@@ -1,0 +1,43 @@
+{
+  "contract_id": "crypto_a7h0_nonfunding_residual_contract_v1",
+  "created_at": "2026-05-19T14:40:37Z",
+  "decision_boundary": {
+    "hold": [
+      "no residual candidate",
+      "candidate performance primarily explained by FundingCore/Core4",
+      "fresh May resembles funding-family failure"
+    ],
+    "pass_method_smoke": [
+      "at least one non-funding candidate has positive validation and recent residual_vs_FundingCore",
+      "fresh May is not a broad FundingCore-like collapse",
+      "funding beta does not explain main return"
+    ]
+  },
+  "funding_baselines": {
+    "Core4": "secondary residualization baseline",
+    "FundingCore": "mandatory benchmark and residualization baseline",
+    "wrong_lag_future_funding": "diagnostic only; cannot be used as signal"
+  },
+  "mandatory_reports_per_candidate": [
+    "raw_performance",
+    "residual_vs_FundingCore",
+    "residual_vs_Core4",
+    "funding_exposure_beta",
+    "wrong_lag_future_funding_diagnostic",
+    "fresh_May_behavior",
+    "symbol_LOO_or_explicit_placeholder",
+    "cost_stress_10bps_primary"
+  ],
+  "scope": {
+    "allowed_result": "PASS_A7H_METHOD_SMOKE_CANDIDATE or HOLD_A7H_NO_RESIDUAL_CANDIDATE",
+    "forbidden_result": [
+      "alpha_shadow_proof",
+      "paper_ready",
+      "live_ready",
+      "production_ready",
+      "generator_bakeoff_pass"
+    ],
+    "search_policy": "fixed small candidate set only; no formula tuning from May outcome"
+  },
+  "stage": "A7H-0 residualization contract + non-funding smoke"
+}
