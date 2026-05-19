@@ -25,6 +25,7 @@ Main blocking conclusions:
 - A7.2 showed positive recent OOS but unacceptable drawdown and negative fresh-May behavior.
 - A7B showed funding-only dominance risk.
 - A7C showed FundingCore is stronger/simpler than Core4 as a benchmark, but still blocked by fresh-May loss and drawdown risk.
+- A7D showed funding time semantics are not yet clean enough for promotion: current exact event detection captures only about 66% of symbol funding events, and the 24h future wrong-lag diagnostic is much stronger than observable FundingCore.
 
 Do not promote to:
 
@@ -56,12 +57,11 @@ Do not expand search yet.
 
 Next audit:
 
-`Funding time-semantics audit`
+`Funding evaluator repair and replay`
 
 Purpose:
 
-- Confirm `latest_known_funding_rate` availability timing.
-- Explain why `wrong_lag_future_24h_diagnostic` is materially stronger than live-lag FundingCore.
-- Verify funding payment treatment and feature/label alignment.
-- Redesign future crypto reward around residual edge vs FundingCore, not raw funding-wrapper return.
-
+- Repair funding event detection so millisecond-offset funding events are not missed.
+- Review whether funding payment should use full signed long/short cashflow instead of long-only drag.
+- Re-run A2.6/A7B/A7C after the evaluator semantics are fixed.
+- Keep Core4/FundingCore blocked from alpha shadow proof until the repaired replay confirms results.

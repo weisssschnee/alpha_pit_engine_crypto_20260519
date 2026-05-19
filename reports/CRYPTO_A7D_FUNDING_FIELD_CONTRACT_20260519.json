@@ -1,0 +1,63 @@
+{
+  "contract_id": "crypto_funding_field_contract_v1",
+  "created_at": "2026-05-19T13:02:00Z",
+  "fields": [
+    {
+      "allowed_as_signal": "allowed only when fundingTime_ms <= feature_available_time",
+      "available_time": "fundingTime_ms, then backward-asof carried into later bars",
+      "contract_type": "USDT-M perpetual",
+      "field_name": "latest_known_funding_rate",
+      "forward_filled_rule": "asof by open_time_ms; value remains until next fundingTime_ms",
+      "funding_payment_time": "fundingTime_ms",
+      "is_predicted_or_settled": "settled_or_exchange_reported_rate_at_fundingTime; not a next-funding prediction",
+      "known_risk": "same-hour event with fundingTime_ms > open_time_ms by a few ms is only visible on the next hourly row in the current panel",
+      "raw_source": "Binance futures fundingRate REST CSV, silver fundingRate.parquet",
+      "sign_convention": "positive funding means longs pay shorts under standard perp convention",
+      "symbol": "core12 USDT perpetual futures",
+      "timezone": "UTC milliseconds"
+    },
+    {
+      "allowed_as_signal": "allowed only when source fundingTime_ms <= feature_available_time",
+      "available_time": "same as source funding events after derivation",
+      "contract_type": "USDT-M perpetual",
+      "field_name": "funding_rate_persistence_3",
+      "forward_filled_rule": "asof-carried derived value",
+      "funding_payment_time": "not a payment field",
+      "is_predicted_or_settled": "derived settled/known history",
+      "raw_source": "derived from latest_known_funding_rate sign over funding events before asof carry",
+      "sign_convention": "mean sign over recent funding events",
+      "symbol": "core12 USDT perpetual futures",
+      "timezone": "UTC milliseconds"
+    },
+    {
+      "allowed_as_signal": "forbidden in current A7D protocol",
+      "available_time": "not available",
+      "contract_type": "not applicable",
+      "field_name": "next_funding_rate",
+      "forward_filled_rule": "not applicable",
+      "funding_payment_time": "future funding event",
+      "is_predicted_or_settled": "future settlement or exchange estimate depending source; forbidden unless separately contracted",
+      "raw_source": "not present in current gold panel",
+      "sign_convention": "not applicable",
+      "symbol": "not applicable",
+      "timezone": "UTC milliseconds"
+    }
+  ],
+  "join_rule": "pd.merge_asof(base.open_time_ms, funding.fundingTime_ms, direction='backward', allow_exact_matches=True)",
+  "observed_alignment_summary": {
+    "exact_event_detected_unique": 20664,
+    "exact_event_detection_rate": 0.6602760736196319,
+    "feature_before_execution_violations": 0,
+    "funding_before_feature_violations": 0,
+    "funding_before_open_violations": 0,
+    "max_timestamp": "2026-05-19T07:00:00+00:00",
+    "min_timestamp": "2024-01-01T00:00:00+00:00",
+    "row_count": 250368,
+    "symbol_count": 12,
+    "unique_symbol_funding_events_in_panel": 31296,
+    "within_1h_event_detected_unique": 31296,
+    "within_1h_event_detection_rate": 1.0
+  },
+  "panel_builder": "G:\\AlphaFactory_CryptoData\\scripts\\build_crypto_gold_panel_v1.py",
+  "source_panel": "G:\\AlphaFactory_CryptoData\\gold\\panels\\crypto_core12_1h_v1.parquet"
+}
