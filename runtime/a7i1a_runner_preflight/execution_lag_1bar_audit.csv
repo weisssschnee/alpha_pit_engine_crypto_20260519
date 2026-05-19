@@ -1,0 +1,10 @@
+candidate_id,signal_mode,lag_bars,lag_signal_source,lag_raw_may_annualized_stress_only,lag_frame_rows,lag_output_exists
+a7i1a_fundingcore_baseline,book_object,1,book_object,-2.7060542933901917,20864,True
+a7i1a_core4_benchmark,book_object,1,book_object,-2.6313034709069925,20864,True
+a7i1a_taker_imbalance_original,original,1,original,-2.9742640932707998,20864,True
+a7i1a_avg_trade_size_original,original,1,original,-1.6260630495539186,20864,True
+a7i1a_taker_imbalance_sign_flip,sign_flip,1,sign_flip,-3.241909376116957,20864,True
+a7i1a_taker_imbalance_row_shuffle,row_shuffle,1,row_shuffle,-1.6988299739816155,20864,True
+a7i1a_taker_imbalance_time_shuffle,time_shuffle,1,time_shuffle,-4.703140299530307,20864,True
+a7i1a_taker_imbalance_wrong_lag,wrong_lag_stale_24h,1,wrong_lag_stale_24h,-3.961439194375928,20864,True
+a7i1a_random_noise_placebo,random_noise,1,random_noise,-2.8552439951723945,20864,True

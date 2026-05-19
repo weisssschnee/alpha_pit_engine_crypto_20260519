@@ -1,0 +1,27 @@
+{
+  "authorizes_a7i1b": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7I1A_RUNNER_PREFLIGHT",
+  "executes_search": false,
+  "generated_at": "2026-05-19T15:55:13Z",
+  "may_boundary": {
+    "may_affects_only_stress_label": true,
+    "may_status": "known_adversarial_stress_set",
+    "may_used_for_candidate_selection": false,
+    "may_used_for_ranking": false,
+    "may_used_for_threshold_tuning": false
+  },
+  "outputs": {
+    "baseline_classification_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1a_runner_preflight\\baseline_classification_audit.csv",
+    "candidate_meta": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1a_runner_preflight\\candidate_meta.csv",
+    "candidate_selection_trace": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1a_runner_preflight\\candidate_selection_trace.csv",
+    "execution_lag_1bar_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1a_runner_preflight\\execution_lag_1bar_audit.csv",
+    "may_usage_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1a_runner_preflight\\may_usage_audit.csv",
+    "metric_scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1a_runner_preflight\\a7i1a_metric_scoreboard.csv",
+    "rank_score_components": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1a_runner_preflight\\rank_score_components.csv",
+    "residualization_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1a_runner_preflight\\residualization_audit.csv"
+  },
+  "stage": "A7I-1a runner implementation preflight"
+}

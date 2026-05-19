@@ -1,0 +1,10 @@
+candidate_id,orientation,train_ic_mean,signal_source,component_count,horizon,base_orientation,signal_lag_bars
+a7i1a_fundingcore_baseline,,,book_object,4.0,,,
+a7i1a_core4_benchmark,,,book_object,4.0,,,
+a7i1a_taker_imbalance_original,-1.0,-0.0017116255238750632,original,,6.0,-1.0,0.0
+a7i1a_avg_trade_size_original,1.0,0.04235432569719945,original,,12.0,1.0,0.0
+a7i1a_taker_imbalance_sign_flip,1.0,-0.0017116255238750632,sign_flip,,6.0,-1.0,0.0
+a7i1a_taker_imbalance_row_shuffle,-1.0,0.0016515825330937193,row_shuffle,,6.0,-1.0,0.0
+a7i1a_taker_imbalance_time_shuffle,-1.0,-0.001825097978944096,time_shuffle,,6.0,-1.0,0.0
+a7i1a_taker_imbalance_wrong_lag,-1.0,0.004414360682248527,wrong_lag_stale_24h,,6.0,-1.0,0.0
+a7i1a_random_noise_placebo,1.0,0.0017836771128128008,random_noise,,6.0,-1.0,0.0
