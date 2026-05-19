@@ -1,0 +1,5 @@
+arm,generated_count,selected_count,research_candidate_count,clue_only_count
+I0_basis_premium,250,64,0,12
+I1_flow_liquidity,250,64,0,64
+I2_microstructure_lite,250,64,0,64
+I3_placebo_random,250,64,0,0

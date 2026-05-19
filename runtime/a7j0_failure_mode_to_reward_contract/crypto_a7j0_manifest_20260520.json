@@ -1,0 +1,9 @@
+{
+  "authorizes_a7j1": true,
+  "authorizes_a7j2": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "contract": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7j0_failure_mode_to_reward_contract\\crypto_a7j0_reward_generator_contract_20260520.json",
+  "decision": "PASS_A7J0_FAILURE_MODE_TO_REWARD_CONTRACT",
+  "generated_at": "2026-05-19T17:07:13Z"
+}
