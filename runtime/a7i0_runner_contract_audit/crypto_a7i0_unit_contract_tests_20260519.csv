@@ -1,0 +1,6 @@
+test_name,expected_label,source,pass
+FundingCore_classified_as_mandatory_baseline,MANDATORY_BASELINE_NOT_CANDIDATE,A7H final,True
+Core4_classified_as_research_benchmark,RESEARCH_BENCHMARK_NOT_CANDIDATE,A7H final,True
+Taker_imbalance_classified_as_overlay_clue,HOLD_RESIDUAL_ONLY_HEDGE_CLUE,A7H final,True
+Placebo_arm_required,NEGATIVE_CONTROL,A7I design,True
+May_not_used_for_ranking,CONTRACT_PASS,A7I design,True

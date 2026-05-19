@@ -1,0 +1,23 @@
+group,required_term,present
+may_boundary,known_adversarial_stress_set,True
+may_boundary,May cannot be used for ranking,True
+may_boundary,May is a stress gate only,True
+may_boundary,append-only locked-forward window,True
+execution_lag,execution_lag_1bar_stress,True
+execution_lag,1bar execution delay destroys all edge,True
+residual_baselines,residual vs FundingCore,True
+residual_baselines,residual vs Core4,True
+residual_baselines,FundingCore remains the primary residualization baseline,True
+placebo,sign flip,True
+placebo,row shuffle,True
+placebo,time shuffle,True
+placebo,wrong-lag future-funding diagnostic,True
+budget,generated candidates per arm: 250,True
+budget,tradable replay candidates per arm: 64,True
+budget,frequency: 1h only,True
+budget,cost primary: 10bps,True
+budget,cost stress: 20bps,True
+blocked_promotions,ALPHA_PROOF,True
+blocked_promotions,SHADOW_READY,True
+blocked_promotions,PAPER_READY,True
+blocked_promotions,PRODUCTION_READY,True

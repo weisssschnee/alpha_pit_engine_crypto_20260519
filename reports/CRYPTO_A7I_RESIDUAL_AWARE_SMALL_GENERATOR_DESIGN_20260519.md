@@ -24,8 +24,24 @@ raw standalone replay
 + cost stress
 + placebo / wrong-lag
 + masked symbol LOO
-+ fresh May behavior
++ known-adversarial May 2026 stress
++ execution-lag stress
 ```
+
+## Evidence Boundary
+
+May 2026 is no longer fresh proof. It was repeatedly inspected during A7F/A7G/A7H and must be treated as:
+
+```text
+known_adversarial_stress_set
+```
+
+Rules:
+
+- May can be used as a fail-fast stress gate.
+- May cannot be used for ranking, threshold tuning, weight selection, or candidate selection.
+- Any May-tuned threshold lowers evidence grade to post-hoc diagnostic.
+- A7I proof requires a later append-only locked-forward window after the runner/reward/candidate contract is frozen.
 
 ## Mandatory Baselines
 
@@ -70,7 +86,8 @@ Do not run 5m until 1h method evidence is valid.
 
 Each candidate must output:
 
-- raw validation/recent/fresh-May performance,
+- raw validation/recent performance,
+- known-adversarial May 2026 stress performance,
 - residual vs FundingCore,
 - residual vs Core4,
 - funding beta and correlation,
@@ -84,8 +101,27 @@ Each candidate must output:
 - masked symbol LOO,
 - month leave-one-out,
 - top loss hour concentration,
+- execution_lag_1bar_stress,
 - source feature lineage,
 - feature/execution/label timing contract.
+
+## Ranking Rule
+
+Candidate ranking may only use:
+
+- validation performance,
+- recent OOS performance,
+- residual vs FundingCore/Core4 on validation and recent OOS,
+- cost and stability metrics from validation/recent OOS.
+
+Candidate ranking must not use:
+
+- May 2026 performance,
+- May-derived thresholds,
+- May-derived weights,
+- May-selected candidate families.
+
+May is a stress gate only.
 
 ## Promotion Gate
 
@@ -93,18 +129,19 @@ A candidate can be labelled `A7I_RESEARCH_CANDIDATE` only if:
 
 - raw 10bps validation > 0,
 - raw 10bps recent > 0,
-- raw 10bps fresh May is not strongly negative,
+- raw 10bps known-adversarial May is not strongly negative,
 - residual vs FundingCore validation > 0,
 - residual vs FundingCore recent > 0,
-- residual vs FundingCore fresh May >= 0,
+- residual vs FundingCore known-adversarial May >= 0,
 - residual vs Core4 recent > 0,
 - funding beta does not explain the majority of return,
 - sign flip is not positive,
 - row/time shuffle are materially weaker,
 - wrong-lag future diagnostic is not stronger than the real signal,
 - recent masked symbol LOO positive rate >= 75%,
-- fresh May masked symbol LOO positive rate >= 50%,
+- May stress masked symbol LOO positive rate >= 50%,
 - 20bps does not fully collapse,
+- execution_lag_1bar_stress does not fully collapse,
 - top loss hours are not overly concentrated.
 
 ## Rejection Rules
@@ -114,9 +151,10 @@ Reject or downgrade if:
 - raw standalone is negative but residual is positive,
 - the candidate only works as a hedge against FundingCore,
 - performance is explained by FundingCore/Core4 beta,
-- fresh May repeats the funding-family failure,
+- known-adversarial May repeats the funding-family failure,
 - one symbol or one month dominates,
 - 20bps cost destroys all edge,
+- 1bar execution delay destroys all edge,
 - placebo or wrong-lag signal is comparable to original.
 
 ## Decision Labels
@@ -154,4 +192,3 @@ If A7I fails, crypto line remains:
 data/evaluator/research infrastructure validated;
 no crypto alpha proof object yet.
 ```
-
