@@ -1,0 +1,32 @@
+{
+  "blockers": [
+    "predeclared_funding_gate_does_not_clear_fresh_may_failure"
+  ],
+  "cost_tier": "stress_10bp",
+  "decision": "HOLD_A7F_FUNDING_REGIME_FAILURE_UNRESOLVED",
+  "generated_at": "2026-05-19T13:22:30Z",
+  "key_metrics": {
+    "core4_g1_fresh_may_ann": -2.6313034709069925,
+    "core4_g6_fresh_may_ann": -0.3385393743381206,
+    "fundingcore_g1_fresh_may_active_ratio": 1.0,
+    "fundingcore_g1_fresh_may_ann": -2.7060542933901917,
+    "fundingcore_g1_recent_oos_ann": 1.0504405731679083,
+    "fundingcore_g6_fresh_may_active_ratio": 0.32908163265306123,
+    "fundingcore_g6_fresh_may_ann": -0.4269216454600744,
+    "fundingcore_g6_recent_oos_ann": 0.27987043259714356,
+    "fundingcore_no_gate_fresh_may_ann": -2.7060542933901917
+  },
+  "outputs": {
+    "bucket_summary": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7f_funding_regime_failure_audit\\crypto_a7f_bucket_summary_20260519.csv",
+    "gate_random_placebo": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7f_funding_regime_failure_audit\\crypto_a7f_gate_random_placebo_20260519.csv",
+    "gate_summary": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7f_funding_regime_failure_audit\\crypto_a7f_gate_summary_20260519.csv",
+    "may_top_loss_hours": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7f_funding_regime_failure_audit\\crypto_a7f_may_top_loss_hours_20260519.csv",
+    "regime_state": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7f_funding_regime_failure_audit\\crypto_a7f_regime_state_20260519.csv",
+    "train_thresholds": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7f_funding_regime_failure_audit\\crypto_a7f_train_thresholds_20260519.json"
+  },
+  "purge_embargo_bars": 24,
+  "risk_variant": "R3_vol_target_gross_0p5x_cap",
+  "warnings": [
+    "core4_still_negative_under_predeclared_funding_gate"
+  ]
+}

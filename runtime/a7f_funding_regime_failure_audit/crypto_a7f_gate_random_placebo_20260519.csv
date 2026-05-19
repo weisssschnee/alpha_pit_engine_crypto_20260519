@@ -1,0 +1,3 @@
+split,mean_annualized,p95_annualized,iterations,reference_gate
+fresh_forward_2026May,-2.30738584365219,-1.6558803992635773,200,G1_avoid_high_funding_abs
+recent_oos_2025H2_2026Apr,0.7878291311836585,0.9355058600152135,200,G1_avoid_high_funding_abs
