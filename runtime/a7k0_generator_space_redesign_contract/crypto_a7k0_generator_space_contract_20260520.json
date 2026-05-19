@@ -1,0 +1,171 @@
+{
+  "a7k1_preflight_required_outputs": [
+    "a7k1_generator_space_manifest.json",
+    "a7k1_feature_coverage_audit.csv",
+    "a7k1_activity_exposure_audit.csv",
+    "a7k1_family_diversity_audit.csv",
+    "a7k1_cost_lag_preselection_audit.csv",
+    "a7k1_funding_core4_beta_screen.csv",
+    "a7k1_may_exclusion_audit.csv"
+  ],
+  "a7k2_budget_if_a7k1_and_new_space_generator_pass": {
+    "arms": 4,
+    "budget_expansion_allowed": false,
+    "execution_lag1_required": true,
+    "frequency": "1h_only",
+    "generated_per_arm": 250,
+    "primary_cost": "10bps",
+    "selected_per_arm": 64,
+    "severe_cost": "20bps"
+  },
+  "authorizes_a7k1": true,
+  "authorizes_a7k2": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blocked_from_a7k": [
+    "same_generator_budget_expansion_without_space_redesign",
+    "May_robust_generator",
+    "FundingCore_or_Core4_rescue",
+    "taker_imbalance_rescue_as_standalone_alpha",
+    "5m_rescue",
+    "shadow_paper_live_promotion"
+  ],
+  "contract_id": "CRYPTO_A7K_GENERATOR_SPACE_REDESIGN_V1",
+  "decision": "PASS_A7K0_GENERATOR_SPACE_REDESIGN_CONTRACT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-19T17:38:13Z",
+  "generator_space": {
+    "K0_basis_premium_clean": {
+      "allowed_features": [
+        "mark_index_ratio",
+        "mark_minus_index",
+        "premium_index",
+        "cs_z_mark_index_ratio",
+        "cs_z_premium_index"
+      ],
+      "blocked_features": [
+        "spot_perp_basis_unless_core6_lane_explicit",
+        "future_mark_or_index",
+        "next_funding_rate"
+      ],
+      "required_checks": [
+        "basis_field_contract_centered",
+        "core12_coverage_or_explicit_core6_lane",
+        "residual_vs_fundingcore"
+      ],
+      "status": "allowed_with_coverage_and_residual_gates"
+    },
+    "K1_flow_liquidity_clean": {
+      "allowed_features": [
+        "quote_asset_volume",
+        "number_of_trades",
+        "avg_trade_size_quote",
+        "quote_volume_mean_6",
+        "quote_volume_mean_12",
+        "quote_volume_mean_24",
+        "taker_buy_ratio",
+        "taker_imbalance"
+      ],
+      "blocked_patterns": [
+        "residual_only_taker_hedge_as_standalone_alpha",
+        "future_volume",
+        "same_bar_execution_volume_if_not_lagged"
+      ],
+      "required_checks": [
+        "raw_viability_before_residual_credit",
+        "cost20_survival",
+        "lag1_survival"
+      ],
+      "status": "allowed_but_not_taker_standalone"
+    },
+    "K2_microstructure_lite_latency_robust": {
+      "allowed_features": [
+        "realized_vol_6",
+        "realized_vol_12",
+        "realized_vol_24",
+        "hl_range",
+        "abs_ret_1",
+        "quote_volume_mean_12",
+        "avg_trade_size_quote"
+      ],
+      "blocked_patterns": [
+        "near-close_same-bar_edge_without_lag_survival",
+        "high_turnover_cost20_fragile"
+      ],
+      "required_checks": [
+        "execution_lag1_validation_recent_nonnegative",
+        "cost20_validation_recent_nonnegative",
+        "top_loss_concentration_audit"
+      ],
+      "status": "allowed_with_execution_lag_gate"
+    },
+    "K3_placebo_random_control": {
+      "allowed_features": [
+        "seeded_random",
+        "row_shuffle",
+        "time_shuffle",
+        "symbol_shuffle"
+      ],
+      "required_checks": [
+        "zero_research_candidate"
+      ],
+      "status": "mandatory_negative_control"
+    }
+  },
+  "global_preselection_gates": {
+    "baseline_residual": {
+      "max_abs_core4_beta_recent": 0.5,
+      "max_abs_funding_beta_recent": 0.5,
+      "residual_vs_core4_recent_positive": true,
+      "residual_vs_fundingcore_recent_positive": true,
+      "residual_vs_fundingcore_validation_positive": true
+    },
+    "cost_and_lag": {
+      "cost20_recent_nonnegative": true,
+      "cost20_validation_nonnegative": true,
+      "lag1_recent_nonnegative": true,
+      "lag1_validation_nonnegative": true
+    },
+    "coverage_activity": {
+      "recent_min_gross_exposure": 0.1,
+      "recent_min_n": 250,
+      "validation_min_gross_exposure": 0.1,
+      "validation_min_n": 250,
+      "zero_activity_candidate": "reject_before_selection"
+    },
+    "family_dedup": {
+      "duplicate_expression_variant_stack": "reject_or_downweight",
+      "formula_fingerprint_dedup_required": true,
+      "max_same_family_share_in_shortlist": 0.25
+    },
+    "raw_viability": {
+      "raw_recent_10bps_positive": true,
+      "raw_validation_10bps_positive": true
+    }
+  },
+  "may_policy": {
+    "allowed_uses": [
+      "post_selection_stress_label",
+      "final_veto_label",
+      "failure_attribution"
+    ],
+    "forbidden_uses": [
+      "ranking",
+      "reward_score",
+      "threshold_tuning",
+      "weight_selection",
+      "candidate_selection",
+      "generator_parameter_tuning",
+      "generator_family_design"
+    ],
+    "status": "known_adversarial_stress_set"
+  },
+  "objective": "Redesign the crypto generator space after A7J exposed low-activity, cost-fragile, lag-fragile, funding-packaged, and duplicate-family candidate failure modes.",
+  "source_decision": {
+    "a7j_final": "HOLD_CRYPTO_A7J_NO_RESEARCH_CANDIDATE",
+    "required_next_step": "generator_space_contract_then_preflight",
+    "same_generator_budget_expansion": "NOT_RECOMMENDED"
+  },
+  "stable_contract_hash": "78ec7710a6c028b7726e711b697c20eedb2497294ec7ecbbe7172b61556758df"
+}

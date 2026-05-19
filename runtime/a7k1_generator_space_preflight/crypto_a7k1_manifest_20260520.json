@@ -1,0 +1,29 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_a7k2": false,
+  "authorizes_alpha_proof": false,
+  "blockers": [
+    "old_a7j_pool_still_has_candidates_passing_a7k_preselection",
+    "old_pool_family_cap_fail"
+  ],
+  "decision": "HOLD_A7K1_PREFLIGHT_BLOCKED",
+  "executes_replay": false,
+  "executes_search": false,
+  "feature_blockers": [],
+  "generated_at": "2026-05-19T17:38:29Z",
+  "may_exclusion_pass": true,
+  "old_pool_a7j_selected_count": 256,
+  "old_pool_a7k_preselection_pass_count": 11,
+  "old_pool_generated_count": 1000,
+  "outputs": {
+    "activity_exposure_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1_generator_space_preflight\\a7k1_activity_exposure_audit.csv",
+    "cost_lag_preselection_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1_generator_space_preflight\\a7k1_cost_lag_preselection_audit.csv",
+    "family_diversity_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1_generator_space_preflight\\a7k1_family_diversity_audit.csv",
+    "feature_coverage_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1_generator_space_preflight\\a7k1_feature_coverage_audit.csv",
+    "funding_core4_beta_screen": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1_generator_space_preflight\\a7k1_funding_core4_beta_screen.csv",
+    "gate_pass_counts": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1_generator_space_preflight\\a7k1_gate_pass_counts.csv",
+    "generator_space_manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1_generator_space_preflight\\a7k1_generator_space_manifest.json",
+    "may_exclusion_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1_generator_space_preflight\\a7k1_may_exclusion_audit.csv",
+    "old_pool_preselection_screen": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1_generator_space_preflight\\a7k1_old_pool_preselection_screen.csv"
+  }
+}
