@@ -1,47 +1,71 @@
 # Crypto A7K Final Decision Record
 
-- decision: `HOLD_CRYPTO_A7K_NO_NEW_SPACE_AUTHORIZATION`
+- decision: `HOLD_CRYPTO_A7K_NO_ALPHA_PROOF`
 - alpha_proof_status: `NOT_ALPHA_PROOF`
 - shadow_paper_live_status: `NOT_AUTHORIZED`
-- A7K-0: `PASS_A7K0_GENERATOR_SPACE_REDESIGN_CONTRACT`
-- A7K-1: `HOLD_A7K1_PREFLIGHT_BLOCKED`
-- A7K-2: `NOT_AUTHORIZED`
+- same_generator_budget_expansion: `NOT_RECOMMENDED`
+
+## Stage Results
+
+| stage | decision | role |
+|---|---|---|
+| `A7K-0` | `PASS_A7K0_GENERATOR_SPACE_REDESIGN_CONTRACT` | freezes the generator-space redesign contract |
+| `A7K-1` | `HOLD_A7K1_PREFLIGHT_BLOCKED` | old A7I/A7J pool still has family-concentrated pass-through |
+| `A7K-1B` | `PASS_A7K1B_NEW_SPACE_GENERATOR_IMPL_PREFLIGHT` | new static generator implementation passes coverage, dedup, family quota, and May-exclusion checks |
+| `A7K-2` | `HOLD_A7K2_INSUFFICIENT_RESEARCH_CANDIDATES` | new-space same-budget smoke produces zero research candidates |
+
+## A7K-2 Key Numbers
+
+- generated: `1000`
+- selected after non-May preselection: `64`
+- research_candidate_count: `0`
+- placebo_research_candidate_count: `0`
+- non_flow_research_candidate_count: `0`
+
+Arm summary:
+
+| arm | generated | preselection pass | selected | research | clue only | shortfall |
+|---|---:|---:|---:|---:|---:|---:|
+| `K0_basis_premium_clean` | 250 | 3 | 3 | 0 | 3 | 61 |
+| `K1_flow_liquidity_clean` | 250 | 28 | 28 | 0 | 28 | 36 |
+| `K2_microstructure_lite_latency_robust` | 250 | 33 | 33 | 0 | 33 | 31 |
+| `K3_placebo_random_control` | 250 | 0 | 0 | 0 | 0 | 64 |
+
+The only selected non-placebo candidates are `clue_only`. Final veto reasons are broad:
+
+- `may_stress_severe_fail`: 64
+- `may_residual_funding_negative`: 64
+
+May is not used for ranking or selection. It is applied only after selection as stress/veto labeling.
 
 ## Confirmed
 
-- A7K correctly inherits the A7J boundary: May 2026 is a known adversarial stress set and remains stress-only.
-- A7K-0 freezes the redesigned generator-space contract without running search or replay.
-- A7K-1 confirms the proposed feature set has core12 coverage for the allowed non-spot fields.
-- A7K-1 confirms May is excluded from preselection gates, score columns, ranking, and selection.
-- A7K-1 catches most old-pool weakness: only `11 / 1000` A7I/A7J frozen candidates pass the A7K preselection gates.
+- The A7K static generator can avoid the A7J zero-activity and duplicate-formula implementation failure.
+- The A7K static generator can enforce family quota before evaluation.
+- The May boundary remains intact.
+- The placebo arm does not produce research candidates.
+- The new generator space still does not produce crypto alpha proof under the current strict gates.
 
 ## Blockers
 
-- `old_a7j_pool_still_has_candidates_passing_a7k_preselection`
-- `old_pool_family_cap_fail`
+- `fewer_than_2_non_placebo_research_candidates`
+- `no_non_flow_non_taker_research_candidate`
+- `arm_preselection_shortfall`
+- broad May stress failure among the selected clue-only candidates
 
-The `11` old-pool candidates that pass A7K preselection are not acceptable as a research set because they are concentrated in one family:
+## Not Authorized
 
-| family | count | share |
-|---|---:|---:|
-| `flow_liquidity` | 10 | 90.91% |
-| `microstructure_lite` | 1 | 9.09% |
+- alpha proof
+- dry-shadow alpha evidence
+- paper trading
+- live trading
+- production
+- old A7.3 bakeoff
+- expanded same-generator budget search
 
-This means A7K has not yet demonstrated a viable redesigned generator space. It only demonstrated that the new gates are directionally stricter and that the old pool still contains family concentration risk.
+## Next Valid Paths
 
-## Not Confirmed
+1. `FORWARD-WAIT`: freeze the A7J/A7K contracts and wait for truly new append-only data after the contract freeze.
+2. `DATA_OR_FEATURE_LAYER_RETHINK`: do not expand formula search; inspect whether the current 1h OHLCV/funding/basis feature set is structurally insufficient. Potential future work must preserve May stress-only and must include a new preflight before any smoke.
 
-- no crypto alpha proof
-- no A7K research candidates
-- no new generator-space smoke authorization
-- no shadow / paper / live authorization
-- no permission to expand the same generator budget
-
-## Next Valid Work
-
-Two valid paths remain:
-
-1. `A7K-GEN-IMPL`: implement a genuinely new generator-space preflight that enforces family caps before selection, rejects residual-only hedge clues, rejects zero/low-activity candidates, and preserves May stress-only.
-2. `FORWARD-WAIT`: freeze the A7J/A7K contracts and wait for new append-only data after the contract freeze.
-
-Do not run A7K-2 until a new-space generator implementation passes a separate preflight. Do not tune gates against May.
+Current recommendation: stop crypto formula search for now. A7K shows the validation framework is functioning, but the available generator spaces are not producing standalone alpha candidates.

@@ -1,0 +1,5 @@
+arm,generated_count,preselection_pass_count,selected_count,research_candidate_count,clue_only_count,selection_shortfall
+K0_basis_premium_clean,250,3,3.0,0.0,3.0,61
+K1_flow_liquidity_clean,250,28,28.0,0.0,28.0,36
+K2_microstructure_lite_latency_robust,250,33,33.0,0.0,33.0,31
+K3_placebo_random_control,250,0,0.0,0.0,0.0,64

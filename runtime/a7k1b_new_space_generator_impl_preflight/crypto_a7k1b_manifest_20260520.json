@@ -1,0 +1,22 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_a7k2_same_budget_smoke": true,
+  "authorizes_alpha_proof": false,
+  "blockers": [],
+  "candidate_manifest_hash": "47145a58699a5acb39d5ebf547e9e2cdcccd4d714735508562480b1ffb7200e8",
+  "contract_hash": "78ec7710a6c028b7726e711b697c20eedb2497294ec7ecbbe7172b61556758df",
+  "decision": "PASS_A7K1B_NEW_SPACE_GENERATOR_IMPL_PREFLIGHT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-19T18:03:22Z",
+  "generated_per_arm": 250,
+  "outputs": {
+    "candidate_manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1b_new_space_generator_impl_preflight\\a7k1b_candidate_manifest.csv",
+    "family_quota_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1b_new_space_generator_impl_preflight\\a7k1b_family_quota_audit.csv",
+    "feature_coverage_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1b_new_space_generator_impl_preflight\\a7k1b_feature_coverage_audit.csv",
+    "formula_dedup_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1b_new_space_generator_impl_preflight\\a7k1b_formula_dedup_audit.csv",
+    "may_exclusion_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1b_new_space_generator_impl_preflight\\a7k1b_may_exclusion_audit.csv",
+    "static_gate_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k1b_new_space_generator_impl_preflight\\a7k1b_static_gate_audit.csv"
+  },
+  "selected_per_arm_if_a7k2": 64
+}

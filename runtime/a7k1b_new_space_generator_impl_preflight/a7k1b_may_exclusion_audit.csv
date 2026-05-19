@@ -1,0 +1,4 @@
+check,pass
+candidate_manifest_excludes_may_terms,True
+generator_config_has_no_may_family,True
+may_policy_inherited_from_a7k0_stress_only,True
