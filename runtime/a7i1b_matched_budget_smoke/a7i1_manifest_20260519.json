@@ -1,0 +1,32 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "fewer_than_2_non_placebo_research_candidates"
+  ],
+  "decision": "HOLD_A7I1_NO_RESEARCH_CANDIDATE",
+  "executes_search": true,
+  "generated_at": "2026-05-19T16:19:08Z",
+  "generated_per_arm": 250,
+  "may_boundary": {
+    "may_status": "known_adversarial_stress_set",
+    "may_used_for_ranking": false,
+    "may_used_for_selection": false
+  },
+  "outputs": {
+    "beta_corr_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_beta_corr_audit.csv",
+    "candidate_scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_candidate_scoreboard.csv",
+    "duplicate_cluster_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_duplicate_cluster_audit.csv",
+    "execution_lag_1bar_stress": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_execution_lag_1bar_stress.csv",
+    "may_stress_only_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_may_stress_only_audit.csv",
+    "placebo_comparison": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_placebo_comparison.csv",
+    "rejected_candidate_reasons": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_rejected_candidate_reasons.csv",
+    "research_candidate_shortlist": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_research_candidate_shortlist.csv",
+    "residual_vs_fundingcore_core4": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_residual_vs_fundingcore_core4.csv",
+    "symbol_month_loo": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_symbol_month_loo.csv"
+  },
+  "placebo_research_candidate_count": 0,
+  "replay_selected_per_arm": 64,
+  "research_candidate_count": 1,
+  "stage": "A7I-1b small matched-budget residual-aware generator smoke"
+}

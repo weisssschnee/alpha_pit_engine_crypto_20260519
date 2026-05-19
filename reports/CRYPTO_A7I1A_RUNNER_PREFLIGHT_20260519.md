@@ -1,6 +1,6 @@
 # Crypto A7I-1a Runner Implementation Preflight
 
-- generated_at: `2026-05-19T15:55:13Z`
+- generated_at: `2026-05-19T16:00:37Z`
 - decision: `PASS_A7I1A_RUNNER_PREFLIGHT`
 - executes_search: `False`
 - authorizes_a7i1b: `True`

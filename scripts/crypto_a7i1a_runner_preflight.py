@@ -70,6 +70,13 @@ def stable_random_signal(shape: tuple[int, int], finite_like: np.ndarray, seed: 
     return out
 
 
+def candidate_seed(candidate_id: str, offset: int = 0) -> int:
+    value = 0
+    for ch in candidate_id:
+        value = (value * 131 + ord(ch)) % 1_000_000_007
+    return RNG_SEED + offset + value % 100_000
+
+
 def preflight_candidates() -> list[RunnerCandidate]:
     return [
         RunnerCandidate(
@@ -197,13 +204,15 @@ def book_from_spec(
     if candidate.signal_mode == "sign_flip":
         forced_orientation = -base_orientation
     elif candidate.signal_mode == "row_shuffle":
-        signal = row_shuffle_signal(base_signal, RNG_SEED + 101)
+        signal = row_shuffle_signal(base_signal, candidate_seed(candidate.candidate_id, 101))
     elif candidate.signal_mode == "time_shuffle":
-        signal = time_shuffle_signal(base_signal, RNG_SEED + 102)
+        signal = time_shuffle_signal(base_signal, candidate_seed(candidate.candidate_id, 102))
     elif candidate.signal_mode == "wrong_lag_stale_24h":
         signal = stable_shift_signal(base_signal, 24)
+    elif candidate.signal_mode == "wrong_lag_future_24h":
+        signal = stable_shift_signal(base_signal, -24)
     elif candidate.signal_mode == "random_noise":
-        signal = stable_random_signal(base_signal.shape, base_signal, RNG_SEED + 103)
+        signal = stable_random_signal(base_signal.shape, base_signal, candidate_seed(candidate.candidate_id, 103))
         forced_orientation = 1.0
     elif candidate.signal_mode != "original":
         raise ValueError(f"unknown signal_mode: {candidate.signal_mode}")
