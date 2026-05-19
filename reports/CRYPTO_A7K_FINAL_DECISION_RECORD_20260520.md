@@ -65,7 +65,8 @@ May is not used for ranking or selection. It is applied only after selection as 
 
 ## Next Valid Paths
 
-1. `FORWARD-WAIT`: freeze the A7J/A7K contracts and wait for truly new append-only data after the contract freeze.
-2. `DATA_OR_FEATURE_LAYER_RETHINK`: do not expand formula search; inspect whether the current 1h OHLCV/funding/basis feature set is structurally insufficient. Potential future work must preserve May stress-only and must include a new preflight before any smoke.
+1. `A7L_SEARCH_SPACE_COVERAGE_AND_SCALING_LAW_AUDIT`: measure grammar, feature-family, horizon, diversity, and gate-attrition coverage before any larger run.
+2. `FORWARD-WAIT`: freeze the A7J/A7K contracts and wait for truly new append-only data after the contract freeze.
+3. `DATA_OR_FEATURE_LAYER_RETHINK`: inspect whether the current 1h OHLCV/funding/basis feature set is structurally insufficient. Potential future work must preserve May stress-only and must include a new preflight before any smoke.
 
-Current recommendation: stop crypto formula search for now. A7K shows the validation framework is functioning, but the available generator spaces are not producing standalone alpha candidates.
+Current recommendation: stop same-generator blind budget expansion. Do not treat A7K as evidence that broader crypto formula search is exhausted. A7K shows the validation framework is functioning and that the current narrow 1h feature/generator distribution is weak under strict gates.
