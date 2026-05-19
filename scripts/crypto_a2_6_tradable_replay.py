@@ -135,9 +135,19 @@ def funding_event_rate(matrices: dict[str, np.ndarray]) -> np.ndarray:
     if "latest_known_funding_rate" not in matrices or "fundingTime_ms" not in matrices or "open_time_ms" not in matrices:
         return np.zeros_like(next(iter(matrices.values())), dtype=float)
     funding = matrices["latest_known_funding_rate"]
-    open_time = matrices["open_time_ms"]
     funding_time = matrices["fundingTime_ms"]
-    is_event = np.isfinite(funding) & np.isfinite(open_time) & np.isfinite(funding_time) & (np.abs(open_time - funding_time) < 1.0)
+    # The 1h panel carries funding by backward-asof. Some exchange fundingTime
+    # values have millisecond offsets from the hourly open, so exact timestamp
+    # matching misses valid events. A funding event is observable at the first
+    # row where the asof fundingTime changes; the first row per symbol is not a
+    # new in-sample event because there is no prior panel state.
+    prev_funding_time = np.vstack([np.full((1, funding_time.shape[1]), np.nan), funding_time[:-1, :]])
+    is_event = (
+        np.isfinite(funding)
+        & np.isfinite(funding_time)
+        & np.isfinite(prev_funding_time)
+        & (funding_time != prev_funding_time)
+    )
     return np.where(is_event, funding, 0.0)
 
 

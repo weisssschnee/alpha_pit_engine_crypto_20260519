@@ -74,7 +74,9 @@ def cluster_position(signal: np.ndarray, target: np.ndarray, orientation: float)
 
 def cluster_return_components(pos: np.ndarray, gross_target: np.ndarray, funding_cost: np.ndarray, cost_bps: float) -> dict[str, np.ndarray]:
     gross = np.nansum(pos * gross_target, axis=1)
-    funding_drag = np.nansum(np.where(pos > 0, pos * funding_cost, 0.0), axis=1)
+    # Signed funding drag: positive funding means longs pay and shorts receive.
+    # The value can be negative when the book is net recipient of funding.
+    funding_drag = np.nansum(pos * funding_cost, axis=1)
     pos_prev = np.vstack([np.zeros((1, pos.shape[1])), pos[:-1, :]])
     turnover = np.nansum(np.abs(pos - pos_prev), axis=1) / 2.0
     fee_drag = turnover * (cost_bps / 10000.0)

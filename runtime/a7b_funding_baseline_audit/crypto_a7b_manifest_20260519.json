@@ -4,16 +4,16 @@
     "Core4_validation_not_above_funding_only"
   ],
   "decision": "HOLD_A7B_FUNDING_BASELINE_DOMINANCE_RISK",
-  "generated_at": "2026-05-19T11:14:02Z",
+  "generated_at": "2026-05-19T13:11:46Z",
   "key_metrics": {
-    "core_fresh_may_10bp_ann": -2.7640661825779107,
-    "core_recent_10bp_ann": 0.5808011796214989,
-    "core_residual_recent_10bp_ann": 0.44329576658581427,
-    "core_residual_validation_10bp_ann": 0.1914239483963761,
-    "core_validation_10bp_ann": 1.0631977428208363,
-    "funding_fresh_may_10bp_ann": -2.856188962009162,
-    "funding_recent_10bp_ann": 0.7862907354498387,
-    "funding_validation_10bp_ann": 1.9696576725287829
+    "core_fresh_may_10bp_ann": -2.6313034709069925,
+    "core_recent_10bp_ann": 0.7164782591560828,
+    "core_residual_recent_10bp_ann": 0.35495302893870456,
+    "core_residual_validation_10bp_ann": 0.1049775356716937,
+    "core_validation_10bp_ann": 1.1978147290017802,
+    "funding_fresh_may_10bp_ann": -2.7060542933901917,
+    "funding_recent_10bp_ann": 0.9279025035074226,
+    "funding_validation_10bp_ann": 2.1061676458596836
   },
   "outputs": {
     "baseline_metrics": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7b_funding_baseline_audit\\crypto_a7b_baseline_metrics_20260519.csv",

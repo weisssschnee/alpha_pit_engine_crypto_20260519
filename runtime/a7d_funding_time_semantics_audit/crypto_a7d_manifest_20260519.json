@@ -1,20 +1,20 @@
 {
-  "blockers": [
-    "funding_event_detection_exact_match_misses_events"
-  ],
+  "blockers": [],
   "cost_tier_primary": "stress_10bp",
-  "decision": "HOLD_A7D_FUNDING_SEMANTICS_UNRESOLVED",
-  "generated_at": "2026-05-19T13:02:00Z",
+  "decision": "PASS_A7D_FUNDING_SEMANTICS_FOR_RESEARCH",
+  "evaluator_funding_payment_model": "full_signed_long_pays_short_receives",
+  "generated_at": "2026-05-19T13:14:32Z",
   "key_metrics": {
     "exact_event_detection_rate": 0.6602760736196319,
-    "f2_fresh_may_annualized": -2.856188962009161,
-    "f2_recent_annualized": 0.7862907354498385,
-    "f4_future_recent_annualized": -1.2058298339188789,
-    "f5_time_shuffle_recent_annualized": -2.2910453523046126,
-    "f6_symbol_shuffle_recent_annualized": -2.9148791498799245,
-    "f7_wrong_lag_future_24h_recent_annualized": 5.878323565429163,
-    "net_current_long_only_recent_ann": 3.357765546517755,
-    "net_full_signed_recent_ann": 3.5273092017467844,
+    "f2_fresh_may_annualized": -2.7060542933901917,
+    "f2_recent_annualized": 0.9279025035074226,
+    "f4_future_recent_annualized": -1.0440807271552697,
+    "f5_time_shuffle_recent_annualized": -2.192655292681766,
+    "f6_symbol_shuffle_recent_annualized": -2.878843949137008,
+    "f7_wrong_lag_future_24h_recent_annualized": 5.77208687858151,
+    "net_current_long_only_recent_ann": 3.503825730223605,
+    "net_full_signed_recent_ann": 3.8730185911783512,
+    "observable_change_event_detection_rate": 1.0,
     "within_1h_event_detection_rate": 1.0
   },
   "outputs": {
@@ -30,6 +30,8 @@
   "purge_embargo_bars": 24,
   "risk_variant": "R3_vol_target_gross_0p5x_cap",
   "warnings": [
+    "exact_match_event_detection_misses_ms_offset_events",
+    "legacy_long_only_funding_model_materially_differs_from_full_signed_model",
     "wrong_lag_future_24h_diagnostic_much_stronger_than_observable",
     "observable_fundingcore_fresh_may_negative"
   ]

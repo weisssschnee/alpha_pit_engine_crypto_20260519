@@ -2,15 +2,15 @@
 
 - decision: `HOLD_FUNDINGCORE_ALPHA_SHADOW_PROOF`
 - status: `fundingcore_research_baseline_only`
-- generated_at: `2026-05-19T12:18:23Z`
+- generated_at: `2026-05-19T13:11:42Z`
 
 ## Summary
 
-- validation 10bps annualized: `1.969657672528783`
-- recent OOS 10bps annualized: `0.7862907354498385`
-- fresh May 10bps annualized: `-2.856188962009161`
-- validation 20bps annualized: `1.7112490999138206`
-- recent OOS 20bps annualized: `0.5112879701508529`
+- validation 10bps annualized: `2.106167645859684`
+- recent OOS 10bps annualized: `0.9279025035074226`
+- fresh May 10bps annualized: `-2.7060542933901917`
+- validation 20bps annualized: `1.8477683004786287`
+- recent OOS 20bps annualized: `0.6528964955906105`
 - recent symbol LOO positive rate: `1.0`
 
 ## Decision

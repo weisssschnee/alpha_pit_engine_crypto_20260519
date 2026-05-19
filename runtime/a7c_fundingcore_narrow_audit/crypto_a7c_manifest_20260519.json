@@ -8,18 +8,18 @@
     "stress_10bp": 10.0
   },
   "decision": "HOLD_FUNDINGCORE_ALPHA_SHADOW_PROOF",
-  "generated_at": "2026-05-19T12:18:23Z",
+  "generated_at": "2026-05-19T13:11:42Z",
   "key_metrics": {
-    "fresh_may_10bp_ann": -2.856188962009161,
-    "fresh_may_compounded_dd": -0.18084837903829232,
-    "recent_oos_10bp_ann": 0.7862907354498385,
-    "recent_oos_20bp_ann": 0.5112879701508529,
-    "recent_oos_compounded_dd": -0.619464975189921,
-    "recent_symbol_loo_min_ann": 1.692624937165766,
+    "fresh_may_10bp_ann": -2.7060542933901917,
+    "fresh_may_compounded_dd": -0.17888775137920254,
+    "recent_oos_10bp_ann": 0.9279025035074226,
+    "recent_oos_20bp_ann": 0.6528964955906105,
+    "recent_oos_compounded_dd": -0.6068311330647214,
+    "recent_symbol_loo_min_ann": 2.1922634631177518,
     "recent_symbol_loo_positive_rate": 1.0,
-    "validation_10bp_ann": 1.969657672528783,
-    "validation_20bp_ann": 1.7112490999138206,
-    "validation_compounded_dd": -0.3767349232919377
+    "validation_10bp_ann": 2.106167645859684,
+    "validation_20bp_ann": 1.8477683004786287,
+    "validation_compounded_dd": -0.37505945279047137
   },
   "outputs": {
     "component_leave_one_out": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7c_fundingcore_narrow_audit\\crypto_a7c_fundingcore_component_leave_one_out_20260519.csv",

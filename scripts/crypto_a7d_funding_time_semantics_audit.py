@@ -160,9 +160,23 @@ def timestamp_alignment_audit() -> tuple[pd.DataFrame, pd.DataFrame, dict[str, A
     df["open_minus_funding_ms"] = df["open_time_ms"] - df["fundingTime_ms"]
     df["current_event_exact"] = df["open_minus_funding_ms"].abs() < 1.0
     df["event_visible_within_1h_after_payment"] = (df["open_minus_funding_ms"] >= 0) & (df["open_minus_funding_ms"] <= 3600_000)
+    df["prev_fundingTime_ms"] = df.groupby("symbol")["fundingTime_ms"].shift(1)
+    df["current_event_by_observable_change"] = (
+        df["fundingTime_ms"].notna()
+        & df["prev_fundingTime_ms"].notna()
+        & (df["fundingTime_ms"] != df["prev_fundingTime_ms"])
+    )
     unique_events = df[["symbol", "fundingTime_ms"]].dropna().drop_duplicates()
+    first_events = df.dropna(subset=["fundingTime_ms"]).groupby("symbol", as_index=False).head(1)[["symbol", "fundingTime_ms"]]
+    expected_change_events = unique_events.merge(
+        first_events.assign(_first_event=True),
+        on=["symbol", "fundingTime_ms"],
+        how="left",
+    )
+    expected_change_events = expected_change_events[expected_change_events["_first_event"].isna()][["symbol", "fundingTime_ms"]]
     exact_events = df.loc[df["current_event_exact"], ["symbol", "fundingTime_ms"]].dropna().drop_duplicates()
     within_1h_events = df.loc[df["event_visible_within_1h_after_payment"], ["symbol", "fundingTime_ms"]].dropna().drop_duplicates()
+    observable_change_events = df.loc[df["current_event_by_observable_change"], ["symbol", "fundingTime_ms"]].dropna().drop_duplicates()
     summary = {
         "row_count": int(len(df)),
         "symbol_count": int(df["symbol"].nunique()),
@@ -174,8 +188,13 @@ def timestamp_alignment_audit() -> tuple[pd.DataFrame, pd.DataFrame, dict[str, A
         "unique_symbol_funding_events_in_panel": int(len(unique_events)),
         "exact_event_detected_unique": int(len(exact_events)),
         "within_1h_event_detected_unique": int(len(within_1h_events)),
+        "observable_change_expected_unique": int(len(expected_change_events)),
+        "observable_change_detected_unique": int(len(observable_change_events)),
         "exact_event_detection_rate": clean_float(len(exact_events) / len(unique_events)) if len(unique_events) else None,
         "within_1h_event_detection_rate": clean_float(len(within_1h_events) / len(unique_events)) if len(unique_events) else None,
+        "observable_change_event_detection_rate": (
+            clean_float(len(observable_change_events) / len(expected_change_events)) if len(expected_change_events) else None
+        ),
     }
     sample_cols = [
         "symbol",
@@ -191,6 +210,7 @@ def timestamp_alignment_audit() -> tuple[pd.DataFrame, pd.DataFrame, dict[str, A
         "feature_before_execution",
         "funding_before_feature",
         "current_event_exact",
+        "current_event_by_observable_change",
     ]
     samples = pd.concat(
         [
@@ -456,6 +476,7 @@ def write_report(
         f"- funding_before_feature violations: `{alignment_summary['funding_before_feature_violations']}`",
         f"- exact event detection rate: `{alignment_summary['exact_event_detection_rate']}`",
         f"- within 1h event visibility rate: `{alignment_summary['within_1h_event_detection_rate']}`",
+        f"- observable change event detection rate: `{alignment_summary['observable_change_event_detection_rate']}`",
         "",
         "## Funding Lag Ladder",
         "",
@@ -562,12 +583,15 @@ def main() -> int:
     blockers = []
     warnings = []
     exact_rate = alignment_summary["exact_event_detection_rate"]
+    observable_change_rate = alignment_summary["observable_change_event_detection_rate"]
     if alignment_summary["feature_before_execution_violations"] > 0 or alignment_summary["funding_before_feature_violations"] > 0:
         blockers.append("timestamp_alignment_violation")
-    if exact_rate is None or exact_rate < 0.95:
-        blockers.append("funding_event_detection_exact_match_misses_events")
+    if observable_change_rate is None or observable_change_rate < 0.99:
+        blockers.append("funding_event_detection_observable_change_misses_events")
+    if exact_rate is not None and exact_rate < 0.95:
+        warnings.append("exact_match_event_detection_misses_ms_offset_events")
     if net_current_recent is not None and net_full_recent is not None and abs(net_current_recent - net_full_recent) > 0.25:
-        blockers.append("funding_payment_model_materially_changes_when_short_side_included")
+        warnings.append("legacy_long_only_funding_model_materially_differs_from_full_signed_model")
     if f5_recent is not None and f2_recent is not None and f5_recent > max(0.0, 0.5 * f2_recent):
         blockers.append("time_shuffled_funding_too_strong")
     if f6_recent is not None and f2_recent is not None and f6_recent > max(0.0, 0.5 * f2_recent):
@@ -588,9 +612,11 @@ def main() -> int:
         "risk_variant": RISK_VARIANT,
         "cost_tier_primary": "stress_10bp",
         "purge_embargo_bars": PURGE_EMBARGO_BARS,
+        "evaluator_funding_payment_model": "full_signed_long_pays_short_receives",
         "key_metrics": {
             "exact_event_detection_rate": exact_rate,
             "within_1h_event_detection_rate": alignment_summary["within_1h_event_detection_rate"],
+            "observable_change_event_detection_rate": observable_change_rate,
             "f2_recent_annualized": f2_recent,
             "f4_future_recent_annualized": f4_recent,
             "f5_time_shuffle_recent_annualized": f5_recent,
@@ -639,7 +665,7 @@ def main() -> int:
         "",
         "A7D audits funding time semantics, event detection, payment sign handling, lag ladder behavior, and May 2026 failure attribution.",
         "",
-        "If blockers are present, FundingCore and Core4 remain data-semantics unresolved and must not enter alpha shadow proof.",
+        "Funding data semantics pass for further research when blockers are empty. This does not promote FundingCore or Core4 to alpha shadow proof.",
         "",
         "## Confirmed",
         "",
@@ -656,7 +682,7 @@ def main() -> int:
         "",
         "## Required Next Action",
         "",
-        "If event detection/payment blockers are present, fix evaluator funding payment semantics and rerun A2.6 onward before using funding results for promotion.",
+        "With evaluator semantics repaired, continue with funding-regime/risk failure audit. Do not run generator bakeoff or shadow promotion while fresh May and drawdown risks remain unresolved.",
     ]
     decision_path.write_text("\n".join(decision_lines) + "\n", encoding="utf-8")
 

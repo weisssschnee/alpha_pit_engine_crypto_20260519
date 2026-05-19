@@ -1,15 +1,15 @@
 # Crypto A7D Decision Record
 
-- decision: `HOLD_A7D_FUNDING_SEMANTICS_UNRESOLVED`
-- generated_at: `2026-05-19T13:02:00Z`
-- blockers: `['funding_event_detection_exact_match_misses_events']`
-- warnings: `['wrong_lag_future_24h_diagnostic_much_stronger_than_observable', 'observable_fundingcore_fresh_may_negative']`
+- decision: `PASS_A7D_FUNDING_SEMANTICS_FOR_RESEARCH`
+- generated_at: `2026-05-19T13:14:32Z`
+- blockers: `[]`
+- warnings: `['exact_match_event_detection_misses_ms_offset_events', 'legacy_long_only_funding_model_materially_differs_from_full_signed_model', 'wrong_lag_future_24h_diagnostic_much_stronger_than_observable', 'observable_fundingcore_fresh_may_negative']`
 
 ## Conclusion
 
 A7D audits funding time semantics, event detection, payment sign handling, lag ladder behavior, and May 2026 failure attribution.
 
-If blockers are present, FundingCore and Core4 remain data-semantics unresolved and must not enter alpha shadow proof.
+Funding data semantics pass for further research when blockers are empty. This does not promote FundingCore or Core4 to alpha shadow proof.
 
 ## Confirmed
 
@@ -26,4 +26,4 @@ If blockers are present, FundingCore and Core4 remain data-semantics unresolved 
 
 ## Required Next Action
 
-If event detection/payment blockers are present, fix evaluator funding payment semantics and rerun A2.6 onward before using funding results for promotion.
+With evaluator semantics repaired, continue with funding-regime/risk failure audit. Do not run generator bakeoff or shadow promotion while fresh May and drawdown risks remain unresolved.
