@@ -1,13 +1,19 @@
 # Crypto A7G-1 May Failure Forensic Audit
 
-- generated_at: `2026-05-19T14:04:54Z`
+- generated_at: `2026-05-19T14:30:12Z`
 - decision: `PASS_A7G1_FORENSIC_COMPLETED_HOLD_FUNDING_LINE`
 - blockers: `[]`
-- warnings: `[]`
+- warnings: `['fresh_forward_failure_unresolved', 'funding_line_paused_for_alpha_proof', 'a7g1_forensic_pass_is_not_risk_gate_pass', 'fundingcore_may_loss_broad_across_components_and_multiple_symbols', 'core4_may_loss_broad_across_components_and_multiple_symbols']`
 
 ## Scope
 
 No new search, no formula changes, no gate tuning. This audit decomposes fresh May 2026 losses after the corrected basis contract from A7G-0.
+
+## Status Boundary
+
+- A7G-1 is a forensic completion pass, not an alpha/risk gate pass.
+- FundingCore/Core4 remain blocked from alpha shadow proof.
+- This result does not authorize A7.3 generator bakeoff, shadow, paper, or live trading.
 
 ## Loss Concentration
 
@@ -73,5 +79,7 @@ No new search, no formula changes, no gate tuning. This audit decomposes fresh M
 
 ## Decision
 
+- FundingCore/Core4 stay at research-benchmark status only.
+- The May failure is broad across components and multiple symbols, not a small top-hour cleanup problem.
 - If losses are broad across components and symbols, the funding line remains paused for alpha proof.
 - If losses are dominated by a small component/symbol/hour set, the next valid work is a predeclared risk-control audit, not search.

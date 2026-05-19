@@ -220,6 +220,12 @@ def write_report(
         "",
         "No new search, no formula changes, no gate tuning. This audit decomposes fresh May 2026 losses after the corrected basis contract from A7G-0.",
         "",
+        "## Status Boundary",
+        "",
+        "- A7G-1 is a forensic completion pass, not an alpha/risk gate pass.",
+        "- FundingCore/Core4 remain blocked from alpha shadow proof.",
+        "- This result does not authorize A7.3 generator bakeoff, shadow, paper, or live trading.",
+        "",
         "## Loss Concentration",
         "",
         "| object | May total | positive hour rate | top3 loss share | top10 loss share |",
@@ -272,6 +278,8 @@ def write_report(
         "",
         "## Decision",
         "",
+        "- FundingCore/Core4 stay at research-benchmark status only.",
+        "- The May failure is broad across components and multiple symbols, not a small top-hour cleanup problem.",
         "- If losses are broad across components and symbols, the funding line remains paused for alpha proof.",
         "- If losses are dominated by a small component/symbol/hour set, the next valid work is a predeclared risk-control audit, not search.",
     ]
@@ -355,12 +363,16 @@ def main() -> int:
     fcore_symbols_negative = int((symbol_summary[symbol_summary["object"] == "FundingCore"]["net_sum"] < 0).sum())
     core4_symbols_negative = int((symbol_summary[symbol_summary["object"] == "Core4"]["net_sum"] < 0).sum())
 
-    warnings = []
+    warnings = [
+        "fresh_forward_failure_unresolved",
+        "funding_line_paused_for_alpha_proof",
+        "a7g1_forensic_pass_is_not_risk_gate_pass",
+    ]
     blockers = []
-    if fcore_components_negative >= 3 and fcore_symbols_negative >= 8:
-        warnings.append("fundingcore_may_loss_broad_across_components_and_symbols")
-    if core4_components_negative >= 3 and core4_symbols_negative >= 8:
-        warnings.append("core4_may_loss_broad_across_components_and_symbols")
+    if fcore_components_negative >= 3 and fcore_symbols_negative >= 6:
+        warnings.append("fundingcore_may_loss_broad_across_components_and_multiple_symbols")
+    if core4_components_negative >= 3 and core4_symbols_negative >= 6:
+        warnings.append("core4_may_loss_broad_across_components_and_multiple_symbols")
     if fcore_top10_share is not None and fcore_top10_share > 0.5:
         warnings.append("fundingcore_top_loss_hours_concentrated")
     if core4_top10_share is not None and core4_top10_share > 0.5:
@@ -370,6 +382,10 @@ def main() -> int:
     manifest = {
         "generated_at": utc_now(),
         "decision": decision,
+        "alpha_proof_status": "HOLD_ALPHA_SHADOW_PROOF",
+        "risk_gate_status": "NOT_PASSED",
+        "authorizes_a7_3_generator_bakeoff": False,
+        "authorizes_shadow_live_or_paper": False,
         "blockers": blockers,
         "warnings": warnings,
         "risk_variant": RISK_VARIANT,
@@ -415,10 +431,20 @@ def main() -> int:
         f"- generated_at: `{manifest['generated_at']}`",
         f"- blockers: `{blockers}`",
         f"- warnings: `{warnings}`",
+        f"- alpha_proof_status: `{manifest['alpha_proof_status']}`",
+        f"- risk_gate_status: `{manifest['risk_gate_status']}`",
+        f"- authorizes_a7_3_generator_bakeoff: `{manifest['authorizes_a7_3_generator_bakeoff']}`",
+        f"- authorizes_shadow_live_or_paper: `{manifest['authorizes_shadow_live_or_paper']}`",
         "",
         "## Conclusion",
         "",
         "A7G-1 is a forensic audit only. FundingCore/Core4 remain blocked from alpha shadow proof until fresh-forward failure is resolved by a predeclared rule and forward-locked evidence.",
+        "",
+        "## Explicit Non-Authorization",
+        "",
+        "- This is not a risk-gate pass.",
+        "- This does not authorize A7.3 generator/reward bakeoff.",
+        "- This does not authorize shadow/live/paper promotion.",
     ]
     decision_path.write_text("\n".join(decision_lines) + "\n", encoding="utf-8")
 
