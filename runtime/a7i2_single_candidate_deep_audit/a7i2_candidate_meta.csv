@@ -1,0 +1,2 @@
+candidate_id,expression,horizon,cost_bps,orientation,train_ic_mean
+i2_microstructure_lite_113,"Mul(Rank(realized_vol_6),ZScore(quote_volume_mean_12))",12,10.0,1.0,0.06345177258638819

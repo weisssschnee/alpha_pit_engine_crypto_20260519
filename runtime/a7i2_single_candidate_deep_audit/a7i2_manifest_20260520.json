@@ -1,0 +1,48 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "blockers": [
+    "raw_may_materially_negative",
+    "cost20_recent_negative",
+    "lag1_may_severely_negative",
+    "may_symbol_loo_weak"
+  ],
+  "candidate_id": "i2_microstructure_lite_113",
+  "decision": "HOLD_A7I2_COST_LAG_MAY_FRAGILE",
+  "expression": "Mul(Rank(realized_vol_6),ZScore(quote_volume_mean_12))",
+  "family": "microstructure_lite",
+  "generated_at": "2026-05-19T16:53:14Z",
+  "horizon": 12,
+  "key_metrics": {
+    "may_symbol_loo_positive_rate": 0.08333333333333333,
+    "raw_may_ann_10bp": -0.4978876854301183,
+    "raw_may_ann_lag1_10bp": -1.0388361151696155,
+    "raw_recent_ann_10bp": 0.2655878686712248,
+    "raw_recent_ann_20bp": -0.23319164432613168,
+    "raw_recent_ann_lag1_10bp": 0.2640403767143501,
+    "raw_validation_ann_10bp": 0.35703539862297007,
+    "recent_symbol_loo_positive_rate": 0.8333333333333334,
+    "residual_funding_may_ann_10bp": 0.6780796432981011,
+    "residual_funding_recent_ann_10bp": 0.5614991374567987,
+    "worst_hour_net_return_10bp": -0.03740340702918458
+  },
+  "outputs": {
+    "candidate_meta": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i2_single_candidate_deep_audit\\a7i2_candidate_meta.csv",
+    "candidate_metrics": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i2_single_candidate_deep_audit\\a7i2_candidate_metrics.csv",
+    "cost_ladder": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i2_single_candidate_deep_audit\\a7i2_cost_ladder.csv",
+    "field_timing_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i2_single_candidate_deep_audit\\a7i2_field_timing_audit.csv",
+    "lag_ladder": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i2_single_candidate_deep_audit\\a7i2_lag_ladder.csv",
+    "month_contribution": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i2_single_candidate_deep_audit\\a7i2_month_contribution.csv",
+    "month_loo": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i2_single_candidate_deep_audit\\a7i2_month_loo.csv",
+    "symbol_contribution": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i2_single_candidate_deep_audit\\a7i2_symbol_contribution.csv",
+    "symbol_loo": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i2_single_candidate_deep_audit\\a7i2_symbol_loo.csv",
+    "top_loss_hours": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i2_single_candidate_deep_audit\\a7i2_top_loss_hours.csv"
+  },
+  "primary_cost_tier": "stress_10bp",
+  "purge_embargo_bars": 24,
+  "warnings": [
+    "a7i2_is_single_candidate_deep_audit_not_generator_success",
+    "may_2026_is_known_adversarial_stress_set_not_fresh_proof",
+    "base_replay_uses_bar_boundary_execution_available_time_equals_execution_time",
+    "no_alpha_shadow_paper_live_authorized"
+  ]
+}
