@@ -1,0 +1,57 @@
+{
+  "blockers": [],
+  "decision": "PASS_A7G0_FIELD_CONTRACT_A7F_CORRECTION_REQUIRED",
+  "field_contract": {
+    "mark_index_ratio": {
+      "correct_abs_basis": "abs(mark_index_ratio)",
+      "definition": "mark_close / index_close - 1.0",
+      "incorrect_abs_basis": "abs(mark_index_ratio - 1.0)",
+      "is_centered": true,
+      "source": "G:\\AlphaFactory_CryptoData\\scripts\\build_crypto_gold_panel_v1.py",
+      "source_lines": [
+        {
+          "line": 203,
+          "text": "df[\"mark_index_ratio\"] = df[\"mark_close\"] / df[\"index_close\"].replace(0, np.nan) - 1.0"
+        },
+        {
+          "line": 229,
+          "text": "\"mark_index_ratio\","
+        }
+      ]
+    },
+    "mark_minus_index": {
+      "definition": "mark_close - index_close",
+      "source": "G:\\AlphaFactory_CryptoData\\scripts\\build_crypto_gold_panel_v1.py",
+      "source_lines": [
+        {
+          "line": 202,
+          "text": "df[\"mark_minus_index\"] = df[\"mark_close\"] - df[\"index_close\"]"
+        }
+      ]
+    },
+    "premium_index": {
+      "definition": "premium_close",
+      "source": "G:\\AlphaFactory_CryptoData\\scripts\\build_crypto_gold_panel_v1.py",
+      "source_lines": [
+        {
+          "line": 205,
+          "text": "df[\"premium_index\"] = df[\"premium_close\"]"
+        },
+        {
+          "line": 230,
+          "text": "\"premium_index\","
+        }
+      ]
+    }
+  },
+  "generated_at": "2026-05-19T13:49:51Z",
+  "key_metrics": {
+    "train_basis_abs_v0_median": 1.0002057058894396,
+    "train_basis_abs_v1_median": 0.0004608692034395734,
+    "train_basis_abs_v2_median": 0.000460869203439575,
+    "train_v0_v1_bucket_match_rate": 0.2689635535307517,
+    "train_v1_v2_bucket_match_rate": 1.0
+  },
+  "next_action": "Rerun A7F with basis_abs_mean = abs(mark_index_ratio); do not interpret old G6 basis bucket.",
+  "warnings": []
+}
