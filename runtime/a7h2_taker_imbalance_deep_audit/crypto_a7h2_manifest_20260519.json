@@ -1,0 +1,56 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "blockers": [
+    "standalone_raw_10bp_negative_recent_or_may",
+    "standalone_recent_symbol_contribution_weak",
+    "standalone_may_symbol_contribution_weak"
+  ],
+  "candidate": {
+    "candidate_id": "a7h_flow_rank_taker_imbalance_h6",
+    "expression": "Rank(taker_imbalance)",
+    "horizon": 6
+  },
+  "decision": "HOLD_A7H2_TAKER_IMBALANCE_UNRESOLVED",
+  "generated_at": "2026-05-19T15:10:54Z",
+  "key_metrics": {
+    "execution_label_start_violations": 0,
+    "feature_before_execution_violations": 0,
+    "fresh_may_residual_dd": -0.02998437331480308,
+    "fresh_may_residual_vs_funding_ann": 0.5603755228931412,
+    "may_symbol_positive_rate": 0.3333333333333333,
+    "median_feature_to_execution_ms": 1.0,
+    "min_feature_to_execution_ms": 1.0,
+    "month_loo_min_ann": 0.12288744454923069,
+    "month_loo_positive_rate": 1.0,
+    "raw_10bp_may_ann": -2.9742640932707998,
+    "raw_10bp_recent_ann": -3.314337613711135,
+    "raw_20bp_may_ann": -6.082350827964679,
+    "raw_20bp_recent_ann": -6.427614379715551,
+    "recent_residual_dd": -0.2711106336212934,
+    "recent_residual_vs_funding_ann": 0.22136168217419044,
+    "recent_symbol_positive_rate": 0.0,
+    "row_count": 250368,
+    "row_shuffle_recent_ann": -3.3814169596325776,
+    "sign_flip_recent_ann": -2.912215918297697,
+    "symbol_count": 12,
+    "taker_field_missing_rows": 12,
+    "taker_imbalance_nan_rate": 4.792944785276074e-05,
+    "time_shuffle_recent_ann": -3.4854371253372984,
+    "validation_residual_vs_funding_ann": 0.4687097421312402,
+    "wrong_lag_future_recent_ann": -3.43964754218006
+  },
+  "outputs": {
+    "month_leave_one_out": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7h2_taker_imbalance_deep_audit\\crypto_a7h2_month_leave_one_out_20260519.csv",
+    "placebo_meta": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7h2_taker_imbalance_deep_audit\\crypto_a7h2_placebo_meta_20260519.csv",
+    "placebo_wrong_lag": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7h2_taker_imbalance_deep_audit\\crypto_a7h2_placebo_wrong_lag_20260519.csv",
+    "split_metrics": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7h2_taker_imbalance_deep_audit\\crypto_a7h2_split_metrics_20260519.csv",
+    "symbol_contribution": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7h2_taker_imbalance_deep_audit\\crypto_a7h2_symbol_contribution_20260519.csv",
+    "timing_samples": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7h2_taker_imbalance_deep_audit\\crypto_a7h2_taker_timing_samples_20260519.csv",
+    "top_loss_hours": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7h2_taker_imbalance_deep_audit\\crypto_a7h2_top_loss_hours_20260519.csv"
+  },
+  "warnings": [
+    "minor_taker_field_missing_rows",
+    "raw_20bp_recent_not_positive",
+    "raw_20bp_may_not_positive"
+  ]
+}
