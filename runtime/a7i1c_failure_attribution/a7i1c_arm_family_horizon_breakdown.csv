@@ -1,0 +1,9 @@
+arm,family,horizon,generated_count,selected_count,research_candidate_count,median_rank_score
+I0_basis_premium,basis_premium,6,125,22,0,-3.259067410538105
+I0_basis_premium,basis_premium,12,125,42,0,-0.3904550894548279
+I1_flow_liquidity,flow_liquidity,6,125,27,0,-4.742985704330649
+I1_flow_liquidity,flow_liquidity,12,125,37,0,-5.091935787922964
+I2_microstructure_lite,microstructure_lite,6,125,30,0,-1.5753631912540198
+I2_microstructure_lite,microstructure_lite,12,125,34,1,-1.455326817182376
+I3_placebo_random,placebo_random,6,125,34,0,-6.274217396957363
+I3_placebo_random,placebo_random,12,125,30,0,-6.783697073005628

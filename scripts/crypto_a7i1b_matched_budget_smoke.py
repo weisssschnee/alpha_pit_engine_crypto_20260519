@@ -555,7 +555,7 @@ def main() -> int:
     if "placebo_arm_produced_research_candidate" in blockers:
         decision = "HOLD_A7I1_PLACEBO_TOO_STRONG"
     elif "fewer_than_2_non_placebo_research_candidates" in blockers:
-        decision = "HOLD_A7I1_NO_RESEARCH_CANDIDATE"
+        decision = "HOLD_A7I1_INSUFFICIENT_RESEARCH_CANDIDATES"
     elif "duplicate_or_family_cap_failed" in blockers:
         decision = "HOLD_A7I1_FAMILY_CONCENTRATION"
     else:

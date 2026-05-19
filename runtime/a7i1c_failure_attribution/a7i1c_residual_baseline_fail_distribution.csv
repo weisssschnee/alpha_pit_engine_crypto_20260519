@@ -1,0 +1,9 @@
+arm,selected_for_replay,residual_funding_validation_fail_count,residual_funding_recent_fail_count,residual_funding_may_fail_count,residual_core4_recent_fail_count,funding_beta_fail_count,core4_beta_fail_count,candidate_count
+I0_basis_premium,False,107,108,88,110,0,0,186
+I0_basis_premium,True,20,22,40,22,1,1,64
+I1_flow_liquidity,False,120,110,92,110,0,0,186
+I1_flow_liquidity,True,0,0,52,0,2,2,64
+I2_microstructure_lite,False,68,65,109,65,0,0,186
+I2_microstructure_lite,True,0,0,54,0,3,2,64
+I3_placebo_random,False,143,133,118,133,0,0,186
+I3_placebo_random,True,11,0,33,0,0,0,64

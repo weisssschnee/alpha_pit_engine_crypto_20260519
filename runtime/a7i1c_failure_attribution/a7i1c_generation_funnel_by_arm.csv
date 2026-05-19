@@ -1,0 +1,5 @@
+arm,generated_count,selected_count,research_candidate_count,placebo_count,median_rank_score,p95_rank_score,selected_rate
+I0_basis_premium,250,64,0,0,-2.770897601356443,2.5031723084957807,0.256
+I1_flow_liquidity,250,64,0,0,-5.00710363695744,7.460107800555506,0.256
+I2_microstructure_lite,250,64,1,0,-1.5663916305394032,4.214468565408232,0.256
+I3_placebo_random,250,64,0,250,-6.471335374008529,2.2645949957793725,0.256

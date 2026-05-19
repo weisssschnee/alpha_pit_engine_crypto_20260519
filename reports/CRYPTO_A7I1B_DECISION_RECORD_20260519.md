@@ -1,6 +1,6 @@
 # Crypto A7I-1b Decision Record
 
-decision: HOLD_A7I1_NO_RESEARCH_CANDIDATE
+decision: HOLD_A7I1_INSUFFICIENT_RESEARCH_CANDIDATES
 stage: small matched-budget residual-aware generator smoke
 authorizes_alpha_proof: false
 authorizes_shadow_paper_live: false

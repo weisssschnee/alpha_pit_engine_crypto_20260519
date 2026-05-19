@@ -1,7 +1,7 @@
 # Crypto A7I-1b Matched-Budget Smoke
 
 - generated_at: `2026-05-19T16:19:08Z`
-- decision: `HOLD_A7I1_NO_RESEARCH_CANDIDATE`
+- decision: `HOLD_A7I1_INSUFFICIENT_RESEARCH_CANDIDATES`
 - executes_search: `True`
 - generated_per_arm: `250`
 - replay_selected_per_arm: `64`
