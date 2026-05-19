@@ -1,0 +1,24 @@
+# Keep this repo as code + lightweight research artifacts only.
+# Market data and append-only telemetry remain under G:\AlphaFactory_CryptoData.
+
+*.parquet
+*.npz
+*.zip
+*.pyc
+__pycache__/
+
+raw/
+bronze/
+silver/
+gold/
+shadow_forward/
+.venv/
+venv/
+
+**/*scaled_panel*.csv
+**/*multipliers*.csv
+**/*residual_vs_funding*.csv
+**/*book_returns*.csv
+**/*positions*.csv
+**/*component_panel*.csv
+
