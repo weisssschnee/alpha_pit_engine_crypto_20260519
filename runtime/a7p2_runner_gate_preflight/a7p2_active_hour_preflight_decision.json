@@ -1,0 +1,39 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_full_l1_without_checkpoint": false,
+  "authorizes_l2_or_l3": false,
+  "authorizes_next_64_cell_checkpoint": false,
+  "blockers": [
+    "single_horizon_deep_share",
+    "active_cells_with_valid_deep_audit_below_50",
+    "single_hypothesis_family_over_40pct"
+  ],
+  "cell_end": 195,
+  "cell_start": 192,
+  "checkpoint_id": "A7P2_PREFLIGHT",
+  "decision": "HOLD_A7O_L1_PILOT_CHECKPOINT",
+  "generated_at": "2026-05-20T18:14:15Z",
+  "metrics": {
+    "active_cells_with_valid_deep_audit": 4,
+    "deep_audit_selected": 12,
+    "deep_selection_policy": "global_liquidity_volatility_cap_15pct",
+    "eval_failure_count": 0,
+    "fold_metric_missing_rate": 0.0,
+    "generated": 8192,
+    "liquidity_volatility_deep_cap": 1,
+    "liquidity_volatility_deep_count": 0,
+    "liquidity_volatility_deep_forced_fill_count": 0,
+    "liquidity_volatility_deep_share": 0.0,
+    "negative_control_dominance_failures": 0,
+    "placebo_or_null_research_candidates": 0,
+    "post_may_eligible_deep_survivors": 1,
+    "single_feature_operator_horizon_motif_share": 0.25,
+    "single_horizon_deep_share": 0.5,
+    "single_hypothesis_family_share": 0.5,
+    "single_return_corr_cluster_share": 0.08333333333333333,
+    "stress_gate_min_active_hours": 10,
+    "stress_gate_min_gross_exposure": 0.05,
+    "strict_replay_selected": 96
+  },
+  "shadow_paper_live_status": "NOT_AUTHORIZED"
+}

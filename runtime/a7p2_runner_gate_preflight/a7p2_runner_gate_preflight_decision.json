@@ -1,0 +1,41 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_full_l1_without_checkpoint": false,
+  "authorizes_l2_or_l3": false,
+  "authorizes_w2": false,
+  "checks": {
+    "active_hour_count_in_fold_metrics": true,
+    "active_hour_count_in_split_metrics": true,
+    "may_policy_unchanged": true,
+    "negative_control_dominance_audit_written": true,
+    "strict_negative_control_blocker_triggered": true
+  },
+  "decision": "PASS_A7P2A_A7P2B_RUNNER_PREFLIGHT",
+  "executes_replay": true,
+  "executes_search": true,
+  "generated_at": "2026-05-20T18:17:59Z",
+  "metrics": {
+    "active_preflight_generated": 8192,
+    "active_preflight_strict_replay": 96,
+    "negctrl_preflight_generated": 2048,
+    "negctrl_preflight_strict_replay": 24,
+    "negctrl_strict_research_like": 1
+  },
+  "outputs": {
+    "active_decision": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7p2_runner_gate_preflight\\a7p2_active_hour_preflight_decision.json",
+    "active_hour_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7p2_runner_gate_preflight\\a7p2_active_hour_metric_audit.csv",
+    "active_manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7p2_runner_gate_preflight\\a7p2_active_hour_preflight_manifest.json",
+    "active_may_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7p2_runner_gate_preflight\\a7p2_active_hour_may_stress_only_audit.csv",
+    "active_split_metrics": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7p2_runner_gate_preflight\\a7p2_active_hour_split_metrics.csv",
+    "decision": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7p2_runner_gate_preflight\\a7p2_runner_gate_preflight_decision.json",
+    "manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7p2_runner_gate_preflight\\a7p2_runner_gate_preflight_manifest.json",
+    "negctrl_decision": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7p2_runner_gate_preflight\\a7p2_negctrl_preflight_decision.json",
+    "negctrl_dominance": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7p2_runner_gate_preflight\\a7p2_negctrl_dominance_audit.csv",
+    "negctrl_manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7p2_runner_gate_preflight\\a7p2_negctrl_preflight_manifest.json",
+    "negctrl_may_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7p2_runner_gate_preflight\\a7p2_negctrl_may_stress_only_audit.csv",
+    "report": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\reports\\CRYPTO_A7P2_RUNNER_GATE_PREFLIGHT_20260521.md"
+  },
+  "preflight_only": true,
+  "shadow_paper_live_status": "NOT_AUTHORIZED",
+  "stable_decision_hash": "2ef9b0dd397e0d5be34f95b894cf86698cfe64ee88e49f28c80ebe7965526c00"
+}

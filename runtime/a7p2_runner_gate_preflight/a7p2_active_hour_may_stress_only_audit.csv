@@ -1,0 +1,7 @@
+check,count,pass
+may_used_for_generation,0,True
+may_used_for_static_score,0,True
+may_used_for_strict_selection,0,True
+may_used_for_deep_selection,0,True
+may_used_for_negative_control_dominance,0,True
+may_used_only_for_post_selection_label,0,True

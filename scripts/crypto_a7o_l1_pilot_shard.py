@@ -70,6 +70,9 @@ RETURN_CORR_CLUSTER_THRESHOLD = 0.80
 MAX_LIQUIDITY_VOLATILITY_DEEP_SHARE = 0.15
 MAX_LIQUIDITY_VOLATILITY_DEEP_COUNT = int(math.floor(PILOT_CELLS * DEEP_AUDIT_PER_CELL * MAX_LIQUIDITY_VOLATILITY_DEEP_SHARE))
 DEEP_SELECTION_POLICY = "global_liquidity_volatility_cap_15pct"
+STRESS_GATE_MIN_GROSS_EXPOSURE = 0.05
+STRESS_GATE_MIN_ACTIVE_HOURS = 10
+NEGATIVE_CONTROL_DOMINANCE_MARGIN = 0.0
 
 
 def utc_now() -> str:
@@ -83,6 +86,11 @@ def formula_hash(expr: str) -> str:
 def is_liquidity_volatility_family(families: Any) -> bool:
     parts = {p.strip() for p in str(families).split(";") if p.strip()}
     return "liquidity" in parts and "volatility" in parts
+
+
+def active_hour_count(gross: np.ndarray) -> int:
+    arr = np.asarray(gross, dtype=float)
+    return int(np.sum(np.isfinite(arr) & (arr > 0.0)))
 
 
 def is_number(text: str) -> bool:
@@ -354,6 +362,7 @@ def summarize_fold_series(candidate_id: str, series_name: str, values: np.ndarra
     rows = []
     for fold_id, mask in fold_masks.items():
         stats = summarize_returns(values[mask])
+        gross_slice = gross[mask]
         rows.append(
             {
                 "candidate_id": candidate_id,
@@ -361,7 +370,8 @@ def summarize_fold_series(candidate_id: str, series_name: str, values: np.ndarra
                 "fold_id": fold_id,
                 **stats,
                 "mean_turnover": clean_float(np.nanmean(turnover[mask])),
-                "mean_gross_exposure": clean_float(np.nanmean(gross[mask])),
+                "mean_gross_exposure": clean_float(np.nanmean(gross_slice)),
+                "active_hour_count": active_hour_count(gross_slice),
             }
         )
     return rows
@@ -388,6 +398,7 @@ def summarize_split_series(candidate_id: str, series_name: str, values: np.ndarr
     for split in ["validation_2025H1", "recent_oos_2025H2_2026Apr", "fresh_forward_2026May"]:
         mask = split_mask(PILOT_INDEX, split)
         stats = summarize_returns(values[mask])
+        gross_slice = gross[mask]
         rows.append(
             {
                 "candidate_id": candidate_id,
@@ -395,7 +406,8 @@ def summarize_split_series(candidate_id: str, series_name: str, values: np.ndarr
                 "split": split,
                 **stats,
                 "mean_turnover": clean_float(np.nanmean(turnover[mask])),
-                "mean_gross_exposure": clean_float(np.nanmean(gross[mask])),
+                "mean_gross_exposure": clean_float(np.nanmean(gross_slice)),
+                "active_hour_count": active_hour_count(gross_slice),
             }
         )
     return rows
@@ -526,7 +538,9 @@ def pivot_split_metrics(split_metrics: pd.DataFrame) -> pd.DataFrame:
     values.columns = [f"{a}__{b}" for a, b in values.columns]
     gross = split_metrics.pivot_table(index="candidate_id", columns=["series", "split"], values="mean_gross_exposure", aggfunc="first")
     gross.columns = [f"{a}__{b}__gross_exposure" for a, b in gross.columns]
-    return values.join(gross, how="outer").reset_index()
+    active = split_metrics.pivot_table(index="candidate_id", columns=["series", "split"], values="active_hour_count", aggfunc="first")
+    active.columns = [f"{a}__{b}__active_hour_count" for a, b in active.columns]
+    return values.join(gross, how="outer").join(active, how="outer").reset_index()
 
 
 def robust_score(fold_metrics: pd.DataFrame, residual_metrics: pd.DataFrame, cost_lag_metrics: pd.DataFrame) -> pd.DataFrame:
@@ -567,11 +581,17 @@ def candidate_decisions(scored: pd.DataFrame) -> pd.DataFrame:
         may_resid = clean_float(row.get("residual_vs_funding_10bp__fresh_forward_2026May"))
         may_gross = clean_float(row.get("raw_10bp__fresh_forward_2026May__gross_exposure"))
         may_resid_gross = clean_float(row.get("residual_vs_funding_10bp__fresh_forward_2026May__gross_exposure"))
+        may_active = clean_float(row.get("raw_10bp__fresh_forward_2026May__active_hour_count"))
+        may_resid_active = clean_float(row.get("residual_vs_funding_10bp__fresh_forward_2026May__active_hour_count"))
         may_reasons = []
-        if may_gross is None or may_gross <= 0:
+        if may_gross is None or may_gross <= STRESS_GATE_MIN_GROSS_EXPOSURE:
             may_reasons.append("may_stress_no_raw_activity")
-        if may_resid_gross is None or may_resid_gross <= 0:
+        if may_resid_gross is None or may_resid_gross <= STRESS_GATE_MIN_GROSS_EXPOSURE:
             may_reasons.append("may_stress_no_residual_activity")
+        if may_active is None or may_active < STRESS_GATE_MIN_ACTIVE_HOURS:
+            may_reasons.append("may_stress_raw_active_hours_below_min")
+        if may_resid_active is None or may_resid_active < STRESS_GATE_MIN_ACTIVE_HOURS:
+            may_reasons.append("may_stress_residual_active_hours_below_min")
         if may is None or may < -0.5:
             may_reasons.append("may_stress_severe_fail")
         elif may < -0.25:
@@ -592,6 +612,75 @@ def candidate_decisions(scored: pd.DataFrame) -> pd.DataFrame:
             label = "A7O_PILOT_REJECTED"
         rows.append({"candidate_id": row["candidate_id"], "candidate_decision": label, "reject_reasons": ";".join(reasons + may_reasons)})
     return pd.DataFrame(rows)
+
+
+def append_reason(existing: Any, reason: str) -> str:
+    parts = [part for part in str(existing or "").split(";") if part and part != "nan"]
+    if reason not in parts:
+        parts.append(reason)
+    return ";".join(parts)
+
+
+def apply_negative_control_dominance(scored: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    out = scored.copy()
+    controls = out[(out["object_type"].astype(str).eq("placebo")) & (out["candidate_decision"].eq("NEGATIVE_CONTROL_RESEARCH_LIKE_FAIL"))].copy()
+    audit_rows: list[dict[str, Any]] = []
+    if controls.empty:
+        return out, pd.DataFrame(
+            columns=[
+                "control_candidate_id",
+                "control_cell_id",
+                "dominance_scope",
+                "matched_normal_count",
+                "blocked_normal_count",
+                "control_score",
+            ]
+        )
+
+    contaminated_cells = set(controls["cell_id"].astype(str))
+    normal_mask = ~out["object_type"].astype(str).eq("placebo")
+    for _, control in controls.iterrows():
+        cell_id = str(control["cell_id"])
+        control_score = clean_float(control.get("pilot_rank_score")) or -999.0
+        same_cell = normal_mask & out["cell_id"].astype(str).eq(cell_id)
+        blocked_cell = same_cell & (pd.to_numeric(out["pilot_rank_score"], errors="coerce").fillna(-999.0) <= control_score + NEGATIVE_CONTROL_DOMINANCE_MARGIN)
+        out.loc[same_cell, "reject_reasons"] = out.loc[same_cell, "reject_reasons"].apply(lambda x: append_reason(x, "control_contaminated_cell"))
+        out.loc[same_cell & out["candidate_decision"].eq("A7O_PILOT_RESEARCH_CANDIDATE"), "candidate_decision"] = "A7O_PILOT_CONTROL_CONTAMINATED_CELL"
+        motif_cols = ["hypothesis_family", "feature_family_set", "operator_motif", "temporal_horizon_class"]
+        motif_mask = normal_mask
+        for col in motif_cols:
+            motif_mask &= out[col].astype(str).eq(str(control.get(col)))
+        blocked_motif = motif_mask & (pd.to_numeric(out["pilot_rank_score"], errors="coerce").fillna(-999.0) <= control_score + NEGATIVE_CONTROL_DOMINANCE_MARGIN)
+        out.loc[blocked_motif, "reject_reasons"] = out.loc[blocked_motif, "reject_reasons"].apply(lambda x: append_reason(x, "negative_control_dominance_fail"))
+        out.loc[blocked_motif & out["candidate_decision"].eq("A7O_PILOT_RESEARCH_CANDIDATE"), "candidate_decision"] = "A7O_PILOT_NEGATIVE_CONTROL_DOMINANCE_FAIL"
+        audit_rows.append(
+            {
+                "control_candidate_id": control["candidate_id"],
+                "control_cell_id": cell_id,
+                "control_signal_mode": control.get("signal_mode"),
+                "control_source_field_families": control.get("source_field_families"),
+                "dominance_scope": "same_cell",
+                "matched_normal_count": int(same_cell.sum()),
+                "blocked_normal_count": int(blocked_cell.sum()),
+                "control_score": control_score,
+                "may_used_for_dominance": False,
+            }
+        )
+        audit_rows.append(
+            {
+                "control_candidate_id": control["candidate_id"],
+                "control_cell_id": cell_id,
+                "control_signal_mode": control.get("signal_mode"),
+                "control_source_field_families": control.get("source_field_families"),
+                "dominance_scope": "same_hypothesis_feature_operator_horizon",
+                "matched_normal_count": int(motif_mask.sum()),
+                "blocked_normal_count": int(blocked_motif.sum()),
+                "control_score": control_score,
+                "may_used_for_dominance": False,
+            }
+        )
+    out["control_contaminated_cell"] = out["cell_id"].astype(str).isin(contaminated_cells)
+    return out, pd.DataFrame(audit_rows)
 
 
 def select_deep(scored: pd.DataFrame) -> pd.DataFrame:
@@ -639,6 +728,9 @@ def select_deep(scored: pd.DataFrame) -> pd.DataFrame:
             backfill = pd.DataFrame(backfill_rows)
             backfill["deep_selection_stage"] = "global_backfill"
             deep = pd.concat([deep, backfill], ignore_index=True)
+    if deep.empty:
+        deep = scored.head(0).copy()
+        deep["deep_selection_stage"] = pd.Series(dtype=str)
     deep["deep_audit_status"] = "selected_for_deep_audit"
     deep["deep_selection_policy"] = DEEP_SELECTION_POLICY
     deep["liquidity_volatility_deep_cap"] = MAX_LIQUIDITY_VOLATILITY_DEEP_COUNT
@@ -647,6 +739,8 @@ def select_deep(scored: pd.DataFrame) -> pd.DataFrame:
 
 
 def return_corr_clusters(book_vectors: pd.DataFrame, deep: pd.DataFrame) -> pd.DataFrame:
+    if deep.empty or "candidate_id" not in deep.columns:
+        return pd.DataFrame(columns=["candidate_id", "return_corr_cluster", "max_corr_to_prior", "cluster_size"])
     vector_by_id = {row["candidate_id"]: row["values"] for _, row in book_vectors.iterrows()}
     ids = [cid for cid in deep["candidate_id"].tolist() if cid in vector_by_id]
     clusters: list[list[str]] = []
@@ -728,6 +822,7 @@ def write_outputs(
     clusters: pd.DataFrame,
     fold_def: pd.DataFrame,
     decision_payload: dict[str, Any],
+    negative_control_dominance: pd.DataFrame,
 ) -> dict[str, Path]:
     def out(name: str) -> Path:
         return A7O_L1_DIR / f"{OUTPUT_PREFIX}_{name}"
@@ -748,6 +843,7 @@ def write_outputs(
         "cell_failure_map": out("cell_failure_map.csv"),
         "placebo_null_comparison": out("placebo_null_comparison.csv"),
         "may_stress_only_audit": out("may_stress_only_audit.csv"),
+        "negative_control_dominance_audit": out("negative_control_dominance_audit.csv"),
         "checkpoint_decision": out("checkpoint_decision.json"),
         "eval_failures": out("eval_failures.csv"),
         "split_metrics": out("split_metrics.csv"),
@@ -801,6 +897,7 @@ def write_outputs(
             {"check": "may_used_for_static_score", "count": 0, "pass": True},
             {"check": "may_used_for_strict_selection", "count": 0, "pass": True},
             {"check": "may_used_for_deep_selection", "count": 0, "pass": True},
+            {"check": "may_used_for_negative_control_dominance", "count": 0, "pass": True},
             {"check": "may_used_only_for_post_selection_label", "count": 0, "pass": True},
         ]
     )
@@ -820,6 +917,7 @@ def write_outputs(
     cell_failure.to_csv(paths["cell_failure_map"], index=False)
     placebo.to_csv(paths["placebo_null_comparison"], index=False)
     may_audit.to_csv(paths["may_stress_only_audit"], index=False)
+    negative_control_dominance.to_csv(paths["negative_control_dominance_audit"], index=False)
     eval_failures.to_csv(paths["eval_failures"], index=False)
     fold_def.to_csv(paths["fold_definition"], index=False)
     write_json(paths["checkpoint_decision"], decision_payload)
@@ -843,11 +941,15 @@ def main() -> int:
     scored = selected.merge(wide, on="candidate_id", how="left").merge(scores, on="candidate_id", how="left")
     decisions = candidate_decisions(scored)
     scored = scored.merge(decisions, on="candidate_id", how="left")
+    scored, negative_control_dominance = apply_negative_control_dominance(scored)
+    strict_control_research_like = scored[(scored["object_type"].astype(str).eq("placebo")) & (scored["candidate_decision"].eq("NEGATIVE_CONTROL_RESEARCH_LIKE_FAIL"))].copy()
     deep = select_deep(scored)
     clusters = return_corr_clusters(book_vectors, deep)
-    deep = deep.merge(clusters[["candidate_id", "return_corr_cluster"]], on="candidate_id", how="left")
+    if "return_corr_cluster" not in deep.columns:
+        deep = deep.merge(clusters[["candidate_id", "return_corr_cluster"]], on="candidate_id", how="left")
     post_may = deep[(deep["candidate_decision"].eq("A7O_PILOT_RESEARCH_CANDIDATE")) & (~deep["object_type"].eq("placebo"))].copy()
     control_research_like = deep[deep["candidate_decision"].eq("NEGATIVE_CONTROL_RESEARCH_LIKE_FAIL")].copy()
+    dominance_failures = deep[deep["candidate_decision"].astype(str).str.contains("CONTROL", na=False)].copy()
 
     fold_metric_missing_rate = float(fold_metrics["annualized_mean"].isna().mean()) if not fold_metrics.empty else 1.0
     liqvol_count = int(deep["liquidity_volatility_flag"].sum()) if "liquidity_volatility_flag" in deep.columns and not deep.empty else 0
@@ -857,7 +959,7 @@ def main() -> int:
     cluster_share = float(deep["return_corr_cluster"].value_counts(normalize=True).iloc[0]) if "return_corr_cluster" in deep.columns and deep["return_corr_cluster"].notna().any() else 0.0
     hypothesis_share = float(deep["hypothesis_family"].value_counts(normalize=True).iloc[0]) if not deep.empty else 0.0
     motif_share = float((deep["feature_family_set"].astype(str) + "|" + deep["operator_motif"].astype(str) + "|" + deep["temporal_horizon_class"].astype(str)).value_counts(normalize=True).iloc[0]) if not deep.empty else 0.0
-    active_cells = int(deep["cell_id"].nunique())
+    active_cells = int(deep["cell_id"].nunique()) if "cell_id" in deep.columns else 0
 
     blockers = []
     if len(eval_failures) > 0:
@@ -872,6 +974,10 @@ def main() -> int:
         blockers.append("single_return_corr_cluster_share")
     if len(control_research_like) > 0:
         blockers.append("placebo_or_null_research_candidates")
+    if len(strict_control_research_like) > 0:
+        blockers.append("strict_negative_control_research_like")
+    if len(dominance_failures) > 0:
+        blockers.append("negative_control_dominance_failures")
     if active_cells < 50:
         blockers.append("active_cells_with_valid_deep_audit_below_50")
     if len(post_may) == 0 and deep["candidate_decision"].nunique() <= 2:
@@ -910,6 +1016,11 @@ def main() -> int:
             "active_cells_with_valid_deep_audit": active_cells,
             "post_may_eligible_deep_survivors": int(len(post_may)),
             "placebo_or_null_research_candidates": int(len(control_research_like)),
+            "strict_negative_control_research_like": int(len(strict_control_research_like)),
+            "negative_control_dominance_failures": int(len(dominance_failures)),
+            "negative_control_dominance_audit_rows": int(len(negative_control_dominance)),
+            "stress_gate_min_gross_exposure": STRESS_GATE_MIN_GROSS_EXPOSURE,
+            "stress_gate_min_active_hours": STRESS_GATE_MIN_ACTIVE_HOURS,
             "single_hypothesis_family_share": hypothesis_share,
             "single_feature_operator_horizon_motif_share": motif_share,
         },
@@ -927,6 +1038,7 @@ def main() -> int:
         clusters=clusters,
         fold_def=fold_def,
         decision_payload=decision_payload,
+        negative_control_dominance=negative_control_dominance,
     )
     manifest = {
         "generated_at": now,
