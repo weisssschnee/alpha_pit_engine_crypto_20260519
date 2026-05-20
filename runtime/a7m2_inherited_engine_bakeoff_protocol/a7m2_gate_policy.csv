@@ -1,0 +1,10 @@
+gate,stage,policy,may_related
+coverage_activity,preselection,required,False
+raw_validation_recent,preselection,required,False
+residual_vs_FundingCore_Core4,preselection,required,False
+cost20_validation_recent,preselection,required,False
+lag1_validation_recent,preselection,required,False
+family_duplicate_cap,selection,required,False
+return_corr_cluster_dedup,selection_or_deep_audit,required,False
+May_stress_label,post_selection,veto_or_failure_attribution_only,True
+placebo_null_strength,aggregate,hard_stop_if_nonzero_research_candidate,False

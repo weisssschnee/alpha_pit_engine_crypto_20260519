@@ -1,0 +1,4 @@
+blocker,status,detail,required_resolution
+A7M1B_surrogate_cross_source_hold,active,leave_source_out_near_miss_lift_min=0.465646,"protocol may be written, but execution needs explicit user approval and should treat surrogate as weak prior"
+E3_AST_failure_aware_repair_not_executable,active,requires crypto failure taxonomy and repair-action adapter preflight,adapter preflight required before engine can enter executable bakeoff
+E4_CEM_adaptive_grammar_crypto_not_executable,active,"requires crypto CEM ledger, production weights, and May-exclusion preflight",adapter preflight required before engine can enter executable bakeoff

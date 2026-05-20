@@ -1,0 +1,10 @@
+metric,minimum,maximum,scope,action_if_fail
+non_may_preselection_pass_rate,0.1,,per engine and global,do_not_escalate
+near_miss_nonplacebo_count,20,,global,hold_engine_bakeoff
+near_miss_family_count,4,,global,hold_engine_bakeoff
+research_candidate_count,2,,global,no_alpha_proof_keep_method_hold
+placebo_research_candidate_count,,0,placebo/null engines,fail_pipeline
+wrong_lag_research_candidate_count,,0,adversarial null,fail_pipeline
+same_family_shortlist_share,,0.25,selected shortlist,hold_due_concentration
+selected_may_severe_fail_share,,0.75,selected stress label,warning_or_hold_no_escalation
+return_corr_cluster_count_growth,positive_vs_A7K,,selected/deep audit,hold_due_no_diversity_growth
