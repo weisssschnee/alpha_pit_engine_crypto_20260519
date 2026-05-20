@@ -1,0 +1,5 @@
+check,pass
+may_used_for_generation,True
+may_used_for_static_score,True
+may_used_for_rank_or_replay_selection,True
+may_stress_only_post_selection,True

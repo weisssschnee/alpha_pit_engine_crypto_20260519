@@ -1,20 +1,22 @@
 # Crypto A7M-2 Decision Record
 
-- decision: `PASS_A7M2_INHERITED_ENGINE_BAKEOFF_PROTOCOL`
+- decision: `HOLD_A7M2_ENGINE_BAKEOFF_BLOCKED`
 - alpha_proof_status: `NOT_ALPHA_PROOF`
-- search_executed: `False`
-- replay_executed: `False`
-- authorizes_a7m2_execution: `False`
-- authorizes_large_search: `False`
+- search_executed: `True`
+- replay_executed: `True`
+- generated_count: `160000`
+- strict_replay_count: `4096`
+- deep_audit_count: `512`
+- blockers: `['single_cluster_contributes_over_35pct']`
 
 ## Confirmed
 
-- A7M-2 inherited-engine bakeoff protocol is specified.
-- Engine matrix, budget plan, gate policy, stop rules, and execution blockers are explicit.
-- A7M-1B HOLD is preserved; surrogate is treated as weak prior, not allocation authority.
+- A7M-2 ran equal-budget inherited-engine bakeoff.
+- Surrogate-driven allocation was not used.
+- May was stress-only.
 
-## Not Confirmed
+## Not Authorized
 
-- No bakeoff execution.
-- No adaptive large search.
-- No research candidate, alpha proof, shadow, paper, live, or production readiness.
+- Adaptive large search.
+- Alpha proof.
+- Shadow, paper, live, or production deployment.

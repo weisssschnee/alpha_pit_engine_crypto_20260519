@@ -1,0 +1,55 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_adaptive_large_search": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "single_cluster_contributes_over_35pct"
+  ],
+  "control_research_like_count": 0,
+  "decision": "HOLD_A7M2_ENGINE_BAKEOFF_BLOCKED",
+  "deep_audit_count": 512,
+  "deep_survivor_or_near_miss_count": 379,
+  "equal_budget": true,
+  "executes_replay": true,
+  "executes_search": true,
+  "formula_family_count": 6,
+  "generated_at": "2026-05-20T09:29:49Z",
+  "generated_count": 160000,
+  "inherited_engine_advantage_count": 2,
+  "max_cluster_share": 0.6464379947229552,
+  "max_engine_share": 0.16886543535620052,
+  "may_policy": {
+    "allowed": [
+      "post_selection_stress_label",
+      "veto",
+      "failure_attribution"
+    ],
+    "forbidden": [
+      "ranking",
+      "reward",
+      "threshold_tuning",
+      "weight_selection",
+      "candidate_selection",
+      "generator_tuning",
+      "arm_allocation",
+      "mutation_prior"
+    ]
+  },
+  "non_flow_taker_family_count": 6,
+  "outputs": {
+    "beta_corr_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2_equal_budget_engine_bakeoff\\a7m2_beta_corr_audit.csv",
+    "candidate_scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2_equal_budget_engine_bakeoff\\a7m2_candidate_scoreboard.csv",
+    "deep_audit_selected": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2_equal_budget_engine_bakeoff\\a7m2_deep_audit_selected.csv",
+    "engine_summary": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2_equal_budget_engine_bakeoff\\a7m2_engine_summary.csv",
+    "generated_candidate_manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2_equal_budget_engine_bakeoff\\a7m2_generated_candidate_manifest.csv",
+    "may_policy_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2_equal_budget_engine_bakeoff\\a7m2_may_policy_audit.csv",
+    "return_corr_clusters": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2_equal_budget_engine_bakeoff\\a7m2_return_corr_clusters.csv",
+    "strict_replay_metric_long": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2_equal_budget_engine_bakeoff\\a7m2_strict_replay_metric_long.csv",
+    "strict_replay_selected_manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2_equal_budget_engine_bakeoff\\a7m2_strict_replay_selected_manifest.csv"
+  },
+  "research_candidate_count": 0,
+  "return_corr_cluster_count": 11,
+  "stable_manifest_hash": "004c91e010fdab43bc23ab9655a33e075d7fd2384b30581338c12b3810b529a5",
+  "strict_replay_count": 4096
+}

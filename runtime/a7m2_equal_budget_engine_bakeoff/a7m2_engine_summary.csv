@@ -1,0 +1,9 @@
+engine,strict_replay_count,non_control_count,research_candidate_count,survivor_or_near_miss_count,survivor_or_near_miss_rate,beats_e0_on_survivor_rate,deep_audit_count,return_corr_cluster_count
+E0_current_A7L_manual_generator,512,512,0,152,0.296875,False,64,4
+E1_FormulaGenV2_crypto_adapter,512,512,0,139,0.271484,False,64,5
+E2_typed_AST_sampler_crypto_adapter,512,512,0,137,0.267578,False,64,4
+E3_AST_failure_aware_repair,512,512,0,355,0.693359,True,64,4
+E4_CEM_adaptive_grammar_crypto,512,512,0,113,0.220703,False,64,9
+E5_surrogate_prioritized_sampler,512,512,0,219,0.427734,True,64,3
+E6_placebo_random_control,512,0,0,0,0.0,False,64,0
+E7_adversarial_null_wrong_lag_control,512,0,0,0,0.0,False,64,0
