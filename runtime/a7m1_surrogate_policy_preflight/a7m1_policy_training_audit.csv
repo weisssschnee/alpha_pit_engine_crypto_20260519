@@ -1,0 +1,5 @@
+check,status,detail
+may_labels_excluded_from_targets,pass,no May stress label used as policy target
+dry_preflight_rows_excluded_from_training,pass,A7L1B rows may be scored but not used to estimate rates
+surrogate_type,pass,laplace_smoothed_empirical_group_model; no external ML dependency
+large_search_authorization,pass,A7M-1 does not authorize adaptive large search

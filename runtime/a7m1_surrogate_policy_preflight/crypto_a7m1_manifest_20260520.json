@@ -1,0 +1,31 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_a7m2_adaptive_search": false,
+  "authorizes_alpha_proof": false,
+  "cost20_survive_lift": 2.53068,
+  "decision": "PASS_A7M1_SURROGATE_PREFLIGHT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-20T03:45:48Z",
+  "inputs": {
+    "failure_labeled_dataset": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m0_failure_labeled_search_dataset\\crypto_a7m0_failure_labeled_candidate_dataset.csv"
+  },
+  "may_policy": {
+    "may_labels_available_as_stress": true,
+    "may_used_as_feature": false,
+    "may_used_as_policy_target": false
+  },
+  "near_miss_lift": 7.065684,
+  "outputs": {
+    "candidate_surrogate_scores": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m1_surrogate_policy_preflight\\a7m1_candidate_surrogate_scores.csv",
+    "policy_training_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m1_surrogate_policy_preflight\\a7m1_policy_training_audit.csv",
+    "surrogate_feature_table": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m1_surrogate_policy_preflight\\a7m1_surrogate_feature_table.csv",
+    "target_lift": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m1_surrogate_policy_preflight\\a7m1_target_lift.csv"
+  },
+  "residual_survive_lift": 1.605092,
+  "scored_rows": 3417,
+  "stable_manifest_hash": "fad32305c6393671a943b91756b2cf2a36724bf455e4e08be039c1258eb18713",
+  "surrogate_type": "laplace_smoothed_empirical_group_model",
+  "training_rows": 2250,
+  "trains_large_model": false
+}
