@@ -1,0 +1,229 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_l1_execution": false,
+  "authorizes_l2_execution": false,
+  "authorizes_l3_execution": false,
+  "decision": "HOLD_A7O_PRE_L1_GATES",
+  "dry_generated_per_cell": 512,
+  "dry_summary": [
+    {
+      "metric": "target_cells",
+      "pass": true,
+      "value": 1024.0
+    },
+    {
+      "metric": "total_dry_generated",
+      "pass": true,
+      "value": 524288.0
+    },
+    {
+      "metric": "active_cells",
+      "pass": true,
+      "value": 1024.0
+    },
+    {
+      "metric": "unique_expr_ratio",
+      "pass": false,
+      "value": 0.5254840850830078
+    },
+    {
+      "metric": "simplified_unique_ratio",
+      "pass": false,
+      "value": 0.5254840850830078
+    },
+    {
+      "metric": "zero_activity_predicted_share",
+      "pass": true,
+      "value": 0.0
+    },
+    {
+      "metric": "unsupported_operator_count",
+      "pass": true,
+      "value": 0.0
+    },
+    {
+      "metric": "may_dependency_count",
+      "pass": true,
+      "value": 0.0
+    },
+    {
+      "metric": "liquidity_volatility_motif_share",
+      "pass": true,
+      "value": 0.07989120483398438
+    },
+    {
+      "metric": "feature_family_combo_count",
+      "pass": true,
+      "value": 384.0
+    },
+    {
+      "metric": "operator_motif_count",
+      "pass": true,
+      "value": 24.0
+    },
+    {
+      "metric": "horizon_class_count",
+      "pass": true,
+      "value": 10.0
+    }
+  ],
+  "executes_large_backtest": false,
+  "executes_replay": true,
+  "executes_search": false,
+  "fold_kernel_sample_candidates": 45,
+  "fold_summary": [
+    {
+      "end": "2025-06-29 23:00:00+00:00",
+      "fold_id": "F0_validation_2025H1",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 4296,
+      "start": "2025-01-02 00:00:00+00:00"
+    },
+    {
+      "end": "2026-04-29 23:00:00+00:00",
+      "fold_id": "F0_recent_2025H2_2026Apr",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 7248,
+      "start": "2025-07-02 00:00:00+00:00"
+    },
+    {
+      "end": "2026-04-14 06:00:00+00:00",
+      "fold_id": "F1_high_realized_vol",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 3463,
+      "start": "2025-01-07 15:00:00+00:00"
+    },
+    {
+      "end": "2026-04-29 14:00:00+00:00",
+      "fold_id": "F2_low_liquidity",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 3463,
+      "start": "2025-01-02 00:00:00+00:00"
+    },
+    {
+      "end": "2026-04-17 21:00:00+00:00",
+      "fold_id": "F3_high_liquidity_high_vol",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 3341,
+      "start": "2025-01-07 15:00:00+00:00"
+    },
+    {
+      "end": "2026-04-29 23:00:00+00:00",
+      "fold_id": "F4_basis_dislocation",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 3463,
+      "start": "2025-01-07 15:00:00+00:00"
+    },
+    {
+      "end": "2026-04-29 23:00:00+00:00",
+      "fold_id": "F5_funding_neutral",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 5775,
+      "start": "2025-01-09 16:00:00+00:00"
+    },
+    {
+      "end": "2026-04-29 14:00:00+00:00",
+      "fold_id": "F6_cross_symbol_dispersion",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 3463,
+      "start": "2025-01-02 00:00:00+00:00"
+    },
+    {
+      "end": "2026-04-29 22:00:00+00:00",
+      "fold_id": "F7_trend_reversal",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 4178,
+      "start": "2025-01-02 15:00:00+00:00"
+    },
+    {
+      "end": "2026-03-17 11:00:00+00:00",
+      "fold_id": "F8_low_vol_high_liquidity",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 478,
+      "start": "2025-01-06 16:00:00+00:00"
+    },
+    {
+      "end": "2026-04-29 18:00:00+00:00",
+      "fold_id": "F9_liquidity_shock",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 2886,
+      "start": "2025-01-02 00:00:00+00:00"
+    },
+    {
+      "end": "2026-04-29 02:00:00+00:00",
+      "fold_id": "F10_volatility_compression",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 4041,
+      "start": "2025-01-02 12:00:00+00:00"
+    },
+    {
+      "end": "2026-04-29 04:00:00+00:00",
+      "fold_id": "F11_cross_symbol_crowding",
+      "kernel_status": "PASS",
+      "may_allowed": false,
+      "n": 3463,
+      "start": "2025-01-02 07:00:00+00:00"
+    }
+  ],
+  "generated_at": "2026-05-20T12:49:20Z",
+  "may_policy": {
+    "allowed": [
+      "post_selection_stress_label",
+      "post_selection_veto",
+      "failure_attribution"
+    ],
+    "forbidden": [
+      "score",
+      "ranking",
+      "threshold",
+      "generation",
+      "allocation",
+      "mutation",
+      "surrogate_target"
+    ]
+  },
+  "outputs": {
+    "cell_failure_map": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_cell_failure_map.csv",
+    "cell_registry": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_search_cell_registry.csv",
+    "cost_lag_fold_metrics": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_cost_lag_fold_metrics.csv",
+    "deep_audit_scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_deep_audit_scoreboard.csv",
+    "dry_generation_coverage": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_dry_generation_coverage.csv",
+    "engine_cell_assignment": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_engine_cell_assignment.csv",
+    "feature_family_registry": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_feature_family_registry.csv",
+    "fold_definition_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_fold_definition_audit.csv",
+    "fold_replay_metrics": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_fold_replay_metrics.csv",
+    "formula_family_clusters": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_formula_family_clusters.csv",
+    "horizon_registry": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_horizon_registry.csv",
+    "ladder_stop_rules": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_ladder_stop_rules.csv",
+    "may_stress_only_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_may_stress_only_audit.csv",
+    "near_miss_pool": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_near_miss_pool.csv",
+    "operator_registry": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_operator_registry.csv",
+    "placebo_null_comparison": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_placebo_null_comparison.csv",
+    "post_may_eligible_pool": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_post_may_eligible_pool.csv",
+    "residual_fold_metrics": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_residual_fold_metrics.csv",
+    "return_corr_clusters": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_return_corr_clusters.csv",
+    "static_validity_funnel": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_static_validity_funnel.csv",
+    "strict_replay_selected": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_search_space_expansion\\a7o_strict_replay_selected.csv"
+  },
+  "phase_status": {
+    "A7O-0": "PASS_A7O0_SEARCH_SPACE_CONTRACT",
+    "A7O-1": "PASS_A7O1_FOLD_REPLAY_KERNEL_AUDIT",
+    "A7O-2": "HOLD_A7O2_DRY_CARTOGRAPHY"
+  },
+  "shadow_paper_live_status": "NOT_AUTHORIZED",
+  "stable_manifest_hash": "5aab05ff936a6c61273c21010f65f27f65e9e4857cef79d2492aa98326275531",
+  "target_cells": 1024,
+  "total_dry_generated": 524288
+}

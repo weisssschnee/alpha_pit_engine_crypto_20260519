@@ -1,0 +1,4 @@
+check,count,pass
+May used in dry generation,0,True
+May used in fold replay masks,0,True
+May used in L0/L1 ranking,0,True
