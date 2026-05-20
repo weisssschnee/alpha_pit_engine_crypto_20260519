@@ -145,6 +145,15 @@ ENGINE_MIX = {
     "random_within_cell": 0.05,
 }
 
+AUTHORIZED_WINDOW_POOL = [3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 30, 36, 48, 60, 72, 84, 96]
+HORIZON_WINDOW_POOLS = {
+    6: [3, 4, 5, 6, 8, 10, 12],
+    12: [3, 4, 6, 8, 10, 12, 16, 20, 24],
+    24: [6, 8, 10, 12, 16, 20, 24, 30, 36, 48],
+    48: [12, 16, 20, 24, 30, 36, 48, 60, 72],
+    72: [24, 30, 36, 48, 60, 72, 84, 96],
+}
+
 FOLD_KERNEL_FEATURES = [
     "ret_6",
     "ret_12",
@@ -184,6 +193,20 @@ def stable_id(*parts: Any, length: int = 16) -> str:
 
 def field_family(field: str) -> str:
     return FIELD_FAMILY.get(field, "derived")
+
+
+def select_field_pair(fields: list[str], ordinal: int) -> tuple[str, str]:
+    """Deterministically cover ordered field pairs inside each search cell."""
+
+    if not fields:
+        return "ret_6", "ret_12"
+    n = len(fields)
+    pair_count = max(1, n * n)
+    pair_index = ordinal % pair_count
+    cycle = ordinal // pair_count
+    f1 = fields[(pair_index // n + cycle) % n]
+    f2 = fields[(pair_index % n + cycle * 2) % n]
+    return f1, f2
 
 
 def build_search_cells() -> pd.DataFrame:
@@ -229,9 +252,23 @@ def build_search_cells() -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def bounded_window(primary_hours: int, variant: int, salt: int = 0) -> int:
+    """Map formula variants to a bounded, pre-authorized window pool.
+
+    A7O-2C showed that continuous 3..1000 rolling windows inflated syntactic
+    uniqueness and damaged small-fold feasibility. This helper keeps all dry
+    and future L1 expressions within an economically interpretable horizon
+    set while preserving deterministic structural diversity.
+    """
+
+    primary = min(HORIZON_WINDOW_POOLS, key=lambda x: abs(x - int(primary_hours)))
+    pool = HORIZON_WINDOW_POOLS[primary]
+    return pool[(variant * 7 + salt * 11) % len(pool)]
+
+
 def expression_from_motif(motif: str, f1: str, f2: str, h: int, fold: str, variant: int) -> str:
-    h2 = 3 + variant
-    h3 = 5 + ((variant * 7) % 997)
+    h2 = bounded_window(h, variant, 0)
+    h3 = bounded_window(h, variant, 1)
     clip = [1.5, 2.0, 2.5, 3.0, 4.0][variant % 5]
     eps = [0.02, 0.05, 0.10, 0.20][variant % 4]
     if motif == "Rank":
@@ -286,10 +323,12 @@ def expression_from_motif(motif: str, f1: str, f2: str, h: int, fold: str, varia
 
 
 def diversify_expression(expr: str, f1: str, f2: str, variant: int) -> str:
-    h1 = 3 + variant
-    h2 = 7 + ((variant * 11) % 997)
+    primary = [6, 12, 24, 48, 72][variant % 5]
+    h1 = bounded_window(primary, variant, 2)
+    h2 = bounded_window(primary, variant, 3)
+    h3 = bounded_window(primary, variant, 4)
     clip = [1.25, 1.5, 2.0, 2.5, 3.0, 4.0][(variant // 5) % 6]
-    mode = variant % 20
+    mode = variant % 64
     if mode == 0:
         return f"TSMean({expr},{h1})"
     if mode == 1:
@@ -328,7 +367,142 @@ def diversify_expression(expr: str, f1: str, f2: str, variant: int) -> str:
         return f"SmoothInteraction({expr},TSMean({f2},{h2}))"
     if mode == 18:
         return f"RollingMax(RollingMin({expr},{h1}),{h2})"
-    return f"RollingMin(RollingMax({expr},{h1}),{h2})"
+    if mode == 19:
+        return f"RollingMin(RollingMax({expr},{h1}),{h2})"
+    if mode == 20:
+        return f"Add(Rank(TSMean({f1},{h1})),{expr})"
+    if mode == 21:
+        return f"Sub(ZScore(TSStd({f2},{h2})),{expr})"
+    if mode == 22:
+        return f"Mul(TSRank({f1},{h1}),{expr})"
+    if mode == 23:
+        return f"SafeDiv(Abs({expr}),Clip(Abs(ZScore(TSMean({f2},{h2}))),0.05,{clip + 2.0}))"
+    if mode == 24:
+        return f"Add(TSMean({expr},{h1}),ZScore(Delta({f1},{h2})))"
+    if mode == 25:
+        return f"Sub(Decay({expr},{h1}),Rank(TSStd({f2},{h2})))"
+    if mode == 26:
+        return f"Mul(WinsorZScore(TSMean({f1},{h1}),{clip}),Rank(TSMean({expr},{h2})))"
+    if mode == 27:
+        return f"Clip(Sub({expr},TSRank({f2},{h2})),-{clip},{clip})"
+    if mode == 28:
+        return f"HorizonSpread(TSMean({f1},{h1}),{h2},{h3})"
+    if mode == 29:
+        return f"SmoothInteraction(TSMean({f1},{h1}),Sub({expr},TSMean({f2},{h2})))"
+    if mode == 30:
+        return f"Rank(Add(Delta({f1},{h1}),TSMean({expr},{h2})))"
+    if mode == 31:
+        return f"ZScore(Sub(TSMean({expr},{h1}),Decay({f2},{h2})))"
+    if mode == 32:
+        return f"Mul(Neg(Rank(TSMean({f1},{h1}))),{expr})"
+    if mode == 33:
+        return f"Add(Abs(ZScore(TSStd({f1},{h1}))),{expr})"
+    if mode == 34:
+        return f"Sub({expr},Abs(ZScore(TSMean({f2},{h2}))))"
+    if mode == 35:
+        return f"Mul(Clip(ZScore(TSMean({f2},{h2})),-{clip},{clip}),Rank(TSMean({expr},{h1})))"
+    if mode == 36:
+        return f"SafeDiv(Sub({expr},Rank(TSMean({f1},{h1}))),Clip(Abs(TSRank({f2},{h2})),0.05,{clip + 1.0}))"
+    if mode == 37:
+        return f"RollingMax(Sub({expr},ZScore(TSMean({f1},{h1}))),{h2})"
+    if mode == 38:
+        return f"RollingMin(Add({expr},Rank(TSMean({f2},{h2}))),{h1})"
+    if mode == 39:
+        return f"Decay(Mul({expr},ZScore(TSStd({f1},{h1}))),{h2})"
+    if mode == 40:
+        return f"TSRank(Sub(TSMean({expr},{h1}),TSMean({f1},{h2})),{h3})"
+    if mode == 41:
+        return f"ZScore(HorizonSpread({f2},{h1},{h2}))"
+    if mode == 42:
+        return f"Rank(SmoothInteraction({expr},TSStd({f1},{h1})))"
+    if mode == 43:
+        return f"Mul(Add(Rank(TSMean({f1},{h1})),ZScore(TSMean({f2},{h2}))),Clip({expr},-{clip},{clip}))"
+    if mode == 44:
+        return f"Sub(WinsorZScore(TSMean({f1},{h1}),{clip}),WinsorZScore(TSMean({f2},{h2}),{clip}))"
+    if mode == 45:
+        return f"Add(TSRank({expr},{h1}),Neg(Rank(Delta({f2},{h2}))))"
+    if mode == 46:
+        return f"Mul(SafeDiv(ZScore(TSMean({f1},{h1})),Clip(Abs(ZScore(TSMean({f2},{h2}))),0.05,{clip + 1.0})),{expr})"
+    if mode == 47:
+        return f"Clip(Add(Decay({expr},{h1}),TSRank({f1},{h2})),-{clip},{clip})"
+    if mode == 48:
+        return f"ResidualizeVsFundingCore(Add({expr},Rank(TSMean({f1},{h1}))))"
+    if mode == 49:
+        return f"ResidualizeVsCore4(Sub({expr},ZScore(TSMean({f2},{h2}))))"
+    if mode == 50:
+        return f"CrossSymbolRank(Add({expr},TSMean({f1},{h1})))"
+    if mode == 51:
+        return f"CrossSymbolZScore(Sub({expr},TSMean({f2},{h2})))"
+    if mode == 52:
+        return f"RegimeMaskNonMay(F3_high_liquidity_high_vol,Sub({expr},Rank(TSMean({f1},{h1}))))"
+    if mode == 53:
+        return f"RegimeMaskNonMay(F5_funding_neutral,Add({expr},ZScore(TSMean({f2},{h2}))))"
+    if mode == 54:
+        return f"Mul(HorizonSpread({f1},{h1},{h2}),Rank(TSMean({expr},{h3})))"
+    if mode == 55:
+        return f"Sub(SmoothInteraction({f1},TSMean({f2},{h2})),TSRank({expr},{h1}))"
+    if mode == 56:
+        return f"Add(RollingMin({expr},{h1}),RollingMax(TSMean({f1},{h2}),{h3}))"
+    if mode == 57:
+        return f"Sub(RollingMax({expr},{h1}),RollingMin(TSMean({f2},{h2}),{h3}))"
+    if mode == 58:
+        return f"Mul(Abs(ZScore(Delta({f1},{h1}))),Clip({expr},-{clip},{clip}))"
+    if mode == 59:
+        return f"SafeDiv(SmoothInteraction({expr},TSMean({f1},{h1})),Clip(Abs(TSStd({f2},{h2})),0.05,{clip + 2.0}))"
+    if mode == 60:
+        return f"Rank(Sub(TSMean({f1},{h1}),TSMean({expr},{h2})))"
+    if mode == 61:
+        return f"ZScore(Add(TSStd({f2},{h2}),Decay({expr},{h1})))"
+    if mode == 62:
+        return f"Mul(Neg(ZScore(TSMean({f2},{h2}))),Rank(TSMean({expr},{h1})))"
+    return f"Clip(SafeDiv(Add({expr},TSMean({f1},{h1})),Clip(Abs(TSMean({f2},{h2})),0.05,{clip + 2.0})),-{clip},{clip})"
+
+
+def apply_cell_context(expr: str, hypothesis: str, turnover: str, fold: str, f1: str, f2: str, variant: int) -> str:
+    """Inject search-cell semantics without using May or continuous windows."""
+
+    primary = [12, 24, 48, 72][variant % 4]
+    h1 = bounded_window(primary, variant, 5)
+    h2 = bounded_window(primary, variant, 6)
+
+    if turnover == "low_turnover":
+        expr = f"TSMean({expr},{h1})"
+    elif turnover == "lag_stable":
+        expr = f"Decay({expr},{h1})"
+    else:
+        expr = f"Clip({expr},-4.0,4.0)"
+
+    if hypothesis == "H00_low_turnover_robust":
+        return f"TSMean(Clip({expr},-3.0,3.0),{h2})"
+    if hypothesis == "H01_cross_symbol_relative_strength":
+        return f"CrossSymbolRank({expr})"
+    if hypothesis == "H02_cross_symbol_dispersion_reversal":
+        return f"Neg(CrossSymbolZScore({expr}))"
+    if hypothesis == "H03_basis_premium_residual":
+        return f"ResidualizeVsFundingCore({expr})"
+    if hypothesis == "H04_basis_compression_expansion":
+        return f"HorizonSpread({expr},{h1},{h2})"
+    if hypothesis == "H05_volatility_structure_ex_liquidity_mul":
+        return f"Sub({expr},Rank(TSMean({f2},{h1})))"
+    if hypothesis == "H06_liquidity_structure_ex_realized_vol_mul":
+        return f"Sub({expr},ZScore(TSStd({f1},{h1})))"
+    if hypothesis == "H07_taker_flow_lag_stable":
+        return f"Decay(Rank({expr}),{h2})"
+    if hypothesis == "H08_trade_size_microstructure_lite":
+        return f"SmoothInteraction({expr},TSMean({f2},{h1}))"
+    if hypothesis == "H09_trend_reversal_horizon_mix":
+        return f"Add({expr},Neg(Rank(Delta({f1},{h1}))))"
+    if hypothesis == "H10_range_breakout_failure":
+        return f"Sub({expr},Sub(RollingMax({f1},{h1}),RollingMin({f2},{h2})))"
+    if hypothesis == "H11_regime_conditional_non_may":
+        return f"RegimeMaskNonMay({fold},{expr})"
+    if hypothesis == "H12_horizon_ensemble_stability":
+        return f"Add({expr},HorizonSpread({f1},{h1},{h2}))"
+    if hypothesis == "H13_symbol_tier_relative":
+        return f"CrossSymbolZScore({expr})"
+    if hypothesis == "H14_open_ast_cem_diversity":
+        return f"SafeDiv({expr},Clip(Abs(TSMean({f2},{h2})),0.05,4.0))"
+    return f"Neg({expr})"
 
 
 def horizon_value(horizon_class: str, ordinal: int) -> int:
@@ -351,10 +525,7 @@ def dry_generate_for_cell(row: pd.Series) -> dict[str, Any]:
     horizon_classes = set()
     engines = set()
     for j in range(DRY_GENERATED_PER_CELL):
-        f1 = fields[j % len(fields)]
-        f2 = fields[(j * 7 + 3) % len(fields)]
-        if f1 == f2 and len(fields) > 1:
-            f2 = fields[(j * 11 + 5) % len(fields)]
+        f1, f2 = select_field_pair(fields, j)
         h = horizon_value(str(row["temporal_horizon_class"]), j)
         motif = str(row["operator_motif"])
         expr = expression_from_motif(motif, f1, f2, h, str(row["regime_fold_target"]), j)
@@ -367,6 +538,7 @@ def dry_generate_for_cell(row: pd.Series) -> dict[str, Any]:
             expr = f"ResidualizeVsCore4({expr})"
         elif str(row["residualization_target"]) == "FundingCore_and_Core4":
             expr = f"ResidualizeVsCore4(ResidualizeVsFundingCore({expr}))"
+        expr = apply_cell_context(expr, str(row["hypothesis_family"]), str(row["turnover_class"]), str(row["regime_fold_target"]), f1, f2, j)
         exprs.append(expr)
         simplified.append(expr.replace(" ", ""))
         fams = sorted({field_family(f1), field_family(f2)})

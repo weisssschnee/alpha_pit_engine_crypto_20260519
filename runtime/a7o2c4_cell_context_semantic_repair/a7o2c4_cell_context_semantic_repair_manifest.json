@@ -1,0 +1,134 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_l1_execution": false,
+  "authorizes_l2_execution": false,
+  "authorizes_l3_execution": false,
+  "blockers": [],
+  "decision": "PASS_A7O2C4_READY_FOR_A7O2D_AUTHORIZATION",
+  "economic_summary": [
+    {
+      "metric": "economic_cell_unique_ratio",
+      "pass": true,
+      "threshold": 0.8,
+      "value": 1.0
+    },
+    {
+      "metric": "top_economic_motif_share",
+      "pass": true,
+      "threshold": 0.1,
+      "value": 0.0009765625
+    },
+    {
+      "metric": "top_feature_family_operator_horizon_triple_share",
+      "pass": true,
+      "threshold": 0.08,
+      "value": 0.00390625
+    },
+    {
+      "metric": "feature_family_set_count",
+      "pass": true,
+      "threshold": 16.0,
+      "value": 16.0
+    },
+    {
+      "metric": "operator_motif_count",
+      "pass": true,
+      "threshold": 24.0,
+      "value": 24.0
+    },
+    {
+      "metric": "horizon_class_count",
+      "pass": true,
+      "threshold": 10.0,
+      "value": 10.0
+    }
+  ],
+  "executes_large_backtest": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "fold_feasibility_min_p05": 0.799163179916318,
+  "generated_at": "2026-05-20T13:49:28Z",
+  "horizon_summary": [
+    {
+      "metric": "max_window",
+      "pass": true,
+      "threshold": 144,
+      "value": 97.0
+    },
+    {
+      "metric": "p95_window",
+      "pass": true,
+      "threshold": 96,
+      "value": 96.0
+    },
+    {
+      "metric": "p50_window",
+      "pass": true,
+      "threshold": "",
+      "value": 48.0
+    },
+    {
+      "metric": "horizon_bucket_count",
+      "pass": true,
+      "threshold": 6,
+      "value": 6.0
+    },
+    {
+      "metric": "continuous_window_inflation_flag",
+      "pass": true,
+      "threshold": 144,
+      "value": 23.0
+    }
+  ],
+  "input": {
+    "bounded_window_repair_module": "scripts/crypto_a7o_search_space_and_fold_replay.py",
+    "dry_generated_per_cell": 512
+  },
+  "may_policy": {
+    "allowed": [
+      "post_selection_stress_label",
+      "post_selection_veto",
+      "failure_attribution"
+    ],
+    "forbidden": [
+      "score",
+      "ranking",
+      "threshold",
+      "generation",
+      "allocation",
+      "mutation",
+      "surrogate_target"
+    ]
+  },
+  "outputs": {
+    "candidate_sample": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o2c4_cell_context_semantic_repair\\a7o2c4_cell_context_semantic_repair_sample_generated_semantic_keys.csv",
+    "economic_uniqueness": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o2c4_cell_context_semantic_repair\\a7o2c4_cell_context_semantic_repair_economic_motif_uniqueness.csv",
+    "fold_feasibility": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o2c4_cell_context_semantic_repair\\a7o2c4_cell_context_semantic_repair_fold_coverage_feasibility.csv",
+    "gate_summary": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o2c4_cell_context_semantic_repair\\a7o2c4_cell_context_semantic_repair_gate_summary.csv",
+    "horizon_distribution": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o2c4_cell_context_semantic_repair\\a7o2c4_cell_context_semantic_repair_horizon_parameter_distribution.csv",
+    "semantic_uniqueness": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o2c4_cell_context_semantic_repair\\a7o2c4_cell_context_semantic_repair_effective_uniqueness.csv"
+  },
+  "ready_for_a7o2d_authorization_record": true,
+  "semantic_summary": [
+    {
+      "metric": "raw_unique_expr_ratio",
+      "pass": true,
+      "threshold": 0.9,
+      "value": 0.9618206024169922
+    },
+    {
+      "metric": "effective_unique_ratio_after_horizon_bucketing",
+      "pass": true,
+      "threshold": 0.85,
+      "value": 0.9284915924072266
+    },
+    {
+      "metric": "simplified_effective_unique_ratio_after_bucket",
+      "pass": true,
+      "threshold": 0.75,
+      "value": 0.9284915924072266
+    }
+  ],
+  "shadow_paper_live_status": "NOT_AUTHORIZED",
+  "stable_manifest_hash": "807866b5b1053448dc0f83e78a8eb54a0f34d6b8cf638b846b199706bcb0789c"
+}

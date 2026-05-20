@@ -1,0 +1,3 @@
+stage,cells,generated_per_cell,total_generated,strict_replay_per_cell,strict_replay_total,deep_audit_per_cell,deep_audit_total,checkpoint
+A7O-L1 pilot shard,64,2048,131072,24,1536,3,192,after pilot
+A7O-L1 full protected run,1024,2048,2097152,24,24576,3,3072,every 64 cells

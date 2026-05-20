@@ -1,0 +1,34 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_full_l1_continuation_after_pilot_pass": true,
+  "authorizes_l1_pilot_execution": true,
+  "authorizes_l2_execution": false,
+  "authorizes_l3_execution": false,
+  "authorizes_unconditional_full_l1_execution": false,
+  "decision": "AUTHORIZED_A7O_L1_PROTECTED_PILOT_AND_CONDITIONAL_FULL_RUN",
+  "executes_replay": false,
+  "executes_search": false,
+  "full_l1_plan": {
+    "cells": 1024,
+    "checkpoint_every_cells": 64,
+    "deep_audit": 3072,
+    "generated": 2097152,
+    "strict_replay": 24576
+  },
+  "generated_at": "2026-05-20T13:54:34Z",
+  "input_c4_manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o2c4_cell_context_semantic_repair\\a7o2c4_cell_context_semantic_repair_manifest.json",
+  "input_c4_manifest_hash": "548d1b61d3361d6e7f3ea26beee9653b4fc326fbe33ed88cd33d6cfc0e438afb",
+  "outputs": {
+    "authorization_matrix": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o2d_l1_execution_authorization\\a7o2d_authorization_matrix.csv",
+    "checkpoint_stop_rules": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o2d_l1_execution_authorization\\a7o2d_checkpoint_stop_rules.csv",
+    "execution_plan": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o2d_l1_execution_authorization\\a7o2d_l1_execution_plan.csv"
+  },
+  "pilot_shard": {
+    "cells": 64,
+    "deep_audit": 192,
+    "generated": 131072,
+    "strict_replay": 1536
+  },
+  "shadow_paper_live_status": "NOT_AUTHORIZED",
+  "stable_manifest_hash": "d4127acb3a6383fd2cd3c124507204863e2265fa8a790d8fa8cdd9379d499e3b"
+}

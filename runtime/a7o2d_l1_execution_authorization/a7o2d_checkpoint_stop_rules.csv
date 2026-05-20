@@ -1,0 +1,8 @@
+gate,threshold,action
+may_leakage_violations,0,stop
+fold_metric_missing_rate,<= 0.01,stop_or_repair
+liquidity_volatility_deep_share,<= 0.15,stop_if_exceeded_after_checkpoint
+single_horizon_deep_share,<= 0.35,stop_if_exceeded_after_checkpoint
+single_return_corr_cluster_share,<= 0.35,stop_if_exceeded_after_checkpoint
+placebo_or_null_research_candidates,0,stop
+post_may_eligible_deep_survivors,>= 24 for full L1 pass,hold_if_not_met

@@ -19,6 +19,8 @@ from crypto_a7o_search_space_and_fold_replay import (
     diversify_expression,
     field_family,
     horizon_value,
+    select_field_pair,
+    apply_cell_context,
 )
 
 
@@ -101,10 +103,7 @@ def generate_cell_candidate_rows(cells: pd.DataFrame) -> pd.DataFrame:
             # Fall back to registry field names; this path should not normally run.
             fields = ["ret_6", "ret_12"]
         for j in range(DRY_GENERATED_PER_CELL):
-            f1 = fields[j % len(fields)]
-            f2 = fields[(j * 7 + 3) % len(fields)]
-            if f1 == f2 and len(fields) > 1:
-                f2 = fields[(j * 11 + 5) % len(fields)]
+            f1, f2 = select_field_pair(fields, j)
             h = horizon_value(str(row["temporal_horizon_class"]), j)
             expr = expression_from_motif(str(row["operator_motif"]), f1, f2, h, str(row["regime_fold_target"]), j)
             expr = diversify_expression(expr, f1, f2, j)
@@ -116,6 +115,7 @@ def generate_cell_candidate_rows(cells: pd.DataFrame) -> pd.DataFrame:
                 expr = f"ResidualizeVsCore4({expr})"
             elif str(row["residualization_target"]) == "FundingCore_and_Core4":
                 expr = f"ResidualizeVsCore4(ResidualizeVsFundingCore({expr}))"
+            expr = apply_cell_context(expr, str(row["hypothesis_family"]), str(row["turnover_class"]), str(row["regime_fold_target"]), f1, f2, j)
             windows = extract_windows(expr)
             max_window = max(windows) if windows else 0
             fams = sorted({field_family(f1), field_family(f2)})
