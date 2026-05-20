@@ -1,7 +1,7 @@
 # Crypto A7O-2 Dry Cartography Audit
 
-- generated_at: `2026-05-20T12:49:20Z`
-- decision: `HOLD_A7O2_DRY_CARTOGRAPHY`
+- generated_at: `2026-05-20T13:07:04Z`
+- decision: `PASS_A7O2_DRY_CARTOGRAPHY`
 - authorizes_l1_execution: `False`
 - executes_large_backtest: `False`
 
@@ -12,8 +12,8 @@
 | target_cells                     |   1024         | True   |
 | total_dry_generated              | 524288         | True   |
 | active_cells                     |   1024         | True   |
-| unique_expr_ratio                |      0.525484  | False  |
-| simplified_unique_ratio          |      0.525484  | False  |
+| unique_expr_ratio                |      1         | True   |
+| simplified_unique_ratio          |      1         | True   |
 | zero_activity_predicted_share    |      0         | True   |
 | unsupported_operator_count       |      0         | True   |
 | may_dependency_count             |      0         | True   |

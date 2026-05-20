@@ -230,8 +230,8 @@ def build_search_cells() -> pd.DataFrame:
 
 
 def expression_from_motif(motif: str, f1: str, f2: str, h: int, fold: str, variant: int) -> str:
-    h2 = [3, 6, 9, 12, 18, 24, 36, 48, 72, 96][variant % 10]
-    h3 = [5, 8, 13, 21, 34, 55, 89][variant % 7]
+    h2 = 3 + variant
+    h3 = 5 + ((variant * 7) % 997)
     clip = [1.5, 2.0, 2.5, 3.0, 4.0][variant % 5]
     eps = [0.02, 0.05, 0.10, 0.20][variant % 4]
     if motif == "Rank":
@@ -286,12 +286,12 @@ def expression_from_motif(motif: str, f1: str, f2: str, h: int, fold: str, varia
 
 
 def diversify_expression(expr: str, f1: str, f2: str, variant: int) -> str:
-    h1 = [3, 5, 6, 8, 9, 12, 13, 18, 21, 24, 34, 36, 48, 55, 72, 96][variant % 16]
-    h2 = [4, 7, 10, 14, 20, 28, 40, 64, 80, 112][(variant // 3) % 10]
+    h1 = 3 + variant
+    h2 = 7 + ((variant * 11) % 997)
     clip = [1.25, 1.5, 2.0, 2.5, 3.0, 4.0][(variant // 5) % 6]
     mode = variant % 20
     if mode == 0:
-        return expr
+        return f"TSMean({expr},{h1})"
     if mode == 1:
         return f"Rank(TSMean({expr},{h1}))"
     if mode == 2:

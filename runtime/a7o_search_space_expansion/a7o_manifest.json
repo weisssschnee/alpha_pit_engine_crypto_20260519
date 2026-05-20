@@ -3,7 +3,7 @@
   "authorizes_l1_execution": false,
   "authorizes_l2_execution": false,
   "authorizes_l3_execution": false,
-  "decision": "HOLD_A7O_PRE_L1_GATES",
+  "decision": "PASS_A7O2_DRY_CARTOGRAPHY_READY_FOR_L1_REVIEW",
   "dry_generated_per_cell": 512,
   "dry_summary": [
     {
@@ -23,13 +23,13 @@
     },
     {
       "metric": "unique_expr_ratio",
-      "pass": false,
-      "value": 0.5254840850830078
+      "pass": true,
+      "value": 1.0
     },
     {
       "metric": "simplified_unique_ratio",
-      "pass": false,
-      "value": 0.5254840850830078
+      "pass": true,
+      "value": 1.0
     },
     {
       "metric": "zero_activity_predicted_share",
@@ -177,7 +177,7 @@
       "start": "2025-01-02 07:00:00+00:00"
     }
   ],
-  "generated_at": "2026-05-20T12:49:20Z",
+  "generated_at": "2026-05-20T13:07:04Z",
   "may_policy": {
     "allowed": [
       "post_selection_stress_label",
@@ -220,10 +220,10 @@
   "phase_status": {
     "A7O-0": "PASS_A7O0_SEARCH_SPACE_CONTRACT",
     "A7O-1": "PASS_A7O1_FOLD_REPLAY_KERNEL_AUDIT",
-    "A7O-2": "HOLD_A7O2_DRY_CARTOGRAPHY"
+    "A7O-2": "PASS_A7O2_DRY_CARTOGRAPHY"
   },
   "shadow_paper_live_status": "NOT_AUTHORIZED",
-  "stable_manifest_hash": "5aab05ff936a6c61273c21010f65f27f65e9e4857cef79d2492aa98326275531",
+  "stable_manifest_hash": "9543861ac70dbe9871d6bc0559e1b70740b314334f01e1a8623b2d143b2a522e",
   "target_cells": 1024,
   "total_dry_generated": 524288
 }

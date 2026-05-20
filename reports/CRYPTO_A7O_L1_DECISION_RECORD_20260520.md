@@ -1,9 +1,9 @@
 # Crypto A7O Decision Record
 
-- decision: `HOLD_A7O_PRE_L1_GATES`
+- decision: `PASS_A7O2_DRY_CARTOGRAPHY_READY_FOR_L1_REVIEW`
 - A7O-0: `PASS_A7O0_SEARCH_SPACE_CONTRACT`
 - A7O-1: `PASS_A7O1_FOLD_REPLAY_KERNEL_AUDIT`
-- A7O-2: `HOLD_A7O2_DRY_CARTOGRAPHY`
+- A7O-2: `PASS_A7O2_DRY_CARTOGRAPHY`
 - authorizes_l1_execution: `False`
 - alpha proof / shadow / paper / live: `NOT_AUTHORIZED`
 
