@@ -1,0 +1,9 @@
+layer,cap,rule
+pre_replay_proxy,formula_fingerprint,dedup exact expr_hash before strict replay
+pre_replay_proxy,field_family,no field family should dominate strict replay selection
+pre_replay_proxy,operator_horizon,cap identical operator_signature + horizon motifs
+pre_replay_proxy,field_pair_horizon,cap identical field-pair + horizon motifs
+post_replay,return_corr_cluster,post-cap top return-corr cluster share <= 35%
+post_replay,field_family,post-cap top field-family share <= 40%
+post_replay,operator_horizon,post-cap top operator-horizon motif share <= 25%
+post_replay,field_pair_horizon,post-cap identical field-pair/horizon share <= 15%

@@ -1,0 +1,54 @@
+{
+  "a7m2_decision": "HOLD_A7M2_ENGINE_BAKEOFF_BLOCKED",
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "blockers": [
+    "post_cap_near_miss_clusters_gte_6",
+    "post_cap_field_families_gte_4",
+    "post_cap_engines_gte_4"
+  ],
+  "decision": "HOLD_A7M2E_CLUSTER_CAP_REVEALS_WEAK_POOL",
+  "executes_replay": false,
+  "executes_search": false,
+  "fast_replay_parity_max_abs_diff": 0.0,
+  "fast_replay_parity_pass": true,
+  "gates": {
+    "fast_replay_parity_pass": true,
+    "may_stress_only_preserved": true,
+    "placebo_adversarial_null_zero": true,
+    "post_cap_engines_gte_4": false,
+    "post_cap_field_families_gte_4": false,
+    "post_cap_near_miss_clusters_gte_6": false,
+    "post_cap_top_field_family_share_lte_40pct": true,
+    "post_cap_top_operator_horizon_share_lte_25pct": true,
+    "post_cap_top_return_corr_cluster_share_lte_35pct": true
+  },
+  "generated_at": "2026-05-20T10:42:49Z",
+  "outputs": {
+    "engine_advantage_after_caps": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2e_cluster_cap_policy_revision\\a7m2e_engine_advantage_after_caps.csv",
+    "fast_replay_parity": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2e_cluster_cap_policy_revision\\a7m2e_fast_replay_parity.csv",
+    "fast_replay_parity_sample": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2e_cluster_cap_policy_revision\\a7m2e_fast_replay_parity_sample.csv",
+    "fast_replay_parity_wide": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2e_cluster_cap_policy_revision\\a7m2e_fast_replay_parity_wide.csv",
+    "field_family_cap_counterfactual": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2e_cluster_cap_policy_revision\\a7m2e_field_family_cap_counterfactual.csv",
+    "label_refactor": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2e_cluster_cap_policy_revision\\a7m2e_label_refactor.csv",
+    "near_miss_pool_after_caps": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2e_cluster_cap_policy_revision\\a7m2e_near_miss_pool_after_caps.csv",
+    "operator_horizon_cap_counterfactual": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2e_cluster_cap_policy_revision\\a7m2e_operator_horizon_cap_counterfactual.csv",
+    "post_replay_cluster_cap_counterfactual": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2e_cluster_cap_policy_revision\\a7m2e_post_replay_cluster_cap_counterfactual.csv",
+    "pre_replay_diversity_cap_policy": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2e_cluster_cap_policy_revision\\a7m2e_pre_replay_diversity_cap_policy.csv",
+    "survivor_label_before_after": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m2e_cluster_cap_policy_revision\\a7m2e_survivor_label_before_after.csv"
+  },
+  "parity_sample_count": 227,
+  "post_cap_pool": {
+    "count": 0,
+    "engine_count": 0,
+    "field_family_count": 0,
+    "formula_family_count": 0,
+    "operator_horizon_count": 0,
+    "placebo_or_null_count": 0,
+    "pool": "post_may_full_caps",
+    "return_corr_cluster_count": 0,
+    "top_field_family_share": 0.0,
+    "top_operator_horizon_share": 0.0,
+    "top_return_corr_cluster_share": 0.0
+  },
+  "stable_manifest_hash": "588283db05656813d7910a7bf8af7e65268d6fbd70b43e228c81a1337cd6205b"
+}
