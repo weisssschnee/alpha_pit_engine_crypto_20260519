@@ -1,0 +1,15 @@
+metric,value,threshold,operator,pass
+registry_cell_count,64.0,64.0,>=,True
+primary_cell_count,61.0,60.0,>=,True
+supplemental_cell_count,3.0,4.0,<=,True
+quarantined_cells_in_registry,0.0,0.0,=,True
+policy_uses_may,0.0,0.0,=,True
+registry_score_uses_may,0.0,0.0,=,True
+registry_selection_uses_may,0.0,0.0,=,True
+hypothesis_family_count,13.0,8.0,>=,True
+feature_family_count,14.0,8.0,>=,True
+single_hypothesis_family_share,0.15625,0.25,<=,True
+single_feature_family_share,0.171875,0.25,<=,True
+single_feature_operator_horizon_motif_share,0.015625,0.15,<=,True
+liquidity_volatility_cell_share,0.046875,0.15,<=,True
+control_contaminated_cells_quarantined,2.0,2.0,>=,True
