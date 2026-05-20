@@ -1,0 +1,22 @@
+{
+  "adapter_ready_count": 4,
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_a7m2_execution": false,
+  "authorizes_a7m2_protocol_writing": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "cost20_lift_excluding_dry": 4.671003,
+  "decision": "HOLD_A7M1B_SURROGATE_OR_ENGINE_READINESS_WEAK",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-20T04:49:10Z",
+  "lag1_lift_excluding_dry": 3.191835,
+  "leave_source_out_near_miss_lift_min": 0.465646,
+  "near_miss_lift_excluding_dry": 7.558442,
+  "outputs": {
+    "calibrated_lift_by_scope": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m1b_surrogate_engine_readiness\\a7m1b_calibrated_lift_by_scope.csv",
+    "inherited_engine_inventory": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m1b_surrogate_engine_readiness\\a7m1b_inherited_engine_inventory.csv",
+    "may_policy_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m1b_surrogate_engine_readiness\\a7m1b_may_policy_audit.csv"
+  },
+  "stable_manifest_hash": "4b0cf46de1ed6a2b216d4069ce5478c97959654f8ce4d12abf21d132f9b16024"
+}

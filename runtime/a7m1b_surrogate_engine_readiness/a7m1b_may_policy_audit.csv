@@ -1,0 +1,6 @@
+check,status,detail
+may_not_target,pass,May labels excluded from TARGETS
+may_not_feature,pass,May labels excluded from FEATURE_COLUMNS
+may_not_arm_allocation_signal,pass,A7M-1B does not allocate arms
+may_not_mutation_prior,pass,A7M-1B does not set mutation priors
+may_stress_only,pass,May labels remain in A7M-0 dataset only as stress/failure attribution
