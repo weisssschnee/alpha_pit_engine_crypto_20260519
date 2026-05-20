@@ -1,0 +1,11 @@
+metric,value,threshold,operator,pass
+wave_liquidity_volatility_deep_share,0.1328125,0.15,<=,True
+wave_single_return_corr_cluster_share,0.020833333333333332,0.2,<=,True
+wave_single_horizon_deep_share,0.11848958333333333,0.3,<=,True
+wave_single_hypothesis_family_share,0.08854166666666667,0.3,<=,True
+wave_single_feature_operator_horizon_motif_share,0.01171875,0.2,<=,True
+wave_field_families,14.0,6.0,>=,True
+wave_hypothesis_families,16.0,6.0,>=,True
+wave_post_may_eligible_deep_survivors,40.0,120.0,>=,False
+wave_post_may_eligible_rate,0.052083333333333336,0.15,>=,False
+wave_return_corr_clusters_proxy,641.0,12.0,>=,True

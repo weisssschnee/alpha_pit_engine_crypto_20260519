@@ -57,6 +57,7 @@ DATE_TAG = os.environ.get("A7O_DATE_TAG", "20260521")
 CHECKPOINT_ID = os.environ.get("A7O_L1_CHECKPOINT_ID", "01").strip()
 CELL_START = int(os.environ.get("A7O_L1_CELL_START", "0"))
 PILOT_CELLS = int(os.environ.get("A7O_L1_CELL_COUNT", "64"))
+SKIP_CUMULATIVE_UPDATE = os.environ.get("A7O_L1_SKIP_CUMULATIVE_UPDATE", "0") == "1"
 IS_LEGACY_PILOT_OUTPUT = CHECKPOINT_ID in {"", "01", "pilot"} and CELL_START == 0
 OUTPUT_PREFIX = "a7o_l1_pilot" if IS_LEGACY_PILOT_OUTPUT else f"a7o_l1_checkpoint_{CHECKPOINT_ID}"
 REPORT_STEM = "CRYPTO_A7O_L1_PILOT_SHARD_CHECKPOINT" if IS_LEGACY_PILOT_OUTPUT else f"CRYPTO_A7O_L1_CHECKPOINT_{CHECKPOINT_ID}"
@@ -523,7 +524,9 @@ def pivot_split_metrics(split_metrics: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame()
     values = split_metrics.pivot_table(index="candidate_id", columns=["series", "split"], values="annualized_mean", aggfunc="first")
     values.columns = [f"{a}__{b}" for a, b in values.columns]
-    return values.reset_index()
+    gross = split_metrics.pivot_table(index="candidate_id", columns=["series", "split"], values="mean_gross_exposure", aggfunc="first")
+    gross.columns = [f"{a}__{b}__gross_exposure" for a, b in gross.columns]
+    return values.join(gross, how="outer").reset_index()
 
 
 def robust_score(fold_metrics: pd.DataFrame, residual_metrics: pd.DataFrame, cost_lag_metrics: pd.DataFrame) -> pd.DataFrame:
@@ -562,7 +565,13 @@ def candidate_decisions(scored: pd.DataFrame) -> pd.DataFrame:
             reasons.append("residual_funding_recent_nonpositive")
         may = clean_float(row.get("raw_10bp__fresh_forward_2026May"))
         may_resid = clean_float(row.get("residual_vs_funding_10bp__fresh_forward_2026May"))
+        may_gross = clean_float(row.get("raw_10bp__fresh_forward_2026May__gross_exposure"))
+        may_resid_gross = clean_float(row.get("residual_vs_funding_10bp__fresh_forward_2026May__gross_exposure"))
         may_reasons = []
+        if may_gross is None or may_gross <= 0:
+            may_reasons.append("may_stress_no_raw_activity")
+        if may_resid_gross is None or may_resid_gross <= 0:
+            may_reasons.append("may_stress_no_residual_activity")
         if may is None or may < -0.5:
             may_reasons.append("may_stress_severe_fail")
         elif may < -0.25:
@@ -947,7 +956,8 @@ def main() -> int:
     summary_path = RUNTIME_DIR / "a7o_l1_cumulative_checkpoint_summary.csv"
     manifest["outputs"]["cumulative_checkpoint_summary"] = str(summary_path)
     manifest["stable_manifest_hash"] = stable_hash({k: v for k, v in manifest.items() if k not in {"generated_at", "stable_manifest_hash"}})
-    summary_path = update_cumulative_checkpoint_summary(decision_payload, manifest, paths)
+    if not SKIP_CUMULATIVE_UPDATE:
+        summary_path = update_cumulative_checkpoint_summary(decision_payload, manifest, paths)
     write_json(paths["manifest"], manifest)
 
     report = [
@@ -973,7 +983,7 @@ def main() -> int:
         write_markdown_table(pd.read_csv(paths["generation_funnel"]), 20),
         "## Cumulative Checkpoint Summary",
         "",
-        write_markdown_table(pd.read_csv(summary_path), 20),
+        write_markdown_table(pd.read_csv(summary_path), 20) if summary_path.exists() else "`Skipped during parallel wave execution; wave runner writes the cumulative summary.`",
         "## Deep Audit Decision Counts",
         "",
         write_markdown_table(deep["candidate_decision"].value_counts().rename_axis("candidate_decision").reset_index(name="count"), 20),
