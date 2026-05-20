@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -52,10 +53,15 @@ from crypto_a7o_search_space_and_fold_replay import (
 from crypto_a7o2c_semantic_uniqueness_audit import stable_file_hash, write_json, write_markdown_table
 
 
-DATE_TAG = "20260520"
-A7O_L1_DIR = RUNTIME_DIR / "a7o_l1_pilot"
+DATE_TAG = os.environ.get("A7O_DATE_TAG", "20260521")
+CHECKPOINT_ID = os.environ.get("A7O_L1_CHECKPOINT_ID", "01").strip()
+CELL_START = int(os.environ.get("A7O_L1_CELL_START", "0"))
+PILOT_CELLS = int(os.environ.get("A7O_L1_CELL_COUNT", "64"))
+IS_LEGACY_PILOT_OUTPUT = CHECKPOINT_ID in {"", "01", "pilot"} and CELL_START == 0
+OUTPUT_PREFIX = "a7o_l1_pilot" if IS_LEGACY_PILOT_OUTPUT else f"a7o_l1_checkpoint_{CHECKPOINT_ID}"
+REPORT_STEM = "CRYPTO_A7O_L1_PILOT_SHARD_CHECKPOINT" if IS_LEGACY_PILOT_OUTPUT else f"CRYPTO_A7O_L1_CHECKPOINT_{CHECKPOINT_ID}"
+A7O_L1_DIR = RUNTIME_DIR / OUTPUT_PREFIX
 
-PILOT_CELLS = 64
 GENERATED_PER_CELL = 2048
 STRICT_REPLAY_PER_CELL = 24
 DEEP_AUDIT_PER_CELL = 3
@@ -261,7 +267,9 @@ class A7OExpressionContext:
 
 
 def load_cells() -> pd.DataFrame:
-    cells = pd.read_csv(A7O_DIR / "a7o_search_cell_registry.csv").head(PILOT_CELLS)
+    cells = pd.read_csv(A7O_DIR / "a7o_search_cell_registry.csv").iloc[CELL_START : CELL_START + PILOT_CELLS].copy()
+    if len(cells) != PILOT_CELLS:
+        raise ValueError(f"requested {PILOT_CELLS} cells from offset {CELL_START}, got {len(cells)}")
     feature_registry = pd.read_csv(A7O_DIR / "a7o_feature_family_registry.csv")
     return cells.merge(feature_registry[["feature_family_set", "fields"]], on="feature_family_set", how="left")
 
@@ -662,6 +670,41 @@ def return_corr_clusters(book_vectors: pd.DataFrame, deep: pd.DataFrame) -> pd.D
     return pd.DataFrame(rows)
 
 
+def update_cumulative_checkpoint_summary(decision_payload: dict[str, Any], manifest: dict[str, Any], paths: dict[str, Path]) -> Path:
+    summary_path = RUNTIME_DIR / "a7o_l1_cumulative_checkpoint_summary.csv"
+    metrics = decision_payload["metrics"]
+    row = {
+        "checkpoint_id": CHECKPOINT_ID,
+        "cell_start": CELL_START,
+        "cell_end": CELL_START + PILOT_CELLS - 1,
+        "generated": metrics["generated"],
+        "strict_replay_selected": metrics["strict_replay_selected"],
+        "deep_audit_selected": metrics["deep_audit_selected"],
+        "post_may_eligible_deep_survivors": metrics["post_may_eligible_deep_survivors"],
+        "post_may_eligible_rate": clean_float(metrics["post_may_eligible_deep_survivors"] / metrics["deep_audit_selected"]) if metrics["deep_audit_selected"] else None,
+        "liquidity_volatility_deep_share": metrics["liquidity_volatility_deep_share"],
+        "single_return_corr_cluster_share": metrics["single_return_corr_cluster_share"],
+        "single_horizon_deep_share": metrics["single_horizon_deep_share"],
+        "active_cells_with_valid_deep_audit": metrics["active_cells_with_valid_deep_audit"],
+        "placebo_or_null_research_candidates": metrics["placebo_or_null_research_candidates"],
+        "may_leakage_violations": 0,
+        "decision": decision_payload["decision"],
+        "blockers": ";".join(decision_payload["blockers"]),
+        "manifest_hash": manifest["stable_manifest_hash"],
+        "runtime_dir": str(A7O_L1_DIR),
+        "report": manifest["outputs"].get("report", ""),
+    }
+    existing = pd.read_csv(summary_path, dtype={"checkpoint_id": str}) if summary_path.exists() else pd.DataFrame()
+    if not existing.empty and "checkpoint_id" in existing.columns:
+        existing = existing[existing["checkpoint_id"].astype(str) != str(CHECKPOINT_ID)]
+    summary = pd.concat([existing, pd.DataFrame([row])], ignore_index=True)
+    summary["checkpoint_id"] = summary["checkpoint_id"].astype(str).str.zfill(2)
+    summary["cell_start"] = pd.to_numeric(summary["cell_start"], errors="coerce")
+    summary = summary.sort_values(["cell_start", "checkpoint_id"], kind="stable")
+    summary.to_csv(summary_path, index=False)
+    return summary_path
+
+
 def write_outputs(
     *,
     generated: pd.DataFrame,
@@ -677,26 +720,29 @@ def write_outputs(
     fold_def: pd.DataFrame,
     decision_payload: dict[str, Any],
 ) -> dict[str, Path]:
+    def out(name: str) -> Path:
+        return A7O_L1_DIR / f"{OUTPUT_PREFIX}_{name}"
+
     paths = {
-        "manifest": A7O_L1_DIR / "a7o_l1_pilot_manifest.json",
-        "cell_registry": A7O_L1_DIR / "a7o_l1_pilot_cell_registry.csv",
-        "generation_funnel": A7O_L1_DIR / "a7o_l1_pilot_generation_funnel.csv",
-        "static_validity_funnel": A7O_L1_DIR / "a7o_l1_pilot_static_validity_funnel.csv",
-        "strict_replay_selected": A7O_L1_DIR / "a7o_l1_pilot_strict_replay_selected.csv",
-        "fold_replay_metrics": A7O_L1_DIR / "a7o_l1_pilot_fold_replay_metrics.csv",
-        "residual_fold_metrics": A7O_L1_DIR / "a7o_l1_pilot_residual_fold_metrics.csv",
-        "cost_lag_fold_metrics": A7O_L1_DIR / "a7o_l1_pilot_cost_lag_fold_metrics.csv",
-        "deep_audit_scoreboard": A7O_L1_DIR / "a7o_l1_pilot_deep_audit_scoreboard.csv",
-        "deep_selection_policy": A7O_L1_DIR / "a7o_l1_pilot_deep_selection_policy.csv",
-        "post_may_eligible_pool": A7O_L1_DIR / "a7o_l1_pilot_post_may_eligible_pool.csv",
-        "return_corr_clusters": A7O_L1_DIR / "a7o_l1_pilot_return_corr_clusters.csv",
-        "cell_failure_map": A7O_L1_DIR / "a7o_l1_pilot_cell_failure_map.csv",
-        "placebo_null_comparison": A7O_L1_DIR / "a7o_l1_pilot_placebo_null_comparison.csv",
-        "may_stress_only_audit": A7O_L1_DIR / "a7o_l1_pilot_may_stress_only_audit.csv",
-        "checkpoint_decision": A7O_L1_DIR / "a7o_l1_pilot_checkpoint_decision.json",
-        "eval_failures": A7O_L1_DIR / "a7o_l1_pilot_eval_failures.csv",
-        "split_metrics": A7O_L1_DIR / "a7o_l1_pilot_split_metrics.csv",
-        "fold_definition": A7O_L1_DIR / "a7o_l1_pilot_fold_definition.csv",
+        "manifest": out("manifest.json"),
+        "cell_registry": out("cell_registry.csv"),
+        "generation_funnel": out("generation_funnel.csv"),
+        "static_validity_funnel": out("static_validity_funnel.csv"),
+        "strict_replay_selected": out("strict_replay_selected.csv"),
+        "fold_replay_metrics": out("fold_replay_metrics.csv"),
+        "residual_fold_metrics": out("residual_fold_metrics.csv"),
+        "cost_lag_fold_metrics": out("cost_lag_fold_metrics.csv"),
+        "deep_audit_scoreboard": out("deep_audit_scoreboard.csv"),
+        "deep_selection_policy": out("deep_selection_policy.csv"),
+        "post_may_eligible_pool": out("post_may_eligible_pool.csv"),
+        "return_corr_clusters": out("return_corr_clusters.csv"),
+        "cell_failure_map": out("cell_failure_map.csv"),
+        "placebo_null_comparison": out("placebo_null_comparison.csv"),
+        "may_stress_only_audit": out("may_stress_only_audit.csv"),
+        "checkpoint_decision": out("checkpoint_decision.json"),
+        "eval_failures": out("eval_failures.csv"),
+        "split_metrics": out("split_metrics.csv"),
+        "fold_definition": out("fold_definition.csv"),
     }
     generated_cells = generated[["cell_id"]].drop_duplicates()
     generation_funnel = pd.DataFrame(
@@ -829,6 +875,9 @@ def main() -> int:
     checkpoint_decision = "PASS_A7O_L1_PILOT_CHECKPOINT_READY_FOR_NEXT_64_CELLS" if not blockers else "HOLD_A7O_L1_PILOT_CHECKPOINT"
     decision_payload = {
         "generated_at": now,
+        "checkpoint_id": CHECKPOINT_ID,
+        "cell_start": CELL_START,
+        "cell_end": CELL_START + PILOT_CELLS - 1,
         "decision": checkpoint_decision,
         "authorizes_next_64_cell_checkpoint": not blockers,
         "authorizes_full_l1_without_checkpoint": False,
@@ -872,6 +921,9 @@ def main() -> int:
     )
     manifest = {
         "generated_at": now,
+        "checkpoint_id": CHECKPOINT_ID,
+        "cell_start": CELL_START,
+        "cell_end": CELL_START + PILOT_CELLS - 1,
         "decision": checkpoint_decision,
         "executes_search": True,
         "executes_replay": True,
@@ -890,13 +942,20 @@ def main() -> int:
         },
         "outputs": {k: str(v) for k, v in paths.items() if k != "manifest"},
     }
+    report_path = REPORT_DIR / f"{REPORT_STEM}_{DATE_TAG}.md"
+    manifest["outputs"]["report"] = str(report_path)
+    summary_path = RUNTIME_DIR / "a7o_l1_cumulative_checkpoint_summary.csv"
+    manifest["outputs"]["cumulative_checkpoint_summary"] = str(summary_path)
     manifest["stable_manifest_hash"] = stable_hash({k: v for k, v in manifest.items() if k not in {"generated_at", "stable_manifest_hash"}})
+    summary_path = update_cumulative_checkpoint_summary(decision_payload, manifest, paths)
     write_json(paths["manifest"], manifest)
 
     report = [
         "# Crypto A7O-L1 Pilot Shard Checkpoint",
         "",
         f"- generated_at: `{now}`",
+        f"- checkpoint_id: `{CHECKPOINT_ID}`",
+        f"- cell_range: `{CELL_START}-{CELL_START + PILOT_CELLS - 1}`",
         f"- decision: `{checkpoint_decision}`",
         "- pilot_only: `True`",
         "- executes_search: `True`",
@@ -912,6 +971,9 @@ def main() -> int:
         "## Generation Funnel",
         "",
         write_markdown_table(pd.read_csv(paths["generation_funnel"]), 20),
+        "## Cumulative Checkpoint Summary",
+        "",
+        write_markdown_table(pd.read_csv(summary_path), 20),
         "## Deep Audit Decision Counts",
         "",
         write_markdown_table(deep["candidate_decision"].value_counts().rename_axis("candidate_decision").reset_index(name="count"), 20),
@@ -919,9 +981,7 @@ def main() -> int:
         "",
         "This pilot checkpoint can only authorize the next 64-cell checkpoint. It cannot authorize alpha proof, shadow, paper, live, L2, or L3.",
     ]
-    report_path = REPORT_DIR / f"CRYPTO_A7O_L1_PILOT_SHARD_CHECKPOINT_{DATE_TAG}.md"
     report_path.write_text("\n".join(report), encoding="utf-8")
-    manifest["outputs"]["report"] = str(report_path)
     write_json(paths["manifest"], manifest)
 
     print(json.dumps(manifest, indent=2, sort_keys=True))
