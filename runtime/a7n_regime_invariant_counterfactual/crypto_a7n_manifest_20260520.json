@@ -1,0 +1,157 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_a7m3": false,
+  "authorizes_a7n3": false,
+  "blockers": [
+    "strict_liquidity_volatility_share_lte_30pct",
+    "strict_field_families_gte_4",
+    "deep_rc000_share_lte_35pct",
+    "deep_return_corr_clusters_gte_6",
+    "deep_field_families_gte_4"
+  ],
+  "counterfactual_scope": "A7M-2 strict/deep existing candidate tables only; no new formula generation and no new replay.",
+  "decision": "HOLD_A7N2_OBJECTIVE_STILL_COLLAPSES",
+  "executes_replay": false,
+  "executes_search": false,
+  "fold_replay_status": "not_executed_contract_only",
+  "gates": {
+    "deep_engines_gte_4": true,
+    "deep_field_families_gte_4": false,
+    "deep_placebo_null_zero": true,
+    "deep_rc000_share_lte_35pct": false,
+    "deep_return_corr_clusters_gte_6": false,
+    "may_excluded_from_score_components": true,
+    "strict_engines_gte_4": true,
+    "strict_field_families_gte_4": false,
+    "strict_liquidity_volatility_share_lte_30pct": false,
+    "strict_placebo_null_zero": true
+  },
+  "generated_at": "2026-05-20T11:44:48Z",
+  "may_policy": {
+    "allowed": [
+      "post_selection_stress_label",
+      "post_selection_veto",
+      "failure_attribution"
+    ],
+    "forbidden": [
+      "ranking",
+      "reward",
+      "threshold_tuning",
+      "weight_selection",
+      "candidate_selection",
+      "generator_tuning",
+      "arm_allocation",
+      "mutation_prior",
+      "surrogate_target"
+    ]
+  },
+  "outputs": {
+    "deep_counterfactual_scores": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7n_regime_invariant_counterfactual\\a7n2_deep_counterfactual_scores.csv",
+    "deep_diversity_capped_top_decile": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7n_regime_invariant_counterfactual\\a7n2_deep_diversity_capped_top_decile.csv",
+    "fold_library": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7n_regime_invariant_counterfactual\\a7n1_non_may_regime_fold_library.csv",
+    "gate_summary": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7n_regime_invariant_counterfactual\\a7n2_gate_summary.csv",
+    "may_exclusion_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7n_regime_invariant_counterfactual\\a7n2_may_exclusion_audit.csv",
+    "objective_contract": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7n_regime_invariant_counterfactual\\crypto_a7n0_objective_contract_20260520.json",
+    "strict_counterfactual_scores": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7n_regime_invariant_counterfactual\\a7n2_strict_counterfactual_scores.csv",
+    "strict_diversity_capped_top_decile": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7n_regime_invariant_counterfactual\\a7n2_strict_diversity_capped_top_decile.csv",
+    "top_decile_summary": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7n_regime_invariant_counterfactual\\a7n2_top_decile_counterfactual_summary.csv"
+  },
+  "phase_status": {
+    "A7N-0": "PASS_A7N0_OBJECTIVE_CONTRACT",
+    "A7N-1": "PASS_A7N1_FOLD_LIBRARY_CONTRACT_ONLY",
+    "A7N-2": "HOLD_A7N2_OBJECTIVE_STILL_COLLAPSES"
+  },
+  "stable_manifest_hash": "ced572de70039bb3c23dc499d83bd0ba7009367463ada065ab48e456f3a328f2",
+  "summary": [
+    {
+      "count": 409,
+      "engine_count": 6,
+      "field_family_count": 4,
+      "liquidity_volatility_share": 0.8997555012224939,
+      "operator_horizon_count": 3,
+      "placebo_or_null_count": 0,
+      "pool": "strict_old_a7m_top_decile",
+      "rc_000_share": 0.0,
+      "return_corr_cluster_count": 0,
+      "score_col": "a7m_rank_score",
+      "top_field_family_share": 0.8312958435207825,
+      "top_operator_horizon_share": 0.5183374083129584,
+      "top_return_corr_cluster_share": 0.0
+    },
+    {
+      "count": 409,
+      "engine_count": 6,
+      "field_family_count": 4,
+      "liquidity_volatility_share": 0.8850855745721271,
+      "operator_horizon_count": 6,
+      "placebo_or_null_count": 0,
+      "pool": "strict_a7n_raw_top_decile",
+      "rc_000_share": 0.0,
+      "return_corr_cluster_count": 0,
+      "score_col": "a7n_regime_invariant_score",
+      "top_field_family_share": 0.7750611246943765,
+      "top_operator_horizon_share": 0.511002444987775,
+      "top_return_corr_cluster_share": 0.0
+    },
+    {
+      "count": 250,
+      "engine_count": 6,
+      "field_family_count": 3,
+      "liquidity_volatility_share": 0.488,
+      "operator_horizon_count": 4,
+      "placebo_or_null_count": 0,
+      "pool": "strict_a7n_diversity_capped_top_decile",
+      "rc_000_share": 0.0,
+      "return_corr_cluster_count": 0,
+      "score_col": "a7n_regime_invariant_score",
+      "top_field_family_share": 0.512,
+      "top_operator_horizon_share": 0.408,
+      "top_return_corr_cluster_share": 0.0
+    },
+    {
+      "count": 51,
+      "engine_count": 6,
+      "field_family_count": 1,
+      "liquidity_volatility_share": 1.0,
+      "operator_horizon_count": 3,
+      "placebo_or_null_count": 0,
+      "pool": "deep_old_a7m_top_decile",
+      "rc_000_share": 0.9019607843137255,
+      "return_corr_cluster_count": 3,
+      "score_col": "a7m_rank_score",
+      "top_field_family_share": 1.0,
+      "top_operator_horizon_share": 0.9019607843137255,
+      "top_return_corr_cluster_share": 0.9019607843137255
+    },
+    {
+      "count": 51,
+      "engine_count": 6,
+      "field_family_count": 2,
+      "liquidity_volatility_share": 0.9019607843137255,
+      "operator_horizon_count": 3,
+      "placebo_or_null_count": 0,
+      "pool": "deep_a7n_raw_top_decile",
+      "rc_000_share": 0.7843137254901961,
+      "return_corr_cluster_count": 4,
+      "score_col": "a7n_regime_invariant_score",
+      "top_field_family_share": 0.9019607843137255,
+      "top_operator_horizon_share": 0.7843137254901961,
+      "top_return_corr_cluster_share": 0.7843137254901961
+    },
+    {
+      "count": 26,
+      "engine_count": 5,
+      "field_family_count": 2,
+      "liquidity_volatility_share": 0.5769230769230769,
+      "operator_horizon_count": 3,
+      "placebo_or_null_count": 0,
+      "pool": "deep_a7n_diversity_capped_top_decile",
+      "rc_000_share": 0.46153846153846156,
+      "return_corr_cluster_count": 5,
+      "score_col": "a7n_regime_invariant_score",
+      "top_field_family_share": 0.5769230769230769,
+      "top_operator_horizon_share": 0.46153846153846156,
+      "top_return_corr_cluster_share": 0.46153846153846156
+    }
+  ]
+}

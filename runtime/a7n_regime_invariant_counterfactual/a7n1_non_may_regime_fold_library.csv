@@ -1,0 +1,9 @@
+fold_id,generated_at,feature_source,definition,purpose,may_allowed,status
+F0_calendar_block_folds,2026-05-20T11:44:48Z,timestamp,validation/recent monthly or biweekly calendar blocks,avoid one block supporting candidate ranking,False,contract_only_not_replayed
+F1_high_realized_vol_fold,2026-05-20T11:44:48Z,realized_vol_6/12/24,top non-May realized volatility quantile inside validation/recent,stress volatility-regime dependence,False,contract_only_not_replayed
+F2_low_liquidity_fold,2026-05-20T11:44:48Z,quote_volume/trade_count/activity,bottom non-May liquidity/activity quantile inside validation/recent,stress liquidity fragility,False,contract_only_not_replayed
+F3_high_liquidity_high_vol_fold,2026-05-20T11:44:48Z,quote volume x realized volatility,intersection of high liquidity and high volatility inside validation/recent,constrain liquidity-volatility collapse without May labels,False,contract_only_not_replayed
+F4_basis_dislocation_fold,2026-05-20T11:44:48Z,mark_index_ratio/premium_index/mark_minus_index,large absolute basis or premium dislocation inside validation/recent,stress basis-regime dependence,False,contract_only_not_replayed
+F5_funding_neutral_fold,2026-05-20T11:44:48Z,latest_known_funding_rate/funding persistence,non-extreme funding state inside validation/recent,detect hidden funding-family wrappers,False,contract_only_not_replayed
+F6_cross_symbol_dispersion_fold,2026-05-20T11:44:48Z,cross-symbol returns/vol/basis dispersion,high cross-symbol dispersion inside validation/recent,stress cross-sectional stability,False,contract_only_not_replayed
+F7_trend_reversal_fold,2026-05-20T11:44:48Z,non-May trend/reversal state,trend to reversal or reverse-shock blocks inside validation/recent,avoid one-direction trend-only alpha wrappers,False,contract_only_not_replayed

@@ -1,0 +1,7 @@
+pool,score_col,count,return_corr_cluster_count,top_return_corr_cluster_share,rc_000_share,field_family_count,top_field_family_share,liquidity_volatility_share,engine_count,placebo_or_null_count,operator_horizon_count,top_operator_horizon_share
+strict_old_a7m_top_decile,a7m_rank_score,409,0,0.0,0.0,4,0.8312958435207825,0.8997555012224939,6,0,3,0.5183374083129584
+strict_a7n_raw_top_decile,a7n_regime_invariant_score,409,0,0.0,0.0,4,0.7750611246943765,0.8850855745721271,6,0,6,0.511002444987775
+strict_a7n_diversity_capped_top_decile,a7n_regime_invariant_score,250,0,0.0,0.0,3,0.512,0.488,6,0,4,0.408
+deep_old_a7m_top_decile,a7m_rank_score,51,3,0.9019607843137255,0.9019607843137255,1,1.0,1.0,6,0,3,0.9019607843137255
+deep_a7n_raw_top_decile,a7n_regime_invariant_score,51,4,0.7843137254901961,0.7843137254901961,2,0.9019607843137255,0.9019607843137255,6,0,3,0.7843137254901961
+deep_a7n_diversity_capped_top_decile,a7n_regime_invariant_score,26,5,0.46153846153846156,0.46153846153846156,2,0.5769230769230769,0.5769230769230769,5,0,3,0.46153846153846156
