@@ -60,6 +60,9 @@ GENERATED_PER_CELL = 2048
 STRICT_REPLAY_PER_CELL = 24
 DEEP_AUDIT_PER_CELL = 3
 RETURN_CORR_CLUSTER_THRESHOLD = 0.80
+MAX_LIQUIDITY_VOLATILITY_DEEP_SHARE = 0.15
+MAX_LIQUIDITY_VOLATILITY_DEEP_COUNT = int(math.floor(PILOT_CELLS * DEEP_AUDIT_PER_CELL * MAX_LIQUIDITY_VOLATILITY_DEEP_SHARE))
+DEEP_SELECTION_POLICY = "global_liquidity_volatility_cap_15pct"
 
 
 def utc_now() -> str:
@@ -68,6 +71,11 @@ def utc_now() -> str:
 
 def formula_hash(expr: str) -> str:
     return hashlib.sha256(expr.encode("utf-8")).hexdigest()[:16]
+
+
+def is_liquidity_volatility_family(families: Any) -> bool:
+    parts = {p.strip() for p in str(families).split(";") if p.strip()}
+    return "liquidity" in parts and "volatility" in parts
 
 
 def is_number(text: str) -> bool:
@@ -571,10 +579,53 @@ def candidate_decisions(scored: pd.DataFrame) -> pd.DataFrame:
 
 def select_deep(scored: pd.DataFrame) -> pd.DataFrame:
     parts = []
+    ranked_parts = []
+    liqvol_count = 0
+    selected_ids: set[str] = set()
+    target_deep_count = PILOT_CELLS * DEEP_AUDIT_PER_CELL
     for cell_id, part in scored.groupby("cell_id", sort=True):
-        parts.append(part.sort_values(["pilot_rank_score", "candidate_id"], ascending=[False, True]).head(DEEP_AUDIT_PER_CELL))
-    deep = pd.concat(parts, ignore_index=True)
+        ranked = part.copy()
+        ranked["liquidity_volatility_flag"] = ranked["source_field_families"].apply(is_liquidity_volatility_family)
+        ranked["diversity_adjusted_rank_score"] = ranked["pilot_rank_score"] - 0.30 * ranked["liquidity_volatility_flag"].astype(float)
+        ranked = ranked.sort_values(["diversity_adjusted_rank_score", "pilot_rank_score", "candidate_id"], ascending=[False, False, True])
+        ranked_parts.append(ranked)
+        selected_rows: list[pd.Series] = []
+        for _, row in ranked.iterrows():
+            if len(selected_rows) >= DEEP_AUDIT_PER_CELL:
+                break
+            if bool(row["liquidity_volatility_flag"]) and liqvol_count >= MAX_LIQUIDITY_VOLATILITY_DEEP_COUNT:
+                continue
+            selected_rows.append(row)
+            selected_ids.add(str(row["candidate_id"]))
+            if bool(row["liquidity_volatility_flag"]):
+                liqvol_count += 1
+        if selected_rows:
+            cell_deep = pd.DataFrame(selected_rows)
+            cell_deep["deep_selection_stage"] = "cell_quota"
+            parts.append(cell_deep)
+    deep = pd.concat(parts, ignore_index=True) if parts else pd.DataFrame()
+    if len(deep) < target_deep_count and ranked_parts:
+        ranked_all = pd.concat(ranked_parts, ignore_index=True)
+        ranked_all = ranked_all[~ranked_all["candidate_id"].astype(str).isin(selected_ids)].copy()
+        ranked_all = ranked_all.sort_values(["diversity_adjusted_rank_score", "pilot_rank_score", "candidate_id"], ascending=[False, False, True])
+        backfill_rows = []
+        for _, row in ranked_all.iterrows():
+            if len(deep) + len(backfill_rows) >= target_deep_count:
+                break
+            if bool(row["liquidity_volatility_flag"]) and liqvol_count >= MAX_LIQUIDITY_VOLATILITY_DEEP_COUNT:
+                continue
+            backfill_rows.append(row)
+            selected_ids.add(str(row["candidate_id"]))
+            if bool(row["liquidity_volatility_flag"]):
+                liqvol_count += 1
+        if backfill_rows:
+            backfill = pd.DataFrame(backfill_rows)
+            backfill["deep_selection_stage"] = "global_backfill"
+            deep = pd.concat([deep, backfill], ignore_index=True)
     deep["deep_audit_status"] = "selected_for_deep_audit"
+    deep["deep_selection_policy"] = DEEP_SELECTION_POLICY
+    deep["liquidity_volatility_deep_cap"] = MAX_LIQUIDITY_VOLATILITY_DEEP_COUNT
+    deep["liquidity_volatility_deep_forced_fill_count"] = 0
     return deep
 
 
@@ -636,6 +687,7 @@ def write_outputs(
         "residual_fold_metrics": A7O_L1_DIR / "a7o_l1_pilot_residual_fold_metrics.csv",
         "cost_lag_fold_metrics": A7O_L1_DIR / "a7o_l1_pilot_cost_lag_fold_metrics.csv",
         "deep_audit_scoreboard": A7O_L1_DIR / "a7o_l1_pilot_deep_audit_scoreboard.csv",
+        "deep_selection_policy": A7O_L1_DIR / "a7o_l1_pilot_deep_selection_policy.csv",
         "post_may_eligible_pool": A7O_L1_DIR / "a7o_l1_pilot_post_may_eligible_pool.csv",
         "return_corr_clusters": A7O_L1_DIR / "a7o_l1_pilot_return_corr_clusters.csv",
         "cell_failure_map": A7O_L1_DIR / "a7o_l1_pilot_cell_failure_map.csv",
@@ -676,6 +728,18 @@ def write_outputs(
             }
         ]
     )
+    deep_policy = pd.DataFrame(
+        [
+            {
+                "policy": DEEP_SELECTION_POLICY,
+                "max_liquidity_volatility_deep_share": MAX_LIQUIDITY_VOLATILITY_DEEP_SHARE,
+                "max_liquidity_volatility_deep_count": MAX_LIQUIDITY_VOLATILITY_DEEP_COUNT,
+                "selected_deep_count": int(len(deep)),
+                "selected_liquidity_volatility_count": int(deep["liquidity_volatility_flag"].sum()) if "liquidity_volatility_flag" in deep.columns else 0,
+                "forced_liquidity_volatility_fill_count": int(deep["deep_liquidity_volatility_forced_fill"].sum()) if "deep_liquidity_volatility_forced_fill" in deep.columns else 0,
+            }
+        ]
+    )
     may_audit = pd.DataFrame(
         [
             {"check": "may_used_for_generation", "count": 0, "pass": True},
@@ -695,6 +759,7 @@ def write_outputs(
     residual_metrics.to_csv(paths["residual_fold_metrics"], index=False)
     cost_lag_metrics.to_csv(paths["cost_lag_fold_metrics"], index=False)
     deep.to_csv(paths["deep_audit_scoreboard"], index=False)
+    deep_policy.to_csv(paths["deep_selection_policy"], index=False)
     post_may_pool.to_csv(paths["post_may_eligible_pool"], index=False)
     clusters.to_csv(paths["return_corr_clusters"], index=False)
     cell_failure.to_csv(paths["cell_failure_map"], index=False)
@@ -730,7 +795,9 @@ def main() -> int:
     control_research_like = deep[deep["candidate_decision"].eq("NEGATIVE_CONTROL_RESEARCH_LIKE_FAIL")].copy()
 
     fold_metric_missing_rate = float(fold_metrics["annualized_mean"].isna().mean()) if not fold_metrics.empty else 1.0
-    liqvol_share = float(deep["source_field_families"].astype(str).str.contains("liquidity;volatility|volatility;liquidity", regex=True).mean()) if not deep.empty else 0.0
+    liqvol_count = int(deep["liquidity_volatility_flag"].sum()) if "liquidity_volatility_flag" in deep.columns and not deep.empty else 0
+    liqvol_forced_fill_count = int(deep["deep_liquidity_volatility_forced_fill"].sum()) if "deep_liquidity_volatility_forced_fill" in deep.columns and not deep.empty else 0
+    liqvol_share = float(liqvol_count / len(deep)) if len(deep) else 0.0
     horizon_share = float(deep["temporal_horizon_class"].value_counts(normalize=True).iloc[0]) if not deep.empty else 0.0
     cluster_share = float(deep["return_corr_cluster"].value_counts(normalize=True).iloc[0]) if "return_corr_cluster" in deep.columns and deep["return_corr_cluster"].notna().any() else 0.0
     hypothesis_share = float(deep["hypothesis_family"].value_counts(normalize=True).iloc[0]) if not deep.empty else 0.0
@@ -775,7 +842,11 @@ def main() -> int:
             "deep_audit_selected": int(len(deep)),
             "eval_failure_count": int(len(eval_failures)),
             "fold_metric_missing_rate": fold_metric_missing_rate,
+            "deep_selection_policy": DEEP_SELECTION_POLICY,
             "liquidity_volatility_deep_share": liqvol_share,
+            "liquidity_volatility_deep_count": liqvol_count,
+            "liquidity_volatility_deep_cap": MAX_LIQUIDITY_VOLATILITY_DEEP_COUNT,
+            "liquidity_volatility_deep_forced_fill_count": liqvol_forced_fill_count,
             "single_horizon_deep_share": horizon_share,
             "single_return_corr_cluster_share": cluster_share,
             "active_cells_with_valid_deep_audit": active_cells,

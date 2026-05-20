@@ -3,14 +3,12 @@
   "authorizes_full_l1_without_checkpoint": false,
   "authorizes_l2_execution": false,
   "authorizes_l3_execution": false,
-  "authorizes_next_64_cell_checkpoint": false,
-  "blockers": [
-    "liquidity_volatility_deep_share"
-  ],
-  "decision": "HOLD_A7O_L1_PILOT_CHECKPOINT",
+  "authorizes_next_64_cell_checkpoint": true,
+  "blockers": [],
+  "decision": "PASS_A7O_L1_PILOT_CHECKPOINT_READY_FOR_NEXT_64_CELLS",
   "executes_replay": true,
   "executes_search": true,
-  "generated_at": "2026-05-20T15:07:12Z",
+  "generated_at": "2026-05-20T15:47:13Z",
   "may_policy": {
     "allowed": [
       "post_selection_stress_label",
@@ -28,16 +26,20 @@
     ]
   },
   "metrics": {
-    "active_cells_with_valid_deep_audit": 64,
+    "active_cells_with_valid_deep_audit": 62,
     "deep_audit_selected": 192,
+    "deep_selection_policy": "global_liquidity_volatility_cap_15pct",
     "eval_failure_count": 0,
     "fold_metric_missing_rate": 0.0,
     "generated": 131072,
-    "liquidity_volatility_deep_share": 0.1875,
+    "liquidity_volatility_deep_cap": 28,
+    "liquidity_volatility_deep_count": 28,
+    "liquidity_volatility_deep_forced_fill_count": 0,
+    "liquidity_volatility_deep_share": 0.14583333333333334,
     "placebo_or_null_research_candidates": 0,
     "post_may_eligible_deep_survivors": 49,
-    "single_feature_operator_horizon_motif_share": 0.015625,
-    "single_horizon_deep_share": 0.171875,
+    "single_feature_operator_horizon_motif_share": 0.03125,
+    "single_horizon_deep_share": 0.16666666666666666,
     "single_hypothesis_family_share": 0.125,
     "single_return_corr_cluster_share": 0.052083333333333336,
     "strict_replay_selected": 1536
@@ -48,6 +50,7 @@
     "checkpoint_decision": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_l1_pilot\\a7o_l1_pilot_checkpoint_decision.json",
     "cost_lag_fold_metrics": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_l1_pilot\\a7o_l1_pilot_cost_lag_fold_metrics.csv",
     "deep_audit_scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_l1_pilot\\a7o_l1_pilot_deep_audit_scoreboard.csv",
+    "deep_selection_policy": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_l1_pilot\\a7o_l1_pilot_deep_selection_policy.csv",
     "eval_failures": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_l1_pilot\\a7o_l1_pilot_eval_failures.csv",
     "fold_definition": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_l1_pilot\\a7o_l1_pilot_fold_definition.csv",
     "fold_replay_metrics": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7o_l1_pilot\\a7o_l1_pilot_fold_replay_metrics.csv",
@@ -64,5 +67,5 @@
   },
   "pilot_only": true,
   "shadow_paper_live_status": "NOT_AUTHORIZED",
-  "stable_manifest_hash": "1aa49022a0c0ee18f62c5773eba48644c2729f5f362b60c79b3e050056edb096"
+  "stable_manifest_hash": "d328533e5f366112e1bf67b81ff14dd94a6bd52ff3310ec112643b16552b8016"
 }
