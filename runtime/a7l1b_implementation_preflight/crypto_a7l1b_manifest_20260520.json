@@ -1,0 +1,28 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_a7l2_level1_small_budget_ladder_smoke": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7L1B_IMPLEMENTATION_PREFLIGHT",
+  "dry_candidate_manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_dry_candidate_manifest.csv",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-20T02:18:25Z",
+  "outputs": {
+    "a7l1b_activity_coverage_precheck": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_activity_coverage_precheck.csv",
+    "a7l1b_cost_lag_metric_availability": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_cost_lag_metric_availability.csv",
+    "a7l1b_family_quota_dedup_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_family_quota_dedup_audit.csv",
+    "a7l1b_feature_timing_contract": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_feature_timing_contract.csv",
+    "a7l1b_formula_static_diversity": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_formula_static_diversity.csv",
+    "a7l1b_generator_arm_coverage": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_generator_arm_coverage.csv",
+    "a7l1b_may_exclusion_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_may_exclusion_audit.csv",
+    "a7l1b_operator_extension_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_operator_extension_audit.csv",
+    "a7l1b_placebo_mode_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_placebo_mode_audit.csv",
+    "a7l1b_readiness_vs_stop_rules": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_readiness_vs_stop_rules.csv",
+    "a7l1b_residual_baseline_metric_availability": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_residual_baseline_metric_availability.csv"
+  },
+  "research_candidate_labeling_executed": false,
+  "source_contract": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1_search_space_redesign_spec\\crypto_a7l1_search_space_contract_20260520.json",
+  "stable_manifest_hash": "f29433b858b26abd803a0792f21b4b74d4f0f755924ef58779416b4bc2ba0681"
+}

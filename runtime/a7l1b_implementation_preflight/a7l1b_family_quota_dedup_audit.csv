@@ -1,0 +1,8 @@
+family,dry_count,share,dedup_unique_count,status
+cost_aware_low_turnover,72,0.208696,72,pass
+cross_symbol_relative,72,0.208696,72,pass
+microstructure_lite_lag_stable,72,0.208696,72,pass
+placebo_random_control,72,0.172662,72,pass
+regime_conditional_no_may,57,0.165217,57,pass
+residual_orthogonal_basis,72,0.208696,72,pass
+ALL,417,1.0,417,pass
