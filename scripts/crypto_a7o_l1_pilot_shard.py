@@ -58,6 +58,8 @@ CHECKPOINT_ID = os.environ.get("A7O_L1_CHECKPOINT_ID", "01").strip()
 CELL_START = int(os.environ.get("A7O_L1_CELL_START", "0"))
 PILOT_CELLS = int(os.environ.get("A7O_L1_CELL_COUNT", "64"))
 SKIP_CUMULATIVE_UPDATE = os.environ.get("A7O_L1_SKIP_CUMULATIVE_UPDATE", "0") == "1"
+CELL_REGISTRY_FILE = os.environ.get("A7O_L1_CELL_REGISTRY_FILE", "").strip()
+CELL_REGISTRY_OFFSET = int(os.environ.get("A7O_L1_CELL_REGISTRY_OFFSET", "0"))
 IS_LEGACY_PILOT_OUTPUT = CHECKPOINT_ID in {"", "01", "pilot"} and CELL_START == 0
 OUTPUT_PREFIX = "a7o_l1_pilot" if IS_LEGACY_PILOT_OUTPUT else f"a7o_l1_checkpoint_{CHECKPOINT_ID}"
 REPORT_STEM = "CRYPTO_A7O_L1_PILOT_SHARD_CHECKPOINT" if IS_LEGACY_PILOT_OUTPUT else f"CRYPTO_A7O_L1_CHECKPOINT_{CHECKPOINT_ID}"
@@ -276,10 +278,16 @@ class A7OExpressionContext:
 
 
 def load_cells() -> pd.DataFrame:
-    cells = pd.read_csv(A7O_DIR / "a7o_search_cell_registry.csv").iloc[CELL_START : CELL_START + PILOT_CELLS].copy()
+    if CELL_REGISTRY_FILE:
+        registry_path = Path(CELL_REGISTRY_FILE)
+        cells = pd.read_csv(registry_path).iloc[CELL_REGISTRY_OFFSET : CELL_REGISTRY_OFFSET + PILOT_CELLS].copy()
+    else:
+        cells = pd.read_csv(A7O_DIR / "a7o_search_cell_registry.csv").iloc[CELL_START : CELL_START + PILOT_CELLS].copy()
     if len(cells) != PILOT_CELLS:
-        raise ValueError(f"requested {PILOT_CELLS} cells from offset {CELL_START}, got {len(cells)}")
+        offset = CELL_REGISTRY_OFFSET if CELL_REGISTRY_FILE else CELL_START
+        raise ValueError(f"requested {PILOT_CELLS} cells from offset {offset}, got {len(cells)}")
     feature_registry = pd.read_csv(A7O_DIR / "a7o_feature_family_registry.csv")
+    cells = cells.drop(columns=["fields"], errors="ignore")
     return cells.merge(feature_registry[["feature_family_set", "fields"]], on="feature_family_set", how="left")
 
 
@@ -993,6 +1001,8 @@ def main() -> int:
         "checkpoint_id": CHECKPOINT_ID,
         "cell_start": CELL_START,
         "cell_end": CELL_START + PILOT_CELLS - 1,
+        "cell_registry_file": CELL_REGISTRY_FILE or None,
+        "cell_registry_offset": CELL_REGISTRY_OFFSET if CELL_REGISTRY_FILE else None,
         "decision": checkpoint_decision,
         "authorizes_next_64_cell_checkpoint": not blockers,
         "authorizes_full_l1_without_checkpoint": False,
@@ -1072,6 +1082,13 @@ def main() -> int:
         summary_path = update_cumulative_checkpoint_summary(decision_payload, manifest, paths)
     write_json(paths["manifest"], manifest)
 
+    if SKIP_CUMULATIVE_UPDATE:
+        cumulative_section = "`Skipped by A7O_L1_SKIP_CUMULATIVE_UPDATE=1; this checkpoint is reviewed through its dedicated decision record.`"
+    elif summary_path.exists():
+        cumulative_section = write_markdown_table(pd.read_csv(summary_path), 20)
+    else:
+        cumulative_section = "`Skipped during parallel wave execution; wave runner writes the cumulative summary.`"
+
     report = [
         "# Crypto A7O-L1 Pilot Shard Checkpoint",
         "",
@@ -1095,7 +1112,7 @@ def main() -> int:
         write_markdown_table(pd.read_csv(paths["generation_funnel"]), 20),
         "## Cumulative Checkpoint Summary",
         "",
-        write_markdown_table(pd.read_csv(summary_path), 20) if summary_path.exists() else "`Skipped during parallel wave execution; wave runner writes the cumulative summary.`",
+        cumulative_section,
         "## Deep Audit Decision Counts",
         "",
         write_markdown_table(deep["candidate_decision"].value_counts().rename_axis("candidate_decision").reset_index(name="count"), 20),

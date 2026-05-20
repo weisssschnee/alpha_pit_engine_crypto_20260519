@@ -1,0 +1,2 @@
+policy,max_liquidity_volatility_deep_share,max_liquidity_volatility_deep_count,selected_deep_count,selected_liquidity_volatility_count,forced_liquidity_volatility_fill_count
+global_liquidity_volatility_cap_15pct,0.15,28,192,9,0
