@@ -1,0 +1,5 @@
+check,status,detail
+may_not_repair_input,pass,Repair action matrix forbids May labels and May margins.
+may_not_mutation_direction,pass,Near-miss mutation is non-May-gate only.
+may_not_candidate_promotion,pass,A7M-2A produces no candidates and no promotion labels.
+may_stress_only_preserved,pass,May remains post-selection stress/veto/failure attribution only.

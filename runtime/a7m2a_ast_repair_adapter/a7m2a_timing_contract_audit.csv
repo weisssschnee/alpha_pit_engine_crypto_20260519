@@ -1,0 +1,6 @@
+check,status,detail
+rolling_past_only_required,pass,All repair actions require past-only rolling features.
+same_bar_execution_forbidden,pass,Lag repair forbids same-bar execution assumptions.
+observable_funding_only,pass,Residual repair cannot use future or settlement-after-use funding.
+zero_activity_guard_required,pass,Activity repair rejects zero-exposure artifacts before replay.
+nan_inf_guard_required,pass,Adapter requires NaN/inf checks before candidate selection.

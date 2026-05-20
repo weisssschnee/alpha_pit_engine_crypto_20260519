@@ -1,0 +1,6 @@
+case_id,input_failure,input_formula,repair_action,expected_output,may_used,expected_classification
+case_cost20_smooth,cost20_fail,"Mul(Rank(realized_vol_6),ZScore(quote_volume_mean_12))",smooth_horizon,mutate horizons toward realized_vol_12/24 and volume_mean_24/48,False,repair_candidate_for_future_bakeoff_only
+case_lag_near_bar,lag1_fail,"Mul(Rank(ret_1),ZScore(taker_imbalance_1))",ban_near_bar_terms,reject or replace with lag-stable rolling variant,False,repair_candidate_for_future_bakeoff_only
+case_residual_packaging,residual_fail,"Mul(Rank(ret_12),ZScore(latest_known_funding_rate))",benchmark_packaging_guard,reject as FundingCore/Core4 packaging unless residual evidence survives,False,benchmark_or_reject
+case_zero_activity,activity_coverage_fail,ZScore(spot_basis_missing_core12),reject_or_replace_inactive_field,reject zero-activity artifact before replay,False,reject_static
+case_near_miss,near_miss,"Mul(Rank(mark_index_ratio),ZScore(number_of_trades_mean_24))",targeted_non_may_mutation,mutate non-May cost/lag/residual dimension only,False,repair_candidate_for_future_bakeoff_only
