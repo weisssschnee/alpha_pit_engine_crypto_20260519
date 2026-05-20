@@ -1,0 +1,26 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_shadow_paper_live": false,
+  "date": "2026-05-20",
+  "decision": "A7D_RECONFIRMED_PASS_FOR_RESEARCH_ONLY",
+  "executes_replay": false,
+  "executes_search": false,
+  "retained_warnings": [
+    "exact_match_event_detection_misses_ms_offset_events",
+    "legacy_long_only_funding_model_materially_differs_from_full_signed_model",
+    "wrong_lag_future_24h_diagnostic_much_stronger_than_observable",
+    "observable_fundingcore_fresh_may_negative"
+  ],
+  "source_audit": "reports/CRYPTO_A7D_FUNDING_TIME_SEMANTICS_AUDIT_20260519.md",
+  "source_decision": "PASS_A7D_FUNDING_SEMANTICS_FOR_RESEARCH",
+  "source_manifest": "runtime/a7d_funding_time_semantics_audit/crypto_a7d_manifest_20260519.json",
+  "status": "research_semantics_pass_reconfirmed",
+  "still_blocked": [
+    "FundingCore_alpha_shadow_proof",
+    "Core4_independent_alpha_proof",
+    "A6_dry_shadow_as_alpha_evidence",
+    "paper_live_promotion",
+    "A7M2F_under_current_objective",
+    "A7M3_large_adaptive_search_under_current_objective"
+  ]
+}
