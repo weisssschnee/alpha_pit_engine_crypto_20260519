@@ -1,0 +1,6 @@
+metric,value,threshold,operator,pass
+wave_liquidity_volatility_deep_share,0.1362847222222222,0.15,<=,True
+wave_single_return_corr_cluster_share,0.026909722222222224,0.2,<=,True
+wave_post_may_eligible_deep_survivors_v2,76.0,120.0,>=,False
+wave_post_may_eligible_rate_v2,0.06597222222222222,0.15,>=,False
+negative_control_research_like_v2,2.0,0.0,=,False

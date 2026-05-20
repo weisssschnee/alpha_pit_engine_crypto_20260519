@@ -1,0 +1,8 @@
+metric,value,threshold,operator,pass
+reselected_deep_count,1152.0,1152.0,=,True
+reselected_liquidity_volatility_share,0.14930555555555555,0.15,<=,True
+reselected_post_may_eligible_deep_survivors_v3,78.0,120.0,>=,False
+reselected_post_may_eligible_rate_v3,0.06770833333333333,0.15,>=,False
+strict_negative_control_research_like_v2,2.0,0.0,=,False
+control_contaminated_cells,2.0,0.0,=,False
+stress_gate_v3_active_hour_count_available,0.0,1.0,=,False
