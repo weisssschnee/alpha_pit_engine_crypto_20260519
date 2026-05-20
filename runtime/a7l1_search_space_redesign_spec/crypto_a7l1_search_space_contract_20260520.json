@@ -1,0 +1,331 @@
+{
+  "allowed_labels": [
+    "A7L_RESEARCH_CANDIDATE",
+    "A7L_NEAR_MISS_COST_FAIL",
+    "A7L_NEAR_MISS_LAG_FAIL",
+    "A7L_NEAR_MISS_MAY_STRESS_FAIL",
+    "A7L_RESIDUAL_ONLY_CLUE",
+    "A7L_REJECTED"
+  ],
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "arms": [
+    {
+      "arm": "L0_cost_aware_low_turnover",
+      "blocked_patterns": "high_turnover_near_close_edge;residual_only_hedge;zero_activity",
+      "preflight_min_field_combo_count": 6,
+      "preflight_min_preselection_rate": 0.1,
+      "primary_families": "price;volatility;liquidity",
+      "purpose": "Generate structures whose first objective is 20bps and 1bar-lag survival, not raw recent return.",
+      "ranking_terms": "raw_validation_recent;cost20_survival;lag1_survival;turnover_cost_penalty",
+      "required_horizons": "12;24;48"
+    },
+    {
+      "arm": "L1_residual_orthogonal_basis",
+      "blocked_patterns": "spot_perp_basis_without_core6_lane;funding_beta_wrapper;basis_zero_activity",
+      "preflight_min_field_combo_count": 8,
+      "preflight_min_preselection_rate": 0.1,
+      "primary_families": "basis;price;volatility;liquidity",
+      "purpose": "Explore basis/premium expressions with mandatory residual value beyond FundingCore/Core4.",
+      "ranking_terms": "residual_vs_fundingcore;residual_vs_core4;raw_validation_recent;cost20_survival",
+      "required_horizons": "12;24;48"
+    },
+    {
+      "arm": "L2_cross_symbol_relative",
+      "blocked_patterns": "single_symbol_proxy;future_universe;current_constituent_survivorship",
+      "preflight_min_field_combo_count": 8,
+      "preflight_min_preselection_rate": 0.08,
+      "primary_families": "cross_symbol;price;volatility;liquidity;basis",
+      "purpose": "Test cross-symbol relative strength, dispersion, and crowding instead of single-field directional carry.",
+      "ranking_terms": "cross_sectional_stability;residual_vs_fundingcore;symbol_loo_stability;cost20_survival",
+      "required_horizons": "6;12;24;48"
+    },
+    {
+      "arm": "L3_regime_conditional_no_may",
+      "blocked_patterns": "may_tuned_gate;may_selected_threshold;too_low_active_ratio",
+      "preflight_min_field_combo_count": 6,
+      "preflight_min_preselection_rate": 0.08,
+      "primary_families": "regime;volatility;liquidity;basis;price",
+      "purpose": "Generate validation/recent-defined regime-conditioned candidates without using May for tuning.",
+      "ranking_terms": "validation_regime_robustness;recent_regime_robustness;raw_validation_recent;residual_survival",
+      "required_horizons": "12;24;48"
+    },
+    {
+      "arm": "L4_microstructure_lite_lag_stable",
+      "blocked_patterns": "taker_standalone;lag_fragile_flow;May_only_rescue",
+      "preflight_min_field_combo_count": 8,
+      "preflight_min_preselection_rate": 0.08,
+      "primary_families": "flow;liquidity;volatility;price",
+      "purpose": "Retest flow/volume/volatility interactions only when they survive 1bar lag and cost stress.",
+      "ranking_terms": "lag1_survival;cost20_survival;top_loss_dispersion;raw_validation_recent",
+      "required_horizons": "6;12;24"
+    },
+    {
+      "arm": "L5_placebo_random_control",
+      "blocked_patterns": "any_research_candidate_is_blocker",
+      "preflight_min_field_combo_count": 4,
+      "preflight_min_preselection_rate": 0.0,
+      "primary_families": "placebo",
+      "purpose": "Negative control arm that must not produce comparable research candidates.",
+      "ranking_terms": "none",
+      "required_horizons": "12;24;48"
+    }
+  ],
+  "authorizes_a7l1b_implementation_preflight": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_budget_ladder_level1": false,
+  "authorizes_shadow_paper_live": false,
+  "blocked_labels": [
+    "ALPHA_PROOF",
+    "SHADOW_READY",
+    "PAPER_READY",
+    "LIVE_READY",
+    "PRODUCTION_READY"
+  ],
+  "budget_ladder": [
+    {
+      "advance_condition": "not_applicable",
+      "generated_total": 1000,
+      "hard_stop_if": "A7L0 blockers remain unresolved",
+      "level": "L0_observed",
+      "status": "completed_hold"
+    },
+    {
+      "advance_condition": "A7L1B implementation preflight passes and level stop rules pass",
+      "generated_total": 4000,
+      "hard_stop_if": "unique_expr_ratio<0.90 or preselection_rate<0.10 or placebo_research>0",
+      "level": "L1_small_ladder",
+      "status": "not_authorized_until_A7L1B"
+    },
+    {
+      "advance_condition": "L1 shows diverse near-miss pool and improving non-May attrition",
+      "generated_total": 16000,
+      "hard_stop_if": "cluster diversity stalls or selected May severe fail remains homogeneous",
+      "level": "L2_medium_ladder",
+      "status": "not_authorized"
+    },
+    {
+      "advance_condition": "L2 produces non-placebo research candidates or diverse near-miss families",
+      "generated_total": 64000,
+      "hard_stop_if": "L2 repeats A7K failure modes",
+      "level": "L3_large_ladder",
+      "status": "not_authorized"
+    }
+  ],
+  "contract_id": "CRYPTO_A7L_SEARCH_SPACE_REDESIGN_SPEC_V1",
+  "decision": "PASS_A7L1_SEARCH_SPACE_REDESIGN_SPEC",
+  "evaluator_scope": {
+    "currently_safe_grammar": [
+      "Rank",
+      "ZScore",
+      "Mul",
+      "nested_Mul"
+    ],
+    "extension_required_checks": [
+      "feature_time_before_execution",
+      "rolling_window_past_only",
+      "same_bar_execution_forbidden",
+      "cost20_and_lag1_metrics_available",
+      "residual_metrics_available"
+    ],
+    "extension_track_not_authorized_until_preflight": [
+      "Add",
+      "Sub",
+      "Div",
+      "SignedPower",
+      "Clip",
+      "TSMean",
+      "TSStd",
+      "TSRank",
+      "Delta",
+      "Decay",
+      "Neutralize"
+    ]
+  },
+  "executes_replay": false,
+  "executes_search": false,
+  "feature_policy": {
+    "diagnostic_or_future_only": [
+      "positioning_recent_only_open_interest",
+      "positioning_recent_only_long_short",
+      "positioning_recent_only_taker_ratio",
+      "liquidation_data_not_present",
+      "orderbook_l2_not_present",
+      "cross_exchange_flow_not_present"
+    ],
+    "frequency_policy": {
+      "allowed_after_preflight": [
+        "3h",
+        "6h",
+        "12h",
+        "24h",
+        "48h labels from 1h panel"
+      ],
+      "not_authorized_yet": [
+        "5m_search",
+        "15m_search",
+        "multi_frequency_evidence_stacking"
+      ],
+      "primary": "1h"
+    },
+    "historical_allowed": [
+      "price",
+      "volatility",
+      "liquidity",
+      "flow_from_trade_bars",
+      "basis",
+      "funding_observable_only",
+      "cross_symbol_relative",
+      "validation_recent_regime_state"
+    ]
+  },
+  "generated_at": "2026-05-20T00:12:30Z",
+  "level1_stop_rules": {
+    "field_family_combo_min": 24,
+    "near_miss_family_min": 3,
+    "near_miss_nonplacebo_min": 10,
+    "non_flow_or_taker_near_miss_min": 1,
+    "non_may_preselection_pass_rate_min": 0.1,
+    "operator_combo_min": 12,
+    "placebo_research_candidates_max": 0,
+    "return_corr_cluster_growth_required": true,
+    "same_family_shortlist_share_max": 0.25,
+    "selected_may_severe_fail_share_warn": 0.75,
+    "unique_expr_ratio_min": 0.9
+  },
+  "mandatory_preflight_before_level1": [
+    {
+      "check_id": "may_exclusion_mechanical",
+      "description": "May columns must be absent from rank score, reward, threshold, weight, selected_for_replay, and generator tuning.",
+      "required": true
+    },
+    {
+      "check_id": "coverage_activity",
+      "description": "Validation and recent windows must have sufficient observations and mean gross exposure before candidate selection.",
+      "required": true
+    },
+    {
+      "check_id": "cost_lag_static_screen",
+      "description": "20bps and 1bar-lag validation/recent screens must be measurable before budget ladder execution.",
+      "required": true
+    },
+    {
+      "check_id": "residual_baseline_screen",
+      "description": "Candidate scoring must report residual vs FundingCore/Core4 and beta penalties.",
+      "required": true
+    },
+    {
+      "check_id": "family_diversity_cap",
+      "description": "No family may exceed 25% of shortlist unless explicitly designated as placebo diagnostics.",
+      "required": true
+    },
+    {
+      "check_id": "evaluator_extension_gate",
+      "description": "Any new operator beyond Rank/ZScore/Mul/nested Mul requires separate evaluator timing and leakage preflight.",
+      "required": true
+    },
+    {
+      "check_id": "return_corr_cluster_dedup",
+      "description": "Selected candidates must be clustered/deduped before research-candidate claims.",
+      "required": true
+    },
+    {
+      "check_id": "positioning_recent_only_policy",
+      "description": "OI/long-short/taker positioning recent-only fields are prohibited from 2024-2026 historical proof until enough forward history exists.",
+      "required": true
+    }
+  ],
+  "may_policy": {
+    "allowed_uses": [
+      "post_selection_stress_label",
+      "final_veto_label",
+      "failure_attribution"
+    ],
+    "forbidden_uses": [
+      "ranking",
+      "reward_score",
+      "threshold_tuning",
+      "weight_selection",
+      "candidate_selection",
+      "generator_parameter_tuning",
+      "generator_family_design",
+      "budget_ladder_advance_decision_except_as_stress_summary"
+    ],
+    "status": "known_adversarial_stress_set"
+  },
+  "next_step": "A7L-1B implementation preflight only; do not run level1 budget ladder yet.",
+  "objective": "Convert A7L-0's negative coverage result into a measurable broader search-space contract. The contract blocks same-generator blind budget expansion while preserving broader crypto formula search as an unfalsified route.",
+  "source_context": {
+    "a7l0_authorizes_budget_ladder_level1": false,
+    "a7l0_blockers": [
+      "a7k_preselection_pass_rate_below_10pct",
+      "a7k_zero_research_candidates",
+      "a7k_selected_candidates_may_failure_too_homogeneous"
+    ],
+    "a7l0_decision": "HOLD_A7L0_BUDGET_LADDER_NOT_AUTHORIZED",
+    "a7l0_manifest_path": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l0_search_space_coverage_audit\\crypto_a7l0_manifest_20260520.json",
+    "a7l0_summary_path": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l0_search_space_coverage_audit\\a7l0_search_space_coverage_summary.csv",
+    "coverage_summary": [
+      {
+        "arm_count": "4",
+        "family_count": "4",
+        "field_family_combo_count": "14",
+        "generated": "1000",
+        "horizon_count": "2",
+        "max_formula_depth": "2",
+        "median_formula_depth": "2.0",
+        "operator_combo_count": "15",
+        "preselection_pass_count": "",
+        "preselection_pass_rate": "",
+        "selected_count": "256",
+        "selected_rate": "0.256",
+        "source_run": "A7I1B_original_generator",
+        "top_family_share": "0.25",
+        "top_field_family_combo_share": "0.156",
+        "top_operator_combo_share": "0.233",
+        "unique_expr_hash": "723",
+        "unique_expr_ratio": "0.723"
+      },
+      {
+        "arm_count": "4",
+        "family_count": "4",
+        "field_family_combo_count": "14",
+        "generated": "1000",
+        "horizon_count": "2",
+        "max_formula_depth": "2",
+        "median_formula_depth": "2.0",
+        "operator_combo_count": "15",
+        "preselection_pass_count": "11.0",
+        "preselection_pass_rate": "0.011",
+        "selected_count": "256",
+        "selected_rate": "0.256",
+        "source_run": "A7J2_reranked_original_pool",
+        "top_family_share": "0.25",
+        "top_field_family_combo_share": "0.156",
+        "top_operator_combo_share": "0.233",
+        "unique_expr_hash": "723",
+        "unique_expr_ratio": "0.723"
+      },
+      {
+        "arm_count": "4",
+        "family_count": "4",
+        "field_family_combo_count": "15",
+        "generated": "1000",
+        "horizon_count": "2",
+        "max_formula_depth": "3",
+        "median_formula_depth": "2.0",
+        "operator_combo_count": "8",
+        "preselection_pass_count": "64.0",
+        "preselection_pass_rate": "0.064",
+        "selected_count": "64",
+        "selected_rate": "0.064",
+        "source_run": "A7K2_new_space",
+        "top_family_share": "0.25",
+        "top_field_family_combo_share": "0.104",
+        "top_operator_combo_share": "0.606",
+        "unique_expr_hash": "1000",
+        "unique_expr_ratio": "1.0"
+      }
+    ]
+  },
+  "stable_contract_hash": "2c7d20285d9064ee1be2099136a94b3cff52d1119caf55af38f22b55995e5c2a"
+}

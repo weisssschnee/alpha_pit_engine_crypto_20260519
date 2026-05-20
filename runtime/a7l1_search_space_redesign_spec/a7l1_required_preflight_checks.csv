@@ -1,0 +1,9 @@
+check_id,required,description
+may_exclusion_mechanical,True,"May columns must be absent from rank score, reward, threshold, weight, selected_for_replay, and generator tuning."
+coverage_activity,True,Validation and recent windows must have sufficient observations and mean gross exposure before candidate selection.
+cost_lag_static_screen,True,20bps and 1bar-lag validation/recent screens must be measurable before budget ladder execution.
+residual_baseline_screen,True,Candidate scoring must report residual vs FundingCore/Core4 and beta penalties.
+family_diversity_cap,True,No family may exceed 25% of shortlist unless explicitly designated as placebo diagnostics.
+evaluator_extension_gate,True,Any new operator beyond Rank/ZScore/Mul/nested Mul requires separate evaluator timing and leakage preflight.
+return_corr_cluster_dedup,True,Selected candidates must be clustered/deduped before research-candidate claims.
+positioning_recent_only_policy,True,OI/long-short/taker positioning recent-only fields are prohibited from 2024-2026 historical proof until enough forward history exists.

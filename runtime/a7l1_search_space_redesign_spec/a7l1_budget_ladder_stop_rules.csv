@@ -1,0 +1,12 @@
+rule,value
+unique_expr_ratio_min,0.9
+field_family_combo_min,24
+operator_combo_min,12
+non_may_preselection_pass_rate_min,0.1
+placebo_research_candidates_max,0
+same_family_shortlist_share_max,0.25
+selected_may_severe_fail_share_warn,0.75
+near_miss_nonplacebo_min,10
+near_miss_family_min,3
+non_flow_or_taker_near_miss_min,1
+return_corr_cluster_growth_required,True
