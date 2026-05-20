@@ -1,0 +1,7 @@
+engine,rc_000,rc_001,rc_002,rc_003,rc_004,rc_005,rc_006,rc_007,rc_008,rc_009,rc_010
+E0_current_A7L_manual_generator,38,8,14,4,0,0,0,0,0,0,0
+E1_FormulaGenV2_crypto_adapter,44,3,4,9,2,0,0,0,0,0,0
+E2_typed_AST_sampler_crypto_adapter,49,4,6,5,0,0,0,0,0,0,0
+E3_AST_failure_aware_repair,24,0,12,24,0,4,0,0,0,0,0
+E4_CEM_adaptive_grammar_crypto,29,0,7,5,0,14,1,1,1,2,1
+E5_surrogate_prioritized_sampler,61,0,0,2,1,0,0,0,0,0,0

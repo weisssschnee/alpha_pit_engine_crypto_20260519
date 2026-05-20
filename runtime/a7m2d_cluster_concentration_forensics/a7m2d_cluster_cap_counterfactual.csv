@@ -1,0 +1,5 @@
+cap_share,max_per_cluster,positive_deep_before,positive_deep_after_cap_only,removed_by_cap,top_cluster_after_cap_share,engine_count_after_cap,family_count_after_cap,field_family_count_after_cap,median_rank_score_after_cap
+0.35,132,379,266,113,0.49624060150375937,6,6,3,13.9992212027613
+0.25,94,379,228,151,0.41228070175438597,6,6,3,14.170468468230336
+0.2,75,379,209,170,0.3588516746411483,6,6,3,14.496088657419294
+0.15,56,379,190,189,0.29473684210526313,6,6,3,14.170468468230336
