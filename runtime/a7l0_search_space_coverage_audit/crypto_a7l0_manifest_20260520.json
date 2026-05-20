@@ -1,0 +1,39 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_alpha_proof": false,
+  "authorizes_budget_ladder_level1": false,
+  "blockers": [
+    "a7k_preselection_pass_rate_below_10pct",
+    "a7k_zero_research_candidates",
+    "a7k_selected_candidates_may_failure_too_homogeneous"
+  ],
+  "decision": "HOLD_A7L0_BUDGET_LADDER_NOT_AUTHORIZED",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-20T00:04:37Z",
+  "inputs": {
+    "A7I1B_original_generator": {
+      "manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_manifest_20260519.json",
+      "scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_candidate_scoreboard.csv",
+      "selected": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_rejected_candidate_reasons.csv"
+    },
+    "A7J2_reranked_original_pool": {
+      "manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7j2_same_budget_redesigned_smoke\\crypto_a7j2_manifest_20260520.json",
+      "scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7j2_same_budget_redesigned_smoke\\a7j2_candidate_scoreboard.csv",
+      "selected": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7j2_same_budget_redesigned_smoke\\a7j2_selected_candidates.csv"
+    },
+    "A7K2_new_space": {
+      "manifest": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k2_new_space_same_budget_smoke\\crypto_a7k2_manifest_20260520.json",
+      "scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k2_new_space_same_budget_smoke\\a7k2_candidate_scoreboard.csv",
+      "selected": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k2_new_space_same_budget_smoke\\a7k2_selected_candidates.csv"
+    }
+  },
+  "outputs": {
+    "coverage_summary": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l0_search_space_coverage_audit\\a7l0_search_space_coverage_summary.csv",
+    "distribution_by_dimension": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l0_search_space_coverage_audit\\a7l0_distribution_by_dimension.csv",
+    "gate_attrition": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l0_search_space_coverage_audit\\a7l0_gate_attrition.csv",
+    "near_miss_audit": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l0_search_space_coverage_audit\\a7l0_near_miss_audit.csv",
+    "rejection_reason_summary": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l0_search_space_coverage_audit\\a7l0_rejection_reason_summary.csv",
+    "unified_candidate_coverage_table": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l0_search_space_coverage_audit\\a7l0_unified_candidate_coverage_table.csv"
+  }
+}
