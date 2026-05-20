@@ -1,0 +1,5 @@
+source_run,rows,selected_for_replay,research_candidates,near_miss,clue,may_stress_fail,policy_training_eligible
+A7I1B_original_generator,1000,256,1,32,0,230,750
+A7J2_reranked_original_pool,1000,256,0,29,140,798,750
+A7K2_new_space,1000,64,0,64,64,758,750
+A7L1B_dry_preflight,417,0,0,0,0,0,345

@@ -1,0 +1,70 @@
+{
+  "alpha_proof_status": "NOT_ALPHA_PROOF",
+  "authorizes_a7m1_surrogate_preflight": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "decision": "PASS_A7M0_FAILURE_LABELED_DATASET_BUILD",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-20T03:38:17Z",
+  "inputs": {
+    "A7I1B_original_generator": {
+      "research_shortlist": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_research_candidate_shortlist.csv",
+      "scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_candidate_scoreboard.csv",
+      "selected_or_rejected": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7i1b_matched_budget_smoke\\a7i1_rejected_candidate_reasons.csv"
+    },
+    "A7J2_reranked_original_pool": {
+      "research_shortlist": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7j2_same_budget_redesigned_smoke\\a7j2_research_candidate_shortlist.csv",
+      "scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7j2_same_budget_redesigned_smoke\\a7j2_candidate_scoreboard.csv",
+      "selected": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7j2_same_budget_redesigned_smoke\\a7j2_selected_candidates.csv",
+      "selected_or_rejected": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7j2_same_budget_redesigned_smoke\\a7j2_rejected_candidate_reasons.csv"
+    },
+    "A7K2_new_space": {
+      "research_shortlist": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k2_new_space_same_budget_smoke\\a7k2_research_candidate_shortlist.csv",
+      "scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k2_new_space_same_budget_smoke\\a7k2_candidate_scoreboard.csv",
+      "selected": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k2_new_space_same_budget_smoke\\a7k2_selected_candidates.csv",
+      "selected_or_rejected": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k2_new_space_same_budget_smoke\\a7k2_rejected_candidate_reasons.csv"
+    },
+    "A7L1B_dry_preflight": {
+      "scoreboard": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7l1b_implementation_preflight\\a7l1b_dry_candidate_manifest.csv"
+    }
+  },
+  "may_policy": {
+    "may_allowed_use": "stress_label_and_failure_attribution_only",
+    "may_labels_included": true,
+    "may_policy_training_allowed": false
+  },
+  "outputs": {
+    "dataset": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m0_failure_labeled_search_dataset\\crypto_a7m0_failure_labeled_candidate_dataset.csv",
+    "family_failure_summary": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m0_failure_labeled_search_dataset\\a7m0_family_failure_summary.csv",
+    "label_summary": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m0_failure_labeled_search_dataset\\a7m0_label_summary.csv",
+    "label_taxonomy": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m0_failure_labeled_search_dataset\\a7m0_label_taxonomy.csv",
+    "source_summary": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7m0_failure_labeled_search_dataset\\a7m0_source_summary.csv"
+  },
+  "row_count": 3417,
+  "source_counts": [
+    {
+      "rows": 1000,
+      "source_run": "A7I1B_original_generator",
+      "status": "loaded"
+    },
+    {
+      "rows": 1000,
+      "source_run": "A7J2_reranked_original_pool",
+      "status": "loaded"
+    },
+    {
+      "rows": 1000,
+      "source_run": "A7K2_new_space",
+      "status": "loaded"
+    },
+    {
+      "rows": 417,
+      "source_run": "A7L1B_dry_preflight",
+      "status": "loaded"
+    }
+  ],
+  "stable_manifest_hash": "541edee15e35d6eebda2726f68f0131ae12dd7fcbea888c0368d62f11cfa22c8",
+  "trains_surrogate": false,
+  "unique_candidate_keys": 3417
+}
