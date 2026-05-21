@@ -1,0 +1,54 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_new_search": false,
+  "authorizes_shadow_paper_live": false,
+  "best_horizon_hours": 24,
+  "best_post_may_eligible_rate": 0.06770833333333333,
+  "blockers": [
+    "post_may_eligible_rate_below_15pct_all_horizons"
+  ],
+  "cost_bps": [
+    10,
+    20,
+    30
+  ],
+  "decision": "HOLD_A7R1_HORIZON_ONLY_INSUFFICIENT",
+  "evaluated_rows": 1344,
+  "executes_replay": true,
+  "executes_search": false,
+  "execution_lags": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "generated_at": "2026-05-21T00:44:09Z",
+  "horizons": [
+    4,
+    8,
+    12,
+    24,
+    48,
+    72,
+    96
+  ],
+  "input_deep_candidates": 192,
+  "may_policy": {
+    "allowed": [
+      "post_selection_stress_label",
+      "post_selection_veto",
+      "failure_attribution"
+    ],
+    "forbidden": [
+      "ranking",
+      "threshold_tuning",
+      "horizon_selection",
+      "reward",
+      "generation",
+      "mutation",
+      "surrogate_target"
+    ]
+  },
+  "source_checkpoint": "A7P3_W2PILOT",
+  "top_decile_max_post_may_eligible_rate": 0.15
+}

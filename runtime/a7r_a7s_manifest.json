@@ -1,0 +1,17 @@
+{
+  "authorizes": {
+    "alpha_proof": false,
+    "new_search": false,
+    "shadow_paper_live": false
+  },
+  "decision": "HOLD_A7R1_HORIZON_ONLY_INSUFFICIENT",
+  "executes_replay": true,
+  "executes_search": false,
+  "generated_at": "2026-05-21T00:44:09Z",
+  "outputs": {
+    "a7r0_report": "reports/CRYPTO_A7R0_HORIZON_REFRAMING_CONTRACT_20260521.md",
+    "a7r1_report": "reports/CRYPTO_A7R1_HORIZON_REFRAMING_SMALL_AUDIT_20260521.md",
+    "a7s0_report": "reports/CRYPTO_A7S0_DATA_HORIZON_CONTRACT_SKELETON_20260521.md"
+  },
+  "source_checkpoint": "A7P3_W2PILOT"
+}

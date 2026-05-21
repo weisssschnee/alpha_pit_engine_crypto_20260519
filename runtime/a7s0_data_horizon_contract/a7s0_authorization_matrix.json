@@ -1,0 +1,14 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_alpha_search": false,
+  "authorizes_data_download": false,
+  "decision": "PASS_A7S0_DATA_HORIZON_CONTRACT_SKELETON",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-21T00:44:09Z",
+  "next_required": [
+    "field_semantics_review",
+    "source_cost_and_access_review",
+    "PIT_timestamp_contract_completion"
+  ]
+}

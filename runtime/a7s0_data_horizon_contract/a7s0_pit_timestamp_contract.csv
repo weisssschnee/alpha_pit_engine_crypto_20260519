@@ -1,0 +1,7 @@
+field,required,description
+observable_time,True,Timestamp when the value is available for signal generation.
+event_time,True,Exchange or vendor event timestamp.
+publication_delay,True,Delay between event and observability.
+symbol_coverage,True,Per-symbol availability and missingness.
+aggregation_lag,True,Lag added before joining to 1h/4h/24h panels.
+survivorship_policy,True,"Handling of listing, delisting, and inactive markets."

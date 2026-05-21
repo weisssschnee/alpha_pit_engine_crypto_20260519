@@ -1,0 +1,5 @@
+execution_lag_bars,status,notes
+0,authorized_for_A7R1_diagnostic,Lag is applied by shifting the signal forward by lag bars before position construction.
+1,authorized_for_A7R1_diagnostic,Lag is applied by shifting the signal forward by lag bars before position construction.
+2,authorized_for_A7R1_diagnostic,Lag is applied by shifting the signal forward by lag bars before position construction.
+3,authorized_for_A7R1_diagnostic,Lag is applied by shifting the signal forward by lag bars before position construction.
