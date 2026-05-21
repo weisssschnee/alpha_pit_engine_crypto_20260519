@@ -1,0 +1,9 @@
+source_id,path,exists,file_size_bytes,manifest_rows,status_counts,data_type_count,symbol_count,row_count_sum,date_range_min,date_range_max
+silver,G:\AlphaFactory_CryptoData\manifests\crypto_silver_manifest_20260519.csv,True,1914342,4104,"{""written"": 4104}",11,12,72235710,2024-01,2026-04-20T02:26:01.046237+00:00_2026-05-19T02:26:01.046237+00:00
+funding_rate,G:\AlphaFactory_CryptoData\manifests\fundingRate_core12_202401_current_manifest.csv,True,3822,12,"{""downloaded"": 12}",1,12,31296,2024-01-01_current,2024-01-01_current
+positioning_recent29d,G:\AlphaFactory_CryptoData\manifests\positioning_core12_recent29d_5m_manifest.csv,True,25770,60,"{""downloaded"": 60}",5,12,500928,2026-04-20T02:26:01.046237+00:00_2026-05-19T02:26:01.046237+00:00,2026-04-20T02:26:01.046237+00:00_2026-05-19T02:26:01.046237+00:00
+positioning_recent30d,G:\AlphaFactory_CryptoData\manifests\positioning_core12_recent30d_5m_manifest.csv,True,23310,60,"{""error"": 60}",5,12,0,2026-04-19_2026-05-19,2026-04-19_2026-05-19
+positioning_forward_20260519,G:\AlphaFactory_CryptoData\manifests\positioning_forward_5m_2026-05-19_manifest.csv,True,27462,60,"{""downloaded"": 60}",5,12,9192,2026-05-19T03:50:00Z,2026-05-19T16:35:08Z
+positioning_forward_20260520,G:\AlphaFactory_CryptoData\manifests\positioning_forward_5m_2026-05-20_manifest.csv,True,27479,60,"{""downloaded"": 59, ""error"": 1}",5,12,17062,2026-05-19T16:30:00Z,2026-05-20T16:35:08Z
+microstructure_pilot,G:\AlphaFactory_CryptoData\manifests\microstructure_pilot_20260519_manifest.csv,True,745,1,"{""downloaded"": 1}",1,1,8601508,2026-04,2026-04
+spot_core6,G:\AlphaFactory_CryptoData\manifests\spot_core6_202401_202604_manifest.csv,True,242612,672,"{""downloaded"": 672}",1,6,8950818,2024-01,2026-04

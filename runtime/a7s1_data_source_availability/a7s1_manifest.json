@@ -1,0 +1,16 @@
+{
+  "data_root": "G:\\AlphaFactory_CryptoData",
+  "decision": "HOLD_A7S1_NEW_DATA_NOT_READY_FOR_ALPHA_SEARCH",
+  "generated_at": "2026-05-21T01:05:38Z",
+  "outputs": [
+    "runtime\\a7s1_data_source_availability\\a7s1_existing_inventory.csv",
+    "runtime\\a7s1_data_source_availability\\a7s1_panel_feature_coverage.csv",
+    "runtime\\a7s1_data_source_availability\\a7s1_candidate_source_contract.csv",
+    "runtime\\a7s1_data_source_availability\\a7s1_pit_readiness_matrix.csv",
+    "runtime\\a7s1_data_source_availability\\a7s1_positioning_manifest_audit.csv",
+    "runtime\\a7s1_data_source_availability\\a7s1_microstructure_manifest_audit.csv",
+    "runtime\\a7s1_data_source_availability\\a7s1_authorization_matrix.json",
+    "reports/CRYPTO_A7S1_DATA_SOURCE_AVAILABILITY_AUDIT_20260521.md"
+  ],
+  "script": "scripts\\crypto_a7s1_data_source_availability_audit.py"
+}

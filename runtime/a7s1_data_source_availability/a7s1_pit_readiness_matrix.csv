@@ -1,0 +1,10 @@
+source,local_status,pit_readiness,alpha_search_authorization,data_download_authorization,forward_observation_authorization,blocking_reason
+futures_ohlcv_mark_index_premium,available_long_history,usable_existing,not_authorized,not_authorized,authorized_if_append_only,No new alpha authorization; already evaluated under A7P/A7R current-space failure.
+funding_rate,available_long_history,usable_existing,not_authorized,not_authorized,authorized_if_append_only,No new alpha authorization; already evaluated under A7P/A7R current-space failure.
+spot_perp_basis,available_partial,usable_with_mask_only,not_authorized,not_authorized,not_authorized,Core6/availability mask required; not full core12.
+open_interest,recent_and_forward_only,not_historical_proof,not_authorized,not_authorized,authorized_if_append_only,Can support forward observation; cannot backfill 2024-2026 proof.
+long_short_positioning,recent_and_forward_only,not_historical_proof,not_authorized,not_authorized,authorized_if_append_only,Can support forward observation; cannot backfill 2024-2026 proof.
+aggTrades_microstructure,single_symbol_month_pilot_only,feasibility_only,not_authorized,not_authorized,not_authorized,Parser/storage feasibility; not research proof.
+liquidation_events_or_volume,not_found_local,contract_required,not_authorized,not_authorized,not_authorized,"Need source, PIT, coverage, and cost contract before collection/search."
+orderbook_depth_spread_imbalance,not_found_local,contract_required,not_authorized,not_authorized,not_authorized,"Need source, PIT, coverage, and cost contract before collection/search."
+cross_exchange_basis_or_funding,not_found_local,contract_required,not_authorized,not_authorized,not_authorized,"Need source, PIT, coverage, and cost contract before collection/search."

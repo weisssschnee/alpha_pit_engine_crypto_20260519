@@ -1,0 +1,4 @@
+panel_id,path,exists,rows,columns,symbol_count,min_timestamp,max_timestamp,has_positioning_columns,has_open_interest,has_long_short,has_liquidation,has_orderbook,has_cross_exchange,duplicate_key_count,positioning_recent_excluded,checksum_ok_rows,spot_close_missing_rate,spot_perp_basis_missing_rate
+core12_1h,G:\AlphaFactory_CryptoData\gold\panels\crypto_core12_1h_v1.parquet,True,250656,88,12,2024-01-01T00:00:00+00:00,2026-04-30T23:00:00+00:00,True,False,False,False,False,False,0,True,245088,0.5,0.5
+core12_1h_forward_updated,G:\AlphaFactory_CryptoData\gold\panels\crypto_core12_1h_v1_forward_updated.parquet,True,250860,88,12,2024-01-01T00:00:00+00:00,2026-04-30T23:00:00+00:00,True,False,False,False,False,False,0,True,245088,0.5,0.5
+core12_5m,G:\AlphaFactory_CryptoData\gold\panels\crypto_core12_5m_v1.parquet,True,2941056,88,12,2024-01-01T00:00:00+00:00,2026-04-30T23:55:00+00:00,True,False,False,False,False,False,0,True,2941056,0.5,0.5

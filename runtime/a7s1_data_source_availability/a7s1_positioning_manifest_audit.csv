@@ -1,0 +1,26 @@
+source_id,endpoint,exists,manifest_rows,symbols,status_counts,row_count_sum,min_start,max_end,date_range_sample,pit_use_status,future_timestamp_warning
+positioning_recent29d,globalLongShortAccountRatio,True,12,12,"{""downloaded"": 12}",100224,,,2026-04-20T02:26:01.046237+00:00_2026-05-19T02:26:01.046237+00:00,recent_forward_only_not_historical_proof,
+positioning_recent29d,openInterestHist,True,12,12,"{""downloaded"": 12}",100224,,,2026-04-20T02:26:01.046237+00:00_2026-05-19T02:26:01.046237+00:00,recent_forward_only_not_historical_proof,
+positioning_recent29d,takerlongshortRatio,True,12,12,"{""downloaded"": 12}",100032,,,2026-04-20T02:26:01.046237+00:00_2026-05-19T02:26:01.046237+00:00,recent_forward_only_not_historical_proof,
+positioning_recent29d,topLongShortAccountRatio,True,12,12,"{""downloaded"": 12}",100224,,,2026-04-20T02:26:01.046237+00:00_2026-05-19T02:26:01.046237+00:00,recent_forward_only_not_historical_proof,
+positioning_recent29d,topLongShortPositionRatio,True,12,12,"{""downloaded"": 12}",100224,,,2026-04-20T02:26:01.046237+00:00_2026-05-19T02:26:01.046237+00:00,recent_forward_only_not_historical_proof,
+positioning_recent30d,globalLongShortAccountRatio,True,12,12,"{""error"": 12}",0,,,2026-04-19_2026-05-19,recent_forward_only_not_historical_proof,
+positioning_recent30d,openInterestHist,True,12,12,"{""error"": 12}",0,,,2026-04-19_2026-05-19,recent_forward_only_not_historical_proof,
+positioning_recent30d,takerlongshortRatio,True,12,12,"{""error"": 12}",0,,,2026-04-19_2026-05-19,recent_forward_only_not_historical_proof,
+positioning_recent30d,topLongShortAccountRatio,True,12,12,"{""error"": 12}",0,,,2026-04-19_2026-05-19,recent_forward_only_not_historical_proof,
+positioning_recent30d,topLongShortPositionRatio,True,12,12,"{""error"": 12}",0,,,2026-04-19_2026-05-19,recent_forward_only_not_historical_proof,
+positioning_forward_20260519,globalLongShortAccountRatio,True,12,12,"{""downloaded"": 12}",1836,2026-05-19T03:55:00Z,2026-05-19T16:35:08Z,,recent_forward_only_not_historical_proof,
+positioning_forward_20260519,openInterestHist,True,12,12,"{""downloaded"": 12}",1836,2026-05-19T03:55:00Z,2026-05-19T16:35:08Z,,recent_forward_only_not_historical_proof,
+positioning_forward_20260519,takerlongshortRatio,True,12,12,"{""downloaded"": 12}",1848,2026-05-19T03:50:00Z,2026-05-19T16:35:08Z,,recent_forward_only_not_historical_proof,
+positioning_forward_20260519,topLongShortAccountRatio,True,12,12,"{""downloaded"": 12}",1836,2026-05-19T03:55:00Z,2026-05-19T16:35:08Z,,recent_forward_only_not_historical_proof,
+positioning_forward_20260519,topLongShortPositionRatio,True,12,12,"{""downloaded"": 12}",1836,2026-05-19T03:55:00Z,2026-05-19T16:35:08Z,,recent_forward_only_not_historical_proof,
+positioning_forward_20260520,globalLongShortAccountRatio,True,12,12,"{""downloaded"": 12}",3468,2026-05-19T16:35:00Z,2026-05-20T16:35:08Z,,recent_forward_only_not_historical_proof,
+positioning_forward_20260520,openInterestHist,True,12,12,"{""downloaded"": 12}",3468,2026-05-19T16:35:00Z,2026-05-20T16:35:08Z,,recent_forward_only_not_historical_proof,
+positioning_forward_20260520,takerlongshortRatio,True,12,12,"{""downloaded"": 11, ""error"": 1}",3190,2026-05-19T16:30:00Z,2026-05-20T16:35:08Z,,recent_forward_only_not_historical_proof,
+positioning_forward_20260520,topLongShortAccountRatio,True,12,12,"{""downloaded"": 12}",3468,2026-05-19T16:35:00Z,2026-05-20T16:35:08Z,,recent_forward_only_not_historical_proof,
+positioning_forward_20260520,topLongShortPositionRatio,True,12,12,"{""downloaded"": 12}",3468,2026-05-19T16:35:00Z,2026-05-20T16:35:08Z,,recent_forward_only_not_historical_proof,
+positioning_forward_state,globalLongShortAccountRatio,True,12,12,{},,,2026-05-20T16:35:00Z,,state_file_forward_only,False
+positioning_forward_state,openInterestHist,True,12,12,{},,,2026-05-20T16:35:00Z,,state_file_forward_only,False
+positioning_forward_state,takerlongshortRatio,True,12,12,{},,,2026-05-20T16:30:00Z,,state_file_forward_only,False
+positioning_forward_state,topLongShortAccountRatio,True,12,12,{},,,2026-05-20T16:35:00Z,,state_file_forward_only,False
+positioning_forward_state,topLongShortPositionRatio,True,12,12,{},,,2026-05-20T16:35:00Z,,state_file_forward_only,False

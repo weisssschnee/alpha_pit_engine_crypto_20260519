@@ -1,0 +1,2 @@
+source,exists,symbol_count,symbols,date_ranges,data_types,row_count_sum,checksum_status_counts,research_status
+microstructure_pilot,True,1,SOLUSDT,2026-04,aggTrades,8601508,"{""ok"": 1}",parser_storage_feasibility_only_not_core12_alpha_proof

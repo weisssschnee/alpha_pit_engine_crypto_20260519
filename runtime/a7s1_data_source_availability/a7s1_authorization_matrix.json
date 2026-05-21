@@ -1,0 +1,27 @@
+{
+  "authorizes_a7s2_field_semantics_review": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_alpha_search": false,
+  "authorizes_data_download": false,
+  "authorizes_forward_observation_contract": true,
+  "authorizes_shadow_paper_live": false,
+  "blocking_findings": [
+    "open_interest_and_long_short_are_recent_forward_only_not_2024_2026_historical_proof",
+    "liquidation_orderbook_cross_exchange_sources_not_found_locally",
+    "spot_perp_basis_is_core6_partial_not_core12_full_universe",
+    "aggTrades_microstructure_is_SOLUSDT_2026_04_pilot_only",
+    "current_long_history_panel_is_same_feature_space_that_A7P_A7R_already_rejected_for_alpha_search"
+  ],
+  "decision": "HOLD_A7S1_NEW_DATA_NOT_READY_FOR_ALPHA_SEARCH",
+  "executes_download": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-21T01:05:38Z",
+  "required_before_download": [
+    "source_cost_and_access_contract",
+    "PIT_timestamp_contract",
+    "symbol_coverage_contract",
+    "storage_cost_contract",
+    "small_sample_timestamp_audit"
+  ]
+}
