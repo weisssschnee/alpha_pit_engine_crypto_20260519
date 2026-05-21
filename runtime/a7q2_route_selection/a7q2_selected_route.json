@@ -1,0 +1,34 @@
+{
+  "authorizes_a7r_small_horizon_diagnostic": true,
+  "authorizes_a7s_data_horizon_contract": true,
+  "authorizes_a7t_forward_locked_observation": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_full_l1": false,
+  "authorizes_l2_or_l3": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_w2_continuation": false,
+  "decision": "PASS_A7Q_ROUTE_SELECTED_NEW_DATA_AND_FORWARD_WAIT",
+  "generated_at": "2026-05-21T00:27:34Z",
+  "may_policy": {
+    "allowed": [
+      "post_selection_stress_label",
+      "post_selection_veto",
+      "failure_attribution",
+      "forward_observation_reporting"
+    ],
+    "forbidden": [
+      "score",
+      "ranking",
+      "threshold",
+      "generation",
+      "allocation",
+      "mutation",
+      "surrogate_target"
+    ]
+  },
+  "optional_diagnostic": "B_horizon_reframing_diagnostic",
+  "parallel_route": "D_append_only_forward_wait",
+  "primary_route": "C_new_data_layer_contract",
+  "route_a_status": "diagnostic_only_not_mainline",
+  "route_e_status": "fallback_if_contracts_fail"
+}

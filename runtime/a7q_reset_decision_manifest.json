@@ -1,0 +1,27 @@
+{
+  "authorizes": {
+    "A7R_0_horizon_diagnostic_contract": true,
+    "A7S_0_data_horizon_contract": true,
+    "A7T_0_forward_locked_observation_contract": true,
+    "L2_or_L3": false,
+    "W2_continuation": false,
+    "alpha_proof": false,
+    "full_L1": false,
+    "shadow_paper_live": false
+  },
+  "decision": "PASS_A7Q_ROUTE_SELECTED_NEW_DATA_AND_FORWARD_WAIT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-21T00:27:34Z",
+  "outputs": {
+    "a7p_final_report": "reports/CRYPTO_A7P_FINAL_FAILURE_DECISION_RECORD_20260521.md",
+    "a7q1_report": "reports/CRYPTO_A7Q1_FAILURE_HYPOTHESIS_MATRIX_20260521.md",
+    "a7q2_report": "reports/CRYPTO_A7Q2_ROUTE_SELECTION_RECORD_20260521.md",
+    "a7q3_report": "reports/CRYPTO_A7Q3_NEXT_STAGE_DEFINITION_20260521.md"
+  },
+  "source_artifacts": {
+    "a7p3": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7p3_protected_w2_pilot_decision\\a7p3_decision_record.json",
+    "a7p4": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7p4_productivity_forensic\\a7p4_decision_record.json",
+    "a7p5": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7p5_non_may_rank_repair_audit\\a7p5_decision_record.json"
+  }
+}

@@ -1,0 +1,4 @@
+blocker,source,severity,blocks,does_not_block
+post_may_eligible_productivity_low,A7P-3/A7P-4,blocking,"W2 continuation, full L1, alpha proof","failure analysis, route decision, data/horizon contracts"
+non_may_rank_inverted_vs_post_may_stress,A7P-4,blocking,current high-score objective reuse,objective reset analysis
+stress_analog_top_decile_weak,A7P-5,blocking,simple worst-fold-rank repair,new horizon/data contract

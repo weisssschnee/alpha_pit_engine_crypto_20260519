@@ -1,0 +1,5 @@
+evidence,value,supports,source
+A7P-3 pipeline clean,"eval failures 0, fold missing 0, controls clean",rules out engineering as primary blocker,A7P-3
+A7P-4 productivity low,eligible_rate=0.067708,current W2 registry not productive enough,A7P-4
+A7P-4 rank inversion,"top=0.0, bottom=0.25",objective misalignment,A7P-4
+A7P-5 stress analog weak,stress_top=0.0,simple non-May worst-fold repair insufficient,A7P-5

@@ -1,0 +1,6 @@
+route_id,route,description,expected_edge,cost,risk,priority,decision,rationale
+A,current-data objective reset,Repair current 1h non-May objective on existing OHLCV/funding/basis data.,low,low,high,low,diagnostic_only,A7P-5 showed a simple non-May stress analog is weak; do not use as main route.
+B,horizon reframing diagnostic,Test 4h/8h/24h or slower execution framing to reduce cost/lag/stress fragility.,medium_low,low_mid,medium,medium,authorize_small_diagnostic,"Cheap test for horizon mismatch, but cannot solve missing state variables alone."
+C,new data layer contract,"Write PIT contracts for OI, liquidation, depth, cross-exchange basis/funding, and related state variables.",medium_high,medium_high,medium,high,primary_route,Most likely route to explain stress regimes not visible in current 1h feature set.
+D,append-only forward wait,Freeze current runner/gates and observe future windows without tuning.,low_discovery_high_evidence,low,low,high_parallel,parallel_route,Needed to avoid further May-overfit and test whether stress behavior repeats.
+E,pause crypto formula search,Freeze crypto formula search and redirect resources until new data or horizon contracts are ready.,conditional,low,low,conditional,fallback,Appropriate if data/horizon contracts are unavailable or fail PIT review.

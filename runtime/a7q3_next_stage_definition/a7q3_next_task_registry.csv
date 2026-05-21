@@ -1,0 +1,5 @@
+stage,name,type,executes_search,executes_replay,objective,authorization
+A7R-0,horizon reframing contract,optional_diagnostic,False,False,Define 4h/8h/24h and slower execution framing test without May tuning.,allowed_small_contract_only
+A7R-1,horizon reframing small audit,optional_diagnostic,False,limited_existing_candidates_or_<=64_cells_only,Check whether slower horizon improves cost/lag and post-May eligible productivity.,requires_A7R0_contract
+A7S-0,new data and horizon contract,primary,False,False,"Create PIT contracts for OI, liquidation, depth, cross-exchange basis/funding, and longer horizons.",authorized
+A7T-0,forward-locked observation contract,parallel,False,False,Freeze runner/gates and define append-only future observation protocol.,authorized

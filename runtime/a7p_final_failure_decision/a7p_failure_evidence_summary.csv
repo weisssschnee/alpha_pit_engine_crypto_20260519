@@ -1,0 +1,8 @@
+evidence_item,status,value,interpretation
+runner_stability,validated,eval_failure_count=0,Protected W2 pilot executed without evaluator failures.
+fold_replay_stability,validated,fold_metric_missing_rate=0.0,Fold replay metrics were present for the pilot shard.
+negative_controls,validated,"strict=0, dominance=0, placebo=0",Negative controls did not penetrate after the A7P runner gate repair.
+diversity_caps,validated,"liqvol=0.046875, cluster=0.09375",A7M/A7N-style single-cluster and liquidity-volatility collapse did not recur in the protected pilot.
+productivity,failed,post_may_eligible=13/192=0.067708,Post-May eligible productivity is below the 15% continuation target.
+rank_alignment,failed,"top_decile=0.0, bottom_decile=0.25",The current non-May rank score is directionally inverted against post-selection stress survival.
+stress_analog_repair,failed,"stress_analog_top_decile=0.0, overall=0.06770833333333333",A simple non-May difficult-fold stress analog did not repair the rank inversion.
