@@ -1,0 +1,6 @@
+endpoint,manifest_rows,silver_files_checked,missing_files,rows_total,missing_required_columns,forward_only_false_count,no_historical_backfill_false_count,decision
+globalLongShortAccountRatio,12,12,0,404,,0,0,PASS_A7S3_POSITIONING_FORWARD_SCHEMA
+openInterestHist,12,12,0,300,,0,0,PASS_A7S3_POSITIONING_FORWARD_SCHEMA
+takerlongshortRatio,12,12,0,312,,0,0,PASS_A7S3_POSITIONING_FORWARD_SCHEMA
+topLongShortAccountRatio,12,12,0,300,,0,0,PASS_A7S3_POSITIONING_FORWARD_SCHEMA
+topLongShortPositionRatio,12,12,0,300,,0,0,PASS_A7S3_POSITIONING_FORWARD_SCHEMA

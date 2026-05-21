@@ -1,0 +1,18 @@
+{
+  "authorizes_aggtrades_schema_join_experiment": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_full_core12_aggtrades_backfill": false,
+  "authorizes_orderbook_forward_observation_context": true,
+  "authorizes_positioning_forward_observation_context": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7S3_SAMPLE_PACKAGE_FOR_CONTRACTED_EXPERIMENTS_HOLD_ALPHA_PROOF",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-21T07:58:37Z",
+  "required_before_full_backfill": [
+    "costed_storage_runtime_plan",
+    "core12_monthly_manifest_plan",
+    "checksum_and_repair_policy",
+    "gold_join_contract_with_feature_available_time"
+  ]
+}

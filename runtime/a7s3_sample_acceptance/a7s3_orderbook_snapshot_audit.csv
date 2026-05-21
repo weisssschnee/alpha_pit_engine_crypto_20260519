@@ -1,0 +1,3 @@
+path,exists,rows,symbol_count,missing_required_columns,forward_only_all_true,time_fields_not_null,event_time_equals_collector_time_all,best_bid_lt_best_ask_all,spread_bps_min,spread_bps_max,depth_imbalance_min,depth_imbalance_max,decision
+G:\AlphaFactory_CryptoData\silver\binance_api\orderbook_forward_snapshot\run=20260521_071938\part.parquet,True,12,12,,True,True,True,True,0.012901169941469823,4.034698406294805,-0.6970409918363932,0.21107318005469375,PASS_A7S3_ORDERBOOK_FORWARD_SAMPLE
+G:\AlphaFactory_CryptoData\silver\binance_api\orderbook_forward_snapshot\run=20260521_074122\part.parquet,True,12,12,,True,True,True,True,0.012877429408291232,4.018485031143931,-0.3055277947184362,0.23350495695657283,PASS_A7S3_ORDERBOOK_FORWARD_SAMPLE

@@ -1,0 +1,2 @@
+panel_path,panel_exists,refresh_manifest_exists,refresh_report_exists,rows,symbol_count,latest_timestamp,latest_timestamp_symbol_count,decision
+G:\AlphaFactory_CryptoData\gold\panels\crypto_core12_1h_v1.parquet,True,True,True,250896,12,2026-05-21T03:00:00Z,12,PASS_A7S3_PANEL_REFRESH_SAMPLE

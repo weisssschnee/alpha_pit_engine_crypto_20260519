@@ -1,0 +1,14 @@
+{
+  "decision": "PASS_A7S3_SAMPLE_PACKAGE_FOR_CONTRACTED_EXPERIMENTS_HOLD_ALPHA_PROOF",
+  "generated_at": "2026-05-21T07:58:37Z",
+  "outputs": [
+    "runtime\\a7s3_sample_acceptance\\a7s3_aggtrades_sample_audit.csv",
+    "runtime\\a7s3_sample_acceptance\\a7s3_orderbook_snapshot_audit.csv",
+    "runtime\\a7s3_sample_acceptance\\a7s3_positioning_forward_schema_audit.csv",
+    "runtime\\a7s3_sample_acceptance\\a7s3_panel_refresh_audit.csv",
+    "runtime\\a7s3_sample_acceptance\\a7s3_acceptance_matrix.csv",
+    "runtime\\a7s3_sample_acceptance\\a7s3_authorization_matrix.json",
+    "reports/CRYPTO_A7S3_SAMPLE_PACKAGE_ACCEPTANCE_AUDIT_20260521.md"
+  ],
+  "script": "scripts\\crypto_a7s3_sample_package_acceptance_audit.py"
+}
