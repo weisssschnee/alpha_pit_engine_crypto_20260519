@@ -1,0 +1,12 @@
+{
+  "decision": "HOLD_A7S2_DATA_BACKFILL_CONTRACT_REQUIRED",
+  "generated_at": "2026-05-21T01:09:38Z",
+  "outputs": [
+    "runtime\\a7s2_field_semantics\\a7s2_source_feasibility_matrix.csv",
+    "runtime\\a7s2_field_semantics\\a7s2_pit_semantics_contract.csv",
+    "runtime\\a7s2_field_semantics\\a7s2_backfill_priority.csv",
+    "runtime\\a7s2_field_semantics\\a7s2_authorization_matrix.json",
+    "reports/CRYPTO_A7S2_FIELD_SEMANTICS_BACKFILL_FEASIBILITY_20260521.md"
+  ],
+  "script": "scripts\\crypto_a7s2_field_semantics_backfill_feasibility.py"
+}

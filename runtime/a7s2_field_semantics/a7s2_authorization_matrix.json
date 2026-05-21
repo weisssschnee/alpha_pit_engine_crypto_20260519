@@ -1,0 +1,21 @@
+{
+  "authorizes_a7s3_costed_backfill_plan": true,
+  "authorizes_a7t0_forward_locked_observation_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_alpha_search": false,
+  "authorizes_data_download": false,
+  "authorizes_shadow_paper_live": false,
+  "blocking_findings": [
+    "official_open_interest_and_long_short_rest_history_is_short_window",
+    "orderbook_depth_requires_archive_or_forward_collector",
+    "liquidation_events_require_source_contract",
+    "cross_exchange_sources_absent_and_need_vendor_contract",
+    "aggTrades_backfill_feasible_but_storage_heavy_and_not_currently_core12_complete"
+  ],
+  "decision": "HOLD_A7S2_DATA_BACKFILL_CONTRACT_REQUIRED",
+  "executes_download": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-21T01:09:38Z",
+  "primary_next": "A7S3_costed_backfill_plan_or_A7T0_forward_locked_observation"
+}
