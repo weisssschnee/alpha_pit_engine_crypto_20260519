@@ -1,0 +1,55 @@
+field_name,unit,semantic_group,definition,feature_available_time_rule,role
+timestamp,datetime_utc,hour_bucket_start,bucket start for raw aggTrades,available_after_hour_close,join_key
+trade_count,count,agg_trade_count,number of aggregate trade rows,available_after_hour_close,feature
+underlying_trade_count,count,underlying_trade_count,sum(last_trade_id - first_trade_id + 1),available_after_hour_close,feature
+quantity,base_asset,total_quantity,sum raw quantity,available_after_hour_close,feature
+notional,quote_asset,total_notional,sum price * quantity,available_after_hour_close,feature
+buy_agg_trade_count,count,aggressor_buy_count,is_buyer_maker=false,available_after_hour_close,feature
+sell_agg_trade_count,count,aggressor_sell_count,is_buyer_maker=true,available_after_hour_close,feature
+buy_underlying_trade_count,count,aggressor_buy_underlying_count,underlying count by buy aggressor side,available_after_hour_close,feature
+sell_underlying_trade_count,count,aggressor_sell_underlying_count,underlying count by sell aggressor side,available_after_hour_close,feature
+buy_quantity,base_asset,aggressor_buy_quantity,quantity where buyer is taker,available_after_hour_close,feature
+sell_quantity,base_asset,aggressor_sell_quantity,quantity where seller is taker,available_after_hour_close,feature
+buy_notional,quote_asset,aggressor_buy_notional,notional where buyer is taker,available_after_hour_close,feature
+sell_notional,quote_asset,aggressor_sell_notional,notional where seller is taker,available_after_hour_close,feature
+signed_aggressor_quantity,base_asset,signed_flow_quantity,buy_quantity - sell_quantity,available_after_hour_close,feature
+signed_aggressor_notional,quote_asset,signed_flow_notional,buy_notional - sell_notional,available_after_hour_close,feature
+volume_imbalance,ratio,notional_weighted_flow_imbalance,signed_aggressor_notional / notional,available_after_hour_close,feature
+buy_sell_notional_ratio,ratio,buy_sell_ratio,buy_notional / sell_notional,available_after_hour_close,feature
+high_price,price,hour_high,max trade price in hour,available_after_hour_close,feature
+low_price,price,hour_low,min trade price in hour,available_after_hour_close,feature
+open_price,price,hour_open,first trade price in hour,available_after_hour_close,feature
+close_price,price,hour_close,last trade price in hour,available_after_hour_close,feature
+vwap,price,hour_vwap,notional / quantity,available_after_hour_close,feature
+buy_vwap,price,buy_vwap,buy_notional / buy_quantity,available_after_hour_close,feature
+sell_vwap,price,sell_vwap,sell_notional / sell_quantity,available_after_hour_close,feature
+price_range_bps,bps,range_bps,(high_price - low_price) / vwap * 10000,available_after_hour_close,feature
+close_to_open_bps,bps,intrahour_return_bps,(close_price - open_price) / open_price * 10000,available_after_hour_close,feature
+large_trade_count_100k_plus,count,large_trade_count,trade_count_100k_1m + trade_count_gt_1m,available_after_hour_close,feature
+large_notional_100k_plus,quote_asset,large_trade_notional,notional_100k_1m + notional_gt_1m,available_after_hour_close,feature
+large_trade_count_ratio_100k_plus,ratio,large_trade_count_ratio,large_trade_count_100k_plus / trade_count,available_after_hour_close,feature
+large_notional_ratio_100k_plus,ratio,large_trade_notional_ratio,large_notional_100k_plus / notional,available_after_hour_close,feature
+first_transact_time_ms,epoch_ms,first_raw_trade_time,first raw aggTrade transact_time in hour,available_after_hour_close,lineage
+last_transact_time_ms,epoch_ms,last_raw_trade_time,last raw aggTrade transact_time in hour,available_after_hour_close,lineage
+first_agg_trade_id,id,first_agg_trade_id,first aggregate trade id in hour,available_after_hour_close,lineage
+last_agg_trade_id,id,last_agg_trade_id,last aggregate trade id in hour,available_after_hour_close,lineage
+symbol,string,symbol,partition and join key,n/a,join_key
+month,string,month_partition,partition month,n/a,lineage
+source,string,source,source marker,n/a,lineage
+aggregation,string,aggregation,aggregation marker,n/a,lineage
+trade_count_le_100,count,trade_count_bucket,aggregate trade count bucket by trade notional,available_after_hour_close,feature
+trade_count_100_1k,count,trade_count_bucket,aggregate trade count bucket by trade notional,available_after_hour_close,feature
+trade_count_1k_10k,count,trade_count_bucket,aggregate trade count bucket by trade notional,available_after_hour_close,feature
+trade_count_10k_100k,count,trade_count_bucket,aggregate trade count bucket by trade notional,available_after_hour_close,feature
+trade_count_100k_1m,count,trade_count_bucket,aggregate trade count bucket by trade notional,available_after_hour_close,feature
+trade_count_gt_1m,count,trade_count_bucket,aggregate trade count bucket by trade notional,available_after_hour_close,feature
+notional_le_100,quote_asset,notional_bucket,notional bucket by trade notional,available_after_hour_close,feature
+notional_100_1k,quote_asset,notional_bucket,notional bucket by trade notional,available_after_hour_close,feature
+notional_1k_10k,quote_asset,notional_bucket,notional bucket by trade notional,available_after_hour_close,feature
+notional_10k_100k,quote_asset,notional_bucket,notional bucket by trade notional,available_after_hour_close,feature
+notional_100k_1m,quote_asset,notional_bucket,notional bucket by trade notional,available_after_hour_close,feature
+notional_gt_1m,quote_asset,notional_bucket,notional bucket by trade notional,available_after_hour_close,feature
+price_std,price_or_quote_asset,distribution_summary,hourly distribution summary,available_after_hour_close,feature
+max_trade_notional,price_or_quote_asset,distribution_summary,hourly distribution summary,available_after_hour_close,feature
+avg_agg_trade_notional,price_or_quote_asset,distribution_summary,hourly distribution summary,available_after_hour_close,feature
+avg_underlying_trade_notional,price_or_quote_asset,distribution_summary,hourly distribution summary,available_after_hour_close,feature

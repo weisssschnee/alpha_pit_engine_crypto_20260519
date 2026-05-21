@@ -1,0 +1,14 @@
+{
+  "decision": "PASS_A7U_ENHANCED_V1_FEATURE_ACCEPTED_WITH_TRACEABILITY_WARNING",
+  "generated_at": "2026-05-21T17:48:49Z",
+  "outputs": [
+    "runtime\\a7u_enhanced_v1_acceptance\\a7u_file_acceptance_audit.csv",
+    "runtime\\a7u_enhanced_v1_acceptance\\a7u_duplicate_symbol_timestamp_keys.csv",
+    "runtime\\a7u_enhanced_v1_acceptance\\a7u_manifest_traceability_audit.csv",
+    "runtime\\a7u_enhanced_v1_acceptance\\a7u_feature_contract.csv",
+    "runtime\\a7u_enhanced_v1_acceptance\\a7u_join_timing_contract.csv",
+    "runtime\\a7u_enhanced_v1_acceptance\\a7u_authorization_matrix.json",
+    "reports/CRYPTO_A7U_ENHANCED_V1_ACCEPTANCE_CONTRACT_20260522.md"
+  ],
+  "script": "scripts\\crypto_a7u_enhanced_v1_acceptance_contract.py"
+}

@@ -1,0 +1,7 @@
+rule_id,rule,status
+join_key,Join to crypto 1h panel on symbol and timestamp.,required
+feature_available_time,"For timestamp t as hour bucket start, all aggTrades features are available only after t + 1h.",required
+execution_lag,Primary experiments should use at least next-bar execution after feature availability; same-hour close execution is forbidden.,required
+raw_access,"Experiment code must read enhanced_v1 gold parquet, not raw zip.",required
+fast_version,fast version is fallback only; enhanced_v1 is the main microstructure feature source after acceptance.,required
+coverage,Current accepted dataset is core3 BTCUSDT/ETHUSDT/SOLUSDT for 2024-01 through 2026-04; do not treat it as core12.,required

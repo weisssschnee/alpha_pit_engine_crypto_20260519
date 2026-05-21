@@ -1,0 +1,28 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core12_claim": false,
+  "authorizes_experiment_line_feature_join": true,
+  "authorizes_full_alpha_panel": false,
+  "authorizes_raw_zip_direct_experiment_access": false,
+  "authorizes_shadow_paper_live": false,
+  "coverage": {
+    "file_count": 84,
+    "months": "2024-01..2026-04",
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT"
+    ]
+  },
+  "decision": "PASS_A7U_ENHANCED_V1_FEATURE_ACCEPTED_WITH_TRACEABILITY_WARNING",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-21T17:48:49Z",
+  "primary_dataset": "G:\\AlphaFactory_CryptoData\\gold\\microstructure\\aggtrades_1h_flow_enhanced_v1",
+  "required_next": [
+    "A7U-0R consolidated raw checksum trace manifest for all 84 symbol-month files",
+    "A7U-1 join enhanced_v1 to crypto 1h panel with feature_available_time",
+    "A7U-2 rolling/cross-symbol feature derivation contract",
+    "A7U-3 small feature smoke against existing negative controls"
+  ]
+}
