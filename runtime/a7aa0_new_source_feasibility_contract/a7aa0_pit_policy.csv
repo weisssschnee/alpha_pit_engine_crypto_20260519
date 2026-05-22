@@ -1,0 +1,6 @@
+policy_id,requirement,reason,blocking_if_missing
+PIT_001,"Every new field must record raw_event_time, observable_time, collector_time, and feature_available_time.",Prevents settlement-after-use and snapshot backfill leakage.,True
+PIT_002,"Snapshot-only orderbook/OI endpoints are forward observation, not historical proof.",Current probes collect current state only.,True
+PIT_003,Recent-history endpoints need retention-window and pagination completeness audit before backfill use.,A recent API window does not prove 2024-2026 historical availability.,True
+PIT_004,May stress remains post-selection stress/veto/failure attribution only.,Avoids known-stress overfit.,True
+PIT_005,No source enters replay without cost/lag/residual/control/symbol-month LOO reporting plan.,Maintains A7 validation standard.,True

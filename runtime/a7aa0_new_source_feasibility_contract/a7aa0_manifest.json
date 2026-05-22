@@ -1,0 +1,12 @@
+{
+  "authorizes_alpha_proof": false,
+  "decision": "PASS_A7AA0_SOURCE_FEASIBILITY_CONTRACT_READY_HISTORICAL_BACKFILL_NOT_AUTHORIZED",
+  "executes_download": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "field_contract_rows": 4,
+  "generated_at": "2026-05-22T09:49:38Z",
+  "probe_manifest": "G:\\AlphaFactory_CryptoData\\raw\\source_probes\\cross_exchange_20260522_core12_probe2\\cross_exchange_source_probe_manifest.csv",
+  "probe_rows": 156,
+  "probe_summary_rows": 13
+}
