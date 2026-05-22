@@ -1,0 +1,29 @@
+{
+  "authorizes_a7x4_forensic": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_expanded_replay": false,
+  "authorizes_full_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_a7x_research_clue",
+    "control_contamination_present"
+  ],
+  "control_contaminated_candidate_count": 28,
+  "control_count": 368,
+  "decision": "HOLD_A7X3_NO_CLEAN_RESEARCH_CLUE",
+  "deep_audit_count": 60,
+  "executes_replay": "small_controlled_diagnostic",
+  "executes_search": "small_structural_generation",
+  "fast_book_parity_pass": true,
+  "generated_at": "2026-05-22T06:57:16Z",
+  "generated_count": 336,
+  "may_policy": "stress_only_not_generation_ranking_threshold_or_allocation",
+  "metric_rows": 1840,
+  "required_next": [
+    "A7X-4 forensic if research clues exist; otherwise revise reset objective",
+    "Do not expand budget from A7X-3 alone",
+    "Keep May stress-only policy"
+  ],
+  "research_clue_count": 0,
+  "strict_replay_candidate_count": 92
+}
