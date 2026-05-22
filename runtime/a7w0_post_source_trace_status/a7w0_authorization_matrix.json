@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_controlled_experiments_without_source_trace_caveat": true,
+  "authorizes_expanded_replay": false,
+  "authorizes_full_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "a7v_signal_family_blocked"
+  ],
+  "current_a7v_activity_liquidity_family_promotable": false,
+  "decision": "PASS_A7W0_SOURCE_TRACE_RESOLVED_SIGNAL_LINE_STILL_HOLD",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T06:29:19Z",
+  "required_next": [
+    "Do not expand current A7V activity/liquidity clue family",
+    "Use A7U-0R PASS only as data provenance closure, not alpha evidence",
+    "If continuing, define a new aggTrades objective/horizon/family redesign stage"
+  ],
+  "source_trace_incomplete_caveat_removed": true
+}
