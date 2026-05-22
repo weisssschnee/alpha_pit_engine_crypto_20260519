@@ -1,0 +1,20 @@
+source_family,field_name,field_type,scope,status,usage_note
+metrics_source,open_interest,independent,core39,allowed,source field; use level/change/zscore variants only after selection
+metrics_source,open_interest_value,independent,core39,allowed,source field; stale-level controls required
+metrics_source,global_long_short_account_ratio,independent,core39,allowed,crowding/account state source
+metrics_source,top_long_short_account_ratio,independent,core39,allowed,crowding/account state source
+metrics_source,top_long_short_position_ratio,independent,core39,allowed,position crowding source
+metrics_source,taker_buy_sell_volume_ratio,independent,core39,allowed,"vendor 5m metrics source, not aggTrades"
+market_structure,mark_index_basis_bps,independent_derived_from_mark_index,core39,allowed,basis level from mark/index source
+market_structure,mark_index_basis_change_24h,derived,core39,allowed,basis dynamic; preferred over static basis for stale-control risk
+market_structure,mark_index_basis_zscore_168h,derived,core39,allowed,basis state
+market_structure,premium_index_bps,independent_derived_from_premium,core39,allowed,premium source state
+market_structure,premium_index_change_24h,derived,core39,allowed,premium dynamic
+market_structure,premium_minus_funding_bps,derived,core39,caution,missing can be high; funding asof semantics required
+market_structure,funding_rate_bps,independent_asof,core39,benchmark_only,mandatory baseline/control; not promotable standalone
+market_structure,funding_rate_change_3obs,derived_asof,core39,benchmark_only,funding family benchmark/control
+aggtrades_core3,agg_signed_flow_z_24h,independent_aggtrades,core3_only,allowed_core3_only,order-flow state; not core39-wide
+aggtrades_core3,agg_flow_imbalance_notional_24h,independent_aggtrades,core3_only,allowed_core3_only,signed aggressor flow
+aggtrades_core3,agg_large_notional_share_24h,independent_aggtrades,core3_only,allowed_core3_only,large trade intensity
+aggtrades_core3,agg_cross_symbol_signed_flow_share,derived_cross_symbol_core3,core3_only,allowed_core3_only,core3 relative flow only
+aggtrades_core3,agg_notional_accel_4h_vs_24h,derived_aggtrades,core3_only,allowed_core3_only,flow acceleration

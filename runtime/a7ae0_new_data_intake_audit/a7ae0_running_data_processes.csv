@@ -1,0 +1,6 @@
+process_id,name,command_line
+20968,powershell.exe,"""C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"" -Command ""[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;
+G:\PythonProject\.venv\Scripts\python.exe G:\AlphaFactory_CryptoData\scripts\download_aggtrades_raw_only.py --symbols ADAUSDT AVAXUSDT BCHUSDT BNBUSDT DOGEUSDT LINKUSDT LTCUSDT SUIUSDT XRPUSDT --start 2024-01 --end 2026-05 --sleep 0.05 --timeout 300 --tag core12_rem9_20260522"""
+21740,python.exe,"""G:\PythonProject\.venv\Scripts\python.exe"" G:\AlphaFactory_CryptoData\scripts\download_aggtrades_raw_only.py --symbols ADAUSDT AVAXUSDT BCHUSDT BNBUSDT DOGEUSDT LINKUSDT LTCUSDT SUIUSDT XRPUSDT --start 2024-01 --end 2026-05 --sleep 0.05 --timeout 300 --tag core12_rem9_20260522"
+18376,python.exe,"""C:\Users\12398\AppData\Local\Programs\Python\Python311\python.exe"" G:\AlphaFactory_CryptoData\scripts\download_aggtrades_raw_only.py --symbols ADAUSDT AVAXUSDT BCHUSDT BNBUSDT DOGEUSDT LINKUSDT LTCUSDT SUIUSDT XRPUSDT --start 2024-01 --end 2026-05 --sleep 0.05 --timeout 300 --tag core12_rem9_20260522"
+23164,powershell.exe,"powershell -NoProfile -Command ""Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match 'download_aggtrades_raw_only|core39|market_structure|aggtrades' } | Select-Object ProcessId,Name,CommandLine | ConvertTo-Json -Depth 3"""

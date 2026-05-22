@@ -1,0 +1,15 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_direct_large_search": false,
+  "authorizes_field_selection_contract": true,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AE0_NEW_DATA_INTAKE_AUDIT_WITH_USAGE_LIMITS",
+  "recommended_next": "A7AE1 field-family selection contract for core39/core3 data, then small controlled replay only",
+  "warnings": [
+    "core12_rem9_aggtrades_raw_download_in_progress_not_ready",
+    "market_structure_has_high_missing_funding_related_fields_select_columns_before_replay",
+    "core39_all_features_is_wide_derived_table_do_not_feed_all_603_columns_blindly",
+    "core3_aggtrades_is_core3_only_not_core39_or_core48_wide"
+  ]
+}
