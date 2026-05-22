@@ -1,0 +1,5 @@
+object_id,status,forward_observation_allowed,proof_use,notes
+FundingCore,BENCHMARK_ONLY,True,excluded_until_new_locked_window,"funding line remains HOLD; observation is telemetry, not promotion"
+Core4,RESEARCH_OBJECT_ONLY,True,excluded_until_new_locked_window,A7 baseline failures and drawdown issues remain unresolved
+A7X3_near_miss_horizon_spread_flow_minus_btc_eth,STRESS_CLUE_NOT_CANDIDATE,True,monitor_only,two A7X-3 near-misses were control-clean pre-May but May-negative; not promotable
+negative_controls,MANDATORY_CONTROL,True,framework_health_only,wrong-lag/row-shuffle/time-shuffle/sign-flip must remain non-promotable

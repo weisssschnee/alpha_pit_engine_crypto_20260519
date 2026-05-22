@@ -1,0 +1,6 @@
+rule_id,rule,violation_action
+freeze_before_window,"candidate list, formulas, scoring, gates, costs, lag rules, and negative controls must be frozen before a forward window starts",window evidence invalid for proof
+no_may_or_seen_forward_tuning,"known May stress and observed forward outcomes cannot tune ranking, thresholds, weights, generation, or allocation",downgrade to post-hoc diagnostic
+append_only_storage,forward snapshots and positioning records must append with collector_time/observable_time; no overwrite without restatement log,hold affected window until restatement audit
+negative_controls_required,negative controls must be reported beside every monitored object,hold framework health claim
+no_trade_authorization,"A7T telemetry cannot authorize shadow, paper, live, or production book",promotion blocked

@@ -1,0 +1,17 @@
+{
+  "authorizes_a7t1_forward_observation_runner_design": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_historical_proof_from_forward_only_fields": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7T0_FORWARD_LOCKED_OBSERVATION_CONTRACT_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T07:10:45Z",
+  "may_policy": "known_stress_not_training_or_tuning_input",
+  "required_next": [
+    "A7T-1 forward observation runner design after frozen commit/window selection",
+    "A7S-1 field availability/source-trace audit for newly delivered historical fields",
+    "No promotion from A7T telemetry alone"
+  ]
+}
