@@ -1,0 +1,26 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_cross_exchange_forward_telemetry_design": true,
+  "authorizes_historical_alpha_proof_from_cross_exchange_snapshot": false,
+  "authorizes_metrics_historical_source_audit": true,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "cross-exchange snapshot is forward-only",
+    "OKX liquidation retention/pagination contract unresolved",
+    "orderbook snapshots cannot be backfilled into historical proof",
+    "Binance basis probe has 3 rate-limit holds in core12_probe2"
+  ],
+  "cross_exchange_forward_snapshot_ready": true,
+  "decision": "PASS_A7AB0_DATA_HANDOFF_ACCEPTED_FOR_SOURCE_AUDIT_AND_FORWARD_TELEMETRY",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T09:55:44Z",
+  "metrics_gold_ready": true,
+  "probe_ready_endpoints": 153,
+  "probe_total_endpoints": 156,
+  "required_next": [
+    "Use Binance metrics history in A7S-1 controlled source audit with vendor warning caveat",
+    "Design A7T forward telemetry from cross-exchange snapshot fields",
+    "Do not run historical alpha proof on liquidation/orderbook snapshot fields"
+  ]
+}

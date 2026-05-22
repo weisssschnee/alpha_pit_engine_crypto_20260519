@@ -1,0 +1,5 @@
+data_line,historical_experiment_allowed,forward_telemetry_allowed,alpha_proof_allowed,use_boundary
+binance_metrics_history,True,True,False,Can enter A7S-1 source audit and controlled historical experiments with vendor 5m warning caveat.
+cross_exchange_forward_snapshot,False,True,False,Use for forward-only telemetry design and source audit sample; do not backfill historical proof.
+okx_liquidation_recent,False,True,False,Recent/forward liquidation pressure source only until retention/pagination/PIT contract is closed.
+orderbook_depth_snapshot,False,True,False,Forward collector only unless a validated historical depth source is contracted.

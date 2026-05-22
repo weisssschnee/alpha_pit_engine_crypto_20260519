@@ -1,0 +1,10 @@
+{
+  "authorizes_alpha_proof": false,
+  "cross_snapshot": "G:\\AlphaFactory_CryptoData\\silver\\cross_exchange_forward_snapshot\\cross_exchange_forward_snapshot_20260522_core12_probe2.parquet",
+  "decision": "PASS_A7AB0_DATA_HANDOFF_ACCEPTED_FOR_SOURCE_AUDIT_AND_FORWARD_TELEMETRY",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T09:55:44Z",
+  "metrics_gold": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_metrics_1h_features_v1.parquet",
+  "probe_manifest": "G:\\AlphaFactory_CryptoData\\raw\\source_probes\\cross_exchange_20260522_core12_probe2\\cross_exchange_source_probe_manifest.csv"
+}

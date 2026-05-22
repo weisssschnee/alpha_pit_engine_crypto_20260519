@@ -1,0 +1,14 @@
+provider,dataset,feature_group,rows,symbols,forward_only_rows,historical_backfill_rows
+binance,basis_1h_recent,basis_recent,9,9,0,0
+binance,current_open_interest,open_interest,12,12,12,0
+binance,orderbook_depth_20,orderbook_depth,12,12,12,0
+binance,premium_index,premium_funding,12,12,12,0
+bybit,current_ticker_oi_funding,ticker_oi_funding,12,12,12,0
+bybit,funding_rate_history,recent_history,12,12,0,0
+bybit,open_interest_1h_recent,recent_history,12,12,0,0
+bybit,orderbook_depth_50,orderbook_depth,12,12,12,0
+okx,current_open_interest,open_interest,12,12,12,0
+okx,funding_rate_current,funding,12,12,12,0
+okx,funding_rate_history,funding,12,12,0,0
+okx,liquidation_orders_probe,liquidation_recent,12,12,0,0
+okx,orderbook_depth_20,orderbook_depth,12,12,12,0

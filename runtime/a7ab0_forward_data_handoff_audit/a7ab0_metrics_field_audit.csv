@@ -1,0 +1,33 @@
+field,present,non_null,independent_source,allowed_role,caveat
+open_interest,True,251028,True,historical source-audit feature,vendor 5m jitter/gap warnings from A7S-1 remain attached
+open_interest_value,True,251028,True,historical source-audit feature,vendor 5m jitter/gap warnings from A7S-1 remain attached
+global_long_short_account_ratio,True,251028,True,historical source-audit feature,vendor 5m jitter/gap warnings from A7S-1 remain attached
+top_long_short_account_ratio,True,251004,True,historical source-audit feature,vendor 5m jitter/gap warnings from A7S-1 remain attached
+top_long_short_position_ratio,True,251028,True,historical source-audit feature,vendor 5m jitter/gap warnings from A7S-1 remain attached
+taker_buy_sell_volume_ratio,True,251028,True,historical source-audit feature,vendor 5m jitter/gap warnings from A7S-1 remain attached
+open_interest_change_1h,True,250919,False,derived transform only,inherits parent source contract; not independent source
+open_interest_change_4h,True,250883,False,derived transform only,inherits parent source contract; not independent source
+open_interest_change_24h,True,250643,False,derived transform only,inherits parent source contract; not independent source
+open_interest_zscore_168h,True,250752,False,derived transform only,inherits parent source contract; not independent source
+open_interest_value_change_1h,True,250919,False,derived transform only,inherits parent source contract; not independent source
+open_interest_value_change_4h,True,250883,False,derived transform only,inherits parent source contract; not independent source
+open_interest_value_change_24h,True,250643,False,derived transform only,inherits parent source contract; not independent source
+open_interest_value_zscore_168h,True,250752,False,derived transform only,inherits parent source contract; not independent source
+global_long_short_account_ratio_change_1h,True,251016,False,derived transform only,inherits parent source contract; not independent source
+global_long_short_account_ratio_change_4h,True,250980,False,derived transform only,inherits parent source contract; not independent source
+global_long_short_account_ratio_change_24h,True,250740,False,derived transform only,inherits parent source contract; not independent source
+global_long_short_account_ratio_zscore_168h,True,250752,False,derived transform only,inherits parent source contract; not independent source
+top_long_short_account_ratio_change_1h,True,250980,False,derived transform only,inherits parent source contract; not independent source
+top_long_short_account_ratio_change_4h,True,250932,False,derived transform only,inherits parent source contract; not independent source
+top_long_short_account_ratio_change_24h,True,250692,False,derived transform only,inherits parent source contract; not independent source
+top_long_short_account_ratio_zscore_168h,True,250728,False,derived transform only,inherits parent source contract; not independent source
+top_long_short_position_ratio_change_1h,True,251016,False,derived transform only,inherits parent source contract; not independent source
+top_long_short_position_ratio_change_4h,True,250980,False,derived transform only,inherits parent source contract; not independent source
+top_long_short_position_ratio_change_24h,True,250740,False,derived transform only,inherits parent source contract; not independent source
+top_long_short_position_ratio_zscore_168h,True,250752,False,derived transform only,inherits parent source contract; not independent source
+taker_buy_sell_volume_ratio_change_1h,True,251016,False,derived transform only,inherits parent source contract; not independent source
+taker_buy_sell_volume_ratio_change_4h,True,250980,False,derived transform only,inherits parent source contract; not independent source
+taker_buy_sell_volume_ratio_change_24h,True,250740,False,derived transform only,inherits parent source contract; not independent source
+taker_buy_sell_volume_ratio_zscore_168h,True,250752,False,derived transform only,inherits parent source contract; not independent source
+open_interest_x_price_move_1h,True,250919,False,derived transform only,inherits parent source contract; not independent source
+open_interest_x_taker_imbalance,True,250907,False,derived transform only,inherits parent source contract; not independent source

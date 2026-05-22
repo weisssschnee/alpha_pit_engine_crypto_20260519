@@ -1,0 +1,2 @@
+dataset,path,exists,rows,columns,symbols,timestamp_min,timestamp_max,decision
+binance_metrics_1h_features_v1,G:\AlphaFactory_CryptoData\gold\features\binance_metrics_1h_features_v1.parquet,True,251028,40,12,2024-01-01 00:00:00+00:00,2026-05-22 00:00:00+00:00,PASS_METRICS_HISTORY_SOURCE_AUDIT_INPUT
