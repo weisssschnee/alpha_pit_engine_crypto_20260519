@@ -1,0 +1,8 @@
+gate,required,pass_condition,failure_decision
+raw_source_trace,True,100% required raw files have manifest rows and checksum status ok where checksum is available,HOLD_A7AC2_SOURCE_TRACE_INCOMPLETE
+symbol_listing_policy,True,"effective_start per symbol is recorded; pre-listing hours are excluded, not filled",HOLD_A7AC3_LISTING_POLICY_INCOMPLETE
+timestamp_alignment,True,feature_time < execution_time <= label_start_time for all generated features,FAIL_A7AC_PIT_ALIGNMENT
+gold_panel_integrity,True,no duplicate symbol/timestamp; no inf; numeric anomaly report clean or explained,HOLD_A7AC2_PANEL_INTEGRITY
+coverage_by_symbol,True,primary_core48 P0 fields continuous from effective_start or missingness explicitly documented,HOLD_A7AC2_COVERAGE_GAP
+survivorship_bias_label,True,expanded universe selected in 2026 is labeled as fixed research universe until dynamic listing universe is built,HOLD_A7AC3_SURVIVORSHIP_POLICY
+watchlist_exclusion,True,watchlist/new-listing and reject/manual symbols are excluded from main historical proof,HOLD_A7AC_WATCHLIST_MIXED_INTO_MAIN_PROOF

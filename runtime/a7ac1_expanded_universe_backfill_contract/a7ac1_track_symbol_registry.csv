@@ -1,0 +1,96 @@
+track,symbol,tier,priority,probe_score,included_in_primary_core48,included_in_secondary_liquid80_pool,required_before_experiment,historical_proof_status
+baseline_core12_existing,BTCUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+baseline_core12_existing,ETHUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+baseline_core12_existing,SOLUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+baseline_core12_existing,BNBUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+baseline_core12_existing,XRPUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+baseline_core12_existing,DOGEUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+baseline_core12_existing,ADAUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+baseline_core12_existing,LINKUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+baseline_core12_existing,AVAXUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+baseline_core12_existing,LTCUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+baseline_core12_existing,BCHUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+baseline_core12_existing,SUIUSDT,core12_existing,P0_existing_control,,True,True,existing panel controls remain required,existing_core12_only
+primary_core48_top36_addition,ALGOUSDT,core48_candidate,P0_backfill_contract,11.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,CELOUSDT,core48_candidate,P0_backfill_contract,11.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,ACHUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,APEUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,ARUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,ATOMUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,CHZUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,DASHUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,GMXUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,LRCUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,MAGICUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,MASKUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,NEARUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,SEIUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,UNIUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,YFIUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,ZECUSDT,core48_candidate,P0_backfill_contract,10.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,BLURUSDT,midcap_candidate,P0_backfill_contract,9.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,BOMEUSDT,midcap_candidate,P0_backfill_contract,9.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,ETCUSDT,midcap_candidate,P0_backfill_contract,9.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,HBARUSDT,midcap_candidate,P0_backfill_contract,9.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,KNCUSDT,midcap_candidate,P0_backfill_contract,9.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,MANAUSDT,midcap_candidate,P0_backfill_contract,9.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,PENDLEUSDT,midcap_candidate,P0_backfill_contract,9.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,WLDUSDT,midcap_candidate,P0_backfill_contract,9.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,1000BONKUSDT,midcap_candidate,P0_backfill_contract,8.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,1000FLOKIUSDT,midcap_candidate,P0_backfill_contract,8.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,1INCHUSDT,midcap_candidate,P0_backfill_contract,8.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,AAVEUSDT,midcap_candidate,P0_backfill_contract,8.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,ACEUSDT,midcap_candidate,P0_backfill_contract,8.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,API3USDT,midcap_candidate,P0_backfill_contract,8.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,APTUSDT,midcap_candidate,P0_backfill_contract,8.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,ARBUSDT,midcap_candidate,P0_backfill_contract,8.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,AXSUSDT,midcap_candidate,P0_backfill_contract,8.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,BANDUSDT,midcap_candidate,P0_backfill_contract,8.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+primary_core48_top36_addition,BATUSDT,midcap_candidate,P0_backfill_contract,8.0,True,True,raw checksum/source trace + listing policy + gold panel build,not_authorized_until_a7ac2_a7ac3_pass
+secondary_liquid80_eligible_pool,BIGTIMEUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,CFXUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,COMPUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,CRVUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,DOTUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,DYDXUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,EGLDUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,ENJUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,ETHFIUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,FILUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,FLOWUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,GALAUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,GMTUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,ICPUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,IMXUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,INJUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,IOTAUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,JTOUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,JUPUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,KSMUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,LDOUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,LPTUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,LQTYUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,MEMEUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,MINAUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,NOTUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,ONDOUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,OPUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,ORDIUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,PYTHUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,QTUMUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,RSRUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,SANDUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,SNXUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,SSVUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,STRKUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,STXUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,SUSHIUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,TIAUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,TRBUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,TRXUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,XLMUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,XTZUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,ZILUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,ZRXUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,RUNEUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
+secondary_liquid80_eligible_pool,WAVESUSDT,midcap_candidate,P1_secondary_contract,8,False,True,secondary source trace + explicit missingness/listing policy,secondary_pool_not_main_proof
