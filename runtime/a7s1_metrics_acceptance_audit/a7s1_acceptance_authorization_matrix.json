@@ -1,0 +1,35 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_controlled_metrics_diagnostics": true,
+  "authorizes_metrics_feature_registry_integration": true,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7S1_ACCEPTED_WITH_VENDOR_5M_WARNINGS",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T08:24:18Z",
+  "gold_panel": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_metrics_1h_features_v1.parquet",
+  "independent_source_fields": [
+    "global_long_short_account_ratio",
+    "open_interest",
+    "open_interest_value",
+    "taker_buy_sell_volume_ratio",
+    "top_long_short_account_ratio",
+    "top_long_short_position_ratio"
+  ],
+  "required_next": [
+    "A7S-2 metrics feature registry integration and controlled diagnostics",
+    "Do not classify change/zscore/interaction fields as independent sources",
+    "Carry vendor 5m bucket duplicate/gap/NaN caveats downstream"
+  ],
+  "source_report": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\reports\\CRYPTO_A7S1_BINANCE_METRICS_SOURCE_TRACE_20260522.md",
+  "vendor_5m_warning_caveat_required": true,
+  "warnings": [
+    "rounded_5m_bucket_duplicate_count",
+    "rounded_5m_timestamp_gap_count",
+    "gap_symbol_days",
+    "raw_nan_count",
+    "gold_nan_numeric_cells",
+    "availability_nan_cells"
+  ]
+}

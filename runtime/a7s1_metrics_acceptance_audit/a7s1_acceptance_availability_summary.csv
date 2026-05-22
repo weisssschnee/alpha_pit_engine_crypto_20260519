@@ -1,0 +1,6 @@
+check,value,status
+availability_symbols,12,PASS
+available_before_execution_all,True,PASS
+availability_duplicate_timestamp_count,0,PASS
+availability_inf_cells,0,PASS
+availability_nan_cells,4736,WARNING

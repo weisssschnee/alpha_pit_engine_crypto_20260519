@@ -1,0 +1,11 @@
+check,value,status
+expected_symbol_days,10464,INFO
+ready_symbol_days,10464,PASS
+checksum_not_ok,0,PASS
+raw_duplicate_timestamp_count,0,PASS
+rounded_5m_bucket_duplicate_count,72,WARNING
+rounded_5m_timestamp_gap_count,132,WARNING
+gap_symbol_days,48,WARNING
+raw_nan_count,1501,WARNING
+negative_raw_values,0,PASS
+symbols,12,PASS

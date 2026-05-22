@@ -1,0 +1,10 @@
+check,value,status
+gold_path_exists,True,PASS
+gold_rows,251028,PASS
+gold_columns,40,PASS
+gold_symbols,12,PASS
+gold_timestamp_min,2024-01-01 00:00:00+00:00,INFO
+gold_timestamp_max,2026-05-22 00:00:00+00:00,INFO
+gold_duplicate_symbol_timestamp,0,PASS
+gold_inf_cells,0,PASS
+gold_nan_numeric_cells,5048,WARNING

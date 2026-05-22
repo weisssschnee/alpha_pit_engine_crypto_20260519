@@ -1,0 +1,5 @@
+check,value,status
+independent_source_field_count,6,PASS
+derived_field_count,29,PASS
+forward_only_independent_fields,0,PASS
+historical_backfill_independent_fields,6,PASS

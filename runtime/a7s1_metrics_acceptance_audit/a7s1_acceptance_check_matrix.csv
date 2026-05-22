@@ -1,0 +1,29 @@
+check,value,status,section
+expected_symbol_days,10464,INFO,source_trace
+ready_symbol_days,10464,PASS,source_trace
+checksum_not_ok,0,PASS,source_trace
+raw_duplicate_timestamp_count,0,PASS,source_trace
+rounded_5m_bucket_duplicate_count,72,WARNING,source_trace
+rounded_5m_timestamp_gap_count,132,WARNING,source_trace
+gap_symbol_days,48,WARNING,source_trace
+raw_nan_count,1501,WARNING,source_trace
+negative_raw_values,0,PASS,source_trace
+symbols,12,PASS,source_trace
+gold_path_exists,True,PASS,gold_panel
+gold_rows,251028,PASS,gold_panel
+gold_columns,40,PASS,gold_panel
+gold_symbols,12,PASS,gold_panel
+gold_timestamp_min,2024-01-01 00:00:00+00:00,INFO,gold_panel
+gold_timestamp_max,2026-05-22 00:00:00+00:00,INFO,gold_panel
+gold_duplicate_symbol_timestamp,0,PASS,gold_panel
+gold_inf_cells,0,PASS,gold_panel
+gold_nan_numeric_cells,5048,WARNING,gold_panel
+independent_source_field_count,6,PASS,field_contract
+derived_field_count,29,PASS,field_contract
+forward_only_independent_fields,0,PASS,field_contract
+historical_backfill_independent_fields,6,PASS,field_contract
+availability_symbols,12,PASS,availability
+available_before_execution_all,True,PASS,availability
+availability_duplicate_timestamp_count,0,PASS,availability
+availability_inf_cells,0,PASS,availability
+availability_nan_cells,4736,WARNING,availability
