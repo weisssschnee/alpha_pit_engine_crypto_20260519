@@ -1,0 +1,25 @@
+{
+  "a7x3_deep_audit_cap": 64,
+  "a7x3_generated_cap": 5000,
+  "a7x3_strict_replay_cap": 256,
+  "authorizes_a7x3_small_controlled_diagnostic": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_expanded_replay": false,
+  "authorizes_full_search": false,
+  "authorizes_replay_old_a7v5_positives": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "current_a7v_activity_liquidity_family_promotable": false,
+  "data_line_status": "PASS",
+  "decision": "PASS_A7X_RESET_CONTRACT_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T06:46:48Z",
+  "required_next": [
+    "A7X-3 small controlled diagnostic under fixed cap",
+    "Use aggTrades as horizon/state/interaction feature, not standalone A7V activity-liquidity expansion",
+    "Preserve May stress-only policy"
+  ],
+  "signal_line_status": "HOLD",
+  "source_trace_incomplete_caveat_removed": true
+}

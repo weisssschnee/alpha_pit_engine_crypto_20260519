@@ -1,0 +1,15 @@
+parameter,value
+experiment_id,20260522_crypto_a7x_aggtrades_reset_001
+objective,small controlled diagnostic for aggTrades objective/horizon/family reset
+generated_cap,5000
+strict_replay_cap,256
+deep_audit_cap,64
+families,F0_slow_aggtrades_horizon;F1_aggtrades_basis_interaction;F2_aggtrades_vol_compression_interaction;F3_aggtrades_cross_symbol_dispersion;F4_symbol_tier_neutralized_aggtrades;F5_controls
+primary_cost,10bps
+severe_cost,20bps
+lag_stress,1bar;2bar;3bar
+may_policy,post-selection stress only; not ranking/tuning/generation/allocation
+negative_controls,row_shuffle;time_shuffle;wrong_lag;sign_flip;matched_family_controls
+pass_label_max,A7X_RESEARCH_CLUE
+forbidden_labels,ALPHA_PROOF;SHADOW_READY;PAPER_READY;LIVE_READY
+reproducibility,"must record selected formulas, seeds, input manifests, output hashes"
