@@ -1,0 +1,49 @@
+rank,symbol,source,tier,probe_score,eligible_for_backfill_contract,main_historical_proof_status,required_before_use
+1,BTCUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+2,ETHUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+3,SOLUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+4,BNBUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+5,XRPUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+6,DOGEUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+7,ADAUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+8,LINKUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+9,AVAXUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+10,LTCUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+11,BCHUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+12,SUIUSDT,core12_existing,core12_existing,,True,existing_core12_controls_only,existing panel controls
+13,ALGOUSDT,liquid80_recommended_addition,core48_candidate,11,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+14,CELOUSDT,liquid80_recommended_addition,core48_candidate,11,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+15,ACHUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+16,APEUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+17,ARUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+18,ATOMUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+19,CHZUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+20,DASHUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+21,GMXUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+22,LRCUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+23,MAGICUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+24,MASKUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+25,NEARUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+26,SEIUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+27,UNIUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+28,YFIUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+29,ZECUSDT,liquid80_recommended_addition,core48_candidate,10,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+30,BLURUSDT,liquid80_recommended_addition,midcap_candidate,9,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+31,BOMEUSDT,liquid80_recommended_addition,midcap_candidate,9,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+32,ETCUSDT,liquid80_recommended_addition,midcap_candidate,9,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+33,HBARUSDT,liquid80_recommended_addition,midcap_candidate,9,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+34,KNCUSDT,liquid80_recommended_addition,midcap_candidate,9,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+35,MANAUSDT,liquid80_recommended_addition,midcap_candidate,9,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+36,PENDLEUSDT,liquid80_recommended_addition,midcap_candidate,9,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+37,WLDUSDT,liquid80_recommended_addition,midcap_candidate,9,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+38,1000BONKUSDT,liquid80_recommended_addition,midcap_candidate,8,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+39,1000FLOKIUSDT,liquid80_recommended_addition,midcap_candidate,8,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+40,1INCHUSDT,liquid80_recommended_addition,midcap_candidate,8,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+41,AAVEUSDT,liquid80_recommended_addition,midcap_candidate,8,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+42,ACEUSDT,liquid80_recommended_addition,midcap_candidate,8,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+43,API3USDT,liquid80_recommended_addition,midcap_candidate,8,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+44,APTUSDT,liquid80_recommended_addition,midcap_candidate,8,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+45,ARBUSDT,liquid80_recommended_addition,midcap_candidate,8,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+46,AXSUSDT,liquid80_recommended_addition,midcap_candidate,8,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+47,BANDUSDT,liquid80_recommended_addition,midcap_candidate,8,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build
+48,BATUSDT,liquid80_recommended_addition,midcap_candidate,8,True,not_authorized_until_full_source_trace,full source trace + listing/survivorship policy + gold panel build

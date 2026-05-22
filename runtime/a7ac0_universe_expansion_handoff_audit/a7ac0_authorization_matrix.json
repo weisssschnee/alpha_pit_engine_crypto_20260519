@@ -1,0 +1,33 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core48_data_backfill_contract": true,
+  "authorizes_large_search": false,
+  "authorizes_midcap_secondary_backfill_contract": true,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_watchlist_main_historical_proof": false,
+  "blockers_before_search": [
+    "expanded symbols do not yet have full raw checksum/source trace in repo proof pack",
+    "listing date and survivorship policy for expanded universe is not written",
+    "probe checks are endpoint/month samples, not full 2024-2026 panel validation",
+    "watchlist/new-listing symbols require separate treatment",
+    "universe expansion is not a substitute for independent liquidation/orderbook historical sources"
+  ],
+  "candidate_count": 124,
+  "core48_candidates": 17,
+  "decision": "PASS_A7AC0_UNIVERSE_EXPANSION_HANDOFF_READY_FOR_BACKFILL_CONTRACT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T10:20:44Z",
+  "input_is_new_independent_field_source": false,
+  "input_is_universe_expansion_probe": true,
+  "liquid80_probe_ready": true,
+  "midcap_candidates": 66,
+  "reject_or_manual_review": 11,
+  "required_next": [
+    "A7AC-1 core48/core80 data backfill and source-trace contract",
+    "A7AC-2 expanded universe gold panel build audit",
+    "A7AC-3 listing/survivorship policy before any expanded-universe replay",
+    "Keep alpha proof/shadow/paper/live blocked"
+  ],
+  "watchlist_or_new_listing": 30
+}

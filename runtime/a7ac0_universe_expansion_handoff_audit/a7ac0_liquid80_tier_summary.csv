@@ -1,0 +1,5 @@
+tier,symbols,mean_score,metrics_2024_ok,metrics_2025_ok,metrics_2026_ok,binance_klines_ok,binance_premium_ok,okx_oi_ok,okx_orderbook_ok,bybit_ticker_ok,bybit_orderbook_ok
+core48_candidate,17,10.1176,17,17,17,17,2,17,17,17,17
+midcap_candidate,66,8.1212,60,65,65,10,8,62,62,66,66
+reject_or_manual_review,11,3.8182,5,10,8,0,0,2,2,4,4
+watchlist_or_new_listing,30,6.1,19,29,28,9,7,8,8,22,22
