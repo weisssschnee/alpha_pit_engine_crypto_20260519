@@ -9,6 +9,7 @@ import re
 import time
 import urllib.error
 import urllib.request
+import zipfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -83,42 +84,71 @@ def download_bytes(url: str, timeout: int, retries: int, backoff: float) -> byte
     raise last_exc
 
 
-def download_file(url: str, path: Path, timeout: int, retries: int, backoff: float) -> tuple[int, str]:
+def download_file_once(url: str, path: Path, timeout: int) -> tuple[int, str]:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
     if tmp.exists():
         tmp.unlink()
     req = urllib.request.Request(url, headers={"User-Agent": UA})
-    last_exc: Exception | None = None
+    if tmp.exists():
+        tmp.unlink()
+    h = hashlib.sha256()
+    size = 0
+    with urllib.request.urlopen(req, timeout=timeout) as response:
+        with tmp.open("wb") as f:
+            while True:
+                chunk = response.read(1024 * 1024)
+                if not chunk:
+                    break
+                f.write(chunk)
+                h.update(chunk)
+                size += len(chunk)
+    tmp.replace(path)
+    return size, h.hexdigest()
+
+
+def zip_integrity_ok(path: Path) -> bool:
+    if not zipfile.is_zipfile(path):
+        return False
+    try:
+        with zipfile.ZipFile(path) as zf:
+            return zf.testzip() is None
+    except zipfile.BadZipFile:
+        return False
+
+
+def remove_bad_download(path: Path) -> None:
+    if path.exists():
+        path.unlink()
+
+
+def download_verified_file(
+    url: str,
+    path: Path,
+    expected_sha256: str,
+    timeout: int,
+    retries: int,
+    backoff: float,
+) -> tuple[int, str, bool, str]:
+    last_error = ""
     for attempt in range(1, retries + 1):
         try:
-            if tmp.exists():
-                tmp.unlink()
-            h = hashlib.sha256()
-            size = 0
-            with urllib.request.urlopen(req, timeout=timeout) as response:
-                with tmp.open("wb") as f:
-                    while True:
-                        chunk = response.read(1024 * 1024)
-                        if not chunk:
-                            break
-                        f.write(chunk)
-                        h.update(chunk)
-                        size += len(chunk)
-            tmp.replace(path)
-            return size, h.hexdigest()
+            size, digest = download_file_once(url, path, timeout=timeout)
+            checksum_ok = digest == expected_sha256
+            integrity_ok = zip_integrity_ok(path)
+            if checksum_ok and integrity_ok:
+                return size, digest, True, ""
+            last_error = f"attempt={attempt} checksum_ok={checksum_ok} zip_integrity_ok={integrity_ok}"
+            remove_bad_download(path)
         except urllib.error.HTTPError:
-            if tmp.exists():
-                tmp.unlink()
+            remove_bad_download(path)
             raise
-        except Exception as exc:  # noqa: BLE001 - retried and recorded by caller
-            last_exc = exc
-            if tmp.exists():
-                tmp.unlink()
-            if attempt < retries:
-                time.sleep(backoff * attempt)
-    assert last_exc is not None
-    raise last_exc
+        except Exception as exc:  # noqa: BLE001 - retry and preserve final reason
+            last_error = f"attempt={attempt} error={exc!r}"
+            remove_bad_download(path)
+        if attempt < retries:
+            time.sleep(backoff * attempt)
+    return 0, "", False, last_error
 
 
 def raw_path(root: Path, job: Job) -> Path:
@@ -172,24 +202,33 @@ def evaluate_job(root: Path, job: Job, timeout: int, retries: int, backoff: floa
             digest = sha256_file(dst)
             row["bytes"] = dst.stat().st_size
             row["sha256"] = digest
-            row["checksum_ok"] = digest == expected
+            checksum_ok = digest == expected
+            integrity_ok = zip_integrity_ok(dst)
+            row["checksum_ok"] = checksum_ok and integrity_ok
             if row["checksum_ok"]:
                 row["status"] = "exists_checksum_ok"
                 return row
             if not overwrite_bad:
                 row["status"] = "exists_checksum_mismatch"
-                row["error"] = "existing file checksum mismatch; rerun with --overwrite-bad"
+                row["error"] = f"existing file invalid; checksum_ok={checksum_ok} zip_integrity_ok={integrity_ok}; rerun with --overwrite-bad"
                 return row
             bad = dst.with_suffix(dst.suffix + f".bad_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
             dst.replace(bad)
 
-        size, digest = download_file(url, dst, timeout=timeout, retries=retries, backoff=backoff)
+        size, digest, ok, verify_error = download_verified_file(
+            url,
+            dst,
+            expected_sha256=expected,
+            timeout=timeout,
+            retries=retries,
+            backoff=backoff,
+        )
         row["bytes"] = size
         row["sha256"] = digest
-        row["checksum_ok"] = digest == expected
-        row["status"] = "downloaded_checksum_ok" if row["checksum_ok"] else "downloaded_checksum_mismatch"
-        if not row["checksum_ok"]:
-            row["error"] = "downloaded file checksum mismatch"
+        row["checksum_ok"] = ok
+        row["status"] = "downloaded_checksum_ok" if ok else "downloaded_checksum_mismatch_after_retries"
+        if not ok:
+            row["error"] = verify_error or "downloaded file checksum/integrity mismatch after retries"
         return row
     except urllib.error.HTTPError as exc:
         row["status"] = "zip_http_error"
