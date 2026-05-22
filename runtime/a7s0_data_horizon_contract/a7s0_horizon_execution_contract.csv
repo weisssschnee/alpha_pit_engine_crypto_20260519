@@ -1,0 +1,10 @@
+horizon_class,signal_frequency,execution_lags_required,primary_cost_bps,stress_cost_bps,success_metric_for_diagnostic,authorization
+H4,1h source panel with slower aggregation/rebalance,1bar;2bar;3bar,10,20;30,cost/lag survival improves without negative-control contamination,diagnostic_only_not_alpha_proof
+H8,1h source panel with slower aggregation/rebalance,1bar;2bar;3bar,10,20;30,cost/lag survival improves without negative-control contamination,diagnostic_only_not_alpha_proof
+H12,1h source panel with slower aggregation/rebalance,1bar;2bar;3bar,10,20;30,cost/lag survival improves without negative-control contamination,diagnostic_only_not_alpha_proof
+H24,1h source panel with slower aggregation/rebalance,1bar;2bar;3bar,10,20;30,cost/lag survival improves without negative-control contamination,diagnostic_only_not_alpha_proof
+H48,1h source panel with slower aggregation/rebalance,1bar;2bar;3bar,10,20;30,cost/lag survival improves without negative-control contamination,diagnostic_only_not_alpha_proof
+H72,1h source panel with slower aggregation/rebalance,1bar;2bar;3bar,10,20;30,cost/lag survival improves without negative-control contamination,diagnostic_only_not_alpha_proof
+H96,1h source panel with slower aggregation/rebalance,1bar;2bar;3bar,10,20;30,cost/lag survival improves without negative-control contamination,diagnostic_only_not_alpha_proof
+mixed_H12_H48,1h source panel with slower aggregation/rebalance,1bar;2bar;3bar,10,20;30,cost/lag survival improves without negative-control contamination,diagnostic_only_not_alpha_proof
+mixed_H24_H96,1h source panel with slower aggregation/rebalance,1bar;2bar;3bar,10,20;30,cost/lag survival improves without negative-control contamination,diagnostic_only_not_alpha_proof

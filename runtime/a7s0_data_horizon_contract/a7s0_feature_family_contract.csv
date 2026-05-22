@@ -1,0 +1,6 @@
+feature_family,allowed_role,blocked_role,must_report
+aggtrades_flow_state,state/interactor/horizon diagnostic,standalone activity/liquidity alpha expansion,standalone ablation; matched controls; 20bps; lag stress; May stress-only label
+aggtrades_large_trade_intensity,liquidity stress / size regime feature,raw large-trade bucket rank as candidate without controls,control dominance and symbol-tier attribution
+basis_premium_interaction,interaction with aggTrades or volatility state,funding/basis wrapper without residual vs FundingCore/Core4,FundingCore/Core4 residual and wrong-lag funding warning
+orderbook_depth_forward,forward observation context,historical alpha proof,append-only collector_time/observable_time audit
+liquidation_forced_flow_future_contract,new data candidate after PIT/source contract,search before field semantics and publication delay are verified,"event-time availability, liquidation side convention, venue coverage, source trace"

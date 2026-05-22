@@ -1,7 +1,6 @@
-field,required,description
-observable_time,True,Timestamp when the value is available for signal generation.
-event_time,True,Exchange or vendor event timestamp.
-publication_delay,True,Delay between event and observability.
-symbol_coverage,True,Per-symbol availability and missingness.
-aggregation_lag,True,Lag added before joining to 1h/4h/24h panels.
-survivorship_policy,True,"Handling of listing, delisting, and inactive markets."
+field_family,timestamp_semantics,observable_time_rule,historical_proof_status,forbidden_use
+base_1h_ohlcv_mark_index_premium,1h bar bucket start,bar close plus processing lag; usable next bar or later,allowed_if_existing_A7_alignment_holds,same-bar close execution or feature_time >= execution_time
+funding_observable,funding event / known funding field time,latest-known only; settlement-after-use forbidden,allowed only under A7D/A7E funding semantics,next_funding_rate or future settlement rate as signal
+aggtrades_enhanced_1h,"floor(event_time, 1h) bucket start",1h aggregate visible only after hour end,allowed for BTC/ETH/SOL after A7U-0R source trace pass,using current hour aggregate for execution inside same hour
+orderbook_forward_snapshot,collector_time / observable_time / event_time snapshot,forward-only snapshot visible after collector_time,not allowed for 2024-2026 historical proof,backfill into historical search or May stress proof
+positioning_forward,API event_time plus collector_time,append-only forward observation only,not allowed until separate historical PIT contract,retroactive history fill for alpha proof

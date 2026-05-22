@@ -1,14 +1,24 @@
 {
+  "agg_feature_columns": 94,
+  "agg_symbol_month_count": 87,
+  "authorizes_a7r_horizon_diagnostic_contract": true,
+  "authorizes_a7s1_field_availability_audit": true,
   "authorizes_alpha_proof": false,
-  "authorizes_alpha_search": false,
-  "authorizes_data_download": false,
-  "decision": "PASS_A7S0_DATA_HORIZON_CONTRACT_SKELETON",
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7S0_DATA_HORIZON_CONTRACT_READY",
   "executes_replay": false,
   "executes_search": false,
-  "generated_at": "2026-05-21T00:44:09Z",
-  "next_required": [
-    "field_semantics_review",
-    "source_cost_and_access_review",
-    "PIT_timestamp_contract_completion"
-  ]
+  "forward_only_fields_allowed_for_historical_proof": false,
+  "generated_at": "2026-05-22T07:08:33Z",
+  "may_policy": "stress_only_not_ranking_generation_threshold_or_allocation",
+  "panel_columns": 184,
+  "panel_exists": true,
+  "panel_rows": 251148,
+  "required_next": [
+    "A7S-1 audit any newly delivered OI/liquidation/orderbook/cross-exchange data before search",
+    "A7R horizon diagnostic may run only as diagnostic, not alpha proof",
+    "A7T forward-locked observation contract for forward-only fields"
+  ],
+  "unified_panel": "G:\\AlphaFactory_CryptoData\\gold\\panels\\crypto_core12_1h_with_aggtrades_features_v1.parquet"
 }

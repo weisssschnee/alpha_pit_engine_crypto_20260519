@@ -1,7 +1,9 @@
-source,priority,status,pit_risk,expected_value
-open_interest,1,contract_required,medium,market_state_and_leverage
-liquidation_events_or_volume,2,contract_required,high,forced_flow_state
-orderbook_depth_spread_imbalance,3,contract_required,high,tradability_and_short_horizon_stress
-cross_exchange_basis_premium,4,contract_required,medium_high,venue_relative_value_state
-cross_exchange_funding,5,contract_required,medium_high,funding_dispersion_state
-long_short_account_or_position_ratio,6,contract_required,medium,crowding_state
+source_id,local_path,current_status,historical_proof_allowed,forward_only,pit_requirements,next_action,path_exists,panel_rows,panel_columns,agg_feature_columns,agg_symbol_month_count
+unified_core12_1h_with_aggtrades_features_v1,G:\AlphaFactory_CryptoData\gold\panels\crypto_core12_1h_with_aggtrades_features_v1.parquet,READY_PANEL_FOR_CONTROLLED_EXPERIMENTS,True,False,inherits base panel plus aggTrades feature availability mask,primary experiment input for controlled diagnostics only,True,251148.0,184.0,94.0,87.0
+base_core12_1h_market_funding_mark_index,G:\AlphaFactory_CryptoData\gold\panels\crypto_core12_1h_v1.parquet,READY_EXISTING_PANEL,True,False,existing A7 linkage/funding contracts remain binding; feature_time < execution_time,usable as baseline panel only; do not treat prior funding-family results as alpha proof,True,,,,
+aggtrades_enhanced_v1_core3,G:\AlphaFactory_CryptoData\gold\microstructure\aggtrades_1h_flow_enhanced_v1,READY_CORE3_SOURCE_TRACE_PASS,True,False,timestamp is hour bucket start; feature observable only after hour close; raw checksum/source trace must remain closed,use as state/interaction/horizon feature; do not expand failed activity-liquidity standalone family,True,,,,
+aggtrades_enhanced_v1_remaining_core12,G:\AlphaFactory_CryptoData\gold\microstructure\aggtrades_1h_flow_enhanced_v1,MISSING_FOR_9_CORE12_SYMBOLS,False,False,same raw zip checksum/source trace as A7U-0R before experiment use,data-line can backfill; experiment-line must wait for source trace pass before core12 agg search,True,,,,
+orderbook_forward_snapshot,G:\AlphaFactory_CryptoData\silver\binance_api\orderbook_forward_snapshot,FORWARD_ONLY_AVAILABLE,False,True,collector_time/observable_time/event_time retained; no historical backfill into 2024-2026 proof,use only for A7T forward observation/live-shadow context until sufficient append-only history exists,True,,,,
+positioning_forward_oi_longshort_taker_ratio,G:\AlphaFactory_CryptoData\metadata\positioning_forward_state.csv,FORWARD_ONLY_AVAILABLE,False,True,event_time/observable_time/collector_time and forward_only_flag required; no historical proof use,append-only observation only; historical use requires separate PIT contract and raw trace,True,,,,
+liquidation_forced_flow,,NOT_PRESENT_CONTRACT_REQUIRED,False,False,event_time and exchange publication semantics; no future aggregate leakage; raw/source trace required,"high-value candidate source after data contract, sample audit, and checksum trace",False,,,,
+cross_exchange_basis_funding_depth,,NOT_PRESENT_CONTRACT_REQUIRED,False,False,"venue-specific observable_time, symbol mapping, trading calendar, fee/cost convention, and missingness contract",do not search before venue/PIT/symbol contract,False,,,,

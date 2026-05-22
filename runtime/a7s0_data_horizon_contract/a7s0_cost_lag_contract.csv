@@ -1,0 +1,5 @@
+scenario,cost_bps,execution_lag,required_for
+normal,10,1bar,all diagnostics
+stress,20,1bar,candidate clue label
+severe,30,2bar;3bar,horizon reset comparison
+zero_cost_diagnostic,0,1bar,"failure attribution only, never promotion"
