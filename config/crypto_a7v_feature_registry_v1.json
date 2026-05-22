@@ -1,0 +1,88 @@
+{
+  "agg_coverage_symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT"
+  ],
+  "authorization": {
+    "authorizes_agg_aware_generator_dry_run": true,
+    "authorizes_alpha_proof": false,
+    "authorizes_core12_cross_section_rank_with_missing_agg": false,
+    "authorizes_full_search": false,
+    "authorizes_same_hour_execution": false,
+    "authorizes_shadow_paper_live": false,
+    "authorizes_zero_fill_for_missing_agg": false,
+    "blockers": [],
+    "decision": "PASS_A7V1_FEATURE_REGISTRY_AND_A7V2_NO_SEARCH_SMOKE",
+    "executes_replay": false,
+    "executes_search": false,
+    "generated_at": "2026-05-22T01:24:15Z",
+    "required_next": [
+      "A7V-3 agg-aware candidate dry run using config/crypto_a7v_feature_registry_v1.json",
+      "A7V-4 no-mask/wrong-lag/time-shuffle controls before replay",
+      "A7U-0R consolidated raw checksum trace before final alpha panel claims"
+    ]
+  },
+  "availability_mask": "agg_features_available",
+  "core_universe": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "LINKUSDT",
+    "AVAXUSDT",
+    "LTCUSDT",
+    "BCHUSDT",
+    "SUIUSDT"
+  ],
+  "derived_feature_spec_count": 5211,
+  "field_family_counts": {
+    "activity_liquidity": 19,
+    "cross_symbol": 10,
+    "flow": 16,
+    "large_trade": 6,
+    "other": 5,
+    "price_microstructure": 12,
+    "rolling": 26
+  },
+  "files": {
+    "base_feature_registry": "runtime\\a7v1_feature_registry_smoke\\a7v1_base_feature_registry.csv",
+    "derived_feature_specs": "runtime\\a7v1_feature_registry_smoke\\a7v1_derived_feature_specs.csv",
+    "negative_controls": "runtime\\a7v1_feature_registry_smoke\\a7v2_negative_control_audit.csv",
+    "smoke_metrics": "runtime\\a7v1_feature_registry_smoke\\a7v2_no_search_smoke_metrics.csv"
+  },
+  "generated_at": "2026-05-22T01:24:15Z",
+  "generator_controls": {
+    "funding_as_unrestricted_discovery_target_allowed": false,
+    "missing_as_signal_allowed": false,
+    "non_core3_cross_section_rank_allowed": false,
+    "required_feature_available_time": "hour_bucket_start + 1h for base agg; rolling descendants shift by required past-only lookback",
+    "required_negative_controls": [
+      "row_shuffle",
+      "time_shuffle",
+      "wrong_lag",
+      "sign_flip",
+      "no_agg_mask",
+      "zero_fill_core12_rank"
+    ],
+    "required_residual_baselines": [
+      "FundingCore",
+      "Core4"
+    ],
+    "same_hour_execution_allowed": false,
+    "zero_fill_allowed": false
+  },
+  "integration_mode": "opt_in_explicit_load",
+  "numeric_agg_base_feature_count": 94,
+  "primary_panel": "G:\\AlphaFactory_CryptoData\\gold\\panels\\crypto_core12_1h_with_aggtrades_features_v1.parquet",
+  "production_families": [
+    "cross_symbol_self_reproduction_core3",
+    "interaction_self_reproduction",
+    "rolling_self_reproduction"
+  ],
+  "schema_field": "agg_feature_schema",
+  "schema_version": "crypto_a7v_feature_registry_v1"
+}
