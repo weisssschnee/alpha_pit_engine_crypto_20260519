@@ -1,0 +1,15 @@
+{
+  "columns_read": 25,
+  "decision": "PASS_A7AF0_CORE39_SELECTED_FIELD_REPLAY_CONTRACT_READY",
+  "duplicate_keys": 0,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T15:03:15Z",
+  "output_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7af0_core39_selected_field_replay_contract",
+  "panel": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_core39_all_features_metrics_v3_market_structure_v1.parquet",
+  "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7AF0_CORE39_SELECTED_FIELD_REPLAY_CONTRACT_20260522.md",
+  "rows": 815818,
+  "symbols": 39,
+  "timestamp_max": "2026-05-22 00:00:00+00:00",
+  "timestamp_min": "2024-01-01 00:00:00+00:00"
+}

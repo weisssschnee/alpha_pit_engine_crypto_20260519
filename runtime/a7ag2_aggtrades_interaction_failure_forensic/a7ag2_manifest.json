@@ -1,0 +1,13 @@
+{
+  "candidates": 90,
+  "controls": 360,
+  "decision": "HOLD_A7AG2_PRE_MAY_ONLY_AND_CONTROL_CONTAMINATION",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T15:24:16Z",
+  "negative_control_research_like": 3,
+  "output_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ag2_aggtrades_interaction_failure_forensic",
+  "post_may_eligible_after_core_candidates": 0,
+  "pre_may_core_gate_candidates": 1,
+  "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7AG2_AGGTRADES_INTERACTION_FAILURE_FORENSIC_20260522.md"
+}

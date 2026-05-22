@@ -1,0 +1,16 @@
+{
+  "authorizes_a7ag_expanded_replay": false,
+  "authorizes_aggtrades_interaction_expansion": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_post_may_eligible_after_core_gate",
+    "negative_control_research_like_penetration",
+    "pre_may_clue_fails_may_stress"
+  ],
+  "decision": "HOLD_A7AG2_PRE_MAY_ONLY_AND_CONTROL_CONTAMINATION",
+  "may_policy": "May remains post-selection stress only; no May ranking or symbol tuning",
+  "suggested_next": "wait_for_core12_rem9_aggtrades_or_define_new_non_1h_objective_contract"
+}

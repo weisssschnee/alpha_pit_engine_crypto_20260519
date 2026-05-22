@@ -1,0 +1,9 @@
+{
+  "authorizes_a7af2_forensic": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7AF1_NO_CONTROL_CLEAN_CLUE",
+  "may_policy": "May was evaluated only after fixed candidate generation; no May ranking or selection"
+}

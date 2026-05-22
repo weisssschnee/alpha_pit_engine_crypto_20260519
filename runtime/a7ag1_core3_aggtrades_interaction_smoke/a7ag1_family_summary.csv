@@ -1,0 +1,6 @@
+family,decision,count
+H0_agg_flow_x_context,A7AG1_PRE_MAY_ONLY_CLUE,1
+H0_agg_flow_x_context,A7AG1_REJECTED,63
+H1_large_trade_x_context,A7AG1_REJECTED,18
+H2_flow_x_crowding,A7AG1_REJECTED,6
+H3_flow_pressure_benchmark,A7AG1_REJECTED,2

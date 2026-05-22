@@ -1,0 +1,11 @@
+registry_item,type,status,reason,count,pre_may_core_gate,post_may_eligible_after_core
+G3_crowding_x_context,family,blocked_for_expansion,no_pre_may_core_gate,24,0.0,0.0
+G0_basis_premium_dynamic,family,blocked_for_expansion,no_pre_may_core_gate,16,0.0,0.0
+G1_crowding_x_basis_dynamic,family,blocked_for_expansion,no_pre_may_core_gate,24,0.0,0.0
+G2_oi_dynamic_x_basis_dynamic,family,blocked_for_expansion,no_pre_may_core_gate,18,0.0,0.0
+G4_oi_change_x_context,family,blocked_for_expansion,no_pre_may_core_gate,6,0.0,0.0
+G5_funding_basis_benchmark,family,blocked_for_expansion,no_pre_may_core_gate,4,0.0,0.0
+G2_oi_dynamic_x_basis_dynamic::sign_flip,control_contamination,blocked_for_expansion,negative_control_research_like,1,,
+G4_oi_change_x_context::sign_flip,control_contamination,blocked_for_expansion,negative_control_research_like,1,,
+G4_oi_change_x_context::sign_flip,control_contamination,blocked_for_expansion,negative_control_research_like,1,,
+core39_metrics_market_structure_selected_fields_a7af1,route,do_not_expand_without_new_objective,zero_control_clean_clues_and_negative_control_penetration,92,0.0,0.0

@@ -1,0 +1,11 @@
+gate,pass_count,total,pass_rate
+gate_raw_validation_positive,8,90,0.08888888888888889
+gate_raw_recent_positive,7,90,0.07777777777777778
+gate_cost20_recent_positive,2,90,0.022222222222222223
+gate_lag1_recent_positive,7,90,0.07777777777777778
+gate_lag2_recent_positive,7,90,0.07777777777777778
+gate_residual_recent_positive,1,90,0.011111111111111112
+gate_controls_clean,87,90,0.9666666666666667
+pre_may_core_gate,1,90,0.011111111111111112
+post_may_positive,16,90,0.17777777777777778
+post_may_eligible_after_core,0,90,0.0

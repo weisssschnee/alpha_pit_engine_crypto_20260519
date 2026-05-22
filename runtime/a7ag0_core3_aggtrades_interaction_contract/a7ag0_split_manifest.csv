@@ -1,0 +1,5 @@
+split,start,end,usage,rows,symbols,expected_rows_if_full,row_coverage,may_allowed_for_ranking,feature_time_rule,execution_rule
+train_2024,2024-01-01T00:00:00+00:00,2024-12-31T23:00:00+00:00,selection_training_only,26322,3,26352,0.9988615664845173,True,aggTrades 1h bucket feature available only after hour close,execution_time >= next 1h bar; lag stress required
+validation_2025H1,2025-01-01T00:00:00+00:00,2025-06-30T23:00:00+00:00,ranking_allowed_non_may,13032,3,13032,1.0,True,aggTrades 1h bucket feature available only after hour close,execution_time >= next 1h bar; lag stress required
+recent_2025H2_2026Apr,2025-07-01T00:00:00+00:00,2026-04-30T23:00:00+00:00,ranking_allowed_non_may,21888,3,21888,1.0,True,aggTrades 1h bucket feature available only after hour close,execution_time >= next 1h bar; lag stress required
+may_2026_stress,2026-05-01T00:00:00+00:00,2026-05-20T23:00:00+00:00,post_selection_stress_only,1440,3,1440,1.0,False,aggTrades 1h bucket feature available only after hour close,execution_time >= next 1h bar; lag stress required

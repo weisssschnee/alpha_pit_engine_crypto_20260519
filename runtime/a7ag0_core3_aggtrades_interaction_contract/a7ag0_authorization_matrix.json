@@ -1,0 +1,15 @@
+{
+  "authorizes_a7ag1_small_controlled_interaction_smoke": true,
+  "authorizes_aggtrades_standalone_activity_expansion": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AG0_CORE3_AGGTRADES_INTERACTION_CONTRACT_READY",
+  "may_policy": "May 2026 stress-only; not ranking, field selection, symbol weighting, or threshold tuning",
+  "warnings": [
+    "A7AG0 is a contract only; no replay and no alpha evidence",
+    "A7V activity/liquidity standalone family remains rejected"
+  ]
+}
