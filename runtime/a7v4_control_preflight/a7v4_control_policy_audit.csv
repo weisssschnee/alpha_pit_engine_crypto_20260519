@@ -1,0 +1,10 @@
+gate,value,decision
+candidate_count,360,PASS
+all_candidates_have_replay_controls,True,PASS
+all_candidates_have_blocked_controls,True,PASS
+replay_controls_promotable,False,PASS
+blocked_controls_allowed_in_replay,False,PASS
+replay_controls_use_agg_mask,True,PASS
+blocked_no_mask_present,360,PASS
+blocked_zero_fill_present,360,PASS
+blocked_same_hour_present,360,PASS
