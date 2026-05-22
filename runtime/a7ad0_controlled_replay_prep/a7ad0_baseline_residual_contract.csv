@@ -1,0 +1,5 @@
+baseline_id,formula,role,required
+FundingCore_proxy_core48,Rank(latest_known_funding_rate) / ZScore(latest_known_funding_rate) variants,"mandatory residual baseline and benchmark, not promotable candidate",True
+Core4_research_benchmark,legacy Core4 motif family where fields exist; benchmark only,residual/control benchmark; not alpha proof and not shadow proof,True
+market_beta_price_momentum,ret_12 / ret_24 cross-sectional rank,simple price baseline,True
+metrics_standalone,open_interest / long-short / taker-ratio single-source standalone baselines,test whether interactions add information beyond independent metrics source,True

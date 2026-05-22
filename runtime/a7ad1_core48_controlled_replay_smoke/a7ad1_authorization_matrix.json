@@ -1,0 +1,16 @@
+{
+  "authorizes_a7ad2_forensic_or_contract_revision": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "HOLD_A7AD1_NO_CONTROL_CLEAN_PRE_MAY_CLUE",
+  "may_policy": "May unavailable in core48 common window; future May/backfilled stress remains post-selection only",
+  "warnings": [
+    "no_may_stress_available_for_core48_common_window",
+    "this_is_controlled_smoke_not_formula_search",
+    "matched_negative_controls_research_like_present_candidates_demoted",
+    "no_pre_may_research_clues_after_controls"
+  ]
+}

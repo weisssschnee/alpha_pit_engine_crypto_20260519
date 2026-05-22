@@ -1,0 +1,19 @@
+{
+  "control_clean_research_clues": 0,
+  "decision": "HOLD_A7AD2_CONTROL_CONTAMINATION_AND_NO_CLUE_CONFIRMED",
+  "executes_replay": false,
+  "executes_search": false,
+  "families_with_control_like": [
+    "F1_funding_residual_controls",
+    "F2_metrics_crowding_oi_interaction",
+    "F3_cross_symbol_relative_strength",
+    "F4_volatility_liquidity_capped"
+  ],
+  "generated_at": "2026-05-22T14:48:28Z",
+  "output_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ad2_core48_control_forensic",
+  "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7AD2_CORE48_CONTROL_FORENSIC_20260522.md",
+  "research_like_controls": 38,
+  "sign_flip_research_like_controls": 8,
+  "total_candidates": 156,
+  "wrong_lag_research_like_controls": 30
+}

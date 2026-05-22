@@ -1,0 +1,6 @@
+family,decision,count
+F0_low_turnover_price_basis,A7AD1_REJECTED,42
+F1_funding_residual_controls,A7AD1_REJECTED,12
+F2_metrics_crowding_oi_interaction,A7AD1_REJECTED,74
+F3_cross_symbol_relative_strength,A7AD1_REJECTED,12
+F4_volatility_liquidity_capped,A7AD1_REJECTED,16
