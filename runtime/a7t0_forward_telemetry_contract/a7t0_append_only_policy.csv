@@ -1,0 +1,6 @@
+policy_id,rule,enforcement
+A7T_APPEND_001,All forward telemetry writes are append-only; existing raw/silver rows cannot be overwritten.,partition by run/date; write new manifest per run; quarantine repairs in separate repair path
+A7T_APPEND_002,Forward-only fields cannot be joined to historical proof windows before their collection timestamp.,feature_available_time >= observable_time; no_historical_backfill_flag must remain true
+A7T_APPEND_003,Any schema change increments collector_version and starts a new compatibility segment.,collector_version and schema_hash in manifest
+A7T_APPEND_004,May 2026 remains stress/failure-attribution only and is never used for telemetry ranking/tuning.,"May columns absent from collector, ranking, and scheduler inputs"
+A7T_APPEND_005,Telemetry may become alpha evidence only after a locked forward window and a separate replay/proof gate.,A7T cannot authorize alpha proof; later stage must freeze candidate definitions before forward window

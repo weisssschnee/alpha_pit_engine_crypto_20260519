@@ -1,0 +1,9 @@
+schema_section,required_fields,purpose,blocking_if_missing
+identity,source_id; provider; dataset; symbol; venue_symbol; feature_group,"Stable routing, venue mapping, and symbol-level coverage.",True
+time_contract,collection_time; observable_time; event_time; feature_available_time; timezone,PIT alignment and append-only evidence boundary.,True
+source_trace,raw_path; raw_sha256; source_url; request_time; response_status; collector_version,Reproducibility and source audit.,True
+forward_flags,forward_only_flag; no_historical_backfill_flag; is_historical_backfill,Prevents accidental historical proof use.,True
+orderbook_depth,best_bid; best_ask; spread_bps; depth_bid_notional_5/10/20; depth_ask_notional_5/10/20; depth_imbalance_5/10/20,Displayed liquidity telemetry.,False
+liquidation_recent,liquidation_buy_notional; liquidation_sell_notional; liquidation_count; large_liquidation_notional; liquidation_imbalance,Forward/recent forced-flow pressure telemetry.,False
+positioning_forward,openInterestHist; globalLongShortAccountRatio; topLongShortAccountRatio; topLongShortPositionRatio; takerlongshortRatio,Append-only positioning telemetry.,False
+basis_funding_cross_exchange,funding_rate; basis; basis_rate; premium; mark_price; index_price; next_funding_time; venue,Cross-venue basis/funding dispersion telemetry.,False

@@ -1,0 +1,6 @@
+evidence_type,allowed_now,minimum_condition,notes
+source_audit,True,raw_path/raw_sha256/source_url/time fields present,A7T can support source audit and telemetry design.
+forward_telemetry,True,append-only collector with manifest and schema version,Telemetry only; no trading authorization.
+historical_alpha_proof,False,not allowed from forward-only snapshots,Requires independent historical source contract or future append-only proof window.
+research_candidate,False,candidate definitions frozen before forward window; controls/cost/lag/LOO required,A7T does not produce candidates.
+shadow_paper_live,False,separate alpha proof gate,Explicitly blocked.

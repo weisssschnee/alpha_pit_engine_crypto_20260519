@@ -1,0 +1,28 @@
+{
+  "authorizes_append_only_observation": true,
+  "authorizes_forward_telemetry_collection_design": true,
+  "authorizes_historical_alpha_proof": false,
+  "authorizes_research_candidate": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "forward-only snapshots cannot be historical proof",
+    "liquidation retention/pagination contract unresolved",
+    "orderbook historical source not validated",
+    "no candidate definitions are frozen in A7T-0"
+  ],
+  "decision": "PASS_A7T0_FORWARD_TELEMETRY_CONTRACT_READY",
+  "executes_download": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T10:00:51Z",
+  "ready_forward_sources": 2,
+  "required_next": [
+    "Implement daily forward telemetry health report",
+    "Add collector_version/schema_hash to forward manifests",
+    "Keep A7AA-1 contracts for liquidation/cross-exchange historical feasibility separate"
+  ],
+  "total_forward_sources": 3,
+  "warnings": [
+    "binance_positioning_forward_5m: HOLD_FORWARD_MANIFEST_ERRORS"
+  ]
+}

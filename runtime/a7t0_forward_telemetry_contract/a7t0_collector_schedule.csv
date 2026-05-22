@@ -1,0 +1,5 @@
+collector,cadence,minimum_fields,primary_use,historical_proof_use
+cross_exchange_forward_snapshot,hourly or 15min during experiment hours,provider/dataset/symbol/observable_time/raw_sha256/feature_group,forward telemetry dashboard and source coverage,blocked
+binance_orderbook_forward_snapshot,hourly baseline; 15min optional during stress periods,"best bid/ask, spread, depth notional, depth imbalance",liquidity state and depth telemetry,blocked
+binance_positioning_forward_5m,daily append catch-up; source period remains 5m,"event_time, observable_time, collector_time, forward flags, raw sha256",positioning telemetry and future append-only history,blocked until accumulated after collector freeze
+daily_forward_health_report,daily,"row counts, missing symbols, stale feeds, schema hash, error count",collector operations and proof hygiene,audit metadata only
