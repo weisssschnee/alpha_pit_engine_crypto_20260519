@@ -1,0 +1,7 @@
+{
+  "decision": "HOLD_A7U0R_SOURCE_TRACE_INCOMPLETE",
+  "generated_at": "2026-05-22T02:23:56Z",
+  "output_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7u0r_source_trace_audit",
+  "panel_path": "G:\\AlphaFactory_CryptoData\\gold\\panels\\crypto_core12_1h_with_aggtrades_features_v1.parquet",
+  "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7U0R_SOURCE_TRACE_AUDIT_20260522.md"
+}

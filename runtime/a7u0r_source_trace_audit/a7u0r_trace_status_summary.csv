@@ -1,0 +1,4 @@
+raw_trace_class,source_trace_decision,rows
+missing_raw_checksum_manifest,HOLD_A7U0R_SOURCE_TRACE_ROW,12
+raw_checksum_not_ok,HOLD_A7U0R_SOURCE_TRACE_ROW,2
+raw_checksum_ok,PASS_A7U0R_SOURCE_TRACE_ROW,73

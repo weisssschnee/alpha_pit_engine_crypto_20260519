@@ -1,0 +1,24 @@
+{
+  "agg_partition_rows": 87,
+  "authorizes_alpha_proof": false,
+  "authorizes_controlled_experiments_with_caveat": true,
+  "authorizes_final_panel_raw_level_claim": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "source_trace_rows_not_ready",
+    "raw_checksum_manifest_coverage_incomplete"
+  ],
+  "decision": "HOLD_A7U0R_SOURCE_TRACE_INCOMPLETE",
+  "executes_replay": false,
+  "executes_search": false,
+  "expected_trace_rows": 87,
+  "generated_at": "2026-05-22T02:23:56Z",
+  "raw_checksum_ok_rows": 73,
+  "required_next": [
+    "Resolve source trace HOLD rows before final raw-level panel claims",
+    "Keep A7V experiment claims caveated as controlled experiments, not final panel proof",
+    "Request missing or corrected raw checksum manifests from data line"
+  ],
+  "source_trace_hold_rows": 14,
+  "source_trace_ready_rows": 73
+}
