@@ -291,6 +291,31 @@ def write_report(now: str, trace: pd.DataFrame, status: pd.DataFrame, by_symbol:
         "expected_hours",
         "source_trace_decision",
     ]
+    if authorization["blockers"]:
+        interpretation = [
+            "- Enhanced hourly partitions exist for the expected core3 symbol-month rows, including the current partial May daily extension.",
+            "- Daily May rows have checksum status from the daily download manifest.",
+            "- Several historical monthly rows lack complete raw checksum manifest coverage or have non-ok checksum status in the available local manifest set. These rows can be used for controlled experiments only under the existing panel acceptance boundary, not for final raw-level proof claims.",
+            "- The unified panel can remain the A7V experiment input, but final panel claims require resolving the raw checksum trace gaps listed above.",
+        ]
+        required_next = [
+            "- Ask data line to provide or regenerate raw checksum manifests for the HOLD rows, especially early 2024 ETH/SOL and any monthly checksum mismatch rows.",
+            "- Do not use A7V/A7U to claim final raw-level panel proof until all source-trace rows pass.",
+            "- Continue controlled experiments only with explicit `source_trace_incomplete` caveat.",
+        ]
+    else:
+        interpretation = [
+            "- All 87 core3 symbol-month source trace rows have raw checksum status `ok` and matching enhanced hourly partitions.",
+            "- Enhanced hourly partitions exist for the expected core3 symbol-month rows, including the current partial May daily extension.",
+            "- The `source_trace_incomplete` caveat is removed for A7V controlled experiments.",
+            "- This closes raw-level source trace for the enhanced aggTrades panel; it does not validate alpha, strategy robustness, or production readiness.",
+        ]
+        required_next = [
+            "- A7V/A7U may reference the enhanced aggTrades panel without the previous `source_trace_incomplete` caveat.",
+            "- Continue to keep alpha proof / shadow / paper / live blocked by A7V-6/A7V-7 signal failures.",
+            "- Any future aggTrades panel refresh must rerun A7U-0R before final panel claims.",
+        ]
+
     lines = [
         "# Crypto A7U-0R Source Trace Audit",
         "",
@@ -324,10 +349,7 @@ def write_report(now: str, trace: pd.DataFrame, status: pd.DataFrame, by_symbol:
         "",
         "## Interpretation",
         "",
-        "- Enhanced hourly partitions exist for the expected core3 symbol-month rows, including the current partial May daily extension.",
-        "- Daily May rows have checksum status from the daily download manifest.",
-        "- Several historical monthly rows lack complete raw checksum manifest coverage or have non-ok checksum status in the available local manifest set. These rows can be used for controlled experiments only under the existing panel acceptance boundary, not for final raw-level proof claims.",
-        "- The unified panel can remain the A7V experiment input, but final panel claims require resolving the raw checksum trace gaps listed above.",
+        *interpretation,
         "",
         "## Authorization",
         "",
@@ -337,9 +359,7 @@ def write_report(now: str, trace: pd.DataFrame, status: pd.DataFrame, by_symbol:
         "",
         "## Required Next",
         "",
-        "- Ask data line to provide or regenerate raw checksum manifests for the HOLD rows, especially early 2024 ETH/SOL and any monthly checksum mismatch rows.",
-        "- Do not use A7V/A7U to claim final raw-level panel proof until all source-trace rows pass.",
-        "- Continue controlled experiments only with explicit `source_trace_incomplete` caveat.",
+        *required_next,
     ]
     REPORT_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -362,6 +382,19 @@ def main() -> None:
     if partition_rows < total_rows:
         blockers.append("agg_enhanced_partitions_missing")
     decision = "HOLD_A7U0R_SOURCE_TRACE_INCOMPLETE" if blockers else "PASS_A7U0R_SOURCE_TRACE_COMPLETE"
+    required_next = (
+        [
+            "Resolve source trace HOLD rows before final raw-level panel claims",
+            "Keep A7V experiment claims caveated as controlled experiments, not final panel proof",
+            "Request missing or corrected raw checksum manifests from data line",
+        ]
+        if blockers
+        else [
+            "A7V/A7U may reference the enhanced aggTrades panel without source_trace_incomplete caveat",
+            "Alpha proof, expanded replay, shadow, paper, and live remain blocked by A7V-6/A7V-7 signal failures",
+            "Rerun A7U-0R after any future aggTrades panel refresh",
+        ]
+    )
     authorization = {
         "generated_at": now,
         "decision": decision,
@@ -373,15 +406,12 @@ def main() -> None:
         "source_trace_hold_rows": hold_rows,
         "raw_checksum_ok_rows": raw_checksum_ok_rows,
         "agg_partition_rows": partition_rows,
-        "authorizes_controlled_experiments_with_caveat": True,
+        "authorizes_controlled_experiments_with_caveat": bool(blockers),
+        "authorizes_controlled_experiments_without_source_trace_caveat": not bool(blockers),
         "authorizes_final_panel_raw_level_claim": False if blockers else True,
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
-        "required_next": [
-            "Resolve source trace HOLD rows before final raw-level panel claims",
-            "Keep A7V experiment claims caveated as controlled experiments, not final panel proof",
-            "Request missing or corrected raw checksum manifests from data line",
-        ],
+        "required_next": required_next,
     }
     trace.to_csv(OUT_DIR / "a7u0r_symbol_month_source_trace.csv", index=False)
     status.to_csv(OUT_DIR / "a7u0r_trace_status_summary.csv", index=False)

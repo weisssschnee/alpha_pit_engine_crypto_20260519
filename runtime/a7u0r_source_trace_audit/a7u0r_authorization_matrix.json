@@ -1,24 +1,22 @@
 {
   "agg_partition_rows": 87,
   "authorizes_alpha_proof": false,
-  "authorizes_controlled_experiments_with_caveat": true,
-  "authorizes_final_panel_raw_level_claim": false,
+  "authorizes_controlled_experiments_with_caveat": false,
+  "authorizes_controlled_experiments_without_source_trace_caveat": true,
+  "authorizes_final_panel_raw_level_claim": true,
   "authorizes_shadow_paper_live": false,
-  "blockers": [
-    "source_trace_rows_not_ready",
-    "raw_checksum_manifest_coverage_incomplete"
-  ],
-  "decision": "HOLD_A7U0R_SOURCE_TRACE_INCOMPLETE",
+  "blockers": [],
+  "decision": "PASS_A7U0R_SOURCE_TRACE_COMPLETE",
   "executes_replay": false,
   "executes_search": false,
   "expected_trace_rows": 87,
-  "generated_at": "2026-05-22T02:23:56Z",
-  "raw_checksum_ok_rows": 73,
+  "generated_at": "2026-05-22T06:27:04Z",
+  "raw_checksum_ok_rows": 87,
   "required_next": [
-    "Resolve source trace HOLD rows before final raw-level panel claims",
-    "Keep A7V experiment claims caveated as controlled experiments, not final panel proof",
-    "Request missing or corrected raw checksum manifests from data line"
+    "A7V/A7U may reference the enhanced aggTrades panel without source_trace_incomplete caveat",
+    "Alpha proof, expanded replay, shadow, paper, and live remain blocked by A7V-6/A7V-7 signal failures",
+    "Rerun A7U-0R after any future aggTrades panel refresh"
   ],
-  "source_trace_hold_rows": 14,
-  "source_trace_ready_rows": 73
+  "source_trace_hold_rows": 0,
+  "source_trace_ready_rows": 87
 }
