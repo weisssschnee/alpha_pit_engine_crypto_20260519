@@ -1,0 +1,31 @@
+{
+  "a7v5_candidate_count": 36,
+  "a7v5_control_count": 144,
+  "a7v5_metric_rows_read": 720,
+  "a7v5_positives_with_matched_positive_controls": 5,
+  "a7v5_smoke_positive_count": 18,
+  "authorizes_a7v7_failure_attribution": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_expanded_replay": false,
+  "authorizes_full_search": false,
+  "authorizes_may_robustness_claim": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_a7v5_positive_survives_may_stress",
+    "matched_controls_positive_for_a7v5_positives",
+    "pre_may_clues_family_concentrated"
+  ],
+  "decision": "HOLD_A7V6_NO_POST_MAY_DOMINANT_CANDIDATE",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T02:07:32Z",
+  "post_may_positive_among_a7v5_positives": 0,
+  "pre_may_control_clean_cost20_dominance_count": 5,
+  "pre_may_top_family_share": 0.8,
+  "required_next": [
+    "A7V-7 failure attribution on the 5 pre-May dominance clues",
+    "Do not promote A7V candidates; all A7V-5 positives fail May stress",
+    "Explain matched-control contamination before any expanded replay",
+    "A7U-0R consolidated raw checksum/source trace before final panel claims"
+  ]
+}
