@@ -188,7 +188,7 @@ def evaluate_job(root: Path, job: Job, timeout: int, retries: int, backoff: floa
             checksum_text = download_bytes(checksum_url, timeout=timeout, retries=retries, backoff=backoff).decode("utf-8", errors="replace")
             chk_path.write_text(checksum_text, encoding="utf-8")
         except urllib.error.HTTPError as exc:
-            row["status"] = "checksum_http_error"
+            row["status"] = "not_available_404" if exc.code == 404 else "checksum_http_error"
             row["error"] = f"{exc.code} {exc.reason}"
             return row
         expected = parse_checksum(chk_path.read_text(encoding="utf-8", errors="replace"))
@@ -231,7 +231,7 @@ def evaluate_job(root: Path, job: Job, timeout: int, retries: int, backoff: floa
             row["error"] = verify_error or "downloaded file checksum/integrity mismatch after retries"
         return row
     except urllib.error.HTTPError as exc:
-        row["status"] = "zip_http_error"
+        row["status"] = "not_available_404" if exc.code == 404 else "zip_http_error"
         row["error"] = f"{exc.code} {exc.reason}"
         return row
     except Exception as exc:  # noqa: BLE001 - manifest should record all failures
@@ -350,8 +350,17 @@ def main() -> int:
         append_csv(manifest_path, rows_buffer, fieldnames)
         rows_buffer.clear()
 
-    bad_count = sum(v for k, v in counts.items() if not (k.endswith("checksum_ok") or k == "exists_checksum_ok"))
-    decision = "PASS_A7AC2C_BINANCE_VISION_MONTHLY_POOL_COMPLETED" if bad_count == 0 else "HOLD_A7AC2C_BINANCE_VISION_MONTHLY_POOL_HAS_FAILURES"
+    ok_statuses = {"exists_checksum_ok", "downloaded_checksum_ok", "not_available_404"}
+    bad_count = sum(v for k, v in counts.items() if k not in ok_statuses)
+    decision = (
+        "PASS_A7AC2C_BINANCE_VISION_MONTHLY_POOL_COMPLETED"
+        if bad_count == 0 and counts.get("not_available_404", 0) == 0
+        else (
+            "PASS_A7AC2C_BINANCE_VISION_MONTHLY_POOL_COMPLETED_WITH_LISTING_GAPS"
+            if bad_count == 0
+            else "HOLD_A7AC2C_BINANCE_VISION_MONTHLY_POOL_HAS_FAILURES"
+        )
+    )
     write_json(status_path, snapshot(decision))
     print("status=" + str(status_path), flush=True)
     print("manifest=" + str(manifest_path), flush=True)
