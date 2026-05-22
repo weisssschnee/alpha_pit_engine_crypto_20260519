@@ -1,0 +1,7 @@
+item,value
+scope,"A7AE-0 contract only, then A7AE-1 <= 96 candidate controlled smoke if contract passes"
+candidate_focus,change/persistence/regime interaction variants; avoid static OI level x realized_vol dominance
+cost_lag,10bps/20bps and lag0/lag1 required; lag2 diagnostic
+controls,matched controls mandatory; wrong-lag strict block; sign-flip orientation block
+may_policy,May still unavailable for core48 common window; future May is stress-only
+authorization,"no formula search, no large search, no alpha proof, no shadow/paper/live"

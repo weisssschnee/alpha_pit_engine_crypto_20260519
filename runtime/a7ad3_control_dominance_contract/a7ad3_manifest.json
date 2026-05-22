@@ -1,0 +1,10 @@
+{
+  "decision": "PASS_A7AD3_CONTROL_DOMINANCE_CONTRACT_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "families_requiring_redesign_or_quarantine": 3,
+  "generated_at": "2026-05-22T14:50:57Z",
+  "output_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ad3_control_dominance_contract",
+  "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7AD3_CONTROL_DOMINANCE_CONTRACT_20260522.md",
+  "research_like_controls_from_a7ad2": 38
+}

@@ -1,0 +1,6 @@
+rule_id,rule,threshold,effect
+D0,matched_controls_required_for_every_candidate,all candidates,"candidate cannot be shortlisted without matched sign_flip,row_shuffle,time_shuffle,wrong_lag_stale_24h controls"
+D1,wrong_lag_strict_block,any matched wrong_lag_stale_24h control passes validation and recent raw 10bps,candidate and same motif are rejected for the smoke
+D2,sign_flip_orientation_block,matched sign_flip passes validation and recent raw 10bps,candidate family/motif is orientation-unstable; demote to diagnostic only
+D3,control_margin,candidate recent robust score > max matched control score + 25pct relative margin,"candidate must materially dominate controls, not merely tie them"
+D4,stale_sensitive_feature_quarantine,open_interest_value_zscore_168h x realized_vol/ret motifs with wrong-lag control pass,do not expand stale-sensitive OI x vol/trend motifs until redesigned
