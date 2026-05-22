@@ -1,0 +1,9 @@
+symbol,data_type,interval,month,status,error
+BOMEUSDT,indexPriceKlines,1m,2024-01,not_available_404,404 Not Found
+BOMEUSDT,klines,1m,2024-01,not_available_404,404 Not Found
+BOMEUSDT,markPriceKlines,1m,2024-01,not_available_404,404 Not Found
+BOMEUSDT,premiumIndexKlines,1m,2024-01,not_available_404,404 Not Found
+BOMEUSDT,indexPriceKlines,1m,2024-02,not_available_404,404 Not Found
+BOMEUSDT,klines,1m,2024-02,not_available_404,404 Not Found
+BOMEUSDT,markPriceKlines,1m,2024-02,not_available_404,404 Not Found
+BOMEUSDT,premiumIndexKlines,1m,2024-02,not_available_404,404 Not Found
