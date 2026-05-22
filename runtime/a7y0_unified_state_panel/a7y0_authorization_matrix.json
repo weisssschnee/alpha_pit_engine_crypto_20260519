@@ -1,0 +1,21 @@
+{
+  "authorizes_a7y1_small_interaction_diagnostic": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_full_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "columns": 222,
+  "decision": "PASS_A7Y0_UNIFIED_STATE_PANEL_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "feature_available_time_rule": "feature_available_time = timestamp + 1h; execution_time >= next 1h bar",
+  "generated_at": "2026-05-22T09:21:11Z",
+  "output_panel": "G:\\AlphaFactory_CryptoData\\gold\\panels\\crypto_core12_1h_with_aggtrades_metrics_features_v1.parquet",
+  "required_next": [
+    "A7Y-1 small interaction diagnostic",
+    "Do not treat metrics derived fields as independent sources",
+    "Preserve agg_features_available and metrics_features_available masks"
+  ],
+  "rows": 251148,
+  "vendor_5m_warning_caveat_required": true
+}

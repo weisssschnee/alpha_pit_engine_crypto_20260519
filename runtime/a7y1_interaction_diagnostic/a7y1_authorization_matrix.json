@@ -1,0 +1,28 @@
+{
+  "authorizes_a7y2_forensic": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_expanded_replay": false,
+  "authorizes_full_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "control_contaminated_candidate_count": 16,
+  "control_count": 376,
+  "decision": "PASS_A7Y1_INTERACTION_CLUE_POOL_FOR_FORENSIC",
+  "deep_audit_count": 45,
+  "executes_replay": "small_controlled_diagnostic",
+  "executes_search": "small_structural_generation",
+  "generated_at": "2026-05-22T09:28:54Z",
+  "generated_count": 120,
+  "interaction_research_clue_count": 4,
+  "may_policy": "stress_only_not_generation_orientation_ranking_threshold_or_allocation",
+  "metric_rows": 1880,
+  "required_next": [
+    "A7Y-2 forensic if interaction clues exist",
+    "No expanded replay or alpha proof from A7Y-1",
+    "Preserve lane separation between core12 metrics and core3 agg-metrics"
+  ],
+  "strict_replay_candidate_count": 94,
+  "warnings": [
+    "control_contamination_present_in_non_clue_pool"
+  ]
+}

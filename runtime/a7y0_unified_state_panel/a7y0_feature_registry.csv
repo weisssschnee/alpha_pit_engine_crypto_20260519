@@ -1,0 +1,217 @@
+field_name,source_layer,field_role,is_independent_source,is_derived,feature_available_rule
+symbol,base_aggtrades_panel,key,False,False,base panel/A7U contracts; execute next 1h bar or later
+interval,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+timestamp,base_aggtrades_panel,key,False,False,base panel/A7U contracts; execute next 1h bar or later
+bar_close_timestamp,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+open_time_ms,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+close_time_ms,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+open,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+high,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+low,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+close,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+volume,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+quote_asset_volume,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+number_of_trades,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+taker_buy_base_asset_volume,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+taker_buy_quote_asset_volume,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+checksum_status,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+source_timestamp_unit,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+mark_open,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+mark_high,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+mark_low,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+mark_close,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+index_open,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+index_high,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+index_low,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+index_close,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+premium_open,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+premium_high,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+premium_low,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+premium_close,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+spot_close,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+fundingTime_ms,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+funding_datetime_utc,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+latest_known_funding_rate,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+funding_mark_price,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+funding_rate_sign,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+funding_rate_z_24,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+funding_rate_persistence_3,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+spot_available,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+positioning_historical_allowed,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+ret_1,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+fwd_ret_1,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+ret_3,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+fwd_ret_3,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+ret_6,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+fwd_ret_6,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+ret_12,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+fwd_ret_12,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+ret_24,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+fwd_ret_24,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+log_ret_1,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+hl_range,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+abs_ret_1,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+realized_vol_6,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+quote_volume_mean_6,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+realized_vol_12,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+quote_volume_mean_12,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+realized_vol_24,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+quote_volume_mean_24,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+avg_trade_size_quote,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+taker_buy_ratio,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+taker_imbalance,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+bar_interval,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+mark_minus_index,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+mark_index_ratio,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+premium_index,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+spot_perp_basis,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_rank_ret_1,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_z_ret_1,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_rank_ret_3,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_z_ret_3,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_rank_ret_6,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_z_ret_6,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_rank_ret_12,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_z_ret_12,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_rank_ret_24,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_z_ret_24,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_rank_quote_asset_volume,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_z_quote_asset_volume,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_rank_taker_imbalance,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_z_taker_imbalance,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_rank_realized_vol_12,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_z_realized_vol_12,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_rank_mark_index_ratio,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_z_mark_index_ratio,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_rank_premium_index,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_z_premium_index,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_rank_latest_known_funding_rate,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+cs_z_latest_known_funding_rate,base_aggtrades_panel,base_market_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_trade_count,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_underlying_trade_count,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_quantity,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_notional,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_buy_agg_trade_count,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_sell_agg_trade_count,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_buy_underlying_trade_count,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_sell_underlying_trade_count,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_buy_quantity,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_sell_quantity,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_buy_notional,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_sell_notional,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_signed_aggressor_quantity,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_signed_aggressor_notional,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_trade_count_le_100,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_trade_count_100_1k,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_trade_count_1k_10k,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_trade_count_10k_100k,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_trade_count_100k_1m,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_trade_count_gt_1m,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_notional_le_100,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_notional_100_1k,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_notional_1k_10k,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_notional_10k_100k,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_notional_100k_1m,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_notional_gt_1m,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_first_agg_trade_id,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_last_agg_trade_id,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_first_transact_time_ms,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_last_transact_time_ms,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_high_price,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_low_price,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_price_std,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_max_trade_notional,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_open_price,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_close_price,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_vwap,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_buy_vwap,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_sell_vwap,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_avg_agg_trade_notional,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_avg_underlying_trade_notional,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_volume_imbalance,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_buy_sell_notional_ratio,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_price_range_bps,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_close_to_open_bps,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_large_trade_count_100k_plus,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_large_notional_100k_plus,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_large_trade_count_ratio_100k_plus,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_large_notional_ratio_100k_plus,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_flow_imbalance_qty,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_flow_imbalance_notional,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_buy_notional_share,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_sell_notional_share,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_large_notional_share_100k_plus,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_large_count_share_100k_plus,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_vwap_close_bps,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_buy_sell_vwap_spread_bps,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_avg_underlying_trades_per_agg,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_notional_sum_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_quantity_sum_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_signed_notional_sum_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_signed_quantity_sum_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_flow_imbalance_notional_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_large_notional_sum_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_large_notional_share_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_trade_count_sum_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_avg_trade_notional_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_price_range_bps_max_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_close_to_open_bps_sum_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_notional_sum_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_quantity_sum_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_signed_notional_sum_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_signed_quantity_sum_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_flow_imbalance_notional_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_large_notional_sum_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_large_notional_share_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_trade_count_sum_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_avg_trade_notional_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_price_range_bps_max_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_close_to_open_bps_sum_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_notional_shock_24h_mad,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_signed_flow_z_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_notional_accel_4h_vs_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_flow_accel_4h_vs_24h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_universe_notional,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_universe_signed_notional,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_universe_large_notional,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_cross_symbol_notional_share,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_cross_symbol_signed_flow_share,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_cross_symbol_large_notional_share,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_btcusdt_flow_imbalance_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_flow_minus_btcusdt_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_ethusdt_flow_imbalance_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_flow_minus_ethusdt_4h,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_features_available,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+agg_feature_schema,base_aggtrades_panel,aggtrades_feature,False,True,base panel/A7U contracts; execute next 1h bar or later
+open_interest,binance_vision_metrics_daily,metrics_independent_source,True,False,metrics raw observable_time = timestamp + 5min; 1h feature_available_time = hour + 1h
+open_interest_value,binance_vision_metrics_daily,metrics_independent_source,True,False,metrics raw observable_time = timestamp + 5min; 1h feature_available_time = hour + 1h
+global_long_short_account_ratio,binance_vision_metrics_daily,metrics_independent_source,True,False,metrics raw observable_time = timestamp + 5min; 1h feature_available_time = hour + 1h
+top_long_short_account_ratio,binance_vision_metrics_daily,metrics_independent_source,True,False,metrics raw observable_time = timestamp + 5min; 1h feature_available_time = hour + 1h
+top_long_short_position_ratio,binance_vision_metrics_daily,metrics_independent_source,True,False,metrics raw observable_time = timestamp + 5min; 1h feature_available_time = hour + 1h
+taker_buy_sell_volume_ratio,binance_vision_metrics_daily,metrics_independent_source,True,False,metrics raw observable_time = timestamp + 5min; 1h feature_available_time = hour + 1h
+open_interest_change_1h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+open_interest_change_4h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+open_interest_change_24h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+open_interest_zscore_168h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+open_interest_value_change_1h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+open_interest_value_change_4h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+open_interest_value_change_24h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+open_interest_value_zscore_168h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+global_long_short_account_ratio_change_1h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+global_long_short_account_ratio_change_4h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+global_long_short_account_ratio_change_24h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+global_long_short_account_ratio_zscore_168h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+top_long_short_account_ratio_change_1h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+top_long_short_account_ratio_change_4h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+top_long_short_account_ratio_change_24h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+top_long_short_account_ratio_zscore_168h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+top_long_short_position_ratio_change_1h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+top_long_short_position_ratio_change_4h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+top_long_short_position_ratio_change_24h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+top_long_short_position_ratio_zscore_168h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+taker_buy_sell_volume_ratio_change_1h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+taker_buy_sell_volume_ratio_change_4h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+taker_buy_sell_volume_ratio_change_24h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+taker_buy_sell_volume_ratio_zscore_168h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+open_interest_x_price_move_1h,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability
+open_interest_x_taker_imbalance,binance_metrics_derived,metrics_derived_feature,False,True,past-only transform after metrics 1h feature availability

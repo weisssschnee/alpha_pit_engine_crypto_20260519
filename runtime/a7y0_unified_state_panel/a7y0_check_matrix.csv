@@ -1,0 +1,12 @@
+check,value,status
+a7s1_metrics_acceptance,PASS_A7S1_ACCEPTED_WITH_VENDOR_5M_WARNINGS,PASS
+a7u0r_source_trace,PASS_A7U0R_SOURCE_TRACE_COMPLETE,PASS
+rows,251148,PASS
+columns,222,PASS
+symbols,12,PASS
+duplicate_symbol_timestamp,0,PASS
+inf_numeric_cells,0,PASS
+metrics_independent_fields,6,PASS
+metrics_derived_fields,26,PASS
+derived_fields_not_independent,True,PASS
+feature_available_time_rule,timestamp+1h,PASS
