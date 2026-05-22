@@ -1,0 +1,27 @@
+{
+  "authorizes_a7u0r_source_trace": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_expanded_replay": false,
+  "authorizes_full_search": false,
+  "authorizes_may_robustness_claim": false,
+  "authorizes_shadow_paper_live": false,
+  "avg_may_positive_hour_rate": 0.5211881188118812,
+  "blockers": [
+    "all_pre_may_clues_fail_may_stress",
+    "activity_liquidity_family_concentration",
+    "matched_control_contamination_present_in_a7v6"
+  ],
+  "candidate_count": 5,
+  "decision": "HOLD_A7V7_ACTIVITY_LIQUIDITY_CLUES_FAIL_MAY_STRESS",
+  "executes_replay": "forensic_recompute_on_a7v6_clues_only",
+  "executes_search": false,
+  "generated_at": "2026-05-22T02:14:05Z",
+  "max_symbol_loss_share_proxy": 0.6059175626179703,
+  "post_may_positive_candidates": 0,
+  "required_next": [
+    "A7U-0R consolidated raw checksum/source trace",
+    "Do not promote A7V clues; all fail May stress",
+    "If continuing, redesign objective/data/horizon rather than expanding current A7V clue family"
+  ],
+  "top_production_family_share": 0.8
+}
