@@ -1,0 +1,4 @@
+source_id,status,rows,symbols,providers,latest_observable_time,age_hours,errors,notes,runs,manifest,manifest_rows,downloaded_rows,endpoints
+cross_exchange_forward_snapshot,PASS_SAMPLE_READY,153,12,"binance,bybit,okx",2026-05-22 09:46:25+00:00,0.282772605,0,forward snapshot sample only; not historical proof,,,,,
+binance_orderbook_forward_snapshot,WARN_STALE_SAMPLE,36,12,binance,2026-05-22 01:10:27.222000+00:00,8.882163645555556,0,sample is stale for live telemetry; collector should run on schedule,3.0,,,,
+binance_positioning_forward_5m,PASS_LATEST_MANIFEST_CLEAN,594,12,,2026-05-22 01:45:33+00:00,8.297196568055556,0,latest manifest must be clean before operational forward telemetry is considered healthy,,G:\AlphaFactory_CryptoData\manifests\positioning_forward_5m_2026-05-22_manifest.csv,60.0,60.0,"globalLongShortAccountRatio,openInterestHist,takerlongshortRatio,topLongShortAccountRatio,topLongShortPositionRatio"

@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_forward_telemetry_collection": true,
+  "authorizes_historical_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "WARN_A7T1_FORWARD_HEALTH_STALE_SAMPLE",
+  "executes_download": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-22T10:03:23Z",
+  "hard_hold_count": 0,
+  "positioning_error_count": 0,
+  "required_next": [
+    "Run orderbook/cross-exchange collectors on fixed schedule if telemetry dashboard is needed",
+    "Add collector_version and schema_hash to all forward manifests"
+  ],
+  "source_count": 3,
+  "warning_count": 1
+}
