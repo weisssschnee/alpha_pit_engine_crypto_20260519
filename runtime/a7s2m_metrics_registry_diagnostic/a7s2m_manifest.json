@@ -1,0 +1,10 @@
+{
+  "base_panel": "G:\\AlphaFactory_CryptoData\\gold\\panels\\crypto_core12_1h_with_aggtrades_features_v1.parquet",
+  "decision": "PASS_A7S2M_CLEAN_CLUES_FOR_FORENSIC_HOLD_EXPANDED_REPLAY",
+  "generated_at": "2026-05-22T08:50:59Z",
+  "merged_rows": 251028,
+  "metrics_panel": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_metrics_1h_features_v1.parquet",
+  "output_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7s2m_metrics_registry_diagnostic",
+  "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7S2M_METRICS_REGISTRY_DIAGNOSTIC_20260522.md",
+  "source_trace_dir": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7s1_metrics_source_trace"
+}

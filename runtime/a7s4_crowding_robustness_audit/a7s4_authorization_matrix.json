@@ -1,0 +1,25 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_crowding_motif_expanded_replay": false,
+  "authorizes_full_search": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_state_feature_use": true,
+  "blockers": [
+    "validation_recent_20bps_fail",
+    "symbol_loo_fail",
+    "month_loo_fail"
+  ],
+  "decision": "HOLD_A7S4_CROWDING_MOTIF_NOT_ROBUST",
+  "executes_replay": "robustness_from_a7s3_artifacts",
+  "executes_search": false,
+  "generated_at": "2026-05-22T09:11:11Z",
+  "required_next": [
+    "Do not promote standalone global-long-short crowding motif",
+    "Use metrics as state/exposure/interactions in later reset only",
+    "No expanded replay from A7S-4"
+  ],
+  "warnings": [
+    "single_formula_single_family",
+    "may_control_positive_stress_only"
+  ]
+}

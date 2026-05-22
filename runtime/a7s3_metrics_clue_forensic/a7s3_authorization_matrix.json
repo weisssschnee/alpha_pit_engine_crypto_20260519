@@ -1,0 +1,28 @@
+{
+  "authorizes_a7s4_small_robustness": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_expanded_replay": false,
+  "authorizes_full_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "clue_count": 2,
+  "decision": "PASS_A7S3_CROWDING_CLUE_FORENSIC_COMPLETE_HOLD_PROMOTION",
+  "executes_replay": "forensic_on_a7s2m_clues_only",
+  "executes_search": false,
+  "generated_at": "2026-05-22T09:08:05Z",
+  "may_control_positive_count": 2,
+  "may_policy": "stress_only_not_ranking_threshold_or_selection",
+  "recent_control_positive_count": 0,
+  "required_next": [
+    "Treat A7S2M clues as one global-long-short crowding motif",
+    "A7S-4 small robustness only if continuing: symbol/month LOO and stronger matched controls",
+    "No expanded search or proof promotion"
+  ],
+  "unique_family_count": 1,
+  "unique_formula_count": 1,
+  "warnings": [
+    "single_formula_two_horizons_not_independent",
+    "single_family_crowding_motif",
+    "may_control_positive_stress_only"
+  ]
+}

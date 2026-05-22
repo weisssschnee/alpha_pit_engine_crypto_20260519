@@ -1,0 +1,46 @@
+{
+  "authorizes_a7s3_forensic": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_expanded_replay": false,
+  "authorizes_full_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "control_contaminated_candidate_count": 29,
+  "control_count": 380,
+  "decision": "PASS_A7S2M_CLEAN_CLUES_FOR_FORENSIC_HOLD_EXPANDED_REPLAY",
+  "deep_audit_count": 45,
+  "derived_fields_are_not_independent_sources": true,
+  "executes_replay": "small_controlled_diagnostic",
+  "executes_search": "small_structural_generation",
+  "feature_available_time_rule": "1h metrics feature available at hour timestamp + 1h; execute next 1h bar or later",
+  "generated_at": "2026-05-22T08:50:59Z",
+  "generated_count": 242,
+  "independent_source_fields": [
+    "open_interest",
+    "open_interest_value",
+    "global_long_short_account_ratio",
+    "top_long_short_account_ratio",
+    "top_long_short_position_ratio",
+    "taker_buy_sell_volume_ratio"
+  ],
+  "may_policy": "stress_only_not_generation_ranking_threshold_orientation_or_allocation",
+  "metric_rows": 1900,
+  "near_miss_may_stress_fail_count": 3,
+  "required_next": [
+    "A7S-3 forensic if clean clues exist; otherwise keep metrics as state/exposure features",
+    "Do not expand metrics search from A7S-2M alone",
+    "Carry A7S-1 vendor 5m warnings downstream"
+  ],
+  "research_clue_count": 2,
+  "strict_replay_candidate_count": 95,
+  "vendor_5m_warning_caveat_required": true,
+  "warnings": [
+    "rounded_5m_bucket_duplicate_count",
+    "rounded_5m_timestamp_gap_count",
+    "gap_symbol_days",
+    "raw_nan_count",
+    "gold_nan_numeric_cells",
+    "availability_nan_cells",
+    "control_contamination_present_in_non_clue_pool"
+  ]
+}
