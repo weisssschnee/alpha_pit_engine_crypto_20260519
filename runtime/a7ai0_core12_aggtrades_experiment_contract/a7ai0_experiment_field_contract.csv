@@ -1,0 +1,21 @@
+field_name,source_family,status,usage_note,present,core12_non_null_rate,min_symbol_rate,median_symbol_rate,max_symbol_rate
+agg_volume_imbalance,agg_flow_balance,allowed,"bounded [-1,1] hourly buy/sell volume pressure",True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_signed_aggressor_notional,agg_flow_size,allowed_with_zscore,raw notional must be normalized before ranking,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_buy_sell_notional_ratio,agg_flow_balance,allowed_with_clip,ratio can be heavy-tailed; clip/winsor before use,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_large_notional_ratio_100k_plus,agg_large_trade,allowed,large trade notional share,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_large_trade_count_ratio_100k_plus,agg_large_trade,allowed,large trade count share,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_max_trade_notional,agg_large_trade,allowed_with_zscore,raw notional must be normalized,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_price_range_bps,agg_intrahour_price,allowed,hour range from aggTrades,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_close_to_open_bps,agg_intrahour_price,allowed,intra-hour direction proxy,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_vwap,agg_micro_price,derive_only,raw VWAP; use with close price to derive vwap-close bps,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_close_price,agg_micro_price,derive_only,raw close price for derived vwap-close bps,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_buy_vwap,agg_micro_price,derive_only,raw buy VWAP for derived buy-sell VWAP spread,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_sell_vwap,agg_micro_price,derive_only,raw sell VWAP for derived buy-sell VWAP spread,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_trade_count,agg_trade_structure,derive_only,used with underlying trade count,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+agg_underlying_trade_count,agg_trade_structure,derive_only,used to derive avg underlying trades per agg,True,0.9815956785697213,0.9758592666953487,0.9758592666953487,0.998804914192839
+open_interest_change_24h,positioning_context,context_only,"interaction context, not aggTrades source",True,0.9984663065474768,0.9974186146565324,0.9985419953152637,0.9986615038959797
+mark_index_basis_change_24h,basis_context,context_only,interaction context,True,0.998804914192839,0.998804914192839,0.998804914192839,0.998804914192839
+premium_index_change_24h,basis_context,context_only,interaction context,True,0.9811654476791434,0.7871313160284908,0.998804914192839,0.998804914192839
+top_long_short_position_ratio_zscore_168h,crowding_context,context_only,interaction context,True,0.9989005210574119,0.9989005210574119,0.9989005210574119,0.9989005210574119
+ret_24,price_context,context_only,trend/reversal context,True,0.9988527176251255,0.9988527176251255,0.9988527176251255,0.9988527176251255
+funding_rate_bps,funding_baseline,baseline_only,residual/control baseline,True,0.9999521965677136,0.9999521965677136,0.9999521965677136,0.9999521965677136

@@ -1,0 +1,15 @@
+{
+  "authorizes_a7ai1_small_controlled_raw_agg_smoke": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_direct_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AI0_CORE12_AGGTRADES_EXPERIMENT_CONTRACT_READY",
+  "may_policy": "May is post-selection stress only and is core3-current-month caveated; do not rank or tune on it",
+  "warnings": [
+    "final_panel_contains_raw_enhanced_agg_fields_not_precomputed_rolling_cross_symbol_agg_features",
+    "may_2026_agg_coverage_is_core3_current_month_caveat_not_core12_monthly_history",
+    "A7AI0 is contract only; no replay and no alpha evidence"
+  ]
+}

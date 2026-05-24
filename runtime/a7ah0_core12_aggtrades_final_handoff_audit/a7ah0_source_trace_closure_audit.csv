@@ -1,0 +1,13 @@
+symbol,source_trace_method,trace_rows,ready_rows,expected_rows,source_trace_complete,note
+ADAUSDT,package_a_checksum_files,28,28,28,True,rem9 monthly 2024-01..2026-04 checksum files present
+AVAXUSDT,package_a_checksum_files,28,28,28,True,rem9 monthly 2024-01..2026-04 checksum files present
+BCHUSDT,package_a_checksum_files,28,28,28,True,rem9 monthly 2024-01..2026-04 checksum files present
+BNBUSDT,package_a_checksum_files,28,28,28,True,rem9 monthly 2024-01..2026-04 checksum files present
+BTCUSDT,A7U0R_source_trace_audit,29,29,29,True,core3 source trace closed by A7U-0R; checksum files may live outside package_a path
+DOGEUSDT,package_a_checksum_files,28,28,28,True,rem9 monthly 2024-01..2026-04 checksum files present
+ETHUSDT,A7U0R_source_trace_audit,29,29,29,True,core3 source trace closed by A7U-0R; checksum files may live outside package_a path
+LINKUSDT,package_a_checksum_files,28,28,28,True,rem9 monthly 2024-01..2026-04 checksum files present
+LTCUSDT,package_a_checksum_files,28,28,28,True,rem9 monthly 2024-01..2026-04 checksum files present
+SOLUSDT,A7U0R_source_trace_audit,29,29,29,True,core3 source trace closed by A7U-0R; checksum files may live outside package_a path
+SUIUSDT,package_a_checksum_files,28,28,28,True,rem9 monthly 2024-01..2026-04 checksum files present
+XRPUSDT,package_a_checksum_files,28,28,28,True,rem9 monthly 2024-01..2026-04 checksum files present

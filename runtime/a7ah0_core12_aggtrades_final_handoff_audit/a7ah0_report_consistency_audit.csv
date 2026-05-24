@@ -1,0 +1,9 @@
+metric,observed,expected_or_reported,source,matches
+final_panel_rows,815818,815818,handoff_expected,True
+final_panel_columns,654,654,handoff_expected,True
+merge_report_output_rows,815818,815818,merge_json,True
+merge_report_output_columns,654,654,merge_json,True
+agg_feature_report_rows,245088,245088,agg_feature_json_vs_handoff,True
+agg_feature_report_symbol_month_count,336,336,agg_feature_json_vs_handoff,True
+merge_report_input_agg_rows,246528,245088,merge_json_vs_agg_feature_json,False
+merge_report_input_agg_symbol_month_count,339,336,merge_json_vs_agg_feature_json,False

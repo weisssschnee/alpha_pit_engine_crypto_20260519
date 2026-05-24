@@ -1,0 +1,11 @@
+{
+  "core12_rows": 251028,
+  "decision": "PASS_A7AI0_CORE12_AGGTRADES_EXPERIMENT_CONTRACT_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "field_count": 20,
+  "generated_at": "2026-05-24T04:47:04Z",
+  "output_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ai0_core12_aggtrades_experiment_contract",
+  "panel_path": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_core12_all_features_metrics_market_structure_aggtrades_v1_20260524.parquet",
+  "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7AI0_CORE12_AGGTRADES_EXPERIMENT_CONTRACT_20260524.md"
+}

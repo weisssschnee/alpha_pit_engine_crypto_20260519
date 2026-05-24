@@ -1,0 +1,13 @@
+symbol,partition_months,has_all_2024_01_to_2026_04,extra_months,missing_months
+ADAUSDT,28,True,,
+AVAXUSDT,28,True,,
+BCHUSDT,28,True,,
+BNBUSDT,28,True,,
+BTCUSDT,29,True,2026-05,
+DOGEUSDT,28,True,,
+ETHUSDT,29,True,2026-05,
+LINKUSDT,28,True,,
+LTCUSDT,28,True,,
+SOLUSDT,29,True,2026-05,
+SUIUSDT,28,True,,
+XRPUSDT,28,True,,

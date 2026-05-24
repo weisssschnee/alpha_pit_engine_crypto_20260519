@@ -1,0 +1,3 @@
+field_name,lower,upper,violation_count
+agg_large_notional_ratio_100k_plus,0.0,1.0,0
+agg_volume_imbalance,-1.0,1.0,0

@@ -1,0 +1,10 @@
+derived_transform,rule
+ts_zscore_24h,past-only rolling zscore over 24h
+ts_zscore_72h,past-only rolling zscore over 72h
+ts_delta_4h,past-only 4h change
+ts_delta_24h,past-only 24h change
+rank_cross_symbol_core12,cross-sectional rank among symbols with agg availability
+interaction_mul_context,agg field x context field; no standalone activity promotion
+vwap_close_bps,"(agg_vwap / agg_close_price - 1) * 10000, guarded for zero close"
+buy_sell_vwap_spread_bps,"(agg_buy_vwap / agg_sell_vwap - 1) * 10000, guarded for zero sell vwap"
+avg_underlying_trades_per_agg,"agg_underlying_trade_count / agg_trade_count, guarded for zero count"

@@ -1,0 +1,6 @@
+pattern,status,reason
+blind_654_column_search,blocked,"wide panel includes non-selected, derived, and benchmark fields"
+standalone_raw_notional_level,blocked,size/liquidity level without normalization is capacity/exposure proxy
+may_tuned_symbol_subset,blocked,May agg coverage is core3 current-month caveated only
+core12_may_stress_claim_without_rem9_may_agg,blocked,rem9 has agg through 2026-04 only
+funding_standalone_promotion,blocked,funding remains benchmark/control

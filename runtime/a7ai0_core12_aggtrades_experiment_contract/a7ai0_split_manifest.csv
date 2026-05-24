@@ -1,0 +1,5 @@
+split,start,end,usage,rows,symbols,agg_available_rows,agg_available_symbol_count,may_allowed_for_ranking
+train_2024,2024-01-01T00:00:00+00:00,2024-12-31T23:00:00+00:00,selection_training_only,105288,12,105288,12,True
+validation_2025H1,2025-01-01T00:00:00+00:00,2025-06-30T23:00:00+00:00,ranking_allowed_non_may,52128,12,52128,12,True
+recent_2025H2_2026Apr,2025-07-01T00:00:00+00:00,2026-04-30T23:00:00+00:00,ranking_allowed_non_may,87552,12,87552,12,True
+may_2026_stress_caveated,2026-05-01T00:00:00+00:00,2026-05-20T23:00:00+00:00,post_selection_stress_only_core3_current_month_caveat,5760,12,1440,3,False

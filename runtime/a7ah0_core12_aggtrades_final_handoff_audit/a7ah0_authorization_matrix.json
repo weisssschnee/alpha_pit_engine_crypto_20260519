@@ -1,0 +1,16 @@
+{
+  "authorizes_a7ai0_core12_aggtrades_experiment_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_direct_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AH0_CORE12_AGGTRADES_FINAL_HANDOFF_ACCEPTED",
+  "may_policy": "2026-05 aggTrades monthly history is not claimed; any May agg coverage is caveated and cannot be ranking/tuning proof",
+  "warnings": [
+    "derived_agg_feature_fields_not_merged_into_final_panel_use_feature_root_or_rebuild_if_needed",
+    "some_core12_symbols_have_2026_05_agg_rows; handoff says monthly May unavailable so treat May agg as forward/current-month caveat",
+    "handoff_report_and_build_json_have_non_blocking_metric_discrepancies",
+    "panel_has_symbol_timestamp_gaps_relative_to_global_panel_range"
+  ]
+}
