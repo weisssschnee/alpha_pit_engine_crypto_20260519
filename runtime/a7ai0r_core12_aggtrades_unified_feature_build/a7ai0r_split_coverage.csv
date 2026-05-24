@@ -1,0 +1,5 @@
+split,rows,symbols,agg_available_rows,agg_available_symbols,agg_available_rate,may_allowed_for_ranking
+train_2024,105288,12,105288,12,1.0,True
+validation_2025H1,52128,12,52128,12,1.0,True
+recent_2025H2_2026Apr,87552,12,87552,12,1.0,True
+may_2026_stress_caveated,5760,12,1440,3,0.25,False

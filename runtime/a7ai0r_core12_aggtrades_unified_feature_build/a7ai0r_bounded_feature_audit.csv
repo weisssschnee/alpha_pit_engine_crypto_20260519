@@ -1,0 +1,13 @@
+field_name,lower,upper,violation_count
+agg_volume_imbalance,-1,1,0
+agg_large_notional_ratio_100k_plus,0,1,0
+agg_flow_imbalance_notional,-1,1,0
+agg_buy_notional_share,0,1,0
+agg_sell_notional_share,0,1,0
+agg_flow_imbalance_notional_4h,-1,1,0
+agg_large_notional_share_4h,0,1,0
+agg_flow_imbalance_notional_24h,-1,1,0
+agg_large_notional_share_24h,0,1,0
+agg_cross_symbol_notional_share,0,1,0
+agg_cross_symbol_signed_flow_share,-1,1,0
+agg_cross_symbol_large_notional_share,0,1,0

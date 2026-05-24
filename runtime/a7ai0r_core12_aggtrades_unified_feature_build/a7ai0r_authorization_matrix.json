@@ -1,0 +1,14 @@
+{
+  "authorizes_a7ai1_small_controlled_unified_agg_smoke": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_direct_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AI0R_CORE12_AGGTRADES_UNIFIED_FEATURES_READY",
+  "may_policy": "May stress-only and core3-current-month caveated; do not rank/tune on May",
+  "warnings": [
+    "May 2026 agg coverage remains core3 current-month caveated; not valid as full core12 May history",
+    "This build creates experimental features from accepted raw agg fields; it is not alpha evidence"
+  ]
+}
