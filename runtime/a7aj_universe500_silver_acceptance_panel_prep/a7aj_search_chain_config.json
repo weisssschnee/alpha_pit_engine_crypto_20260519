@@ -1,0 +1,28 @@
+{
+  "allowed_next_step": "A7AK1 small controlled field-family smoke",
+  "blocked": [
+    "large_search",
+    "alpha_proof",
+    "shadow_paper_live",
+    "May ranking/tuning/selection",
+    "using this top300 panel as May stress source; it has no May 2026 market/funding rows",
+    "using current top300 membership as proof universe without survivorship caveat"
+  ],
+  "feature_families": [
+    "market_funding",
+    "binance_metrics_open_interest_and_positioning",
+    "core12_aggtrades_overlay",
+    "cross_source_interactions_derived_in_runner"
+  ],
+  "input_panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe300_market_metrics_agg_overlay_1h_v1_20260525",
+  "max_initial_symbols": "strict full-history subset from a7aj_universe_registry.csv",
+  "may_boundary": "this panel ends at 2026-04-30; May stress must come from separate stress-only source",
+  "source_trace_boundary": "local silver accepted; raw checksum trace remains on company machine",
+  "stage": "A7AK",
+  "timing_contract": {
+    "feature_available_time": "timestamp + 1h",
+    "minimum_execution_time": "timestamp + 2h",
+    "timestamp": "1h bucket start UTC"
+  },
+  "universe_registry": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7aj_universe500_silver_acceptance_panel_prep\\a7aj_universe_registry.csv"
+}

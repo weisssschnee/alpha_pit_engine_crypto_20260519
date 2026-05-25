@@ -1,0 +1,27 @@
+{
+  "authorizes_a7ak_small_field_family_smoke": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AJ_UNIVERSE500_SILVER_ACCEPTED_AND_SEARCH_PANEL_PREPARED",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-25T02:36:54Z",
+  "incoming_root": "G:\\AlphaFactory_CryptoData\\incoming_company\\crypto_universe500_silver_20260525",
+  "market_metrics_intersection_symbols": 300,
+  "market_rows_manifest": 5362049,
+  "market_symbols": 300,
+  "metrics_rows_manifest": 6918822,
+  "metrics_symbols": 498,
+  "output_panel_columns_sample": 124,
+  "output_panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe300_market_metrics_agg_overlay_1h_v1_20260525",
+  "output_panel_rows": 5362049,
+  "output_panel_symbols": 300,
+  "warnings": [
+    "Incoming company package contains silver aggregates only; raw checksum trace remains on company machine",
+    "Universe300 is current/top selection and is not by itself a survivorship-safe proof universe",
+    "Output market/funding panel ends at 2026-04-30; May stress requires separate current/forward source and remains excluded from ranking",
+    "May remains stress-only and must not be used for ranking, tuning, universe selection, or promotion"
+  ]
+}
