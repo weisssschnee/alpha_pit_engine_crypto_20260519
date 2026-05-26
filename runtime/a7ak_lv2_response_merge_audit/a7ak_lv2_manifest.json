@@ -1,0 +1,31 @@
+{
+  "age_lt30_states_with_train_response": 138,
+  "authorizes_alpha_proof": false,
+  "authorizes_lv3_neutral_smoke_design": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AK_LV2_RESPONSE_MERGE_AUDIT_READY",
+  "executes_replay": false,
+  "executes_response_merge_audit": true,
+  "executes_search": false,
+  "generated_at": "2026-05-26T18:17:43Z",
+  "input_base_panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v1_20260525",
+  "input_lv1_panel": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_latent_state_features_v1_20260527.parquet",
+  "insufficient_train_support_states": 553,
+  "merge_eligible_states": 100,
+  "merged_groups": 100,
+  "multi_state_merge_groups": 0,
+  "raw_states_total_lv1": 825,
+  "relaxed_candidate_merge_pairs_ge_0_88": 7,
+  "states_in_multi_state_groups": 0,
+  "train_response_states": 653,
+  "train_window": "2024-01-01 00:00 UTC .. 2024-12-31 23:00 UTC",
+  "unseen_train_hold_states": 172,
+  "warnings": [
+    "Forward labels are used only inside train_2024 to estimate state response vectors",
+    "LV2 response vectors are diagnostics and not trading replay evidence",
+    "States unseen in train are held for LV3 mapping rather than force-merged",
+    "Cost/lag fields in LV2 are response proxies, not executable book-level cost proof"
+  ]
+}

@@ -1,0 +1,8 @@
+state_a,state_b,response_cosine_similarity,same_age_bucket,same_liquidity_state,same_volatility_state,suggestion_status
+lv_12fe23ccd7,lv_4ec6957e53,0.921444103075606,True,False,True,candidate_for_review_not_applied
+lv_18ddae7954,lv_f947a5a9b1,0.9024458421259098,True,False,True,candidate_for_review_not_applied
+lv_95fd209b8a,lv_9ae3502181,0.8955184960422004,True,False,True,candidate_for_review_not_applied
+lv_dbcfc4ac24,lv_fd823dbade,0.8951716009433012,True,True,True,candidate_for_review_not_applied
+lv_465a3e381d,lv_9c7069e440,0.8864024931854906,False,True,True,candidate_for_review_not_applied
+lv_3d8dcec701,lv_de4260f3c2,0.8830735990373675,True,False,True,candidate_for_review_not_applied
+lv_9a2a85b9d3,lv_f947a5a9b1,0.8806960498200354,False,True,True,candidate_for_review_not_applied

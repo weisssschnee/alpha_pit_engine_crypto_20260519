@@ -1,0 +1,8 @@
+check,status,detail
+response_fit_window,PASS,response vectors and merge groups are computed from train_2024 rows only
+validation_recent_usage,PASS,validation/recent rows are not used for response-vector fitting or merge assignment
+may_usage,PASS,May rows are unavailable and not used
+label_boundary,PASS,forward labels are nulled when label_end would cross beyond train_2024
+replay_boundary,PASS,"LV2 is a response/merge audit, not a trading replay or promotion test"
+short_history_policy,PASS,age_lt30 states are kept for modeling diagnostics but not promoted to proof
+unseen_state_policy,WARN,states unseen in train are held for LV3 mapping and not force-merged
