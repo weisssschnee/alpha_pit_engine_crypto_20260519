@@ -1,0 +1,14 @@
+search_eligibility,liquidity_tier,symbols
+hold_quality_or_short_history,tail,10
+hold_quality_or_short_history,top20,1
+hold_quality_or_short_history,top200,1
+listing_aware,tail,209
+listing_aware,top100,25
+listing_aware,top20,5
+listing_aware,top200,56
+listing_aware,top50,10
+strict_full_history,tail,79
+strict_full_history,top100,25
+strict_full_history,top20,14
+strict_full_history,top200,43
+strict_full_history,top50,20

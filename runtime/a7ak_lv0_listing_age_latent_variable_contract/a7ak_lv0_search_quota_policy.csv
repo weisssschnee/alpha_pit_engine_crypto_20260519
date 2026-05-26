@@ -1,0 +1,7 @@
+quota_bucket,definition,target_share,quota_type,notes
+age_lt_30d,listing_age_days < 30,0.1,fixed minimum,Minimum 10% of LV smoke generation/selection slots when available; never zeroed due to short history
+age_30_90d,30 <= listing_age_days < 90,0.1,soft minimum,Lifecycle continuation bucket
+age_90_180d,90 <= listing_age_days < 180,0.1,soft minimum,Post-listing stabilization bucket
+age_180_365d,180 <= listing_age_days < 365,0.15,soft minimum,Maturing alt bucket
+age_ge_365d,listing_age_days >= 365,0.4,primary mass,Primary mature-history mass
+state_diversity_reserve,underrepresented latent states,0.15,reserve,Allocated to latent states with sufficient quality but low representation

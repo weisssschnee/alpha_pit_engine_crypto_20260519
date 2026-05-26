@@ -1,0 +1,12 @@
+stage,rule_name,rule_value,rationale
+LV1,state_construction_period,train only,Fit transforms/clusters only on train rows; validation/recent evaluate frozen mapping
+LV1,initial_state_model,interpretable clustering,First pass uses age/liquidity/vol/funding/basis/coverage features; avoid opaque model
+LV1,normalization,train-only robust zscore or rank,No validation/test/May distribution in scaler
+LV1,age_role,input feature only,"Age bucket is diagnostic, not final state label"
+LV1,short_history_policy,include in modeling if quality pass,Short-history symbols can inform lifecycle states but not primary proof
+LV1,age_lt_30d_policy,fixed quota,Do not discard; reserve explicit search quota and report separately
+LV2,response_merge_period,train only,State response vector computed only on train
+LV2,merge_rule,response similarity + risk similarity,Merge raw states if response vectors and cost/lag/funding/beta profiles align
+LV2,freeze_rule,freeze raw-to-merged map,Apply frozen map to validation/recent; do not refit on outcomes
+LV3,ranking_views,global/age-neutral/latent-neutral,Every candidate reports all three views
+LV3,promotion_boundary,strict proof universe primary,"Listing-aware states can support diagnostics/generalization, not standalone proof"

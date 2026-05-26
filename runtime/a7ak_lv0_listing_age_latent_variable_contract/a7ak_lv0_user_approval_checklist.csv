@@ -1,0 +1,6 @@
+approval_item,approved_default,description
+approve_lv1_state_feature_build,False,Build row-level observable state features with train-only scalers
+approve_lv1_initial_clustering,False,Fit initial interpretable latent states on train rows only
+approve_lv2_response_merge,False,Compute train-only response vectors and frozen merge map
+approve_lv3_neutral_smoke,False,Run global vs age-neutral vs latent-neutral field-family smoke
+approve_age_lt30_quota,False,Reserve fixed age<30d quota in smoke; no direct proof promotion

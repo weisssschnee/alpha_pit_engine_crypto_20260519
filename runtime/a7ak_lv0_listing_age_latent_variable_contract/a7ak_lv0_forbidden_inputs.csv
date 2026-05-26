@@ -1,0 +1,7 @@
+forbidden_input,forbidden_use,reason
+validation_or_recent_returns,state construction / scaler / cluster fit,Would leak evaluation outcomes
+May stress labels,state construction / merge / quota / ranking,Known adversarial stress; stress-only
+future delisting or survival,symbol class or latent state,Survivorship leakage
+future liquidity percentile,row-level feature,Must use timestamp-active or trailing window only
+post-period volume median,state construction,Use train-only or trailing windows
+control outcome superiority,candidate promotion,"Negative controls can block, not optimize"

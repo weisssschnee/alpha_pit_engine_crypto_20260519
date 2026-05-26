@@ -1,0 +1,16 @@
+response_component,definition,component_group,allowed_fit_period
+future_return_mean,mean next-bar/trade label return within train,response,train_only
+future_return_vol,volatility of next-bar/trade label return within train,risk,train_only
+drawdown_proxy,state-level cumulative drawdown proxy,risk,train_only
+cost20_survival,state response after 20bps cost stress,execution,train_only
+lag1_survival,state response after one-bar lag stress,execution,train_only
+funding_beta,state beta to FundingCore/funding baseline,exposure,train_only
+btc_beta,state beta to BTC return,exposure,train_only
+liquidity_beta,state beta to liquidity factor,exposure,train_only
+volatility_beta,state beta to volatility factor,exposure,train_only
+momentum_probe_response,response to simple momentum probe,signal_family_response,train_only
+reversal_probe_response,response to simple reversal probe,signal_family_response,train_only
+liquidity_probe_response,response to liquidity/activity probe,signal_family_response,train_only
+basis_probe_response,response to basis/premium probe,signal_family_response,train_only
+funding_probe_response,response to observable funding probe,signal_family_response,train_only
+oi_positioning_probe_response,response to OI/positioning probe,signal_family_response,train_only

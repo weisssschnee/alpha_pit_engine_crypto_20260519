@@ -1,0 +1,19 @@
+{
+  "age_lt_30d_fixed_quota": "10% minimum of LV smoke generation/selection slots when available; not proof promotion quota",
+  "authorizes_a7ak_min_without_lv": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_lv1_after_user_approval": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AK_LV0_CONTRACT_READY_FOR_USER_APPROVAL",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_state_construction": false,
+  "proof_boundary": {
+    "hold": "quality audit only",
+    "listing_aware": "generalization/lifecycle diagnostic only until frozen state map validates",
+    "modeling": "U_all_quality_eligible can participate in train-only latent-state research",
+    "primary_proof": "strict_full_history remains primary proof-style universe"
+  },
+  "requires_user_approval_before_execution": true
+}
