@@ -1,0 +1,6 @@
+check,status,detail
+candidate_set,PASS,fixed field-family list only; no generated formulas
+neutralization_modes,PASS,"global, age-neutral, coarse-latent-neutral, raw-latent-neutral are reported separately"
+may_usage,PASS,May rows are unavailable and not used
+promotion_boundary,PASS,"LV3 is diagnostic IC/spread smoke, not tradable replay or alpha proof"
+cost_boundary,WARN,no executable turnover/cost book is run in LV3
