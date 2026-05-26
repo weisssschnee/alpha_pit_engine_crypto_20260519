@@ -1,0 +1,5 @@
+dataset,symbols,ok_symbols,error_symbols,rows,zero_row_ok
+funding,50,44,6,3927,9
+index_1h,50,30,20,21581,6
+mark_1h,50,29,21,22520,8
+open_interest_snapshot,50,43,7,35,8

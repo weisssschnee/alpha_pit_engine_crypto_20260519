@@ -1,0 +1,9 @@
+field_name,source_class,raw_source,history_status,feature_available_rule,authorization
+okx_funding_rate,okx_funding,OKX public funding-rate-history recent window,historical recent sample,timestamp + 1h conservative,sample/telemetry only
+okx_realized_funding_rate,okx_funding,OKX public funding-rate-history recent window,historical recent sample,timestamp + 1h conservative,sample/telemetry only
+okx_mark_close,okx_mark,OKX mark-price 1h candles,historical recent sample,timestamp + 1h conservative,sample/telemetry only
+okx_index_close,okx_index,OKX index 1h candles,historical recent sample,timestamp + 1h conservative,sample/telemetry only
+okx_mark_index_basis_bps,derived_cross_exchange,okx_mark_close / okx_index_close - 1,derived from OKX recent sample,timestamp + 1h conservative,sample/telemetry only
+mark_basis_spread_bps_okx_minus_binance,derived_cross_exchange,OKX basis minus Binance basis,derived aligned sample,timestamp + 1h conservative,sample/telemetry only
+funding_spread_bps_okx_minus_binance,derived_cross_exchange,OKX funding minus Binance funding,derived aligned sample,timestamp + 1h conservative,sample/telemetry only
+okx_open_interest_snapshot,okx_forward_snapshot,OKX current open interest snapshot,forward-only snapshot,collector_time observable,forward telemetry only; not historical proof

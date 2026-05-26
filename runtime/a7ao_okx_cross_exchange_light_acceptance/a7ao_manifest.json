@@ -1,0 +1,34 @@
+{
+  "aligned_rows": 1535,
+  "aligned_sample_path": "G:\\AlphaFactory_CryptoData\\gold\\features\\okx_binance_cross_exchange_light_top50_30d_v1_20260526\\okx_binance_mark_index_funding_spread_sample.parquet",
+  "aligned_symbols": 15,
+  "authorizes_cross_exchange_spread_diagnostic": true,
+  "authorizes_forward_telemetry_design": true,
+  "authorizes_historical_alpha_proof": false,
+  "blockers": [],
+  "decision": "PASS_A7AO_OKX_LIGHT_SAMPLE_ACCEPTED_FOR_TELEMETRY_AND_SPREAD_AUDIT",
+  "executes_replay": false,
+  "executes_search": false,
+  "funding_rows": 3927,
+  "generated_at": "2026-05-26T15:50:48Z",
+  "index_rows": 21581,
+  "manifest_symbols": 50,
+  "mark_rows": 22520,
+  "oi_snapshot_rows": 35,
+  "okx_manifest": "G:\\AlphaFactory_CryptoData\\manifests\\okx_cross_exchange_light_top50_30d_v1_20260526.csv",
+  "okx_report": "G:\\AlphaFactory_CryptoData\\reports\\okx_cross_exchange_light_top50_30d_v1_20260526.json",
+  "okx_root": "G:\\AlphaFactory_CryptoData\\silver\\cross_exchange\\okx_cross_exchange_light_top50_30d_v1_20260526",
+  "output_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\okx_binance_cross_exchange_light_top50_30d_v1_20260526",
+  "source_report_counts": {
+    "funding": 3927,
+    "index_1h": 21581,
+    "mark_1h": 22520,
+    "open_interest_snapshot": 35
+  },
+  "warnings": [
+    "OKX light sample is recent/partial and not a full historical proof source",
+    "open_interest_snapshot is forward-only current snapshot",
+    "manifest contains timeout/error rows; use coverage table before any diagnostic",
+    "Bybit remains unavailable due timeout and is not part of this sample"
+  ]
+}
