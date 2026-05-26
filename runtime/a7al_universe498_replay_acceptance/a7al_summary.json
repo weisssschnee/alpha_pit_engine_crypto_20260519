@@ -1,0 +1,30 @@
+{
+  "authorizes_a7ak_min_small_controlled_smoke": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "columns": 54,
+  "decision": "PASS_A7AL_UNIVERSE498_REPLAY_BASE_ACCEPTED",
+  "duplicate_timestamp_count": 0,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-26T14:22:37Z",
+  "hold_symbols": 12,
+  "inf_cell_count": 0,
+  "listing_aware_symbols": 305,
+  "negative_non_allowed_count": 0,
+  "panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v1_20260525",
+  "rows": 6650298,
+  "source_report": "G:\\AlphaFactory_CryptoData\\reports\\BINANCE_UNIVERSE498_REPLAY_1H_V1_20260525.json",
+  "source_report_rows": 6650298,
+  "source_report_symbols": 498,
+  "strict_full_history_symbols": 181,
+  "symbols": 498,
+  "warnings": [
+    "May 2026 rows are not present; May cannot be used from this panel",
+    "Universe498 membership is current/listing-aware and is not by itself survivorship-safe proof",
+    "Panel execution_time equals feature_available_time; conservative experiments should add one extra bar lag stress",
+    "No aggTrades/book/liquidation/cross-exchange fields in this replay base"
+  ]
+}

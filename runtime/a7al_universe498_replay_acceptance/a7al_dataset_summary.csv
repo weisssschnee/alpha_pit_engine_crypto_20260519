@@ -1,0 +1,2 @@
+dataset,symbols,rows_manifest,rows_actual,duplicate_timestamp_count,gap_hours,inf_cell_count,negative_non_allowed_count,strict_full_history_symbols,listing_aware_symbols
+binance_universe498_replay_1h_v1,498,6650298,6650298,0,103,0,0,181,305

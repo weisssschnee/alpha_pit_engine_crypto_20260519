@@ -1,0 +1,33 @@
+{
+  "blocked": [
+    "large_search",
+    "alpha_proof",
+    "shadow_paper_live",
+    "May ranking/tuning/selection",
+    "using listing-aware universe as final proof universe without survivorship caveat"
+  ],
+  "data_metadata_feature_contract": "G:\\AlphaFactory_CryptoData\\gold\\metadata\\binance_universe498_replay_1h_v1_feature_contract_20260526.csv",
+  "data_metadata_search_config": "G:\\AlphaFactory_CryptoData\\gold\\metadata\\binance_universe498_replay_1h_v1_a7ak_min_search_config_20260526.json",
+  "data_metadata_symbol_classification": "G:\\AlphaFactory_CryptoData\\gold\\metadata\\binance_universe498_replay_1h_v1_symbol_classification_20260526.csv",
+  "feature_contract": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7al_universe498_replay_acceptance\\a7am_feature_contract.csv",
+  "feature_families": [
+    "derived_replay_base",
+    "funding",
+    "key",
+    "mark_index_premium",
+    "metadata_timing",
+    "metrics_positioning",
+    "trade_ohlcv"
+  ],
+  "input_panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v1_20260525",
+  "primary_universe_rule": "search_eligibility == strict_full_history",
+  "secondary_universe_rule": "listing_aware diagnostic only",
+  "stage": "A7AK-min",
+  "symbol_classification": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7al_universe498_replay_acceptance\\a7am_symbol_classification.csv",
+  "timing_contract": {
+    "feature_available_time": "timestamp + 1h",
+    "panel_execution_time": "timestamp + 1h",
+    "recommended_stress_execution_time": "timestamp + 2h",
+    "timestamp": "1h bucket start UTC"
+  }
+}
