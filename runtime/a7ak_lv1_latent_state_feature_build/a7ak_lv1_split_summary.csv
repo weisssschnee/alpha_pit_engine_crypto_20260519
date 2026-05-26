@@ -1,0 +1,5 @@
+split,rows,symbols,raw_states,rows_state_seen_in_train,state_seen_in_train_rate,may_allowed_for_ranking
+train_2024,1880549,276,653,1880549,1.0,True
+validation_2025H1,1410769,374,441,1178585,0.8354202566118195,True
+recent_2025H2_2026Apr,3358980,498,464,2354642,0.7009991128259174,True
+may_2026_unavailable,0,0,0,0,,False

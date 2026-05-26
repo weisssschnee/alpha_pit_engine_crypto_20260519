@@ -1,0 +1,31 @@
+{
+  "age_lt30_fixed_quota_minimum": 0.1,
+  "age_lt30_rows": 358955,
+  "age_lt30_symbols": 498,
+  "authorizes_alpha_proof": false,
+  "authorizes_lv2_response_merge_audit": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "columns": 48,
+  "decision": "PASS_A7AK_LV1_LATENT_STATE_FEATURES_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_state_construction": true,
+  "generated_at": "2026-05-26T16:33:10Z",
+  "input_panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v1_20260525",
+  "input_symbol_classification": "G:\\AlphaFactory_CryptoData\\gold\\metadata\\binance_universe498_replay_1h_v1_symbol_classification_20260526.csv",
+  "output_panel": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_latent_state_features_v1_20260527.parquet",
+  "raw_latent_states": 825,
+  "rows": 6650298,
+  "symbols": 498,
+  "train_seen_states": 653,
+  "unseen_state_row_share": 0.18593482577773207,
+  "unseen_state_rows": 1236522,
+  "warnings": [
+    "LV1 uses interpretable train-only bucketized raw states, not response-merged states",
+    "Short-history symbols can contribute to lifecycle state research but not primary proof",
+    "May 2026 rows are unavailable in the input panel",
+    "Raw latent states unseen in train are flagged and require LV2/LV3 handling before use"
+  ]
+}
