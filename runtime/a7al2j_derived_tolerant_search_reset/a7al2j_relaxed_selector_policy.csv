@@ -1,0 +1,9 @@
+rule,value,reason
+generation_cap,8000,more tolerance for derived-field exploration
+selector_cap,768,do not over-prune before replay
+strict_replay_cap,192,small but broader than previous 128
+deep_audit_cap,48,reserve only for post-control survivors
+min_selected_skeleton_count,40,avoid formula motif collapse
+top_field_family_share_cap,0.30,"looser than proof, still prevents domination"
+matched_control_required,true,controls are not relaxed
+one_bar_lag_required,true,native latency stress is retained

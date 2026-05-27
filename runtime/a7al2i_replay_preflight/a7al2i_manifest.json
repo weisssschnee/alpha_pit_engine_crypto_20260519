@@ -1,0 +1,31 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_replay_preflight_clues",
+    "control_dominated_candidates_present"
+  ],
+  "candidates_replayed": 15,
+  "controls": [
+    "one_bar_lag",
+    "wrong_lag_future_24h",
+    "wrong_lag_stale_168h",
+    "time_shuffle",
+    "symbol_shuffle",
+    "same_family_random"
+  ],
+  "decision": "HOLD_A7AL2I_NO_CLUES",
+  "decision_counts": {
+    "HOLD_A7AL2I_CONTROL_DOMINATED": 5,
+    "HOLD_A7AL2I_UNSTABLE_PRE_MAY": 10
+  },
+  "executes_alpha_proof": false,
+  "executes_formula_generation": false,
+  "executes_formula_search": false,
+  "generated_at": "2026-05-27T10:17:21Z",
+  "input_base": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v2_20260527",
+  "replay_preflight_clue_count": 0,
+  "rows": 3779411,
+  "strict_symbols": 181
+}

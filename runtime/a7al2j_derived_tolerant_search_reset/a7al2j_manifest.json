@@ -1,0 +1,14 @@
+{
+  "authorizes_a7al2k_generator_smoke": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AL2J_DERIVED_TOLERANT_RESET_READY_FOR_A7AL2K",
+  "derived_searchable_field_count": 26,
+  "generated_at": "2026-05-27T10:18:53Z",
+  "generator_cells": 7,
+  "input_a7al2i_decision": "HOLD_A7AL2I_NO_CLUES",
+  "input_a7as0_decision": "PASS_A7AS0_V2_DATA_ACCEPTANCE_READY_FOR_A7AL2G",
+  "policy": "derived fields are first-class if lineage/PIT/control requirements are explicit; controls remain mandatory"
+}

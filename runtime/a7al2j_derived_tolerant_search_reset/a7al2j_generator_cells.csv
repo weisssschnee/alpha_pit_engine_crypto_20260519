@@ -1,0 +1,8 @@
+cell,inputs,objective,budget_share
+J0_oi_derived_state,open_interest_change_24h|open_interest_zscore_168h|oi_x_price_move_24h,test leverage-flow state without direct OI level rank,0.18
+J1_vol_range_structure,range_bps|realized_vol_24h|realized_vol_168h|vol_compression,test price/range derived structure beyond stale controls,0.18
+J2_liquidity_lifecycle,trade_count|log_quote_volume_168h|liquidity_rank_active_universe|age_x_liquidity,"test lifecycle/liquidity interaction, not raw activity rank",0.16
+J3_basis_funding_derived,basis_abs_168h|premium_abs_168h|funding_rate_abs_168h|funding_rate_mean_168h,retest crowded dislocation as state interaction only,0.14
+J4_upper_regime_interaction,R3_liquidity_cycle|R4_leverage_crowding|R5_basis_dislocation|R10_stress_proxy,condition formulas on train-frozen upper regimes,0.14
+J5_cross_exchange_overlay_diagnostic,okx_binance_spread|funding_spread|oi_spread|basis_spread,30d diagnostic only; no proof promotion,0.08
+J6_controls_placebo,wrong_lag|shuffle|random|same_family_placebo,negative controls,0.12
