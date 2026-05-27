@@ -1,0 +1,5 @@
+blocked_field_or_alias,replacement,block_reason
+mark_basis_bps_okx_minus_binance,mark_basis_bps_okx_contract_unit_minus_binance,Unsafe for multiplier contracts; caused about -9990 bps false basis
+index_spread_bps_okx_minus_binance,index_spread_bps_okx_contract_unit_minus_binance,Unsafe for multiplier contracts; caused about -9990 bps false index spread
+okx_mark_close - binance_mark_close direct comparison,okx_mark_close_contract_unit - binance_mark_close,Direct price comparison mixes underlying-unit and contract-unit prices
+okx_index_close - binance_index_close direct comparison,okx_index_close_contract_unit - binance_index_close,Direct price comparison mixes underlying-unit and contract-unit prices

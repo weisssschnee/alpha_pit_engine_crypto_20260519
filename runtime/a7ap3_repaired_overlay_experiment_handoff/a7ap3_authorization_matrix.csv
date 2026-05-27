@@ -1,0 +1,7 @@
+item,authorized,notes
+repaired overlay field diagnostics,True,Use repaired contract-unit fields only
+short-window field smoke,True,Diagnostic only; 103 hourly timestamps
+forward telemetry design,True,Append-only/forward context only
+broad formula search,False,Overlap too short and A7AP1/A7AP2 found no clue
+historical alpha proof,False,No historical OKX overlay proof window
+shadow / paper / live,False,Not a tradable proof object

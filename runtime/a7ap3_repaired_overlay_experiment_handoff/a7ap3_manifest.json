@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-05-27T01:17:59Z",
+  "decision": "PASS_A7AP3_REPAIRED_OVERLAY_HANDOFF_DIAGNOSTIC_ONLY",
+  "input_a7ap0_decision": "PASS_A7AP0_CROSS_EXCHANGE_OVERLAY_ACCEPTED_WITH_PRICE_SCALE_QUARANTINE",
+  "input_a7ap1_decision": "PASS_A7AP1_CROSS_EXCHANGE_FIELD_SMOKE_DIAGNOSTIC_ONLY",
+  "input_a7ap2_decision": "PASS_A7AP2_MULTIPLIER_PRICE_SCALE_REPAIR_DIAGNOSTIC_READY",
+  "repaired_gold_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\okx_binance_cross_exchange_1h_30d_v1_price_scale_repaired_20260527",
+  "symbols": 218,
+  "rows": 22345,
+  "unique_hours": 103,
+  "price_scale_repair_symbol_count": 4,
+  "price_scale_repair_symbols": [
+    "1000BONKUSDT",
+    "1000FLOKIUSDT",
+    "1000PEPEUSDT",
+    "1000SHIBUSDT"
+  ],
+  "post_repair_extreme_symbol_count": 0,
+  "diagnostic_clue_count": 0,
+  "authorizes_diagnostic_use_repaired_fields": true,
+  "authorizes_broad_search": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "executes_search": false,
+  "executes_replay": false,
+  "blockers": [],
+  "warnings": [
+    "Use repaired contract-unit fields for cross-venue price comparisons",
+    "Original raw cross-venue price differences remain audit-only for multiplier contracts",
+    "Overlap is only 103 hours; no historical alpha proof"
+  ]
+}

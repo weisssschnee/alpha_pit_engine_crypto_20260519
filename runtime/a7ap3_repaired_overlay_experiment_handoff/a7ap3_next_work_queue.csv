@@ -1,0 +1,4 @@
+task,priority,why
+A7AP-4 forward overlay collector contract,P0,Current OKX/Binance overlap is 103 hours; useful proof needs append-only forward accumulation
+A7AP-5 longer overlap source feasibility,P1,Check whether OKX historical mark/index/funding can be extended without PIT ambiguity
+A7AP-6 integrate allowed fields into formula registry with blocked alias guard,P1,Prevent future generators from using unsafe raw cross-venue basis aliases

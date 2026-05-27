@@ -1,0 +1,7 @@
+field_or_family,status,reason,scope
+mark_basis_bps_okx_contract_unit_minus_binance,allowed_diagnostic,OKX mark price is converted to Binance contract unit before comparison,short_window_overlay_diagnostic_only
+index_spread_bps_okx_contract_unit_minus_binance,allowed_diagnostic,OKX index price is converted to Binance contract unit before comparison,short_window_overlay_diagnostic_only
+funding_spread_okx_minus_binance,allowed_diagnostic_with_coverage_caveat,Only 20.1 percent valid rows in the 103-hour overlap due sparse Binance funding rows,coverage_audit_and_diagnostic_only
+okx_internal_mark_index_basis_bps,allowed_diagnostic,Single-venue internal basis; not affected by multiplier cross-venue scale mismatch,short_window_overlay_diagnostic_only
+binance_internal_mark_index_basis_bps,allowed_diagnostic,Single-venue internal basis; useful as baseline context,short_window_overlay_diagnostic_only
+raw okx/binance mark/index price columns,allowed_source_context_only,Raw fields are preserved for audit but should not be used directly for cross-venue basis on multiplier contracts,source_audit_only
