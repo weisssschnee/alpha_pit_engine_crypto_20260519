@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-05-27T04:16:41Z",
+  "decision": "HOLD_A7AR4_SELECTOR_DIVERSITY_WEAK",
+  "executes_search": false,
+  "executes_replay": false,
+  "generated_candidates": 1000,
+  "a7ar2_evaled_candidates": 96,
+  "eligible_prediversity_candidates": 90,
+  "selected_candidates": 20,
+  "selected_family_count": 6,
+  "selected_skeleton_count": 9,
+  "selected_production_key_count": 20,
+  "minimum_selected_skeleton_count": 20,
+  "blockers": [
+    "selected_skeleton_count_below_20"
+  ],
+  "a7al1_field_family_baseline_not_blocked_by_a7ar4": true,
+  "authorizes_a7al2_small_formula_search_contract_drafting": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "warnings": [
+    "A7AR-4 is pre-replay selector plumbing only",
+    "A7AR-2 evaluated only 96 generated candidates; non-evaluated candidates are rejected for this smoke",
+    "Current generator skeleton diversity is expected to be the binding constraint if selected_skeleton_count < 20"
+  ]
+}

@@ -1,0 +1,5 @@
+check,status,detail
+fixed_delay_stress_abolished,PASS,PASS_A7AL0L_FIXED_DELAY_STRESS_ABOLISHED
+field_contract_all_present,PASS,fields=28 missing=0
+same_bar_forbidden,PASS,same_bar_execution_allowed must be false
+fixed_delay_not_required,PASS,field-native latency audit is required instead

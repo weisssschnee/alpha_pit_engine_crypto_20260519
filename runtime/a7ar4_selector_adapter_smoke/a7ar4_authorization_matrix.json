@@ -1,0 +1,18 @@
+{
+  "decision": "HOLD_A7AR4_SELECTOR_DIVERSITY_WEAK",
+  "blockers": [
+    "selected_skeleton_count_below_20"
+  ],
+  "authorized": {
+    "a7al1_field_family_baseline": true,
+    "a7al2_small_formula_search_contract_drafting": false
+  },
+  "not_authorized": {
+    "formula_search_execution": true,
+    "alpha_proof": true,
+    "shadow": true,
+    "paper": true,
+    "live": true
+  },
+  "note": "A7AR-4 selector smoke does not replace A7AL-1 field-family baseline."
+}

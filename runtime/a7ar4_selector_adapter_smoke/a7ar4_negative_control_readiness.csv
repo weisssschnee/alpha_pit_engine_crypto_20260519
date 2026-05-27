@@ -1,0 +1,6 @@
+check,status,detail
+negative_control_plan_attached,PASS,plan_controls=8
+a7ar2_control_eval_success,PASS,rows=288 failures=0
+control_available_random_field,PASS,rows=96 active_ratio_median=1.0
+control_available_wrong_lag_future_1h,PASS,rows=96 active_ratio_median=0.987176
+control_available_wrong_lag_stale_24h,PASS,rows=96 active_ratio_median=0.985344

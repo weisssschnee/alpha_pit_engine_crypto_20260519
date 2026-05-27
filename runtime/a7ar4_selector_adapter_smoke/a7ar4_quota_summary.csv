@@ -1,0 +1,22 @@
+quota_type,bucket,selected_count,selected_share,status
+formula_family,basis_funding_crowding,5,0.25,
+formula_family,price_volatility_structure,4,0.2,
+formula_family,liquidity_volatility_guarded,4,0.2,
+formula_family,oi_price_interaction,3,0.15,
+formula_family,taker_flow_state,3,0.15,
+formula_family,positioning_reversal,1,0.05,
+field_family,price,8,0.4,
+field_family,volatility,8,0.4,
+field_family,liquidity,7,0.35,
+field_family,basis,5,0.25,
+field_family,funding,5,0.25,
+field_family,open_interest,3,0.15,
+field_family,taker_ratio,3,0.15,
+field_family,positioning,1,0.05,
+wrapper_tag,none,7,0.35,
+wrapper_tag,funding_wrapper_risk,5,0.25,
+wrapper_tag,basis_premium_wrapper_risk,5,0.25,
+wrapper_tag,oi_positioning_wrapper_risk,4,0.2,
+wrapper_tag,taker_flow_wrapper_risk,4,0.2,
+age_listing_latent,age_lt30_fixed_quota,,,policy_attached_not_materialized_pre_replay
+meme_multiplier,meme_multiplier_strata,,,taxonomy_attached; enforced at replay universe stage

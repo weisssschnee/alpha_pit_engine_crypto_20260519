@@ -1,0 +1,5 @@
+scope,candidates,skeleton_count,top_skeleton,top_skeleton_share,required_skeleton_count,status
+all_generated,1000,9,skeleton-7762e3f46e546cc2,0.247,,
+a7ar2_evaled,96,9,skeleton-7762e3f46e546cc2,0.25,,
+eligible_prediversity,90,9,skeleton-7762e3f46e546cc2,0.233333,,
+selected,20,9,skeleton-7762e3f46e546cc2,0.15,20,HOLD
