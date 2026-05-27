@@ -1,0 +1,109 @@
+{
+  "allowed_use": [
+    "diagnostic candidate ordering",
+    "pre-search selector implementation audit",
+    "A7AL-2P contract drafting input after all hard blockers are cleared"
+  ],
+  "blockers": [
+    "matched_control_dominance_hard_gate_fail",
+    "timevarying_latent_neutralization_fragile"
+  ],
+  "contract_name": "A7AR-5 replay-aware selector adapter",
+  "decision": "HOLD_A7AR5_REPLAY_SELECTOR_NOT_AUTHORIZED",
+  "forbidden_inputs": [
+    "May score",
+    "May ranking",
+    "May threshold tuning",
+    "May weight selection",
+    "May generator tuning",
+    "May selector score",
+    "shadow/paper/live promotion labels"
+  ],
+  "generated_at": "2026-05-27T15:59:08Z",
+  "hard_gate_status": {
+    "candidate_eval": "PASS",
+    "canonical_field_alias_code": "PASS",
+    "matched_control_dominance": "HOLD",
+    "timevarying_latent_neutralization": "HOLD"
+  },
+  "hard_gates": {
+    "canonical_contract_unit_fields_only": true,
+    "j5_overlay_silent_fallback_forbidden": true,
+    "label_entry_alignment_required": [
+      "label_t_to_t24",
+      "label_t1_to_t25",
+      "label_t2_to_t26"
+    ],
+    "overlap_robust_stats_required": [
+      "newey_west_lag24",
+      "block_bootstrap_block24",
+      "nonoverlap_offset_tstats"
+    ],
+    "split_control_ratio_0_80_to_1_00": "WARN_CONTROL_CLOSE",
+    "split_control_ratio_gte_1_00": "HOLD_CONTROL_DOMINATED",
+    "timevarying_latent_state_neutralization_required": true
+  },
+  "not_authorized": [
+    "A7AL-2 formula search execution",
+    "alpha proof",
+    "shadow",
+    "paper",
+    "live"
+  ],
+  "score_components_no_may": [
+    "non_may_original_spread",
+    "entry_shift_aligned_spread_label_t1_to_t25",
+    "matched_control_dominance_margin_by_split",
+    "one_bar_lag_survival_recent",
+    "timevarying_latent_neutralization_survival",
+    "cost_proxy_placeholder_from_replay_family",
+    "family_skeleton_cell_diversity"
+  ],
+  "status": "DRY_ADAPTER_ONLY",
+  "top_dry_selector_candidates": [
+    {
+      "candidate_id": "a7al2k_0cf817ef95787b3d",
+      "cell": "J4_upper_regime_interaction",
+      "control_dominance_margin": -0.0388686504706397,
+      "family": "derived_upper_regime_proxy",
+      "non_may_original_spread_score": 0.003407917840936718,
+      "one_bar_lag_survival_recent": 0.967108310046891,
+      "replay_aware_selector_score_no_may": 0.0036642639406307166,
+      "timevarying_latent_positive_premay_splits": 2
+    },
+    {
+      "candidate_id": "a7al2k_134ec76b5d7444f9",
+      "cell": "J2_liquidity_lifecycle",
+      "control_dominance_margin": -0.062067289623535915,
+      "family": "derived_liquidity_lifecycle",
+      "non_may_original_spread_score": 0.002811178997600509,
+      "one_bar_lag_survival_recent": 0.971546179276137,
+      "replay_aware_selector_score_no_may": 0.003053504984502102,
+      "timevarying_latent_positive_premay_splits": 2
+    },
+    {
+      "candidate_id": "a7al2k_01759e5da72c472c",
+      "cell": "J4_upper_regime_interaction",
+      "control_dominance_margin": 0.03581679097228696,
+      "family": "derived_upper_regime_proxy",
+      "non_may_original_spread_score": 0.002047623251922958,
+      "one_bar_lag_survival_recent": 0.9815500034166228,
+      "replay_aware_selector_score_no_may": 0.0021634700073118705,
+      "timevarying_latent_positive_premay_splits": 1
+    },
+    {
+      "candidate_id": "a7al2k_01298a6b5902f416",
+      "cell": "J0_oi_derived_state",
+      "control_dominance_margin": 0.22551241768568242,
+      "family": "derived_oi_price_state",
+      "non_may_original_spread_score": 0.0013818245587966403,
+      "one_bar_lag_survival_recent": 0.984298095607153,
+      "replay_aware_selector_score_no_may": 0.0016318322989801945,
+      "timevarying_latent_positive_premay_splits": 1
+    }
+  ],
+  "warnings": [
+    "stale_a7al2k_artifacts_contain_blocked_overlay_aliases_rerun_required_before_j5_use",
+    "overlap_adjusted_recent_tstat_below_2_for_some_candidates"
+  ]
+}

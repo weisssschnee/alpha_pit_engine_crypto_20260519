@@ -1,0 +1,33 @@
+{
+  "a7ar5_contract_decision": "HOLD_A7AR5_REPLAY_SELECTOR_NOT_AUTHORIZED",
+  "authorizes_a7al2p_contract": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "matched_control_dominance_hard_gate_fail",
+    "timevarying_latent_neutralization_fragile"
+  ],
+  "candidate_count": 4,
+  "decision": "HOLD_A7AL2P0_PRE_SEARCH_HARDENING_BLOCKERS",
+  "eval_errors": 0,
+  "executes_alpha_proof": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-27T15:59:08Z",
+  "p0_1_label_alignment": "computed label_t_to_t24, label_t1_to_t25, label_t2_to_t26",
+  "p0_2_canonical_alias": "generator code patched; stale generated artifacts audited separately",
+  "p0_3_control_gate": "control_ratio >= 1.00 is HOLD by split",
+  "p0_4_overlap_stats": "hourly naive, 24h non-overlap offset, Newey-West lag24, block bootstrap block24",
+  "p0_5_timevarying_latent": {
+    "loaded_rows": 3692531,
+    "state_non_missing_share": 0.9703079075817397,
+    "state_panel_path": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_latent_state_features_v1_20260527.parquet",
+    "state_seen_in_train_share": 0.7661959913546751
+  },
+  "p0_6_replay_selector": "A7AR-5 dry replay-aware selector contract and score generated without May",
+  "warnings": [
+    "stale_a7al2k_artifacts_contain_blocked_overlay_aliases_rerun_required_before_j5_use",
+    "overlap_adjusted_recent_tstat_below_2_for_some_candidates"
+  ]
+}

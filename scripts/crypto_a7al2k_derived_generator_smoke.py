@@ -181,13 +181,16 @@ class DerivedCandidateGenerator:
             "overlay": [
                 f
                 for f in [
-                    "mark_basis_bps_okx_minus_binance",
-                    "index_spread_bps_okx_minus_binance",
                     "funding_spread_okx_minus_binance",
+                    "okx_internal_mark_index_basis_bps",
+                    "binance_internal_mark_index_basis_bps",
                     "oi_usd_spread_okx_minus_binance",
                     "oi_usd_ratio_okx_over_binance",
+                    "oi_coin_ratio_okx_over_binance",
                     "taker_ratio_spread_okx_minus_binance",
                     "okx_contracts_taker_buy_share",
+                    "okx_contracts_taker_buy_sell_ratio",
+                    "oi_value_ratio_from_crowding_endpoint_okx_over_binance",
                 ]
                 if f in overlay_fields
             ],
@@ -319,7 +322,7 @@ class DerivedCandidateGenerator:
             return CandidateSpec(cell, "derived_upper_regime_proxy", self.rng.choice(templates), "upper_regime_proxy")
         if cell == "J5_cross_exchange_overlay_diagnostic":
             if not self.pools["overlay"]:
-                return self.expression_for_cell("J0_oi_derived_state")
+                raise ValueError("J5_cross_exchange_overlay_diagnostic requires canonical overlay fields; silent fallback is forbidden")
             overlay = self.choice("overlay")
             price = self.choice("price")
             w1, w2 = self.w(), self.w()
