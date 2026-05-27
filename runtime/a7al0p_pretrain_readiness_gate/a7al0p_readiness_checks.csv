@@ -1,0 +1,10 @@
+check,status,blocker,detail
+feature_lineage_100pct_resolved,PASS,,rows=81
+label_fields_isolated,PASS,,label_rows=1
+pit_lag_and_plus2h_contract,PASS,,pit_rows=80
+derived_feature_contract_passed,PASS,,PASS_A7AL0F_DERIVED_FEATURE_ENGINEERING_CONTRACT
+upper_regime_train_only_passed,PASS,,PASS_A7AL0G_UPPER_REGIME_STATE_BUILDER
+neutralization_policy_exists,PASS,,modes=6
+negative_control_plan_exists,PASS,,controls=8
+no_may_dependency,PASS,,May unavailable and not used
+a7al1_only_authorization,PASS,,"pretrain gate can authorize field-family baseline only, not formula search"

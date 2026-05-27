@@ -1,0 +1,16 @@
+{
+  "blocked_fields": [
+    "forward_trade_return_1h",
+    "fwd_ret_1h",
+    "fwd_ret_4h",
+    "fwd_ret_24h"
+  ],
+  "blocked_patterns": [
+    "future funding or next funding as signal",
+    "same-bar execution from bar-close fields",
+    "validation/test-fitted thresholds",
+    "May-derived thresholds or weights",
+    "global-rank-only promotion without neutralized survival",
+    "wrong-lag controls comparable to original"
+  ]
+}

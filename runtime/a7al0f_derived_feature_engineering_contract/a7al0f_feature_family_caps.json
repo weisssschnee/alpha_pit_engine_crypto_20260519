@@ -1,0 +1,18 @@
+{
+  "field_family_caps": {
+    "liquidity_volatility_interaction": 0.15,
+    "funding_basis_interaction": 0.2,
+    "meme_listing_cycle": 0.15,
+    "single_raw_source_family": 0.35
+  },
+  "search_quota_policy": {
+    "age_lt30d_minimum_search_quota": 0.1,
+    "strict_full_history_minimum_search_quota": 0.35,
+    "listing_aware_max_primary_proof_weight": 0.0
+  },
+  "small_group_policy": {
+    "min_group_symbols": 10,
+    "min_group_active_symbols_per_hour": 8,
+    "fallback": "parent state -> liquidity tier -> global"
+  }
+}

@@ -1,0 +1,12 @@
+regime_state,transitions,transition_rate,distinct_states
+R0_market_trend_state,3352,0.16412064238151194,3
+R1_market_volatility_state,306,0.014982373678025853,3
+R2_market_breadth_state,3256,0.15942028985507245,3
+R3_liquidity_cycle_state,53,0.0025949862906384648,3
+R4_leverage_crowding_state,2893,0.14164708186447317,3
+R5_basis_premium_dislocation_state,157,0.007687034860947905,3
+R6_positioning_crowding_state,391,0.019144144144144143,3
+R7_meme_risk_on_state,3679,0.18013121817469643,3
+R8_listing_cycle_pressure_state,80,0.0039169604386995694,3
+R9_alt_vs_major_dispersion_state,3778,0.18497845671758714,3
+R10_stress_proxy_state,1076,0.0526831179005092,3

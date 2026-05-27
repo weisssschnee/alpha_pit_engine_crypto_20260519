@@ -1,0 +1,12 @@
+{
+  "generated_at": "2026-05-27T03:31:48Z",
+  "decision": "PASS_A7AL0F_DERIVED_FEATURE_ENGINEERING_CONTRACT",
+  "executes_search": false,
+  "executes_replay": false,
+  "feature_family_rows": 21,
+  "derived_fields_first_class": true,
+  "authorizes_a7al0g_upper_regime_builder": true,
+  "authorizes_a7al1_baseline": false,
+  "authorizes_formula_search": false,
+  "blockers": []
+}

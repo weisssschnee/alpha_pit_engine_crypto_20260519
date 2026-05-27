@@ -1,0 +1,7 @@
+node,kind,outputs_to
+Universe498 1h replay panel,input,A7AM base feature contract
+A7AM base feature contract,contract,A7AL-0R feature lineage ledger
+A7AK-LV1 latent state feature build,derived feature builder,A7AL-0R feature lineage ledger
+A7AK-LV2 train-only response merge,train-only state merge,A7AL-0R latent freeze audit
+A7AK-LV3 neutral field-family smoke,diagnostic,A7AL-0R readiness audit
+A7AL-0 top498 contract,contract,A7AL-0P pre-train gate

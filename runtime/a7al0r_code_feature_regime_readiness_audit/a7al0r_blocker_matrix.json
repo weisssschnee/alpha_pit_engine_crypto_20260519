@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-05-27T03:31:39Z",
+  "decision": "PASS_A7AL0R_READY_FOR_FEATURE_REGIME_REBUILD",
+  "executes_search": false,
+  "executes_replay": false,
+  "feature_lineage_rows": 81,
+  "derived_feature_rows": 30,
+  "label_fields": 1,
+  "pit_rows": 80,
+  "input_decisions": {
+    "lv1": "PASS_A7AK_LV1_LATENT_STATE_FEATURES_READY",
+    "lv2": "PASS_A7AK_LV2_RESPONSE_MERGE_AUDIT_READY",
+    "lv3": "PASS_A7AK_LV3_NEUTRAL_FIELD_FAMILY_DIAGNOSTIC_READY",
+    "a7al0": "PASS_A7AL0_TOP498_ALPHA_SEARCH_CONTRACT_READY"
+  },
+  "blockers": [],
+  "warnings": [
+    "Derived fields are allowed as first-class state/search inputs when lineage, PIT lag, and +2h stress are explicit",
+    "Forward labels remain label-only",
+    "A7AL-0R does not authorize formula search"
+  ]
+}

@@ -1,0 +1,5 @@
+split,timestamps,active_symbols_median,R0_market_trend_state_states,R0_market_trend_state_missing,R1_market_volatility_state_states,R1_market_volatility_state_missing,R2_market_breadth_state_states,R2_market_breadth_state_missing,R3_liquidity_cycle_state_states,R3_liquidity_cycle_state_missing,R4_leverage_crowding_state_states,R4_leverage_crowding_state_missing,R5_basis_premium_dislocation_state_states,R5_basis_premium_dislocation_state_missing,R6_positioning_crowding_state_states,R6_positioning_crowding_state_missing,R7_meme_risk_on_state_states,R7_meme_risk_on_state_missing,R8_listing_cycle_pressure_state_states,R8_listing_cycle_pressure_state_missing,R9_alt_vs_major_dispersion_state_states,R9_alt_vs_major_dispersion_state_missing,R10_stress_proxy_state_states,R10_stress_proxy_state_missing
+recent_oos_2026JanApr,2880,498.0,3,0,3,0,3,0,1,0,3,0,1,0,3,0,3,0,1,0,3,0,3,0
+test_2025H2,4416,440.0,3,0,3,0,3,0,1,0,3,0,3,0,3,0,3,0,3,0,3,0,3,0
+train_2024,8784,211.0,3,24,3,48,3,0,3,23,3,44,3,0,3,10,3,24,3,0,3,24,3,0
+validation_2025H1,4344,325.0,3,0,3,0,3,0,3,0,3,0,3,0,3,0,3,0,3,0,3,0,3,0

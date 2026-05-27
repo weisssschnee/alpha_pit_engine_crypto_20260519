@@ -1,0 +1,12 @@
+regime_id,input_fields,economic_role,fit_rule,apply_rule,may_used,allowed_for_rank,allowed_for_regime,allowed_for_search_interaction
+R0_market_trend,market_ret_24h_median,market trend / reversal pressure,thresholds fit on train_2024 only,validation/test/recent apply frozen thresholds,False,False,True,True
+R1_market_volatility,market_vol_168h_median,aggregate volatility state,thresholds fit on train_2024 only,validation/test/recent apply frozen thresholds,False,False,True,True
+R2_market_breadth,market_breadth_positive,cross-sectional breadth,thresholds fit on train_2024 only,validation/test/recent apply frozen thresholds,False,False,True,True
+R3_liquidity_cycle,market_liquidity_log_median,market liquidity cycle,thresholds fit on train_2024 only,validation/test/recent apply frozen thresholds,False,False,True,True
+R4_leverage_crowding,leverage_oi_change_median + funding_abs_median,aggregate leverage/funding crowding,thresholds fit on train_2024 only,validation/test/recent apply frozen thresholds,False,False,True,True
+R5_basis_premium_dislocation,basis_abs_median + premium_abs_median,basis/premium dislocation,thresholds fit on train_2024 only,validation/test/recent apply frozen thresholds,False,False,True,True
+R6_positioning_crowding,top_long_short_position_median,positioning crowding,thresholds fit on train_2024 only,validation/test/recent apply frozen thresholds,False,False,True,True
+R7_meme_risk_on,meme_vs_nonmeme_ret_24h,meme risk-on state,thresholds fit on train_2024 only,validation/test/recent apply frozen thresholds,False,False,True,True
+R8_listing_cycle_pressure,listing_age_lt30_share,listing lifecycle pressure,thresholds fit on train_2024 only,validation/test/recent apply frozen thresholds,False,False,True,True
+R9_alt_vs_major_dispersion,alt_vs_major_ret_24h,alt vs major relative state,thresholds fit on train_2024 only,validation/test/recent apply frozen thresholds,False,False,True,True
+R10_stress_proxy,volatility high + breadth weak,market stress proxy,thresholds fit on train_2024 only,validation/test/recent apply frozen thresholds,False,False,True,True

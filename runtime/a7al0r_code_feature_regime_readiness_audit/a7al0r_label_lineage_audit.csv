@@ -1,0 +1,2 @@
+field_name,feature_class,allowed_for_label,allowed_for_rank,allowed_for_search,allowed_for_regime,status
+forward_trade_return_1h,derived_label,True,False,False,False,PASS_LABEL_ISOLATED

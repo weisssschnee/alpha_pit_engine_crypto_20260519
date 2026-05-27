@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-05-27T03:31:59Z",
+  "decision": "PASS_A7AL0G_UPPER_REGIME_STATE_BUILDER",
+  "output_panel": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_upper_regime_state_v1_20260527.parquet",
+  "rows": 20424,
+  "columns": 35,
+  "regime_states": 11,
+  "executes_search": false,
+  "executes_replay": false,
+  "train_only_thresholds": true,
+  "may_used": false,
+  "authorizes_a7al0p_pretrain_gate": true,
+  "authorizes_a7al1_baseline": false,
+  "blockers": []
+}
