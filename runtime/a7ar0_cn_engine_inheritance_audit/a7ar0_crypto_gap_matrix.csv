@@ -1,0 +1,16 @@
+component,priority,gap_status,gap_detail,must_port_before_a7al2_formula_search,safe_to_copy_directly,required_crypto_adapter
+formula_gen_v2_sampler,P0,partial_reference_only,no importable crypto package; current scripts use simplified generator,yes,no,port into crypto namespace with crypto field/operator adapter
+typed_ast_and_macros,P0,partial_reference_only,reference copied but no crypto field/operator adapter package,yes,no,port with crypto-safe operator registry and timing checks
+freeform_and_ablation_sampler,P1,partial_reference_only,reference copied but not active in crypto search,yes,no,port after FormulaGenV2 adapter parity
+motif_packs,P0,partial_reference_only,CN pack copied; crypto pack is small and not equivalent,yes,no,translate motif structure only; replace all CN stock fields
+feature_algebra,P0,missing,no crypto equivalent found as reusable package,yes,no,port minimal crypto operator evaluator before formula search
+variation_and_fingerprint,P0,missing,"dedup exists ad hoc in scripts, not inherited engine service",yes,no,port for crypto formula dedup and memory keys
+search_memory_schema,P0,missing,memory policy not active; no CN payload should be inherited,yes,no,inherit schema only; initialize blank crypto memory
+ledger_policy_and_bandit,P1,missing,A7M surrogate exists but not CN ledger policy,yes,no,port policy mechanics; replace motif allowlists with crypto taxonomy
+replay_ranker,P1,missing,A7M surrogate is empirical diagnostic; CN replay ranker not ported,yes,no,port only pre-replay matrix logic; replace target labels
+selector_stack,P2,missing,stage scripts have caps but not CN selector stack,no,no,port after A7AL-1 baseline establishes field-family signal
+vector_selector,P2,missing,not ported,no,no,port after selector stack parity
+real_market_validation,P1,partial_crypto_specific,crypto has fast replay scripts; no reusable CN-style validation service,yes,no,"adapt as crypto strict replay parity target, not direct run"
+proof_suite,P3,missing,crypto proof suite not authorized,no,no,defer until crypto research candidate pool exists
+large_search_supervisor_worker,P2,missing,A7O wave runner is purpose-built; CN supervisor/worker not ported,no,no,port after generator/ranker parity and fresh crypto memory
+runtime_state_registry,P3,missing,forward telemetry contracts exist; no CN runtime registry port,no,no,"port schema after alpha candidate freeze, not before"

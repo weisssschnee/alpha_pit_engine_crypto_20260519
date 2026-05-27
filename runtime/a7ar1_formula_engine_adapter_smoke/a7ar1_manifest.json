@@ -1,0 +1,11 @@
+{
+  "config": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\config\\crypto_formula_gen_v2_motif_pack_v1.json",
+  "decision": "PASS_A7AR1_FORMULA_ENGINE_ADAPTER_SMOKE",
+  "memory_policy": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\config\\crypto_search_memory_policy_v1.json",
+  "object_id": "crypto_a7ar1_formula_engine_adapter_smoke",
+  "outputs": {
+    "generated_candidates": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar1_formula_engine_adapter_smoke\\a7ar1_generated_candidates.csv",
+    "memory_reset_audit": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar1_formula_engine_adapter_smoke\\a7ar1_memory_reset_audit.csv",
+    "validation_audit": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar1_formula_engine_adapter_smoke\\a7ar1_validation_audit.csv"
+  }
+}

@@ -1,0 +1,7 @@
+forbidden_item,reason
+CN search_memory.json,Would suppress or bias crypto search with stock candidate history.
+CN candidate_ledger.json records,Stock candidate outcomes are not crypto evidence.
+CN expression_keys/skeleton_keys payload,Only keying logic is reusable; payload is market-specific memory.
+CN stock fields and motif field lists,Crypto fields require PIT/timing/venue-specific semantics.
+CN reward weights direct use,"Crypto needs neutralized top498, cost/lag, beta/liquidity/meme controls."
+CN runtime baselines as crypto proof,"Baselines are useful as chain-lock patterns, not crypto alpha evidence."

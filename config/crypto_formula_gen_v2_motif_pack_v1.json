@@ -1,0 +1,99 @@
+{
+  "object_id": "crypto_formula_gen_v2_motif_pack_v1",
+  "created_at": "2026-05-27",
+  "source_design": "CN FormulaGenV2 role/motif structure adapted to crypto top498 fields",
+  "cn_memory_payload_inherited": false,
+  "cn_stock_fields_inherited": false,
+  "windows": {
+    "short": [4, 8, 12, 24],
+    "medium": [48, 72, 96, 168],
+    "long": [336, 504, 720]
+  },
+  "field_families": {
+    "price": ["trade_close", "mark_close", "index_close"],
+    "return": ["trade_close", "mark_close"],
+    "volatility": ["trade_high", "trade_low", "mark_high", "mark_low"],
+    "liquidity": ["trade_quote_volume", "trade_volume", "trade_count", "taker_buy_quote_volume"],
+    "open_interest": ["open_interest_last", "open_interest_mean", "open_interest_value_last", "open_interest_value_mean"],
+    "positioning": [
+      "global_long_short_account_ratio_last",
+      "global_long_short_account_ratio_mean",
+      "top_long_short_account_ratio_last",
+      "top_long_short_account_ratio_mean",
+      "top_long_short_position_ratio_last",
+      "top_long_short_position_ratio_mean"
+    ],
+    "taker_ratio": ["taker_buy_sell_volume_ratio_last", "taker_buy_sell_volume_ratio_mean"],
+    "basis": ["premium_close", "premium_close_bps", "mark_index_basis_bps", "mark_trade_basis_bps"],
+    "funding": ["funding_rate"]
+  },
+  "motif_families": {
+    "oi_price_interaction": {
+      "weight": 1.3,
+      "field_families": ["open_interest", "price"],
+      "templates": [
+        "Mul(ZScore(Delta({open_interest},{w1})),ZScore(Delta({price},{w2})))",
+        "Mul(Rank(Mean({open_interest},{w1})),ZScore(Delta({price},{w2})))"
+      ]
+    },
+    "positioning_reversal": {
+      "weight": 1.0,
+      "field_families": ["positioning", "price"],
+      "templates": [
+        "Mul(ZScore(Mean({positioning},{w1})),Neg(ZScore(Delta({price},{w2}))))",
+        "Sub(ZScore(Mean({positioning},{w1})),ZScore(Mean({positioning},{w2})))"
+      ]
+    },
+    "taker_flow_state": {
+      "weight": 0.9,
+      "field_families": ["taker_ratio", "liquidity"],
+      "templates": [
+        "Mul(ZScore(Mean({taker_ratio},{w1})),Rank(Mean({liquidity},{w2})))",
+        "Sub(ZScore(Mean({taker_ratio},{w1})),ZScore(Mean({taker_ratio},{w2})))"
+      ]
+    },
+    "basis_funding_crowding": {
+      "weight": 1.1,
+      "field_families": ["basis", "funding"],
+      "templates": [
+        "Mul(ZScore({basis}),ZScore(Mean({funding},{w1})))",
+        "Sub(ZScore(Mean({basis},{w1})),ZScore(Mean({funding},{w2})))"
+      ]
+    },
+    "liquidity_volatility_guarded": {
+      "weight": 0.5,
+      "field_families": ["liquidity", "volatility"],
+      "templates": [
+        "Mul(Rank(Mean({liquidity},{w1})),ZScore(Sub({volatility},{volatility})))",
+        "Mul(ZScore(Delta({liquidity},{w1})),Rank(Mean({volatility},{w2})))"
+      ]
+    },
+    "price_volatility_structure": {
+      "weight": 0.8,
+      "field_families": ["price", "volatility"],
+      "templates": [
+        "Mul(ZScore(Delta({price},{w1})),ZScore(Mean({volatility},{w2})))",
+        "Sub(ZScore(Delta({price},{w1})),ZScore(Delta({volatility},{w2})))"
+      ]
+    }
+  },
+  "constraints": {
+    "max_tree_depth": 8,
+    "banned_cn_stock_tokens": [
+      "$amount",
+      "$final_float_market_cap",
+      "$free_float",
+      "$turnover_rate",
+      "$limit_up",
+      "$limit_down",
+      "final_float_market_cap",
+      "turnover_rate",
+      "limit_up",
+      "limit_down"
+    ],
+    "all_products_normalized_or_ranked": true,
+    "same_bar_execution_allowed": false,
+    "requires_plus_1h_execution": true,
+    "requires_plus_2h_stress": true
+  }
+}

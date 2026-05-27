@@ -1,0 +1,6 @@
+stage,name,objective,success_gate,authorized_search
+A7AR-1,formula_engine_import_smoke,Create importable crypto FormulaGenV2/typed AST adapter package.,Generate 1000 crypto field-safe expressions with zero CN field references.,no
+A7AR-2,feature_algebra_parity_smoke,Evaluate a fixed operator set on a tiny top498 slice with +1h/+2h timing.,"Operator parity, NaN/inf, activity, and timing checks pass.",no
+A7AR-3,fresh_memory_and_dedup_smoke,Initialize crypto memory empty and test expression/skeleton/family dedup.,Memory starts empty; duplicate control works only on crypto-generated formulas.,no
+A7AR-4,pre_replay_ranker_adapter_smoke,Build CN-style pre-replay matrix from crypto-safe columns only.,Forbidden post-replay and future/stress columns excluded mechanically.,no
+A7AR-5,a7al1_field_family_baseline_with_engine_services,Run field-family baseline smoke using inherited dedup/ranker/selector services.,A7AL-1 gates define whether A7AL-2 formula search can start.,field_family_smoke_only

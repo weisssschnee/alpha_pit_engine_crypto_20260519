@@ -1,0 +1,64 @@
+{
+  "object_id": "crypto_cn_engine_inheritance_v1",
+  "created_at": "2026-05-27",
+  "purpose": "Adapt the mature CN AlphaFactory engine flow into crypto without modifying CN and without inheriting CN search memory payloads.",
+  "cn_repo": "G:/Project_V7_Rotation/alpha_pit_engine_project_20260511",
+  "crypto_repo": "G:/Project_V7_Rotation/alpha_pit_engine_crypto_20260519",
+  "scope": {
+    "inherit_engine_structure": true,
+    "inherit_runtime_memory_payloads": false,
+    "inherit_cn_candidate_ledgers": false,
+    "inherit_cn_reward_weights_directly": false,
+    "modify_cn_repo": false,
+    "copy_cn_source_only_after_adapter_contract": true
+  },
+  "target_crypto_context": {
+    "primary_panel": "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v1_20260525",
+    "primary_frequency": "1h",
+    "primary_universe": "U0_strict_full_history_181",
+    "diagnostic_universe": "U1_listing_aware_305",
+    "execution_lag_primary": "timestamp_plus_1h",
+    "execution_lag_conservative": "timestamp_plus_2h",
+    "alpha_proof_authorized": false
+  },
+  "inheritance_layers": [
+    {
+      "layer": "L0_reference_inventory",
+      "description": "Read CN source and runtime manifests read-only; produce component inventory and gap matrix.",
+      "status": "authorized"
+    },
+    {
+      "layer": "L1_formula_engine_adapter",
+      "description": "Port FormulaGenV2, typed AST, macros, paired ablation, and motif packs into a crypto namespace with crypto field mapping.",
+      "status": "pending_a7ar0"
+    },
+    {
+      "layer": "L2_memory_and_policy_adapter",
+      "description": "Port search memory schema, fingerprinting, diversity keys, and ledger policy with a fresh crypto memory namespace.",
+      "status": "pending_a7ar0"
+    },
+    {
+      "layer": "L3_ranker_selector_adapter",
+      "description": "Port replay-aware ranker and selector stack using only pre-replay crypto-safe features.",
+      "status": "pending_l1_l2"
+    },
+    {
+      "layer": "L4_worker_supervisor_adapter",
+      "description": "Port large-search supervisor/worker and successive-halving orchestration after parity smoke.",
+      "status": "pending_l3"
+    },
+    {
+      "layer": "L5_proof_forward_adapter",
+      "description": "Port proof suite, locked forward, shadow, and regime/book components only after research candidate pool exists.",
+      "status": "blocked_until_candidate_pool"
+    }
+  ],
+  "hard_forbidden": [
+    "Do not import CN search_memory.json or candidate_ledger.json into crypto.",
+    "Do not import CN expression_keys, skeleton_keys, duplicate_skip_events, records, or replay_enrichment_paths.",
+    "Do not use CN stock fields without crypto field adapter mapping.",
+    "Do not run CN reward weights directly on crypto panels.",
+    "Do not use post-replay or May/future stress labels as pre-replay ranker features.",
+    "Do not modify the CN repository."
+  ]
+}

@@ -1,0 +1,7 @@
+policy_item,inherit_from_cn,inherit_payload,crypto_action
+schema,yes,no,Use LocalSearchMemory keying ideas and schema shape under crypto namespace.
+expression_keys,no,no,Initialize empty set; populate only from crypto candidates.
+skeleton_keys,no,no,Initialize empty set; avoid suppressing crypto formulas due to CN stock memory.
+production_rule_key,yes,no,Adapt context fields to engine/cell/horizon/neutralization namespace.
+reward_proxy,structure_only,no,Replace IC/OOS/replay components with A7AL pre-replay and neutralized metrics.
+candidate_records,no,no,"Do not import CN candidate ledgers, retained flags, cluster ids, or replay metrics."

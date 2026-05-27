@@ -1,0 +1,14 @@
+{
+  "a7al2_formula_search_authorized": false,
+  "alpha_proof_authorized": false,
+  "cn_memory_payload_violations": 0,
+  "cn_reward_payload_violations": 0,
+  "cn_stock_field_violations": 0,
+  "decision": "PASS_A7AR1_FORMULA_ENGINE_ADAPTER_SMOKE",
+  "generated_candidates": 1000,
+  "memory_reset_checks_failed": 0,
+  "shadow_paper_live_authorized": false,
+  "unique_expressions": 1000,
+  "validation_failed": 0,
+  "validation_passed": 1000
+}

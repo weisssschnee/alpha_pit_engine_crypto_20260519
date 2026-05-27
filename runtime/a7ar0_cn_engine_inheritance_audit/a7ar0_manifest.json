@@ -1,0 +1,13 @@
+{
+  "cn_repo_read_only": true,
+  "cn_root": "G:\\Project_V7_Rotation\\alpha_pit_engine_project_20260511",
+  "component_count": 15,
+  "config_files": [
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\config\\crypto_cn_engine_inheritance_v1.json",
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\config\\crypto_search_memory_policy_v1.json"
+  ],
+  "crypto_root": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519",
+  "decision": "PASS_A7AR0_CN_ENGINE_FLOW_UNDERSTOOD_ADAPTER_REQUIRED",
+  "gap_count": 15,
+  "object_id": "crypto_a7ar0_cn_engine_inheritance_audit"
+}

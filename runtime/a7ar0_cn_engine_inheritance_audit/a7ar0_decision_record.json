@@ -1,0 +1,24 @@
+{
+  "a7al2_formula_search_authorized": false,
+  "alpha_proof_authorized": false,
+  "cn_repo_read_only": true,
+  "created_at": "20260527",
+  "decision": "PASS_A7AR0_CN_ENGINE_FLOW_UNDERSTOOD_ADAPTER_REQUIRED",
+  "inherit_cn_memory_payloads": false,
+  "inherit_engine_structure": true,
+  "modify_cn_repo_authorized": false,
+  "outputs": {
+    "adapter_plan": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar0_cn_engine_inheritance_audit\\a7ar0_adapter_plan.csv",
+    "component_inventory": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar0_cn_engine_inheritance_audit\\a7ar0_cn_component_inventory.csv",
+    "forbidden_inheritance": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar0_cn_engine_inheritance_audit\\a7ar0_forbidden_inheritance.csv",
+    "gap_matrix": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar0_cn_engine_inheritance_audit\\a7ar0_crypto_gap_matrix.csv",
+    "memory_policy": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar0_cn_engine_inheritance_audit\\a7ar0_memory_policy.csv"
+  },
+  "required_next_stages": [
+    "A7AR-1",
+    "A7AR-2",
+    "A7AR-3",
+    "A7AR-4"
+  ],
+  "shadow_paper_live_authorized": false
+}

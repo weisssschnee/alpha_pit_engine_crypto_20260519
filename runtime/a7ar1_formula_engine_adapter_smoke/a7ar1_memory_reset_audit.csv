@@ -1,0 +1,6 @@
+check,status,detail
+fresh_memory_required,pass,True
+expression_keys_empty,pass,0
+skeleton_keys_empty,pass,0
+records_empty,pass,0
+inherited_paths_empty,pass,0

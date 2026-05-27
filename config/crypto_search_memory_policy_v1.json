@@ -1,0 +1,55 @@
+{
+  "object_id": "crypto_search_memory_policy_v1",
+  "created_at": "2026-05-27",
+  "purpose": "Define crypto search memory configuration inherited from CN schema but initialized with no CN memory payloads.",
+  "schema_inheritance": {
+    "source_component": "CN LocalSearchMemory schema and keying ideas",
+    "inherit_expression_key_logic": true,
+    "inherit_skeleton_key_logic": true,
+    "inherit_production_rule_key_shape": true,
+    "inherit_reward_proxy_shape": "structure_only",
+    "inherit_records": false,
+    "inherit_expression_keys": false,
+    "inherit_skeleton_keys": false,
+    "inherit_duplicate_skip_events": false,
+    "inherit_replay_enrichment_paths": false,
+    "inherit_candidate_ledgers": false
+  },
+  "crypto_namespace": {
+    "memory_namespace": "crypto_a7al_top498_fresh_v1",
+    "dataset_role": "crypto_universe498_replay_1h_v1",
+    "universe_primary": "U0_strict_full_history_181",
+    "universe_diagnostic": "U1_listing_aware_305",
+    "frequency": "1h",
+    "memory_root": "runtime/crypto_search_memory/a7al_top498_fresh_v1"
+  },
+  "initial_state": {
+    "expression_keys": [],
+    "skeleton_keys": [],
+    "records": [],
+    "duplicate_skip_events": [],
+    "replay_enrichment_paths": [],
+    "inherited_paths": [],
+    "fresh_memory_required": true
+  },
+  "allowed_policy_inputs": [
+    "crypto field family",
+    "crypto operator signature",
+    "crypto horizon bucket",
+    "neutralization mode",
+    "latent state group",
+    "liquidity tier",
+    "contract multiplier/meme class",
+    "pre-replay cheap score",
+    "negative control class"
+  ],
+  "forbidden_policy_inputs": [
+    "CN candidate performance",
+    "CN candidate expression ids",
+    "CN search memory records",
+    "CN cluster ids",
+    "May or future stress label",
+    "post-replay pass label during pre-replay ranking",
+    "same-bar or future crypto feature values"
+  ]
+}
