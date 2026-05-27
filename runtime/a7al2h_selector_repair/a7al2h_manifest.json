@@ -1,0 +1,19 @@
+{
+  "authorizes_a7al2_formula_search_execution": false,
+  "authorizes_a7al2_replay_preflight": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AL2H_SELECTOR_REPAIRED_READY_FOR_REPLAY_PREFLIGHT",
+  "executes_formula_generation": false,
+  "executes_formula_search": false,
+  "executes_replay": false,
+  "generated_at": "2026-05-27T09:44:30Z",
+  "input_a7al2g_decision": "PASS_A7AL2G_MATCHED_CONTROL_GATE_PREFLIGHT_EXECUTION_HOLD",
+  "input_candidates": 32,
+  "next_required_step": "A7AL-2I replay preflight: evaluate selected control-gated candidates and matched controls on base v2 with one-bar-lag stress",
+  "rejected_not_authorized_candidates": 17,
+  "selected_control_gated_candidates": 15,
+  "selected_skeleton_count": 15,
+  "top_skeleton_share": 0.06666666666666667
+}

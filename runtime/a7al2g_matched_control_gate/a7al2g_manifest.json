@@ -1,0 +1,31 @@
+{
+  "authorizes_a7al2_execution": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers_to_execution": [
+    "selected_pool_contains_not_authorized_field_families",
+    "matched_control_gate_not_yet_connected_to_replay_runner"
+  ],
+  "decision": "PASS_A7AL2G_MATCHED_CONTROL_GATE_PREFLIGHT_EXECUTION_HOLD",
+  "executes_formula_generation": false,
+  "executes_formula_search": false,
+  "executes_replay": false,
+  "generated_at": "2026-05-27T09:42:16Z",
+  "input_a7al2_decision": "PASS_A7AL2_CONTROL_DOMINANCE_CONTRACT_DRAFTED_EXECUTION_HOLD",
+  "input_a7as0_decision": "PASS_A7AS0_V2_DATA_ACCEPTANCE_READY_FOR_A7AL2G",
+  "next_required_step": "A7AL-2H selector repair: filter/reweight candidate pool to allowed mutation/regime roles before replay",
+  "policy_counts": {
+    "mutation_source_only_control_required": 11,
+    "not_authorized_by_a7al1b_baseline": 17,
+    "regime_state_or_neutralizer_only": 4
+  },
+  "required_controls": [
+    "one_bar_lag_stress",
+    "wrong_lag_future_24h",
+    "wrong_lag_stale_168h",
+    "time_shuffle",
+    "symbol_shuffle",
+    "same_family_random"
+  ],
+  "selected_candidates_audited": 32
+}

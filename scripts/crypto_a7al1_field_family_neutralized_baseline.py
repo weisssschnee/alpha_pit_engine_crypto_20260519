@@ -20,7 +20,7 @@ REPO = Path(__import__("os").environ.get("ALPHAFACTORY_CRYPTO_REPO_ROOT", str(RE
 BASE_PANEL_ROOT = Path(
     __import__("os").environ.get(
         "A7AL_BASE_PANEL_ROOT",
-        str(DATA_ROOT / "gold" / "features" / "binance_universe498_replay_1h_v1_20260525"),
+        str(DATA_ROOT / "gold" / "features" / "binance_universe498_replay_1h_v2_20260527"),
     )
 )
 LV1_PANEL = Path(

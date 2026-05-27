@@ -1,0 +1,4 @@
+field_families,selected_count
+price|volatility,6
+liquidity|volatility,5
+open_interest|price,4

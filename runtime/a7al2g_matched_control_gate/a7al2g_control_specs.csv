@@ -1,0 +1,7 @@
+control,construction,promotion_rule
+one_bar_lag_stress,evaluate same expression with field-native one bar delayed features,must be materially weaker than original and cannot be return-corr equivalent
+wrong_lag_future_24h,shift every source feature family by -24h before expression evaluation,must be materially weaker than original and cannot be return-corr equivalent
+wrong_lag_stale_168h,shift every source feature family by +168h before expression evaluation,must be materially weaker than original and cannot be return-corr equivalent
+time_shuffle,permute timestamp blocks within split; preserve symbol membership,must be materially weaker than original and cannot be return-corr equivalent
+symbol_shuffle,permute symbols within timestamp and split,must be materially weaker than original and cannot be return-corr equivalent
+same_family_random,random expression from same field family / operator motif / horizon bucket,must be materially weaker than original and cannot be return-corr equivalent
