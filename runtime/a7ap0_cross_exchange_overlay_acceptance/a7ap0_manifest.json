@@ -1,0 +1,41 @@
+{
+  "authorizes_a7ap1_small_diagnostic_smoke": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_broad_search": false,
+  "authorizes_shadow_paper_live": false,
+  "binance_funding_non_null_rate": 0.20143208771537258,
+  "blockers": [],
+  "clean_symbols_after_price_scale_quarantine": 214,
+  "coverage": "G:\\AlphaFactory_CryptoData\\manifests\\okx_binance_cross_exchange_1h_30d_v1_20260527_coverage.csv",
+  "decision": "PASS_A7AP0_CROSS_EXCHANGE_OVERLAY_ACCEPTED_WITH_PRICE_SCALE_QUARANTINE",
+  "duplicate_symbol_timestamp_rows": 0,
+  "executes_acceptance_audit": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "field_contract": "G:\\AlphaFactory_CryptoData\\gold\\metadata\\okx_binance_cross_exchange_1h_30d_v1_field_contract_20260527.json",
+  "generated_at": "2026-05-27T00:49:59Z",
+  "gold_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\okx_binance_cross_exchange_1h_30d_v1_20260527",
+  "manifest": "G:\\AlphaFactory_CryptoData\\manifests\\okx_binance_cross_exchange_1h_30d_v1_20260527_manifest.csv",
+  "numeric_inf_cells": 0,
+  "okx_funding_non_null_rate": 0.9629447303647348,
+  "okx_index_non_null_rate": 0.9985679122846274,
+  "okx_mark_non_null_rate": 0.9988364287312598,
+  "price_scale_quarantine_symbol_count": 4,
+  "price_scale_quarantine_symbols": [
+    "1000BONKUSDT",
+    "1000FLOKIUSDT",
+    "1000PEPEUSDT",
+    "1000SHIBUSDT"
+  ],
+  "rows": 22345,
+  "source_report": "G:\\AlphaFactory_CryptoData\\reports\\OKX_BINANCE_CROSS_EXCHANGE_1H_30D_V1_20260527.md",
+  "symbols": 218,
+  "timestamp_max": "2026-04-30 23:00:00+00:00",
+  "timestamp_min": "2026-04-26 17:00:00+00:00",
+  "unique_hours": 103,
+  "warnings": [
+    "short_overlap_window_diagnostic_only",
+    "binance_funding_sparse_in_overlap",
+    "price_scale_mismatch_symbols_quarantined"
+  ]
+}

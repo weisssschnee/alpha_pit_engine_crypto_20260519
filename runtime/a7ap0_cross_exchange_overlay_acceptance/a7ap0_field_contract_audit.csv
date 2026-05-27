@@ -1,0 +1,9 @@
+item,value
+dataset,okx_binance_cross_exchange_1h_30d_v1_20260527
+decision,CANDIDATE_DIAGNOSTIC_OVERLAY_CLEAN_SUBSET_ONLY
+okx_source,"OKX public REST funding-rate-history, mark-price-candles, index-candles; 30d recent pull; clean subset only"
+binance_source,binance_universe498_replay_1h_v1_20260525 accepted replay base
+join_rule,inner join on symbol + hourly timestamp; OKX funding backward-asof to hourly rows using fundingTime <= timestamp
+feature_available_time,timestamp + 1h
+recommended_stress_execution_time,timestamp + 2h
+not_authorized,alpha proof;shadow;paper;live

@@ -1,0 +1,6 @@
+check,pass_rate,fail_count
+feature_available_time_eq_timestamp_plus_1h,1.0,0
+execution_time_eq_feature_available_time,1.0,0
+stress_execution_time_eq_timestamp_plus_2h,1.0,0
+historical_backfill_true,1.0,0
+forward_only_false,1.0,0
