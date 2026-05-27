@@ -1,0 +1,21 @@
+{
+  "active_retained": [
+    "A7AJ/A7AK/A7AL top498 and latent-neutral contracts",
+    "A7AO/A7AP cross-exchange acceptance and repaired overlay",
+    "A7AR CN-engine inheritance adapters",
+    "A7S/A7U data-source and source-trace contracts",
+    "A7T forward telemetry contracts",
+    "A7W post-source-trace status",
+    "build/run data utilities"
+  ],
+  "archive_root": "archive/deprecated_crypto_a7_20260527",
+  "buckets": {
+    "reports": 181,
+    "runtime": 116,
+    "scripts": 107
+  },
+  "cn_repo_touched": false,
+  "decision": "PASS_CRYPTO_DEPRECATED_ACTIVE_TREE_ARCHIVE_20260527",
+  "moved_count": 404,
+  "not_deleted": true
+}
