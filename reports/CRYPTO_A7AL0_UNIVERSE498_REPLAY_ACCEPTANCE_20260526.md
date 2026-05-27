@@ -1,6 +1,6 @@
 # CRYPTO A7AL-0 Universe498 Replay Acceptance
 
-Generated: 2026-05-26T14:22:37Z
+Generated: 2026-05-27T03:47:59Z
 
 ## Decision
 
@@ -24,7 +24,7 @@ This audit validates the top498 1h replay base. It does not run replay and does 
   "duplicate_timestamp_count": 0,
   "executes_replay": false,
   "executes_search": false,
-  "generated_at": "2026-05-26T14:22:37Z",
+  "generated_at": "2026-05-27T03:47:59Z",
   "hold_symbols": 12,
   "inf_cell_count": 0,
   "listing_aware_symbols": 305,
@@ -39,7 +39,7 @@ This audit validates the top498 1h replay base. It does not run replay and does 
   "warnings": [
     "May 2026 rows are not present; May cannot be used from this panel",
     "Universe498 membership is current/listing-aware and is not by itself survivorship-safe proof",
-    "Panel execution_time equals feature_available_time; conservative experiments should add one extra bar lag stress",
+    "Panel execution_time equals feature_available_time; experiments should use field-native latency audit and wrong-lag controls",
     "No aggTrades/book/liquidation/cross-exchange fields in this replay base"
   ]
 }
@@ -129,6 +129,6 @@ This audit validates the top498 1h replay base. It does not run replay and does 
 timestamp = 1h bucket start UTC
 feature_available_time = timestamp + 1h
 panel execution_time = timestamp + 1h
-recommended conservative replay execution_time = timestamp + 2h / one extra bar lag for stress
+recommended replay execution_time = timestamp + 1h / next 1h bar open; fixed delay stress prohibited
 May 2026 rows are not present in this panel and cannot be used for ranking or stress here
 ```

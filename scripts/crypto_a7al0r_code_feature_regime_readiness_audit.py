@@ -436,7 +436,8 @@ def base_lineage_rows() -> list[dict[str, Any]]:
                 "uses_future": is_label,
                 "uses_label": is_label,
                 "pit_lag_required": "+1h primary",
-                "plus2h_required": True,
+                "latency_audit_required": True,
+                "fixed_delay_stress_required": False,
                 "allowed_for_rank": (not is_label) and source_class not in {"key", "metadata_timing"},
                 "allowed_for_regime": (not is_label) and source_class not in {"key"},
                 "allowed_for_search": (not is_label) and source_class not in {"key", "metadata_timing"},
@@ -474,7 +475,8 @@ def derived_lineage_rows() -> list[dict[str, Any]]:
                 "uses_future": False,
                 "uses_label": uses_label,
                 "pit_lag_required": "+1h primary",
-                "plus2h_required": True,
+                "latency_audit_required": True,
+                "fixed_delay_stress_required": False,
                 "allowed_for_rank": allowed_for_search,
                 "allowed_for_regime": bool(spec["allowed_for_regime"]),
                 "allowed_for_search": allowed_for_search,
@@ -483,7 +485,7 @@ def derived_lineage_rows() -> list[dict[str, Any]]:
                 "non_null_rate": q.get("non_null_rate", ""),
                 "nan_count": q.get("nan_count", ""),
                 "economic_role": spec["economic_role"],
-                "caveat": "derived feature; source lineage and +2h stress required",
+                "caveat": "derived feature; source lineage and field-native latency audit required; fixed delay stress prohibited",
             }
         )
     return rows
@@ -530,9 +532,10 @@ def pit_lag_rows(ledger: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "field_name": row["field_name"],
                 "feature_class": row["feature_class"],
                 "pit_lag_required": row["pit_lag_required"],
-                "plus2h_required": row["plus2h_required"],
+                "latency_audit_required": row["latency_audit_required"],
+                "fixed_delay_stress_required": row["fixed_delay_stress_required"],
                 "same_bar_allowed": False,
-                "status": "PASS_PIT_CONTRACTED" if row["pit_lag_required"] == "+1h primary" and row["plus2h_required"] else "HOLD_PIT_INCOMPLETE",
+                "status": "PASS_PIT_CONTRACTED" if row["pit_lag_required"] == "+1h primary" and row["latency_audit_required"] and not row["fixed_delay_stress_required"] else "HOLD_PIT_INCOMPLETE",
             }
         )
     return rows
@@ -574,7 +577,7 @@ def main() -> None:
         "input_decisions": manifest_inputs,
         "blockers": blockers,
         "warnings": [
-            "Derived fields are allowed as first-class state/search inputs when lineage, PIT lag, and +2h stress are explicit",
+            "Derived fields are allowed as first-class state/search inputs when lineage, PIT lag, and field-native latency audit are explicit",
             "Forward labels remain label-only",
             "A7AL-0R does not authorize formula search",
         ],
@@ -598,7 +601,7 @@ Generated: {generated_at}
 {manifest["decision"]}
 ```
 
-This audit makes derived features first-class search inputs only when lineage, PIT lag, label isolation, and +2h stress are explicit.
+This audit makes derived features first-class search inputs only when lineage, PIT lag, label isolation, and field-native latency audit are explicit. Fixed delay stress is prohibited.
 
 ## Summary
 

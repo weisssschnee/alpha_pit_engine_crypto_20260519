@@ -18,7 +18,8 @@
     "primary_universe": "U0_strict_full_history_181",
     "diagnostic_universe": "U1_listing_aware_305",
     "execution_lag_primary": "timestamp_plus_1h",
-    "execution_lag_conservative": "timestamp_plus_2h",
+    "execution_lag_policy": "timestamp_plus_1h_primary_with_field_native_latency_audit",
+    "fixed_delay_stress_required": false,
     "alpha_proof_authorized": false
   },
   "inheritance_layers": [

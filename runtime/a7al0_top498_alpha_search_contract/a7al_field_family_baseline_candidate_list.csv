@@ -1,4 +1,4 @@
-priority,field_family,fixed_transform,search_allowed_in_a7al1,baseline_smoke_allowed,requires_plus2h_stress,requires_negative_controls,requires_latent_neutral,requires_meme_multiplier_attribution
+priority,field_family,fixed_transform,search_allowed_in_a7al1,baseline_smoke_allowed,requires_field_native_latency_audit,requires_negative_controls,requires_latent_neutral,requires_meme_multiplier_attribution
 P0,open_interest,level,False,True,True,True,True,False
 P0,open_interest,change_1h,False,True,True,True,True,False
 P0,open_interest,change_4h,False,True,True,True,True,False

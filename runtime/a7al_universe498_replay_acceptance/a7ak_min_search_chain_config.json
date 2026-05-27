@@ -27,7 +27,7 @@
   "timing_contract": {
     "feature_available_time": "timestamp + 1h",
     "panel_execution_time": "timestamp + 1h",
-    "recommended_stress_execution_time": "timestamp + 2h",
+    "recommended_stress_execution_time": "field_native_latency_audit",
     "timestamp": "1h bucket start UTC"
   }
 }

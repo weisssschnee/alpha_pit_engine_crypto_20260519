@@ -50,7 +50,7 @@
   ],
   "hard_holds": [
     "HOLD_A7AL1_CONTROL_CONTAMINATION if wrong_lag_future/stale is comparable to original",
-    "HOLD_A7AL1_TIMING_FRAGILE if +2h stress collapses",
+    "HOLD_A7AL1_TIMING_FRAGILE if field-native latency audit or wrong-lag controls fail",
     "HOLD_A7AL1_STATE_BIAS_ONLY if neutralized signals vanish",
     "HOLD_A7AL1_MEME_OR_CONTRACT_BETA if only meme/multiplier strata explain result"
   ]

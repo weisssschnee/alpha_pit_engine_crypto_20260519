@@ -271,7 +271,7 @@ def adapter_plan_rows() -> list[dict[str, Any]]:
         {
             "stage": "A7AR-2",
             "name": "feature_algebra_parity_smoke",
-            "objective": "Evaluate a fixed operator set on a tiny top498 slice with +1h/+2h timing.",
+            "objective": "Evaluate a fixed operator set on a tiny top498 slice with +1h primary timing and field-native latency audit.",
             "success_gate": "Operator parity, NaN/inf, activity, and timing checks pass.",
             "authorized_search": "no",
         },

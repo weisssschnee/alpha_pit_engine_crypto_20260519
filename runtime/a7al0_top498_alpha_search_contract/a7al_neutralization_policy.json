@@ -57,7 +57,7 @@
     ],
     "execution_lag_stress": [
       "+1h primary",
-      "+2h conservative"
+      "field-native latency audit"
     ]
   },
   "proof_boundary": {

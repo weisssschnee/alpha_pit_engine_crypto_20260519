@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-27T03:31:39Z",
+  "generated_at": "2026-05-27T03:49:06Z",
   "decision": "PASS_A7AL0R_READY_FOR_FEATURE_REGIME_REBUILD",
   "executes_search": false,
   "executes_replay": false,
@@ -15,7 +15,7 @@
   },
   "blockers": [],
   "warnings": [
-    "Derived fields are allowed as first-class state/search inputs when lineage, PIT lag, and +2h stress are explicit",
+    "Derived fields are allowed as first-class state/search inputs when lineage, PIT lag, and field-native latency audit are explicit",
     "Forward labels remain label-only",
     "A7AL-0R does not authorize formula search"
   ]

@@ -332,15 +332,15 @@ def feature_contract(columns: list[str], agg_cols: list[str]) -> pd.DataFrame:
         elif col.startswith("metrics_"):
             source_class = "binance_metrics"
             independent_source = True
-            timing = "hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag"
+            timing = "hourly aggregate from 5m metrics; usable after hour close with field-native latency audit"
         elif col.startswith(("mark_", "index_", "premium_", "funding_", "last_funding_", "market_")):
             source_class = "market_funding"
             independent_source = True
-            timing = "hourly market/funding aggregate; usable after hour close plus conservative 1h lag"
+            timing = "hourly market/funding aggregate; usable after hour close with field-native latency audit"
         elif col in agg_cols or col.startswith("agg_"):
             source_class = "core12_aggtrades_overlay"
             independent_source = True
-            timing = "core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag"
+            timing = "core12 aggTrades hourly/derived; usable after hour close with field-native latency audit"
         elif col.endswith("_time") or col.startswith("source_") or col.startswith("is_"):
             source_class = "metadata"
             independent_source = False
@@ -531,7 +531,8 @@ def main() -> None:
         "timing_contract": {
             "timestamp": "1h bucket start UTC",
             "feature_available_time": "timestamp + 1h",
-            "minimum_execution_time": "timestamp + 2h",
+            "minimum_execution_time": "timestamp + 1h / next 1h bar open",
+            "fixed_delay_stress_required": False,
         },
         "source_trace_boundary": "local silver accepted; raw checksum trace remains on company machine",
         "may_boundary": "this panel ends at 2026-04-30; May stress must come from separate stress-only source",
@@ -651,7 +652,8 @@ NOT AUTHORIZED:
 TIMING:
   timestamp = 1h bucket start UTC
   feature_available_time = timestamp + 1h
-  minimum execution_time = timestamp + 2h
+  minimum execution_time = timestamp + 1h / next 1h bar open
+  fixed delay stress = prohibited
 
 MAY:
   this panel has no May 2026 market/funding rows

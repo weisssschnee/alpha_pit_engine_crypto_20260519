@@ -337,7 +337,7 @@ This audit validates the top498 1h replay base. It does not run replay and does 
 timestamp = 1h bucket start UTC
 feature_available_time = timestamp + 1h
 panel execution_time = timestamp + 1h
-recommended conservative replay execution_time = timestamp + 2h / one extra bar lag for stress
+recommended replay execution_time = timestamp + 1h / next 1h bar open; fixed delay stress prohibited
 May 2026 rows are not present in this panel and cannot be used for ranking or stress here
 ```
 """
@@ -419,7 +419,7 @@ def main() -> None:
                 "source_class": feature_family(name)[0],
                 "independent_source": feature_family(name)[1],
                 "source_detail": feature_family(name)[2],
-                "feature_available_rule": "timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress",
+                "feature_available_rule": "timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited",
             }
             for name in sample_schema.names
         ]
@@ -479,7 +479,7 @@ def main() -> None:
         "warnings": [
             "May 2026 rows are not present; May cannot be used from this panel",
             "Universe498 membership is current/listing-aware and is not by itself survivorship-safe proof",
-            "Panel execution_time equals feature_available_time; conservative experiments should add one extra bar lag stress",
+            "Panel execution_time equals feature_available_time; experiments should use field-native latency audit and wrong-lag controls",
             "No aggTrades/book/liquidation/cross-exchange fields in this replay base",
         ],
         "source_report_rows": source_report.get("rows"),
@@ -508,7 +508,7 @@ def main() -> None:
             "timestamp": "1h bucket start UTC",
             "feature_available_time": "timestamp + 1h",
             "panel_execution_time": "timestamp + 1h",
-            "recommended_stress_execution_time": "timestamp + 2h",
+            "recommended_stress_execution_time": "field_native_latency_audit",
         },
     }
 

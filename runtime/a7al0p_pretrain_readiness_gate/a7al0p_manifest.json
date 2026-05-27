@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-27T03:32:40Z",
+  "generated_at": "2026-05-27T03:51:50Z",
   "decision": "PASS_A7AL0P_PRETRAIN_READY_FOR_A7AL1_FIELD_FAMILY_BASELINE",
   "executes_search": false,
   "executes_replay": false,
@@ -10,7 +10,7 @@
   "blockers": [],
   "warnings": [
     "A7AL-1 must remain field-family baseline replay, not formula search",
-    "Derived features are allowed only with lineage, PIT, +2h stress, neutralization, and controls",
+    "Derived features are allowed only with lineage, PIT, field-native latency audit, neutralization, and controls",
     "Age<30d symbols must receive fixed search quota but cannot dominate proof"
   ]
 }

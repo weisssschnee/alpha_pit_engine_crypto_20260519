@@ -1,29 +1,29 @@
-field_name,in_contract,feature_available_time_primary,feature_available_time_conservative,same_bar_execution_allowed,two_bar_lag_stress_required
-funding_rate,True,timestamp + 1h,timestamp + 2h,False,True
-global_long_short_account_ratio_last,True,timestamp + 1h,timestamp + 2h,False,True
-global_long_short_account_ratio_mean,True,timestamp + 1h,timestamp + 2h,False,True
-index_close,True,timestamp + 1h,timestamp + 2h,False,True
-mark_close,True,timestamp + 1h,timestamp + 2h,False,True
-mark_high,True,timestamp + 1h,timestamp + 2h,False,True
-mark_index_basis_bps,True,timestamp + 1h,timestamp + 2h,False,True
-mark_low,True,timestamp + 1h,timestamp + 2h,False,True
-mark_trade_basis_bps,True,timestamp + 1h,timestamp + 2h,False,True
-open_interest_last,True,timestamp + 1h,timestamp + 2h,False,True
-open_interest_mean,True,timestamp + 1h,timestamp + 2h,False,True
-open_interest_value_last,True,timestamp + 1h,timestamp + 2h,False,True
-open_interest_value_mean,True,timestamp + 1h,timestamp + 2h,False,True
-premium_close,True,timestamp + 1h,timestamp + 2h,False,True
-premium_close_bps,True,timestamp + 1h,timestamp + 2h,False,True
-taker_buy_quote_volume,True,timestamp + 1h,timestamp + 2h,False,True
-taker_buy_sell_volume_ratio_last,True,timestamp + 1h,timestamp + 2h,False,True
-taker_buy_sell_volume_ratio_mean,True,timestamp + 1h,timestamp + 2h,False,True
-top_long_short_account_ratio_last,True,timestamp + 1h,timestamp + 2h,False,True
-top_long_short_account_ratio_mean,True,timestamp + 1h,timestamp + 2h,False,True
-top_long_short_position_ratio_last,True,timestamp + 1h,timestamp + 2h,False,True
-top_long_short_position_ratio_mean,True,timestamp + 1h,timestamp + 2h,False,True
-trade_close,True,timestamp + 1h,timestamp + 2h,False,True
-trade_count,True,timestamp + 1h,timestamp + 2h,False,True
-trade_high,True,timestamp + 1h,timestamp + 2h,False,True
-trade_low,True,timestamp + 1h,timestamp + 2h,False,True
-trade_quote_volume,True,timestamp + 1h,timestamp + 2h,False,True
-trade_volume,True,timestamp + 1h,timestamp + 2h,False,True
+field_name,in_contract,feature_available_time_primary,required_latency_audit,same_bar_execution_allowed,fixed_delay_stress_required
+funding_rate,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+global_long_short_account_ratio_last,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+global_long_short_account_ratio_mean,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+index_close,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+mark_close,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+mark_high,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+mark_index_basis_bps,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+mark_low,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+mark_trade_basis_bps,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+open_interest_last,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+open_interest_mean,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+open_interest_value_last,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+open_interest_value_mean,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+premium_close,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+premium_close_bps,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+taker_buy_quote_volume,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+taker_buy_sell_volume_ratio_last,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+taker_buy_sell_volume_ratio_mean,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+top_long_short_account_ratio_last,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+top_long_short_account_ratio_mean,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+top_long_short_position_ratio_last,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+top_long_short_position_ratio_mean,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+trade_close,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+trade_count,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+trade_high,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+trade_low,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+trade_quote_volume,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
+trade_volume,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False

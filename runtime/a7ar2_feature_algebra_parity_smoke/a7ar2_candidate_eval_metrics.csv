@@ -1,4 +1,4 @@
-candidate_id,family,expression,eval_status,rows,non_null_ratio_0bar,active_ratio_0bar,inf_rows_0bar,std_0bar,active_ratio_plus1h,active_ratio_plus2h,inf_rows_plus2h,error
+candidate_id,family,expression,eval_status,rows,non_null_ratio_0bar,active_ratio_0bar,inf_rows_0bar,std_0bar,active_ratio_plus1h,active_ratio_field_native_lag1,inf_rows_field_native_lag1,error
 crypto_fg2_1d8d3d74ee3dd701,basis_funding_crowding,"Sub(ZScore(Mean(mark_index_basis_bps,12)),ZScore(Mean(funding_rate,168)))",pass,419205,0.153347,0.153347,0,1.1376256923,0.153347,0.153335,0,
 crypto_fg2_422f3aa826219ad4,basis_funding_crowding,"Sub(ZScore(Mean(mark_trade_basis_bps,72)),ZScore(Mean(funding_rate,8)))",pass,419205,0.0,0.0,0,nan,0.0,0.0,0,
 crypto_fg2_76ca30746eef69f6,basis_funding_crowding,"Sub(ZScore(Mean(mark_index_basis_bps,720)),ZScore(Mean(funding_rate,504)))",pass,419205,0.98704,0.98704,0,0.9570276818,0.98704,0.986963,0,

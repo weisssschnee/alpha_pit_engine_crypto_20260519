@@ -41,7 +41,7 @@ The missing execution services are material: feature algebra, search memory, led
 ## Adapter Sequence
 
 - A7AR-1 formula_engine_import_smoke: Create importable crypto FormulaGenV2/typed AST adapter package. Gate: Generate 1000 crypto field-safe expressions with zero CN field references.
-- A7AR-2 feature_algebra_parity_smoke: Evaluate a fixed operator set on a tiny top498 slice with +1h/+2h timing. Gate: Operator parity, NaN/inf, activity, and timing checks pass.
+- A7AR-2 feature_algebra_parity_smoke: Evaluate a fixed operator set on a tiny top498 slice with +1h primary timing and field-native latency audit. Gate: Operator parity, NaN/inf, activity, and timing checks pass.
 - A7AR-3 fresh_memory_and_dedup_smoke: Initialize crypto memory empty and test expression/skeleton/family dedup. Gate: Memory starts empty; duplicate control works only on crypto-generated formulas.
 - A7AR-4 pre_replay_ranker_adapter_smoke: Build CN-style pre-replay matrix from crypto-safe columns only. Gate: Forbidden post-replay and future/stress columns excluded mechanically.
 - A7AR-5 a7al1_field_family_baseline_with_engine_services: Run field-family baseline smoke using inherited dedup/ranker/selector services. Gate: A7AL-1 gates define whether A7AL-2 formula search can start.

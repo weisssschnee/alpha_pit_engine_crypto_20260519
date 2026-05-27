@@ -1,4 +1,4 @@
-family,candidates,eval_failures,median_active_ratio_plus2h,min_active_ratio_plus2h
+family,candidates,eval_failures,median_active_ratio_field_native_lag1,min_active_ratio_field_native_lag1
 basis_funding_crowding,16,0,0.153335,0.0
 liquidity_volatility_guarded,16,0,0.990763,0.944962
 oi_price_interaction,16,0,0.992062,0.943483

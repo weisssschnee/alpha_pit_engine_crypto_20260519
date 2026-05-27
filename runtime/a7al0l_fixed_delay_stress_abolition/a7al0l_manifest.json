@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-05-27T03:51:25Z",
+  "decision": "PASS_A7AL0L_FIXED_DELAY_STRESS_ABOLISHED",
+  "scope": [
+    "scripts",
+    "config",
+    "alphafactory_crypto"
+  ],
+  "forbidden_terms": [
+    "+2h",
+    "2h stress",
+    "plus2",
+    "two_bar",
+    "timestamp + 2h",
+    "feature_available_time_conservative"
+  ],
+  "violation_count": 0,
+  "violations": [],
+  "policy": {
+    "fixed_delay_stress": "prohibited",
+    "primary_execution": "timestamp + 1h / next 1h bar open for 1h bar-close features",
+    "required_audit": "field-native latency contract plus wrong-lag controls",
+    "fast_microstructure": "must use native 5m/15m/tick/aggTrades timing, not fixed bar delay"
+  },
+  "authorizes_a7al1_field_family_baseline": true,
+  "authorizes_a7al2_formula_search": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false
+}

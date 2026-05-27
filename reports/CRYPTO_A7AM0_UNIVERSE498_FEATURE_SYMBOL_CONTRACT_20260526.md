@@ -1,6 +1,6 @@
 # CRYPTO A7AM-0 Universe498 Feature And Symbol Contract
 
-Generated: 2026-05-26T14:22:37Z
+Generated: 2026-05-27T03:47:59Z
 
 ## Decision
 
@@ -66,59 +66,59 @@ FEATURE FAMILY BLOCKS:
 
 ## Feature Contract Sample
 
-| field_name                           | source_class        | independent_source   | source_detail                        | feature_available_rule                                                 |
-|:-------------------------------------|:--------------------|:---------------------|:-------------------------------------|:-----------------------------------------------------------------------|
-| symbol                               | key                 | False                | identity                             | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| timestamp                            | key                 | False                | identity                             | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| trade_open                           | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| trade_high                           | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| trade_low                            | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| trade_close                          | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| trade_volume                         | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| trade_quote_volume                   | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| trade_count                          | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| taker_buy_volume                     | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| taker_buy_quote_volume               | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| metrics_n_5m                         | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| open_interest_last                   | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| open_interest_mean                   | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| open_interest_value_last             | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| open_interest_value_mean             | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| top_long_short_account_ratio_last    | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| top_long_short_account_ratio_mean    | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| top_long_short_position_ratio_last   | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| top_long_short_position_ratio_mean   | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| global_long_short_account_ratio_last | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| global_long_short_account_ratio_mean | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| taker_buy_sell_volume_ratio_last     | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| taker_buy_sell_volume_ratio_mean     | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| funding_interval_hours               | funding             | True                 | Binance funding event observed in 1h | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| funding_rate                         | funding             | True                 | Binance funding event observed in 1h | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| mark_open                            | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| mark_high                            | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| mark_low                             | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| mark_close                           | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| mark_count                           | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| index_open                           | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| index_high                           | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| index_low                            | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| index_close                          | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| index_count                          | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| premium_open                         | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| premium_high                         | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| premium_low                          | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| premium_close                        | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| premium_count                        | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| source_trade_klines                  | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| source_metrics                       | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| source_market_funding                | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| feature_available_time               | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| execution_time                       | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| is_historical_backfill               | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| is_forward_only                      | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| trade_return_1h                      | derived_replay_base | False                | derived from accepted source fields  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| forward_trade_return_1h              | derived_replay_base | False                | derived from accepted source fields  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| mark_index_basis_bps                 | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| mark_trade_basis_bps                 | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| premium_close_bps                    | derived_replay_base | False                | derived from accepted source fields  | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
-| kline_taker_buy_quote_share          | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h; use timestamp + 2h for conservative one-bar-lag stress |
+| field_name                           | source_class        | independent_source   | source_detail                        | feature_available_rule                                                                                |
+|:-------------------------------------|:--------------------|:---------------------|:-------------------------------------|:------------------------------------------------------------------------------------------------------|
+| symbol                               | key                 | False                | identity                             | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| timestamp                            | key                 | False                | identity                             | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| trade_open                           | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| trade_high                           | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| trade_low                            | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| trade_close                          | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| trade_volume                         | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| trade_quote_volume                   | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| trade_count                          | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| taker_buy_volume                     | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| taker_buy_quote_volume               | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| metrics_n_5m                         | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| open_interest_last                   | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| open_interest_mean                   | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| open_interest_value_last             | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| open_interest_value_mean             | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| top_long_short_account_ratio_last    | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| top_long_short_account_ratio_mean    | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| top_long_short_position_ratio_last   | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| top_long_short_position_ratio_mean   | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| global_long_short_account_ratio_last | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| global_long_short_account_ratio_mean | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| taker_buy_sell_volume_ratio_last     | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| taker_buy_sell_volume_ratio_mean     | metrics_positioning | True                 | Binance metrics 5m aggregated to 1h  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| funding_interval_hours               | funding             | True                 | Binance funding event observed in 1h | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| funding_rate                         | funding             | True                 | Binance funding event observed in 1h | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| mark_open                            | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| mark_high                            | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| mark_low                             | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| mark_close                           | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| mark_count                           | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| index_open                           | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| index_high                           | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| index_low                            | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| index_close                          | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| index_count                          | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| premium_open                         | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| premium_high                         | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| premium_low                          | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| premium_close                        | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| premium_count                        | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| source_trade_klines                  | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| source_metrics                       | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| source_market_funding                | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| feature_available_time               | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| execution_time                       | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| is_historical_backfill               | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| is_forward_only                      | metadata_timing     | False                | pipeline metadata                    | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| trade_return_1h                      | derived_replay_base | False                | derived from accepted source fields  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| forward_trade_return_1h              | derived_replay_base | False                | derived from accepted source fields  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| mark_index_basis_bps                 | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| mark_trade_basis_bps                 | mark_index_premium  | True                 | Binance mark/index/premium 1h        | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| premium_close_bps                    | derived_replay_base | False                | derived from accepted source fields  | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |
+| kline_taker_buy_quote_share          | trade_ohlcv         | True                 | Binance futures trade kline 1h       | timestamp + 1h / next 1h bar open; field-native latency audit required; fixed delay stress prohibited |

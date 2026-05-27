@@ -137,9 +137,9 @@ def field_timing_subset(fields: set[str]) -> list[dict[str, Any]]:
                 "field_name": field,
                 "in_contract": row is not None,
                 "feature_available_time_primary": row.get("feature_available_time_primary", "") if row else "",
-                "feature_available_time_conservative": row.get("feature_available_time_conservative", "") if row else "",
+                "required_latency_audit": row.get("required_latency_audit", "") if row else "",
                 "same_bar_execution_allowed": row.get("same_bar_execution_allowed", "") if row else "",
-                "two_bar_lag_stress_required": row.get("two_bar_lag_stress_required", "") if row else "",
+                "fixed_delay_stress_required": row.get("fixed_delay_stress_required", "") if row else "",
             }
         )
     return rows
@@ -167,7 +167,7 @@ def evaluate_candidates(candidates: list[dict[str, str]], frame: pd.DataFrame, a
         try:
             result = evaluator.evaluate(expression)
             plus1 = shifted_activity(result.values, frame, 0)
-            plus2 = shifted_activity(result.values, frame, 1)
+            field_native_lag1 = shifted_activity(result.values, frame, 1)
             stale24 = shifted_activity(result.values, frame, 24)
             future1 = shifted_activity(result.values, frame, -1)
             random_values = pd.Series(rng.normal(size=len(frame)), index=frame.index)
@@ -184,8 +184,8 @@ def evaluate_candidates(candidates: list[dict[str, str]], frame: pd.DataFrame, a
                     "inf_rows_0bar": result.diagnostics["inf_rows"],
                     "std_0bar": result.diagnostics["std"],
                     "active_ratio_plus1h": plus1["active_ratio"],
-                    "active_ratio_plus2h": plus2["active_ratio"],
-                    "inf_rows_plus2h": plus2["inf_rows"],
+                    "active_ratio_field_native_lag1": field_native_lag1["active_ratio"],
+                    "inf_rows_field_native_lag1": field_native_lag1["inf_rows"],
                     "error": "",
                 }
             )
@@ -227,8 +227,8 @@ def evaluate_candidates(candidates: list[dict[str, str]], frame: pd.DataFrame, a
                     "inf_rows_0bar": 0,
                     "std_0bar": "",
                     "active_ratio_plus1h": 0,
-                    "active_ratio_plus2h": 0,
-                    "inf_rows_plus2h": 0,
+                    "active_ratio_field_native_lag1": 0,
+                    "inf_rows_field_native_lag1": 0,
                     "error": str(exc)[:400],
                 }
             )
@@ -241,14 +241,14 @@ def aggregate_by_family(metric_rows: list[dict[str, Any]]) -> list[dict[str, Any
         by_family[row["family"]].append(row)
     output: list[dict[str, Any]] = []
     for family, rows in sorted(by_family.items()):
-        active_plus2 = [float(row["active_ratio_plus2h"]) for row in rows if row["eval_status"] == "pass"]
+        active_lag1 = [float(row["active_ratio_field_native_lag1"]) for row in rows if row["eval_status"] == "pass"]
         output.append(
             {
                 "family": family,
                 "candidates": len(rows),
                 "eval_failures": sum(1 for row in rows if row["eval_status"] != "pass"),
-                "median_active_ratio_plus2h": round(float(np.median(active_plus2)), 6) if active_plus2 else 0.0,
-                "min_active_ratio_plus2h": round(float(np.min(active_plus2)), 6) if active_plus2 else 0.0,
+                "median_active_ratio_field_native_lag1": round(float(np.median(active_lag1)), 6) if active_lag1 else 0.0,
+                "min_active_ratio_field_native_lag1": round(float(np.min(active_lag1)), 6) if active_lag1 else 0.0,
             }
         )
     return output
@@ -267,7 +267,7 @@ def make_report(summary: dict[str, Any]) -> str:
             "",
             "- Evaluates A7AR-1 generated formulas on a strict_full_history top498 sample.",
             "- Tests crypto-safe operator execution for Mean, Delta, ZScore, Rank, Mul, Sub, Neg.",
-            "- Audits +1h/+2h timing feasibility, NaN/inf, active signal coverage, and control-evaluation feasibility.",
+            "- Audits +1h primary timing, field-native lag feasibility, NaN/inf, active signal coverage, and control-evaluation feasibility.",
             "- Does not run alpha replay, ranking, formula search, or candidate promotion.",
             "",
             "## Results",
@@ -276,7 +276,7 @@ def make_report(summary: dict[str, Any]) -> str:
             f"- panel_rows: {summary['panel_rows']}",
             f"- evaluated_candidates: {summary['evaluated_candidates']}",
             f"- eval_failures: {summary['eval_failures']}",
-            f"- plus2_active_candidates: {summary['plus2_active_candidates']}",
+            f"- field_native_lag1_active_candidates: {summary['field_native_lag1_active_candidates']}",
             f"- inf_candidate_count: {summary['inf_candidate_count']}",
             f"- timing_violations: {summary['timing_violations']}",
             f"- field_contract_missing: {summary['field_contract_missing']}",
@@ -306,8 +306,8 @@ def main() -> None:
     family_rows = aggregate_by_family(metric_rows)
 
     eval_failures = sum(1 for row in metric_rows if row["eval_status"] != "pass")
-    inf_candidate_count = sum(1 for row in metric_rows if int(row["inf_rows_0bar"] or 0) > 0 or int(row["inf_rows_plus2h"] or 0) > 0)
-    plus2_active_candidates = sum(1 for row in metric_rows if row["eval_status"] == "pass" and float(row["active_ratio_plus2h"]) >= 0.25)
+    inf_candidate_count = sum(1 for row in metric_rows if int(row["inf_rows_0bar"] or 0) > 0 or int(row["inf_rows_field_native_lag1"] or 0) > 0)
+    field_native_lag1_active_candidates = sum(1 for row in metric_rows if row["eval_status"] == "pass" and float(row["active_ratio_field_native_lag1"]) >= 0.25)
     timing_violations = sum(int(row["violations"]) for row in timing_rows)
     field_contract_missing = sum(1 for row in field_contract_rows if not row["in_contract"])
     control_eval_failures = sum(1 for row in control_rows if row["eval_status"] != "pass")
@@ -319,7 +319,7 @@ def main() -> None:
         and timing_violations == 0
         and field_contract_missing == 0
         and control_eval_failures == 0
-        and plus2_active_candidates >= int(0.85 * len(metric_rows))
+        and field_native_lag1_active_candidates >= int(0.85 * len(metric_rows))
     )
     decision = "PASS_A7AR2_FEATURE_ALGEBRA_PARITY_SMOKE" if pass_gate else "HOLD_A7AR2_FEATURE_ALGEBRA_PARITY_SMOKE"
     summary = {
@@ -328,7 +328,7 @@ def main() -> None:
         "panel_rows": int(len(frame)),
         "evaluated_candidates": len(metric_rows),
         "eval_failures": eval_failures,
-        "plus2_active_candidates": plus2_active_candidates,
+        "field_native_lag1_active_candidates": field_native_lag1_active_candidates,
         "inf_candidate_count": inf_candidate_count,
         "timing_violations": timing_violations,
         "field_contract_missing": field_contract_missing,
@@ -354,8 +354,8 @@ def main() -> None:
             "inf_rows_0bar",
             "std_0bar",
             "active_ratio_plus1h",
-            "active_ratio_plus2h",
-            "inf_rows_plus2h",
+            "active_ratio_field_native_lag1",
+            "inf_rows_field_native_lag1",
             "error",
         ],
     )
@@ -376,15 +376,15 @@ def main() -> None:
             "field_name",
             "in_contract",
             "feature_available_time_primary",
-            "feature_available_time_conservative",
+            "required_latency_audit",
             "same_bar_execution_allowed",
-            "two_bar_lag_stress_required",
+            "fixed_delay_stress_required",
         ],
     )
     write_csv(
         RUNTIME_DIR / "a7ar2_family_summary.csv",
         family_rows,
-        ["family", "candidates", "eval_failures", "median_active_ratio_plus2h", "min_active_ratio_plus2h"],
+        ["family", "candidates", "eval_failures", "median_active_ratio_field_native_lag1", "min_active_ratio_field_native_lag1"],
     )
     write_json(RUNTIME_DIR / "a7ar2_decision_record.json", summary)
     write_json(

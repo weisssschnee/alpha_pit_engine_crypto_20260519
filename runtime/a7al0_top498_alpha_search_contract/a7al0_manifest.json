@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-27T02:15:33Z",
+  "generated_at": "2026-05-27T03:48:11Z",
   "decision": "PASS_A7AL0_TOP498_ALPHA_SEARCH_CONTRACT_READY",
   "executes_search": false,
   "executes_replay": false,
@@ -102,6 +102,6 @@
     "Universe498 is current/listing-aware and not delisting-complete",
     "May 2026 unavailable in this panel",
     "A7AL-0 is a contract/audit stage, not alpha evidence",
-    "All field-family structures must survive +2h lag, beta residual, neutralization, and negative controls in A7AL-1"
+    "All field-family structures must pass field-native latency audit, beta residual, neutralization, and negative controls in A7AL-1"
   ]
 }

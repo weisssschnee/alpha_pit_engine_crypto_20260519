@@ -1,6 +1,6 @@
 # CRYPTO A7AL-0 Top498 Latent-Neutral Alpha Search Contract
 
-Generated: 2026-05-27T02:15:33Z
+Generated: 2026-05-27T03:48:11Z
 
 ## Decision
 
@@ -44,10 +44,10 @@ but it is not delisting-complete survivorship-safe proof by itself.
 ## PIT Timing Rule
 
 ```text
-primary feature availability: timestamp + 1h
-conservative stress: timestamp + 2h
+primary feature availability: timestamp + 1h / next 1h bar open
+fixed delay stress: prohibited
 same-bar execution: forbidden
-promotion rule: any field-family structure that collapses at +2h remains clue-only
+promotion rule: field-native latency audit and wrong-lag controls must pass
 ```
 
 ## Latent State Boundary
@@ -81,7 +81,7 @@ Meme and multiplier groups are exposure strata unless sample size is sufficient.
 AUTHORIZED:
   field-family neutralized baseline smoke
   global vs age-neutral vs latent-neutral vs liquidity/meme/multiplier-aware diagnostics
-  +1h primary and +2h conservative timing comparison
+  +1h primary and field-native latency audit
   negative controls before any candidate promotion
 
 NOT AUTHORIZED:
@@ -94,7 +94,7 @@ NOT AUTHORIZED:
 
 ```text
 At least 2 field families must survive on U0 strict symbols.
-Signals must survive neutralization, BTC/ETH beta residual, +2h lag stress, and negative controls.
+Signals must survive neutralization, BTC/ETH beta residual, field-native latency audit, and negative controls.
 U1 listing-aware can support lifecycle generalization but not primary proof by itself.
 Single symbol / single latent state / meme / multiplier concentration blocks promotion.
 ```

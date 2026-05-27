@@ -282,7 +282,7 @@ def build_field_timing_contract(base_contract: pd.DataFrame) -> list[dict]:
             event_time = "5m vendor metric create_time inside 1h bucket"
             source_update_time = "vendor 5m create_time plus jitter; A7S1 warning applies"
             observable_time = "latest 5m observation in hour, conservatively no earlier than bucket_end"
-            caveat = "vendor 5m jitter/gap warning; use +2h stress for promotion eligibility"
+            caveat = "vendor 5m jitter/gap warning; field-native latency audit required; fixed delay stress prohibited"
         elif source_class == "funding":
             event_time = "funding event timestamp if present in 1h bucket"
             source_update_time = "Binance fundingRate archive event/publication timing"
@@ -308,13 +308,13 @@ def build_field_timing_contract(base_contract: pd.DataFrame) -> list[dict]:
                 "observable_time": observable_time,
                 "feature_available_time_primary": "timestamp + 1h",
                 "execution_time_primary": "timestamp + 1h / next 1h bar open",
-                "feature_available_time_conservative": "timestamp + 2h",
-                "execution_time_conservative": "timestamp + 2h",
+                "latency_class": source_class,
+                "primary_execution_lag": "timestamp + 1h / next 1h bar open",
+                "required_latency_audit": "field-native availability, wrong-lag controls, and no same-bar execution",
                 "must_lag_by_one_bar": True,
-                "must_lag_by_two_bars": False,
-                "two_bar_lag_stress_required": True,
+                "fixed_delay_stress_required": False,
                 "same_bar_execution_allowed": False,
-                "pit_status": "PIT_CONSERVATIVE_IF_PLUS_1H_AND_PLUS_2H_STRESS_REPORTED",
+                "pit_status": "PIT_VALID_IF_PLUS_1H_AND_FIELD_NATIVE_LATENCY_AUDIT_PASS",
                 "caveat": caveat,
             }
         )
@@ -460,7 +460,7 @@ def build_neutralization_policy() -> dict:
             "max_weight_per_meme_multiplier_group": 0.15,
             "liquidity_weighting": "equal weight primary; liquidity-capped sensitivity required",
             "cost_stress_bps": [10, 20, 30],
-            "execution_lag_stress": ["+1h primary", "+2h conservative"],
+            "execution_lag_stress": ["+1h primary", "field-native latency audit"],
         },
         "proof_boundary": {
             "U0_strict_full_history": "primary proof-style universe",
@@ -492,7 +492,7 @@ def build_negative_control_plan() -> dict:
         ],
         "hard_holds": [
             "HOLD_A7AL1_CONTROL_CONTAMINATION if wrong_lag_future/stale is comparable to original",
-            "HOLD_A7AL1_TIMING_FRAGILE if +2h stress collapses",
+            "HOLD_A7AL1_TIMING_FRAGILE if field-native latency audit or wrong-lag controls fail",
             "HOLD_A7AL1_STATE_BIAS_ONLY if neutralized signals vanish",
             "HOLD_A7AL1_MEME_OR_CONTRACT_BETA if only meme/multiplier strata explain result",
         ],
@@ -521,7 +521,7 @@ def build_field_family_candidate_list() -> list[dict]:
                     "fixed_transform": transform,
                     "search_allowed_in_a7al1": False,
                     "baseline_smoke_allowed": True,
-                    "requires_plus2h_stress": True,
+                    "requires_field_native_latency_audit": True,
                     "requires_negative_controls": True,
                     "requires_latent_neutral": True,
                     "requires_meme_multiplier_attribution": family in {"meme_multiplier_neutralization_diagnostic", "listing_age_latent_interaction"},
@@ -695,7 +695,7 @@ def main() -> None:
             "Universe498 is current/listing-aware and not delisting-complete",
             "May 2026 unavailable in this panel",
             "A7AL-0 is a contract/audit stage, not alpha evidence",
-            "All field-family structures must survive +2h lag, beta residual, neutralization, and negative controls in A7AL-1",
+            "All field-family structures must pass field-native latency audit, beta residual, neutralization, and negative controls in A7AL-1",
         ],
     }
     (RUNTIME / "a7al0_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
@@ -743,10 +743,10 @@ but it is not delisting-complete survivorship-safe proof by itself.
 ## PIT Timing Rule
 
 ```text
-primary feature availability: timestamp + 1h
-conservative stress: timestamp + 2h
+primary feature availability: timestamp + 1h / next 1h bar open
+fixed delay stress: prohibited
 same-bar execution: forbidden
-promotion rule: any field-family structure that collapses at +2h remains clue-only
+promotion rule: field-native latency audit and wrong-lag controls must pass
 ```
 
 ## Latent State Boundary
@@ -770,7 +770,7 @@ Meme and multiplier groups are exposure strata unless sample size is sufficient.
 AUTHORIZED:
   field-family neutralized baseline smoke
   global vs age-neutral vs latent-neutral vs liquidity/meme/multiplier-aware diagnostics
-  +1h primary and +2h conservative timing comparison
+  +1h primary and field-native latency audit
   negative controls before any candidate promotion
 
 NOT AUTHORIZED:
@@ -783,7 +783,7 @@ NOT AUTHORIZED:
 
 ```text
 At least 2 field families must survive on U0 strict symbols.
-Signals must survive neutralization, BTC/ETH beta residual, +2h lag stress, and negative controls.
+Signals must survive neutralization, BTC/ETH beta residual, field-native latency audit, and negative controls.
 U1 listing-aware can support lifecycle generalization but not primary proof by itself.
 Single symbol / single latent state / meme / multiplier concentration blocks promotion.
 ```

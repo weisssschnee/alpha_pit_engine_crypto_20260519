@@ -8,7 +8,7 @@
   ],
   "mandatory_constraints": [
     "feature lineage present",
-    "+1h primary and +2h stress reported",
+    "+1h primary and field-native latency audit reported",
     "no label fields",
     "train-only thresholds for regime/rank bins",
     "negative controls must be weaker than original",
