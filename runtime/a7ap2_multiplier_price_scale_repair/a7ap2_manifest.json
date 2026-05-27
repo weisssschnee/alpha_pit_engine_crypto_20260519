@@ -1,0 +1,36 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_broad_search": false,
+  "authorizes_diagnostic_use_repaired_fields": true,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AP2_MULTIPLIER_PRICE_SCALE_REPAIR_DIAGNOSTIC_READY",
+  "diagnostic_clue_count": 0,
+  "executes_price_scale_repair": true,
+  "executes_search": false,
+  "executes_small_field_smoke": true,
+  "executes_tradable_replay": false,
+  "generated_at": "2026-05-27T01:14:26Z",
+  "input_gold_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\okx_binance_cross_exchange_1h_30d_v1_20260527",
+  "output_gold_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\okx_binance_cross_exchange_1h_30d_v1_price_scale_repaired_20260527",
+  "post_repair_extreme_symbol_count": 0,
+  "post_repair_extreme_symbols": [],
+  "price_scale_repair_symbol_count": 4,
+  "price_scale_repair_symbols": [
+    "1000BONKUSDT",
+    "1000FLOKIUSDT",
+    "1000PEPEUSDT",
+    "1000SHIBUSDT"
+  ],
+  "rows": 22345,
+  "symbols": 218,
+  "taxonomy": "G:\\AlphaFactory_CryptoData\\gold\\metadata\\binance_universe498_contract_meme_taxonomy_v1_20260527.csv",
+  "timestamp_max": "2026-04-30 23:00:00+00:00",
+  "timestamp_min": "2026-04-26 17:00:00+00:00",
+  "unique_hours": 103,
+  "warnings": [
+    "Raw OKX/Binance fields are preserved; repaired fields use contract-unit OKX prices",
+    "Overlap remains only 103 hours",
+    "Field smoke is diagnostic only, not executable PnL"
+  ]
+}
