@@ -1,0 +1,34 @@
+{
+  "contract": "A7AL-2P1 selector feature generation",
+  "derived_feature_policy": {
+    "derived_fields_are_allowed": true,
+    "forbidden": [
+      "May in selector score",
+      "May threshold tuning",
+      "label/future fields as features",
+      "promotion from replay-only clue"
+    ],
+    "raw_source_independence_is_not_required_for_selector_features": true,
+    "required": [
+      "field lineage resolved",
+      "PIT and label leakage clear",
+      "formula structure features",
+      "cross-source interaction tags",
+      "replay/control/lag features",
+      "time-varying latent neutral survival",
+      "cost/turnover proxy",
+      "family/skeleton/cell diversity keys"
+    ]
+  },
+  "generated_at": "2026-05-27T17:56:14Z",
+  "score_components_no_may": [
+    "premay spread strength",
+    "split-specific control dominance margin",
+    "one-bar lag survival",
+    "time-varying latent positive split count",
+    "formula turnover proxy",
+    "formula smoothing score",
+    "derived/interaction feature bonus",
+    "skeleton/production/family identity for diversity"
+  ]
+}

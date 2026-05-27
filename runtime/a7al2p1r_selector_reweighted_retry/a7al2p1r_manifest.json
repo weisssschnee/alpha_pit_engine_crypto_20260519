@@ -1,0 +1,21 @@
+{
+  "authorizes_a7al2p_contract": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "candidate_count": 2,
+  "decision": "PASS_A7AL2P1R_SELECTOR_REWEIGHTED_POOL_READY_FOR_P0R_RETRY",
+  "decision_counts": {
+    "A7AL2P1R_SELECTOR_REWEIGHTED_DIAGNOSTIC_PASS": 2
+  },
+  "diagnostic_pass_count": 2,
+  "executes_alpha_proof": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-27T17:59:55Z",
+  "input": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7al2p1_selector_feature_generation\\a7al2p1_selector_feature_matrix.csv",
+  "required_next": "freeze selector-reweighted diagnostic pool; do not execute A7AL-2 search without separate contract",
+  "uses_may_for_selection": false,
+  "warnings": []
+}
