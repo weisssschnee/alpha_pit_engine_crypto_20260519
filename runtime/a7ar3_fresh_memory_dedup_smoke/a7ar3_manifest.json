@@ -1,0 +1,6 @@
+{
+  "decision": "PASS_A7AR3_FRESH_MEMORY_DEDUP_SMOKE",
+  "memory_output": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar3_fresh_memory_dedup_smoke\\crypto_search_memory_fresh_v1.json",
+  "memory_policy": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\config\\crypto_search_memory_policy_v1.json",
+  "object_id": "crypto_a7ar3_fresh_memory_dedup_smoke"
+}

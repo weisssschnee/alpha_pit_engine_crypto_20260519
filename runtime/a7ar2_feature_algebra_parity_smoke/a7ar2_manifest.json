@@ -1,0 +1,12 @@
+{
+  "candidate_source": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar1_formula_engine_adapter_smoke\\a7ar1_generated_candidates.csv",
+  "decision": "PASS_A7AR2_FEATURE_ALGEBRA_PARITY_SMOKE",
+  "object_id": "crypto_a7ar2_feature_algebra_parity_smoke",
+  "outputs": {
+    "candidate_eval_metrics": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar2_feature_algebra_parity_smoke\\a7ar2_candidate_eval_metrics.csv",
+    "control_eval_audit": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar2_feature_algebra_parity_smoke\\a7ar2_control_eval_audit.csv",
+    "field_contract_audit": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar2_feature_algebra_parity_smoke\\a7ar2_field_contract_audit.csv",
+    "timing_audit": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ar2_feature_algebra_parity_smoke\\a7ar2_timing_audit.csv"
+  },
+  "panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v1_20260525"
+}

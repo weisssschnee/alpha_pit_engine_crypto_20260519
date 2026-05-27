@@ -1,0 +1,18 @@
+{
+  "a7al2_formula_search_authorized": false,
+  "a7ar4_authorized": true,
+  "accepted_records": 1000,
+  "alpha_proof_authorized": false,
+  "cn_memory_payload_inherited": false,
+  "decision": "PASS_A7AR3_FRESH_MEMORY_DEDUP_SMOKE",
+  "duplicate_events": 0,
+  "expression_key_count": 1000,
+  "initial_expression_keys": 0,
+  "initial_inherited_paths": 0,
+  "initial_skeleton_keys": 0,
+  "input_candidates": 1000,
+  "production_key_count": 356,
+  "shadow_paper_live_authorized": false,
+  "skeleton_key_count": 9,
+  "skeleton_repeat_events": 991
+}

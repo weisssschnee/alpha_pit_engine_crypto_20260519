@@ -1,0 +1,7 @@
+family,candidates,eval_failures,median_active_ratio_plus2h,min_active_ratio_plus2h
+basis_funding_crowding,16,0,0.153335,0.0
+liquidity_volatility_guarded,16,0,0.990763,0.944962
+oi_price_interaction,16,0,0.992062,0.943483
+positioning_reversal,16,0,0.992252,0.959848
+price_volatility_structure,16,0,0.974275,0.944962
+taker_flow_state,16,0,0.997176,0.975768

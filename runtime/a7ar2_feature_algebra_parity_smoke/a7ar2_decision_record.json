@@ -1,0 +1,17 @@
+{
+  "a7al2_formula_search_authorized": false,
+  "a7ar3_authorized": true,
+  "alpha_proof_authorized": false,
+  "control_eval_failures": 0,
+  "decision": "PASS_A7AR2_FEATURE_ALGEBRA_PARITY_SMOKE",
+  "eval_failures": 0,
+  "evaluated_candidates": 96,
+  "field_contract_missing": 0,
+  "inf_candidate_count": 0,
+  "panel_rows": 419205,
+  "plus2_active_candidates": 86,
+  "shadow_paper_live_authorized": false,
+  "symbols": 32,
+  "timing_violations": 0,
+  "unknown_fields": []
+}

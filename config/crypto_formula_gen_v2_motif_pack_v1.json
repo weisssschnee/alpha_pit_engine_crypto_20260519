@@ -64,7 +64,7 @@
       "weight": 0.5,
       "field_families": ["liquidity", "volatility"],
       "templates": [
-        "Mul(Rank(Mean({liquidity},{w1})),ZScore(Sub({volatility},{volatility})))",
+        "Mul(Rank(Mean({liquidity},{w1})),ZScore(Delta({volatility},{w2})))",
         "Mul(ZScore(Delta({liquidity},{w1})),Rank(Mean({volatility},{w2})))"
       ]
     },
