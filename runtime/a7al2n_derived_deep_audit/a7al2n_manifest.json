@@ -1,0 +1,27 @@
+{
+  "authorizes_a7al2o_candidate_mini_replay": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "candidate_eval_errors": 0,
+  "decision": "PASS_A7AL2N_DEEP_AUDIT_DIAGNOSTIC_CANDIDATES_FOUND",
+  "decision_counts": {
+    "A7AL2N_DEEP_AUDIT_DIAGNOSTIC_PASS": 4
+  },
+  "deep_audit_candidates": 4,
+  "diagnostic_pass_count": 4,
+  "executes_alpha_proof": false,
+  "executes_deep_audit": true,
+  "executes_formula_generation": false,
+  "generated_at": "2026-05-27T13:34:32Z",
+  "input_clue_file": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7al2m_derived_clue_forensic\\a7al2m_clue_shortlist.csv",
+  "latency_policy": "field_native_one_bar_lag_inherited_from_a7al2l_no_blanket_plus2h",
+  "may_usage": "stress_label_only_not_used_for_orientation_or_selection",
+  "orientation_policy": "pre_may_validation_test_recent_mean_sign_only",
+  "strict_symbols": 181,
+  "timestamps": 21025,
+  "warnings": {
+    "train_oriented_spread_nonpositive": 2
+  }
+}
