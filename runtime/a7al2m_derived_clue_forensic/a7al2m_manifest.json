@@ -1,0 +1,23 @@
+{
+  "authorizes_a7al2n_deep_audit": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "cell_count": 4,
+  "clue_count": 10,
+  "decision": "PASS_A7AL2M_DERIVED_CLUE_POOL_READY_FOR_DEEP_AUDIT",
+  "deep_audit_candidate_count": 4,
+  "field_family_count": 6,
+  "generated_at": "2026-05-27T12:59:41Z",
+  "input_a7al2l_decision": "PASS_A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUES_FOUND_EXECUTION_HOLD",
+  "quality_counts": {
+    "A7AL2M_CONTROL_MARGIN_THIN_CLUE": 1,
+    "A7AL2M_DEEP_AUDIT_CANDIDATE": 4,
+    "A7AL2M_STRESS_DIVERGENT_CLUE": 5
+  },
+  "stress_divergent_clue_count": 5,
+  "warnings": [
+    "stress_divergent_clues_present"
+  ]
+}

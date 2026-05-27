@@ -1,0 +1,7 @@
+cell,family,field_families,count
+J0_oi_derived_state,derived_oi_price_state,open_interest,1
+J0_oi_derived_state,derived_oi_price_state,open_interest|price,3
+J2_liquidity_lifecycle,derived_liquidity_lifecycle,liquidity|price,1
+J3_basis_funding_derived,derived_basis_funding_state,basis|funding,1
+J4_upper_regime_interaction,derived_upper_regime_proxy,basis|liquidity,2
+J4_upper_regime_interaction,derived_upper_regime_proxy,liquidity|open_interest,2
