@@ -1,0 +1,5 @@
+split,split_label,start,end,role,expected_hours,symbols_active,strict_full_history_symbols_active,listing_aware_symbols_active,hold_symbols_active,median_rows_per_symbol,min_rows_per_symbol,median_window_coverage_ratio,median_active_span_coverage_ratio
+train,train_2024,2024-01-01T00:00:00,2024-12-31T23:00:00,fit thresholds / latent construction / response merge only,8784,276,181,92,3,8784,37,1.0,1.0
+validation,validation_2025H1,2025-01-01T00:00:00,2025-06-30T23:00:00,field-family validation,4344,374,181,186,7,4344,108,1.0,1.0
+test,test_2025H2,2025-07-01T00:00:00,2025-12-31T23:00:00,held-out historical test,4416,489,181,297,11,4416,11,1.0,1.0
+recent_oos,recent_oos_2026JanApr,2026-01-01T00:00:00,2026-04-30T23:00:00,recent OOS; May 2026 unavailable in this panel,2880,498,181,305,12,2880,2341,1.0,1.0

@@ -1,0 +1,57 @@
+{
+  "stage": "A7AL-1 field-family baseline smoke",
+  "controls_required_before_candidate_promotion": true,
+  "controls": [
+    {
+      "name": "row_shuffle",
+      "level": "within symbol",
+      "must_be_weaker_than_original": true
+    },
+    {
+      "name": "time_shuffle",
+      "level": "within field family",
+      "must_be_weaker_than_original": true
+    },
+    {
+      "name": "symbol_shuffle",
+      "level": "within timestamp",
+      "must_be_weaker_than_original": true
+    },
+    {
+      "name": "wrong_lag_future",
+      "definition": "use t+1/t+2 feature as if known at t",
+      "must_be_zero_tolerance": true
+    },
+    {
+      "name": "wrong_lag_stale",
+      "definition": "use stale 24h-lagged proxy",
+      "must_be_weaker_than_original": true
+    },
+    {
+      "name": "sign_flip",
+      "definition": "invert signal direction",
+      "must_be_weaker_than_original": true
+    },
+    {
+      "name": "random_field",
+      "definition": "seeded random normal per symbol-hour",
+      "must_be_weaker_than_original": true
+    },
+    {
+      "name": "same_family_placebo",
+      "definition": "field-family matched but economically wrong transform",
+      "must_be_weaker_than_original": true
+    }
+  ],
+  "known_risk_from_prior_stages": [
+    "wrong-lag controls previously penetrated crypto gates in A7O/A7P",
+    "zero-exposure and low-activity false positives were observed and repaired",
+    "global rank can be dominated by age/liquidity/meme state bias"
+  ],
+  "hard_holds": [
+    "HOLD_A7AL1_CONTROL_CONTAMINATION if wrong_lag_future/stale is comparable to original",
+    "HOLD_A7AL1_TIMING_FRAGILE if +2h stress collapses",
+    "HOLD_A7AL1_STATE_BIAS_ONLY if neutralized signals vanish",
+    "HOLD_A7AL1_MEME_OR_CONTRACT_BETA if only meme/multiplier strata explain result"
+  ]
+}

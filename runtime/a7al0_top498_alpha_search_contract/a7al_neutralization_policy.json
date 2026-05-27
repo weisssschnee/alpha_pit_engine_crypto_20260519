@@ -1,0 +1,69 @@
+{
+  "decision_scope": "A7AL-0 contract only; no alpha proof",
+  "ranking_modes": [
+    {
+      "mode": "global_rank",
+      "algorithm": "cross-sectional rank by timestamp over eligible symbols",
+      "min_group_active_symbols_per_hour": 20,
+      "fallback": "drop hour if below minimum"
+    },
+    {
+      "mode": "age_neutral_rank",
+      "algorithm": "within age bucket percentile rank, then pooled cross-section",
+      "min_group_symbols": 10,
+      "min_group_active_symbols_per_hour": 8,
+      "small_group_fallback": "parent age bucket then global"
+    },
+    {
+      "mode": "latent_state_neutral_rank",
+      "algorithm": "within frozen merged latent state percentile rank",
+      "min_group_symbols": 10,
+      "min_group_active_symbols_per_hour": 8,
+      "small_group_fallback": "coarse latent state -> liquidity tier -> global"
+    },
+    {
+      "mode": "liquidity_tier_neutral_rank",
+      "algorithm": "within liquidity tier percentile rank",
+      "min_group_symbols": 10,
+      "min_group_active_symbols_per_hour": 8,
+      "small_group_fallback": "adjacent liquidity tier then global"
+    },
+    {
+      "mode": "meme_multiplier_aware_rank",
+      "algorithm": "report separate meme/multiplier strata; do not force tiny groups into standalone proof",
+      "min_group_symbols": 10,
+      "min_group_active_symbols_per_hour": 8,
+      "small_group_fallback": "meme vs non-meme parent, multiplier flag reported as exposure"
+    },
+    {
+      "mode": "btc_eth_beta_residual",
+      "algorithm": "train-window rolling or fixed residual against BTC/ETH returns before cross-sectional ranking",
+      "min_regression_observations": 500,
+      "fallback": "report raw and mark residual unavailable; do not promote"
+    }
+  ],
+  "portfolio_proxy": {
+    "rebalance": "1h",
+    "book": "dollar-neutral top/bottom cross-section proxy",
+    "top_bottom_default": "top 10 percent vs bottom 10 percent, capped by available active symbols",
+    "max_weight_per_symbol": 0.02,
+    "max_weight_per_latent_state": 0.2,
+    "max_weight_per_meme_multiplier_group": 0.15,
+    "liquidity_weighting": "equal weight primary; liquidity-capped sensitivity required",
+    "cost_stress_bps": [
+      10,
+      20,
+      30
+    ],
+    "execution_lag_stress": [
+      "+1h primary",
+      "+2h conservative"
+    ]
+  },
+  "proof_boundary": {
+    "U0_strict_full_history": "primary proof-style universe",
+    "U1_listing_aware": "diagnostic and latent-state generalization only",
+    "U2_hold": "excluded from candidate proof",
+    "May": "unavailable in this panel; cannot rank/tune/select"
+  }
+}

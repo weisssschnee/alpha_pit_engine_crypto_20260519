@@ -1,0 +1,11 @@
+{
+  "lv1_decision": "PASS_A7AK_LV1_LATENT_STATE_FEATURES_READY",
+  "lv2_decision": "PASS_A7AK_LV2_RESPONSE_MERGE_AUDIT_READY",
+  "state_construction_window": "train_2024 only for thresholds",
+  "response_merge_window": "train_2024 only",
+  "validation_test_policy": "apply frozen mapping; unseen states held or fallback only",
+  "raw_latent_states": 825,
+  "train_seen_states": 653,
+  "unseen_state_policy_rows": 172,
+  "may_used": false
+}

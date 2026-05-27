@@ -1,0 +1,5 @@
+split,split_label,start,end,expected_hours,role
+train,train_2024,2024-01-01T00:00:00,2024-12-31T23:00:00,8784,fit thresholds / latent construction / response merge only
+validation,validation_2025H1,2025-01-01T00:00:00,2025-06-30T23:00:00,4344,field-family validation
+test,test_2025H2,2025-07-01T00:00:00,2025-12-31T23:00:00,4416,held-out historical test
+recent_oos,recent_oos_2026JanApr,2026-01-01T00:00:00,2026-04-30T23:00:00,2880,recent OOS; May 2026 unavailable in this panel
