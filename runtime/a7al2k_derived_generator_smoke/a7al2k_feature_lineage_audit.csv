@@ -1,0 +1,6 @@
+check,status,detail
+a7al2j_ready,PASS,PASS_A7AL2J_DERIVED_TOLERANT_RESET_READY_FOR_A7AL2K
+base_schema_available,PASS,54
+overlay_schema_available,PASS,65
+label_future_field_block,PASS,0
+diagnostic_overlay_excluded_from_historical_selection,PASS,0

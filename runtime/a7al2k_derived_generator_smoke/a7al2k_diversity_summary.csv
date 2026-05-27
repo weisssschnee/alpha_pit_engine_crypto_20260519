@@ -1,0 +1,5 @@
+metric,top_value,top_count,share,cap,pass
+top_skeleton_share,skeleton-377d45dadd905908,24,0.03125,0.15,True
+top_production_key_share,a7al2k_derived_generator::derived_vol_range_state::volatility::48|168,7,0.009114583333333334,0.2,True
+top_cell_share,J1_vol_range_structure,185,0.24088541666666666,0.3,True
+top_field_family_token_share,open_interest,230,0.18821603927986907,0.3,True

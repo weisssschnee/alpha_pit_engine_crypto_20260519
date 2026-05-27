@@ -1,0 +1,19 @@
+{
+  "authorizes_a7al2l_replay_preflight": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "control_rows": 4608,
+  "decision": "PASS_A7AL2K_DERIVED_GENERATOR_SMOKE_READY_FOR_A7AL2L",
+  "executes_formula_generation": true,
+  "executes_replay": false,
+  "generated_at": "2026-05-27T10:35:01Z",
+  "generated_candidates": 8000,
+  "policy": "derived formulas are allowed broadly; label/PIT/control requirements are not relaxed",
+  "selected_cell_count": 5,
+  "selected_field_family_count": 6,
+  "selected_for_a7al2l_replay_preflight": 768,
+  "selected_skeleton_count": 47,
+  "selector_cap": 768
+}
