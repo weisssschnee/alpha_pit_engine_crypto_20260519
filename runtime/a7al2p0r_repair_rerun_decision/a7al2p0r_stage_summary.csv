@@ -1,0 +1,7 @@
+stage,decision,generated_at,blockers,warnings,authorizes_formula_search_execution,authorizes_alpha_proof
+A7AL-2K repaired generator smoke,PASS_A7AL2K_DERIVED_GENERATOR_SMOKE_READY_FOR_A7AL2L,2026-05-27T16:45:04Z,,,False,False
+A7AL-2L fast replay preflight rerun,PASS_A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUES_FOUND_EXECUTION_HOLD,2026-05-27T17:35:24Z,,control_dominated_candidates_rejected,False,False
+A7AL-2M clue forensic rerun,PASS_A7AL2M_DERIVED_CLUE_POOL_READY_FOR_DEEP_AUDIT,2026-05-27T17:35:34Z,,stress_divergent_clues_present|field_family_diversity_below_4,False,False
+A7AL-2N deep audit rerun,PASS_A7AL2N_DEEP_AUDIT_DIAGNOSTIC_CANDIDATES_FOUND,2026-05-27T17:35:48Z,,,False,False
+A7AL-2O mini replay rerun,PASS_A7AL2O_MINI_REPLAY_CANDIDATES_READY_FOR_CONTRACT,2026-05-27T17:36:30Z,,,False,False
+A7AL-2P0 hardening audit rerun,HOLD_A7AL2P0_PRE_SEARCH_HARDENING_BLOCKERS,2026-05-27T17:38:38Z,timevarying_latent_neutralization_fragile,overlap_adjusted_recent_tstat_below_2_for_some_candidates,False,False

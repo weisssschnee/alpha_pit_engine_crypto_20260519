@@ -1,0 +1,77 @@
+{
+  "allowed_use": [
+    "diagnostic candidate ordering",
+    "pre-search selector implementation audit",
+    "A7AL-2P contract drafting input after all hard blockers are cleared"
+  ],
+  "blockers": [
+    "timevarying_latent_neutralization_fragile"
+  ],
+  "contract_name": "A7AR-5 replay-aware selector adapter",
+  "decision": "HOLD_A7AR5_REPLAY_SELECTOR_NOT_AUTHORIZED",
+  "forbidden_inputs": [
+    "May score",
+    "May ranking",
+    "May threshold tuning",
+    "May weight selection",
+    "May generator tuning",
+    "May selector score",
+    "shadow/paper/live promotion labels"
+  ],
+  "generated_at": "2026-05-27T17:38:38Z",
+  "hard_gate_status": {
+    "candidate_eval": "PASS",
+    "canonical_field_alias_code": "PASS",
+    "matched_control_dominance": "PASS",
+    "timevarying_latent_neutralization": "HOLD"
+  },
+  "hard_gates": {
+    "canonical_contract_unit_fields_only": true,
+    "j5_overlay_silent_fallback_forbidden": true,
+    "label_entry_alignment_required": [
+      "label_t_to_t24",
+      "label_t1_to_t25",
+      "label_t2_to_t26"
+    ],
+    "overlap_robust_stats_required": [
+      "newey_west_lag24",
+      "block_bootstrap_block24",
+      "nonoverlap_offset_tstats"
+    ],
+    "split_control_ratio_0_80_to_1_00": "WARN_CONTROL_CLOSE",
+    "split_control_ratio_gte_1_00": "HOLD_CONTROL_DOMINATED",
+    "timevarying_latent_state_neutralization_required": true
+  },
+  "not_authorized": [
+    "A7AL-2 formula search execution",
+    "alpha proof",
+    "shadow",
+    "paper",
+    "live"
+  ],
+  "score_components_no_may": [
+    "non_may_original_spread",
+    "entry_shift_aligned_spread_label_t1_to_t25",
+    "matched_control_dominance_margin_by_split",
+    "one_bar_lag_survival_recent",
+    "timevarying_latent_neutralization_survival",
+    "cost_proxy_placeholder_from_replay_family",
+    "family_skeleton_cell_diversity"
+  ],
+  "status": "DRY_ADAPTER_ONLY",
+  "top_dry_selector_candidates": [
+    {
+      "candidate_id": "a7al2k_01759e5da72c472c",
+      "cell": "J4_upper_regime_interaction",
+      "control_dominance_margin": 0.03581679097228696,
+      "family": "derived_upper_regime_proxy",
+      "non_may_original_spread_score": 0.002047623251922958,
+      "one_bar_lag_survival_recent": 0.9815500034166228,
+      "replay_aware_selector_score_no_may": 0.0021634700073118705,
+      "timevarying_latent_positive_premay_splits": 1
+    }
+  ],
+  "warnings": [
+    "overlap_adjusted_recent_tstat_below_2_for_some_candidates"
+  ]
+}

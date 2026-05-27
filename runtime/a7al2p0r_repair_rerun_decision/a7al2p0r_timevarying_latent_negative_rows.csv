@@ -1,0 +1,3 @@
+candidate_id,variant,entry_label,split,n_dates,mean_oriented_spread,hourly_tstat_naive,positive_rate
+a7al2k_01759e5da72c472c,timevarying_latent_state_neutral,label_t1_to_t25,validation_2025H1,4319,-0.0006462249015408,-3.3129123581027398,0.481592961333642
+a7al2k_01759e5da72c472c,timevarying_latent_state_neutral,label_t1_to_t25,recent_oos_2026JanApr,2855,-0.0001037533698908,-0.3357466277438679,0.5208406304728547

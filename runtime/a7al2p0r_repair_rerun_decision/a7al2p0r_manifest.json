@@ -1,0 +1,32 @@
+{
+  "a7al2k_generated_candidates": 8000,
+  "a7al2k_selected_for_replay": 768,
+  "a7al2l_clue_count": 3,
+  "a7al2l_replay_cap": 64,
+  "a7al2m_deep_audit_candidate_count": 1,
+  "a7al2n_diagnostic_pass_count": 1,
+  "a7al2o_diagnostic_pass_count": 1,
+  "a7al2p0_decision": "HOLD_A7AL2P0_PRE_SEARCH_HARDENING_BLOCKERS",
+  "a7ar5_contract_decision": "HOLD_A7AR5_REPLAY_SELECTOR_NOT_AUTHORIZED",
+  "authorizes_a7al2p_contract": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "timevarying_latent_neutralization_fragile"
+  ],
+  "canonical_alias_code_fail": false,
+  "decision": "HOLD_A7AL2P0R_REPAIR_RERUN_BLOCKED",
+  "executes_alpha_proof": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-27T17:41:35Z",
+  "premay_control_hold_count": 0,
+  "required_next": "repair selector/neutralization or regenerate candidate pool; do not run A7AL-2 formula search",
+  "rerun_scope": "A7AL-2K/L/M/N/O/P0 repaired chain",
+  "stale_alias_artifact_count": 0,
+  "timevarying_latent_negative_premay_rows": 2,
+  "warnings": [
+    "overlap_adjusted_recent_tstat_below_2_for_some_candidates"
+  ]
+}

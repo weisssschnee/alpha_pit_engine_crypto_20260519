@@ -1,0 +1,177 @@
+{
+  "a7al2k": {
+    "authorizes_a7al2l_replay_preflight": true,
+    "authorizes_alpha_proof": false,
+    "authorizes_formula_search_execution": false,
+    "authorizes_shadow_paper_live": false,
+    "blockers": [],
+    "control_rows": 4608,
+    "decision": "PASS_A7AL2K_DERIVED_GENERATOR_SMOKE_READY_FOR_A7AL2L",
+    "executes_formula_generation": true,
+    "executes_replay": false,
+    "generated_at": "2026-05-27T16:45:04Z",
+    "generated_candidates": 8000,
+    "policy": "derived formulas are allowed broadly; label/PIT/control requirements are not relaxed",
+    "selected_cell_count": 5,
+    "selected_field_family_count": 6,
+    "selected_for_a7al2l_replay_preflight": 768,
+    "selected_skeleton_count": 47,
+    "selector_cap": 768
+  },
+  "a7al2l": {
+    "authorizes_alpha_proof": false,
+    "authorizes_formula_search_execution": false,
+    "authorizes_shadow_paper_live": false,
+    "blockers": [],
+    "candidate_eval_errors": 0,
+    "controls": [
+      "one_bar_lag",
+      "wrong_lag_future_24h",
+      "wrong_lag_stale_168h",
+      "time_shuffle",
+      "symbol_shuffle",
+      "same_family_random"
+    ],
+    "decision": "PASS_A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUES_FOUND_EXECUTION_HOLD",
+    "decision_counts": {
+      "A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUE": 3,
+      "HOLD_A7AL2L_CONTROL_DOMINATED": 22,
+      "HOLD_A7AL2L_ONE_BAR_LAG_FRAGILE": 2,
+      "HOLD_A7AL2L_UNSTABLE_PRE_MAY": 37
+    },
+    "derived_replay_preflight_clue_count": 3,
+    "engine": "matrix_fast_preflight",
+    "executes_alpha_proof": false,
+    "executes_formula_generation": false,
+    "executes_replay_preflight": true,
+    "generated_at": "2026-05-27T17:35:24Z",
+    "input_base": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v2_20260527",
+    "matrix_rows": 3805525,
+    "max_symbols_env": 0,
+    "replay_cap": 64,
+    "runtime_seconds": 1157.248,
+    "selected_from_a7al2k": 64,
+    "strict_symbols": 181,
+    "timestamps": 21025,
+    "warnings": [
+      "control_dominated_candidates_rejected"
+    ]
+  },
+  "a7al2m": {
+    "authorizes_a7al2n_deep_audit": true,
+    "authorizes_alpha_proof": false,
+    "authorizes_formula_search_execution": false,
+    "authorizes_shadow_paper_live": false,
+    "blockers": [],
+    "cell_count": 1,
+    "clue_count": 3,
+    "decision": "PASS_A7AL2M_DERIVED_CLUE_POOL_READY_FOR_DEEP_AUDIT",
+    "deep_audit_candidate_count": 1,
+    "field_family_count": 2,
+    "generated_at": "2026-05-27T17:35:34Z",
+    "input_a7al2l_decision": "PASS_A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUES_FOUND_EXECUTION_HOLD",
+    "quality_counts": {
+      "A7AL2M_DEEP_AUDIT_CANDIDATE": 1,
+      "A7AL2M_STRESS_DIVERGENT_CLUE": 2
+    },
+    "stress_divergent_clue_count": 2,
+    "warnings": [
+      "stress_divergent_clues_present",
+      "field_family_diversity_below_4"
+    ]
+  },
+  "a7al2n": {
+    "authorizes_a7al2o_candidate_mini_replay": true,
+    "authorizes_alpha_proof": false,
+    "authorizes_formula_search_execution": false,
+    "authorizes_shadow_paper_live": false,
+    "blockers": [],
+    "candidate_eval_errors": 0,
+    "decision": "PASS_A7AL2N_DEEP_AUDIT_DIAGNOSTIC_CANDIDATES_FOUND",
+    "decision_counts": {
+      "A7AL2N_DEEP_AUDIT_DIAGNOSTIC_PASS": 1
+    },
+    "deep_audit_candidates": 1,
+    "diagnostic_pass_count": 1,
+    "executes_alpha_proof": false,
+    "executes_deep_audit": true,
+    "executes_formula_generation": false,
+    "generated_at": "2026-05-27T17:35:48Z",
+    "input_clue_file": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7al2m_derived_clue_forensic\\a7al2m_clue_shortlist.csv",
+    "latency_policy": "field_native_one_bar_lag_inherited_from_a7al2l_no_blanket_plus2h",
+    "may_usage": "stress_label_only_not_used_for_orientation_or_selection",
+    "orientation_policy": "pre_may_validation_test_recent_mean_sign_only",
+    "strict_symbols": 181,
+    "timestamps": 21025,
+    "warnings": {}
+  },
+  "a7al2o": {
+    "authorizes_a7al2p_contract": true,
+    "authorizes_alpha_proof": false,
+    "authorizes_formula_search_execution": false,
+    "authorizes_shadow_paper_live": false,
+    "blockers": [],
+    "candidate_count": 1,
+    "cost_proxy_bps": [
+      2.0,
+      5.0,
+      10.0
+    ],
+    "decision": "PASS_A7AL2O_MINI_REPLAY_CANDIDATES_READY_FOR_CONTRACT",
+    "decision_cost_proxy_bps": 2.0,
+    "decision_counts": {
+      "A7AL2O_MINI_REPLAY_DIAGNOSTIC_PASS": 1
+    },
+    "diagnostic_pass_count": 1,
+    "eval_errors": 0,
+    "executes_alpha_proof": false,
+    "executes_formula_generation": false,
+    "executes_mini_replay": true,
+    "generated_at": "2026-05-27T17:36:30Z",
+    "input": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7al2n_derived_deep_audit\\a7al2n_deep_candidate_summary.csv",
+    "latency_policy": "field_native_one_bar_lag_no_blanket_plus2h",
+    "latent_state_neutralization_note": "dominant_latent_state is a symbol-level proxy because time-varying latent-state panel is not materialized in this audit",
+    "may_usage": "stress_reporting_only_not_used_for_selection_or_orientation",
+    "neutralization_variants": [
+      "neutral_liquidity_tier",
+      "neutral_meme_contract_group",
+      "neutral_multiplier_flag",
+      "neutral_major_flag",
+      "neutral_dominant_latent_state",
+      "exclude_meme",
+      "exclude_multiplier",
+      "exclude_major"
+    ]
+  },
+  "a7al2p0": {
+    "a7ar5_contract_decision": "HOLD_A7AR5_REPLAY_SELECTOR_NOT_AUTHORIZED",
+    "authorizes_a7al2p_contract": false,
+    "authorizes_alpha_proof": false,
+    "authorizes_formula_search_execution": false,
+    "authorizes_shadow_paper_live": false,
+    "blockers": [
+      "timevarying_latent_neutralization_fragile"
+    ],
+    "candidate_count": 1,
+    "decision": "HOLD_A7AL2P0_PRE_SEARCH_HARDENING_BLOCKERS",
+    "eval_errors": 0,
+    "executes_alpha_proof": false,
+    "executes_search": false,
+    "executes_training": false,
+    "generated_at": "2026-05-27T17:38:38Z",
+    "p0_1_label_alignment": "computed label_t_to_t24, label_t1_to_t25, label_t2_to_t26",
+    "p0_2_canonical_alias": "generator code patched; stale generated artifacts audited separately",
+    "p0_3_control_gate": "control_ratio >= 1.00 is HOLD by split",
+    "p0_4_overlap_stats": "hourly naive, 24h non-overlap offset, Newey-West lag24, block bootstrap block24",
+    "p0_5_timevarying_latent": {
+      "loaded_rows": 3692531,
+      "state_non_missing_share": 0.9703079075817397,
+      "state_panel_path": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_latent_state_features_v1_20260527.parquet",
+      "state_seen_in_train_share": 0.7661959913546751
+    },
+    "p0_6_replay_selector": "A7AR-5 dry replay-aware selector contract and score generated without May",
+    "warnings": [
+      "overlap_adjusted_recent_tstat_below_2_for_some_candidates"
+    ]
+  }
+}
