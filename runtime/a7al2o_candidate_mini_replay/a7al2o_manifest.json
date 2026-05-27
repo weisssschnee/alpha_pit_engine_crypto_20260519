@@ -1,0 +1,38 @@
+{
+  "authorizes_a7al2p_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "candidate_count": 4,
+  "cost_proxy_bps": [
+    2.0,
+    5.0,
+    10.0
+  ],
+  "decision": "PASS_A7AL2O_MINI_REPLAY_CANDIDATES_READY_FOR_CONTRACT",
+  "decision_cost_proxy_bps": 2.0,
+  "decision_counts": {
+    "A7AL2O_MINI_REPLAY_DIAGNOSTIC_PASS": 4
+  },
+  "diagnostic_pass_count": 4,
+  "eval_errors": 0,
+  "executes_alpha_proof": false,
+  "executes_formula_generation": false,
+  "executes_mini_replay": true,
+  "generated_at": "2026-05-27T14:03:18Z",
+  "input": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7al2n_derived_deep_audit\\a7al2n_deep_candidate_summary.csv",
+  "latency_policy": "field_native_one_bar_lag_no_blanket_plus2h",
+  "latent_state_neutralization_note": "dominant_latent_state is a symbol-level proxy because time-varying latent-state panel is not materialized in this audit",
+  "may_usage": "stress_reporting_only_not_used_for_selection_or_orientation",
+  "neutralization_variants": [
+    "neutral_liquidity_tier",
+    "neutral_meme_contract_group",
+    "neutral_multiplier_flag",
+    "neutral_major_flag",
+    "neutral_dominant_latent_state",
+    "exclude_meme",
+    "exclude_multiplier",
+    "exclude_major"
+  ]
+}
