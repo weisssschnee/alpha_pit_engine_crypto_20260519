@@ -1,0 +1,27 @@
+{
+  "all_usdt_margined_perpetual_contracts": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_lv4_stratification_use": true,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AK_LV3R_CONTRACT_MEME_TAXONOMY_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_taxonomy_audit": true,
+  "generated_at": "2026-05-27T00:31:52Z",
+  "input_classification": "G:\\AlphaFactory_CryptoData\\gold\\metadata\\binance_universe498_replay_1h_v1_symbol_classification_20260526.csv",
+  "meme_multiplier_contract_symbols": 11,
+  "meme_review_symbols": 6,
+  "meme_symbols_high_confidence": 39,
+  "meme_symbols_medium_confidence": 17,
+  "multiplier_contract_symbols": 13,
+  "non_meme_multiplier_contract_symbols": 2,
+  "output_taxonomy": "G:\\AlphaFactory_CryptoData\\gold\\metadata\\binance_universe498_contract_meme_taxonomy_v1_20260527.csv",
+  "plain_contract_symbols": 485,
+  "symbols": 498,
+  "warnings": [
+    "Meme taxonomy is conservative and intended for stratification/control, not alpha labels",
+    "Medium-confidence meme rows require review before proof use",
+    "All symbols are futures contracts; taxonomy does not imply spot tradability"
+  ]
+}

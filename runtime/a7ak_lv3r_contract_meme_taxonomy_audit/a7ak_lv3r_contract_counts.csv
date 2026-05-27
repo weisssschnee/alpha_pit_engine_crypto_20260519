@@ -1,0 +1,4 @@
+contract_format,is_multiplier_contract,contract_unit_multiplier,symbols
+plain_contract,False,1,485
+multiplier_contract,True,1000,10
+multiplier_contract,True,1000000,3

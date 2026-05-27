@@ -1,0 +1,24 @@
+symbol,underlying_asset,liquidity_rank,is_meme_token,meme_confidence,meme_subtype,meme_review_note
+PUMPUSDT,PUMP,18,True,medium,culture_meme,medium-confidence meme/social classification
+PEOPLEUSDT,PEOPLE,65,False,review,review,"DAO/social token, not automatically meme"
+APEUSDT,APE,77,False,review,review,"nft/social token, not automatically meme"
+NOTUSDT,NOT,92,False,review,review,"social/game token, review before meme treatment"
+ACTUSDT,ACT,156,True,medium,culture_meme,medium-confidence meme/social classification
+GRIFFAINUSDT,GRIFFAIN,168,True,medium,ai_meme,medium-confidence meme/social classification
+ZEREBROUSDT,ZEREBRO,192,True,medium,ai_meme,medium-confidence meme/social classification
+SWARMSUSDT,SWARMS,205,True,medium,ai_meme,medium-confidence meme/social classification
+ANIMEUSDT,ANIME,208,False,review,review,"culture token, review before meme treatment"
+COOKIEUSDT,COOKIE,211,True,medium,culture_meme,medium-confidence meme/social classification
+BANANAS31USDT,BANANAS31,217,True,medium,culture_meme,medium-confidence meme/social classification
+TSTUSDT,TST,275,True,medium,culture_meme,medium-confidence meme/social classification
+HMSTRUSDT,HMSTR,278,True,medium,animal_meme,game/community token with meme-like behavior
+CATIUSDT,CATI,313,False,review,review,"game/app token, do not infer meme from CAT substring"
+BANUSDT,BAN,386,True,medium,culture_meme,medium-confidence meme/social classification
+DOODUSDT,DOOD,425,True,medium,culture_meme,medium-confidence meme/social classification
+BULLAUSDT,BULLA,433,True,medium,culture_meme,medium-confidence meme/social classification
+CLANKERUSDT,CLANKER,460,True,medium,ai_meme,medium-confidence meme/social classification
+FLOCKUSDT,FLOCK,462,True,medium,ai_meme,medium-confidence meme/social classification
+SPORTFUNUSDT,SPORTFUN,464,True,medium,culture_meme,medium-confidence meme/social classification
+TURTLEUSDT,TURTLE,471,True,medium,animal_meme,medium-confidence meme/social classification
+IDOLUSDT,IDOL,482,True,medium,culture_meme,medium-confidence meme/social classification
+PUMPBTCUSDT,PUMPBTC,486,False,review,review,"wrapped/derivative naming, not direct meme token"

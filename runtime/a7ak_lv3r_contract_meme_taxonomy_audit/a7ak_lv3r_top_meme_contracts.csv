@@ -1,0 +1,63 @@
+symbol,underlying_asset,contract_format,contract_unit_multiplier,liquidity_rank,liquidity_tier,search_eligibility,is_meme_token,meme_confidence,meme_subtype,meme_review_note
+DOGEUSDT,DOGE,plain_contract,1,5,top20,strict_full_history,True,high,dog,
+1000PEPEUSDT,PEPE,multiplier_contract,1000,6,top20,strict_full_history,True,high,frog,
+WIFUSDT,WIF,plain_contract,1,10,top20,strict_full_history,True,high,dog,
+FARTCOINUSDT,FARTCOIN,plain_contract,1,12,top20,listing_aware,True,high,culture_meme,
+TRUMPUSDT,TRUMP,plain_contract,1,17,top20,listing_aware,True,high,political_meme,
+PUMPUSDT,PUMP,plain_contract,1,18,top20,hold_quality_or_short_history,True,medium,culture_meme,medium-confidence meme/social classification
+1000SHIBUSDT,SHIB,multiplier_contract,1000,27,top50,strict_full_history,True,high,dog,
+1000BONKUSDT,BONK,multiplier_contract,1000,29,top50,strict_full_history,True,high,dog,
+PENGUUSDT,PENGU,plain_contract,1,33,top50,listing_aware,True,high,animal_meme,
+NEIROUSDT,NEIRO,plain_contract,1,46,top50,listing_aware,True,high,dog,
+PNUTUSDT,PNUT,plain_contract,1,47,top50,listing_aware,True,high,animal_meme,
+POPCATUSDT,POPCAT,plain_contract,1,54,top100,listing_aware,True,high,cat,
+1000FLOKIUSDT,FLOKI,multiplier_contract,1000,55,top100,strict_full_history,True,high,dog,
+1000SATSUSDT,SATS,multiplier_contract,1000,57,top100,strict_full_history,True,high,btc_meme,
+BOMEUSDT,BOME,plain_contract,1,61,top100,listing_aware,True,high,culture_meme,
+PEOPLEUSDT,PEOPLE,plain_contract,1,65,top100,strict_full_history,False,review,review,"DAO/social token, not automatically meme"
+GIGGLEUSDT,GIGGLE,plain_contract,1,69,top100,listing_aware,True,high,culture_meme,
+MOODENGUSDT,MOODENG,plain_contract,1,72,top100,listing_aware,True,high,animal_meme,
+TURBOUSDT,TURBO,plain_contract,1,74,top100,listing_aware,True,high,ai_meme,
+APEUSDT,APE,plain_contract,1,77,top100,strict_full_history,False,review,review,"nft/social token, not automatically meme"
+SPXUSDT,SPX,plain_contract,1,78,top100,listing_aware,True,high,culture_meme,
+NOTUSDT,NOT,plain_contract,1,92,top100,listing_aware,False,review,review,"social/game token, review before meme treatment"
+MEMEUSDT,MEME,plain_contract,1,95,top100,strict_full_history,True,high,culture_meme,
+PIPPINUSDT,PIPPIN,plain_contract,1,98,top100,listing_aware,True,high,ai_meme,
+1000RATSUSDT,RATS,multiplier_contract,1000,110,top200,strict_full_history,True,high,animal_meme,
+GOATUSDT,GOAT,plain_contract,1,114,top200,listing_aware,True,high,ai_meme,
+USELESSUSDT,USELESS,plain_contract,1,124,top200,listing_aware,True,high,culture_meme,
+DOGSUSDT,DOGS,plain_contract,1,136,top200,listing_aware,True,high,dog,high-confidence meme but also app/community token
+ACTUSDT,ACT,plain_contract,1,156,top200,listing_aware,True,medium,culture_meme,medium-confidence meme/social classification
+GRIFFAINUSDT,GRIFFAIN,plain_contract,1,168,top200,listing_aware,True,medium,ai_meme,medium-confidence meme/social classification
+MEWUSDT,MEW,plain_contract,1,171,top200,listing_aware,True,high,cat,
+BRETTUSDT,BRETT,plain_contract,1,175,top200,listing_aware,True,high,culture_meme,
+MUBARAKUSDT,MUBARAK,plain_contract,1,179,top200,listing_aware,True,high,political_meme,
+CHILLGUYUSDT,CHILLGUY,plain_contract,1,186,top200,listing_aware,True,high,culture_meme,
+JELLYJELLYUSDT,JELLYJELLY,plain_contract,1,190,top200,listing_aware,True,high,culture_meme,
+ZEREBROUSDT,ZEREBRO,plain_contract,1,192,top200,listing_aware,True,medium,ai_meme,medium-confidence meme/social classification
+1MBABYDOGEUSDT,BABYDOGE,multiplier_contract,1000000,195,top200,listing_aware,True,high,dog,
+SWARMSUSDT,SWARMS,plain_contract,1,205,tail,listing_aware,True,medium,ai_meme,medium-confidence meme/social classification
+ANIMEUSDT,ANIME,plain_contract,1,208,tail,listing_aware,False,review,review,"culture token, review before meme treatment"
+COOKIEUSDT,COOKIE,plain_contract,1,211,tail,listing_aware,True,medium,culture_meme,medium-confidence meme/social classification
+1000000MOGUSDT,MOG,multiplier_contract,1000000,215,tail,listing_aware,True,high,cat,
+MELANIAUSDT,MELANIA,plain_contract,1,216,tail,listing_aware,True,high,political_meme,
+BANANAS31USDT,BANANAS31,plain_contract,1,217,tail,listing_aware,True,medium,culture_meme,medium-confidence meme/social classification
+1000CATUSDT,CAT,multiplier_contract,1000,256,tail,listing_aware,True,high,cat,
+TSTUSDT,TST,plain_contract,1,275,tail,listing_aware,True,medium,culture_meme,medium-confidence meme/social classification
+HMSTRUSDT,HMSTR,plain_contract,1,278,tail,listing_aware,True,medium,animal_meme,game/community token with meme-like behavior
+BROCCOLI714USDT,BROCCOLI714,plain_contract,1,298,tail,listing_aware,True,high,culture_meme,
+CATIUSDT,CATI,plain_contract,1,313,tail,listing_aware,False,review,review,"game/app token, do not infer meme from CAT substring"
+1000CHEEMSUSDT,CHEEMS,multiplier_contract,1000,345,tail,listing_aware,True,high,dog,
+BANUSDT,BAN,plain_contract,1,386,tail,listing_aware,True,medium,culture_meme,medium-confidence meme/social classification
+DOODUSDT,DOOD,plain_contract,1,425,tail,listing_aware,True,medium,culture_meme,medium-confidence meme/social classification
+BULLAUSDT,BULLA,plain_contract,1,433,tail,listing_aware,True,medium,culture_meme,medium-confidence meme/social classification
+TOSHIUSDT,TOSHI,plain_contract,1,434,tail,listing_aware,True,high,cat,
+KOMAUSDT,KOMA,plain_contract,1,453,tail,listing_aware,True,high,culture_meme,
+CLANKERUSDT,CLANKER,plain_contract,1,460,tail,listing_aware,True,medium,ai_meme,medium-confidence meme/social classification
+FLOCKUSDT,FLOCK,plain_contract,1,462,tail,listing_aware,True,medium,ai_meme,medium-confidence meme/social classification
+SPORTFUNUSDT,SPORTFUN,plain_contract,1,464,tail,listing_aware,True,medium,culture_meme,medium-confidence meme/social classification
+TURTLEUSDT,TURTLE,plain_contract,1,471,tail,listing_aware,True,medium,animal_meme,medium-confidence meme/social classification
+BROCCOLIF3BUSDT,BROCCOLIF3B,plain_contract,1,473,tail,listing_aware,True,high,culture_meme,
+IDOLUSDT,IDOL,plain_contract,1,482,tail,listing_aware,True,medium,culture_meme,medium-confidence meme/social classification
+PUMPBTCUSDT,PUMPBTC,plain_contract,1,486,tail,listing_aware,False,review,review,"wrapped/derivative naming, not direct meme token"
+1000000BOBUSDT,BOB,multiplier_contract,1000000,492,tail,listing_aware,True,high,internet_meme,

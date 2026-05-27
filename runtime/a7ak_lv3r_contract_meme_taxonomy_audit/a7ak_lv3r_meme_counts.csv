@@ -1,0 +1,15 @@
+is_meme_token,meme_confidence,meme_subtype,symbols
+True,high,culture_meme,12
+True,medium,culture_meme,10
+True,high,dog,9
+True,high,cat,5
+True,medium,ai_meme,5
+True,high,animal_meme,4
+True,high,ai_meme,3
+True,high,political_meme,3
+True,medium,animal_meme,2
+True,high,btc_meme,1
+True,high,frog,1
+True,high,internet_meme,1
+False,none,not_meme_or_unknown,436
+False,review,review,6
