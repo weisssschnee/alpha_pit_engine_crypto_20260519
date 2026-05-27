@@ -17,7 +17,7 @@ PASS_A7AR2_FEATURE_ALGEBRA_PARITY_SMOKE
 - panel_rows: 419205
 - evaluated_candidates: 96
 - eval_failures: 0
-- field_native_lag1_active_candidates: 86
+- field_native_lag1_active_candidates: 83
 - inf_candidate_count: 0
 - timing_violations: 0
 - field_contract_missing: 0

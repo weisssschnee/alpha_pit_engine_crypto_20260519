@@ -19,10 +19,10 @@ PASS_A7AR3_FRESH_MEMORY_DEDUP_SMOKE
 - input_candidates: 1000
 - accepted_records: 1000
 - duplicate_events: 0
-- skeleton_repeat_events_soft: 991
+- skeleton_repeat_events_soft: 969
 - expression_key_count: 1000
-- skeleton_key_count: 9
-- production_key_count: 356
+- skeleton_key_count: 31
+- production_key_count: 351
 
 ## Authorization
 

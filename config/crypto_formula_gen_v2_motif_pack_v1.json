@@ -33,7 +33,11 @@
       "field_families": ["open_interest", "price"],
       "templates": [
         "Mul(ZScore(Delta({open_interest},{w1})),ZScore(Delta({price},{w2})))",
-        "Mul(Rank(Mean({open_interest},{w1})),ZScore(Delta({price},{w2})))"
+        "Mul(Rank(Mean({open_interest},{w1})),ZScore(Delta({price},{w2})))",
+        "Add(ZScore(Delta({open_interest},{w1})),ZScore(Delta({price},{w2})))",
+        "Sub(Rank(Delta({open_interest},{w1})),Rank(Delta({price},{w2})))",
+        "Mul(Sign(Delta({open_interest},{w1})),Rank(Mean({price},{w2})))",
+        "Sub(ZScore(Mean({open_interest},{w1})),Rank(Mean({price},{w2})))"
       ]
     },
     "positioning_reversal": {
@@ -41,7 +45,11 @@
       "field_families": ["positioning", "price"],
       "templates": [
         "Mul(ZScore(Mean({positioning},{w1})),Neg(ZScore(Delta({price},{w2}))))",
-        "Sub(ZScore(Mean({positioning},{w1})),ZScore(Mean({positioning},{w2})))"
+        "Sub(ZScore(Mean({positioning},{w1})),ZScore(Mean({positioning},{w2})))",
+        "Mul(Sign(Delta({positioning},{w1})),Neg(ZScore(Delta({price},{w2}))))",
+        "Add(ZScore(Delta({positioning},{w1})),Neg(Rank(Delta({price},{w2}))))",
+        "Sub(Rank(Mean({positioning},{w1})),Rank(Mean({price},{w2})))",
+        "Mul(Abs(ZScore(Delta({positioning},{w1}))),Sign(Delta({price},{w2})))"
       ]
     },
     "taker_flow_state": {
@@ -49,7 +57,11 @@
       "field_families": ["taker_ratio", "liquidity"],
       "templates": [
         "Mul(ZScore(Mean({taker_ratio},{w1})),Rank(Mean({liquidity},{w2})))",
-        "Sub(ZScore(Mean({taker_ratio},{w1})),ZScore(Mean({taker_ratio},{w2})))"
+        "Sub(ZScore(Mean({taker_ratio},{w1})),ZScore(Mean({taker_ratio},{w2})))",
+        "Add(ZScore(Delta({taker_ratio},{w1})),Rank(Mean({liquidity},{w2})))",
+        "Sub(Rank(Delta({taker_ratio},{w1})),ZScore(Delta({liquidity},{w2})))",
+        "Mul(Sign(Delta({taker_ratio},{w1})),ZScore(Delta({liquidity},{w2})))",
+        "Mul(Abs(ZScore(Mean({taker_ratio},{w1}))),Rank(Delta({liquidity},{w2})))"
       ]
     },
     "basis_funding_crowding": {
@@ -57,7 +69,11 @@
       "field_families": ["basis", "funding"],
       "templates": [
         "Mul(ZScore({basis}),ZScore(Mean({funding},{w1})))",
-        "Sub(ZScore(Mean({basis},{w1})),ZScore(Mean({funding},{w2})))"
+        "Sub(ZScore(Mean({basis},{w1})),ZScore(Mean({funding},{w2})))",
+        "Add(Rank(Delta({basis},{w1})),ZScore(Mean({funding},{w2})))",
+        "Mul(Sign(Delta({basis},{w1})),ZScore(Mean({funding},{w2})))",
+        "Sub(Abs(ZScore(Mean({basis},{w1}))),Abs(ZScore(Mean({funding},{w2}))))",
+        "Mul(Rank(Mean({basis},{w1})),Sign(Delta({funding},{w2})))"
       ]
     },
     "liquidity_volatility_guarded": {
@@ -65,7 +81,11 @@
       "field_families": ["liquidity", "volatility"],
       "templates": [
         "Mul(Rank(Mean({liquidity},{w1})),ZScore(Delta({volatility},{w2})))",
-        "Mul(ZScore(Delta({liquidity},{w1})),Rank(Mean({volatility},{w2})))"
+        "Mul(ZScore(Delta({liquidity},{w1})),Rank(Mean({volatility},{w2})))",
+        "Add(Rank(Delta({liquidity},{w1})),Neg(ZScore(Delta({volatility},{w2}))))",
+        "Sub(ZScore(Mean({liquidity},{w1})),Rank(Mean({volatility},{w2})))",
+        "Mul(Sign(Delta({liquidity},{w1})),Abs(ZScore(Delta({volatility},{w2}))))",
+        "Sub(Abs(ZScore(Delta({liquidity},{w1}))),Abs(ZScore(Delta({volatility},{w2}))))"
       ]
     },
     "price_volatility_structure": {
@@ -73,7 +93,11 @@
       "field_families": ["price", "volatility"],
       "templates": [
         "Mul(ZScore(Delta({price},{w1})),ZScore(Mean({volatility},{w2})))",
-        "Sub(ZScore(Delta({price},{w1})),ZScore(Delta({volatility},{w2})))"
+        "Sub(ZScore(Delta({price},{w1})),ZScore(Delta({volatility},{w2})))",
+        "Add(Rank(Delta({price},{w1})),Neg(Rank(Delta({volatility},{w2}))))",
+        "Mul(Sign(Delta({price},{w1})),Abs(ZScore(Mean({volatility},{w2}))))",
+        "Sub(Abs(ZScore(Delta({price},{w1}))),Rank(Mean({volatility},{w2})))",
+        "Mul(Rank(Mean({price},{w1})),Sign(Delta({volatility},{w2})))"
       ]
     }
   },
@@ -94,6 +118,7 @@
     "all_products_normalized_or_ranked": true,
     "same_bar_execution_allowed": false,
     "requires_plus_1h_execution": true,
-    "requires_plus_2h_stress": true
+    "fixed_delay_stress_required": false,
+    "field_native_latency_audit_required": true
   }
 }

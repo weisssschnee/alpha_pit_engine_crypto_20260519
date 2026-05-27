@@ -83,6 +83,19 @@ def field_family_tokens(value: Any) -> list[str]:
     return sorted({part for part in str(value or "").split("|") if part})
 
 
+def top_field_family_share(rows: pd.DataFrame) -> tuple[str, int, float]:
+    if rows.empty:
+        return "", 0, 0.0
+    tokens: list[str] = []
+    for value in rows["field_families"]:
+        tokens.extend(field_family_tokens(value))
+    if not tokens:
+        return "", 0, 0.0
+    counts = Counter(tokens)
+    top_value, top_count = counts.most_common(1)[0]
+    return top_value, int(top_count), float(top_count / len(tokens))
+
+
 def wrapper_tags(fields: str, field_families: str) -> str:
     text = f"{fields}|{field_families}".lower()
     tags = []
@@ -196,6 +209,32 @@ def select_candidates(df: pd.DataFrame) -> pd.DataFrame:
         selected_families[family] += 1
         for ff in ffs:
             selected_field_families[ff] += 1
+
+    # Final prune: keep the selector itself responsible for field-family caps.
+    # The first-pass one-per-skeleton fill can otherwise create a near-threshold
+    # token concentration even when structural diversity is healthy.
+    while True:
+        selected_rows = eligible[eligible["candidate_id"].astype(str).isin(selected)].copy()
+        top_ff, _, top_share = top_field_family_share(selected_rows)
+        if top_share <= TOP_FIELD_FAMILY_SHARE_CAP or len(selected) <= MIN_SELECTED_SKELETONS:
+            break
+        removable = selected_rows[selected_rows["field_families"].apply(lambda value: top_ff in field_family_tokens(value))].copy()
+        if removable.empty:
+            break
+        removable = removable.sort_values(["selection_score", "candidate_id"], ascending=[True, False])
+        removed = False
+        for _, candidate in removable.iterrows():
+            trial = selected - {str(candidate["candidate_id"])}
+            trial_rows = eligible[eligible["candidate_id"].astype(str).isin(trial)]
+            if trial_rows["skeleton_key"].nunique() < MIN_SELECTED_SKELETONS:
+                continue
+            if trial_rows["family"].nunique() < MIN_SELECTED_FAMILIES:
+                continue
+            selected = trial
+            removed = True
+            break
+        if not removed:
+            break
 
     score_map = dict(zip(eligible["candidate_id"], eligible["selection_score"]))
     df["selection_score"] = df["candidate_id"].map(score_map).fillna(0.0)
@@ -382,7 +421,7 @@ def decide(trace: pd.DataFrame, tables: dict[str, list[dict[str, Any]]], latency
 
     if not blockers:
         return "PASS_A7AR4_SELECTOR_ADAPTER_SMOKE", []
-    if any("latency" in b or "field" in b for b in blockers):
+    if any(b == "latency_policy_fail" or b == "field_contract_fail" for b in blockers):
         return "HOLD_A7AR4_LATENCY_OR_FIELD_CONTRACT_FAIL", blockers
     if any("memory" in b for b in blockers):
         return "HOLD_A7AR4_MEMORY_COLLISION", blockers

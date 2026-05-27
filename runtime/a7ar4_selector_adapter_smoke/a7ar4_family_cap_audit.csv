@@ -1,5 +1,5 @@
 cap_name,top_value,top_count,top_share,cap,status
-top_formula_family_share,basis_funding_crowding,5,0.25,0.25,PASS
-top_skeleton_share,skeleton-7762e3f46e546cc2,3,0.15,0.15,PASS
-top_production_key_share,crypto_formula_gen_v2_adapter::basis_funding_crowding::basis|funding::8|336,1,0.05,0.2,PASS
-top_field_family_share,price,8,0.2,0.25,PASS
+top_formula_family_share,positioning_reversal,6,0.1875,0.25,PASS
+top_skeleton_share,skeleton-746e1c41665c2005,3,0.09375,0.15,PASS
+top_production_key_share,crypto_formula_gen_v2_adapter::positioning_reversal::positioning|price::96,1,0.03125,0.2,PASS
+top_field_family_share,price,16,0.25,0.25,PASS

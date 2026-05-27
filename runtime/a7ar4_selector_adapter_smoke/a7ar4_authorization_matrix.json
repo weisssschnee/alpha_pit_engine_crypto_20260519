@@ -1,11 +1,9 @@
 {
-  "decision": "HOLD_A7AR4_SELECTOR_DIVERSITY_WEAK",
-  "blockers": [
-    "selected_skeleton_count_below_20"
-  ],
+  "decision": "PASS_A7AR4_SELECTOR_ADAPTER_SMOKE",
+  "blockers": [],
   "authorized": {
     "a7al1_field_family_baseline": true,
-    "a7al2_small_formula_search_contract_drafting": false
+    "a7al2_small_formula_search_contract_drafting": true
   },
   "not_authorized": {
     "formula_search_execution": true,

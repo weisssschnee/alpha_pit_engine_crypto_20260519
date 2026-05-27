@@ -20,7 +20,6 @@ taker_buy_sell_volume_ratio_mean,True,timestamp + 1h,"field-native availability,
 top_long_short_account_ratio_last,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
 top_long_short_account_ratio_mean,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
 top_long_short_position_ratio_last,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
-top_long_short_position_ratio_mean,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
 trade_close,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
 trade_count,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
 trade_high,True,timestamp + 1h,"field-native availability, wrong-lag controls, and no same-bar execution",False,False
