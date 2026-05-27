@@ -1,0 +1,8 @@
+check,status,detail
+candidate_scope,PASS,fixed field-family baseline only; no formula generation
+pit_timing,PASS,1h feature_available_time/execution_time inherited; fixed +2h stress abolished
+label_alignment,PASS,forward 24h label clipped at split end; overlapping labels disclosed
+survivorship_boundary,WARN,"Universe498 is current/listing-aware; U0 strict is primary, U1 diagnostic"
+cost_turnover_boundary,WARN,top/bottom book proxy only; no executable turnover/cost replay
+negative_controls,HOLD,control_dominance_wrong_lag_future_24h|wrong_lag_stale_168h
+decision,HOLD_A7AL1_CONTROL_CONTAMINATION,A7AL-1 does not authorize alpha proof or formula search execution

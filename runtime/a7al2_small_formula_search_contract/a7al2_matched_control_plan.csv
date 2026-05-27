@@ -1,0 +1,6 @@
+control,applies_to,pass_rule
+wrong_lag_future_24h,every selected formula,candidate validation/recent robust score must exceed matched control by margin and same sign stability
+wrong_lag_stale_168h,every selected formula,candidate must not be return-correlated or score-equivalent to stale control
+time_shuffle,top replay shortlist,shuffle score materially weaker than original
+symbol_shuffle,top replay shortlist,shuffle score materially weaker than original
+same_family_random,per field family,family placebo must not produce comparable candidate

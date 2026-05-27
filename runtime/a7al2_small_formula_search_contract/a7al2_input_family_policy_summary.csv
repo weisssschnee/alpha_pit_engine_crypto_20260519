@@ -1,0 +1,10 @@
+field_family,signals,diagnostic_pass_signals,control_blocked_signals,recommended_direct_alpha,regime_or_state_only,blocked_direct_rank
+funding,4,0,0,0,0,0
+liquidity_volume,4,1,1,0,0,1
+listing_age_latent_interaction,3,1,1,0,1,0
+long_short_positioning,3,0,0,0,0,0
+open_interest,4,1,1,0,1,0
+premium_basis,6,0,0,0,0,0
+price_volatility_interaction,3,1,1,0,0,1
+taker_buy_sell_volume_ratio,1,0,0,0,0,0
+upper_regime_interaction,4,0,0,0,0,0

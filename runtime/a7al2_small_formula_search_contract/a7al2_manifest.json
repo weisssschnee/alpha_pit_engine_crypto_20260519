@@ -1,0 +1,24 @@
+{
+  "allowed_mutation_source_count": 4,
+  "authorizes_a7al2_execution": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers_to_execution": [
+    "a7al1b_control_latency_hold_requires_contract_repair"
+  ],
+  "decision": "PASS_A7AL2_CONTROL_DOMINANCE_CONTRACT_DRAFTED_EXECUTION_HOLD",
+  "executes_formula_generation": false,
+  "executes_formula_search": false,
+  "execution_plan": {
+    "deep_audit_cap": 32,
+    "generated_cap": 5000,
+    "latency_policy": "field_native_only; fixed +2h stress prohibited",
+    "portfolio_proxy": "top/bottom cross-sectional spread only at contract stage",
+    "selector_cap": 512,
+    "strict_replay_cap": 128,
+    "universe_diagnostic": "U1_listing_aware",
+    "universe_primary": "U0_strict_full_history"
+  },
+  "generated_at": "2026-05-27T09:28:53Z",
+  "input_a7al1b_decision": "HOLD_A7AL1B_WRONG_LAG_CONTAMINATION_CONFIRMED"
+}

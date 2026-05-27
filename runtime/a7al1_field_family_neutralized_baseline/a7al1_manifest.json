@@ -1,0 +1,40 @@
+{
+  "authorizes_a7al1b_forensic": false,
+  "authorizes_a7al2_formula_search_execution": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "control_dominance_wrong_lag_future_24h|wrong_lag_stale_168h"
+  ],
+  "decision": "HOLD_A7AL1_CONTROL_CONTAMINATION",
+  "executes_alpha_proof": false,
+  "executes_formula_generation": false,
+  "executes_formula_search": false,
+  "field_families_tested": 9,
+  "generated_at": "2026-05-27T09:25:19Z",
+  "input_latent_panel": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_latent_state_features_v1_20260527.parquet",
+  "input_panel_root": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v1_20260525",
+  "input_regime_panel": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_upper_regime_state_v1_20260527.parquet",
+  "neutralization_modes": [
+    "global",
+    "age_neutral",
+    "latent_state_neutral",
+    "liquidity_tier_neutral",
+    "meme_multiplier_aware"
+  ],
+  "passed_field_family_count": 4,
+  "primary_label": "fwd_ret_24h",
+  "rows": 6650298,
+  "signals_tested": 32,
+  "universes": [
+    "U0_strict_full_history",
+    "U1_listing_aware",
+    "U0U1_all_eligible"
+  ],
+  "warnings": [
+    "Baseline uses overlapping 24h labels and top/bottom spread proxy",
+    "Universe498 is current/listing-aware; U0 strict is primary, U1 diagnostic",
+    "No executable turnover/cost book is run in A7AL-1",
+    "May rows are unavailable and not used"
+  ]
+}
