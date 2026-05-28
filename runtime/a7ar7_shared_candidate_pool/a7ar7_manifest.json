@@ -1,0 +1,23 @@
+{
+  "authorizes_a7al2v_selector_dryrun": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_direct_expansion": false,
+  "authorizes_large_search": false,
+  "authorizes_same_objective_rerun": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "candidate_count": 4000,
+  "decision": "PASS_A7AR7_SHARED_CANDIDATE_POOL_READY_FOR_A7AL2V",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "fast_replay_count": 128,
+  "forensic_count": 14,
+  "generated_at": "2026-05-28T14:58:46Z",
+  "generated_count": 4000,
+  "may_retained_for_veto_or_attribution": true,
+  "may_stress_failed_count": 14,
+  "may_used_for_pool_construction": false,
+  "premay_control_dominated_count": 115,
+  "stress_attributed_count": 14
+}

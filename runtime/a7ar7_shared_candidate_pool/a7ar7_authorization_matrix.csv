@@ -1,0 +1,6 @@
+action,status,reason
+a7al2v_replay_aware_selector_dryrun,AUTHORIZED,shared pool now available; no search/replay required
+same_objective_rerun,NOT_AUTHORIZED,A7AL-2T stress attribution failed all company-full candidates
+direct_oi_price_expansion,NOT_AUTHORIZED,A7AL-2U holds direct expansion until selector repair
+large_formula_search,NOT_AUTHORIZED,candidate pool governance and replay-aware selector not complete
+alpha_proof_shadow_paper_live,NOT_AUTHORIZED,no stress-clean candidate pool

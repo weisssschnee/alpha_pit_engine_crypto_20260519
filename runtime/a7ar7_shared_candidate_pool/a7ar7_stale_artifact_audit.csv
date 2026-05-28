@@ -1,0 +1,7 @@
+artifact,status,stale_risk
+a7al2q_generated_candidates.csv,current_company_chain,False
+a7al2q_candidate_scoreboard.csv,current_company_chain,False
+a7al2r_decision_record.csv,current_company_chain,False
+a7al2s_candidate_tiers.csv,current_company_chain,False
+a7al2t_candidate_failure_summary.csv,current_company_chain,False
+a7al2u_manifest.json,contract_only,False

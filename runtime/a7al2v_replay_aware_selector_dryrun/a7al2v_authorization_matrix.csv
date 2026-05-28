@@ -1,0 +1,7 @@
+action,status,reason
+a7ar8_signal_vector_registry,AUTHORIZED,needed before larger replay selection
+a7al2w_selector_repair_iteration,AUTHORIZED,dry-run shows remaining blocker state
+a7al2q_same_objective_rerun,NOT_AUTHORIZED,same objective already failed May stress attribution
+direct_oi_price_expansion,NOT_AUTHORIZED,stress veto/control dominance unresolved
+large_formula_search,NOT_AUTHORIZED,replay-aware selector dry-run is not a search pass
+alpha_proof_shadow_paper_live,NOT_AUTHORIZED,no stress-clean selected pool

@@ -1,0 +1,25 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_direct_expansion": false,
+  "authorizes_large_search": false,
+  "authorizes_same_objective_rerun": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "selected_pool_may_stress_veto"
+  ],
+  "decision": "HOLD_A7AL2V_SELECTED_POOL_STRESS_VETO_NO_EXPANSION",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "forbidden_selector_feature_overlap_count": 0,
+  "generated_at": "2026-05-28T14:59:47Z",
+  "input_pool_candidates": 4000,
+  "selected_candidates": 4,
+  "selected_stress_clean_candidates": 0,
+  "selected_with_may_stress_evidence": 4,
+  "selector_scored_candidates": 128,
+  "uses_may_for_generation": false,
+  "uses_may_for_ranking": false,
+  "uses_may_for_selector_score": false,
+  "uses_may_for_veto_or_attribution": true
+}

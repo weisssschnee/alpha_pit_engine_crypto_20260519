@@ -1,0 +1,11 @@
+feature,forbidden_pattern_hit,allowed_for_selector_score
+selector_feature_replay_alignment_score,,True
+selector_feature_latency_survival_score,,True
+selector_feature_neutral_survival_score,,True
+selector_feature_cost_survival_score,,True
+selector_feature_robust_stat_score,,True
+selector_feature_spread_score,,True
+selector_feature_control_penalty,,True
+selector_feature_turnover_penalty,,True
+selector_feature_concentration_penalty,,True
+selector_score_no_may,,True
