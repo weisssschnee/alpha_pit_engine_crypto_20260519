@@ -1,6 +1,6 @@
 # CRYPTO A7AL-2X4 Replay Readiness Audit
 
-Generated: 2026-05-28T17:16:22Z
+Generated: 2026-05-28T17:37:22Z
 
 ## Decision
 
@@ -23,15 +23,15 @@ This stage audits whether the A7AL-2X3 family-balanced selected queue can be eva
     "state_or_derived_fields_not_materialized_for_fast_replay",
     "operators_not_supported_by_existing_fast_replay"
   ],
-  "blocking_field_count": 5,
+  "blocking_field_count": 6,
   "blocking_operator_count": 4,
   "decision": "HOLD_A7AL2X4_REPLAY_PREFLIGHT_NOT_READY_MATERIALIZATION_REQUIRED",
   "executes_generation": false,
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "field_count": 12,
-  "generated_at": "2026-05-28T17:16:22Z",
+  "field_count": 13,
+  "generated_at": "2026-05-28T17:37:22Z",
   "operator_count": 14,
   "selected_candidate_count": 176
 }
@@ -47,7 +47,7 @@ This stage audits whether the A7AL-2X3 family-balanced selected queue can be eva
 | F3_positioning_divergence          |               24 |               3 |            7 |                                                                                                                   |                            | True                            |
 | F4_OI_taker_flow_interaction       |               24 |               2 |           10 |                                                                                                                   | Clip                       | False                           |
 | F5_OI_upper_regime_interaction     |               24 |               5 |            3 | R2_market_breadth_state\|R3_liquidity_cycle_state\|R4_leverage_crowding_state\|R5_basis_premium_dislocation_state | GroupNeutralize            | False                           |
-| F6_OI_latent_state_interaction     |               24 |               2 |            8 | liquidity_tier                                                                                                    | GroupNeutralize\|StateMask | False                           |
+| F6_OI_latent_state_interaction     |               24 |               3 |            7 | is_major\|liquidity_tier                                                                                          | GroupNeutralize\|StateMask | False                           |
 
 ## Field Materialization Audit
 
@@ -60,6 +60,7 @@ This stage audits whether the A7AL-2X3 family-balanced selected queue can be eva
 | funding_rate                         | ready_in_base_panel                      | base_panel            | True                   | False                              |
 | global_long_short_account_ratio_last | ready_in_base_panel                      | base_panel            | True                   | False                              |
 | index_close                          | ready_in_base_panel                      | base_panel            | True                   | False                              |
+| is_major                             | unknown_missing_field                    | unknown               | False                  | True                               |
 | kline_taker_buy_quote_share          | ready_in_base_panel                      | base_panel            | True                   | False                              |
 | liquidity_tier                       | requires_latent_taxonomy_materialization | a7ak_lv/a7ak_taxonomy | False                  | True                               |
 | mark_index_basis_bps                 | ready_in_base_panel                      | base_panel            | True                   | False                              |

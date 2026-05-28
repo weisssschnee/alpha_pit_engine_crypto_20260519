@@ -1,0 +1,15 @@
+operator,status,semantics,is_blocker
+Abs,already_supported,existing fast replay operator,False
+Add,already_supported,existing fast replay operator,False
+Clip,local_extension_contract_ready,"fixed symmetric clipping after scalar transform; proposed default [-5,5], no May fit",False
+Delta,already_supported,existing fast replay operator,False
+GroupNeutralize,requires_state_aware_evaluator_extension,demean or zscore within timestamp and materialized group field; needs min-group fallback policy,False
+Mean,already_supported,existing fast replay operator,False
+Mul,already_supported,existing fast replay operator,False
+Neg,already_supported,existing fast replay operator,False
+Rank,already_supported,existing fast replay operator,False
+Sign,already_supported,existing fast replay operator,False
+StateMask,requires_state_aware_evaluator_extension,indicator for materialized state field equals requested label,False
+Sub,already_supported,existing fast replay operator,False
+Winsor,local_extension_contract_ready,"fixed symmetric winsorization after scalar transform; proposed default [-5,5], no May fit",False
+ZScore,already_supported,existing fast replay operator,False

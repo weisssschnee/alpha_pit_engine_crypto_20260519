@@ -8,15 +8,15 @@
     "state_or_derived_fields_not_materialized_for_fast_replay",
     "operators_not_supported_by_existing_fast_replay"
   ],
-  "blocking_field_count": 5,
+  "blocking_field_count": 6,
   "blocking_operator_count": 4,
   "decision": "HOLD_A7AL2X4_REPLAY_PREFLIGHT_NOT_READY_MATERIALIZATION_REQUIRED",
   "executes_generation": false,
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "field_count": 12,
-  "generated_at": "2026-05-28T17:16:22Z",
+  "field_count": 13,
+  "generated_at": "2026-05-28T17:37:22Z",
   "operator_count": 14,
   "selected_candidate_count": 176
 }

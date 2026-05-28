@@ -1,0 +1,21 @@
+{
+  "A7AL-2X4M": {
+    "status": "PASS_A7AL2X4M_READY_FOR_NUMERIC_REPLAY_PREFLIGHT_IMPLEMENTATION"
+  },
+  "numeric_replay": {
+    "authorized": false,
+    "reason": "materialization/evaluator audit only"
+  },
+  "A7AL-2Y_generation": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

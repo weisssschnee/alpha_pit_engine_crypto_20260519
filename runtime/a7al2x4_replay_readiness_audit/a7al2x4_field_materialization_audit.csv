@@ -6,6 +6,7 @@ R5_basis_premium_dislocation_state,requires_upper_regime_materialization,a7al0g_
 funding_rate,ready_in_base_panel,base_panel,True,False
 global_long_short_account_ratio_last,ready_in_base_panel,base_panel,True,False
 index_close,ready_in_base_panel,base_panel,True,False
+is_major,unknown_missing_field,unknown,False,True
 kline_taker_buy_quote_share,ready_in_base_panel,base_panel,True,False
 liquidity_tier,requires_latent_taxonomy_materialization,a7ak_lv/a7ak_taxonomy,False,True
 mark_index_basis_bps,ready_in_base_panel,base_panel,True,False

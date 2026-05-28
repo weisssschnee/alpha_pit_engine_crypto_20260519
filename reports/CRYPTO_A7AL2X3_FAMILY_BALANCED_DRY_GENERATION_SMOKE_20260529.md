@@ -1,6 +1,6 @@
 # CRYPTO A7AL-2X3 Family-Balanced Dry Generation Smoke
 
-Generated: 2026-05-28T17:09:15Z
+Generated: 2026-05-28T17:37:17Z
 
 ## Decision
 
@@ -27,7 +27,7 @@ This stage executes dry candidate generation and shared-ledger construction only
   "executes_search": false,
   "executes_training": false,
   "family_count": 7,
-  "generated_at": "2026-05-28T17:09:15Z",
+  "generated_at": "2026-05-28T17:37:17Z",
   "generated_count": 1920,
   "selected_for_future_preflight_count": 176,
   "static_valid_count": 1920
@@ -43,8 +43,8 @@ This stage executes dry candidate generation and shared-ledger construction only
 | F2_OI_funding_crowding_interaction |               256 |                  256 |                             24 |                       6 |                       154 | F2_OI_funding_crowding_interaction |                             256 |                       0.18 |                         24 |          0.133333 | True         |
 | F3_positioning_divergence          |               256 |                  256 |                             24 |                       7 |                       226 | F3_positioning_divergence          |                             256 |                       0.16 |                         24 |          0.133333 | True         |
 | F4_OI_taker_flow_interaction       |               256 |                  256 |                             24 |                       6 |                       148 | F4_OI_taker_flow_interaction       |                             256 |                       0.16 |                         24 |          0.133333 | True         |
-| F5_OI_upper_regime_interaction     |               256 |                  256 |                             24 |                      16 |                       160 | F5_OI_upper_regime_interaction     |                             256 |                       0.16 |                         24 |          0.133333 | True         |
-| F6_OI_latent_state_interaction     |               256 |                  256 |                             24 |                       6 |                       256 | F6_OI_latent_state_interaction     |                             256 |                       0.16 |                         24 |          0.133333 | True         |
+| F5_OI_upper_regime_interaction     |               256 |                  256 |                             24 |                      16 |                       192 | F5_OI_upper_regime_interaction     |                             256 |                       0.16 |                         24 |          0.133333 | True         |
+| F6_OI_latent_state_interaction     |               256 |                  256 |                             24 |                      10 |                       166 | F6_OI_latent_state_interaction     |                             256 |                       0.16 |                         24 |          0.133333 | True         |
 
 ## Skeleton Diversity Audit
 
@@ -55,8 +55,8 @@ This stage executes dry candidate generation and shared-ledger construction only
 | F2_OI_funding_crowding_interaction |               256 |                6 |                154 |                   43 |                      2 |             0.167969 |             0.0078125  | True             |
 | F3_positioning_divergence          |               256 |                7 |                226 |                   37 |                      2 |             0.144531 |             0.0078125  | True             |
 | F4_OI_taker_flow_interaction       |               256 |                6 |                148 |                   43 |                      2 |             0.167969 |             0.0078125  | True             |
-| F5_OI_upper_regime_interaction     |               256 |               16 |                160 |                   16 |                      4 |             0.0625   |             0.015625   | True             |
-| F6_OI_latent_state_interaction     |               256 |                6 |                256 |                   43 |                      1 |             0.167969 |             0.00390625 | True             |
+| F5_OI_upper_regime_interaction     |               256 |               16 |                192 |                   16 |                      2 |             0.0625   |             0.0078125  | True             |
+| F6_OI_latent_state_interaction     |               256 |               10 |                166 |                   26 |                      5 |             0.101562 |             0.0195312  | True             |
 
 ## Field Source Audit
 
@@ -77,24 +77,23 @@ This stage executes dry candidate generation and shared-ledger construction only
 | global_long_short_account_ratio_last  | binance_metrics_history | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |
 | global_long_short_account_ratio_mean  | binance_metrics_history | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |
 | index_close                           | binance_market_history  | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |
+| is_major                              | a7ak_taxonomy           | observable_taxonomy            | timestamp_plus_1h_primary | False                  | True                                    |
+| is_multiplier_contract                | a7ak_taxonomy           | observable_taxonomy            | timestamp_plus_1h_primary | False                  | True                                    |
 | kline_taker_buy_quote_share           | binance_market_history  | raw_source_or_derived          | timestamp_plus_1h_primary | True                   | True                                    |
-| liquidity_rank_active_universe        | a7ak_lv1_lv2_latent     | train_only_or_observable_state | timestamp_plus_1h_primary | False                  | True                                    |
+| liquidity_rank_active_universe        | a7ak_lv1_latent         | train_only_or_observable_state | timestamp_plus_1h_primary | False                  | True                                    |
 | liquidity_tier                        | a7ak_taxonomy           | observable_taxonomy            | timestamp_plus_1h_primary | False                  | True                                    |
-| listing_age_days                      | a7ak_lv1_lv2_latent     | train_only_or_observable_state | timestamp_plus_1h_primary | False                  | True                                    |
-| major_flag                            | a7ak_taxonomy           | observable_taxonomy            | timestamp_plus_1h_primary | False                  | True                                    |
+| listing_age_days                      | a7ak_lv1_latent         | train_only_or_observable_state | timestamp_plus_1h_primary | False                  | True                                    |
 | mark_close                            | binance_market_history  | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |
 | mark_index_basis_bps                  | binance_market_history  | derived_historical             | timestamp_plus_1h_primary | True                   | True                                    |
 | mark_trade_basis_bps                  | binance_market_history  | derived_historical             | timestamp_plus_1h_primary | True                   | True                                    |
-| meme_flag                             | a7ak_taxonomy           | observable_taxonomy            | timestamp_plus_1h_primary | False                  | True                                    |
-| merged_latent_state_id                | a7ak_lv1_lv2_latent     | train_only_or_observable_state | timestamp_plus_1h_primary | False                  | True                                    |
-| multiplier_group                      | a7ak_taxonomy           | observable_taxonomy            | timestamp_plus_1h_primary | False                  | True                                    |
+| meme_contract_group                   | a7ak_taxonomy           | observable_taxonomy            | timestamp_plus_1h_primary | False                  | True                                    |
 | open_interest_last                    | binance_metrics_history | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |
 | open_interest_mean                    | binance_metrics_history | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |
 | open_interest_value_last              | binance_metrics_history | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |
 | open_interest_value_mean              | binance_metrics_history | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |
 | premium_close                         | binance_premium_history | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |
 | premium_close_bps                     | binance_premium_history | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |
-| raw_latent_state_id                   | a7ak_lv1_lv2_latent     | train_only_or_observable_state | timestamp_plus_1h_primary | False                  | True                                    |
+| raw_latent_state_id                   | a7ak_lv1_latent         | train_only_or_observable_state | timestamp_plus_1h_primary | False                  | True                                    |
 | taker_buy_quote_volume                | binance_market_history  | raw_source_or_derived          | timestamp_plus_1h_primary | True                   | True                                    |
 | taker_buy_sell_volume_ratio_last      | binance_metrics_history | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |
 | taker_buy_sell_volume_ratio_mean      | binance_metrics_history | raw_source                     | timestamp_plus_1h_primary | True                   | True                                    |

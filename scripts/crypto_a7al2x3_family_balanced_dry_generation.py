@@ -57,14 +57,47 @@ ALLOWED_OPERATORS = {
 }
 
 STATE_CONSTANTS = {
+    "alt_lag",
+    "alt_lead",
+    "alt_mid",
+    "basis_high",
+    "basis_low",
+    "basis_mid",
+    "breadth_mid",
+    "breadth_strong",
+    "breadth_weak",
+    "false",
     "high",
+    "lev_high",
+    "lev_low",
+    "lev_mid",
+    "liq_contracting",
+    "liq_expanding",
+    "liq_mid",
     "low",
+    "meme_multiplier_contract",
+    "meme_plain_contract",
     "mid",
+    "non_meme_multiplier_contract",
+    "non_meme_plain_contract",
     "pos_high",
     "pos_low",
+    "pos_mid",
     "stress_high",
+    "stress_low",
+    "stress_mid",
+    "tail",
+    "top100",
+    "top20",
+    "top200",
+    "top50",
     "trend_up",
     "trend_down",
+    "trend_mid",
+    "true",
+    "vol_high",
+    "vol_low",
+    "vol_mid",
     "risk_on",
     "risk_off",
     "major",
@@ -157,7 +190,14 @@ def field_family(field: str) -> str:
         return "taker_flow"
     if name.startswith("r") and "_state" in name:
         return "upper_regime"
-    if "latent" in name or "listing_age" in name or "liquidity_tier" in name or "meme" in name or "multiplier" in name:
+    if (
+        "latent" in name
+        or "listing_age" in name
+        or "liquidity_tier" in name
+        or "meme" in name
+        or "multiplier" in name
+        or name == "is_major"
+    ):
         return "latent_state"
     if any(token in name for token in ["close", "price", "return"]):
         return "price"
@@ -265,17 +305,28 @@ def build_specs() -> tuple[list[dict[str, Any]], dict[str, list[str]]]:
         "taker_buy_quote_volume",
         "kline_taker_buy_quote_share",
     ]
-    regime_fields = [
-        "R0_market_trend_state",
-        "R2_market_breadth_state",
-        "R3_liquidity_cycle_state",
-        "R4_leverage_crowding_state",
-        "R5_basis_premium_dislocation_state",
-        "R6_positioning_crowding_state",
-        "R9_alt_vs_major_dispersion_state",
-        "R10_stress_proxy_state",
-    ]
-    latent_fields = ["merged_latent_state_id", "raw_latent_state_id", "liquidity_tier", "meme_flag", "multiplier_group", "major_flag"]
+    regime_state_values = {
+        "R0_market_trend_state": ["trend_up", "trend_down"],
+        "R2_market_breadth_state": ["breadth_strong", "breadth_weak"],
+        "R3_liquidity_cycle_state": ["liq_expanding", "liq_contracting"],
+        "R4_leverage_crowding_state": ["lev_high", "lev_low"],
+        "R5_basis_premium_dislocation_state": ["basis_high", "basis_low"],
+        "R6_positioning_crowding_state": ["pos_high", "pos_low"],
+        "R9_alt_vs_major_dispersion_state": ["alt_lead", "alt_lag"],
+        "R10_stress_proxy_state": ["stress_high", "stress_low"],
+    }
+    latent_fields = ["raw_latent_state_id", "liquidity_tier", "meme_contract_group", "is_multiplier_contract", "is_major"]
+    latent_state_values = {
+        "liquidity_tier": ["top20", "top50", "top100", "top200", "tail"],
+        "meme_contract_group": [
+            "meme_multiplier_contract",
+            "meme_plain_contract",
+            "non_meme_multiplier_contract",
+            "non_meme_plain_contract",
+        ],
+        "is_multiplier_contract": ["True", "False"],
+        "is_major": ["True", "False"],
+    }
     windows = [4, 8, 12, 24, 48, 72, 96, 168, 336]
     slow_windows = [24, 48, 72, 96, 168, 336]
 
@@ -328,17 +379,19 @@ def build_specs() -> tuple[list[dict[str, Any]], dict[str, list[str]]]:
         add("F4_OI_taker_flow_interaction", f"Sub(Abs(ZScore(Delta({oi},{w1}))),Abs(ZScore(Delta({taker},{w2}))))", [oi, taker])
         add("F4_OI_taker_flow_interaction", f"Mul(Clip(ZScore(Mean({taker},{w2}))),Sign(Delta({oi},{w1})))", [oi, taker])
 
-    for oi, regime, w1, state in product(oi_fields, regime_fields, slow_windows, ["high", "low", "stress_high", "pos_high"]):
-        add("F5_OI_upper_regime_interaction", f"Mul(Rank(Delta({oi},{w1})),StateMask({regime},{state}))", [oi, regime])
+    for oi, regime, w1 in product(oi_fields, regime_state_values, slow_windows):
+        for state in regime_state_values[regime]:
+            add("F5_OI_upper_regime_interaction", f"Mul(Rank(Delta({oi},{w1})),StateMask({regime},{state}))", [oi, regime])
         add("F5_OI_upper_regime_interaction", f"GroupNeutralize(Rank(Delta({oi},{w1})),{regime})", [oi, regime])
 
     for oi, latent, w1 in product(oi_fields, latent_fields, slow_windows):
         add("F6_OI_latent_state_interaction", f"LatentNeutralRank(Delta({oi},{w1}),{latent})", [oi, latent])
-        add("F6_OI_latent_state_interaction", f"Mul(Rank(Delta({oi},{w1})),StateMask({latent},high))", [oi, latent])
         add("F6_OI_latent_state_interaction", f"GroupNeutralize(Rank(Delta({oi},{w1})),{latent})", [oi, latent])
         add("F6_OI_latent_state_interaction", f"GroupNeutralize(ZScore(Mean({oi},{w1})),{latent})", [oi, latent])
-        add("F6_OI_latent_state_interaction", f"Mul(Sign(Delta({oi},{w1})),StateMask({latent},high))", [oi, latent])
         add("F6_OI_latent_state_interaction", f"Sub(Rank(Delta({oi},{w1})),GroupNeutralize(Rank(Delta({oi},{w1})),{latent}))", [oi, latent])
+        for state in latent_state_values.get(latent, []):
+            add("F6_OI_latent_state_interaction", f"Mul(Rank(Delta({oi},{w1})),StateMask({latent},{state}))", [oi, latent])
+            add("F6_OI_latent_state_interaction", f"Mul(Sign(Delta({oi},{w1})),StateMask({latent},{state}))", [oi, latent])
 
     return specs, fields_by_expr
 

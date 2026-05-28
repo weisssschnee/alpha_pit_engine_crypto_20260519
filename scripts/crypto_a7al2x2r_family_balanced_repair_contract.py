@@ -137,8 +137,8 @@ def main() -> None:
             ("F4_OI_taker_flow_interaction", "taker_buy_quote_volume|kline_taker_buy_quote_share", "binance_market_history", "raw_source_or_derived", "timestamp_plus_1h_primary", True),
             ("F5_OI_upper_regime_interaction", "R4_leverage_crowding_state|R5_basis_premium_dislocation_state|R6_positioning_crowding_state|R10_stress_proxy_state", "a7al0g_upper_regime", "train_only_state", "timestamp_plus_1h_primary", True),
             ("F5_OI_upper_regime_interaction", "R0_market_trend_state|R2_market_breadth_state|R3_liquidity_cycle_state|R9_alt_vs_major_dispersion_state", "a7al0g_upper_regime", "train_only_state", "timestamp_plus_1h_primary", True),
-            ("F6_OI_latent_state_interaction", "merged_latent_state_id|raw_latent_state_id|listing_age_days|liquidity_rank_active_universe", "a7ak_lv1_lv2_latent", "train_only_or_observable_state", "timestamp_plus_1h_primary", True),
-            ("F6_OI_latent_state_interaction", "meme_flag|multiplier_group|major_flag|liquidity_tier", "a7ak_taxonomy", "observable_taxonomy", "timestamp_plus_1h_primary", True),
+            ("F6_OI_latent_state_interaction", "raw_latent_state_id|listing_age_days|liquidity_rank_active_universe", "a7ak_lv1_latent", "train_only_or_observable_state", "timestamp_plus_1h_primary", True),
+            ("F6_OI_latent_state_interaction", "meme_contract_group|is_multiplier_contract|is_major|liquidity_tier", "a7ak_taxonomy", "observable_taxonomy", "timestamp_plus_1h_primary", True),
         ],
         columns=["family_id", "field_or_group", "source_contract", "field_class", "pit_policy", "allowed_for_historical_dry_generation"],
     )
