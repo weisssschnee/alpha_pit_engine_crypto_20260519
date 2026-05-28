@@ -118,12 +118,15 @@ def main() -> None:
     if selector_eligible == 0:
         decision = "HOLD_A7AL2P1T_REPAIRED_POOL_NO_SELECTOR_ELIGIBLE_CANDIDATES"
         blockers = ["no_selector_eligible_candidates_after_repaired_pool_rerun"]
+        required_next = "regenerate or adjust non-May selector/generator with time-varying latent survival and control dominance earlier in selection; do not draft A7AL-2P2 from the old P1/P1R pool"
     elif p1r_pass == 0:
         decision = "HOLD_A7AL2P1T_REPAIRED_POOL_NO_P1R_PASS"
         blockers = ["no_selector_reweighted_pass_after_repaired_pool_rerun"]
+        required_next = "repair selector-reweighted retry before provenance audit; do not draft A7AL-2P2"
     else:
         decision = "PASS_A7AL2P1T_REPAIRED_POOL_READY_FOR_PROVENANCE_AUDIT"
         blockers = []
+        required_next = "run or rely on A7AL-2P1S provenance audit before drafting A7AL-2P2"
 
     manifest = {
         "generated_at": utc_now(),
@@ -149,7 +152,7 @@ def main() -> None:
         "authorizes_formula_search_execution": False,
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
-        "required_next": "regenerate or adjust non-May selector/generator with time-varying latent survival and control dominance earlier in selection; do not draft A7AL-2P2 from the old P1/P1R pool",
+        "required_next": required_next,
     }
     write_json(OUT_DIR / "a7al2p1t_manifest.json", manifest)
 

@@ -1,0 +1,12 @@
+item,reason
+funding-only wrapper,would reopen old funding residual route
+basis/liquidity old families as standalone,A7V/A7P failure family
+activity/liquidity A7V family,source-trace-clean but signal HOLD
+J5 stale overlay aliases,canonical contract only
+mark_basis_bps_okx_minus_binance,blocked direct/raw overlay alias
+index_spread_bps_okx_minus_binance,blocked direct/raw overlay alias
+cross-exchange direct raw price comparison,contract-unit unsafe
+May-informed regime mask,May remains stress-only
+deep nested conditionals,local seed search only
+SignedPower,unbounded nonlinear transform
+full FormulaGenV2 open grammar,not authorized for local contract

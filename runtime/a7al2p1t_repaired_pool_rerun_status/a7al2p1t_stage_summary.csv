@@ -1,5 +1,5 @@
 stage,decision,generated_at,generated_candidates,selected_or_replayed_candidates,candidate_count,clue_count,selector_eligible_count,diagnostic_pass_count,blockers,warnings,authorizes_formula_search_execution,authorizes_alpha_proof
 A7AL-2K repaired current generated pool,PASS_A7AL2K_DERIVED_GENERATOR_SMOKE_READY_FOR_A7AL2L,2026-05-28T01:45:32Z,8000,768,,,,,,,False,False
-A7AL-2L repaired current 64-cap replay preflight,PASS_A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUES_FOUND_EXECUTION_HOLD,2026-05-28T02:32:25Z,,64,,3,,,,control_dominated_candidates_rejected,False,False
-A7AL-2P1 selector feature generation on repaired pool,HOLD_A7AL2P1_SELECTOR_FEATURES_BLOCKED,2026-05-28T02:37:26Z,,,3,,0,,no_selector_candidate_survives_timevarying_latent_gate,selector_eligible_pool_below_2,False,False
-A7AL-2P1R selector-reweighted retry,HOLD_A7AL2P1R_NO_SELECTOR_ELIGIBLE_CANDIDATES,2026-05-28T02:38:13Z,,,0,,,0,no_selector_eligible_candidates,,False,False
+A7AL-2L repaired current 64-cap replay preflight,PASS_A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUES_FOUND_EXECUTION_HOLD,2026-05-28T07:12:23Z,,2,,2,,,,,False,False
+A7AL-2P1 selector feature generation on repaired pool,PASS_A7AL2P1_SELECTOR_FEATURES_READY_FOR_P0R_RETRY,2026-05-28T07:19:02Z,,,2,,2,,,,False,False
+A7AL-2P1R selector-reweighted retry,PASS_A7AL2P1R_SELECTOR_REWEIGHTED_POOL_READY_FOR_P0R_RETRY,2026-05-28T07:23:21Z,,,2,,,2,,,False,False

@@ -1,0 +1,30 @@
+{
+  "authorizes_a7al2p2_execution": false,
+  "authorizes_a7al2q_local_execution": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "budget": {
+    "authorizes_a7al2q_local_execution": true,
+    "authorizes_alpha_proof": false,
+    "authorizes_large_search": false,
+    "deep_audit": 16,
+    "generated_total": 4000,
+    "scope": "local OI-price seed search only",
+    "seed_count": 2,
+    "selected_for_fast_replay": 128
+  },
+  "decision": "PASS_A7AL2P2_LOCAL_OI_PRICE_SEARCH_CONTRACT_READY_FOR_A7AL2Q",
+  "executes_alpha_proof": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-28T07:27:54Z",
+  "input_p1s_decision": "PASS_A7AL2P1S_SELECTED_POOL_PROVENANCE_CLEAN",
+  "required_next": "Run A7AL-2Q local small formula-search execution only if operator/field implementation matches this contract.",
+  "seed_candidates": [
+    "a7al2k_046e806368e99c76",
+    "a7al2k_0a247ec03472983b"
+  ],
+  "uses_may_for_selection": false
+}

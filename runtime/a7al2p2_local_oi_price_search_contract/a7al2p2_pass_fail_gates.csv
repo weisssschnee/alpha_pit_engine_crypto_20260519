@@ -1,0 +1,11 @@
+gate,requirement
+no_stale_artifact,P1S stays PASS
+control_dominance,no control ratio >= 1.0 in any pre-May split
+timevarying_latent,positive in all pre-May splits
+label_alignment,label_t1 and label_t2 positive in all pre-May splits
+overlap_robust_stats,overlap/non-overlap stats do not collapse
+cost_proxy,2/5/10bps proxy survives
+concentration,no single symbol/month/latent state dominates
+skeleton_diversity,no single skeleton > 20%
+negative_controls,attached and weaker than original
+may_exclusion,no May in selector/ranking/mutation

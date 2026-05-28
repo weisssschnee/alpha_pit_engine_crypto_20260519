@@ -1,0 +1,15 @@
+field,family,role
+open_interest_last,open_interest,primary
+open_interest_mean,open_interest,primary
+open_interest_value_last,open_interest,primary
+open_interest_value_mean,open_interest,primary
+trade_close,price,primary_price
+mark_close,price,primary_price
+index_close,price,primary_price
+premium_close,basis,diagnostic_interaction_only
+premium_close_bps,basis,diagnostic_interaction_only
+mark_index_basis_bps,basis,diagnostic_interaction_only
+R3_liquidity_cycle,upper_regime,allowed_if_lineage_clean
+R4_leverage_crowding,upper_regime,allowed_if_lineage_clean
+R5_basis_dislocation,upper_regime,allowed_if_lineage_clean
+R10_stress_proxy,upper_regime,allowed_if_lineage_clean

@@ -1,0 +1,10 @@
+{
+  "authorizes_a7al2q_local_execution": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "deep_audit": 16,
+  "generated_total": 4000,
+  "scope": "local OI-price seed search only",
+  "seed_count": 2,
+  "selected_for_fast_replay": 128
+}

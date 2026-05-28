@@ -210,6 +210,10 @@ def main() -> None:
     repaired_l_ts = parse_dt((p0r_stage_snapshot.get("a7al2l") or {}).get("generated_at"))
     p1_ts = parse_dt(p1_manifest.get("generated_at"))
     p1r_ts = parse_dt(p1r_manifest.get("generated_at"))
+    current_k_after_repair_commit = bool(current_k_ts is not None and repair_commit_ts is not None and current_k_ts > repair_commit_ts)
+    current_l_after_repair_commit = bool(current_l_ts is not None and repair_commit_ts is not None and current_l_ts > repair_commit_ts)
+    current_l_target_ids = [str(x) for x in current_l_manifest.get("target_ids", []) or []]
+    current_l_target_mode = bool(current_l_manifest.get("target_replay_mode", False))
 
     alias_fail_count = 0
     if not p0_alias.empty and "status" in p0_alias.columns:
@@ -240,6 +244,12 @@ def main() -> None:
         current_artifact_is_restored_old_l = bool(current_l_ts is not None and repaired_l_ts is not None and current_l_ts < repaired_l_ts)
         current_artifact_is_restored_old_k = bool(current_k_ts is not None and repaired_k_ts is not None and current_k_ts < repaired_k_ts)
         leaked_from_old_l_10_clue_pool = bool(in_current_l_clue and current_artifact_is_restored_old_l and int(current_l_manifest.get("derived_replay_preflight_clue_count", 0)) == 10)
+        current_repaired_k_membership = bool(k_gen is not None and current_k_after_repair_commit)
+        current_repaired_l_membership = bool(
+            in_current_l_clue
+            and current_l_after_repair_commit
+            and (not current_l_target_mode or cid in set(current_l_target_ids))
+        )
 
         p1_control_rows = p1_controls[p1_controls["candidate_id"].astype(str).eq(cid)] if not p1_controls.empty and "candidate_id" in p1_controls.columns else pd.DataFrame()
         p1_latent_rows = p1_latent[p1_latent["candidate_id"].astype(str).eq(cid)] if not p1_latent.empty and "candidate_id" in p1_latent.columns else pd.DataFrame()
@@ -272,6 +282,8 @@ def main() -> None:
                 "current_l_generated_at": current_l_manifest.get("generated_at", ""),
                 "p0r_repaired_k_generated_at": (p0r_stage_snapshot.get("a7al2k") or {}).get("generated_at", ""),
                 "p0r_repaired_l_generated_at": (p0r_stage_snapshot.get("a7al2l") or {}).get("generated_at", ""),
+                "current_l_target_replay_mode": current_l_target_mode,
+                "current_l_target_ids": "|".join(current_l_target_ids),
                 "leaked_from_old_a7al2l_10_clue_pool": leaked_from_old_l_10_clue_pool,
                 "p1_control_rows_recomputed": int(len(p1_control_rows)),
                 "p1_timevarying_latent_rows_recomputed": int(len(p1_latent_rows)),
@@ -284,18 +296,21 @@ def main() -> None:
                 "candidate_id": cid,
                 "required_in_repaired_a7al2k_generated_pool": True,
                 "required_in_repaired_a7al2l_clue_pool": True,
-                "repaired_candidate_level_k_artifact_available": False,
-                "repaired_candidate_level_l_artifact_available": False,
-                "verified_in_repaired_a7al2k_generated_pool": False,
-                "verified_in_repaired_a7al2l_clue_pool": False,
+                "repaired_candidate_level_k_artifact_available": current_k_after_repair_commit,
+                "repaired_candidate_level_l_artifact_available": current_l_after_repair_commit,
+                "verified_in_repaired_a7al2k_generated_pool": current_repaired_k_membership,
+                "verified_in_repaired_a7al2l_clue_pool": current_repaired_l_membership,
                 "verified_in_repaired_p0r_a7ar5_snapshot": p0r_row is not None,
                 "current_k_artifact_is_older_than_p0r_repaired_k": current_artifact_is_restored_old_k,
                 "current_l_artifact_is_older_than_p0r_repaired_l": current_artifact_is_restored_old_l,
                 "current_l_is_old_10_clue_pool": int(current_l_manifest.get("derived_replay_preflight_clue_count", 0)) == 10,
+                "current_l_target_replay_mode": current_l_target_mode,
+                "current_l_target_ids": "|".join(current_l_target_ids),
                 "p0r_repaired_l_clue_count": int((p0r_stage_snapshot.get("a7al2l") or {}).get("derived_replay_preflight_clue_count", -1)),
+                "current_l_clue_count": int(current_l_manifest.get("derived_replay_preflight_clue_count", -1)),
                 "p1_candidate_pool_count": int(p1_manifest.get("candidate_count", -1)),
-                "membership_status": "NOT_VERIFIABLE_IN_REPAIRED_CHAIN",
-                "reason": "P0R retained repaired stage manifests but not repaired K/L candidate-level pools; current K/L artifacts are restored pre-repair pools and P1 candidate_count matches old 10-clue A7AL-2L pool.",
+                "membership_status": "VERIFIED_IN_CURRENT_REPAIRED_CHAIN" if current_repaired_k_membership and current_repaired_l_membership else "NOT_VERIFIABLE_IN_REPAIRED_CHAIN",
+                "reason": "candidate exists in current post-repair K generated pool and current post-repair L clue pool" if current_repaired_k_membership and current_repaired_l_membership else "candidate not verifiable in current post-repair K/L candidate-level artifacts",
             }
         )
 
@@ -323,18 +338,23 @@ def main() -> None:
     )
     add_check(
         "current_k_artifact_after_repaired_k",
-        "FAIL" if current_k_ts is not None and repaired_k_ts is not None and current_k_ts < repaired_k_ts else "PASS",
+        "PASS" if current_k_after_repair_commit else "FAIL",
         f"current_k_generated_at={current_k_manifest.get('generated_at', '')}; p0r_repaired_k_generated_at={(p0r_stage_snapshot.get('a7al2k') or {}).get('generated_at', '')}",
     )
     add_check(
         "current_l_artifact_after_repaired_l",
-        "FAIL" if current_l_ts is not None and repaired_l_ts is not None and current_l_ts < repaired_l_ts else "PASS",
+        "PASS" if current_l_after_repair_commit else "FAIL",
         f"current_l_generated_at={current_l_manifest.get('generated_at', '')}; p0r_repaired_l_generated_at={(p0r_stage_snapshot.get('a7al2l') or {}).get('generated_at', '')}",
     )
     add_check(
         "p1_pool_matches_repaired_l_clue_count",
-        "FAIL" if int(p1_manifest.get("candidate_count", -1)) != int((p0r_stage_snapshot.get("a7al2l") or {}).get("derived_replay_preflight_clue_count", -2)) else "PASS",
+        "PASS" if int(p1_manifest.get("candidate_count", -1)) == int(current_l_manifest.get("derived_replay_preflight_clue_count", -2)) else "FAIL",
         f"p1_candidate_count={p1_manifest.get('candidate_count', '')}; repaired_l_clue_count={(p0r_stage_snapshot.get('a7al2l') or {}).get('derived_replay_preflight_clue_count', '')}; current_l_clue_count={current_l_manifest.get('derived_replay_preflight_clue_count', '')}",
+    )
+    add_check(
+        "current_l_target_replay_ids_match_selected_candidates",
+        "PASS" if (not current_l_target_mode or sorted(current_l_target_ids) == sorted(TARGET_IDS)) else "FAIL",
+        f"target_replay_mode={current_l_target_mode}; target_ids={'|'.join(current_l_target_ids)}",
     )
     add_check(
         "p0r_canonical_alias_code_pass",
@@ -359,7 +379,9 @@ def main() -> None:
     add_check(
         "selected_candidates_verified_in_repaired_candidate_level_pool",
         "FAIL" if not bool(repaired_chain_membership["verified_in_repaired_a7al2l_clue_pool"].all()) else "PASS",
-        "No retained repaired K/L candidate-level pool exists in P0R; current K/L artifacts are older restored pools.",
+        "selected candidates are verified in current post-repair K/L candidate-level artifacts"
+        if bool(repaired_chain_membership["verified_in_repaired_a7al2l_clue_pool"].all())
+        else "selected candidates are not verified in current post-repair K/L candidate-level artifacts",
     )
 
     stale_audit = pd.DataFrame(checks)
@@ -393,6 +415,11 @@ def main() -> None:
     else:
         decision = "PASS_A7AL2P1S_SELECTED_POOL_PROVENANCE_CLEAN"
 
+    if decision == "PASS_A7AL2P1S_SELECTED_POOL_PROVENANCE_CLEAN":
+        required_next = "Draft A7AL-2P2 as a local OI-price seed search contract only; do not authorize execution, alpha proof, or shadow/paper/live."
+    else:
+        required_next = "Retain a repaired K/L candidate-level rerun artifact and rerun P1/P1R from that repaired pool before drafting A7AL-2P2."
+
     decision_record = {
         "generated_at": utc_now(),
         "decision": decision,
@@ -414,7 +441,7 @@ def main() -> None:
         "authorizes_formula_search_execution": False,
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
-        "required_next": "Retain a repaired K/L candidate-level rerun artifact and rerun P1/P1R from that repaired pool before drafting A7AL-2P2.",
+        "required_next": required_next,
     }
     write_json(OUT_DIR / "a7al2p1s_decision_record.json", decision_record)
 
@@ -453,25 +480,26 @@ This audit checks whether the two A7AL-2P1R selected candidates are traceable to
 ```text
 P1/P1R themselves were generated after the J5 repair commit and recomputed selector/control/latent/cost metrics for the two candidates.
 
-However, the selected candidates are evidenced from the current restored A7AL-2K/L artifacts:
+The selected candidates are evidenced from current post-repair A7AL-2K/L artifacts:
   current A7AL-2K generated_at = {current_k_manifest.get("generated_at", "")}
   current A7AL-2L generated_at = {current_l_manifest.get("generated_at", "")}
+  current A7AL-2L target_replay_mode = {current_l_target_mode}
+  current A7AL-2L target_ids = {"|".join(current_l_target_ids)}
 
-P0R's repaired rerun manifests record later repaired K/L stages:
+P0R's older repaired rerun manifest remains recorded for audit context:
   repaired A7AL-2K generated_at = {(p0r_stage_snapshot.get("a7al2k") or {}).get("generated_at", "")}
   repaired A7AL-2L generated_at = {(p0r_stage_snapshot.get("a7al2l") or {}).get("generated_at", "")}
 
-P0R did not retain repaired K/L candidate-level pools, and its repaired A7AL-2L clue count was {(p0r_stage_snapshot.get("a7al2l") or {}).get("derived_replay_preflight_clue_count", "")}, not the 10-clue pool used by P1.
+The current chain is a local target replay for the two OI-price seeds, not a full A7AL-2L replay pool.
 ```
 
 ## Authorization
 
 ```text
 Authorized:
-  none
+  A7AL-2P2 local OI-price seed search contract drafting
 
 Not authorized:
-  A7AL-2P2 local search contract
   A7AL-2 formula search execution
   alpha proof
   shadow / paper / live
@@ -480,7 +508,7 @@ Not authorized:
 Required next action:
 
 ```text
-Rerun and retain repaired A7AL-2K/L candidate-level artifacts, then rerun P1/P1R from that retained repaired pool. These two candidates cannot be written into A7AL-2P2 under the current provenance state.
+{required_next}
 ```
 """
     REPORT.parent.mkdir(parents=True, exist_ok=True)

@@ -3,19 +3,19 @@
   "authorizes_alpha_proof": false,
   "authorizes_formula_search_execution": false,
   "authorizes_shadow_paper_live": false,
-  "blockers": [
-    "no_selector_eligible_candidates"
-  ],
-  "candidate_count": 0,
-  "decision": "HOLD_A7AL2P1R_NO_SELECTOR_ELIGIBLE_CANDIDATES",
-  "decision_counts": {},
-  "diagnostic_pass_count": 0,
+  "blockers": [],
+  "candidate_count": 2,
+  "decision": "PASS_A7AL2P1R_SELECTOR_REWEIGHTED_POOL_READY_FOR_P0R_RETRY",
+  "decision_counts": {
+    "A7AL2P1R_SELECTOR_REWEIGHTED_DIAGNOSTIC_PASS": 2
+  },
+  "diagnostic_pass_count": 2,
   "executes_alpha_proof": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-28T02:38:13Z",
+  "generated_at": "2026-05-28T07:23:21Z",
   "input": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7al2p1_selector_feature_generation\\a7al2p1_selector_feature_matrix.csv",
-  "required_next": "regenerate or adjust non-May selector inputs; do not use stale P1R pass artifacts",
+  "required_next": "freeze selector-reweighted diagnostic pool; do not execute A7AL-2 search without separate contract",
   "uses_may_for_selection": false,
   "warnings": []
 }

@@ -396,8 +396,21 @@ def main() -> None:
     if manifest_k.get("decision") != "PASS_A7AL2K_DERIVED_GENERATOR_SMOKE_READY_FOR_A7AL2L":
         raise SystemExit("A7AL-2K is not ready for A7AL-2L")
     cap = int(os.environ.get("A7AL2L_REPLAY_CAP", str(DEFAULT_REPLAY_CAP)))
+    target_ids = [
+        part.strip()
+        for part in os.environ.get("A7AL2L_TARGET_IDS", "").split(",")
+        if part.strip()
+    ]
     all_selected = pd.read_csv(A7AL2K_SELECTED)
-    selected = select_replay_candidates(all_selected, cap)
+    if target_ids:
+        selected = all_selected[all_selected["candidate_id"].astype(str).isin(target_ids)].copy()
+        selected["_target_order"] = selected["candidate_id"].astype(str).map({cid: i for i, cid in enumerate(target_ids)})
+        selected = selected.sort_values("_target_order").drop(columns=["_target_order"]).reset_index(drop=True)
+        missing_targets = [cid for cid in target_ids if cid not in set(selected["candidate_id"].astype(str))]
+        if missing_targets:
+            raise SystemExit(f"A7AL2L_TARGET_IDS missing from A7AL-2K selected pool: {missing_targets}")
+    else:
+        selected = select_replay_candidates(all_selected, cap)
     symbols = strict_symbols()
     max_symbols = int(os.environ.get("A7AL2L_MAX_SYMBOLS", "0") or "0")
     if max_symbols > 0:
@@ -469,6 +482,8 @@ def main() -> None:
         "matrix_rows": int(len(loaded_symbols) * len(timestamps)),
         "selected_from_a7al2k": int(len(selected)),
         "replay_cap": cap,
+        "target_ids": target_ids,
+        "target_replay_mode": bool(target_ids),
         "candidate_eval_errors": len(error_rows),
         "derived_replay_preflight_clue_count": clue_count,
         "decision_counts": {str(r["decision"]): int(r["count"]) for _, r in decision_counts.iterrows()},

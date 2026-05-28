@@ -1,0 +1,13 @@
+transform,status,constraint
+Mean,allowed,past-only rolling window
+Delta,allowed,past-only difference
+ZScore,allowed,cross-sectional or past-only rolling; lineage required
+Rank,allowed,cross-sectional at timestamp
+CSRank,allowed,cross-sectional at timestamp
+Sub,allowed,bounded arithmetic
+Mul,allowed,two-term interaction only unless explicitly justified
+SafeDiv,allowed,finite-denominator guard required
+Clip,allowed,fixed non-May bounds
+Winsor,allowed,fixed non-May bounds
+TSRank,allowed,past-only rolling window
+Decay,allowed,past-only smoothing
