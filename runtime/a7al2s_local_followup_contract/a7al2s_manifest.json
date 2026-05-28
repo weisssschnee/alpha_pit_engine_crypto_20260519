@@ -1,0 +1,21 @@
+{
+  "authorizes_a7al2t_may_stress_failure_attribution": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_company_full_a7al2q2r": true,
+  "authorizes_large_search": false,
+  "authorizes_local_expansion_before_full_pool": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "candidate_count": 4,
+  "decision": "PASS_A7AL2S_LOCAL_FOLLOWUP_CONTRACT_READY",
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-28T13:24:54Z",
+  "input_a7al2r_decision": "PASS_A7AL2R_LOCAL_FORENSIC_CANDIDATES_READY_FOR_A7AL2S_CONTRACT",
+  "primary_clean_premay_count": 2,
+  "required_next": "Run company full A7AL-2Q/2R when company data path is mounted, or run A7AL-2T May stress failure attribution; do not start large search.",
+  "uses_may_for_mutation": false,
+  "uses_may_for_ranking": false,
+  "uses_may_for_selection": false,
+  "watchlist_control_close_count": 2
+}

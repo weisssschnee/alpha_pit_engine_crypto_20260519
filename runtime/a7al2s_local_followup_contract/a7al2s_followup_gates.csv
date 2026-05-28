@@ -1,0 +1,7 @@
+gate,requirement
+full_pool_required,A7AL-2Q/2R full 128 replay on company resources before expansion
+may_stress_only,"May can be failure attribution/veto only, never selector/ranking/mutation"
+control_close_handling,control_close candidates stay watchlist unless full-pool controls improve
+primary_seed_handling,"no-warning candidates are diagnostic primary clues, not proof objects"
+negative_controls,"wrong-lag, shuffle, same-family controls remain attached"
+artifact_chain,use committed A7AL-2Q and A7AL-2R artifacts only

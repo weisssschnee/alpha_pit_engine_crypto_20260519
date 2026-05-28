@@ -1,0 +1,6 @@
+action,status,reason
+company_full_a7al2q2r,AUTHORIZED_IF_COMPANY_PATH_AVAILABLE,local pilot executed only 16 replay candidates; full 128 replay/deep pass should be checked off local memory path
+a7al2t_may_stress_failure_attribution,AUTHORIZED,all four local forensic candidates are pre-May positive but May/control dominated; classify failure without using May for selection
+local_narrow_mutation_expansion,HOLD_UNTIL_FULL_QR_OR_A7AL2T,avoid amplifying a four-candidate local pilot before full-pool confirmation
+large_formula_search,NOT_AUTHORIZED,current evidence is local diagnostic only
+alpha_proof_shadow_paper_live,NOT_AUTHORIZED,May stress remains negative/control dominated and no append-only proof exists
