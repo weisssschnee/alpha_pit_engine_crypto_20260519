@@ -1,0 +1,29 @@
+{
+  "authorizes_a7al2p2": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "selected_candidates_not_verified_in_repaired_chain",
+    "stale_artifact_risk"
+  ],
+  "candidate_count": 2,
+  "current_l_clue_count": 10,
+  "decision": "HOLD_A7AL2P1S_NOT_IN_REPAIRED_CHAIN",
+  "generated_at": "2026-05-28T01:41:37Z",
+  "j5_repair_commit": "eb62bda",
+  "j5_repair_commit_time": "2026-05-28T00:00:51+08:00",
+  "p0r_canonical_alias_code_fail": false,
+  "p0r_repaired_l_clue_count": 3,
+  "p0r_stale_alias_artifact_count": 0,
+  "p1_candidate_count": 10,
+  "p1_generated_after_j5_repair": true,
+  "p1_p1r_recomputed_metrics_present": true,
+  "p1r_generated_after_j5_repair": true,
+  "required_next": "Retain a repaired K/L candidate-level rerun artifact and rerun P1/P1R from that repaired pool before drafting A7AL-2P2.",
+  "selected_candidates_have_no_blocked_overlay_alias": true,
+  "target_candidates": [
+    "a7al2k_046e806368e99c76",
+    "a7al2k_0a247ec03472983b"
+  ]
+}

@@ -1,0 +1,12 @@
+check,status,detail
+j5_repair_commit_time_available,PASS,eb62bda commit_time=2026-05-28T00:00:51+08:00
+p1_generated_after_j5_repair,PASS,p1_generated_at=2026-05-27T17:56:14Z; j5_repair_commit_time=2026-05-28T00:00:51+08:00
+p1r_generated_after_j5_repair,PASS,p1r_generated_at=2026-05-27T17:59:55Z; j5_repair_commit_time=2026-05-28T00:00:51+08:00
+current_k_artifact_after_repaired_k,FAIL,current_k_generated_at=2026-05-27T10:35:01Z; p0r_repaired_k_generated_at=2026-05-27T16:45:04Z
+current_l_artifact_after_repaired_l,FAIL,current_l_generated_at=2026-05-27T12:56:03Z; p0r_repaired_l_generated_at=2026-05-27T17:35:24Z
+p1_pool_matches_repaired_l_clue_count,FAIL,p1_candidate_count=10; repaired_l_clue_count=3; current_l_clue_count=10
+p0r_canonical_alias_code_pass,PASS,p0r_canonical_alias_code_fail=False; p0_alias_fail_count=0
+p0r_stale_alias_count_zero,PASS,p0r_stale_alias_artifact_count=0; current_p0_stale_alias_rows=164
+selected_candidates_have_no_blocked_alias,PASS,blocked_alias_count=0
+selected_candidates_recomputed_in_p1_p1r,PASS,P1 control/latent and P1R split variants are present for both selected candidates.
+selected_candidates_verified_in_repaired_candidate_level_pool,FAIL,No retained repaired K/L candidate-level pool exists in P0R; current K/L artifacts are older restored pools.
