@@ -1,0 +1,17 @@
+candidate_id,orientation_fit_split,orientation_entry_label,train_mean_spread,orientation,uses_may
+a7al2q_d6f7ebc0dbbdda7a,train_2024,label_t1_to_t25,0.0019598947667496054,1.0,False
+a7al2q_6671d1fac5e57efe,train_2024,label_t1_to_t25,0.0017245018372656683,1.0,False
+a7al2q_58ec268c498480a1,train_2024,label_t1_to_t25,0.0007315556552108611,1.0,False
+a7al2q_d7a6680d151b7968,train_2024,label_t1_to_t25,-0.00022452493733744234,-1.0,False
+a7al2q_69233c377095f5a4,train_2024,label_t1_to_t25,-4.441808398442945e-05,-1.0,False
+a7al2q_5b4e7d3dc1984b26,train_2024,label_t1_to_t25,0.00018782974902555228,1.0,False
+a7al2q_bac72457ad9e4104,train_2024,label_t1_to_t25,0.0004956085150406498,1.0,False
+a7al2q_f962751a6f713294,train_2024,label_t1_to_t25,0.0003098672081294855,1.0,False
+a7al2q_1378ff7d2322adee,train_2024,label_t1_to_t25,0.0016542222867750324,1.0,False
+a7al2q_8e279dd3d23e1613,train_2024,label_t1_to_t25,-0.0002106924930806084,-1.0,False
+a7al2q_ceda68bb417b5cad,train_2024,label_t1_to_t25,0.0020839984230346365,1.0,False
+a7al2q_f00f22bbcc48dc2c,train_2024,label_t1_to_t25,0.001967691792702108,1.0,False
+a7al2q_b463b7c4454b038d,train_2024,label_t1_to_t25,-0.0002254974705224495,-1.0,False
+a7al2q_fe342a17a3bf56da,train_2024,label_t1_to_t25,-0.0011050007535289268,-1.0,False
+a7al2q_0a44f7b06019cff8,train_2024,label_t1_to_t25,-0.00028105186292303835,-1.0,False
+a7al2q_153d45b2cb3aebdd,train_2024,label_t1_to_t25,0.00015150484838141233,1.0,False

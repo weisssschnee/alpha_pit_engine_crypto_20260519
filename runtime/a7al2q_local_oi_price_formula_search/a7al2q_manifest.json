@@ -1,0 +1,68 @@
+{
+  "authorizes_a7al2r_local_forensic": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "controls": [
+    "one_bar_lag",
+    "wrong_lag_future_24h",
+    "wrong_lag_stale_168h",
+    "same_family_random"
+  ],
+  "controls_deferred_to_deep_forensic": [
+    "time_shuffle",
+    "symbol_shuffle"
+  ],
+  "cost_bps": [
+    2.0,
+    5.0,
+    10.0
+  ],
+  "decision": "PASS_A7AL2Q_LOCAL_OI_PRICE_CANDIDATES_FOUND_EXECUTION_HOLD",
+  "decision_counts": {
+    "A7AL2Q_LOCAL_OI_PRICE_DIAGNOSTIC_CANDIDATE": 4,
+    "HOLD_A7AL2Q_CONTROL_DOMINATED": 12
+  },
+  "deep_audit": 16,
+  "diagnostic_candidate_count": 4,
+  "executed_fast_replay": 16,
+  "executes_alpha_proof": false,
+  "executes_local_search": true,
+  "executes_training": false,
+  "fields_loaded": [
+    "index_close",
+    "mark_close",
+    "open_interest_last",
+    "open_interest_mean",
+    "open_interest_value_last",
+    "open_interest_value_mean",
+    "trade_close"
+  ],
+  "generated_at": "2026-05-28T12:42:54Z",
+  "generated_total": 4000,
+  "input_contract": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7al2p2_local_oi_price_search_contract\\a7al2p2_manifest.json",
+  "latency_policy": "field-native; no blanket +2h stress; label_t1 and label_t2 are audit labels",
+  "latent_coverage": {
+    "deferred_to": "A7AL-2R local deep forensic",
+    "latent_audit_cap": 16
+  },
+  "orientation_fit_split": "train_2024",
+  "runtime_seconds": 658.806,
+  "seed_candidates": [
+    "a7al2k_046e806368e99c76",
+    "a7al2k_0a247ec03472983b"
+  ],
+  "selected_for_fast_replay": 128,
+  "selected_skeleton_count": 11,
+  "selected_top_skeleton_share": 0.15625,
+  "strict_symbols": 181,
+  "timestamps": 21025,
+  "uses_may_for_generation": false,
+  "uses_may_for_mutation": false,
+  "uses_may_for_ranking": false,
+  "uses_may_for_selection": false,
+  "warnings": [
+    "control_dominated_candidates_rejected"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "authorizes_a7al2r_local_forensic": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AL2Q_LOCAL_OI_PRICE_CANDIDATES_FOUND_EXECUTION_HOLD",
+  "diagnostic_candidate_count": 4,
+  "generated_at": "2026-05-28T12:42:54Z",
+  "warnings": [
+    "control_dominated_candidates_rejected"
+  ]
+}
