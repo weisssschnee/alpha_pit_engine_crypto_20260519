@@ -1,0 +1,18 @@
+{
+  "authorizes_a7al2x3_family_balanced_dry_generation": "READY_FOR_REVIEW_NOT_EXECUTION_AUTHORIZED",
+  "authorizes_a7al2y_generation": "NOT_AUTHORIZED",
+  "authorizes_alpha_proof": "NOT_AUTHORIZED",
+  "authorizes_large_search": "NOT_AUTHORIZED",
+  "authorizes_shadow_paper_live": "NOT_AUTHORIZED",
+  "decision": "PASS_A7AL2X2R_GENERATOR_AND_SHARED_POOL_REPAIR_CONTRACT_READY_FOR_A7AL2X3_REVIEW",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "requires_before_a7al2x3": [
+    "implement family-balanced generator quotas",
+    "replace F3 overlay-only positioning with Binance historical positioning fields",
+    "add F6 latent-state templates",
+    "write shared-pool ledger from family-balanced dry generation output"
+  ]
+}

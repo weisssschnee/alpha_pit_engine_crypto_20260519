@@ -1,0 +1,18 @@
+column_name,dtype,description
+candidate_id,string,stable unique id
+expression,string,formula expression
+objective_family,enum:F0-F6,A7AL-2X objective family
+source_stage,string,generator/preflight/shared-pool source
+field_families,string,pipe-delimited field families
+fields,string,pipe-delimited concrete fields
+operator_signature,string,operator motif
+window_signature,string,lookback windows
+skeleton_key,string,structure dedup key
+production_key,string,family/field/window key
+historical_source_ok,bool,no overlay-only historical proof field
+field_lineage_ok,bool,all fields in lineage ledger
+pit_policy_ok,bool,field-native latency valid
+negative_control_attached,bool,matched controls available before replay
+selected_for_family_balanced_preflight,bool,quota-based preflight selection
+preflight_decision,string,empty before replay
+shared_pool_stage,string,current stage

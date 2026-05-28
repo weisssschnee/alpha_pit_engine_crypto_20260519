@@ -1,0 +1,10 @@
+item,policy,reason
+same_direct_oi_price_rerun,forbid,A7AL-2P2 direct OI-price was superseded and stress-vetoed.
+direct_oi_price_level_gap_standalone,forbid,May/control failure; weak prior only.
+funding_only_wrapper,forbid,Must interact with OI/positioning and pass residual/control gates.
+basis_only_wrapper,forbid,Must interact with OI/positioning and pass residual/control gates.
+liquidity_volatility_old_family,forbid,Old A7M/A7O collapse family.
+a7v_activity_liquidity_self_reproduction,forbid,A7V family failed after source trace pass.
+j5_cross_exchange_overlay_historical_proof,forbid,30d overlay diagnostic only; no historical proof.
+raw_okx_binance_direct_price_comparison,forbid,Canonical contract-unit fields required.
+may_in_selector_or_generation,forbid,May stress-only; veto/attribution only.

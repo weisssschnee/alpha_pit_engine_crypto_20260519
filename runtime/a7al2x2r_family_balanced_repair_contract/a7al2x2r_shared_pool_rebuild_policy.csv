@@ -1,0 +1,9 @@
+policy_key,policy_value
+source_of_truth,A7AL-2X shared candidate ledger only; no direct single-stage CSV reads
+family_min_coverage,F0-F6 must each have shared-pool candidates if generated historically
+quota_selection,"family-balanced first, then skeleton/production diversity"
+signal_vector_cap,selected top signal-vector cluster share <= 0.35; max pairwise corr <= 0.80
+skeleton_cap,same skeleton share <= 0.25
+production_cap,same production key share <= 0.20
+control_gate,control_ratio >= 1.0 hard reject; 0.80-1.0 warning
+may_policy,May cannot enter generation/selector/ranking/mutation; veto/attribution only

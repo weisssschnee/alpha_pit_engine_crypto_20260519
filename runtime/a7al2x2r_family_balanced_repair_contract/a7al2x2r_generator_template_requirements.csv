@@ -1,0 +1,8 @@
+family_id,template_pattern,allowed_operator_motif,allowed_windows,hard_requirement
+F0_OI_delta_price_interaction,"Mul(Sign(Delta(OI,w1)),Rank(Delta(price,w2)))",Delta|Mul|Rank|Sign|ZScore,4|8|12|24|48|72|96|168|336,must include OI delta/value delta and price move
+F1_OI_basis_premium_interaction,"Mul(Sign(Delta(OI,w1)),Rank(Mean(premium_abs,w2)))",Delta|Mean|Mul|Rank|ZScore|Sub,12|24|48|72|96|168|336,must include OI and premium/basis dislocation
+F2_OI_funding_crowding_interaction,"Mul(Sign(Delta(OI,w1)),Rank(Mean(funding_abs,w2)))",Delta|Mean|Mul|Rank|ZScore|Sub,12|24|48|72|96|168|336,funding-only expression forbidden
+F3_positioning_divergence,"Sub(Rank(top_position_ratio),Rank(global_account_ratio))",Delta|Mean|Rank|Sub|ZScore|Mul,12|24|48|72|96|168|336,must use at least two positioning fields or positioning x price state
+F4_OI_taker_flow_interaction,"Mul(Sign(Delta(OI,w1)),Rank(Delta(taker_ratio,w2)))",Delta|Mean|Mul|Rank|Sign|ZScore,4|8|12|24|48|72|96|168,must include OI change and taker/flow field
+F5_OI_upper_regime_interaction,"Mul(Rank(Delta(OI,w1)),RegimeState(Rk))",Delta|Mul|Rank|ZScore|StateMask,24|48|72|96|168|336,state thresholds must be train-frozen; state alone cannot rank
+F6_OI_latent_state_interaction,"LatentNeutralRank(Delta(OI,w1)) or OI x latent state",Delta|Rank|ZScore|Neutralize|Mul,24|48|72|96|168|336,latent mapping frozen before validation/test

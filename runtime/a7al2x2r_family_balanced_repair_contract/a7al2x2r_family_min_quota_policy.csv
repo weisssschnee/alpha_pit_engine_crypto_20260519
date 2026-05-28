@@ -1,0 +1,8 @@
+family_id,family_status,dry_generation_min_candidates,dry_generation_max_share,preflight_min_candidates,shared_pool_min_candidates,historical_source_required,standalone_allowed,notes
+F0_OI_delta_price_interaction,allowed_contract_only,384,0.2,32,32,True,False,Must use OI delta/value delta with price move; direct level gap remains weak prior.
+F1_OI_basis_premium_interaction,allowed_contract_only,256,0.18,24,24,True,False,Use Binance historical premium/basis fields only; no raw OKX/Binance price comparison.
+F2_OI_funding_crowding_interaction,allowed_contract_only,256,0.18,24,24,True,False,Use OI change with funding level/abs/persistence; funding-only wrapper forbidden.
+F3_positioning_divergence,allowed_contract_only,256,0.16,24,24,True,False,"Must use Binance historical long-short/account/position fields, not J5 OKX 30d overlay."
+F4_OI_taker_flow_interaction,allowed_contract_only,256,0.16,24,24,True,False,Use OI change with taker buy/sell ratio or historical taker flow fields.
+F5_OI_upper_regime_interaction,allowed_contract_only,256,0.16,24,24,True,False,"Use train-frozen upper-regime state fields as interaction context, not standalone rank."
+F6_OI_latent_state_interaction,allowed_contract_only,256,0.16,24,24,True,False,Add explicit generator templates for listing-age latent/liquidity-tier/meme/multiplier OI interactions.

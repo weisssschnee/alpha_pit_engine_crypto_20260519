@@ -1,0 +1,16 @@
+{
+  "authorizes_a7al2x3_family_balanced_dry_generation": false,
+  "authorizes_a7al2y_generation": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AL2X2R_GENERATOR_AND_SHARED_POOL_REPAIR_CONTRACT_READY_FOR_A7AL2X3_REVIEW",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "family_count": 7,
+  "field_contract_rows": 18,
+  "forbidden_items": 9,
+  "generated_at": "2026-05-28T16:59:05Z"
+}
