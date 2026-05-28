@@ -1,0 +1,25 @@
+{
+  "authorizes_a7al2u_objective_repair_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_company_full_a7al2q2r": true,
+  "authorizes_large_search": false,
+  "authorizes_local_expansion": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "all_local_candidates_may_sign_flip",
+    "all_local_candidates_may_control_dominated"
+  ],
+  "candidate_entry_rows": 8,
+  "decision": "HOLD_A7AL2T_MAY_STRESS_FAILURE_CONFIRMED_NO_EXPANSION",
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-28T13:29:34Z",
+  "input_a7al2s_decision": "PASS_A7AL2S_LOCAL_FOLLOWUP_CONTRACT_READY",
+  "may_control_dominated_rows": 8,
+  "required_next": "Prefer company full A7AL-2Q/2R. If unavailable, draft A7AL-2U objective-repair contract; do not run local expansion.",
+  "sign_flip_rows": 8,
+  "unique_candidates": 4,
+  "uses_may_for_mutation": false,
+  "uses_may_for_ranking": false,
+  "uses_may_for_selection": false
+}
