@@ -1,0 +1,28 @@
+{
+  "authorizes_a7al2y_generation": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "selected_count_below_4",
+    "selected_stress_clean_candidates_zero"
+  ],
+  "decision": "HOLD_A7AL2X1_NO_ELIGIBLE_ALLOWED_OBJECTIVE_FAMILY_IN_SHARED_POOL",
+  "eligible_allowed_family_candidates": 0,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "fast_replay_candidates": 128,
+  "generated_at": "2026-05-28T16:31:38Z",
+  "input_pool_candidates": 4000,
+  "selected_control_dominated": 0,
+  "selected_count": 0,
+  "selected_latent_fragile": 0,
+  "selected_max_pairwise_corr": 0.0,
+  "selected_signal_vector_clusters": 0,
+  "selected_stress_clean_candidates": 0,
+  "selected_with_stress_evidence": 0,
+  "uses_may_for_generation": false,
+  "uses_may_for_selector": false,
+  "uses_may_for_veto_or_attribution": true
+}

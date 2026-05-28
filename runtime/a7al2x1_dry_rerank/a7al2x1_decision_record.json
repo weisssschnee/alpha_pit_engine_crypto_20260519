@@ -1,0 +1,8 @@
+{
+  "a7al2y_generation": "NOT_AUTHORIZED",
+  "alpha_proof": "NOT_AUTHORIZED",
+  "decision": "HOLD_A7AL2X1_NO_ELIGIBLE_ALLOWED_OBJECTIVE_FAMILY_IN_SHARED_POOL",
+  "large_formula_search": "NOT_AUTHORIZED",
+  "reason": "A7AL-2X1 is dry rerank only; generation requires stress-clean selected evidence, which is absent.",
+  "shadow_paper_live": "NOT_AUTHORIZED"
+}

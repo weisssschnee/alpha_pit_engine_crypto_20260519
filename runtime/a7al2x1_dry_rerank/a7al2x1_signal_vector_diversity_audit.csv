@@ -1,0 +1,2 @@
+selected_count,selected_signal_vector_clusters,selected_max_pairwise_corr,selected_control_dominated,selected_latent_fragile,selected_with_stress_evidence,selected_stress_clean_candidates,uses_may_for_selector
+0,0,0.0,0,0,0,0,False
