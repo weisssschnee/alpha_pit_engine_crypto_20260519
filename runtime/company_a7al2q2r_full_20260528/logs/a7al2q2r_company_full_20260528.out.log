@@ -1,0 +1,290 @@
+started 2026/05/28 ÷‹Àƒ 21:47:53.00 
+{
+  "dataset": "binance_universe498_replay_1h_v2_20260527",
+  "generated_at_utc": "2026-05-28T13:48:44Z",
+  "decision": "BINANCE_UNIVERSE498_REPLAY_BASE_EXTENDED_TO_MAY_PATCH",
+  "symbols": 498,
+  "rows": 6949596,
+  "min_timestamp": "2024-01-01 00:00:00+00:00",
+  "max_timestamp": "2026-05-26 00:00:00+00:00",
+  "duplicate_timestamp_count": 0,
+  "inf_cell_count": 0,
+  "gap_hours_gt_1": 9,
+  "manifest": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\manifests\\binance_universe498_replay_1h_v2_20260527_manifest.csv",
+  "coverage": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\manifests\\binance_universe498_replay_1h_v2_20260527_coverage.csv",
+  "gold_dir": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v2_20260527",
+  "source_old_dir": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v1_20260525",
+  "source_patch_dir": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_may2026_patch_stdlib_v1_20260527"
+}
+build_v2_exit_code=0 
+[A7AL-2Q] replay 1/128 a7al2q_d6f7ebc0dbbdda7a
+[A7AL-2Q] replay 2/128 a7al2q_6671d1fac5e57efe
+[A7AL-2Q] replay 3/128 a7al2q_58ec268c498480a1
+[A7AL-2Q] replay 4/128 a7al2q_d7a6680d151b7968
+[A7AL-2Q] replay 5/128 a7al2q_69233c377095f5a4
+[A7AL-2Q] replay 6/128 a7al2q_5b4e7d3dc1984b26
+[A7AL-2Q] replay 7/128 a7al2q_bac72457ad9e4104
+[A7AL-2Q] replay 8/128 a7al2q_f962751a6f713294
+[A7AL-2Q] replay 9/128 a7al2q_1378ff7d2322adee
+[A7AL-2Q] replay 10/128 a7al2q_8e279dd3d23e1613
+[A7AL-2Q] replay 11/128 a7al2q_ceda68bb417b5cad
+[A7AL-2Q] replay 12/128 a7al2q_f00f22bbcc48dc2c
+[A7AL-2Q] replay 13/128 a7al2q_b463b7c4454b038d
+[A7AL-2Q] replay 14/128 a7al2q_fe342a17a3bf56da
+[A7AL-2Q] replay 15/128 a7al2q_0a44f7b06019cff8
+[A7AL-2Q] replay 16/128 a7al2q_153d45b2cb3aebdd
+[A7AL-2Q] replay 17/128 a7al2q_0de0d41346741bd1
+[A7AL-2Q] replay 18/128 a7al2q_1a85ce2f6824961f
+[A7AL-2Q] replay 19/128 a7al2q_d933f0049acb4699
+[A7AL-2Q] replay 20/128 a7al2q_d1103bc53dda5f19
+[A7AL-2Q] replay 21/128 a7al2q_7b47c379b145850f
+[A7AL-2Q] replay 22/128 a7al2q_ae4f22820243f5d8
+[A7AL-2Q] replay 23/128 a7al2q_e7f3ac7f42ea12ab
+[A7AL-2Q] replay 24/128 a7al2q_10991f685ed433e6
+[A7AL-2Q] replay 25/128 a7al2q_47801cd1758f1a59
+[A7AL-2Q] replay 26/128 a7al2q_2ec6136e6ff32eb3
+[A7AL-2Q] replay 27/128 a7al2q_881df3d6813ae28f
+[A7AL-2Q] replay 28/128 a7al2q_070161fc8a8254ad
+[A7AL-2Q] replay 29/128 a7al2q_3ba41c66a0de2fa2
+[A7AL-2Q] replay 30/128 a7al2q_b6b2f5aba19390f8
+[A7AL-2Q] replay 31/128 a7al2q_10e647a6a770bab4
+[A7AL-2Q] replay 32/128 a7al2q_0f14395724f60a61
+[A7AL-2Q] replay 33/128 a7al2q_d7066321956fffb8
+[A7AL-2Q] replay 34/128 a7al2q_f36ca1ecd3f7a0c6
+[A7AL-2Q] replay 35/128 a7al2q_c3ec84f31f7ebaa6
+[A7AL-2Q] replay 36/128 a7al2q_69d146749c30da3c
+[A7AL-2Q] replay 37/128 a7al2q_07a399f87a92a0d2
+[A7AL-2Q] replay 38/128 a7al2q_e3cdfb5cac370798
+[A7AL-2Q] replay 39/128 a7al2q_8110f9704918d1df
+[A7AL-2Q] replay 40/128 a7al2q_532a063383e97c15
+[A7AL-2Q] replay 41/128 a7al2q_1174aa64fb8b7d3d
+[A7AL-2Q] replay 42/128 a7al2q_9fa3d42c3de13e96
+[A7AL-2Q] replay 43/128 a7al2q_b73c1ada9ca478f6
+[A7AL-2Q] replay 44/128 a7al2q_3abec814a5c6d0df
+[A7AL-2Q] replay 45/128 a7al2q_d213a791f5c9668e
+[A7AL-2Q] replay 46/128 a7al2q_b03bff273b1b5b3d
+[A7AL-2Q] replay 47/128 a7al2q_b14aea393d7309d7
+[A7AL-2Q] replay 48/128 a7al2q_f7bc64abcc3b500d
+[A7AL-2Q] replay 49/128 a7al2q_0b3baa3540853655
+[A7AL-2Q] replay 50/128 a7al2q_4d10b72a6d4c6c50
+[A7AL-2Q] replay 51/128 a7al2q_18f61565dad3e1fc
+[A7AL-2Q] replay 52/128 a7al2q_79c5659c69a1d823
+[A7AL-2Q] replay 53/128 a7al2q_ecb245360a346fd3
+[A7AL-2Q] replay 54/128 a7al2q_5732109429ac7cd1
+[A7AL-2Q] replay 55/128 a7al2q_83c8025d58c16623
+[A7AL-2Q] replay 56/128 a7al2q_ce22ea0cc5740a03
+[A7AL-2Q] replay 57/128 a7al2q_dca37c649bd07b2c
+[A7AL-2Q] replay 58/128 a7al2q_5da100b2822dc1a6
+[A7AL-2Q] replay 59/128 a7al2q_be7b3f3711ce725c
+[A7AL-2Q] replay 60/128 a7al2q_7ab7421584d602af
+[A7AL-2Q] replay 61/128 a7al2q_a33a56cf65a5b0c2
+[A7AL-2Q] replay 62/128 a7al2q_4e2ad10685353df3
+[A7AL-2Q] replay 63/128 a7al2q_ce8a620efc85d44a
+[A7AL-2Q] replay 64/128 a7al2q_33d51890b0068eb6
+[A7AL-2Q] replay 65/128 a7al2q_af8aba41cb19fdbe
+[A7AL-2Q] replay 66/128 a7al2q_0d7351f49adf11c3
+[A7AL-2Q] replay 67/128 a7al2q_0531d6565dc36cea
+[A7AL-2Q] replay 68/128 a7al2q_a7da20bb164fda71
+[A7AL-2Q] replay 69/128 a7al2q_5283ae4eef4cf18b
+[A7AL-2Q] replay 70/128 a7al2q_8b64d810bb3b0c96
+[A7AL-2Q] replay 71/128 a7al2q_fbec7059dfeab1ab
+[A7AL-2Q] replay 72/128 a7al2q_5b16140570d34ff8
+[A7AL-2Q] replay 73/128 a7al2q_bf78a22567a7afd9
+[A7AL-2Q] replay 74/128 a7al2q_c09e1651a5aa0926
+[A7AL-2Q] replay 75/128 a7al2q_132c2a7c6c4a9142
+[A7AL-2Q] replay 76/128 a7al2q_7cf43aae9a3604a4
+[A7AL-2Q] replay 77/128 a7al2q_d8a7f2027987e6a0
+[A7AL-2Q] replay 78/128 a7al2q_894ef6556dc4dd53
+[A7AL-2Q] replay 79/128 a7al2q_86bb796aa404fadd
+[A7AL-2Q] replay 80/128 a7al2q_e6be44ccbba38b66
+[A7AL-2Q] replay 81/128 a7al2q_bacf83c4aa67df04
+[A7AL-2Q] replay 82/128 a7al2q_ca72f5849cff347a
+[A7AL-2Q] replay 83/128 a7al2q_c46fcfb9f5cfa44a
+[A7AL-2Q] replay 84/128 a7al2q_a5c03992d01f4b7e
+[A7AL-2Q] replay 85/128 a7al2q_fe98f845b4729cb0
+[A7AL-2Q] replay 86/128 a7al2q_de61a31e0f94786b
+[A7AL-2Q] replay 87/128 a7al2q_100786d679e5b988
+[A7AL-2Q] replay 88/128 a7al2q_052666e2602c6204
+[A7AL-2Q] replay 89/128 a7al2q_79ce9904a7c3ba7d
+[A7AL-2Q] replay 90/128 a7al2q_cdee002b3cb51028
+[A7AL-2Q] replay 91/128 a7al2q_61b0e773f54d336e
+[A7AL-2Q] replay 92/128 a7al2q_ad8239fed28311c1
+[A7AL-2Q] replay 93/128 a7al2q_65fb8055686e568f
+[A7AL-2Q] replay 94/128 a7al2q_39631109514d8381
+[A7AL-2Q] replay 95/128 a7al2q_c5d66518cfe91753
+[A7AL-2Q] replay 96/128 a7al2q_c547c12042501b74
+[A7AL-2Q] replay 97/128 a7al2q_f6acc570273f4779
+[A7AL-2Q] replay 98/128 a7al2q_1a74d652104b593d
+[A7AL-2Q] replay 99/128 a7al2q_165d460c6fe4efb2
+[A7AL-2Q] replay 100/128 a7al2q_21e726a216c59eff
+[A7AL-2Q] replay 101/128 a7al2q_4194a7bf5b871ea7
+[A7AL-2Q] replay 102/128 a7al2q_edb77f58a5decea7
+[A7AL-2Q] replay 103/128 a7al2q_df339788dddb7322
+[A7AL-2Q] replay 104/128 a7al2q_c71837a81f389a41
+[A7AL-2Q] replay 105/128 a7al2q_706253017908e57d
+[A7AL-2Q] replay 106/128 a7al2q_aced101952a66c40
+[A7AL-2Q] replay 107/128 a7al2q_dd469285431f6901
+[A7AL-2Q] replay 108/128 a7al2q_e64593ae611d474b
+[A7AL-2Q] replay 109/128 a7al2q_fd69cd2051870a73
+[A7AL-2Q] replay 110/128 a7al2q_f864cf9d943df0c8
+[A7AL-2Q] replay 111/128 a7al2q_929e4e1ec2e59b6a
+[A7AL-2Q] replay 112/128 a7al2q_0133ba7e904144bd
+[A7AL-2Q] replay 113/128 a7al2q_8b401291d0c3a28f
+[A7AL-2Q] replay 114/128 a7al2q_781b0a6856b6b231
+[A7AL-2Q] replay 115/128 a7al2q_c0e06a1a62f16dc7
+[A7AL-2Q] replay 116/128 a7al2q_bfbe17018f795d57
+[A7AL-2Q] replay 117/128 a7al2q_17023300cdd76c4a
+[A7AL-2Q] replay 118/128 a7al2q_7add750c5afd623c
+[A7AL-2Q] replay 119/128 a7al2q_8802b9454941aa10
+[A7AL-2Q] replay 120/128 a7al2q_cb8e24ab5beec723
+[A7AL-2Q] replay 121/128 a7al2q_75b3845ed1c94361
+[A7AL-2Q] replay 122/128 a7al2q_faf18b94871d9f38
+[A7AL-2Q] replay 123/128 a7al2q_a4993fe3273bf0c8
+[A7AL-2Q] replay 124/128 a7al2q_f77b6def03c43da1
+[A7AL-2Q] replay 125/128 a7al2q_2117241ae3758f6c
+[A7AL-2Q] replay 126/128 a7al2q_40806f08f3894855
+[A7AL-2Q] replay 127/128 a7al2q_d1fb9280d2477aa4
+[A7AL-2Q] replay 128/128 a7al2q_7302f990e738fbea
+{
+  "authorizes_a7al2r_local_forensic": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "controls": [
+    "one_bar_lag",
+    "wrong_lag_future_24h",
+    "wrong_lag_stale_168h",
+    "same_family_random"
+  ],
+  "controls_deferred_to_deep_forensic": [
+    "time_shuffle",
+    "symbol_shuffle"
+  ],
+  "cost_bps": [
+    2.0,
+    5.0,
+    10.0
+  ],
+  "decision": "PASS_A7AL2Q_LOCAL_OI_PRICE_CANDIDATES_FOUND_EXECUTION_HOLD",
+  "decision_counts": {
+    "A7AL2Q_LOCAL_OI_PRICE_DIAGNOSTIC_CANDIDATE": 14,
+    "HOLD_A7AL2Q_CONTROL_DOMINATED": 114
+  },
+  "deep_audit": 16,
+  "diagnostic_candidate_count": 14,
+  "executed_fast_replay": 128,
+  "executes_alpha_proof": false,
+  "executes_local_search": true,
+  "executes_training": false,
+  "fields_loaded": [
+    "index_close",
+    "mark_close",
+    "open_interest_last",
+    "open_interest_mean",
+    "open_interest_value_last",
+    "open_interest_value_mean",
+    "trade_close"
+  ],
+  "generated_at": "2026-05-28T14:17:23Z",
+  "generated_total": 4000,
+  "input_contract": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\runtime\\a7al2p2_local_oi_price_search_contract\\a7al2p2_manifest.json",
+  "latency_policy": "field-native; no blanket +2h stress; label_t1 and label_t2 are audit labels",
+  "latent_coverage": {
+    "deferred_to": "A7AL-2R local deep forensic",
+    "latent_audit_cap": 16
+  },
+  "orientation_fit_split": "train_2024",
+  "runtime_seconds": 1718.326,
+  "seed_candidates": [
+    "a7al2k_046e806368e99c76",
+    "a7al2k_0a247ec03472983b"
+  ],
+  "selected_for_fast_replay": 128,
+  "selected_skeleton_count": 11,
+  "selected_top_skeleton_share": 0.15625,
+  "strict_symbols": 181,
+  "timestamps": 21025,
+  "uses_may_for_generation": false,
+  "uses_may_for_mutation": false,
+  "uses_may_for_ranking": false,
+  "uses_may_for_selection": false,
+  "warnings": [
+    "control_dominated_candidates_rejected"
+  ]
+}
+a7al2q_exit_code=0 
+[A7AL-2R] 1/14 a7al2q_69d146749c30da3c
+[A7AL-2R] 2/14 a7al2q_3abec814a5c6d0df
+[A7AL-2R] 3/14 a7al2q_1378ff7d2322adee
+[A7AL-2R] 4/14 a7al2q_a4993fe3273bf0c8
+[A7AL-2R] 5/14 a7al2q_0de0d41346741bd1
+[A7AL-2R] 6/14 a7al2q_5da100b2822dc1a6
+[A7AL-2R] 7/14 a7al2q_132c2a7c6c4a9142
+[A7AL-2R] 8/14 a7al2q_f00f22bbcc48dc2c
+[A7AL-2R] 9/14 a7al2q_d6f7ebc0dbbdda7a
+[A7AL-2R] 10/14 a7al2q_6671d1fac5e57efe
+[A7AL-2R] 11/14 a7al2q_33d51890b0068eb6
+[A7AL-2R] 12/14 a7al2q_100786d679e5b988
+[A7AL-2R] 13/14 a7al2q_2ec6136e6ff32eb3
+[A7AL-2R] 14/14 a7al2q_ca72f5849cff347a
+{
+  "authorizes_a7al2s_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "candidate_count": 14,
+  "controls": [
+    "wrong_lag_future_24h",
+    "wrong_lag_stale_168h",
+    "same_family_random",
+    "time_shuffle",
+    "symbol_shuffle"
+  ],
+  "cost_bps": [
+    2.0,
+    5.0,
+    10.0
+  ],
+  "decision": "PASS_A7AL2R_LOCAL_FORENSIC_CANDIDATES_READY_FOR_A7AL2S_CONTRACT",
+  "decision_counts": {
+    "A7AL2R_LOCAL_FORENSIC_PASS": 10,
+    "HOLD_A7AL2R_CONTROL_DOMINATED": 1,
+    "HOLD_A7AL2R_LATENT_FRAGILE": 3
+  },
+  "entry_labels": [
+    "label_t1_to_t25",
+    "label_t2_to_t26"
+  ],
+  "executes_alpha_proof": false,
+  "executes_search": false,
+  "executes_training": false,
+  "fields_loaded": [
+    "index_close",
+    "mark_close",
+    "open_interest_value_last",
+    "open_interest_value_mean",
+    "trade_close"
+  ],
+  "forensic_pass_count": 10,
+  "generated_at": "2026-05-28T14:27:47Z",
+  "input_q_manifest": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\runtime\\a7al2q_local_oi_price_formula_search\\a7al2q_manifest.json",
+  "latent_coverage": {
+    "loaded_rows": 3692531,
+    "state_non_missing_share": 0.9703079075817397,
+    "state_panel_path": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_latent_state_features_v1_20260527.parquet",
+    "state_seen_in_train_share": 0.7661959913546751
+  },
+  "runtime_seconds": 623.811,
+  "strict_symbols": 181,
+  "timestamps": 21025,
+  "uses_may_for_generation": false,
+  "uses_may_for_mutation": false,
+  "uses_may_for_ranking": false,
+  "uses_may_for_selection": false,
+  "warnings": [
+    "control_dominated_candidates_rejected"
+  ]
+}
+a7al2r_exit_code=0 
