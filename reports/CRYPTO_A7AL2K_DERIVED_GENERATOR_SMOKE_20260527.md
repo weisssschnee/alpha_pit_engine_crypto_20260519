@@ -1,6 +1,6 @@
 # CRYPTO A7AL-2K Derived Generator Smoke
 
-Generated: 2026-05-27T10:35:01Z
+Generated: 2026-05-28T01:45:32Z
 
 ## Decision
 
@@ -21,7 +21,7 @@ PASS_A7AL2K_DERIVED_GENERATOR_SMOKE_READY_FOR_A7AL2L
   "decision": "PASS_A7AL2K_DERIVED_GENERATOR_SMOKE_READY_FOR_A7AL2L",
   "executes_formula_generation": true,
   "executes_replay": false,
-  "generated_at": "2026-05-27T10:35:01Z",
+  "generated_at": "2026-05-28T01:45:32Z",
   "generated_candidates": 8000,
   "policy": "derived formulas are allowed broadly; label/PIT/control requirements are not relaxed",
   "selected_cell_count": 5,

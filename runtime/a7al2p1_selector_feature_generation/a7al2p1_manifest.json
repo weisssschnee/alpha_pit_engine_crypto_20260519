@@ -3,19 +3,20 @@
   "authorizes_alpha_proof": false,
   "authorizes_formula_search_execution": false,
   "authorizes_shadow_paper_live": false,
-  "blockers": [],
-  "candidate_count": 10,
+  "blockers": [
+    "no_selector_candidate_survives_timevarying_latent_gate"
+  ],
+  "candidate_count": 3,
   "candidate_scope": "A7AL-2L replay-preflight clue candidates only",
-  "decision": "PASS_A7AL2P1_SELECTOR_FEATURES_READY_FOR_P0R_RETRY",
+  "decision": "HOLD_A7AL2P1_SELECTOR_FEATURES_BLOCKED",
   "decision_counts": {
-    "A7AL2P1_SELECTOR_DIAGNOSTIC_ELIGIBLE": 2,
-    "HOLD_CONTROL_DOMINATED": 6,
-    "HOLD_TIMEVARYING_LATENT_FRAGILE": 2
+    "HOLD_CONTROL_DOMINATED": 2,
+    "HOLD_TIMEVARYING_LATENT_FRAGILE": 1
   },
   "executes_alpha_proof": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-27T17:56:14Z",
+  "generated_at": "2026-05-28T02:37:26Z",
   "latent_coverage": {
     "loaded_rows": 3692531,
     "state_non_missing_share": 0.9703079075817397,
@@ -23,7 +24,9 @@
     "state_seen_in_train_share": 0.7661959913546751
   },
   "required_next": "If eligible_count > 0, run a selector-reweighted mini replay/P0R retry; otherwise regenerate with time-varying latent survival in selector.",
-  "selector_eligible_count": 2,
+  "selector_eligible_count": 0,
   "uses_may_in_selector": false,
-  "warnings": []
+  "warnings": [
+    "selector_eligible_pool_below_2"
+  ]
 }

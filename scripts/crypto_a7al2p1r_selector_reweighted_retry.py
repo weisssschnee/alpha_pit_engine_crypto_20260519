@@ -217,7 +217,92 @@ def main() -> None:
     features = pd.read_csv(A7AL2P1_FEATURES)
     candidates = features[features["selector_decision"].eq("A7AL2P1_SELECTOR_DIAGNOSTIC_ELIGIBLE")].copy()
     if candidates.empty:
-        raise SystemExit("no A7AL-2P1 selector-eligible candidates")
+        manifest = {
+            "generated_at": utc_now(),
+            "decision": "HOLD_A7AL2P1R_NO_SELECTOR_ELIGIBLE_CANDIDATES",
+            "input": str(A7AL2P1_FEATURES),
+            "candidate_count": 0,
+            "diagnostic_pass_count": 0,
+            "decision_counts": {},
+            "blockers": ["no_selector_eligible_candidates"],
+            "warnings": [],
+            "executes_training": False,
+            "executes_search": False,
+            "executes_alpha_proof": False,
+            "uses_may_for_selection": False,
+            "authorizes_a7al2p_contract": False,
+            "authorizes_formula_search_execution": False,
+            "authorizes_alpha_proof": False,
+            "authorizes_shadow_paper_live": False,
+            "required_next": "regenerate or adjust non-May selector inputs; do not use stale P1R pass artifacts",
+        }
+        empty_decisions = pd.DataFrame(
+            columns=[
+                "candidate_id",
+                "decision",
+                "reasons",
+                "warnings",
+                "pass_variants",
+                "net_2bps_pass_variants",
+                "neutralized_pass_variant_count",
+                "recent_turnover",
+                "control_ratio_premay_max_by_split",
+                "latent_positive_premay_splits",
+            ]
+        )
+        empty_split = pd.DataFrame(
+            columns=[
+                "candidate_id",
+                "variant",
+                "split",
+                "n_dates",
+                "mean_spread_24h",
+                "spread_tstat",
+                "positive_spread_rate",
+                "avg_one_way_turnover",
+                "avg_top_count",
+                "avg_bottom_count",
+                "net_mean_spread_2bps",
+                "net_mean_spread_5bps",
+                "net_mean_spread_10bps",
+            ]
+        )
+        empty_split.to_csv(OUT_DIR / "a7al2p1r_variant_split_summary.csv", index=False)
+        empty_decisions.to_csv(OUT_DIR / "a7al2p1r_decision_record.csv", index=False)
+        pd.DataFrame(columns=["candidate_id", "error"]).to_csv(OUT_DIR / "a7al2p1r_eval_errors.csv", index=False)
+        write_json(OUT_DIR / "a7al2p1r_manifest.json", manifest)
+        report = f"""# CRYPTO A7AL-2P1R Selector-Reweighted Retry
+
+Generated: {manifest["generated_at"]}
+
+## Decision
+
+```text
+{manifest["decision"]}
+```
+
+No A7AL-2P1 selector-eligible candidates were available. This file intentionally replaces any previous P1R pass artifacts so stale selector output cannot be used downstream.
+
+## Manifest
+
+```json
+{json.dumps(manifest, indent=2, sort_keys=True)}
+```
+
+## Boundary
+
+```text
+Not authorized:
+  A7AL-2P contract
+  formula search execution
+  alpha proof
+  shadow / paper / live
+```
+"""
+        REPORT.parent.mkdir(parents=True, exist_ok=True)
+        REPORT.write_text(report, encoding="utf-8")
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return
 
     fields = {"trade_close"}
     for text in candidates["expression"].dropna().astype(str):

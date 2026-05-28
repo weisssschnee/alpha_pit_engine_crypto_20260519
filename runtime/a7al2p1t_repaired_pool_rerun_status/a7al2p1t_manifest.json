@@ -1,0 +1,31 @@
+{
+  "a7al2k_generated_at": "2026-05-28T01:45:32Z",
+  "a7al2k_generated_candidates": 8000,
+  "a7al2k_selected_for_replay": 768,
+  "a7al2l_clue_count": 3,
+  "a7al2l_generated_at": "2026-05-28T02:32:25Z",
+  "a7al2l_replay_cap": 64,
+  "a7al2p1_candidate_count": 3,
+  "a7al2p1_decision_counts": {
+    "HOLD_CONTROL_DOMINATED": 2,
+    "HOLD_TIMEVARYING_LATENT_FRAGILE": 1
+  },
+  "a7al2p1_generated_at": "2026-05-28T02:37:26Z",
+  "a7al2p1_selector_eligible_count": 0,
+  "a7al2p1r_decision": "HOLD_A7AL2P1R_NO_SELECTOR_ELIGIBLE_CANDIDATES",
+  "a7al2p1r_diagnostic_pass_count": 0,
+  "a7al2p1r_generated_at": "2026-05-28T02:38:13Z",
+  "authorizes_a7al2p2": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_selector_eligible_candidates_after_repaired_pool_rerun"
+  ],
+  "decision": "HOLD_A7AL2P1T_REPAIRED_POOL_NO_SELECTOR_ELIGIBLE_CANDIDATES",
+  "executes_alpha_proof": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-28T02:40:45Z",
+  "required_next": "regenerate or adjust non-May selector/generator with time-varying latent survival and control dominance earlier in selection; do not draft A7AL-2P2 from the old P1/P1R pool"
+}

@@ -1,6 +1,6 @@
 # CRYPTO A7AL-2L Fast Derived Replay Preflight
 
-Generated: 2026-05-27T12:56:03Z
+Generated: 2026-05-28T02:32:25Z
 
 ## Decision
 
@@ -29,23 +29,23 @@ This is a matrix-level replay preflight on A7AL-2K derived-tolerant generated ca
   ],
   "decision": "PASS_A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUES_FOUND_EXECUTION_HOLD",
   "decision_counts": {
-    "A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUE": 10,
-    "HOLD_A7AL2L_CONTROL_DOMINATED": 82,
-    "HOLD_A7AL2L_ONE_BAR_LAG_FRAGILE": 5,
-    "HOLD_A7AL2L_UNSTABLE_PRE_MAY": 95
+    "A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUE": 3,
+    "HOLD_A7AL2L_CONTROL_DOMINATED": 22,
+    "HOLD_A7AL2L_ONE_BAR_LAG_FRAGILE": 2,
+    "HOLD_A7AL2L_UNSTABLE_PRE_MAY": 37
   },
-  "derived_replay_preflight_clue_count": 10,
+  "derived_replay_preflight_clue_count": 3,
   "engine": "matrix_fast_preflight",
   "executes_alpha_proof": false,
   "executes_formula_generation": false,
   "executes_replay_preflight": true,
-  "generated_at": "2026-05-27T12:56:03Z",
+  "generated_at": "2026-05-28T02:32:25Z",
   "input_base": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v2_20260527",
   "matrix_rows": 3805525,
   "max_symbols_env": 0,
-  "replay_cap": 192,
-  "runtime_seconds": 3715.208,
-  "selected_from_a7al2k": 192,
+  "replay_cap": 64,
+  "runtime_seconds": 2800.023,
+  "selected_from_a7al2k": 64,
   "strict_symbols": 181,
   "timestamps": 21025,
   "warnings": [
@@ -58,10 +58,10 @@ This is a matrix-level replay preflight on A7AL-2K derived-tolerant generated ca
 
 | decision                             |   count |
 |:-------------------------------------|--------:|
-| HOLD_A7AL2L_UNSTABLE_PRE_MAY         |      95 |
-| HOLD_A7AL2L_CONTROL_DOMINATED        |      82 |
-| A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUE |      10 |
-| HOLD_A7AL2L_ONE_BAR_LAG_FRAGILE      |       5 |
+| HOLD_A7AL2L_UNSTABLE_PRE_MAY         |      37 |
+| HOLD_A7AL2L_CONTROL_DOMINATED        |      22 |
+| A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUE |       3 |
+| HOLD_A7AL2L_ONE_BAR_LAG_FRAGILE      |       2 |
 
 ## Candidate Decisions
 
@@ -131,31 +131,12 @@ This is a matrix-level replay preflight on A7AL-2K derived-tolerant generated ca
 | a7al2k_0c53e43cfdaf2667 | J1_vol_range_structure      | derived_vol_range_state     | volatility              | HOLD_A7AL2L_CONTROL_DOMINATED        |                  0.0011097   |            0.00093459  |              0.00226639  |                 -0.000812664 |                 0.00224366  |                            16.1462   |
 | a7al2k_0505415561457923 | J2_liquidity_lifecycle      | derived_liquidity_lifecycle | liquidity               | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                 -0.000583847 |            0.000325357 |              0.000760358 |                 -0.000911231 |                 0.000695134 |                            12.3296   |
 | a7al2k_0308f7c0d2fce66c | J3_basis_funding_derived    | derived_basis_funding_state | funding|price           | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                nan           |          nan           |            nan           |                nan           |               nan           |                           nan        |
-| a7al2k_069228d66ec75500 | J4_upper_regime_interaction | derived_upper_regime_proxy  | basis|liquidity         | HOLD_A7AL2L_CONTROL_DOMINATED        |                 -0.00218638  |           -0.00269748  |             -0.00352425  |                 -0.00658047  |                -0.00343637  |                             1.56753  |
-| a7al2k_004eaca76fe52c4d | J0_oi_derived_state         | derived_oi_price_state      | open_interest           | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                 -0.000163563 |            0.000357072 |              8.16918e-05 |                 -0.00111329  |                 8.42199e-06 |                            35.3409   |
-| a7al2k_0c70d7d54223473d | J1_vol_range_structure      | derived_vol_range_state     | volatility              | HOLD_A7AL2L_CONTROL_DOMINATED        |                 -0.000118869 |           -0.00140951  |             -0.00310724  |                  0.00276219  |                -0.00303243  |                            64.7153   |
-| a7al2k_020f72112dce28fc | J2_liquidity_lifecycle      | derived_liquidity_lifecycle | liquidity               | HOLD_A7AL2L_CONTROL_DOMINATED        |                 -0.00182223  |           -0.0025956   |             -0.00488064  |                 -4.18032e-05 |                -0.0048266   |                             8.04177  |
-| a7al2k_05f22ed2f10d828a | J3_basis_funding_derived    | derived_basis_funding_state | basis|funding           | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                nan           |          nan           |            nan           |                nan           |               nan           |                           nan        |
-| a7al2k_0a0902e17932fe44 | J4_upper_regime_interaction | derived_upper_regime_proxy  | liquidity|price         | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                  0.000346657 |           -0.000587912 |             -0.00184977  |                 -0.00469936  |                -0.00188428  |                             6.4965   |
-| a7al2k_00a996ae217b0ade | J0_oi_derived_state         | derived_oi_price_state      | open_interest           | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                  0.000172709 |            0.00073751  |             -0.000177722 |                  0.00259497  |                -0.000140731 |                            80.1186   |
-| a7al2k_157ffd1c7429cc92 | J1_vol_range_structure      | derived_vol_range_state     | volatility              | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                 -0.00165581  |            9.44764e-05 |             -0.0011561   |                  0.00189133  |                -0.00109515  |                           283.533    |
-| a7al2k_02b68dd5d49d90ca | J2_liquidity_lifecycle      | derived_liquidity_lifecycle | liquidity               | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                 -0.000876877 |            0.000377454 |             -0.000743514 |                  0.000137721 |                -0.00075618  |                            62.575    |
-| a7al2k_0a5aea93d2cd0108 | J3_basis_funding_derived    | derived_basis_funding_state | funding|price           | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                nan           |          nan           |            nan           |                nan           |               nan           |                           nan        |
-| a7al2k_0c438090d7c27a37 | J4_upper_regime_interaction | derived_upper_regime_proxy  | liquidity|price         | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                  0.000494895 |           -0.00107248  |              0.00069265  |                 -0.00115351  |                 0.000629156 |                             5.23578  |
-| a7al2k_03b591e0132f649e | J0_oi_derived_state         | derived_oi_price_state      | open_interest           | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                 -0.0012201   |            0.00079428  |              0.000987986 |                  0.00357271  |                 0.0010373   |                            18.9967   |
-| a7al2k_17b43bd92ea7ec2a | J1_vol_range_structure      | derived_vol_range_state     | volatility              | HOLD_A7AL2L_CONTROL_DOMINATED        |                 -0.000211508 |           -0.000479941 |             -0.00383577  |                  0.00192326  |                -0.00370557  |                            88.2539   |
-| a7al2k_04da18b1c9dacc8b | J2_liquidity_lifecycle      | derived_liquidity_lifecycle | liquidity               | HOLD_A7AL2L_CONTROL_DOMINATED        |                 -0.00158963  |           -0.00185826  |             -0.0039932   |                  0.000638858 |                -0.00401752  |                             6.34978  |
-| a7al2k_0c80a3240bda9be5 | J3_basis_funding_derived    | derived_basis_funding_state | basis|funding           | HOLD_A7AL2L_UNSTABLE_PRE_MAY         |                nan           |          nan           |            nan           |                nan           |               nan           |                           nan        |
-| a7al2k_0c93194149ba3e72 | J4_upper_regime_interaction | derived_upper_regime_proxy  | basis|liquidity         | HOLD_A7AL2L_CONTROL_DOMINATED        |                 -0.00218509  |           -0.00324995  |             -0.00360455  |                 -0.00688291  |                -0.0034549   |                             1.82369  |
 
 ## Boundary
 
 ```text
 Allowed interpretation:
   A7AL2L_DERIVED_REPLAY_PREFLIGHT_CLUE means a derived structure deserves controlled follow-up.
-
-Rejected controls:
-  Candidates dominated by wrong-lag / shuffle / placebo controls are rejected and recorded as warnings, not blockers, when clean clues still exist.
 
 Not authorized:
   alpha proof
