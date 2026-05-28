@@ -1,0 +1,12 @@
+item,status,reason
+same_direct_OI_price_objective_rerun,forbidden,superseded by A7AL-2X0 and zero stress-clean selected candidates
+direct_OI_price_expansion,forbidden,direct OI x price is stress-vetoed weak prior only
+funding_only_wrapper,forbidden,"must be interaction, not standalone wrapper"
+basis_only_wrapper,forbidden,"must be interaction, not standalone wrapper"
+liquidity_volatility_old_family,forbidden,previous crypto path produced cluster/stress failures
+A7V_activity_liquidity_self_reproduction_family,forbidden,A7V family failed control/May attribution
+stale_J5_overlay_aliases,forbidden,canonical alias audit required; no stale fallback
+raw_OKX_Binance_direct_price_comparison,forbidden,contract-unit canonical fields only
+full_open_FormulaGenV2_grammar,forbidden,A7AL-2X is not an open grammar search
+May_informed_regime_mask,forbidden,May stress-only policy
+May_in_ranking_selector_mutation_generation_weight_update,forbidden,May allowed only for post-selection veto/attribution

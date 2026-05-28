@@ -1,0 +1,10 @@
+{
+  "same_field_family_pair_share": "<= 0.35",
+  "same_production_key_share": "<= 0.20",
+  "same_skeleton_share": "<= 0.25",
+  "selected_max_pairwise_corr": "<= 0.80",
+  "selected_signal_vector_clusters": ">= min(selected_count, 4)",
+  "selected_top_signal_vector_cluster_share": "<= 0.35",
+  "small_pool_rule": "for selected_count <= 4, selected candidates should be in distinct signal-vector clusters unless no eligible alternatives exist",
+  "uses_may_for_cluster": false
+}

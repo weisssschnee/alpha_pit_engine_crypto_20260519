@@ -1,0 +1,19 @@
+{
+  "allowed": [
+    "post_selection_veto",
+    "failure_attribution",
+    "stress_report_label"
+  ],
+  "forbidden": [
+    "ranking",
+    "selector_score",
+    "threshold_tuning",
+    "weight_selection",
+    "generation",
+    "mutation",
+    "lane_allocation",
+    "training_target",
+    "regime_mask"
+  ],
+  "policy_source": "A7AL-2X0 authorization arbitration"
+}

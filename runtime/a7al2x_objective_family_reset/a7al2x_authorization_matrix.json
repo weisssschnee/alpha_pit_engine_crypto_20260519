@@ -1,0 +1,11 @@
+{
+  "a7al2q_local_execution": "NOT_AUTHORIZED",
+  "a7al2x1_dry_rerank": "AUTHORIZED",
+  "a7al2y_generation": "NOT_AUTHORIZED",
+  "alpha_proof": "NOT_AUTHORIZED",
+  "decision": "PASS_A7AL2X_OBJECTIVE_FAMILY_RESET_CONTRACT_READY_FOR_A7AL2X1",
+  "direct_oi_price_expansion": "NOT_AUTHORIZED",
+  "large_formula_search": "NOT_AUTHORIZED",
+  "same_objective_rerun": "NOT_AUTHORIZED",
+  "shadow_paper_live": "NOT_AUTHORIZED"
+}

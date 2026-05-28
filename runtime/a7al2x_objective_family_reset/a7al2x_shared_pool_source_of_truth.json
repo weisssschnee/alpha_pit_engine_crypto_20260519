@@ -1,0 +1,15 @@
+{
+  "a7al2p2_status": "SUPERSEDED_DIAGNOSTIC_CONTRACT",
+  "a7al2q_local_execution": "NOT_AUTHORIZED",
+  "forbidden_inputs": [
+    "direct A7AL-2P2 seed pool reads",
+    "direct stale A7AL-2L or A7AL-2O single-stage artifact reads",
+    "selector bypassing A7AR-7 shared candidate pool"
+  ],
+  "required_inputs": {
+    "authorization_arbitration": "runtime\\a7al2x0_authorization_arbitration\\a7al2x0_authorization_matrix.json",
+    "selector_diversity_repair_manifest": "runtime\\a7al2w_signal_vector_selector_repair\\a7al2w_manifest.json",
+    "shared_candidate_pool": "runtime\\a7ar7_shared_candidate_pool\\a7ar7_shared_candidate_pool.csv",
+    "signal_vector_cluster_registry": "runtime\\a7ar8_signal_vector_cluster_registry\\a7ar8_signal_cluster_registry.csv"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "allowed_selector_features": {
+    "control_dominance": [
+      "matched_control_margin",
+      "wrong_lag_margin",
+      "shuffle_control_margin"
+    ],
+    "diversity": [
+      "signal_vector_cluster_id",
+      "field_family_pair",
+      "skeleton_key",
+      "production_key"
+    ],
+    "latency_cost": [
+      "one_bar_lag_survival",
+      "cost_proxy_survival",
+      "turnover_proxy"
+    ],
+    "neutralization": [
+      "timevarying_latent_neutral_survival",
+      "liquidity_tier_neutral_survival",
+      "meme_multiplier_neutral_survival"
+    ],
+    "replay_alignment": [
+      "pre_may_replay_alignment",
+      "label_entry_alignment",
+      "split_dispersion"
+    ],
+    "robust_statistics": [
+      "newey_west_tstat",
+      "block_bootstrap_tstat",
+      "nonoverlap_offset_tstat"
+    ]
+  },
+  "forbidden_selector_features": [
+    "May_return",
+    "May_residual",
+    "May_pass_fail",
+    "May_stress_margin",
+    "May_tuned_threshold",
+    "promotion_label",
+    "alpha_proof_label",
+    "shadow_paper_live_label"
+  ],
+  "hard_gates": {
+    "control_ratio_ge_1": "reject",
+    "same_signal_vector_cluster_over_cap": "reject_or_downrank",
+    "same_skeleton_over_cap": "reject_or_downrank",
+    "timevarying_latent_neutral_fail": "reject",
+    "wrong_lag_or_shuffle_control_stronger": "reject"
+  },
+  "uses_may_for_selector": false
+}
