@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -9,18 +10,26 @@ import pandas as pd
 
 
 REPO = Path(__file__).resolve().parents[1]
-OUT_DIR = REPO / "runtime" / "a7al2t_may_stress_failure_attribution"
-REPORT = REPO / "reports" / "CRYPTO_A7AL2T_MAY_STRESS_FAILURE_ATTRIBUTION_20260528.md"
+CONTEXT = os.environ.get("A7AL2T_CONTEXT", "local").strip() or "local"
+OUT_DIR = Path(os.environ.get("A7AL2T_OUT_DIR", str(REPO / "runtime" / "a7al2t_may_stress_failure_attribution")))
+REPORT = Path(
+    os.environ.get(
+        "A7AL2T_REPORT",
+        str(REPO / "reports" / "CRYPTO_A7AL2T_MAY_STRESS_FAILURE_ATTRIBUTION_20260528.md"),
+    )
+)
 
-A7AL2S_MANIFEST = REPO / "runtime" / "a7al2s_local_followup_contract" / "a7al2s_manifest.json"
-A7AL2S_TIERS = REPO / "runtime" / "a7al2s_local_followup_contract" / "a7al2s_candidate_tiers.csv"
-A7AL2R_INPUT = REPO / "runtime" / "a7al2r_local_forensic" / "a7al2r_input_candidates.csv"
-A7AL2R_VARIANTS = REPO / "runtime" / "a7al2r_local_forensic" / "a7al2r_variant_metrics.csv"
-A7AL2R_CONTROL = REPO / "runtime" / "a7al2r_local_forensic" / "a7al2r_control_dominance.csv"
-A7AL2R_SYMBOL = REPO / "runtime" / "a7al2r_local_forensic" / "a7al2r_symbol_contribution.csv"
-A7AL2R_MONTH = REPO / "runtime" / "a7al2r_local_forensic" / "a7al2r_month_contribution.csv"
-A7AL2R_LATENT = REPO / "runtime" / "a7al2r_local_forensic" / "a7al2r_latent_state_contribution.csv"
-A7AL2R_TOP_HOURS = REPO / "runtime" / "a7al2r_local_forensic" / "a7al2r_top_gain_loss_hours.csv"
+A7AL2S_BASE = Path(os.environ.get("A7AL2S_BASE_DIR", str(REPO / "runtime" / "a7al2s_local_followup_contract")))
+A7AL2R_BASE = Path(os.environ.get("A7AL2R_BASE_DIR", str(REPO / "runtime" / "a7al2r_local_forensic")))
+A7AL2S_MANIFEST = A7AL2S_BASE / "a7al2s_manifest.json"
+A7AL2S_TIERS = A7AL2S_BASE / "a7al2s_candidate_tiers.csv"
+A7AL2R_INPUT = A7AL2R_BASE / "a7al2r_input_candidates.csv"
+A7AL2R_VARIANTS = A7AL2R_BASE / "a7al2r_variant_metrics.csv"
+A7AL2R_CONTROL = A7AL2R_BASE / "a7al2r_control_dominance.csv"
+A7AL2R_SYMBOL = A7AL2R_BASE / "a7al2r_symbol_contribution.csv"
+A7AL2R_MONTH = A7AL2R_BASE / "a7al2r_month_contribution.csv"
+A7AL2R_LATENT = A7AL2R_BASE / "a7al2r_latent_state_contribution.csv"
+A7AL2R_TOP_HOURS = A7AL2R_BASE / "a7al2r_top_gain_loss_hours.csv"
 
 EVAL_PREMAY_SPLITS = ["validation_2025H1", "test_2025H2", "recent_oos_2026JanApr"]
 MAY_SPLIT = "known_may2026_stress"
@@ -194,8 +203,10 @@ def main() -> None:
         [
             {
                 "action": "company_full_a7al2q2r",
-                "status": "PREFERRED_NEXT_IF_COMPANY_PATH_AVAILABLE",
-                "reason": "local run only deep-audited 16; full 128 replay should test whether May failure is local-pilot artifact",
+                "status": "COMPLETED" if CONTEXT == "company_full" else "PREFERRED_NEXT_IF_COMPANY_PATH_AVAILABLE",
+                "reason": "company full run is the current input"
+                if CONTEXT == "company_full"
+                else "local run only deep-audited 16; full 128 replay should test whether May failure is local-pilot artifact",
             },
             {
                 "action": "local_mutation_expansion",
@@ -218,15 +229,19 @@ def main() -> None:
     sign_flip_count = int(candidate_failure["may_sign_flip"].sum())
     may_control_dominated_count = int((candidate_failure["may_max_control_ratio"] >= 1.0).sum())
     decision = "HOLD_A7AL2T_MAY_STRESS_FAILURE_CONFIRMED_NO_EXPANSION"
+    blocker_prefix = "all_company_full_candidates" if CONTEXT == "company_full" else "all_local_candidates"
     manifest = {
         "generated_at": utc_now(),
+        "context": CONTEXT,
         "decision": decision,
         "input_a7al2s_decision": s_manifest.get("decision"),
+        "input_a7al2s_base_dir": str(A7AL2S_BASE),
+        "input_a7al2r_base_dir": str(A7AL2R_BASE),
         "candidate_entry_rows": int(len(candidate_failure)),
         "unique_candidates": int(candidate_failure["candidate_id"].nunique()),
         "sign_flip_rows": sign_flip_count,
         "may_control_dominated_rows": may_control_dominated_count,
-        "authorizes_company_full_a7al2q2r": True,
+        "authorizes_company_full_a7al2q2r": CONTEXT != "company_full",
         "authorizes_a7al2u_objective_repair_contract": True,
         "authorizes_local_expansion": False,
         "authorizes_large_search": False,
@@ -238,10 +253,12 @@ def main() -> None:
         "uses_may_for_ranking": False,
         "uses_may_for_mutation": False,
         "blockers": [
-            "all_local_candidates_may_sign_flip",
-            "all_local_candidates_may_control_dominated",
+            f"{blocker_prefix}_may_sign_flip",
+            f"{blocker_prefix}_may_control_dominated",
         ],
-        "required_next": "Prefer company full A7AL-2Q/2R. If unavailable, draft A7AL-2U objective-repair contract; do not run local expansion.",
+        "required_next": "Draft A7AL-2U objective/selector repair contract from company full failure attribution; do not run expansion."
+        if CONTEXT == "company_full"
+        else "Prefer company full A7AL-2Q/2R. If unavailable, draft A7AL-2U objective-repair contract; do not run local expansion.",
     }
 
     candidate_failure.to_csv(OUT_DIR / "a7al2t_candidate_failure_summary.csv", index=False)
@@ -254,7 +271,8 @@ def main() -> None:
     action_matrix.to_csv(OUT_DIR / "a7al2t_action_matrix.csv", index=False)
     write_json(OUT_DIR / "a7al2t_manifest.json", manifest)
 
-    report = f"""# CRYPTO A7AL-2T May-Stress Failure Attribution
+    title = "CRYPTO A7AL-2T Company May-Stress Failure Attribution" if CONTEXT == "company_full" else "CRYPTO A7AL-2T May-Stress Failure Attribution"
+    report = f"""# {title}
 
 Generated: {manifest["generated_at"]}
 
@@ -300,8 +318,8 @@ This stage performs attribution only. It uses May as a post-selection stress/fai
 
 ```text
 Authorized:
-  company full A7AL-2Q/2R if company path is available
   A7AL-2U objective-repair contract drafting only
+  company full A7AL-2Q/2R if company path is available only for local context
 
 Not authorized:
   local mutation expansion

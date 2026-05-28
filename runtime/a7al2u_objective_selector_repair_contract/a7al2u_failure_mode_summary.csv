@@ -1,0 +1,9 @@
+metric,value,interpretation
+q_generated_total,4000,local OI x price search budget executed on company machine
+q_executed_fast_replay,128,fast replay candidates scored before deep forensic
+q_diagnostic_candidates,14,pre-May diagnostic candidates before deep forensic
+q_control_dominated,114,selector allowed many variants that controls could explain
+r_forensic_pass,10,pre-May deep forensic pass count
+t_unique_candidates,14,company full pool sent to May stress attribution
+t_sign_flip_rows,28,all candidate-entry rows flip sign in May
+t_may_control_dominated_rows,28,all candidate-entry rows are weaker than matched controls in May

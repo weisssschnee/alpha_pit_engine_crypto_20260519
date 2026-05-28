@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -9,13 +10,20 @@ import pandas as pd
 
 
 REPO = Path(__file__).resolve().parents[1]
-OUT_DIR = REPO / "runtime" / "a7al2s_local_followup_contract"
-REPORT = REPO / "reports" / "CRYPTO_A7AL2S_LOCAL_FOLLOWUP_CONTRACT_20260528.md"
+CONTEXT = os.environ.get("A7AL2S_CONTEXT", "local").strip() or "local"
+OUT_DIR = Path(os.environ.get("A7AL2S_OUT_DIR", str(REPO / "runtime" / "a7al2s_local_followup_contract")))
+REPORT = Path(
+    os.environ.get(
+        "A7AL2S_REPORT",
+        str(REPO / "reports" / "CRYPTO_A7AL2S_LOCAL_FOLLOWUP_CONTRACT_20260528.md"),
+    )
+)
 
-A7AL2R_MANIFEST = REPO / "runtime" / "a7al2r_local_forensic" / "a7al2r_manifest.json"
-A7AL2R_DECISIONS = REPO / "runtime" / "a7al2r_local_forensic" / "a7al2r_decision_record.csv"
-A7AL2R_CONTROL = REPO / "runtime" / "a7al2r_local_forensic" / "a7al2r_control_dominance.csv"
-A7AL2R_VARIANTS = REPO / "runtime" / "a7al2r_local_forensic" / "a7al2r_variant_metrics.csv"
+A7AL2R_BASE = Path(os.environ.get("A7AL2R_BASE_DIR", str(REPO / "runtime" / "a7al2r_local_forensic")))
+A7AL2R_MANIFEST = A7AL2R_BASE / "a7al2r_manifest.json"
+A7AL2R_DECISIONS = A7AL2R_BASE / "a7al2r_decision_record.csv"
+A7AL2R_CONTROL = A7AL2R_BASE / "a7al2r_control_dominance.csv"
+A7AL2R_VARIANTS = A7AL2R_BASE / "a7al2r_variant_metrics.csv"
 
 
 def utc_now() -> str:
@@ -92,51 +100,88 @@ def main() -> None:
     tiers["reasons"] = tiers["reasons"].fillna("")
 
     def tier(row: pd.Series) -> str:
+        decision_value = str(row.get("decision", "") or "")
+        reasons = str(row.get("reasons", "") or "")
         warnings = str(row.get("warnings", "") or "")
         may_gate = str(row.get("may_gate_max", "") or "")
         if "HOLD_CONTROL_DOMINATED" in may_gate:
             stress = "may_control_dominated"
         else:
             stress = "may_stress_not_clean"
+        if decision_value != "A7AL2R_LOCAL_FORENSIC_PASS":
+            hold_reason = reasons.strip() or decision_value or "forensic_hold"
+            hold_reason = hold_reason.lower().replace("hold_a7al2r_", "").replace(" ", "_")
+            return f"hold_{hold_reason}__{stress}"
         if warnings.strip():
             return f"watchlist_control_close__{stress}"
         return f"primary_clean_premay__{stress}"
 
     tiers["a7al2s_tier"] = tiers.apply(tier, axis=1)
     tiers["allowed_as_seed_for_large_search"] = False
-    tiers["allowed_as_seed_for_company_full_qr_comparison"] = True
+    tiers["allowed_as_seed_for_company_full_qr_comparison"] = CONTEXT != "company_full"
     tiers["allowed_for_may_stress_failure_attribution"] = True
     tiers["allowed_for_local_expansion_before_full_pool"] = False
 
-    action_matrix = pd.DataFrame(
-        [
-            {
-                "action": "company_full_a7al2q2r",
-                "status": "AUTHORIZED_IF_COMPANY_PATH_AVAILABLE",
-                "reason": "local pilot executed only 16 replay candidates; full 128 replay/deep pass should be checked off local memory path",
-            },
-            {
-                "action": "a7al2t_may_stress_failure_attribution",
-                "status": "AUTHORIZED",
-                "reason": "all four local forensic candidates are pre-May positive but May/control dominated; classify failure without using May for selection",
-            },
-            {
-                "action": "local_narrow_mutation_expansion",
-                "status": "HOLD_UNTIL_FULL_QR_OR_A7AL2T",
-                "reason": "avoid amplifying a four-candidate local pilot before full-pool confirmation",
-            },
-            {
-                "action": "large_formula_search",
-                "status": "NOT_AUTHORIZED",
-                "reason": "current evidence is local diagnostic only",
-            },
-            {
-                "action": "alpha_proof_shadow_paper_live",
-                "status": "NOT_AUTHORIZED",
-                "reason": "May stress remains negative/control dominated and no append-only proof exists",
-            },
-        ]
-    )
+    if CONTEXT == "company_full":
+        action_matrix = pd.DataFrame(
+            [
+                {
+                    "action": "a7al2t_company_may_stress_attribution",
+                    "status": "AUTHORIZED",
+                    "reason": "company full run produced a 14-candidate forensic pool; classify stress behavior before any expansion",
+                },
+                {
+                    "action": "a7al2u_objective_or_selector_repair_contract",
+                    "status": "AUTHORIZED_FOR_CONTRACT_ONLY",
+                    "reason": "control dominance remains high in fast replay and must feed selector/objective repair, not direct expansion",
+                },
+                {
+                    "action": "local_narrow_mutation_expansion",
+                    "status": "NOT_AUTHORIZED",
+                    "reason": "company full results supersede local pilot and still require stress attribution",
+                },
+                {
+                    "action": "large_formula_search",
+                    "status": "NOT_AUTHORIZED",
+                    "reason": "company full run is diagnostic and not a proof object",
+                },
+                {
+                    "action": "alpha_proof_shadow_paper_live",
+                    "status": "NOT_AUTHORIZED",
+                    "reason": "no append-only proof and stress attribution remains pending",
+                },
+            ]
+        )
+    else:
+        action_matrix = pd.DataFrame(
+            [
+                {
+                    "action": "company_full_a7al2q2r",
+                    "status": "AUTHORIZED_IF_COMPANY_PATH_AVAILABLE",
+                    "reason": "local pilot executed only 16 replay candidates; full 128 replay/deep pass should be checked off local memory path",
+                },
+                {
+                    "action": "a7al2t_may_stress_failure_attribution",
+                    "status": "AUTHORIZED",
+                    "reason": "all four local forensic candidates are pre-May positive but May/control dominated; classify failure without using May for selection",
+                },
+                {
+                    "action": "local_narrow_mutation_expansion",
+                    "status": "HOLD_UNTIL_FULL_QR_OR_A7AL2T",
+                    "reason": "avoid amplifying a four-candidate local pilot before full-pool confirmation",
+                },
+                {
+                    "action": "large_formula_search",
+                    "status": "NOT_AUTHORIZED",
+                    "reason": "current evidence is local diagnostic only",
+                },
+                {
+                    "action": "alpha_proof_shadow_paper_live",
+                    "status": "NOT_AUTHORIZED",
+                    "reason": "May stress remains negative/control dominated and no append-only proof exists",
+                },
+            ]
+        )
     gates = pd.DataFrame(
         [
             {"gate": "full_pool_required", "requirement": "A7AL-2Q/2R full 128 replay on company resources before expansion"},
@@ -150,14 +195,17 @@ def main() -> None:
 
     clean_count = int(tiers["a7al2s_tier"].str.startswith("primary_clean_premay").sum())
     watch_count = int(tiers["a7al2s_tier"].str.startswith("watchlist_control_close").sum())
+    decision = "PASS_A7AL2S_COMPANY_FULL_FOLLOWUP_CONTRACT_READY" if CONTEXT == "company_full" else "PASS_A7AL2S_LOCAL_FOLLOWUP_CONTRACT_READY"
     manifest = {
         "generated_at": utc_now(),
-        "decision": "PASS_A7AL2S_LOCAL_FOLLOWUP_CONTRACT_READY",
+        "context": CONTEXT,
+        "decision": decision,
         "input_a7al2r_decision": r_manifest.get("decision"),
+        "input_a7al2r_base_dir": str(A7AL2R_BASE),
         "candidate_count": int(len(tiers)),
         "primary_clean_premay_count": clean_count,
         "watchlist_control_close_count": watch_count,
-        "authorizes_company_full_a7al2q2r": True,
+        "authorizes_company_full_a7al2q2r": CONTEXT != "company_full",
         "authorizes_a7al2t_may_stress_failure_attribution": True,
         "authorizes_local_expansion_before_full_pool": False,
         "authorizes_large_search": False,
@@ -169,7 +217,9 @@ def main() -> None:
         "uses_may_for_ranking": False,
         "uses_may_for_mutation": False,
         "blockers": [],
-        "required_next": "Run company full A7AL-2Q/2R when company data path is mounted, or run A7AL-2T May stress failure attribution; do not start large search.",
+        "required_next": "Run A7AL-2T stress attribution on this company full pool; do not start expansion or large search."
+        if CONTEXT == "company_full"
+        else "Run company full A7AL-2Q/2R when company data path is mounted, or run A7AL-2T May stress failure attribution; do not start large search.",
     }
 
     tiers.to_csv(OUT_DIR / "a7al2s_candidate_tiers.csv", index=False)
@@ -177,7 +227,8 @@ def main() -> None:
     gates.to_csv(OUT_DIR / "a7al2s_followup_gates.csv", index=False)
     write_json(OUT_DIR / "a7al2s_manifest.json", manifest)
 
-    report = f"""# CRYPTO A7AL-2S Local Follow-Up Contract
+    title = "CRYPTO A7AL-2S Company Full Follow-Up Contract" if CONTEXT == "company_full" else "CRYPTO A7AL-2S Local Follow-Up Contract"
+    report = f"""# {title}
 
 Generated: {manifest["generated_at"]}
 
@@ -187,7 +238,7 @@ Generated: {manifest["generated_at"]}
 {manifest["decision"]}
 ```
 
-This is a contract only. It executes no search, no training, no replay, and no proof. It converts the A7AL-2R local forensic result into explicit next-step authorization.
+This is a contract only. It executes no search, no training, no replay, and no proof. It converts the A7AL-2R forensic result into explicit next-step authorization.
 
 ## Manifest
 
@@ -211,8 +262,8 @@ This is a contract only. It executes no search, no training, no replay, and no p
 
 ```text
 Authorized:
-  company full A7AL-2Q/2R run when company path is available
   A7AL-2T May-stress failure attribution
+  company full A7AL-2Q/2R run when company path is available only for local context
 
 Not authorized:
   local expansion before full-pool confirmation

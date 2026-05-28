@@ -1,0 +1,28 @@
+{
+  "authorizes_a7al2u_objective_repair_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_company_full_a7al2q2r": false,
+  "authorizes_large_search": false,
+  "authorizes_local_expansion": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "all_company_full_candidates_may_sign_flip",
+    "all_company_full_candidates_may_control_dominated"
+  ],
+  "candidate_entry_rows": 28,
+  "context": "company_full",
+  "decision": "HOLD_A7AL2T_MAY_STRESS_FAILURE_CONFIRMED_NO_EXPANSION",
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-28T14:40:46Z",
+  "input_a7al2r_base_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\company_a7al2q2r_full_20260528\\runtime\\a7al2r_local_forensic",
+  "input_a7al2s_base_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7al2s_company_full_followup_contract",
+  "input_a7al2s_decision": "PASS_A7AL2S_COMPANY_FULL_FOLLOWUP_CONTRACT_READY",
+  "may_control_dominated_rows": 28,
+  "required_next": "Draft A7AL-2U objective/selector repair contract from company full failure attribution; do not run expansion.",
+  "sign_flip_rows": 28,
+  "unique_candidates": 14,
+  "uses_may_for_mutation": false,
+  "uses_may_for_ranking": false,
+  "uses_may_for_selection": false
+}

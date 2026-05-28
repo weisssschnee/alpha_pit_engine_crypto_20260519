@@ -1,0 +1,23 @@
+{
+  "authorizes_a7al2t_may_stress_failure_attribution": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_company_full_a7al2q2r": false,
+  "authorizes_large_search": false,
+  "authorizes_local_expansion_before_full_pool": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "candidate_count": 14,
+  "context": "company_full",
+  "decision": "PASS_A7AL2S_COMPANY_FULL_FOLLOWUP_CONTRACT_READY",
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-28T14:40:43Z",
+  "input_a7al2r_base_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\company_a7al2q2r_full_20260528\\runtime\\a7al2r_local_forensic",
+  "input_a7al2r_decision": "PASS_A7AL2R_LOCAL_FORENSIC_CANDIDATES_READY_FOR_A7AL2S_CONTRACT",
+  "primary_clean_premay_count": 5,
+  "required_next": "Run A7AL-2T stress attribution on this company full pool; do not start expansion or large search.",
+  "uses_may_for_mutation": false,
+  "uses_may_for_ranking": false,
+  "uses_may_for_selection": false,
+  "watchlist_control_close_count": 5
+}

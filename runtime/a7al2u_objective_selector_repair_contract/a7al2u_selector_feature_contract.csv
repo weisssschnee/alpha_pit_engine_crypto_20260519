@@ -1,0 +1,9 @@
+feature_group,required_features,may_allowed,purpose
+formula_lineage,expression_key;skeleton_key;production_key;operator_signature;field_family_set;window_signature;parent_seed_id,False,"dedup, diversity, and narrow-family cap"
+replay_alignment,label_t1_spread_by_split;label_t2_spread_by_split;entry_label_agreement;min_split_spread;split_dispersion,False,avoid one-entry alignment artifacts
+control_dominance,max_control_ratio_by_premay_split;control_margin_by_mode;control_close_count;control_hold_count,False,reduce 114/128 control-dominated replay waste
+latency_cost,one_bar_lag_spread_by_split;net_2bps;net_5bps;net_10bps;turnover_proxy,False,penalize timing and cost fragility without blanket +2h stress
+neutralization,timevarying_latent_spread;latent_positive_split_count;liquidity_tier_neutral_spread;age_or_listing_state_coverage,False,avoid latent-state-only artifacts
+robust_statistics,newey_west_tstat_lag24;block_bootstrap_tstat_block24;nonoverlap_offset_min_tstat,False,replace naive overlapping hourly t-stat in selector
+concentration,top_symbol_share;top_month_share;top_latent_share;top_skeleton_share;top_field_family_share,False,cap single symbol/month/state/skeleton dominance
+stress_attribution,may_spread;may_control_ratio;may_sign_flip;may_failure_label,veto_and_report_only,never selector score; only post-selection attribution/veto
