@@ -1,0 +1,29 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_direct_expansion": false,
+  "authorizes_large_search": false,
+  "authorizes_same_objective_rerun": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "selected_queue_pairwise_corr_high",
+    "selected_queue_may_stress_veto"
+  ],
+  "candidate_vectors": 128,
+  "cluster_corr_threshold": 0.95,
+  "decision": "HOLD_A7AR8_SELECTED_QUEUE_STRESS_VETO_NO_EXPANSION",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-28T15:10:04Z",
+  "selected_count": 4,
+  "selected_max_pairwise_corr": 0.9582527973890684,
+  "selected_same_cluster_pairs": 3,
+  "selected_signal_vector_clusters": 2,
+  "selected_stress_clean_candidates": 0,
+  "selected_top_cluster_share": 0.75,
+  "signal_vector_clusters": 119,
+  "uses_may_for_cluster": false,
+  "uses_may_for_selection": false,
+  "uses_may_for_veto_or_attribution": true,
+  "vector_feature_count": 135
+}

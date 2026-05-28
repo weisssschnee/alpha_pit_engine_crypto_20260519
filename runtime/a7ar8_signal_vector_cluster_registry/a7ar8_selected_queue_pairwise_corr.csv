@@ -1,0 +1,7 @@
+left_candidate_id,right_candidate_id,signal_vector_corr,above_0p95,above_0p90
+a7al2q_1378ff7d2322adee,a7al2q_f00f22bbcc48dc2c,0.9387829439450973,False,True
+a7al2q_1378ff7d2322adee,a7al2q_0de0d41346741bd1,0.933076744554425,False,True
+a7al2q_1378ff7d2322adee,a7al2q_69d146749c30da3c,0.9327494387752833,False,True
+a7al2q_f00f22bbcc48dc2c,a7al2q_0de0d41346741bd1,0.9582527973890684,True,True
+a7al2q_f00f22bbcc48dc2c,a7al2q_69d146749c30da3c,0.9360139920954926,False,True
+a7al2q_0de0d41346741bd1,a7al2q_69d146749c30da3c,0.9509291849704367,True,True

@@ -1,0 +1,6 @@
+action,status,reason
+a7al2w_objective_repair,AUTHORIZED,selected queue is stress-vetoed; repair objective before any expansion
+same_objective_rerun,NOT_AUTHORIZED,A7AL-2V selected queue has zero stress-clean candidates
+direct_oi_price_expansion,NOT_AUTHORIZED,signal-vector registry does not repair May stress veto
+large_formula_search,NOT_AUTHORIZED,registry is diagnostic; no stress-clean selected pool
+alpha_proof_shadow_paper_live,NOT_AUTHORIZED,no candidate-level proof
