@@ -1,0 +1,2 @@
+eligible_before_repair,selected_count,selected_signal_vector_clusters,selected_top_cluster_share,selected_max_pairwise_corr,selected_stress_clean_candidates,uses_may_for_selector
+10,2,2,0.5,0.8945560120210092,0,False

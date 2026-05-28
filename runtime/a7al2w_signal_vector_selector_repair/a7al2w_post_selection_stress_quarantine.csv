@@ -1,0 +1,3 @@
+candidate_id,signal_vector_cluster_id,t_failure_labels,t_may_min_spread,t_may_sign_flip_rows,t_may_control_dominated_rows,quarantine_type,allowed_for_selector_score,allowed_for_generation_weight_update
+a7al2q_1378ff7d2322adee,svc_015,MAY_SIGN_FLIP|MAY_CONTROL_DOMINATED,-0.0018621614500395,2.0,2.0,post_selection_stress_veto_only,False,False
+a7al2q_a4993fe3273bf0c8,svc_065,MAY_SIGN_FLIP|MAY_CONTROL_DOMINATED|PREMAY_CONTROL_CLOSE,-0.0018559170194277,2.0,2.0,post_selection_stress_veto_only,False,False

@@ -1,0 +1,27 @@
+{
+  "authorizes_a7al2x_objective_family_reset_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_direct_expansion": false,
+  "authorizes_large_search": false,
+  "authorizes_same_objective_rerun": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "selected_queue_may_stress_veto"
+  ],
+  "decision": "HOLD_A7AL2W_SELECTOR_DIVERSITY_REPAIRED_BUT_STRESS_VETO",
+  "eligible_before_repair": 10,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-28T15:23:36Z",
+  "input_selector_candidates": 128,
+  "selected_count": 2,
+  "selected_max_pairwise_corr": 0.8945560120210092,
+  "selected_signal_vector_clusters": 2,
+  "selected_stress_clean_candidates": 0,
+  "selected_top_cluster_share": 0.5,
+  "uses_may_for_generation": false,
+  "uses_may_for_selector": false,
+  "uses_may_for_veto_or_attribution": true,
+  "uses_may_for_weight_update": false
+}
