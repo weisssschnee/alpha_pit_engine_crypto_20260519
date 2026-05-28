@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-05-28T00:00:00Z",
+  "decision": "PASS_A7AR6_PARITY_AUDIT_COMPLETE_REQUIRES_A7AL2V_A7AR7",
+  "executes_search": false,
+  "executes_replay": false,
+  "executes_training": false,
+  "cn_reference_workspace": "G:\\Project_V7_Rotation\\alpha_pit_engine_mature_feature_workspace_20260528",
+  "crypto_reference_repo": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519",
+  "missing_high_severity_nodes": [
+    "shared_candidate_pool",
+    "replay_aware_selector_lifecycle",
+    "signal_vector_cluster_registry",
+    "global_clustering_and_marginal_audit",
+    "promotion_triage_chain_lock"
+  ],
+  "authorizes_a7al2v_selector_dryrun": true,
+  "authorizes_a7ar7_shared_candidate_pool_builder": true,
+  "authorizes_same_objective_rerun": false,
+  "authorizes_direct_oi_price_expansion": false,
+  "authorizes_large_search": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "may_policy": {
+    "may_allowed_for_veto_or_attribution": true,
+    "may_allowed_for_selector_score": false,
+    "may_allowed_for_ranking": false,
+    "may_allowed_for_generation": false,
+    "may_allowed_for_mutation": false,
+    "may_allowed_for_lane_allocation": false,
+    "may_allowed_for_training_target": false
+  },
+  "required_next": [
+    "A7AL-2V replay-aware selector dry-run",
+    "A7AR-7 shared candidate pool builder"
+  ]
+}

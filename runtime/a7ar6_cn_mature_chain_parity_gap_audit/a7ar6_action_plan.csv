@@ -1,0 +1,8 @@
+priority,stage,action,success_criteria,not_authorized
+P0,A7AL-2V,replay-aware selector dry-run on existing A7AL-2Q/2R/2T artifacts,"forbidden feature overlap zero; May feature usage zero; group holdout by skeleton/source_lane; selector-control baseline included; no direct same-objective expansion",large_search alpha_proof shadow_paper_live
+P0,A7AR-7,shared candidate pool builder,"single ledger joins generated candidates, memory keys, selector traces, replay metrics, forensic labels, stress labels, stale artifact status",promotion alpha_proof shadow_paper_live
+P1,A7AR-8,signal-vector cluster registry adapter,"return-vector clusters and selected-queue corr caps available before replay selection",large_search alpha_proof
+P1,A7AR-9,lane budget feedback ledger,"lane priors and replay feedback tracked without May labels",adaptive_large_search
+P2,A7AL-3,strict replay and book-level proxy,"candidate pool has replay-clean candidates and book proxy reports turnover/cost/liquidity",alpha_proof
+P2,A7AL-4,global clustering and marginal audit,"candidate marginal value assessed against crypto baseline or benchmark object",shadow_paper_live
+P3,A7AL-5,promotion triage and chain-lock,"central promotion queue and locked object registry updated only after all gates pass",unreviewed_promotion
