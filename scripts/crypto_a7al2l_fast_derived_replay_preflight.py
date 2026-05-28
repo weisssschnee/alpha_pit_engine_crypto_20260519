@@ -23,8 +23,13 @@ if str(REPO) not in sys.path:
 from alphafactory_crypto.engines.feature_algebra import parse_call
 
 
-DATA_ROOT = Path(r"G:\AlphaFactory_CryptoData")
-BASE_DIR = DATA_ROOT / "gold" / "features" / "binance_universe498_replay_1h_v2_20260527"
+DATA_ROOT = Path(os.environ.get("ALPHAFACTORY_CRYPTO_DATA_ROOT", r"G:\AlphaFactory_CryptoData"))
+BASE_DIR = Path(
+    os.environ.get(
+        "A7AL_BASE_PANEL_ROOT",
+        str(DATA_ROOT / "gold" / "features" / "binance_universe498_replay_1h_v2_20260527"),
+    )
+)
 SPLIT_COVERAGE = REPO / "runtime" / "a7al0_top498_alpha_search_contract" / "a7al_split_coverage_by_symbol.csv"
 A7AL2K_SELECTED = REPO / "runtime" / "a7al2k_derived_generator_smoke" / "a7al2k_selected_candidates.csv"
 A7AL2K_MANIFEST = REPO / "runtime" / "a7al2k_derived_generator_smoke" / "a7al2k_manifest.json"

@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import math
+import os
 import re
 import sys
 from collections import Counter
@@ -22,7 +23,13 @@ FAST_SCRIPT = REPO / "scripts" / "crypto_a7al2l_fast_derived_replay_preflight.py
 GENERATOR_SCRIPT = REPO / "scripts" / "crypto_a7al2k_derived_generator_smoke.py"
 A7AL2O_DECISIONS = REPO / "runtime" / "a7al2o_candidate_mini_replay" / "a7al2o_decision_record.csv"
 A7AL2K_GENERATED = REPO / "runtime" / "a7al2k_derived_generator_smoke" / "a7al2k_generated_candidates.csv"
-LATENT_PANEL = Path(r"G:\AlphaFactory_CryptoData\gold\features\binance_universe498_latent_state_features_v1_20260527.parquet")
+DATA_ROOT = Path(os.environ.get("ALPHAFACTORY_CRYPTO_DATA_ROOT", r"G:\AlphaFactory_CryptoData"))
+LATENT_PANEL = Path(
+    os.environ.get(
+        "A7AL_LV1_PANEL",
+        str(DATA_ROOT / "gold" / "features" / "binance_universe498_latent_state_features_v1_20260527.parquet"),
+    )
+)
 OUT_DIR = REPO / "runtime" / "a7al2p0_pre_search_hardening_audit"
 REPORT = REPO / "reports" / "CRYPTO_A7AL2P0_PRE_SEARCH_HARDENING_AUDIT_20260527.md"
 
