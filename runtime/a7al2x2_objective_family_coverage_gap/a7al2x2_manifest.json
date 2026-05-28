@@ -1,0 +1,25 @@
+{
+  "allowed_family_generated_total": 2625,
+  "allowed_family_shared_pool_total": 2998,
+  "allowed_family_x1_non_rejected_total": 0,
+  "authorizes_a7al2x3_generation": false,
+  "authorizes_a7al2y_generation": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_a7al2x_allowed_family_candidate_survives_x1_dry_rerank",
+    "f1_f6_absent_from_a7ar7_shared_pool_source_of_truth",
+    "f1_f6_absent_from_a7al2l_target_replay",
+    "positioning_family_generated_only_as_j5_overlay_diagnostic",
+    "latent_state_interaction_family_not_generated"
+  ],
+  "decision": "HOLD_A7AL2X2_OBJECTIVE_FAMILY_COVERAGE_GAP_REQUIRES_GENERATOR_AND_SHARED_POOL_REPAIR",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-28T16:51:53Z",
+  "input_generated_candidates": 8000,
+  "input_shared_pool_candidates": 4000
+}

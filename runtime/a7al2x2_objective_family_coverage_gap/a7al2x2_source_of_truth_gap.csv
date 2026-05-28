@@ -1,0 +1,5 @@
+artifact,candidate_count,family_count,top_family,top_family_share,source_of_truth_role
+a7al2k_generated_pool,8000,8,UNMAPPED_OR_FORBIDDEN,0.589375,generator_broad_pool
+a7al2l_replayed_target_pool,2,1,DIRECT_OI_PRICE_WEAK_PRIOR,1.0,downstream_stage
+a7ar7_shared_candidate_pool,4000,2,F0_OI_delta_price_interaction,0.7495,current_selector_source_of_truth
+a7al2x1_dry_rerank_trace,4000,3,F0_OI_delta_price_interaction,0.49775,downstream_stage

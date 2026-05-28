@@ -1,0 +1,10 @@
+family_id,generated_count,historical_generated_count,selected_for_a7al2l_count,selected_historical_for_a7al2l_count,a7al2l_replayed_count,a7al2l_clue_count,shared_pool_count,shared_fast_replay_count,x1_non_rejected_count,x1_selected_count,generated_share,gap_stage,recommended_repair
+F0_OI_delta_price_interaction,2053,1819,104,104,0,0,2998,103,0,0,0.256625,a7al2l_target_replay_mode_excluded,run_family_balanced_preflight_instead_of_two_target_replay
+F1_OI_basis_premium_interaction,85,85,7,7,0,0,0,0,0,0,0.010625,a7al2l_target_replay_mode_excluded,run_family_balanced_preflight_instead_of_two_target_replay
+F2_OI_funding_crowding_interaction,77,77,13,13,0,0,0,0,0,0,0.009625,a7al2l_target_replay_mode_excluded,run_family_balanced_preflight_instead_of_two_target_replay
+F3_positioning_divergence,67,0,0,0,0,0,0,0,0,0,0.008375,generated_only_as_overlay_or_nonhistorical,replace_overlay_only_fields_with_historical_binance_fields_or_contract_source
+F4_OI_taker_flow_interaction,126,126,23,23,0,0,0,0,0,0,0.01575,a7al2l_target_replay_mode_excluded,run_family_balanced_preflight_instead_of_two_target_replay
+F5_OI_upper_regime_interaction,217,217,39,39,0,0,0,0,0,0,0.027125,a7al2l_target_replay_mode_excluded,run_family_balanced_preflight_instead_of_two_target_replay
+F6_OI_latent_state_interaction,0,0,0,0,0,0,0,0,0,0,0.0,not_generated,add_family_to_generator_templates
+DIRECT_OI_PRICE_WEAK_PRIOR,660,660,44,44,2,2,1002,25,0,0,0.0825,x1_control_or_contract_rejected,repair_control_dominance_or_keep_as_rejected_family
+UNMAPPED_OR_FORBIDDEN,4715,4376,538,538,0,0,0,0,0,0,0.589375,a7al2l_target_replay_mode_excluded,run_family_balanced_preflight_instead_of_two_target_replay

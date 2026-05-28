@@ -1,0 +1,4 @@
+step,name,description,executes_generation,executes_replay,authorizes_search
+A7AL-2X2R0,family-balanced generator coverage repair contract,Add explicit quotas for F1-F6 historical fields before any selector or replay.,False,False,False
+A7AL-2X2R1,shared-pool ledger rebuild contract,"Define a new shared pool source-of-truth that includes all A7AL-2X families, not only local OI-price candidates.",False,False,False
+A7AL-2X3,family-balanced dry generation smoke,"Only after R0/R1, generate a small balanced candidate pool and stop before replay.",True,False,False

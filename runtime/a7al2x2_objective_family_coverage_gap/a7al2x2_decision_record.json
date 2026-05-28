@@ -1,0 +1,9 @@
+{
+  "a7al2x3_family_balanced_generation": "NOT_AUTHORIZED",
+  "a7al2y_generation": "NOT_AUTHORIZED",
+  "alpha_proof": "NOT_AUTHORIZED",
+  "decision": "HOLD_A7AL2X2_OBJECTIVE_FAMILY_COVERAGE_GAP_REQUIRES_GENERATOR_AND_SHARED_POOL_REPAIR",
+  "large_formula_search": "NOT_AUTHORIZED",
+  "reason": "Existing shared pool is local OI-price oriented; A7AL-2X allowed F1-F6 families lack replay/shared-pool coverage and X1 eligible candidates.",
+  "shadow_paper_live": "NOT_AUTHORIZED"
+}
