@@ -1,0 +1,5 @@
+step,name,action,executes_replay,authorizes_alpha
+A7AL-2X4M0,operator extension,Add Clip/Winsor and state-aware StateMask/GroupNeutralize/LatentNeutralRank support to a crypto replay evaluator.,False,False
+A7AL-2X4M1,upper-regime materialization,Materialize A7AL-0G train-frozen regime states into a replay matrix aligned by timestamp.,False,False
+A7AL-2X4M2,latent/taxonomy materialization,Materialize A7AK LV1/LV2 latent state ids plus meme/multiplier/major/liquidity-tier taxonomy into symbol-time panel.,False,False
+A7AL-2X4M3,family-balanced replay authorization,"Only after M0-M2 pass, authorize numeric replay preflight on the 176 selected candidates.",False,False

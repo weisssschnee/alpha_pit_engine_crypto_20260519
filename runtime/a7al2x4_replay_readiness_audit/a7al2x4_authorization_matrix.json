@@ -1,0 +1,9 @@
+{
+  "a7al2y_generation": "NOT_AUTHORIZED",
+  "alpha_proof": "NOT_AUTHORIZED",
+  "decision": "HOLD_A7AL2X4_REPLAY_PREFLIGHT_NOT_READY_MATERIALIZATION_REQUIRED",
+  "large_formula_search": "NOT_AUTHORIZED",
+  "numeric_replay_preflight": "NOT_AUTHORIZED",
+  "reason": "Current fast replay cannot honestly evaluate X3 family-balanced selected candidates until state fields and operators are materialized.",
+  "shadow_paper_live": "NOT_AUTHORIZED"
+}

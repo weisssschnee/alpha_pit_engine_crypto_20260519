@@ -1,0 +1,15 @@
+operator,status,blocking_for_current_fast_replay
+Abs,ready_in_existing_fast_evaluator,False
+Add,ready_in_existing_fast_evaluator,False
+Clip,needs_small_evaluator_extension,True
+Delta,ready_in_existing_fast_evaluator,False
+GroupNeutralize,needs_state_aware_evaluator_extension,True
+Mean,ready_in_existing_fast_evaluator,False
+Mul,ready_in_existing_fast_evaluator,False
+Neg,ready_in_existing_fast_evaluator,False
+Rank,ready_in_existing_fast_evaluator,False
+Sign,ready_in_existing_fast_evaluator,False
+StateMask,needs_state_aware_evaluator_extension,True
+Sub,ready_in_existing_fast_evaluator,False
+Winsor,needs_small_evaluator_extension,True
+ZScore,ready_in_existing_fast_evaluator,False

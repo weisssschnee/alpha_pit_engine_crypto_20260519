@@ -1,0 +1,22 @@
+{
+  "authorizes_a7al2y_generation": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_replay_preflight": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "state_or_derived_fields_not_materialized_for_fast_replay",
+    "operators_not_supported_by_existing_fast_replay"
+  ],
+  "blocking_field_count": 5,
+  "blocking_operator_count": 4,
+  "decision": "HOLD_A7AL2X4_REPLAY_PREFLIGHT_NOT_READY_MATERIALIZATION_REQUIRED",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "field_count": 12,
+  "generated_at": "2026-05-28T17:16:22Z",
+  "operator_count": 14,
+  "selected_candidate_count": 176
+}
