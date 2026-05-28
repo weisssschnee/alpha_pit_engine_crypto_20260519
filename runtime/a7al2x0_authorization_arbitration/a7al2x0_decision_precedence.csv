@@ -1,0 +1,4 @@
+record_id,decision,superseded_by,final_status,reason
+A7AL-2P2,PASS_A7AL2P2_LOCAL_OI_PRICE_SEARCH_CONTRACT_READY_FOR_A7AL2Q,A7AL-2T|A7AL-2U|A7AL-2V|A7AR-8|A7AL-2W,SUPERSEDED_DIAGNOSTIC_CONTRACT,"Later company execution, stress attribution, replay-aware selector, signal-vector registry, and selector repair show zero stress-clean selected candidates."
+A7AL-2Q,previously_authorized_by_A7AL-2P2,A7AL-2X0,NOT_AUTHORIZED,Same objective direct OI x price path is stress-vetoed after later evidence.
+A7AL-2X,objective_family_reset_contract,,AUTHORIZED_CONTRACT_ONLY,Move from direct OI x price weak prior to broader OI/positioning interaction contract; no search execution.

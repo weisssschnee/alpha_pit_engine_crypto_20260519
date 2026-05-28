@@ -1,0 +1,22 @@
+{
+  "a7al2p2_superseded": true,
+  "artifact_records": 10,
+  "authorizes_a7al2q_local_execution": false,
+  "authorizes_a7al2x1_dry_rerank_after_contract": true,
+  "authorizes_a7al2x_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_direct_oi_price_expansion": false,
+  "authorizes_large_search": false,
+  "authorizes_same_objective_rerun": false,
+  "authorizes_shadow_paper_live": false,
+  "branch_vv": "* main 9394520 [origin/main: ahead 11] add crypto signal vector selector repair",
+  "decision": "PASS_A7AL2X0_AUTHORIZATION_ARBITRATION_COMPLETE",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-28T15:54:47Z",
+  "local_head_before_commit": "9394520",
+  "origin_main_ahead_behind_before_commit": "0\t11",
+  "origin_main_before_commit": "40620fe",
+  "uses_may_for_authorization": "veto_or_attribution_only"
+}

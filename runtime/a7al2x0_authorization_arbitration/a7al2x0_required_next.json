@@ -1,0 +1,16 @@
+{
+  "a7al2x_scope": [
+    "direct OI x price becomes stress-vetoed weak prior",
+    "allow OI/positioning interaction families only",
+    "require shared candidate pool as source of truth",
+    "require signal-vector cluster cap",
+    "May remains post-selection veto/attribution only"
+  ],
+  "must_not_do": [
+    "execute A7AL-2Q under superseded P2 authorization",
+    "rerun same direct OI x price objective",
+    "start large formula search",
+    "authorize alpha proof/shadow/paper/live"
+  ],
+  "next_stage": "A7AL-2X objective family reset contract"
+}
