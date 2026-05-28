@@ -1,0 +1,8 @@
+objective_family,generated_count,static_valid_count,selected_for_preflight_count,unique_skeleton_count,unique_production_count,family_id,dry_generation_min_candidates,dry_generation_max_share,preflight_min_candidates,generated_share,quota_pass
+F0_OI_delta_price_interaction,384,384,32,7,216,F0_OI_delta_price_interaction,384,0.2,32,0.2,True
+F1_OI_basis_premium_interaction,256,256,24,6,154,F1_OI_basis_premium_interaction,256,0.18,24,0.13333333333333333,True
+F2_OI_funding_crowding_interaction,256,256,24,6,154,F2_OI_funding_crowding_interaction,256,0.18,24,0.13333333333333333,True
+F3_positioning_divergence,256,256,24,7,226,F3_positioning_divergence,256,0.16,24,0.13333333333333333,True
+F4_OI_taker_flow_interaction,256,256,24,6,148,F4_OI_taker_flow_interaction,256,0.16,24,0.13333333333333333,True
+F5_OI_upper_regime_interaction,256,256,24,16,160,F5_OI_upper_regime_interaction,256,0.16,24,0.13333333333333333,True
+F6_OI_latent_state_interaction,256,256,24,6,256,F6_OI_latent_state_interaction,256,0.16,24,0.13333333333333333,True

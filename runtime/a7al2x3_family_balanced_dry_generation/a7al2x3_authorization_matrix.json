@@ -1,0 +1,9 @@
+{
+  "a7al2x4_family_balanced_replay_preflight": "READY_FOR_REVIEW_NOT_AUTHORIZED",
+  "a7al2y_generation": "NOT_AUTHORIZED",
+  "alpha_proof": "NOT_AUTHORIZED",
+  "decision": "PASS_A7AL2X3_FAMILY_BALANCED_DRY_GENERATION_LEDGER_READY_FOR_PREFLIGHT_REVIEW",
+  "large_formula_search": "NOT_AUTHORIZED",
+  "reason": "A7AL-2X3 is dry generation and ledger construction only; replay/preflight requires a separate authorization record.",
+  "shadow_paper_live": "NOT_AUTHORIZED"
+}

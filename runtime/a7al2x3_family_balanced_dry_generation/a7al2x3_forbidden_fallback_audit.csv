@@ -1,0 +1,10 @@
+forbidden_item,policy,candidate_hit_count
+same_direct_oi_price_rerun,forbid,0
+direct_oi_price_level_gap_standalone,forbid,0
+funding_only_wrapper,forbid,0
+basis_only_wrapper,forbid,0
+liquidity_volatility_old_family,forbid,0
+a7v_activity_liquidity_self_reproduction,forbid,0
+j5_cross_exchange_overlay_historical_proof,forbid,0
+raw_okx_binance_direct_price_comparison,forbid,0
+may_in_selector_or_generation,forbid,0
