@@ -1,0 +1,5 @@
+candidate_id,decision,reasons,warnings,label_t1_positive_premay_splits,label_t2_positive_premay_splits,one_bar_lag_positive_premay_splits,latent_positive_premay_splits,net_10bps_positive_premay_splits,control_ratio_premay_max,top_symbol_abs_contribution_share,top_month_abs_contribution_share,top_latent_abs_contribution_share
+a7al2q_1378ff7d2322adee,A7AL2R_LOCAL_FORENSIC_PASS,,,3,3,3,3,3,0.5977895485931952,0.04454982722640114,0.2897293591915247,0.20351023473946656
+a7al2q_f00f22bbcc48dc2c,A7AL2R_LOCAL_FORENSIC_PASS,,,3,3,3,3,3,0.7371290356519459,0.0450271148930863,0.28523575711057514,0.20462594298810213
+a7al2q_d6f7ebc0dbbdda7a,A7AL2R_LOCAL_FORENSIC_PASS,,control_close,3,3,3,3,3,0.8138625769990896,0.0450585090983562,0.28653162352600947,0.20460411514145277
+a7al2q_6671d1fac5e57efe,A7AL2R_LOCAL_FORENSIC_PASS,,control_close,3,3,3,3,3,0.8901761602600439,0.04496547717414799,0.2787882254441636,0.20698635823036174

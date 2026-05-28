@@ -1,0 +1,54 @@
+{
+  "authorizes_a7al2s_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "candidate_count": 4,
+  "controls": [
+    "wrong_lag_future_24h",
+    "wrong_lag_stale_168h",
+    "same_family_random",
+    "time_shuffle",
+    "symbol_shuffle"
+  ],
+  "cost_bps": [
+    2.0,
+    5.0,
+    10.0
+  ],
+  "decision": "PASS_A7AL2R_LOCAL_FORENSIC_CANDIDATES_READY_FOR_A7AL2S_CONTRACT",
+  "decision_counts": {
+    "A7AL2R_LOCAL_FORENSIC_PASS": 4
+  },
+  "entry_labels": [
+    "label_t1_to_t25",
+    "label_t2_to_t26"
+  ],
+  "executes_alpha_proof": false,
+  "executes_search": false,
+  "executes_training": false,
+  "fields_loaded": [
+    "index_close",
+    "open_interest_value_last",
+    "open_interest_value_mean",
+    "trade_close"
+  ],
+  "forensic_pass_count": 4,
+  "generated_at": "2026-05-28T13:17:54Z",
+  "input_q_manifest": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7al2q_local_oi_price_formula_search\\a7al2q_manifest.json",
+  "latent_coverage": {
+    "loaded_rows": 3692531,
+    "state_non_missing_share": 0.9703079075817397,
+    "state_panel_path": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_latent_state_features_v1_20260527.parquet",
+    "state_seen_in_train_share": 0.7661959913546751
+  },
+  "runtime_seconds": 630.561,
+  "strict_symbols": 181,
+  "timestamps": 21025,
+  "uses_may_for_generation": false,
+  "uses_may_for_mutation": false,
+  "uses_may_for_ranking": false,
+  "uses_may_for_selection": false,
+  "warnings": []
+}

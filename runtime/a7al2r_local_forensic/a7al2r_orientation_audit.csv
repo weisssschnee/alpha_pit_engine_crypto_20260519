@@ -1,0 +1,5 @@
+candidate_id,orientation_fit_split,orientation_entry_label,train_mean_spread,orientation,uses_may
+a7al2q_1378ff7d2322adee,train_2024,label_t1_to_t25,0.0016542222867750324,1.0,False
+a7al2q_f00f22bbcc48dc2c,train_2024,label_t1_to_t25,0.001967691792702108,1.0,False
+a7al2q_d6f7ebc0dbbdda7a,train_2024,label_t1_to_t25,0.0019598947667496054,1.0,False
+a7al2q_6671d1fac5e57efe,train_2024,label_t1_to_t25,0.0017245018372656683,1.0,False
