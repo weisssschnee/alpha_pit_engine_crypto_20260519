@@ -56,6 +56,8 @@ PRE_MAY_SPLITS = ["validation_2025H1", "test_2025H2", "recent_oos_2026JanApr"]
 MATERIALIZE_CAP = int(os.environ.get("A7FF8_MATERIALIZE_CAP", "384"))
 FAST_NUMERIC_CAP = int(os.environ.get("A7FF8_FAST_NUMERIC_CAP", "256"))
 PORTFOLIO_CAP = int(os.environ.get("A7FF8_PORTFOLIO_CAP", "128"))
+QUEUE_OFFSET = int(os.environ.get("A7FF8_QUEUE_OFFSET", "0"))
+QUEUE_LIMIT = int(os.environ.get("A7FF8_QUEUE_LIMIT", "0"))
 MIN_FINITE_SHARE = float(os.environ.get("A7FF8_MIN_FINITE_SHARE", "0.20"))
 MIN_NONZERO_SHARE = float(os.environ.get("A7FF8_MIN_NONZERO_SHARE", "0.01"))
 
@@ -104,7 +106,10 @@ def md_table(df: pd.DataFrame, max_rows: int = 80) -> str:
     for col in view.columns:
         if view[col].dtype == object:
             view[col] = view[col].astype(str).str.replace("|", "\\|", regex=False)
-    return view.to_markdown(index=False)
+    try:
+        return view.to_markdown(index=False)
+    except ImportError:
+        return "```text\n" + view.to_string(index=False) + "\n```"
 
 
 def expression_fields(expression: str) -> set[str]:
@@ -323,6 +328,10 @@ def main() -> None:
         raise SystemExit(f"A7FF-7E does not authorize {STAGE} numeric probe")
     plan = read_json(A7FF7E_PLAN)
     queue = pd.read_csv(A7FF7E_QUEUE).head(MATERIALIZE_CAP).copy()
+    if QUEUE_OFFSET:
+        queue = queue.iloc[QUEUE_OFFSET:].copy()
+    if QUEUE_LIMIT:
+        queue = queue.head(QUEUE_LIMIT).copy()
     if FAST_NUMERIC_CAP and len(queue) > FAST_NUMERIC_CAP:
         # Keep diversity: first pass by semantic pair/motif before truncation.
         rows = []
@@ -481,6 +490,8 @@ def main() -> None:
         "executes_search": False,
         "uses_may": False,
         "input_blueprint_count": int(len(queue)),
+        "queue_offset": QUEUE_OFFSET,
+        "queue_limit": QUEUE_LIMIT,
         "materialized_activity_ok_count": materialized_count,
         "label_response_rows": int(len(responses)),
         "non_l7_numeric_clue_rows": clue_count,

@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF10_COMPANY_PARALLEL_NUMERIC_AGGREGATE_BUILT",
+  "generated_at": "2026-05-29T19:59:27Z",
+  "missing_manifests": [],
+  "shard_count_complete": 4,
+  "shard_count_expected": 4,
+  "stage": "A7FF-10-COMPANY-PARALLEL-AGGREGATE",
+  "total_input_blueprints": 384,
+  "total_label_response_rows": 7680,
+  "total_materialized_activity_ok": 384,
+  "total_non_l7_numeric_clue_rows": 237,
+  "total_portfolio_queue_count": 80,
+  "total_rank_label_diagnostic_clue_rows": 66,
+  "total_selected_portfolio_queue_count": 40,
+  "uses_may": false
+}

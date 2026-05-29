@@ -1,0 +1,5 @@
+shard,stage,decision,input_blueprint_count,queue_offset,queue_limit,materialized_activity_ok_count,label_response_rows,non_l7_numeric_clue_rows,rank_label_diagnostic_clue_rows,portfolio_queue_count,selected_portfolio_queue_count,uses_may,authorizes_search
+00,A7FF-10S00,PASS_A7FF10S00_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,96,0,96,96,1920,87,14,21,8,False,False
+01,A7FF-10S01,PASS_A7FF10S01_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,96,96,96,96,1920,112,23,35,14,False,False
+02,A7FF-10S02,PASS_A7FF10S02_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,96,192,96,96,1920,19,3,6,5,False,False
+03,A7FF-10S03,PASS_A7FF10S03_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,96,288,96,96,1920,19,26,18,13,False,False
