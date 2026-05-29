@@ -1,0 +1,20 @@
+{
+  "A7AI-F0": {
+    "status": "PASS_A7AIF0_FIELD_CONTRACT_ENFORCEMENT_LEDGER_READY_FOR_A7AIF1"
+  },
+  "A7AI-F1_engine_enforcement_gap_audit": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "A7AI-F1": {
+    "status": "PASS_A7AIF1_ENGINE_ENFORCEMENT_CONNECTED"
+  },
+  "A7AI-F2_engine_patch_contract": {
+    "authorized": false
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

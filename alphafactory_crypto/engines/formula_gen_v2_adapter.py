@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import hashlib
 import random
 import re
@@ -9,6 +10,12 @@ from typing import Any
 
 
 DEFAULT_CONFIG = Path(__file__).resolve().parents[2] / "config" / "crypto_formula_gen_v2_motif_pack_v1.json"
+
+FIELD_MODE_COLUMN = {
+    "ordinary_alpha": "ordinary_alpha_allowed",
+    "diagnostic": "diagnostic_allowed",
+    "risk_defense": "risk_defense_allowed",
+}
 
 
 @dataclass(frozen=True, slots=True)
@@ -68,6 +75,17 @@ def _weighted_choice(rng: random.Random, weights: dict[str, float]) -> str:
     return sorted(weights)[-1]
 
 
+def _truthy(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    return str(value).strip().lower() in {"true", "1", "yes", "y"}
+
+
+def load_field_enforcement_csv(path: str | Path) -> dict[str, dict[str, Any]]:
+    with Path(path).open("r", encoding="utf-8", newline="") as handle:
+        return {str(row["field_name"]): dict(row) for row in csv.DictReader(handle)}
+
+
 class CryptoFormulaGenV2Adapter:
     """CN FormulaGenV2-style generator adapted to crypto field contracts.
 
@@ -76,21 +94,56 @@ class CryptoFormulaGenV2Adapter:
     reward outcomes.
     """
 
-    def __init__(self, config: dict[str, Any], *, seed: str = "crypto_formula_gen_v2") -> None:
+    def __init__(
+        self,
+        config: dict[str, Any],
+        *,
+        seed: str = "crypto_formula_gen_v2",
+        field_enforcement: dict[str, dict[str, Any]] | None = None,
+        field_mode: str = "syntax",
+    ) -> None:
         self.config = config
         self.rng = random.Random(stable_hash(seed, 12))
         self.seed = seed
+        self.field_enforcement = field_enforcement or {}
+        self.field_mode = field_mode
 
     @classmethod
-    def from_path(cls, path: str | Path = DEFAULT_CONFIG, *, seed: str = "crypto_formula_gen_v2") -> "CryptoFormulaGenV2Adapter":
+    def from_path(
+        cls,
+        path: str | Path = DEFAULT_CONFIG,
+        *,
+        seed: str = "crypto_formula_gen_v2",
+        field_enforcement_path: str | Path | None = None,
+        field_mode: str = "syntax",
+    ) -> "CryptoFormulaGenV2Adapter":
         import json
 
         payload = json.loads(Path(path).read_text(encoding="utf-8"))
-        return cls(payload, seed=seed)
+        enforcement = load_field_enforcement_csv(field_enforcement_path) if field_enforcement_path else None
+        return cls(payload, seed=seed, field_enforcement=enforcement, field_mode=field_mode)
+
+    def _field_allowed_for_mode(self, field: str) -> bool:
+        if self.field_mode == "syntax" or not self.field_enforcement:
+            return True
+        row = self.field_enforcement.get(field)
+        if not row:
+            return False
+        if str(row.get("enforcement_status", "")).startswith("FORBID"):
+            return False
+        if str(row.get("enforcement_status", "")).startswith("HOLD_CONTRACT") or str(row.get("enforcement_status", "")).startswith("HOLD_TIMING"):
+            return False
+        mode_column = FIELD_MODE_COLUMN.get(self.field_mode)
+        if not mode_column:
+            raise ValueError(f"unknown field_mode: {self.field_mode}")
+        return _truthy(row.get(mode_column))
 
     @property
     def field_registry(self) -> dict[str, list[str]]:
-        return {key: list(value) for key, value in (self.config.get("field_families") or {}).items()}
+        registry: dict[str, list[str]] = {}
+        for key, values in (self.config.get("field_families") or {}).items():
+            registry[key] = [str(field) for field in values if self._field_allowed_for_mode(str(field))]
+        return registry
 
     @property
     def allowed_fields(self) -> set[str]:
@@ -133,7 +186,13 @@ class CryptoFormulaGenV2Adapter:
             template = str(_choice(self.rng, list(spec.get("templates") or [])))
             required_families = list(spec.get("field_families") or [])
             expression, field_families, used_fields = self._format(template, required_families)
-            validation = validate_expression(expression, self.allowed_fields, self.config)
+            validation = validate_expression(
+                expression,
+                self.allowed_fields,
+                self.config,
+                field_enforcement=self.field_enforcement,
+                field_mode=self.field_mode,
+            )
             if validation["passed"]:
                 candidate_id = f"crypto_fg2_{stable_hash(expression + str(index), 16)}"
                 return CryptoFormulaCandidate(
@@ -150,12 +209,21 @@ class CryptoFormulaGenV2Adapter:
                         "cn_memory_payload_inherited": False,
                         "cn_reward_payload_inherited": False,
                         "source_config": str(DEFAULT_CONFIG),
+                        "field_mode": self.field_mode,
+                        "semantic_field_enforcement_applied": bool(self.field_enforcement),
                     },
                 )
         raise RuntimeError("failed to generate a valid crypto expression after 128 attempts")
 
 
-def validate_expression(expression: str, allowed_fields: set[str], config: dict[str, Any]) -> dict[str, Any]:
+def validate_expression(
+    expression: str,
+    allowed_fields: set[str],
+    config: dict[str, Any],
+    *,
+    field_enforcement: dict[str, dict[str, Any]] | None = None,
+    field_mode: str = "syntax",
+) -> dict[str, Any]:
     reasons: list[str] = []
     max_tree_depth = int((config.get("constraints") or {}).get("max_tree_depth", 8))
     if tree_depth(expression) > max_tree_depth:
@@ -172,6 +240,20 @@ def validate_expression(expression: str, allowed_fields: set[str], config: dict[
     unknown = sorted(field for field in candidate_fields if field not in allowed_fields)
     if unknown:
         reasons.append("unknown_field:" + "|".join(unknown[:8]))
+    if field_mode != "syntax" and field_enforcement:
+        mode_column = FIELD_MODE_COLUMN.get(field_mode)
+        if not mode_column:
+            reasons.append(f"unknown_field_mode:{field_mode}")
+        for field in sorted(candidate_fields):
+            row = field_enforcement.get(field)
+            if not row:
+                reasons.append(f"field_contract_missing:{field}")
+                continue
+            status = str(row.get("enforcement_status", ""))
+            if status == "FORBID" or status.startswith("HOLD_CONTRACT") or status.startswith("HOLD_TIMING"):
+                reasons.append(f"field_enforcement_block:{field}:{status}")
+            if mode_column and not _truthy(row.get(mode_column)):
+                reasons.append(f"field_mode_not_allowed:{field}:{field_mode}")
     if "Mul(" in expression:
         mul_args = re.findall(r"Mul\((.*)\)", expression)
         unsafe = [arg for arg in mul_args if not any(prefix in arg for prefix in ("ZScore(", "Rank(", "Sign(", "Clip(", "Abs("))]

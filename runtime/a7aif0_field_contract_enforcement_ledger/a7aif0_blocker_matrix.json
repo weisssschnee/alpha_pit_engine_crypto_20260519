@@ -1,0 +1,7 @@
+{
+  "hard_blockers": [],
+  "warnings": {
+    "motif_warning_count": 3,
+    "weak_or_unclassified_motif_fields": 3
+  }
+}

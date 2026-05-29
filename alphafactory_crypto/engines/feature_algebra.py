@@ -15,6 +15,12 @@ class EvalResult:
     diagnostics: dict[str, Any]
 
 
+def _truthy(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    return str(value).strip().lower() in {"true", "1", "yes", "y"}
+
+
 def split_args(body: str) -> list[str]:
     args: list[str] = []
     depth = 0
@@ -82,13 +88,20 @@ class CryptoFeatureAlgebra:
       the caller through feature_available_time/execution_time shifts.
     """
 
-    def __init__(self, frame: pd.DataFrame, allowed_fields: set[str]) -> None:
+    def __init__(
+        self,
+        frame: pd.DataFrame,
+        allowed_fields: set[str],
+        *,
+        field_contract: dict[str, dict[str, Any]] | None = None,
+    ) -> None:
         required = {"symbol", "timestamp"}
         missing = required - set(frame.columns)
         if missing:
             raise ValueError(f"frame missing required columns: {sorted(missing)}")
         self.frame = frame.sort_values(["symbol", "timestamp"]).reset_index(drop=True).copy()
         self.allowed_fields = allowed_fields
+        self.field_contract = field_contract or {}
 
     def evaluate(self, expression: str) -> EvalResult:
         values = self._eval(expression.strip())
@@ -119,6 +132,7 @@ class CryptoFeatureAlgebra:
                 raise ValueError(f"unknown field: {expression}")
             if expression not in self.frame.columns:
                 raise ValueError(f"field not present in frame: {expression}")
+            self._validate_field_contract(expression)
             return _to_numeric(self.frame[expression])
 
         name, args = call
@@ -163,3 +177,21 @@ class CryptoFeatureAlgebra:
                 raise ValueError(f"Sign expects 1 arg: {expression}")
             return np.sign(self._eval(args[0]))
         raise ValueError(f"unsupported operator: {name}")
+
+    def _validate_field_contract(self, field: str) -> None:
+        if not self.field_contract:
+            return
+        row = self.field_contract.get(field)
+        if not row:
+            raise ValueError(f"field contract missing: {field}")
+        status = str(row.get("enforcement_status", ""))
+        if status == "FORBID" or status.startswith("HOLD_CONTRACT") or status.startswith("HOLD_TIMING"):
+            raise ValueError(f"field contract blocks field: {field}:{status}")
+        if _truthy(row.get("uses_future")) or _truthy(row.get("uses_label")):
+            raise ValueError(f"field leaks label or future: {field}")
+        if _truthy(row.get("same_bar_execution_allowed")):
+            raise ValueError(f"same-bar field not allowed: {field}")
+        if _truthy(row.get("fixed_delay_stress_required")):
+            raise ValueError(f"fixed-delay stress field not allowed: {field}")
+        if "timing_ok" in row and not _truthy(row.get("timing_ok")):
+            raise ValueError(f"field timing contract not ok: {field}")

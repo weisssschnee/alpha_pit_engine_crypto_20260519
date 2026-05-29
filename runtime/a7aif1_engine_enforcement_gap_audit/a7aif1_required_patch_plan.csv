@@ -1,0 +1,5 @@
+patch_id,component,action,status,blocks_search
+A7AI-F2-1,FormulaGenV2Adapter,add semantic ledger loader and per-mode allowed field lists,implemented_or_present,False
+A7AI-F2-2,FormulaGenV2Adapter,"reject fields marked label_only, future_dependent, fixed_delay_required, same_bar_allowed, or missing contract",implemented_or_present,False
+A7AI-F2-3,ReplayCaller,feed A7AI-F0 timing and role ledger into evaluator caller before numeric replay,implemented_or_present,False
+A7AI-F2-4,Selector,consume selector_primary_allowed and selector_diagnostic_allowed instead of raw motif family membership,artifact_policy_present,False

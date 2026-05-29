@@ -1,0 +1,12 @@
+component,check,status,severity,evidence,required_action
+FormulaGenV2Adapter,loads motif field registry,PASS,info,field_registry/field_families found,keep motif registry as syntax source
+FormulaGenV2Adapter,rejects unknown fields,PASS,info,unknown field validation found,keep field existence validation
+FormulaGenV2Adapter,enforces semantic field ledger,PASS,info,semantic ledger hooks found,add optional semantic ledger loader and per-mode field allowlist
+FormulaGenV2Adapter,supports mode-specific field roles,PASS,info,mode-specific role filter found,filter sampled fields by ordinary_alpha_allowed / diagnostic_allowed / risk_defense_allowed
+CryptoFeatureAlgebra,evaluates only allowed fields,PASS,info,allowed_fields present,keep evaluator field existence guard
+CryptoFeatureAlgebra,local timing enforcement,PASS,info,optional field_contract hook found; caller timing delegation remains default when no contract is passed,pass A7AI-F0 field_contract in enforced replay callers
+MotifPack,declares crypto timing policy,PASS,info,"{""all_products_normalized_or_ranked"": true, ""banned_cn_stock_tokens"": [""$amount"", ""$final_float_market_cap"", ""$free_float"", ""$turnover_rate"", ""$limit_up"", ""$limit_down"", ""final_float_market_cap"", ""turnover_rate"", ""limit_up"", ""limit_down""], ""field_native_latency_audit_required"": true, ""fixed_delay_stress_required"": false, ""max_tree_depth"": 8, ""requires_plus_1h_execution"": true, ""same_bar_execution_allowed"": false}",preserve field-native latency policy; no fixed +2h stress gate
+MotifPack,all motif fields exist in A7AI-F0 ledger,PASS,info,all motif fields covered,do not sample missing-contract motif fields
+SelectorPolicy,primitive-response seed policy exists,PASS,info,allowed_seed_fields=5,"use seed role as selector target input, not as formula-search authorization"
+SelectorPolicy,ordinary alpha dry rerank remains non-executing,PASS,info,a7ah1d_decision=HOLD_A7AH1D_NO_ORDINARY_ALPHA_DRY_RERANK_CANDIDATES; formula_search=False,preserve no-search boundary until engine enforcement is patched
+Authorization,A7AH ordinary contract does not authorize large search,PASS,info,a7ah1_decision=PASS_A7AH1_ORDINARY_ALPHA_OBJECTIVE_REWRITE_CONTRACT_READY_FOR_DRY_RERANK,"keep A7AI as hardening gate, not search execution"

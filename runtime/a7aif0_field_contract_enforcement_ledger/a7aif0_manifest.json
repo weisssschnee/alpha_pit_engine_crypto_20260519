@@ -1,0 +1,28 @@
+{
+  "authorizes_a7aif1_engine_enforcement_gap_audit": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AIF0_FIELD_CONTRACT_ENFORCEMENT_LEDGER_READY_FOR_A7AIF1",
+  "diagnostic_allowed_motif_fields": 19,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "field_count": 81,
+  "generated_at": "2026-05-29T09:38:53Z",
+  "hard_blockers": [],
+  "input_artifacts": {
+    "a7ar2_field_audit": "runtime\\a7ar2_feature_algebra_parity_smoke\\a7ar2_field_contract_audit.csv",
+    "feature_role": "runtime\\a7aa2_feature_role_classification\\a7aa2_feature_role_ledger.csv",
+    "lineage": "runtime\\a7al0r_code_feature_regime_readiness_audit\\a7al0r_feature_lineage_ledger.csv",
+    "motif_pack": "config\\crypto_formula_gen_v2_motif_pack_v1.json",
+    "timing": "runtime\\a7al0_top498_alpha_search_contract\\a7al_field_timing_contract.csv"
+  },
+  "motif_field_count": 28,
+  "motif_warning_count": 3,
+  "ordinary_alpha_allowed_motif_fields": 1,
+  "risk_defense_allowed_motif_fields": 5,
+  "stage": "A7AI-F0",
+  "uses_may": false
+}

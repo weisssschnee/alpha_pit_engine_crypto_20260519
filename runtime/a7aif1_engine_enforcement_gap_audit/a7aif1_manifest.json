@@ -1,0 +1,17 @@
+{
+  "authorizes_a7aif2_engine_patch_contract": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AIF1_ENGINE_ENFORCEMENT_CONNECTED",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T09:41:30Z",
+  "hard_gap_count": 0,
+  "hard_gaps": [],
+  "input_a7aif0_decision": "PASS_A7AIF0_FIELD_CONTRACT_ENFORCEMENT_LEDGER_READY_FOR_A7AIF1",
+  "stage": "A7AI-F1",
+  "uses_may": false
+}
