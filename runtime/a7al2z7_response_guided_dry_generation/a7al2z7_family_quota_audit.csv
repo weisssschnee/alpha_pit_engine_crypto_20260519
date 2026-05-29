@@ -1,0 +1,9 @@
+objective_family,generated_count,static_valid_count,selected_for_z8_count,unique_skeleton_count,unique_production_count,family_id,minimum_generated,minimum_selected,quota_pass
+M0_basis_funding_double_difference,405,405,16,6,405,M0_basis_funding_double_difference,160,16,True
+M1_price_range_smoothed_reversal,576,576,16,4,540,M1_price_range_smoothed_reversal,160,16,True
+M2_taker_liquidity_control_resistant,1080,1080,16,6,864,M2_taker_liquidity_control_resistant,160,16,True
+M3_latent_meme_major_neutral,600,600,16,2,600,M3_latent_meme_major_neutral,160,16,True
+M4_regime_relative_value,2016,2016,16,2,2016,M4_regime_relative_value,160,16,True
+M5_trend_breadth_interaction,864,864,16,2,864,M5_trend_breadth_interaction,160,16,True
+M6_low_turnover_funding_premium,384,384,16,8,384,M6_low_turnover_funding_premium,160,16,True
+M7_multi_neutral_cross_family,864,864,16,2,864,M7_multi_neutral_cross_family,160,16,True

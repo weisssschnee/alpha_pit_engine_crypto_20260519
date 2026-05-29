@@ -1,0 +1,17 @@
+{
+  "A7AL-2Z8": {
+    "status": "HOLD_A7AL2Z8_REPAIR_QUOTA_OR_ACTIVITY_FAILURE"
+  },
+  "a7al2z9_numeric_diagnostic": {
+    "authorized": false
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "numeric_replay_execution": {
+    "authorized": false
+  }
+}

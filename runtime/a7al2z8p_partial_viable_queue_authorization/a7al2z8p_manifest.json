@@ -1,0 +1,21 @@
+{
+  "authorizes_a7al2z9_partial_numeric_diagnostic": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_full_replay": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AL2Z8P_PARTIAL_VIABLE_QUEUE_READY_FOR_Z9_DIAGNOSTIC",
+  "executes_authorization_only": true,
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T04:43:11Z",
+  "known_weak_families": "M0/M6/M7 materialization weak; excluded from full-family claim",
+  "selected_activity_failure_count": 0,
+  "selected_candidates": 82,
+  "selected_eval_failure_count": 0,
+  "selected_family_count": 6,
+  "source_z8_decision": "HOLD_A7AL2Z8_REPAIR_QUOTA_OR_ACTIVITY_FAILURE",
+  "stage": "A7AL-2Z8P"
+}

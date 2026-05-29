@@ -1,0 +1,20 @@
+{
+  "A7AL-2Z8P": {
+    "status": "PASS_A7AL2Z8P_PARTIAL_VIABLE_QUEUE_READY_FOR_Z9_DIAGNOSTIC"
+  },
+  "a7al2z9_partial_numeric_diagnostic": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "full_replay": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_full_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_response_guided_partial_numeric_clues"
+  ],
+  "candidate_count": 82,
+  "decision": "HOLD_A7AL2Z9_NO_RESPONSE_GUIDED_PARTIAL_NUMERIC_CLUES",
+  "eval_error_count": 0,
+  "executes_generation": false,
+  "executes_partial_numeric_diagnostic": true,
+  "executes_search": false,
+  "executes_training": false,
+  "full_timestamps_before_smoke_subset": 21025,
+  "generated_at": "2026-05-29T04:49:05Z",
+  "label_horizons_h": [
+    1,
+    4,
+    8,
+    24
+  ],
+  "metric_rows": 11480,
+  "pre_may_clue_may_unobserved_count": 0,
+  "pre_may_clue_may_veto_count": 0,
+  "source_z8p_selected_candidates": 82,
+  "stage": "A7AL-2Z9",
+  "stress_clean_clue_count": 0,
+  "symbols_loaded": 96,
+  "timestamps": 3481,
+  "uses_may_in_generation": false,
+  "uses_may_in_selector": false
+}

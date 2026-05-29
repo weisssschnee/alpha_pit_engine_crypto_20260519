@@ -1,0 +1,17 @@
+{
+  "A7AL-2Z9": {
+    "status": "HOLD_A7AL2Z9_NO_RESPONSE_GUIDED_PARTIAL_NUMERIC_CLUES"
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "full_replay": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

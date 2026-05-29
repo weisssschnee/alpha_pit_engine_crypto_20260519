@@ -1,0 +1,20 @@
+{
+  "A7AL-2Z7": {
+    "status": "PASS_A7AL2Z7_RESPONSE_GUIDED_DRY_GENERATION_READY_FOR_Z8"
+  },
+  "a7al2z8_materialization_repair": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "numeric_replay": {
+    "authorized": false
+  }
+}

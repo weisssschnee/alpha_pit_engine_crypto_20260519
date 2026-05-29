@@ -1,0 +1,7 @@
+objective_family,selected_count,z7_seed_retained_count,unique_skeleton_count,median_finite_share,median_nonzero_share
+M1_price_range_smoothed_reversal,16,16,4,0.820741166331514,1.0
+M2_taker_liquidity_control_resistant,16,16,6,0.953165397874174,0.9999888311404316
+M3_latent_meme_major_neutral,16,13,2,0.97701809824763,1.0
+M4_regime_relative_value,16,11,2,0.8149956908934215,1.0
+M5_trend_breadth_interaction,16,16,2,0.8172938810686584,1.0
+M6_low_turnover_funding_premium,2,2,2,0.5168758378818348,0.9997729369701862

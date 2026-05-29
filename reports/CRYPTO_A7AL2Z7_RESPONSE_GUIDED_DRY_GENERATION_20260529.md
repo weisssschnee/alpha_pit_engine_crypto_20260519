@@ -1,0 +1,98 @@
+# CRYPTO A7AL-2Z7 RESPONSE-GUIDED DRY GENERATION
+
+Generated: 2026-05-29T04:22:53Z
+
+## Decision
+
+`PASS_A7AL2Z7_RESPONSE_GUIDED_DRY_GENERATION_READY_FOR_Z8`
+
+Z7 uses Z6 non-May failure directives to generate response-guided non-OI candidates. It does not replay, train, or authorize proof.
+
+## Manifest
+
+```json
+{
+  "authorizes_a7al2z8_materialization_repair": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "blocker_count": 0,
+  "decision": "PASS_A7AL2Z7_RESPONSE_GUIDED_DRY_GENERATION_READY_FOR_Z8",
+  "executes_numeric_replay": false,
+  "executes_static_generation": true,
+  "executes_training": false,
+  "family_count": 8,
+  "generated_at": "2026-05-29T04:22:53Z",
+  "generated_total": 6789,
+  "selected_for_z8_count": 128,
+  "selected_top_family_share": 0.125,
+  "stage": "A7AL-2Z7",
+  "static_valid_count": 6789,
+  "unique_expr_ratio": 0.9840919133893062,
+  "uses_may": false,
+  "uses_oi_or_positioning_core": false
+}
+```
+
+## Family Quota Audit
+
+| objective_family                     |   generated_count |   static_valid_count |   selected_for_z8_count |   unique_skeleton_count |   unique_production_count | family_id                            |   minimum_generated |   minimum_selected | quota_pass   |
+|:-------------------------------------|------------------:|---------------------:|------------------------:|------------------------:|--------------------------:|:-------------------------------------|--------------------:|-------------------:|:-------------|
+| M0_basis_funding_double_difference   |               405 |                  405 |                      16 |                       6 |                       405 | M0_basis_funding_double_difference   |                 160 |                 16 | True         |
+| M1_price_range_smoothed_reversal     |               576 |                  576 |                      16 |                       4 |                       540 | M1_price_range_smoothed_reversal     |                 160 |                 16 | True         |
+| M2_taker_liquidity_control_resistant |              1080 |                 1080 |                      16 |                       6 |                       864 | M2_taker_liquidity_control_resistant |                 160 |                 16 | True         |
+| M3_latent_meme_major_neutral         |               600 |                  600 |                      16 |                       2 |                       600 | M3_latent_meme_major_neutral         |                 160 |                 16 | True         |
+| M4_regime_relative_value             |              2016 |                 2016 |                      16 |                       2 |                      2016 | M4_regime_relative_value             |                 160 |                 16 | True         |
+| M5_trend_breadth_interaction         |               864 |                  864 |                      16 |                       2 |                       864 | M5_trend_breadth_interaction         |                 160 |                 16 | True         |
+| M6_low_turnover_funding_premium      |               384 |                  384 |                      16 |                       8 |                       384 | M6_low_turnover_funding_premium      |                 160 |                 16 | True         |
+| M7_multi_neutral_cross_family        |               864 |                  864 |                      16 |                       2 |                       864 | M7_multi_neutral_cross_family        |                 160 |                 16 | True         |
+
+## Selected Preview
+
+| candidate_id             | objective_family                     | expression                                                                                                                                                                             | field_families                      | operator_signature                                         | skeleton_key              |
+|:-------------------------|:-------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------|:-----------------------------------------------------------|:--------------------------|
+| a7al2z7_002f1b9a11a16083 | M0_basis_funding_double_difference   | LatentNeutralRank(Sub(Rank(Mean(Delta(mark_trade_basis_bps,12),8)),Rank(Mean(Delta(funding_rate,12),8))),liquidity_tier)                                                               | basis_premium\|funding\|state       | Delta\|LatentNeutralRank\|Mean\|Rank\|Sub                  | skeleton-aea444a5ed8a6400 |
+| a7al2z7_00b9f7f2e817cf7d | M0_basis_funding_double_difference   | LatentNeutralRank(Sub(Rank(Mean(Delta(mark_index_basis_bps,48),4)),Rank(Mean(Delta(funding_rate,48),4))),R5_basis_premium_dislocation_state)                                           | basis_premium\|funding\|state       | Delta\|LatentNeutralRank\|Mean\|Rank\|Sub                  | skeleton-1d048fd25fceb186 |
+| a7al2z7_029bd0dc4ea7deaa | M0_basis_funding_double_difference   | LatentNeutralRank(Sub(Rank(Mean(Delta(mark_index_basis_bps,48),8)),Rank(Mean(Delta(funding_rate,48),8))),R10_stress_proxy_state)                                                       | basis_premium\|funding\|state       | Delta\|LatentNeutralRank\|Mean\|Rank\|Sub                  | skeleton-1d048fd25fceb186 |
+| a7al2z7_02a37ddf932978e0 | M0_basis_funding_double_difference   | GroupNeutralize(Sub(Rank(Mean(Delta(mark_index_basis_bps,48),4)),Rank(Mean(Delta(funding_rate,48),4))),R5_basis_premium_dislocation_state)                                             | basis_premium\|funding\|state       | Delta\|GroupNeutralize\|Mean\|Rank\|Sub                    | skeleton-4964bb24550c433f |
+| a7al2z7_02bf2e7e1a213cbd | M0_basis_funding_double_difference   | GroupNeutralize(Sub(Rank(Mean(Delta(premium_close_bps,72),12)),Rank(Mean(Delta(funding_rate,72),12))),R5_basis_premium_dislocation_state)                                              | basis_premium\|funding\|state       | Delta\|GroupNeutralize\|Mean\|Rank\|Sub                    | skeleton-4964bb24550c433f |
+| a7al2z7_02c858f34d65b612 | M0_basis_funding_double_difference   | LatentNeutralRank(Sub(Rank(Mean(Delta(mark_trade_basis_bps,72),12)),Rank(Mean(Delta(funding_rate,72),12))),R5_basis_premium_dislocation_state)                                         | basis_premium\|funding\|state       | Delta\|LatentNeutralRank\|Mean\|Rank\|Sub                  | skeleton-1d048fd25fceb186 |
+| a7al2z7_0360ff84330cad0a | M0_basis_funding_double_difference   | LatentNeutralRank(Sub(Rank(Mean(Delta(premium_close_bps,168),12)),Rank(Mean(Delta(funding_rate,168),12))),R10_stress_proxy_state)                                                      | basis_premium\|funding\|state       | Delta\|LatentNeutralRank\|Mean\|Rank\|Sub                  | skeleton-1d048fd25fceb186 |
+| a7al2z7_065abbf8a0fe1fb7 | M0_basis_funding_double_difference   | GroupNeutralize(Sub(Rank(Mean(Delta(premium_close_bps,72),8)),Rank(Mean(Delta(funding_rate,72),8))),R10_stress_proxy_state)                                                            | basis_premium\|funding\|state       | Delta\|GroupNeutralize\|Mean\|Rank\|Sub                    | skeleton-4964bb24550c433f |
+| a7al2z7_066be0cdc6266ec1 | M0_basis_funding_double_difference   | GroupNeutralize(Sub(Rank(Mean(Delta(mark_index_basis_bps,48),8)),Rank(Mean(Delta(funding_rate,48),8))),R10_stress_proxy_state)                                                         | basis_premium\|funding\|state       | Delta\|GroupNeutralize\|Mean\|Rank\|Sub                    | skeleton-4964bb24550c433f |
+| a7al2z7_068bb1a1076a5844 | M0_basis_funding_double_difference   | LatentNeutralRank(Sub(Rank(Mean(Delta(mark_index_basis_bps,48),12)),Rank(Mean(Delta(funding_rate,48),12))),liquidity_tier)                                                             | basis_premium\|funding\|state       | Delta\|LatentNeutralRank\|Mean\|Rank\|Sub                  | skeleton-aea444a5ed8a6400 |
+| a7al2z7_077a7ed6ad2b4e7c | M0_basis_funding_double_difference   | GroupNeutralize(Sub(Rank(Mean(Delta(mark_index_basis_bps,168),12)),Rank(Mean(Delta(funding_rate,168),12))),liquidity_tier)                                                             | basis_premium\|funding\|state       | Delta\|GroupNeutralize\|Mean\|Rank\|Sub                    | skeleton-c0f866db89ee2ec1 |
+| a7al2z7_07b817c9b7cafc4e | M0_basis_funding_double_difference   | GroupNeutralize(Mul(Winsor(ZScore(Mean(Delta(mark_index_basis_bps,72),4))),Neg(Winsor(ZScore(Mean(Delta(funding_rate,72),4))))),R5_basis_premium_dislocation_state)                    | basis_premium\|funding\|state       | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Winsor\|ZScore     | skeleton-fe9029b7f2645954 |
+| a7al2z7_082fbbd3dfdcd912 | M0_basis_funding_double_difference   | LatentNeutralRank(Sub(Rank(Mean(Delta(mark_trade_basis_bps,24),4)),Rank(Mean(Delta(funding_rate,24),4))),R10_stress_proxy_state)                                                       | basis_premium\|funding\|state       | Delta\|LatentNeutralRank\|Mean\|Rank\|Sub                  | skeleton-1d048fd25fceb186 |
+| a7al2z7_087b0dafeafd155d | M0_basis_funding_double_difference   | GroupNeutralize(Sub(Rank(Mean(Delta(mark_trade_basis_bps,24),12)),Rank(Mean(Delta(funding_rate,24),12))),R5_basis_premium_dislocation_state)                                           | basis_premium\|funding\|state       | Delta\|GroupNeutralize\|Mean\|Rank\|Sub                    | skeleton-4964bb24550c433f |
+| a7al2z7_09b3119c49b19810 | M0_basis_funding_double_difference   | GroupNeutralize(Sub(Rank(Mean(Delta(mark_trade_basis_bps,48),8)),Rank(Mean(Delta(funding_rate,48),8))),liquidity_tier)                                                                 | basis_premium\|funding\|state       | Delta\|GroupNeutralize\|Mean\|Rank\|Sub                    | skeleton-c0f866db89ee2ec1 |
+| a7al2z7_0f2955824976ef30 | M0_basis_funding_double_difference   | GroupNeutralize(Mul(Winsor(ZScore(Mean(Delta(mark_index_basis_bps,24),8))),Neg(Winsor(ZScore(Mean(Delta(funding_rate,24),8))))),liquidity_tier)                                        | basis_premium\|funding\|state       | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Winsor\|ZScore     | skeleton-e4518b847942bc9b |
+| a7al2z7_00465f6a4d7171aa | M1_price_range_smoothed_reversal     | GroupNeutralize(Mul(Rank(SafeDiv(Mean(Sub(trade_high,trade_low),48),Mean(index_close,48))),Neg(Rank(Delta(index_close,24)))),R1_market_volatility_state)                               | price\|range\|state                 | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|SafeDiv\|Sub | skeleton-a8da5fed8b17facd |
+| a7al2z7_009122ab58cd2a9c | M1_price_range_smoothed_reversal     | LatentNeutralRank(Sub(Rank(SafeDiv(Mean(Sub(trade_high,trade_low),12),Mean(index_close,12))),Rank(Delta(index_close,24))),R0_market_trend_state)                                       | price\|range\|state                 | Delta\|LatentNeutralRank\|Mean\|Rank\|SafeDiv\|Sub         | skeleton-a7537d92797064d4 |
+| a7al2z7_00db615b9305fec8 | M1_price_range_smoothed_reversal     | GroupNeutralize(Mul(Rank(SafeDiv(Mean(Sub(mark_high,mark_low),48),Mean(trade_close,48))),Neg(Rank(Delta(trade_close,24)))),liquidity_tier)                                             | price\|range\|state                 | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|SafeDiv\|Sub | skeleton-7522e672725c8071 |
+| a7al2z7_0138e50d0e7b387a | M1_price_range_smoothed_reversal     | LatentNeutralRank(Sub(Rank(SafeDiv(Mean(Sub(trade_high,trade_low),72),Mean(mark_close,72))),Rank(Delta(mark_close,12))),R0_market_trend_state)                                         | price\|range\|state                 | Delta\|LatentNeutralRank\|Mean\|Rank\|SafeDiv\|Sub         | skeleton-a7537d92797064d4 |
+| a7al2z7_01cba4970c25369f | M1_price_range_smoothed_reversal     | LatentNeutralRank(Sub(Rank(SafeDiv(Mean(Sub(mark_high,mark_low),12),Mean(trade_close,12))),Rank(Delta(trade_close,12))),liquidity_tier)                                                | price\|range\|state                 | Delta\|LatentNeutralRank\|Mean\|Rank\|SafeDiv\|Sub         | skeleton-0fd76254a649d3de |
+| a7al2z7_01cc321810e635c7 | M1_price_range_smoothed_reversal     | LatentNeutralRank(Sub(Rank(SafeDiv(Mean(Sub(mark_high,mark_low),24),Mean(trade_close,24))),Rank(Delta(trade_close,4))),R1_market_volatility_state)                                     | price\|range\|state                 | Delta\|LatentNeutralRank\|Mean\|Rank\|SafeDiv\|Sub         | skeleton-a7537d92797064d4 |
+| a7al2z7_02add0ebbc1d07bd | M1_price_range_smoothed_reversal     | GroupNeutralize(Mul(Rank(SafeDiv(Mean(Sub(mark_high,mark_low),24),Mean(index_close,24))),Neg(Rank(Delta(index_close,12)))),R0_market_trend_state)                                      | price\|range\|state                 | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|SafeDiv\|Sub | skeleton-a8da5fed8b17facd |
+| a7al2z7_037571959d044fcd | M1_price_range_smoothed_reversal     | LatentNeutralRank(Sub(Rank(SafeDiv(Mean(Sub(mark_high,mark_low),12),Mean(index_close,12))),Rank(Delta(index_close,24))),R0_market_trend_state)                                         | price\|range\|state                 | Delta\|LatentNeutralRank\|Mean\|Rank\|SafeDiv\|Sub         | skeleton-a7537d92797064d4 |
+| a7al2z7_0383d053fd041a38 | M1_price_range_smoothed_reversal     | LatentNeutralRank(Sub(Rank(SafeDiv(Mean(Sub(trade_high,trade_low),48),Mean(mark_close,48))),Rank(Delta(mark_close,8))),R1_market_volatility_state)                                     | price\|range\|state                 | Delta\|LatentNeutralRank\|Mean\|Rank\|SafeDiv\|Sub         | skeleton-a7537d92797064d4 |
+| a7al2z7_049337112af7153b | M1_price_range_smoothed_reversal     | LatentNeutralRank(Sub(Rank(SafeDiv(Mean(Sub(trade_high,trade_low),48),Mean(trade_close,48))),Rank(Delta(trade_close,8))),R1_market_volatility_state)                                   | price\|range\|state                 | Delta\|LatentNeutralRank\|Mean\|Rank\|SafeDiv\|Sub         | skeleton-a7537d92797064d4 |
+| a7al2z7_04f82708eab5c29d | M1_price_range_smoothed_reversal     | LatentNeutralRank(Sub(Rank(SafeDiv(Mean(Sub(mark_high,mark_low),72),Mean(index_close,72))),Rank(Delta(index_close,12))),R1_market_volatility_state)                                    | price\|range\|state                 | Delta\|LatentNeutralRank\|Mean\|Rank\|SafeDiv\|Sub         | skeleton-a7537d92797064d4 |
+| a7al2z7_04fa8b02a635cb47 | M1_price_range_smoothed_reversal     | GroupNeutralize(Mul(Rank(SafeDiv(Mean(Sub(mark_high,mark_low),12),Mean(mark_close,12))),Neg(Rank(Delta(mark_close,4)))),R1_market_volatility_state)                                    | price\|range\|state                 | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|SafeDiv\|Sub | skeleton-a8da5fed8b17facd |
+| a7al2z7_05688909c97d394a | M1_price_range_smoothed_reversal     | LatentNeutralRank(Sub(Rank(SafeDiv(Mean(Sub(mark_high,mark_low),48),Mean(index_close,48))),Rank(Delta(index_close,4))),liquidity_tier)                                                 | price\|range\|state                 | Delta\|LatentNeutralRank\|Mean\|Rank\|SafeDiv\|Sub         | skeleton-0fd76254a649d3de |
+| a7al2z7_05b057e58bb433ba | M1_price_range_smoothed_reversal     | GroupNeutralize(Mul(Rank(SafeDiv(Mean(Sub(mark_high,mark_low),24),Mean(trade_close,24))),Neg(Rank(Delta(trade_close,4)))),R0_market_trend_state)                                       | price\|range\|state                 | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|SafeDiv\|Sub | skeleton-a8da5fed8b17facd |
+| a7al2z7_06ea7f699ed8f206 | M1_price_range_smoothed_reversal     | GroupNeutralize(Mul(Rank(SafeDiv(Mean(Sub(trade_high,trade_low),24),Mean(trade_close,24))),Neg(Rank(Delta(trade_close,8)))),liquidity_tier)                                            | price\|range\|state                 | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|SafeDiv\|Sub | skeleton-7522e672725c8071 |
+| a7al2z7_0788b9564003a690 | M1_price_range_smoothed_reversal     | GroupNeutralize(Mul(Rank(SafeDiv(Mean(Sub(mark_high,mark_low),48),Mean(index_close,48))),Neg(Rank(Delta(index_close,12)))),liquidity_tier)                                             | price\|range\|state                 | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|SafeDiv\|Sub | skeleton-7522e672725c8071 |
+| a7al2z7_0041d5fb3124fa47 | M2_taker_liquidity_control_resistant | GroupNeutralize(Mul(Sub(Rank(Mean(Delta(kline_taker_buy_quote_share,8),8)),Rank(Mean(Delta(trade_count,8),8))),Neg(Rank(Delta(trade_close,8)))),meme_contract_group)                   | liquidity\|price\|state\|taker_flow | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|Sub          | skeleton-083e6f1b3a15137b |
+| a7al2z7_00bf2939f831a24a | M2_taker_liquidity_control_resistant | GroupNeutralize(Mul(Sub(Rank(Mean(Delta(taker_buy_sell_volume_ratio_last,48),8)),Rank(Mean(Delta(trade_volume,48),8))),Neg(Rank(Delta(trade_close,24)))),meme_contract_group)          | liquidity\|price\|state\|taker_flow | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|Sub          | skeleton-083e6f1b3a15137b |
+| a7al2z7_00db8d680b5b65af | M2_taker_liquidity_control_resistant | GroupNeutralize(Mul(Sub(Rank(Mean(Delta(kline_taker_buy_quote_share,4),12)),Rank(Mean(Delta(taker_buy_quote_volume,4),12))),Neg(Rank(Delta(trade_close,4)))),R3_liquidity_cycle_state) | price\|state\|taker_flow            | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|Sub          | skeleton-35ccb86a77df3dd0 |
+| a7al2z7_00e7c95da6ccaad7 | M2_taker_liquidity_control_resistant | GroupNeutralize(Sub(Rank(Mean(Delta(taker_buy_sell_volume_ratio_last,8),8)),Rank(Mean(Delta(trade_count,8),8))),R3_liquidity_cycle_state)                                              | liquidity\|state\|taker_flow        | Delta\|GroupNeutralize\|Mean\|Rank\|Sub                    | skeleton-4964bb24550c433f |
+| a7al2z7_00e90fb95f68ca2c | M2_taker_liquidity_control_resistant | GroupNeutralize(Mul(Sub(Rank(Mean(Delta(taker_buy_sell_volume_ratio_last,4),4)),Rank(Mean(Delta(trade_volume,4),4))),Neg(Rank(Delta(trade_close,4)))),meme_contract_group)             | liquidity\|price\|state\|taker_flow | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|Sub          | skeleton-083e6f1b3a15137b |
+| a7al2z7_014cec2ab624f1d7 | M2_taker_liquidity_control_resistant | GroupNeutralize(Mul(Sub(Rank(Mean(Delta(kline_taker_buy_quote_share,24),12)),Rank(Mean(Delta(trade_volume,24),12))),Neg(Rank(Delta(trade_close,24)))),meme_contract_group)             | liquidity\|price\|state\|taker_flow | Delta\|GroupNeutralize\|Mean\|Mul\|Neg\|Rank\|Sub          | skeleton-083e6f1b3a15137b |
+| a7al2z7_015149b9c8223e6a | M2_taker_liquidity_control_resistant | LatentNeutralRank(Sub(Rank(Mean(Delta(taker_buy_sell_volume_ratio_last,4),8)),Rank(Mean(Delta(trade_quote_volume,4),8))),R3_liquidity_cycle_state)                                     | liquidity\|state\|taker_flow        | Delta\|LatentNeutralRank\|Mean\|Rank\|Sub                  | skeleton-1d048fd25fceb186 |
+| a7al2z7_01a5639ce271a902 | M2_taker_liquidity_control_resistant | LatentNeutralRank(Sub(Rank(Mean(Delta(taker_buy_sell_volume_ratio_last,48),8)),Rank(Mean(Delta(trade_count,48),8))),meme_contract_group)                                               | liquidity\|state\|taker_flow        | Delta\|LatentNeutralRank\|Mean\|Rank\|Sub                  | skeleton-aea444a5ed8a6400 |
+
+## Blockers
+
+No blockers.

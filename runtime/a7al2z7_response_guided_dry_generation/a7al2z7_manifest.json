@@ -1,0 +1,22 @@
+{
+  "authorizes_a7al2z8_materialization_repair": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "blocker_count": 0,
+  "decision": "PASS_A7AL2Z7_RESPONSE_GUIDED_DRY_GENERATION_READY_FOR_Z8",
+  "executes_numeric_replay": false,
+  "executes_static_generation": true,
+  "executes_training": false,
+  "family_count": 8,
+  "generated_at": "2026-05-29T04:22:53Z",
+  "generated_total": 6789,
+  "selected_for_z8_count": 128,
+  "selected_top_family_share": 0.125,
+  "stage": "A7AL-2Z7",
+  "static_valid_count": 6789,
+  "unique_expr_ratio": 0.9840919133893062,
+  "uses_may": false,
+  "uses_oi_or_positioning_core": false
+}

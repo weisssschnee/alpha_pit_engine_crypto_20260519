@@ -1,0 +1,20 @@
+{
+  "A7AL-2Z6": {
+    "status": "PASS_A7AL2Z6_RESPONSE_GUIDED_MUTATION_CONTRACT_READY_FOR_Z7"
+  },
+  "a7al2z7_response_guided_generation": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "full_replay": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

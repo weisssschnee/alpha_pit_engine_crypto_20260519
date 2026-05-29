@@ -1,0 +1,21 @@
+{
+  "authorizes_a7al2z7_response_guided_generation": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_full_replay": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AL2Z6_RESPONSE_GUIDED_MUTATION_CONTRACT_READY_FOR_Z7",
+  "executes_contract_only": true,
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T04:20:21Z",
+  "source_z5_blockers": [
+    "no_multi_horizon_numeric_preflight_clues"
+  ],
+  "source_z5_decision": "HOLD_A7AL2Z5_NO_MULTI_HORIZON_PREFLIGHT_CLUES",
+  "source_z5_stress_clean_count": 0,
+  "stage": "A7AL-2Z6",
+  "uses_may_for_mutation": false
+}

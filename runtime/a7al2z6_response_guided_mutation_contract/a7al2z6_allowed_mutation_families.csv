@@ -1,0 +1,9 @@
+family_id,description,minimum_generated,minimum_selected
+M0_basis_funding_double_difference,Basis/premium and funding dislocation with group-neutral double differences.,160,16
+M1_price_range_smoothed_reversal,Smoothed range/price reversal with volatility and trend-state neutralization.,160,16
+M2_taker_liquidity_control_resistant,Taker/liquidity pressure after liquidity-tier and stale-control resistant transforms.,160,16
+M3_latent_meme_major_neutral,"Latent, meme, major and multiplier neutral structures using non-OI fields.",160,16
+M4_regime_relative_value,Regime-neutral relative value between basis/funding/price/taker fields.,160,16
+M5_trend_breadth_interaction,Market trend/breadth state interactions with price and premium reversals.,160,16
+M6_low_turnover_funding_premium,Lower-turnover funding/premium persistence and compression forms.,160,16
+M7_multi_neutral_cross_family,Cross-family expressions requiring both state neutralization and source diversity.,160,16
