@@ -1,0 +1,11 @@
+{
+  "authorizes_a7al2x7_small_numeric_replay_preflight": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_generation": false,
+  "authorizes_full_numeric_replay": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AL2X6_SMALL_NUMERIC_REPLAY_CONTRACT_READY_FOR_A7AL2X7",
+  "requires_x5_decision": "PASS_A7AL2X5_EVALUATOR_PREFLIGHT_SMOKE_READY_FOR_SMALL_REPLAY_CONTRACT",
+  "x5_decision": "PASS_A7AL2X5_EVALUATOR_PREFLIGHT_SMOKE_READY_FOR_SMALL_REPLAY_CONTRACT"
+}

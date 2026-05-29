@@ -1,0 +1,8 @@
+objective_family,selected_available
+F0_OI_delta_price_interaction,32
+F1_OI_basis_premium_interaction,24
+F2_OI_funding_crowding_interaction,24
+F3_positioning_divergence,24
+F4_OI_taker_flow_interaction,24
+F5_OI_upper_regime_interaction,24
+F6_OI_latent_state_interaction,24

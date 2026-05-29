@@ -1,0 +1,10 @@
+metric_or_variant,purpose,requirement
+original,primary signal spread,required
+one_bar_lag,execution alignment stress,required
+wrong_lag_future_24h,lookahead/control contamination check,required
+wrong_lag_stale_168h,stale-lag/control contamination check,required
+time_shuffle,time null,required
+symbol_shuffle,cross-section null,required
+same_family_random,same-family random placebo,required
+overlap_disclosure,24h labels overlap; report naive tstat as diagnostic only,required
+non_overlap_offsets,24 offset tstats if implemented in X7,recommended

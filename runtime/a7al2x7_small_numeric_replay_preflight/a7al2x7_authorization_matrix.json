@@ -1,0 +1,17 @@
+{
+  "A7AL-2X7": {
+    "status": "HOLD_A7AL2X7_NO_CLEAN_NUMERIC_PREFLIGHT_CLUES"
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_generation": {
+    "authorized": false
+  },
+  "full_numeric_replay": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

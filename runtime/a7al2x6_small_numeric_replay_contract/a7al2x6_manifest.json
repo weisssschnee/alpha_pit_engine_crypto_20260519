@@ -1,0 +1,14 @@
+{
+  "authorizes_a7al2x7_small_numeric_replay_preflight": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_cap": 56,
+  "decision": "PASS_A7AL2X6_SMALL_NUMERIC_REPLAY_CONTRACT_READY_FOR_A7AL2X7",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T01:07:07Z",
+  "per_family_cap": 8,
+  "selected_available": 176,
+  "stage": "A7AL-2X6"
+}

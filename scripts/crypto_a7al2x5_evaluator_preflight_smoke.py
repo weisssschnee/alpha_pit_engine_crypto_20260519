@@ -232,31 +232,30 @@ def cs_rank_pct(values: np.ndarray) -> np.ndarray:
 
 def group_demean(values: np.ndarray, groups: np.ndarray, min_group: int = 3) -> np.ndarray:
     out = np.full_like(values, np.nan, dtype=np.float64)
-    for t in range(values.shape[1]):
-        col = values[:, t]
-        grp = groups[:, t].astype(str)
-        valid = np.isfinite(col) & pd.notna(grp)
-        if not valid.any():
-            continue
-        for g in np.unique(grp[valid]):
-            idx = valid & (grp == g)
-            if idx.sum() < min_group:
-                continue
-            out[idx, t] = col[idx] - np.nanmean(col[idx])
+    grp = groups.astype(str)
+    valid_all = np.isfinite(values) & (grp != "None") & (grp != "nan")
+    for g in np.unique(grp[valid_all]):
+        mask = (grp == g) & np.isfinite(values)
+        count = mask.sum(axis=0)
+        vals = np.where(mask, values, np.nan)
+        with np.errstate(invalid="ignore"):
+            mean = np.nanmean(vals, axis=0, keepdims=True)
+        ok = mask & (count.reshape(1, -1) >= min_group)
+        out[ok] = (values - mean)[ok]
     return out
 
 
 def group_rank(values: np.ndarray, groups: np.ndarray, min_group: int = 3) -> np.ndarray:
     out = np.full_like(values, np.nan, dtype=np.float64)
-    for t in range(values.shape[1]):
-        col = values[:, t]
-        grp = groups[:, t].astype(str)
-        valid = np.isfinite(col) & pd.notna(grp)
-        for g in np.unique(grp[valid]):
-            idx = valid & (grp == g)
-            if idx.sum() < min_group:
-                continue
-            out[idx, t] = pd.Series(col[idx]).rank(pct=True, method="average").to_numpy(dtype=np.float64)
+    grp = groups.astype(str)
+    valid_all = np.isfinite(values) & (grp != "None") & (grp != "nan")
+    for g in np.unique(grp[valid_all]):
+        mask = (grp == g) & np.isfinite(values)
+        count = mask.sum(axis=0)
+        vals = np.where(mask, values, np.nan)
+        ranked = pd.DataFrame(vals).rank(axis=0, pct=True, method="average").to_numpy(dtype=np.float64)
+        ok = mask & (count.reshape(1, -1) >= min_group)
+        out[ok] = ranked[ok]
     return out
 
 

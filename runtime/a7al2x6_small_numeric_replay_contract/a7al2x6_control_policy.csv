@@ -1,0 +1,7 @@
+condition,policy
+control_ratio >= 1.00 in any pre-May split,hard_reject
+0.80 <= control_ratio < 1.00,warning
+wrong_lag_future stronger than original,hard_reject
+wrong_lag_stale stronger than original,hard_reject
+May pass/fail in selector,forbidden
+May stress,post-selection veto/attribution only

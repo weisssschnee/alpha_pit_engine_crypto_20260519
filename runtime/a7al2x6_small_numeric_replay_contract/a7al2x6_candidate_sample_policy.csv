@@ -1,0 +1,12 @@
+policy_key,policy_value
+input_pool,A7AL-2X3 selected_for_family_balanced_preflight candidates only
+input_gate,requires A7AL-2X4M PASS and A7AL-2X5 PASS
+candidate_cap,56 candidates max
+family_quota,up to 8 candidates per F0-F6 objective family
+selection_order,family-balanced; skeleton diversity; production diversity; no May score
+symbol_sample,"strict_full_history symbols, max 96 for X7 preflight"
+frequency,1h
+label,log trade_close[t+24h] - log trade_close[t]
+label_boundary,label end must remain inside split
+cost_proxy,report 0/2/5/10 bps proxy net spread; no production cost proof
+neutralization,report original plus state-aware evaluator compatibility; full neutral replay remains later

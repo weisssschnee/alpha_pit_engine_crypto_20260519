@@ -1,0 +1,8 @@
+audit_item,contract
+lookahead,feature fields must come from A7AL-2X5 materialized fields; no future rank statistics
+survivorship,X7 preflight uses strict_full_history sample only; universe498 remains current/listing-aware outside proof
+date_alignment,signal at t; label t to t+24h; one_bar_lag variant required
+label_horizon,24h overlapping label disclosed; naive tstat not promotion evidence
+transaction_cost,bps proxy only; no production cost proof
+turnover,not a tradable book; report signal turnover proxy if implemented later
+replay_vs_discovery,"X7 is replay preflight from generated pool, not discovery proof"
