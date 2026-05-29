@@ -1,0 +1,21 @@
+{
+  "authorizes_a7ff8_numeric_probe_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "blueprint_count": 9271,
+  "decision": "PASS_A7FF7E_EXPANDED_DERIVATION_READY_FOR_A7FF8_NUMERIC_PROBE",
+  "executes_generation": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-29T16:24:01Z",
+  "motif_count": 8,
+  "previous_a7ff6_decision": "HOLD_A7FF6_PORTFOLIO_MARGINAL_DRYRUN_NOT_PROMOTABLE",
+  "selected_for_numeric_probe": 384,
+  "selected_motif_count": 7,
+  "selected_semantic_pair_count": 5,
+  "semantic_pair_count": 5,
+  "stage": "A7FF-7E",
+  "uses_may": false
+}

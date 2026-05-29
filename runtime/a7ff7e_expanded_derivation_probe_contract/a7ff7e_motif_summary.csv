@@ -1,0 +1,15 @@
+motif,selected_for_a7ff8_numeric_probe,count
+gated_sign,False,1264
+gated_sign,True,96
+mul,False,1172
+mul,True,96
+relative_shock,False,1264
+relative_shock,True,96
+safe_div_abs,False,1189
+safe_div_abs,True,11
+single,True,15
+smooth_interaction,False,1298
+smooth_interaction,True,62
+spread_rank,False,1352
+spread_rank,True,8
+sub,False,1348
