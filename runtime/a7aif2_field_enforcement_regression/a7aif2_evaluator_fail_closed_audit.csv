@@ -1,0 +1,4 @@
+check,expression,should_pass,actual_pass,error,decision
+allowed_contract_field,mark_index_basis_bps,True,True,,PASS
+label_future_field,forward_trade_return_1h,False,False,field contract blocks field: forward_trade_return_1h:FORBID,PASS
+missing_contract_field,made_up_field,False,False,field contract missing: made_up_field,PASS

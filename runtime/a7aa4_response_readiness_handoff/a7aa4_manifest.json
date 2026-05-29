@@ -1,0 +1,25 @@
+{
+  "active_label_families": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return",
+    "L7_ranked_future_return"
+  ],
+  "authorizes_a7sel0": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AA4_RESPONSE_LABEL_READINESS_HANDOFF_FOR_A7SEL0",
+  "deferred_or_missing_label_families": [
+    "L4_latent_state_relative_return"
+  ],
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T14:12:41Z",
+  "reuses_existing_a7aa0_to_a7aa3": true,
+  "signal_candidate_field_count": 5,
+  "stage": "A7AA-4"
+}

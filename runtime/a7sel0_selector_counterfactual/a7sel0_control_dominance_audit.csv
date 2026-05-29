@@ -1,0 +1,5 @@
+candidate_id,control_ratio_for_selector,control_dominated,role_violation,candidate_role
+a7al2q_1378ff7d2322adee,0.5977895485931952,False,False,risk_defense_only
+a7al2q_69d146749c30da3c,0.6386744001375635,False,False,weak_or_unclassified
+a7al2q_a4993fe3273bf0c8,0.6664196226160567,False,False,risk_defense_only
+a7al2q_5da100b2822dc1a6,0.6678080866883747,False,False,risk_defense_only

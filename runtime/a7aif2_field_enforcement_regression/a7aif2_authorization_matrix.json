@@ -1,0 +1,11 @@
+{
+  "A7AI-F2": {
+    "status": "PASS_A7AIF2_END_TO_END_ENFORCEMENT_CONNECTED"
+  },
+  "A7AI-F3": {
+    "authorized": true
+  },
+  "search": {
+    "authorized": false
+  }
+}

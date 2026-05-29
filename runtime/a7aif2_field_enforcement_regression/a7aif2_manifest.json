@@ -1,0 +1,16 @@
+{
+  "authorizes_a7aif3": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AIF2_END_TO_END_ENFORCEMENT_CONNECTED",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T14:09:19Z",
+  "generator_mode_count": 3,
+  "historical_candidate_count": 4000,
+  "role_violation_count": 0,
+  "stage": "A7AI-F2"
+}

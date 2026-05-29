@@ -1,0 +1,16 @@
+operator,expression,supported,finite_rows,max_abs_diff_contract_vs_plain,error,resolution
+Mean,"Mean(mark_index_basis_bps,4)",True,244,0.0,,resolved
+Delta,"Delta(mark_index_basis_bps,4)",True,240,0.0,,resolved
+ZScore,ZScore(mark_index_basis_bps),True,256,0.0,,resolved
+Rank,Rank(mark_index_basis_bps),True,256,0.0,,resolved
+CSRank,CSRank(mark_index_basis_bps),True,256,0.0,,resolved
+Mul,"Mul(ZScore(mark_index_basis_bps),Rank(premium_close_bps))",True,256,0.0,,resolved
+Sub,"Sub(ZScore(mark_index_basis_bps),ZScore(premium_close_bps))",True,256,0.0,,resolved
+Add,"Add(ZScore(mark_index_basis_bps),ZScore(premium_close_bps))",True,256,0.0,,resolved
+Neg,Neg(ZScore(mark_index_basis_bps)),True,256,0.0,,resolved
+Abs,Abs(ZScore(mark_index_basis_bps)),True,256,0.0,,resolved
+Sign,"Sign(Delta(mark_index_basis_bps,4))",True,240,0.0,,resolved
+SafeDiv,"SafeDiv(ZScore(mark_index_basis_bps),Abs(ZScore(premium_close_bps)))",True,256,0.0,,resolved
+Clip,"Clip(ZScore(mark_index_basis_bps),-2,2)",True,256,0.0,,resolved
+TSRank,"TSRank(mark_index_basis_bps,24)",True,164,0.0,,resolved
+Decay,"Decay(mark_index_basis_bps,24)",True,164,0.0,,resolved

@@ -74,6 +74,42 @@ def _cross_sectional_zscore(values: pd.Series, frame: pd.DataFrame) -> pd.Series
     return (values - mean) / std
 
 
+def _rolling_rank(values: pd.Series, frame: pd.DataFrame, window: int) -> pd.Series:
+    def rank_last(chunk: np.ndarray) -> float:
+        finite = chunk[np.isfinite(chunk)]
+        if len(finite) == 0 or not np.isfinite(chunk[-1]):
+            return np.nan
+        return float((finite <= chunk[-1]).mean())
+
+    return (
+        _group_symbol(values, frame)
+        .rolling(window=max(1, int(window)), min_periods=max(2, min(int(window), 24)))
+        .apply(rank_last, raw=True)
+        .reset_index(level=0, drop=True)
+        .reindex(values.index)
+    )
+
+
+def _decay_linear(values: pd.Series, frame: pd.DataFrame, window: int) -> pd.Series:
+    def weighted(chunk: np.ndarray) -> float:
+        finite = np.asarray(chunk, dtype=float)
+        if not np.isfinite(finite).any():
+            return np.nan
+        weights = np.arange(1, len(finite) + 1, dtype=float)
+        mask = np.isfinite(finite)
+        if not mask.any():
+            return np.nan
+        return float(np.dot(finite[mask], weights[mask]) / weights[mask].sum())
+
+    return (
+        _group_symbol(values, frame)
+        .rolling(window=max(1, int(window)), min_periods=max(2, min(int(window), 24)))
+        .apply(weighted, raw=True)
+        .reset_index(level=0, drop=True)
+        .reindex(values.index)
+    )
+
+
 def _to_numeric(values: pd.Series) -> pd.Series:
     return pd.to_numeric(values, errors="coerce").replace([np.inf, -np.inf], np.nan)
 
@@ -144,6 +180,14 @@ class CryptoFeatureAlgebra:
             if len(args) != 2:
                 raise ValueError(f"Delta expects 2 args: {expression}")
             return _delta(self._eval(args[0]), self.frame, int(args[1]))
+        if name == "TSRank":
+            if len(args) != 2:
+                raise ValueError(f"TSRank expects 2 args: {expression}")
+            return _rolling_rank(self._eval(args[0]), self.frame, int(args[1]))
+        if name == "Decay":
+            if len(args) != 2:
+                raise ValueError(f"Decay expects 2 args: {expression}")
+            return _decay_linear(self._eval(args[0]), self.frame, int(args[1]))
         if name in {"Rank", "CSRank"}:
             if len(args) != 1:
                 raise ValueError(f"{name} expects 1 arg: {expression}")
@@ -160,6 +204,12 @@ class CryptoFeatureAlgebra:
             if len(args) != 2:
                 raise ValueError(f"Sub expects 2 args: {expression}")
             return self._eval(args[0]) - self._eval(args[1])
+        if name == "SafeDiv":
+            if len(args) != 2:
+                raise ValueError(f"SafeDiv expects 2 args: {expression}")
+            denominator = self._eval(args[1]).replace(0.0, np.nan)
+            denominator = denominator.mask(denominator.abs() < 1e-12)
+            return self._eval(args[0]) / denominator
         if name == "Add":
             if len(args) != 2:
                 raise ValueError(f"Add expects 2 args: {expression}")
@@ -176,6 +226,10 @@ class CryptoFeatureAlgebra:
             if len(args) != 1:
                 raise ValueError(f"Sign expects 1 arg: {expression}")
             return np.sign(self._eval(args[0]))
+        if name == "Clip":
+            if len(args) != 3:
+                raise ValueError(f"Clip expects 3 args: {expression}")
+            return self._eval(args[0]).clip(lower=float(args[1]), upper=float(args[2]))
         raise ValueError(f"unsupported operator: {name}")
 
     def _validate_field_contract(self, field: str) -> None:

@@ -1,0 +1,3 @@
+candidate_role,decision,count
+risk_defense_only,DIAGNOSTIC_ONLY,1982
+weak_or_unclassified,DIAGNOSTIC_ONLY,2018

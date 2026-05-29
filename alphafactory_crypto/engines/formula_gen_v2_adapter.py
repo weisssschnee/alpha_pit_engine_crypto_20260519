@@ -177,8 +177,20 @@ class CryptoFormulaGenV2Adapter:
             slots[f"w{index}"] = str(self._sample_window())
         return template.format(**slots), tuple(sorted(set(used_families))), tuple(sorted(set(used_fields)))
 
-    def generate(self, *, index: int = 0) -> CryptoFormulaCandidate:
+    def _eligible_motif_families(self) -> dict[str, Any]:
+        registry = self.field_registry
         families = self.config.get("motif_families") or {}
+        eligible: dict[str, Any] = {}
+        for family, spec in families.items():
+            required_families = list(spec.get("field_families") or [])
+            if all(registry.get(str(required)) for required in required_families):
+                eligible[str(family)] = spec
+        return eligible
+
+    def generate(self, *, index: int = 0) -> CryptoFormulaCandidate:
+        families = self._eligible_motif_families()
+        if not families:
+            raise RuntimeError(f"no motif families have fields allowed for field_mode={self.field_mode}")
         weights = {key: float(value.get("weight", 1.0)) for key, value in families.items()}
         for _attempt in range(128):
             family = _weighted_choice(self.rng, weights)

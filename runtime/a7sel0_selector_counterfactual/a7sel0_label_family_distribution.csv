@@ -1,0 +1,5 @@
+candidate_id,non_l7_label_alignment_score,q_label_t1_positive_premay_splits,q_label_t2_positive_premay_splits,r_label_t1_positive_premay_splits,r_label_t2_positive_premay_splits
+a7al2q_1378ff7d2322adee,12.0,3.0,3.0,3.0,3.0
+a7al2q_69d146749c30da3c,12.0,3.0,3.0,3.0,3.0
+a7al2q_a4993fe3273bf0c8,12.0,3.0,3.0,3.0,3.0
+a7al2q_5da100b2822dc1a6,12.0,3.0,3.0,3.0,3.0

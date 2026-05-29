@@ -1,0 +1,17 @@
+{
+  "authorizes_a7aa": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "blocking_field_count": 0,
+  "blocking_operator_count": 0,
+  "decision": "PASS_A7AIF3_REPLAY_MATERIALIZATION_PARITY_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "field_count": 32,
+  "generated_at": "2026-05-29T14:10:45Z",
+  "operator_count": 15,
+  "stage": "A7AI-F3"
+}

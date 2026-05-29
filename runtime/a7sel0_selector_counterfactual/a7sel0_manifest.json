@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "selected_stress_clean_candidates_zero"
+  ],
+  "decision": "HOLD_A7SEL0_SELECTOR_COUNTERFACTUAL_NOT_PROMOTABLE",
+  "eligible_queue_count": 13,
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-29T14:14:36Z",
+  "input_candidate_count": 4000,
+  "selected_count": 4,
+  "selected_stress_clean_candidates": 0,
+  "stage": "A7SEL-0",
+  "uses_may_for_post_selection_stress_summary": true,
+  "uses_may_in_selector_score": false
+}
