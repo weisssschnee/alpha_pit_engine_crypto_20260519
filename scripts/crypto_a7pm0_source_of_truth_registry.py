@@ -188,6 +188,39 @@ def report_stage_id(path: Path) -> str:
     return normalize_stage_id(path.stem)
 
 
+def stage_root(compact_stage: str) -> str:
+    match = re.match(r"^(A7[A-Z]+[0-9]*)", compact_stage)
+    return match.group(1) if match else compact_stage
+
+
+def select_primary_report(stage_id: str, reports_by_stage: dict[str, list[str]]) -> str:
+    stage_norm = stage_id.replace("-", "")
+    root = stage_root(stage_norm)
+    wants_comparison = "COMPARISON" in stage_norm
+    candidates: list[tuple[int, int, str]] = []
+    for report_stage, paths in reports_by_stage.items():
+        report_norm = report_stage.replace("-", "")
+        report_is_comparison = "COMPARISON" in report_norm
+        direct_match = stage_norm in report_norm or report_norm in stage_norm
+        rooted_comparison_match = wants_comparison and report_is_comparison and report_norm.startswith(root)
+        if not direct_match and not rooted_comparison_match:
+            continue
+        score = 0
+        if report_norm != stage_norm:
+            score += 10
+        if not report_norm.startswith(stage_norm):
+            score += 5
+        if report_is_comparison != wants_comparison:
+            score += 100
+        # Prefer the most specific non-comparison report for base stages such as A7FF-9.
+        score += len(report_norm) // 100
+        candidates.append((score, len(report_norm), paths[0]))
+    if not candidates:
+        return ""
+    candidates.sort(key=lambda item: (item[0], item[1], item[2]))
+    return candidates[0][2]
+
+
 def infer_evidence_level(decision: str, stage_id: str) -> str:
     upper = (decision or "").upper()
     if "ALPHA" in upper and "NOT" not in upper:
@@ -291,12 +324,7 @@ def main() -> None:
             decision = "NO_DECISION_FIELD"
         auth = collect_authorization(payload, auth_payloads)
         runtime_rel = rel(runtime_dir)
-        primary_report = ""
-        stage_norm = stage_id.replace("-", "")
-        for report_stage, paths in reports_by_stage.items():
-            if stage_norm in report_stage.replace("-", "") or report_stage.replace("-", "") in stage_norm:
-                primary_report = paths[0]
-                break
+        primary_report = select_primary_report(stage_id, reports_by_stage)
         commit_info = commit_map.get(primary_report) or commit_map.get(manifest_path) or commit_map.get(runtime_rel, {})
         row = {
             "stage_id": stage_id,

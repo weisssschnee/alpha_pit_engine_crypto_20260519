@@ -1058,17 +1058,33 @@ runtime,A7FF-7E,runtime/a7ff7e_expanded_derivation_probe_contract/a7ff7e_numeric
 runtime,A7FF-7E,runtime/a7ff7e_expanded_derivation_probe_contract/a7ff7e_priority_summary.csv,bd530c1,expand crypto a7ff derivation probe contract,119
 runtime,A7FF-7E,runtime/a7ff7e_expanded_derivation_probe_contract/a7ff7e_selected_numeric_probe_queue.csv,bd530c1,expand crypto a7ff derivation probe contract,141910
 runtime,A7FF-7E,runtime/a7ff7e_expanded_derivation_probe_contract/a7ff7e_semantic_pair_summary.csv,bd530c1,expand crypto a7ff derivation probe contract,443
-runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_control_dominance_metrics.csv,,,3481138
-runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_control_summary.csv,,,455
-runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_decision_counts.csv,,,1280
-runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_decision_record.json,,,2102
-runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_family_decision_summary.csv,,,750
-runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_label_response_metrics.csv,,,1023744
-runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_manifest.json,,,2102
-runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_materialization_metrics.csv,,,16800
-runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_nonoverlap_stats.csv,,,133543
-runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_portfolio_marginal_proxy.csv,,,12910
-runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_selected_portfolio_queue.csv,,,6224
+runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_control_dominance_metrics.csv,f467852,run crypto a7ff8 expanded numeric probe,3481138
+runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_control_summary.csv,f467852,run crypto a7ff8 expanded numeric probe,455
+runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_decision_counts.csv,f467852,run crypto a7ff8 expanded numeric probe,1280
+runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_decision_record.json,f467852,run crypto a7ff8 expanded numeric probe,2102
+runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_family_decision_summary.csv,f467852,run crypto a7ff8 expanded numeric probe,750
+runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_label_response_metrics.csv,f467852,run crypto a7ff8 expanded numeric probe,1023744
+runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_manifest.json,f467852,run crypto a7ff8 expanded numeric probe,2102
+runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_materialization_metrics.csv,f467852,run crypto a7ff8 expanded numeric probe,16800
+runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_nonoverlap_stats.csv,f467852,run crypto a7ff8 expanded numeric probe,133543
+runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_portfolio_marginal_proxy.csv,f467852,run crypto a7ff8 expanded numeric probe,12910
+runtime,A7FF-8,runtime/a7ff8_expanded_numeric_probe/a7ff8_selected_portfolio_queue.csv,f467852,run crypto a7ff8 expanded numeric probe,6224
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_control_dominance_metrics.csv,,,5221228
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_control_summary.csv,,,452
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_decision_counts.csv,,,1283
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_decision_record.json,,,2102
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_family_decision_summary.csv,,,751
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_label_response_metrics.csv,,,1547877
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_manifest.json,,,2102
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_materialization_metrics.csv,,,25557
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_nonoverlap_stats.csv,,,200299
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_portfolio_marginal_proxy.csv,,,18940
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_run_96.log,,,7222
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/a7ff9_selected_portfolio_queue.csv,,,7958
+runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/run_a7ff9_96.ps1,,,588
+runtime,A7FF-9-COMPARISON,runtime/a7ff9_continuation_comparison/a7ff9_comparison_summary.csv,,,500
+runtime,A7FF-9-COMPARISON,runtime/a7ff9_continuation_comparison/a7ff9_family_clue_comparison.csv,,,529
+runtime,A7FF-9-COMPARISON,runtime/a7ff9_continuation_comparison/a7ff9_manifest.json,,,564
 report,A7FF0-FIELD-ONTOLOGY-V2,reports/CRYPTO_A7FF0_FIELD_ONTOLOGY_V2_20260530.md,b725826,add crypto a7ff field to factor compiler,1871
 report,A7FF1-OPERATOR-PROBING,reports/CRYPTO_A7FF1_OPERATOR_PROBING_20260530.md,b725826,add crypto a7ff field to factor compiler,1993
 report,A7FF2-FEATURE-PAIR-CLUSTERING,reports/CRYPTO_A7FF2_FEATURE_PAIR_CLUSTERING_20260530.md,b725826,add crypto a7ff field to factor compiler,28233
@@ -1077,14 +1093,16 @@ report,A7FF4-FEATURE-ROLE-PROMOTION,reports/CRYPTO_A7FF4_FEATURE_ROLE_PROMOTION_
 report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
 report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_DERIVATION_PROBE_CONTRACT_20260530.md,bd530c1,expand crypto a7ff derivation probe contract,25056
-report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,,,18324
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,bd530c1,expand crypto a7ff derivation probe contract,189894
+report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
+report,A7FF9-CONTINUATION-COMPARISON,reports/CRYPTO_A7FF9_CONTINUATION_COMPARISON_20260530.md,,,3330
+report,A7FF9-EXPANDED-NUMERIC-PROBE-CONTINUATION,reports/CRYPTO_A7FF9_EXPANDED_NUMERIC_PROBE_CONTINUATION_20260530.md,,,21246
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,f467852,run crypto a7ff8 expanded numeric probe,193758
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,5230053,refresh crypto a7pm registry after selector counterfactual,94548
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,de26507,add crypto a7pm governance registry,391
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,bd530c1,expand crypto a7ff derivation probe contract,87092
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,bd530c1,expand crypto a7ff derivation probe contract,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,f467852,run crypto a7ff8 expanded numeric probe,89102
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,f467852,run crypto a7ff8 expanded numeric probe,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,de26507,add crypto a7pm governance registry,332
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,bd530c1,expand crypto a7ff derivation probe contract,49912
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,f467852,run crypto a7ff8 expanded numeric probe,50549
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -1105,7 +1123,7 @@ runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,de26
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,de26507,add crypto a7pm governance registry,282
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,de26507,add crypto a7pm governance registry,821
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,de26507,add crypto a7pm governance registry,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,bd530c1,expand crypto a7ff derivation probe contract,4499
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,f467852,run crypto a7ff8 expanded numeric probe,5035
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
 report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,de26507,add crypto a7pm governance registry,2160

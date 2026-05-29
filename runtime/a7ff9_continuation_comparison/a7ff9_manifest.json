@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "compares": [
+    "A7FF-8_64",
+    "A7FF-9_96"
+  ],
+  "decision": "PASS_A7FF9_CONTINUATION_COMPARISON_BUILT",
+  "generated_at": "2026-05-29T18:24:18Z",
+  "stage": "A7FF-9-COMPARISON",
+  "timeout_note": {
+    "action": "reran as 96-blueprint continuation to produce complete auditable artifacts",
+    "attempted_blueprints": 128,
+    "attempted_stage": "A7FF-9_128",
+    "result": "timeout_no_manifest",
+    "timeout_seconds": 1800
+  }
+}

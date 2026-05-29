@@ -1,0 +1,9 @@
+stage,semantic_pair,decision_kind,count
+A7FF-8_64,basis_premium_like,NUMERIC_CLUE,27
+A7FF-8_64,basis_premium_like,RANK_LABEL_DIAGNOSTIC_CLUE,6
+A7FF-8_64,basis_premium_like|positioning_like,NUMERIC_CLUE,38
+A7FF-8_64,basis_premium_like|positioning_like,RANK_LABEL_DIAGNOSTIC_CLUE,6
+A7FF-9_96,basis_premium_like,NUMERIC_CLUE,27
+A7FF-9_96,basis_premium_like,RANK_LABEL_DIAGNOSTIC_CLUE,6
+A7FF-9_96,basis_premium_like|positioning_like,NUMERIC_CLUE,60
+A7FF-9_96,basis_premium_like|positioning_like,RANK_LABEL_DIAGNOSTIC_CLUE,8

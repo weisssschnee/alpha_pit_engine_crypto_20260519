@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-29T17:08:54Z
+Generated: 2026-05-29T18:24:39Z
 
 ## Decision
 
@@ -12,11 +12,20 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
-?? reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md
-?? runtime/a7ff8_expanded_numeric_probe/
-?? scripts/crypto_a7ff8_expanded_numeric_probe.py
-HEAD=bd530c16c1eaa3aac28e72e9cb3e685eae1ba900
-origin/main=bd530c16c1eaa3aac28e72e9cb3e685eae1ba900
+ M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
+ M scripts/crypto_a7ff8_expanded_numeric_probe.py
+ M scripts/crypto_a7pm0_source_of_truth_registry.py
+?? reports/CRYPTO_A7FF9_CONTINUATION_COMPARISON_20260530.md
+?? reports/CRYPTO_A7FF9_EXPANDED_NUMERIC_PROBE_CONTINUATION_20260530.md
+?? runtime/a7ff9_continuation_comparison/
+?? runtime/a7ff9_expanded_numeric_probe_continuation/
+?? scripts/crypto_a7ff9_continuation_comparison.py
+HEAD=f46785211a34a21e0e1fd0b65378c0d1ce301267
+origin/main=f46785211a34a21e0e1fd0b65378c0d1ce301267
 HEAD == origin/main: True
 ```
 
@@ -24,7 +33,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 1285,
+  "artifact_count": 1303,
   "authorization_record_count": 638,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +47,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-29T17:08:54Z",
-  "head": "bd530c16c1eaa3aac28e72e9cb3e685eae1ba900",
+  "generated_at": "2026-05-29T18:24:39Z",
+  "head": "f46785211a34a21e0e1fd0b65378c0d1ce301267",
   "head_equals_origin_main": true,
-  "origin_main": "bd530c16c1eaa3aac28e72e9cb3e685eae1ba900",
+  "origin_main": "f46785211a34a21e0e1fd0b65378c0d1ce301267",
   "stage": "A7PM-0",
-  "stage_count": 160
+  "stage_count": 162
 }
 ```
 
@@ -62,7 +71,7 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |      51 |
+| valid_or_historical_record   | governance_or_audit        |      53 |
 | valid_or_historical_record   | contract                   |      36 |
 | valid_or_historical_record   | smoke                      |       7 |
 | valid_or_historical_record   | diagnostic                 |       5 |

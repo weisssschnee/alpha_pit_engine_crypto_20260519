@@ -33,8 +33,11 @@ from scripts.crypto_a7al2z2r_broader_non_oi_materialization_repair import strict
 from scripts.crypto_a7al2z4_broader_non_oi_numeric_replay_preflight import smoke_column_indices, spread_series, tstat  # noqa: E402
 
 
-RUNTIME = REPO / "runtime" / "a7ff8_expanded_numeric_probe"
-REPORT = REPO / "reports" / "CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md"
+STAGE = os.environ.get("A7FF8_STAGE", "A7FF-8")
+DECISION_PREFIX = STAGE.replace("-", "")
+FILE_PREFIX = os.environ.get("A7FF8_FILE_PREFIX", DECISION_PREFIX.lower())
+RUNTIME = Path(os.environ.get("A7FF8_RUNTIME", str(REPO / "runtime" / "a7ff8_expanded_numeric_probe")))
+REPORT = Path(os.environ.get("A7FF8_REPORT", str(REPO / "reports" / "CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md")))
 
 A7FF7E_MANIFEST = REPO / "runtime" / "a7ff7e_expanded_derivation_probe_contract" / "a7ff7e_manifest.json"
 A7FF7E_QUEUE = REPO / "runtime" / "a7ff7e_expanded_derivation_probe_contract" / "a7ff7e_selected_numeric_probe_queue.csv"
@@ -88,6 +91,10 @@ def read_json(path: Path) -> dict[str, Any]:
 def write_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+
+
+def artifact(name: str) -> Path:
+    return RUNTIME / f"{FILE_PREFIX}_{name}"
 
 
 def md_table(df: pd.DataFrame, max_rows: int = 80) -> str:
@@ -214,19 +221,19 @@ def classify_label_response(
     cost10_recent = recent - (2 * 10 / 10000) if np.isfinite(recent) else np.nan
 
     if not premay_all_positive:
-        decision = "HOLD_A7FF8_PRE_MAY_UNSTABLE"
+        decision = f"HOLD_{DECISION_PREFIX}_PRE_MAY_UNSTABLE"
     elif np.isfinite(control_ratio) and control_ratio >= 1.0:
-        decision = "HOLD_A7FF8_CONTROL_DOMINATED"
+        decision = f"HOLD_{DECISION_PREFIX}_CONTROL_DOMINATED"
     elif not lag_ok:
-        decision = "HOLD_A7FF8_ONE_BAR_LAG_FRAGILE"
+        decision = f"HOLD_{DECISION_PREFIX}_ONE_BAR_LAG_FRAGILE"
     elif not robust_ok:
-        decision = "HOLD_A7FF8_NONOVERLAP_WEAK"
+        decision = f"HOLD_{DECISION_PREFIX}_NONOVERLAP_WEAK"
     elif not np.isfinite(cost2_recent) or cost2_recent <= 0:
-        decision = "HOLD_A7FF8_COST2_PROXY_FRAGILE"
+        decision = f"HOLD_{DECISION_PREFIX}_COST2_PROXY_FRAGILE"
     elif label_family == "L7_ranked_future_return":
-        decision = "A7FF8_RANK_LABEL_DIAGNOSTIC_CLUE"
+        decision = f"{DECISION_PREFIX}_RANK_LABEL_DIAGNOSTIC_CLUE"
     else:
-        decision = "A7FF8_NUMERIC_CLUE"
+        decision = f"{DECISION_PREFIX}_NUMERIC_CLUE"
 
     response = {
         "blueprint_id": candidate["blueprint_id"],
@@ -267,7 +274,7 @@ def classify_label_response(
 
 def portfolio_proxy(responses: pd.DataFrame, materialized: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     usable = responses[
-        responses["decision"].isin(["A7FF8_NUMERIC_CLUE", "A7FF8_RANK_LABEL_DIAGNOSTIC_CLUE"])
+        responses["decision"].isin([f"{DECISION_PREFIX}_NUMERIC_CLUE", f"{DECISION_PREFIX}_RANK_LABEL_DIAGNOSTIC_CLUE"])
     ].copy()
     if usable.empty:
         empty = pd.DataFrame()
@@ -313,7 +320,7 @@ def main() -> None:
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     a7ff7e = read_json(A7FF7E_MANIFEST)
     if not a7ff7e.get("authorizes_a7ff8_numeric_probe_contract"):
-        raise SystemExit("A7FF-7E does not authorize A7FF-8 numeric probe")
+        raise SystemExit(f"A7FF-7E does not authorize {STAGE} numeric probe")
     plan = read_json(A7FF7E_PLAN)
     queue = pd.read_csv(A7FF7E_QUEUE).head(MATERIALIZE_CAP).copy()
     if FAST_NUMERIC_CAP and len(queue) > FAST_NUMERIC_CAP:
@@ -345,7 +352,7 @@ def main() -> None:
         blockers.append("missing_numeric_fields")
     else:
         symbols = strict_symbols()
-        print(f"[A7FF-8] loading symbols={len(symbols)}, base_fields={len(base_fields)}, latent_fields={len(latent_fields)}", flush=True)
+        print(f"[{STAGE}] loading symbols={len(symbols)}, base_fields={len(base_fields)}, latent_fields={len(latent_fields)}", flush=True)
         loaded_symbols, timestamps, numeric = load_base(symbols, base_fields)
         numeric.update(load_latent_numeric(loaded_symbols, timestamps, latent_fields))
         groups = load_group_fields(loaded_symbols, timestamps, {"liquidity_tier"})
@@ -365,7 +372,7 @@ def main() -> None:
         }
         evaluator = A7AB4Evaluator(numeric, groups)
         rng = np.random.default_rng(20260530)
-        print(f"[A7FF-8] evaluating blueprints={len(queue)}, timestamps={len(timestamps)}, full_timestamps={full_timestamp_count}", flush=True)
+        print(f"[{STAGE}] evaluating blueprints={len(queue)}, timestamps={len(timestamps)}, full_timestamps={full_timestamp_count}", flush=True)
         for idx_row, row in enumerate(queue.to_dict("records"), start=1):
             expr = str(row["expression"])
             try:
@@ -410,7 +417,7 @@ def main() -> None:
                     control_rows.extend(controls)
                     nonoverlap_rows.append(nonoverlap)
             if idx_row % 32 == 0:
-                print(f"[A7FF-8] evaluated {idx_row}/{len(queue)}", flush=True)
+                print(f"[{STAGE}] evaluated {idx_row}/{len(queue)}", flush=True)
 
     materialized = pd.DataFrame(material_rows)
     responses = pd.DataFrame(response_rows)
@@ -436,35 +443,35 @@ def main() -> None:
         else pd.DataFrame(columns=["control", "median_ratio", "max_ratio", "rows"])
     )
 
-    clue_count = int((responses["decision"] == "A7FF8_NUMERIC_CLUE").sum()) if not responses.empty else 0
-    rank_clue_count = int((responses["decision"] == "A7FF8_RANK_LABEL_DIAGNOSTIC_CLUE").sum()) if not responses.empty else 0
+    clue_count = int((responses["decision"] == f"{DECISION_PREFIX}_NUMERIC_CLUE").sum()) if not responses.empty else 0
+    rank_clue_count = int((responses["decision"] == f"{DECISION_PREFIX}_RANK_LABEL_DIAGNOSTIC_CLUE").sum()) if not responses.empty else 0
     materialized_count = int(materialized["activity_ok"].sum()) if not materialized.empty else 0
     if missing:
-        decision = "HOLD_A7FF8_MISSING_FIELDS"
+        decision = f"HOLD_{DECISION_PREFIX}_MISSING_FIELDS"
     elif materialized_count == 0:
-        decision = "HOLD_A7FF8_NO_ACTIVITY_OK_BLUEPRINTS"
+        decision = f"HOLD_{DECISION_PREFIX}_NO_ACTIVITY_OK_BLUEPRINTS"
         blockers.append("no_activity_ok_blueprints")
     elif clue_count == 0:
-        decision = "HOLD_A7FF8_NO_NON_L7_NUMERIC_CLUES"
+        decision = f"HOLD_{DECISION_PREFIX}_NO_NON_L7_NUMERIC_CLUES"
         blockers.append("no_non_l7_numeric_clues")
     elif len(portfolio_selected) < 4:
-        decision = "HOLD_A7FF8_PORTFOLIO_QUEUE_TOO_SMALL"
+        decision = f"HOLD_{DECISION_PREFIX}_PORTFOLIO_QUEUE_TOO_SMALL"
         blockers.append("portfolio_selected_lt_4")
     else:
-        decision = "PASS_A7FF8_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH"
+        decision = f"PASS_{DECISION_PREFIX}_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH"
 
-    materialized.to_csv(RUNTIME / "a7ff8_materialization_metrics.csv", index=False)
-    responses.to_csv(RUNTIME / "a7ff8_label_response_metrics.csv", index=False)
-    controls.to_csv(RUNTIME / "a7ff8_control_dominance_metrics.csv", index=False)
-    nonoverlap.to_csv(RUNTIME / "a7ff8_nonoverlap_stats.csv", index=False)
-    portfolio_all.to_csv(RUNTIME / "a7ff8_portfolio_marginal_proxy.csv", index=False)
-    portfolio_selected.to_csv(RUNTIME / "a7ff8_selected_portfolio_queue.csv", index=False)
-    decision_counts.to_csv(RUNTIME / "a7ff8_decision_counts.csv", index=False)
-    family_summary.to_csv(RUNTIME / "a7ff8_family_decision_summary.csv", index=False)
-    control_summary.to_csv(RUNTIME / "a7ff8_control_summary.csv", index=False)
+    materialized.to_csv(artifact("materialization_metrics.csv"), index=False)
+    responses.to_csv(artifact("label_response_metrics.csv"), index=False)
+    controls.to_csv(artifact("control_dominance_metrics.csv"), index=False)
+    nonoverlap.to_csv(artifact("nonoverlap_stats.csv"), index=False)
+    portfolio_all.to_csv(artifact("portfolio_marginal_proxy.csv"), index=False)
+    portfolio_selected.to_csv(artifact("selected_portfolio_queue.csv"), index=False)
+    decision_counts.to_csv(artifact("decision_counts.csv"), index=False)
+    family_summary.to_csv(artifact("family_decision_summary.csv"), index=False)
+    control_summary.to_csv(artifact("control_summary.csv"), index=False)
 
     manifest = {
-        "stage": "A7FF-8",
+        "stage": STAGE,
         "generated_at": now_utc(),
         "decision": decision,
         "blockers": sorted(set(blockers)),
@@ -485,11 +492,11 @@ def main() -> None:
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
     }
-    write_json(RUNTIME / "a7ff8_decision_record.json", manifest)
-    write_json(RUNTIME / "a7ff8_manifest.json", manifest)
+    write_json(artifact("decision_record.json"), manifest)
+    write_json(artifact("manifest.json"), manifest)
 
     lines = [
-        "# CRYPTO A7FF-8 EXPANDED NUMERIC PROBE",
+        f"# CRYPTO {STAGE} EXPANDED NUMERIC PROBE",
         "",
         f"Generated: {manifest['generated_at']}",
         "",
@@ -497,7 +504,7 @@ def main() -> None:
         "",
         f"`{decision}`",
         "",
-        "A7FF-8 materializes the A7FF-7E selected blueprint queue and evaluates label response, controls, non-overlap statistics, and a dry portfolio marginal proxy. It is not formula search or alpha proof.",
+        f"{STAGE} materializes the A7FF-7E selected blueprint queue and evaluates label response, controls, non-overlap statistics, and a dry portfolio marginal proxy. It is not formula search or alpha proof.",
         "",
         "## Manifest",
         "",
