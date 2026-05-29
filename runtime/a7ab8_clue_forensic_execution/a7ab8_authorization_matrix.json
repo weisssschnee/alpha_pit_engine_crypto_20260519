@@ -1,0 +1,20 @@
+{
+  "A7AB-8": {
+    "status": "PASS_A7AB8_FORENSIC_SURVIVORS_FOUND_EXECUTION_HOLD"
+  },
+  "A7AB-9_survivor_freeze_contract": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

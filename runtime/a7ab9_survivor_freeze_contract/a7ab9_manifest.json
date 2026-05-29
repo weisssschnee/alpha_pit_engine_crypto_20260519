@@ -1,0 +1,26 @@
+{
+  "authorizes_a7ac0_representative_forensic_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AB9_SURVIVOR_FREEZE_REPRESENTATIVE_POOL_WITH_WARNINGS",
+  "executes_contract_only": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T06:38:52Z",
+  "input_a7ab8_decision": "PASS_A7AB8_FORENSIC_SURVIVORS_FOUND_EXECUTION_HOLD",
+  "representative_rows": 8,
+  "stage": "A7AB-9",
+  "survivor_candidates": 14,
+  "survivor_clusters": 8,
+  "survivor_rows": 15,
+  "top_cluster_share": 0.4,
+  "top_label_share": 1.0,
+  "uses_may": false,
+  "warnings": [
+    "top_return_corr_cluster_share_gt_35pct",
+    "single_label_family_dominates"
+  ]
+}

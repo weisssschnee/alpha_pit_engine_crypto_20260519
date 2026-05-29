@@ -1,0 +1,29 @@
+{
+  "authorizes_a7ab9_survivor_freeze_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AB8_FORENSIC_SURVIVORS_FOUND_EXECUTION_HOLD",
+  "decision_counts": {
+    "A7AB8_FORENSIC_SURVIVOR": 15,
+    "HOLD_A7AB8_CONTROL_DOMINATED": 1,
+    "HOLD_A7AB8_LAG_FRAGILE": 17
+  },
+  "executes_clue_forensic": true,
+  "executes_formula_generation": false,
+  "executes_large_search": false,
+  "executes_training": false,
+  "forensic_survivor_candidates": 14,
+  "forensic_survivor_rows": 15,
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-05-29T06:36:09Z",
+  "input_clue_candidates": 27,
+  "input_clue_rows": 33,
+  "metric_rows": 1155,
+  "return_corr_cluster_count": 21,
+  "stage": "A7AB-8",
+  "symbols_loaded": 96,
+  "timestamps": 21025,
+  "uses_may": false
+}
