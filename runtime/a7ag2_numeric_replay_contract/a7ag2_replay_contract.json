@@ -1,0 +1,41 @@
+{
+  "horizons": [
+    1,
+    4,
+    24
+  ],
+  "labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L2_BTC_ETH_beta_residual_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return",
+    "L6_downside_avoidance"
+  ],
+  "max_candidates": 96,
+  "not_authorized": [
+    "numeric_replay_execution_without_A7AG3",
+    "formula_search_execution",
+    "large_search",
+    "alpha_proof",
+    "shadow_paper_live"
+  ],
+  "pass_gate": {
+    "G0_ordinary_alpha_basis_premium": ">=2 control-clean nonrank candidates across pre-May splits",
+    "G1_neutralized_alpha_diagnostic": ">=3 control-clean beta/neutralized candidates; cannot promote ordinary alpha without L0/L1 translation",
+    "G2_downside_risk_defense": ">=4 control-clean downside candidates; cannot promote ordinary alpha"
+  },
+  "required_controls": [
+    "one_bar_lag",
+    "wrong_lag_future_24h",
+    "wrong_lag_stale_168h",
+    "same_family_random"
+  ],
+  "required_splits": [
+    "train_2024",
+    "validation_2025H1",
+    "test_2025H2",
+    "recent_oos_2026JanApr"
+  ],
+  "universe": "strict_symbols bounded replay subset inherited from A7AA/A7AE diagnostics"
+}

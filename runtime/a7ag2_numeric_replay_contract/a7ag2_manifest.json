@@ -1,0 +1,21 @@
+{
+  "authorizes_a7ag3_numeric_replay_pilot": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_replay_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AG2_NUMERIC_REPLAY_CONTRACT_READY_FOR_A7AG3_PILOT",
+  "executes_contract_only": true,
+  "executes_formula_search": false,
+  "executes_numeric_replay": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T08:30:54Z",
+  "production_key_count": 72,
+  "queue_count": 96,
+  "skeleton_count": 27,
+  "source_a7ag1_decision": "PASS_A7AG1_STATIC_BLUEPRINT_DRYRUN_READY_FOR_A7AG2_NUMERIC_REPLAY_CONTRACT",
+  "stage": "A7AG-2",
+  "track_count": 3,
+  "uses_may": false
+}
