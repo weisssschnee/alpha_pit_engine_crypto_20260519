@@ -1,0 +1,23 @@
+{
+  "authorizes_a7ad2_translated_candidate_forensic_contract": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7AD1_RANKED_LABEL_TRANSLATION_TOO_NARROW",
+  "executes_label_translation_audit": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T07:31:44Z",
+  "input_a7ad0_decision": "PASS_A7AD0_RANKED_LABEL_TRANSLATION_CONTRACT_READY_FOR_A7AD1",
+  "l7_pass_candidates": 6,
+  "l7_pass_rows": 31,
+  "positive_but_blocked_rows": 26,
+  "stage": "A7AD-1",
+  "translated_candidates": 1,
+  "translated_non_global_candidates": 1,
+  "translated_rows": 1,
+  "translation_rows": 31,
+  "uses_may": false
+}

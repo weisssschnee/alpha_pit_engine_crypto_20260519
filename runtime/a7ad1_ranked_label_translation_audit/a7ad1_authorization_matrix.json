@@ -1,0 +1,20 @@
+{
+  "A7AD-1": {
+    "status": "HOLD_A7AD1_RANKED_LABEL_TRANSLATION_TOO_NARROW"
+  },
+  "A7AD-2_translated_candidate_forensic_contract": {
+    "authorized": false
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

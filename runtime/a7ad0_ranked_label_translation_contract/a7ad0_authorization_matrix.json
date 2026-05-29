@@ -1,0 +1,20 @@
+{
+  "A7AD-0": {
+    "status": "PASS_A7AD0_RANKED_LABEL_TRANSLATION_CONTRACT_READY_FOR_A7AD1"
+  },
+  "A7AD-1_ranked_label_translation_audit": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

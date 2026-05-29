@@ -1,0 +1,6 @@
+gate,rule
+minimum_translated_candidates,>= 2 candidates translate from L7 to L0/L1
+minimum_translated_modes,>= 1 non-global neutralization mode has translated candidates
+control_clean_translation,translated rows must have control_ratio < 1.0
+warning_disclosure,0.80 <= control_ratio < 1.0 remains diagnostic-only
+no_search_authorization,"A7AD cannot authorize formula search, large search, alpha proof, shadow, paper, or live"

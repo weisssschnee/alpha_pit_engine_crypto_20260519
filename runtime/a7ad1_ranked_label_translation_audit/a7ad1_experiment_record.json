@@ -1,0 +1,27 @@
+{
+  "date": "2026-05-29",
+  "decision": "HOLD_A7AD1_RANKED_LABEL_TRANSLATION_TOO_NARROW",
+  "experiment_id": "20260529_a7ad1_ranked_label_translation_audit",
+  "inputs": {
+    "a7ac3_decisions": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac3_label_diversification_diagnostic\\a7ac3_label_neutralization_decisions.csv",
+    "a7ad0_manifest": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ad0_ranked_label_translation_contract\\a7ad0_manifest.json"
+  },
+  "mode": "light_diagnostic",
+  "next_action": "A7AE non-ranked objective redesign contract",
+  "objective": "Audit whether L7 ranked-return passes translate into raw or cross-sectional relative PnL proxy.",
+  "outputs": {
+    "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7AD1_RANKED_LABEL_TRANSLATION_AUDIT_20260529.md",
+    "runtime": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ad1_ranked_label_translation_audit"
+  },
+  "parameters": {
+    "May_usage": "not used",
+    "minimum_non_global_translated_candidates": 2,
+    "minimum_translated_candidates": 2,
+    "source_label": "L7_ranked_future_return",
+    "target_labels": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return"
+    ]
+  },
+  "status": "completed"
+}

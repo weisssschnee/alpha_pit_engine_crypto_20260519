@@ -1,0 +1,10 @@
+label_family,neutralization_mode,rows,pass_rows,candidates
+L7_ranked_future_return,meme_multiplier_neutral,12,11,6
+L7_ranked_future_return,global_rank,12,10,6
+L7_ranked_future_return,liquidity_tier_neutral,12,10,6
+L0_raw_forward_return,liquidity_tier_neutral,12,1,6
+L1_cross_sectional_relative_return,liquidity_tier_neutral,12,1,6
+L0_raw_forward_return,global_rank,12,0,6
+L0_raw_forward_return,meme_multiplier_neutral,12,0,6
+L1_cross_sectional_relative_return,global_rank,12,0,6
+L1_cross_sectional_relative_return,meme_multiplier_neutral,12,0,6

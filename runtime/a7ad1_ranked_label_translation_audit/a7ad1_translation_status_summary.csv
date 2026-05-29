@@ -1,0 +1,8 @@
+translation_status,neutralization_mode,rows,candidates,median_l7_control_ratio,median_translated_control_ratio
+no_raw_or_relative_translation,global_rank,2,1,0.7334091931800872,
+no_raw_or_relative_translation,liquidity_tier_neutral,1,1,0.4349943622939021,
+no_raw_or_relative_translation,meme_multiplier_neutral,1,1,0.4370138560556377,
+positive_but_blocked,meme_multiplier_neutral,10,5,0.8019395597152544,6.95349166606643
+positive_but_blocked,global_rank,8,5,0.647726328466685,6.262429515070094
+positive_but_blocked,liquidity_tier_neutral,8,5,0.7591025486198537,4.841354646044849
+translated_to_non_ranked,liquidity_tier_neutral,1,1,0.9450356646163768,0.8702846191734801

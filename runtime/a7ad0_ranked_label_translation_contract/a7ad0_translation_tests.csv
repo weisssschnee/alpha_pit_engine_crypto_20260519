@@ -1,0 +1,6 @@
+test,definition,required
+matched_label_translation,"for every L7 pass row, compare same candidate/horizon/neutralization under L0 and L1",True
+raw_relative_pnl_proxy,"L0/L1 validation, test, recent oriented spreads must all be positive",True
+control_dominance_after_translation,translated L0/L1 row must have control_ratio < 1.0; >=0.80 remains warning,True
+neutralization_translation,translation must hold under at least one non-global neutralization mode,True
+ranked_label_artifact_detection,"if L7 survives but L0/L1 do not, freeze as ranked-label diagnostic clue",True

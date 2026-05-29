@@ -1,0 +1,18 @@
+{
+  "authorizes_a7ad1_ranked_label_translation_audit": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AD0_RANKED_LABEL_TRANSLATION_CONTRACT_READY_FOR_A7AD1",
+  "executes_contract_only": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T07:31:41Z",
+  "input_a7ac3_decision": "HOLD_A7AC3_PARTIAL_LABEL_DIVERSIFICATION",
+  "source_candidate_count": 6,
+  "source_decision_rows": 108,
+  "stage": "A7AD-0",
+  "uses_may": false
+}
