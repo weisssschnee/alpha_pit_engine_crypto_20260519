@@ -229,6 +229,9 @@ A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_authorization_matrix.
 A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_authorization_matrix.json,formula_search,"{""authorized"": false}",False
 A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_authorization_matrix.json,large_search,"{""authorized"": false}",False
 A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_authorization_matrix.json,A7AI-F2,"{""status"": ""PASS_A7AIF2_END_TO_END_ENFORCEMENT_CONNECTED""}",False
+A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_authorization_matrix.json,A7AI-F3,"{""authorized"": true}",True
+A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_authorization_matrix.json,search,"{""authorized"": false}",False
 A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,authorizes_a7ai1_small_controlled_raw_agg_smoke,true,True
 A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,authorizes_alpha_proof,false,False
 A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,authorizes_direct_formula_search,false,False

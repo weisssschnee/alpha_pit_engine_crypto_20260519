@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-29T14:00:39Z
+Generated: 2026-05-29T14:18:03Z
 
 ## Decision
 
@@ -12,8 +12,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
-HEAD=de26507eec436fe2c721dfb7e4e81eff46156892
-origin/main=de26507eec436fe2c721dfb7e4e81eff46156892
+HEAD=8bad66e5eafa649a56e77c75016d0d1c3c3fcdf9
+origin/main=8bad66e5eafa649a56e77c75016d0d1c3c3fcdf9
 HEAD == origin/main: True
 ```
 
@@ -21,8 +21,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 1180,
-  "authorization_record_count": 635,
+  "artifact_count": 1209,
+  "authorization_record_count": 638,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -35,12 +35,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-29T14:00:39Z",
-  "head": "de26507eec436fe2c721dfb7e4e81eff46156892",
+  "generated_at": "2026-05-29T14:18:03Z",
+  "head": "8bad66e5eafa649a56e77c75016d0d1c3c3fcdf9",
   "head_equals_origin_main": true,
-  "origin_main": "de26507eec436fe2c721dfb7e4e81eff46156892",
+  "origin_main": "8bad66e5eafa649a56e77c75016d0d1c3c3fcdf9",
   "stage": "A7PM-0",
-  "stage_count": 144
+  "stage_count": 148
 }
 ```
 
@@ -53,13 +53,13 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      29 |
+| hold                         | hold                       |      30 |
 | hold                         | diagnostic                 |       4 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |      40 |
+| valid_or_historical_record   | governance_or_audit        |      43 |
 | valid_or_historical_record   | contract                   |      36 |
 | valid_or_historical_record   | smoke                      |       7 |
 | valid_or_historical_record   | diagnostic                 |       5 |

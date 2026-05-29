@@ -22,10 +22,15 @@ runtime,A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_authorization_matri
 runtime,A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_blocked_primary_fields_until_response_evidence.csv,fa3b2d7,add crypto a7aa primitive response map,477
 runtime,A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_manifest.json,fa3b2d7,add crypto a7aa primitive response map,528
 runtime,A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_selector_rewrite_contract.json,fa3b2d7,add crypto a7aa primitive response map,1032
+runtime,A7AA-4,runtime/a7aa4_response_readiness_handoff/a7aa4_feature_role_reuse_audit.csv,8bad66e,add crypto enforcement parity and selector counterfactual,3149
+runtime,A7AA-4,runtime/a7aa4_response_readiness_handoff/a7aa4_label_contract_reuse_audit.csv,8bad66e,add crypto enforcement parity and selector counterfactual,877
+runtime,A7AA-4,runtime/a7aa4_response_readiness_handoff/a7aa4_manifest.json,8bad66e,add crypto enforcement parity and selector counterfactual,770
+runtime,A7AA-4,runtime/a7aa4_response_readiness_handoff/a7aa4_reused_stage_summary.csv,8bad66e,add crypto enforcement parity and selector counterfactual,861
 report,A7AA0-LABEL-FEATURE-RESPONSE-CONTRACT,reports/CRYPTO_A7AA0_LABEL_FEATURE_RESPONSE_CONTRACT_20260529.md,fa3b2d7,add crypto a7aa primitive response map,9656
 report,A7AA1-PRIMITIVE-RESPONSE-MAP,reports/CRYPTO_A7AA1_PRIMITIVE_RESPONSE_MAP_20260529.md,fa3b2d7,add crypto a7aa primitive response map,30938
 report,A7AA2-FEATURE-ROLE-CLASSIFICATION,reports/CRYPTO_A7AA2_FEATURE_ROLE_CLASSIFICATION_20260529.md,fa3b2d7,add crypto a7aa primitive response map,15685
 report,A7AA3-SELECTOR-REWRITE-CONTRACT,reports/CRYPTO_A7AA3_SELECTOR_REWRITE_CONTRACT_20260529.md,fa3b2d7,add crypto a7aa primitive response map,5612
+report,A7AA4-RESPONSE-READINESS-HANDOFF,reports/CRYPTO_A7AA4_RESPONSE_READINESS_HANDOFF_20260529.md,8bad66e,add crypto enforcement parity and selector counterfactual,4059
 runtime,A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_allowed_seed_fields.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,1077
 runtime,A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_authorization_matrix.json,2eca9f5,add crypto a7ab selector rewrite dryrun,354
 runtime,A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_manifest.json,2eca9f5,add crypto a7ab selector rewrite dryrun,935
@@ -325,6 +330,20 @@ runtime,A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_engine_enforc
 runtime,A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_hard_gaps.csv,b5f83ad,add crypto a7ai field enforcement gate,58
 runtime,A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_manifest.json,b5f83ad,add crypto a7ai field enforcement gate,584
 runtime,A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_required_patch_plan.csv,b5f83ad,add crypto a7ai field enforcement gate,628
+runtime,A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_authorization_matrix.json,8bad66e,add crypto enforcement parity and selector counterfactual,179
+runtime,A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_evaluator_fail_closed_audit.csv,8bad66e,add crypto enforcement parity and selector counterfactual,332
+runtime,A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_generator_mode_smoke.csv,8bad66e,add crypto enforcement parity and selector counterfactual,495
+runtime,A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_historical_candidate_role_reclassification.csv,8bad66e,add crypto enforcement parity and selector counterfactual,668402
+runtime,A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_manifest.json,8bad66e,add crypto enforcement parity and selector counterfactual,478
+runtime,A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_role_violation_summary.csv,8bad66e,add crypto enforcement parity and selector counterfactual,114
+runtime,A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_selector_role_trace_audit.csv,8bad66e,add crypto enforcement parity and selector counterfactual,461579
+runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_blocking_field_resolution.csv,8bad66e,add crypto enforcement parity and selector counterfactual,106
+runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_blocking_operator_resolution.csv,8bad66e,add crypto enforcement parity and selector counterfactual,91
+runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_eval_consistency_sample.csv,8bad66e,add crypto enforcement parity and selector counterfactual,915
+runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_field_materialization_matrix.csv,8bad66e,add crypto enforcement parity and selector counterfactual,2758
+runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_forbidden_operator_registry.csv,8bad66e,add crypto enforcement parity and selector counterfactual,27
+runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_manifest.json,8bad66e,add crypto enforcement parity and selector counterfactual,490
+runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_operator_parity_matrix.csv,8bad66e,add crypto enforcement parity and selector counterfactual,1150
 runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,5b5ca07,audit crypto a7ah core12 aggtrades handoff,708
 runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_blocked_pattern_registry.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,478
 runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_derived_in_runner_contract.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,642
@@ -341,6 +360,8 @@ runtime,A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_unif
 report,A7AI0R-CORE12-AGGTRADES-UNIFIED-FEATURE-BUILD,reports/CRYPTO_A7AI0R_CORE12_AGGTRADES_UNIFIED_FEATURE_BUILD_20260524.md,d005e36,build crypto a7ai unified aggtrades features,10190
 report,A7AIF0-FIELD-CONTRACT-ENFORCEMENT-LEDGER,reports/CRYPTO_A7AIF0_FIELD_CONTRACT_ENFORCEMENT_LEDGER_20260529.md,b5f83ad,add crypto a7ai field enforcement gate,13959
 report,A7AIF1-ENGINE-ENFORCEMENT-GAP-AUDIT,reports/CRYPTO_A7AIF1_ENGINE_ENFORCEMENT_GAP_AUDIT_20260529.md,b5f83ad,add crypto a7ai field enforcement gate,10408
+report,A7AIF2-END-TO-END-FIELD-ENFORCEMENT-REGRESSION,reports/CRYPTO_A7AIF2_END_TO_END_FIELD_ENFORCEMENT_REGRESSION_20260529.md,8bad66e,add crypto enforcement parity and selector counterfactual,3099
+report,A7AIF3-MATERIALIZATION-EVALUATOR-PARITY,reports/CRYPTO_A7AIF3_MATERIALIZATION_EVALUATOR_PARITY_20260529.md,8bad66e,add crypto enforcement parity and selector counterfactual,9597
 runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_dataset_summary.csv,f56e049,accept crypto universe silver and prep search panel,263
 runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_feature_contract.csv,f56e049,accept crypto universe silver and prep search panel,21835
 runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_market_symbol_audit.csv,f56e049,accept crypto universe silver and prep search panel,105013
@@ -998,13 +1019,13 @@ runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_overlay_sample_audit.csv,4a
 runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_overlay_summary.csv,4a753fe,accept crypto v2 data and repair selector controls,1054
 runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_overlay_timing_contract_extract.csv,4a753fe,accept crypto v2 data and repair selector controls,67
 report,A7AS0-V2-DATA-ACCEPTANCE,reports/CRYPTO_A7AS0_V2_DATA_ACCEPTANCE_20260527.md,4a753fe,accept crypto v2 data and repair selector controls,11469
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,de26507,add crypto a7pm governance registry,174654
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,40a7b7c,refresh crypto a7pm source registry,175956
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,de26507,add crypto a7pm governance registry,94134
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,de26507,add crypto a7pm governance registry,391
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,de26507,add crypto a7pm governance registry,78877
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,de26507,add crypto a7pm governance registry,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,40a7b7c,refresh crypto a7pm source registry,78905
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,40a7b7c,refresh crypto a7pm source registry,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,de26507,add crypto a7pm governance registry,332
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,de26507,add crypto a7pm governance registry,45352
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,40a7b7c,refresh crypto a7pm source registry,45380
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -1025,7 +1046,7 @@ runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,de26
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,de26507,add crypto a7pm governance registry,282
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,de26507,add crypto a7pm governance registry,821
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,de26507,add crypto a7pm governance registry,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,de26507,add crypto a7pm governance registry,4942
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,40a7b7c,refresh crypto a7pm source registry,4307
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
 report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,de26507,add crypto a7pm governance registry,2160
@@ -1102,6 +1123,14 @@ runtime,A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_month_loo.csv,d663427,a
 runtime,A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_robustness_summary.csv,d663427,audit crypto a7s metrics clues,1055
 runtime,A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_symbol_loo.csv,d663427,audit crypto a7s metrics clues,6864
 report,A7S4-CROWDING-ROBUSTNESS-AUDIT,reports/CRYPTO_A7S4_CROWDING_ROBUSTNESS_AUDIT_20260522.md,d663427,audit crypto a7s metrics clues,10074
+runtime,A7SEL-0,runtime/a7sel0_selector_counterfactual/a7sel0_control_dominance_audit.csv,8bad66e,add crypto enforcement parity and selector counterfactual,388
+runtime,A7SEL-0,runtime/a7sel0_selector_counterfactual/a7sel0_label_family_distribution.csv,8bad66e,add crypto enforcement parity and selector counterfactual,363
+runtime,A7SEL-0,runtime/a7sel0_selector_counterfactual/a7sel0_manifest.json,8bad66e,add crypto enforcement parity and selector counterfactual,632
+runtime,A7SEL-0,runtime/a7sel0_selector_counterfactual/a7sel0_selected_queue.csv,8bad66e,add crypto enforcement parity and selector counterfactual,6819
+runtime,A7SEL-0,runtime/a7sel0_selector_counterfactual/a7sel0_selector_trace.csv,8bad66e,add crypto enforcement parity and selector counterfactual,2597708
+runtime,A7SEL-0,runtime/a7sel0_selector_counterfactual/a7sel0_signal_vector_diversity.csv,8bad66e,add crypto enforcement parity and selector counterfactual,128
+runtime,A7SEL-0,runtime/a7sel0_selector_counterfactual/a7sel0_stress_veto_summary.csv,8bad66e,add crypto enforcement parity and selector counterfactual,119
+report,A7SEL0-SELECTOR-TARGET-COUNTERFACTUAL,reports/CRYPTO_A7SEL0_SELECTOR_TARGET_COUNTERFACTUAL_20260529.md,8bad66e,add crypto enforcement parity and selector counterfactual,2725
 runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_append_only_rules.csv,956e38c,add crypto a7t0 forward contract,828
 runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,956e38c,add crypto a7t0 forward contract,709
 runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_forward_field_registry.csv,956e38c,add crypto a7t0 forward contract,1038
