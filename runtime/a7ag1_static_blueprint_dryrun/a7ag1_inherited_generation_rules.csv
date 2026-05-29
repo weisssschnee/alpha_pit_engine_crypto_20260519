@@ -1,0 +1,8 @@
+rule,detail
+source_queue_only,A7AG inputs must come from A7AF1 selected queue
+role_label_alignment,track labels must match selector tier role
+no_cross_track_promotion,downside/risk-defense results cannot count as ordinary alpha
+control_first,matched wrong-lag/stale/random controls must be attached before any numeric replay contract
+latency_native,same-bar field-native timing policy remains; no artificial +2h stress
+no_may,"May not used in generation, selector score, threshold, mutation, or authorization"
+no_full_grammar,FormulaGenV2 open grammar remains disabled; only typed role-aware blueprints allowed

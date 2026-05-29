@@ -1,0 +1,22 @@
+{
+  "authorizes_a7ag2_numeric_replay_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_replay_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "blueprint_count": 372,
+  "decision": "PASS_A7AG1_STATIC_BLUEPRINT_DRYRUN_READY_FOR_A7AG2_NUMERIC_REPLAY_CONTRACT",
+  "executes_formula_search": false,
+  "executes_numeric_replay": false,
+  "executes_static_blueprint_generation": true,
+  "executes_training": false,
+  "generated_at": "2026-05-29T08:24:48Z",
+  "production_key_count": 188,
+  "skeleton_count": 60,
+  "source_a7ag0_decision": "PASS_A7AG0_ROLE_AWARE_GENERATION_CONTRACT_READY_FOR_A7AG1_BLUEPRINT_DRYRUN",
+  "stage": "A7AG-1",
+  "static_ok_count": 372,
+  "track_count": 3,
+  "uses_may_count": 0
+}

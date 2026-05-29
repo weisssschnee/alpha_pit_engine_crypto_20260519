@@ -1,0 +1,4 @@
+track_id,blueprints,static_ok,unique_seed_fields,unique_skeletons,unique_production_keys
+G0_ordinary_alpha_basis_premium,60,60,1,12,20
+G1_neutralized_alpha_diagnostic,96,96,3,60,48
+G2_downside_risk_defense,216,216,5,60,120
