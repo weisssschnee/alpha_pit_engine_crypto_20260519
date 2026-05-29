@@ -1,0 +1,9 @@
+metric,value
+a7ag5_decision,HOLD_A7AG5_NO_ORDINARY_LABEL_TRANSLATION
+a7ag3_to_a7ag5_clues,24
+ordinary_label_translation_clue_count,0
+cost20_original_survivor_count,8
+concentration_blocker_count,0
+formula_generation_overconservative,false; A7AG3 evaluated 96/96 and found 24 pilot clues
+ordinary_alpha_status,HOLD
+risk_defense_status,forensic_only

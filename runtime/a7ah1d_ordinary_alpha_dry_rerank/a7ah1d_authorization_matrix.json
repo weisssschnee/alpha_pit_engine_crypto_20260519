@@ -1,0 +1,17 @@
+{
+  "A7AH-1D": {
+    "status": "HOLD_A7AH1D_NO_ORDINARY_ALPHA_DRY_RERANK_CANDIDATES"
+  },
+  "a7ah1e_contract": {
+    "authorized": false
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

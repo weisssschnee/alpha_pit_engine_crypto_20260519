@@ -1,0 +1,17 @@
+seed_field,interaction_field,clue_count,skeleton_count,median_control_ratio,cost10_survivors,cost20_survivors
+top_long_short_account_ratio_last,realized_vol_24h,2,2,0.6687438562296525,1,1
+top_long_short_account_ratio_last,oi_x_price_move_24h,2,2,0.6460603846534636,1,0
+top_long_short_account_ratio_last,open_interest_last,2,2,0.3973883647626939,1,0
+realized_vol_24h,oi_x_price_move_24h,1,1,0.8083660893916995,1,1
+realized_vol_24h,open_interest_last,1,1,0.9182186519198572,1,1
+global_long_short_account_ratio_last,oi_x_price_move_24h,1,1,0.4288417653991144,0,0
+global_long_short_account_ratio_last,open_interest_last,1,1,0.8046761675030744,0,0
+global_long_short_account_ratio_last,realized_vol_24h,1,1,0.7315635506767028,0,0
+global_long_short_account_ratio_last,top_long_short_account_ratio_last,1,1,0.6168506447536766,0,0
+oi_x_price_move_24h,global_long_short_account_ratio_last,1,1,0.7772680719409663,1,0
+oi_x_price_move_24h,realized_vol_24h,1,1,0.8176232491910048,1,0
+oi_x_price_move_24h,top_long_short_account_ratio_last,1,1,0.8164868387007758,1,0
+oi_x_price_move_24h,trade_count,1,1,0.9235100208969966,0,0
+top_long_short_account_ratio_last,global_long_short_account_ratio_last,1,1,0.4093658049158898,0,0
+trade_count,global_long_short_account_ratio_last,1,1,0.8762653222087295,0,0
+trade_count,oi_x_price_move_24h,1,1,0.913005363644196,0,0

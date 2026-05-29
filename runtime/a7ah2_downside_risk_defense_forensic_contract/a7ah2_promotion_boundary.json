@@ -1,0 +1,20 @@
+{
+  "allowed": [
+    "forensic audit",
+    "risk-defense clue classification",
+    "state-conditioned diagnostic"
+  ],
+  "not_allowed": [
+    "ordinary alpha evidence",
+    "standalone alpha proof",
+    "shadow/paper/live overlay",
+    "large search seed without A7AH2F pass"
+  ],
+  "required_before_any_risk_overlay_research": [
+    "cost ladder pass",
+    "state-conditioned downside benefit",
+    "negative controls clean",
+    "loss-hour/month concentration clean",
+    "explicit ordinary alpha separation"
+  ]
+}

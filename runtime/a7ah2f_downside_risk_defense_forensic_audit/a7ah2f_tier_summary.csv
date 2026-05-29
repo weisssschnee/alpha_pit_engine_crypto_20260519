@@ -1,0 +1,3 @@
+risk_defense_tier,candidates,seed_field_count,interaction_field_count,median_control_ratio,median_cost20,max_symbol_share,max_month_share
+hold,16,5,6,0.806521128447387,-0.0022972222668597997,0.0514508588674077,0.3955650441213563
+review_candidate_10bps,3,2,3,0.5311026046378738,-0.0016739835556695,0.0430147072441292,0.3939444123441679

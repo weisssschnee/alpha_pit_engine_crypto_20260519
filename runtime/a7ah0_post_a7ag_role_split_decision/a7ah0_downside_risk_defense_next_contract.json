@@ -1,0 +1,18 @@
+{
+  "must_audit": [
+    "cost_ladder_5_10_20bps",
+    "crash_state_conditioning",
+    "top_loss_hour_attribution",
+    "symbol_month_latent_concentration",
+    "negative_controls_by_downside_label",
+    "tradeability_as_risk_overlay_only"
+  ],
+  "name": "downside risk-defense forensic contract",
+  "not_authorized": [
+    "ordinary_alpha_promotion",
+    "live_risk_overlay",
+    "alpha_proof"
+  ],
+  "purpose": "audit whether L6 downside clues represent a coherent risk-defense state, not ordinary alpha",
+  "stage": "A7AH-2"
+}

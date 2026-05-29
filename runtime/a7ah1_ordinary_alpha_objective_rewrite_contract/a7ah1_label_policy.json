@@ -1,0 +1,29 @@
+{
+  "diagnostic_only_labels": [
+    "L5_vol_adjusted_return"
+  ],
+  "forbidden_as_primary_alpha_labels": [
+    "L5_vol_adjusted_return",
+    "L6_downside_avoidance",
+    "L7_ranked_future_return"
+  ],
+  "ordinary_alpha_candidate_requires": [
+    "positive_L0_or_L1_response",
+    "control_ratio_lt_1_in_each_pre_may_split",
+    "one_bar_lag_survival",
+    "cost5_proxy_survival",
+    "nonoverlap_median_tstat_floor_gt_0",
+    "not_concentration_dominated"
+  ],
+  "primary_alpha_labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return"
+  ],
+  "risk_defense_only_labels": [
+    "L6_downside_avoidance"
+  ],
+  "secondary_diagnostic_labels": [
+    "L2_BTC_ETH_beta_residual_return",
+    "L3_liquidity_tier_relative_return"
+  ]
+}

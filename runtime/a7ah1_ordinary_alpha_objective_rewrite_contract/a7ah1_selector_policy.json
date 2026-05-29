@@ -1,0 +1,25 @@
+{
+  "dry_rerank_input": "existing A7AG2/A7AG3 queue and metrics only",
+  "hard_reject": [
+    "no_L0_or_L1_positive_split",
+    "control_ratio_ge_1",
+    "wrong_lag_or_shuffle_control_stronger",
+    "same_skeleton_over_cap",
+    "same_field_family_over_cap"
+  ],
+  "score_components_allowed": [
+    "L0_L1_oriented_spread",
+    "matched_control_margin",
+    "one_bar_lag_survival",
+    "cost5_proxy_survival",
+    "nonoverlap_robustness",
+    "field_family_diversity",
+    "skeleton_diversity"
+  ],
+  "score_components_forbidden": [
+    "L5_as_primary_reward",
+    "L6_as_primary_reward",
+    "May",
+    "ranked_label_only_reward"
+  ]
+}

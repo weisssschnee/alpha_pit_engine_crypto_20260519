@@ -1,0 +1,23 @@
+{
+  "authorizes_a7ah2g_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "concentration_blocker_count": 0,
+  "control_margin_clean_count": 10,
+  "decision": "PASS_A7AH2F_DOWNSIDE_RISK_DEFENSE_REVIEW_CANDIDATES_FOUND",
+  "executes_forensic_audit": true,
+  "executes_formula_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T09:02:44Z",
+  "input_a7ah2_decision": "PASS_A7AH2_DOWNSIDE_RISK_DEFENSE_FORENSIC_CONTRACT_READY_FOR_A7AH2F",
+  "input_downside_clues": 19,
+  "risk_defense_review_candidate_count": 3,
+  "stage": "A7AH-2F",
+  "strict_risk_defense_candidate_count": 0,
+  "survives_20bps_proxy_count": 3,
+  "uses_may": false
+}

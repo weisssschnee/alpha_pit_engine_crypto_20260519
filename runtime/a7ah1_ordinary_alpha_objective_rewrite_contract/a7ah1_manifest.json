@@ -1,0 +1,17 @@
+{
+  "authorizes_a7ah1d_dry_rerank": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AH1_ORDINARY_ALPHA_OBJECTIVE_REWRITE_CONTRACT_READY_FOR_DRY_RERANK",
+  "executes_contract_only": true,
+  "executes_formula_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T08:59:32Z",
+  "input_a7ah0_decision": "PASS_A7AH0_POST_A7AG_ROLE_SPLIT_READY_FOR_A7AH1_A7AH2_CONTRACTS",
+  "stage": "A7AH-1",
+  "uses_may": false
+}

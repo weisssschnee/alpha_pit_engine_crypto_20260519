@@ -1,0 +1,20 @@
+{
+  "authorizes_a7ah1_ordinary_alpha_objective_rewrite_contract": true,
+  "authorizes_a7ah2_downside_risk_defense_forensic_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "concentration_blocker_count": 0,
+  "decision": "PASS_A7AH0_POST_A7AG_ROLE_SPLIT_READY_FOR_A7AH1_A7AH2_CONTRACTS",
+  "executes_formula_generation": false,
+  "executes_replay": false,
+  "executes_role_split_decision": true,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T08:56:57Z",
+  "input_a7ag5_decision": "HOLD_A7AG5_NO_ORDINARY_LABEL_TRANSLATION",
+  "ordinary_label_translation_clue_count": 0,
+  "stage": "A7AH-0",
+  "uses_may": false
+}

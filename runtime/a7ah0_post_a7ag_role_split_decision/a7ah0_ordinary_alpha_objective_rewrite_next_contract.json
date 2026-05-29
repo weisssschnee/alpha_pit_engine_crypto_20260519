@@ -1,0 +1,17 @@
+{
+  "allowed_contract_work": [
+    "define L0/L1-first selector objective",
+    "require ordinary label response before formula expansion",
+    "keep vol-adjusted/downside fields as diagnostics or controls only",
+    "define bounded A7AH1 dry rerank on existing A7AG queue"
+  ],
+  "must_not_use": [
+    "L5_vol_adjusted_return_as_primary_alpha_label",
+    "L6_downside_avoidance_as_primary_alpha_label",
+    "May",
+    "formula_search_execution"
+  ],
+  "name": "ordinary alpha objective rewrite contract",
+  "purpose": "rewrite ordinary alpha objective after A7AG5 showed no L0/L1 translation",
+  "stage": "A7AH-1"
+}

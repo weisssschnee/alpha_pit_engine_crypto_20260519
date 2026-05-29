@@ -1,0 +1,6 @@
+audit_id,purpose,required_outputs,pass_signal
+D0_cost_ladder,separate 5bps pilot clues from 10/20bps robust risk-defense clues,cost5|cost10|cost20 survivor counts by candidate,risk-defense candidate survives >=10bps diagnostic and reports 20bps status
+D1_crash_state_conditioning,test whether downside clue is state-conditional rather than universal short-vol exposure,performance by drawdown/breadth/volatility state,benefit concentrated in adverse states without normal-state damage dominating
+D2_loss_hour_attribution,detect whether signal only avoids a few known loss hours,top gain/loss hour contribution and leave-one-month-out contribution,no single hour/month dominates
+D3_negative_controls_downside,ensure downside label is not trivially easier for wrong-lag/shuffle controls,matched controls by candidate and split,control ratio < 1 in all pre-May splits
+D4_overlay_boundary,prevent risk-defense clue from being promoted as ordinary alpha or live overlay,allowed/not-allowed use matrix,only forensic/risk-defense research remains authorized

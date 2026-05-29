@@ -1,0 +1,20 @@
+{
+  "A7AH-0": {
+    "status": "PASS_A7AH0_POST_A7AG_ROLE_SPLIT_READY_FOR_A7AH1_A7AH2_CONTRACTS"
+  },
+  "A7AH-1_ordinary_alpha_objective_rewrite_contract": {
+    "authorized": true
+  },
+  "A7AH-2_downside_risk_defense_forensic_contract": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

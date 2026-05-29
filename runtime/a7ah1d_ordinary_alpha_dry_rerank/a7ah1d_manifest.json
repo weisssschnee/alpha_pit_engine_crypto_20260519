@@ -1,0 +1,23 @@
+{
+  "authorizes_a7ah1e_contract": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7AH1D_NO_ORDINARY_ALPHA_DRY_RERANK_CANDIDATES",
+  "executes_dry_rerank": true,
+  "executes_formula_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T09:00:52Z",
+  "input_a7ah1_decision": "PASS_A7AH1_ORDINARY_ALPHA_OBJECTIVE_REWRITE_CONTRACT_READY_FOR_DRY_RERANK",
+  "label_families": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return"
+  ],
+  "ordinary_candidate_count": 16,
+  "ordinary_hard_gate_pass_count": 0,
+  "stage": "A7AH-1D",
+  "uses_may": false
+}

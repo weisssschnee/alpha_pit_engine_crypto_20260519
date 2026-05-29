@@ -1,0 +1,17 @@
+{
+  "A7AH-2F": {
+    "status": "PASS_A7AH2F_DOWNSIDE_RISK_DEFENSE_REVIEW_CANDIDATES_FOUND"
+  },
+  "a7ah2g_contract": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}
