@@ -1,0 +1,28 @@
+{
+  "authorization": {
+    "alpha_proof": false,
+    "formula_generation": false,
+    "full_numeric_replay": false,
+    "large_search": false,
+    "shadow_paper_live": false
+  },
+  "blocking_issues": [
+    "no_stress_clean_preflight_clues",
+    "pre_may_alignment_too_sparse",
+    "matched_controls_often_dominate",
+    "some_families_sparse_under_smoke_subset"
+  ],
+  "decision": "HOLD_A7AL2X7F_OBJECTIVE_FAMILY_NUMERIC_EVIDENCE_WEAK",
+  "primary_findings": [
+    "X7 evaluator artifacts are available and do not indicate implementation failure.",
+    "Pre-May split alignment is weak: only one candidate is positive across validation, test, and recent OOS.",
+    "Matched controls dominate most candidates when inspected across pre-May splits.",
+    "No stress-clean replay-preflight clue is present in the bounded smoke sample."
+  ],
+  "recommended_next_action": [
+    "Do not authorize A7AL-2Y or full replay from current X7 evidence.",
+    "Either expand X7F forensic on the company machine or redesign away from the current OI/positioning pool."
+  ],
+  "source_decision": "HOLD_A7AL2X7_NO_CLEAN_NUMERIC_PREFLIGHT_CLUES",
+  "source_stage": "A7AL-2X7"
+}

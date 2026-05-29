@@ -1,0 +1,30 @@
+{
+  "allowed_next": [
+    "A7AL-2X7F forensic expansion on company machine",
+    "objective-family redesign away from current OI/positioning pool"
+  ],
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_generation": false,
+  "authorizes_full_numeric_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_stress_clean_preflight_clues",
+    "pre_may_alignment_too_sparse",
+    "matched_controls_often_dominate",
+    "some_families_sparse_under_smoke_subset"
+  ],
+  "candidate_count": 14,
+  "control_dominated_count": 11,
+  "decision": "HOLD_A7AL2X7F_OBJECTIVE_FAMILY_NUMERIC_EVIDENCE_WEAK",
+  "executes_formula_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T02:09:20Z",
+  "missing_or_sparse_count": 2,
+  "pre_may_all_positive_count": 1,
+  "source_decision": "HOLD_A7AL2X7_NO_CLEAN_NUMERIC_PREFLIGHT_CLUES",
+  "source_stage": "A7AL-2X7",
+  "stage": "A7AL-2X7F",
+  "stress_clean_preflight_clue_count": 0
+}
