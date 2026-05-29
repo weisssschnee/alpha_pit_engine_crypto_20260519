@@ -1,0 +1,17 @@
+{
+  "authorizes_a7aa3_selector_rewrite_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AA2_FEATURE_ROLES_READY_FOR_SELECTOR_REWRITE_CONTRACT",
+  "executes_role_classification": true,
+  "executes_search": false,
+  "executes_training": false,
+  "field_count": 24,
+  "generated_at": "2026-05-29T05:30:56Z",
+  "signal_candidate_field_count": 5,
+  "source_a7aa1_decision": "PASS_A7AA1_PRIMITIVE_RESPONSE_CANDIDATES_FOUND_FORMULA_SEARCH_STILL_HOLD",
+  "stage": "A7AA-2",
+  "uses_may": false
+}

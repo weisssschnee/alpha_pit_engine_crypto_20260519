@@ -1,0 +1,6 @@
+transform,uses_future,description
+level,False,raw feature value
+delta_4h,False,feature_t - feature_t-4
+delta_24h,False,feature_t - feature_t-24
+cs_rank,False,timestamp cross-sectional rank percentile
+ts_zscore_168h,False,past rolling 168h zscore

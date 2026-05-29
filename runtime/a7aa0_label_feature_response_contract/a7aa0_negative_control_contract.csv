@@ -1,0 +1,5 @@
+control,purpose
+one_bar_lag,entry latency survival
+wrong_lag_future_24h,lookahead contamination check
+wrong_lag_stale_168h,stale signal placebo
+same_family_random,random signal placebo

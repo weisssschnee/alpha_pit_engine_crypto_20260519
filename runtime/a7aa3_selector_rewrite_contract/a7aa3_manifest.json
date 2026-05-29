@@ -1,0 +1,16 @@
+{
+  "authorizes_a7ab0_selector_rewrite_dryrun_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blocked_field_count": 19,
+  "decision": "PASS_A7AA3_SELECTOR_REWRITE_CONTRACT_READY_FOR_A7AB0",
+  "executes_contract_only": true,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T05:31:49Z",
+  "seed_field_count": 5,
+  "stage": "A7AA-3",
+  "uses_may": false
+}

@@ -1,0 +1,38 @@
+{
+  "allowed_horizon_focus": [
+    1,
+    4
+  ],
+  "allowed_label_focus": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L7_ranked_future_return"
+  ],
+  "allowed_next_stage": "A7AB0_selector_rewrite_dryrun_contract_only",
+  "allowed_primary_families": [
+    "basis_premium",
+    "price_return",
+    "volatility"
+  ],
+  "allowed_primary_seed_fields": [
+    "trade_return_1h",
+    "realized_vol_24h",
+    "mark_index_basis_bps",
+    "realized_vol_168h",
+    "premium_close_bps"
+  ],
+  "not_authorized": [
+    "formula_search_execution",
+    "large_search",
+    "alpha_proof",
+    "shadow_paper_live"
+  ],
+  "required_pre_generation_filters": [
+    "seed_field_must_have_A7AA1_primitive_response_candidate",
+    "label_family_must_match_seed_evidence",
+    "horizon_must_match_seed_evidence_or_be_adjacent_short_horizon",
+    "wrong_lag_and_random_controls_attached",
+    "no_May_in_selector_generation_mutation"
+  ],
+  "selector_target": "primitive_response_first"
+}

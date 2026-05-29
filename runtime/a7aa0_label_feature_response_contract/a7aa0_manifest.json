@@ -1,0 +1,19 @@
+{
+  "authorizes_a7aa1_primitive_response_map": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AA0_LABEL_FEATURE_RESPONSE_CONTRACT_READY_FOR_A7AA1",
+  "executes_contract_only": true,
+  "executes_response_map": false,
+  "executes_search": false,
+  "executes_training": false,
+  "feature_count": 32,
+  "generated_at": "2026-05-29T05:07:00Z",
+  "label_families_allowed_in_a7aa1": 5,
+  "source_z9_decision": "HOLD_A7AL2Z9_NO_RESPONSE_GUIDED_PARTIAL_NUMERIC_CLUES",
+  "source_z9_stress_clean_count": 0,
+  "stage": "A7AA-0",
+  "uses_may_for_contract": false
+}

@@ -1,0 +1,17 @@
+{
+  "A7AA-3": {
+    "status": "PASS_A7AA3_SELECTOR_REWRITE_CONTRACT_READY_FOR_A7AB0"
+  },
+  "a7ab0_selector_rewrite_dryrun_contract": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

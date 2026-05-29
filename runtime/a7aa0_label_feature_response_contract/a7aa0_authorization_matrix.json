@@ -1,0 +1,17 @@
+{
+  "A7AA-0": {
+    "status": "PASS_A7AA0_LABEL_FEATURE_RESPONSE_CONTRACT_READY_FOR_A7AA1"
+  },
+  "a7aa1_primitive_response_map": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

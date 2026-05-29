@@ -1,0 +1,43 @@
+{
+  "allowed_horizon_focus": [
+    1,
+    4
+  ],
+  "allowed_label_focus": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L7_ranked_future_return"
+  ],
+  "allowed_seed_fields": [
+    "trade_return_1h",
+    "realized_vol_24h",
+    "mark_index_basis_bps",
+    "realized_vol_168h",
+    "premium_close_bps"
+  ],
+  "alpha_proof_authorized": false,
+  "blocked_until_response_evidence": [
+    "mark_trade_basis_bps",
+    "trade_return_24h",
+    "open_interest_last",
+    "taker_buy_sell_volume_ratio_last",
+    "global_long_short_account_ratio_last",
+    "kline_taker_buy_quote_share",
+    "oi_x_price_move_24h",
+    "top_long_short_position_ratio_last",
+    "open_interest_change_24h",
+    "open_interest_value_last",
+    "top_long_short_account_ratio_last",
+    "trade_quote_volume",
+    "basis_abs_168h",
+    "premium_abs_168h",
+    "liquidity_rank_active_universe",
+    "trade_count",
+    "funding_rate",
+    "funding_rate_abs_168h",
+    "funding_rate_mean_168h"
+  ],
+  "formula_search_authorized": false,
+  "large_search_authorized": false,
+  "selector_rewrite_status": "primitive_response_first"
+}

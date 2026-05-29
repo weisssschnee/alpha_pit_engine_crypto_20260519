@@ -1,0 +1,10 @@
+field_family,field_count,signal_candidate_fields,risk_or_control_fields,weak_fields
+basis_premium,5,2,0,2
+volatility,2,2,0,0
+price_return,2,1,1,0
+funding,3,0,0,3
+liquidity,3,0,0,3
+open_interest,3,0,3,0
+positioning,3,0,3,0
+taker_flow,2,0,0,0
+open_interest_interaction,1,0,1,0

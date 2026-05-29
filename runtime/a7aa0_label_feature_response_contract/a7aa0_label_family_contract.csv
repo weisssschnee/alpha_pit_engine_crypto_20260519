@@ -1,0 +1,8 @@
+label_family,definition,role,allowed_in_a7aa1
+L0_raw_forward_return,log(close_t+h)-log(close_t),baseline raw forward return,True
+L1_cross_sectional_relative_return,raw forward return minus timestamp cross-sectional mean,market-mode reduced relative return,True
+L3_liquidity_tier_relative_return,raw forward return demeaned within liquidity_tier,liquidity-tier relative label,True
+L5_vol_adjusted_return,raw forward return divided by realized_vol_168h,vol-normalized response,True
+L7_ranked_future_return,timestamp cross-sectional rank percentile of raw forward return minus 0.5,ranked future return,True
+L2_BTC_ETH_beta_residual_return,future return residualized versus BTC/ETH beta proxy,contract only; not used until beta matrix is frozen,False
+L6_downside_avoidance,asymmetric downside/crash avoidance label,contract only; requires separate downside objective,False
