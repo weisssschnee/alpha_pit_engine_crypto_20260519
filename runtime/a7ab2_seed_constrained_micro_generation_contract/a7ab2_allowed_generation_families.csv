@@ -1,0 +1,5 @@
+family_id,required_seed_family,allowed_seed_fields,mechanism,allowed_transforms,allowed_interactions
+G0_price_return_reversal,price_return,trade_return_1h,recent cross-sectional winners mean-revert over ranked future return labels,level|cs_rank|zscore|winsor|tsrank|decay,volatility_state|basis_premium_state
+G1_volatility_state_reversal,volatility,realized_vol_24h|realized_vol_168h,"high realized volatility state is tested as risk/reversal state, not standalone proof",level|cs_rank|zscore|winsor|tsrank|decay|horizon_spread,price_return_state|basis_premium_state
+G2_basis_premium_dislocation,basis_premium,premium_close_bps|mark_index_basis_bps,basis/premium change is tested as dislocation/reversion state,delta_24h|cs_rank|zscore|winsor|tsrank|decay,price_return_state|volatility_state
+G3_seed_pair_interaction,price_return+volatility+basis_premium,mark_index_basis_bps|premium_close_bps|realized_vol_168h|realized_vol_24h|trade_return_1h,only pairwise seed interactions with clean primitive-response lineage,Mul|Sub|SafeDiv|Rank|ZScore|Clip|Winsor,price_x_vol|price_x_basis|basis_x_vol

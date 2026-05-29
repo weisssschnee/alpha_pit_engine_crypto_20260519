@@ -1,0 +1,5 @@
+family_id,selected_count,seed_field_count,skeleton_count
+G0_price_return_reversal,128,1,48
+G1_volatility_state_reversal,179,2,48
+G2_basis_premium_dislocation,179,2,48
+G3_seed_pair_interaction,26,4,26

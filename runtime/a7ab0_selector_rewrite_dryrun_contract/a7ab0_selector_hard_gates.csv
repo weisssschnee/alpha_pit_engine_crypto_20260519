@@ -1,0 +1,7 @@
+gate,rule
+primary_field_must_be_a7aa2_seed,field in A7AA2 predictive_signal_candidate set
+control_ratio_lt_1,control_ratio_premay_max < 1.0
+premay_all_positive,validation/test/recent all oriented positive
+lag_ok,one_bar_lag_recent_oriented positive and >= 25pct of recent
+label_and_horizon_focus,label/horizon must be supported by A7AA1 evidence
+no_may,"May not used in selector score, generation, mutation, or threshold"

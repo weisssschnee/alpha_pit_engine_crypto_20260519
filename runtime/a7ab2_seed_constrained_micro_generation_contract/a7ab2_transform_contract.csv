@@ -1,0 +1,14 @@
+operator,allowed,constraint
+Rank,True,cross-sectional per timestamp only
+ZScore,True,rolling or cross-sectional; no future fit
+TSRank,True,lookback in 24|72|168 only
+Delta,True,lookback in 1|4|24 only
+Mean,True,lookback in 4|24|72|168 only
+Decay,True,lookback in 4|12|24 only
+Sub,True,seed fields only
+Mul,True,max one interaction node
+SafeDiv,True,bounded denominator; no raw price ratio overlay
+Clip,True,fixed train-only or symmetric constants
+Winsor,True,fixed train-only or symmetric constants
+SignedPower,False,forbidden in A7AB-2
+deep_nested_conditionals,False,forbidden in A7AB-2

@@ -1,0 +1,8 @@
+gate,rule
+seed_lineage_required,every expression must trace to an A7AB-1 selected seed
+primitive_response_role_required,seed field must be predictive_signal_candidate in A7AA-2
+no_may,"May cannot enter generation, mutation, selector score, thresholds, or authorization"
+negative_controls_attached,wrong-lag/stale/shuffle/random controls must be generated with each family
+latency_native,field-native latency only; no artificial +2h stress policy
+skeleton_diversity,same skeleton share <= 15% in static queue
+field_family_diversity,same family share <= 35% in static queue

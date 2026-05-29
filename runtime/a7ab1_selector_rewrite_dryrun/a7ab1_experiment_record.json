@@ -1,0 +1,12 @@
+{
+  "commands": [
+    "python -m py_compile scripts/crypto_a7ab1_selector_rewrite_dryrun.py",
+    "python scripts/crypto_a7ab1_selector_rewrite_dryrun.py"
+  ],
+  "experiment_id": "20260529_a7ab1_selector_rewrite_dryrun",
+  "mode": "light",
+  "next_action": "write A7AB-2 contract only if A7AB-1 pass remains accepted",
+  "objective": "construct primitive-response-first selector queue before any formula generation",
+  "reproducible": true,
+  "status": "completed"
+}

@@ -1,0 +1,23 @@
+{
+  "A7AB-2": {
+    "status": "PASS_A7AB2_SEED_CONSTRAINED_MICRO_GENERATION_CONTRACT_READY_FOR_A7AB3_DRY_GENERATION"
+  },
+  "A7AB-3_seed_constrained_dry_generation": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "fast_replay": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

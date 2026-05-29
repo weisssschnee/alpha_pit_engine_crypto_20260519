@@ -1,0 +1,13 @@
+{
+  "future_deep_audit_cap_if_later_authorized": 16,
+  "future_fast_replay_cap_if_later_authorized": 128,
+  "generated_total_cap": 4096,
+  "max_depth": 4,
+  "max_interaction_nodes": 1,
+  "max_per_family_share": 0.35,
+  "max_per_seed_field_share": 0.25,
+  "max_same_skeleton_share": 0.15,
+  "min_family_count_static_queue": 3,
+  "min_seed_field_count_static_queue": 5,
+  "static_selected_cap": 512
+}

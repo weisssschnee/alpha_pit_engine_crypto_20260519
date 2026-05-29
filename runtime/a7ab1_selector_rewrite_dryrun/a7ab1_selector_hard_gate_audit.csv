@@ -1,0 +1,12 @@
+candidate_id,seed_field,premay_all_positive,control_ratio_lt_1,lag_ok,label_allowed,horizon_allowed,no_may_used,eligible,reject_reasons
+a7ab1_seed_000,True,True,True,True,True,True,True,True,
+a7ab1_seed_001,True,True,True,True,True,True,True,True,
+a7ab1_seed_002,True,True,True,True,True,True,True,True,
+a7ab1_seed_003,True,True,True,True,True,True,True,True,
+a7ab1_seed_004,True,True,True,True,True,True,True,True,
+a7ab1_seed_005,True,True,True,True,True,True,True,True,
+a7ab1_seed_006,True,True,True,True,True,True,True,True,
+a7ab1_seed_007,True,True,True,True,True,True,True,True,
+a7ab1_seed_008,True,True,True,True,True,True,True,True,
+a7ab1_seed_009,True,True,True,True,True,True,True,True,
+a7ab1_seed_010,True,True,True,True,True,True,True,True,

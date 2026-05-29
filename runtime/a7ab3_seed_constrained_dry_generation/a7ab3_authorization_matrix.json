@@ -1,0 +1,20 @@
+{
+  "A7AB-3": {
+    "status": "PASS_A7AB3_SEED_CONSTRAINED_DRY_GENERATION_READY_FOR_A7AB4_MATERIALIZATION_PREFLIGHT"
+  },
+  "A7AB-4_materialization_preflight": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "fast_replay": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "authorizes_a7ab3_seed_constrained_dry_generation": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_fast_replay": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AB2_SEED_CONSTRAINED_MICRO_GENERATION_CONTRACT_READY_FOR_A7AB3_DRY_GENERATION",
+  "executes_contract_only": true,
+  "executes_formula_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T05:39:48Z",
+  "quota": {
+    "future_deep_audit_cap_if_later_authorized": 16,
+    "future_fast_replay_cap_if_later_authorized": 128,
+    "generated_total_cap": 4096,
+    "max_depth": 4,
+    "max_interaction_nodes": 1,
+    "max_per_family_share": 0.35,
+    "max_per_seed_field_share": 0.25,
+    "max_same_skeleton_share": 0.15,
+    "min_family_count_static_queue": 3,
+    "min_seed_field_count_static_queue": 5,
+    "static_selected_cap": 512
+  },
+  "seed_families": [
+    "basis_premium",
+    "price_return",
+    "volatility"
+  ],
+  "seed_family_count": 3,
+  "seed_field_count": 5,
+  "seed_fields": [
+    "mark_index_basis_bps",
+    "premium_close_bps",
+    "realized_vol_168h",
+    "realized_vol_24h",
+    "trade_return_1h"
+  ],
+  "stage": "A7AB-2",
+  "uses_may": false
+}

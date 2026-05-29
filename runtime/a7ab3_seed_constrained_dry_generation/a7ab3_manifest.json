@@ -1,0 +1,49 @@
+{
+  "authorizes_a7ab4_materialization_preflight": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_fast_replay": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AB3_SEED_CONSTRAINED_DRY_GENERATION_READY_FOR_A7AB4_MATERIALIZATION_PREFLIGHT",
+  "executes_formula_generation": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_static_dry_generation_only": true,
+  "executes_training": false,
+  "generated_at": "2026-05-29T05:47:13Z",
+  "generation_contract": {
+    "future_deep_audit_cap_if_later_authorized": 16,
+    "future_fast_replay_cap_if_later_authorized": 128,
+    "generated_total_cap": 4096,
+    "max_depth": 4,
+    "max_interaction_nodes": 1,
+    "max_per_family_share": 0.35,
+    "max_per_seed_field_share": 0.25,
+    "max_same_skeleton_share": 0.15,
+    "min_family_count_static_queue": 3,
+    "min_seed_field_count_static_queue": 5,
+    "static_selected_cap": 512
+  },
+  "quota_summary": {
+    "family_count": 4,
+    "generated_total": 1855,
+    "primary_seed_field_count": 5,
+    "skeleton_count": 96,
+    "static_selected_count": 512,
+    "static_selected_family_count": 4,
+    "static_selected_seed_field_count": 5,
+    "static_selected_skeleton_count": 74,
+    "static_top_family_share": 0.349609375,
+    "static_top_seed_field_share": 0.25,
+    "static_top_skeleton_share": 0.087890625,
+    "unique_expression_ratio": 1.0
+  },
+  "stage": "A7AB-3",
+  "static_validity": {
+    "generated_obvious_self_spread_count": 0,
+    "generated_uses_may_count": 0,
+    "selected_obvious_self_spread_count": 0,
+    "selected_uses_may_count": 0
+  },
+  "uses_may": false
+}

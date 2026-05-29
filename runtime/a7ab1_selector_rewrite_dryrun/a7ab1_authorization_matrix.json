@@ -1,0 +1,20 @@
+{
+  "A7AB-1": {
+    "status": "PASS_A7AB1_SELECTOR_REWRITE_DRYRUN_READY_FOR_A7AB2_CONTRACT"
+  },
+  "A7AB-2_seed_constrained_micro_generation_contract": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}
