@@ -1,0 +1,24 @@
+{
+  "active_non_l7_labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return"
+  ],
+  "authorizes_a7pool0": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7AIF4_ORDINARY_ALPHA_SEEDS_FOUND",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-29T14:39:14Z",
+  "promoted_evidence_rows": 2,
+  "promoted_field_count": 1,
+  "promotion_audit_rows": 11,
+  "response_candidate_rows": 11,
+  "stage": "A7AI-F4",
+  "uses_may": false
+}

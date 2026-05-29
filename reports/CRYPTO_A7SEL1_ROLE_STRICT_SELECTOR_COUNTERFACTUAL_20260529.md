@@ -1,0 +1,33 @@
+# CRYPTO A7SEL-1 ROLE-STRICT SELECTOR COUNTERFACTUAL
+
+Generated: 2026-05-29T14:40:28Z
+
+## Decision
+
+`HOLD_A7SEL1_NOT_RUN_A7POOL0_NOT_READY`
+
+A7SEL-1 was not run because A7POOL-0 did not authorize selector continuation.
+
+## Manifest
+
+```json
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "a7pool0_not_authorized"
+  ],
+  "decision": "HOLD_A7SEL1_NOT_RUN_A7POOL0_NOT_READY",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-29T14:40:28Z",
+  "selected_count": 0,
+  "selected_stress_clean_candidates": 0,
+  "stage": "A7SEL-1",
+  "upstream_a7pool0_decision": "HOLD_A7POOL0_POOL_NOT_READY_FOR_SELECTOR",
+  "uses_may_for_post_selection_stress_summary": false,
+  "uses_may_in_selector_score": false
+}
+```

@@ -1,0 +1,6 @@
+field_name,promotion_decision,evidence_rows
+mark_index_basis_bps,PROMOTE_ORDINARY_ALPHA_SEED,2
+premium_close_bps,HOLD_L7_ONLY,1
+realized_vol_168h,HOLD_L7_ONLY,2
+realized_vol_24h,HOLD_L7_ONLY,2
+trade_return_1h,HOLD_L7_ONLY,4

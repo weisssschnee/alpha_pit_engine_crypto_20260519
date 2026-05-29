@@ -1,0 +1,23 @@
+{
+  "alpha_eligible_count": 8,
+  "authorizes_a7sel1": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "single_family_concentration_gt_35pct"
+  ],
+  "decision": "HOLD_A7POOL0_POOL_NOT_READY_FOR_SELECTOR",
+  "duplicate_expression_count_before_dedup": 8,
+  "executes_generation": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "field_family_count": 1,
+  "generated_at": "2026-05-29T14:40:16Z",
+  "generated_count": 8,
+  "skeleton_count": 7,
+  "stage": "A7POOL-0",
+  "top_family_share": 1.0,
+  "top_skeleton_share": 0.25,
+  "uses_may": false
+}

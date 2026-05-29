@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-29T14:18:03Z
+Generated: 2026-05-29T14:40:57Z
 
 ## Decision
 
@@ -12,8 +12,17 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
-HEAD=8bad66e5eafa649a56e77c75016d0d1c3c3fcdf9
-origin/main=8bad66e5eafa649a56e77c75016d0d1c3c3fcdf9
+?? reports/CRYPTO_A7AIF4_RESPONSE_BACKED_FIELD_PROMOTION_20260529.md
+?? reports/CRYPTO_A7POOL0_ALPHA_ELIGIBLE_POOL_REBUILD_20260529.md
+?? reports/CRYPTO_A7SEL1_ROLE_STRICT_SELECTOR_COUNTERFACTUAL_20260529.md
+?? runtime/a7aif4_response_backed_field_promotion/
+?? runtime/a7pool0_alpha_eligible_pool/
+?? runtime/a7sel1_role_strict_selector_counterfactual/
+?? scripts/crypto_a7aif4_response_backed_field_promotion.py
+?? scripts/crypto_a7pool0_alpha_eligible_pool_rebuild.py
+?? scripts/crypto_a7sel1_role_strict_selector_counterfactual.py
+HEAD=52300535a037b05e484c7c10a8c084aefe68aba3
+origin/main=52300535a037b05e484c7c10a8c084aefe68aba3
 HEAD == origin/main: True
 ```
 
@@ -21,7 +30,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 1209,
+  "artifact_count": 1234,
   "authorization_record_count": 638,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -35,12 +44,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-29T14:18:03Z",
-  "head": "8bad66e5eafa649a56e77c75016d0d1c3c3fcdf9",
+  "generated_at": "2026-05-29T14:40:57Z",
+  "head": "52300535a037b05e484c7c10a8c084aefe68aba3",
   "head_equals_origin_main": true,
-  "origin_main": "8bad66e5eafa649a56e77c75016d0d1c3c3fcdf9",
+  "origin_main": "52300535a037b05e484c7c10a8c084aefe68aba3",
   "stage": "A7PM-0",
-  "stage_count": 148
+  "stage_count": 151
 }
 ```
 
@@ -53,7 +62,7 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      30 |
+| hold                         | hold                       |      32 |
 | hold                         | diagnostic                 |       4 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
@@ -63,7 +72,7 @@ HEAD == origin/main: True
 | valid_or_historical_record   | contract                   |      36 |
 | valid_or_historical_record   | smoke                      |       7 |
 | valid_or_historical_record   | diagnostic                 |       5 |
-| valid_or_historical_record   | alpha_claim_check_required |       1 |
+| valid_or_historical_record   | alpha_claim_check_required |       2 |
 
 ## Supersession Map
 
