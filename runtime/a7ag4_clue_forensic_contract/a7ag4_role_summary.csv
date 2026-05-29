@@ -1,0 +1,4 @@
+clue_role,track_id,label_family,clue_count,seed_field_count,interaction_field_count,skeleton_count,median_control_ratio,max_control_ratio,cost10_survivors,cost20_survivors,near_control_boundary
+basis_premium_vol_adjusted_diagnostic,G0_ordinary_alpha_basis_premium,L5_vol_adjusted_return,2,1,2,1,0.9092812948032825,0.9542760747312308,2,2,2
+downside_risk_defense_clue,G2_downside_risk_defense,L6_downside_avoidance,19,5,6,15,0.7961293125724718,0.9235100208969966,8,3,9
+neutralized_vol_adjusted_diagnostic,G1_neutralized_alpha_diagnostic,L5_vol_adjusted_return,3,1,2,3,0.8387474287757677,0.8693403596110361,3,3,2

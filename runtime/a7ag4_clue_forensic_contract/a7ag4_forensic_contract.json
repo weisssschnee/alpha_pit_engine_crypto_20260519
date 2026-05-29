@@ -1,0 +1,22 @@
+{
+  "inputs": [
+    "runtime\\a7ag3_numeric_replay_pilot\\a7ag3_replay_clues.csv",
+    "runtime\\a7ag3_numeric_replay_pilot\\a7ag3_candidate_replay_metrics.csv"
+  ],
+  "not_authorized": [
+    "formula_search_execution",
+    "large_search",
+    "alpha_proof",
+    "shadow_paper_live"
+  ],
+  "ordinary_alpha_rule": "Only L0/L1 G0 clues can be ordinary alpha evidence. L5 vol-adjusted and L6 downside clues remain diagnostic or risk-defense only.",
+  "required_a7ag5_audits": [
+    "role_specific_label_translation",
+    "symbol_month_latent_concentration",
+    "cost_ladder_5_10_20bps",
+    "expanded_negative_control_margin",
+    "ordinary_alpha_vs_risk_defense_separation",
+    "duplicate_skeleton_and_production_key_cap"
+  ],
+  "scope": "forensic contract only; no generation, no search, no alpha proof"
+}

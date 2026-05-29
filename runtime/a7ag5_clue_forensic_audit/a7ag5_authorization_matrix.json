@@ -1,0 +1,17 @@
+{
+  "A7AG-5": {
+    "status": "HOLD_A7AG5_NO_ORDINARY_LABEL_TRANSLATION"
+  },
+  "a7ag6_contract": {
+    "authorized": false
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

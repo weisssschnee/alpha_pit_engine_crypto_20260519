@@ -1,0 +1,4 @@
+track_id,median_control_ratio,max_control_ratio,control_dominated
+G0_ordinary_alpha_basis_premium,2.652297362868739,82.29249592790126,14
+G1_neutralized_alpha_diagnostic,1.7508211256542376,73.33808633706393,25
+G2_downside_risk_defense,0.920864336408427,182.9124115903552,18

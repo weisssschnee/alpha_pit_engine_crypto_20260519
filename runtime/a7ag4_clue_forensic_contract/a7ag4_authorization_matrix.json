@@ -1,0 +1,17 @@
+{
+  "A7AG-4": {
+    "status": "PASS_A7AG4_CLUE_FORENSIC_CONTRACT_READY_FOR_A7AG5"
+  },
+  "a7ag5_clue_forensic_audit": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

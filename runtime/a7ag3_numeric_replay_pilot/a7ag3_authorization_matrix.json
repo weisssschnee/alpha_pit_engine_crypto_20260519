@@ -1,0 +1,17 @@
+{
+  "A7AG-3": {
+    "status": "PASS_A7AG3_NUMERIC_REPLAY_PILOT_CLUES_FOUND_EXECUTION_STILL_HOLD"
+  },
+  "a7ag4_forensic_contract": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

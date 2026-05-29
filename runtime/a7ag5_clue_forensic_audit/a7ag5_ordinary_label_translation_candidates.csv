@@ -1,0 +1,1 @@
+candidate_id,track_id,clue_role,original_label_family,translation_label_family,label_horizon_h,decision,control_ratio_premay_max,cost5_recent_oriented,cost10_recent_oriented,cost20_recent_oriented,robust_median_tstat_floor,premay_all_positive,lag_ok

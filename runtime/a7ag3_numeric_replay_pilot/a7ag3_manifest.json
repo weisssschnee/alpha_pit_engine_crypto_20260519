@@ -1,0 +1,30 @@
+{
+  "authorizes_a7ag4_forensic_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "base_field_count": 8,
+  "clue_count": 24,
+  "decision": "PASS_A7AG3_NUMERIC_REPLAY_PILOT_CLUES_FOUND_EXECUTION_STILL_HOLD",
+  "evaluated_count": 96,
+  "executes_formula_search": false,
+  "executes_numeric_replay_pilot": true,
+  "executes_training": false,
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-05-29T08:38:53Z",
+  "input_a7ag2_decision": "PASS_A7AG2_NUMERIC_REPLAY_CONTRACT_READY_FOR_A7AG3_PILOT",
+  "latent_field_count": 4,
+  "missing_fields": [],
+  "passed_tracks": [
+    "G0_ordinary_alpha_basis_premium",
+    "G1_neutralized_alpha_diagnostic",
+    "G2_downside_risk_defense"
+  ],
+  "pilot_cost_bps_gate": 5,
+  "queue_count": 96,
+  "stage": "A7AG-3",
+  "symbols_loaded": 96,
+  "timestamps": 3481,
+  "uses_may": false
+}

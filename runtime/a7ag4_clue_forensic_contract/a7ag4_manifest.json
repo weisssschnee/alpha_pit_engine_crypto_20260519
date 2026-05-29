@@ -1,0 +1,23 @@
+{
+  "authorizes_a7ag5_clue_forensic_audit": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "cost20_proxy_survivor_count": 8,
+  "decision": "PASS_A7AG4_CLUE_FORENSIC_CONTRACT_READY_FOR_A7AG5",
+  "downside_risk_defense_clue_count": 19,
+  "executes_contract_only": true,
+  "executes_formula_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T08:41:21Z",
+  "input_a7ag3_decision": "PASS_A7AG3_NUMERIC_REPLAY_PILOT_CLUES_FOUND_EXECUTION_STILL_HOLD",
+  "input_clue_count": 24,
+  "near_control_boundary_count": 13,
+  "ordinary_alpha_clue_count": 0,
+  "stage": "A7AG-4",
+  "uses_may": false,
+  "vol_adjusted_diagnostic_count": 5
+}
