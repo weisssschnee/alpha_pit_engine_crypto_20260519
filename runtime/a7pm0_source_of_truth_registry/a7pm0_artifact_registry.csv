@@ -1,0 +1,1181 @@
+artifact_type,stage_id,path,commit,commit_subject,bytes
+runtime,A7AA-0,runtime/a7aa0_label_feature_response_contract/a7aa0_authorization_matrix.json,fa3b2d7,add crypto a7aa primitive response map,342
+runtime,A7AA-0,runtime/a7aa0_label_feature_response_contract/a7aa0_candidate_primitive_fields.csv,fa3b2d7,add crypto a7aa primitive response map,2651
+runtime,A7AA-0,runtime/a7aa0_label_feature_response_contract/a7aa0_label_family_contract.csv,fa3b2d7,add crypto a7aa primitive response map,877
+runtime,A7AA-0,runtime/a7aa0_label_feature_response_contract/a7aa0_manifest.json,fa3b2d7,add crypto a7aa primitive response map,701
+runtime,A7AA-0,runtime/a7aa0_label_feature_response_contract/a7aa0_negative_control_contract.csv,fa3b2d7,add crypto a7aa primitive response map,190
+runtime,A7AA-0,runtime/a7aa0_label_feature_response_contract/a7aa0_transform_contract.csv,fa3b2d7,add crypto a7aa primitive response map,252
+runtime,A7AA-1,runtime/a7aa1_primitive_response_map/a7aa1_authorization_matrix.json,fa3b2d7,add crypto a7aa primitive response map,361
+runtime,A7AA-1,runtime/a7aa1_primitive_response_map/a7aa1_decision_counts.csv,fa3b2d7,add crypto a7aa primitive response map,144
+runtime,A7AA-1,runtime/a7aa1_primitive_response_map/a7aa1_field_family_label_summary.csv,fa3b2d7,add crypto a7aa primitive response map,5619
+runtime,A7AA-1,runtime/a7aa1_primitive_response_map/a7aa1_manifest.json,fa3b2d7,add crypto a7aa primitive response map,838
+runtime,A7AA-1,runtime/a7aa1_primitive_response_map/a7aa1_primitive_response_candidates.csv,fa3b2d7,add crypto a7aa primitive response map,7764
+runtime,A7AA-1,runtime/a7aa1_primitive_response_map/a7aa1_primitive_response_map.csv,fa3b2d7,add crypto a7aa primitive response map,387125
+runtime,A7AA-2,runtime/a7aa2_feature_role_classification/a7aa2_authorization_matrix.json,fa3b2d7,add crypto a7aa primitive response map,347
+runtime,A7AA-2,runtime/a7aa2_feature_role_classification/a7aa2_family_role_summary.csv,fa3b2d7,add crypto a7aa primitive response map,285
+runtime,A7AA-2,runtime/a7aa2_feature_role_classification/a7aa2_feature_role_ledger.csv,fa3b2d7,add crypto a7aa primitive response map,3149
+runtime,A7AA-2,runtime/a7aa2_feature_role_classification/a7aa2_manifest.json,fa3b2d7,add crypto a7aa primitive response map,643
+runtime,A7AA-2,runtime/a7aa2_feature_role_classification/a7aa2_selector_rewrite_seed_policy.json,fa3b2d7,add crypto a7aa primitive response map,1168
+runtime,A7AA-2,runtime/a7aa2_feature_role_classification/a7aa2_selector_seed_fields.csv,fa3b2d7,add crypto a7aa primitive response map,1077
+runtime,A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_allowed_selector_seed_fields.csv,fa3b2d7,add crypto a7aa primitive response map,1077
+runtime,A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_authorization_matrix.json,fa3b2d7,add crypto a7aa primitive response map,356
+runtime,A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_blocked_primary_fields_until_response_evidence.csv,fa3b2d7,add crypto a7aa primitive response map,477
+runtime,A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_manifest.json,fa3b2d7,add crypto a7aa primitive response map,528
+runtime,A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_selector_rewrite_contract.json,fa3b2d7,add crypto a7aa primitive response map,1032
+report,A7AA0-LABEL-FEATURE-RESPONSE-CONTRACT,reports/CRYPTO_A7AA0_LABEL_FEATURE_RESPONSE_CONTRACT_20260529.md,fa3b2d7,add crypto a7aa primitive response map,9656
+report,A7AA1-PRIMITIVE-RESPONSE-MAP,reports/CRYPTO_A7AA1_PRIMITIVE_RESPONSE_MAP_20260529.md,fa3b2d7,add crypto a7aa primitive response map,30938
+report,A7AA2-FEATURE-ROLE-CLASSIFICATION,reports/CRYPTO_A7AA2_FEATURE_ROLE_CLASSIFICATION_20260529.md,fa3b2d7,add crypto a7aa primitive response map,15685
+report,A7AA3-SELECTOR-REWRITE-CONTRACT,reports/CRYPTO_A7AA3_SELECTOR_REWRITE_CONTRACT_20260529.md,fa3b2d7,add crypto a7aa primitive response map,5612
+runtime,A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_allowed_seed_fields.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,1077
+runtime,A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_authorization_matrix.json,2eca9f5,add crypto a7ab selector rewrite dryrun,354
+runtime,A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_manifest.json,2eca9f5,add crypto a7ab selector rewrite dryrun,935
+runtime,A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_selector_hard_gates.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,429
+runtime,A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_selector_score_features.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,329
+runtime,A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_authorization_matrix.json,2eca9f5,add crypto a7ab selector rewrite dryrun,413
+runtime,A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_experiment_record.json,2eca9f5,add crypto a7ab selector rewrite dryrun,477
+runtime,A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_manifest.json,2eca9f5,add crypto a7ab selector rewrite dryrun,2099
+runtime,A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_score_feature_weights.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,329
+runtime,A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_seed_scoreboard.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,5059
+runtime,A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_selector_hard_gate_audit.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,764
+runtime,A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_selector_queue.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,4666
+runtime,A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_allowed_generation_families.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,1098
+runtime,A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_authorization_matrix.json,2eca9f5,add crypto a7ab selector rewrite dryrun,478
+runtime,A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_forbidden_families.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,519
+runtime,A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_generation_quota.json,2eca9f5,add crypto a7ab selector rewrite dryrun,410
+runtime,A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_hard_gates.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,580
+runtime,A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_manifest.json,2eca9f5,add crypto a7ab selector rewrite dryrun,1364
+runtime,A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_seed_queue_input.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,4651
+runtime,A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_transform_contract.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,602
+runtime,A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_authorization_matrix.json,2eca9f5,add crypto a7ab selector rewrite dryrun,408
+runtime,A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_generated_pool.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,608700
+runtime,A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_generation_family_summary.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,208
+runtime,A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_manifest.json,2eca9f5,add crypto a7ab selector rewrite dryrun,1708
+runtime,A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_static_selected_family_summary.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,205
+runtime,A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_static_selected_queue.csv,2eca9f5,add crypto a7ab selector rewrite dryrun,158673
+runtime,A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_static_validity_audit.json,2eca9f5,add crypto a7ab selector rewrite dryrun,159
+runtime,A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_authorization_matrix.json,3c67dec,add crypto a7ab materialization and replay preflight,475
+runtime,A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_blocker_matrix.csv,3c67dec,add crypto a7ab materialization and replay preflight,2
+runtime,A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_candidate_materialization_summary.csv,3c67dec,add crypto a7ab materialization and replay preflight,174510
+runtime,A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_family_materialization_summary.csv,3c67dec,add crypto a7ab materialization and replay preflight,382
+runtime,A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_manifest.json,3c67dec,add crypto a7ab materialization and replay preflight,1056
+runtime,A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_motif_materialization_summary.csv,3c67dec,add crypto a7ab materialization and replay preflight,869
+runtime,A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_operator_coverage.csv,3c67dec,add crypto a7ab materialization and replay preflight,141
+runtime,A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_authorization_matrix.json,3c67dec,add crypto a7ab materialization and replay preflight,737
+runtime,A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_control_contract.csv,3c67dec,add crypto a7ab materialization and replay preflight,320
+runtime,A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_label_contract.csv,3c67dec,add crypto a7ab materialization and replay preflight,144
+runtime,A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_manifest.json,3c67dec,add crypto a7ab materialization and replay preflight,751
+runtime,A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_pass_gates.csv,3c67dec,add crypto a7ab materialization and replay preflight,537
+runtime,A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_replay_contract_queue.csv,3c67dec,add crypto a7ab materialization and replay preflight,41257
+runtime,A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_authorization_matrix.json,3c67dec,add crypto a7ab materialization and replay preflight,397
+runtime,A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_candidate_label_decisions.csv,3c67dec,add crypto a7ab materialization and replay preflight,139633
+runtime,A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_candidate_variant_metrics.csv,3c67dec,add crypto a7ab materialization and replay preflight,5887894
+runtime,A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_clue_queue.csv,3c67dec,add crypto a7ab materialization and replay preflight,6183
+runtime,A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_decision_counts.csv,3c67dec,add crypto a7ab materialization and replay preflight,156
+runtime,A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_eval_errors.csv,3c67dec,add crypto a7ab materialization and replay preflight,2
+runtime,A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_manifest.json,3c67dec,add crypto a7ab materialization and replay preflight,1161
+runtime,A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_ranked_decision_queue.csv,3c67dec,add crypto a7ab materialization and replay preflight,139633
+runtime,A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_authorization_matrix.json,3c67dec,add crypto a7ab materialization and replay preflight,384
+runtime,A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_clue_candidate_detail.csv,3c67dec,add crypto a7ab materialization and replay preflight,15833
+runtime,A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_clue_family_summary.csv,3c67dec,add crypto a7ab materialization and replay preflight,205
+runtime,A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_clue_label_summary.csv,3c67dec,add crypto a7ab materialization and replay preflight,519
+runtime,A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_clue_queue_input.csv,3c67dec,add crypto a7ab materialization and replay preflight,5969
+runtime,A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_manifest.json,3c67dec,add crypto a7ab materialization and replay preflight,706
+runtime,A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_pass_gates.csv,3c67dec,add crypto a7ab materialization and replay preflight,566
+runtime,A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_required_forensic_tests.csv,3c67dec,add crypto a7ab materialization and replay preflight,833
+runtime,A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_authorization_matrix.json,0a08edc,add crypto a7ab clue forensic,386
+runtime,A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_clue_augmented.csv,0a08edc,add crypto a7ab clue forensic,15687
+runtime,A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_decision_counts.csv,0a08edc,add crypto a7ab clue forensic,103
+runtime,A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_forensic_decisions.csv,0a08edc,add crypto a7ab clue forensic,11587
+runtime,A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_forensic_survivors.csv,0a08edc,add crypto a7ab clue forensic,5421
+runtime,A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_full_window_variant_metrics.csv,0a08edc,add crypto a7ab clue forensic,223859
+runtime,A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_manifest.json,0a08edc,add crypto a7ab clue forensic,941
+runtime,A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_return_corr_cluster_summary.csv,0a08edc,add crypto a7ab clue forensic,261
+runtime,A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_return_corr_clusters.csv,0a08edc,add crypto a7ab clue forensic,1787
+runtime,A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_authorization_matrix.json,0a08edc,add crypto a7ab clue forensic,404
+runtime,A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_input_cluster_summary.csv,0a08edc,add crypto a7ab clue forensic,261
+runtime,A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_manifest.json,0a08edc,add crypto a7ab clue forensic,873
+runtime,A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_representative_survivor_pool.csv,0a08edc,add crypto a7ab clue forensic,3191
+runtime,A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_survivor_cluster_audit.csv,0a08edc,add crypto a7ab clue forensic,456
+runtime,A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_survivor_label_audit.csv,0a08edc,add crypto a7ab clue forensic,239
+runtime,A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_survivor_pool.csv,0a08edc,add crypto a7ab clue forensic,5230
+report,A7AB0-SELECTOR-REWRITE-DRYRUN-CONTRACT,reports/CRYPTO_A7AB0_SELECTOR_REWRITE_DRYRUN_CONTRACT_20260529.md,2eca9f5,add crypto a7ab selector rewrite dryrun,5408
+report,A7AB1-SELECTOR-REWRITE-DRYRUN,reports/CRYPTO_A7AB1_SELECTOR_REWRITE_DRYRUN_20260529.md,2eca9f5,add crypto a7ab selector rewrite dryrun,12126
+report,A7AB2-SEED-CONSTRAINED-MICRO-GENERATION-CONTRACT,reports/CRYPTO_A7AB2_SEED_CONSTRAINED_MICRO_GENERATION_CONTRACT_20260529.md,2eca9f5,add crypto a7ab selector rewrite dryrun,10771
+report,A7AB3-SEED-CONSTRAINED-DRY-GENERATION,reports/CRYPTO_A7AB3_SEED_CONSTRAINED_DRY_GENERATION_20260529.md,2eca9f5,add crypto a7ab selector rewrite dryrun,18383
+report,A7AB4-MATERIALIZATION-PREFLIGHT,reports/CRYPTO_A7AB4_MATERIALIZATION_PREFLIGHT_20260529.md,3c67dec,add crypto a7ab materialization and replay preflight,12916
+report,A7AB5-NUMERIC-REPLAY-CONTRACT,reports/CRYPTO_A7AB5_NUMERIC_REPLAY_CONTRACT_20260529.md,3c67dec,add crypto a7ab materialization and replay preflight,16065
+report,A7AB6-SMALL-NUMERIC-REPLAY-PREFLIGHT,reports/CRYPTO_A7AB6_SMALL_NUMERIC_REPLAY_PREFLIGHT_20260529.md,3c67dec,add crypto a7ab materialization and replay preflight,36643
+report,A7AB7-CLUE-FORENSIC-CONTRACT,reports/CRYPTO_A7AB7_CLUE_FORENSIC_CONTRACT_20260529.md,3c67dec,add crypto a7ab materialization and replay preflight,5238
+report,A7AB8-CLUE-FORENSIC-EXECUTION,reports/CRYPTO_A7AB8_CLUE_FORENSIC_EXECUTION_20260529.md,0a08edc,add crypto a7ab clue forensic,31715
+report,A7AB9-SURVIVOR-FREEZE-CONTRACT,reports/CRYPTO_A7AB9_SURVIVOR_FREEZE_CONTRACT_20260529.md,0a08edc,add crypto a7ab clue forensic,8802
+runtime,A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_authorization_matrix.json,e729fda,add crypto a7ac representative forensic,418
+runtime,A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_experiment_record.json,e729fda,add crypto a7ac representative forensic,1387
+runtime,A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_label_summary.csv,e729fda,add crypto a7ac representative forensic,338
+runtime,A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_manifest.json,e729fda,add crypto a7ac representative forensic,1163
+runtime,A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_pass_gates.csv,e729fda,add crypto a7ac representative forensic,948
+runtime,A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_representative_cluster_summary.csv,e729fda,add crypto a7ac representative forensic,424
+runtime,A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_representative_input_pool.csv,e729fda,add crypto a7ac representative forensic,3183
+runtime,A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_representative_risk_flags.csv,e729fda,add crypto a7ac representative forensic,1278
+runtime,A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_required_forensic_tests.csv,e729fda,add crypto a7ac representative forensic,1376
+runtime,A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_risk_summary.csv,e729fda,add crypto a7ac representative forensic,124
+runtime,A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_source_survivor_pool.csv,e729fda,add crypto a7ac representative forensic,5230
+runtime,A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_authorization_matrix.json,e729fda,add crypto a7ac representative forensic,494
+runtime,A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_cluster_summary.csv,e729fda,add crypto a7ac representative forensic,463
+runtime,A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_control_dominance_by_split.csv,e729fda,add crypto a7ac representative forensic,3908
+runtime,A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_decision_counts.csv,e729fda,add crypto a7ac representative forensic,116
+runtime,A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_experiment_record.json,e729fda,add crypto a7ac representative forensic,1663
+runtime,A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_label_summary.csv,e729fda,add crypto a7ac representative forensic,306
+runtime,A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_manifest.json,e729fda,add crypto a7ac representative forensic,1153
+runtime,A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_representative_forensic_audit.csv,e729fda,add crypto a7ac representative forensic,4020
+runtime,A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_source_a7ab8_decisions.csv,e729fda,add crypto a7ac representative forensic,11145
+runtime,A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_authorization_matrix.json,e729fda,add crypto a7ac representative forensic,428
+runtime,A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_blocker_summary.csv,e729fda,add crypto a7ac representative forensic,64
+runtime,A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_control_warning_rows.csv,e729fda,add crypto a7ac representative forensic,1111
+runtime,A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_diagnostic_representative_subset.csv,e729fda,add crypto a7ac representative forensic,3561
+runtime,A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_experiment_record.json,e729fda,add crypto a7ac representative forensic,1432
+runtime,A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_manifest.json,e729fda,add crypto a7ac representative forensic,967
+runtime,A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_quarantined_representatives.csv,e729fda,add crypto a7ac representative forensic,969
+runtime,A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_warning_summary.csv,e729fda,add crypto a7ac representative forensic,119
+runtime,A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_authorization_matrix.json,d49b1d8,add crypto a7ac label diversification diagnostic,420
+runtime,A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_diagnostic_subset_input.csv,d49b1d8,add crypto a7ac label diversification diagnostic,3561
+runtime,A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_execution_plan.csv,d49b1d8,add crypto a7ac label diversification diagnostic,804
+runtime,A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_experiment_record.json,d49b1d8,add crypto a7ac label diversification diagnostic,1540
+runtime,A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_forbidden_actions.csv,d49b1d8,add crypto a7ac label diversification diagnostic,364
+runtime,A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_label_family_contract.csv,d49b1d8,add crypto a7ac label diversification diagnostic,725
+runtime,A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_manifest.json,d49b1d8,add crypto a7ac label diversification diagnostic,829
+runtime,A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_neutralization_contract.csv,d49b1d8,add crypto a7ac label diversification diagnostic,552
+runtime,A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_pass_gates.csv,d49b1d8,add crypto a7ac label diversification diagnostic,864
+runtime,A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_quarantined_input.csv,d49b1d8,add crypto a7ac label diversification diagnostic,969
+runtime,A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_source_summary.csv,d49b1d8,add crypto a7ac label diversification diagnostic,428
+runtime,A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_authorization_matrix.json,d49b1d8,add crypto a7ac label diversification diagnostic,388
+runtime,A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_candidate_summary.csv,d49b1d8,add crypto a7ac label diversification diagnostic,271
+runtime,A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_decision_counts.csv,d49b1d8,add crypto a7ac label diversification diagnostic,113
+runtime,A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_experiment_record.json,d49b1d8,add crypto a7ac label diversification diagnostic,2053
+runtime,A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_label_mode_summary.csv,d49b1d8,add crypto a7ac label diversification diagnostic,773
+runtime,A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_label_neutralization_decisions.csv,d49b1d8,add crypto a7ac label diversification diagnostic,31654
+runtime,A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_label_neutralization_metrics.csv,d49b1d8,add crypto a7ac label diversification diagnostic,793272
+runtime,A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_manifest.json,d49b1d8,add crypto a7ac label diversification diagnostic,1345
+runtime,A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_neutralized_pass_rows.csv,d49b1d8,add crypto a7ac label diversification diagnostic,7201
+runtime,A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_non_rank_pass_rows.csv,d49b1d8,add crypto a7ac label diversification diagnostic,881
+runtime,A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_pass_rows.csv,d49b1d8,add crypto a7ac label diversification diagnostic,9901
+report,A7AC0-REPRESENTATIVE-FORENSIC-CONTRACT,reports/CRYPTO_A7AC0_REPRESENTATIVE_FORENSIC_CONTRACT_20260529.md,e729fda,add crypto a7ac representative forensic,11022
+report,A7AC1-REPRESENTATIVE-FORENSIC-EXECUTION,reports/CRYPTO_A7AC1_REPRESENTATIVE_FORENSIC_EXECUTION_20260529.md,e729fda,add crypto a7ac representative forensic,19638
+report,A7AC1R-REPRESENTATIVE-QUARANTINE-CONTRACT,reports/CRYPTO_A7AC1R_REPRESENTATIVE_QUARANTINE_CONTRACT_20260529.md,e729fda,add crypto a7ac representative forensic,12367
+report,A7AC2-LABEL-DIVERSIFICATION-CONTRACT,reports/CRYPTO_A7AC2_LABEL_DIVERSIFICATION_CONTRACT_20260529.md,d49b1d8,add crypto a7ac label diversification diagnostic,9964
+report,A7AC3-LABEL-DIVERSIFICATION-DIAGNOSTIC,reports/CRYPTO_A7AC3_LABEL_DIVERSIFICATION_DIAGNOSTIC_20260529.md,d49b1d8,add crypto a7ac label diversification diagnostic,19503
+runtime,A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_authorization_matrix.json,e05d94a,add crypto a7ad ranked label translation audit,402
+runtime,A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_experiment_record.json,e05d94a,add crypto a7ad ranked label translation audit,1210
+runtime,A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_manifest.json,e05d94a,add crypto a7ad ranked label translation audit,652
+runtime,A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_pass_gates.csv,e05d94a,add crypto a7ad ranked label translation audit,433
+runtime,A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_source_label_summary.csv,e05d94a,add crypto a7ad ranked label translation audit,555
+runtime,A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_translation_tests.csv,e05d94a,add crypto a7ad ranked label translation audit,579
+runtime,A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_authorization_matrix.json,e05d94a,add crypto a7ad ranked label translation audit,397
+runtime,A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_candidate_translation_summary.csv,e05d94a,add crypto a7ad ranked label translation audit,415
+runtime,A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_experiment_record.json,e05d94a,add crypto a7ad ranked label translation audit,1340
+runtime,A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_l7_to_nonrank_translation_rows.csv,e05d94a,add crypto a7ad ranked label translation audit,10224
+runtime,A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_manifest.json,e05d94a,add crypto a7ad ranked label translation audit,825
+runtime,A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_positive_but_blocked_rows.csv,e05d94a,add crypto a7ad ranked label translation audit,8970
+runtime,A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_translated_rows.csv,e05d94a,add crypto a7ad ranked label translation audit,661
+runtime,A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_translation_status_summary.csv,e05d94a,add crypto a7ad ranked label translation audit,677
+report,A7AD0-RANKED-LABEL-TRANSLATION-CONTRACT,reports/CRYPTO_A7AD0_RANKED_LABEL_TRANSLATION_CONTRACT_20260529.md,e05d94a,add crypto a7ad ranked label translation audit,5399
+report,A7AD1-RANKED-LABEL-TRANSLATION-AUDIT,reports/CRYPTO_A7AD1_RANKED_LABEL_TRANSLATION_AUDIT_20260529.md,e05d94a,add crypto a7ad ranked label translation audit,20162
+runtime,A7AE-0,runtime/a7ae0_label_adequacy_extension_contract/a7ae0_authorization_matrix.json,3e8440f,add crypto a7ae label adequacy audit,349
+runtime,A7AE-0,runtime/a7ae0_label_adequacy_extension_contract/a7ae0_field_universe.csv,3e8440f,add crypto a7ae label adequacy audit,2100
+runtime,A7AE-0,runtime/a7ae0_label_adequacy_extension_contract/a7ae0_label_family_contract.csv,3e8440f,add crypto a7ae label adequacy audit,944
+runtime,A7AE-0,runtime/a7ae0_label_adequacy_extension_contract/a7ae0_manifest.json,3e8440f,add crypto a7ae label adequacy audit,709
+runtime,A7AE-0,runtime/a7ae0_label_adequacy_extension_contract/a7ae0_negative_control_contract.csv,3e8440f,add crypto a7ae label adequacy audit,190
+runtime,A7AE-0,runtime/a7ae0_label_adequacy_extension_contract/a7ae0_transform_contract.csv,3e8440f,add crypto a7ae label adequacy audit,167
+runtime,A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_authorization_matrix.json,3e8440f,add crypto a7ae label adequacy audit,344
+runtime,A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_decision_counts.csv,3e8440f,add crypto a7ae label adequacy audit,149
+runtime,A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_family_label_summary.csv,3e8440f,add crypto a7ae label adequacy audit,4164
+runtime,A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_label_adequacy_candidates.csv,3e8440f,add crypto a7ae label adequacy audit,32556
+runtime,A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_label_adequacy_response_map.csv,3e8440f,add crypto a7ae label adequacy audit,902492
+runtime,A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_label_adequacy_summary.csv,3e8440f,add crypto a7ae label adequacy audit,1371
+runtime,A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_label_matrix_audit.csv,3e8440f,add crypto a7ae label adequacy audit,1269
+runtime,A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_manifest.json,3e8440f,add crypto a7ae label adequacy audit,843
+runtime,A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_non_rank_label_candidates.csv,3e8440f,add crypto a7ae label adequacy audit,26963
+runtime,A7AE-2,runtime/a7ae2_label_adequacy_role_review/a7ae2_authorization_matrix.json,3e8440f,add crypto a7ae label adequacy audit,344
+runtime,A7AE-2,runtime/a7ae2_label_adequacy_role_review/a7ae2_family_role_summary.csv,3e8440f,add crypto a7ae label adequacy audit,1020
+runtime,A7AE-2,runtime/a7ae2_label_adequacy_role_review/a7ae2_feature_role_update.csv,3e8440f,add crypto a7ae label adequacy audit,5021
+runtime,A7AE-2,runtime/a7ae2_label_adequacy_role_review/a7ae2_manifest.json,3e8440f,add crypto a7ae label adequacy audit,732
+runtime,A7AE-2,runtime/a7ae2_label_adequacy_role_review/a7ae2_selector_seed_policy.csv,3e8440f,add crypto a7ae label adequacy audit,3538
+runtime,A7AE-2,runtime/a7ae2_label_adequacy_role_review/a7ae2_source_candidates_snapshot.csv,3e8440f,add crypto a7ae label adequacy audit,31743
+report,A7AE0-LABEL-ADEQUACY-EXTENSION-CONTRACT,reports/CRYPTO_A7AE0_LABEL_ADEQUACY_EXTENSION_CONTRACT_20260529.md,3e8440f,add crypto a7ae label adequacy audit,8843
+report,A7AE1-LABEL-ADEQUACY-RESPONSE-MAP,reports/CRYPTO_A7AE1_LABEL_ADEQUACY_RESPONSE_MAP_20260529.md,3e8440f,add crypto a7ae label adequacy audit,124585
+report,A7AE2-LABEL-ADEQUACY-ROLE-REVIEW,reports/CRYPTO_A7AE2_LABEL_ADEQUACY_ROLE_REVIEW_20260529.md,3e8440f,add crypto a7ae label adequacy audit,31382
+runtime,A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_allowed_seed_fields.csv,169e482,add crypto a7af role aware selector,3538
+runtime,A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_authorization_matrix.json,169e482,add crypto a7af role aware selector,353
+runtime,A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_manifest.json,169e482,add crypto a7af role aware selector,701
+runtime,A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_role_caps.json,169e482,add crypto a7af role aware selector,296
+runtime,A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_selector_hard_gates.csv,169e482,add crypto a7af role aware selector,515
+runtime,A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_selector_score_features.csv,169e482,add crypto a7af role aware selector,442
+runtime,A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_selector_tiers.csv,169e482,add crypto a7af role aware selector,886
+runtime,A7AF-1,runtime/a7af1_role_aware_selector_dryrun/a7af1_authorization_matrix.json,169e482,add crypto a7af role aware selector,364
+runtime,A7AF-1,runtime/a7af1_role_aware_selector_dryrun/a7af1_manifest.json,169e482,add crypto a7af role aware selector,806
+runtime,A7AF-1,runtime/a7af1_role_aware_selector_dryrun/a7af1_selected_queue.csv,169e482,add crypto a7af role aware selector,9781
+runtime,A7AF-1,runtime/a7af1_role_aware_selector_dryrun/a7af1_selected_tier_summary.csv,169e482,add crypto a7af role aware selector,307
+runtime,A7AF-1,runtime/a7af1_role_aware_selector_dryrun/a7af1_selector_scoreboard.csv,169e482,add crypto a7af role aware selector,25632
+runtime,A7AF-1,runtime/a7af1_role_aware_selector_dryrun/a7af1_tier_summary.csv,169e482,add crypto a7af role aware selector,303
+report,A7AF0-ROLE-AWARE-SELECTOR-CONTRACT,reports/CRYPTO_A7AF0_ROLE_AWARE_SELECTOR_CONTRACT_20260529.md,169e482,add crypto a7af role aware selector,16126
+report,A7AF1-ROLE-AWARE-SELECTOR-DRYRUN,reports/CRYPTO_A7AF1_ROLE_AWARE_SELECTOR_DRYRUN_20260529.md,169e482,add crypto a7af role aware selector,62240
+runtime,A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_authorization_matrix.json,3c091df,add crypto a7ag role aware generation contract,423
+runtime,A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_blueprint_budget.json,3c091df,add crypto a7ag role aware generation contract,361
+runtime,A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_generation_rules.csv,3c091df,add crypto a7ag role aware generation contract,619
+runtime,A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_generation_tracks.csv,3c091df,add crypto a7ag role aware generation contract,1402
+runtime,A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_manifest.json,3c091df,add crypto a7ag role aware generation contract,774
+runtime,A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_source_queue_track_summary.csv,3c091df,add crypto a7ag role aware generation contract,307
+runtime,A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_source_selected_queue.csv,3c091df,add crypto a7ag role aware generation contract,9764
+runtime,A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_authorization_matrix.json,7f892da,add crypto a7ag static blueprint dryrun,433
+runtime,A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_inherited_generation_rules.csv,7f892da,add crypto a7ag static blueprint dryrun,619
+runtime,A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_manifest.json,7f892da,add crypto a7ag static blueprint dryrun,843
+runtime,A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_skeleton_summary.csv,7f892da,add crypto a7ag static blueprint dryrun,5945
+runtime,A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_static_blueprint_registry.csv,7f892da,add crypto a7ag static blueprint dryrun,146664
+runtime,A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_static_ok_blueprints.csv,7f892da,add crypto a7ag static blueprint dryrun,146664
+runtime,A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_track_summary.csv,7f892da,add crypto a7ag static blueprint dryrun,227
+runtime,A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_authorization_matrix.json,fd2b6f0,add crypto a7ag numeric replay contract,412
+runtime,A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_label_summary.csv,fd2b6f0,add crypto a7ag numeric replay contract,616
+runtime,A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_manifest.json,fd2b6f0,add crypto a7ag numeric replay contract,773
+runtime,A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_numeric_replay_queue.csv,fd2b6f0,add crypto a7ag numeric replay contract,57140
+runtime,A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_replay_contract.json,fd2b6f0,add crypto a7ag numeric replay contract,1214
+runtime,A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_track_summary.csv,fd2b6f0,add crypto a7ag numeric replay contract,233
+runtime,A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_authorization_matrix.json,97ff801,add crypto a7ag numeric replay pilot,353
+runtime,A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_candidate_replay_metrics.csv,97ff801,add crypto a7ag numeric replay pilot,103246
+runtime,A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_control_summary.csv,97ff801,add crypto a7ag numeric replay pilot,277
+runtime,A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_decision_counts.csv,97ff801,add crypto a7ag numeric replay pilot,180
+runtime,A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_manifest.json,97ff801,add crypto a7ag numeric replay pilot,989
+runtime,A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_replay_clues.csv,97ff801,add crypto a7ag numeric replay pilot,26583
+runtime,A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_track_summary.csv,97ff801,add crypto a7ag numeric replay pilot,405
+runtime,A7AG-4,runtime/a7ag4_clue_forensic_contract/a7ag4_authorization_matrix.json,97ff801,add crypto a7ag numeric replay pilot,340
+runtime,A7AG-4,runtime/a7ag4_clue_forensic_contract/a7ag4_concentration_summary.csv,97ff801,add crypto a7ag numeric replay pilot,1205
+runtime,A7AG-4,runtime/a7ag4_clue_forensic_contract/a7ag4_forensic_contract.json,97ff801,add crypto a7ag numeric replay pilot,827
+runtime,A7AG-4,runtime/a7ag4_clue_forensic_contract/a7ag4_manifest.json,97ff801,add crypto a7ag numeric replay pilot,850
+runtime,A7AG-4,runtime/a7ag4_clue_forensic_contract/a7ag4_role_classified_clues.csv,97ff801,add crypto a7ag numeric replay pilot,27186
+runtime,A7AG-4,runtime/a7ag4_clue_forensic_contract/a7ag4_role_summary.csv,97ff801,add crypto a7ag numeric replay pilot,614
+runtime,A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_authorization_matrix.json,97ff801,add crypto a7ag numeric replay pilot,321
+runtime,A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_concentration_audit.csv,97ff801,add crypto a7ag numeric replay pilot,6893
+runtime,A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_concentration_summary.csv,97ff801,add crypto a7ag numeric replay pilot,397
+runtime,A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_label_translation_audit.csv,97ff801,add crypto a7ag numeric replay pilot,33383
+runtime,A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_label_translation_summary.csv,97ff801,add crypto a7ag numeric replay pilot,1388
+runtime,A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_manifest.json,97ff801,add crypto a7ag numeric replay pilot,864
+runtime,A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_ordinary_label_translation_candidates.csv,97ff801,add crypto a7ag numeric replay pilot,251
+report,A7AG0-ROLE-AWARE-GENERATION-CONTRACT,reports/CRYPTO_A7AG0_ROLE_AWARE_GENERATION_CONTRACT_20260529.md,3c091df,add crypto a7ag role aware generation contract,6559
+report,A7AG1-STATIC-BLUEPRINT-DRYRUN,reports/CRYPTO_A7AG1_STATIC_BLUEPRINT_DRYRUN_20260529.md,7f892da,add crypto a7ag static blueprint dryrun,87991
+report,A7AG2-NUMERIC-REPLAY-CONTRACT,reports/CRYPTO_A7AG2_NUMERIC_REPLAY_CONTRACT_20260529.md,fd2b6f0,add crypto a7ag numeric replay contract,101690
+report,A7AG3-NUMERIC-REPLAY-PILOT,reports/CRYPTO_A7AG3_NUMERIC_REPLAY_PILOT_20260529.md,97ff801,add crypto a7ag numeric replay pilot,51314
+report,A7AG4-CLUE-FORENSIC-CONTRACT,reports/CRYPTO_A7AG4_CLUE_FORENSIC_CONTRACT_20260529.md,97ff801,add crypto a7ag numeric replay pilot,5945
+report,A7AG5-CLUE-FORENSIC-AUDIT,reports/CRYPTO_A7AG5_CLUE_FORENSIC_AUDIT_20260529.md,97ff801,add crypto a7ag numeric replay pilot,4863
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_agg_coverage_by_symbol.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,2150
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_agg_feature_partition_audit.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,332
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_agg_monthly_coverage.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,10257
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_authorization_matrix.json,5b5ca07,audit crypto a7ah core12 aggtrades handoff,864
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_bounded_field_audit.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,119
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_checksum_count_audit.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,866
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_hourly_enhanced_partition_audit.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,329
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_key_coverage_by_symbol.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,2903
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_manifest.json,5b5ca07,audit crypto a7ah core12 aggtrades handoff,1068
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_missing_timestamp_sample.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,14126
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_numeric_quality.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,1017
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_report_consistency_audit.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,587
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_schema_audit.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,34205
+runtime,A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_source_trace_closure_audit.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,1399
+runtime,A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_authorization_matrix.json,56215b3,add crypto a7ah role split followup,462
+runtime,A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_branch_decision_matrix.csv,56215b3,add crypto a7ah role split followup,717
+runtime,A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_downside_risk_defense_next_contract.json,56215b3,add crypto a7ah role split followup,545
+runtime,A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_evidence_summary.csv,56215b3,add crypto a7ah role split followup,356
+runtime,A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_input_concentration_summary.csv,56215b3,add crypto a7ah role split followup,393
+runtime,A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_input_label_translation_summary.csv,56215b3,add crypto a7ah role split followup,1388
+runtime,A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_manifest.json,56215b3,add crypto a7ah role split followup,802
+runtime,A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_ordinary_alpha_objective_rewrite_next_contract.json,56215b3,add crypto a7ah role split followup,632
+runtime,A7AH-1,runtime/a7ah1_ordinary_alpha_objective_rewrite_contract/a7ah1_allowed_objective_families.csv,56215b3,add crypto a7ah role split followup,854
+runtime,A7AH-1,runtime/a7ah1_ordinary_alpha_objective_rewrite_contract/a7ah1_authorization_matrix.json,56215b3,add crypto a7ah role split followup,356
+runtime,A7AH-1,runtime/a7ah1_ordinary_alpha_objective_rewrite_contract/a7ah1_label_policy.json,56215b3,add crypto a7ah role split followup,776
+runtime,A7AH-1,runtime/a7ah1_ordinary_alpha_objective_rewrite_contract/a7ah1_manifest.json,56215b3,add crypto a7ah role split followup,646
+runtime,A7AH-1,runtime/a7ah1_ordinary_alpha_objective_rewrite_contract/a7ah1_selector_policy.json,56215b3,add crypto a7ah role split followup,660
+runtime,A7AH-1D,runtime/a7ah1d_ordinary_alpha_dry_rerank/a7ah1d_authorization_matrix.json,56215b3,add crypto a7ah role split followup,334
+runtime,A7AH-1D,runtime/a7ah1d_ordinary_alpha_dry_rerank/a7ah1d_label_summary.csv,56215b3,add crypto a7ah role split followup,222
+runtime,A7AH-1D,runtime/a7ah1d_ordinary_alpha_dry_rerank/a7ah1d_manifest.json,56215b3,add crypto a7ah role split followup,806
+runtime,A7AH-1D,runtime/a7ah1d_ordinary_alpha_dry_rerank/a7ah1d_ordinary_alpha_rerank_queue.csv,56215b3,add crypto a7ah role split followup,18694
+runtime,A7AH-1D,runtime/a7ah1d_ordinary_alpha_dry_rerank/a7ah1d_ordinary_alpha_selected.csv,56215b3,add crypto a7ah role split followup,1342
+runtime,A7AH-1D,runtime/a7ah1d_ordinary_alpha_dry_rerank/a7ah1d_reject_reason_summary.csv,56215b3,add crypto a7ah role split followup,108
+runtime,A7AH-2,runtime/a7ah2_downside_risk_defense_forensic_contract/a7ah2_authorization_matrix.json,56215b3,add crypto a7ah role split followup,363
+runtime,A7AH-2,runtime/a7ah2_downside_risk_defense_forensic_contract/a7ah2_downside_seed_pair_summary.csv,56215b3,add crypto a7ah role split followup,1359
+runtime,A7AH-2,runtime/a7ah2_downside_risk_defense_forensic_contract/a7ah2_forensic_audit_plan.csv,56215b3,add crypto a7ah role split followup,1057
+runtime,A7AH-2,runtime/a7ah2_downside_risk_defense_forensic_contract/a7ah2_manifest.json,56215b3,add crypto a7ah role split followup,718
+runtime,A7AH-2,runtime/a7ah2_downside_risk_defense_forensic_contract/a7ah2_promotion_boundary.json,56215b3,add crypto a7ah role split followup,535
+runtime,A7AH-2F,runtime/a7ah2f_downside_risk_defense_forensic_audit/a7ah2f_authorization_matrix.json,56215b3,add crypto a7ah role split followup,339
+runtime,A7AH-2F,runtime/a7ah2f_downside_risk_defense_forensic_audit/a7ah2f_downside_candidate_audit.csv,56215b3,add crypto a7ah role split followup,23882
+runtime,A7AH-2F,runtime/a7ah2f_downside_risk_defense_forensic_audit/a7ah2f_manifest.json,56215b3,add crypto a7ah role split followup,865
+runtime,A7AH-2F,runtime/a7ah2f_downside_risk_defense_forensic_audit/a7ah2f_seed_pair_summary.csv,56215b3,add crypto a7ah role split followup,1636
+runtime,A7AH-2F,runtime/a7ah2f_downside_risk_defense_forensic_audit/a7ah2f_tier_summary.csv,56215b3,add crypto a7ah role split followup,338
+report,A7AH0-CORE12-AGGTRADES-FINAL-HANDOFF-AUDIT,reports/CRYPTO_A7AH0_CORE12_AGGTRADES_FINAL_HANDOFF_AUDIT_20260524.md,5b5ca07,audit crypto a7ah core12 aggtrades handoff,27877
+report,A7AH0-POST-A7AG-ROLE-SPLIT-DECISION,reports/CRYPTO_A7AH0_POST_A7AG_ROLE_SPLIT_DECISION_20260529.md,56215b3,add crypto a7ah role split followup,5267
+report,A7AH1-ORDINARY-ALPHA-OBJECTIVE-REWRITE-CONTRACT,reports/CRYPTO_A7AH1_ORDINARY_ALPHA_OBJECTIVE_REWRITE_CONTRACT_20260529.md,56215b3,add crypto a7ah role split followup,4546
+report,A7AH1D-ORDINARY-ALPHA-DRY-RERANK,reports/CRYPTO_A7AH1D_ORDINARY_ALPHA_DRY_RERANK_20260529.md,56215b3,add crypto a7ah role split followup,35164
+report,A7AH2-DOWNSIDE-RISK-DEFENSE-FORENSIC-CONTRACT,reports/CRYPTO_A7AH2_DOWNSIDE_RISK_DEFENSE_FORENSIC_CONTRACT_20260529.md,56215b3,add crypto a7ah role split followup,7090
+report,A7AH2F-DOWNSIDE-RISK-DEFENSE-FORENSIC-AUDIT,reports/CRYPTO_A7AH2F_DOWNSIDE_RISK_DEFENSE_FORENSIC_AUDIT_20260529.md,56215b3,add crypto a7ah role split followup,51731
+runtime,A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_authorization_matrix.json,b5f83ad,add crypto a7ai field enforcement gate,394
+runtime,A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_blocker_matrix.json,b5f83ad,add crypto a7ai field enforcement gate,125
+runtime,A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_enforcement_summary.csv,b5f83ad,add crypto a7ai field enforcement gate,311
+runtime,A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_generator_field_family_enforcement.csv,b5f83ad,add crypto a7ai field enforcement gate,13741
+runtime,A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_manifest.json,b5f83ad,add crypto a7ai field enforcement gate,1210
+runtime,A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_motif_family_enforcement_summary.csv,b5f83ad,add crypto a7ai field enforcement gate,395
+runtime,A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_semantic_field_enforcement_ledger.csv,b5f83ad,add crypto a7ai field enforcement gate,35319
+runtime,A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_authorization_matrix.json,b5f83ad,add crypto a7ai field enforcement gate,366
+runtime,A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_engine_enforcement_gap_matrix.csv,b5f83ad,add crypto a7ai field enforcement gate,2300
+runtime,A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_hard_gaps.csv,b5f83ad,add crypto a7ai field enforcement gate,58
+runtime,A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_manifest.json,b5f83ad,add crypto a7ai field enforcement gate,584
+runtime,A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_required_patch_plan.csv,b5f83ad,add crypto a7ai field enforcement gate,628
+runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,5b5ca07,audit crypto a7ah core12 aggtrades handoff,708
+runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_blocked_pattern_registry.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,478
+runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_derived_in_runner_contract.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,642
+runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_experiment_field_contract.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,3490
+runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_manifest.json,5b5ca07,audit crypto a7ah core12 aggtrades handoff,649
+runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_split_manifest.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,612
+report,A7AI0-CORE12-AGGTRADES-EXPERIMENT-CONTRACT,reports/CRYPTO_A7AI0_CORE12_AGGTRADES_EXPERIMENT_CONTRACT_20260524.md,5b5ca07,audit crypto a7ah core12 aggtrades handoff,11335
+runtime,A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_authorization_matrix.json,d005e36,build crypto a7ai unified aggtrades features,642
+runtime,A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_bounded_feature_audit.csv,d005e36,build crypto a7ai unified aggtrades features,485
+runtime,A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_manifest.json,d005e36,build crypto a7ai unified aggtrades features,888
+runtime,A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_numeric_quality.csv,d005e36,build crypto a7ai unified aggtrades features,7066
+runtime,A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_split_coverage.csv,d005e36,build crypto a7ai unified aggtrades features,293
+runtime,A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_unified_feature_catalog.csv,d005e36,build crypto a7ai unified aggtrades features,5271
+report,A7AI0R-CORE12-AGGTRADES-UNIFIED-FEATURE-BUILD,reports/CRYPTO_A7AI0R_CORE12_AGGTRADES_UNIFIED_FEATURE_BUILD_20260524.md,d005e36,build crypto a7ai unified aggtrades features,10190
+report,A7AIF0-FIELD-CONTRACT-ENFORCEMENT-LEDGER,reports/CRYPTO_A7AIF0_FIELD_CONTRACT_ENFORCEMENT_LEDGER_20260529.md,b5f83ad,add crypto a7ai field enforcement gate,13959
+report,A7AIF1-ENGINE-ENFORCEMENT-GAP-AUDIT,reports/CRYPTO_A7AIF1_ENGINE_ENFORCEMENT_GAP_AUDIT_20260529.md,b5f83ad,add crypto a7ai field enforcement gate,10408
+runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_dataset_summary.csv,f56e049,accept crypto universe silver and prep search panel,263
+runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_feature_contract.csv,f56e049,accept crypto universe silver and prep search panel,21835
+runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_market_symbol_audit.csv,f56e049,accept crypto universe silver and prep search panel,105013
+runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_metrics_symbol_audit.csv,f56e049,accept crypto universe silver and prep search panel,166993
+runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_output_panel_manifest.csv,f56e049,accept crypto universe silver and prep search panel,67745
+runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_panel_quality.csv,f56e049,accept crypto universe silver and prep search panel,12381
+runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_search_chain_config.json,f56e049,accept crypto universe silver and prep search panel,1353
+runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_split_coverage.csv,f56e049,accept crypto universe silver and prep search panel,56622
+runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_summary.json,f56e049,accept crypto universe silver and prep search panel,1373
+runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_universe_registry.csv,f56e049,accept crypto universe silver and prep search panel,139548
+report,A7AJ0-UNIVERSE500-SILVER-ACCEPTANCE,reports/CRYPTO_A7AJ0_UNIVERSE500_SILVER_ACCEPTANCE_20260525.md,f56e049,accept crypto universe silver and prep search panel,13383
+report,A7AJ1-UNIVERSE300-SEARCH-PANEL-PREP,reports/CRYPTO_A7AJ1_UNIVERSE300_SEARCH_PANEL_PREP_20260525.md,f56e049,accept crypto universe silver and prep search panel,3006
+runtime,A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,a2e1d50,define crypto a7ak listing age latent variable contract,889
+runtime,A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_forbidden_inputs.csv,a2e1d50,define crypto a7ak listing age latent variable contract,594
+runtime,A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_input_feature_family_counts.csv,a2e1d50,define crypto a7ak listing age latent variable contract,144
+runtime,A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_manifest.json,a2e1d50,define crypto a7ak listing age latent variable contract,886
+runtime,A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_observable_state_features.csv,a2e1d50,define crypto a7ak listing age latent variable contract,3160
+runtime,A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_response_vector_definition.csv,a2e1d50,define crypto a7ak listing age latent variable contract,1297
+runtime,A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_search_quota_policy.csv,a2e1d50,define crypto a7ak listing age latent variable contract,695
+runtime,A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_state_construction_rules.csv,a2e1d50,define crypto a7ak listing age latent variable contract,1272
+runtime,A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_universe_counts.csv,a2e1d50,define crypto a7ak listing age latent variable contract,433
+runtime,A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_user_approval_checklist.csv,a2e1d50,define crypto a7ak listing age latent variable contract,527
+runtime,A7AK,runtime/a7ak_lv1_latent_state_feature_build/a7ak_lv1_age_quota_audit.csv,dfff89d,build crypto a7ak latent state features,1448
+runtime,A7AK,runtime/a7ak_lv1_latent_state_feature_build/a7ak_lv1_manifest.json,dfff89d,build crypto a7ak latent state features,1426
+runtime,A7AK,runtime/a7ak_lv1_latent_state_feature_build/a7ak_lv1_raw_state_registry.csv,dfff89d,build crypto a7ak latent state features,99839
+runtime,A7AK,runtime/a7ak_lv1_latent_state_feature_build/a7ak_lv1_split_summary.csv,dfff89d,build crypto a7ak latent state features,325
+runtime,A7AK,runtime/a7ak_lv1_latent_state_feature_build/a7ak_lv1_state_feature_quality.csv,dfff89d,build crypto a7ak latent state features,1813
+runtime,A7AK,runtime/a7ak_lv1_latent_state_feature_build/a7ak_lv1_symbol_state_coverage.csv,dfff89d,build crypto a7ak latent state features,68442
+runtime,A7AK,runtime/a7ak_lv1_latent_state_feature_build/a7ak_lv1_train_thresholds.csv,dfff89d,build crypto a7ak latent state features,660
+runtime,A7AK,runtime/a7ak_lv2_response_merge_audit/a7ak_lv2_bias_boundary_audit.csv,b4d07ce,audit crypto a7ak latent state response merges,672
+runtime,A7AK,runtime/a7ak_lv2_response_merge_audit/a7ak_lv2_manifest.json,b4d07ce,audit crypto a7ak latent state response merges,1428
+runtime,A7AK,runtime/a7ak_lv2_response_merge_audit/a7ak_lv2_merge_group_registry.csv,b4d07ce,audit crypto a7ak latent state response merges,10193
+runtime,A7AK,runtime/a7ak_lv2_response_merge_audit/a7ak_lv2_relaxed_merge_suggestions.csv,b4d07ce,audit crypto a7ak latent state response merges,798
+runtime,A7AK,runtime/a7ak_lv2_response_merge_audit/a7ak_lv2_response_similarity_edges.csv,b4d07ce,audit crypto a7ak latent state response merges,32155
+runtime,A7AK,runtime/a7ak_lv2_response_merge_audit/a7ak_lv2_state_merge_map.csv,b4d07ce,audit crypto a7ak latent state response merges,402770
+runtime,A7AK,runtime/a7ak_lv2_response_merge_audit/a7ak_lv2_state_response_vectors.csv,b4d07ce,audit crypto a7ak latent state response merges,381217
+runtime,A7AK,runtime/a7ak_lv2_response_merge_audit/a7ak_lv2_unseen_state_policy.csv,b4d07ce,audit crypto a7ak latent state response merges,22785
+runtime,A7AK,runtime/a7ak_lv3_neutral_field_family_smoke/a7ak_lv3_bias_boundary_audit.csv,73cba8c,smoke crypto a7ak latent neutral field families,427
+runtime,A7AK,runtime/a7ak_lv3_neutral_field_family_smoke/a7ak_lv3_manifest.json,73cba8c,smoke crypto a7ak latent neutral field families,1404
+runtime,A7AK,runtime/a7ak_lv3_neutral_field_family_smoke/a7ak_lv3_neutralization_coverage.csv,73cba8c,smoke crypto a7ak latent neutral field families,3621
+runtime,A7AK,runtime/a7ak_lv3_neutral_field_family_smoke/a7ak_lv3_signal_decisions.csv,73cba8c,smoke crypto a7ak latent neutral field families,3103
+runtime,A7AK,runtime/a7ak_lv3_neutral_field_family_smoke/a7ak_lv3_signal_mode_metrics.csv,73cba8c,smoke crypto a7ak latent neutral field families,35397
+runtime,A7AK,runtime/a7ak_lv3_neutral_field_family_smoke/a7ak_lv3_timestamp_sample_audit.csv,73cba8c,smoke crypto a7ak latent neutral field families,151
+runtime,A7AK,runtime/a7ak_lv3r_contract_meme_taxonomy_audit/a7ak_lv3r_contract_counts.csv,9dbfb0c,classify crypto contract and meme taxonomy,171
+runtime,A7AK,runtime/a7ak_lv3r_contract_meme_taxonomy_audit/a7ak_lv3r_contract_meme_stratification_counts.csv,9dbfb0c,classify crypto contract and meme taxonomy,1507
+runtime,A7AK,runtime/a7ak_lv3r_contract_meme_taxonomy_audit/a7ak_lv3r_contract_meme_taxonomy.csv,9dbfb0c,classify crypto contract and meme taxonomy,209440
+runtime,A7AK,runtime/a7ak_lv3r_contract_meme_taxonomy_audit/a7ak_lv3r_manifest.json,9dbfb0c,classify crypto contract and meme taxonomy,1226
+runtime,A7AK,runtime/a7ak_lv3r_contract_meme_taxonomy_audit/a7ak_lv3r_meme_counts.csv,9dbfb0c,classify crypto contract and meme taxonomy,392
+runtime,A7AK,runtime/a7ak_lv3r_contract_meme_taxonomy_audit/a7ak_lv3r_meme_review_flags.csv,9dbfb0c,classify crypto contract and meme taxonomy,2162
+runtime,A7AK,runtime/a7ak_lv3r_contract_meme_taxonomy_audit/a7ak_lv3r_top_meme_contracts.csv,9dbfb0c,classify crypto contract and meme taxonomy,6419
+report,A7AK-LV0-LISTING-AGE-LATENT-VARIABLE-CONTRACT,reports/CRYPTO_A7AK_LV0_LISTING_AGE_LATENT_VARIABLE_CONTRACT_20260526.md,a2e1d50,define crypto a7ak listing age latent variable contract,18156
+report,A7AK-LV1-LATENT-STATE-FEATURE-BUILD,reports/CRYPTO_A7AK_LV1_LATENT_STATE_FEATURE_BUILD_20260527.md,dfff89d,build crypto a7ak latent state features,26784
+report,A7AK-LV2-RESPONSE-MERGE-AUDIT,reports/CRYPTO_A7AK_LV2_RESPONSE_MERGE_AUDIT_20260527.md,b4d07ce,audit crypto a7ak latent state response merges,59071
+report,A7AK-LV3-NEUTRAL-FIELD-FAMILY-SMOKE,reports/CRYPTO_A7AK_LV3_NEUTRAL_FIELD_FAMILY_SMOKE_20260527.md,73cba8c,smoke crypto a7ak latent neutral field families,43576
+report,A7AK-LV3R-CONTRACT-MEME-TAXONOMY-AUDIT,reports/CRYPTO_A7AK_LV3R_CONTRACT_MEME_TAXONOMY_AUDIT_20260527.md,9dbfb0c,classify crypto contract and meme taxonomy,28631
+runtime,A7AL,runtime/a7al_universe498_replay_acceptance/a7ak_min_search_chain_config.json,b4af964,abolish fixed delay stress in crypto latency policy,1693
+runtime,A7AL,runtime/a7al_universe498_replay_acceptance/a7al_dataset_summary.csv,a9a634e,accept crypto universe498 replay base,243
+runtime,A7AL,runtime/a7al_universe498_replay_acceptance/a7al_split_coverage.csv,a9a634e,accept crypto universe498 replay base,240
+runtime,A7AL,runtime/a7al_universe498_replay_acceptance/a7al_summary.json,b4af964,abolish fixed delay stress in crypto latency policy,1293
+runtime,A7AL,runtime/a7al_universe498_replay_acceptance/a7al_symbol_quality.csv,a9a634e,accept crypto universe498 replay base,209633
+runtime,A7AL,runtime/a7al_universe498_replay_acceptance/a7am_feature_contract.csv,b4af964,abolish fixed delay stress in crypto latency policy,9433
+runtime,A7AL,runtime/a7al_universe498_replay_acceptance/a7am_symbol_classification.csv,a9a634e,accept crypto universe498 replay base,77600
+runtime,A7AL-2,runtime/a7al2_small_formula_search_contract/a7al2_allowed_feature_roles.csv,6232a96,add crypto a7al neutral baseline controls,592
+runtime,A7AL-2,runtime/a7al2_small_formula_search_contract/a7al2_input_family_policy_summary.csv,6232a96,add crypto a7al neutral baseline controls,442
+runtime,A7AL-2,runtime/a7al2_small_formula_search_contract/a7al2_manifest.json,6232a96,add crypto a7al neutral baseline controls,929
+runtime,A7AL-2,runtime/a7al2_small_formula_search_contract/a7al2_matched_control_plan.csv,6232a96,add crypto a7al neutral baseline controls,554
+runtime,A7AL-2G,runtime/a7al2g_matched_control_gate/a7al2g_candidate_gate_matrix.csv,4a753fe,accept crypto v2 data and repair selector controls,18738
+runtime,A7AL-2G,runtime/a7al2g_matched_control_gate/a7al2g_control_specs.csv,4a753fe,accept crypto v2 data and repair selector controls,1008
+runtime,A7AL-2G,runtime/a7al2g_matched_control_gate/a7al2g_input_allowed_roles.csv,4a753fe,accept crypto v2 data and repair selector controls,592
+runtime,A7AL-2G,runtime/a7al2g_matched_control_gate/a7al2g_manifest.json,4a753fe,accept crypto v2 data and repair selector controls,1198
+runtime,A7AL-2G,runtime/a7al2g_matched_control_gate/a7al2g_policy_counts.csv,4a753fe,accept crypto v2 data and repair selector controls,130
+runtime,A7AL-2H,runtime/a7al2h_selector_repair/a7al2h_manifest.json,4a753fe,accept crypto v2 data and repair selector controls,864
+runtime,A7AL-2H,runtime/a7al2h_selector_repair/a7al2h_rejected_not_authorized_candidates.csv,4a753fe,accept crypto v2 data and repair selector controls,10963
+runtime,A7AL-2H,runtime/a7al2h_selector_repair/a7al2h_repaired_selection_trace.csv,4a753fe,accept crypto v2 data and repair selector controls,21131
+runtime,A7AL-2H,runtime/a7al2h_selector_repair/a7al2h_selected_control_gated_candidates.csv,4a753fe,accept crypto v2 data and repair selector controls,10405
+runtime,A7AL-2H,runtime/a7al2h_selector_repair/a7al2h_selected_family_counts.csv,4a753fe,accept crypto v2 data and repair selector controls,98
+runtime,A7AL-2H,runtime/a7al2h_selector_repair/a7al2h_selected_policy_counts.csv,4a753fe,accept crypto v2 data and repair selector controls,101
+runtime,A7AL-2I,runtime/a7al2i_replay_preflight/a7al2i_candidate_decisions.csv,c525b91,add crypto a7al replay preflight and derived reset,5517
+runtime,A7AL-2I,runtime/a7al2i_replay_preflight/a7al2i_candidate_variant_metrics.csv,c525b91,add crypto a7al replay preflight and derived reset,84828
+runtime,A7AL-2I,runtime/a7al2i_replay_preflight/a7al2i_manifest.json,c525b91,add crypto a7al replay preflight and derived reset,927
+runtime,A7AL-2I,runtime/a7al2i_replay_preflight/a7al2i_timestamp_spread_trace_sample.csv,c525b91,add crypto a7al replay preflight and derived reset,2
+runtime,A7AL-2J,runtime/a7al2j_derived_tolerant_search_reset/a7al2j_feature_roles.csv,c525b91,add crypto a7al replay preflight and derived reset,555
+runtime,A7AL-2J,runtime/a7al2j_derived_tolerant_search_reset/a7al2j_generator_cells.csv,c525b91,add crypto a7al replay preflight and derived reset,1057
+runtime,A7AL-2J,runtime/a7al2j_derived_tolerant_search_reset/a7al2j_input_derived_contract.csv,c525b91,add crypto a7al replay preflight and derived reset,6510
+runtime,A7AL-2J,runtime/a7al2j_derived_tolerant_search_reset/a7al2j_manifest.json,c525b91,add crypto a7al replay preflight and derived reset,626
+runtime,A7AL-2J,runtime/a7al2j_derived_tolerant_search_reset/a7al2j_relaxed_selector_policy.csv,c525b91,add crypto a7al replay preflight and derived reset,511
+runtime,A7AL-2J,runtime/a7al2j_derived_tolerant_search_reset/a7al2j_searchable_derived_field_sample.csv,c525b91,add crypto a7al replay preflight and derived reset,9552
+runtime,A7AL-2K,runtime/a7al2k_derived_generator_smoke/a7al2k_cell_quota_summary.csv,39de239,add crypto derived generator smoke,310
+runtime,A7AL-2K,runtime/a7al2k_derived_generator_smoke/a7al2k_control_attachment_audit.csv,39de239,add crypto derived generator smoke,638136
+runtime,A7AL-2K,runtime/a7al2k_derived_generator_smoke/a7al2k_diversity_summary.csv,39de239,add crypto derived generator smoke,387
+runtime,A7AL-2K,runtime/a7al2k_derived_generator_smoke/a7al2k_feature_lineage_audit.csv,39de239,add crypto derived generator smoke,252
+runtime,A7AL-2K,runtime/a7al2k_derived_generator_smoke/a7al2k_generated_candidates.csv,8886edb,rerun crypto a7al2p1 on repaired pool,3495979
+runtime,A7AL-2K,runtime/a7al2k_derived_generator_smoke/a7al2k_manifest.json,8886edb,rerun crypto a7al2p1 on repaired pool,710
+runtime,A7AL-2K,runtime/a7al2k_derived_generator_smoke/a7al2k_selected_candidates.csv,39de239,add crypto derived generator smoke,321298
+runtime,A7AL-2K,runtime/a7al2k_derived_generator_smoke/a7al2k_selector_trace_summary.csv,39de239,add crypto derived generator smoke,146
+runtime,A7AL-2L,runtime/a7al2l_fast_derived_replay_preflight/a7al2l_fast_candidate_decisions.csv,40620fe,add crypto a7al2p2 local oi price contract,1038
+runtime,A7AL-2L,runtime/a7al2l_fast_derived_replay_preflight/a7al2l_fast_candidate_variant_metrics.csv,40620fe,add crypto a7al2p2 local oi price contract,11366
+runtime,A7AL-2L,runtime/a7al2l_fast_derived_replay_preflight/a7al2l_fast_eval_errors.csv,2214e72,add crypto derived replay preflight,2
+runtime,A7AL-2L,runtime/a7al2l_fast_derived_replay_preflight/a7al2l_fast_manifest.json,40620fe,add crypto a7al2p2 local oi price contract,1177
+runtime,A7AL-2L,runtime/a7al2l_fast_derived_replay_preflight/a7al2l_fast_replayed_candidates.csv,40620fe,add crypto a7al2p2 local oi price contract,1201
+runtime,A7AL-2M,runtime/a7al2m_derived_clue_forensic/a7al2m_cell_family_summary.csv,2214e72,add crypto derived replay preflight,456
+runtime,A7AL-2M,runtime/a7al2m_derived_clue_forensic/a7al2m_clue_shortlist.csv,2214e72,add crypto derived replay preflight,4889
+runtime,A7AL-2M,runtime/a7al2m_derived_clue_forensic/a7al2m_manifest.json,2214e72,add crypto derived replay preflight,750
+runtime,A7AL-2M,runtime/a7al2m_derived_clue_forensic/a7al2m_quality_summary.csv,2214e72,add crypto derived replay preflight,119
+runtime,A7AL-2M,runtime/a7al2m_derived_clue_forensic/a7al2m_variant_split_metrics.csv,2214e72,add crypto derived replay preflight,9947
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_beta_exposure.csv,d5ed8d2,add crypto derived clue deep audit,1569
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_decision_record.csv,d5ed8d2,add crypto derived clue deep audit,279
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_deep_candidate_summary.csv,d5ed8d2,add crypto derived clue deep audit,2733
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_eval_errors.csv,d5ed8d2,add crypto derived clue deep audit,2
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_manifest.json,d5ed8d2,add crypto derived clue deep audit,1091
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_meme_multiplier_exposure.csv,d5ed8d2,add crypto derived clue deep audit,35066
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_month_concentration_summary.csv,d5ed8d2,add crypto derived clue deep audit,395
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_month_contribution.csv,d5ed8d2,add crypto derived clue deep audit,7749
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_split_summary.csv,d5ed8d2,add crypto derived clue deep audit,2618
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_symbol_concentration_summary.csv,d5ed8d2,add crypto derived clue deep audit,1880
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_symbol_contribution.csv,d5ed8d2,add crypto derived clue deep audit,283434
+runtime,A7AL-2N,runtime/a7al2n_derived_deep_audit/a7al2n_top_loss_gain_hours.csv,d5ed8d2,add crypto derived clue deep audit,7687
+runtime,A7AL-2O,runtime/a7al2o_candidate_mini_replay/a7al2o_beta_residual_alpha.csv,fa24081,add crypto candidate mini replay audit,27227
+runtime,A7AL-2O,runtime/a7al2o_candidate_mini_replay/a7al2o_control_margin_recheck.csv,fa24081,add crypto candidate mini replay audit,225
+runtime,A7AL-2O,runtime/a7al2o_candidate_mini_replay/a7al2o_decision_record.csv,fa24081,add crypto candidate mini replay audit,2582
+runtime,A7AL-2O,runtime/a7al2o_candidate_mini_replay/a7al2o_eval_errors.csv,fa24081,add crypto candidate mini replay audit,2
+runtime,A7AL-2O,runtime/a7al2o_candidate_mini_replay/a7al2o_manifest.json,fa24081,add crypto candidate mini replay audit,1380
+runtime,A7AL-2O,runtime/a7al2o_candidate_mini_replay/a7al2o_variant_split_summary.csv,fa24081,add crypto candidate mini replay audit,45371
+runtime,A7AL-2O,runtime/a7al2o_candidate_mini_replay/a7al2o_variant_validity.csv,fa24081,add crypto candidate mini replay audit,2896
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7al2p0_canonical_field_alias_code_audit.csv,eb62bda,add crypto a7al2p0 pre-search hardening audit,1350
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7al2p0_eval_errors.csv,eb62bda,add crypto a7al2p0 pre-search hardening audit,2
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7al2p0_label_alignment_summary.csv,eb62bda,add crypto a7al2p0 pre-search hardening audit,1389
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7al2p0_label_execution_alignment.csv,eb62bda,add crypto a7al2p0 pre-search hardening audit,58022
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7al2p0_manifest.json,eb62bda,add crypto a7al2p0 pre-search hardening audit,1562
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7al2p0_matched_control_gate_by_split.csv,eb62bda,add crypto a7al2p0 pre-search hardening audit,8516
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7al2p0_nonoverlap_offset_tstats.csv,eb62bda,add crypto a7al2p0 pre-search hardening audit,36449
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7al2p0_overlap_robust_tstats.csv,eb62bda,add crypto a7al2p0 pre-search hardening audit,2108
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7al2p0_replay_aware_selector_score_components.csv,eb62bda,add crypto a7al2p0 pre-search hardening audit,1025
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7al2p0_stale_artifact_alias_violations.csv,eb62bda,add crypto a7al2p0 pre-search hardening audit,31646
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7al2p0_timevarying_latent_neutralization.csv,eb62bda,add crypto a7al2p0 pre-search hardening audit,2992
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7ar5_replay_aware_selector_contract.json,eb62bda,add crypto a7al2p0 pre-search hardening audit,4015
+runtime,A7AL-2P0,runtime/a7al2p0_pre_search_hardening_audit/a7ar5_replay_aware_selector_score_components.csv,eb62bda,add crypto a7al2p0 pre-search hardening audit,1025
+runtime,A7AL-2P0R,runtime/a7al2p0r_repair_rerun_decision/a7al2p0r_a7ar5_contract_snapshot.json,c7e7448,add crypto a7al2p0r repair rerun decision,2523
+runtime,A7AL-2P0R,runtime/a7al2p0r_repair_rerun_decision/a7al2p0r_a7ar5_selector_score_components.csv,c7e7448,add crypto a7al2p0r repair rerun decision,432
+runtime,A7AL-2P0R,runtime/a7al2p0r_repair_rerun_decision/a7al2p0r_manifest.json,c7e7448,add crypto a7al2p0r repair rerun decision,1247
+runtime,A7AL-2P0R,runtime/a7al2p0r_repair_rerun_decision/a7al2p0r_premay_control_hold_rows.csv,c7e7448,add crypto a7al2p0r repair rerun decision,2
+runtime,A7AL-2P0R,runtime/a7al2p0r_repair_rerun_decision/a7al2p0r_stage_manifest_snapshot.json,c7e7448,add crypto a7al2p0r repair rerun decision,6967
+runtime,A7AL-2P0R,runtime/a7al2p0r_repair_rerun_decision/a7al2p0r_stage_summary.csv,c7e7448,add crypto a7al2p0r repair rerun decision,1013
+runtime,A7AL-2P0R,runtime/a7al2p0r_repair_rerun_decision/a7al2p0r_timevarying_latent_negative_rows.csv,c7e7448,add crypto a7al2p0r repair rerun decision,417
+runtime,A7AL-2P1,runtime/a7al2p1_selector_feature_generation/a7al2p1_control_dominance_by_split.csv,40620fe,add crypto a7al2p2 local oi price contract,806
+runtime,A7AL-2P1,runtime/a7al2p1_selector_feature_generation/a7al2p1_eval_errors.csv,2993764,add crypto a7al2p1 selector feature generation,2
+runtime,A7AL-2P1,runtime/a7al2p1_selector_feature_generation/a7al2p1_feature_generation_contract.json,40620fe,add crypto a7al2p2 local oi price contract,1120
+runtime,A7AL-2P1,runtime/a7al2p1_selector_feature_generation/a7al2p1_manifest.json,40620fe,add crypto a7al2p2 local oi price contract,1116
+runtime,A7AL-2P1,runtime/a7al2p1_selector_feature_generation/a7al2p1_selector_feature_matrix.csv,40620fe,add crypto a7al2p2 local oi price contract,2408
+runtime,A7AL-2P1,runtime/a7al2p1_selector_feature_generation/a7al2p1_timevarying_latent_metrics.csv,40620fe,add crypto a7al2p2 local oi price contract,1540
+runtime,A7AL-2P1R,runtime/a7al2p1r_selector_reweighted_retry/a7al2p1r_decision_record.csv,40620fe,add crypto a7al2p2 local oi price contract,1077
+runtime,A7AL-2P1R,runtime/a7al2p1r_selector_reweighted_retry/a7al2p1r_eval_errors.csv,40620fe,add crypto a7al2p2 local oi price contract,2
+runtime,A7AL-2P1R,runtime/a7al2p1r_selector_reweighted_retry/a7al2p1r_manifest.json,40620fe,add crypto a7al2p2 local oi price contract,877
+runtime,A7AL-2P1R,runtime/a7al2p1r_selector_reweighted_retry/a7al2p1r_variant_split_summary.csv,40620fe,add crypto a7al2p2 local oi price contract,23048
+runtime,A7AL-2P1S,runtime/a7al2p1s_selected_pool_provenance/a7al2p1s_artifact_manifest.csv,40620fe,add crypto a7al2p2 local oi price contract,4463
+runtime,A7AL-2P1S,runtime/a7al2p1s_selected_pool_provenance/a7al2p1s_candidate_provenance.csv,40620fe,add crypto a7al2p2 local oi price contract,1906
+runtime,A7AL-2P1S,runtime/a7al2p1s_selected_pool_provenance/a7al2p1s_decision_record.json,40620fe,add crypto a7al2p2 local oi price contract,1012
+runtime,A7AL-2P1S,runtime/a7al2p1s_selected_pool_provenance/a7al2p1s_repaired_chain_membership.csv,40620fe,add crypto a7al2p2 local oi price contract,1112
+runtime,A7AL-2P1S,runtime/a7al2p1s_selected_pool_provenance/a7al2p1s_stale_artifact_audit.csv,40620fe,add crypto a7al2p2 local oi price contract,1427
+runtime,A7AL-2P1T,runtime/a7al2p1t_repaired_pool_rerun_status/a7al2p1t_manifest.json,40620fe,add crypto a7al2p2 local oi price contract,1101
+runtime,A7AL-2P1T,runtime/a7al2p1t_repaired_pool_rerun_status/a7al2p1t_p1r_decision_record.csv,40620fe,add crypto a7al2p2 local oi price contract,1073
+runtime,A7AL-2P1T,runtime/a7al2p1t_repaired_pool_rerun_status/a7al2p1t_repaired_clue_pool.csv,40620fe,add crypto a7al2p2 local oi price contract,1002
+runtime,A7AL-2P1T,runtime/a7al2p1t_repaired_pool_rerun_status/a7al2p1t_selector_decisions.csv,40620fe,add crypto a7al2p2 local oi price contract,559
+runtime,A7AL-2P1T,runtime/a7al2p1t_repaired_pool_rerun_status/a7al2p1t_stage_summary.csv,40620fe,add crypto a7al2p2 local oi price contract,819
+runtime,A7AL-2P2,runtime/a7al2p2_local_oi_price_search_contract/a7al2p2_allowed_fields.csv,40620fe,add crypto a7al2p2 local oi price contract,689
+runtime,A7AL-2P2,runtime/a7al2p2_local_oi_price_search_contract/a7al2p2_allowed_transforms.csv,40620fe,add crypto a7al2p2 local oi price contract,561
+runtime,A7AL-2P2,runtime/a7al2p2_local_oi_price_search_contract/a7al2p2_budget.json,40620fe,add crypto a7al2p2 local oi price contract,274
+runtime,A7AL-2P2,runtime/a7al2p2_local_oi_price_search_contract/a7al2p2_forbidden_items.csv,40620fe,add crypto a7al2p2 local oi price contract,667
+runtime,A7AL-2P2,runtime/a7al2p2_local_oi_price_search_contract/a7al2p2_manifest.json,40620fe,add crypto a7al2p2 local oi price contract,1113
+runtime,A7AL-2P2,runtime/a7al2p2_local_oi_price_search_contract/a7al2p2_pass_fail_gates.csv,40620fe,add crypto a7al2p2 local oi price contract,548
+runtime,A7AL-2P2,runtime/a7al2p2_local_oi_price_search_contract/a7al2p2_seed_candidates.csv,40620fe,add crypto a7al2p2 local oi price contract,1027
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_candidate_scoreboard.csv,ce085c8,run crypto a7al2q local oi price search,11363
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_control_dominance.csv,ce085c8,run crypto a7al2q local oi price search,27651
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_cost_proxy.csv,ce085c8,run crypto a7al2q local oi price search,114112
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_decision_record.json,ce085c8,run crypto a7al2q local oi price search,406
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_deep_audit_scoreboard.csv,ce085c8,run crypto a7al2q local oi price search,11363
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_eval_errors.csv,ce085c8,run crypto a7al2q local oi price search,2
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_executed_fast_replay_candidates.csv,ce085c8,run crypto a7al2q local oi price search,6294
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_fast_replay_metrics.csv,ce085c8,run crypto a7al2q local oi price search,173201
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_generated_candidates.csv,ce085c8,run crypto a7al2q local oi price search,1508959
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_latency_label_alignment.csv,ce085c8,run crypto a7al2q local oi price search,1458
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_manifest.json,ce085c8,run crypto a7al2q local oi price search,2022
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_nonoverlap_offset_tstats.csv,ce085c8,run crypto a7al2q local oi price search,2
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_overlap_robust_tstats.csv,ce085c8,run crypto a7al2q local oi price search,2
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_reject_reason_summary.csv,ce085c8,run crypto a7al2q local oi price search,96
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_selected_for_fast_replay.csv,ce085c8,run crypto a7al2q local oi price search,48800
+runtime,A7AL-2Q,runtime/a7al2q_local_oi_price_formula_search/a7al2q_timevarying_latent_metrics.csv,ce085c8,run crypto a7al2q local oi price search,2
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_control_dominance.csv,11eda7f,add crypto a7al2r local forensic,5716
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_decision_record.csv,11eda7f,add crypto a7al2r local forensic,922
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_eval_errors.csv,11eda7f,add crypto a7al2r local forensic,2
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_input_candidates.csv,11eda7f,add crypto a7al2r local forensic,3069
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_latent_state_contribution.csv,11eda7f,add crypto a7al2r local forensic,14389
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_manifest.json,11eda7f,add crypto a7al2r local forensic,1621
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_month_contribution.csv,11eda7f,add crypto a7al2r local forensic,6105
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_nonoverlap_offset_tstats.csv,11eda7f,add crypto a7al2r local forensic,36868
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_orientation_audit.csv,11eda7f,add crypto a7al2r local forensic,434
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_overlap_robust_tstats.csv,11eda7f,add crypto a7al2r local forensic,2129
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_symbol_contribution.csv,11eda7f,add crypto a7al2r local forensic,14901
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_timevarying_latent_metrics.csv,11eda7f,add crypto a7al2r local forensic,5100
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_top_gain_loss_hours.csv,11eda7f,add crypto a7al2r local forensic,31133
+runtime,A7AL-2R,runtime/a7al2r_local_forensic/a7al2r_variant_metrics.csv,11eda7f,add crypto a7al2r local forensic,69384
+runtime,A7AL-2S,runtime/a7al2s_company_full_followup_contract/a7al2s_action_authorization_matrix.csv,7e34b48,add company a7al2s2t and selector repair contract,684
+runtime,A7AL-2S,runtime/a7al2s_company_full_followup_contract/a7al2s_candidate_tiers.csv,7e34b48,add company a7al2s2t and selector repair contract,5800
+runtime,A7AL-2S,runtime/a7al2s_company_full_followup_contract/a7al2s_followup_gates.csv,7e34b48,add company a7al2s2t and selector repair contract,532
+runtime,A7AL-2S,runtime/a7al2s_company_full_followup_contract/a7al2s_manifest.json,7e34b48,add company a7al2s2t and selector repair contract,1085
+runtime,A7AL-2S,runtime/a7al2s_local_followup_contract/a7al2s_action_authorization_matrix.csv,2d1efd3,add crypto a7al2s followup contract,719
+runtime,A7AL-2S,runtime/a7al2s_local_followup_contract/a7al2s_candidate_tiers.csv,2d1efd3,add crypto a7al2s followup contract,2057
+runtime,A7AL-2S,runtime/a7al2s_local_followup_contract/a7al2s_followup_gates.csv,2d1efd3,add crypto a7al2s followup contract,532
+runtime,A7AL-2S,runtime/a7al2s_local_followup_contract/a7al2s_manifest.json,2d1efd3,add crypto a7al2s followup contract,923
+runtime,A7AL-2T,runtime/a7al2t_company_may_stress_failure_attribution/a7al2t_action_matrix.csv,7e34b48,add company a7al2s2t and selector repair contract,478
+runtime,A7AL-2T,runtime/a7al2t_company_may_stress_failure_attribution/a7al2t_candidate_failure_summary.csv,7e34b48,add company a7al2s2t and selector repair contract,17046
+runtime,A7AL-2T,runtime/a7al2t_company_may_stress_failure_attribution/a7al2t_control_mode_failure.csv,7e34b48,add company a7al2s2t and selector repair contract,21195
+runtime,A7AL-2T,runtime/a7al2t_company_may_stress_failure_attribution/a7al2t_manifest.json,7e34b48,add company a7al2s2t and selector repair contract,1333
+runtime,A7AL-2T,runtime/a7al2t_company_may_stress_failure_attribution/a7al2t_may_latent_concentration.csv,7e34b48,add company a7al2s2t and selector repair contract,1240
+runtime,A7AL-2T,runtime/a7al2t_company_may_stress_failure_attribution/a7al2t_may_month_concentration.csv,7e34b48,add company a7al2s2t and selector repair contract,1170
+runtime,A7AL-2T,runtime/a7al2t_company_may_stress_failure_attribution/a7al2t_may_symbol_concentration.csv,7e34b48,add company a7al2s2t and selector repair contract,13261
+runtime,A7AL-2T,runtime/a7al2t_company_may_stress_failure_attribution/a7al2t_may_top_loss_hours.csv,7e34b48,add company a7al2s2t and selector repair contract,13905
+runtime,A7AL-2T,runtime/a7al2t_company_may_stress_failure_attribution/a7al2t_split_contrast.csv,7e34b48,add company a7al2s2t and selector repair contract,27341
+runtime,A7AL-2T,runtime/a7al2t_may_stress_failure_attribution/a7al2t_action_matrix.csv,c8cb2ae,add crypto a7al2t may stress attribution,575
+runtime,A7AL-2T,runtime/a7al2t_may_stress_failure_attribution/a7al2t_candidate_failure_summary.csv,c8cb2ae,add crypto a7al2t may stress attribution,5258
+runtime,A7AL-2T,runtime/a7al2t_may_stress_failure_attribution/a7al2t_control_mode_failure.csv,c8cb2ae,add crypto a7al2t may stress attribution,6215
+runtime,A7AL-2T,runtime/a7al2t_may_stress_failure_attribution/a7al2t_manifest.json,c8cb2ae,add crypto a7al2t may stress attribution,985
+runtime,A7AL-2T,runtime/a7al2t_may_stress_failure_attribution/a7al2t_may_latent_concentration.csv,c8cb2ae,add crypto a7al2t may stress attribution,416
+runtime,A7AL-2T,runtime/a7al2t_may_stress_failure_attribution/a7al2t_may_month_concentration.csv,c8cb2ae,add crypto a7al2t may stress attribution,390
+runtime,A7AL-2T,runtime/a7al2t_may_stress_failure_attribution/a7al2t_may_symbol_concentration.csv,c8cb2ae,add crypto a7al2t may stress attribution,3839
+runtime,A7AL-2T,runtime/a7al2t_may_stress_failure_attribution/a7al2t_may_top_loss_hours.csv,c8cb2ae,add crypto a7al2t may stress attribution,4005
+runtime,A7AL-2T,runtime/a7al2t_may_stress_failure_attribution/a7al2t_split_contrast.csv,c8cb2ae,add crypto a7al2t may stress attribution,8153
+runtime,A7AL-2U,runtime/a7al2u_objective_selector_repair_contract/a7al2u_authorization_matrix.csv,7e34b48,add company a7al2s2t and selector repair contract,541
+runtime,A7AL-2U,runtime/a7al2u_objective_selector_repair_contract/a7al2u_failure_mode_summary.csv,7e34b48,add company a7al2s2t and selector repair contract,641
+runtime,A7AL-2U,runtime/a7al2u_objective_selector_repair_contract/a7al2u_manifest.json,7e34b48,add company a7al2s2t and selector repair contract,1187
+runtime,A7AL-2U,runtime/a7al2u_objective_selector_repair_contract/a7al2u_premay_robust_candidate_summary.csv,7e34b48,add company a7al2s2t and selector repair contract,2203
+runtime,A7AL-2U,runtime/a7al2u_objective_selector_repair_contract/a7al2u_selector_feature_contract.csv,7e34b48,add company a7al2s2t and selector repair contract,1366
+runtime,A7AL-2U,runtime/a7al2u_objective_selector_repair_contract/a7al2u_selector_gate_contract.csv,7e34b48,add company a7al2s2t and selector repair contract,965
+runtime,A7AL-2V,runtime/a7al2v_replay_aware_selector_dryrun/a7al2v_authorization_matrix.csv,52b6e46,add crypto shared pool and selector dryrun,528
+runtime,A7AL-2V,runtime/a7al2v_replay_aware_selector_dryrun/a7al2v_forbidden_feature_audit.csv,52b6e46,add crypto shared pool and selector dryrun,478
+runtime,A7AL-2V,runtime/a7al2v_replay_aware_selector_dryrun/a7al2v_manifest.json,52b6e46,add crypto shared pool and selector dryrun,858
+runtime,A7AL-2V,runtime/a7al2v_replay_aware_selector_dryrun/a7al2v_post_selection_stress_veto_audit.csv,52b6e46,add crypto shared pool and selector dryrun,1193
+runtime,A7AL-2V,runtime/a7al2v_replay_aware_selector_dryrun/a7al2v_reject_reason_summary.csv,52b6e46,add crypto shared pool and selector dryrun,112
+runtime,A7AL-2V,runtime/a7al2v_replay_aware_selector_dryrun/a7al2v_selected_pool.csv,52b6e46,add crypto shared pool and selector dryrun,6618
+runtime,A7AL-2V,runtime/a7al2v_replay_aware_selector_dryrun/a7al2v_selector_matrix.csv,52b6e46,add crypto shared pool and selector dryrun,123850
+runtime,A7AL-2W,runtime/a7al2w_signal_vector_selector_repair/a7al2w_authorization_matrix.csv,9394520,add crypto signal vector selector repair,460
+runtime,A7AL-2W,runtime/a7al2w_signal_vector_selector_repair/a7al2w_input_reject_reason_summary.csv,9394520,add crypto signal vector selector repair,112
+runtime,A7AL-2W,runtime/a7al2w_signal_vector_selector_repair/a7al2w_manifest.json,9394520,add crypto signal vector selector repair,958
+runtime,A7AL-2W,runtime/a7al2w_signal_vector_selector_repair/a7al2w_post_selection_stress_quarantine.csv,9394520,add crypto signal vector selector repair,506
+runtime,A7AL-2W,runtime/a7al2w_signal_vector_selector_repair/a7al2w_queue_diversity_audit.csv,9394520,add crypto signal vector selector repair,219
+runtime,A7AL-2W,runtime/a7al2w_signal_vector_selector_repair/a7al2w_repair_reason_summary.csv,9394520,add crypto signal vector selector repair,136
+runtime,A7AL-2W,runtime/a7al2w_signal_vector_selector_repair/a7al2w_repaired_selected_pool.csv,9394520,add crypto signal vector selector repair,4630
+runtime,A7AL-2W,runtime/a7al2w_signal_vector_selector_repair/a7al2w_repaired_selector_candidates.csv,9394520,add crypto signal vector selector repair,14721
+runtime,A7AL-2W,runtime/a7al2w_signal_vector_selector_repair/a7al2w_selected_queue_pairwise_corr.csv,9394520,add crypto signal vector selector repair,159
+runtime,A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_allowed_objective_families.csv,5ae8e75,add crypto a7al2x objective family reset,1966
+runtime,A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_authorization_matrix.json,5ae8e75,add crypto a7al2x objective family reset,429
+runtime,A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_forbidden_objective_families.csv,5ae8e75,add crypto a7al2x objective family reset,1007
+runtime,A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_manifest.json,5ae8e75,add crypto a7al2x objective family reset,1029
+runtime,A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_may_policy_audit.json,5ae8e75,add crypto a7al2x objective family reset,382
+runtime,A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_selector_feature_contract.json,5ae8e75,add crypto a7al2x objective family reset,1403
+runtime,A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_shared_pool_source_of_truth.json,5ae8e75,add crypto a7al2x objective family reset,783
+runtime,A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_signal_vector_cap_policy.json,5ae8e75,add crypto a7al2x objective family reset,485
+runtime,A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_artifact_inventory.csv,91ded54,add crypto a7al2x0 authorization arbitration,1930
+runtime,A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,91ded54,add crypto a7al2x0 authorization arbitration,1041
+runtime,A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_decision_precedence.csv,91ded54,add crypto a7al2x0 authorization arbitration,672
+runtime,A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_manifest.json,91ded54,add crypto a7al2x0 authorization arbitration,911
+runtime,A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_required_next.json,91ded54,add crypto a7al2x0 authorization arbitration,572
+runtime,A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_superseded_records.csv,91ded54,add crypto a7al2x0 authorization arbitration,284
+runtime,A7AL-2X1,runtime/a7al2x1_dry_rerank/a7al2x1_control_dominance_audit.csv,897bc41,add crypto a7al2x1 dry rerank,69
+runtime,A7AL-2X1,runtime/a7al2x1_dry_rerank/a7al2x1_decision_record.json,897bc41,add crypto a7al2x1 dry rerank,365
+runtime,A7AL-2X1,runtime/a7al2x1_dry_rerank/a7al2x1_manifest.json,897bc41,add crypto a7al2x1 dry rerank,956
+runtime,A7AL-2X1,runtime/a7al2x1_dry_rerank/a7al2x1_objective_family_funnel.csv,897bc41,add crypto a7al2x1 dry rerank,409
+runtime,A7AL-2X1,runtime/a7al2x1_dry_rerank/a7al2x1_reject_reason_summary.csv,897bc41,add crypto a7al2x1 dry rerank,171
+runtime,A7AL-2X1,runtime/a7al2x1_dry_rerank/a7al2x1_selected_pairwise_corr.csv,897bc41,add crypto a7al2x1 dry rerank,2
+runtime,A7AL-2X1,runtime/a7al2x1_dry_rerank/a7al2x1_selected_queue.csv,897bc41,add crypto a7al2x1 dry rerank,1823
+runtime,A7AL-2X1,runtime/a7al2x1_dry_rerank/a7al2x1_selector_trace.csv,897bc41,add crypto a7al2x1 dry rerank,2621265
+runtime,A7AL-2X1,runtime/a7al2x1_dry_rerank/a7al2x1_signal_vector_diversity_audit.csv,897bc41,add crypto a7al2x1 dry rerank,234
+runtime,A7AL-2X1,runtime/a7al2x1_dry_rerank/a7al2x1_stress_veto_summary.csv,897bc41,add crypto a7al2x1 dry rerank,119
+runtime,A7AL-2X2,runtime/a7al2x2_objective_family_coverage_gap/a7al2x2_decision_record.json,f6fff13,add crypto a7al2x2 coverage gap audit,487
+runtime,A7AL-2X2,runtime/a7al2x2_objective_family_coverage_gap/a7al2x2_generated_family_coverage.csv,f6fff13,add crypto a7al2x2 coverage gap audit,1777
+runtime,A7AL-2X2,runtime/a7al2x2_objective_family_coverage_gap/a7al2x2_manifest.json,f6fff13,add crypto a7al2x2 coverage gap audit,1001
+runtime,A7AL-2X2,runtime/a7al2x2_objective_family_coverage_gap/a7al2x2_missing_family_gap_audit.csv,f6fff13,add crypto a7al2x2 coverage gap audit,1284
+runtime,A7AL-2X2,runtime/a7al2x2_objective_family_coverage_gap/a7al2x2_repair_plan.csv,f6fff13,add crypto a7al2x2 coverage gap audit,567
+runtime,A7AL-2X2,runtime/a7al2x2_objective_family_coverage_gap/a7al2x2_source_of_truth_gap.csv,f6fff13,add crypto a7al2x2 coverage gap audit,445
+runtime,A7AL-2X2,runtime/a7al2x2_objective_family_coverage_gap/a7al2x2_stage_funnel_by_family.csv,f6fff13,add crypto a7al2x2 coverage gap audit,1681
+runtime,A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,452bd40,add crypto a7al2x2r repair contracts,815
+runtime,A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_family_min_quota_policy.csv,452bd40,add crypto a7al2x2r repair contracts,1350
+runtime,A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_forbidden_fallbacks.csv,452bd40,add crypto a7al2x2r repair contracts,816
+runtime,A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_generator_template_requirements.csv,452bd40,add crypto a7al2x2r repair contracts,1396
+runtime,A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_historical_field_source_contract.csv,ea2204d,add crypto a7al2x4m materialization audit,2858
+runtime,A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_manifest.json,ea2204d,add crypto a7al2x4m materialization audit,564
+runtime,A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_shared_pool_ledger_schema.csv,452bd40,add crypto a7al2x2r repair contracts,894
+runtime,A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_shared_pool_rebuild_policy.csv,452bd40,add crypto a7al2x2r repair contracts,622
+runtime,A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_authorization_matrix.json,825947f,add crypto a7al2x3 dry generation,478
+runtime,A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_family_quota_audit.csv,ea2204d,add crypto a7al2x4m materialization audit,1043
+runtime,A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_field_source_audit.csv,ea2204d,add crypto a7al2x4m materialization audit,4066
+runtime,A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_forbidden_fallback_audit.csv,825947f,add crypto a7al2x3 dry generation,423
+runtime,A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_generated_candidate_ledger.csv,b178c78,add crypto a7al2x5 evaluator preflight smoke,1085578
+runtime,A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_manifest.json,b178c78,add crypto a7al2x5 evaluator preflight smoke,633
+runtime,A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_negative_control_plan.csv,825947f,add crypto a7al2x3 dry generation,121
+runtime,A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_shared_pool_ledger.csv,b178c78,add crypto a7al2x5 evaluator preflight smoke,1085578
+runtime,A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_skeleton_diversity_audit.csv,ea2204d,add crypto a7al2x4m materialization audit,687
+runtime,A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_static_validity_audit.csv,b178c78,add crypto a7al2x5 evaluator preflight smoke,125955
+runtime,A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_authorization_matrix.json,99e561c,add crypto a7al2x4 replay readiness audit,451
+runtime,A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_family_readiness_audit.csv,b178c78,add crypto a7al2x5 evaluator preflight smoke,663
+runtime,A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_field_materialization_audit.csv,b178c78,add crypto a7al2x5 evaluator preflight smoke,1113
+runtime,A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_manifest.json,b178c78,add crypto a7al2x5 evaluator preflight smoke,746
+runtime,A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_materialization_plan.csv,99e561c,add crypto a7al2x4 replay readiness audit,677
+runtime,A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_operator_support_audit.csv,99e561c,add crypto a7al2x4 replay readiness audit,700
+runtime,A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_authorization_matrix.json,ea2204d,add crypto a7al2x4m materialization audit,435
+runtime,A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_blocker_matrix.csv,ea2204d,add crypto a7al2x4m materialization audit,2
+runtime,A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_field_materialization_sources.csv,b178c78,add crypto a7al2x5 evaluator preflight smoke,3152
+runtime,A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_manifest.json,b178c78,add crypto a7al2x5 evaluator preflight smoke,466
+runtime,A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_operator_semantics.csv,ea2204d,add crypto a7al2x4m materialization audit,1183
+runtime,A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_statemask_label_audit.csv,ea2204d,add crypto a7al2x4m materialization audit,3313
+runtime,A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_authorization_matrix.json,b178c78,add crypto a7al2x5 evaluator preflight smoke,501
+runtime,A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_blocker_matrix.csv,b178c78,add crypto a7al2x5 evaluator preflight smoke,2
+runtime,A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_candidate_eval_summary.csv,0c94624,add crypto a7al2x7 small replay preflight,42329
+runtime,A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_group_field_coverage.csv,b178c78,add crypto a7al2x5 evaluator preflight smoke,363
+runtime,A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_manifest.json,0c94624,add crypto a7al2x7 small replay preflight,786
+runtime,A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_operator_coverage.csv,b178c78,add crypto a7al2x5 evaluator preflight smoke,177
+runtime,A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_authorization_matrix.json,0c94624,add crypto a7al2x7 small replay preflight,539
+runtime,A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_available_family_counts.csv,0c94624,add crypto a7al2x7 small replay preflight,279
+runtime,A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_bias_audit_contract.csv,0c94624,add crypto a7al2x7 small replay preflight,625
+runtime,A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_candidate_sample_policy.csv,0c94624,add crypto a7al2x7 small replay preflight,706
+runtime,A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_control_policy.csv,0c94624,add crypto a7al2x7 small replay preflight,303
+runtime,A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_experiment_record.json,0c94624,add crypto a7al2x7 small replay preflight,1298
+runtime,A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_manifest.json,0c94624,add crypto a7al2x7 small replay preflight,456
+runtime,A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_replay_metric_contract.csv,0c94624,add crypto a7al2x7 small replay preflight,558
+runtime,A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_authorization_matrix.json,0c94624,add crypto a7al2x7 small replay preflight,327
+runtime,A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_candidate_decisions.csv,0c94624,add crypto a7al2x7 small replay preflight,3462
+runtime,A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_candidate_variant_metrics.csv,0c94624,add crypto a7al2x7 small replay preflight,72606
+runtime,A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_decision_counts.csv,0c94624,add crypto a7al2x7 small replay preflight,84
+runtime,A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_eval_errors.csv,0c94624,add crypto a7al2x7 small replay preflight,2
+runtime,A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_manifest.json,0c94624,add crypto a7al2x7 small replay preflight,1072
+runtime,A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_replayed_candidate_sample.csv,0c94624,add crypto a7al2x7 small replay preflight,8541
+runtime,A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_authorization_matrix.json,a273d5a,add crypto a7al2x7f replay forensic,335
+runtime,A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_candidate_failure_taxonomy.csv,a273d5a,add crypto a7al2x7f replay forensic,8724
+runtime,A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_control_dominance_detail.csv,a273d5a,add crypto a7al2x7f replay forensic,24128
+runtime,A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_control_dominance_rollup.csv,a273d5a,add crypto a7al2x7f replay forensic,1277
+runtime,A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_decision_record.json,a273d5a,add crypto a7al2x7f replay forensic,1184
+runtime,A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_failure_root_summary.csv,a273d5a,add crypto a7al2x7f replay forensic,131
+runtime,A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_manifest.json,a273d5a,add crypto a7al2x7f replay forensic,1052
+runtime,A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_objective_family_failure_summary.csv,a273d5a,add crypto a7al2x7f replay forensic,924
+runtime,A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_split_alignment_summary.csv,a273d5a,add crypto a7al2x7f replay forensic,469
+runtime,A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_authorization_matrix.json,534951b,add crypto a7al2x7h heavy replay preflight,328
+runtime,A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_candidate_decisions.csv,534951b,add crypto a7al2x7h heavy replay preflight,12429
+runtime,A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_candidate_variant_metrics.csv,534951b,add crypto a7al2x7h heavy replay preflight,278307
+runtime,A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_decision_counts.csv,534951b,add crypto a7al2x7h heavy replay preflight,84
+runtime,A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_eval_errors.csv,534951b,add crypto a7al2x7h heavy replay preflight,2
+runtime,A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_manifest.json,534951b,add crypto a7al2x7h heavy replay preflight,1234
+runtime,A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_replayed_candidate_sample.csv,534951b,add crypto a7al2x7h heavy replay preflight,33370
+runtime,A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_authorization_matrix.json,534951b,add crypto a7al2x7h heavy replay preflight,336
+runtime,A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_candidate_failure_taxonomy.csv,534951b,add crypto a7al2x7h heavy replay preflight,31902
+runtime,A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_control_dominance_detail.csv,534951b,add crypto a7al2x7h heavy replay preflight,93154
+runtime,A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_control_dominance_rollup.csv,534951b,add crypto a7al2x7h heavy replay preflight,1285
+runtime,A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_decision_record.json,534951b,add crypto a7al2x7h heavy replay preflight,1139
+runtime,A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_failure_root_summary.csv,534951b,add crypto a7al2x7h heavy replay preflight,132
+runtime,A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_manifest.json,534951b,add crypto a7al2x7h heavy replay preflight,1051
+runtime,A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_objective_family_failure_summary.csv,534951b,add crypto a7al2x7h heavy replay preflight,956
+runtime,A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_split_alignment_summary.csv,534951b,add crypto a7al2x7h heavy replay preflight,472
+runtime,A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_allowed_objective_families.csv,48d205b,add crypto a7al2z broader non oi diagnostics,2552
+runtime,A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_authorization_matrix.json,48d205b,add crypto a7al2z broader non oi diagnostics,409
+runtime,A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_forbidden_fields_and_families.csv,48d205b,add crypto a7al2z broader non oi diagnostics,913
+runtime,A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_manifest.json,48d205b,add crypto a7al2z broader non oi diagnostics,853
+runtime,A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_prior_oi_positioning_failure_summary.csv,48d205b,add crypto a7al2z broader non oi diagnostics,943
+runtime,A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_selector_contract.json,48d205b,add crypto a7al2z broader non oi diagnostics,641
+runtime,A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_authorization_matrix.json,48d205b,add crypto a7al2z broader non oi diagnostics,425
+runtime,A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_family_quota_audit.csv,48d205b,add crypto a7al2z broader non oi diagnostics,994
+runtime,A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_generated_candidate_ledger.csv,48d205b,add crypto a7al2z broader non oi diagnostics,680767
+runtime,A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_manifest.json,48d205b,add crypto a7al2z broader non oi diagnostics,760
+runtime,A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_selected_for_z2_materialization.csv,48d205b,add crypto a7al2z broader non oi diagnostics,71380
+runtime,A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_static_blocker_matrix.csv,48d205b,add crypto a7al2z broader non oi diagnostics,2
+runtime,A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_authorization_matrix.json,48d205b,add crypto a7al2z broader non oi diagnostics,340
+runtime,A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_blocker_matrix.csv,48d205b,add crypto a7al2z broader non oi diagnostics,1789
+runtime,A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_candidate_eval_summary.csv,48d205b,add crypto a7al2z broader non oi diagnostics,29328
+runtime,A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_family_eval_summary.csv,48d205b,add crypto a7al2z broader non oi diagnostics,748
+runtime,A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_group_field_coverage.csv,48d205b,add crypto a7al2z broader non oi diagnostics,697
+runtime,A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_manifest.json,48d205b,add crypto a7al2z broader non oi diagnostics,745
+runtime,A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_operator_coverage.csv,48d205b,add crypto a7al2z broader non oi diagnostics,182
+runtime,A7AL-2Z2R,runtime/a7al2z2r_broader_non_oi_materialization_repair/a7al2z2r_authorization_matrix.json,48d205b,add crypto a7al2z broader non oi diagnostics,376
+runtime,A7AL-2Z2R,runtime/a7al2z2r_broader_non_oi_materialization_repair/a7al2z2r_candidate_eval_trace.csv,48d205b,add crypto a7al2z broader non oi diagnostics,52065
+runtime,A7AL-2Z2R,runtime/a7al2z2r_broader_non_oi_materialization_repair/a7al2z2r_family_repair_summary.csv,48d205b,add crypto a7al2z broader non oi diagnostics,749
+runtime,A7AL-2Z2R,runtime/a7al2z2r_broader_non_oi_materialization_repair/a7al2z2r_manifest.json,48d205b,add crypto a7al2z broader non oi diagnostics,839
+runtime,A7AL-2Z2R,runtime/a7al2z2r_broader_non_oi_materialization_repair/a7al2z2r_repair_blocker_matrix.csv,48d205b,add crypto a7al2z broader non oi diagnostics,7773
+runtime,A7AL-2Z2R,runtime/a7al2z2r_broader_non_oi_materialization_repair/a7al2z2r_repaired_selected_candidates.csv,48d205b,add crypto a7al2z broader non oi diagnostics,81991
+runtime,A7AL-2Z3,runtime/a7al2z3_broader_non_oi_numeric_preflight_contract/a7al2z3_authorization_matrix.json,48d205b,add crypto a7al2z broader non oi diagnostics,401
+runtime,A7AL-2Z3,runtime/a7al2z3_broader_non_oi_numeric_preflight_contract/a7al2z3_family_input_summary.csv,48d205b,add crypto a7al2z broader non oi diagnostics,382
+runtime,A7AL-2Z3,runtime/a7al2z3_broader_non_oi_numeric_preflight_contract/a7al2z3_manifest.json,48d205b,add crypto a7al2z broader non oi diagnostics,866
+runtime,A7AL-2Z3,runtime/a7al2z3_broader_non_oi_numeric_preflight_contract/a7al2z3_negative_control_contract.csv,48d205b,add crypto a7al2z broader non oi diagnostics,287
+runtime,A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_authorization_matrix.json,48d205b,add crypto a7al2z broader non oi diagnostics,321
+runtime,A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_candidate_decisions.csv,48d205b,add crypto a7al2z broader non oi diagnostics,33208
+runtime,A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_candidate_variant_metrics.csv,48d205b,add crypto a7al2z broader non oi diagnostics,875815
+runtime,A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_decision_counts.csv,48d205b,add crypto a7al2z broader non oi diagnostics,121
+runtime,A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_eval_errors.csv,48d205b,add crypto a7al2z broader non oi diagnostics,2
+runtime,A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_family_decision_summary.csv,48d205b,add crypto a7al2z broader non oi diagnostics,623
+runtime,A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_manifest.json,48d205b,add crypto a7al2z broader non oi diagnostics,1249
+runtime,A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_replayed_candidate_sample.csv,48d205b,add crypto a7al2z broader non oi diagnostics,81834
+runtime,A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_authorization_matrix.json,48d205b,add crypto a7al2z broader non oi diagnostics,330
+runtime,A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_control_ratio_detail.csv,48d205b,add crypto a7al2z broader non oi diagnostics,301240
+runtime,A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_control_ratio_summary.csv,48d205b,add crypto a7al2z broader non oi diagnostics,3874
+runtime,A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_family_decision_breakdown.csv,48d205b,add crypto a7al2z broader non oi diagnostics,1089
+runtime,A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_family_failure_profile.csv,48d205b,add crypto a7al2z broader non oi diagnostics,622
+runtime,A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_manifest.json,48d205b,add crypto a7al2z broader non oi diagnostics,631
+runtime,A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_premay_near_miss_candidates.csv,48d205b,add crypto a7al2z broader non oi diagnostics,3222
+runtime,A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_split_stability_profile.csv,48d205b,add crypto a7al2z broader non oi diagnostics,16874
+runtime,A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_authorization_matrix.json,48d205b,add crypto a7al2z broader non oi diagnostics,315
+runtime,A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_candidate_horizon_decisions.csv,48d205b,add crypto a7al2z broader non oi diagnostics,134027
+runtime,A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_candidate_variant_metrics_by_horizon.csv,48d205b,add crypto a7al2z broader non oi diagnostics,3553241
+runtime,A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_decision_counts_by_horizon.csv,48d205b,add crypto a7al2z broader non oi diagnostics,513
+runtime,A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_eval_errors.csv,48d205b,add crypto a7al2z broader non oi diagnostics,2
+runtime,A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_family_horizon_summary.csv,48d205b,add crypto a7al2z broader non oi diagnostics,2247
+runtime,A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_manifest.json,48d205b,add crypto a7al2z broader non oi diagnostics,918
+runtime,A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_allowed_mutation_families.csv,dd9549c,add crypto a7al2z response guided diagnostics,985
+runtime,A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_authorization_matrix.json,dd9549c,add crypto a7al2z response guided diagnostics,402
+runtime,A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_failure_guided_mutation_directives.csv,dd9549c,add crypto a7al2z response guided diagnostics,8510
+runtime,A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_forbidden_patterns.csv,dd9549c,add crypto a7al2z response guided diagnostics,213
+runtime,A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_manifest.json,dd9549c,add crypto a7al2z response guided diagnostics,752
+runtime,A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_source_decision_counts_by_horizon.csv,dd9549c,add crypto a7al2z response guided diagnostics,513
+runtime,A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_authorization_matrix.json,dd9549c,add crypto a7al2z response guided diagnostics,408
+runtime,A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_family_quota_audit.csv,dd9549c,add crypto a7al2z response guided diagnostics,922
+runtime,A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_generated_candidate_ledger.csv,dd9549c,add crypto a7al2z response guided diagnostics,4867081
+runtime,A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_manifest.json,dd9549c,add crypto a7al2z response guided diagnostics,743
+runtime,A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_selected_for_z8_materialization.csv,dd9549c,add crypto a7al2z response guided diagnostics,92734
+runtime,A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_static_blocker_matrix.csv,dd9549c,add crypto a7al2z response guided diagnostics,2
+runtime,A7AL-2Z8,runtime/a7al2z8_response_guided_materialization_repair/a7al2z8_authorization_matrix.json,dd9549c,add crypto a7al2z response guided diagnostics,340
+runtime,A7AL-2Z8,runtime/a7al2z8_response_guided_materialization_repair/a7al2z8_candidate_eval_trace.csv,dd9549c,add crypto a7al2z response guided diagnostics,107352
+runtime,A7AL-2Z8,runtime/a7al2z8_response_guided_materialization_repair/a7al2z8_family_repair_summary.csv,dd9549c,add crypto a7al2z response guided diagnostics,521
+runtime,A7AL-2Z8,runtime/a7al2z8_response_guided_materialization_repair/a7al2z8_manifest.json,dd9549c,add crypto a7al2z response guided diagnostics,890
+runtime,A7AL-2Z8,runtime/a7al2z8_response_guided_materialization_repair/a7al2z8_repair_blocker_matrix.csv,dd9549c,add crypto a7al2z response guided diagnostics,27695
+runtime,A7AL-2Z8,runtime/a7al2z8_response_guided_materialization_repair/a7al2z8_repaired_selected_candidates.csv,dd9549c,add crypto a7al2z response guided diagnostics,62920
+runtime,A7AL-2Z8P,runtime/a7al2z8p_partial_viable_queue_authorization/a7al2z8p_authorization_matrix.json,dd9549c,add crypto a7al2z response guided diagnostics,402
+runtime,A7AL-2Z8P,runtime/a7al2z8p_partial_viable_queue_authorization/a7al2z8p_manifest.json,dd9549c,add crypto a7al2z response guided diagnostics,834
+runtime,A7AL-2Z8P,runtime/a7al2z8p_partial_viable_queue_authorization/a7al2z8p_partial_viable_candidates.csv,dd9549c,add crypto a7al2z response guided diagnostics,62909
+runtime,A7AL-2Z8P,runtime/a7al2z8p_partial_viable_queue_authorization/a7al2z8p_source_blockers.csv,dd9549c,add crypto a7al2z response guided diagnostics,27695
+runtime,A7AL-2Z8P,runtime/a7al2z8p_partial_viable_queue_authorization/a7al2z8p_source_family_summary.csv,dd9549c,add crypto a7al2z response guided diagnostics,520
+runtime,A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_authorization_matrix.json,dd9549c,add crypto a7al2z response guided diagnostics,323
+runtime,A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_candidate_horizon_decisions.csv,dd9549c,add crypto a7al2z response guided diagnostics,83398
+runtime,A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_candidate_variant_metrics_by_horizon.csv,dd9549c,add crypto a7al2z response guided diagnostics,2222504
+runtime,A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_decision_counts_by_horizon.csv,dd9549c,add crypto a7al2z response guided diagnostics,400
+runtime,A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_eval_errors.csv,dd9549c,add crypto a7al2z response guided diagnostics,2
+runtime,A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_family_horizon_summary.csv,dd9549c,add crypto a7al2z response guided diagnostics,1606
+runtime,A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_manifest.json,dd9549c,add crypto a7al2z response guided diagnostics,968
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7ak_lv_train_only_state_freeze_audit.csv,7735863,add crypto a7al top498 alpha search contract,2372
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7ak_lv_train_only_state_freeze_manifest.json,7735863,add crypto a7al top498 alpha search contract,449
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al0_manifest.json,b4af964,abolish fixed delay stress in crypto latency policy,4016
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al_beta_liquidity_meme_exposure_baseline.csv,7735863,add crypto a7al top498 alpha search contract,98935
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al_field_family_baseline_candidate_list.csv,b4af964,abolish fixed delay stress in crypto latency policy,2945
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al_field_timing_contract.csv,b4af964,abolish fixed delay stress in crypto latency policy,19458
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al_latent_state_feature_inputs.csv,7735863,add crypto a7al top498 alpha search contract,1717
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al_negative_control_plan.json,b4af964,abolish fixed delay stress in crypto latency policy,1892
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al_neutralization_policy.json,b4af964,abolish fixed delay stress in crypto latency policy,2667
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al_split_coverage_by_symbol.csv,7735863,add crypto a7al top498 alpha search contract,314572
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al_split_definition.csv,7735863,add crypto a7al top498 alpha search contract,484
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al_split_summary.csv,7735863,add crypto a7al top498 alpha search contract,813
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al_universe_survivorship_audit.csv,7735863,add crypto a7al top498 alpha search contract,123112
+runtime,A7AL0,runtime/a7al0_top498_alpha_search_contract/a7al_unseen_state_handling_policy.csv,7735863,add crypto a7al top498 alpha search contract,22785
+report,A7AL0-TOP498-LATENT-NEUTRAL-ALPHA-SEARCH-CONTRACT,reports/CRYPTO_A7AL0_TOP498_LATENT_NEUTRAL_ALPHA_SEARCH_CONTRACT_20260527.md,b4af964,abolish fixed delay stress in crypto latency policy,4076
+report,A7AL0-UNIVERSE498-REPLAY-ACCEPTANCE,reports/CRYPTO_A7AL0_UNIVERSE498_REPLAY_ACCEPTANCE_20260526.md,b4af964,abolish fixed delay stress in crypto latency policy,12555
+runtime,A7AL0F,runtime/a7al0f_derived_feature_engineering_contract/a7al0f_allowed_derived_feature_set.json,b4af964,abolish fixed delay stress in crypto latency policy,553
+runtime,A7AL0F,runtime/a7al0f_derived_feature_engineering_contract/a7al0f_blocked_feature_set.json,3f795d9,add crypto a7al derived feature readiness gates,447
+runtime,A7AL0F,runtime/a7al0f_derived_feature_engineering_contract/a7al0f_feature_family_caps.json,3f795d9,add crypto a7al derived feature readiness gates,544
+runtime,A7AL0F,runtime/a7al0f_derived_feature_engineering_contract/a7al0f_feature_generation_contract.csv,b4af964,abolish fixed delay stress in crypto latency policy,6510
+runtime,A7AL0F,runtime/a7al0f_derived_feature_engineering_contract/a7al0f_manifest.json,b4af964,abolish fixed delay stress in crypto latency policy,388
+report,A7AL0F-DERIVED-FEATURE-ENGINEERING-CONTRACT,reports/CRYPTO_A7AL0F_DERIVED_FEATURE_ENGINEERING_CONTRACT_20260527.md,b4af964,abolish fixed delay stress in crypto latency policy,7560
+runtime,A7AL0G,runtime/a7al0g_upper_regime_state_builder/a7al0g_manifest.json,3f795d9,add crypto a7al derived feature readiness gates,505
+runtime,A7AL0G,runtime/a7al0g_upper_regime_state_builder/a7al0g_regime_coverage_by_split.csv,3f795d9,add crypto a7al derived feature readiness gates,1099
+runtime,A7AL0G,runtime/a7al0g_upper_regime_state_builder/a7al0g_regime_state_contract.csv,3f795d9,add crypto a7al derived feature readiness gates,2108
+runtime,A7AL0G,runtime/a7al0g_upper_regime_state_builder/a7al0g_regime_transition_matrix.csv,3f795d9,add crypto a7al derived feature readiness gates,665
+runtime,A7AL0G,runtime/a7al0g_upper_regime_state_builder/a7al0g_train_only_thresholds.csv,3f795d9,add crypto a7al derived feature readiness gates,4192
+report,A7AL0G-UPPER-REGIME-STATE-BUILDER,reports/CRYPTO_A7AL0G_UPPER_REGIME_STATE_BUILDER_20260527.md,3f795d9,add crypto a7al derived feature readiness gates,5796
+runtime,A7AL0L,runtime/a7al0l_fixed_delay_stress_abolition/a7al0l_active_code_forbidden_term_scan.json,b4af964,abolish fixed delay stress in crypto latency policy,2
+runtime,A7AL0L,runtime/a7al0l_fixed_delay_stress_abolition/a7al0l_manifest.json,b4af964,abolish fixed delay stress in crypto latency policy,886
+report,A7AL0L-FIXED-DELAY-STRESS-ABOLITION,reports/CRYPTO_A7AL0L_FIXED_DELAY_STRESS_ABOLITION_20260527.md,b4af964,abolish fixed delay stress in crypto latency policy,849
+runtime,A7AL0P,runtime/a7al0p_pretrain_readiness_gate/a7al0p_manifest.json,b4af964,abolish fixed delay stress in crypto latency policy,672
+runtime,A7AL0P,runtime/a7al0p_pretrain_readiness_gate/a7al0p_readiness_checks.csv,b4af964,abolish fixed delay stress in crypto latency policy,698
+report,A7AL0P-PRETRAIN-READINESS-GATE,reports/CRYPTO_A7AL0P_PRETRAIN_READINESS_GATE_20260527.md,b4af964,abolish fixed delay stress in crypto latency policy,1200
+runtime,A7AL0R,runtime/a7al0r_code_feature_regime_readiness_audit/a7al0r_blocker_matrix.json,b4af964,abolish fixed delay stress in crypto latency policy,811
+runtime,A7AL0R,runtime/a7al0r_code_feature_regime_readiness_audit/a7al0r_dataflow_graph.csv,3f795d9,add crypto a7al derived feature readiness gates,459
+runtime,A7AL0R,runtime/a7al0r_code_feature_regime_readiness_audit/a7al0r_derived_feature_catalog.csv,b4af964,abolish fixed delay stress in crypto latency policy,10903
+runtime,A7AL0R,runtime/a7al0r_code_feature_regime_readiness_audit/a7al0r_feature_lineage_ledger.csv,b4af964,abolish fixed delay stress in crypto latency policy,24921
+runtime,A7AL0R,runtime/a7al0r_code_feature_regime_readiness_audit/a7al0r_label_lineage_audit.csv,3f795d9,add crypto a7al derived feature readiness gates,188
+runtime,A7AL0R,runtime/a7al0r_code_feature_regime_readiness_audit/a7al0r_pit_lag_audit.csv,b4af964,abolish fixed delay stress in crypto latency policy,6720
+runtime,A7AL0R,runtime/a7al0r_code_feature_regime_readiness_audit/a7al0r_script_inventory.csv,3f795d9,add crypto a7al derived feature readiness gates,659
+report,A7AL0R-CODE-FEATURE-REGIME-READINESS-AUDIT,reports/CRYPTO_A7AL0R_CODE_FEATURE_REGIME_READINESS_AUDIT_20260527.md,b4af964,abolish fixed delay stress in crypto latency policy,13571
+runtime,A7AL1,runtime/a7al1_field_family_neutralized_baseline/a7al1_bias_audit.csv,6232a96,add crypto a7al neutral baseline controls,675
+runtime,A7AL1,runtime/a7al1_field_family_neutralized_baseline/a7al1_field_family_metrics.csv,6232a96,add crypto a7al neutral baseline controls,89110
+runtime,A7AL1,runtime/a7al1_field_family_neutralized_baseline/a7al1_full_neutralization_shortlist.csv,6232a96,add crypto a7al neutral baseline controls,589
+runtime,A7AL1,runtime/a7al1_field_family_neutralized_baseline/a7al1_manifest.json,6232a96,add crypto a7al neutral baseline controls,1609
+runtime,A7AL1,runtime/a7al1_field_family_neutralized_baseline/a7al1_negative_control_audit.csv,6232a96,add crypto a7al neutral baseline controls,6648
+runtime,A7AL1,runtime/a7al1_field_family_neutralized_baseline/a7al1_signal_decisions.csv,6232a96,add crypto a7al neutral baseline controls,4976
+runtime,A7AL1,runtime/a7al1_field_family_neutralized_baseline/a7al1_timestamp_spread_trace_sample.csv,6232a96,add crypto a7al neutral baseline controls,2102831
+report,A7AL1-FIELD-FAMILY-NEUTRALIZED-BASELINE,reports/CRYPTO_A7AL1_FIELD_FAMILY_NEUTRALIZED_BASELINE_20260527.md,6232a96,add crypto a7al neutral baseline controls,60298
+runtime,A7AL1B,runtime/a7al1b_control_latency_forensic/a7al1b_control_blocker_summary.csv,6232a96,add crypto a7al neutral baseline controls,597
+runtime,A7AL1B,runtime/a7al1b_control_latency_forensic/a7al1b_family_policy_summary.csv,6232a96,add crypto a7al neutral baseline controls,442
+runtime,A7AL1B,runtime/a7al1b_control_latency_forensic/a7al1b_manifest.json,6232a96,add crypto a7al neutral baseline controls,684
+runtime,A7AL1B,runtime/a7al1b_control_latency_forensic/a7al1b_relevant_metric_extract.csv,6232a96,add crypto a7al neutral baseline controls,33715
+runtime,A7AL1B,runtime/a7al1b_control_latency_forensic/a7al1b_signal_policy_recommendations.csv,6232a96,add crypto a7al neutral baseline controls,7561
+report,A7AL1B-CONTROL-LATENCY-FORENSIC,reports/CRYPTO_A7AL1B_CONTROL_LATENCY_FORENSIC_20260527.md,6232a96,add crypto a7al neutral baseline controls,14489
+report,A7AL2-SMALL-FORMULA-SEARCH-CONTRACT,reports/CRYPTO_A7AL2_SMALL_FORMULA_SEARCH_CONTRACT_20260527.md,6232a96,add crypto a7al neutral baseline controls,5769
+report,A7AL2G-MATCHED-CONTROL-GATE,reports/CRYPTO_A7AL2G_MATCHED_CONTROL_GATE_20260527.md,4a753fe,accept crypto v2 data and repair selector controls,11271
+report,A7AL2H-SELECTOR-REPAIR,reports/CRYPTO_A7AL2H_SELECTOR_REPAIR_20260527.md,4a753fe,accept crypto v2 data and repair selector controls,9326
+report,A7AL2I-REPLAY-PREFLIGHT,reports/CRYPTO_A7AL2I_REPLAY_PREFLIGHT_20260527.md,c525b91,add crypto a7al replay preflight and derived reset,6842
+report,A7AL2J-DERIVED-TOLERANT-SEARCH-RESET,reports/CRYPTO_A7AL2J_DERIVED_TOLERANT_SEARCH_RESET_20260527.md,c525b91,add crypto a7al replay preflight and derived reset,5199
+report,A7AL2K-DERIVED-GENERATOR-SMOKE,reports/CRYPTO_A7AL2K_DERIVED_GENERATOR_SMOKE_20260527.md,8886edb,rerun crypto a7al2p1 on repaired pool,4848
+report,A7AL2L-FAST-DERIVED-REPLAY-PREFLIGHT,reports/CRYPTO_A7AL2L_FAST_DERIVED_REPLAY_PREFLIGHT_20260527.md,40620fe,add crypto a7al2p2 local oi price contract,3279
+report,A7AL2M-DERIVED-CLUE-FORENSIC,reports/CRYPTO_A7AL2M_DERIVED_CLUE_FORENSIC_20260527.md,2214e72,add crypto derived replay preflight,5675
+report,A7AL2N-DERIVED-DEEP-AUDIT,reports/CRYPTO_A7AL2N_DERIVED_DEEP_AUDIT_20260527.md,d5ed8d2,add crypto derived clue deep audit,10773
+report,A7AL2O-CANDIDATE-MINI-REPLAY,reports/CRYPTO_A7AL2O_CANDIDATE_MINI_REPLAY_20260527.md,fa24081,add crypto candidate mini replay audit,18909
+report,A7AL2P0-PRE-SEARCH-HARDENING-AUDIT,reports/CRYPTO_A7AL2P0_PRE_SEARCH_HARDENING_AUDIT_20260527.md,eb62bda,add crypto a7al2p0 pre-search hardening audit,28052
+report,A7AL2P0R-REPAIR-RERUN-DECISION,reports/CRYPTO_A7AL2P0R_REPAIR_RERUN_DECISION_20260528.md,c7e7448,add crypto a7al2p0r repair rerun decision,10623
+report,A7AL2P1-SELECTOR-FEATURE-GENERATION,reports/CRYPTO_A7AL2P1_SELECTOR_FEATURE_GENERATION_20260528.md,40620fe,add crypto a7al2p2 local oi price contract,6264
+report,A7AL2P1R-SELECTOR-REWEIGHTED-RETRY,reports/CRYPTO_A7AL2P1R_SELECTOR_REWEIGHTED_RETRY_20260528.md,40620fe,add crypto a7al2p2 local oi price contract,28471
+report,A7AL2P1S-SELECTED-POOL-PROVENANCE-AUDIT,reports/CRYPTO_A7AL2P1S_SELECTED_POOL_PROVENANCE_AUDIT_20260528.md,40620fe,add crypto a7al2p2 local oi price contract,12743
+report,A7AL2P1T-REPAIRED-POOL-RERUN-STATUS,reports/CRYPTO_A7AL2P1T_REPAIRED_POOL_RERUN_STATUS_20260528.md,40620fe,add crypto a7al2p2 local oi price contract,6244
+report,A7AL2P2-LOCAL-OI-PRICE-SEARCH-CONTRACT,reports/CRYPTO_A7AL2P2_LOCAL_OI_PRICE_SEARCH_CONTRACT_20260528.md,40620fe,add crypto a7al2p2 local oi price contract,8315
+report,A7AL2Q-LOCAL-OI-PRICE-FORMULA-SEARCH,reports/CRYPTO_A7AL2Q_LOCAL_OI_PRICE_FORMULA_SEARCH_20260528.md,ce085c8,run crypto a7al2q local oi price search,13988
+report,A7AL2R-LOCAL-FORENSIC,reports/CRYPTO_A7AL2R_LOCAL_FORENSIC_20260528.md,11eda7f,add crypto a7al2r local forensic,12403
+report,A7AL2S-COMPANY-FULL-FOLLOWUP-CONTRACT,reports/CRYPTO_A7AL2S_COMPANY_FULL_FOLLOWUP_CONTRACT_20260528.md,7e34b48,add company a7al2s2t and selector repair contract,18401
+report,A7AL2S-LOCAL-FOLLOWUP-CONTRACT,reports/CRYPTO_A7AL2S_LOCAL_FOLLOWUP_CONTRACT_20260528.md,2d1efd3,add crypto a7al2s followup contract,9077
+report,A7AL2T-COMPANY-MAY-STRESS-FAILURE-ATTRIBUTION,reports/CRYPTO_A7AL2T_COMPANY_MAY_STRESS_FAILURE_ATTRIBUTION_20260528.md,7e34b48,add company a7al2s2t and selector repair contract,54757
+report,A7AL2T-MAY-STRESS-FAILURE-ATTRIBUTION,reports/CRYPTO_A7AL2T_MAY_STRESS_FAILURE_ATTRIBUTION_20260528.md,c8cb2ae,add crypto a7al2t may stress attribution,26146
+report,A7AL2U-OBJECTIVE-SELECTOR-REPAIR-CONTRACT,reports/CRYPTO_A7AL2U_OBJECTIVE_SELECTOR_REPAIR_CONTRACT_20260528.md,7e34b48,add company a7al2s2t and selector repair contract,12371
+report,A7AL2V-REPLAY-AWARE-SELECTOR-DRYRUN,reports/CRYPTO_A7AL2V_REPLAY_AWARE_SELECTOR_DRYRUN_20260528.md,52b6e46,add crypto shared pool and selector dryrun,6444
+report,A7AL2W-SIGNAL-VECTOR-SELECTOR-REPAIR,reports/CRYPTO_A7AL2W_SIGNAL_VECTOR_SELECTOR_REPAIR_20260528.md,9394520,add crypto signal vector selector repair,6082
+report,A7AL2X-OBJECTIVE-FAMILY-RESET-CONTRACT,reports/CRYPTO_A7AL2X_OBJECTIVE_FAMILY_RESET_CONTRACT_20260528.md,5ae8e75,add crypto a7al2x objective family reset,10982
+report,A7AL2X0-AUTHORIZATION-ARBITRATION,reports/CRYPTO_A7AL2X0_AUTHORIZATION_ARBITRATION_20260528.md,91ded54,add crypto a7al2x0 authorization arbitration,10391
+report,A7AL2X1-DRY-RERANK,reports/CRYPTO_A7AL2X1_DRY_RERANK_20260529.md,897bc41,add crypto a7al2x1 dry rerank,3587
+report,A7AL2X2-OBJECTIVE-FAMILY-COVERAGE-GAP-AUDIT,reports/CRYPTO_A7AL2X2_OBJECTIVE_FAMILY_COVERAGE_GAP_AUDIT_20260529.md,f6fff13,add crypto a7al2x2 coverage gap audit,12688
+report,A7AL2X2R0-FAMILY-BALANCED-GENERATOR-REPAIR-CONTRACT,reports/CRYPTO_A7AL2X2R0_FAMILY_BALANCED_GENERATOR_REPAIR_CONTRACT_20260529.md,ea2204d,add crypto a7al2x4m materialization audit,14078
+report,A7AL2X2R1-SHARED-POOL-REBUILD-CONTRACT,reports/CRYPTO_A7AL2X2R1_SHARED_POOL_REBUILD_CONTRACT_20260529.md,ea2204d,add crypto a7al2x4m materialization audit,4647
+report,A7AL2X3-FAMILY-BALANCED-DRY-GENERATION-SMOKE,reports/CRYPTO_A7AL2X3_FAMILY_BALANCED_DRY_GENERATION_SMOKE_20260529.md,b178c78,add crypto a7al2x5 evaluator preflight smoke,16041
+report,A7AL2X4-REPLAY-READINESS-AUDIT,reports/CRYPTO_A7AL2X4_REPLAY_READINESS_AUDIT_20260529.md,b178c78,add crypto a7al2x5 evaluator preflight smoke,9809
+report,A7AL2X4M-MATERIALIZATION-AND-EVALUATOR-AUDIT,reports/CRYPTO_A7AL2X4M_MATERIALIZATION_AND_EVALUATOR_AUDIT_20260529.md,b178c78,add crypto a7al2x5 evaluator preflight smoke,13984
+report,A7AL2X5-EVALUATOR-PREFLIGHT-SMOKE,reports/CRYPTO_A7AL2X5_EVALUATOR_PREFLIGHT_SMOKE_20260529.md,b178c78,add crypto a7al2x5 evaluator preflight smoke,27431
+report,A7AL2X6-SMALL-NUMERIC-REPLAY-CONTRACT,reports/CRYPTO_A7AL2X6_SMALL_NUMERIC_REPLAY_CONTRACT_20260529.md,0c94624,add crypto a7al2x7 small replay preflight,6286
+report,A7AL2X7-SMALL-NUMERIC-REPLAY-PREFLIGHT,reports/CRYPTO_A7AL2X7_SMALL_NUMERIC_REPLAY_PREFLIGHT_20260529.md,0c94624,add crypto a7al2x7 small replay preflight,25890
+report,A7AL2X7F-REPLAY-PREFLIGHT-FORENSIC,reports/CRYPTO_A7AL2X7F_REPLAY_PREFLIGHT_FORENSIC_20260529.md,a273d5a,add crypto a7al2x7f replay forensic,19593
+report,A7AL2X7H-HEAVY-NUMERIC-REPLAY-PREFLIGHT,reports/CRYPTO_A7AL2X7H_HEAVY_NUMERIC_REPLAY_PREFLIGHT_20260529.md,534951b,add crypto a7al2x7h heavy replay preflight,42391
+report,A7AL2X7HF-HEAVY-REPLAY-PREFLIGHT-FORENSIC,reports/CRYPTO_A7AL2X7HF_HEAVY_REPLAY_PREFLIGHT_FORENSIC_20260529.md,534951b,add crypto a7al2x7h heavy replay preflight,33921
+report,A7AL2Z0-BROADER-NON-OI-OBJECTIVE-CONTRACT,reports/CRYPTO_A7AL2Z0_BROADER_NON_OI_OBJECTIVE_CONTRACT_20260529.md,48d205b,add crypto a7al2z broader non oi diagnostics,8028
+report,A7AL2Z1-BROADER-NON-OI-DRY-GENERATION,reports/CRYPTO_A7AL2Z1_BROADER_NON_OI_DRY_GENERATION_20260529.md,48d205b,add crypto a7al2z broader non oi diagnostics,14707
+report,A7AL2Z2-BROADER-NON-OI-MATERIALIZATION-AUDIT,reports/CRYPTO_A7AL2Z2_BROADER_NON_OI_MATERIALIZATION_AUDIT_20260529.md,48d205b,add crypto a7al2z broader non oi diagnostics,33380
+report,A7AL2Z2R-BROADER-NON-OI-MATERIALIZATION-REPAIR,reports/CRYPTO_A7AL2Z2R_BROADER_NON_OI_MATERIALIZATION_REPAIR_20260529.md,48d205b,add crypto a7al2z broader non oi diagnostics,55907
+report,A7AL2Z3-BROADER-NON-OI-NUMERIC-PREFLIGHT-CONTRACT,reports/CRYPTO_A7AL2Z3_BROADER_NON_OI_NUMERIC_PREFLIGHT_CONTRACT_20260529.md,48d205b,add crypto a7al2z broader non oi diagnostics,2584
+report,A7AL2Z4-BROADER-NON-OI-NUMERIC-REPLAY-PREFLIGHT,reports/CRYPTO_A7AL2Z4_BROADER_NON_OI_NUMERIC_REPLAY_PREFLIGHT_20260529.md,48d205b,add crypto a7al2z broader non oi diagnostics,79379
+report,A7AL2Z4F-BROADER-NON-OI-PREFLIGHT-FORENSIC,reports/CRYPTO_A7AL2Z4F_BROADER_NON_OI_PREFLIGHT_FORENSIC_20260529.md,48d205b,add crypto a7al2z broader non oi diagnostics,16025
+report,A7AL2Z5-BROADER-NON-OI-MULTI-HORIZON-DIAGNOSTIC,reports/CRYPTO_A7AL2Z5_BROADER_NON_OI_MULTI_HORIZON_DIAGNOSTIC_20260529.md,48d205b,add crypto a7al2z broader non oi diagnostics,79511
+report,A7AL2Z6-RESPONSE-GUIDED-MUTATION-CONTRACT,reports/CRYPTO_A7AL2Z6_RESPONSE_GUIDED_MUTATION_CONTRACT_20260529.md,dd9549c,add crypto a7al2z response guided diagnostics,16447
+report,A7AL2Z7-RESPONSE-GUIDED-DRY-GENERATION,reports/CRYPTO_A7AL2Z7_RESPONSE_GUIDED_DRY_GENERATION_20260529.md,dd9549c,add crypto a7al2z response guided diagnostics,19778
+report,A7AL2Z8-RESPONSE-GUIDED-MATERIALIZATION-REPAIR,reports/CRYPTO_A7AL2Z8_RESPONSE_GUIDED_MATERIALIZATION_REPAIR_20260529.md,dd9549c,add crypto a7al2z response guided diagnostics,36444
+report,A7AL2Z8P-PARTIAL-VIABLE-QUEUE-AUTHORIZATION,reports/CRYPTO_A7AL2Z8P_PARTIAL_VIABLE_QUEUE_AUTHORIZATION_20260529.md,dd9549c,add crypto a7al2z response guided diagnostics,10399
+report,A7AL2Z9-RESPONSE-GUIDED-PARTIAL-NUMERIC-DIAGNOSTIC,reports/CRYPTO_A7AL2Z9_RESPONSE_GUIDED_PARTIAL_NUMERIC_DIAGNOSTIC_20260529.md,dd9549c,add crypto a7al2z response guided diagnostics,60055
+report,A7AM0-UNIVERSE498-FEATURE-SYMBOL-CONTRACT,reports/CRYPTO_A7AM0_UNIVERSE498_FEATURE_SYMBOL_CONTRACT_20260526.md,b4af964,abolish fixed delay stress in crypto latency policy,15009
+runtime,A7AO,runtime/a7ao_okx_cross_exchange_light_acceptance/a7ao0_field_contract.csv,ce2155d,accept okx cross exchange light sample,1327
+runtime,A7AO,runtime/a7ao_okx_cross_exchange_light_acceptance/a7ao0_manifest_summary.csv,ce2155d,accept okx cross exchange light sample,173
+runtime,A7AO,runtime/a7ao_okx_cross_exchange_light_acceptance/a7ao0_okx_dataset_quality.csv,ce2155d,accept okx cross exchange light sample,437
+runtime,A7AO,runtime/a7ao_okx_cross_exchange_light_acceptance/a7ao0_symbol_coverage.csv,ce2155d,accept okx cross exchange light sample,9228
+runtime,A7AO,runtime/a7ao_okx_cross_exchange_light_acceptance/a7ao1_alignment_summary.csv,ce2155d,accept okx cross exchange light sample,2318
+runtime,A7AO,runtime/a7ao_okx_cross_exchange_light_acceptance/a7ao_manifest.json,ce2155d,accept okx cross exchange light sample,1651
+report,A7AO0-OKX-CROSS-EXCHANGE-LIGHT-ACCEPTANCE,reports/CRYPTO_A7AO0_OKX_CROSS_EXCHANGE_LIGHT_ACCEPTANCE_20260526.md,ce2155d,accept okx cross exchange light sample,31595
+report,A7AO1-OKX-BINANCE-SPREAD-ALIGNMENT-SAMPLE,reports/CRYPTO_A7AO1_OKX_BINANCE_SPREAD_ALIGNMENT_SAMPLE_20260526.md,ce2155d,accept okx cross exchange light sample,4721
+runtime,A7AP0,runtime/a7ap0_cross_exchange_overlay_acceptance/a7ap0_coverage_summary.csv,12c436b,audit crypto okx binance cross exchange overlay,46
+runtime,A7AP0,runtime/a7ap0_cross_exchange_overlay_acceptance/a7ap0_field_contract_audit.csv,12c436b,audit crypto okx binance cross exchange overlay,584
+runtime,A7AP0,runtime/a7ap0_cross_exchange_overlay_acceptance/a7ap0_field_quality.csv,12c436b,audit crypto okx binance cross exchange overlay,1376
+runtime,A7AP0,runtime/a7ap0_cross_exchange_overlay_acceptance/a7ap0_manifest.json,12c436b,audit crypto okx binance cross exchange overlay,1827
+runtime,A7AP0,runtime/a7ap0_cross_exchange_overlay_acceptance/a7ap0_manifest_summary.csv,12c436b,audit crypto okx binance cross exchange overlay,24
+runtime,A7AP0,runtime/a7ap0_cross_exchange_overlay_acceptance/a7ap0_price_scale_audit.csv,12c436b,audit crypto okx binance cross exchange overlay,23650
+runtime,A7AP0,runtime/a7ap0_cross_exchange_overlay_acceptance/a7ap0_symbol_quality.csv,12c436b,audit crypto okx binance cross exchange overlay,27107
+runtime,A7AP0,runtime/a7ap0_cross_exchange_overlay_acceptance/a7ap0_timing_audit.csv,12c436b,audit crypto okx binance cross exchange overlay,235
+report,A7AP0-OKX-BINANCE-CROSS-EXCHANGE-ACCEPTANCE,reports/CRYPTO_A7AP0_OKX_BINANCE_CROSS_EXCHANGE_ACCEPTANCE_20260527.md,12c436b,audit crypto okx binance cross exchange overlay,21585
+runtime,A7AP1,runtime/a7ap1_cross_exchange_field_smoke/a7ap1_field_smoke_metrics.csv,12c436b,audit crypto okx binance cross exchange overlay,5978
+runtime,A7AP1,runtime/a7ap1_cross_exchange_field_smoke/a7ap1_manifest.json,12c436b,audit crypto okx binance cross exchange overlay,1115
+runtime,A7AP1,runtime/a7ap1_cross_exchange_field_smoke/a7ap1_signal_decisions.csv,12c436b,audit crypto okx binance cross exchange overlay,1192
+runtime,A7AP1,runtime/a7ap1_cross_exchange_field_smoke/a7ap1_timestamp_metrics.csv,12c436b,audit crypto okx binance cross exchange overlay,213442
+report,A7AP1-CROSS-EXCHANGE-FIELD-SMOKE,reports/CRYPTO_A7AP1_CROSS_EXCHANGE_FIELD_SMOKE_20260527.md,12c436b,audit crypto okx binance cross exchange overlay,12002
+runtime,A7AP2,runtime/a7ap2_multiplier_price_scale_repair/a7ap2_field_smoke_metrics.csv,4284205,repair crypto cross exchange multiplier price scale,6313
+runtime,A7AP2,runtime/a7ap2_multiplier_price_scale_repair/a7ap2_manifest.json,4284205,repair crypto cross exchange multiplier price scale,1479
+runtime,A7AP2,runtime/a7ap2_multiplier_price_scale_repair/a7ap2_price_scale_repair_audit.csv,4284205,repair crypto cross exchange multiplier price scale,39611
+runtime,A7AP2,runtime/a7ap2_multiplier_price_scale_repair/a7ap2_signal_decisions.csv,4284205,repair crypto cross exchange multiplier price scale,1254
+runtime,A7AP2,runtime/a7ap2_multiplier_price_scale_repair/a7ap2_timestamp_metrics.csv,4284205,repair crypto cross exchange multiplier price scale,229795
+report,A7AP2-MULTIPLIER-PRICE-SCALE-REPAIR,reports/CRYPTO_A7AP2_MULTIPLIER_PRICE_SCALE_REPAIR_20260527.md,4284205,repair crypto cross exchange multiplier price scale,15274
+runtime,A7AP3,runtime/a7ap3_repaired_overlay_experiment_handoff/a7ap3_authorization_matrix.csv,10a1ebd,add crypto cross exchange repaired overlay handoff,439
+runtime,A7AP3,runtime/a7ap3_repaired_overlay_experiment_handoff/a7ap3_blocked_field_aliases.csv,10a1ebd,add crypto cross exchange repaired overlay handoff,714
+runtime,A7AP3,runtime/a7ap3_repaired_overlay_experiment_handoff/a7ap3_field_use_policy.csv,10a1ebd,add crypto cross exchange repaired overlay handoff,1110
+runtime,A7AP3,runtime/a7ap3_repaired_overlay_experiment_handoff/a7ap3_manifest.json,10a1ebd,add crypto cross exchange repaired overlay handoff,1328
+runtime,A7AP3,runtime/a7ap3_repaired_overlay_experiment_handoff/a7ap3_next_work_queue.csv,10a1ebd,add crypto cross exchange repaired overlay handoff,447
+report,A7AP3-REPAIRED-OVERLAY-EXPERIMENT-HANDOFF,reports/CRYPTO_A7AP3_REPAIRED_OVERLAY_EXPERIMENT_HANDOFF_20260527.md,10a1ebd,add crypto cross exchange repaired overlay handoff,5144
+runtime,A7AR-0,runtime/a7ar0_cn_engine_inheritance_audit/a7ar0_adapter_plan.csv,b4af964,abolish fixed delay stress in crypto latency policy,1037
+runtime,A7AR-0,runtime/a7ar0_cn_engine_inheritance_audit/a7ar0_cn_component_inventory.csv,6199a9b,add crypto cn engine inheritance adapter smoke,4005
+runtime,A7AR-0,runtime/a7ar0_cn_engine_inheritance_audit/a7ar0_crypto_gap_matrix.csv,6199a9b,add crypto cn engine inheritance adapter smoke,2429
+runtime,A7AR-0,runtime/a7ar0_cn_engine_inheritance_audit/a7ar0_decision_record.json,6199a9b,add crypto cn engine inheritance adapter smoke,1278
+runtime,A7AR-0,runtime/a7ar0_cn_engine_inheritance_audit/a7ar0_forbidden_inheritance.csv,6199a9b,add crypto cn engine inheritance adapter smoke,620
+runtime,A7AR-0,runtime/a7ar0_cn_engine_inheritance_audit/a7ar0_manifest.json,6199a9b,add crypto cn engine inheritance adapter smoke,615
+runtime,A7AR-0,runtime/a7ar0_cn_engine_inheritance_audit/a7ar0_memory_policy.csv,6199a9b,add crypto cn engine inheritance adapter smoke,654
+runtime,A7AR-1,runtime/a7ar1_formula_engine_adapter_smoke/a7ar1_decision_record.json,6199a9b,add crypto cn engine inheritance adapter smoke,452
+runtime,A7AR-1,runtime/a7ar1_formula_engine_adapter_smoke/a7ar1_family_counts.csv,f481314,repair crypto formula motif diversity for selector,179
+runtime,A7AR-1,runtime/a7ar1_formula_engine_adapter_smoke/a7ar1_field_family_counts.csv,f481314,repair crypto formula motif diversity for selector,131
+runtime,A7AR-1,runtime/a7ar1_formula_engine_adapter_smoke/a7ar1_generated_candidates.csv,f481314,repair crypto formula motif diversity for selector,230847
+runtime,A7AR-1,runtime/a7ar1_formula_engine_adapter_smoke/a7ar1_manifest.json,6199a9b,add crypto cn engine inheritance adapter smoke,882
+runtime,A7AR-1,runtime/a7ar1_formula_engine_adapter_smoke/a7ar1_memory_reset_audit.csv,6199a9b,add crypto cn engine inheritance adapter smoke,164
+runtime,A7AR-1,runtime/a7ar1_formula_engine_adapter_smoke/a7ar1_operator_counts.csv,f481314,repair crypto formula motif diversity for selector,112
+runtime,A7AR-1,runtime/a7ar1_formula_engine_adapter_smoke/a7ar1_validation_audit.csv,f481314,repair crypto formula motif diversity for selector,47073
+runtime,A7AR-2,runtime/a7ar2_feature_algebra_parity_smoke/a7ar2_candidate_eval_metrics.csv,f481314,repair crypto formula motif diversity for selector,18845
+runtime,A7AR-2,runtime/a7ar2_feature_algebra_parity_smoke/a7ar2_control_eval_audit.csv,f481314,repair crypto formula motif diversity for selector,17529
+runtime,A7AR-2,runtime/a7ar2_feature_algebra_parity_smoke/a7ar2_decision_record.json,f481314,repair crypto formula motif diversity for selector,500
+runtime,A7AR-2,runtime/a7ar2_feature_algebra_parity_smoke/a7ar2_family_summary.csv,f481314,repair crypto formula motif diversity for selector,378
+runtime,A7AR-2,runtime/a7ar2_feature_algebra_parity_smoke/a7ar2_field_contract_audit.csv,f481314,repair crypto formula motif diversity for selector,3609
+runtime,A7AR-2,runtime/a7ar2_feature_algebra_parity_smoke/a7ar2_manifest.json,ae45e2a,add crypto feature algebra and memory adapter smokes,1063
+runtime,A7AR-2,runtime/a7ar2_feature_algebra_parity_smoke/a7ar2_timing_audit.csv,ae45e2a,add crypto feature algebra and memory adapter smokes,192
+runtime,A7AR-3,runtime/a7ar3_fresh_memory_dedup_smoke/a7ar3_decision_record.json,f481314,repair crypto formula motif diversity for selector,559
+runtime,A7AR-3,runtime/a7ar3_fresh_memory_dedup_smoke/a7ar3_duplicate_events.csv,ae45e2a,add crypto feature algebra and memory adapter smokes,33
+runtime,A7AR-3,runtime/a7ar3_fresh_memory_dedup_smoke/a7ar3_family_counts.csv,f481314,repair crypto formula motif diversity for selector,181
+runtime,A7AR-3,runtime/a7ar3_fresh_memory_dedup_smoke/a7ar3_manifest.json,ae45e2a,add crypto feature algebra and memory adapter smokes,398
+runtime,A7AR-3,runtime/a7ar3_fresh_memory_dedup_smoke/a7ar3_memory_records.csv,f481314,repair crypto formula motif diversity for selector,305071
+runtime,A7AR-3,runtime/a7ar3_fresh_memory_dedup_smoke/a7ar3_production_key_counts.csv,f481314,repair crypto formula motif diversity for selector,29221
+runtime,A7AR-3,runtime/a7ar3_fresh_memory_dedup_smoke/a7ar3_skeleton_repeat_events_soft.csv,f481314,repair crypto formula motif diversity for selector,73677
+runtime,A7AR-3,runtime/a7ar3_fresh_memory_dedup_smoke/crypto_search_memory_fresh_v1.json,f481314,repair crypto formula motif diversity for selector,745354
+runtime,A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_authorization_matrix.json,f481314,repair crypto formula motif diversity for selector,435
+runtime,A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_family_cap_audit.csv,f481314,repair crypto formula motif diversity for selector,351
+runtime,A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_latency_policy_audit.csv,f481314,repair crypto formula motif diversity for selector,294
+runtime,A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_manifest.json,f481314,repair crypto formula motif diversity for selector,1018
+runtime,A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_memory_dedup_audit.csv,f481314,repair crypto formula motif diversity for selector,149
+runtime,A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_negative_control_readiness.csv,f481314,repair crypto formula motif diversity for selector,358
+runtime,A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_quota_summary.csv,f481314,repair crypto formula motif diversity for selector,1029
+runtime,A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_reject_reason_summary.csv,f481314,repair crypto formula motif diversity for selector,137
+runtime,A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_selection_trace.csv,f481314,repair crypto formula motif diversity for selector,466296
+runtime,A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_skeleton_diversity_audit.csv,f481314,repair crypto formula motif diversity for selector,334
+runtime,A7AR-6,runtime/a7ar6_cn_mature_chain_parity_gap_audit/a7ar6_action_plan.csv,b58ad78,add crypto cn mature chain parity audit,1293
+runtime,A7AR-6,runtime/a7ar6_cn_mature_chain_parity_gap_audit/a7ar6_chain_node_comparison.csv,b58ad78,add crypto cn mature chain parity audit,1804
+runtime,A7AR-6,runtime/a7ar6_cn_mature_chain_parity_gap_audit/a7ar6_gap_matrix.csv,b58ad78,add crypto cn mature chain parity audit,2603
+runtime,A7AR-6,runtime/a7ar6_cn_mature_chain_parity_gap_audit/a7ar6_manifest.json,b58ad78,add crypto cn mature chain parity audit,1370
+runtime,A7AR-7,runtime/a7ar7_shared_candidate_pool/a7ar7_authorization_matrix.csv,52b6e46,add crypto shared pool and selector dryrun,496
+runtime,A7AR-7,runtime/a7ar7_shared_candidate_pool/a7ar7_decision_summary.csv,52b6e46,add crypto shared pool and selector dryrun,586
+runtime,A7AR-7,runtime/a7ar7_shared_candidate_pool/a7ar7_manifest.json,52b6e46,add crypto shared pool and selector dryrun,782
+runtime,A7AR-7,runtime/a7ar7_shared_candidate_pool/a7ar7_provenance_audit.csv,52b6e46,add crypto shared pool and selector dryrun,615
+runtime,A7AR-7,runtime/a7ar7_shared_candidate_pool/a7ar7_shared_candidate_pool.csv,52b6e46,add crypto shared pool and selector dryrun,2015110
+runtime,A7AR-7,runtime/a7ar7_shared_candidate_pool/a7ar7_stage_summary.csv,52b6e46,add crypto shared pool and selector dryrun,102
+runtime,A7AR-7,runtime/a7ar7_shared_candidate_pool/a7ar7_stale_artifact_audit.csv,52b6e46,add crypto shared pool and selector dryrun,370
+runtime,A7AR-8,runtime/a7ar8_signal_vector_cluster_registry/a7ar8_authorization_matrix.csv,55f40b9,add crypto signal vector cluster registry,481
+runtime,A7AR-8,runtime/a7ar8_signal_vector_cluster_registry/a7ar8_manifest.json,55f40b9,add crypto signal vector cluster registry,989
+runtime,A7AR-8,runtime/a7ar8_signal_vector_cluster_registry/a7ar8_selected_queue_diversity_audit.csv,55f40b9,add crypto signal vector cluster registry,223
+runtime,A7AR-8,runtime/a7ar8_signal_vector_cluster_registry/a7ar8_selected_queue_pairwise_corr.csv,55f40b9,add crypto signal vector cluster registry,550
+runtime,A7AR-8,runtime/a7ar8_signal_vector_cluster_registry/a7ar8_selected_queue_registry.csv,55f40b9,add crypto signal vector cluster registry,1875
+runtime,A7AR-8,runtime/a7ar8_signal_vector_cluster_registry/a7ar8_signal_cluster_registry.csv,55f40b9,add crypto signal vector cluster registry,43379
+runtime,A7AR-8,runtime/a7ar8_signal_vector_cluster_registry/a7ar8_signal_cluster_summary.csv,55f40b9,add crypto signal vector cluster registry,18011
+runtime,A7AR-8,runtime/a7ar8_signal_vector_cluster_registry/a7ar8_signal_vectors.csv,55f40b9,add crypto signal vector cluster registry,343236
+report,A7AR0-CN-ENGINE-INHERITANCE-AUDIT,reports/CRYPTO_A7AR0_CN_ENGINE_INHERITANCE_AUDIT_20260527.md,b4af964,abolish fixed delay stress in crypto latency policy,4000
+report,A7AR1-FORMULA-ENGINE-ADAPTER-SMOKE,reports/CRYPTO_A7AR1_FORMULA_ENGINE_ADAPTER_SMOKE_20260527.md,6199a9b,add crypto cn engine inheritance adapter smoke,873
+report,A7AR2-FEATURE-ALGEBRA-PARITY-SMOKE,reports/CRYPTO_A7AR2_FEATURE_ALGEBRA_PARITY_SMOKE_20260527.md,f481314,repair crypto formula motif diversity for selector,886
+report,A7AR3-FRESH-MEMORY-DEDUP-SMOKE,reports/CRYPTO_A7AR3_FRESH_MEMORY_DEDUP_SMOKE_20260527.md,f481314,repair crypto formula motif diversity for selector,805
+report,A7AR4-SELECTOR-ADAPTER-SMOKE,reports/CRYPTO_A7AR4_SELECTOR_ADAPTER_SMOKE_20260527.md,f481314,repair crypto formula motif diversity for selector,3408
+report,A7AR6-CN-MATURE-CHAIN-PARITY-GAP-AUDIT,reports/CRYPTO_A7AR6_CN_MATURE_CHAIN_PARITY_GAP_AUDIT_20260528.md,b58ad78,add crypto cn mature chain parity audit,4905
+report,A7AR7-SHARED-CANDIDATE-POOL,reports/CRYPTO_A7AR7_SHARED_CANDIDATE_POOL_20260528.md,52b6e46,add crypto shared pool and selector dryrun,5214
+report,A7AR8-SIGNAL-VECTOR-CLUSTER-REGISTRY,reports/CRYPTO_A7AR8_SIGNAL_VECTOR_CLUSTER_REGISTRY_20260528.md,55f40b9,add crypto signal vector cluster registry,16426
+runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_base_sample_audit.csv,4a753fe,accept crypto v2 data and repair selector controls,505
+runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_base_summary.csv,4a753fe,accept crypto v2 data and repair selector controls,1194
+runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_manifest.json,4a753fe,accept crypto v2 data and repair selector controls,3620
+runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_overlay_sample_audit.csv,4a753fe,accept crypto v2 data and repair selector controls,435
+runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_overlay_summary.csv,4a753fe,accept crypto v2 data and repair selector controls,1054
+runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_overlay_timing_contract_extract.csv,4a753fe,accept crypto v2 data and repair selector controls,67
+report,A7AS0-V2-DATA-ACCEPTANCE,reports/CRYPTO_A7AS0_V2_DATA_ACCEPTANCE_20260527.md,4a753fe,accept crypto v2 data and repair selector controls,11469
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,,,172731
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,,,94134
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,,,391
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,,,75984
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,,,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,,,332
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,,,44443
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,,,302
+runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,,,18742
+runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,,,746
+runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_data_asset_inventory.csv,,,243
+runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_manifest.json,,,507
+runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_module_target_layout.json,,,987
+runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_refactor_priority.csv,,,638
+runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_report_inventory.csv,,,18116
+runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_runtime_artifact_inventory.csv,,,142119
+runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_allowed_transitions.csv,,,1223
+runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_candidate_state_machine.json,,,2942
+runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv,,,647
+runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,,,866
+runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,,,457
+runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,,,465
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,,,365
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,,,237
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,,,282
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,,,821
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,,,424
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,,,4466
+report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,,,3447
+report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,,,3875
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,,,2160
+runtime,A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,74b6285,add crypto a7x4 forensic and a7s0 contract,1035
+runtime,A7S0,runtime/a7s0_data_horizon_contract/a7s0_candidate_data_sources.csv,74b6285,add crypto a7x4 forensic and a7s0 contract,2745
+runtime,A7S0,runtime/a7s0_data_horizon_contract/a7s0_cost_lag_contract.csv,74b6285,add crypto a7x4 forensic and a7s0 contract,234
+runtime,A7S0,runtime/a7s0_data_horizon_contract/a7s0_feature_family_contract.csv,74b6285,add crypto a7x4 forensic and a7s0 contract,966
+runtime,A7S0,runtime/a7s0_data_horizon_contract/a7s0_horizon_execution_contract.csv,74b6285,add crypto a7x4 forensic and a7s0 contract,1744
+runtime,A7S0,runtime/a7s0_data_horizon_contract/a7s0_manifest.json,74b6285,add crypto a7x4 forensic and a7s0 contract,347
+runtime,A7S0,runtime/a7s0_data_horizon_contract/a7s0_panel_coverage.csv,74b6285,add crypto a7x4 forensic and a7s0 contract,1271
+runtime,A7S0,runtime/a7s0_data_horizon_contract/a7s0_pit_timestamp_contract.csv,74b6285,add crypto a7x4 forensic and a7s0 contract,1141
+report,A7S0-DATA-HORIZON-CONTRACT,reports/CRYPTO_A7S0_DATA_HORIZON_CONTRACT_20260522.md,74b6285,add crypto a7x4 forensic and a7s0 contract,16485
+report,A7S0-DATA-HORIZON-CONTRACT-SKELETON,reports/CRYPTO_A7S0_DATA_HORIZON_CONTRACT_SKELETON_20260521.md,ed156cc,add crypto a7r horizon diagnostic,2382
+runtime,A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,7fef912,add crypto a7s data availability audit,1091
+runtime,A7S1,runtime/a7s1_data_source_availability/a7s1_candidate_source_contract.csv,7fef912,add crypto a7s data availability audit,2655
+runtime,A7S1,runtime/a7s1_data_source_availability/a7s1_existing_inventory.csv,7fef912,add crypto a7s data availability audit,1746
+runtime,A7S1,runtime/a7s1_data_source_availability/a7s1_manifest.json,7fef912,add crypto a7s data availability audit,887
+runtime,A7S1,runtime/a7s1_data_source_availability/a7s1_microstructure_manifest_audit.csv,7fef912,add crypto a7s data availability audit,244
+runtime,A7S1,runtime/a7s1_data_source_availability/a7s1_panel_feature_coverage.csv,7fef912,add crypto a7s data availability audit,949
+runtime,A7S1,runtime/a7s1_data_source_availability/a7s1_pit_readiness_matrix.csv,7fef912,add crypto a7s data availability audit,1793
+runtime,A7S1,runtime/a7s1_data_source_availability/a7s1_positioning_manifest_audit.csv,7fef912,add crypto a7s data availability audit,4232
+runtime,A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,7fbc18a,accept crypto a7s1 metrics source,1365
+runtime,A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_availability_summary.csv,7fbc18a,accept crypto a7s1 metrics source,207
+runtime,A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_check_matrix.csv,7fbc18a,accept crypto a7s1 metrics source,1337
+runtime,A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_coverage_by_symbol.csv,7fbc18a,accept crypto a7s1 metrics source,834
+runtime,A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_field_contract_flat.csv,7fbc18a,accept crypto a7s1 metrics source,15400
+runtime,A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_field_contract_summary.csv,7fbc18a,accept crypto a7s1 metrics source,175
+runtime,A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_gold_panel_summary.csv,7fbc18a,accept crypto a7s1 metrics source,317
+runtime,A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_manifest.json,7fbc18a,accept crypto a7s1 metrics source,358
+runtime,A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_source_trace_summary.csv,7fbc18a,accept crypto a7s1 metrics source,336
+report,A7S1-DATA-SOURCE-AVAILABILITY-AUDIT,reports/CRYPTO_A7S1_DATA_SOURCE_AVAILABILITY_AUDIT_20260521.md,7fef912,add crypto a7s data availability audit,26877
+report,A7S1-METRICS-ACCEPTANCE-AUDIT,reports/CRYPTO_A7S1_METRICS_ACCEPTANCE_AUDIT_20260522.md,7fbc18a,accept crypto a7s1 metrics source,9161
+runtime,A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,91427b6,add crypto a7s field semantics audit,914
+runtime,A7S2,runtime/a7s2_field_semantics/a7s2_backfill_priority.csv,91427b6,add crypto a7s field semantics audit,837
+runtime,A7S2,runtime/a7s2_field_semantics/a7s2_manifest.json,91427b6,add crypto a7s field semantics audit,562
+runtime,A7S2,runtime/a7s2_field_semantics/a7s2_pit_semantics_contract.csv,91427b6,add crypto a7s field semantics audit,5049
+runtime,A7S2,runtime/a7s2_field_semantics/a7s2_source_feasibility_matrix.csv,91427b6,add crypto a7s field semantics audit,4308
+report,A7S2-FIELD-SEMANTICS-BACKFILL-FEASIBILITY,reports/CRYPTO_A7S2_FIELD_SEMANTICS_BACKFILL_FEASIBILITY_20260521.md,91427b6,add crypto a7s field semantics audit,20887
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,d663427,audit crypto a7s metrics clues,1741
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_candidate_labels.csv,d663427,audit crypto a7s metrics clues,40400
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_controls.csv,d663427,audit crypto a7s metrics clues,206695
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_deep_audit_pool.csv,d663427,audit crypto a7s metrics clues,19467
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_eval_failures.csv,d663427,audit crypto a7s metrics clues,2
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_feature_registry.csv,d663427,audit crypto a7s metrics clues,9862
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_generated_candidates.csv,d663427,audit crypto a7s metrics clues,105755
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_manifest.json,d663427,audit crypto a7s metrics clues,739
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_panel_coverage.csv,d663427,audit crypto a7s metrics clues,1195
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_selected_candidates.csv,d663427,audit crypto a7s metrics clues,41877
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_split_metrics.csv,d663427,audit crypto a7s metrics clues,810830
+runtime,A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_wide_metrics.csv,d663427,audit crypto a7s metrics clues,378649
+report,A7S2M-METRICS-REGISTRY-DIAGNOSTIC,reports/CRYPTO_A7S2M_METRICS_REGISTRY_DIAGNOSTIC_20260522.md,d663427,audit crypto a7s metrics clues,37221
+runtime,A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,d663427,audit crypto a7s metrics clues,1032
+runtime,A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_baseline_comparison.csv,d663427,audit crypto a7s metrics clues,13281
+runtime,A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_clue_registry.csv,d663427,audit crypto a7s metrics clues,1085
+runtime,A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_clue_split_metrics.csv,d663427,audit crypto a7s metrics clues,2076
+runtime,A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_concentration_summary.csv,d663427,audit crypto a7s metrics clues,231
+runtime,A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_control_detail.csv,d663427,audit crypto a7s metrics clues,3700
+runtime,A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_manifest.json,d663427,audit crypto a7s metrics clues,366
+runtime,A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_month_contribution.csv,d663427,audit crypto a7s metrics clues,5407
+runtime,A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_symbol_contribution.csv,d663427,audit crypto a7s metrics clues,14556
+runtime,A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_top_hours.csv,d663427,audit crypto a7s metrics clues,13985
+runtime,A7S3,runtime/a7s3_sample_acceptance/a7s3_acceptance_matrix.csv,5ed736c,add crypto a7s sample acceptance audit,580
+runtime,A7S3,runtime/a7s3_sample_acceptance/a7s3_aggtrades_sample_audit.csv,5ed736c,add crypto a7s sample acceptance audit,2092
+runtime,A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,5ed736c,add crypto a7s sample acceptance audit,710
+runtime,A7S3,runtime/a7s3_sample_acceptance/a7s3_manifest.json,5ed736c,add crypto a7s sample acceptance audit,739
+runtime,A7S3,runtime/a7s3_sample_acceptance/a7s3_orderbook_snapshot_audit.csv,5ed736c,add crypto a7s sample acceptance audit,746
+runtime,A7S3,runtime/a7s3_sample_acceptance/a7s3_panel_refresh_audit.csv,5ed736c,add crypto a7s sample acceptance audit,293
+runtime,A7S3,runtime/a7s3_sample_acceptance/a7s3_positioning_forward_schema_audit.csv,5ed736c,add crypto a7s sample acceptance audit,555
+report,A7S3-METRICS-CLUE-FORENSIC,reports/CRYPTO_A7S3_METRICS_CLUE_FORENSIC_20260522.md,d663427,audit crypto a7s metrics clues,34472
+report,A7S3-SAMPLE-PACKAGE-ACCEPTANCE-AUDIT,reports/CRYPTO_A7S3_SAMPLE_PACKAGE_ACCEPTANCE_AUDIT_20260521.md,5ed736c,add crypto a7s sample acceptance audit,11535
+runtime,A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,d663427,audit crypto a7s metrics clues,804
+runtime,A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_manifest.json,d663427,audit crypto a7s metrics clues,353
+runtime,A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_month_loo.csv,d663427,audit crypto a7s metrics clues,2263
+runtime,A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_robustness_summary.csv,d663427,audit crypto a7s metrics clues,1055
+runtime,A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_symbol_loo.csv,d663427,audit crypto a7s metrics clues,6864
+report,A7S4-CROWDING-ROBUSTNESS-AUDIT,reports/CRYPTO_A7S4_CROWDING_ROBUSTNESS_AUDIT_20260522.md,d663427,audit crypto a7s metrics clues,10074
+runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_append_only_rules.csv,956e38c,add crypto a7t0 forward contract,828
+runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,956e38c,add crypto a7t0 forward contract,709
+runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_forward_field_registry.csv,956e38c,add crypto a7t0 forward contract,1038
+runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_manifest.json,956e38c,add crypto a7t0 forward contract,389
+runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_observation_object_registry.csv,956e38c,add crypto a7t0 forward contract,634
+runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_output_contract.csv,956e38c,add crypto a7t0 forward contract,542
+runtime,A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_append_only_policy.csv,94f5b70,add crypto a7t forward telemetry contract,988
+runtime,A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,94f5b70,add crypto a7t forward telemetry contract,1070
+runtime,A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_collector_schedule.csv,94f5b70,add crypto a7t forward telemetry contract,869
+runtime,A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_evidence_boundary.csv,94f5b70,add crypto a7t forward telemetry contract,660
+runtime,A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_forward_source_inventory.csv,94f5b70,add crypto a7t forward telemetry contract,1245
+runtime,A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_manifest.json,94f5b70,add crypto a7t forward telemetry contract,475
+runtime,A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_telemetry_schema_contract.csv,94f5b70,add crypto a7t forward telemetry contract,1337
+report,A7T0-FORWARD-LOCKED-OBSERVATION-CONTRACT,reports/CRYPTO_A7T0_FORWARD_LOCKED_OBSERVATION_CONTRACT_20260522.md,956e38c,add crypto a7t0 forward contract,7420
+report,A7T0-FORWARD-TELEMETRY-CONTRACT,reports/CRYPTO_A7T0_FORWARD_TELEMETRY_CONTRACT_20260522.md,94f5b70,add crypto a7t forward telemetry contract,14089
+runtime,A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,36e3efa,add crypto a7t forward health report,668
+runtime,A7T1,runtime/a7t1_forward_health_report/a7t1_forward_source_health.csv,36e3efa,add crypto a7t forward health report,928
+runtime,A7T1,runtime/a7t1_forward_health_report/a7t1_manifest.json,36e3efa,add crypto a7t forward health report,297
+runtime,A7T1,runtime/a7t1_forward_health_report/a7t1_positioning_error_detail.csv,36e3efa,add crypto a7t forward health report,117
+report,A7T1-FORWARD-HEALTH-REPORT,reports/CRYPTO_A7T1_FORWARD_HEALTH_REPORT_20260522.md,36e3efa,add crypto a7t forward health report,4751
+runtime,A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,d66bd42,add crypto a7u enhanced feature contract,1039
+runtime,A7U,runtime/a7u_enhanced_v1_acceptance/a7u_duplicate_symbol_timestamp_keys.csv,d66bd42,add crypto a7u enhanced feature contract,23
+runtime,A7U,runtime/a7u_enhanced_v1_acceptance/a7u_feature_contract.csv,d66bd42,add crypto a7u enhanced feature contract,6061
+runtime,A7U,runtime/a7u_enhanced_v1_acceptance/a7u_file_acceptance_audit.csv,d66bd42,add crypto a7u enhanced feature contract,43052
+runtime,A7U,runtime/a7u_enhanced_v1_acceptance/a7u_join_timing_contract.csv,d66bd42,add crypto a7u enhanced feature contract,716
+runtime,A7U,runtime/a7u_enhanced_v1_acceptance/a7u_manifest.json,d66bd42,add crypto a7u enhanced feature contract,751
+runtime,A7U,runtime/a7u_enhanced_v1_acceptance/a7u_manifest_traceability_audit.csv,d66bd42,add crypto a7u enhanced feature contract,1198
+report,A7U-ENHANCED-V1-ACCEPTANCE-CONTRACT,reports/CRYPTO_A7U_ENHANCED_V1_ACCEPTANCE_CONTRACT_20260522.md,d66bd42,add crypto a7u enhanced feature contract,114393
+runtime,A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,5dad490,update crypto a7u0r source trace pass,887
+runtime,A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_manifest.json,5dad490,update crypto a7u0r source trace pass,453
+runtime,A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_panel_lineage_summary.csv,ca27e0e,add crypto a7u0r source trace audit,841
+runtime,A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_source_trace_hold_rows.csv,5dad490,update crypto a7u0r source trace pass,767
+runtime,A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_symbol_month_source_trace.csv,5dad490,update crypto a7u0r source trace pass,106248
+runtime,A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_trace_by_symbol.csv,5dad490,update crypto a7u0r source trace pass,137
+runtime,A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_trace_status_summary.csv,5dad490,update crypto a7u0r source trace pass,92
+report,A7U0R-SOURCE-TRACE-AUDIT,reports/CRYPTO_A7U0R_SOURCE_TRACE_AUDIT_20260522.md,5dad490,update crypto a7u0r source trace pass,4999
+runtime,A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,0a7c50a,update source trace pass and post status,828
+runtime,A7W0,runtime/a7w0_post_source_trace_status/a7w0_manifest.json,0a7c50a,update source trace pass and post status,370
+runtime,A7W0,runtime/a7w0_post_source_trace_status/a7w0_stage_status.csv,0a7c50a,update source trace pass and post status,779
+report,A7W0-POST-SOURCE-TRACE-STATUS,reports/CRYPTO_A7W0_POST_SOURCE_TRACE_STATUS_20260522.md,0a7c50a,update source trace pass and post status,4350
+runtime,BASELINES,runtime/baselines/crypto_core4_conservative_dry_shadow_v0.json,cd052a1,initial crypto alphafactory artifacts,952
+runtime,BASELINES,runtime/baselines/crypto_core4_locked_research_book_v1.json,cd052a1,initial crypto alphafactory artifacts,4109
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/COMPANY_FULL_RUN_SUMMARY.md,f2f8c3b,add company a7al2q2r full run artifacts,1204
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/logs/a7al2q2r_company_full_20260528.err.log,f2f8c3b,add company a7al2q2r full run artifacts,3
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/logs/a7al2q2r_company_full_20260528.out.log,f2f8c3b,add company a7al2q2r full run artifacts,11857
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/reports/CRYPTO_A7AL2Q_LOCAL_OI_PRICE_FORMULA_SEARCH_20260528.md,f2f8c3b,add company a7al2q2r full run artifacts,10477
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/reports/CRYPTO_A7AL2R_LOCAL_FORENSIC_20260528.md,f2f8c3b,add company a7al2q2r full run artifacts,19256
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_candidate_scoreboard.csv,f2f8c3b,add company a7al2q2r full run artifacts,87187
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_control_dominance.csv,f2f8c3b,add company a7al2q2r full run artifacts,220450
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_cost_proxy.csv,f2f8c3b,add company a7al2q2r full run artifacts,911896
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_decision_record.json,f2f8c3b,add company a7al2q2r full run artifacts,407
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_deep_audit_scoreboard.csv,f2f8c3b,add company a7al2q2r full run artifacts,10420
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_eval_errors.csv,f2f8c3b,add company a7al2q2r full run artifacts,2
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_executed_fast_replay_candidates.csv,f2f8c3b,add company a7al2q2r full run artifacts,48800
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_fast_replay_metrics.csv,f2f8c3b,add company a7al2q2r full run artifacts,1385870
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_generated_candidates.csv,f2f8c3b,add company a7al2q2r full run artifacts,1508959
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_latency_label_alignment.csv,f2f8c3b,add company a7al2q2r full run artifacts,10969
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_manifest.json,f2f8c3b,add company a7al2q2r full run artifacts,2019
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_nonoverlap_offset_tstats.csv,f2f8c3b,add company a7al2q2r full run artifacts,2
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_overlap_robust_tstats.csv,f2f8c3b,add company a7al2q2r full run artifacts,2
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_reject_reason_summary.csv,f2f8c3b,add company a7al2q2r full run artifacts,98
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_selected_for_fast_replay.csv,f2f8c3b,add company a7al2q2r full run artifacts,48800
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2q_local_oi_price_formula_search/a7al2q_timevarying_latent_metrics.csv,f2f8c3b,add company a7al2q2r full run artifacts,2
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_control_dominance.csv,f2f8c3b,add company a7al2q2r full run artifacts,19776
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_decision_record.csv,f2f8c3b,add company a7al2q2r full run artifacts,2513
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_eval_errors.csv,f2f8c3b,add company a7al2q2r full run artifacts,2
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_input_candidates.csv,f2f8c3b,add company a7al2q2r full run artifacts,9106
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_latent_state_contribution.csv,f2f8c3b,add company a7al2q2r full run artifacts,50148
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_manifest.json,f2f8c3b,add company a7al2q2r full run artifacts,1785
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_month_contribution.csv,f2f8c3b,add company a7al2q2r full run artifacts,21195
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_nonoverlap_offset_tstats.csv,f2f8c3b,add company a7al2q2r full run artifacts,128809
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_orientation_audit.csv,f2f8c3b,add company a7al2q2r full run artifacts,1272
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_overlap_robust_tstats.csv,f2f8c3b,add company a7al2q2r full run artifacts,7173
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_symbol_contribution.csv,f2f8c3b,add company a7al2q2r full run artifacts,51958
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_timevarying_latent_metrics.csv,f2f8c3b,add company a7al2q2r full run artifacts,17318
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_top_gain_loss_hours.csv,f2f8c3b,add company a7al2q2r full run artifacts,108808
+runtime,COMPANY-A7AL2Q2R-FULL,runtime/company_a7al2q2r_full_20260528/runtime/a7al2r_local_forensic/a7al2r_variant_metrics.csv,f2f8c3b,add company a7al2q2r full run artifacts,241038

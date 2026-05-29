@@ -1,0 +1,117 @@
+{
+  "allowed_transitions": [
+    {
+      "condition": "static and field-contract valid",
+      "from": "generated",
+      "to": "materialized"
+    },
+    {
+      "condition": "evaluator parity and PIT contract pass",
+      "from": "materialized",
+      "to": "fast_replayed"
+    },
+    {
+      "condition": "negative controls weaker",
+      "from": "fast_replayed",
+      "to": "control_clean"
+    },
+    {
+      "condition": "latent/liquidity/meme/beta neutral survival",
+      "from": "control_clean",
+      "to": "neutralization_clean"
+    },
+    {
+      "condition": "field-native latency pass",
+      "from": "neutralization_clean",
+      "to": "latency_clean"
+    },
+    {
+      "condition": "non-overlap or robust tstat pass",
+      "from": "latency_clean",
+      "to": "overlap_robust"
+    },
+    {
+      "condition": "signal-vector and formula cluster registered",
+      "from": "overlap_robust",
+      "to": "cluster_registered"
+    },
+    {
+      "condition": "deep audit selected under caps",
+      "from": "cluster_registered",
+      "to": "deep_audited"
+    },
+    {
+      "condition": "diagnostic-only evidence",
+      "from": "deep_audited",
+      "to": "diagnostic_clue"
+    },
+    {
+      "condition": "all promotion gates pass",
+      "from": "deep_audited",
+      "to": "research_candidate"
+    },
+    {
+      "condition": "only as weak prior for a new contract",
+      "from": "diagnostic_clue",
+      "to": "generated"
+    },
+    {
+      "condition": "explicit future authorization only",
+      "from": "research_candidate",
+      "to": "paper_candidate"
+    },
+    {
+      "condition": "explicit future authorization only",
+      "from": "paper_candidate",
+      "to": "shadow_candidate"
+    },
+    {
+      "condition": "explicit future authorization only",
+      "from": "shadow_candidate",
+      "to": "live_candidate"
+    },
+    {
+      "condition": "static or role fail",
+      "from": "generated",
+      "to": "rejected"
+    },
+    {
+      "condition": "eval fail or low activity",
+      "from": "materialized",
+      "to": "rejected"
+    },
+    {
+      "condition": "control/latency/label fail",
+      "from": "fast_replayed",
+      "to": "rejected"
+    },
+    {
+      "condition": "newer arbitration or failed translation",
+      "from": "diagnostic_clue",
+      "to": "superseded"
+    },
+    {
+      "condition": "newer arbitration or failed forward test",
+      "from": "research_candidate",
+      "to": "superseded"
+    }
+  ],
+  "states": [
+    "generated",
+    "materialized",
+    "fast_replayed",
+    "control_clean",
+    "neutralization_clean",
+    "latency_clean",
+    "overlap_robust",
+    "cluster_registered",
+    "deep_audited",
+    "diagnostic_clue",
+    "research_candidate",
+    "rejected",
+    "superseded",
+    "paper_candidate",
+    "shadow_candidate",
+    "live_candidate"
+  ]
+}

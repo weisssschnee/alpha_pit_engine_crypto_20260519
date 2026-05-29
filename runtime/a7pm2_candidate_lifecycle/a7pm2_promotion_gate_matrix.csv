@@ -1,0 +1,9 @@
+gate,required_for,hard_fail_state
+field_role_enforcement,materialized,rejected
+control_dominance,control_clean,rejected
+neutralization,neutralization_clean,diagnostic_clue_or_rejected
+latency_wrong_lag,latency_clean,rejected
+overlap_robust_stats,overlap_robust,diagnostic_clue_or_rejected
+cluster_diversity,cluster_registered,diagnostic_clue
+deep_audit,research_candidate,diagnostic_clue_or_rejected
+explicit_authorization,paper/shadow/live,not_authorized

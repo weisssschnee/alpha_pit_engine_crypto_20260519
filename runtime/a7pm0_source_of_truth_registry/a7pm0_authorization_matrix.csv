@@ -1,0 +1,636 @@
+stage_id,authorization_path,authorization_key,authorization_value,authorized_bool
+A7AA-0,runtime/a7aa0_label_feature_response_contract/a7aa0_authorization_matrix.json,A7AA-0,"{""status"": ""PASS_A7AA0_LABEL_FEATURE_RESPONSE_CONTRACT_READY_FOR_A7AA1""}",False
+A7AA-0,runtime/a7aa0_label_feature_response_contract/a7aa0_authorization_matrix.json,a7aa1_primitive_response_map,"{""authorized"": true}",True
+A7AA-0,runtime/a7aa0_label_feature_response_contract/a7aa0_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AA-0,runtime/a7aa0_label_feature_response_contract/a7aa0_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AA-0,runtime/a7aa0_label_feature_response_contract/a7aa0_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AA-1,runtime/a7aa1_primitive_response_map/a7aa1_authorization_matrix.json,A7AA-1,"{""status"": ""PASS_A7AA1_PRIMITIVE_RESPONSE_CANDIDATES_FOUND_FORMULA_SEARCH_STILL_HOLD""}",False
+A7AA-1,runtime/a7aa1_primitive_response_map/a7aa1_authorization_matrix.json,a7aa2_feature_role_classification,"{""authorized"": true}",True
+A7AA-1,runtime/a7aa1_primitive_response_map/a7aa1_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AA-1,runtime/a7aa1_primitive_response_map/a7aa1_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AA-1,runtime/a7aa1_primitive_response_map/a7aa1_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AA-2,runtime/a7aa2_feature_role_classification/a7aa2_authorization_matrix.json,A7AA-2,"{""status"": ""PASS_A7AA2_FEATURE_ROLES_READY_FOR_SELECTOR_REWRITE_CONTRACT""}",False
+A7AA-2,runtime/a7aa2_feature_role_classification/a7aa2_authorization_matrix.json,a7aa3_selector_rewrite_contract,"{""authorized"": true}",True
+A7AA-2,runtime/a7aa2_feature_role_classification/a7aa2_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AA-2,runtime/a7aa2_feature_role_classification/a7aa2_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AA-2,runtime/a7aa2_feature_role_classification/a7aa2_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_authorization_matrix.json,A7AA-3,"{""status"": ""PASS_A7AA3_SELECTOR_REWRITE_CONTRACT_READY_FOR_A7AB0""}",False
+A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_authorization_matrix.json,a7ab0_selector_rewrite_dryrun_contract,"{""authorized"": true}",True
+A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AA-3,runtime/a7aa3_selector_rewrite_contract/a7aa3_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_authorization_matrix.json,A7AB-0,"{""status"": ""PASS_A7AB0_SELECTOR_REWRITE_DRYRUN_CONTRACT_READY_FOR_A7AB1""}",False
+A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_authorization_matrix.json,a7ab1_selector_rewrite_dryrun,"{""authorized"": true}",True
+A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AB-0,runtime/a7ab0_selector_rewrite_dryrun_contract/a7ab0_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_authorization_matrix.json,A7AB-1,"{""status"": ""PASS_A7AB1_SELECTOR_REWRITE_DRYRUN_READY_FOR_A7AB2_CONTRACT""}",False
+A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_authorization_matrix.json,A7AB-2_seed_constrained_micro_generation_contract,"{""authorized"": true}",True
+A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AB-1,runtime/a7ab1_selector_rewrite_dryrun/a7ab1_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_authorization_matrix.json,A7AB-2,"{""status"": ""PASS_A7AB2_SEED_CONSTRAINED_MICRO_GENERATION_CONTRACT_READY_FOR_A7AB3_DRY_GENERATION""}",False
+A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_authorization_matrix.json,A7AB-3_seed_constrained_dry_generation,"{""authorized"": true}",True
+A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_authorization_matrix.json,fast_replay,"{""authorized"": false}",False
+A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AB-2,runtime/a7ab2_seed_constrained_micro_generation_contract/a7ab2_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_authorization_matrix.json,A7AB-3,"{""status"": ""PASS_A7AB3_SEED_CONSTRAINED_DRY_GENERATION_READY_FOR_A7AB4_MATERIALIZATION_PREFLIGHT""}",False
+A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_authorization_matrix.json,A7AB-4_materialization_preflight,"{""authorized"": true}",True
+A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_authorization_matrix.json,fast_replay,"{""authorized"": false}",False
+A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AB-3,runtime/a7ab3_seed_constrained_dry_generation/a7ab3_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_authorization_matrix.json,A7AB-4,"{""status"": ""PASS_A7AB4_MATERIALIZATION_PREFLIGHT_READY_FOR_A7AB5_NUMERIC_REPLAY_CONTRACT""}",False
+A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_authorization_matrix.json,A7AB-5_numeric_replay_contract,"{""authorized"": true}",True
+A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_authorization_matrix.json,numeric_replay_execution,"{""authorized"": false}",False
+A7AB-4,runtime/a7ab4_materialization_preflight/a7ab4_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_authorization_matrix.json,A7AB-5,"{""status"": ""PASS_A7AB5_NUMERIC_REPLAY_CONTRACT_READY_FOR_A7AB6_SMALL_REPLAY_PREFLIGHT""}",False
+A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_authorization_matrix.json,A7AB-6_small_numeric_replay_preflight,"{""authorized"": true}",True
+A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_authorization_matrix.json,numeric_replay_execution_scope,"{""authorized"": true, ""horizons_h"": [1, 4], ""labels"": [""L7_ranked_future_return"", ""L1_cross_sectional_relative_return"", ""L0_raw_forward_return""], ""max_candidates"": 128, ""purpose"": ""bounded preflight only""}",True
+A7AB-5,runtime/a7ab5_numeric_replay_contract/a7ab5_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_authorization_matrix.json,A7AB-6,"{""status"": ""PASS_A7AB6_SMALL_NUMERIC_REPLAY_PREFLIGHT_CLUES_FOUND_EXECUTION_HOLD""}",False
+A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_authorization_matrix.json,A7AB-7_forensic_contract,"{""authorized"": true}",True
+A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AB-6,runtime/a7ab6_small_numeric_replay_preflight/a7ab6_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_authorization_matrix.json,A7AB-7,"{""status"": ""PASS_A7AB7_CLUE_FORENSIC_CONTRACT_READY_FOR_A7AB8""}",False
+A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_authorization_matrix.json,A7AB-8_clue_forensic_execution,"{""authorized"": true}",True
+A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AB-7,runtime/a7ab7_clue_forensic_contract/a7ab7_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_authorization_matrix.json,A7AB-8,"{""status"": ""PASS_A7AB8_FORENSIC_SURVIVORS_FOUND_EXECUTION_HOLD""}",False
+A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_authorization_matrix.json,A7AB-9_survivor_freeze_contract,"{""authorized"": true}",True
+A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AB-8,runtime/a7ab8_clue_forensic_execution/a7ab8_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_authorization_matrix.json,A7AB-9,"{""status"": ""PASS_A7AB9_SURVIVOR_FREEZE_REPRESENTATIVE_POOL_WITH_WARNINGS""}",False
+A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_authorization_matrix.json,A7AC-0_representative_forensic_contract,"{""authorized"": true}",True
+A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AB-9,runtime/a7ab9_survivor_freeze_contract/a7ab9_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_authorization_matrix.json,A7AC-0,"{""status"": ""PASS_A7AC0_REPRESENTATIVE_FORENSIC_CONTRACT_READY_FOR_A7AC1_WITH_WARNINGS""}",False
+A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_authorization_matrix.json,A7AC-1_representative_forensic_execution,"{""authorized"": true}",True
+A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AC-0,runtime/a7ac0_representative_forensic_contract/a7ac0_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_authorization_matrix.json,A7AC-1,"{""status"": ""HOLD_A7AC1_REPRESENTATIVE_FORENSIC_PARTIAL_BLOCKERS""}",False
+A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_authorization_matrix.json,A7AC-1R_representative_quarantine_contract,"{""authorized"": true}",True
+A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_authorization_matrix.json,A7AC-2_label_diversification_and_neutralization_contract,"{""authorized"": false}",False
+A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AC-1,runtime/a7ac1_representative_forensic_execution/a7ac1_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_authorization_matrix.json,A7AC-1R,"{""status"": ""PASS_A7AC1R_DIAGNOSTIC_SUBSET_FROZEN_READY_FOR_A7AC2_WITH_WARNINGS""}",False
+A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_authorization_matrix.json,A7AC-2_label_diversification_and_neutralization_contract,"{""authorized"": true}",True
+A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AC-1R,runtime/a7ac1r_representative_quarantine_contract/a7ac1r_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_authorization_matrix.json,A7AC-2,"{""status"": ""PASS_A7AC2_LABEL_DIVERSIFICATION_CONTRACT_READY_FOR_A7AC3""}",False
+A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_authorization_matrix.json,A7AC-3_label_diversification_and_neutralization_diagnostic,"{""authorized"": true}",True
+A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AC-2,runtime/a7ac2_label_diversification_contract/a7ac2_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_authorization_matrix.json,A7AC-3,"{""status"": ""HOLD_A7AC3_PARTIAL_LABEL_DIVERSIFICATION""}",False
+A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_authorization_matrix.json,A7AC-4_neutralized_representative_contract,"{""authorized"": false}",False
+A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AC-3,runtime/a7ac3_label_diversification_diagnostic/a7ac3_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_authorization_matrix.json,A7AD-0,"{""status"": ""PASS_A7AD0_RANKED_LABEL_TRANSLATION_CONTRACT_READY_FOR_A7AD1""}",False
+A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_authorization_matrix.json,A7AD-1_ranked_label_translation_audit,"{""authorized"": true}",True
+A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AD-0,runtime/a7ad0_ranked_label_translation_contract/a7ad0_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_authorization_matrix.json,A7AD-1,"{""status"": ""HOLD_A7AD1_RANKED_LABEL_TRANSLATION_TOO_NARROW""}",False
+A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_authorization_matrix.json,A7AD-2_translated_candidate_forensic_contract,"{""authorized"": false}",False
+A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AD-1,runtime/a7ad1_ranked_label_translation_audit/a7ad1_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AE-0,runtime/a7ae0_label_adequacy_extension_contract/a7ae0_authorization_matrix.json,A7AE-0,"{""status"": ""PASS_A7AE0_LABEL_ADEQUACY_EXTENSION_CONTRACT_READY_FOR_A7AE1""}",False
+A7AE-0,runtime/a7ae0_label_adequacy_extension_contract/a7ae0_authorization_matrix.json,a7ae1_label_adequacy_response_map,"{""authorized"": true}",True
+A7AE-0,runtime/a7ae0_label_adequacy_extension_contract/a7ae0_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AE-0,runtime/a7ae0_label_adequacy_extension_contract/a7ae0_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AE-0,runtime/a7ae0_label_adequacy_extension_contract/a7ae0_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_authorization_matrix.json,A7AE-1,"{""status"": ""PASS_A7AE1_NON_RANK_LABEL_RESPONSE_CANDIDATES_FOUND_SEARCH_STILL_HOLD""}",False
+A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_authorization_matrix.json,feature_role_review,"{""authorized"": true}",True
+A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AE-1,runtime/a7ae1_label_adequacy_response_map/a7ae1_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AE-2,runtime/a7ae2_label_adequacy_role_review/a7ae2_authorization_matrix.json,A7AE-2,"{""status"": ""PASS_A7AE2_LABEL_ADEQUACY_ROLES_READY_FOR_SELECTOR_REWRITE_REVIEW""}",False
+A7AE-2,runtime/a7ae2_label_adequacy_role_review/a7ae2_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AE-2,runtime/a7ae2_label_adequacy_role_review/a7ae2_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AE-2,runtime/a7ae2_label_adequacy_role_review/a7ae2_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AE-2,runtime/a7ae2_label_adequacy_role_review/a7ae2_authorization_matrix.json,selector_rewrite_review,"{""authorized"": true}",True
+A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_authorization_matrix.json,A7AF-0,"{""status"": ""PASS_A7AF0_ROLE_AWARE_SELECTOR_CONTRACT_READY_FOR_A7AF1""}",False
+A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_authorization_matrix.json,a7af1_role_aware_selector_dryrun,"{""authorized"": true}",True
+A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AF-0,runtime/a7af0_role_aware_selector_contract/a7af0_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AF-1,runtime/a7af1_role_aware_selector_dryrun/a7af1_authorization_matrix.json,A7AF-1,"{""status"": ""PASS_A7AF1_ROLE_AWARE_SELECTOR_DRYRUN_READY_FOR_A7AG0_CONTRACT""}",False
+A7AF-1,runtime/a7af1_role_aware_selector_dryrun/a7af1_authorization_matrix.json,a7ag0_role_aware_generation_contract,"{""authorized"": true}",True
+A7AF-1,runtime/a7af1_role_aware_selector_dryrun/a7af1_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AF-1,runtime/a7af1_role_aware_selector_dryrun/a7af1_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AF-1,runtime/a7af1_role_aware_selector_dryrun/a7af1_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_authorization_matrix.json,A7AG-0,"{""status"": ""PASS_A7AG0_ROLE_AWARE_GENERATION_CONTRACT_READY_FOR_A7AG1_BLUEPRINT_DRYRUN""}",False
+A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_authorization_matrix.json,a7ag1_static_blueprint_dryrun,"{""authorized"": true}",True
+A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AG-0,runtime/a7ag0_role_aware_generation_contract/a7ag0_authorization_matrix.json,numeric_replay,"{""authorized"": false}",False
+A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_authorization_matrix.json,A7AG-1,"{""status"": ""PASS_A7AG1_STATIC_BLUEPRINT_DRYRUN_READY_FOR_A7AG2_NUMERIC_REPLAY_CONTRACT""}",False
+A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_authorization_matrix.json,a7ag2_numeric_replay_contract,"{""authorized"": true}",True
+A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AG-1,runtime/a7ag1_static_blueprint_dryrun/a7ag1_authorization_matrix.json,numeric_replay_execution,"{""authorized"": false}",False
+A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_authorization_matrix.json,A7AG-2,"{""status"": ""PASS_A7AG2_NUMERIC_REPLAY_CONTRACT_READY_FOR_A7AG3_PILOT""}",False
+A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_authorization_matrix.json,a7ag3_numeric_replay_pilot,"{""authorized"": true}",True
+A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AG-2,runtime/a7ag2_numeric_replay_contract/a7ag2_authorization_matrix.json,numeric_replay_execution,"{""authorized"": false}",False
+A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_authorization_matrix.json,A7AG-3,"{""status"": ""PASS_A7AG3_NUMERIC_REPLAY_PILOT_CLUES_FOUND_EXECUTION_STILL_HOLD""}",False
+A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_authorization_matrix.json,a7ag4_forensic_contract,"{""authorized"": true}",True
+A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AG-3,runtime/a7ag3_numeric_replay_pilot/a7ag3_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AG-4,runtime/a7ag4_clue_forensic_contract/a7ag4_authorization_matrix.json,A7AG-4,"{""status"": ""PASS_A7AG4_CLUE_FORENSIC_CONTRACT_READY_FOR_A7AG5""}",False
+A7AG-4,runtime/a7ag4_clue_forensic_contract/a7ag4_authorization_matrix.json,a7ag5_clue_forensic_audit,"{""authorized"": true}",True
+A7AG-4,runtime/a7ag4_clue_forensic_contract/a7ag4_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AG-4,runtime/a7ag4_clue_forensic_contract/a7ag4_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AG-4,runtime/a7ag4_clue_forensic_contract/a7ag4_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_authorization_matrix.json,A7AG-5,"{""status"": ""HOLD_A7AG5_NO_ORDINARY_LABEL_TRANSLATION""}",False
+A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_authorization_matrix.json,a7ag6_contract,"{""authorized"": false}",False
+A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AG-5,runtime/a7ag5_clue_forensic_audit/a7ag5_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_authorization_matrix.json,authorizes_a7ai0_core12_aggtrades_experiment_contract,true,True
+A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_authorization_matrix.json,authorizes_direct_formula_search,false,False
+A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_authorization_matrix.json,authorizes_large_search,false,False
+A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_authorization_matrix.json,blockers,[],False
+A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_authorization_matrix.json,decision,"""PASS_A7AH0_CORE12_AGGTRADES_FINAL_HANDOFF_ACCEPTED""",False
+A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_authorization_matrix.json,may_policy,"""2026-05 aggTrades monthly history is not claimed; any May agg coverage is caveated and cannot be ranking/tuning proof""",False
+A7AH-0,runtime/a7ah0_core12_aggtrades_final_handoff_audit/a7ah0_authorization_matrix.json,warnings,"[""derived_agg_feature_fields_not_merged_into_final_panel_use_feature_root_or_rebuild_if_needed"", ""some_core12_symbols_have_2026_05_agg_rows; handoff says monthly May unavailable so treat May agg as forward/current-month caveat"", ""handoff_report_and_build_json_have_non_blocking_metric_discrepancies"", ""panel_has_symbol_timestamp_gaps_relative_to_global_panel_range""]",False
+A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_authorization_matrix.json,A7AH-0,"{""status"": ""PASS_A7AH0_POST_A7AG_ROLE_SPLIT_READY_FOR_A7AH1_A7AH2_CONTRACTS""}",False
+A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_authorization_matrix.json,A7AH-1_ordinary_alpha_objective_rewrite_contract,"{""authorized"": true}",True
+A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_authorization_matrix.json,A7AH-2_downside_risk_defense_forensic_contract,"{""authorized"": true}",True
+A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AH-0,runtime/a7ah0_post_a7ag_role_split_decision/a7ah0_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AH-1,runtime/a7ah1_ordinary_alpha_objective_rewrite_contract/a7ah1_authorization_matrix.json,A7AH-1,"{""status"": ""PASS_A7AH1_ORDINARY_ALPHA_OBJECTIVE_REWRITE_CONTRACT_READY_FOR_DRY_RERANK""}",False
+A7AH-1,runtime/a7ah1_ordinary_alpha_objective_rewrite_contract/a7ah1_authorization_matrix.json,a7ah1d_dry_rerank,"{""authorized"": true}",True
+A7AH-1,runtime/a7ah1_ordinary_alpha_objective_rewrite_contract/a7ah1_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AH-1,runtime/a7ah1_ordinary_alpha_objective_rewrite_contract/a7ah1_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AH-1,runtime/a7ah1_ordinary_alpha_objective_rewrite_contract/a7ah1_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AH-1D,runtime/a7ah1d_ordinary_alpha_dry_rerank/a7ah1d_authorization_matrix.json,A7AH-1D,"{""status"": ""HOLD_A7AH1D_NO_ORDINARY_ALPHA_DRY_RERANK_CANDIDATES""}",False
+A7AH-1D,runtime/a7ah1d_ordinary_alpha_dry_rerank/a7ah1d_authorization_matrix.json,a7ah1e_contract,"{""authorized"": false}",False
+A7AH-1D,runtime/a7ah1d_ordinary_alpha_dry_rerank/a7ah1d_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AH-1D,runtime/a7ah1d_ordinary_alpha_dry_rerank/a7ah1d_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AH-1D,runtime/a7ah1d_ordinary_alpha_dry_rerank/a7ah1d_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AH-2,runtime/a7ah2_downside_risk_defense_forensic_contract/a7ah2_authorization_matrix.json,A7AH-2,"{""status"": ""PASS_A7AH2_DOWNSIDE_RISK_DEFENSE_FORENSIC_CONTRACT_READY_FOR_A7AH2F""}",False
+A7AH-2,runtime/a7ah2_downside_risk_defense_forensic_contract/a7ah2_authorization_matrix.json,a7ah2f_downside_forensic_audit,"{""authorized"": true}",True
+A7AH-2,runtime/a7ah2_downside_risk_defense_forensic_contract/a7ah2_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AH-2,runtime/a7ah2_downside_risk_defense_forensic_contract/a7ah2_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AH-2,runtime/a7ah2_downside_risk_defense_forensic_contract/a7ah2_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AH-2F,runtime/a7ah2f_downside_risk_defense_forensic_audit/a7ah2f_authorization_matrix.json,A7AH-2F,"{""status"": ""PASS_A7AH2F_DOWNSIDE_RISK_DEFENSE_REVIEW_CANDIDATES_FOUND""}",False
+A7AH-2F,runtime/a7ah2f_downside_risk_defense_forensic_audit/a7ah2f_authorization_matrix.json,a7ah2g_contract,"{""authorized"": true}",True
+A7AH-2F,runtime/a7ah2f_downside_risk_defense_forensic_audit/a7ah2f_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AH-2F,runtime/a7ah2f_downside_risk_defense_forensic_audit/a7ah2f_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AH-2F,runtime/a7ah2f_downside_risk_defense_forensic_audit/a7ah2f_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_authorization_matrix.json,A7AI-F0,"{""status"": ""PASS_A7AIF0_FIELD_CONTRACT_ENFORCEMENT_LEDGER_READY_FOR_A7AIF1""}",False
+A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_authorization_matrix.json,A7AI-F1_engine_enforcement_gap_audit,"{""authorized"": true}",True
+A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AI-F0,runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_authorization_matrix.json,A7AI-F1,"{""status"": ""PASS_A7AIF1_ENGINE_ENFORCEMENT_CONNECTED""}",False
+A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_authorization_matrix.json,A7AI-F2_engine_patch_contract,"{""authorized"": false}",False
+A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AI-F1,runtime/a7aif1_engine_enforcement_gap_audit/a7aif1_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,authorizes_a7ai1_small_controlled_raw_agg_smoke,true,True
+A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,authorizes_direct_formula_search,false,False
+A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,authorizes_large_search,false,False
+A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,blockers,[],False
+A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,decision,"""PASS_A7AI0_CORE12_AGGTRADES_EXPERIMENT_CONTRACT_READY""",False
+A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,may_policy,"""May is post-selection stress only and is core3-current-month caveated; do not rank or tune on it""",False
+A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,warnings,"[""final_panel_contains_raw_enhanced_agg_fields_not_precomputed_rolling_cross_symbol_agg_features"", ""may_2026_agg_coverage_is_core3_current_month_caveat_not_core12_monthly_history"", ""A7AI0 is contract only; no replay and no alpha evidence""]",False
+A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_authorization_matrix.json,authorizes_a7ai1_small_controlled_unified_agg_smoke,true,True
+A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_authorization_matrix.json,authorizes_direct_formula_search,false,False
+A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_authorization_matrix.json,authorizes_large_search,false,False
+A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_authorization_matrix.json,blockers,[],False
+A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_authorization_matrix.json,decision,"""PASS_A7AI0R_CORE12_AGGTRADES_UNIFIED_FEATURES_READY""",False
+A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_authorization_matrix.json,may_policy,"""May stress-only and core3-current-month caveated; do not rank/tune on May""",False
+A7AI0R,runtime/a7ai0r_core12_aggtrades_unified_feature_build/a7ai0r_authorization_matrix.json,warnings,"[""May 2026 agg coverage remains core3 current-month caveated; not valid as full core12 May history"", ""This build creates experimental features from accepted raw agg fields; it is not alpha evidence""]",False
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,age_lt_30d_fixed_quota,"""10% minimum of LV smoke generation/selection slots when available; not proof promotion quota""",False
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,authorizes_a7ak_min_without_lv,false,False
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,authorizes_large_search,false,False
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,authorizes_lv1_after_user_approval,true,True
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,decision,"""PASS_A7AK_LV0_CONTRACT_READY_FOR_USER_APPROVAL""",False
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,executes_replay,false,False
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,executes_search,false,False
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,executes_state_construction,false,False
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,proof_boundary,"{""hold"": ""quality audit only"", ""listing_aware"": ""generalization/lifecycle diagnostic only until frozen state map validates"", ""modeling"": ""U_all_quality_eligible can participate in train-only latent-state research"", ""primary_proof"": ""strict_full_history remains primary proof-style universe""}",False
+A7AK,runtime/a7ak_lv0_listing_age_latent_variable_contract/a7ak_lv0_authorization_matrix.json,requires_user_approval_before_execution,true,True
+A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_authorization_matrix.json,a7al2q_local_execution,"""NOT_AUTHORIZED""",False
+A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_authorization_matrix.json,a7al2x1_dry_rerank,"""AUTHORIZED""",True
+A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_authorization_matrix.json,a7al2y_generation,"""NOT_AUTHORIZED""",False
+A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_authorization_matrix.json,alpha_proof,"""NOT_AUTHORIZED""",False
+A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_authorization_matrix.json,decision,"""PASS_A7AL2X_OBJECTIVE_FAMILY_RESET_CONTRACT_READY_FOR_A7AL2X1""",False
+A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_authorization_matrix.json,direct_oi_price_expansion,"""NOT_AUTHORIZED""",False
+A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_authorization_matrix.json,large_formula_search,"""NOT_AUTHORIZED""",False
+A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_authorization_matrix.json,same_objective_rerun,"""NOT_AUTHORIZED""",False
+A7AL-2X,runtime/a7al2x_objective_family_reset/a7al2x_authorization_matrix.json,shadow_paper_live,"""NOT_AUTHORIZED""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,a7al2p2_final_status,"""SUPERSEDED_DIAGNOSTIC_CONTRACT""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,a7al2q_local_execution,"""NOT_AUTHORIZED""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,a7al2x1_dry_rerank,"""AUTHORIZED_AFTER_A7AL2X_CONTRACT""",True
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,a7al2x_objective_family_reset_contract,"""AUTHORIZED_CONTRACT_ONLY""",True
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,alpha_proof,"""NOT_AUTHORIZED""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,decision,"""PASS_A7AL2X0_AUTHORIZATION_ARBITRATION_COMPLETE""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,direct_oi_price_expansion,"""NOT_AUTHORIZED""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,large_formula_search,"""NOT_AUTHORIZED""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,local_head_before_a7al2x0_commit,"""9394520""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,may_policy,"{""may_allowed_for_generation"": false, ""may_allowed_for_mutation"": false, ""may_allowed_for_ranking"": false, ""may_allowed_for_selector"": false, ""may_allowed_for_veto_or_attribution"": true, ""may_allowed_for_weight_update"": false}",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,origin_main_ahead_behind_before_a7al2x0_commit,"""0\t11""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,origin_main_before_a7al2x0_commit,"""40620fe""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,same_objective_rerun,"""NOT_AUTHORIZED""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,shadow_paper_live,"""NOT_AUTHORIZED""",False
+A7AL-2X0,runtime/a7al2x0_authorization_arbitration/a7al2x0_authorization_matrix.json,source_of_truth,"""local_main_after_commit_pending_remote_push""",False
+A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,authorizes_a7al2x3_family_balanced_dry_generation,"""READY_FOR_REVIEW_NOT_EXECUTION_AUTHORIZED""",True
+A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,authorizes_a7al2y_generation,"""NOT_AUTHORIZED""",False
+A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,authorizes_alpha_proof,"""NOT_AUTHORIZED""",False
+A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,authorizes_large_search,"""NOT_AUTHORIZED""",False
+A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,authorizes_shadow_paper_live,"""NOT_AUTHORIZED""",False
+A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,decision,"""PASS_A7AL2X2R_GENERATOR_AND_SHARED_POOL_REPAIR_CONTRACT_READY_FOR_A7AL2X3_REVIEW""",False
+A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,executes_generation,false,False
+A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,executes_replay,false,False
+A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,executes_search,false,False
+A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,executes_training,false,False
+A7AL-2X2R,runtime/a7al2x2r_family_balanced_repair_contract/a7al2x2r_authorization_matrix.json,requires_before_a7al2x3,"[""implement family-balanced generator quotas"", ""replace F3 overlay-only positioning with Binance historical positioning fields"", ""add F6 latent-state templates"", ""write shared-pool ledger from family-balanced dry generation output""]",False
+A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_authorization_matrix.json,a7al2x4_family_balanced_replay_preflight,"""READY_FOR_REVIEW_NOT_AUTHORIZED""",False
+A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_authorization_matrix.json,a7al2y_generation,"""NOT_AUTHORIZED""",False
+A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_authorization_matrix.json,alpha_proof,"""NOT_AUTHORIZED""",False
+A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_authorization_matrix.json,decision,"""PASS_A7AL2X3_FAMILY_BALANCED_DRY_GENERATION_LEDGER_READY_FOR_PREFLIGHT_REVIEW""",False
+A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_authorization_matrix.json,large_formula_search,"""NOT_AUTHORIZED""",False
+A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_authorization_matrix.json,reason,"""A7AL-2X3 is dry generation and ledger construction only; replay/preflight requires a separate authorization record.""",False
+A7AL-2X3,runtime/a7al2x3_family_balanced_dry_generation/a7al2x3_authorization_matrix.json,shadow_paper_live,"""NOT_AUTHORIZED""",False
+A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_authorization_matrix.json,a7al2y_generation,"""NOT_AUTHORIZED""",False
+A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_authorization_matrix.json,alpha_proof,"""NOT_AUTHORIZED""",False
+A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_authorization_matrix.json,decision,"""HOLD_A7AL2X4_REPLAY_PREFLIGHT_NOT_READY_MATERIALIZATION_REQUIRED""",False
+A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_authorization_matrix.json,large_formula_search,"""NOT_AUTHORIZED""",False
+A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_authorization_matrix.json,numeric_replay_preflight,"""NOT_AUTHORIZED""",False
+A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_authorization_matrix.json,reason,"""Current fast replay cannot honestly evaluate X3 family-balanced selected candidates until state fields and operators are materialized.""",False
+A7AL-2X4,runtime/a7al2x4_replay_readiness_audit/a7al2x4_authorization_matrix.json,shadow_paper_live,"""NOT_AUTHORIZED""",False
+A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_authorization_matrix.json,A7AL-2X4M,"{""status"": ""PASS_A7AL2X4M_READY_FOR_NUMERIC_REPLAY_PREFLIGHT_IMPLEMENTATION""}",False
+A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_authorization_matrix.json,A7AL-2Y_generation,"{""authorized"": false}",False
+A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_authorization_matrix.json,numeric_replay,"{""authorized"": false, ""reason"": ""materialization/evaluator audit only""}",False
+A7AL-2X4M,runtime/a7al2x4m_materialization_and_evaluator_audit/a7al2x4m_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_authorization_matrix.json,A7AL-2X5,"{""status"": ""PASS_A7AL2X5_EVALUATOR_PREFLIGHT_SMOKE_READY_FOR_SMALL_REPLAY_CONTRACT""}",False
+A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_authorization_matrix.json,formula_generation,"{""authorized"": false}",False
+A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_authorization_matrix.json,numeric_replay_execution,"{""authorized"": false}",False
+A7AL-2X5,runtime/a7al2x5_evaluator_preflight_smoke/a7al2x5_authorization_matrix.json,small_numeric_replay_contract,"{""authorized"": true, ""note"": ""contract only; execution still requires explicit next stage""}",True
+A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_authorization_matrix.json,authorizes_a7al2x7_small_numeric_replay_preflight,true,True
+A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_authorization_matrix.json,authorizes_formula_generation,false,False
+A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_authorization_matrix.json,authorizes_full_numeric_replay,false,False
+A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_authorization_matrix.json,authorizes_large_search,false,False
+A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_authorization_matrix.json,decision,"""PASS_A7AL2X6_SMALL_NUMERIC_REPLAY_CONTRACT_READY_FOR_A7AL2X7""",False
+A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_authorization_matrix.json,requires_x5_decision,"""PASS_A7AL2X5_EVALUATOR_PREFLIGHT_SMOKE_READY_FOR_SMALL_REPLAY_CONTRACT""",False
+A7AL-2X6,runtime/a7al2x6_small_numeric_replay_contract/a7al2x6_authorization_matrix.json,x5_decision,"""PASS_A7AL2X5_EVALUATOR_PREFLIGHT_SMOKE_READY_FOR_SMALL_REPLAY_CONTRACT""",False
+A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_authorization_matrix.json,A7AL-2X7,"{""status"": ""HOLD_A7AL2X7_NO_CLEAN_NUMERIC_PREFLIGHT_CLUES""}",False
+A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_authorization_matrix.json,formula_generation,"{""authorized"": false}",False
+A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_authorization_matrix.json,full_numeric_replay,"{""authorized"": false}",False
+A7AL-2X7,runtime/a7al2x7_small_numeric_replay_preflight/a7al2x7_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_authorization_matrix.json,A7AL-2X7F,"{""status"": ""HOLD_A7AL2X7F_OBJECTIVE_FAMILY_NUMERIC_EVIDENCE_WEAK""}",False
+A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_authorization_matrix.json,formula_generation,"{""authorized"": false}",False
+A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_authorization_matrix.json,full_numeric_replay,"{""authorized"": false}",False
+A7AL-2X7F,runtime/a7al2x7f_replay_preflight_forensic/a7al2x7f_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_authorization_matrix.json,A7AL-2X7H,"{""status"": ""HOLD_A7AL2X7_NO_CLEAN_NUMERIC_PREFLIGHT_CLUES""}",False
+A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_authorization_matrix.json,formula_generation,"{""authorized"": false}",False
+A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_authorization_matrix.json,full_numeric_replay,"{""authorized"": false}",False
+A7AL-2X7H,runtime/a7al2x7h_heavy_numeric_replay_preflight/a7al2x7h_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_authorization_matrix.json,A7AL-2X7HF,"{""status"": ""HOLD_A7AL2X7F_OBJECTIVE_FAMILY_NUMERIC_EVIDENCE_WEAK""}",False
+A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_authorization_matrix.json,formula_generation,"{""authorized"": false}",False
+A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_authorization_matrix.json,full_numeric_replay,"{""authorized"": false}",False
+A7AL-2X7HF,runtime/a7al2x7hf_heavy_replay_preflight_forensic/a7al2x7hf_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_authorization_matrix.json,A7AL-2Z0,"""PASS_A7AL2Z0_BROADER_NON_OI_OBJECTIVE_CONTRACT_READY_FOR_A7AL2Z1""",False
+A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_authorization_matrix.json,A7AL-2Z1_static_dry_generation,"""AUTHORIZED""",True
+A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_authorization_matrix.json,A7AL-2Z2_materialization_audit,"""NOT_AUTHORIZED_UNTIL_Z1_PASS""",False
+A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_authorization_matrix.json,alpha_proof,"""NOT_AUTHORIZED""",False
+A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_authorization_matrix.json,formula_search_execution,"""NOT_AUTHORIZED""",False
+A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_authorization_matrix.json,large_search,"""NOT_AUTHORIZED""",False
+A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_authorization_matrix.json,numeric_replay,"""NOT_AUTHORIZED""",False
+A7AL-2Z0,runtime/a7al2z0_broader_non_oi_objective_contract/a7al2z0_authorization_matrix.json,shadow_paper_live,"""NOT_AUTHORIZED""",False
+A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_authorization_matrix.json,A7AL-2Z1,"{""status"": ""PASS_A7AL2Z1_BROADER_NON_OI_DRY_GENERATION_READY_FOR_MATERIALIZATION_AUDIT""}",False
+A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_authorization_matrix.json,a7al2z2_materialization_audit,"{""authorized"": true}",True
+A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z1,runtime/a7al2z1_broader_non_oi_dry_generation/a7al2z1_authorization_matrix.json,numeric_replay,"{""authorized"": false}",False
+A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_authorization_matrix.json,A7AL-2Z2,"{""status"": ""HOLD_A7AL2Z2_EVAL_OR_ACTIVITY_FAILURE""}",False
+A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_authorization_matrix.json,a7al2z3_numeric_preflight_contract,"{""authorized"": false}",False
+A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z2,runtime/a7al2z2_broader_non_oi_materialization_audit/a7al2z2_authorization_matrix.json,numeric_replay_execution,"{""authorized"": false}",False
+A7AL-2Z2R,runtime/a7al2z2r_broader_non_oi_materialization_repair/a7al2z2r_authorization_matrix.json,A7AL-2Z2R,"{""status"": ""PASS_A7AL2Z2R_BROADER_NON_OI_MATERIALIZATION_REPAIR_READY_FOR_Z3_CONTRACT""}",False
+A7AL-2Z2R,runtime/a7al2z2r_broader_non_oi_materialization_repair/a7al2z2r_authorization_matrix.json,a7al2z3_numeric_preflight_contract,"{""authorized"": true}",True
+A7AL-2Z2R,runtime/a7al2z2r_broader_non_oi_materialization_repair/a7al2z2r_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z2R,runtime/a7al2z2r_broader_non_oi_materialization_repair/a7al2z2r_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z2R,runtime/a7al2z2r_broader_non_oi_materialization_repair/a7al2z2r_authorization_matrix.json,numeric_replay_execution,"{""authorized"": false}",False
+A7AL-2Z3,runtime/a7al2z3_broader_non_oi_numeric_preflight_contract/a7al2z3_authorization_matrix.json,A7AL-2Z3,"{""status"": ""PASS_A7AL2Z3_BROADER_NON_OI_NUMERIC_PREFLIGHT_CONTRACT_READY_FOR_Z4""}",False
+A7AL-2Z3,runtime/a7al2z3_broader_non_oi_numeric_preflight_contract/a7al2z3_authorization_matrix.json,a7al2z4_numeric_preflight,"{""authorized"": true}",True
+A7AL-2Z3,runtime/a7al2z3_broader_non_oi_numeric_preflight_contract/a7al2z3_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z3,runtime/a7al2z3_broader_non_oi_numeric_preflight_contract/a7al2z3_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AL-2Z3,runtime/a7al2z3_broader_non_oi_numeric_preflight_contract/a7al2z3_authorization_matrix.json,full_replay,"{""authorized"": false}",False
+A7AL-2Z3,runtime/a7al2z3_broader_non_oi_numeric_preflight_contract/a7al2z3_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_authorization_matrix.json,A7AL-2Z4,"{""status"": ""HOLD_A7AL2Z4_NO_NUMERIC_PREFLIGHT_CLUES""}",False
+A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_authorization_matrix.json,formula_generation,"{""authorized"": false}",False
+A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_authorization_matrix.json,full_numeric_replay,"{""authorized"": false}",False
+A7AL-2Z4,runtime/a7al2z4_broader_non_oi_numeric_replay_preflight/a7al2z4_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_authorization_matrix.json,A7AL-2Z4F,"{""status"": ""HOLD_A7AL2Z4F_PRE_MAY_SIGNAL_CONTROL_OR_LAG_FRAGILE""}",False
+A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z4F,runtime/a7al2z4f_broader_non_oi_preflight_forensic/a7al2z4f_authorization_matrix.json,same_pool_expansion,"{""authorized"": false}",False
+A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_authorization_matrix.json,A7AL-2Z5,"{""status"": ""HOLD_A7AL2Z5_NO_MULTI_HORIZON_PREFLIGHT_CLUES""}",False
+A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_authorization_matrix.json,full_replay,"{""authorized"": false}",False
+A7AL-2Z5,runtime/a7al2z5_broader_non_oi_multi_horizon_diagnostic/a7al2z5_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_authorization_matrix.json,A7AL-2Z6,"{""status"": ""PASS_A7AL2Z6_RESPONSE_GUIDED_MUTATION_CONTRACT_READY_FOR_Z7""}",False
+A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_authorization_matrix.json,a7al2z7_response_guided_generation,"{""authorized"": true}",True
+A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_authorization_matrix.json,full_replay,"{""authorized"": false}",False
+A7AL-2Z6,runtime/a7al2z6_response_guided_mutation_contract/a7al2z6_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_authorization_matrix.json,A7AL-2Z7,"{""status"": ""PASS_A7AL2Z7_RESPONSE_GUIDED_DRY_GENERATION_READY_FOR_Z8""}",False
+A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_authorization_matrix.json,a7al2z8_materialization_repair,"{""authorized"": true}",True
+A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_authorization_matrix.json,formula_search_execution,"{""authorized"": false}",False
+A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z7,runtime/a7al2z7_response_guided_dry_generation/a7al2z7_authorization_matrix.json,numeric_replay,"{""authorized"": false}",False
+A7AL-2Z8,runtime/a7al2z8_response_guided_materialization_repair/a7al2z8_authorization_matrix.json,A7AL-2Z8,"{""status"": ""HOLD_A7AL2Z8_REPAIR_QUOTA_OR_ACTIVITY_FAILURE""}",False
+A7AL-2Z8,runtime/a7al2z8_response_guided_materialization_repair/a7al2z8_authorization_matrix.json,a7al2z9_numeric_diagnostic,"{""authorized"": false}",False
+A7AL-2Z8,runtime/a7al2z8_response_guided_materialization_repair/a7al2z8_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z8,runtime/a7al2z8_response_guided_materialization_repair/a7al2z8_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z8,runtime/a7al2z8_response_guided_materialization_repair/a7al2z8_authorization_matrix.json,numeric_replay_execution,"{""authorized"": false}",False
+A7AL-2Z8P,runtime/a7al2z8p_partial_viable_queue_authorization/a7al2z8p_authorization_matrix.json,A7AL-2Z8P,"{""status"": ""PASS_A7AL2Z8P_PARTIAL_VIABLE_QUEUE_READY_FOR_Z9_DIAGNOSTIC""}",False
+A7AL-2Z8P,runtime/a7al2z8p_partial_viable_queue_authorization/a7al2z8p_authorization_matrix.json,a7al2z9_partial_numeric_diagnostic,"{""authorized"": true}",True
+A7AL-2Z8P,runtime/a7al2z8p_partial_viable_queue_authorization/a7al2z8p_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z8P,runtime/a7al2z8p_partial_viable_queue_authorization/a7al2z8p_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AL-2Z8P,runtime/a7al2z8p_partial_viable_queue_authorization/a7al2z8p_authorization_matrix.json,full_replay,"{""authorized"": false}",False
+A7AL-2Z8P,runtime/a7al2z8p_partial_viable_queue_authorization/a7al2z8p_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_authorization_matrix.json,A7AL-2Z9,"{""status"": ""HOLD_A7AL2Z9_NO_RESPONSE_GUIDED_PARTIAL_NUMERIC_CLUES""}",False
+A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_authorization_matrix.json,alpha_proof_shadow_paper_live,"{""authorized"": false}",False
+A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_authorization_matrix.json,full_replay,"{""authorized"": false}",False
+A7AL-2Z9,runtime/a7al2z9_response_guided_partial_numeric_diagnostic/a7al2z9_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_authorization_matrix.json,authorized,"{""a7al1_field_family_baseline"": true, ""a7al2_small_formula_search_contract_drafting"": true}",False
+A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_authorization_matrix.json,blockers,[],False
+A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_authorization_matrix.json,decision,"""PASS_A7AR4_SELECTOR_ADAPTER_SMOKE""",False
+A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search_execution"": true, ""live"": true, ""paper"": true, ""shadow"": true}",False
+A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_authorization_matrix.json,note,"""A7AR-4 selector smoke does not replace A7AL-1 field-family baseline.""",False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_feature_columns,94,False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_symbol_month_count,87,False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,authorizes_a7r_horizon_diagnostic_contract,true,True
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,authorizes_a7s1_field_availability_audit,true,True
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,blockers,[],False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,decision,"""PASS_A7S0_DATA_HORIZON_CONTRACT_READY""",False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,executes_replay,false,False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,executes_search,false,False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,forward_only_fields_allowed_for_historical_proof,false,False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,generated_at,"""2026-05-22T07:08:33Z""",False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,may_policy,"""stress_only_not_ranking_generation_threshold_or_allocation""",False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,panel_columns,184,False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,panel_exists,true,True
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,panel_rows,251148,False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,required_next,"[""A7S-1 audit any newly delivered OI/liquidation/orderbook/cross-exchange data before search"", ""A7R horizon diagnostic may run only as diagnostic, not alpha proof"", ""A7T forward-locked observation contract for forward-only fields""]",False
+A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,unified_panel,"""G:\\AlphaFactory_CryptoData\\gold\\panels\\crypto_core12_1h_with_aggtrades_features_v1.parquet""",False
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,authorizes_a7s2_field_semantics_review,true,True
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,authorizes_alpha_search,false,False
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,authorizes_data_download,false,False
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,authorizes_forward_observation_contract,true,True
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,blocking_findings,"[""open_interest_and_long_short_are_recent_forward_only_not_2024_2026_historical_proof"", ""liquidation_orderbook_cross_exchange_sources_not_found_locally"", ""spot_perp_basis_is_core6_partial_not_core12_full_universe"", ""aggTrades_microstructure_is_SOLUSDT_2026_04_pilot_only"", ""current_long_history_panel_is_same_feature_space_that_A7P_A7R_already_rejected_for_alpha_search""]",False
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,decision,"""HOLD_A7S1_NEW_DATA_NOT_READY_FOR_ALPHA_SEARCH""",False
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,executes_download,false,False
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,executes_replay,false,False
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,executes_search,false,False
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,generated_at,"""2026-05-21T01:05:38Z""",False
+A7S1,runtime/a7s1_data_source_availability/a7s1_authorization_matrix.json,required_before_download,"[""source_cost_and_access_contract"", ""PIT_timestamp_contract"", ""symbol_coverage_contract"", ""storage_cost_contract"", ""small_sample_timestamp_audit""]",False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,authorizes_controlled_metrics_diagnostics,true,True
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,authorizes_metrics_feature_registry_integration,true,True
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,blockers,[],False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,decision,"""PASS_A7S1_ACCEPTED_WITH_VENDOR_5M_WARNINGS""",False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,executes_replay,false,False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,executes_search,false,False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,generated_at,"""2026-05-22T08:24:18Z""",False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,gold_panel,"""G:\\AlphaFactory_CryptoData\\gold\\features\\binance_metrics_1h_features_v1.parquet""",False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,independent_source_fields,"[""global_long_short_account_ratio"", ""open_interest"", ""open_interest_value"", ""taker_buy_sell_volume_ratio"", ""top_long_short_account_ratio"", ""top_long_short_position_ratio""]",False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,required_next,"[""A7S-2 metrics feature registry integration and controlled diagnostics"", ""Do not classify change/zscore/interaction fields as independent sources"", ""Carry vendor 5m bucket duplicate/gap/NaN caveats downstream""]",False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,source_report,"""G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\reports\\CRYPTO_A7S1_BINANCE_METRICS_SOURCE_TRACE_20260522.md""",False
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,vendor_5m_warning_caveat_required,true,True
+A7S1,runtime/a7s1_metrics_acceptance_audit/a7s1_acceptance_authorization_matrix.json,warnings,"[""rounded_5m_bucket_duplicate_count"", ""rounded_5m_timestamp_gap_count"", ""gap_symbol_days"", ""raw_nan_count"", ""gold_nan_numeric_cells"", ""availability_nan_cells""]",False
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,authorizes_a7s3_costed_backfill_plan,true,True
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,authorizes_a7t0_forward_locked_observation_contract,true,True
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,authorizes_alpha_search,false,False
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,authorizes_data_download,false,False
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,blocking_findings,"[""official_open_interest_and_long_short_rest_history_is_short_window"", ""orderbook_depth_requires_archive_or_forward_collector"", ""liquidation_events_require_source_contract"", ""cross_exchange_sources_absent_and_need_vendor_contract"", ""aggTrades_backfill_feasible_but_storage_heavy_and_not_currently_core12_complete""]",False
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,decision,"""HOLD_A7S2_DATA_BACKFILL_CONTRACT_REQUIRED""",False
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,executes_download,false,False
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,executes_replay,false,False
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,executes_search,false,False
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,generated_at,"""2026-05-21T01:09:38Z""",False
+A7S2,runtime/a7s2_field_semantics/a7s2_authorization_matrix.json,primary_next,"""A7S3_costed_backfill_plan_or_A7T0_forward_locked_observation""",False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,authorizes_a7s3_forensic,true,True
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,authorizes_expanded_replay,false,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,authorizes_full_search,false,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,blockers,[],False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,control_contaminated_candidate_count,29,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,control_count,380,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,decision,"""PASS_A7S2M_CLEAN_CLUES_FOR_FORENSIC_HOLD_EXPANDED_REPLAY""",False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,deep_audit_count,45,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,derived_fields_are_not_independent_sources,true,True
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,executes_replay,"""small_controlled_diagnostic""",False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,executes_search,"""small_structural_generation""",False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,feature_available_time_rule,"""1h metrics feature available at hour timestamp + 1h; execute next 1h bar or later""",False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,generated_at,"""2026-05-22T08:50:59Z""",False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,generated_count,242,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,independent_source_fields,"[""open_interest"", ""open_interest_value"", ""global_long_short_account_ratio"", ""top_long_short_account_ratio"", ""top_long_short_position_ratio"", ""taker_buy_sell_volume_ratio""]",False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,may_policy,"""stress_only_not_generation_ranking_threshold_orientation_or_allocation""",False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,metric_rows,1900,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,near_miss_may_stress_fail_count,3,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,required_next,"[""A7S-3 forensic if clean clues exist; otherwise keep metrics as state/exposure features"", ""Do not expand metrics search from A7S-2M alone"", ""Carry A7S-1 vendor 5m warnings downstream""]",False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,research_clue_count,2,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,strict_replay_candidate_count,95,False
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,vendor_5m_warning_caveat_required,true,True
+A7S2M,runtime/a7s2m_metrics_registry_diagnostic/a7s2m_authorization_matrix.json,warnings,"[""rounded_5m_bucket_duplicate_count"", ""rounded_5m_timestamp_gap_count"", ""gap_symbol_days"", ""raw_nan_count"", ""gold_nan_numeric_cells"", ""availability_nan_cells"", ""control_contamination_present_in_non_clue_pool""]",False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,authorizes_a7s4_small_robustness,true,True
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,authorizes_expanded_replay,false,False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,authorizes_full_search,false,False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,blockers,[],False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,clue_count,2,False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,decision,"""PASS_A7S3_CROWDING_CLUE_FORENSIC_COMPLETE_HOLD_PROMOTION""",False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,executes_replay,"""forensic_on_a7s2m_clues_only""",False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,executes_search,false,False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,generated_at,"""2026-05-22T09:08:05Z""",False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,may_control_positive_count,2,False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,may_policy,"""stress_only_not_ranking_threshold_or_selection""",False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,recent_control_positive_count,0,False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,required_next,"[""Treat A7S2M clues as one global-long-short crowding motif"", ""A7S-4 small robustness only if continuing: symbol/month LOO and stronger matched controls"", ""No expanded search or proof promotion""]",False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,unique_family_count,1,False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,unique_formula_count,1,False
+A7S3,runtime/a7s3_metrics_clue_forensic/a7s3_authorization_matrix.json,warnings,"[""single_formula_two_horizons_not_independent"", ""single_family_crowding_motif"", ""may_control_positive_stress_only""]",False
+A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,authorizes_aggtrades_schema_join_experiment,true,True
+A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,authorizes_full_core12_aggtrades_backfill,false,False
+A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,authorizes_orderbook_forward_observation_context,true,True
+A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,authorizes_positioning_forward_observation_context,true,True
+A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,decision,"""PASS_A7S3_SAMPLE_PACKAGE_FOR_CONTRACTED_EXPERIMENTS_HOLD_ALPHA_PROOF""",False
+A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,executes_replay,false,False
+A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,executes_search,false,False
+A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,generated_at,"""2026-05-21T07:58:37Z""",False
+A7S3,runtime/a7s3_sample_acceptance/a7s3_authorization_matrix.json,required_before_full_backfill,"[""costed_storage_runtime_plan"", ""core12_monthly_manifest_plan"", ""checksum_and_repair_policy"", ""gold_join_contract_with_feature_available_time""]",False
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,authorizes_crowding_motif_expanded_replay,false,False
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,authorizes_full_search,false,False
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,authorizes_state_feature_use,true,True
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,blockers,"[""validation_recent_20bps_fail"", ""symbol_loo_fail"", ""month_loo_fail""]",False
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,decision,"""HOLD_A7S4_CROWDING_MOTIF_NOT_ROBUST""",False
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,executes_replay,"""robustness_from_a7s3_artifacts""",False
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,executes_search,false,False
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,generated_at,"""2026-05-22T09:11:11Z""",False
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,required_next,"[""Do not promote standalone global-long-short crowding motif"", ""Use metrics as state/exposure/interactions in later reset only"", ""No expanded replay from A7S-4""]",False
+A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,warnings,"[""single_formula_single_family"", ""may_control_positive_stress_only""]",False
+A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,authorizes_a7t1_forward_observation_runner_design,true,True
+A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,authorizes_historical_proof_from_forward_only_fields,false,False
+A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,blockers,[],False
+A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,decision,"""PASS_A7T0_FORWARD_LOCKED_OBSERVATION_CONTRACT_READY""",False
+A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,executes_replay,false,False
+A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,executes_search,false,False
+A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,generated_at,"""2026-05-22T07:10:45Z""",False
+A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,may_policy,"""known_stress_not_training_or_tuning_input""",False
+A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,required_next,"[""A7T-1 forward observation runner design after frozen commit/window selection"", ""A7S-1 field availability/source-trace audit for newly delivered historical fields"", ""No promotion from A7T telemetry alone""]",False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,authorizes_append_only_observation,true,True
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,authorizes_forward_telemetry_collection_design,true,True
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,authorizes_historical_alpha_proof,false,False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,authorizes_research_candidate,false,False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,blockers,"[""forward-only snapshots cannot be historical proof"", ""liquidation retention/pagination contract unresolved"", ""orderbook historical source not validated"", ""no candidate definitions are frozen in A7T-0""]",False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,decision,"""PASS_A7T0_FORWARD_TELEMETRY_CONTRACT_READY""",False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,executes_download,false,False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,executes_replay,false,False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,executes_search,false,False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,generated_at,"""2026-05-22T10:00:51Z""",False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,ready_forward_sources,2,False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,required_next,"[""Implement daily forward telemetry health report"", ""Add collector_version/schema_hash to forward manifests"", ""Keep A7AA-1 contracts for liquidation/cross-exchange historical feasibility separate""]",False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,total_forward_sources,3,False
+A7T0,runtime/a7t0_forward_telemetry_contract/a7t0_authorization_matrix.json,warnings,"[""binance_positioning_forward_5m: HOLD_FORWARD_MANIFEST_ERRORS""]",False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,authorizes_forward_telemetry_collection,true,True
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,authorizes_historical_alpha_proof,false,False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,decision,"""WARN_A7T1_FORWARD_HEALTH_STALE_SAMPLE""",False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,executes_download,false,False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,executes_replay,false,False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,executes_search,false,False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,generated_at,"""2026-05-22T10:03:23Z""",False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,hard_hold_count,0,False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,positioning_error_count,0,False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,required_next,"[""Run orderbook/cross-exchange collectors on fixed schedule if telemetry dashboard is needed"", ""Add collector_version and schema_hash to all forward manifests""]",False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,source_count,3,False
+A7T1,runtime/a7t1_forward_health_report/a7t1_authorization_matrix.json,warning_count,1,False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,authorizes_core12_claim,false,False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,authorizes_experiment_line_feature_join,true,True
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,authorizes_full_alpha_panel,false,False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,authorizes_raw_zip_direct_experiment_access,false,False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,coverage,"{""file_count"": 84, ""months"": ""2024-01..2026-04"", ""symbols"": [""BTCUSDT"", ""ETHUSDT"", ""SOLUSDT""]}",False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,decision,"""PASS_A7U_ENHANCED_V1_FEATURE_ACCEPTED_WITH_TRACEABILITY_WARNING""",False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,executes_replay,false,False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,executes_search,false,False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,generated_at,"""2026-05-21T17:48:49Z""",False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,primary_dataset,"""G:\\AlphaFactory_CryptoData\\gold\\microstructure\\aggtrades_1h_flow_enhanced_v1""",False
+A7U,runtime/a7u_enhanced_v1_acceptance/a7u_authorization_matrix.json,required_next,"[""A7U-0R consolidated raw checksum trace manifest for all 84 symbol-month files"", ""A7U-1 join enhanced_v1 to crypto 1h panel with feature_available_time"", ""A7U-2 rolling/cross-symbol feature derivation contract"", ""A7U-3 small feature smoke against existing negative controls""]",False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,agg_partition_rows,87,False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,authorizes_controlled_experiments_with_caveat,false,False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,authorizes_controlled_experiments_without_source_trace_caveat,true,True
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,authorizes_final_panel_raw_level_claim,true,True
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,blockers,[],False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,decision,"""PASS_A7U0R_SOURCE_TRACE_COMPLETE""",False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,executes_replay,false,False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,executes_search,false,False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,expected_trace_rows,87,False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,generated_at,"""2026-05-22T06:27:04Z""",False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,raw_checksum_ok_rows,87,False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,required_next,"[""A7V/A7U may reference the enhanced aggTrades panel without source_trace_incomplete caveat"", ""Alpha proof, expanded replay, shadow, paper, and live remain blocked by A7V-6/A7V-7 signal failures"", ""Rerun A7U-0R after any future aggTrades panel refresh""]",False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,source_trace_hold_rows,0,False
+A7U0R,runtime/a7u0r_source_trace_audit/a7u0r_authorization_matrix.json,source_trace_ready_rows,87,False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,authorizes_controlled_experiments_without_source_trace_caveat,true,True
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,authorizes_expanded_replay,false,False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,authorizes_full_search,false,False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,blockers,"[""a7v_signal_family_blocked""]",False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,current_a7v_activity_liquidity_family_promotable,false,False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,decision,"""PASS_A7W0_SOURCE_TRACE_RESOLVED_SIGNAL_LINE_STILL_HOLD""",False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,executes_replay,false,False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,executes_search,false,False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,generated_at,"""2026-05-22T06:29:19Z""",False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,required_next,"[""Do not expand current A7V activity/liquidity clue family"", ""Use A7U-0R PASS only as data provenance closure, not alpha evidence"", ""If continuing, define a new aggTrades objective/horizon/family redesign stage""]",False
+A7W0,runtime/a7w0_post_source_trace_status/a7w0_authorization_matrix.json,source_trace_incomplete_caveat_removed,true,True

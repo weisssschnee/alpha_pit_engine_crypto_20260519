@@ -1,0 +1,17 @@
+state,definition
+generated,formula/expression exists but has no evidence
+materialized,expression evaluated into numeric signal
+fast_replayed,candidate passed fast replay diagnostic
+control_clean,matched controls are weaker
+neutralization_clean,survives required neutralization
+latency_clean,field-native timing and wrong-lag checks pass
+overlap_robust,overlap-robust/non-overlap statistics pass
+cluster_registered,signal-vector/formula cluster recorded
+deep_audited,deep audit completed
+diagnostic_clue,diagnostic evidence only; no promotion
+research_candidate,research-stage candidate after all non-trading gates
+rejected,blocked by any hard gate
+superseded,replaced by newer source-of-truth arbitration
+paper_candidate,future paper authorization only
+shadow_candidate,future shadow authorization only
+live_candidate,future live authorization only

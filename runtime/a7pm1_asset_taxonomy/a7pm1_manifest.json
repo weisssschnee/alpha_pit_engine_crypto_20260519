@@ -1,0 +1,17 @@
+{
+  "authorizes_a7pm2": true,
+  "authorizes_a7pm3": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "code_asset_count": 151,
+  "config_count": 7,
+  "decision": "PASS_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_BUILT",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T13:53:38Z",
+  "report_count": 148,
+  "runtime_artifact_count": 1017,
+  "stage": "A7PM-1"
+}

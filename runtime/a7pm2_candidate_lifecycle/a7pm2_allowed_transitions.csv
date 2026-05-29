@@ -1,0 +1,20 @@
+from_state,to_state,condition
+generated,materialized,static and field-contract valid
+materialized,fast_replayed,evaluator parity and PIT contract pass
+fast_replayed,control_clean,negative controls weaker
+control_clean,neutralization_clean,latent/liquidity/meme/beta neutral survival
+neutralization_clean,latency_clean,field-native latency pass
+latency_clean,overlap_robust,non-overlap or robust tstat pass
+overlap_robust,cluster_registered,signal-vector and formula cluster registered
+cluster_registered,deep_audited,deep audit selected under caps
+deep_audited,diagnostic_clue,diagnostic-only evidence
+deep_audited,research_candidate,all promotion gates pass
+diagnostic_clue,generated,only as weak prior for a new contract
+research_candidate,paper_candidate,explicit future authorization only
+paper_candidate,shadow_candidate,explicit future authorization only
+shadow_candidate,live_candidate,explicit future authorization only
+generated,rejected,static or role fail
+materialized,rejected,eval fail or low activity
+fast_replayed,rejected,control/latency/label fail
+diagnostic_clue,superseded,newer arbitration or failed translation
+research_candidate,superseded,newer arbitration or failed forward test

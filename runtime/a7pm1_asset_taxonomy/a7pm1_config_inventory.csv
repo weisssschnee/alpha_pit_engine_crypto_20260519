@@ -1,0 +1,8 @@
+path,asset_kind,category,target_module,refactor_priority,bytes
+config/crypto_a7v_feature_registry_v1.json,config,feature_factory,alphafactory_crypto/features,20,3018
+config/crypto_alphafactory_bootstrap_v1.json,config,stage_entry_or_misc,manual_review,60,2014
+config/crypto_alphafactory_method_v1.json,config,stage_entry_or_misc,manual_review,60,5539
+config/crypto_cn_engine_inheritance_v1.json,config,stage_entry_or_misc,manual_review,60,2977
+config/crypto_formula_gen_v2_motif_pack_v1.json,config,formula_generator,alphafactory_crypto/generators,30,5505
+config/crypto_motif_pack_v0.yaml,config,stage_entry_or_misc,manual_review,60,1732
+config/crypto_search_memory_policy_v1.json,config,clustering,alphafactory_crypto/clustering,40,1879

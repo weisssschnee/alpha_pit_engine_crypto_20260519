@@ -1,0 +1,15 @@
+{
+  "allowed_transition_count": 19,
+  "authorizes_a7pm3": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_BUILT",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "forbidden_transition_count": 8,
+  "generated_at": "2026-05-29T13:53:58Z",
+  "stage": "A7PM-2",
+  "state_count": 16
+}

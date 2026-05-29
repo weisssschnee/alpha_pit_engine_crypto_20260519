@@ -1,0 +1,26 @@
+{
+  "a7pm0": {
+    "artifact_count": 1158,
+    "authorization_record_count": 635,
+    "authorizes_a7pm1": true,
+    "authorizes_a7pm2": true,
+    "authorizes_a7pm3": true,
+    "authorizes_alpha_proof": false,
+    "authorizes_large_search": false,
+    "authorizes_search": false,
+    "authorizes_shadow_paper_live": false,
+    "blockers": [],
+    "decision": "PASS_A7PM0_SOURCE_OF_TRUTH_REGISTRY_BUILT",
+    "executes_replay": false,
+    "executes_search": false,
+    "executes_training": false,
+    "generated_at": "2026-05-29T13:50:49Z",
+    "head": "5f7950ff7fa2b2d6656066f79142eccbeed1d6d0",
+    "head_equals_origin_main": true,
+    "origin_main": "5f7950ff7fa2b2d6656066f79142eccbeed1d6d0",
+    "stage": "A7PM-0",
+    "stage_count": 141
+  },
+  "a7pm2": {},
+  "head_equals_origin_main": true
+}

@@ -1,0 +1,14 @@
+{
+  "alphafactory_crypto/clustering": "signal-vector and formula-family clustering",
+  "alphafactory_crypto/controls": "negative controls, wrong-lag, shuffle, placebo",
+  "alphafactory_crypto/data_contracts": "PIT/source/timing/source-of-truth contracts",
+  "alphafactory_crypto/experiments": "experiment board and stage registry integration",
+  "alphafactory_crypto/features": "typed FeatureFactory and derived feature contracts",
+  "alphafactory_crypto/generators": "formula and expression generators",
+  "alphafactory_crypto/governance": "source-of-truth registry and authorization matrix",
+  "alphafactory_crypto/labels": "label construction and label adequacy",
+  "alphafactory_crypto/promotion": "candidate lifecycle and promotion gates",
+  "alphafactory_crypto/regimes": "latent and upper-regime state builders",
+  "alphafactory_crypto/replay": "materialization, evaluator, replay, parity",
+  "alphafactory_crypto/selectors": "role-aware and replay-aware selectors"
+}

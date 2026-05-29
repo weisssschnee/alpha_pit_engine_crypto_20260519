@@ -1,0 +1,2 @@
+path,asset_kind,category,target_module,refactor_priority,notes
+external_gold_and_silver_panels,data_asset,data_contracts,alphafactory_crypto/data_contracts,20,Large data stays outside git; registry should reference contracts/manifests only.

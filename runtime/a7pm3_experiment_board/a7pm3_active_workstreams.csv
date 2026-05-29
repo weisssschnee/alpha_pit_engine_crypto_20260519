@@ -1,0 +1,6 @@
+workstream,current_stage,status,next
+governance,A7PM-0/1/2/3,pass,keep registry as source-of-truth
+field_enforcement,A7AI-F0/F1,pass,A7AI-F2 regression
+replay_parity,A7AR-2 plus pending A7AI-F3,allowed_next,materialization/evaluator parity
+response_map,A7AA/A7AH,allowed_next,primitive response and label adequacy
+search_execution,blocked,not_authorized,none

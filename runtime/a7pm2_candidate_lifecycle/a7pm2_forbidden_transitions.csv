@@ -1,0 +1,9 @@
+from_state,to_state,reason
+diagnostic_clue,shadow_candidate,diagnostic cannot skip research/paper gates
+diagnostic_clue,live_candidate,diagnostic cannot skip research/paper/shadow gates
+generated,research_candidate,must materialize/replay/audit first
+control_clean,research_candidate,must pass neutralization/latency/cluster/deep audit
+superseded,generated,superseded artifacts cannot be selector source-of-truth
+rejected,research_candidate,rejected candidates require fresh generation and full gate path
+deep_audited,shadow_candidate,deep audit is not trading authorization
+research_candidate,live_candidate,must pass paper/shadow gates

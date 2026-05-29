@@ -1,0 +1,4 @@
+stage_id,supersedes,superseded_by,current_status,notes
+A7AL-2P2,,A7AL-2X0,superseded_diagnostic,A7AL-2P2 superseded by A7AL-2X0 arbitration
+A7AL-2Q,,A7AL-2X0,not_authorized,A7AL-2Q local execution not authorized
+COMPANY-A7AL2Q2R-FULL,,A7AL-2X0,not_authorized,A7AL-2Q local execution not authorized

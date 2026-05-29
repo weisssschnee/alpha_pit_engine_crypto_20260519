@@ -1,0 +1,13 @@
+category,target_module,asset_count,min_priority
+experiment_registry,alphafactory_crypto/governance,6,10
+data_contracts,alphafactory_crypto/data_contracts,42,20
+replay_engine,alphafactory_crypto/replay,17,20
+feature_factory,alphafactory_crypto/features,12,20
+label_factory,alphafactory_crypto/labels,4,20
+selector,alphafactory_crypto/selectors,9,30
+formula_generator,alphafactory_crypto/generators,4,30
+controls,alphafactory_crypto/controls,2,30
+regime_factory,alphafactory_crypto/regimes,1,30
+clustering,alphafactory_crypto/clustering,3,40
+promotion,alphafactory_crypto/promotion,1,40
+stage_entry_or_misc,manual_review,50,60
