@@ -1,0 +1,39 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_generation": false,
+  "authorizes_full_numeric_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_numeric_preflight_clues"
+  ],
+  "candidate_count": 128,
+  "controls": [
+    "one_bar_lag",
+    "wrong_lag_future_24h",
+    "wrong_lag_stale_168h",
+    "time_shuffle",
+    "symbol_shuffle",
+    "same_family_random"
+  ],
+  "decision": "HOLD_A7AL2Z4_NO_NUMERIC_PREFLIGHT_CLUES",
+  "eval_error_count": 0,
+  "executes_formula_generation": false,
+  "executes_numeric_replay_preflight": true,
+  "executes_search": false,
+  "executes_training": false,
+  "full_timestamps_before_smoke_subset": 21025,
+  "generated_at": "2026-05-29T03:46:53Z",
+  "hours_per_split": 720,
+  "label": "log_trade_close_t_plus_24h_minus_log_trade_close_t",
+  "metric_rows": 4480,
+  "orientation": "train_2024_original_spread_sign_only",
+  "pre_may_clue_may_unobserved_count": 0,
+  "pre_may_clue_may_veto_count": 0,
+  "spread_bucket_method": "cross_sectional_rank_pct_top_bottom_decile",
+  "stage": "A7AL-2Z4",
+  "stress_clean_clue_count": 0,
+  "symbols_loaded": 96,
+  "timestamps": 3481,
+  "uses_may_in_generation": false,
+  "uses_may_in_selector": false
+}

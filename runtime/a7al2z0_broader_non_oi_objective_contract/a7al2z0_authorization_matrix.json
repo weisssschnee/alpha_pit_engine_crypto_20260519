@@ -1,0 +1,10 @@
+{
+  "A7AL-2Z0": "PASS_A7AL2Z0_BROADER_NON_OI_OBJECTIVE_CONTRACT_READY_FOR_A7AL2Z1",
+  "A7AL-2Z1_static_dry_generation": "AUTHORIZED",
+  "A7AL-2Z2_materialization_audit": "NOT_AUTHORIZED_UNTIL_Z1_PASS",
+  "alpha_proof": "NOT_AUTHORIZED",
+  "formula_search_execution": "NOT_AUTHORIZED",
+  "large_search": "NOT_AUTHORIZED",
+  "numeric_replay": "NOT_AUTHORIZED",
+  "shadow_paper_live": "NOT_AUTHORIZED"
+}

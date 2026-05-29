@@ -1,0 +1,17 @@
+{
+  "A7AL-2Z4F": {
+    "status": "HOLD_A7AL2Z4F_PRE_MAY_SIGNAL_CONTROL_OR_LAG_FRAGILE"
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "same_pool_expansion": {
+    "authorized": false
+  }
+}

@@ -1,0 +1,9 @@
+objective_family,generated_count,static_valid_count,selected_for_z2_count,unique_skeleton_count,unique_production_count,family_id,minimum_generated,minimum_selected_for_preflight,quota_pass
+Z0_funding_basis_premium_dislocation,126,126,16,7,126,Z0_funding_basis_premium_dislocation,96,12,True
+Z1_price_range_volatility_structure,182,182,16,11,128,Z1_price_range_volatility_structure,128,16,True
+Z2_liquidity_taker_microstructure_lite,182,182,16,8,182,Z2_liquidity_taker_microstructure_lite,128,16,True
+Z3_basis_price_trend_reversal,108,108,16,5,108,Z3_basis_price_trend_reversal,96,12,True
+Z4_upper_regime_relative_value,216,216,16,3,216,Z4_upper_regime_relative_value,128,16,True
+Z5_latent_listing_meme_neutral_structure,182,182,16,5,181,Z5_latent_listing_meme_neutral_structure,128,16,True
+Z6_cross_sectional_relative_flow_value,96,96,16,4,96,Z6_cross_sectional_relative_flow_value,96,12,True
+Z7_market_regime_price_breadth,180,180,16,3,180,Z7_market_regime_price_breadth,128,16,True

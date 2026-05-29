@@ -1,0 +1,17 @@
+{
+  "A7AL-2Z2R": {
+    "status": "PASS_A7AL2Z2R_BROADER_NON_OI_MATERIALIZATION_REPAIR_READY_FOR_Z3_CONTRACT"
+  },
+  "a7al2z3_numeric_preflight_contract": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "numeric_replay_execution": {
+    "authorized": false
+  }
+}

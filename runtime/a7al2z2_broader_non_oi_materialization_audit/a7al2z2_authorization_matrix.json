@@ -1,0 +1,17 @@
+{
+  "A7AL-2Z2": {
+    "status": "HOLD_A7AL2Z2_EVAL_OR_ACTIVITY_FAILURE"
+  },
+  "a7al2z3_numeric_preflight_contract": {
+    "authorized": false
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "numeric_replay_execution": {
+    "authorized": false
+  }
+}

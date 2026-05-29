@@ -1,0 +1,9 @@
+objective_family,candidate_count,skeleton_count
+Z0_funding_basis_premium_dislocation,16,5
+Z1_price_range_volatility_structure,16,11
+Z2_liquidity_taker_microstructure_lite,16,8
+Z3_basis_price_trend_reversal,16,5
+Z4_upper_regime_relative_value,16,3
+Z5_latent_listing_meme_neutral_structure,16,5
+Z6_cross_sectional_relative_flow_value,16,4
+Z7_market_regime_price_breadth,16,3

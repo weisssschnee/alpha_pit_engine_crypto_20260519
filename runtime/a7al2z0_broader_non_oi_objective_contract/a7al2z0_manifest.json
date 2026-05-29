@@ -1,0 +1,21 @@
+{
+  "allowed_family_count": 8,
+  "authorizes_a7al2z1_static_dry_generation": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AL2Z0_BROADER_NON_OI_OBJECTIVE_CONTRACT_READY_FOR_A7AL2Z1",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "forbidden_item_count": 11,
+  "generated_at": "2026-05-29T03:29:57Z",
+  "input_x7hf_candidate_count": 56,
+  "input_x7hf_decision": "HOLD_A7AL2X7F_OBJECTIVE_FAMILY_NUMERIC_EVIDENCE_WEAK",
+  "input_x7hf_stress_clean_count": 0,
+  "may_policy": "stress_only_veto_and_failure_attribution",
+  "stage": "A7AL-2Z0",
+  "trigger": "A7AL-2X7H/X7HF heavy OI-positioning pool produced zero stress-clean clues"
+}

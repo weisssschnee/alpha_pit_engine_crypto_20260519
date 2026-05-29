@@ -1,0 +1,17 @@
+{
+  "A7AL-2Z5": {
+    "status": "HOLD_A7AL2Z5_NO_MULTI_HORIZON_PREFLIGHT_CLUES"
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "full_replay": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "A7AL-2Z3": {
+    "status": "PASS_A7AL2Z3_BROADER_NON_OI_NUMERIC_PREFLIGHT_CONTRACT_READY_FOR_Z4"
+  },
+  "a7al2z4_numeric_preflight": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "full_replay": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

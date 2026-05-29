@@ -1,0 +1,12 @@
+item,status,reason
+open_interest_last,forbidden_as_core,A7AL-2X7H/X7HF rejected current OI pool
+open_interest_mean,forbidden_as_core,A7AL-2X7H/X7HF rejected current OI pool
+open_interest_value_last,forbidden_as_core,A7AL-2X7H/X7HF rejected current OI pool
+open_interest_value_mean,forbidden_as_core,A7AL-2X7H/X7HF rejected current OI pool
+global_long_short_account_ratio_*,forbidden_as_core,positioning pool was control dominated
+top_long_short_account_ratio_*,forbidden_as_core,positioning pool was control dominated
+top_long_short_position_ratio_*,forbidden_as_core,positioning pool was control dominated
+A7V_activity_liquidity_self_reproduction,forbidden,previous activity/liquidity family failed
+liquidity_x_volatility_rc000_style,forbidden,previous cluster/stress failure
+May_in_selector_or_generation,forbidden,May stress-only
+full_open_grammar,forbidden,Z0/Z1 are bounded broader-family stages

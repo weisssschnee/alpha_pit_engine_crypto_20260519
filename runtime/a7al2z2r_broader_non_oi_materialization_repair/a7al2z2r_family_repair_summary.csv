@@ -1,0 +1,9 @@
+objective_family,selected_count,z1_seed_retained_count,unique_skeleton_count,median_finite_share,median_nonzero_share
+Z0_funding_basis_premium_dislocation,16,9,5,0.9705259116131589,0.9991124551445997
+Z1_price_range_volatility_structure,16,14,11,0.9974038842647641,1.0
+Z2_liquidity_taker_microstructure_lite,16,16,8,0.9979865239793896,1.0
+Z3_basis_price_trend_reversal,16,16,5,0.9962386048355133,0.9991388567820263
+Z4_upper_regime_relative_value,16,12,3,0.9688916963931826,0.9993645165307382
+Z5_latent_listing_meme_neutral_structure,16,12,5,0.9934680935394371,0.9997359750038588
+Z6_cross_sectional_relative_flow_value,16,13,4,0.9968311533888228,0.9999992523811023
+Z7_market_regime_price_breadth,16,16,3,0.9679151803408641,0.9999243768241536

@@ -1,0 +1,8 @@
+objective_family,candidate_count,pre_may_all_positive,may_stress_clean,control_dominated,missing_or_sparse,median_max_control_ratio,median_recent_oriented_spread,failure_roots
+F0_OI_delta_price_interaction,8,1,3,8,0,8.021245084873167,0.0003928195907437,matched_control_dominated|pre_may_direction_unstable
+F1_OI_basis_premium_interaction,8,0,0,8,0,2.0969739338299944,-0.004954475947262,pre_may_direction_unstable
+F2_OI_funding_crowding_interaction,8,0,0,0,8,,,metric_missing_or_sparse_smoke_window
+F3_positioning_divergence,8,3,5,8,0,30.964423717763538,0.0013034101117538,matched_control_dominated|pre_may_direction_unstable
+F4_OI_taker_flow_interaction,8,0,5,8,0,10.413220664934704,-0.0002562402978834,pre_may_direction_unstable
+F5_OI_upper_regime_interaction,8,0,0,8,0,13.607934135518075,-0.0014808683248776,pre_may_direction_unstable
+F6_OI_latent_state_interaction,8,0,0,1,8,45.98847213177236,,metric_missing_or_sparse_smoke_window

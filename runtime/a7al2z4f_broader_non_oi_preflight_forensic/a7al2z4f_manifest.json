@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_same_pool_expansion": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 128,
+  "control_dominated_count": 9,
+  "decision": "HOLD_A7AL2Z4F_PRE_MAY_SIGNAL_CONTROL_OR_LAG_FRAGILE",
+  "executes_forensic_only": true,
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T03:48:31Z",
+  "lag_fragile_count": 3,
+  "may_veto_count": 0,
+  "pre_may_positive_count": 12,
+  "pre_may_unstable_count": 116,
+  "stage": "A7AL-2Z4F",
+  "stress_clean_count": 0,
+  "uses_may_in_selector": false
+}

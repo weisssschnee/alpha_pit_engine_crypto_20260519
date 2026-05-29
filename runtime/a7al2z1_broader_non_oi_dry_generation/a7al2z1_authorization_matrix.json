@@ -1,0 +1,20 @@
+{
+  "A7AL-2Z1": {
+    "status": "PASS_A7AL2Z1_BROADER_NON_OI_DRY_GENERATION_READY_FOR_MATERIALIZATION_AUDIT"
+  },
+  "a7al2z2_materialization_audit": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "numeric_replay": {
+    "authorized": false
+  }
+}

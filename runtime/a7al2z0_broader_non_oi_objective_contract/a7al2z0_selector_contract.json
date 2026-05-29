@@ -1,0 +1,29 @@
+{
+  "allowed": [
+    "field_lineage_ok",
+    "pit_policy_ok",
+    "activity_coverage",
+    "family_balanced_quota",
+    "skeleton_diversity",
+    "signal_vector_diversity_later",
+    "matched_control_attachment",
+    "one_bar_lag_later",
+    "cost_proxy_later",
+    "timevarying_latent_neutral_later"
+  ],
+  "forbidden": [
+    "May_return",
+    "May_pass_fail",
+    "May_margin",
+    "promotion_label",
+    "stale_A7AL2X_oi_pool_score"
+  ],
+  "required_controls": [
+    "one_bar_lag",
+    "wrong_lag_future_24h",
+    "wrong_lag_stale_168h",
+    "time_shuffle",
+    "symbol_shuffle",
+    "same_family_random"
+  ]
+}

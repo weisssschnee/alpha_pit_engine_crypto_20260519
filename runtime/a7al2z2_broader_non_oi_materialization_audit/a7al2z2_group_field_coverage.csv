@@ -1,0 +1,12 @@
+group_field,unique_values,values
+R0_market_trend_state,3,trend_down|trend_mid|trend_up
+R10_stress_proxy_state,3,stress_high|stress_low|stress_mid
+R1_market_volatility_state,3,vol_high|vol_low|vol_mid
+R2_market_breadth_state,3,breadth_mid|breadth_strong|breadth_weak
+R3_liquidity_cycle_state,3,liq_contracting|liq_expanding|liq_mid
+R5_basis_premium_dislocation_state,3,basis_high|basis_low|basis_mid
+R9_alt_vs_major_dispersion_state,3,alt_lag|alt_lead|alt_mid
+is_major,2,False|True
+is_multiplier_contract,2,False|True
+liquidity_tier,5,tail|top100|top20|top200|top50
+meme_contract_group,4,meme_multiplier_contract|meme_plain_contract|non_meme_multiplier_contract|non_meme_plain_contract

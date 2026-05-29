@@ -1,0 +1,7 @@
+control,purpose
+one_bar_lag,entry latency survival
+wrong_lag_future_24h,future-lag contamination check
+wrong_lag_stale_168h,stale-lag contamination check
+time_shuffle,time structure placebo
+symbol_shuffle,cross-symbol identity placebo
+same_family_random,same-shape random placebo

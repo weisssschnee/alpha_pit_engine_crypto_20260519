@@ -1,0 +1,25 @@
+{
+  "authorizes_a7al2z4_broader_non_oi_numeric_preflight": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_full_replay": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 128,
+  "cost_proxy_bps": [
+    10
+  ],
+  "decision": "PASS_A7AL2Z3_BROADER_NON_OI_NUMERIC_PREFLIGHT_CONTRACT_READY_FOR_Z4",
+  "executes_contract_only": true,
+  "executes_numeric_replay": false,
+  "executes_training": false,
+  "family_count": 8,
+  "generated_at": "2026-05-29T03:44:34Z",
+  "hours_per_split": 720,
+  "label": "log_trade_close_t_plus_24h_minus_log_trade_close_t",
+  "may_policy": "post_selection_stress_only",
+  "orientation": "train_2024_original_spread_sign_only",
+  "stage": "A7AL-2Z3",
+  "symbol_cap": 96,
+  "uses_may_in_selector_or_generation": false
+}

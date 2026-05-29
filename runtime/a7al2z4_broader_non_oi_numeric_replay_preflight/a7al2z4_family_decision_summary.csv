@@ -1,0 +1,9 @@
+objective_family,candidate_count,pre_may_positive_count,lag_ok_count,may_stress_clean_count,median_control_ratio
+Z0_funding_basis_premium_dislocation,16,1,5,4,4.453893660714096
+Z1_price_range_volatility_structure,16,2,8,8,5.3859640645029
+Z2_liquidity_taker_microstructure_lite,16,2,8,7,21.32991128850386
+Z3_basis_price_trend_reversal,16,0,6,5,29.679565850635854
+Z4_upper_regime_relative_value,16,0,3,0,2.912044247286116
+Z5_latent_listing_meme_neutral_structure,16,4,7,11,28.47924352609822
+Z6_cross_sectional_relative_flow_value,16,0,9,9,5.327049434165519
+Z7_market_regime_price_breadth,16,3,8,0,16.611552650061203

@@ -1,0 +1,23 @@
+{
+  "activity_failure_count": 20,
+  "authorizes_a7al2z3_numeric_preflight_contract": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_replay_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "base_numeric_field_count": 18,
+  "decision": "HOLD_A7AL2Z2_EVAL_OR_ACTIVITY_FAILURE",
+  "eval_failure_count": 0,
+  "evaluated_candidates": 128,
+  "executes_materialization_audit": true,
+  "executes_replay": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T03:36:19Z",
+  "group_field_count": 11,
+  "latent_numeric_field_count": 0,
+  "numeric_field_count": 18,
+  "stage": "A7AL-2Z2",
+  "symbols_loaded": 96,
+  "timestamps": 21025,
+  "uses_may": false
+}
