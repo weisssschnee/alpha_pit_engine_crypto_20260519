@@ -1,0 +1,28 @@
+{
+  "authorizes_a7ac2_label_diversification_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blocked_rows": 1,
+  "decision": "PASS_A7AC1R_DIAGNOSTIC_SUBSET_FROZEN_READY_FOR_A7AC2_WITH_WARNINGS",
+  "diagnostic_candidates": 6,
+  "diagnostic_clusters": 7,
+  "diagnostic_control_warning_rows": 2,
+  "diagnostic_label_families": 1,
+  "diagnostic_rows": 7,
+  "executes_contract_only": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T06:51:08Z",
+  "input_a7ac1_decision": "HOLD_A7AC1_REPRESENTATIVE_FORENSIC_PARTIAL_BLOCKERS",
+  "input_representative_rows": 8,
+  "stage": "A7AC-1R",
+  "uses_may": false,
+  "warnings": [
+    "diagnostic_subset_has_control_warning_rows",
+    "single_label_family_only",
+    "same_candidate_multi_horizon"
+  ]
+}

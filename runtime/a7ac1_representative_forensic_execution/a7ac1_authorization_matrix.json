@@ -1,0 +1,23 @@
+{
+  "A7AC-1": {
+    "status": "HOLD_A7AC1_REPRESENTATIVE_FORENSIC_PARTIAL_BLOCKERS"
+  },
+  "A7AC-1R_representative_quarantine_contract": {
+    "authorized": true
+  },
+  "A7AC-2_label_diversification_and_neutralization_contract": {
+    "authorized": false
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "date": "2026-05-29",
+  "decision": "PASS_A7AC1R_DIAGNOSTIC_SUBSET_FROZEN_READY_FOR_A7AC2_WITH_WARNINGS",
+  "experiment_id": "20260529_a7ac1r_representative_quarantine_contract",
+  "inputs": {
+    "a7ac1_audit": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac1_representative_forensic_execution\\a7ac1_representative_forensic_audit.csv",
+    "a7ac1_control": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac1_representative_forensic_execution\\a7ac1_control_dominance_by_split.csv",
+    "a7ac1_manifest": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac1_representative_forensic_execution\\a7ac1_manifest.json"
+  },
+  "mode": "light_contract",
+  "next_action": "A7AC-2 label-diversification and neutralization contract",
+  "objective": "Quarantine A7AC-1 blocked representatives and freeze a diagnostic-only subset.",
+  "outputs": {
+    "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7AC1R_REPRESENTATIVE_QUARANTINE_CONTRACT_20260529.md",
+    "runtime": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac1r_representative_quarantine_contract"
+  },
+  "parameters": {
+    "May_usage": "not used",
+    "blocked_decision": "HOLD_A7AC1_REPRESENTATIVE_FORENSIC_BLOCKED",
+    "minimum_diagnostic_clusters": 4,
+    "minimum_diagnostic_rows": 4
+  },
+  "status": "completed"
+}

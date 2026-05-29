@@ -1,0 +1,20 @@
+{
+  "A7AC-0": {
+    "status": "PASS_A7AC0_REPRESENTATIVE_FORENSIC_CONTRACT_READY_FOR_A7AC1_WITH_WARNINGS"
+  },
+  "A7AC-1_representative_forensic_execution": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

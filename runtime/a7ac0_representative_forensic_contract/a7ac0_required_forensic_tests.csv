@@ -1,0 +1,11 @@
+test,purpose,blocking
+source_of_truth_provenance,confirm every representative comes from A7AB-9 and no stale A7AB artifacts are reused,True
+full_window_metric_reproduction,rerun representative metrics from expressions and compare with A7AB-8 values,True
+control_dominance_by_split_and_type,"wrong-lag, stale, shuffle, sign-flip, random-field controls must remain weaker in train/validation/test/recent",True
+nonoverlap_and_block_robust_stats,replace naive overlapping-hour confidence with horizon-aware non-overlap and block bootstrap summaries,True
+label_family_specificity,all current representatives are L7 ranked-return clues; audit whether this is a label artifact,False
+field_native_lag_and_cost_ladder,check one-bar execution and 2/5/10/20bps cost proxy survival without artificial two-hour delay policy,True
+symbol_month_tier_concentration,"audit symbol, month, listing-age, meme, multiplier, major/alt, and latent-state concentration",True
+cluster_representative_independence,verify one representative per return-corr cluster remains diverse after reproduction,True
+beta_liquidity_latent_neutral_survival,"measure BTC/ETH beta, liquidity-tier, latent-state, meme, and multiplier neutral survival",True
+May_stress_label_only_if_available,"May can only be post-selection stress/veto/failure attribution; never selector, score, generation, or threshold",True

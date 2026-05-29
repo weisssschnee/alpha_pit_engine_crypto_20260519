@@ -1,0 +1,32 @@
+{
+  "authorizes_a7ac1r_representative_quarantine_contract": true,
+  "authorizes_a7ac2_label_diversification_contract": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7AC1_REPRESENTATIVE_FORENSIC_PARTIAL_BLOCKERS",
+  "decision_counts": {
+    "A7AC1_REPRESENTATIVE_DIAGNOSTIC_PASS_WITH_WARNINGS": 7,
+    "HOLD_A7AC1_REPRESENTATIVE_FORENSIC_BLOCKED": 1
+  },
+  "diagnostic_pass_candidates": 6,
+  "diagnostic_pass_clusters": 7,
+  "diagnostic_pass_rows": 7,
+  "executes_new_replay": false,
+  "executes_representative_forensic": true,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T06:51:05Z",
+  "hard_block_rows": 1,
+  "input_a7ac0_decision": "PASS_A7AC0_REPRESENTATIVE_FORENSIC_CONTRACT_READY_FOR_A7AC1_WITH_WARNINGS",
+  "representative_rows": 8,
+  "stage": "A7AC-1",
+  "uses_may": false,
+  "warning_pass_rows": 7,
+  "warnings": [
+    "diagnostic_pass_rows_have_warnings",
+    "single_label_family_only",
+    "same_candidate_multi_horizon"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "date": "2026-05-29",
+  "decision": "HOLD_A7AC1_REPRESENTATIVE_FORENSIC_PARTIAL_BLOCKERS",
+  "experiment_id": "20260529_a7ac1_representative_forensic_execution",
+  "inputs": {
+    "a7ab8_decisions": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ab8_clue_forensic_execution\\a7ab8_forensic_decisions.csv",
+    "a7ab8_metrics": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ab8_clue_forensic_execution\\a7ab8_full_window_variant_metrics.csv",
+    "a7ac0_manifest": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac0_representative_forensic_contract\\a7ac0_manifest.json",
+    "representative_pool": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac0_representative_forensic_contract\\a7ac0_representative_input_pool.csv"
+  },
+  "mode": "light_forensic",
+  "next_action": "A7AC-1R representative quarantine contract",
+  "objective": "Execute artifact-level forensic checks on A7AB-9 representative survivors.",
+  "outputs": {
+    "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7AC1_REPRESENTATIVE_FORENSIC_EXECUTION_20260529.md",
+    "runtime": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac1_representative_forensic_execution"
+  },
+  "parameters": {
+    "control_hard_gate": "control_ratio < 1.0",
+    "control_warning_gate": "control_ratio >= 0.80",
+    "cost_bps": [
+      2,
+      5,
+      10,
+      20
+    ],
+    "metric_source": "A7AB-8 full-window metrics",
+    "new_formula_generation": false,
+    "new_replay_execution": false
+  },
+  "status": "completed"
+}

@@ -1,0 +1,25 @@
+{
+  "date": "2026-05-29",
+  "decision": "contract_only",
+  "experiment_id": "20260529_a7ac0_representative_forensic_contract",
+  "inputs": {
+    "input_decision": "PASS_A7AB9_SURVIVOR_FREEZE_REPRESENTATIVE_POOL_WITH_WARNINGS",
+    "manifest": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ab9_survivor_freeze_contract\\a7ab9_manifest.json",
+    "representative_pool": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ab9_survivor_freeze_contract\\a7ab9_representative_survivor_pool.csv",
+    "survivor_pool": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ab9_survivor_freeze_contract\\a7ab9_survivor_pool.csv"
+  },
+  "mode": "light_contract",
+  "next_action": "A7AC-1 representative forensic execution",
+  "objective": "Define the forensic execution contract for A7AB-9 representative survivors.",
+  "outputs": {
+    "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7AC0_REPRESENTATIVE_FORENSIC_CONTRACT_20260529.md",
+    "runtime": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac0_representative_forensic_contract"
+  },
+  "parameters": {
+    "May_usage": "stress_only_if_available; not used by A7AC0",
+    "formula_generation": false,
+    "replay_execution": false,
+    "search_execution": false
+  },
+  "status": "completed"
+}

@@ -1,0 +1,3 @@
+risk_flags,rows
+top_symbol_repeats_in_representative_pool,6
+control_ratio_warning_ge_0_80;same_candidate_multi_horizon,2

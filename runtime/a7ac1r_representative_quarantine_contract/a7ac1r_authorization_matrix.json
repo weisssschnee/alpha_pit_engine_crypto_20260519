@@ -1,0 +1,20 @@
+{
+  "A7AC-1R": {
+    "status": "PASS_A7AC1R_DIAGNOSTIC_SUBSET_FROZEN_READY_FOR_A7AC2_WITH_WARNINGS"
+  },
+  "A7AC-2_label_diversification_and_neutralization_contract": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

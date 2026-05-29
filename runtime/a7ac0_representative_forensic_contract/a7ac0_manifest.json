@@ -1,0 +1,30 @@
+{
+  "authorizes_a7ac1_representative_forensic_execution": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AC0_REPRESENTATIVE_FORENSIC_CONTRACT_READY_FOR_A7AC1_WITH_WARNINGS",
+  "executes_contract_only": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T06:46:22Z",
+  "input_a7ab9_decision": "PASS_A7AB9_SURVIVOR_FREEZE_REPRESENTATIVE_POOL_WITH_WARNINGS",
+  "representative_candidate_count": 7,
+  "representative_cluster_count": 8,
+  "representative_rows": 8,
+  "representatives_control_hard_hold_ge_1": 0,
+  "representatives_control_warning_ge_0_80": 2,
+  "source_survivor_rows": 15,
+  "stage": "A7AC-0",
+  "top_cluster_share_before_representative_freeze": 0.4,
+  "top_label_share": 1.0,
+  "uses_may": false,
+  "warnings": [
+    "representatives_with_control_ratio_warning_ge_0_80",
+    "same_candidate_selected_in_multiple_horizons",
+    "single_label_family_dominates",
+    "top_return_corr_cluster_share_gt_35pct"
+  ]
+}

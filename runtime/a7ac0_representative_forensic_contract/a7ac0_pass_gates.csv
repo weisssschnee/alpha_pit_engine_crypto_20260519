@@ -1,0 +1,10 @@
+gate,rule
+provenance_clean,all representatives trace to A7AB-9 source-of-truth artifacts
+metric_reproduction_tolerance,reproduced validation/test/recent spreads match A7AB-8 within 1e-10 or documented rounding
+control_hard_gate,reject any representative with control_ratio >= 1.0 in any pre-May split
+control_warning_gate,representatives with 0.80 <= control_ratio < 1.0 remain diagnostic only
+robust_stats_positive,nonoverlap or block-robust statistics remain positive for validation/test/recent
+lag_and_cost_survival,one-bar lag and 10bps/20bps cost proxies remain positive
+concentration_cap,"no single symbol, month, latent state, meme group, or multiplier group dominates surviving representatives"
+label_concentration_caveat,single-label-family dominance blocks promotion beyond forensic until independently diversified
+no_may_leakage,"May remains stress-only and cannot enter selector, ranking, mutation, generation, or thresholds"
