@@ -1,0 +1,20 @@
+{
+  "authorizes_a7ab8_clue_forensic_execution": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "clue_candidate_count": 27,
+  "clue_family_count": 4,
+  "clue_rows": 33,
+  "clue_skeleton_count": 21,
+  "decision": "PASS_A7AB7_CLUE_FORENSIC_CONTRACT_READY_FOR_A7AB8",
+  "executes_contract_only": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T06:24:35Z",
+  "input_a7ab6_decision": "PASS_A7AB6_SMALL_NUMERIC_REPLAY_PREFLIGHT_CLUES_FOUND_EXECUTION_HOLD",
+  "stage": "A7AB-7",
+  "uses_may": false
+}

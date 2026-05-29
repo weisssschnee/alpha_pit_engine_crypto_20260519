@@ -1,0 +1,20 @@
+{
+  "A7AB-7": {
+    "status": "PASS_A7AB7_CLUE_FORENSIC_CONTRACT_READY_FOR_A7AB8"
+  },
+  "A7AB-8_clue_forensic_execution": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

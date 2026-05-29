@@ -1,0 +1,7 @@
+control,required,failure_if
+one_bar_lag,True,candidate collapses under field-native one-bar lag
+wrong_lag_future_1h,True,control ratio >= 1.0
+wrong_lag_stale_24h,True,control ratio >= 1.0
+time_shuffle,True,control ratio >= 1.0
+symbol_shuffle,True,control ratio >= 1.0
+same_family_random,True,control ratio >= 1.0

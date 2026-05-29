@@ -1,0 +1,7 @@
+label_family,horizon_h,clue_rows,clue_candidates,median_control_ratio,max_control_ratio
+L7_ranked_future_return,1,20,20,0.8846167444859299,0.99973230580447
+L7_ranked_future_return,4,7,7,0.8282358214464629,0.9862537764350452
+L1_cross_sectional_relative_return,1,2,2,0.8911291756836753,0.9586871305260204
+L0_raw_forward_return,1,2,2,0.8911291756836757,0.9586871305260204
+L0_raw_forward_return,4,1,1,0.5743806607825986,0.5743806607825986
+L1_cross_sectional_relative_return,4,1,1,0.574380660782599,0.574380660782599

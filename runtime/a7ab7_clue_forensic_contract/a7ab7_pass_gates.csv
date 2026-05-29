@@ -1,0 +1,8 @@
+gate,rule
+pre_may_full_window_positive,validation/test/recent oriented spread positive in full-window replay
+control_ratio_lt_0_80,control ratio < 0.80 preferred; >=1.00 hard HOLD
+lag_survival,one-bar lag remains positive and >=25% of original recent spread
+cost_survival,2/5/10bps proxy does not erase all pre-May evidence
+cluster_diversity,no single return-corr cluster >35% of forensic survivors
+family_diversity,no single generation family >50% of forensic survivors
+no_may_leakage,"May not used in ranking, threshold, selector, generation, or mutation"

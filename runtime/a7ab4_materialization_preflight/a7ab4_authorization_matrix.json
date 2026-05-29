@@ -1,0 +1,23 @@
+{
+  "A7AB-4": {
+    "status": "PASS_A7AB4_MATERIALIZATION_PREFLIGHT_READY_FOR_A7AB5_NUMERIC_REPLAY_CONTRACT"
+  },
+  "A7AB-5_numeric_replay_contract": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "numeric_replay_execution": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

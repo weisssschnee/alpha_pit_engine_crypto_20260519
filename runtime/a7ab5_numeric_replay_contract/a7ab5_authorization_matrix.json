@@ -1,0 +1,34 @@
+{
+  "A7AB-5": {
+    "status": "PASS_A7AB5_NUMERIC_REPLAY_CONTRACT_READY_FOR_A7AB6_SMALL_REPLAY_PREFLIGHT"
+  },
+  "A7AB-6_small_numeric_replay_preflight": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "numeric_replay_execution_scope": {
+    "authorized": true,
+    "horizons_h": [
+      1,
+      4
+    ],
+    "labels": [
+      "L7_ranked_future_return",
+      "L1_cross_sectional_relative_return",
+      "L0_raw_forward_return"
+    ],
+    "max_candidates": 128,
+    "purpose": "bounded preflight only"
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

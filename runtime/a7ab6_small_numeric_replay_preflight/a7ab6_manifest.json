@@ -1,0 +1,39 @@
+{
+  "authorizes_a7ab7_forensic_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "clue_candidate_count": 27,
+  "clue_count": 33,
+  "decision": "PASS_A7AB6_SMALL_NUMERIC_REPLAY_PREFLIGHT_CLUES_FOUND_EXECUTION_HOLD",
+  "decision_counts": {
+    "A7AB6_SMALL_REPLAY_PREFLIGHT_CLUE": 33,
+    "HOLD_A7AB6_CONTROL_DOMINATED": 260,
+    "HOLD_A7AB6_ONE_BAR_LAG_FRAGILE": 125,
+    "HOLD_A7AB6_PREMAY_UNSTABLE": 350
+  },
+  "eval_error_count": 0,
+  "executes_formula_generation": false,
+  "executes_large_search": false,
+  "executes_small_numeric_replay_preflight": true,
+  "executes_training": false,
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-05-29T06:23:22Z",
+  "horizons": [
+    1,
+    4
+  ],
+  "hours_per_split": 720,
+  "input_queue_count": 128,
+  "labels": [
+    "L7_ranked_future_return",
+    "L1_cross_sectional_relative_return",
+    "L0_raw_forward_return"
+  ],
+  "metric_rows": 26880,
+  "stage": "A7AB-6",
+  "symbols_loaded": 96,
+  "timestamps": 3481,
+  "uses_may": false
+}

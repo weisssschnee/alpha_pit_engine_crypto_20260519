@@ -1,0 +1,8 @@
+gate,rule
+pre_may_split_stability,validation/test/recent oriented spread positive
+control_dominance,matched control ratio < 1.0 in every pre-May split
+nonoverlap_stats,24h non-overlap min/median stats reported; naive hourly tstat not sufficient
+latency,field-native one-bar lag must survive; no artificial +2h policy
+cost_proxy,2bps/5bps/10bps proxy reported
+diversity,"no single family > 35%, no single skeleton > 15%, no single seed field > 25%"
+no_may,"May not used in score, selector, threshold, replay ranking, or mutation"

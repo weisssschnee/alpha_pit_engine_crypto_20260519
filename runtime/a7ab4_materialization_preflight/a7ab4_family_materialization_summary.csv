@@ -1,0 +1,5 @@
+family_id,evaluated_count,eval_success_count,activity_ok_count,median_finite_share,median_nonzero_share,skeleton_count,seed_field_count
+G0_price_return_reversal,128,128,128,0.98828125,1.0,48,1
+G1_volatility_state_reversal,179,179,179,0.847412109375,1.0,48,2
+G2_basis_premium_dislocation,179,179,179,0.993896484375,1.0,48,2
+G3_seed_pair_interaction,26,26,26,0.84765625,1.0,26,4

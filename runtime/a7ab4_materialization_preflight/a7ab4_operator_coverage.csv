@@ -1,0 +1,11 @@
+operator,selected_candidate_count
+Clip,159
+Decay,326
+Delta,250
+Mean,306
+Mul,179
+Rank,333
+Sub,403
+TSRank,178
+Winsor,121
+ZScore,260

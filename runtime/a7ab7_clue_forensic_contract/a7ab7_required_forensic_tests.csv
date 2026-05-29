@@ -1,0 +1,11 @@
+test,purpose
+full_window_replay,"rerun clue candidates on full available timestamps, not split-balanced subset"
+nonoverlap_stats,report horizon-aware non-overlap tstats; naive hourly tstats cannot promote
+control_dominance_by_split,wrong-lag/stale/shuffle/random controls must remain weaker in each pre-May split
+field_native_latency,one-bar lag survival; no artificial +2h stress policy
+cost_proxy,2bps/5bps/10bps proxy sensitivity
+symbol_concentration,no single symbol or symbol tier explains the clue
+month_concentration,no single month explains the clue
+return_corr_cluster,cluster clue return streams and cap single cluster
+skeleton_and_family_diversity,check whether clues are repeated variants of one skeleton/family
+May_stress_label_only_if_available,May can only be post-selection stress/veto/failure attribution

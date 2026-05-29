@@ -1,0 +1,4 @@
+label_family,horizons_h,primary
+L7_ranked_future_return,1|4,True
+L1_cross_sectional_relative_return,1|4,False
+L0_raw_forward_return,1,False
