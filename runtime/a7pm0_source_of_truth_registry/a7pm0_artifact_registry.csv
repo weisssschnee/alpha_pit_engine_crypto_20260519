@@ -344,13 +344,13 @@ runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_field_mat
 runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_forbidden_operator_registry.csv,8bad66e,add crypto enforcement parity and selector counterfactual,27
 runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_manifest.json,8bad66e,add crypto enforcement parity and selector counterfactual,490
 runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_operator_parity_matrix.csv,8bad66e,add crypto enforcement parity and selector counterfactual,1150
-runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_candidate_field_promotion.csv,,,2518
-runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_demoted_or_blocked_fields.csv,,,2085
-runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_enforcement_ledger_v2_preview.csv,,,36024
-runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_manifest.json,,,705
-runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_prerequisite_audit.csv,,,240
-runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_promoted_ordinary_alpha_fields.csv,,,640
-runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_role_transition_audit.csv,,,230
+runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_candidate_field_promotion.csv,d18f2d5,add crypto response backed alpha pool gates,2518
+runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_demoted_or_blocked_fields.csv,d18f2d5,add crypto response backed alpha pool gates,2085
+runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_enforcement_ledger_v2_preview.csv,d18f2d5,add crypto response backed alpha pool gates,36024
+runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_manifest.json,d18f2d5,add crypto response backed alpha pool gates,705
+runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_prerequisite_audit.csv,d18f2d5,add crypto response backed alpha pool gates,240
+runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_promoted_ordinary_alpha_fields.csv,d18f2d5,add crypto response backed alpha pool gates,640
+runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_role_transition_audit.csv,d18f2d5,add crypto response backed alpha pool gates,230
 runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_authorization_matrix.json,5b5ca07,audit crypto a7ah core12 aggtrades handoff,708
 runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_blocked_pattern_registry.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,478
 runtime,A7AI0,runtime/a7ai0_core12_aggtrades_experiment_contract/a7ai0_derived_in_runner_contract.csv,5b5ca07,audit crypto a7ah core12 aggtrades handoff,642
@@ -369,7 +369,7 @@ report,A7AIF0-FIELD-CONTRACT-ENFORCEMENT-LEDGER,reports/CRYPTO_A7AIF0_FIELD_CONT
 report,A7AIF1-ENGINE-ENFORCEMENT-GAP-AUDIT,reports/CRYPTO_A7AIF1_ENGINE_ENFORCEMENT_GAP_AUDIT_20260529.md,b5f83ad,add crypto a7ai field enforcement gate,10408
 report,A7AIF2-END-TO-END-FIELD-ENFORCEMENT-REGRESSION,reports/CRYPTO_A7AIF2_END_TO_END_FIELD_ENFORCEMENT_REGRESSION_20260529.md,8bad66e,add crypto enforcement parity and selector counterfactual,3099
 report,A7AIF3-MATERIALIZATION-EVALUATOR-PARITY,reports/CRYPTO_A7AIF3_MATERIALIZATION_EVALUATOR_PARITY_20260529.md,8bad66e,add crypto enforcement parity and selector counterfactual,9597
-report,A7AIF4-RESPONSE-BACKED-FIELD-PROMOTION,reports/CRYPTO_A7AIF4_RESPONSE_BACKED_FIELD_PROMOTION_20260529.md,,,6036
+report,A7AIF4-RESPONSE-BACKED-FIELD-PROMOTION,reports/CRYPTO_A7AIF4_RESPONSE_BACKED_FIELD_PROMOTION_20260529.md,d18f2d5,add crypto response backed alpha pool gates,6036
 runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_dataset_summary.csv,f56e049,accept crypto universe silver and prep search panel,263
 runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_feature_contract.csv,f56e049,accept crypto universe silver and prep search panel,21835
 runtime,A7AJ,runtime/a7aj_universe500_silver_acceptance_panel_prep/a7aj_market_symbol_audit.csv,f56e049,accept crypto universe silver and prep search panel,105013
@@ -1027,13 +1027,44 @@ runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_overlay_sample_audit.csv,4a
 runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_overlay_summary.csv,4a753fe,accept crypto v2 data and repair selector controls,1054
 runtime,A7AS0,runtime/a7as0_v2_data_acceptance/a7as0_overlay_timing_contract_extract.csv,4a753fe,accept crypto v2 data and repair selector controls,67
 report,A7AS0-V2-DATA-ACCEPTANCE,reports/CRYPTO_A7AS0_V2_DATA_ACCEPTANCE_20260527.md,4a753fe,accept crypto v2 data and repair selector controls,11469
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,5230053,refresh crypto a7pm registry after selector counterfactual,180790
+runtime,A7FF-0,runtime/a7ff0_field_ontology_v2/a7ff0_field_ontology_v2.csv,b725826,add crypto a7ff field to factor compiler,47068
+runtime,A7FF-0,runtime/a7ff0_field_ontology_v2/a7ff0_manifest.json,b725826,add crypto a7ff field to factor compiler,334
+runtime,A7FF-0,runtime/a7ff0_field_ontology_v2/a7ff0_semantic_type_summary.csv,b725826,add crypto a7ff field to factor compiler,748
+runtime,A7FF-1,runtime/a7ff1_operator_probing/a7ff1_manifest.json,b725826,add crypto a7ff field to factor compiler,339
+runtime,A7FF-1,runtime/a7ff1_operator_probing/a7ff1_operator_policy.csv,b725826,add crypto a7ff field to factor compiler,998
+runtime,A7FF-1,runtime/a7ff1_operator_probing/a7ff1_operator_probe_score.csv,b725826,add crypto a7ff field to factor compiler,2803
+runtime,A7FF-1,runtime/a7ff1_operator_probing/a7ff1_operator_reliability_summary.csv,b725826,add crypto a7ff field to factor compiler,278
+runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_feature_pair_policy.csv,b725826,add crypto a7ff field to factor compiler,25215
+runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_feature_pair_similarity.csv,b725826,add crypto a7ff field to factor compiler,64874
+runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_field_response_vectors.csv,b725826,add crypto a7ff field to factor compiler,14739
+runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_manifest.json,b725826,add crypto a7ff field to factor compiler,348
+runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_semantic_response_clusters.csv,b725826,add crypto a7ff field to factor compiler,533
+runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_candidate_blueprints.csv,b725826,add crypto a7ff field to factor compiler,3272
+runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_generation_layer_policy.json,b725826,add crypto a7ff field to factor compiler,754
+runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_manifest.json,b725826,add crypto a7ff field to factor compiler,320
+runtime,A7FF-4,runtime/a7ff4_feature_role_promotion/a7ff4_feature_role_map_v2.csv,b725826,add crypto a7ff field to factor compiler,11222
+runtime,A7FF-4,runtime/a7ff4_feature_role_promotion/a7ff4_manifest.json,b725826,add crypto a7ff field to factor compiler,342
+runtime,A7FF-4,runtime/a7ff4_feature_role_promotion/a7ff4_role_transition_policy.csv,b725826,add crypto a7ff field to factor compiler,349
+runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_blocked_factor_blueprints.csv,b725826,add crypto a7ff field to factor compiler,780
+runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_factor_candidate_blueprints.csv,b725826,add crypto a7ff field to factor compiler,3116
+runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_manifest.json,b725826,add crypto a7ff field to factor compiler,359
+runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_manifest.json,b725826,add crypto a7ff field to factor compiler,453
+runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_portfolio_marginal_queue.csv,b725826,add crypto a7ff field to factor compiler,2157
+runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_selected_dryrun_queue.csv,b725826,add crypto a7ff field to factor compiler,751
+report,A7FF0-FIELD-ONTOLOGY-V2,reports/CRYPTO_A7FF0_FIELD_ONTOLOGY_V2_20260530.md,b725826,add crypto a7ff field to factor compiler,1871
+report,A7FF1-OPERATOR-PROBING,reports/CRYPTO_A7FF1_OPERATOR_PROBING_20260530.md,b725826,add crypto a7ff field to factor compiler,1993
+report,A7FF2-FEATURE-PAIR-CLUSTERING,reports/CRYPTO_A7FF2_FEATURE_PAIR_CLUSTERING_20260530.md,b725826,add crypto a7ff field to factor compiler,28233
+report,A7FF3-COARSE-TO-FINE-GENERATION-CONTRACT,reports/CRYPTO_A7FF3_COARSE_TO_FINE_GENERATION_CONTRACT_20260530.md,b725826,add crypto a7ff field to factor compiler,5677
+report,A7FF4-FEATURE-ROLE-PROMOTION,reports/CRYPTO_A7FF4_FEATURE_ROLE_PROMOTION_20260530.md,b725826,add crypto a7ff field to factor compiler,5766
+report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
+report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,d18f2d5,add crypto response backed alpha pool gates,187553
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,5230053,refresh crypto a7pm registry after selector counterfactual,94548
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,de26507,add crypto a7pm governance registry,391
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,5230053,refresh crypto a7pm registry after selector counterfactual,81180
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,5230053,refresh crypto a7pm registry after selector counterfactual,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,d18f2d5,add crypto response backed alpha pool gates,86272
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,de26507,add crypto a7pm governance registry,332
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,5230053,refresh crypto a7pm registry after selector counterfactual,46627
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,d18f2d5,add crypto response backed alpha pool gates,49520
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -1054,18 +1085,18 @@ runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,de26
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,de26507,add crypto a7pm governance registry,282
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,de26507,add crypto a7pm governance registry,821
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,de26507,add crypto a7pm governance registry,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,5230053,refresh crypto a7pm registry after selector counterfactual,4307
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,d18f2d5,add crypto response backed alpha pool gates,5110
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
 report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,de26507,add crypto a7pm governance registry,2160
-runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,,,47
-runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,,,3219
-runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,,,663
-runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_reject_reason_summary.csv,,,2
-runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_role_trace.csv,,,1192
-runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_signal_vector_proxy_distribution.csv,,,886
-runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_skeleton_distribution.csv,,,270
-report,A7POOL0-ALPHA-ELIGIBLE-POOL-REBUILD,reports/CRYPTO_A7POOL0_ALPHA_ELIGIBLE_POOL_REBUILD_20260529.md,,,3172
+runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
+runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
+runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
+runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_reject_reason_summary.csv,d18f2d5,add crypto response backed alpha pool gates,2
+runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_role_trace.csv,d18f2d5,add crypto response backed alpha pool gates,1192
+runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_signal_vector_proxy_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,886
+runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_skeleton_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,270
+report,A7POOL0-ALPHA-ELIGIBLE-POOL-REBUILD,reports/CRYPTO_A7POOL0_ALPHA_ELIGIBLE_POOL_REBUILD_20260529.md,d18f2d5,add crypto response backed alpha pool gates,3172
 runtime,A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,74b6285,add crypto a7x4 forensic and a7s0 contract,1035
 runtime,A7S0,runtime/a7s0_data_horizon_contract/a7s0_candidate_data_sources.csv,74b6285,add crypto a7x4 forensic and a7s0 contract,2745
 runtime,A7S0,runtime/a7s0_data_horizon_contract/a7s0_cost_lag_contract.csv,74b6285,add crypto a7x4 forensic and a7s0 contract,234
@@ -1146,16 +1177,16 @@ runtime,A7SEL-0,runtime/a7sel0_selector_counterfactual/a7sel0_selected_queue.csv
 runtime,A7SEL-0,runtime/a7sel0_selector_counterfactual/a7sel0_selector_trace.csv,8bad66e,add crypto enforcement parity and selector counterfactual,2597708
 runtime,A7SEL-0,runtime/a7sel0_selector_counterfactual/a7sel0_signal_vector_diversity.csv,8bad66e,add crypto enforcement parity and selector counterfactual,128
 runtime,A7SEL-0,runtime/a7sel0_selector_counterfactual/a7sel0_stress_veto_summary.csv,8bad66e,add crypto enforcement parity and selector counterfactual,119
-runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_control_dominance_audit.csv,,,2
-runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_label_family_distribution.csv,,,2
-runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_manifest.json,,,616
-runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_role_audit.csv,,,2
-runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_selected_queue.csv,,,2
-runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_selector_trace.csv,,,2
-runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_signal_vector_diversity.csv,,,2
-runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_stress_summary.csv,,,2
+runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_control_dominance_audit.csv,d18f2d5,add crypto response backed alpha pool gates,2
+runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_label_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,2
+runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_manifest.json,d18f2d5,add crypto response backed alpha pool gates,616
+runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_role_audit.csv,d18f2d5,add crypto response backed alpha pool gates,2
+runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_selected_queue.csv,d18f2d5,add crypto response backed alpha pool gates,2
+runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_selector_trace.csv,d18f2d5,add crypto response backed alpha pool gates,2
+runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_signal_vector_diversity.csv,d18f2d5,add crypto response backed alpha pool gates,2
+runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_stress_summary.csv,d18f2d5,add crypto response backed alpha pool gates,2
 report,A7SEL0-SELECTOR-TARGET-COUNTERFACTUAL,reports/CRYPTO_A7SEL0_SELECTOR_TARGET_COUNTERFACTUAL_20260529.md,8bad66e,add crypto enforcement parity and selector counterfactual,2725
-report,A7SEL1-ROLE-STRICT-SELECTOR-COUNTERFACTUAL,reports/CRYPTO_A7SEL1_ROLE_STRICT_SELECTOR_COUNTERFACTUAL_20260529.md,,,877
+report,A7SEL1-ROLE-STRICT-SELECTOR-COUNTERFACTUAL,reports/CRYPTO_A7SEL1_ROLE_STRICT_SELECTOR_COUNTERFACTUAL_20260529.md,d18f2d5,add crypto response backed alpha pool gates,877
 runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_append_only_rules.csv,956e38c,add crypto a7t0 forward contract,828
 runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,956e38c,add crypto a7t0 forward contract,709
 runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_forward_field_registry.csv,956e38c,add crypto a7t0 forward contract,1038
