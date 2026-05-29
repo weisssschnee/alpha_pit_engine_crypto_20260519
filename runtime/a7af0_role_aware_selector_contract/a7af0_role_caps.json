@@ -1,0 +1,9 @@
+{
+  "max_downside_share_in_combined_review": 0.5,
+  "max_per_field": 3,
+  "max_per_field_family_per_tier": 4,
+  "max_selected_total": 18,
+  "min_beta_neutral_for_neutralized_contract": 3,
+  "min_downside_for_risk_defense_contract": 4,
+  "min_raw_relative_for_ordinary_alpha_contract": 2
+}

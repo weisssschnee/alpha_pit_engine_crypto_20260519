@@ -1,0 +1,19 @@
+{
+  "authorizes_a7af1_role_aware_selector_dryrun": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AF0_ROLE_AWARE_SELECTOR_CONTRACT_READY_FOR_A7AF1",
+  "executes_contract_only": true,
+  "executes_formula_generation": false,
+  "executes_search": false,
+  "executes_selector_dryrun": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T08:17:56Z",
+  "seed_field_count": 14,
+  "selector_tier_count": 3,
+  "source_a7ae2_decision": "PASS_A7AE2_LABEL_ADEQUACY_ROLES_READY_FOR_SELECTOR_REWRITE_REVIEW",
+  "stage": "A7AF-0",
+  "uses_may": false
+}

@@ -1,0 +1,8 @@
+gate,rule
+seed_field_must_be_in_a7ae2_policy,field_name in a7ae2_selector_seed_policy.csv
+role_label_match,label family must match feature role tier
+control_ratio_lt_1,control_ratio_premay_max < 1.0
+premay_all_positive,validation/test/recent all oriented positive
+lag_ok,one_bar_lag_recent_oriented positive and >= 25pct of recent
+no_may,"May not used in selector score, threshold, mutation, generation, or authorization"
+downside_not_ordinary_alpha,L6 downside queue cannot authorize ordinary alpha search

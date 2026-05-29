@@ -1,0 +1,7 @@
+score_feature,definition
+candidate_role_priority,T0 > T1 > T2 for ordinary alpha; T2 separated from alpha queue
+premay_split_consistency,validation/test/recent all oriented positive
+control_margin,1 - max wrong-lag/stale/random control ratio
+one_bar_lag_survival,recent one-bar-lag oriented spread survives
+nonoverlap_robust_tstat,minimum oriented pre-May non-overlap tstat
+field_family_diversity,cap per field family inside each tier

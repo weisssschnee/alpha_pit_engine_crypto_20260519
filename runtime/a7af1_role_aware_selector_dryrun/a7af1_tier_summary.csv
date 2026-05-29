@@ -1,0 +1,5 @@
+selector_tier,candidates,eligible,selected,unique_fields,median_control_ratio
+T0_raw_relative_alpha,7,7,3,1,0.7857862638470475
+T1_beta_neutral_alpha_diagnostic,7,7,6,3,0.8400746591294805
+T2_downside_risk_defense,23,23,9,10,0.8177616525726132
+blocked_role_label_mismatch,13,0,0,4,0.2675451847919714

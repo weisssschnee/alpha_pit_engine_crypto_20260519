@@ -1,0 +1,17 @@
+{
+  "A7AF-1": {
+    "status": "PASS_A7AF1_ROLE_AWARE_SELECTOR_DRYRUN_READY_FOR_A7AG0_CONTRACT"
+  },
+  "a7ag0_role_aware_generation_contract": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}
