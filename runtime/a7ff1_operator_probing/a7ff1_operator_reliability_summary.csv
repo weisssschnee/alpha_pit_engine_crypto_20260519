@@ -1,0 +1,4 @@
+operator,semantic_type_count,total_tests,total_candidates,total_non_l7_candidates,best_score,allow_count,operator_reliability
+CSRank,7,216,4,0,5.24568293228145,0,diagnostic
+Delta,7,216,3,2,4.533858109908921,1,allowed_limited
+Identity,7,216,4,0,5.24568293228145,0,diagnostic

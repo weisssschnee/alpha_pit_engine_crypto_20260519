@@ -1,0 +1,12 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "blockers": [],
+  "decision": "PASS_A7FF4_ROLE_PROMOTION_MAP_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-29T16:16:58Z",
+  "regime_or_interaction_input_count": 14,
+  "signal_candidate_count": 1,
+  "stage": "A7FF-4"
+}

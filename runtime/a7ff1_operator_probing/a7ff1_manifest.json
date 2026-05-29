@@ -1,0 +1,12 @@
+{
+  "allowed_operator_rows": 1,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "blockers": [],
+  "decision": "PASS_A7FF1_OPERATOR_PROBING_READY_FOR_PAIR_CLUSTERING",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-29T16:16:57Z",
+  "operator_count": 3,
+  "stage": "A7FF-1"
+}

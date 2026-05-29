@@ -1,0 +1,13 @@
+{
+  "allowed_pair_count": 103,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "blockers": [],
+  "decision": "PASS_A7FF2_FEATURE_PAIR_POLICY_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "field_vector_count": 24,
+  "generated_at": "2026-05-29T16:16:58Z",
+  "pair_count": 276,
+  "stage": "A7FF-2"
+}

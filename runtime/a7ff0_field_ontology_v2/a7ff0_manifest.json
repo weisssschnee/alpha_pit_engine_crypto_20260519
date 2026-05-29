@@ -1,0 +1,12 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "decision": "PASS_A7FF0_FIELD_ONTOLOGY_V2_BUILT",
+  "executes_replay": false,
+  "executes_search": false,
+  "field_count": 81,
+  "generated_at": "2026-05-29T16:16:57Z",
+  "semantic_type_count": 8,
+  "signal_seed_candidate_count": 1,
+  "stage": "A7FF-0"
+}

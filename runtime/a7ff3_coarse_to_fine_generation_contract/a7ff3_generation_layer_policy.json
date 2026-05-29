@@ -1,0 +1,34 @@
+{
+  "F1_single_field_transform": {
+    "allowed": true,
+    "requires": [
+      "field_ontology",
+      "operator_probe_allowed",
+      "non_l7_response_evidence"
+    ]
+  },
+  "F2_typed_two_field_interaction": {
+    "allowed": true,
+    "requires": [
+      "one_promoted_signal_seed",
+      "allowed_feature_pair_policy",
+      "controls_attached"
+    ]
+  },
+  "F3_state_conditioned_or_neutralized": {
+    "allowed": "contract_only",
+    "requires": [
+      "frozen_regime_state",
+      "neutralization_policy",
+      "no_label_or_future_state"
+    ]
+  },
+  "F4_portfolio_candidate": {
+    "allowed": "not_yet",
+    "requires": [
+      "numeric_replay",
+      "marginal_contribution",
+      "cluster_registry"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "portfolio_marginal_reward_requires_numeric_replay"
+  ],
+  "decision": "HOLD_A7FF6_PORTFOLIO_MARGINAL_DRYRUN_NOT_PROMOTABLE",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-29T16:16:58Z",
+  "queue_count": 13,
+  "selected_count": 4,
+  "stage": "A7FF-6",
+  "uses_may": false
+}
