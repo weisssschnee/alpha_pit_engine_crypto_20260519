@@ -30,8 +30,21 @@ from scripts.crypto_a7al2x5_evaluator_preflight_smoke import (
 
 
 ROOT = REPO
-RUNTIME = ROOT / "runtime" / "a7al2x7_small_numeric_replay_preflight"
-REPORT = ROOT / "reports" / "CRYPTO_A7AL2X7_SMALL_NUMERIC_REPLAY_PREFLIGHT_20260529.md"
+STAGE = os.environ.get("A7AL2X7_STAGE", "A7AL-2X7")
+FILE_PREFIX = os.environ.get("A7AL2X7_FILE_PREFIX", "a7al2x7")
+REPORT_TITLE = os.environ.get("A7AL2X7_REPORT_TITLE", "CRYPTO A7AL-2X7 SMALL NUMERIC REPLAY PREFLIGHT")
+RUNTIME = Path(
+    os.environ.get(
+        "A7AL2X7_RUNTIME",
+        str(ROOT / "runtime" / "a7al2x7_small_numeric_replay_preflight"),
+    )
+)
+REPORT = Path(
+    os.environ.get(
+        "A7AL2X7_REPORT",
+        str(ROOT / "reports" / "CRYPTO_A7AL2X7_SMALL_NUMERIC_REPLAY_PREFLIGHT_20260529.md"),
+    )
+)
 X6_MANIFEST = ROOT / "runtime" / "a7al2x6_small_numeric_replay_contract" / "a7al2x6_manifest.json"
 X5_SUMMARY = ROOT / "runtime" / "a7al2x5_evaluator_preflight_smoke" / "a7al2x5_candidate_eval_summary.csv"
 
@@ -164,15 +177,9 @@ def spread_series(signal: np.ndarray, label: np.ndarray) -> tuple[np.ndarray, np
     valid_counts = valid.sum(axis=0)
     enough = valid_counts >= MIN_ACTIVE_SYMBOLS
     sig = np.where(valid, signal, np.nan)
-    q10 = np.full(sig.shape[1], np.nan)
-    q90 = np.full(sig.shape[1], np.nan)
-    cols = np.where(enough)[0]
-    if len(cols):
-        with np.errstate(all="ignore"):
-            q10[cols] = np.nanpercentile(sig[:, cols], 10, axis=0)
-            q90[cols] = np.nanpercentile(sig[:, cols], 90, axis=0)
-    top_mask = valid & enough.reshape(1, -1) & (signal >= q90.reshape(1, -1))
-    bottom_mask = valid & enough.reshape(1, -1) & (signal <= q10.reshape(1, -1))
+    ranks = pd.DataFrame(sig).rank(axis=0, pct=True, method="average").to_numpy(dtype=np.float64)
+    top_mask = valid & enough.reshape(1, -1) & (ranks >= 0.90)
+    bottom_mask = valid & enough.reshape(1, -1) & (ranks <= 0.10)
     top_count = top_mask.sum(axis=0)
     bottom_count = bottom_mask.sum(axis=0)
     top_sum = np.where(top_mask, label, 0.0).sum(axis=0)
@@ -309,7 +316,7 @@ def classify(metrics: pd.DataFrame, sample: pd.DataFrame) -> pd.DataFrame:
 
 def write_report(manifest: dict[str, Any], decisions: pd.DataFrame, counts: pd.DataFrame, metrics_preview: pd.DataFrame) -> None:
     lines = [
-        "# CRYPTO A7AL-2X7 SMALL NUMERIC REPLAY PREFLIGHT",
+        f"# {REPORT_TITLE}",
         "",
         f"Generated: {manifest['generated_at']}",
         "",
@@ -432,7 +439,7 @@ def main() -> None:
     )
 
     manifest = {
-        "stage": "A7AL-2X7",
+        "stage": STAGE,
         "generated_at": now_utc(),
         "decision": decision,
         "executes_small_numeric_replay_preflight": True,
@@ -456,18 +463,21 @@ def main() -> None:
         "controls": CONTROL_VARIANTS,
         "label": "log_trade_close_t_plus_24h_minus_log_trade_close_t",
         "orientation": "train_2024_original_spread_sign_only",
+        "spread_bucket_method": "cross_sectional_rank_pct_top_bottom_decile",
+        "top_bucket_rule": "rank_pct >= 0.90",
+        "bottom_bucket_rule": "rank_pct <= 0.10",
     }
 
-    sample.to_csv(RUNTIME / "a7al2x7_replayed_candidate_sample.csv", index=False)
-    metrics.to_csv(RUNTIME / "a7al2x7_candidate_variant_metrics.csv", index=False)
-    decisions.to_csv(RUNTIME / "a7al2x7_candidate_decisions.csv", index=False)
-    pd.DataFrame(error_rows).to_csv(RUNTIME / "a7al2x7_eval_errors.csv", index=False)
-    counts.to_csv(RUNTIME / "a7al2x7_decision_counts.csv", index=False)
-    write_json(RUNTIME / "a7al2x7_manifest.json", manifest)
+    sample.to_csv(RUNTIME / f"{FILE_PREFIX}_replayed_candidate_sample.csv", index=False)
+    metrics.to_csv(RUNTIME / f"{FILE_PREFIX}_candidate_variant_metrics.csv", index=False)
+    decisions.to_csv(RUNTIME / f"{FILE_PREFIX}_candidate_decisions.csv", index=False)
+    pd.DataFrame(error_rows).to_csv(RUNTIME / f"{FILE_PREFIX}_eval_errors.csv", index=False)
+    counts.to_csv(RUNTIME / f"{FILE_PREFIX}_decision_counts.csv", index=False)
+    write_json(RUNTIME / f"{FILE_PREFIX}_manifest.json", manifest)
     write_json(
-        RUNTIME / "a7al2x7_authorization_matrix.json",
+        RUNTIME / f"{FILE_PREFIX}_authorization_matrix.json",
         {
-            "A7AL-2X7": {"status": decision},
+            STAGE: {"status": decision},
             "full_numeric_replay": {"authorized": False},
             "formula_generation": {"authorized": False},
             "large_search": {"authorized": False},

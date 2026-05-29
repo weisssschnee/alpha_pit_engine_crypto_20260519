@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -10,9 +11,29 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[1]
-X7_RUNTIME = ROOT / "runtime" / "a7al2x7_small_numeric_replay_preflight"
-RUNTIME = ROOT / "runtime" / "a7al2x7f_replay_preflight_forensic"
-REPORT = ROOT / "reports" / "CRYPTO_A7AL2X7F_REPLAY_PREFLIGHT_FORENSIC_20260529.md"
+STAGE = os.environ.get("A7AL2X7F_STAGE", "A7AL-2X7F")
+SOURCE_STAGE = os.environ.get("A7AL2X7F_SOURCE_STAGE", "A7AL-2X7")
+SOURCE_PREFIX = os.environ.get("A7AL2X7F_SOURCE_PREFIX", "a7al2x7")
+FILE_PREFIX = os.environ.get("A7AL2X7F_FILE_PREFIX", "a7al2x7f")
+REPORT_TITLE = os.environ.get("A7AL2X7F_REPORT_TITLE", "CRYPTO A7AL-2X7F REPLAY PREFLIGHT FORENSIC")
+X7_RUNTIME = Path(
+    os.environ.get(
+        "A7AL2X7F_SOURCE_RUNTIME",
+        str(ROOT / "runtime" / "a7al2x7_small_numeric_replay_preflight"),
+    )
+)
+RUNTIME = Path(
+    os.environ.get(
+        "A7AL2X7F_RUNTIME",
+        str(ROOT / "runtime" / "a7al2x7f_replay_preflight_forensic"),
+    )
+)
+REPORT = Path(
+    os.environ.get(
+        "A7AL2X7F_REPORT",
+        str(ROOT / "reports" / "CRYPTO_A7AL2X7F_REPLAY_PREFLIGHT_FORENSIC_20260529.md"),
+    )
+)
 
 PRE_MAY_SPLITS = ["validation_2025H1", "test_2025H2", "recent_oos_2026JanApr"]
 CONTROL_VARIANTS = [
@@ -52,10 +73,10 @@ def bool_series(series: pd.Series) -> pd.Series:
 
 
 def load_inputs() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, dict[str, Any]]:
-    decisions = pd.read_csv(X7_RUNTIME / "a7al2x7_candidate_decisions.csv")
-    metrics = pd.read_csv(X7_RUNTIME / "a7al2x7_candidate_variant_metrics.csv")
-    sample = pd.read_csv(X7_RUNTIME / "a7al2x7_replayed_candidate_sample.csv")
-    manifest = read_json(X7_RUNTIME / "a7al2x7_manifest.json")
+    decisions = pd.read_csv(X7_RUNTIME / f"{SOURCE_PREFIX}_candidate_decisions.csv")
+    metrics = pd.read_csv(X7_RUNTIME / f"{SOURCE_PREFIX}_candidate_variant_metrics.csv")
+    sample = pd.read_csv(X7_RUNTIME / f"{SOURCE_PREFIX}_replayed_candidate_sample.csv")
+    manifest = read_json(X7_RUNTIME / f"{SOURCE_PREFIX}_manifest.json")
     return decisions, metrics, sample, manifest
 
 
@@ -289,7 +310,7 @@ def write_report(
     control_rollup: pd.DataFrame,
 ) -> None:
     lines = [
-        "# CRYPTO A7AL-2X7F REPLAY PREFLIGHT FORENSIC",
+        f"# {REPORT_TITLE}",
         "",
         f"Generated: {manifest['generated_at']}",
         "",
@@ -403,11 +424,23 @@ def main() -> None:
         blockers.append("some_families_sparse_under_smoke_subset")
 
     decision = "HOLD_A7AL2X7F_OBJECTIVE_FAMILY_NUMERIC_EVIDENCE_WEAK"
+    allowed_next = (
+        [
+            "objective-family redesign away from current OI/positioning pool",
+            "broader non-OI objective family contract if additional exploration is authorized",
+        ]
+        if STAGE.endswith("HF")
+        else [
+            "A7AL-2X7F forensic expansion on company machine",
+            "objective-family redesign away from current OI/positioning pool",
+        ]
+    )
+
     manifest = {
-        "stage": "A7AL-2X7F",
+        "stage": STAGE,
         "generated_at": now_utc(),
         "decision": decision,
-        "source_stage": "A7AL-2X7",
+        "source_stage": SOURCE_STAGE,
         "source_decision": x7_manifest.get("decision"),
         "executes_formula_generation": False,
         "executes_search": False,
@@ -423,24 +456,21 @@ def main() -> None:
         "control_dominated_count": control_dominated,
         "missing_or_sparse_count": missing_or_sparse,
         "blockers": blockers,
-        "allowed_next": [
-            "A7AL-2X7F forensic expansion on company machine",
-            "objective-family redesign away from current OI/positioning pool",
-        ],
+        "allowed_next": allowed_next,
     }
 
-    details.to_csv(RUNTIME / "a7al2x7f_candidate_failure_taxonomy.csv", index=False)
-    families.to_csv(RUNTIME / "a7al2x7f_objective_family_failure_summary.csv", index=False)
-    split_summary.to_csv(RUNTIME / "a7al2x7f_split_alignment_summary.csv", index=False)
-    controls.to_csv(RUNTIME / "a7al2x7f_control_dominance_detail.csv", index=False)
-    controls_rollup.to_csv(RUNTIME / "a7al2x7f_control_dominance_rollup.csv", index=False)
-    roots.to_csv(RUNTIME / "a7al2x7f_failure_root_summary.csv", index=False)
-    write_json(RUNTIME / "a7al2x7f_manifest.json", manifest)
+    details.to_csv(RUNTIME / f"{FILE_PREFIX}_candidate_failure_taxonomy.csv", index=False)
+    families.to_csv(RUNTIME / f"{FILE_PREFIX}_objective_family_failure_summary.csv", index=False)
+    split_summary.to_csv(RUNTIME / f"{FILE_PREFIX}_split_alignment_summary.csv", index=False)
+    controls.to_csv(RUNTIME / f"{FILE_PREFIX}_control_dominance_detail.csv", index=False)
+    controls_rollup.to_csv(RUNTIME / f"{FILE_PREFIX}_control_dominance_rollup.csv", index=False)
+    roots.to_csv(RUNTIME / f"{FILE_PREFIX}_failure_root_summary.csv", index=False)
+    write_json(RUNTIME / f"{FILE_PREFIX}_manifest.json", manifest)
     write_json(
-        RUNTIME / "a7al2x7f_decision_record.json",
+        RUNTIME / f"{FILE_PREFIX}_decision_record.json",
         {
             "decision": decision,
-            "source_stage": "A7AL-2X7",
+            "source_stage": SOURCE_STAGE,
             "source_decision": x7_manifest.get("decision"),
             "primary_findings": [
                 "X7 evaluator artifacts are available and do not indicate implementation failure.",
@@ -451,7 +481,7 @@ def main() -> None:
             "blocking_issues": blockers,
             "recommended_next_action": [
                 "Do not authorize A7AL-2Y or full replay from current X7 evidence.",
-                "Either expand X7F forensic on the company machine or redesign away from the current OI/positioning pool.",
+                "Redesign away from the current OI/positioning pool or open a broader objective-family contract.",
             ],
             "authorization": {
                 "full_numeric_replay": False,
@@ -463,9 +493,9 @@ def main() -> None:
         },
     )
     write_json(
-        RUNTIME / "a7al2x7f_authorization_matrix.json",
+        RUNTIME / f"{FILE_PREFIX}_authorization_matrix.json",
         {
-            "A7AL-2X7F": {"status": decision},
+            STAGE: {"status": decision},
             "full_numeric_replay": {"authorized": False},
             "formula_generation": {"authorized": False},
             "large_search": {"authorized": False},

@@ -1,0 +1,29 @@
+{
+  "allowed_next": [
+    "objective-family redesign away from current OI/positioning pool",
+    "broader non-OI objective family contract if additional exploration is authorized"
+  ],
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_generation": false,
+  "authorizes_full_numeric_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_stress_clean_preflight_clues",
+    "matched_controls_often_dominate",
+    "some_families_sparse_under_smoke_subset"
+  ],
+  "candidate_count": 56,
+  "control_dominated_count": 41,
+  "decision": "HOLD_A7AL2X7F_OBJECTIVE_FAMILY_NUMERIC_EVIDENCE_WEAK",
+  "executes_formula_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T03:19:43Z",
+  "missing_or_sparse_count": 16,
+  "pre_may_all_positive_count": 4,
+  "source_decision": "HOLD_A7AL2X7_NO_CLEAN_NUMERIC_PREFLIGHT_CLUES",
+  "source_stage": "A7AL-2X7H",
+  "stage": "A7AL-2X7HF",
+  "stress_clean_preflight_clue_count": 0
+}
