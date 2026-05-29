@@ -1,0 +1,32 @@
+{
+  "date": "2026-05-29",
+  "decision": "contract_only",
+  "experiment_id": "20260529_a7ac2_label_diversification_contract",
+  "inputs": {
+    "a7ac1r_manifest": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac1r_representative_quarantine_contract\\a7ac1r_manifest.json",
+    "diagnostic_subset": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac1r_representative_quarantine_contract\\a7ac1r_diagnostic_representative_subset.csv",
+    "quarantined": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac1r_representative_quarantine_contract\\a7ac1r_quarantined_representatives.csv"
+  },
+  "mode": "light_contract",
+  "next_action": "A7AC-3 label diversification and neutralization diagnostic",
+  "objective": "Define a bounded label-diversification and neutralization diagnostic for A7AC-1R representatives.",
+  "outputs": {
+    "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7AC2_LABEL_DIVERSIFICATION_CONTRACT_20260529.md",
+    "runtime": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ac2_label_diversification_contract"
+  },
+  "parameters": {
+    "May_usage": "not used",
+    "minimum_neutralized_candidates": 2,
+    "minimum_non_ranked_candidates": 2,
+    "required_horizons": [
+      1,
+      4
+    ],
+    "required_labels": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L7_ranked_future_return"
+    ]
+  },
+  "status": "completed"
+}

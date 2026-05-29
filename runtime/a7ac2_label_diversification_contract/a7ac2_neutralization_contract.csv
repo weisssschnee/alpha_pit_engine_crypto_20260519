@@ -1,0 +1,6 @@
+neutralization_mode,required,minimum_group_symbols,fallback,purpose
+global_rank,True,30,none,baseline cross-sectional top/bottom construction
+liquidity_tier_neutral,True,8,global_rank,separate signal from liquidity tier bias
+latent_state_neutral,True,8,liquidity_tier_neutral,separate signal from listing-age latent-state bias
+meme_multiplier_neutral,True,8,liquidity_tier_neutral,separate signal from meme and contract-multiplier effects
+btc_eth_beta_residual,False,30,global_rank,secondary beta residual check where implementation is available

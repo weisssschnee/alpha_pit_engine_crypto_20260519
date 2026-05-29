@@ -1,0 +1,7 @@
+step,description,executes_search
+load_diagnostic_subset,use only A7AC-1R diagnostic representative subset; quarantined representatives remain excluded,False
+recompute_candidate_signals,re-evaluate the 7 diagnostic expressions on full timestamps for label/neutralization variants only,False
+evaluate_label_matrix,evaluate required labels L0/L1/L7 at 1h/4h; optional L2/L3/L4 if local inputs are available,False
+evaluate_neutralization_modes,"global, liquidity-tier, latent-state, meme/multiplier neutral where grouping inputs are available",False
+control_and_lag_audit,wrong-lag/stale/shuffle/sign/random controls plus one-bar execution and 2/5/10/20bps cost proxy,False
+decide_label_artifact_vs_real_structure,"if evidence exists only in L7 ranked-return, freeze as label artifact and stop",False

@@ -1,0 +1,10 @@
+gate,rule
+quarantine_respected,no A7AC-1 blocked representatives in A7AC-3 input
+non_ranked_label_support,at least 2 diagnostic candidates survive either L0 or L1 in pre-May splits
+neutralization_support,at least 2 diagnostic candidates survive one required neutralization mode beyond global rank
+control_hard_gate,control_ratio must remain <1.0 by split and control type
+control_warning_disclosure,0.80 <= control_ratio < 1.0 remains diagnostic-only warning
+nonoverlap_positive,nonoverlap min/median tstats must remain positive in validation/test/recent
+lag_cost_positive,one-bar lag and 20bps proxy must remain positive
+label_concentration_resolution,"if survivors remain L7-only, do not authorize formula search or replay expansion"
+no_may_leakage,May is unavailable to selector/ranking/generation/thresholds and remains stress-only if later observed

@@ -1,0 +1,20 @@
+{
+  "A7AC-3": {
+    "status": "HOLD_A7AC3_PARTIAL_LABEL_DIVERSIFICATION"
+  },
+  "A7AC-4_neutralized_representative_contract": {
+    "authorized": false
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

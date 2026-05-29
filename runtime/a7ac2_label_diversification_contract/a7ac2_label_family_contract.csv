@@ -1,0 +1,7 @@
+label_family,role,horizons,required,promotion_role
+L0_raw_forward_return,raw return sanity check,1|4,True,diagnostic_only_unless_neutral_survives
+L1_cross_sectional_relative_return,market-mean relative return,1|4,True,minimum non-ranked diversification target
+L7_ranked_future_return,current survivor label; must not be sole evidence,1|4,True,cannot promote alone
+L2_btc_eth_residual_return,BTC/ETH beta residual label,1|4,False,secondary if local implementation available
+L3_liquidity_tier_relative_return,liquidity-tier relative label,1|4,False,secondary if local implementation available
+L4_latent_state_relative_return,time-varying latent-state relative label,1|4,False,secondary if local implementation available

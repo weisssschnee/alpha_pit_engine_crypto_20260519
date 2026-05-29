@@ -1,0 +1,20 @@
+{
+  "A7AC-2": {
+    "status": "PASS_A7AC2_LABEL_DIVERSIFICATION_CONTRACT_READY_FOR_A7AC3"
+  },
+  "A7AC-3_label_diversification_and_neutralization_diagnostic": {
+    "authorized": true
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

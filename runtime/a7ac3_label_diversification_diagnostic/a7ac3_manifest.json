@@ -1,0 +1,43 @@
+{
+  "authorizes_a7ac4_neutralized_representative_contract": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 6,
+  "decision": "HOLD_A7AC3_PARTIAL_LABEL_DIVERSIFICATION",
+  "decision_counts": {
+    "A7AC3_LABEL_NEUTRALIZATION_PASS_WITH_WARNINGS": 33,
+    "HOLD_A7AC3_LABEL_OR_NEUTRALIZATION_BLOCKED": 75
+  },
+  "executes_formula_generation": false,
+  "executes_label_diagnostic": true,
+  "executes_search": false,
+  "executes_training": false,
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-05-29T07:09:24Z",
+  "horizons": [
+    1,
+    4
+  ],
+  "input_a7ac2_decision": "PASS_A7AC2_LABEL_DIVERSIFICATION_CONTRACT_READY_FOR_A7AC3",
+  "labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L7_ranked_future_return"
+  ],
+  "latent_group_status": "deferred_dynamic_latent_neutralization_not_run_in_A7AC3",
+  "metric_rows": 3780,
+  "neutralization_modes": [
+    "global_rank",
+    "liquidity_tier_neutral",
+    "meme_multiplier_neutral"
+  ],
+  "neutralized_pass_candidates": 6,
+  "non_rank_pass_candidates": 1,
+  "pass_rows": 33,
+  "stage": "A7AC-3",
+  "symbols_loaded": 96,
+  "timestamps": 21025,
+  "uses_may": false
+}

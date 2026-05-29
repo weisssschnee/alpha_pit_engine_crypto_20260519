@@ -1,0 +1,23 @@
+{
+  "authorizes_a7ac3_label_diversification_diagnostic": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AC2_LABEL_DIVERSIFICATION_CONTRACT_READY_FOR_A7AC3",
+  "diagnostic_candidates": 6,
+  "diagnostic_clusters": 7,
+  "diagnostic_label_families": 1,
+  "diagnostic_rows": 7,
+  "executes_contract_only": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T06:55:43Z",
+  "input_a7ac1r_decision": "PASS_A7AC1R_DIAGNOSTIC_SUBSET_FROZEN_READY_FOR_A7AC2_WITH_WARNINGS",
+  "quarantined_rows": 1,
+  "required_label_count": 3,
+  "required_neutralization_count": 4,
+  "stage": "A7AC-2",
+  "uses_may": false
+}

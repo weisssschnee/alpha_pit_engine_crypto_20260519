@@ -1,0 +1,10 @@
+label_family,neutralization_mode,rows,pass_rows,candidates,pass_candidates,median_control_ratio
+L7_ranked_future_return,meme_multiplier_neutral,12,11,6,6,0.8019395597152544
+L7_ranked_future_return,global_rank,12,10,6,6,0.7417587553051257
+L7_ranked_future_return,liquidity_tier_neutral,12,10,6,5,0.835857523166005
+L0_raw_forward_return,liquidity_tier_neutral,12,1,6,1,5.490781111688559
+L1_cross_sectional_relative_return,liquidity_tier_neutral,12,1,6,1,5.49078111168856
+L0_raw_forward_return,global_rank,12,0,6,0,9.843346216610843
+L0_raw_forward_return,meme_multiplier_neutral,12,0,6,0,8.592693042895297
+L1_cross_sectional_relative_return,global_rank,12,0,6,0,9.843346216610858
+L1_cross_sectional_relative_return,meme_multiplier_neutral,12,0,6,0,8.592693042895306
