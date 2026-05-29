@@ -1,0 +1,20 @@
+{
+  "A7AG-0": {
+    "status": "PASS_A7AG0_ROLE_AWARE_GENERATION_CONTRACT_READY_FOR_A7AG1_BLUEPRINT_DRYRUN"
+  },
+  "a7ag1_static_blueprint_dryrun": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search_execution": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "numeric_replay": {
+    "authorized": false
+  }
+}

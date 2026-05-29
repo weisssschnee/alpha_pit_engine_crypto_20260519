@@ -1,0 +1,10 @@
+{
+  "a7ag1_executes_formula_search": false,
+  "a7ag1_executes_numeric_replay": false,
+  "a7ag1_static_blueprint_dryrun_authorized": true,
+  "combined_max_static_blueprints": 576,
+  "g0_max_static_blueprints": 128,
+  "g1_max_static_blueprints": 192,
+  "g2_max_static_blueprints": 256,
+  "numeric_replay_after_a7ag1": "requires_separate_A7AG2_contract"
+}

@@ -1,0 +1,4 @@
+selector_tier,selected,unique_fields,unique_families,max_control_ratio,min_robust_tstat_floor
+T0_raw_relative_alpha,3,1,1,0.8310629993440081,4.098221868779841
+T1_beta_neutral_alpha_diagnostic,6,3,3,0.986634721522299,1.1818188186115688
+T2_downside_risk_defense,9,5,4,0.8733738051380588,2.334510991572852

@@ -1,0 +1,20 @@
+{
+  "authorizes_a7ag1_static_blueprint_dryrun": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AG0_ROLE_AWARE_GENERATION_CONTRACT_READY_FOR_A7AG1_BLUEPRINT_DRYRUN",
+  "executes_contract_only": true,
+  "executes_formula_search": false,
+  "executes_numeric_replay": false,
+  "executes_static_blueprint_generation": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T08:22:01Z",
+  "selected_queue_rows": 18,
+  "source_a7af1_decision": "PASS_A7AF1_ROLE_AWARE_SELECTOR_DRYRUN_READY_FOR_A7AG0_CONTRACT",
+  "stage": "A7AG-0",
+  "track_count": 3,
+  "uses_may": false
+}
