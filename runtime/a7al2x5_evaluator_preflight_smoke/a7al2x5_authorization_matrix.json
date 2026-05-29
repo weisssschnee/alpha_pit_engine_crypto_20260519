@@ -1,0 +1,21 @@
+{
+  "A7AL-2X5": {
+    "status": "PASS_A7AL2X5_EVALUATOR_PREFLIGHT_SMOKE_READY_FOR_SMALL_REPLAY_CONTRACT"
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_generation": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "numeric_replay_execution": {
+    "authorized": false
+  },
+  "small_numeric_replay_contract": {
+    "authorized": true,
+    "note": "contract only; execution still requires explicit next stage"
+  }
+}

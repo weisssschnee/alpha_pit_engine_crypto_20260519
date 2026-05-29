@@ -1,0 +1,23 @@
+{
+  "activity_failure_count": 0,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_generation": false,
+  "authorizes_numeric_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "base_numeric_field_count": 7,
+  "blockers": [],
+  "decision": "PASS_A7AL2X5_EVALUATOR_PREFLIGHT_SMOKE_READY_FOR_SMALL_REPLAY_CONTRACT",
+  "eval_failure_count": 0,
+  "evaluated_candidates": 176,
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_training": false,
+  "generated_at": "2026-05-29T00:11:46Z",
+  "group_field_count": 6,
+  "input_x4m_decision": "PASS_A7AL2X4M_READY_FOR_NUMERIC_REPLAY_PREFLIGHT_IMPLEMENTATION",
+  "latent_numeric_field_count": 1,
+  "numeric_field_count": 8,
+  "stage": "A7AL-2X5",
+  "symbols_loaded": 96,
+  "timestamps": 21025
+}

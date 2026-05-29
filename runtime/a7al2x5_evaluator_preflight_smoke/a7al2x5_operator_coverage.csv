@@ -1,0 +1,15 @@
+operator,selected_candidate_count
+Abs,6
+Add,18
+Clip,18
+Delta,164
+GroupNeutralize,30
+Mean,80
+Mul,70
+Neg,18
+Rank,112
+Sign,44
+StateMask,18
+Sub,64
+Winsor,8
+ZScore,76

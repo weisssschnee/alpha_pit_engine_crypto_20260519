@@ -295,7 +295,7 @@ def build_specs() -> tuple[list[dict[str, Any]], dict[str, list[str]]]:
     oi_fields = ["open_interest_last", "open_interest_mean", "open_interest_value_last", "open_interest_value_mean"]
     price_fields = ["trade_close", "mark_close", "index_close"]
     basis_fields = ["premium_close", "premium_close_bps", "mark_index_basis_bps", "mark_trade_basis_bps"]
-    funding_fields = ["funding_rate", "funding_rate_abs_168h", "funding_rate_mean_168h"]
+    funding_fields = ["funding_rate_abs_168h", "funding_rate_mean_168h"]
     global_fields = ["global_long_short_account_ratio_last", "global_long_short_account_ratio_mean"]
     account_fields = ["top_long_short_account_ratio_last", "top_long_short_account_ratio_mean"]
     position_fields = ["top_long_short_position_ratio_last", "top_long_short_position_ratio_mean"]

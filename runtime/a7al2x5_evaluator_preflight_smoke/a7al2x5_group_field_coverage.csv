@@ -1,0 +1,7 @@
+group_field,unique_values,values
+R2_market_breadth_state,3,breadth_mid|breadth_strong|breadth_weak
+R3_liquidity_cycle_state,3,liq_contracting|liq_expanding|liq_mid
+R4_leverage_crowding_state,3,lev_high|lev_low|lev_mid
+R5_basis_premium_dislocation_state,3,basis_high|basis_low|basis_mid
+is_major,2,False|True
+liquidity_tier,5,tail|top100|top20|top200|top50

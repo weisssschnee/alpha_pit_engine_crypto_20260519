@@ -1,6 +1,6 @@
 # CRYPTO A7AL-2X3 Family-Balanced Dry Generation Smoke
 
-Generated: 2026-05-28T17:37:17Z
+Generated: 2026-05-29T00:09:43Z
 
 ## Decision
 
@@ -27,7 +27,7 @@ This stage executes dry candidate generation and shared-ledger construction only
   "executes_search": false,
   "executes_training": false,
   "family_count": 7,
-  "generated_at": "2026-05-28T17:37:17Z",
+  "generated_at": "2026-05-29T00:09:43Z",
   "generated_count": 1920,
   "selected_for_future_preflight_count": 176,
   "static_valid_count": 1920

@@ -1,7 +1,7 @@
 objective_family,selected_count,unique_fields,unique_ops,blocking_fields,blocking_operators,ready_for_current_fast_replay
 F0_OI_delta_price_interaction,32,2,8,,Winsor,False
 F1_OI_basis_premium_interaction,24,2,10,,Clip,False
-F2_OI_funding_crowding_interaction,24,2,11,,Clip,False
+F2_OI_funding_crowding_interaction,24,2,11,funding_rate_abs_168h,Clip,False
 F3_positioning_divergence,24,3,7,,,True
 F4_OI_taker_flow_interaction,24,2,10,,Clip,False
 F5_OI_upper_regime_interaction,24,5,3,R2_market_breadth_state|R3_liquidity_cycle_state|R4_leverage_crowding_state|R5_basis_premium_dislocation_state,GroupNeutralize,False
