@@ -1,0 +1,4 @@
+transform,description,enabled_in_a7ae1
+level,raw feature value,True
+delta_24h,feature_t - feature_t-24,True
+cs_rank,timestamp cross-sectional rank percentile,True

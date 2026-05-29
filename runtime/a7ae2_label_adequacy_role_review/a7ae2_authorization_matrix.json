@@ -1,0 +1,17 @@
+{
+  "A7AE-2": {
+    "status": "PASS_A7AE2_LABEL_ADEQUACY_ROLES_READY_FOR_SELECTOR_REWRITE_REVIEW"
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "selector_rewrite_review": {
+    "authorized": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "A7AE-1": {
+    "status": "PASS_A7AE1_NON_RANK_LABEL_RESPONSE_CANDIDATES_FOUND_SEARCH_STILL_HOLD"
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "feature_role_review": {
+    "authorized": true
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

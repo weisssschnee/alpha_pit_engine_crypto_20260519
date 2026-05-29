@@ -1,0 +1,17 @@
+{
+  "A7AE-0": {
+    "status": "PASS_A7AE0_LABEL_ADEQUACY_EXTENSION_CONTRACT_READY_FOR_A7AE1"
+  },
+  "a7ae1_label_adequacy_response_map": {
+    "authorized": true
+  },
+  "alpha_proof_shadow_paper_live": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  }
+}

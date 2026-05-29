@@ -1,0 +1,20 @@
+{
+  "authorizes_a7ae1_label_adequacy_response_map": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7AE0_LABEL_ADEQUACY_EXTENSION_CONTRACT_READY_FOR_A7AE1",
+  "executes_contract_only": true,
+  "executes_response_map": false,
+  "executes_search": false,
+  "executes_training": false,
+  "feature_count": 24,
+  "generated_at": "2026-05-29T07:56:54Z",
+  "label_family_count": 7,
+  "source_a7ad1_decision": "HOLD_A7AD1_RANKED_LABEL_TRANSLATION_TOO_NARROW",
+  "source_a7ad1_translated_candidates": 1,
+  "stage": "A7AE-0",
+  "transform_count": 3,
+  "uses_may": false
+}

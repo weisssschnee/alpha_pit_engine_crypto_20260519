@@ -1,0 +1,8 @@
+label_family,definition,role,enabled_in_a7ae1
+L0_raw_forward_return,log(close_t+h)-log(close_t),baseline tradable raw return proxy,True
+L1_cross_sectional_relative_return,raw forward return minus timestamp cross-sectional mean,market-mode reduced relative return,True
+L2_BTC_ETH_beta_residual_return,train-fit per-symbol residual versus BTC and ETH forward-return factors,major-beta residual return,True
+L3_liquidity_tier_relative_return,raw forward return demeaned within liquidity_tier at timestamp,liquidity-tier relative return,True
+L5_vol_adjusted_return,raw forward return divided by contemporaneous realized_vol_168h,volatility-normalized return,True
+L6_downside_avoidance,"min(raw forward return, 0); higher spread means top bucket loses less in downside states",downside-avoidance diagnostic,True
+L7_ranked_future_return,timestamp cross-sectional rank percentile of raw forward return minus 0.5,rank-label diagnostic only,True
