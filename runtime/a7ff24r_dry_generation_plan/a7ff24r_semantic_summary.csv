@@ -1,0 +1,16 @@
+semantic_pair,count
+basis_premium_like|funding_like,6000
+funding_like|positioning_like,6000
+basis_premium_like|positioning_like,4781
+basis_premium_like|volatility_like,1563
+basis_premium_like|price_like,773
+basis_premium_like|basis_premium_like,442
+price_like|volatility_like,402
+volatility_like|volatility_like,211
+liquidity_like|volatility_like,124
+volatility_like,84
+basis_premium_like,81
+basis_premium_like|liquidity_like,62
+price_like,34
+basis_premium_like|generic_numeric,24
+basis_premium_like|state_or_taxonomy,18

@@ -1,0 +1,36 @@
+{
+  "allowed_pair_count": 837,
+  "authorizes_a7ff24r_company_execution_plan_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_old_a7ff23_execution": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF23R_DERIVED_FACTOR_EXPANSION_CONTRACT_READY_FOR_A7FF24R_PLAN",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T06:05:39Z",
+  "generation_budget": {
+    "company_numeric_shard_size": 200,
+    "company_numeric_shards": 12,
+    "company_numeric_wave_blueprints": 2400,
+    "deep_diagnostic_target": 128,
+    "external_label_balanced_selector_target_rows": 640,
+    "generated_blueprints_target": 24000,
+    "materialization_target": 3000,
+    "max_parallel_company_shards": 4,
+    "minimum_selected_label_families": 4,
+    "minimum_selected_semantic_families": 4,
+    "minimum_selected_signal_vector_clusters": 8
+  },
+  "seed_route_counts": {
+    "exploratory_signal_seed": 4,
+    "modifier_only_seed": 73,
+    "primary_signal_seed": 1
+  },
+  "source_r5_decision": "PASS_A7FFR5_PROMOTION_REDESIGN_READY_BUT_SEARCH_STILL_HOLD",
+  "source_seed_preview_rows": 78,
+  "source_signal_semantic_family_count": 3,
+  "stage": "A7FF-23R-DERIVED-FACTOR-EXPANSION-CONTRACT",
+  "uses_may": false
+}

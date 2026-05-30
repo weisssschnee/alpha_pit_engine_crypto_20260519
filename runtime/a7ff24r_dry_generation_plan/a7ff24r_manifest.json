@@ -1,0 +1,50 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_company_numeric_execution": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "blueprint_count": 20599,
+  "company_shard_count": 12,
+  "company_wave_queue_count": 2400,
+  "decision": "PASS_A7FF24R_DRY_GENERATION_PLAN_READY_FOR_COMPANY_NUMERIC",
+  "executes_blueprint_generation": true,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T06:20:13Z",
+  "materialization_motif_count": 10,
+  "materialization_queue_count": 3000,
+  "materialization_semantic_pair_count": 10,
+  "motif_count": 10,
+  "selector_policy": {
+    "allowed_labels": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L2_BTC_ETH_beta_residual_return",
+      "L3_liquidity_tier_relative_return",
+      "L4_latent_state_relative_return",
+      "L5_vol_adjusted_return",
+      "L6_downside_avoidance_or_crash_beta"
+    ],
+    "control_ratio_diagnostic_gate": 1.0,
+    "control_ratio_promotion_gate": 0.8,
+    "forbidden_selector": [
+      "A7FF8_internal_selected_queue",
+      "raw_pass_count_only",
+      "L7_only_rank_label"
+    ],
+    "max_top_label_share": 0.25,
+    "max_top_motif_share": 0.3,
+    "max_top_pair_family_share": 0.3,
+    "max_top_semantic_family_share": 0.35,
+    "min_non_l7_selected_share": 0.75,
+    "ranked_label_policy": "L7 diagnostic only; cannot be sole promotion evidence",
+    "selector": "external_label_balanced_selector_v2",
+    "uses_may_in_selector": false
+  },
+  "semantic_pair_count": 15,
+  "source_a7ff23r_decision": "PASS_A7FF23R_DERIVED_FACTOR_EXPANSION_CONTRACT_READY_FOR_A7FF24R_PLAN",
+  "stage": "A7FF-24R-DRY-GENERATION-PLAN",
+  "uses_may": false
+}

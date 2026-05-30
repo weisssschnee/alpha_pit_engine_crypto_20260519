@@ -1,0 +1,13 @@
+semantic_type_v3,a7ff23r_seed_route,field_count,standalone_alpha_allowed,interaction_allowed,non_l7_candidate_rows,primitive_candidate_rows,best_control_ratio
+basis_premium_like,exploratory_signal_seed,1,0,1,0,1,0.7914377201455718
+price_like,exploratory_signal_seed,1,0,1,0,4,0.2543170677185504
+volatility_like,exploratory_signal_seed,2,0,2,0,4,0.8794980260372742
+basis_premium_like,modifier_only_seed,18,0,18,0,0,0.1077748962021696
+funding_like,modifier_only_seed,6,0,6,0,0,0.607008666815867
+generic_numeric,modifier_only_seed,9,0,9,0,0,
+liquidity_like,modifier_only_seed,11,0,11,0,0,2.140760343626434
+positioning_like,modifier_only_seed,15,0,15,0,0,0.6881180489558985
+price_like,modifier_only_seed,2,0,2,0,0,6.212879638689556
+state_or_taxonomy,modifier_only_seed,8,0,8,0,0,0.9971229523630204
+volatility_like,modifier_only_seed,4,0,4,0,0,
+basis_premium_like,primary_signal_seed,1,1,1,2,2,0.1412887057970058

@@ -1,0 +1,5 @@
+level,target_blueprints,source,purpose
+L1_single_field_transform,5000,ordinary_alpha_seed + exploratory_signal_seed,probe whether single-source transforms have non-L7 response
+L2_typed_two_field_interaction,12000,A7FF-R3 allow/probe priority pairs,expand OI/funding/liquidity/vol/price interactions without open grammar
+L3_state_conditioned_feature,5000,modifier_only_seed as condition/neutralizer only,test regime/state conditioning without standalone state alpha
+L4_factor_candidate_probe,2000,response-backed candidates from L1-L3,produce selector-ready factor probes

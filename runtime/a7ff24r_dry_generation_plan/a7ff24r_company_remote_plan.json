@@ -1,0 +1,10 @@
+{
+  "company_shard_size": 200,
+  "company_shards": 12,
+  "execution_status": "not_started",
+  "local_queue": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ff24r_dry_generation_plan\\a7ff24r_company_numeric_wave_queue.csv",
+  "max_parallel_company_shards": 4,
+  "next_required_script": "A7FF25R company numeric runner implementation or adapter against crypto_a7ff8_expanded_numeric_probe.py",
+  "remote_python": "D:\\HermesWorker\\venvs\\phase3z33\\Scripts\\python.exe",
+  "remote_repo": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote"
+}

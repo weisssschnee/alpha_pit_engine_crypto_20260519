@@ -1,0 +1,17 @@
+{
+  "commands": [
+    "G:\\PythonProject\\.venv\\Scripts\\python.exe scripts\\crypto_a7ff23r_derived_factor_expansion_contract.py"
+  ],
+  "continuation": "Implement A7FF24R company execution plan only from this contract; do not execute old A7FF23.",
+  "experiment_id": "20260530_a7ff23r_derived_factor_expansion_contract",
+  "input_files": [
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ffr1_field_ontology_v3\\a7ffr1_field_ontology_v3.csv",
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ffr2_operator_probing_v2\\a7ffr2_operator_probe_policy.csv",
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ffr3_feature_pair_policy_v2\\a7ffr3_feature_pair_policy_v2.csv",
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ffr4_coarse_to_fine_generation_redesign\\a7ffr4_generation_levels.csv",
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ffr5_response_backed_promotion_redesign\\a7ffr5_seed_preview.csv"
+  ],
+  "mode": "contract_only",
+  "objective": "define heavier R-policy-derived feature-to-factor expansion without executing search",
+  "reproducible": "yes"
+}

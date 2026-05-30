@@ -1,0 +1,13 @@
+{
+  "company_numeric_shard_size": 200,
+  "company_numeric_shards": 12,
+  "company_numeric_wave_blueprints": 2400,
+  "deep_diagnostic_target": 128,
+  "external_label_balanced_selector_target_rows": 640,
+  "generated_blueprints_target": 24000,
+  "materialization_target": 3000,
+  "max_parallel_company_shards": 4,
+  "minimum_selected_label_families": 4,
+  "minimum_selected_semantic_families": 4,
+  "minimum_selected_signal_vector_clusters": 8
+}
