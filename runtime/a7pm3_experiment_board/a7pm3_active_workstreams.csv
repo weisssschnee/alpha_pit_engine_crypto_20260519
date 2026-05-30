@@ -1,5 +1,5 @@
 workstream,current_stage,status,next
 governance,A7PM-0/1/2/3,pass,keep registry as source-of-truth
-a7ff_family_diversification,A7FF-34,pass_queue_coverage,A7FF-35 numeric preflight
+a7ff_family_diversification,A7FF-35,pass_diversified_numeric_preflight,A7FF-36 forensic/repair decision
 a7ff_funding_tail,A7FF-24R3,pass_dense_materializer_preflight,A7FF-24R4 repaired-queue numeric wave contract
 search_execution,blocked,not_authorized,none

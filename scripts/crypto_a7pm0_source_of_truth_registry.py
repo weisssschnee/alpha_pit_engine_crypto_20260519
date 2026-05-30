@@ -27,7 +27,7 @@ BLOCKED_TASKS = {
 }
 
 NEXT_ALLOWED_TASKS = {
-    "A7FF-35": "numeric preflight on A7FF-33 family-diversified queue after A7FF-34 coverage pass; no search",
+    "A7FF-36": "forensic/repair decision on A7FF-35 diversified numeric preflight clues; no search",
     "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
 }
