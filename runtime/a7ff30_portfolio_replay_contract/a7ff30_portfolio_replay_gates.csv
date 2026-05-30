@@ -1,0 +1,9 @@
+gate,rule,hard
+frozen_queue_only,input must be runtime/a7ff29_candidate_forensic/a7ff29_a7ff30_portfolio_replay_contract_queue.csv,True
+no_weight_learning,no trained weights; equal candidate ensemble only,True
+non_l7_only,ranked-return diagnostic rows are excluded,True
+control_clean,reject any candidate with max_control_ratio >= 1.0; warn >= 0.8,True
+cost_stress,report 2/5/10 bps net proxies; no promotion if cost2 collapses,True
+concentration,"report symbol, month, semantic pair, skeleton, liquidity tier, and latent-state concentration",True
+basis_premium_warning,basis/premium-root concentration is a warning; do not generalize to broad crypto alpha,True
+no_may_selector,May/stress remains post-selection attribution only,True

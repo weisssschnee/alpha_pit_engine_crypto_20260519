@@ -1,0 +1,5 @@
+mode,description,required_outputs
+equal_weight_top_bottom,"rank signal cross-sectionally each hour; long top bucket, short bottom bucket; equal symbol weights",gross/net spread; turnover; cost2/5/10; symbol/month/state concentration
+liquidity_capped_top_bottom,same as equal-weight but cap symbol weights by liquidity tier and active universe size,gross/net spread; liquidity-cap hit rate; top weight concentration
+candidate_ensemble_equal,average normalized ranks across the 6 frozen candidates; no learned weights,ensemble gross/net spread; candidate marginal contribution; candidate correlation
+candidate_leave_one_out,remove one candidate at a time from ensemble to estimate marginal contribution,delta net spread; delta tstat; concentration change

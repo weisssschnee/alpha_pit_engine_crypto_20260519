@@ -449,6 +449,21 @@ A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,sem
 A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,skeleton_count,8,False
 A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,stage,"""A7FF-28""",False
 A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,warnings,[],False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,authorizes_a7ff30a_portfolio_replay_smoke,true,True
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,authorizes_search,false,False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,candidate_count,6,False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,decision,"""PASS_A7FF30_PORTFOLIO_REPLAY_CONTRACT_READY_NO_SEARCH_AUTH""",False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,executes_generation,false,False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,executes_replay,false,False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,executes_search,false,False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,generated_at,"""2026-05-30T10:20:04Z""",False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,prior_decision,"""PASS_A7FF29_FORENSIC_READY_FOR_A7FF30_PORTFOLIO_REPLAY_CONTRACT_WITH_CONCENTRATION_WARNINGS_NO_SEARCH_AUTH""",False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,prior_stage,"""A7FF-29""",False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,semantic_pair_count,3,False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,stage,"""A7FF-30""",False
+A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,warnings,"[""all_candidates_have_basis_premium_root"", ""safe_div_outlier_risk_present""]",False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_feature_columns,94,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_symbol_month_count,87,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,authorizes_a7r_horizon_diagnostic_contract,true,True

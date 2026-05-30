@@ -1,0 +1,4 @@
+step,action,authorizes_search
+A7FF-30A,portfolio replay implementation smoke on frozen 6-candidate queue,False
+A7FF-30B,candidate ensemble and leave-one-out marginal replay,False
+A7FF-30C,portfolio concentration and stress attribution report,False

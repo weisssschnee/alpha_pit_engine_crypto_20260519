@@ -1,0 +1,4 @@
+risk,observed,mitigation
+basis_premium_root_concentration,True,portfolio replay must report this as a family concentration warning
+safe_div_outlier,True,replay must report winsorized and raw variants side by side
+single_label_family,False,report per-label and ensemble results; no promotion on one label only

@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T10:18:17Z
+Generated: 2026-05-30T10:21:03Z
 
 ## Decision
 
@@ -19,11 +19,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF29_CANDIDATE_FORENSIC_20260530.md
-?? runtime/a7ff29_candidate_forensic/
-?? scripts/crypto_a7ff29_candidate_forensic.py
-HEAD=537bbdf2baaf519fbbc9d956e97eceaeadac2e82
-origin/main=537bbdf2baaf519fbbc9d956e97eceaeadac2e82
+?? reports/CRYPTO_A7FF30_PORTFOLIO_REPLAY_CONTRACT_20260530.md
+?? runtime/a7ff30_portfolio_replay_contract/
+?? scripts/crypto_a7ff30_portfolio_replay_contract.py
+HEAD=bff1ff94e354916a81cb7da7835a2fcd9479cafb
+origin/main=bff1ff94e354916a81cb7da7835a2fcd9479cafb
 HEAD == origin/main: True
 ```
 
@@ -31,8 +31,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2074,
-  "authorization_record_count": 657,
+  "artifact_count": 2082,
+  "authorization_record_count": 672,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -45,12 +45,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T10:18:17Z",
-  "head": "537bbdf2baaf519fbbc9d956e97eceaeadac2e82",
+  "generated_at": "2026-05-30T10:21:03Z",
+  "head": "bff1ff94e354916a81cb7da7835a2fcd9479cafb",
   "head_equals_origin_main": true,
-  "origin_main": "537bbdf2baaf519fbbc9d956e97eceaeadac2e82",
+  "origin_main": "bff1ff94e354916a81cb7da7835a2fcd9479cafb",
   "stage": "A7PM-0",
-  "stage_count": 220
+  "stage_count": 221
 }
 ```
 
@@ -70,7 +70,7 @@ HEAD == origin/main: True
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |      97 |
-| valid_or_historical_record   | contract                   |      44 |
+| valid_or_historical_record   | contract                   |      45 |
 | valid_or_historical_record   | smoke                      |       7 |
 | valid_or_historical_record   | diagnostic                 |       5 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
@@ -103,7 +103,7 @@ HEAD == origin/main: True
 ```json
 {
   "A7FF-24R2": "repaired company queue tail rebuild using dense funding-state fields or healthy backfill; no search",
-  "A7FF-30": "portfolio replay contract for the frozen A7FF-29 six-candidate queue; no search",
+  "A7FF-30A": "portfolio replay smoke for the frozen A7FF-30 six-candidate queue; no search",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```
