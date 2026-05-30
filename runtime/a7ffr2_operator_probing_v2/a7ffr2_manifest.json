@@ -1,0 +1,13 @@
+{
+  "authorizes_a7ffr3": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "decision": "PASS_A7FFR2_OPERATOR_PROBING_V2_READY",
+  "executes_generation": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T05:51:45Z",
+  "policy_rows": 42,
+  "probe_required_rows": 39,
+  "promote_operator_rows": 0,
+  "stage": "A7FF-R2-OPERATOR-PROBING-V2"
+}

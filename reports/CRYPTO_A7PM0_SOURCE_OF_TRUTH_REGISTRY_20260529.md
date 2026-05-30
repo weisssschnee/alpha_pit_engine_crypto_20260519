@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T05:15:47Z
+Generated: 2026-05-30T05:52:38Z
 
 ## Decision
 
@@ -12,11 +12,21 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
-?? reports/CRYPTO_A7FF22_LABEL_BALANCED_EXPANSION_CONTRACT_20260530.md
-?? runtime/a7ff22_label_balanced_expansion_contract/
-?? scripts/crypto_a7ff22_label_balanced_expansion_contract.py
-HEAD=039707500fa9f4cbf638f5b42c88dbc880a0b194
-origin/main=039707500fa9f4cbf638f5b42c88dbc880a0b194
+?? reports/CRYPTO_A7FFR0_DERIVED_GENERATION_FAILURE_FREEZE_20260530.md
+?? reports/CRYPTO_A7FFR1_FIELD_ONTOLOGY_V3_20260530.md
+?? reports/CRYPTO_A7FFR2_OPERATOR_PROBING_V2_20260530.md
+?? reports/CRYPTO_A7FFR3_FEATURE_PAIR_POLICY_V2_20260530.md
+?? reports/CRYPTO_A7FFR4_COARSE_TO_FINE_GENERATION_REDESIGN_20260530.md
+?? reports/CRYPTO_A7FFR5_RESPONSE_BACKED_PROMOTION_REDESIGN_20260530.md
+?? runtime/a7ffr0_derived_generation_failure_freeze/
+?? runtime/a7ffr1_field_ontology_v3/
+?? runtime/a7ffr2_operator_probing_v2/
+?? runtime/a7ffr3_feature_pair_policy_v2/
+?? runtime/a7ffr4_coarse_to_fine_generation_redesign/
+?? runtime/a7ffr5_response_backed_promotion_redesign/
+?? scripts/crypto_a7ffr_derived_generation_redesign.py
+HEAD=1427c3470f64688646bb92bb4c4446562d5f103e
+origin/main=1427c3470f64688646bb92bb4c4446562d5f103e
 HEAD == origin/main: True
 ```
 
@@ -24,7 +34,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 1678,
+  "artifact_count": 1702,
   "authorization_record_count": 638,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +48,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T05:15:47Z",
-  "head": "039707500fa9f4cbf638f5b42c88dbc880a0b194",
+  "generated_at": "2026-05-30T05:52:38Z",
+  "head": "1427c3470f64688646bb92bb4c4446562d5f103e",
   "head_equals_origin_main": true,
-  "origin_main": "039707500fa9f4cbf638f5b42c88dbc880a0b194",
+  "origin_main": "1427c3470f64688646bb92bb4c4446562d5f103e",
   "stage": "A7PM-0",
-  "stage_count": 199
+  "stage_count": 205
 }
 ```
 
@@ -56,13 +66,13 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      36 |
+| hold                         | hold                       |      38 |
 | hold                         | diagnostic                 |       4 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |      83 |
+| valid_or_historical_record   | governance_or_audit        |      87 |
 | valid_or_historical_record   | contract                   |      40 |
 | valid_or_historical_record   | smoke                      |       7 |
 | valid_or_historical_record   | diagnostic                 |       5 |

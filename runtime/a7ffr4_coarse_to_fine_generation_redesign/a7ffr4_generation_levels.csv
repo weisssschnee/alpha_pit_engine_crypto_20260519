@@ -1,0 +1,5 @@
+level,budget,source,gate
+L1_single_field_transform,2400,ontology_v3 + operator_policy_v2,operator_policy_v2 != block
+L2_typed_two_field_interaction,4800,feature_pair_policy_v2,allow_high_priority or probe_high_priority
+L3_state_conditioned_feature,1600,regime_neutralizer_interaction_seed,state field may condition but not become standalone alpha
+L4_factor_candidate,800,response-backed generated features,"non-L7, control-clean, cost/lag robust"

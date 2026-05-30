@@ -1,0 +1,8 @@
+gate,threshold,hard
+non_l7_label_evidence,>=1 non-L7 candidate row,True
+control_clean,control_ratio < 0.80 for promotion; <1.0 for diagnostic,True
+lag_and_timing,lag_ok and timing_ok,True
+cost_survival,cost5-or-better for diagnostic; cost10 preferred,False
+role_integrity,risk/regime fields cannot become standalone alpha,True
+field_family_breadth,>=3 semantic families before search authorization,True
+selector_policy,external label-balanced selector only,True

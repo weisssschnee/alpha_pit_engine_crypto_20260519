@@ -1,0 +1,14 @@
+{
+  "allow_high_priority_pairs": 132,
+  "authorizes_a7ffr4": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "decision": "PASS_A7FFR3_FEATURE_PAIR_POLICY_READY",
+  "executes_generation": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T05:51:47Z",
+  "pair_count": 3003,
+  "probe_high_priority_pairs": 705,
+  "seed_field_count": 78,
+  "stage": "A7FF-R3-FEATURE-PAIR-POLICY-V2"
+}

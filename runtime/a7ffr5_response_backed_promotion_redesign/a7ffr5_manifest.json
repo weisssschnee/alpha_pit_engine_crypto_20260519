@@ -1,0 +1,14 @@
+{
+  "authorizes_a7ff23r_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFR5_PROMOTION_REDESIGN_READY_BUT_SEARCH_STILL_HOLD",
+  "executes_generation": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T05:51:47Z",
+  "pair_policy_rows": 3003,
+  "seed_preview_rows": 78,
+  "signal_semantic_family_count": 3,
+  "stage": "A7FF-R5-RESPONSE-BACKED-PROMOTION-REDESIGN"
+}

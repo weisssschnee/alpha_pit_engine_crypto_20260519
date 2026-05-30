@@ -1,0 +1,15 @@
+{
+  "authorizes_a7ffr2": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "decision": "PASS_A7FFR1_FIELD_ONTOLOGY_V3_BUILT",
+  "executes_generation": false,
+  "executes_search": false,
+  "exploratory_signal_seed_count": 4,
+  "field_count": 81,
+  "generated_at": "2026-05-30T05:51:45Z",
+  "ordinary_alpha_seed_count": 1,
+  "regime_neutralizer_interaction_seed_count": 73,
+  "semantic_type_count": 8,
+  "stage": "A7FF-R1-FIELD-ONTOLOGY-V3"
+}

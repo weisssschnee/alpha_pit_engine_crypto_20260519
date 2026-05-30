@@ -1324,13 +1324,13 @@ runtime,A7FF-21-EXTERNAL-CONFIRMATION-SELECTOR,runtime/a7ff21_external_confirmat
 runtime,A7FF-21-EXTERNAL-CONFIRMATION-SELECTOR,runtime/a7ff21_external_confirmation_selector/a7ff21_selected_label_cost_tier_summary.csv,0397075,confirm crypto a7ff external selector,341
 runtime,A7FF-21-EXTERNAL-CONFIRMATION-SELECTOR,runtime/a7ff21_external_confirmation_selector/a7ff21_selected_motif_summary.csv,0397075,confirm crypto a7ff external selector,74
 runtime,A7FF-21-EXTERNAL-CONFIRMATION-SELECTOR,runtime/a7ff21_external_confirmation_selector/a7ff21_selected_semantic_summary.csv,0397075,confirm crypto a7ff external selector,174
-runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_allowed_families.json,,,1716
-runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_forbidden_policy.json,,,253
-runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_label_policy.csv,,,245
-runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_manifest.json,,,1036
-runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_motif_policy.csv,,,109
-runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_selector_policy.json,,,648
-runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_semantic_policy.csv,,,208
+runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_allowed_families.json,1427c34,add crypto a7ff22 expansion contract,1716
+runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_forbidden_policy.json,1427c34,add crypto a7ff22 expansion contract,253
+runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_label_policy.csv,1427c34,add crypto a7ff22 expansion contract,245
+runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_manifest.json,1427c34,add crypto a7ff22 expansion contract,1036
+runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_motif_policy.csv,1427c34,add crypto a7ff22 expansion contract,109
+runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_selector_policy.json,1427c34,add crypto a7ff22 expansion contract,648
+runtime,A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT,runtime/a7ff22_label_balanced_expansion_contract/a7ff22_semantic_policy.csv,1427c34,add crypto a7ff22 expansion contract,208
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_candidate_blueprints.csv,b725826,add crypto a7ff field to factor compiler,3272
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_generation_layer_policy.json,b725826,add crypto a7ff field to factor compiler,754
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_manifest.json,b725826,add crypto a7ff field to factor compiler,320
@@ -1377,6 +1377,24 @@ runtime,A7FF-9,runtime/a7ff9_expanded_numeric_probe_continuation/run_a7ff9_96.ps
 runtime,A7FF-9-COMPARISON,runtime/a7ff9_continuation_comparison/a7ff9_comparison_summary.csv,d64e4e3,run crypto a7ff9 numeric continuation,500
 runtime,A7FF-9-COMPARISON,runtime/a7ff9_continuation_comparison/a7ff9_family_clue_comparison.csv,d64e4e3,run crypto a7ff9 numeric continuation,529
 runtime,A7FF-9-COMPARISON,runtime/a7ff9_continuation_comparison/a7ff9_manifest.json,d64e4e3,run crypto a7ff9 numeric continuation,564
+runtime,A7FF-R0-DERIVED-GENERATION-FAILURE-FREEZE,runtime/a7ffr0_derived_generation_failure_freeze/a7ffr0_failure_evidence_matrix.csv,,,859
+runtime,A7FF-R0-DERIVED-GENERATION-FAILURE-FREEZE,runtime/a7ffr0_derived_generation_failure_freeze/a7ffr0_manifest.json,,,539
+runtime,A7FF-R1-FIELD-ONTOLOGY-V3,runtime/a7ffr1_field_ontology_v3/a7ffr1_field_ontology_v3.csv,,,50026
+runtime,A7FF-R1-FIELD-ONTOLOGY-V3,runtime/a7ffr1_field_ontology_v3/a7ffr1_manifest.json,,,477
+runtime,A7FF-R1-FIELD-ONTOLOGY-V3,runtime/a7ffr1_field_ontology_v3/a7ffr1_semantic_role_summary.csv,,,744
+runtime,A7FF-R2-OPERATOR-PROBING-V2,runtime/a7ffr2_operator_probing_v2/a7ffr2_manifest.json,,,387
+runtime,A7FF-R2-OPERATOR-PROBING-V2,runtime/a7ffr2_operator_probing_v2/a7ffr2_observed_operator_response.csv,,,1529
+runtime,A7FF-R2-OPERATOR-PROBING-V2,runtime/a7ffr2_operator_probing_v2/a7ffr2_operator_probe_policy.csv,,,2320
+runtime,A7FF-R3-FEATURE-PAIR-POLICY-V2,runtime/a7ffr3_feature_pair_policy_v2/a7ffr3_feature_pair_policy_v2.csv,,,605788
+runtime,A7FF-R3-FEATURE-PAIR-POLICY-V2,runtime/a7ffr3_feature_pair_policy_v2/a7ffr3_manifest.json,,,431
+runtime,A7FF-R3-FEATURE-PAIR-POLICY-V2,runtime/a7ffr3_feature_pair_policy_v2/a7ffr3_pair_policy_summary.csv,,,3189
+runtime,A7FF-R4-COARSE-TO-FINE-GENERATION-REDESIGN,runtime/a7ffr4_coarse_to_fine_generation_redesign/a7ffr4_allowed_generation_pairs.csv,,,162539
+runtime,A7FF-R4-COARSE-TO-FINE-GENERATION-REDESIGN,runtime/a7ffr4_coarse_to_fine_generation_redesign/a7ffr4_generation_levels.csv,,,452
+runtime,A7FF-R4-COARSE-TO-FINE-GENERATION-REDESIGN,runtime/a7ffr4_coarse_to_fine_generation_redesign/a7ffr4_manifest.json,,,409
+runtime,A7FF-R4-COARSE-TO-FINE-GENERATION-REDESIGN,runtime/a7ffr4_coarse_to_fine_generation_redesign/a7ffr4_operator_budget_summary.csv,,,63
+runtime,A7FF-R5-RESPONSE-BACKED-PROMOTION-REDESIGN,runtime/a7ffr5_response_backed_promotion_redesign/a7ffr5_manifest.json,,,487
+runtime,A7FF-R5-RESPONSE-BACKED-PROMOTION-REDESIGN,runtime/a7ffr5_response_backed_promotion_redesign/a7ffr5_promotion_gates.csv,,,470
+runtime,A7FF-R5-RESPONSE-BACKED-PROMOTION-REDESIGN,runtime/a7ffr5_response_backed_promotion_redesign/a7ffr5_seed_preview.csv,,,9759
 report,A7FF0-FIELD-ONTOLOGY-V2,reports/CRYPTO_A7FF0_FIELD_ONTOLOGY_V2_20260530.md,b725826,add crypto a7ff field to factor compiler,1871
 report,A7FF1-OPERATOR-PROBING,reports/CRYPTO_A7FF1_OPERATOR_PROBING_20260530.md,b725826,add crypto a7ff field to factor compiler,1993
 runtime,A7FF10,runtime/a7ff10_company_parallel/a7ff10_company_parallel_launch_manifest.csv,e5a6a4a,run crypto a7ff10 company numeric probe,2552
@@ -1462,7 +1480,7 @@ report,A7FF19S01-COMPANY-NUMERIC-CONFIRMATION,reports/CRYPTO_A7FF19S01_COMPANY_N
 report,A7FF2-FEATURE-PAIR-CLUSTERING,reports/CRYPTO_A7FF2_FEATURE_PAIR_CLUSTERING_20260530.md,b725826,add crypto a7ff field to factor compiler,28233
 report,A7FF20-CONFIRMATION-SELECTOR-TRIAGE,reports/CRYPTO_A7FF20_CONFIRMATION_SELECTOR_TRIAGE_20260530.md,0397075,confirm crypto a7ff external selector,3751
 report,A7FF21-EXTERNAL-CONFIRMATION-SELECTOR,reports/CRYPTO_A7FF21_EXTERNAL_CONFIRMATION_SELECTOR_20260530.md,0397075,confirm crypto a7ff external selector,4389
-report,A7FF22-LABEL-BALANCED-EXPANSION-CONTRACT,reports/CRYPTO_A7FF22_LABEL_BALANCED_EXPANSION_CONTRACT_20260530.md,,,6454
+report,A7FF22-LABEL-BALANCED-EXPANSION-CONTRACT,reports/CRYPTO_A7FF22_LABEL_BALANCED_EXPANSION_CONTRACT_20260530.md,1427c34,add crypto a7ff22 expansion contract,6454
 report,A7FF3-COARSE-TO-FINE-GENERATION-CONTRACT,reports/CRYPTO_A7FF3_COARSE_TO_FINE_GENERATION_CONTRACT_20260530.md,b725826,add crypto a7ff field to factor compiler,5677
 report,A7FF4-FEATURE-ROLE-PROMOTION,reports/CRYPTO_A7FF4_FEATURE_ROLE_PROMOTION_20260530.md,b725826,add crypto a7ff field to factor compiler,5766
 report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
@@ -1471,13 +1489,19 @@ report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_
 report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
 report,A7FF9-CONTINUATION-COMPARISON,reports/CRYPTO_A7FF9_CONTINUATION_COMPARISON_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,3330
 report,A7FF9-EXPANDED-NUMERIC-PROBE-CONTINUATION,reports/CRYPTO_A7FF9_EXPANDED_NUMERIC_PROBE_CONTINUATION_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,21246
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,0397075,confirm crypto a7ff external selector,248554
+report,A7FFR0-DERIVED-GENERATION-FAILURE-FREEZE,reports/CRYPTO_A7FFR0_DERIVED_GENERATION_FAILURE_FREEZE_20260530.md,,,2686
+report,A7FFR1-FIELD-ONTOLOGY-V3,reports/CRYPTO_A7FFR1_FIELD_ONTOLOGY_V3_20260530.md,,,20202
+report,A7FFR2-OPERATOR-PROBING-V2,reports/CRYPTO_A7FFR2_OPERATOR_PROBING_V2_20260530.md,,,10539
+report,A7FFR3-FEATURE-PAIR-POLICY-V2,reports/CRYPTO_A7FFR3_FEATURE_PAIR_POLICY_V2_20260530.md,,,38678
+report,A7FFR4-COARSE-TO-FINE-GENERATION-REDESIGN,reports/CRYPTO_A7FFR4_COARSE_TO_FINE_GENERATION_REDESIGN_20260530.md,,,34030
+report,A7FFR5-RESPONSE-BACKED-PROMOTION-REDESIGN,reports/CRYPTO_A7FFR5_RESPONSE_BACKED_PROMOTION_REDESIGN_20260530.md,,,21018
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,1427c34,add crypto a7ff22 expansion contract,252263
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,5230053,refresh crypto a7pm registry after selector counterfactual,94548
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,de26507,add crypto a7pm governance registry,391
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,0397075,confirm crypto a7ff external selector,114399
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,0397075,confirm crypto a7ff external selector,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,1427c34,add crypto a7ff22 expansion contract,115240
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,1427c34,add crypto a7ff22 expansion contract,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,de26507,add crypto a7pm governance registry,332
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,0397075,confirm crypto a7ff external selector,62389
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,1427c34,add crypto a7ff22 expansion contract,62802
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -1498,7 +1522,7 @@ runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,de26
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,de26507,add crypto a7pm governance registry,282
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,de26507,add crypto a7pm governance registry,821
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,de26507,add crypto a7pm governance registry,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,0397075,confirm crypto a7ff external selector,5417
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,1427c34,add crypto a7ff22 expansion contract,4496
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
 report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,de26507,add crypto a7pm governance registry,2160
