@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF16_COMPANY_NUMERIC_FOLLOWUP_AGGREGATE_BUILT",
+  "executes_generation": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T04:48:16Z",
+  "missing_manifests": [],
+  "non_l7_label_families": 4,
+  "shard_count_complete": 2,
+  "shard_count_expected": 2,
+  "stage": "A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE",
+  "total_input_blueprints": 96,
+  "total_label_response_rows": 1920,
+  "total_materialized_activity_ok": 96,
+  "total_non_l7_numeric_clue_rows": 402,
+  "total_portfolio_queue_count": 95,
+  "total_rank_label_diagnostic_clue_rows": 81,
+  "total_selected_portfolio_queue_count": 59,
+  "uses_may": false
+}
