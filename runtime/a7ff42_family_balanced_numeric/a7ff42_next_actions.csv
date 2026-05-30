@@ -1,0 +1,4 @@
+route,status,reason
+A7FF-43_deep_forensic,not_authorized,requires selected control-strict non-L7 evidence across at least 2 families
+A7FF-R8_selector_objective_rewrite,recommended_if_hold,family-balanced input still cannot produce selected multifamily evidence
+formula_search,blocked,A7FF-42 is numeric only and never authorizes search

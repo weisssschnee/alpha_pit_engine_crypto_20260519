@@ -3,6 +3,7 @@
   "A7AL-2Y": "formula generation/search execution not authorized",
   "A7AL-3": "large search not authorized",
   "A7FF-41": "not authorized by A7FF-40 because selected control-strict non-L7 evidence is still single-family",
+  "A7FF-43": "not authorized by A7FF-42 because selected control-strict non-L7 evidence is still single-family",
   "alpha_proof": "not authorized",
   "direct_OI_price_rerun": "same objective rerun not authorized",
   "formula_search": "not authorized",

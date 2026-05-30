@@ -1,0 +1,8 @@
+a7ff42_queue_role,semantic_pair,motif,queue_count,skeleton_count
+family_balanced_candidate,funding_like|basis_premium_like,spread_rank,52,6
+family_balanced_candidate,regime_state|price_return_like,spread_rank,52,5
+family_balanced_candidate,funding_like|basis_premium_like,sub,52,6
+family_balanced_candidate,regime_state|price_return_like,sub,52,5
+capped_reference_diagnostic,basis_premium_like|basis_premium_like,safe_div_clip,51,6
+family_balanced_candidate,funding_like|basis_premium_like,mul,51,6
+family_balanced_candidate,funding_like|basis_premium_like,zspread,51,6
