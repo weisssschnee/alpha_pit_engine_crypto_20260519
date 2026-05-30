@@ -1,0 +1,8 @@
+path,exists,size_bytes,modified_time,purpose,finality
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\reports\CRYPTO_A7FF_VERSION_20260530_A7FFR_TO_A7FF24R.md,True,43102,2026-05-30T06:31:35+00:00,canonical human-readable version file,final
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\runtime\a7ff_version_20260530\a7ff_v20260530_formula_index.csv,True,8028080,2026-05-30T06:31:34+00:00,complete formula blueprint index,final_index
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\runtime\a7ff_version_20260530\a7ff_v20260530_derived_field_catalog.csv,True,189887,2026-05-30T06:31:34+00:00,base field and transform catalog,final_index
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\runtime\a7ff_version_20260530\a7ff_v20260530_formula_family_summary.csv,True,10476,2026-05-30T06:31:34+00:00,formula level/semantic/motif summary,summary
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\runtime\a7ff_version_20260530\a7ff_v20260530_base_field_usage.csv,True,4249,2026-05-30T06:31:34+00:00,base field usage summary,summary
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\runtime\a7ff_version_20260530\a7ff_v20260530_queue_summary.csv,True,476,2026-05-30T06:31:34+00:00,queue counts and paths,summary
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\runtime\a7ff_version_20260530\a7ff_v20260530_manifest.json,True,1314,2026-05-30T06:31:35+00:00,version manifest,final
