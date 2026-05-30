@@ -27,7 +27,7 @@ BLOCKED_TASKS = {
 }
 
 NEXT_ALLOWED_TASKS = {
-    "A7FF-31": "portfolio forensic/concentration contract for A7FF-30A ensemble clues; no search",
+    "A7FF-32": "family diversification contract after A7FF-31 concentrated-clue hold; no search",
     "A7FF-24R2": "repaired company queue tail rebuild using dense funding-state fields or healthy backfill; no search",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
 }

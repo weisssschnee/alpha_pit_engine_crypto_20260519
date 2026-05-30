@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-30T10:26:12Z
+Generated: 2026-05-30T10:31:21Z
 
 ## Decision
 
@@ -8,18 +8,18 @@ Generated: 2026-05-30T10:26:12Z
 
 ## Active Workstreams
 
-| workstream            | current_stage   | status                                           | next                                              |
-|:----------------------|:----------------|:-------------------------------------------------|:--------------------------------------------------|
-| governance            | A7PM-0/1/2/3    | pass                                             | keep registry as source-of-truth                  |
-| a7ff_portfolio_replay | A7FF-30A        | pass_forensic_allowed_with_concentration_warning | A7FF-31 portfolio forensic/concentration contract |
-| a7ff_funding_tail     | A7FF-25R6       | pass_queue_repair_allowed                        | A7FF-24R2 repaired queue tail rebuild             |
-| search_execution      | blocked         | not_authorized                                   | none                                              |
+| workstream              | current_stage   | status                    | next                                    |
+|:------------------------|:----------------|:--------------------------|:----------------------------------------|
+| governance              | A7PM-0/1/2/3    | pass                      | keep registry as source-of-truth        |
+| a7ff_portfolio_forensic | A7FF-31         | hold_concentrated_clue    | A7FF-32 family diversification contract |
+| a7ff_funding_tail       | A7FF-25R6       | pass_queue_repair_allowed | A7FF-24R2 repaired queue tail rebuild   |
+| search_execution        | blocked         | not_authorized            | none                                    |
 
 ## Allowed Next Tasks
 
 | task                 | reason                                                                                              |
 |:---------------------|:----------------------------------------------------------------------------------------------------|
-| A7FF-31              | portfolio forensic/concentration contract for A7FF-30A ensemble clues; no search                    |
+| A7FF-32              | family diversification contract after A7FF-31 concentrated-clue hold; no search                     |
 | A7FF-24R2            | repaired company queue tail rebuild using dense funding-state fields or healthy backfill; no search |
 | A7PM-0/3 maintenance | governance registry maintenance                                                                     |
 
@@ -39,5 +39,5 @@ Generated: 2026-05-30T10:26:12Z
 
 ```text
 No formula search, large search, alpha proof, shadow, paper, or live execution is authorized.
-The next technical work is A7FF-31 portfolio forensic/concentration contract and A7FF-24R2 repaired queue tail rebuild.
+The next technical work is A7FF-32 family diversification contract and A7FF-24R2 repaired queue tail rebuild.
 ```

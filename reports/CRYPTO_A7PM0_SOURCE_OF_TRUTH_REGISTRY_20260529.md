@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T10:26:15Z
+Generated: 2026-05-30T10:31:24Z
 
 ## Decision
 
@@ -19,11 +19,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF30A_PORTFOLIO_REPLAY_SMOKE_20260530.md
-?? runtime/a7ff30a_portfolio_replay_smoke/
-?? scripts/crypto_a7ff30a_portfolio_replay_smoke.py
-HEAD=e97d9de508fb8fcede6ae79588541dc8255f95c4
-origin/main=e97d9de508fb8fcede6ae79588541dc8255f95c4
+?? reports/CRYPTO_A7FF31_PORTFOLIO_FORENSIC_20260530.md
+?? runtime/a7ff31_portfolio_forensic/
+?? scripts/crypto_a7ff31_portfolio_forensic.py
+HEAD=a368260661c0db3b3b08869a52b16e0f4da57dc6
+origin/main=a368260661c0db3b3b08869a52b16e0f4da57dc6
 HEAD == origin/main: True
 ```
 
@@ -31,7 +31,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2091,
+  "artifact_count": 2099,
   "authorization_record_count": 672,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -45,12 +45,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T10:26:15Z",
-  "head": "e97d9de508fb8fcede6ae79588541dc8255f95c4",
+  "generated_at": "2026-05-30T10:31:24Z",
+  "head": "a368260661c0db3b3b08869a52b16e0f4da57dc6",
   "head_equals_origin_main": true,
-  "origin_main": "e97d9de508fb8fcede6ae79588541dc8255f95c4",
+  "origin_main": "a368260661c0db3b3b08869a52b16e0f4da57dc6",
   "stage": "A7PM-0",
-  "stage_count": 222
+  "stage_count": 223
 }
 ```
 
@@ -64,7 +64,7 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
 | hold                         | hold                       |      39 |
-| hold                         | diagnostic                 |       4 |
+| hold                         | diagnostic                 |       5 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
@@ -103,7 +103,7 @@ HEAD == origin/main: True
 ```json
 {
   "A7FF-24R2": "repaired company queue tail rebuild using dense funding-state fields or healthy backfill; no search",
-  "A7FF-31": "portfolio forensic/concentration contract for A7FF-30A ensemble clues; no search",
+  "A7FF-32": "family diversification contract after A7FF-31 concentrated-clue hold; no search",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```

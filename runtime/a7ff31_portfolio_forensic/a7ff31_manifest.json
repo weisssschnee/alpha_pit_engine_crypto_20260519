@@ -1,0 +1,26 @@
+{
+  "authorizes_a7ff24r2_queue_repair": true,
+  "authorizes_a7ff32_family_diversification_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 6,
+  "decision": "HOLD_A7FF31_PORTFOLIO_FORENSIC_CONCENTRATED_CLUE_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T10:30:27Z",
+  "max_pairwise_corr_abs": 0.9999999999999998,
+  "mean_pairwise_corr_abs": 0.5111626544210106,
+  "recent_month_positive_rate": 1.0,
+  "selected_ensemble_clue_rows": 12,
+  "stage": "A7FF-31",
+  "top_symbol_contribution_share": 0.05521294374079854,
+  "warnings": [
+    "all_candidates_have_basis_premium_root",
+    "safe_div_outlier_risk_present",
+    "ensemble_is_basis_premium_root_concentrated",
+    "candidate_pairwise_corr_gt_0_80",
+    "basis_premium_root_concentration_requires_family_diversification_before_search"
+  ]
+}
