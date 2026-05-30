@@ -1,0 +1,7 @@
+semantic_pair,decision,count
+basis_premium_like,A7FF25R1_NUMERIC_CLUE,4
+basis_premium_like,HOLD_A7FF25R1_CONTROL_DOMINATED,28
+basis_premium_like,HOLD_A7FF25R1_ONE_BAR_LAG_FRAGILE,2
+basis_premium_like,HOLD_A7FF25R1_PRE_MAY_UNSTABLE,146
+basis_premium_like|basis_premium_like,HOLD_A7FF25R1_CONTROL_DOMINATED,10
+basis_premium_like|basis_premium_like,HOLD_A7FF25R1_PRE_MAY_UNSTABLE,130

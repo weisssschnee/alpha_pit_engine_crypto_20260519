@@ -1,0 +1,39 @@
+{
+  "activity_ok_count": 16,
+  "authorizes_a7ff25r2_one_shard_numeric_wave": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_full_12_shard_numeric": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "control_rows": 6720,
+  "decision": "PASS_A7FF25R1_NUMERIC_ADAPTER_PARITY_SMOKE",
+  "eval_failure_count": 0,
+  "eval_success_count": 20,
+  "executes_numeric_probe": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T07:24:04Z",
+  "label_response_rows": 320,
+  "non_l7_numeric_clue_rows": 4,
+  "numeric_probe_decision": "HOLD_A7FF25R1_PORTFOLIO_QUEUE_TOO_SMALL",
+  "process_exit_code": 0,
+  "rank_label_diagnostic_clue_rows": 0,
+  "sample_policy": {
+    "full_100_rows_recommended_on_company_machine": true,
+    "intended_full_adapter_smoke_rows": 100,
+    "rows_per_shard": 10,
+    "shards": 2
+  },
+  "sample_rows": 20,
+  "sample_shards": [
+    "shard_00",
+    "shard_01"
+  ],
+  "source_a7ff25r0_decision": "PASS_A7FF25R0_COMPANY_QUEUE_COVERAGE_ACCEPTABLE_WITH_WARNINGS",
+  "stage": "A7FF-25R1-NUMERIC-ADAPTER-PARITY-SMOKE",
+  "started_at": "2026-05-30T07:19:09Z",
+  "timed_out": false,
+  "timeout_seconds": 900,
+  "uses_may": false
+}

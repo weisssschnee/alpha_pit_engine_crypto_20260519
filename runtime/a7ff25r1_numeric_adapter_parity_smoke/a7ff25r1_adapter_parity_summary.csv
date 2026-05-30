@@ -1,0 +1,11 @@
+check,value,pass
+process_exit_code,0,True
+timed_out,False,True
+sample_rows,20,True
+eval_failure_count,0,True
+activity_ok_count,16,True
+missing_field_blocker,False,True
+role_violation,False,True
+label_leakage_violation,False,True
+response_rows,320,True
+control_rows,6720,True
