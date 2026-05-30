@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T05:52:38Z
+Generated: 2026-05-30T05:56:18Z
 
 ## Decision
 
@@ -12,21 +12,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
-?? reports/CRYPTO_A7FFR0_DERIVED_GENERATION_FAILURE_FREEZE_20260530.md
-?? reports/CRYPTO_A7FFR1_FIELD_ONTOLOGY_V3_20260530.md
-?? reports/CRYPTO_A7FFR2_OPERATOR_PROBING_V2_20260530.md
-?? reports/CRYPTO_A7FFR3_FEATURE_PAIR_POLICY_V2_20260530.md
-?? reports/CRYPTO_A7FFR4_COARSE_TO_FINE_GENERATION_REDESIGN_20260530.md
-?? reports/CRYPTO_A7FFR5_RESPONSE_BACKED_PROMOTION_REDESIGN_20260530.md
-?? runtime/a7ffr0_derived_generation_failure_freeze/
-?? runtime/a7ffr1_field_ontology_v3/
-?? runtime/a7ffr2_operator_probing_v2/
-?? runtime/a7ffr3_feature_pair_policy_v2/
-?? runtime/a7ffr4_coarse_to_fine_generation_redesign/
-?? runtime/a7ffr5_response_backed_promotion_redesign/
-?? scripts/crypto_a7ffr_derived_generation_redesign.py
-HEAD=1427c3470f64688646bb92bb4c4446562d5f103e
-origin/main=1427c3470f64688646bb92bb4c4446562d5f103e
+HEAD=3e509b26e16d9fcf85f3124eefd7febe75322129
+origin/main=3e509b26e16d9fcf85f3124eefd7febe75322129
 HEAD == origin/main: True
 ```
 
@@ -48,10 +35,10 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T05:52:38Z",
-  "head": "1427c3470f64688646bb92bb4c4446562d5f103e",
+  "generated_at": "2026-05-30T05:56:18Z",
+  "head": "3e509b26e16d9fcf85f3124eefd7febe75322129",
   "head_equals_origin_main": true,
-  "origin_main": "1427c3470f64688646bb92bb4c4446562d5f103e",
+  "origin_main": "3e509b26e16d9fcf85f3124eefd7febe75322129",
   "stage": "A7PM-0",
   "stage_count": 205
 }
