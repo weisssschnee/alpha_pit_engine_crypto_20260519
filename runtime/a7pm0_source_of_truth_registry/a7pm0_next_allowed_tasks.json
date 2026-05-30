@@ -1,8 +1,5 @@
 {
-  "A7AA": "primitive response / label adequacy continuation",
-  "A7AI-F2": "end-to-end field enforcement regression audit",
-  "A7AI-F3": "materialization/evaluator parity sprint",
-  "A7PM-1": "asset taxonomy and modularization plan",
-  "A7PM-2": "candidate lifecycle state machine",
-  "A7PM-3": "current experiment board"
+  "A7FF-25R4": "no-activity shard tail audit and queue repair; no search",
+  "A7FF-26": "numeric clue forensic and promotion triage on A7FF-25R3 selected queue; no search",
+  "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }

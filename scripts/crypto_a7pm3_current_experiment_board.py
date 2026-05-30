@@ -16,13 +16,13 @@ A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 
 
 ALLOWED = {
-    "A7AI-F2": "end-to-end field enforcement regression",
-    "A7AI-F3": "materialization/evaluator parity sprint",
-    "A7AA": "primitive response / label adequacy audit",
-    "A7PM-1/2/3 maintenance": "governance registry maintenance",
+    "A7FF-25R4": "no-activity shard tail audit and queue repair; no search",
+    "A7FF-26": "numeric clue forensic and promotion triage; no search",
+    "A7PM-0/3 maintenance": "governance registry maintenance",
 }
 
 BLOCKED = {
+    "A7FF search execution": "numeric wave has clues but still no replay/search authorization",
     "A7AL-2Y generation": "not authorized",
     "A7AL-3 large search": "not authorized",
     "direct OI-price rerun": "superseded weak prior / not authorized",
@@ -66,9 +66,8 @@ def main() -> None:
     active = pd.DataFrame(
         [
             {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
-            {"workstream": "field_enforcement", "current_stage": "A7AI-F0/F1", "status": "pass", "next": "A7AI-F2 regression"},
-            {"workstream": "replay_parity", "current_stage": "A7AR-2 plus pending A7AI-F3", "status": "allowed_next", "next": "materialization/evaluator parity"},
-            {"workstream": "response_map", "current_stage": "A7AA/A7AH", "status": "allowed_next", "next": "primitive response and label adequacy"},
+            {"workstream": "a7ff_numeric_wave", "current_stage": "A7FF-25R3", "status": "pass_with_warnings", "next": "A7FF-25R4 no-activity shard tail audit"},
+            {"workstream": "a7ff_clue_triage", "current_stage": "A7FF-25R3 selected queue", "status": "allowed_next", "next": "A7FF-26 numeric clue forensic"},
             {"workstream": "search_execution", "current_stage": "blocked", "status": "not_authorized", "next": "none"},
         ]
     )

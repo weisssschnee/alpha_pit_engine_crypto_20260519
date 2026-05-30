@@ -1,0 +1,5 @@
+field_name,in_base_schema,in_latent_schema,missing
+mark_index_basis_bps,True,False,False
+premium_close_bps,True,False,False
+realized_vol_168h,False,True,False
+trade_close,True,False,False

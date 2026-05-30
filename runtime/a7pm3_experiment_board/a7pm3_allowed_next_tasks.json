@@ -1,6 +1,5 @@
 {
-  "A7AA": "primitive response / label adequacy audit",
-  "A7AI-F2": "end-to-end field enforcement regression",
-  "A7AI-F3": "materialization/evaluator parity sprint",
-  "A7PM-1/2/3 maintenance": "governance registry maintenance"
+  "A7FF-25R4": "no-activity shard tail audit and queue repair; no search",
+  "A7FF-26": "numeric clue forensic and promotion triage; no search",
+  "A7PM-0/3 maintenance": "governance registry maintenance"
 }

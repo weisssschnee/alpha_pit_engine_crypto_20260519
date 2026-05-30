@@ -1,0 +1,13 @@
+@echo off
+cd /d D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote
+set A7FF8_STAGE=A7FF-25R3S07
+set A7FF8_FILE_PREFIX=a7ff25r3s07
+set A7FF8_RUNTIME=D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote\runtime\a7ff25r3_full_numeric_wave\shard_07
+set A7FF8_REPORT=D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote\reports\CRYPTO_A7FF25R3S07_NUMERIC_WAVE_20260530.md
+set A7FF8_QUEUE_PATH=D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote\runtime\a7ff24r_dry_generation_plan\a7ff24r_company_shard_07_queue.csv
+set A7FF8_MATERIALIZE_CAP=200
+set A7FF8_FAST_NUMERIC_CAP=200
+set A7FF8_PORTFOLIO_CAP=64
+set A7FF8_QUEUE_OFFSET=0
+set A7FF8_QUEUE_LIMIT=200
+D:\HermesWorker\venvs\phase3z33\Scripts\python.exe scripts\crypto_a7ff8_expanded_numeric_probe.py

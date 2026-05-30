@@ -1,0 +1,17 @@
+{
+  "base_dir": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v2_20260527",
+  "base_dir_exists": true,
+  "base_schema_error": "",
+  "base_schema_field_count": 54,
+  "generated_at": "2026-05-30T07:53:28Z",
+  "latent_panel": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_latent_state_features_v1_20260527.parquet",
+  "latent_panel_exists": true,
+  "latent_schema_error": "",
+  "latent_schema_field_count": 48,
+  "missing_field_count": 0,
+  "missing_fields": [],
+  "queue_rows": 200,
+  "required_field_count": 4,
+  "rows_with_missing_fields": 0,
+  "stage": "A7FF-25R2-MISSING-FIELD-AUDIT"
+}
