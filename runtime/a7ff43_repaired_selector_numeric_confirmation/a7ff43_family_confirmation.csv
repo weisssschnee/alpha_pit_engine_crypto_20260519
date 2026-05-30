@@ -1,0 +1,4 @@
+semantic_pair,target_rows,confirmed_rows,found_rows,max_confirmed_control_ratio,median_confirmed_control_ratio,target_motifs
+basis_premium_like|basis_premium_like,6,6,6,0.3639252160234912,0.2608720009841674,1
+funding_like|basis_premium_like,5,5,5,0.6215343323193879,0.5161731440559704,3
+regime_state|price_return_like,1,1,1,0.6228179927319956,0.6228179927319956,1

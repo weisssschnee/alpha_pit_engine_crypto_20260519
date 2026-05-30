@@ -1,0 +1,4 @@
+route,status,reason
+A7FF-44_deep_forensic,authorized,"requires repaired selector rows to remain numeric-confirmed, non-L7, control-strict, and multi-family"
+A7FF-R9_selector_repair_failure_audit,not_needed_if_pass,use only if repaired rows fail numeric confirmation
+formula_search,blocked,A7FF-43 is numeric confirmation only

@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T17:12:45Z
+Generated: 2026-05-30T17:55:37Z
 
 ## Decision
 
@@ -18,11 +18,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFR8_SELECTOR_OBJECTIVE_REWRITE_20260531.md
-?? runtime/a7ffr8_selector_objective_rewrite/
-?? scripts/crypto_a7ffr8_selector_objective_rewrite.py
-HEAD=1f7cb0e1d0ec36a0ddd83b6e96db552977bfe21d
-origin/main=1f7cb0e1d0ec36a0ddd83b6e96db552977bfe21d
+?? reports/CRYPTO_A7FF43_REPAIRED_SELECTOR_NUMERIC_CONFIRMATION_20260531.md
+?? runtime/a7ff43_repaired_selector_numeric_confirmation/
+?? scripts/crypto_a7ff43_repaired_selector_numeric_confirmation.py
+HEAD=987c4045b6096f2e2933b3e0a7c84a9d3e4baa81
+origin/main=987c4045b6096f2e2933b3e0a7c84a9d3e4baa81
 HEAD == origin/main: True
 ```
 
@@ -30,7 +30,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2320,
+  "artifact_count": 2339,
   "authorization_record_count": 683,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -44,12 +44,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T17:12:45Z",
-  "head": "1f7cb0e1d0ec36a0ddd83b6e96db552977bfe21d",
+  "generated_at": "2026-05-30T17:55:37Z",
+  "head": "987c4045b6096f2e2933b3e0a7c84a9d3e4baa81",
   "head_equals_origin_main": true,
-  "origin_main": "1f7cb0e1d0ec36a0ddd83b6e96db552977bfe21d",
+  "origin_main": "987c4045b6096f2e2933b3e0a7c84a9d3e4baa81",
   "stage": "A7PM-0",
-  "stage_count": 239
+  "stage_count": 240
 }
 ```
 
@@ -71,7 +71,7 @@ HEAD == origin/main: True
 | valid_or_historical_record   | governance_or_audit        |     107 |
 | valid_or_historical_record   | contract                   |      48 |
 | valid_or_historical_record   | smoke                      |       8 |
-| valid_or_historical_record   | diagnostic                 |       6 |
+| valid_or_historical_record   | diagnostic                 |       7 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 
 ## Supersession Map
@@ -104,7 +104,7 @@ HEAD == origin/main: True
 ```json
 {
   "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
-  "A7FF-43": "repaired-selector numeric confirmation after A7FF-R8; no search",
+  "A7FF-44": "deep forensic for A7FF-43 repaired-selector confirmed rows; no search",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```
