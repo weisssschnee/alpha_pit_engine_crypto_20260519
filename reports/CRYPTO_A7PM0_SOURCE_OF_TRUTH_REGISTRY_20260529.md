@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T04:11:01Z
+Generated: 2026-05-30T04:23:02Z
 
 ## Decision
 
@@ -12,41 +12,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
- M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
- M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
- M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
- M scripts/crypto_a7ff8_expanded_numeric_probe.py
-?? reports/CRYPTO_A7FF12S00_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF12S01_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF12S02_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF12S03_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF12S04_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF12S05_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF12S06_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF12S07_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF12_COMPANY_WAVE_AGGREGATE_20260530.md
-?? reports/CRYPTO_A7FF12_NUMERIC_WAVE_QUEUE_CONTRACT_20260530.md
-?? reports/CRYPTO_A7FF13_WAVE_TRIAGE_20260530.md
-?? runtime/a7ff12_company_numeric_probe_shard_00/
-?? runtime/a7ff12_company_numeric_probe_shard_01/
-?? runtime/a7ff12_company_numeric_probe_shard_02/
-?? runtime/a7ff12_company_numeric_probe_shard_03/
-?? runtime/a7ff12_company_numeric_probe_shard_04/
-?? runtime/a7ff12_company_numeric_probe_shard_05/
-?? runtime/a7ff12_company_numeric_probe_shard_06/
-?? runtime/a7ff12_company_numeric_probe_shard_07/
-?? runtime/a7ff12_company_parallel/
-?? runtime/a7ff12_company_wave_aggregate/
-?? runtime/a7ff12_numeric_wave_queue_contract/
-?? runtime/a7ff13_wave_triage/
-?? scripts/crypto_a7ff12_company_wave_aggregate.py
-?? scripts/crypto_a7ff12_company_wave_launcher.ps1
-?? scripts/crypto_a7ff12_numeric_wave_queue_contract.py
-?? scripts/crypto_a7ff13_wave_triage.py
-HEAD=509931a85993b3cbe3d456323beafbcc4898d678
-origin/main=509931a85993b3cbe3d456323beafbcc4898d678
+?? reports/CRYPTO_A7FF14_LABEL_BALANCED_SELECTOR_REPAIR_20260530.md
+?? runtime/a7ff14_label_balanced_selector_repair/
+?? scripts/crypto_a7ff14_label_balanced_selector_repair.py
+HEAD=bdba34e826c94c131920e5853fc0fbd73e233d6b
+origin/main=bdba34e826c94c131920e5853fc0fbd73e233d6b
 HEAD == origin/main: True
 ```
 
@@ -54,7 +24,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 1529,
+  "artifact_count": 1538,
   "authorization_record_count": 638,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -68,12 +38,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T04:11:01Z",
-  "head": "509931a85993b3cbe3d456323beafbcc4898d678",
+  "generated_at": "2026-05-30T04:23:02Z",
+  "head": "bdba34e826c94c131920e5853fc0fbd73e233d6b",
   "head_equals_origin_main": true,
-  "origin_main": "509931a85993b3cbe3d456323beafbcc4898d678",
+  "origin_main": "bdba34e826c94c131920e5853fc0fbd73e233d6b",
   "stage": "A7PM-0",
-  "stage_count": 182
+  "stage_count": 183
 }
 ```
 
@@ -92,7 +62,7 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |      71 |
+| valid_or_historical_record   | governance_or_audit        |      72 |
 | valid_or_historical_record   | contract                   |      37 |
 | valid_or_historical_record   | smoke                      |       7 |
 | valid_or_historical_record   | diagnostic                 |       5 |

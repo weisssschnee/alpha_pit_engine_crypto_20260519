@@ -1,0 +1,29 @@
+{
+  "date": "2026-05-30T04:21:09Z",
+  "decision": "PASS_A7FF14_LABEL_BALANCED_SELECTOR_REPAIR_READY_FOR_A7FF15",
+  "experiment_id": "20260530_a7ff14_label_balanced_selector_repair",
+  "inputs": [
+    "runtime/a7ff12_company_numeric_probe_shard_*/a7ff12s*_label_response_metrics.csv",
+    "runtime/a7ff12_company_numeric_probe_shard_*/a7ff12s*_materialization_metrics.csv",
+    "runtime/a7ff13_wave_triage/a7ff13_manifest.json"
+  ],
+  "mode": "research_governance",
+  "next_action": "A7FF-15 may run balanced numeric follow-up / dry validation only; no formula search is authorized.",
+  "objective": "Repair A7FF selector target so raw L0/L1/L3/L5 clue surface is preserved in dry rerank.",
+  "parameters": {
+    "hard_filters": [
+      "non-L7 only",
+      "premay_all_positive",
+      "lag_ok",
+      "robust_ok",
+      "control_ratio_premay_max < 1.0",
+      "cost2_recent_oriented > 0"
+    ],
+    "label_quota": 16,
+    "motif_cap": 20,
+    "semantic_cap": 20,
+    "skeleton_cap": 4,
+    "target_total": 64
+  },
+  "status": "completed"
+}

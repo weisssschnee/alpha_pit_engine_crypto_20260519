@@ -1,0 +1,5 @@
+semantic_pair,selected_count,strict_priority_count,median_control_ratio
+basis_premium_like|positioning_like,20,3,0.48999723981930965
+basis_premium_like|volatility_like,20,6,0.4180690310501556
+basis_premium_like|basis_premium_like,19,13,0.6599172117647547
+basis_premium_like|price_like,5,3,0.7635230345576339

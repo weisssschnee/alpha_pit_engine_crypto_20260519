@@ -1,0 +1,9 @@
+label_family,label_horizon_h,selected_count,strict_priority_count,median_control_ratio,median_cost10
+L0_raw_forward_return,1,9,0,0.3143084679293464,-0.0008616497549461
+L0_raw_forward_return,4,7,7,0.7604519179234577,0.0008548690715478
+L1_cross_sectional_relative_return,1,9,0,0.3188693548259619,-0.0008471710477173
+L1_cross_sectional_relative_return,4,7,7,0.7635230345576339,0.0008548690715478
+L3_liquidity_tier_relative_return,1,16,0,0.4925718332737946,-0.0009811941718478
+L5_vol_adjusted_return,1,9,7,0.5805247732250088,0.0844457556603502
+L5_vol_adjusted_return,4,2,0,0.8940295401477126,0.1482230183036218
+L5_vol_adjusted_return,8,5,4,0.6452620982448759,0.3393866850483854
