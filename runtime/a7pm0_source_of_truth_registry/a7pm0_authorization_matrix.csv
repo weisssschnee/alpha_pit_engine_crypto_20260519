@@ -475,6 +475,8 @@ A7FF-37,runtime/a7ff37_deep_replay_contract/a7ff37_authorization_matrix.json,alp
 A7FF-37,runtime/a7ff37_deep_replay_contract/a7ff37_authorization_matrix.json,formula_search,"{""authorized"": false}",False
 A7FF-37,runtime/a7ff37_deep_replay_contract/a7ff37_authorization_matrix.json,large_search,"{""authorized"": false}",False
 A7FF-37,runtime/a7ff37_deep_replay_contract/a7ff37_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_authorization_matrix.json,authorized,"{""A7FF-47"": ""portfolio microreplay / label diversification audit on frozen 7-row pool"", ""A7PM maintenance"": ""source-of-truth refresh""}",False
+A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_authorization_matrix.json,not_authorized,"{""alpha_proof"": ""not authorized"", ""formula_search"": ""frozen clues are not alpha candidates"", ""large_search"": ""not authorized"", ""shadow_paper_live"": ""not authorized""}",False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_feature_columns,94,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_symbol_month_count,87,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,authorizes_a7r_horizon_diagnostic_contract,true,True

@@ -1,0 +1,45 @@
+{
+  "allowed_inputs": [
+    {
+      "allowed": true,
+      "path": "runtime/a7ff42_family_balanced_numeric/a7ff42_control_strict_non_l7_clues.csv",
+      "source_stage": "A7FF-42",
+      "use": "mine existing non-L5 strict clues without generation"
+    },
+    {
+      "allowed": true,
+      "path": "runtime/a7ff45_bounded_deep_replay/a7ff45_label_response_metrics.csv",
+      "source_stage": "A7FF-45",
+      "use": "negative reference for L5-only frozen pool"
+    },
+    {
+      "allowed": true,
+      "path": "runtime/a7ff47_portfolio_microreplay/a7ff47_label_translation_map.csv",
+      "source_stage": "A7FF-47",
+      "use": "label translation failure attribution"
+    }
+  ],
+  "name": "existing-map non-L5 candidate mining",
+  "not_authorized": [
+    "formula_search",
+    "large_search",
+    "alpha_proof",
+    "shadow",
+    "paper",
+    "live"
+  ],
+  "requirements": {
+    "allow_l5_only_as_diagnostic": true,
+    "control_ratio_max": 0.8,
+    "min_candidate_rows": 6,
+    "min_semantic_families": 2,
+    "no_new_generation": true,
+    "no_search": true,
+    "require_non_l5_labels": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L3_liquidity_tier_relative_return"
+    ]
+  },
+  "stage": "A7FF-49"
+}

@@ -16,13 +16,15 @@ A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 
 
 ALLOWED = {
-    "A7FF-R9": "reference/regime repair after A7FF-44 bounded queue single-family hold; no search",
+    "A7FF-R11": "feature/label objective reset after A7FF-49 no non-reference non-L5 candidates; no search",
     "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
     "A7PM-0/3 maintenance": "governance registry maintenance",
 }
 
 BLOCKED = {
-    "A7FF-45 bounded deep replay": "not authorized by A7FF-44; bounded replay queue is single-family after reference/regime filtering",
+    "A7FF-50": "not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps",
+    "A7FF-48": "not authorized by A7FF-47; frozen clues fail non-L5 label translation",
+    "A7FF-45 continuation": "bounded replay passed but is superseded by A7FF-47 L5-only translation hold",
     "A7FF-43 deep forensic": "not authorized by A7FF-42; selected control-strict non-L7 evidence remains single-family",
     "A7FF-41 control-strict expansion": "not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family",
     "A7FF search execution": "numeric wave has clues but still no replay/search authorization",
@@ -69,7 +71,7 @@ def main() -> None:
     active = pd.DataFrame(
         [
             {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
-            {"workstream": "a7ff_family_diversification", "current_stage": "A7FF-44", "status": "hold_bounded_queue_single_family", "next": "A7FF-R9 reference/regime repair"},
+            {"workstream": "a7ff_family_diversification", "current_stage": "A7FF-49", "status": "hold_no_non_reference_non_l5", "next": "A7FF-R11 feature/label objective reset"},
             {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R3", "status": "pass_dense_materializer_preflight", "next": "A7FF-24R4 repaired-queue numeric wave contract"},
             {"workstream": "search_execution", "current_stage": "blocked", "status": "not_authorized", "next": "none"},
         ]
@@ -123,7 +125,7 @@ def main() -> None:
         "",
         "```text",
         "No formula search, large search, alpha proof, shadow, paper, or live execution is authorized.",
-        "The next technical work is A7FF-R9 reference/regime repair and A7FF-24R4 repaired-queue numeric wave contract.",
+        "The next technical work is A7FF-R11 feature/label objective reset and A7FF-24R4 repaired-queue numeric wave contract.",
         "```",
     ]
     REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")

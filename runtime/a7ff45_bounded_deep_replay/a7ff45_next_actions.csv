@@ -1,0 +1,3 @@
+route,status,reason
+A7FF-46_candidate_freeze,authorized,"requires bounded replay to keep at least 6 rows, 2 families, control strict, cost/lag/robust positive"
+formula_search,blocked,A7FF-45 is bounded replay only and does not authorize generation or search

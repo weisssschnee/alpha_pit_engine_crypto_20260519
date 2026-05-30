@@ -1,0 +1,4 @@
+metric,value
+regime_total_strict_pool_rows,35
+regime_strict_repair_rows,3
+regime_strict_repair_blueprints,3

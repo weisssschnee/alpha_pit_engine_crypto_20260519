@@ -1,0 +1,4 @@
+failure_layer,evidence,impact,required_repair
+label_target,strict translations exist only on L5_vol_adjusted_return,current frozen pool is diagnostic-only and cannot become alpha/search input,non-L5-first candidate mining from existing numeric maps
+selector_reward,bounded replay rows are control-clean but L5-only,selector can over-reward volatility-adjusted labels while raw/relative return translation is absent,hard require L0/L1/L3 evidence before replay promotion
+feature_role,basis/funding and regime/price clues behave as risk/vol-adjusted diagnostics,do not treat L5-only clues as ordinary-alpha candidates,demote L5-only features to diagnostic or risk-adjusted state features

@@ -1,0 +1,28 @@
+{
+  "authorizes_a7ff48": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "non_l5_translation_candidates_below_2",
+    "non_l5_translation_family_count_below_2"
+  ],
+  "decision": "HOLD_A7FF47_LABEL_TRANSLATION_FAIL_L5_ONLY",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "frozen_blueprints": 7,
+  "generated_at": "2026-05-30T18:36:03Z",
+  "label_metric_rows": 140,
+  "source_a7ff46_decision": "PASS_A7FF46_CANDIDATE_FREEZE_READY_FOR_A7FF47_NO_SEARCH_AUTH",
+  "stage": "A7FF-47",
+  "strict_l5_rows": 8,
+  "strict_label_translation_rows": 8,
+  "strict_non_l5_family_count": 0,
+  "strict_non_l5_rows": 0,
+  "uses_may": false,
+  "warnings": [
+    "l5_vol_adjusted_label_dominates"
+  ]
+}

@@ -1,0 +1,2 @@
+semantic_pair,rows,policy,counts_as_replay_family,max_share_in_bounded_replay,reason
+basis_premium_like|basis_premium_like,6,reference_only_capped_diagnostic,False,0.0,basis self-pair confirms reference response but cannot be used as a non-reference replay family

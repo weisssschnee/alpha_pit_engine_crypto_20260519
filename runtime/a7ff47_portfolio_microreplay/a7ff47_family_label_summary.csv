@@ -1,0 +1,11 @@
+semantic_pair,label_family,rows,blueprints,strict_translations,non_l5_strict_translations,median_control_ratio,min_cost10,max_cost10
+funding_like|basis_premium_like,L0_raw_forward_return,16,4,0,0,2.575033361804323,-0.0111799614700902,0.0011638821589084
+funding_like|basis_premium_like,L1_cross_sectional_relative_return,16,4,0,0,2.6781819266443723,-0.0111799614700902,0.0011638821589084
+funding_like|basis_premium_like,L3_liquidity_tier_relative_return,16,4,0,0,2.5911626792495026,-0.0104917945946009,0.0009468793294863
+funding_like|basis_premium_like,L5_vol_adjusted_return,16,4,5,0,2.10607777963299,-0.6016905843677155,0.4425319907275736
+funding_like|basis_premium_like,L7_ranked_future_return,16,4,0,0,0.9188617390899125,-0.0164685072105151,0.0540405524957428
+regime_state|price_return_like,L0_raw_forward_return,12,3,0,0,1.2962857643513812,-0.0019304948019669,-0.0006739947886746
+regime_state|price_return_like,L1_cross_sectional_relative_return,12,3,0,0,0.9662808044892478,-0.0019304948019669,-0.0006739947886746
+regime_state|price_return_like,L3_liquidity_tier_relative_return,12,3,0,0,1.1161754331615281,-0.0018322033844812,-0.0007216418820254
+regime_state|price_return_like,L5_vol_adjusted_return,12,3,3,0,1.5511220967215849,-0.0006687966265638,0.0742942214595257
+regime_state|price_return_like,L7_ranked_future_return,12,3,0,0,0.473399360398705,0.0195091528309919,0.0508102946479163

@@ -1,0 +1,26 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_next_generation": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "non_reference_non_l5_rows_below_6",
+    "non_reference_non_l5_family_count_below_2"
+  ],
+  "decision": "HOLD_A7FF49_NO_NON_REFERENCE_NON_L5_CANDIDATES",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T18:39:23Z",
+  "source_a7ffr10_decision": "PASS_A7FFR10_LABEL_FEATURE_TARGET_REDESIGN_READY_FOR_A7FF49_NO_SEARCH_AUTH",
+  "stage": "A7FF-49",
+  "strict_non_l5_non_reference_family_count": 0,
+  "strict_non_l5_non_reference_rows": 0,
+  "strict_non_l5_reference_rows": 4,
+  "strict_non_l5_rows": 4,
+  "uses_may": false,
+  "warnings": [
+    "non_l5_evidence_exists_only_as_reference_family"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "authorizes_a7ff45_bounded_deep_replay": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FFR9_REFERENCE_REGIME_REPAIR_READY_FOR_A7FF45_BOUNDED_DEEP_REPLAY_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T18:27:37Z",
+  "reference_policy": "basis self-pair capped as reference-only diagnostic",
+  "regime_repair_blueprints": 3,
+  "regime_repair_rows": 3,
+  "repaired_queue_count": 7,
+  "repaired_queue_family_count": 2,
+  "repaired_queue_top_family_share": 0.5714285714285714,
+  "source_a7ff44_decision": "HOLD_A7FF44_DEEP_FORENSIC_CONCENTRATION_OR_BREADTH_FAIL",
+  "stage": "A7FF-R9",
+  "uses_may": false,
+  "warnings": []
+}

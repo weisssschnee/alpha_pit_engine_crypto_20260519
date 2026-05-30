@@ -1,0 +1,19 @@
+{
+  "authorizes_a7ff49_existing_map_non_l5_mining": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FFR10_LABEL_FEATURE_TARGET_REDESIGN_READY_FOR_A7FF49_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T18:38:02Z",
+  "source_a7ff47_decision": "HOLD_A7FF47_LABEL_TRANSLATION_FAIL_L5_ONLY",
+  "stage": "A7FF-R10",
+  "uses_may": false,
+  "warnings": [
+    "current_frozen_pool_is_l5_only_diagnostic"
+  ]
+}

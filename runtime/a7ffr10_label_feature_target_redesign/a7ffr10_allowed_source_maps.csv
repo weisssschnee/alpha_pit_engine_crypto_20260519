@@ -1,0 +1,4 @@
+source_stage,path,allowed,use
+A7FF-42,runtime/a7ff42_family_balanced_numeric/a7ff42_control_strict_non_l7_clues.csv,True,mine existing non-L5 strict clues without generation
+A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_label_response_metrics.csv,True,negative reference for L5-only frozen pool
+A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_label_translation_map.csv,True,label translation failure attribution

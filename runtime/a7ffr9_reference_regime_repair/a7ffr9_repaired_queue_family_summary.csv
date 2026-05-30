@@ -1,0 +1,3 @@
+semantic_pair,rows,blueprints,motifs,labels,median_control_ratio,max_control_ratio,min_cost10,min_robust_floor
+funding_like|basis_premium_like,4,4,2,1,0.4422367314339589,0.6215343323193879,0.1063901571057504,5.357955930752267
+regime_state|price_return_like,3,3,2,1,0.7666971513118234,0.7863975569846146,0.0467692280739554,1.598196625160734

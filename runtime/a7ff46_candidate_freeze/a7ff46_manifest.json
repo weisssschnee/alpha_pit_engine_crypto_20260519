@@ -1,0 +1,25 @@
+{
+  "authorizes_a7ff47_portfolio_microreplay": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FF46_CANDIDATE_FREEZE_READY_FOR_A7FF47_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "frozen_candidate_rows": 7,
+  "frozen_family_count": 2,
+  "frozen_label_family_count": 1,
+  "generated_at": "2026-05-30T18:34:51Z",
+  "max_control_ratio": 0.6215343323193879,
+  "min_cost10": 0.0467692280739554,
+  "min_robust_floor": 1.598196625160734,
+  "source_a7ff45_decision": "PASS_A7FF45_BOUNDED_DEEP_REPLAY_CONFIRMED_READY_FOR_A7FF46_NO_SEARCH_AUTH",
+  "stage": "A7FF-46",
+  "uses_may": false,
+  "warnings": [
+    "single_label_family_L5_vol_adjusted_only"
+  ]
+}

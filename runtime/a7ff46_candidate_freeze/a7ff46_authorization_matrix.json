@@ -1,0 +1,12 @@
+{
+  "authorized": {
+    "A7FF-47": "portfolio microreplay / label diversification audit on frozen 7-row pool",
+    "A7PM maintenance": "source-of-truth refresh"
+  },
+  "not_authorized": {
+    "alpha_proof": "not authorized",
+    "formula_search": "frozen clues are not alpha candidates",
+    "large_search": "not authorized",
+    "shadow_paper_live": "not authorized"
+  }
+}

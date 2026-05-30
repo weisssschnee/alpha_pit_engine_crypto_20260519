@@ -16,7 +16,9 @@ REPORT = REPO / "reports" / "CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md"
 
 
 BLOCKED_TASKS = {
-    "A7FF-45": "not authorized by A7FF-44 because bounded deep replay queue is single-family after reference/regime filtering",
+    "A7FF-50": "not authorized by A7FF-49 because existing maps have no non-reference non-L5 candidates",
+    "A7FF-48": "not authorized by A7FF-47 because frozen clues fail non-L5 label translation",
+    "A7FF-45": "superseded by A7FF-47 label translation hold; bounded replay passed but did not translate beyond L5",
     "A7FF-43": "not authorized by A7FF-42 because selected control-strict non-L7 evidence is still single-family",
     "A7FF-41": "not authorized by A7FF-40 because selected control-strict non-L7 evidence is still single-family",
     "A7AL-2Q": "superseded/not_authorized by A7AL-2X0",
@@ -30,7 +32,7 @@ BLOCKED_TASKS = {
 }
 
 NEXT_ALLOWED_TASKS = {
-    "A7FF-R9": "reference/regime repair after A7FF-44 bounded queue single-family hold; no search",
+    "A7FF-R11": "feature/label objective reset after A7FF-49 no non-reference non-L5 candidates; no search",
     "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
 }

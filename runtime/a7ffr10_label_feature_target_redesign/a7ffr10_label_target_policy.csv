@@ -1,0 +1,6 @@
+label_family,required_for_promotion,role,minimum_rows
+L0_raw_forward_return,True,primary_non_l5_translation,2
+L1_cross_sectional_relative_return,True,primary_non_l5_translation,2
+L3_liquidity_tier_relative_return,True,primary_non_l5_translation,2
+L5_vol_adjusted_return,False,supporting_risk_adjusted_diagnostic,0
+L7_ranked_future_return,False,diagnostic_only_not_alpha_proof,0

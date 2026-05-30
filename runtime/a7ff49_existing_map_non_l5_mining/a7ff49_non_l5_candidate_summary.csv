@@ -1,0 +1,3 @@
+candidate_role,semantic_pair,label_family,rows,blueprints,motifs,median_control_ratio,min_cost10,min_robust_floor
+reference_non_l5_diagnostic,basis_premium_like|basis_premium_like,L0_raw_forward_return,2,2,1,0.6369075188085122,6.790174279597359e-05,1.39731442992098
+reference_non_l5_diagnostic,basis_premium_like|basis_premium_like,L1_cross_sectional_relative_return,2,2,1,0.6369075188085123,6.790174279597359e-05,1.3973144299209803
