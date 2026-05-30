@@ -16,7 +16,7 @@ A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 
 
 ALLOWED = {
-    "A7FF-R8": "selector objective rewrite after A7FF-42 selected multifamily failure; no search",
+    "A7FF-43": "repaired-selector numeric confirmation after A7FF-R8; no search",
     "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
     "A7PM-0/3 maintenance": "governance registry maintenance",
 }
@@ -68,7 +68,7 @@ def main() -> None:
     active = pd.DataFrame(
         [
             {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
-            {"workstream": "a7ff_family_diversification", "current_stage": "A7FF-42", "status": "hold_selected_single_family_after_balanced_input", "next": "A7FF-R8 selector objective rewrite"},
+            {"workstream": "a7ff_family_diversification", "current_stage": "A7FF-R8", "status": "pass_selector_repair_ready", "next": "A7FF-43 repaired-selector numeric confirmation"},
             {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R3", "status": "pass_dense_materializer_preflight", "next": "A7FF-24R4 repaired-queue numeric wave contract"},
             {"workstream": "search_execution", "current_stage": "blocked", "status": "not_authorized", "next": "none"},
         ]
@@ -122,7 +122,7 @@ def main() -> None:
         "",
         "```text",
         "No formula search, large search, alpha proof, shadow, paper, or live execution is authorized.",
-        "The next technical work is A7FF-R8 selector objective rewrite and A7FF-24R4 repaired-queue numeric wave contract.",
+        "The next technical work is A7FF-43 repaired-selector numeric confirmation and A7FF-24R4 repaired-queue numeric wave contract.",
         "```",
     ]
     REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")

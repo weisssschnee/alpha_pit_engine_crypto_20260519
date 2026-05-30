@@ -1,0 +1,4 @@
+semantic_pair,selected_rows,motifs,labels,median_control_ratio,max_control_ratio,median_family_retention_score
+basis_premium_like|basis_premium_like,6,1,2,0.29538116067243003,0.3068956272269977,21.25053614933813
+funding_like|basis_premium_like,5,3,2,0.2351232726764358,0.6215343323193879,20.48168235485969
+regime_state|price_return_like,1,1,1,0.3857586053098404,0.3857586053098404,7.51924929235597

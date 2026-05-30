@@ -1,0 +1,28 @@
+{
+  "authorization": {
+    "authorizes_alpha_proof": false,
+    "authorizes_numeric_confirmation": true,
+    "authorizes_search": false
+  },
+  "hard_gates": {
+    "absolute_control_ratio_lt": 1.0,
+    "materialized_required": true,
+    "may_usage_allowed": false,
+    "non_l7_only": true,
+    "primary_control_ratio_lt": 0.8
+  },
+  "objective": {
+    "use_control_ratio_penalty": true,
+    "use_cost10_as_secondary_not_primary": true,
+    "use_family_retention_score": true,
+    "use_marginal_diversity_bonus": true,
+    "use_standalone_score_only": false
+  },
+  "quota": {
+    "funding_basis_family_cap": 0.5,
+    "max_single_family_share": 0.5,
+    "min_clean_family_count": 2,
+    "min_selected_count": 6,
+    "preferred_clean_family_count": 3
+  }
+}

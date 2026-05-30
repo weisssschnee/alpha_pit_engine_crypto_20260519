@@ -1,5 +1,5 @@
 workstream,current_stage,status,next
 governance,A7PM-0/1/2/3,pass,keep registry as source-of-truth
-a7ff_family_diversification,A7FF-42,hold_selected_single_family_after_balanced_input,A7FF-R8 selector objective rewrite
+a7ff_family_diversification,A7FF-R8,pass_selector_repair_ready,A7FF-43 repaired-selector numeric confirmation
 a7ff_funding_tail,A7FF-24R3,pass_dense_materializer_preflight,A7FF-24R4 repaired-queue numeric wave contract
 search_execution,blocked,not_authorized,none

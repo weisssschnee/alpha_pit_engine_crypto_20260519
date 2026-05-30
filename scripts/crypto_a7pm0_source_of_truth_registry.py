@@ -29,7 +29,7 @@ BLOCKED_TASKS = {
 }
 
 NEXT_ALLOWED_TASKS = {
-    "A7FF-R8": "selector objective rewrite after A7FF-42 selected multifamily failure; no search",
+    "A7FF-43": "repaired-selector numeric confirmation after A7FF-R8; no search",
     "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
 }

@@ -1,0 +1,28 @@
+{
+  "authorizes_a7ff43_numeric_confirmation": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "current_selected_strict_family_count": 1,
+  "current_selected_strict_rows": 4,
+  "decision": "PASS_A7FFR8_SELECTOR_REPAIR_READY_FOR_A7FF43_NUMERIC_CONFIRMATION_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T17:11:44Z",
+  "repaired_control_ratio_max": 0.6215343323193879,
+  "repaired_control_ratio_median": 0.29538116067243003,
+  "repaired_selected_count": 12,
+  "repaired_selected_family_count": 3,
+  "repaired_top_family_share": 0.5,
+  "source_a7ff42_decision": "HOLD_A7FF42_FAMILY_BALANCED_NUMERIC_SELECTED_TOO_THIN",
+  "stage": "A7FF-R8",
+  "strict_input_family_count": 3,
+  "strict_input_rows": 173,
+  "uses_may": false,
+  "warnings": [
+    "repaired_selector_retains_3_families_dry_only"
+  ]
+}

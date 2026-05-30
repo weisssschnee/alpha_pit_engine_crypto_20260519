@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T15:42:02Z
+Generated: 2026-05-30T17:12:45Z
 
 ## Decision
 
@@ -11,27 +11,26 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
+## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF42_FAMILY_BALANCED_NUMERIC_20260530.md
-?? runtime/a7ff42_family_balanced_numeric/
-?? scripts/crypto_a7ff42_family_balanced_numeric.py
-HEAD=0e6a555bb68e8f151aa3d632bc27204d3e09e72a
-origin/main=10cb5fa22bdf705c96715163b0b7d582b8ec7021
-HEAD == origin/main: False
+?? reports/CRYPTO_A7FFR8_SELECTOR_OBJECTIVE_REWRITE_20260531.md
+?? runtime/a7ffr8_selector_objective_rewrite/
+?? scripts/crypto_a7ffr8_selector_objective_rewrite.py
+HEAD=1f7cb0e1d0ec36a0ddd83b6e96db552977bfe21d
+origin/main=1f7cb0e1d0ec36a0ddd83b6e96db552977bfe21d
+HEAD == origin/main: True
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 2303,
+  "artifact_count": 2320,
   "authorization_record_count": 683,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -45,12 +44,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T15:42:02Z",
-  "head": "0e6a555bb68e8f151aa3d632bc27204d3e09e72a",
-  "head_equals_origin_main": false,
-  "origin_main": "10cb5fa22bdf705c96715163b0b7d582b8ec7021",
+  "generated_at": "2026-05-30T17:12:45Z",
+  "head": "1f7cb0e1d0ec36a0ddd83b6e96db552977bfe21d",
+  "head_equals_origin_main": true,
+  "origin_main": "1f7cb0e1d0ec36a0ddd83b6e96db552977bfe21d",
   "stage": "A7PM-0",
-  "stage_count": 238
+  "stage_count": 239
 }
 ```
 
@@ -69,7 +68,7 @@ HEAD == origin/main: False
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     106 |
+| valid_or_historical_record   | governance_or_audit        |     107 |
 | valid_or_historical_record   | contract                   |      48 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       6 |
@@ -105,7 +104,7 @@ HEAD == origin/main: False
 ```json
 {
   "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
-  "A7FF-R8": "selector objective rewrite after A7FF-42 selected multifamily failure; no search",
+  "A7FF-43": "repaired-selector numeric confirmation after A7FF-R8; no search",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```
