@@ -1,0 +1,4 @@
+policy_id,applies_to,action,reason
+funding_raw_sparse_quarantine,raw funding_rate expressions in company queue,do_not_count_as_healthy_company_queue_until dense funding-state transforms exist,eval_success but low finite_share caused all activity_ok=0 in shards 08-11
+funding_state_rebuild,funding_like semantic family,replace raw funding_rate wrappers with settlement-aware or forward-filled funding state features before numeric wave,sparse event-style funding field is not suitable as a direct dense 1h alpha field
+queue_tail_backfill,A7FF company queue,backfill shards 08-11 with activity-capable semantic pairs before full replay authorization,2400-row queue contains 800 rows that materialize to no activity

@@ -1387,211 +1387,228 @@ runtime,A7FF-25R1,runtime/a7ff25r1_numeric_adapter_parity_smoke/a7ff25r1_portfol
 runtime,A7FF-25R1,runtime/a7ff25r1_numeric_adapter_parity_smoke/a7ff25r1_sample_queue.csv,57625c0,smoke crypto a7ff25r numeric adapter,7072
 runtime,A7FF-25R1,runtime/a7ff25r1_numeric_adapter_parity_smoke/a7ff25r1_selected_portfolio_queue.csv,57625c0,smoke crypto a7ff25r numeric adapter,1915
 runtime,A7FF-25R1,runtime/a7ff25r1_numeric_adapter_parity_smoke/a7ff25r1_wrapper_manifest.json,57625c0,smoke crypto a7ff25r numeric adapter,1267
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_control_dominance_metrics.csv,,,8596128
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_control_summary.csv,,,456
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_decision_counts.csv,,,1482
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_decision_record.json,,,2364
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_family_decision_summary.csv,,,801
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_label_response_metrics.csv,,,2477902
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_manifest.json,,,2364
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_materialization_metrics.csv,,,47726
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_missing_field_audit.csv,,,96
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_missing_field_manifest.json,,,653
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_nonoverlap_stats.csv,,,330678
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_portfolio_marginal_proxy.csv,,,40427
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_remote_process.json,,,688
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_remote_run_20260530_155445.err.log,,,0
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_remote_run_20260530_155445.out.log,,,0
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_remote_stderr.log,,,0
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_remote_stdout.log,,,0
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_required_field_schema_audit.csv,,,193
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_selected_portfolio_queue.csv,,,7885
-runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/run_a7ff25r2_shard_00.cmd,,,881
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_control_summary_merged.csv,,,464
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_decision_counts_merged.csv,,,1508
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_decision_record.json,,,1037
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_family_decision_summary_merged.csv,,,2712
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_manifest.json,,,1037
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_materialization_dropoff_audit.csv,,,668
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_selected_family_summary.csv,,,1154
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_selected_portfolio_queue_merged.csv,,,60297
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_shard_summary.csv,,,1955
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_control_dominance_metrics.csv,,,8596128
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_control_summary.csv,,,456
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_decision_counts.csv,,,1551
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_decision_record.json,,,2370
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_family_decision_summary.csv,,,837
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_job_stdout.log,,,7736
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_label_response_metrics.csv,,,2487322
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_manifest.json,,,2370
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_materialization_metrics.csv,,,47726
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_nonoverlap_stats.csv,,,330678
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_portfolio_marginal_proxy.csv,,,40565
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_selected_portfolio_queue.csv,,,7909
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_stderr.log,,,0
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_stdout.log,,,0
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/run_a7ff25r3_shard_00.cmd,,,884
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_control_dominance_metrics.csv,,,8161951
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_control_summary.csv,,,454
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_decision_counts.csv,,,1547
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_decision_record.json,,,2370
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_family_decision_summary.csv,,,492
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_job_stdout.log,,,7736
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_label_response_metrics.csv,,,2427416
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_manifest.json,,,2370
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_materialization_metrics.csv,,,51219
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_nonoverlap_stats.csv,,,314014
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_portfolio_marginal_proxy.csv,,,40708
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_selected_portfolio_queue.csv,,,8942
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_stderr.log,,,0
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_stdout.log,,,0
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/run_a7ff25r3_shard_01.cmd,,,884
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_control_dominance_metrics.csv,,,9152292
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_control_summary.csv,,,459
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_decision_counts.csv,,,1552
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_decision_record.json,,,2371
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_family_decision_summary.csv,,,823
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_job_stdout.log,,,7738
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_label_response_metrics.csv,,,2625764
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_manifest.json,,,2371
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_materialization_metrics.csv,,,47219
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_nonoverlap_stats.csv,,,351409
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_portfolio_marginal_proxy.csv,,,77967
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_selected_portfolio_queue.csv,,,6974
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_stderr.log,,,0
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_stdout.log,,,0
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/run_a7ff25r3_shard_02.cmd,,,884
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_control_dominance_metrics.csv,,,8541696
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_control_summary.csv,,,454
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_decision_counts.csv,,,1476
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_decision_record.json,,,2369
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_family_decision_summary.csv,,,442
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_job_stdout.log,,,7734
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_label_response_metrics.csv,,,2498035
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_manifest.json,,,2369
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_materialization_metrics.csv,,,49341
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_nonoverlap_stats.csv,,,329714
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_portfolio_marginal_proxy.csv,,,41928
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_selected_portfolio_queue.csv,,,8754
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_stderr.log,,,0
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_stdout.log,,,0
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/run_a7ff25r3_shard_03.cmd,,,884
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_control_dominance_metrics.csv,,,9090570
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_control_summary.csv,,,453
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_decision_counts.csv,,,1415
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_decision_record.json,,,2371
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_family_decision_summary.csv,,,885
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_job_stdout.log,,,7738
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_label_response_metrics.csv,,,2628030
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_manifest.json,,,2371
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_materialization_metrics.csv,,,48521
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_nonoverlap_stats.csv,,,348853
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_portfolio_marginal_proxy.csv,,,61886
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_selected_portfolio_queue.csv,,,7909
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/run_a7ff25r3_shard_04.cmd,,,884
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_control_dominance_metrics.csv,,,9245984
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_control_summary.csv,,,462
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_decision_counts.csv,,,1548
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_decision_record.json,,,2370
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_family_decision_summary.csv,,,473
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_job_stdout.log,,,7736
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_label_response_metrics.csv,,,2688797
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_manifest.json,,,2370
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_materialization_metrics.csv,,,49218
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_nonoverlap_stats.csv,,,356862
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_portfolio_marginal_proxy.csv,,,38108
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_selected_portfolio_queue.csv,,,7075
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/run_a7ff25r3_shard_05.cmd,,,884
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_control_dominance_metrics.csv,,,9031984
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_control_summary.csv,,,455
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_decision_counts.csv,,,1407
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_decision_record.json,,,2372
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_family_decision_summary.csv,,,728
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_job_stdout.log,,,7740
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_label_response_metrics.csv,,,2640748
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_manifest.json,,,2372
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_materialization_metrics.csv,,,50155
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_nonoverlap_stats.csv,,,347136
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_portfolio_marginal_proxy.csv,,,58447
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_selected_portfolio_queue.csv,,,12123
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/run_a7ff25r3_shard_06.cmd,,,884
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_control_dominance_metrics.csv,,,9239550
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_control_summary.csv,,,464
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_decision_counts.csv,,,1395
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_decision_record.json,,,2372
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_family_decision_summary.csv,,,1373
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_job_stdout.log,,,7740
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_label_response_metrics.csv,,,2540169
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_manifest.json,,,2372
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_materialization_metrics.csv,,,42593
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_nonoverlap_stats.csv,,,355046
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_portfolio_marginal_proxy.csv,,,44665
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_selected_portfolio_queue.csv,,,9266
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/run_a7ff25r3_shard_07.cmd,,,884
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_control_dominance_metrics.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_control_summary.csv,,,37
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_decision_counts.csv,,,29
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_decision_record.json,,,2384
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_family_decision_summary.csv,,,30
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_job_stdout.log,,,7764
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_label_response_metrics.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_manifest.json,,,2384
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_materialization_metrics.csv,,,47529
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_nonoverlap_stats.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_portfolio_marginal_proxy.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_selected_portfolio_queue.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/run_a7ff25r3_shard_08.cmd,,,884
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_control_dominance_metrics.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_control_summary.csv,,,37
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_decision_counts.csv,,,29
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_decision_record.json,,,2384
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_family_decision_summary.csv,,,30
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_job_stdout.log,,,7764
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_label_response_metrics.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_manifest.json,,,2384
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_materialization_metrics.csv,,,49216
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_nonoverlap_stats.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_portfolio_marginal_proxy.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_selected_portfolio_queue.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/run_a7ff25r3_shard_09.cmd,,,884
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_control_dominance_metrics.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_control_summary.csv,,,37
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_decision_counts.csv,,,29
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_decision_record.json,,,2384
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_family_decision_summary.csv,,,30
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_job_stdout.log,,,7764
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_label_response_metrics.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_manifest.json,,,2384
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_materialization_metrics.csv,,,49722
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_nonoverlap_stats.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_portfolio_marginal_proxy.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_selected_portfolio_queue.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/run_a7ff25r3_shard_10.cmd,,,884
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_control_dominance_metrics.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_control_summary.csv,,,37
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_decision_counts.csv,,,29
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_decision_record.json,,,2384
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_exit_code.txt,,,3
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_family_decision_summary.csv,,,30
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_job_stdout.log,,,7764
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_label_response_metrics.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_manifest.json,,,2384
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_materialization_metrics.csv,,,52286
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_nonoverlap_stats.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_portfolio_marginal_proxy.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_selected_portfolio_queue.csv,,,2
-runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/run_a7ff25r3_shard_11.cmd,,,884
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,8596128
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,456
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,1482
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2364
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,801
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2477902
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2364
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,47726
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_missing_field_audit.csv,cf30256,run crypto a7ff25r company numeric wave,96
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_missing_field_manifest.json,cf30256,run crypto a7ff25r company numeric wave,653
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,330678
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,40427
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_remote_process.json,cf30256,run crypto a7ff25r company numeric wave,688
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_remote_run_20260530_155445.err.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_remote_run_20260530_155445.out.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_remote_stderr.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_remote_stdout.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_required_field_schema_audit.csv,cf30256,run crypto a7ff25r company numeric wave,193
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/a7ff25r2_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,7885
+runtime,A7FF-25R2,runtime/a7ff25r2_one_shard_numeric_wave/run_a7ff25r2_shard_00.cmd,cf30256,run crypto a7ff25r company numeric wave,881
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_control_summary_merged.csv,cf30256,run crypto a7ff25r company numeric wave,464
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_decision_counts_merged.csv,cf30256,run crypto a7ff25r company numeric wave,1508
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,1037
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_family_decision_summary_merged.csv,cf30256,run crypto a7ff25r company numeric wave,2712
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_manifest.json,cf30256,run crypto a7ff25r company numeric wave,1037
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_materialization_dropoff_audit.csv,cf30256,run crypto a7ff25r company numeric wave,668
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_selected_family_summary.csv,cf30256,run crypto a7ff25r company numeric wave,1154
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_selected_portfolio_queue_merged.csv,cf30256,run crypto a7ff25r company numeric wave,60297
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/a7ff25r3_shard_summary.csv,cf30256,run crypto a7ff25r company numeric wave,1955
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,8596128
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,456
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,1551
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2370
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,837
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7736
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2487322
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2370
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,47726
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,330678
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,40565
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,7909
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_stderr.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/a7ff25r3s00_stdout.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_00/run_a7ff25r3_shard_00.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,8161951
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,454
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,1547
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2370
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,492
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7736
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2427416
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2370
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,51219
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,314014
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,40708
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,8942
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_stderr.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/a7ff25r3s01_stdout.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_01/run_a7ff25r3_shard_01.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,9152292
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,459
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,1552
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2371
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,823
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7738
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2625764
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2371
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,47219
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,351409
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,77967
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,6974
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_stderr.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/a7ff25r3s02_stdout.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_02/run_a7ff25r3_shard_02.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,8541696
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,454
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,1476
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2369
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,442
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7734
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2498035
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2369
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,49341
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,329714
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,41928
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,8754
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_stderr.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/a7ff25r3s03_stdout.log,cf30256,run crypto a7ff25r company numeric wave,0
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_03/run_a7ff25r3_shard_03.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,9090570
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,453
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,1415
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2371
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,885
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7738
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2628030
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2371
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,48521
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,348853
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,61886
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/a7ff25r3s04_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,7909
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_04/run_a7ff25r3_shard_04.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,9245984
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,462
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,1548
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2370
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,473
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7736
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2688797
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2370
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,49218
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,356862
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,38108
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/a7ff25r3s05_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,7075
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_05/run_a7ff25r3_shard_05.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,9031984
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,455
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,1407
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2372
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,728
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7740
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2640748
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2372
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,50155
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,347136
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,58447
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/a7ff25r3s06_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,12123
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_06/run_a7ff25r3_shard_06.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,9239550
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,464
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,1395
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2372
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,1373
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7740
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2540169
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2372
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,42593
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,355046
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,44665
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/a7ff25r3s07_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,9266
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_07/run_a7ff25r3_shard_07.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,37
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,29
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2384
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,30
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7764
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2384
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,47529
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/a7ff25r3s08_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_08/run_a7ff25r3_shard_08.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,37
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,29
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2384
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,30
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7764
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2384
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,49216
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/a7ff25r3s09_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_09/run_a7ff25r3_shard_09.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,37
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,29
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2384
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,30
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7764
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2384
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,49722
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/a7ff25r3s10_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_10/run_a7ff25r3_shard_10.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_control_dominance_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_control_summary.csv,cf30256,run crypto a7ff25r company numeric wave,37
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_decision_counts.csv,cf30256,run crypto a7ff25r company numeric wave,29
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_decision_record.json,cf30256,run crypto a7ff25r company numeric wave,2384
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_exit_code.txt,cf30256,run crypto a7ff25r company numeric wave,3
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_family_decision_summary.csv,cf30256,run crypto a7ff25r company numeric wave,30
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_job_stdout.log,cf30256,run crypto a7ff25r company numeric wave,7764
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_label_response_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_manifest.json,cf30256,run crypto a7ff25r company numeric wave,2384
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_materialization_metrics.csv,cf30256,run crypto a7ff25r company numeric wave,52286
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_nonoverlap_stats.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_portfolio_marginal_proxy.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/a7ff25r3s11_selected_portfolio_queue.csv,cf30256,run crypto a7ff25r company numeric wave,2
+runtime,A7FF-25R3,runtime/a7ff25r3_full_numeric_wave/shard_11/run_a7ff25r3_shard_11.cmd,cf30256,run crypto a7ff25r company numeric wave,884
+runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_decision_record.json,,,876
+runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_failure_reason_summary.csv,,,158
+runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_manifest.json,,,876
+runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_shard_activity_summary.csv,,,2033
+runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_tail_blueprint_failure_audit.csv,,,178337
+runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_tail_family_motif_failure_summary.csv,,,737
+runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_tail_queue_field_usage.csv,,,160
+runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_tail_repair_policy.csv,,,717
+runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_control_risk_summary.csv,,,621
+runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_decision_record.json,,,1148
+runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_family_label_summary.csv,,,3451
+runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_label_triage_summary.csv,,,262
+runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_manifest.json,,,1148
+runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_promotion_candidate_queue.csv,,,5415
+runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_rank_label_diagnostic_queue.csv,,,17448
+runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_selected_candidate_triage.csv,,,26481
+runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_watchlist_queue.csv,,,4128
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_candidate_blueprints.csv,b725826,add crypto a7ff field to factor compiler,3272
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_generation_layer_policy.json,b725826,add crypto a7ff field to factor compiler,754
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_manifest.json,b725826,add crypto a7ff field to factor compiler,320
@@ -1754,20 +1771,22 @@ report,A7FF23R-DERIVED-FACTOR-EXPANSION-CONTRACT,reports/CRYPTO_A7FF23R_DERIVED_
 report,A7FF24R-DRY-GENERATION-PLAN,reports/CRYPTO_A7FF24R_DRY_GENERATION_PLAN_20260530.md,587e26e,add crypto a7ff23r and a7ff24r expansion plan,5835
 report,A7FF25R0-COMPANY-QUEUE-COVERAGE-AUDIT,reports/CRYPTO_A7FF25R0_COMPANY_QUEUE_COVERAGE_AUDIT_20260530.md,efa57ad,audit crypto a7ff25r company queue coverage,82647
 report,A7FF25R1-NUMERIC-ADAPTER-PARITY-SMOKE,reports/CRYPTO_A7FF25R1_NUMERIC_ADAPTER_PARITY_SMOKE_20260530.md,57625c0,smoke crypto a7ff25r numeric adapter,11850
-report,A7FF25R2-ONE-SHARD-NUMERIC-WAVE,reports/CRYPTO_A7FF25R2_ONE_SHARD_NUMERIC_WAVE_20260530.md,,,19488
-report,A7FF25R3-FULL-COMPANY-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3_FULL_COMPANY_NUMERIC_WAVE_20260530.md,,,13790
-report,A7FF25R3S00-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S00_NUMERIC_WAVE_20260530.md,,,18649
-report,A7FF25R3S01-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S01_NUMERIC_WAVE_20260530.md,,,19552
-report,A7FF25R3S02-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S02_NUMERIC_WAVE_20260530.md,,,17080
-report,A7FF25R3S03-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S03_NUMERIC_WAVE_20260530.md,,,19155
-report,A7FF25R3S04-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S04_NUMERIC_WAVE_20260530.md,,,18474
-report,A7FF25R3S05-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S05_NUMERIC_WAVE_20260530.md,,,16649
-report,A7FF25R3S06-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S06_NUMERIC_WAVE_20260530.md,,,24971
-report,A7FF25R3S07-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S07_NUMERIC_WAVE_20260530.md,,,21620
-report,A7FF25R3S08-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S08_NUMERIC_WAVE_20260530.md,,,3198
-report,A7FF25R3S09-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S09_NUMERIC_WAVE_20260530.md,,,3198
-report,A7FF25R3S10-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S10_NUMERIC_WAVE_20260530.md,,,3198
-report,A7FF25R3S11-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S11_NUMERIC_WAVE_20260530.md,,,3198
+report,A7FF25R2-ONE-SHARD-NUMERIC-WAVE,reports/CRYPTO_A7FF25R2_ONE_SHARD_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,19488
+report,A7FF25R3-FULL-COMPANY-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3_FULL_COMPANY_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,13790
+report,A7FF25R3S00-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S00_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,18649
+report,A7FF25R3S01-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S01_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,19552
+report,A7FF25R3S02-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S02_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,17080
+report,A7FF25R3S03-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S03_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,19155
+report,A7FF25R3S04-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S04_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,18474
+report,A7FF25R3S05-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S05_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,16649
+report,A7FF25R3S06-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S06_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,24971
+report,A7FF25R3S07-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S07_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,21620
+report,A7FF25R3S08-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S08_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,3198
+report,A7FF25R3S09-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S09_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,3198
+report,A7FF25R3S10-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S10_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,3198
+report,A7FF25R3S11-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S11_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,3198
+report,A7FF25R4-NO-ACTIVITY-TAIL-AUDIT,reports/CRYPTO_A7FF25R4_NO_ACTIVITY_TAIL_AUDIT_20260530.md,,,4996
+report,A7FF26-NUMERIC-CLUE-FORENSIC,reports/CRYPTO_A7FF26_NUMERIC_CLUE_FORENSIC_20260530.md,,,15931
 report,A7FF3-COARSE-TO-FINE-GENERATION-CONTRACT,reports/CRYPTO_A7FF3_COARSE_TO_FINE_GENERATION_CONTRACT_20260530.md,b725826,add crypto a7ff field to factor compiler,5677
 report,A7FF4-FEATURE-ROLE-PROMOTION,reports/CRYPTO_A7FF4_FEATURE_ROLE_PROMOTION_20260530.md,b725826,add crypto a7ff field to factor compiler,5766
 report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
@@ -1782,13 +1801,13 @@ report,A7FFR2-OPERATOR-PROBING-V2,reports/CRYPTO_A7FFR2_OPERATOR_PROBING_V2_2026
 report,A7FFR3-FEATURE-PAIR-POLICY-V2,reports/CRYPTO_A7FFR3_FEATURE_PAIR_POLICY_V2_20260530.md,3e509b2,redesign crypto a7ff derived generation,38678
 report,A7FFR4-COARSE-TO-FINE-GENERATION-REDESIGN,reports/CRYPTO_A7FFR4_COARSE_TO_FINE_GENERATION_REDESIGN_20260530.md,3e509b2,redesign crypto a7ff derived generation,34030
 report,A7FFR5-RESPONSE-BACKED-PROMOTION-REDESIGN,reports/CRYPTO_A7FFR5_RESPONSE_BACKED_PROMOTION_REDESIGN_20260530.md,3e509b2,redesign crypto a7ff derived generation,21018
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,e9491ec,refresh crypto a7pm registry after a7ff25r1,267825
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,cf30256,run crypto a7ff25r company numeric wave,290199
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,5230053,refresh crypto a7pm registry after selector counterfactual,94548
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,de26507,add crypto a7pm governance registry,391
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,e9491ec,refresh crypto a7pm registry after a7ff25r1,121364
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,e9491ec,refresh crypto a7pm registry after a7ff25r1,710
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,de26507,add crypto a7pm governance registry,332
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,e9491ec,refresh crypto a7pm registry after a7ff25r1,66419
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,cf30256,run crypto a7ff25r company numeric wave,122855
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,cf30256,run crypto a7ff25r company numeric wave,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,cf30256,run crypto a7ff25r company numeric wave,258
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,cf30256,run crypto a7ff25r company numeric wave,67040
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -1804,15 +1823,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,de26507,add crypto a7pm governance registry,365
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,de26507,add crypto a7pm governance registry,237
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,de26507,add crypto a7pm governance registry,282
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,de26507,add crypto a7pm governance registry,821
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,de26507,add crypto a7pm governance registry,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,e9491ec,refresh crypto a7pm registry after a7ff25r1,4307
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,cf30256,run crypto a7ff25r company numeric wave,320
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,cf30256,run crypto a7ff25r company numeric wave,212
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,cf30256,run crypto a7ff25r company numeric wave,377
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,cf30256,run crypto a7ff25r company numeric wave,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,cf30256,run crypto a7ff25r company numeric wave,424
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,cf30256,run crypto a7ff25r company numeric wave,5333
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,de26507,add crypto a7pm governance registry,2160
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,cf30256,run crypto a7ff25r company numeric wave,2348
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

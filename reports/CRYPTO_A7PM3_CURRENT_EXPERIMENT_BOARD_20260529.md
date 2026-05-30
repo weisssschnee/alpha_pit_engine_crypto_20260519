@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-30T08:47:33Z
+Generated: 2026-05-30T09:09:18Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-05-30T08:47:33Z
 
 ## Active Workstreams
 
-| workstream        | current_stage            | status             | next                                   |
-|:------------------|:-------------------------|:-------------------|:---------------------------------------|
-| governance        | A7PM-0/1/2/3             | pass               | keep registry as source-of-truth       |
-| a7ff_numeric_wave | A7FF-25R3                | pass_with_warnings | A7FF-25R4 no-activity shard tail audit |
-| a7ff_clue_triage  | A7FF-25R3 selected queue | allowed_next       | A7FF-26 numeric clue forensic          |
-| search_execution  | blocked                  | not_authorized     | none                                   |
+| workstream        | current_stage   | status                        | next                                      |
+|:------------------|:----------------|:------------------------------|:------------------------------------------|
+| governance        | A7PM-0/1/2/3    | pass                          | keep registry as source-of-truth          |
+| a7ff_numeric_wave | A7FF-25R4       | pass_repair_required          | A7FF-25R5 funding-state tail queue repair |
+| a7ff_clue_triage  | A7FF-26         | pass_replay_preflight_allowed | A7FF-27 replay preflight                  |
+| search_execution  | blocked         | not_authorized                | none                                      |
 
 ## Allowed Next Tasks
 
-| task                 | reason                                                   |
-|:---------------------|:---------------------------------------------------------|
-| A7FF-25R4            | no-activity shard tail audit and queue repair; no search |
-| A7FF-26              | numeric clue forensic and promotion triage; no search    |
-| A7PM-0/3 maintenance | governance registry maintenance                          |
+| task                 | reason                                                                 |
+|:---------------------|:-----------------------------------------------------------------------|
+| A7FF-27              | replay preflight for promotion-ready numeric research clues; no search |
+| A7FF-25R5            | funding-state tail queue repair contract; no search                    |
+| A7PM-0/3 maintenance | governance registry maintenance                                        |
 
 ## Blocked Tasks
 

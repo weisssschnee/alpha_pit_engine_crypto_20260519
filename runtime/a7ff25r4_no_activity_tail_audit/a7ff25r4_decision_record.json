@@ -1,0 +1,29 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_queue_repair": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF25R4_NO_ACTIVITY_TAIL_CAUSE_IDENTIFIED_REPAIR_REQUIRED",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T09:07:10Z",
+  "no_activity_shards": [
+    "08",
+    "09",
+    "10",
+    "11"
+  ],
+  "prior_decision": "PASS_A7FF25R3_FULL_NUMERIC_WAVE_COMPLETED_WITH_WARNINGS_NO_SEARCH_AUTH",
+  "prior_stage": "A7FF-25R3",
+  "stage": "A7FF-25R4",
+  "tail_blueprint_count": 800,
+  "tail_funding_rate_expression_count": 800,
+  "tail_low_finite_share_count": 800,
+  "warnings": [
+    "no_activity_tail_shards",
+    "all_tail_failures_low_finite_share",
+    "tail_all_uses_funding_rate"
+  ]
+}

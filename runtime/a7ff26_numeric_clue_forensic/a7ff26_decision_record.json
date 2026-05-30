@@ -1,0 +1,33 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_replay_preflight": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF26_NUMERIC_RESEARCH_CLUES_READY_FOR_REPLAY_PREFLIGHT_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T09:07:19Z",
+  "non_l7_selected_count": 25,
+  "prior_decision": "PASS_A7FF25R3_FULL_NUMERIC_WAVE_COMPLETED_WITH_WARNINGS_NO_SEARCH_AUTH",
+  "prior_stage": "A7FF-25R3",
+  "promotion_ready_count": 14,
+  "promotion_semantic_pair_count": 5,
+  "promotion_skeleton_count": 8,
+  "promotion_thresholds": {
+    "control_ratio_premay_max_lt": 0.8,
+    "cost10_recent_oriented_gt": 0.0,
+    "label_family_not": "L7_ranked_future_return",
+    "one_bar_lag_recent_oriented_gt": 0.0,
+    "premay_all_positive": true,
+    "robust_min_tstat_floor_gte": 1.5
+  },
+  "rank_label_diagnostic_count": 46,
+  "selected_input_count": 71,
+  "stage": "A7FF-26",
+  "uses_may": false,
+  "warnings": [
+    "rank_label_diagnostic_selected_majority"
+  ]
+}

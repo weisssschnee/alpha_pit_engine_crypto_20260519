@@ -27,8 +27,8 @@ BLOCKED_TASKS = {
 }
 
 NEXT_ALLOWED_TASKS = {
-    "A7FF-25R4": "no-activity shard tail audit and queue repair; no search",
-    "A7FF-26": "numeric clue forensic and promotion triage on A7FF-25R3 selected queue; no search",
+    "A7FF-27": "replay preflight for A7FF-26 promotion-ready numeric research clues; no search",
+    "A7FF-25R5": "funding-state tail queue repair contract for no-activity shards; no search",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
 }
 

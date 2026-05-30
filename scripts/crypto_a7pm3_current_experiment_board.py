@@ -16,8 +16,8 @@ A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 
 
 ALLOWED = {
-    "A7FF-25R4": "no-activity shard tail audit and queue repair; no search",
-    "A7FF-26": "numeric clue forensic and promotion triage; no search",
+    "A7FF-27": "replay preflight for promotion-ready numeric research clues; no search",
+    "A7FF-25R5": "funding-state tail queue repair contract; no search",
     "A7PM-0/3 maintenance": "governance registry maintenance",
 }
 
@@ -66,8 +66,8 @@ def main() -> None:
     active = pd.DataFrame(
         [
             {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
-            {"workstream": "a7ff_numeric_wave", "current_stage": "A7FF-25R3", "status": "pass_with_warnings", "next": "A7FF-25R4 no-activity shard tail audit"},
-            {"workstream": "a7ff_clue_triage", "current_stage": "A7FF-25R3 selected queue", "status": "allowed_next", "next": "A7FF-26 numeric clue forensic"},
+            {"workstream": "a7ff_numeric_wave", "current_stage": "A7FF-25R4", "status": "pass_repair_required", "next": "A7FF-25R5 funding-state tail queue repair"},
+            {"workstream": "a7ff_clue_triage", "current_stage": "A7FF-26", "status": "pass_replay_preflight_allowed", "next": "A7FF-27 replay preflight"},
             {"workstream": "search_execution", "current_stage": "blocked", "status": "not_authorized", "next": "none"},
         ]
     )

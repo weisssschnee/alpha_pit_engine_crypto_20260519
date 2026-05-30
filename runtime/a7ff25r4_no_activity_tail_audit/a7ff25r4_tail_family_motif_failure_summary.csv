@@ -1,0 +1,11 @@
+shard,semantic_pair,motif,failure_reason,count
+08,basis_premium_like|funding_like,gated_sign,low_finite_share,114
+08,basis_premium_like|funding_like,mean_reversion_gate,low_finite_share,86
+09,basis_premium_like|funding_like,mean_reversion_gate,low_finite_share,170
+09,basis_premium_like|funding_like,mul,low_finite_share,30
+10,basis_premium_like|funding_like,relative_shock,low_finite_share,168
+10,basis_premium_like|funding_like,mul,low_finite_share,32
+11,basis_premium_like|funding_like,relative_shock,low_finite_share,146
+11,basis_premium_like|funding_like,safe_div_abs,low_finite_share,22
+11,basis_premium_like|funding_like,signed_spread,low_finite_share,19
+11,funding_like|positioning_like,gated_sign,low_finite_share,13
