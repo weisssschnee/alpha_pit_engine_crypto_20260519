@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-52 materialization preflight contract": "after A7FF51E static-ready 50000 blueprints; no numeric replay/search",
+  "A7FF-52E materialization preflight execution option": "requires explicit authorization; 1200 family-balanced rows; no numeric replay/search",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

@@ -1945,10 +1945,11 @@ runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_blocked_factor_blue
 runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_factor_candidate_blueprints.csv,b725826,add crypto a7ff field to factor compiler,3116
 runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_manifest.json,b725826,add crypto a7ff field to factor compiler,359
 runtime,A7FF-51,runtime/a7ff51_compact_non_l5_contract/a7ff51_manifest.json,44bd9de,add crypto a7ff execution contracts,2747
-runtime,A7FF-51E,runtime/a7ff51e_non_l5_heavy_generation/a7ff51e_blueprint_queue.csv,ee84b7e,run crypto a7ff51e non l5 generation,26962782
-runtime,A7FF-51E,runtime/a7ff51e_non_l5_heavy_generation/a7ff51e_coverage_summary.csv,ee84b7e,run crypto a7ff51e non l5 generation,15977
-runtime,A7FF-51E,runtime/a7ff51e_non_l5_heavy_generation/a7ff51e_manifest.json,ee84b7e,run crypto a7ff51e non l5 generation,1101
-runtime,A7FF-51E,runtime/a7ff51e_non_l5_heavy_generation/a7ff51e_static_audit.csv,ee84b7e,run crypto a7ff51e non l5 generation,490
+runtime,A7FF-51E,runtime/a7ff51e_non_l5_heavy_generation/a7ff51e_blueprint_queue.csv,fdf0583,run crypto a7ff51e non l5 generation,26962782
+runtime,A7FF-51E,runtime/a7ff51e_non_l5_heavy_generation/a7ff51e_coverage_summary.csv,fdf0583,run crypto a7ff51e non l5 generation,15977
+runtime,A7FF-51E,runtime/a7ff51e_non_l5_heavy_generation/a7ff51e_manifest.json,fdf0583,run crypto a7ff51e non l5 generation,1101
+runtime,A7FF-51E,runtime/a7ff51e_non_l5_heavy_generation/a7ff51e_static_audit.csv,fdf0583,run crypto a7ff51e non l5 generation,490
+runtime,A7FF-52,runtime/a7ff52_materialization_preflight_contract/a7ff52_manifest.json,6f99341,add crypto a7ff52 materialization contract,1940
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_manifest.json,b725826,add crypto a7ff field to factor compiler,453
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_portfolio_marginal_queue.csv,b725826,add crypto a7ff field to factor compiler,2157
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_selected_dryrun_queue.csv,b725826,add crypto a7ff field to factor compiler,751
@@ -2191,7 +2192,8 @@ report,A7FF47-PORTFOLIO-MICROREPLAY,reports/CRYPTO_A7FF47_PORTFOLIO_MICROREPLAY_
 report,A7FF49-EXISTING-MAP-NON-L5-MINING,reports/CRYPTO_A7FF49_EXISTING_MAP_NON_L5_MINING_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,11327
 report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
 report,A7FF51-COMPACT-NON-L5-CONTRACT,reports/CRYPTO_A7FF51_COMPACT_NON_L5_CONTRACT_20260531.md,44bd9de,add crypto a7ff execution contracts,2422
-report,A7FF51E-NON-L5-HEAVY-GENERATION,reports/CRYPTO_A7FF51E_NON_L5_HEAVY_GENERATION_20260531.md,ee84b7e,run crypto a7ff51e non l5 generation,22454
+report,A7FF51E-NON-L5-HEAVY-GENERATION,reports/CRYPTO_A7FF51E_NON_L5_HEAVY_GENERATION_20260531.md,fdf0583,run crypto a7ff51e non l5 generation,22454
+report,A7FF52-MATERIALIZATION-PREFLIGHT-CONTRACT,reports/CRYPTO_A7FF52_MATERIALIZATION_PREFLIGHT_CONTRACT_20260531.md,6f99341,add crypto a7ff52 materialization contract,1638
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
 report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_DERIVATION_PROBE_CONTRACT_20260530.md,bd530c1,expand crypto a7ff derivation probe contract,25056
 report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
@@ -2213,13 +2215,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,ee84b7e,run crypto a7ff51e non l5 generation,361997
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,6f99341,add crypto a7ff52 materialization contract,362446
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,ce25d84,advance crypto a7ff bounded replay forensics,100789
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,ee84b7e,run crypto a7ff51e non l5 generation,1167
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,ee84b7e,run crypto a7ff51e non l5 generation,148759
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,ee84b7e,run crypto a7ff51e non l5 generation,710
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,ee84b7e,run crypto a7ff51e non l5 generation,329
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,ee84b7e,run crypto a7ff51e non l5 generation,79765
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,6f99341,add crypto a7ff52 materialization contract,1316
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,6f99341,add crypto a7ff52 materialization contract,149543
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,6f99341,add crypto a7ff52 materialization contract,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,6f99341,add crypto a7ff52 materialization contract,353
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,6f99341,add crypto a7ff52 materialization contract,80114
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -2235,15 +2237,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,ee84b7e,run crypto a7ff51e non l5 generation,356
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,ee84b7e,run crypto a7ff51e non l5 generation,311
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,ee84b7e,run crypto a7ff51e non l5 generation,1159
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,ee84b7e,run crypto a7ff51e non l5 generation,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,ee84b7e,run crypto a7ff51e non l5 generation,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,ee84b7e,run crypto a7ff51e non l5 generation,5723
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,6f99341,add crypto a7ff52 materialization contract,345
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,6f99341,add crypto a7ff52 materialization contract,335
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,6f99341,add crypto a7ff52 materialization contract,1306
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,6f99341,add crypto a7ff52 materialization contract,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,6f99341,add crypto a7ff52 materialization contract,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,6f99341,add crypto a7ff52 materialization contract,5926
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,ee84b7e,run crypto a7ff51e non l5 generation,4420
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,6f99341,add crypto a7ff52 materialization contract,4632
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
