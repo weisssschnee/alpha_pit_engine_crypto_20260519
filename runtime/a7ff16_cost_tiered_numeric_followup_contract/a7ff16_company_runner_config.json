@@ -1,0 +1,17 @@
+{
+  "fast_numeric_cap_per_shard": 48,
+  "file_prefix": "a7ff16s",
+  "materialize_cap_per_shard": 48,
+  "portfolio_cap_per_shard": 128,
+  "queue_local_path": "runtime\\a7ff16_cost_tiered_numeric_followup_contract\\a7ff16_execution_queue.csv",
+  "queue_remote_path": "runtime\\a7ff16_cost_tiered_numeric_followup_contract\\a7ff16_execution_queue.csv",
+  "recommended_max_parallel": 2,
+  "recommended_shard_count": 2,
+  "recommended_shard_size": 48,
+  "remote_base_panel": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v2_20260527",
+  "remote_data_root": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData",
+  "remote_python": "D:\\HermesWorker\\venvs\\phase3z33\\Scripts\\python.exe",
+  "remote_repo": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote",
+  "runner_script": "scripts\\crypto_a7ff8_expanded_numeric_probe.py",
+  "stage_prefix": "A7FF-16S"
+}
