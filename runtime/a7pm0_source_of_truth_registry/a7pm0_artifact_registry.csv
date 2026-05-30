@@ -1670,13 +1670,21 @@ runtime,A7FF-29,runtime/a7ff29_candidate_forensic/a7ff29_manifest.json,bff1ff9,a
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_candidate_blueprints.csv,b725826,add crypto a7ff field to factor compiler,3272
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_generation_layer_policy.json,b725826,add crypto a7ff field to factor compiler,754
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_manifest.json,b725826,add crypto a7ff field to factor compiler,320
-runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,,,721
-runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_execution_plan.csv,,,252
-runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_frozen_portfolio_replay_queue.csv,,,2330
-runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_manifest.json,,,721
-runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_portfolio_replay_gates.csv,,,743
-runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_replay_modes.csv,,,758
-runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_risk_register.csv,,,313
+runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_authorization_matrix.json,e97d9de,add crypto a7ff portfolio replay contract,721
+runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_execution_plan.csv,e97d9de,add crypto a7ff portfolio replay contract,252
+runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_frozen_portfolio_replay_queue.csv,e97d9de,add crypto a7ff portfolio replay contract,2330
+runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_manifest.json,e97d9de,add crypto a7ff portfolio replay contract,721
+runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_portfolio_replay_gates.csv,e97d9de,add crypto a7ff portfolio replay contract,743
+runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_replay_modes.csv,e97d9de,add crypto a7ff portfolio replay contract,758
+runtime,A7FF-30,runtime/a7ff30_portfolio_replay_contract/a7ff30_risk_register.csv,e97d9de,add crypto a7ff portfolio replay contract,313
+runtime,A7FF-30A,runtime/a7ff30a_portfolio_replay_smoke/a7ff30a_concentration_summary.csv,,,195
+runtime,A7FF-30A,runtime/a7ff30a_portfolio_replay_smoke/a7ff30a_decision_record.json,,,774
+runtime,A7FF-30A,runtime/a7ff30a_portfolio_replay_smoke/a7ff30a_ensemble_clue_metrics.csv,,,7426
+runtime,A7FF-30A,runtime/a7ff30a_portfolio_replay_smoke/a7ff30a_leave_one_out_metrics.csv,,,58779
+runtime,A7FF-30A,runtime/a7ff30a_portfolio_replay_smoke/a7ff30a_manifest.json,,,774
+runtime,A7FF-30A,runtime/a7ff30a_portfolio_replay_smoke/a7ff30a_portfolio_label_metrics.csv,,,119689
+runtime,A7FF-30A,runtime/a7ff30a_portfolio_replay_smoke/a7ff30a_selected_ensemble_clues.csv,,,7426
+runtime,A7FF-30A,runtime/a7ff30a_portfolio_replay_smoke/a7ff30a_signal_materialization.csv,,,1039
 runtime,A7FF-4,runtime/a7ff4_feature_role_promotion/a7ff4_feature_role_map_v2.csv,b725826,add crypto a7ff field to factor compiler,11222
 runtime,A7FF-4,runtime/a7ff4_feature_role_promotion/a7ff4_manifest.json,b725826,add crypto a7ff field to factor compiler,342
 runtime,A7FF-4,runtime/a7ff4_feature_role_promotion/a7ff4_role_transition_policy.csv,b725826,add crypto a7ff field to factor compiler,349
@@ -1861,7 +1869,8 @@ report,A7FF28A-BOUNDED-DEEP-REPLAY,reports/CRYPTO_A7FF28A_BOUNDED_DEEP_REPLAY_20
 report,A7FF28A-BOUNDED-DEEP-REPLAY-SUMMARY,reports/CRYPTO_A7FF28A_BOUNDED_DEEP_REPLAY_SUMMARY_20260530.md,537bbdf,run crypto a7ff bounded deep replay,10701
 report,A7FF29-CANDIDATE-FORENSIC,reports/CRYPTO_A7FF29_CANDIDATE_FORENSIC_20260530.md,bff1ff9,audit crypto a7ff candidate forensics,20499
 report,A7FF3-COARSE-TO-FINE-GENERATION-CONTRACT,reports/CRYPTO_A7FF3_COARSE_TO_FINE_GENERATION_CONTRACT_20260530.md,b725826,add crypto a7ff field to factor compiler,5677
-report,A7FF30-PORTFOLIO-REPLAY-CONTRACT,reports/CRYPTO_A7FF30_PORTFOLIO_REPLAY_CONTRACT_20260530.md,,,14123
+report,A7FF30-PORTFOLIO-REPLAY-CONTRACT,reports/CRYPTO_A7FF30_PORTFOLIO_REPLAY_CONTRACT_20260530.md,e97d9de,add crypto a7ff portfolio replay contract,14123
+report,A7FF30A-PORTFOLIO-REPLAY-SMOKE,reports/CRYPTO_A7FF30A_PORTFOLIO_REPLAY_SMOKE_20260530.md,,,53870
 report,A7FF4-FEATURE-ROLE-PROMOTION,reports/CRYPTO_A7FF4_FEATURE_ROLE_PROMOTION_20260530.md,b725826,add crypto a7ff field to factor compiler,5766
 report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
@@ -1875,13 +1884,13 @@ report,A7FFR2-OPERATOR-PROBING-V2,reports/CRYPTO_A7FFR2_OPERATOR_PROBING_V2_2026
 report,A7FFR3-FEATURE-PAIR-POLICY-V2,reports/CRYPTO_A7FFR3_FEATURE_PAIR_POLICY_V2_20260530.md,3e509b2,redesign crypto a7ff derived generation,38678
 report,A7FFR4-COARSE-TO-FINE-GENERATION-REDESIGN,reports/CRYPTO_A7FFR4_COARSE_TO_FINE_GENERATION_REDESIGN_20260530.md,3e509b2,redesign crypto a7ff derived generation,34030
 report,A7FFR5-RESPONSE-BACKED-PROMOTION-REDESIGN,reports/CRYPTO_A7FFR5_RESPONSE_BACKED_PROMOTION_REDESIGN_20260530.md,3e509b2,redesign crypto a7ff derived generation,21018
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,bff1ff9,audit crypto a7ff candidate forensics,311585
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,3eebfb6,add crypto a7ff deep replay contract,96748
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,e97d9de,add crypto a7ff portfolio replay contract,312721
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,e97d9de,add crypto a7ff portfolio replay contract,98706
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,de26507,add crypto a7pm governance registry,391
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,bff1ff9,audit crypto a7ff candidate forensics,128904
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,bff1ff9,audit crypto a7ff candidate forensics,710
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,bff1ff9,audit crypto a7ff candidate forensics,299
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,bff1ff9,audit crypto a7ff candidate forensics,69609
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,e97d9de,add crypto a7ff portfolio replay contract,129639
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,e97d9de,add crypto a7ff portfolio replay contract,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,e97d9de,add crypto a7ff portfolio replay contract,297
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,e97d9de,add crypto a7ff portfolio replay contract,69909
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -1897,15 +1906,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,bff1ff9,audit crypto a7ff candidate forensics,349
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,bff1ff9,audit crypto a7ff candidate forensics,279
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,e97d9de,add crypto a7ff portfolio replay contract,371
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,e97d9de,add crypto a7ff portfolio replay contract,282
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,cf30256,run crypto a7ff25r company numeric wave,377
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,bff1ff9,audit crypto a7ff candidate forensics,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,bff1ff9,audit crypto a7ff candidate forensics,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,bff1ff9,audit crypto a7ff candidate forensics,4839
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,e97d9de,add crypto a7ff portfolio replay contract,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,e97d9de,add crypto a7ff portfolio replay contract,424
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,e97d9de,add crypto a7ff portfolio replay contract,4858
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,bff1ff9,audit crypto a7ff candidate forensics,2719
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,e97d9de,add crypto a7ff portfolio replay contract,2827
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

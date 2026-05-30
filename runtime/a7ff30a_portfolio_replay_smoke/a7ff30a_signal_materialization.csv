@@ -1,0 +1,7 @@
+blueprint_id,expression,orientation_source_label,orientation_source_horizon,orientation,finite_share,nonzero_share
+a7ff24r_858ff2210f276fcf,"Delta(mark_index_basis_bps,12)",L5_vol_adjusted_return,1,-1.0,0.9962654409652398,0.9952369691188631
+a7ff24r_650915032f2a5979,"Mul(Delta(mark_index_basis_bps,12),Sign(realized_vol_24h))",L5_vol_adjusted_return,1,-1.0,0.8239011778224649,0.8230107878443516
+a7ff24r_bcc3435cf539d883,"Sub(mark_index_basis_bps,Mean(premium_close_bps,12))",L3_liquidity_tier_relative_return,1,-1.0,0.9965527147371445,0.9958718282832932
+a7ff24r_389e925b81a0c645,"Mean(Mul(Delta(mark_index_basis_bps,1),realized_vol_168h),4)",L5_vol_adjusted_return,8,-1.0,0.8261993679977018,0.8261247720458813
+a7ff24r_c223ee324263786f,"SafeDiv(premium_close_bps,Abs(realized_vol_168h))",L5_vol_adjusted_return,1,-1.0,0.8273484630853203,0.5586205145216098
+a7ff24r_145e2d58adad4f4a,"SafeDiv(mark_index_basis_bps,Abs(ZScore(Mean(premium_close_bps,12))))",L1_cross_sectional_relative_return,1,-1.0,0.9965527147371445,0.9859251723245844

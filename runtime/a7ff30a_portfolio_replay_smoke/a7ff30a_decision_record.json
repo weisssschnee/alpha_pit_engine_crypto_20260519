@@ -1,0 +1,24 @@
+{
+  "authorizes_a7ff31_portfolio_forensic_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 6,
+  "decision": "PASS_A7FF30A_PORTFOLIO_REPLAY_SMOKE_FOUND_ENSEMBLE_CLUES_NO_SEARCH_AUTH",
+  "ensemble_clue_rows": 12,
+  "executes_generation": false,
+  "executes_replay": true,
+  "executes_search": false,
+  "full_timestamp_count": 21025,
+  "generated_at": "2026-05-30T10:25:01Z",
+  "missing_fields": [],
+  "portfolio_metric_rows": 208,
+  "stage": "A7FF-30A",
+  "symbol_count": 181,
+  "timestamp_count": 3481,
+  "warnings": [
+    "all_candidates_have_basis_premium_root",
+    "safe_div_outlier_risk_present",
+    "ensemble_is_basis_premium_root_concentrated"
+  ]
+}
