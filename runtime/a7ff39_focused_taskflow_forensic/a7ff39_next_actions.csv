@@ -1,0 +1,4 @@
+route,action,allowed_scope,blocked_scope
+A7FF-40_control_strict_focused_queue,build control-strict follow-up queue,funding_dense clean variants plus small regime control-warning audit,rank-label-only rows and control_ratio >= 1.0 rows
+A7FF-40R_regime_control_repair,repair regime_state relative-value controls before expansion,regime rows only as diagnostic until control ratio < 0.80,promotion/search
+A7FF-40B_basis_reference,keep basis safe_div as reference/diagnostic,small reference rows only,basis-root dominance

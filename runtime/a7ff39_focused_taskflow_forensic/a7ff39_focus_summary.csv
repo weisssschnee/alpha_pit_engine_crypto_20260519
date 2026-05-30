@@ -1,0 +1,8 @@
+semantic_pair,is_non_l7,control_bucket,selected_count,max_control_ratio,mean_score_no_may
+funding_like|basis_premium_like,True,clean_lt_0p80,2,0.5888672225646748,68.03686485185686
+funding_like|basis_premium_like,True,warning_0p80_to_1p00,2,0.9504795081720718,240.23355351377106
+basis_premium_like|basis_premium_like,True,warning_0p80_to_1p00,1,0.8547565109660017,105.61832623708416
+regime_state|price_return_like,True,warning_0p80_to_1p00,1,0.8524675625727227,103.40933146477526
+regime_state|price_return_like,False,clean_lt_0p80,5,0.7572007776422219,60.78263257975516
+funding_like|basis_premium_like,False,clean_lt_0p80,2,0.7584919369487557,12.767391404583138
+funding_like|basis_premium_like,False,warning_0p80_to_1p00,1,0.9863412028840732,8.001563165322798

@@ -1,0 +1,28 @@
+{
+  "authorizes_a7ff40_control_strict_followup": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FF39_FOCUSED_FORENSIC_READY_FOR_CONTROL_STRICT_FOLLOWUP_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T12:40:00Z",
+  "non_l7_numeric_clue_rows": 88,
+  "rank_label_diagnostic_clue_rows": 72,
+  "selected_count": 14,
+  "selected_non_l7_clean_count": 2,
+  "selected_non_l7_clean_family_count": 1,
+  "selected_non_l7_count": 6,
+  "selected_rank_label_count": 8,
+  "source_a7ff38_decision": "PASS_A7FF38_FOCUSED_REPLAY_TASKFLOW_COMPLETED_NO_SEARCH_AUTH",
+  "stage": "A7FF-39",
+  "uses_may": false,
+  "warnings": [
+    "selected_contains_rank_label_diagnostic_rows",
+    "non_l7_selected_contains_control_warning_rows",
+    "control_clean_non_l7_selected_single_family"
+  ]
+}

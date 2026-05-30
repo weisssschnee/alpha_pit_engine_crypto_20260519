@@ -1,0 +1,7 @@
+semantic_pair,a7ff38_role,queue_count,motif_count,skeleton_count,primary_field_count,secondary_field_count
+funding_like|basis_premium_like,primary_focus_funding_dense,300,10,30,1,1
+regime_state|price_return_like,control_warning_focus_regime,180,10,23,1,1
+basis_premium_like|basis_premium_like,diagnostic_reference_basis,60,5,12,1,1
+liquidity_like|volatility_like,contrast_liquidity_volatility,60,10,23,1,1
+open_interest_like|positioning_like,contrast_oi_positioning,60,10,23,1,1
+taker_flow_like|open_interest_like,contrast_taker_leverage,60,10,23,1,1
