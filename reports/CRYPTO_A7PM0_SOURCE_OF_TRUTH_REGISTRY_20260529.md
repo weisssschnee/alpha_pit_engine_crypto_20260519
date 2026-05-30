@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T06:20:47Z
+Generated: 2026-05-30T06:22:32Z
 
 ## Decision
 
@@ -12,14 +12,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
-?? reports/CRYPTO_A7FF23R_DERIVED_FACTOR_EXPANSION_CONTRACT_20260530.md
-?? reports/CRYPTO_A7FF24R_DRY_GENERATION_PLAN_20260530.md
-?? runtime/a7ff23r_derived_factor_expansion_contract/
-?? runtime/a7ff24r_dry_generation_plan/
-?? scripts/crypto_a7ff23r_derived_factor_expansion_contract.py
-?? scripts/crypto_a7ff24r_dry_generation_plan.py
-HEAD=96d3c9a48baf669b23a43c25456f8409dcaa502e
-origin/main=96d3c9a48baf669b23a43c25456f8409dcaa502e
+HEAD=587e26e6d7d0350154b5f90d0b113e331d915bd0
+origin/main=587e26e6d7d0350154b5f90d0b113e331d915bd0
 HEAD == origin/main: True
 ```
 
@@ -41,10 +35,10 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T06:20:47Z",
-  "head": "96d3c9a48baf669b23a43c25456f8409dcaa502e",
+  "generated_at": "2026-05-30T06:22:32Z",
+  "head": "587e26e6d7d0350154b5f90d0b113e331d915bd0",
   "head_equals_origin_main": true,
-  "origin_main": "96d3c9a48baf669b23a43c25456f8409dcaa502e",
+  "origin_main": "587e26e6d7d0350154b5f90d0b113e331d915bd0",
   "stage": "A7PM-0",
   "stage_count": 207
 }
