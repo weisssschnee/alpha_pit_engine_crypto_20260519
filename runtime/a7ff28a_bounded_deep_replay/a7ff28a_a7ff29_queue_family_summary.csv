@@ -1,0 +1,7 @@
+semantic_pair,motif,label_family,candidate_count,median_control_ratio,median_score_no_may
+basis_premium_like,single,L5_vol_adjusted_return,1,0.2378122862593981,271.63310396594
+basis_premium_like|basis_premium_like,safe_div_abs,L1_cross_sectional_relative_return,1,0.2263905120289567,6.773609487971044
+basis_premium_like|basis_premium_like,sub,L3_liquidity_tier_relative_return,1,0.1508674481286142,143.5541374024747
+basis_premium_like|volatility_like,gated_sign,L5_vol_adjusted_return,1,0.2728766985130318,271.6103790277254
+basis_premium_like|volatility_like,safe_div_abs,L5_vol_adjusted_return,1,0.7212882306454783,80.86682908589565
+basis_premium_like|volatility_like,smooth_mul,L5_vol_adjusted_return,1,0.6120477019308964,131.7243581406559
