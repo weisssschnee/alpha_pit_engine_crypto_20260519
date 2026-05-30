@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T19:01:18Z
+Generated: 2026-05-30T19:14:43Z
 
 ## Decision
 
@@ -15,8 +15,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=7b68b14ffb906e96efac7744d563370280a7aced
-origin/main=ce25d84e06598f348c829a480f54ddb555ec4e09
+HEAD=7d434c6fc9872b4f3550b5526afac767b031a759
+origin/main=91a4732d1204d6d91fbca6913e1764a334a20ef1
 HEAD == origin/main: False
 ```
 
@@ -24,7 +24,7 @@ HEAD == origin/main: False
 
 ```json
 {
-  "artifact_count": 2406,
+  "artifact_count": 2410,
   "authorization_record_count": 685,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +38,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T19:01:18Z",
-  "head": "7b68b14ffb906e96efac7744d563370280a7aced",
+  "generated_at": "2026-05-30T19:14:43Z",
+  "head": "7d434c6fc9872b4f3550b5526afac767b031a759",
   "head_equals_origin_main": false,
-  "origin_main": "ce25d84e06598f348c829a480f54ddb555ec4e09",
+  "origin_main": "91a4732d1204d6d91fbca6913e1764a334a20ef1",
   "stage": "A7PM-0",
-  "stage_count": 248
+  "stage_count": 249
 }
 ```
 
@@ -62,7 +62,7 @@ HEAD == origin/main: False
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     111 |
+| valid_or_historical_record   | governance_or_audit        |     112 |
 | valid_or_historical_record   | contract                   |      49 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       7 |

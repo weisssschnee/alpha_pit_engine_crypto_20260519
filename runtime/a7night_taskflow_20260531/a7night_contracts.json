@@ -1,0 +1,51 @@
+{
+  "A7FF-24R4": {
+    "artifact_budget": {
+      "max_new_reports": 1,
+      "max_new_runtime_tables": 3,
+      "required_manifest": true
+    },
+    "execution_authorized": false,
+    "hard_gates": {
+      "before_full_wave": [
+        "queue coverage by shard and semantic pair",
+        "no missing numeric fields",
+        "no eval failures in preflight sample",
+        "raw funding rate must remain absent from dense tail"
+      ]
+    },
+    "name": "repaired-queue numeric wave contract",
+    "preconditions": {
+      "dense_materializer_preflight_pass": true,
+      "dense_tail_activity_ok_count": 78,
+      "eval_failure_count": 0,
+      "raw_funding_rate_tail_rows": 0
+    },
+    "search_authorized": false,
+    "source": "A7FF-24R3",
+    "status": "contract_ready"
+  },
+  "A7FF-51": {
+    "artifact_budget": {
+      "max_new_reports": 1,
+      "max_new_runtime_tables": 3,
+      "required_manifest": true
+    },
+    "execution_authorized": false,
+    "hard_gates": {
+      "control_ratio_max": 0.8,
+      "min_non_reference_families_before_replay": 2,
+      "min_non_reference_rows_before_replay": 6,
+      "reference_family_cannot_count_as_primary": true
+    },
+    "name": "compact non-L5-first derived generation contract",
+    "primary_labels": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L3_liquidity_tier_relative_return"
+    ],
+    "search_authorized": false,
+    "source": "A7FF-R11",
+    "status": "contract_ready"
+  }
+}

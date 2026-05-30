@@ -1,0 +1,22 @@
+{
+  "artifact_budget": {
+    "reports": 1,
+    "runtime_files": 3,
+    "scripts": 1
+  },
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "contracts": [
+    "A7FF-51",
+    "A7FF-24R4"
+  ],
+  "decision": "PASS_A7NIGHT_TASKFLOW_READY",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T19:13:49Z",
+  "stage": "A7NIGHT-20260531"
+}
