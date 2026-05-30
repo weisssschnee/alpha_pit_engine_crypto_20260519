@@ -1,0 +1,15 @@
+{
+  "authorization": {
+    "a7ff16_cost_tiered_numeric_followup": true,
+    "alpha_proof": false,
+    "search": false,
+    "shadow_paper_live": false
+  },
+  "decision": "PASS_A7FF15_COST_TIERED_BALANCED_FOLLOWUP_READY_FOR_A7FF16_WITH_L3_COST_WARNING",
+  "source": {
+    "a7ff12_shards": "runtime/a7ff12_company_numeric_probe_shard_*",
+    "a7ff14_manifest": "runtime\\a7ff14_label_balanced_selector_repair\\a7ff14_manifest.json",
+    "a7ff14_queue": "runtime\\a7ff14_label_balanced_selector_repair\\a7ff14_label_balanced_selected_queue.csv"
+  },
+  "stage": "A7FF-15-COST-TIERED-BALANCED-FOLLOWUP"
+}

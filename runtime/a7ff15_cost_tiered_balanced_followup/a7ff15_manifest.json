@@ -1,0 +1,32 @@
+{
+  "a7ff14_selected_rows": 64,
+  "authorizes_a7ff16_cost_tiered_numeric_followup": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF15_COST_TIERED_BALANCED_FOLLOWUP_READY_FOR_A7FF16_WITH_L3_COST_WARNING",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T04:29:15Z",
+  "input_candidate_rows": 461,
+  "input_unique_blueprints": 121,
+  "l3_strict_cost10_rows": 0,
+  "label_quota": 40,
+  "min_acceptable_total": 144,
+  "selected_cost5_or_better_rows": 119,
+  "selected_label_families": 4,
+  "selected_rows": 152,
+  "selected_strict_cost10_rows": 37,
+  "selected_top_label_share": 0.2631578947368421,
+  "selected_top_motif_share": 0.3026315789473684,
+  "selected_top_semantic_share": 0.3157894736842105,
+  "selected_unique_blueprints": 96,
+  "source_a7ff14_decision": "PASS_A7FF14_LABEL_BALANCED_SELECTOR_REPAIR_READY_FOR_A7FF15",
+  "stage": "A7FF-15-COST-TIERED-BALANCED-FOLLOWUP",
+  "target_total": 160,
+  "uses_may": false,
+  "warnings": [
+    "L3_liquidity_tier_relative_return_has_no_strict_cost10_rows"
+  ]
+}

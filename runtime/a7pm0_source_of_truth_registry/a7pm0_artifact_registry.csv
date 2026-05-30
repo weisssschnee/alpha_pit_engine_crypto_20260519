@@ -1206,14 +1206,23 @@ runtime,A7FF-13-WAVE-TRIAGE,runtime/a7ff13_wave_triage/a7ff13_raw_clue_label_sum
 runtime,A7FF-13-WAVE-TRIAGE,runtime/a7ff13_wave_triage/a7ff13_raw_clue_semantic_summary.csv,bdba34e,run crypto a7ff12 numeric wave,184
 runtime,A7FF-13-WAVE-TRIAGE,runtime/a7ff13_wave_triage/a7ff13_selected_label_summary.csv,bdba34e,run crypto a7ff12 numeric wave,828
 runtime,A7FF-13-WAVE-TRIAGE,runtime/a7ff13_wave_triage/a7ff13_selected_semantic_summary.csv,bdba34e,run crypto a7ff12 numeric wave,312
-runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_balanced_candidate_pool.csv,,,396902
-runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_candidate_label_summary.csv,,,1210
-runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_experiment_record.json,,,1068
-runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_label_balanced_selected_queue.csv,,,57791
-runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_manifest.json,,,950
-runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_selected_label_summary.csv,,,683
-runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_selected_motif_summary.csv,,,123
-runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_selected_semantic_summary.csv,,,313
+runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_balanced_candidate_pool.csv,9fa8d43,repair crypto a7ff selector label balance,396902
+runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_candidate_label_summary.csv,9fa8d43,repair crypto a7ff selector label balance,1210
+runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_experiment_record.json,9fa8d43,repair crypto a7ff selector label balance,1068
+runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_label_balanced_selected_queue.csv,9fa8d43,repair crypto a7ff selector label balance,57791
+runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_manifest.json,9fa8d43,repair crypto a7ff selector label balance,950
+runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_selected_label_summary.csv,9fa8d43,repair crypto a7ff selector label balance,683
+runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_selected_motif_summary.csv,9fa8d43,repair crypto a7ff selector label balance,123
+runtime,A7FF-14-LABEL-BALANCED-SELECTOR-REPAIR,runtime/a7ff14_label_balanced_selector_repair/a7ff14_selected_semantic_summary.csv,9fa8d43,repair crypto a7ff selector label balance,313
+runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_candidate_label_cost_tier_summary.csv,,,4615
+runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_cost_tiered_candidate_pool.csv,,,403676
+runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_cost_tiered_selected_queue.csv,,,133999
+runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_experiment_record.json,,,612
+runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_manifest.json,,,1197
+runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_selected_blueprint_summary.csv,,,18944
+runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_selected_label_cost_tier_summary.csv,,,2729
+runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_selected_motif_summary.csv,,,162
+runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_selected_semantic_summary.csv,,,311
 runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_feature_pair_policy.csv,b725826,add crypto a7ff field to factor compiler,25215
 runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_feature_pair_similarity.csv,b725826,add crypto a7ff field to factor compiler,64874
 runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_field_response_vectors.csv,b725826,add crypto a7ff field to factor compiler,14739
@@ -1321,7 +1330,8 @@ report,A7FF12S05-COMPANY-NUMERIC-PROBE,reports/CRYPTO_A7FF12S05_COMPANY_NUMERIC_
 report,A7FF12S06-COMPANY-NUMERIC-PROBE,reports/CRYPTO_A7FF12S06_COMPANY_NUMERIC_PROBE_20260530.md,bdba34e,run crypto a7ff12 numeric wave,23316
 report,A7FF12S07-COMPANY-NUMERIC-PROBE,reports/CRYPTO_A7FF12S07_COMPANY_NUMERIC_PROBE_20260530.md,bdba34e,run crypto a7ff12 numeric wave,17987
 report,A7FF13-WAVE-TRIAGE,reports/CRYPTO_A7FF13_WAVE_TRIAGE_20260530.md,bdba34e,run crypto a7ff12 numeric wave,5478
-report,A7FF14-LABEL-BALANCED-SELECTOR-REPAIR,reports/CRYPTO_A7FF14_LABEL_BALANCED_SELECTOR_REPAIR_20260530.md,,,24880
+report,A7FF14-LABEL-BALANCED-SELECTOR-REPAIR,reports/CRYPTO_A7FF14_LABEL_BALANCED_SELECTOR_REPAIR_20260530.md,9fa8d43,repair crypto a7ff selector label balance,24880
+report,A7FF15-COST-TIERED-BALANCED-FOLLOWUP,reports/CRYPTO_A7FF15_COST_TIERED_BALANCED_FOLLOWUP_20260530.md,,,28680
 report,A7FF2-FEATURE-PAIR-CLUSTERING,reports/CRYPTO_A7FF2_FEATURE_PAIR_CLUSTERING_20260530.md,b725826,add crypto a7ff field to factor compiler,28233
 report,A7FF3-COARSE-TO-FINE-GENERATION-CONTRACT,reports/CRYPTO_A7FF3_COARSE_TO_FINE_GENERATION_CONTRACT_20260530.md,b725826,add crypto a7ff field to factor compiler,5677
 report,A7FF4-FEATURE-ROLE-PROMOTION,reports/CRYPTO_A7FF4_FEATURE_ROLE_PROMOTION_20260530.md,b725826,add crypto a7ff field to factor compiler,5766
@@ -1331,13 +1341,13 @@ report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_
 report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
 report,A7FF9-CONTINUATION-COMPARISON,reports/CRYPTO_A7FF9_CONTINUATION_COMPARISON_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,3330
 report,A7FF9-EXPANDED-NUMERIC-PROBE-CONTINUATION,reports/CRYPTO_A7FF9_EXPANDED_NUMERIC_PROBE_CONTINUATION_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,21246
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,bdba34e,run crypto a7ff12 numeric wave,221717
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,9fa8d43,repair crypto a7ff selector label balance,228213
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,5230053,refresh crypto a7pm registry after selector counterfactual,94548
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,de26507,add crypto a7pm governance registry,391
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,bdba34e,run crypto a7ff12 numeric wave,103337
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,bdba34e,run crypto a7ff12 numeric wave,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,9fa8d43,repair crypto a7ff selector label balance,104209
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,9fa8d43,repair crypto a7ff selector label balance,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,de26507,add crypto a7pm governance registry,332
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,bdba34e,run crypto a7ff12 numeric wave,56769
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,9fa8d43,repair crypto a7ff selector label balance,57213
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -1358,7 +1368,7 @@ runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,de26
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,de26507,add crypto a7pm governance registry,282
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,de26507,add crypto a7pm governance registry,821
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,de26507,add crypto a7pm governance registry,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,bdba34e,run crypto a7ff12 numeric wave,6149
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,9fa8d43,repair crypto a7ff selector label balance,4487
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
 report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,de26507,add crypto a7pm governance registry,2160
