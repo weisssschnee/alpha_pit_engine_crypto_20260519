@@ -430,6 +430,25 @@ A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_authorization_matrix.json,bloc
 A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_authorization_matrix.json,decision,"""PASS_A7AR4_SELECTOR_ADAPTER_SMOKE""",False
 A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search_execution"": true, ""live"": true, ""paper"": true, ""shadow"": true}",False
 A7AR-4,runtime/a7ar4_selector_adapter_smoke/a7ar4_authorization_matrix.json,note,"""A7AR-4 selector smoke does not replace A7AL-1 field-family baseline.""",False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,authorizes_deep_replay_execution,true,True
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,authorizes_search,false,False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,decision,"""PASS_A7FF28_DEEP_REPLAY_CONTRACT_READY_NO_SEARCH_AUTH""",False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,executes_generation,false,False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,executes_replay,false,False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,executes_search,false,False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,generated_at,"""2026-05-30T09:44:26Z""",False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,input_queue_count,8,False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,max_control_ratio,0.9717879399861112,False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,missing_required_columns,[],False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,non_l7_count,8,False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,prior_decision,"""PASS_A7FF27_REPLAY_PREFLIGHT_READY_FOR_A7FF28_DEEP_REPLAY_CONTRACT_NO_SEARCH_AUTH""",False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,prior_stage,"""A7FF-27""",False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,semantic_pair_count,3,False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,skeleton_count,8,False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,stage,"""A7FF-28""",False
+A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,warnings,[],False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_feature_columns,94,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_symbol_month_count,87,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,authorizes_a7r_horizon_diagnostic_contract,true,True

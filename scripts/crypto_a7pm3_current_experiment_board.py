@@ -16,8 +16,8 @@ A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 
 
 ALLOWED = {
-    "A7FF-28": "deep replay contract/preflight for A7FF-27 selected candidates; no search",
-    "A7FF-25R6": "dense funding-state materialization audit and activity precheck; no search",
+    "A7FF-28A": "bounded deep replay execution for the frozen A7FF-28 8-candidate queue; no search",
+    "A7FF-24R2": "repaired company queue tail rebuild using dense funding-state fields or healthy backfill; no search",
     "A7PM-0/3 maintenance": "governance registry maintenance",
 }
 
@@ -66,8 +66,8 @@ def main() -> None:
     active = pd.DataFrame(
         [
             {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
-            {"workstream": "a7ff_replay_preflight", "current_stage": "A7FF-27", "status": "pass_contract_allowed", "next": "A7FF-28 deep replay contract/preflight"},
-            {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-25R5", "status": "pass_materialization_audit_allowed", "next": "A7FF-25R6 dense funding-state audit"},
+            {"workstream": "a7ff_deep_replay", "current_stage": "A7FF-28", "status": "pass_bounded_replay_allowed", "next": "A7FF-28A bounded deep replay"},
+            {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-25R6", "status": "pass_queue_repair_allowed", "next": "A7FF-24R2 repaired queue tail rebuild"},
             {"workstream": "search_execution", "current_stage": "blocked", "status": "not_authorized", "next": "none"},
         ]
     )
@@ -120,7 +120,7 @@ def main() -> None:
         "",
         "```text",
         "No formula search, large search, alpha proof, shadow, paper, or live execution is authorized.",
-        "The next technical work is A7FF-28 deep replay contract/preflight and A7FF-25R6 dense funding-state audit.",
+        "The next technical work is A7FF-28A bounded deep replay and A7FF-24R2 repaired queue tail rebuild.",
         "```",
     ]
     REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")

@@ -1,0 +1,6 @@
+step,action,executes_search
+A7FF-28A,load A7FF-27 queue and freeze candidate order,False
+A7FF-28B,materialize all 8 expressions on full strict universe,False
+A7FF-28C,run split/horizon/label/control/cost replay metrics,False
+A7FF-28D,"run portfolio proxy, concentration, and stress attribution",False
+A7FF-28E,decide research-clue vs diagnostic-only vs reject,False

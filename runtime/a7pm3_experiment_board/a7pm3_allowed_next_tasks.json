@@ -1,5 +1,5 @@
 {
-  "A7FF-25R6": "dense funding-state materialization audit and activity precheck; no search",
-  "A7FF-28": "deep replay contract/preflight for A7FF-27 selected candidates; no search",
+  "A7FF-24R2": "repaired company queue tail rebuild using dense funding-state fields or healthy backfill; no search",
+  "A7FF-28A": "bounded deep replay execution for the frozen A7FF-28 8-candidate queue; no search",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

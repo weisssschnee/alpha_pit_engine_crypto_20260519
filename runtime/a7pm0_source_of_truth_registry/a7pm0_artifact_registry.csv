@@ -1600,12 +1600,18 @@ runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_tail_blueprin
 runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_tail_family_motif_failure_summary.csv,abb6034,triage crypto a7ff numeric clues,737
 runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_tail_queue_field_usage.csv,abb6034,triage crypto a7ff numeric clues,160
 runtime,A7FF-25R4,runtime/a7ff25r4_no_activity_tail_audit/a7ff25r4_tail_repair_policy.csv,abb6034,triage crypto a7ff numeric clues,717
-runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_blocked_funding_patterns.csv,,,403
-runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_decision_record.json,,,672
-runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_dense_funding_state_field_contract.csv,,,1355
-runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_manifest.json,,,672
-runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_next_actions.json,,,320
-runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_queue_repair_policy.csv,,,640
+runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_blocked_funding_patterns.csv,468c021,advance crypto a7ff replay preflight,403
+runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_decision_record.json,468c021,advance crypto a7ff replay preflight,672
+runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_dense_funding_state_field_contract.csv,468c021,advance crypto a7ff replay preflight,1355
+runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_manifest.json,468c021,advance crypto a7ff replay preflight,672
+runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_next_actions.json,468c021,advance crypto a7ff replay preflight,320
+runtime,A7FF-25R5,runtime/a7ff25r5_funding_tail_repair_contract/a7ff25r5_queue_repair_policy.csv,468c021,advance crypto a7ff replay preflight,640
+runtime,A7FF-25R6,runtime/a7ff25r6_dense_funding_state_audit/a7ff25r6_decision_record.json,,,718
+runtime,A7FF-25R6,runtime/a7ff25r6_dense_funding_state_audit/a7ff25r6_dense_funding_state_activity_metrics.csv,,,1964
+runtime,A7FF-25R6,runtime/a7ff25r6_dense_funding_state_audit/a7ff25r6_dense_funding_state_sample.csv,,,4639
+runtime,A7FF-25R6,runtime/a7ff25r6_dense_funding_state_audit/a7ff25r6_manifest.json,,,718
+runtime,A7FF-25R6,runtime/a7ff25r6_dense_funding_state_audit/a7ff25r6_repair_comparison.csv,,,1496
+runtime,A7FF-25R6,runtime/a7ff25r6_dense_funding_state_audit/a7ff25r6_split_activity_metrics.csv,,,1460
 runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_control_risk_summary.csv,abb6034,triage crypto a7ff numeric clues,621
 runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_decision_record.json,abb6034,triage crypto a7ff numeric clues,1148
 runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_family_label_summary.csv,abb6034,triage crypto a7ff numeric clues,3451
@@ -1615,23 +1621,29 @@ runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_promotion_candidate_
 runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_rank_label_diagnostic_queue.csv,abb6034,triage crypto a7ff numeric clues,17448
 runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_selected_candidate_triage.csv,abb6034,triage crypto a7ff numeric clues,26481
 runtime,A7FF-26,runtime/a7ff26_numeric_clue_forensic/a7ff26_watchlist_queue.csv,abb6034,triage crypto a7ff numeric clues,4128
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_a7ff28_preflight_queue.csv,,,7674
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_candidate_replay_preflight_summary.csv,,,3061
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_control_dominance_metrics.csv,,,767774
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_control_summary.csv,,,440
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_decision_counts.csv,,,1419
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_decision_record.json,,,2329
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_family_decision_summary.csv,,,1591
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_label_decision_summary.csv,,,1419
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_label_response_metrics.csv,,,220418
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_manifest.json,,,2329
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_materialization_metrics.csv,,,3692
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_nonoverlap_stats.csv,,,29306
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_portfolio_marginal_proxy.csv,,,12820
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_selected_family_summary.csv,,,313
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_selected_portfolio_queue.csv,,,7775
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_summary_decision_record.json,,,870
-runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_summary_manifest.json,,,870
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_a7ff28_preflight_queue.csv,468c021,advance crypto a7ff replay preflight,7674
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_candidate_replay_preflight_summary.csv,468c021,advance crypto a7ff replay preflight,3061
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_control_dominance_metrics.csv,468c021,advance crypto a7ff replay preflight,767774
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_control_summary.csv,468c021,advance crypto a7ff replay preflight,440
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_decision_counts.csv,468c021,advance crypto a7ff replay preflight,1419
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_decision_record.json,468c021,advance crypto a7ff replay preflight,2329
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_family_decision_summary.csv,468c021,advance crypto a7ff replay preflight,1591
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_label_decision_summary.csv,468c021,advance crypto a7ff replay preflight,1419
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_label_response_metrics.csv,468c021,advance crypto a7ff replay preflight,220418
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_manifest.json,468c021,advance crypto a7ff replay preflight,2329
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_materialization_metrics.csv,468c021,advance crypto a7ff replay preflight,3692
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_nonoverlap_stats.csv,468c021,advance crypto a7ff replay preflight,29306
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_portfolio_marginal_proxy.csv,468c021,advance crypto a7ff replay preflight,12820
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_selected_family_summary.csv,468c021,advance crypto a7ff replay preflight,313
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_selected_portfolio_queue.csv,468c021,advance crypto a7ff replay preflight,7775
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_summary_decision_record.json,468c021,advance crypto a7ff replay preflight,870
+runtime,A7FF-27,runtime/a7ff27_replay_preflight/a7ff27_summary_manifest.json,468c021,advance crypto a7ff replay preflight,870
+runtime,A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_authorization_matrix.json,,,721
+runtime,A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_deep_replay_gate_contract.csv,,,823
+runtime,A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_deep_replay_queue.csv,,,7708
+runtime,A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_execution_plan.csv,,,372
+runtime,A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_manifest.json,,,721
+runtime,A7FF-28,runtime/a7ff28_deep_replay_contract/a7ff28_queue_family_summary.csv,,,756
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_candidate_blueprints.csv,b725826,add crypto a7ff field to factor compiler,3272
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_generation_layer_policy.json,b725826,add crypto a7ff field to factor compiler,754
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_manifest.json,b725826,add crypto a7ff field to factor compiler,320
@@ -1809,10 +1821,12 @@ report,A7FF25R3S09-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S09_NUMERIC_WAVE_20260530
 report,A7FF25R3S10-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S10_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,3198
 report,A7FF25R3S11-NUMERIC-WAVE,reports/CRYPTO_A7FF25R3S11_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,3198
 report,A7FF25R4-NO-ACTIVITY-TAIL-AUDIT,reports/CRYPTO_A7FF25R4_NO_ACTIVITY_TAIL_AUDIT_20260530.md,abb6034,triage crypto a7ff numeric clues,4996
-report,A7FF25R5-FUNDING-TAIL-REPAIR-CONTRACT,reports/CRYPTO_A7FF25R5_FUNDING_TAIL_REPAIR_CONTRACT_20260530.md,,,7548
+report,A7FF25R5-FUNDING-TAIL-REPAIR-CONTRACT,reports/CRYPTO_A7FF25R5_FUNDING_TAIL_REPAIR_CONTRACT_20260530.md,468c021,advance crypto a7ff replay preflight,7548
+report,A7FF25R6-DENSE-FUNDING-STATE-AUDIT,reports/CRYPTO_A7FF25R6_DENSE_FUNDING_STATE_AUDIT_20260530.md,,,15302
 report,A7FF26-NUMERIC-CLUE-FORENSIC,reports/CRYPTO_A7FF26_NUMERIC_CLUE_FORENSIC_20260530.md,abb6034,triage crypto a7ff numeric clues,15931
-report,A7FF27-REPLAY-PREFLIGHT,reports/CRYPTO_A7FF27_REPLAY_PREFLIGHT_20260530.md,,,22576
-report,A7FF27-REPLAY-PREFLIGHT-SUMMARY,reports/CRYPTO_A7FF27_REPLAY_PREFLIGHT_SUMMARY_20260530.md,,,13706
+report,A7FF27-REPLAY-PREFLIGHT,reports/CRYPTO_A7FF27_REPLAY_PREFLIGHT_20260530.md,468c021,advance crypto a7ff replay preflight,22576
+report,A7FF27-REPLAY-PREFLIGHT-SUMMARY,reports/CRYPTO_A7FF27_REPLAY_PREFLIGHT_SUMMARY_20260530.md,468c021,advance crypto a7ff replay preflight,13706
+report,A7FF28-DEEP-REPLAY-CONTRACT,reports/CRYPTO_A7FF28_DEEP_REPLAY_CONTRACT_20260530.md,,,13900
 report,A7FF3-COARSE-TO-FINE-GENERATION-CONTRACT,reports/CRYPTO_A7FF3_COARSE_TO_FINE_GENERATION_CONTRACT_20260530.md,b725826,add crypto a7ff field to factor compiler,5677
 report,A7FF4-FEATURE-ROLE-PROMOTION,reports/CRYPTO_A7FF4_FEATURE_ROLE_PROMOTION_20260530.md,b725826,add crypto a7ff field to factor compiler,5766
 report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
@@ -1827,13 +1841,13 @@ report,A7FFR2-OPERATOR-PROBING-V2,reports/CRYPTO_A7FFR2_OPERATOR_PROBING_V2_2026
 report,A7FFR3-FEATURE-PAIR-POLICY-V2,reports/CRYPTO_A7FFR3_FEATURE_PAIR_POLICY_V2_20260530.md,3e509b2,redesign crypto a7ff derived generation,38678
 report,A7FFR4-COARSE-TO-FINE-GENERATION-REDESIGN,reports/CRYPTO_A7FFR4_COARSE_TO_FINE_GENERATION_REDESIGN_20260530.md,3e509b2,redesign crypto a7ff derived generation,34030
 report,A7FFR5-RESPONSE-BACKED-PROMOTION-REDESIGN,reports/CRYPTO_A7FFR5_RESPONSE_BACKED_PROMOTION_REDESIGN_20260530.md,3e509b2,redesign crypto a7ff derived generation,21018
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,abb6034,triage crypto a7ff numeric clues,302129
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,468c021,advance crypto a7ff replay preflight,305247
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,5230053,refresh crypto a7pm registry after selector counterfactual,94548
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,de26507,add crypto a7pm governance registry,391
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,abb6034,triage crypto a7ff numeric clues,124378
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,abb6034,triage crypto a7ff numeric clues,710
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,abb6034,triage crypto a7ff numeric clues,273
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,abb6034,triage crypto a7ff numeric clues,67693
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,468c021,advance crypto a7ff replay preflight,125870
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,468c021,advance crypto a7ff replay preflight,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,468c021,advance crypto a7ff replay preflight,268
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,468c021,advance crypto a7ff replay preflight,68315
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -1849,15 +1863,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,abb6034,triage crypto a7ff numeric clues,339
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,abb6034,triage crypto a7ff numeric clues,250
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,468c021,advance crypto a7ff replay preflight,323
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,468c021,advance crypto a7ff replay preflight,284
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,cf30256,run crypto a7ff25r company numeric wave,377
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,abb6034,triage crypto a7ff numeric clues,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,abb6034,triage crypto a7ff numeric clues,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,abb6034,triage crypto a7ff numeric clues,4669
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,468c021,advance crypto a7ff replay preflight,424
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,468c021,advance crypto a7ff replay preflight,4984
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,abb6034,triage crypto a7ff numeric clues,2539
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,468c021,advance crypto a7ff replay preflight,2584
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

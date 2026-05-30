@@ -1,0 +1,9 @@
+gate,rule,hard
+source_of_truth,input queue is runtime/a7ff27_replay_preflight/a7ff27_a7ff28_preflight_queue.csv,True
+no_generation,A7FF-28 may not generate or mutate formulas,True
+no_search_authorization,A7FF-28 is replay contract/preflight only,True
+full_symbol_replay,deep replay must evaluate selected formulas on strict_full_history symbols and report listing-aware diagnostics separately,True
+label_family_balance,non-L7 labels are required for promotion; L7 remains diagnostic,True
+control_dominance,control_ratio >= 1.0 is rejected; 0.80-1.00 remains warning/diagnostic,True
+portfolio_proxy,"report equal-weight and liquidity-capped proxy, turnover, cost2/5/10, symbol/month/state concentration",True
+stress_policy,"May/stress may only be post-selection veto/failure attribution, never selector score",True

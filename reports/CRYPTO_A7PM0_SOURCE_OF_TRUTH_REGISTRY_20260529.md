@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T09:36:14Z
+Generated: 2026-05-30T09:46:18Z
 
 ## Decision
 
@@ -15,18 +15,18 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF25R5_FUNDING_TAIL_REPAIR_CONTRACT_20260530.md
-?? reports/CRYPTO_A7FF27_REPLAY_PREFLIGHT_20260530.md
-?? reports/CRYPTO_A7FF27_REPLAY_PREFLIGHT_SUMMARY_20260530.md
-?? runtime/a7ff25r5_funding_tail_repair_contract/
-?? runtime/a7ff27_replay_preflight/
-?? scripts/crypto_a7ff25r5_funding_tail_repair_contract.py
-?? scripts/crypto_a7ff27_replay_preflight_summary.py
-HEAD=abb6034694107280b7ee8dc7826d56488dd3474a
-origin/main=abb6034694107280b7ee8dc7826d56488dd3474a
+?? reports/CRYPTO_A7FF25R6_DENSE_FUNDING_STATE_AUDIT_20260530.md
+?? reports/CRYPTO_A7FF28_DEEP_REPLAY_CONTRACT_20260530.md
+?? runtime/a7ff25r6_dense_funding_state_audit/
+?? runtime/a7ff28_deep_replay_contract/
+?? scripts/crypto_a7ff25r6_dense_funding_state_audit.py
+?? scripts/crypto_a7ff28_deep_replay_contract.py
+HEAD=468c0211f4b83e433115d0064b3d777df047dab2
+origin/main=468c0211f4b83e433115d0064b3d777df047dab2
 HEAD == origin/main: True
 ```
 
@@ -34,8 +34,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2034,
-  "authorization_record_count": 638,
+  "artifact_count": 2048,
+  "authorization_record_count": 657,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -48,12 +48,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T09:36:14Z",
-  "head": "abb6034694107280b7ee8dc7826d56488dd3474a",
+  "generated_at": "2026-05-30T09:46:18Z",
+  "head": "468c0211f4b83e433115d0064b3d777df047dab2",
   "head_equals_origin_main": true,
-  "origin_main": "abb6034694107280b7ee8dc7826d56488dd3474a",
+  "origin_main": "468c0211f4b83e433115d0064b3d777df047dab2",
   "stage": "A7PM-0",
-  "stage_count": 216
+  "stage_count": 218
 }
 ```
 
@@ -72,8 +72,8 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |      95 |
-| valid_or_historical_record   | contract                   |      42 |
+| valid_or_historical_record   | governance_or_audit        |      96 |
+| valid_or_historical_record   | contract                   |      43 |
 | valid_or_historical_record   | smoke                      |       7 |
 | valid_or_historical_record   | diagnostic                 |       5 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
@@ -105,8 +105,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "A7FF-25R6": "dense funding-state materialization audit and activity precheck; no search",
-  "A7FF-28": "deep replay contract/preflight for A7FF-27 selected candidates; no search",
+  "A7FF-24R2": "repaired company queue tail rebuild using dense funding-state fields or healthy backfill; no search",
+  "A7FF-28A": "bounded deep replay execution for the frozen A7FF-28 8-candidate queue; no search",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```
