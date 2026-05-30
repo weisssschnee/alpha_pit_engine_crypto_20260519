@@ -1,0 +1,30 @@
+{
+  "authorizes_a7ff37_deep_replay_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FF36_DIVERSIFIED_CLUES_READY_FOR_DEEP_REPLAY_CONTRACT_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T11:31:28Z",
+  "no_activity_families": [
+    "D6_listing_latent_lifecycle"
+  ],
+  "selected_control_block_count": 0,
+  "selected_control_warning_count": 1,
+  "selected_count": 9,
+  "selected_non_l7_count": 4,
+  "selected_non_l7_family_count": 3,
+  "selected_rank_label_only_count": 5,
+  "source_a7ff35_decision": "PASS_A7FF35_DIVERSIFIED_NUMERIC_PREFLIGHT_COMPLETED_NO_SEARCH_AUTH",
+  "stage": "A7FF-36",
+  "uses_may": false,
+  "warnings": [
+    "selected_queue_contains_rank_label_diagnostic_rows",
+    "non_l7_selected_control_warning_rows_present",
+    "family_no_activity_requires_repair_or_exclusion"
+  ]
+}

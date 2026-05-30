@@ -1,0 +1,5 @@
+item,action,reason,count
+rank_label_selected_rows,exclude_from_deep_replay_contract,L7 ranked-return remains diagnostic-only,5
+control_warning_non_l7_rows,keep_only_with_control_margin_audit,"0.80 <= control_ratio < 1.00 is warning, not promotion",1
+no_activity_families,repair_or_exclude_before_expansion,family materialization has zero activity in diversified preflight,1
+non_l7_clue_rows,allow_deep_replay_contract_only,non-L7 diversified clues exist but remain bounded preflight evidence,4

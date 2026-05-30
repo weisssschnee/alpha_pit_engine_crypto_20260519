@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T11:27:17Z
+Generated: 2026-05-30T11:32:01Z
 
 ## Decision
 
@@ -11,7 +11,7 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
+## main...origin/main [ahead 1]
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
@@ -19,19 +19,19 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF35_DIVERSIFIED_NUMERIC_PREFLIGHT_20260530.md
-?? runtime/a7ff35_diversified_numeric_preflight/
-?? scripts/crypto_a7ff35_diversified_numeric_preflight.py
-HEAD=f849f6d5fa0e605aef166ae1f6d6193d2f79ab37
+?? reports/CRYPTO_A7FF36_DIVERSIFIED_CLUE_FORENSIC_20260530.md
+?? runtime/a7ff36_diversified_clue_forensic/
+?? scripts/crypto_a7ff36_diversified_clue_forensic.py
+HEAD=13edd110892f6add2c3ed9dc3911f86469e9ff75
 origin/main=f849f6d5fa0e605aef166ae1f6d6193d2f79ab37
-HEAD == origin/main: True
+HEAD == origin/main: False
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 2197,
+  "artifact_count": 2204,
   "authorization_record_count": 678,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -45,12 +45,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T11:27:17Z",
-  "head": "f849f6d5fa0e605aef166ae1f6d6193d2f79ab37",
-  "head_equals_origin_main": true,
+  "generated_at": "2026-05-30T11:32:01Z",
+  "head": "13edd110892f6add2c3ed9dc3911f86469e9ff75",
+  "head_equals_origin_main": false,
   "origin_main": "f849f6d5fa0e605aef166ae1f6d6193d2f79ab37",
   "stage": "A7PM-0",
-  "stage_count": 229
+  "stage_count": 230
 }
 ```
 
@@ -70,7 +70,7 @@ HEAD == origin/main: True
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     102 |
-| valid_or_historical_record   | contract                   |      46 |
+| valid_or_historical_record   | contract                   |      47 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       5 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
@@ -103,7 +103,7 @@ HEAD == origin/main: True
 ```json
 {
   "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
-  "A7FF-36": "forensic/repair decision on A7FF-35 diversified numeric preflight clues; no search",
+  "A7FF-37": "deep replay contract for A7FF-36 non-L7 diversified clues; no search",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```
