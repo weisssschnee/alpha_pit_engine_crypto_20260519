@@ -1,0 +1,18 @@
+{
+  "A7FF-37A_bounded_deep_replay": {
+    "authorized": true,
+    "execution_type": "bounded_deep_replay_only"
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "authorizes_a7ff38_focused_replay_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FF37B_FOCUSED_REPLAY_FOLLOWUP_READY_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T11:57:23Z",
+  "input_queue_count": 4,
+  "non_l7_numeric_clue_rows": 19,
+  "rank_label_diagnostic_clue_rows": 5,
+  "selected_count": 4,
+  "selected_non_l7_count": 3,
+  "selected_non_l7_family_count": 2,
+  "selected_rank_label_count": 1,
+  "source_a7ff37a_decision": "PASS_A7FF37A_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH",
+  "stage": "A7FF-37B",
+  "uses_may": false,
+  "warnings": [
+    "selected_queue_contains_rank_label_diagnostic",
+    "non_l7_control_warning_present"
+  ]
+}

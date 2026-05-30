@@ -27,7 +27,7 @@ BLOCKED_TASKS = {
 }
 
 NEXT_ALLOWED_TASKS = {
-    "A7FF-37": "deep replay contract for A7FF-36 non-L7 diversified clues; no search",
+    "A7FF-38": "focused replay contract for A7FF-37B funding-dense/regime follow-up; no search",
     "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
 }

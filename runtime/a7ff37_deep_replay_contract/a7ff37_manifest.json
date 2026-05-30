@@ -1,0 +1,26 @@
+{
+  "authorizes_a7ff37a_bounded_deep_replay": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "control_block_count": 0,
+  "control_warning_count": 1,
+  "decision": "PASS_A7FF37_DEEP_REPLAY_CONTRACT_READY_FOR_A7FF37A_NO_SEARCH_AUTH",
+  "deep_replay_candidate_count": 4,
+  "deep_replay_family_count": 3,
+  "deep_replay_motif_count": 4,
+  "excluded_selected_count": 5,
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T11:52:53Z",
+  "source_a7ff36_decision": "PASS_A7FF36_DIVERSIFIED_CLUES_READY_FOR_DEEP_REPLAY_CONTRACT_NO_SEARCH_AUTH",
+  "stage": "A7FF-37",
+  "uses_may": false,
+  "warnings": [
+    "control_warning_candidate_included",
+    "rank_label_selected_rows_excluded"
+  ]
+}

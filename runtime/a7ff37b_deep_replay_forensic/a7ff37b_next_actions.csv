@@ -1,0 +1,5 @@
+target,action,reason
+funding_like|basis_premium_like,focus_deep_replay_expansion,2 selected non-L7 clues; control ratios below 0.80 in A7FF-37A selected queue
+regime_state|price_return_like,keep_with_control_margin_audit,1 selected non-L7 clue but control ratio is warning range above 0.80
+basis_premium_like|basis_premium_like,diagnostic_only_until_non_l7_selected,basis safe_div selected only under L7 ranked label in A7FF-37A
+D6_listing_latent_lifecycle,exclude_from_next_replay_until_activity_repair,A7FF-36 found no activity for listing/latent family

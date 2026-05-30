@@ -1,0 +1,38 @@
+{
+  "candidate_count": 4,
+  "hard_gates": {
+    "control_ratio_block": "reject if >= 1.00 in any pre-May split",
+    "control_ratio_warning": "flag if 0.80 <= ratio < 1.00",
+    "eval_failure_count": 0,
+    "may_in_scoring": false,
+    "non_l7_required": true,
+    "rank_label_only_promotion": false,
+    "search_execution": false
+  },
+  "horizons_hours": [
+    1,
+    4,
+    8,
+    24
+  ],
+  "input_queue": "runtime/a7ff37_deep_replay_contract/a7ff37_deep_replay_queue.csv",
+  "labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return",
+    "L7_ranked_future_return_diagnostic_only"
+  ],
+  "promotion_boundary": "deep replay can only produce research-clue forensic evidence, not alpha proof",
+  "required_controls": [
+    "wrong_lag_future",
+    "wrong_lag_stale",
+    "time_shuffle",
+    "symbol_shuffle",
+    "sign_flip",
+    "same_family_placebo"
+  ],
+  "stage": "A7FF-37A",
+  "symbol_universe": "strict_full_history_181",
+  "type": "bounded_deep_replay_execution"
+}

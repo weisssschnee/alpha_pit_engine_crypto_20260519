@@ -470,6 +470,11 @@ A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_authorization_matr
 A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_authorization_matrix.json,large_search,"{""authorized"": false}",False
 A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_authorization_matrix.json,numeric_probe,"{""authorized"": false}",False
 A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
+A7FF-37,runtime/a7ff37_deep_replay_contract/a7ff37_authorization_matrix.json,A7FF-37A_bounded_deep_replay,"{""authorized"": true, ""execution_type"": ""bounded_deep_replay_only""}",True
+A7FF-37,runtime/a7ff37_deep_replay_contract/a7ff37_authorization_matrix.json,alpha_proof,"{""authorized"": false}",False
+A7FF-37,runtime/a7ff37_deep_replay_contract/a7ff37_authorization_matrix.json,formula_search,"{""authorized"": false}",False
+A7FF-37,runtime/a7ff37_deep_replay_contract/a7ff37_authorization_matrix.json,large_search,"{""authorized"": false}",False
+A7FF-37,runtime/a7ff37_deep_replay_contract/a7ff37_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_feature_columns,94,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_symbol_month_count,87,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,authorizes_a7r_horizon_diagnostic_contract,true,True

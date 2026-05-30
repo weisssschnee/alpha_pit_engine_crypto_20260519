@@ -1,0 +1,4 @@
+semantic_pair,is_non_l7,selected_count,max_control_ratio,mean_score_no_may
+funding_like|basis_premium_like,True,2,0.623967285513026,132.65599310501446
+regime_state|price_return_like,True,1,0.8647965597019845,52.51238451299439
+basis_premium_like|basis_premium_like,False,1,0.4234494161186325,30.11661550780328

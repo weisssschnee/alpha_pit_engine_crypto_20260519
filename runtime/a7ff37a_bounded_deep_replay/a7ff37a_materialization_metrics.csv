@@ -1,0 +1,5 @@
+blueprint_id,expression,semantic_pair,motif,skeleton_key,eval_success,finite_share,nonzero_share,activity_ok,min_value,max_value,std_value,error
+a7ff33_dcdd07a710d41c9f,"Clip(SafeDiv(mark_index_basis_bps,Abs(Delta(mark_index_basis_bps,1))),-5,5)",basis_premium_like|basis_premium_like,safe_div_clip,skel_6badd2926fa2941d,True,0.9986064841340759,0.9900871447575665,True,-5.0,5.0,2.3144256188979586,
+a7ff33_fe3e0c6a7b32a1d7,"Sub(CSRank(rolling_coverage_168h),CSRank(Delta(trade_return_1h,1)))",regime_state|price_return_like,spread_rank,skel_1a1b3fb29dff7328,True,0.8270611893134157,0.9944770571426926,True,-0.49723756906077343,0.49723756906077354,0.28867046458810636,
+a7ff33_c8b780256ff30837,"Sub(funding_rate_state_last_ffill_8h,Delta(mark_index_basis_bps,1))",funding_like|basis_premium_like,sub,skel_f8484b844efd270f,True,0.8277801673171328,0.9999961652912844,True,-1862.7352086359633,2248.424794016522,13.877712999686981,
+a7ff33_0c0da14842542e13,"Sub(ZScore(funding_rate_state_last_ffill_8h),ZScore(mark_index_basis_bps))",funding_like|basis_premium_like,zspread,skel_293cae94cfd91548,True,0.8280674410890374,1.0,True,-19.98920558423464,13.57560459869765,1.1233513145176206,
