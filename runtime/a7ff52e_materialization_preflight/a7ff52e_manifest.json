@@ -1,0 +1,28 @@
+{
+  "activity_ok_rate": 0.875,
+  "authorizes_alpha_proof": false,
+  "authorizes_numeric_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "base_field_count": 4,
+  "blockers": [],
+  "decision": "PASS_A7FF52E_MATERIALIZATION_PREFLIGHT_READY_FOR_NUMERIC_CONTRACT",
+  "dense_field_count": 0,
+  "eval_failure_count": 0,
+  "executes_materialization": true,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "execution_authorization_source": "latest_user_continue_request_after_A7FF52_contract",
+  "families_retained": 7,
+  "generated_at": "2026-05-30T20:11:46Z",
+  "latent_field_count": 4,
+  "low_activity_families": [
+    "funding_like|basis_premium_like"
+  ],
+  "missing_fields": [],
+  "sample_family_count": 8,
+  "sample_rows": 1200,
+  "stage": "A7FF-52E",
+  "uses_may": false
+}

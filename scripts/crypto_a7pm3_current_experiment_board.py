@@ -13,16 +13,10 @@ RUNTIME = REPO / "runtime" / "a7pm3_experiment_board"
 REPORT = REPO / "reports" / "CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md"
 A7PM0 = REPO / "runtime" / "a7pm0_source_of_truth_registry" / "a7pm0_manifest.json"
 A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
+A7FF52E = REPO / "runtime" / "a7ff52e_materialization_preflight" / "a7ff52e_manifest.json"
 
 
-ALLOWED = {
-    "A7FF-52E materialization preflight execution option": "requires explicit authorization; 1200 family-balanced rows; no numeric replay/search",
-    "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-    "A7PM-0/3 maintenance": "governance registry maintenance",
-}
-
-BLOCKED = {
-    "A7FF-52E execution": "pending explicit materialization-preflight authorization; A7FF-52 contract is ready but materialization is not started",
+BASE_BLOCKED = {
     "A7FF-24R4E execution": "pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but numeric wave execution is not started",
     "A7FF-51 execution": "not authorized by A7FF-R11; only contract drafting is allowed",
     "A7FF-50": "not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps",
@@ -38,6 +32,42 @@ BLOCKED = {
     "alpha proof": "not authorized",
     "shadow/paper/live": "not authorized",
 }
+
+
+def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
+    a7ff52e = read_json(A7FF52E)
+    allowed = {
+        "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
+        "A7PM-0/3 maintenance": "governance registry maintenance",
+    }
+    blocked = dict(BASE_BLOCKED)
+    if a7ff52e.get("decision") == "PASS_A7FF52E_MATERIALIZATION_PREFLIGHT_READY_FOR_NUMERIC_CONTRACT":
+        allowed["A7FF-53 numeric response contract"] = (
+            "contract drafting only; use A7FF-52E materialization metrics; no numeric execution/search"
+        )
+        blocked["A7FF-52E rerun"] = "already executed; rerun only if A7FF-51E pool or evaluator changes"
+        current_stage = "A7FF-52E"
+        status = "materialization_preflight_pass_no_numeric"
+        next_task = "A7FF-53 numeric response contract"
+    else:
+        allowed["A7FF-52E materialization preflight execution option"] = (
+            "requires explicit authorization; 1200 family-balanced rows; no numeric replay/search"
+        )
+        blocked["A7FF-52E execution"] = (
+            "pending explicit materialization-preflight authorization; A7FF-52 contract is ready but materialization is not started"
+        )
+        current_stage = "A7FF-52"
+        status = "contract_ready_no_materialization"
+        next_task = "A7FF-52E if explicitly authorized"
+    active = pd.DataFrame(
+        [
+            {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
+            {"workstream": "a7ff_family_diversification", "current_stage": current_stage, "status": status, "next": next_task},
+            {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R4", "status": "contract_ready_no_execution", "next": "A7FF-24R4E if explicitly authorized"},
+            {"workstream": "search_execution", "current_stage": "blocked", "status": "not_authorized", "next": "none"},
+        ]
+    )
+    return allowed, blocked, active
 
 
 def now_utc() -> str:
@@ -71,14 +101,7 @@ def main() -> None:
     if not pm0.get("authorizes_a7pm3") and not pm2.get("authorizes_a7pm3"):
         raise SystemExit("A7PM source stages do not authorize A7PM-3")
 
-    active = pd.DataFrame(
-        [
-            {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
-            {"workstream": "a7ff_family_diversification", "current_stage": "A7FF-52", "status": "contract_ready_no_materialization", "next": "A7FF-52E if explicitly authorized"},
-            {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R4", "status": "contract_ready_no_execution", "next": "A7FF-24R4E if explicitly authorized"},
-            {"workstream": "search_execution", "current_stage": "blocked", "status": "not_authorized", "next": "none"},
-        ]
-    )
+    allowed, blocked, active = board_state()
     manifest = {
         "stage": "A7PM-3",
         "generated_at": now_utc(),
@@ -90,19 +113,19 @@ def main() -> None:
         "authorizes_large_search": False,
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
-        "allowed_next_task_count": len(ALLOWED),
-        "blocked_task_count": len(BLOCKED),
+        "allowed_next_task_count": len(allowed),
+        "blocked_task_count": len(blocked),
     }
-    write_json(RUNTIME / "a7pm3_allowed_next_tasks.json", ALLOWED)
-    write_json(RUNTIME / "a7pm3_blocked_tasks.json", BLOCKED)
+    write_json(RUNTIME / "a7pm3_allowed_next_tasks.json", allowed)
+    write_json(RUNTIME / "a7pm3_blocked_tasks.json", blocked)
     active.to_csv(RUNTIME / "a7pm3_active_workstreams.csv", index=False)
     write_json(
         RUNTIME / "a7pm3_latest_source_of_truth.json",
         {"a7pm0": pm0, "a7pm2": pm2, "head_equals_origin_main": pm0.get("head_equals_origin_main")},
     )
     write_json(RUNTIME / "a7pm3_manifest.json", manifest)
-    allowed_df = pd.DataFrame([{"task": k, "reason": v} for k, v in ALLOWED.items()])
-    blocked_df = pd.DataFrame([{"task": k, "reason": v} for k, v in BLOCKED.items()])
+    allowed_df = pd.DataFrame([{"task": k, "reason": v} for k, v in allowed.items()])
+    blocked_df = pd.DataFrame([{"task": k, "reason": v} for k, v in blocked.items()])
     lines = [
         "# CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD",
         "",
@@ -128,7 +151,7 @@ def main() -> None:
         "",
         "```text",
         "No formula search, large search, alpha proof, shadow, paper, or live execution is authorized.",
-        "The contracts are ready. Heavy execution options are A7FF-51E and A7FF-24R4E, both requiring explicit authorization.",
+        "A7FF-52E materialization is complete if present in the source-of-truth registry. Next A7FF step is contract-only unless explicitly authorized.",
         "```",
     ]
     REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
