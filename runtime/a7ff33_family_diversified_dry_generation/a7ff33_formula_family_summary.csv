@@ -1,0 +1,15 @@
+family_id,root_family,level,formula_count,skeleton_count,motif_count,primary_field_count,secondary_field_count
+D0_basis_premium_reference,basis_premium_like|basis_premium_like,L2_typed_two_field_interaction,2518,60,7,1,4
+D0_basis_premium_reference,basis_premium_like|basis_premium_like,L4_factor_candidate_probe,1082,36,3,1,4
+D1_open_interest_positioning,open_interest_like|positioning_like,L2_typed_two_field_interaction,3357,60,7,1,5
+D1_open_interest_positioning,open_interest_like|positioning_like,L4_factor_candidate_probe,1443,36,3,1,5
+D2_taker_flow_leverage,taker_flow_like|open_interest_like,L2_typed_two_field_interaction,2518,60,7,1,4
+D2_taker_flow_leverage,taker_flow_like|open_interest_like,L4_factor_candidate_probe,1082,36,3,1,4
+D3_liquidity_volatility_state,liquidity_like|volatility_like,L2_typed_two_field_interaction,2518,60,7,1,4
+D3_liquidity_volatility_state,liquidity_like|volatility_like,L4_factor_candidate_probe,1082,36,3,1,4
+D4_regime_relative_value,regime_state|price_return_like,L3_state_conditioned_feature,2098,51,7,1,5
+D4_regime_relative_value,regime_state|price_return_like,L4_factor_candidate_probe,902,30,3,1,5
+D5_funding_dense_state,funding_like|basis_premium_like,L2_typed_two_field_interaction,2518,60,7,1,4
+D5_funding_dense_state,funding_like|basis_premium_like,L4_factor_candidate_probe,1082,36,3,1,4
+D6_listing_latent_lifecycle,listing_age_like|latent_state,L3_state_conditioned_feature,1260,51,7,1,3
+D6_listing_latent_lifecycle,listing_age_like|latent_state,L4_factor_candidate_probe,540,30,3,1,3

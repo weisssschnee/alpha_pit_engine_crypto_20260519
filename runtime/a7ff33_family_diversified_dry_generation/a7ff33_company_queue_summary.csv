@@ -1,0 +1,8 @@
+family_id,root_family,company_wave_count,skeleton_count,motif_count
+D0_basis_premium_reference,basis_premium_like|basis_premium_like,516,45,10
+D1_open_interest_positioning,open_interest_like|positioning_like,514,45,10
+D2_taker_flow_leverage,taker_flow_like|open_interest_like,514,45,10
+D3_liquidity_volatility_state,liquidity_like|volatility_like,514,45,10
+D4_regime_relative_value,regime_state|price_return_like,514,38,10
+D5_funding_dense_state,funding_like|basis_premium_like,514,45,10
+D6_listing_latent_lifecycle,listing_age_like|latent_state,514,38,10

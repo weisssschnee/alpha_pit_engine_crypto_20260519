@@ -1382,23 +1382,23 @@ runtime,A7FF-24R2,runtime/a7ff24r2_repaired_company_queue/a7ff24r2_shard_08_queu
 runtime,A7FF-24R2,runtime/a7ff24r2_repaired_company_queue/a7ff24r2_shard_09_queue.csv,3e99194,repair crypto a7ff company queue tail,118952
 runtime,A7FF-24R2,runtime/a7ff24r2_repaired_company_queue/a7ff24r2_shard_10_queue.csv,3e99194,repair crypto a7ff company queue tail,118760
 runtime,A7FF-24R2,runtime/a7ff24r2_repaired_company_queue/a7ff24r2_shard_11_queue.csv,3e99194,repair crypto a7ff company queue tail,121002
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_control_dominance_metrics.csv,,,4301015
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_control_summary.csv,,,450
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_decision_counts.csv,,,665
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_decision_record.json,,,1540
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_dense_materializer_parity_summary.csv,,,338
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_dense_tail_materialization_metrics.csv,,,26077
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_dense_tail_sample_queue.csv,,,58202
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_family_decision_summary.csv,,,168
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_label_response_metrics.csv,,,1272945
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_manifest.json,,,1540
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_materialization_metrics.csv,,,26444
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_nonoverlap_stats.csv,,,167008
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_numeric_probe_stdout.log,,,3418
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_portfolio_marginal_proxy.csv,,,2
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_repaired_queue_shard_audit.csv,,,361
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_repaired_queue_summary.csv,,,128
-runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_selected_portfolio_queue.csv,,,2
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_control_dominance_metrics.csv,2c0aa81,preflight crypto a7ff dense funding queue,4301015
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_control_summary.csv,2c0aa81,preflight crypto a7ff dense funding queue,450
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_decision_counts.csv,2c0aa81,preflight crypto a7ff dense funding queue,665
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_decision_record.json,2c0aa81,preflight crypto a7ff dense funding queue,1540
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_dense_materializer_parity_summary.csv,2c0aa81,preflight crypto a7ff dense funding queue,338
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_dense_tail_materialization_metrics.csv,2c0aa81,preflight crypto a7ff dense funding queue,26077
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_dense_tail_sample_queue.csv,2c0aa81,preflight crypto a7ff dense funding queue,58202
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_family_decision_summary.csv,2c0aa81,preflight crypto a7ff dense funding queue,168
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_label_response_metrics.csv,2c0aa81,preflight crypto a7ff dense funding queue,1272945
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_manifest.json,2c0aa81,preflight crypto a7ff dense funding queue,1540
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_materialization_metrics.csv,2c0aa81,preflight crypto a7ff dense funding queue,26444
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_nonoverlap_stats.csv,2c0aa81,preflight crypto a7ff dense funding queue,167008
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_numeric_probe_stdout.log,2c0aa81,preflight crypto a7ff dense funding queue,3418
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_portfolio_marginal_proxy.csv,2c0aa81,preflight crypto a7ff dense funding queue,2
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_repaired_queue_shard_audit.csv,2c0aa81,preflight crypto a7ff dense funding queue,361
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_repaired_queue_summary.csv,2c0aa81,preflight crypto a7ff dense funding queue,128
+runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_selected_portfolio_queue.csv,2c0aa81,preflight crypto a7ff dense funding queue,2
 runtime,A7FF-25R0-COMPANY-QUEUE-COVERAGE-AUDIT,runtime/a7ff25r0_company_queue_coverage/a7ff25r0_company_queue_coverage_by_base_field.csv,efa57ad,audit crypto a7ff25r company queue coverage,7560
 runtime,A7FF-25R0-COMPANY-QUEUE-COVERAGE-AUDIT,runtime/a7ff25r0_company_queue_coverage/a7ff25r0_company_queue_coverage_by_level.csv,efa57ad,audit crypto a7ff25r company queue coverage,712
 runtime,A7FF-25R0-COMPANY-QUEUE-COVERAGE-AUDIT,runtime/a7ff25r0_company_queue_coverage/a7ff25r0_company_queue_coverage_by_motif.csv,efa57ad,audit crypto a7ff25r company queue coverage,1423
@@ -1728,14 +1728,47 @@ runtime,A7FF-31,runtime/a7ff31_portfolio_forensic/a7ff31_leave_one_out_focus.csv
 runtime,A7FF-31,runtime/a7ff31_portfolio_forensic/a7ff31_manifest.json,17d1423,forensic crypto a7ff portfolio clues,999
 runtime,A7FF-31,runtime/a7ff31_portfolio_forensic/a7ff31_recent_month_contribution.csv,17d1423,forensic crypto a7ff portfolio clues,148
 runtime,A7FF-31,runtime/a7ff31_portfolio_forensic/a7ff31_recent_symbol_contribution.csv,17d1423,forensic crypto a7ff portfolio clues,24145
-runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_allowed_family_quota.csv,,,1223
-runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_authorization_matrix.json,,,396
-runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_blocked_patterns.csv,,,681
-runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_current_concentrated_family_summary.csv,,,216
-runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_decision_record.json,,,1109
-runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_generation_scale_policy.json,,,584
-runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_manifest.json,,,1109
-runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_selector_diversity_policy.json,,,443
+runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_allowed_family_quota.csv,2c0aa81,preflight crypto a7ff dense funding queue,1223
+runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_authorization_matrix.json,2c0aa81,preflight crypto a7ff dense funding queue,396
+runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_blocked_patterns.csv,2c0aa81,preflight crypto a7ff dense funding queue,681
+runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_current_concentrated_family_summary.csv,2c0aa81,preflight crypto a7ff dense funding queue,216
+runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_decision_record.json,2c0aa81,preflight crypto a7ff dense funding queue,1109
+runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_generation_scale_policy.json,2c0aa81,preflight crypto a7ff dense funding queue,584
+runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_manifest.json,2c0aa81,preflight crypto a7ff dense funding queue,1109
+runtime,A7FF-32,runtime/a7ff32_family_diversification_contract/a7ff32_selector_diversity_policy.json,2c0aa81,preflight crypto a7ff dense funding queue,443
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_blueprint_pool.csv,,,12023601
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_company_numeric_wave_queue.csv,,,1810576
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_company_queue_summary.csv,,,564
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_company_shard_plan.csv,,,461
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_decision_record.json,,,964
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_formula_family_summary.csv,,,1551
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_generation_policy.json,,,3118
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_manifest.json,,,964
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_materialization_queue.csv,,,2963771
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_00_queue.csv,,,100894
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_01_queue.csv,,,100842
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_02_queue.csv,,,100785
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_03_queue.csv,,,101031
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_04_queue.csv,,,100771
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_05_queue.csv,,,100863
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_06_queue.csv,,,100906
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_07_queue.csv,,,100814
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_08_queue.csv,,,100766
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_09_queue.csv,,,100983
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_10_queue.csv,,,100890
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_11_queue.csv,,,100857
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_12_queue.csv,,,100929
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_13_queue.csv,,,100915
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_14_queue.csv,,,100783
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_15_queue.csv,,,100994
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_16_queue.csv,,,100836
+runtime,A7FF-33,runtime/a7ff33_family_diversified_dry_generation/a7ff33_shard_17_queue.csv,,,100953
+runtime,A7FF-34,runtime/a7ff34_family_queue_coverage_audit/a7ff34_base_field_usage.csv,,,2922
+runtime,A7FF-34,runtime/a7ff34_family_queue_coverage_audit/a7ff34_company_family_coverage.csv,,,793
+runtime,A7FF-34,runtime/a7ff34_family_queue_coverage_audit/a7ff34_company_shard_coverage.csv,,,515
+runtime,A7FF-34,runtime/a7ff34_family_queue_coverage_audit/a7ff34_decision_record.json,,,990
+runtime,A7FF-34,runtime/a7ff34_family_queue_coverage_audit/a7ff34_manifest.json,,,990
+runtime,A7FF-34,runtime/a7ff34_family_queue_coverage_audit/a7ff34_queue_coverage_summary.csv,,,5243
 runtime,A7FF-4,runtime/a7ff4_feature_role_promotion/a7ff4_feature_role_map_v2.csv,b725826,add crypto a7ff field to factor compiler,11222
 runtime,A7FF-4,runtime/a7ff4_feature_role_promotion/a7ff4_manifest.json,b725826,add crypto a7ff field to factor compiler,342
 runtime,A7FF-4,runtime/a7ff4_feature_role_promotion/a7ff4_role_transition_policy.csv,b725826,add crypto a7ff field to factor compiler,349
@@ -1894,7 +1927,7 @@ report,A7FF22-LABEL-BALANCED-EXPANSION-CONTRACT,reports/CRYPTO_A7FF22_LABEL_BALA
 report,A7FF23R-DERIVED-FACTOR-EXPANSION-CONTRACT,reports/CRYPTO_A7FF23R_DERIVED_FACTOR_EXPANSION_CONTRACT_20260530.md,587e26e,add crypto a7ff23r and a7ff24r expansion plan,12133
 report,A7FF24R-DRY-GENERATION-PLAN,reports/CRYPTO_A7FF24R_DRY_GENERATION_PLAN_20260530.md,587e26e,add crypto a7ff23r and a7ff24r expansion plan,5835
 report,A7FF24R2-REPAIRED-COMPANY-QUEUE,reports/CRYPTO_A7FF24R2_REPAIRED_COMPANY_QUEUE_20260530.md,3e99194,repair crypto a7ff company queue tail,6657
-report,A7FF24R3-DENSE-MATERIALIZER-PREFLIGHT,reports/CRYPTO_A7FF24R3_DENSE_MATERIALIZER_PREFLIGHT_20260530.md,,,18342
+report,A7FF24R3-DENSE-MATERIALIZER-PREFLIGHT,reports/CRYPTO_A7FF24R3_DENSE_MATERIALIZER_PREFLIGHT_20260530.md,2c0aa81,preflight crypto a7ff dense funding queue,18342
 report,A7FF25R0-COMPANY-QUEUE-COVERAGE-AUDIT,reports/CRYPTO_A7FF25R0_COMPANY_QUEUE_COVERAGE_AUDIT_20260530.md,efa57ad,audit crypto a7ff25r company queue coverage,82647
 report,A7FF25R1-NUMERIC-ADAPTER-PARITY-SMOKE,reports/CRYPTO_A7FF25R1_NUMERIC_ADAPTER_PARITY_SMOKE_20260530.md,57625c0,smoke crypto a7ff25r numeric adapter,11850
 report,A7FF25R2-ONE-SHARD-NUMERIC-WAVE,reports/CRYPTO_A7FF25R2_ONE_SHARD_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,19488
@@ -1925,7 +1958,9 @@ report,A7FF3-COARSE-TO-FINE-GENERATION-CONTRACT,reports/CRYPTO_A7FF3_COARSE_TO_F
 report,A7FF30-PORTFOLIO-REPLAY-CONTRACT,reports/CRYPTO_A7FF30_PORTFOLIO_REPLAY_CONTRACT_20260530.md,e97d9de,add crypto a7ff portfolio replay contract,14123
 report,A7FF30A-PORTFOLIO-REPLAY-SMOKE,reports/CRYPTO_A7FF30A_PORTFOLIO_REPLAY_SMOKE_20260530.md,a368260,run crypto a7ff portfolio replay smoke,53870
 report,A7FF31-PORTFOLIO-FORENSIC,reports/CRYPTO_A7FF31_PORTFOLIO_FORENSIC_20260530.md,17d1423,forensic crypto a7ff portfolio clues,22536
-report,A7FF32-FAMILY-DIVERSIFICATION-CONTRACT,reports/CRYPTO_A7FF32_FAMILY_DIVERSIFICATION_CONTRACT_20260530.md,,,7031
+report,A7FF32-FAMILY-DIVERSIFICATION-CONTRACT,reports/CRYPTO_A7FF32_FAMILY_DIVERSIFICATION_CONTRACT_20260530.md,2c0aa81,preflight crypto a7ff dense funding queue,7031
+report,A7FF33-FAMILY-DIVERSIFIED-DRY-GENERATION,reports/CRYPTO_A7FF33_FAMILY_DIVERSIFIED_DRY_GENERATION_20260530.md,,,7963
+report,A7FF34-FAMILY-QUEUE-COVERAGE-AUDIT,reports/CRYPTO_A7FF34_FAMILY_QUEUE_COVERAGE_AUDIT_20260530.md,,,7089
 report,A7FF4-FEATURE-ROLE-PROMOTION,reports/CRYPTO_A7FF4_FEATURE_ROLE_PROMOTION_20260530.md,b725826,add crypto a7ff field to factor compiler,5766
 report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
@@ -1939,13 +1974,13 @@ report,A7FFR2-OPERATOR-PROBING-V2,reports/CRYPTO_A7FFR2_OPERATOR_PROBING_V2_2026
 report,A7FFR3-FEATURE-PAIR-POLICY-V2,reports/CRYPTO_A7FFR3_FEATURE_PAIR_POLICY_V2_20260530.md,3e509b2,redesign crypto a7ff derived generation,38678
 report,A7FFR4-COARSE-TO-FINE-GENERATION-REDESIGN,reports/CRYPTO_A7FFR4_COARSE_TO_FINE_GENERATION_REDESIGN_20260530.md,3e509b2,redesign crypto a7ff derived generation,34030
 report,A7FFR5-RESPONSE-BACKED-PROMOTION-REDESIGN,reports/CRYPTO_A7FFR5_RESPONSE_BACKED_PROMOTION_REDESIGN_20260530.md,3e509b2,redesign crypto a7ff derived generation,21018
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,3e99194,repair crypto a7ff company queue tail,317382
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,e97d9de,add crypto a7ff portfolio replay contract,98706
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,2c0aa81,preflight crypto a7ff dense funding queue,321169
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,2c0aa81,preflight crypto a7ff dense funding queue,99589
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,de26507,add crypto a7pm governance registry,391
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,3e99194,repair crypto a7ff company queue tail,131170
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,3e99194,repair crypto a7ff company queue tail,710
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,3e99194,repair crypto a7ff company queue tail,275
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,3e99194,repair crypto a7ff company queue tail,70843
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,2c0aa81,preflight crypto a7ff dense funding queue,132769
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,2c0aa81,preflight crypto a7ff dense funding queue,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,2c0aa81,preflight crypto a7ff dense funding queue,301
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,2c0aa81,preflight crypto a7ff dense funding queue,71572
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -1961,15 +1996,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,3e99194,repair crypto a7ff company queue tail,356
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,3e99194,repair crypto a7ff company queue tail,283
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,2c0aa81,preflight crypto a7ff dense funding queue,340
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,2c0aa81,preflight crypto a7ff dense funding queue,287
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,cf30256,run crypto a7ff25r company numeric wave,377
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,3e99194,repair crypto a7ff company queue tail,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,3e99194,repair crypto a7ff company queue tail,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,3e99194,repair crypto a7ff company queue tail,4518
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,2c0aa81,preflight crypto a7ff dense funding queue,424
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,2c0aa81,preflight crypto a7ff dense funding queue,5042
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,3e99194,repair crypto a7ff company queue tail,2726
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,2c0aa81,preflight crypto a7ff dense funding queue,2730
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

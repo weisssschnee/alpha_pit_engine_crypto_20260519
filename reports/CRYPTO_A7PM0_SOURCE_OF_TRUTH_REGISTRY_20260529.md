@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T11:07:04Z
+Generated: 2026-05-30T11:15:23Z
 
 ## Decision
 
@@ -15,18 +15,18 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
- M scripts/crypto_a7ff8_expanded_numeric_probe.py
  M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF24R3_DENSE_MATERIALIZER_PREFLIGHT_20260530.md
-?? reports/CRYPTO_A7FF32_FAMILY_DIVERSIFICATION_CONTRACT_20260530.md
-?? runtime/a7ff24r3_dense_materializer_preflight/
-?? runtime/a7ff32_family_diversification_contract/
-?? scripts/crypto_a7ff24r3_dense_materializer_preflight.py
-?? scripts/crypto_a7ff32_family_diversification_contract.py
-HEAD=3e99194c9391e40f599dd5b544e305d18e2c3f06
-origin/main=3e99194c9391e40f599dd5b544e305d18e2c3f06
+?? reports/CRYPTO_A7FF33_FAMILY_DIVERSIFIED_DRY_GENERATION_20260530.md
+?? reports/CRYPTO_A7FF34_FAMILY_QUEUE_COVERAGE_AUDIT_20260530.md
+?? runtime/a7ff33_family_diversified_dry_generation/
+?? runtime/a7ff34_family_queue_coverage_audit/
+?? scripts/crypto_a7ff33_family_diversified_dry_generation.py
+?? scripts/crypto_a7ff34_family_queue_coverage_audit.py
+HEAD=2c0aa8121c2410863192146e7dde9540abde811f
+origin/main=2c0aa8121c2410863192146e7dde9540abde811f
 HEAD == origin/main: True
 ```
 
@@ -34,7 +34,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2146,
+  "artifact_count": 2181,
   "authorization_record_count": 678,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -48,12 +48,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T11:07:04Z",
-  "head": "3e99194c9391e40f599dd5b544e305d18e2c3f06",
+  "generated_at": "2026-05-30T11:15:23Z",
+  "head": "2c0aa8121c2410863192146e7dde9540abde811f",
   "head_equals_origin_main": true,
-  "origin_main": "3e99194c9391e40f599dd5b544e305d18e2c3f06",
+  "origin_main": "2c0aa8121c2410863192146e7dde9540abde811f",
   "stage": "A7PM-0",
-  "stage_count": 226
+  "stage_count": 228
 }
 ```
 
@@ -72,7 +72,7 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |      99 |
+| valid_or_historical_record   | governance_or_audit        |     101 |
 | valid_or_historical_record   | contract                   |      46 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       5 |
@@ -106,7 +106,7 @@ HEAD == origin/main: True
 ```json
 {
   "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
-  "A7FF-33": "family-diversified dry generation plan authorized by A7FF-32; no numeric probe or search",
+  "A7FF-35": "numeric preflight on A7FF-33 family-diversified queue after A7FF-34 coverage pass; no search",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```

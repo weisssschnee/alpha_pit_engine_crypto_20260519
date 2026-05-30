@@ -1,0 +1,83 @@
+{
+  "quota": [
+    {
+      "family_id": "D0_basis_premium_reference",
+      "max_generation_share": 0.25,
+      "max_selected_share": 0.2,
+      "min_generation_share": 0.05,
+      "notes": "Existing clue root; cannot dominate next pool.",
+      "role": "reference_family_only",
+      "root_family": "basis_premium_like"
+    },
+    {
+      "family_id": "D1_open_interest_positioning",
+      "max_generation_share": 0.35,
+      "max_selected_share": 0.3,
+      "min_generation_share": 0.15,
+      "notes": "OI/positioning interaction, not direct OI-price rerun.",
+      "role": "primary_diversification_target",
+      "root_family": "open_interest_like|positioning_like"
+    },
+    {
+      "family_id": "D2_taker_flow_leverage",
+      "max_generation_share": 0.25,
+      "max_selected_share": 0.25,
+      "min_generation_share": 0.1,
+      "notes": "Aggressive taker flow under leverage expansion/contraction.",
+      "role": "primary_diversification_target",
+      "root_family": "taker_flow_like|open_interest_like"
+    },
+    {
+      "family_id": "D3_liquidity_volatility_state",
+      "max_generation_share": 0.25,
+      "max_selected_share": 0.25,
+      "min_generation_share": 0.1,
+      "notes": "Liquidity/volatility state with strict control dominance gate.",
+      "role": "primary_diversification_target",
+      "root_family": "liquidity_like|volatility_like"
+    },
+    {
+      "family_id": "D4_regime_relative_value",
+      "max_generation_share": 0.25,
+      "max_selected_share": 0.25,
+      "min_generation_share": 0.1,
+      "notes": "Upper-regime conditioned relative-value, not direct regime-as-alpha.",
+      "role": "primary_diversification_target",
+      "root_family": "regime_state|price_return_like"
+    },
+    {
+      "family_id": "D5_funding_dense_state",
+      "max_generation_share": 0.25,
+      "max_selected_share": 0.25,
+      "min_generation_share": 0.1,
+      "notes": "Only dense funding fields; raw funding_rate tail is blocked.",
+      "role": "dense_materializer_target",
+      "root_family": "funding_like|basis_premium_like"
+    },
+    {
+      "family_id": "D6_listing_latent_lifecycle",
+      "max_generation_share": 0.15,
+      "max_selected_share": 0.15,
+      "min_generation_share": 0.05,
+      "notes": "Age/latent lifecycle interactions; must survive neutralization.",
+      "role": "diagnostic_to_signal_bridge",
+      "root_family": "listing_age_like|latent_state"
+    }
+  ],
+  "scale": {
+    "company_shard_count": 18,
+    "company_wave_queue_target": 3600,
+    "executes_numeric_probe": false,
+    "executes_replay": false,
+    "executes_search": false,
+    "generated_blueprint_target": 24000,
+    "materialization_queue_target": 6000,
+    "min_motif_count": 10,
+    "min_non_basis_company_wave_share": 0.65,
+    "min_non_basis_generation_share": 0.65,
+    "min_root_family_count": 6,
+    "notes": "Scale is deliberately larger than A7FF-24R, but it is still dry generation / asset construction only.",
+    "stage": "A7FF-33",
+    "type": "family_diversified_dry_generation_plan"
+  }
+}
