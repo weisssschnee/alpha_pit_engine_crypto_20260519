@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-30T10:31:21Z
+Generated: 2026-05-30T10:46:00Z
 
 ## Decision
 
@@ -12,16 +12,16 @@ Generated: 2026-05-30T10:31:21Z
 |:------------------------|:----------------|:--------------------------|:----------------------------------------|
 | governance              | A7PM-0/1/2/3    | pass                      | keep registry as source-of-truth        |
 | a7ff_portfolio_forensic | A7FF-31         | hold_concentrated_clue    | A7FF-32 family diversification contract |
-| a7ff_funding_tail       | A7FF-25R6       | pass_queue_repair_allowed | A7FF-24R2 repaired queue tail rebuild   |
+| a7ff_funding_tail       | A7FF-24R2       | pass_repaired_queue_ready | A7FF-24R3 dense materializer preflight  |
 | search_execution        | blocked         | not_authorized            | none                                    |
 
 ## Allowed Next Tasks
 
-| task                 | reason                                                                                              |
-|:---------------------|:----------------------------------------------------------------------------------------------------|
-| A7FF-32              | family diversification contract after A7FF-31 concentrated-clue hold; no search                     |
-| A7FF-24R2            | repaired company queue tail rebuild using dense funding-state fields or healthy backfill; no search |
-| A7PM-0/3 maintenance | governance registry maintenance                                                                     |
+| task                 | reason                                                                          |
+|:---------------------|:--------------------------------------------------------------------------------|
+| A7FF-32              | family diversification contract after A7FF-31 concentrated-clue hold; no search |
+| A7FF-24R3            | dense materializer preflight on repaired A7FF-24R2 company queue; no search     |
+| A7PM-0/3 maintenance | governance registry maintenance                                                 |
 
 ## Blocked Tasks
 
@@ -39,5 +39,5 @@ Generated: 2026-05-30T10:31:21Z
 
 ```text
 No formula search, large search, alpha proof, shadow, paper, or live execution is authorized.
-The next technical work is A7FF-32 family diversification contract and A7FF-24R2 repaired queue tail rebuild.
+The next technical work is A7FF-32 family diversification contract and A7FF-24R3 dense materializer preflight.
 ```

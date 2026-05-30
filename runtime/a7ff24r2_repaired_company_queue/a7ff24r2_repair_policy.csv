@@ -1,0 +1,5 @@
+gate,rule,status
+no_raw_funding_rate_tail,tail shard expressions may not contain raw funding_rate as the dense signal source,pass
+dense_materializer_required,numeric runner must materialize funding_rate_state_last_ffill_8h before evaluating repaired queue,required
+tail_activity_precheck,A7FF-25R6 dense state finite/nonzero activity passed on 96-symbol audit,pass
+search_boundary,queue rebuild does not authorize formula search,pass

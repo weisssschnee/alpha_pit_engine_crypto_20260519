@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_dense_materializer_preflight": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "company_shard_count": 12,
+  "decision": "PASS_A7FF24R2_REPAIRED_COMPANY_QUEUE_READY_FOR_DENSE_MATERIALIZER_PREFLIGHT_NO_SEARCH_AUTH",
+  "dense_tail_rows": 800,
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T10:41:18Z",
+  "healthy_preserved_count": 1600,
+  "original_queue_count": 2400,
+  "raw_funding_rate_remaining_tail_rows": 0,
+  "repaired_queue_count": 2400,
+  "stage": "A7FF-24R2",
+  "tail_repaired_count": 800,
+  "warnings": []
+}

@@ -17,7 +17,7 @@ A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 
 ALLOWED = {
     "A7FF-32": "family diversification contract after A7FF-31 concentrated-clue hold; no search",
-    "A7FF-24R2": "repaired company queue tail rebuild using dense funding-state fields or healthy backfill; no search",
+    "A7FF-24R3": "dense materializer preflight on repaired A7FF-24R2 company queue; no search",
     "A7PM-0/3 maintenance": "governance registry maintenance",
 }
 
@@ -67,7 +67,7 @@ def main() -> None:
         [
             {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
             {"workstream": "a7ff_portfolio_forensic", "current_stage": "A7FF-31", "status": "hold_concentrated_clue", "next": "A7FF-32 family diversification contract"},
-            {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-25R6", "status": "pass_queue_repair_allowed", "next": "A7FF-24R2 repaired queue tail rebuild"},
+            {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R2", "status": "pass_repaired_queue_ready", "next": "A7FF-24R3 dense materializer preflight"},
             {"workstream": "search_execution", "current_stage": "blocked", "status": "not_authorized", "next": "none"},
         ]
     )
@@ -120,7 +120,7 @@ def main() -> None:
         "",
         "```text",
         "No formula search, large search, alpha proof, shadow, paper, or live execution is authorized.",
-        "The next technical work is A7FF-32 family diversification contract and A7FF-24R2 repaired queue tail rebuild.",
+        "The next technical work is A7FF-32 family diversification contract and A7FF-24R3 dense materializer preflight.",
         "```",
     ]
     REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")

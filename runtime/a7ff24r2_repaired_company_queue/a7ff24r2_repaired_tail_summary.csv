@@ -1,0 +1,16 @@
+semantic_pair,motif,repair_rule,count
+basis_premium_like|funding_like,gated_sign,delta_dense_state,31
+basis_premium_like|funding_like,gated_sign,generic_dense_state,2
+basis_premium_like|funding_like,gated_sign,mean_dense_state,81
+basis_premium_like|funding_like,mean_reversion_gate,delta_dense_state,50
+basis_premium_like|funding_like,mean_reversion_gate,generic_dense_state,32
+basis_premium_like|funding_like,mean_reversion_gate,mean_dense_state,174
+basis_premium_like|funding_like,mul,generic_dense_state,2
+basis_premium_like|funding_like,mul,mean_dense_state,60
+basis_premium_like|funding_like,relative_shock,delta_dense_state,91
+basis_premium_like|funding_like,relative_shock,mean_dense_state,223
+basis_premium_like|funding_like,safe_div_abs,generic_dense_state,2
+basis_premium_like|funding_like,safe_div_abs,mean_dense_state,20
+basis_premium_like|funding_like,signed_spread,mean_dense_state,19
+funding_like|positioning_like,gated_sign,delta_dense_state,5
+funding_like|positioning_like,gated_sign,mean_dense_state,8
