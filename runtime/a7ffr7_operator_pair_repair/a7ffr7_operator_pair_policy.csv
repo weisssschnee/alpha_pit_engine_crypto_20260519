@@ -1,0 +1,8 @@
+semantic_pair,motif,strict_clue_rows,strict_blueprints,label_count,min_control_ratio,median_control_ratio,max_repair_score,repaired_role,a7ff42_quota_hint,promotion_boundary
+basis_premium_like|basis_premium_like,safe_div_clip,52,16,4,0.2105976399402257,0.4497956941786859,27.71314243629931,reference_pair_capped,0.15,diagnostic_reference_only_until_non_self_pair_confirms
+funding_like|basis_premium_like,spread_rank,30,10,4,0.1829671576281676,0.565682054013395,20.02896969145463,candidate_pair,0.4,numeric_followup_only_no_search
+funding_like|basis_premium_like,zspread,24,9,4,0.2547692350491746,0.5654837192242723,21.736351252192257,candidate_pair,0.4,numeric_followup_only_no_search
+funding_like|basis_premium_like,sub,23,8,4,0.2582895429691746,0.5202321764948902,26.387538003088768,candidate_pair,0.4,numeric_followup_only_no_search
+funding_like|basis_premium_like,mul,3,1,3,0.5270061772372266,0.5736042548115664,5.356585740511436,candidate_pair,0.4,numeric_followup_only_no_search
+regime_state|price_return_like,spread_rank,16,7,4,0.3783019699353285,0.6082348508068353,7.7557124153256565,selector_quota_required,0.35,numeric_followup_only_no_search
+regime_state|price_return_like,sub,17,7,4,0.4172612372862395,0.5116515229660062,7.715189496237551,selector_quota_required,0.35,numeric_followup_only_no_search

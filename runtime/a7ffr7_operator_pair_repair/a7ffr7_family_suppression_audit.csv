@@ -1,0 +1,4 @@
+semantic_pair,strict_clue_rows,strict_blueprints,strict_motifs,strict_labels,min_control_ratio,median_control_ratio,max_repair_score,median_repair_score,selected_strict_rows,selected_strict_blueprints,selected_strict_motifs,selected_min_control_ratio,selected_share_of_strict_blueprints,suppression_reason
+funding_like|basis_premium_like,80,28,4,4,0.1829671576281676,0.5634181558463255,26.387538003088768,14.44210223400639,5,5,3,0.2547692350491746,0.17857142857142858,not_suppressed
+basis_premium_like|basis_premium_like,52,16,1,4,0.2105976399402257,0.4497956941786859,27.71314243629931,15.612351884437217,0,0,0,,0.0,reference_family_should_be_capped_not_promoted
+regime_state|price_return_like,33,14,2,4,0.3783019699353285,0.5351329622918253,7.7557124153256565,7.4360790120946385,0,0,0,,0.0,regime_family_needs_family_quota_repair

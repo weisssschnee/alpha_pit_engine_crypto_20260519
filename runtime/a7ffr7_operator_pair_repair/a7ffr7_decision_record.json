@@ -1,0 +1,29 @@
+{
+  "a7ff40_selected_control_strict_non_l7_count": 5,
+  "a7ff40_selected_control_strict_non_l7_family_count": 1,
+  "authorizes_a7ff42_family_balanced_numeric": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FFR7_OPERATOR_PAIR_REPAIR_READY_FOR_A7FF42_FAMILY_BALANCED_NUMERIC_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T14:52:11Z",
+  "repaired_dry_queue_control_strict_count": 10,
+  "repaired_dry_queue_count": 10,
+  "repaired_dry_queue_family_count": 3,
+  "repaired_dry_queue_non_l7_count": 10,
+  "source_a7ff40_decision": "HOLD_A7FF40_CONTROL_STRICT_SINGLE_FAMILY_OR_SELECTED_TOO_THIN",
+  "stage": "A7FF-R7",
+  "strict_input_family_count": 3,
+  "strict_input_rows": 165,
+  "suppressed_family_count": 1,
+  "uses_may": false,
+  "warnings": [
+    "a7ff40_selector_omitted_control_strict_families",
+    "basis_reference_present_keep_capped"
+  ]
+}

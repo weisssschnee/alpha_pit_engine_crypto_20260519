@@ -1,0 +1,7 @@
+a7ff40_queue_role,semantic_pair,queue_count,motif_count,skeleton_count
+strict_followup_candidate,funding_like|basis_premium_like,206,4,12
+control_repair_diagnostic,regime_state|price_return_like,104,2,10
+contrast_diagnostic,taker_flow_like|open_interest_like,80,10,45
+contrast_diagnostic,liquidity_like|volatility_like,80,10,45
+contrast_diagnostic,open_interest_like|positioning_like,80,10,45
+basis_reference_diagnostic,basis_premium_like|basis_premium_like,51,1,6
