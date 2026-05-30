@@ -56,12 +56,24 @@ def only_expected_dirty(status: str) -> tuple[bool, str]:
         return True, "clean"
     allowed = (
         "reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md",
+        "reports/CRYPTO_A7FF51_COMPACT_NON_L5_CONTRACT_20260531.md",
+        "reports/CRYPTO_A7FF24R4_REPAIRED_NUMERIC_WAVE_CONTRACT_20260531.md",
+        "reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md",
+        "reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md",
         "runtime/a7night_taskflow_20260531/",
+        "runtime/a7ff51_compact_non_l5_contract/",
+        "runtime/a7ff24r4_repaired_numeric_wave_contract/",
+        "runtime/a7pm0_source_of_truth_registry/",
+        "runtime/a7pm3_experiment_board/",
         "scripts/crypto_a7night_taskflow_20260531.py",
+        "scripts/crypto_a7ff51_compact_non_l5_contract.py",
+        "scripts/crypto_a7ff24r4_repaired_numeric_wave_contract.py",
+        "scripts/crypto_a7pm0_source_of_truth_registry.py",
+        "scripts/crypto_a7pm3_current_experiment_board.py",
     )
     unexpected: list[str] = []
     for line in status.splitlines():
-        path = line[3:] if len(line) > 3 else line
+        path = line[2:].strip() if len(line) > 2 else line.strip()
         if not any(path.startswith(prefix) for prefix in allowed):
             unexpected.append(line)
     return not unexpected, "\n".join(unexpected) if unexpected else "only A7NIGHT self artifacts are dirty"
@@ -119,6 +131,72 @@ def main() -> None:
             },
         },
     }
+
+    approval_options = {
+        "recommended": "APPROVE_A7FF51E_NON_L5_FIRST_HEAVY_GENERATION_ONLY",
+        "options": {
+            "APPROVE_A7FF51E_NON_L5_FIRST_HEAVY_GENERATION_ONLY": {
+                "what_runs": [
+                    "non-L5-first derived blueprint generation",
+                    "static materialization-readiness audit",
+                    "queue coverage and family balance audit",
+                ],
+                "budget": {
+                    "blueprint_target": 50000,
+                    "max_runtime_tables": 3,
+                    "max_reports": 1,
+                },
+                "hard_stop_before": [
+                    "numeric replay",
+                    "formula search",
+                    "alpha proof",
+                    "shadow/paper/live",
+                ],
+                "success_gate": {
+                    "non_reference_non_l5_rows_before_replay": ">= 200 static candidates",
+                    "semantic_pair_families": ">= 6",
+                    "top_family_share": "<= 0.30",
+                    "reference_family_counts_as_primary": False,
+                },
+            },
+            "APPROVE_A7FF24R4_REPAIRED_QUEUE_NUMERIC_WAVE": {
+                "what_runs": [
+                    "bounded numeric wave over repaired A7FF-24R queue",
+                    "shard coverage audit",
+                    "failure-map only, no promotion",
+                ],
+                "budget": {
+                    "max_queue_rows": 2400,
+                    "shards": 12,
+                    "max_runtime_tables": 3,
+                    "max_reports": 1,
+                },
+                "hard_stop_before": [
+                    "full search",
+                    "alpha proof",
+                    "shadow/paper/live",
+                ],
+                "success_gate": {
+                    "eval_failure_count": 0,
+                    "non_l7_numeric_clue_rows": "> 0",
+                    "missing_numeric_fields": 0,
+                    "control_ratio_max_for_candidates": "< 0.80",
+                },
+            },
+            "APPROVE_BOTH_SEQUENTIAL": {
+                "order": ["A7FF51E", "A7FF24R4"],
+                "stop_rule": "if A7FF51E fails artifact or coverage gates, do not start A7FF24R4",
+                "reason": "keeps non-L5 objective reset as primary, with repaired queue numeric wave as secondary audit",
+            },
+            "DO_NOT_RUN_OVERNIGHT": {
+                "what_runs": [],
+                "reason": "keep repo frozen at contract-only state",
+            },
+        },
+        "explicit_user_approval_required_for_heavy_execution": True,
+        "contract_work_can_continue_without_approval": True,
+    }
+    write_json(RUNTIME / "a7night_approval_options.json", approval_options)
     write_json(RUNTIME / "a7night_contracts.json", contracts)
 
     checks = [
@@ -135,16 +213,16 @@ def main() -> None:
             "pass": dirty_ok,
         },
         {
-            "check": "a7ff51_contract_allowed_by_pm3",
-            "value": "A7FF-51 contract" in pm3_allowed,
-            "detail": str(pm3_allowed.get("A7FF-51 contract")),
-            "pass": "A7FF-51 contract" in pm3_allowed,
+            "check": "a7ff51_path_present_in_pm3",
+            "value": ("A7FF-51 contract" in pm3_allowed) or ("A7FF-51E heavy generation execution option" in pm3_allowed),
+            "detail": str(pm3_allowed.get("A7FF-51 contract") or pm3_allowed.get("A7FF-51E heavy generation execution option")),
+            "pass": ("A7FF-51 contract" in pm3_allowed) or ("A7FF-51E heavy generation execution option" in pm3_allowed),
         },
         {
-            "check": "a7ff24r4_allowed_by_pm3",
-            "value": "A7FF-24R4" in pm3_allowed,
-            "detail": str(pm3_allowed.get("A7FF-24R4")),
-            "pass": "A7FF-24R4" in pm3_allowed,
+            "check": "a7ff24r4_path_present_in_pm3",
+            "value": ("A7FF-24R4" in pm3_allowed) or ("A7FF-24R4E repaired numeric wave execution option" in pm3_allowed),
+            "detail": str(pm3_allowed.get("A7FF-24R4") or pm3_allowed.get("A7FF-24R4E repaired numeric wave execution option")),
+            "pass": ("A7FF-24R4" in pm3_allowed) or ("A7FF-24R4E repaired numeric wave execution option" in pm3_allowed),
         },
         {
             "check": "a7ffr11_authorizes_contract_only",
@@ -175,7 +253,10 @@ def main() -> None:
         "decision": "PASS_A7NIGHT_TASKFLOW_READY" if not blockers else "HOLD_A7NIGHT_TASKFLOW_SELF_CHECK_FAIL",
         "blockers": blockers,
         "contracts": list(contracts.keys()),
-        "artifact_budget": {"reports": 1, "runtime_files": 3, "scripts": 1},
+        "approval_required_for_heavy_execution": True,
+        "contract_work_can_continue_without_approval": True,
+        "recommended_approval": approval_options["recommended"],
+        "artifact_budget": {"reports": 1, "runtime_files": 4, "scripts": 1},
         "executes_generation": False,
         "executes_numeric_probe": False,
         "executes_replay": False,
@@ -211,6 +292,14 @@ This night taskflow packages the currently authorized long-task direction withou
 ## Self Check
 
 {md_table(check_df)}
+
+## Approval Required
+
+I did not start a heavy run because the current source-of-truth only authorizes contracts. Contract drafting can continue without approval; heavy generation or numeric-wave execution requires one explicit execution option:
+
+```json
+{json.dumps(approval_options, indent=2, sort_keys=True)}
+```
 
 ## Execution Boundary
 

@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T19:14:43Z
+Generated: 2026-05-30T19:26:55Z
 
 ## Decision
 
@@ -15,8 +15,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=7d434c6fc9872b4f3550b5526afac767b031a759
-origin/main=91a4732d1204d6d91fbca6913e1764a334a20ef1
+HEAD=2b8ad8a73a29aebdeb3004ef2f997b05b94be904
+origin/main=560477682a668ae7546a1ce9370daee5163cd487
 HEAD == origin/main: False
 ```
 
@@ -24,7 +24,7 @@ HEAD == origin/main: False
 
 ```json
 {
-  "artifact_count": 2410,
+  "artifact_count": 2415,
   "authorization_record_count": 685,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +38,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T19:14:43Z",
-  "head": "7d434c6fc9872b4f3550b5526afac767b031a759",
+  "generated_at": "2026-05-30T19:26:55Z",
+  "head": "2b8ad8a73a29aebdeb3004ef2f997b05b94be904",
   "head_equals_origin_main": false,
-  "origin_main": "91a4732d1204d6d91fbca6913e1764a334a20ef1",
+  "origin_main": "560477682a668ae7546a1ce9370daee5163cd487",
   "stage": "A7PM-0",
-  "stage_count": 249
+  "stage_count": 251
 }
 ```
 
@@ -63,7 +63,7 @@ HEAD == origin/main: False
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     112 |
-| valid_or_historical_record   | contract                   |      49 |
+| valid_or_historical_record   | contract                   |      51 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       7 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
@@ -83,12 +83,14 @@ HEAD == origin/main: False
   "A7AL-2Q": "superseded/not_authorized by A7AL-2X0",
   "A7AL-2Y": "formula generation/search execution not authorized",
   "A7AL-3": "large search not authorized",
+  "A7FF-24R4E execution": "pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but does not execute numeric wave",
   "A7FF-41": "not authorized by A7FF-40 because selected control-strict non-L7 evidence is still single-family",
   "A7FF-43": "not authorized by A7FF-42 because selected control-strict non-L7 evidence is still single-family",
   "A7FF-45": "superseded by A7FF-47 label translation hold; bounded replay passed but did not translate beyond L5",
   "A7FF-48": "not authorized by A7FF-47 because frozen clues fail non-L5 label translation",
   "A7FF-50": "not authorized by A7FF-49 because existing maps have no non-reference non-L5 candidates",
   "A7FF-51 execution": "not authorized by A7FF-R11; only contract drafting is authorized",
+  "A7FF-51E execution": "pending explicit heavy-execution authorization; A7FF-51 contract is ready but does not execute generation",
   "alpha_proof": "not authorized",
   "direct_OI_price_rerun": "same objective rerun not authorized",
   "formula_search": "not authorized",
@@ -101,8 +103,8 @@ HEAD == origin/main: False
 
 ```json
 {
-  "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
-  "A7FF-51 contract": "compact non-L5-first derived generation contract after A7FF-R11; no execution/search",
+  "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
+  "A7FF-51E heavy generation execution option": "requires explicit user authorization; no search and hard stop before numeric replay",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```

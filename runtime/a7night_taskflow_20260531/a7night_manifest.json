@@ -1,13 +1,15 @@
 {
+  "approval_required_for_heavy_execution": true,
   "artifact_budget": {
     "reports": 1,
-    "runtime_files": 3,
+    "runtime_files": 4,
     "scripts": 1
   },
   "authorizes_alpha_proof": false,
   "authorizes_search": false,
   "authorizes_shadow_paper_live": false,
   "blockers": [],
+  "contract_work_can_continue_without_approval": true,
   "contracts": [
     "A7FF-51",
     "A7FF-24R4"
@@ -17,6 +19,7 @@
   "executes_numeric_probe": false,
   "executes_replay": false,
   "executes_search": false,
-  "generated_at": "2026-05-30T19:13:49Z",
+  "generated_at": "2026-05-30T19:26:25Z",
+  "recommended_approval": "APPROVE_A7FF51E_NON_L5_FIRST_HEAVY_GENERATION_ONLY",
   "stage": "A7NIGHT-20260531"
 }

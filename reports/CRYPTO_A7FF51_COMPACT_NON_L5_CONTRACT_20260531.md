@@ -1,0 +1,84 @@
+# CRYPTO A7FF-51 COMPACT NON-L5 CONTRACT
+
+Generated: 2026-05-30T19:22:25Z
+
+## Decision
+
+`PASS_A7FF51_COMPACT_NON_L5_CONTRACT_READY_NO_EXECUTION_AUTH`
+
+This is a contract-only stage. It defines the next non-L5-first large generation execution but does not start it.
+
+## Contract
+
+```json
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_generation_execution": false,
+  "authorizes_numeric_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "contract_scope": {
+    "primary_labels": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L3_liquidity_tier_relative_return"
+    ],
+    "primary_objective": "build non-reference, non-L5 candidate supply",
+    "reference_family_cannot_count_as_primary": true,
+    "supporting_only_labels": [
+      "L5_vol_adjusted_return",
+      "L7_ranked_future_return"
+    ]
+  },
+  "decision": "PASS_A7FF51_COMPACT_CONTRACT_READY",
+  "execution_budget_if_later_approved": {
+    "blueprint_target": 50000,
+    "max_reports": 1,
+    "max_runtime_tables": 3,
+    "max_scripts": 1
+  },
+  "generation_rules": {
+    "family_cap": 0.3,
+    "forbidden_primary_family": [
+      "basis_premium_like|basis_premium_like"
+    ],
+    "motif_cap": 0.25,
+    "must_include_semantic_families": [
+      "funding_like|basis_premium_like",
+      "regime_state|price_return_like",
+      "basis_premium_like|price_return_like",
+      "positioning_like|price_return_like",
+      "open_interest_like|price_return_like",
+      "taker_flow_like|basis_premium_like",
+      "liquidity_like|price_return_like",
+      "volatility_like|basis_premium_like"
+    ],
+    "require_non_l5_first_scoring": true
+  },
+  "hard_stop_before": [
+    "numeric replay",
+    "formula search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "name": "compact non-L5-first derived generation contract",
+  "pre_replay_gates": {
+    "min_non_reference_non_l5_static_candidates": 200,
+    "min_semantic_families": 6,
+    "reference_family_rows_count_as_primary": false,
+    "top_family_share_max": 0.3
+  },
+  "purpose": "define the next large generation execution without starting it",
+  "source": "A7FF-R11",
+  "stage": "A7FF-51"
+}
+```
+
+## Boundary
+
+```text
+generation executed: false
+numeric replay executed: false
+search executed: false
+alpha proof / shadow / paper / live: false
+```

@@ -1399,6 +1399,7 @@ runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_portfol
 runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_repaired_queue_shard_audit.csv,2c0aa81,preflight crypto a7ff dense funding queue,361
 runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_repaired_queue_summary.csv,2c0aa81,preflight crypto a7ff dense funding queue,128
 runtime,A7FF-24R3,runtime/a7ff24r3_dense_materializer_preflight/a7ff24r3_selected_portfolio_queue.csv,2c0aa81,preflight crypto a7ff dense funding queue,2
+runtime,A7FF-24R4,runtime/a7ff24r4_repaired_numeric_wave_contract/a7ff24r4_manifest.json,2b8ad8a,add crypto a7ff execution contracts,1840
 runtime,A7FF-25R0-COMPANY-QUEUE-COVERAGE-AUDIT,runtime/a7ff25r0_company_queue_coverage/a7ff25r0_company_queue_coverage_by_base_field.csv,efa57ad,audit crypto a7ff25r company queue coverage,7560
 runtime,A7FF-25R0-COMPANY-QUEUE-COVERAGE-AUDIT,runtime/a7ff25r0_company_queue_coverage/a7ff25r0_company_queue_coverage_by_level.csv,efa57ad,audit crypto a7ff25r company queue coverage,712
 runtime,A7FF-25R0-COMPANY-QUEUE-COVERAGE-AUDIT,runtime/a7ff25r0_company_queue_coverage/a7ff25r0_company_queue_coverage_by_motif.csv,efa57ad,audit crypto a7ff25r company queue coverage,1423
@@ -1943,6 +1944,7 @@ runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_strict_non_l5_c
 runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_blocked_factor_blueprints.csv,b725826,add crypto a7ff field to factor compiler,780
 runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_factor_candidate_blueprints.csv,b725826,add crypto a7ff field to factor compiler,3116
 runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_manifest.json,b725826,add crypto a7ff field to factor compiler,359
+runtime,A7FF-51,runtime/a7ff51_compact_non_l5_contract/a7ff51_manifest.json,2b8ad8a,add crypto a7ff execution contracts,2747
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_manifest.json,b725826,add crypto a7ff field to factor compiler,453
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_portfolio_marginal_queue.csv,b725826,add crypto a7ff field to factor compiler,2157
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_selected_dryrun_queue.csv,b725826,add crypto a7ff field to factor compiler,751
@@ -2133,6 +2135,7 @@ report,A7FF23R-DERIVED-FACTOR-EXPANSION-CONTRACT,reports/CRYPTO_A7FF23R_DERIVED_
 report,A7FF24R-DRY-GENERATION-PLAN,reports/CRYPTO_A7FF24R_DRY_GENERATION_PLAN_20260530.md,587e26e,add crypto a7ff23r and a7ff24r expansion plan,5835
 report,A7FF24R2-REPAIRED-COMPANY-QUEUE,reports/CRYPTO_A7FF24R2_REPAIRED_COMPANY_QUEUE_20260530.md,3e99194,repair crypto a7ff company queue tail,6657
 report,A7FF24R3-DENSE-MATERIALIZER-PREFLIGHT,reports/CRYPTO_A7FF24R3_DENSE_MATERIALIZER_PREFLIGHT_20260530.md,2c0aa81,preflight crypto a7ff dense funding queue,18342
+report,A7FF24R4-REPAIRED-NUMERIC-WAVE-CONTRACT,reports/CRYPTO_A7FF24R4_REPAIRED_NUMERIC_WAVE_CONTRACT_20260531.md,2b8ad8a,add crypto a7ff execution contracts,1511
 report,A7FF25R0-COMPANY-QUEUE-COVERAGE-AUDIT,reports/CRYPTO_A7FF25R0_COMPANY_QUEUE_COVERAGE_AUDIT_20260530.md,efa57ad,audit crypto a7ff25r company queue coverage,82647
 report,A7FF25R1-NUMERIC-ADAPTER-PARITY-SMOKE,reports/CRYPTO_A7FF25R1_NUMERIC_ADAPTER_PARITY_SMOKE_20260530.md,57625c0,smoke crypto a7ff25r numeric adapter,11850
 report,A7FF25R2-ONE-SHARD-NUMERIC-WAVE,reports/CRYPTO_A7FF25R2_ONE_SHARD_NUMERIC_WAVE_20260530.md,cf30256,run crypto a7ff25r company numeric wave,19488
@@ -2183,6 +2186,7 @@ report,A7FF46-CANDIDATE-FREEZE,reports/CRYPTO_A7FF46_CANDIDATE_FREEZE_20260531.m
 report,A7FF47-PORTFOLIO-MICROREPLAY,reports/CRYPTO_A7FF47_PORTFOLIO_MICROREPLAY_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,21246
 report,A7FF49-EXISTING-MAP-NON-L5-MINING,reports/CRYPTO_A7FF49_EXISTING_MAP_NON_L5_MINING_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,11327
 report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
+report,A7FF51-COMPACT-NON-L5-CONTRACT,reports/CRYPTO_A7FF51_COMPACT_NON_L5_CONTRACT_20260531.md,2b8ad8a,add crypto a7ff execution contracts,2422
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
 report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_DERIVATION_PROBE_CONTRACT_20260530.md,bd530c1,expand crypto a7ff derivation probe contract,25056
 report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
@@ -2199,17 +2203,18 @@ report,A7FFR5-RESPONSE-BACKED-PROMOTION-REDESIGN,reports/CRYPTO_A7FFR5_RESPONSE_
 report,A7FFR7-OPERATOR-PAIR-REPAIR,reports/CRYPTO_A7FFR7_OPERATOR_PAIR_REPAIR_20260530.md,0e6a555,repair crypto a7ff operator pair selection,27642
 report,A7FFR8-SELECTOR-OBJECTIVE-REWRITE,reports/CRYPTO_A7FFR8_SELECTOR_OBJECTIVE_REWRITE_20260531.md,987c404,rewrite crypto a7ff selector objective,31749
 report,A7FFR9-REFERENCE-REGIME-REPAIR,reports/CRYPTO_A7FFR9_REFERENCE_REGIME_REPAIR_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,19381
-runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,7d434c6,add crypto night taskflow contracts,1530
-runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,7d434c6,add crypto night taskflow contracts,528
-runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,7d434c6,add crypto night taskflow contracts,879
-report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,7d434c6,add crypto night taskflow contracts,4143
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,7d434c6,add crypto night taskflow contracts,360731
+runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_options.json,2b8ad8a,add crypto a7ff execution contracts,2125
+runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
+runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,2b8ad8a,add crypto a7ff execution contracts,715
+runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,2b8ad8a,add crypto a7ff execution contracts,851
+report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,2b8ad8a,add crypto a7ff execution contracts,6723
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,2b8ad8a,add crypto a7ff execution contracts,361250
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,ce25d84,advance crypto a7ff bounded replay forensics,100789
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,91a4732,add crypto a7ffr11 compact objective reset,1027
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,7d434c6,add crypto night taskflow contracts,146494
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,7d434c6,add crypto night taskflow contracts,710
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,91a4732,add crypto a7ffr11 compact objective reset,306
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,7d434c6,add crypto night taskflow contracts,78805
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,2b8ad8a,add crypto a7ff execution contracts,1301
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,2b8ad8a,add crypto a7ff execution contracts,148006
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,2b8ad8a,add crypto a7ff execution contracts,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,2b8ad8a,add crypto a7ff execution contracts,343
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,2b8ad8a,add crypto a7ff execution contracts,79447
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -2225,15 +2230,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,91a4732,add crypto a7ffr11 compact objective reset,352
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,91a4732,add crypto a7ffr11 compact objective reset,288
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,91a4732,add crypto a7ffr11 compact objective reset,1011
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,7d434c6,add crypto night taskflow contracts,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,7d434c6,add crypto night taskflow contracts,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,7d434c6,add crypto night taskflow contracts,5238
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,2b8ad8a,add crypto a7ff execution contracts,339
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,2b8ad8a,add crypto a7ff execution contracts,325
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,2b8ad8a,add crypto a7ff execution contracts,1301
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,2b8ad8a,add crypto a7ff execution contracts,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,2b8ad8a,add crypto a7ff execution contracts,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,2b8ad8a,add crypto a7ff execution contracts,6102
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,7d434c6,add crypto night taskflow contracts,3802
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,2b8ad8a,add crypto a7ff execution contracts,4564
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

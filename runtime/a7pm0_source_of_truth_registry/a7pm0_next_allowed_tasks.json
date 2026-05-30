@@ -1,5 +1,5 @@
 {
-  "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
-  "A7FF-51 contract": "compact non-L5-first derived generation contract after A7FF-R11; no execution/search",
+  "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
+  "A7FF-51E heavy generation execution option": "requires explicit user authorization; no search and hard stop before numeric replay",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }

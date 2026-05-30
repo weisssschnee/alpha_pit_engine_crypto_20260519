@@ -1,8 +1,8 @@
 check,value,detail,pass
-git_head_equals_origin_main_before_night_commit,True,head=91a4732d1204d6d91fbca6913e1764a334a20ef1; origin=91a4732d1204d6d91fbca6913e1764a334a20ef1,True
+git_head_equals_origin_main_before_night_commit,True,head=560477682a668ae7546a1ce9370daee5163cd487; origin=560477682a668ae7546a1ce9370daee5163cd487,True
 working_tree_has_only_expected_night_artifacts,True,only A7NIGHT self artifacts are dirty,True
-a7ff51_contract_allowed_by_pm3,True,compact non-L5-first derived generation contract after A7FF-R11; no execution/search,True
-a7ff24r4_allowed_by_pm3,True,repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search,True
+a7ff51_path_present_in_pm3,True,requires explicit user authorization; no search and hard stop before numeric replay,True
+a7ff24r4_path_present_in_pm3,True,requires explicit user authorization; no search and no promotion,True
 a7ffr11_authorizes_contract_only,True,PASS_A7FFR11_FEATURE_LABEL_OBJECTIVE_RESET_READY_FOR_A7FF51_CONTRACT_NO_SEARCH_AUTH,True
 a7ff24r3_authorizes_contract_only,True,PASS_A7FF24R3_DENSE_MATERIALIZER_PREFLIGHT_READY_FOR_REPAIRED_QUEUE_NUMERIC_WAVE_NO_SEARCH_AUTH,True
 global_search_not_authorized,True,A7FF-R11 and A7FF-24R3 both deny search,True

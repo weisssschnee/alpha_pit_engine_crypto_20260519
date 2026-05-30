@@ -1,0 +1,67 @@
+{
+  "contract_work_can_continue_without_approval": true,
+  "explicit_user_approval_required_for_heavy_execution": true,
+  "options": {
+    "APPROVE_A7FF24R4_REPAIRED_QUEUE_NUMERIC_WAVE": {
+      "budget": {
+        "max_queue_rows": 2400,
+        "max_reports": 1,
+        "max_runtime_tables": 3,
+        "shards": 12
+      },
+      "hard_stop_before": [
+        "full search",
+        "alpha proof",
+        "shadow/paper/live"
+      ],
+      "success_gate": {
+        "control_ratio_max_for_candidates": "< 0.80",
+        "eval_failure_count": 0,
+        "missing_numeric_fields": 0,
+        "non_l7_numeric_clue_rows": "> 0"
+      },
+      "what_runs": [
+        "bounded numeric wave over repaired A7FF-24R queue",
+        "shard coverage audit",
+        "failure-map only, no promotion"
+      ]
+    },
+    "APPROVE_A7FF51E_NON_L5_FIRST_HEAVY_GENERATION_ONLY": {
+      "budget": {
+        "blueprint_target": 50000,
+        "max_reports": 1,
+        "max_runtime_tables": 3
+      },
+      "hard_stop_before": [
+        "numeric replay",
+        "formula search",
+        "alpha proof",
+        "shadow/paper/live"
+      ],
+      "success_gate": {
+        "non_reference_non_l5_rows_before_replay": ">= 200 static candidates",
+        "reference_family_counts_as_primary": false,
+        "semantic_pair_families": ">= 6",
+        "top_family_share": "<= 0.30"
+      },
+      "what_runs": [
+        "non-L5-first derived blueprint generation",
+        "static materialization-readiness audit",
+        "queue coverage and family balance audit"
+      ]
+    },
+    "APPROVE_BOTH_SEQUENTIAL": {
+      "order": [
+        "A7FF51E",
+        "A7FF24R4"
+      ],
+      "reason": "keeps non-L5 objective reset as primary, with repaired queue numeric wave as secondary audit",
+      "stop_rule": "if A7FF51E fails artifact or coverage gates, do not start A7FF24R4"
+    },
+    "DO_NOT_RUN_OVERNIGHT": {
+      "reason": "keep repo frozen at contract-only state",
+      "what_runs": []
+    }
+  },
+  "recommended": "APPROVE_A7FF51E_NON_L5_FIRST_HEAVY_GENERATION_ONLY"
+}
