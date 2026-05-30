@@ -1,0 +1,13 @@
+label_family,cost_tier,rows,unique_blueprints
+L0_raw_forward_return,cost2_numeric_diagnostic,34,32
+L0_raw_forward_return,cost5_followup,47,45
+L0_raw_forward_return,strict_cost10,11,11
+L1_cross_sectional_relative_return,cost2_numeric_diagnostic,34,32
+L1_cross_sectional_relative_return,cost5_followup,52,46
+L1_cross_sectional_relative_return,strict_cost10,11,11
+L3_liquidity_tier_relative_return,cost2_numeric_diagnostic,40,39
+L3_liquidity_tier_relative_return,cost5_followup,49,47
+L3_liquidity_tier_relative_return,strict_cost10,2,2
+L5_vol_adjusted_return,cost2_numeric_diagnostic,11,10
+L5_vol_adjusted_return,cost5_followup,11,11
+L5_vol_adjusted_return,strict_cost10,100,66

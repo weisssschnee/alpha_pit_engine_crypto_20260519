@@ -1223,47 +1223,54 @@ runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balance
 runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_selected_label_cost_tier_summary.csv,16dbde2,add crypto a7ff15 cost tiered followup,2729
 runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_selected_motif_summary.csv,16dbde2,add crypto a7ff15 cost tiered followup,162
 runtime,A7FF-15-COST-TIERED-BALANCED-FOLLOWUP,runtime/a7ff15_cost_tiered_balanced_followup/a7ff15_selected_semantic_summary.csv,16dbde2,add crypto a7ff15 cost tiered followup,311
-runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_decision_counts_all_shards.csv,,,2823
-runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_label_response_metrics_all_shards.csv,,,1508628
-runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_label_summary.csv,,,1507
-runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_manifest.json,,,774
-runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_non_l7_clue_summary.csv,,,3066
-runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_selected_portfolio_queue_all_shards.csv,,,51313
-runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_shard_summary.csv,,,817
+runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_decision_counts_all_shards.csv,433af45,run crypto a7ff16 followup and triage selector,2823
+runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_label_response_metrics_all_shards.csv,433af45,run crypto a7ff16 followup and triage selector,1508628
+runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_label_summary.csv,433af45,run crypto a7ff16 followup and triage selector,1507
+runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_manifest.json,433af45,run crypto a7ff16 followup and triage selector,774
+runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_non_l7_clue_summary.csv,433af45,run crypto a7ff16 followup and triage selector,3066
+runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_selected_portfolio_queue_all_shards.csv,433af45,run crypto a7ff16 followup and triage selector,51313
+runtime,A7FF-16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,runtime/a7ff16_company_numeric_followup_aggregate/a7ff16_shard_summary.csv,433af45,run crypto a7ff16 followup and triage selector,817
 runtime,A7FF-16-COST-TIERED-NUMERIC-FOLLOWUP-CONTRACT,runtime/a7ff16_cost_tiered_numeric_followup_contract/a7ff16_company_runner_config.json,d3bb2a4,add crypto a7ff16 numeric followup contract,958
 runtime,A7FF-16-COST-TIERED-NUMERIC-FOLLOWUP-CONTRACT,runtime/a7ff16_cost_tiered_numeric_followup_contract/a7ff16_execution_motif_summary.csv,d3bb2a4,add crypto a7ff16 numeric followup contract,132
 runtime,A7FF-16-COST-TIERED-NUMERIC-FOLLOWUP-CONTRACT,runtime/a7ff16_cost_tiered_numeric_followup_contract/a7ff16_execution_queue.csv,d3bb2a4,add crypto a7ff16 numeric followup contract,23976
 runtime,A7FF-16-COST-TIERED-NUMERIC-FOLLOWUP-CONTRACT,runtime/a7ff16_cost_tiered_numeric_followup_contract/a7ff16_execution_semantic_summary.csv,d3bb2a4,add crypto a7ff16 numeric followup contract,191
 runtime,A7FF-16-COST-TIERED-NUMERIC-FOLLOWUP-CONTRACT,runtime/a7ff16_cost_tiered_numeric_followup_contract/a7ff16_label_target_summary.csv,d3bb2a4,add crypto a7ff16 numeric followup contract,570
 runtime,A7FF-16-COST-TIERED-NUMERIC-FOLLOWUP-CONTRACT,runtime/a7ff16_cost_tiered_numeric_followup_contract/a7ff16_manifest.json,d3bb2a4,add crypto a7ff16 numeric followup contract,817
-runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_control_dominance_metrics.csv,,,2614815
-runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_control_summary.csv,,,454
-runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_decision_counts.csv,,,1494
-runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_decision_record.json,,,2372
-runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_family_decision_summary.csv,,,1584
-runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_label_response_metrics.csv,,,774655
-runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_manifest.json,,,2372
-runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_materialization_metrics.csv,,,13059
-runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_nonoverlap_stats.csv,,,99158
-runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_portfolio_marginal_proxy.csv,,,42415
-runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_selected_portfolio_queue.csv,,,29466
-runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_control_dominance_metrics.csv,,,2614597
-runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_control_summary.csv,,,457
-runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_decision_counts.csv,,,1226
-runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_decision_record.json,,,2373
-runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_family_decision_summary.csv,,,1590
-runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_label_response_metrics.csv,,,774291
-runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_manifest.json,,,2373
-runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_materialization_metrics.csv,,,13029
-runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_nonoverlap_stats.csv,,,99053
-runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_portfolio_marginal_proxy.csv,,,41827
-runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_selected_portfolio_queue.csv,,,23664
-runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_internal_selected_label_distribution.csv,,,278
-runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_internal_selected_non_l7_label_distribution.csv,,,233
-runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_internal_selected_semantic_distribution.csv,,,257
-runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_manifest.json,,,858
-runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_raw_clue_label_distribution.csv,,,235
-runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_raw_clue_semantic_distribution.csv,,,264
+runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_control_dominance_metrics.csv,433af45,run crypto a7ff16 followup and triage selector,2614815
+runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_control_summary.csv,433af45,run crypto a7ff16 followup and triage selector,454
+runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_decision_counts.csv,433af45,run crypto a7ff16 followup and triage selector,1494
+runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_decision_record.json,433af45,run crypto a7ff16 followup and triage selector,2372
+runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_family_decision_summary.csv,433af45,run crypto a7ff16 followup and triage selector,1584
+runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_label_response_metrics.csv,433af45,run crypto a7ff16 followup and triage selector,774655
+runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_manifest.json,433af45,run crypto a7ff16 followup and triage selector,2372
+runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_materialization_metrics.csv,433af45,run crypto a7ff16 followup and triage selector,13059
+runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_nonoverlap_stats.csv,433af45,run crypto a7ff16 followup and triage selector,99158
+runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_portfolio_marginal_proxy.csv,433af45,run crypto a7ff16 followup and triage selector,42415
+runtime,A7FF-16S00,runtime/a7ff16_company_numeric_followup_shard_00/a7ff16s00_selected_portfolio_queue.csv,433af45,run crypto a7ff16 followup and triage selector,29466
+runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_control_dominance_metrics.csv,433af45,run crypto a7ff16 followup and triage selector,2614597
+runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_control_summary.csv,433af45,run crypto a7ff16 followup and triage selector,457
+runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_decision_counts.csv,433af45,run crypto a7ff16 followup and triage selector,1226
+runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_decision_record.json,433af45,run crypto a7ff16 followup and triage selector,2373
+runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_family_decision_summary.csv,433af45,run crypto a7ff16 followup and triage selector,1590
+runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_label_response_metrics.csv,433af45,run crypto a7ff16 followup and triage selector,774291
+runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_manifest.json,433af45,run crypto a7ff16 followup and triage selector,2373
+runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_materialization_metrics.csv,433af45,run crypto a7ff16 followup and triage selector,13029
+runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_nonoverlap_stats.csv,433af45,run crypto a7ff16 followup and triage selector,99053
+runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_portfolio_marginal_proxy.csv,433af45,run crypto a7ff16 followup and triage selector,41827
+runtime,A7FF-16S01,runtime/a7ff16_company_numeric_followup_shard_01/a7ff16s01_selected_portfolio_queue.csv,433af45,run crypto a7ff16 followup and triage selector,23664
+runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_internal_selected_label_distribution.csv,433af45,run crypto a7ff16 followup and triage selector,278
+runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_internal_selected_non_l7_label_distribution.csv,433af45,run crypto a7ff16 followup and triage selector,233
+runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_internal_selected_semantic_distribution.csv,433af45,run crypto a7ff16 followup and triage selector,257
+runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_manifest.json,433af45,run crypto a7ff16 followup and triage selector,858
+runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_raw_clue_label_distribution.csv,433af45,run crypto a7ff16 followup and triage selector,235
+runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_raw_clue_semantic_distribution.csv,433af45,run crypto a7ff16 followup and triage selector,264
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_candidate_label_cost_tier_summary.csv,,,688
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_external_candidate_pool.csv,,,351386
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_external_label_balanced_selected_queue.csv,,,70815
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_manifest.json,,,919
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_selected_label_cost_tier_summary.csv,,,345
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_selected_motif_summary.csv,,,97
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_selected_semantic_summary.csv,,,174
 runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_feature_pair_policy.csv,b725826,add crypto a7ff field to factor compiler,25215
 runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_feature_pair_similarity.csv,b725826,add crypto a7ff field to factor compiler,64874
 runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_field_response_vectors.csv,b725826,add crypto a7ff field to factor compiler,14739
@@ -1373,18 +1380,19 @@ report,A7FF12S07-COMPANY-NUMERIC-PROBE,reports/CRYPTO_A7FF12S07_COMPANY_NUMERIC_
 report,A7FF13-WAVE-TRIAGE,reports/CRYPTO_A7FF13_WAVE_TRIAGE_20260530.md,bdba34e,run crypto a7ff12 numeric wave,5478
 report,A7FF14-LABEL-BALANCED-SELECTOR-REPAIR,reports/CRYPTO_A7FF14_LABEL_BALANCED_SELECTOR_REPAIR_20260530.md,9fa8d43,repair crypto a7ff selector label balance,24880
 report,A7FF15-COST-TIERED-BALANCED-FOLLOWUP,reports/CRYPTO_A7FF15_COST_TIERED_BALANCED_FOLLOWUP_20260530.md,16dbde2,add crypto a7ff15 cost tiered followup,28680
-runtime,A7FF16,runtime/a7ff16_company_parallel/a7ff16_company_launch_manifest.csv,,,1625
-runtime,A7FF16,runtime/a7ff16_company_parallel/a7ff16s00.err.log,,,880
-runtime,A7FF16,runtime/a7ff16_company_parallel/a7ff16s00.out.log,,,2548
-runtime,A7FF16,runtime/a7ff16_company_parallel/a7ff16s01.err.log,,,880
-runtime,A7FF16,runtime/a7ff16_company_parallel/a7ff16s01.out.log,,,2549
-runtime,A7FF16,runtime/a7ff16_company_parallel/run_a7ff16s00.ps1,,,1199
-runtime,A7FF16,runtime/a7ff16_company_parallel/run_a7ff16s01.ps1,,,1200
-report,A7FF16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,reports/CRYPTO_A7FF16_COMPANY_NUMERIC_FOLLOWUP_AGGREGATE_20260530.md,,,11122
+runtime,A7FF16,runtime/a7ff16_company_parallel/a7ff16_company_launch_manifest.csv,433af45,run crypto a7ff16 followup and triage selector,1625
+runtime,A7FF16,runtime/a7ff16_company_parallel/a7ff16s00.err.log,433af45,run crypto a7ff16 followup and triage selector,880
+runtime,A7FF16,runtime/a7ff16_company_parallel/a7ff16s00.out.log,433af45,run crypto a7ff16 followup and triage selector,2548
+runtime,A7FF16,runtime/a7ff16_company_parallel/a7ff16s01.err.log,433af45,run crypto a7ff16 followup and triage selector,880
+runtime,A7FF16,runtime/a7ff16_company_parallel/a7ff16s01.out.log,433af45,run crypto a7ff16 followup and triage selector,2549
+runtime,A7FF16,runtime/a7ff16_company_parallel/run_a7ff16s00.ps1,433af45,run crypto a7ff16 followup and triage selector,1199
+runtime,A7FF16,runtime/a7ff16_company_parallel/run_a7ff16s01.ps1,433af45,run crypto a7ff16 followup and triage selector,1200
+report,A7FF16-COMPANY-NUMERIC-FOLLOWUP-AGGREGATE,reports/CRYPTO_A7FF16_COMPANY_NUMERIC_FOLLOWUP_AGGREGATE_20260530.md,433af45,run crypto a7ff16 followup and triage selector,11122
 report,A7FF16-COST-TIERED-NUMERIC-FOLLOWUP-CONTRACT,reports/CRYPTO_A7FF16_COST_TIERED_NUMERIC_FOLLOWUP_CONTRACT_20260530.md,d3bb2a4,add crypto a7ff16 numeric followup contract,43758
-report,A7FF16S00-COMPANY-NUMERIC-FOLLOWUP,reports/CRYPTO_A7FF16S00_COMPANY_NUMERIC_FOLLOWUP_20260530.md,,,54014
-report,A7FF16S01-COMPANY-NUMERIC-FOLLOWUP,reports/CRYPTO_A7FF16S01_COMPANY_NUMERIC_FOLLOWUP_20260530.md,,,43788
-report,A7FF17-FOLLOWUP-SELECTOR-TRIAGE,reports/CRYPTO_A7FF17_FOLLOWUP_SELECTOR_TRIAGE_20260530.md,,,3803
+report,A7FF16S00-COMPANY-NUMERIC-FOLLOWUP,reports/CRYPTO_A7FF16S00_COMPANY_NUMERIC_FOLLOWUP_20260530.md,433af45,run crypto a7ff16 followup and triage selector,54014
+report,A7FF16S01-COMPANY-NUMERIC-FOLLOWUP,reports/CRYPTO_A7FF16S01_COMPANY_NUMERIC_FOLLOWUP_20260530.md,433af45,run crypto a7ff16 followup and triage selector,43788
+report,A7FF17-FOLLOWUP-SELECTOR-TRIAGE,reports/CRYPTO_A7FF17_FOLLOWUP_SELECTOR_TRIAGE_20260530.md,433af45,run crypto a7ff16 followup and triage selector,3803
+report,A7FF18-EXTERNAL-LABEL-BALANCED-SELECTOR,reports/CRYPTO_A7FF18_EXTERNAL_LABEL_BALANCED_SELECTOR_20260530.md,,,4360
 report,A7FF2-FEATURE-PAIR-CLUSTERING,reports/CRYPTO_A7FF2_FEATURE_PAIR_CLUSTERING_20260530.md,b725826,add crypto a7ff field to factor compiler,28233
 report,A7FF3-COARSE-TO-FINE-GENERATION-CONTRACT,reports/CRYPTO_A7FF3_COARSE_TO_FINE_GENERATION_CONTRACT_20260530.md,b725826,add crypto a7ff field to factor compiler,5677
 report,A7FF4-FEATURE-ROLE-PROMOTION,reports/CRYPTO_A7FF4_FEATURE_ROLE_PROMOTION_20260530.md,b725826,add crypto a7ff field to factor compiler,5766
@@ -1394,13 +1402,13 @@ report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_
 report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
 report,A7FF9-CONTINUATION-COMPARISON,reports/CRYPTO_A7FF9_CONTINUATION_COMPARISON_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,3330
 report,A7FF9-EXPANDED-NUMERIC-PROBE-CONTINUATION,reports/CRYPTO_A7FF9_EXPANDED_NUMERIC_PROBE_CONTINUATION_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,21246
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,d3bb2a4,add crypto a7ff16 numeric followup contract,231476
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,433af45,run crypto a7ff16 followup and triage selector,237059
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,5230053,refresh crypto a7pm registry after selector counterfactual,94548
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,de26507,add crypto a7pm governance registry,391
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,d3bb2a4,add crypto a7ff16 numeric followup contract,105864
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,d3bb2a4,add crypto a7ff16 numeric followup contract,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,433af45,run crypto a7ff16 followup and triage selector,108857
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,433af45,run crypto a7ff16 followup and triage selector,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,de26507,add crypto a7pm governance registry,332
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,d3bb2a4,add crypto a7ff16 numeric followup contract,57998
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,433af45,run crypto a7ff16 followup and triage selector,59549
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -1421,7 +1429,7 @@ runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,de26
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,de26507,add crypto a7pm governance registry,282
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,de26507,add crypto a7pm governance registry,821
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,de26507,add crypto a7pm governance registry,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,d3bb2a4,add crypto a7ff16 numeric followup contract,4508
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,433af45,run crypto a7ff16 followup and triage selector,4986
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
 report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,de26507,add crypto a7pm governance registry,2160

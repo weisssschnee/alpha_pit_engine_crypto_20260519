@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T04:51:58Z
+Generated: 2026-05-30T04:56:05Z
 
 ## Decision
 
@@ -12,20 +12,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
-?? reports/CRYPTO_A7FF16S00_COMPANY_NUMERIC_FOLLOWUP_20260530.md
-?? reports/CRYPTO_A7FF16S01_COMPANY_NUMERIC_FOLLOWUP_20260530.md
-?? reports/CRYPTO_A7FF16_COMPANY_NUMERIC_FOLLOWUP_AGGREGATE_20260530.md
-?? reports/CRYPTO_A7FF17_FOLLOWUP_SELECTOR_TRIAGE_20260530.md
-?? runtime/a7ff16_company_numeric_followup_aggregate/
-?? runtime/a7ff16_company_numeric_followup_shard_00/
-?? runtime/a7ff16_company_numeric_followup_shard_01/
-?? runtime/a7ff16_company_parallel/
-?? runtime/a7ff17_followup_selector_triage/
-?? scripts/crypto_a7ff16_company_followup_aggregate.py
-?? scripts/crypto_a7ff16_company_followup_launcher.ps1
-?? scripts/crypto_a7ff17_followup_selector_triage.py
-HEAD=d3bb2a45b5b4e60c28b9c9d632bb20e0321c8896
-origin/main=d3bb2a45b5b4e60c28b9c9d632bb20e0321c8896
+?? reports/CRYPTO_A7FF18_EXTERNAL_LABEL_BALANCED_SELECTOR_20260530.md
+?? runtime/a7ff18_external_label_balanced_selector/
+?? scripts/crypto_a7ff18_external_label_balanced_selector.py
+HEAD=433af450010afcf0f03d95322287edc76b0b3204
+origin/main=433af450010afcf0f03d95322287edc76b0b3204
 HEAD == origin/main: True
 ```
 
@@ -33,7 +24,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 1601,
+  "artifact_count": 1609,
   "authorization_record_count": 638,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -47,12 +38,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T04:51:58Z",
-  "head": "d3bb2a45b5b4e60c28b9c9d632bb20e0321c8896",
+  "generated_at": "2026-05-30T04:56:05Z",
+  "head": "433af450010afcf0f03d95322287edc76b0b3204",
   "head_equals_origin_main": true,
-  "origin_main": "d3bb2a45b5b4e60c28b9c9d632bb20e0321c8896",
+  "origin_main": "433af450010afcf0f03d95322287edc76b0b3204",
   "stage": "A7PM-0",
-  "stage_count": 190
+  "stage_count": 191
 }
 ```
 
@@ -71,7 +62,7 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |      77 |
+| valid_or_historical_record   | governance_or_audit        |      78 |
 | valid_or_historical_record   | contract                   |      38 |
 | valid_or_historical_record   | smoke                      |       7 |
 | valid_or_historical_record   | diagnostic                 |       5 |
