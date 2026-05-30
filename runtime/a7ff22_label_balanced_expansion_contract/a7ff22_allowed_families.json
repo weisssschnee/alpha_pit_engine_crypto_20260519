@@ -1,0 +1,76 @@
+[
+  {
+    "family": "G0_basis_premium_volatility",
+    "label_targets": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L3_liquidity_tier_relative_return",
+      "L5_vol_adjusted_return"
+    ],
+    "motifs": [
+      "sub",
+      "safe_div_abs",
+      "gated_sign",
+      "spread_rank",
+      "mul"
+    ],
+    "semantic_pairs": [
+      "basis_premium_like|volatility_like"
+    ]
+  },
+  {
+    "family": "G1_basis_premium_positioning",
+    "label_targets": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L3_liquidity_tier_relative_return",
+      "L5_vol_adjusted_return"
+    ],
+    "motifs": [
+      "safe_div_abs",
+      "sub",
+      "gated_sign",
+      "spread_rank",
+      "mul"
+    ],
+    "semantic_pairs": [
+      "basis_premium_like|positioning_like"
+    ]
+  },
+  {
+    "family": "G2_basis_premium_relative_value",
+    "label_targets": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L3_liquidity_tier_relative_return",
+      "L5_vol_adjusted_return"
+    ],
+    "motifs": [
+      "sub",
+      "spread_rank",
+      "safe_div_abs",
+      "gated_sign"
+    ],
+    "semantic_pairs": [
+      "basis_premium_like|basis_premium_like"
+    ]
+  },
+  {
+    "family": "G3_basis_premium_price_state",
+    "label_targets": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L3_liquidity_tier_relative_return",
+      "L5_vol_adjusted_return"
+    ],
+    "motifs": [
+      "sub",
+      "gated_sign",
+      "mul",
+      "safe_div_abs"
+    ],
+    "semantic_pairs": [
+      "basis_premium_like|price_like"
+    ]
+  }
+]

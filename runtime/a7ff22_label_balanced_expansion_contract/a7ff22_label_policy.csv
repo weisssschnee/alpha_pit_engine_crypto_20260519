@@ -1,0 +1,5 @@
+label_family,seed_rows,unique_blueprints,strict_cost10_rows,cost5_or_better_rows
+L0_raw_forward_return,16,14,6,16
+L1_cross_sectional_relative_return,16,16,8,16
+L3_liquidity_tier_relative_return,16,16,0,16
+L5_vol_adjusted_return,16,14,16,16

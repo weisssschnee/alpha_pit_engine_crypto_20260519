@@ -1,0 +1,18 @@
+{
+  "forbid_a7ff8_internal_selected_queue_as_source_of_truth": true,
+  "l3_policy": "cost5_or_better_allowed; strict_cost10_preferred_but_not_required",
+  "label_families": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return"
+  ],
+  "label_quota_share": 0.25,
+  "max_top_label_share": 0.3,
+  "max_top_motif_share": 0.35,
+  "max_top_semantic_share": 0.35,
+  "min_cost5_or_better_share": 0.75,
+  "min_strict_cost10_rows_after_selection": 80,
+  "min_unique_blueprints_after_selection": 120,
+  "must_use_external_label_balanced_selector": true
+}

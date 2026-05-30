@@ -1,0 +1,27 @@
+{
+  "authorizes_a7ff23_label_balanced_generation_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF22_LABEL_BALANCED_EXPANSION_CONTRACT_READY_FOR_A7FF23",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T05:15:14Z",
+  "generation_budget": {
+    "company_numeric_shard_size": 120,
+    "company_numeric_shards": 8,
+    "company_numeric_wave_blueprints": 960,
+    "deep_diagnostic_target": 64,
+    "external_selector_label_quota": 60,
+    "external_selector_target_rows": 240,
+    "generated_blueprints_target": 9600,
+    "materialization_target": 960,
+    "max_parallel_company_shards": 2
+  },
+  "seed_rows": 64,
+  "seed_unique_blueprints": 39,
+  "source_a7ff21_decision": "PASS_A7FF21_EXTERNAL_CONFIRMATION_SELECTOR_READY_FOR_A7FF22_WITH_BLUEPRINT_DIVERSITY_WARNING",
+  "stage": "A7FF-22-LABEL-BALANCED-EXPANSION-CONTRACT",
+  "uses_may": false
+}

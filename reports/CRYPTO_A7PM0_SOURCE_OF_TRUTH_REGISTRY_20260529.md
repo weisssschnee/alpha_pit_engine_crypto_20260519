@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T05:12:31Z
+Generated: 2026-05-30T05:15:47Z
 
 ## Decision
 
@@ -12,26 +12,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
-?? reports/CRYPTO_A7FF19S00_COMPANY_NUMERIC_CONFIRMATION_20260530.md
-?? reports/CRYPTO_A7FF19S01_COMPANY_NUMERIC_CONFIRMATION_20260530.md
-?? reports/CRYPTO_A7FF19_COMPANY_NUMERIC_CONFIRMATION_AGGREGATE_20260530.md
-?? reports/CRYPTO_A7FF19_EXTERNAL_SELECTOR_CONFIRMATION_CONTRACT_20260530.md
-?? reports/CRYPTO_A7FF20_CONFIRMATION_SELECTOR_TRIAGE_20260530.md
-?? reports/CRYPTO_A7FF21_EXTERNAL_CONFIRMATION_SELECTOR_20260530.md
-?? runtime/a7ff19_company_numeric_confirmation_aggregate/
-?? runtime/a7ff19_company_numeric_confirmation_shard_00/
-?? runtime/a7ff19_company_numeric_confirmation_shard_01/
-?? runtime/a7ff19_company_parallel/
-?? runtime/a7ff19_external_selector_confirmation_contract/
-?? runtime/a7ff20_confirmation_selector_triage/
-?? runtime/a7ff21_external_confirmation_selector/
-?? scripts/crypto_a7ff19_company_confirmation_aggregate.py
-?? scripts/crypto_a7ff19_company_confirmation_launcher.ps1
-?? scripts/crypto_a7ff19_external_selector_confirmation_contract.py
-?? scripts/crypto_a7ff20_confirmation_selector_triage.py
-?? scripts/crypto_a7ff21_external_confirmation_selector.py
-HEAD=8392554edf867031ffb6fa23e29a20ade96d40cb
-origin/main=8392554edf867031ffb6fa23e29a20ade96d40cb
+?? reports/CRYPTO_A7FF22_LABEL_BALANCED_EXPANSION_CONTRACT_20260530.md
+?? runtime/a7ff22_label_balanced_expansion_contract/
+?? scripts/crypto_a7ff22_label_balanced_expansion_contract.py
+HEAD=039707500fa9f4cbf638f5b42c88dbc880a0b194
+origin/main=039707500fa9f4cbf638f5b42c88dbc880a0b194
 HEAD == origin/main: True
 ```
 
@@ -39,7 +24,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 1670,
+  "artifact_count": 1678,
   "authorization_record_count": 638,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -53,12 +38,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T05:12:31Z",
-  "head": "8392554edf867031ffb6fa23e29a20ade96d40cb",
+  "generated_at": "2026-05-30T05:15:47Z",
+  "head": "039707500fa9f4cbf638f5b42c88dbc880a0b194",
   "head_equals_origin_main": true,
-  "origin_main": "8392554edf867031ffb6fa23e29a20ade96d40cb",
+  "origin_main": "039707500fa9f4cbf638f5b42c88dbc880a0b194",
   "stage": "A7PM-0",
-  "stage_count": 198
+  "stage_count": 199
 }
 ```
 
@@ -78,7 +63,7 @@ HEAD == origin/main: True
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |      83 |
-| valid_or_historical_record   | contract                   |      39 |
+| valid_or_historical_record   | contract                   |      40 |
 | valid_or_historical_record   | smoke                      |       7 |
 | valid_or_historical_record   | diagnostic                 |       5 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
