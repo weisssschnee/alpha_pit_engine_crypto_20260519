@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF19_COMPANY_NUMERIC_CONFIRMATION_AGGREGATE_BUILT",
+  "executes_generation": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T05:08:21Z",
+  "missing_manifests": [],
+  "non_l7_label_families": 4,
+  "shard_count_complete": 2,
+  "shard_count_expected": 2,
+  "stage": "A7FF-19-COMPANY-NUMERIC-CONFIRMATION-AGGREGATE",
+  "total_input_blueprints": 56,
+  "total_label_response_rows": 1120,
+  "total_materialized_activity_ok": 56,
+  "total_non_l7_numeric_clue_rows": 276,
+  "total_portfolio_queue_count": 56,
+  "total_rank_label_diagnostic_clue_rows": 56,
+  "total_selected_portfolio_queue_count": 41,
+  "uses_may": false
+}

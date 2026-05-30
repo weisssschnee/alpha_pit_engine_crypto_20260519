@@ -1264,18 +1264,66 @@ runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage
 runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_manifest.json,433af45,run crypto a7ff16 followup and triage selector,858
 runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_raw_clue_label_distribution.csv,433af45,run crypto a7ff16 followup and triage selector,235
 runtime,A7FF-17-FOLLOWUP-SELECTOR-TRIAGE,runtime/a7ff17_followup_selector_triage/a7ff17_raw_clue_semantic_distribution.csv,433af45,run crypto a7ff16 followup and triage selector,264
-runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_candidate_label_cost_tier_summary.csv,,,688
-runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_external_candidate_pool.csv,,,351386
-runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_external_label_balanced_selected_queue.csv,,,70815
-runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_manifest.json,,,919
-runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_selected_label_cost_tier_summary.csv,,,345
-runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_selected_motif_summary.csv,,,97
-runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_selected_semantic_summary.csv,,,174
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_candidate_label_cost_tier_summary.csv,8392554,repair crypto a7ff external label selector,688
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_external_candidate_pool.csv,8392554,repair crypto a7ff external label selector,351386
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_external_label_balanced_selected_queue.csv,8392554,repair crypto a7ff external label selector,70815
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_manifest.json,8392554,repair crypto a7ff external label selector,919
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_selected_label_cost_tier_summary.csv,8392554,repair crypto a7ff external label selector,345
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_selected_motif_summary.csv,8392554,repair crypto a7ff external label selector,97
+runtime,A7FF-18-EXTERNAL-LABEL-BALANCED-SELECTOR,runtime/a7ff18_external_label_balanced_selector/a7ff18_selected_semantic_summary.csv,8392554,repair crypto a7ff external label selector,174
+runtime,A7FF-19-COMPANY-NUMERIC-CONFIRMATION-AGGREGATE,runtime/a7ff19_company_numeric_confirmation_aggregate/a7ff19_decision_counts_all_shards.csv,,,2820
+runtime,A7FF-19-COMPANY-NUMERIC-CONFIRMATION-AGGREGATE,runtime/a7ff19_company_numeric_confirmation_aggregate/a7ff19_label_response_metrics_all_shards.csv,,,880540
+runtime,A7FF-19-COMPANY-NUMERIC-CONFIRMATION-AGGREGATE,runtime/a7ff19_company_numeric_confirmation_aggregate/a7ff19_label_summary.csv,,,1482
+runtime,A7FF-19-COMPANY-NUMERIC-CONFIRMATION-AGGREGATE,runtime/a7ff19_company_numeric_confirmation_aggregate/a7ff19_manifest.json,,,782
+runtime,A7FF-19-COMPANY-NUMERIC-CONFIRMATION-AGGREGATE,runtime/a7ff19_company_numeric_confirmation_aggregate/a7ff19_non_l7_clue_summary.csv,,,3064
+runtime,A7FF-19-COMPANY-NUMERIC-CONFIRMATION-AGGREGATE,runtime/a7ff19_company_numeric_confirmation_aggregate/a7ff19_selected_portfolio_queue_all_shards.csv,,,35988
+runtime,A7FF-19-COMPANY-NUMERIC-CONFIRMATION-AGGREGATE,runtime/a7ff19_company_numeric_confirmation_aggregate/a7ff19_shard_summary.csv,,,821
+runtime,A7FF-19-EXTERNAL-SELECTOR-CONFIRMATION-CONTRACT,runtime/a7ff19_external_selector_confirmation_contract/a7ff19_company_runner_config.json,,,962
+runtime,A7FF-19-EXTERNAL-SELECTOR-CONFIRMATION-CONTRACT,runtime/a7ff19_external_selector_confirmation_contract/a7ff19_execution_motif_summary.csv,,,111
+runtime,A7FF-19-EXTERNAL-SELECTOR-CONFIRMATION-CONTRACT,runtime/a7ff19_external_selector_confirmation_contract/a7ff19_execution_queue.csv,,,13904
+runtime,A7FF-19-EXTERNAL-SELECTOR-CONFIRMATION-CONTRACT,runtime/a7ff19_external_selector_confirmation_contract/a7ff19_execution_semantic_summary.csv,,,190
+runtime,A7FF-19-EXTERNAL-SELECTOR-CONFIRMATION-CONTRACT,runtime/a7ff19_external_selector_confirmation_contract/a7ff19_label_target_summary.csv,,,345
+runtime,A7FF-19-EXTERNAL-SELECTOR-CONFIRMATION-CONTRACT,runtime/a7ff19_external_selector_confirmation_contract/a7ff19_manifest.json,,,815
+runtime,A7FF-19S00,runtime/a7ff19_company_numeric_confirmation_shard_00/a7ff19s00_control_dominance_metrics.csv,,,1525983
+runtime,A7FF-19S00,runtime/a7ff19_company_numeric_confirmation_shard_00/a7ff19s00_control_summary.csv,,,456
+runtime,A7FF-19S00,runtime/a7ff19_company_numeric_confirmation_shard_00/a7ff19s00_decision_counts.csv,,,1491
+runtime,A7FF-19S00,runtime/a7ff19_company_numeric_confirmation_shard_00/a7ff19s00_decision_record.json,,,2374
+runtime,A7FF-19S00,runtime/a7ff19_company_numeric_confirmation_shard_00/a7ff19s00_family_decision_summary.csv,,,1185
+runtime,A7FF-19S00,runtime/a7ff19_company_numeric_confirmation_shard_00/a7ff19s00_label_response_metrics.csv,,,453119
+runtime,A7FF-19S00,runtime/a7ff19_company_numeric_confirmation_shard_00/a7ff19s00_manifest.json,,,2374
+runtime,A7FF-19S00,runtime/a7ff19_company_numeric_confirmation_shard_00/a7ff19s00_materialization_metrics.csv,,,7720
+runtime,A7FF-19S00,runtime/a7ff19_company_numeric_confirmation_shard_00/a7ff19s00_nonoverlap_stats.csv,,,57779
+runtime,A7FF-19S00,runtime/a7ff19_company_numeric_confirmation_shard_00/a7ff19s00_portfolio_marginal_proxy.csv,,,25213
+runtime,A7FF-19S00,runtime/a7ff19_company_numeric_confirmation_shard_00/a7ff19s00_selected_portfolio_queue.csv,,,18320
+runtime,A7FF-19S01,runtime/a7ff19_company_numeric_confirmation_shard_01/a7ff19s01_control_dominance_metrics.csv,,,1526048
+runtime,A7FF-19S01,runtime/a7ff19_company_numeric_confirmation_shard_01/a7ff19s01_control_summary.csv,,,455
+runtime,A7FF-19S01,runtime/a7ff19_company_numeric_confirmation_shard_01/a7ff19s01_decision_counts.csv,,,1226
+runtime,A7FF-19S01,runtime/a7ff19_company_numeric_confirmation_shard_01/a7ff19s01_decision_record.json,,,2375
+runtime,A7FF-19S01,runtime/a7ff19_company_numeric_confirmation_shard_01/a7ff19s01_family_decision_summary.csv,,,1514
+runtime,A7FF-19S01,runtime/a7ff19_company_numeric_confirmation_shard_01/a7ff19s01_label_response_metrics.csv,,,451164
+runtime,A7FF-19S01,runtime/a7ff19_company_numeric_confirmation_shard_01/a7ff19s01_manifest.json,,,2375
+runtime,A7FF-19S01,runtime/a7ff19_company_numeric_confirmation_shard_01/a7ff19s01_materialization_metrics.csv,,,7636
+runtime,A7FF-19S01,runtime/a7ff19_company_numeric_confirmation_shard_01/a7ff19s01_nonoverlap_stats.csv,,,57699
+runtime,A7FF-19S01,runtime/a7ff19_company_numeric_confirmation_shard_01/a7ff19s01_portfolio_marginal_proxy.csv,,,25231
+runtime,A7FF-19S01,runtime/a7ff19_company_numeric_confirmation_shard_01/a7ff19s01_selected_portfolio_queue.csv,,,19233
 runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_feature_pair_policy.csv,b725826,add crypto a7ff field to factor compiler,25215
 runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_feature_pair_similarity.csv,b725826,add crypto a7ff field to factor compiler,64874
 runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_field_response_vectors.csv,b725826,add crypto a7ff field to factor compiler,14739
 runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_manifest.json,b725826,add crypto a7ff field to factor compiler,348
 runtime,A7FF-2,runtime/a7ff2_feature_pair_clustering/a7ff2_semantic_response_clusters.csv,b725826,add crypto a7ff field to factor compiler,533
+runtime,A7FF-20-CONFIRMATION-SELECTOR-TRIAGE,runtime/a7ff20_confirmation_selector_triage/a7ff20_internal_selected_label_distribution.csv,,,234
+runtime,A7FF-20-CONFIRMATION-SELECTOR-TRIAGE,runtime/a7ff20_confirmation_selector_triage/a7ff20_internal_selected_non_l7_label_distribution.csv,,,234
+runtime,A7FF-20-CONFIRMATION-SELECTOR-TRIAGE,runtime/a7ff20_confirmation_selector_triage/a7ff20_internal_selected_semantic_distribution.csv,,,259
+runtime,A7FF-20-CONFIRMATION-SELECTOR-TRIAGE,runtime/a7ff20_confirmation_selector_triage/a7ff20_manifest.json,,,887
+runtime,A7FF-20-CONFIRMATION-SELECTOR-TRIAGE,runtime/a7ff20_confirmation_selector_triage/a7ff20_raw_clue_label_distribution.csv,,,234
+runtime,A7FF-20-CONFIRMATION-SELECTOR-TRIAGE,runtime/a7ff20_confirmation_selector_triage/a7ff20_raw_clue_semantic_distribution.csv,,,262
+runtime,A7FF-21-EXTERNAL-CONFIRMATION-SELECTOR,runtime/a7ff21_external_confirmation_selector/a7ff21_candidate_label_cost_tier_summary.csv,,,679
+runtime,A7FF-21-EXTERNAL-CONFIRMATION-SELECTOR,runtime/a7ff21_external_confirmation_selector/a7ff21_external_candidate_pool.csv,,,240991
+runtime,A7FF-21-EXTERNAL-CONFIRMATION-SELECTOR,runtime/a7ff21_external_confirmation_selector/a7ff21_external_confirmation_selected_queue.csv,,,56894
+runtime,A7FF-21-EXTERNAL-CONFIRMATION-SELECTOR,runtime/a7ff21_external_confirmation_selector/a7ff21_manifest.json,,,1015
+runtime,A7FF-21-EXTERNAL-CONFIRMATION-SELECTOR,runtime/a7ff21_external_confirmation_selector/a7ff21_selected_label_cost_tier_summary.csv,,,341
+runtime,A7FF-21-EXTERNAL-CONFIRMATION-SELECTOR,runtime/a7ff21_external_confirmation_selector/a7ff21_selected_motif_summary.csv,,,74
+runtime,A7FF-21-EXTERNAL-CONFIRMATION-SELECTOR,runtime/a7ff21_external_confirmation_selector/a7ff21_selected_semantic_summary.csv,,,174
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_candidate_blueprints.csv,b725826,add crypto a7ff field to factor compiler,3272
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_generation_layer_policy.json,b725826,add crypto a7ff field to factor compiler,754
 runtime,A7FF-3,runtime/a7ff3_coarse_to_fine_generation_contract/a7ff3_manifest.json,b725826,add crypto a7ff field to factor compiler,320
@@ -1392,8 +1440,21 @@ report,A7FF16-COST-TIERED-NUMERIC-FOLLOWUP-CONTRACT,reports/CRYPTO_A7FF16_COST_T
 report,A7FF16S00-COMPANY-NUMERIC-FOLLOWUP,reports/CRYPTO_A7FF16S00_COMPANY_NUMERIC_FOLLOWUP_20260530.md,433af45,run crypto a7ff16 followup and triage selector,54014
 report,A7FF16S01-COMPANY-NUMERIC-FOLLOWUP,reports/CRYPTO_A7FF16S01_COMPANY_NUMERIC_FOLLOWUP_20260530.md,433af45,run crypto a7ff16 followup and triage selector,43788
 report,A7FF17-FOLLOWUP-SELECTOR-TRIAGE,reports/CRYPTO_A7FF17_FOLLOWUP_SELECTOR_TRIAGE_20260530.md,433af45,run crypto a7ff16 followup and triage selector,3803
-report,A7FF18-EXTERNAL-LABEL-BALANCED-SELECTOR,reports/CRYPTO_A7FF18_EXTERNAL_LABEL_BALANCED_SELECTOR_20260530.md,,,4360
+report,A7FF18-EXTERNAL-LABEL-BALANCED-SELECTOR,reports/CRYPTO_A7FF18_EXTERNAL_LABEL_BALANCED_SELECTOR_20260530.md,8392554,repair crypto a7ff external label selector,4360
+runtime,A7FF19,runtime/a7ff19_company_parallel/a7ff19_company_launch_manifest.csv,,,1642
+runtime,A7FF19,runtime/a7ff19_company_parallel/a7ff19s00.err.log,,,880
+runtime,A7FF19,runtime/a7ff19_company_parallel/a7ff19s00.out.log,,,2520
+runtime,A7FF19,runtime/a7ff19_company_parallel/a7ff19s01.err.log,,,880
+runtime,A7FF19,runtime/a7ff19_company_parallel/a7ff19s01.out.log,,,2521
+runtime,A7FF19,runtime/a7ff19_company_parallel/run_a7ff19s00.ps1,,,1209
+runtime,A7FF19,runtime/a7ff19_company_parallel/run_a7ff19s01.ps1,,,1210
+report,A7FF19-COMPANY-NUMERIC-CONFIRMATION-AGGREGATE,reports/CRYPTO_A7FF19_COMPANY_NUMERIC_CONFIRMATION_AGGREGATE_20260530.md,,,11148
+report,A7FF19-EXTERNAL-SELECTOR-CONFIRMATION-CONTRACT,reports/CRYPTO_A7FF19_EXTERNAL_SELECTOR_CONFIRMATION_CONTRACT_20260530.md,,,31549
+report,A7FF19S00-COMPANY-NUMERIC-CONFIRMATION,reports/CRYPTO_A7FF19S00_COMPANY_NUMERIC_CONFIRMATION_20260530.md,,,34915
+report,A7FF19S01-COMPANY-NUMERIC-CONFIRMATION,reports/CRYPTO_A7FF19S01_COMPANY_NUMERIC_CONFIRMATION_20260530.md,,,36746
 report,A7FF2-FEATURE-PAIR-CLUSTERING,reports/CRYPTO_A7FF2_FEATURE_PAIR_CLUSTERING_20260530.md,b725826,add crypto a7ff field to factor compiler,28233
+report,A7FF20-CONFIRMATION-SELECTOR-TRIAGE,reports/CRYPTO_A7FF20_CONFIRMATION_SELECTOR_TRIAGE_20260530.md,,,3751
+report,A7FF21-EXTERNAL-CONFIRMATION-SELECTOR,reports/CRYPTO_A7FF21_EXTERNAL_CONFIRMATION_SELECTOR_20260530.md,,,4389
 report,A7FF3-COARSE-TO-FINE-GENERATION-CONTRACT,reports/CRYPTO_A7FF3_COARSE_TO_FINE_GENERATION_CONTRACT_20260530.md,b725826,add crypto a7ff field to factor compiler,5677
 report,A7FF4-FEATURE-ROLE-PROMOTION,reports/CRYPTO_A7FF4_FEATURE_ROLE_PROMOTION_20260530.md,b725826,add crypto a7ff field to factor compiler,5766
 report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
@@ -1402,13 +1463,13 @@ report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_
 report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
 report,A7FF9-CONTINUATION-COMPARISON,reports/CRYPTO_A7FF9_CONTINUATION_COMPARISON_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,3330
 report,A7FF9-EXPANDED-NUMERIC-PROBE-CONTINUATION,reports/CRYPTO_A7FF9_EXPANDED_NUMERIC_PROBE_CONTINUATION_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,21246
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,433af45,run crypto a7ff16 followup and triage selector,237059
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,8392554,repair crypto a7ff external label selector,240632
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,5230053,refresh crypto a7pm registry after selector counterfactual,94548
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,de26507,add crypto a7pm governance registry,391
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,433af45,run crypto a7ff16 followup and triage selector,108857
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,433af45,run crypto a7ff16 followup and triage selector,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,8392554,repair crypto a7ff external label selector,109690
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,8392554,repair crypto a7ff external label selector,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,de26507,add crypto a7pm governance registry,332
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,433af45,run crypto a7ff16 followup and triage selector,59549
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,8392554,repair crypto a7ff external label selector,59954
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -1429,7 +1490,7 @@ runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,de26
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,de26507,add crypto a7pm governance registry,282
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,de26507,add crypto a7pm governance registry,821
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,de26507,add crypto a7pm governance registry,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,433af45,run crypto a7ff16 followup and triage selector,4986
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,8392554,repair crypto a7ff external label selector,4493
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
 report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,de26507,add crypto a7pm governance registry,2160

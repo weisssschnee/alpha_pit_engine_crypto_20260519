@@ -1,0 +1,22 @@
+{
+  "authorizes_a7ff21_external_confirmation_selector": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7FF20_INTERNAL_SELECTOR_LABEL_CONCENTRATION_CONFIRMED_AFTER_EXTERNAL_QUEUE",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T05:09:47Z",
+  "raw_non_l7_clue_rows": 276,
+  "raw_non_l7_label_families": 4,
+  "raw_top_label_share": 0.32971014492753625,
+  "selected_non_l7_label_families": 4,
+  "selected_non_l7_rows": 41,
+  "selected_non_l7_top_label_share": 0.8780487804878049,
+  "selected_rows": 41,
+  "selected_top_label_share": 0.8780487804878049,
+  "source_a7ff19_decision": "PASS_A7FF19_COMPANY_NUMERIC_CONFIRMATION_AGGREGATE_BUILT",
+  "stage": "A7FF-20-CONFIRMATION-SELECTOR-TRIAGE",
+  "uses_may": false
+}

@@ -1,0 +1,74 @@
+[A7FF-19S00] loading symbols=96, base_fields=8, latent_fields=2
+[A7FF-19S00] evaluating blueprints=28, timestamps=3481, full_timestamps=21025
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FF19S00_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T05:06:09Z",
+  "input_blueprint_count": 28,
+  "label_response_rows": 560,
+  "materialized_activity_ok_count": 28,
+  "non_l7_numeric_clue_rows": 130,
+  "plan": {
+    "control_probe_cap": 256,
+    "controls": [
+      "wrong_lag_future",
+      "wrong_lag_stale",
+      "time_shuffle",
+      "symbol_shuffle",
+      "sign_flip",
+      "same_family_placebo"
+    ],
+    "deep_audit_cap": 64,
+    "fast_numeric_probe_cap": 256,
+    "horizons": [
+      "1h",
+      "4h",
+      "8h",
+      "24h"
+    ],
+    "input_blueprint_source": "runtime/a7ff7e_expanded_derivation_probe_contract/a7ff7e_expanded_blueprint_pool.csv",
+    "labels": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L3_liquidity_tier_relative_return",
+      "L5_vol_adjusted_return",
+      "L7_ranked_future_return_diagnostic_only"
+    ],
+    "materialize_cap": 384,
+    "portfolio_marginal_probe_cap": 128,
+    "promotion_blockers": [
+      "L7-only cannot promote",
+      "control_ratio >= 1.0 blocks",
+      "single semantic_pair > 35pct blocks",
+      "single skeleton > 15pct blocks",
+      "numeric replay required before any search authorization"
+    ],
+    "required_outputs": [
+      "a7ff8_materialization_metrics.csv",
+      "a7ff8_label_response_metrics.csv",
+      "a7ff8_control_dominance_metrics.csv",
+      "a7ff8_nonoverlap_stats.csv",
+      "a7ff8_portfolio_marginal_proxy.csv",
+      "a7ff8_decision_record.json"
+    ],
+    "selected_blueprints": 384,
+    "stage": "A7FF-8",
+    "status": "contract_only_not_executed"
+  },
+  "portfolio_queue_count": 28,
+  "queue_limit": 28,
+  "queue_offset": 0,
+  "queue_path": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7ff19_external_selector_confirmation_contract\\a7ff19_execution_queue.csv",
+  "queue_total_rows": 56,
+  "rank_label_diagnostic_clue_rows": 28,
+  "selected_portfolio_queue_count": 20,
+  "stage": "A7FF-19S00",
+  "uses_may": false
+}

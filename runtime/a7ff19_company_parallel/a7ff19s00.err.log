@@ -1,0 +1,8 @@
+D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote\scripts\crypto_a7aa1_primitive_response_map.py:119: RuntimeWarning: Mean of empty slice
+  mean = np.nanmean(raw, axis=0, keepdims=True)
+D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote\scripts\crypto_a7al2x5_evaluator_preflight_smoke.py:242: RuntimeWarning: Mean of empty slice
+  mean = np.nanmean(vals, axis=0, keepdims=True)
+D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote\scripts\crypto_a7al2x5_evaluator_preflight_smoke.py:222: RuntimeWarning: Mean of empty slice
+  mean = np.nanmean(values, axis=0, keepdims=True)
+D:\HermesWorker\venvs\phase3z33\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1997: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,

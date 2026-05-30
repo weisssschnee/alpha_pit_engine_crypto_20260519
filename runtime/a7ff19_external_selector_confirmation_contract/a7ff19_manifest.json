@@ -1,0 +1,20 @@
+{
+  "a7ff18_selected_rows": 80,
+  "authorizes_alpha_proof": false,
+  "authorizes_company_numeric_execution": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "cost5_or_better_execution_blueprints": 56,
+  "decision": "PASS_A7FF19_EXTERNAL_SELECTOR_CONFIRMATION_CONTRACT_READY_FOR_COMPANY_EXECUTION",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "execution_blueprints": 56,
+  "generated_at": "2026-05-30T05:02:53Z",
+  "source_a7ff18_decision": "PASS_A7FF18_EXTERNAL_LABEL_BALANCED_SELECTOR_READY_FOR_A7FF19",
+  "stage": "A7FF-19-EXTERNAL-SELECTOR-CONFIRMATION-CONTRACT",
+  "strict_cost10_execution_blueprints": 35,
+  "top_motif_share": 0.30357142857142855,
+  "top_semantic_share": 0.35714285714285715,
+  "uses_may": false
+}
