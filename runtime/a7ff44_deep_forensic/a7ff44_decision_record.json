@@ -1,0 +1,30 @@
+{
+  "authorizes_a7ff45_bounded_deep_replay": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "bounded_deep_replay_queue_family_count_below_2"
+  ],
+  "bounded_deep_replay_queue_count": 4,
+  "bounded_deep_replay_queue_family_count": 1,
+  "candidate_for_bounded_deep_replay_rows": 4,
+  "confirmed_family_count": 3,
+  "confirmed_rows": 12,
+  "decision": "HOLD_A7FF44_DEEP_FORENSIC_CONCENTRATION_OR_BREADTH_FAIL",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T18:20:51Z",
+  "non_reference_family_count": 2,
+  "reference_family_rows": 6,
+  "regime_singleton_rows": 0,
+  "source_a7ff43_decision": "PASS_A7FF43_REPAIRED_SELECTOR_NUMERIC_CONFIRMED_READY_FOR_DEEP_FORENSIC_NO_SEARCH_AUTH",
+  "stage": "A7FF-44",
+  "uses_may": false,
+  "warnings": [
+    "reference_family_at_cap",
+    "regime_family_singleton"
+  ]
+}

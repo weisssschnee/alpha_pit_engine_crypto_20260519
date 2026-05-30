@@ -4,11 +4,11 @@
   "authorizes_large_search": false,
   "authorizes_search": false,
   "authorizes_shadow_paper_live": false,
-  "blocked_task_count": 9,
+  "blocked_task_count": 10,
   "decision": "PASS_A7PM3_CURRENT_EXPERIMENT_BOARD_BUILT",
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T17:55:55Z",
+  "generated_at": "2026-05-30T18:22:13Z",
   "stage": "A7PM-3"
 }

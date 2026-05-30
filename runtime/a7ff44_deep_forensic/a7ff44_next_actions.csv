@@ -1,0 +1,4 @@
+route,status,reason
+A7FF-45_bounded_deep_replay,not_authorized,requires bounded replay queue to retain at least 2 non-reference/non-fragile families
+A7FF-R9_reference_regime_repair,required,basis self-pair is capped and regime singleton is not replay-eligible; repair before bounded replay
+formula_search,blocked,A7FF-44 is forensic only and does not authorize search

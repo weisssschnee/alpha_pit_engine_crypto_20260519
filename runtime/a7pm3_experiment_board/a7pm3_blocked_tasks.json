@@ -5,6 +5,7 @@
   "A7FF search execution": "numeric wave has clues but still no replay/search authorization",
   "A7FF-41 control-strict expansion": "not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family",
   "A7FF-43 deep forensic": "not authorized by A7FF-42; selected control-strict non-L7 evidence remains single-family",
+  "A7FF-45 bounded deep replay": "not authorized by A7FF-44; bounded replay queue is single-family after reference/regime filtering",
   "alpha proof": "not authorized",
   "direct OI-price rerun": "superseded weak prior / not authorized",
   "shadow/paper/live": "not authorized"

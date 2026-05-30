@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T17:55:37Z
+Generated: 2026-05-30T18:21:53Z
 
 ## Decision
 
@@ -15,14 +15,15 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF43_REPAIRED_SELECTOR_NUMERIC_CONFIRMATION_20260531.md
-?? runtime/a7ff43_repaired_selector_numeric_confirmation/
-?? scripts/crypto_a7ff43_repaired_selector_numeric_confirmation.py
-HEAD=987c4045b6096f2e2933b3e0a7c84a9d3e4baa81
-origin/main=987c4045b6096f2e2933b3e0a7c84a9d3e4baa81
+?? reports/CRYPTO_A7FF44_DEEP_FORENSIC_20260531.md
+?? runtime/a7ff44_deep_forensic/
+?? scripts/crypto_a7ff44_deep_forensic.py
+HEAD=75523965624212236f4944f77ebcbf22e131b5cb
+origin/main=75523965624212236f4944f77ebcbf22e131b5cb
 HEAD == origin/main: True
 ```
 
@@ -30,7 +31,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2339,
+  "artifact_count": 2347,
   "authorization_record_count": 683,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -44,12 +45,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T17:55:37Z",
-  "head": "987c4045b6096f2e2933b3e0a7c84a9d3e4baa81",
+  "generated_at": "2026-05-30T18:21:53Z",
+  "head": "75523965624212236f4944f77ebcbf22e131b5cb",
   "head_equals_origin_main": true,
-  "origin_main": "987c4045b6096f2e2933b3e0a7c84a9d3e4baa81",
+  "origin_main": "75523965624212236f4944f77ebcbf22e131b5cb",
   "stage": "A7PM-0",
-  "stage_count": 240
+  "stage_count": 241
 }
 ```
 
@@ -63,7 +64,7 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
 | hold                         | hold                       |      41 |
-| hold                         | diagnostic                 |       5 |
+| hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
@@ -91,6 +92,7 @@ HEAD == origin/main: True
   "A7AL-3": "large search not authorized",
   "A7FF-41": "not authorized by A7FF-40 because selected control-strict non-L7 evidence is still single-family",
   "A7FF-43": "not authorized by A7FF-42 because selected control-strict non-L7 evidence is still single-family",
+  "A7FF-45": "not authorized by A7FF-44 because bounded deep replay queue is single-family after reference/regime filtering",
   "alpha_proof": "not authorized",
   "direct_OI_price_rerun": "same objective rerun not authorized",
   "formula_search": "not authorized",
@@ -104,7 +106,7 @@ HEAD == origin/main: True
 ```json
 {
   "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
-  "A7FF-44": "deep forensic for A7FF-43 repaired-selector confirmed rows; no search",
+  "A7FF-R9": "reference/regime repair after A7FF-44 bounded queue single-family hold; no search",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```

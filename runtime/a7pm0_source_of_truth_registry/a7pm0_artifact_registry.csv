@@ -1878,24 +1878,31 @@ runtime,A7FF-42,runtime/a7ff42_family_balanced_numeric/a7ff42_portfolio_marginal
 runtime,A7FF-42,runtime/a7ff42_family_balanced_numeric/a7ff42_queue_summary.csv,1f7cb0e,run crypto a7ff42 family balanced numeric,578
 runtime,A7FF-42,runtime/a7ff42_family_balanced_numeric/a7ff42_selected_forensic.csv,1f7cb0e,run crypto a7ff42 family balanced numeric,11470
 runtime,A7FF-42,runtime/a7ff42_family_balanced_numeric/a7ff42_selected_portfolio_queue.csv,1f7cb0e,run crypto a7ff42 family balanced numeric,11143
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_confirmed_repaired_rows.csv,,,23498
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_control_dominance_metrics.csv,,,653759
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_control_summary.csv,,,447
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_decision_counts.csv,,,1026
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_decision_record.json,,,1276
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_family_confirmation.csv,,,368
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_family_decision_summary.csv,,,960
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_label_response_metrics.csv,,,192322
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_manifest.json,,,1276
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_materialization_metrics.csv,,,2986
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_next_actions.csv,,,330
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_nonoverlap_stats.csv,,,24913
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_numeric_probe_stdout.log,,,3334
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_portfolio_marginal_proxy.csv,,,11082
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_probe_selected_forensic.csv,,,2033
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_repaired_selector_numeric_queue.csv,,,12529
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_selected_portfolio_queue.csv,,,1965
-runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_unique_formula_queue.csv,,,12529
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_confirmed_repaired_rows.csv,7552396,confirm crypto a7ff repaired selector numerics,23498
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_control_dominance_metrics.csv,7552396,confirm crypto a7ff repaired selector numerics,653759
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_control_summary.csv,7552396,confirm crypto a7ff repaired selector numerics,447
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_decision_counts.csv,7552396,confirm crypto a7ff repaired selector numerics,1026
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_decision_record.json,7552396,confirm crypto a7ff repaired selector numerics,1276
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_family_confirmation.csv,7552396,confirm crypto a7ff repaired selector numerics,368
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_family_decision_summary.csv,7552396,confirm crypto a7ff repaired selector numerics,960
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_label_response_metrics.csv,7552396,confirm crypto a7ff repaired selector numerics,192322
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_manifest.json,7552396,confirm crypto a7ff repaired selector numerics,1276
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_materialization_metrics.csv,7552396,confirm crypto a7ff repaired selector numerics,2986
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_next_actions.csv,7552396,confirm crypto a7ff repaired selector numerics,330
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_nonoverlap_stats.csv,7552396,confirm crypto a7ff repaired selector numerics,24913
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_numeric_probe_stdout.log,7552396,confirm crypto a7ff repaired selector numerics,3334
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_portfolio_marginal_proxy.csv,7552396,confirm crypto a7ff repaired selector numerics,11082
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_probe_selected_forensic.csv,7552396,confirm crypto a7ff repaired selector numerics,2033
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_repaired_selector_numeric_queue.csv,7552396,confirm crypto a7ff repaired selector numerics,12529
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_selected_portfolio_queue.csv,7552396,confirm crypto a7ff repaired selector numerics,1965
+runtime,A7FF-43,runtime/a7ff43_repaired_selector_numeric_confirmation/a7ff43_unique_formula_queue.csv,7552396,confirm crypto a7ff repaired selector numerics,12529
+runtime,A7FF-44,runtime/a7ff44_deep_forensic/a7ff44_bounded_deep_replay_queue.csv,,,10353
+runtime,A7FF-44,runtime/a7ff44_deep_forensic/a7ff44_concentration_audit.csv,,,191
+runtime,A7FF-44,runtime/a7ff44_deep_forensic/a7ff44_decision_record.json,,,1026
+runtime,A7FF-44,runtime/a7ff44_deep_forensic/a7ff44_family_forensic.csv,,,629
+runtime,A7FF-44,runtime/a7ff44_deep_forensic/a7ff44_manifest.json,,,1026
+runtime,A7FF-44,runtime/a7ff44_deep_forensic/a7ff44_next_actions.csv,,,372
+runtime,A7FF-44,runtime/a7ff44_deep_forensic/a7ff44_row_forensic.csv,,,25290
 runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_blocked_factor_blueprints.csv,b725826,add crypto a7ff field to factor compiler,780
 runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_factor_candidate_blueprints.csv,b725826,add crypto a7ff field to factor compiler,3116
 runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_manifest.json,b725826,add crypto a7ff field to factor compiler,359
@@ -2117,7 +2124,8 @@ report,A7FF39-FOCUSED-TASKFLOW-FORENSIC,reports/CRYPTO_A7FF39_FOCUSED_TASKFLOW_F
 report,A7FF4-FEATURE-ROLE-PROMOTION,reports/CRYPTO_A7FF4_FEATURE_ROLE_PROMOTION_20260530.md,b725826,add crypto a7ff field to factor compiler,5766
 report,A7FF40-CONTROL-STRICT-FOLLOWUP,reports/CRYPTO_A7FF40_CONTROL_STRICT_FOLLOWUP_20260530.md,10cb5fa,run crypto a7ff40 control strict followup,47742
 report,A7FF42-FAMILY-BALANCED-NUMERIC,reports/CRYPTO_A7FF42_FAMILY_BALANCED_NUMERIC_20260530.md,1f7cb0e,run crypto a7ff42 family balanced numeric,33699
-report,A7FF43-REPAIRED-SELECTOR-NUMERIC-CONFIRMATION,reports/CRYPTO_A7FF43_REPAIRED_SELECTOR_NUMERIC_CONFIRMATION_20260531.md,,,58320
+report,A7FF43-REPAIRED-SELECTOR-NUMERIC-CONFIRMATION,reports/CRYPTO_A7FF43_REPAIRED_SELECTOR_NUMERIC_CONFIRMATION_20260531.md,7552396,confirm crypto a7ff repaired selector numerics,58320
+report,A7FF44-DEEP-FORENSIC,reports/CRYPTO_A7FF44_DEEP_FORENSIC_20260531.md,,,82816
 report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
 report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_DERIVATION_PROBE_CONTRACT_20260530.md,bd530c1,expand crypto a7ff derivation probe contract,25056
@@ -2132,13 +2140,13 @@ report,A7FFR4-COARSE-TO-FINE-GENERATION-REDESIGN,reports/CRYPTO_A7FFR4_COARSE_TO
 report,A7FFR5-RESPONSE-BACKED-PROMOTION-REDESIGN,reports/CRYPTO_A7FFR5_RESPONSE_BACKED_PROMOTION_REDESIGN_20260530.md,3e509b2,redesign crypto a7ff derived generation,21018
 report,A7FFR7-OPERATOR-PAIR-REPAIR,reports/CRYPTO_A7FFR7_OPERATOR_PAIR_REPAIR_20260530.md,0e6a555,repair crypto a7ff operator pair selection,27642
 report,A7FFR8-SELECTOR-OBJECTIVE-REWRITE,reports/CRYPTO_A7FFR8_SELECTOR_OBJECTIVE_REWRITE_20260531.md,987c404,rewrite crypto a7ff selector objective,31749
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,987c404,rewrite crypto a7ff selector objective,346827
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,7552396,confirm crypto a7ff repaired selector numerics,349679
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,0255072,replay crypto a7ff diversified clues,100274
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,1f7cb0e,run crypto a7ff42 family balanced numeric,619
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,987c404,rewrite crypto a7ff selector objective,141193
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,987c404,rewrite crypto a7ff selector objective,710
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,987c404,rewrite crypto a7ff selector objective,276
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,987c404,rewrite crypto a7ff selector objective,75767
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,7552396,confirm crypto a7ff repaired selector numerics,142007
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,7552396,confirm crypto a7ff repaired selector numerics,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,7552396,confirm crypto a7ff repaired selector numerics,282
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,7552396,confirm crypto a7ff repaired selector numerics,76146
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -2154,15 +2162,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,987c404,rewrite crypto a7ff selector objective,357
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,987c404,rewrite crypto a7ff selector objective,264
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,1f7cb0e,run crypto a7ff42 family balanced numeric,628
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,987c404,rewrite crypto a7ff selector objective,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,987c404,rewrite crypto a7ff selector objective,424
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,987c404,rewrite crypto a7ff selector objective,4999
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,7552396,confirm crypto a7ff repaired selector numerics,359
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,7552396,confirm crypto a7ff repaired selector numerics,276
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,1f7cb0e,run crypto a7ff42 family balanced numeric,763
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,7552396,confirm crypto a7ff repaired selector numerics,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,7552396,confirm crypto a7ff repaired selector numerics,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,7552396,confirm crypto a7ff repaired selector numerics,5041
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,987c404,rewrite crypto a7ff selector objective,3325
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,7552396,confirm crypto a7ff repaired selector numerics,3530
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

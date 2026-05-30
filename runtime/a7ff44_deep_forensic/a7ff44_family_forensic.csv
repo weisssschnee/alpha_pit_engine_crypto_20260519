@@ -1,0 +1,4 @@
+semantic_pair,rows,motifs,labels,horizons,confirmed_rows,cost10_positive_rows,lag_positive_rows,robust_floor_positive_rows,same_sign_tstat_rows,median_control_ratio,max_control_ratio,min_abs_split_tstat,family_status
+basis_premium_like|basis_premium_like,6,1,2,1,6,3,6,6,6,0.2608720009841674,0.3639252160234912,0.517132477056949,reference_family_cap_required
+funding_like|basis_premium_like,5,3,2,1,5,4,5,5,5,0.5161731440559704,0.6215343323193879,1.351531630518567,candidate_family
+regime_state|price_return_like,1,1,1,1,1,0,1,0,1,0.6228179927319956,0.6228179927319956,1.5133899595337956,singleton_family_needs_more_evidence

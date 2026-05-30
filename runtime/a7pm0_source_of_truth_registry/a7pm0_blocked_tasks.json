@@ -4,6 +4,7 @@
   "A7AL-3": "large search not authorized",
   "A7FF-41": "not authorized by A7FF-40 because selected control-strict non-L7 evidence is still single-family",
   "A7FF-43": "not authorized by A7FF-42 because selected control-strict non-L7 evidence is still single-family",
+  "A7FF-45": "not authorized by A7FF-44 because bounded deep replay queue is single-family after reference/regime filtering",
   "alpha_proof": "not authorized",
   "direct_OI_price_rerun": "same objective rerun not authorized",
   "formula_search": "not authorized",
