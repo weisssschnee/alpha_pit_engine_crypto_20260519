@@ -1,0 +1,11 @@
+semantic_pair,motif,count,priority_count,median_control_ratio,median_score_no_may
+basis_premium_like|volatility_like,mul,14,5,0.757258382353823,131.45094704402106
+basis_premium_like|positioning_like,gated_sign,7,3,0.9689691584035868,6.031030841596413
+basis_premium_like|price_like,smooth_interaction,8,2,0.5477398424443789,49.30612948073056
+basis_premium_like|basis_premium_like,relative_shock,4,1,0.8093090613053202,101.44383640693043
+basis_premium_like|basis_premium_like,safe_div_abs,2,1,0.6988220139870247,126.95212606689208
+basis_premium_like,single,1,1,0.7909575038695922,395.4568638340487
+basis_premium_like|basis_premium_like,mul,1,0,0.4747640757009912,37.89770860286368
+basis_premium_like|positioning_like,mul,1,0,0.987029833501413,51.5774679712751
+basis_premium_like|price_like,relative_shock,1,0,0.6529469711742192,21.312824980552787
+basis_premium_like|price_like,spread_rank,1,0,0.96418674354809,33.59518844669462

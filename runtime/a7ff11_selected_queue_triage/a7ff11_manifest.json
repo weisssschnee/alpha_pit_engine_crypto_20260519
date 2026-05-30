@@ -1,0 +1,28 @@
+{
+  "authorizes_a7ff12_numeric_wave_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF11_TRIAGE_READY_FOR_A7FF12_NUMERIC_WAVE_WITH_LABEL_DIVERSITY_WARNING",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T03:12:47Z",
+  "input_selected_rows": 40,
+  "non_l7_selected_rows": 26,
+  "priority_followup_count": 13,
+  "priority_label_families": 1,
+  "priority_semantic_pairs": 5,
+  "rank_label_diagnostic_rows": 14,
+  "source_decision": "PASS_A7FF10_COMPANY_PARALLEL_NUMERIC_AGGREGATE_BUILT",
+  "source_stage": "A7FF-10-COMPANY-PARALLEL-AGGREGATE",
+  "stage": "A7FF-11-SELECTED-QUEUE-TRIAGE",
+  "top_semantic_pair_share": 0.35,
+  "top_skeleton_share": 0.05,
+  "unique_blueprints": 40,
+  "uses_may": false,
+  "warnings": [
+    "priority_queue_label_concentrated"
+  ],
+  "watchlist_count": 13
+}

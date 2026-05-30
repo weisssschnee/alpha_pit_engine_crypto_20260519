@@ -1,0 +1,26 @@
+{
+  "date": "2026-05-30T03:12:47Z",
+  "decision": "PASS_A7FF11_TRIAGE_READY_FOR_A7FF12_NUMERIC_WAVE_WITH_LABEL_DIVERSITY_WARNING",
+  "experiment_id": "20260530_a7ff11_selected_queue_triage",
+  "inputs": {
+    "selected_queue": "runtime\\a7ff10_company_parallel_aggregate\\a7ff10_selected_portfolio_queue_all_shards.csv",
+    "source_manifest": "runtime\\a7ff10_company_parallel_aggregate\\a7ff10_manifest.json"
+  },
+  "mode": "research_governance",
+  "next_action": "Draft or execute A7FF-12 numeric wave only after preserving non-L7 label diversity and fixing company runner reliability.",
+  "objective": "Triage A7FF-10 company-machine selected queue before any larger numeric wave.",
+  "outputs": {
+    "candidate_triage": "runtime\\a7ff11_selected_queue_triage\\a7ff11_candidate_triage.csv",
+    "manifest": "runtime\\a7ff11_selected_queue_triage\\a7ff11_manifest.json",
+    "priority_followup_queue": "runtime\\a7ff11_selected_queue_triage\\a7ff11_priority_followup_queue.csv"
+  },
+  "parameters": {
+    "priority_control_ratio_max": 0.8,
+    "requires_cost10_positive": true,
+    "requires_lag_ok": true,
+    "requires_non_l7": true,
+    "requires_premay_all_positive": true,
+    "requires_robust_min_tstat_positive": true
+  },
+  "status": "completed"
+}

@@ -1,0 +1,3 @@
+issue,evidence,fix_applied,status
+background_launch_log_not_reliable_source_of_truth,At least one shard log does not contain final PASS even though final runtime manifest exists,Treat shard manifest and pulled report as source-of-truth; require per-shard manifest polling,requires_runner_hardening
+company_machine_resource_preflight_required,Heavy shards share the machine with unrelated Python jobs,A7FF-12 launch must check free memory and heavy Python process count before starting,required_next_launch_gate

@@ -1,0 +1,5 @@
+log,exists,bytes,has_pass_decision,has_traceback,has_tabulate_error,has_missing_numpy,has_missing_data_root
+a7ff10s00.log,True,7134,False,False,False,False,False
+a7ff10s01.log,True,7512,False,False,False,False,False
+a7ff10s02.log,True,7506,False,False,False,False,False
+a7ff10s03.log,True,7512,False,False,False,False,False

@@ -1,0 +1,6 @@
+semantic_pair,count,share
+basis_premium_like|volatility_like,14,0.35
+basis_premium_like|price_like,10,0.25
+basis_premium_like|positioning_like,8,0.2
+basis_premium_like|basis_premium_like,7,0.175
+basis_premium_like,1,0.025

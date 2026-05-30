@@ -1,0 +1,15 @@
+{
+  "authorizes_a7ff12_company_numeric_wave": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF11R_COMPANY_RUNNER_CONTRACT_READY_WITH_MANIFEST_POLLING_REQUIRED",
+  "generated_at": "2026-05-30T03:15:04Z",
+  "issues_recorded": 2,
+  "launcher_rows": 4,
+  "log_rows": 4,
+  "requires_manifest_polling": true,
+  "source_decision": "PASS_A7FF10_COMPANY_PARALLEL_NUMERIC_AGGREGATE_BUILT",
+  "source_stage": "A7FF-10-COMPANY-PARALLEL-AGGREGATE",
+  "stage": "A7FF-11R-COMPANY-RUNNER-CONTRACT"
+}

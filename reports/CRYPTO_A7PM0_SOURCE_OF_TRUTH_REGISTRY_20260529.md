@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-29T20:09:52Z
+Generated: 2026-05-30T03:15:26Z
 
 ## Decision
 
@@ -12,27 +12,14 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
- M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
- M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
- M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
- M scripts/crypto_a7ff8_expanded_numeric_probe.py
-?? reports/CRYPTO_A7FF10S00_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF10S01_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF10S02_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF10S03_COMPANY_NUMERIC_PROBE_20260530.md
-?? reports/CRYPTO_A7FF10_COMPANY_PARALLEL_AGGREGATE_20260530.md
-?? runtime/a7ff10_company_numeric_probe_shard_00/
-?? runtime/a7ff10_company_numeric_probe_shard_01/
-?? runtime/a7ff10_company_numeric_probe_shard_02/
-?? runtime/a7ff10_company_numeric_probe_shard_03/
-?? runtime/a7ff10_company_parallel/
-?? runtime/a7ff10_company_parallel_aggregate/
-?? scripts/crypto_a7ff10_company_parallel_aggregate.py
-?? scripts/crypto_a7ff10_company_parallel_launcher.ps1
-HEAD=d64e4e31e9f7ebb0fdc6065b3a2f4914f13b5910
-origin/main=d64e4e31e9f7ebb0fdc6065b3a2f4914f13b5910
+?? reports/CRYPTO_A7FF11_COMPANY_RUNNER_CONTRACT_20260530.md
+?? reports/CRYPTO_A7FF11_SELECTED_QUEUE_TRIAGE_20260530.md
+?? runtime/a7ff11_company_runner_contract/
+?? runtime/a7ff11_selected_queue_triage/
+?? scripts/crypto_a7ff11_company_runner_contract.py
+?? scripts/crypto_a7ff11_selected_queue_triage.py
+HEAD=e5a6a4a0b20100d921f47bcd0b93b253893a1d94
+origin/main=e5a6a4a0b20100d921f47bcd0b93b253893a1d94
 HEAD == origin/main: True
 ```
 
@@ -40,7 +27,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 1367,
+  "artifact_count": 1385,
   "authorization_record_count": 638,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -54,12 +41,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-29T20:09:52Z",
-  "head": "d64e4e31e9f7ebb0fdc6065b3a2f4914f13b5910",
+  "generated_at": "2026-05-30T03:15:26Z",
+  "head": "e5a6a4a0b20100d921f47bcd0b93b253893a1d94",
   "head_equals_origin_main": true,
-  "origin_main": "d64e4e31e9f7ebb0fdc6065b3a2f4914f13b5910",
+  "origin_main": "e5a6a4a0b20100d921f47bcd0b93b253893a1d94",
   "stage": "A7PM-0",
-  "stage_count": 168
+  "stage_count": 170
 }
 ```
 
@@ -78,8 +65,8 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |      59 |
-| valid_or_historical_record   | contract                   |      36 |
+| valid_or_historical_record   | governance_or_audit        |      60 |
+| valid_or_historical_record   | contract                   |      37 |
 | valid_or_historical_record   | smoke                      |       7 |
 | valid_or_historical_record   | diagnostic                 |       5 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

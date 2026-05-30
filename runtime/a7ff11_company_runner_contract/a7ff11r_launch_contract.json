@@ -1,0 +1,28 @@
+{
+  "background_start_process_status": "not_reliable_enough_for_unattended_scale_without_manifest_polling",
+  "data_root": "D:/HermesWorker/GDrive/AlphaFactory_CryptoData",
+  "max_initial_parallel_shards": 2,
+  "must_not_do": [
+    "use D:/Python311/python.exe for numeric probes",
+    "assume G:/AlphaFactory_CryptoData exists on company machine",
+    "treat a process id in launch_manifest as completion evidence",
+    "treat logs as source-of-truth when runtime manifests disagree"
+  ],
+  "preflight_checks": [
+    "python imports numpy/pandas/pyarrow",
+    "base panel path exists",
+    "meme taxonomy metadata exists",
+    "free memory >= 8GB before starting 1 shard, >= 14GB before starting 2 shards",
+    "no unrelated high-memory Python job unless running single-shard foreground",
+    "per-shard manifest path is absent or explicitly quarantined before rerun"
+  ],
+  "recommended_execution_mode": "managed_foreground_or_manifest_polled_jobs",
+  "remote_host": "company-pc-via-hermes-stable",
+  "remote_python": "D:/HermesWorker/venvs/phase3z33/Scripts/python.exe",
+  "remote_repo": "D:/HermesWorker/GDrive/Project_V7_Rotation/alpha_pit_engine_crypto_20260519_remote",
+  "required_env": {
+    "A7AL_BASE_PANEL_ROOT": "D:/HermesWorker/GDrive/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v2_20260527",
+    "ALPHAFACTORY_CRYPTO_DATA_ROOT": "D:/HermesWorker/GDrive/AlphaFactory_CryptoData"
+  },
+  "safe_fallback": "run shards sequentially via SSH foreground and pull manifests after each shard"
+}
