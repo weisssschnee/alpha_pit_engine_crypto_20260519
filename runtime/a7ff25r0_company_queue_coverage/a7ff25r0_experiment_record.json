@@ -1,0 +1,23 @@
+{
+  "commands": [
+    "G:\\PythonProject\\.venv\\Scripts\\python.exe scripts\\crypto_a7ff25r0_company_queue_coverage_audit.py"
+  ],
+  "date": "2026-05-30",
+  "decision": "PASS_A7FF25R0_COMPANY_QUEUE_COVERAGE_ACCEPTABLE_WITH_WARNINGS",
+  "experiment_id": "20260530_a7ff25r0_company_queue_coverage",
+  "inputs": [
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ff_version_20260530\\a7ff_v20260530_formula_index.csv",
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ff_version_20260530\\a7ff_v20260530_derived_field_catalog.csv",
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ff24r_dry_generation_plan\\a7ff24r_materialization_queue.csv",
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ff24r_dry_generation_plan\\a7ff24r_company_numeric_wave_queue.csv",
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ff24r_dry_generation_plan\\a7ff24r_company_shard_plan.csv"
+  ],
+  "mode": "light",
+  "next_action": "A7FF-25R1 numeric adapter parity smoke if PASS/HOLD warnings accepted",
+  "objective": "audit whether A7FF-24R company numeric queue represents the versioned formula atlas well enough for adapter smoke",
+  "outputs": [
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7FF25R0_COMPANY_QUEUE_COVERAGE_AUDIT_20260530.md",
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ff25r0_company_queue_coverage"
+  ],
+  "status": "completed"
+}

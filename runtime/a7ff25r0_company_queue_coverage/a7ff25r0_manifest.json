@@ -1,0 +1,35 @@
+{
+  "authorizes_a7ff25r1_adapter_parity_smoke": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_full_12_shard_numeric": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "company_base_field_count": 10,
+  "company_base_semantic_type_count": 5,
+  "company_motif_count": 10,
+  "company_semantic_pair_count": 10,
+  "company_wave_queue_count": 2400,
+  "decision": "PASS_A7FF25R0_COMPANY_QUEUE_COVERAGE_ACCEPTABLE_WITH_WARNINGS",
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "formula_rows": 20599,
+  "generated_at": "2026-05-30T06:58:48Z",
+  "issues": [],
+  "large_unrepresented_family_count": 22,
+  "materialization_queue_count": 3000,
+  "missing_important_field_types": [
+    "liquidity_like"
+  ],
+  "stage": "A7FF-25R0-COMPANY-QUEUE-COVERAGE-AUDIT",
+  "top_base_field_share": 0.20012939400474444,
+  "top_motif_share": 0.21625,
+  "top_semantic_pair_share": 0.3333333333333333,
+  "uses_may": false,
+  "version_head": "609b45d9addb6ce87a16f334a944abdce0a889a4",
+  "version_id": "CRYPTO_A7FF_V20260530_R_TO_24R",
+  "warnings": [
+    "important_field_type_absent_from_company_wave:liquidity_like",
+    "large_formula_families_absent_from_company_wave:22"
+  ]
+}
