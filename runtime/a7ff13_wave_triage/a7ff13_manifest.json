@@ -1,0 +1,21 @@
+{
+  "authorizes_a7ff14_selector_repair_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7FF13_SELECTOR_LABEL_CONCENTRATION_AFTER_NUMERIC_SCALEUP",
+  "generated_at": "2026-05-30T04:10:27Z",
+  "input_blueprints": 720,
+  "priority_top_label_share": 1.0,
+  "raw_non_l7_label_families": 4,
+  "raw_non_l7_numeric_clue_rows": 461,
+  "raw_rank_label_diagnostic_clue_rows": 146,
+  "selected_priority_clean_count": 39,
+  "selected_priority_label_families": 1,
+  "selected_queue_count": 83,
+  "selected_top_label_share": 0.6265060240963856,
+  "source_decision": "PASS_A7FF12_COMPANY_NUMERIC_WAVE_AGGREGATE_BUILT",
+  "source_stage": "A7FF-12-COMPANY-NUMERIC-WAVE-AGGREGATE",
+  "stage": "A7FF-13-WAVE-TRIAGE",
+  "uses_may": false
+}

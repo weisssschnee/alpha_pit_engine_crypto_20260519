@@ -1,0 +1,8 @@
+motif,count
+relative_shock,128
+spread_rank,128
+smooth_interaction,128
+gated_sign,97
+mul,80
+sub,80
+safe_div_abs,79

@@ -42,6 +42,7 @@ REPORT = Path(os.environ.get("A7FF8_REPORT", str(REPO / "reports" / "CRYPTO_A7FF
 A7FF7E_MANIFEST = REPO / "runtime" / "a7ff7e_expanded_derivation_probe_contract" / "a7ff7e_manifest.json"
 A7FF7E_QUEUE = REPO / "runtime" / "a7ff7e_expanded_derivation_probe_contract" / "a7ff7e_selected_numeric_probe_queue.csv"
 A7FF7E_PLAN = REPO / "runtime" / "a7ff7e_expanded_derivation_probe_contract" / "a7ff7e_numeric_probe_plan.json"
+QUEUE_PATH = Path(os.environ.get("A7FF8_QUEUE_PATH", str(A7FF7E_QUEUE)))
 
 LABELS = [
     "L0_raw_forward_return",
@@ -327,11 +328,14 @@ def main() -> None:
     if not a7ff7e.get("authorizes_a7ff8_numeric_probe_contract"):
         raise SystemExit(f"A7FF-7E does not authorize {STAGE} numeric probe")
     plan = read_json(A7FF7E_PLAN)
-    queue = pd.read_csv(A7FF7E_QUEUE).head(MATERIALIZE_CAP).copy()
+    queue_all = pd.read_csv(QUEUE_PATH)
+    queue = queue_all.copy()
     if QUEUE_OFFSET:
         queue = queue.iloc[QUEUE_OFFSET:].copy()
     if QUEUE_LIMIT:
         queue = queue.head(QUEUE_LIMIT).copy()
+    elif MATERIALIZE_CAP:
+        queue = queue.head(MATERIALIZE_CAP).copy()
     if FAST_NUMERIC_CAP and len(queue) > FAST_NUMERIC_CAP:
         # Keep diversity: first pass by semantic pair/motif before truncation.
         rows = []
@@ -490,6 +494,8 @@ def main() -> None:
         "executes_search": False,
         "uses_may": False,
         "input_blueprint_count": int(len(queue)),
+        "queue_path": str(QUEUE_PATH),
+        "queue_total_rows": int(len(queue_all)),
         "queue_offset": QUEUE_OFFSET,
         "queue_limit": QUEUE_LIMIT,
         "materialized_activity_ok_count": materialized_count,

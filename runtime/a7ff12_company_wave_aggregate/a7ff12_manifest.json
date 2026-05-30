@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF12_COMPANY_NUMERIC_WAVE_AGGREGATE_BUILT",
+  "generated_at": "2026-05-30T04:04:57Z",
+  "missing_manifests": [],
+  "shard_count_complete": 8,
+  "shard_count_expected": 8,
+  "stage": "A7FF-12-COMPANY-NUMERIC-WAVE-AGGREGATE",
+  "start_shard": 0,
+  "total_input_blueprints": 720,
+  "total_label_response_rows": 14400,
+  "total_materialized_activity_ok": 720,
+  "total_non_l7_numeric_clue_rows": 461,
+  "total_portfolio_queue_count": 162,
+  "total_rank_label_diagnostic_clue_rows": 146,
+  "total_selected_portfolio_queue_count": 83,
+  "uses_may": false
+}

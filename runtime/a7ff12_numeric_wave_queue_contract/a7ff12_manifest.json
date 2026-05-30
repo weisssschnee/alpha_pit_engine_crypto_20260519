@@ -1,0 +1,32 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_company_numeric_probe": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_pool_rows": 8887,
+  "decision": "PASS_A7FF12_NUMERIC_WAVE_QUEUE_READY_FOR_COMPANY_EXECUTION",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_search": false,
+  "full_pool_rows": 9271,
+  "generated_at": "2026-05-30T03:28:36Z",
+  "max_per_motif": 128,
+  "max_per_semantic": {
+    "basis_premium_like": 0,
+    "basis_premium_like|basis_premium_like": 192,
+    "basis_premium_like|positioning_like": 240,
+    "basis_premium_like|price_like": 144,
+    "basis_premium_like|volatility_like": 192
+  },
+  "max_per_skeleton": 8,
+  "motif_count": 7,
+  "old_queue_rows": 384,
+  "selected_queue_size": 720,
+  "semantic_pair_count": 4,
+  "skeleton_count": 102,
+  "source_a7ff11_decision": "PASS_A7FF11_TRIAGE_READY_FOR_A7FF12_NUMERIC_WAVE_WITH_LABEL_DIVERSITY_WARNING",
+  "source_a7ff11r_decision": "PASS_A7FF11R_COMPANY_RUNNER_CONTRACT_READY_WITH_MANIFEST_POLLING_REQUIRED",
+  "stage": "A7FF-12-NUMERIC-WAVE-QUEUE-CONTRACT",
+  "target_queue_size": 720,
+  "uses_may": false
+}
