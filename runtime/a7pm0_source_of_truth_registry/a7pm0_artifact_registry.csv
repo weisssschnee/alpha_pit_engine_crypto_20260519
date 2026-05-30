@@ -1903,43 +1903,43 @@ runtime,A7FF-44,runtime/a7ff44_deep_forensic/a7ff44_family_forensic.csv,301103e,
 runtime,A7FF-44,runtime/a7ff44_deep_forensic/a7ff44_manifest.json,301103e,forensic crypto a7ff repaired selector rows,1026
 runtime,A7FF-44,runtime/a7ff44_deep_forensic/a7ff44_next_actions.csv,301103e,forensic crypto a7ff repaired selector rows,372
 runtime,A7FF-44,runtime/a7ff44_deep_forensic/a7ff44_row_forensic.csv,301103e,forensic crypto a7ff repaired selector rows,25290
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_bounded_deep_replay_queue.csv,8753211,advance crypto a7ff bounded replay forensics,2409
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_confirmed_bounded_rows.csv,8753211,advance crypto a7ff bounded replay forensics,9429
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_control_dominance_metrics.csv,8753211,advance crypto a7ff bounded replay forensics,381471
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_control_summary.csv,8753211,advance crypto a7ff bounded replay forensics,452
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_decision_counts.csv,8753211,advance crypto a7ff bounded replay forensics,1214
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_decision_record.json,8753211,advance crypto a7ff bounded replay forensics,1145
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_family_confirmation.csv,8753211,advance crypto a7ff bounded replay forensics,370
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_family_decision_summary.csv,8753211,advance crypto a7ff bounded replay forensics,608
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_label_response_metrics.csv,8753211,advance crypto a7ff bounded replay forensics,110226
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_manifest.json,8753211,advance crypto a7ff bounded replay forensics,1145
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_materialization_metrics.csv,8753211,advance crypto a7ff bounded replay forensics,1805
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_next_actions.csv,8753211,advance crypto a7ff bounded replay forensics,261
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_nonoverlap_stats.csv,8753211,advance crypto a7ff bounded replay forensics,14573
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_numeric_probe_stdout.log,8753211,advance crypto a7ff bounded replay forensics,3303
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_portfolio_marginal_proxy.csv,8753211,advance crypto a7ff bounded replay forensics,6757
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_probe_selected_forensic.csv,8753211,advance crypto a7ff bounded replay forensics,1996
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_selected_portfolio_queue.csv,8753211,advance crypto a7ff bounded replay forensics,1930
-runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_unique_formula_queue.csv,8753211,advance crypto a7ff bounded replay forensics,2409
-runtime,A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_authorization_matrix.json,8753211,advance crypto a7ff bounded replay forensics,384
-runtime,A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_decision_record.json,8753211,advance crypto a7ff bounded replay forensics,872
-runtime,A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_family_freeze_summary.csv,8753211,advance crypto a7ff bounded replay forensics,291
-runtime,A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_frozen_candidate_pool.csv,8753211,advance crypto a7ff bounded replay forensics,3028
-runtime,A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_manifest.json,8753211,advance crypto a7ff bounded replay forensics,872
-runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_decision_record.json,8753211,advance crypto a7ff bounded replay forensics,873
-runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_family_label_summary.csv,8753211,advance crypto a7ff bounded replay forensics,1403
-runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_l5_confirmed_candidates.csv,8753211,advance crypto a7ff bounded replay forensics,7362
-runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_label_translation_map.csv,8753211,advance crypto a7ff bounded replay forensics,112904
-runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_label_translation_summary.csv,8753211,advance crypto a7ff bounded replay forensics,737
-runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_manifest.json,8753211,advance crypto a7ff bounded replay forensics,873
-runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_non_l5_translation_candidates.csv,8753211,advance crypto a7ff bounded replay forensics,1178
-runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_pseudo_book_proxy.csv,8753211,advance crypto a7ff bounded replay forensics,320
-runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_decision_record.json,8753211,advance crypto a7ff bounded replay forensics,890
-runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_manifest.json,8753211,advance crypto a7ff bounded replay forensics,890
-runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_non_l5_candidate_summary.csv,8753211,advance crypto a7ff bounded replay forensics,436
-runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_non_reference_non_l5_candidates.csv,8753211,advance crypto a7ff bounded replay forensics,1153
-runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_reference_non_l5_diagnostics.csv,8753211,advance crypto a7ff bounded replay forensics,4510
-runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_strict_non_l5_candidates.csv,8753211,advance crypto a7ff bounded replay forensics,4510
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_bounded_deep_replay_queue.csv,ce25d84,advance crypto a7ff bounded replay forensics,2409
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_confirmed_bounded_rows.csv,ce25d84,advance crypto a7ff bounded replay forensics,9429
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_control_dominance_metrics.csv,ce25d84,advance crypto a7ff bounded replay forensics,381471
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_control_summary.csv,ce25d84,advance crypto a7ff bounded replay forensics,452
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_decision_counts.csv,ce25d84,advance crypto a7ff bounded replay forensics,1214
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_decision_record.json,ce25d84,advance crypto a7ff bounded replay forensics,1145
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_family_confirmation.csv,ce25d84,advance crypto a7ff bounded replay forensics,370
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_family_decision_summary.csv,ce25d84,advance crypto a7ff bounded replay forensics,608
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_label_response_metrics.csv,ce25d84,advance crypto a7ff bounded replay forensics,110226
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_manifest.json,ce25d84,advance crypto a7ff bounded replay forensics,1145
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_materialization_metrics.csv,ce25d84,advance crypto a7ff bounded replay forensics,1805
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_next_actions.csv,ce25d84,advance crypto a7ff bounded replay forensics,261
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_nonoverlap_stats.csv,ce25d84,advance crypto a7ff bounded replay forensics,14573
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_numeric_probe_stdout.log,ce25d84,advance crypto a7ff bounded replay forensics,3303
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_portfolio_marginal_proxy.csv,ce25d84,advance crypto a7ff bounded replay forensics,6757
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_probe_selected_forensic.csv,ce25d84,advance crypto a7ff bounded replay forensics,1996
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_selected_portfolio_queue.csv,ce25d84,advance crypto a7ff bounded replay forensics,1930
+runtime,A7FF-45,runtime/a7ff45_bounded_deep_replay/a7ff45_unique_formula_queue.csv,ce25d84,advance crypto a7ff bounded replay forensics,2409
+runtime,A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_authorization_matrix.json,ce25d84,advance crypto a7ff bounded replay forensics,384
+runtime,A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_decision_record.json,ce25d84,advance crypto a7ff bounded replay forensics,872
+runtime,A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_family_freeze_summary.csv,ce25d84,advance crypto a7ff bounded replay forensics,291
+runtime,A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_frozen_candidate_pool.csv,ce25d84,advance crypto a7ff bounded replay forensics,3028
+runtime,A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_manifest.json,ce25d84,advance crypto a7ff bounded replay forensics,872
+runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_decision_record.json,ce25d84,advance crypto a7ff bounded replay forensics,873
+runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_family_label_summary.csv,ce25d84,advance crypto a7ff bounded replay forensics,1403
+runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_l5_confirmed_candidates.csv,ce25d84,advance crypto a7ff bounded replay forensics,7362
+runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_label_translation_map.csv,ce25d84,advance crypto a7ff bounded replay forensics,112904
+runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_label_translation_summary.csv,ce25d84,advance crypto a7ff bounded replay forensics,737
+runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_manifest.json,ce25d84,advance crypto a7ff bounded replay forensics,873
+runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_non_l5_translation_candidates.csv,ce25d84,advance crypto a7ff bounded replay forensics,1178
+runtime,A7FF-47,runtime/a7ff47_portfolio_microreplay/a7ff47_pseudo_book_proxy.csv,ce25d84,advance crypto a7ff bounded replay forensics,320
+runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_decision_record.json,ce25d84,advance crypto a7ff bounded replay forensics,890
+runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_manifest.json,ce25d84,advance crypto a7ff bounded replay forensics,890
+runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_non_l5_candidate_summary.csv,ce25d84,advance crypto a7ff bounded replay forensics,436
+runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_non_reference_non_l5_candidates.csv,ce25d84,advance crypto a7ff bounded replay forensics,1153
+runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_reference_non_l5_diagnostics.csv,ce25d84,advance crypto a7ff bounded replay forensics,4510
+runtime,A7FF-49,runtime/a7ff49_existing_map_non_l5_mining/a7ff49_strict_non_l5_candidates.csv,ce25d84,advance crypto a7ff bounded replay forensics,4510
 runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_blocked_factor_blueprints.csv,b725826,add crypto a7ff field to factor compiler,780
 runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_factor_candidate_blueprints.csv,b725826,add crypto a7ff field to factor compiler,3116
 runtime,A7FF-5,runtime/a7ff5_factor_candidate_compiler/a7ff5_manifest.json,b725826,add crypto a7ff field to factor compiler,359
@@ -1985,12 +1985,14 @@ runtime,A7FF-R0-DERIVED-GENERATION-FAILURE-FREEZE,runtime/a7ffr0_derived_generat
 runtime,A7FF-R1-FIELD-ONTOLOGY-V3,runtime/a7ffr1_field_ontology_v3/a7ffr1_field_ontology_v3.csv,3e509b2,redesign crypto a7ff derived generation,50026
 runtime,A7FF-R1-FIELD-ONTOLOGY-V3,runtime/a7ffr1_field_ontology_v3/a7ffr1_manifest.json,3e509b2,redesign crypto a7ff derived generation,477
 runtime,A7FF-R1-FIELD-ONTOLOGY-V3,runtime/a7ffr1_field_ontology_v3/a7ffr1_semantic_role_summary.csv,3e509b2,redesign crypto a7ff derived generation,744
-runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_allowed_source_maps.csv,8753211,advance crypto a7ff bounded replay forensics,424
-runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_decision_record.json,8753211,advance crypto a7ff bounded replay forensics,644
-runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_failure_attribution.csv,8753211,advance crypto a7ff bounded replay forensics,690
-runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_label_target_policy.csv,8753211,advance crypto a7ff bounded replay forensics,384
-runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_manifest.json,8753211,advance crypto a7ff bounded replay forensics,644
-runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_next_contract_a7ff49.json,8753211,advance crypto a7ff bounded replay forensics,1289
+runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_allowed_source_maps.csv,ce25d84,advance crypto a7ff bounded replay forensics,424
+runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_decision_record.json,ce25d84,advance crypto a7ff bounded replay forensics,644
+runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_failure_attribution.csv,ce25d84,advance crypto a7ff bounded replay forensics,690
+runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_label_target_policy.csv,ce25d84,advance crypto a7ff bounded replay forensics,384
+runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_manifest.json,ce25d84,advance crypto a7ff bounded replay forensics,644
+runtime,A7FF-R10,runtime/a7ffr10_label_feature_target_redesign/a7ffr10_next_contract_a7ff49.json,ce25d84,advance crypto a7ff bounded replay forensics,1289
+runtime,A7FF-R11,runtime/a7ffr11_feature_label_objective_reset/a7ffr11_compact_reset_policy.csv,7b68b14,add crypto a7ffr11 compact objective reset,715
+runtime,A7FF-R11,runtime/a7ffr11_feature_label_objective_reset/a7ffr11_manifest.json,7b68b14,add crypto a7ffr11 compact objective reset,1639
 runtime,A7FF-R2-OPERATOR-PROBING-V2,runtime/a7ffr2_operator_probing_v2/a7ffr2_manifest.json,3e509b2,redesign crypto a7ff derived generation,387
 runtime,A7FF-R2-OPERATOR-PROBING-V2,runtime/a7ffr2_operator_probing_v2/a7ffr2_observed_operator_response.csv,3e509b2,redesign crypto a7ff derived generation,1529
 runtime,A7FF-R2-OPERATOR-PROBING-V2,runtime/a7ffr2_operator_probing_v2/a7ffr2_operator_probe_policy.csv,3e509b2,redesign crypto a7ff derived generation,2320
@@ -2026,13 +2028,13 @@ runtime,A7FF-R8,runtime/a7ffr8_selector_objective_rewrite/a7ffr8b_selector_ablat
 runtime,A7FF-R8,runtime/a7ffr8_selector_objective_rewrite/a7ffr8c_family_retention_audit.csv,987c404,rewrite crypto a7ff selector objective,402
 runtime,A7FF-R8,runtime/a7ffr8_selector_objective_rewrite/a7ffr8c_repaired_selected_queue.csv,987c404,rewrite crypto a7ff selector objective,12536
 runtime,A7FF-R8,runtime/a7ffr8_selector_objective_rewrite/a7ffr8c_selector_repair_policy.json,987c404,rewrite crypto a7ff selector objective,779
-runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_decision_record.json,8753211,advance crypto a7ff bounded replay forensics,874
-runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_manifest.json,8753211,advance crypto a7ff bounded replay forensics,874
-runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_reference_cap_policy.csv,8753211,advance crypto a7ff bounded replay forensics,266
-runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_regime_repair_candidates.csv,8753211,advance crypto a7ff bounded replay forensics,28170
-runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_regime_repair_summary.csv,8753211,advance crypto a7ff bounded replay forensics,112
-runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_repaired_candidate_queue.csv,8753211,advance crypto a7ff bounded replay forensics,2409
-runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_repaired_queue_family_summary.csv,8753211,advance crypto a7ff bounded replay forensics,343
+runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_decision_record.json,ce25d84,advance crypto a7ff bounded replay forensics,874
+runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_manifest.json,ce25d84,advance crypto a7ff bounded replay forensics,874
+runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_reference_cap_policy.csv,ce25d84,advance crypto a7ff bounded replay forensics,266
+runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_regime_repair_candidates.csv,ce25d84,advance crypto a7ff bounded replay forensics,28170
+runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_regime_repair_summary.csv,ce25d84,advance crypto a7ff bounded replay forensics,112
+runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_repaired_candidate_queue.csv,ce25d84,advance crypto a7ff bounded replay forensics,2409
+runtime,A7FF-R9,runtime/a7ffr9_reference_regime_repair/a7ffr9_repaired_queue_family_summary.csv,ce25d84,advance crypto a7ff bounded replay forensics,343
 report,A7FF-VERSION,reports/CRYPTO_A7FF_VERSION_20260530_A7FFR_TO_A7FF24R.md,609b45d,add crypto a7ff version file,43102
 runtime,A7FF-VERSION-20260530,runtime/a7ff_version_20260530/a7ff_v20260530_base_field_usage.csv,609b45d,add crypto a7ff version file,4249
 runtime,A7FF-VERSION-20260530,runtime/a7ff_version_20260530/a7ff_v20260530_derived_field_catalog.csv,609b45d,add crypto a7ff version file,189887
@@ -2176,10 +2178,10 @@ report,A7FF40-CONTROL-STRICT-FOLLOWUP,reports/CRYPTO_A7FF40_CONTROL_STRICT_FOLLO
 report,A7FF42-FAMILY-BALANCED-NUMERIC,reports/CRYPTO_A7FF42_FAMILY_BALANCED_NUMERIC_20260530.md,1f7cb0e,run crypto a7ff42 family balanced numeric,33699
 report,A7FF43-REPAIRED-SELECTOR-NUMERIC-CONFIRMATION,reports/CRYPTO_A7FF43_REPAIRED_SELECTOR_NUMERIC_CONFIRMATION_20260531.md,7552396,confirm crypto a7ff repaired selector numerics,58320
 report,A7FF44-DEEP-FORENSIC,reports/CRYPTO_A7FF44_DEEP_FORENSIC_20260531.md,301103e,forensic crypto a7ff repaired selector rows,82816
-report,A7FF45-BOUNDED-DEEP-REPLAY,reports/CRYPTO_A7FF45_BOUNDED_DEEP_REPLAY_20260531.md,8753211,advance crypto a7ff bounded replay forensics,26458
-report,A7FF46-CANDIDATE-FREEZE,reports/CRYPTO_A7FF46_CANDIDATE_FREEZE_20260531.md,8753211,advance crypto a7ff bounded replay forensics,8134
-report,A7FF47-PORTFOLIO-MICROREPLAY,reports/CRYPTO_A7FF47_PORTFOLIO_MICROREPLAY_20260531.md,8753211,advance crypto a7ff bounded replay forensics,21246
-report,A7FF49-EXISTING-MAP-NON-L5-MINING,reports/CRYPTO_A7FF49_EXISTING_MAP_NON_L5_MINING_20260531.md,8753211,advance crypto a7ff bounded replay forensics,11327
+report,A7FF45-BOUNDED-DEEP-REPLAY,reports/CRYPTO_A7FF45_BOUNDED_DEEP_REPLAY_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,26458
+report,A7FF46-CANDIDATE-FREEZE,reports/CRYPTO_A7FF46_CANDIDATE_FREEZE_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,8134
+report,A7FF47-PORTFOLIO-MICROREPLAY,reports/CRYPTO_A7FF47_PORTFOLIO_MICROREPLAY_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,21246
+report,A7FF49-EXISTING-MAP-NON-L5-MINING,reports/CRYPTO_A7FF49_EXISTING_MAP_NON_L5_MINING_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,11327
 report,A7FF5-FACTOR-CANDIDATE-COMPILER,reports/CRYPTO_A7FF5_FACTOR_CANDIDATE_COMPILER_20260530.md,b725826,add crypto a7ff field to factor compiler,5989
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
 report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_DERIVATION_PROBE_CONTRACT_20260530.md,bd530c1,expand crypto a7ff derivation probe contract,25056
@@ -2188,21 +2190,22 @@ report,A7FF9-CONTINUATION-COMPARISON,reports/CRYPTO_A7FF9_CONTINUATION_COMPARISO
 report,A7FF9-EXPANDED-NUMERIC-PROBE-CONTINUATION,reports/CRYPTO_A7FF9_EXPANDED_NUMERIC_PROBE_CONTINUATION_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,21246
 report,A7FFR0-DERIVED-GENERATION-FAILURE-FREEZE,reports/CRYPTO_A7FFR0_DERIVED_GENERATION_FAILURE_FREEZE_20260530.md,3e509b2,redesign crypto a7ff derived generation,2686
 report,A7FFR1-FIELD-ONTOLOGY-V3,reports/CRYPTO_A7FFR1_FIELD_ONTOLOGY_V3_20260530.md,3e509b2,redesign crypto a7ff derived generation,20202
-report,A7FFR10-LABEL-FEATURE-TARGET-REDESIGN,reports/CRYPTO_A7FFR10_LABEL_FEATURE_TARGET_REDESIGN_20260531.md,8753211,advance crypto a7ff bounded replay forensics,9721
+report,A7FFR10-LABEL-FEATURE-TARGET-REDESIGN,reports/CRYPTO_A7FFR10_LABEL_FEATURE_TARGET_REDESIGN_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,9721
+report,A7FFR11-FEATURE-LABEL-OBJECTIVE-RESET,reports/CRYPTO_A7FFR11_FEATURE_LABEL_OBJECTIVE_RESET_20260531.md,7b68b14,add crypto a7ffr11 compact objective reset,4290
 report,A7FFR2-OPERATOR-PROBING-V2,reports/CRYPTO_A7FFR2_OPERATOR_PROBING_V2_20260530.md,3e509b2,redesign crypto a7ff derived generation,10539
 report,A7FFR3-FEATURE-PAIR-POLICY-V2,reports/CRYPTO_A7FFR3_FEATURE_PAIR_POLICY_V2_20260530.md,3e509b2,redesign crypto a7ff derived generation,38678
 report,A7FFR4-COARSE-TO-FINE-GENERATION-REDESIGN,reports/CRYPTO_A7FFR4_COARSE_TO_FINE_GENERATION_REDESIGN_20260530.md,3e509b2,redesign crypto a7ff derived generation,34030
 report,A7FFR5-RESPONSE-BACKED-PROMOTION-REDESIGN,reports/CRYPTO_A7FFR5_RESPONSE_BACKED_PROMOTION_REDESIGN_20260530.md,3e509b2,redesign crypto a7ff derived generation,21018
 report,A7FFR7-OPERATOR-PAIR-REPAIR,reports/CRYPTO_A7FFR7_OPERATOR_PAIR_REPAIR_20260530.md,0e6a555,repair crypto a7ff operator pair selection,27642
 report,A7FFR8-SELECTOR-OBJECTIVE-REWRITE,reports/CRYPTO_A7FFR8_SELECTOR_OBJECTIVE_REWRITE_20260531.md,987c404,rewrite crypto a7ff selector objective,31749
-report,A7FFR9-REFERENCE-REGIME-REPAIR,reports/CRYPTO_A7FFR9_REFERENCE_REGIME_REPAIR_20260531.md,8753211,advance crypto a7ff bounded replay forensics,19381
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,8753211,advance crypto a7ff bounded replay forensics,357075
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,8753211,advance crypto a7ff bounded replay forensics,100789
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,8753211,advance crypto a7ff bounded replay forensics,935
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,8753211,advance crypto a7ff bounded replay forensics,145025
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,8753211,advance crypto a7ff bounded replay forensics,710
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,8753211,advance crypto a7ff bounded replay forensics,303
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,8753211,advance crypto a7ff bounded replay forensics,78192
+report,A7FFR9-REFERENCE-REGIME-REPAIR,reports/CRYPTO_A7FFR9_REFERENCE_REGIME_REPAIR_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,19381
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,7b68b14,add crypto a7ffr11 compact objective reset,360267
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,ce25d84,advance crypto a7ff bounded replay forensics,100789
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,7b68b14,add crypto a7ffr11 compact objective reset,1027
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,7b68b14,add crypto a7ffr11 compact objective reset,145832
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,7b68b14,add crypto a7ffr11 compact objective reset,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,7b68b14,add crypto a7ffr11 compact objective reset,306
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,7b68b14,add crypto a7ffr11 compact objective reset,78578
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -2218,15 +2221,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,8753211,advance crypto a7ff bounded replay forensics,362
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,8753211,advance crypto a7ff bounded replay forensics,285
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,8753211,advance crypto a7ff bounded replay forensics,922
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,8753211,advance crypto a7ff bounded replay forensics,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,8753211,advance crypto a7ff bounded replay forensics,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,8753211,advance crypto a7ff bounded replay forensics,6803
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,7b68b14,add crypto a7ffr11 compact objective reset,352
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,7b68b14,add crypto a7ffr11 compact objective reset,288
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,7b68b14,add crypto a7ffr11 compact objective reset,1011
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,7b68b14,add crypto a7ffr11 compact objective reset,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,7b68b14,add crypto a7ffr11 compact objective reset,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,7b68b14,add crypto a7ffr11 compact objective reset,5578
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,8753211,advance crypto a7ff bounded replay forensics,3687
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,7b68b14,add crypto a7ffr11 compact objective reset,3802
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

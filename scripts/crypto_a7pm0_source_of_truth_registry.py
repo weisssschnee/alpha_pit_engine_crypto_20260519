@@ -16,6 +16,7 @@ REPORT = REPO / "reports" / "CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md"
 
 
 BLOCKED_TASKS = {
+    "A7FF-51 execution": "not authorized by A7FF-R11; only contract drafting is authorized",
     "A7FF-50": "not authorized by A7FF-49 because existing maps have no non-reference non-L5 candidates",
     "A7FF-48": "not authorized by A7FF-47 because frozen clues fail non-L5 label translation",
     "A7FF-45": "superseded by A7FF-47 label translation hold; bounded replay passed but did not translate beyond L5",
@@ -32,7 +33,7 @@ BLOCKED_TASKS = {
 }
 
 NEXT_ALLOWED_TASKS = {
-    "A7FF-R11": "feature/label objective reset after A7FF-49 no non-reference non-L5 candidates; no search",
+    "A7FF-51 contract": "compact non-L5-first derived generation contract after A7FF-R11; no execution/search",
     "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
 }

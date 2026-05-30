@@ -1,0 +1,52 @@
+{
+  "authorizes_a7ff51_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_generation_execution": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FFR11_FEATURE_LABEL_OBJECTIVE_RESET_READY_FOR_A7FF51_CONTRACT_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T18:55:00Z",
+  "next_contract": {
+    "artifact_budget": {
+      "max_new_reports": 1,
+      "max_new_runtime_tables": 3,
+      "required_manifest": true
+    },
+    "authorized": true,
+    "blocked": [
+      "formula_search",
+      "large_search",
+      "alpha_proof",
+      "shadow",
+      "paper",
+      "live"
+    ],
+    "execution_type": "contract_only",
+    "hard_requirements": {
+      "control_ratio_max": 0.8,
+      "min_non_reference_families_before_replay": 2,
+      "min_non_reference_rows_before_replay": 6,
+      "primary_labels": [
+        "L0_raw_forward_return",
+        "L1_cross_sectional_relative_return",
+        "L3_liquidity_tier_relative_return"
+      ],
+      "reference_family_cannot_count_as_primary": true
+    },
+    "name": "non-L5-first derived generation contract",
+    "no_search": true,
+    "stage": "A7FF-51"
+  },
+  "reason": "A7FF-49 found zero non-reference non-L5 candidates in existing maps",
+  "source_a7ff49_decision": "HOLD_A7FF49_NO_NON_REFERENCE_NON_L5_CANDIDATES",
+  "stage": "A7FF-R11",
+  "uses_may": false,
+  "warnings": [
+    "artifact_budget_enforced_for_future_a7ff_stages"
+  ]
+}

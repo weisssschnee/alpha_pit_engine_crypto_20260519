@@ -1,0 +1,5 @@
+policy_area,rule,reason
+artifact_hygiene,"future A7FF stages should emit one report, one manifest, and only essential machine tables",avoid runtime sprawl and preserve source-of-truth clarity
+label_target,promotion requires non-reference evidence on L0/L1/L3 before L5 can support a clue,current frozen pool is L5-only and does not translate to raw or relative labels
+reference_family,basis_premium self-pair is reference-only until confirmed by non-self semantic pair,A7FF-49 found all non-L5 evidence only inside the reference family
+next_execution,authorize only a compact A7FF-51 non-L5-first generation contract; no search execution,existing numeric maps do not contain a usable non-reference non-L5 pool
