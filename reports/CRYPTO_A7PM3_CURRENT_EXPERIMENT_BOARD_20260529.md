@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-30T19:26:53Z
+Generated: 2026-05-30T19:35:29Z
 
 ## Decision
 
@@ -8,26 +8,25 @@ Generated: 2026-05-30T19:26:53Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                      | next                                |
-|:----------------------------|:----------------|:----------------------------|:------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                        | keep registry as source-of-truth    |
-| a7ff_family_diversification | A7FF-51         | contract_ready_no_execution | A7FF-51E if explicitly authorized   |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution | A7FF-24R4E if explicitly authorized |
-| search_execution            | blocked         | not_authorized              | none                                |
+| workstream                  | current_stage   | status                             | next                                       |
+|:----------------------------|:----------------|:-----------------------------------|:-------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                               | keep registry as source-of-truth           |
+| a7ff_family_diversification | A7FF-51E        | pass_static_ready_50000_blueprints | A7FF-52 materialization preflight contract |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution        | A7FF-24R4E if explicitly authorized        |
+| search_execution            | blocked         | not_authorized                     | none                                       |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                                              |
-|:--------------------------------------------------|:------------------------------------------------------------------------------------|
-| A7FF-51E heavy generation execution option        | requires explicit user authorization; no search and hard stop before numeric replay |
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                    |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                                     |
+| task                                              | reason                                                                |
+|:--------------------------------------------------|:----------------------------------------------------------------------|
+| A7FF-52 materialization preflight contract        | after A7FF51E static-ready 50000 blueprints; no numeric replay/search |
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion      |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                       |
 
 ## Blocked Tasks
 
 | task                             | reason                                                                                                                |
 |:---------------------------------|:----------------------------------------------------------------------------------------------------------------------|
-| A7FF-51E execution               | pending explicit heavy-execution authorization; A7FF-51 contract is ready but generation execution is not started     |
 | A7FF-24R4E execution             | pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but numeric wave execution is not started |
 | A7FF-51 execution                | not authorized by A7FF-R11; only contract drafting is allowed                                                         |
 | A7FF-50                          | not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps                                   |

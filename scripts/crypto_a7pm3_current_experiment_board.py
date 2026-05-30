@@ -16,13 +16,12 @@ A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 
 
 ALLOWED = {
-    "A7FF-51E heavy generation execution option": "requires explicit user authorization; no search and hard stop before numeric replay",
+    "A7FF-52 materialization preflight contract": "after A7FF51E static-ready 50000 blueprints; no numeric replay/search",
     "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
     "A7PM-0/3 maintenance": "governance registry maintenance",
 }
 
 BLOCKED = {
-    "A7FF-51E execution": "pending explicit heavy-execution authorization; A7FF-51 contract is ready but generation execution is not started",
     "A7FF-24R4E execution": "pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but numeric wave execution is not started",
     "A7FF-51 execution": "not authorized by A7FF-R11; only contract drafting is allowed",
     "A7FF-50": "not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps",
@@ -74,7 +73,7 @@ def main() -> None:
     active = pd.DataFrame(
         [
             {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
-            {"workstream": "a7ff_family_diversification", "current_stage": "A7FF-51", "status": "contract_ready_no_execution", "next": "A7FF-51E if explicitly authorized"},
+            {"workstream": "a7ff_family_diversification", "current_stage": "A7FF-51E", "status": "pass_static_ready_50000_blueprints", "next": "A7FF-52 materialization preflight contract"},
             {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R4", "status": "contract_ready_no_execution", "next": "A7FF-24R4E if explicitly authorized"},
             {"workstream": "search_execution", "current_stage": "blocked", "status": "not_authorized", "next": "none"},
         ]

@@ -1,0 +1,12 @@
+metric,value,threshold,pass
+blueprint_rows,50000.0,50000.0,True
+semantic_pair_families,8.0,6.0,True
+top_family_share,0.138,0.3,True
+non_reference_non_l5_static_candidates,50000.0,200.0,True
+primary_label_family_count,3.0,3.0,True
+reference_family_primary_rows,0.0,0.0,True
+missing_primary_fields,0.0,0.0,True
+missing_secondary_fields,0.0,0.0,True
+unsupported_operator_count,0.0,0.0,True
+duplicate_expression_count,7772.0,12500.0,True
+duplicate_production_key_count,0.0,0.0,True

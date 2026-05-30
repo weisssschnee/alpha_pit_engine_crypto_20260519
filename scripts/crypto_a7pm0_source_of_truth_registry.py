@@ -16,7 +16,6 @@ REPORT = REPO / "reports" / "CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md"
 
 
 BLOCKED_TASKS = {
-    "A7FF-51E execution": "pending explicit heavy-execution authorization; A7FF-51 contract is ready but does not execute generation",
     "A7FF-24R4E execution": "pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but does not execute numeric wave",
     "A7FF-51 execution": "not authorized by A7FF-R11; only contract drafting is authorized",
     "A7FF-50": "not authorized by A7FF-49 because existing maps have no non-reference non-L5 candidates",
@@ -35,7 +34,7 @@ BLOCKED_TASKS = {
 }
 
 NEXT_ALLOWED_TASKS = {
-    "A7FF-51E heavy generation execution option": "requires explicit user authorization; no search and hard stop before numeric replay",
+    "A7FF-52 materialization preflight contract": "after A7FF51E static-ready 50000 blueprints; no numeric replay/search",
     "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
 }
