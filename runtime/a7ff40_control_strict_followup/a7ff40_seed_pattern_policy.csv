@@ -1,0 +1,8 @@
+semantic_pair,motif,seed_rows,seed_blueprints,label_count,min_control_ratio,median_control_ratio,max_response_proxy_score,primary_field_count,secondary_field_count,a7ff40_policy
+funding_like|basis_premium_like,sub,21,7,4,0.2253303013138528,0.5944264114160742,23.614348493811892,1,1,expand_control_strict
+funding_like|basis_premium_like,spread_rank,11,5,3,0.1830829241883608,0.6376940370891875,18.454915887350477,1,1,expand_control_strict
+regime_state|price_return_like,sub,5,2,3,0.3780458061389614,0.6609762270531286,8.213792625308717,1,1,diagnostic_control_repair
+funding_like|basis_premium_like,zspread,4,1,4,0.2534696909895323,0.4215477965731427,19.21352833519362,1,1,expand_control_strict
+basis_premium_like|basis_premium_like,safe_div_clip,4,1,4,0.4748114534399173,0.579051467554685,12.955997592618822,1,1,small_reference_only
+regime_state|price_return_like,spread_rank,4,2,3,0.4819811227499148,0.5897576127492916,8.213262998922097,1,1,diagnostic_control_repair
+funding_like|basis_premium_like,mul,3,1,3,0.5270061772372266,0.6511382137483697,6.140824811425166,1,1,expand_control_strict

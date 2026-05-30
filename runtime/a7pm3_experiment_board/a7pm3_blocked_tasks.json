@@ -3,6 +3,7 @@
   "A7AL-2Y generation": "not authorized",
   "A7AL-3 large search": "not authorized",
   "A7FF search execution": "numeric wave has clues but still no replay/search authorization",
+  "A7FF-41 control-strict expansion": "not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family",
   "alpha proof": "not authorized",
   "direct OI-price rerun": "superseded weak prior / not authorized",
   "shadow/paper/live": "not authorized"

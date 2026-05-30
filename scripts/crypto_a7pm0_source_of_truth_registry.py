@@ -16,6 +16,7 @@ REPORT = REPO / "reports" / "CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md"
 
 
 BLOCKED_TASKS = {
+    "A7FF-41": "not authorized by A7FF-40 because selected control-strict non-L7 evidence is still single-family",
     "A7AL-2Q": "superseded/not_authorized by A7AL-2X0",
     "A7AL-2Y": "formula generation/search execution not authorized",
     "A7AL-3": "large search not authorized",
@@ -27,7 +28,7 @@ BLOCKED_TASKS = {
 }
 
 NEXT_ALLOWED_TASKS = {
-    "A7FF-40": "control-strict focused follow-up after A7FF-39; no search",
+    "A7FF-R7": "operator-pair repair after A7FF-40 single-family selected evidence; no search",
     "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
 }

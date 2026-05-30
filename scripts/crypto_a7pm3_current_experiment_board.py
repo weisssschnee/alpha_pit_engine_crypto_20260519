@@ -16,12 +16,13 @@ A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 
 
 ALLOWED = {
-    "A7FF-40": "control-strict focused follow-up after A7FF-39; no search",
+    "A7FF-R7": "operator-pair repair after A7FF-40 single-family selected evidence; no search",
     "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
     "A7PM-0/3 maintenance": "governance registry maintenance",
 }
 
 BLOCKED = {
+    "A7FF-41 control-strict expansion": "not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family",
     "A7FF search execution": "numeric wave has clues but still no replay/search authorization",
     "A7AL-2Y generation": "not authorized",
     "A7AL-3 large search": "not authorized",
@@ -66,7 +67,7 @@ def main() -> None:
     active = pd.DataFrame(
         [
             {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
-            {"workstream": "a7ff_family_diversification", "current_stage": "A7FF-39", "status": "pass_control_strict_followup_ready", "next": "A7FF-40 control-strict focused follow-up"},
+            {"workstream": "a7ff_family_diversification", "current_stage": "A7FF-40", "status": "hold_selected_single_family", "next": "A7FF-R7 operator-pair repair"},
             {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R3", "status": "pass_dense_materializer_preflight", "next": "A7FF-24R4 repaired-queue numeric wave contract"},
             {"workstream": "search_execution", "current_stage": "blocked", "status": "not_authorized", "next": "none"},
         ]
@@ -120,7 +121,7 @@ def main() -> None:
         "",
         "```text",
         "No formula search, large search, alpha proof, shadow, paper, or live execution is authorized.",
-        "The next technical work is A7FF-40 control-strict focused follow-up and A7FF-24R4 repaired-queue numeric wave contract.",
+        "The next technical work is A7FF-R7 operator-pair repair and A7FF-24R4 repaired-queue numeric wave contract.",
         "```",
     ]
     REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")

@@ -1,0 +1,4 @@
+route,status,reason
+A7FF-41_control_strict_expansion,not_authorized,requires >=4 selected control-strict non-L7 rows across >=2 semantic families
+A7FF-R_operator_pair_repair,recommended_if_hold,"single-family clean evidence means feature-pair policy, not selector size, is the binding constraint"
+formula_search,blocked,A7FF-40 is numeric/forensic only and never authorizes search

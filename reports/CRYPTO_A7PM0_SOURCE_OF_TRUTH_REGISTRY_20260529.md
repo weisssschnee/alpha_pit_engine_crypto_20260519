@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T12:41:14Z
+Generated: 2026-05-30T14:37:46Z
 
 ## Decision
 
@@ -15,18 +15,15 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF38_FOCUSED_REPLAY_TASKFLOW_20260530.md
-?? reports/CRYPTO_A7FF39_FOCUSED_TASKFLOW_FORENSIC_20260530.md
-?? runtime/a7ff38_focused_replay_taskflow/
-?? runtime/a7ff39_focused_taskflow_forensic/
-?? scripts/crypto_a7ff38_focused_replay_taskflow.py
-?? scripts/crypto_a7ff39_focused_taskflow_forensic.py
-HEAD=0255072a37481073437120b7589ed5e37ac9751b
-origin/main=0255072a37481073437120b7589ed5e37ac9751b
+?? reports/CRYPTO_A7FF40_CONTROL_STRICT_FOLLOWUP_20260530.md
+?? runtime/a7ff40_control_strict_followup/
+?? scripts/crypto_a7ff40_control_strict_followup.py
+HEAD=93168587c34e1ff3d5c8bd11081252a33ff7d027
+origin/main=93168587c34e1ff3d5c8bd11081252a33ff7d027
 HEAD == origin/main: True
 ```
 
@@ -34,7 +31,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2254,
+  "artifact_count": 2276,
   "authorization_record_count": 683,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -48,12 +45,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T12:41:14Z",
-  "head": "0255072a37481073437120b7589ed5e37ac9751b",
+  "generated_at": "2026-05-30T14:37:46Z",
+  "head": "93168587c34e1ff3d5c8bd11081252a33ff7d027",
   "head_equals_origin_main": true,
-  "origin_main": "0255072a37481073437120b7589ed5e37ac9751b",
+  "origin_main": "93168587c34e1ff3d5c8bd11081252a33ff7d027",
   "stage": "A7PM-0",
-  "stage_count": 235
+  "stage_count": 236
 }
 ```
 
@@ -66,7 +63,7 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      39 |
+| hold                         | hold                       |      40 |
 | hold                         | diagnostic                 |       5 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
@@ -93,6 +90,7 @@ HEAD == origin/main: True
   "A7AL-2Q": "superseded/not_authorized by A7AL-2X0",
   "A7AL-2Y": "formula generation/search execution not authorized",
   "A7AL-3": "large search not authorized",
+  "A7FF-41": "not authorized by A7FF-40 because selected control-strict non-L7 evidence is still single-family",
   "alpha_proof": "not authorized",
   "direct_OI_price_rerun": "same objective rerun not authorized",
   "formula_search": "not authorized",
@@ -106,7 +104,7 @@ HEAD == origin/main: True
 ```json
 {
   "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
-  "A7FF-40": "control-strict focused follow-up after A7FF-39; no search",
+  "A7FF-R7": "operator-pair repair after A7FF-40 single-family selected evidence; no search",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```
