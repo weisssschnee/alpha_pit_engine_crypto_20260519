@@ -1,0 +1,87 @@
+[A7FF-24R3] loading symbols=96, base_fields=4, latent_fields=1
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7aa1_primitive_response_map.py:119: RuntimeWarning: Mean of empty slice
+  mean = np.nanmean(raw, axis=0, keepdims=True)
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7al2x5_evaluator_preflight_smoke.py:242: RuntimeWarning: Mean of empty slice
+  mean = np.nanmean(vals, axis=0, keepdims=True)
+[A7FF-24R3] evaluating blueprints=100, timestamps=3481, full_timestamps=21025
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7al2x5_evaluator_preflight_smoke.py:222: RuntimeWarning: Mean of empty slice
+  mean = np.nanmean(values, axis=0, keepdims=True)
+C:\Users\12398\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1997: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+[A7FF-24R3] evaluated 32/100
+[A7FF-24R3] evaluated 64/100
+[A7FF-24R3] evaluated 96/100
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_non_l7_numeric_clues"
+  ],
+  "decision": "HOLD_A7FF24R3_NO_NON_L7_NUMERIC_CLUES",
+  "executes_generation": false,
+  "executes_numeric_probe": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T11:01:42Z",
+  "input_blueprint_count": 100,
+  "label_response_rows": 1560,
+  "materialized_activity_ok_count": 78,
+  "non_l7_numeric_clue_rows": 0,
+  "plan": {
+    "control_probe_cap": 256,
+    "controls": [
+      "wrong_lag_future",
+      "wrong_lag_stale",
+      "time_shuffle",
+      "symbol_shuffle",
+      "sign_flip",
+      "same_family_placebo"
+    ],
+    "deep_audit_cap": 64,
+    "fast_numeric_probe_cap": 256,
+    "horizons": [
+      "1h",
+      "4h",
+      "8h",
+      "24h"
+    ],
+    "input_blueprint_source": "runtime/a7ff7e_expanded_derivation_probe_contract/a7ff7e_expanded_blueprint_pool.csv",
+    "labels": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L3_liquidity_tier_relative_return",
+      "L5_vol_adjusted_return",
+      "L7_ranked_future_return_diagnostic_only"
+    ],
+    "materialize_cap": 384,
+    "portfolio_marginal_probe_cap": 128,
+    "promotion_blockers": [
+      "L7-only cannot promote",
+      "control_ratio >= 1.0 blocks",
+      "single semantic_pair > 35pct blocks",
+      "single skeleton > 15pct blocks",
+      "numeric replay required before any search authorization"
+    ],
+    "required_outputs": [
+      "a7ff8_materialization_metrics.csv",
+      "a7ff8_label_response_metrics.csv",
+      "a7ff8_control_dominance_metrics.csv",
+      "a7ff8_nonoverlap_stats.csv",
+      "a7ff8_portfolio_marginal_proxy.csv",
+      "a7ff8_decision_record.json"
+    ],
+    "selected_blueprints": 384,
+    "stage": "A7FF-8",
+    "status": "contract_only_not_executed"
+  },
+  "portfolio_queue_count": 0,
+  "queue_limit": 100,
+  "queue_offset": 0,
+  "queue_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ff24r3_dense_materializer_preflight\\a7ff24r3_dense_tail_sample_queue.csv",
+  "queue_total_rows": 100,
+  "rank_label_diagnostic_clue_rows": 0,
+  "selected_portfolio_queue_count": 0,
+  "stage": "A7FF-24R3",
+  "uses_may": false
+}

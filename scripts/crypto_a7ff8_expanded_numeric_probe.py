@@ -29,6 +29,11 @@ from scripts.crypto_a7al2x5_evaluator_preflight_smoke import (  # noqa: E402
     parquet_schema,
     shift_matrix,
 )
+from scripts.crypto_a7ff25r6_dense_funding_state_audit import (  # noqa: E402
+    dense_ffill_and_age,
+    rolling_mean_std_z,
+    shift_matrix as dense_shift_matrix,
+)
 from scripts.crypto_a7al2z2r_broader_non_oi_materialization_repair import strict_symbols  # noqa: E402
 from scripts.crypto_a7al2z4_broader_non_oi_numeric_replay_preflight import smoke_column_indices, spread_series, tstat  # noqa: E402
 
@@ -80,6 +85,13 @@ OPERATORS = {
     "SafeDiv",
     "Clip",
     "Winsor",
+}
+DENSE_FUNDING_FIELDS = {
+    "funding_rate_state_last_ffill_8h",
+    "funding_rate_update_age_hours",
+    "funding_rate_abs_state_168h_z",
+    "funding_rate_delta_state_24h",
+    "funding_state_x_basis_delta",
 }
 
 
@@ -352,9 +364,14 @@ def main() -> None:
         fields.update(expression_fields(expr))
     base_schema = parquet_schema(BASE_DIR)
     latent_schema = parquet_schema(LATENT_PANEL)
+    requested_dense_funding = fields & DENSE_FUNDING_FIELDS
     base_fields = {field for field in fields if field in base_schema}
+    if requested_dense_funding:
+        base_fields.add("funding_rate")
+        if "funding_state_x_basis_delta" in requested_dense_funding:
+            base_fields.add("mark_index_basis_bps")
     latent_fields = {field for field in fields if field in latent_schema and field not in base_fields}
-    missing = sorted(fields - base_fields - latent_fields)
+    missing = sorted(fields - base_fields - latent_fields - requested_dense_funding)
 
     blockers: list[str] = []
     material_rows: list[dict[str, Any]] = []
@@ -368,6 +385,19 @@ def main() -> None:
         print(f"[{STAGE}] loading symbols={len(symbols)}, base_fields={len(base_fields)}, latent_fields={len(latent_fields)}", flush=True)
         loaded_symbols, timestamps, numeric = load_base(symbols, base_fields)
         numeric.update(load_latent_numeric(loaded_symbols, timestamps, latent_fields))
+        if requested_dense_funding:
+            raw_funding = numeric["funding_rate"]
+            dense_funding, funding_age = dense_ffill_and_age(raw_funding, 8)
+            numeric["funding_rate_state_last_ffill_8h"] = dense_funding
+            numeric["funding_rate_update_age_hours"] = funding_age
+            if "funding_rate_abs_state_168h_z" in requested_dense_funding:
+                numeric["funding_rate_abs_state_168h_z"] = rolling_mean_std_z(np.abs(dense_funding), 168, 48)
+            if "funding_rate_delta_state_24h" in requested_dense_funding or "funding_state_x_basis_delta" in requested_dense_funding:
+                funding_delta_24h = dense_funding - dense_shift_matrix(dense_funding, 24)
+                numeric["funding_rate_delta_state_24h"] = funding_delta_24h
+            if "funding_state_x_basis_delta" in requested_dense_funding:
+                basis = numeric["mark_index_basis_bps"]
+                numeric["funding_state_x_basis_delta"] = funding_delta_24h * (basis - dense_shift_matrix(basis, 24))
         groups = load_group_fields(loaded_symbols, timestamps, {"liquidity_tier"})
         full_timestamp_count = int(len(timestamps))
         idx = smoke_column_indices(timestamps)

@@ -1,0 +1,12 @@
+{
+  "max_selected_basis_premium_root_share": 0.2,
+  "max_selected_single_production_key_share": 0.1,
+  "max_selected_single_root_family_share": 0.3,
+  "max_selected_single_skeleton_share": 0.15,
+  "min_selected_root_family_count": 5,
+  "min_selected_signal_vector_cluster_count": 8,
+  "must_attach_negative_controls": true,
+  "must_log_field_roles": true,
+  "must_not_use_may": true,
+  "must_use_response_backed_field_roles": true
+}

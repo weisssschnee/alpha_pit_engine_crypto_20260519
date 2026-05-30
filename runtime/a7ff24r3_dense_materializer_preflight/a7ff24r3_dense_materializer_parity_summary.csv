@@ -1,0 +1,12 @@
+check,value,pass
+process_exit_code,0,True
+timed_out,False,True
+sample_rows,100,True
+eval_failure_count,0,True
+activity_ok_count,78,True
+dense_tail_activity_ok_count,78,True
+missing_field_blocker,False,True
+response_rows,1560,True
+control_rows,32760,True
+tail_raw_funding_rate_rows,0,True
+global_raw_funding_rate_rows,13,False

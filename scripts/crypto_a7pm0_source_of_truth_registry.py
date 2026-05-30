@@ -27,8 +27,8 @@ BLOCKED_TASKS = {
 }
 
 NEXT_ALLOWED_TASKS = {
-    "A7FF-32": "family diversification contract after A7FF-31 concentrated-clue hold; no search",
-    "A7FF-24R3": "dense materializer preflight on repaired A7FF-24R2 company queue; no search",
+    "A7FF-33": "family-diversified dry generation plan authorized by A7FF-32; no numeric probe or search",
+    "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
 }
 

@@ -1,0 +1,27 @@
+{
+  "allowed_family_count": 7,
+  "authorizes_a7ff33_family_diversified_dry_generation": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_numeric_probe": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blocked_pattern_count": 8,
+  "blockers": [],
+  "current_candidate_count": 6,
+  "current_max_pairwise_corr_abs": 0.9999999999999998,
+  "current_top_symbol_contribution_share": 0.05521294374079854,
+  "decision": "PASS_A7FF32_FAMILY_DIVERSIFICATION_CONTRACT_READY_FOR_A7FF33_DRY_GENERATION_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T11:05:26Z",
+  "source_a7ff24r3_decision": "PASS_A7FF24R3_DENSE_MATERIALIZER_PREFLIGHT_READY_FOR_REPAIRED_QUEUE_NUMERIC_WAVE_NO_SEARCH_AUTH",
+  "source_a7ff31_decision": "HOLD_A7FF31_PORTFOLIO_FORENSIC_CONCENTRATED_CLUE_NO_SEARCH_AUTH",
+  "stage": "A7FF-32",
+  "uses_may": false,
+  "warnings": [
+    "source_A7FF31_is_hold_by_design",
+    "current_clue_pool_all_basis_premium_root"
+  ]
+}

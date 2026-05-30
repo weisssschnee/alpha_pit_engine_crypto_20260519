@@ -1,0 +1,21 @@
+{
+  "A7FF-33_family_diversified_dry_generation": {
+    "authorized": true,
+    "execution_type": "dry_generation_only"
+  },
+  "alpha_proof": {
+    "authorized": false
+  },
+  "formula_search": {
+    "authorized": false
+  },
+  "large_search": {
+    "authorized": false
+  },
+  "numeric_probe": {
+    "authorized": false
+  },
+  "shadow_paper_live": {
+    "authorized": false
+  }
+}

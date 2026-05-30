@@ -1,0 +1,16 @@
+{
+  "company_shard_count": 18,
+  "company_wave_queue_target": 3600,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_blueprint_target": 24000,
+  "materialization_queue_target": 6000,
+  "min_motif_count": 10,
+  "min_non_basis_company_wave_share": 0.65,
+  "min_non_basis_generation_share": 0.65,
+  "min_root_family_count": 6,
+  "notes": "Scale is deliberately larger than A7FF-24R, but it is still dry generation / asset construction only.",
+  "stage": "A7FF-33",
+  "type": "family_diversified_dry_generation_plan"
+}

@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T10:46:00Z
+Generated: 2026-05-30T11:07:04Z
 
 ## Decision
 
@@ -12,13 +12,21 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
+ M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
+ M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_manifest.json
+ M scripts/crypto_a7ff8_expanded_numeric_probe.py
  M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF24R2_REPAIRED_COMPANY_QUEUE_20260530.md
-?? runtime/a7ff24r2_repaired_company_queue/
-?? scripts/crypto_a7ff24r2_repaired_company_queue.py
-HEAD=17d14235d2e2ae3461c222f3bb12b0ae19e9c9e6
-origin/main=17d14235d2e2ae3461c222f3bb12b0ae19e9c9e6
+?? reports/CRYPTO_A7FF24R3_DENSE_MATERIALIZER_PREFLIGHT_20260530.md
+?? reports/CRYPTO_A7FF32_FAMILY_DIVERSIFICATION_CONTRACT_20260530.md
+?? runtime/a7ff24r3_dense_materializer_preflight/
+?? runtime/a7ff32_family_diversification_contract/
+?? scripts/crypto_a7ff24r3_dense_materializer_preflight.py
+?? scripts/crypto_a7ff32_family_diversification_contract.py
+HEAD=3e99194c9391e40f599dd5b544e305d18e2c3f06
+origin/main=3e99194c9391e40f599dd5b544e305d18e2c3f06
 HEAD == origin/main: True
 ```
 
@@ -26,8 +34,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2119,
-  "authorization_record_count": 672,
+  "artifact_count": 2146,
+  "authorization_record_count": 678,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -40,12 +48,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T10:46:00Z",
-  "head": "17d14235d2e2ae3461c222f3bb12b0ae19e9c9e6",
+  "generated_at": "2026-05-30T11:07:04Z",
+  "head": "3e99194c9391e40f599dd5b544e305d18e2c3f06",
   "head_equals_origin_main": true,
-  "origin_main": "17d14235d2e2ae3461c222f3bb12b0ae19e9c9e6",
+  "origin_main": "3e99194c9391e40f599dd5b544e305d18e2c3f06",
   "stage": "A7PM-0",
-  "stage_count": 224
+  "stage_count": 226
 }
 ```
 
@@ -64,8 +72,8 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |      98 |
-| valid_or_historical_record   | contract                   |      45 |
+| valid_or_historical_record   | governance_or_audit        |      99 |
+| valid_or_historical_record   | contract                   |      46 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       5 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
@@ -97,8 +105,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "A7FF-24R3": "dense materializer preflight on repaired A7FF-24R2 company queue; no search",
-  "A7FF-32": "family diversification contract after A7FF-31 concentrated-clue hold; no search",
+  "A7FF-24R4": "repaired-queue numeric wave contract after A7FF-24R3 dense materializer preflight; no search",
+  "A7FF-33": "family-diversified dry generation plan authorized by A7FF-32; no numeric probe or search",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```

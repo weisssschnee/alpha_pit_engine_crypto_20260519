@@ -1,0 +1,47 @@
+{
+  "activity_ok_count": 78,
+  "authorizes_alpha_proof": false,
+  "authorizes_full_12_shard_numeric": false,
+  "authorizes_repaired_queue_numeric_wave_contract": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "control_rows": 32760,
+  "decision": "PASS_A7FF24R3_DENSE_MATERIALIZER_PREFLIGHT_READY_FOR_REPAIRED_QUEUE_NUMERIC_WAVE_NO_SEARCH_AUTH",
+  "dense_funding_state_rows": 800,
+  "dense_tail_activity_ok_count": 78,
+  "dense_tail_rows": 800,
+  "eval_failure_count": 0,
+  "eval_success_count": 100,
+  "executes_numeric_probe": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T11:01:42Z",
+  "label_response_rows": 1560,
+  "non_l7_numeric_clue_rows": 0,
+  "numeric_probe_decision": "HOLD_A7FF24R3_NO_NON_L7_NUMERIC_CLUES",
+  "process_exit_code": 0,
+  "queue_rows": 2400,
+  "rank_label_diagnostic_clue_rows": 0,
+  "raw_funding_rate_global_rows": 13,
+  "raw_funding_rate_tail_rows": 0,
+  "sample_policy": {
+    "rows_per_tail_shard": 25,
+    "tail_shards": [
+      "shard_08",
+      "shard_09",
+      "shard_10",
+      "shard_11"
+    ]
+  },
+  "sample_rows": 100,
+  "source_a7ff24r2_decision": "PASS_A7FF24R2_REPAIRED_COMPANY_QUEUE_READY_FOR_DENSE_MATERIALIZER_PREFLIGHT_NO_SEARCH_AUTH",
+  "stage": "A7FF-24R3",
+  "started_at": "2026-05-30T10:54:18Z",
+  "timed_out": false,
+  "timeout_seconds": 1800,
+  "uses_may": false,
+  "warnings": [
+    "preserved_healthy_queue_still_has_raw_funding_rate_rows"
+  ]
+}

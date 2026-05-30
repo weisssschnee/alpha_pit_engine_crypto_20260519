@@ -1,0 +1,9 @@
+pattern,rule
+basis_premium_root_only_pool,basis_premium_like selected share > 0.20 blocks progression
+raw_funding_rate_tail,raw funding_rate cannot be used in repaired tail; use dense funding state fields
+same_skeleton_cluster,single skeleton selected share > 0.15 blocks progression
+SafeDiv_unbounded,SafeDiv requires denominator guard and winsor/clip audit
+L7_ranked_label_only,ranked-return-only evidence remains diagnostic-only
+control_dominated,control_ratio >= 1.00 rejects; 0.80-1.00 warns
+May_in_selector,"May cannot enter generation, selector, ranking, weight update, or mutation"
+direct_OI_price_rerun,direct OI-price remains weak prior; no same-objective rerun
