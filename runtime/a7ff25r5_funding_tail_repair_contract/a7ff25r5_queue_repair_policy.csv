@@ -1,0 +1,5 @@
+gate,rule,failure_action
+dense_state_required,"funding-like formulas must use approved dense funding-state fields, not raw funding_rate",reject from company wave queue
+activity_precheck,finite_share >= 0.20 and nonzero_share >= 0.01 on smoke panel before queue admission,quarantine and backfill with non-funding semantic pair
+family_backfill,replace shards 08-11 with activity-capable basis/price/volatility or rebuilt funding-state interactions,do not treat 2400-row queue as uniformly healthy
+response_evidence_required,dense funding-state fields need non-L7/control-clean response before promotion beyond diagnostic,diagnostic_only

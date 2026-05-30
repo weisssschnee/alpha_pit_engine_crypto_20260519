@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-30T09:09:10Z
+Generated: 2026-05-30T09:36:14Z
 
 ## Decision
 
@@ -12,16 +12,21 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
+ M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
+ M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF25R4_NO_ACTIVITY_TAIL_AUDIT_20260530.md
-?? reports/CRYPTO_A7FF26_NUMERIC_CLUE_FORENSIC_20260530.md
-?? runtime/a7ff25r4_no_activity_tail_audit/
-?? runtime/a7ff26_numeric_clue_forensic/
-?? scripts/crypto_a7ff25r4_no_activity_tail_audit.py
-?? scripts/crypto_a7ff26_numeric_clue_forensic.py
-HEAD=cf302569c363e3623097043bd804deca8a9c5836
-origin/main=cf302569c363e3623097043bd804deca8a9c5836
+?? reports/CRYPTO_A7FF25R5_FUNDING_TAIL_REPAIR_CONTRACT_20260530.md
+?? reports/CRYPTO_A7FF27_REPLAY_PREFLIGHT_20260530.md
+?? reports/CRYPTO_A7FF27_REPLAY_PREFLIGHT_SUMMARY_20260530.md
+?? runtime/a7ff25r5_funding_tail_repair_contract/
+?? runtime/a7ff27_replay_preflight/
+?? scripts/crypto_a7ff25r5_funding_tail_repair_contract.py
+?? scripts/crypto_a7ff27_replay_preflight_summary.py
+HEAD=abb6034694107280b7ee8dc7826d56488dd3474a
+origin/main=abb6034694107280b7ee8dc7826d56488dd3474a
 HEAD == origin/main: True
 ```
 
@@ -29,7 +34,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2008,
+  "artifact_count": 2034,
   "authorization_record_count": 638,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -43,12 +48,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-30T09:09:10Z",
-  "head": "cf302569c363e3623097043bd804deca8a9c5836",
+  "generated_at": "2026-05-30T09:36:14Z",
+  "head": "abb6034694107280b7ee8dc7826d56488dd3474a",
   "head_equals_origin_main": true,
-  "origin_main": "cf302569c363e3623097043bd804deca8a9c5836",
+  "origin_main": "abb6034694107280b7ee8dc7826d56488dd3474a",
   "stage": "A7PM-0",
-  "stage_count": 214
+  "stage_count": 216
 }
 ```
 
@@ -67,8 +72,8 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |      94 |
-| valid_or_historical_record   | contract                   |      41 |
+| valid_or_historical_record   | governance_or_audit        |      95 |
+| valid_or_historical_record   | contract                   |      42 |
 | valid_or_historical_record   | smoke                      |       7 |
 | valid_or_historical_record   | diagnostic                 |       5 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
@@ -100,8 +105,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "A7FF-25R5": "funding-state tail queue repair contract for no-activity shards; no search",
-  "A7FF-27": "replay preflight for A7FF-26 promotion-ready numeric research clues; no search",
+  "A7FF-25R6": "dense funding-state materialization audit and activity precheck; no search",
+  "A7FF-28": "deep replay contract/preflight for A7FF-27 selected candidates; no search",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```

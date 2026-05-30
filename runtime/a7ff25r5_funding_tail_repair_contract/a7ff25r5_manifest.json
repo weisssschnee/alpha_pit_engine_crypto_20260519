@@ -1,0 +1,18 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_funding_state_materialization_audit": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blocked_pattern_count": 2,
+  "decision": "PASS_A7FF25R5_FUNDING_TAIL_REPAIR_CONTRACT_BUILT_NO_SEARCH_AUTH",
+  "dense_funding_state_field_count": 5,
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-30T09:30:43Z",
+  "prior_decision": "PASS_A7FF25R4_NO_ACTIVITY_TAIL_CAUSE_IDENTIFIED_REPAIR_REQUIRED",
+  "prior_stage": "A7FF-25R4",
+  "queue_policy_gate_count": 4,
+  "stage": "A7FF-25R5"
+}

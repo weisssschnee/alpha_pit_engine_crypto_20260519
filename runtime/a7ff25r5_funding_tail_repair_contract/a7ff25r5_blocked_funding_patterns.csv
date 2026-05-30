@@ -1,0 +1,3 @@
+pattern,examples,status,reason
+raw funding_rate direct wrapper,"Mean(funding_rate,*), Delta(funding_rate,*), ZScore(Mean(funding_rate,*))",blocked_from_healthy_company_queue,A7FF-25R4 showed 800/800 tail blueprints fail low finite_share
+funding_only_alpha_objective,funding_rate as standalone signal family,blocked,funding field is sparse/event-like and must be rebuilt as dense state or interaction

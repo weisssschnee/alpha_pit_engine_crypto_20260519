@@ -1,0 +1,10 @@
+{
+  "A7FF-24R2": "rebuild company queue tail after funding-state repair or backfill with healthy semantic pairs",
+  "A7FF-25R6": "implement dense funding-state materialization audit and activity precheck",
+  "blocked": [
+    "formula search",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ]
+}
