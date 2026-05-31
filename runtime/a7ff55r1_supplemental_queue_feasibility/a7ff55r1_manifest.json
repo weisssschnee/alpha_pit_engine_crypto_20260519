@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "open_interest_like_absent_from_formula_index",
+    "liquidity_like_absent_from_materialization_queue",
+    "taker_flow_like_absent_from_formula_index"
+  ],
+  "decision": "HOLD_A7FF55R1_SUPPLEMENTAL_QUEUE_ATLAS_COVERAGE_FAIL",
+  "executes_replay": false,
+  "executes_search": false,
+  "families_feasible_from_formula_index": 3,
+  "families_feasible_from_materialized_queue": 2,
+  "families_required_positive_quota": 5,
+  "formula_index_rows": 20599,
+  "generated_at": "2026-05-31T11:45:14Z",
+  "next_allowed": "A7FF-55R2 atlas field-family generation repair",
+  "quota_rows": 7,
+  "stage": "A7FF-55R1",
+  "uses_may": false
+}

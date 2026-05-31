@@ -22,6 +22,7 @@ A7FF55 = REPO / "runtime" / "a7ff55_selector_repair_contract" / "a7ff55_manifest
 A7FF55D = REPO / "runtime" / "a7ff55d_selector_repair_partial_dryrun" / "a7ff55d_manifest.json"
 A7FF55F = REPO / "runtime" / "a7ff55f_full_primary_input_rebuild" / "a7ff55f_manifest.json"
 A7FF55R = REPO / "runtime" / "a7ff55r_selector_field_family_repair_contract" / "a7ff55r_manifest.json"
+A7FF55R1 = REPO / "runtime" / "a7ff55r1_supplemental_queue_feasibility" / "a7ff55r1_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -52,12 +53,22 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff55d = read_json(A7FF55D)
     a7ff55f = read_json(A7FF55F)
     a7ff55r = read_json(A7FF55R)
+    a7ff55r1 = read_json(A7FF55R1)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff55r.get("decision") == "PASS_A7FF55R_SELECTOR_FIELD_FAMILY_REPAIR_CONTRACT_READY_NO_EXECUTION_AUTH":
+    if a7ff55r1.get("decision") == "HOLD_A7FF55R1_SUPPLEMENTAL_QUEUE_ATLAS_COVERAGE_FAIL":
+        allowed["A7FF-55R2 atlas field-family generation repair"] = (
+            "contract/implementation repair only; add missing open_interest/taker-flow families and materializable liquidity queue before numeric execution"
+        )
+        blocked["A7FF-55R1 supplemental numeric execution"] = "blocked: current atlas lacks open_interest/taker-flow formulas and liquidity materialization coverage"
+        blocked["A7FF-56 replay-preflight contract"] = "blocked: A7FF-55R1 atlas coverage fail"
+        current_stage = "A7FF-55R1"
+        status = "supplemental_queue_atlas_coverage_fail"
+        next_task = "A7FF-55R2 atlas field-family generation repair"
+    elif a7ff55r.get("decision") == "PASS_A7FF55R_SELECTOR_FIELD_FAMILY_REPAIR_CONTRACT_READY_NO_EXECUTION_AUTH":
         allowed["A7FF-55R1 family-diverse supplemental primary-label input generation"] = (
             "requires explicit heavy execution; over-sample open_interest/positioning/liquidity/volatility/taker-flow primary-label inputs; no replay/search/promotion"
         )

@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-31T11:38:15Z
+Generated: 2026-05-31T11:48:18Z
 
 ## Decision
 
@@ -12,26 +12,12 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
- M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
- M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
- M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
- M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
- M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
- M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF55F_FULL_PRIMARY_INPUT_REBUILD_20260531.md
-?? reports/CRYPTO_A7FF55R_SELECTOR_FIELD_FAMILY_REPAIR_CONTRACT_20260531.md
-?? runtime/a7ff55f_full_primary_input_rebuild/
-?? runtime/a7ff55r_selector_field_family_repair_contract/
-?? scripts/crypto_a7ff55f_full_primary_input_rebuild.py
-?? scripts/crypto_a7ff55r_selector_field_family_repair_contract.py
-HEAD=310e3f6ee7f9c7c6cec51ef0337bc1fca76b6db2
-origin/main=310e3f6ee7f9c7c6cec51ef0337bc1fca76b6db2
+?? reports/CRYPTO_A7FF55R1_SUPPLEMENTAL_QUEUE_FEASIBILITY_20260531.md
+?? runtime/a7ff55r1_supplemental_queue_feasibility/
+?? scripts/crypto_a7ff55r1_supplemental_queue_feasibility.py
+HEAD=c0ade9250cd71a3bab0cbeeaf8ec0f56914d5371
+origin/main=c0ade9250cd71a3bab0cbeeaf8ec0f56914d5371
 HEAD == origin/main: True
 ```
 
@@ -39,7 +25,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2503,
+  "artifact_count": 2507,
   "authorization_record_count": 685,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -53,12 +39,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-31T11:38:15Z",
-  "head": "310e3f6ee7f9c7c6cec51ef0337bc1fca76b6db2",
+  "generated_at": "2026-05-31T11:48:18Z",
+  "head": "c0ade9250cd71a3bab0cbeeaf8ec0f56914d5371",
   "head_equals_origin_main": true,
-  "origin_main": "310e3f6ee7f9c7c6cec51ef0337bc1fca76b6db2",
+  "origin_main": "c0ade9250cd71a3bab0cbeeaf8ec0f56914d5371",
   "stage": "A7PM-0",
-  "stage_count": 264
+  "stage_count": 265
 }
 ```
 
@@ -71,7 +57,7 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      46 |
+| hold                         | hold                       |      47 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |

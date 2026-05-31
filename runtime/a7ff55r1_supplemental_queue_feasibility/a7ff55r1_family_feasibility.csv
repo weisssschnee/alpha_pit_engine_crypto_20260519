@@ -1,0 +1,8 @@
+field_family,required_min_primary_candidates,formula_count,materialization_queue_count,company_wave_queue_count,semantic_pair_count,motif_count,feasible_for_supplemental_numeric,feasible_for_existing_materialized_numeric
+open_interest_like,12,0,0,0,0,0,False,False
+positioning_like,12,10781,413,13,2,9,True,True
+liquidity_like,10,186,0,0,2,8,True,False
+volatility_like,10,2384,595,595,5,10,True,True
+taker_flow_like,8,0,0,0,0,0,False,False
+basis_premium_like,0,13744,2377,2177,9,10,False,False
+regime_state,0,0,0,0,0,0,False,False
