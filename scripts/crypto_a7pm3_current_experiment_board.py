@@ -29,6 +29,7 @@ A7FF55R4 = REPO / "runtime" / "a7ff55r4_repaired_atlas_coverage_audit" / "a7ff55
 A7FF55R5 = REPO / "runtime" / "a7ff55r5_repaired_atlas_numeric_contract" / "a7ff55r5_manifest.json"
 A7FF55R5E = REPO / "runtime" / "a7ff55r5e_sharded_numeric_summary" / "a7ff55r5e_manifest.json"
 A7FFCORE0 = REPO / "runtime" / "a7ffcore0_typed_ast_governance" / "a7ffcore0_manifest.json"
+A7FFCORE1 = REPO / "runtime" / "a7ffcore1_ast_schema_adapter" / "a7ffcore1_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -66,12 +67,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff55r5 = read_json(A7FF55R5)
     a7ff55r5e = read_json(A7FF55R5E)
     a7ffcore0 = read_json(A7FFCORE0)
+    a7ffcore1 = read_json(A7FFCORE1)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore0.get("decision") == "PASS_A7FFCORE0_TYPED_AST_GOVERNANCE_READY_FOR_CORE1":
+    if a7ffcore1.get("decision") == "PASS_A7FFCORE1_AST_SCHEMA_ADAPTER_READY_FOR_CORE2":
+        allowed["A7FF-CORE2 FeatureFactory subgraph registry"] = (
+            "registry only; promote parsed AST nodes into reusable feature subgraphs with lineage/PIT/role metadata; no generation/numeric/replay/search"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked until typed subgraph registry and FormulaGen gate are wired"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "deprioritized until typed subgraph registry is available; weak numeric response should not drive untyped atlas patches"
+        )
+        current_stage = "A7FF-CORE1"
+        status = "ast_schema_adapter_ready_for_core2"
+        next_task = "A7FF-CORE2 FeatureFactory subgraph registry"
+    elif a7ffcore0.get("decision") == "PASS_A7FFCORE0_TYPED_AST_GOVERNANCE_READY_FOR_CORE1":
         allowed["A7FF-CORE1 AST schema adapter"] = (
             "governance/adapter only; round-trip expression string to typed AST JSON and back; no generation/numeric/replay/search"
         )

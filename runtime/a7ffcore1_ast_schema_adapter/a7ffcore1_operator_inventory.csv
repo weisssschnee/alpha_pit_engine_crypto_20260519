@@ -1,0 +1,11 @@
+node_value,operator_node_count
+Mean,13436
+Delta,8248
+ZScore,7978
+Mul,6300
+CSRank,4680
+Sub,2340
+Sign,1980
+Abs,1890
+SafeDiv,1530
+Neg,810
