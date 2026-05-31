@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-31T07:56:38Z
+Generated: 2026-05-31T08:03:49Z
 
 ## Decision
 
@@ -15,8 +15,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=ccd75c3db6d8ee161715f67ba65c280f0bb8ea86
-origin/main=b05823b1c580af440b3a559d12d3b78e376a0410
+HEAD=9454a1b42b1710486516dad903cfbb5b8accea6c
+origin/main=85597fb91d1ec8ece9ac54cb06d17127719a014e
 HEAD == origin/main: False
 ```
 
@@ -24,7 +24,7 @@ HEAD == origin/main: False
 
 ```json
 {
-  "artifact_count": 2452,
+  "artifact_count": 2459,
   "authorization_record_count": 685,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +38,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-31T07:56:38Z",
-  "head": "ccd75c3db6d8ee161715f67ba65c280f0bb8ea86",
+  "generated_at": "2026-05-31T08:03:49Z",
+  "head": "9454a1b42b1710486516dad903cfbb5b8accea6c",
   "head_equals_origin_main": false,
-  "origin_main": "b05823b1c580af440b3a559d12d3b78e376a0410",
+  "origin_main": "85597fb91d1ec8ece9ac54cb06d17127719a014e",
   "stage": "A7PM-0",
-  "stage_count": 258
+  "stage_count": 259
 }
 ```
 
@@ -56,7 +56,7 @@ HEAD == origin/main: False
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      43 |
+| hold                         | hold                       |      44 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |

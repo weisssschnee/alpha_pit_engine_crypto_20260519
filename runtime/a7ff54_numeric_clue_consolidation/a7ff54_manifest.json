@@ -1,0 +1,28 @@
+{
+  "authorizes_a7ff55_selector_repair_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "selected_queue_has_no_L0_L1_L3_primary_label_rows",
+    "selected_non_l7_rows_are_L5_only",
+    "selected_top_motif_share_above_0p35"
+  ],
+  "decision": "HOLD_A7FF54_SELECTED_QUEUE_LABEL_REPAIR_REQUIRED_NO_REPLAY_AUTH",
+  "executes_replay": false,
+  "executes_search": false,
+  "families_with_non_l7_clues": 6,
+  "generated_at": "2026-05-31T08:00:10Z",
+  "numeric_clue_rows": 186,
+  "rank_label_diagnostic_clue_rows": 258,
+  "selected_l5_count": 51,
+  "selected_non_l7_count": 51,
+  "selected_portfolio_queue_count": 148,
+  "selected_primary_L0_L1_L3_count": 0,
+  "source_a7ff53e_decision": "PASS_A7FF53E_NUMERIC_RESPONSE_SHARD_SUMMARY_READY_NO_SEARCH_AUTH",
+  "stage": "A7FF-54",
+  "top_selected_family_share": 0.16216216216216217,
+  "top_selected_motif_share": 0.44594594594594594,
+  "uses_may": false
+}

@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-54 numeric clue consolidation contract": "contract drafting only; consolidate 186 non-L7 clues and 148 selected queue rows; no replay/search/promotion",
+  "A7FF-55 selector repair contract": "contract drafting only; require L0/L1/L3 representation and motif caps before any replay preflight",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

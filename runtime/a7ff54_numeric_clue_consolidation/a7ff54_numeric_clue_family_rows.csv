@@ -1,0 +1,7 @@
+semantic_pair,decision,count
+basis_premium_like|price_return_like,A7FF53ES00_NUMERIC_CLUE,77
+liquidity_like|price_return_like,A7FF53ES01_NUMERIC_CLUE,10
+open_interest_like|price_return_like,A7FF53ES02_NUMERIC_CLUE,3
+positioning_like|price_return_like,A7FF53ES03_NUMERIC_CLUE,15
+regime_state|price_return_like,A7FF53ES04_NUMERIC_CLUE,72
+volatility_like|basis_premium_like,A7FF53ES05_NUMERIC_CLUE,9

@@ -1,0 +1,24 @@
+{
+  "blocked_replay_conditions": {
+    "selected_L5_only_non_L7": "not replay-authorizing",
+    "selected_L7_only": "diagnostic only",
+    "selected_primary_L0_L1_L3_count": "must be > 0 before replay preflight"
+  },
+  "clue_consolidation": {
+    "families_with_non_l7_clues": 6,
+    "numeric_clue_rows": 186,
+    "selected_portfolio_queue_count": 148
+  },
+  "next_allowed": {
+    "A7FF-55": "selector repair contract to force primary label representation and family/motif caps"
+  },
+  "not_authorized": [
+    "replay",
+    "formula search",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "source": "A7FF-53E",
+  "stage": "A7FF-54"
+}

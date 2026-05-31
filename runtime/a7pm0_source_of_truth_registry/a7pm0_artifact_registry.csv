@@ -1958,12 +1958,12 @@ runtime,A7FF-53,runtime/a7ff53_numeric_response_contract/a7ff53_execution_contra
 runtime,A7FF-53,runtime/a7ff53_numeric_response_contract/a7ff53_family_numeric_policy.csv,1da486b,add crypto a7ff53 numeric response contract,1274
 runtime,A7FF-53,runtime/a7ff53_numeric_response_contract/a7ff53_label_plan.csv,1da486b,add crypto a7ff53 numeric response contract,555
 runtime,A7FF-53,runtime/a7ff53_numeric_response_contract/a7ff53_manifest.json,1da486b,add crypto a7ff53 numeric response contract,988
-runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_decision_summary.csv,ccd75c3,summarize crypto a7ff53e numeric shards,8959
-runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_family_decision_summary.csv,ccd75c3,summarize crypto a7ff53e numeric shards,2788
-runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_manifest.json,ccd75c3,summarize crypto a7ff53e numeric shards,710
-runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_selected_portfolio_queue_compact.csv,ccd75c3,summarize crypto a7ff53e numeric shards,22795
-runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_selected_summary.csv,ccd75c3,summarize crypto a7ff53e numeric shards,783
-runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_shard_summary.csv,ccd75c3,summarize crypto a7ff53e numeric shards,960
+runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_decision_summary.csv,85597fb,summarize crypto a7ff53e numeric shards,8959
+runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_family_decision_summary.csv,85597fb,summarize crypto a7ff53e numeric shards,2788
+runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_manifest.json,85597fb,summarize crypto a7ff53e numeric shards,710
+runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_selected_portfolio_queue_compact.csv,85597fb,summarize crypto a7ff53e numeric shards,22795
+runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_selected_summary.csv,85597fb,summarize crypto a7ff53e numeric shards,783
+runtime,A7FF-53E,runtime/a7ff53e_numeric_response_summary/a7ff53e_shard_summary.csv,85597fb,summarize crypto a7ff53e numeric shards,960
 runtime,A7FF-53E-S00,runtime/a7ff53e_numeric_response_execution_s00/a7ff53e_s00_control_dominance_metrics.csv,b05823b,run crypto a7ff53e first numeric shard,8213461
 runtime,A7FF-53E-S00,runtime/a7ff53e_numeric_response_execution_s00/a7ff53e_s00_control_summary.csv,b05823b,run crypto a7ff53e first numeric shard,453
 runtime,A7FF-53E-S00,runtime/a7ff53e_numeric_response_execution_s00/a7ff53e_s00_decision_counts.csv,b05823b,run crypto a7ff53e first numeric shard,1528
@@ -1975,6 +1975,12 @@ runtime,A7FF-53E-S00,runtime/a7ff53e_numeric_response_execution_s00/a7ff53e_s00_
 runtime,A7FF-53E-S00,runtime/a7ff53e_numeric_response_execution_s00/a7ff53e_s00_nonoverlap_stats.csv,b05823b,run crypto a7ff53e first numeric shard,315668
 runtime,A7FF-53E-S00,runtime/a7ff53e_numeric_response_execution_s00/a7ff53e_s00_portfolio_marginal_proxy.csv,b05823b,run crypto a7ff53e first numeric shard,25855
 runtime,A7FF-53E-S00,runtime/a7ff53e_numeric_response_execution_s00/a7ff53e_s00_selected_portfolio_queue.csv,b05823b,run crypto a7ff53e first numeric shard,21517
+runtime,A7FF-54,runtime/a7ff54_numeric_clue_consolidation/a7ff54_manifest.json,9454a1b,add crypto a7ff54 numeric clue consolidation,1045
+runtime,A7FF-54,runtime/a7ff54_numeric_clue_consolidation/a7ff54_numeric_clue_family_rows.csv,9454a1b,add crypto a7ff54 numeric clue consolidation,404
+runtime,A7FF-54,runtime/a7ff54_numeric_clue_consolidation/a7ff54_replay_preflight_policy.json,9454a1b,add crypto a7ff54 numeric clue consolidation,679
+runtime,A7FF-54,runtime/a7ff54_numeric_clue_consolidation/a7ff54_selected_family_label_distribution.csv,9454a1b,add crypto a7ff54 numeric clue consolidation,783
+runtime,A7FF-54,runtime/a7ff54_numeric_clue_consolidation/a7ff54_selected_label_distribution.csv,9454a1b,add crypto a7ff54 numeric clue consolidation,84
+runtime,A7FF-54,runtime/a7ff54_numeric_clue_consolidation/a7ff54_selected_motif_distribution.csv,9454a1b,add crypto a7ff54 numeric clue consolidation,122
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_manifest.json,b725826,add crypto a7ff field to factor compiler,453
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_portfolio_marginal_queue.csv,b725826,add crypto a7ff field to factor compiler,2157
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_selected_dryrun_queue.csv,b725826,add crypto a7ff field to factor compiler,751
@@ -2223,7 +2229,8 @@ report,A7FF52E-MATERIALIZATION-PREFLIGHT,reports/CRYPTO_A7FF52E_MATERIALIZATION_
 report,A7FF53-NUMERIC-RESPONSE-CONTRACT,reports/CRYPTO_A7FF53_NUMERIC_RESPONSE_CONTRACT_20260531.md,1da486b,add crypto a7ff53 numeric response contract,7389
 runtime,A7FF53E,runtime/a7ff53e_numeric_response_execution/a7ff53e_numeric_queue.csv,b05823b,run crypto a7ff53e first numeric shard,735973
 report,A7FF53E-NUMERIC-RESPONSE-EXECUTION-S00,reports/CRYPTO_A7FF53E_NUMERIC_RESPONSE_EXECUTION_S00_20260531.md,b05823b,run crypto a7ff53e first numeric shard,45683
-report,A7FF53E-NUMERIC-RESPONSE-SUMMARY,reports/CRYPTO_A7FF53E_NUMERIC_RESPONSE_SUMMARY_20260531.md,ccd75c3,summarize crypto a7ff53e numeric shards,16927
+report,A7FF53E-NUMERIC-RESPONSE-SUMMARY,reports/CRYPTO_A7FF53E_NUMERIC_RESPONSE_SUMMARY_20260531.md,85597fb,summarize crypto a7ff53e numeric shards,16927
+report,A7FF54-NUMERIC-CLUE-CONSOLIDATION,reports/CRYPTO_A7FF54_NUMERIC_CLUE_CONSOLIDATION_20260531.md,9454a1b,add crypto a7ff54 numeric clue consolidation,8114
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
 report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_DERIVATION_PROBE_CONTRACT_20260530.md,bd530c1,expand crypto a7ff derivation probe contract,25056
 report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
@@ -2245,13 +2252,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,ccd75c3,summarize crypto a7ff53e numeric shards,366767
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,9454a1b,add crypto a7ff54 numeric clue consolidation,367817
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,ce25d84,advance crypto a7ff bounded replay forensics,100789
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,ccd75c3,summarize crypto a7ff53e numeric shards,153171
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,ccd75c3,summarize crypto a7ff53e numeric shards,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,9454a1b,add crypto a7ff54 numeric clue consolidation,153185
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,9454a1b,add crypto a7ff54 numeric clue consolidation,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,ccd75c3,summarize crypto a7ff53e numeric shards,81567
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,9454a1b,add crypto a7ff54 numeric clue consolidation,81865
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -2267,15 +2274,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,ccd75c3,summarize crypto a7ff53e numeric shards,354
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,ccd75c3,summarize crypto a7ff53e numeric shards,351
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,ccd75c3,summarize crypto a7ff53e numeric shards,1256
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,ccd75c3,summarize crypto a7ff53e numeric shards,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,ccd75c3,summarize crypto a7ff53e numeric shards,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,ccd75c3,summarize crypto a7ff53e numeric shards,5846
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,9454a1b,add crypto a7ff54 numeric clue consolidation,346
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,9454a1b,add crypto a7ff54 numeric clue consolidation,330
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,9454a1b,add crypto a7ff54 numeric clue consolidation,1266
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,9454a1b,add crypto a7ff54 numeric clue consolidation,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,9454a1b,add crypto a7ff54 numeric clue consolidation,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,9454a1b,add crypto a7ff54 numeric clue consolidation,5849
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,ccd75c3,summarize crypto a7ff53e numeric shards,4787
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,9454a1b,add crypto a7ff54 numeric clue consolidation,4713
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
