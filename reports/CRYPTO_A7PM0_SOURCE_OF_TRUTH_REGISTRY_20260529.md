@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-31T17:37:54Z
+Generated: 2026-05-31T17:43:06Z
 
 ## Decision
 
@@ -11,20 +11,19 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
+## main...origin/main [ahead 1]
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=1ded83325280f2c8581dc987729584621017c25d
-origin/main=1ded83325280f2c8581dc987729584621017c25d
-HEAD == origin/main: True
+HEAD=02de3f1af67e76330aa7f863e54fed2dc9b653ec
+origin/main=4122604a1ba2914bc61f3df82240a709d8bacf06
+HEAD == origin/main: False
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 2572,
+  "artifact_count": 2580,
   "authorization_record_count": 685,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +37,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-31T17:37:54Z",
-  "head": "1ded83325280f2c8581dc987729584621017c25d",
-  "head_equals_origin_main": true,
-  "origin_main": "1ded83325280f2c8581dc987729584621017c25d",
+  "generated_at": "2026-05-31T17:43:06Z",
+  "head": "02de3f1af67e76330aa7f863e54fed2dc9b653ec",
+  "head_equals_origin_main": false,
+  "origin_main": "4122604a1ba2914bc61f3df82240a709d8bacf06",
   "stage": "A7PM-0",
-  "stage_count": 274
+  "stage_count": 275
 }
 ```
 
@@ -62,7 +61,7 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     123 |
+| valid_or_historical_record   | governance_or_audit        |     124 |
 | valid_or_historical_record   | contract                   |      58 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       7 |
