@@ -43,6 +43,7 @@ A7FFCORE7ER = REPO / "runtime" / "a7ffcore7er_repaired_numeric_response" / "a7ff
 A7FFCORE8 = REPO / "runtime" / "a7ffcore8_numeric_clue_consolidation" / "a7ffcore8_manifest.json"
 A7FFCORE8E = REPO / "runtime" / "a7ffcore8e_replay_preflight_packet_audit" / "a7ffcore8e_manifest.json"
 A7FFCORE9 = REPO / "runtime" / "a7ffcore9_bounded_replay_contract" / "a7ffcore9_manifest.json"
+A7FFCORE9E = REPO / "runtime" / "a7ffcore9e_bounded_replay" / "a7ffcore9e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -94,12 +95,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore8 = read_json(A7FFCORE8)
     a7ffcore8e = read_json(A7FFCORE8E)
     a7ffcore9 = read_json(A7FFCORE9)
+    a7ffcore9e = read_json(A7FFCORE9E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore9.get("decision") == "PASS_A7FFCORE9_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE9E":
+    if a7ffcore9e.get("decision") == "PASS_A7FFCORE9E_BOUNDED_REPLAY_CLEAN_CANDIDATES_READY_FOR_CORE10":
+        allowed["A7FF-CORE10 replay-clean consolidation / search-readiness contract"] = (
+            "contract only; consolidate CORE9E replay-clean candidates and define search-readiness gates; no formula search or promotion"
+        )
+        blocked["A7FF-CORE9E rerun"] = "bounded replay passed; rerun only if packet, replay policy, or data changes"
+        blocked["A7FF-CORE9 large replay"] = "blocked: CORE9E is bounded replay only and authorizes CORE10 contract"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE9E gate-native replay path"
+        current_stage = "A7FF-CORE9E"
+        status = "bounded_replay_clean_candidates_ready_for_core10"
+        next_task = "A7FF-CORE10 replay-clean consolidation / search-readiness contract"
+    elif a7ffcore9.get("decision") == "PASS_A7FFCORE9_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE9E":
         allowed["A7FF-CORE9E bounded replay execution"] = (
             "bounded replay execution over CORE9 contract packet only; no formula search, large search, promotion, or alpha proof"
         )

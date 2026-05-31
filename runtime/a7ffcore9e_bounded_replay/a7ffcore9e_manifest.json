@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core10_contract": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 114,
+  "decision": "PASS_A7FFCORE9E_BOUNDED_REPLAY_CLEAN_CANDIDATES_READY_FOR_CORE10",
+  "eval_error_count": 0,
+  "executes_replay": true,
+  "executes_search": false,
+  "generated_at": "2026-05-31T23:55:53Z",
+  "next_allowed": "A7FF-CORE10 replay-clean consolidation / search-readiness contract",
+  "replay_clean_candidate_count": 27,
+  "replay_clean_motif_bucket_count": 6,
+  "replay_clean_semantic_bucket_count": 8,
+  "replay_rows": 1368,
+  "sample_rows": 383696,
+  "sample_timestamp_count": 1152,
+  "source_decision": "PASS_A7FFCORE9_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE9E",
+  "source_stage": "A7FF-CORE9",
+  "stage": "A7FF-CORE9E"
+}
