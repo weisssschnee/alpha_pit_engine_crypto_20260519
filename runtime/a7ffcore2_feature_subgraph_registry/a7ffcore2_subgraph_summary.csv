@@ -1,0 +1,6 @@
+subgraph_kind,formula_gen_gate,subgraphs,blueprint_refs,max_ref_count
+factor_candidate_root,diagnostic_or_repair_root_only,9240,35619,3612
+typed_interaction_subgraph,feature_factory_reusable_subgraph,1943,1943,1
+typed_transform_subgraph,feature_factory_reusable_subgraph,862,21588,180
+field_node,feature_factory_reusable_subgraph,15,6900,800
+const_node,registry_only,4,16020,6162

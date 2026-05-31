@@ -30,6 +30,7 @@ A7FF55R5 = REPO / "runtime" / "a7ff55r5_repaired_atlas_numeric_contract" / "a7ff
 A7FF55R5E = REPO / "runtime" / "a7ff55r5e_sharded_numeric_summary" / "a7ff55r5e_manifest.json"
 A7FFCORE0 = REPO / "runtime" / "a7ffcore0_typed_ast_governance" / "a7ffcore0_manifest.json"
 A7FFCORE1 = REPO / "runtime" / "a7ffcore1_ast_schema_adapter" / "a7ffcore1_manifest.json"
+A7FFCORE2 = REPO / "runtime" / "a7ffcore2_feature_subgraph_registry" / "a7ffcore2_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -68,12 +69,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff55r5e = read_json(A7FF55R5E)
     a7ffcore0 = read_json(A7FFCORE0)
     a7ffcore1 = read_json(A7FFCORE1)
+    a7ffcore2 = read_json(A7FFCORE2)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore1.get("decision") == "PASS_A7FFCORE1_AST_SCHEMA_ADAPTER_READY_FOR_CORE2":
+    if a7ffcore2.get("decision") == "PASS_A7FFCORE2_FEATURE_SUBGRAPH_REGISTRY_READY_FOR_CORE3":
+        allowed["A7FF-CORE3 FormulaGen subgraph gate"] = (
+            "governance/gate only; require FormulaGen to consume approved typed subgraphs and reject bypassed raw expressions; no generation/numeric/replay/search"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked until FormulaGen subgraph gate is wired and audited"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "deprioritized until FormulaGen consumes typed subgraph registry; weak numeric response should not drive untyped atlas patches"
+        )
+        current_stage = "A7FF-CORE2"
+        status = "feature_subgraph_registry_ready_for_core3"
+        next_task = "A7FF-CORE3 FormulaGen subgraph gate"
+    elif a7ffcore1.get("decision") == "PASS_A7FFCORE1_AST_SCHEMA_ADAPTER_READY_FOR_CORE2":
         allowed["A7FF-CORE2 FeatureFactory subgraph registry"] = (
             "registry only; promote parsed AST nodes into reusable feature subgraphs with lineage/PIT/role metadata; no generation/numeric/replay/search"
         )

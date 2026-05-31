@@ -1,0 +1,7 @@
+candidate_roles,formula_gen_gate,subgraphs
+role_mixed_allowed,diagnostic_or_repair_root_only,9000
+role_mixed_allowed,feature_factory_reusable_subgraph,2820
+exploratory_signal_probe,diagnostic_or_repair_root_only,170
+exploratory_signal_probe;role_mixed_allowed,diagnostic_or_repair_root_only,70
+exploratory_signal_probe;role_mixed_allowed,registry_only,3
+exploratory_signal_probe,registry_only,1
