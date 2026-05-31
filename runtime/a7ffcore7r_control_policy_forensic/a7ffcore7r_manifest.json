@@ -1,0 +1,29 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core7er": true,
+  "authorizes_core8": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE7R_CONTROL_POLICY_REPAIR_REQUIRED_READY_FOR_CORE7ER",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-31T23:08:53Z",
+  "next_allowed": "A7FF-CORE7ER repaired numeric-response rerun with sign_flip diagnostic-only policy",
+  "non_sign_controls": [
+    "time_shuffle",
+    "symbol_shuffle",
+    "same_family_placebo",
+    "wrong_lag_future",
+    "wrong_lag_stale"
+  ],
+  "primary_non_l7_repaired_clue_rows": 942,
+  "repaired_candidate_count": 472,
+  "repaired_numeric_clue_rows": 942,
+  "response_rows": 40960,
+  "sign_flip_policy": "diagnostic_only_not_allowed_in_abs_max_control_score",
+  "sign_flip_tautology_share": 1.0,
+  "source_decision": "HOLD_A7FFCORE7E_NUMERIC_RESPONSE_WEAK",
+  "source_numeric_clue_rows": 0,
+  "source_stage": "A7FF-CORE7E",
+  "stage": "A7FF-CORE7R"
+}

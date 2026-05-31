@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core8_contract": true,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE7ER_REPAIRED_NUMERIC_RESPONSE_READY_FOR_CORE8",
+  "executes_numeric_reclassification": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-31T23:10:22Z",
+  "label_family_count_with_clues": 3,
+  "next_allowed": "A7FF-CORE8 numeric clue consolidation / replay-preflight contract",
+  "numeric_clue_candidate_count": 472,
+  "numeric_clue_rows": 942,
+  "primary_non_l7_clue_rows": 942,
+  "response_rows": 40960,
+  "semantic_bucket_count_with_clues": 9,
+  "sign_flip_policy": "diagnostic_only_excluded_from_abs_max_control",
+  "source_decision": "PASS_A7FFCORE7R_CONTROL_POLICY_REPAIR_REQUIRED_READY_FOR_CORE7ER",
+  "source_stage": "A7FF-CORE7R",
+  "stage": "A7FF-CORE7ER"
+}
