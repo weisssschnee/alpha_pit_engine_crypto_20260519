@@ -11,8 +11,8 @@
   "A7FF-50": "not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps",
   "A7FF-51 execution": "not authorized by A7FF-R11; only contract drafting is allowed",
   "A7FF-55R5F expanded sharded numeric execution": "superseded by CORE7/CORE8 gate-native path",
-  "A7FF-CORE7E rerun": "superseded by CORE7ER and CORE8",
-  "A7FF-CORE8 direct replay execution": "blocked: CORE8 authorizes replay-preflight packet audit only",
+  "A7FF-CORE8 direct replay execution": "blocked: CORE8E authorizes CORE9 contract only",
+  "A7FF-CORE8E rerun": "packet audit passed; rerun only if CORE8 packet or audit policy changes",
   "alpha proof": "not authorized",
   "direct OI-price rerun": "superseded weak prior / not authorized",
   "shadow/paper/live": "not authorized"
