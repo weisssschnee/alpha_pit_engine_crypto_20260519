@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-55R5E repaired atlas numeric execution": "bounded numeric execution over repaired 2400-row queue; primary labels only; no replay/search/promotion",
+  "A7FF-55R6 numeric response forensic / atlas repair": "forensic/repair only; inspect weak primary-label response and revise repaired atlas before further numeric expansion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

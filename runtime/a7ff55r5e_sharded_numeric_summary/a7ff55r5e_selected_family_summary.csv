@@ -1,0 +1,3 @@
+semantic_pair,motif,label_family,selected_rows
+open_interest_like|positioning_like,safe_div_abs,L1_cross_sectional_relative_return,1
+taker_flow_like|open_interest_like,relative_shock,L0_raw_forward_return,1

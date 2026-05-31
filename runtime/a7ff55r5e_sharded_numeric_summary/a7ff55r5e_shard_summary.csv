@@ -1,0 +1,6 @@
+source_shard,decision,input_blueprint_count,label_response_rows,materialized_activity_ok_count,non_l7_numeric_clue_rows,selected_portfolio_queue_count,queue_offset,queue_limit
+S00,HOLD_A7FF55R5E_NO_NON_L7_NUMERIC_CLUES,100,1200,100,0,0,-1,100
+S01,HOLD_A7FF55R5E_NO_NON_L7_NUMERIC_CLUES,100,1200,100,0,0,100,100
+S12,HOLD_A7FF55R5E_NO_NON_L7_NUMERIC_CLUES,50,600,50,0,0,600,50
+S24,HOLD_A7FF55R5E_PORTFOLIO_QUEUE_TOO_SMALL,50,600,50,1,1,1200,50
+S36,HOLD_A7FF55R5E_PORTFOLIO_QUEUE_TOO_SMALL,50,600,50,3,1,1800,50

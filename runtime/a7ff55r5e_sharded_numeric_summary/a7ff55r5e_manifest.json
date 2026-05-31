@@ -1,0 +1,26 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "non_l7_clue_rows_below_12",
+    "selected_queue_rows_below_8",
+    "selected_semantic_pair_count_below_3"
+  ],
+  "decision": "HOLD_A7FF55R5E_SHARDED_NUMERIC_WEAK_RESPONSE",
+  "executes_numeric": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-31T16:15:44Z",
+  "label_response_rows": 4200,
+  "next_allowed": "A7FF-55R6 numeric response forensic / atlas repair",
+  "non_l7_numeric_clue_rows": 4,
+  "sampled_input_blueprints": 350,
+  "selected_motif_count": 2,
+  "selected_portfolio_queue_count": 2,
+  "selected_semantic_pair_count": 2,
+  "shard_count": 5,
+  "stage": "A7FF-55R5E",
+  "uses_may": false
+}

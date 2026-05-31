@@ -27,6 +27,7 @@ A7FF55R2 = REPO / "runtime" / "a7ff55r2_atlas_field_family_generation_repair" / 
 A7FF55R3 = REPO / "runtime" / "a7ff55r3_repaired_atlas_dry_generation" / "a7ff55r3_manifest.json"
 A7FF55R4 = REPO / "runtime" / "a7ff55r4_repaired_atlas_coverage_audit" / "a7ff55r4_manifest.json"
 A7FF55R5 = REPO / "runtime" / "a7ff55r5_repaired_atlas_numeric_contract" / "a7ff55r5_manifest.json"
+A7FF55R5E = REPO / "runtime" / "a7ff55r5e_sharded_numeric_summary" / "a7ff55r5e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -62,12 +63,22 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff55r3 = read_json(A7FF55R3)
     a7ff55r4 = read_json(A7FF55R4)
     a7ff55r5 = read_json(A7FF55R5)
+    a7ff55r5e = read_json(A7FF55R5E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff55r5.get("decision") == "PASS_A7FF55R5_REPAIRED_ATLAS_NUMERIC_CONTRACT_READY_FOR_EXECUTION":
+    if a7ff55r5e.get("decision") == "HOLD_A7FF55R5E_SHARDED_NUMERIC_WEAK_RESPONSE":
+        allowed["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "forensic/repair only; inspect weak primary-label response and revise repaired atlas before further numeric expansion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked: sampled repaired atlas numeric response is too weak"
+        blocked["A7FF-56 replay-preflight contract"] = "blocked: A7FF-55R5E selected queue too small and insufficiently diverse"
+        current_stage = "A7FF-55R5E"
+        status = "sharded_numeric_weak_response_hold"
+        next_task = "A7FF-55R6 numeric response forensic / atlas repair"
+    elif a7ff55r5.get("decision") == "PASS_A7FF55R5_REPAIRED_ATLAS_NUMERIC_CONTRACT_READY_FOR_EXECUTION":
         allowed["A7FF-55R5E repaired atlas numeric execution"] = (
             "bounded numeric execution over repaired 2400-row queue; primary labels only; no replay/search/promotion"
         )

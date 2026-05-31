@@ -2042,12 +2042,68 @@ runtime,A7FF-55R4,runtime/a7ff55r4_repaired_atlas_coverage_audit/a7ff55r4_queue_
 runtime,A7FF-55R4,runtime/a7ff55r4_repaired_atlas_coverage_audit/a7ff55r4_queue_by_primary_semantic.csv,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,181
 runtime,A7FF-55R4,runtime/a7ff55r4_repaired_atlas_coverage_audit/a7ff55r4_queue_by_semantic_pair.csv,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,378
 runtime,A7FF-55R4,runtime/a7ff55r4_repaired_atlas_coverage_audit/a7ff55r4_queue_by_shard.csv,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,447
-runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_execution_env.json,,,968
-runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_label_plan.csv,,,563
-runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_manifest.json,,,884
-runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_numeric_plan.json,,,782
-runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_queue_summary.csv,,,681
-runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_shard_plan.csv,,,264
+runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_execution_env.json,d404188,add crypto a7ff55r5 numeric contract,968
+runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_label_plan.csv,d404188,add crypto a7ff55r5 numeric contract,563
+runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_manifest.json,d404188,add crypto a7ff55r5 numeric contract,884
+runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_numeric_plan.json,d404188,add crypto a7ff55r5 numeric contract,782
+runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_queue_summary.csv,d404188,add crypto a7ff55r5 numeric contract,681
+runtime,A7FF-55R5,runtime/a7ff55r5_repaired_atlas_numeric_contract/a7ff55r5_shard_plan.csv,d404188,add crypto a7ff55r5 numeric contract,264
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s00/a7ff55r5e_s00_control_summary.csv,,,453
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s00/a7ff55r5e_s00_decision_counts.csv,,,433
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s00/a7ff55r5e_s00_decision_record.json,,,1958
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s00/a7ff55r5e_s00_family_decision_summary.csv,,,136
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s00/a7ff55r5e_s00_label_response_metrics.csv,,,899190
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s00/a7ff55r5e_s00_manifest.json,,,1958
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s00/a7ff55r5e_s00_materialization_metrics.csv,,,19467
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s00/a7ff55r5e_s00_nonoverlap_stats.csv,,,131809
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s00/a7ff55r5e_s00_portfolio_marginal_proxy.csv,,,2
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s00/a7ff55r5e_s00_selected_portfolio_queue.csv,,,2
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s01/a7ff55r5e_s01_control_summary.csv,,,452
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s01/a7ff55r5e_s01_decision_counts.csv,,,433
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s01/a7ff55r5e_s01_decision_record.json,,,1960
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s01/a7ff55r5e_s01_family_decision_summary.csv,,,269
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s01/a7ff55r5e_s01_label_response_metrics.csv,,,981244
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s01/a7ff55r5e_s01_manifest.json,,,1960
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s01/a7ff55r5e_s01_materialization_metrics.csv,,,26863
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s01/a7ff55r5e_s01_nonoverlap_stats.csv,,,132209
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s01/a7ff55r5e_s01_portfolio_marginal_proxy.csv,,,2
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s01/a7ff55r5e_s01_selected_portfolio_queue.csv,,,2
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s12/a7ff55r5e_s12_control_summary.csv,,,450
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s12/a7ff55r5e_s12_decision_counts.csv,,,433
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s12/a7ff55r5e_s12_decision_record.json,,,1956
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s12/a7ff55r5e_s12_family_decision_summary.csv,,,167
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s12/a7ff55r5e_s12_label_response_metrics.csv,,,491096
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s12/a7ff55r5e_s12_manifest.json,,,1956
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s12/a7ff55r5e_s12_materialization_metrics.csv,,,13388
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s12/a7ff55r5e_s12_nonoverlap_stats.csv,,,65939
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s12/a7ff55r5e_s12_portfolio_marginal_proxy.csv,,,2
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s12/a7ff55r5e_s12_selected_portfolio_queue.csv,,,2
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s24/a7ff55r5e_s24_control_summary.csv,,,451
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s24/a7ff55r5e_s24_decision_counts.csv,,,494
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s24/a7ff55r5e_s24_decision_record.json,,,1959
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s24/a7ff55r5e_s24_family_decision_summary.csv,,,239
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s24/a7ff55r5e_s24_label_response_metrics.csv,,,504894
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s24/a7ff55r5e_s24_manifest.json,,,1959
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s24/a7ff55r5e_s24_materialization_metrics.csv,,,14228
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s24/a7ff55r5e_s24_nonoverlap_stats.csv,,,66059
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s24/a7ff55r5e_s24_portfolio_marginal_proxy.csv,,,2019
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s24/a7ff55r5e_s24_selected_portfolio_queue.csv,,,2019
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s36/a7ff55r5e_s36_control_summary.csv,,,447
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s36/a7ff55r5e_s36_decision_counts.csv,,,602
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s36/a7ff55r5e_s36_decision_record.json,,,1959
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s36/a7ff55r5e_s36_family_decision_summary.csv,,,235
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s36/a7ff55r5e_s36_label_response_metrics.csv,,,500810
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s36/a7ff55r5e_s36_manifest.json,,,1959
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s36/a7ff55r5e_s36_materialization_metrics.csv,,,14061
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s36/a7ff55r5e_s36_nonoverlap_stats.csv,,,65743
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s36/a7ff55r5e_s36_portfolio_marginal_proxy.csv,,,1988
+runtime,A7FF-55R5E,runtime/a7ff55r5e_repaired_atlas_numeric_s36/a7ff55r5e_s36_selected_portfolio_queue.csv,,,1988
+runtime,A7FF-55R5E,runtime/a7ff55r5e_sharded_numeric_summary/a7ff55r5e_clue_family_summary.csv,,,381
+runtime,A7FF-55R5E,runtime/a7ff55r5e_sharded_numeric_summary/a7ff55r5e_label_response_compact.csv,,,3276537
+runtime,A7FF-55R5E,runtime/a7ff55r5e_sharded_numeric_summary/a7ff55r5e_manifest.json,,,825
+runtime,A7FF-55R5E,runtime/a7ff55r5e_sharded_numeric_summary/a7ff55r5e_selected_family_summary.csv,,,210
+runtime,A7FF-55R5E,runtime/a7ff55r5e_sharded_numeric_summary/a7ff55r5e_selected_queue_compact.csv,,,2861
+runtime,A7FF-55R5E,runtime/a7ff55r5e_sharded_numeric_summary/a7ff55r5e_shard_summary.csv,,,515
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_manifest.json,b725826,add crypto a7ff field to factor compiler,453
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_portfolio_marginal_queue.csv,b725826,add crypto a7ff field to factor compiler,2157
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_selected_dryrun_queue.csv,b725826,add crypto a7ff field to factor compiler,751
@@ -2307,7 +2363,14 @@ report,A7FF55R1-SUPPLEMENTAL-QUEUE-FEASIBILITY,reports/CRYPTO_A7FF55R1_SUPPLEMEN
 report,A7FF55R2-ATLAS-FIELD-FAMILY-GENERATION-REPAIR,reports/CRYPTO_A7FF55R2_ATLAS_FIELD_FAMILY_GENERATION_REPAIR_20260531.md,4c48b41,add crypto a7ff55r2 atlas repair,12481
 report,A7FF55R3-REPAIRED-ATLAS-DRY-GENERATION,reports/CRYPTO_A7FF55R3_REPAIRED_ATLAS_DRY_GENERATION_20260531.md,430355c,generate crypto a7ff55r3 repaired atlas,5105
 report,A7FF55R4-REPAIRED-ATLAS-COVERAGE-AUDIT,reports/CRYPTO_A7FF55R4_REPAIRED_ATLAS_COVERAGE_AUDIT_20260531.md,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,5217
-report,A7FF55R5-REPAIRED-ATLAS-NUMERIC-CONTRACT,reports/CRYPTO_A7FF55R5_REPAIRED_ATLAS_NUMERIC_CONTRACT_20260531.md,,,5634
+report,A7FF55R5-REPAIRED-ATLAS-NUMERIC-CONTRACT,reports/CRYPTO_A7FF55R5_REPAIRED_ATLAS_NUMERIC_CONTRACT_20260531.md,d404188,add crypto a7ff55r5 numeric contract,5634
+runtime,A7FF55R5E,runtime/a7ff55r5e_sharded_numeric_runner/a7ff55r5e_shard_run_results.json,,,3557
+report,A7FF55R5E-REPAIRED-ATLAS-NUMERIC-S00,reports/CRYPTO_A7FF55R5E_REPAIRED_ATLAS_NUMERIC_S00_20260531.md,,,4269
+report,A7FF55R5E-REPAIRED-ATLAS-NUMERIC-S01,reports/CRYPTO_A7FF55R5E_REPAIRED_ATLAS_NUMERIC_S01_20260531.md,,,4499
+report,A7FF55R5E-REPAIRED-ATLAS-NUMERIC-S12,reports/CRYPTO_A7FF55R5E_REPAIRED_ATLAS_NUMERIC_S12_20260531.md,,,4331
+report,A7FF55R5E-REPAIRED-ATLAS-NUMERIC-S24,reports/CRYPTO_A7FF55R5E_REPAIRED_ATLAS_NUMERIC_S24_20260531.md,,,8912
+report,A7FF55R5E-REPAIRED-ATLAS-NUMERIC-S36,reports/CRYPTO_A7FF55R5E_REPAIRED_ATLAS_NUMERIC_S36_20260531.md,,,9026
+report,A7FF55R5E-SHARDED-NUMERIC-SUMMARY,reports/CRYPTO_A7FF55R5E_SHARDED_NUMERIC_SUMMARY_20260531.md,,,4209
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
 report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_DERIVATION_PROBE_CONTRACT_20260530.md,bd530c1,expand crypto a7ff derivation probe contract,25056
 report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
@@ -2329,13 +2392,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,378571
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,d404188,add crypto a7ff55r5 numeric contract,379774
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,ce25d84,advance crypto a7ff bounded replay forensics,100789
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,157807
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,d404188,add crypto a7ff55r5 numeric contract,158586
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,d404188,add crypto a7ff55r5 numeric contract,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,84784
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,d404188,add crypto a7ff55r5 numeric contract,85128
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -2351,15 +2414,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,372
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,370
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,1386
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,5489
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,d404188,add crypto a7ff55r5 numeric contract,375
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,d404188,add crypto a7ff55r5 numeric contract,346
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,d404188,add crypto a7ff55r5 numeric contract,1259
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,d404188,add crypto a7ff55r5 numeric contract,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,d404188,add crypto a7ff55r5 numeric contract,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,d404188,add crypto a7ff55r5 numeric contract,5495
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,a89a9e9,audit crypto a7ff55r4 repaired atlas coverage,5188
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,d404188,add crypto a7ff55r5 numeric contract,4899
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
