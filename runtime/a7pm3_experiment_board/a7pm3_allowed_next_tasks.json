@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-55R2 atlas field-family generation repair": "contract/implementation repair only; add missing open_interest/taker-flow families and materializable liquidity queue before numeric execution",
+  "A7FF-55R3 repaired atlas dry generation": "dry generation only; use repaired open_interest/taker-flow/liquidity seed and pair previews; no numeric/replay/search/promotion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

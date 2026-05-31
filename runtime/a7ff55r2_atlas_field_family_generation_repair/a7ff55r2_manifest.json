@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF55R2_ATLAS_FIELD_FAMILY_GENERATION_REPAIR_READY_NO_GENERATION_EXEC",
+  "executes_generation": false,
+  "executes_numeric": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "field_repairs": 18,
+  "generated_at": "2026-05-31T11:51:09Z",
+  "next_allowed": "A7FF-55R3 repaired atlas dry generation using repaired seed/pair preview",
+  "repaired_liquidity_seed_count": 9,
+  "repaired_open_interest_seed_count": 5,
+  "repaired_taker_flow_seed_count": 4,
+  "required_pair_patch_rows": 5,
+  "source_decision": "HOLD_A7FF55R1_SUPPLEMENTAL_QUEUE_ATLAS_COVERAGE_FAIL",
+  "source_stage": "A7FF-55R1",
+  "stage": "A7FF-55R2",
+  "uses_may": false
+}

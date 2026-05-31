@@ -23,6 +23,7 @@ A7FF55D = REPO / "runtime" / "a7ff55d_selector_repair_partial_dryrun" / "a7ff55d
 A7FF55F = REPO / "runtime" / "a7ff55f_full_primary_input_rebuild" / "a7ff55f_manifest.json"
 A7FF55R = REPO / "runtime" / "a7ff55r_selector_field_family_repair_contract" / "a7ff55r_manifest.json"
 A7FF55R1 = REPO / "runtime" / "a7ff55r1_supplemental_queue_feasibility" / "a7ff55r1_manifest.json"
+A7FF55R2 = REPO / "runtime" / "a7ff55r2_atlas_field_family_generation_repair" / "a7ff55r2_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -54,12 +55,22 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff55f = read_json(A7FF55F)
     a7ff55r = read_json(A7FF55R)
     a7ff55r1 = read_json(A7FF55R1)
+    a7ff55r2 = read_json(A7FF55R2)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff55r1.get("decision") == "HOLD_A7FF55R1_SUPPLEMENTAL_QUEUE_ATLAS_COVERAGE_FAIL":
+    if a7ff55r2.get("decision") == "PASS_A7FF55R2_ATLAS_FIELD_FAMILY_GENERATION_REPAIR_READY_NO_GENERATION_EXEC":
+        allowed["A7FF-55R3 repaired atlas dry generation"] = (
+            "dry generation only; use repaired open_interest/taker-flow/liquidity seed and pair previews; no numeric/replay/search/promotion"
+        )
+        blocked["A7FF-55R1 supplemental numeric execution"] = "blocked until repaired atlas dry generation and coverage audit pass"
+        blocked["A7FF-56 replay-preflight contract"] = "blocked until repaired atlas numeric response selector queue passes"
+        current_stage = "A7FF-55R2"
+        status = "atlas_field_family_generation_repair_ready_no_generation_exec"
+        next_task = "A7FF-55R3 repaired atlas dry generation"
+    elif a7ff55r1.get("decision") == "HOLD_A7FF55R1_SUPPLEMENTAL_QUEUE_ATLAS_COVERAGE_FAIL":
         allowed["A7FF-55R2 atlas field-family generation repair"] = (
             "contract/implementation repair only; add missing open_interest/taker-flow families and materializable liquidity queue before numeric execution"
         )

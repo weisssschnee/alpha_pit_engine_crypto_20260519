@@ -1,0 +1,15 @@
+semantic_type_v3,a7ff23r_seed_route,field_count
+basis_premium_like,exploratory_signal_seed,1
+basis_premium_like,modifier_only_seed,18
+basis_premium_like,primary_signal_seed,1
+funding_like,modifier_only_seed,6
+generic_numeric,modifier_only_seed,9
+liquidity_like,exploratory_signal_seed,9
+open_interest_like,exploratory_signal_seed,5
+positioning_like,modifier_only_seed,8
+price_like,exploratory_signal_seed,1
+price_like,modifier_only_seed,2
+state_or_taxonomy,modifier_only_seed,8
+taker_flow_like,exploratory_signal_seed,4
+volatility_like,exploratory_signal_seed,2
+volatility_like,modifier_only_seed,4

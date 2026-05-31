@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-31T11:48:26Z
+Generated: 2026-05-31T11:54:13Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-05-31T11:48:26Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                 | next                                           |
-|:----------------------------|:----------------|:---------------------------------------|:-----------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                   | keep registry as source-of-truth               |
-| a7ff_family_diversification | A7FF-55R1       | supplemental_queue_atlas_coverage_fail | A7FF-55R2 atlas field-family generation repair |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution            | A7FF-24R4E if explicitly authorized            |
-| search_execution            | blocked         | not_authorized                         | none                                           |
+| workstream                  | current_stage   | status                                                        | next                                    |
+|:----------------------------|:----------------|:--------------------------------------------------------------|:----------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                                          | keep registry as source-of-truth        |
+| a7ff_family_diversification | A7FF-55R2       | atlas_field_family_generation_repair_ready_no_generation_exec | A7FF-55R3 repaired atlas dry generation |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                                   | A7FF-24R4E if explicitly authorized     |
+| search_execution            | blocked         | not_authorized                                                | none                                    |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                                                                                                         |
-|:--------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                                               |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                                                |
-| A7FF-55R2 atlas field-family generation repair    | contract/implementation repair only; add missing open_interest/taker-flow families and materializable liquidity queue before numeric execution |
+| task                                              | reason                                                                                                                          |
+|:--------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                                |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                                 |
+| A7FF-55R3 repaired atlas dry generation           | dry generation only; use repaired open_interest/taker-flow/liquidity seed and pair previews; no numeric/replay/search/promotion |
 
 ## Blocked Tasks
 
@@ -41,8 +41,8 @@ Generated: 2026-05-31T11:48:26Z
 | A7AL-2Q                                  | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                              | not authorized                                                                                                        |
 | shadow/paper/live                        | not authorized                                                                                                        |
-| A7FF-55R1 supplemental numeric execution | blocked: current atlas lacks open_interest/taker-flow formulas and liquidity materialization coverage                 |
-| A7FF-56 replay-preflight contract        | blocked: A7FF-55R1 atlas coverage fail                                                                                |
+| A7FF-55R1 supplemental numeric execution | blocked until repaired atlas dry generation and coverage audit pass                                                   |
+| A7FF-56 replay-preflight contract        | blocked until repaired atlas numeric response selector queue passes                                                   |
 
 ## Boundary
 
