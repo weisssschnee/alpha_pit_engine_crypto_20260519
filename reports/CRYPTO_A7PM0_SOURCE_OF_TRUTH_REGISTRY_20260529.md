@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-31T17:43:06Z
+Generated: 2026-05-31T17:43:34Z
 
 ## Decision
 
@@ -11,12 +11,13 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
+## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=02de3f1af67e76330aa7f863e54fed2dc9b653ec
-origin/main=4122604a1ba2914bc61f3df82240a709d8bacf06
-HEAD == origin/main: False
+HEAD=9f2f32d3e66cb19a22be12119dffcd1193a77cf5
+origin/main=9f2f32d3e66cb19a22be12119dffcd1193a77cf5
+HEAD == origin/main: True
 ```
 
 ## Manifest
@@ -37,10 +38,10 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-31T17:43:06Z",
-  "head": "02de3f1af67e76330aa7f863e54fed2dc9b653ec",
-  "head_equals_origin_main": false,
-  "origin_main": "4122604a1ba2914bc61f3df82240a709d8bacf06",
+  "generated_at": "2026-05-31T17:43:34Z",
+  "head": "9f2f32d3e66cb19a22be12119dffcd1193a77cf5",
+  "head_equals_origin_main": true,
+  "origin_main": "9f2f32d3e66cb19a22be12119dffcd1193a77cf5",
   "stage": "A7PM-0",
   "stage_count": 275
 }
