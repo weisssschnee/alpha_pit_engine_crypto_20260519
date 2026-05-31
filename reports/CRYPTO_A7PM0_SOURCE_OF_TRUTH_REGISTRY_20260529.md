@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-31T17:23:00Z
+Generated: 2026-05-31T17:25:36Z
 
 ## Decision
 
@@ -11,14 +11,12 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
- M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE1_AST_SCHEMA_ADAPTER_20260601.md
-?? runtime/a7ffcore1_ast_schema_adapter/
-?? scripts/crypto_a7ffcore1_ast_schema_adapter.py
-HEAD=72852932994495f5e9daccaf0219e3c1e4a08412
+## main...origin/main [ahead 1]
+ M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_manifest.json
+HEAD=9a6d340bf66afc5cf6dc4b4b62a95dcc53e75b89
 origin/main=72852932994495f5e9daccaf0219e3c1e4a08412
-HEAD == origin/main: True
+HEAD == origin/main: False
 ```
 
 ## Manifest
@@ -39,9 +37,9 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-31T17:23:00Z",
-  "head": "72852932994495f5e9daccaf0219e3c1e4a08412",
-  "head_equals_origin_main": true,
+  "generated_at": "2026-05-31T17:25:36Z",
+  "head": "9a6d340bf66afc5cf6dc4b4b62a95dcc53e75b89",
+  "head_equals_origin_main": false,
   "origin_main": "72852932994495f5e9daccaf0219e3c1e4a08412",
   "stage": "A7PM-0",
   "stage_count": 273
