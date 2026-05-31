@@ -59,6 +59,13 @@ LABELS = [
     "L5_vol_adjusted_return",
     "L7_ranked_future_return",
 ]
+LABEL_FILTER = [
+    x.strip()
+    for x in os.environ.get("A7FF8_LABELS", "").split(",")
+    if x.strip()
+]
+if LABEL_FILTER:
+    LABELS = [x for x in LABELS if x in set(LABEL_FILTER)]
 NON_L7_LABELS = {x for x in LABELS if x != "L7_ranked_future_return"}
 HORIZONS = [1, 4, 8, 24]
 PRE_MAY_SPLITS = ["validation_2025H1", "test_2025H2", "recent_oos_2026JanApr"]
@@ -69,6 +76,7 @@ QUEUE_OFFSET = int(os.environ.get("A7FF8_QUEUE_OFFSET", "0"))
 QUEUE_LIMIT = int(os.environ.get("A7FF8_QUEUE_LIMIT", "0"))
 MIN_FINITE_SHARE = float(os.environ.get("A7FF8_MIN_FINITE_SHARE", "0.20"))
 MIN_NONZERO_SHARE = float(os.environ.get("A7FF8_MIN_NONZERO_SHARE", "0.01"))
+WRITE_CONTROL_DETAIL = os.environ.get("A7FF8_WRITE_CONTROL_DETAIL", "1").lower() not in {"0", "false", "no"}
 
 FIELD_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
 OPERATORS = {
@@ -511,7 +519,8 @@ def main() -> None:
 
     materialized.to_csv(artifact("materialization_metrics.csv"), index=False)
     responses.to_csv(artifact("label_response_metrics.csv"), index=False)
-    controls.to_csv(artifact("control_dominance_metrics.csv"), index=False)
+    if WRITE_CONTROL_DETAIL:
+        controls.to_csv(artifact("control_dominance_metrics.csv"), index=False)
     nonoverlap.to_csv(artifact("nonoverlap_stats.csv"), index=False)
     portfolio_all.to_csv(artifact("portfolio_marginal_proxy.csv"), index=False)
     portfolio_selected.to_csv(artifact("selected_portfolio_queue.csv"), index=False)
@@ -540,6 +549,8 @@ def main() -> None:
         "rank_label_diagnostic_clue_rows": rank_clue_count,
         "portfolio_queue_count": int(len(portfolio_all)),
         "selected_portfolio_queue_count": int(len(portfolio_selected)),
+        "labels": LABELS,
+        "writes_control_detail": WRITE_CONTROL_DETAIL,
         "plan": plan,
         "authorizes_search": False,
         "authorizes_alpha_proof": False,

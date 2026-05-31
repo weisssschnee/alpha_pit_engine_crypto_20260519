@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-31T08:35:11Z
+Generated: 2026-05-31T09:40:28Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-05-31T08:35:11Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                      | next                                                              |
-|:----------------------------|:----------------|:--------------------------------------------|:------------------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                        | keep registry as source-of-truth                                  |
-| a7ff_family_diversification | A7FF-55         | selector_repair_contract_ready_no_execution | A7FF-55D selector input rebuild / dryrun if explicitly authorized |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                 | A7FF-24R4E if explicitly authorized                               |
-| search_execution            | blocked         | not_authorized                              | none                                                              |
+| workstream                  | current_stage   | status                                                   | next                                      |
+|:----------------------------|:----------------|:---------------------------------------------------------|:------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                                     | keep registry as source-of-truth          |
+| a7ff_family_diversification | A7FF-55D        | partial_selector_dryrun_hold_full_input_rebuild_required | A7FF-55F full primary-label input rebuild |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                              | A7FF-24R4E if explicitly authorized       |
+| search_execution            | blocked         | not_authorized                                           | none                                      |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                                                                                     |
-|:--------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                           |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                            |
-| A7FF-55D selector input rebuild / dryrun option   | requires explicit execution; rebuild primary-label response compact and dryrun selector repair; no replay/search/promotion |
+| task                                              | reason                                                                                                                |
+|:--------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                      |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                       |
+| A7FF-55F full primary-label input rebuild         | requires heavy execution; rebuild S02-S06 primary-label compact inputs with shard outputs; no replay/search/promotion |
 
 ## Blocked Tasks
 
@@ -41,7 +41,7 @@ Generated: 2026-05-31T08:35:11Z
 | A7AL-2Q                          | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                      | not authorized                                                                                                        |
 | shadow/paper/live                | not authorized                                                                                                        |
-| A7FF-54 selected queue replay    | blocked by A7FF-55: no L0/L1/L3 selected rows and L5/L7 absorption                                                    |
+| A7FF-55D replay preflight        | blocked: partial dryrun still family/motif concentrated and is not full-scope                                         |
 
 ## Boundary
 

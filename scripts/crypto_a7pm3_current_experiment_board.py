@@ -19,6 +19,7 @@ A7FF53E_S00 = REPO / "runtime" / "a7ff53e_numeric_response_execution_s00" / "a7f
 A7FF53E = REPO / "runtime" / "a7ff53e_numeric_response_summary" / "a7ff53e_manifest.json"
 A7FF54 = REPO / "runtime" / "a7ff54_numeric_clue_consolidation" / "a7ff54_manifest.json"
 A7FF55 = REPO / "runtime" / "a7ff55_selector_repair_contract" / "a7ff55_manifest.json"
+A7FF55D = REPO / "runtime" / "a7ff55d_selector_repair_partial_dryrun" / "a7ff55d_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -46,12 +47,21 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff53e = read_json(A7FF53E)
     a7ff54 = read_json(A7FF54)
     a7ff55 = read_json(A7FF55)
+    a7ff55d = read_json(A7FF55D)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff55.get("decision") == "PASS_A7FF55_SELECTOR_REPAIR_CONTRACT_READY_NO_EXECUTION_AUTH":
+    if a7ff55d.get("decision") == "HOLD_A7FF55D_PARTIAL_SELECTOR_DRYRUN_REQUIRES_FULL_INPUT_REBUILD":
+        allowed["A7FF-55F full primary-label input rebuild"] = (
+            "requires heavy execution; rebuild S02-S06 primary-label compact inputs with shard outputs; no replay/search/promotion"
+        )
+        blocked["A7FF-55D replay preflight"] = "blocked: partial dryrun still family/motif concentrated and is not full-scope"
+        current_stage = "A7FF-55D"
+        status = "partial_selector_dryrun_hold_full_input_rebuild_required"
+        next_task = "A7FF-55F full primary-label input rebuild"
+    elif a7ff55.get("decision") == "PASS_A7FF55_SELECTOR_REPAIR_CONTRACT_READY_NO_EXECUTION_AUTH":
         allowed["A7FF-55D selector input rebuild / dryrun option"] = (
             "requires explicit execution; rebuild primary-label response compact and dryrun selector repair; no replay/search/promotion"
         )
