@@ -24,6 +24,7 @@ A7FF55F = REPO / "runtime" / "a7ff55f_full_primary_input_rebuild" / "a7ff55f_man
 A7FF55R = REPO / "runtime" / "a7ff55r_selector_field_family_repair_contract" / "a7ff55r_manifest.json"
 A7FF55R1 = REPO / "runtime" / "a7ff55r1_supplemental_queue_feasibility" / "a7ff55r1_manifest.json"
 A7FF55R2 = REPO / "runtime" / "a7ff55r2_atlas_field_family_generation_repair" / "a7ff55r2_manifest.json"
+A7FF55R3 = REPO / "runtime" / "a7ff55r3_repaired_atlas_dry_generation" / "a7ff55r3_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -56,12 +57,22 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff55r = read_json(A7FF55R)
     a7ff55r1 = read_json(A7FF55R1)
     a7ff55r2 = read_json(A7FF55R2)
+    a7ff55r3 = read_json(A7FF55R3)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff55r2.get("decision") == "PASS_A7FF55R2_ATLAS_FIELD_FAMILY_GENERATION_REPAIR_READY_NO_GENERATION_EXEC":
+    if a7ff55r3.get("decision") == "PASS_A7FF55R3_REPAIRED_ATLAS_DRY_GENERATION_READY_FOR_COVERAGE_AUDIT":
+        allowed["A7FF-55R4 repaired atlas coverage audit"] = (
+            "coverage audit only; verify repaired 2400-row queue family/motif/base-field balance before numeric execution"
+        )
+        blocked["A7FF-55R3 direct numeric execution"] = "blocked: dry generation only authorizes coverage audit, not numeric execution"
+        blocked["A7FF-56 replay-preflight contract"] = "blocked until repaired atlas numeric response selector queue passes"
+        current_stage = "A7FF-55R3"
+        status = "repaired_atlas_dry_generation_ready_for_coverage_audit"
+        next_task = "A7FF-55R4 repaired atlas coverage audit"
+    elif a7ff55r2.get("decision") == "PASS_A7FF55R2_ATLAS_FIELD_FAMILY_GENERATION_REPAIR_READY_NO_GENERATION_EXEC":
         allowed["A7FF-55R3 repaired atlas dry generation"] = (
             "dry generation only; use repaired open_interest/taker-flow/liquidity seed and pair previews; no numeric/replay/search/promotion"
         )

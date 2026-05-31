@@ -1,0 +1,26 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_numeric": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FF55R3_REPAIRED_ATLAS_DRY_GENERATION_READY_FOR_COVERAGE_AUDIT",
+  "executes_generation": true,
+  "executes_numeric": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "formula_count": 9240,
+  "generated_at": "2026-05-31T12:00:34Z",
+  "next_allowed": "A7FF-55R4 repaired atlas coverage audit",
+  "queue_count": 2400,
+  "queue_motif_count": 9,
+  "queue_semantic_pair_count": 8,
+  "required_pairs_present": [
+    "liquidity_like|volatility_like",
+    "open_interest_like|positioning_like",
+    "taker_flow_like|open_interest_like"
+  ],
+  "stage": "A7FF-55R3",
+  "uses_may": false
+}

@@ -2023,13 +2023,18 @@ runtime,A7FF-55R,runtime/a7ff55r_selector_field_family_repair_contract/a7ff55r_s
 runtime,A7FF-55R1,runtime/a7ff55r1_supplemental_queue_feasibility/a7ff55r1_atlas_family_motif_availability.csv,7819ccb,audit crypto a7ff55r1 queue feasibility,4572
 runtime,A7FF-55R1,runtime/a7ff55r1_supplemental_queue_feasibility/a7ff55r1_family_feasibility.csv,7819ccb,audit crypto a7ff55r1 queue feasibility,539
 runtime,A7FF-55R1,runtime/a7ff55r1_supplemental_queue_feasibility/a7ff55r1_manifest.json,7819ccb,audit crypto a7ff55r1 queue feasibility,804
-runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_existing_pair_source_summary.csv,,,1397
-runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_manifest.json,,,833
-runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_old_seed_summary.csv,,,522
-runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_repaired_seed_policy_preview.csv,,,16675
-runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_repaired_seed_summary.csv,,,614
-runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_required_pair_policy_patch.csv,,,1056
-runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_semantic_route_repair_map.csv,,,3461
+runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_existing_pair_source_summary.csv,4c48b41,add crypto a7ff55r2 atlas repair,1397
+runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_manifest.json,4c48b41,add crypto a7ff55r2 atlas repair,833
+runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_old_seed_summary.csv,4c48b41,add crypto a7ff55r2 atlas repair,522
+runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_repaired_seed_policy_preview.csv,4c48b41,add crypto a7ff55r2 atlas repair,16675
+runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_repaired_seed_summary.csv,4c48b41,add crypto a7ff55r2 atlas repair,614
+runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_required_pair_policy_patch.csv,4c48b41,add crypto a7ff55r2 atlas repair,1056
+runtime,A7FF-55R2,runtime/a7ff55r2_atlas_field_family_generation_repair/a7ff55r2_semantic_route_repair_map.csv,4c48b41,add crypto a7ff55r2 atlas repair,3461
+runtime,A7FF-55R3,runtime/a7ff55r3_repaired_atlas_dry_generation/a7ff55r3_formula_family_summary.csv,,,1350
+runtime,A7FF-55R3,runtime/a7ff55r3_repaired_atlas_dry_generation/a7ff55r3_manifest.json,,,827
+runtime,A7FF-55R3,runtime/a7ff55r3_repaired_atlas_dry_generation/a7ff55r3_queue_summary.csv,,,682
+runtime,A7FF-55R3,runtime/a7ff55r3_repaired_atlas_dry_generation/a7ff55r3_repaired_formula_index.csv,,,3181316
+runtime,A7FF-55R3,runtime/a7ff55r3_repaired_atlas_dry_generation/a7ff55r3_repaired_materialization_queue.csv,,,861574
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_manifest.json,b725826,add crypto a7ff field to factor compiler,453
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_portfolio_marginal_queue.csv,b725826,add crypto a7ff field to factor compiler,2157
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_selected_dryrun_queue.csv,b725826,add crypto a7ff field to factor compiler,751
@@ -2286,7 +2291,8 @@ report,A7FF55D-SELECTOR-REPAIR-PARTIAL-DRYRUN,reports/CRYPTO_A7FF55D_SELECTOR_RE
 report,A7FF55F-FULL-PRIMARY-INPUT-REBUILD,reports/CRYPTO_A7FF55F_FULL_PRIMARY_INPUT_REBUILD_20260531.md,c0ade92,add crypto a7ff55f selector rebuild,8230
 report,A7FF55R-SELECTOR-FIELD-FAMILY-REPAIR-CONTRACT,reports/CRYPTO_A7FF55R_SELECTOR_FIELD_FAMILY_REPAIR_CONTRACT_20260531.md,c0ade92,add crypto a7ff55f selector rebuild,7203
 report,A7FF55R1-SUPPLEMENTAL-QUEUE-FEASIBILITY,reports/CRYPTO_A7FF55R1_SUPPLEMENTAL_QUEUE_FEASIBILITY_20260531.md,7819ccb,audit crypto a7ff55r1 queue feasibility,14715
-report,A7FF55R2-ATLAS-FIELD-FAMILY-GENERATION-REPAIR,reports/CRYPTO_A7FF55R2_ATLAS_FIELD_FAMILY_GENERATION_REPAIR_20260531.md,,,12481
+report,A7FF55R2-ATLAS-FIELD-FAMILY-GENERATION-REPAIR,reports/CRYPTO_A7FF55R2_ATLAS_FIELD_FAMILY_GENERATION_REPAIR_20260531.md,4c48b41,add crypto a7ff55r2 atlas repair,12481
+report,A7FF55R3-REPAIRED-ATLAS-DRY-GENERATION,reports/CRYPTO_A7FF55R3_REPAIRED_ATLAS_DRY_GENERATION_20260531.md,,,5105
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
 report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_DERIVATION_PROBE_CONTRACT_20260530.md,bd530c1,expand crypto a7ff derivation probe contract,25056
 report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
@@ -2308,13 +2314,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,7819ccb,audit crypto a7ff55r1 queue feasibility,375312
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,4c48b41,add crypto a7ff55r2 atlas repair,376484
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,ce25d84,advance crypto a7ff bounded replay forensics,100789
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,7819ccb,audit crypto a7ff55r1 queue feasibility,155439
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,7819ccb,audit crypto a7ff55r1 queue feasibility,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,4c48b41,add crypto a7ff55r2 atlas repair,156248
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,4c48b41,add crypto a7ff55r2 atlas repair,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,7819ccb,audit crypto a7ff55r1 queue feasibility,83714
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,4c48b41,add crypto a7ff55r2 atlas repair,84095
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -2330,15 +2336,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,7819ccb,audit crypto a7ff55r1 queue feasibility,365
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,7819ccb,audit crypto a7ff55r1 queue feasibility,388
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,7819ccb,audit crypto a7ff55r1 queue feasibility,1393
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,7819ccb,audit crypto a7ff55r1 queue feasibility,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,7819ccb,audit crypto a7ff55r1 queue feasibility,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,7819ccb,audit crypto a7ff55r1 queue feasibility,5492
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,4c48b41,add crypto a7ff55r2 atlas repair,381
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,4c48b41,add crypto a7ff55r2 atlas repair,366
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,4c48b41,add crypto a7ff55r2 atlas repair,1388
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,4c48b41,add crypto a7ff55r2 atlas repair,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,4c48b41,add crypto a7ff55r2 atlas repair,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,4c48b41,add crypto a7ff55r2 atlas repair,5510
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,7819ccb,audit crypto a7ff55r1 queue feasibility,5319
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,4c48b41,add crypto a7ff55r2 atlas repair,5340
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
