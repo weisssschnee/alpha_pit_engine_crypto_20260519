@@ -1,0 +1,6 @@
+cap,limit,action
+top_semantic_pair_share,0.3,downrank_or_reject_after_cap
+top_motif_share,0.3,downrank_or_reject_after_cap
+top_label_family_share,0.35,downrank_or_reject_after_cap
+L5_share_without_primary_rows,0.0,reject_queue
+L7_replay_promotion_share,0.0,diagnostic_only

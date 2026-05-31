@@ -1,0 +1,47 @@
+{
+  "authorizes_execution": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "hard_reject": [
+    "label_family == L7_ranked_future_return for replay promotion",
+    "diagnostic_only_low_activity family as primary replay row",
+    "control_ratio >= 0.80",
+    "decision not in NUMERIC_CLUE for non-L7 rows",
+    "missing primary label quota",
+    "top motif share > 0.30",
+    "top semantic pair share > 0.30"
+  ],
+  "purpose": "repair selector target before any replay preflight",
+  "score_inputs_allowed": [
+    "non_l7_primary_label_indicator",
+    "control_margin",
+    "premay_split_stability",
+    "one_bar_lag_survival",
+    "nonoverlap_robustness",
+    "cost_proxy_survival",
+    "family_diversity_bonus",
+    "motif_diversity_bonus"
+  ],
+  "score_inputs_forbidden": [
+    "May pass/fail",
+    "May return",
+    "L7 ranked label as primary proof",
+    "raw score without control margin",
+    "stale selected queue from A7FF-54"
+  ],
+  "source": "A7FF-54",
+  "stage": "A7FF-55",
+  "target_queue": {
+    "L5_allowed_only_after_primary_quota": true,
+    "L7_diagnostic_only": true,
+    "motif_min_count": 4,
+    "primary_label_families_present": [
+      "L0_raw_forward_return",
+      "L1_cross_sectional_relative_return",
+      "L3_liquidity_tier_relative_return"
+    ],
+    "primary_label_min_rows_total": 12,
+    "selected_rows": "32 to 64",
+    "semantic_pair_min_count": 4
+  }
+}

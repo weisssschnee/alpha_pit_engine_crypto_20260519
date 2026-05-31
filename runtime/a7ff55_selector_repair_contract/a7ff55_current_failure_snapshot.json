@@ -1,0 +1,13 @@
+{
+  "a7ff54_blockers": [
+    "selected_queue_has_no_L0_L1_L3_primary_label_rows",
+    "selected_non_l7_rows_are_L5_only",
+    "selected_top_motif_share_above_0p35"
+  ],
+  "a7ff54_decision": "HOLD_A7FF54_SELECTED_QUEUE_LABEL_REPAIR_REQUIRED_NO_REPLAY_AUTH",
+  "selected_l5_count": 51,
+  "selected_non_l7_count": 51,
+  "selected_primary_L0_L1_L3_count": 0,
+  "top_selected_family_share": 0.16216216216216217,
+  "top_selected_motif_share": 0.44594594594594594
+}

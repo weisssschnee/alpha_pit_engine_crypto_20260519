@@ -1,0 +1,21 @@
+{
+  "authorizes_a7ff55e_selector_repair_execution": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FF55_SELECTOR_REPAIR_CONTRACT_READY_NO_EXECUTION_AUTH",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_selector": false,
+  "generated_at": "2026-05-31T08:32:22Z",
+  "source_a7ff54_decision": "HOLD_A7FF54_SELECTED_QUEUE_LABEL_REPAIR_REQUIRED_NO_REPLAY_AUTH",
+  "stage": "A7FF-55",
+  "uses_may": false,
+  "warnings": [
+    "contract_only_no_selector_execution",
+    "A7FF-54 selected queue remains blocked for replay",
+    "selector repair requires full or compact primary-label response rows"
+  ]
+}

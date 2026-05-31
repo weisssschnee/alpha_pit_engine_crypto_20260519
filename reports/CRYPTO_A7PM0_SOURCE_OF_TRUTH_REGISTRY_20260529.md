@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-31T08:03:49Z
+Generated: 2026-05-31T08:35:18Z
 
 ## Decision
 
@@ -15,8 +15,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=9454a1b42b1710486516dad903cfbb5b8accea6c
-origin/main=85597fb91d1ec8ece9ac54cb06d17127719a014e
+HEAD=36b39c261ddd1ab775ec5b5dc6d35da71a56dddd
+origin/main=471fd12ce81b9c7e678051faceae2533b9395fdf
 HEAD == origin/main: False
 ```
 
@@ -24,7 +24,7 @@ HEAD == origin/main: False
 
 ```json
 {
-  "artifact_count": 2459,
+  "artifact_count": 2466,
   "authorization_record_count": 685,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +38,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-31T08:03:49Z",
-  "head": "9454a1b42b1710486516dad903cfbb5b8accea6c",
+  "generated_at": "2026-05-31T08:35:18Z",
+  "head": "36b39c261ddd1ab775ec5b5dc6d35da71a56dddd",
   "head_equals_origin_main": false,
-  "origin_main": "85597fb91d1ec8ece9ac54cb06d17127719a014e",
+  "origin_main": "471fd12ce81b9c7e678051faceae2533b9395fdf",
   "stage": "A7PM-0",
-  "stage_count": 259
+  "stage_count": 260
 }
 ```
 
@@ -63,7 +63,7 @@ HEAD == origin/main: False
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     116 |
-| valid_or_historical_record   | contract                   |      54 |
+| valid_or_historical_record   | contract                   |      55 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       7 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

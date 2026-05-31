@@ -1,0 +1,4 @@
+artifact,required_columns,status,reason
+A7FF-53E label response metrics,"blueprint_id,label_family,label_horizon_h,semantic_pair,motif,decision,score_no_may",required_for_selector_repair_execution,A7FF-54 compact selected queue lacks primary-label candidates; rerank must start from full response rows or a compact clue table with L0/L1/L3 rows
+A7FF-53E control metrics,"blueprint_id,label_family,label_horizon_h,control_ratio_premay_max,decision",required_for_selector_repair_execution,selector cannot select control-dominated rows
+A7FF-53E materialization metrics,"blueprint_id,semantic_pair,motif,finite_share,nonzero_share,activity_ok",required_for_selector_repair_execution,low-activity and diagnostic-only families must be excluded from primary replay queue

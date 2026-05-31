@@ -1,0 +1,6 @@
+label_family,role,min_selected_rows,max_selected_share,selection_rule
+L0_raw_forward_return,primary,4,0.35,must compete before L5/L7 rows; cannot be backfilled by L5
+L1_cross_sectional_relative_return,primary,4,0.35,must compete before L5/L7 rows; cannot be backfilled by L5
+L3_liquidity_tier_relative_return,primary,4,0.35,must compete before L5/L7 rows; cannot be backfilled by L5
+L5_vol_adjusted_return,secondary,0,0.35,allowed only after primary-label quota is met
+L7_ranked_future_return,diagnostic_only,0,0.25,never promotes replay; diagnostic coverage only

@@ -18,6 +18,7 @@ A7FF53 = REPO / "runtime" / "a7ff53_numeric_response_contract" / "a7ff53_manifes
 A7FF53E_S00 = REPO / "runtime" / "a7ff53e_numeric_response_execution_s00" / "a7ff53e_s00_manifest.json"
 A7FF53E = REPO / "runtime" / "a7ff53e_numeric_response_summary" / "a7ff53e_manifest.json"
 A7FF54 = REPO / "runtime" / "a7ff54_numeric_clue_consolidation" / "a7ff54_manifest.json"
+A7FF55 = REPO / "runtime" / "a7ff55_selector_repair_contract" / "a7ff55_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -44,12 +45,21 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff53e_s00 = read_json(A7FF53E_S00)
     a7ff53e = read_json(A7FF53E)
     a7ff54 = read_json(A7FF54)
+    a7ff55 = read_json(A7FF55)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff54.get("decision") == "HOLD_A7FF54_SELECTED_QUEUE_LABEL_REPAIR_REQUIRED_NO_REPLAY_AUTH":
+    if a7ff55.get("decision") == "PASS_A7FF55_SELECTOR_REPAIR_CONTRACT_READY_NO_EXECUTION_AUTH":
+        allowed["A7FF-55D selector input rebuild / dryrun option"] = (
+            "requires explicit execution; rebuild primary-label response compact and dryrun selector repair; no replay/search/promotion"
+        )
+        blocked["A7FF-54 selected queue replay"] = "blocked by A7FF-55: no L0/L1/L3 selected rows and L5/L7 absorption"
+        current_stage = "A7FF-55"
+        status = "selector_repair_contract_ready_no_execution"
+        next_task = "A7FF-55D selector input rebuild / dryrun if explicitly authorized"
+    elif a7ff54.get("decision") == "HOLD_A7FF54_SELECTED_QUEUE_LABEL_REPAIR_REQUIRED_NO_REPLAY_AUTH":
         allowed["A7FF-55 selector repair contract"] = (
             "contract drafting only; require L0/L1/L3 representation and motif caps before any replay preflight"
         )

@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-31T08:03:32Z
+Generated: 2026-05-31T08:35:11Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-05-31T08:03:32Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                              | next                                |
-|:----------------------------|:----------------|:------------------------------------|:------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                | keep registry as source-of-truth    |
-| a7ff_family_diversification | A7FF-54         | hold_selector_label_repair_required | A7FF-55 selector repair contract    |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution         | A7FF-24R4E if explicitly authorized |
-| search_execution            | blocked         | not_authorized                      | none                                |
+| workstream                  | current_stage   | status                                      | next                                                              |
+|:----------------------------|:----------------|:--------------------------------------------|:------------------------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                        | keep registry as source-of-truth                                  |
+| a7ff_family_diversification | A7FF-55         | selector_repair_contract_ready_no_execution | A7FF-55D selector input rebuild / dryrun if explicitly authorized |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                 | A7FF-24R4E if explicitly authorized                               |
+| search_execution            | blocked         | not_authorized                              | none                                                              |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                                                             |
-|:--------------------------------------------------|:---------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                   |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                                                    |
-| A7FF-55 selector repair contract                  | contract drafting only; require L0/L1/L3 representation and motif caps before any replay preflight |
+| task                                              | reason                                                                                                                     |
+|:--------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                           |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                            |
+| A7FF-55D selector input rebuild / dryrun option   | requires explicit execution; rebuild primary-label response compact and dryrun selector repair; no replay/search/promotion |
 
 ## Blocked Tasks
 
@@ -41,7 +41,7 @@ Generated: 2026-05-31T08:03:32Z
 | A7AL-2Q                          | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                      | not authorized                                                                                                        |
 | shadow/paper/live                | not authorized                                                                                                        |
-| A7FF-54 replay preflight         | blocked: selected queue has no L0/L1/L3 rows and non-L7 rows are L5-only                                              |
+| A7FF-54 selected queue replay    | blocked by A7FF-55: no L0/L1/L3 selected rows and L5/L7 absorption                                                    |
 
 ## Boundary
 
