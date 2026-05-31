@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-31T12:01:00Z
+Generated: 2026-05-31T12:03:07Z
 
 ## Decision
 
@@ -13,11 +13,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ```text
 ## main...origin/main
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FF55R3_REPAIRED_ATLAS_DRY_GENERATION_20260531.md
-?? runtime/a7ff55r3_repaired_atlas_dry_generation/
-?? scripts/crypto_a7ff55r3_repaired_atlas_dry_generation.py
-HEAD=4c48b414da3c2df08cfdb4b906b7d01d0b1eca5e
-origin/main=4c48b414da3c2df08cfdb4b906b7d01d0b1eca5e
+?? reports/CRYPTO_A7FF55R4_REPAIRED_ATLAS_COVERAGE_AUDIT_20260531.md
+?? runtime/a7ff55r4_repaired_atlas_coverage_audit/
+?? scripts/crypto_a7ff55r4_repaired_atlas_coverage_audit.py
+HEAD=430355c6d22d5c16a9cfaae0f0b57561dad7a601
+origin/main=430355c6d22d5c16a9cfaae0f0b57561dad7a601
 HEAD == origin/main: True
 ```
 
@@ -25,7 +25,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2521,
+  "artifact_count": 2529,
   "authorization_record_count": 685,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -39,12 +39,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-31T12:01:00Z",
-  "head": "4c48b414da3c2df08cfdb4b906b7d01d0b1eca5e",
+  "generated_at": "2026-05-31T12:03:07Z",
+  "head": "430355c6d22d5c16a9cfaae0f0b57561dad7a601",
   "head_equals_origin_main": true,
-  "origin_main": "4c48b414da3c2df08cfdb4b906b7d01d0b1eca5e",
+  "origin_main": "430355c6d22d5c16a9cfaae0f0b57561dad7a601",
   "stage": "A7PM-0",
-  "stage_count": 267
+  "stage_count": 268
 }
 ```
 
@@ -64,7 +64,7 @@ HEAD == origin/main: True
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     119 |
-| valid_or_historical_record   | contract                   |      56 |
+| valid_or_historical_record   | contract                   |      57 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       7 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

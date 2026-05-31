@@ -1,0 +1,9 @@
+semantic_pair,queue_count,queue_share
+liquidity_like|volatility_like,600,0.25
+open_interest_like|positioning_like,600,0.25
+taker_flow_like|open_interest_like,600,0.25
+open_interest_like|price_like,440,0.18333333333333332
+liquidity_like,108,0.045
+open_interest_like,28,0.011666666666666667
+taker_flow_like,16,0.006666666666666667
+volatility_like,8,0.0033333333333333335

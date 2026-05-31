@@ -25,6 +25,7 @@ A7FF55R = REPO / "runtime" / "a7ff55r_selector_field_family_repair_contract" / "
 A7FF55R1 = REPO / "runtime" / "a7ff55r1_supplemental_queue_feasibility" / "a7ff55r1_manifest.json"
 A7FF55R2 = REPO / "runtime" / "a7ff55r2_atlas_field_family_generation_repair" / "a7ff55r2_manifest.json"
 A7FF55R3 = REPO / "runtime" / "a7ff55r3_repaired_atlas_dry_generation" / "a7ff55r3_manifest.json"
+A7FF55R4 = REPO / "runtime" / "a7ff55r4_repaired_atlas_coverage_audit" / "a7ff55r4_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -58,12 +59,22 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff55r1 = read_json(A7FF55R1)
     a7ff55r2 = read_json(A7FF55R2)
     a7ff55r3 = read_json(A7FF55R3)
+    a7ff55r4 = read_json(A7FF55R4)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff55r3.get("decision") == "PASS_A7FF55R3_REPAIRED_ATLAS_DRY_GENERATION_READY_FOR_COVERAGE_AUDIT":
+    if a7ff55r4.get("decision") == "PASS_A7FF55R4_REPAIRED_ATLAS_COVERAGE_READY_FOR_NUMERIC_CONTRACT":
+        allowed["A7FF-55R5 repaired atlas numeric contract"] = (
+            "contract drafting only; define bounded primary-label numeric run over repaired 2400-row queue; no numeric/replay/search execution"
+        )
+        blocked["A7FF-55R4 direct numeric execution"] = "blocked: coverage audit authorizes numeric contract only, not execution"
+        blocked["A7FF-56 replay-preflight contract"] = "blocked until repaired atlas numeric response selector queue passes"
+        current_stage = "A7FF-55R4"
+        status = "repaired_atlas_coverage_ready_for_numeric_contract"
+        next_task = "A7FF-55R5 repaired atlas numeric contract"
+    elif a7ff55r3.get("decision") == "PASS_A7FF55R3_REPAIRED_ATLAS_DRY_GENERATION_READY_FOR_COVERAGE_AUDIT":
         allowed["A7FF-55R4 repaired atlas coverage audit"] = (
             "coverage audit only; verify repaired 2400-row queue family/motif/base-field balance before numeric execution"
         )

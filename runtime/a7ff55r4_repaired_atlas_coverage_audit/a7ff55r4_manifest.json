@@ -1,0 +1,29 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_numeric_contract": true,
+  "authorizes_numeric_execution": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FF55R4_REPAIRED_ATLAS_COVERAGE_READY_FOR_NUMERIC_CONTRACT",
+  "executes_numeric": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "formula_count": 9240,
+  "generated_at": "2026-05-31T12:02:36Z",
+  "motif_count": 9,
+  "next_allowed": "A7FF-55R5 repaired atlas numeric contract",
+  "queue_count": 2400,
+  "required_pairs_present": [
+    "liquidity_like|volatility_like",
+    "open_interest_like|positioning_like",
+    "taker_flow_like|open_interest_like"
+  ],
+  "semantic_pair_count": 8,
+  "stage": "A7FF-55R4",
+  "top_motif_share": 0.19625,
+  "top_pair_motif_share": 0.12833333333333333,
+  "top_semantic_pair_share": 0.25,
+  "uses_may": false
+}

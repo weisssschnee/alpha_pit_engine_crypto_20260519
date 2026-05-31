@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-31T12:01:11Z
+Generated: 2026-05-31T12:03:19Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-05-31T12:01:11Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                                 | next                                    |
-|:----------------------------|:----------------|:-------------------------------------------------------|:----------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                                   | keep registry as source-of-truth        |
-| a7ff_family_diversification | A7FF-55R3       | repaired_atlas_dry_generation_ready_for_coverage_audit | A7FF-55R4 repaired atlas coverage audit |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                            | A7FF-24R4E if explicitly authorized     |
-| search_execution            | blocked         | not_authorized                                         | none                                    |
+| workstream                  | current_stage   | status                                             | next                                      |
+|:----------------------------|:----------------|:---------------------------------------------------|:------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                               | keep registry as source-of-truth          |
+| a7ff_family_diversification | A7FF-55R4       | repaired_atlas_coverage_ready_for_numeric_contract | A7FF-55R5 repaired atlas numeric contract |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                        | A7FF-24R4E if explicitly authorized       |
+| search_execution            | blocked         | not_authorized                                     | none                                      |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                                                                       |
-|:--------------------------------------------------|:-------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                             |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                                                              |
-| A7FF-55R4 repaired atlas coverage audit           | coverage audit only; verify repaired 2400-row queue family/motif/base-field balance before numeric execution |
+| task                                              | reason                                                                                                                            |
+|:--------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                                  |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                                   |
+| A7FF-55R5 repaired atlas numeric contract         | contract drafting only; define bounded primary-label numeric run over repaired 2400-row queue; no numeric/replay/search execution |
 
 ## Blocked Tasks
 
@@ -41,7 +41,7 @@ Generated: 2026-05-31T12:01:11Z
 | A7AL-2Q                            | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                        | not authorized                                                                                                        |
 | shadow/paper/live                  | not authorized                                                                                                        |
-| A7FF-55R3 direct numeric execution | blocked: dry generation only authorizes coverage audit, not numeric execution                                         |
+| A7FF-55R4 direct numeric execution | blocked: coverage audit authorizes numeric contract only, not execution                                               |
 | A7FF-56 replay-preflight contract  | blocked until repaired atlas numeric response selector queue passes                                                   |
 
 ## Boundary

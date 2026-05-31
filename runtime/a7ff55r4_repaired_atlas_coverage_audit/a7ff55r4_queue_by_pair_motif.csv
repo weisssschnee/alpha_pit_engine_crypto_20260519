@@ -1,0 +1,15 @@
+semantic_pair,motif,queue_count,queue_share
+liquidity_like|volatility_like,liquidity_shock,308,0.12833333333333333
+open_interest_like|positioning_like,delta_x_divergence,308,0.12833333333333333
+taker_flow_like|open_interest_like,flow_x_leverage,308,0.12833333333333333
+open_interest_like|positioning_like,safe_div_abs,292,0.12166666666666667
+liquidity_like|volatility_like,mean_reversion_gate,292,0.12166666666666667
+open_interest_like|price_like,mean_reversion_gate,174,0.0725
+taker_flow_like|open_interest_like,relative_shock,169,0.07041666666666667
+open_interest_like|price_like,delta_x_divergence,163,0.06791666666666667
+taker_flow_like|open_interest_like,gated_sign,123,0.05125
+liquidity_like,single,108,0.045
+open_interest_like|price_like,smooth_mul,103,0.042916666666666665
+open_interest_like,single,28,0.011666666666666667
+taker_flow_like,single,16,0.006666666666666667
+volatility_like,single,8,0.0033333333333333335
