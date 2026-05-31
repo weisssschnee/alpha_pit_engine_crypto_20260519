@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-31T18:08:39Z
+Generated: 2026-05-31T18:53:01Z
 
 ## Decision
 
@@ -13,10 +13,9 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ```text
 ## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=cfb305626b4cf7f8145f280b2b8a4867618c4ccd
-origin/main=cfb305626b4cf7f8145f280b2b8a4867618c4ccd
+HEAD=70e6950193f959d3e5a1a1f7efac018c8edac36b
+origin/main=70e6950193f959d3e5a1a1f7efac018c8edac36b
 HEAD == origin/main: True
 ```
 
@@ -24,7 +23,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2593,
+  "artifact_count": 2622,
   "authorization_record_count": 685,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +37,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-31T18:08:39Z",
-  "head": "cfb305626b4cf7f8145f280b2b8a4867618c4ccd",
+  "generated_at": "2026-05-31T18:53:01Z",
+  "head": "70e6950193f959d3e5a1a1f7efac018c8edac36b",
   "head_equals_origin_main": true,
-  "origin_main": "cfb305626b4cf7f8145f280b2b8a4867618c4ccd",
+  "origin_main": "70e6950193f959d3e5a1a1f7efac018c8edac36b",
   "stage": "A7PM-0",
-  "stage_count": 277
+  "stage_count": 279
 }
 ```
 
@@ -62,8 +61,8 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     126 |
-| valid_or_historical_record   | contract                   |      58 |
+| valid_or_historical_record   | governance_or_audit        |     127 |
+| valid_or_historical_record   | contract                   |      59 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       7 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
