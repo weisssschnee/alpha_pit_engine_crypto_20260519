@@ -1,0 +1,30 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_numeric_response_execution": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FF53_NUMERIC_RESPONSE_CONTRACT_READY_NO_EXECUTION_AUTH",
+  "diagnostic_only_low_activity_families": [
+    "funding_like|basis_premium_like"
+  ],
+  "executes_generation": false,
+  "executes_materialization": false,
+  "executes_numeric_probe": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-31T05:20:05Z",
+  "primary_family_count": 7,
+  "scale_guard_families": [
+    "taker_flow_like|basis_premium_like"
+  ],
+  "source_a7ff52e_decision": "PASS_A7FF52E_MATERIALIZATION_PREFLIGHT_READY_FOR_NUMERIC_CONTRACT",
+  "source_activity_ok_rate": 0.875,
+  "source_families_retained": 7,
+  "stage": "A7FF-53",
+  "uses_may": false,
+  "warnings": [
+    "contract_only_no_numeric_response_execution"
+  ]
+}

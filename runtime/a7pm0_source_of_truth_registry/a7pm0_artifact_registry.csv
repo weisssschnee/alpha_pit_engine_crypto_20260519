@@ -1953,6 +1953,11 @@ runtime,A7FF-52,runtime/a7ff52_materialization_preflight_contract/a7ff52_manifes
 runtime,A7FF-52E,runtime/a7ff52e_materialization_preflight/a7ff52e_manifest.json,23a5560,run crypto a7ff52e materialization preflight,884
 runtime,A7FF-52E,runtime/a7ff52e_materialization_preflight/a7ff52e_materialization_metrics.csv,23a5560,run crypto a7ff52e materialization preflight,195518
 runtime,A7FF-52E,runtime/a7ff52e_materialization_preflight/a7ff52e_summary.csv,23a5560,run crypto a7ff52e materialization preflight,877
+runtime,A7FF-53,runtime/a7ff53_numeric_response_contract/a7ff53_control_plan.csv,7322b62,add crypto a7ff53 numeric response contract,381
+runtime,A7FF-53,runtime/a7ff53_numeric_response_contract/a7ff53_execution_contract.json,7322b62,add crypto a7ff53 numeric response contract,2034
+runtime,A7FF-53,runtime/a7ff53_numeric_response_contract/a7ff53_family_numeric_policy.csv,7322b62,add crypto a7ff53 numeric response contract,1274
+runtime,A7FF-53,runtime/a7ff53_numeric_response_contract/a7ff53_label_plan.csv,7322b62,add crypto a7ff53 numeric response contract,555
+runtime,A7FF-53,runtime/a7ff53_numeric_response_contract/a7ff53_manifest.json,7322b62,add crypto a7ff53 numeric response contract,988
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_manifest.json,b725826,add crypto a7ff field to factor compiler,453
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_portfolio_marginal_queue.csv,b725826,add crypto a7ff field to factor compiler,2157
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_selected_dryrun_queue.csv,b725826,add crypto a7ff field to factor compiler,751
@@ -2198,6 +2203,7 @@ report,A7FF51-COMPACT-NON-L5-CONTRACT,reports/CRYPTO_A7FF51_COMPACT_NON_L5_CONTR
 report,A7FF51E-NON-L5-HEAVY-GENERATION,reports/CRYPTO_A7FF51E_NON_L5_HEAVY_GENERATION_20260531.md,fdf0583,run crypto a7ff51e non l5 generation,22454
 report,A7FF52-MATERIALIZATION-PREFLIGHT-CONTRACT,reports/CRYPTO_A7FF52_MATERIALIZATION_PREFLIGHT_CONTRACT_20260531.md,50ebaf9,add crypto a7ff52 materialization contract,1638
 report,A7FF52E-MATERIALIZATION-PREFLIGHT,reports/CRYPTO_A7FF52E_MATERIALIZATION_PREFLIGHT_20260531.md,23a5560,run crypto a7ff52e materialization preflight,3008
+report,A7FF53-NUMERIC-RESPONSE-CONTRACT,reports/CRYPTO_A7FF53_NUMERIC_RESPONSE_CONTRACT_20260531.md,7322b62,add crypto a7ff53 numeric response contract,7389
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
 report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_DERIVATION_PROBE_CONTRACT_20260530.md,bd530c1,expand crypto a7ff derivation probe contract,25056
 report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
@@ -2219,13 +2225,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,23a5560,run crypto a7ff52e materialization preflight,363237
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,7322b62,add crypto a7ff53 numeric response contract,363742
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,ce25d84,advance crypto a7ff bounded replay forensics,100789
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,23a5560,run crypto a7ff52e materialization preflight,150299
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,23a5560,run crypto a7ff52e materialization preflight,711
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,7322b62,add crypto a7ff53 numeric response contract,151040
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,7322b62,add crypto a7ff53 numeric response contract,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,23a5560,run crypto a7ff52e materialization preflight,80435
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,7322b62,add crypto a7ff53 numeric response contract,80741
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -2241,15 +2247,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,23a5560,run crypto a7ff52e materialization preflight,354
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,23a5560,run crypto a7ff52e materialization preflight,322
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,23a5560,run crypto a7ff52e materialization preflight,1250
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,23a5560,run crypto a7ff52e materialization preflight,1306
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,23a5560,run crypto a7ff52e materialization preflight,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,23a5560,run crypto a7ff52e materialization preflight,5451
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,7322b62,add crypto a7ff53 numeric response contract,356
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,7322b62,add crypto a7ff53 numeric response contract,332
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,7322b62,add crypto a7ff53 numeric response contract,1338
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,7322b62,add crypto a7ff53 numeric response contract,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,7322b62,add crypto a7ff53 numeric response contract,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,7322b62,add crypto a7ff53 numeric response contract,5846
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,23a5560,run crypto a7ff52e materialization preflight,4704
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,7322b62,add crypto a7ff53 numeric response contract,4885
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

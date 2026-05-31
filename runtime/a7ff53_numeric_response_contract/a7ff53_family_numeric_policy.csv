@@ -1,0 +1,9 @@
+semantic_pair,rows_in_materialization_sample,eval_success_rows,activity_ok_rows,median_finite_share,median_nonzero_share,median_std,numeric_policy,caveat
+basis_premium_like|price_return_like,150,150,150,0.820741166331514,0.999992752360756,2.095638859768559,primary_numeric_candidate,
+funding_like|basis_premium_like,150,150,0,0.0033545197740112,0.9950409068056126,0.7071067811865476,diagnostic_only_low_activity,activity_ok_rows=0 in A7FF-52E; exclude from primary response gates
+liquidity_like|price_return_like,150,150,150,0.820741166331514,0.9960736898926236,0.9538517875257616,primary_numeric_candidate,
+open_interest_like|price_return_like,150,150,150,0.8206813176290338,1.0,0.9905097732762862,primary_numeric_candidate,
+positioning_like|price_return_like,150,150,150,0.9925308819304798,1.0,0.9946816639552156,primary_numeric_candidate,
+regime_state|price_return_like,150,150,150,0.820741166331514,0.999992752360756,2.095638859768559,primary_numeric_candidate,
+taker_flow_like|basis_premium_like,150,150,150,0.8250502729100833,1.0,13239468.575422734,primary_with_scale_guard,large numeric scale; require winsor/scale audit before clue promotion
+volatility_like|basis_premium_like,150,150,150,0.820741166331514,1.0,0.9947203900944092,primary_numeric_candidate,

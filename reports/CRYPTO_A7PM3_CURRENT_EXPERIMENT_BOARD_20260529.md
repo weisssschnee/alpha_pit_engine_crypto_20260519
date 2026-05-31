@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-30T20:16:15Z
+Generated: 2026-05-31T05:21:13Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-05-30T20:16:15Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                    | next                                |
-|:----------------------------|:----------------|:------------------------------------------|:------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                      | keep registry as source-of-truth    |
-| a7ff_family_diversification | A7FF-52E        | materialization_preflight_pass_no_numeric | A7FF-53 numeric response contract   |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution               | A7FF-24R4E if explicitly authorized |
-| search_execution            | blocked         | not_authorized                            | none                                |
+| workstream                  | current_stage   | status                                       | next                                |
+|:----------------------------|:----------------|:---------------------------------------------|:------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                         | keep registry as source-of-truth    |
+| a7ff_family_diversification | A7FF-53         | numeric_response_contract_ready_no_execution | A7FF-53E if explicitly authorized   |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                  | A7FF-24R4E if explicitly authorized |
+| search_execution            | blocked         | not_authorized                               | none                                |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                                                    |
-|:--------------------------------------------------|:------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                          |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                                           |
-| A7FF-53 numeric response contract                 | contract drafting only; use A7FF-52E materialization metrics; no numeric execution/search |
+| task                                              | reason                                                                                     |
+|:--------------------------------------------------|:-------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                           |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                                            |
+| A7FF-53E numeric response execution option        | requires explicit authorization; bounded numeric response only; no replay/search/promotion |
 
 ## Blocked Tasks
 
@@ -41,6 +41,7 @@ Generated: 2026-05-30T20:16:15Z
 | A7AL-2Q                          | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                      | not authorized                                                                                                        |
 | shadow/paper/live                | not authorized                                                                                                        |
+| A7FF-53 execution                | contract ready but numeric response execution is not started                                                          |
 | A7FF-52E rerun                   | already executed; rerun only if A7FF-51E pool or evaluator changes                                                    |
 
 ## Boundary

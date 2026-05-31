@@ -1,0 +1,6 @@
+label_family,role,horizons,pass_use
+L0_raw_forward_return,primary,"1h,4h,8h,24h",can support clue only if control-clean and split-stable
+L1_cross_sectional_relative_return,primary,"1h,4h,8h,24h",required to prevent pure ranked-label artifacts
+L3_liquidity_tier_relative_return,primary,"1h,4h,8h,24h",tests liquidity-tier robustness
+L5_vol_adjusted_return,secondary,"4h,8h,24h",supports risk-normalized clue evidence but cannot stand alone
+L7_ranked_future_return,diagnostic_only,"1h,4h,8h,24h",never sufficient for promotion without non-L7 evidence

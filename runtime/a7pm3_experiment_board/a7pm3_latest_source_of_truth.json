@@ -1,6 +1,6 @@
 {
   "a7pm0": {
-    "artifact_count": 2426,
+    "artifact_count": 2432,
     "authorization_record_count": 685,
     "authorizes_a7pm1": true,
     "authorizes_a7pm2": true,
@@ -14,12 +14,12 @@
     "executes_replay": false,
     "executes_search": false,
     "executes_training": false,
-    "generated_at": "2026-05-30T20:12:27Z",
-    "head": "585085bcfa61f790273f0ac48d62805833c47d55",
-    "head_equals_origin_main": false,
-    "origin_main": "50ebaf9f561e709060c2fa33efecbbb437422f12",
+    "generated_at": "2026-05-31T05:20:41Z",
+    "head": "b56402cf668bb7d10585476e11c30211116ab019",
+    "head_equals_origin_main": true,
+    "origin_main": "b56402cf668bb7d10585476e11c30211116ab019",
     "stage": "A7PM-0",
-    "stage_count": 254
+    "stage_count": 255
   },
   "a7pm2": {
     "allowed_transition_count": 19,
@@ -36,5 +36,5 @@
     "stage": "A7PM-2",
     "state_count": 16
   },
-  "head_equals_origin_main": false
+  "head_equals_origin_main": true
 }

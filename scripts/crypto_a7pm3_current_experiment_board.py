@@ -14,6 +14,7 @@ REPORT = REPO / "reports" / "CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md"
 A7PM0 = REPO / "runtime" / "a7pm0_source_of_truth_registry" / "a7pm0_manifest.json"
 A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 A7FF52E = REPO / "runtime" / "a7ff52e_materialization_preflight" / "a7ff52e_manifest.json"
+A7FF53 = REPO / "runtime" / "a7ff53_numeric_response_contract" / "a7ff53_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -36,12 +37,22 @@ BASE_BLOCKED = {
 
 def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff52e = read_json(A7FF52E)
+    a7ff53 = read_json(A7FF53)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff52e.get("decision") == "PASS_A7FF52E_MATERIALIZATION_PREFLIGHT_READY_FOR_NUMERIC_CONTRACT":
+    if a7ff53.get("decision") == "PASS_A7FF53_NUMERIC_RESPONSE_CONTRACT_READY_NO_EXECUTION_AUTH":
+        allowed["A7FF-53E numeric response execution option"] = (
+            "requires explicit authorization; bounded numeric response only; no replay/search/promotion"
+        )
+        blocked["A7FF-53 execution"] = "contract ready but numeric response execution is not started"
+        blocked["A7FF-52E rerun"] = "already executed; rerun only if A7FF-51E pool or evaluator changes"
+        current_stage = "A7FF-53"
+        status = "numeric_response_contract_ready_no_execution"
+        next_task = "A7FF-53E if explicitly authorized"
+    elif a7ff52e.get("decision") == "PASS_A7FF52E_MATERIALIZATION_PREFLIGHT_READY_FOR_NUMERIC_CONTRACT":
         allowed["A7FF-53 numeric response contract"] = (
             "contract drafting only; use A7FF-52E materialization metrics; no numeric execution/search"
         )

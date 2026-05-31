@@ -1,0 +1,8 @@
+control,hard_gate
+wrong_lag_future,control_ratio < 0.80 for clue promotion
+wrong_lag_stale,control_ratio < 0.80 for clue promotion
+row_shuffle,must be weaker than original signal
+time_shuffle,must be weaker than original signal
+symbol_shuffle,must be weaker than original signal
+sign_flip,cannot produce symmetric pass
+same_family_placebo,must not dominate original family
