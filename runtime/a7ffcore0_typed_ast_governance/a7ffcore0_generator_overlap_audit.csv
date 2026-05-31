@@ -1,0 +1,45 @@
+object_type,object_id,in_a7ff_v20260530,in_repaired_a7ff55r3,governance_note
+semantic_pair,basis_premium_like,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,basis_premium_like|basis_premium_like,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,basis_premium_like|funding_like,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,basis_premium_like|generic_numeric,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,basis_premium_like|liquidity_like,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,basis_premium_like|positioning_like,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,basis_premium_like|price_like,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,basis_premium_like|state_or_taxonomy,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,basis_premium_like|volatility_like,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,funding_like|positioning_like,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,liquidity_like,False,True,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,liquidity_like|volatility_like,True,True,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,open_interest_like,False,True,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,open_interest_like|positioning_like,False,True,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,open_interest_like|price_like,False,True,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,price_like,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,price_like|volatility_like,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,taker_flow_like,False,True,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,taker_flow_like|basis_premium_like,False,True,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,taker_flow_like|open_interest_like,False,True,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,volatility_like,True,True,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+semantic_pair,volatility_like|volatility_like,True,False,"semantic pair must map to typed AST semantic_pair, not ad hoc string families"
+field,age_x_liquidity,True,True,field role must be carried as Field node metadata before transform/formula use
+field,basis_abs_168h,True,False,field role must be carried as Field node metadata before transform/formula use
+field,funding_rate,True,False,field role must be carried as Field node metadata before transform/formula use
+field,liquidity_rank_active_universe,True,True,field role must be carried as Field node metadata before transform/formula use
+field,mark_index_basis_bps,True,True,field role must be carried as Field node metadata before transform/formula use
+field,mark_trade_basis_bps,True,False,field role must be carried as Field node metadata before transform/formula use
+field,open_interest_change_24h,True,True,field role must be carried as Field node metadata before transform/formula use
+field,open_interest_last,True,True,field role must be carried as Field node metadata before transform/formula use
+field,open_interest_mean,True,True,field role must be carried as Field node metadata before transform/formula use
+field,open_interest_value_last,True,True,field role must be carried as Field node metadata before transform/formula use
+field,open_interest_value_mean,True,True,field role must be carried as Field node metadata before transform/formula use
+field,premium_abs_168h,True,False,field role must be carried as Field node metadata before transform/formula use
+field,premium_close,True,False,field role must be carried as Field node metadata before transform/formula use
+field,premium_close_bps,True,False,field role must be carried as Field node metadata before transform/formula use
+field,premium_count,True,False,field role must be carried as Field node metadata before transform/formula use
+field,premium_high,True,False,field role must be carried as Field node metadata before transform/formula use
+field,premium_low,True,False,field role must be carried as Field node metadata before transform/formula use
+field,premium_open,True,False,field role must be carried as Field node metadata before transform/formula use
+field,taker_buy_quote_volume,True,True,field role must be carried as Field node metadata before transform/formula use
+field,taker_buy_sell_volume_ratio_last,True,True,field role must be carried as Field node metadata before transform/formula use
+field,taker_buy_sell_volume_ratio_mean,True,True,field role must be carried as Field node metadata before transform/formula use
+field,taker_buy_volume,True,True,field role must be carried as Field node metadata before transform/formula use

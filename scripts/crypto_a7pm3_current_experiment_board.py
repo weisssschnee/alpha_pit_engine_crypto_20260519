@@ -28,6 +28,7 @@ A7FF55R3 = REPO / "runtime" / "a7ff55r3_repaired_atlas_dry_generation" / "a7ff55
 A7FF55R4 = REPO / "runtime" / "a7ff55r4_repaired_atlas_coverage_audit" / "a7ff55r4_manifest.json"
 A7FF55R5 = REPO / "runtime" / "a7ff55r5_repaired_atlas_numeric_contract" / "a7ff55r5_manifest.json"
 A7FF55R5E = REPO / "runtime" / "a7ff55r5e_sharded_numeric_summary" / "a7ff55r5e_manifest.json"
+A7FFCORE0 = REPO / "runtime" / "a7ffcore0_typed_ast_governance" / "a7ffcore0_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -64,12 +65,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff55r4 = read_json(A7FF55R4)
     a7ff55r5 = read_json(A7FF55R5)
     a7ff55r5e = read_json(A7FF55R5E)
+    a7ffcore0 = read_json(A7FFCORE0)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff55r5e.get("decision") == "HOLD_A7FF55R5E_SHARDED_NUMERIC_WEAK_RESPONSE":
+    if a7ffcore0.get("decision") == "PASS_A7FFCORE0_TYPED_AST_GOVERNANCE_READY_FOR_CORE1":
+        allowed["A7FF-CORE1 AST schema adapter"] = (
+            "governance/adapter only; round-trip expression string to typed AST JSON and back; no generation/numeric/replay/search"
+        )
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "deprioritized until typed AST governance is wired; current issue is generator/feature boundary, not only response forensic"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked: A7FF-CORE0 requires typed AST adapter before expanding repaired atlas"
+        current_stage = "A7FF-CORE0"
+        status = "typed_ast_governance_ready_for_core1"
+        next_task = "A7FF-CORE1 AST schema adapter"
+    elif a7ff55r5e.get("decision") == "HOLD_A7FF55R5E_SHARDED_NUMERIC_WEAK_RESPONSE":
         allowed["A7FF-55R6 numeric response forensic / atlas repair"] = (
             "forensic/repair only; inspect weak primary-label response and revise repaired atlas before further numeric expansion"
         )

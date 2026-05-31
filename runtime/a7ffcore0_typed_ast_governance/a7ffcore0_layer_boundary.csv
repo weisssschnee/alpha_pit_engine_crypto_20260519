@@ -1,0 +1,7 @@
+layer,owner,artifact,may_generate,must_not_generate
+L0_raw_field,data_contracts / feature registry,Field node,raw field node only,"transforms, labels as feature, formula interactions"
+L1_typed_derived_feature,Field-to-Factor Compiler,Transform / Interaction subgraph,typed subgraph with lineage/PIT/role,alpha candidate or replay authorization
+L2_response_tested_feature,response map / controls,feature subgraph + response evidence,promotion evidence,portfolio claim
+L3_factor_candidate,selector preflight,FactorCandidate node,candidate with label/horizon/orientation/control policy,paper/shadow/live authorization
+L4_alpha_formula_candidate,FormulaGen / Searcher,composition of approved factor candidates,bounded formula hypotheses,raw unapproved feature transforms
+L5_book_component,replay / cluster / promotion,book component,promotion candidate after replay/cluster/marginal evidence,bypass proof gates

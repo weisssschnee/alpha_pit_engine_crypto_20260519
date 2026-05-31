@@ -1,0 +1,10 @@
+{
+  "decision": "HOLD_A7FF55R5E_SHARDED_NUMERIC_WEAK_RESPONSE",
+  "governance_interpretation": "R2/R3/R4 repaired coverage, but the system still lacks a unified typed subgraph boundary; field-family repair can create syntactic coverage without enough response-backed factor seeds.",
+  "numeric_response_issue": {
+    "non_l7_numeric_clue_rows": 4,
+    "sampled_input_blueprints": 350,
+    "selected_portfolio_queue_count": 2
+  },
+  "source": "A7FF-55R5E"
+}

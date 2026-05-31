@@ -1,0 +1,6 @@
+step,task,success_criteria,blocks
+A7FF-CORE1,AST schema adapter,formula_index rows can round-trip expression string -> typed AST JSON -> expression string,no new formula generation until adapter exists for new stages
+A7FF-CORE2,FeatureFactory subgraph registry,derived features are emitted as approved subgraphs with raw_inputs/lookback/PIT/role,manual untyped derived columns
+A7FF-CORE3,FormulaGen approved-subgraph gate,FormulaGen can only compose approved AST subgraphs or explicitly diagnostic nodes,bypass of field-role enforcement
+A7FF-CORE4,SearchMemory semantic dedup,"dedup includes raw_inputs/operator_path/semantic_type/response_role, not string only",duplicate economic meaning under different names
+A7FF-CORE5,selector role trace enforcement,selector trace records AST node roles and rejects role violations fail-closed,diagnostic/risk fields selected as ordinary alpha

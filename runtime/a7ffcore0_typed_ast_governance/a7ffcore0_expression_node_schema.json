@@ -1,0 +1,108 @@
+{
+  "global_invariants": [
+    "label nodes cannot be referenced by Field/Transform/Interaction nodes",
+    "diagnostic/risk/neutralizer nodes cannot become ordinary alpha without explicit response-backed promotion",
+    "FormulaGen may only compose approved feature subgraphs",
+    "FeatureFactory may only emit typed subgraphs, not standalone untyped columns",
+    "selector reads factor_role and response_evidence, not only expression string"
+  ],
+  "node_types": {
+    "FactorCandidate": {
+      "promotion_boundary": "cannot become replay candidate without response/control/latency evidence",
+      "required": [
+        "expression_node_id",
+        "orientation_source",
+        "label_family",
+        "horizon_hours",
+        "neutralization",
+        "control_policy",
+        "response_evidence_id"
+      ]
+    },
+    "Field": {
+      "allowed_roles": [
+        "raw_source",
+        "signal_seed",
+        "regime",
+        "neutralizer",
+        "risk_exposure",
+        "diagnostic",
+        "label_only",
+        "forbidden"
+      ],
+      "required": [
+        "field_name",
+        "raw_source_family",
+        "semantic_type",
+        "field_role",
+        "pit_policy",
+        "latency_policy"
+      ]
+    },
+    "Interaction": {
+      "operators": [
+        "Mul",
+        "Sub",
+        "Add",
+        "SafeDiv",
+        "GatedSign",
+        "SpreadRank",
+        "SmoothMul"
+      ],
+      "required": [
+        "operator",
+        "left_node_id",
+        "right_node_id",
+        "semantic_pair",
+        "motif",
+        "role_policy"
+      ]
+    },
+    "Label": {
+      "required": [
+        "label_family",
+        "horizon_hours",
+        "entry_alignment",
+        "usage"
+      ],
+      "usage": "target_only_never_feature"
+    },
+    "Neutralization": {
+      "operators": [
+        "CSRank",
+        "WithinLatentRank",
+        "WithinLiquidityTierRank",
+        "Residualize"
+      ],
+      "required": [
+        "input_node_id",
+        "group_key",
+        "neutralization_policy",
+        "min_group_count"
+      ]
+    },
+    "Transform": {
+      "operators": [
+        "Delta",
+        "Mean",
+        "ZScore",
+        "TSRank",
+        "Decay",
+        "Rank",
+        "CSRank",
+        "Abs",
+        "Sign",
+        "Clip"
+      ],
+      "required": [
+        "operator",
+        "input_node_id",
+        "lookback_hours",
+        "fit_window",
+        "pit_policy",
+        "role_policy"
+      ]
+    }
+  },
+  "schema_version": "a7ff_core_ast_v0"
+}

@@ -1,0 +1,7 @@
+role,feature_factory_allowed,formula_gen_allowed,selector_allowed
+ordinary_alpha_seed,emit typed subgraph after response evidence,compose with approved factor candidates,eligible for alpha queue if controls pass
+exploratory_signal_seed,emit typed subgraph for numeric response,compose only in diagnostic/repair waves,not alpha-eligible until response-backed promotion
+regime_neutralizer_interaction_seed,emit as modifier/condition node,right-hand modifier only unless promoted,cannot stand alone as alpha signal
+risk_defense_only,emit defense/neutralization node,not allowed in ordinary alpha expression as signal,reject for alpha replay
+diagnostic_only,emit only with diagnostic route,diagnostic search only,cannot enter ordinary alpha replay queue
+label_only,target node only,forbidden as feature input,forbidden as candidate field

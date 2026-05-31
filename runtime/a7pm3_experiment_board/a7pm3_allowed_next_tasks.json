@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-55R6 numeric response forensic / atlas repair": "forensic/repair only; inspect weak primary-label response and revise repaired atlas before further numeric expansion",
+  "A7FF-CORE1 AST schema adapter": "governance/adapter only; round-trip expression string to typed AST JSON and back; no generation/numeric/replay/search",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }
