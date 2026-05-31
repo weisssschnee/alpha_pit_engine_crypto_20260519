@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-31T23:06:39Z
+Generated: 2026-05-31T23:11:45Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-05-31T23:06:39Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                      | next                                                 |
-|:----------------------------|:----------------|:----------------------------|:-----------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                        | keep registry as source-of-truth                     |
-| a7ff_family_diversification | A7FF-CORE7E     | numeric_response_hold_weak  | A7FF-CORE7R response repair / label-control forensic |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution | A7FF-24R4E if explicitly authorized                  |
-| search_execution            | blocked         | not_authorized              | none                                                 |
+| workstream                  | current_stage   | status                                    | next                                                              |
+|:----------------------------|:----------------|:------------------------------------------|:------------------------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                      | keep registry as source-of-truth                                  |
+| a7ff_family_diversification | A7FF-CORE7ER    | repaired_numeric_response_ready_for_core8 | A7FF-CORE8 numeric clue consolidation / replay-preflight contract |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution               | A7FF-24R4E if explicitly authorized                               |
+| search_execution            | blocked         | not_authorized                            | none                                                              |
 
 ## Allowed Next Tasks
 
-| task                                                 | reason                                                                                                                   |
-|:-----------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option    | requires explicit user authorization; no search and no promotion                                                         |
-| A7PM-0/3 maintenance                                 | governance registry maintenance                                                                                          |
-| A7FF-CORE7R response repair / label-control forensic | forensic/repair only; inspect no-primary-non-L7 clue result and control dominance before changing generation or selector |
+| task                                                              | reason                                                                                                                 |
+|:------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option                 | requires explicit user authorization; no search and no promotion                                                       |
+| A7PM-0/3 maintenance                                              | governance registry maintenance                                                                                        |
+| A7FF-CORE8 numeric clue consolidation / replay-preflight contract | contract only; consolidate CORE7ER repaired numeric clues and define replay-preflight gate; no replay/search/promotion |
 
 ## Blocked Tasks
 
@@ -41,10 +41,10 @@ Generated: 2026-05-31T23:06:39Z
 | A7AL-2Q                                            | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                                        | not authorized                                                                                                        |
 | shadow/paper/live                                  | not authorized                                                                                                        |
-| A7FF-CORE8 numeric clue consolidation              | blocked: CORE7E produced no primary non-L7 numeric clues                                                              |
-| A7FF-CORE7E rerun                                  | blocked unless queue, labels, controls, or runner changes                                                             |
-| A7FF-55R5F expanded sharded numeric execution      | superseded by CORE7E gate-native numeric path                                                                         |
-| A7FF-55R6 numeric response forensic / atlas repair | legacy atlas repair superseded; use CORE7R on gate-native queue instead                                               |
+| A7FF-CORE7E rerun                                  | superseded by CORE7ER repaired numeric response                                                                       |
+| A7FF-CORE7R continuation                           | control-policy forensic completed; CORE7ER is canonical repaired numeric response                                     |
+| A7FF-55R5F expanded sharded numeric execution      | superseded by CORE7 gate-native path                                                                                  |
+| A7FF-55R6 numeric response forensic / atlas repair | legacy atlas repair superseded; use CORE7ER repaired gate-native response                                             |
 
 ## Boundary
 
