@@ -1,0 +1,7 @@
+gate
+at least 16 replay-clean candidates
+at least 4 semantic buckets
+at least 4 motif buckets
+non-L7 primary label evidence remains positive
+controls weaker than original on primary labels
+cost 5bps survives for replay-clean queue

@@ -1,0 +1,78 @@
+{
+  "candidate_count": 114,
+  "controls": [
+    "wrong_lag_future",
+    "wrong_lag_stale",
+    "time_shuffle",
+    "symbol_shuffle",
+    "same_family_placebo"
+  ],
+  "cost_bps": [
+    0,
+    2,
+    5,
+    10
+  ],
+  "hard_reject": [
+    "eval_error_count > 0",
+    "label_or_may_token",
+    "missing_field_count > 0",
+    "control_ratio >= 1.0 in any primary split",
+    "wrong_lag_future stronger than original",
+    "single_symbol_share > 0.20",
+    "single_month_share > 0.35",
+    "single_semantic_bucket_share > 0.35",
+    "single_motif_bucket_share > 0.35"
+  ],
+  "horizons": [
+    1,
+    4,
+    8,
+    24
+  ],
+  "input_packet": "runtime\\a7ffcore8e_replay_preflight_packet_audit\\a7ffcore8e_replay_preflight_packet.csv",
+  "labels": [
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return"
+  ],
+  "orientation": {
+    "may_used": false,
+    "sign_flip_policy": "diagnostic_only_not_allowed_as_abs_control_dominance",
+    "source": "CORE7ER numeric clue sign by label/horizon"
+  },
+  "pass_gate": [
+    "at least 16 replay-clean candidates",
+    "at least 4 semantic buckets",
+    "at least 4 motif buckets",
+    "non-L7 primary label evidence remains positive",
+    "controls weaker than original on primary labels",
+    "cost 5bps survives for replay-clean queue"
+  ],
+  "portfolio_proxy": {
+    "dollar_neutral": true,
+    "long_leg": "top_decile_or_top10_if_active_count_lt_100",
+    "max_motif_bucket_weight": 0.35,
+    "max_semantic_bucket_weight": 0.3,
+    "max_symbol_weight": 0.02,
+    "ranking": "cross_sectional_per_timestamp",
+    "short_leg": "bottom_decile_or_bottom10_if_active_count_lt_100",
+    "weighting": "equal_weight_with_per_symbol_cap"
+  },
+  "splits": [
+    "train",
+    "validation",
+    "recent"
+  ],
+  "statistics": [
+    "split_spread",
+    "non_overlap_offset_spread",
+    "hourly_overlap_tstat",
+    "block_bootstrap_tstat",
+    "control_dominance_margin",
+    "turnover_proxy",
+    "cost_adjusted_spread",
+    "symbol_month_contribution",
+    "semantic_motif_concentration"
+  ]
+}

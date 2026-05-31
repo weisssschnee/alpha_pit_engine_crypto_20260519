@@ -1,0 +1,8 @@
+{
+  "A7FF-CORE9E bounded replay execution": true,
+  "alpha_proof": false,
+  "formula_search": false,
+  "large_replay": false,
+  "large_search": false,
+  "shadow_paper_live": false
+}

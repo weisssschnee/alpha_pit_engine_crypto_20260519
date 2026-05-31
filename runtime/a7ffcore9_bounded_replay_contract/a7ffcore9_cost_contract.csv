@@ -1,0 +1,5 @@
+cost_bps,purpose
+0,replay_cost_stress
+2,replay_cost_stress
+5,replay_cost_stress
+10,replay_cost_stress

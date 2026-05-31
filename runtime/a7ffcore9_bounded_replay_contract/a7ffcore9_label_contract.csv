@@ -1,0 +1,13 @@
+label_id,horizon,is_primary
+L1_cross_sectional_relative_return,1,True
+L1_cross_sectional_relative_return,4,True
+L1_cross_sectional_relative_return,8,True
+L1_cross_sectional_relative_return,24,True
+L3_liquidity_tier_relative_return,1,True
+L3_liquidity_tier_relative_return,4,True
+L3_liquidity_tier_relative_return,8,True
+L3_liquidity_tier_relative_return,24,True
+L5_vol_adjusted_return,1,True
+L5_vol_adjusted_return,4,True
+L5_vol_adjusted_return,8,True
+L5_vol_adjusted_return,24,True
