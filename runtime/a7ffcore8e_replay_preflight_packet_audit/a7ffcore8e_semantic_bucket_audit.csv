@@ -1,0 +1,10 @@
+semantic_bucket,candidate_count,ready_count,median_min_control_ratio
+liquidity_like|volatility_like,24,24,0.3508968637815537
+taker_flow_like|open_interest_like,24,24,0.3647138686992007
+open_interest_like|price_like,24,24,0.5344254158194655
+taker_flow_like,15,15,0.5897223599553452
+liquidity_like,8,8,0.6483570422101755
+open_interest_like,8,8,0.6789449594141237
+taker_flow_like|basis_premium_like,7,7,0.5667310883998219
+open_interest_like|positioning_like,2,2,0.6098253354610643
+volatility_like,2,2,0.6262926551381216

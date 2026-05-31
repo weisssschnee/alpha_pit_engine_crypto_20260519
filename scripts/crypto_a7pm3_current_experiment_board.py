@@ -41,6 +41,7 @@ A7FFCORE7E = REPO / "runtime" / "a7ffcore7e_numeric_response" / "a7ffcore7e_mani
 A7FFCORE7R = REPO / "runtime" / "a7ffcore7r_control_policy_forensic" / "a7ffcore7r_manifest.json"
 A7FFCORE7ER = REPO / "runtime" / "a7ffcore7er_repaired_numeric_response" / "a7ffcore7er_manifest.json"
 A7FFCORE8 = REPO / "runtime" / "a7ffcore8_numeric_clue_consolidation" / "a7ffcore8_manifest.json"
+A7FFCORE8E = REPO / "runtime" / "a7ffcore8e_replay_preflight_packet_audit" / "a7ffcore8e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -90,12 +91,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore7r = read_json(A7FFCORE7R)
     a7ffcore7er = read_json(A7FFCORE7ER)
     a7ffcore8 = read_json(A7FFCORE8)
+    a7ffcore8e = read_json(A7FFCORE8E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore8.get("decision") == "PASS_A7FFCORE8_NUMERIC_CLUE_CONSOLIDATION_READY_FOR_CORE8E":
+    if a7ffcore8e.get("decision") == "PASS_A7FFCORE8E_REPLAY_PREFLIGHT_PACKET_READY_FOR_CORE9_CONTRACT":
+        allowed["A7FF-CORE9 bounded replay contract"] = (
+            "contract only; define bounded replay protocol for CORE8E packet; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE8 direct replay execution"] = "blocked: CORE8E authorizes CORE9 contract only"
+        blocked["A7FF-CORE8E rerun"] = "packet audit passed; rerun only if CORE8 packet or audit policy changes"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7/CORE8 gate-native path"
+        current_stage = "A7FF-CORE8E"
+        status = "replay_preflight_packet_ready_for_core9_contract"
+        next_task = "A7FF-CORE9 bounded replay contract"
+    elif a7ffcore8.get("decision") == "PASS_A7FFCORE8_NUMERIC_CLUE_CONSOLIDATION_READY_FOR_CORE8E":
         allowed["A7FF-CORE8E replay-preflight packet audit"] = (
             "audit CORE8 candidate packet for expression materialization, label/control coverage, diversity, and replay readiness; no portfolio replay/search/promotion"
         )

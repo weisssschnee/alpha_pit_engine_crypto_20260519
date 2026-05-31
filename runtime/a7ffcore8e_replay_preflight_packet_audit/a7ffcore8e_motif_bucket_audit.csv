@@ -1,0 +1,8 @@
+motif_bucket,candidate_count,ready_count,median_min_control_ratio
+single,28,28,0.6117641270568951
+mean_reversion_gate,24,24,0.5344254158194655
+flow_x_leverage,24,24,0.3647138686992007
+liquidity_shock,14,14,0.40651607011887814
+safe_div_abs,12,12,0.29166907715313584
+gated_sign,7,7,0.5667310883998219
+delta_x_divergence,5,5,0.6937013068126537

@@ -1,0 +1,4 @@
+candidate_roles,formula_gen_gate,gate_mode,candidate_count,ready_count
+role_mixed_allowed,diagnostic_or_repair_root_only,diagnostic_repair,81,81
+exploratory_signal_probe,diagnostic_or_repair_root_only,diagnostic_repair,28,28
+exploratory_signal_probe;role_mixed_allowed,diagnostic_or_repair_root_only,diagnostic_repair,5,5
