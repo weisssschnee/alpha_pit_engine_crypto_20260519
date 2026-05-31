@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-31T17:43:34Z
+Generated: 2026-05-31T18:06:46Z
 
 ## Decision
 
@@ -11,20 +11,24 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
+## main...origin/main [ahead 1]
+ M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=9f2f32d3e66cb19a22be12119dffcd1193a77cf5
-origin/main=9f2f32d3e66cb19a22be12119dffcd1193a77cf5
-HEAD == origin/main: True
+HEAD=7011a15c1ab054127306fe88f47108846cd04506
+origin/main=97cf90e4cf4f3ce952978bb66445e5e8ee51b6d8
+HEAD == origin/main: False
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 2580,
+  "artifact_count": 2593,
   "authorization_record_count": 685,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +42,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-31T17:43:34Z",
-  "head": "9f2f32d3e66cb19a22be12119dffcd1193a77cf5",
-  "head_equals_origin_main": true,
-  "origin_main": "9f2f32d3e66cb19a22be12119dffcd1193a77cf5",
+  "generated_at": "2026-05-31T18:06:46Z",
+  "head": "7011a15c1ab054127306fe88f47108846cd04506",
+  "head_equals_origin_main": false,
+  "origin_main": "97cf90e4cf4f3ce952978bb66445e5e8ee51b6d8",
   "stage": "A7PM-0",
-  "stage_count": 275
+  "stage_count": 277
 }
 ```
 
@@ -62,7 +66,7 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     124 |
+| valid_or_historical_record   | governance_or_audit        |     126 |
 | valid_or_historical_record   | contract                   |      58 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       7 |
