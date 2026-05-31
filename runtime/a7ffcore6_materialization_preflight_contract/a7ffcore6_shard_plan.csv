@@ -1,0 +1,9 @@
+shard_id,start_index,end_index_exclusive,candidate_count,semantic_bucket_count,motif_bucket_count,raw_field_count,expected_output
+S00,0,256,256,2,2,13,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S00_materialization.csv
+S01,256,512,256,3,4,14,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S01_materialization.csv
+S02,512,768,256,3,4,12,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S02_materialization.csv
+S03,768,1024,256,3,3,13,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S03_materialization.csv
+S04,1024,1280,256,3,3,11,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S04_materialization.csv
+S05,1280,1536,256,1,2,5,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S05_materialization.csv
+S06,1536,1792,256,1,2,5,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S06_materialization.csv
+S07,1792,2048,256,1,1,5,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S07_materialization.csv

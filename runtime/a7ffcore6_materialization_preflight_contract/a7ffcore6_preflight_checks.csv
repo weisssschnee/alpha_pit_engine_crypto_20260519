@@ -1,0 +1,9 @@
+check_id,rule,hard_gate
+C00_input_queue_integrity,"candidate_id/root_subgraph_id unique, gate_allowed=true for all rows",True
+C01_panel_field_presence,all raw_inputs exist in experiment panel or candidate fails closed,True
+C02_operator_support,expression operators supported by FeatureAlgebra before evaluation,True
+C03_materialization_finite,finite ratio and active coverage emitted per candidate,True
+C04_no_label_or_may,"no label, future, May stress, or pass/fail tokens in materialized expression",True
+C05_no_return_scoring,"preflight does not compute labels, returns, IC, spread, replay, selector score, or promotion",True
+C06_shard_manifest,each shard writes manifest with failure counts and reject reasons,True
+C07_role_preservation,diagnostic roots remain diagnostic; ordinary alpha remains unauthorized,True

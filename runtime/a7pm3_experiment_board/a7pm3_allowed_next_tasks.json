@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE6 gate-native materialization preflight contract": "contract/preflight design only; define materialization checks for CORE5 gate-native queue; no numeric/replay/search/promotion",
+  "A7FF-CORE6E gate-native materialization preflight execution": "materialization/activity preflight only over CORE5 queue shards; no labels, returns, replay, search, or promotion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

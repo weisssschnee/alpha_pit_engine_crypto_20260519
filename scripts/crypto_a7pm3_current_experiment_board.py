@@ -34,6 +34,7 @@ A7FFCORE2 = REPO / "runtime" / "a7ffcore2_feature_subgraph_registry" / "a7ffcore
 A7FFCORE3 = REPO / "runtime" / "a7ffcore3_formula_gen_subgraph_gate" / "a7ffcore3_manifest.json"
 A7FFCORE4 = REPO / "runtime" / "a7ffcore4_gate_implementation_regression" / "a7ffcore4_manifest.json"
 A7FFCORE5 = REPO / "runtime" / "a7ffcore5_gate_native_generation_dryrun" / "a7ffcore5_manifest.json"
+A7FFCORE6 = REPO / "runtime" / "a7ffcore6_materialization_preflight_contract" / "a7ffcore6_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -76,12 +77,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore3 = read_json(A7FFCORE3)
     a7ffcore4 = read_json(A7FFCORE4)
     a7ffcore5 = read_json(A7FFCORE5)
+    a7ffcore6 = read_json(A7FFCORE6)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore5.get("decision") == "PASS_A7FFCORE5_GATE_NATIVE_DRYRUN_READY_FOR_CORE6":
+    if a7ffcore6.get("decision") == "PASS_A7FFCORE6_MATERIALIZATION_PREFLIGHT_CONTRACT_READY_FOR_CORE6E":
+        allowed["A7FF-CORE6E gate-native materialization preflight execution"] = (
+            "materialization/activity preflight only over CORE5 queue shards; no labels, returns, replay, search, or promotion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked until CORE6E materialization preflight passes and CORE7 numeric-response contract is written"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "superseded by CORE6E path; materialize gate-native queue before any numeric response or atlas repair"
+        )
+        current_stage = "A7FF-CORE6"
+        status = "materialization_preflight_contract_ready_for_core6e"
+        next_task = "A7FF-CORE6E gate-native materialization preflight execution"
+    elif a7ffcore5.get("decision") == "PASS_A7FFCORE5_GATE_NATIVE_DRYRUN_READY_FOR_CORE6":
         allowed["A7FF-CORE6 gate-native materialization preflight contract"] = (
             "contract/preflight design only; define materialization checks for CORE5 gate-native queue; no numeric/replay/search/promotion"
         )

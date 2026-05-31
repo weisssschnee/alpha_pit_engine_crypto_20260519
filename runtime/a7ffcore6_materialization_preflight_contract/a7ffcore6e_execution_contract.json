@@ -1,0 +1,30 @@
+{
+  "allowed_actions": [
+    "load panel",
+    "evaluate expressions for finite/activity/materialization only",
+    "emit per-candidate finite/activity/missing/operator status",
+    "emit shard manifests"
+  ],
+  "candidate_count": 2048,
+  "forbidden_actions": [
+    "compute forward returns",
+    "compute labels",
+    "compute IC/spread/PnL",
+    "run replay",
+    "run selector",
+    "run search",
+    "promote candidates",
+    "use May stress labels or pass/fail"
+  ],
+  "input_queue": "runtime\\a7ffcore5_gate_native_generation_dryrun\\a7ffcore5_gate_native_candidate_queue.csv",
+  "pass_conditions": {
+    "eval_failure_rate_max": 0.02,
+    "label_or_may_token_count": 0,
+    "missing_field_rate_max": 0.01,
+    "ordinary_alpha_leak_count": 0,
+    "role_violation_count": 0
+  },
+  "shard_count": 8,
+  "shard_size": 256,
+  "stage": "A7FF-CORE6E"
+}
