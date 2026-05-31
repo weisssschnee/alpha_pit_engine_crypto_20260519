@@ -1,0 +1,28 @@
+{
+  "execution_mode": "bounded_numeric_only_no_replay_no_search",
+  "expected_label_response_rows": 28800,
+  "hard_gates": {
+    "control_ratio_for_candidate": "< 0.80",
+    "eval_failure_count": 0,
+    "missing_field_count": 0,
+    "non_l7_numeric_clue_rows": "> 0",
+    "selected_motif_count": ">= 5",
+    "selected_portfolio_queue_count": ">= 24",
+    "selected_semantic_pair_count": ">= 5"
+  },
+  "horizons": [
+    "1h",
+    "4h",
+    "8h",
+    "24h"
+  ],
+  "labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return"
+  ],
+  "may_policy": "not used in scoring or authorization",
+  "queue_rows": 2400,
+  "runner": "scripts/crypto_a7ff8_expanded_numeric_probe.py",
+  "stage": "A7FF-55R5E"
+}

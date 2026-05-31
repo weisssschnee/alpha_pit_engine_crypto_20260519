@@ -1,0 +1,15 @@
+semantic_pair,motif,queue_rows
+liquidity_like|volatility_like,liquidity_shock,308
+open_interest_like|positioning_like,delta_x_divergence,308
+taker_flow_like|open_interest_like,flow_x_leverage,308
+open_interest_like|positioning_like,safe_div_abs,292
+liquidity_like|volatility_like,mean_reversion_gate,292
+open_interest_like|price_like,mean_reversion_gate,174
+taker_flow_like|open_interest_like,relative_shock,169
+open_interest_like|price_like,delta_x_divergence,163
+taker_flow_like|open_interest_like,gated_sign,123
+liquidity_like,single,108
+open_interest_like|price_like,smooth_mul,103
+open_interest_like,single,28
+taker_flow_like,single,16
+volatility_like,single,8

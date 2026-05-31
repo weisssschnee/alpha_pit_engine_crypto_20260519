@@ -26,6 +26,7 @@ A7FF55R1 = REPO / "runtime" / "a7ff55r1_supplemental_queue_feasibility" / "a7ff5
 A7FF55R2 = REPO / "runtime" / "a7ff55r2_atlas_field_family_generation_repair" / "a7ff55r2_manifest.json"
 A7FF55R3 = REPO / "runtime" / "a7ff55r3_repaired_atlas_dry_generation" / "a7ff55r3_manifest.json"
 A7FF55R4 = REPO / "runtime" / "a7ff55r4_repaired_atlas_coverage_audit" / "a7ff55r4_manifest.json"
+A7FF55R5 = REPO / "runtime" / "a7ff55r5_repaired_atlas_numeric_contract" / "a7ff55r5_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -60,12 +61,21 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff55r2 = read_json(A7FF55R2)
     a7ff55r3 = read_json(A7FF55R3)
     a7ff55r4 = read_json(A7FF55R4)
+    a7ff55r5 = read_json(A7FF55R5)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff55r4.get("decision") == "PASS_A7FF55R4_REPAIRED_ATLAS_COVERAGE_READY_FOR_NUMERIC_CONTRACT":
+    if a7ff55r5.get("decision") == "PASS_A7FF55R5_REPAIRED_ATLAS_NUMERIC_CONTRACT_READY_FOR_EXECUTION":
+        allowed["A7FF-55R5E repaired atlas numeric execution"] = (
+            "bounded numeric execution over repaired 2400-row queue; primary labels only; no replay/search/promotion"
+        )
+        blocked["A7FF-56 replay-preflight contract"] = "blocked until A7FF-55R5E numeric response summary passes"
+        current_stage = "A7FF-55R5"
+        status = "repaired_atlas_numeric_contract_ready_for_execution"
+        next_task = "A7FF-55R5E repaired atlas numeric execution"
+    elif a7ff55r4.get("decision") == "PASS_A7FF55R4_REPAIRED_ATLAS_COVERAGE_READY_FOR_NUMERIC_CONTRACT":
         allowed["A7FF-55R5 repaired atlas numeric contract"] = (
             "contract drafting only; define bounded primary-label numeric run over repaired 2400-row queue; no numeric/replay/search execution"
         )

@@ -1,0 +1,6 @@
+label_family,role,horizons,promotion_use
+L0_raw_forward_return,primary,"1h,4h,8h,24h",raw return sanity; cannot pass alone if control dominated
+L1_cross_sectional_relative_return,primary,"1h,4h,8h,24h",primary cross-sectional economics; required representation
+L3_liquidity_tier_relative_return,primary,"1h,4h,8h,24h",liquidity-tier robustness; required representation
+L5_vol_adjusted_return,blocked_this_wave,none,blocked to prevent previous L5 absorption
+L7_ranked_future_return,blocked_this_wave,none,"diagnostic only, not part of repaired primary wave"

@@ -1,0 +1,26 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_numeric_execution": true,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF55R5_REPAIRED_ATLAS_NUMERIC_CONTRACT_READY_FOR_EXECUTION",
+  "executes_numeric": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "expected_label_response_rows": 28800,
+  "generated_at": "2026-05-31T12:41:36Z",
+  "labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return"
+  ],
+  "motif_count": 9,
+  "next_allowed": "A7FF-55R5E repaired atlas numeric execution",
+  "queue_rows": 2400,
+  "semantic_pair_count": 8,
+  "source_decision": "PASS_A7FF55R4_REPAIRED_ATLAS_COVERAGE_READY_FOR_NUMERIC_CONTRACT",
+  "source_stage": "A7FF-55R4",
+  "stage": "A7FF-55R5",
+  "uses_may": false
+}
