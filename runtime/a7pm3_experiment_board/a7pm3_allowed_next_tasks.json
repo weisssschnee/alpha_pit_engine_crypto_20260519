@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE8 numeric clue consolidation / replay-preflight contract": "contract only; consolidate CORE7ER repaired numeric clues and define replay-preflight gate; no replay/search/promotion",
+  "A7FF-CORE8E replay-preflight packet audit": "audit CORE8 candidate packet for expression materialization, label/control coverage, diversity, and replay readiness; no portfolio replay/search/promotion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }
