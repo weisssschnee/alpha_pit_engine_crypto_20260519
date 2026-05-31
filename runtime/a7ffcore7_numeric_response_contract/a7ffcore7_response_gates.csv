@@ -1,0 +1,8 @@
+gate_id,rule,hard_gate
+G00_materialized_only,only CORE6E status=ok candidates enter numeric response,True
+G01_primary_non_l7_presence,L1/L3/L5 primary labels must be reported separately from L7,True
+G02_control_dominance,wrong-lag/stale controls must be weaker than original signal,True
+G03_split_consistency,train/validation/recent split metrics emitted separately,True
+G04_nonoverlap_stats,24h non-overlap offsets or robust stats required for any future promotion,True
+G05_no_may_selector,"May stress may not enter orientation, selector score, mutation, or ranking",True
+G06_no_replay_or_promotion,CORE7E numeric response is not replay/search/promotion,True

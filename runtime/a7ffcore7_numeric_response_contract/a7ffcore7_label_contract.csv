@@ -1,0 +1,6 @@
+label_id,field,horizons,primary
+L0_raw_forward_return,forward_trade_return_1h,1h;4h;8h;24h,False
+L1_cross_sectional_relative_return,derived_in_runner,1h;4h;8h;24h,True
+L3_liquidity_tier_relative_return,derived_in_runner,1h;4h;8h;24h,True
+L5_vol_adjusted_return,derived_in_runner,1h;4h;8h;24h,True
+L7_ranked_future_return,derived_in_runner,1h;4h;8h;24h,False

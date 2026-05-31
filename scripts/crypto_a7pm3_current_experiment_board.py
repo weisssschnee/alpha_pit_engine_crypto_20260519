@@ -36,6 +36,7 @@ A7FFCORE4 = REPO / "runtime" / "a7ffcore4_gate_implementation_regression" / "a7f
 A7FFCORE5 = REPO / "runtime" / "a7ffcore5_gate_native_generation_dryrun" / "a7ffcore5_manifest.json"
 A7FFCORE6 = REPO / "runtime" / "a7ffcore6_materialization_preflight_contract" / "a7ffcore6_manifest.json"
 A7FFCORE6E = REPO / "runtime" / "a7ffcore6e_materialization_preflight" / "a7ffcore6e_manifest.json"
+A7FFCORE7 = REPO / "runtime" / "a7ffcore7_numeric_response_contract" / "a7ffcore7_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -80,12 +81,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore5 = read_json(A7FFCORE5)
     a7ffcore6 = read_json(A7FFCORE6)
     a7ffcore6e = read_json(A7FFCORE6E)
+    a7ffcore7 = read_json(A7FFCORE7)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore6e.get("decision") == "PASS_A7FFCORE6E_MATERIALIZATION_PREFLIGHT_READY_FOR_CORE7":
+    if a7ffcore7.get("decision") == "PASS_A7FFCORE7_NUMERIC_RESPONSE_CONTRACT_READY_FOR_CORE7E":
+        allowed["A7FF-CORE7E gate-native numeric-response execution"] = (
+            "bounded numeric-response execution only over CORE6E materialized queue; no replay/search/promotion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7E gate-native numeric path"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "superseded by CORE7E path; legacy atlas numeric response remains blocked"
+        )
+        current_stage = "A7FF-CORE7"
+        status = "numeric_response_contract_ready_for_core7e"
+        next_task = "A7FF-CORE7E gate-native numeric-response execution"
+    elif a7ffcore6e.get("decision") == "PASS_A7FFCORE6E_MATERIALIZATION_PREFLIGHT_READY_FOR_CORE7":
         allowed["A7FF-CORE7 gate-native numeric-response contract"] = (
             "contract only; define label/control response run over materialized CORE6E queue; no execution/replay/search/promotion"
         )

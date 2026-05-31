@@ -1,0 +1,7 @@
+control_id,required,hard_gate
+wrong_lag_future,True,True
+wrong_lag_stale,True,True
+time_shuffle,True,False
+symbol_shuffle,True,False
+sign_flip,True,False
+same_family_placebo,True,False

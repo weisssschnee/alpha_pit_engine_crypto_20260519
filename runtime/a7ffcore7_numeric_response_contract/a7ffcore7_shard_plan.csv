@@ -1,0 +1,9 @@
+shard_id,start_index,end_index_exclusive,candidate_count,label_count,control_count,expected_rows,expected_output
+S00,0,256,256,5,6,5120,runtime/a7ffcore7e_numeric_response/a7ffcore7e_S00_response.csv
+S01,256,512,256,5,6,5120,runtime/a7ffcore7e_numeric_response/a7ffcore7e_S01_response.csv
+S02,512,768,256,5,6,5120,runtime/a7ffcore7e_numeric_response/a7ffcore7e_S02_response.csv
+S03,768,1024,256,5,6,5120,runtime/a7ffcore7e_numeric_response/a7ffcore7e_S03_response.csv
+S04,1024,1280,256,5,6,5120,runtime/a7ffcore7e_numeric_response/a7ffcore7e_S04_response.csv
+S05,1280,1536,256,5,6,5120,runtime/a7ffcore7e_numeric_response/a7ffcore7e_S05_response.csv
+S06,1536,1792,256,5,6,5120,runtime/a7ffcore7e_numeric_response/a7ffcore7e_S06_response.csv
+S07,1792,2048,256,5,6,5120,runtime/a7ffcore7e_numeric_response/a7ffcore7e_S07_response.csv
