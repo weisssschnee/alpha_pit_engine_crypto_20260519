@@ -1,0 +1,8 @@
+{
+  "A7FF-CORE8E replay-preflight packet audit": true,
+  "alpha_proof": false,
+  "formula_search": false,
+  "large_search": false,
+  "portfolio_replay_execution": false,
+  "shadow_paper_live": false
+}

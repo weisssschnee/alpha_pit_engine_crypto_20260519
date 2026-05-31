@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core8e": true,
+  "authorizes_replay_execution": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE8_NUMERIC_CLUE_CONSOLIDATION_READY_FOR_CORE8E",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-31T23:16:11Z",
+  "next_allowed": "A7FF-CORE8E replay-preflight packet audit",
+  "numeric_clue_candidate_count": 472,
+  "numeric_clue_rows": 942,
+  "preflight_queue_count": 114,
+  "preflight_queue_motif_bucket_count": 7,
+  "preflight_queue_semantic_bucket_count": 9,
+  "risk_flags": [],
+  "source_decision": "PASS_A7FFCORE7ER_REPAIRED_NUMERIC_RESPONSE_READY_FOR_CORE8",
+  "source_stage": "A7FF-CORE7ER",
+  "stage": "A7FF-CORE8",
+  "top_motif_bucket_share": 0.24561403508771928,
+  "top_semantic_bucket_share": 0.21052631578947367
+}
