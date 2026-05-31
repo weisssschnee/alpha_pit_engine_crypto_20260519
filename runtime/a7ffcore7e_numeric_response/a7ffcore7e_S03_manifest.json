@@ -1,0 +1,9 @@
+{
+  "candidate_count": 256,
+  "eval_errors": 0,
+  "numeric_clues": 0,
+  "output": "runtime\\a7ffcore7e_numeric_response\\a7ffcore7e_S03_response.csv",
+  "primary_non_l7_clues": 0,
+  "response_rows": 5120,
+  "shard_id": "S03"
+}

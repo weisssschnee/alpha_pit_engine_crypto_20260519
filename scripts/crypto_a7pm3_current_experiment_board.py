@@ -37,6 +37,7 @@ A7FFCORE5 = REPO / "runtime" / "a7ffcore5_gate_native_generation_dryrun" / "a7ff
 A7FFCORE6 = REPO / "runtime" / "a7ffcore6_materialization_preflight_contract" / "a7ffcore6_manifest.json"
 A7FFCORE6E = REPO / "runtime" / "a7ffcore6e_materialization_preflight" / "a7ffcore6e_manifest.json"
 A7FFCORE7 = REPO / "runtime" / "a7ffcore7_numeric_response_contract" / "a7ffcore7_manifest.json"
+A7FFCORE7E = REPO / "runtime" / "a7ffcore7e_numeric_response" / "a7ffcore7e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -82,12 +83,36 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore6 = read_json(A7FFCORE6)
     a7ffcore6e = read_json(A7FFCORE6E)
     a7ffcore7 = read_json(A7FFCORE7)
+    a7ffcore7e = read_json(A7FFCORE7E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore7.get("decision") == "PASS_A7FFCORE7_NUMERIC_RESPONSE_CONTRACT_READY_FOR_CORE7E":
+    if a7ffcore7e.get("decision") == "PASS_A7FFCORE7E_NUMERIC_RESPONSE_READY_FOR_CORE8":
+        allowed["A7FF-CORE8 numeric clue consolidation / replay-preflight contract"] = (
+            "contract only; consolidate CORE7E numeric clues and define replay-preflight gate; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE7E rerun"] = "numeric response execution complete; rerun only if queue, labels, controls, or runner changes"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7E gate-native numeric path"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = "superseded by CORE7E gate-native numeric path"
+        current_stage = "A7FF-CORE7E"
+        status = "numeric_response_ready_for_core8"
+        next_task = "A7FF-CORE8 numeric clue consolidation / replay-preflight contract"
+    elif a7ffcore7e.get("decision") == "HOLD_A7FFCORE7E_NUMERIC_RESPONSE_WEAK":
+        allowed["A7FF-CORE7R response repair / label-control forensic"] = (
+            "forensic/repair only; inspect no-primary-non-L7 clue result and control dominance before changing generation or selector"
+        )
+        blocked["A7FF-CORE8 numeric clue consolidation"] = "blocked: CORE7E produced no primary non-L7 numeric clues"
+        blocked["A7FF-CORE7E rerun"] = "blocked unless queue, labels, controls, or runner changes"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7E gate-native numeric path"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "legacy atlas repair superseded; use CORE7R on gate-native queue instead"
+        )
+        current_stage = "A7FF-CORE7E"
+        status = "numeric_response_hold_weak"
+        next_task = "A7FF-CORE7R response repair / label-control forensic"
+    elif a7ffcore7.get("decision") == "PASS_A7FFCORE7_NUMERIC_RESPONSE_CONTRACT_READY_FOR_CORE7E":
         allowed["A7FF-CORE7E gate-native numeric-response execution"] = (
             "bounded numeric-response execution only over CORE6E materialized queue; no replay/search/promotion"
         )

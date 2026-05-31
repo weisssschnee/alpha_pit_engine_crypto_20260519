@@ -1,0 +1,9 @@
+shard_id,candidate_count,response_rows,eval_errors,numeric_clues,primary_non_l7_clues,output
+S00,256,5120,0,0,0,runtime\a7ffcore7e_numeric_response\a7ffcore7e_S00_response.csv
+S01,256,5120,0,0,0,runtime\a7ffcore7e_numeric_response\a7ffcore7e_S01_response.csv
+S02,256,5120,0,0,0,runtime\a7ffcore7e_numeric_response\a7ffcore7e_S02_response.csv
+S03,256,5120,0,0,0,runtime\a7ffcore7e_numeric_response\a7ffcore7e_S03_response.csv
+S04,256,5120,0,0,0,runtime\a7ffcore7e_numeric_response\a7ffcore7e_S04_response.csv
+S05,256,5120,0,0,0,runtime\a7ffcore7e_numeric_response\a7ffcore7e_S05_response.csv
+S06,256,5120,0,0,0,runtime\a7ffcore7e_numeric_response\a7ffcore7e_S06_response.csv
+S07,256,5120,0,0,0,runtime\a7ffcore7e_numeric_response\a7ffcore7e_S07_response.csv

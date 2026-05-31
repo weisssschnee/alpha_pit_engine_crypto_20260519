@@ -1,0 +1,17 @@
+semantic_bucket,motif_bucket,rows,candidate_count,numeric_clues,median_control_ratio
+liquidity_like,liquidity_shock,200,10,0,1.3817768745995154
+liquidity_like,single,1960,98,0,1.265151213287693
+liquidity_like|volatility_like,liquidity_shock,7400,370,0,1.8767484489161412
+liquidity_like|volatility_like,mean_reversion_gate,7200,360,0,2.052089303908607
+liquidity_like|volatility_like,safe_div_abs,6400,320,0,1.699301041286053
+open_interest_like,delta_x_divergence,400,20,0,1.4059162651719483
+open_interest_like,flow_x_leverage,400,20,0,2.6481394533205784
+open_interest_like,single,400,20,0,2.150330767763592
+open_interest_like|positioning_like,delta_x_divergence,3840,192,0,4.93406419074965
+open_interest_like|price_like,delta_x_divergence,880,44,0,7.186993020345737
+open_interest_like|price_like,mean_reversion_gate,2960,148,0,1.9502625879241953
+taker_flow_like,flow_x_leverage,200,10,0,2.151731832788421
+taker_flow_like,single,760,38,0,2.535066603958327
+taker_flow_like|basis_premium_like,gated_sign,3840,192,0,3.055377818411991
+taker_flow_like|open_interest_like,flow_x_leverage,3840,192,0,1.9194141558674958
+volatility_like,single,280,14,0,1.5926680668544797
