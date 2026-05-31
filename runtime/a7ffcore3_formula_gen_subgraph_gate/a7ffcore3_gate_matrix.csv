@@ -1,0 +1,4 @@
+gate,count,status,authorizes_generation
+approved_reusable_subgraphs,2820,allowed_for_feature_factory,False
+diagnostic_roots,9240,diagnostic_or_repair_only,False
+blocked_or_unknown_subgraphs,0,fail_closed,False

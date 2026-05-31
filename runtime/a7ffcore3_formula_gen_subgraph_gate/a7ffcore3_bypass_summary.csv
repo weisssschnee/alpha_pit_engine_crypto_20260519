@@ -1,0 +1,3 @@
+bypass_risk,gate_status,script_count
+high,needs_core4_wiring,12
+low,no_obvious_generation_path,5

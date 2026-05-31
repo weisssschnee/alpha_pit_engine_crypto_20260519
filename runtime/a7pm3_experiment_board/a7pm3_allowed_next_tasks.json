@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE3 FormulaGen subgraph gate": "governance/gate only; require FormulaGen to consume approved typed subgraphs and reject bypassed raw expressions; no generation/numeric/replay/search",
+  "A7FF-CORE4 FormulaGen gate implementation regression": "implementation/regression only; wire active generation entrypoints to CORE3 subgraph gate or quarantine bypass scripts; no generation/numeric/replay/search",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

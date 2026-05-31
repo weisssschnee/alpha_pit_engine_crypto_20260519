@@ -1,0 +1,54 @@
+{
+  "allowed_formula_gen_modes": {
+    "diagnostic_repair": {
+      "allowed_subgraph_gate": [
+        "feature_factory_reusable_subgraph",
+        "diagnostic_or_repair_root_only"
+      ],
+      "authorizes_numeric": false,
+      "authorizes_replay": false,
+      "authorizes_search": false
+    },
+    "ordinary_alpha": {
+      "allowed_subgraph_gate": [
+        "feature_factory_reusable_subgraph"
+      ],
+      "authorizes_numeric": false,
+      "authorizes_replay": false,
+      "authorizes_search": false,
+      "requires_response_promotion": true
+    }
+  },
+  "allowed_input_sources": [
+    "runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_reusable_feature_subgraphs.csv",
+    "runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_subgraph_registry.csv"
+  ],
+  "hard_rules": [
+    {
+      "detail": "FormulaGen must assemble candidates from approved_subgraph_id values, not ad hoc raw expression strings.",
+      "rule": "subgraph_source_required"
+    },
+    {
+      "detail": "Direct Field or raw expression creation is rejected unless it resolves to an approved CORE2 subgraph_id.",
+      "rule": "raw_field_bypass_rejected"
+    },
+    {
+      "detail": "CORE2 factor_candidate_root nodes are diagnostic/repair roots only until response promotion and replay gates pass.",
+      "rule": "root_candidate_not_alpha"
+    },
+    {
+      "detail": "label_only, future, timing-blocked, or missing-contract fields remain fail-closed.",
+      "rule": "label_and_future_forbidden"
+    },
+    {
+      "detail": "diagnostic_only and risk_defense_only nodes cannot enter ordinary alpha queues.",
+      "rule": "role_route_enforced"
+    },
+    {
+      "detail": "May labels, returns, pass/fail flags, or stress margins are forbidden in generation, mutation, ranking, or selector score.",
+      "rule": "no_may_in_generation"
+    }
+  ],
+  "policy_id": "a7ffcore3_formula_gen_subgraph_gate_v1",
+  "source_stage": "A7FF-CORE2"
+}
