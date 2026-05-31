@@ -10,8 +10,8 @@
   "A7FF-48": "not authorized by A7FF-47; frozen clues fail non-L5 label translation",
   "A7FF-50": "not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps",
   "A7FF-51 execution": "not authorized by A7FF-R11; only contract drafting is allowed",
-  "A7FF-55R5F expanded sharded numeric execution": "blocked until CORE5 produces a gate-native generated queue and CORE6 materialization preflight passes",
-  "A7FF-55R6 numeric response forensic / atlas repair": "deprioritized until CORE5 gate-native generation queue exists; weak numeric response should not drive quarantined legacy generators",
+  "A7FF-55R5F expanded sharded numeric execution": "blocked until CORE6 materialization preflight and CORE7 numeric contract pass on gate-native queue",
+  "A7FF-55R6 numeric response forensic / atlas repair": "deprioritized; CORE5 now provides gate-native queue, next work is materialization preflight not legacy atlas repair",
   "alpha proof": "not authorized",
   "direct OI-price rerun": "superseded weak prior / not authorized",
   "shadow/paper/live": "not authorized"

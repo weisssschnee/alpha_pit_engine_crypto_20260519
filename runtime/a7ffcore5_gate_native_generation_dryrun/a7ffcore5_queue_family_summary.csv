@@ -1,0 +1,17 @@
+semantic_bucket,motif_bucket,candidates,raw_field_count,gate_pass
+liquidity_like|volatility_like,liquidity_shock,370,5,370
+liquidity_like|volatility_like,mean_reversion_gate,360,5,360
+liquidity_like|volatility_like,safe_div_abs,320,5,320
+open_interest_like|positioning_like,delta_x_divergence,192,5,192
+taker_flow_like|basis_premium_like,gated_sign,192,6,192
+taker_flow_like|open_interest_like,flow_x_leverage,192,5,192
+open_interest_like|price_like,mean_reversion_gate,148,5,148
+liquidity_like,single,98,9,98
+open_interest_like|price_like,delta_x_divergence,44,5,44
+taker_flow_like,single,38,4,38
+open_interest_like,delta_x_divergence,20,2,20
+open_interest_like,flow_x_leverage,20,2,20
+open_interest_like,single,20,5,20
+volatility_like,single,14,2,14
+liquidity_like,liquidity_shock,10,1,10
+taker_flow_like,flow_x_leverage,10,1,10

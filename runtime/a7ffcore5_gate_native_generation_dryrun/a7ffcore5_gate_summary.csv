@@ -1,0 +1,2 @@
+gate_allowed,gate_reason,ordinary_alpha_allowed,ordinary_alpha_reject_reason,candidates
+True,approved_diagnostic_root_id,False,subgraph_id_not_allowed_for_mode,2048

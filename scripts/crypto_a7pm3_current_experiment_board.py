@@ -33,6 +33,7 @@ A7FFCORE1 = REPO / "runtime" / "a7ffcore1_ast_schema_adapter" / "a7ffcore1_manif
 A7FFCORE2 = REPO / "runtime" / "a7ffcore2_feature_subgraph_registry" / "a7ffcore2_manifest.json"
 A7FFCORE3 = REPO / "runtime" / "a7ffcore3_formula_gen_subgraph_gate" / "a7ffcore3_manifest.json"
 A7FFCORE4 = REPO / "runtime" / "a7ffcore4_gate_implementation_regression" / "a7ffcore4_manifest.json"
+A7FFCORE5 = REPO / "runtime" / "a7ffcore5_gate_native_generation_dryrun" / "a7ffcore5_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -74,12 +75,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore2 = read_json(A7FFCORE2)
     a7ffcore3 = read_json(A7FFCORE3)
     a7ffcore4 = read_json(A7FFCORE4)
+    a7ffcore5 = read_json(A7FFCORE5)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore4.get("decision") == "PASS_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_READY_FOR_CORE5":
+    if a7ffcore5.get("decision") == "PASS_A7FFCORE5_GATE_NATIVE_DRYRUN_READY_FOR_CORE6":
+        allowed["A7FF-CORE6 gate-native materialization preflight contract"] = (
+            "contract/preflight design only; define materialization checks for CORE5 gate-native queue; no numeric/replay/search/promotion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked until CORE6 materialization preflight and CORE7 numeric contract pass on gate-native queue"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "deprioritized; CORE5 now provides gate-native queue, next work is materialization preflight not legacy atlas repair"
+        )
+        current_stage = "A7FF-CORE5"
+        status = "gate_native_dryrun_ready_for_core6"
+        next_task = "A7FF-CORE6 gate-native materialization preflight contract"
+    elif a7ffcore4.get("decision") == "PASS_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_READY_FOR_CORE5":
         allowed["A7FF-CORE5 gate-native generation compatibility dryrun"] = (
             "dryrun/compatibility only; build a new generator entrypoint that emits CORE4-gated subgraph references; no numeric/replay/search/promotion"
         )

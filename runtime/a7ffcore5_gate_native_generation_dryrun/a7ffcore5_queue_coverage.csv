@@ -1,0 +1,9 @@
+metric,value
+queue_rows,2048
+root_registry_rows,9240
+reusable_subgraph_rows,2820
+semantic_bucket_count,9
+motif_bucket_count,7
+raw_field_count,35
+gate_pass_count,2048
+ordinary_alpha_allowed_count,0
