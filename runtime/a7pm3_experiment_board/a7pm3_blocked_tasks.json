@@ -10,7 +10,8 @@
   "A7FF-48": "not authorized by A7FF-47; frozen clues fail non-L5 label translation",
   "A7FF-50": "not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps",
   "A7FF-51 execution": "not authorized by A7FF-R11; only contract drafting is allowed",
-  "A7FF-55D replay preflight": "blocked: partial dryrun still family/motif concentrated and is not full-scope",
+  "A7FF-55F selected queue replay": "blocked: selector dryrun did not pass concentration caps",
+  "A7FF-56 replay-preflight contract": "blocked: A7FF-55F selected queue still family/motif/label concentrated",
   "alpha proof": "not authorized",
   "direct OI-price rerun": "superseded weak prior / not authorized",
   "shadow/paper/live": "not authorized"

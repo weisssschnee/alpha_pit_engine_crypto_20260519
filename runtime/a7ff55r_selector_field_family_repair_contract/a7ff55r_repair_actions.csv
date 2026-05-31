@@ -1,0 +1,7 @@
+repair_id,target,rule,reason
+R0_primary_label_balance_keep,label_family,keep L0/L1/L3 minimum 4 rows each; L5/L7 remain excluded from alpha-selector queue,A7FF55F solved label absence; retain this constraint
+R1_family_anti_concentration,semantic_pair,hard cap per selected semantic_pair <= 0.25 until at least 5 families are selected,A7FF55F top semantic pair share was 0.40
+R2_motif_anti_concentration,motif,hard cap spread_rank <= 0.25 and require at least 5 motifs before any replay-preflight contract,A7FF55F spread_rank share was 0.5333
+R3_underrepresented_family_boost,input_generation,"supplemental primary-label inputs must over-sample open_interest, positioning, liquidity, volatility, and taker-flow families",A7FF55F had only 1-3 selected rows in those families
+R4_duplicate_economic_core_downrank,selector_score,down-rank repeated price_return interactions after each family reaches 4 rows,current selected queue is price-return-core dominated
+R5_control_margin_preserve,hard_gate,keep control_ratio_premay_max < 0.80 and wrong-lag/shuffle weaker than original,do not solve diversity by admitting control-like rows

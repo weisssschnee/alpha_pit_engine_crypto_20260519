@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-55F full primary-label input rebuild": "requires heavy execution; rebuild S02-S06 primary-label compact inputs with shard outputs; no replay/search/promotion",
+  "A7FF-55R1 family-diverse supplemental primary-label input generation": "requires explicit heavy execution; over-sample open_interest/positioning/liquidity/volatility/taker-flow primary-label inputs; no replay/search/promotion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

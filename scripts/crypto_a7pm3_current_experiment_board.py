@@ -20,6 +20,8 @@ A7FF53E = REPO / "runtime" / "a7ff53e_numeric_response_summary" / "a7ff53e_manif
 A7FF54 = REPO / "runtime" / "a7ff54_numeric_clue_consolidation" / "a7ff54_manifest.json"
 A7FF55 = REPO / "runtime" / "a7ff55_selector_repair_contract" / "a7ff55_manifest.json"
 A7FF55D = REPO / "runtime" / "a7ff55d_selector_repair_partial_dryrun" / "a7ff55d_manifest.json"
+A7FF55F = REPO / "runtime" / "a7ff55f_full_primary_input_rebuild" / "a7ff55f_manifest.json"
+A7FF55R = REPO / "runtime" / "a7ff55r_selector_field_family_repair_contract" / "a7ff55r_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -48,12 +50,39 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff54 = read_json(A7FF54)
     a7ff55 = read_json(A7FF55)
     a7ff55d = read_json(A7FF55D)
+    a7ff55f = read_json(A7FF55F)
+    a7ff55r = read_json(A7FF55R)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff55d.get("decision") == "HOLD_A7FF55D_PARTIAL_SELECTOR_DRYRUN_REQUIRES_FULL_INPUT_REBUILD":
+    if a7ff55r.get("decision") == "PASS_A7FF55R_SELECTOR_FIELD_FAMILY_REPAIR_CONTRACT_READY_NO_EXECUTION_AUTH":
+        allowed["A7FF-55R1 family-diverse supplemental primary-label input generation"] = (
+            "requires explicit heavy execution; over-sample open_interest/positioning/liquidity/volatility/taker-flow primary-label inputs; no replay/search/promotion"
+        )
+        blocked["A7FF-56 replay-preflight contract"] = "blocked: A7FF-55F selected queue still family/motif/label concentrated"
+        blocked["A7FF-55F selected queue replay"] = "blocked: selector dryrun did not pass concentration caps"
+        current_stage = "A7FF-55R"
+        status = "selector_field_family_repair_contract_ready_no_execution"
+        next_task = "A7FF-55R1 family-diverse supplemental primary-label input generation if explicitly authorized"
+    elif a7ff55f.get("decision") == "HOLD_A7FF55F_FULL_PRIMARY_SELECTOR_INPUT_REPAIR_REQUIRED":
+        allowed["A7FF-55R selector / field-family repair contract"] = (
+            "contract drafting only; repair family/motif/top-label concentration before any replay preflight"
+        )
+        blocked["A7FF-56 replay-preflight contract"] = "blocked: A7FF-55F selected queue still family/motif/label concentrated"
+        current_stage = "A7FF-55F"
+        status = "full_primary_selector_input_hold_repair_required"
+        next_task = "A7FF-55R selector / field-family repair contract"
+    elif a7ff55f.get("decision") == "PASS_A7FF55F_FULL_PRIMARY_SELECTOR_INPUT_READY_NO_REPLAY_AUTH":
+        allowed["A7FF-56 replay-preflight contract"] = (
+            "contract drafting only; A7FF-55F selected queue passed primary-label and diversity caps; no replay/search/promotion"
+        )
+        blocked["A7FF-55F direct replay"] = "blocked: A7FF-55F authorizes contract only, not replay execution"
+        current_stage = "A7FF-55F"
+        status = "full_primary_selector_input_ready_no_replay"
+        next_task = "A7FF-56 replay-preflight contract"
+    elif a7ff55d.get("decision") == "HOLD_A7FF55D_PARTIAL_SELECTOR_DRYRUN_REQUIRES_FULL_INPUT_REBUILD":
         allowed["A7FF-55F full primary-label input rebuild"] = (
             "requires heavy execution; rebuild S02-S06 primary-label compact inputs with shard outputs; no replay/search/promotion"
         )

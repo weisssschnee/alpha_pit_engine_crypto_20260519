@@ -1987,24 +1987,39 @@ runtime,A7FF-55,runtime/a7ff55_selector_repair_contract/a7ff55_label_quota_polic
 runtime,A7FF-55,runtime/a7ff55_selector_repair_contract/a7ff55_manifest.json,837c1e6,add crypto a7ff55 selector repair contract,773
 runtime,A7FF-55,runtime/a7ff55_selector_repair_contract/a7ff55_required_inputs.csv,837c1e6,add crypto a7ff55 selector repair contract,768
 runtime,A7FF-55,runtime/a7ff55_selector_repair_contract/a7ff55_selector_policy.json,837c1e6,add crypto a7ff55 selector repair contract,1454
-runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_available_response_compact.csv,a075030,run crypto a7ff55d partial selector dryrun,3852515
-runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_manifest.json,a075030,run crypto a7ff55d partial selector dryrun,1005
-runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_primary_label_candidate_pool.csv,a075030,run crypto a7ff55d partial selector dryrun,32500
-runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_repaired_selected_queue.csv,a075030,run crypto a7ff55d partial selector dryrun,10705
-runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_selected_family_summary.csv,a075030,run crypto a7ff55d partial selector dryrun,107
-runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_selected_label_summary.csv,a075030,run crypto a7ff55d partial selector dryrun,129
-runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_selected_motif_summary.csv,a075030,run crypto a7ff55d partial selector dryrun,77
-runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_source_audit.csv,a075030,run crypto a7ff55d partial selector dryrun,235
-runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_control_summary.csv,a075030,run crypto a7ff55d partial selector dryrun,450
-runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_decision_counts.csv,a075030,run crypto a7ff55d partial selector dryrun,760
-runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_decision_record.json,a075030,run crypto a7ff55d partial selector dryrun,2635
-runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_family_decision_summary.csv,a075030,run crypto a7ff55d partial selector dryrun,383
-runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_label_response_metrics.csv,a075030,run crypto a7ff55d partial selector dryrun,1514187
-runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_manifest.json,a075030,run crypto a7ff55d partial selector dryrun,2635
-runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_materialization_metrics.csv,a075030,run crypto a7ff55d partial selector dryrun,44204
-runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_nonoverlap_stats.csv,a075030,run crypto a7ff55d partial selector dryrun,195472
-runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_portfolio_marginal_proxy.csv,a075030,run crypto a7ff55d partial selector dryrun,4575
-runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_selected_portfolio_queue.csv,a075030,run crypto a7ff55d partial selector dryrun,4575
+runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_available_response_compact.csv,310e3f6,run crypto a7ff55d partial selector dryrun,3852515
+runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_manifest.json,310e3f6,run crypto a7ff55d partial selector dryrun,1005
+runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_primary_label_candidate_pool.csv,310e3f6,run crypto a7ff55d partial selector dryrun,32500
+runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_repaired_selected_queue.csv,310e3f6,run crypto a7ff55d partial selector dryrun,10705
+runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_selected_family_summary.csv,310e3f6,run crypto a7ff55d partial selector dryrun,107
+runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_selected_label_summary.csv,310e3f6,run crypto a7ff55d partial selector dryrun,129
+runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_selected_motif_summary.csv,310e3f6,run crypto a7ff55d partial selector dryrun,77
+runtime,A7FF-55D,runtime/a7ff55d_selector_repair_partial_dryrun/a7ff55d_source_audit.csv,310e3f6,run crypto a7ff55d partial selector dryrun,235
+runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_control_summary.csv,310e3f6,run crypto a7ff55d partial selector dryrun,450
+runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_decision_counts.csv,310e3f6,run crypto a7ff55d partial selector dryrun,760
+runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_decision_record.json,310e3f6,run crypto a7ff55d partial selector dryrun,2635
+runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_family_decision_summary.csv,310e3f6,run crypto a7ff55d partial selector dryrun,383
+runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_label_response_metrics.csv,310e3f6,run crypto a7ff55d partial selector dryrun,1514187
+runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_manifest.json,310e3f6,run crypto a7ff55d partial selector dryrun,2635
+runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_materialization_metrics.csv,310e3f6,run crypto a7ff55d partial selector dryrun,44204
+runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_nonoverlap_stats.csv,310e3f6,run crypto a7ff55d partial selector dryrun,195472
+runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_portfolio_marginal_proxy.csv,310e3f6,run crypto a7ff55d partial selector dryrun,4575
+runtime,A7FF-55D-S01P,runtime/a7ff55d_selector_repair_inputs_s01p/a7ff55d_s01p_selected_portfolio_queue.csv,310e3f6,run crypto a7ff55d partial selector dryrun,4575
+runtime,A7FF-55F,runtime/a7ff55f_full_primary_input_rebuild/a7ff55f_available_primary_response_compact.csv,,,11178916
+runtime,A7FF-55F,runtime/a7ff55f_full_primary_input_rebuild/a7ff55f_candidate_family_summary.csv,,,1129
+runtime,A7FF-55F,runtime/a7ff55f_full_primary_input_rebuild/a7ff55f_manifest.json,,,1083
+runtime,A7FF-55F,runtime/a7ff55f_full_primary_input_rebuild/a7ff55f_primary_label_candidate_pool.csv,,,70374
+runtime,A7FF-55F,runtime/a7ff55f_full_primary_input_rebuild/a7ff55f_repaired_selected_queue.csv,,,25204
+runtime,A7FF-55F,runtime/a7ff55f_full_primary_input_rebuild/a7ff55f_selected_family_summary.csv,,,258
+runtime,A7FF-55F,runtime/a7ff55f_full_primary_input_rebuild/a7ff55f_selected_label_summary.csv,,,131
+runtime,A7FF-55F,runtime/a7ff55f_full_primary_input_rebuild/a7ff55f_selected_motif_summary.csv,,,78
+runtime,A7FF-55F,runtime/a7ff55f_full_primary_input_rebuild/a7ff55f_source_audit.csv,,,1925
+runtime,A7FF-55R,runtime/a7ff55r_selector_field_family_repair_contract/a7ff55r_manifest.json,,,891
+runtime,A7FF-55R,runtime/a7ff55r_selector_field_family_repair_contract/a7ff55r_next_runner_contract.json,,,731
+runtime,A7FF-55R,runtime/a7ff55r_selector_field_family_repair_contract/a7ff55r_prior_selected_family_exposure.csv,,,361
+runtime,A7FF-55R,runtime/a7ff55r_selector_field_family_repair_contract/a7ff55r_prior_selected_motif_exposure.csv,,,140
+runtime,A7FF-55R,runtime/a7ff55r_selector_field_family_repair_contract/a7ff55r_repair_actions.csv,,,1134
+runtime,A7FF-55R,runtime/a7ff55r_selector_field_family_repair_contract/a7ff55r_supplemental_family_quota.csv,,,465
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_manifest.json,b725826,add crypto a7ff field to factor compiler,453
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_portfolio_marginal_queue.csv,b725826,add crypto a7ff field to factor compiler,2157
 runtime,A7FF-6,runtime/a7ff6_portfolio_marginal_selector_dryrun/a7ff6_selected_dryrun_queue.csv,b725826,add crypto a7ff field to factor compiler,751
@@ -2256,8 +2271,10 @@ report,A7FF53E-NUMERIC-RESPONSE-EXECUTION-S00,reports/CRYPTO_A7FF53E_NUMERIC_RES
 report,A7FF53E-NUMERIC-RESPONSE-SUMMARY,reports/CRYPTO_A7FF53E_NUMERIC_RESPONSE_SUMMARY_20260531.md,85597fb,summarize crypto a7ff53e numeric shards,16927
 report,A7FF54-NUMERIC-CLUE-CONSOLIDATION,reports/CRYPTO_A7FF54_NUMERIC_CLUE_CONSOLIDATION_20260531.md,471fd12,add crypto a7ff54 numeric clue consolidation,8114
 report,A7FF55-SELECTOR-REPAIR-CONTRACT,reports/CRYPTO_A7FF55_SELECTOR_REPAIR_CONTRACT_20260531.md,837c1e6,add crypto a7ff55 selector repair contract,7795
-report,A7FF55D-SELECTOR-REPAIR-INPUTS-S01P,reports/CRYPTO_A7FF55D_SELECTOR_REPAIR_INPUTS_S01P_20260531.md,a075030,run crypto a7ff55d partial selector dryrun,14650
-report,A7FF55D-SELECTOR-REPAIR-PARTIAL-DRYRUN,reports/CRYPTO_A7FF55D_SELECTOR_REPAIR_PARTIAL_DRYRUN_20260531.md,a075030,run crypto a7ff55d partial selector dryrun,3018
+report,A7FF55D-SELECTOR-REPAIR-INPUTS-S01P,reports/CRYPTO_A7FF55D_SELECTOR_REPAIR_INPUTS_S01P_20260531.md,310e3f6,run crypto a7ff55d partial selector dryrun,14650
+report,A7FF55D-SELECTOR-REPAIR-PARTIAL-DRYRUN,reports/CRYPTO_A7FF55D_SELECTOR_REPAIR_PARTIAL_DRYRUN_20260531.md,310e3f6,run crypto a7ff55d partial selector dryrun,3018
+report,A7FF55F-FULL-PRIMARY-INPUT-REBUILD,reports/CRYPTO_A7FF55F_FULL_PRIMARY_INPUT_REBUILD_20260531.md,,,8010
+report,A7FF55R-SELECTOR-FIELD-FAMILY-REPAIR-CONTRACT,reports/CRYPTO_A7FF55R_SELECTOR_FIELD_FAMILY_REPAIR_CONTRACT_20260531.md,,,7203
 report,A7FF6-PORTFOLIO-MARGINAL-SELECTOR-DRYRUN,reports/CRYPTO_A7FF6_PORTFOLIO_MARGINAL_SELECTOR_DRYRUN_20260530.md,b725826,add crypto a7ff field to factor compiler,6745
 report,A7FF7E-EXPANDED-DERIVATION-PROBE-CONTRACT,reports/CRYPTO_A7FF7E_EXPANDED_DERIVATION_PROBE_CONTRACT_20260530.md,bd530c1,expand crypto a7ff derivation probe contract,25056
 report,A7FF8-EXPANDED-NUMERIC-PROBE,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
@@ -2279,13 +2296,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,a075030,run crypto a7ff55d partial selector dryrun,371403
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,310e3f6,run crypto a7ff55d partial selector dryrun,393494
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,ce25d84,advance crypto a7ff bounded replay forensics,100789
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,a075030,run crypto a7ff55d partial selector dryrun,154637
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,a075030,run crypto a7ff55d partial selector dryrun,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,310e3f6,run crypto a7ff55d partial selector dryrun,157526
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,310e3f6,run crypto a7ff55d partial selector dryrun,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,a075030,run crypto a7ff55d partial selector dryrun,82754
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,310e3f6,run crypto a7ff55d partial selector dryrun,87184
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -2301,15 +2318,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,a075030,run crypto a7ff55d partial selector dryrun,377
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,a075030,run crypto a7ff55d partial selector dryrun,358
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,a075030,run crypto a7ff55d partial selector dryrun,1272
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,a075030,run crypto a7ff55d partial selector dryrun,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,a075030,run crypto a7ff55d partial selector dryrun,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,a075030,run crypto a7ff55d partial selector dryrun,6031
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,310e3f6,run crypto a7ff55d partial selector dryrun,429
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,310e3f6,run crypto a7ff55d partial selector dryrun,421
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,310e3f6,run crypto a7ff55d partial selector dryrun,1370
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,310e3f6,run crypto a7ff55d partial selector dryrun,1306
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,310e3f6,run crypto a7ff55d partial selector dryrun,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,310e3f6,run crypto a7ff55d partial selector dryrun,7856
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,a075030,run crypto a7ff55d partial selector dryrun,4970
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,310e3f6,run crypto a7ff55d partial selector dryrun,5733
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

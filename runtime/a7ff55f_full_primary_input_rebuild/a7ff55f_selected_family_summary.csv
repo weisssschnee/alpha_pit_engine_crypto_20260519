@@ -1,0 +1,7 @@
+semantic_pair,selected_count
+basis_premium_like|price_return_like,11
+liquidity_like|price_return_like,1
+open_interest_like|price_return_like,1
+positioning_like|price_return_like,3
+regime_state|price_return_like,12
+volatility_like|basis_premium_like,2

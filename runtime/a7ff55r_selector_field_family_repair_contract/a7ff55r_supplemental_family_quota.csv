@@ -1,0 +1,8 @@
+field_family,min_primary_candidates,preferred_labels,allowed_role
+open_interest_like,12,"L0,L1,L3",ordinary_or_mixed_alpha_only
+positioning_like,12,"L0,L1,L3",ordinary_or_mixed_alpha_only
+liquidity_like,10,"L0,L1,L3",ordinary_or_mixed_alpha_only
+volatility_like,10,"L0,L1,L3",ordinary_or_mixed_alpha_only
+taker_flow_like,8,"L0,L1,L3",ordinary_or_mixed_alpha_only
+basis_premium_like,0,"L0,L1,L3",cap_only_no_boost
+regime_state,0,"L0,L1,L3",cap_only_no_boost

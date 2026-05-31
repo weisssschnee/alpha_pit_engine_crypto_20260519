@@ -1,0 +1,26 @@
+{
+  "blocked_labels": [
+    "L7_ranked_future_return"
+  ],
+  "description": "family-diverse supplemental primary-label input generation and dry selector rerun",
+  "executes_replay": false,
+  "executes_search": false,
+  "family_caps": {
+    "selected_label_max_share": 0.35,
+    "selected_motif_max_share": 0.25,
+    "selected_semantic_pair_max_share": 0.25
+  },
+  "max_new_primary_response_rows": 12000,
+  "minimums": {
+    "primary_label_rows_each": 4,
+    "selected_motifs": 5,
+    "selected_rows": 24,
+    "selected_semantic_pairs": 5
+  },
+  "required_labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return"
+  ],
+  "stage": "A7FF-55R1"
+}

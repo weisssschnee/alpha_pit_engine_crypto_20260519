@@ -1,0 +1,34 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_next_contract": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "available_response_sources": 17,
+  "blockers": [
+    "top_family_share_above_0p30",
+    "top_motif_share_above_0p30",
+    "top_label_share_above_0p35"
+  ],
+  "decision": "HOLD_A7FF55F_FULL_PRIMARY_SELECTOR_INPUT_REPAIR_REQUIRED",
+  "executes_replay": false,
+  "executes_search": false,
+  "executes_selector_dryrun": true,
+  "generated_at": "2026-05-31T11:31:31Z",
+  "next_allowed": "A7FF-55R selector/field-family repair contract",
+  "primary_label_candidate_rows": 86,
+  "response_rows": 13800,
+  "selected_family_count": 6,
+  "selected_label_counts": {
+    "L0_raw_forward_return": 10,
+    "L1_cross_sectional_relative_return": 12,
+    "L3_liquidity_tier_relative_return": 8
+  },
+  "selected_motif_count": 4,
+  "selected_rows": 30,
+  "stage": "A7FF-55F",
+  "top_family_share": 0.4,
+  "top_label_share": 0.4,
+  "top_motif_share": 0.5333333333333333,
+  "uses_may": false
+}

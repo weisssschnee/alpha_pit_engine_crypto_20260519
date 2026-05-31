@@ -1,0 +1,24 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_next_contract": true,
+  "authorizes_next_execution": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FF55R_SELECTOR_FIELD_FAMILY_REPAIR_CONTRACT_READY_NO_EXECUTION_AUTH",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-31T11:35:06Z",
+  "next_allowed": "A7FF-55R1 family-diverse supplemental primary-label input generation, if explicitly executed",
+  "repair_action_count": 6,
+  "source_blockers": [
+    "top_family_share_above_0p30",
+    "top_motif_share_above_0p30",
+    "top_label_share_above_0p35"
+  ],
+  "source_decision": "HOLD_A7FF55F_FULL_PRIMARY_SELECTOR_INPUT_REPAIR_REQUIRED",
+  "source_stage": "A7FF-55F",
+  "stage": "A7FF-55R",
+  "supplemental_family_quota_rows": 7,
+  "uses_may": false
+}
