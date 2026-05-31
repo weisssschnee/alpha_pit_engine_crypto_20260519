@@ -1,0 +1,17 @@
+semantic_bucket,motif_bucket,status,candidates,mean_non_null_ratio,mean_active_ratio
+liquidity_like|volatility_like,liquidity_shock,ok,370,0.9769328324324325,0.9764390486486486
+liquidity_like|volatility_like,mean_reversion_gate,ok,360,0.9783695611111111,0.9769449333333333
+liquidity_like|volatility_like,safe_div_abs,ok,320,0.978147940625,0.9778239781249999
+open_interest_like|positioning_like,delta_x_divergence,ok,192,0.9976575833333333,0.994905265625
+taker_flow_like|basis_premium_like,gated_sign,ok,192,0.9983834374999999,0.997184828125
+taker_flow_like|open_interest_like,flow_x_leverage,ok,192,0.9960628906250001,0.9960627135416668
+open_interest_like|price_like,mean_reversion_gate,ok,148,0.9939803378378379,0.9900990472972974
+liquidity_like,single,ok,98,0.9658329489795918,0.9523011734693877
+open_interest_like|price_like,delta_x_divergence,ok,44,0.99622175,0.9937565227272728
+taker_flow_like,single,ok,38,0.9979882105263158,0.9978093684210526
+open_interest_like,delta_x_divergence,ok,20,0.9981274000000001,0.9981111
+open_interest_like,flow_x_leverage,ok,20,0.9981274000000001,0.9981113
+open_interest_like,single,ok,20,0.9678592,0.9678572000000001
+volatility_like,single,ok,14,0.9547014285714285,0.9542575714285714
+liquidity_like,liquidity_shock,ok,10,0.9991973999999999,0.9986846999999999
+taker_flow_like,flow_x_leverage,ok,10,0.9991973999999999,0.9987726

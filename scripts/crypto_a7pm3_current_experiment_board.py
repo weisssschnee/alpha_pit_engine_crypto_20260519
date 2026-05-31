@@ -35,6 +35,7 @@ A7FFCORE3 = REPO / "runtime" / "a7ffcore3_formula_gen_subgraph_gate" / "a7ffcore
 A7FFCORE4 = REPO / "runtime" / "a7ffcore4_gate_implementation_regression" / "a7ffcore4_manifest.json"
 A7FFCORE5 = REPO / "runtime" / "a7ffcore5_gate_native_generation_dryrun" / "a7ffcore5_manifest.json"
 A7FFCORE6 = REPO / "runtime" / "a7ffcore6_materialization_preflight_contract" / "a7ffcore6_manifest.json"
+A7FFCORE6E = REPO / "runtime" / "a7ffcore6e_materialization_preflight" / "a7ffcore6e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -78,12 +79,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore4 = read_json(A7FFCORE4)
     a7ffcore5 = read_json(A7FFCORE5)
     a7ffcore6 = read_json(A7FFCORE6)
+    a7ffcore6e = read_json(A7FFCORE6E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore6.get("decision") == "PASS_A7FFCORE6_MATERIALIZATION_PREFLIGHT_CONTRACT_READY_FOR_CORE6E":
+    if a7ffcore6e.get("decision") == "PASS_A7FFCORE6E_MATERIALIZATION_PREFLIGHT_READY_FOR_CORE7":
+        allowed["A7FF-CORE7 gate-native numeric-response contract"] = (
+            "contract only; define label/control response run over materialized CORE6E queue; no execution/replay/search/promotion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7 path; legacy numeric execution remains blocked"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "superseded by CORE7 path; gate-native materialization passed, next is numeric-response contract"
+        )
+        current_stage = "A7FF-CORE6E"
+        status = "materialization_preflight_ready_for_core7"
+        next_task = "A7FF-CORE7 gate-native numeric-response contract"
+    elif a7ffcore6.get("decision") == "PASS_A7FFCORE6_MATERIALIZATION_PREFLIGHT_CONTRACT_READY_FOR_CORE6E":
         allowed["A7FF-CORE6E gate-native materialization preflight execution"] = (
             "materialization/activity preflight only over CORE5 queue shards; no labels, returns, replay, search, or promotion"
         )

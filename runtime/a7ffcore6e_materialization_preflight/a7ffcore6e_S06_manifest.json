@@ -1,0 +1,11 @@
+{
+  "candidate_count": 256,
+  "eval_error_count": 0,
+  "label_or_may_token_count": 0,
+  "mean_active_ratio": 0.9743581718749998,
+  "mean_non_null_ratio": 0.975118390625,
+  "missing_field_count": 0,
+  "ok_count": 256,
+  "output": "runtime\\a7ffcore6e_materialization_preflight\\a7ffcore6e_S06_materialization.csv",
+  "shard_id": "S06"
+}

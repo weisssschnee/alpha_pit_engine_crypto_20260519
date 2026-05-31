@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-31T18:11:22Z
+Generated: 2026-05-31T18:52:30Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-05-31T18:11:22Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                              | next                                                        |
-|:----------------------------|:----------------|:----------------------------------------------------|:------------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                                | keep registry as source-of-truth                            |
-| a7ff_family_diversification | A7FF-CORE6      | materialization_preflight_contract_ready_for_core6e | A7FF-CORE6E gate-native materialization preflight execution |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                         | A7FF-24R4E if explicitly authorized                         |
-| search_execution            | blocked         | not_authorized                                      | none                                                        |
+| workstream                  | current_stage   | status                                    | next                                             |
+|:----------------------------|:----------------|:------------------------------------------|:-------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                      | keep registry as source-of-truth                 |
+| a7ff_family_diversification | A7FF-CORE6E     | materialization_preflight_ready_for_core7 | A7FF-CORE7 gate-native numeric-response contract |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution               | A7FF-24R4E if explicitly authorized              |
+| search_execution            | blocked         | not_authorized                            | none                                             |
 
 ## Allowed Next Tasks
 
-| task                                                        | reason                                                                                                            |
-|:------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option           | requires explicit user authorization; no search and no promotion                                                  |
-| A7PM-0/3 maintenance                                        | governance registry maintenance                                                                                   |
-| A7FF-CORE6E gate-native materialization preflight execution | materialization/activity preflight only over CORE5 queue shards; no labels, returns, replay, search, or promotion |
+| task                                              | reason                                                                                                                |
+|:--------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                      |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                       |
+| A7FF-CORE7 gate-native numeric-response contract  | contract only; define label/control response run over materialized CORE6E queue; no execution/replay/search/promotion |
 
 ## Blocked Tasks
 
@@ -41,8 +41,8 @@ Generated: 2026-05-31T18:11:22Z
 | A7AL-2Q                                            | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                                        | not authorized                                                                                                        |
 | shadow/paper/live                                  | not authorized                                                                                                        |
-| A7FF-55R5F expanded sharded numeric execution      | blocked until CORE6E materialization preflight passes and CORE7 numeric-response contract is written                  |
-| A7FF-55R6 numeric response forensic / atlas repair | superseded by CORE6E path; materialize gate-native queue before any numeric response or atlas repair                  |
+| A7FF-55R5F expanded sharded numeric execution      | superseded by CORE7 path; legacy numeric execution remains blocked                                                    |
+| A7FF-55R6 numeric response forensic / atlas repair | superseded by CORE7 path; gate-native materialization passed, next is numeric-response contract                       |
 
 ## Boundary
 
