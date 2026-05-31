@@ -11,7 +11,9 @@
   "A7FF-50": "not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps",
   "A7FF-51 execution": "not authorized by A7FF-R11; only contract drafting is allowed",
   "A7FF-55R5F expanded sharded numeric execution": "superseded by CORE7E gate-native numeric path",
-  "A7FF-55R6 numeric response forensic / atlas repair": "superseded by CORE7E path; legacy atlas numeric response remains blocked",
+  "A7FF-55R6 numeric response forensic / atlas repair": "legacy atlas repair superseded; use CORE7R on gate-native queue instead",
+  "A7FF-CORE7E rerun": "blocked unless queue, labels, controls, or runner changes",
+  "A7FF-CORE8 numeric clue consolidation": "blocked: CORE7E produced no primary non-L7 numeric clues",
   "alpha proof": "not authorized",
   "direct OI-price rerun": "superseded weak prior / not authorized",
   "shadow/paper/live": "not authorized"

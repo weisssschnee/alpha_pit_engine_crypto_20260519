@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE7E gate-native numeric-response execution": "bounded numeric-response execution only over CORE6E materialized queue; no replay/search/promotion",
+  "A7FF-CORE7R response repair / label-control forensic": "forensic/repair only; inspect no-primary-non-L7 clue result and control dominance before changing generation or selector",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }
