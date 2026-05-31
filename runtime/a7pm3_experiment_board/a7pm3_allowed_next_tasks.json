@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-53E numeric response execution option": "requires explicit authorization; bounded numeric response only; no replay/search/promotion",
+  "A7FF-53E remaining shard execution option": "requires explicit heavy-task authorization; continue bounded numeric response shards or optimize runner; no replay/search/promotion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

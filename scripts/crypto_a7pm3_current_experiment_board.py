@@ -15,6 +15,7 @@ A7PM0 = REPO / "runtime" / "a7pm0_source_of_truth_registry" / "a7pm0_manifest.js
 A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 A7FF52E = REPO / "runtime" / "a7ff52e_materialization_preflight" / "a7ff52e_manifest.json"
 A7FF53 = REPO / "runtime" / "a7ff53_numeric_response_contract" / "a7ff53_manifest.json"
+A7FF53E_S00 = REPO / "runtime" / "a7ff53e_numeric_response_execution_s00" / "a7ff53e_s00_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -38,12 +39,21 @@ BASE_BLOCKED = {
 def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ff52e = read_json(A7FF52E)
     a7ff53 = read_json(A7FF53)
+    a7ff53e_s00 = read_json(A7FF53E_S00)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ff53.get("decision") == "PASS_A7FF53_NUMERIC_RESPONSE_CONTRACT_READY_NO_EXECUTION_AUTH":
+    if a7ff53e_s00.get("decision") == "PASS_A7FF53ES00_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH":
+        allowed["A7FF-53E remaining shard execution option"] = (
+            "requires explicit heavy-task authorization; continue bounded numeric response shards or optimize runner; no replay/search/promotion"
+        )
+        blocked["A7FF-53E full one-shot execution"] = "current runner timed out on 1200-row one-shot; use shard execution or optimize before full run"
+        current_stage = "A7FF-53E-S00"
+        status = "first_numeric_shard_pass_no_search"
+        next_task = "A7FF-53E remaining shards or runner optimization"
+    elif a7ff53.get("decision") == "PASS_A7FF53_NUMERIC_RESPONSE_CONTRACT_READY_NO_EXECUTION_AUTH":
         allowed["A7FF-53E numeric response execution option"] = (
             "requires explicit authorization; bounded numeric response only; no replay/search/promotion"
         )

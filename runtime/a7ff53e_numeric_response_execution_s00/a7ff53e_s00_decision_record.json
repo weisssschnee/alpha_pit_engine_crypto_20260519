@@ -1,0 +1,86 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FF53ES00_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH",
+  "executes_generation": false,
+  "executes_numeric_probe": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-05-31T06:08:32Z",
+  "input_blueprint_count": 150,
+  "label_response_rows": 3000,
+  "materialized_activity_ok_count": 150,
+  "non_l7_numeric_clue_rows": 77,
+  "plan": {
+    "authorizes_alpha_proof": false,
+    "authorizes_numeric_response_execution": false,
+    "authorizes_replay": false,
+    "authorizes_search": false,
+    "authorizes_shadow_paper_live": false,
+    "decision": "PASS_A7FF53_NUMERIC_RESPONSE_CONTRACT_READY_NO_EXECUTION_AUTH",
+    "execution_budget_if_later_approved": {
+      "diagnostic_only_low_activity_families": [
+        "funding_like|basis_premium_like"
+      ],
+      "horizons": [
+        "1h",
+        "4h",
+        "8h",
+        "24h"
+      ],
+      "input_materialized_rows": 1200,
+      "labels": [
+        "L0_raw_forward_return",
+        "L1_cross_sectional_relative_return",
+        "L3_liquidity_tier_relative_return",
+        "L5_vol_adjusted_return",
+        "L7_ranked_future_return"
+      ],
+      "max_reports": 1,
+      "max_runtime_tables": 6,
+      "max_scripts": 1,
+      "primary_semantic_families": [
+        "basis_premium_like|price_return_like",
+        "liquidity_like|price_return_like",
+        "open_interest_like|price_return_like",
+        "positioning_like|price_return_like",
+        "regime_state|price_return_like",
+        "taker_flow_like|basis_premium_like",
+        "volatility_like|basis_premium_like"
+      ]
+    },
+    "hard_gates_for_future_execution": {
+      "control_ratio_for_clue": "< 0.80",
+      "l7_only_evidence": "diagnostic_only_not_promotable",
+      "low_activity_family_primary_rows": 0,
+      "materialization_eval_failure_count": 0,
+      "missing_field_count": 0,
+      "non_l7_primary_label_clue_rows": "> 0",
+      "primary_family_count": ">= 6",
+      "uses_may_in_score": false,
+      "wrong_lag_dominance": 0
+    },
+    "hard_stop_before": [
+      "formula search",
+      "large search",
+      "alpha proof",
+      "shadow/paper/live"
+    ],
+    "input_metrics": "runtime/a7ff52e_materialization_preflight/a7ff52e_materialization_metrics.csv",
+    "input_summary": "runtime/a7ff52e_materialization_preflight/a7ff52e_summary.csv",
+    "name": "numeric response contract after A7FF-52E materialization preflight",
+    "source_stage": "A7FF-52E",
+    "stage": "A7FF-53"
+  },
+  "portfolio_queue_count": 29,
+  "queue_limit": 150,
+  "queue_offset": 0,
+  "queue_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ff53e_numeric_response_execution\\a7ff53e_numeric_queue.csv",
+  "queue_total_rows": 1200,
+  "rank_label_diagnostic_clue_rows": 39,
+  "selected_portfolio_queue_count": 24,
+  "stage": "A7FF-53E-S00",
+  "uses_may": false
+}

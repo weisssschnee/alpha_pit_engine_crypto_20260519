@@ -48,6 +48,9 @@ A7FF7E_MANIFEST = REPO / "runtime" / "a7ff7e_expanded_derivation_probe_contract"
 A7FF7E_QUEUE = REPO / "runtime" / "a7ff7e_expanded_derivation_probe_contract" / "a7ff7e_selected_numeric_probe_queue.csv"
 A7FF7E_PLAN = REPO / "runtime" / "a7ff7e_expanded_derivation_probe_contract" / "a7ff7e_numeric_probe_plan.json"
 QUEUE_PATH = Path(os.environ.get("A7FF8_QUEUE_PATH", str(A7FF7E_QUEUE)))
+AUTH_MANIFEST = Path(os.environ.get("A7FF8_AUTH_MANIFEST", str(A7FF7E_MANIFEST)))
+AUTH_DECISION = os.environ.get("A7FF8_AUTH_DECISION", "")
+PLAN_PATH = Path(os.environ.get("A7FF8_PLAN_PATH", str(A7FF7E_PLAN)))
 
 LABELS = [
     "L0_raw_forward_return",
@@ -336,10 +339,13 @@ def portfolio_proxy(responses: pd.DataFrame, materialized: pd.DataFrame) -> tupl
 def main() -> None:
     RUNTIME.mkdir(parents=True, exist_ok=True)
     REPORT.parent.mkdir(parents=True, exist_ok=True)
-    a7ff7e = read_json(A7FF7E_MANIFEST)
-    if not a7ff7e.get("authorizes_a7ff8_numeric_probe_contract"):
+    auth = read_json(AUTH_MANIFEST)
+    if AUTH_DECISION:
+        if auth.get("decision") != AUTH_DECISION:
+            raise SystemExit(f"{AUTH_MANIFEST} does not authorize {STAGE}: {auth.get('decision')}")
+    elif not auth.get("authorizes_a7ff8_numeric_probe_contract"):
         raise SystemExit(f"A7FF-7E does not authorize {STAGE} numeric probe")
-    plan = read_json(A7FF7E_PLAN)
+    plan = read_json(PLAN_PATH)
     queue_all = pd.read_csv(QUEUE_PATH)
     queue = queue_all.copy()
     if QUEUE_OFFSET:
