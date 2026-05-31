@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FF53E_NUMERIC_RESPONSE_SHARD_SUMMARY_READY_NO_SEARCH_AUTH",
+  "executes_numeric_probe": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "families_with_non_l7_clues": 6,
+  "generated_at": "2026-05-31T07:52:57Z",
+  "input_blueprint_count": 1200,
+  "label_response_rows": 21000,
+  "materialized_activity_ok_count": 1050,
+  "non_l7_numeric_clue_rows": 186,
+  "pass_shard_count": 6,
+  "rank_label_diagnostic_clue_rows": 258,
+  "selected_portfolio_queue_count": 148,
+  "shard_count": 8,
+  "stage": "A7FF-53E",
+  "uses_may": false
+}

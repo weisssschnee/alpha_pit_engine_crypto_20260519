@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-31T06:10:40Z
+Generated: 2026-05-31T07:56:26Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-05-31T06:10:40Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                             | next                                             |
-|:----------------------------|:----------------|:-----------------------------------|:-------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                               | keep registry as source-of-truth                 |
-| a7ff_family_diversification | A7FF-53E-S00    | first_numeric_shard_pass_no_search | A7FF-53E remaining shards or runner optimization |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution        | A7FF-24R4E if explicitly authorized              |
-| search_execution            | blocked         | not_authorized                     | none                                             |
+| workstream                  | current_stage   | status                                  | next                                |
+|:----------------------------|:----------------|:----------------------------------------|:------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                    | keep registry as source-of-truth    |
+| a7ff_family_diversification | A7FF-53E        | numeric_response_summary_pass_no_search | A7FF-54 clue consolidation contract |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution             | A7FF-24R4E if explicitly authorized |
+| search_execution            | blocked         | not_authorized                          | none                                |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                                                                                              |
-|:--------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                                    |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                                     |
-| A7FF-53E remaining shard execution option         | requires explicit heavy-task authorization; continue bounded numeric response shards or optimize runner; no replay/search/promotion |
+| task                                              | reason                                                                                                       |
+|:--------------------------------------------------|:-------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                             |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                                                              |
+| A7FF-54 numeric clue consolidation contract       | contract drafting only; consolidate 186 non-L7 clues and 148 selected queue rows; no replay/search/promotion |
 
 ## Blocked Tasks
 
@@ -41,7 +41,7 @@ Generated: 2026-05-31T06:10:40Z
 | A7AL-2Q                          | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                      | not authorized                                                                                                        |
 | shadow/paper/live                | not authorized                                                                                                        |
-| A7FF-53E full one-shot execution | current runner timed out on 1200-row one-shot; use shard execution or optimize before full run                        |
+| A7FF-53E rerun                   | numeric response summary complete; rerun only if queue or runner changes                                              |
 
 ## Boundary
 
