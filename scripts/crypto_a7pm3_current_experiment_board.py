@@ -32,6 +32,7 @@ A7FFCORE0 = REPO / "runtime" / "a7ffcore0_typed_ast_governance" / "a7ffcore0_man
 A7FFCORE1 = REPO / "runtime" / "a7ffcore1_ast_schema_adapter" / "a7ffcore1_manifest.json"
 A7FFCORE2 = REPO / "runtime" / "a7ffcore2_feature_subgraph_registry" / "a7ffcore2_manifest.json"
 A7FFCORE3 = REPO / "runtime" / "a7ffcore3_formula_gen_subgraph_gate" / "a7ffcore3_manifest.json"
+A7FFCORE4 = REPO / "runtime" / "a7ffcore4_gate_implementation_regression" / "a7ffcore4_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -72,12 +73,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore1 = read_json(A7FFCORE1)
     a7ffcore2 = read_json(A7FFCORE2)
     a7ffcore3 = read_json(A7FFCORE3)
+    a7ffcore4 = read_json(A7FFCORE4)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore3.get("decision") == "PASS_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_READY_FOR_CORE4":
+    if a7ffcore4.get("decision") == "PASS_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_READY_FOR_CORE5":
+        allowed["A7FF-CORE5 gate-native generation compatibility dryrun"] = (
+            "dryrun/compatibility only; build a new generator entrypoint that emits CORE4-gated subgraph references; no numeric/replay/search/promotion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked until CORE5 produces a gate-native generated queue and CORE6 materialization preflight passes"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "deprioritized until CORE5 gate-native generation queue exists; weak numeric response should not drive quarantined legacy generators"
+        )
+        current_stage = "A7FF-CORE4"
+        status = "gate_implementation_regression_ready_for_core5"
+        next_task = "A7FF-CORE5 gate-native generation compatibility dryrun"
+    elif a7ffcore3.get("decision") == "PASS_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_READY_FOR_CORE4":
         allowed["A7FF-CORE4 FormulaGen gate implementation regression"] = (
             "implementation/regression only; wire active generation entrypoints to CORE3 subgraph gate or quarantine bypass scripts; no generation/numeric/replay/search"
         )

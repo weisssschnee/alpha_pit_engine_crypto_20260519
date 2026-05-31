@@ -1,0 +1,6 @@
+mode,input_type,expected_allowed,actual_allowed,cases
+ordinary_alpha,expression,True,True,50
+ordinary_alpha,subgraph_id,True,True,50
+diagnostic_repair,subgraph_id,True,True,20
+ordinary_alpha,subgraph_id,False,False,20
+ordinary_alpha,expression,False,False,5

@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE4 FormulaGen gate implementation regression": "implementation/regression only; wire active generation entrypoints to CORE3 subgraph gate or quarantine bypass scripts; no generation/numeric/replay/search",
+  "A7FF-CORE5 gate-native generation compatibility dryrun": "dryrun/compatibility only; build a new generator entrypoint that emits CORE4-gated subgraph references; no numeric/replay/search/promotion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }
