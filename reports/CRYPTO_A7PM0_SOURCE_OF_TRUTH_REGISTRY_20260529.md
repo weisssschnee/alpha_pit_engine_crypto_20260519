@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-05-31T23:35:10Z
+Generated: 2026-05-31T23:38:07Z
 
 ## Decision
 
@@ -17,8 +17,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=dd283020fd8d5d713e03d2acd4538f0b5764e766
-origin/main=dd283020fd8d5d713e03d2acd4538f0b5764e766
+HEAD=949e328b52371c52847f41b5ea130f77e11c51bc
+origin/main=949e328b52371c52847f41b5ea130f77e11c51bc
 HEAD == origin/main: True
 ```
 
@@ -26,8 +26,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2685,
-  "authorization_record_count": 691,
+  "artifact_count": 2696,
+  "authorization_record_count": 697,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -40,12 +40,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-05-31T23:35:10Z",
-  "head": "dd283020fd8d5d713e03d2acd4538f0b5764e766",
+  "generated_at": "2026-05-31T23:38:07Z",
+  "head": "949e328b52371c52847f41b5ea130f77e11c51bc",
   "head_equals_origin_main": true,
-  "origin_main": "dd283020fd8d5d713e03d2acd4538f0b5764e766",
+  "origin_main": "949e328b52371c52847f41b5ea130f77e11c51bc",
   "stage": "A7PM-0",
-  "stage_count": 285
+  "stage_count": 286
 }
 ```
 
@@ -65,7 +65,7 @@ HEAD == origin/main: True
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     130 |
-| valid_or_historical_record   | contract                   |      61 |
+| valid_or_historical_record   | contract                   |      62 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       7 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

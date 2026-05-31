@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-05-31T23:35:12Z
+Generated: 2026-05-31T23:38:09Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-05-31T23:35:12Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                           | next                                |
-|:----------------------------|:----------------|:-------------------------------------------------|:------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                             | keep registry as source-of-truth    |
-| a7ff_family_diversification | A7FF-CORE8E     | replay_preflight_packet_ready_for_core9_contract | A7FF-CORE9 bounded replay contract  |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                      | A7FF-24R4E if explicitly authorized |
-| search_execution            | blocked         | not_authorized                                   | none                                |
+| workstream                  | current_stage   | status                                   | next                                 |
+|:----------------------------|:----------------|:-----------------------------------------|:-------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                     | keep registry as source-of-truth     |
+| a7ff_family_diversification | A7FF-CORE9      | bounded_replay_contract_ready_for_core9e | A7FF-CORE9E bounded replay execution |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution              | A7FF-24R4E if explicitly authorized  |
+| search_execution            | blocked         | not_authorized                           | none                                 |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                                                                |
-|:--------------------------------------------------|:------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                      |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                                                       |
-| A7FF-CORE9 bounded replay contract                | contract only; define bounded replay protocol for CORE8E packet; no replay execution/search/promotion |
+| task                                              | reason                                                                                                               |
+|:--------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                     |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                      |
+| A7FF-CORE9E bounded replay execution              | bounded replay execution over CORE9 contract packet only; no formula search, large search, promotion, or alpha proof |
 
 ## Blocked Tasks
 
@@ -41,9 +41,9 @@ Generated: 2026-05-31T23:35:12Z
 | A7AL-2Q                                       | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                                   | not authorized                                                                                                        |
 | shadow/paper/live                             | not authorized                                                                                                        |
-| A7FF-CORE8 direct replay execution            | blocked: CORE8E authorizes CORE9 contract only                                                                        |
-| A7FF-CORE8E rerun                             | packet audit passed; rerun only if CORE8 packet or audit policy changes                                               |
-| A7FF-55R5F expanded sharded numeric execution | superseded by CORE7/CORE8 gate-native path                                                                            |
+| A7FF-CORE9 large replay                       | blocked: CORE9 authorizes bounded execution only                                                                      |
+| A7FF-CORE8 direct replay execution            | superseded by CORE9 contract                                                                                          |
+| A7FF-55R5F expanded sharded numeric execution | superseded by CORE9 gate-native replay path                                                                           |
 
 ## Boundary
 
