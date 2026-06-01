@@ -1,0 +1,3 @@
+stage,action,input,authorized
+A7FF-CORE25E,targeted lane/horizon blueprint generation and preflight packet construction,CORE25 contract + existing field/operator registry,True
+A7FF-CORE26,targeted numeric probe contract,CORE25E pass only,False

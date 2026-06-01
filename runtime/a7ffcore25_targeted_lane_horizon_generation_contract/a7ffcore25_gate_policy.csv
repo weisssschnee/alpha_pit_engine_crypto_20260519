@@ -1,0 +1,6 @@
+gate,requirement
+targeted_generation_only,all candidates must belong to CORE25 target lanes and H4+/H24 horizons
+s0_s1_presence,S0 and S1 must both be present in generated packet
+one_bar_executable_policy,same-bar-only candidates remain diagnostic; one-bar positive required for replay-clean
+lane_cap,no lane may exceed 45% of materialization preflight packet
+search_auth,"no search, large search, alpha proof, shadow, paper, or live"

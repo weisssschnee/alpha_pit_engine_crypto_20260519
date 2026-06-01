@@ -1,0 +1,6 @@
+finding,value,interpretation
+repair_packet_count,12,includes executable clean and diagnostic repair seeds
+executable_clean_count,4,true one-bar executable clean supply
+executable_clean_lanes,2,true executable lane breadth
+missing_executable_lanes,"S0_positioning_price_basis,S1_liquidity_basis_positioning",lanes not yet executable
+missing_packet_lanes,S0_positioning_price_basis,lanes absent even as repair packet seeds

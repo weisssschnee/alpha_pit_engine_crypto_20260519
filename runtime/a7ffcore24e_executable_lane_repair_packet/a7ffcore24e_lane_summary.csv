@@ -1,0 +1,6 @@
+packet_role,seed_lane,candidate_count,label_family_count
+executable_clean,S2_taker_flow_liquidity_oi,1,1
+executable_clean,S3_cross_family_bridge,3,3
+one_bar_near_miss_seed,S3_cross_family_bridge,5,3
+same_bar_repair_seed,S1_liquidity_basis_positioning,2,2
+same_bar_repair_seed,S3_cross_family_bridge,1,1

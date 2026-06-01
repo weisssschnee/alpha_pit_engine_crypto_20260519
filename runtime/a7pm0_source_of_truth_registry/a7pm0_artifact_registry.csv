@@ -2795,6 +2795,48 @@ runtime,A7FF-CORE23,runtime/a7ffcore23_executable_horizon_redesign_contract/a7ff
 runtime,A7FF-CORE23,runtime/a7ffcore23_executable_horizon_redesign_contract/a7ffcore23_execution_plan.csv,d921a02,add crypto core21 translation and core23 contract,216
 runtime,A7FF-CORE23,runtime/a7ffcore23_executable_horizon_redesign_contract/a7ffcore23_horizon_policy.csv,d921a02,add crypto core21 translation and core23 contract,475
 runtime,A7FF-CORE23,runtime/a7ffcore23_executable_horizon_redesign_contract/a7ffcore23_manifest.json,d921a02,add crypto core21 translation and core23 contract,714
+runtime,A7FF-CORE23E,runtime/a7ffcore23e_executable_horizon_diagnostic_audit/a7ffcore23e_best_executable_clean_candidates.csv,,,1559
+runtime,A7FF-CORE23E,runtime/a7ffcore23e_executable_horizon_diagnostic_audit/a7ffcore23e_clean_by_label.csv,,,181
+runtime,A7FF-CORE23E,runtime/a7ffcore23e_executable_horizon_diagnostic_audit/a7ffcore23e_clean_by_lane.csv,,,112
+runtime,A7FF-CORE23E,runtime/a7ffcore23e_executable_horizon_diagnostic_audit/a7ffcore23e_diagnosis.csv,,,467
+runtime,A7FF-CORE23E,runtime/a7ffcore23e_executable_horizon_diagnostic_audit/a7ffcore23e_executable_horizon_matrix.csv,,,1235
+runtime,A7FF-CORE23E,runtime/a7ffcore23e_executable_horizon_diagnostic_audit/a7ffcore23e_manifest.json,,,969
+runtime,A7FF-CORE23R,runtime/a7ffcore23r_executable_horizon_forensic/a7ffcore23r_diagnosis.csv,,,548
+runtime,A7FF-CORE23R,runtime/a7ffcore23r_executable_horizon_forensic/a7ffcore23r_field_usage.csv,,,143
+runtime,A7FF-CORE23R,runtime/a7ffcore23r_executable_horizon_forensic/a7ffcore23r_label_presence.csv,,,181
+runtime,A7FF-CORE23R,runtime/a7ffcore23r_executable_horizon_forensic/a7ffcore23r_lane_presence.csv,,,112
+runtime,A7FF-CORE23R,runtime/a7ffcore23r_executable_horizon_forensic/a7ffcore23r_manifest.json,,,1006
+runtime,A7FF-CORE23R,runtime/a7ffcore23r_executable_horizon_forensic/a7ffcore23r_recommended_actions.csv,,,305
+runtime,A7FF-CORE24,runtime/a7ffcore24_executable_lane_repair_contract/a7ffcore24_blocked_tasks.csv,,,232
+runtime,A7FF-CORE24,runtime/a7ffcore24_executable_lane_repair_contract/a7ffcore24_execution_plan.csv,,,227
+runtime,A7FF-CORE24,runtime/a7ffcore24_executable_lane_repair_contract/a7ffcore24_gate_policy.csv,,,398
+runtime,A7FF-CORE24,runtime/a7ffcore24_executable_lane_repair_contract/a7ffcore24_lane_policy.csv,,,769
+runtime,A7FF-CORE24,runtime/a7ffcore24_executable_lane_repair_contract/a7ffcore24_manifest.json,,,818
+runtime,A7FF-CORE24E,runtime/a7ffcore24e_executable_lane_repair_packet/a7ffcore24e_diagnosis.csv,,,427
+runtime,A7FF-CORE24E,runtime/a7ffcore24e_executable_lane_repair_packet/a7ffcore24e_lane_summary.csv,,,309
+runtime,A7FF-CORE24E,runtime/a7ffcore24e_executable_lane_repair_packet/a7ffcore24e_manifest.json,,,1096
+runtime,A7FF-CORE24E,runtime/a7ffcore24e_executable_lane_repair_packet/a7ffcore24e_repair_packet.csv,,,6306
+runtime,A7FF-CORE24E,runtime/a7ffcore24e_executable_lane_repair_packet/a7ffcore24e_role_summary.csv,,,141
+runtime,A7FF-CORE24E,runtime/a7ffcore24e_executable_lane_repair_packet/a7ffcore24e_source_lane_horizon_coverage.csv,,,188
+runtime,A7FF-CORE24R,runtime/a7ffcore24r_lane_packet_forensic/a7ffcore24r_diagnosis.csv,,,493
+runtime,A7FF-CORE24R,runtime/a7ffcore24r_lane_packet_forensic/a7ffcore24r_manifest.json,,,1062
+runtime,A7FF-CORE24R,runtime/a7ffcore24r_lane_packet_forensic/a7ffcore24r_recommended_actions.csv,,,337
+runtime,A7FF-CORE24R,runtime/a7ffcore24r_lane_packet_forensic/a7ffcore24r_target_lanes.csv,,,335
+runtime,A7FF-CORE25,runtime/a7ffcore25_targeted_lane_horizon_generation_contract/a7ffcore25_execution_plan.csv,,,247
+runtime,A7FF-CORE25,runtime/a7ffcore25_targeted_lane_horizon_generation_contract/a7ffcore25_gate_policy.csv,,,441
+runtime,A7FF-CORE25,runtime/a7ffcore25_targeted_lane_horizon_generation_contract/a7ffcore25_generation_budget.csv,,,154
+runtime,A7FF-CORE25,runtime/a7ffcore25_targeted_lane_horizon_generation_contract/a7ffcore25_manifest.json,,,826
+runtime,A7FF-CORE25,runtime/a7ffcore25_targeted_lane_horizon_generation_contract/a7ffcore25_target_policy.csv,,,803
+runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_field_usage.csv,,,402
+runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_generated_blueprints.csv,,,1558007
+runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_lane_distribution.csv,,,206
+runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_manifest.json,,,899
+runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_preflight_distribution.csv,,,204
+runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_preflight_packet.csv,,,310287
+runtime,A7FF-CORE26,runtime/a7ffcore26_targeted_numeric_probe_contract/a7ffcore26_expected_outputs.csv,,,303
+runtime,A7FF-CORE26,runtime/a7ffcore26_targeted_numeric_probe_contract/a7ffcore26_gate_policy.csv,,,251
+runtime,A7FF-CORE26,runtime/a7ffcore26_targeted_numeric_probe_contract/a7ffcore26_manifest.json,,,674
+runtime,A7FF-CORE26,runtime/a7ffcore26_targeted_numeric_probe_contract/a7ffcore26_probe_policy.csv,,,284
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_allowed_subgraph_registry.csv,02de3f1,add crypto a7ffcore3 formulagen gate,841265
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_bypass_summary.csv,02de3f1,add crypto a7ffcore3 formulagen gate,100
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_diagnostic_root_registry.csv,02de3f1,add crypto a7ffcore3 formulagen gate,2249503
@@ -3201,6 +3243,14 @@ report,A7FFCORE22-LAG-AWARE-REPLAY-TRANSLATION-CONTRACT,reports/CRYPTO_A7FFCORE2
 report,A7FFCORE22E-LAG-AWARE-REPLAY-TRANSLATION-AUDIT,reports/CRYPTO_A7FFCORE22E_LAG_AWARE_REPLAY_TRANSLATION_AUDIT_20260601.md,d921a02,add crypto core21 translation and core23 contract,3295
 report,A7FFCORE22R-LAG-TRANSLATION-FORENSIC,reports/CRYPTO_A7FFCORE22R_LAG_TRANSLATION_FORENSIC_20260601.md,d921a02,add crypto core21 translation and core23 contract,4502
 report,A7FFCORE23-EXECUTABLE-HORIZON-REDESIGN-CONTRACT,reports/CRYPTO_A7FFCORE23_EXECUTABLE_HORIZON_REDESIGN_CONTRACT_20260601.md,d921a02,add crypto core21 translation and core23 contract,3232
+report,A7FFCORE23E-EXECUTABLE-HORIZON-DIAGNOSTIC-AUDIT,reports/CRYPTO_A7FFCORE23E_EXECUTABLE_HORIZON_DIAGNOSTIC_AUDIT_20260601.md,,,9832
+report,A7FFCORE23R-EXECUTABLE-HORIZON-FORENSIC,reports/CRYPTO_A7FFCORE23R_EXECUTABLE_HORIZON_FORENSIC_20260601.md,,,4566
+report,A7FFCORE24-EXECUTABLE-LANE-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE24_EXECUTABLE_LANE_REPAIR_CONTRACT_20260601.md,,,4577
+report,A7FFCORE24E-EXECUTABLE-LANE-REPAIR-PACKET,reports/CRYPTO_A7FFCORE24E_EXECUTABLE_LANE_REPAIR_PACKET_20260601.md,,,4189
+report,A7FFCORE24R-LANE-PACKET-FORENSIC,reports/CRYPTO_A7FFCORE24R_LANE_PACKET_FORENSIC_20260601.md,,,5901
+report,A7FFCORE25-TARGETED-LANE-HORIZON-GENERATION-CONTRACT,reports/CRYPTO_A7FFCORE25_TARGETED_LANE_HORIZON_GENERATION_CONTRACT_20260601.md,,,4873
+report,A7FFCORE25E-TARGETED-LANE-HORIZON-GENERATION,reports/CRYPTO_A7FFCORE25E_TARGETED_LANE_HORIZON_GENERATION_20260601.md,,,3442
+report,A7FFCORE26-TARGETED-NUMERIC-PROBE-CONTRACT,reports/CRYPTO_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_20260601.md,,,2819
 report,A7FFCORE3-FORMULAGEN-SUBGRAPH-GATE,reports/CRYPTO_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_20260601.md,02de3f1,add crypto a7ffcore3 formulagen gate,5243
 report,A7FFCORE4-GATE-IMPLEMENTATION-REGRESSION,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
 report,A7FFCORE5-GATE-NATIVE-GENERATION-DRYRUN,reports/CRYPTO_A7FFCORE5_GATE_NATIVE_GENERATION_DRYRUN_20260601.md,7011a15,add crypto a7ffcore5 gate native dryrun,4601
@@ -3230,13 +3280,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,d921a02,add crypto core21 translation and core23 contract,534824
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,1ebf5b4,refresh crypto registry after core23,536800
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,9f44a1f,refresh crypto registry after a7ffcore14se,104425
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,d921a02,add crypto core21 translation and core23 contract,203645
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,d921a02,add crypto core21 translation and core23 contract,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,1ebf5b4,refresh crypto registry after core23,203673
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,1ebf5b4,refresh crypto registry after core23,711
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,d921a02,add crypto core21 translation and core23 contract,110094
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,1ebf5b4,refresh crypto registry after core23,110136
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -3252,15 +3302,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,d921a02,add crypto core21 translation and core23 contract,385
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,d921a02,add crypto core21 translation and core23 contract,380
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,d921a02,add crypto core21 translation and core23 contract,1520
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,d921a02,add crypto core21 translation and core23 contract,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,d921a02,add crypto core21 translation and core23 contract,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,d921a02,add crypto core21 translation and core23 contract,6872
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,d921a02,add crypto core21 translation and core23 contract,377
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,d921a02,add crypto core21 translation and core23 contract,350
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,d921a02,add crypto core21 translation and core23 contract,1419
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,1ebf5b4,refresh crypto registry after core23,1306
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,1ebf5b4,refresh crypto registry after core23,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,1ebf5b4,refresh crypto registry after core23,5451
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,d921a02,add crypto core21 translation and core23 contract,5609
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,1ebf5b4,refresh crypto registry after core23,5265
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

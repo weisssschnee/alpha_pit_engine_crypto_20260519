@@ -1,0 +1,5 @@
+lane,numeric_probe_quota,priority
+S0_positioning_price_basis,160,primary missing executable lane
+S1_liquidity_basis_positioning,160,primary one-bar conversion lane
+S2_taker_flow_liquidity_oi,80,calibration executable lane
+S3_cross_family_bridge,80,calibration non-L5 bridge lane

@@ -1,0 +1,5 @@
+artifact,description
+a7ffcore26e_numeric_rows.csv,candidate split/cost/horizon numeric response rows
+a7ffcore26e_candidate_summary.csv,candidate-level clean/control/lag summary
+a7ffcore26e_lane_summary.csv,lane-level executable clean supply
+a7ffcore26e_eval_errors.csv,fail-closed evaluator errors

@@ -1,0 +1,3 @@
+stage,action,input,authorized
+A7FF-CORE24E,bounded executable lane repair packet construction,CORE17E locked packet + CORE23E/23R lane findings,True
+A7FF-CORE25,lower-turnover bounded replay contract,CORE24E pass only,False

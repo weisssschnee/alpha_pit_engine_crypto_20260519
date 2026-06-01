@@ -1,0 +1,32 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core25_contract": false,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "executable_clean_count_lt_6",
+    "executable_clean_lane_count_lt_3",
+    "repair_packet_missing_lanes"
+  ],
+  "decision": "HOLD_A7FFCORE24E_SOURCE_PACKET_LANE_COVERAGE_INSUFFICIENT",
+  "executable_clean_candidate_count": 4,
+  "executable_clean_lane_count": 2,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T15:39:46Z",
+  "missing_executable_lanes": [
+    "S0_positioning_price_basis",
+    "S1_liquidity_basis_positioning"
+  ],
+  "missing_packet_lanes": [
+    "S0_positioning_price_basis"
+  ],
+  "next_allowed": "A7FF-CORE24R lane packet coverage forensic",
+  "repair_packet_candidate_count": 12,
+  "repair_packet_lane_count": 3,
+  "source_decision": "PASS_A7FFCORE24_EXECUTABLE_LANE_REPAIR_CONTRACT_READY_FOR_CORE24E",
+  "source_stage": "A7FF-CORE24",
+  "stage": "A7FF-CORE24E"
+}

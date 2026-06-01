@@ -1,0 +1,6 @@
+gate,threshold,scope
+min_executable_candidate_count,>= 6,one-bar H4+ / H24 diagnostic packet
+min_executable_lane_count,>= 3,S0/S1/S2/S3 lanes
+min_non_l5_candidate_count,>= 3,non-L7/non-L5 preferred; L5 cannot dominate
+same_bar_only_candidate_policy,diagnostic_only,cannot enter replay-clean packet unless one-bar positive
+search_authorization,false,CORE24 authorizes packet construction only

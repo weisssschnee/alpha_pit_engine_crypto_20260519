@@ -1,0 +1,3 @@
+next_stage,action,rationale,authorized
+A7FF-CORE25,targeted executable-lane horizon generation contract,bounded generation is required for S0 H4+/H24 and S1 one-bar conversion; old packet cannot repair this internally,True
+A7FF large search,blocked,"needed generation is lane/horizon-targeted, not open grammar or large search",False

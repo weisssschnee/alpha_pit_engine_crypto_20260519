@@ -1,0 +1,8 @@
+gate,threshold
+eval_failure_count,0
+missing_field_count,0 or documented unsupported
+one_bar_executable_clean_count,>= 6
+one_bar_executable_lane_count,>= 3
+non_l5_clean_count,>= 3
+same_bar_only_policy,diagnostic only
+search_authorization,false

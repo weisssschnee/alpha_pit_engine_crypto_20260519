@@ -1,0 +1,5 @@
+lane,repair_target,allowed_fields,forbidden
+S0_positioning_price_basis,convert same-bar H4/H8 diagnostic supply into one-bar executable H4+/H24 candidates,"positioning, price/mark/index, basis/premium",same-bar-only promotion; direct high-turnover 1h rerun
+S1_basis_premium_funding,restore funding/basis lane under executable horizon and one-bar lag,"basis/premium, funding, low-turnover trend/vol context",funding-only wrapper; basis-only wrapper
+S2_taker_flow_liquidity_oi,"retain existing H24 executable clue as calibration, not expansion seed","taker ratio, OI, liquidity state",single-lane promotion
+S3_cross_family_bridge,"retain non-L5 H24 executable bridge as calibration, not proof","positioning, OI value, cross-family bridge",S3-only selector dominance

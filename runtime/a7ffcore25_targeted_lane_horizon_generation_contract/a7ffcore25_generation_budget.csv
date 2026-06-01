@@ -1,0 +1,6 @@
+item,value
+generated_blueprints_max,4800
+materialization_preflight_max,960
+numeric_probe_max,480
+target_lane_min_count,2
+target_horizon_min_count,3

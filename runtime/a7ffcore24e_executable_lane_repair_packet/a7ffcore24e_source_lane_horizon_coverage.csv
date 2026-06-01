@@ -1,0 +1,5 @@
+seed_lane,candidate_count,horizons
+S0_positioning_price_basis,31,1
+S1_liquidity_basis_positioning,33,"1,4"
+S2_taker_flow_liquidity_oi,12,"1,4,24"
+S3_cross_family_bridge,20,"1,4,8,24"

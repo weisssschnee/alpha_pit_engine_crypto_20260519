@@ -1,0 +1,6 @@
+finding,value,interpretation
+executable_supply_exists,4,"there is H4+ one-bar executable evidence, but not enough breadth"
+lane_breadth_deficit,2,only two seed lanes survive; missing lanes must be repaired before any search
+same_bar_excess_supply,3,same-bar H4+ diagnostics still exceed executable one-bar evidence
+missing_executable_lanes,"S0_positioning_price_basis,S1_basis_premium_funding",lane repair target set
+dominant_failure,executable_lane_supply_too_narrow,the bottleneck is not label translation anymore; it is executable breadth

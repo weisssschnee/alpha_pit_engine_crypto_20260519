@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T15:30:56Z
+Generated: 2026-06-01T15:50:03Z
 
 ## Decision
 
@@ -11,20 +11,48 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
+## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
+ M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=d921a025396278e4b4aeb8032d56cba4143725e1
-origin/main=e4cf28443dee95f3d1e7c8bac4a223b05e79499a
-HEAD == origin/main: False
+ M scripts/crypto_a7pm3_current_experiment_board.py
+?? reports/CRYPTO_A7FFCORE23E_EXECUTABLE_HORIZON_DIAGNOSTIC_AUDIT_20260601.md
+?? reports/CRYPTO_A7FFCORE23R_EXECUTABLE_HORIZON_FORENSIC_20260601.md
+?? reports/CRYPTO_A7FFCORE24E_EXECUTABLE_LANE_REPAIR_PACKET_20260601.md
+?? reports/CRYPTO_A7FFCORE24R_LANE_PACKET_FORENSIC_20260601.md
+?? reports/CRYPTO_A7FFCORE24_EXECUTABLE_LANE_REPAIR_CONTRACT_20260601.md
+?? reports/CRYPTO_A7FFCORE25E_TARGETED_LANE_HORIZON_GENERATION_20260601.md
+?? reports/CRYPTO_A7FFCORE25_TARGETED_LANE_HORIZON_GENERATION_CONTRACT_20260601.md
+?? reports/CRYPTO_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_20260601.md
+?? runtime/a7ffcore23e_executable_horizon_diagnostic_audit/
+?? runtime/a7ffcore23r_executable_horizon_forensic/
+?? runtime/a7ffcore24_executable_lane_repair_contract/
+?? runtime/a7ffcore24e_executable_lane_repair_packet/
+?? runtime/a7ffcore24r_lane_packet_forensic/
+?? runtime/a7ffcore25_targeted_lane_horizon_generation_contract/
+?? runtime/a7ffcore25e_targeted_lane_horizon_generation/
+?? runtime/a7ffcore26_targeted_numeric_probe_contract/
+?? scripts/crypto_a7ffcore23e_executable_horizon_diagnostic_audit.py
+?? scripts/crypto_a7ffcore23r_executable_horizon_forensic.py
+?? scripts/crypto_a7ffcore24_executable_lane_repair_contract.py
+?? scripts/crypto_a7ffcore24e_executable_lane_repair_packet.py
+?? scripts/crypto_a7ffcore24r_lane_packet_forensic.py
+?? scripts/crypto_a7ffcore25_targeted_lane_horizon_generation_contract.py
+?? scripts/crypto_a7ffcore25e_targeted_lane_horizon_generation.py
+?? scripts/crypto_a7ffcore26_targeted_numeric_probe_contract.py
+HEAD=1ebf5b409080847d31d363300b0f0b300a8f2c18
+origin/main=1ebf5b409080847d31d363300b0f0b300a8f2c18
+HEAD == origin/main: True
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3437,
+  "artifact_count": 3487,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +66,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T15:30:56Z",
-  "head": "d921a025396278e4b4aeb8032d56cba4143725e1",
-  "head_equals_origin_main": false,
-  "origin_main": "e4cf28443dee95f3d1e7c8bac4a223b05e79499a",
+  "generated_at": "2026-06-01T15:50:03Z",
+  "head": "1ebf5b409080847d31d363300b0f0b300a8f2c18",
+  "head_equals_origin_main": true,
+  "origin_main": "1ebf5b409080847d31d363300b0f0b300a8f2c18",
   "stage": "A7PM-0",
-  "stage_count": 344
+  "stage_count": 352
 }
 ```
 
@@ -56,15 +84,15 @@ HEAD == origin/main: False
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      64 |
+| hold                         | hold                       |      66 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |      82 |
-| valid_or_historical_record   | diagnostic                 |      17 |
+| valid_or_historical_record   | contract                   |      86 |
+| valid_or_historical_record   | diagnostic                 |      19 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 

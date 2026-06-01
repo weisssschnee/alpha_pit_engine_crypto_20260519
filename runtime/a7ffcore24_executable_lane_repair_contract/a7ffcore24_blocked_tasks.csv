@@ -1,0 +1,4 @@
+blocked_task,reason
+large search,blocked: executable lane supply is too narrow
+formula generation/search,blocked: CORE24 authorizes bounded lane repair packet construction only
+alpha proof / shadow / paper / live,not authorized

@@ -99,6 +99,14 @@ A7FFCORE22 = REPO / "runtime" / "a7ffcore22_lag_aware_replay_translation_contrac
 A7FFCORE22E = REPO / "runtime" / "a7ffcore22e_lag_aware_replay_translation_audit" / "a7ffcore22e_manifest.json"
 A7FFCORE22R = REPO / "runtime" / "a7ffcore22r_lag_translation_forensic" / "a7ffcore22r_manifest.json"
 A7FFCORE23 = REPO / "runtime" / "a7ffcore23_executable_horizon_redesign_contract" / "a7ffcore23_manifest.json"
+A7FFCORE23E = REPO / "runtime" / "a7ffcore23e_executable_horizon_diagnostic_audit" / "a7ffcore23e_manifest.json"
+A7FFCORE23R = REPO / "runtime" / "a7ffcore23r_executable_horizon_forensic" / "a7ffcore23r_manifest.json"
+A7FFCORE24 = REPO / "runtime" / "a7ffcore24_executable_lane_repair_contract" / "a7ffcore24_manifest.json"
+A7FFCORE24E = REPO / "runtime" / "a7ffcore24e_executable_lane_repair_packet" / "a7ffcore24e_manifest.json"
+A7FFCORE24R = REPO / "runtime" / "a7ffcore24r_lane_packet_forensic" / "a7ffcore24r_manifest.json"
+A7FFCORE25 = REPO / "runtime" / "a7ffcore25_targeted_lane_horizon_generation_contract" / "a7ffcore25_manifest.json"
+A7FFCORE25E = REPO / "runtime" / "a7ffcore25e_targeted_lane_horizon_generation" / "a7ffcore25e_manifest.json"
+A7FFCORE26 = REPO / "runtime" / "a7ffcore26_targeted_numeric_probe_contract" / "a7ffcore26_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -206,12 +214,93 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore22e = read_json(A7FFCORE22E)
     a7ffcore22r = read_json(A7FFCORE22R)
     a7ffcore23 = read_json(A7FFCORE23)
+    a7ffcore23e = read_json(A7FFCORE23E)
+    a7ffcore23r = read_json(A7FFCORE23R)
+    a7ffcore24 = read_json(A7FFCORE24)
+    a7ffcore24e = read_json(A7FFCORE24E)
+    a7ffcore24r = read_json(A7FFCORE24R)
+    a7ffcore25 = read_json(A7FFCORE25)
+    a7ffcore25e = read_json(A7FFCORE25E)
+    a7ffcore26 = read_json(A7FFCORE26)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore23.get("decision") == "PASS_A7FFCORE23_EXECUTABLE_HORIZON_REDESIGN_CONTRACT_READY_FOR_CORE23E":
+    if a7ffcore26.get("decision") == "PASS_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_READY_FOR_CORE26E":
+        allowed["A7FF-CORE26E targeted numeric probe execution"] = (
+            "bounded 480-row numeric probe over CORE25E targeted packet; no search, large search, alpha proof, or live"
+        )
+        blocked["A7FF large search"] = "blocked until targeted numeric probe produces executable multi-lane evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE26 authorizes numeric probe execution only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE26"
+        status = "targeted_numeric_probe_contract_ready_for_core26e"
+        next_task = "A7FF-CORE26E targeted numeric probe execution"
+    elif a7ffcore25e.get("decision") == "PASS_A7FFCORE25E_TARGETED_GENERATION_PREFLIGHT_PACKET_READY_FOR_CORE26_CONTRACT":
+        allowed["A7FF-CORE26 targeted numeric probe contract"] = (
+            "contract only; define bounded numeric probe over targeted lane/horizon preflight packet"
+        )
+        blocked["A7FF large search"] = "blocked until targeted numeric probe produces executable multi-lane evidence"
+        blocked["A7FF formula generation/search"] = "blocked after bounded packet construction; next is numeric probe contract only"
+        current_stage = "A7FF-CORE25E"
+        status = "targeted_generation_preflight_packet_ready_for_core26"
+        next_task = "A7FF-CORE26 targeted numeric probe contract"
+    elif a7ffcore25.get("decision") == "PASS_A7FFCORE25_TARGETED_LANE_HORIZON_GENERATION_CONTRACT_READY_FOR_CORE25E":
+        allowed["A7FF-CORE25E targeted lane/horizon generation preflight packet"] = (
+            "bounded targeted generation/preflight only; repair S0/S1 executable horizon coverage"
+        )
+        blocked["A7FF large search"] = "blocked: missing lane repair must stay targeted"
+        blocked["A7FF formula generation/search"] = "blocked: CORE25 authorizes targeted preflight packet only"
+        current_stage = "A7FF-CORE25"
+        status = "targeted_lane_horizon_generation_contract_ready_for_core25e"
+        next_task = "A7FF-CORE25E targeted lane/horizon generation preflight packet"
+    elif a7ffcore24r.get("decision") == "PASS_A7FFCORE24R_LANE_PACKET_FORENSIC_COMPLETE_READY_FOR_CORE25":
+        allowed["A7FF-CORE25 targeted executable-lane horizon generation contract"] = (
+            "contract only; define bounded S0/S1 lane/horizon repair generation"
+        )
+        blocked["A7FF large search"] = "blocked: source packet missing executable lane/horizon coverage"
+        blocked["A7FF formula generation/search"] = "blocked until targeted generation contract exists"
+        current_stage = "A7FF-CORE24R"
+        status = "lane_packet_forensic_ready_for_core25"
+        next_task = "A7FF-CORE25 targeted executable-lane horizon generation contract"
+    elif a7ffcore24e.get("decision") == "HOLD_A7FFCORE24E_SOURCE_PACKET_LANE_COVERAGE_INSUFFICIENT":
+        allowed["A7FF-CORE24R lane packet coverage forensic"] = (
+            "forensic only; freeze why old packet cannot repair missing executable lanes"
+        )
+        blocked["A7FF large search"] = "blocked: repair packet still lacks executable lane breadth"
+        blocked["A7FF formula generation/search"] = "blocked until lane packet forensic"
+        current_stage = "A7FF-CORE24E"
+        status = "source_packet_lane_coverage_insufficient"
+        next_task = "A7FF-CORE24R lane packet coverage forensic"
+    elif a7ffcore24.get("decision") == "PASS_A7FFCORE24_EXECUTABLE_LANE_REPAIR_CONTRACT_READY_FOR_CORE24E":
+        allowed["A7FF-CORE24E bounded executable lane repair packet construction"] = (
+            "packet construction only; classify executable clean, same-bar repair, and near-miss seeds"
+        )
+        blocked["A7FF large search"] = "blocked: executable lane supply is too narrow"
+        blocked["A7FF formula generation/search"] = "blocked: CORE24 authorizes packet construction only"
+        current_stage = "A7FF-CORE24"
+        status = "executable_lane_repair_contract_ready_for_core24e"
+        next_task = "A7FF-CORE24E bounded executable lane repair packet construction"
+    elif a7ffcore23r.get("decision") == "PASS_A7FFCORE23R_EXECUTABLE_HORIZON_FORENSIC_COMPLETE_READY_FOR_CORE24":
+        allowed["A7FF-CORE24 lower-turnover executable lane repair contract"] = (
+            "contract only; repair missing executable lane breadth after CORE23E hold"
+        )
+        blocked["A7FF large search"] = "blocked: executable clean supply is 4 candidates / 2 lanes"
+        blocked["A7FF formula generation/search"] = "blocked until executable lane repair contract"
+        current_stage = "A7FF-CORE23R"
+        status = "executable_horizon_forensic_ready_for_core24"
+        next_task = "A7FF-CORE24 lower-turnover executable lane repair contract"
+    elif a7ffcore23e.get("decision") == "HOLD_A7FFCORE23E_EXECUTABLE_HORIZON_SUPPLY_INSUFFICIENT":
+        allowed["A7FF-CORE23R executable-horizon forensic"] = (
+            "forensic only; diagnose lower-turnover executable supply shortage"
+        )
+        blocked["A7FF large search"] = "blocked: executable horizon supply insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until executable-horizon forensic"
+        current_stage = "A7FF-CORE23E"
+        status = "executable_horizon_supply_insufficient"
+        next_task = "A7FF-CORE23R executable-horizon forensic"
+    elif a7ffcore23.get("decision") == "PASS_A7FFCORE23_EXECUTABLE_HORIZON_REDESIGN_CONTRACT_READY_FOR_CORE23E":
         allowed["A7FF-CORE23E executable-horizon diagnostic audit"] = (
             "diagnostic audit only; test lower-turnover executable horizons and lane-specific timing translation; no formula generation or search"
         )

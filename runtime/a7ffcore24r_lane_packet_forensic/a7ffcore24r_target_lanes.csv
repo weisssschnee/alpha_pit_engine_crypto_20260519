@@ -1,0 +1,3 @@
+target_lane,needed_horizons,reason,generation_scope
+S0_positioning_price_basis,4h/8h/24h,current source packet has S0 only at H1,bounded lane-native transformations only
+S1_liquidity_basis_positioning,4h/8h/24h,"same-bar diagnostic exists, one-bar executable conversion fails",lower-turnover smoothing / lag-resilient variants only

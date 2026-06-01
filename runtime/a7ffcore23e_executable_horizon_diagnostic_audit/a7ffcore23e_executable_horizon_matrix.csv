@@ -1,0 +1,17 @@
+policy,cost_bps,min_horizon_h,clean_candidate_count,clean_lane_count,clean_label_family_count,non_l5_candidate_count,non_l5_share,horizon_buckets
+one_bar_any_horizon,2,1,4,2,4,3,0.75,H24_low_turnover
+one_bar_executable_h4_plus,2,4,4,2,4,3,0.75,H24_low_turnover
+one_bar_low_turnover_h24,2,24,4,2,4,3,0.75,H24_low_turnover
+same_bar_diagnostic_h4_plus,2,4,7,3,4,5,0.7142857142857143,"H24_low_turnover,H4_H8_medium_turnover"
+one_bar_any_horizon,5,1,4,2,4,3,0.75,H24_low_turnover
+one_bar_executable_h4_plus,5,4,4,2,4,3,0.75,H24_low_turnover
+one_bar_low_turnover_h24,5,24,4,2,4,3,0.75,H24_low_turnover
+same_bar_diagnostic_h4_plus,5,4,3,2,2,1,0.3333333333333333,"H24_low_turnover,H4_H8_medium_turnover"
+one_bar_any_horizon,10,1,1,1,1,0,0.0,H24_low_turnover
+one_bar_executable_h4_plus,10,4,1,1,1,0,0.0,H24_low_turnover
+one_bar_low_turnover_h24,10,24,1,1,1,0,0.0,H24_low_turnover
+same_bar_diagnostic_h4_plus,10,4,2,2,1,0,0.0,"H24_low_turnover,H4_H8_medium_turnover"
+one_bar_any_horizon,20,1,1,1,1,0,0.0,H24_low_turnover
+one_bar_executable_h4_plus,20,4,1,1,1,0,0.0,H24_low_turnover
+one_bar_low_turnover_h24,20,24,1,1,1,0,0.0,H24_low_turnover
+same_bar_diagnostic_h4_plus,20,4,2,2,1,0,0.0,"H24_low_turnover,H4_H8_medium_turnover"

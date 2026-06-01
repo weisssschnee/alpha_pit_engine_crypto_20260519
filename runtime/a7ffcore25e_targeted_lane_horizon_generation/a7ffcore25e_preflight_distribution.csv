@@ -1,0 +1,5 @@
+seed_lane,preflight_count,label_family_count,horizon_count
+S0_positioning_price_basis,360,3,3
+S1_liquidity_basis_positioning,360,3,3
+S2_taker_flow_liquidity_oi,120,4,1
+S3_cross_family_bridge,120,4,2

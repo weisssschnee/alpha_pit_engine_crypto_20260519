@@ -1,0 +1,5 @@
+finding,value,interpretation
+repair_packet_exists,12,"packet can preserve diagnostic seeds, but cannot become executable evidence"
+s0_absent_from_h4_plus_packet,True,S0 source candidates are H1-only and cannot be repaired without new bounded lane/horizon generation
+s1_same_bar_only,True,S1 enters packet as diagnostic but fails one-bar executable gate
+dominant_failure,source_packet_missing_executable_lane_horizon_coverage,old locked packet cannot supply enough executable lane breadth

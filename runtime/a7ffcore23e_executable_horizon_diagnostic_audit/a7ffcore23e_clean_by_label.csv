@@ -1,0 +1,5 @@
+label_family,clean_candidate_count,lane_count
+L0_raw_forward_return,1,1
+L1_cross_sectional_relative_return,1,1
+L3_liquidity_tier_relative_return,1,1
+L5_vol_adjusted_return,1,1

@@ -1,0 +1,25 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core24_contract": true,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "best_executable_h4_plus_clean_candidate_count": 4,
+  "best_executable_h4_plus_clean_lane_count": 2,
+  "best_same_bar_h4_plus_candidate_count": 7,
+  "best_same_bar_h4_plus_lane_count": 3,
+  "decision": "PASS_A7FFCORE23R_EXECUTABLE_HORIZON_FORENSIC_COMPLETE_READY_FOR_CORE24",
+  "dominant_failure": "executable_lane_supply_too_narrow",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T15:35:57Z",
+  "missing_executable_lanes": [
+    "S0_positioning_price_basis",
+    "S1_basis_premium_funding"
+  ],
+  "next_allowed": "A7FF-CORE24 lower-turnover executable lane repair contract",
+  "source_decision": "HOLD_A7FFCORE23E_EXECUTABLE_HORIZON_SUPPLY_INSUFFICIENT",
+  "source_stage": "A7FF-CORE23E",
+  "stage": "A7FF-CORE23R"
+}

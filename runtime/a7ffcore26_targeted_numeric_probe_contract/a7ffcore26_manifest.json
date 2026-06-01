@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core26e": true,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_READY_FOR_CORE26E",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T15:47:32Z",
+  "next_allowed": "A7FF-CORE26E targeted numeric probe execution",
+  "numeric_probe_quota": 480,
+  "source_decision": "PASS_A7FFCORE25E_TARGETED_GENERATION_PREFLIGHT_PACKET_READY_FOR_CORE26_CONTRACT",
+  "source_stage": "A7FF-CORE25E",
+  "stage": "A7FF-CORE26"
+}

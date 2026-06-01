@@ -1,0 +1,5 @@
+target,reason,horizons,allowed_templates,blocked_templates,min_packet_quota
+S0_positioning_price_basis,missing from H4+ repair packet,"4h,8h,24h",positioning x basis/price lower-turnover transforms; rank/tsrank/zscore/delta/spread,H1-only rerun; same-bar promotion; open grammar,160
+S1_liquidity_basis_positioning,same-bar diagnostic exists but one-bar executable fails,"4h,8h,24h",liquidity x basis/positioning lag-resilient smoothing and low-turnover transforms,basis-only wrapper; funding-only wrapper; same-bar-only promotion,160
+S2_taker_flow_liquidity_oi,existing H24 executable clue is calibration lane,24h,calibration variants only,single-lane expansion,40
+S3_cross_family_bridge,existing non-L5 executable bridge is calibration lane,"8h,24h",calibration variants only,S3-only dominance,40

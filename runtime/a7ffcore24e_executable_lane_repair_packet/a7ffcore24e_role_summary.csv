@@ -1,0 +1,4 @@
+packet_role,candidate_count,lane_count,label_family_count
+executable_clean,4,2,4
+one_bar_near_miss_seed,5,1,3
+same_bar_repair_seed,3,2,3
