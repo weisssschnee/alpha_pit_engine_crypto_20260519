@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T07:14:30Z
+Generated: 2026-06-01T07:34:46Z
 
 ## Decision
 
@@ -12,15 +12,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
- M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE14SEE_SHARDED_BOUNDED_REPLAY_20260601.md
-?? reports/CRYPTO_A7FFCORE14SER_REPAIRED_REPLAY_FORENSIC_20260601.md
-?? runtime/a7ffcore14see_sharded_bounded_replay/
-?? runtime/a7ffcore14ser_repaired_replay_forensic/
-?? scripts/crypto_a7ffcore14see_sharded_bounded_replay.py
-?? scripts/crypto_a7ffcore14ser_repaired_replay_forensic.py
-HEAD=9f44a1f28889c6fb4ef733a9e4f843492debb780
-origin/main=9f44a1f28889c6fb4ef733a9e4f843492debb780
+HEAD=d312e57f9ec94483fcecc888140d11793de048ab
+origin/main=d312e57f9ec94483fcecc888140d11793de048ab
 HEAD == origin/main: True
 ```
 
@@ -42,10 +35,10 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T07:14:30Z",
-  "head": "9f44a1f28889c6fb4ef733a9e4f843492debb780",
+  "generated_at": "2026-06-01T07:34:46Z",
+  "head": "d312e57f9ec94483fcecc888140d11793de048ab",
   "head_equals_origin_main": true,
-  "origin_main": "9f44a1f28889c6fb4ef733a9e4f843492debb780",
+  "origin_main": "d312e57f9ec94483fcecc888140d11793de048ab",
   "stage": "A7PM-0",
   "stage_count": 303
 }
