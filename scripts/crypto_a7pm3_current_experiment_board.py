@@ -137,6 +137,7 @@ A7FFCORE36E = REPO / "runtime" / "a7ffcore36e_replay_objective_reset_execution" 
 A7FFCORE36ER = REPO / "runtime" / "a7ffcore36er_replay_objective_forensic" / "a7ffcore36er_manifest.json"
 A7FFCORE37X = REPO / "runtime" / "a7ffcore37x_route_arbitration" / "a7ffcore37x_manifest.json"
 A7FFCORE38 = REPO / "runtime" / "a7ffcore38_portfolio_label_objective_contract" / "a7ffcore38_manifest.json"
+A7FFCORE38E = REPO / "runtime" / "a7ffcore38e_portfolio_label_objective_audit" / "a7ffcore38e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -282,12 +283,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore36er = read_json(A7FFCORE36ER)
     a7ffcore37x = read_json(A7FFCORE37X)
     a7ffcore38 = read_json(A7FFCORE38)
+    a7ffcore38e = read_json(A7FFCORE38E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore38.get("decision") == "PASS_A7FFCORE38_PORTFOLIO_LABEL_OBJECTIVE_CONTRACT_READY_FOR_CORE38E":
+    if a7ffcore38e.get("decision") == "HOLD_A7FFCORE38E_BOOK_OBJECTIVE_AUDIT_REQUIRES_SYMBOL_LEVEL_REPLAY_INPUT":
+        allowed["A7FF-CORE39 symbol-level book input packet contract"] = (
+            "contract only; define symbol-level score/return/weight packet required for B1-B4 book objectives"
+        )
+        blocked["A7FF large search"] = "blocked: CORE38E found portfolio objectives cannot be computed from aggregate replay rows"
+        blocked["A7FF formula generation/search"] = "blocked until symbol-level book packet exists and passes audit"
+        blocked["A7FF-CORE38E book objective execution from aggregate rows"] = "not authorized: missing symbol-level input"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE38E"
+        status = "book_objective_audit_requires_symbol_level_input"
+        next_task = "A7FF-CORE39 symbol-level book input packet contract"
+    elif a7ffcore38.get("decision") == "PASS_A7FFCORE38_PORTFOLIO_LABEL_OBJECTIVE_CONTRACT_READY_FOR_CORE38E":
         allowed["A7FF-CORE38E executable portfolio-label objective adequacy audit"] = (
             "audit only; test book/label objective adequacy over existing artifacts before any generation"
         )

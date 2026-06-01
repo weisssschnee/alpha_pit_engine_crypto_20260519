@@ -1,0 +1,6 @@
+task,status,reason
+A7FF-CORE39 symbol-level book input packet contract,AUTHORIZED_CONTRACT_ONLY,CORE38E shows book objectives need symbol-level score/return/weight inputs
+A7FF-CORE38E book objective execution from current aggregate rows,NOT_AUTHORIZED,current artifacts are aggregate summaries and cannot compute B1/B2/B3/B4
+formula_search,NOT_AUTHORIZED,book objective input packet missing
+large_search,NOT_AUTHORIZED,book objective input packet missing
+alpha_proof / shadow / paper / live,NOT_AUTHORIZED,no proof object

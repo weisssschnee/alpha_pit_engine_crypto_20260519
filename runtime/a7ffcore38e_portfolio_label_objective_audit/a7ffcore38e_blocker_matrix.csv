@@ -1,0 +1,5 @@
+blocker,severity,impact,required_fix
+aggregate_replay_summary_only,HIGH,B1/B2/B3/B4 portfolio objectives cannot be computed,build symbol-level candidate score and label/book input packet
+missing_position_weight_trace,HIGH,cannot enforce max symbol/family/liquidity caps,emit per-timestamp selected long/short weights before spread aggregation
+missing_beta_residual_label_panel,MEDIUM,cannot test B2 market-beta residual objective,construct BTC/ETH/market residual return labels with PIT split metadata
+legacy_net_spread_reference_only,HIGH,the only fully computable objective is already known to fail,do not rerun B0 as primary objective

@@ -1,0 +1,18 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core39_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "computable_primary_objectives": 0,
+  "decision": "HOLD_A7FFCORE38E_BOOK_OBJECTIVE_AUDIT_REQUIRES_SYMBOL_LEVEL_REPLAY_INPUT",
+  "dominant_blocker": "symbol_level_book_input_missing",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T19:52:28Z",
+  "next_allowed": "A7FF-CORE39 symbol-level book input packet contract",
+  "reference_objectives_available": 1,
+  "source_decision": "PASS_A7FFCORE38_PORTFOLIO_LABEL_OBJECTIVE_CONTRACT_READY_FOR_CORE38E",
+  "source_stage": "A7FF-CORE38",
+  "stage": "A7FF-CORE38E"
+}

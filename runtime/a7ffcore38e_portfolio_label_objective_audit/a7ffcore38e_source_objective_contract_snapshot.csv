@@ -1,0 +1,7 @@
+objective_id,role,description,allowed_as_primary,reason
+B0_legacy_net_spread,reference_only,existing per-candidate net spread proxy used in CORE33/34/36,False,failed train-to-OOS executable survivor translation
+B1_cross_sectional_rank_book,primary_candidate,top/bottom cross-sectional rank book with equal-weight and liquidity-capped variants,True,tests whether numeric rank response converts into book spread without relying on raw return label only
+B2_market_beta_residual_book,primary_candidate,BTC/ETH/market beta residualized return book before spread and control gates,True,separates market beta from symbol-specific cross-section structure
+B3_vol_adjusted_rank_book,diagnostic_primary,vol-adjusted rank return and downside-normalized book proxy,True,prevents high-vol small symbols from dominating raw spread
+B4_liquidity_cost_capped_book,primary_candidate,"book proxy with turnover, quote-volume, and cost bucket caps",True,aligns replay objective to executable capacity and cost before selector scoring
+B5_family_role_book,diagnostic_only,family-specific book roles: F1a may be hedge/regime-like; F1b/F2a require control-first directional evidence,False,"CORE36ER showed family-specific failure modes, not one universal objective"

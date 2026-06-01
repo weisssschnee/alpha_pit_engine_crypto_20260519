@@ -3119,13 +3119,21 @@ runtime,A7FF-CORE37X,runtime/a7ffcore37x_route_arbitration/a7ffcore37x_family_di
 runtime,A7FF-CORE37X,runtime/a7ffcore37x_route_arbitration/a7ffcore37x_frozen_paths.csv,5b119fe,add crypto core37x route arbitration,367
 runtime,A7FF-CORE37X,runtime/a7ffcore37x_route_arbitration/a7ffcore37x_manifest.json,5b119fe,add crypto core37x route arbitration,768
 runtime,A7FF-CORE37X,runtime/a7ffcore37x_route_arbitration/a7ffcore37x_route_scorecard.csv,5b119fe,add crypto core37x route arbitration,655
-report,A7FF-CORE38,reports/CRYPTO_A7FFCORE38_PORTFOLIO_LABEL_OBJECTIVE_CONTRACT_20260602.md,,,6421
-runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_authorization_matrix.json,,,292
-runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_book_constraints.csv,,,467
-runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_execution_plan.csv,,,312
-runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_label_contract.csv,,,553
-runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_manifest.json,,,617
-runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_objective_book_contract.csv,,,1247
+report,A7FF-CORE38,reports/CRYPTO_A7FFCORE38_PORTFOLIO_LABEL_OBJECTIVE_CONTRACT_20260602.md,7dc2329,add crypto core38 portfolio label objective contract,6421
+runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_authorization_matrix.json,7dc2329,add crypto core38 portfolio label objective contract,292
+runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_book_constraints.csv,7dc2329,add crypto core38 portfolio label objective contract,467
+runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_execution_plan.csv,7dc2329,add crypto core38 portfolio label objective contract,312
+runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_label_contract.csv,7dc2329,add crypto core38 portfolio label objective contract,553
+runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_manifest.json,7dc2329,add crypto core38 portfolio label objective contract,617
+runtime,A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_objective_book_contract.csv,7dc2329,add crypto core38 portfolio label objective contract,1247
+report,A7FF-CORE38E,reports/CRYPTO_A7FFCORE38E_PORTFOLIO_LABEL_OBJECTIVE_AUDIT_20260602.md,,,8509
+runtime,A7FF-CORE38E,runtime/a7ffcore38e_portfolio_label_objective_audit/a7ffcore38e_authorization_matrix.csv,,,528
+runtime,A7FF-CORE38E,runtime/a7ffcore38e_portfolio_label_objective_audit/a7ffcore38e_available_column_inventory.csv,,,2352
+runtime,A7FF-CORE38E,runtime/a7ffcore38e_portfolio_label_objective_audit/a7ffcore38e_blocker_matrix.csv,,,643
+runtime,A7FF-CORE38E,runtime/a7ffcore38e_portfolio_label_objective_audit/a7ffcore38e_label_computability_audit.csv,,,1106
+runtime,A7FF-CORE38E,runtime/a7ffcore38e_portfolio_label_objective_audit/a7ffcore38e_manifest.json,,,755
+runtime,A7FF-CORE38E,runtime/a7ffcore38e_portfolio_label_objective_audit/a7ffcore38e_objective_computability_audit.csv,,,1495
+runtime,A7FF-CORE38E,runtime/a7ffcore38e_portfolio_label_objective_audit/a7ffcore38e_source_objective_contract_snapshot.csv,,,1247
 report,A7FF-CORE4,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_entrypoint_policy.csv,97cf90e,add crypto a7ffcore4 gate regression,2751
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_entrypoint_route_summary.csv,97cf90e,add crypto a7ffcore4 gate regression,252
@@ -3492,14 +3500,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,5b119fe,add crypto core37x route arbitration,5897
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,5b119fe,add crypto core37x route arbitration,568269
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,4790a08,add crypto core36 replay objective reset,107530
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,7dc2329,add crypto core38 portfolio label objective contract,5879
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,7dc2329,add crypto core38 portfolio label objective contract,569809
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,7dc2329,add crypto core38 portfolio label objective contract,107530
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,5b119fe,add crypto core37x route arbitration,226340
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,5b119fe,add crypto core37x route arbitration,711
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,7dc2329,add crypto core38 portfolio label objective contract,226347
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,7dc2329,add crypto core38 portfolio label objective contract,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,5b119fe,add crypto core37x route arbitration,123942
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,7dc2329,add crypto core38 portfolio label objective contract,124282
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3517,12 +3525,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,5b119fe,add crypto core37x route arbitration,5568
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,5b119fe,add crypto core37x route arbitration,399
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,5b119fe,add crypto core37x route arbitration,356
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,5b119fe,add crypto core37x route arbitration,1477
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,5b119fe,add crypto core37x route arbitration,1306
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,5b119fe,add crypto core37x route arbitration,425
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,7dc2329,add crypto core38 portfolio label objective contract,5861
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,7dc2329,add crypto core38 portfolio label objective contract,383
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,7dc2329,add crypto core38 portfolio label objective contract,347
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,7dc2329,add crypto core38 portfolio label objective contract,1549
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,7dc2329,add crypto core38 portfolio label objective contract,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,7dc2329,add crypto core38 portfolio label objective contract,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

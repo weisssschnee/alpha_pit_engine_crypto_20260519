@@ -1,0 +1,7 @@
+objective_id,required_columns,available_status,missing_columns,audit_result
+B0_legacy_net_spread,"replay_candidate_id, split, label_family, horizon_h, net_spread, control_ratio",AVAILABLE,,available_but_already_failed
+B1_cross_sectional_rank_book,"timestamp, symbol, candidate_score, forward_return, rank_weight",MISSING_SYMBOL_LEVEL_INPUT,"timestamp, symbol, candidate_score, forward_return, rank_weight",cannot_compute_from_aggregate_replay_rows
+B2_market_beta_residual_book,"timestamp, symbol, forward_return, btc_eth_market_return, beta_residual_return",MISSING_SYMBOL_LEVEL_INPUT,"timestamp, symbol, forward_return, btc_eth_market_return, beta_residual_return",cannot_compute_from_aggregate_replay_rows
+B3_vol_adjusted_rank_book,"timestamp, symbol, candidate_score, forward_return, realized_vol, vol_adjusted_return",MISSING_SYMBOL_LEVEL_INPUT,"timestamp, symbol, candidate_score, forward_return, realized_vol, vol_adjusted_return",cannot_compute_from_aggregate_replay_rows
+B4_liquidity_cost_capped_book,"timestamp, symbol, candidate_score, quote_volume, turnover, cost_bucket, position_weight",PARTIAL_AGGREGATE_ONLY,"timestamp, symbol, candidate_score, quote_volume, cost_bucket, position_weight",aggregate turnover exists but cannot enforce symbol-level caps
+B5_family_role_book,"family_id, split, net_spread, control_ratio, train_oos_diagnosis",PARTIAL_DIAGNOSTIC_ONLY,symbol-level hedge/regime book attribution,can diagnose family role but cannot compute executable family book

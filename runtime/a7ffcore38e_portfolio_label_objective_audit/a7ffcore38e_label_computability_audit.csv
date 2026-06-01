@@ -1,0 +1,7 @@
+label_id,status,primary,note,symbol_level_required,computable_from_current_artifacts,audit_note
+L0_raw_forward_return,allowed_reference,False,cannot be sole proof label,False,True,aggregate proxy exists but cannot be sole proof label
+L1_cross_sectional_relative_return,allowed_primary,True,preferred for cross-sectional book,True,False,"requires symbol-level score/return panel, not aggregate replay summary"
+L2_market_beta_residual_return,required_primary,True,must be tested before search authorization,True,False,"requires symbol-level score/return panel, not aggregate replay summary"
+L3_liquidity_tier_relative_return,allowed_primary,True,controls liquidity-tier distortions,True,False,"requires symbol-level score/return panel, not aggregate replay summary"
+L5_vol_adjusted_return,allowed_primary,True,controls high-vol dominance,True,False,"requires symbol-level score/return panel, not aggregate replay summary"
+L7_ranked_future_return,diagnostic_only,False,rank labels cannot alone authorize alpha/search,False,False,"requires symbol-level score/return panel, not aggregate replay summary"

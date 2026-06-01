@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T19:50:07Z
+Generated: 2026-06-01T19:52:51Z
 
 ## Decision
 
@@ -8,43 +8,43 @@ Generated: 2026-06-01T19:50:07Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                               | next                                                             |
-|:----------------------------|:----------------|:-----------------------------------------------------|:-----------------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                                 | keep registry as source-of-truth                                 |
-| a7ff_family_diversification | A7FF-CORE38     | portfolio_label_objective_contract_ready_for_core38e | A7FF-CORE38E executable portfolio-label objective adequacy audit |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                          | A7FF-24R4E if explicitly authorized                              |
-| search_execution            | blocked         | not_authorized                                       | none                                                             |
+| workstream                  | current_stage   | status                                           | next                                                |
+|:----------------------------|:----------------|:-------------------------------------------------|:----------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                             | keep registry as source-of-truth                    |
+| a7ff_family_diversification | A7FF-CORE38E    | book_objective_audit_requires_symbol_level_input | A7FF-CORE39 symbol-level book input packet contract |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                      | A7FF-24R4E if explicitly authorized                 |
+| search_execution            | blocked         | not_authorized                                   | none                                                |
 
 ## Allowed Next Tasks
 
-| task                                                             | reason                                                                                       |
-|:-----------------------------------------------------------------|:---------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option                | requires explicit user authorization; no search and no promotion                             |
-| A7PM-0/3 maintenance                                             | governance registry maintenance                                                              |
-| A7FF-CORE38E executable portfolio-label objective adequacy audit | audit only; test book/label objective adequacy over existing artifacts before any generation |
+| task                                                | reason                                                                                           |
+|:----------------------------------------------------|:-------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option   | requires explicit user authorization; no search and no promotion                                 |
+| A7PM-0/3 maintenance                                | governance registry maintenance                                                                  |
+| A7FF-CORE39 symbol-level book input packet contract | contract only; define symbol-level score/return/weight packet required for B1-B4 book objectives |
 
 ## Blocked Tasks
 
-| task                                | reason                                                                                                                |
-|:------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E execution                | pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but numeric wave execution is not started |
-| A7FF-51 execution                   | not authorized by A7FF-R11; only contract drafting is allowed                                                         |
-| A7FF-50                             | not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps                                   |
-| A7FF-48                             | not authorized by A7FF-47; frozen clues fail non-L5 label translation                                                 |
-| A7FF-45 continuation                | bounded replay passed but is superseded by A7FF-47 L5-only translation hold                                           |
-| A7FF-43 deep forensic               | not authorized by A7FF-42; selected control-strict non-L7 evidence remains single-family                              |
-| A7FF-41 control-strict expansion    | not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family                              |
-| A7FF search execution               | numeric wave has clues but still no replay/search authorization                                                       |
-| A7AL-2Y generation                  | not authorized                                                                                                        |
-| A7AL-3 large search                 | not authorized                                                                                                        |
-| direct OI-price rerun               | superseded weak prior / not authorized                                                                                |
-| A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
-| alpha proof                         | not authorized                                                                                                        |
-| shadow/paper/live                   | not authorized                                                                                                        |
-| A7FF large search                   | blocked: CORE38 authorizes objective adequacy audit only                                                              |
-| A7FF formula generation/search      | blocked until CORE38E proves book-objective survivors                                                                 |
-| same CORE33/34/36 queue rerun       | not authorized: frozen by CORE37X/CORE38                                                                              |
-| alpha proof / shadow / paper / live | not authorized                                                                                                        |
+| task                                                      | reason                                                                                                                |
+|:----------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E execution                                      | pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but numeric wave execution is not started |
+| A7FF-51 execution                                         | not authorized by A7FF-R11; only contract drafting is allowed                                                         |
+| A7FF-50                                                   | not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps                                   |
+| A7FF-48                                                   | not authorized by A7FF-47; frozen clues fail non-L5 label translation                                                 |
+| A7FF-45 continuation                                      | bounded replay passed but is superseded by A7FF-47 L5-only translation hold                                           |
+| A7FF-43 deep forensic                                     | not authorized by A7FF-42; selected control-strict non-L7 evidence remains single-family                              |
+| A7FF-41 control-strict expansion                          | not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family                              |
+| A7FF search execution                                     | numeric wave has clues but still no replay/search authorization                                                       |
+| A7AL-2Y generation                                        | not authorized                                                                                                        |
+| A7AL-3 large search                                       | not authorized                                                                                                        |
+| direct OI-price rerun                                     | superseded weak prior / not authorized                                                                                |
+| A7AL-2Q                                                   | not authorized by A7AL-2X0                                                                                            |
+| alpha proof                                               | not authorized                                                                                                        |
+| shadow/paper/live                                         | not authorized                                                                                                        |
+| A7FF large search                                         | blocked: CORE38E found portfolio objectives cannot be computed from aggregate replay rows                             |
+| A7FF formula generation/search                            | blocked until symbol-level book packet exists and passes audit                                                        |
+| A7FF-CORE38E book objective execution from aggregate rows | not authorized: missing symbol-level input                                                                            |
+| alpha proof / shadow / paper / live                       | not authorized                                                                                                        |
 
 ## Boundary
 
