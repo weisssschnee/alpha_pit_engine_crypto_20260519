@@ -52,6 +52,8 @@ A7FFCORE12E = REPO / "runtime" / "a7ffcore12e_materialization_preflight" / "a7ff
 A7FFCORE13 = REPO / "runtime" / "a7ffcore13_numeric_response_contract" / "a7ffcore13_manifest.json"
 A7FFCORE13E = REPO / "runtime" / "a7ffcore13e_numeric_response" / "a7ffcore13e_manifest.json"
 A7FFCORE14 = REPO / "runtime" / "a7ffcore14_replay_preflight_contract" / "a7ffcore14_manifest.json"
+A7FFCORE14E = REPO / "runtime" / "a7ffcore14e_bounded_replay" / "a7ffcore14e_manifest.json"
+A7FFCORE14R = REPO / "runtime" / "a7ffcore14r_replay_failure_forensic" / "a7ffcore14r_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -112,12 +114,43 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore13 = read_json(A7FFCORE13)
     a7ffcore13e = read_json(A7FFCORE13E)
     a7ffcore14 = read_json(A7FFCORE14)
+    a7ffcore14e = read_json(A7FFCORE14E)
+    a7ffcore14r = read_json(A7FFCORE14R)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore14.get("decision") == "PASS_A7FFCORE14_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE14E":
+    if a7ffcore14r.get("decision") == "PASS_A7FFCORE14R_FAILURE_ATTRIBUTION_COMPLETE_READY_FOR_CORE14S":
+        allowed["A7FF-CORE14S replay-packet/objective repair contract"] = (
+            "contract only; repair replay packet/objective based on CORE14R control/cost/split attribution; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE15"] = "blocked: CORE14E replay-clean pool insufficient and CORE14R requires repair contract first"
+        blocked["A7FF-CORE14E rerun"] = "blocked until CORE14S defines a concrete repair policy"
+        blocked["A7FF large search"] = "blocked: CORE14R shows current replay packet is not search-ready"
+        current_stage = "A7FF-CORE14R"
+        status = "replay_failure_forensic_ready_for_core14s"
+        next_task = "A7FF-CORE14S replay-packet/objective repair contract"
+    elif a7ffcore14e.get("decision") == "HOLD_A7FFCORE14E_BOUNDED_REPLAY_INSUFFICIENT":
+        allowed["A7FF-CORE14R replay failure forensic"] = (
+            "diagnose CORE14E replay collapse by split/control/family; no rerun/search/promotion"
+        )
+        blocked["A7FF-CORE15"] = "blocked: CORE14E replay-clean pool insufficient"
+        blocked["A7FF-CORE14E rerun"] = "blocked until CORE14R identifies a concrete replay policy or pool repair"
+        blocked["A7FF large search"] = "blocked: CORE14E hold; replay-clean candidates are too narrow"
+        current_stage = "A7FF-CORE14E"
+        status = "bounded_replay_hold_insufficient_clean_pool"
+        next_task = "A7FF-CORE14R replay failure forensic"
+    elif a7ffcore14e.get("decision") == "PASS_A7FFCORE14E_BOUNDED_REPLAY_CLEAN_CANDIDATES_READY_FOR_CORE15":
+        allowed["A7FF-CORE15 replay-clean consolidation / search-readiness audit"] = (
+            "contract/audit only; consolidate CORE14E clean pool and decide whether any small-search gate is met"
+        )
+        blocked["A7FF-CORE14E rerun"] = "bounded replay passed; rerun only if packet or replay policy changes"
+        blocked["A7FF large search"] = "blocked until CORE15 explicitly passes large-search readiness gates"
+        current_stage = "A7FF-CORE14E"
+        status = "bounded_replay_clean_candidates_ready_for_core15"
+        next_task = "A7FF-CORE15 replay-clean consolidation / search-readiness audit"
+    elif a7ffcore14.get("decision") == "PASS_A7FFCORE14_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE14E":
         allowed["A7FF-CORE14E bounded replay execution"] = (
             "execute bounded replay over CORE14 128-candidate packet only; no formula search, large search, promotion, or alpha proof"
         )

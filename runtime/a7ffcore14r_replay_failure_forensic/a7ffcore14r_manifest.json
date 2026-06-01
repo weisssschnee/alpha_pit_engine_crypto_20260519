@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core14s_contract": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE14R_FAILURE_ATTRIBUTION_COMPLETE_READY_FOR_CORE14S",
+  "dominant_blocker": "control_and_cost_collapse",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T04:39:57Z",
+  "max_strict_candidates_under_sensitivity": 12,
+  "near_miss_candidate_count": 9,
+  "next_allowed": "A7FF-CORE14S replay-packet/objective repair contract",
+  "source_candidate_count": 128,
+  "source_decision": "HOLD_A7FFCORE14E_BOUNDED_REPLAY_INSUFFICIENT",
+  "source_replay_clean_candidate_count": 2,
+  "source_stage": "A7FF-CORE14E",
+  "stage": "A7FF-CORE14R"
+}
