@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE12E temp-subgraph materialization preflight": "materialization/activity preflight for CORE12 temporary subgraphs; no numeric/replay/search/promotion",
+  "A7FF-CORE13 numeric response contract": "contract only; define primary-label numeric response over CORE12E materialized temp subgraphs; no numeric execution/search/promotion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

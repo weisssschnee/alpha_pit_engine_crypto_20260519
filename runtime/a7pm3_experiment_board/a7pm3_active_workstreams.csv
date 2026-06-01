@@ -1,5 +1,5 @@
 workstream,current_stage,status,next
 governance,A7PM-0/1/2/3,pass,keep registry as source-of-truth
-a7ff_family_diversification,A7FF-CORE12,temp_subgraph_registry_ready_for_core12e,A7FF-CORE12E temp-subgraph materialization preflight
+a7ff_family_diversification,A7FF-CORE12E,materialization_preflight_ready_for_core13,A7FF-CORE13 numeric response contract
 a7ff_funding_tail,A7FF-24R4,contract_ready_no_execution,A7FF-24R4E if explicitly authorized
 search_execution,blocked,not_authorized,none
