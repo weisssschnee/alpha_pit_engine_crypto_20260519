@@ -1,0 +1,4 @@
+family_id,candidate_count,survivor_count,median_control_ratio,median_net_spread
+F1a_aggtrades_flow_microstructure,7,0,0.7473794226608086,-0.00018356566533331308
+F1b_taker_flow_market_panel,6,1,2.529041176277511,-9.440003626375111e-05
+F2a_basis_funding_independent,8,0,2.5482406293986157,-7.988652761721076e-05

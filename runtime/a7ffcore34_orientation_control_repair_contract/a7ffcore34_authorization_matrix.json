@@ -1,0 +1,11 @@
+{
+  "authorized": {
+    "A7FF-CORE34E train-only orientation/control repair execution": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "large_search": true,
+    "new_formula_generation": true,
+    "shadow_paper_live": true
+  }
+}

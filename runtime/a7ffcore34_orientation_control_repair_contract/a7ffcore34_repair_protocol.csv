@@ -1,0 +1,6 @@
+step,rule,blocking
+train_orientation_fit,fit sign only on train_2024 using L1/L5 net spread; freeze sign for later splits,True
+control_filter,reject candidate if train_2024 stale-control ratio >= 1.0 after orientation,True
+multi_cost_report,report 2/5/10bps net spread by split and label,True
+no_test_orientation,validation/test/recent may evaluate only; cannot set sign or thresholds,True
+no_search,"repair execution is bounded replay repair only, not formula generation/search",True

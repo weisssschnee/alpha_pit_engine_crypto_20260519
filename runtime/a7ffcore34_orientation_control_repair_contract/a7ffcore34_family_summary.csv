@@ -1,0 +1,4 @@
+family_id,repair_mode,candidate_count
+F1a_aggtrades_flow_microstructure,train_only_orientation,6
+F1b_taker_flow_market_panel,control_filter,3
+F2a_basis_funding_independent,control_filter,5

@@ -1,0 +1,5 @@
+repair,target,rule,authorized_next
+train_only_orientation,F1a control-clean but negative net spread,"fit sign on train_2024 only, freeze sign, then evaluate validation/test/recent",True
+control_dominance_filter,F1b/F2a control-dominated candidates,drop or down-rank candidates with train control_ratio >= 1 before replay queue,True
+cost_turnover_sensitivity,all bounded replay candidates,report 2/5/10bps net spread and turnover by split before replay promotion,True
+large_search,none,not authorized until repaired bounded replay survivors exist,False

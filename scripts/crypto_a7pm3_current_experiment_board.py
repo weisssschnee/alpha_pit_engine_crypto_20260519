@@ -126,6 +126,9 @@ A7FFCORE31 = REPO / "runtime" / "a7ffcore31_independent_family_clue_consolidatio
 A7FFCORE32 = REPO / "runtime" / "a7ffcore32_replay_preflight_contract" / "a7ffcore32_manifest.json"
 A7FFCORE32E = REPO / "runtime" / "a7ffcore32e_replay_preflight_execution" / "a7ffcore32e_manifest.json"
 A7FFCORE33 = REPO / "runtime" / "a7ffcore33_bounded_replay_contract" / "a7ffcore33_manifest.json"
+A7FFCORE33E = REPO / "runtime" / "a7ffcore33e_bounded_replay_execution" / "a7ffcore33e_manifest.json"
+A7FFCORE33ER = REPO / "runtime" / "a7ffcore33er_bounded_replay_forensic" / "a7ffcore33er_manifest.json"
+A7FFCORE34 = REPO / "runtime" / "a7ffcore34_orientation_control_repair_contract" / "a7ffcore34_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -260,12 +263,45 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore32 = read_json(A7FFCORE32)
     a7ffcore32e = read_json(A7FFCORE32E)
     a7ffcore33 = read_json(A7FFCORE33)
+    a7ffcore33e = read_json(A7FFCORE33E)
+    a7ffcore33er = read_json(A7FFCORE33ER)
+    a7ffcore34 = read_json(A7FFCORE34)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore33.get("decision") == "PASS_A7FFCORE33_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE33E":
+    if a7ffcore34.get("decision") == "PASS_A7FFCORE34_ORIENTATION_CONTROL_REPAIR_CONTRACT_READY_FOR_CORE34E":
+        allowed["A7FF-CORE34E train-only orientation/control repair execution"] = (
+            "bounded replay repair only; no new generation/search/promotion"
+        )
+        blocked["A7FF large search"] = "blocked until CORE34E creates repaired bounded replay survivors"
+        blocked["A7FF formula generation/search"] = "blocked: CORE34 authorizes repair execution only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE34"
+        status = "orientation_control_repair_contract_ready_for_core34e"
+        next_task = "A7FF-CORE34E train-only orientation/control repair execution"
+    elif a7ffcore33er.get("decision") == "PASS_A7FFCORE33ER_FORENSIC_READY_FOR_CORE34_ORIENTATION_REPAIR_CONTRACT":
+        allowed["A7FF-CORE34 train-only orientation/control repair contract"] = (
+            "contract only; define train-only sign and control filter repair after bounded replay hold"
+        )
+        blocked["A7FF large search"] = "blocked: CORE33E bounded replay has zero survivors"
+        blocked["A7FF formula generation/search"] = "blocked: repair contract required"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE33ER"
+        status = "bounded_replay_forensic_ready_for_core34_contract"
+        next_task = "A7FF-CORE34 train-only orientation/control repair contract"
+    elif a7ffcore33e.get("decision") == "HOLD_A7FFCORE33E_BOUNDED_REPLAY_INSUFFICIENT":
+        allowed["A7FF-CORE33ER bounded replay forensic"] = (
+            "forensic only; diagnose why bounded replay has zero survivors"
+        )
+        blocked["A7FF large search"] = "blocked: CORE33E bounded replay insufficient"
+        blocked["A7FF formula generation/search"] = "blocked: forensic required before repair"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE33E"
+        status = "bounded_replay_insufficient_forensic_required"
+        next_task = "A7FF-CORE33ER bounded replay forensic"
+    elif a7ffcore33.get("decision") == "PASS_A7FFCORE33_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE33E":
         allowed["A7FF-CORE33E bounded replay execution"] = (
             "bounded replay only; no formula search, large search, alpha proof, or live"
         )

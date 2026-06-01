@@ -3036,20 +3036,40 @@ runtime,A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_gate
 runtime,A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_manifest.json,6110822,add crypto core32 replay preflight contract,713
 runtime,A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_preflight_checks.csv,6110822,add crypto core32 replay preflight contract,715
 runtime,A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_replay_preflight_queue.csv,6110822,add crypto core32 replay preflight contract,11740
-report,A7FF-CORE32E,reports/CRYPTO_A7FFCORE32E_REPLAY_PREFLIGHT_EXECUTION_20260602.md,,,6961
-runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_candidate_summary.csv,,,3347
-runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_dataset_summary.csv,,,146
-runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_family_summary.csv,,,319
-runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_manifest.json,,,794
-runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_preflight_results.csv,,,68528
-runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_selected_preflight_candidates.csv,,,2948
-report,A7FF-CORE33,reports/CRYPTO_A7FFCORE33_BOUNDED_REPLAY_CONTRACT_20260602.md,,,8628
-runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_authorization_matrix.json,,,221
-runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_family_summary.csv,,,307
-runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_gate_audit.csv,,,215
-runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_manifest.json,,,642
-runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_replay_candidate_queue.csv,,,8778
-runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_replay_protocol.csv,,,559
+report,A7FF-CORE32E,reports/CRYPTO_A7FFCORE32E_REPLAY_PREFLIGHT_EXECUTION_20260602.md,1f00a87,add crypto core32e preflight and core33 contract,6961
+runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_candidate_summary.csv,1f00a87,add crypto core32e preflight and core33 contract,3347
+runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_dataset_summary.csv,1f00a87,add crypto core32e preflight and core33 contract,146
+runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_family_summary.csv,1f00a87,add crypto core32e preflight and core33 contract,319
+runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_manifest.json,1f00a87,add crypto core32e preflight and core33 contract,794
+runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_preflight_results.csv,1f00a87,add crypto core32e preflight and core33 contract,68528
+runtime,A7FF-CORE32E,runtime/a7ffcore32e_replay_preflight_execution/a7ffcore32e_selected_preflight_candidates.csv,1f00a87,add crypto core32e preflight and core33 contract,2948
+report,A7FF-CORE33,reports/CRYPTO_A7FFCORE33_BOUNDED_REPLAY_CONTRACT_20260602.md,1f00a87,add crypto core32e preflight and core33 contract,8628
+runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_authorization_matrix.json,1f00a87,add crypto core32e preflight and core33 contract,221
+runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_family_summary.csv,1f00a87,add crypto core32e preflight and core33 contract,307
+runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_gate_audit.csv,1f00a87,add crypto core32e preflight and core33 contract,215
+runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_manifest.json,1f00a87,add crypto core32e preflight and core33 contract,642
+runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_replay_candidate_queue.csv,1f00a87,add crypto core32e preflight and core33 contract,8778
+runtime,A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_replay_protocol.csv,1f00a87,add crypto core32e preflight and core33 contract,559
+report,A7FF-CORE33E,reports/CRYPTO_A7FFCORE33E_BOUNDED_REPLAY_EXECUTION_20260602.md,,,2279
+runtime,A7FF-CORE33E,runtime/a7ffcore33e_bounded_replay_execution/a7ffcore33e_candidate_summary.csv,,,2644
+runtime,A7FF-CORE33E,runtime/a7ffcore33e_bounded_replay_execution/a7ffcore33e_dataset_summary.csv,,,225
+runtime,A7FF-CORE33E,runtime/a7ffcore33e_bounded_replay_execution/a7ffcore33e_family_summary.csv,,,314
+runtime,A7FF-CORE33E,runtime/a7ffcore33e_bounded_replay_execution/a7ffcore33e_manifest.json,,,682
+runtime,A7FF-CORE33E,runtime/a7ffcore33e_bounded_replay_execution/a7ffcore33e_replay_results.csv,,,183355
+runtime,A7FF-CORE33E,runtime/a7ffcore33e_bounded_replay_execution/a7ffcore33e_survivors.csv,,,129
+report,A7FF-CORE33ER,reports/CRYPTO_A7FFCORE33ER_BOUNDED_REPLAY_FORENSIC_20260602.md,,,8853
+runtime,A7FF-CORE33ER,runtime/a7ffcore33er_bounded_replay_forensic/a7ffcore33er_candidate_failure_diagnostic.csv,,,2888
+runtime,A7FF-CORE33ER,runtime/a7ffcore33er_bounded_replay_forensic/a7ffcore33er_family_failure_diagnostic.csv,,,454
+runtime,A7FF-CORE33ER,runtime/a7ffcore33er_bounded_replay_forensic/a7ffcore33er_manifest.json,,,647
+runtime,A7FF-CORE33ER,runtime/a7ffcore33er_bounded_replay_forensic/a7ffcore33er_repair_plan.csv,,,557
+runtime,A7FF-CORE33ER,runtime/a7ffcore33er_bounded_replay_forensic/a7ffcore33er_split_label_failure_map.csv,,,11092
+report,A7FF-CORE34,reports/CRYPTO_A7FFCORE34_ORIENTATION_CONTROL_REPAIR_CONTRACT_20260602.md,,,5968
+runtime,A7FF-CORE34,runtime/a7ffcore34_orientation_control_repair_contract/a7ffcore34_authorization_matrix.json,,,252
+runtime,A7FF-CORE34,runtime/a7ffcore34_orientation_control_repair_contract/a7ffcore34_family_summary.csv,,,193
+runtime,A7FF-CORE34,runtime/a7ffcore34_orientation_control_repair_contract/a7ffcore34_gate_audit.csv,,,136
+runtime,A7FF-CORE34,runtime/a7ffcore34_orientation_control_repair_contract/a7ffcore34_manifest.json,,,653
+runtime,A7FF-CORE34,runtime/a7ffcore34_orientation_control_repair_contract/a7ffcore34_repair_candidate_queue.csv,,,7688
+runtime,A7FF-CORE34,runtime/a7ffcore34_orientation_control_repair_contract/a7ffcore34_repair_protocol.csv,,,491
 report,A7FF-CORE4,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_entrypoint_policy.csv,97cf90e,add crypto a7ffcore4 gate regression,2751
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_entrypoint_route_summary.csv,97cf90e,add crypto a7ffcore4 gate regression,252
@@ -3416,14 +3436,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,6110822,add crypto core32 replay preflight contract,5870
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,6110822,add crypto core32 replay preflight contract,553794
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,6110822,add crypto core32 replay preflight contract,105837
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,1f00a87,add crypto core32e preflight and core33 contract,6047
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,1f00a87,add crypto core32e preflight and core33 contract,555672
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,1f00a87,add crypto core32e preflight and core33 contract,106218
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,6110822,add crypto core32 replay preflight contract,219347
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,6110822,add crypto core32 replay preflight contract,711
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,1f00a87,add crypto core32e preflight and core33 contract,220870
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,1f00a87,add crypto core32e preflight and core33 contract,711
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,6110822,add crypto core32 replay preflight contract,119604
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,1f00a87,add crypto core32e preflight and core33 contract,120257
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3441,12 +3461,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,6110822,add crypto core32 replay preflight contract,5014
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,6110822,add crypto core32 replay preflight contract,361
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,6110822,add crypto core32 replay preflight contract,311
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,6110822,add crypto core32 replay preflight contract,1402
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,6110822,add crypto core32 replay preflight contract,1306
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,6110822,add crypto core32 replay preflight contract,425
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,1f00a87,add crypto core32e preflight and core33 contract,5229
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,1f00a87,add crypto core32e preflight and core33 contract,396
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,1f00a87,add crypto core32e preflight and core33 contract,322
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,1f00a87,add crypto core32e preflight and core33 contract,1399
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,1f00a87,add crypto core32e preflight and core33 contract,1306
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,1f00a87,add crypto core32e preflight and core33 contract,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
