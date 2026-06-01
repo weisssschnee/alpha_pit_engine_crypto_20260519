@@ -2105,6 +2105,28 @@ runtime,A7FF-CORE1,runtime/a7ffcore1_ast_schema_adapter/a7ffcore1_manifest.json,
 runtime,A7FF-CORE1,runtime/a7ffcore1_ast_schema_adapter/a7ffcore1_node_inventory.csv,9a6d340,add crypto a7ffcore1 ast adapter,6200137
 runtime,A7FF-CORE1,runtime/a7ffcore1_ast_schema_adapter/a7ffcore1_operator_inventory.csv,9a6d340,add crypto a7ffcore1 ast adapter,146
 runtime,A7FF-CORE1,runtime/a7ffcore1_ast_schema_adapter/a7ffcore1_sample_typed_ast.jsonl,9a6d340,add crypto a7ffcore1 ast adapter,65971
+runtime,A7FF-CORE10,runtime/a7ffcore10_replay_clean_consolidation/a7ffcore10_authorization_matrix.json,c287a31,add crypto a7ffcore10 search readiness audit,162
+runtime,A7FF-CORE10,runtime/a7ffcore10_replay_clean_consolidation/a7ffcore10_clean_family_summary.csv,c287a31,add crypto a7ffcore10 search readiness audit,843
+runtime,A7FF-CORE10,runtime/a7ffcore10_replay_clean_consolidation/a7ffcore10_manifest.json,c287a31,add crypto a7ffcore10 search readiness audit,796
+runtime,A7FF-CORE10,runtime/a7ffcore10_replay_clean_consolidation/a7ffcore10_replay_clean_candidate_pool.csv,c287a31,add crypto a7ffcore10 search readiness audit,16404
+runtime,A7FF-CORE10,runtime/a7ffcore10_replay_clean_consolidation/a7ffcore10_search_readiness_contract.json,c287a31,add crypto a7ffcore10 search readiness audit,712
+runtime,A7FF-CORE10,runtime/a7ffcore10_replay_clean_consolidation/a7ffcore10_search_readiness_gates.csv,c287a31,add crypto a7ffcore10 search readiness audit,217
+runtime,A7FF-CORE10E,runtime/a7ffcore10e_search_readiness_audit/a7ffcore10e_family_summary.csv,c287a31,add crypto a7ffcore10 search readiness audit,776
+runtime,A7FF-CORE10E,runtime/a7ffcore10e_search_readiness_audit/a7ffcore10e_manifest.json,c287a31,add crypto a7ffcore10 search readiness audit,705
+runtime,A7FF-CORE10E,runtime/a7ffcore10e_search_readiness_audit/a7ffcore10e_readiness_gates.csv,c287a31,add crypto a7ffcore10 search readiness audit,477
+runtime,A7FF-CORE10E,runtime/a7ffcore10e_search_readiness_audit/a7ffcore10e_search_ready_seed_pool.csv,c287a31,add crypto a7ffcore10 search readiness audit,14201
+runtime,A7FF-CORE10E,runtime/a7ffcore10e_search_readiness_audit/a7ffcore10e_small_search_contract_preview.json,c287a31,add crypto a7ffcore10 search readiness audit,836
+runtime,A7FF-CORE10R,runtime/a7ffcore10r_replay_clean_pool_repair/a7ffcore10r_balanced_family_summary.csv,c287a31,add crypto a7ffcore10 search readiness audit,410
+runtime,A7FF-CORE10R,runtime/a7ffcore10r_replay_clean_pool_repair/a7ffcore10r_balanced_replay_clean_pool.csv,c287a31,add crypto a7ffcore10 search readiness audit,14201
+runtime,A7FF-CORE10R,runtime/a7ffcore10r_replay_clean_pool_repair/a7ffcore10r_manifest.json,c287a31,add crypto a7ffcore10 search readiness audit,762
+runtime,A7FF-CORE10R,runtime/a7ffcore10r_replay_clean_pool_repair/a7ffcore10r_repair_gates.csv,c287a31,add crypto a7ffcore10 search readiness audit,162
+runtime,A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_authorization_matrix.json,d0a6f4d,add crypto a7ffcore11 small expansion contract,238
+runtime,A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_execution_plan.json,d0a6f4d,add crypto a7ffcore11 small expansion contract,701
+runtime,A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_family_budget.csv,d0a6f4d,add crypto a7ffcore11 small expansion contract,825
+runtime,A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_grammar_contract.json,d0a6f4d,add crypto a7ffcore11 small expansion contract,903
+runtime,A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_manifest.json,d0a6f4d,add crypto a7ffcore11 small expansion contract,726
+runtime,A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_pass_gates.json,d0a6f4d,add crypto a7ffcore11 small expansion contract,318
+runtime,A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_seed_pool.csv,d0a6f4d,add crypto a7ffcore11 small expansion contract,14201
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_blueprint_subgraph_map.csv,510fb01,add crypto a7ffcore2 subgraph registry,2501481
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_factor_candidate_roots.csv,510fb01,add crypto a7ffcore2 subgraph registry,4627017
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_family_subgraph_summary.csv,510fb01,add crypto a7ffcore2 subgraph registry,4501
@@ -2229,6 +2251,11 @@ runtime,A7FF-CORE9,runtime/a7ffcore9_bounded_replay_contract/a7ffcore9_pass_gate
 runtime,A7FF-CORE9,runtime/a7ffcore9_bounded_replay_contract/a7ffcore9_replay_contract_packet.csv,949e328,add crypto a7ffcore9 bounded replay contract,59003
 runtime,A7FF-CORE9,runtime/a7ffcore9_bounded_replay_contract/a7ffcore9_replay_protocol.json,949e328,add crypto a7ffcore9 bounded replay contract,2150
 runtime,A7FF-CORE9,runtime/a7ffcore9_bounded_replay_contract/a7ffcore9_replay_shard_plan.csv,949e328,add crypto a7ffcore9 bounded replay contract,114
+runtime,A7FF-CORE9E,runtime/a7ffcore9e_bounded_replay/a7ffcore9e_candidate_summary.csv,2c72a25,add crypto a7ffcore9e bounded replay,18364
+runtime,A7FF-CORE9E,runtime/a7ffcore9e_bounded_replay/a7ffcore9e_family_summary.csv,2c72a25,add crypto a7ffcore9e bounded replay,1128
+runtime,A7FF-CORE9E,runtime/a7ffcore9e_bounded_replay/a7ffcore9e_manifest.json,2c72a25,add crypto a7ffcore9e bounded replay,826
+runtime,A7FF-CORE9E,runtime/a7ffcore9e_bounded_replay/a7ffcore9e_replay_clean_candidates.csv,2c72a25,add crypto a7ffcore9e bounded replay,824
+runtime,A7FF-CORE9E,runtime/a7ffcore9e_bounded_replay/a7ffcore9e_replay_rows.csv,2c72a25,add crypto a7ffcore9e bounded replay,313881
 runtime,A7FF-R0-DERIVED-GENERATION-FAILURE-FREEZE,runtime/a7ffr0_derived_generation_failure_freeze/a7ffr0_failure_evidence_matrix.csv,3e509b2,redesign crypto a7ff derived generation,859
 runtime,A7FF-R0-DERIVED-GENERATION-FAILURE-FREEZE,runtime/a7ffr0_derived_generation_failure_freeze/a7ffr0_manifest.json,3e509b2,redesign crypto a7ff derived generation,539
 runtime,A7FF-R1-FIELD-ONTOLOGY-V3,runtime/a7ffr1_field_ontology_v3/a7ffr1_field_ontology_v3.csv,3e509b2,redesign crypto a7ff derived generation,50026
@@ -2460,6 +2487,10 @@ report,A7FF9-CONTINUATION-COMPARISON,reports/CRYPTO_A7FF9_CONTINUATION_COMPARISO
 report,A7FF9-EXPANDED-NUMERIC-PROBE-CONTINUATION,reports/CRYPTO_A7FF9_EXPANDED_NUMERIC_PROBE_CONTINUATION_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,21246
 report,A7FFCORE0-TYPED-AST-GOVERNANCE,reports/CRYPTO_A7FFCORE0_TYPED_AST_GOVERNANCE_20260601.md,7285293,add crypto a7ffcore0 typed ast governance,17309
 report,A7FFCORE1-AST-SCHEMA-ADAPTER,reports/CRYPTO_A7FFCORE1_AST_SCHEMA_ADAPTER_20260601.md,9a6d340,add crypto a7ffcore1 ast adapter,8849
+report,A7FFCORE10-REPLAY-CLEAN-CONSOLIDATION,reports/CRYPTO_A7FFCORE10_REPLAY_CLEAN_CONSOLIDATION_20260601.md,c287a31,add crypto a7ffcore10 search readiness audit,36159
+report,A7FFCORE10E-SEARCH-READINESS-AUDIT,reports/CRYPTO_A7FFCORE10E_SEARCH_READINESS_AUDIT_20260601.md,c287a31,add crypto a7ffcore10 search readiness audit,4125
+report,A7FFCORE10R-REPLAY-CLEAN-POOL-REPAIR,reports/CRYPTO_A7FFCORE10R_REPLAY_CLEAN_POOL_REPAIR_20260601.md,c287a31,add crypto a7ffcore10 search readiness audit,29952
+report,A7FFCORE11-SMALL-EXPANSION-CONTRACT,reports/CRYPTO_A7FFCORE11_SMALL_EXPANSION_CONTRACT_20260601.md,d0a6f4d,add crypto a7ffcore11 small expansion contract,4379
 report,A7FFCORE2-FEATURE-SUBGRAPH-REGISTRY,reports/CRYPTO_A7FFCORE2_FEATURE_SUBGRAPH_REGISTRY_20260601.md,510fb01,add crypto a7ffcore2 subgraph registry,40668
 report,A7FFCORE3-FORMULAGEN-SUBGRAPH-GATE,reports/CRYPTO_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_20260601.md,02de3f1,add crypto a7ffcore3 formulagen gate,5243
 report,A7FFCORE4-GATE-IMPLEMENTATION-REGRESSION,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
@@ -2473,6 +2504,7 @@ report,A7FFCORE7R-CONTROL-POLICY-FORENSIC,reports/CRYPTO_A7FFCORE7R_CONTROL_POLI
 report,A7FFCORE8-NUMERIC-CLUE-CONSOLIDATION,reports/CRYPTO_A7FFCORE8_NUMERIC_CLUE_CONSOLIDATION_20260601.md,a250520,add crypto a7ffcore8 numeric clue consolidation,20523
 report,A7FFCORE8E-REPLAY-PREFLIGHT-PACKET-AUDIT,reports/CRYPTO_A7FFCORE8E_REPLAY_PREFLIGHT_PACKET_AUDIT_20260601.md,dd28302,add crypto a7ffcore8e replay preflight audit,6237
 report,A7FFCORE9-BOUNDED-REPLAY-CONTRACT,reports/CRYPTO_A7FFCORE9_BOUNDED_REPLAY_CONTRACT_20260601.md,949e328,add crypto a7ffcore9 bounded replay contract,5438
+report,A7FFCORE9E-BOUNDED-REPLAY-EXECUTION,reports/CRYPTO_A7FFCORE9E_BOUNDED_REPLAY_EXECUTION_20260601.md,2c72a25,add crypto a7ffcore9e bounded replay,22927
 report,A7FFR0-DERIVED-GENERATION-FAILURE-FREEZE,reports/CRYPTO_A7FFR0_DERIVED_GENERATION_FAILURE_FREEZE_20260530.md,3e509b2,redesign crypto a7ff derived generation,2686
 report,A7FFR1-FIELD-ONTOLOGY-V3,reports/CRYPTO_A7FFR1_FIELD_ONTOLOGY_V3_20260530.md,3e509b2,redesign crypto a7ff derived generation,20202
 report,A7FFR10-LABEL-FEATURE-TARGET-REDESIGN,reports/CRYPTO_A7FFR10_LABEL_FEATURE_TARGET_REDESIGN_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,9721
@@ -2489,13 +2521,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,b79895a,refresh crypto registry after a7ffcore8e,402869
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,facd0a6,refresh crypto registry after a7ffcore8,101544
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,9926af4,refresh crypto registry after a7ffcore9,405365
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,9926af4,refresh crypto registry after a7ffcore9,102262
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,b79895a,refresh crypto registry after a7ffcore8e,169287
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,b79895a,refresh crypto registry after a7ffcore8e,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,9926af4,refresh crypto registry after a7ffcore9,170795
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,9926af4,refresh crypto registry after a7ffcore9,711
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,b79895a,refresh crypto registry after a7ffcore8e,90285
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,9926af4,refresh crypto registry after a7ffcore9,90923
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -2511,15 +2543,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,b79895a,refresh crypto registry after a7ffcore8e,358
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,b79895a,refresh crypto registry after a7ffcore8e,352
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,b79895a,refresh crypto registry after a7ffcore8e,1413
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,b79895a,refresh crypto registry after a7ffcore8e,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,b79895a,refresh crypto registry after a7ffcore8e,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,b79895a,refresh crypto registry after a7ffcore8e,5559
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,9926af4,refresh crypto registry after a7ffcore9,370
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,9926af4,refresh crypto registry after a7ffcore9,389
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,9926af4,refresh crypto registry after a7ffcore9,1443
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,9926af4,refresh crypto registry after a7ffcore9,1306
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,9926af4,refresh crypto registry after a7ffcore9,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,9926af4,refresh crypto registry after a7ffcore9,5980
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,b79895a,refresh crypto registry after a7ffcore8e,5402
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,9926af4,refresh crypto registry after a7ffcore9,5456
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

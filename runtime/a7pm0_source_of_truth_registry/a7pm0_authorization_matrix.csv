@@ -477,6 +477,17 @@ A7FF-37,runtime/a7ff37_deep_replay_contract/a7ff37_authorization_matrix.json,lar
 A7FF-37,runtime/a7ff37_deep_replay_contract/a7ff37_authorization_matrix.json,shadow_paper_live,"{""authorized"": false}",False
 A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_authorization_matrix.json,authorized,"{""A7FF-47"": ""portfolio microreplay / label diversification audit on frozen 7-row pool"", ""A7PM maintenance"": ""source-of-truth refresh""}",False
 A7FF-46,runtime/a7ff46_candidate_freeze/a7ff46_authorization_matrix.json,not_authorized,"{""alpha_proof"": ""not authorized"", ""formula_search"": ""frozen clues are not alpha candidates"", ""large_search"": ""not authorized"", ""shadow_paper_live"": ""not authorized""}",False
+A7FF-CORE10,runtime/a7ffcore10_replay_clean_consolidation/a7ffcore10_authorization_matrix.json,A7FF-CORE10E search-readiness audit,false,False
+A7FF-CORE10,runtime/a7ffcore10_replay_clean_consolidation/a7ffcore10_authorization_matrix.json,alpha_proof,false,False
+A7FF-CORE10,runtime/a7ffcore10_replay_clean_consolidation/a7ffcore10_authorization_matrix.json,formula_search,false,False
+A7FF-CORE10,runtime/a7ffcore10_replay_clean_consolidation/a7ffcore10_authorization_matrix.json,large_search,false,False
+A7FF-CORE10,runtime/a7ffcore10_replay_clean_consolidation/a7ffcore10_authorization_matrix.json,shadow_paper_live,false,False
+A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_authorization_matrix.json,A7FF-CORE11E small gate-native dry generation,true,True
+A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_authorization_matrix.json,A7FF-CORE11F materialization preflight,false,False
+A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_authorization_matrix.json,A7FF-CORE11G numeric response,false,False
+A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_authorization_matrix.json,alpha_proof,false,False
+A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_authorization_matrix.json,large_search,false,False
+A7FF-CORE11,runtime/a7ffcore11_small_expansion_contract/a7ffcore11_authorization_matrix.json,shadow_paper_live,false,False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,A7FF-CORE8E replay-preflight packet audit,true,True
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,alpha_proof,false,False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,formula_search,false,False
