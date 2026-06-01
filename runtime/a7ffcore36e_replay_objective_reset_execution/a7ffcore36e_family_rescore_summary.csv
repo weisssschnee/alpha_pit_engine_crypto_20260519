@@ -1,0 +1,4 @@
+family_id,candidate_count,train_pass_count,two_split_selected_count,strict_survivor_count,median_train_net_spread,median_oos_min_split_net_spread,median_train_control_ratio,median_oos_worst_control_ratio,median_objective_score
+F1a_aggtrades_flow_microstructure,7,3,0,0,0.0015680341252381,-0.0050861014083460505,1.0799555761249946,1.1455591213672958,5.014086272879338
+F1b_taker_flow_market_panel,6,0,0,0,0.0009659763919986778,-0.019795689454996376,2.9462008669718425,3.5884592056345967,-62.9712214194551
+F2a_basis_funding_independent,8,0,0,0,0.0010668072219345338,-0.017113566996782823,2.7588234504942886,3.099086663931126,-32.46919851127395

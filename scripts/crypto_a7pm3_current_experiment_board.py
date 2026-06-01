@@ -133,6 +133,7 @@ A7FFCORE34E = REPO / "runtime" / "a7ffcore34e_orientation_control_repair_executi
 A7FFCORE34ER = REPO / "runtime" / "a7ffcore34er_repair_forensic" / "a7ffcore34er_manifest.json"
 A7FFCORE35 = REPO / "runtime" / "a7ffcore35_search_readiness_arbitration" / "a7ffcore35_manifest.json"
 A7FFCORE36 = REPO / "runtime" / "a7ffcore36_replay_objective_reset_contract" / "a7ffcore36_manifest.json"
+A7FFCORE36E = REPO / "runtime" / "a7ffcore36e_replay_objective_reset_execution" / "a7ffcore36e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -274,12 +275,33 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore34er = read_json(A7FFCORE34ER)
     a7ffcore35 = read_json(A7FFCORE35)
     a7ffcore36 = read_json(A7FFCORE36)
+    a7ffcore36e = read_json(A7FFCORE36E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore36.get("decision") == "PASS_A7FFCORE36_REPLAY_OBJECTIVE_RESET_CONTRACT_READY_FOR_CORE36E":
+    if a7ffcore36e.get("decision") == "PASS_A7FFCORE36E_REPLAY_OBJECTIVE_SURVIVORS_READY_FOR_CORE37_CONTRACT":
+        allowed["A7FF-CORE37 bounded replay-objective repair contract"] = (
+            "contract only; CORE36E found executable objective survivors, but no search or proof is authorized"
+        )
+        blocked["A7FF large search"] = "blocked until CORE37 and any subsequent bounded execution prove robust replay survivors"
+        blocked["A7FF formula generation/search"] = "blocked: CORE36E authorizes contract drafting only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE36E"
+        status = "replay_objective_survivors_ready_for_core37_contract"
+        next_task = "A7FF-CORE37 bounded replay-objective repair contract"
+    elif a7ffcore36e.get("decision") == "HOLD_A7FFCORE36E_REPLAY_OBJECTIVE_RESET_NO_EXECUTABLE_SURVIVORS":
+        allowed["A7FF-CORE36ER replay-objective reset forensic"] = (
+            "forensic only; diagnose why executable-spread-first reset still produced no selectable survivors"
+        )
+        blocked["A7FF large search"] = "blocked: CORE36E replay-objective reset found no executable survivors"
+        blocked["A7FF formula generation/search"] = "blocked: replay-objective reset failed before search"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE36E"
+        status = "replay_objective_reset_no_executable_survivors"
+        next_task = "A7FF-CORE36ER replay-objective reset forensic"
+    elif a7ffcore36.get("decision") == "PASS_A7FFCORE36_REPLAY_OBJECTIVE_RESET_CONTRACT_READY_FOR_CORE36E":
         allowed["A7FF-CORE36E replay-objective reset execution"] = (
             "bounded re-score only; no new formula generation/search"
         )

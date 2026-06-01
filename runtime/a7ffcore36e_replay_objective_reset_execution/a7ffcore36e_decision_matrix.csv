@@ -1,0 +1,5 @@
+gate,value,pass,required_for_pass
+selected_count_ge_4,0,False,True
+selected_family_count_ge_2,0,False,True
+strict_survivor_count,0,False,False
+strict_survivor_family_count,0,False,False

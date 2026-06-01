@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core36er_forensic": true,
+  "authorizes_core37_contract": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 21,
+  "decision": "HOLD_A7FFCORE36E_REPLAY_OBJECTIVE_RESET_NO_EXECUTABLE_SURVIVORS",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T19:39:51Z",
+  "next_allowed": "A7FF-CORE36ER replay-objective reset forensic",
+  "primary_replay_rows": 336,
+  "selected_count": 0,
+  "selected_family_count": 0,
+  "source_decision": "PASS_A7FFCORE36_REPLAY_OBJECTIVE_RESET_CONTRACT_READY_FOR_CORE36E",
+  "source_stage": "A7FF-CORE36",
+  "stage": "A7FF-CORE36E",
+  "strict_survivor_count": 0,
+  "strict_survivor_family_count": 0,
+  "uses_existing_core33e_replay_results": true
+}
