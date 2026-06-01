@@ -1,0 +1,4 @@
+action_id,action,reason
+R0_no_large_search,do not proceed to CORE20/search-readiness,"bounded replay clean supply is 2 candidates across 2 lanes, below the 12/3 gate"
+R1_contract_replay_repair,write CORE19S bounded replay repair contract,"the failure has moved from seed supply to replay translation; repair should target replay label/cost/lag translation, not formula generation"
+R2_preserve_clean_clues,freeze the 2 replay-clean candidates as diagnostic replay clues only,they are not enough for search readiness or alpha proof

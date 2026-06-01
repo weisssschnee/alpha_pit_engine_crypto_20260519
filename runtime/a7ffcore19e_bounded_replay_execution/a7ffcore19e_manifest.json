@@ -1,0 +1,30 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core20_contract": false,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "replay_clean_candidate_count_lt_12",
+    "replay_clean_seed_lane_count_lt_3"
+  ],
+  "candidate_count": 96,
+  "clean_rule": "validation/test/recent all positive at 5bps, control_ratio < 1.0, one_bar_lag positive",
+  "decision": "HOLD_A7FFCORE19E_BOUNDED_REPLAY_INSUFFICIENT",
+  "eval_error_count": 0,
+  "executes_replay": true,
+  "executes_search": false,
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-06-01T14:57:52Z",
+  "next_allowed": "A7FF-CORE19R bounded replay forensic",
+  "replay_clean_candidate_count": 2,
+  "replay_clean_non_l5_share": 0.5,
+  "replay_clean_seed_lane_count": 2,
+  "replay_rows": 1536,
+  "source_decision": "PASS_A7FFCORE19_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE19E",
+  "source_stage": "A7FF-CORE19",
+  "stage": "A7FF-CORE19E",
+  "symbols_loaded": 96,
+  "timestamps": 3481
+}

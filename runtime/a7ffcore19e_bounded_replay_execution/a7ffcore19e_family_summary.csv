@@ -1,0 +1,5 @@
+seed_lane,second_pass_family,candidate_count,replay_clean_candidate_count,label_family_count,median_control_ratio
+S3_cross_family_bridge,H3_cross_family_bridge,20,1,4,0.7182607889179484
+S2_taker_flow_liquidity_oi,H2_I4_near_miss_repair,12,1,4,1.7213478323454672
+S1_liquidity_basis_positioning,H1_I5_deconcentration,33,0,3,0.718863599896951
+S0_positioning_price_basis,H0_I3_deconcentration,31,0,3,0.5572324529857349

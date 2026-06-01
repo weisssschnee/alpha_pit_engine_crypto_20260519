@@ -1,0 +1,5 @@
+repair_lane,action,allowed,forbidden
+L0_cost_tier_attribution,re-evaluate clean supply at 2bps/5bps/10bps/20bps without changing candidate orientation,True,using cost tier to claim alpha proof
+L1_lag_attribution,"separate same-bar, one-bar-lag, and stale-lag failure counts",True,promoting same-bar-only candidates
+L2_label_translation,audit L0/L1/L3/L5 and horizon-24 translation by lane,True,L5-only pass as search-ready evidence
+L3_lane_specific_replay_packet,construct a diagnostic repair packet preserving S2/S3 clean clues and testing S0/S1 failure reasons,True,adding new formula generation or changing the locked packet source

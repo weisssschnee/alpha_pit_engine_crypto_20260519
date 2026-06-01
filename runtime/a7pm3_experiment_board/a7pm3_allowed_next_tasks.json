@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE19E bounded replay execution on locked packet": "execute bounded replay on locked 96-row packet only; no formula generation, search expansion, alpha proof, or live",
+  "A7FF-CORE21E replay translation matrix audit": "audit label/cost/lag/lane translation using existing replay rows; no formula generation or search",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

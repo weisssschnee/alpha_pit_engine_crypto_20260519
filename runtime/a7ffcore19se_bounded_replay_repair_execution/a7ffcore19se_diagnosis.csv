@@ -1,0 +1,4 @@
+diagnosis,evidence,value
+cost_dominant_failure,2bps clean count improves over 5bps but remains below replay-clean breadth gate,4
+lane_breadth_insufficient,best-cost clean lane count remains below 3,2
+clean_clues_diagnostic_only,clean rows exist but are too few for search-readiness,4

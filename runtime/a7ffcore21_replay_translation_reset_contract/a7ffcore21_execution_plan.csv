@@ -1,0 +1,3 @@
+stage,action,input,authorized
+A7FF-CORE21E,label/cost/lag/lane translation matrix audit,CORE19E replay rows + CORE17E locked packet,True
+A7FF-CORE22,bounded replay objective repair contract,CORE21E pass only,False

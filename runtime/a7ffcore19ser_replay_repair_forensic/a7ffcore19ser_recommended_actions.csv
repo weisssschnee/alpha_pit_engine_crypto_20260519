@@ -1,0 +1,4 @@
+action_id,action,reason
+R0_freeze_core19_path,freeze CORE19 locked-packet replay path as engineering pass / signal hold,bounded replay and repair both fail breadth gates
+R1_no_large_search,do not authorize large search or formula expansion from this packet,replay-clean supply is too narrow and lane-limited
+R2_next_reset_contract,write CORE21 objective/label replay translation reset contract,"failure is replay translation/cost-lane breadth, not materialization or governance"

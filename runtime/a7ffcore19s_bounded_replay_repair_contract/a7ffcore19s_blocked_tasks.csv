@@ -1,0 +1,5 @@
+blocked_task,reason
+CORE20,blocked until CORE19SE repair execution passes
+formula generation/search,blocked: CORE19S authorizes replay repair only
+large search,blocked until replay-clean supply and selector readiness pass
+alpha proof / shadow / paper / live,not authorized

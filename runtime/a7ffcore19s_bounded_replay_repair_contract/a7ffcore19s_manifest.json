@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core19se": true,
+  "authorizes_core20": false,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE19S_BOUNDED_REPLAY_REPAIR_CONTRACT_READY_FOR_CORE19SE",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T15:01:49Z",
+  "next_allowed": "A7FF-CORE19SE bounded replay repair execution",
+  "source_decision": "PASS_A7FFCORE19R_BOUNDED_REPLAY_FORENSIC_COMPLETE_READY_FOR_CORE19S",
+  "source_replay_clean_candidate_count": 2,
+  "source_replay_clean_seed_lane_count": 2,
+  "source_stage": "A7FF-CORE19R",
+  "stage": "A7FF-CORE19S"
+}

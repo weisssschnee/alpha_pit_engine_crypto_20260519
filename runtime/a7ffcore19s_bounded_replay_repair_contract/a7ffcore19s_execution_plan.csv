@@ -1,0 +1,3 @@
+stage,action,input,output,authorized
+A7FF-CORE19SE,bounded replay repair execution,CORE19E replay rows + CORE17E locked packet,cost/lag/label/lane attribution and repaired replay decision,True
+A7FF-CORE20,replay-clean consolidation / search-readiness contract,CORE19SE pass only,contract only,False

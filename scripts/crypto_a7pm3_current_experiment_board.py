@@ -87,6 +87,12 @@ A7FFCORE17E = REPO / "runtime" / "a7ffcore17e_objective_seed_packet_construction
 A7FFCORE18 = REPO / "runtime" / "a7ffcore18_bounded_replay_preflight_contract" / "a7ffcore18_manifest.json"
 A7FFCORE18E = REPO / "runtime" / "a7ffcore18e_bounded_replay_preflight" / "a7ffcore18e_manifest.json"
 A7FFCORE19 = REPO / "runtime" / "a7ffcore19_bounded_replay_contract" / "a7ffcore19_manifest.json"
+A7FFCORE19E = REPO / "runtime" / "a7ffcore19e_bounded_replay_execution" / "a7ffcore19e_manifest.json"
+A7FFCORE19R = REPO / "runtime" / "a7ffcore19r_bounded_replay_forensic" / "a7ffcore19r_manifest.json"
+A7FFCORE19S = REPO / "runtime" / "a7ffcore19s_bounded_replay_repair_contract" / "a7ffcore19s_manifest.json"
+A7FFCORE19SE = REPO / "runtime" / "a7ffcore19se_bounded_replay_repair_execution" / "a7ffcore19se_manifest.json"
+A7FFCORE19SER = REPO / "runtime" / "a7ffcore19ser_replay_repair_forensic" / "a7ffcore19ser_manifest.json"
+A7FFCORE21 = REPO / "runtime" / "a7ffcore21_replay_translation_reset_contract" / "a7ffcore21_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -182,12 +188,74 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore18 = read_json(A7FFCORE18)
     a7ffcore18e = read_json(A7FFCORE18E)
     a7ffcore19 = read_json(A7FFCORE19)
+    a7ffcore19e = read_json(A7FFCORE19E)
+    a7ffcore19r = read_json(A7FFCORE19R)
+    a7ffcore19s = read_json(A7FFCORE19S)
+    a7ffcore19se = read_json(A7FFCORE19SE)
+    a7ffcore19ser = read_json(A7FFCORE19SER)
+    a7ffcore21 = read_json(A7FFCORE21)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore19.get("decision") == "PASS_A7FFCORE19_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE19E":
+    if a7ffcore21.get("decision") == "PASS_A7FFCORE21_REPLAY_TRANSLATION_RESET_CONTRACT_READY_FOR_CORE21E":
+        allowed["A7FF-CORE21E replay translation matrix audit"] = (
+            "audit label/cost/lag/lane translation using existing replay rows; no formula generation or search"
+        )
+        blocked["A7FF large search"] = "blocked until translation reset produces robust multi-lane replay-clean evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE21 authorizes translation audit only"
+        blocked["CORE20"] = "blocked/superseded: CORE19 bounded replay repair did not pass"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE21"
+        status = "replay_translation_reset_contract_ready_for_core21e"
+        next_task = "A7FF-CORE21E replay translation matrix audit"
+    elif a7ffcore19ser.get("decision") == "PASS_A7FFCORE19SER_REPLAY_REPAIR_FORENSIC_COMPLETE_READY_FOR_CORE21":
+        allowed["A7FF-CORE21 replay translation reset contract"] = (
+            "contract only; reset label/cost/lag/lane replay translation after CORE19SE hold"
+        )
+        blocked["A7FF large search"] = "blocked: replay-clean supply too narrow after repair"
+        blocked["A7FF formula generation/search"] = "blocked until replay translation reset produces evidence"
+        current_stage = "A7FF-CORE19SER"
+        status = "replay_repair_forensic_ready_for_core21"
+        next_task = "A7FF-CORE21 replay translation reset contract"
+    elif a7ffcore19se.get("decision") == "HOLD_A7FFCORE19SE_REPLAY_REPAIR_INSUFFICIENT":
+        allowed["A7FF-CORE19SER replay repair forensic"] = (
+            "forensic only; freeze failed bounded replay repair"
+        )
+        blocked["A7FF large search"] = "blocked: replay repair insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until replay repair forensic and reset"
+        current_stage = "A7FF-CORE19SE"
+        status = "bounded_replay_repair_insufficient"
+        next_task = "A7FF-CORE19SER replay repair forensic"
+    elif a7ffcore19s.get("decision") == "PASS_A7FFCORE19S_BOUNDED_REPLAY_REPAIR_CONTRACT_READY_FOR_CORE19SE":
+        allowed["A7FF-CORE19SE bounded replay repair execution"] = (
+            "execute cost/lag/label/lane repair attribution using existing CORE19E replay rows"
+        )
+        blocked["A7FF large search"] = "blocked until replay repair passes"
+        blocked["A7FF formula generation/search"] = "blocked: CORE19S authorizes replay repair only"
+        current_stage = "A7FF-CORE19S"
+        status = "bounded_replay_repair_contract_ready_for_core19se"
+        next_task = "A7FF-CORE19SE bounded replay repair execution"
+    elif a7ffcore19r.get("decision") == "PASS_A7FFCORE19R_BOUNDED_REPLAY_FORENSIC_COMPLETE_READY_FOR_CORE19S":
+        allowed["A7FF-CORE19S bounded replay repair contract"] = (
+            "contract only; define cost/lag/label/lane repair after CORE19E hold"
+        )
+        blocked["A7FF large search"] = "blocked: bounded replay clean supply insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until replay repair produces evidence"
+        current_stage = "A7FF-CORE19R"
+        status = "bounded_replay_forensic_ready_for_core19s"
+        next_task = "A7FF-CORE19S bounded replay repair contract"
+    elif a7ffcore19e.get("decision") == "HOLD_A7FFCORE19E_BOUNDED_REPLAY_INSUFFICIENT":
+        allowed["A7FF-CORE19R bounded replay forensic"] = (
+            "forensic only; freeze CORE19E bounded replay hold"
+        )
+        blocked["A7FF large search"] = "blocked: bounded replay clean supply insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay forensic/repair"
+        current_stage = "A7FF-CORE19E"
+        status = "bounded_replay_insufficient"
+        next_task = "A7FF-CORE19R bounded replay forensic"
+    elif a7ffcore19.get("decision") == "PASS_A7FFCORE19_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE19E":
         allowed["A7FF-CORE19E bounded replay execution on locked packet"] = (
             "execute bounded replay on locked 96-row packet only; no formula generation, search expansion, alpha proof, or live"
         )

@@ -1,0 +1,5 @@
+blocked_task,reason
+CORE20,superseded by CORE19SER hold; replay-clean supply insufficient
+large search,blocked until replay translation reset produces robust multi-lane clean evidence
+formula generation/search,blocked: CORE21 is translation reset only
+alpha proof / shadow / paper / live,not authorized

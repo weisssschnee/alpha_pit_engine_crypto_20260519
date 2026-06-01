@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T14:49:25Z
+Generated: 2026-06-01T15:09:39Z
 
 ## Decision
 
@@ -11,20 +11,42 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
+## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
+ M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=a2bb2170b87e1b4841e1857390732b0e77dccc1d
-origin/main=5be2e451686339d87570a3f0706cff842c581b43
-HEAD == origin/main: False
+ M scripts/crypto_a7pm3_current_experiment_board.py
+?? reports/CRYPTO_A7FFCORE19E_BOUNDED_REPLAY_EXECUTION_20260601.md
+?? reports/CRYPTO_A7FFCORE19R_BOUNDED_REPLAY_FORENSIC_20260601.md
+?? reports/CRYPTO_A7FFCORE19SER_REPLAY_REPAIR_FORENSIC_20260601.md
+?? reports/CRYPTO_A7FFCORE19SE_BOUNDED_REPLAY_REPAIR_EXECUTION_20260601.md
+?? reports/CRYPTO_A7FFCORE19S_BOUNDED_REPLAY_REPAIR_CONTRACT_20260601.md
+?? reports/CRYPTO_A7FFCORE21_REPLAY_TRANSLATION_RESET_CONTRACT_20260601.md
+?? runtime/a7ffcore19e_bounded_replay_execution/
+?? runtime/a7ffcore19r_bounded_replay_forensic/
+?? runtime/a7ffcore19s_bounded_replay_repair_contract/
+?? runtime/a7ffcore19se_bounded_replay_repair_execution/
+?? runtime/a7ffcore19ser_replay_repair_forensic/
+?? runtime/a7ffcore21_replay_translation_reset_contract/
+?? scripts/crypto_a7ffcore19e_bounded_replay_execution.py
+?? scripts/crypto_a7ffcore19r_bounded_replay_forensic.py
+?? scripts/crypto_a7ffcore19s_bounded_replay_repair_contract.py
+?? scripts/crypto_a7ffcore19se_bounded_replay_repair_execution.py
+?? scripts/crypto_a7ffcore19ser_replay_repair_forensic.py
+?? scripts/crypto_a7ffcore21_replay_translation_reset_contract.py
+HEAD=3b74176f526d69dcdd5f54c57095db99e613345c
+origin/main=3b74176f526d69dcdd5f54c57095db99e613345c
+HEAD == origin/main: True
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3368,
+  "artifact_count": 3404,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +60,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T14:49:25Z",
-  "head": "a2bb2170b87e1b4841e1857390732b0e77dccc1d",
-  "head_equals_origin_main": false,
-  "origin_main": "5be2e451686339d87570a3f0706cff842c581b43",
+  "generated_at": "2026-06-01T15:09:39Z",
+  "head": "3b74176f526d69dcdd5f54c57095db99e613345c",
+  "head_equals_origin_main": true,
+  "origin_main": "3b74176f526d69dcdd5f54c57095db99e613345c",
   "stage": "A7PM-0",
-  "stage_count": 332
+  "stage_count": 338
 }
 ```
 
@@ -56,15 +78,15 @@ HEAD == origin/main: False
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      60 |
+| hold                         | hold                       |      62 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |      78 |
-| valid_or_historical_record   | diagnostic                 |      13 |
+| valid_or_historical_record   | contract                   |      80 |
+| valid_or_historical_record   | diagnostic                 |      15 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 

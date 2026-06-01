@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core19s": true,
+  "authorizes_core20": false,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE19R_BOUNDED_REPLAY_FORENSIC_COMPLETE_READY_FOR_CORE19S",
+  "dominant_failure": "bounded_replay_translation_supply_insufficient",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T15:00:10Z",
+  "next_allowed": "A7FF-CORE19S bounded replay repair contract",
+  "replay_clean_candidate_count": 2,
+  "replay_clean_seed_lane_count": 2,
+  "source_decision": "HOLD_A7FFCORE19E_BOUNDED_REPLAY_INSUFFICIENT",
+  "source_stage": "A7FF-CORE19E",
+  "stage": "A7FF-CORE19R"
+}

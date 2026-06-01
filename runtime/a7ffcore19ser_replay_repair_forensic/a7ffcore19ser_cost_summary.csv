@@ -1,0 +1,5 @@
+cost_bps,clean_candidate_count,clean_seed_lane_count,clean_non_l5_share
+2,4,2,0.75
+5,2,2,0.5
+10,1,1,0.0
+20,1,1,0.0

@@ -1,0 +1,3 @@
+seed_lane,label_family,rows,median_control_ratio,median_cost_adjusted_spread
+S2_taker_flow_liquidity_oi,L5_vol_adjusted_return,1,0.947619754963101,0.0660383728272127
+S3_cross_family_bridge,L3_liquidity_tier_relative_return,1,0.7057943697854729,0.0004943568613195
