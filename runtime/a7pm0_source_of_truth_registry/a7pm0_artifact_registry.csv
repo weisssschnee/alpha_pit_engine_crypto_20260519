@@ -2726,32 +2726,32 @@ runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_input_
 runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_manifest.json,a2bb217,advance crypto core16me to core19 contract,685
 runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_pass_gate_matrix.csv,a2bb217,advance crypto core16me to core19 contract,532
 runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_replay_scope.csv,a2bb217,advance crypto core16me to core19 contract,618
-runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_candidate_summary.csv,,,34549
-runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_eval_errors.csv,,,2
-runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_family_summary.csv,,,420
-runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_manifest.json,,,1093
-runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_replay_clean_candidates.csv,,,974
-runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_replay_rows.csv,,,848030
-runtime,A7FF-CORE19R,runtime/a7ffcore19r_bounded_replay_forensic/a7ffcore19r_candidate_failure_map.csv,,,26822
-runtime,A7FF-CORE19R,runtime/a7ffcore19r_bounded_replay_forensic/a7ffcore19r_clean_clue_summary.csv,,,266
-runtime,A7FF-CORE19R,runtime/a7ffcore19r_bounded_replay_forensic/a7ffcore19r_failure_summary.csv,,,696
-runtime,A7FF-CORE19R,runtime/a7ffcore19r_bounded_replay_forensic/a7ffcore19r_manifest.json,,,789
-runtime,A7FF-CORE19R,runtime/a7ffcore19r_bounded_replay_forensic/a7ffcore19r_recommended_actions.csv,,,534
-runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_blocked_tasks.csv,,,278
-runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_execution_plan.csv,,,302
-runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_manifest.json,,,755
-runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_repair_policy.csv,,,640
-runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_source_clean_clue_summary.csv,,,266
-runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_source_failure_summary.csv,,,696
-runtime,A7FF-CORE19SE,runtime/a7ffcore19se_bounded_replay_repair_execution/a7ffcore19se_2bps_clean_diagnostic_clues.csv,,,1691
-runtime,A7FF-CORE19SE,runtime/a7ffcore19se_bounded_replay_repair_execution/a7ffcore19se_cost_tier_clean_summary.csv,,,120
-runtime,A7FF-CORE19SE,runtime/a7ffcore19se_bounded_replay_repair_execution/a7ffcore19se_diagnosis.csv,,,288
-runtime,A7FF-CORE19SE,runtime/a7ffcore19se_bounded_replay_repair_execution/a7ffcore19se_lane_cost_summary.csv,,,1597
-runtime,A7FF-CORE19SE,runtime/a7ffcore19se_bounded_replay_repair_execution/a7ffcore19se_manifest.json,,,753
-runtime,A7FF-CORE19SER,runtime/a7ffcore19ser_replay_repair_forensic/a7ffcore19ser_cost_summary.csv,,,120
-runtime,A7FF-CORE19SER,runtime/a7ffcore19ser_replay_repair_forensic/a7ffcore19ser_diagnosis.csv,,,288
-runtime,A7FF-CORE19SER,runtime/a7ffcore19ser_replay_repair_forensic/a7ffcore19ser_manifest.json,,,816
-runtime,A7FF-CORE19SER,runtime/a7ffcore19ser_replay_repair_forensic/a7ffcore19ser_recommended_actions.csv,,,483
+runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_candidate_summary.csv,4d5f416,add crypto core19 bounded replay forensic,34549
+runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_eval_errors.csv,4d5f416,add crypto core19 bounded replay forensic,2
+runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_family_summary.csv,4d5f416,add crypto core19 bounded replay forensic,420
+runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_manifest.json,4d5f416,add crypto core19 bounded replay forensic,1093
+runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_replay_clean_candidates.csv,4d5f416,add crypto core19 bounded replay forensic,974
+runtime,A7FF-CORE19E,runtime/a7ffcore19e_bounded_replay_execution/a7ffcore19e_replay_rows.csv,4d5f416,add crypto core19 bounded replay forensic,848030
+runtime,A7FF-CORE19R,runtime/a7ffcore19r_bounded_replay_forensic/a7ffcore19r_candidate_failure_map.csv,4d5f416,add crypto core19 bounded replay forensic,26822
+runtime,A7FF-CORE19R,runtime/a7ffcore19r_bounded_replay_forensic/a7ffcore19r_clean_clue_summary.csv,4d5f416,add crypto core19 bounded replay forensic,266
+runtime,A7FF-CORE19R,runtime/a7ffcore19r_bounded_replay_forensic/a7ffcore19r_failure_summary.csv,4d5f416,add crypto core19 bounded replay forensic,696
+runtime,A7FF-CORE19R,runtime/a7ffcore19r_bounded_replay_forensic/a7ffcore19r_manifest.json,4d5f416,add crypto core19 bounded replay forensic,789
+runtime,A7FF-CORE19R,runtime/a7ffcore19r_bounded_replay_forensic/a7ffcore19r_recommended_actions.csv,4d5f416,add crypto core19 bounded replay forensic,534
+runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_blocked_tasks.csv,4d5f416,add crypto core19 bounded replay forensic,278
+runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_execution_plan.csv,4d5f416,add crypto core19 bounded replay forensic,302
+runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_manifest.json,4d5f416,add crypto core19 bounded replay forensic,755
+runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_repair_policy.csv,4d5f416,add crypto core19 bounded replay forensic,640
+runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_source_clean_clue_summary.csv,4d5f416,add crypto core19 bounded replay forensic,266
+runtime,A7FF-CORE19S,runtime/a7ffcore19s_bounded_replay_repair_contract/a7ffcore19s_source_failure_summary.csv,4d5f416,add crypto core19 bounded replay forensic,696
+runtime,A7FF-CORE19SE,runtime/a7ffcore19se_bounded_replay_repair_execution/a7ffcore19se_2bps_clean_diagnostic_clues.csv,4d5f416,add crypto core19 bounded replay forensic,1691
+runtime,A7FF-CORE19SE,runtime/a7ffcore19se_bounded_replay_repair_execution/a7ffcore19se_cost_tier_clean_summary.csv,4d5f416,add crypto core19 bounded replay forensic,120
+runtime,A7FF-CORE19SE,runtime/a7ffcore19se_bounded_replay_repair_execution/a7ffcore19se_diagnosis.csv,4d5f416,add crypto core19 bounded replay forensic,288
+runtime,A7FF-CORE19SE,runtime/a7ffcore19se_bounded_replay_repair_execution/a7ffcore19se_lane_cost_summary.csv,4d5f416,add crypto core19 bounded replay forensic,1597
+runtime,A7FF-CORE19SE,runtime/a7ffcore19se_bounded_replay_repair_execution/a7ffcore19se_manifest.json,4d5f416,add crypto core19 bounded replay forensic,753
+runtime,A7FF-CORE19SER,runtime/a7ffcore19ser_replay_repair_forensic/a7ffcore19ser_cost_summary.csv,4d5f416,add crypto core19 bounded replay forensic,120
+runtime,A7FF-CORE19SER,runtime/a7ffcore19ser_replay_repair_forensic/a7ffcore19ser_diagnosis.csv,4d5f416,add crypto core19 bounded replay forensic,288
+runtime,A7FF-CORE19SER,runtime/a7ffcore19ser_replay_repair_forensic/a7ffcore19ser_manifest.json,4d5f416,add crypto core19 bounded replay forensic,816
+runtime,A7FF-CORE19SER,runtime/a7ffcore19ser_replay_repair_forensic/a7ffcore19ser_recommended_actions.csv,4d5f416,add crypto core19 bounded replay forensic,483
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_blueprint_subgraph_map.csv,510fb01,add crypto a7ffcore2 subgraph registry,2501481
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_factor_candidate_roots.csv,510fb01,add crypto a7ffcore2 subgraph registry,4627017
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_family_subgraph_summary.csv,510fb01,add crypto a7ffcore2 subgraph registry,4501
@@ -2764,10 +2764,10 @@ runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_reusabl
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_subgraph_edge_list.csv,510fb01,add crypto a7ffcore2 subgraph registry,7628150
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_subgraph_registry.csv,510fb01,add crypto a7ffcore2 subgraph registry,5933220
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_subgraph_summary.csv,510fb01,add crypto a7ffcore2 subgraph registry,386
-runtime,A7FF-CORE21,runtime/a7ffcore21_replay_translation_reset_contract/a7ffcore21_blocked_tasks.csv,,,308
-runtime,A7FF-CORE21,runtime/a7ffcore21_replay_translation_reset_contract/a7ffcore21_execution_plan.csv,,,217
-runtime,A7FF-CORE21,runtime/a7ffcore21_replay_translation_reset_contract/a7ffcore21_manifest.json,,,751
-runtime,A7FF-CORE21,runtime/a7ffcore21_replay_translation_reset_contract/a7ffcore21_reset_policy.csv,,,726
+runtime,A7FF-CORE21,runtime/a7ffcore21_replay_translation_reset_contract/a7ffcore21_blocked_tasks.csv,4d5f416,add crypto core19 bounded replay forensic,308
+runtime,A7FF-CORE21,runtime/a7ffcore21_replay_translation_reset_contract/a7ffcore21_execution_plan.csv,4d5f416,add crypto core19 bounded replay forensic,217
+runtime,A7FF-CORE21,runtime/a7ffcore21_replay_translation_reset_contract/a7ffcore21_manifest.json,4d5f416,add crypto core19 bounded replay forensic,751
+runtime,A7FF-CORE21,runtime/a7ffcore21_replay_translation_reset_contract/a7ffcore21_reset_policy.csv,4d5f416,add crypto core19 bounded replay forensic,726
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_allowed_subgraph_registry.csv,02de3f1,add crypto a7ffcore3 formulagen gate,841265
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_bypass_summary.csv,02de3f1,add crypto a7ffcore3 formulagen gate,100
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_diagnostic_root_registry.csv,02de3f1,add crypto a7ffcore3 formulagen gate,2249503
@@ -3161,13 +3161,13 @@ report,A7FFCORE17E-OBJECTIVE-SEED-PACKET-CONSTRUCTION,reports/CRYPTO_A7FFCORE17E
 report,A7FFCORE18-BOUNDED-REPLAY-PREFLIGHT-CONTRACT,reports/CRYPTO_A7FFCORE18_BOUNDED_REPLAY_PREFLIGHT_CONTRACT_20260601.md,a2bb217,advance crypto core16me to core19 contract,3766
 report,A7FFCORE18E-BOUNDED-REPLAY-PREFLIGHT,reports/CRYPTO_A7FFCORE18E_BOUNDED_REPLAY_PREFLIGHT_20260601.md,a2bb217,advance crypto core16me to core19 contract,3010
 report,A7FFCORE19-BOUNDED-REPLAY-CONTRACT,reports/CRYPTO_A7FFCORE19_BOUNDED_REPLAY_CONTRACT_20260601.md,a2bb217,advance crypto core16me to core19 contract,3583
-report,A7FFCORE19E-BOUNDED-REPLAY-EXECUTION,reports/CRYPTO_A7FFCORE19E_BOUNDED_REPLAY_EXECUTION_20260601.md,,,4448
-report,A7FFCORE19R-BOUNDED-REPLAY-FORENSIC,reports/CRYPTO_A7FFCORE19R_BOUNDED_REPLAY_FORENSIC_20260601.md,,,4359
-report,A7FFCORE19S-BOUNDED-REPLAY-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE19S_BOUNDED_REPLAY_REPAIR_CONTRACT_20260601.md,,,4672
-report,A7FFCORE19SE-BOUNDED-REPLAY-REPAIR-EXECUTION,reports/CRYPTO_A7FFCORE19SE_BOUNDED_REPLAY_REPAIR_EXECUTION_20260601.md,,,5357
-report,A7FFCORE19SER-REPLAY-REPAIR-FORENSIC,reports/CRYPTO_A7FFCORE19SER_REPLAY_REPAIR_FORENSIC_20260601.md,,,3351
+report,A7FFCORE19E-BOUNDED-REPLAY-EXECUTION,reports/CRYPTO_A7FFCORE19E_BOUNDED_REPLAY_EXECUTION_20260601.md,4d5f416,add crypto core19 bounded replay forensic,4448
+report,A7FFCORE19R-BOUNDED-REPLAY-FORENSIC,reports/CRYPTO_A7FFCORE19R_BOUNDED_REPLAY_FORENSIC_20260601.md,4d5f416,add crypto core19 bounded replay forensic,4359
+report,A7FFCORE19S-BOUNDED-REPLAY-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE19S_BOUNDED_REPLAY_REPAIR_CONTRACT_20260601.md,4d5f416,add crypto core19 bounded replay forensic,4672
+report,A7FFCORE19SE-BOUNDED-REPLAY-REPAIR-EXECUTION,reports/CRYPTO_A7FFCORE19SE_BOUNDED_REPLAY_REPAIR_EXECUTION_20260601.md,4d5f416,add crypto core19 bounded replay forensic,5357
+report,A7FFCORE19SER-REPLAY-REPAIR-FORENSIC,reports/CRYPTO_A7FFCORE19SER_REPLAY_REPAIR_FORENSIC_20260601.md,4d5f416,add crypto core19 bounded replay forensic,3351
 report,A7FFCORE2-FEATURE-SUBGRAPH-REGISTRY,reports/CRYPTO_A7FFCORE2_FEATURE_SUBGRAPH_REGISTRY_20260601.md,510fb01,add crypto a7ffcore2 subgraph registry,40668
-report,A7FFCORE21-REPLAY-TRANSLATION-RESET-CONTRACT,reports/CRYPTO_A7FFCORE21_REPLAY_TRANSLATION_RESET_CONTRACT_20260601.md,,,3784
+report,A7FFCORE21-REPLAY-TRANSLATION-RESET-CONTRACT,reports/CRYPTO_A7FFCORE21_REPLAY_TRANSLATION_RESET_CONTRACT_20260601.md,4d5f416,add crypto core19 bounded replay forensic,3784
 report,A7FFCORE3-FORMULAGEN-SUBGRAPH-GATE,reports/CRYPTO_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_20260601.md,02de3f1,add crypto a7ffcore3 formulagen gate,5243
 report,A7FFCORE4-GATE-IMPLEMENTATION-REGRESSION,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
 report,A7FFCORE5-GATE-NATIVE-GENERATION-DRYRUN,reports/CRYPTO_A7FFCORE5_GATE_NATIVE_GENERATION_DRYRUN_20260601.md,7011a15,add crypto a7ffcore5 gate native dryrun,4601
@@ -3197,13 +3197,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,3b74176,refresh crypto registry after core19 contract,525381
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,4d5f416,add crypto core19 bounded replay forensic,529417
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,9f44a1f,refresh crypto registry after a7ffcore14se,104425
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,3b74176,refresh crypto registry after core19 contract,197359
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,3b74176,refresh crypto registry after core19 contract,711
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,4d5f416,add crypto core19 bounded replay forensic,200472
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,4d5f416,add crypto core19 bounded replay forensic,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,3b74176,refresh crypto registry after core19 contract,106060
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,4d5f416,add crypto core19 bounded replay forensic,108021
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -3219,15 +3219,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,a2bb217,advance crypto core16me to core19 contract,378
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,a2bb217,advance crypto core16me to core19 contract,341
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,a2bb217,advance crypto core16me to core19 contract,1495
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,3b74176,refresh crypto registry after core19 contract,1306
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,3b74176,refresh crypto registry after core19 contract,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,3b74176,refresh crypto registry after core19 contract,5451
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,4d5f416,add crypto core19 bounded replay forensic,378
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,4d5f416,add crypto core19 bounded replay forensic,341
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,4d5f416,add crypto core19 bounded replay forensic,1495
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,4d5f416,add crypto core19 bounded replay forensic,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,4d5f416,add crypto core19 bounded replay forensic,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,4d5f416,add crypto core19 bounded replay forensic,6806
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,3b74176,refresh crypto registry after core19 contract,5392
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,4d5f416,add crypto core19 bounded replay forensic,5392
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

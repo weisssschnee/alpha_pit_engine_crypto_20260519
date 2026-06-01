@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T15:09:39Z
+Generated: 2026-06-01T15:11:43Z
 
 ## Decision
 
@@ -11,35 +11,13 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
+## main...origin/main [ahead 1]
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
- M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
- M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE19E_BOUNDED_REPLAY_EXECUTION_20260601.md
-?? reports/CRYPTO_A7FFCORE19R_BOUNDED_REPLAY_FORENSIC_20260601.md
-?? reports/CRYPTO_A7FFCORE19SER_REPLAY_REPAIR_FORENSIC_20260601.md
-?? reports/CRYPTO_A7FFCORE19SE_BOUNDED_REPLAY_REPAIR_EXECUTION_20260601.md
-?? reports/CRYPTO_A7FFCORE19S_BOUNDED_REPLAY_REPAIR_CONTRACT_20260601.md
-?? reports/CRYPTO_A7FFCORE21_REPLAY_TRANSLATION_RESET_CONTRACT_20260601.md
-?? runtime/a7ffcore19e_bounded_replay_execution/
-?? runtime/a7ffcore19r_bounded_replay_forensic/
-?? runtime/a7ffcore19s_bounded_replay_repair_contract/
-?? runtime/a7ffcore19se_bounded_replay_repair_execution/
-?? runtime/a7ffcore19ser_replay_repair_forensic/
-?? runtime/a7ffcore21_replay_translation_reset_contract/
-?? scripts/crypto_a7ffcore19e_bounded_replay_execution.py
-?? scripts/crypto_a7ffcore19r_bounded_replay_forensic.py
-?? scripts/crypto_a7ffcore19s_bounded_replay_repair_contract.py
-?? scripts/crypto_a7ffcore19se_bounded_replay_repair_execution.py
-?? scripts/crypto_a7ffcore19ser_replay_repair_forensic.py
-?? scripts/crypto_a7ffcore21_replay_translation_reset_contract.py
-HEAD=3b74176f526d69dcdd5f54c57095db99e613345c
+HEAD=4d5f4164011f21dbc462ad6c1e60fef1aa23d62b
 origin/main=3b74176f526d69dcdd5f54c57095db99e613345c
-HEAD == origin/main: True
+HEAD == origin/main: False
 ```
 
 ## Manifest
@@ -60,9 +38,9 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T15:09:39Z",
-  "head": "3b74176f526d69dcdd5f54c57095db99e613345c",
-  "head_equals_origin_main": true,
+  "generated_at": "2026-06-01T15:11:43Z",
+  "head": "4d5f4164011f21dbc462ad6c1e60fef1aa23d62b",
+  "head_equals_origin_main": false,
   "origin_main": "3b74176f526d69dcdd5f54c57095db99e613345c",
   "stage": "A7PM-0",
   "stage_count": 338
