@@ -1,0 +1,16 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core41e_execution": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE41_BOOK_CONTROL_REPAIR_CONTRACT_READY_FOR_CORE41E",
+  "dominant_failure": "book_objective_control_dominated",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T20:26:38Z",
+  "next_allowed": "A7FF-CORE41E book control repair execution",
+  "source_decision": "PASS_A7FFCORE40ER_BOOK_REPLAY_FORENSIC_READY_FOR_CORE41_CONTRACT",
+  "source_stage": "A7FF-CORE40ER",
+  "stage": "A7FF-CORE41"
+}

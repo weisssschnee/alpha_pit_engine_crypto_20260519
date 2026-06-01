@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE39E symbol-level book packet construction audit": "bounded packet construction audit only; no search or book replay execution",
+  "A7FF-CORE43E full-universe control-vector rebuild audit": "audit only; verify full-universe original/stale/sign/null score vectors can be rebuilt",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

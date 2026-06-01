@@ -1,0 +1,5 @@
+objective_id,replay_rows,positive_rows,control_clean_rows,median_net_book_return,median_control_ratio,diagnosis
+B1_cross_sectional_rank_book,168,88,46,0.004095403060317,1.5602491040874171,control_dominated
+B2_market_beta_residual_book,168,86,47,0.0031556076216511,1.58252376837232,control_dominated
+B3_vol_adjusted_rank_book,168,87,47,0.1400598459886387,1.3327593238547124,control_dominated
+B4_liquidity_cost_capped_book,168,95,50,0.0012116032876074,1.395175669906641,control_dominated

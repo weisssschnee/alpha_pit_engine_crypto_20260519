@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core40_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 21,
+  "decision": "PASS_A7FFCORE39E_SYMBOL_LEVEL_PACKET_SAMPLE_READY_FOR_CORE40_CONTRACT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T20:20:50Z",
+  "next_allowed": "A7FF-CORE40 bounded book-objective replay contract",
+  "packet_sample_committed_to_git": false,
+  "packet_sample_path": "G:/AlphaFactory_CryptoData/research_runtime/a7ffcore39e_symbol_level_book_packet_20260602/a7ffcore39e_symbol_level_packet_sample.parquet",
+  "packet_sample_rows": 623160,
+  "source_decision": "PASS_A7FFCORE39_SYMBOL_LEVEL_BOOK_PACKET_CONTRACT_READY_FOR_CORE39E",
+  "source_stage": "A7FF-CORE39",
+  "stage": "A7FF-CORE39E"
+}

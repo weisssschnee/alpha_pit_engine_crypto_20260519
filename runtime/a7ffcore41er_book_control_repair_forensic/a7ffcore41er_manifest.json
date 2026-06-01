@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core42_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 21,
+  "decision": "PASS_A7FFCORE41ER_BOOK_CONTROL_REPAIR_FORENSIC_READY_FOR_CORE42",
+  "dominant_failure": "single_family_weak_partial_survivor_after_control_repair",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T20:28:59Z",
+  "next_allowed": "A7FF-CORE42 book-control route arbitration / freeze contract",
+  "partial_survivor_count": 1,
+  "partial_survivor_family_count": 1,
+  "source_decision": "HOLD_A7FFCORE41E_BOOK_CONTROL_REPAIR_INSUFFICIENT",
+  "source_stage": "A7FF-CORE41E",
+  "stage": "A7FF-CORE41ER"
+}

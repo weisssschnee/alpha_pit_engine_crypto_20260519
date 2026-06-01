@@ -1,0 +1,6 @@
+policy_id,description,hard_requirement
+O0_full_universe_score_required,"orthogonalization must occur before top/bottom book selection, so full timestamp-symbol candidate scores are required",True
+O1_stale_score_residual,residualize candidate_score against stale_score by candidate/timestamp cross-section,True
+O2_sign_arbitrariness_filter,reject candidate/objective if original and sign-flip produce symmetric book results after residualization,True
+O3_shuffle_null_margin,book objective must beat row/time/symbol shuffle null variants with margin,True
+O4_no_search,no new formula generation or large search before control-orthogonal packet passes,True

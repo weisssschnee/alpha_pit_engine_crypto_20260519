@@ -1,0 +1,2 @@
+stage,input,action,executes_new_generation,executes_search,executes_alpha_proof
+A7FF-CORE40E,G:/AlphaFactory_CryptoData/research_runtime/a7ffcore39e_symbol_level_book_packet_20260602/a7ffcore39e_symbol_level_packet_sample.parquet,aggregate symbol-level weights and labels into bounded book-objective replay metrics,False,False,False

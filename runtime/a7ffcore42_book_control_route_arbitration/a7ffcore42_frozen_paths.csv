@@ -1,0 +1,5 @@
+path,status,reason
+CORE33-41 current candidate queue,FROZEN,no multi-family strict survivor
+F1b partial survivor expansion,BLOCKED,single weak survivor only
+large search / formula search,BLOCKED,book responses are control-dominated
+alpha proof / shadow / paper / live,BLOCKED,no proof object

@@ -1,0 +1,2 @@
+task,status,scope
+A7FF-CORE43 control orthogonalization / null-model contract,AUTHORIZED_CONTRACT_ONLY,"define control-orthogonal score residuals, stale dominance decomposition, and sign-arbitrariness rejection before generation"

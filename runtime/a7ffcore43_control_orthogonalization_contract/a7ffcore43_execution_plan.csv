@@ -1,0 +1,3 @@
+stage,action,executes_new_generation,executes_search
+A7FF-CORE43E,audit whether full-universe score/control vectors can be rebuilt from existing candidates and panels,False,False
+A7FF-CORE44,"if CORE43E passes, define full-universe orthogonal score packet construction",False,False

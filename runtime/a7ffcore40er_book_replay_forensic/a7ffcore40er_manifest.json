@@ -1,0 +1,18 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core41_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "book_survivor_count": 0,
+  "candidate_count": 21,
+  "decision": "PASS_A7FFCORE40ER_BOOK_REPLAY_FORENSIC_READY_FOR_CORE41_CONTRACT",
+  "dominant_failure": "book_objective_control_dominated",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T20:25:14Z",
+  "next_allowed": "A7FF-CORE41 book-objective control repair contract",
+  "source_decision": "HOLD_A7FFCORE40E_BOOK_OBJECTIVE_REPLAY_INSUFFICIENT",
+  "source_stage": "A7FF-CORE40E",
+  "stage": "A7FF-CORE40ER"
+}

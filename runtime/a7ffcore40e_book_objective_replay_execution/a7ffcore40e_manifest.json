@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core40er_forensic": true,
+  "authorizes_core41_arbitration": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "book_replay_rows": 672,
+  "decision": "HOLD_A7FFCORE40E_BOOK_OBJECTIVE_REPLAY_INSUFFICIENT",
+  "executes_replay": true,
+  "executes_search": false,
+  "generated_at": "2026-06-01T20:23:52Z",
+  "next_allowed": "A7FF-CORE40ER book-objective replay forensic",
+  "packet_rows": 623160,
+  "source_decision": "PASS_A7FFCORE40_BOOK_OBJECTIVE_REPLAY_CONTRACT_READY_FOR_CORE40E",
+  "source_stage": "A7FF-CORE40",
+  "stage": "A7FF-CORE40E",
+  "survivor_count": 0,
+  "survivor_family_count": 0
+}

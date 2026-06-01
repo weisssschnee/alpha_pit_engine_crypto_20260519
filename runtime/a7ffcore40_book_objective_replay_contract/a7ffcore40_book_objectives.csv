@@ -1,0 +1,5 @@
+book_objective,label_column,primary
+B1_cross_sectional_rank_book,cs_relative_return,True
+B2_market_beta_residual_book,market_beta_residual_return,True
+B3_vol_adjusted_rank_book,vol_adjusted_return,True
+B4_liquidity_cost_capped_book,cs_relative_return,True

@@ -1,0 +1,9 @@
+field,level,required
+candidate_score_original,full_universe,True
+candidate_score_stale,full_universe,True
+candidate_score_sign_flip,full_universe,True
+candidate_score_shuffle_time,full_universe,True
+candidate_score_shuffle_symbol,full_universe,True
+residual_score_stale_orthogonal,full_universe,True
+residual_score_null_orthogonal,full_universe,True
+book_weight_from_residual_score,selected_book,True

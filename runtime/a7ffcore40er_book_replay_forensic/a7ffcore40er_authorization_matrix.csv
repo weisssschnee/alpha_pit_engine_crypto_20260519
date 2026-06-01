@@ -1,0 +1,6 @@
+task,status,reason
+A7FF-CORE41 book-objective control repair contract,AUTHORIZED_CONTRACT_ONLY,book objectives show positive medians but are dominated by stale/sign-flip controls
+book objective survivor promotion,NOT_AUTHORIZED,survivor_count=0
+formula_search,NOT_AUTHORIZED,book response is control-dominated
+large_search,NOT_AUTHORIZED,book response is control-dominated
+alpha_proof / shadow / paper / live,NOT_AUTHORIZED,no proof object

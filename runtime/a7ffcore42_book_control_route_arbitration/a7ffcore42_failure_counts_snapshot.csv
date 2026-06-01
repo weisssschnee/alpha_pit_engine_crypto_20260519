@@ -1,0 +1,5 @@
+family_id,forensic_class,candidate_count
+F1a_aggtrades_flow_microstructure,train_control_dominated,7
+F1b_taker_flow_market_panel,train_control_dominated,5
+F1b_taker_flow_market_panel,partial_survivor,1
+F2a_basis_funding_independent,train_control_dominated,8

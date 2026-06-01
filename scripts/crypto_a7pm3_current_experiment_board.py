@@ -139,6 +139,15 @@ A7FFCORE37X = REPO / "runtime" / "a7ffcore37x_route_arbitration" / "a7ffcore37x_
 A7FFCORE38 = REPO / "runtime" / "a7ffcore38_portfolio_label_objective_contract" / "a7ffcore38_manifest.json"
 A7FFCORE38E = REPO / "runtime" / "a7ffcore38e_portfolio_label_objective_audit" / "a7ffcore38e_manifest.json"
 A7FFCORE39 = REPO / "runtime" / "a7ffcore39_symbol_level_book_packet_contract" / "a7ffcore39_manifest.json"
+A7FFCORE39E = REPO / "runtime" / "a7ffcore39e_symbol_level_book_packet_audit" / "a7ffcore39e_manifest.json"
+A7FFCORE40 = REPO / "runtime" / "a7ffcore40_book_objective_replay_contract" / "a7ffcore40_manifest.json"
+A7FFCORE40E = REPO / "runtime" / "a7ffcore40e_book_objective_replay_execution" / "a7ffcore40e_manifest.json"
+A7FFCORE40ER = REPO / "runtime" / "a7ffcore40er_book_replay_forensic" / "a7ffcore40er_manifest.json"
+A7FFCORE41 = REPO / "runtime" / "a7ffcore41_book_control_repair_contract" / "a7ffcore41_manifest.json"
+A7FFCORE41E = REPO / "runtime" / "a7ffcore41e_book_control_repair_execution" / "a7ffcore41e_manifest.json"
+A7FFCORE41ER = REPO / "runtime" / "a7ffcore41er_book_control_repair_forensic" / "a7ffcore41er_manifest.json"
+A7FFCORE42 = REPO / "runtime" / "a7ffcore42_book_control_route_arbitration" / "a7ffcore42_manifest.json"
+A7FFCORE43 = REPO / "runtime" / "a7ffcore43_control_orthogonalization_contract" / "a7ffcore43_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -286,12 +295,115 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore38 = read_json(A7FFCORE38)
     a7ffcore38e = read_json(A7FFCORE38E)
     a7ffcore39 = read_json(A7FFCORE39)
+    a7ffcore39e = read_json(A7FFCORE39E)
+    a7ffcore40 = read_json(A7FFCORE40)
+    a7ffcore40e = read_json(A7FFCORE40E)
+    a7ffcore40er = read_json(A7FFCORE40ER)
+    a7ffcore41 = read_json(A7FFCORE41)
+    a7ffcore41e = read_json(A7FFCORE41E)
+    a7ffcore41er = read_json(A7FFCORE41ER)
+    a7ffcore42 = read_json(A7FFCORE42)
+    a7ffcore43 = read_json(A7FFCORE43)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore39.get("decision") == "PASS_A7FFCORE39_SYMBOL_LEVEL_BOOK_PACKET_CONTRACT_READY_FOR_CORE39E":
+    if a7ffcore43.get("decision") == "PASS_A7FFCORE43_CONTROL_ORTHOGONALIZATION_CONTRACT_READY_FOR_CORE43E":
+        allowed["A7FF-CORE43E full-universe control-vector rebuild audit"] = (
+            "audit only; verify full-universe original/stale/sign/null score vectors can be rebuilt"
+        )
+        blocked["A7FF large search"] = "blocked: CORE43 authorizes control-vector rebuild audit only"
+        blocked["A7FF formula generation/search"] = "blocked until control-orthogonal vector packet exists and passes audit"
+        blocked["F1b survivor expansion"] = "not authorized: weak single-family evidence only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE43"
+        status = "control_orthogonalization_contract_ready_for_core43e"
+        next_task = "A7FF-CORE43E full-universe control-vector rebuild audit"
+    elif a7ffcore42.get("decision") == "PASS_A7FFCORE42_ROUTE_ARBITRATION_READY_FOR_CORE43_CONTROL_ORTHOGONALIZATION_CONTRACT":
+        allowed["A7FF-CORE43 control orthogonalization / null-model contract"] = (
+            "contract only; redesign controls before any generation/search"
+        )
+        blocked["A7FF large search"] = "blocked: CORE42 freezes current weak single-family survivor path"
+        blocked["A7FF formula generation/search"] = "blocked until CORE43 and any later control-orthogonal evidence pass"
+        blocked["F1b survivor expansion"] = "not authorized: CORE42 rejected weak partial survivor expansion"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE42"
+        status = "route_arbitration_ready_for_core43_control_contract"
+        next_task = "A7FF-CORE43 control orthogonalization / null-model contract"
+    elif a7ffcore41er.get("decision") == "PASS_A7FFCORE41ER_BOOK_CONTROL_REPAIR_FORENSIC_READY_FOR_CORE42":
+        allowed["A7FF-CORE42 book-control route arbitration / freeze contract"] = (
+            "contract only; freeze weak single-family survivor and decide next route"
+        )
+        blocked["A7FF large search"] = "blocked: CORE41ER found only one weak single-family partial survivor"
+        blocked["A7FF formula generation/search"] = "blocked: CORE42 arbitration required after weak survivor forensic"
+        blocked["F1b survivor expansion"] = "not authorized: weak single-family evidence only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE41ER"
+        status = "book_control_repair_forensic_ready_for_core42"
+        next_task = "A7FF-CORE42 book-control route arbitration / freeze contract"
+    elif a7ffcore41e.get("decision") == "HOLD_A7FFCORE41E_BOOK_CONTROL_REPAIR_INSUFFICIENT":
+        allowed["A7FF-CORE41ER book control repair forensic"] = (
+            "forensic only; classify weak partial survivors and remaining control failures"
+        )
+        blocked["A7FF large search"] = "blocked: CORE41E repair insufficient"
+        blocked["A7FF formula generation/search"] = "blocked: CORE41E repair insufficient"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE41E"
+        status = "book_control_repair_insufficient"
+        next_task = "A7FF-CORE41ER book control repair forensic"
+    elif a7ffcore41.get("decision") == "PASS_A7FFCORE41_BOOK_CONTROL_REPAIR_CONTRACT_READY_FOR_CORE41E":
+        allowed["A7FF-CORE41E book control repair execution"] = (
+            "repair execution only; train-only orientation/control repair over existing book variants"
+        )
+        blocked["A7FF large search"] = "blocked: CORE41 authorizes control repair only"
+        blocked["A7FF formula generation/search"] = "blocked: CORE41 authorizes control repair only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE41"
+        status = "book_control_repair_contract_ready_for_core41e"
+        next_task = "A7FF-CORE41E book control repair execution"
+    elif a7ffcore40er.get("decision") == "PASS_A7FFCORE40ER_BOOK_REPLAY_FORENSIC_READY_FOR_CORE41_CONTRACT":
+        allowed["A7FF-CORE41 book-objective control repair contract"] = (
+            "contract only; define repair for stale/sign-flip control dominance"
+        )
+        blocked["A7FF large search"] = "blocked: CORE40ER confirms book objective control dominance"
+        blocked["A7FF formula generation/search"] = "blocked: CORE41 contract required"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE40ER"
+        status = "book_replay_forensic_ready_for_core41"
+        next_task = "A7FF-CORE41 book-objective control repair contract"
+    elif a7ffcore40e.get("decision") == "HOLD_A7FFCORE40E_BOOK_OBJECTIVE_REPLAY_INSUFFICIENT":
+        allowed["A7FF-CORE40ER book-objective replay forensic"] = (
+            "forensic only; classify book objective replay failure"
+        )
+        blocked["A7FF large search"] = "blocked: CORE40E book replay insufficient"
+        blocked["A7FF formula generation/search"] = "blocked: CORE40E book replay insufficient"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE40E"
+        status = "book_objective_replay_insufficient"
+        next_task = "A7FF-CORE40ER book-objective replay forensic"
+    elif a7ffcore40.get("decision") == "PASS_A7FFCORE40_BOOK_OBJECTIVE_REPLAY_CONTRACT_READY_FOR_CORE40E":
+        allowed["A7FF-CORE40E bounded book-objective replay execution"] = (
+            "bounded book replay only over CORE39E symbol-level sample packet; no search"
+        )
+        blocked["A7FF large search"] = "blocked: CORE40 authorizes bounded book replay only"
+        blocked["A7FF formula generation/search"] = "blocked: CORE40 authorizes bounded book replay only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE40"
+        status = "book_objective_replay_contract_ready_for_core40e"
+        next_task = "A7FF-CORE40E bounded book-objective replay execution"
+    elif a7ffcore39e.get("decision") == "PASS_A7FFCORE39E_SYMBOL_LEVEL_PACKET_SAMPLE_READY_FOR_CORE40_CONTRACT":
+        allowed["A7FF-CORE40 bounded book-objective replay contract"] = (
+            "contract only; define bounded book-objective replay using CORE39E symbol-level packet sample"
+        )
+        blocked["A7FF large search"] = "blocked: CORE39E authorizes CORE40 contract only, not search"
+        blocked["A7FF formula generation/search"] = "blocked until CORE40 and any subsequent bounded book replay pass"
+        blocked["book objective replay execution"] = "not authorized until CORE40 contract exists"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE39E"
+        status = "symbol_level_packet_sample_ready_for_core40_contract"
+        next_task = "A7FF-CORE40 bounded book-objective replay contract"
+    elif a7ffcore39.get("decision") == "PASS_A7FFCORE39_SYMBOL_LEVEL_BOOK_PACKET_CONTRACT_READY_FOR_CORE39E":
         allowed["A7FF-CORE39E symbol-level book packet construction audit"] = (
             "bounded packet construction audit only; no search or book replay execution"
         )

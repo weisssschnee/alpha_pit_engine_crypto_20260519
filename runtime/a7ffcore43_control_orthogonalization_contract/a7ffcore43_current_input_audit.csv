@@ -1,0 +1,3 @@
+artifact,status,reason
+CORE39E selected book packet sample,INSUFFICIENT_FOR_ORTHOGONALIZATION,"contains selected top/bottom rows, not full-universe score vectors"
+CORE33 candidate queue,SUFFICIENT_AS_CANDIDATE_SOURCE,expressions and fields are available for rebuilding full-universe score vectors

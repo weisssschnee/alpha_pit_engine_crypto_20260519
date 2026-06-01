@@ -1,0 +1,12 @@
+{
+  "authorized": {
+    "A7FF-CORE43E full-universe control-vector rebuild audit": true
+  },
+  "not_authorized": {
+    "F1b_partial_survivor_expansion": true,
+    "alpha_proof": true,
+    "formula_search": true,
+    "large_search": true,
+    "shadow_paper_live": true
+  }
+}

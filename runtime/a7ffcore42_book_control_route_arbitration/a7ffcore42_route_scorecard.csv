@@ -1,0 +1,5 @@
+route,status,reason,authorizes_next
+R0_expand_F1b_partial_survivor,REJECT,only one weak partial survivor; OOS tail and control instability remain,False
+R1_large_search,REJECT,search would optimize toward control-dominated book responses,False
+R2_same_packet_rerun,REJECT,CORE40E/41E already consumed the current packet and controls,False
+R3_control_orthogonalization_contract,AUTHORIZE_CONTRACT_ONLY,next valid work is to redesign controls/orthogonalization before any search,True

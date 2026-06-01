@@ -1,0 +1,7 @@
+metric,value,pass
+packet_sample_rows,623160.0,True
+candidate_count_in_sample,21.0,True
+label_count_in_sample,4.0,True
+control_variant_count_in_sample,3.0,True
+required_field_count,24.0,True
+missing_label_rate,0.008998010141857629,True

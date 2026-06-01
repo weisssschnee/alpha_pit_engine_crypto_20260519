@@ -1,0 +1,15 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core43e_audit": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE43_CONTROL_ORTHOGONALIZATION_CONTRACT_READY_FOR_CORE43E",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T20:32:28Z",
+  "next_allowed": "A7FF-CORE43E full-universe control-vector rebuild audit",
+  "source_decision": "PASS_A7FFCORE42_ROUTE_ARBITRATION_READY_FOR_CORE43_CONTROL_ORTHOGONALIZATION_CONTRACT",
+  "source_stage": "A7FF-CORE42",
+  "stage": "A7FF-CORE43"
+}

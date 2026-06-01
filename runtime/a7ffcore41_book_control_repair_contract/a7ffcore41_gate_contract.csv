@@ -1,0 +1,7 @@
+gate,rule,hard_gate
+train_oriented_net_positive,train repaired original net > 0,True
+train_control_margin,"train repaired control_ratio < 0.8 preferred, <1.0 required",True
+oos_split_balance,>=2 OOS splits positive and control-clean,True
+orientation_arbitrary,reject if sign-flip is equally strong after train orientation,True
+stale_dominance,reject if stale control dominates original in train or OOS,True
+family_breadth,>=2 families and >=4 candidates before expansion,True

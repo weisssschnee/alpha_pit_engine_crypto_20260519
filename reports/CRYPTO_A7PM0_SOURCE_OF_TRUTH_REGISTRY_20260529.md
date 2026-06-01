@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T19:55:27Z
+Generated: 2026-06-01T20:33:11Z
 
 ## Decision
 
@@ -11,7 +11,7 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
+## main...origin/main [ahead 1]
  M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
@@ -25,20 +25,44 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE39_SYMBOL_LEVEL_BOOK_PACKET_CONTRACT_20260602.md
-?? runtime/a7ffcore39_symbol_level_book_packet_contract/
-?? scripts/crypto_a7ffcore39_symbol_level_book_packet_contract.py
-HEAD=3de2747ad35a2bd7c3e378158ea8ad6d868b8512
+?? reports/CRYPTO_A7FFCORE39E_SYMBOL_LEVEL_BOOK_PACKET_AUDIT_20260602.md
+?? reports/CRYPTO_A7FFCORE40ER_BOOK_REPLAY_FORENSIC_20260602.md
+?? reports/CRYPTO_A7FFCORE40E_BOOK_OBJECTIVE_REPLAY_EXECUTION_20260602.md
+?? reports/CRYPTO_A7FFCORE40_BOOK_OBJECTIVE_REPLAY_CONTRACT_20260602.md
+?? reports/CRYPTO_A7FFCORE41ER_BOOK_CONTROL_REPAIR_FORENSIC_20260602.md
+?? reports/CRYPTO_A7FFCORE41E_BOOK_CONTROL_REPAIR_EXECUTION_20260602.md
+?? reports/CRYPTO_A7FFCORE41_BOOK_CONTROL_REPAIR_CONTRACT_20260602.md
+?? reports/CRYPTO_A7FFCORE42_BOOK_CONTROL_ROUTE_ARBITRATION_20260602.md
+?? reports/CRYPTO_A7FFCORE43_CONTROL_ORTHOGONALIZATION_CONTRACT_20260602.md
+?? runtime/a7ffcore39e_symbol_level_book_packet_audit/
+?? runtime/a7ffcore40_book_objective_replay_contract/
+?? runtime/a7ffcore40e_book_objective_replay_execution/
+?? runtime/a7ffcore40er_book_replay_forensic/
+?? runtime/a7ffcore41_book_control_repair_contract/
+?? runtime/a7ffcore41e_book_control_repair_execution/
+?? runtime/a7ffcore41er_book_control_repair_forensic/
+?? runtime/a7ffcore42_book_control_route_arbitration/
+?? runtime/a7ffcore43_control_orthogonalization_contract/
+?? scripts/crypto_a7ffcore39e_symbol_level_book_packet_audit.py
+?? scripts/crypto_a7ffcore40_book_objective_replay_contract.py
+?? scripts/crypto_a7ffcore40e_book_objective_replay_execution.py
+?? scripts/crypto_a7ffcore40er_book_replay_forensic.py
+?? scripts/crypto_a7ffcore41_book_control_repair_contract.py
+?? scripts/crypto_a7ffcore41e_book_control_repair_execution.py
+?? scripts/crypto_a7ffcore41er_book_control_repair_forensic.py
+?? scripts/crypto_a7ffcore42_book_control_route_arbitration.py
+?? scripts/crypto_a7ffcore43_control_orthogonalization_contract.py
+HEAD=827def932e11aaf498b84f5c2af913958e1f49c7
 origin/main=3de2747ad35a2bd7c3e378158ea8ad6d868b8512
-HEAD == origin/main: True
+HEAD == origin/main: False
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3714,
-  "authorization_record_count": 730,
+  "artifact_count": 3782,
+  "authorization_record_count": 736,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -51,12 +75,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T19:55:27Z",
-  "head": "3de2747ad35a2bd7c3e378158ea8ad6d868b8512",
-  "head_equals_origin_main": true,
+  "generated_at": "2026-06-01T20:33:11Z",
+  "head": "827def932e11aaf498b84f5c2af913958e1f49c7",
+  "head_equals_origin_main": false,
   "origin_main": "3de2747ad35a2bd7c3e378158ea8ad6d868b8512",
   "stage": "A7PM-0",
-  "stage_count": 384
+  "stage_count": 393
 }
 ```
 
@@ -69,15 +93,15 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      75 |
+| hold                         | hold                       |      77 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |     104 |
-| valid_or_historical_record   | diagnostic                 |      24 |
+| valid_or_historical_record   | contract                   |     110 |
+| valid_or_historical_record   | diagnostic                 |      25 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 

@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core43_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE42_ROUTE_ARBITRATION_READY_FOR_CORE43_CONTROL_ORTHOGONALIZATION_CONTRACT",
+  "dominant_failure": "single_family_weak_partial_survivor_after_control_repair",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T20:30:53Z",
+  "next_allowed": "A7FF-CORE43 control orthogonalization / null-model contract",
+  "selected_route": "R3_control_orthogonalization_contract",
+  "source_decision": "PASS_A7FFCORE41ER_BOOK_CONTROL_REPAIR_FORENSIC_READY_FOR_CORE42",
+  "source_stage": "A7FF-CORE41ER",
+  "stage": "A7FF-CORE42"
+}

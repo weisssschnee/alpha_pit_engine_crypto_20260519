@@ -1,0 +1,6 @@
+task,status,reason
+A7FF-CORE42 book-control route arbitration / freeze contract,AUTHORIZED_CONTRACT_ONLY,CORE41E produced only one weak partial survivor in one family; expansion is not authorized
+F1b survivor expansion,NOT_AUTHORIZED,"single weak survivor, OOS tail and control still unstable"
+formula_search,NOT_AUTHORIZED,no multi-family strict book survivor
+large_search,NOT_AUTHORIZED,no multi-family strict book survivor
+alpha_proof / shadow / paper / live,NOT_AUTHORIZED,no proof object

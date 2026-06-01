@@ -1,0 +1,7 @@
+gate,rule,hard_gate
+original_control_margin,original book spread must beat stale and sign_flip controls,True
+split_balance,validation/test/recent cannot be all negative after train positive,True
+family_diversity,selected survivors must span >=2 families before any next expansion,True
+candidate_count,selected survivors >=4 for any expansion contract,True
+cost_cap,sample uses 5bps; full execution contract must include 2/5/10bps,False
+packet_reconciliation,book replay must be reproducible from CORE39E packet path,True

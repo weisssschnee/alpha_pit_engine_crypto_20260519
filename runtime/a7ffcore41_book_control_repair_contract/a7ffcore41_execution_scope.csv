@@ -1,0 +1,2 @@
+stage,input,action,executes_new_generation,executes_search
+A7FF-CORE41E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_book_replay_all_variants.csv,apply train-only orientation and control dominance repair to existing book replay variants,False,False
