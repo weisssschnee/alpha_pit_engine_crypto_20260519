@@ -2186,6 +2186,162 @@ runtime,A7FF-CORE14SE,runtime/a7ffcore14se_repaired_packet_construction/a7ffcore
 runtime,A7FF-CORE14SE,runtime/a7ffcore14se_repaired_packet_construction/a7ffcore14se_manifest.json,d42375b,add crypto a7ffcore14se repaired packet,726
 runtime,A7FF-CORE14SE,runtime/a7ffcore14se_repaired_packet_construction/a7ffcore14se_repaired_replay_packet.csv,d42375b,add crypto a7ffcore14se repaired packet,51564
 runtime,A7FF-CORE14SE,runtime/a7ffcore14se_repaired_packet_construction/a7ffcore14se_scored_source_pool.csv,d42375b,add crypto a7ffcore14se repaired packet,103240
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/a7ffcore14see_candidate_summary.csv,,,21453
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/a7ffcore14see_family_summary_by_shard.csv,,,6611
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/a7ffcore14see_manifest.json,,,856
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/a7ffcore14see_replay_clean_candidates.csv,,,347
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/a7ffcore14see_replay_rows.csv,,,493721
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/a7ffcore14see_shard_manifest_summary.csv,,,9925
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_00_of_16/a7ffcore14e_candidate_summary.csv,,,1488
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_00_of_16/a7ffcore14e_family_summary.csv,,,475
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_00_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_00_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_00_of_16/a7ffcore14e_replay_rows.csv,,,32166
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_00_of_16/a7ffcore14see_shard_manifest.json,,,1284
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_00_of_16/a7ffcore14see_shard_packet.csv,,,3282
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_00_of_16/a7ffcore14see_shard_report.md,,,5219
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_00_of_16/a7ffcore14see_source_shim.json,,,241
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_01_of_16/a7ffcore14e_candidate_summary.csv,,,1565
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_01_of_16/a7ffcore14e_family_summary.csv,,,503
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_01_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_01_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_01_of_16/a7ffcore14e_replay_rows.csv,,,33642
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_01_of_16/a7ffcore14see_shard_manifest.json,,,1284
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_01_of_16/a7ffcore14see_shard_packet.csv,,,3538
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_01_of_16/a7ffcore14see_shard_report.md,,,5219
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_01_of_16/a7ffcore14see_source_shim.json,,,241
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_02_of_16/a7ffcore14e_candidate_summary.csv,,,1575
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_02_of_16/a7ffcore14e_family_summary.csv,,,503
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_02_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_02_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_02_of_16/a7ffcore14e_replay_rows.csv,,,33973
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_02_of_16/a7ffcore14see_shard_manifest.json,,,1284
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_02_of_16/a7ffcore14see_shard_packet.csv,,,3659
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_02_of_16/a7ffcore14see_shard_report.md,,,5219
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_02_of_16/a7ffcore14see_source_shim.json,,,241
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_03_of_16/a7ffcore14e_candidate_summary.csv,,,1532
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_03_of_16/a7ffcore14e_family_summary.csv,,,568
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_03_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_03_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_03_of_16/a7ffcore14e_replay_rows.csv,,,32728
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_03_of_16/a7ffcore14see_shard_manifest.json,,,1284
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_03_of_16/a7ffcore14see_shard_packet.csv,,,3470
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_03_of_16/a7ffcore14see_shard_report.md,,,5385
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_03_of_16/a7ffcore14see_source_shim.json,,,241
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_04_of_16/a7ffcore14e_candidate_summary.csv,,,1496
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_04_of_16/a7ffcore14e_family_summary.csv,,,641
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_04_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_04_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_04_of_16/a7ffcore14e_replay_rows.csv,,,32168
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_04_of_16/a7ffcore14see_shard_manifest.json,,,1284
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_04_of_16/a7ffcore14see_shard_packet.csv,,,3396
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_04_of_16/a7ffcore14see_shard_report.md,,,5551
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_04_of_16/a7ffcore14see_source_shim.json,,,241
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_05_of_16/a7ffcore14e_candidate_summary.csv,,,1565
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_05_of_16/a7ffcore14e_family_summary.csv,,,401
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_05_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_05_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_05_of_16/a7ffcore14e_replay_rows.csv,,,34156
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_05_of_16/a7ffcore14see_shard_manifest.json,,,1284
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_05_of_16/a7ffcore14see_shard_packet.csv,,,3531
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_05_of_16/a7ffcore14see_shard_report.md,,,4993
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_05_of_16/a7ffcore14see_source_shim.json,,,241
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_06_of_16/a7ffcore14e_candidate_summary.csv,,,1542
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_06_of_16/a7ffcore14e_family_summary.csv,,,471
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_06_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_06_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_06_of_16/a7ffcore14e_replay_rows.csv,,,33104
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_06_of_16/a7ffcore14see_shard_manifest.json,,,1284
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_06_of_16/a7ffcore14see_shard_packet.csv,,,3587
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_06_of_16/a7ffcore14see_shard_report.md,,,5219
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_06_of_16/a7ffcore14see_source_shim.json,,,241
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_07_of_16/a7ffcore14e_candidate_summary.csv,,,1518
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_07_of_16/a7ffcore14e_family_summary.csv,,,475
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_07_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_07_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_07_of_16/a7ffcore14e_replay_rows.csv,,,32326
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_07_of_16/a7ffcore14see_shard_manifest.json,,,1284
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_07_of_16/a7ffcore14see_shard_packet.csv,,,3516
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_07_of_16/a7ffcore14see_shard_report.md,,,5219
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_07_of_16/a7ffcore14see_source_shim.json,,,241
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_08_of_16/a7ffcore14e_candidate_summary.csv,,,1550
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_08_of_16/a7ffcore14e_family_summary.csv,,,569
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_08_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_08_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_08_of_16/a7ffcore14e_replay_rows.csv,,,33116
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_08_of_16/a7ffcore14see_shard_manifest.json,,,1284
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_08_of_16/a7ffcore14see_shard_packet.csv,,,3530
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_08_of_16/a7ffcore14see_shard_report.md,,,5385
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_08_of_16/a7ffcore14see_source_shim.json,,,241
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_09_of_16/a7ffcore14e_candidate_summary.csv,,,1520
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_09_of_16/a7ffcore14e_family_summary.csv,,,544
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_09_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_09_of_16/a7ffcore14e_replay_clean_candidates.csv,,,154
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_09_of_16/a7ffcore14e_replay_rows.csv,,,32483
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_09_of_16/a7ffcore14see_shard_manifest.json,,,1284
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_09_of_16/a7ffcore14see_shard_packet.csv,,,3450
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_09_of_16/a7ffcore14see_shard_report.md,,,5385
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_09_of_16/a7ffcore14see_source_shim.json,,,241
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_10_of_16/a7ffcore14e_candidate_summary.csv,,,1515
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_10_of_16/a7ffcore14e_family_summary.csv,,,636
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_10_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_10_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_10_of_16/a7ffcore14e_replay_rows.csv,,,31983
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_10_of_16/a7ffcore14see_shard_manifest.json,,,1285
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_10_of_16/a7ffcore14see_shard_packet.csv,,,3436
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_10_of_16/a7ffcore14see_shard_report.md,,,5551
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_10_of_16/a7ffcore14see_source_shim.json,,,242
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_11_of_16/a7ffcore14e_candidate_summary.csv,,,1501
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_11_of_16/a7ffcore14e_family_summary.csv,,,455
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_11_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_11_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_11_of_16/a7ffcore14e_replay_rows.csv,,,32306
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_11_of_16/a7ffcore14see_shard_manifest.json,,,1285
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_11_of_16/a7ffcore14see_shard_packet.csv,,,3432
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_11_of_16/a7ffcore14see_shard_report.md,,,5219
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_11_of_16/a7ffcore14see_source_shim.json,,,242
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_12_of_16/a7ffcore14e_candidate_summary.csv,,,1511
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_12_of_16/a7ffcore14e_family_summary.csv,,,384
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_12_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_12_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_12_of_16/a7ffcore14e_replay_rows.csv,,,32746
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_12_of_16/a7ffcore14see_shard_manifest.json,,,1285
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_12_of_16/a7ffcore14see_shard_packet.csv,,,3542
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_12_of_16/a7ffcore14see_shard_report.md,,,5053
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_12_of_16/a7ffcore14see_source_shim.json,,,242
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_13_of_16/a7ffcore14e_candidate_summary.csv,,,1479
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_13_of_16/a7ffcore14e_family_summary.csv,,,564
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_13_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_13_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_13_of_16/a7ffcore14e_replay_rows.csv,,,31578
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_13_of_16/a7ffcore14see_shard_manifest.json,,,1285
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_13_of_16/a7ffcore14see_shard_packet.csv,,,3318
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_13_of_16/a7ffcore14see_shard_report.md,,,5385
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_13_of_16/a7ffcore14see_source_shim.json,,,242
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_14_of_16/a7ffcore14e_candidate_summary.csv,,,1510
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_14_of_16/a7ffcore14e_family_summary.csv,,,638
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_14_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_14_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_14_of_16/a7ffcore14e_replay_rows.csv,,,31697
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_14_of_16/a7ffcore14see_shard_manifest.json,,,1285
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_14_of_16/a7ffcore14see_shard_packet.csv,,,3423
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_14_of_16/a7ffcore14see_shard_report.md,,,5551
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_14_of_16/a7ffcore14see_source_shim.json,,,242
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_15_of_16/a7ffcore14e_candidate_summary.csv,,,1513
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_15_of_16/a7ffcore14e_family_summary.csv,,,568
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_15_of_16/a7ffcore14e_manifest.json,,,1164
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_15_of_16/a7ffcore14e_replay_clean_candidates.csv,,,74
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_15_of_16/a7ffcore14e_replay_rows.csv,,,32351
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_15_of_16/a7ffcore14see_shard_manifest.json,,,1285
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_15_of_16/a7ffcore14see_shard_packet.csv,,,3432
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_15_of_16/a7ffcore14see_shard_report.md,,,5385
+runtime,A7FF-CORE14SEE,runtime/a7ffcore14see_sharded_bounded_replay/shard_15_of_16/a7ffcore14see_source_shim.json,,,242
+runtime,A7FF-CORE14SER,runtime/a7ffcore14ser_repaired_replay_forensic/a7ffcore14ser_candidate_summary.csv,,,21451
+runtime,A7FF-CORE14SER,runtime/a7ffcore14ser_repaired_replay_forensic/a7ffcore14ser_clean_candidates.csv,,,347
+runtime,A7FF-CORE14SER,runtime/a7ffcore14ser_repaired_replay_forensic/a7ffcore14ser_family_summary.csv,,,785
+runtime,A7FF-CORE14SER,runtime/a7ffcore14ser_repaired_replay_forensic/a7ffcore14ser_gate_sensitivity.csv,,,362
+runtime,A7FF-CORE14SER,runtime/a7ffcore14ser_repaired_replay_forensic/a7ffcore14ser_manifest.json,,,914
+runtime,A7FF-CORE14SER,runtime/a7ffcore14ser_repaired_replay_forensic/a7ffcore14ser_split_summary.csv,,,1848
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_blueprint_subgraph_map.csv,510fb01,add crypto a7ffcore2 subgraph registry,2501481
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_factor_candidate_roots.csv,510fb01,add crypto a7ffcore2 subgraph registry,4627017
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_family_subgraph_summary.csv,510fb01,add crypto a7ffcore2 subgraph registry,4501
@@ -2560,6 +2716,8 @@ report,A7FFCORE14E-BOUNDED-REPLAY-EXECUTION,reports/CRYPTO_A7FFCORE14E_BOUNDED_R
 report,A7FFCORE14R-REPLAY-FAILURE-FORENSIC,reports/CRYPTO_A7FFCORE14R_REPLAY_FAILURE_FORENSIC_20260601.md,7b86919,add crypto a7ffcore14e replay and forensic,17229
 report,A7FFCORE14S-REPLAY-PACKET-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE14S_REPLAY_PACKET_REPAIR_CONTRACT_20260601.md,3e8c552,add crypto a7ffcore14s repair contract,13203
 report,A7FFCORE14SE-REPAIRED-PACKET-CONSTRUCTION,reports/CRYPTO_A7FFCORE14SE_REPAIRED_PACKET_CONSTRUCTION_20260601.md,d42375b,add crypto a7ffcore14se repaired packet,50466
+report,A7FFCORE14SEE-SHARDED-BOUNDED-REPLAY,reports/CRYPTO_A7FFCORE14SEE_SHARDED_BOUNDED_REPLAY_20260601.md,,,2038
+report,A7FFCORE14SER-REPAIRED-REPLAY-FORENSIC,reports/CRYPTO_A7FFCORE14SER_REPAIRED_REPLAY_FORENSIC_20260601.md,,,10248
 report,A7FFCORE2-FEATURE-SUBGRAPH-REGISTRY,reports/CRYPTO_A7FFCORE2_FEATURE_SUBGRAPH_REGISTRY_20260601.md,510fb01,add crypto a7ffcore2 subgraph registry,40668
 report,A7FFCORE3-FORMULAGEN-SUBGRAPH-GATE,reports/CRYPTO_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_20260601.md,02de3f1,add crypto a7ffcore3 formulagen gate,5243
 report,A7FFCORE4-GATE-IMPLEMENTATION-REGRESSION,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
@@ -2590,13 +2748,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,bcd062f,refresh crypto registry after a7ffcore12e,412654
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,8f99238,refresh crypto registry after a7ffcore11,103688
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,9f44a1f,refresh crypto registry after a7ffcore14se,420223
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,9f44a1f,refresh crypto registry after a7ffcore14se,104425
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,bcd062f,refresh crypto registry after a7ffcore12e,175421
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,bcd062f,refresh crypto registry after a7ffcore12e,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,9f44a1f,refresh crypto registry after a7ffcore14se,180069
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,9f44a1f,refresh crypto registry after a7ffcore14se,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,bcd062f,refresh crypto registry after a7ffcore12e,93223
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,9f44a1f,refresh crypto registry after a7ffcore14se,95533
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -2615,12 +2773,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,d42375b,add crypto a7ffcore14se repaired packet,375
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,d42375b,add crypto a7ffcore14se repaired packet,372
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,d42375b,add crypto a7ffcore14se repaired packet,1423
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,bcd062f,refresh crypto registry after a7ffcore12e,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,d42375b,add crypto a7ffcore14se repaired packet,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,bcd062f,refresh crypto registry after a7ffcore12e,5559
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,9f44a1f,refresh crypto registry after a7ffcore14se,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,9f44a1f,refresh crypto registry after a7ffcore14se,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,9f44a1f,refresh crypto registry after a7ffcore14se,5253
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,d42375b,add crypto a7ffcore14se repaired packet,5274
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,9f44a1f,refresh crypto registry after a7ffcore14se,5274
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

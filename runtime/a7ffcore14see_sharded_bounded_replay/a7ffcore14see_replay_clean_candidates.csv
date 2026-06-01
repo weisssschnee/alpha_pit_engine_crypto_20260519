@@ -1,0 +1,2 @@
+candidate_id,semantic_bucket,motif_bucket,replay_rows,median_spread,median_cost_adjusted_spread,max_tstat,min_control_ratio,validation_recent_clean_splits,replay_clean,shard_id
+a7ffcore11e_a8d20b6bdd9fb53e86,taker_flow_like|basis_premium_like,gated_sign,12,0.0010297212115561,-3.830349778676404e-05,2.857048713028969,0.6609048761514368,2,True,9

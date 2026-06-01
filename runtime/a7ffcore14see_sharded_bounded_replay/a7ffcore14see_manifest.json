@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core15_contract": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 128,
+  "completed_shard_count": 16,
+  "decision": "HOLD_A7FFCORE14SEE_REPAIRED_BOUNDED_REPLAY_INSUFFICIENT_OR_INCOMPLETE",
+  "eval_error_count": 0,
+  "executes_replay": true,
+  "executes_search": false,
+  "generated_at": "2026-06-01T06:57:05Z",
+  "next_allowed": "continue A7FF-CORE14SEE shards or run CORE14SER forensic after full shard completion",
+  "replay_clean_candidate_count": 1,
+  "replay_clean_motif_bucket_count": 1,
+  "replay_clean_semantic_bucket_count": 1,
+  "replay_row_count": 1536,
+  "shard_count": 16,
+  "source_decision": "PASS_A7FFCORE14SE_REPAIRED_PACKET_READY_FOR_BOUNDED_REPLAY",
+  "source_stage": "A7FF-CORE14SE",
+  "stage": "A7FF-CORE14SEE"
+}

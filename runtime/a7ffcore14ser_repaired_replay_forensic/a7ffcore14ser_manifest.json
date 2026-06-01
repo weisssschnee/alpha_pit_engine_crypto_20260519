@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core15_contract": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 128,
+  "clean_candidate_count": 1,
+  "clean_family_concentration": 1.0,
+  "clean_motif_bucket_count": 1,
+  "clean_semantic_bucket_count": 1,
+  "completed_shard_count": 16,
+  "decision": "PASS_A7FFCORE14SER_REPAIRED_REPLAY_FORENSIC_COMPLETE_STOP_REPLAY_EXPANSION",
+  "dominant_failure": "objective_surface_not_replay_stable",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T07:07:18Z",
+  "max_candidates_under_relaxed_sensitivity": 22,
+  "next_allowed": "A7FF-CORE15X objective-surface reset / replay-stability repair contract",
+  "source_decision": "HOLD_A7FFCORE14SEE_REPAIRED_BOUNDED_REPLAY_INSUFFICIENT_OR_INCOMPLETE",
+  "source_stage": "A7FF-CORE14SEE",
+  "stage": "A7FF-CORE14SER"
+}

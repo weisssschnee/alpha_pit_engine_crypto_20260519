@@ -1,0 +1,7 @@
+{
+  "decision": "PASS_A7FFCORE14_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE14E",
+  "shard_count": 16,
+  "shard_id": 12,
+  "source_decision": "PASS_A7FFCORE14SE_REPAIRED_PACKET_READY_FOR_BOUNDED_REPLAY",
+  "source_stage": "A7FF-CORE14SE"
+}

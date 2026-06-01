@@ -1,0 +1,6 @@
+semantic_bucket,motif_bucket,candidate_count,median_cost_adjusted_spread,median_control_ratio,clean_candidate_count
+liquidity_like|volatility_like,liquidity_shock,2,-0.0012662374846110116,1.7164020712524977,0
+open_interest_like|positioning_like,delta_x_divergence,2,-0.0007723000408370477,3.560328635774816,0
+taker_flow_like|basis_premium_like,gated_sign,2,-0.0003726004374145982,5.065086803149544,0
+liquidity_like,single,1,-0.0007111179827719824,3.1380887462273983,0
+taker_flow_like|open_interest_like,flow_x_leverage,1,-0.007206819556759139,1.816073636039274,0

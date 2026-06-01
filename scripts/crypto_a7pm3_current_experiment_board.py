@@ -56,6 +56,8 @@ A7FFCORE14E = REPO / "runtime" / "a7ffcore14e_bounded_replay" / "a7ffcore14e_man
 A7FFCORE14R = REPO / "runtime" / "a7ffcore14r_replay_failure_forensic" / "a7ffcore14r_manifest.json"
 A7FFCORE14S = REPO / "runtime" / "a7ffcore14s_replay_packet_repair_contract" / "a7ffcore14s_manifest.json"
 A7FFCORE14SE = REPO / "runtime" / "a7ffcore14se_repaired_packet_construction" / "a7ffcore14se_manifest.json"
+A7FFCORE14SEE = REPO / "runtime" / "a7ffcore14see_sharded_bounded_replay" / "a7ffcore14see_manifest.json"
+A7FFCORE14SER = REPO / "runtime" / "a7ffcore14ser_repaired_replay_forensic" / "a7ffcore14ser_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -120,12 +122,33 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore14r = read_json(A7FFCORE14R)
     a7ffcore14s = read_json(A7FFCORE14S)
     a7ffcore14se = read_json(A7FFCORE14SE)
+    a7ffcore14see = read_json(A7FFCORE14SEE)
+    a7ffcore14ser = read_json(A7FFCORE14SER)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore14se.get("decision") == "PASS_A7FFCORE14SE_REPAIRED_PACKET_READY_FOR_BOUNDED_REPLAY":
+    if a7ffcore14ser.get("decision") == "PASS_A7FFCORE14SER_REPAIRED_REPLAY_FORENSIC_COMPLETE_STOP_REPLAY_EXPANSION":
+        allowed["A7FF-CORE15X objective-surface reset / replay-stability repair contract"] = (
+            "contract only; reset objective surface after repaired replay failure; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE15"] = "blocked: CORE14SER stops replay expansion; clean pool is one candidate in one family"
+        blocked["A7FF-CORE14SEE rerun"] = "blocked until CORE15X defines a new objective-surface or stability policy"
+        blocked["A7FF large search"] = "blocked: repaired packet failed replay-stability gates"
+        current_stage = "A7FF-CORE14SER"
+        status = "repaired_replay_forensic_stop_replay_expansion"
+        next_task = "A7FF-CORE15X objective-surface reset / replay-stability repair contract"
+    elif a7ffcore14see.get("decision") == "HOLD_A7FFCORE14SEE_REPAIRED_BOUNDED_REPLAY_INSUFFICIENT_OR_INCOMPLETE":
+        allowed["A7FF-CORE14SER repaired replay forensic"] = (
+            "diagnose repaired packet replay failure after all shards complete; no rerun/search/promotion"
+        )
+        blocked["A7FF-CORE15"] = "blocked: CORE14SEE repaired replay is insufficient"
+        blocked["A7FF large search"] = "blocked: CORE14SEE did not produce enough clean breadth"
+        current_stage = "A7FF-CORE14SEE"
+        status = "repaired_bounded_replay_hold"
+        next_task = "A7FF-CORE14SER repaired replay forensic"
+    elif a7ffcore14se.get("decision") == "PASS_A7FFCORE14SE_REPAIRED_PACKET_READY_FOR_BOUNDED_REPLAY":
         allowed["A7FF-CORE14SEE repaired packet bounded replay execution"] = (
             "execute bounded replay over repaired CORE14SE packet only; no formula search, large search, promotion, or alpha proof"
         )
