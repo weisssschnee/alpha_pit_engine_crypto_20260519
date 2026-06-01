@@ -1,0 +1,7 @@
+field_family,repair_priority,allowed_transforms,family_native_labels,probe_policy,minimum_non_basis_candidates
+open_interest,1,delta_1h;delta_4h;delta_24h;zscore_72h;zscore_168h;tsrank_72h;spread_short_long,L1_cross_sectional_relative_return;L3_liquidity_tier_relative_return;L5_vol_adjusted_return,"single-field plus OI-price/OI-funding interaction probe, no open grammar",8
+positioning,2,level;delta_4h;delta_24h;zscore_168h;spread_short_long,L1_cross_sectional_relative_return;L3_liquidity_tier_relative_return;L5_vol_adjusted_return,divergence and crowding probes only,8
+taker_flow,3,delta_1h;delta_4h;zscore_72h;shock_24h;tsrank_72h,L0_raw_forward_return;L1_cross_sectional_relative_return;L5_vol_adjusted_return,flow imbalance and reversal probes; require controls weaker than original,6
+liquidity,4,delta_4h;delta_24h;zscore_168h;tsrank_168h;shock_24h,L1_cross_sectional_relative_return;L3_liquidity_tier_relative_return;L5_vol_adjusted_return,state/neutralizer first; standalone signal only if non-L7 and control-clean,4
+volatility,5,delta_4h;delta_24h;zscore_72h;zscore_168h;spread_short_long,L3_liquidity_tier_relative_return;L5_vol_adjusted_return,risk-state and reversal pressure probes; no pure volatility beta wrapper,4
+price_return,6,delta_1h;delta_4h;zscore_72h;tsrank_72h;shock_24h,L1_cross_sectional_relative_return;L3_liquidity_tier_relative_return;L5_vol_adjusted_return,use only as interaction/control baseline; cap standalone exposure,2

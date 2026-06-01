@@ -1,0 +1,21 @@
+{
+  "atlas_candidate_count": 149,
+  "authorizes_alpha_proof": false,
+  "authorizes_core16f_contract": true,
+  "authorizes_core17": false,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE16ER_EXPANDED_ATLAS_FORENSIC_COMPLETE_READY_FOR_CORE16F",
+  "dominant_failure": "basis_premium_supply_concentration",
+  "executes_replay": false,
+  "executes_search": false,
+  "field_family_count": 3,
+  "generated_at": "2026-06-01T09:17:15Z",
+  "next_allowed": "A7FF-CORE16F non-basis field-family supply repair contract",
+  "source_decision": "HOLD_A7FFCORE16E_EXPANDED_PRIMITIVE_ATLAS_INSUFFICIENT",
+  "source_stage": "A7FF-CORE16E",
+  "stage": "A7FF-CORE16ER",
+  "top_family_share": 0.9664429530201343
+}

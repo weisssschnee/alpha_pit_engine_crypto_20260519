@@ -1,0 +1,14 @@
+{
+  "atlas_candidate_count": 0,
+  "decision": "PASS_A7FFCORE16E_FAMILY_SHARD_COMPLETE",
+  "field_count": 2,
+  "field_family": "listing_age_interaction",
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-06-01T09:12:04Z",
+  "missing_fields_excluded": [],
+  "response_rows": 320,
+  "stage": "A7FF-CORE16E-FAMILY",
+  "symbols_loaded": 96,
+  "timestamps": 3481,
+  "transform_count": 0
+}

@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core16ge": true,
+  "authorizes_core17": false,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE16G_FAMILY_NATIVE_INTERACTION_CONTRACT_READY_FOR_CORE16GE",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T09:24:48Z",
+  "interaction_family_count": 7,
+  "near_miss_non_basis_count": 46,
+  "next_allowed": "A7FF-CORE16GE family-native interaction probe execution",
+  "source_decision": "PASS_A7FFCORE16FER_NON_BASIS_FORENSIC_COMPLETE_READY_FOR_CORE16G",
+  "source_stage": "A7FF-CORE16FER",
+  "stage": "A7FF-CORE16G"
+}

@@ -1,0 +1,38 @@
+{
+  "authorized": true,
+  "basis_premium_max_share": 0.35,
+  "executes_replay": false,
+  "executes_search": false,
+  "families": [
+    "open_interest",
+    "positioning",
+    "taker_flow",
+    "liquidity",
+    "volatility",
+    "price_return"
+  ],
+  "forbidden": [
+    "formula generation",
+    "bounded replay",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "horizons": [
+    1,
+    4,
+    8,
+    24
+  ],
+  "labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return"
+  ],
+  "name": "non-basis expanded primitive/operator atlas execution",
+  "non_basis_min_candidate_count": 32,
+  "non_basis_min_field_family_count": 4,
+  "stage": "A7FF-CORE16FE",
+  "top_family_share_max": 0.5
+}

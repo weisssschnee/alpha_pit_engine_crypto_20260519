@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core16g_contract": true,
+  "authorizes_core17": false,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE16FER_NON_BASIS_FORENSIC_COMPLETE_READY_FOR_CORE16G",
+  "dominant_failure": "non_basis_single_field_supply_insufficient",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T09:22:55Z",
+  "near_miss_non_basis_count": 46,
+  "next_allowed": "A7FF-CORE16G family-native interaction repair contract",
+  "source_decision": "HOLD_A7FFCORE16FE_NON_BASIS_ATLAS_SUPPLY_INSUFFICIENT",
+  "source_stage": "A7FF-CORE16FE",
+  "stage": "A7FF-CORE16FER",
+  "strict_non_basis_candidate_count": 5,
+  "strict_non_basis_field_family_count": 2
+}

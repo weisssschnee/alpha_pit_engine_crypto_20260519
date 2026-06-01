@@ -1,0 +1,4 @@
+field_family,atlas_candidate_count,share,transform_count,label_family_count,lag_ok_candidate_count,median_control_ratio,status
+basis_premium,144,0.9664429530201344,9,4,67,0.6578444106006975,dominant_saturated_family
+price_return,4,0.0268456375838926,2,3,1,0.5894533215818696,thin_positive_supply
+positioning,1,0.0067114093959731,1,1,1,0.9833479027691002,thin_positive_supply

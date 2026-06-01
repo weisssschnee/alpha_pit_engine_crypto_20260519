@@ -1,0 +1,6 @@
+action_id,target,action,reason
+R0_cap_basis_premium_atlas,basis_premium,treat as saturated diagnostic supply; cap in any future atlas/queue until non-basis families show supply,CORE16E top_family_share is above 96 percent even after lag gate relaxation
+R1_non_basis_near_miss_repair,"open_interest, price_return, positioning, listing_age",mine near-miss rows with control_ratio between 1.0 and 1.5 and require split-specific failure attribution before generation,non-basis families have sparse or zero atlas supply but some near-miss evidence exists
+R2_family_native_label_policy,all non-basis families,allow family-native label/transform pair contracts rather than one global pass gate,global primitive atlas pass gate rewards basis/premium and suppresses sparse event-like families
+R3_interaction_probe_before_formula,"OI, positioning, taker_flow, liquidity, volatility",run typed interaction probes only after single-family near-miss repair; no open grammar,"single-field response is insufficient, but direct formula generation would amplify control-like structures"
+R4_stop_core17_until_breadth,CORE17/search,"block objective seed policy, replay expansion, and formula search until non-basis breadth gate passes",149 candidates are not useful if 144 come from one family

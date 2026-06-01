@@ -1,0 +1,7 @@
+family,status,next_action,hard_limit
+open_interest,near_miss_repairable,convert OI level/delta near-miss rows into OI x price/funding/basis interaction probes,no standalone OI alpha promotion without control_ratio < 1.0
+positioning,thin_strict_supply,use account-vs-position divergence and top-vs-global divergence as typed interaction probes,positioning cannot be a risk-defense wrapper selected as ordinary alpha
+taker_flow,zero_strict_supply,only test taker x OI and taker x liquidity reversal probes; no standalone flow search,requires non-L7 response and control-clean evidence
+liquidity,zero_strict_supply,treat as state/neutralizer unless interaction probe beats controls,no liquidity-volatility old-family revival
+volatility,zero_strict_supply,use volatility as conditioning state for basis/OI/positioning only,no pure volatility beta signal
+price_return,thin_but_control_risky,use only as interaction leg and baseline control,no direct price-return objective expansion

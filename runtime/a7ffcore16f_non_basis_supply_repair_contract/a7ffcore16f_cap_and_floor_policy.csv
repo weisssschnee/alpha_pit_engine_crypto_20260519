@@ -1,0 +1,5 @@
+policy_id,field_family,max_share_in_core16fe_queue,reason,min_candidate_count,min_field_family_count,gate
+basis_premium_cap,basis_premium,0.35,CORE16E basis_premium share was 96.6 percent,,,
+non_basis_floor,non_basis_total,,CORE17 requires breadth before objective seed policy,32.0,4.0,
+family_native_gate,all,,avoid over-conservative latency filtering while still rejecting control-like responses,,,"premay_all_positive and control_ratio < 1.0; lag_ok is diagnostic flag, not hard reject"
+near_miss_lane,non_basis,,surface repair evidence without promoting control-like rows,,,control_ratio between 1.0 and 1.5 may enter forensic-only lane

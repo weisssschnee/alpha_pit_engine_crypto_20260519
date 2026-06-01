@@ -1,0 +1,27 @@
+{
+  "authorized": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "forbidden": [
+    "CORE17 objective seed policy",
+    "formula generation",
+    "replay expansion",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "minimum_success_criteria": {
+    "basis_premium_share_max": 0.5,
+    "non_basis_candidate_count": 32,
+    "non_basis_field_family_count": 4,
+    "top_family_share_max": 0.5
+  },
+  "name": "non-basis field-family supply repair contract",
+  "scope": [
+    "basis/premium cap policy",
+    "non-basis near-miss mining",
+    "family-native label/transform pass gates",
+    "typed interaction probe contract"
+  ],
+  "stage": "A7FF-CORE16F"
+}

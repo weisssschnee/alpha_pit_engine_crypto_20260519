@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T08:19:24Z
+Generated: 2026-06-01T09:25:26Z
 
 ## Decision
 
@@ -12,15 +12,38 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
+ M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
+ M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
+ M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
+ M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
+ M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE16R_PRIMITIVE_ATLAS_SUPPLY_REPAIR_20260601.md
-?? reports/CRYPTO_A7FFCORE16_PRIMITIVE_REPLAY_STABILITY_ATLAS_20260601.md
-?? runtime/a7ffcore16_primitive_replay_stability_atlas/
-?? runtime/a7ffcore16r_primitive_atlas_supply_repair/
-?? scripts/crypto_a7ffcore16_primitive_replay_stability_atlas.py
-?? scripts/crypto_a7ffcore16r_primitive_atlas_supply_repair.py
-HEAD=d1f2388fd5465bca880776d848f9c508d91bea28
-origin/main=d1f2388fd5465bca880776d848f9c508d91bea28
+?? reports/CRYPTO_A7FFCORE16ER_EXPANDED_ATLAS_FORENSIC_20260601.md
+?? reports/CRYPTO_A7FFCORE16E_EXPANDED_PRIMITIVE_OPERATOR_ATLAS_20260601.md
+?? reports/CRYPTO_A7FFCORE16FER_NON_BASIS_ATLAS_FORENSIC_20260601.md
+?? reports/CRYPTO_A7FFCORE16FE_NON_BASIS_ATLAS_EXECUTION_20260601.md
+?? reports/CRYPTO_A7FFCORE16F_NON_BASIS_SUPPLY_REPAIR_CONTRACT_20260601.md
+?? reports/CRYPTO_A7FFCORE16G_FAMILY_NATIVE_INTERACTION_CONTRACT_20260601.md
+?? runtime/a7ffcore16e_expanded_primitive_operator_atlas/
+?? runtime/a7ffcore16er_expanded_atlas_forensic/
+?? runtime/a7ffcore16f_non_basis_supply_repair_contract/
+?? runtime/a7ffcore16fe_non_basis_atlas_execution/
+?? runtime/a7ffcore16fer_non_basis_atlas_forensic/
+?? runtime/a7ffcore16g_family_native_interaction_contract/
+?? scripts/crypto_a7ffcore16e_sharded_primitive_operator_atlas.py
+?? scripts/crypto_a7ffcore16er_expanded_atlas_forensic.py
+?? scripts/crypto_a7ffcore16f_non_basis_supply_repair_contract.py
+?? scripts/crypto_a7ffcore16fe_non_basis_atlas_execution.py
+?? scripts/crypto_a7ffcore16fer_non_basis_atlas_forensic.py
+?? scripts/crypto_a7ffcore16g_family_native_interaction_contract.py
+HEAD=2ff1edc24d008740a6e4bafb935bd467b4d35837
+origin/main=2ff1edc24d008740a6e4bafb935bd467b4d35837
 HEAD == origin/main: True
 ```
 
@@ -28,7 +51,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2987,
+  "artifact_count": 3071,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -42,12 +65,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T08:19:24Z",
-  "head": "d1f2388fd5465bca880776d848f9c508d91bea28",
+  "generated_at": "2026-06-01T09:25:26Z",
+  "head": "2ff1edc24d008740a6e4bafb935bd467b4d35837",
   "head_equals_origin_main": true,
-  "origin_main": "d1f2388fd5465bca880776d848f9c508d91bea28",
+  "origin_main": "2ff1edc24d008740a6e4bafb935bd467b4d35837",
   "stage": "A7PM-0",
-  "stage_count": 308
+  "stage_count": 314
 }
 ```
 
@@ -60,15 +83,15 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      54 |
+| hold                         | hold                       |      56 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     140 |
-| valid_or_historical_record   | contract                   |      68 |
-| valid_or_historical_record   | diagnostic                 |       8 |
+| valid_or_historical_record   | contract                   |      70 |
+| valid_or_historical_record   | diagnostic                 |      10 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 

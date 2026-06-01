@@ -1,0 +1,35 @@
+{
+  "allowed_interaction_families": [
+    "OI_delta_x_price_move",
+    "OI_delta_x_funding_abs",
+    "OI_delta_x_basis_premium_dislocation",
+    "positioning_divergence_x_price_or_basis",
+    "taker_flow_x_OI_or_liquidity",
+    "liquidity_state_x_basis_or_positioning",
+    "volatility_state_x_basis_or_OI"
+  ],
+  "authorized": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "forbidden": [
+    "open grammar FormulaGen",
+    "bounded replay",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "inputs": [
+    "CORE16FE strict non-basis atlas candidates",
+    "CORE16FE near-miss forensic lane",
+    "CORE16F family policy",
+    "field role ledger"
+  ],
+  "name": "family-native interaction repair contract",
+  "pass_gate": {
+    "control_ratio_required": "< 1.0 for promotion, 1.0-1.5 forensic only",
+    "interaction_probe_candidates": 64,
+    "non_basis_family_count": 4,
+    "top_family_share_max": 0.4
+  },
+  "stage": "A7FF-CORE16G"
+}

@@ -1,0 +1,10 @@
+operator,allowed,constraint
+Mul,True,only typed left/right families in interaction_families
+SafeDiv,True,denominator must be positive-stable; winsorize extreme denominators
+Sub,True,only for divergence/spread semantics
+Add,True,only after same semantic scale normalization
+ZScore,True,lookback 72h/168h only
+TSRank,True,lookback 72h/168h only
+Clip,True,predefined quantile clip; no tuned thresholds
+IfElse,False,blocked: no deep conditionals or threshold masks
+SignedPower,False,blocked: unbounded nonlinear transform

@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core16fe": true,
+  "authorizes_core17": false,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE16F_NON_BASIS_SUPPLY_REPAIR_CONTRACT_READY_FOR_CORE16FE",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T09:19:48Z",
+  "next_allowed": "A7FF-CORE16FE non-basis expanded primitive/operator atlas execution",
+  "source_decision": "PASS_A7FFCORE16ER_EXPANDED_ATLAS_FORENSIC_COMPLETE_READY_FOR_CORE16F",
+  "source_stage": "A7FF-CORE16ER",
+  "stage": "A7FF-CORE16F"
+}

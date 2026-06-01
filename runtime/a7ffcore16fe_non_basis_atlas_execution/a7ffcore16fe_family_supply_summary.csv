@@ -1,0 +1,7 @@
+field_family,rows,strict_candidate_count,near_miss_count,transform_count,label_family_count,median_control_ratio
+price_return,320,4,37,10,4,13.669997497505639
+positioning,480,1,2,10,4,11.143872738546492
+open_interest,480,0,6,10,4,13.672454522047978
+taker_flow,320,0,1,10,4,5.025139661681218
+liquidity,640,0,0,10,4,9.975123573089089
+volatility,320,0,0,10,4,26.008176421258117

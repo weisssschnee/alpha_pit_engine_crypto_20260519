@@ -63,6 +63,12 @@ A7FFCORE15Y = REPO / "runtime" / "a7ffcore15y_replay_stability_surface" / "a7ffc
 A7FFCORE15YR = REPO / "runtime" / "a7ffcore15yr_surface_failure_repair" / "a7ffcore15yr_manifest.json"
 A7FFCORE16 = REPO / "runtime" / "a7ffcore16_primitive_replay_stability_atlas" / "a7ffcore16_manifest.json"
 A7FFCORE16R = REPO / "runtime" / "a7ffcore16r_primitive_atlas_supply_repair" / "a7ffcore16r_manifest.json"
+A7FFCORE16E = REPO / "runtime" / "a7ffcore16e_expanded_primitive_operator_atlas" / "a7ffcore16e_manifest.json"
+A7FFCORE16ER = REPO / "runtime" / "a7ffcore16er_expanded_atlas_forensic" / "a7ffcore16er_manifest.json"
+A7FFCORE16F = REPO / "runtime" / "a7ffcore16f_non_basis_supply_repair_contract" / "a7ffcore16f_manifest.json"
+A7FFCORE16FE = REPO / "runtime" / "a7ffcore16fe_non_basis_atlas_execution" / "a7ffcore16fe_manifest.json"
+A7FFCORE16FER = REPO / "runtime" / "a7ffcore16fer_non_basis_atlas_forensic" / "a7ffcore16fer_manifest.json"
+A7FFCORE16G = REPO / "runtime" / "a7ffcore16g_family_native_interaction_contract" / "a7ffcore16g_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -134,12 +140,83 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore15yr = read_json(A7FFCORE15YR)
     a7ffcore16 = read_json(A7FFCORE16)
     a7ffcore16r = read_json(A7FFCORE16R)
+    a7ffcore16e = read_json(A7FFCORE16E)
+    a7ffcore16er = read_json(A7FFCORE16ER)
+    a7ffcore16f = read_json(A7FFCORE16F)
+    a7ffcore16fe = read_json(A7FFCORE16FE)
+    a7ffcore16fer = read_json(A7FFCORE16FER)
+    a7ffcore16g = read_json(A7FFCORE16G)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore16r.get("decision") == "PASS_A7FFCORE16R_PRIMITIVE_ATLAS_SUPPLY_REPAIR_READY_FOR_CORE16E":
+    if a7ffcore16g.get("decision") == "PASS_A7FFCORE16G_FAMILY_NATIVE_INTERACTION_CONTRACT_READY_FOR_CORE16GE":
+        allowed["A7FF-CORE16GE family-native interaction probe execution"] = (
+            "execute typed interaction probe only; no open grammar, replay expansion, search, or promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked until CORE16GE typed interaction probe passes"
+        blocked["A7FF formula generation"] = "blocked: CORE16G authorizes typed interaction probe only"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until interaction probe passes"
+        current_stage = "A7FF-CORE16G"
+        status = "family_native_interaction_contract_ready_for_core16ge"
+        next_task = "A7FF-CORE16GE family-native interaction probe execution"
+    elif a7ffcore16fer.get("decision") == "PASS_A7FFCORE16FER_NON_BASIS_FORENSIC_COMPLETE_READY_FOR_CORE16G":
+        allowed["A7FF-CORE16G family-native interaction repair contract"] = (
+            "contract only; convert non-basis near-miss evidence into typed interaction probes; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16FE non-basis single-field supply is insufficient"
+        blocked["A7FF formula generation"] = "blocked until CORE16G/next interaction supply passes gates"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until interaction supply gates pass"
+        current_stage = "A7FF-CORE16FER"
+        status = "non_basis_forensic_ready_for_core16g"
+        next_task = "A7FF-CORE16G family-native interaction repair contract"
+    elif a7ffcore16fe.get("decision") == "HOLD_A7FFCORE16FE_NON_BASIS_ATLAS_SUPPLY_INSUFFICIENT":
+        allowed["A7FF-CORE16FER non-basis atlas forensic / family-native repair"] = (
+            "diagnose non-basis single-field supply failure and define interaction repair; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16FE non-basis supply failed"
+        blocked["A7FF formula generation"] = "blocked until CORE16FER defines repair"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until non-basis supply gates pass"
+        current_stage = "A7FF-CORE16FE"
+        status = "non_basis_atlas_supply_hold"
+        next_task = "A7FF-CORE16FER non-basis atlas forensic / family-native repair"
+    elif a7ffcore16f.get("decision") == "PASS_A7FFCORE16F_NON_BASIS_SUPPLY_REPAIR_CONTRACT_READY_FOR_CORE16FE":
+        allowed["A7FF-CORE16FE non-basis expanded primitive/operator atlas execution"] = (
+            "execute non-basis family-targeted primitive/operator atlas only; no formula generation/replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked until CORE16FE non-basis supply passes"
+        blocked["A7FF formula generation"] = "blocked until non-basis primitive/operator supply has breadth"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas to replay"
+        blocked["A7FF large search"] = "blocked until non-basis supply gates pass"
+        current_stage = "A7FF-CORE16F"
+        status = "non_basis_supply_repair_contract_ready_for_core16fe"
+        next_task = "A7FF-CORE16FE non-basis expanded primitive/operator atlas execution"
+    elif a7ffcore16er.get("decision") == "PASS_A7FFCORE16ER_EXPANDED_ATLAS_FORENSIC_COMPLETE_READY_FOR_CORE16F":
+        allowed["A7FF-CORE16F non-basis field-family supply repair contract"] = (
+            "contract only; cap saturated basis/premium supply and repair non-basis field-family supply; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16E expanded atlas is basis/premium concentrated"
+        blocked["A7FF formula generation"] = "blocked until CORE16F/next supply repair establishes non-basis breadth"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas to replay"
+        blocked["A7FF large search"] = "blocked until non-basis supply gates pass"
+        current_stage = "A7FF-CORE16ER"
+        status = "expanded_atlas_forensic_ready_for_core16f"
+        next_task = "A7FF-CORE16F non-basis field-family supply repair contract"
+    elif a7ffcore16e.get("decision") == "HOLD_A7FFCORE16E_EXPANDED_PRIMITIVE_ATLAS_INSUFFICIENT":
+        allowed["A7FF-CORE16ER expanded atlas failure forensic"] = (
+            "diagnose CORE16E atlas concentration and define non-basis supply repair; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16E atlas breadth failed"
+        blocked["A7FF formula generation"] = "blocked until CORE16ER/CORE16F defines and repairs non-basis supply"
+        blocked["A7FF large search"] = "blocked until expanded primitive atlas passes"
+        current_stage = "A7FF-CORE16E"
+        status = "expanded_primitive_atlas_hold"
+        next_task = "A7FF-CORE16ER expanded atlas failure forensic"
+    elif a7ffcore16r.get("decision") == "PASS_A7FFCORE16R_PRIMITIVE_ATLAS_SUPPLY_REPAIR_READY_FOR_CORE16E":
         allowed["A7FF-CORE16E expanded primitive/operator-probe atlas execution"] = (
             "execute expanded primitive/operator response atlas only; no formula generation/replay/search/promotion"
         )

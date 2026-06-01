@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T08:19:27Z
+Generated: 2026-06-01T09:25:24Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T08:19:27Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                          | next                                                           |
-|:----------------------------|:----------------|:------------------------------------------------|:---------------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                            | keep registry as source-of-truth                               |
-| a7ff_family_diversification | A7FF-CORE16R    | primitive_atlas_supply_repair_ready_for_core16e | A7FF-CORE16E expanded primitive/operator-probe atlas execution |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                     | A7FF-24R4E if explicitly authorized                            |
-| search_execution            | blocked         | not_authorized                                  | none                                                           |
+| workstream                  | current_stage   | status                                                | next                                                    |
+|:----------------------------|:----------------|:------------------------------------------------------|:--------------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                                  | keep registry as source-of-truth                        |
+| a7ff_family_diversification | A7FF-CORE16G    | family_native_interaction_contract_ready_for_core16ge | A7FF-CORE16GE family-native interaction probe execution |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                           | A7FF-24R4E if explicitly authorized                     |
+| search_execution            | blocked         | not_authorized                                        | none                                                    |
 
 ## Allowed Next Tasks
 
-| task                                                           | reason                                                                                                 |
-|:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option              | requires explicit user authorization; no search and no promotion                                       |
-| A7PM-0/3 maintenance                                           | governance registry maintenance                                                                        |
-| A7FF-CORE16E expanded primitive/operator-probe atlas execution | execute expanded primitive/operator response atlas only; no formula generation/replay/search/promotion |
+| task                                                    | reason                                                                                        |
+|:--------------------------------------------------------|:----------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option       | requires explicit user authorization; no search and no promotion                              |
+| A7PM-0/3 maintenance                                    | governance registry maintenance                                                               |
+| A7FF-CORE16GE family-native interaction probe execution | execute typed interaction probe only; no open grammar, replay expansion, search, or promotion |
 
 ## Blocked Tasks
 
@@ -41,9 +41,10 @@ Generated: 2026-06-01T08:19:27Z
 | A7AL-2Q                          | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                      | not authorized                                                                                                        |
 | shadow/paper/live                | not authorized                                                                                                        |
-| A7FF-CORE17                      | blocked: CORE16 atlas supply failed; CORE16E repair execution required                                                |
-| A7FF formula generation          | blocked until expanded primitive atlas passes supply gates                                                            |
-| A7FF large search                | blocked until CORE16E passes                                                                                          |
+| A7FF-CORE17                      | blocked until CORE16GE typed interaction probe passes                                                                 |
+| A7FF formula generation          | blocked: CORE16G authorizes typed interaction probe only                                                              |
+| A7FF bounded replay              | blocked: no broad objective atlas                                                                                     |
+| A7FF large search                | blocked until interaction probe passes                                                                                |
 
 ## Boundary
 

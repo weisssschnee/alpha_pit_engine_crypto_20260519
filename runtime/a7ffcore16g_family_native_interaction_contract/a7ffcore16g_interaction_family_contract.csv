@@ -1,0 +1,8 @@
+interaction_family,left_family,right_family,allowed_transforms,role,rationale
+I0_OI_delta_x_price_move,open_interest,price_return,delta_4h;delta_24h;zscore_168h;spread_short_long,ordinary_alpha_probe,OI single-field rows have near misses but need price-move context to avoid slow leverage-state ambiguity
+I1_OI_delta_x_funding_abs,open_interest,funding,delta_4h;delta_24h;zscore_168h,ordinary_alpha_probe,leverage expansion should be interpreted under crowding/funding state
+I2_OI_delta_x_basis_premium_dislocation,open_interest,basis_premium,delta_4h;zscore_72h;zscore_168h;shock_24h,ordinary_alpha_probe_with_basis_cap,"use basis/premium as context leg, not dominant standalone source"
+I3_positioning_divergence_x_price_or_basis,positioning,price_return;basis_premium,spread_short_long;delta_24h;zscore_168h,ordinary_alpha_probe,positioning strict supply is thin but divergence may only matter under price/basis context
+I4_taker_flow_x_OI_or_liquidity,taker_flow,open_interest;liquidity,delta_1h;delta_4h;shock_24h;tsrank_72h,diagnostic_to_alpha_probe,flow alone has zero strict supply; test only with leverage or liquidity state
+I5_liquidity_state_x_basis_or_positioning,liquidity,basis_premium;positioning,zscore_168h;tsrank_168h;shock_24h,state_conditioned_probe,liquidity is likely a state/neutralizer unless interaction beats controls
+I6_volatility_state_x_basis_or_OI,volatility,basis_premium;open_interest,zscore_72h;zscore_168h;spread_short_long,state_conditioned_probe,"volatility should condition dislocation/leverage signals, not become pure volatility beta"

@@ -1,0 +1,24 @@
+{
+  "atlas_candidate_count": 149,
+  "atlas_transform_count": 10,
+  "authorizes_alpha_proof": false,
+  "authorizes_core17": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "field_family_count_lt_6",
+    "top_family_share_gt_30pct"
+  ],
+  "completed_family_shards": 13,
+  "decision": "HOLD_A7FFCORE16E_EXPANDED_PRIMITIVE_ATLAS_INSUFFICIENT",
+  "executes_replay": false,
+  "executes_search": false,
+  "field_family_count": 3,
+  "generated_at": "2026-06-01T09:14:53Z",
+  "next_allowed": "A7FF-CORE16ER expanded atlas failure forensic",
+  "response_rows": 5120,
+  "source_decision": "PASS_A7FFCORE16R_PRIMITIVE_ATLAS_SUPPLY_REPAIR_READY_FOR_CORE16E",
+  "source_stage": "A7FF-CORE16R",
+  "stage": "A7FF-CORE16E",
+  "top_family_share": 0.9664429530201343
+}

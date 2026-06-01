@@ -1,0 +1,14 @@
+{
+  "atlas_candidate_count": 0,
+  "decision": "PASS_A7FFCORE16E_FAMILY_SHARD_COMPLETE",
+  "field_count": 3,
+  "field_family": "funding",
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-06-01T09:04:33Z",
+  "missing_fields_excluded": [],
+  "response_rows": 480,
+  "stage": "A7FF-CORE16E-FAMILY",
+  "symbols_loaded": 96,
+  "timestamps": 3481,
+  "transform_count": 0
+}

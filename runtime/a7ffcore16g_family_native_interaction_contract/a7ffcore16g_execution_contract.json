@@ -1,0 +1,43 @@
+{
+  "authorized": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "forbidden": [
+    "open grammar FormulaGen",
+    "bounded replay",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "horizons": [
+    1,
+    4,
+    8,
+    24
+  ],
+  "labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return"
+  ],
+  "max_blueprints": 2048,
+  "name": "family-native interaction probe execution",
+  "promotion_gate": {
+    "control_ratio_for_promotion": "< 1.0",
+    "interaction_probe_candidates": 64,
+    "near_miss_lane": "1.0 <= control_ratio < 1.5 forensic-only",
+    "non_basis_family_count": 4,
+    "top_family_share_max": 0.4
+  },
+  "stage": "A7FF-CORE16GE",
+  "target_interaction_families": [
+    "I0_OI_delta_x_price_move",
+    "I1_OI_delta_x_funding_abs",
+    "I2_OI_delta_x_basis_premium_dislocation",
+    "I3_positioning_divergence_x_price_or_basis",
+    "I4_taker_flow_x_OI_or_liquidity",
+    "I5_liquidity_state_x_basis_or_positioning",
+    "I6_volatility_state_x_basis_or_OI"
+  ]
+}

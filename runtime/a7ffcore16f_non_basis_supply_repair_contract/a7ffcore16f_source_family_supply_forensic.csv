@@ -1,0 +1,14 @@
+field_family,scored_rows,atlas_candidate_count,lag_ok_candidate_count,near_miss_count,median_control_ratio,transform_count,label_family_count,supply_class
+basis_premium,800,144,67,33,3.880141130347146,10,4,positive_concentrated
+price_return,320,4,1,18,13.897384287132729,10,4,near_miss_repairable
+positioning,480,1,1,0,11.24519225470957,10,4,zero_or_control_like
+open_interest,480,0,0,5,11.407110227678691,10,4,near_miss_repairable
+listing_age,320,0,0,1,4.881010149043558,10,4,near_miss_repairable
+coverage,320,0,0,0,,10,4,zero_or_control_like
+funding,480,0,0,0,3.9303492944440057,10,4,zero_or_control_like
+liquidity,640,0,0,0,11.47251539609604,10,4,zero_or_control_like
+liquidity_volatility,160,0,0,0,12.472252698240728,10,4,zero_or_control_like
+listing_age_interaction,320,0,0,0,12.335716779929708,10,4,zero_or_control_like
+open_interest_interaction,160,0,0,0,17.61084669414966,10,4,zero_or_control_like
+taker_flow,320,0,0,0,4.4907772092949045,10,4,zero_or_control_like
+volatility,320,0,0,0,27.640560753442216,10,4,zero_or_control_like
