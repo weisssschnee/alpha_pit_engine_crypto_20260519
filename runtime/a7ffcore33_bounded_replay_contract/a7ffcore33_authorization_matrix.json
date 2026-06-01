@@ -1,0 +1,11 @@
+{
+  "authorized": {
+    "A7FF-CORE33E bounded replay execution": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "formula_search": true,
+    "large_search": true,
+    "shadow_paper_live": true
+  }
+}

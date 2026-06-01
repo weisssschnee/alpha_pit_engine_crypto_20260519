@@ -1,0 +1,5 @@
+gate,threshold,observed,pass
+replay_candidate_count,>= 12,21.0,True
+family_count,>= 3,3.0,True
+cluster_unique,all selected candidates unique clusters,21.0,True
+top_family_share,<= 0.50,0.38095238095238093,True

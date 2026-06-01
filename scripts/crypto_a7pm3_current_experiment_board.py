@@ -124,6 +124,8 @@ A7FFCORE30 = REPO / "runtime" / "a7ffcore30_independent_family_numeric_probe_con
 A7FFCORE30E = REPO / "runtime" / "a7ffcore30e_bounded_numeric_probe" / "a7ffcore30e_manifest.json"
 A7FFCORE31 = REPO / "runtime" / "a7ffcore31_independent_family_clue_consolidation" / "a7ffcore31_manifest.json"
 A7FFCORE32 = REPO / "runtime" / "a7ffcore32_replay_preflight_contract" / "a7ffcore32_manifest.json"
+A7FFCORE32E = REPO / "runtime" / "a7ffcore32e_replay_preflight_execution" / "a7ffcore32e_manifest.json"
+A7FFCORE33 = REPO / "runtime" / "a7ffcore33_bounded_replay_contract" / "a7ffcore33_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -256,12 +258,35 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore30e = read_json(A7FFCORE30E)
     a7ffcore31 = read_json(A7FFCORE31)
     a7ffcore32 = read_json(A7FFCORE32)
+    a7ffcore32e = read_json(A7FFCORE32E)
+    a7ffcore33 = read_json(A7FFCORE33)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore32.get("decision") == "PASS_A7FFCORE32_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE32E":
+    if a7ffcore33.get("decision") == "PASS_A7FFCORE33_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE33E":
+        allowed["A7FF-CORE33E bounded replay execution"] = (
+            "bounded replay only; no formula search, large search, alpha proof, or live"
+        )
+        blocked["A7FF large search"] = "blocked until CORE33E bounded replay evidence passes promotion gates"
+        blocked["A7FF formula generation/search"] = "blocked: CORE33 authorizes bounded replay only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE33"
+        status = "bounded_replay_contract_ready_for_core33e"
+        next_task = "A7FF-CORE33E bounded replay execution"
+    elif a7ffcore32e.get("decision") == "PASS_A7FFCORE32E_REPLAY_PREFLIGHT_READY_FOR_CORE33_CONTRACT":
+        allowed["A7FF-CORE33 bounded replay contract"] = (
+            "contract only; define bounded replay over CORE32E preflight survivors"
+        )
+        blocked["A7FF replay execution"] = "blocked until CORE33 contract authorizes CORE33E"
+        blocked["A7FF large search"] = "blocked: replay preflight evidence is not search evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE32E authorizes bounded replay contract only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE32E"
+        status = "replay_preflight_ready_for_core33_contract"
+        next_task = "A7FF-CORE33 bounded replay contract"
+    elif a7ffcore32.get("decision") == "PASS_A7FFCORE32_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE32E":
         allowed["A7FF-CORE32E replay preflight execution"] = (
             "preflight execution only; no tradable replay/search/promotion"
         )

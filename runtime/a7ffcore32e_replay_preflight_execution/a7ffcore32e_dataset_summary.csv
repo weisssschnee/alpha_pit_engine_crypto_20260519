@@ -1,0 +1,3 @@
+dataset,rows,sample_rows,symbols,sample_timestamps
+core12_aggtrades_all_features,815818,39935,39,1024
+top498_replay_v2,6949596,338493,498,1024

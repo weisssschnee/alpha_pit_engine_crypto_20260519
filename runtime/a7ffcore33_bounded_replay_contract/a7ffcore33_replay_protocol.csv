@@ -1,0 +1,9 @@
+item,value
+portfolio_proxy,hourly cross-sectional top/bottom decile spread; equal-weight and liquidity-capped variants
+labels,L0/L1/L3/L5 primary; L7 diagnostic only
+horizons,"4h, 8h, 24h"
+costs,"2bps, 5bps, 10bps proxy"
+controls,"row shuffle, time shuffle, wrong-lag future, stale, sign flip, same-family placebo"
+robust_stats,non-overlap offset tstat; simple block bootstrap; split consistency
+concentration,"family, cluster, symbol, month, and dataset contribution caps"
+boundary,"bounded replay only; no search, alpha proof, shadow, paper, live"

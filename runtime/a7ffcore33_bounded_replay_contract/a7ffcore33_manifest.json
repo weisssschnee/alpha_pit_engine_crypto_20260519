@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core33e_bounded_replay": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE33_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE33E",
+  "executes_replay": false,
+  "executes_search": false,
+  "family_count": 3,
+  "generated_at": "2026-06-01T19:06:07Z",
+  "next_allowed": "A7FF-CORE33E bounded replay execution",
+  "replay_candidate_count": 21,
+  "source_decision": "PASS_A7FFCORE32E_REPLAY_PREFLIGHT_READY_FOR_CORE33_CONTRACT",
+  "source_stage": "A7FF-CORE32E",
+  "stage": "A7FF-CORE33"
+}

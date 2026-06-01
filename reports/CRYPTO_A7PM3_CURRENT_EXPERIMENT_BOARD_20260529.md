@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T18:58:46Z
+Generated: 2026-06-01T19:06:36Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T18:58:46Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                      | next                                    |
-|:----------------------------|:----------------|:--------------------------------------------|:----------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                        | keep registry as source-of-truth        |
-| a7ff_family_diversification | A7FF-CORE32     | replay_preflight_contract_ready_for_core32e | A7FF-CORE32E replay preflight execution |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                 | A7FF-24R4E if explicitly authorized     |
-| search_execution            | blocked         | not_authorized                              | none                                    |
+| workstream                  | current_stage   | status                                    | next                                  |
+|:----------------------------|:----------------|:------------------------------------------|:--------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                      | keep registry as source-of-truth      |
+| a7ff_family_diversification | A7FF-CORE33     | bounded_replay_contract_ready_for_core33e | A7FF-CORE33E bounded replay execution |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution               | A7FF-24R4E if explicitly authorized   |
+| search_execution            | blocked         | not_authorized                            | none                                  |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                           |
-|:--------------------------------------------------|:-----------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                  |
-| A7FF-CORE32E replay preflight execution           | preflight execution only; no tradable replay/search/promotion    |
+| task                                              | reason                                                                     |
+|:--------------------------------------------------|:---------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion           |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                            |
+| A7FF-CORE33E bounded replay execution             | bounded replay only; no formula search, large search, alpha proof, or live |
 
 ## Blocked Tasks
 
@@ -41,9 +41,8 @@ Generated: 2026-06-01T18:58:46Z
 | A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                         | not authorized                                                                                                        |
 | shadow/paper/live                   | not authorized                                                                                                        |
-| A7FF tradable replay                | blocked until CORE32E preflight passes all controls and alignment checks                                              |
-| A7FF large search                   | blocked: replay preflight contract is not search evidence                                                             |
-| A7FF formula generation/search      | blocked: CORE32 authorizes preflight execution only                                                                   |
+| A7FF large search                   | blocked until CORE33E bounded replay evidence passes promotion gates                                                  |
+| A7FF formula generation/search      | blocked: CORE33 authorizes bounded replay only                                                                        |
 | alpha proof / shadow / paper / live | not authorized                                                                                                        |
 
 ## Boundary

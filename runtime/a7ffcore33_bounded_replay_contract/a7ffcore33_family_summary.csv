@@ -1,0 +1,4 @@
+family_id,replay_candidate_count,cluster_count,median_control_ratio,median_abs_ic
+F1a_aggtrades_flow_microstructure,7,7,0.0791233048045327,0.0125352126969394
+F1b_taker_flow_market_panel,6,6,0.44888466960932205,0.0111356262626408
+F2a_basis_funding_independent,8,8,0.22640343099902865,0.01281307759067925

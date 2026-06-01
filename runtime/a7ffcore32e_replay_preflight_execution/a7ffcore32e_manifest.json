@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core33_contract": true,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_tradable_replay": false,
+  "candidate_count": 24,
+  "decision": "PASS_A7FFCORE32E_REPLAY_PREFLIGHT_READY_FOR_CORE33_CONTRACT",
+  "executes_replay_preflight": true,
+  "executes_search": false,
+  "executes_tradable_replay": false,
+  "generated_at": "2026-06-01T19:05:07Z",
+  "next_allowed": "A7FF-CORE33 bounded replay contract",
+  "preflight_result_rows": 360,
+  "selected_family_count": 3,
+  "selected_preflight_candidate_count": 21,
+  "source_decision": "PASS_A7FFCORE32_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE32E",
+  "source_stage": "A7FF-CORE32",
+  "stage": "A7FF-CORE32E"
+}
