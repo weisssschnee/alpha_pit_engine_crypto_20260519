@@ -1,0 +1,7 @@
+label_id,status,primary,note
+L0_raw_forward_return,allowed_reference,False,cannot be sole proof label
+L1_cross_sectional_relative_return,allowed_primary,True,preferred for cross-sectional book
+L2_market_beta_residual_return,required_primary,True,must be tested before search authorization
+L3_liquidity_tier_relative_return,allowed_primary,True,controls liquidity-tier distortions
+L5_vol_adjusted_return,allowed_primary,True,controls high-vol dominance
+L7_ranked_future_return,diagnostic_only,False,rank labels cannot alone authorize alpha/search

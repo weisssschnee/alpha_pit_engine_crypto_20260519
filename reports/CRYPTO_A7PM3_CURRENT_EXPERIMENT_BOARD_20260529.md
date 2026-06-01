@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T19:46:24Z
+Generated: 2026-06-01T19:50:07Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T19:46:24Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                      | next                                                      |
-|:----------------------------|:----------------|:--------------------------------------------|:----------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                        | keep registry as source-of-truth                          |
-| a7ff_family_diversification | A7FF-CORE37X    | route_arbitration_ready_for_core38_contract | A7FF-CORE38 executable portfolio-label objective contract |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                 | A7FF-24R4E if explicitly authorized                       |
-| search_execution            | blocked         | not_authorized                              | none                                                      |
+| workstream                  | current_stage   | status                                               | next                                                             |
+|:----------------------------|:----------------|:-----------------------------------------------------|:-----------------------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                                 | keep registry as source-of-truth                                 |
+| a7ff_family_diversification | A7FF-CORE38     | portfolio_label_objective_contract_ready_for_core38e | A7FF-CORE38E executable portfolio-label objective adequacy audit |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                          | A7FF-24R4E if explicitly authorized                              |
+| search_execution            | blocked         | not_authorized                                       | none                                                             |
 
 ## Allowed Next Tasks
 
-| task                                                      | reason                                                                                    |
-|:----------------------------------------------------------|:------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option         | requires explicit user authorization; no search and no promotion                          |
-| A7PM-0/3 maintenance                                      | governance registry maintenance                                                           |
-| A7FF-CORE38 executable portfolio-label objective contract | contract only; define executable portfolio-label/book objective before any new generation |
+| task                                                             | reason                                                                                       |
+|:-----------------------------------------------------------------|:---------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option                | requires explicit user authorization; no search and no promotion                             |
+| A7PM-0/3 maintenance                                             | governance registry maintenance                                                              |
+| A7FF-CORE38E executable portfolio-label objective adequacy audit | audit only; test book/label objective adequacy over existing artifacts before any generation |
 
 ## Blocked Tasks
 
@@ -41,9 +41,9 @@ Generated: 2026-06-01T19:46:24Z
 | A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                         | not authorized                                                                                                        |
 | shadow/paper/live                   | not authorized                                                                                                        |
-| A7FF large search                   | blocked: CORE37X selected portfolio-label objective contract, not search                                              |
-| A7FF formula generation/search      | blocked until CORE38 contract and any later bounded execution pass                                                    |
-| same CORE33/34/36 queue rerun       | not authorized: frozen by CORE37X                                                                                     |
+| A7FF large search                   | blocked: CORE38 authorizes objective adequacy audit only                                                              |
+| A7FF formula generation/search      | blocked until CORE38E proves book-objective survivors                                                                 |
+| same CORE33/34/36 queue rerun       | not authorized: frozen by CORE37X/CORE38                                                                              |
 | alpha proof / shadow / paper / live | not authorized                                                                                                        |
 
 ## Boundary

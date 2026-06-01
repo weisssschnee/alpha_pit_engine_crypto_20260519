@@ -1,0 +1,12 @@
+{
+  "authorized": {
+    "A7FF-CORE38E executable portfolio-label objective adequacy audit": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "formula_search": true,
+    "large_search": true,
+    "same_CORE33_34_36_queue_rerun": true,
+    "shadow_paper_live": true
+  }
+}

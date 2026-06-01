@@ -1,0 +1,8 @@
+constraint,value,hard_gate
+max_symbol_weight,2.5% or lower in top498 book,True
+max_family_weight,35% selected queue cap,True
+max_cluster_weight,25% signal-vector/cluster cap,True
+liquidity_cap,quote-volume tier cap before spread scoring,True
+cost_buckets,2bps/5bps/10bps variants; primary must survive 5bps,True
+controls,"wrong-lag, stale, shuffle, sign-flip weaker than original",True
+oos_balance,validation/test/recent cannot be dominated by one split,True

@@ -136,6 +136,7 @@ A7FFCORE36 = REPO / "runtime" / "a7ffcore36_replay_objective_reset_contract" / "
 A7FFCORE36E = REPO / "runtime" / "a7ffcore36e_replay_objective_reset_execution" / "a7ffcore36e_manifest.json"
 A7FFCORE36ER = REPO / "runtime" / "a7ffcore36er_replay_objective_forensic" / "a7ffcore36er_manifest.json"
 A7FFCORE37X = REPO / "runtime" / "a7ffcore37x_route_arbitration" / "a7ffcore37x_manifest.json"
+A7FFCORE38 = REPO / "runtime" / "a7ffcore38_portfolio_label_objective_contract" / "a7ffcore38_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -280,12 +281,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore36e = read_json(A7FFCORE36E)
     a7ffcore36er = read_json(A7FFCORE36ER)
     a7ffcore37x = read_json(A7FFCORE37X)
+    a7ffcore38 = read_json(A7FFCORE38)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore37x.get("decision") == "PASS_A7FFCORE37X_ROUTE_ARBITRATION_READY_FOR_CORE38_CONTRACT":
+    if a7ffcore38.get("decision") == "PASS_A7FFCORE38_PORTFOLIO_LABEL_OBJECTIVE_CONTRACT_READY_FOR_CORE38E":
+        allowed["A7FF-CORE38E executable portfolio-label objective adequacy audit"] = (
+            "audit only; test book/label objective adequacy over existing artifacts before any generation"
+        )
+        blocked["A7FF large search"] = "blocked: CORE38 authorizes objective adequacy audit only"
+        blocked["A7FF formula generation/search"] = "blocked until CORE38E proves book-objective survivors"
+        blocked["same CORE33/34/36 queue rerun"] = "not authorized: frozen by CORE37X/CORE38"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE38"
+        status = "portfolio_label_objective_contract_ready_for_core38e"
+        next_task = "A7FF-CORE38E executable portfolio-label objective adequacy audit"
+    elif a7ffcore37x.get("decision") == "PASS_A7FFCORE37X_ROUTE_ARBITRATION_READY_FOR_CORE38_CONTRACT":
         allowed["A7FF-CORE38 executable portfolio-label objective contract"] = (
             "contract only; define executable portfolio-label/book objective before any new generation"
         )

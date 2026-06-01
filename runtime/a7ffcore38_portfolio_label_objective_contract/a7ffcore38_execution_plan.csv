@@ -1,0 +1,3 @@
+stage,action,executes_new_generation,executes_search,executes_new_replay
+A7FF-CORE38E,recompute book-objective adequacy over existing CORE33E/36E artifacts where possible,False,False,False
+A7FF-CORE39,"only if CORE38E identifies book-objective survivors, write bounded book-replay contract",False,False,False
