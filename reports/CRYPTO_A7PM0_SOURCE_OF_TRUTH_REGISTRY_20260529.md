@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T09:25:26Z
+Generated: 2026-06-01T09:26:32Z
 
 ## Decision
 
@@ -12,38 +12,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
- M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
- M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
- M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
- M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
- M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE16ER_EXPANDED_ATLAS_FORENSIC_20260601.md
-?? reports/CRYPTO_A7FFCORE16E_EXPANDED_PRIMITIVE_OPERATOR_ATLAS_20260601.md
-?? reports/CRYPTO_A7FFCORE16FER_NON_BASIS_ATLAS_FORENSIC_20260601.md
-?? reports/CRYPTO_A7FFCORE16FE_NON_BASIS_ATLAS_EXECUTION_20260601.md
-?? reports/CRYPTO_A7FFCORE16F_NON_BASIS_SUPPLY_REPAIR_CONTRACT_20260601.md
-?? reports/CRYPTO_A7FFCORE16G_FAMILY_NATIVE_INTERACTION_CONTRACT_20260601.md
-?? runtime/a7ffcore16e_expanded_primitive_operator_atlas/
-?? runtime/a7ffcore16er_expanded_atlas_forensic/
-?? runtime/a7ffcore16f_non_basis_supply_repair_contract/
-?? runtime/a7ffcore16fe_non_basis_atlas_execution/
-?? runtime/a7ffcore16fer_non_basis_atlas_forensic/
-?? runtime/a7ffcore16g_family_native_interaction_contract/
-?? scripts/crypto_a7ffcore16e_sharded_primitive_operator_atlas.py
-?? scripts/crypto_a7ffcore16er_expanded_atlas_forensic.py
-?? scripts/crypto_a7ffcore16f_non_basis_supply_repair_contract.py
-?? scripts/crypto_a7ffcore16fe_non_basis_atlas_execution.py
-?? scripts/crypto_a7ffcore16fer_non_basis_atlas_forensic.py
-?? scripts/crypto_a7ffcore16g_family_native_interaction_contract.py
-HEAD=2ff1edc24d008740a6e4bafb935bd467b4d35837
-origin/main=2ff1edc24d008740a6e4bafb935bd467b4d35837
+HEAD=002d4bf3b1c77de35805c602c6f960d710be666c
+origin/main=002d4bf3b1c77de35805c602c6f960d710be666c
 HEAD == origin/main: True
 ```
 
@@ -65,10 +38,10 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T09:25:26Z",
-  "head": "2ff1edc24d008740a6e4bafb935bd467b4d35837",
+  "generated_at": "2026-06-01T09:26:32Z",
+  "head": "002d4bf3b1c77de35805c602c6f960d710be666c",
   "head_equals_origin_main": true,
-  "origin_main": "2ff1edc24d008740a6e4bafb935bd467b4d35837",
+  "origin_main": "002d4bf3b1c77de35805c602c6f960d710be666c",
   "stage": "A7PM-0",
   "stage_count": 314
 }
