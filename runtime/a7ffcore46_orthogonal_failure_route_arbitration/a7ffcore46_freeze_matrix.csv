@@ -1,0 +1,7 @@
+item,status
+CORE33 candidate expansion,NOT_AUTHORIZED
+F1a/F1b/F2a same-family rerun,NOT_AUTHORIZED
+large formula search,NOT_AUTHORIZED
+alpha proof,NOT_AUTHORIZED
+shadow/paper/live,NOT_AUTHORIZED
+A7FF-CORE47 control-null-aware factor compiler contract,AUTHORIZED_CONTRACT_ONLY

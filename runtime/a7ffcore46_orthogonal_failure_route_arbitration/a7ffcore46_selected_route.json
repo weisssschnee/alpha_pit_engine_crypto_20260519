@@ -1,0 +1,9 @@
+{
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "goal": "define how future feature/factor generation must optimize original-vs-null separability before replay",
+  "next_stage": "A7FF-CORE47",
+  "next_stage_name": "control-null-aware feature-to-factor compiler contract",
+  "selected_route": "R3_control_null_aware_factor_compiler_contract"
+}

@@ -1,0 +1,7 @@
+gate,threshold
+packet_rows_positive,packet_rows > 0
+candidate_count_positive,candidate_count >= 4
+split_coverage,train/validation/test/recent reported separately
+net_book_positive,median net book return > 0 in at least two pre-recent splits
+control_margin,residual book must beat stale/sign/shuffle controls
+family_breadth,survivors from >=2 families required for any later expansion

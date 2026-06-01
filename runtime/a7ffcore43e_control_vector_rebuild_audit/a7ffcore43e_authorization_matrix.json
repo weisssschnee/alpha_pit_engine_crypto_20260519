@@ -1,0 +1,13 @@
+{
+  "authorized": {
+    "A7FF-CORE44 full-universe orthogonal score packet construction contract": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "book_replay_execution_from_selected_packet": true,
+    "formula_search": true,
+    "large_search": true,
+    "new_generation": true,
+    "shadow_paper_live": true
+  }
+}

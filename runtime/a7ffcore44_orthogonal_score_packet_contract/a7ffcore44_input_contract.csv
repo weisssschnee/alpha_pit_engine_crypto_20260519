@@ -1,0 +1,3 @@
+input_id,path,required,status,notes
+I0_core43e_full_universe_control_vector_sample,G:/AlphaFactory_CryptoData/research_runtime/a7ffcore43e_control_vectors_20260602/a7ffcore43e_full_universe_control_vector_sample.parquet,True,AVAILABLE,external parquet remains outside git; committed manifest references it
+I1_core33_candidate_queue,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_replay_candidate_queue.csv,True,AVAILABLE,candidate metadata source; no stale selected packet reuse

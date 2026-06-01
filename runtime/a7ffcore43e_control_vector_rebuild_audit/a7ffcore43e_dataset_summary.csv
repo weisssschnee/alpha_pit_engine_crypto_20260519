@@ -1,0 +1,3 @@
+dataset,source_rows,source_symbols,source_timestamps,sample_timestamps,candidate_count,quote_col
+core12_aggtrades_all_features,815818,39,20919,48,7,agg_notional
+top498_replay_v2,6949596,498,21025,48,14,trade_quote_volume

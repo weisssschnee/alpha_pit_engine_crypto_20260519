@@ -1,0 +1,6 @@
+policy_id,description,hard_requirement
+P0_use_core44e_packet_only,CORE45E must use CORE44E orthogonal packet and must not use CORE39E selected packet,True
+P1_recompute_labels_from_panel,CORE45E must attach labels from panel data at replay time; CORE44E packet contains scores/weights only,True
+P2_split_separated_reporting,report train/validation/test/recent separately before any aggregate metric,True
+P3_control_rank_margin,compare residual book against original/stale/sign/shuffle rank books where possible,True
+P4_no_search_or_promotion,"CORE45/CORE45E do not authorize formula generation, search, proof, shadow, paper, or live",True

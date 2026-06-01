@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core44_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 21,
+  "dataset_count": 2,
+  "decision": "PASS_A7FFCORE43E_CONTROL_VECTOR_REBUILD_READY_FOR_CORE44",
+  "executes_new_generation": false,
+  "executes_search": false,
+  "external_sample_path": "G:/AlphaFactory_CryptoData/research_runtime/a7ffcore43e_control_vectors_20260602/a7ffcore43e_full_universe_control_vector_sample.parquet",
+  "generated_at": "2026-06-01T20:42:57Z",
+  "min_residual_fit_rows_required": 30,
+  "next_allowed": "A7FF-CORE44 full-universe orthogonal score packet construction contract",
+  "source_decision": "PASS_A7FFCORE43_CONTROL_ORTHOGONALIZATION_CONTRACT_READY_FOR_CORE43E",
+  "source_stage": "A7FF-CORE43",
+  "stage": "A7FF-CORE43E",
+  "vector_sample_columns": 18,
+  "vector_sample_rows": 255236
+}

@@ -1,0 +1,5 @@
+objective_id,label_column,description,primary
+OB1_cross_sectional_relative_book,cs_relative_return,long/short book return using cross-sectional relative return,True
+OB2_market_beta_residual_book,market_beta_residual_return,book return after BTC/ETH market residual label,True
+OB3_liquidity_tier_relative_book,liquidity_tier_relative_return,book return relative to timestamp liquidity tier,True
+OB4_vol_adjusted_book,vol_adjusted_return,vol-adjusted book return diagnostic,False

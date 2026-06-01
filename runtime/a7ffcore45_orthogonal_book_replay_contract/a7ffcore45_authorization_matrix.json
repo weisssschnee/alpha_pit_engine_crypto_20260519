@@ -1,0 +1,13 @@
+{
+  "authorized": {
+    "A7FF-CORE45E bounded orthogonal book replay execution": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "formula_search": true,
+    "large_search": true,
+    "new_generation": true,
+    "promotion": true,
+    "shadow_paper_live": true
+  }
+}

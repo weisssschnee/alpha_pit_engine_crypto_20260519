@@ -1,0 +1,3 @@
+stage,action,executes_new_generation,executes_search,writes_large_artifact_to_git
+A7FF-CORE44E,construct bounded orthogonal score packet from CORE43E full-universe vectors,False,False,False
+A7FF-CORE45,"if CORE44E passes, define bounded orthogonal book replay contract",False,False,False

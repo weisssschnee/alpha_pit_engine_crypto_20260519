@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core45_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 21,
+  "decision": "PASS_A7FFCORE44E_ORTHOGONAL_SCORE_PACKET_READY_FOR_CORE45_CONTRACT",
+  "executes_new_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "external_packet_path": "G:/AlphaFactory_CryptoData/research_runtime/a7ffcore44e_orthogonal_score_packet_20260602/a7ffcore44e_orthogonal_book_input_packet.parquet",
+  "generated_at": "2026-06-01T20:47:57Z",
+  "next_allowed": "A7FF-CORE45 bounded orthogonal book replay contract",
+  "packet_rows": 22600,
+  "source_decision": "PASS_A7FFCORE44_ORTHOGONAL_SCORE_PACKET_CONTRACT_READY_FOR_CORE44E",
+  "source_stage": "A7FF-CORE44",
+  "source_vector_rows": 255236,
+  "stage": "A7FF-CORE44E"
+}

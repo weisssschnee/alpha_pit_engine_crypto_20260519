@@ -1,0 +1,5 @@
+objective_id,replay_rows,positive_rows,control_clean_rows,median_net_book_return,median_control_ratio
+OB1_cross_sectional_relative_book,150,62,13,-0.0005354282,3.31741
+OB2_market_beta_residual_book,150,62,13,-0.0005354282,3.31741
+OB3_liquidity_tier_relative_book,150,71,18,-0.00020749003,3.598162
+OB4_vol_adjusted_book,150,79,17,0.009449118,3.660715

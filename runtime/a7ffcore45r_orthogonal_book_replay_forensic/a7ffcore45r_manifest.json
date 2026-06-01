@@ -1,0 +1,18 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core46_route_arbitration": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE45R_ORTHOGONAL_BOOK_REPLAY_FORENSIC_READY_FOR_CORE46_ROUTE_ARBITRATION",
+  "dominant_failure": "orthogonal_book_replay_control_dominated_zero_survivors",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T20:56:55Z",
+  "next_allowed": "A7FF-CORE46 orthogonal replay failure route arbitration",
+  "source_decision": "HOLD_A7FFCORE45E_ORTHOGONAL_BOOK_REPLAY_INSUFFICIENT",
+  "source_stage": "A7FF-CORE45E",
+  "stage": "A7FF-CORE45R",
+  "survivor_count": 0,
+  "survivor_family_count": 0
+}

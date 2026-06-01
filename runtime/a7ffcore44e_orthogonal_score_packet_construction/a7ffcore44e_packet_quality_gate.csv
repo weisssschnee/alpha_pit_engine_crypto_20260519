@@ -1,0 +1,7 @@
+metric,value,pass
+packet_rows,22600.0,True
+candidate_count,21.0,True
+required_packet_columns_present,20.0,True
+missing_book_score_rate,0.0,True
+max_abs_book_weight,0.02500000037252903,True
+long_short_presence_all_candidates,21.0,True

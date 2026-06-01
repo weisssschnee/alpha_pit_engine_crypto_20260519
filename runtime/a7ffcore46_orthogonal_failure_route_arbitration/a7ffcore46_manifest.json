@@ -1,0 +1,18 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core47_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE46_ROUTE_ARBITRATION_READY_FOR_CORE47_CONTRACT",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T20:58:54Z",
+  "next_allowed": "A7FF-CORE47 control-null-aware feature-to-factor compiler contract",
+  "selected_route": "R3_control_null_aware_factor_compiler_contract",
+  "source_decision": "PASS_A7FFCORE45R_ORTHOGONAL_BOOK_REPLAY_FORENSIC_READY_FOR_CORE46_ROUTE_ARBITRATION",
+  "source_dominant_failure": "orthogonal_book_replay_control_dominated_zero_survivors",
+  "source_stage": "A7FF-CORE45R",
+  "stage": "A7FF-CORE46"
+}

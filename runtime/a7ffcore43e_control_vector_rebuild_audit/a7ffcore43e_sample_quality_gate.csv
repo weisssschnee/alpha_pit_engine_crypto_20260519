@@ -1,0 +1,7 @@
+metric,value,pass
+vector_sample_rows,255236.0,True
+candidate_count,21.0,True
+required_vector_columns_present,7.0,True
+min_original_non_null_ratio,0.25580027798567306,True
+min_residual_null_std,0.00016263504221569747,True
+min_null_fit_rows,37.0,True

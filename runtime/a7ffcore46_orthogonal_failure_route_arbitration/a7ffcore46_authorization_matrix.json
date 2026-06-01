@@ -1,0 +1,13 @@
+{
+  "authorized": {
+    "A7FF-CORE47 control-null-aware feature-to-factor compiler contract": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "current_candidate_expansion": true,
+    "formula_search": true,
+    "large_search": true,
+    "same_family_rerun": true,
+    "shadow_paper_live": true
+  }
+}

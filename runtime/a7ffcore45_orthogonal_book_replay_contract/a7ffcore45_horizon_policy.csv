@@ -1,0 +1,3 @@
+horizon_h,role,description
+8,primary_short_horizon,shorter executable horizon used by prior CORE39/40 book packet diagnostics
+24,primary_slow_horizon,slower executable horizon used by prior CORE39/40 book packet diagnostics

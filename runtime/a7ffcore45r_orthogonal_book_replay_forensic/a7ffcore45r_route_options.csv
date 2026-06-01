@@ -1,0 +1,5 @@
+route_id,decision,reason
+R0_expand_current_candidates,REJECT,CORE45E has zero survivors after full-universe residual control orthogonalization
+R1_large_search,REJECT,book objective remains control dominated; search would amplify control-like structures
+R2_same_family_rerun,REJECT,F1a/F1b/F2a all have zero survivors and median control ratio above one
+R3_route_arbitration,SELECT,freeze current orthogonal book replay failure and choose between label/control redesign or new objective family

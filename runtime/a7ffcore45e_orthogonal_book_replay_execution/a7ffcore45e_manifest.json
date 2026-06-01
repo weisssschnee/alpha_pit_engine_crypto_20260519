@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core45r_forensic": true,
+  "authorizes_core46_arbitration": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "book_replay_rows": 600,
+  "decision": "HOLD_A7FFCORE45E_ORTHOGONAL_BOOK_REPLAY_INSUFFICIENT",
+  "executes_replay": true,
+  "executes_search": false,
+  "generated_at": "2026-06-01T20:54:34Z",
+  "next_allowed": "A7FF-CORE45R orthogonal book replay forensic",
+  "packet_variant_rows": 171086,
+  "source_decision": "PASS_A7FFCORE45_ORTHOGONAL_BOOK_REPLAY_CONTRACT_READY_FOR_CORE45E",
+  "source_stage": "A7FF-CORE45",
+  "stage": "A7FF-CORE45E",
+  "survivor_count": 0,
+  "survivor_family_count": 0,
+  "vector_rows": 255236
+}
