@@ -2619,44 +2619,44 @@ runtime,A7FF-CORE16K,runtime/a7ffcore16k_h2_strict_floor_repair_contract/a7ffcor
 runtime,A7FF-CORE16K,runtime/a7ffcore16k_h2_strict_floor_repair_contract/a7ffcore16k_source_h2_excluded_nearmiss_rows.csv,37a5102,add crypto core16he second pass breadth governance,3478
 runtime,A7FF-CORE16K,runtime/a7ffcore16k_h2_strict_floor_repair_contract/a7ffcore16k_source_h2_strict_rows.csv,37a5102,add crypto core16he second pass breadth governance,8445
 runtime,A7FF-CORE16K,runtime/a7ffcore16k_h2_strict_floor_repair_contract/a7ffcore16k_source_strict_queue.csv,37a5102,add crypto core16he second pass breadth governance,78334
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_blueprint_queue.csv,,,14426
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_chunk_manifest_summary.csv,,,549
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_decision_counts.csv,,,181
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_h2_added_strict_rows.csv,,,2676
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_h2_repair_candidates.csv,,,2631
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_h2_repair_response_map.csv,,,799767
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_manifest.json,,,847
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_repaired_strict_preseed_queue.csv,,,80263
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=0-of-5/a7ffcore16ke_blueprint_queue.csv,,,2964
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=0-of-5/a7ffcore16ke_chunk_manifest.json,,,260
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=0-of-5/a7ffcore16ke_h2_repair_candidates.csv,,,1012
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=0-of-5/a7ffcore16ke_h2_repair_response_map.csv,,,164229
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=1-of-5/a7ffcore16ke_blueprint_queue.csv,,,2964
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=1-of-5/a7ffcore16ke_chunk_manifest.json,,,260
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=1-of-5/a7ffcore16ke_h2_repair_candidates.csv,,,2592
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=1-of-5/a7ffcore16ke_h2_repair_response_map.csv,,,152499
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=2-of-5/a7ffcore16ke_blueprint_queue.csv,,,2954
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=2-of-5/a7ffcore16ke_chunk_manifest.json,,,260
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=2-of-5/a7ffcore16ke_h2_repair_candidates.csv,,,1012
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=2-of-5/a7ffcore16ke_h2_repair_response_map.csv,,,178959
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=3-of-5/a7ffcore16ke_blueprint_queue.csv,,,2954
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=3-of-5/a7ffcore16ke_chunk_manifest.json,,,260
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=3-of-5/a7ffcore16ke_h2_repair_candidates.csv,,,1012
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=3-of-5/a7ffcore16ke_h2_repair_response_map.csv,,,141053
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=4-of-5/a7ffcore16ke_blueprint_queue.csv,,,2974
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=4-of-5/a7ffcore16ke_chunk_manifest.json,,,260
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=4-of-5/a7ffcore16ke_h2_repair_candidates.csv,,,1012
-runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=4-of-5/a7ffcore16ke_h2_repair_response_map.csv,,,184069
-runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_candidate_transform_summary.csv,,,157
-runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_manifest.json,,,947
-runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_nearmiss_transform_summary.csv,,,336
-runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_recommended_actions.csv,,,528
-runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_repaired_queue_summary.csv,,,237
-runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_allowed_next.csv,,,250
-runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_blocked_tasks.csv,,,280
-runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_core16me_operator_policy.csv,,,368
-runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_floor_policy.csv,,,458
-runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_manifest.json,,,811
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_blueprint_queue.csv,093ff03,add crypto core16ke h2 repair arbitration,14426
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_chunk_manifest_summary.csv,093ff03,add crypto core16ke h2 repair arbitration,549
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_decision_counts.csv,093ff03,add crypto core16ke h2 repair arbitration,181
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_h2_added_strict_rows.csv,093ff03,add crypto core16ke h2 repair arbitration,2676
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_h2_repair_candidates.csv,093ff03,add crypto core16ke h2 repair arbitration,2631
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_h2_repair_response_map.csv,093ff03,add crypto core16ke h2 repair arbitration,799767
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_manifest.json,093ff03,add crypto core16ke h2 repair arbitration,847
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/a7ffcore16ke_repaired_strict_preseed_queue.csv,093ff03,add crypto core16ke h2 repair arbitration,80263
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=0-of-5/a7ffcore16ke_blueprint_queue.csv,093ff03,add crypto core16ke h2 repair arbitration,2964
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=0-of-5/a7ffcore16ke_chunk_manifest.json,093ff03,add crypto core16ke h2 repair arbitration,260
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=0-of-5/a7ffcore16ke_h2_repair_candidates.csv,093ff03,add crypto core16ke h2 repair arbitration,1012
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=0-of-5/a7ffcore16ke_h2_repair_response_map.csv,093ff03,add crypto core16ke h2 repair arbitration,164229
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=1-of-5/a7ffcore16ke_blueprint_queue.csv,093ff03,add crypto core16ke h2 repair arbitration,2964
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=1-of-5/a7ffcore16ke_chunk_manifest.json,093ff03,add crypto core16ke h2 repair arbitration,260
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=1-of-5/a7ffcore16ke_h2_repair_candidates.csv,093ff03,add crypto core16ke h2 repair arbitration,2592
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=1-of-5/a7ffcore16ke_h2_repair_response_map.csv,093ff03,add crypto core16ke h2 repair arbitration,152499
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=2-of-5/a7ffcore16ke_blueprint_queue.csv,093ff03,add crypto core16ke h2 repair arbitration,2954
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=2-of-5/a7ffcore16ke_chunk_manifest.json,093ff03,add crypto core16ke h2 repair arbitration,260
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=2-of-5/a7ffcore16ke_h2_repair_candidates.csv,093ff03,add crypto core16ke h2 repair arbitration,1012
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=2-of-5/a7ffcore16ke_h2_repair_response_map.csv,093ff03,add crypto core16ke h2 repair arbitration,178959
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=3-of-5/a7ffcore16ke_blueprint_queue.csv,093ff03,add crypto core16ke h2 repair arbitration,2954
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=3-of-5/a7ffcore16ke_chunk_manifest.json,093ff03,add crypto core16ke h2 repair arbitration,260
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=3-of-5/a7ffcore16ke_h2_repair_candidates.csv,093ff03,add crypto core16ke h2 repair arbitration,1012
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=3-of-5/a7ffcore16ke_h2_repair_response_map.csv,093ff03,add crypto core16ke h2 repair arbitration,141053
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=4-of-5/a7ffcore16ke_blueprint_queue.csv,093ff03,add crypto core16ke h2 repair arbitration,2974
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=4-of-5/a7ffcore16ke_chunk_manifest.json,093ff03,add crypto core16ke h2 repair arbitration,260
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=4-of-5/a7ffcore16ke_h2_repair_candidates.csv,093ff03,add crypto core16ke h2 repair arbitration,1012
+runtime,A7FF-CORE16KE,runtime/a7ffcore16ke_h2_strict_floor_execution/chunk=4-of-5/a7ffcore16ke_h2_repair_response_map.csv,093ff03,add crypto core16ke h2 repair arbitration,184069
+runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_candidate_transform_summary.csv,093ff03,add crypto core16ke h2 repair arbitration,157
+runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_manifest.json,093ff03,add crypto core16ke h2 repair arbitration,947
+runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_nearmiss_transform_summary.csv,093ff03,add crypto core16ke h2 repair arbitration,336
+runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_recommended_actions.csv,093ff03,add crypto core16ke h2 repair arbitration,528
+runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_repaired_queue_summary.csv,093ff03,add crypto core16ke h2 repair arbitration,237
+runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_allowed_next.csv,093ff03,add crypto core16ke h2 repair arbitration,250
+runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_blocked_tasks.csv,093ff03,add crypto core16ke h2 repair arbitration,280
+runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_core16me_operator_policy.csv,093ff03,add crypto core16ke h2 repair arbitration,368
+runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_floor_policy.csv,093ff03,add crypto core16ke h2 repair arbitration,458
+runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_manifest.json,093ff03,add crypto core16ke h2 repair arbitration,811
 runtime,A7FF-CORE16R,runtime/a7ffcore16r_primitive_atlas_supply_repair/a7ffcore16r_blocked_actions.csv,2ff1edc,add crypto a7ffcore16 primitive atlas,300
 runtime,A7FF-CORE16R,runtime/a7ffcore16r_primitive_atlas_supply_repair/a7ffcore16r_manifest.json,2ff1edc,add crypto a7ffcore16 primitive atlas,575
 runtime,A7FF-CORE16R,runtime/a7ffcore16r_primitive_atlas_supply_repair/a7ffcore16r_next_contract.json,2ff1edc,add crypto a7ffcore16 primitive atlas,928
@@ -3056,9 +3056,9 @@ report,A7FFCORE16HER-SECOND-PASS-FORENSIC,reports/CRYPTO_A7FFCORE16HER_SECOND_PA
 report,A7FFCORE16I-BALANCED-PRESEED-QUEUE-AUDIT,reports/CRYPTO_A7FFCORE16I_BALANCED_PRESEED_QUEUE_AUDIT_20260601.md,37a5102,add crypto core16he second pass breadth governance,128910
 report,A7FFCORE16J-NEARMISS-RESOLUTION-AUDIT,reports/CRYPTO_A7FFCORE16J_NEARMISS_RESOLUTION_AUDIT_20260601.md,37a5102,add crypto core16he second pass breadth governance,2604
 report,A7FFCORE16K-H2-STRICT-FLOOR-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE16K_H2_STRICT_FLOOR_REPAIR_CONTRACT_20260601.md,37a5102,add crypto core16he second pass breadth governance,2841
-report,A7FFCORE16KE-H2-STRICT-FLOOR-EXECUTION,reports/CRYPTO_A7FFCORE16KE_H2_STRICT_FLOOR_EXECUTION_20260601.md,,,7333
-report,A7FFCORE16KR-H2-REPAIR-FORENSIC,reports/CRYPTO_A7FFCORE16KR_H2_REPAIR_FORENSIC_20260601.md,,,8953
-report,A7FFCORE16M-H2-FLOOR-ARBITRATION-CONTRACT,reports/CRYPTO_A7FFCORE16M_H2_FLOOR_ARBITRATION_CONTRACT_20260601.md,,,3644
+report,A7FFCORE16KE-H2-STRICT-FLOOR-EXECUTION,reports/CRYPTO_A7FFCORE16KE_H2_STRICT_FLOOR_EXECUTION_20260601.md,093ff03,add crypto core16ke h2 repair arbitration,7333
+report,A7FFCORE16KR-H2-REPAIR-FORENSIC,reports/CRYPTO_A7FFCORE16KR_H2_REPAIR_FORENSIC_20260601.md,093ff03,add crypto core16ke h2 repair arbitration,8953
+report,A7FFCORE16M-H2-FLOOR-ARBITRATION-CONTRACT,reports/CRYPTO_A7FFCORE16M_H2_FLOOR_ARBITRATION_CONTRACT_20260601.md,093ff03,add crypto core16ke h2 repair arbitration,3644
 report,A7FFCORE16R-PRIMITIVE-ATLAS-SUPPLY-REPAIR,reports/CRYPTO_A7FFCORE16R_PRIMITIVE_ATLAS_SUPPLY_REPAIR_20260601.md,2ff1edc,add crypto a7ffcore16 primitive atlas,4353
 report,A7FFCORE2-FEATURE-SUBGRAPH-REGISTRY,reports/CRYPTO_A7FFCORE2_FEATURE_SUBGRAPH_REGISTRY_20260601.md,510fb01,add crypto a7ffcore2 subgraph registry,40668
 report,A7FFCORE3-FORMULAGEN-SUBGRAPH-GATE,reports/CRYPTO_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_20260601.md,02de3f1,add crypto a7ffcore3 formulagen gate,5243
@@ -3090,13 +3090,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,35ff84d,refresh crypto registry after core16k push,506717
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,093ff03,add crypto core16ke h2 repair arbitration,511630
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,9f44a1f,refresh crypto registry after a7ffcore14se,104425
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,35ff84d,refresh crypto registry after core16k push,190344
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,35ff84d,refresh crypto registry after core16k push,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,093ff03,add crypto core16ke h2 repair arbitration,191867
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,093ff03,add crypto core16ke h2 repair arbitration,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,35ff84d,refresh crypto registry after core16k push,102653
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,093ff03,add crypto core16ke h2 repair arbitration,103606
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -3112,15 +3112,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,37a5102,add crypto core16he second pass breadth governance,377
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,37a5102,add crypto core16he second pass breadth governance,346
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,37a5102,add crypto core16he second pass breadth governance,1533
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,35ff84d,refresh crypto registry after core16k push,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,35ff84d,refresh crypto registry after core16k push,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,35ff84d,refresh crypto registry after core16k push,5439
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,093ff03,add crypto core16ke h2 repair arbitration,377
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,093ff03,add crypto core16ke h2 repair arbitration,346
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,093ff03,add crypto core16ke h2 repair arbitration,1533
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,093ff03,add crypto core16ke h2 repair arbitration,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,093ff03,add crypto core16ke h2 repair arbitration,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,093ff03,add crypto core16ke h2 repair arbitration,6218
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,35ff84d,refresh crypto registry after core16k push,5478
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,093ff03,add crypto core16ke h2 repair arbitration,5478
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
