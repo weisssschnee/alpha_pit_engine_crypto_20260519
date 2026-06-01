@@ -1,0 +1,3 @@
+failure_reason,candidate_count
+train_objective_fail,18
+oos_split_balance_fail,3

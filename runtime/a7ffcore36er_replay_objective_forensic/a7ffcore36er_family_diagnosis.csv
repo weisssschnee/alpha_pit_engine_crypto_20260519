@@ -1,0 +1,4 @@
+family_id,candidate_count,train_objective_pass_count,selected_count,strict_survivor_count,median_train_net_spread,median_train_control_ratio,median_oos_min_split_net_spread,median_oos_worst_control_ratio,diagnosis
+F1a_aggtrades_flow_microstructure,7,3,0,0,0.0015680341252381,1.0799555761249946,-0.005086101408346,1.1455591213672958,train_positive_but_oos_split_unstable
+F1b_taker_flow_market_panel,6,0,0,0,0.0009659763919985999,2.9462008669718425,-0.01979568945499635,3.5884592056345967,train_objective_control_fail
+F2a_basis_funding_independent,8,0,0,0,0.0010668072219345,2.7588234504942886,-0.0171135669967828,3.099086663931126,train_objective_control_fail

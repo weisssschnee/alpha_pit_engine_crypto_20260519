@@ -14,9 +14,9 @@
     "executes_replay": false,
     "executes_search": false,
     "executes_training": false,
-    "generated_at": "2026-06-01T19:40:03Z",
-    "head": "4790a0823c03036de62b73ff7a05019b22361a64",
-    "head_equals_origin_main": true,
+    "generated_at": "2026-06-01T19:40:49Z",
+    "head": "58b3e15f1aababeab3a7c1c23a105d7a82c98338",
+    "head_equals_origin_main": false,
     "origin_main": "4790a0823c03036de62b73ff7a05019b22361a64",
     "stage": "A7PM-0",
     "stage_count": 379
@@ -36,5 +36,5 @@
     "stage": "A7PM-2",
     "state_count": 16
   },
-  "head_equals_origin_main": true
+  "head_equals_origin_main": false
 }

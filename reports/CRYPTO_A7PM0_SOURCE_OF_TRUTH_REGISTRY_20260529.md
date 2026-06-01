@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T19:40:49Z
+Generated: 2026-06-01T19:43:20Z
 
 ## Decision
 
@@ -11,20 +11,27 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
+## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
+ M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=58b3e15f1aababeab3a7c1c23a105d7a82c98338
-origin/main=4790a0823c03036de62b73ff7a05019b22361a64
-HEAD == origin/main: False
+ M scripts/crypto_a7pm3_current_experiment_board.py
+?? reports/CRYPTO_A7FFCORE36ER_REPLAY_OBJECTIVE_FORENSIC_20260602.md
+?? runtime/a7ffcore36er_replay_objective_forensic/
+?? scripts/crypto_a7ffcore36er_replay_objective_forensic.py
+HEAD=7658ba639a161da82b59baf469a70264158f296a
+origin/main=7658ba639a161da82b59baf469a70264158f296a
+HEAD == origin/main: True
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3677,
+  "artifact_count": 3685,
   "authorization_record_count": 726,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +45,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T19:40:49Z",
-  "head": "58b3e15f1aababeab3a7c1c23a105d7a82c98338",
-  "head_equals_origin_main": false,
-  "origin_main": "4790a0823c03036de62b73ff7a05019b22361a64",
+  "generated_at": "2026-06-01T19:43:20Z",
+  "head": "7658ba639a161da82b59baf469a70264158f296a",
+  "head_equals_origin_main": true,
+  "origin_main": "7658ba639a161da82b59baf469a70264158f296a",
   "stage": "A7PM-0",
-  "stage_count": 379
+  "stage_count": 380
 }
 ```
 
@@ -64,7 +71,7 @@ HEAD == origin/main: False
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
 | valid_or_historical_record   | contract                   |     101 |
-| valid_or_historical_record   | diagnostic                 |      23 |
+| valid_or_historical_record   | diagnostic                 |      24 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 

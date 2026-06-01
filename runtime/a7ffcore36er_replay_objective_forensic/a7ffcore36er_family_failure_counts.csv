@@ -1,0 +1,5 @@
+family_id,failure_reason,candidate_count
+F1a_aggtrades_flow_microstructure,oos_split_balance_fail,3
+F1a_aggtrades_flow_microstructure,train_objective_fail,4
+F1b_taker_flow_market_panel,train_objective_fail,6
+F2a_basis_funding_independent,train_objective_fail,8

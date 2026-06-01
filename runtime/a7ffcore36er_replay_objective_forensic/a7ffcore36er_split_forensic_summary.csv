@@ -1,0 +1,13 @@
+family_id,split,candidate_count,split_pass_count,median_net_spread,median_control_ratio,median_positive_rows,median_control_clean_rows
+F1a_aggtrades_flow_microstructure,recent_2026JanApr,7,0,-0.005086101408346,1.1455591213672958,0.0,2.0
+F1a_aggtrades_flow_microstructure,test_2025H2,7,0,-0.0001456399910239,0.5004379450223749,1.0,3.0
+F1a_aggtrades_flow_microstructure,train_2024,7,3,0.0015680341252381,1.0799555761249946,2.0,2.0
+F1a_aggtrades_flow_microstructure,validation_2025H1,7,2,-9.944482349952576e-05,0.148461271605417,1.0,4.0
+F1b_taker_flow_market_panel,recent_2026JanApr,6,1,-0.01979568945499635,1.0558897760095833,0.5,2.0
+F1b_taker_flow_market_panel,test_2025H2,6,2,0.00126957124260365,3.140309706683028,2.0,2.0
+F1b_taker_flow_market_panel,train_2024,6,0,0.0009659763919985999,2.9462008669718425,2.0,2.0
+F1b_taker_flow_market_panel,validation_2025H1,6,0,-0.00957399522166195,2.379600640462165,0.0,2.5
+F2a_basis_funding_independent,recent_2026JanApr,8,1,-0.01668050891847055,1.1971374092043134,1.0,2.0
+F2a_basis_funding_independent,test_2025H2,8,3,0.00200315712182775,1.518950145810991,2.0,2.0
+F2a_basis_funding_independent,train_2024,8,0,0.0010668072219345,2.7588234504942886,2.0,2.0
+F2a_basis_funding_independent,validation_2025H1,8,0,-0.00772507988006105,1.7732108920568308,0.0,2.0

@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core37x_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 21,
+  "decision": "PASS_A7FFCORE36ER_REPLAY_OBJECTIVE_FORENSIC_COMPLETE_READY_FOR_CORE37X",
+  "dominant_failure": "train_to_oos_executable_spread_instability_after_control_gating",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T19:43:07Z",
+  "next_allowed": "A7FF-CORE37X replay-objective failure freeze / route arbitration contract",
+  "selected_count": 0,
+  "source_decision": "HOLD_A7FFCORE36E_REPLAY_OBJECTIVE_RESET_NO_EXECUTABLE_SURVIVORS",
+  "source_stage": "A7FF-CORE36E",
+  "stage": "A7FF-CORE36ER",
+  "strict_survivor_count": 0,
+  "train_objective_pass_count": 3
+}

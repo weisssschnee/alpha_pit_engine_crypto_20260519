@@ -1,0 +1,6 @@
+task,status,reason
+A7FF-CORE37X replay-objective failure freeze / route arbitration contract,AUTHORIZED_CONTRACT_ONLY,CORE36E found no executable survivors after objective reset; route decision is needed before any new work
+same CORE33/34/36 queue rerun,NOT_AUTHORIZED,CORE36E exhausted executable-spread-first rescoring without survivors
+formula_search,NOT_AUTHORIZED,no executable replay survivor and no family with stable train-to-OOS translation
+large_search,NOT_AUTHORIZED,numeric/preflight response still fails executable replay translation
+alpha_proof / shadow / paper / live,NOT_AUTHORIZED,no alpha proof object or replay survivor

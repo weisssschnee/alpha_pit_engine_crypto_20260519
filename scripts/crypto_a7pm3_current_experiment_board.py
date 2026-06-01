@@ -134,6 +134,7 @@ A7FFCORE34ER = REPO / "runtime" / "a7ffcore34er_repair_forensic" / "a7ffcore34er
 A7FFCORE35 = REPO / "runtime" / "a7ffcore35_search_readiness_arbitration" / "a7ffcore35_manifest.json"
 A7FFCORE36 = REPO / "runtime" / "a7ffcore36_replay_objective_reset_contract" / "a7ffcore36_manifest.json"
 A7FFCORE36E = REPO / "runtime" / "a7ffcore36e_replay_objective_reset_execution" / "a7ffcore36e_manifest.json"
+A7FFCORE36ER = REPO / "runtime" / "a7ffcore36er_replay_objective_forensic" / "a7ffcore36er_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -276,12 +277,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore35 = read_json(A7FFCORE35)
     a7ffcore36 = read_json(A7FFCORE36)
     a7ffcore36e = read_json(A7FFCORE36E)
+    a7ffcore36er = read_json(A7FFCORE36ER)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore36e.get("decision") == "PASS_A7FFCORE36E_REPLAY_OBJECTIVE_SURVIVORS_READY_FOR_CORE37_CONTRACT":
+    if a7ffcore36er.get("decision") == "PASS_A7FFCORE36ER_REPLAY_OBJECTIVE_FORENSIC_COMPLETE_READY_FOR_CORE37X":
+        allowed["A7FF-CORE37X replay-objective failure freeze / route arbitration contract"] = (
+            "contract only; decide whether to freeze current independent-family replay path or redesign the replay objective"
+        )
+        blocked["A7FF large search"] = "blocked: CORE36ER confirms train-to-OOS executable spread instability"
+        blocked["A7FF formula generation/search"] = "blocked: route arbitration required after replay-objective failure"
+        blocked["same CORE33/34/36 queue rerun"] = "not authorized: exhausted by CORE36E/36ER"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE36ER"
+        status = "replay_objective_forensic_ready_for_core37x"
+        next_task = "A7FF-CORE37X replay-objective failure freeze / route arbitration contract"
+    elif a7ffcore36e.get("decision") == "PASS_A7FFCORE36E_REPLAY_OBJECTIVE_SURVIVORS_READY_FOR_CORE37_CONTRACT":
         allowed["A7FF-CORE37 bounded replay-objective repair contract"] = (
             "contract only; CORE36E found executable objective survivors, but no search or proof is authorized"
         )
