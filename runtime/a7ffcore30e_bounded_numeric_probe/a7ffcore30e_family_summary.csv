@@ -1,0 +1,4 @@
+family_id,candidate_count,clean_candidate_count,median_control_ratio,median_max_ic
+F1a_aggtrades_flow_microstructure,80,56,0.483830528068807,0.01726363800498216
+F1b_taker_flow_market_panel,80,34,1.2856583903149266,0.007845120475836992
+F2a_basis_funding_independent,80,42,0.8626318759124285,0.00614784530796677

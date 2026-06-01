@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core31_contract": true,
+  "authorizes_large_search": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 240,
+  "clean_candidate_count": 113,
+  "clean_family_count": 3,
+  "decision": "PASS_A7FFCORE30E_NUMERIC_PROBE_CLUES_READY_FOR_CORE31_CONTRACT",
+  "executes_numeric": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T18:51:43Z",
+  "next_allowed": "A7FF-CORE31 independent family clue consolidation contract",
+  "numeric_result_rows": 2160,
+  "source_decision": "PASS_A7FFCORE30_NUMERIC_PROBE_CONTRACT_READY_FOR_CORE30E",
+  "source_stage": "A7FF-CORE30",
+  "stage": "A7FF-CORE30E"
+}
