@@ -1,0 +1,6 @@
+gate,pass
+packet_count_gte_64,True
+semantic_buckets_gte_5,True
+motif_buckets_gte_5,True
+top_semantic_share_lte_035,True
+top_motif_share_lte_035,True

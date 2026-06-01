@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T01:46:51Z
+Generated: 2026-06-01T03:40:03Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T01:46:51Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                     | next                                  |
-|:----------------------------|:----------------|:-------------------------------------------|:--------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                       | keep registry as source-of-truth      |
-| a7ff_family_diversification | A7FF-CORE12E    | materialization_preflight_ready_for_core13 | A7FF-CORE13 numeric response contract |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                | A7FF-24R4E if explicitly authorized   |
-| search_execution            | blocked         | not_authorized                             | none                                  |
+| workstream                  | current_stage   | status                                      | next                                  |
+|:----------------------------|:----------------|:--------------------------------------------|:--------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                        | keep registry as source-of-truth      |
+| a7ff_family_diversification | A7FF-CORE14     | replay_preflight_contract_ready_for_core14e | A7FF-CORE14E bounded replay execution |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                 | A7FF-24R4E if explicitly authorized   |
+| search_execution            | blocked         | not_authorized                              | none                                  |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                                                                                               |
-|:--------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                                     |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                                      |
-| A7FF-CORE13 numeric response contract             | contract only; define primary-label numeric response over CORE12E materialized temp subgraphs; no numeric execution/search/promotion |
+| task                                              | reason                                                                                                                   |
+|:--------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                         |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                          |
+| A7FF-CORE14E bounded replay execution             | execute bounded replay over CORE14 128-candidate packet only; no formula search, large search, promotion, or alpha proof |
 
 ## Blocked Tasks
 
@@ -41,9 +41,9 @@ Generated: 2026-06-01T01:46:51Z
 | A7AL-2Q                          | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                      | not authorized                                                                                                        |
 | shadow/paper/live                | not authorized                                                                                                        |
-| A7FF-CORE12E rerun               | materialization preflight passed; rerun only if blueprint registry or evaluator changes                               |
-| A7FF-CORE12 direct numeric       | blocked: CORE12E authorizes CORE13 contract only                                                                      |
-| A7FF large search                | blocked: CORE12E only authorizes numeric response contract                                                            |
+| A7FF-CORE14 rerun                | replay-preflight contract passed; rerun only if CORE13E numeric clues or replay packet policy changes                 |
+| A7FF-CORE13E direct replay       | superseded by CORE14 replay-preflight packet                                                                          |
+| A7FF large search                | blocked: CORE14 authorizes bounded replay only, not search                                                            |
 
 ## Boundary
 

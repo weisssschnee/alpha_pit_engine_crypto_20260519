@@ -1,0 +1,28 @@
+{
+  "controls": [
+    "wrong_lag_future",
+    "wrong_lag_stale",
+    "time_shuffle",
+    "symbol_shuffle",
+    "same_family_placebo"
+  ],
+  "cost_bps": [
+    0,
+    2,
+    5,
+    10
+  ],
+  "horizons": [
+    1,
+    4,
+    8,
+    24
+  ],
+  "labels": [
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return"
+  ],
+  "packet": "runtime\\a7ffcore14_replay_preflight_contract\\a7ffcore14_replay_packet.csv",
+  "sign_flip": "diagnostic_only"
+}

@@ -51,6 +51,7 @@ A7FFCORE12 = REPO / "runtime" / "a7ffcore12_blueprint_registration_audit" / "a7f
 A7FFCORE12E = REPO / "runtime" / "a7ffcore12e_materialization_preflight" / "a7ffcore12e_manifest.json"
 A7FFCORE13 = REPO / "runtime" / "a7ffcore13_numeric_response_contract" / "a7ffcore13_manifest.json"
 A7FFCORE13E = REPO / "runtime" / "a7ffcore13e_numeric_response" / "a7ffcore13e_manifest.json"
+A7FFCORE14 = REPO / "runtime" / "a7ffcore14_replay_preflight_contract" / "a7ffcore14_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -110,12 +111,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore12e = read_json(A7FFCORE12E)
     a7ffcore13 = read_json(A7FFCORE13)
     a7ffcore13e = read_json(A7FFCORE13E)
+    a7ffcore14 = read_json(A7FFCORE14)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore13e.get("decision") == "PASS_A7FFCORE13E_NUMERIC_RESPONSE_READY_FOR_CORE14":
+    if a7ffcore14.get("decision") == "PASS_A7FFCORE14_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE14E":
+        allowed["A7FF-CORE14E bounded replay execution"] = (
+            "execute bounded replay over CORE14 128-candidate packet only; no formula search, large search, promotion, or alpha proof"
+        )
+        blocked["A7FF-CORE14 rerun"] = "replay-preflight contract passed; rerun only if CORE13E numeric clues or replay packet policy changes"
+        blocked["A7FF-CORE13E direct replay"] = "superseded by CORE14 replay-preflight packet"
+        blocked["A7FF large search"] = "blocked: CORE14 authorizes bounded replay only, not search"
+        current_stage = "A7FF-CORE14"
+        status = "replay_preflight_contract_ready_for_core14e"
+        next_task = "A7FF-CORE14E bounded replay execution"
+    elif a7ffcore13e.get("decision") == "PASS_A7FFCORE13E_NUMERIC_RESPONSE_READY_FOR_CORE14":
         allowed["A7FF-CORE14 replay-preflight contract"] = (
             "contract only; define bounded replay packet from CORE13E numeric clues; no replay execution/search/promotion"
         )
