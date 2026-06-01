@@ -54,6 +54,7 @@ A7FFCORE13E = REPO / "runtime" / "a7ffcore13e_numeric_response" / "a7ffcore13e_m
 A7FFCORE14 = REPO / "runtime" / "a7ffcore14_replay_preflight_contract" / "a7ffcore14_manifest.json"
 A7FFCORE14E = REPO / "runtime" / "a7ffcore14e_bounded_replay" / "a7ffcore14e_manifest.json"
 A7FFCORE14R = REPO / "runtime" / "a7ffcore14r_replay_failure_forensic" / "a7ffcore14r_manifest.json"
+A7FFCORE14S = REPO / "runtime" / "a7ffcore14s_replay_packet_repair_contract" / "a7ffcore14s_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -116,12 +117,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore14 = read_json(A7FFCORE14)
     a7ffcore14e = read_json(A7FFCORE14E)
     a7ffcore14r = read_json(A7FFCORE14R)
+    a7ffcore14s = read_json(A7FFCORE14S)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore14r.get("decision") == "PASS_A7FFCORE14R_FAILURE_ATTRIBUTION_COMPLETE_READY_FOR_CORE14S":
+    if a7ffcore14s.get("decision") == "PASS_A7FFCORE14S_REPLAY_PACKET_REPAIR_CONTRACT_READY_FOR_CORE14SE":
+        allowed["A7FF-CORE14SE repaired packet construction / bounded replay execution"] = (
+            "construct repaired packet under CORE14S rules and run bounded replay only; no formula search, large search, promotion, or alpha proof"
+        )
+        blocked["A7FF-CORE15"] = "blocked until CORE14SE produces enough clean breadth"
+        blocked["A7FF large search"] = "blocked: CORE14S authorizes repaired bounded replay only"
+        blocked["same CORE14 packet rerun"] = "blocked: CORE14S requires repaired packet, not unchanged rerun"
+        current_stage = "A7FF-CORE14S"
+        status = "replay_packet_repair_contract_ready_for_core14se"
+        next_task = "A7FF-CORE14SE repaired packet construction / bounded replay execution"
+    elif a7ffcore14r.get("decision") == "PASS_A7FFCORE14R_FAILURE_ATTRIBUTION_COMPLETE_READY_FOR_CORE14S":
         allowed["A7FF-CORE14S replay-packet/objective repair contract"] = (
             "contract only; repair replay packet/objective based on CORE14R control/cost/split attribution; no replay execution/search/promotion"
         )

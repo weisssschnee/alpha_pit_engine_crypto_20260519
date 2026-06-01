@@ -1,0 +1,7 @@
+rule_id,requirement,reason
+R0_no_gate_relaxation_as_solution,do not proceed by merely relaxing CORE14E pass gates,CORE14R max strict candidates under sensitivity is below 24; relaxed control thresholds do not create enough breadth
+R1_split_first_packet_score,CORE14SE packet score must prioritize candidates with validation and recent evidence separately,CORE14E collapsed under validation+recent joint clean rule
+R2_control_margin_first,packet construction must rank by non-signflip max control margin before raw score,dominant blocker is control_and_cost_collapse
+R3_cost_floor,candidate packet must estimate 5bps cost survival before replay execution,many candidates have positive raw spread but negative cost-adjusted spread
+R4_family_rebalance,packet must cap any semantic/motif pair at 20 percent and include at least 6 semantic buckets and 5 motifs,CORE14E clean pool collapsed to one semantic and one motif
+R5_no_same_packet_rerun,CORE14E packet cannot be rerun unchanged,same packet already executed bounded replay and failed clean pool gates

@@ -1,0 +1,17 @@
+cost_bps,control_ratio_threshold,either_validation_or_recent_candidates,both_validation_and_recent_candidates,both_semantic_count,both_motif_count
+0,0.8,14,2,1,1
+0,1.0,29,5,2,2
+0,1.5,50,9,2,2
+0,2.0,64,12,2,2
+2,0.8,8,2,1,1
+2,1.0,21,5,2,2
+2,1.5,35,9,2,2
+2,2.0,43,11,2,2
+5,0.8,4,0,0,0
+5,1.0,11,2,1,1
+5,1.5,16,4,2,2
+5,2.0,17,4,2,2
+10,0.8,2,0,0,0
+10,1.0,4,0,0,0
+10,1.5,5,0,0,0
+10,2.0,5,0,0,0

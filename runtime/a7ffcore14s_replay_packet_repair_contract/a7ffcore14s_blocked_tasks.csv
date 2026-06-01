@@ -1,0 +1,5 @@
+task,reason
+A7FF-CORE15,blocked until repaired packet replay produces enough clean breadth
+A7FF large search,blocked; CORE14E replay-clean pool has only two candidates
+same packet rerun,blocked; CORE14R attributes failure to control/cost/split collapse
+alpha proof / shadow / paper / live,not authorized

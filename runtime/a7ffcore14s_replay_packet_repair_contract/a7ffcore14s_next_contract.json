@@ -1,0 +1,26 @@
+{
+  "action": "build repaired replay packet and execute bounded replay only if packet gates pass",
+  "clean_rule": "validation and recent both positive at 5bps with max non-signflip control_ratio < 1.0",
+  "forbidden": [
+    "same CORE14 packet rerun",
+    "gate relaxation as pass",
+    "formula search",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "max_packet": 128,
+  "max_semantic_motif_pair_share": 0.2,
+  "min_motif_buckets": 5,
+  "min_packet": 96,
+  "min_semantic_buckets": 6,
+  "required_controls": [
+    "wrong_lag_future",
+    "wrong_lag_stale",
+    "time_shuffle",
+    "symbol_shuffle",
+    "same_family_placebo"
+  ],
+  "source_pool": "CORE13E numeric clues plus CORE14R failure attribution; not CORE14E clean pool only",
+  "stage": "A7FF-CORE14SE"
+}

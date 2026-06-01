@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE14S replay-packet/objective repair contract": "contract only; repair replay packet/objective based on CORE14R control/cost/split attribution; no replay execution/search/promotion",
+  "A7FF-CORE14SE repaired packet construction / bounded replay execution": "construct repaired packet under CORE14S rules and run bounded replay only; no formula search, large search, promotion, or alpha proof",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }
