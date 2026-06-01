@@ -1,0 +1,17 @@
+dataset,field,available,schema_field_count
+top498_replay_v2,funding_rate,True,54
+top498_replay_v2,kline_taker_buy_quote_share,True,54
+top498_replay_v2,mark_index_basis_bps,True,54
+top498_replay_v2,premium_close,True,54
+top498_replay_v2,premium_close_bps,True,54
+top498_replay_v2,taker_buy_quote_volume,True,54
+top498_replay_v2,trade_quote_volume,True,54
+top498_replay_v2,trade_volume,True,54
+core12_aggtrades_all_features,agg_large_notional_ratio_100k_plus,True,654
+core12_aggtrades_all_features,agg_max_trade_notional,True,654
+core12_aggtrades_all_features,agg_price_range_bps,True,654
+core12_aggtrades_all_features,agg_signed_aggressor_notional,True,654
+core12_aggtrades_all_features,agg_volume_imbalance,True,654
+core12_aggtrades_all_features,funding_rate,True,654
+core12_aggtrades_all_features,mark_index_basis_bps,True,654
+core12_aggtrades_all_features,premium_index_bps,True,654

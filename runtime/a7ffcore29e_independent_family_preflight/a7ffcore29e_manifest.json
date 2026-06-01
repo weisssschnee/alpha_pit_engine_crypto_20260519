@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core30_contract": true,
+  "authorizes_large_search": false,
+  "authorizes_numeric_probe": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blueprint_count": 480,
+  "decision": "PASS_A7FFCORE29E_INDEPENDENT_FAMILY_PREFLIGHT_READY_FOR_CORE30_CONTRACT",
+  "executes_generation": false,
+  "executes_numeric": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "family_count": 3,
+  "forbidden_pattern_hit_count": 0,
+  "generated_at": "2026-06-01T18:35:54Z",
+  "next_allowed": "A7FF-CORE30 independent family numeric probe contract",
+  "preflight_missing_count": 0,
+  "preflight_pass_count": 480,
+  "source_decision": "PASS_A7FFCORE29_INDEPENDENT_FAMILY_BOUNDED_PROBE_CONTRACT_READY_FOR_CORE29E",
+  "source_stage": "A7FF-CORE29",
+  "stage": "A7FF-CORE29E"
+}

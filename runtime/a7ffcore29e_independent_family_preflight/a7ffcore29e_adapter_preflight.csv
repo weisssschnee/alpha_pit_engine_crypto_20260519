@@ -1,0 +1,4 @@
+adapter,dataset,required_fields_available,status
+aggtrades_enhanced_field_adapter,core12_aggtrades_all_features,True,pass
+existing_top498_panel_fields,top498_replay_v2,True,pass
+balanced_queue_policy,all,True,pass

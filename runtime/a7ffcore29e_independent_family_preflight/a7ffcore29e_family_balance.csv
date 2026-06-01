@@ -1,0 +1,4 @@
+family_id,dataset,blueprint_count,preflight_pass_count,motif_count,operator_count
+F1a_aggtrades_flow_microstructure,core12_aggtrades_all_features,160,160,4,5
+F1b_taker_flow_market_panel,top498_replay_v2,160,160,4,5
+F2a_basis_funding_independent,top498_replay_v2,160,160,4,5
