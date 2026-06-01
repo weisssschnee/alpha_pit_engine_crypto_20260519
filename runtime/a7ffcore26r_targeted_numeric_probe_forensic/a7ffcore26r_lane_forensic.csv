@@ -1,0 +1,5 @@
+seed_lane,candidates,pass_3_split,pass_2_split,pass_spread_3_split,median_control,median_spread
+S0_positioning_price_basis,160,0,3,14,4.695646085653138,-0.0004432433510056
+S1_liquidity_basis_positioning,160,0,0,5,4.191479963264181,-0.0014236802494729999
+S2_taker_flow_liquidity_oi,80,0,0,0,10.345624755540456,-0.0005577357758693678
+S3_cross_family_bridge,80,0,4,6,7.773566529568995,0.0002066580856401667

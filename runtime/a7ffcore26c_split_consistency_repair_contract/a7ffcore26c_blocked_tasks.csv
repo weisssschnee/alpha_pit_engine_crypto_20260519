@@ -1,0 +1,4 @@
+blocked_task,reason
+CORE27 bounded replay contract,no three-split executable candidates
+open formula generation / large search,near misses are lane-specific and control-dominated
+alpha proof / shadow / paper / live,not authorized

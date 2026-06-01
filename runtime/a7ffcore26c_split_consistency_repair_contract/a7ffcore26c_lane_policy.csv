@@ -1,0 +1,5 @@
+lane,status,evidence,allowed_repair
+S0_positioning_price_basis,near_miss_primary,"3 two-split near misses, 14 spread-positive candidates, high control median",control-resistant variants and split-stability filters around existing S0 field pairs
+S3_cross_family_bridge,near_miss_primary,"4 two-split near misses, positive median spread, high control median",control-resistant bridge variants; cap S3 dominance
+S1_liquidity_basis_positioning,secondary_weak,spread-positive candidates exist but zero two-split near miss,diagnostic only unless control/spread improves
+S2_taker_flow_liquidity_oi,blocked_weak,zero spread-positive three-split and high control,no expansion in CORE26C

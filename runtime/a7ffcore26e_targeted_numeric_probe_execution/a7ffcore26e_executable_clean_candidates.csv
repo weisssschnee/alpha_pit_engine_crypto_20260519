@@ -1,0 +1,1 @@
+candidate_id,seed_lane,label_family,label_horizon_h,left_field,left_transform,operator,right_field,right_transform,split,cost_bps,orientation,sample_rows,corr_one_bar,one_bar_spread,same_bar_spread,one_bar_costed_spread,same_bar_costed_spread,max_control_spread,control_ratio

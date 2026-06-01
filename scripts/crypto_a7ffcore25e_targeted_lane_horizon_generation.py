@@ -67,6 +67,8 @@ def transform_expr(field: str, transform: str) -> str:
     if transform.startswith("decay_"):
         h = transform.split("_", 1)[1].replace("h", "")
         return f"Decay({field},{h})"
+    if transform == "spread_short_long":
+        return f"Sub(Mean({field},24),Mean({field},168))"
     if transform.startswith("rank"):
         return f"Rank({field})"
     if transform.startswith("abs_zscore"):

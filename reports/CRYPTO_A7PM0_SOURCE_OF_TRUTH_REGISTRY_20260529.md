@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T15:53:27Z
+Generated: 2026-06-01T17:46:35Z
 
 ## Decision
 
@@ -11,11 +11,30 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
+## main...origin/main [ahead 2]
+ M reports/CRYPTO_A7FFCORE25E_TARGETED_LANE_HORIZON_GENERATION_20260601.md
+ M reports/CRYPTO_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_20260601.md
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_generated_blueprints.csv
+ M runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_manifest.json
+ M runtime/a7ffcore26_targeted_numeric_probe_contract/a7ffcore26_manifest.json
+ M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
+ M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=f49874ddcb2dc4f83800e714e02fa2343dbd9da3
+ M scripts/crypto_a7ffcore25e_targeted_lane_horizon_generation.py
+ M scripts/crypto_a7pm3_current_experiment_board.py
+?? reports/CRYPTO_A7FFCORE26C_SPLIT_CONSISTENCY_REPAIR_CONTRACT_20260602.md
+?? reports/CRYPTO_A7FFCORE26E_TARGETED_NUMERIC_PROBE_EXECUTION_20260602.md
+?? reports/CRYPTO_A7FFCORE26R_TARGETED_NUMERIC_PROBE_FORENSIC_20260602.md
+?? runtime/a7ffcore26c_split_consistency_repair_contract/
+?? runtime/a7ffcore26e_targeted_numeric_probe_execution/
+?? runtime/a7ffcore26r_targeted_numeric_probe_forensic/
+?? scripts/crypto_a7ffcore26c_split_consistency_repair_contract.py
+?? scripts/crypto_a7ffcore26e_targeted_numeric_probe_execution.py
+?? scripts/crypto_a7ffcore26r_targeted_numeric_probe_forensic.py
+HEAD=0658d0482e60dfdff9bfa201b0b26186b29ca4a8
 origin/main=1ebf5b409080847d31d363300b0f0b300a8f2c18
 HEAD == origin/main: False
 ```
@@ -24,7 +43,7 @@ HEAD == origin/main: False
 
 ```json
 {
-  "artifact_count": 3487,
+  "artifact_count": 3511,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +57,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T15:53:27Z",
-  "head": "f49874ddcb2dc4f83800e714e02fa2343dbd9da3",
+  "generated_at": "2026-06-01T17:46:35Z",
+  "head": "0658d0482e60dfdff9bfa201b0b26186b29ca4a8",
   "head_equals_origin_main": false,
   "origin_main": "1ebf5b409080847d31d363300b0f0b300a8f2c18",
   "stage": "A7PM-0",
-  "stage_count": 352
+  "stage_count": 355
 }
 ```
 
@@ -56,15 +75,15 @@ HEAD == origin/main: False
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      66 |
+| hold                         | hold                       |      67 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |      86 |
-| valid_or_historical_record   | diagnostic                 |      19 |
+| valid_or_historical_record   | contract                   |      87 |
+| valid_or_historical_record   | diagnostic                 |      20 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 

@@ -1,0 +1,5 @@
+label_family,candidates,pass_3_split,pass_2_split,median_control,median_spread
+L0_raw_forward_return,220,0,2,4.884914590414091,-0.0008446609097107084
+L1_cross_sectional_relative_return,130,0,2,5.668216323098044,-0.0005525876834189373
+L3_liquidity_tier_relative_return,115,0,3,5.293307224087508,-0.0004947240681611667
+L5_vol_adjusted_return,15,0,0,14.269823391081228,-0.03900487259901286

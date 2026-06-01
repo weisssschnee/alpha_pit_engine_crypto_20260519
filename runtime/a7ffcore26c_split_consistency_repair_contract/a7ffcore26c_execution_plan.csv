@@ -1,0 +1,3 @@
+stage,action,input,authorized
+A7FF-CORE26CE,split-consistency repair generation and numeric probe,CORE26R near-miss candidates + lane policy,True
+A7FF-CORE27,bounded replay contract,CORE26CE pass only,False

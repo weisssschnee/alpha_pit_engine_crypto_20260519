@@ -1,6 +1,6 @@
 # CRYPTO A7FF-CORE25E TARGETED LANE/HORIZON GENERATION
 
-Generated: 2026-06-01T15:46:24Z
+Generated: 2026-06-01T16:53:38Z
 
 ## Decision
 
@@ -23,7 +23,7 @@ CORE25E generates a bounded targeted blueprint/preflight packet for missing exec
   "decision": "PASS_A7FFCORE25E_TARGETED_GENERATION_PREFLIGHT_PACKET_READY_FOR_CORE26_CONTRACT",
   "executes_replay": false,
   "executes_search": false,
-  "generated_at": "2026-06-01T15:46:24Z",
+  "generated_at": "2026-06-01T16:53:38Z",
   "generated_blueprint_count": 4800,
   "next_allowed": "A7FF-CORE26 targeted numeric probe contract",
   "preflight_horizon_count": 3,

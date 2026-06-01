@@ -1,6 +1,6 @@
 # CRYPTO A7FF-CORE26 TARGETED NUMERIC PROBE CONTRACT
 
-Generated: 2026-06-01T15:47:32Z
+Generated: 2026-06-01T16:53:40Z
 
 ## Decision
 
@@ -21,7 +21,7 @@ CORE26 defines a bounded numeric probe over the CORE25E targeted preflight packe
   "decision": "PASS_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_READY_FOR_CORE26E",
   "executes_replay": false,
   "executes_search": false,
-  "generated_at": "2026-06-01T15:47:32Z",
+  "generated_at": "2026-06-01T16:53:40Z",
   "next_allowed": "A7FF-CORE26E targeted numeric probe execution",
   "numeric_probe_quota": 480,
   "source_decision": "PASS_A7FFCORE25E_TARGETED_GENERATION_PREFLIGHT_PACKET_READY_FOR_CORE26_CONTRACT",

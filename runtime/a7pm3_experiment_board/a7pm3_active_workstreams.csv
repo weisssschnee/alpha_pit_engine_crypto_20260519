@@ -1,5 +1,5 @@
 workstream,current_stage,status,next
 governance,A7PM-0/1/2/3,pass,keep registry as source-of-truth
-a7ff_family_diversification,A7FF-CORE26,targeted_numeric_probe_contract_ready_for_core26e,A7FF-CORE26E targeted numeric probe execution
+a7ff_family_diversification,A7FF-CORE26C,split_consistency_repair_contract_ready_for_core26ce,A7FF-CORE26CE split-consistency repair numeric probe
 a7ff_funding_tail,A7FF-24R4,contract_ready_no_execution,A7FF-24R4E if explicitly authorized
 search_execution,blocked,not_authorized,none

@@ -1,0 +1,25 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core26c_contract": true,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "no_three_split_executable_candidates",
+    "near_miss_lane_count_lt_3"
+  ],
+  "decision": "PASS_A7FFCORE26R_TARGETED_NUMERIC_FORENSIC_COMPLETE_READY_FOR_CORE26C",
+  "dominant_failure": "split_consistency_failure_after_targeted_generation",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T17:44:55Z",
+  "near_miss_lane_count": 2,
+  "next_allowed": "A7FF-CORE26C coverage-aware numeric probe repair contract",
+  "source_decision": "HOLD_A7FFCORE26E_TARGETED_NUMERIC_PROBE_INSUFFICIENT",
+  "source_stage": "A7FF-CORE26E",
+  "stage": "A7FF-CORE26R",
+  "three_split_clean_count": 0,
+  "two_split_near_miss_count": 7,
+  "zero_sample_candidate_count": 0
+}

@@ -1,0 +1,29 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core27_contract": false,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "one_bar_executable_clean_count_lt_6",
+    "one_bar_executable_lane_count_lt_3",
+    "non_l5_clean_count_lt_3"
+  ],
+  "decision": "HOLD_A7FFCORE26E_TARGETED_NUMERIC_PROBE_INSUFFICIENT",
+  "eval_error_count": 0,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T17:44:43Z",
+  "next_allowed": "A7FF-CORE26R targeted numeric probe forensic",
+  "non_l5_clean_count": 0,
+  "numeric_rows": 5760,
+  "one_bar_executable_clean_candidate_count": 0,
+  "one_bar_executable_clean_lane_count": 0,
+  "probe_candidate_count": 480,
+  "probe_symbol_count": 192,
+  "probe_symbol_limit": 192,
+  "source_decision": "PASS_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_READY_FOR_CORE26E",
+  "source_stage": "A7FF-CORE26",
+  "stage": "A7FF-CORE26E"
+}

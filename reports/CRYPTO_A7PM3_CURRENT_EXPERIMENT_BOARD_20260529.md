@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T15:52:38Z
+Generated: 2026-06-01T17:46:28Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T15:52:38Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                            | next                                          |
-|:----------------------------|:----------------|:--------------------------------------------------|:----------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                              | keep registry as source-of-truth              |
-| a7ff_family_diversification | A7FF-CORE26     | targeted_numeric_probe_contract_ready_for_core26e | A7FF-CORE26E targeted numeric probe execution |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                       | A7FF-24R4E if explicitly authorized           |
-| search_execution            | blocked         | not_authorized                                    | none                                          |
+| workstream                  | current_stage   | status                                               | next                                                 |
+|:----------------------------|:----------------|:-----------------------------------------------------|:-----------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                                 | keep registry as source-of-truth                     |
+| a7ff_family_diversification | A7FF-CORE26C    | split_consistency_repair_contract_ready_for_core26ce | A7FF-CORE26CE split-consistency repair numeric probe |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                          | A7FF-24R4E if explicitly authorized                  |
+| search_execution            | blocked         | not_authorized                                       | none                                                 |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                                                                    |
-|:--------------------------------------------------|:----------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                          |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                                                           |
-| A7FF-CORE26E targeted numeric probe execution     | bounded 480-row numeric probe over CORE25E targeted packet; no search, large search, alpha proof, or live |
+| task                                                 | reason                                                                                             |
+|:-----------------------------------------------------|:---------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option    | requires explicit user authorization; no search and no promotion                                   |
+| A7PM-0/3 maintenance                                 | governance registry maintenance                                                                    |
+| A7FF-CORE26CE split-consistency repair numeric probe | bounded S0/S3-focused repair numeric probe; no open generation, search, large search, or promotion |
 
 ## Blocked Tasks
 
@@ -41,8 +41,9 @@ Generated: 2026-06-01T15:52:38Z
 | A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                         | not authorized                                                                                                        |
 | shadow/paper/live                   | not authorized                                                                                                        |
-| A7FF large search                   | blocked until targeted numeric probe produces executable multi-lane evidence                                          |
-| A7FF formula generation/search      | blocked: CORE26 authorizes numeric probe execution only                                                               |
+| A7FF-CORE27 bounded replay contract | blocked until CORE26CE produces three-split executable candidates                                                     |
+| A7FF large search                   | blocked: targeted numeric probe has split-consistency failure                                                         |
+| A7FF formula generation/search      | blocked: CORE26C authorizes bounded repair numeric probe only                                                         |
 | alpha proof / shadow / paper / live | not authorized                                                                                                        |
 
 ## Boundary

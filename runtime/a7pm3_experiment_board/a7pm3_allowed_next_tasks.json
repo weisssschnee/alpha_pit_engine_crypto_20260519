@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE26E targeted numeric probe execution": "bounded 480-row numeric probe over CORE25E targeted packet; no search, large search, alpha proof, or live",
+  "A7FF-CORE26CE split-consistency repair numeric probe": "bounded S0/S3-focused repair numeric probe; no open generation, search, large search, or promotion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

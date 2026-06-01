@@ -1,0 +1,6 @@
+finding,value,interpretation
+three_split_clean_count,0,strict executable clean supply
+two_split_near_miss_count,7,near-miss supply if one split fails
+lane_with_two_split_near_miss,2,near-miss lane breadth
+zero_sample_candidate_count,0,coverage/materialization holes in sampled probe
+dominant_failure,split_consistency_failure_after_targeted_generation,why CORE26E cannot advance

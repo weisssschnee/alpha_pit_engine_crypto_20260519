@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core26ce": true,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_open_formula_generation": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE26C_SPLIT_CONSISTENCY_REPAIR_CONTRACT_READY_FOR_CORE26CE",
+  "dominant_failure": "split_consistency_failure_after_targeted_generation",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T17:45:52Z",
+  "near_miss_count": 7,
+  "near_miss_lane_count": 2,
+  "next_allowed": "A7FF-CORE26CE split-consistency repair numeric probe",
+  "source_decision": "PASS_A7FFCORE26R_TARGETED_NUMERIC_FORENSIC_COMPLETE_READY_FOR_CORE26C",
+  "source_stage": "A7FF-CORE26R",
+  "stage": "A7FF-CORE26C"
+}

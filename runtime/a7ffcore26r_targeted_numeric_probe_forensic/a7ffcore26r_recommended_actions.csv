@@ -1,0 +1,3 @@
+next_stage,action,rationale,authorized
+A7FF-CORE26C,coverage-aware numeric probe repair contract,CORE26E produced eval-success but zero strict clean; repair must separate coverage holes from genuine split instability,True
+A7FF-CORE27 replay contract,blocked,no three-split executable candidates,False

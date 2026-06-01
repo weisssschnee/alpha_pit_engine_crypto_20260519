@@ -1,0 +1,5 @@
+item,value
+generated_blueprints_max,2400
+numeric_probe_max,360
+focus_lanes,"S0,S3 primary; S1 diagnostic cap; S2 blocked"
+required_output,>=6 three-split clean candidates and >=3 lanes before replay contract
