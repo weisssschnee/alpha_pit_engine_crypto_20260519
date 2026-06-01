@@ -2652,80 +2652,80 @@ runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_manif
 runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_nearmiss_transform_summary.csv,093ff03,add crypto core16ke h2 repair arbitration,336
 runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_recommended_actions.csv,093ff03,add crypto core16ke h2 repair arbitration,528
 runtime,A7FF-CORE16KR,runtime/a7ffcore16kr_h2_repair_forensic/a7ffcore16kr_repaired_queue_summary.csv,093ff03,add crypto core16ke h2 repair arbitration,237
-runtime,A7FF-CORE16L,runtime/a7ffcore16l_strict_preseed_queue_lock/a7ffcore16l_gate_audit.csv,,,335
-runtime,A7FF-CORE16L,runtime/a7ffcore16l_strict_preseed_queue_lock/a7ffcore16l_locked_strict_preseed_queue.csv,,,84415
-runtime,A7FF-CORE16L,runtime/a7ffcore16l_strict_preseed_queue_lock/a7ffcore16l_manifest.json,,,938
-runtime,A7FF-CORE16L,runtime/a7ffcore16l_strict_preseed_queue_lock/a7ffcore16l_queue_family_summary.csv,,,403
+runtime,A7FF-CORE16L,runtime/a7ffcore16l_strict_preseed_queue_lock/a7ffcore16l_gate_audit.csv,a2bb217,advance crypto core16me to core19 contract,335
+runtime,A7FF-CORE16L,runtime/a7ffcore16l_strict_preseed_queue_lock/a7ffcore16l_locked_strict_preseed_queue.csv,a2bb217,advance crypto core16me to core19 contract,84415
+runtime,A7FF-CORE16L,runtime/a7ffcore16l_strict_preseed_queue_lock/a7ffcore16l_manifest.json,a2bb217,advance crypto core16me to core19 contract,938
+runtime,A7FF-CORE16L,runtime/a7ffcore16l_strict_preseed_queue_lock/a7ffcore16l_queue_family_summary.csv,a2bb217,advance crypto core16me to core19 contract,403
 runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_allowed_next.csv,093ff03,add crypto core16ke h2 repair arbitration,250
 runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_blocked_tasks.csv,093ff03,add crypto core16ke h2 repair arbitration,280
 runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_core16me_operator_policy.csv,093ff03,add crypto core16ke h2 repair arbitration,368
 runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_floor_policy.csv,093ff03,add crypto core16ke h2 repair arbitration,458
 runtime,A7FF-CORE16M,runtime/a7ffcore16m_h2_floor_arbitration_contract/a7ffcore16m_manifest.json,093ff03,add crypto core16ke h2 repair arbitration,811
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_blueprint_queue.csv,,,39927
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_chunk_manifest_summary.csv,,,819
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_decision_counts.csv,,,225
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_family_summary.csv,,,355
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_h2_added_strict_rows.csv,,,1933
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_h2_repair_candidates.csv,,,9241
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_h2_repair_response_map.csv,,,2134245
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_manifest.json,,,847
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_repaired_strict_preseed_queue.csv,,,81307
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=0-of-6/a7ffcore16me_blueprint_queue.csv,,,6577
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=0-of-6/a7ffcore16me_chunk_manifest.json,,,385
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=0-of-6/a7ffcore16me_h2_repair_candidates.csv,,,1051
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=0-of-6/a7ffcore16me_h2_repair_response_map.csv,,,336408
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=1-of-6/a7ffcore16me_blueprint_queue.csv,,,6817
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=1-of-6/a7ffcore16me_chunk_manifest.json,,,385
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=1-of-6/a7ffcore16me_h2_repair_candidates.csv,,,1051
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=1-of-6/a7ffcore16me_h2_repair_response_map.csv,,,376861
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=2-of-6/a7ffcore16me_blueprint_queue.csv,,,6667
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=2-of-6/a7ffcore16me_chunk_manifest.json,,,385
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=2-of-6/a7ffcore16me_h2_repair_candidates.csv,,,1051
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=2-of-6/a7ffcore16me_h2_repair_response_map.csv,,,348739
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=3-of-6/a7ffcore16me_blueprint_queue.csv,,,6907
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=3-of-6/a7ffcore16me_chunk_manifest.json,,,385
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=3-of-6/a7ffcore16me_h2_repair_candidates.csv,,,4243
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=3-of-6/a7ffcore16me_h2_repair_response_map.csv,,,369387
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=4-of-6/a7ffcore16me_blueprint_queue.csv,,,6697
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=4-of-6/a7ffcore16me_chunk_manifest.json,,,385
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=4-of-6/a7ffcore16me_h2_repair_candidates.csv,,,3524
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=4-of-6/a7ffcore16me_h2_repair_response_map.csv,,,378858
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=5-of-6/a7ffcore16me_blueprint_queue.csv,,,6937
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=5-of-6/a7ffcore16me_chunk_manifest.json,,,385
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=5-of-6/a7ffcore16me_h2_repair_candidates.csv,,,3472
-runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=5-of-6/a7ffcore16me_h2_repair_response_map.csv,,,376041
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_blueprint_queue.csv,a2bb217,advance crypto core16me to core19 contract,39927
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_chunk_manifest_summary.csv,a2bb217,advance crypto core16me to core19 contract,819
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_decision_counts.csv,a2bb217,advance crypto core16me to core19 contract,225
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_family_summary.csv,a2bb217,advance crypto core16me to core19 contract,355
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_h2_added_strict_rows.csv,a2bb217,advance crypto core16me to core19 contract,1933
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_h2_repair_candidates.csv,a2bb217,advance crypto core16me to core19 contract,9241
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_h2_repair_response_map.csv,a2bb217,advance crypto core16me to core19 contract,2134245
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_manifest.json,a2bb217,advance crypto core16me to core19 contract,847
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/a7ffcore16me_repaired_strict_preseed_queue.csv,a2bb217,advance crypto core16me to core19 contract,81307
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=0-of-6/a7ffcore16me_blueprint_queue.csv,a2bb217,advance crypto core16me to core19 contract,6577
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=0-of-6/a7ffcore16me_chunk_manifest.json,a2bb217,advance crypto core16me to core19 contract,385
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=0-of-6/a7ffcore16me_h2_repair_candidates.csv,a2bb217,advance crypto core16me to core19 contract,1051
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=0-of-6/a7ffcore16me_h2_repair_response_map.csv,a2bb217,advance crypto core16me to core19 contract,336408
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=1-of-6/a7ffcore16me_blueprint_queue.csv,a2bb217,advance crypto core16me to core19 contract,6817
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=1-of-6/a7ffcore16me_chunk_manifest.json,a2bb217,advance crypto core16me to core19 contract,385
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=1-of-6/a7ffcore16me_h2_repair_candidates.csv,a2bb217,advance crypto core16me to core19 contract,1051
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=1-of-6/a7ffcore16me_h2_repair_response_map.csv,a2bb217,advance crypto core16me to core19 contract,376861
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=2-of-6/a7ffcore16me_blueprint_queue.csv,a2bb217,advance crypto core16me to core19 contract,6667
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=2-of-6/a7ffcore16me_chunk_manifest.json,a2bb217,advance crypto core16me to core19 contract,385
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=2-of-6/a7ffcore16me_h2_repair_candidates.csv,a2bb217,advance crypto core16me to core19 contract,1051
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=2-of-6/a7ffcore16me_h2_repair_response_map.csv,a2bb217,advance crypto core16me to core19 contract,348739
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=3-of-6/a7ffcore16me_blueprint_queue.csv,a2bb217,advance crypto core16me to core19 contract,6907
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=3-of-6/a7ffcore16me_chunk_manifest.json,a2bb217,advance crypto core16me to core19 contract,385
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=3-of-6/a7ffcore16me_h2_repair_candidates.csv,a2bb217,advance crypto core16me to core19 contract,4243
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=3-of-6/a7ffcore16me_h2_repair_response_map.csv,a2bb217,advance crypto core16me to core19 contract,369387
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=4-of-6/a7ffcore16me_blueprint_queue.csv,a2bb217,advance crypto core16me to core19 contract,6697
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=4-of-6/a7ffcore16me_chunk_manifest.json,a2bb217,advance crypto core16me to core19 contract,385
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=4-of-6/a7ffcore16me_h2_repair_candidates.csv,a2bb217,advance crypto core16me to core19 contract,3524
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=4-of-6/a7ffcore16me_h2_repair_response_map.csv,a2bb217,advance crypto core16me to core19 contract,378858
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=5-of-6/a7ffcore16me_blueprint_queue.csv,a2bb217,advance crypto core16me to core19 contract,6937
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=5-of-6/a7ffcore16me_chunk_manifest.json,a2bb217,advance crypto core16me to core19 contract,385
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=5-of-6/a7ffcore16me_h2_repair_candidates.csv,a2bb217,advance crypto core16me to core19 contract,3472
+runtime,A7FF-CORE16ME,runtime/a7ffcore16me_broader_h2_repair_execution/chunk=5-of-6/a7ffcore16me_h2_repair_response_map.csv,a2bb217,advance crypto core16me to core19 contract,376041
 runtime,A7FF-CORE16R,runtime/a7ffcore16r_primitive_atlas_supply_repair/a7ffcore16r_blocked_actions.csv,2ff1edc,add crypto a7ffcore16 primitive atlas,300
 runtime,A7FF-CORE16R,runtime/a7ffcore16r_primitive_atlas_supply_repair/a7ffcore16r_manifest.json,2ff1edc,add crypto a7ffcore16 primitive atlas,575
 runtime,A7FF-CORE16R,runtime/a7ffcore16r_primitive_atlas_supply_repair/a7ffcore16r_next_contract.json,2ff1edc,add crypto a7ffcore16 primitive atlas,928
 runtime,A7FF-CORE16R,runtime/a7ffcore16r_primitive_atlas_supply_repair/a7ffcore16r_repair_actions.csv,2ff1edc,add crypto a7ffcore16 primitive atlas,900
 runtime,A7FF-CORE16R,runtime/a7ffcore16r_primitive_atlas_supply_repair/a7ffcore16r_source_family_stability.csv,2ff1edc,add crypto a7ffcore16 primitive atlas,1971
-runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_blocked_tasks.csv,,,327
-runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_manifest.json,,,721
-runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_objective_policy.csv,,,639
-runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_seed_lane_policy.csv,,,486
-runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_seed_lane_summary.csv,,,442
-runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_seed_policy_queue.csv,,,95539
-runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_gate_audit.csv,,,260
-runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_label_horizon_summary.csv,,,596
-runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_manifest.json,,,821
-runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_objective_seed_packet.csv,,,100710
-runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_operator_summary.csv,,,64
-runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_seed_lane_summary.csv,,,493
-runtime,A7FF-CORE18,runtime/a7ffcore18_bounded_replay_preflight_contract/a7ffcore18_blocked_tasks.csv,,,334
-runtime,A7FF-CORE18,runtime/a7ffcore18_bounded_replay_preflight_contract/a7ffcore18_execution_plan.csv,,,270
-runtime,A7FF-CORE18,runtime/a7ffcore18_bounded_replay_preflight_contract/a7ffcore18_manifest.json,,,666
-runtime,A7FF-CORE18,runtime/a7ffcore18_bounded_replay_preflight_contract/a7ffcore18_packet_summary.csv,,,944
-runtime,A7FF-CORE18,runtime/a7ffcore18_bounded_replay_preflight_contract/a7ffcore18_replay_preflight_contract.csv,,,807
-runtime,A7FF-CORE18E,runtime/a7ffcore18e_bounded_replay_preflight/a7ffcore18e_field_contract_audit.csv,,,569
-runtime,A7FF-CORE18E,runtime/a7ffcore18e_bounded_replay_preflight/a7ffcore18e_gate_audit.csv,,,303
-runtime,A7FF-CORE18E,runtime/a7ffcore18e_bounded_replay_preflight/a7ffcore18e_lane_summary.csv,,,360
-runtime,A7FF-CORE18E,runtime/a7ffcore18e_bounded_replay_preflight/a7ffcore18e_manifest.json,,,867
-runtime,A7FF-CORE18E,runtime/a7ffcore18e_bounded_replay_preflight/a7ffcore18e_packet_role_counts.csv,,,48
-runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_blocked_tasks.csv,,,294
-runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_input_lane_counts.csv,,,140
-runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_manifest.json,,,685
-runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_pass_gate_matrix.csv,,,532
-runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_replay_scope.csv,,,618
+runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_blocked_tasks.csv,a2bb217,advance crypto core16me to core19 contract,327
+runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_manifest.json,a2bb217,advance crypto core16me to core19 contract,721
+runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_objective_policy.csv,a2bb217,advance crypto core16me to core19 contract,639
+runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_seed_lane_policy.csv,a2bb217,advance crypto core16me to core19 contract,486
+runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_seed_lane_summary.csv,a2bb217,advance crypto core16me to core19 contract,442
+runtime,A7FF-CORE17,runtime/a7ffcore17_objective_seed_policy_contract/a7ffcore17_seed_policy_queue.csv,a2bb217,advance crypto core16me to core19 contract,95539
+runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_gate_audit.csv,a2bb217,advance crypto core16me to core19 contract,260
+runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_label_horizon_summary.csv,a2bb217,advance crypto core16me to core19 contract,596
+runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_manifest.json,a2bb217,advance crypto core16me to core19 contract,821
+runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_objective_seed_packet.csv,a2bb217,advance crypto core16me to core19 contract,100710
+runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_operator_summary.csv,a2bb217,advance crypto core16me to core19 contract,64
+runtime,A7FF-CORE17E,runtime/a7ffcore17e_objective_seed_packet_construction/a7ffcore17e_seed_lane_summary.csv,a2bb217,advance crypto core16me to core19 contract,493
+runtime,A7FF-CORE18,runtime/a7ffcore18_bounded_replay_preflight_contract/a7ffcore18_blocked_tasks.csv,a2bb217,advance crypto core16me to core19 contract,334
+runtime,A7FF-CORE18,runtime/a7ffcore18_bounded_replay_preflight_contract/a7ffcore18_execution_plan.csv,a2bb217,advance crypto core16me to core19 contract,270
+runtime,A7FF-CORE18,runtime/a7ffcore18_bounded_replay_preflight_contract/a7ffcore18_manifest.json,a2bb217,advance crypto core16me to core19 contract,666
+runtime,A7FF-CORE18,runtime/a7ffcore18_bounded_replay_preflight_contract/a7ffcore18_packet_summary.csv,a2bb217,advance crypto core16me to core19 contract,944
+runtime,A7FF-CORE18,runtime/a7ffcore18_bounded_replay_preflight_contract/a7ffcore18_replay_preflight_contract.csv,a2bb217,advance crypto core16me to core19 contract,807
+runtime,A7FF-CORE18E,runtime/a7ffcore18e_bounded_replay_preflight/a7ffcore18e_field_contract_audit.csv,a2bb217,advance crypto core16me to core19 contract,569
+runtime,A7FF-CORE18E,runtime/a7ffcore18e_bounded_replay_preflight/a7ffcore18e_gate_audit.csv,a2bb217,advance crypto core16me to core19 contract,303
+runtime,A7FF-CORE18E,runtime/a7ffcore18e_bounded_replay_preflight/a7ffcore18e_lane_summary.csv,a2bb217,advance crypto core16me to core19 contract,360
+runtime,A7FF-CORE18E,runtime/a7ffcore18e_bounded_replay_preflight/a7ffcore18e_manifest.json,a2bb217,advance crypto core16me to core19 contract,867
+runtime,A7FF-CORE18E,runtime/a7ffcore18e_bounded_replay_preflight/a7ffcore18e_packet_role_counts.csv,a2bb217,advance crypto core16me to core19 contract,48
+runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_blocked_tasks.csv,a2bb217,advance crypto core16me to core19 contract,294
+runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_input_lane_counts.csv,a2bb217,advance crypto core16me to core19 contract,140
+runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_manifest.json,a2bb217,advance crypto core16me to core19 contract,685
+runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_pass_gate_matrix.csv,a2bb217,advance crypto core16me to core19 contract,532
+runtime,A7FF-CORE19,runtime/a7ffcore19_bounded_replay_contract/a7ffcore19_replay_scope.csv,a2bb217,advance crypto core16me to core19 contract,618
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_blueprint_subgraph_map.csv,510fb01,add crypto a7ffcore2 subgraph registry,2501481
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_factor_candidate_roots.csv,510fb01,add crypto a7ffcore2 subgraph registry,4627017
 runtime,A7FF-CORE2,runtime/a7ffcore2_feature_subgraph_registry/a7ffcore2_family_subgraph_summary.csv,510fb01,add crypto a7ffcore2 subgraph registry,4501
@@ -3122,15 +3122,15 @@ report,A7FFCORE16J-NEARMISS-RESOLUTION-AUDIT,reports/CRYPTO_A7FFCORE16J_NEARMISS
 report,A7FFCORE16K-H2-STRICT-FLOOR-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE16K_H2_STRICT_FLOOR_REPAIR_CONTRACT_20260601.md,37a5102,add crypto core16he second pass breadth governance,2841
 report,A7FFCORE16KE-H2-STRICT-FLOOR-EXECUTION,reports/CRYPTO_A7FFCORE16KE_H2_STRICT_FLOOR_EXECUTION_20260601.md,093ff03,add crypto core16ke h2 repair arbitration,7333
 report,A7FFCORE16KR-H2-REPAIR-FORENSIC,reports/CRYPTO_A7FFCORE16KR_H2_REPAIR_FORENSIC_20260601.md,093ff03,add crypto core16ke h2 repair arbitration,8953
-report,A7FFCORE16L-STRICT-PRESEED-QUEUE-LOCK,reports/CRYPTO_A7FFCORE16L_STRICT_PRESEED_QUEUE_LOCK_20260601.md,,,2996
+report,A7FFCORE16L-STRICT-PRESEED-QUEUE-LOCK,reports/CRYPTO_A7FFCORE16L_STRICT_PRESEED_QUEUE_LOCK_20260601.md,a2bb217,advance crypto core16me to core19 contract,2996
 report,A7FFCORE16M-H2-FLOOR-ARBITRATION-CONTRACT,reports/CRYPTO_A7FFCORE16M_H2_FLOOR_ARBITRATION_CONTRACT_20260601.md,093ff03,add crypto core16ke h2 repair arbitration,3644
-report,A7FFCORE16ME-BROADER-H2-REPAIR-EXECUTION,reports/CRYPTO_A7FFCORE16ME_BROADER_H2_REPAIR_EXECUTION_20260601.md,,,7063
+report,A7FFCORE16ME-BROADER-H2-REPAIR-EXECUTION,reports/CRYPTO_A7FFCORE16ME_BROADER_H2_REPAIR_EXECUTION_20260601.md,a2bb217,advance crypto core16me to core19 contract,7063
 report,A7FFCORE16R-PRIMITIVE-ATLAS-SUPPLY-REPAIR,reports/CRYPTO_A7FFCORE16R_PRIMITIVE_ATLAS_SUPPLY_REPAIR_20260601.md,2ff1edc,add crypto a7ffcore16 primitive atlas,4353
-report,A7FFCORE17-OBJECTIVE-SEED-POLICY-CONTRACT,reports/CRYPTO_A7FFCORE17_OBJECTIVE_SEED_POLICY_CONTRACT_20260601.md,,,4321
-report,A7FFCORE17E-OBJECTIVE-SEED-PACKET-CONSTRUCTION,reports/CRYPTO_A7FFCORE17E_OBJECTIVE_SEED_PACKET_CONSTRUCTION_20260601.md,,,4636
-report,A7FFCORE18-BOUNDED-REPLAY-PREFLIGHT-CONTRACT,reports/CRYPTO_A7FFCORE18_BOUNDED_REPLAY_PREFLIGHT_CONTRACT_20260601.md,,,3766
-report,A7FFCORE18E-BOUNDED-REPLAY-PREFLIGHT,reports/CRYPTO_A7FFCORE18E_BOUNDED_REPLAY_PREFLIGHT_20260601.md,,,3010
-report,A7FFCORE19-BOUNDED-REPLAY-CONTRACT,reports/CRYPTO_A7FFCORE19_BOUNDED_REPLAY_CONTRACT_20260601.md,,,3583
+report,A7FFCORE17-OBJECTIVE-SEED-POLICY-CONTRACT,reports/CRYPTO_A7FFCORE17_OBJECTIVE_SEED_POLICY_CONTRACT_20260601.md,a2bb217,advance crypto core16me to core19 contract,4321
+report,A7FFCORE17E-OBJECTIVE-SEED-PACKET-CONSTRUCTION,reports/CRYPTO_A7FFCORE17E_OBJECTIVE_SEED_PACKET_CONSTRUCTION_20260601.md,a2bb217,advance crypto core16me to core19 contract,4636
+report,A7FFCORE18-BOUNDED-REPLAY-PREFLIGHT-CONTRACT,reports/CRYPTO_A7FFCORE18_BOUNDED_REPLAY_PREFLIGHT_CONTRACT_20260601.md,a2bb217,advance crypto core16me to core19 contract,3766
+report,A7FFCORE18E-BOUNDED-REPLAY-PREFLIGHT,reports/CRYPTO_A7FFCORE18E_BOUNDED_REPLAY_PREFLIGHT_20260601.md,a2bb217,advance crypto core16me to core19 contract,3010
+report,A7FFCORE19-BOUNDED-REPLAY-CONTRACT,reports/CRYPTO_A7FFCORE19_BOUNDED_REPLAY_CONTRACT_20260601.md,a2bb217,advance crypto core16me to core19 contract,3583
 report,A7FFCORE2-FEATURE-SUBGRAPH-REGISTRY,reports/CRYPTO_A7FFCORE2_FEATURE_SUBGRAPH_REGISTRY_20260601.md,510fb01,add crypto a7ffcore2 subgraph registry,40668
 report,A7FFCORE3-FORMULAGEN-SUBGRAPH-GATE,reports/CRYPTO_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_20260601.md,02de3f1,add crypto a7ffcore3 formulagen gate,5243
 report,A7FFCORE4-GATE-IMPLEMENTATION-REGRESSION,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
@@ -3161,13 +3161,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,5be2e45,refresh crypto registry after core16m,513563
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,a2bb217,advance crypto core16me to core19 contract,521859
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,9f44a1f,refresh crypto registry after a7ffcore14se,104425
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,5be2e45,refresh crypto registry after core16m,191881
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,5be2e45,refresh crypto registry after core16m,711
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,a2bb217,advance crypto core16me to core19 contract,197310
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,a2bb217,advance crypto core16me to core19 contract,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,5be2e45,refresh crypto registry after core16m,103627
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,a2bb217,advance crypto core16me to core19 contract,106011
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -3183,15 +3183,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,093ff03,add crypto core16ke h2 repair arbitration,378
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,093ff03,add crypto core16ke h2 repair arbitration,368
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,093ff03,add crypto core16ke h2 repair arbitration,1450
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,5be2e45,refresh crypto registry after core16m,1306
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,5be2e45,refresh crypto registry after core16m,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,5be2e45,refresh crypto registry after core16m,5451
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,a2bb217,advance crypto core16me to core19 contract,378
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,a2bb217,advance crypto core16me to core19 contract,368
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,a2bb217,advance crypto core16me to core19 contract,1450
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,a2bb217,advance crypto core16me to core19 contract,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,a2bb217,advance crypto core16me to core19 contract,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,a2bb217,advance crypto core16me to core19 contract,6998
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,5be2e45,refresh crypto registry after core16m,5341
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,a2bb217,advance crypto core16me to core19 contract,5341
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

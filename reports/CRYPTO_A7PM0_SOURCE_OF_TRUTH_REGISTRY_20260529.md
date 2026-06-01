@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T14:48:02Z
+Generated: 2026-06-01T14:49:25Z
 
 ## Decision
 
@@ -11,38 +11,13 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
+## main...origin/main [ahead 1]
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
- M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
- M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE16L_STRICT_PRESEED_QUEUE_LOCK_20260601.md
-?? reports/CRYPTO_A7FFCORE16ME_BROADER_H2_REPAIR_EXECUTION_20260601.md
-?? reports/CRYPTO_A7FFCORE17E_OBJECTIVE_SEED_PACKET_CONSTRUCTION_20260601.md
-?? reports/CRYPTO_A7FFCORE17_OBJECTIVE_SEED_POLICY_CONTRACT_20260601.md
-?? reports/CRYPTO_A7FFCORE18E_BOUNDED_REPLAY_PREFLIGHT_20260601.md
-?? reports/CRYPTO_A7FFCORE18_BOUNDED_REPLAY_PREFLIGHT_CONTRACT_20260601.md
-?? reports/CRYPTO_A7FFCORE19_BOUNDED_REPLAY_CONTRACT_20260601.md
-?? runtime/a7ffcore16l_strict_preseed_queue_lock/
-?? runtime/a7ffcore16me_broader_h2_repair_execution/
-?? runtime/a7ffcore17_objective_seed_policy_contract/
-?? runtime/a7ffcore17e_objective_seed_packet_construction/
-?? runtime/a7ffcore18_bounded_replay_preflight_contract/
-?? runtime/a7ffcore18e_bounded_replay_preflight/
-?? runtime/a7ffcore19_bounded_replay_contract/
-?? scripts/crypto_a7ffcore16l_strict_preseed_queue_lock.py
-?? scripts/crypto_a7ffcore16me_broader_h2_repair_execution.py
-?? scripts/crypto_a7ffcore17_objective_seed_policy_contract.py
-?? scripts/crypto_a7ffcore17e_objective_seed_packet_construction.py
-?? scripts/crypto_a7ffcore18_bounded_replay_preflight_contract.py
-?? scripts/crypto_a7ffcore18e_bounded_replay_preflight.py
-?? scripts/crypto_a7ffcore19_bounded_replay_contract.py
-HEAD=5be2e451686339d87570a3f0706cff842c581b43
+HEAD=a2bb2170b87e1b4841e1857390732b0e77dccc1d
 origin/main=5be2e451686339d87570a3f0706cff842c581b43
-HEAD == origin/main: True
+HEAD == origin/main: False
 ```
 
 ## Manifest
@@ -63,9 +38,9 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T14:48:02Z",
-  "head": "5be2e451686339d87570a3f0706cff842c581b43",
-  "head_equals_origin_main": true,
+  "generated_at": "2026-06-01T14:49:25Z",
+  "head": "a2bb2170b87e1b4841e1857390732b0e77dccc1d",
+  "head_equals_origin_main": false,
   "origin_main": "5be2e451686339d87570a3f0706cff842c581b43",
   "stage": "A7PM-0",
   "stage_count": 332
