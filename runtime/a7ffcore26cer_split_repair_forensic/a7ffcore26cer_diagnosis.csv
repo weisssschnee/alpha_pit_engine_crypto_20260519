@@ -1,0 +1,7 @@
+finding,value,interpretation
+clean_count,4,strict three-split clean candidates after repair
+clean_lane_count,1,strict clean lane breadth
+s0_clean_count,4,S0 is the only productive clean lane
+s3_clean_count,0,S3 repair did not reach strict clean
+s3_near_miss_count,4,S3 still has near-miss structure worth isolated repair
+dominant_failure,single_lane_clean_supply_after_split_repair,cannot advance to replay with one clean lane only

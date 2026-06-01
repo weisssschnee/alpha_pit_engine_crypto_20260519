@@ -1,0 +1,4 @@
+lane,status,allowed,blocked
+S3_cross_family_bridge,primary_non_s0_repair,basis/OI/liquidity bridge variants around existing S3 near-miss; H8/H24; one-bar executable only,"S0 fields, S3-only promotion, same-bar-only candidates"
+S1_liquidity_basis_positioning,secondary_repair,liquidity x basis/positioning variants with stricter control filtering,basis-only/funding-only wrappers and H1 variants
+S0_positioning_price_basis,calibration_only,retain existing 4 clean candidates as reference,further S0 expansion in CORE26D

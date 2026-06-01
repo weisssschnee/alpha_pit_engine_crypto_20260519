@@ -1,0 +1,3 @@
+stage,action,input,authorized
+A7FF-CORE26DE,non-S0 lane repair numeric probe,S3 near-miss + S1 secondary repair policy + S0 reference,True
+A7FF-CORE27,bounded replay contract,CORE26DE pass only,False

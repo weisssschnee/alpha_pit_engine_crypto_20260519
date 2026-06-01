@@ -1,0 +1,18 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core26de": true,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_open_formula_generation": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE26D_NON_S0_LANE_REPAIR_CONTRACT_READY_FOR_CORE26DE",
+  "dominant_failure": "single_lane_clean_supply_after_split_repair",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T18:03:15Z",
+  "next_allowed": "A7FF-CORE26DE non-S0 lane repair numeric probe",
+  "source_decision": "PASS_A7FFCORE26CER_SPLIT_REPAIR_FORENSIC_COMPLETE_READY_FOR_CORE26D",
+  "source_stage": "A7FF-CORE26CER",
+  "stage": "A7FF-CORE26D"
+}

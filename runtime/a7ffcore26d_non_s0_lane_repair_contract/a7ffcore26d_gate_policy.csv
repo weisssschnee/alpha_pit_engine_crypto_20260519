@@ -1,0 +1,5 @@
+gate,threshold
+non_s0_three_split_clean_count,>= 2
+total_three_split_clean_lane_count,>= 2 including S0 reference
+control_ratio_policy,< 1.0 all pre-May splits
+search_authorization,false

@@ -1,0 +1,3 @@
+next_stage,action,rationale,authorized
+A7FF-CORE26D,non-S0 lane independence repair contract,"S0 has local clean evidence, but replay/search requires at least one additional independent executable lane",True
+A7FF-CORE27 bounded replay contract,blocked,clean supply remains 4 candidates / 1 lane,False

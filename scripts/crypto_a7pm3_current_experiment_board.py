@@ -110,6 +110,9 @@ A7FFCORE26 = REPO / "runtime" / "a7ffcore26_targeted_numeric_probe_contract" / "
 A7FFCORE26E = REPO / "runtime" / "a7ffcore26e_targeted_numeric_probe_execution" / "a7ffcore26e_manifest.json"
 A7FFCORE26R = REPO / "runtime" / "a7ffcore26r_targeted_numeric_probe_forensic" / "a7ffcore26r_manifest.json"
 A7FFCORE26C = REPO / "runtime" / "a7ffcore26c_split_consistency_repair_contract" / "a7ffcore26c_manifest.json"
+A7FFCORE26CE = REPO / "runtime" / "a7ffcore26ce_split_consistency_repair_probe" / "a7ffcore26ce_manifest.json"
+A7FFCORE26CER = REPO / "runtime" / "a7ffcore26cer_split_repair_forensic" / "a7ffcore26cer_manifest.json"
+A7FFCORE26D = REPO / "runtime" / "a7ffcore26d_non_s0_lane_repair_contract" / "a7ffcore26d_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -228,12 +231,44 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore26e = read_json(A7FFCORE26E)
     a7ffcore26r = read_json(A7FFCORE26R)
     a7ffcore26c = read_json(A7FFCORE26C)
+    a7ffcore26ce = read_json(A7FFCORE26CE)
+    a7ffcore26cer = read_json(A7FFCORE26CER)
+    a7ffcore26d = read_json(A7FFCORE26D)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore26c.get("decision") == "PASS_A7FFCORE26C_SPLIT_CONSISTENCY_REPAIR_CONTRACT_READY_FOR_CORE26CE":
+    if a7ffcore26d.get("decision") == "PASS_A7FFCORE26D_NON_S0_LANE_REPAIR_CONTRACT_READY_FOR_CORE26DE":
+        allowed["A7FF-CORE26DE non-S0 lane repair numeric probe"] = (
+            "bounded S3/S1-focused numeric probe; S0 is calibration-only; no open generation, search, or promotion"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked until non-S0 lane repair creates independent executable lane evidence"
+        blocked["A7FF large search"] = "blocked: clean evidence remains single-lane S0"
+        blocked["A7FF formula generation/search"] = "blocked: CORE26D authorizes bounded non-S0 lane repair probe only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE26D"
+        status = "non_s0_lane_repair_contract_ready_for_core26de"
+        next_task = "A7FF-CORE26DE non-S0 lane repair numeric probe"
+    elif a7ffcore26cer.get("decision") == "PASS_A7FFCORE26CER_SPLIT_REPAIR_FORENSIC_COMPLETE_READY_FOR_CORE26D":
+        allowed["A7FF-CORE26D non-S0 lane independence repair contract"] = (
+            "contract only; define S3/S1 repair after CORE26CE clean evidence collapses to S0"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: clean supply is single-lane"
+        blocked["A7FF large search"] = "blocked: split repair insufficient"
+        current_stage = "A7FF-CORE26CER"
+        status = "split_repair_forensic_ready_for_core26d"
+        next_task = "A7FF-CORE26D non-S0 lane independence repair contract"
+    elif a7ffcore26ce.get("decision") == "HOLD_A7FFCORE26CE_SPLIT_REPAIR_INSUFFICIENT":
+        allowed["A7FF-CORE26CER split repair forensic"] = (
+            "forensic only; diagnose CORE26CE single-lane clean supply"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: split repair insufficient"
+        blocked["A7FF large search"] = "blocked until split repair forensic"
+        current_stage = "A7FF-CORE26CE"
+        status = "split_consistency_repair_insufficient"
+        next_task = "A7FF-CORE26CER split repair forensic"
+    elif a7ffcore26c.get("decision") == "PASS_A7FFCORE26C_SPLIT_CONSISTENCY_REPAIR_CONTRACT_READY_FOR_CORE26CE":
         allowed["A7FF-CORE26CE split-consistency repair numeric probe"] = (
             "bounded S0/S3-focused repair numeric probe; no open generation, search, large search, or promotion"
         )

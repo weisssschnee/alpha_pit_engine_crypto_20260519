@@ -1,0 +1,26 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core27_contract": false,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "three_split_clean_count_lt_6",
+    "three_split_clean_lane_count_lt_3"
+  ],
+  "decision": "HOLD_A7FFCORE26CE_SPLIT_REPAIR_INSUFFICIENT",
+  "eval_error_count": 0,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T18:01:18Z",
+  "next_allowed": "A7FF-CORE26CER split repair forensic",
+  "numeric_rows": 2880,
+  "repair_pool_count": 360,
+  "source_decision": "PASS_A7FFCORE26C_SPLIT_CONSISTENCY_REPAIR_CONTRACT_READY_FOR_CORE26CE",
+  "source_stage": "A7FF-CORE26C",
+  "stage": "A7FF-CORE26CE",
+  "three_split_clean_count": 4,
+  "three_split_clean_lane_count": 1,
+  "two_split_near_miss_count": 20
+}

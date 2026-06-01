@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core26d_contract": true,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE26CER_SPLIT_REPAIR_FORENSIC_COMPLETE_READY_FOR_CORE26D",
+  "dominant_failure": "single_lane_clean_supply_after_split_repair",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T18:02:33Z",
+  "next_allowed": "A7FF-CORE26D non-S0 lane independence repair contract",
+  "s0_clean_count": 4,
+  "s3_clean_count": 0,
+  "s3_near_miss_count": 4,
+  "source_decision": "HOLD_A7FFCORE26CE_SPLIT_REPAIR_INSUFFICIENT",
+  "source_stage": "A7FF-CORE26CE",
+  "stage": "A7FF-CORE26CER",
+  "three_split_clean_count": 4,
+  "three_split_clean_lane_count": 1
+}

@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T17:47:16Z
+Generated: 2026-06-01T18:03:58Z
 
 ## Decision
 
@@ -11,20 +11,33 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 3]
+## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
+ M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=55aa1c6d7f04702a8aec51a6e0e0f051bc702e36
-origin/main=1ebf5b409080847d31d363300b0f0b300a8f2c18
-HEAD == origin/main: False
+ M scripts/crypto_a7pm3_current_experiment_board.py
+?? reports/CRYPTO_A7FFCORE26CER_SPLIT_REPAIR_FORENSIC_20260602.md
+?? reports/CRYPTO_A7FFCORE26CE_SPLIT_CONSISTENCY_REPAIR_PROBE_20260602.md
+?? reports/CRYPTO_A7FFCORE26D_NON_S0_LANE_REPAIR_CONTRACT_20260602.md
+?? runtime/a7ffcore26ce_split_consistency_repair_probe/
+?? runtime/a7ffcore26cer_split_repair_forensic/
+?? runtime/a7ffcore26d_non_s0_lane_repair_contract/
+?? scripts/crypto_a7ffcore26ce_split_consistency_repair_probe.py
+?? scripts/crypto_a7ffcore26cer_split_repair_forensic.py
+?? scripts/crypto_a7ffcore26d_non_s0_lane_repair_contract.py
+HEAD=8b5373a68d8e06f1ab2190bb9edd25278d8bafe6
+origin/main=8b5373a68d8e06f1ab2190bb9edd25278d8bafe6
+HEAD == origin/main: True
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3511,
+  "artifact_count": 3531,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +51,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T17:47:16Z",
-  "head": "55aa1c6d7f04702a8aec51a6e0e0f051bc702e36",
-  "head_equals_origin_main": false,
-  "origin_main": "1ebf5b409080847d31d363300b0f0b300a8f2c18",
+  "generated_at": "2026-06-01T18:03:58Z",
+  "head": "8b5373a68d8e06f1ab2190bb9edd25278d8bafe6",
+  "head_equals_origin_main": true,
+  "origin_main": "8b5373a68d8e06f1ab2190bb9edd25278d8bafe6",
   "stage": "A7PM-0",
-  "stage_count": 355
+  "stage_count": 358
 }
 ```
 
@@ -56,15 +69,15 @@ HEAD == origin/main: False
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      67 |
+| hold                         | hold                       |      68 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |      87 |
-| valid_or_historical_record   | diagnostic                 |      20 |
+| valid_or_historical_record   | contract                   |      88 |
+| valid_or_historical_record   | diagnostic                 |      21 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 
