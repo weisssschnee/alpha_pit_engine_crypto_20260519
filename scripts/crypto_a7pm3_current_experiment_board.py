@@ -138,6 +138,7 @@ A7FFCORE36ER = REPO / "runtime" / "a7ffcore36er_replay_objective_forensic" / "a7
 A7FFCORE37X = REPO / "runtime" / "a7ffcore37x_route_arbitration" / "a7ffcore37x_manifest.json"
 A7FFCORE38 = REPO / "runtime" / "a7ffcore38_portfolio_label_objective_contract" / "a7ffcore38_manifest.json"
 A7FFCORE38E = REPO / "runtime" / "a7ffcore38e_portfolio_label_objective_audit" / "a7ffcore38e_manifest.json"
+A7FFCORE39 = REPO / "runtime" / "a7ffcore39_symbol_level_book_packet_contract" / "a7ffcore39_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -284,12 +285,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore37x = read_json(A7FFCORE37X)
     a7ffcore38 = read_json(A7FFCORE38)
     a7ffcore38e = read_json(A7FFCORE38E)
+    a7ffcore39 = read_json(A7FFCORE39)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore38e.get("decision") == "HOLD_A7FFCORE38E_BOOK_OBJECTIVE_AUDIT_REQUIRES_SYMBOL_LEVEL_REPLAY_INPUT":
+    if a7ffcore39.get("decision") == "PASS_A7FFCORE39_SYMBOL_LEVEL_BOOK_PACKET_CONTRACT_READY_FOR_CORE39E":
+        allowed["A7FF-CORE39E symbol-level book packet construction audit"] = (
+            "bounded packet construction audit only; no search or book replay execution"
+        )
+        blocked["A7FF large search"] = "blocked: CORE39 authorizes packet construction audit only"
+        blocked["A7FF formula generation/search"] = "blocked until symbol-level packet exists and passes quality/reconciliation audit"
+        blocked["book objective replay execution"] = "not authorized until CORE39E packet passes and CORE40 contract exists"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE39"
+        status = "symbol_level_book_packet_contract_ready_for_core39e"
+        next_task = "A7FF-CORE39E symbol-level book packet construction audit"
+    elif a7ffcore38e.get("decision") == "HOLD_A7FFCORE38E_BOOK_OBJECTIVE_AUDIT_REQUIRES_SYMBOL_LEVEL_REPLAY_INPUT":
         allowed["A7FF-CORE39 symbol-level book input packet contract"] = (
             "contract only; define symbol-level score/return/weight packet required for B1-B4 book objectives"
         )

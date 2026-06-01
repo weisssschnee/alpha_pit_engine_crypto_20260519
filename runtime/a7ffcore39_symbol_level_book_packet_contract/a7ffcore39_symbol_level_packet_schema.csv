@@ -1,0 +1,25 @@
+field,required,role,note
+candidate_id,True,key,stable candidate id
+timestamp,True,key,feature timestamp / decision timestamp
+feature_available_time,True,timing,must be <= execution timestamp
+execution_time,True,timing,book entry timestamp
+symbol,True,key,instrument id
+split,True,evaluation,train/validation/test/recent
+family_id,True,candidate_metadata,data family / motif group
+cluster_key,True,candidate_metadata,diversity and dedup key
+label_id,True,label,L1/L2/L3/L5 primary labels
+horizon_h,True,label,book horizon
+candidate_score,True,signal,symbol-level formula score before ranking
+candidate_rank,True,signal,cross-sectional rank at timestamp
+raw_weight,True,portfolio,top/bottom book weight before caps
+capped_weight,True,portfolio,after symbol/liquidity/family caps
+side,True,portfolio,long/short/flat
+forward_return,True,label,raw return
+cs_relative_return,True,label,cross-sectional relative return
+market_beta_residual_return,True,label,BTC/ETH/market residual
+liquidity_tier_relative_return,True,label,within liquidity tier
+vol_adjusted_return,True,label,return normalized by realized vol
+quote_volume,True,cost_capacity,liquidity cap input
+turnover_proxy,True,cost_capacity,turnover/cost proxy
+cost_bps,True,cost_capacity,2/5/10 bps variants
+control_variant,True,control,original/wrong_lag/stale/shuffle/sign_flip

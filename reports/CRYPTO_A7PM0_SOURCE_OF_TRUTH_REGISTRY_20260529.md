@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T19:53:00Z
+Generated: 2026-06-01T19:55:27Z
 
 ## Decision
 
@@ -15,6 +15,7 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv
  M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
  M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
  M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
@@ -24,11 +25,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE38E_PORTFOLIO_LABEL_OBJECTIVE_AUDIT_20260602.md
-?? runtime/a7ffcore38e_portfolio_label_objective_audit/
-?? scripts/crypto_a7ffcore38e_portfolio_label_objective_audit.py
-HEAD=7dc2329237923fc5f1eeac4059d98e3de6939c2b
-origin/main=7dc2329237923fc5f1eeac4059d98e3de6939c2b
+?? reports/CRYPTO_A7FFCORE39_SYMBOL_LEVEL_BOOK_PACKET_CONTRACT_20260602.md
+?? runtime/a7ffcore39_symbol_level_book_packet_contract/
+?? scripts/crypto_a7ffcore39_symbol_level_book_packet_contract.py
+HEAD=3de2747ad35a2bd7c3e378158ea8ad6d868b8512
+origin/main=3de2747ad35a2bd7c3e378158ea8ad6d868b8512
 HEAD == origin/main: True
 ```
 
@@ -36,8 +37,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 3707,
-  "authorization_record_count": 728,
+  "artifact_count": 3714,
+  "authorization_record_count": 730,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -50,12 +51,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T19:53:00Z",
-  "head": "7dc2329237923fc5f1eeac4059d98e3de6939c2b",
+  "generated_at": "2026-06-01T19:55:27Z",
+  "head": "3de2747ad35a2bd7c3e378158ea8ad6d868b8512",
   "head_equals_origin_main": true,
-  "origin_main": "7dc2329237923fc5f1eeac4059d98e3de6939c2b",
+  "origin_main": "3de2747ad35a2bd7c3e378158ea8ad6d868b8512",
   "stage": "A7PM-0",
-  "stage_count": 383
+  "stage_count": 384
 }
 ```
 
@@ -75,7 +76,7 @@ HEAD == origin/main: True
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |     103 |
+| valid_or_historical_record   | contract                   |     104 |
 | valid_or_historical_record   | diagnostic                 |      24 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

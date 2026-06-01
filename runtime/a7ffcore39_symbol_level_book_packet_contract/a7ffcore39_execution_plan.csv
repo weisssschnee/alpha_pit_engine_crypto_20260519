@@ -1,0 +1,3 @@
+stage,action,scope
+A7FF-CORE39E,construct a bounded symbol-level packet for existing CORE33 candidate queue,existing candidates only; no new formula generation; no search
+A7FF-CORE40,"if CORE39E packet passes, define bounded book-objective replay execution",contract only until explicitly authorized

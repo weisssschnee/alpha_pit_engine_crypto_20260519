@@ -1,0 +1,6 @@
+artifact,purpose
+a7ffcore39e_symbol_level_score_packet.parquet,raw symbol-level candidate scores and labels
+a7ffcore39e_book_weight_trace.parquet,long/short/capped weights and cost inputs
+a7ffcore39e_control_packet.parquet,matched control variants with identical schema
+a7ffcore39e_aggregate_replay_reconciliation.csv,prove aggregate replay can be reconstructed
+a7ffcore39e_packet_quality_audit.csv,"missingness, NaN/inf, timing, coverage, cap audit"

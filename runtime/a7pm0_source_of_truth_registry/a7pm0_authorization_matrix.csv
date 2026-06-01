@@ -508,6 +508,8 @@ A7FF-CORE36,runtime/a7ffcore36_replay_objective_reset_contract/a7ffcore36_author
 A7FF-CORE36,runtime/a7ffcore36_replay_objective_reset_contract/a7ffcore36_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""shadow_paper_live"": true}",False
 A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_authorization_matrix.json,authorized,"{""A7FF-CORE38E executable portfolio-label objective adequacy audit"": true}",False
 A7FF-CORE38,runtime/a7ffcore38_portfolio_label_objective_contract/a7ffcore38_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""same_CORE33_34_36_queue_rerun"": true, ""shadow_paper_live"": true}",False
+A7FF-CORE39,runtime/a7ffcore39_symbol_level_book_packet_contract/a7ffcore39_authorization_matrix.json,authorized,"{""A7FF-CORE39E symbol-level book packet construction audit"": true}",False
+A7FF-CORE39,runtime/a7ffcore39_symbol_level_book_packet_contract/a7ffcore39_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""book_objective_replay_execution"": true, ""formula_search"": true, ""large_search"": true, ""shadow_paper_live"": true}",False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,A7FF-CORE8E replay-preflight packet audit,true,True
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,alpha_proof,false,False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,formula_search,false,False

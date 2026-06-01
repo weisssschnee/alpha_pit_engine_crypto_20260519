@@ -1,0 +1,7 @@
+requirement,description,hard_gate
+symbol_level_materialization,candidate_score must be emitted per candidate/timestamp/symbol before aggregation,True
+point_in_time_timing,feature_available_time and execution_time must be explicit,True
+book_weight_trace,raw and capped weights must be retained for every selected symbol,True
+primary_label_panel,L1/L2/L3/L5 labels must be available at symbol level,True
+control_packet,wrong-lag/stale/shuffle/sign-flip controls must be materialized with same schema,True
+aggregation_reproducibility,aggregate spread rows must be reproducible from the symbol-level packet,True

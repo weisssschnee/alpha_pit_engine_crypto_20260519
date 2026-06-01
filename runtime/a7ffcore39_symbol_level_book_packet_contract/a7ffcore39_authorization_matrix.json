@@ -1,0 +1,12 @@
+{
+  "authorized": {
+    "A7FF-CORE39E symbol-level book packet construction audit": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "book_objective_replay_execution": true,
+    "formula_search": true,
+    "large_search": true,
+    "shadow_paper_live": true
+  }
+}
