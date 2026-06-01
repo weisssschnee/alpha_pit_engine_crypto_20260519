@@ -1,0 +1,9 @@
+check,requirement,blocking
+candidate_rebuild,"re-materialize expression from source datasets, not reuse CORE30E vectors",True
+split_coverage,train/validation/test/recent coverage by symbol and timestamp,True
+label_set,L0/L1/L3/L5/L7 at 4h/8h/24h with L7 diagnostic-only,True
+controls,"row shuffle, time shuffle, wrong-lag future, stale, sign flip, same-family placebo",True
+non_overlap_stats,offset non-overlap tstats and simple block bootstrap summary,True
+family_and_cluster_caps,no single family > 40%; no repeated cluster representatives,True
+turnover_cost_proxy,2/5/10 bps proxy and one-bar executable alignment,True
+source_boundary,cross-exchange forward-only and liquidation/orderbook excluded,True

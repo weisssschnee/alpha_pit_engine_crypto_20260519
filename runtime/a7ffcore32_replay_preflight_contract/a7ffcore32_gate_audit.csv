@@ -1,0 +1,5 @@
+gate,threshold,observed,pass
+queue_count,24,24,True
+family_count,3,3,True
+per_family_count,8 each,"F1a_aggtrades_flow_microstructure:8,F1b_taker_flow_market_panel:8,F2a_basis_funding_independent:8",True
+cluster_unique,24 unique clusters,24,True

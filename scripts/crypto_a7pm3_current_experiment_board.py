@@ -123,6 +123,7 @@ A7FFCORE29E = REPO / "runtime" / "a7ffcore29e_independent_family_preflight" / "a
 A7FFCORE30 = REPO / "runtime" / "a7ffcore30_independent_family_numeric_probe_contract" / "a7ffcore30_manifest.json"
 A7FFCORE30E = REPO / "runtime" / "a7ffcore30e_bounded_numeric_probe" / "a7ffcore30e_manifest.json"
 A7FFCORE31 = REPO / "runtime" / "a7ffcore31_independent_family_clue_consolidation" / "a7ffcore31_manifest.json"
+A7FFCORE32 = REPO / "runtime" / "a7ffcore32_replay_preflight_contract" / "a7ffcore32_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -254,12 +255,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore30 = read_json(A7FFCORE30)
     a7ffcore30e = read_json(A7FFCORE30E)
     a7ffcore31 = read_json(A7FFCORE31)
+    a7ffcore32 = read_json(A7FFCORE32)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore31.get("decision") == "PASS_A7FFCORE31_CLUE_CONSOLIDATION_READY_FOR_CORE32_REPLAY_PREFLIGHT_CONTRACT":
+    if a7ffcore32.get("decision") == "PASS_A7FFCORE32_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE32E":
+        allowed["A7FF-CORE32E replay preflight execution"] = (
+            "preflight execution only; no tradable replay/search/promotion"
+        )
+        blocked["A7FF tradable replay"] = "blocked until CORE32E preflight passes all controls and alignment checks"
+        blocked["A7FF large search"] = "blocked: replay preflight contract is not search evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE32 authorizes preflight execution only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE32"
+        status = "replay_preflight_contract_ready_for_core32e"
+        next_task = "A7FF-CORE32E replay preflight execution"
+    elif a7ffcore31.get("decision") == "PASS_A7FFCORE31_CLUE_CONSOLIDATION_READY_FOR_CORE32_REPLAY_PREFLIGHT_CONTRACT":
         allowed["A7FF-CORE32 replay preflight contract"] = (
             "contract only; define replay-preflight checks over CORE31 24-row queue"
         )

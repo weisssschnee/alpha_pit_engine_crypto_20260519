@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE32 replay preflight contract": "contract only; define replay-preflight checks over CORE31 24-row queue",
+  "A7FF-CORE32E replay preflight execution": "preflight execution only; no tradable replay/search/promotion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

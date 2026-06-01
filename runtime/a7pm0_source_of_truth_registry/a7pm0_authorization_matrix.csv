@@ -498,6 +498,8 @@ A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcor
 A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcore29_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_generation_execution_beyond_contract"": true, ""large_search"": true, ""search"": true, ""shadow_paper_live"": true}",False
 A7FF-CORE30,runtime/a7ffcore30_independent_family_numeric_probe_contract/a7ffcore30_authorization_matrix.json,authorized,"{""A7FF-CORE30E bounded numeric probe execution"": true}",False
 A7FF-CORE30,runtime/a7ffcore30_independent_family_numeric_probe_contract/a7ffcore30_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""replay_contract"": true, ""shadow_paper_live"": true}",False
+A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_authorization_matrix.json,authorized,"{""A7FF-CORE32E replay preflight execution"": true}",False
+A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""shadow_paper_live"": true, ""tradable_replay"": true}",False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,A7FF-CORE8E replay-preflight packet audit,true,True
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,alpha_proof,false,False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,formula_search,false,False

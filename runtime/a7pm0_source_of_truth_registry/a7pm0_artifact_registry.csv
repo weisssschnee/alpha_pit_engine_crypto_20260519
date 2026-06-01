@@ -3019,16 +3019,23 @@ runtime,A7FF-CORE30E,runtime/a7ffcore30e_bounded_numeric_probe/a7ffcore30e_famil
 runtime,A7FF-CORE30E,runtime/a7ffcore30e_bounded_numeric_probe/a7ffcore30e_manifest.json,f5b9025,add crypto core30e bounded numeric probe,775
 runtime,A7FF-CORE30E,runtime/a7ffcore30e_bounded_numeric_probe/a7ffcore30e_numeric_results.csv,f5b9025,add crypto core30e bounded numeric probe,568761
 runtime,A7FF-CORE30E,runtime/a7ffcore30e_bounded_numeric_probe/a7ffcore30e_selected_numeric_clues.csv,f5b9025,add crypto core30e bounded numeric probe,13284
-report,A7FF-CORE31,reports/CRYPTO_A7FFCORE31_INDEPENDENT_FAMILY_CLUE_CONSOLIDATION_20260602.md,,,20116
-runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_cluster_registry.csv,,,29451
-runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_concentration_audit.csv,,,225
-runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_enriched_numeric_clues.csv,,,47120
-runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_family_summary.csv,,,359
-runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_gate_audit.csv,,,277
-runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_label_evidence.csv,,,69005
-runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_manifest.json,,,753
-runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_replay_family_summary.csv,,,314
-runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_replay_preflight_queue.csv,,,11188
+report,A7FF-CORE31,reports/CRYPTO_A7FFCORE31_INDEPENDENT_FAMILY_CLUE_CONSOLIDATION_20260602.md,f6cad7c,add crypto core31 clue consolidation,20116
+runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_cluster_registry.csv,f6cad7c,add crypto core31 clue consolidation,29451
+runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_concentration_audit.csv,f6cad7c,add crypto core31 clue consolidation,225
+runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_enriched_numeric_clues.csv,f6cad7c,add crypto core31 clue consolidation,47120
+runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_family_summary.csv,f6cad7c,add crypto core31 clue consolidation,359
+runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_gate_audit.csv,f6cad7c,add crypto core31 clue consolidation,277
+runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_label_evidence.csv,f6cad7c,add crypto core31 clue consolidation,69005
+runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_manifest.json,f6cad7c,add crypto core31 clue consolidation,753
+runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_replay_family_summary.csv,f6cad7c,add crypto core31 clue consolidation,314
+runtime,A7FF-CORE31,runtime/a7ffcore31_independent_family_clue_consolidation/a7ffcore31_replay_preflight_queue.csv,f6cad7c,add crypto core31 clue consolidation,11188
+report,A7FF-CORE32,reports/CRYPTO_A7FFCORE32_REPLAY_PREFLIGHT_CONTRACT_20260602.md,,,9918
+runtime,A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_authorization_matrix.json,,,253
+runtime,A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_family_balance.csv,,,297
+runtime,A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_gate_audit.csv,,,250
+runtime,A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_manifest.json,,,713
+runtime,A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_preflight_checks.csv,,,715
+runtime,A7FF-CORE32,runtime/a7ffcore32_replay_preflight_contract/a7ffcore32_replay_preflight_queue.csv,,,11740
 report,A7FF-CORE4,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_entrypoint_policy.csv,97cf90e,add crypto a7ffcore4 gate regression,2751
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_entrypoint_route_summary.csv,97cf90e,add crypto a7ffcore4 gate regression,252
@@ -3395,14 +3402,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,f5b9025,add crypto core30e bounded numeric probe,5849
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,f5b9025,add crypto core30e bounded numeric probe,551207
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,f6cad7c,add crypto core31 clue consolidation,5894
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,f6cad7c,add crypto core31 clue consolidation,552695
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,1ae2bb0,add crypto core30 numeric probe contract,105423
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,f5b9025,add crypto core30e bounded numeric probe,217762
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,f5b9025,add crypto core30e bounded numeric probe,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,f6cad7c,add crypto core31 clue consolidation,218581
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,f6cad7c,add crypto core31 clue consolidation,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,f5b9025,add crypto core30e bounded numeric probe,118889
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,f6cad7c,add crypto core31 clue consolidation,119273
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3420,12 +3427,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,f5b9025,add crypto core30e bounded numeric probe,5275
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,f5b9025,add crypto core30e bounded numeric probe,381
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,f5b9025,add crypto core30e bounded numeric probe,307
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,f5b9025,add crypto core30e bounded numeric probe,1483
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,f5b9025,add crypto core30e bounded numeric probe,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,f5b9025,add crypto core30e bounded numeric probe,425
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,f6cad7c,add crypto core31 clue consolidation,5149
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,f6cad7c,add crypto core31 clue consolidation,365
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,f6cad7c,add crypto core31 clue consolidation,300
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,f6cad7c,add crypto core31 clue consolidation,1499
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,f6cad7c,add crypto core31 clue consolidation,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,f6cad7c,add crypto core31 clue consolidation,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
