@@ -77,6 +77,9 @@ A7FFCORE16HER = REPO / "runtime" / "a7ffcore16her_second_pass_forensic" / "a7ffc
 A7FFCORE16I = REPO / "runtime" / "a7ffcore16i_balanced_preseed_queue_audit" / "a7ffcore16i_manifest.json"
 A7FFCORE16J = REPO / "runtime" / "a7ffcore16j_nearmiss_resolution_audit" / "a7ffcore16j_manifest.json"
 A7FFCORE16K = REPO / "runtime" / "a7ffcore16k_h2_strict_floor_repair_contract" / "a7ffcore16k_manifest.json"
+A7FFCORE16KE = REPO / "runtime" / "a7ffcore16ke_h2_strict_floor_execution" / "a7ffcore16ke_manifest.json"
+A7FFCORE16KR = REPO / "runtime" / "a7ffcore16kr_h2_repair_forensic" / "a7ffcore16kr_manifest.json"
+A7FFCORE16M = REPO / "runtime" / "a7ffcore16m_h2_floor_arbitration_contract" / "a7ffcore16m_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -162,12 +165,51 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore16i = read_json(A7FFCORE16I)
     a7ffcore16j = read_json(A7FFCORE16J)
     a7ffcore16k = read_json(A7FFCORE16K)
+    a7ffcore16ke = read_json(A7FFCORE16KE)
+    a7ffcore16kr = read_json(A7FFCORE16KR)
+    a7ffcore16m = read_json(A7FFCORE16M)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore16k.get("decision") == "PASS_A7FFCORE16K_H2_STRICT_FLOOR_REPAIR_CONTRACT_READY_FOR_CORE16KE":
+    if a7ffcore16m.get("decision") == "PASS_A7FFCORE16M_H2_FLOOR_RETAINED_READY_FOR_CORE16ME":
+        allowed["A7FF-CORE16ME broader H2/I4 strict-floor repair execution"] = (
+            "execute broader checkpointed H2/I4 repair only; no replay expansion, search, or promotion"
+        )
+        blocked["A7FF-CORE16L"] = "blocked until CORE16ME produces strict H2 floor and strict queue size"
+        blocked["A7FF-CORE17"] = "blocked until strict queue lock passes"
+        blocked["A7FF formula generation"] = "blocked: CORE16M authorizes H2/I4 repair only"
+        blocked["A7FF bounded replay"] = "blocked: strict pre-seed queue not complete"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16M"
+        status = "h2_floor_retained_ready_for_core16me"
+        next_task = "A7FF-CORE16ME broader H2/I4 strict-floor repair execution"
+    elif a7ffcore16kr.get("decision") == "PASS_A7FFCORE16KR_H2_REPAIR_FORENSIC_COMPLETE_READY_FOR_CORE16M":
+        allowed["A7FF-CORE16M H2 floor arbitration contract"] = (
+            "contract only; arbitrate H2 floor after CORE16KE fell one strict row short; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE16L"] = "blocked: CORE16KE strict queue still below H2 floor"
+        blocked["A7FF-CORE17"] = "blocked until strict queue lock passes"
+        blocked["A7FF formula generation"] = "blocked until CORE16M/CORE16ME resolves H2 floor"
+        blocked["A7FF bounded replay"] = "blocked: strict pre-seed queue incomplete"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16KR"
+        status = "h2_repair_forensic_ready_for_core16m"
+        next_task = "A7FF-CORE16M H2 floor arbitration contract"
+    elif a7ffcore16ke.get("decision") == "HOLD_A7FFCORE16KE_H2_STRICT_FLOOR_REPAIR_INSUFFICIENT":
+        allowed["A7FF-CORE16KR H2 repair forensic"] = (
+            "forensic only; freeze CORE16KE one-row shortfall and define next governance step"
+        )
+        blocked["A7FF-CORE16L"] = "blocked: CORE16KE strict queue still below size/H2 floor"
+        blocked["A7FF-CORE17"] = "blocked until strict queue lock passes"
+        blocked["A7FF formula generation"] = "blocked until CORE16KR/CORE16M resolves H2 floor"
+        blocked["A7FF bounded replay"] = "blocked: strict pre-seed queue incomplete"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16KE"
+        status = "h2_strict_floor_repair_insufficient"
+        next_task = "A7FF-CORE16KR H2 repair forensic"
+    elif a7ffcore16k.get("decision") == "PASS_A7FFCORE16K_H2_STRICT_FLOOR_REPAIR_CONTRACT_READY_FOR_CORE16KE":
         allowed["A7FF-CORE16KE H2/I4 strict-floor repair execution"] = (
             "execute H2/I4 strict-floor repair only; no open grammar, replay expansion, search, or promotion"
         )

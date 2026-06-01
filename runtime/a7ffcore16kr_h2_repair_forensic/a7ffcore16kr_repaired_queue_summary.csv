@@ -1,0 +1,5 @@
+second_pass_family,queue_role,rows,label_family_count
+H1_I5_deconcentration,strict_candidate,33,3
+H0_I3_deconcentration,strict_candidate,31,3
+H3_cross_family_bridge,strict_candidate,20,4
+H2_I4_near_miss_repair,strict_candidate,11,4

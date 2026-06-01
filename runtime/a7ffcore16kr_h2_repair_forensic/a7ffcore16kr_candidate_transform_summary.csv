@@ -1,0 +1,2 @@
+left_transform,operator,right_transform,candidate_rows,label_family_count,min_control_ratio,lag_ok_count
+delta_2h,SafeDiv,delta_2h,2,2,0.952750140952802,0

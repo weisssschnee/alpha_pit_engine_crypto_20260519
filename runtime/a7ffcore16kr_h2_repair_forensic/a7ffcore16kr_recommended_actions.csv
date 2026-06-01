@@ -1,0 +1,4 @@
+action_id,action,reason
+A0_no_core16l,do not lock the strict pre-seed queue,CORE16KE repaired queue is still below size and H2 floors
+A1_core16m_floor_arbitration,write a floor arbitration contract before any further execution,"the gap is one row, but weakening the floor silently would corrupt governance"
+A2_core16me_optional_broader_h2_wave,"if strict floor is retained, run a broader H2 wave with additional transforms and checkpointing",current narrow wave found 2 of 3 required rows and the remaining gap is localized

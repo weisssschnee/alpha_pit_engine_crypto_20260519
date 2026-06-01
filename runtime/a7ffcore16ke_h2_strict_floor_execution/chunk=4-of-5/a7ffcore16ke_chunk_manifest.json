@@ -1,0 +1,10 @@
+{
+  "blueprint_count": 15,
+  "chunk_count": 5,
+  "chunk_index": 4,
+  "decision": "PASS_A7FFCORE16KE_CHUNK_COMPLETE",
+  "generated_at": "2026-06-01T13:56:16Z",
+  "h2_repair_candidate_count": 0,
+  "response_rows": 240,
+  "stage": "A7FF-CORE16KE-CHUNK"
+}

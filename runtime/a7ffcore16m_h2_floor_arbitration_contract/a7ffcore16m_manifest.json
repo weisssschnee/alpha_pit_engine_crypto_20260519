@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core16l": false,
+  "authorizes_core16me": true,
+  "authorizes_core17": false,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE16M_H2_FLOOR_RETAINED_READY_FOR_CORE16ME",
+  "executes_replay": false,
+  "executes_search": false,
+  "floor_policy": "retain_h2_floor_no_nearmiss_promotion",
+  "generated_at": "2026-06-01T14:00:34Z",
+  "h2_rows_needed": 1,
+  "next_allowed": "A7FF-CORE16ME broader checkpointed H2/I4 strict-floor repair execution",
+  "queue_rows_needed": 1,
+  "source_decision": "PASS_A7FFCORE16KR_H2_REPAIR_FORENSIC_COMPLETE_READY_FOR_CORE16M",
+  "source_stage": "A7FF-CORE16KR",
+  "stage": "A7FF-CORE16M"
+}

@@ -14,10 +14,10 @@
     "executes_replay": false,
     "executes_search": false,
     "executes_training": false,
-    "generated_at": "2026-06-01T12:47:51Z",
-    "head": "37a510217aea5bc6768768ac81f6e857369b2308",
-    "head_equals_origin_main": false,
-    "origin_main": "8de8e46fca0b73825ff817c570eded105a67c056",
+    "generated_at": "2026-06-01T12:50:42Z",
+    "head": "69bf457ce9af5e36474f6451cc1b2fdbce4df80b",
+    "head_equals_origin_main": true,
+    "origin_main": "69bf457ce9af5e36474f6451cc1b2fdbce4df80b",
     "stage": "A7PM-0",
     "stage_count": 322
   },
@@ -36,5 +36,5 @@
     "stage": "A7PM-2",
     "state_count": 16
   },
-  "head_equals_origin_main": false
+  "head_equals_origin_main": true
 }

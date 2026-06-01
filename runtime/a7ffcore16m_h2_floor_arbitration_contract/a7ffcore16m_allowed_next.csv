@@ -1,0 +1,3 @@
+stage,allowed_action,scope
+A7FF-CORE16ME,broader checkpointed H2/I4 strict-floor repair execution,H2_I4_near_miss_repair only; expand transform grid around taker_flow x liquidity/OI pairs
+A7PM-0/3,registry refresh after CORE16M/ME,governance only

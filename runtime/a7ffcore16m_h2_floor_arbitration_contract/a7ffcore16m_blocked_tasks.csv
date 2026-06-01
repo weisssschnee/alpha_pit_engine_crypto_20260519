@@ -1,0 +1,5 @@
+blocked_task,reason
+A7FF-CORE16L,strict pre-seed queue still below size/H2 floor
+A7FF-CORE17,objective seed policy blocked until strict queue lock passes
+formula generation/search,CORE16M authorizes H2 repair execution only
+alpha proof / shadow / paper / live,not authorized

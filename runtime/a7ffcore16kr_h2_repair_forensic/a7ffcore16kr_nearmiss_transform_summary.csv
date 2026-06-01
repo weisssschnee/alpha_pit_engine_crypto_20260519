@@ -1,0 +1,6 @@
+left_transform,operator,right_transform,near_miss_rows,min_control_ratio,label_family_count
+delta_4h,Mul,delta_4h,3,1.0114124588254485,3
+delta_2h,SafeDiv,delta_8h,1,1.1093336231935351,1
+zscore_72h,Mul,shock_24h,1,1.202515963668304,1
+delta_4h,SafeDiv,delta_4h,1,1.3027651315969346,1
+delta_2h,SafeDiv,delta_2h,1,1.374617526308928,1

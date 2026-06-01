@@ -1,0 +1,2 @@
+family,left_families,right_families,operators,left_transforms,right_transforms,required_added_strict_h2
+H2_I4_near_miss_repair,taker_flow,liquidity|open_interest,Mul|SafeDiv|Sub,delta_1h|delta_2h|delta_4h|delta_8h|delta_24h|zscore_72h|zscore_168h|shock_24h|tsrank_72h,level|delta_1h|delta_2h|delta_4h|delta_8h|delta_24h|zscore_72h|zscore_168h|shock_24h|tsrank_72h,1

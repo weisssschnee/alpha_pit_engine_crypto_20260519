@@ -1,0 +1,4 @@
+policy_id,decision,reason
+P0_retain_h2_floor,retain,H2/I4 under-supply was the explicit blocker; waiving the floor would make the balanced queue governance meaningless
+P1_no_nearmiss_promotion,retain,near-miss rows remain forensic evidence only; they cannot be used as strict alpha seeds
+P2_authorize_broader_h2_wave,authorize_core16me,CORE16KE found 2 of 3 required strict rows; the remaining gap is localized and worth one broader checkpointed H2 wave
