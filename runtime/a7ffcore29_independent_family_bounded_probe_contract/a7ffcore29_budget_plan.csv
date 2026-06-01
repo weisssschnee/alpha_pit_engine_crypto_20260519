@@ -1,0 +1,7 @@
+budget_item,value,notes
+max_total_blueprints,2400.0,contract cap; no generation executed here
+materialization_preflight_rows,480.0,balanced 160 rows per family
+numeric_probe_rows,240.0,only after adapter/preflight pass
+min_family_count,3.0,all CORE28E candidate families represented
+max_single_family_share,0.34,preflight and numeric queue cap
+max_single_motif_share,0.2,prevent motif collapse

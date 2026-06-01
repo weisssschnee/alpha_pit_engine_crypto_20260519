@@ -1,0 +1,13 @@
+{
+  "authorized": {
+    "A7FF-CORE29E independent family dry-generation/materialization adapter preflight": true,
+    "A7FF-CORE29E numeric probe": false
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "formula_generation_execution_beyond_contract": true,
+    "large_search": true,
+    "search": true,
+    "shadow_paper_live": true
+  }
+}

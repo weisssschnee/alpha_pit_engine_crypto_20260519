@@ -1,0 +1,8 @@
+pattern,reason
+direct_OI_price_rerun,S0 was single-lane only and superseded as diagnostic reference
+basis_only_wrapper,basis-only promotion collapsed to narrow surface
+funding_only_wrapper,funding-only wrapper is not independent family evidence
+activity_liquidity_self_reproduction,A7V activity/liquidity family remains blocked
+raw_OKX_Binance_direct_price_comparison,requires canonical contract-unit fields
+forward_only_cross_exchange_as_historical_proof,cross-exchange overlay is diagnostic/recent only
+liquidation_orderbook_without_PIT_contract,new data source contract required

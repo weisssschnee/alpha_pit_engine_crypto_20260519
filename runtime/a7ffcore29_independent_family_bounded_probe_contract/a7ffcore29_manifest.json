@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core29e_preflight": true,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_probe": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE29_INDEPENDENT_FAMILY_BOUNDED_PROBE_CONTRACT_READY_FOR_CORE29E",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "family_count": 3,
+  "generated_at": "2026-06-01T18:32:18Z",
+  "materialization_preflight_rows": 480,
+  "max_total_blueprints": 2400,
+  "next_allowed": "A7FF-CORE29E independent family dry-generation/materialization adapter preflight",
+  "numeric_probe_rows_after_preflight": 240,
+  "source_decision": "PASS_A7FFCORE28E_INDEPENDENT_DATA_FAMILY_ATLAS_READY_FOR_CORE29_CONTRACT",
+  "source_stage": "A7FF-CORE28E",
+  "stage": "A7FF-CORE29"
+}

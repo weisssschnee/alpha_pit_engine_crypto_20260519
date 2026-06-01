@@ -118,6 +118,7 @@ A7FFCORE26DER = REPO / "runtime" / "a7ffcore26der_non_s0_repair_forensic" / "a7f
 A7FFCORE27X = REPO / "runtime" / "a7ffcore27x_search_readiness_arbitration" / "a7ffcore27x_manifest.json"
 A7FFCORE28 = REPO / "runtime" / "a7ffcore28_objective_data_family_reset_contract" / "a7ffcore28_manifest.json"
 A7FFCORE28E = REPO / "runtime" / "a7ffcore28e_independent_data_family_atlas_audit" / "a7ffcore28e_manifest.json"
+A7FFCORE29 = REPO / "runtime" / "a7ffcore29_independent_family_bounded_probe_contract" / "a7ffcore29_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -244,12 +245,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore27x = read_json(A7FFCORE27X)
     a7ffcore28 = read_json(A7FFCORE28)
     a7ffcore28e = read_json(A7FFCORE28E)
+    a7ffcore29 = read_json(A7FFCORE29)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore28e.get("decision") == "PASS_A7FFCORE28E_INDEPENDENT_DATA_FAMILY_ATLAS_READY_FOR_CORE29_CONTRACT":
+    if a7ffcore29.get("decision") == "PASS_A7FFCORE29_INDEPENDENT_FAMILY_BOUNDED_PROBE_CONTRACT_READY_FOR_CORE29E":
+        allowed["A7FF-CORE29E independent family dry-generation/materialization adapter preflight"] = (
+            "bounded preflight only; validate aggTrades/top498 adapters and balanced queues without search"
+        )
+        blocked["A7FF-CORE29 numeric probe"] = "blocked until CORE29E preflight passes"
+        blocked["A7FF large search"] = "blocked until independent-family preflight and numeric evidence pass"
+        blocked["A7FF formula generation/search"] = "blocked: CORE29 authorizes preflight only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE29"
+        status = "independent_family_bounded_probe_contract_ready_for_core29e"
+        next_task = "A7FF-CORE29E independent family dry-generation/materialization adapter preflight"
+    elif a7ffcore28e.get("decision") == "PASS_A7FFCORE28E_INDEPENDENT_DATA_FAMILY_ATLAS_READY_FOR_CORE29_CONTRACT":
         allowed["A7FF-CORE29 independent family bounded generation/probe contract"] = (
             "contract only; use CORE28E atlas candidates without executing generation/search"
         )

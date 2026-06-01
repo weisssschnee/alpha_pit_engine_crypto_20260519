@@ -1,0 +1,4 @@
+adapter,required_for,must_check,blocking_if_missing
+aggtrades_enhanced_field_adapter,F1a_aggtrades_flow_microstructure,field existence; timestamp after-hour availability; core12 coverage; NaN/inf; role trace,True
+existing_top498_panel_fields,F1b/F2a,field contract; materialization parity; label alignment; no S0-only queue dominance,True
+control_attachment,all,row shuffle; time shuffle; wrong lag; stale; same-family placebo,True

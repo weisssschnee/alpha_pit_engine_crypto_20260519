@@ -2973,13 +2973,21 @@ runtime,A7FF-CORE28,runtime/a7ffcore28_objective_data_family_reset_contract/a7ff
 runtime,A7FF-CORE28,runtime/a7ffcore28_objective_data_family_reset_contract/a7ffcore28_gate_policy.csv,aede318,add crypto core26de non-s0 repair arbitration,228
 runtime,A7FF-CORE28,runtime/a7ffcore28_objective_data_family_reset_contract/a7ffcore28_manifest.json,aede318,add crypto core26de non-s0 repair arbitration,715
 runtime,A7FF-CORE28,runtime/a7ffcore28_objective_data_family_reset_contract/a7ffcore28_reset_policy.csv,aede318,add crypto core26de non-s0 repair arbitration,866
-report,A7FF-CORE28E,reports/CRYPTO_A7FFCORE28E_INDEPENDENT_DATA_FAMILY_ATLAS_AUDIT_20260602.md,,,9324
-runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_blocked_families.csv,,,2931
-runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_data_family_atlas.csv,,,4639
-runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_independence_scorecard.csv,,,636
-runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_manifest.json,,,1224
-runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_next_family_candidates.csv,,,1969
-runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_source_artifact_inventory.csv,,,1260
+report,A7FF-CORE28E,reports/CRYPTO_A7FFCORE28E_INDEPENDENT_DATA_FAMILY_ATLAS_AUDIT_20260602.md,96d3efc,add crypto core28e independent data atlas,9324
+runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_blocked_families.csv,96d3efc,add crypto core28e independent data atlas,2931
+runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_data_family_atlas.csv,96d3efc,add crypto core28e independent data atlas,4639
+runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_independence_scorecard.csv,96d3efc,add crypto core28e independent data atlas,636
+runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_manifest.json,96d3efc,add crypto core28e independent data atlas,1224
+runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_next_family_candidates.csv,96d3efc,add crypto core28e independent data atlas,1969
+runtime,A7FF-CORE28E,runtime/a7ffcore28e_independent_data_family_atlas_audit/a7ffcore28e_source_artifact_inventory.csv,96d3efc,add crypto core28e independent data atlas,1260
+report,A7FF-CORE29,reports/CRYPTO_A7FFCORE29_INDEPENDENT_FAMILY_BOUNDED_PROBE_CONTRACT_20260602.md,,,7737
+runtime,A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcore29_adapter_requirements.csv,,,436
+runtime,A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcore29_allowed_field_tokens.csv,,,725
+runtime,A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcore29_authorization_matrix.json,,,357
+runtime,A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcore29_budget_plan.csv,,,401
+runtime,A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcore29_family_contract.csv,,,1027
+runtime,A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcore29_forbidden_patterns.csv,,,590
+runtime,A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcore29_manifest.json,,,905
 report,A7FF-CORE3,reports/CRYPTO_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_20260601.md,02de3f1,add crypto a7ffcore3 formulagen gate,5243
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_allowed_subgraph_registry.csv,02de3f1,add crypto a7ffcore3 formulagen gate,841265
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_bypass_summary.csv,02de3f1,add crypto a7ffcore3 formulagen gate,100
@@ -3354,14 +3362,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,aede318,add crypto core26de non-s0 repair arbitration,6284
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,aede318,add crypto core26de non-s0 repair arbitration,546217
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,96d3efc,add crypto core28e independent data atlas,6284
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,96d3efc,add crypto core28e independent data atlas,546217
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,9f44a1f,refresh crypto registry after a7ffcore14se,104425
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,aede318,add crypto core26de non-s0 repair arbitration,214569
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,aede318,add crypto core26de non-s0 repair arbitration,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,96d3efc,add crypto core28e independent data atlas,214569
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,96d3efc,add crypto core28e independent data atlas,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,aede318,add crypto core26de non-s0 repair arbitration,117436
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,96d3efc,add crypto core28e independent data atlas,117436
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3379,12 +3387,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,aede318,add crypto core26de non-s0 repair arbitration,5521
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,aede318,add crypto core26de non-s0 repair arbitration,403
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,aede318,add crypto core26de non-s0 repair arbitration,343
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,aede318,add crypto core26de non-s0 repair arbitration,1500
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,aede318,add crypto core26de non-s0 repair arbitration,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,aede318,add crypto core26de non-s0 repair arbitration,425
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,96d3efc,add crypto core28e independent data atlas,5791
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,96d3efc,add crypto core28e independent data atlas,422
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,96d3efc,add crypto core28e independent data atlas,373
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,96d3efc,add crypto core28e independent data atlas,1471
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,96d3efc,add crypto core28e independent data atlas,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,96d3efc,add crypto core28e independent data atlas,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
