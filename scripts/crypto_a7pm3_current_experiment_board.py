@@ -50,6 +50,7 @@ A7FFCORE11E = REPO / "runtime" / "a7ffcore11e_small_dry_generation" / "a7ffcore1
 A7FFCORE12 = REPO / "runtime" / "a7ffcore12_blueprint_registration_audit" / "a7ffcore12_manifest.json"
 A7FFCORE12E = REPO / "runtime" / "a7ffcore12e_materialization_preflight" / "a7ffcore12e_manifest.json"
 A7FFCORE13 = REPO / "runtime" / "a7ffcore13_numeric_response_contract" / "a7ffcore13_manifest.json"
+A7FFCORE13E = REPO / "runtime" / "a7ffcore13e_numeric_response" / "a7ffcore13e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -108,12 +109,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore12 = read_json(A7FFCORE12)
     a7ffcore12e = read_json(A7FFCORE12E)
     a7ffcore13 = read_json(A7FFCORE13)
+    a7ffcore13e = read_json(A7FFCORE13E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore13.get("decision") == "PASS_A7FFCORE13_NUMERIC_RESPONSE_CONTRACT_READY_FOR_CORE13E":
+    if a7ffcore13e.get("decision") == "PASS_A7FFCORE13E_NUMERIC_RESPONSE_READY_FOR_CORE14":
+        allowed["A7FF-CORE14 replay-preflight contract"] = (
+            "contract only; define bounded replay packet from CORE13E numeric clues; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE13E rerun"] = "numeric response passed; rerun only if temp subgraph queue or response policy changes"
+        blocked["A7FF-CORE13 direct replay"] = "blocked: CORE13E authorizes replay-preflight contract only"
+        blocked["A7FF large search"] = "blocked: CORE13E is numeric response, not search authorization"
+        current_stage = "A7FF-CORE13E"
+        status = "numeric_response_ready_for_core14"
+        next_task = "A7FF-CORE14 replay-preflight contract"
+    elif a7ffcore13.get("decision") == "PASS_A7FFCORE13_NUMERIC_RESPONSE_CONTRACT_READY_FOR_CORE13E":
         allowed["A7FF-CORE13E numeric response execution"] = (
             "execute bounded primary-label numeric response over 416 CORE12E candidates; no replay/search/promotion"
         )

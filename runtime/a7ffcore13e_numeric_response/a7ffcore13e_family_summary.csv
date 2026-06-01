@@ -1,0 +1,11 @@
+semantic_bucket,motif_bucket,generation_mode,rows,numeric_clues,candidate_count,median_control_ratio
+liquidity_like|volatility_like,liquidity_shock,seed_field_mul_delta,960,203,80,1.3921211931118158
+open_interest_like|positioning_like,delta_x_divergence,seed_field_mul_delta,840,184,70,2.019690186177933
+taker_flow_like|open_interest_like,flow_x_leverage,seed_field_mul_delta,960,113,80,1.6157686281037782
+taker_flow_like|basis_premium_like,gated_sign,seed_field_mul_delta,420,92,35,1.4724378498968749
+liquidity_like,single,seed_field_mul_delta,840,74,70,1.4111785970610649
+open_interest_like,single,seed_field_mul_delta,192,16,16,1.864508909267474
+taker_flow_like|basis_premium_like,gated_sign,seed_field_rank_spread,420,12,35,2.14510498350786
+taker_flow_like|basis_premium_like,gated_sign,seed_field_safe_div,120,9,10,2.616053576051657
+liquidity_like,single,seed_field_rank_spread,120,4,10,4.631659853680517
+open_interest_like|positioning_like,delta_x_divergence,seed_field_rank_spread,120,0,10,11.700698734384508

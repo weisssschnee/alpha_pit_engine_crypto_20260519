@@ -1,0 +1,13 @@
+label_id,horizon,rows,numeric_clues,candidate_count,median_control_ratio
+L1_cross_sectional_relative_return,4,416,86,416,1.3714689355830634
+L3_liquidity_tier_relative_return,1,416,78,416,1.4289544190550232
+L1_cross_sectional_relative_return,1,416,77,416,1.6940521758620677
+L1_cross_sectional_relative_return,8,416,75,416,1.500822885207168
+L1_cross_sectional_relative_return,24,416,71,416,1.3557719945723927
+L3_liquidity_tier_relative_return,4,416,69,416,1.5530743276029677
+L3_liquidity_tier_relative_return,24,416,55,416,1.5014804812235374
+L3_liquidity_tier_relative_return,8,416,54,416,1.7989923961851462
+L5_vol_adjusted_return,1,416,47,416,2.56429832304838
+L5_vol_adjusted_return,8,416,44,416,1.8042588731668916
+L5_vol_adjusted_return,4,416,35,416,2.559813781919423
+L5_vol_adjusted_return,24,416,16,416,2.4753053995723215
