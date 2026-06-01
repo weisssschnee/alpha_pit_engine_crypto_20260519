@@ -1,0 +1,6 @@
+generation_mode,candidate_count,median_node_count,median_depth
+seed_field_mul_delta,805,16.0,7.0
+seed_field_rank_spread,805,15.0,6.0
+seed_field_safe_div,805,16.0,6.0
+seed_field_z_add,798,17.0,7.0
+seed_field_z_spread,782,17.0,7.0

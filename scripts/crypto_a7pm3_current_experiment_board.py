@@ -47,6 +47,7 @@ A7FFCORE9E = REPO / "runtime" / "a7ffcore9e_bounded_replay" / "a7ffcore9e_manife
 A7FFCORE10E = REPO / "runtime" / "a7ffcore10e_search_readiness_audit" / "a7ffcore10e_manifest.json"
 A7FFCORE11 = REPO / "runtime" / "a7ffcore11_small_expansion_contract" / "a7ffcore11_manifest.json"
 A7FFCORE11E = REPO / "runtime" / "a7ffcore11e_small_dry_generation" / "a7ffcore11e_manifest.json"
+A7FFCORE12 = REPO / "runtime" / "a7ffcore12_blueprint_registration_audit" / "a7ffcore12_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -102,12 +103,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore10e = read_json(A7FFCORE10E)
     a7ffcore11 = read_json(A7FFCORE11)
     a7ffcore11e = read_json(A7FFCORE11E)
+    a7ffcore12 = read_json(A7FFCORE12)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore11e.get("decision") == "PASS_A7FFCORE11E_BLUEPRINTS_READY_FOR_CORE12_REGISTRATION":
+    if a7ffcore12.get("decision") == "PASS_A7FFCORE12_TEMP_SUBGRAPH_REGISTRY_READY_FOR_CORE12E":
+        allowed["A7FF-CORE12E temp-subgraph materialization preflight"] = (
+            "materialization/activity preflight for CORE12 temporary subgraphs; no numeric/replay/search/promotion"
+        )
+        blocked["A7FF-CORE12 direct numeric"] = "blocked until CORE12E materialization preflight passes"
+        blocked["A7FF-CORE11E materialization"] = "superseded by CORE12 temp-subgraph registry"
+        blocked["A7FF large search"] = "blocked: CORE12 only authorizes materialization preflight"
+        current_stage = "A7FF-CORE12"
+        status = "temp_subgraph_registry_ready_for_core12e"
+        next_task = "A7FF-CORE12E temp-subgraph materialization preflight"
+    elif a7ffcore11e.get("decision") == "PASS_A7FFCORE11E_BLUEPRINTS_READY_FOR_CORE12_REGISTRATION":
         allowed["A7FF-CORE12 blueprint subgraph registration / gate audit"] = (
             "register/audit CORE11E blueprints under typed subgraph governance; no materialization/numeric/replay/search promotion"
         )

@@ -1,0 +1,10 @@
+semantic_bucket,motif_bucket,candidate_count,parent_count,generation_mode_count
+liquidity_like|volatility_like,liquidity_shock,1211,7,5
+taker_flow_like|open_interest_like,flow_x_leverage,696,4,5
+open_interest_like,single,522,3,5
+liquidity_like,single,348,2,5
+open_interest_like|positioning_like,delta_x_divergence,348,2,5
+volatility_like,single,348,2,5
+liquidity_like|volatility_like,safe_div_abs,174,1,5
+taker_flow_like|basis_premium_like,gated_sign,174,1,5
+taker_flow_like,single,174,1,5
