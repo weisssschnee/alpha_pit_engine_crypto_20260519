@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T10:03:10Z
+Generated: 2026-06-01T12:46:07Z
 
 ## Decision
 
@@ -13,10 +13,29 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ```text
 ## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
+ M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=888ed347265d430d9680353fa722db9359dad71c
-origin/main=888ed347265d430d9680353fa722db9359dad71c
+ M scripts/crypto_a7pm3_current_experiment_board.py
+?? reports/CRYPTO_A7FFCORE16HER_SECOND_PASS_FORENSIC_20260601.md
+?? reports/CRYPTO_A7FFCORE16HE_SECOND_PASS_INTERACTION_BREADTH_20260601.md
+?? reports/CRYPTO_A7FFCORE16I_BALANCED_PRESEED_QUEUE_AUDIT_20260601.md
+?? reports/CRYPTO_A7FFCORE16J_NEARMISS_RESOLUTION_AUDIT_20260601.md
+?? reports/CRYPTO_A7FFCORE16K_H2_STRICT_FLOOR_REPAIR_CONTRACT_20260601.md
+?? runtime/a7ffcore16he_second_pass_interaction_breadth/
+?? runtime/a7ffcore16her_second_pass_forensic/
+?? runtime/a7ffcore16i_balanced_preseed_queue_audit/
+?? runtime/a7ffcore16j_nearmiss_resolution_audit/
+?? runtime/a7ffcore16k_h2_strict_floor_repair_contract/
+?? scripts/crypto_a7ffcore16he_second_pass_interaction_breadth.py
+?? scripts/crypto_a7ffcore16her_second_pass_forensic_and_queue.py
+?? scripts/crypto_a7ffcore16i_balanced_preseed_queue_audit.py
+?? scripts/crypto_a7ffcore16j_nearmiss_resolution_audit.py
+?? scripts/crypto_a7ffcore16k_h2_strict_floor_repair_contract.py
+HEAD=8de8e46fca0b73825ff817c570eded105a67c056
+origin/main=8de8e46fca0b73825ff817c570eded105a67c056
 HEAD == origin/main: True
 ```
 
@@ -24,7 +43,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 3123,
+  "artifact_count": 3256,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +57,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T10:03:10Z",
-  "head": "888ed347265d430d9680353fa722db9359dad71c",
+  "generated_at": "2026-06-01T12:46:07Z",
+  "head": "8de8e46fca0b73825ff817c570eded105a67c056",
   "head_equals_origin_main": true,
-  "origin_main": "888ed347265d430d9680353fa722db9359dad71c",
+  "origin_main": "8de8e46fca0b73825ff817c570eded105a67c056",
   "stage": "A7PM-0",
-  "stage_count": 317
+  "stage_count": 322
 }
 ```
 
@@ -56,15 +75,15 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      57 |
+| hold                         | hold                       |      59 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     140 |
-| valid_or_historical_record   | contract                   |      71 |
-| valid_or_historical_record   | diagnostic                 |      11 |
+| valid_or_historical_record   | governance_or_audit        |     141 |
+| valid_or_historical_record   | contract                   |      72 |
+| valid_or_historical_record   | diagnostic                 |      12 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 

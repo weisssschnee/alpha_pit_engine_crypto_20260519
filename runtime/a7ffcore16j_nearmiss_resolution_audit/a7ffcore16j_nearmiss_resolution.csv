@@ -1,0 +1,2 @@
+resolution,rows,reason
+exclude_from_alpha_seed,3,near-miss rows have control_ratio >= 1.0 and cannot be promoted without a dedicated strict repair

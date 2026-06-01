@@ -1,0 +1,25 @@
+{
+  "allowed_scope": [
+    "H2_I4_near_miss_repair only",
+    "taker_flow x OI/liquidity typed probes",
+    "control_ratio < 1.0 strict promotion only"
+  ],
+  "authorized": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "forbidden": [
+    "near-miss direct promotion",
+    "open grammar FormulaGen",
+    "bounded replay",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "name": "H2/I4 strict-floor repair execution",
+  "stage": "A7FF-CORE16KE",
+  "target": {
+    "additional_h2_strict_candidates": 3,
+    "strict_h2_count": 12,
+    "strict_queue_size": 96
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "authorized": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "forbidden": [
+    "objective seed promotion from near-miss rows",
+    "open grammar FormulaGen",
+    "bounded replay",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "inputs": [
+    "CORE16HE second-pass candidates",
+    "CORE16HE near-miss rows",
+    "CORE16H cap policy"
+  ],
+  "name": "balanced interaction pre-seed queue audit",
+  "queue_targets": {
+    "family_count": 4,
+    "h2_floor": 12,
+    "near_miss_rows_must_be_role_flagged": true,
+    "non_l5_share_min": 0.4,
+    "queue_size": 96,
+    "top_family_share_max": 0.45
+  },
+  "stage": "A7FF-CORE16I"
+}

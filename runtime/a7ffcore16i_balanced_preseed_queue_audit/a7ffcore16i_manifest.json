@@ -1,0 +1,28 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core16j": true,
+  "authorizes_core17": false,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "near_miss_rows_present_not_promotable"
+  ],
+  "decision": "PASS_A7FFCORE16I_BALANCED_PRESEED_QUEUE_READY_FOR_NEARMISS_RESOLUTION",
+  "executes_replay": false,
+  "executes_search": false,
+  "family_count": 4,
+  "generated_at": "2026-06-01T12:42:49Z",
+  "h2_count": 12,
+  "near_miss_count": 3,
+  "next_allowed": "A7FF-CORE16J near-miss upgrade/exclusion audit",
+  "non_l5_share": 0.8854166666666666,
+  "operator_count": 3,
+  "queue_size": 96,
+  "source_decision": "PASS_A7FFCORE16HER_SECOND_PASS_FORENSIC_READY_FOR_CORE16I",
+  "source_stage": "A7FF-CORE16HER",
+  "stage": "A7FF-CORE16I",
+  "strict_count": 93,
+  "top_family_share": 0.34375
+}

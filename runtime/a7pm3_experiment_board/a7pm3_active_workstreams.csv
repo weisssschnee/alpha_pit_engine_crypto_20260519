@@ -1,5 +1,5 @@
 workstream,current_stage,status,next
 governance,A7PM-0/1/2/3,pass,keep registry as source-of-truth
-a7ff_family_diversification,A7FF-CORE16H,second_pass_interaction_contract_ready_for_core16he,A7FF-CORE16HE second-pass interaction breadth execution
+a7ff_family_diversification,A7FF-CORE16K,h2_strict_floor_repair_contract_ready_for_core16ke,A7FF-CORE16KE H2/I4 strict-floor repair execution
 a7ff_funding_tail,A7FF-24R4,contract_ready_no_execution,A7FF-24R4E if explicitly authorized
 search_execution,blocked,not_authorized,none

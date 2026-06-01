@@ -1,0 +1,9 @@
+metric,value
+queue_size,96.0
+strict_size,93.0
+near_miss_size,3.0
+strict_family_count,4.0
+strict_h2_count,9.0
+strict_top_family_share,0.3548387096774194
+strict_non_l5_share,0.8924731182795699
+strict_operator_count,3.0

@@ -72,6 +72,11 @@ A7FFCORE16G = REPO / "runtime" / "a7ffcore16g_family_native_interaction_contract
 A7FFCORE16GE = REPO / "runtime" / "a7ffcore16ge_family_native_interaction_probe" / "a7ffcore16ge_manifest.json"
 A7FFCORE16GER = REPO / "runtime" / "a7ffcore16ger_interaction_probe_forensic" / "a7ffcore16ger_manifest.json"
 A7FFCORE16H = REPO / "runtime" / "a7ffcore16h_second_pass_interaction_contract" / "a7ffcore16h_manifest.json"
+A7FFCORE16HE = REPO / "runtime" / "a7ffcore16he_second_pass_interaction_breadth" / "a7ffcore16he_manifest.json"
+A7FFCORE16HER = REPO / "runtime" / "a7ffcore16her_second_pass_forensic" / "a7ffcore16her_manifest.json"
+A7FFCORE16I = REPO / "runtime" / "a7ffcore16i_balanced_preseed_queue_audit" / "a7ffcore16i_manifest.json"
+A7FFCORE16J = REPO / "runtime" / "a7ffcore16j_nearmiss_resolution_audit" / "a7ffcore16j_manifest.json"
+A7FFCORE16K = REPO / "runtime" / "a7ffcore16k_h2_strict_floor_repair_contract" / "a7ffcore16k_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -152,12 +157,72 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore16ge = read_json(A7FFCORE16GE)
     a7ffcore16ger = read_json(A7FFCORE16GER)
     a7ffcore16h = read_json(A7FFCORE16H)
+    a7ffcore16he = read_json(A7FFCORE16HE)
+    a7ffcore16her = read_json(A7FFCORE16HER)
+    a7ffcore16i = read_json(A7FFCORE16I)
+    a7ffcore16j = read_json(A7FFCORE16J)
+    a7ffcore16k = read_json(A7FFCORE16K)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore16h.get("decision") == "PASS_A7FFCORE16H_SECOND_PASS_INTERACTION_CONTRACT_READY_FOR_CORE16HE":
+    if a7ffcore16k.get("decision") == "PASS_A7FFCORE16K_H2_STRICT_FLOOR_REPAIR_CONTRACT_READY_FOR_CORE16KE":
+        allowed["A7FF-CORE16KE H2/I4 strict-floor repair execution"] = (
+            "execute H2/I4 strict-floor repair only; no open grammar, replay expansion, search, or promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked until CORE16KE produces strict H2 floor and strict queue size"
+        blocked["A7FF formula generation"] = "blocked: CORE16K authorizes H2/I4 repair only"
+        blocked["A7FF bounded replay"] = "blocked: strict pre-seed queue not complete"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16K"
+        status = "h2_strict_floor_repair_contract_ready_for_core16ke"
+        next_task = "A7FF-CORE16KE H2/I4 strict-floor repair execution"
+    elif a7ffcore16j.get("decision") == "HOLD_A7FFCORE16J_STRICT_QUEUE_H2_FLOOR_INSUFFICIENT":
+        allowed["A7FF-CORE16K H2/I4 strict-floor repair contract"] = (
+            "contract only; repair missing H2/I4 strict rows; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: strict queue size/H2 floor insufficient"
+        blocked["A7FF formula generation"] = "blocked until CORE16K/CORE16KE repairs strict floor"
+        blocked["A7FF bounded replay"] = "blocked: strict pre-seed queue incomplete"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16J"
+        status = "strict_queue_h2_floor_insufficient"
+        next_task = "A7FF-CORE16K H2/I4 strict-floor repair contract"
+    elif a7ffcore16i.get("decision") == "PASS_A7FFCORE16I_BALANCED_PRESEED_QUEUE_READY_FOR_NEARMISS_RESOLUTION":
+        allowed["A7FF-CORE16J near-miss upgrade/exclusion audit"] = (
+            "audit near-miss rows in balanced pre-seed queue; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: near-miss rows unresolved"
+        blocked["A7FF formula generation"] = "blocked until near-miss rows are excluded or repaired"
+        blocked["A7FF bounded replay"] = "blocked: pre-seed queue includes forensic near-miss rows"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16I"
+        status = "balanced_preseed_queue_ready_for_nearmiss_resolution"
+        next_task = "A7FF-CORE16J near-miss upgrade/exclusion audit"
+    elif a7ffcore16her.get("decision") == "PASS_A7FFCORE16HER_SECOND_PASS_FORENSIC_READY_FOR_CORE16I":
+        allowed["A7FF-CORE16I balanced interaction pre-seed queue audit"] = (
+            "construct/audit capped pre-seed queue with near-miss rows role-flagged; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16HE requires balanced pre-seed queue audit"
+        blocked["A7FF formula generation"] = "blocked until strict pre-seed queue passes"
+        blocked["A7FF bounded replay"] = "blocked: no strict pre-seed queue yet"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16HER"
+        status = "second_pass_forensic_ready_for_core16i"
+        next_task = "A7FF-CORE16I balanced interaction pre-seed queue audit"
+    elif a7ffcore16he.get("decision") == "HOLD_A7FFCORE16HE_SECOND_PASS_BREADTH_INSUFFICIENT":
+        allowed["A7FF-CORE16HER second-pass interaction forensic"] = (
+            "diagnose CORE16HE breadth failure and define balanced queue repair; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16HE breadth gates failed"
+        blocked["A7FF formula generation"] = "blocked until CORE16HER/next queue repair"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until second-pass breadth gates pass"
+        current_stage = "A7FF-CORE16HE"
+        status = "second_pass_breadth_hold"
+        next_task = "A7FF-CORE16HER second-pass interaction forensic"
+    elif a7ffcore16h.get("decision") == "PASS_A7FFCORE16H_SECOND_PASS_INTERACTION_CONTRACT_READY_FOR_CORE16HE":
         allowed["A7FF-CORE16HE second-pass interaction breadth execution"] = (
             "execute second-pass typed interaction breadth repair only; no open grammar, replay expansion, search, or promotion"
         )

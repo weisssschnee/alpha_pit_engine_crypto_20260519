@@ -1,0 +1,4 @@
+action_id,action,reason
+R0_balanced_preseed_queue,"use capped H0/H1, preserve H3, and top up H2 with explicitly flagged near-miss rows",strict candidates are abundant but concentrated; H2 strict count is 9 vs floor 12
+R1_no_core17_yet,do not authorize objective seed policy until near-miss rows are either upgraded or excluded by a dedicated audit,balanced queue may need forensic rows to satisfy H2 breadth
+R2_execute_core16i,run balanced pre-seed queue audit with role-aware near-miss isolation,"supply is now nonzero enough to test queue governance, not search"

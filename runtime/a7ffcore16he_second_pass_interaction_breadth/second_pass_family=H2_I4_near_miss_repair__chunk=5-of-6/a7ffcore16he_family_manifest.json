@@ -1,0 +1,16 @@
+{
+  "blueprint_count": 93,
+  "chunk_count": 6,
+  "chunk_index": 5,
+  "decision": "PASS_A7FFCORE16HE_FAMILY_SHARD_COMPLETE",
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-06-01T11:27:04Z",
+  "missing_fields_excluded": [],
+  "near_miss_count": 8,
+  "response_rows": 1488,
+  "second_pass_candidate_count": 0,
+  "second_pass_family": "H2_I4_near_miss_repair",
+  "stage": "A7FF-CORE16HE-FAMILY",
+  "symbols_loaded": 96,
+  "timestamps": 3481
+}

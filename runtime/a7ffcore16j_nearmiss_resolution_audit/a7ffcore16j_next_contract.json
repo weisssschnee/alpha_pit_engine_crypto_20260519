@@ -1,0 +1,20 @@
+{
+  "authorized": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "forbidden": [
+    "promoting near-miss as alpha seed",
+    "open grammar FormulaGen",
+    "bounded replay",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "name": "H2/I4 strict-floor repair",
+  "stage": "A7FF-CORE16K",
+  "target": {
+    "near_miss_promotions_allowed": false,
+    "strict_h2_candidate_count": 12,
+    "strict_queue_size": 96
+  }
+}

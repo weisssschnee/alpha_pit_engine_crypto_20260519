@@ -1,0 +1,5 @@
+second_pass_family,response_rows,blueprint_count,candidate_count,near_miss_count,label_family_count,operator_count,median_control_ratio
+H1_I5_deconcentration,13824,864,200,237,4,3,9.458412242231457
+H0_I3_deconcentration,6048,378,128,106,4,3,7.990191763624947
+H3_cross_family_bridge,11520,720,20,50,4,2,7.342624392003857
+H2_I4_near_miss_repair,8960,560,9,41,4,2,6.164511465595419

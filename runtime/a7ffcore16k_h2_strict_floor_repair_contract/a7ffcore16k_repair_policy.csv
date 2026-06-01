@@ -1,0 +1,4 @@
+policy_id,scope,action,target
+h2_delta_repair,H2_I4_near_miss_repair,run H2-only asymmetric transform variants around excluded near-miss rows,at least 3 additional strict H2 candidates with control_ratio < 1.0
+no_nearmiss_promotion,H2 near-miss,near-miss rows remain excluded unless rerun as strict rows under repaired transforms,no forensic row enters CORE17 queue directly
+queue_fill,balanced strict queue,replace excluded near-miss rows with strict H2 rows only,strict queue size 96 and H2 strict count >= 12

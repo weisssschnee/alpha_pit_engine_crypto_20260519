@@ -1,0 +1,14 @@
+{
+  "blueprint_count": 378,
+  "decision": "PASS_A7FFCORE16HE_FAMILY_SHARD_COMPLETE",
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-06-01T10:35:59Z",
+  "missing_fields_excluded": [],
+  "near_miss_count": 106,
+  "response_rows": 6048,
+  "second_pass_candidate_count": 128,
+  "second_pass_family": "H0_I3_deconcentration",
+  "stage": "A7FF-CORE16HE-FAMILY",
+  "symbols_loaded": 96,
+  "timestamps": 3481
+}

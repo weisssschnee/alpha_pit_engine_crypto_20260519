@@ -1,0 +1,29 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core17": false,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "top_family_share_gt_45pct",
+    "i4_floor_lt_12"
+  ],
+  "blueprint_count": 2522,
+  "completed_second_pass_shards": 25,
+  "decision": "HOLD_A7FFCORE16HE_SECOND_PASS_BREADTH_INSUFFICIENT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T12:38:55Z",
+  "i4_repair_candidate_count": 9,
+  "next_allowed": "A7FF-CORE16HER second-pass interaction forensic",
+  "non_l5_label_share": 0.6722689075630253,
+  "operator_count": 3,
+  "response_rows": 40352,
+  "second_pass_candidate_count": 357,
+  "second_pass_family_count": 4,
+  "source_decision": "PASS_A7FFCORE16H_SECOND_PASS_INTERACTION_CONTRACT_READY_FOR_CORE16HE",
+  "source_stage": "A7FF-CORE16H",
+  "stage": "A7FF-CORE16HE",
+  "top_second_pass_family_share": 0.5602240896358543
+}
