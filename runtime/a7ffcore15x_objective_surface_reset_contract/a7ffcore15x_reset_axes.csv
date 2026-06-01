@@ -1,0 +1,6 @@
+axis,problem,repair_requirement
+A0_label_surface,numeric clue selection does not translate into validation+recent 5bps replay clean breadth,score objectives by split-separate replay stability proxy before packet construction
+A1_control_surface,wrong-lag/shuffle/placebo controls dominate most replay rows,"make max non-signflip control margin a pre-packet hard gate, not only replay attribution"
+A2_cost_surface,many high-tstat candidates lose positive spread after 5bps adjustment,use 5bps cost floor in objective-surface construction
+A3_family_surface,clean evidence collapses to one semantic/motif family,"treat single-family clean evidence as non-expandable diagnostic, not search seed"
+A4_expression_surface,packet repair increased outside-old coverage but did not improve replay stability,stop queue reshuffling; rebuild objectives from replay-stability features

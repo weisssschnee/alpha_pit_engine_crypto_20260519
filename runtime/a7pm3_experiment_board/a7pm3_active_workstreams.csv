@@ -1,5 +1,5 @@
 workstream,current_stage,status,next
 governance,A7PM-0/1/2/3,pass,keep registry as source-of-truth
-a7ff_family_diversification,A7FF-CORE14SER,repaired_replay_forensic_stop_replay_expansion,A7FF-CORE15X objective-surface reset / replay-stability repair contract
+a7ff_family_diversification,A7FF-CORE15X,objective_surface_reset_contract_ready_for_core15y,A7FF-CORE15Y replay-stability objective-surface builder
 a7ff_funding_tail,A7FF-24R4,contract_ready_no_execution,A7FF-24R4E if explicitly authorized
 search_execution,blocked,not_authorized,none

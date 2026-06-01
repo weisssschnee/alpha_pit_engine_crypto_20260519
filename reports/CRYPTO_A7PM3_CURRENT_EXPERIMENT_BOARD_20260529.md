@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T07:34:49Z
+Generated: 2026-06-01T07:47:08Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T07:34:49Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                         | next                                                                    |
-|:----------------------------|:----------------|:-----------------------------------------------|:------------------------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                           | keep registry as source-of-truth                                        |
-| a7ff_family_diversification | A7FF-CORE14SER  | repaired_replay_forensic_stop_replay_expansion | A7FF-CORE15X objective-surface reset / replay-stability repair contract |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                    | A7FF-24R4E if explicitly authorized                                     |
-| search_execution            | blocked         | not_authorized                                 | none                                                                    |
+| workstream                  | current_stage   | status                                             | next                                                    |
+|:----------------------------|:----------------|:---------------------------------------------------|:--------------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                               | keep registry as source-of-truth                        |
+| a7ff_family_diversification | A7FF-CORE15X    | objective_surface_reset_contract_ready_for_core15y | A7FF-CORE15Y replay-stability objective-surface builder |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                        | A7FF-24R4E if explicitly authorized                     |
+| search_execution            | blocked         | not_authorized                                     | none                                                    |
 
 ## Allowed Next Tasks
 
-| task                                                                    | reason                                                                                                     |
-|:------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option                       | requires explicit user authorization; no search and no promotion                                           |
-| A7PM-0/3 maintenance                                                    | governance registry maintenance                                                                            |
-| A7FF-CORE15X objective-surface reset / replay-stability repair contract | contract only; reset objective surface after repaired replay failure; no replay execution/search/promotion |
+| task                                                    | reason                                                                                                                 |
+|:--------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option       | requires explicit user authorization; no search and no promotion                                                       |
+| A7PM-0/3 maintenance                                    | governance registry maintenance                                                                                        |
+| A7FF-CORE15Y replay-stability objective-surface builder | build replay-stability feature matrix from existing numeric/replay/forensic rows; no replay execution/search/promotion |
 
 ## Blocked Tasks
 
@@ -41,9 +41,9 @@ Generated: 2026-06-01T07:34:49Z
 | A7AL-2Q                          | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                      | not authorized                                                                                                        |
 | shadow/paper/live                | not authorized                                                                                                        |
-| A7FF-CORE15                      | blocked: CORE14SER stops replay expansion; clean pool is one candidate in one family                                  |
-| A7FF-CORE14SEE rerun             | blocked until CORE15X defines a new objective-surface or stability policy                                             |
-| A7FF large search                | blocked: repaired packet failed replay-stability gates                                                                |
+| A7FF-CORE15                      | blocked: CORE15X requires objective-surface builder before any search-readiness audit                                 |
+| A7FF bounded replay rerun        | blocked: CORE15X forbids rerun before objective-surface repair                                                        |
+| A7FF large search                | blocked: replay-stable objective surface is not yet established                                                       |
 
 ## Boundary
 

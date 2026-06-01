@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE15X objective-surface reset / replay-stability repair contract": "contract only; reset objective surface after repaired replay failure; no replay execution/search/promotion",
+  "A7FF-CORE15Y replay-stability objective-surface builder": "build replay-stability feature matrix from existing numeric/replay/forensic rows; no replay execution/search/promotion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

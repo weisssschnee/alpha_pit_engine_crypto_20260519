@@ -1,0 +1,6 @@
+item,reason
+CORE14 packet rerun,already failed; CORE14R attributed control/cost/split collapse
+CORE14SE repaired packet rerun,already failed; CORE14SER found only one clean candidate
+CORE15 search-readiness,blocked; clean pool breadth is insufficient
+large search,blocked; replay-stable objective surface is not established
+alpha proof / shadow / paper / live,not authorized

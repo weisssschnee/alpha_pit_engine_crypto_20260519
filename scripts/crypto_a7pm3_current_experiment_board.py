@@ -58,6 +58,7 @@ A7FFCORE14S = REPO / "runtime" / "a7ffcore14s_replay_packet_repair_contract" / "
 A7FFCORE14SE = REPO / "runtime" / "a7ffcore14se_repaired_packet_construction" / "a7ffcore14se_manifest.json"
 A7FFCORE14SEE = REPO / "runtime" / "a7ffcore14see_sharded_bounded_replay" / "a7ffcore14see_manifest.json"
 A7FFCORE14SER = REPO / "runtime" / "a7ffcore14ser_repaired_replay_forensic" / "a7ffcore14ser_manifest.json"
+A7FFCORE15X = REPO / "runtime" / "a7ffcore15x_objective_surface_reset_contract" / "a7ffcore15x_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -124,12 +125,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore14se = read_json(A7FFCORE14SE)
     a7ffcore14see = read_json(A7FFCORE14SEE)
     a7ffcore14ser = read_json(A7FFCORE14SER)
+    a7ffcore15x = read_json(A7FFCORE15X)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore14ser.get("decision") == "PASS_A7FFCORE14SER_REPAIRED_REPLAY_FORENSIC_COMPLETE_STOP_REPLAY_EXPANSION":
+    if a7ffcore15x.get("decision") == "PASS_A7FFCORE15X_OBJECTIVE_SURFACE_RESET_CONTRACT_READY_FOR_CORE15Y":
+        allowed["A7FF-CORE15Y replay-stability objective-surface builder"] = (
+            "build replay-stability feature matrix from existing numeric/replay/forensic rows; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE15"] = "blocked: CORE15X requires objective-surface builder before any search-readiness audit"
+        blocked["A7FF bounded replay rerun"] = "blocked: CORE15X forbids rerun before objective-surface repair"
+        blocked["A7FF large search"] = "blocked: replay-stable objective surface is not yet established"
+        current_stage = "A7FF-CORE15X"
+        status = "objective_surface_reset_contract_ready_for_core15y"
+        next_task = "A7FF-CORE15Y replay-stability objective-surface builder"
+    elif a7ffcore14ser.get("decision") == "PASS_A7FFCORE14SER_REPAIRED_REPLAY_FORENSIC_COMPLETE_STOP_REPLAY_EXPANSION":
         allowed["A7FF-CORE15X objective-surface reset / replay-stability repair contract"] = (
             "contract only; reset objective surface after repaired replay failure; no replay execution/search/promotion"
         )

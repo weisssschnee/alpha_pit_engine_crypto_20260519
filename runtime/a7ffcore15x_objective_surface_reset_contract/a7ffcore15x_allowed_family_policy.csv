@@ -1,0 +1,5 @@
+family,status,rule
+split_stable_basis_taker,diagnostic_only_until_stability_proven,allowed only if validation and recent both pass before any search expansion
+control_margin_first_liquidity_volatility,conditional,allowed only with control_ratio < 0.8 in validation and recent at 5bps
+oi_positioning_retest,weak_prior_retest_only,requires non-replay numeric evidence plus split-stable replay proxy; no direct expansion
+fresh_objective_surface,preferred,construct from primitive response fields that survive split/control/cost gates before formula mutation

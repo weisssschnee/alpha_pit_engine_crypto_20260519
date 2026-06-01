@@ -1,0 +1,29 @@
+{
+  "action": "build replay-stability objective surface from existing response/replay rows; no formula generation",
+  "forbidden": [
+    "new formula generation",
+    "bounded replay rerun",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "inputs": [
+    "CORE13E numeric clues",
+    "CORE14E replay rows",
+    "CORE14SEE repaired replay rows",
+    "CORE14R and CORE14SER forensic maps"
+  ],
+  "must_output": [
+    "candidate replay-stability feature matrix",
+    "family stability scorecard",
+    "control/cost/split bottleneck map",
+    "objective-surface allowed seed policy"
+  ],
+  "pass_minimum": {
+    "candidate_count_with_split_stable_proxy": 32,
+    "motif_bucket_count": 4,
+    "semantic_bucket_count": 5,
+    "top_family_share_max": 0.35
+  },
+  "stage": "A7FF-CORE15Y"
+}

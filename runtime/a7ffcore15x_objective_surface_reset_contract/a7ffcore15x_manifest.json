@@ -1,0 +1,16 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core15y": true,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE15X_OBJECTIVE_SURFACE_RESET_CONTRACT_READY_FOR_CORE15Y",
+  "dominant_failure": "objective_surface_not_replay_stable",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T07:45:26Z",
+  "next_allowed": "A7FF-CORE15Y replay-stability objective-surface builder",
+  "source_decision": "PASS_A7FFCORE14SER_REPAIRED_REPLAY_FORENSIC_COMPLETE_STOP_REPLAY_EXPANSION",
+  "source_stage": "A7FF-CORE14SER",
+  "stage": "A7FF-CORE15X"
+}
