@@ -1,0 +1,5 @@
+next_action,authorized,reason
+A7FF-CORE35 search-readiness arbitration,True,must decide whether independent-family line can justify further bounded repair or should reset again
+large_search,False,bounded replay and repair produced zero survivors
+same_queue_rerun,False,same train-only orientation/control repair exhausted without survivors
+alpha_proof_shadow_paper_live,False,no replay survivors and no proof object

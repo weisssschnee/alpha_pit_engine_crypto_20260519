@@ -1,0 +1,15 @@
+replay_candidate_id,family_id,train_control_filter_pass,orientation_sign,repaired_positive_count,repaired_control_clean_count,oos_positive_count,oos_control_clean_count,median_repaired_net_spread,train_median_control_ratio,recent_2026JanApr,test_2025H2,train_2024,validation_2025H1,all_oos_splits_positive,failure_mode
+a7ffcore33_010,F2a_basis_funding_independent,False,1,16,17,13,14,-6.388359500338537e-05,2.453331880204609,4,9,3,0,False,train_control_filter_fail
+a7ffcore33_006,F1b_taker_flow_market_panel,False,1,18,12,13,9,-3.60091496167929e-06,1.7298692151158137,7,3,5,3,True,train_control_filter_fail
+a7ffcore33_005,F2a_basis_funding_independent,False,1,16,12,13,9,-1.9923047658127823e-05,3.1377755371527627,7,3,3,3,True,train_control_filter_fail
+a7ffcore33_002,F2a_basis_funding_independent,False,1,15,17,11,15,-6.496141988358502e-05,3.4920980417704026,2,9,4,0,False,train_control_filter_fail
+a7ffcore33_001,F1b_taker_flow_market_panel,False,1,15,17,11,14,-4.018087625577723e-05,1.5230407568826108,2,9,4,0,False,train_control_filter_fail
+a7ffcore33_011,F2a_basis_funding_independent,False,1,14,12,11,9,-4.836807666550096e-05,1.4761077988803977,5,3,3,3,True,train_control_filter_fail
+a7ffcore33_012,F1b_taker_flow_market_panel,False,1,14,12,11,9,-6.798421740187626e-05,2.1112347766612207,5,3,3,3,True,train_control_filter_fail
+a7ffcore33_013,F2a_basis_funding_independent,False,1,14,12,11,9,-9.481163535083647e-05,5.1559050319555695,5,3,3,3,True,train_control_filter_fail
+a7ffcore33_020,F1a_aggtrades_flow_microstructure,False,1,8,20,5,17,-0.0001835656653332,1.905462231209168,0,1,3,4,False,train_control_filter_fail
+a7ffcore33_008,F1a_aggtrades_flow_microstructure,False,1,8,22,4,18,-0.0001635994710012,1.0799555761249946,0,2,4,2,False,train_control_filter_fail
+a7ffcore33_016,F1a_aggtrades_flow_microstructure,True,1,9,22,4,15,-0.0001462255551092,0.3463884992785472,0,0,5,4,False,orientation_repair_oos_positive_insufficient
+a7ffcore33_018,F1a_aggtrades_flow_microstructure,False,1,7,18,3,15,-0.0001638130637917,1.535696446395242,0,1,4,2,False,train_control_filter_fail
+a7ffcore33_017,F1a_aggtrades_flow_microstructure,False,1,7,19,3,15,-0.0001954107643434,1.0156913509823604,0,2,4,1,False,train_control_filter_fail
+a7ffcore33_015,F1a_aggtrades_flow_microstructure,True,1,5,20,1,16,-0.0002201815300334,0.8302648169642681,0,1,4,0,False,orientation_repair_oos_positive_insufficient

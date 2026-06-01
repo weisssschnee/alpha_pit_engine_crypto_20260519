@@ -1,0 +1,5 @@
+family_id,failure_mode,candidate_count
+F1a_aggtrades_flow_microstructure,orientation_repair_oos_positive_insufficient,2
+F1a_aggtrades_flow_microstructure,train_control_filter_fail,4
+F1b_taker_flow_market_panel,train_control_filter_fail,3
+F2a_basis_funding_independent,train_control_filter_fail,5

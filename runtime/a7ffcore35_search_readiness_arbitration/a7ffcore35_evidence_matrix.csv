@@ -1,0 +1,5 @@
+stage,decision,positive_evidence,negative_evidence
+CORE30E numeric probe,PASS_A7FFCORE30E_NUMERIC_PROBE_CLUES_READY_FOR_CORE31_CONTRACT,113 clean numeric clues across 3 families,numeric-only; no portfolio/replay proof
+CORE32E replay preflight,PASS_A7FFCORE32E_REPLAY_PREFLIGHT_READY_FOR_CORE33_CONTRACT,21 preflight candidates across 3 families,preflight only; no tradable replay
+CORE33E bounded replay,HOLD_A7FFCORE33E_BOUNDED_REPLAY_INSUFFICIENT,bounded replay executed,survivor_count=0
+CORE34E/34ER repair,PASS_A7FFCORE34ER_REPAIR_FORENSIC_READY_FOR_CORE35_ARBITRATION,repair failure diagnosed,train_control_fail_count=12; OOS positive still insufficient

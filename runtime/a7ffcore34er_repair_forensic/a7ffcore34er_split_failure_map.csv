@@ -1,0 +1,13 @@
+family_id,split,median_positive_count,median_control_clean_count,median_repaired_net_spread,median_control_ratio
+F1a_aggtrades_flow_microstructure,recent_2026JanApr,0.0,5.5,-0.00024997562828165,0.5144428560325964
+F1a_aggtrades_flow_microstructure,test_2025H2,1.0,4.0,-0.0001927209891463,1.48000250290589
+F1a_aggtrades_flow_microstructure,train_2024,4.0,4.0,-0.00010251030575523707,1.4121805825024927
+F1a_aggtrades_flow_microstructure,validation_2025H1,2.0,7.0,-0.0001418839838432,0.36343595099098713
+F1b_taker_flow_market_panel,recent_2026JanApr,5.0,3.0,1.787482659633844e-05,1.902213622420427
+F1b_taker_flow_market_panel,test_2025H2,3.0,3.0,-9.53122505044272e-06,3.6873304528435313
+F1b_taker_flow_market_panel,train_2024,4.0,3.0,-6.098992901788859e-06,3.3629367788117404
+F1b_taker_flow_market_panel,validation_2025H1,3.0,3.0,-7.541325472446494e-05,9.56148696594664
+F2a_basis_funding_independent,recent_2026JanApr,5.0,3.0,2.583489124401061e-05,1.553050758325362
+F2a_basis_funding_independent,test_2025H2,3.0,3.0,-7.883894012858717e-06,3.323092542856739
+F2a_basis_funding_independent,train_2024,3.0,3.0,-6.293314730626369e-05,5.171526460565894
+F2a_basis_funding_independent,validation_2025H1,3.0,3.0,-8.15941505445289e-05,5.603615565777685

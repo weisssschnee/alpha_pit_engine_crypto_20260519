@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE34E train-only orientation/control repair execution": "bounded replay repair only; no new generation/search/promotion",
+  "A7FF-CORE36 replay-objective/portfolio-proxy reset contract": "contract only; fix numeric-to-replay translation before any search",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

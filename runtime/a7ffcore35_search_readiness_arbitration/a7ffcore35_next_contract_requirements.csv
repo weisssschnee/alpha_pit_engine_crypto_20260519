@@ -1,0 +1,5 @@
+contract_item,required_change
+label_portfolio_alignment,separate IC-like numeric response from executable spread; define portfolio objective before generation
+train_only_orientation_policy,orientation can be used only if train control clean and OOS split coverage survives
+control_first_replay_queue,control ratio must gate replay candidates before score ranking
+family_specific_response_roles,F1a may be regime/hedge-like; F1b/F2a need stronger control dominance filter

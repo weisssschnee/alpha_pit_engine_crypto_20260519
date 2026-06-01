@@ -1,0 +1,4 @@
+family_id,repair_candidate_count,survivor_count,median_oos_positive_count,median_oos_control_clean_count,median_repaired_net_spread
+F1a_aggtrades_flow_microstructure,6,0,3.5,15.5,-0.00017368936456252498
+F1b_taker_flow_market_panel,3,0,11.0,9.0,-4.018087625577723e-05
+F2a_basis_funding_independent,5,0,11.0,9.0,-6.388359500338537e-05

@@ -1,0 +1,16 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core35_arbitration": true,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE34ER_REPAIR_FORENSIC_READY_FOR_CORE35_ARBITRATION",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T19:31:17Z",
+  "next_allowed": "A7FF-CORE35 search-readiness arbitration",
+  "oos_positive_fail_count": 2,
+  "source_decision": "HOLD_A7FFCORE34E_REPAIR_INSUFFICIENT",
+  "source_stage": "A7FF-CORE34E",
+  "stage": "A7FF-CORE34ER",
+  "train_control_fail_count": 12
+}

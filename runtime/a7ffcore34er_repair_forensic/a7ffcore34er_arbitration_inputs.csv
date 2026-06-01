@@ -1,0 +1,5 @@
+evidence,status,detail
+numeric_probe_response,pass,CORE30E produced 113 numeric clues across 3 families
+replay_preflight,pass,CORE32E selected 21 preflight candidates across 3 families
+bounded_replay,hold,CORE33E survivor_count=0
+orientation_control_repair,hold,CORE34E survivor_count=0 after train-only sign/control repair

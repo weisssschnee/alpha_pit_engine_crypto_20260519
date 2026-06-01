@@ -1,0 +1,16 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core36_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7FFCORE35_SEARCH_NOT_READY_REPLAY_TRANSLATION_FAILURE",
+  "dominant_failure": "numeric_response_does_not_translate_to_bounded_replay_survivors",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T19:32:11Z",
+  "next_allowed": "A7FF-CORE36 replay-objective/portfolio-proxy reset contract",
+  "source_decision": "PASS_A7FFCORE34ER_REPAIR_FORENSIC_READY_FOR_CORE35_ARBITRATION",
+  "source_stage": "A7FF-CORE34ER",
+  "stage": "A7FF-CORE35"
+}
