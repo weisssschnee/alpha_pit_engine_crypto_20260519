@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core12_registration": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blueprint_count": 3995,
+  "decision": "PASS_A7FFCORE11E_BLUEPRINTS_READY_FOR_CORE12_REGISTRATION",
+  "executes_materialization": false,
+  "executes_numeric": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T00:21:33Z",
+  "motif_bucket_count": 6,
+  "next_allowed": "A7FF-CORE12 blueprint subgraph registration / gate audit",
+  "parent_seed_count": 23,
+  "risk_flags": [],
+  "semantic_bucket_count": 8,
+  "source_decision": "PASS_A7FFCORE11_SMALL_EXPANSION_CONTRACT_READY_FOR_CORE11E",
+  "source_stage": "A7FF-CORE11",
+  "stage": "A7FF-CORE11E"
+}

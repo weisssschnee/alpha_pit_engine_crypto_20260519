@@ -46,6 +46,7 @@ A7FFCORE9 = REPO / "runtime" / "a7ffcore9_bounded_replay_contract" / "a7ffcore9_
 A7FFCORE9E = REPO / "runtime" / "a7ffcore9e_bounded_replay" / "a7ffcore9e_manifest.json"
 A7FFCORE10E = REPO / "runtime" / "a7ffcore10e_search_readiness_audit" / "a7ffcore10e_manifest.json"
 A7FFCORE11 = REPO / "runtime" / "a7ffcore11_small_expansion_contract" / "a7ffcore11_manifest.json"
+A7FFCORE11E = REPO / "runtime" / "a7ffcore11e_small_dry_generation" / "a7ffcore11e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -100,12 +101,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore9e = read_json(A7FFCORE9E)
     a7ffcore10e = read_json(A7FFCORE10E)
     a7ffcore11 = read_json(A7FFCORE11)
+    a7ffcore11e = read_json(A7FFCORE11E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore11.get("decision") == "PASS_A7FFCORE11_SMALL_EXPANSION_CONTRACT_READY_FOR_CORE11E":
+    if a7ffcore11e.get("decision") == "PASS_A7FFCORE11E_BLUEPRINTS_READY_FOR_CORE12_REGISTRATION":
+        allowed["A7FF-CORE12 blueprint subgraph registration / gate audit"] = (
+            "register/audit CORE11E blueprints under typed subgraph governance; no materialization/numeric/replay/search promotion"
+        )
+        blocked["A7FF-CORE11E materialization"] = "blocked: CORE11E outputs blueprints requiring CORE12 registration first"
+        blocked["A7FF large search"] = "blocked: CORE11E is small blueprint generation only"
+        blocked["A7FF-CORE11 rerun"] = "blueprint generation passed; rerun only if seed pool or grammar changes"
+        current_stage = "A7FF-CORE11E"
+        status = "blueprints_ready_for_core12_registration"
+        next_task = "A7FF-CORE12 blueprint subgraph registration / gate audit"
+    elif a7ffcore11.get("decision") == "PASS_A7FFCORE11_SMALL_EXPANSION_CONTRACT_READY_FOR_CORE11E":
         allowed["A7FF-CORE11E small gate-native dry generation"] = (
             "generate 4000 small-expansion formulas from replay-clean seeds under typed AST/subgraph gate; no materialization/numeric/replay/search promotion"
         )
