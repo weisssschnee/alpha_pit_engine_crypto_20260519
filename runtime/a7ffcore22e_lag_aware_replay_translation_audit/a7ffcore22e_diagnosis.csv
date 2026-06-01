@@ -1,0 +1,5 @@
+finding,value,interpretation
+one_bar_primary_supply,4,best executable lag clean candidate count
+one_bar_primary_lanes,2,best executable lag clean lane breadth
+same_bar_diagnostic_supply,55,same-bar diagnostic count; not promotion evidence
+same_bar_minus_one_bar_gap,51,timing fragility proxy

@@ -1,0 +1,4 @@
+finding,evidence,interpretation
+same_bar_diagnostic_excess,same-bar diagnostic count 55 vs one-bar count 4,current packet has strong timing fragility
+one_bar_lane_breadth_insufficient,one-bar lane count 2 < 3,executable evidence is not broad enough for search readiness
+large_search_not_justified,failure occurs after governance/materialization/preflight and before search,expanding formula generation would amplify timing-fragile structures

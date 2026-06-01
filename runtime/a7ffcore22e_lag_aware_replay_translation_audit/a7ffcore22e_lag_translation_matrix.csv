@@ -1,0 +1,13 @@
+lag_bucket,cost_bps,clean_candidate_count,clean_lane_count,non_l5_share
+same_bar_diagnostic,2,55,4,0.8545454545454545
+one_bar_primary_costed,2,4,2,0.75
+stale_proxy_uncosted,2,80,4,0.9
+same_bar_diagnostic,5,9,2,0.1111111111111111
+one_bar_primary_costed,5,4,2,0.75
+stale_proxy_uncosted,5,80,4,0.9
+same_bar_diagnostic,10,8,2,0.0
+one_bar_primary_costed,10,1,1,0.0
+stale_proxy_uncosted,10,80,4,0.9
+same_bar_diagnostic,20,8,2,0.0
+one_bar_primary_costed,20,1,1,0.0
+stale_proxy_uncosted,20,80,4,0.9

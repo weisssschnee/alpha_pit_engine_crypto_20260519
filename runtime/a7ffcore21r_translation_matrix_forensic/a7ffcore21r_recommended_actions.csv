@@ -1,0 +1,4 @@
+action_id,action,reason
+R0_no_large_search,do not authorize large search,translation matrix remains too narrow after cost and label decomposition
+R1_lag_translation_contract,write CORE22 lag-aware replay translation contract,lag gate suppresses many otherwise cost/control-clean L0/L1/L3 rows
+R2_lane_specific_repair,require S0/S1 lane repair before any search-readiness claim,clean replay evidence remains concentrated in S2/S3

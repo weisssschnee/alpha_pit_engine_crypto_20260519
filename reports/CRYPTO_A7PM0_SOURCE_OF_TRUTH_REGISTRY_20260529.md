@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T15:11:43Z
+Generated: 2026-06-01T15:29:52Z
 
 ## Decision
 
@@ -11,20 +11,42 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
+## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
+ M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=4d5f4164011f21dbc462ad6c1e60fef1aa23d62b
-origin/main=3b74176f526d69dcdd5f54c57095db99e613345c
-HEAD == origin/main: False
+ M scripts/crypto_a7pm3_current_experiment_board.py
+?? reports/CRYPTO_A7FFCORE21E_REPLAY_TRANSLATION_MATRIX_AUDIT_20260601.md
+?? reports/CRYPTO_A7FFCORE21R_TRANSLATION_MATRIX_FORENSIC_20260601.md
+?? reports/CRYPTO_A7FFCORE22E_LAG_AWARE_REPLAY_TRANSLATION_AUDIT_20260601.md
+?? reports/CRYPTO_A7FFCORE22R_LAG_TRANSLATION_FORENSIC_20260601.md
+?? reports/CRYPTO_A7FFCORE22_LAG_AWARE_REPLAY_TRANSLATION_CONTRACT_20260601.md
+?? reports/CRYPTO_A7FFCORE23_EXECUTABLE_HORIZON_REDESIGN_CONTRACT_20260601.md
+?? runtime/a7ffcore21e_replay_translation_matrix_audit/
+?? runtime/a7ffcore21r_translation_matrix_forensic/
+?? runtime/a7ffcore22_lag_aware_replay_translation_contract/
+?? runtime/a7ffcore22e_lag_aware_replay_translation_audit/
+?? runtime/a7ffcore22r_lag_translation_forensic/
+?? runtime/a7ffcore23_executable_horizon_redesign_contract/
+?? scripts/crypto_a7ffcore21e_replay_translation_matrix_audit.py
+?? scripts/crypto_a7ffcore21r_translation_matrix_forensic.py
+?? scripts/crypto_a7ffcore22_lag_aware_replay_translation_contract.py
+?? scripts/crypto_a7ffcore22e_lag_aware_replay_translation_audit.py
+?? scripts/crypto_a7ffcore22r_lag_translation_forensic.py
+?? scripts/crypto_a7ffcore23_executable_horizon_redesign_contract.py
+HEAD=e4cf28443dee95f3d1e7c8bac4a223b05e79499a
+origin/main=e4cf28443dee95f3d1e7c8bac4a223b05e79499a
+HEAD == origin/main: True
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3404,
+  "artifact_count": 3437,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +60,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T15:11:43Z",
-  "head": "4d5f4164011f21dbc462ad6c1e60fef1aa23d62b",
-  "head_equals_origin_main": false,
-  "origin_main": "3b74176f526d69dcdd5f54c57095db99e613345c",
+  "generated_at": "2026-06-01T15:29:52Z",
+  "head": "e4cf28443dee95f3d1e7c8bac4a223b05e79499a",
+  "head_equals_origin_main": true,
+  "origin_main": "e4cf28443dee95f3d1e7c8bac4a223b05e79499a",
   "stage": "A7PM-0",
-  "stage_count": 338
+  "stage_count": 344
 }
 ```
 
@@ -56,15 +78,15 @@ HEAD == origin/main: False
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      62 |
+| hold                         | hold                       |      64 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |      80 |
-| valid_or_historical_record   | diagnostic                 |      15 |
+| valid_or_historical_record   | contract                   |      82 |
+| valid_or_historical_record   | diagnostic                 |      17 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 

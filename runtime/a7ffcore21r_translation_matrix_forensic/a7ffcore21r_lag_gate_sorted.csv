@@ -1,0 +1,17 @@
+label_family,cost_bps,clean_candidate_count,clean_without_lag_gate,lag_gate_loss
+L0_raw_forward_return,2,1,17.0,16
+L1_cross_sectional_relative_return,2,1,17.0,16
+L3_liquidity_tier_relative_return,2,1,13.0,12
+L5_vol_adjusted_return,10,1,8.0,7
+L5_vol_adjusted_return,2,1,8.0,7
+L5_vol_adjusted_return,5,1,8.0,7
+L5_vol_adjusted_return,20,1,8.0,7
+L0_raw_forward_return,10,0,,0
+L1_cross_sectional_relative_return,20,0,,0
+L1_cross_sectional_relative_return,10,0,,0
+L1_cross_sectional_relative_return,5,0,,0
+L0_raw_forward_return,20,0,,0
+L0_raw_forward_return,5,0,,0
+L3_liquidity_tier_relative_return,20,0,,0
+L3_liquidity_tier_relative_return,5,1,1.0,0
+L3_liquidity_tier_relative_return,10,0,,0

@@ -1,0 +1,5 @@
+axis,allowed,forbidden
+execution_horizon,4h/8h/24h holding and lower-turnover replay diagnostics,same-bar promotion or one-hour high-turnover search expansion
+signal_source,reuse locked seed packet and replay-clean diagnostic clues as anchors,open grammar FormulaGen or large search
+cost_model,cost tier must be tied to turnover bucket and horizon,choosing lowest cost tier as proof
+lane_repair,S0/S1/S2/S3 lane-specific lower-turnover diagnostics,single-lane promotion

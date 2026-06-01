@@ -1,0 +1,4 @@
+lag_bucket,allowed,promotion_allowed,reason
+same_bar_diagnostic,diagnostic attribution only,False,same-bar behavior may be timing-fragile
+one_bar_primary,primary promotion gate for replay-clean candidates,True,field-native executable timing baseline
+stale_lag_control,negative/control comparison only,False,stale survival alone is not alpha evidence

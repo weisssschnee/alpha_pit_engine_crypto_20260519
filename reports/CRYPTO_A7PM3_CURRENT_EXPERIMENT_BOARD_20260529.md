@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T15:11:26Z
+Generated: 2026-06-01T15:29:42Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T15:11:26Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                              | next                                         |
-|:----------------------------|:----------------|:----------------------------------------------------|:---------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                                | keep registry as source-of-truth             |
-| a7ff_family_diversification | A7FF-CORE21     | replay_translation_reset_contract_ready_for_core21e | A7FF-CORE21E replay translation matrix audit |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                         | A7FF-24R4E if explicitly authorized          |
-| search_execution            | blocked         | not_authorized                                      | none                                         |
+| workstream                  | current_stage   | status                                                 | next                                             |
+|:----------------------------|:----------------|:-------------------------------------------------------|:-------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                                   | keep registry as source-of-truth                 |
+| a7ff_family_diversification | A7FF-CORE23     | executable_horizon_redesign_contract_ready_for_core23e | A7FF-CORE23E executable-horizon diagnostic audit |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                            | A7FF-24R4E if explicitly authorized              |
+| search_execution            | blocked         | not_authorized                                         | none                                             |
 
 ## Allowed Next Tasks
 
-| task                                              | reason                                                                                            |
-|:--------------------------------------------------|:--------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                  |
-| A7PM-0/3 maintenance                              | governance registry maintenance                                                                   |
-| A7FF-CORE21E replay translation matrix audit      | audit label/cost/lag/lane translation using existing replay rows; no formula generation or search |
+| task                                              | reason                                                                                                                               |
+|:--------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                                     |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                                      |
+| A7FF-CORE23E executable-horizon diagnostic audit  | diagnostic audit only; test lower-turnover executable horizons and lane-specific timing translation; no formula generation or search |
 
 ## Blocked Tasks
 
@@ -41,9 +41,9 @@ Generated: 2026-06-01T15:11:26Z
 | A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                         | not authorized                                                                                                        |
 | shadow/paper/live                   | not authorized                                                                                                        |
-| A7FF large search                   | blocked until translation reset produces robust multi-lane replay-clean evidence                                      |
-| A7FF formula generation/search      | blocked: CORE21 authorizes translation audit only                                                                     |
-| CORE20                              | blocked/superseded: CORE19 bounded replay repair did not pass                                                         |
+| A7FF large search                   | blocked: same-bar diagnostics dominate one-bar executable evidence                                                    |
+| A7FF formula generation/search      | blocked: CORE23 authorizes executable-horizon diagnostic audit only                                                   |
+| CORE20/CORE22 same-objective repair | blocked/superseded: lag translation is timing-fragile                                                                 |
 | alpha proof / shadow / paper / live | not authorized                                                                                                        |
 
 ## Boundary

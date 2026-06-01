@@ -1,0 +1,6 @@
+finding,value,interpretation
+best_label_cost_clean,1,max clean candidates by label/cost bucket
+best_lane_cost_clean,3,max clean candidates by lane/cost bucket
+non_l5_clean_2bps,3,non-L5 translation at lowest cost tier
+l5_clean_2bps,1,L5 diagnostic-only translation at lowest cost tier
+current_clean_lanes,2,lane breadth under original CORE19E clean rule

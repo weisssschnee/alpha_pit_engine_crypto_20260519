@@ -1,0 +1,25 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core22_contract": false,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "best_label_cost_clean_candidate_count": 1,
+  "best_lane_cost_clean_candidate_count": 3,
+  "blockers": [
+    "best_label_cost_clean_lt_6",
+    "current_replay_clean_lanes_lt_3"
+  ],
+  "current_replay_clean_lanes": 2,
+  "decision": "HOLD_A7FFCORE21E_TRANSLATION_MATRIX_INSUFFICIENT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T15:16:45Z",
+  "l5_clean_2bps": 1,
+  "next_allowed": "A7FF-CORE21R translation matrix forensic",
+  "non_l5_clean_2bps": 3,
+  "source_decision": "PASS_A7FFCORE21_REPLAY_TRANSLATION_RESET_CONTRACT_READY_FOR_CORE21E",
+  "source_stage": "A7FF-CORE21",
+  "stage": "A7FF-CORE21E"
+}

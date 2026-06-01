@@ -93,6 +93,12 @@ A7FFCORE19S = REPO / "runtime" / "a7ffcore19s_bounded_replay_repair_contract" / 
 A7FFCORE19SE = REPO / "runtime" / "a7ffcore19se_bounded_replay_repair_execution" / "a7ffcore19se_manifest.json"
 A7FFCORE19SER = REPO / "runtime" / "a7ffcore19ser_replay_repair_forensic" / "a7ffcore19ser_manifest.json"
 A7FFCORE21 = REPO / "runtime" / "a7ffcore21_replay_translation_reset_contract" / "a7ffcore21_manifest.json"
+A7FFCORE21E = REPO / "runtime" / "a7ffcore21e_replay_translation_matrix_audit" / "a7ffcore21e_manifest.json"
+A7FFCORE21R = REPO / "runtime" / "a7ffcore21r_translation_matrix_forensic" / "a7ffcore21r_manifest.json"
+A7FFCORE22 = REPO / "runtime" / "a7ffcore22_lag_aware_replay_translation_contract" / "a7ffcore22_manifest.json"
+A7FFCORE22E = REPO / "runtime" / "a7ffcore22e_lag_aware_replay_translation_audit" / "a7ffcore22e_manifest.json"
+A7FFCORE22R = REPO / "runtime" / "a7ffcore22r_lag_translation_forensic" / "a7ffcore22r_manifest.json"
+A7FFCORE23 = REPO / "runtime" / "a7ffcore23_executable_horizon_redesign_contract" / "a7ffcore23_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -194,12 +200,74 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore19se = read_json(A7FFCORE19SE)
     a7ffcore19ser = read_json(A7FFCORE19SER)
     a7ffcore21 = read_json(A7FFCORE21)
+    a7ffcore21e = read_json(A7FFCORE21E)
+    a7ffcore21r = read_json(A7FFCORE21R)
+    a7ffcore22 = read_json(A7FFCORE22)
+    a7ffcore22e = read_json(A7FFCORE22E)
+    a7ffcore22r = read_json(A7FFCORE22R)
+    a7ffcore23 = read_json(A7FFCORE23)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore21.get("decision") == "PASS_A7FFCORE21_REPLAY_TRANSLATION_RESET_CONTRACT_READY_FOR_CORE21E":
+    if a7ffcore23.get("decision") == "PASS_A7FFCORE23_EXECUTABLE_HORIZON_REDESIGN_CONTRACT_READY_FOR_CORE23E":
+        allowed["A7FF-CORE23E executable-horizon diagnostic audit"] = (
+            "diagnostic audit only; test lower-turnover executable horizons and lane-specific timing translation; no formula generation or search"
+        )
+        blocked["A7FF large search"] = "blocked: same-bar diagnostics dominate one-bar executable evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE23 authorizes executable-horizon diagnostic audit only"
+        blocked["CORE20/CORE22 same-objective repair"] = "blocked/superseded: lag translation is timing-fragile"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE23"
+        status = "executable_horizon_redesign_contract_ready_for_core23e"
+        next_task = "A7FF-CORE23E executable-horizon diagnostic audit"
+    elif a7ffcore22r.get("decision") == "PASS_A7FFCORE22R_LAG_TRANSLATION_FORENSIC_COMPLETE_READY_FOR_CORE23":
+        allowed["A7FF-CORE23 executable-horizon redesign contract"] = (
+            "contract only; redesign replay translation around executable holding horizons after same-bar dominance"
+        )
+        blocked["A7FF large search"] = "blocked: lag translation forensic shows same-bar dominance"
+        blocked["A7FF formula generation/search"] = "blocked until executable-horizon redesign produces evidence"
+        current_stage = "A7FF-CORE22R"
+        status = "lag_translation_forensic_ready_for_core23"
+        next_task = "A7FF-CORE23 executable-horizon redesign contract"
+    elif a7ffcore22e.get("decision") == "HOLD_A7FFCORE22E_LAG_TRANSLATION_INSUFFICIENT":
+        allowed["A7FF-CORE22R lag translation forensic"] = (
+            "forensic only; freeze one-bar lag translation failure and same-bar dominance"
+        )
+        blocked["A7FF large search"] = "blocked: one-bar executable clean supply insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until lag translation forensic/redesign"
+        current_stage = "A7FF-CORE22E"
+        status = "lag_aware_translation_insufficient"
+        next_task = "A7FF-CORE22R lag translation forensic"
+    elif a7ffcore22.get("decision") == "PASS_A7FFCORE22_LAG_AWARE_REPLAY_TRANSLATION_CONTRACT_READY_FOR_CORE22E":
+        allowed["A7FF-CORE22E lag-aware replay translation audit"] = (
+            "audit one-bar/same-bar translation using existing replay rows; no formula generation or search"
+        )
+        blocked["A7FF large search"] = "blocked until lag-aware translation produces executable evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE22 authorizes lag-aware translation audit only"
+        current_stage = "A7FF-CORE22"
+        status = "lag_aware_replay_translation_contract_ready_for_core22e"
+        next_task = "A7FF-CORE22E lag-aware replay translation audit"
+    elif a7ffcore21r.get("decision") == "PASS_A7FFCORE21R_TRANSLATION_MATRIX_FORENSIC_COMPLETE_READY_FOR_CORE22":
+        allowed["A7FF-CORE22 lag-aware replay translation contract"] = (
+            "contract only; address lag and lane translation bottleneck after CORE21E hold"
+        )
+        blocked["A7FF large search"] = "blocked: translation matrix shows lag/lane bottleneck"
+        blocked["A7FF formula generation/search"] = "blocked until lag-aware translation audit produces evidence"
+        current_stage = "A7FF-CORE21R"
+        status = "translation_matrix_forensic_ready_for_core22"
+        next_task = "A7FF-CORE22 lag-aware replay translation contract"
+    elif a7ffcore21e.get("decision") == "HOLD_A7FFCORE21E_TRANSLATION_MATRIX_INSUFFICIENT":
+        allowed["A7FF-CORE21R translation matrix forensic"] = (
+            "forensic only; diagnose label/cost/lag/lane translation failure"
+        )
+        blocked["A7FF large search"] = "blocked: translation matrix insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until translation forensic/redesign"
+        current_stage = "A7FF-CORE21E"
+        status = "translation_matrix_insufficient"
+        next_task = "A7FF-CORE21R translation matrix forensic"
+    elif a7ffcore21.get("decision") == "PASS_A7FFCORE21_REPLAY_TRANSLATION_RESET_CONTRACT_READY_FOR_CORE21E":
         allowed["A7FF-CORE21E replay translation matrix audit"] = (
             "audit label/cost/lag/lane translation using existing replay rows; no formula generation or search"
         )

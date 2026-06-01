@@ -1,0 +1,3 @@
+stage,action,input,authorized
+A7FF-CORE22E,lag-aware replay translation audit,CORE19E rows + CORE21E lag matrix,True
+A7FF-CORE23,lane repair or search-readiness contract,CORE22E pass only,False

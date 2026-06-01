@@ -1,0 +1,24 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core23_contract": false,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "best_one_bar_clean_candidate_count": 4,
+  "best_one_bar_clean_lane_count": 2,
+  "best_same_bar_diagnostic_count": 55,
+  "blockers": [
+    "one_bar_clean_count_lt_6",
+    "one_bar_clean_lane_count_lt_3",
+    "same_bar_dominates_one_bar"
+  ],
+  "decision": "HOLD_A7FFCORE22E_LAG_TRANSLATION_INSUFFICIENT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T15:22:38Z",
+  "next_allowed": "A7FF-CORE22R lag translation forensic",
+  "source_decision": "PASS_A7FFCORE22_LAG_AWARE_REPLAY_TRANSLATION_CONTRACT_READY_FOR_CORE22E",
+  "source_stage": "A7FF-CORE22",
+  "stage": "A7FF-CORE22E"
+}

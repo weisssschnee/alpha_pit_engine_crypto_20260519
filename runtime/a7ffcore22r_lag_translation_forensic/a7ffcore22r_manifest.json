@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core23_contract": true,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "best_one_bar_clean_candidate_count": 4,
+  "best_one_bar_clean_lane_count": 2,
+  "best_same_bar_diagnostic_count": 55,
+  "decision": "PASS_A7FFCORE22R_LAG_TRANSLATION_FORENSIC_COMPLETE_READY_FOR_CORE23",
+  "dominant_failure": "same_bar_diagnostic_dominates_one_bar_executable",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T15:24:03Z",
+  "next_allowed": "A7FF-CORE23 executable-horizon redesign contract",
+  "source_decision": "HOLD_A7FFCORE22E_LAG_TRANSLATION_INSUFFICIENT",
+  "source_stage": "A7FF-CORE22E",
+  "stage": "A7FF-CORE22R"
+}

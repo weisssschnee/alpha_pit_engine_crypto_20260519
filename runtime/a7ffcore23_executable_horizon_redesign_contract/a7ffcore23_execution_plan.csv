@@ -1,0 +1,3 @@
+stage,action,input,authorized
+A7FF-CORE23E,executable-horizon diagnostic audit,CORE17E locked packet + CORE19E rows where applicable,True
+A7FF-CORE24,lower-turnover bounded replay contract,CORE23E pass only,False

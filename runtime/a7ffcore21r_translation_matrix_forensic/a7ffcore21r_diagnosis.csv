@@ -1,0 +1,5 @@
+finding,evidence,severity
+cost_relief_exists_but_insufficient,"2bps non-L5 clean count is 3, but best label/cost bucket clean count is 1",high
+lag_gate_is_major_suppressor,L0/L1 2bps each have 17 clean-without-lag candidates but only 1 with lag gate,high
+lane_breadth_still_insufficient,current replay-clean lane count is 2; S0/S1 do not translate to clean bounded replay,high
+not_l5_only,"non-L5 2bps clean count exceeds L5 2bps clean count, but breadth is still too low",medium

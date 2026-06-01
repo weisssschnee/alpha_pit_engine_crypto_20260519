@@ -1,0 +1,4 @@
+action_id,action,reason
+R0_freeze_core22_path,freeze current locked-packet replay path as timing-fragile,same-bar diagnostic overwhelms one-bar executable supply
+R1_core23_contract,write CORE23 executable-horizon redesign contract,"next work must target lower-turnover/horizon/execution framing, not bigger search"
+R2_no_search,continue blocking large search and formula expansion,one-bar clean evidence is 4 candidates across 2 lanes

@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE21E replay translation matrix audit": "audit label/cost/lag/lane translation using existing replay rows; no formula generation or search",
+  "A7FF-CORE23E executable-horizon diagnostic audit": "diagnostic audit only; test lower-turnover executable horizons and lane-specific timing translation; no formula generation or search",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }
