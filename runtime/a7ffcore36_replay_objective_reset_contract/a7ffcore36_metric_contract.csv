@@ -1,0 +1,7 @@
+metric,role
+train_net_spread_after_cost,orientation and primary gate
+train_control_ratio,hard reject if >= 1.0
+oos_min_split_net_spread,split-balance gate
+oos_control_clean_count,control survival gate
+turnover_cost_sensitivity_2_5_10bps,cost fragility check
+family_cluster_diversity,queue concentration cap

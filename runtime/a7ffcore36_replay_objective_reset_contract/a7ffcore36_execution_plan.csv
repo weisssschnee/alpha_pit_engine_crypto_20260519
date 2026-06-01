@@ -1,0 +1,3 @@
+stage,action,executes_new_generation,executes_search
+A7FF-CORE36E,re-score existing CORE33 queue using replay-objective reset metrics,False,False
+A7FF-CORE37,"only if CORE36E finds survivors, write bounded replay repair/replay contract",False,False

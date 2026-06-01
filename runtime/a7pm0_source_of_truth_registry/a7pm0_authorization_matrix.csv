@@ -504,6 +504,8 @@ A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_authorization_
 A7FF-CORE33,runtime/a7ffcore33_bounded_replay_contract/a7ffcore33_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""shadow_paper_live"": true}",False
 A7FF-CORE34,runtime/a7ffcore34_orientation_control_repair_contract/a7ffcore34_authorization_matrix.json,authorized,"{""A7FF-CORE34E train-only orientation/control repair execution"": true}",False
 A7FF-CORE34,runtime/a7ffcore34_orientation_control_repair_contract/a7ffcore34_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""large_search"": true, ""new_formula_generation"": true, ""shadow_paper_live"": true}",False
+A7FF-CORE36,runtime/a7ffcore36_replay_objective_reset_contract/a7ffcore36_authorization_matrix.json,authorized,"{""A7FF-CORE36E replay-objective reset execution"": true}",False
+A7FF-CORE36,runtime/a7ffcore36_replay_objective_reset_contract/a7ffcore36_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""shadow_paper_live"": true}",False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,A7FF-CORE8E replay-preflight packet audit,true,True
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,alpha_proof,false,False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,formula_search,false,False

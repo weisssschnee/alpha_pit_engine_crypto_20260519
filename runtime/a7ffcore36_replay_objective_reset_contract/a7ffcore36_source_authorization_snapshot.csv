@@ -1,0 +1,7 @@
+task,status,reason
+large_search,NOT_AUTHORIZED,bounded replay and repair survivor_count=0
+formula_search,NOT_AUTHORIZED,numeric/preflight clues did not survive replay proxy
+same_queue_rerun,NOT_AUTHORIZED,CORE34E exhausted train-only orientation/control repair
+alpha_proof,NOT_AUTHORIZED,no replay survivor/proof object
+shadow_paper_live,NOT_AUTHORIZED,no alpha proof and no replay survivor
+A7FF-CORE36 replay-objective/portfolio-proxy reset contract,AUTHORIZED_CONTRACT_ONLY,failure moved from numeric feature response to replay/portfolio translation

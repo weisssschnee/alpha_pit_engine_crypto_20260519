@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T19:32:48Z
+Generated: 2026-06-01T19:34:36Z
 
 ## Decision
 
@@ -11,7 +11,7 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 4]
+## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
@@ -19,26 +19,20 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE34ER_REPAIR_FORENSIC_20260602.md
-?? reports/CRYPTO_A7FFCORE34E_ORIENTATION_CONTROL_REPAIR_EXECUTION_20260602.md
-?? reports/CRYPTO_A7FFCORE35_SEARCH_READINESS_ARBITRATION_20260602.md
-?? runtime/a7ffcore34e_orientation_control_repair_execution/
-?? runtime/a7ffcore34er_repair_forensic/
-?? runtime/a7ffcore35_search_readiness_arbitration/
-?? scripts/crypto_a7ffcore34e_orientation_control_repair_execution.py
-?? scripts/crypto_a7ffcore34er_repair_forensic.py
-?? scripts/crypto_a7ffcore35_search_readiness_arbitration.py
-HEAD=3f177f825315621c551cc954137c8b9d1a88c0d7
-origin/main=f5b90250b86da25bf7d7f2c67e0a3be3b282370a
-HEAD == origin/main: False
+?? reports/CRYPTO_A7FFCORE36_REPLAY_OBJECTIVE_RESET_CONTRACT_20260602.md
+?? runtime/a7ffcore36_replay_objective_reset_contract/
+?? scripts/crypto_a7ffcore36_replay_objective_reset_contract.py
+HEAD=7ad2d9e5d38a7f67f5b3322b205ef9a2e193d8c1
+origin/main=7ad2d9e5d38a7f67f5b3322b205ef9a2e193d8c1
+HEAD == origin/main: True
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3663,
-  "authorization_record_count": 724,
+  "artifact_count": 3670,
+  "authorization_record_count": 726,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -51,12 +45,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T19:32:48Z",
-  "head": "3f177f825315621c551cc954137c8b9d1a88c0d7",
-  "head_equals_origin_main": false,
-  "origin_main": "f5b90250b86da25bf7d7f2c67e0a3be3b282370a",
+  "generated_at": "2026-06-01T19:34:36Z",
+  "head": "7ad2d9e5d38a7f67f5b3322b205ef9a2e193d8c1",
+  "head_equals_origin_main": true,
+  "origin_main": "7ad2d9e5d38a7f67f5b3322b205ef9a2e193d8c1",
   "stage": "A7PM-0",
-  "stage_count": 377
+  "stage_count": 378
 }
 ```
 
@@ -76,7 +70,7 @@ HEAD == origin/main: False
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |     100 |
+| valid_or_historical_record   | contract                   |     101 |
 | valid_or_historical_record   | diagnostic                 |      23 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

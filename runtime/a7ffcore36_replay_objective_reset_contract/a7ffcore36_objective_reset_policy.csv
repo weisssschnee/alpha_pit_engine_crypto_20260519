@@ -1,0 +1,6 @@
+objective_id,description,allowed,forbidden
+R0_executable_spread_first,rank candidates by train executable spread after cost before IC-like response,True,IC-only or numeric-only ranking
+R1_control_margin_first,require train stale/control margin before queue inclusion,True,post-hoc control filtering after selected queue
+R2_oos_split_balance,"score requires validation/test/recent split presence, not aggregate pass count",True,single-split or train-only success
+R3_family_role_specific,treat flow/microstructure as directional or hedge-like depending on train spread role,True,same objective for all data families
+R4_search,formula or large search,False,any search before replay-objective reset execution proves survivors

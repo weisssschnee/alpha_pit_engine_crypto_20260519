@@ -132,6 +132,7 @@ A7FFCORE34 = REPO / "runtime" / "a7ffcore34_orientation_control_repair_contract"
 A7FFCORE34E = REPO / "runtime" / "a7ffcore34e_orientation_control_repair_execution" / "a7ffcore34e_manifest.json"
 A7FFCORE34ER = REPO / "runtime" / "a7ffcore34er_repair_forensic" / "a7ffcore34er_manifest.json"
 A7FFCORE35 = REPO / "runtime" / "a7ffcore35_search_readiness_arbitration" / "a7ffcore35_manifest.json"
+A7FFCORE36 = REPO / "runtime" / "a7ffcore36_replay_objective_reset_contract" / "a7ffcore36_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -272,12 +273,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore34e = read_json(A7FFCORE34E)
     a7ffcore34er = read_json(A7FFCORE34ER)
     a7ffcore35 = read_json(A7FFCORE35)
+    a7ffcore36 = read_json(A7FFCORE36)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore35.get("decision") == "HOLD_A7FFCORE35_SEARCH_NOT_READY_REPLAY_TRANSLATION_FAILURE":
+    if a7ffcore36.get("decision") == "PASS_A7FFCORE36_REPLAY_OBJECTIVE_RESET_CONTRACT_READY_FOR_CORE36E":
+        allowed["A7FF-CORE36E replay-objective reset execution"] = (
+            "bounded re-score only; no new formula generation/search"
+        )
+        blocked["A7FF large search"] = "blocked until CORE36E proves replay-objective survivors"
+        blocked["A7FF formula generation/search"] = "blocked: CORE36 authorizes objective reset execution only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE36"
+        status = "replay_objective_reset_contract_ready_for_core36e"
+        next_task = "A7FF-CORE36E replay-objective reset execution"
+    elif a7ffcore35.get("decision") == "HOLD_A7FFCORE35_SEARCH_NOT_READY_REPLAY_TRANSLATION_FAILURE":
         allowed["A7FF-CORE36 replay-objective/portfolio-proxy reset contract"] = (
             "contract only; fix numeric-to-replay translation before any search"
         )
