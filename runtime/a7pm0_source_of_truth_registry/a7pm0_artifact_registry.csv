@@ -2988,14 +2988,14 @@ runtime,A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract
 runtime,A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcore29_family_contract.csv,48cd19e,add crypto core29 independent family contract,1027
 runtime,A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcore29_forbidden_patterns.csv,48cd19e,add crypto core29 independent family contract,590
 runtime,A7FF-CORE29,runtime/a7ffcore29_independent_family_bounded_probe_contract/a7ffcore29_manifest.json,48cd19e,add crypto core29 independent family contract,905
-report,A7FF-CORE29E,reports/CRYPTO_A7FFCORE29E_INDEPENDENT_FAMILY_PREFLIGHT_20260602.md,,,5255
-runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_adapter_preflight.csv,,,218
-runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_blueprint_preflight_queue.csv,,,126442
-runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_family_balance.csv,,,278
-runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_forbidden_pattern_audit.csv,,,141
-runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_manifest.json,,,870
-runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_schema_availability.csv,,,902
-runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_source_family_contract_snapshot.csv,,,1027
+report,A7FF-CORE29E,reports/CRYPTO_A7FFCORE29E_INDEPENDENT_FAMILY_PREFLIGHT_20260602.md,b013d55,add crypto core29e independent family preflight,5255
+runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_adapter_preflight.csv,b013d55,add crypto core29e independent family preflight,218
+runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_blueprint_preflight_queue.csv,b013d55,add crypto core29e independent family preflight,126442
+runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_family_balance.csv,b013d55,add crypto core29e independent family preflight,278
+runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_forbidden_pattern_audit.csv,b013d55,add crypto core29e independent family preflight,141
+runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_manifest.json,b013d55,add crypto core29e independent family preflight,870
+runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_schema_availability.csv,b013d55,add crypto core29e independent family preflight,902
+runtime,A7FF-CORE29E,runtime/a7ffcore29e_independent_family_preflight/a7ffcore29e_source_family_contract_snapshot.csv,b013d55,add crypto core29e independent family preflight,1027
 report,A7FF-CORE3,reports/CRYPTO_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_20260601.md,02de3f1,add crypto a7ffcore3 formulagen gate,5243
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_allowed_subgraph_registry.csv,02de3f1,add crypto a7ffcore3 formulagen gate,841265
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_bypass_summary.csv,02de3f1,add crypto a7ffcore3 formulagen gate,100
@@ -3004,6 +3004,14 @@ runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_formula
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_gate_matrix.csv,02de3f1,add crypto a7ffcore3 formulagen gate,214
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_generation_script_bypass_audit.csv,02de3f1,add crypto a7ffcore3 formulagen gate,6981
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_manifest.json,02de3f1,add crypto a7ffcore3 formulagen gate,1046
+report,A7FF-CORE30,reports/CRYPTO_A7FFCORE30_INDEPENDENT_FAMILY_NUMERIC_PROBE_CONTRACT_20260602.md,,,4024
+runtime,A7FF-CORE30,runtime/a7ffcore30_independent_family_numeric_probe_contract/a7ffcore30_authorization_matrix.json,,,258
+runtime,A7FF-CORE30,runtime/a7ffcore30_independent_family_numeric_probe_contract/a7ffcore30_control_plan.csv,,,142
+runtime,A7FF-CORE30,runtime/a7ffcore30_independent_family_numeric_probe_contract/a7ffcore30_family_summary.csv,,,193
+runtime,A7FF-CORE30,runtime/a7ffcore30_independent_family_numeric_probe_contract/a7ffcore30_gate_plan.csv,,,439
+runtime,A7FF-CORE30,runtime/a7ffcore30_independent_family_numeric_probe_contract/a7ffcore30_label_plan.csv,,,303
+runtime,A7FF-CORE30,runtime/a7ffcore30_independent_family_numeric_probe_contract/a7ffcore30_manifest.json,,,761
+runtime,A7FF-CORE30,runtime/a7ffcore30_independent_family_numeric_probe_contract/a7ffcore30_numeric_probe_queue.csv,,,69730
 report,A7FF-CORE4,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_entrypoint_policy.csv,97cf90e,add crypto a7ffcore4 gate regression,2751
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_entrypoint_route_summary.csv,97cf90e,add crypto a7ffcore4 gate regression,252
@@ -3370,14 +3378,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,48cd19e,add crypto core29 independent family contract,5906
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,48cd19e,add crypto core29 independent family contract,547459
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,b013d55,add crypto core29e independent family preflight,5870
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,b013d55,add crypto core29e independent family preflight,548818
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,48cd19e,add crypto core29 independent family contract,104972
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,48cd19e,add crypto core29 independent family contract,215399
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,48cd19e,add crypto core29 independent family contract,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,b013d55,add crypto core29e independent family preflight,216190
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,b013d55,add crypto core29e independent family preflight,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,48cd19e,add crypto core29 independent family contract,117831
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,b013d55,add crypto core29e independent family preflight,118187
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3395,12 +3403,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,48cd19e,add crypto core29 independent family contract,5399
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,48cd19e,add crypto core29 independent family contract,391
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,48cd19e,add crypto core29 independent family contract,333
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,48cd19e,add crypto core29 independent family contract,1498
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,48cd19e,add crypto core29 independent family contract,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,48cd19e,add crypto core29 independent family contract,425
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,b013d55,add crypto core29e independent family preflight,5275
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,b013d55,add crypto core29e independent family preflight,386
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,b013d55,add crypto core29e independent family preflight,306
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,b013d55,add crypto core29e independent family preflight,1489
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,b013d55,add crypto core29e independent family preflight,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,b013d55,add crypto core29e independent family preflight,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

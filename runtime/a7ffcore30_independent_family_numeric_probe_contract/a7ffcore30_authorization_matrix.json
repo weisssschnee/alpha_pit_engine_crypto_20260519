@@ -1,0 +1,12 @@
+{
+  "authorized": {
+    "A7FF-CORE30E bounded numeric probe execution": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "formula_search": true,
+    "large_search": true,
+    "replay_contract": true,
+    "shadow_paper_live": true
+  }
+}

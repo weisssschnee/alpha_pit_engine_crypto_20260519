@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T18:36:26Z
+Generated: 2026-06-01T18:38:21Z
 
 ## Decision
 
@@ -19,11 +19,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE29E_INDEPENDENT_FAMILY_PREFLIGHT_20260602.md
-?? runtime/a7ffcore29e_independent_family_preflight/
-?? scripts/crypto_a7ffcore29e_independent_family_preflight.py
-HEAD=48cd19e5871e2941fd84364146c1f31cbe100b58
-origin/main=48cd19e5871e2941fd84364146c1f31cbe100b58
+?? reports/CRYPTO_A7FFCORE30_INDEPENDENT_FAMILY_NUMERIC_PROBE_CONTRACT_20260602.md
+?? runtime/a7ffcore30_independent_family_numeric_probe_contract/
+?? scripts/crypto_a7ffcore30_independent_family_numeric_probe_contract.py
+HEAD=b013d559bf40899338cc547b1dc8099555dc672e
+origin/main=b013d559bf40899338cc547b1dc8099555dc672e
 HEAD == origin/main: True
 ```
 
@@ -31,8 +31,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 3577,
-  "authorization_record_count": 716,
+  "artifact_count": 3585,
+  "authorization_record_count": 718,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -45,12 +45,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T18:36:26Z",
-  "head": "48cd19e5871e2941fd84364146c1f31cbe100b58",
+  "generated_at": "2026-06-01T18:38:21Z",
+  "head": "b013d559bf40899338cc547b1dc8099555dc672e",
   "head_equals_origin_main": true,
-  "origin_main": "48cd19e5871e2941fd84364146c1f31cbe100b58",
+  "origin_main": "b013d559bf40899338cc547b1dc8099555dc672e",
   "stage": "A7PM-0",
-  "stage_count": 365
+  "stage_count": 366
 }
 ```
 
@@ -70,7 +70,7 @@ HEAD == origin/main: True
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |      92 |
+| valid_or_historical_record   | contract                   |      93 |
 | valid_or_historical_record   | diagnostic                 |      22 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

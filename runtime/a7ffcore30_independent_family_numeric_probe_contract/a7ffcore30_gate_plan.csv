@@ -1,0 +1,8 @@
+gate,threshold
+family_balance,80 numeric rows per family
+preflight_pass,all 240 selected rows passed CORE29E field preflight
+non_l7_evidence,at least one non-L7 primary label family must be positive before any replay contract
+control_ratio,median control_ratio < 1.0; preferred < 0.8
+split_consistency,train/validation/test not all sign-inconsistent
+single_family_cap,no family can alone authorize replay/search
+large_search,false

@@ -1,0 +1,7 @@
+control,required
+row_shuffle,True
+time_shuffle,True
+wrong_lag_future,True
+wrong_lag_stale,True
+sign_flip,True
+same_family_placebo,True

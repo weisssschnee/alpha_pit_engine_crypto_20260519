@@ -120,6 +120,7 @@ A7FFCORE28 = REPO / "runtime" / "a7ffcore28_objective_data_family_reset_contract
 A7FFCORE28E = REPO / "runtime" / "a7ffcore28e_independent_data_family_atlas_audit" / "a7ffcore28e_manifest.json"
 A7FFCORE29 = REPO / "runtime" / "a7ffcore29_independent_family_bounded_probe_contract" / "a7ffcore29_manifest.json"
 A7FFCORE29E = REPO / "runtime" / "a7ffcore29e_independent_family_preflight" / "a7ffcore29e_manifest.json"
+A7FFCORE30 = REPO / "runtime" / "a7ffcore30_independent_family_numeric_probe_contract" / "a7ffcore30_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -248,12 +249,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore28e = read_json(A7FFCORE28E)
     a7ffcore29 = read_json(A7FFCORE29)
     a7ffcore29e = read_json(A7FFCORE29E)
+    a7ffcore30 = read_json(A7FFCORE30)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore29e.get("decision") == "PASS_A7FFCORE29E_INDEPENDENT_FAMILY_PREFLIGHT_READY_FOR_CORE30_CONTRACT":
+    if a7ffcore30.get("decision") == "PASS_A7FFCORE30_NUMERIC_PROBE_CONTRACT_READY_FOR_CORE30E":
+        allowed["A7FF-CORE30E bounded numeric probe execution"] = (
+            "bounded 240-row numeric probe only; no replay/search/promotion"
+        )
+        blocked["A7FF replay contract"] = "blocked until CORE30E numeric probe passes non-L7/control/split gates"
+        blocked["A7FF large search"] = "blocked until independent-family numeric evidence passes"
+        blocked["A7FF formula generation/search"] = "blocked: CORE30 authorizes numeric probe only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE30"
+        status = "independent_family_numeric_probe_contract_ready_for_core30e"
+        next_task = "A7FF-CORE30E bounded numeric probe execution"
+    elif a7ffcore29e.get("decision") == "PASS_A7FFCORE29E_INDEPENDENT_FAMILY_PREFLIGHT_READY_FOR_CORE30_CONTRACT":
         allowed["A7FF-CORE30 independent family numeric probe contract"] = (
             "contract only; define bounded 240-row numeric probe after CORE29E preflight pass"
         )

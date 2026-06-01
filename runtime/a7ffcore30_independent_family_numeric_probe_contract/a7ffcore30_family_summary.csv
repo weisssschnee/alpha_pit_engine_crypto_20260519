@@ -1,0 +1,4 @@
+family_id,numeric_queue_count,motif_count,operator_count,window_count
+F1a_aggtrades_flow_microstructure,80,4,5,4
+F1b_taker_flow_market_panel,80,4,5,4
+F2a_basis_funding_independent,80,4,5,4

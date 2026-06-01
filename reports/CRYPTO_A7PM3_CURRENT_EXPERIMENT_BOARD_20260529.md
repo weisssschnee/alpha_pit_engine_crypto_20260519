@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T18:36:21Z
+Generated: 2026-06-01T18:38:16Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T18:36:21Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                                 | next                                                  |
-|:----------------------------|:----------------|:-------------------------------------------------------|:------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                                   | keep registry as source-of-truth                      |
-| a7ff_family_diversification | A7FF-CORE29E    | independent_family_preflight_ready_for_core30_contract | A7FF-CORE30 independent family numeric probe contract |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                            | A7FF-24R4E if explicitly authorized                   |
-| search_execution            | blocked         | not_authorized                                         | none                                                  |
+| workstream                  | current_stage   | status                                                      | next                                         |
+|:----------------------------|:----------------|:------------------------------------------------------------|:---------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                                        | keep registry as source-of-truth             |
+| a7ff_family_diversification | A7FF-CORE30     | independent_family_numeric_probe_contract_ready_for_core30e | A7FF-CORE30E bounded numeric probe execution |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                                 | A7FF-24R4E if explicitly authorized          |
+| search_execution            | blocked         | not_authorized                                              | none                                         |
 
 ## Allowed Next Tasks
 
-| task                                                  | reason                                                                           |
-|:------------------------------------------------------|:---------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option     | requires explicit user authorization; no search and no promotion                 |
-| A7PM-0/3 maintenance                                  | governance registry maintenance                                                  |
-| A7FF-CORE30 independent family numeric probe contract | contract only; define bounded 240-row numeric probe after CORE29E preflight pass |
+| task                                              | reason                                                           |
+|:--------------------------------------------------|:-----------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                  |
+| A7FF-CORE30E bounded numeric probe execution      | bounded 240-row numeric probe only; no replay/search/promotion   |
 
 ## Blocked Tasks
 
@@ -41,9 +41,9 @@ Generated: 2026-06-01T18:36:21Z
 | A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                         | not authorized                                                                                                        |
 | shadow/paper/live                   | not authorized                                                                                                        |
-| A7FF-CORE30 numeric execution       | blocked until CORE30 contract explicitly authorizes CORE30E                                                           |
+| A7FF replay contract                | blocked until CORE30E numeric probe passes non-L7/control/split gates                                                 |
 | A7FF large search                   | blocked until independent-family numeric evidence passes                                                              |
-| A7FF formula generation/search      | blocked: CORE29E authorizes numeric-probe contract only                                                               |
+| A7FF formula generation/search      | blocked: CORE30 authorizes numeric probe only                                                                         |
 | alpha proof / shadow / paper / live | not authorized                                                                                                        |
 
 ## Boundary

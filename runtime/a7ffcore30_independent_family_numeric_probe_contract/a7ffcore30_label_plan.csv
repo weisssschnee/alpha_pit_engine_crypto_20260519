@@ -1,0 +1,6 @@
+label,horizons_h,role
+L0_raw_forward_return,"4,8,24",primary_non_ranked
+L1_cross_sectional_relative_return,"4,8,24",primary_non_ranked
+L3_liquidity_tier_relative_return,"8,24",state_relative
+L5_vol_adjusted_return,"8,24",risk_adjusted
+L7_ranked_future_return,"8,24",diagnostic_only_not_sufficient
