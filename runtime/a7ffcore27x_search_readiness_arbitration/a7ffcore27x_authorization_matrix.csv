@@ -1,0 +1,4 @@
+task,reason,authorized
+A7FF-CORE28 objective/data-family reset contract,current S0/S1/S3 field set cannot produce independent executable lane breadth,True
+A7FF-CORE27 bounded replay contract,blocked until multi-lane strict clean supply exists,False
+large search / formula search,blocked; would amplify a single-lane clue,False

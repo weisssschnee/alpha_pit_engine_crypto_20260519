@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T18:03:58Z
+Generated: 2026-06-01T18:22:10Z
 
 ## Decision
 
@@ -11,7 +11,7 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
+## main...origin/main [ahead 1]
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
@@ -19,25 +19,28 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE26CER_SPLIT_REPAIR_FORENSIC_20260602.md
-?? reports/CRYPTO_A7FFCORE26CE_SPLIT_CONSISTENCY_REPAIR_PROBE_20260602.md
-?? reports/CRYPTO_A7FFCORE26D_NON_S0_LANE_REPAIR_CONTRACT_20260602.md
-?? runtime/a7ffcore26ce_split_consistency_repair_probe/
-?? runtime/a7ffcore26cer_split_repair_forensic/
-?? runtime/a7ffcore26d_non_s0_lane_repair_contract/
-?? scripts/crypto_a7ffcore26ce_split_consistency_repair_probe.py
-?? scripts/crypto_a7ffcore26cer_split_repair_forensic.py
-?? scripts/crypto_a7ffcore26d_non_s0_lane_repair_contract.py
-HEAD=8b5373a68d8e06f1ab2190bb9edd25278d8bafe6
+?? reports/CRYPTO_A7FFCORE26DER_NON_S0_REPAIR_FORENSIC_20260602.md
+?? reports/CRYPTO_A7FFCORE26DE_NON_S0_LANE_REPAIR_PROBE_20260602.md
+?? reports/CRYPTO_A7FFCORE27X_SEARCH_READINESS_ARBITRATION_20260602.md
+?? reports/CRYPTO_A7FFCORE28_OBJECTIVE_DATA_FAMILY_RESET_CONTRACT_20260602.md
+?? runtime/a7ffcore26de_non_s0_lane_repair_probe/
+?? runtime/a7ffcore26der_non_s0_repair_forensic/
+?? runtime/a7ffcore27x_search_readiness_arbitration/
+?? runtime/a7ffcore28_objective_data_family_reset_contract/
+?? scripts/crypto_a7ffcore26de_non_s0_lane_repair_probe.py
+?? scripts/crypto_a7ffcore26der_non_s0_repair_forensic.py
+?? scripts/crypto_a7ffcore27x_search_readiness_arbitration.py
+?? scripts/crypto_a7ffcore28_objective_data_family_reset_contract.py
+HEAD=ca8d85dc0f12add4cf38f3eadfe0466472ebdc8d
 origin/main=8b5373a68d8e06f1ab2190bb9edd25278d8bafe6
-HEAD == origin/main: True
+HEAD == origin/main: False
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3531,
+  "artifact_count": 3554,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -51,12 +54,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T18:03:58Z",
-  "head": "8b5373a68d8e06f1ab2190bb9edd25278d8bafe6",
-  "head_equals_origin_main": true,
+  "generated_at": "2026-06-01T18:22:10Z",
+  "head": "ca8d85dc0f12add4cf38f3eadfe0466472ebdc8d",
+  "head_equals_origin_main": false,
   "origin_main": "8b5373a68d8e06f1ab2190bb9edd25278d8bafe6",
   "stage": "A7PM-0",
-  "stage_count": 358
+  "stage_count": 362
 }
 ```
 
@@ -69,15 +72,15 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      68 |
+| hold                         | hold                       |      70 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |      88 |
-| valid_or_historical_record   | diagnostic                 |      21 |
+| valid_or_historical_record   | contract                   |      89 |
+| valid_or_historical_record   | diagnostic                 |      22 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 

@@ -113,6 +113,10 @@ A7FFCORE26C = REPO / "runtime" / "a7ffcore26c_split_consistency_repair_contract"
 A7FFCORE26CE = REPO / "runtime" / "a7ffcore26ce_split_consistency_repair_probe" / "a7ffcore26ce_manifest.json"
 A7FFCORE26CER = REPO / "runtime" / "a7ffcore26cer_split_repair_forensic" / "a7ffcore26cer_manifest.json"
 A7FFCORE26D = REPO / "runtime" / "a7ffcore26d_non_s0_lane_repair_contract" / "a7ffcore26d_manifest.json"
+A7FFCORE26DE = REPO / "runtime" / "a7ffcore26de_non_s0_lane_repair_probe" / "a7ffcore26de_manifest.json"
+A7FFCORE26DER = REPO / "runtime" / "a7ffcore26der_non_s0_repair_forensic" / "a7ffcore26der_manifest.json"
+A7FFCORE27X = REPO / "runtime" / "a7ffcore27x_search_readiness_arbitration" / "a7ffcore27x_manifest.json"
+A7FFCORE28 = REPO / "runtime" / "a7ffcore28_objective_data_family_reset_contract" / "a7ffcore28_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -234,12 +238,54 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore26ce = read_json(A7FFCORE26CE)
     a7ffcore26cer = read_json(A7FFCORE26CER)
     a7ffcore26d = read_json(A7FFCORE26D)
+    a7ffcore26de = read_json(A7FFCORE26DE)
+    a7ffcore26der = read_json(A7FFCORE26DER)
+    a7ffcore27x = read_json(A7FFCORE27X)
+    a7ffcore28 = read_json(A7FFCORE28)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore26d.get("decision") == "PASS_A7FFCORE26D_NON_S0_LANE_REPAIR_CONTRACT_READY_FOR_CORE26DE":
+    if a7ffcore28.get("decision") == "PASS_A7FFCORE28_OBJECTIVE_DATA_FAMILY_RESET_CONTRACT_READY_FOR_CORE28E":
+        allowed["A7FF-CORE28E independent data-family atlas contract/audit"] = (
+            "contract/audit only; identify independent non-S0 data families before any new search"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: single-lane S0 evidence only"
+        blocked["A7FF large search"] = "blocked until independent multi-lane executable evidence exists"
+        blocked["A7FF formula generation/search"] = "blocked: CORE28 authorizes data-family atlas audit only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE28"
+        status = "objective_data_family_reset_contract_ready_for_core28e"
+        next_task = "A7FF-CORE28E independent data-family atlas contract/audit"
+    elif a7ffcore27x.get("decision") == "HOLD_A7FFCORE27X_SEARCH_NOT_READY_SINGLE_LANE_SUPPLY":
+        allowed["A7FF-CORE28 objective/data-family reset contract"] = (
+            "contract only; reset away from S0 single-lane supply before search"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: search readiness arbitration failed"
+        blocked["A7FF large search"] = "blocked: single-lane S0 supply"
+        current_stage = "A7FF-CORE27X"
+        status = "search_not_ready_single_lane_supply"
+        next_task = "A7FF-CORE28 objective/data-family reset contract"
+    elif a7ffcore26der.get("decision") == "PASS_A7FFCORE26DER_NON_S0_REPAIR_FORENSIC_COMPLETE_READY_FOR_CORE27X":
+        allowed["A7FF-CORE27X search-readiness arbitration / objective reset contract"] = (
+            "arbitration only; decide whether current evidence can support replay/search"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: non-S0 repair has no strict clean candidates"
+        blocked["A7FF large search"] = "blocked until readiness arbitration"
+        current_stage = "A7FF-CORE26DER"
+        status = "non_s0_repair_forensic_ready_for_core27x"
+        next_task = "A7FF-CORE27X search-readiness arbitration / objective reset contract"
+    elif a7ffcore26de.get("decision") == "HOLD_A7FFCORE26DE_NON_S0_REPAIR_INSUFFICIENT":
+        allowed["A7FF-CORE26DER non-S0 repair forensic"] = (
+            "forensic only; freeze non-S0 repair failure"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: non-S0 repair insufficient"
+        blocked["A7FF large search"] = "blocked until non-S0 repair forensic"
+        current_stage = "A7FF-CORE26DE"
+        status = "non_s0_repair_insufficient"
+        next_task = "A7FF-CORE26DER non-S0 repair forensic"
+    elif a7ffcore26d.get("decision") == "PASS_A7FFCORE26D_NON_S0_LANE_REPAIR_CONTRACT_READY_FOR_CORE26DE":
         allowed["A7FF-CORE26DE non-S0 lane repair numeric probe"] = (
             "bounded S3/S1-focused numeric probe; S0 is calibration-only; no open generation, search, or promotion"
         )

@@ -1,0 +1,27 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core27_contract": false,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "three_split_clean_count_lt_6",
+    "three_split_clean_lane_count_lt_3",
+    "two_split_near_miss_count_lt_12"
+  ],
+  "decision": "HOLD_A7FFCORE26DE_NON_S0_REPAIR_INSUFFICIENT",
+  "eval_error_count": 0,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T18:18:48Z",
+  "next_allowed": "A7FF-CORE26DER non-S0 repair forensic",
+  "numeric_rows": 2880,
+  "repair_pool_count": 360,
+  "source_decision": "PASS_A7FFCORE26D_NON_S0_LANE_REPAIR_CONTRACT_READY_FOR_CORE26DE",
+  "source_stage": "A7FF-CORE26D",
+  "stage": "A7FF-CORE26DE",
+  "three_split_clean_count": 0,
+  "three_split_clean_lane_count": 0,
+  "two_split_near_miss_count": 9
+}

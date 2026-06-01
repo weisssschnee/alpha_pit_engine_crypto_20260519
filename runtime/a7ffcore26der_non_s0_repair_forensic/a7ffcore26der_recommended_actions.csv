@@ -1,0 +1,4 @@
+next_stage,action,rationale,authorized
+A7FF-CORE27X,search readiness arbitration / objective reset,"S0 local clue exists, but independent lane cannot be repaired from current S1/S3 targeted probes",True
+A7FF-CORE27 bounded replay contract,blocked,non-S0 repair has zero three-split clean candidates,False
+large search,blocked,search would expand a single-lane S0 clue without independent lane support,False

@@ -1,0 +1,6 @@
+family,status,allowed,blocked
+F0_positioning_price_basis_s0,diagnostic_reference_only,use 4 clean S0 candidates as calibration and anti-overfit control,"standalone search objective, replay contract, large search seed"
+F1_independent_flow_microstructure,primary_reset_candidate,"taker flow, aggTrades flow, liquidity/volume state, low-turnover interactions",A7V activity/liquidity self-reproduction patterns
+F2_independent_basis_funding,primary_reset_candidate,basis/funding dislocation with non-S0 neutralization and H8/H24 executable horizons,basis-only or funding-only wrappers
+F3_cross_exchange_forward_context,diagnostic_forward_only,forward telemetry / state context only,historical alpha proof or backfilled proof
+F4_new_data_family_contract,contract_required,liquidation/orderbook/cross-exchange only after PIT/source contract,untraced historical proof

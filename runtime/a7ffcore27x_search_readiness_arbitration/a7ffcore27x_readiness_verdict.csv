@@ -1,0 +1,5 @@
+axis,evidence,verdict
+S0 local clue,4 clean candidates / 1 lane,diagnostic clue only; cannot support replay/search alone
+non-S0 independent lane,"0 clean, 9 near-miss",no strict independent lane
+bounded replay readiness,requires multi-lane strict clean supply,not ready
+large search readiness,single-lane S0 clue and non-S0 repair failure,not authorized

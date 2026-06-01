@@ -1,0 +1,5 @@
+gate,threshold
+independent_lane_requirement,>= 2 non-S0 lanes before replay/search
+s0_concentration_cap,S0 diagnostic reference only
+forward_only_source_policy,cannot enter historical proof
+large_search_authorization,false

@@ -1,5 +1,5 @@
 workstream,current_stage,status,next
 governance,A7PM-0/1/2/3,pass,keep registry as source-of-truth
-a7ff_family_diversification,A7FF-CORE26D,non_s0_lane_repair_contract_ready_for_core26de,A7FF-CORE26DE non-S0 lane repair numeric probe
+a7ff_family_diversification,A7FF-CORE28,objective_data_family_reset_contract_ready_for_core28e,A7FF-CORE28E independent data-family atlas contract/audit
 a7ff_funding_tail,A7FF-24R4,contract_ready_no_execution,A7FF-24R4E if explicitly authorized
 search_execution,blocked,not_authorized,none

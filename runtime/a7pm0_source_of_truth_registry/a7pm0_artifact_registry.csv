@@ -2843,23 +2843,35 @@ runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffc
 runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_manifest.json,55aa1c6,add crypto core26 targeted numeric probe,827
 runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_near_miss_seed_snapshot.csv,55aa1c6,add crypto core26 targeted numeric probe,1402
 runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_repair_budget.csv,55aa1c6,add crypto core26 targeted numeric probe,213
-runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_candidate_summary.csv,,,64684
-runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_clean_candidates.csv,,,1346
-runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_eval_errors.csv,,,2
-runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_lane_summary.csv,,,232
-runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_manifest.json,,,901
-runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_near_miss_candidates.csv,,,6153
-runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_numeric_rows.csv,,,929992
-runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_repair_pool.csv,,,109588
-runtime,A7FF-CORE26CER,runtime/a7ffcore26cer_split_repair_forensic/a7ffcore26cer_clean_candidates_snapshot.csv,,,1346
-runtime,A7FF-CORE26CER,runtime/a7ffcore26cer_split_repair_forensic/a7ffcore26cer_diagnosis.csv,,,439
-runtime,A7FF-CORE26CER,runtime/a7ffcore26cer_split_repair_forensic/a7ffcore26cer_manifest.json,,,847
-runtime,A7FF-CORE26CER,runtime/a7ffcore26cer_split_repair_forensic/a7ffcore26cer_near_miss_snapshot.csv,,,6153
-runtime,A7FF-CORE26CER,runtime/a7ffcore26cer_split_repair_forensic/a7ffcore26cer_recommended_actions.csv,,,304
-runtime,A7FF-CORE26D,runtime/a7ffcore26d_non_s0_lane_repair_contract/a7ffcore26d_execution_plan.csv,,,203
-runtime,A7FF-CORE26D,runtime/a7ffcore26d_non_s0_lane_repair_contract/a7ffcore26d_gate_policy.csv,,,192
-runtime,A7FF-CORE26D,runtime/a7ffcore26d_non_s0_lane_repair_contract/a7ffcore26d_lane_policy.csv,,,523
-runtime,A7FF-CORE26D,runtime/a7ffcore26d_non_s0_lane_repair_contract/a7ffcore26d_manifest.json,,,752
+runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_candidate_summary.csv,ca8d85d,add crypto core26ce split repair probe,64684
+runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_clean_candidates.csv,ca8d85d,add crypto core26ce split repair probe,1346
+runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_eval_errors.csv,ca8d85d,add crypto core26ce split repair probe,2
+runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_lane_summary.csv,ca8d85d,add crypto core26ce split repair probe,232
+runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_manifest.json,ca8d85d,add crypto core26ce split repair probe,901
+runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_near_miss_candidates.csv,ca8d85d,add crypto core26ce split repair probe,6153
+runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_numeric_rows.csv,ca8d85d,add crypto core26ce split repair probe,929992
+runtime,A7FF-CORE26CE,runtime/a7ffcore26ce_split_consistency_repair_probe/a7ffcore26ce_repair_pool.csv,ca8d85d,add crypto core26ce split repair probe,109588
+runtime,A7FF-CORE26CER,runtime/a7ffcore26cer_split_repair_forensic/a7ffcore26cer_clean_candidates_snapshot.csv,ca8d85d,add crypto core26ce split repair probe,1346
+runtime,A7FF-CORE26CER,runtime/a7ffcore26cer_split_repair_forensic/a7ffcore26cer_diagnosis.csv,ca8d85d,add crypto core26ce split repair probe,439
+runtime,A7FF-CORE26CER,runtime/a7ffcore26cer_split_repair_forensic/a7ffcore26cer_manifest.json,ca8d85d,add crypto core26ce split repair probe,847
+runtime,A7FF-CORE26CER,runtime/a7ffcore26cer_split_repair_forensic/a7ffcore26cer_near_miss_snapshot.csv,ca8d85d,add crypto core26ce split repair probe,6153
+runtime,A7FF-CORE26CER,runtime/a7ffcore26cer_split_repair_forensic/a7ffcore26cer_recommended_actions.csv,ca8d85d,add crypto core26ce split repair probe,304
+runtime,A7FF-CORE26D,runtime/a7ffcore26d_non_s0_lane_repair_contract/a7ffcore26d_execution_plan.csv,ca8d85d,add crypto core26ce split repair probe,203
+runtime,A7FF-CORE26D,runtime/a7ffcore26d_non_s0_lane_repair_contract/a7ffcore26d_gate_policy.csv,ca8d85d,add crypto core26ce split repair probe,192
+runtime,A7FF-CORE26D,runtime/a7ffcore26d_non_s0_lane_repair_contract/a7ffcore26d_lane_policy.csv,ca8d85d,add crypto core26ce split repair probe,523
+runtime,A7FF-CORE26D,runtime/a7ffcore26d_non_s0_lane_repair_contract/a7ffcore26d_manifest.json,ca8d85d,add crypto core26ce split repair probe,752
+runtime,A7FF-CORE26DE,runtime/a7ffcore26de_non_s0_lane_repair_probe/a7ffcore26de_candidate_summary.csv,,,66227
+runtime,A7FF-CORE26DE,runtime/a7ffcore26de_non_s0_lane_repair_probe/a7ffcore26de_clean_candidates.csv,,,142
+runtime,A7FF-CORE26DE,runtime/a7ffcore26de_non_s0_lane_repair_probe/a7ffcore26de_eval_errors.csv,,,2
+runtime,A7FF-CORE26DE,runtime/a7ffcore26de_non_s0_lane_repair_probe/a7ffcore26de_lane_summary.csv,,,233
+runtime,A7FF-CORE26DE,runtime/a7ffcore26de_non_s0_lane_repair_probe/a7ffcore26de_manifest.json,,,936
+runtime,A7FF-CORE26DE,runtime/a7ffcore26de_non_s0_lane_repair_probe/a7ffcore26de_near_miss_candidates.csv,,,2851
+runtime,A7FF-CORE26DE,runtime/a7ffcore26de_non_s0_lane_repair_probe/a7ffcore26de_numeric_rows.csv,,,936187
+runtime,A7FF-CORE26DE,runtime/a7ffcore26de_non_s0_lane_repair_probe/a7ffcore26de_repair_pool.csv,,,109636
+runtime,A7FF-CORE26DER,runtime/a7ffcore26der_non_s0_repair_forensic/a7ffcore26der_diagnosis.csv,,,405
+runtime,A7FF-CORE26DER,runtime/a7ffcore26der_non_s0_repair_forensic/a7ffcore26der_manifest.json,,,893
+runtime,A7FF-CORE26DER,runtime/a7ffcore26der_non_s0_repair_forensic/a7ffcore26der_near_miss_snapshot.csv,,,2851
+runtime,A7FF-CORE26DER,runtime/a7ffcore26der_non_s0_repair_forensic/a7ffcore26der_recommended_actions.csv,,,411
 runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_candidate_summary.csv,55aa1c6,add crypto core26 targeted numeric probe,89398
 runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_eval_errors.csv,55aa1c6,add crypto core26 targeted numeric probe,2
 runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_executable_clean_candidates.csv,55aa1c6,add crypto core26 targeted numeric probe,277
@@ -2875,6 +2887,13 @@ runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcor
 runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_manifest.json,55aa1c6,add crypto core26 targeted numeric probe,956
 runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_near_miss_candidates.csv,55aa1c6,add crypto core26 targeted numeric probe,1424
 runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_recommended_actions.csv,55aa1c6,add crypto core26 targeted numeric probe,304
+runtime,A7FF-CORE27X,runtime/a7ffcore27x_search_readiness_arbitration/a7ffcore27x_authorization_matrix.csv,,,331
+runtime,A7FF-CORE27X,runtime/a7ffcore27x_search_readiness_arbitration/a7ffcore27x_manifest.json,,,875
+runtime,A7FF-CORE27X,runtime/a7ffcore27x_search_readiness_arbitration/a7ffcore27x_readiness_verdict.csv,,,359
+runtime,A7FF-CORE28,runtime/a7ffcore28_objective_data_family_reset_contract/a7ffcore28_execution_plan.csv,,,232
+runtime,A7FF-CORE28,runtime/a7ffcore28_objective_data_family_reset_contract/a7ffcore28_gate_policy.csv,,,228
+runtime,A7FF-CORE28,runtime/a7ffcore28_objective_data_family_reset_contract/a7ffcore28_manifest.json,,,715
+runtime,A7FF-CORE28,runtime/a7ffcore28_objective_data_family_reset_contract/a7ffcore28_reset_policy.csv,,,866
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_allowed_subgraph_registry.csv,02de3f1,add crypto a7ffcore3 formulagen gate,841265
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_bypass_summary.csv,02de3f1,add crypto a7ffcore3 formulagen gate,100
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_diagnostic_root_registry.csv,02de3f1,add crypto a7ffcore3 formulagen gate,2249503
@@ -3290,11 +3309,15 @@ report,A7FFCORE25-TARGETED-LANE-HORIZON-GENERATION-CONTRACT,reports/CRYPTO_A7FFC
 report,A7FFCORE25E-TARGETED-LANE-HORIZON-GENERATION,reports/CRYPTO_A7FFCORE25E_TARGETED_LANE_HORIZON_GENERATION_20260601.md,55aa1c6,add crypto core26 targeted numeric probe,3442
 report,A7FFCORE26-TARGETED-NUMERIC-PROBE-CONTRACT,reports/CRYPTO_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_20260601.md,55aa1c6,add crypto core26 targeted numeric probe,2819
 report,A7FFCORE26C-SPLIT-CONSISTENCY-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE26C_SPLIT_CONSISTENCY_REPAIR_CONTRACT_20260602.md,55aa1c6,add crypto core26 targeted numeric probe,5230
-report,A7FFCORE26CE-SPLIT-CONSISTENCY-REPAIR-PROBE,reports/CRYPTO_A7FFCORE26CE_SPLIT_CONSISTENCY_REPAIR_PROBE_20260602.md,,,12357
-report,A7FFCORE26CER-SPLIT-REPAIR-FORENSIC,reports/CRYPTO_A7FFCORE26CER_SPLIT_REPAIR_FORENSIC_20260602.md,,,3588
-report,A7FFCORE26D-NON-S0-LANE-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE26D_NON_S0_LANE_REPAIR_CONTRACT_20260602.md,,,3213
+report,A7FFCORE26CE-SPLIT-CONSISTENCY-REPAIR-PROBE,reports/CRYPTO_A7FFCORE26CE_SPLIT_CONSISTENCY_REPAIR_PROBE_20260602.md,ca8d85d,add crypto core26ce split repair probe,12357
+report,A7FFCORE26CER-SPLIT-REPAIR-FORENSIC,reports/CRYPTO_A7FFCORE26CER_SPLIT_REPAIR_FORENSIC_20260602.md,ca8d85d,add crypto core26ce split repair probe,3588
+report,A7FFCORE26D-NON-S0-LANE-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE26D_NON_S0_LANE_REPAIR_CONTRACT_20260602.md,ca8d85d,add crypto core26ce split repair probe,3213
+report,A7FFCORE26DE-NON-S0-LANE-REPAIR-PROBE,reports/CRYPTO_A7FFCORE26DE_NON_S0_LANE_REPAIR_PROBE_20260602.md,,,6228
+report,A7FFCORE26DER-NON-S0-REPAIR-FORENSIC,reports/CRYPTO_A7FFCORE26DER_NON_S0_REPAIR_FORENSIC_20260602.md,,,3876
 report,A7FFCORE26E-TARGETED-NUMERIC-PROBE-EXECUTION,reports/CRYPTO_A7FFCORE26E_TARGETED_NUMERIC_PROBE_EXECUTION_20260602.md,55aa1c6,add crypto core26 targeted numeric probe,1489
 report,A7FFCORE26R-TARGETED-NUMERIC-PROBE-FORENSIC,reports/CRYPTO_A7FFCORE26R_TARGETED_NUMERIC_PROBE_FORENSIC_20260602.md,55aa1c6,add crypto core26 targeted numeric probe,7445
+report,A7FFCORE27X-SEARCH-READINESS-ARBITRATION,reports/CRYPTO_A7FFCORE27X_SEARCH_READINESS_ARBITRATION_20260602.md,,,2900
+report,A7FFCORE28-OBJECTIVE-DATA-FAMILY-RESET-CONTRACT,reports/CRYPTO_A7FFCORE28_OBJECTIVE_DATA_FAMILY_RESET_CONTRACT_20260602.md,,,3731
 report,A7FFCORE3-FORMULAGEN-SUBGRAPH-GATE,reports/CRYPTO_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_20260601.md,02de3f1,add crypto a7ffcore3 formulagen gate,5243
 report,A7FFCORE4-GATE-IMPLEMENTATION-REGRESSION,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
 report,A7FFCORE5-GATE-NATIVE-GENERATION-DRYRUN,reports/CRYPTO_A7FFCORE5_GATE_NATIVE_GENERATION_DRYRUN_20260601.md,7011a15,add crypto a7ffcore5 gate native dryrun,4601
@@ -3324,13 +3347,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,8b5373a,refresh crypto registry after core26 probe,548640
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,ca8d85d,add crypto core26ce split repair probe,550895
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,9f44a1f,refresh crypto registry after a7ffcore14se,104425
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,8b5373a,refresh crypto registry after core26 probe,210020
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,8b5373a,refresh crypto registry after core26 probe,711
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,ca8d85d,add crypto core26ce split repair probe,211548
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,ca8d85d,add crypto core26ce split repair probe,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,8b5373a,refresh crypto registry after core26 probe,113983
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,ca8d85d,add crypto core26ce split repair probe,114940
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -3346,15 +3369,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,55aa1c6,add crypto core26 targeted numeric probe,376
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,55aa1c6,add crypto core26 targeted numeric probe,347
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,55aa1c6,add crypto core26 targeted numeric probe,1522
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,8b5373a,refresh crypto registry after core26 probe,1306
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,8b5373a,refresh crypto registry after core26 probe,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,8b5373a,refresh crypto registry after core26 probe,5451
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,ca8d85d,add crypto core26ce split repair probe,394
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,ca8d85d,add crypto core26ce split repair probe,341
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,ca8d85d,add crypto core26ce split repair probe,1489
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,ca8d85d,add crypto core26ce split repair probe,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,ca8d85d,add crypto core26ce split repair probe,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,ca8d85d,add crypto core26ce split repair probe,6239
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,8b5373a,refresh crypto registry after core26 probe,5394
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,ca8d85d,add crypto core26ce split repair probe,5463
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
