@@ -1,0 +1,5 @@
+family,source_interaction,action,target
+H0_I3_deconcentration,I3_positioning_divergence_x_price_or_basis,cap Sub/L5 concentration; add asymmetric transforms positioning:spread_short_long|zscore_168h with price/basis:delta_24h|shock_24h,keep I3 useful while preventing single operator/label dominance
+H1_I5_deconcentration,I5_liquidity_state_x_basis_or_positioning,cap Mul/L5; add SafeDiv and Sub only where semantic scale permits; require non-L5 share,convert liquidity-state interaction into diversified candidate supply
+H2_I4_near_miss_repair,I4_taker_flow_x_OI_or_liquidity,expand asymmetric transforms around near-miss rows; evaluate flow reversal under OI/liquidity context,turn best non-I3/I5 near-miss lane into strict candidates
+H3_cross_family_bridge,I3/I5/I4,build low-count bridge probes that combine positioning/liquidity/taker context without basis dominance,raise interaction family count to at least 3 without open grammar

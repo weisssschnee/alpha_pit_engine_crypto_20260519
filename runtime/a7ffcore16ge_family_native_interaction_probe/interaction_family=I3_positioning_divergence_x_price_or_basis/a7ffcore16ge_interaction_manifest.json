@@ -1,0 +1,14 @@
+{
+  "blueprint_count": 189,
+  "decision": "PASS_A7FFCORE16GE_INTERACTION_SHARD_COMPLETE",
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-06-01T09:52:51Z",
+  "interaction_family": "I3_positioning_divergence_x_price_or_basis",
+  "missing_fields_excluded": [],
+  "near_miss_count": 47,
+  "probe_candidate_count": 34,
+  "response_rows": 3024,
+  "stage": "A7FF-CORE16GE-INTERACTION",
+  "symbols_loaded": 96,
+  "timestamps": 3481
+}

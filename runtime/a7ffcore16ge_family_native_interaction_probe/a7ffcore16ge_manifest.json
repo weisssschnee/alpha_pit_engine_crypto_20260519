@@ -1,0 +1,26 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core17": false,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "interaction_family_count_lt_4",
+    "top_interaction_family_share_gt_40pct"
+  ],
+  "blueprint_count": 811,
+  "completed_interaction_shards": 7,
+  "decision": "HOLD_A7FFCORE16GE_INTERACTION_PROBE_SUPPLY_INSUFFICIENT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T09:58:46Z",
+  "interaction_family_count": 2,
+  "interaction_probe_candidate_count": 84,
+  "next_allowed": "A7FF-CORE16GER interaction probe forensic",
+  "response_rows": 12976,
+  "source_decision": "PASS_A7FFCORE16G_FAMILY_NATIVE_INTERACTION_CONTRACT_READY_FOR_CORE16GE",
+  "source_stage": "A7FF-CORE16G",
+  "stage": "A7FF-CORE16GE",
+  "top_interaction_family_share": 0.5952380952380952
+}

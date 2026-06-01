@@ -1,0 +1,27 @@
+{
+  "authorized": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "forbidden": [
+    "open grammar FormulaGen",
+    "bounded replay",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "name": "second-pass interaction breadth repair contract",
+  "scope": [
+    "cap I3/I5 concentration",
+    "expand I4 near-miss lane",
+    "asymmetric left/right transforms",
+    "operator/label diversity gates"
+  ],
+  "stage": "A7FF-CORE16H",
+  "targets": {
+    "min_candidate_count": 96,
+    "min_interaction_family_count": 3,
+    "min_non_L5_label_share": 0.4,
+    "min_operator_count": 2,
+    "top_interaction_family_share_max": 0.45
+  }
+}

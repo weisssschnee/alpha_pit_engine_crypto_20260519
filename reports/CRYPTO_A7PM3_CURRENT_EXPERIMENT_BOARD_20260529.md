@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T09:26:28Z
+Generated: 2026-06-01T10:02:15Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T09:26:28Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                                | next                                                    |
-|:----------------------------|:----------------|:------------------------------------------------------|:--------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                                  | keep registry as source-of-truth                        |
-| a7ff_family_diversification | A7FF-CORE16G    | family_native_interaction_contract_ready_for_core16ge | A7FF-CORE16GE family-native interaction probe execution |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                           | A7FF-24R4E if explicitly authorized                     |
-| search_execution            | blocked         | not_authorized                                        | none                                                    |
+| workstream                  | current_stage   | status                                              | next                                                    |
+|:----------------------------|:----------------|:----------------------------------------------------|:--------------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                                | keep registry as source-of-truth                        |
+| a7ff_family_diversification | A7FF-CORE16H    | second_pass_interaction_contract_ready_for_core16he | A7FF-CORE16HE second-pass interaction breadth execution |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                         | A7FF-24R4E if explicitly authorized                     |
+| search_execution            | blocked         | not_authorized                                      | none                                                    |
 
 ## Allowed Next Tasks
 
-| task                                                    | reason                                                                                        |
-|:--------------------------------------------------------|:----------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option       | requires explicit user authorization; no search and no promotion                              |
-| A7PM-0/3 maintenance                                    | governance registry maintenance                                                               |
-| A7FF-CORE16GE family-native interaction probe execution | execute typed interaction probe only; no open grammar, replay expansion, search, or promotion |
+| task                                                    | reason                                                                                                             |
+|:--------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option       | requires explicit user authorization; no search and no promotion                                                   |
+| A7PM-0/3 maintenance                                    | governance registry maintenance                                                                                    |
+| A7FF-CORE16HE second-pass interaction breadth execution | execute second-pass typed interaction breadth repair only; no open grammar, replay expansion, search, or promotion |
 
 ## Blocked Tasks
 
@@ -41,10 +41,10 @@ Generated: 2026-06-01T09:26:28Z
 | A7AL-2Q                          | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                      | not authorized                                                                                                        |
 | shadow/paper/live                | not authorized                                                                                                        |
-| A7FF-CORE17                      | blocked until CORE16GE typed interaction probe passes                                                                 |
-| A7FF formula generation          | blocked: CORE16G authorizes typed interaction probe only                                                              |
+| A7FF-CORE17                      | blocked until CORE16HE breadth execution passes                                                                       |
+| A7FF formula generation          | blocked: CORE16H authorizes second-pass typed interaction execution only                                              |
 | A7FF bounded replay              | blocked: no broad objective atlas                                                                                     |
-| A7FF large search                | blocked until interaction probe passes                                                                                |
+| A7FF large search                | blocked until second-pass interaction gates pass                                                                      |
 
 ## Boundary
 

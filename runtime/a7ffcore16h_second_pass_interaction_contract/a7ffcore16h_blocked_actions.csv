@@ -1,0 +1,6 @@
+item,reason
+A7FF-CORE17 objective seed policy,blocked until CORE16HE breadth execution passes
+formula generation,blocked: only second-pass typed interaction execution is authorized
+bounded replay,blocked: no broad objective atlas
+large search,blocked
+alpha proof / shadow / paper / live,not authorized

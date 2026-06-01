@@ -1,0 +1,14 @@
+{
+  "blueprint_count": 120,
+  "decision": "PASS_A7FFCORE16GE_INTERACTION_SHARD_COMPLETE",
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-06-01T09:42:19Z",
+  "interaction_family": "I2_OI_delta_x_basis_premium_dislocation",
+  "missing_fields_excluded": [],
+  "near_miss_count": 1,
+  "probe_candidate_count": 0,
+  "response_rows": 1920,
+  "stage": "A7FF-CORE16GE-INTERACTION",
+  "symbols_loaded": 96,
+  "timestamps": 3481
+}

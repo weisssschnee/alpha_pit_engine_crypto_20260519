@@ -1,0 +1,6 @@
+item,reason
+A7FF-CORE17 objective seed policy,blocked: CORE16GE interaction breadth failed
+formula generation,blocked: only second-pass typed interaction probe is authorized
+bounded replay,blocked: no broad objective atlas
+large search,blocked
+alpha proof / shadow / paper / live,not authorized

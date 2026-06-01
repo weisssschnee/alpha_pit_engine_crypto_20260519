@@ -69,6 +69,9 @@ A7FFCORE16F = REPO / "runtime" / "a7ffcore16f_non_basis_supply_repair_contract" 
 A7FFCORE16FE = REPO / "runtime" / "a7ffcore16fe_non_basis_atlas_execution" / "a7ffcore16fe_manifest.json"
 A7FFCORE16FER = REPO / "runtime" / "a7ffcore16fer_non_basis_atlas_forensic" / "a7ffcore16fer_manifest.json"
 A7FFCORE16G = REPO / "runtime" / "a7ffcore16g_family_native_interaction_contract" / "a7ffcore16g_manifest.json"
+A7FFCORE16GE = REPO / "runtime" / "a7ffcore16ge_family_native_interaction_probe" / "a7ffcore16ge_manifest.json"
+A7FFCORE16GER = REPO / "runtime" / "a7ffcore16ger_interaction_probe_forensic" / "a7ffcore16ger_manifest.json"
+A7FFCORE16H = REPO / "runtime" / "a7ffcore16h_second_pass_interaction_contract" / "a7ffcore16h_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -146,12 +149,48 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore16fe = read_json(A7FFCORE16FE)
     a7ffcore16fer = read_json(A7FFCORE16FER)
     a7ffcore16g = read_json(A7FFCORE16G)
+    a7ffcore16ge = read_json(A7FFCORE16GE)
+    a7ffcore16ger = read_json(A7FFCORE16GER)
+    a7ffcore16h = read_json(A7FFCORE16H)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore16g.get("decision") == "PASS_A7FFCORE16G_FAMILY_NATIVE_INTERACTION_CONTRACT_READY_FOR_CORE16GE":
+    if a7ffcore16h.get("decision") == "PASS_A7FFCORE16H_SECOND_PASS_INTERACTION_CONTRACT_READY_FOR_CORE16HE":
+        allowed["A7FF-CORE16HE second-pass interaction breadth execution"] = (
+            "execute second-pass typed interaction breadth repair only; no open grammar, replay expansion, search, or promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked until CORE16HE breadth execution passes"
+        blocked["A7FF formula generation"] = "blocked: CORE16H authorizes second-pass typed interaction execution only"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until second-pass interaction gates pass"
+        current_stage = "A7FF-CORE16H"
+        status = "second_pass_interaction_contract_ready_for_core16he"
+        next_task = "A7FF-CORE16HE second-pass interaction breadth execution"
+    elif a7ffcore16ger.get("decision") == "PASS_A7FFCORE16GER_INTERACTION_FORENSIC_COMPLETE_READY_FOR_CORE16H":
+        allowed["A7FF-CORE16H second-pass interaction breadth repair contract"] = (
+            "contract only; repair I3/I5 concentration and expand I4 near-miss lane; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16GE interaction breadth failed"
+        blocked["A7FF formula generation"] = "blocked until CORE16H/next contract defines repair"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until interaction breadth gates pass"
+        current_stage = "A7FF-CORE16GER"
+        status = "interaction_forensic_ready_for_core16h"
+        next_task = "A7FF-CORE16H second-pass interaction breadth repair contract"
+    elif a7ffcore16ge.get("decision") == "HOLD_A7FFCORE16GE_INTERACTION_PROBE_SUPPLY_INSUFFICIENT":
+        allowed["A7FF-CORE16GER interaction probe forensic"] = (
+            "diagnose typed interaction probe failure and decide second-pass repair; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16GE interaction breadth failed"
+        blocked["A7FF formula generation"] = "blocked until CORE16GER/CORE16H repair"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until interaction breadth gates pass"
+        current_stage = "A7FF-CORE16GE"
+        status = "interaction_probe_supply_hold"
+        next_task = "A7FF-CORE16GER interaction probe forensic"
+    elif a7ffcore16g.get("decision") == "PASS_A7FFCORE16G_FAMILY_NATIVE_INTERACTION_CONTRACT_READY_FOR_CORE16GE":
         allowed["A7FF-CORE16GE family-native interaction probe execution"] = (
             "execute typed interaction probe only; no open grammar, replay expansion, search, or promotion"
         )

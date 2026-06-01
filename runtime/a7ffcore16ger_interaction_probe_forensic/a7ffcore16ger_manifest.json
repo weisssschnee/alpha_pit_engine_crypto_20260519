@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core16h_contract": true,
+  "authorizes_core17": false,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE16GER_INTERACTION_FORENSIC_COMPLETE_READY_FOR_CORE16H",
+  "dominant_failure": "interaction_candidate_supply_narrow_but_nonzero",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T10:00:31Z",
+  "interaction_family_count": 2,
+  "interaction_probe_candidate_count": 84,
+  "next_allowed": "A7FF-CORE16H second-pass interaction breadth repair contract",
+  "source_decision": "HOLD_A7FFCORE16GE_INTERACTION_PROBE_SUPPLY_INSUFFICIENT",
+  "source_stage": "A7FF-CORE16GE",
+  "stage": "A7FF-CORE16GER",
+  "top_interaction_family_share": 0.5952380952380952
+}

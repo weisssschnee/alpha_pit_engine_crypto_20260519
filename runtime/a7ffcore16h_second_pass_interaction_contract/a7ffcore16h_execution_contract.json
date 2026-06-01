@@ -1,0 +1,29 @@
+{
+  "authorized": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "families": [
+    "H0_I3_deconcentration",
+    "H1_I5_deconcentration",
+    "H2_I4_near_miss_repair",
+    "H3_cross_family_bridge"
+  ],
+  "forbidden": [
+    "open grammar FormulaGen",
+    "bounded replay",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "max_blueprints": 4096,
+  "name": "second-pass interaction breadth execution",
+  "pass_gate": {
+    "candidate_count": 96,
+    "i4_floor": 12,
+    "interaction_family_count": 3,
+    "non_l5_label_share_min": 0.4,
+    "operator_count_min": 2,
+    "top_family_share_max": 0.45
+  },
+  "stage": "A7FF-CORE16HE"
+}

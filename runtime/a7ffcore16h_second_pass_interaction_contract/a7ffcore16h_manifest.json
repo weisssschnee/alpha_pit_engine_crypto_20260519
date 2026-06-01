@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core16he": true,
+  "authorizes_core17": false,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE16H_SECOND_PASS_INTERACTION_CONTRACT_READY_FOR_CORE16HE",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T10:01:36Z",
+  "next_allowed": "A7FF-CORE16HE second-pass interaction breadth execution",
+  "source_decision": "PASS_A7FFCORE16GER_INTERACTION_FORENSIC_COMPLETE_READY_FOR_CORE16H",
+  "source_stage": "A7FF-CORE16GER",
+  "stage": "A7FF-CORE16H"
+}

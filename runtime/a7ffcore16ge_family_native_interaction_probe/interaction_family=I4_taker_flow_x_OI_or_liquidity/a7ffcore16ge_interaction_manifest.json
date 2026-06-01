@@ -1,0 +1,14 @@
+{
+  "blueprint_count": 112,
+  "decision": "PASS_A7FFCORE16GE_INTERACTION_SHARD_COMPLETE",
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-06-01T09:46:53Z",
+  "interaction_family": "I4_taker_flow_x_OI_or_liquidity",
+  "missing_fields_excluded": [],
+  "near_miss_count": 10,
+  "probe_candidate_count": 0,
+  "response_rows": 1792,
+  "stage": "A7FF-CORE16GE-INTERACTION",
+  "symbols_loaded": 96,
+  "timestamps": 3481
+}

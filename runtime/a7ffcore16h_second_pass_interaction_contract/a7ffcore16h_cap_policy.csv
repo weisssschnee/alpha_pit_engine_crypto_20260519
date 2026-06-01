@@ -1,0 +1,6 @@
+policy_id,value,reason
+i3_i5_top_share_cap,each <= 45%,CORE16GE top family share was 59.5%
+non_l5_label_floor,>= 40%,avoid ranked/vol-only label concentration
+operator_floor,>= 2 operators,avoid single Sub/Mul morphology
+i4_floor,>= 12 strict or near-strict rows,force non-I3/I5 expansion lane to be tested
+control_gate,strict < 1.0; forensic 1.0-1.5,do not promote control-like interactions

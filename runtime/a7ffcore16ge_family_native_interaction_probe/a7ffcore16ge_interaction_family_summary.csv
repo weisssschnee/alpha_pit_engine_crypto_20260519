@@ -1,0 +1,8 @@
+interaction_family,response_rows,blueprint_count,probe_candidate_count,near_miss_count,label_family_count,median_control_ratio
+I5_liquidity_state_x_basis_or_positioning,3072,192,50,26,4,8.572036158409505
+I3_positioning_divergence_x_price_or_basis,3024,189,34,47,4,8.45690355899496
+I4_taker_flow_x_OI_or_liquidity,1792,112,0,10,4,6.638809423513292
+I2_OI_delta_x_basis_premium_dislocation,1920,120,0,1,4,10.045525477769058
+I0_OI_delta_x_price_move,768,48,0,0,4,8.938786951905053
+I1_OI_delta_x_funding_abs,864,54,0,0,4,3.8814377358139702
+I6_volatility_state_x_basis_or_OI,1536,96,0,0,4,10.426453488480636

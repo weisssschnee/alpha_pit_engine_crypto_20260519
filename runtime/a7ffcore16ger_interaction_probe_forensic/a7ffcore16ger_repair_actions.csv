@@ -1,0 +1,5 @@
+action_id,target,action,reason
+R0_cap_successful_interactions,I3/I5,cap selected share and require operator/label diversity before any objective seed policy,"CORE16GE found candidates, but only from two interaction families"
+R1_expand_near_miss_I4,I4_taker_flow_x_OI_or_liquidity,repair near-miss rows with asymmetric transforms and tighter control-dominance diagnostics,I4 produced near misses but no strict candidates; it is the best non-I3/I5 expansion lane
+R2_block_dead_interactions,I0/I1/I2/I6,keep as diagnostic-only unless a later primitive/field update changes response evidence,these interaction families produced no strict supply in CORE16GE
+R3_second_pass_interaction_probe,CORE16H,run a bounded second-pass probe with asymmetric transforms and family caps; no open grammar,"nonzero supply exists, but breadth gates failed"
