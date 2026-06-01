@@ -1,0 +1,6 @@
+item,reason
+CORE17 objective seed policy,blocked: CORE16 atlas supply insufficient
+formula generation,blocked until expanded primitive atlas passes
+bounded replay,blocked until supply repair yields broader objective atlas
+large search,blocked
+alpha proof / shadow / paper / live,not authorized

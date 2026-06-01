@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T08:08:30Z
+Generated: 2026-06-01T08:19:24Z
 
 ## Decision
 
@@ -13,14 +13,14 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ```text
 ## main...origin/main
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE15YR_SURFACE_FAILURE_REPAIR_20260601.md
-?? reports/CRYPTO_A7FFCORE15Y_REPLAY_STABILITY_SURFACE_20260601.md
-?? runtime/a7ffcore15y_replay_stability_surface/
-?? runtime/a7ffcore15yr_surface_failure_repair/
-?? scripts/crypto_a7ffcore15y_replay_stability_surface_builder.py
-?? scripts/crypto_a7ffcore15yr_surface_failure_repair.py
-HEAD=9bfee5081c8942f19c79ccb573aba10eaceab34a
-origin/main=9bfee5081c8942f19c79ccb573aba10eaceab34a
+?? reports/CRYPTO_A7FFCORE16R_PRIMITIVE_ATLAS_SUPPLY_REPAIR_20260601.md
+?? reports/CRYPTO_A7FFCORE16_PRIMITIVE_REPLAY_STABILITY_ATLAS_20260601.md
+?? runtime/a7ffcore16_primitive_replay_stability_atlas/
+?? runtime/a7ffcore16r_primitive_atlas_supply_repair/
+?? scripts/crypto_a7ffcore16_primitive_replay_stability_atlas.py
+?? scripts/crypto_a7ffcore16r_primitive_atlas_supply_repair.py
+HEAD=d1f2388fd5465bca880776d848f9c508d91bea28
+origin/main=d1f2388fd5465bca880776d848f9c508d91bea28
 HEAD == origin/main: True
 ```
 
@@ -28,7 +28,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2975,
+  "artifact_count": 2987,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -42,12 +42,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T08:08:30Z",
-  "head": "9bfee5081c8942f19c79ccb573aba10eaceab34a",
+  "generated_at": "2026-06-01T08:19:24Z",
+  "head": "d1f2388fd5465bca880776d848f9c508d91bea28",
   "head_equals_origin_main": true,
-  "origin_main": "9bfee5081c8942f19c79ccb573aba10eaceab34a",
+  "origin_main": "d1f2388fd5465bca880776d848f9c508d91bea28",
   "stage": "A7PM-0",
-  "stage_count": 306
+  "stage_count": 308
 }
 ```
 
@@ -60,13 +60,13 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      53 |
+| hold                         | hold                       |      54 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     139 |
+| valid_or_historical_record   | governance_or_audit        |     140 |
 | valid_or_historical_record   | contract                   |      68 |
 | valid_or_historical_record   | diagnostic                 |       8 |
 | valid_or_historical_record   | smoke                      |       8 |

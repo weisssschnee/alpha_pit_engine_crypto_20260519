@@ -1,0 +1,46 @@
+{
+  "action": "expanded primitive/operator-probe atlas execution",
+  "forbidden": [
+    "formula search",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "horizons": [
+    1,
+    4,
+    8,
+    24
+  ],
+  "inputs": [
+    "top498 feature panel",
+    "A7AA label contract",
+    "field role ledger",
+    "CORE16 insufficient atlas"
+  ],
+  "labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return"
+  ],
+  "pass_gate": {
+    "atlas_candidate_count": 64,
+    "field_family_count": 6,
+    "top_family_share_max": 0.3,
+    "transform_count": 5
+  },
+  "stage": "A7FF-CORE16E",
+  "transforms": [
+    "level",
+    "delta_1h",
+    "delta_4h",
+    "delta_24h",
+    "zscore_72h",
+    "zscore_168h",
+    "tsrank_72h",
+    "tsrank_168h",
+    "shock_24h",
+    "spread_short_long"
+  ]
+}

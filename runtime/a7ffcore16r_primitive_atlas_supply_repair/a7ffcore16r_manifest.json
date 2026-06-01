@@ -1,0 +1,15 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core16e": true,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE16R_PRIMITIVE_ATLAS_SUPPLY_REPAIR_READY_FOR_CORE16E",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T08:17:59Z",
+  "next_allowed": "A7FF-CORE16E expanded primitive/operator-probe atlas execution",
+  "source_decision": "HOLD_A7FFCORE16_PRIMITIVE_ATLAS_INSUFFICIENT",
+  "source_stage": "A7FF-CORE16",
+  "stage": "A7FF-CORE16R"
+}

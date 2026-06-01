@@ -1,0 +1,6 @@
+action_id,requirement,minimum
+R0_expand_non_l7_primitive_probe,rerun/extend primitive response map with more transforms and less L7 absorption,">=64 non-L7 atlas candidates, >=6 field families, >=5 transforms"
+R1_operator_probing,score field_family x operator x label x horizon before factor generation,operator families must pass control_ratio < 1.0 and split consistency before generation
+R2_field_family_quota,"explicitly quota open_interest, positioning, taker_flow, liquidity, volatility, basis/funding",no single family >30 percent in atlas
+R3_lag_fragility_repair,separate lag-fragile from control-clean; do not discard all lag-fragile fields without slow-horizon retest,slow-horizon retest contract for 4h/8h/24h primitive transforms
+R4_no_search_until_supply_pass,formula search remains blocked until primitive atlas supply passes,CORE16R/CORE16E pass before any new generation/replay

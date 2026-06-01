@@ -61,6 +61,8 @@ A7FFCORE14SER = REPO / "runtime" / "a7ffcore14ser_repaired_replay_forensic" / "a
 A7FFCORE15X = REPO / "runtime" / "a7ffcore15x_objective_surface_reset_contract" / "a7ffcore15x_manifest.json"
 A7FFCORE15Y = REPO / "runtime" / "a7ffcore15y_replay_stability_surface" / "a7ffcore15y_manifest.json"
 A7FFCORE15YR = REPO / "runtime" / "a7ffcore15yr_surface_failure_repair" / "a7ffcore15yr_manifest.json"
+A7FFCORE16 = REPO / "runtime" / "a7ffcore16_primitive_replay_stability_atlas" / "a7ffcore16_manifest.json"
+A7FFCORE16R = REPO / "runtime" / "a7ffcore16r_primitive_atlas_supply_repair" / "a7ffcore16r_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -130,12 +132,33 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore15x = read_json(A7FFCORE15X)
     a7ffcore15y = read_json(A7FFCORE15Y)
     a7ffcore15yr = read_json(A7FFCORE15YR)
+    a7ffcore16 = read_json(A7FFCORE16)
+    a7ffcore16r = read_json(A7FFCORE16R)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore15yr.get("decision") == "PASS_A7FFCORE15YR_SURFACE_FAILURE_REPAIR_READY_FOR_CORE16_ATLAS":
+    if a7ffcore16r.get("decision") == "PASS_A7FFCORE16R_PRIMITIVE_ATLAS_SUPPLY_REPAIR_READY_FOR_CORE16E":
+        allowed["A7FF-CORE16E expanded primitive/operator-probe atlas execution"] = (
+            "execute expanded primitive/operator response atlas only; no formula generation/replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16 atlas supply failed; CORE16E repair execution required"
+        blocked["A7FF formula generation"] = "blocked until expanded primitive atlas passes supply gates"
+        blocked["A7FF large search"] = "blocked until CORE16E passes"
+        current_stage = "A7FF-CORE16R"
+        status = "primitive_atlas_supply_repair_ready_for_core16e"
+        next_task = "A7FF-CORE16E expanded primitive/operator-probe atlas execution"
+    elif a7ffcore16.get("decision") == "HOLD_A7FFCORE16_PRIMITIVE_ATLAS_INSUFFICIENT":
+        allowed["A7FF-CORE16R primitive atlas supply repair"] = (
+            "contract only; repair primitive atlas supply after CORE16 insufficiency; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16 atlas insufficient"
+        blocked["A7FF large search"] = "blocked until primitive atlas supply passes"
+        current_stage = "A7FF-CORE16"
+        status = "primitive_atlas_insufficient"
+        next_task = "A7FF-CORE16R primitive atlas supply repair"
+    elif a7ffcore15yr.get("decision") == "PASS_A7FFCORE15YR_SURFACE_FAILURE_REPAIR_READY_FOR_CORE16_ATLAS":
         allowed["A7FF-CORE16 primitive-response replay-stability atlas rebuild"] = (
             "build new objective atlas from primitive response and replay-stability evidence; no replay execution/search/promotion"
         )
