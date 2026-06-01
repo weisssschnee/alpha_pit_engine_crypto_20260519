@@ -117,6 +117,7 @@ A7FFCORE26DE = REPO / "runtime" / "a7ffcore26de_non_s0_lane_repair_probe" / "a7f
 A7FFCORE26DER = REPO / "runtime" / "a7ffcore26der_non_s0_repair_forensic" / "a7ffcore26der_manifest.json"
 A7FFCORE27X = REPO / "runtime" / "a7ffcore27x_search_readiness_arbitration" / "a7ffcore27x_manifest.json"
 A7FFCORE28 = REPO / "runtime" / "a7ffcore28_objective_data_family_reset_contract" / "a7ffcore28_manifest.json"
+A7FFCORE28E = REPO / "runtime" / "a7ffcore28e_independent_data_family_atlas_audit" / "a7ffcore28e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -242,12 +243,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore26der = read_json(A7FFCORE26DER)
     a7ffcore27x = read_json(A7FFCORE27X)
     a7ffcore28 = read_json(A7FFCORE28)
+    a7ffcore28e = read_json(A7FFCORE28E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore28.get("decision") == "PASS_A7FFCORE28_OBJECTIVE_DATA_FAMILY_RESET_CONTRACT_READY_FOR_CORE28E":
+    if a7ffcore28e.get("decision") == "PASS_A7FFCORE28E_INDEPENDENT_DATA_FAMILY_ATLAS_READY_FOR_CORE29_CONTRACT":
+        allowed["A7FF-CORE29 independent family bounded generation/probe contract"] = (
+            "contract only; use CORE28E atlas candidates without executing generation/search"
+        )
+        blocked["A7FF-CORE28 S0 direct continuation"] = "blocked: S0 is diagnostic reference only"
+        blocked["A7FF large search"] = "blocked until CORE29/next bounded evidence creates independent executable lanes"
+        blocked["A7FF formula generation/search"] = "blocked: CORE28E authorizes CORE29 contract only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE28E"
+        status = "independent_data_family_atlas_ready_for_core29_contract"
+        next_task = "A7FF-CORE29 independent family bounded generation/probe contract"
+    elif a7ffcore28.get("decision") == "PASS_A7FFCORE28_OBJECTIVE_DATA_FAMILY_RESET_CONTRACT_READY_FOR_CORE28E":
         allowed["A7FF-CORE28E independent data-family atlas contract/audit"] = (
             "contract/audit only; identify independent non-S0 data families before any new search"
         )

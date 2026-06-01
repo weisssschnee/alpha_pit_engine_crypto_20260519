@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE28E independent data-family atlas contract/audit": "contract/audit only; identify independent non-S0 data families before any new search",
+  "A7FF-CORE29 independent family bounded generation/probe contract": "contract only; use CORE28E atlas candidates without executing generation/search",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

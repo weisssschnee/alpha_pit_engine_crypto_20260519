@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T18:22:06Z
+Generated: 2026-06-01T18:30:28Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T18:22:06Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                                 | next                                                      |
-|:----------------------------|:----------------|:-------------------------------------------------------|:----------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                                   | keep registry as source-of-truth                          |
-| a7ff_family_diversification | A7FF-CORE28     | objective_data_family_reset_contract_ready_for_core28e | A7FF-CORE28E independent data-family atlas contract/audit |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                            | A7FF-24R4E if explicitly authorized                       |
-| search_execution            | blocked         | not_authorized                                         | none                                                      |
+| workstream                  | current_stage   | status                                                  | next                                                             |
+|:----------------------------|:----------------|:--------------------------------------------------------|:-----------------------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                                    | keep registry as source-of-truth                                 |
+| a7ff_family_diversification | A7FF-CORE28E    | independent_data_family_atlas_ready_for_core29_contract | A7FF-CORE29 independent family bounded generation/probe contract |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                             | A7FF-24R4E if explicitly authorized                              |
+| search_execution            | blocked         | not_authorized                                          | none                                                             |
 
 ## Allowed Next Tasks
 
-| task                                                      | reason                                                                               |
-|:----------------------------------------------------------|:-------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option         | requires explicit user authorization; no search and no promotion                     |
-| A7PM-0/3 maintenance                                      | governance registry maintenance                                                      |
-| A7FF-CORE28E independent data-family atlas contract/audit | contract/audit only; identify independent non-S0 data families before any new search |
+| task                                                             | reason                                                                          |
+|:-----------------------------------------------------------------|:--------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option                | requires explicit user authorization; no search and no promotion                |
+| A7PM-0/3 maintenance                                             | governance registry maintenance                                                 |
+| A7FF-CORE29 independent family bounded generation/probe contract | contract only; use CORE28E atlas candidates without executing generation/search |
 
 ## Blocked Tasks
 
@@ -41,9 +41,9 @@ Generated: 2026-06-01T18:22:06Z
 | A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                         | not authorized                                                                                                        |
 | shadow/paper/live                   | not authorized                                                                                                        |
-| A7FF-CORE27 bounded replay contract | blocked: single-lane S0 evidence only                                                                                 |
-| A7FF large search                   | blocked until independent multi-lane executable evidence exists                                                       |
-| A7FF formula generation/search      | blocked: CORE28 authorizes data-family atlas audit only                                                               |
+| A7FF-CORE28 S0 direct continuation  | blocked: S0 is diagnostic reference only                                                                              |
+| A7FF large search                   | blocked until CORE29/next bounded evidence creates independent executable lanes                                       |
+| A7FF formula generation/search      | blocked: CORE28E authorizes CORE29 contract only                                                                      |
 | alpha proof / shadow / paper / live | not authorized                                                                                                        |
 
 ## Boundary

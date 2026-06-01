@@ -84,6 +84,29 @@ def normalize_stage_id(text: str) -> str:
     return token.upper()
 
 
+def normalize_compact_stage_token(text: str) -> str:
+    token = re.sub(r"^CRYPTO_", "", text.strip(), flags=re.IGNORECASE).upper()
+    token = token.replace("-", "").replace("_", "")
+    replacements = [
+        ("A7FFCORE", "A7FF-CORE"),
+        ("A7AIF", "A7AI-F"),
+        ("A7PM", "A7PM-"),
+        ("A7AL2", "A7AL-2"),
+        ("A7AR", "A7AR-"),
+        ("A7AA", "A7AA-"),
+        ("A7AH", "A7AH-"),
+        ("A7AG", "A7AG-"),
+        ("A7AC", "A7AC-"),
+        ("A7AB", "A7AB-"),
+        ("A7AD", "A7AD-"),
+        ("A7AE", "A7AE-"),
+    ]
+    for prefix, replacement in replacements:
+        if token.startswith(prefix):
+            return replacement + token[len(prefix) :]
+    return normalize_stage_id(text)
+
+
 def stage_from_runtime_dir(path: Path) -> str:
     name = path.name
     m = re.match(r"^(a7[a-z0-9]+)", name, flags=re.IGNORECASE)
@@ -190,7 +213,9 @@ def find_reports() -> list[Path]:
 
 
 def report_stage_id(path: Path) -> str:
-    return normalize_stage_id(path.stem)
+    stem = re.sub(r"^CRYPTO_", "", path.stem, flags=re.IGNORECASE)
+    token = stem.split("_", 1)[0]
+    return normalize_compact_stage_token(token)
 
 
 def stage_root(compact_stage: str) -> str:

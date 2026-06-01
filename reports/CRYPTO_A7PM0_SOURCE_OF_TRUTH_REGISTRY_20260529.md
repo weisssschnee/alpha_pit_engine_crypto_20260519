@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T18:22:10Z
+Generated: 2026-06-01T18:30:34Z
 
 ## Decision
 
@@ -11,36 +11,33 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
+## main...origin/main
+ M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
+ M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
+ M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE26DER_NON_S0_REPAIR_FORENSIC_20260602.md
-?? reports/CRYPTO_A7FFCORE26DE_NON_S0_LANE_REPAIR_PROBE_20260602.md
-?? reports/CRYPTO_A7FFCORE27X_SEARCH_READINESS_ARBITRATION_20260602.md
-?? reports/CRYPTO_A7FFCORE28_OBJECTIVE_DATA_FAMILY_RESET_CONTRACT_20260602.md
-?? runtime/a7ffcore26de_non_s0_lane_repair_probe/
-?? runtime/a7ffcore26der_non_s0_repair_forensic/
-?? runtime/a7ffcore27x_search_readiness_arbitration/
-?? runtime/a7ffcore28_objective_data_family_reset_contract/
-?? scripts/crypto_a7ffcore26de_non_s0_lane_repair_probe.py
-?? scripts/crypto_a7ffcore26der_non_s0_repair_forensic.py
-?? scripts/crypto_a7ffcore27x_search_readiness_arbitration.py
-?? scripts/crypto_a7ffcore28_objective_data_family_reset_contract.py
-HEAD=ca8d85dc0f12add4cf38f3eadfe0466472ebdc8d
-origin/main=8b5373a68d8e06f1ab2190bb9edd25278d8bafe6
-HEAD == origin/main: False
+?? reports/CRYPTO_A7FFCORE28E_INDEPENDENT_DATA_FAMILY_ATLAS_AUDIT_20260602.md
+?? runtime/a7ffcore28e_independent_data_family_atlas_audit/
+?? scripts/crypto_a7ffcore28e_independent_data_family_atlas_audit.py
+HEAD=aede318298f07b6d303de670e6921d30ed177db1
+origin/main=aede318298f07b6d303de670e6921d30ed177db1
+HEAD == origin/main: True
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3554,
+  "artifact_count": 3561,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -54,12 +51,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T18:22:10Z",
-  "head": "ca8d85dc0f12add4cf38f3eadfe0466472ebdc8d",
-  "head_equals_origin_main": false,
-  "origin_main": "8b5373a68d8e06f1ab2190bb9edd25278d8bafe6",
+  "generated_at": "2026-06-01T18:30:34Z",
+  "head": "aede318298f07b6d303de670e6921d30ed177db1",
+  "head_equals_origin_main": true,
+  "origin_main": "aede318298f07b6d303de670e6921d30ed177db1",
   "stage": "A7PM-0",
-  "stage_count": 362
+  "stage_count": 363
 }
 ```
 
@@ -79,7 +76,7 @@ HEAD == origin/main: False
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |      89 |
+| valid_or_historical_record   | contract                   |      90 |
 | valid_or_historical_record   | diagnostic                 |      22 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

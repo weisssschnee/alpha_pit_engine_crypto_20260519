@@ -1,0 +1,33 @@
+{
+  "a7aif4_promoted_family_count": 1,
+  "authorizes_alpha_proof": false,
+  "authorizes_core29_contract": true,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blocked_family_ids": [
+    "F0_positioning_price_basis_s0",
+    "F2b_positioning_ratios_diagnostic",
+    "F3_liquidity_volume_state",
+    "F4_cross_exchange_forward_context",
+    "F5_new_liquidation_orderbook_contract"
+  ],
+  "candidate_family_ids": [
+    "F1a_aggtrades_flow_microstructure",
+    "F1b_taker_flow_market_panel",
+    "F2a_basis_funding_independent"
+  ],
+  "decision": "PASS_A7FFCORE28E_INDEPENDENT_DATA_FAMILY_ATLAS_READY_FOR_CORE29_CONTRACT",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "family_count": 8,
+  "generated_at": "2026-06-01T18:30:26Z",
+  "independent_ready_family_count": 3,
+  "next_allowed": "A7FF-CORE29 independent family bounded generation/probe contract",
+  "ready_for_core29_family_count": 3,
+  "source_decision": "PASS_A7FFCORE28_OBJECTIVE_DATA_FAMILY_RESET_CONTRACT_READY_FOR_CORE28E",
+  "source_stage": "A7FF-CORE28",
+  "stage": "A7FF-CORE28E"
+}
