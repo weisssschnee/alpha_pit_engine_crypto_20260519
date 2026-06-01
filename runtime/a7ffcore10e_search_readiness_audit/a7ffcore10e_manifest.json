@@ -1,0 +1,18 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core11_contract": true,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE10E_READY_FOR_CORE11_SMALL_SEARCH_CONTRACT",
+  "executes_search": false,
+  "generated_at": "2026-06-01T00:04:04Z",
+  "large_search_contract_ready": false,
+  "motif_bucket_count": 6,
+  "next_allowed": "A7FF-CORE11 small gate-native formula expansion contract",
+  "seed_candidate_count": 23,
+  "semantic_bucket_count": 8,
+  "small_search_contract_ready": true,
+  "source_decision": "PASS_A7FFCORE10R_BALANCED_POOL_READY_FOR_SEARCH_READINESS_AUDIT",
+  "source_stage": "A7FF-CORE10R",
+  "stage": "A7FF-CORE10E"
+}

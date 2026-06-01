@@ -1,0 +1,20 @@
+{
+  "allowed_next_stage": "A7FF-CORE10E search-readiness audit",
+  "candidate_count": 27,
+  "not_authorized": [
+    "formula_search",
+    "large_search",
+    "alpha_proof",
+    "shadow",
+    "paper",
+    "live"
+  ],
+  "required_before_any_search_contract": [
+    "verify expression/materialization parity for clean pool",
+    "verify split-level replay rows and cost buckets for clean pool",
+    "verify control dominance by candidate and by family",
+    "verify no single family/motif concentration",
+    "define search budget, grammar, negative controls, and rollback gates"
+  ],
+  "source_pool": "runtime\\a7ffcore10_replay_clean_consolidation\\a7ffcore10_replay_clean_candidate_pool.csv"
+}

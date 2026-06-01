@@ -44,6 +44,7 @@ A7FFCORE8 = REPO / "runtime" / "a7ffcore8_numeric_clue_consolidation" / "a7ffcor
 A7FFCORE8E = REPO / "runtime" / "a7ffcore8e_replay_preflight_packet_audit" / "a7ffcore8e_manifest.json"
 A7FFCORE9 = REPO / "runtime" / "a7ffcore9_bounded_replay_contract" / "a7ffcore9_manifest.json"
 A7FFCORE9E = REPO / "runtime" / "a7ffcore9e_bounded_replay" / "a7ffcore9e_manifest.json"
+A7FFCORE10E = REPO / "runtime" / "a7ffcore10e_search_readiness_audit" / "a7ffcore10e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -96,12 +97,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore8e = read_json(A7FFCORE8E)
     a7ffcore9 = read_json(A7FFCORE9)
     a7ffcore9e = read_json(A7FFCORE9E)
+    a7ffcore10e = read_json(A7FFCORE10E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore9e.get("decision") == "PASS_A7FFCORE9E_BOUNDED_REPLAY_CLEAN_CANDIDATES_READY_FOR_CORE10":
+    if a7ffcore10e.get("decision") == "PASS_A7FFCORE10E_READY_FOR_CORE11_SMALL_SEARCH_CONTRACT":
+        allowed["A7FF-CORE11 small gate-native formula expansion contract"] = (
+            "contract only; define small expansion from 23 replay-clean seeds; no execution until contract is written"
+        )
+        blocked["A7FF large search"] = "blocked: CORE10E large-search gates failed; seed_count < 64 and breadth < large-search minimum"
+        blocked["A7FF-CORE10E rerun"] = "search readiness audit passed for small contract; rerun only if clean pool changes"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE10E gate-native search-readiness path"
+        current_stage = "A7FF-CORE10E"
+        status = "ready_for_core11_small_search_contract_not_large_search"
+        next_task = "A7FF-CORE11 small gate-native formula expansion contract"
+    elif a7ffcore9e.get("decision") == "PASS_A7FFCORE9E_BOUNDED_REPLAY_CLEAN_CANDIDATES_READY_FOR_CORE10":
         allowed["A7FF-CORE10 replay-clean consolidation / search-readiness contract"] = (
             "contract only; consolidate CORE9E replay-clean candidates and define search-readiness gates; no formula search or promotion"
         )

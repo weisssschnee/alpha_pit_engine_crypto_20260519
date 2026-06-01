@@ -1,0 +1,6 @@
+gate,pass
+min_balanced_candidates_16,True
+min_semantic_buckets_6,True
+min_motif_buckets_5,True
+top_semantic_share_lte_035,True
+top_motif_share_lte_035,True

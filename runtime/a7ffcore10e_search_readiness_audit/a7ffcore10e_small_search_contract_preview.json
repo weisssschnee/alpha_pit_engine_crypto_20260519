@@ -1,0 +1,26 @@
+{
+  "allowed_budget": {
+    "bounded_replay": 64,
+    "generated_total": 4000,
+    "materialization_preflight": 512,
+    "numeric_response": 256
+  },
+  "next_stage": "A7FF-CORE11 small gate-native formula expansion contract",
+  "not_authorized": [
+    "large_search",
+    "alpha_proof",
+    "shadow",
+    "paper",
+    "live"
+  ],
+  "required_constraints": [
+    "use CORE typed AST and subgraph gate only",
+    "derive from replay-clean seed semantic/motif families",
+    "preserve sign_flip diagnostic-only control policy",
+    "primary labels only: L1/L3/L5",
+    "no May, no stale artifacts, no direct legacy generator bypass",
+    "family/motif cap before replay"
+  ],
+  "seed_candidate_count": 23,
+  "seed_pool": "runtime\\a7ffcore10r_replay_clean_pool_repair\\a7ffcore10r_balanced_replay_clean_pool.csv"
+}

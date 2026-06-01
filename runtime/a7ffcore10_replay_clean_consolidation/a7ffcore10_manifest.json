@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core10e": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "top_semantic_share_lte_035",
+    "top_motif_share_lte_035"
+  ],
+  "clean_candidate_count": 27,
+  "decision": "HOLD_A7FFCORE10_REPLAY_CLEAN_POOL_WEAK",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T00:00:46Z",
+  "motif_bucket_count": 6,
+  "next_allowed": "A7FF-CORE10R replay-clean pool repair",
+  "semantic_bucket_count": 8,
+  "source_decision": "PASS_A7FFCORE9E_BOUNDED_REPLAY_CLEAN_CANDIDATES_READY_FOR_CORE10",
+  "source_stage": "A7FF-CORE9E",
+  "stage": "A7FF-CORE10",
+  "top_motif_bucket_share": 0.37037037037037035,
+  "top_semantic_bucket_share": 0.37037037037037035
+}

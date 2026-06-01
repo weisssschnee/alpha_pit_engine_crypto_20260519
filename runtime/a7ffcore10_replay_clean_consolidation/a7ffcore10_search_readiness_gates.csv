@@ -1,0 +1,8 @@
+gate,pass
+min_clean_candidates_16,True
+min_semantic_buckets_6,True
+min_motif_buckets_5,True
+top_semantic_share_lte_035,False
+top_motif_share_lte_035,False
+core9e_eval_errors_zero,True
+bounded_replay_only,True

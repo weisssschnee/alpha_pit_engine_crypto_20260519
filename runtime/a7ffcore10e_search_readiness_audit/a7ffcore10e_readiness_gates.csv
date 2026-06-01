@@ -1,0 +1,10 @@
+scope,gate,pass
+small_search_contract,seed_count_gte_16,True
+small_search_contract,semantic_buckets_gte_6,True
+small_search_contract,motif_buckets_gte_5,True
+small_search_contract,top_semantic_share_lte_035,True
+small_search_contract,top_motif_share_lte_035,True
+small_search_contract,all_from_gate_native_core_path,True
+large_search_contract,seed_count_gte_64,False
+large_search_contract,semantic_buckets_gte_10,False
+large_search_contract,motif_buckets_gte_8,False
