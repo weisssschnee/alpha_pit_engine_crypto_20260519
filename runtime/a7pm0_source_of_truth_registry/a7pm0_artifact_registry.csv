@@ -3267,45 +3267,68 @@ runtime,A7FF-CORE46,runtime/a7ffcore46_orthogonal_failure_route_arbitration/a7ff
 runtime,A7FF-CORE46,runtime/a7ffcore46_orthogonal_failure_route_arbitration/a7ffcore46_manifest.json,239ad4c,add crypto core43e through core46 orthogonal controls,828
 runtime,A7FF-CORE46,runtime/a7ffcore46_orthogonal_failure_route_arbitration/a7ffcore46_route_options.csv,239ad4c,add crypto core43e through core46 orthogonal controls,573
 runtime,A7FF-CORE46,runtime/a7ffcore46_orthogonal_failure_route_arbitration/a7ffcore46_selected_route.json,239ad4c,add crypto core43e through core46 orthogonal controls,393
-report,A7FF-CORE47,reports/CRYPTO_A7FFCORE47_CONTROL_NULL_AWARE_FACTOR_COMPILER_CONTRACT_20260602.md,,,6676
-runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_authorization_matrix.json,,,343
-runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_blocked_patterns.csv,,,344
-runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_compiler_principles.csv,,,693
-runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_generation_funnel.csv,,,686
-runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_manifest.json,,,759
-runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_next_audit_plan.csv,,,305
-runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_score_contract.csv,,,778
-report,A7FF-CORE47E,reports/CRYPTO_A7FFCORE47E_COMPILER_READINESS_AUDIT_20260602.md,,,7376
-runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_authorization_matrix.json,,,334
-runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_gap_matrix.csv,,,531
-runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_generation_readiness.csv,,,443
-runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_input_inventory.csv,,,975
-runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_manifest.json,,,759
-runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_readiness_matrix.csv,,,710
-report,A7FF-CORE48,reports/CRYPTO_A7FFCORE48_NULL_FIRST_SEED_GENERATION_CONTRACT_20260602.md,,,7215
-runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_authorization_matrix.json,,,288
-runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_execution_plan.csv,,,292
-runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_generation_lanes.csv,,,568
-runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_hard_gates.csv,,,705
-runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_input_sources.csv,,,734
-runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_manifest.json,,,683
-runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_pass_gate.csv,,,292
-runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_seed_output_schema.csv,,,328
-report,A7FF-CORE48E,reports/CRYPTO_A7FFCORE48E_NULL_FIRST_DRY_SEED_GENERATION_20260602.md,,,42486
-runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_authorization_matrix.json,,,350
-runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_eligible_seed_queue.csv,,,402832
-runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_family_operator_summary.csv,,,3117
-runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_generated_seed_pool.csv,,,408850
-runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_manifest.json,,,838
-runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_quality_gate.csv,,,267
-runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_reject_reason_summary.csv,,,79
-report,A7FF-CORE48R,reports/CRYPTO_A7FFCORE48R_DRY_SEED_GENERATION_FORENSIC_20260602.md,,,4666
-runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_family_forensic.csv,,,587
-runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_family_operator_source_summary.csv,,,3117
-runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_gate_forensic.csv,,,359
-runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_manifest.json,,,849
-runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_operator_forensic.csv,,,144
-runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_route_options.csv,,,379
+report,A7FF-CORE47,reports/CRYPTO_A7FFCORE47_CONTROL_NULL_AWARE_FACTOR_COMPILER_CONTRACT_20260602.md,33e53d7,add crypto core47 through core48r null first compiler,6676
+runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_authorization_matrix.json,33e53d7,add crypto core47 through core48r null first compiler,343
+runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_blocked_patterns.csv,33e53d7,add crypto core47 through core48r null first compiler,344
+runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_compiler_principles.csv,33e53d7,add crypto core47 through core48r null first compiler,693
+runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_generation_funnel.csv,33e53d7,add crypto core47 through core48r null first compiler,686
+runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_manifest.json,33e53d7,add crypto core47 through core48r null first compiler,759
+runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_next_audit_plan.csv,33e53d7,add crypto core47 through core48r null first compiler,305
+runtime,A7FF-CORE47,runtime/a7ffcore47_control_null_aware_factor_compiler_contract/a7ffcore47_score_contract.csv,33e53d7,add crypto core47 through core48r null first compiler,778
+report,A7FF-CORE47E,reports/CRYPTO_A7FFCORE47E_COMPILER_READINESS_AUDIT_20260602.md,33e53d7,add crypto core47 through core48r null first compiler,7376
+runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_authorization_matrix.json,33e53d7,add crypto core47 through core48r null first compiler,334
+runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_gap_matrix.csv,33e53d7,add crypto core47 through core48r null first compiler,531
+runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_generation_readiness.csv,33e53d7,add crypto core47 through core48r null first compiler,443
+runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_input_inventory.csv,33e53d7,add crypto core47 through core48r null first compiler,975
+runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_manifest.json,33e53d7,add crypto core47 through core48r null first compiler,759
+runtime,A7FF-CORE47E,runtime/a7ffcore47e_compiler_readiness_audit/a7ffcore47e_readiness_matrix.csv,33e53d7,add crypto core47 through core48r null first compiler,710
+report,A7FF-CORE48,reports/CRYPTO_A7FFCORE48_NULL_FIRST_SEED_GENERATION_CONTRACT_20260602.md,33e53d7,add crypto core47 through core48r null first compiler,7215
+runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_authorization_matrix.json,33e53d7,add crypto core47 through core48r null first compiler,288
+runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_execution_plan.csv,33e53d7,add crypto core47 through core48r null first compiler,292
+runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_generation_lanes.csv,33e53d7,add crypto core47 through core48r null first compiler,568
+runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_hard_gates.csv,33e53d7,add crypto core47 through core48r null first compiler,705
+runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_input_sources.csv,33e53d7,add crypto core47 through core48r null first compiler,734
+runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_manifest.json,33e53d7,add crypto core47 through core48r null first compiler,683
+runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_pass_gate.csv,33e53d7,add crypto core47 through core48r null first compiler,292
+runtime,A7FF-CORE48,runtime/a7ffcore48_null_first_seed_generation_contract/a7ffcore48_seed_output_schema.csv,33e53d7,add crypto core47 through core48r null first compiler,328
+report,A7FF-CORE48E,reports/CRYPTO_A7FFCORE48E_NULL_FIRST_DRY_SEED_GENERATION_20260602.md,33e53d7,add crypto core47 through core48r null first compiler,42486
+runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_authorization_matrix.json,33e53d7,add crypto core47 through core48r null first compiler,350
+runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_eligible_seed_queue.csv,33e53d7,add crypto core47 through core48r null first compiler,402832
+runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_family_operator_summary.csv,33e53d7,add crypto core47 through core48r null first compiler,3117
+runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_generated_seed_pool.csv,33e53d7,add crypto core47 through core48r null first compiler,408850
+runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_manifest.json,33e53d7,add crypto core47 through core48r null first compiler,838
+runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_quality_gate.csv,33e53d7,add crypto core47 through core48r null first compiler,267
+runtime,A7FF-CORE48E,runtime/a7ffcore48e_null_first_dry_seed_generation/a7ffcore48e_reject_reason_summary.csv,33e53d7,add crypto core47 through core48r null first compiler,79
+report,A7FF-CORE48R,reports/CRYPTO_A7FFCORE48R_DRY_SEED_GENERATION_FORENSIC_20260602.md,33e53d7,add crypto core47 through core48r null first compiler,4666
+runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_family_forensic.csv,33e53d7,add crypto core47 through core48r null first compiler,587
+runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_family_operator_source_summary.csv,33e53d7,add crypto core47 through core48r null first compiler,3117
+runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_gate_forensic.csv,33e53d7,add crypto core47 through core48r null first compiler,359
+runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_manifest.json,33e53d7,add crypto core47 through core48r null first compiler,849
+runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_operator_forensic.csv,33e53d7,add crypto core47 through core48r null first compiler,144
+runtime,A7FF-CORE48R,runtime/a7ffcore48r_dry_seed_generation_forensic/a7ffcore48r_route_options.csv,33e53d7,add crypto core47 through core48r null first compiler,379
+report,A7FF-CORE48S,reports/CRYPTO_A7FFCORE48S_OPERATOR_NULL_COVERAGE_REPAIR_CONTRACT_20260602.md,,,5184
+runtime,A7FF-CORE48S,runtime/a7ffcore48s_operator_null_coverage_repair_contract/a7ffcore48s_authorization_matrix.json,,,290
+runtime,A7FF-CORE48S,runtime/a7ffcore48s_operator_null_coverage_repair_contract/a7ffcore48s_execution_plan.csv,,,300
+runtime,A7FF-CORE48S,runtime/a7ffcore48s_operator_null_coverage_repair_contract/a7ffcore48s_manifest.json,,,815
+runtime,A7FF-CORE48S,runtime/a7ffcore48s_operator_null_coverage_repair_contract/a7ffcore48s_operator_repair_set.csv,,,709
+runtime,A7FF-CORE48S,runtime/a7ffcore48s_operator_null_coverage_repair_contract/a7ffcore48s_repair_policy.csv,,,600
+runtime,A7FF-CORE48S,runtime/a7ffcore48s_operator_null_coverage_repair_contract/a7ffcore48s_repaired_gate.csv,,,237
+report,A7FF-CORE48SE,reports/CRYPTO_A7FFCORE48SE_REPAIRED_NULL_FIRST_DRY_GENERATION_20260602.md,,,53817
+runtime,A7FF-CORE48SE,runtime/a7ffcore48se_repaired_null_first_dry_generation/a7ffcore48se_authorization_matrix.json,,,350
+runtime,A7FF-CORE48SE,runtime/a7ffcore48se_repaired_null_first_dry_generation/a7ffcore48se_eligible_seed_queue.csv,,,718290
+runtime,A7FF-CORE48SE,runtime/a7ffcore48se_repaired_null_first_dry_generation/a7ffcore48se_family_summary.csv,,,2150
+runtime,A7FF-CORE48SE,runtime/a7ffcore48se_repaired_null_first_dry_generation/a7ffcore48se_full_repaired_seed_pool.csv,,,40300420
+runtime,A7FF-CORE48SE,runtime/a7ffcore48se_repaired_null_first_dry_generation/a7ffcore48se_manifest.json,,,910
+runtime,A7FF-CORE48SE,runtime/a7ffcore48se_repaired_null_first_dry_generation/a7ffcore48se_operator_summary.csv,,,444
+runtime,A7FF-CORE48SE,runtime/a7ffcore48se_repaired_null_first_dry_generation/a7ffcore48se_quality_gate.csv,,,283
+report,A7FF-CORE49,reports/CRYPTO_A7FFCORE49_FULL_UNIVERSE_NULL_VECTOR_PREFLIGHT_CONTRACT_20260602.md,,,8111
+runtime,A7FF-CORE49,runtime/a7ffcore49_full_universe_null_vector_preflight_contract/a7ffcore49_authorization_matrix.json,,,295
+runtime,A7FF-CORE49,runtime/a7ffcore49_full_universe_null_vector_preflight_contract/a7ffcore49_execution_policy.csv,,,721
+runtime,A7FF-CORE49,runtime/a7ffcore49_full_universe_null_vector_preflight_contract/a7ffcore49_input_sources.csv,,,843
+runtime,A7FF-CORE49,runtime/a7ffcore49_full_universe_null_vector_preflight_contract/a7ffcore49_manifest.json,,,821
+runtime,A7FF-CORE49,runtime/a7ffcore49_full_universe_null_vector_preflight_contract/a7ffcore49_preflight_shard_plan.csv,,,610
+runtime,A7FF-CORE49,runtime/a7ffcore49_full_universe_null_vector_preflight_contract/a7ffcore49_quality_gate.csv,,,241
+runtime,A7FF-CORE49,runtime/a7ffcore49_full_universe_null_vector_preflight_contract/a7ffcore49_vector_output_schema.csv,,,556
 report,A7FF-CORE5,reports/CRYPTO_A7FFCORE5_GATE_NATIVE_GENERATION_DRYRUN_20260601.md,7011a15,add crypto a7ffcore5 gate native dryrun,4601
 runtime,A7FF-CORE5,runtime/a7ffcore5_gate_native_generation_dryrun/a7ffcore5_gate_native_candidate_queue.csv,7011a15,add crypto a7ffcore5 gate native dryrun,869288
 runtime,A7FF-CORE5,runtime/a7ffcore5_gate_native_generation_dryrun/a7ffcore5_gate_summary.csv,7011a15,add crypto a7ffcore5 gate native dryrun,167
@@ -3666,14 +3689,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,239ad4c,add crypto core43e through core46 orthogonal controls,6710
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,239ad4c,add crypto core43e through core46 orthogonal controls,594184
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,239ad4c,add crypto core43e through core46 orthogonal controls,113267
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,33e53d7,add crypto core47 through core48r null first compiler,6524
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,33e53d7,add crypto core47 through core48r null first compiler,599951
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,33e53d7,add crypto core47 through core48r null first compiler,114803
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,239ad4c,add crypto core43e through core46 orthogonal controls,239843
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,239ad4c,add crypto core43e through core46 orthogonal controls,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,33e53d7,add crypto core47 through core48r null first compiler,242270
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,33e53d7,add crypto core47 through core48r null first compiler,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,239ad4c,add crypto core43e through core46 orthogonal controls,131346
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,33e53d7,add crypto core47 through core48r null first compiler,132784
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3691,12 +3714,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,239ad4c,add crypto core43e through core46 orthogonal controls,5340
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,239ad4c,add crypto core43e through core46 orthogonal controls,387
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,239ad4c,add crypto core43e through core46 orthogonal controls,326
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,239ad4c,add crypto core43e through core46 orthogonal controls,1427
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,239ad4c,add crypto core43e through core46 orthogonal controls,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,239ad4c,add crypto core43e through core46 orthogonal controls,425
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,33e53d7,add crypto core47 through core48r null first compiler,5635
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,33e53d7,add crypto core47 through core48r null first compiler,391
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,33e53d7,add crypto core47 through core48r null first compiler,379
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,33e53d7,add crypto core47 through core48r null first compiler,1471
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,33e53d7,add crypto core47 through core48r null first compiler,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,33e53d7,add crypto core47 through core48r null first compiler,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

@@ -1,0 +1,12 @@
+field,required,description
+seed_id,True,CORE48SE seed id
+timestamp,True,feature timestamp
+symbol,True,symbol
+original_signal,True,materialized candidate signal
+stale_signal,True,stale/wrong-lag control vector
+sign_flip_signal,True,sign-flip control vector
+time_shuffle_signal,True,time-shuffle control vector
+symbol_shuffle_signal,True,symbol-shuffle control vector
+null_margin,True,original-vs-null vector margin proxy
+role_gate_status,True,field/candidate role enforcement status
+materialization_status,True,expression materialization status

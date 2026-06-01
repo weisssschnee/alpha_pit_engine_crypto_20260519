@@ -1,0 +1,8 @@
+gate,threshold,observed
+seed_queue_present,true,True
+seed_count,>= 1800,1800
+semantic_family_count,>= 30,39
+operator_count,>= 7,7
+preflight_shard_count,>= 12,12
+executes_numeric_replay,false,False
+executes_formula_search,false,False

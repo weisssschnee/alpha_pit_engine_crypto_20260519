@@ -1,0 +1,6 @@
+input_id,path,role,required
+I0_core48se_seed_queue,runtime/a7ffcore48se_repaired_null_first_dry_generation/a7ffcore48se_eligible_seed_queue.csv,source-of-truth repaired null-first seed queue,True
+I1_universe498_panel,G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v2_20260527,full-universe feature panel for vector construction,True
+I2_label_contract,runtime/a7aa0_label_universe/a7aa0_label_contract.csv,label family and horizon contract for preflight bookkeeping only,True
+I3_field_enforcement_ledger,runtime/a7aif2_field_enforcement_regression/a7aif2_historical_candidate_role_reclassification.csv,role-aware field/candidate enforcement source,True
+I4_materialization_parity,runtime/a7aif3_materialization_evaluator_parity/a7aif3_operator_parity_matrix.csv,approved operator materialization parity source,True

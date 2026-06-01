@@ -1,0 +1,13 @@
+{
+  "authorized": {
+    "A7FF-CORE48SE repaired null-first dry seed generation": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "formula_search": true,
+    "large_search": true,
+    "numeric_replay": true,
+    "promotion": true,
+    "shadow_paper_live": true
+  }
+}

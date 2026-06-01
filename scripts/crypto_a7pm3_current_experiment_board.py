@@ -160,6 +160,9 @@ A7FFCORE47E = REPO / "runtime" / "a7ffcore47e_compiler_readiness_audit" / "a7ffc
 A7FFCORE48 = REPO / "runtime" / "a7ffcore48_null_first_seed_generation_contract" / "a7ffcore48_manifest.json"
 A7FFCORE48E = REPO / "runtime" / "a7ffcore48e_null_first_dry_seed_generation" / "a7ffcore48e_manifest.json"
 A7FFCORE48R = REPO / "runtime" / "a7ffcore48r_dry_seed_generation_forensic" / "a7ffcore48r_manifest.json"
+A7FFCORE48S = REPO / "runtime" / "a7ffcore48s_operator_null_coverage_repair_contract" / "a7ffcore48s_manifest.json"
+A7FFCORE48SE = REPO / "runtime" / "a7ffcore48se_repaired_null_first_dry_generation" / "a7ffcore48se_manifest.json"
+A7FFCORE49 = REPO / "runtime" / "a7ffcore49_full_universe_null_vector_preflight_contract" / "a7ffcore49_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -328,12 +331,59 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore48 = read_json(A7FFCORE48)
     a7ffcore48e = read_json(A7FFCORE48E)
     a7ffcore48r = read_json(A7FFCORE48R)
+    a7ffcore48s = read_json(A7FFCORE48S)
+    a7ffcore48se = read_json(A7FFCORE48SE)
+    a7ffcore49 = read_json(A7FFCORE49)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore48r.get("decision") == "PASS_A7FFCORE48R_DRY_SEED_FORENSIC_READY_FOR_CORE48S_OPERATOR_REPAIR":
+    if a7ffcore49.get("decision") == "PASS_A7FFCORE49_FULL_UNIVERSE_NULL_VECTOR_PREFLIGHT_CONTRACT_READY_FOR_CORE49E":
+        allowed["A7FF-CORE49E full-universe null-vector preflight execution"] = (
+            "vector preflight only; materialize original/null vectors over repaired seed queue; no replay, search, proof, or promotion"
+        )
+        blocked["A7FF large search"] = "blocked: CORE49 authorizes vector preflight only"
+        blocked["A7FF formula search"] = "blocked: CORE49E is null-vector preflight, not search"
+        blocked["numeric replay"] = "not authorized until CORE49E passes and a replay contract is written"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE49"
+        status = "full_universe_null_vector_preflight_contract_ready"
+        next_task = "A7FF-CORE49E full-universe null-vector preflight execution"
+    elif a7ffcore48se.get("decision") == "PASS_A7FFCORE48SE_REPAIRED_DRY_SEEDS_READY_FOR_CORE49_CONTRACT":
+        allowed["A7FF-CORE49 full-universe null-vector preflight contract"] = (
+            "contract only; define full-universe vector preflight over repaired null-first seed queue"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48SE authorizes CORE49 contract only"
+        blocked["A7FF formula search"] = "blocked: repaired dry seeds are not search candidates yet"
+        blocked["numeric replay"] = "not authorized until null-vector preflight and replay contract pass"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48SE"
+        status = "repaired_null_first_dry_seeds_ready_for_core49_contract"
+        next_task = "A7FF-CORE49 full-universe null-vector preflight contract"
+    elif a7ffcore48se.get("decision") == "HOLD_A7FFCORE48SE_REPAIRED_DRY_SEEDS_INSUFFICIENT":
+        allowed["A7FF-CORE48SER repaired dry seed forensic"] = (
+            "forensic only; classify repaired dry generation failure"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48SE repaired seed generation insufficient"
+        blocked["A7FF formula search"] = "blocked: repaired null-first seed queue not ready"
+        blocked["numeric replay"] = "not authorized"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48SE"
+        status = "repaired_null_first_dry_seed_generation_insufficient"
+        next_task = "A7FF-CORE48SER repaired dry seed forensic"
+    elif a7ffcore48s.get("decision") == "PASS_A7FFCORE48S_OPERATOR_NULL_COVERAGE_REPAIR_CONTRACT_READY_FOR_CORE48SE":
+        allowed["A7FF-CORE48SE repaired null-first dry seed generation"] = (
+            "bounded repaired dry generation only; no replay, search, proof, or promotion"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48S authorizes repaired dry generation only"
+        blocked["A7FF formula search"] = "blocked: CORE48SE is not search execution"
+        blocked["numeric replay"] = "not authorized until repaired seeds pass and CORE49 contract exists"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48S"
+        status = "operator_null_repair_contract_ready_for_core48se"
+        next_task = "A7FF-CORE48SE repaired null-first dry seed generation"
+    elif a7ffcore48r.get("decision") == "PASS_A7FFCORE48R_DRY_SEED_FORENSIC_READY_FOR_CORE48S_OPERATOR_REPAIR":
         allowed["A7FF-CORE48S operator-null coverage repair contract"] = (
             "contract only; repair native operator coverage before null-vector preflight"
         )

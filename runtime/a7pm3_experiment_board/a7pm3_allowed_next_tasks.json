@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE48S operator-null coverage repair contract": "contract only; repair native operator coverage before null-vector preflight",
+  "A7FF-CORE49E full-universe null-vector preflight execution": "vector preflight only; materialize original/null vectors over repaired seed queue; no replay, search, proof, or promotion",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

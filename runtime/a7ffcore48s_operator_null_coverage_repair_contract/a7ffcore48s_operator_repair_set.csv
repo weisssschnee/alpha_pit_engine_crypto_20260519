@@ -1,0 +1,5 @@
+operator,repair_status,economic_role,null_margin_proxy
+SpreadShortLong,authorized_for_repaired_native_probe,relative-value / slow-fast dislocation,"base semantic-type best native operator margin, capped by field best_control_ratio"
+WinsorZ,authorized_for_repaired_native_probe,shock clipping / robust delta state,"base semantic-type best native operator margin, capped by field best_control_ratio"
+AbsDelta,authorized_for_repaired_native_probe,magnitude dislocation without sign assumption,"Delta margin if available, otherwise field best_control_ratio"
+SignedRankDelta,authorized_for_repaired_native_probe,cross-sectional ranked delta with sign preservation,CSRank and Delta margin minimum if available

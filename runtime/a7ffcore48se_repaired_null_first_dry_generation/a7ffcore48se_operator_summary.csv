@@ -1,0 +1,8 @@
+operator,operator_origin,seed_count,semantic_family_count,min_null_margin
+CSRank,native,276,39,0.1077748962021696
+Delta,native,267,38,0.1077748962021696
+Identity,native,267,39,0.1077748962021696
+AbsDelta,repaired_native_proxy,248,39,0.1077748962021696
+SignedRankDelta,repaired_native_proxy,248,39,0.1077748962021696
+SpreadShortLong,repaired_native_proxy,247,39,0.1077748962021696
+WinsorZ,repaired_native_proxy,247,39,0.1077748962021696

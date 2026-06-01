@@ -1,0 +1,13 @@
+shard_id,seed_start_inclusive,seed_end_exclusive,max_seed_count,executes_replay,executes_search
+core49e_shard_00,0,150,150,False,False
+core49e_shard_01,150,300,150,False,False
+core49e_shard_02,300,450,150,False,False
+core49e_shard_03,450,600,150,False,False
+core49e_shard_04,600,750,150,False,False
+core49e_shard_05,750,900,150,False,False
+core49e_shard_06,900,1050,150,False,False
+core49e_shard_07,1050,1200,150,False,False
+core49e_shard_08,1200,1350,150,False,False
+core49e_shard_09,1350,1500,150,False,False
+core49e_shard_10,1500,1650,150,False,False
+core49e_shard_11,1650,1800,150,False,False

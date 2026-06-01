@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core48ser_forensic": false,
+  "authorizes_core49_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE48SE_REPAIRED_DRY_SEEDS_READY_FOR_CORE49_CONTRACT",
+  "eligible_operator_count": 7,
+  "eligible_seed_count": 1800,
+  "eligible_semantic_family_count": 39,
+  "executes_generation": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T21:24:23Z",
+  "generated_seed_count": 107211,
+  "next_allowed": "A7FF-CORE49 full-universe null-vector preflight contract",
+  "repair_operator_share": 0.55,
+  "source_decision": "PASS_A7FFCORE48S_OPERATOR_NULL_COVERAGE_REPAIR_CONTRACT_READY_FOR_CORE48SE",
+  "source_stage": "A7FF-CORE48S",
+  "stage": "A7FF-CORE48SE"
+}

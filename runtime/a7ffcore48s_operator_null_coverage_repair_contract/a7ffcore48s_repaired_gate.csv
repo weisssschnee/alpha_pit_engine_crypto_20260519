@@ -1,0 +1,9 @@
+gate,threshold
+generated_seed_count,>= 1200
+eligible_seed_count,>= 360
+semantic_family_count,>= 8
+operator_count,>= 5
+motif_cap_violation_count,0
+family_cap_violation_count,0
+role_violation_count,0
+repair_operator_share,<= 0.55

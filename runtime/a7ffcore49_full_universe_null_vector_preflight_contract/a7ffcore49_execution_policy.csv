@@ -1,0 +1,6 @@
+policy_id,description,hard_requirement
+P0_vector_preflight_only,"CORE49E may materialize original and null vectors but may not calculate portfolio replay, promotion, or alpha proof",True
+P1_full_universe_required,"preflight must use the full available universe panel, not a hand-picked symbol subset",True
+P2_null_vectors_required,"every retained seed must include stale, sign-flip, time-shuffle, and symbol-shuffle vectors",True
+P3_fail_closed_on_role_or_materialization,"missing field contracts, role violations, or unsupported operators fail closed",True
+P4_external_large_artifacts,large vector parquet outputs must stay under G:/AlphaFactory_CryptoData/research_runtime and be referenced by manifest only,True

@@ -1,0 +1,3 @@
+stage,action,executes_generation,executes_replay,executes_search,max_seed_count
+A7FF-CORE48SE,run bounded repaired null-first dry generation with expanded operator set,True,False,False,1800.0
+A7FF-CORE49,"if CORE48SE passes, define full-universe null-vector preflight contract",False,False,False,

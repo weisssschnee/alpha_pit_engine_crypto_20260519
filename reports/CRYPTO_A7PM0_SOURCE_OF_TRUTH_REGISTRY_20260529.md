@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T21:15:19Z
+Generated: 2026-06-01T21:27:15Z
 
 ## Decision
 
@@ -25,23 +25,17 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE47E_COMPILER_READINESS_AUDIT_20260602.md
-?? reports/CRYPTO_A7FFCORE47_CONTROL_NULL_AWARE_FACTOR_COMPILER_CONTRACT_20260602.md
-?? reports/CRYPTO_A7FFCORE48E_NULL_FIRST_DRY_SEED_GENERATION_20260602.md
-?? reports/CRYPTO_A7FFCORE48R_DRY_SEED_GENERATION_FORENSIC_20260602.md
-?? reports/CRYPTO_A7FFCORE48_NULL_FIRST_SEED_GENERATION_CONTRACT_20260602.md
-?? runtime/a7ffcore47_control_null_aware_factor_compiler_contract/
-?? runtime/a7ffcore47e_compiler_readiness_audit/
-?? runtime/a7ffcore48_null_first_seed_generation_contract/
-?? runtime/a7ffcore48e_null_first_dry_seed_generation/
-?? runtime/a7ffcore48r_dry_seed_generation_forensic/
-?? scripts/crypto_a7ffcore47_control_null_aware_factor_compiler_contract.py
-?? scripts/crypto_a7ffcore47e_compiler_readiness_audit.py
-?? scripts/crypto_a7ffcore48_null_first_seed_generation_contract.py
-?? scripts/crypto_a7ffcore48e_null_first_dry_seed_generation.py
-?? scripts/crypto_a7ffcore48r_dry_seed_generation_forensic.py
-HEAD=239ad4c8b94ab0bfede04f4cae5c8e0b462d6416
-origin/main=239ad4c8b94ab0bfede04f4cae5c8e0b462d6416
+?? reports/CRYPTO_A7FFCORE48SE_REPAIRED_NULL_FIRST_DRY_GENERATION_20260602.md
+?? reports/CRYPTO_A7FFCORE48S_OPERATOR_NULL_COVERAGE_REPAIR_CONTRACT_20260602.md
+?? reports/CRYPTO_A7FFCORE49_FULL_UNIVERSE_NULL_VECTOR_PREFLIGHT_CONTRACT_20260602.md
+?? runtime/a7ffcore48s_operator_null_coverage_repair_contract/
+?? runtime/a7ffcore48se_repaired_null_first_dry_generation/
+?? runtime/a7ffcore49_full_universe_null_vector_preflight_contract/
+?? scripts/crypto_a7ffcore48s_operator_null_coverage_repair_contract.py
+?? scripts/crypto_a7ffcore48se_repaired_null_first_dry_generation.py
+?? scripts/crypto_a7ffcore49_full_universe_null_vector_preflight_contract.py
+HEAD=33e53d771454828eebaaf76f6c53de90a31d800e
+origin/main=33e53d771454828eebaaf76f6c53de90a31d800e
 HEAD == origin/main: True
 ```
 
@@ -49,8 +43,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 3873,
-  "authorization_record_count": 754,
+  "artifact_count": 3896,
+  "authorization_record_count": 760,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -63,12 +57,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T21:15:19Z",
-  "head": "239ad4c8b94ab0bfede04f4cae5c8e0b462d6416",
+  "generated_at": "2026-06-01T21:27:15Z",
+  "head": "33e53d771454828eebaaf76f6c53de90a31d800e",
   "head_equals_origin_main": true,
-  "origin_main": "239ad4c8b94ab0bfede04f4cae5c8e0b462d6416",
+  "origin_main": "33e53d771454828eebaaf76f6c53de90a31d800e",
   "stage": "A7PM-0",
-  "stage_count": 405
+  "stage_count": 408
 }
 ```
 
@@ -88,7 +82,7 @@ HEAD == origin/main: True
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     144 |
-| valid_or_historical_record   | contract                   |     117 |
+| valid_or_historical_record   | contract                   |     120 |
 | valid_or_historical_record   | diagnostic                 |      27 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

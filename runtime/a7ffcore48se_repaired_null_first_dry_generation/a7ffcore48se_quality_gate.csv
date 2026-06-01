@@ -1,0 +1,9 @@
+metric,value,pass
+generated_seed_count,107211.0,True
+eligible_seed_count,1800.0,True
+semantic_family_count,39.0,True
+operator_count,7.0,True
+motif_cap_violation_count,0.0,True
+family_cap_violation_count,0.0,True
+role_violation_count,0.0,True
+repair_operator_share,0.55,True

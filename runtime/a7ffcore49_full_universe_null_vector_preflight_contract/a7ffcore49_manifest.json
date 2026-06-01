@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core49e_preflight_execution": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE49_FULL_UNIVERSE_NULL_VECTOR_PREFLIGHT_CONTRACT_READY_FOR_CORE49E",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T21:26:27Z",
+  "next_allowed": "A7FF-CORE49E full-universe null-vector preflight execution",
+  "operator_count": 7,
+  "preflight_shard_count": 12,
+  "seed_count": 1800,
+  "semantic_family_count": 39,
+  "source_decision": "PASS_A7FFCORE48SE_REPAIRED_DRY_SEEDS_READY_FOR_CORE49_CONTRACT",
+  "source_stage": "A7FF-CORE48SE",
+  "stage": "A7FF-CORE49"
+}
