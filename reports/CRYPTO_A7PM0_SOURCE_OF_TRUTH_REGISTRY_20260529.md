@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T20:33:11Z
+Generated: 2026-06-01T20:34:12Z
 
 ## Decision
 
@@ -11,50 +11,13 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
- M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
+## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
- M runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv
- M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
- M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
- M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
- M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE39E_SYMBOL_LEVEL_BOOK_PACKET_AUDIT_20260602.md
-?? reports/CRYPTO_A7FFCORE40ER_BOOK_REPLAY_FORENSIC_20260602.md
-?? reports/CRYPTO_A7FFCORE40E_BOOK_OBJECTIVE_REPLAY_EXECUTION_20260602.md
-?? reports/CRYPTO_A7FFCORE40_BOOK_OBJECTIVE_REPLAY_CONTRACT_20260602.md
-?? reports/CRYPTO_A7FFCORE41ER_BOOK_CONTROL_REPAIR_FORENSIC_20260602.md
-?? reports/CRYPTO_A7FFCORE41E_BOOK_CONTROL_REPAIR_EXECUTION_20260602.md
-?? reports/CRYPTO_A7FFCORE41_BOOK_CONTROL_REPAIR_CONTRACT_20260602.md
-?? reports/CRYPTO_A7FFCORE42_BOOK_CONTROL_ROUTE_ARBITRATION_20260602.md
-?? reports/CRYPTO_A7FFCORE43_CONTROL_ORTHOGONALIZATION_CONTRACT_20260602.md
-?? runtime/a7ffcore39e_symbol_level_book_packet_audit/
-?? runtime/a7ffcore40_book_objective_replay_contract/
-?? runtime/a7ffcore40e_book_objective_replay_execution/
-?? runtime/a7ffcore40er_book_replay_forensic/
-?? runtime/a7ffcore41_book_control_repair_contract/
-?? runtime/a7ffcore41e_book_control_repair_execution/
-?? runtime/a7ffcore41er_book_control_repair_forensic/
-?? runtime/a7ffcore42_book_control_route_arbitration/
-?? runtime/a7ffcore43_control_orthogonalization_contract/
-?? scripts/crypto_a7ffcore39e_symbol_level_book_packet_audit.py
-?? scripts/crypto_a7ffcore40_book_objective_replay_contract.py
-?? scripts/crypto_a7ffcore40e_book_objective_replay_execution.py
-?? scripts/crypto_a7ffcore40er_book_replay_forensic.py
-?? scripts/crypto_a7ffcore41_book_control_repair_contract.py
-?? scripts/crypto_a7ffcore41e_book_control_repair_execution.py
-?? scripts/crypto_a7ffcore41er_book_control_repair_forensic.py
-?? scripts/crypto_a7ffcore42_book_control_route_arbitration.py
-?? scripts/crypto_a7ffcore43_control_orthogonalization_contract.py
-HEAD=827def932e11aaf498b84f5c2af913958e1f49c7
-origin/main=3de2747ad35a2bd7c3e378158ea8ad6d868b8512
-HEAD == origin/main: False
+HEAD=41fa38a0d5de4c0688fc59bd0e1adfcb850d103d
+origin/main=41fa38a0d5de4c0688fc59bd0e1adfcb850d103d
+HEAD == origin/main: True
 ```
 
 ## Manifest
@@ -75,10 +38,10 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T20:33:11Z",
-  "head": "827def932e11aaf498b84f5c2af913958e1f49c7",
-  "head_equals_origin_main": false,
-  "origin_main": "3de2747ad35a2bd7c3e378158ea8ad6d868b8512",
+  "generated_at": "2026-06-01T20:34:12Z",
+  "head": "41fa38a0d5de4c0688fc59bd0e1adfcb850d103d",
+  "head_equals_origin_main": true,
+  "origin_main": "41fa38a0d5de4c0688fc59bd0e1adfcb850d103d",
   "stage": "A7PM-0",
   "stage_count": 393
 }

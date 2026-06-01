@@ -3141,80 +3141,80 @@ runtime,A7FF-CORE39,runtime/a7ffcore39_symbol_level_book_packet_contract/a7ffcor
 runtime,A7FF-CORE39,runtime/a7ffcore39_symbol_level_book_packet_contract/a7ffcore39_manifest.json,827def9,add crypto core39 symbol level book packet contract,660
 runtime,A7FF-CORE39,runtime/a7ffcore39_symbol_level_book_packet_contract/a7ffcore39_packet_build_requirements.csv,827def9,add crypto core39 symbol level book packet contract,615
 runtime,A7FF-CORE39,runtime/a7ffcore39_symbol_level_book_packet_contract/a7ffcore39_symbol_level_packet_schema.csv,827def9,add crypto core39 symbol level book packet contract,1355
-report,A7FF-CORE39E,reports/CRYPTO_A7FFCORE39E_SYMBOL_LEVEL_BOOK_PACKET_AUDIT_20260602.md,,,13915
-runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_candidate_score_diagnostics.csv,,,2431
-runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_dataset_summary.csv,,,224
-runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_manifest.json,,,881
-runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_packet_artifact_manifest.csv,,,226
-runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_packet_quality_audit.csv,,,242
-runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_shard_plan.csv,,,5132
+report,A7FF-CORE39E,reports/CRYPTO_A7FFCORE39E_SYMBOL_LEVEL_BOOK_PACKET_AUDIT_20260602.md,41fa38a,add crypto core39e through core43 book controls,13915
+runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_candidate_score_diagnostics.csv,41fa38a,add crypto core39e through core43 book controls,2431
+runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_dataset_summary.csv,41fa38a,add crypto core39e through core43 book controls,224
+runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_manifest.json,41fa38a,add crypto core39e through core43 book controls,881
+runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_packet_artifact_manifest.csv,41fa38a,add crypto core39e through core43 book controls,226
+runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_packet_quality_audit.csv,41fa38a,add crypto core39e through core43 book controls,242
+runtime,A7FF-CORE39E,runtime/a7ffcore39e_symbol_level_book_packet_audit/a7ffcore39e_shard_plan.csv,41fa38a,add crypto core39e through core43 book controls,5132
 report,A7FF-CORE4,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_entrypoint_policy.csv,97cf90e,add crypto a7ffcore4 gate regression,2751
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_entrypoint_route_summary.csv,97cf90e,add crypto a7ffcore4 gate regression,252
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_gate_regression_cases.csv,97cf90e,add crypto a7ffcore4 gate regression,20142
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_manifest.json,97cf90e,add crypto a7ffcore4 gate regression,983
 runtime,A7FF-CORE4,runtime/a7ffcore4_gate_implementation_regression/a7ffcore4_regression_summary.csv,97cf90e,add crypto a7ffcore4 gate regression,264
-report,A7FF-CORE40,reports/CRYPTO_A7FFCORE40_BOOK_OBJECTIVE_REPLAY_CONTRACT_20260602.md,,,4460
-runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_authorization_matrix.json,,,265
-runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_book_objectives.csv,,,261
-runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_execution_scope.csv,,,335
-runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_manifest.json,,,812
-runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_replay_gates.csv,,,528
-runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_source_packet_quality_snapshot.csv,,,240
-report,A7FF-CORE40E,reports/CRYPTO_A7FFCORE40E_BOOK_OBJECTIVE_REPLAY_EXECUTION_20260602.md,,,13812
-runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_book_replay_all_variants.csv,,,330860
-runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_book_replay_original_vs_controls.csv,,,148238
-runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_candidate_summary.csv,,,4768
-runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_family_summary.csv,,,492
-runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_manifest.json,,,739
-runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_objective_summary.csv,,,420
-runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_split_balance.csv,,,8762
-runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_survivors.csv,,,365
-report,A7FF-CORE40ER,reports/CRYPTO_A7FFCORE40ER_BOOK_REPLAY_FORENSIC_20260602.md,,,7247
-runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_authorization_matrix.csv,,,446
-runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_candidate_failure_classification.csv,,,5188
-runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_failure_counts.csv,,,397
-runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_family_summary_snapshot.csv,,,482
-runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_manifest.json,,,708
-runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_objective_forensic.csv,,,491
-runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_objective_summary_snapshot.csv,,,409
-runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_split_objective_forensic.csv,,,1583
-report,A7FF-CORE41,reports/CRYPTO_A7FFCORE41_BOOK_CONTROL_REPAIR_CONTRACT_20260602.md,,,5198
-runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_authorization_matrix.json,,,255
-runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_control_repair_policy.csv,,,639
-runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_execution_scope.csv,,,270
-runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_gate_contract.csv,,,483
-runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_manifest.json,,,657
-runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_source_objective_forensic_snapshot.csv,,,491
-report,A7FF-CORE41E,reports/CRYPTO_A7FFCORE41E_BOOK_CONTROL_REPAIR_EXECUTION_20260602.md,,,10922
-runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_candidate_summary.csv,,,3158
-runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_family_summary.csv,,,479
-runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_manifest.json,,,712
-runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_orientation_summary.csv,,,2115
-runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_repaired_book_rows.csv,,,170293
-runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_split_summary.csv,,,8884
-runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_survivors.csv,,,401
-report,A7FF-CORE41ER,reports/CRYPTO_A7FFCORE41ER_BOOK_CONTROL_REPAIR_FORENSIC_20260602.md,,,4330
-runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_authorization_matrix.csv,,,499
-runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_candidate_forensic_classification.csv,,,3637
-runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_failure_counts.csv,,,263
-runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_family_summary_snapshot.csv,,,470
-runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_manifest.json,,,781
-runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_partial_survivor_snapshot.csv,,,439
-report,A7FF-CORE42,reports/CRYPTO_A7FFCORE42_BOOK_CONTROL_ROUTE_ARBITRATION_20260602.md,,,4737
-runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_authorized_next.csv,,,232
-runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_failure_counts_snapshot.csv,,,263
-runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_frozen_paths.csv,,,297
-runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_manifest.json,,,780
-runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_partial_survivor_snapshot.csv,,,439
-runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_route_scorecard.csv,,,486
-report,A7FF-CORE43,reports/CRYPTO_A7FFCORE43_CONTROL_ORTHOGONALIZATION_CONTRACT_20260602.md,,,4728
-runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_authorization_matrix.json,,,284
-runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_current_input_audit.csv,,,300
-runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_execution_plan.csv,,,285
-runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_manifest.json,,,632
-runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_orthogonalization_policy.csv,,,659
-runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_required_control_vector_packet.csv,,,410
+report,A7FF-CORE40,reports/CRYPTO_A7FFCORE40_BOOK_OBJECTIVE_REPLAY_CONTRACT_20260602.md,41fa38a,add crypto core39e through core43 book controls,4460
+runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_authorization_matrix.json,41fa38a,add crypto core39e through core43 book controls,265
+runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_book_objectives.csv,41fa38a,add crypto core39e through core43 book controls,261
+runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_execution_scope.csv,41fa38a,add crypto core39e through core43 book controls,335
+runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_manifest.json,41fa38a,add crypto core39e through core43 book controls,812
+runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_replay_gates.csv,41fa38a,add crypto core39e through core43 book controls,528
+runtime,A7FF-CORE40,runtime/a7ffcore40_book_objective_replay_contract/a7ffcore40_source_packet_quality_snapshot.csv,41fa38a,add crypto core39e through core43 book controls,240
+report,A7FF-CORE40E,reports/CRYPTO_A7FFCORE40E_BOOK_OBJECTIVE_REPLAY_EXECUTION_20260602.md,41fa38a,add crypto core39e through core43 book controls,13812
+runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_book_replay_all_variants.csv,41fa38a,add crypto core39e through core43 book controls,330860
+runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_book_replay_original_vs_controls.csv,41fa38a,add crypto core39e through core43 book controls,148238
+runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_candidate_summary.csv,41fa38a,add crypto core39e through core43 book controls,4768
+runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_family_summary.csv,41fa38a,add crypto core39e through core43 book controls,492
+runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_manifest.json,41fa38a,add crypto core39e through core43 book controls,739
+runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_objective_summary.csv,41fa38a,add crypto core39e through core43 book controls,420
+runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_split_balance.csv,41fa38a,add crypto core39e through core43 book controls,8762
+runtime,A7FF-CORE40E,runtime/a7ffcore40e_book_objective_replay_execution/a7ffcore40e_survivors.csv,41fa38a,add crypto core39e through core43 book controls,365
+report,A7FF-CORE40ER,reports/CRYPTO_A7FFCORE40ER_BOOK_REPLAY_FORENSIC_20260602.md,41fa38a,add crypto core39e through core43 book controls,7247
+runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_authorization_matrix.csv,41fa38a,add crypto core39e through core43 book controls,446
+runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_candidate_failure_classification.csv,41fa38a,add crypto core39e through core43 book controls,5188
+runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_failure_counts.csv,41fa38a,add crypto core39e through core43 book controls,397
+runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_family_summary_snapshot.csv,41fa38a,add crypto core39e through core43 book controls,482
+runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_manifest.json,41fa38a,add crypto core39e through core43 book controls,708
+runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_objective_forensic.csv,41fa38a,add crypto core39e through core43 book controls,491
+runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_objective_summary_snapshot.csv,41fa38a,add crypto core39e through core43 book controls,409
+runtime,A7FF-CORE40ER,runtime/a7ffcore40er_book_replay_forensic/a7ffcore40er_split_objective_forensic.csv,41fa38a,add crypto core39e through core43 book controls,1583
+report,A7FF-CORE41,reports/CRYPTO_A7FFCORE41_BOOK_CONTROL_REPAIR_CONTRACT_20260602.md,41fa38a,add crypto core39e through core43 book controls,5198
+runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_authorization_matrix.json,41fa38a,add crypto core39e through core43 book controls,255
+runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_control_repair_policy.csv,41fa38a,add crypto core39e through core43 book controls,639
+runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_execution_scope.csv,41fa38a,add crypto core39e through core43 book controls,270
+runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_gate_contract.csv,41fa38a,add crypto core39e through core43 book controls,483
+runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_manifest.json,41fa38a,add crypto core39e through core43 book controls,657
+runtime,A7FF-CORE41,runtime/a7ffcore41_book_control_repair_contract/a7ffcore41_source_objective_forensic_snapshot.csv,41fa38a,add crypto core39e through core43 book controls,491
+report,A7FF-CORE41E,reports/CRYPTO_A7FFCORE41E_BOOK_CONTROL_REPAIR_EXECUTION_20260602.md,41fa38a,add crypto core39e through core43 book controls,10922
+runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_candidate_summary.csv,41fa38a,add crypto core39e through core43 book controls,3158
+runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_family_summary.csv,41fa38a,add crypto core39e through core43 book controls,479
+runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_manifest.json,41fa38a,add crypto core39e through core43 book controls,712
+runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_orientation_summary.csv,41fa38a,add crypto core39e through core43 book controls,2115
+runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_repaired_book_rows.csv,41fa38a,add crypto core39e through core43 book controls,170293
+runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_split_summary.csv,41fa38a,add crypto core39e through core43 book controls,8884
+runtime,A7FF-CORE41E,runtime/a7ffcore41e_book_control_repair_execution/a7ffcore41e_survivors.csv,41fa38a,add crypto core39e through core43 book controls,401
+report,A7FF-CORE41ER,reports/CRYPTO_A7FFCORE41ER_BOOK_CONTROL_REPAIR_FORENSIC_20260602.md,41fa38a,add crypto core39e through core43 book controls,4330
+runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_authorization_matrix.csv,41fa38a,add crypto core39e through core43 book controls,499
+runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_candidate_forensic_classification.csv,41fa38a,add crypto core39e through core43 book controls,3637
+runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_failure_counts.csv,41fa38a,add crypto core39e through core43 book controls,263
+runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_family_summary_snapshot.csv,41fa38a,add crypto core39e through core43 book controls,470
+runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_manifest.json,41fa38a,add crypto core39e through core43 book controls,781
+runtime,A7FF-CORE41ER,runtime/a7ffcore41er_book_control_repair_forensic/a7ffcore41er_partial_survivor_snapshot.csv,41fa38a,add crypto core39e through core43 book controls,439
+report,A7FF-CORE42,reports/CRYPTO_A7FFCORE42_BOOK_CONTROL_ROUTE_ARBITRATION_20260602.md,41fa38a,add crypto core39e through core43 book controls,4737
+runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_authorized_next.csv,41fa38a,add crypto core39e through core43 book controls,232
+runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_failure_counts_snapshot.csv,41fa38a,add crypto core39e through core43 book controls,263
+runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_frozen_paths.csv,41fa38a,add crypto core39e through core43 book controls,297
+runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_manifest.json,41fa38a,add crypto core39e through core43 book controls,780
+runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_partial_survivor_snapshot.csv,41fa38a,add crypto core39e through core43 book controls,439
+runtime,A7FF-CORE42,runtime/a7ffcore42_book_control_route_arbitration/a7ffcore42_route_scorecard.csv,41fa38a,add crypto core39e through core43 book controls,486
+report,A7FF-CORE43,reports/CRYPTO_A7FFCORE43_CONTROL_ORTHOGONALIZATION_CONTRACT_20260602.md,41fa38a,add crypto core39e through core43 book controls,4728
+runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_authorization_matrix.json,41fa38a,add crypto core39e through core43 book controls,284
+runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_current_input_audit.csv,41fa38a,add crypto core39e through core43 book controls,300
+runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_execution_plan.csv,41fa38a,add crypto core39e through core43 book controls,285
+runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_manifest.json,41fa38a,add crypto core39e through core43 book controls,632
+runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_orthogonalization_policy.csv,41fa38a,add crypto core39e through core43 book controls,659
+runtime,A7FF-CORE43,runtime/a7ffcore43_control_orthogonalization_contract/a7ffcore43_required_control_vector_packet.csv,41fa38a,add crypto core39e through core43 book controls,410
 report,A7FF-CORE5,reports/CRYPTO_A7FFCORE5_GATE_NATIVE_GENERATION_DRYRUN_20260601.md,7011a15,add crypto a7ffcore5 gate native dryrun,4601
 runtime,A7FF-CORE5,runtime/a7ffcore5_gate_native_generation_dryrun/a7ffcore5_gate_native_candidate_queue.csv,7011a15,add crypto a7ffcore5 gate native dryrun,869288
 runtime,A7FF-CORE5,runtime/a7ffcore5_gate_native_generation_dryrun/a7ffcore5_gate_summary.csv,7011a15,add crypto a7ffcore5 gate native dryrun,167
@@ -3575,14 +3575,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,827def9,add crypto core39 symbol level book packet contract,7826
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,827def9,add crypto core39 symbol level book packet contract,578871
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,827def9,add crypto core39 symbol level book packet contract,109314
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,41fa38a,add crypto core39e through core43 book controls,7826
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,41fa38a,add crypto core39e through core43 book controls,578871
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,41fa38a,add crypto core39e through core43 book controls,109314
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,827def9,add crypto core39 symbol level book packet contract,232616
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,827def9,add crypto core39 symbol level book packet contract,711
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,41fa38a,add crypto core39e through core43 book controls,232616
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,41fa38a,add crypto core39e through core43 book controls,711
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,827def9,add crypto core39 symbol level book packet contract,127696
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,41fa38a,add crypto core39e through core43 book controls,127696
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3600,12 +3600,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,827def9,add crypto core39 symbol level book packet contract,5439
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,827def9,add crypto core39 symbol level book packet contract,390
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,827def9,add crypto core39 symbol level book packet contract,341
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,827def9,add crypto core39 symbol level book packet contract,1499
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,827def9,add crypto core39 symbol level book packet contract,1306
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,827def9,add crypto core39 symbol level book packet contract,425
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,41fa38a,add crypto core39e through core43 book controls,5439
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,41fa38a,add crypto core39e through core43 book controls,390
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,41fa38a,add crypto core39e through core43 book controls,341
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,41fa38a,add crypto core39e through core43 book controls,1499
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,41fa38a,add crypto core39e through core43 book controls,1306
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,41fa38a,add crypto core39e through core43 book controls,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
