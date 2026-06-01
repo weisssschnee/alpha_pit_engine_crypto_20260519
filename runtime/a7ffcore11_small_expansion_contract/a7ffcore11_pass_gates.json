@@ -1,0 +1,9 @@
+{
+  "bounded_replay_clean_candidates_min": 16,
+  "bounded_replay_clean_motif_buckets_min": 5,
+  "bounded_replay_clean_semantic_buckets_min": 5,
+  "control_ratio_lt_1_required": true,
+  "large_search_authorization": false,
+  "materialization_eval_errors": 0,
+  "numeric_primary_non_l7_clue_candidates_min": 64
+}

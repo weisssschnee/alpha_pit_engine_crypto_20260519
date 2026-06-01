@@ -45,6 +45,7 @@ A7FFCORE8E = REPO / "runtime" / "a7ffcore8e_replay_preflight_packet_audit" / "a7
 A7FFCORE9 = REPO / "runtime" / "a7ffcore9_bounded_replay_contract" / "a7ffcore9_manifest.json"
 A7FFCORE9E = REPO / "runtime" / "a7ffcore9e_bounded_replay" / "a7ffcore9e_manifest.json"
 A7FFCORE10E = REPO / "runtime" / "a7ffcore10e_search_readiness_audit" / "a7ffcore10e_manifest.json"
+A7FFCORE11 = REPO / "runtime" / "a7ffcore11_small_expansion_contract" / "a7ffcore11_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -98,12 +99,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore9 = read_json(A7FFCORE9)
     a7ffcore9e = read_json(A7FFCORE9E)
     a7ffcore10e = read_json(A7FFCORE10E)
+    a7ffcore11 = read_json(A7FFCORE11)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore10e.get("decision") == "PASS_A7FFCORE10E_READY_FOR_CORE11_SMALL_SEARCH_CONTRACT":
+    if a7ffcore11.get("decision") == "PASS_A7FFCORE11_SMALL_EXPANSION_CONTRACT_READY_FOR_CORE11E":
+        allowed["A7FF-CORE11E small gate-native dry generation"] = (
+            "generate 4000 small-expansion formulas from replay-clean seeds under typed AST/subgraph gate; no materialization/numeric/replay/search promotion"
+        )
+        blocked["A7FF large search"] = "blocked: CORE11 only authorizes small dry generation, not large search"
+        blocked["A7FF-CORE11 materialization execution"] = "blocked until CORE11E dry generation produces a valid queue"
+        blocked["A7FF-CORE10E rerun"] = "search-readiness audit consumed by CORE11 contract"
+        current_stage = "A7FF-CORE11"
+        status = "small_expansion_contract_ready_for_core11e"
+        next_task = "A7FF-CORE11E small gate-native dry generation"
+    elif a7ffcore10e.get("decision") == "PASS_A7FFCORE10E_READY_FOR_CORE11_SMALL_SEARCH_CONTRACT":
         allowed["A7FF-CORE11 small gate-native formula expansion contract"] = (
             "contract only; define small expansion from 23 replay-clean seeds; no execution until contract is written"
         )

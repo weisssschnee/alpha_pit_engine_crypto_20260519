@@ -1,0 +1,36 @@
+{
+  "bounded_replay": 64,
+  "controls": [
+    "wrong_lag_future",
+    "wrong_lag_stale",
+    "time_shuffle",
+    "symbol_shuffle",
+    "same_family_placebo"
+  ],
+  "cost_bps": [
+    0,
+    2,
+    5,
+    10
+  ],
+  "generated_total": 4000,
+  "horizons": [
+    1,
+    4,
+    8,
+    24
+  ],
+  "materialization_preflight": 512,
+  "numeric_response": 256,
+  "primary_labels": [
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return"
+  ],
+  "selection_caps": {
+    "top_motif_bucket_share": 0.35,
+    "top_semantic_bucket_share": 0.35,
+    "top_signal_vector_cluster_share": 0.25,
+    "top_skeleton_share": 0.2
+  }
+}

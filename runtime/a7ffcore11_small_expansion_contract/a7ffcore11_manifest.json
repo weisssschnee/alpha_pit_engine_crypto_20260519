@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core11e": true,
+  "authorizes_large_search": false,
+  "authorizes_materialization_execution": false,
+  "authorizes_numeric_execution": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE11_SMALL_EXPANSION_CONTRACT_READY_FOR_CORE11E",
+  "executes_search": false,
+  "generated_at": "2026-06-01T00:11:24Z",
+  "generated_total_budget": 4000,
+  "motif_bucket_count": 6,
+  "next_allowed": "A7FF-CORE11E small gate-native dry generation",
+  "seed_candidate_count": 23,
+  "semantic_bucket_count": 8,
+  "source_decision": "PASS_A7FFCORE10E_READY_FOR_CORE11_SMALL_SEARCH_CONTRACT",
+  "source_stage": "A7FF-CORE10E",
+  "stage": "A7FF-CORE11"
+}

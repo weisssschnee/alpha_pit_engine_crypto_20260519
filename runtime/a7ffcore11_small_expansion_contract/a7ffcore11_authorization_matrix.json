@@ -1,0 +1,8 @@
+{
+  "A7FF-CORE11E small gate-native dry generation": true,
+  "A7FF-CORE11F materialization preflight": false,
+  "A7FF-CORE11G numeric response": false,
+  "alpha_proof": false,
+  "large_search": false,
+  "shadow_paper_live": false
+}

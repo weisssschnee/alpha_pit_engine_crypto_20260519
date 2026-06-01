@@ -1,0 +1,46 @@
+{
+  "allowed_transforms": [
+    "Mean",
+    "Delta",
+    "ZScore",
+    "Rank",
+    "CSRank",
+    "TSRank",
+    "SafeDiv",
+    "Mul",
+    "Sub",
+    "Add",
+    "Neg",
+    "Abs",
+    "Sign",
+    "Clip",
+    "Decay"
+  ],
+  "allowed_window_set": [
+    4,
+    8,
+    12,
+    24,
+    48,
+    72,
+    168,
+    336
+  ],
+  "forbidden": [
+    "raw expression construction bypassing typed AST gate",
+    "legacy quarantined generator entrypoints",
+    "May-informed thresholds or masks",
+    "label/future/target fields",
+    "sign_flip as max-control dominance",
+    "full open FormulaGenV2 grammar",
+    "large search budget"
+  ],
+  "mutation_modes": [
+    "window_neighbor",
+    "operator_neighbor",
+    "seed_field_sibling",
+    "semantic_pair_preserving_interaction",
+    "motif_preserving_simplification",
+    "motif_preserving_complexification_depth_lte_4"
+  ]
+}
