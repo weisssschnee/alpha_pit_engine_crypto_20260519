@@ -48,6 +48,7 @@ A7FFCORE10E = REPO / "runtime" / "a7ffcore10e_search_readiness_audit" / "a7ffcor
 A7FFCORE11 = REPO / "runtime" / "a7ffcore11_small_expansion_contract" / "a7ffcore11_manifest.json"
 A7FFCORE11E = REPO / "runtime" / "a7ffcore11e_small_dry_generation" / "a7ffcore11e_manifest.json"
 A7FFCORE12 = REPO / "runtime" / "a7ffcore12_blueprint_registration_audit" / "a7ffcore12_manifest.json"
+A7FFCORE12E = REPO / "runtime" / "a7ffcore12e_materialization_preflight" / "a7ffcore12e_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -104,12 +105,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore11 = read_json(A7FFCORE11)
     a7ffcore11e = read_json(A7FFCORE11E)
     a7ffcore12 = read_json(A7FFCORE12)
+    a7ffcore12e = read_json(A7FFCORE12E)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore12.get("decision") == "PASS_A7FFCORE12_TEMP_SUBGRAPH_REGISTRY_READY_FOR_CORE12E":
+    if a7ffcore12e.get("decision") == "PASS_A7FFCORE12E_MATERIALIZATION_PREFLIGHT_READY_FOR_CORE13":
+        allowed["A7FF-CORE13 numeric response contract"] = (
+            "contract only; define primary-label numeric response over CORE12E materialized temp subgraphs; no numeric execution/search/promotion"
+        )
+        blocked["A7FF-CORE12E rerun"] = "materialization preflight passed; rerun only if blueprint registry or evaluator changes"
+        blocked["A7FF-CORE12 direct numeric"] = "blocked: CORE12E authorizes CORE13 contract only"
+        blocked["A7FF large search"] = "blocked: CORE12E only authorizes numeric response contract"
+        current_stage = "A7FF-CORE12E"
+        status = "materialization_preflight_ready_for_core13"
+        next_task = "A7FF-CORE13 numeric response contract"
+    elif a7ffcore12.get("decision") == "PASS_A7FFCORE12_TEMP_SUBGRAPH_REGISTRY_READY_FOR_CORE12E":
         allowed["A7FF-CORE12E temp-subgraph materialization preflight"] = (
             "materialization/activity preflight for CORE12 temporary subgraphs; no numeric/replay/search/promotion"
         )

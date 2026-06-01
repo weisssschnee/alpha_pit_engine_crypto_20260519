@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core13": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FFCORE12E_MATERIALIZATION_PREFLIGHT_READY_FOR_CORE13",
+  "eval_error_count": 0,
+  "executes_materialization": true,
+  "executes_numeric": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T01:45:14Z",
+  "low_activity_count": 0,
+  "next_allowed": "A7FF-CORE13 numeric response contract",
+  "ok_count": 416,
+  "queue_count": 416,
+  "source_decision": "PASS_A7FFCORE12_TEMP_SUBGRAPH_REGISTRY_READY_FOR_CORE12E",
+  "source_stage": "A7FF-CORE12",
+  "stage": "A7FF-CORE12E"
+}
