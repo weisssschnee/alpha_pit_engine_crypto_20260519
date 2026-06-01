@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T15:29:52Z
+Generated: 2026-06-01T15:30:56Z
 
 ## Decision
 
@@ -11,35 +11,13 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
+## main...origin/main [ahead 1]
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
- M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
- M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE21E_REPLAY_TRANSLATION_MATRIX_AUDIT_20260601.md
-?? reports/CRYPTO_A7FFCORE21R_TRANSLATION_MATRIX_FORENSIC_20260601.md
-?? reports/CRYPTO_A7FFCORE22E_LAG_AWARE_REPLAY_TRANSLATION_AUDIT_20260601.md
-?? reports/CRYPTO_A7FFCORE22R_LAG_TRANSLATION_FORENSIC_20260601.md
-?? reports/CRYPTO_A7FFCORE22_LAG_AWARE_REPLAY_TRANSLATION_CONTRACT_20260601.md
-?? reports/CRYPTO_A7FFCORE23_EXECUTABLE_HORIZON_REDESIGN_CONTRACT_20260601.md
-?? runtime/a7ffcore21e_replay_translation_matrix_audit/
-?? runtime/a7ffcore21r_translation_matrix_forensic/
-?? runtime/a7ffcore22_lag_aware_replay_translation_contract/
-?? runtime/a7ffcore22e_lag_aware_replay_translation_audit/
-?? runtime/a7ffcore22r_lag_translation_forensic/
-?? runtime/a7ffcore23_executable_horizon_redesign_contract/
-?? scripts/crypto_a7ffcore21e_replay_translation_matrix_audit.py
-?? scripts/crypto_a7ffcore21r_translation_matrix_forensic.py
-?? scripts/crypto_a7ffcore22_lag_aware_replay_translation_contract.py
-?? scripts/crypto_a7ffcore22e_lag_aware_replay_translation_audit.py
-?? scripts/crypto_a7ffcore22r_lag_translation_forensic.py
-?? scripts/crypto_a7ffcore23_executable_horizon_redesign_contract.py
-HEAD=e4cf28443dee95f3d1e7c8bac4a223b05e79499a
+HEAD=d921a025396278e4b4aeb8032d56cba4143725e1
 origin/main=e4cf28443dee95f3d1e7c8bac4a223b05e79499a
-HEAD == origin/main: True
+HEAD == origin/main: False
 ```
 
 ## Manifest
@@ -60,9 +38,9 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T15:29:52Z",
-  "head": "e4cf28443dee95f3d1e7c8bac4a223b05e79499a",
-  "head_equals_origin_main": true,
+  "generated_at": "2026-06-01T15:30:56Z",
+  "head": "d921a025396278e4b4aeb8032d56cba4143725e1",
+  "head_equals_origin_main": false,
   "origin_main": "e4cf28443dee95f3d1e7c8bac4a223b05e79499a",
   "stage": "A7PM-0",
   "stage_count": 344
