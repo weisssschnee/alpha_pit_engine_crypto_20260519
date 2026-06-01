@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T01:46:48Z
+Generated: 2026-06-01T05:50:29Z
 
 ## Decision
 
@@ -12,13 +12,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
- M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
- M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=6b622c9a14bb3d1cbc930a833d856ce3da7eb335
-origin/main=6b622c9a14bb3d1cbc930a833d856ce3da7eb335
+HEAD=d42375b80a2f8e5d289502a51014ab82166fa442
+origin/main=d42375b80a2f8e5d289502a51014ab82166fa442
 HEAD == origin/main: True
 ```
 
@@ -26,8 +21,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2748,
-  "authorization_record_count": 708,
+  "artifact_count": 2797,
+  "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -40,12 +35,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T01:46:48Z",
-  "head": "6b622c9a14bb3d1cbc930a833d856ce3da7eb335",
+  "generated_at": "2026-06-01T05:50:29Z",
+  "head": "d42375b80a2f8e5d289502a51014ab82166fa442",
   "head_equals_origin_main": true,
-  "origin_main": "6b622c9a14bb3d1cbc930a833d856ce3da7eb335",
+  "origin_main": "d42375b80a2f8e5d289502a51014ab82166fa442",
   "stage": "A7PM-0",
-  "stage_count": 294
+  "stage_count": 301
 }
 ```
 
@@ -58,14 +53,14 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      50 |
+| hold                         | hold                       |      51 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     135 |
-| valid_or_historical_record   | contract                   |      64 |
+| valid_or_historical_record   | governance_or_audit        |     138 |
+| valid_or_historical_record   | contract                   |      67 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | diagnostic                 |       7 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
