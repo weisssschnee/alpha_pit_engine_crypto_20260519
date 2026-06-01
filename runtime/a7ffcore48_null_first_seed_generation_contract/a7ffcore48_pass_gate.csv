@@ -1,0 +1,8 @@
+gate,threshold
+generated_seed_count,>= 400 bounded dry seeds
+eligible_seed_count,>= 120 null-first eligible seeds
+semantic_family_count,>= 5 eligible semantic families
+operator_count,>= 4 eligible operators
+role_violation_count,0
+missing_contract_count,0
+family_cap_violation_count,0

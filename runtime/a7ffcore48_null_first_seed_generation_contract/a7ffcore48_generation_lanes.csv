@@ -1,0 +1,5 @@
+lane_id,description,max_seed_count,requires_pair
+N0_single_field_operator_seed,single field x operator seeds with non-L7 response and control/null margin evidence,360,False
+N1_role_compatible_pair_seed,semantic-compatible field pairs after both sides have response evidence,360,True
+N2_regime_conditioned_seed,ordinary-alpha seed conditioned by regime/neutralizer fields without promoting those fields as standalone alpha,240,True
+N3_control_repair_seed,near-miss response rows explicitly redesigned to improve original-vs-stale/sign/shuffle separation,240,False

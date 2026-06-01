@@ -1,0 +1,9 @@
+metric,value,pass
+generated_seed_count,1200,True
+eligible_seed_count,1200,True
+semantic_family_count,12,True
+operator_count,3,False
+role_violation_count,0,True
+missing_contract_count,0,True
+family_cap_violation_count,0,True
+motif_cap_violation_count,3,False

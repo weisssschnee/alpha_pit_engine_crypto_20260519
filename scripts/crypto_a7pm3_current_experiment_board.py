@@ -155,6 +155,11 @@ A7FFCORE45 = REPO / "runtime" / "a7ffcore45_orthogonal_book_replay_contract" / "
 A7FFCORE45E = REPO / "runtime" / "a7ffcore45e_orthogonal_book_replay_execution" / "a7ffcore45e_manifest.json"
 A7FFCORE45R = REPO / "runtime" / "a7ffcore45r_orthogonal_book_replay_forensic" / "a7ffcore45r_manifest.json"
 A7FFCORE46 = REPO / "runtime" / "a7ffcore46_orthogonal_failure_route_arbitration" / "a7ffcore46_manifest.json"
+A7FFCORE47 = REPO / "runtime" / "a7ffcore47_control_null_aware_factor_compiler_contract" / "a7ffcore47_manifest.json"
+A7FFCORE47E = REPO / "runtime" / "a7ffcore47e_compiler_readiness_audit" / "a7ffcore47e_manifest.json"
+A7FFCORE48 = REPO / "runtime" / "a7ffcore48_null_first_seed_generation_contract" / "a7ffcore48_manifest.json"
+A7FFCORE48E = REPO / "runtime" / "a7ffcore48e_null_first_dry_seed_generation" / "a7ffcore48e_manifest.json"
+A7FFCORE48R = REPO / "runtime" / "a7ffcore48r_dry_seed_generation_forensic" / "a7ffcore48r_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -318,12 +323,93 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore45e = read_json(A7FFCORE45E)
     a7ffcore45r = read_json(A7FFCORE45R)
     a7ffcore46 = read_json(A7FFCORE46)
+    a7ffcore47 = read_json(A7FFCORE47)
+    a7ffcore47e = read_json(A7FFCORE47E)
+    a7ffcore48 = read_json(A7FFCORE48)
+    a7ffcore48e = read_json(A7FFCORE48E)
+    a7ffcore48r = read_json(A7FFCORE48R)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore46.get("decision") == "PASS_A7FFCORE46_ROUTE_ARBITRATION_READY_FOR_CORE47_CONTRACT":
+    if a7ffcore48r.get("decision") == "PASS_A7FFCORE48R_DRY_SEED_FORENSIC_READY_FOR_CORE48S_OPERATOR_REPAIR":
+        allowed["A7FF-CORE48S operator-null coverage repair contract"] = (
+            "contract only; repair native operator coverage before null-vector preflight"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48R authorizes operator coverage repair contract only"
+        blocked["A7FF formula search"] = "blocked: operator/motif coverage insufficient"
+        blocked["numeric replay"] = "not authorized"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48R"
+        status = "dry_seed_forensic_ready_for_operator_repair_contract"
+        next_task = "A7FF-CORE48S operator-null coverage repair contract"
+    elif a7ffcore48e.get("decision") == "PASS_A7FFCORE48E_NULL_FIRST_DRY_SEEDS_READY_FOR_CORE49_CONTRACT":
+        allowed["A7FF-CORE49 full-universe null-vector preflight contract"] = (
+            "contract only; define vector preflight over null-first eligible seed queue"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48E authorizes CORE49 contract only"
+        blocked["A7FF formula search"] = "blocked: CORE48E dry seeds are not search candidates yet"
+        blocked["numeric replay"] = "not authorized until null-vector preflight and later replay contract pass"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48E"
+        status = "null_first_dry_seeds_ready_for_core49_contract"
+        next_task = "A7FF-CORE49 full-universe null-vector preflight contract"
+    elif a7ffcore48e.get("decision") == "HOLD_A7FFCORE48E_NULL_FIRST_DRY_SEEDS_INSUFFICIENT":
+        allowed["A7FF-CORE48R dry seed generation forensic"] = (
+            "forensic only; diagnose dry seed insufficiency before any preflight/replay"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48E dry seed generation insufficient"
+        blocked["A7FF formula search"] = "blocked: null-first eligible seed supply insufficient"
+        blocked["numeric replay"] = "not authorized"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48E"
+        status = "null_first_dry_seed_generation_insufficient"
+        next_task = "A7FF-CORE48R dry seed generation forensic"
+    elif a7ffcore48.get("decision") == "PASS_A7FFCORE48_NULL_FIRST_SEED_GENERATION_CONTRACT_READY_FOR_CORE48E":
+        allowed["A7FF-CORE48E bounded null-first dry seed generation"] = (
+            "bounded dry generation only; no replay, search, proof, or promotion"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48 authorizes bounded dry generation only"
+        blocked["A7FF formula search"] = "blocked: CORE48E is seed generation/preflight, not formula search"
+        blocked["numeric replay"] = "not authorized until CORE49 or later"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48"
+        status = "null_first_seed_generation_contract_ready_for_core48e"
+        next_task = "A7FF-CORE48E bounded null-first dry seed generation"
+    elif a7ffcore47e.get("decision") == "PASS_A7FFCORE47E_COMPILER_READINESS_READY_FOR_CORE48_CONTRACT":
+        allowed["A7FF-CORE48 bounded null-first factor seed generation contract"] = (
+            "contract only; define bounded null-first seed generation after compiler readiness passes"
+        )
+        blocked["A7FF large search"] = "blocked: CORE47E authorizes CORE48 contract only"
+        blocked["A7FF formula generation/search"] = "blocked until CORE48 and later execution gates explicitly authorize bounded generation"
+        blocked["current candidate expansion"] = "not authorized: CORE46/47 freeze remains active"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE47E"
+        status = "compiler_readiness_ready_for_core48_contract"
+        next_task = "A7FF-CORE48 bounded null-first factor seed generation contract"
+    elif a7ffcore47e.get("decision") == "HOLD_A7FFCORE47E_COMPILER_READINESS_GAPS":
+        allowed["A7FF-CORE47E repair / rerun"] = (
+            "audit repair only; close readiness gaps before any null-first generation contract"
+        )
+        blocked["A7FF large search"] = "blocked: CORE47E readiness gaps"
+        blocked["A7FF formula generation/search"] = "blocked: compiler readiness incomplete"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE47E"
+        status = "compiler_readiness_gaps"
+        next_task = "A7FF-CORE47E repair / rerun"
+    elif a7ffcore47.get("decision") == "PASS_A7FFCORE47_CONTROL_NULL_AWARE_COMPILER_CONTRACT_READY_FOR_CORE47E":
+        allowed["A7FF-CORE47E control-null-aware compiler readiness audit"] = (
+            "audit only; verify existing artifacts can support null-first field/operator/factor compilation"
+        )
+        blocked["A7FF large search"] = "blocked: CORE47 authorizes readiness audit only"
+        blocked["A7FF formula generation/search"] = "blocked until control-null-aware compiler readiness passes and later generation contract exists"
+        blocked["current candidate expansion"] = "not authorized: CORE47 keeps CORE46 freeze active"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE47"
+        status = "control_null_compiler_contract_ready_for_core47e"
+        next_task = "A7FF-CORE47E control-null-aware compiler readiness audit"
+    elif a7ffcore46.get("decision") == "PASS_A7FFCORE46_ROUTE_ARBITRATION_READY_FOR_CORE47_CONTRACT":
         allowed["A7FF-CORE47 control-null-aware feature-to-factor compiler contract"] = (
             "contract only; redesign future generation around original-vs-null separability before replay"
         )

@@ -1,0 +1,13 @@
+{
+  "authorized": {
+    "A7FF-CORE48 bounded null-first factor seed generation contract": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "current_candidate_expansion": true,
+    "formula_search": true,
+    "large_search": true,
+    "null_first_generation_execution": true,
+    "shadow_paper_live": true
+  }
+}

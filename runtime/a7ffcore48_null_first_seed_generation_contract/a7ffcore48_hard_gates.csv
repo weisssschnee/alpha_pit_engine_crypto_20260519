@@ -1,0 +1,9 @@
+gate,requirement
+field_contract_present,all fields must exist in ontology/enforcement ledger
+role_allowed,diagnostic/risk-defense fields cannot be standalone alpha seeds
+non_l7_response_required,seed must have non-L7 response evidence or be marked diagnostic-only
+control_margin_required,operator/field evidence must show original signal weaker controls are not dominant
+full_universe_vector_required,CORE48E must output original/stale/sign/time/symbol score vector fields
+family_cap,no semantic family may exceed 35 percent of selected seeds
+motif_cap,no operator/motif may exceed 25 percent of selected seeds
+no_known_stress_score,known stress/May-like labels are forbidden in generation score

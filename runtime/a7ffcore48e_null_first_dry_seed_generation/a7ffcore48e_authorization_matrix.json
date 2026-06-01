@@ -1,0 +1,14 @@
+{
+  "authorized": {
+    "A7FF-CORE48R dry seed generation forensic": true,
+    "A7FF-CORE49 full-universe null-vector preflight contract": false
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "formula_search": true,
+    "large_search": true,
+    "numeric_replay": true,
+    "promotion": true,
+    "shadow_paper_live": true
+  }
+}

@@ -1,0 +1,4 @@
+route_id,decision,reason
+R0_relax_operator_gate,REJECT,would admit unprobed operators into eligible null-first queue
+R1_proceed_to_core49,REJECT,eligible seed queue has only three native operators and motif caps fail
+R2_operator_null_coverage_repair_contract,SELECT,field/family breadth is adequate; repair missing native null-aware operator coverage before vector preflight

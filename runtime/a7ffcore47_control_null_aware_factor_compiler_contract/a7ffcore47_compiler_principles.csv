@@ -1,0 +1,6 @@
+principle_id,description,hard_requirement
+C0_null_first,feature-to-factor candidates must expose original-vs-null separability before replay or book selection,True
+C1_full_universe_vectors,"candidate scoring must be evaluated on full timestamp-symbol score vectors, not selected top/bottom rows",True
+C2_role_typed_generation,"signal, regime, neutralizer, and risk-defense fields must remain role-tagged through compilation",True
+C3_response_before_interaction,single-field/operator response and null-separation evidence must exist before pairwise interaction expansion,True
+C4_portfolio_marginal_later,book/replay reward can only be used after null-separation and role checks pass,True

@@ -1,0 +1,13 @@
+semantic_pair,seed_count,operator_count,seed_share
+basis_premium_like|positioning_like,285,3,0.2375
+basis_premium_like|liquidity_like,225,3,0.1875
+basis_premium_like|basis_premium_like,210,3,0.175
+basis_premium_like|volatility_like,114,3,0.095
+basis_premium_like|state_or_taxonomy,90,3,0.075
+basis_premium_like|price_like,90,3,0.075
+basis_premium_like|generic_numeric,90,3,0.075
+basis_premium_like|funding_like,30,3,0.025
+liquidity_like|price_like,30,3,0.025
+price_like|price_like,15,3,0.0125
+basis_premium_like,14,3,0.011666666666666667
+price_like,7,3,0.005833333333333334

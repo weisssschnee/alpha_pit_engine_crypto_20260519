@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core48_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_generation_execution": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE47E_COMPILER_READINESS_READY_FOR_CORE48_CONTRACT",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T21:07:34Z",
+  "next_allowed": "A7FF-CORE48 bounded null-first factor seed generation contract",
+  "readiness_pass_count": 8,
+  "readiness_total_count": 8,
+  "source_decision": "PASS_A7FFCORE47_CONTROL_NULL_AWARE_COMPILER_CONTRACT_READY_FOR_CORE47E",
+  "source_stage": "A7FF-CORE47",
+  "stage": "A7FF-CORE47E"
+}

@@ -1,0 +1,4 @@
+capability,status,reason
+define_null_first_generation_contract,READY,source artifacts are sufficient to define a bounded null-first generation contract
+execute_null_first_generation_now,NOT_READY,compiler implementation and gate-native output schema are not built yet; CORE47E is audit-only
+execute_formula_search_now,NOT_AUTHORIZED,CORE46/CORE47 explicitly block generation/search until null-first compiler contract and later gates exist

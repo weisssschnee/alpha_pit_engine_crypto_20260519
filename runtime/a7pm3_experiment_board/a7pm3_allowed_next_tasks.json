@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE47 control-null-aware feature-to-factor compiler contract": "contract only; redesign future generation around original-vs-null separability before replay",
+  "A7FF-CORE48S operator-null coverage repair contract": "contract only; repair native operator coverage before null-vector preflight",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

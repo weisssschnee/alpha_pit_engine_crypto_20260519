@@ -1,0 +1,14 @@
+{
+  "authorized": {
+    "A7FF-CORE47E control-null-aware compiler readiness audit": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "current_candidate_expansion": true,
+    "formula_search": true,
+    "large_search": true,
+    "new_generation": true,
+    "same_family_rerun": true,
+    "shadow_paper_live": true
+  }
+}

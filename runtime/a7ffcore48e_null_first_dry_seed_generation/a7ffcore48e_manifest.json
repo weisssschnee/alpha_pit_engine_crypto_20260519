@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core48r_forensic": true,
+  "authorizes_core49_contract": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_numeric_replay": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7FFCORE48E_NULL_FIRST_DRY_SEEDS_INSUFFICIENT",
+  "eligible_operator_count": 3,
+  "eligible_seed_count": 1200,
+  "eligible_semantic_family_count": 12,
+  "executes_generation": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T21:13:24Z",
+  "generated_seed_count": 1200,
+  "next_allowed": "A7FF-CORE48R dry seed generation forensic",
+  "source_decision": "PASS_A7FFCORE48_NULL_FIRST_SEED_GENERATION_CONTRACT_READY_FOR_CORE48E",
+  "source_stage": "A7FF-CORE48",
+  "stage": "A7FF-CORE48E"
+}

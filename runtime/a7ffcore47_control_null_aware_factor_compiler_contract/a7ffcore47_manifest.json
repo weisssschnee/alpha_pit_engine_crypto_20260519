@@ -1,0 +1,18 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core47e_audit": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_new_generation": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE47_CONTROL_NULL_AWARE_COMPILER_CONTRACT_READY_FOR_CORE47E",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T21:03:33Z",
+  "next_allowed": "A7FF-CORE47E control-null-aware compiler readiness audit",
+  "source_decision": "PASS_A7FFCORE46_ROUTE_ARBITRATION_READY_FOR_CORE47_CONTRACT",
+  "source_selected_route": "R3_control_null_aware_factor_compiler_contract",
+  "source_stage": "A7FF-CORE46",
+  "stage": "A7FF-CORE47"
+}

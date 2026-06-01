@@ -1,0 +1,16 @@
+field,required
+seed_id,True
+lane_id,True
+field_primary,True
+field_partner,False
+semantic_type_primary,True
+semantic_type_partner,False
+operator,True
+window_h,True
+expression,True
+compiler_role,True
+non_l7_evidence,True
+operator_null_margin,True
+role_gate_status,True
+family_cap_status,True
+candidate_status,True

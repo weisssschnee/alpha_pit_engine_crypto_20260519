@@ -1,0 +1,6 @@
+input_id,path,role,required
+I0_field_ontology_v3,runtime/a7ffr1_field_ontology_v3/a7ffr1_field_ontology_v3.csv,field semantic and compiler role source,True
+I1_operator_response,runtime/a7ffr2_operator_probing_v2/a7ffr2_observed_operator_response.csv,operator response/null pre-score source,True
+I2_pair_policy,runtime/a7ffr3_feature_pair_policy_v2/a7ffr3_feature_pair_policy_v2.csv,semantic-compatible pair source,True
+I3_primitive_response_map,runtime/a7aa1_primitive_response_map/a7aa1_primitive_response_map.csv,label/control response evidence source,True
+I4_core43e_vector_schema,runtime/a7ffcore43e_control_vector_rebuild_audit/a7ffcore43e_sample_quality_gate.csv,required full-universe null-vector feasibility source,True

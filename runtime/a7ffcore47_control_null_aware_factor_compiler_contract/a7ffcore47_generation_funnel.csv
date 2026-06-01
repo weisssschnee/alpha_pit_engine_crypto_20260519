@@ -1,0 +1,6 @@
+level,action,max_output_role
+L0_field_operator_probe,probe field_type x operator with null-vector margins before derived feature promotion,probe_result
+L1_single_field_factor_seed,promote only fields/transforms with non-null separation and non-L7 response evidence,ordinary_alpha_seed_or_regime_only
+L2_compatible_pair_probe,test semantic-compatible field pairs only after both sides have L1 evidence,interaction_probe
+L3_state_conditioned_factor,allow regime/neutralizer fields only as conditioners unless response-backed as signal,factor_candidate
+L4_replay_candidate_packet,build full-universe vectors and control-null residual score packet before book replay,replay_candidate

@@ -1,0 +1,4 @@
+gap_id,severity,description,blocks_core48_contract,blocks_generation_execution
+G0_compiler_implementation_missing,expected_next_contract_gap,no null-first compiler execution entrypoint exists yet,False,True
+G1_operator_null_margin_not_native,implementation_gap,operator probing has response/control summaries but not native full-universe null vectors per operator,False,True
+G2_pair_policy_not_null_ranked,implementation_gap,feature-pair policy exists but must be re-ranked by null-margin evidence before generation,False,True

@@ -1,0 +1,3 @@
+stage,action,executes_generation,executes_replay,executes_search,max_seed_count
+A7FF-CORE48E,bounded null-first dry seed generation using CORE48 gates,True,False,False,1200.0
+A7FF-CORE49,"if CORE48E passes, define full-universe null-vector preflight for eligible seeds",False,False,False,

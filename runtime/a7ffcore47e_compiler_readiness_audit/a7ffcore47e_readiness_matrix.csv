@@ -1,0 +1,9 @@
+requirement,evidence,status,notes
+field ontology with compiler roles,a7ffr1_field_ontology_v3,PASS,rows=81
+operator probing evidence,a7ffr2_observed_operator_response,PASS,rows=21
+feature pair policy,a7ffr3_feature_pair_policy_v2,PASS,rows=3003
+primitive response map,a7aa1_primitive_response_map,PASS,rows=648
+role enforcement connected,A7AI-F2,PASS,role_violation_count=0
+materialization/evaluator parity,A7AI-F3,PASS,fields=32; operators=15
+full-universe control vector feasibility,A7FF-CORE43E,PASS,quality_rows=6
+negative replay evidence available,A7FF-CORE45E/45R,PASS,core45e=HOLD_A7FFCORE45E_ORTHOGONAL_BOOK_REPLAY_INSUFFICIENT; failure=orthogonal_book_replay_control_dominated_zero_survivors

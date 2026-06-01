@@ -1,0 +1,9 @@
+score_component,source,allowed_stage,may_use
+original_response_score,feature x transform x label/horizon response,probe,True
+stale_null_margin,original score vector versus stale score vector,probe_and_gate,True
+sign_flip_asymmetry,original score behavior versus sign-flipped score behavior,probe_and_gate,True
+shuffle_time_margin,original score vector versus time-shuffle null,probe_and_gate,True
+shuffle_symbol_margin,original score vector versus symbol-shuffle null,probe_and_gate,True
+role_violation_penalty,field ontology / role enforcement ledger,hard_gate,True
+family_breadth_bonus,semantic family and motif diversity,selection_after_gate,True
+may_or_known_stress_score,known stress label or May-like post-selection veto result,forbidden_for_compiler_score,False

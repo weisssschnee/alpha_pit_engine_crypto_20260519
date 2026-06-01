@@ -1,0 +1,9 @@
+metric,value,pass,forensic_class
+generated_seed_count,1200,True,pass
+eligible_seed_count,1200,True,pass
+semantic_family_count,12,True,pass
+operator_count,3,False,operator_breadth_fail
+role_violation_count,0,True,pass
+missing_contract_count,0,True,pass
+family_cap_violation_count,0,True,pass
+motif_cap_violation_count,3,False,motif_concentration_fail
