@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core14see": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FFCORE14SE_REPAIRED_PACKET_READY_FOR_BOUNDED_REPLAY",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T04:45:22Z",
+  "motif_bucket_count": 5,
+  "next_allowed": "A7FF-CORE14SEE repaired packet bounded replay execution",
+  "outside_old_packet_count": 101,
+  "packet_count": 128,
+  "semantic_bucket_count": 6,
+  "source_decision": "PASS_A7FFCORE14S_REPLAY_PACKET_REPAIR_CONTRACT_READY_FOR_CORE14SE",
+  "source_stage": "A7FF-CORE14S",
+  "stage": "A7FF-CORE14SE",
+  "top_pair_share": 0.1953125
+}

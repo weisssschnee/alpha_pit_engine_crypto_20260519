@@ -1,0 +1,7 @@
+semantic_bucket,motif_bucket,candidate_count,outside_old_packet_count,median_repair_score,median_min_control_ratio,median_best_original_score
+liquidity_like|volatility_like,liquidity_shock,25,24,9.131413342905745,0.4769884819064131,0.011383810084
+taker_flow_like|basis_premium_like,gated_sign,25,14,8.398381725296383,0.6227314342579094,0.0499790037165038
+open_interest_like|positioning_like,delta_x_divergence,25,24,8.07550407811823,0.5800401479037302,0.0090219914463214
+taker_flow_like|open_interest_like,flow_x_leverage,25,24,7.358787348789692,0.6576903608941038,0.0838739429974013
+liquidity_like,single,23,12,10.688055890783046,0.4451156559055419,0.042433495873841
+open_interest_like,single,5,3,7.850480877018487,0.587879998142597,0.0398031924561268
