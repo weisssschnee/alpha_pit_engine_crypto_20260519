@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T10:02:18Z
+Generated: 2026-06-01T10:03:10Z
 
 ## Decision
 
@@ -13,23 +13,10 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ```text
 ## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
- M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
- M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE16GER_INTERACTION_PROBE_FORENSIC_20260601.md
-?? reports/CRYPTO_A7FFCORE16GE_FAMILY_NATIVE_INTERACTION_PROBE_20260601.md
-?? reports/CRYPTO_A7FFCORE16H_SECOND_PASS_INTERACTION_CONTRACT_20260601.md
-?? runtime/a7ffcore16ge_family_native_interaction_probe/
-?? runtime/a7ffcore16ger_interaction_probe_forensic/
-?? runtime/a7ffcore16h_second_pass_interaction_contract/
-?? scripts/crypto_a7ffcore16ge_family_native_interaction_probe.py
-?? scripts/crypto_a7ffcore16ger_interaction_probe_forensic.py
-?? scripts/crypto_a7ffcore16h_second_pass_interaction_contract.py
-HEAD=a9dcbb41d0aa418b58dfa368412551676f8eee51
-origin/main=a9dcbb41d0aa418b58dfa368412551676f8eee51
+HEAD=888ed347265d430d9680353fa722db9359dad71c
+origin/main=888ed347265d430d9680353fa722db9359dad71c
 HEAD == origin/main: True
 ```
 
@@ -51,10 +38,10 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T10:02:18Z",
-  "head": "a9dcbb41d0aa418b58dfa368412551676f8eee51",
+  "generated_at": "2026-06-01T10:03:10Z",
+  "head": "888ed347265d430d9680353fa722db9359dad71c",
   "head_equals_origin_main": true,
-  "origin_main": "a9dcbb41d0aa418b58dfa368412551676f8eee51",
+  "origin_main": "888ed347265d430d9680353fa722db9359dad71c",
   "stage": "A7PM-0",
   "stage_count": 317
 }
