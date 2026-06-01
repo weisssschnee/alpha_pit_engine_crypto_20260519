@@ -1,0 +1,15 @@
+seed_lane,label_family,rows,operator_count,horizon_count
+S1_liquidity_basis_positioning,L1_cross_sectional_relative_return,12,2,2
+S1_liquidity_basis_positioning,L0_raw_forward_return,12,2,2
+S0_positioning_price_basis,L1_cross_sectional_relative_return,11,2,1
+S0_positioning_price_basis,L0_raw_forward_return,11,2,1
+S0_positioning_price_basis,L3_liquidity_tier_relative_return,9,1,1
+S1_liquidity_basis_positioning,L3_liquidity_tier_relative_return,9,2,2
+S3_cross_family_bridge,L5_vol_adjusted_return,6,1,2
+S3_cross_family_bridge,L0_raw_forward_return,5,2,4
+S3_cross_family_bridge,L1_cross_sectional_relative_return,5,2,4
+S2_taker_flow_liquidity_oi,L5_vol_adjusted_return,4,2,2
+S3_cross_family_bridge,L3_liquidity_tier_relative_return,4,2,4
+S2_taker_flow_liquidity_oi,L0_raw_forward_return,3,2,2
+S2_taker_flow_liquidity_oi,L1_cross_sectional_relative_return,3,2,2
+S2_taker_flow_liquidity_oi,L3_liquidity_tier_relative_return,2,2,2

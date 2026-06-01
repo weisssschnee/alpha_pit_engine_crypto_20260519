@@ -1,0 +1,3 @@
+stage,action,input,output,authorized
+A7FF-CORE18E,bounded replay preflight execution,A7FF-CORE17E objective seed packet,materialization/eval/control readiness for bounded replay,True
+A7FF-CORE19,bounded replay contract,A7FF-CORE18E preflight pass,contract only,False

@@ -1,0 +1,5 @@
+second_pass_family,queue_role,rows,label_family_count,horizon_count,operator_count,lag_ok_count,median_control_ratio
+H1_I5_deconcentration,strict_candidate,33,3,2,2,33,0.7187603607278056
+H0_I3_deconcentration,strict_candidate,31,3,1,2,31,0.5553186909556819
+H3_cross_family_bridge,strict_candidate,20,4,4,2,15,0.8304841155851694
+H2_I4_near_miss_repair,strict_candidate,12,4,3,2,5,0.7414735845413947

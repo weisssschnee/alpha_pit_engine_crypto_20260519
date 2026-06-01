@@ -80,6 +80,13 @@ A7FFCORE16K = REPO / "runtime" / "a7ffcore16k_h2_strict_floor_repair_contract" /
 A7FFCORE16KE = REPO / "runtime" / "a7ffcore16ke_h2_strict_floor_execution" / "a7ffcore16ke_manifest.json"
 A7FFCORE16KR = REPO / "runtime" / "a7ffcore16kr_h2_repair_forensic" / "a7ffcore16kr_manifest.json"
 A7FFCORE16M = REPO / "runtime" / "a7ffcore16m_h2_floor_arbitration_contract" / "a7ffcore16m_manifest.json"
+A7FFCORE16ME = REPO / "runtime" / "a7ffcore16me_broader_h2_repair_execution" / "a7ffcore16me_manifest.json"
+A7FFCORE16L = REPO / "runtime" / "a7ffcore16l_strict_preseed_queue_lock" / "a7ffcore16l_manifest.json"
+A7FFCORE17 = REPO / "runtime" / "a7ffcore17_objective_seed_policy_contract" / "a7ffcore17_manifest.json"
+A7FFCORE17E = REPO / "runtime" / "a7ffcore17e_objective_seed_packet_construction" / "a7ffcore17e_manifest.json"
+A7FFCORE18 = REPO / "runtime" / "a7ffcore18_bounded_replay_preflight_contract" / "a7ffcore18_manifest.json"
+A7FFCORE18E = REPO / "runtime" / "a7ffcore18e_bounded_replay_preflight" / "a7ffcore18e_manifest.json"
+A7FFCORE19 = REPO / "runtime" / "a7ffcore19_bounded_replay_contract" / "a7ffcore19_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -168,12 +175,90 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore16ke = read_json(A7FFCORE16KE)
     a7ffcore16kr = read_json(A7FFCORE16KR)
     a7ffcore16m = read_json(A7FFCORE16M)
+    a7ffcore16me = read_json(A7FFCORE16ME)
+    a7ffcore16l = read_json(A7FFCORE16L)
+    a7ffcore17 = read_json(A7FFCORE17)
+    a7ffcore17e = read_json(A7FFCORE17E)
+    a7ffcore18 = read_json(A7FFCORE18)
+    a7ffcore18e = read_json(A7FFCORE18E)
+    a7ffcore19 = read_json(A7FFCORE19)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore16m.get("decision") == "PASS_A7FFCORE16M_H2_FLOOR_RETAINED_READY_FOR_CORE16ME":
+    if a7ffcore19.get("decision") == "PASS_A7FFCORE19_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE19E":
+        allowed["A7FF-CORE19E bounded replay execution on locked packet"] = (
+            "execute bounded replay on locked 96-row packet only; no formula generation, search expansion, alpha proof, or live"
+        )
+        blocked["A7FF large search"] = "blocked until CORE19E bounded replay produces control-clean evidence and later search-readiness gates pass"
+        blocked["A7FF formula generation/search"] = "blocked: CORE19 authorizes bounded replay execution only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE19"
+        status = "bounded_replay_contract_ready_for_core19e"
+        next_task = "A7FF-CORE19E bounded replay execution on locked packet"
+    elif a7ffcore18e.get("decision") == "PASS_A7FFCORE18E_BOUNDED_REPLAY_PREFLIGHT_READY_FOR_CORE19_CONTRACT":
+        allowed["A7FF-CORE19 bounded replay contract"] = (
+            "contract only; define bounded replay execution rules for locked packet"
+        )
+        blocked["A7FF bounded replay execution"] = "blocked until CORE19 contract exists"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE18E"
+        status = "bounded_replay_preflight_ready_for_core19"
+        next_task = "A7FF-CORE19 bounded replay contract"
+    elif a7ffcore18.get("decision") == "PASS_A7FFCORE18_BOUNDED_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE18E":
+        allowed["A7FF-CORE18E bounded replay preflight execution"] = (
+            "preflight only; verify locked packet fields/operators/roles before bounded replay contract"
+        )
+        blocked["A7FF bounded replay execution"] = "blocked until CORE18E preflight and CORE19 contract pass"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE18"
+        status = "bounded_replay_preflight_contract_ready_for_core18e"
+        next_task = "A7FF-CORE18E bounded replay preflight execution"
+    elif a7ffcore17e.get("decision") == "PASS_A7FFCORE17E_OBJECTIVE_SEED_PACKET_READY_FOR_CORE18_CONTRACT":
+        allowed["A7FF-CORE18 bounded replay preflight contract"] = (
+            "contract only; define bounded replay preflight gates"
+        )
+        blocked["A7FF bounded replay execution"] = "blocked until CORE18/18E/19 pass"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE17E"
+        status = "objective_seed_packet_ready_for_core18"
+        next_task = "A7FF-CORE18 bounded replay preflight contract"
+    elif a7ffcore17.get("decision") == "PASS_A7FFCORE17_OBJECTIVE_SEED_POLICY_CONTRACT_READY_FOR_CORE17E":
+        allowed["A7FF-CORE17E objective seed packet construction audit"] = (
+            "packet construction/audit only; no replay/search/promotion"
+        )
+        blocked["A7FF bounded replay execution"] = "blocked until CORE17E/18/18E/19 pass"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE17"
+        status = "objective_seed_policy_ready_for_core17e"
+        next_task = "A7FF-CORE17E objective seed packet construction audit"
+    elif a7ffcore16l.get("decision") == "PASS_A7FFCORE16L_STRICT_PRESEED_QUEUE_LOCKED_READY_FOR_CORE17_CONTRACT":
+        allowed["A7FF-CORE17 objective seed policy contract"] = (
+            "contract only; convert locked strict pre-seed queue into seed policy"
+        )
+        blocked["A7FF bounded replay execution"] = "blocked until CORE17/17E/18/18E/19 pass"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE16L"
+        status = "strict_preseed_queue_locked_ready_for_core17"
+        next_task = "A7FF-CORE17 objective seed policy contract"
+    elif a7ffcore16me.get("decision") == "PASS_A7FFCORE16ME_H2_FLOOR_REPAIRED_READY_FOR_CORE16L":
+        allowed["A7FF-CORE16L strict pre-seed queue lock audit"] = (
+            "audit/lock strict queue only; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked until CORE16L locks strict queue"
+        blocked["A7FF formula generation"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF bounded replay"] = "blocked until CORE16L/17/18/19 pass"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE16ME"
+        status = "h2_floor_repaired_ready_for_core16l"
+        next_task = "A7FF-CORE16L strict pre-seed queue lock audit"
+    elif a7ffcore16m.get("decision") == "PASS_A7FFCORE16M_H2_FLOOR_RETAINED_READY_FOR_CORE16ME":
         allowed["A7FF-CORE16ME broader H2/I4 strict-floor repair execution"] = (
             "execute broader checkpointed H2/I4 repair only; no replay expansion, search, or promotion"
         )

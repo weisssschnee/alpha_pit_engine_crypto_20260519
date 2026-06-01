@@ -1,0 +1,9 @@
+contract_item,requirement,hard_gate
+input_packet,use A7FF-CORE17E objective seed packet as the only candidate source,True
+candidate_count,"packet_size == 96; no extra generation, no stale candidate injection",True
+labels,evaluate locked label_family/label_horizon plus replay book labels; report non-L5 separately,True
+controls,"wrong-lag future, stale lag, row/time/symbol shuffle, same-family placebo weaker than candidate",True
+neutralization,"global, liquidity-tier, latent-state, meme/multiplier aware summaries required",True
+cost_lag,1bar lag and cost proxy stress required before any deep audit authorization,True
+breadth,preserve four seed lanes; top selected lane share <= 35%,True
+authorization,"CORE18 authorizes only CORE18E replay preflight execution, not bounded replay/search",True

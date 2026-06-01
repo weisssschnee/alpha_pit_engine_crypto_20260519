@@ -1,0 +1,8 @@
+gate,value,threshold,pass
+packet_size,96.0,>=96,True
+seed_lane_count,4.0,>=4,True
+top_seed_lane_share,0.34375,<=0.35,True
+duplicate_keys,0.0,0,True
+non_l5_share,0.8958333333333334,>=0.40,True
+operator_count,3.0,>=3,True
+label_family_count,4.0,>=3,True

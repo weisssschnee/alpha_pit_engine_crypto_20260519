@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core18_contract": true,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FFCORE17E_OBJECTIVE_SEED_PACKET_READY_FOR_CORE18_CONTRACT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T14:39:17Z",
+  "label_family_count": 4,
+  "next_allowed": "A7FF-CORE18 bounded replay preflight contract",
+  "non_l5_share": 0.8958333333333334,
+  "operator_count": 3,
+  "packet_size": 96,
+  "seed_lane_count": 4,
+  "source_decision": "PASS_A7FFCORE17_OBJECTIVE_SEED_POLICY_CONTRACT_READY_FOR_CORE17E",
+  "source_stage": "A7FF-CORE17",
+  "stage": "A7FF-CORE17E",
+  "top_seed_lane_share": 0.34375
+}

@@ -1,0 +1,10 @@
+item,value,hard_gate
+input_packet,A7FF-CORE17E objective seed packet,True
+candidate_count,96,True
+selection_mode,bounded locked packet only; no generation; no mutation; no selector expansion,True
+book,top/bottom cross-sectional replay proxy with dollar-neutral and lane/family caps,True
+controls,"wrong-lag future, stale, row/time/symbol shuffle, same-family placebo",True
+latency,field-native timing plus one-bar lag stress,True
+cost,2/5/10/20 bps proxy tiers,True
+neutralization,"global, liquidity tier, latent state, meme/multiplier aware",True
+statistics,overlap robust and non-overlap offset stats,True

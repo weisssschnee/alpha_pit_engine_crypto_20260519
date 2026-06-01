@@ -1,0 +1,5 @@
+policy_id,rule,reason
+P0_seed_packet_only,CORE17 authorizes only CORE17E seed packet construction,"locked preseed rows still require packet-level dedup, label/horizon balance, and replay preflight before numeric replay"
+P1_no_search,no open grammar formula generation or large search,"CORE16 produced a governed seed queue, not an alpha pool"
+P2_no_direct_promotion,no seed row can become research_candidate without bounded replay and controls,current evidence is pre-replay response/control surface only
+P3_preserve_breadth,CORE17E must preserve all four seed lanes and cap top lane share,prior failure mode was family concentration

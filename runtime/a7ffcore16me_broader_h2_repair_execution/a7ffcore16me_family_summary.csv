@@ -1,0 +1,5 @@
+left_family,right_family,operator,response_rows,blueprint_count,candidate_count,near_miss_count,median_control_ratio
+taker_flow,liquidity,SafeDiv,960,60,6,8,5.393060135776398
+taker_flow,liquidity,Mul,960,60,3,10,4.720773950336039
+taker_flow,open_interest,SafeDiv,480,30,1,5,5.225429986097423
+taker_flow,open_interest,Mul,480,30,0,2,5.450804022947066

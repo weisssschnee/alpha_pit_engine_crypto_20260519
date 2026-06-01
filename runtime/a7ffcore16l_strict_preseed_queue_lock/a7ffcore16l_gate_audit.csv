@@ -1,0 +1,11 @@
+gate,value,threshold,pass
+queue_size,96.0,>=96,True
+strict_count,96.0,==queue_size,True
+near_miss_count,0.0,0,True
+family_count,4.0,>=4,True
+top_family_share,0.34375,<=0.45,True
+h2_count,12.0,>=12,True
+h3_count,20.0,>=12,True
+non_l5_share,0.8958333333333334,>=0.40,True
+operator_count,3.0,>=2,True
+duplicate_keys,0.0,0,True

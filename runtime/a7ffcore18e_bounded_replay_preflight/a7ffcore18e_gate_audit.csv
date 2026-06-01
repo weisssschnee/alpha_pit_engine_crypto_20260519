@@ -1,0 +1,10 @@
+gate,value,threshold,pass
+packet_size,96.0,96,True
+missing_fields,0.0,0,True
+unsupported_operators,0.0,0,True
+duplicate_keys,0.0,0,True
+direct_replay_flags,0.0,0,True
+search_flags,0.0,0,True
+alpha_flags,0.0,0,True
+top_lane_share,0.34375,<=0.35,True
+non_l5_share,0.8958333333333334,>=0.40,True

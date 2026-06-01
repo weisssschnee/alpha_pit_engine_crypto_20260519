@@ -1,0 +1,14 @@
+{
+  "blueprint_count": 30,
+  "chunk_count": 6,
+  "chunk_index": 0,
+  "decision": "PASS_A7FFCORE16ME_CHUNK_COMPLETE",
+  "full_timestamps_before_subset": 21025,
+  "generated_at": "2026-06-01T14:14:10Z",
+  "h2_repair_candidate_count": 0,
+  "missing_fields_excluded": [],
+  "response_rows": 480,
+  "stage": "A7FF-CORE16ME-CHUNK",
+  "symbols_loaded": 96,
+  "timestamps": 3481
+}

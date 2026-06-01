@@ -1,0 +1,5 @@
+blocked_task,reason
+A7FF bounded replay execution,blocked until CORE18E preflight passes and CORE19 contract exists
+A7FF formula generation/search,blocked: CORE18 is replay preflight contract only
+A7FF large search,blocked until bounded replay produces control-clean candidates
+alpha proof / shadow / paper / live,not authorized

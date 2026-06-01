@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T14:04:09Z
+Generated: 2026-06-01T14:48:02Z
 
 ## Decision
 
@@ -11,20 +11,45 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
+## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
+ M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=093ff03c86d55257dfa166699505d1d8d7a1d79e
-origin/main=35ff84da192a5c809a7abeb9de8053170d3d7807
-HEAD == origin/main: False
+ M scripts/crypto_a7pm3_current_experiment_board.py
+?? reports/CRYPTO_A7FFCORE16L_STRICT_PRESEED_QUEUE_LOCK_20260601.md
+?? reports/CRYPTO_A7FFCORE16ME_BROADER_H2_REPAIR_EXECUTION_20260601.md
+?? reports/CRYPTO_A7FFCORE17E_OBJECTIVE_SEED_PACKET_CONSTRUCTION_20260601.md
+?? reports/CRYPTO_A7FFCORE17_OBJECTIVE_SEED_POLICY_CONTRACT_20260601.md
+?? reports/CRYPTO_A7FFCORE18E_BOUNDED_REPLAY_PREFLIGHT_20260601.md
+?? reports/CRYPTO_A7FFCORE18_BOUNDED_REPLAY_PREFLIGHT_CONTRACT_20260601.md
+?? reports/CRYPTO_A7FFCORE19_BOUNDED_REPLAY_CONTRACT_20260601.md
+?? runtime/a7ffcore16l_strict_preseed_queue_lock/
+?? runtime/a7ffcore16me_broader_h2_repair_execution/
+?? runtime/a7ffcore17_objective_seed_policy_contract/
+?? runtime/a7ffcore17e_objective_seed_packet_construction/
+?? runtime/a7ffcore18_bounded_replay_preflight_contract/
+?? runtime/a7ffcore18e_bounded_replay_preflight/
+?? runtime/a7ffcore19_bounded_replay_contract/
+?? scripts/crypto_a7ffcore16l_strict_preseed_queue_lock.py
+?? scripts/crypto_a7ffcore16me_broader_h2_repair_execution.py
+?? scripts/crypto_a7ffcore17_objective_seed_policy_contract.py
+?? scripts/crypto_a7ffcore17e_objective_seed_packet_construction.py
+?? scripts/crypto_a7ffcore18_bounded_replay_preflight_contract.py
+?? scripts/crypto_a7ffcore18e_bounded_replay_preflight.py
+?? scripts/crypto_a7ffcore19_bounded_replay_contract.py
+HEAD=5be2e451686339d87570a3f0706cff842c581b43
+origin/main=5be2e451686339d87570a3f0706cff842c581b43
+HEAD == origin/main: True
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3297,
+  "artifact_count": 3368,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -38,12 +63,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T14:04:09Z",
-  "head": "093ff03c86d55257dfa166699505d1d8d7a1d79e",
-  "head_equals_origin_main": false,
-  "origin_main": "35ff84da192a5c809a7abeb9de8053170d3d7807",
+  "generated_at": "2026-06-01T14:48:02Z",
+  "head": "5be2e451686339d87570a3f0706cff842c581b43",
+  "head_equals_origin_main": true,
+  "origin_main": "5be2e451686339d87570a3f0706cff842c581b43",
   "stage": "A7PM-0",
-  "stage_count": 325
+  "stage_count": 332
 }
 ```
 
@@ -62,8 +87,8 @@ HEAD == origin/main: False
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     142 |
-| valid_or_historical_record   | contract                   |      72 |
+| valid_or_historical_record   | governance_or_audit        |     143 |
+| valid_or_historical_record   | contract                   |      78 |
 | valid_or_historical_record   | diagnostic                 |      13 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

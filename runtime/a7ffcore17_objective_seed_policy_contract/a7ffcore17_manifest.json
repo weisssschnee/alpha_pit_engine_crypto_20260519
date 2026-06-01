@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core17e": true,
+  "authorizes_formula_generation": false,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE17_OBJECTIVE_SEED_POLICY_CONTRACT_READY_FOR_CORE17E",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T14:37:41Z",
+  "next_allowed": "A7FF-CORE17E objective seed packet construction audit",
+  "seed_lane_count": 4,
+  "seed_queue_size": 96,
+  "source_decision": "PASS_A7FFCORE16L_STRICT_PRESEED_QUEUE_LOCKED_READY_FOR_CORE17_CONTRACT",
+  "source_stage": "A7FF-CORE16L",
+  "stage": "A7FF-CORE17",
+  "top_seed_lane_share": 0.34375
+}

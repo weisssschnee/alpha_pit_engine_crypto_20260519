@@ -1,0 +1,5 @@
+blocked_task,reason
+A7FF bounded replay,blocked until CORE17E seed packet and CORE18 replay preflight contract pass
+A7FF formula generation/search,blocked: CORE17 is seed policy contract only
+A7FF large search,blocked until bounded replay produces control-clean evidence
+alpha proof / shadow / paper / live,not authorized

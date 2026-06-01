@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_bounded_replay_execution": false,
+  "authorizes_core18e": true,
+  "authorizes_formula_generation": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE18_BOUNDED_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE18E",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T14:41:20Z",
+  "next_allowed": "A7FF-CORE18E bounded replay preflight execution",
+  "packet_size": 96,
+  "source_decision": "PASS_A7FFCORE17E_OBJECTIVE_SEED_PACKET_READY_FOR_CORE18_CONTRACT",
+  "source_stage": "A7FF-CORE17E",
+  "stage": "A7FF-CORE18"
+}

@@ -1,0 +1,5 @@
+seed_lane,second_pass_family,rows,label_family_count,horizon_count,operator_count,median_control_ratio,lag_ok_count
+S1_liquidity_basis_positioning,H1_I5_deconcentration,33,3,2,2,0.7187603607278056,33
+S0_positioning_price_basis,H0_I3_deconcentration,31,3,1,2,0.5553186909556819,31
+S3_cross_family_bridge,H3_cross_family_bridge,20,4,4,2,0.8304841155851694,15
+S2_taker_flow_liquidity_oi,H2_I4_near_miss_repair,12,4,3,2,0.7414735845413947,5

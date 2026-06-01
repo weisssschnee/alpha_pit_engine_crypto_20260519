@@ -1,0 +1,4 @@
+operator,rows,seed_lane_count
+Sub,48,2
+Mul,40,4
+SafeDiv,8,2

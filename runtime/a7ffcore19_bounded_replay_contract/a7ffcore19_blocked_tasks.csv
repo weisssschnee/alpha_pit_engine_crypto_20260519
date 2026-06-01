@@ -1,0 +1,4 @@
+blocked_task,reason
+A7FF large search,blocked until CORE19E bounded replay produces control-clean candidates and later selector governance passes
+formula generation/search expansion,blocked: CORE19 authorizes bounded replay execution only
+alpha proof / shadow / paper / live,not authorized

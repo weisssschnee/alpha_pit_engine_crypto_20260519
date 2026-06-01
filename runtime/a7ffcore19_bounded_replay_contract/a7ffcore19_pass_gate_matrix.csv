@@ -1,0 +1,7 @@
+gate,requirement
+control_clean,no selected candidate with control_ratio >= 1.0 in any pre-May split
+lane_breadth,selected lanes >= 3 and top lane share <= 0.40
+non_l5_translation,non-L5 evidence must remain nonzero; L5-only pass is diagnostic only
+lag_survival,one-bar lag replay proxy must not flip or collapse for selected candidates
+cost_survival,5bps and 10bps tiers must remain directionally positive before deep audit
+stress_policy,"May/stress labels post-selection only; no May in ranking, mutation, or weight update"

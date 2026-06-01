@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core19e_bounded_replay_execution": true,
+  "authorizes_formula_generation": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE19_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE19E",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T14:44:32Z",
+  "input_packet_size": 96,
+  "next_allowed": "A7FF-CORE19E bounded replay execution on locked packet",
+  "source_decision": "PASS_A7FFCORE18E_BOUNDED_REPLAY_PREFLIGHT_READY_FOR_CORE19_CONTRACT",
+  "source_stage": "A7FF-CORE18E",
+  "stage": "A7FF-CORE19"
+}

@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T14:03:59Z
+Generated: 2026-06-01T14:47:18Z
 
 ## Decision
 
@@ -8,44 +8,42 @@ Generated: 2026-06-01T14:03:59Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                               | next                                                      |
-|:----------------------------|:----------------|:-------------------------------------|:----------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                 | keep registry as source-of-truth                          |
-| a7ff_family_diversification | A7FF-CORE16M    | h2_floor_retained_ready_for_core16me | A7FF-CORE16ME broader H2/I4 strict-floor repair execution |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution          | A7FF-24R4E if explicitly authorized                       |
-| search_execution            | blocked         | not_authorized                       | none                                                      |
+| workstream                  | current_stage   | status                                    | next                                                   |
+|:----------------------------|:----------------|:------------------------------------------|:-------------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                      | keep registry as source-of-truth                       |
+| a7ff_family_diversification | A7FF-CORE19     | bounded_replay_contract_ready_for_core19e | A7FF-CORE19E bounded replay execution on locked packet |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution               | A7FF-24R4E if explicitly authorized                    |
+| search_execution            | blocked         | not_authorized                            | none                                                   |
 
 ## Allowed Next Tasks
 
-| task                                                      | reason                                                                                    |
-|:----------------------------------------------------------|:------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option         | requires explicit user authorization; no search and no promotion                          |
-| A7PM-0/3 maintenance                                      | governance registry maintenance                                                           |
-| A7FF-CORE16ME broader H2/I4 strict-floor repair execution | execute broader checkpointed H2/I4 repair only; no replay expansion, search, or promotion |
+| task                                                   | reason                                                                                                             |
+|:-------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option      | requires explicit user authorization; no search and no promotion                                                   |
+| A7PM-0/3 maintenance                                   | governance registry maintenance                                                                                    |
+| A7FF-CORE19E bounded replay execution on locked packet | execute bounded replay on locked 96-row packet only; no formula generation, search expansion, alpha proof, or live |
 
 ## Blocked Tasks
 
-| task                             | reason                                                                                                                |
-|:---------------------------------|:----------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E execution             | pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but numeric wave execution is not started |
-| A7FF-51 execution                | not authorized by A7FF-R11; only contract drafting is allowed                                                         |
-| A7FF-50                          | not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps                                   |
-| A7FF-48                          | not authorized by A7FF-47; frozen clues fail non-L5 label translation                                                 |
-| A7FF-45 continuation             | bounded replay passed but is superseded by A7FF-47 L5-only translation hold                                           |
-| A7FF-43 deep forensic            | not authorized by A7FF-42; selected control-strict non-L7 evidence remains single-family                              |
-| A7FF-41 control-strict expansion | not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family                              |
-| A7FF search execution            | numeric wave has clues but still no replay/search authorization                                                       |
-| A7AL-2Y generation               | not authorized                                                                                                        |
-| A7AL-3 large search              | not authorized                                                                                                        |
-| direct OI-price rerun            | superseded weak prior / not authorized                                                                                |
-| A7AL-2Q                          | not authorized by A7AL-2X0                                                                                            |
-| alpha proof                      | not authorized                                                                                                        |
-| shadow/paper/live                | not authorized                                                                                                        |
-| A7FF-CORE16L                     | blocked until CORE16ME produces strict H2 floor and strict queue size                                                 |
-| A7FF-CORE17                      | blocked until strict queue lock passes                                                                                |
-| A7FF formula generation          | blocked: CORE16M authorizes H2/I4 repair only                                                                         |
-| A7FF bounded replay              | blocked: strict pre-seed queue not complete                                                                           |
-| A7FF large search                | blocked until strict pre-seed queue passes                                                                            |
+| task                                | reason                                                                                                                |
+|:------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E execution                | pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but numeric wave execution is not started |
+| A7FF-51 execution                   | not authorized by A7FF-R11; only contract drafting is allowed                                                         |
+| A7FF-50                             | not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps                                   |
+| A7FF-48                             | not authorized by A7FF-47; frozen clues fail non-L5 label translation                                                 |
+| A7FF-45 continuation                | bounded replay passed but is superseded by A7FF-47 L5-only translation hold                                           |
+| A7FF-43 deep forensic               | not authorized by A7FF-42; selected control-strict non-L7 evidence remains single-family                              |
+| A7FF-41 control-strict expansion    | not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family                              |
+| A7FF search execution               | numeric wave has clues but still no replay/search authorization                                                       |
+| A7AL-2Y generation                  | not authorized                                                                                                        |
+| A7AL-3 large search                 | not authorized                                                                                                        |
+| direct OI-price rerun               | superseded weak prior / not authorized                                                                                |
+| A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
+| alpha proof                         | not authorized                                                                                                        |
+| shadow/paper/live                   | not authorized                                                                                                        |
+| A7FF large search                   | blocked until CORE19E bounded replay produces control-clean evidence and later search-readiness gates pass            |
+| A7FF formula generation/search      | blocked: CORE19 authorizes bounded replay execution only                                                              |
+| alpha proof / shadow / paper / live | not authorized                                                                                                        |
 
 ## Boundary
 
