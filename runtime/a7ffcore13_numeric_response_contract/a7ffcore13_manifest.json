@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core13e": true,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "control_count": 5,
+  "decision": "PASS_A7FFCORE13_NUMERIC_RESPONSE_CONTRACT_READY_FOR_CORE13E",
+  "executes_numeric": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T01:47:49Z",
+  "horizon_count": 4,
+  "label_count": 3,
+  "motif_bucket_count": 5,
+  "next_allowed": "A7FF-CORE13E numeric response execution",
+  "queue_count": 416,
+  "semantic_bucket_count": 6,
+  "shard_count": 4,
+  "source_decision": "PASS_A7FFCORE12E_MATERIALIZATION_PREFLIGHT_READY_FOR_CORE13",
+  "source_stage": "A7FF-CORE12E",
+  "stage": "A7FF-CORE13"
+}

@@ -1,0 +1,7 @@
+control,dominance_role
+wrong_lag_future,hard_control
+wrong_lag_stale,hard_control
+time_shuffle,hard_control
+symbol_shuffle,hard_control
+same_family_placebo,hard_control
+sign_flip,diagnostic_only_excluded_from_abs_max

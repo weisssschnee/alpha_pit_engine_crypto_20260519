@@ -1,0 +1,8 @@
+{
+  "control_ratio_lt_0_8_for_clue": true,
+  "eval_error_count": 0,
+  "motif_bucket_count_min": 5,
+  "numeric_clue_candidates_min": 64,
+  "semantic_bucket_count_min": 6,
+  "sign_flip_diagnostic_only": true
+}

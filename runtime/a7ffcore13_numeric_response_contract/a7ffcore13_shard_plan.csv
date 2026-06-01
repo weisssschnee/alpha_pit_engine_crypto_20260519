@@ -1,0 +1,5 @@
+shard_id,start_index,end_index_exclusive,candidate_count
+S00,0,104,104
+S01,104,208,104
+S02,208,312,104
+S03,312,416,104
