@@ -1,0 +1,7 @@
+gate,threshold,observed,pass
+selected_clue_count,>= 24,113.0,True
+selected_family_count,>= 3,3.0,True
+cluster_count,>= 12,113.0,True
+replay_queue_count,>= 18,24.0,True
+replay_queue_family_count,>= 3,3.0,True
+top_family_share_replay_queue,<= 0.50,0.3333333333333333,True

@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core32_contract": true,
+  "authorizes_large_search": false,
+  "authorizes_replay_execution": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "cluster_count": 113,
+  "decision": "PASS_A7FFCORE31_CLUE_CONSOLIDATION_READY_FOR_CORE32_REPLAY_PREFLIGHT_CONTRACT",
+  "executes_replay": false,
+  "executes_search": false,
+  "family_count": 3,
+  "generated_at": "2026-06-01T18:55:09Z",
+  "next_allowed": "A7FF-CORE32 replay preflight contract",
+  "replay_preflight_queue_count": 24,
+  "selected_clue_count": 113,
+  "source_decision": "PASS_A7FFCORE30E_NUMERIC_PROBE_CLUES_READY_FOR_CORE31_CONTRACT",
+  "source_stage": "A7FF-CORE30E",
+  "stage": "A7FF-CORE31"
+}

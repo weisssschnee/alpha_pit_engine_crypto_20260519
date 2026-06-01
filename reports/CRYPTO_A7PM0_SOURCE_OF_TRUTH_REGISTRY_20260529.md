@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T18:52:16Z
+Generated: 2026-06-01T18:55:45Z
 
 ## Decision
 
@@ -19,11 +19,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE30E_BOUNDED_NUMERIC_PROBE_20260602.md
-?? runtime/a7ffcore30e_bounded_numeric_probe/
-?? scripts/crypto_a7ffcore30e_bounded_numeric_probe.py
-HEAD=1ae2bb0ad7286ebd8bc66c3214c8f43ca71687e9
-origin/main=1ae2bb0ad7286ebd8bc66c3214c8f43ca71687e9
+?? reports/CRYPTO_A7FFCORE31_INDEPENDENT_FAMILY_CLUE_CONSOLIDATION_20260602.md
+?? runtime/a7ffcore31_independent_family_clue_consolidation/
+?? scripts/crypto_a7ffcore31_independent_family_clue_consolidation.py
+HEAD=f5b90250b86da25bf7d7f2c67e0a3be3b282370a
+origin/main=f5b90250b86da25bf7d7f2c67e0a3be3b282370a
 HEAD == origin/main: True
 ```
 
@@ -31,7 +31,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 3592,
+  "artifact_count": 3602,
   "authorization_record_count": 718,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -45,12 +45,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T18:52:16Z",
-  "head": "1ae2bb0ad7286ebd8bc66c3214c8f43ca71687e9",
+  "generated_at": "2026-06-01T18:55:45Z",
+  "head": "f5b90250b86da25bf7d7f2c67e0a3be3b282370a",
   "head_equals_origin_main": true,
-  "origin_main": "1ae2bb0ad7286ebd8bc66c3214c8f43ca71687e9",
+  "origin_main": "f5b90250b86da25bf7d7f2c67e0a3be3b282370a",
   "stage": "A7PM-0",
-  "stage_count": 367
+  "stage_count": 368
 }
 ```
 
@@ -70,7 +70,7 @@ HEAD == origin/main: True
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     143 |
-| valid_or_historical_record   | contract                   |      94 |
+| valid_or_historical_record   | contract                   |      95 |
 | valid_or_historical_record   | diagnostic                 |      22 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

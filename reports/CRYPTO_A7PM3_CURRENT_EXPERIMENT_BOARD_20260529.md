@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T18:52:12Z
+Generated: 2026-06-01T18:55:41Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T18:52:12Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                                | next                                                       |
-|:----------------------------|:----------------|:------------------------------------------------------|:-----------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                                  | keep registry as source-of-truth                           |
-| a7ff_family_diversification | A7FF-CORE30E    | bounded_numeric_probe_clues_ready_for_core31_contract | A7FF-CORE31 independent family clue consolidation contract |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                           | A7FF-24R4E if explicitly authorized                        |
-| search_execution            | blocked         | not_authorized                                        | none                                                       |
+| workstream                  | current_stage   | status                                                        | next                                  |
+|:----------------------------|:----------------|:--------------------------------------------------------------|:--------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                                          | keep registry as source-of-truth      |
+| a7ff_family_diversification | A7FF-CORE31     | clue_consolidation_ready_for_core32_replay_preflight_contract | A7FF-CORE32 replay preflight contract |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                                   | A7FF-24R4E if explicitly authorized   |
+| search_execution            | blocked         | not_authorized                                                | none                                  |
 
 ## Allowed Next Tasks
 
-| task                                                       | reason                                                                       |
-|:-----------------------------------------------------------|:-----------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option          | requires explicit user authorization; no search and no promotion             |
-| A7PM-0/3 maintenance                                       | governance registry maintenance                                              |
-| A7FF-CORE31 independent family clue consolidation contract | contract only; consolidate CORE30E numeric clues before any replay preflight |
+| task                                              | reason                                                                 |
+|:--------------------------------------------------|:-----------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion       |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                        |
+| A7FF-CORE32 replay preflight contract             | contract only; define replay-preflight checks over CORE31 24-row queue |
 
 ## Blocked Tasks
 
@@ -41,9 +41,9 @@ Generated: 2026-06-01T18:52:12Z
 | A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                         | not authorized                                                                                                        |
 | shadow/paper/live                   | not authorized                                                                                                        |
-| A7FF replay contract                | blocked until CORE31 consolidates clues and defines replay preflight gates                                            |
-| A7FF large search                   | blocked: CORE30E is numeric probe evidence only                                                                       |
-| A7FF formula generation/search      | blocked: no replay/search authorization from numeric probe                                                            |
+| A7FF replay execution               | blocked until CORE32 contract and any CORE32E preflight pass                                                          |
+| A7FF large search                   | blocked: numeric clues are not replay evidence                                                                        |
+| A7FF formula generation/search      | blocked: CORE31 authorizes replay-preflight contract only                                                             |
 | alpha proof / shadow / paper / live | not authorized                                                                                                        |
 
 ## Boundary

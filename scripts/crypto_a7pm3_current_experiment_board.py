@@ -122,6 +122,7 @@ A7FFCORE29 = REPO / "runtime" / "a7ffcore29_independent_family_bounded_probe_con
 A7FFCORE29E = REPO / "runtime" / "a7ffcore29e_independent_family_preflight" / "a7ffcore29e_manifest.json"
 A7FFCORE30 = REPO / "runtime" / "a7ffcore30_independent_family_numeric_probe_contract" / "a7ffcore30_manifest.json"
 A7FFCORE30E = REPO / "runtime" / "a7ffcore30e_bounded_numeric_probe" / "a7ffcore30e_manifest.json"
+A7FFCORE31 = REPO / "runtime" / "a7ffcore31_independent_family_clue_consolidation" / "a7ffcore31_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -252,12 +253,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore29e = read_json(A7FFCORE29E)
     a7ffcore30 = read_json(A7FFCORE30)
     a7ffcore30e = read_json(A7FFCORE30E)
+    a7ffcore31 = read_json(A7FFCORE31)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore30e.get("decision") == "PASS_A7FFCORE30E_NUMERIC_PROBE_CLUES_READY_FOR_CORE31_CONTRACT":
+    if a7ffcore31.get("decision") == "PASS_A7FFCORE31_CLUE_CONSOLIDATION_READY_FOR_CORE32_REPLAY_PREFLIGHT_CONTRACT":
+        allowed["A7FF-CORE32 replay preflight contract"] = (
+            "contract only; define replay-preflight checks over CORE31 24-row queue"
+        )
+        blocked["A7FF replay execution"] = "blocked until CORE32 contract and any CORE32E preflight pass"
+        blocked["A7FF large search"] = "blocked: numeric clues are not replay evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE31 authorizes replay-preflight contract only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE31"
+        status = "clue_consolidation_ready_for_core32_replay_preflight_contract"
+        next_task = "A7FF-CORE32 replay preflight contract"
+    elif a7ffcore30e.get("decision") == "PASS_A7FFCORE30E_NUMERIC_PROBE_CLUES_READY_FOR_CORE31_CONTRACT":
         allowed["A7FF-CORE31 independent family clue consolidation contract"] = (
             "contract only; consolidate CORE30E numeric clues before any replay preflight"
         )
