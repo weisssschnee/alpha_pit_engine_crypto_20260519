@@ -1,0 +1,6 @@
+item,reason
+CORE15Z seed policy,blocked: CORE15Y surface candidate breadth failed
+bounded replay rerun,blocked: replay has already shown objective-surface instability
+formula search,blocked: search would amplify an unstable objective surface
+large search,blocked until CORE16 atlas passes breadth/control gates
+alpha proof / shadow / paper / live,not authorized

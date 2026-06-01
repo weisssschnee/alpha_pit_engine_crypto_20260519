@@ -1,0 +1,5 @@
+weak_point,evidence,repair
+W0_low_surface_candidate_count,surface_candidate_count=4,do not replay current queue; rebuild candidate objectives from primitive response and non-replay split proxies
+W1_family_concentration,top_family_share=0.75,require objective-surface candidate quota by semantic family before any materialization queue
+W2_control_ratio_surface,family scorecard median control ratios mostly above 1,"make control margin a generation-side objective, not post-replay filter only"
+W3_replay_before_surface,two bounded replay packets consumed but surface remains too narrow,"next stage must be surface reconstruction, not another bounded replay packet"

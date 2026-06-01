@@ -1,0 +1,25 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core15z": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "surface_candidate_count_lt_32",
+    "semantic_bucket_count_lt_5",
+    "motif_bucket_count_lt_4",
+    "top_family_share_gt_35pct"
+  ],
+  "decision": "HOLD_A7FFCORE15Y_REPLAY_STABILITY_SURFACE_INSUFFICIENT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T07:58:42Z",
+  "next_allowed": "A7FF-CORE15YR objective-surface failure repair",
+  "source_decision": "PASS_A7FFCORE15X_OBJECTIVE_SURFACE_RESET_CONTRACT_READY_FOR_CORE15Y",
+  "source_stage": "A7FF-CORE15X",
+  "stage": "A7FF-CORE15Y",
+  "surface_candidate_count": 4,
+  "surface_motif_bucket_count": 2,
+  "surface_row_count": 256,
+  "surface_semantic_bucket_count": 2,
+  "top_family_share": 0.75
+}

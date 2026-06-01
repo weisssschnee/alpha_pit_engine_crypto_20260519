@@ -1,0 +1,15 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core16": true,
+  "authorizes_replay": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE15YR_SURFACE_FAILURE_REPAIR_READY_FOR_CORE16_ATLAS",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T08:05:34Z",
+  "next_allowed": "A7FF-CORE16 primitive-response replay-stability atlas rebuild",
+  "source_decision": "HOLD_A7FFCORE15Y_REPLAY_STABILITY_SURFACE_INSUFFICIENT",
+  "source_stage": "A7FF-CORE15Y",
+  "stage": "A7FF-CORE15YR"
+}

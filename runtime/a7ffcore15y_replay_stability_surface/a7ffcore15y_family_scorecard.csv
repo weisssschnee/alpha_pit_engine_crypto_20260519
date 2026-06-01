@@ -1,0 +1,13 @@
+source,semantic_bucket,motif_bucket,candidate_count,surface_candidate_count,median_surface_score,median_control_ratio,median_cost_adjusted_spread
+core14e_original_packet,liquidity_like|volatility_like,liquidity_shock,28,2,1.0167582286821402,1.4797568961959624,-0.00096256858135185
+core14see_repaired_packet,liquidity_like|volatility_like,liquidity_shock,25,1,1.276174316183402,1.8641115716407384,-0.0008696528565152
+core14see_repaired_packet,taker_flow_like|basis_premium_like,gated_sign,25,1,-0.7138276786112319,2.816925042000911,-0.0006199509525812
+core14e_original_packet,open_interest_like|positioning_like,delta_x_divergence,28,0,-2.4164887200758334,3.0250395396759293,-0.0008998976084196499
+core14see_repaired_packet,open_interest_like|positioning_like,delta_x_divergence,25,0,-0.6830887661584688,3.5863866536931983,-0.0008257915366575
+core14see_repaired_packet,taker_flow_like|open_interest_like,flow_x_leverage,25,0,0.2602378704313191,2.644650243705946,-0.0010820633563889
+core14e_original_packet,taker_flow_like|basis_premium_like,gated_sign,24,0,-0.882379368504865,3.4430417643542324,-0.0006489443734188499
+core14e_original_packet,taker_flow_like|open_interest_like,flow_x_leverage,24,0,-1.6757987191406674,2.742593036863293,-0.00106199535521455
+core14see_repaired_packet,liquidity_like,single,23,0,-3.837787992997165,4.540855564526649,-0.001192740358261
+core14e_original_packet,liquidity_like,single,20,0,-1.912513269327759,3.3943012328690605,-0.0011170811198896
+core14see_repaired_packet,open_interest_like,single,5,0,-1.415519110074463,3.09129613552519,-0.0009921026370076
+core14e_original_packet,open_interest_like,single,4,0,-4.207172970847151,5.395825988420951,-0.0010641874911502

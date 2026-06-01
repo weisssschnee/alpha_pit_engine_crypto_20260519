@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T07:47:04Z
+Generated: 2026-06-01T08:08:30Z
 
 ## Decision
 
@@ -13,11 +13,14 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ```text
 ## main...origin/main
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE15X_OBJECTIVE_SURFACE_RESET_CONTRACT_20260601.md
-?? runtime/a7ffcore15x_objective_surface_reset_contract/
-?? scripts/crypto_a7ffcore15x_objective_surface_reset_contract.py
-HEAD=37c3a4575202f3d23aa7f9fd10721d1a04b5ab28
-origin/main=37c3a4575202f3d23aa7f9fd10721d1a04b5ab28
+?? reports/CRYPTO_A7FFCORE15YR_SURFACE_FAILURE_REPAIR_20260601.md
+?? reports/CRYPTO_A7FFCORE15Y_REPLAY_STABILITY_SURFACE_20260601.md
+?? runtime/a7ffcore15y_replay_stability_surface/
+?? runtime/a7ffcore15yr_surface_failure_repair/
+?? scripts/crypto_a7ffcore15y_replay_stability_surface_builder.py
+?? scripts/crypto_a7ffcore15yr_surface_failure_repair.py
+HEAD=9bfee5081c8942f19c79ccb573aba10eaceab34a
+origin/main=9bfee5081c8942f19c79ccb573aba10eaceab34a
 HEAD == origin/main: True
 ```
 
@@ -25,7 +28,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 2963,
+  "artifact_count": 2975,
   "authorization_record_count": 714,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -39,12 +42,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T07:47:04Z",
-  "head": "37c3a4575202f3d23aa7f9fd10721d1a04b5ab28",
+  "generated_at": "2026-06-01T08:08:30Z",
+  "head": "9bfee5081c8942f19c79ccb573aba10eaceab34a",
   "head_equals_origin_main": true,
-  "origin_main": "37c3a4575202f3d23aa7f9fd10721d1a04b5ab28",
+  "origin_main": "9bfee5081c8942f19c79ccb573aba10eaceab34a",
   "stage": "A7PM-0",
-  "stage_count": 304
+  "stage_count": 306
 }
 ```
 
@@ -57,13 +60,13 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      52 |
+| hold                         | hold                       |      53 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     138 |
+| valid_or_historical_record   | governance_or_audit        |     139 |
 | valid_or_historical_record   | contract                   |      68 |
 | valid_or_historical_record   | diagnostic                 |       8 |
 | valid_or_historical_record   | smoke                      |       8 |

@@ -59,6 +59,8 @@ A7FFCORE14SE = REPO / "runtime" / "a7ffcore14se_repaired_packet_construction" / 
 A7FFCORE14SEE = REPO / "runtime" / "a7ffcore14see_sharded_bounded_replay" / "a7ffcore14see_manifest.json"
 A7FFCORE14SER = REPO / "runtime" / "a7ffcore14ser_repaired_replay_forensic" / "a7ffcore14ser_manifest.json"
 A7FFCORE15X = REPO / "runtime" / "a7ffcore15x_objective_surface_reset_contract" / "a7ffcore15x_manifest.json"
+A7FFCORE15Y = REPO / "runtime" / "a7ffcore15y_replay_stability_surface" / "a7ffcore15y_manifest.json"
+A7FFCORE15YR = REPO / "runtime" / "a7ffcore15yr_surface_failure_repair" / "a7ffcore15yr_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -126,12 +128,33 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore14see = read_json(A7FFCORE14SEE)
     a7ffcore14ser = read_json(A7FFCORE14SER)
     a7ffcore15x = read_json(A7FFCORE15X)
+    a7ffcore15y = read_json(A7FFCORE15Y)
+    a7ffcore15yr = read_json(A7FFCORE15YR)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore15x.get("decision") == "PASS_A7FFCORE15X_OBJECTIVE_SURFACE_RESET_CONTRACT_READY_FOR_CORE15Y":
+    if a7ffcore15yr.get("decision") == "PASS_A7FFCORE15YR_SURFACE_FAILURE_REPAIR_READY_FOR_CORE16_ATLAS":
+        allowed["A7FF-CORE16 primitive-response replay-stability atlas rebuild"] = (
+            "build new objective atlas from primitive response and replay-stability evidence; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE15Z"] = "blocked: CORE15Y surface candidate breadth failed"
+        blocked["A7FF bounded replay rerun"] = "blocked: CORE15YR requires atlas rebuild before any replay"
+        blocked["A7FF large search"] = "blocked until CORE16 atlas passes breadth/control gates"
+        current_stage = "A7FF-CORE15YR"
+        status = "surface_failure_repair_ready_for_core16_atlas"
+        next_task = "A7FF-CORE16 primitive-response replay-stability atlas rebuild"
+    elif a7ffcore15y.get("decision") == "HOLD_A7FFCORE15Y_REPLAY_STABILITY_SURFACE_INSUFFICIENT":
+        allowed["A7FF-CORE15YR objective-surface failure repair"] = (
+            "contract only; diagnose insufficient objective-surface breadth and define atlas rebuild; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE15Z"] = "blocked: CORE15Y surface candidates insufficient"
+        blocked["A7FF large search"] = "blocked: CORE15Y did not establish replay-stable surface"
+        current_stage = "A7FF-CORE15Y"
+        status = "replay_stability_surface_hold"
+        next_task = "A7FF-CORE15YR objective-surface failure repair"
+    elif a7ffcore15x.get("decision") == "PASS_A7FFCORE15X_OBJECTIVE_SURFACE_RESET_CONTRACT_READY_FOR_CORE15Y":
         allowed["A7FF-CORE15Y replay-stability objective-surface builder"] = (
             "build replay-stability feature matrix from existing numeric/replay/forensic rows; no replay execution/search/promotion"
         )

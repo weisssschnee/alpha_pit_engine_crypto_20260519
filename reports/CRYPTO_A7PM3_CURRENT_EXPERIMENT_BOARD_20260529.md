@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T07:47:08Z
+Generated: 2026-06-01T08:08:33Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T07:47:08Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                             | next                                                    |
-|:----------------------------|:----------------|:---------------------------------------------------|:--------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                               | keep registry as source-of-truth                        |
-| a7ff_family_diversification | A7FF-CORE15X    | objective_surface_reset_contract_ready_for_core15y | A7FF-CORE15Y replay-stability objective-surface builder |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                        | A7FF-24R4E if explicitly authorized                     |
-| search_execution            | blocked         | not_authorized                                     | none                                                    |
+| workstream                  | current_stage   | status                                        | next                                                          |
+|:----------------------------|:----------------|:----------------------------------------------|:--------------------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                          | keep registry as source-of-truth                              |
+| a7ff_family_diversification | A7FF-CORE15YR   | surface_failure_repair_ready_for_core16_atlas | A7FF-CORE16 primitive-response replay-stability atlas rebuild |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                   | A7FF-24R4E if explicitly authorized                           |
+| search_execution            | blocked         | not_authorized                                | none                                                          |
 
 ## Allowed Next Tasks
 
-| task                                                    | reason                                                                                                                 |
-|:--------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option       | requires explicit user authorization; no search and no promotion                                                       |
-| A7PM-0/3 maintenance                                    | governance registry maintenance                                                                                        |
-| A7FF-CORE15Y replay-stability objective-surface builder | build replay-stability feature matrix from existing numeric/replay/forensic rows; no replay execution/search/promotion |
+| task                                                          | reason                                                                                                                |
+|:--------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option             | requires explicit user authorization; no search and no promotion                                                      |
+| A7PM-0/3 maintenance                                          | governance registry maintenance                                                                                       |
+| A7FF-CORE16 primitive-response replay-stability atlas rebuild | build new objective atlas from primitive response and replay-stability evidence; no replay execution/search/promotion |
 
 ## Blocked Tasks
 
@@ -41,9 +41,9 @@ Generated: 2026-06-01T07:47:08Z
 | A7AL-2Q                          | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                      | not authorized                                                                                                        |
 | shadow/paper/live                | not authorized                                                                                                        |
-| A7FF-CORE15                      | blocked: CORE15X requires objective-surface builder before any search-readiness audit                                 |
-| A7FF bounded replay rerun        | blocked: CORE15X forbids rerun before objective-surface repair                                                        |
-| A7FF large search                | blocked: replay-stable objective surface is not yet established                                                       |
+| A7FF-CORE15Z                     | blocked: CORE15Y surface candidate breadth failed                                                                     |
+| A7FF bounded replay rerun        | blocked: CORE15YR requires atlas rebuild before any replay                                                            |
+| A7FF large search                | blocked until CORE16 atlas passes breadth/control gates                                                               |
 
 ## Boundary
 
