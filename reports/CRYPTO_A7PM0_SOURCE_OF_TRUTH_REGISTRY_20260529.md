@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T17:46:35Z
+Generated: 2026-06-01T17:47:16Z
 
 ## Decision
 
@@ -11,30 +11,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 2]
- M reports/CRYPTO_A7FFCORE25E_TARGETED_LANE_HORIZON_GENERATION_20260601.md
- M reports/CRYPTO_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_20260601.md
+## main...origin/main [ahead 3]
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_generated_blueprints.csv
- M runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_manifest.json
- M runtime/a7ffcore26_targeted_numeric_probe_contract/a7ffcore26_manifest.json
- M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
- M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
- M scripts/crypto_a7ffcore25e_targeted_lane_horizon_generation.py
- M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE26C_SPLIT_CONSISTENCY_REPAIR_CONTRACT_20260602.md
-?? reports/CRYPTO_A7FFCORE26E_TARGETED_NUMERIC_PROBE_EXECUTION_20260602.md
-?? reports/CRYPTO_A7FFCORE26R_TARGETED_NUMERIC_PROBE_FORENSIC_20260602.md
-?? runtime/a7ffcore26c_split_consistency_repair_contract/
-?? runtime/a7ffcore26e_targeted_numeric_probe_execution/
-?? runtime/a7ffcore26r_targeted_numeric_probe_forensic/
-?? scripts/crypto_a7ffcore26c_split_consistency_repair_contract.py
-?? scripts/crypto_a7ffcore26e_targeted_numeric_probe_execution.py
-?? scripts/crypto_a7ffcore26r_targeted_numeric_probe_forensic.py
-HEAD=0658d0482e60dfdff9bfa201b0b26186b29ca4a8
+HEAD=55aa1c6d7f04702a8aec51a6e0e0f051bc702e36
 origin/main=1ebf5b409080847d31d363300b0f0b300a8f2c18
 HEAD == origin/main: False
 ```
@@ -57,8 +38,8 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T17:46:35Z",
-  "head": "0658d0482e60dfdff9bfa201b0b26186b29ca4a8",
+  "generated_at": "2026-06-01T17:47:16Z",
+  "head": "55aa1c6d7f04702a8aec51a6e0e0f051bc702e36",
   "head_equals_origin_main": false,
   "origin_main": "1ebf5b409080847d31d363300b0f0b300a8f2c18",
   "stage": "A7PM-0",

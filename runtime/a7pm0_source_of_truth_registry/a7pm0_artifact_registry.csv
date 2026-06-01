@@ -2828,36 +2828,36 @@ runtime,A7FF-CORE25,runtime/a7ffcore25_targeted_lane_horizon_generation_contract
 runtime,A7FF-CORE25,runtime/a7ffcore25_targeted_lane_horizon_generation_contract/a7ffcore25_manifest.json,f49874d,advance crypto core23e to core26 contract,826
 runtime,A7FF-CORE25,runtime/a7ffcore25_targeted_lane_horizon_generation_contract/a7ffcore25_target_policy.csv,f49874d,advance crypto core23e to core26 contract,803
 runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_field_usage.csv,f49874d,advance crypto core23e to core26 contract,402
-runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_generated_blueprints.csv,f49874d,advance crypto core23e to core26 contract,1565087
+runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_generated_blueprints.csv,55aa1c6,add crypto core26 targeted numeric probe,1565087
 runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_lane_distribution.csv,f49874d,advance crypto core23e to core26 contract,206
-runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_manifest.json,f49874d,advance crypto core23e to core26 contract,899
+runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_manifest.json,55aa1c6,add crypto core26 targeted numeric probe,899
 runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_preflight_distribution.csv,f49874d,advance crypto core23e to core26 contract,204
 runtime,A7FF-CORE25E,runtime/a7ffcore25e_targeted_lane_horizon_generation/a7ffcore25e_preflight_packet.csv,f49874d,advance crypto core23e to core26 contract,310287
 runtime,A7FF-CORE26,runtime/a7ffcore26_targeted_numeric_probe_contract/a7ffcore26_expected_outputs.csv,f49874d,advance crypto core23e to core26 contract,303
 runtime,A7FF-CORE26,runtime/a7ffcore26_targeted_numeric_probe_contract/a7ffcore26_gate_policy.csv,f49874d,advance crypto core23e to core26 contract,251
-runtime,A7FF-CORE26,runtime/a7ffcore26_targeted_numeric_probe_contract/a7ffcore26_manifest.json,f49874d,advance crypto core23e to core26 contract,674
+runtime,A7FF-CORE26,runtime/a7ffcore26_targeted_numeric_probe_contract/a7ffcore26_manifest.json,55aa1c6,add crypto core26 targeted numeric probe,674
 runtime,A7FF-CORE26,runtime/a7ffcore26_targeted_numeric_probe_contract/a7ffcore26_probe_policy.csv,f49874d,advance crypto core23e to core26 contract,284
-runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_blocked_tasks.csv,,,234
-runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_execution_plan.csv,,,210
-runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_lane_policy.csv,,,683
-runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_manifest.json,,,827
-runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_near_miss_seed_snapshot.csv,,,1402
-runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_repair_budget.csv,,,213
-runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_candidate_summary.csv,,,89398
-runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_eval_errors.csv,,,2
-runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_executable_clean_candidates.csv,,,277
-runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_label_summary.csv,,,47
-runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_lane_summary.csv,,,52
-runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_manifest.json,,,1032
-runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_numeric_rows.csv,,,2122661
-runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_probe_packet.csv,,,156233
-runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_candidate_split_forensic.csv,,,87989
-runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_diagnosis.csv,,,385
-runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_label_forensic.csv,,,392
-runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_lane_forensic.csv,,,409
-runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_manifest.json,,,956
-runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_near_miss_candidates.csv,,,1424
-runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_recommended_actions.csv,,,304
+runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_blocked_tasks.csv,55aa1c6,add crypto core26 targeted numeric probe,234
+runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_execution_plan.csv,55aa1c6,add crypto core26 targeted numeric probe,210
+runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_lane_policy.csv,55aa1c6,add crypto core26 targeted numeric probe,683
+runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_manifest.json,55aa1c6,add crypto core26 targeted numeric probe,827
+runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_near_miss_seed_snapshot.csv,55aa1c6,add crypto core26 targeted numeric probe,1402
+runtime,A7FF-CORE26C,runtime/a7ffcore26c_split_consistency_repair_contract/a7ffcore26c_repair_budget.csv,55aa1c6,add crypto core26 targeted numeric probe,213
+runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_candidate_summary.csv,55aa1c6,add crypto core26 targeted numeric probe,89398
+runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_eval_errors.csv,55aa1c6,add crypto core26 targeted numeric probe,2
+runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_executable_clean_candidates.csv,55aa1c6,add crypto core26 targeted numeric probe,277
+runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_label_summary.csv,55aa1c6,add crypto core26 targeted numeric probe,47
+runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_lane_summary.csv,55aa1c6,add crypto core26 targeted numeric probe,52
+runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_manifest.json,55aa1c6,add crypto core26 targeted numeric probe,1032
+runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_numeric_rows.csv,55aa1c6,add crypto core26 targeted numeric probe,2122661
+runtime,A7FF-CORE26E,runtime/a7ffcore26e_targeted_numeric_probe_execution/a7ffcore26e_probe_packet.csv,55aa1c6,add crypto core26 targeted numeric probe,156233
+runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_candidate_split_forensic.csv,55aa1c6,add crypto core26 targeted numeric probe,87989
+runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_diagnosis.csv,55aa1c6,add crypto core26 targeted numeric probe,385
+runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_label_forensic.csv,55aa1c6,add crypto core26 targeted numeric probe,392
+runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_lane_forensic.csv,55aa1c6,add crypto core26 targeted numeric probe,409
+runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_manifest.json,55aa1c6,add crypto core26 targeted numeric probe,956
+runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_near_miss_candidates.csv,55aa1c6,add crypto core26 targeted numeric probe,1424
+runtime,A7FF-CORE26R,runtime/a7ffcore26r_targeted_numeric_probe_forensic/a7ffcore26r_recommended_actions.csv,55aa1c6,add crypto core26 targeted numeric probe,304
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_allowed_subgraph_registry.csv,02de3f1,add crypto a7ffcore3 formulagen gate,841265
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_bypass_summary.csv,02de3f1,add crypto a7ffcore3 formulagen gate,100
 runtime,A7FF-CORE3,runtime/a7ffcore3_formula_gen_subgraph_gate/a7ffcore3_diagnostic_root_registry.csv,02de3f1,add crypto a7ffcore3 formulagen gate,2249503
@@ -3270,11 +3270,11 @@ report,A7FFCORE24-EXECUTABLE-LANE-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE24_EXEC
 report,A7FFCORE24E-EXECUTABLE-LANE-REPAIR-PACKET,reports/CRYPTO_A7FFCORE24E_EXECUTABLE_LANE_REPAIR_PACKET_20260601.md,f49874d,advance crypto core23e to core26 contract,4189
 report,A7FFCORE24R-LANE-PACKET-FORENSIC,reports/CRYPTO_A7FFCORE24R_LANE_PACKET_FORENSIC_20260601.md,f49874d,advance crypto core23e to core26 contract,5901
 report,A7FFCORE25-TARGETED-LANE-HORIZON-GENERATION-CONTRACT,reports/CRYPTO_A7FFCORE25_TARGETED_LANE_HORIZON_GENERATION_CONTRACT_20260601.md,f49874d,advance crypto core23e to core26 contract,4873
-report,A7FFCORE25E-TARGETED-LANE-HORIZON-GENERATION,reports/CRYPTO_A7FFCORE25E_TARGETED_LANE_HORIZON_GENERATION_20260601.md,f49874d,advance crypto core23e to core26 contract,3442
-report,A7FFCORE26-TARGETED-NUMERIC-PROBE-CONTRACT,reports/CRYPTO_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_20260601.md,f49874d,advance crypto core23e to core26 contract,2819
-report,A7FFCORE26C-SPLIT-CONSISTENCY-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE26C_SPLIT_CONSISTENCY_REPAIR_CONTRACT_20260602.md,,,5230
-report,A7FFCORE26E-TARGETED-NUMERIC-PROBE-EXECUTION,reports/CRYPTO_A7FFCORE26E_TARGETED_NUMERIC_PROBE_EXECUTION_20260602.md,,,1489
-report,A7FFCORE26R-TARGETED-NUMERIC-PROBE-FORENSIC,reports/CRYPTO_A7FFCORE26R_TARGETED_NUMERIC_PROBE_FORENSIC_20260602.md,,,7445
+report,A7FFCORE25E-TARGETED-LANE-HORIZON-GENERATION,reports/CRYPTO_A7FFCORE25E_TARGETED_LANE_HORIZON_GENERATION_20260601.md,55aa1c6,add crypto core26 targeted numeric probe,3442
+report,A7FFCORE26-TARGETED-NUMERIC-PROBE-CONTRACT,reports/CRYPTO_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_20260601.md,55aa1c6,add crypto core26 targeted numeric probe,2819
+report,A7FFCORE26C-SPLIT-CONSISTENCY-REPAIR-CONTRACT,reports/CRYPTO_A7FFCORE26C_SPLIT_CONSISTENCY_REPAIR_CONTRACT_20260602.md,55aa1c6,add crypto core26 targeted numeric probe,5230
+report,A7FFCORE26E-TARGETED-NUMERIC-PROBE-EXECUTION,reports/CRYPTO_A7FFCORE26E_TARGETED_NUMERIC_PROBE_EXECUTION_20260602.md,55aa1c6,add crypto core26 targeted numeric probe,1489
+report,A7FFCORE26R-TARGETED-NUMERIC-PROBE-FORENSIC,reports/CRYPTO_A7FFCORE26R_TARGETED_NUMERIC_PROBE_FORENSIC_20260602.md,55aa1c6,add crypto core26 targeted numeric probe,7445
 report,A7FFCORE3-FORMULAGEN-SUBGRAPH-GATE,reports/CRYPTO_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_20260601.md,02de3f1,add crypto a7ffcore3 formulagen gate,5243
 report,A7FFCORE4-GATE-IMPLEMENTATION-REGRESSION,reports/CRYPTO_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_20260601.md,97cf90e,add crypto a7ffcore4 gate regression,5940
 report,A7FFCORE5-GATE-NATIVE-GENERATION-DRYRUN,reports/CRYPTO_A7FFCORE5_GATE_NATIVE_GENERATION_DRYRUN_20260601.md,7011a15,add crypto a7ffcore5 gate native dryrun,4601
@@ -3304,13 +3304,13 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.jso
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
 report,A7NIGHT-TASKFLOW,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,0658d04,refresh crypto registry after core26 contract,544761
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,55aa1c6,add crypto core26 targeted numeric probe,547560
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,9f44a1f,refresh crypto registry after a7ffcore14se,104425
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,0658d04,refresh crypto registry after core26 contract,208415
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,0658d04,refresh crypto registry after core26 contract,711
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,55aa1c6,add crypto core26 targeted numeric probe,210006
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,55aa1c6,add crypto core26 targeted numeric probe,711
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,0658d04,refresh crypto registry after core26 contract,112924
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,55aa1c6,add crypto core26 targeted numeric probe,113962
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_config_inventory.csv,de26507,add crypto a7pm governance registry,746
@@ -3326,15 +3326,15 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,f49874d,advance crypto core23e to core26 contract,388
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,f49874d,advance crypto core23e to core26 contract,350
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,f49874d,advance crypto core23e to core26 contract,1521
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,0658d04,refresh crypto registry after core26 contract,1306
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,0658d04,refresh crypto registry after core26 contract,425
-report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,0658d04,refresh crypto registry after core26 contract,5451
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,55aa1c6,add crypto core26 targeted numeric probe,388
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,55aa1c6,add crypto core26 targeted numeric probe,350
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,55aa1c6,add crypto core26 targeted numeric probe,1521
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,55aa1c6,add crypto core26 targeted numeric probe,1306
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,55aa1c6,add crypto core26 targeted numeric probe,425
+report,A7PM0-SOURCE-OF-TRUTH-REGISTRY,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,55aa1c6,add crypto core26 targeted numeric probe,6770
 report,A7PM1-ASSET-TAXONOMY-AND-MODULARIZATION-PLAN,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 report,A7PM2-CANDIDATE-LIFECYCLE-STATE-MACHINE,reports/CRYPTO_A7PM2_CANDIDATE_LIFECYCLE_STATE_MACHINE_20260529.md,de26507,add crypto a7pm governance registry,3875
-report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,0658d04,refresh crypto registry after core26 contract,5466
+report,A7PM3-CURRENT-EXPERIMENT-BOARD,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,55aa1c6,add crypto core26 targeted numeric probe,5466
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
