@@ -1,0 +1,2 @@
+task,status,scope
+A7FF-CORE38 executable portfolio-label objective contract,AUTHORIZED_CONTRACT_ONLY,define labels/book proxies/cost/control gates for executable translation; no generation or replay

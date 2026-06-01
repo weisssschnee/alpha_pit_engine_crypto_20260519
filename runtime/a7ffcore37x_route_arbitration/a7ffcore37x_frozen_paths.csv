@@ -1,0 +1,5 @@
+path,status,reason
+CORE33/34/36 same candidate queue,FROZEN,zero selected executable survivors
+same direct numeric-response objective,FROZEN,numeric response does not survive bounded replay
+search before executable objective,BLOCKED,selector target would reward non-executable clues
+alpha proof / shadow / paper / live,BLOCKED,no replay survivor or proof object

@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core38_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE37X_ROUTE_ARBITRATION_READY_FOR_CORE38_CONTRACT",
+  "dominant_failure": "train_to_oos_executable_spread_instability_after_control_gating",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-01T19:45:16Z",
+  "next_allowed": "A7FF-CORE38 executable portfolio-label objective contract",
+  "selected_route": "R3_portfolio_label_objective_contract",
+  "source_decision": "PASS_A7FFCORE36ER_REPLAY_OBJECTIVE_FORENSIC_COMPLETE_READY_FOR_CORE37X",
+  "source_stage": "A7FF-CORE36ER",
+  "stage": "A7FF-CORE37X"
+}

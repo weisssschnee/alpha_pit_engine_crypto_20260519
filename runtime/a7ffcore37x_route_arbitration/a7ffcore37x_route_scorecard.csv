@@ -1,0 +1,5 @@
+route,status,reason,authorizes_next
+R0_same_queue_rerun,REJECT,CORE34E and CORE36E already exhausted orientation/control and executable-objective rescoring,False
+R1_large_formula_search,REJECT,large search would amplify numeric-positive/replay-negative structures without executable translation,False
+R2_more_independent_family_generation,HOLD,"independent data families show numeric response, but replay objective/label book still fails",False
+R3_portfolio_label_objective_contract,AUTHORIZE_CONTRACT_ONLY,"failure is in label/book/executable spread translation, so next step must define executable portfolio-label objective before generation",True

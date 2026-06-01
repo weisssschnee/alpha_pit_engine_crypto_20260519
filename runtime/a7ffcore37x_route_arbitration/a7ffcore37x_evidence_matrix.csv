@@ -1,0 +1,6 @@
+evidence_id,stage,decision,positive,negative
+E0_numeric_response,CORE30E,PASS_A7FFCORE30E_NUMERIC_PROBE_CLUES_READY_FOR_CORE31_CONTRACT,113 clean numeric clues across 3 independent families,numeric response did not translate to bounded replay survivors
+E1_replay_preflight,CORE32E,PASS_A7FFCORE32E_REPLAY_PREFLIGHT_READY_FOR_CORE33_CONTRACT,21 replay-preflight candidates across 3 families,preflight evidence remained weaker than executable spread replay
+E2_bounded_replay,CORE33E,HOLD_A7FFCORE33E_BOUNDED_REPLAY_INSUFFICIENT,bounded replay executed over existing candidates,survivor_count=0
+E3_orientation_control_repair,CORE34E,HOLD_A7FFCORE34E_REPAIR_INSUFFICIENT,train-only orientation/control repair executed,survivor_count=0 after repair
+E4_replay_objective_reset,CORE36E/36ER,HOLD_A7FFCORE36E_REPLAY_OBJECTIVE_RESET_NO_EXECUTABLE_SURVIVORS,executable-spread-first rescoring isolated 3 train-pass F1a candidates,selected_count=0; F1a OOS split unstable; F1b/F2a train objective/control fail

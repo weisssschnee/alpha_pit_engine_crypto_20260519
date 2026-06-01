@@ -2,8 +2,8 @@
   "A7AL-2Q": "not authorized by A7AL-2X0",
   "A7AL-2Y generation": "not authorized",
   "A7AL-3 large search": "not authorized",
-  "A7FF formula generation/search": "blocked: route arbitration required after replay-objective failure",
-  "A7FF large search": "blocked: CORE36ER confirms train-to-OOS executable spread instability",
+  "A7FF formula generation/search": "blocked until CORE38 contract and any later bounded execution pass",
+  "A7FF large search": "blocked: CORE37X selected portfolio-label objective contract, not search",
   "A7FF search execution": "numeric wave has clues but still no replay/search authorization",
   "A7FF-24R4E execution": "pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but numeric wave execution is not started",
   "A7FF-41 control-strict expansion": "not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family",
@@ -15,6 +15,6 @@
   "alpha proof": "not authorized",
   "alpha proof / shadow / paper / live": "not authorized",
   "direct OI-price rerun": "superseded weak prior / not authorized",
-  "same CORE33/34/36 queue rerun": "not authorized: exhausted by CORE36E/36ER",
+  "same CORE33/34/36 queue rerun": "not authorized: frozen by CORE37X",
   "shadow/paper/live": "not authorized"
 }
