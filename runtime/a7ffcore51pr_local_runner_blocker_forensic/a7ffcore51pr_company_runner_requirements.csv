@@ -1,0 +1,6 @@
+requirement,value
+shard_count,"at least 16 candidate shards, <=24 candidates/shard"
+compact_frame,symbol/timestamp/trade_close/split/needed feature columns only
+incremental_outputs,write per-shard metrics before aggregation; resume-safe
+controls,original/stale/time/symbol/sign controls required
+authorization,no search/proof/promotion; replay diagnostics only

@@ -3367,6 +3367,12 @@ runtime,A7FF-CORE51ER,runtime/a7ffcore51er_replay_runner_performance_forensic/a7
 runtime,A7FF-CORE51ER,runtime/a7ffcore51er_replay_runner_performance_forensic/a7ffcore51er_manifest.json,f77ab48,add crypto core51 replay runner forensic,725
 runtime,A7FF-CORE51ER,runtime/a7ffcore51er_replay_runner_performance_forensic/a7ffcore51er_repair_plan.csv,f77ab48,add crypto core51 replay runner forensic,414
 runtime,A7FF-CORE51ER,runtime/a7ffcore51er_replay_runner_performance_forensic/a7ffcore51er_timeout_incident.csv,f77ab48,add crypto core51 replay runner forensic,266
+report,A7FF-CORE51PR,reports/CRYPTO_A7FFCORE51PR_LOCAL_RUNNER_BLOCKER_FORENSIC_20260602.md,,,3685
+runtime,A7FF-CORE51PR,runtime/a7ffcore51pr_local_runner_blocker_forensic/a7ffcore51pr_authorization_matrix.json,,,301
+runtime,A7FF-CORE51PR,runtime/a7ffcore51pr_local_runner_blocker_forensic/a7ffcore51pr_company_runner_requirements.csv,,,367
+runtime,A7FF-CORE51PR,runtime/a7ffcore51pr_local_runner_blocker_forensic/a7ffcore51pr_manifest.json,,,746
+runtime,A7FF-CORE51PR,runtime/a7ffcore51pr_local_runner_blocker_forensic/a7ffcore51pr_route_decision.csv,,,362
+runtime,A7FF-CORE51PR,runtime/a7ffcore51pr_local_runner_blocker_forensic/a7ffcore51pr_timeout_attempts.csv,,,265
 report,A7FF-CORE6,reports/CRYPTO_A7FFCORE6_MATERIALIZATION_PREFLIGHT_CONTRACT_20260601.md,ecb2304,add crypto a7ffcore6 materialization contract,14883
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_manifest.json,ecb2304,add crypto a7ffcore6 materialization contract,850
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_preflight_checks.csv,ecb2304,add crypto a7ffcore6 materialization contract,827
@@ -3720,14 +3726,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,f77ab48,add crypto core51 replay runner forensic,5963
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,f77ab48,add crypto core51 replay runner forensic,606966
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,d712288,refresh crypto pm registry after core51 forensic,5439
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,d712288,refresh crypto pm registry after core51 forensic,607224
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,f77ab48,add crypto core51 replay runner forensic,117316
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,f77ab48,add crypto core51 replay runner forensic,246202
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,f77ab48,add crypto core51 replay runner forensic,711
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,d712288,refresh crypto pm registry after core51 forensic,246209
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,d712288,refresh crypto pm registry after core51 forensic,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,f77ab48,add crypto core51 replay runner forensic,134868
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,d712288,refresh crypto pm registry after core51 forensic,134882
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3745,12 +3751,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,f77ab48,add crypto core51 replay runner forensic,5507
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,f77ab48,add crypto core51 replay runner forensic,380
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,f77ab48,add crypto core51 replay runner forensic,369
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,f77ab48,add crypto core51 replay runner forensic,1419
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,f77ab48,add crypto core51 replay runner forensic,1306
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,f77ab48,add crypto core51 replay runner forensic,425
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,d712288,refresh crypto pm registry after core51 forensic,5638
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,f77ab48,add crypto core51 replay runner forensic,391
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,f77ab48,add crypto core51 replay runner forensic,382
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,f77ab48,add crypto core51 replay runner forensic,1444
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,d712288,refresh crypto pm registry after core51 forensic,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,d712288,refresh crypto pm registry after core51 forensic,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

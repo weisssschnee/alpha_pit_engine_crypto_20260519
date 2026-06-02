@@ -1,0 +1,4 @@
+route_id,decision,reason
+R0_local_pandas_retry,REJECT,two 16-candidate smokes timed out; local retry wastes time
+R1_company_machine_sharded_runner,SELECT,parallel shard execution and higher memory are required for 384-candidate filtered replay
+R2_compact_replay_frame,REQUIRED,prebuild compact label/feature frame and per-shard candidate files before replay

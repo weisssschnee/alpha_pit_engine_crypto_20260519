@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core51px_company_sharded_runner_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7FFCORE51PR_LOCAL_REPLAY_RUNNER_INSUFFICIENT_USE_COMPANY_SHARDS",
+  "dominant_failure": "local_runner_timeout_after_naive_and_dense_attempts",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-02T02:21:41Z",
+  "next_allowed": "A7FF-CORE51PX company-machine sharded replay runner contract",
+  "source_decision": "HOLD_A7FFCORE51ER_REPLAY_RUNNER_PERFORMANCE_BLOCKER",
+  "source_stage": "A7FF-CORE51ER",
+  "stage": "A7FF-CORE51PR"
+}

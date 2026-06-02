@@ -1,5 +1,5 @@
 workstream,current_stage,status,next
 governance,A7PM-0/1/2/3,pass,keep registry as source-of-truth
-a7ff_family_diversification,A7FF-CORE51ER,replay_runner_performance_blocker,A7FF-CORE51P optimized replay runner contract / implementation
+a7ff_family_diversification,A7FF-CORE51PR,local_replay_runner_blocked_use_company_shards,A7FF-CORE51PX company-machine sharded replay runner contract
 a7ff_funding_tail,A7FF-24R4,contract_ready_no_execution,A7FF-24R4E if explicitly authorized
 search_execution,blocked,not_authorized,none

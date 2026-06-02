@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE51P optimized replay runner contract / implementation": "runner optimization only; current CORE51E runner timed out on 16-candidate smoke, no search/proof/promotion",
+  "A7FF-CORE51PX company-machine sharded replay runner contract": "contract/deployment design only; move filtered replay to company-machine shards with compact frame and incremental outputs",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

@@ -1,0 +1,3 @@
+attempt_id,candidate_count,timeout_seconds,result,dominant_issue
+A0_naive_runner,16,1200,timeout,repeated full-frame groupby/rank
+A1_dense_matrix_runner,16,900,timeout,full-frame load/materialization plus dense control matrix construction still too slow locally

@@ -1,0 +1,13 @@
+{
+  "authorized": {
+    "A7FF-CORE51PX company-machine sharded replay runner contract": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "formula_search": true,
+    "large_search": true,
+    "local_runner_retry": true,
+    "promotion": true,
+    "shadow_paper_live": true
+  }
+}
