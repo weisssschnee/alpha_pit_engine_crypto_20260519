@@ -552,6 +552,8 @@ A7FF-CORE51PR,runtime/a7ffcore51pr_local_runner_blocker_forensic/a7ffcore51pr_au
 A7FF-CORE51PR,runtime/a7ffcore51pr_local_runner_blocker_forensic/a7ffcore51pr_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""local_runner_retry"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
 A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_authorization_matrix.json,authorized,"{""A7FF-CORE51PXE company-machine sharded replay execution"": true}",False
 A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""local_runner_retry"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
+A7FF-CORE51PXV,runtime/a7ffcore51pxv_company_execution_preflight_validator/a7ffcore51pxv_authorization_matrix.json,authorized,"{""A7FF-CORE51PXE company-machine sharded replay execution"": true}",False
+A7FF-CORE51PXV,runtime/a7ffcore51pxv_company_execution_preflight_validator/a7ffcore51pxv_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,A7FF-CORE8E replay-preflight packet audit,true,True
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,alpha_proof,false,False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,formula_search,false,False

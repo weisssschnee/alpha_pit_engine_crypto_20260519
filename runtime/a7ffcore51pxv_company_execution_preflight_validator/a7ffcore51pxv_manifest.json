@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core51pxe_execution": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FFCORE51PXV_COMPANY_EXECUTION_PREFLIGHT_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-02T02:53:57Z",
+  "missing_field_count": 0,
+  "next_allowed": "A7FF-CORE51PXE company-machine sharded replay execution",
+  "required_field_count": 42,
+  "selected_candidate_count": 384,
+  "shard_count": 16,
+  "source_decision": "PASS_A7FFCORE51PX_COMPANY_SHARDED_REPLAY_CONTRACT_READY_FOR_COMPANY_EXECUTION",
+  "source_stage": "A7FF-CORE51PX",
+  "stage": "A7FF-CORE51PXV"
+}

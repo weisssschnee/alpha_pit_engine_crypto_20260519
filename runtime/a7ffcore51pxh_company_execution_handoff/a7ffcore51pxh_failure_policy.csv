@@ -1,0 +1,5 @@
+failure,action
+single_shard_timeout,rerun only that shard with --force after checking compact frame exists
+compact_frame_build_fail,check base/latent panel availability and field contract
+multiple_shard_failures,freeze CORE51PXE as runner/data issue and open forensic; do not search
+control_clean_zero,still aggregate/import; CORE52 decides signal route

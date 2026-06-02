@@ -169,6 +169,8 @@ A7FFCORE51 = REPO / "runtime" / "a7ffcore51_filtered_replay_contract" / "a7ffcor
 A7FFCORE51ER = REPO / "runtime" / "a7ffcore51er_replay_runner_performance_forensic" / "a7ffcore51er_manifest.json"
 A7FFCORE51PR = REPO / "runtime" / "a7ffcore51pr_local_runner_blocker_forensic" / "a7ffcore51pr_manifest.json"
 A7FFCORE51PX = REPO / "runtime" / "a7ffcore51px_company_sharded_replay_runner_contract" / "a7ffcore51px_manifest.json"
+A7FFCORE51PXV = REPO / "runtime" / "a7ffcore51pxv_company_execution_preflight_validator" / "a7ffcore51pxv_manifest.json"
+A7FFCORE51PXH = REPO / "runtime" / "a7ffcore51pxh_company_execution_handoff" / "a7ffcore51pxh_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -346,12 +348,36 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore51er = read_json(A7FFCORE51ER)
     a7ffcore51pr = read_json(A7FFCORE51PR)
     a7ffcore51px = read_json(A7FFCORE51PX)
+    a7ffcore51pxv = read_json(A7FFCORE51PXV)
+    a7ffcore51pxh = read_json(A7FFCORE51PXH)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore51px.get("decision") == "PASS_A7FFCORE51PX_COMPANY_SHARDED_REPLAY_CONTRACT_READY_FOR_COMPANY_EXECUTION":
+    if a7ffcore51pxh.get("decision") == "PASS_A7FFCORE51PXH_COMPANY_EXECUTION_HANDOFF_READY":
+        allowed["A7FF-CORE51PXE company-machine sharded replay execution"] = (
+            "execution handoff ready; run company orchestrator, monitor shards, aggregate, then import results for CORE52 arbitration"
+        )
+        blocked["A7FF-CORE51E local runner retry"] = "blocked: company execution handoff is source-of-truth"
+        blocked["A7FF large search"] = "blocked: only company sharded replay diagnostics are authorized"
+        blocked["A7FF formula search"] = "blocked"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE51PXH"
+        status = "company_execution_handoff_ready"
+        next_task = "A7FF-CORE51PXE company-machine sharded replay execution"
+    elif a7ffcore51pxv.get("decision") == "PASS_A7FFCORE51PXV_COMPANY_EXECUTION_PREFLIGHT_READY":
+        allowed["A7FF-CORE51PXE company-machine sharded replay execution"] = (
+            "preflight ready; company shard package validated; no search/proof/promotion"
+        )
+        blocked["A7FF-CORE51E local runner retry"] = "blocked: CORE51PXV selected company-machine execution"
+        blocked["A7FF large search"] = "blocked"
+        blocked["A7FF formula search"] = "blocked"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE51PXV"
+        status = "company_execution_preflight_ready"
+        next_task = "A7FF-CORE51PXE company-machine sharded replay execution"
+    elif a7ffcore51px.get("decision") == "PASS_A7FFCORE51PX_COMPANY_SHARDED_REPLAY_CONTRACT_READY_FOR_COMPANY_EXECUTION":
         allowed["A7FF-CORE51PXE company-machine sharded replay execution"] = (
             "company-machine shard execution option; build compact frame and run 16 candidate shards; no search/proof/promotion"
         )

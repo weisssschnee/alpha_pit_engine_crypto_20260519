@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE51PXE company-machine sharded replay execution": "company-machine shard execution option; build compact frame and run 16 candidate shards; no search/proof/promotion",
+  "A7FF-CORE51PXE company-machine sharded replay execution": "execution handoff ready; run company orchestrator, monitor shards, aggregate, then import results for CORE52 arbitration",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

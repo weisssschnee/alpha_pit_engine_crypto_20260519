@@ -1,0 +1,15 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core51pxe_execution": true,
+  "authorizes_shadow_paper_live": false,
+  "command_file": "G:/Project_V7_Rotation/alpha_pit_engine_crypto_20260519/runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_company_execution_commands.ps1",
+  "decision": "PASS_A7FFCORE51PXH_COMPANY_EXECUTION_HANDOFF_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-02T02:55:43Z",
+  "next_allowed": "A7FF-CORE51PXE company-machine sharded replay execution",
+  "output_dir": "G:/AlphaFactory_CryptoData/research_runtime/a7ffcore51px_company_sharded_replay_20260602",
+  "source_decision": "PASS_A7FFCORE51PXV_COMPANY_EXECUTION_PREFLIGHT_READY",
+  "source_stage": "A7FF-CORE51PXV",
+  "stage": "A7FF-CORE51PXH"
+}

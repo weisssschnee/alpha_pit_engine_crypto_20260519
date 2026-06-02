@@ -1,0 +1,6 @@
+gate,pass_condition
+completed_shards,16/16 shard manifests PASS
+eval_failures,aggregate eval_failure_count == 0
+metric_rows,aggregate metric_rows > 0
+import_manifest,repo runtime import decision PASS
+authorization_boundary,no formula search / proof / promotion / live
