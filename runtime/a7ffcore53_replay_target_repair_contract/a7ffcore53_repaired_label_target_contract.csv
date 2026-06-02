@@ -1,0 +1,9 @@
+target_id,role,status,description,independent_for_top_bottom_spread,promotion_role
+T0_raw_return,baseline,allowed_baseline,raw forward return by horizon,True,baseline_only
+T1_xs_relative_return,redundant_for_decile_spread,blocked_as_independent_evidence,cross-sectional demeaned return; top-bottom spread equals raw spread after common component removal,False,diagnostic_only
+T2_btc_eth_beta_residual_return,market_beta_residual,required_new_target,future return residual after BTC/ETH or major-beta exposure removal,True,primary_candidate_evidence
+T3_liquidity_tier_relative_return,liquidity_neutral_relative,required_new_target,future return relative to active liquidity tier peers,True,primary_candidate_evidence
+T4_latent_state_relative_return,latent_state_neutral_relative,required_new_target,future return relative to frozen listing-age/liquidity/volatility latent state peers,True,primary_candidate_evidence
+T5_vol_adjusted_return,risk_scaled_return,required_new_target,future return divided by ex-ante realized volatility scale,True,supporting_candidate_evidence
+T6_ranked_future_return,rank_label,diagnostic_only,future cross-sectional rank; cannot alone promote candidate to alpha pool,True,diagnostic_only
+T7_portfolio_net_spread_proxy,book_proxy,required_new_target,top-bottom book spread proxy with turnover/cost accounting fields,True,promotion_gate

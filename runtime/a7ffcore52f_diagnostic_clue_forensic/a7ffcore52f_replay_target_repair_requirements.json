@@ -1,0 +1,17 @@
+{
+  "required_repairs": [
+    "do_not_count_L0_raw_and_L1_xs_as_independent_for_top_bottom_spread",
+    "add_non_redundant_label_targets_before_next_replay_wave",
+    "require_control_margin_not_just_control_ratio_below_one",
+    "separate_diagnostic_clues_from_strict_replay_clues",
+    "do_not_expand_formula_search_from_current_35_diagnostic_clues"
+  ],
+  "suggested_label_targets": [
+    "BTC_ETH_beta_residual_return",
+    "liquidity_tier_relative_return",
+    "latent_state_relative_return",
+    "vol_adjusted_return",
+    "ranked_future_return_diagnostic_only",
+    "portfolio_top_bottom_net_spread_proxy"
+  ]
+}

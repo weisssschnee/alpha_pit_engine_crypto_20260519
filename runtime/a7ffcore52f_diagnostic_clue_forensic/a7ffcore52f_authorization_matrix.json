@@ -1,0 +1,13 @@
+{
+  "authorized": {
+    "A7FF-CORE53 replay target repair contract": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "deep_audit": true,
+    "formula_search": true,
+    "large_search": true,
+    "promotion": true,
+    "shadow_paper_live": true
+  }
+}

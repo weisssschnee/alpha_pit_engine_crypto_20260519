@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-02T03:01:33Z
+Generated: 2026-06-02T09:39:16Z
 
 ## Decision
 
@@ -11,25 +11,21 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
- M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
- M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
- M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
- M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
- M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=b37af5d12a93a84cbfae27d6af9500c04dc2eeb9
+## main...origin/main [ahead 1]
+ M runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_company_execution_commands.ps1
+ M scripts/crypto_a7ffcore51px_company_shard_worker.py
+?? reports/CRYPTO_A7FFCORE51PXE_COMPANY_SHARDED_REPLAY_IMPORT_20260602.md
+?? runtime/a7ffcore51pxe_company_sharded_replay_import/
+HEAD=9eba6402b6b4119955396f7c71ef9ff05974272f
 origin/main=b37af5d12a93a84cbfae27d6af9500c04dc2eeb9
-HEAD == origin/main: True
+HEAD == origin/main: False
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3969,
+  "artifact_count": 3974,
   "authorization_record_count": 774,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -43,12 +39,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-02T03:01:33Z",
-  "head": "b37af5d12a93a84cbfae27d6af9500c04dc2eeb9",
-  "head_equals_origin_main": true,
+  "generated_at": "2026-06-02T09:39:16Z",
+  "head": "9eba6402b6b4119955396f7c71ef9ff05974272f",
+  "head_equals_origin_main": false,
   "origin_main": "b37af5d12a93a84cbfae27d6af9500c04dc2eeb9",
   "stage": "A7PM-0",
-  "stage_count": 418
+  "stage_count": 419
 }
 ```
 
@@ -67,7 +63,7 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     148 |
+| valid_or_historical_record   | governance_or_audit        |     149 |
 | valid_or_historical_record   | contract                   |     124 |
 | valid_or_historical_record   | diagnostic                 |      27 |
 | valid_or_historical_record   | smoke                      |       8 |

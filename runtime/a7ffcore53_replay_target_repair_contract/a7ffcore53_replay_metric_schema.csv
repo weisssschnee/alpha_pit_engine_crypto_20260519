@@ -1,0 +1,9 @@
+column,required,description
+target_id,True,repaired replay target id
+horizon,True,label horizon
+original_spread_mean,True,top-bottom target spread
+original_tstat,True,hourly or non-overlap robust tstat
+control_ratio,True,max absolute control spread divided by original absolute spread
+control_margin,True,1 - control_ratio
+independent_target_flag,True,whether target counts as independent evidence
+portfolio_net_spread_proxy,False,book-level net spread proxy where applicable

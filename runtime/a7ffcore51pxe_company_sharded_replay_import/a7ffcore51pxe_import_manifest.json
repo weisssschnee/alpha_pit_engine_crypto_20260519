@@ -1,0 +1,15 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core52_arbitration": true,
+  "authorizes_shadow_paper_live": false,
+  "completed_shards": 16,
+  "control_clean_positive_seed_count": 35,
+  "decision": "PASS_A7FFCORE51PXE_COMPANY_RESULTS_IMPORTED_READY_FOR_CORE52_ARBITRATION",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-02T09:38:22Z",
+  "metric_rows": 3072,
+  "source_decision": "PASS_A7FFCORE51PXE_COMPANY_SHARDED_REPLAY_AGGREGATED",
+  "source_output_dir": "G:/AlphaFactory_CryptoData/research_runtime/a7ffcore51px_company_sharded_replay_20260602",
+  "stage": "A7FF-CORE51PXE-IMPORT"
+}

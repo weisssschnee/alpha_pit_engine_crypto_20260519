@@ -1,0 +1,5 @@
+horizon,status,notes
+1h,allowed,primary fast horizon; require turnover/cost proxy
+4h,allowed,medium fast horizon
+8h,allowed,medium horizon
+24h,allowed,slow horizon

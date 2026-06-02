@@ -1,0 +1,16 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core53e_preflight": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE53_REPLAY_TARGET_REPAIR_CONTRACT_READY_FOR_CORE53E",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-02T09:50:25Z",
+  "required_new_target_count": 5,
+  "source_decision": "HOLD_A7FFCORE52F_LABEL_REDUNDANCY_AND_THIN_CONTROL_MARGIN",
+  "source_stage": "A7FF-CORE52F",
+  "stage": "A7FF-CORE53",
+  "target_count": 8
+}

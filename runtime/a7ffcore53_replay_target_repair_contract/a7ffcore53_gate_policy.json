@@ -1,0 +1,20 @@
+{
+  "diagnostic_clue": {
+    "median_control_ratio_max": 1.0,
+    "min_clean_horizon_count": 1,
+    "min_clean_independent_target_count": 1,
+    "requires_forensic_not_search": true
+  },
+  "forbidden_counting_rules": [
+    "T0_raw_return and T1_xs_relative_return cannot be counted as two independent labels for top-bottom spread",
+    "ranked_future_return cannot be the only positive target for alpha promotion",
+    "control_ratio just below one is not sufficient without positive control margin"
+  ],
+  "strict_replay_clue": {
+    "median_control_ratio_max": 0.9,
+    "min_clean_horizon_count": 2,
+    "min_clean_independent_target_count": 3,
+    "min_control_ratio_max": 0.8,
+    "requires_portfolio_net_spread_proxy_positive": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core53_replay_target_repair_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7FFCORE52F_LABEL_REDUNDANCY_AND_THIN_CONTROL_MARGIN",
+  "diagnostic_clue_count": 35,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-02T09:48:13Z",
+  "redundant_l0_l1_horizon_count": 4,
+  "single_horizon_clue_count": 25,
+  "source_decision": "HOLD_A7FFCORE52_DIAGNOSTIC_CLUES_INSUFFICIENT_FOR_SEARCH",
+  "source_stage": "A7FF-CORE52",
+  "stage": "A7FF-CORE52F",
+  "strict_replay_clue_count": 1,
+  "thin_control_margin_clue_count": 34
+}

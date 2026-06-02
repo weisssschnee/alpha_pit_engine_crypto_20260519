@@ -1,0 +1,12 @@
+{
+  "authorized": {
+    "A7FF-CORE53E replay target builder preflight": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "candidate_promotion": true,
+    "formula_search": true,
+    "large_search": true,
+    "shadow_paper_live": true
+  }
+}

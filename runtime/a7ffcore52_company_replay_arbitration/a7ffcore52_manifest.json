@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core52f_forensic": true,
+  "authorizes_core53_deep_audit_contract": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7FFCORE52_DIAGNOSTIC_CLUES_INSUFFICIENT_FOR_SEARCH",
+  "diagnostic_clue_count": 35,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-02T09:43:13Z",
+  "label_count": 8,
+  "metric_rows": 3072,
+  "operator_count": 7,
+  "seed_count": 384,
+  "semantic_pair_count": 39,
+  "source_decision": "PASS_A7FFCORE51PXE_COMPANY_RESULTS_IMPORTED_READY_FOR_CORE52_ARBITRATION",
+  "source_stage": "A7FF-CORE51PXE-IMPORT",
+  "stage": "A7FF-CORE52",
+  "strict_replay_clue_count": 1,
+  "strict_replay_clue_semantic_pair_count": 1
+}

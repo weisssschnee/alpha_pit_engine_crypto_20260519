@@ -19,7 +19,7 @@ if str(SCRIPTS) not in sys.path:
 
 from alphafactory_crypto.engines.feature_algebra import CryptoFeatureAlgebra
 from crypto_a7ffcore49e_full_universe_null_vector_preflight_execution import vector_controls
-from crypto_a7ffcore51p_optimized_replay_runner_smoke import dense_index, dense_matrix, dense_spread
+from crypto_a7ffcore51p_optimized_replay_runner_smoke import dense_index, dense_matrix
 
 
 HORIZONS = [1, 4, 8, 24]
@@ -27,6 +27,114 @@ HORIZONS = [1, 4, 8, 24]
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def decile_spread_fast(signal_matrix: np.ndarray, label_matrix: np.ndarray) -> tuple[float, float, int]:
+    """Compute hourly top-bottom decile spread without row-wise nanpercentile allocations."""
+    spreads: list[float] = []
+    for signal_row, label_row in zip(signal_matrix, label_matrix):
+        valid = np.isfinite(signal_row) & np.isfinite(label_row)
+        n = int(valid.sum())
+        if n < 20:
+            continue
+        s = signal_row[valid]
+        l = label_row[valid]
+        k = max(1, int(np.ceil(0.1 * n)))
+        order = np.argpartition(s, (k - 1, n - k))
+        bottom_mean = float(np.mean(l[order[:k]]))
+        top_mean = float(np.mean(l[order[n - k :]]))
+        spread = top_mean - bottom_mean
+        if np.isfinite(spread):
+            spreads.append(spread)
+    if not spreads:
+        return np.nan, np.nan, 0
+    values = np.asarray(spreads, dtype=np.float64)
+    mean = float(values.mean())
+    std = float(values.std(ddof=1)) if values.size > 1 else np.nan
+    tstat = mean / (std / np.sqrt(values.size)) if np.isfinite(std) and std > 0 else np.nan
+    return mean, float(tstat) if np.isfinite(tstat) else np.nan, int(values.size)
+
+
+def decile_spreads_for_labels(
+    signal_matrix: np.ndarray, label_matrices: dict[str, np.ndarray]
+) -> dict[str, tuple[float, float, int]]:
+    """Compute decile spreads for all labels while reusing each hourly signal sort."""
+    spread_lists: dict[str, list[float]] = {label_key: [] for label_key in label_matrices}
+    label_items = list(label_matrices.items())
+    for row_num, signal_row in enumerate(signal_matrix):
+        finite_signal = np.isfinite(signal_row)
+        n_signal = int(finite_signal.sum())
+        if n_signal < 20:
+            continue
+        finite_cols = np.flatnonzero(finite_signal)
+        ordered_cols = finite_cols[np.argsort(signal_row[finite_cols])]
+        for label_key, label_matrix in label_items:
+            label_row = label_matrix[row_num]
+            usable_cols = ordered_cols[np.isfinite(label_row[ordered_cols])]
+            n = int(usable_cols.size)
+            if n < 20:
+                continue
+            k = max(1, int(np.ceil(0.1 * n)))
+            spread = float(np.mean(label_row[usable_cols[-k:]]) - np.mean(label_row[usable_cols[:k]]))
+            if np.isfinite(spread):
+                spread_lists[label_key].append(spread)
+    out: dict[str, tuple[float, float, int]] = {}
+    for label_key, spreads in spread_lists.items():
+        if not spreads:
+            out[label_key] = (np.nan, np.nan, 0)
+            continue
+        values = np.asarray(spreads, dtype=np.float64)
+        mean = float(values.mean())
+        std = float(values.std(ddof=1)) if values.size > 1 else np.nan
+        tstat = mean / (std / np.sqrt(values.size)) if np.isfinite(std) and std > 0 else np.nan
+        out[label_key] = (mean, float(tstat) if np.isfinite(tstat) else np.nan, int(values.size))
+    return out
+
+
+def decile_spreads_vectorized(
+    signal_matrix: np.ndarray, label_matrices: dict[str, np.ndarray]
+) -> dict[str, tuple[float, float, int]]:
+    finite_signal = np.isfinite(signal_matrix)
+    row_counts = finite_signal.sum(axis=1).astype(np.int32)
+    enough = row_counts >= 20
+    if not bool(enough.any()):
+        return {label_key: (np.nan, np.nan, 0) for label_key in label_matrices}
+    k = np.ceil(row_counts * 0.1).astype(np.int32)
+    k = np.maximum(k, 1)
+    max_k = int(k[enough].max())
+    sort_input = np.where(finite_signal, signal_matrix, np.inf)
+    order = np.argsort(sort_input, axis=1)
+    ar = np.arange(max_k, dtype=np.int32)
+    bottom_idx = order[:, :max_k]
+    bottom_mask = enough[:, None] & (ar[None, :] < k[:, None])
+    top_positions = row_counts[:, None] - max_k + ar[None, :]
+    top_positions = np.clip(top_positions, 0, signal_matrix.shape[1] - 1)
+    top_idx = np.take_along_axis(order, top_positions, axis=1)
+    top_mask = enough[:, None] & (ar[None, :] >= (max_k - k)[:, None])
+    out: dict[str, tuple[float, float, int]] = {}
+    for label_key, label_matrix in label_matrices.items():
+        bottom_values = np.take_along_axis(label_matrix, bottom_idx, axis=1)
+        top_values = np.take_along_axis(label_matrix, top_idx, axis=1)
+        bottom_valid = bottom_mask & np.isfinite(bottom_values)
+        top_valid = top_mask & np.isfinite(top_values)
+        bottom_count = bottom_valid.sum(axis=1)
+        top_count = top_valid.sum(axis=1)
+        bottom_sum = np.where(bottom_valid, bottom_values, 0.0).sum(axis=1, dtype=np.float64)
+        top_sum = np.where(top_valid, top_values, 0.0).sum(axis=1, dtype=np.float64)
+        valid_rows = (bottom_count > 0) & (top_count > 0)
+        if not bool(valid_rows.any()):
+            out[label_key] = (np.nan, np.nan, 0)
+            continue
+        spreads = (top_sum[valid_rows] / top_count[valid_rows]) - (bottom_sum[valid_rows] / bottom_count[valid_rows])
+        spreads = spreads[np.isfinite(spreads)]
+        if spreads.size == 0:
+            out[label_key] = (np.nan, np.nan, 0)
+            continue
+        mean = float(spreads.mean())
+        std = float(spreads.std(ddof=1)) if spreads.size > 1 else np.nan
+        tstat = mean / (std / np.sqrt(spreads.size)) if np.isfinite(std) and std > 0 else np.nan
+        out[label_key] = (mean, float(tstat) if np.isfinite(tstat) else np.nan, int(spreads.size))
+    return out
 
 
 def main() -> None:
@@ -78,19 +186,22 @@ def main() -> None:
                 "symbol_shuffle": controls["symbol_shuffle_signal"],
                 "sign_flip": controls["sign_flip_signal"],
             }
-            dense_signals = {name: dense_matrix(series, row_idx, col_idx, n_ts, n_symbols) for name, series in signal_map.items()}
+            spread_maps = {
+                name: decile_spreads_vectorized(dense_matrix(series, row_idx, col_idx, n_ts, n_symbols), label_matrices)
+                for name, series in signal_map.items()
+            }
         except Exception as exc:
             failures.append({"seed_id": seed.get("seed_id", ""), "expression": seed.get("expression", ""), "error": str(exc)})
             continue
         for label_key, label_matrix in label_matrices.items():
-            original_mean, original_tstat, obs = dense_spread(dense_signals["original"], label_matrix)
+            original_mean, original_tstat, obs = spread_maps["original"][label_key]
             control_means = []
             control_spreads = {}
             for control_name in ["stale", "time_shuffle", "symbol_shuffle", "sign_flip"]:
-                mean, _, _ = dense_spread(dense_signals[control_name], label_matrix)
+                mean, _, _ = spread_maps[control_name][label_key]
                 control_spreads[f"{control_name}_spread_mean"] = mean
                 control_means.append(abs(mean) if np.isfinite(mean) else np.nan)
-            control_max = np.nanmax(control_means)
+            control_max = np.nanmax(control_means) if any(np.isfinite(x) for x in control_means) else np.nan
             original_abs = abs(original_mean) if np.isfinite(original_mean) else np.nan
             control_ratio = control_max / original_abs if np.isfinite(original_abs) and original_abs > 1e-12 else np.nan
             rows.append(
