@@ -3377,7 +3377,7 @@ report,A7FF-CORE51PX,reports/CRYPTO_A7FFCORE51PX_COMPANY_SHARDED_REPLAY_RUNNER_C
 runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_authorization_matrix.json,1d072b6,add crypto core51px company sharded replay contract,296
 runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_candidate_shard_plan.csv,1d072b6,add crypto core51px company sharded replay contract,2294
 runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_compact_frame_contract.csv,1d072b6,add crypto core51px company sharded replay contract,1947
-runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_company_execution_commands.ps1,1d072b6,add crypto core51px company sharded replay contract,726
+runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_company_execution_commands.ps1,1d072b6,add crypto core51px company sharded replay contract,337
 runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_deployment_policy.csv,1d072b6,add crypto core51px company sharded replay contract,472
 runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_input_sources.csv,1d072b6,add crypto core51px company sharded replay contract,799
 runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_manifest.json,1d072b6,add crypto core51px company sharded replay contract,884
@@ -3752,14 +3752,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,1d072b6,add crypto core51px company sharded replay contract,6024
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,1d072b6,add crypto core51px company sharded replay contract,611576
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,5ba8561,refresh crypto pm registry after core51px,5439
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,5ba8561,refresh crypto pm registry after core51px,613180
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,1d072b6,add crypto core51px company sharded replay contract,118287
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,1d072b6,add crypto core51px company sharded replay contract,247712
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,1d072b6,add crypto core51px company sharded replay contract,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,5ba8561,refresh crypto pm registry after core51px,247719
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,5ba8561,refresh crypto pm registry after core51px,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,1d072b6,add crypto core51px company sharded replay contract,135851
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,5ba8561,refresh crypto pm registry after core51px,135858
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3777,12 +3777,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,1d072b6,add crypto core51px company sharded replay contract,5489
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,5ba8561,refresh crypto pm registry after core51px,5489
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,1d072b6,add crypto core51px company sharded replay contract,377
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,1d072b6,add crypto core51px company sharded replay contract,369
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,1d072b6,add crypto core51px company sharded replay contract,1432
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,1d072b6,add crypto core51px company sharded replay contract,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,1d072b6,add crypto core51px company sharded replay contract,425
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,5ba8561,refresh crypto pm registry after core51px,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,5ba8561,refresh crypto pm registry after core51px,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
