@@ -1,0 +1,13 @@
+field,required
+shard_id,True
+seed_id,True
+label_family,True
+horizon,True
+original_spread_mean,True
+original_tstat,True
+control_ratio,True
+stale_spread_mean,True
+time_shuffle_spread_mean,True
+symbol_shuffle_spread_mean,True
+sign_flip_spread_mean,True
+decision,True

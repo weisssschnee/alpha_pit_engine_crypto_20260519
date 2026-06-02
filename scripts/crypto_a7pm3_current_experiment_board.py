@@ -168,6 +168,7 @@ A7FFCORE50 = REPO / "runtime" / "a7ffcore50_null_vector_preflight_arbitration" /
 A7FFCORE51 = REPO / "runtime" / "a7ffcore51_filtered_replay_contract" / "a7ffcore51_manifest.json"
 A7FFCORE51ER = REPO / "runtime" / "a7ffcore51er_replay_runner_performance_forensic" / "a7ffcore51er_manifest.json"
 A7FFCORE51PR = REPO / "runtime" / "a7ffcore51pr_local_runner_blocker_forensic" / "a7ffcore51pr_manifest.json"
+A7FFCORE51PX = REPO / "runtime" / "a7ffcore51px_company_sharded_replay_runner_contract" / "a7ffcore51px_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -344,12 +345,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore51 = read_json(A7FFCORE51)
     a7ffcore51er = read_json(A7FFCORE51ER)
     a7ffcore51pr = read_json(A7FFCORE51PR)
+    a7ffcore51px = read_json(A7FFCORE51PX)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore51pr.get("decision") == "HOLD_A7FFCORE51PR_LOCAL_REPLAY_RUNNER_INSUFFICIENT_USE_COMPANY_SHARDS":
+    if a7ffcore51px.get("decision") == "PASS_A7FFCORE51PX_COMPANY_SHARDED_REPLAY_CONTRACT_READY_FOR_COMPANY_EXECUTION":
+        allowed["A7FF-CORE51PXE company-machine sharded replay execution"] = (
+            "company-machine shard execution option; build compact frame and run 16 candidate shards; no search/proof/promotion"
+        )
+        blocked["A7FF-CORE51E local runner retry"] = "blocked: CORE51PX selected company-machine sharding"
+        blocked["A7FF large search"] = "blocked: only sharded replay diagnostics are authorized"
+        blocked["A7FF formula search"] = "blocked"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE51PX"
+        status = "company_sharded_replay_contract_ready"
+        next_task = "A7FF-CORE51PXE company-machine sharded replay execution"
+    elif a7ffcore51pr.get("decision") == "HOLD_A7FFCORE51PR_LOCAL_REPLAY_RUNNER_INSUFFICIENT_USE_COMPANY_SHARDS":
         allowed["A7FF-CORE51PX company-machine sharded replay runner contract"] = (
             "contract/deployment design only; move filtered replay to company-machine shards with compact frame and incremental outputs"
         )

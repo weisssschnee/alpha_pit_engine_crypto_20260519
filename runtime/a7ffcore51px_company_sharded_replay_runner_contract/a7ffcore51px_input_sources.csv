@@ -1,0 +1,6 @@
+input_id,path,role,required
+I0_selected_candidate_queue,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_selected_candidate_queue.csv,balanced 384-candidate replay queue,True
+I1_candidate_shards,runtime/a7ffcore51px_company_sharded_replay_runner_contract/candidate_shards/,16 x 24-candidate shard CSVs,True
+I2_compact_frame_contract,runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_compact_frame_contract.csv,required columns and source panel routing,True
+I3_base_panel,G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v2_20260527,base universe498 replay panel,True
+I4_latent_panel,G:/AlphaFactory_CryptoData/gold/features/binance_universe498_latent_state_features_v1_20260527.parquet,latent/listing/liquidity overlay,True

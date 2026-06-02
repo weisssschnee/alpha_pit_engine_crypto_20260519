@@ -1,0 +1,7 @@
+policy_id,policy
+P0_no_local_retry,do not rerun local pandas replay runner
+P1_company_shards,run candidate shards independently on company machine
+P2_compact_frame,build compact frame with only required columns before shard replay
+P3_incremental_outputs,write one metrics CSV and one manifest JSON per shard
+P4_resume_safe,skip completed shards with PASS manifest unless force flag is set
+P5_no_search,no formula generation/search/proof/promotion/shadow/paper/live

@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-02T02:23:57Z
+Generated: 2026-06-02T02:31:45Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-02T02:23:57Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                         | next                                                         |
-|:----------------------------|:----------------|:-----------------------------------------------|:-------------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                           | keep registry as source-of-truth                             |
-| a7ff_family_diversification | A7FF-CORE51PR   | local_replay_runner_blocked_use_company_shards | A7FF-CORE51PX company-machine sharded replay runner contract |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                    | A7FF-24R4E if explicitly authorized                          |
-| search_execution            | blocked         | not_authorized                                 | none                                                         |
+| workstream                  | current_stage   | status                                | next                                                    |
+|:----------------------------|:----------------|:--------------------------------------|:--------------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                  | keep registry as source-of-truth                        |
+| a7ff_family_diversification | A7FF-CORE51PX   | company_sharded_replay_contract_ready | A7FF-CORE51PXE company-machine sharded replay execution |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution           | A7FF-24R4E if explicitly authorized                     |
+| search_execution            | blocked         | not_authorized                        | none                                                    |
 
 ## Allowed Next Tasks
 
-| task                                                         | reason                                                                                                                     |
-|:-------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option            | requires explicit user authorization; no search and no promotion                                                           |
-| A7PM-0/3 maintenance                                         | governance registry maintenance                                                                                            |
-| A7FF-CORE51PX company-machine sharded replay runner contract | contract/deployment design only; move filtered replay to company-machine shards with compact frame and incremental outputs |
+| task                                                    | reason                                                                                                             |
+|:--------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option       | requires explicit user authorization; no search and no promotion                                                   |
+| A7PM-0/3 maintenance                                    | governance registry maintenance                                                                                    |
+| A7FF-CORE51PXE company-machine sharded replay execution | company-machine shard execution option; build compact frame and run 16 candidate shards; no search/proof/promotion |
 
 ## Blocked Tasks
 
@@ -41,8 +41,8 @@ Generated: 2026-06-02T02:23:57Z
 | A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                         | not authorized                                                                                                        |
 | shadow/paper/live                   | not authorized                                                                                                        |
-| A7FF-CORE51E local runner retry     | blocked: local naive and dense-matrix smokes timed out                                                                |
-| A7FF large search                   | blocked: replay runner must move to company-machine shards first                                                      |
+| A7FF-CORE51E local runner retry     | blocked: CORE51PX selected company-machine sharding                                                                   |
+| A7FF large search                   | blocked: only sharded replay diagnostics are authorized                                                               |
 | A7FF formula search                 | blocked                                                                                                               |
 | alpha proof / shadow / paper / live | not authorized                                                                                                        |
 
