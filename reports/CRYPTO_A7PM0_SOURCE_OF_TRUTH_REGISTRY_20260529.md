@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-02T02:36:22Z
+Generated: 2026-06-02T02:41:38Z
 
 ## Decision
 
@@ -12,16 +12,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
- M reports/CRYPTO_A7FFCORE51PX_COMPANY_SHARDED_REPLAY_RUNNER_CONTRACT_20260602.md
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_company_execution_commands.ps1
- M runtime/a7ffcore51px_company_sharded_replay_runner_contract/a7ffcore51px_manifest.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
- M scripts/crypto_a7ffcore51px_company_sharded_replay_runner_contract.py
-?? scripts/crypto_a7ffcore51pxe_company_sharded_replay_orchestrator.py
-HEAD=5ba8561200249ab1c66495d07729a6a918b4a7b3
-origin/main=5ba8561200249ab1c66495d07729a6a918b4a7b3
+HEAD=90115d2d1baff060f7958b313c73ef5e0da71f26
+origin/main=90115d2d1baff060f7958b313c73ef5e0da71f26
 HEAD == origin/main: True
 ```
 
@@ -43,10 +38,10 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-02T02:36:22Z",
-  "head": "5ba8561200249ab1c66495d07729a6a918b4a7b3",
+  "generated_at": "2026-06-02T02:41:38Z",
+  "head": "90115d2d1baff060f7958b313c73ef5e0da71f26",
   "head_equals_origin_main": true,
-  "origin_main": "5ba8561200249ab1c66495d07729a6a918b4a7b3",
+  "origin_main": "90115d2d1baff060f7958b313c73ef5e0da71f26",
   "stage": "A7PM-0",
   "stage_count": 416
 }
