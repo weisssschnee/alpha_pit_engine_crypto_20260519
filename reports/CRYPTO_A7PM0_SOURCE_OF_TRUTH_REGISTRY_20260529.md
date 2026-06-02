@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-02T02:22:55Z
+Generated: 2026-06-02T02:24:06Z
 
 ## Decision
 
@@ -13,18 +13,10 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ```text
 ## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
- M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
- M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE51PR_LOCAL_RUNNER_BLOCKER_FORENSIC_20260602.md
-?? runtime/a7ffcore51pr_local_runner_blocker_forensic/
-?? scripts/crypto_a7ffcore51p_optimized_replay_runner_smoke.py
-?? scripts/crypto_a7ffcore51pr_local_runner_blocker_forensic.py
-HEAD=d7122884c12cc477466dfe64dc82e3e3fa1c2274
-origin/main=d7122884c12cc477466dfe64dc82e3e3fa1c2274
+HEAD=979438c824ce9905b9e2262ed7a2d255bef6f80c
+origin/main=979438c824ce9905b9e2262ed7a2d255bef6f80c
 HEAD == origin/main: True
 ```
 
@@ -46,10 +38,10 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-02T02:22:55Z",
-  "head": "d7122884c12cc477466dfe64dc82e3e3fa1c2274",
+  "generated_at": "2026-06-02T02:24:06Z",
+  "head": "979438c824ce9905b9e2262ed7a2d255bef6f80c",
   "head_equals_origin_main": true,
-  "origin_main": "d7122884c12cc477466dfe64dc82e3e3fa1c2274",
+  "origin_main": "979438c824ce9905b9e2262ed7a2d255bef6f80c",
   "stage": "A7PM-0",
   "stage_count": 415
 }
