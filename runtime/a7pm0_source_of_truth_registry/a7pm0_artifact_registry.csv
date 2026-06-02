@@ -340,13 +340,13 @@ runtime,A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_historical_ca
 runtime,A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_manifest.json,8bad66e,add crypto enforcement parity and selector counterfactual,478
 runtime,A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_role_violation_summary.csv,8bad66e,add crypto enforcement parity and selector counterfactual,114
 runtime,A7AI-F2,runtime/a7aif2_field_enforcement_regression/a7aif2_selector_role_trace_audit.csv,8bad66e,add crypto enforcement parity and selector counterfactual,461579
-report,A7AI-F3,reports/CRYPTO_A7AIF3_MATERIALIZATION_EVALUATOR_PARITY_20260529.md,8bad66e,add crypto enforcement parity and selector counterfactual,9597
+report,A7AI-F3,reports/CRYPTO_A7AIF3_MATERIALIZATION_EVALUATOR_PARITY_20260529.md,2c20665,add crypto core49e core50 null vector preflight,9597
 runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_blocking_field_resolution.csv,8bad66e,add crypto enforcement parity and selector counterfactual,106
 runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_blocking_operator_resolution.csv,8bad66e,add crypto enforcement parity and selector counterfactual,91
 runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_eval_consistency_sample.csv,8bad66e,add crypto enforcement parity and selector counterfactual,915
 runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_field_materialization_matrix.csv,8bad66e,add crypto enforcement parity and selector counterfactual,2758
 runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_forbidden_operator_registry.csv,8bad66e,add crypto enforcement parity and selector counterfactual,27
-runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_manifest.json,8bad66e,add crypto enforcement parity and selector counterfactual,490
+runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_manifest.json,2c20665,add crypto core49e core50 null vector preflight,490
 runtime,A7AI-F3,runtime/a7aif3_materialization_evaluator_parity/a7aif3_operator_parity_matrix.csv,8bad66e,add crypto enforcement parity and selector counterfactual,1150
 report,A7AI-F4,reports/CRYPTO_A7AIF4_RESPONSE_BACKED_FIELD_PROMOTION_20260529.md,d18f2d5,add crypto response backed alpha pool gates,6036
 runtime,A7AI-F4,runtime/a7aif4_response_backed_field_promotion/a7aif4_candidate_field_promotion.csv,d18f2d5,add crypto response backed alpha pool gates,2518
@@ -3329,13 +3329,13 @@ runtime,A7FF-CORE49,runtime/a7ffcore49_full_universe_null_vector_preflight_contr
 runtime,A7FF-CORE49,runtime/a7ffcore49_full_universe_null_vector_preflight_contract/a7ffcore49_preflight_shard_plan.csv,7583e81,add crypto core48s through core49 preflight contract,610
 runtime,A7FF-CORE49,runtime/a7ffcore49_full_universe_null_vector_preflight_contract/a7ffcore49_quality_gate.csv,7583e81,add crypto core48s through core49 preflight contract,241
 runtime,A7FF-CORE49,runtime/a7ffcore49_full_universe_null_vector_preflight_contract/a7ffcore49_vector_output_schema.csv,7583e81,add crypto core48s through core49 preflight contract,556
-report,A7FF-CORE49E,reports/CRYPTO_A7FFCORE49E_FULL_UNIVERSE_NULL_VECTOR_PREFLIGHT_EXECUTION_20260602.md,,,15684
-runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_authorization_matrix.json,,,354
-runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_eval_failures.csv,,,2
-runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_family_operator_summary.csv,,,25650
-runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_manifest.json,,,1183
-runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_missing_fields.csv,,,15
-runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_seed_vector_metrics.csv,,,573962
+report,A7FF-CORE49E,reports/CRYPTO_A7FFCORE49E_FULL_UNIVERSE_NULL_VECTOR_PREFLIGHT_EXECUTION_20260602.md,2c20665,add crypto core49e core50 null vector preflight,15684
+runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_authorization_matrix.json,2c20665,add crypto core49e core50 null vector preflight,354
+runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_eval_failures.csv,2c20665,add crypto core49e core50 null vector preflight,2
+runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_family_operator_summary.csv,2c20665,add crypto core49e core50 null vector preflight,25650
+runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_manifest.json,2c20665,add crypto core49e core50 null vector preflight,1183
+runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_missing_fields.csv,2c20665,add crypto core49e core50 null vector preflight,15
+runtime,A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_seed_vector_metrics.csv,2c20665,add crypto core49e core50 null vector preflight,573962
 report,A7FF-CORE5,reports/CRYPTO_A7FFCORE5_GATE_NATIVE_GENERATION_DRYRUN_20260601.md,7011a15,add crypto a7ffcore5 gate native dryrun,4601
 runtime,A7FF-CORE5,runtime/a7ffcore5_gate_native_generation_dryrun/a7ffcore5_gate_native_candidate_queue.csv,7011a15,add crypto a7ffcore5 gate native dryrun,869288
 runtime,A7FF-CORE5,runtime/a7ffcore5_gate_native_generation_dryrun/a7ffcore5_gate_summary.csv,7011a15,add crypto a7ffcore5 gate native dryrun,167
@@ -3343,15 +3343,24 @@ runtime,A7FF-CORE5,runtime/a7ffcore5_gate_native_generation_dryrun/a7ffcore5_man
 runtime,A7FF-CORE5,runtime/a7ffcore5_gate_native_generation_dryrun/a7ffcore5_queue_coverage.csv,7011a15,add crypto a7ffcore5 gate native dryrun,206
 runtime,A7FF-CORE5,runtime/a7ffcore5_gate_native_generation_dryrun/a7ffcore5_queue_family_summary.csv,7011a15,add crypto a7ffcore5 gate native dryrun,848
 runtime,A7FF-CORE5,runtime/a7ffcore5_gate_native_generation_dryrun/a7ffcore5_selected_root_subgraphs.csv,7011a15,add crypto a7ffcore5 gate native dryrun,565057
-report,A7FF-CORE50,reports/CRYPTO_A7FFCORE50_NULL_VECTOR_PREFLIGHT_ARBITRATION_20260602.md,,,20068
-runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_arbitration_summary.csv,,,364
-runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_authorization_matrix.json,,,336
-runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_filtered_family_operator_summary.csv,,,28006
-runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_filtered_seed_preview.csv,,,568664
-runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_inactive_or_empty_seed_audit.csv,,,18396
-runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_manifest.json,,,905
-runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_replay_filter_policy.csv,,,412
-runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_stale_risk_tier_summary.csv,,,111
+report,A7FF-CORE50,reports/CRYPTO_A7FFCORE50_NULL_VECTOR_PREFLIGHT_ARBITRATION_20260602.md,2c20665,add crypto core49e core50 null vector preflight,20068
+runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_arbitration_summary.csv,2c20665,add crypto core49e core50 null vector preflight,364
+runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_authorization_matrix.json,2c20665,add crypto core49e core50 null vector preflight,336
+runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_filtered_family_operator_summary.csv,2c20665,add crypto core49e core50 null vector preflight,28006
+runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_filtered_seed_preview.csv,2c20665,add crypto core49e core50 null vector preflight,568664
+runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_inactive_or_empty_seed_audit.csv,2c20665,add crypto core49e core50 null vector preflight,18396
+runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_manifest.json,2c20665,add crypto core49e core50 null vector preflight,905
+runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_replay_filter_policy.csv,2c20665,add crypto core49e core50 null vector preflight,412
+runtime,A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_stale_risk_tier_summary.csv,2c20665,add crypto core49e core50 null vector preflight,111
+report,A7FF-CORE51,reports/CRYPTO_A7FFCORE51_FILTERED_REPLAY_CONTRACT_20260602.md,,,6771
+runtime,A7FF-CORE51,runtime/a7ffcore51_filtered_replay_contract/a7ffcore51_authorization_matrix.json,,,306
+runtime,A7FF-CORE51,runtime/a7ffcore51_filtered_replay_contract/a7ffcore51_candidate_summary.csv,,,112
+runtime,A7FF-CORE51,runtime/a7ffcore51_filtered_replay_contract/a7ffcore51_input_sources.csv,,,712
+runtime,A7FF-CORE51,runtime/a7ffcore51_filtered_replay_contract/a7ffcore51_label_and_cost_policy.csv,,,558
+runtime,A7FF-CORE51,runtime/a7ffcore51_filtered_replay_contract/a7ffcore51_manifest.json,,,745
+runtime,A7FF-CORE51,runtime/a7ffcore51_filtered_replay_contract/a7ffcore51_pass_gate.csv,,,326
+runtime,A7FF-CORE51,runtime/a7ffcore51_filtered_replay_contract/a7ffcore51_replay_candidate_policy.csv,,,535
+runtime,A7FF-CORE51,runtime/a7ffcore51_filtered_replay_contract/a7ffcore51_replay_design.csv,,,322
 report,A7FF-CORE6,reports/CRYPTO_A7FFCORE6_MATERIALIZATION_PREFLIGHT_CONTRACT_20260601.md,ecb2304,add crypto a7ffcore6 materialization contract,14883
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_manifest.json,ecb2304,add crypto a7ffcore6 materialization contract,850
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_preflight_checks.csv,ecb2304,add crypto a7ffcore6 materialization contract,827
@@ -3705,14 +3714,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,7583e81,add crypto core48s through core49 preflight contract,6116
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,7583e81,add crypto core48s through core49 preflight contract,603148
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,7583e81,add crypto core48s through core49 preflight contract,115846
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,2c20665,add crypto core49e core50 null vector preflight,6731
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,2c20665,add crypto core49e core50 null vector preflight,604196
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,2c20665,add crypto core49e core50 null vector preflight,116353
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,7583e81,add crypto core48s through core49 preflight contract,243953
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,7583e81,add crypto core48s through core49 preflight contract,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,2c20665,add crypto core49e core50 null vector preflight,244756
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,2c20665,add crypto core49e core50 null vector preflight,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,7583e81,add crypto core48s through core49 preflight contract,133597
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,2c20665,add crypto core49e core50 null vector preflight,133965
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3730,12 +3739,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,7583e81,add crypto core48s through core49 preflight contract,5471
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,7583e81,add crypto core48s through core49 preflight contract,377
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,7583e81,add crypto core48s through core49 preflight contract,350
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,7583e81,add crypto core48s through core49 preflight contract,1481
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,7583e81,add crypto core48s through core49 preflight contract,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,7583e81,add crypto core48s through core49 preflight contract,425
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,2c20665,add crypto core49e core50 null vector preflight,5436
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,2c20665,add crypto core49e core50 null vector preflight,373
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,2c20665,add crypto core49e core50 null vector preflight,392
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,2c20665,add crypto core49e core50 null vector preflight,1391
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,2c20665,add crypto core49e core50 null vector preflight,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,2c20665,add crypto core49e core50 null vector preflight,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

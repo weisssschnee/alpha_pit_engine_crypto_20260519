@@ -1,0 +1,8 @@
+gate,rule,hard_gate
+materialization_status,must pass CORE49E,True
+null_vector_filter,must pass CORE50 active/symbol/time-shuffle filters,True
+semantic_pair_cap,selected replay queue share <= 0.25,True
+operator_cap,selected replay queue share <= 0.25,True
+stale_risk_balance,include low/medium/high stale-risk tiers; high tier is allowed but capped,True
+non_label_source,May/stress labels cannot enter selection/ranking/scoring,True
+control_dominance,matched null controls must be reported per split and can veto promotion,True

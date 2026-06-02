@@ -1,0 +1,8 @@
+gate,threshold
+selected_candidate_count,>= 128 for CORE51E
+selected_semantic_pair_count,>= 20
+selected_operator_count,>= 5
+top_semantic_pair_share,<= 0.25
+top_operator_share,<= 0.25
+selected_non_l7_evidence,must be present; L7-only cannot pass
+matched_null_controls,controls must be weaker than original for promotion

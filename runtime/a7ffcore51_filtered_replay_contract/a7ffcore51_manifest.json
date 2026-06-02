@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core51e_filtered_replay": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7FFCORE51_FILTERED_REPLAY_CONTRACT_READY_FOR_CORE51E",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "filtered_candidate_count": 1462,
+  "generated_at": "2026-06-02T01:24:00Z",
+  "next_allowed": "A7FF-CORE51E filtered replay preflight/execution",
+  "operator_count": 7,
+  "semantic_pair_count": 39,
+  "source_decision": "PASS_A7FFCORE50_NULL_VECTOR_ARBITRATION_READY_FOR_CORE51_FILTERED_REPLAY_CONTRACT",
+  "source_stage": "A7FF-CORE50",
+  "stage": "A7FF-CORE51"
+}

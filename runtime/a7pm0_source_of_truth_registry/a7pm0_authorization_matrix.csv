@@ -544,6 +544,8 @@ A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a
 A7FF-CORE49E,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""numeric_replay"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
 A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_authorization_matrix.json,authorized,"{""A7FF-CORE50R null-vector filter repair"": false, ""A7FF-CORE51 filtered replay contract"": true}",False
 A7FF-CORE50,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""direct_replay_execution"": true, ""formula_search"": true, ""large_search"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
+A7FF-CORE51,runtime/a7ffcore51_filtered_replay_contract/a7ffcore51_authorization_matrix.json,authorized,"{""A7FF-CORE51E filtered replay preflight/execution"": true}",False
+A7FF-CORE51,runtime/a7ffcore51_filtered_replay_contract/a7ffcore51_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""direct_live_replay_without_controls"": true, ""formula_search"": true, ""large_search"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,A7FF-CORE8E replay-preflight packet audit,true,True
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,alpha_proof,false,False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,formula_search,false,False

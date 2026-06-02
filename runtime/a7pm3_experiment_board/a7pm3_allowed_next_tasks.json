@@ -1,5 +1,5 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE51 filtered replay contract": "contract drafting only; CORE50 filtered 1462 vector-clean seeds, but replay execution remains blocked until CORE51",
+  "A7FF-CORE51E filtered replay preflight/execution": "bounded filtered replay execution option; use CORE50 vector-clean queue and CORE51 controls; no search, proof, promotion, shadow, paper, or live",
   "A7PM-0/3 maintenance": "governance registry maintenance"
 }

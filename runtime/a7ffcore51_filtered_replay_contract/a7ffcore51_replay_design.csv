@@ -1,0 +1,3 @@
+design_id,candidate_input_count,max_replay_candidates,selection_method,executes_replay_in_contract
+D0_filtered_queue_replay,1462,384,"balanced by semantic_pair, operator, stale_risk_tier, and active_ratio quartile",False
+D1_control_book,1462,384,same selected expressions with stale/sign/time/symbol null vectors,False

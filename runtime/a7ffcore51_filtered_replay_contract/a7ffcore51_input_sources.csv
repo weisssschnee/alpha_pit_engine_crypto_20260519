@@ -1,0 +1,5 @@
+input_id,path,role,required
+I0_core50_filtered_seed_preview,runtime/a7ffcore50_null_vector_preflight_arbitration/a7ffcore50_filtered_seed_preview.csv,source-of-truth replay candidate queue,True
+I1_core49e_vector_metrics,runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/a7ffcore49e_seed_vector_metrics.csv,materialization and null-vector diagnostics,True
+I2_universe498_panel,G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v2_20260527,market/metrics panel for replay labels and costs,True
+I3_latent_state_panel,G:/AlphaFactory_CryptoData/gold/features/binance_universe498_latent_state_features_v1_20260527.parquet,latent/liquidity/listing neutralization support,True

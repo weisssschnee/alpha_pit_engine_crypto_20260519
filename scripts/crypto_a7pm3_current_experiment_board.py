@@ -165,6 +165,7 @@ A7FFCORE48SE = REPO / "runtime" / "a7ffcore48se_repaired_null_first_dry_generati
 A7FFCORE49 = REPO / "runtime" / "a7ffcore49_full_universe_null_vector_preflight_contract" / "a7ffcore49_manifest.json"
 A7FFCORE49E = REPO / "runtime" / "a7ffcore49e_full_universe_null_vector_preflight_execution" / "a7ffcore49e_manifest.json"
 A7FFCORE50 = REPO / "runtime" / "a7ffcore50_null_vector_preflight_arbitration" / "a7ffcore50_manifest.json"
+A7FFCORE51 = REPO / "runtime" / "a7ffcore51_filtered_replay_contract" / "a7ffcore51_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -338,12 +339,23 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore49 = read_json(A7FFCORE49)
     a7ffcore49e = read_json(A7FFCORE49E)
     a7ffcore50 = read_json(A7FFCORE50)
+    a7ffcore51 = read_json(A7FFCORE51)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore50.get("decision") == "PASS_A7FFCORE50_NULL_VECTOR_ARBITRATION_READY_FOR_CORE51_FILTERED_REPLAY_CONTRACT":
+    if a7ffcore51.get("decision") == "PASS_A7FFCORE51_FILTERED_REPLAY_CONTRACT_READY_FOR_CORE51E":
+        allowed["A7FF-CORE51E filtered replay preflight/execution"] = (
+            "bounded filtered replay execution option; use CORE50 vector-clean queue and CORE51 controls; no search, proof, promotion, shadow, paper, or live"
+        )
+        blocked["A7FF large search"] = "blocked: CORE51 authorizes bounded filtered replay only"
+        blocked["A7FF formula search"] = "blocked: CORE51E is replay execution, not generation/search"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE51"
+        status = "filtered_replay_contract_ready_for_core51e"
+        next_task = "A7FF-CORE51E filtered replay preflight/execution"
+    elif a7ffcore50.get("decision") == "PASS_A7FFCORE50_NULL_VECTOR_ARBITRATION_READY_FOR_CORE51_FILTERED_REPLAY_CONTRACT":
         allowed["A7FF-CORE51 filtered replay contract"] = (
             "contract drafting only; CORE50 filtered 1462 vector-clean seeds, but replay execution remains blocked until CORE51"
         )

@@ -1,0 +1,13 @@
+{
+  "authorized": {
+    "A7FF-CORE51E filtered replay preflight/execution": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "direct_live_replay_without_controls": true,
+    "formula_search": true,
+    "large_search": true,
+    "promotion": true,
+    "shadow_paper_live": true
+  }
+}

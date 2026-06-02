@@ -1,0 +1,7 @@
+item,policy
+label_horizons,1h/4h/8h/24h forward labels; report separately
+primary_labels,"L0 raw, L1 cross-sectional relative, L3 liquidity-tier relative, L5 vol-adjusted; L7 ranked label cannot dominate"
+cost_proxy,2bps/5bps/10bps proxy tiers; no promotion if only 0-cost survives
+neutralization,"global, liquidity-tier, latent-state, major/meme/multiplier diagnostics"
+stats,non-overlap offset stats and block/Newey-West style robust t-stat where available
+stress_policy,known stress may be post-selection veto/attribution only; never ranking input
