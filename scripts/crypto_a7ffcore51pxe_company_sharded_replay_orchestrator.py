@@ -87,7 +87,18 @@ def main() -> None:
     summary = pd.DataFrame(rows).sort_values("shard_id")
     summary_path = out / "a7ffcore51pxe_shard_execution_summary.csv"
     summary.to_csv(summary_path, index=False)
+    aggregate_cmd = [
+        sys.executable,
+        str(REPO / "scripts" / "crypto_a7ffcore51pxe_company_result_aggregator.py"),
+        "--out",
+        str(out),
+        "--expected-shards",
+        str(len(shards)),
+    ]
+    aggregate_code, aggregate_stdout, aggregate_stderr = run_command(aggregate_cmd)
     pass_count = int(summary["decision"].astype(str).str.startswith("PASS_").sum()) if not summary.empty else 0
+    aggregate_manifest_path = out / "a7ffcore51pxe_aggregate_manifest.json"
+    aggregate_manifest = json.loads(aggregate_manifest_path.read_text(encoding="utf-8")) if aggregate_manifest_path.exists() else {}
     manifest = {
         "stage": "A7FF-CORE51PXE",
         "generated_at": now_utc(),
@@ -100,11 +111,17 @@ def main() -> None:
         "metric_rows": int(pd.to_numeric(summary.get("metric_rows", pd.Series(dtype=int)), errors="coerce").fillna(0).sum()),
         "eval_failure_count": int(pd.to_numeric(summary.get("eval_failure_count", pd.Series(dtype=int)), errors="coerce").fillna(0).sum()),
         "control_clean_positive_rows": int(pd.to_numeric(summary.get("control_clean_positive_rows", pd.Series(dtype=int)), errors="coerce").fillna(0).sum()),
-        "decision": "PASS_A7FFCORE51PXE_COMPANY_SHARDED_REPLAY_COMPLETE" if pass_count == len(shards) and len(shards) > 0 else "HOLD_A7FFCORE51PXE_COMPANY_SHARDED_REPLAY_INCOMPLETE",
+        "aggregate_return_code": int(aggregate_code),
+        "aggregate_decision": aggregate_manifest.get("decision", ""),
+        "decision": "PASS_A7FFCORE51PXE_COMPANY_SHARDED_REPLAY_COMPLETE"
+        if pass_count == len(shards) and len(shards) > 0 and aggregate_code == 0
+        else "HOLD_A7FFCORE51PXE_COMPANY_SHARDED_REPLAY_INCOMPLETE",
         "executes_replay": True,
         "executes_search": False,
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
+        "aggregate_stdout_tail": aggregate_stdout[-1000:],
+        "aggregate_stderr_tail": aggregate_stderr[-1000:],
     }
     (out / "a7ffcore51pxe_manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
     print(json.dumps(manifest, indent=2, sort_keys=True))
