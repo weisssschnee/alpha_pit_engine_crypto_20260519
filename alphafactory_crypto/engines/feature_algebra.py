@@ -111,7 +111,7 @@ def _decay_linear(values: pd.Series, frame: pd.DataFrame, window: int) -> pd.Ser
 
 
 def _to_numeric(values: pd.Series) -> pd.Series:
-    return pd.to_numeric(values, errors="coerce").replace([np.inf, -np.inf], np.nan)
+    return pd.to_numeric(values, errors="coerce").astype("float64").replace([np.inf, -np.inf], np.nan)
 
 
 class CryptoFeatureAlgebra:

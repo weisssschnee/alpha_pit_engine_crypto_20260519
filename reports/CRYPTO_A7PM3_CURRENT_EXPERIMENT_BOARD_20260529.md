@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-01T21:27:13Z
+Generated: 2026-06-02T01:21:13Z
 
 ## Decision
 
@@ -8,20 +8,20 @@ Generated: 2026-06-01T21:27:13Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                             | next                                                       |
-|:----------------------------|:----------------|:---------------------------------------------------|:-----------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                               | keep registry as source-of-truth                           |
-| a7ff_family_diversification | A7FF-CORE49     | full_universe_null_vector_preflight_contract_ready | A7FF-CORE49E full-universe null-vector preflight execution |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                        | A7FF-24R4E if explicitly authorized                        |
-| search_execution            | blocked         | not_authorized                                     | none                                                       |
+| workstream                  | current_stage   | status                                                     | next                                 |
+|:----------------------------|:----------------|:-----------------------------------------------------------|:-------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                                       | keep registry as source-of-truth     |
+| a7ff_family_diversification | A7FF-CORE50     | null_vector_arbitration_ready_for_filtered_replay_contract | A7FF-CORE51 filtered replay contract |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                                | A7FF-24R4E if explicitly authorized  |
+| search_execution            | blocked         | not_authorized                                             | none                                 |
 
 ## Allowed Next Tasks
 
-| task                                                       | reason                                                                                                                    |
-|:-----------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option          | requires explicit user authorization; no search and no promotion                                                          |
-| A7PM-0/3 maintenance                                       | governance registry maintenance                                                                                           |
-| A7FF-CORE49E full-universe null-vector preflight execution | vector preflight only; materialize original/null vectors over repaired seed queue; no replay, search, proof, or promotion |
+| task                                              | reason                                                                                                             |
+|:--------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------|
+| A7FF-24R4E repaired numeric wave execution option | requires explicit user authorization; no search and no promotion                                                   |
+| A7PM-0/3 maintenance                              | governance registry maintenance                                                                                    |
+| A7FF-CORE51 filtered replay contract              | contract drafting only; CORE50 filtered 1462 vector-clean seeds, but replay execution remains blocked until CORE51 |
 
 ## Blocked Tasks
 
@@ -41,9 +41,9 @@ Generated: 2026-06-01T21:27:13Z
 | A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
 | alpha proof                         | not authorized                                                                                                        |
 | shadow/paper/live                   | not authorized                                                                                                        |
-| A7FF large search                   | blocked: CORE49 authorizes vector preflight only                                                                      |
-| A7FF formula search                 | blocked: CORE49E is null-vector preflight, not search                                                                 |
-| numeric replay                      | not authorized until CORE49E passes and a replay contract is written                                                  |
+| A7FF large search                   | blocked: CORE50 authorizes CORE51 contract only                                                                       |
+| A7FF formula search                 | blocked: CORE50 is replay-contract preparation, not search                                                            |
+| direct replay execution             | not authorized until CORE51 contract explicitly defines execution                                                     |
 | alpha proof / shadow / paper / live | not authorized                                                                                                        |
 
 ## Boundary

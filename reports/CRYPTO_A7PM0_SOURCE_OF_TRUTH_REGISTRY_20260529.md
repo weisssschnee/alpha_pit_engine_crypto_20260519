@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-01T21:27:15Z
+Generated: 2026-06-02T01:21:25Z
 
 ## Decision
 
@@ -12,8 +12,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
+ M alphafactory_crypto/engines/feature_algebra.py
+ M reports/CRYPTO_A7AIF3_MATERIALIZATION_EVALUATOR_PARITY_20260529.md
  M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7aif3_materialization_evaluator_parity/a7aif3_manifest.json
  M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
  M runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv
  M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
@@ -25,17 +28,14 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE48SE_REPAIRED_NULL_FIRST_DRY_GENERATION_20260602.md
-?? reports/CRYPTO_A7FFCORE48S_OPERATOR_NULL_COVERAGE_REPAIR_CONTRACT_20260602.md
-?? reports/CRYPTO_A7FFCORE49_FULL_UNIVERSE_NULL_VECTOR_PREFLIGHT_CONTRACT_20260602.md
-?? runtime/a7ffcore48s_operator_null_coverage_repair_contract/
-?? runtime/a7ffcore48se_repaired_null_first_dry_generation/
-?? runtime/a7ffcore49_full_universe_null_vector_preflight_contract/
-?? scripts/crypto_a7ffcore48s_operator_null_coverage_repair_contract.py
-?? scripts/crypto_a7ffcore48se_repaired_null_first_dry_generation.py
-?? scripts/crypto_a7ffcore49_full_universe_null_vector_preflight_contract.py
-HEAD=33e53d771454828eebaaf76f6c53de90a31d800e
-origin/main=33e53d771454828eebaaf76f6c53de90a31d800e
+?? reports/CRYPTO_A7FFCORE49E_FULL_UNIVERSE_NULL_VECTOR_PREFLIGHT_EXECUTION_20260602.md
+?? reports/CRYPTO_A7FFCORE50_NULL_VECTOR_PREFLIGHT_ARBITRATION_20260602.md
+?? runtime/a7ffcore49e_full_universe_null_vector_preflight_execution/
+?? runtime/a7ffcore50_null_vector_preflight_arbitration/
+?? scripts/crypto_a7ffcore49e_full_universe_null_vector_preflight_execution.py
+?? scripts/crypto_a7ffcore50_null_vector_preflight_arbitration.py
+HEAD=7583e81abdb1202c648fcfe3cdb91aa5bff97a70
+origin/main=7583e81abdb1202c648fcfe3cdb91aa5bff97a70
 HEAD == origin/main: True
 ```
 
@@ -43,8 +43,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 3896,
-  "authorization_record_count": 760,
+  "artifact_count": 3912,
+  "authorization_record_count": 764,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -57,12 +57,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-01T21:27:15Z",
-  "head": "33e53d771454828eebaaf76f6c53de90a31d800e",
+  "generated_at": "2026-06-02T01:21:25Z",
+  "head": "7583e81abdb1202c648fcfe3cdb91aa5bff97a70",
   "head_equals_origin_main": true,
-  "origin_main": "33e53d771454828eebaaf76f6c53de90a31d800e",
+  "origin_main": "7583e81abdb1202c648fcfe3cdb91aa5bff97a70",
   "stage": "A7PM-0",
-  "stage_count": 408
+  "stage_count": 410
 }
 ```
 
@@ -82,7 +82,7 @@ HEAD == origin/main: True
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
 | valid_or_historical_record   | governance_or_audit        |     144 |
-| valid_or_historical_record   | contract                   |     120 |
+| valid_or_historical_record   | contract                   |     122 |
 | valid_or_historical_record   | diagnostic                 |      27 |
 | valid_or_historical_record   | smoke                      |       8 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |

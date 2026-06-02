@@ -1,0 +1,15 @@
+{
+  "authorized": {
+    "A7FF-CORE49E full run": false,
+    "A7FF-CORE49ER preflight forensic": false,
+    "A7FF-CORE50 contract/arbitration": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "formula_search": true,
+    "large_search": true,
+    "numeric_replay": true,
+    "promotion": true,
+    "shadow_paper_live": true
+  }
+}

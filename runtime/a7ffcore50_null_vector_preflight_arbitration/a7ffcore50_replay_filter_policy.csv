@@ -1,0 +1,8 @@
+gate,rule,hard_gate
+materialization_status,must equal pass,True
+active_ratio,>= 0.001,True
+symbol_shuffle_corr_abs,<= 0.35 or missing,True
+time_shuffle_corr_abs,<= 0.95 or missing,True
+stale_corr_abs,record as risk tier; do not hard reject before replay contract,False
+family_cap,replay contract must cap semantic_pair share <= 0.25,True
+operator_cap,replay contract must cap operator share <= 0.25,True

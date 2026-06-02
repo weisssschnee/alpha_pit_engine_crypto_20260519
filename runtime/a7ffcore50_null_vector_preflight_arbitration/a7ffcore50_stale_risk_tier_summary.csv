@@ -1,0 +1,4 @@
+stale_risk_tier,seed_count,semantic_family_count,operator_count
+medium,506,33,7
+high,478,38,7
+low,478,28,6

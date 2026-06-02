@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core51_filtered_replay_contract": true,
+  "authorizes_direct_replay_execution": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FFCORE50_NULL_VECTOR_ARBITRATION_READY_FOR_CORE51_FILTERED_REPLAY_CONTRACT",
+  "eligible_after_null_filter_count": 1462,
+  "eligible_operator_count": 7,
+  "eligible_semantic_family_count": 39,
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-02T01:20:08Z",
+  "materialization_pass_count": 1728,
+  "next_allowed": "A7FF-CORE51 filtered replay contract",
+  "seed_count": 1800,
+  "source_decision": "PASS_A7FFCORE49E_NULL_VECTOR_PREFLIGHT_READY_FOR_CORE50_CONTRACT",
+  "source_stage": "A7FF-CORE49E",
+  "stage": "A7FF-CORE50"
+}

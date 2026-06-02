@@ -2,8 +2,8 @@
   "A7AL-2Q": "not authorized by A7AL-2X0",
   "A7AL-2Y generation": "not authorized",
   "A7AL-3 large search": "not authorized",
-  "A7FF formula search": "blocked: CORE49E is null-vector preflight, not search",
-  "A7FF large search": "blocked: CORE49 authorizes vector preflight only",
+  "A7FF formula search": "blocked: CORE50 is replay-contract preparation, not search",
+  "A7FF large search": "blocked: CORE50 authorizes CORE51 contract only",
   "A7FF search execution": "numeric wave has clues but still no replay/search authorization",
   "A7FF-24R4E execution": "pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but numeric wave execution is not started",
   "A7FF-41 control-strict expansion": "not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family",
@@ -15,6 +15,6 @@
   "alpha proof": "not authorized",
   "alpha proof / shadow / paper / live": "not authorized",
   "direct OI-price rerun": "superseded weak prior / not authorized",
-  "numeric replay": "not authorized until CORE49E passes and a replay contract is written",
+  "direct replay execution": "not authorized until CORE51 contract explicitly defines execution",
   "shadow/paper/live": "not authorized"
 }

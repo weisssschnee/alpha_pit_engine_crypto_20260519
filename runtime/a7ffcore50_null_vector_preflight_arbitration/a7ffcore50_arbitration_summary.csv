@@ -1,0 +1,11 @@
+metric,value
+seed_count,1800.0
+materialization_pass_count,1728.0
+eligible_after_null_filter_count,1462.0
+semantic_family_count,39.0
+eligible_semantic_family_count,39.0
+operator_count,7.0
+eligible_operator_count,7.0
+median_abs_stale_corr,0.6140640602818097
+median_abs_time_shuffle_corr,0.1272747655328491
+median_abs_symbol_shuffle_corr,0.005686730403355

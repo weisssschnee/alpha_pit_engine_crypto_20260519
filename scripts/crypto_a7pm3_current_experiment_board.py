@@ -163,6 +163,8 @@ A7FFCORE48R = REPO / "runtime" / "a7ffcore48r_dry_seed_generation_forensic" / "a
 A7FFCORE48S = REPO / "runtime" / "a7ffcore48s_operator_null_coverage_repair_contract" / "a7ffcore48s_manifest.json"
 A7FFCORE48SE = REPO / "runtime" / "a7ffcore48se_repaired_null_first_dry_generation" / "a7ffcore48se_manifest.json"
 A7FFCORE49 = REPO / "runtime" / "a7ffcore49_full_universe_null_vector_preflight_contract" / "a7ffcore49_manifest.json"
+A7FFCORE49E = REPO / "runtime" / "a7ffcore49e_full_universe_null_vector_preflight_execution" / "a7ffcore49e_manifest.json"
+A7FFCORE50 = REPO / "runtime" / "a7ffcore50_null_vector_preflight_arbitration" / "a7ffcore50_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -334,12 +336,58 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore48s = read_json(A7FFCORE48S)
     a7ffcore48se = read_json(A7FFCORE48SE)
     a7ffcore49 = read_json(A7FFCORE49)
+    a7ffcore49e = read_json(A7FFCORE49E)
+    a7ffcore50 = read_json(A7FFCORE50)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore49.get("decision") == "PASS_A7FFCORE49_FULL_UNIVERSE_NULL_VECTOR_PREFLIGHT_CONTRACT_READY_FOR_CORE49E":
+    if a7ffcore50.get("decision") == "PASS_A7FFCORE50_NULL_VECTOR_ARBITRATION_READY_FOR_CORE51_FILTERED_REPLAY_CONTRACT":
+        allowed["A7FF-CORE51 filtered replay contract"] = (
+            "contract drafting only; CORE50 filtered 1462 vector-clean seeds, but replay execution remains blocked until CORE51"
+        )
+        blocked["A7FF large search"] = "blocked: CORE50 authorizes CORE51 contract only"
+        blocked["A7FF formula search"] = "blocked: CORE50 is replay-contract preparation, not search"
+        blocked["direct replay execution"] = "not authorized until CORE51 contract explicitly defines execution"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE50"
+        status = "null_vector_arbitration_ready_for_filtered_replay_contract"
+        next_task = "A7FF-CORE51 filtered replay contract"
+    elif a7ffcore50.get("decision") == "HOLD_A7FFCORE50_NULL_VECTOR_ARBITRATION_REPLAY_CONTRACT_BLOCKED":
+        allowed["A7FF-CORE50R null-vector filter repair"] = (
+            "repair only; filtered queue failed seed/family/operator breadth gates"
+        )
+        blocked["A7FF large search"] = "blocked: CORE50 null-vector arbitration blocked replay contract"
+        blocked["A7FF formula search"] = "blocked"
+        blocked["direct replay execution"] = "not authorized"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE50"
+        status = "null_vector_arbitration_hold"
+        next_task = "A7FF-CORE50R null-vector filter repair"
+    elif a7ffcore49e.get("decision") == "PASS_A7FFCORE49E_NULL_VECTOR_PREFLIGHT_READY_FOR_CORE50_CONTRACT":
+        allowed["A7FF-CORE50 null-vector preflight arbitration / replay contract"] = (
+            "contract/arbitration only; CORE49E vectors materialized, but replay/search remain blocked until CORE50 defines the next gate"
+        )
+        blocked["A7FF large search"] = "blocked: CORE49E authorizes CORE50 contract/arbitration only"
+        blocked["A7FF formula search"] = "blocked: CORE49E is vector preflight, not formula search"
+        blocked["numeric replay"] = "not authorized until CORE50 explicitly writes a replay contract"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE49E"
+        status = "full_universe_null_vector_preflight_pass_ready_for_core50"
+        next_task = "A7FF-CORE50 null-vector preflight arbitration / replay contract"
+    elif a7ffcore49e.get("decision") == "HOLD_A7FFCORE49E_NULL_VECTOR_PREFLIGHT_BLOCKERS":
+        allowed["A7FF-CORE49ER null-vector preflight forensic"] = (
+            "forensic only; classify CORE49E materialization/vector blocker before any replay contract"
+        )
+        blocked["A7FF large search"] = "blocked: CORE49E vector preflight blockers"
+        blocked["A7FF formula search"] = "blocked: CORE49E vector preflight blockers"
+        blocked["numeric replay"] = "not authorized"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE49E"
+        status = "full_universe_null_vector_preflight_hold"
+        next_task = "A7FF-CORE49ER null-vector preflight forensic"
+    elif a7ffcore49.get("decision") == "PASS_A7FFCORE49_FULL_UNIVERSE_NULL_VECTOR_PREFLIGHT_CONTRACT_READY_FOR_CORE49E":
         allowed["A7FF-CORE49E full-universe null-vector preflight execution"] = (
             "vector preflight only; materialize original/null vectors over repaired seed queue; no replay, search, proof, or promotion"
         )
