@@ -3399,16 +3399,16 @@ runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contrac
 runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/candidate_shards/core51px_shard_13.csv,1d072b6,add crypto core51px company sharded replay contract,9322
 runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/candidate_shards/core51px_shard_14.csv,1d072b6,add crypto core51px company sharded replay contract,9845
 runtime,A7FF-CORE51PX,runtime/a7ffcore51px_company_sharded_replay_runner_contract/candidate_shards/core51px_shard_15.csv,1d072b6,add crypto core51px company sharded replay contract,9306
-report,A7FF-CORE51PXH,reports/CRYPTO_A7FFCORE51PXH_COMPANY_EXECUTION_HANDOFF_20260602.md,,,4497
-runtime,A7FF-CORE51PXH,runtime/a7ffcore51pxh_company_execution_handoff/a7ffcore51pxh_acceptance_gates.csv,,,274
-runtime,A7FF-CORE51PXH,runtime/a7ffcore51pxh_company_execution_handoff/a7ffcore51pxh_execution_steps.csv,,,1216
-runtime,A7FF-CORE51PXH,runtime/a7ffcore51pxh_company_execution_handoff/a7ffcore51pxh_failure_policy.csv,,,359
-runtime,A7FF-CORE51PXH,runtime/a7ffcore51pxh_company_execution_handoff/a7ffcore51pxh_manifest.json,,,808
-report,A7FF-CORE51PXV,reports/CRYPTO_A7FFCORE51PXV_COMPANY_EXECUTION_PREFLIGHT_VALIDATOR_20260602.md,,,5466
-runtime,A7FF-CORE51PXV,runtime/a7ffcore51pxv_company_execution_preflight_validator/a7ffcore51pxv_authorization_matrix.json,,,263
-runtime,A7FF-CORE51PXV,runtime/a7ffcore51pxv_company_execution_preflight_validator/a7ffcore51pxv_manifest.json,,,756
-runtime,A7FF-CORE51PXV,runtime/a7ffcore51pxv_company_execution_preflight_validator/a7ffcore51pxv_preflight_checks.csv,,,1069
-runtime,A7FF-CORE51PXV,runtime/a7ffcore51pxv_company_execution_preflight_validator/a7ffcore51pxv_script_compile_audit.csv,,,449
+report,A7FF-CORE51PXH,reports/CRYPTO_A7FFCORE51PXH_COMPANY_EXECUTION_HANDOFF_20260602.md,b37af5d,add crypto core51px execution preflight handoff,4497
+runtime,A7FF-CORE51PXH,runtime/a7ffcore51pxh_company_execution_handoff/a7ffcore51pxh_acceptance_gates.csv,b37af5d,add crypto core51px execution preflight handoff,274
+runtime,A7FF-CORE51PXH,runtime/a7ffcore51pxh_company_execution_handoff/a7ffcore51pxh_execution_steps.csv,b37af5d,add crypto core51px execution preflight handoff,1216
+runtime,A7FF-CORE51PXH,runtime/a7ffcore51pxh_company_execution_handoff/a7ffcore51pxh_failure_policy.csv,b37af5d,add crypto core51px execution preflight handoff,359
+runtime,A7FF-CORE51PXH,runtime/a7ffcore51pxh_company_execution_handoff/a7ffcore51pxh_manifest.json,b37af5d,add crypto core51px execution preflight handoff,808
+report,A7FF-CORE51PXV,reports/CRYPTO_A7FFCORE51PXV_COMPANY_EXECUTION_PREFLIGHT_VALIDATOR_20260602.md,b37af5d,add crypto core51px execution preflight handoff,5466
+runtime,A7FF-CORE51PXV,runtime/a7ffcore51pxv_company_execution_preflight_validator/a7ffcore51pxv_authorization_matrix.json,b37af5d,add crypto core51px execution preflight handoff,263
+runtime,A7FF-CORE51PXV,runtime/a7ffcore51pxv_company_execution_preflight_validator/a7ffcore51pxv_manifest.json,b37af5d,add crypto core51px execution preflight handoff,756
+runtime,A7FF-CORE51PXV,runtime/a7ffcore51pxv_company_execution_preflight_validator/a7ffcore51pxv_preflight_checks.csv,b37af5d,add crypto core51px execution preflight handoff,1069
+runtime,A7FF-CORE51PXV,runtime/a7ffcore51pxv_company_execution_preflight_validator/a7ffcore51pxv_script_compile_audit.csv,b37af5d,add crypto core51px execution preflight handoff,449
 report,A7FF-CORE6,reports/CRYPTO_A7FFCORE6_MATERIALIZATION_PREFLIGHT_CONTRACT_20260601.md,ecb2304,add crypto a7ffcore6 materialization contract,14883
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_manifest.json,ecb2304,add crypto a7ffcore6 materialization contract,850
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_preflight_checks.csv,ecb2304,add crypto a7ffcore6 materialization contract,827
@@ -3762,14 +3762,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,57dd658,refresh crypto pm registry after core51pxe monitoring,5439
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,57dd658,refresh crypto pm registry after core51pxe monitoring,613126
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,1d072b6,add crypto core51px company sharded replay contract,118287
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,b37af5d,add crypto core51px execution preflight handoff,5439
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,b37af5d,add crypto core51px execution preflight handoff,614810
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,b37af5d,add crypto core51px execution preflight handoff,118753
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,57dd658,refresh crypto pm registry after core51pxe monitoring,247719
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,57dd658,refresh crypto pm registry after core51pxe monitoring,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,b37af5d,add crypto core51px execution preflight handoff,249321
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,b37af5d,add crypto core51px execution preflight handoff,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,57dd658,refresh crypto pm registry after core51pxe monitoring,135858
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,b37af5d,add crypto core51px execution preflight handoff,136590
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3787,12 +3787,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,57dd658,refresh crypto pm registry after core51pxe monitoring,5483
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,1d072b6,add crypto core51px company sharded replay contract,372
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,1d072b6,add crypto core51px company sharded replay contract,375
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,1d072b6,add crypto core51px company sharded replay contract,1442
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,57dd658,refresh crypto pm registry after core51pxe monitoring,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,57dd658,refresh crypto pm registry after core51pxe monitoring,425
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,b37af5d,add crypto core51px execution preflight handoff,5483
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,b37af5d,add crypto core51px execution preflight handoff,372
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,b37af5d,add crypto core51px execution preflight handoff,375
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,b37af5d,add crypto core51px execution preflight handoff,1442
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,b37af5d,add crypto core51px execution preflight handoff,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,b37af5d,add crypto core51px execution preflight handoff,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
