@@ -1,0 +1,5 @@
+bottleneck_id,description,severity,fix
+B0_repeated_full_frame_rank,"runner recomputes timestamp rank/top-bottom spread for every seed, control, label family, and horizon",critical,precompute timestamp group codes and use vectorized top/bottom masks per signal
+B1_repeated_control_replay,stale/sign/time/symbol controls trigger four additional full-frame spread passes per label,critical,compute original/control spreads in one vectorized block and cache label arrays
+B2_full_frame_reload,runner rebuilds full 498-symbol frame and latent overlay inside execution,medium,persist compact replay frame or memory-map only symbol/timestamp/labels/required fields
+B3_no_shard_resume,timeout leaves no shard-level partial metrics because replay writes only at the end,high,write per-shard/per-candidate metrics incrementally with resume manifest

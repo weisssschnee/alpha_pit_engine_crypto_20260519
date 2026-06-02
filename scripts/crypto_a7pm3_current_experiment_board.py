@@ -166,6 +166,7 @@ A7FFCORE49 = REPO / "runtime" / "a7ffcore49_full_universe_null_vector_preflight_
 A7FFCORE49E = REPO / "runtime" / "a7ffcore49e_full_universe_null_vector_preflight_execution" / "a7ffcore49e_manifest.json"
 A7FFCORE50 = REPO / "runtime" / "a7ffcore50_null_vector_preflight_arbitration" / "a7ffcore50_manifest.json"
 A7FFCORE51 = REPO / "runtime" / "a7ffcore51_filtered_replay_contract" / "a7ffcore51_manifest.json"
+A7FFCORE51ER = REPO / "runtime" / "a7ffcore51er_replay_runner_performance_forensic" / "a7ffcore51er_manifest.json"
 
 
 BASE_BLOCKED = {
@@ -340,12 +341,24 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ffcore49e = read_json(A7FFCORE49E)
     a7ffcore50 = read_json(A7FFCORE50)
     a7ffcore51 = read_json(A7FFCORE51)
+    a7ffcore51er = read_json(A7FFCORE51ER)
     allowed = {
         "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore51.get("decision") == "PASS_A7FFCORE51_FILTERED_REPLAY_CONTRACT_READY_FOR_CORE51E":
+    if a7ffcore51er.get("decision") == "HOLD_A7FFCORE51ER_REPLAY_RUNNER_PERFORMANCE_BLOCKER":
+        allowed["A7FF-CORE51P optimized replay runner contract / implementation"] = (
+            "runner optimization only; current CORE51E runner timed out on 16-candidate smoke, no search/proof/promotion"
+        )
+        blocked["A7FF-CORE51E current runner rerun"] = "blocked: repeated full-frame groupby/rank timeout"
+        blocked["A7FF large search"] = "blocked: replay runner performance blocker"
+        blocked["A7FF formula search"] = "blocked"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE51ER"
+        status = "replay_runner_performance_blocker"
+        next_task = "A7FF-CORE51P optimized replay runner contract / implementation"
+    elif a7ffcore51.get("decision") == "PASS_A7FFCORE51_FILTERED_REPLAY_CONTRACT_READY_FOR_CORE51E":
         allowed["A7FF-CORE51E filtered replay preflight/execution"] = (
             "bounded filtered replay execution option; use CORE50 vector-clean queue and CORE51 controls; no search, proof, promotion, shadow, paper, or live"
         )

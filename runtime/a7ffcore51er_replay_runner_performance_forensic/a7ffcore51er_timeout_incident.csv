@@ -1,0 +1,2 @@
+incident_id,attempted_command,timeout_seconds,candidate_count,frame_rows,frame_symbols,result
+I0_core51e_smoke_timeout,$env:A7FFCORE51E_MAX_CANDIDATES='16'; py scripts/crypto_a7ffcore51e_filtered_replay_execution.py,1200,16,6949596,498,timeout_no_replay_artifacts

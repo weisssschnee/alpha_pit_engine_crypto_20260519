@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-02T01:25:20Z
+Generated: 2026-06-02T01:58:46Z
 
 ## Decision
 
@@ -11,7 +11,7 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
+## main...origin/main [ahead 1]
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
@@ -19,20 +19,21 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7FFCORE51_FILTERED_REPLAY_CONTRACT_20260602.md
-?? runtime/a7ffcore51_filtered_replay_contract/
-?? scripts/crypto_a7ffcore51_filtered_replay_contract.py
-HEAD=2c206653bda9795b8aa573b2b9494d0862314744
+?? reports/CRYPTO_A7FFCORE51ER_REPLAY_RUNNER_PERFORMANCE_FORENSIC_20260602.md
+?? runtime/a7ffcore51er_replay_runner_performance_forensic/
+?? scripts/crypto_a7ffcore51e_filtered_replay_execution.py
+?? scripts/crypto_a7ffcore51er_replay_runner_performance_forensic.py
+HEAD=8a9f441c72ab7a64c0deea6daf5298d77f2e882b
 origin/main=2c206653bda9795b8aa573b2b9494d0862314744
-HEAD == origin/main: True
+HEAD == origin/main: False
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 3921,
-  "authorization_record_count": 766,
+  "artifact_count": 3927,
+  "authorization_record_count": 768,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -45,12 +46,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-02T01:25:20Z",
-  "head": "2c206653bda9795b8aa573b2b9494d0862314744",
-  "head_equals_origin_main": true,
+  "generated_at": "2026-06-02T01:58:46Z",
+  "head": "8a9f441c72ab7a64c0deea6daf5298d77f2e882b",
+  "head_equals_origin_main": false,
   "origin_main": "2c206653bda9795b8aa573b2b9494d0862314744",
   "stage": "A7PM-0",
-  "stage_count": 411
+  "stage_count": 413
 }
 ```
 
@@ -63,13 +64,13 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      79 |
+| hold                         | hold                       |      80 |
 | hold                         | diagnostic                 |       6 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     144 |
+| valid_or_historical_record   | governance_or_audit        |     145 |
 | valid_or_historical_record   | contract                   |     123 |
 | valid_or_historical_record   | diagnostic                 |      27 |
 | valid_or_historical_record   | smoke                      |       8 |

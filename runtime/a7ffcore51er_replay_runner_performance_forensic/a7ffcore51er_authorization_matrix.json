@@ -1,0 +1,13 @@
+{
+  "authorized": {
+    "A7FF-CORE51P optimized replay runner contract / implementation": true
+  },
+  "not_authorized": {
+    "CORE51E_current_runner_rerun": true,
+    "alpha_proof": true,
+    "formula_search": true,
+    "large_search": true,
+    "promotion": true,
+    "shadow_paper_live": true
+  }
+}

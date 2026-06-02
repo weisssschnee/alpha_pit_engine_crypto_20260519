@@ -1,0 +1,4 @@
+stage,action,requirements,executes_replay
+A7FF-CORE51P,optimized replay runner contract and implementation,"sharded, resumable, vectorized label arrays, incremental writes",False
+A7FF-CORE51PE,optimized 16-candidate smoke,complete within 180 seconds and produce metrics,True
+A7FF-CORE51E-R,rerun bounded filtered replay with optimized runner,"384 candidates max, shard outputs, no search/proof/promotion",True

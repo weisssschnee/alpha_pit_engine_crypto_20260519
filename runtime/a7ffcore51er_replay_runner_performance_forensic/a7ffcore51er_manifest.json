@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core51p_runner_optimization": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "HOLD_A7FFCORE51ER_REPLAY_RUNNER_PERFORMANCE_BLOCKER",
+  "dominant_failure": "replay_runner_repeated_full_frame_groupby_rank_timeout",
+  "executes_generation": false,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-02T01:55:14Z",
+  "next_allowed": "A7FF-CORE51P optimized replay runner contract / implementation",
+  "source_decision": "PASS_A7FFCORE51_FILTERED_REPLAY_CONTRACT_READY_FOR_CORE51E",
+  "source_stage": "A7FF-CORE51",
+  "stage": "A7FF-CORE51ER"
+}
