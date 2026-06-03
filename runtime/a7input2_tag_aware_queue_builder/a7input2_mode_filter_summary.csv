@@ -1,0 +1,11 @@
+mode,mode_decision,mode_reason,row_count
+interaction_alpha,accept,interaction_route,4720
+interaction_alpha,reject,interaction_tag_not_allowed,12006
+interaction_alpha,reject,interaction_requires_pair_or_condition,3463
+interaction_alpha,reject,no_approved_input_field,410
+ordinary_alpha,accept,ordinary_alpha_route,8177
+ordinary_alpha,reject,ordinary_alpha_blocked_tag,12012
+ordinary_alpha,reject,no_approved_input_field,410
+rescue_lane,accept,rescue_lane_route,2029
+rescue_lane,reject,rescue_requires_only_rescue_tags,18160
+rescue_lane,reject,no_approved_input_field,410

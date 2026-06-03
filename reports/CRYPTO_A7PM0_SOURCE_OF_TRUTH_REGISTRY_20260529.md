@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-03T02:32:46Z
+Generated: 2026-06-03T02:56:47Z
 
 ## Decision
 
@@ -11,24 +11,18 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
-?? reports/CRYPTO_A7INPUT0_INPUT_APPROVAL_PACKAGE_20260603.md
-?? reports/CRYPTO_A7INPUT1_INTEGRATION_SMOKE_20260603.md
-?? runtime/a7input0_input_approval_package/
-?? runtime/a7input1_integration_smoke/
-?? scripts/crypto_a7input0_input_approval_package.py
-?? scripts/crypto_a7input1_integration_smoke.py
-HEAD=608ecd1adb0128d9099a915852394ddcf333eebe
-origin/main=608ecd1adb0128d9099a915852394ddcf333eebe
-HEAD == origin/main: True
+## main...origin/main [ahead 1]
+HEAD=d70bc9e4d55b9786ef58a9ccf217a0ec4580c83f
+origin/main=72ea63c4ea2323b7c03cd7ad03edbf5663b949a8
+HEAD == origin/main: False
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 4038,
-  "authorization_record_count": 790,
+  "artifact_count": 4050,
+  "authorization_record_count": 792,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -41,12 +35,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-03T02:32:46Z",
-  "head": "608ecd1adb0128d9099a915852394ddcf333eebe",
-  "head_equals_origin_main": true,
-  "origin_main": "608ecd1adb0128d9099a915852394ddcf333eebe",
+  "generated_at": "2026-06-03T02:56:47Z",
+  "head": "d70bc9e4d55b9786ef58a9ccf217a0ec4580c83f",
+  "head_equals_origin_main": false,
+  "origin_main": "72ea63c4ea2323b7c03cd7ad03edbf5663b949a8",
   "stage": "A7PM-0",
-  "stage_count": 427
+  "stage_count": 428
 }
 ```
 
@@ -65,7 +59,7 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     152 |
+| valid_or_historical_record   | governance_or_audit        |     153 |
 | valid_or_historical_record   | contract                   |     125 |
 | valid_or_historical_record   | diagnostic                 |      27 |
 | valid_or_historical_record   | smoke                      |       9 |

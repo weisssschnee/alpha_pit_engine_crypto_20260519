@@ -1,0 +1,8 @@
+mode,mode_reason,row_count
+interaction_alpha,interaction_tag_not_allowed,12006
+interaction_alpha,interaction_requires_pair_or_condition,3463
+interaction_alpha,no_approved_input_field,410
+ordinary_alpha,ordinary_alpha_blocked_tag,12012
+ordinary_alpha,no_approved_input_field,410
+rescue_lane,rescue_requires_only_rescue_tags,18160
+rescue_lane,no_approved_input_field,410

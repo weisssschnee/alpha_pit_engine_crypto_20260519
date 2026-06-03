@@ -1,0 +1,4 @@
+queue,row_count,semantic_type_count,semantic_pair_count,info_cluster_count,skeleton_count,top_semantic_type_share,top_semantic_pair_share,top_info_cluster_share,top_skeleton_share
+ordinary_alpha,1875,5,10,16,42,0.4362666666666667,0.192,0.256,0.04906666666666667
+interaction_alpha,1815,5,7,15,36,0.5818181818181818,0.19834710743801653,0.3305785123966942,0.05895316804407714
+rescue_lane,300,1,2,1,32,1.0,0.79,1.0,0.06333333333333334

@@ -582,6 +582,8 @@ A7INPUT-0,runtime/a7input0_input_approval_package/a7input0_authorization_matrix.
 A7INPUT-0,runtime/a7input0_input_approval_package/a7input0_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
 A7INPUT-1,runtime/a7input1_integration_smoke/a7input1_authorization_matrix.json,authorized,"{""A7FF-CORE54 input-tag-aware queue builder contract"": true}",False
 A7INPUT-1,runtime/a7input1_integration_smoke/a7input1_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
+A7INPUT-2,runtime/a7input2_tag_aware_queue_builder/a7input2_authorization_matrix.json,authorized,"{""A7FF-CORE54 input-tag-aware queue builder contract"": true}",False
+A7INPUT-2,runtime/a7input2_tag_aware_queue_builder/a7input2_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""numeric_replay"": true, ""shadow_paper_live"": true}",False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_feature_columns,94,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_symbol_month_count,87,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,authorizes_a7r_horizon_diagnostic_contract,true,True

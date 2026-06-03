@@ -1,0 +1,42 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core54_queue_builder_contract": true,
+  "authorizes_core55_numeric_preflight": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7INPUT2_TAG_AWARE_QUEUE_BUILDER_READY_FOR_CORE54",
+  "executes_replay": false,
+  "executes_search": false,
+  "formula_index_rows": 20599,
+  "generated_at": "2026-06-03T02:54:55Z",
+  "interaction_candidate_count_before_caps": 4720,
+  "interaction_queue_count": 1815,
+  "interaction_top_semantic_pair_share": 0.19834710743801653,
+  "no_condition_only_ordinary_alpha_accepted": true,
+  "no_hard_blocked_fields_accepted": true,
+  "ordinary_alpha_candidate_count_before_caps": 8177,
+  "ordinary_alpha_queue_count": 1875,
+  "ordinary_top_info_cluster_share": 0.256,
+  "ordinary_top_semantic_pair_share": 0.192,
+  "ordinary_top_semantic_type_share": 0.4362666666666667,
+  "queue_pass_thresholds": {
+    "interaction_top_semantic_pair_share_lte": 0.2,
+    "ordinary_top_info_cluster_share_lte": 0.3,
+    "ordinary_top_semantic_pair_share_lte": 0.2,
+    "ordinary_top_semantic_type_share_lte": 0.45
+  },
+  "rejected_route_rows": 46871,
+  "rescue_candidate_count_before_caps": 2029,
+  "rescue_queue_count": 300,
+  "source_decisions": [
+    "PASS_A7INPUT0_INPUT_APPROVAL_PACKAGE_READY",
+    "PASS_A7INPUT1_INPUT_ROUTING_INTEGRATION_SMOKE"
+  ],
+  "source_stages": [
+    "A7INPUT-0",
+    "A7INPUT-1",
+    "A7FF-v20260530"
+  ],
+  "stage": "A7INPUT-2"
+}
