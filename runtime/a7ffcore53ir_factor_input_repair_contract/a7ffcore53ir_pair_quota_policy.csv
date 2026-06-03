@@ -1,9 +1,0 @@
-pair_rule,status,max_share,reason,min_share
-single_price_like,cap,0.12,price-like standalone often wraps market beta,
-single_funding_like,cap,0.1,funding standalone has high control sensitivity,
-positioning_like|funding_like,require_quota,,crowding plus leverage-state interaction,0.06
-positioning_like|basis_premium_like,require_quota,,leverage expansion under dislocation,0.05
-positioning_like|liquidity_like,require_quota,,crowding under tradability/liquidity state,0.05
-funding_like|volatility_like,require_quota,,crowding under volatility state,0.04
-basis_premium_like|liquidity_like,require_quota,,dislocation with tradability,0.04
-state_or_taxonomy interactions,condition_only,0.15,state fields should not dominate standalone alpha,

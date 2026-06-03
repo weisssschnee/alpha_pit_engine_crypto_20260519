@@ -1,8 +1,0 @@
-action_id,action,required
-R0,retype derived/regime fields from compact frame before formula selection,True
-R1,apply field-type quota before materialization queue selection,True
-R2,apply input-field-set cap before selector/replay,True
-R3,force minimum OI/positioning interaction supply,True
-R4,force minimum funding/basis/liquidity/volatility interaction supply,True
-R5,separate condition/state variables from standalone alpha fields,True
-R6,rerun CORE53I after repaired queue construction,True
