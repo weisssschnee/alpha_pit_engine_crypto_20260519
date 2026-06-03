@@ -1,0 +1,22 @@
+{
+  "approved_signal_input_count": 26,
+  "authorizes_alpha_proof": false,
+  "authorizes_core54_queue_builder": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blocked_input_count": 6,
+  "condition_only_input_count": 4,
+  "decision": "PASS_A7FFCORE53IA_INCREMENTAL_INPUT_APPROVAL_BUILT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-03T01:57:54Z",
+  "high_corr_pair_count_abs_ge_0_95": 23,
+  "large_info_cluster_count": 7,
+  "numeric_field_count": 36,
+  "sample_rows": 1353903,
+  "sample_timestamps": 4096,
+  "source_decision": "PASS_A7FFCORE53IR_FACTOR_INPUT_REPAIR_CONTRACT_READY_FOR_REPAIRED_QUEUE_BUILDER",
+  "source_stage": "A7FF-CORE53IR",
+  "stage": "A7FF-CORE53IA"
+}
