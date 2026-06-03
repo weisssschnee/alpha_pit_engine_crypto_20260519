@@ -1,0 +1,9 @@
+field_type,max_candidate_share,min_candidate_share,role
+price_like,0.3,0.05,baseline_or_interaction_only
+funding_like,0.25,0.05,signal_or_state
+positioning_like,0.25,0.08,signal_or_state
+basis_premium_like,0.25,0.05,signal_or_state
+liquidity_like,0.25,0.05,interaction_or_neutralizer
+volatility_like,0.2,0.04,risk_scale_or_interaction
+state_or_taxonomy,0.2,0.03,condition_or_neutralizer
+generic_numeric,0.1,0.0,restricted_until_retyped

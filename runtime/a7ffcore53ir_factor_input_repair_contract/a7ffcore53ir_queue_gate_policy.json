@@ -1,0 +1,25 @@
+{
+  "candidate_queue_requirements": {
+    "max_top_base_field_share": 0.25,
+    "max_top_input_field_set_share": 0.08,
+    "max_top_input_type_share": 0.35,
+    "min_candidate_count": 384,
+    "min_input_type_count": 7,
+    "min_required_interaction_pair_count": 5,
+    "min_strict_candidate_input_type_count_after_repaired_targets": 3,
+    "no_single_price_or_funding_dominance": true
+  },
+  "forbidden": [
+    "counting multiple formulas with identical input field set as independent breadth",
+    "counting L0_raw and L1_xs as independent label evidence",
+    "allowing one strict clue from one input type to authorize search",
+    "expanding formula search before repaired target replay passes input breadth gate"
+  ],
+  "strict_promotion_requirements": {
+    "median_control_ratio_max": 0.9,
+    "min_independent_repaired_target_count": 3,
+    "min_input_type_count": 3,
+    "min_semantic_pair_count": 3,
+    "requires_positive_portfolio_net_spread_proxy": true
+  }
+}
