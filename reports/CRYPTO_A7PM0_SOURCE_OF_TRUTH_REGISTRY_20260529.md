@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-03T02:56:47Z
+Generated: 2026-06-03T06:12:51Z
 
 ## Decision
 
@@ -12,7 +12,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main [ahead 1]
-HEAD=d70bc9e4d55b9786ef58a9ccf217a0ec4580c83f
+?? reports/CRYPTO_A7INPUT3_NUMERIC_PROBE_DETAIL_20260603.md
+?? reports/CRYPTO_A7INPUT3_TAG_AWARE_NUMERIC_PREFLIGHT_20260603.md
+?? runtime/a7input3_tag_aware_numeric_preflight/
+?? scripts/crypto_a7input3_tag_aware_numeric_preflight.py
+HEAD=eb85d293167eb3174c7d0c14143ae550c9e7edaf
 origin/main=72ea63c4ea2323b7c03cd7ad03edbf5663b949a8
 HEAD == origin/main: False
 ```
@@ -21,8 +25,8 @@ HEAD == origin/main: False
 
 ```json
 {
-  "artifact_count": 4050,
-  "authorization_record_count": 792,
+  "artifact_count": 4070,
+  "authorization_record_count": 794,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -35,12 +39,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-03T02:56:47Z",
-  "head": "d70bc9e4d55b9786ef58a9ccf217a0ec4580c83f",
+  "generated_at": "2026-06-03T06:12:51Z",
+  "head": "eb85d293167eb3174c7d0c14143ae550c9e7edaf",
   "head_equals_origin_main": false,
   "origin_main": "72ea63c4ea2323b7c03cd7ad03edbf5663b949a8",
   "stage": "A7PM-0",
-  "stage_count": 428
+  "stage_count": 429
 }
 ```
 
@@ -59,7 +63,7 @@ HEAD == origin/main: False
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     153 |
+| valid_or_historical_record   | governance_or_audit        |     154 |
 | valid_or_historical_record   | contract                   |     125 |
 | valid_or_historical_record   | diagnostic                 |      27 |
 | valid_or_historical_record   | smoke                      |       9 |

@@ -1,0 +1,10 @@
+{
+  "authorized": {
+    "A7FF-CORE54E tag-aware numeric execution": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "large_search": true,
+    "shadow_paper_live": true
+  }
+}

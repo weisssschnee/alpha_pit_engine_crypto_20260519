@@ -1,0 +1,34 @@
+{
+  "stage": "A7INPUT-3",
+  "external_runtime_dir": "G:/AlphaFactory_CryptoData/research_runtime/a7input3_tag_aware_numeric_preflight_20260603",
+  "moved_out_of_git": [
+    {
+      "file": "a7input3_control_dominance_metrics.csv",
+      "reason": "large detailed control table; keep outside git, summarize in repo"
+    },
+    {
+      "file": "a7input3_label_response_metrics.csv",
+      "reason": "large detailed label response table; keep outside git, summarize in repo"
+    },
+    {
+      "file": "a7input3_nonoverlap_stats.csv",
+      "reason": "large detailed non-overlap table; keep outside git, summarize in repo"
+    }
+  ],
+  "repo_keeps": [
+    "a7input3_manifest.json",
+    "a7input3_authorization_matrix.json",
+    "a7input3_materialization_by_queue.csv",
+    "a7input3_decision_by_queue.csv",
+    "a7input3_semantic_response_summary.csv",
+    "a7input3_selected_summary.csv",
+    "a7input3_control_summary.csv",
+    "a7input3_family_decision_summary.csv",
+    "a7input3_decision_counts.csv",
+    "a7input3_materialization_metrics.csv",
+    "a7input3_portfolio_marginal_proxy.csv",
+    "a7input3_selected_portfolio_queue.csv",
+    "a7input3_numeric_preflight_queue.csv",
+    "a7input3_numeric_probe_stdout.log"
+  ]
+}

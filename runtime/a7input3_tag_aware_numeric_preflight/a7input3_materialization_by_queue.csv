@@ -1,0 +1,4 @@
+a7input_queue,rows,eval_success,activity_ok,median_finite_share,median_nonzero_share
+interaction_alpha,512,512,412,0.8270611893134157,0.9824226321926239
+ordinary_alpha,512,512,424,0.9713190055539596,0.9881701378844856
+rescue_lane,192,192,0,0.00308520061285065,0.9946548494677692
