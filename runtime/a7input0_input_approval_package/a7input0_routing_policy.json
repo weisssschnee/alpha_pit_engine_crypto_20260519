@@ -1,0 +1,42 @@
+{
+  "hard_block": {
+    "blocked_tags": [
+      "A7INPUT_HARD_BLOCKED",
+      "A7INPUT_REVIEW_REQUIRED"
+    ],
+    "fail_closed": true
+  },
+  "interaction_alpha": {
+    "allowed_tags": [
+      "A7INPUT_APPROVED_SIGNAL_PRIMARY",
+      "A7INPUT_APPROVED_REDUNDANT_CAP",
+      "A7INPUT_CONDITION_NEUTRALIZER_ONLY"
+    ],
+    "condition_only_formula_forbidden": true,
+    "requires_at_least_one_signal_tag": true
+  },
+  "ordinary_alpha": {
+    "allowed_tags": [
+      "A7INPUT_APPROVED_SIGNAL_PRIMARY",
+      "A7INPUT_APPROVED_REDUNDANT_CAP"
+    ],
+    "blocked_tags": [
+      "A7INPUT_CONDITION_NEUTRALIZER_ONLY",
+      "A7INPUT_RESCUE_SPARSE_EVENT",
+      "A7INPUT_RESCUE_TS_STATE",
+      "A7INPUT_HARD_BLOCKED",
+      "A7INPUT_REVIEW_REQUIRED"
+    ],
+    "max_redundant_cap_share": 0.35,
+    "max_same_info_cluster_share": 0.2
+  },
+  "rescue_lane": {
+    "allowed_tags": [
+      "A7INPUT_RESCUE_SPARSE_EVENT",
+      "A7INPUT_RESCUE_TS_STATE"
+    ],
+    "cannot_authorize_alpha_search": true,
+    "must_be_separately_reported": true,
+    "requires_event_or_state_specific_label": true
+  }
+}

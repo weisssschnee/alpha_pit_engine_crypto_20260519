@@ -1,0 +1,8 @@
+input_tag,meaning,allowed_in,requires_cap,rescue_lane
+A7INPUT_APPROVED_SIGNAL_PRIMARY,field has enough standalone incremental information for ordinary alpha input,"generator,evaluator,selector,replay",False,False
+A7INPUT_APPROVED_REDUNDANT_CAP,field is informative but belongs to high-correlation cluster; cap by info_cluster_id,"generator,evaluator,selector,replay",True,False
+A7INPUT_CONDITION_NEUTRALIZER_ONLY,field is state/taxonomy/neutralizer; not standalone alpha input,"regime,neutralizer,condition,interaction_gate",True,False
+A7INPUT_RESCUE_SPARSE_EVENT,low coverage but high uniqueness/activity; can be tested only in sparse/event rescue lane,"rescue_event,diagnostic_interaction",True,True
+A7INPUT_RESCUE_TS_STATE,low cross-sectional variation; can be tested only as time-series or market-state variable,"rescue_state,market_regime",True,True
+A7INPUT_HARD_BLOCKED,field should not enter alpha generation unless re-audited,none,True,False
+A7INPUT_REVIEW_REQUIRED,field lacks stable routing decision,manual_review,True,False

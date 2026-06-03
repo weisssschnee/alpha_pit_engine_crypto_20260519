@@ -1,0 +1,26 @@
+{
+  "authorizes_a7input1_integration_smoke": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "condition_only_field_count": 4,
+  "decision": "PASS_A7INPUT0_INPUT_APPROVAL_PACKAGE_READY",
+  "executes_replay": false,
+  "executes_search": false,
+  "field_count": 36,
+  "generated_at": "2026-06-03T02:29:44Z",
+  "hard_blocked_field_count": 0,
+  "ordinary_alpha_allowed_field_count": 26,
+  "rescue_lane_field_count": 6,
+  "source_decisions": [
+    "PASS_A7FFCORE53IA_INCREMENTAL_INPUT_APPROVAL_BUILT",
+    "PASS_A7FFCORE53IAE_INPUT_APPROVAL_FILTER_EXPERIMENT_BUILT"
+  ],
+  "source_stages": [
+    "A7FF-CORE53IA",
+    "A7FF-CORE53IAE"
+  ],
+  "stage": "A7INPUT-0",
+  "tag_count": 7
+}

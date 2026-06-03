@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core54_queue_builder_contract": true,
+  "authorizes_formula_search": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7INPUT1_INPUT_ROUTING_INTEGRATION_SMOKE",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-03T02:31:16Z",
+  "interaction_alpha_accept_count": 2858,
+  "mode_count": 3,
+  "ordinary_alpha_accept_count": 2858,
+  "rescue_lane_accept_count": 0,
+  "sample_formula_count": 5000,
+  "source_decision": "PASS_A7INPUT0_INPUT_APPROVAL_PACKAGE_READY",
+  "source_stage": "A7INPUT-0",
+  "stage": "A7INPUT-1"
+}

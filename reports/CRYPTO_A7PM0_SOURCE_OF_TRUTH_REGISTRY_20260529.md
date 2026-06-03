@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-03T02:08:35Z
+Generated: 2026-06-03T02:32:46Z
 
 ## Decision
 
@@ -12,26 +12,14 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
- M reports/CRYPTO_A7FFCORE53IA_INCREMENTAL_INPUT_APPROVAL_20260603.md
-D  reports/CRYPTO_A7FFCORE53IR_FACTOR_INPUT_REPAIR_CONTRACT_20260603.md
- M runtime/a7ffcore53ia_incremental_input_approval/a7ffcore53ia_manifest.json
-D  runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_authorization_matrix.json
-D  runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_current_snapshot.json
-D  runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_field_type_quota_policy.csv
-D  runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_manifest.json
-D  runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_pair_quota_policy.csv
-D  runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_queue_gate_policy.json
-D  runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_repair_actions.csv
-D  runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_source_base_field_usage.csv
-D  runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_source_field_type_usage.csv
-D  runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_source_input_type_redundancy.csv
- M scripts/crypto_a7ffcore53ia_incremental_input_approval.py
-D  scripts/crypto_a7ffcore53ir_factor_input_repair_contract.py
-?? reports/CRYPTO_A7FFCORE53IAE_INPUT_APPROVAL_FILTER_EXPERIMENT_20260603.md
-?? runtime/a7ffcore53iae_input_approval_filter_experiment/
-?? scripts/crypto_a7ffcore53iae_input_approval_filter_experiment.py
-HEAD=76acbcf100861507514e55d86910928d4dba5ee1
-origin/main=76acbcf100861507514e55d86910928d4dba5ee1
+?? reports/CRYPTO_A7INPUT0_INPUT_APPROVAL_PACKAGE_20260603.md
+?? reports/CRYPTO_A7INPUT1_INTEGRATION_SMOKE_20260603.md
+?? runtime/a7input0_input_approval_package/
+?? runtime/a7input1_integration_smoke/
+?? scripts/crypto_a7input0_input_approval_package.py
+?? scripts/crypto_a7input1_integration_smoke.py
+HEAD=608ecd1adb0128d9099a915852394ddcf333eebe
+origin/main=608ecd1adb0128d9099a915852394ddcf333eebe
 HEAD == origin/main: True
 ```
 
@@ -39,8 +27,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 4024,
-  "authorization_record_count": 786,
+  "artifact_count": 4038,
+  "authorization_record_count": 790,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -53,12 +41,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-03T02:08:35Z",
-  "head": "76acbcf100861507514e55d86910928d4dba5ee1",
+  "generated_at": "2026-06-03T02:32:46Z",
+  "head": "608ecd1adb0128d9099a915852394ddcf333eebe",
   "head_equals_origin_main": true,
-  "origin_main": "76acbcf100861507514e55d86910928d4dba5ee1",
+  "origin_main": "608ecd1adb0128d9099a915852394ddcf333eebe",
   "stage": "A7PM-0",
-  "stage_count": 425
+  "stage_count": 427
 }
 ```
 
@@ -77,10 +65,10 @@ HEAD == origin/main: True
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     151 |
+| valid_or_historical_record   | governance_or_audit        |     152 |
 | valid_or_historical_record   | contract                   |     125 |
 | valid_or_historical_record   | diagnostic                 |      27 |
-| valid_or_historical_record   | smoke                      |       8 |
+| valid_or_historical_record   | smoke                      |       9 |
 | valid_or_historical_record   | alpha_claim_check_required |       2 |
 
 ## Supersession Map

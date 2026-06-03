@@ -1,0 +1,6 @@
+mode,decision,reason,row_count,median_input_field_count
+interaction_alpha,accept,interaction_allowed,0,2.0
+interaction_alpha,reject,interaction_blocked_tag,0,2.0
+ordinary_alpha,accept,ordinary_alpha_allowed,0,2.0
+ordinary_alpha,reject,ordinary_alpha_blocked_tag,0,2.0
+rescue_lane,reject,rescue_lane_non_rescue_tag,0,2.0

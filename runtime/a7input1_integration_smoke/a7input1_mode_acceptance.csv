@@ -1,0 +1,4 @@
+mode,accepted,total,accept_rate
+interaction_alpha,2858,5000,0.5716
+ordinary_alpha,2858,5000,0.5716
+rescue_lane,0,5000,0.0
