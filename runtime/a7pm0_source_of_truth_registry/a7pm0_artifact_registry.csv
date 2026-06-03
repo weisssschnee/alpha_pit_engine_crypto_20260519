@@ -3446,25 +3446,24 @@ runtime,A7FF-CORE53I,runtime/a7ffcore53i_factor_input_information_audit/a7ffcore
 runtime,A7FF-CORE53I,runtime/a7ffcore53i_factor_input_information_audit/a7ffcore53i_input_type_redundancy.csv,c74e526,add crypto core53 factor input audit,1920
 runtime,A7FF-CORE53I,runtime/a7ffcore53i_factor_input_information_audit/a7ffcore53i_manifest.json,c74e526,add crypto core53 factor input audit,1002
 runtime,A7FF-CORE53I,runtime/a7ffcore53i_factor_input_information_audit/a7ffcore53i_skeleton_redundancy.csv,c74e526,add crypto core53 factor input audit,5105
-report,A7FF-CORE53IA,reports/CRYPTO_A7FFCORE53IA_INCREMENTAL_INPUT_APPROVAL_20260603.md,bd50869,add crypto core53 incremental input approval,21486
+report,A7FF-CORE53IA,reports/CRYPTO_A7FFCORE53IA_INCREMENTAL_INPUT_APPROVAL_20260603.md,bd50869,add crypto core53 incremental input approval,21451
 runtime,A7FF-CORE53IA,runtime/a7ffcore53ia_incremental_input_approval/a7ffcore53ia_authorization_matrix.json,bd50869,add crypto core53 incremental input approval,261
 runtime,A7FF-CORE53IA,runtime/a7ffcore53ia_incremental_input_approval/a7ffcore53ia_cluster_approval_summary.csv,bd50869,add crypto core53 incremental input approval,1569
 runtime,A7FF-CORE53IA,runtime/a7ffcore53ia_incremental_input_approval/a7ffcore53ia_field_input_approval_ledger.csv,bd50869,add crypto core53 incremental input approval,8083
 runtime,A7FF-CORE53IA,runtime/a7ffcore53ia_incremental_input_approval/a7ffcore53ia_high_corr_field_pairs.csv,bd50869,add crypto core53 incremental input approval,2209
 runtime,A7FF-CORE53IA,runtime/a7ffcore53ia_incremental_input_approval/a7ffcore53ia_information_clusters.csv,bd50869,add crypto core53 incremental input approval,1758
-runtime,A7FF-CORE53IA,runtime/a7ffcore53ia_incremental_input_approval/a7ffcore53ia_manifest.json,bd50869,add crypto core53 incremental input approval,808
+runtime,A7FF-CORE53IA,runtime/a7ffcore53ia_incremental_input_approval/a7ffcore53ia_manifest.json,bd50869,add crypto core53 incremental input approval,773
 runtime,A7FF-CORE53IA,runtime/a7ffcore53ia_incremental_input_approval/a7ffcore53ia_semantic_approval_summary.csv,bd50869,add crypto core53 incremental input approval,666
-report,A7FF-CORE53IR,reports/CRYPTO_A7FFCORE53IR_FACTOR_INPUT_REPAIR_CONTRACT_20260603.md,c74e526,add crypto core53 factor input audit,5434
-runtime,A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_authorization_matrix.json,c74e526,add crypto core53 factor input audit,264
-runtime,A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_current_snapshot.json,c74e526,add crypto core53 factor input audit,271
-runtime,A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_field_type_quota_policy.csv,c74e526,add crypto core53 factor input audit,445
-runtime,A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_manifest.json,c74e526,add crypto core53 factor input audit,635
-runtime,A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_pair_quota_policy.csv,c74e526,add crypto core53 factor input audit,749
-runtime,A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_queue_gate_policy.json,c74e526,add crypto core53 factor input audit,996
-runtime,A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_repair_actions.csv,c74e526,add crypto core53 factor input audit,502
-runtime,A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_source_base_field_usage.csv,c74e526,add crypto core53 factor input audit,2187
-runtime,A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_source_field_type_usage.csv,c74e526,add crypto core53 factor input audit,345
-runtime,A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_source_input_type_redundancy.csv,c74e526,add crypto core53 factor input audit,1919
+report,A7FF-CORE53IAE,reports/CRYPTO_A7FFCORE53IAE_INPUT_APPROVAL_FILTER_EXPERIMENT_20260603.md,,,8824
+runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_accepted_cluster_usage.csv,,,1063
+runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_authorization_matrix.json,,,254
+runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_clue_filter_summary.csv,,,775
+runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_filter_summary.csv,,,785
+runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_formula_index_filter_trace.csv,,,5483674
+runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_manifest.json,,,877
+runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_registry_summary.csv,,,432
+runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_selected_queue_filter_trace.csv,,,123152
+runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_system_input_registry.csv,,,6711
 report,A7FF-CORE6,reports/CRYPTO_A7FFCORE6_MATERIALIZATION_PREFLIGHT_CONTRACT_20260601.md,ecb2304,add crypto a7ffcore6 materialization contract,14883
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_manifest.json,ecb2304,add crypto a7ffcore6 materialization contract,850
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_preflight_checks.csv,ecb2304,add crypto a7ffcore6 materialization contract,827
@@ -3818,14 +3817,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,c74e526,add crypto core53 factor input audit,5439
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,c74e526,add crypto core53 factor input audit,623133
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,c74e526,add crypto core53 factor input audit,121429
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,76acbcf,refresh crypto pm registry after core53ia,5853
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,76acbcf,refresh crypto pm registry after core53ia,623541
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,76acbcf,refresh crypto pm registry after core53ia,121429
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,c74e526,add crypto core53 factor input audit,252499
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,c74e526,add crypto core53 factor input audit,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,76acbcf,refresh crypto pm registry after core53ia,252506
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,76acbcf,refresh crypto pm registry after core53ia,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,c74e526,add crypto core53 factor input audit,138953
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,76acbcf,refresh crypto pm registry after core53ia,138960
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3843,12 +3842,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,c74e526,add crypto core53 factor input audit,5483
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,76acbcf,refresh crypto pm registry after core53ia,5483
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,b37af5d,add crypto core51px execution preflight handoff,372
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,b37af5d,add crypto core51px execution preflight handoff,375
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,b37af5d,add crypto core51px execution preflight handoff,1442
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,c74e526,add crypto core53 factor input audit,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,c74e526,add crypto core53 factor input audit,425
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,76acbcf,refresh crypto pm registry after core53ia,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,76acbcf,refresh crypto pm registry after core53ia,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

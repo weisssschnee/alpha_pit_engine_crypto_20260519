@@ -1,0 +1,11 @@
+pool_name,filter_decision,formula_count,semantic_pair_count,operator_count,median_input_field_count
+a7ff_v20260530_formula_index,reject_blocked_input,12006,3,9,2.0
+a7ff_v20260530_formula_index,accept_primary_incremental_input,4198,13,10,2.0
+a7ff_v20260530_formula_index,accept_redundant_cap_only,3983,9,10,1.0
+a7ff_v20260530_formula_index,reject_no_known_input,410,3,8,0.0
+a7ff_v20260530_formula_index,accept_redundant_cap_with_condition_only,2,1,2,2.0
+core51px_selected_queue,accept_primary_incremental_input,172,30,7,2.0
+core51px_selected_queue,accept_redundant_cap_only,101,13,6,2.0
+core51px_selected_queue,reject_blocked_input,82,9,7,2.0
+core51px_selected_queue,accept_redundant_cap_with_condition_only,22,4,5,2.0
+core51px_selected_queue,reject_condition_only,7,3,3,1.0

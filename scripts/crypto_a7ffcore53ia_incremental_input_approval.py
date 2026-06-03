@@ -10,7 +10,7 @@ import pandas as pd
 
 REPO = Path(__file__).resolve().parents[1]
 CORE51PX = REPO / "runtime" / "a7ffcore51px_company_sharded_replay_runner_contract"
-CORE53IR = REPO / "runtime" / "a7ffcore53ir_factor_input_repair_contract"
+CORE53I = REPO / "runtime" / "a7ffcore53i_factor_input_information_audit"
 COMPACT_FRAME = Path("G:/AlphaFactory_CryptoData/research_runtime/a7ffcore51px_company_sharded_replay_20260602/a7ffcore51px_compact_frame.parquet")
 RUNTIME = REPO / "runtime" / "a7ffcore53ia_incremental_input_approval"
 REPORT = REPO / "reports" / "CRYPTO_A7FFCORE53IA_INCREMENTAL_INPUT_APPROVAL_20260603.md"
@@ -75,9 +75,9 @@ def md5_stable_sample(df: pd.DataFrame, max_timestamps: int = 4096) -> pd.DataFr
 def main() -> None:
     RUNTIME.mkdir(parents=True, exist_ok=True)
     REPORT.parent.mkdir(parents=True, exist_ok=True)
-    source = read_json(CORE53IR / "a7ffcore53ir_manifest.json")
-    if source.get("decision") != "PASS_A7FFCORE53IR_FACTOR_INPUT_REPAIR_CONTRACT_READY_FOR_REPAIRED_QUEUE_BUILDER":
-        raise SystemExit(f"CORE53IA not authorized by CORE53IR: {source.get('decision')}")
+    source = read_json(CORE53I / "a7ffcore53i_manifest.json")
+    if not source.get("authorizes_factor_input_repair"):
+        raise SystemExit(f"CORE53IA not authorized by CORE53I: {source.get('decision')}")
     contract = pd.read_csv(CORE51PX / "a7ffcore51px_compact_frame_contract.csv")
     fields = contract["field_name"].dropna().astype(str).tolist()
     df = pd.read_parquet(COMPACT_FRAME, columns=[c for c in fields if c not in {"symbol"} and not c.startswith("label_")])

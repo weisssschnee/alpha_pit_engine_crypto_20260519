@@ -1,0 +1,12 @@
+semantic_type,system_input_role,field_count
+basis_premium_like,signal_primary,2
+basis_premium_like,signal_redundant_cap,2
+funding_like,blocked,4
+liquidity_like,signal_primary,5
+liquidity_like,blocked,2
+liquidity_like,signal_redundant_cap,2
+positioning_like,signal_redundant_cap,4
+price_like,signal_redundant_cap,6
+price_like,signal_primary,2
+state_or_taxonomy,condition_or_neutralizer,4
+volatility_like,signal_primary,3

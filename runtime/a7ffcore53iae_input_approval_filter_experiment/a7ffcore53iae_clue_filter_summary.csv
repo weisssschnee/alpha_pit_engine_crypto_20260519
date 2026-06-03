@@ -1,0 +1,12 @@
+arbitration_status,filter_decision,seed_count,median_control_ratio
+diagnostic_clue,accept_primary_incremental_input,14,1.0018662912659901
+diagnostic_clue,reject_blocked_input,9,1.181106849877554
+diagnostic_clue,accept_redundant_cap_only,6,2.238531258671875
+diagnostic_clue,accept_redundant_cap_with_condition_only,3,1.0545850685253662
+diagnostic_clue,reject_condition_only,2,4.076405208882539
+rejected,accept_primary_incremental_input,157,1.3956385536868987
+rejected,accept_redundant_cap_only,95,1.1914514205472124
+rejected,reject_blocked_input,73,1.0931835955129587
+rejected,accept_redundant_cap_with_condition_only,19,1.0333254572513542
+rejected,reject_condition_only,5,1.396741338160847
+strict_replay_clue,accept_primary_incremental_input,1,0.8829837651727406

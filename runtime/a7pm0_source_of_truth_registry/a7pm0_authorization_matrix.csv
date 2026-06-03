@@ -564,8 +564,8 @@ A7FF-CORE53I,runtime/a7ffcore53i_factor_input_information_audit/a7ffcore53i_auth
 A7FF-CORE53I,runtime/a7ffcore53i_factor_input_information_audit/a7ffcore53i_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
 A7FF-CORE53IA,runtime/a7ffcore53ia_incremental_input_approval/a7ffcore53ia_authorization_matrix.json,authorized,"{""A7FF-CORE54 queue builder using input approval ledger"": true}",False
 A7FF-CORE53IA,runtime/a7ffcore53ia_incremental_input_approval/a7ffcore53ia_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
-A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_authorization_matrix.json,authorized,"{""A7FF-CORE54 repaired factor-input queue builder contract"": true}",False
-A7FF-CORE53IR,runtime/a7ffcore53ir_factor_input_repair_contract/a7ffcore53ir_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
+A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_authorization_matrix.json,authorized,"{""A7FF-CORE54 input-approval-aware queue builder"": true}",False
+A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,A7FF-CORE8E replay-preflight packet audit,true,True
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,alpha_proof,false,False
 A7FF-CORE8,runtime/a7ffcore8_numeric_clue_consolidation/a7ffcore8_authorization_matrix.json,formula_search,false,False
