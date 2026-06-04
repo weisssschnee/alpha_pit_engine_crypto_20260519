@@ -1,0 +1,3 @@
+repair_item,affected_semantic_pairs,evidence,action,next_stage
+funding_positioning_zero_activity,basis_premium_like|funding_like;funding_like|positioning_like,CORE60C activity_ok_rows=0 for funding related pairs,do not send these pairs to selector until panel availability / transform activity repair passes,CORE62C_materialization_repair_dryrun
+basis_funding_sparse_finite_share,basis_premium_like|funding_like,median_finite_share near zero despite nonzero_share high,audit funding_rate timestamp/coverage and transform windows before any numeric expansion,CORE62C_materialization_repair_dryrun

@@ -1,0 +1,27 @@
+{
+  "allowed_next": [
+    "CORE62A non-L7 selector target dryrun on exact clean subset",
+    "CORE62B target near-miss repair dryrun",
+    "CORE62C materialization repair dryrun"
+  ],
+  "forbidden": [
+    "formula search",
+    "large search",
+    "alpha proof",
+    "shadow/paper/live"
+  ],
+  "hard_caps": {
+    "selected_l7_share_max": 0.4,
+    "selected_non_l7_min": 12,
+    "selected_semantic_pair_min": 4,
+    "top_semantic_pair_share_max": 0.35
+  },
+  "hard_reject": [
+    "control_ratio >= 1.0",
+    "cost10_recent_oriented <= 0 for selector route",
+    "zero_activity_semantic_pair",
+    "missing materialization contract"
+  ],
+  "selector_mode": "non_l7_first_repair_dryrun",
+  "stage": "A7FF-CORE61"
+}

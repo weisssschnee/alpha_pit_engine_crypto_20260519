@@ -1,0 +1,25 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core62a_non_l7_selector_dryrun": false,
+  "authorizes_core62b_target_near_miss_dryrun": true,
+  "authorizes_core62c_materialization_repair_dryrun": true,
+  "authorizes_search": false,
+  "blockers": [
+    "exact_clean_non_l7_lt_4",
+    "materialization_zero_activity_pairs_present"
+  ],
+  "decision": "HOLD_CORE61_REPAIR_PLAN_REQUIRES_MATERIALIZATION_AND_TARGET_FIX",
+  "exact_clean_non_l7_rows": 3,
+  "exact_non_l7_rows": 6,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-04T16:31:04Z",
+  "inactive_semantic_pair_count": 2,
+  "near_miss_rows": 313,
+  "repair_candidate_rows": 319,
+  "repair_semantic_pair_count": 6,
+  "source_core60b_decision": "HOLD_CORE60B_TARGET_ADEQUACY_REPAIR_REQUIRED",
+  "source_core60c_decision": "HOLD_CORE60C_MATERIALIZATION_REPAIR_REQUIRED",
+  "source_core60d_decision": "HOLD_CORE60D_SELECTOR_STILL_RANK_BIASED",
+  "stage": "A7FF-CORE61"
+}

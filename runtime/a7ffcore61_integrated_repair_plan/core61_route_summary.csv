@@ -1,0 +1,5 @@
+core61_route,core61_reason,rows,unique_blueprints,semantic_pair_count,median_control_ratio,min_cost10,max_cost10
+CORE62A_non_l7_selector_target_dryrun,exact_non_l7_clue,6,6,2,0.8387516677134188,-0.0015739941020676,0.0496385720659838
+CORE62B_target_near_miss_repair_dryrun,near_miss_one_bar_lag_fragile,174,49,6,0.6517330826030814,-0.0016053642869241,0.1497384400188399
+CORE62B_target_near_miss_repair_dryrun,near_miss_control_dominated,109,63,6,1.137112265392339,-0.0018253312505455,0.2700006537298506
+CORE62B_target_near_miss_repair_dryrun,near_miss_pre_may_unstable,30,17,2,1.089920348025014,-0.0024654170692592,0.1539625615005

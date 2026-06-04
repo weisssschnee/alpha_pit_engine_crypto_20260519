@@ -1,0 +1,5 @@
+policy_id,rule,threshold
+T0_non_l7_first,CORE62 selector dryrun must score non-L7 labels first and treat L7 as diagnostic-only evidence,selected_l7_share <= 0.40
+T1_premay_stability_split,separate pre_may_unstable into split-sign instability vs weak magnitude; do not loosen pass gate globally,non_l7_target_count >= 4 before numeric expansion
+T2_control_margin_floor,non-L7 exact clue or near-miss must retain control_ratio < 1.0 for selector queue,hard reject control_ratio >= 1.0
+T3_cost_floor,"cost10 negative candidates can only enter target forensic, not selector queue",selector cost10_recent_oriented > 0
