@@ -1,0 +1,31 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core57_replay_arbitration": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "clean_candidate_count_lt_12",
+    "clean_semantic_pair_count_lt_4",
+    "clean_label_family_count_lt_2"
+  ],
+  "clean_candidate_count": 0,
+  "clean_label_family_count": 0,
+  "clean_replay_rows": 0,
+  "clean_semantic_pair_count": 0,
+  "clean_top_semantic_pair_share": 0.0,
+  "decision": "HOLD_A7FFCORE56_BOUNDED_REPLAY_PREFLIGHT",
+  "eval_failure_count": 0,
+  "executes_replay": true,
+  "executes_search": false,
+  "frame_rows": 6949596,
+  "frame_symbols": 498,
+  "generated_at": "2026-06-04T12:15:42Z",
+  "label_matrix_count": 16,
+  "packet_count": 114,
+  "replay_metric_rows": 1824,
+  "source_decision": "PASS_A7FFCORE55_REPLAY_READY_PACKET_BUILT",
+  "source_stage": "A7FF-CORE55",
+  "stage": "A7FF-CORE56",
+  "timestamp_count": 21025,
+  "uses_may": false
+}

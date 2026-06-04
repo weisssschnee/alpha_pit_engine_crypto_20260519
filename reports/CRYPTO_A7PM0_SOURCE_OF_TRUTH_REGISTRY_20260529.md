@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-04T07:23:58Z
+Generated: 2026-06-04T12:21:31Z
 
 ## Decision
 
@@ -12,8 +12,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main [ahead 1]
-HEAD=f0ee965d6eeaf6c45b35315b50c3bec5cd827379
-origin/main=b6647abe7e2105452b0b474038a5a0e131420ab6
+ M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
+ M runtime/a7pm3_experiment_board/a7pm3_manifest.json
+HEAD=aabdfacaab8390188d15ff594a1a9d28ff5fc6ee
+origin/main=105dd993df03c6d85220e7288ba12da49f30fbc8
 HEAD == origin/main: False
 ```
 
@@ -21,8 +24,8 @@ HEAD == origin/main: False
 
 ```json
 {
-  "artifact_count": 4089,
-  "authorization_record_count": 798,
+  "artifact_count": 4099,
+  "authorization_record_count": 800,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -35,12 +38,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-04T07:23:58Z",
-  "head": "f0ee965d6eeaf6c45b35315b50c3bec5cd827379",
+  "generated_at": "2026-06-04T12:21:31Z",
+  "head": "aabdfacaab8390188d15ff594a1a9d28ff5fc6ee",
   "head_equals_origin_main": false,
-  "origin_main": "b6647abe7e2105452b0b474038a5a0e131420ab6",
+  "origin_main": "105dd993df03c6d85220e7288ba12da49f30fbc8",
   "stage": "A7PM-0",
-  "stage_count": 431
+  "stage_count": 432
 }
 ```
 
@@ -53,7 +56,7 @@ HEAD == origin/main: False
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      83 |
+| hold                         | hold                       |      84 |
 | hold                         | diagnostic                 |       7 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |

@@ -3465,17 +3465,27 @@ runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7
 runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_selected_queue_filter_trace.csv,608ecd1,add crypto input approval filter experiment,123152
 runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_system_input_registry.csv,608ecd1,add crypto input approval filter experiment,6711
 report,A7FF-CORE54E,reports/CRYPTO_A7FFCORE54E_TAG_AWARE_NUMERIC_EXECUTION_20260604.md,b6647ab,run crypto core54e tag aware numeric execution,34652
-report,A7FF-CORE55,reports/CRYPTO_A7FFCORE55_NUMERIC_CLUE_FORENSIC_20260604.md,f0ee965,add crypto core55 numeric clue forensic,14854
-runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_authorization_matrix.json,f0ee965,add crypto core55 numeric clue forensic,191
-runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_candidate_clue_pool.csv,f0ee965,add crypto core55 numeric clue forensic,66621
-runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_label_family_summary.csv,f0ee965,add crypto core55 numeric clue forensic,522
-runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_manifest.json,f0ee965,add crypto core55 numeric clue forensic,846
-runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_packet_semantic_summary.csv,f0ee965,add crypto core55 numeric clue forensic,1376
-runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_reject_reason_summary.csv,f0ee965,add crypto core55 numeric clue forensic,46
-runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_rejected_candidates.csv,f0ee965,add crypto core55 numeric clue forensic,3752
-runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_replay_ready_packet.csv,f0ee965,add crypto core55 numeric clue forensic,63386
-runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_selected_overlap_audit.csv,f0ee965,add crypto core55 numeric clue forensic,578
-runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_semantic_pair_summary.csv,f0ee965,add crypto core55 numeric clue forensic,1376
+report,A7FF-CORE55,reports/CRYPTO_A7FFCORE55_NUMERIC_CLUE_FORENSIC_20260604.md,105dd99,add crypto core55 numeric clue forensic,14854
+runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_authorization_matrix.json,105dd99,add crypto core55 numeric clue forensic,191
+runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_candidate_clue_pool.csv,105dd99,add crypto core55 numeric clue forensic,66621
+runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_label_family_summary.csv,105dd99,add crypto core55 numeric clue forensic,522
+runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_manifest.json,105dd99,add crypto core55 numeric clue forensic,846
+runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_packet_semantic_summary.csv,105dd99,add crypto core55 numeric clue forensic,1376
+runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_reject_reason_summary.csv,105dd99,add crypto core55 numeric clue forensic,46
+runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_rejected_candidates.csv,105dd99,add crypto core55 numeric clue forensic,3752
+runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_replay_ready_packet.csv,105dd99,add crypto core55 numeric clue forensic,63386
+runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_selected_overlap_audit.csv,105dd99,add crypto core55 numeric clue forensic,578
+runtime,A7FF-CORE55,runtime/a7ffcore55_numeric_clue_forensic/a7ffcore55_semantic_pair_summary.csv,105dd99,add crypto core55 numeric clue forensic,1376
+report,A7FF-CORE56,reports/CRYPTO_A7FFCORE56_BOUNDED_REPLAY_PREFLIGHT_20260604.md,aabdfac,run crypto core56 bounded replay preflight,21474
+runtime,A7FF-CORE56,runtime/a7ffcore56_bounded_replay_preflight/a7ffcore56_authorization_matrix.json,aabdfac,run crypto core56 bounded replay preflight,186
+runtime,A7FF-CORE56,runtime/a7ffcore56_bounded_replay_preflight/a7ffcore56_candidate_summary.csv,aabdfac,run crypto core56 bounded replay preflight,12685
+runtime,A7FF-CORE56,runtime/a7ffcore56_bounded_replay_preflight/a7ffcore56_clean_semantic_summary.csv,aabdfac,run crypto core56 bounded replay preflight,2
+runtime,A7FF-CORE56,runtime/a7ffcore56_bounded_replay_preflight/a7ffcore56_eval_failures.csv,aabdfac,run crypto core56 bounded replay preflight,2
+runtime,A7FF-CORE56,runtime/a7ffcore56_bounded_replay_preflight/a7ffcore56_label_decision_summary.csv,aabdfac,run crypto core56 bounded replay preflight,1819
+runtime,A7FF-CORE56,runtime/a7ffcore56_bounded_replay_preflight/a7ffcore56_manifest.json,aabdfac,run crypto core56 bounded replay preflight,972
+runtime,A7FF-CORE56,runtime/a7ffcore56_bounded_replay_preflight/a7ffcore56_replay_clean_candidates.csv,aabdfac,run crypto core56 bounded replay preflight,1039
+runtime,A7FF-CORE56,runtime/a7ffcore56_bounded_replay_preflight/a7ffcore56_replay_metrics.csv,aabdfac,run crypto core56 bounded replay preflight,1259018
+runtime,A7FF-CORE56,runtime/a7ffcore56_bounded_replay_preflight/a7ffcore56_split_obs_summary.csv,aabdfac,run crypto core56 bounded replay preflight,225
 report,A7FF-CORE6,reports/CRYPTO_A7FFCORE6_MATERIALIZATION_PREFLIGHT_CONTRACT_20260601.md,ecb2304,add crypto a7ffcore6 materialization contract,14883
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_manifest.json,ecb2304,add crypto a7ffcore6 materialization contract,850
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_preflight_checks.csv,ecb2304,add crypto a7ffcore6 materialization contract,827
@@ -3882,14 +3892,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,f0ee965,add crypto core55 numeric clue forensic,5418
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,f0ee965,add crypto core55 numeric clue forensic,632669
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,f0ee965,add crypto core55 numeric clue forensic,123715
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,aabdfac,run crypto core56 bounded replay preflight,5544
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,aabdfac,run crypto core56 bounded replay preflight,634148
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,aabdfac,run crypto core56 bounded replay preflight,124066
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,f0ee965,add crypto core55 numeric clue forensic,257011
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,f0ee965,add crypto core55 numeric clue forensic,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,aabdfac,run crypto core56 bounded replay preflight,257018
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,aabdfac,run crypto core56 bounded replay preflight,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,f0ee965,add crypto core55 numeric clue forensic,140855
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,aabdfac,run crypto core56 bounded replay preflight,141138
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3907,12 +3917,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,f0ee965,add crypto core55 numeric clue forensic,5483
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,aabdfac,run crypto core56 bounded replay preflight,5483
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,b37af5d,add crypto core51px execution preflight handoff,372
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,b37af5d,add crypto core51px execution preflight handoff,375
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,b37af5d,add crypto core51px execution preflight handoff,1442
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,f0ee965,add crypto core55 numeric clue forensic,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,f0ee965,add crypto core55 numeric clue forensic,425
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,105dd99,add crypto core55 numeric clue forensic,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,aabdfac,run crypto core56 bounded replay preflight,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
