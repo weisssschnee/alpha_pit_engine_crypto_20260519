@@ -1,0 +1,19 @@
+{
+  "core58_objective": "failure-aware queue rebuild with control-clean and split-stable hard gates",
+  "does_not_authorize_search": true,
+  "hard_exclusions": [
+    "control_ratio_premay_max >= 1.0",
+    "premay_positive_split_count < 3 for replay queue",
+    "stale_ratio_recent >= 1.0",
+    "cost5_recent_oriented <= 0",
+    "label families with zero pre-May observations"
+  ],
+  "next_recommended_stage": "A7FF-CORE58",
+  "selector_changes": [
+    "rank by preMay split consistency before recent spread",
+    "penalize strongest control source directly",
+    "require nonzero representation from at least four semantic pairs before replay",
+    "do not promote CORE55 numeric clue rows without CORE56 replay clean evidence"
+  ],
+  "stage": "A7FF-CORE57"
+}

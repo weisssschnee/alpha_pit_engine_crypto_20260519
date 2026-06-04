@@ -1,0 +1,30 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core58_failure_aware_queue_rebuild": true,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers_inherited_from_core56": [
+    "core56_clean_candidate_count_zero"
+  ],
+  "control_dominated_rows": 612,
+  "cost5_fragile_rows": 14,
+  "decision": "PASS_A7FFCORE57_FAILURE_DECOMPOSITION_BUILT",
+  "decision_count": 4,
+  "empty_premay_label_families": [
+    "L3_liquidity_relative"
+  ],
+  "empty_premay_label_family_count": 1,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-04T12:30:20Z",
+  "input_candidate_count": 114,
+  "input_replay_rows": 1824,
+  "motif_count": 8,
+  "premay_unstable_rows": 1189,
+  "semantic_pair_count": 9,
+  "source_decision": "HOLD_A7FFCORE56_BOUNDED_REPLAY_PREFLIGHT",
+  "source_stage": "A7FF-CORE56",
+  "stage": "A7FF-CORE57",
+  "stale_lag_fragile_rows": 9,
+  "uses_may": false
+}

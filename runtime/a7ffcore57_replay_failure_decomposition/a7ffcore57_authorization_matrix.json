@@ -1,0 +1,10 @@
+{
+  "authorized": {
+    "A7FF-CORE58 failure-aware queue rebuild": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "large_search": true,
+    "shadow_paper_live": true
+  }
+}
