@@ -723,6 +723,21 @@ A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,execu
 A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,generated_at,"""2026-05-22T09:11:11Z""",False
 A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,required_next,"[""Do not promote standalone global-long-short crowding motif"", ""Use metrics as state/exposure/interactions in later reset only"", ""No expanded replay from A7S-4""]",False
 A7S4,runtime/a7s4_crowding_robustness_audit/a7s4_authorization_matrix.json,warnings,"[""single_formula_single_family"", ""may_control_positive_stress_only""]",False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,authorizes_core62b,true,True
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,authorizes_core62c,true,True
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,authorizes_search,false,False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,decision,"""PASS_A7SSM_SEARCH_SPACE_MEMORY_MAP_BUILT""",False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,generated_at,"""2026-06-04T16:59:49Z""",False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,repair_or_blocked_pairs,4,False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,search_ready_pairs,0,False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,selector_eligible_rows,55,False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,source_core60b_decision,"""HOLD_CORE60B_TARGET_ADEQUACY_REPAIR_REQUIRED""",False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,source_core60c_decision,"""HOLD_CORE60C_MATERIALIZATION_REPAIR_REQUIRED""",False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,source_core60d_decision,"""HOLD_CORE60D_SELECTOR_STILL_RANK_BIASED""",False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,source_core61_decision,"""HOLD_CORE61_REPAIR_PLAN_REQUIRES_MATERIALIZATION_AND_TARGET_FIX""",False
+A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,stage,"""A7SSM""",False
 A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,authorizes_a7t1_forward_observation_runner_design,true,True
 A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,authorizes_alpha_proof,false,False
 A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_authorization_matrix.json,authorizes_historical_proof_from_forward_only_fields,false,False

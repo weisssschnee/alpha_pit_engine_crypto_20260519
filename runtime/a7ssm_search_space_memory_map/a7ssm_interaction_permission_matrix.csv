@@ -1,0 +1,11 @@
+semantic_pair,semantic_parts,activity_ok_rate,non_l7_exact_rows,selected_l7_share,route,search_permission,search_ready,next_allowed
+basis_premium_like|funding_like,basis_premium_like;funding_like,0.0,0,0.0,materialization_repair,blocked_until_materialized,False,CORE62C
+funding_like|positioning_like,funding_like;positioning_like,0.0,0,0.0,materialization_repair,blocked_until_materialized,False,CORE62C
+basis_premium_like,basis_premium_like,0.9473684210526316,0,1.0,selector_l7_bias_diagnostic,diagnostic_only,False,CORE62B
+basis_premium_like|basis_premium_like,basis_premium_like;basis_premium_like,0.66,0,1.0,selector_l7_bias_diagnostic,diagnostic_only,False,CORE62B
+price_like,price_like,1.0,0,1.0,selector_l7_bias_diagnostic,diagnostic_only,False,CORE62B
+price_like|volatility_like,price_like;volatility_like,0.8431372549019608,0,1.0,selector_l7_bias_diagnostic,diagnostic_only,False,CORE62B
+volatility_like,volatility_like,1.0,0,1.0,selector_l7_bias_diagnostic,diagnostic_only,False,CORE62B
+volatility_like|volatility_like,volatility_like;volatility_like,0.8461538461538461,0,1.0,selector_l7_bias_diagnostic,diagnostic_only,False,CORE62B
+basis_premium_like|price_like,basis_premium_like;price_like,0.8156028368794326,5,0.9230769230769232,target_near_miss_repair,repair_only,False,CORE62B
+basis_premium_like|volatility_like,basis_premium_like;volatility_like,0.784037558685446,1,1.0,target_near_miss_repair,repair_only,False,CORE62B

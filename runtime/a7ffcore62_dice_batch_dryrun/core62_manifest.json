@@ -1,0 +1,16 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_parallel_dryrun": true,
+  "authorizes_search": false,
+  "blockers": [],
+  "core62b_semantic_pair_count": 4,
+  "core62b_target_near_miss_rows": 45,
+  "core62c_materialization_task_rows": 2,
+  "decision": "PASS_CORE62_DICE_BATCH_READY_FOR_PARALLEL_DRYRUN",
+  "dice_batch_rows": 47,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-04T16:59:53Z",
+  "source_a7ssm_decision": "PASS_A7SSM_SEARCH_SPACE_MEMORY_MAP_BUILT",
+  "stage": "A7FF-CORE62"
+}

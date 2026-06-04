@@ -1,0 +1,7 @@
+dice_arm,semantic_pair,rows,unique_blueprints
+CORE62B_target_near_miss_repair,basis_premium_like|basis_premium_like,18,17
+CORE62B_target_near_miss_repair,basis_premium_like|price_like,17,17
+CORE62B_target_near_miss_repair,basis_premium_like|volatility_like,8,8
+CORE62B_target_near_miss_repair,basis_premium_like,2,2
+CORE62C_materialization_repair,basis_premium_like|funding_like,1,0
+CORE62C_materialization_repair,funding_like|positioning_like,1,0

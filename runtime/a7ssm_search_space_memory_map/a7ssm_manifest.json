@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core62b": true,
+  "authorizes_core62c": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7SSM_SEARCH_SPACE_MEMORY_MAP_BUILT",
+  "generated_at": "2026-06-04T16:59:49Z",
+  "repair_or_blocked_pairs": 4,
+  "search_ready_pairs": 0,
+  "selector_eligible_rows": 55,
+  "source_core60b_decision": "HOLD_CORE60B_TARGET_ADEQUACY_REPAIR_REQUIRED",
+  "source_core60c_decision": "HOLD_CORE60C_MATERIALIZATION_REPAIR_REQUIRED",
+  "source_core60d_decision": "HOLD_CORE60D_SELECTOR_STILL_RANK_BIASED",
+  "source_core61_decision": "HOLD_CORE61_REPAIR_PLAN_REQUIRES_MATERIALIZATION_AND_TARGET_FIX",
+  "stage": "A7SSM"
+}

@@ -1,0 +1,8 @@
+{
+  "control_ratio_max": 1.0,
+  "cost10_min": 0.0,
+  "selected_l7_share_max": 0.4,
+  "selected_non_l7_min": 12,
+  "selected_semantic_pair_min": 4,
+  "top_semantic_pair_share_max": 0.35
+}
