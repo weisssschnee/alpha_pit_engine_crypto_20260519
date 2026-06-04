@@ -40,7 +40,10 @@ def write_json(path: Path, payload: Any) -> None:
 def read_csv(path: Path) -> pd.DataFrame:
     if not path.exists() or path.stat().st_size == 0:
         return pd.DataFrame()
-    return pd.read_csv(path)
+    try:
+        return pd.read_csv(path)
+    except pd.errors.EmptyDataError:
+        return pd.DataFrame()
 
 
 def md_table(df: pd.DataFrame, max_rows: int = 80) -> str:
@@ -50,7 +53,10 @@ def md_table(df: pd.DataFrame, max_rows: int = 80) -> str:
     for col in view.columns:
         if view[col].dtype == object:
             view[col] = view[col].astype(str).str.replace("|", "\\|", regex=False)
-    return view.to_markdown(index=False)
+    try:
+        return view.to_markdown(index=False)
+    except ImportError:
+        return "```csv\n" + view.to_csv(index=False) + "```"
 
 
 def shard_queue(queue: pd.DataFrame, rows_per_shard: int) -> list[tuple[int, pd.DataFrame]]:

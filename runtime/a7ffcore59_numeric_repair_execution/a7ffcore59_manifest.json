@@ -1,0 +1,32 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core60_numeric_forensic": false,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "non_l7_candidate_count_lt_24",
+    "non_l7_semantic_count_lt_4"
+  ],
+  "decision": "HOLD_A7FFCORE59_NUMERIC_REPAIR_EXECUTION",
+  "eval_failure_count": 0,
+  "executes_numeric_probe": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "external_runtime_dir": "D:/HermesWorker/GDrive/AlphaFactory_CryptoData/research_runtime/a7ffcore59_numeric_repair_execution_20260604",
+  "failed_shard_count": 0,
+  "generated_at": "2026-06-04T14:33:33Z",
+  "input_queue_rows": 1200,
+  "label_response_rows": 12940,
+  "materialized_activity_ok_count": 647,
+  "non_l7_candidate_count": 6,
+  "non_l7_numeric_clue_rows": 6,
+  "non_l7_semantic_pair_count": 2,
+  "rank_label_diagnostic_clue_rows": 341,
+  "selected_portfolio_queue_count": 44,
+  "shard_count": 6,
+  "source_decision": "PASS_A7FFCORE58_FAILURE_AWARE_QUEUE_REBUILT_READY_FOR_CORE59",
+  "source_stage": "A7FF-CORE58",
+  "stage": "A7FF-CORE59",
+  "timed_out_shard_count": 0,
+  "uses_may": false
+}

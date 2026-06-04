@@ -1,0 +1,14 @@
+{
+  "external_keeps": [
+    "full shard label/control/nonoverlap/materialization outputs and logs"
+  ],
+  "external_runtime_dir": "D:/HermesWorker/GDrive/AlphaFactory_CryptoData/research_runtime/a7ffcore59_numeric_repair_execution_20260604",
+  "repo_keeps": [
+    "manifest",
+    "authorization",
+    "materialization_by_semantic",
+    "decision_by_semantic",
+    "clue summaries",
+    "selected summary"
+  ]
+}

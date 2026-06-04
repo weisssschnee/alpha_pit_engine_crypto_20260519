@@ -1,0 +1,10 @@
+semantic_pair,label_family,row_count
+basis_premium_like|price_like,L7_ranked_future_return,12
+basis_premium_like|volatility_like,L7_ranked_future_return,10
+basis_premium_like|basis_premium_like,L7_ranked_future_return,8
+volatility_like|volatility_like,L7_ranked_future_return,4
+price_like|volatility_like,L7_ranked_future_return,3
+price_like,L7_ranked_future_return,3
+volatility_like,L7_ranked_future_return,2
+basis_premium_like,L7_ranked_future_return,1
+basis_premium_like|price_like,L5_vol_adjusted_return,1

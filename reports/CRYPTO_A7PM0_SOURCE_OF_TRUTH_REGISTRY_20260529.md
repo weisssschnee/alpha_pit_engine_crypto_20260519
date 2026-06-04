@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-04T13:44:06Z
+Generated: 2026-06-04T14:34:53Z
 
 ## Decision
 
@@ -11,21 +11,35 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
+## main...origin/main
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
+ M runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_checkpoint_manifest.json
+ M runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_checkpoint_status.csv
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=89954d3ec8baa3f7816021a3a672f9aab7161b35
-origin/main=64701125b030b8be188baa0a7663d37937624fc1
-HEAD == origin/main: False
+ M scripts/crypto_a7ffcore59_numeric_repair_execution.py
+?? reports/CRYPTO_A7FFCORE59_NUMERIC_REPAIR_EXECUTION_20260604.md
+?? runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_authorization_matrix.json
+?? runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_clue_summary.csv
+?? runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_decision_by_semantic.csv
+?? runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_external_artifact_manifest.json
+?? runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_manifest.json
+?? runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_materialization_by_semantic.csv
+?? runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_non_l7_clue_summary.csv
+?? runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_selected_summary.csv
+?? runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_shard_summary.csv
+?? scripts/crypto_a7ffcore59_company_parallel_launcher.ps1
+HEAD=fd4099ccb45649fd1dcb05305cda2225dc4b876d
+origin/main=fd4099ccb45649fd1dcb05305cda2225dc4b876d
+HEAD == origin/main: True
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 4133,
-  "authorization_record_count": 804,
+  "artifact_count": 4143,
+  "authorization_record_count": 806,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -38,10 +52,10 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-04T13:44:06Z",
-  "head": "89954d3ec8baa3f7816021a3a672f9aab7161b35",
-  "head_equals_origin_main": false,
-  "origin_main": "64701125b030b8be188baa0a7663d37937624fc1",
+  "generated_at": "2026-06-04T14:34:53Z",
+  "head": "fd4099ccb45649fd1dcb05305cda2225dc4b876d",
+  "head_equals_origin_main": true,
+  "origin_main": "fd4099ccb45649fd1dcb05305cda2225dc4b876d",
   "stage": "A7PM-0",
   "stage_count": 435
 }

@@ -1,0 +1,11 @@
+semantic_pair,rows,eval_success,activity_ok,median_finite_share,median_nonzero_share
+basis_premium_like|price_like,282,282,230,0.9956908934214306,0.9879385963551817
+basis_premium_like|volatility_like,213,213,167,0.8253375466819879,0.9888954060943111
+basis_premium_like|basis_premium_like,200,200,132,0.9962654409652398,0.9441900749701323
+price_like|volatility_like,51,51,43,0.8253375466819879,0.9879481378350156
+basis_premium_like,38,38,36,0.9933927032461936,1.0
+volatility_like|volatility_like,26,26,22,0.8256248204538925,0.9781246369234344
+volatility_like,14,14,14,0.8273484630853203,1.0
+price_like,3,3,3,0.9994254524561909,1.0
+funding_like|positioning_like,13,13,0,0.0032647467202911,0.9007155635062611
+basis_premium_like|funding_like,360,360,0,0.0006703054677774,0.9581056466302368
