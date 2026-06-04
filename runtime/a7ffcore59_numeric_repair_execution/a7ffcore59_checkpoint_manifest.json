@@ -1,0 +1,9 @@
+{
+  "complete_or_existing_shards": 4,
+  "external_runtime_dir": "G:/AlphaFactory_CryptoData/research_runtime/a7ffcore59_numeric_repair_execution_20260604",
+  "failed_or_partial_shards": 1,
+  "generated_at": "2026-06-04T13:41:57Z",
+  "not_started_shards": 1,
+  "stage": "A7FF-CORE59",
+  "total_shards": 6
+}

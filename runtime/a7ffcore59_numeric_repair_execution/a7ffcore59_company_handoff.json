@@ -1,0 +1,41 @@
+{
+  "stage": "A7FF-CORE59",
+  "generated_at": "2026-06-04T13:42:30Z",
+  "purpose": "company_machine_checkpoint_safe_numeric_repair_execution",
+  "external_runtime_dir": "G:/AlphaFactory_CryptoData/research_runtime/a7ffcore59_numeric_repair_execution_20260604",
+  "local_checkpoint": {
+    "complete_existing": ["s00", "s01", "s02", "s03"],
+    "queued_partial": ["s04"],
+    "not_started": ["s05"]
+  },
+  "company_commands": {
+    "resume_if_existing_shards_available": [
+      "cd G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519",
+      "git pull",
+      "$env:A7FFCORE59_EXTERNAL='G:\\AlphaFactory_CryptoData\\research_runtime\\a7ffcore59_numeric_repair_execution_20260604'",
+      "$env:A7FFCORE59_ROWS_PER_SHARD='200'",
+      "$env:A7FFCORE59_SHARDS='4,5'",
+      "py scripts\\crypto_a7ffcore59_numeric_repair_execution.py"
+    ],
+    "full_run_if_no_existing_shards": [
+      "cd G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519",
+      "git pull",
+      "$env:A7FFCORE59_EXTERNAL='G:\\AlphaFactory_CryptoData\\research_runtime\\a7ffcore59_numeric_repair_execution_20260604'",
+      "$env:A7FFCORE59_ROWS_PER_SHARD='200'",
+      "py scripts\\crypto_a7ffcore59_numeric_repair_execution.py"
+    ],
+    "checkpoint_only": [
+      "$env:A7FFCORE59_CHECKPOINT_ONLY='1'",
+      "py scripts\\crypto_a7ffcore59_numeric_repair_execution.py",
+      "Remove-Item Env:\\A7FFCORE59_CHECKPOINT_ONLY -ErrorAction SilentlyContinue"
+    ]
+  },
+  "authorization": {
+    "numeric_probe_execution": true,
+    "replay_execution": false,
+    "formula_search": false,
+    "large_search": false,
+    "alpha_proof": false,
+    "shadow_paper_live": false
+  }
+}

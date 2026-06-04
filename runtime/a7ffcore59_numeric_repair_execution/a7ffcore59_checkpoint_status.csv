@@ -1,0 +1,7 @@
+shard,returncode,timed_out,reused_existing,runtime_dir,queue_rows,decision,blockers,materialized_activity_ok_count,label_response_rows,non_l7_numeric_clue_rows,rank_label_diagnostic_clue_rows,selected_portfolio_queue_count,checkpoint_status,manifest_exists,queue_exists
+s00,0,False,True,G:/AlphaFactory_CryptoData/research_runtime/a7ffcore59_numeric_repair_execution_20260604/shard_00,200,HOLD_A7FFCORE59S00_NO_ACTIVITY_OK_BLUEPRINTS,no_activity_ok_blueprints,0,0,0,0,0,complete_existing,True,True
+s01,0,False,True,G:/AlphaFactory_CryptoData/research_runtime/a7ffcore59_numeric_repair_execution_20260604/shard_01,200,HOLD_A7FFCORE59S01_NO_NON_L7_NUMERIC_CLUES,no_non_l7_numeric_clues,23,460,0,11,4,complete_existing,True,True
+s02,0,False,True,G:/AlphaFactory_CryptoData/research_runtime/a7ffcore59_numeric_repair_execution_20260604/shard_02,200,HOLD_A7FFCORE59S02_NO_NON_L7_NUMERIC_CLUES,no_non_l7_numeric_clues,154,3080,0,63,7,complete_existing,True,True
+s03,0,False,True,G:/AlphaFactory_CryptoData/research_runtime/a7ffcore59_numeric_repair_execution_20260604/shard_03,200,HOLD_A7FFCORE59S03_NO_NON_L7_NUMERIC_CLUES,no_non_l7_numeric_clues,144,2880,0,93,11,complete_existing,True,True
+s04,,,False,G:/AlphaFactory_CryptoData/research_runtime/a7ffcore59_numeric_repair_execution_20260604/shard_04,200,,,,,,,,queued_partial,False,True
+s05,,,False,G:/AlphaFactory_CryptoData/research_runtime/a7ffcore59_numeric_repair_execution_20260604/shard_05,200,,,,,,,,not_started,False,False
