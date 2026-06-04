@@ -1,0 +1,11 @@
+{
+  "authorized": {
+    "A7FF-CORE55 numeric clue forensic": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "large_search": true,
+    "replay": true,
+    "shadow_paper_live": true
+  }
+}

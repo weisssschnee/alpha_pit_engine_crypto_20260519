@@ -578,6 +578,8 @@ A7FF-CORE9,runtime/a7ffcore9_bounded_replay_contract/a7ffcore9_authorization_mat
 A7FF-CORE9,runtime/a7ffcore9_bounded_replay_contract/a7ffcore9_authorization_matrix.json,large_replay,false,False
 A7FF-CORE9,runtime/a7ffcore9_bounded_replay_contract/a7ffcore9_authorization_matrix.json,large_search,false,False
 A7FF-CORE9,runtime/a7ffcore9_bounded_replay_contract/a7ffcore9_authorization_matrix.json,shadow_paper_live,false,False
+A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_authorization_matrix.json,authorized,"{""A7FF-CORE55 numeric clue forensic"": true}",False
+A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""large_search"": true, ""replay"": true, ""shadow_paper_live"": true}",False
 A7INPUT-0,runtime/a7input0_input_approval_package/a7input0_authorization_matrix.json,authorized,"{""A7INPUT-1 generator/evaluator integration smoke"": true}",False
 A7INPUT-0,runtime/a7input0_input_approval_package/a7input0_authorization_matrix.json,not_authorized,"{""alpha_proof"": true, ""formula_search"": true, ""large_search"": true, ""promotion"": true, ""shadow_paper_live"": true}",False
 A7INPUT-1,runtime/a7input1_integration_smoke/a7input1_authorization_matrix.json,authorized,"{""A7FF-CORE54 input-tag-aware queue builder contract"": true}",False

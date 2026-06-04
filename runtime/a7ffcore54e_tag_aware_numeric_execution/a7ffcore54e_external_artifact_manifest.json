@@ -1,0 +1,19 @@
+{
+  "external_keeps": [
+    "full label_response_metrics",
+    "full control_dominance_metrics",
+    "full nonoverlap_stats",
+    "stdout detail",
+    "numeric probe detail report"
+  ],
+  "external_runtime_dir": "G:/AlphaFactory_CryptoData/research_runtime/a7ffcore54e_tag_aware_numeric_execution_20260604",
+  "repo_keeps": [
+    "manifest",
+    "authorization",
+    "materialization_by_queue",
+    "decision_by_queue",
+    "semantic_response_summary",
+    "selected_summary",
+    "compact selected/portfolio/materialization files"
+  ]
+}

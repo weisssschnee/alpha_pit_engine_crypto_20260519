@@ -3464,6 +3464,7 @@ runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7
 runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_registry_summary.csv,608ecd1,add crypto input approval filter experiment,432
 runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_selected_queue_filter_trace.csv,608ecd1,add crypto input approval filter experiment,123152
 runtime,A7FF-CORE53IAE,runtime/a7ffcore53iae_input_approval_filter_experiment/a7ffcore53iae_system_input_registry.csv,608ecd1,add crypto input approval filter experiment,6711
+report,A7FF-CORE54E,reports/CRYPTO_A7FFCORE54E_TAG_AWARE_NUMERIC_EXECUTION_20260604.md,d6b8136,run crypto core54e tag aware numeric execution,34652
 report,A7FF-CORE6,reports/CRYPTO_A7FFCORE6_MATERIALIZATION_PREFLIGHT_CONTRACT_20260601.md,ecb2304,add crypto a7ffcore6 materialization contract,14883
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_manifest.json,ecb2304,add crypto a7ffcore6 materialization contract,850
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_preflight_checks.csv,ecb2304,add crypto a7ffcore6 materialization contract,827
@@ -3801,6 +3802,15 @@ report,A7FF7E,reports/CRYPTO_A7FF7E_EXPANDED_DERIVATION_PROBE_CONTRACT_20260530.
 report,A7FF8,reports/CRYPTO_A7FF8_EXPANDED_NUMERIC_PROBE_20260530.md,f467852,run crypto a7ff8 expanded numeric probe,18324
 report,A7FF9,reports/CRYPTO_A7FF9_CONTINUATION_COMPARISON_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,3330
 report,A7FF9,reports/CRYPTO_A7FF9_EXPANDED_NUMERIC_PROBE_CONTINUATION_20260530.md,d64e4e3,run crypto a7ff9 numeric continuation,21246
+runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_authorization_matrix.json,d6b8136,run crypto core54e tag aware numeric execution,209
+runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_decision_by_queue.csv,d6b8136,run crypto core54e tag aware numeric execution,18783
+runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_external_artifact_manifest.json,d6b8136,run crypto core54e tag aware numeric execution,555
+runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_main_numeric_queue.csv,d6b8136,run crypto core54e tag aware numeric execution,1535913
+runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_manifest.json,d6b8136,run crypto core54e tag aware numeric execution,1337
+runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_materialization_by_queue.csv,d6b8136,run crypto core54e tag aware numeric execution,223
+runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_selected_summary.csv,d6b8136,run crypto core54e tag aware numeric execution,2041
+runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_semantic_response_summary.csv,d6b8136,run crypto core54e tag aware numeric execution,15466
+runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_shard_summary.csv,d6b8136,run crypto core54e tag aware numeric execution,2604
 report,A7FFR0,reports/CRYPTO_A7FFR0_DERIVED_GENERATION_FAILURE_FREEZE_20260530.md,3e509b2,redesign crypto a7ff derived generation,2686
 report,A7FFR1,reports/CRYPTO_A7FFR1_FIELD_ONTOLOGY_V3_20260530.md,3e509b2,redesign crypto a7ff derived generation,20202
 report,A7FFR10,reports/CRYPTO_A7FFR10_LABEL_FEATURE_TARGET_REDESIGN_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,9721
@@ -3835,42 +3845,40 @@ runtime,A7INPUT-2,runtime/a7input2_tag_aware_queue_builder/a7input2_queue_summar
 runtime,A7INPUT-2,runtime/a7input2_tag_aware_queue_builder/a7input2_reject_reason_summary.csv,eb85d29,add crypto input tag aware queues,377
 runtime,A7INPUT-2,runtime/a7input2_tag_aware_queue_builder/a7input2_rejected_queue.csv,eb85d29,add crypto input tag aware queues,30354982
 runtime,A7INPUT-2,runtime/a7input2_tag_aware_queue_builder/a7input2_rescue_queue.csv,eb85d29,add crypto input tag aware queues,163892
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_authorization_matrix.json,,,195
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_control_dominance_metrics.csv,,,45774865
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_control_summary.csv,,,459
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_decision_by_queue.csv,,,3870
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_decision_counts.csv,,,1549
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_decision_record.json,,,2586
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_family_decision_summary.csv,,,2206
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_label_response_metrics.csv,,,13249305
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_manifest.json,,,1163
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_materialization_by_queue.csv,,,283
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_materialization_metrics.csv,,,298890
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_nonoverlap_stats.csv,,,1760762
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_numeric_preflight_queue.csv,,,770745
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_numeric_probe_stdout.log,,,4775
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_portfolio_marginal_proxy.csv,,,254974
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_selected_portfolio_queue.csv,,,20575
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_selected_summary.csv,,,878
-runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_semantic_response_summary.csv,,,4930
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_authorization_matrix.json,8cd88e0,run crypto input tag aware numeric preflight,195
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_control_summary.csv,8cd88e0,run crypto input tag aware numeric preflight,459
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_decision_by_queue.csv,8cd88e0,run crypto input tag aware numeric preflight,3870
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_decision_counts.csv,8cd88e0,run crypto input tag aware numeric preflight,1549
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_decision_record.json,8cd88e0,run crypto input tag aware numeric preflight,2586
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_external_artifact_manifest.json,8cd88e0,run crypto input tag aware numeric preflight,1227
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_family_decision_summary.csv,8cd88e0,run crypto input tag aware numeric preflight,2206
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_manifest.json,8cd88e0,run crypto input tag aware numeric preflight,1163
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_materialization_by_queue.csv,8cd88e0,run crypto input tag aware numeric preflight,283
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_materialization_metrics.csv,8cd88e0,run crypto input tag aware numeric preflight,298890
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_numeric_preflight_queue.csv,8cd88e0,run crypto input tag aware numeric preflight,770745
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_numeric_probe_stdout.log,8cd88e0,run crypto input tag aware numeric preflight,4775
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_portfolio_marginal_proxy.csv,8cd88e0,run crypto input tag aware numeric preflight,254974
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_selected_portfolio_queue.csv,8cd88e0,run crypto input tag aware numeric preflight,20575
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_selected_summary.csv,8cd88e0,run crypto input tag aware numeric preflight,878
+runtime,A7INPUT-3,runtime/a7input3_tag_aware_numeric_preflight/a7input3_semantic_response_summary.csv,8cd88e0,run crypto input tag aware numeric preflight,4930
 report,A7INPUT0,reports/CRYPTO_A7INPUT0_INPUT_APPROVAL_PACKAGE_20260603.md,72ea63c,add crypto input approval package,10554
 report,A7INPUT1,reports/CRYPTO_A7INPUT1_INTEGRATION_SMOKE_20260603.md,72ea63c,add crypto input approval package,2443
 report,A7INPUT2,reports/CRYPTO_A7INPUT2_TAG_AWARE_QUEUE_BUILDER_20260603.md,eb85d29,add crypto input tag aware queues,16425
-report,A7INPUT3,reports/CRYPTO_A7INPUT3_NUMERIC_PROBE_DETAIL_20260603.md,,,46254
-report,A7INPUT3,reports/CRYPTO_A7INPUT3_TAG_AWARE_NUMERIC_PREFLIGHT_20260603.md,,,16859
+report,A7INPUT3,reports/CRYPTO_A7INPUT3_NUMERIC_PROBE_DETAIL_20260603.md,8cd88e0,run crypto input tag aware numeric preflight,46254
+report,A7INPUT3,reports/CRYPTO_A7INPUT3_TAG_AWARE_NUMERIC_PREFLIGHT_20260603.md,8cd88e0,run crypto input tag aware numeric preflight,17166
 report,A7NIGHT,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_options.json,44bd9de,add crypto a7ff execution contracts,2125
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,eb85d29,add crypto input tag aware queues,5265
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,eb85d29,add crypto input tag aware queues,627015
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,eb85d29,add crypto input tag aware queues,122630
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,d6b8136,run crypto core54e tag aware numeric execution,5439
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,d6b8136,run crypto core54e tag aware numeric execution,630993
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,d6b8136,run crypto core54e tag aware numeric execution,123365
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,eb85d29,add crypto input tag aware queues,254728
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,eb85d29,add crypto input tag aware queues,711
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,d6b8136,run crypto core54e tag aware numeric execution,256264
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,d6b8136,run crypto core54e tag aware numeric execution,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,eb85d29,add crypto input tag aware queues,139877
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,d6b8136,run crypto core54e tag aware numeric execution,140543
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3888,12 +3896,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,eb85d29,add crypto input tag aware queues,5483
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,d6b8136,run crypto core54e tag aware numeric execution,5483
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,b37af5d,add crypto core51px execution preflight handoff,372
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,b37af5d,add crypto core51px execution preflight handoff,375
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,b37af5d,add crypto core51px execution preflight handoff,1442
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,eb85d29,add crypto input tag aware queues,1306
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,eb85d29,add crypto input tag aware queues,425
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,d6b8136,run crypto core54e tag aware numeric execution,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,d6b8136,run crypto core54e tag aware numeric execution,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

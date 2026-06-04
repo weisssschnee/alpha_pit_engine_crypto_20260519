@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-03T06:12:51Z
+Generated: 2026-06-04T05:51:56Z
 
 ## Decision
 
@@ -12,12 +12,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main [ahead 1]
-?? reports/CRYPTO_A7INPUT3_NUMERIC_PROBE_DETAIL_20260603.md
-?? reports/CRYPTO_A7INPUT3_TAG_AWARE_NUMERIC_PREFLIGHT_20260603.md
-?? runtime/a7input3_tag_aware_numeric_preflight/
-?? scripts/crypto_a7input3_tag_aware_numeric_preflight.py
-HEAD=eb85d293167eb3174c7d0c14143ae550c9e7edaf
-origin/main=72ea63c4ea2323b7c03cd7ad03edbf5663b949a8
+HEAD=d6b81368870c6b5a841713ce45a0defe8c1e0490
+origin/main=8cd88e07f9ad0b5bf1d2601fa5f67ad50904656f
 HEAD == origin/main: False
 ```
 
@@ -25,8 +21,8 @@ HEAD == origin/main: False
 
 ```json
 {
-  "artifact_count": 4070,
-  "authorization_record_count": 794,
+  "artifact_count": 4078,
+  "authorization_record_count": 796,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -39,12 +35,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-03T06:12:51Z",
-  "head": "eb85d293167eb3174c7d0c14143ae550c9e7edaf",
+  "generated_at": "2026-06-04T05:51:56Z",
+  "head": "d6b81368870c6b5a841713ce45a0defe8c1e0490",
   "head_equals_origin_main": false,
-  "origin_main": "72ea63c4ea2323b7c03cd7ad03edbf5663b949a8",
+  "origin_main": "8cd88e07f9ad0b5bf1d2601fa5f67ad50904656f",
   "stage": "A7PM-0",
-  "stage_count": 429
+  "stage_count": 430
 }
 ```
 
@@ -63,7 +59,7 @@ HEAD == origin/main: False
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     154 |
+| valid_or_historical_record   | governance_or_audit        |     155 |
 | valid_or_historical_record   | contract                   |     125 |
 | valid_or_historical_record   | diagnostic                 |      27 |
 | valid_or_historical_record   | smoke                      |       9 |

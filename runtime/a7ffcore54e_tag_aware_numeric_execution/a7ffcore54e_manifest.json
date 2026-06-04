@@ -1,0 +1,40 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core55_numeric_forensic": true,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FFCORE54E_TAG_AWARE_NUMERIC_EXECUTION_READY_FOR_CORE55",
+  "eval_failure_count": 0,
+  "executes_numeric_probe": true,
+  "executes_replay": false,
+  "executes_search": false,
+  "external_runtime_dir": "G:/AlphaFactory_CryptoData/research_runtime/a7ffcore54e_tag_aware_numeric_execution_20260604",
+  "failed_shard_count": 0,
+  "generated_at": "2026-06-04T05:50:40Z",
+  "input_queue_rows": 2451,
+  "interaction_rows": 576,
+  "label_response_rows": 41420,
+  "materialized_activity_ok_count": 2071,
+  "non_l7_numeric_clue_rows": 348,
+  "ordinary_rows": 1875,
+  "portfolio_queue_count": 0,
+  "process_exit_code": 0,
+  "rank_label_diagnostic_clue_rows": 998,
+  "selected_portfolio_queue_count": 149,
+  "shard_count": 10,
+  "source_decisions": [
+    "PASS_A7INPUT2_TAG_AWARE_QUEUE_BUILDER_READY_FOR_CORE54",
+    "PASS_A7INPUT3_TAG_AWARE_NUMERIC_PREFLIGHT_READY_FOR_CORE54E"
+  ],
+  "source_stages": [
+    "A7INPUT-2",
+    "A7INPUT-3"
+  ],
+  "stage": "A7FF-CORE54E",
+  "started_at": "2026-06-04T05:50:39Z",
+  "timed_out": false,
+  "timed_out_shard_count": 0,
+  "timeout_seconds": 28800,
+  "uses_may": false
+}
