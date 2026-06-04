@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-04T05:51:56Z
+Generated: 2026-06-04T07:23:58Z
 
 ## Decision
 
@@ -12,8 +12,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main [ahead 1]
-HEAD=d6b81368870c6b5a841713ce45a0defe8c1e0490
-origin/main=8cd88e07f9ad0b5bf1d2601fa5f67ad50904656f
+HEAD=f0ee965d6eeaf6c45b35315b50c3bec5cd827379
+origin/main=b6647abe7e2105452b0b474038a5a0e131420ab6
 HEAD == origin/main: False
 ```
 
@@ -21,8 +21,8 @@ HEAD == origin/main: False
 
 ```json
 {
-  "artifact_count": 4078,
-  "authorization_record_count": 796,
+  "artifact_count": 4089,
+  "authorization_record_count": 798,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -35,12 +35,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-04T05:51:56Z",
-  "head": "d6b81368870c6b5a841713ce45a0defe8c1e0490",
+  "generated_at": "2026-06-04T07:23:58Z",
+  "head": "f0ee965d6eeaf6c45b35315b50c3bec5cd827379",
   "head_equals_origin_main": false,
-  "origin_main": "8cd88e07f9ad0b5bf1d2601fa5f67ad50904656f",
+  "origin_main": "b6647abe7e2105452b0b474038a5a0e131420ab6",
   "stage": "A7PM-0",
-  "stage_count": 430
+  "stage_count": 431
 }
 ```
 
@@ -59,7 +59,7 @@ HEAD == origin/main: False
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     155 |
+| valid_or_historical_record   | governance_or_audit        |     156 |
 | valid_or_historical_record   | contract                   |     125 |
 | valid_or_historical_record   | diagnostic                 |      27 |
 | valid_or_historical_record   | smoke                      |       9 |

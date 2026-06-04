@@ -1,0 +1,10 @@
+{
+  "authorized": {
+    "A7FF-CORE56 bounded replay preflight": true
+  },
+  "not_authorized": {
+    "alpha_proof": true,
+    "large_search": true,
+    "shadow_paper_live": true
+  }
+}

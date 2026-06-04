@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core56_bounded_replay_preflight": true,
+  "authorizes_large_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7FFCORE55_REPLAY_READY_PACKET_BUILT",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-04T07:21:52Z",
+  "non_l7_clue_rows": 348,
+  "replay_packet_label_family_count": 4,
+  "replay_packet_selected_overlap_count": 44,
+  "replay_packet_semantic_pair_count": 9,
+  "replay_packet_top_semantic_pair_share": 0.2807017543859649,
+  "replay_ready_packet_count": 114,
+  "response_rows": 41420,
+  "source_decision": "PASS_A7FFCORE54E_TAG_AWARE_NUMERIC_EXECUTION_READY_FOR_CORE55",
+  "source_stage": "A7FF-CORE54E",
+  "stage": "A7FF-CORE55",
+  "unique_candidate_count": 120,
+  "uses_may": false
+}
