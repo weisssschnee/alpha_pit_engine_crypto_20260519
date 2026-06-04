@@ -1,0 +1,6 @@
+label_family,label_horizon_h,decision,row_count
+L5_vol_adjusted_return,1,A7FFCORE59S05_NUMERIC_CLUE,2
+L0_raw_forward_return,4,A7FFCORE59S04_NUMERIC_CLUE,1
+L0_raw_forward_return,24,A7FFCORE59S05_NUMERIC_CLUE,1
+L1_cross_sectional_relative_return,1,A7FFCORE59S05_NUMERIC_CLUE,1
+L3_liquidity_tier_relative_return,1,A7FFCORE59S05_NUMERIC_CLUE,1

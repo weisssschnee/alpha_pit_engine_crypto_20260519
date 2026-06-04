@@ -1,0 +1,2 @@
+audit_item,status,reason,fallback_used
+symbol_state_concentration,UNAVAILABLE_IN_CORE59_NUMERIC_OUTPUT,"CORE59 shard outputs do not include symbol_id, latent_state_id, meme, liquidity_tier, or per-row state exposure columns.",semantic_pair/motif/skeleton concentration only

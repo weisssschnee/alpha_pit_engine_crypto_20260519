@@ -1,0 +1,25 @@
+{
+  "activity_ok_rate": 0.5391666666666667,
+  "activity_ok_rows": 647,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "blockers": [
+    "queue_non_l7_semantic_width_lt_4",
+    "non_l7_top_semantic_pair_share_gt_0_8",
+    "activity_ok_rate_lt_0_6"
+  ],
+  "decision": "HOLD_CORE59G_QUEUE_COVERAGE_TOO_NARROW",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-04T15:50:50Z",
+  "label_response_rows": 12940,
+  "non_l7_numeric_clue_rows": 6,
+  "non_l7_semantic_pair_count": 2,
+  "queue_rows": 1200,
+  "rank_label_diagnostic_clue_rows": 341,
+  "selected_portfolio_queue_rows": 44,
+  "stage": "A7FF-CORE59G",
+  "top_non_l7_semantic_share": 0.8333333333333334,
+  "top_queue_semantic_share": 0.3,
+  "top_selected_semantic_share": 0.29545454545454547
+}

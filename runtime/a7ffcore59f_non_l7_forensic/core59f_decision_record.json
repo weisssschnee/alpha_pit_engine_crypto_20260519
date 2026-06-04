@@ -1,0 +1,21 @@
+{
+  "all_cost10_positive": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "blockers": [
+    "control_ratio_ge_0_8"
+  ],
+  "decision": "HOLD_CORE59F_THIN_OR_CONTROL_FRAGILE",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-04T15:50:49Z",
+  "input_core59_decision": "HOLD_A7FFCORE59_NUMERIC_REPAIR_EXECUTION",
+  "max_control_ratio": 0.9049114010773984,
+  "min_cost10_recent_oriented": -0.0015739941020676,
+  "non_l7_clue_rows": 6,
+  "non_l7_semantic_pair_count": 2,
+  "non_l7_unique_blueprints": 6,
+  "stage": "A7FF-CORE59F",
+  "symbol_state_concentration_auditable": false,
+  "top_semantic_pair_share": 0.8333333333333334
+}
