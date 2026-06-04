@@ -3542,12 +3542,20 @@ report,A7FF-CORE60B,reports/CRYPTO_A7FFCORE60B_TARGET_ADEQUACY_REPAIR_AUDIT_2026
 report,A7FF-CORE60C,reports/CRYPTO_A7FFCORE60C_MATERIALIZATION_REPAIR_AUDIT_20260605.md,b36188f,add crypto core60 parallel bottleneck audits,22816
 report,A7FF-CORE60D,reports/CRYPTO_A7FFCORE60D_SELECTOR_PORTFOLIO_PROXY_ATTRIBUTION_20260605.md,b36188f,add crypto core60 parallel bottleneck audits,15838
 report,A7FF-CORE61,reports/CRYPTO_A7FFCORE61_INTEGRATED_REPAIR_PLAN_20260605.md,a13fa03,add crypto core61 integrated repair plan,25724
-report,A7FF-CORE62,reports/CRYPTO_A7FFCORE62_DICE_BATCH_DRYRUN_20260605.md,,,38322
-runtime,A7FF-CORE62,runtime/a7ffcore62_dice_batch_dryrun/core62_decision_record.json,,,541
-runtime,A7FF-CORE62,runtime/a7ffcore62_dice_batch_dryrun/core62_dice_batch_queue.csv,,,18044
-runtime,A7FF-CORE62,runtime/a7ffcore62_dice_batch_dryrun/core62_dice_batch_summary.csv,,,455
-runtime,A7FF-CORE62,runtime/a7ffcore62_dice_batch_dryrun/core62_manifest.json,,,541
-runtime,A7FF-CORE62,runtime/a7ffcore62_dice_batch_dryrun/core62_selector_caps.json,,,193
+report,A7FF-CORE62,reports/CRYPTO_A7FFCORE62_DICE_BATCH_DRYRUN_20260605.md,b655847,add crypto search space memory map and dice batch,38322
+runtime,A7FF-CORE62,runtime/a7ffcore62_dice_batch_dryrun/core62_decision_record.json,b655847,add crypto search space memory map and dice batch,541
+runtime,A7FF-CORE62,runtime/a7ffcore62_dice_batch_dryrun/core62_dice_batch_queue.csv,b655847,add crypto search space memory map and dice batch,18044
+runtime,A7FF-CORE62,runtime/a7ffcore62_dice_batch_dryrun/core62_dice_batch_summary.csv,b655847,add crypto search space memory map and dice batch,455
+runtime,A7FF-CORE62,runtime/a7ffcore62_dice_batch_dryrun/core62_manifest.json,b655847,add crypto search space memory map and dice batch,541
+runtime,A7FF-CORE62,runtime/a7ffcore62_dice_batch_dryrun/core62_selector_caps.json,b655847,add crypto search space memory map and dice batch,193
+report,A7FF-CORE63,reports/CRYPTO_A7FFCORE63_DICE_EXECUTION_AUDIT_20260605.md,,,21057
+runtime,A7FF-CORE63,runtime/a7ffcore63_dice_execution_audit/core63_decision_record.json,,,675
+runtime,A7FF-CORE63,runtime/a7ffcore63_dice_execution_audit/core63_manifest.json,,,675
+runtime,A7FF-CORE63,runtime/a7ffcore63_dice_execution_audit/core63_materialization_formula_samples.csv,,,16285
+runtime,A7FF-CORE63,runtime/a7ffcore63_dice_execution_audit/core63_materialization_pair_diagnosis.csv,,,673
+runtime,A7FF-CORE63,runtime/a7ffcore63_dice_execution_audit/core63_selected_numeric_retest_queue.csv,,,11739
+runtime,A7FF-CORE63,runtime/a7ffcore63_dice_execution_audit/core63_target_near_miss_repair_score.csv,,,21780
+runtime,A7FF-CORE63,runtime/a7ffcore63_dice_execution_audit/core63_target_near_miss_summary.csv,,,822
 report,A7FF-CORE6E,reports/CRYPTO_A7FFCORE6E_MATERIALIZATION_PREFLIGHT_EXECUTION_20260601.md,70e6950,add crypto a7ffcore6e materialization preflight,9673
 runtime,A7FF-CORE6E,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S00_manifest.json,70e6950,add crypto a7ffcore6e materialization preflight,346
 runtime,A7FF-CORE6E,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S00_materialization.csv,70e6950,add crypto a7ffcore6e materialization preflight,63439
@@ -3985,14 +3993,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,a13fa03,add crypto core61 integrated repair plan,5619
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,a13fa03,add crypto core61 integrated repair plan,648025
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,decd170,run crypto core59 company numeric repair execution,125151
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,b655847,add crypto search space memory map and dice batch,5760
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,b655847,add crypto search space memory map and dice batch,649500
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,b655847,add crypto search space memory map and dice batch,127135
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,a13fa03,add crypto core61 integrated repair plan,259308
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,a13fa03,add crypto core61 integrated repair plan,711
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,b655847,add crypto search space memory map and dice batch,260758
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,b655847,add crypto search space memory map and dice batch,711
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,a13fa03,add crypto core61 integrated repair plan,143460
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,b655847,add crypto search space memory map and dice batch,144047
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -4010,12 +4018,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,a13fa03,add crypto core61 integrated repair plan,5483
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,b655847,add crypto search space memory map and dice batch,5483
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,b37af5d,add crypto core51px execution preflight handoff,372
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,b37af5d,add crypto core51px execution preflight handoff,375
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,b37af5d,add crypto core51px execution preflight handoff,1442
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,a13fa03,add crypto core61 integrated repair plan,1306
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,a13fa03,add crypto core61 integrated repair plan,425
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,b655847,add crypto search space memory map and dice batch,1306
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,b655847,add crypto search space memory map and dice batch,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
@@ -4114,13 +4122,13 @@ runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_signal
 runtime,A7SEL-1,runtime/a7sel1_role_strict_selector_counterfactual/a7sel1_stress_summary.csv,d18f2d5,add crypto response backed alpha pool gates,2
 report,A7SEL0,reports/CRYPTO_A7SEL0_SELECTOR_TARGET_COUNTERFACTUAL_20260529.md,8bad66e,add crypto enforcement parity and selector counterfactual,2725
 report,A7SEL1,reports/CRYPTO_A7SEL1_ROLE_STRICT_SELECTOR_COUNTERFACTUAL_20260529.md,d18f2d5,add crypto response backed alpha pool gates,877
-report,A7SSM,reports/CRYPTO_A7SSM_SEARCH_SPACE_MEMORY_MAP_20260605.md,,,36627
-runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_field_family_route_map.csv,,,665
-runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_interaction_permission_matrix.csv,,,1449
-runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_label_permission_matrix.csv,,,5171
-runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_manifest.json,,,716
-runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,,,716
-runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_selector_eligibility_map.csv,,,109245
+report,A7SSM,reports/CRYPTO_A7SSM_SEARCH_SPACE_MEMORY_MAP_20260605.md,b655847,add crypto search space memory map and dice batch,36627
+runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_field_family_route_map.csv,b655847,add crypto search space memory map and dice batch,665
+runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_interaction_permission_matrix.csv,b655847,add crypto search space memory map and dice batch,1449
+runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_label_permission_matrix.csv,b655847,add crypto search space memory map and dice batch,5171
+runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_manifest.json,b655847,add crypto search space memory map and dice batch,716
+runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_search_authorization_matrix.json,b655847,add crypto search space memory map and dice batch,716
+runtime,A7SSM,runtime/a7ssm_search_space_memory_map/a7ssm_selector_eligibility_map.csv,b655847,add crypto search space memory map and dice batch,109245
 report,A7T0,reports/CRYPTO_A7T0_FORWARD_LOCKED_OBSERVATION_CONTRACT_20260522.md,956e38c,add crypto a7t0 forward contract,7420
 report,A7T0,reports/CRYPTO_A7T0_FORWARD_TELEMETRY_CONTRACT_20260522.md,94f5b70,add crypto a7t forward telemetry contract,14089
 runtime,A7T0,runtime/a7t0_forward_locked_observation_contract/a7t0_append_only_rules.csv,956e38c,add crypto a7t0 forward contract,828

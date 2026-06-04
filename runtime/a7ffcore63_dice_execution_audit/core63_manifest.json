@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_core64_materialization_fix": true,
+  "authorizes_core64_retest_package": true,
+  "authorizes_search": false,
+  "blockers": [
+    "materialization_repairs_required"
+  ],
+  "core62b_rows": 45,
+  "core62c_pair_diagnosis_rows": 2,
+  "decision": "HOLD_CORE63_DICE_EXECUTION_REPAIRS_REQUIRED",
+  "executes_replay": false,
+  "executes_search": false,
+  "funding_sparse_state_alignment_pair_count": 2,
+  "generated_at": "2026-06-04T17:09:48Z",
+  "input_dice_rows": 47,
+  "materialization_repair_pair_count": 2,
+  "selected_numeric_retest_rows": 24,
+  "selected_semantic_pair_count": 4,
+  "stage": "A7FF-CORE63"
+}

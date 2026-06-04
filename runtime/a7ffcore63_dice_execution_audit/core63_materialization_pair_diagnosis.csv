@@ -1,0 +1,3 @@
+semantic_pair,formulas,rows,eval_success_rate,activity_ok_rows,median_finite_share,median_nonzero_share,zero_finite_rate,low_finite_rate,uses_funding_rate,uses_positioning,diagnosis,core63_repair
+basis_premium_like|funding_like,360,360,1.0,0,0.0006703054677774,0.9581056466302368,0.24722222222222223,0.8305555555555556,1.0,0.0,funding_event_sparse_state_alignment,build PIT funding_state carry contract and retest funding interactions
+funding_like|positioning_like,13,13,1.0,0,0.0032647467202911,0.9007155635062611,0.23076923076923078,0.8461538461538461,1.0,1.0,funding_event_sparse_state_alignment,build PIT funding_state carry contract and retest funding interactions

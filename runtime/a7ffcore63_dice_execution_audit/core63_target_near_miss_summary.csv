@@ -1,0 +1,6 @@
+semantic_pair,core63_action,rows,selected,median_repair_score,median_control_ratio,min_cost10,max_cost10
+basis_premium_like|price_like,entry_lag_repair_numeric_retest,17,10,0.736203322367436,0.6237502919369992,0.0309656688631822,0.1337359276130965
+basis_premium_like|basis_premium_like,entry_lag_repair_numeric_retest,16,7,0.6860726051510228,0.5703070528341803,0.0347345986692454,0.1363602576934537
+basis_premium_like|volatility_like,entry_lag_repair_numeric_retest,8,5,0.7814485499960853,0.49502368806212627,0.0495286887794997,0.1345805605048653
+basis_premium_like,entry_lag_repair_numeric_retest,2,2,0.7887391374226647,0.47906993488077054,0.1303396752689262,0.1345805605048653
+basis_premium_like|basis_premium_like,target_gate_retest,2,0,0.3888167018160497,0.5937147893147348,0.0002260961586433,0.0003028477289637
