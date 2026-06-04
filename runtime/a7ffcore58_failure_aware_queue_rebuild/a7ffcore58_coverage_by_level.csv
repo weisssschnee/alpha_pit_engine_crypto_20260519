@@ -1,0 +1,7 @@
+core58_queue,level,row_count,formula_count,median_score,max_score
+numeric_replay_repair,L2_typed_two_field_interaction,772,772,-4.0,56.0
+materialization_repair,L3_state_conditioned_feature,612,612,117.0,117.0
+numeric_replay_repair,L3_state_conditioned_feature,373,373,99.0,103.0
+materialization_repair,L4_factor_candidate_probe,358,358,6.0,86.0
+materialization_repair,L2_typed_two_field_interaction,230,230,41.0,56.0
+numeric_replay_repair,L1_single_field_transform,55,55,-13.0,2.0

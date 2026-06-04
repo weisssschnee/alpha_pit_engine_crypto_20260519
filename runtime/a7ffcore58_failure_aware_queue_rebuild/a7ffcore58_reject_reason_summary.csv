@@ -1,0 +1,7 @@
+core58_queue,reject_reason,row_count
+materialization_repair_rejected,semantic_cap,9187
+materialization_repair_rejected,motif_cap,5761
+materialization_repair_rejected,queue_full,3069
+numeric_replay_repair_rejected,motif_cap,482
+numeric_replay_repair_rejected,queue_full,430
+numeric_replay_repair_rejected,semantic_cap,421

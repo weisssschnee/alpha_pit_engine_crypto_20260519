@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-04T12:32:01Z
+Generated: 2026-06-04T12:39:32Z
 
 ## Decision
 
@@ -11,11 +11,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main [ahead 1]
+## main...origin/main [ahead 2]
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-HEAD=e4fb10be3ccb1ad4ab6a402576b9589ab439c7b7
+HEAD=7c79330707c49cac131368702c3618bffaba98dc
 origin/main=004f93b587389b72c9b2f1fd1761ce3d70b28ea5
 HEAD == origin/main: False
 ```
@@ -24,8 +24,8 @@ HEAD == origin/main: False
 
 ```json
 {
-  "artifact_count": 4115,
-  "authorization_record_count": 802,
+  "artifact_count": 4128,
+  "authorization_record_count": 804,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -38,12 +38,12 @@ HEAD == origin/main: False
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-04T12:32:01Z",
-  "head": "e4fb10be3ccb1ad4ab6a402576b9589ab439c7b7",
+  "generated_at": "2026-06-04T12:39:32Z",
+  "head": "7c79330707c49cac131368702c3618bffaba98dc",
   "head_equals_origin_main": false,
   "origin_main": "004f93b587389b72c9b2f1fd1761ce3d70b28ea5",
   "stage": "A7PM-0",
-  "stage_count": 433
+  "stage_count": 434
 }
 ```
 
@@ -62,7 +62,7 @@ HEAD == origin/main: False
 | hold                         | contract                   |       2 |
 | not_authorized               | hold                       |       2 |
 | superseded_diagnostic        | contract                   |       1 |
-| valid_or_historical_record   | governance_or_audit        |     157 |
+| valid_or_historical_record   | governance_or_audit        |     158 |
 | valid_or_historical_record   | contract                   |     125 |
 | valid_or_historical_record   | diagnostic                 |      27 |
 | valid_or_historical_record   | smoke                      |       9 |

@@ -1,0 +1,5 @@
+core58_queue,candidate_role,row_count,formula_count,median_score,max_score
+materialization_repair,role_mixed_allowed,1200,1200,85.0,117.0
+numeric_replay_repair,role_mixed_allowed,1145,1145,-4.0,103.0
+numeric_replay_repair,ordinary_alpha_valid,31,31,-13.0,2.0
+numeric_replay_repair,exploratory_signal_probe,24,24,-13.0,-13.0
