@@ -3530,14 +3530,17 @@ runtime,A7FF-CORE59,runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_non_l
 runtime,A7FF-CORE59,runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_numeric_repair_queue.csv,fd4099c,prepare crypto core59 company checkpoint handoff,525543
 runtime,A7FF-CORE59,runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_selected_summary.csv,decd170,run crypto core59 company numeric repair execution,520
 runtime,A7FF-CORE59,runtime/a7ffcore59_numeric_repair_execution/a7ffcore59_shard_summary.csv,decd170,run crypto core59 company numeric repair execution,1548
-report,A7FF-CORE59F,reports/CRYPTO_A7FFCORE59F_NON_L7_CLUE_FORENSIC_20260604.md,,,9853
-report,A7FF-CORE59G,reports/CRYPTO_A7FFCORE59G_QUEUE_TARGET_ATTRITION_MAP_20260604.md,,,26406
+report,A7FF-CORE59F,reports/CRYPTO_A7FFCORE59F_NON_L7_CLUE_FORENSIC_20260604.md,7dc4335,add crypto core59 forensic attrition audits,9853
+report,A7FF-CORE59G,reports/CRYPTO_A7FFCORE59G_QUEUE_TARGET_ATTRITION_MAP_20260604.md,7dc4335,add crypto core59 forensic attrition audits,26406
 report,A7FF-CORE6,reports/CRYPTO_A7FFCORE6_MATERIALIZATION_PREFLIGHT_CONTRACT_20260601.md,ecb2304,add crypto a7ffcore6 materialization contract,14883
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_manifest.json,ecb2304,add crypto a7ffcore6 materialization contract,850
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_preflight_checks.csv,ecb2304,add crypto a7ffcore6 materialization contract,827
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_required_field_plan.csv,ecb2304,add crypto a7ffcore6 materialization contract,3233
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6_shard_plan.csv,ecb2304,add crypto a7ffcore6 materialization contract,967
 runtime,A7FF-CORE6,runtime/a7ffcore6_materialization_preflight_contract/a7ffcore6e_execution_contract.json,ecb2304,add crypto a7ffcore6 materialization contract,880
+report,A7FF-CORE60B,reports/CRYPTO_A7FFCORE60B_TARGET_ADEQUACY_REPAIR_AUDIT_20260605.md,,,23215
+report,A7FF-CORE60C,reports/CRYPTO_A7FFCORE60C_MATERIALIZATION_REPAIR_AUDIT_20260605.md,,,22816
+report,A7FF-CORE60D,reports/CRYPTO_A7FFCORE60D_SELECTOR_PORTFOLIO_PROXY_ATTRIBUTION_20260605.md,,,15838
 report,A7FF-CORE6E,reports/CRYPTO_A7FFCORE6E_MATERIALIZATION_PREFLIGHT_EXECUTION_20260601.md,70e6950,add crypto a7ffcore6e materialization preflight,9673
 runtime,A7FF-CORE6E,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S00_manifest.json,70e6950,add crypto a7ffcore6e materialization preflight,346
 runtime,A7FF-CORE6E,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S00_materialization.csv,70e6950,add crypto a7ffcore6e materialization preflight,63439
@@ -3878,22 +3881,37 @@ runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_
 runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_selected_summary.csv,b6647ab,run crypto core54e tag aware numeric execution,2041
 runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_semantic_response_summary.csv,b6647ab,run crypto core54e tag aware numeric execution,15466
 runtime,A7FFCORE54E,runtime/a7ffcore54e_tag_aware_numeric_execution/a7ffcore54e_shard_summary.csv,b6647ab,run crypto core54e tag aware numeric execution,2604
-runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_control_margin_audit.csv,,,1032
-runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_cost_net_audit.csv,,,571
-runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_decision_record.json,,,704
-runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_label_target_breakdown.csv,,,346
-runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_non_l7_clue_table.csv,,,2199
-runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_selected_overlap.csv,,,117
-runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_semantic_pair_breakdown.csv,,,193
-runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_symbol_state_concentration.csv,,,276
-runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_decision_record.json,,,820
-runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_funnel_by_family.csv,,,995
-runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_funnel_by_operator_motif.csv,,,778
-runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_funnel_by_semantic_pair.csv,,,995
-runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_funnel_by_target.csv,,,18963
-runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_materialization_failure_map.csv,,,3575
-runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_non_l7_loss_map.csv,,,1095
-runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_selector_rejection_map.csv,,,4761
+runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_control_margin_audit.csv,7dc4335,add crypto core59 forensic attrition audits,1032
+runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_cost_net_audit.csv,7dc4335,add crypto core59 forensic attrition audits,571
+runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_decision_record.json,7dc4335,add crypto core59 forensic attrition audits,704
+runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_label_target_breakdown.csv,7dc4335,add crypto core59 forensic attrition audits,346
+runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_non_l7_clue_table.csv,7dc4335,add crypto core59 forensic attrition audits,2199
+runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_selected_overlap.csv,7dc4335,add crypto core59 forensic attrition audits,117
+runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_semantic_pair_breakdown.csv,7dc4335,add crypto core59 forensic attrition audits,193
+runtime,A7FFCORE59F,runtime/a7ffcore59f_non_l7_forensic/core59f_symbol_state_concentration.csv,7dc4335,add crypto core59 forensic attrition audits,276
+runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_decision_record.json,7dc4335,add crypto core59 forensic attrition audits,820
+runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_funnel_by_family.csv,7dc4335,add crypto core59 forensic attrition audits,995
+runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_funnel_by_operator_motif.csv,7dc4335,add crypto core59 forensic attrition audits,778
+runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_funnel_by_semantic_pair.csv,7dc4335,add crypto core59 forensic attrition audits,995
+runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_funnel_by_target.csv,7dc4335,add crypto core59 forensic attrition audits,18963
+runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_materialization_failure_map.csv,7dc4335,add crypto core59 forensic attrition audits,3575
+runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_non_l7_loss_map.csv,7dc4335,add crypto core59 forensic attrition audits,1095
+runtime,A7FFCORE59G,runtime/a7ffcore59g_attrition_map/core59g_selector_rejection_map.csv,7dc4335,add crypto core59 forensic attrition audits,4761
+runtime,A7FFCORE60B,runtime/a7ffcore60b_target_adequacy_repair_audit/core60b_decision_record.json,,,598
+runtime,A7FFCORE60B,runtime/a7ffcore60b_target_adequacy_repair_audit/core60b_label_family_summary.csv,,,805
+runtime,A7FFCORE60B,runtime/a7ffcore60b_target_adequacy_repair_audit/core60b_rank_vs_non_l7_target_gap.csv,,,4272
+runtime,A7FFCORE60B,runtime/a7ffcore60b_target_adequacy_repair_audit/core60b_target_decision_matrix.csv,,,3418
+runtime,A7FFCORE60B,runtime/a7ffcore60b_target_adequacy_repair_audit/core60b_target_summary.csv,,,4514
+runtime,A7FFCORE60C,runtime/a7ffcore60c_materialization_repair_audit/core60c_decision_record.json,,,557
+runtime,A7FFCORE60C,runtime/a7ffcore60c_materialization_repair_audit/core60c_inactive_or_failed_examples.csv,,,109539
+runtime,A7FFCORE60C,runtime/a7ffcore60c_materialization_repair_audit/core60c_materialization_by_field.csv,,,907
+runtime,A7FFCORE60C,runtime/a7ffcore60c_materialization_repair_audit/core60c_materialization_by_semantic_motif.csv,,,4198
+runtime,A7FFCORE60C,runtime/a7ffcore60c_materialization_repair_audit/core60c_materialization_by_semantic_pair.csv,,,1181
+runtime,A7FFCORE60D,runtime/a7ffcore60d_selector_portfolio_proxy_attribution/core60d_decision_record.json,,,534
+runtime,A7FFCORE60D,runtime/a7ffcore60d_selector_portfolio_proxy_attribution/core60d_l7_pressure_by_semantic_pair.csv,,,539
+runtime,A7FFCORE60D,runtime/a7ffcore60d_selector_portfolio_proxy_attribution/core60d_pool_vs_selected_by_semantic_motif.csv,,,3558
+runtime,A7FFCORE60D,runtime/a7ffcore60d_selector_portfolio_proxy_attribution/core60d_selected_distribution.csv,,,2904
+runtime,A7FFCORE60D,runtime/a7ffcore60d_selector_portfolio_proxy_attribution/core60d_selected_queue_full.csv,,,38402
 report,A7FFR0,reports/CRYPTO_A7FFR0_DERIVED_GENERATION_FAILURE_FREEZE_20260530.md,3e509b2,redesign crypto a7ff derived generation,2686
 report,A7FFR1,reports/CRYPTO_A7FFR1_FIELD_ONTOLOGY_V3_20260530.md,3e509b2,redesign crypto a7ff derived generation,20202
 report,A7FFR10,reports/CRYPTO_A7FFR10_LABEL_FEATURE_TARGET_REDESIGN_20260531.md,ce25d84,advance crypto a7ff bounded replay forensics,9721
@@ -3954,14 +3972,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,decd170,run crypto core59 company numeric repair execution,6529
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,decd170,run crypto core59 company numeric repair execution,641223
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,7dc4335,add crypto core59 forensic attrition audits,5707
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,7dc4335,add crypto core59 forensic attrition audits,643526
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,decd170,run crypto core59 company numeric repair execution,125151
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,decd170,run crypto core59 company numeric repair execution,259308
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,decd170,run crypto core59 company numeric repair execution,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,7dc4335,add crypto core59 forensic attrition audits,259308
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,7dc4335,add crypto core59 forensic attrition audits,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,decd170,run crypto core59 company numeric repair execution,142130
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,7dc4335,add crypto core59 forensic attrition audits,142522
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -3979,12 +3997,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,decd170,run crypto core59 company numeric repair execution,5483
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,7dc4335,add crypto core59 forensic attrition audits,5483
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,b37af5d,add crypto core51px execution preflight handoff,372
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,b37af5d,add crypto core51px execution preflight handoff,375
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,b37af5d,add crypto core51px execution preflight handoff,1442
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,decd170,run crypto core59 company numeric repair execution,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,decd170,run crypto core59 company numeric repair execution,425
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,7dc4335,add crypto core59 forensic attrition audits,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,7dc4335,add crypto core59 forensic attrition audits,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

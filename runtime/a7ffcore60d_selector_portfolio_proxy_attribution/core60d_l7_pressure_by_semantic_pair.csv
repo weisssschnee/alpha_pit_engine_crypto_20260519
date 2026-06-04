@@ -1,0 +1,9 @@
+semantic_pair,selected_rows,l7_rows,non_l7_rows,median_score_no_may,l7_share
+basis_premium_like|volatility_like,10,10,0,65.00354291401418,1.0
+basis_premium_like|basis_premium_like,8,8,0,28.03817460885449,1.0
+volatility_like|volatility_like,4,4,0,73.06681369358867,1.0
+price_like,3,3,0,75.55659464201096,1.0
+price_like|volatility_like,3,3,0,37.33430340843015,1.0
+volatility_like,2,2,0,39.46068226051415,1.0
+basis_premium_like,1,1,0,23.626391960831192,1.0
+basis_premium_like|price_like,13,12,1,45.687545480991446,0.9230769230769231

@@ -1,0 +1,18 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "blockers": [
+    "selected_non_l7_lt_12",
+    "selected_l7_share_gt_0_65"
+  ],
+  "decision": "HOLD_CORE60D_SELECTOR_STILL_RANK_BIASED",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-04T16:08:56Z",
+  "selected_l7_share": 0.9772727272727273,
+  "selected_non_l7_rows": 1,
+  "selected_rows": 44,
+  "selected_semantic_pair_count": 8,
+  "stage": "A7FF-CORE60D",
+  "top_selected_semantic_share": 0.29545454545454547
+}

@@ -1,0 +1,19 @@
+{
+  "activity_ok_rate": 0.5391666666666667,
+  "activity_ok_rows": 647,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "blockers": [
+    "activity_ok_rate_lt_0_6",
+    "semantic_pairs_with_zero_activity_ok"
+  ],
+  "decision": "HOLD_CORE60C_MATERIALIZATION_REPAIR_REQUIRED",
+  "eval_fail_rows": 0,
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-04T16:08:55Z",
+  "inactive_or_sparse_rows": 553,
+  "queue_rows": 1200,
+  "stage": "A7FF-CORE60C",
+  "zero_activity_semantic_pair_count": 2
+}

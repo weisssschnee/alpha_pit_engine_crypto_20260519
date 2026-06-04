@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "blockers": [
+    "premay_unstable_rate_gt_0_6",
+    "control_dominated_rate_gt_0_25",
+    "rank_label_gap_large"
+  ],
+  "control_dominated_rate": 0.27017001545595054,
+  "decision": "HOLD_CORE60B_TARGET_ADEQUACY_REPAIR_REQUIRED",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-04T16:08:55Z",
+  "l7_rank_label_rows": 341,
+  "label_response_rows": 12940,
+  "non_l7_rows": 6,
+  "non_l7_target_count": 5,
+  "premay_unstable_rate": 0.6820710973724884,
+  "stage": "A7FF-CORE60B"
+}

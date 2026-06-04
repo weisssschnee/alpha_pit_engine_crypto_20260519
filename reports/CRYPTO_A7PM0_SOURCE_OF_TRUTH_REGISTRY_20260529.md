@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-04T15:53:09Z
+Generated: 2026-06-04T16:10:13Z
 
 ## Decision
 
@@ -11,25 +11,27 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 ## Git State
 
 ```text
-## main...origin/main
+## main...origin/main [ahead 1]
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-?? reports/CRYPTO_A7FFCORE59F_NON_L7_CLUE_FORENSIC_20260604.md
-?? reports/CRYPTO_A7FFCORE59G_QUEUE_TARGET_ATTRITION_MAP_20260604.md
-?? runtime/a7ffcore59f_non_l7_forensic/
-?? runtime/a7ffcore59g_attrition_map/
-?? scripts/crypto_a7ffcore59fg_forensic_attrition.py
-HEAD=decd1707dabe9ffad8d4811a9c523e37473caae5
+?? reports/CRYPTO_A7FFCORE60B_TARGET_ADEQUACY_REPAIR_AUDIT_20260605.md
+?? reports/CRYPTO_A7FFCORE60C_MATERIALIZATION_REPAIR_AUDIT_20260605.md
+?? reports/CRYPTO_A7FFCORE60D_SELECTOR_PORTFOLIO_PROXY_ATTRIBUTION_20260605.md
+?? runtime/a7ffcore60b_target_adequacy_repair_audit/
+?? runtime/a7ffcore60c_materialization_repair_audit/
+?? runtime/a7ffcore60d_selector_portfolio_proxy_attribution/
+?? scripts/crypto_a7ffcore60bcd_parallel_audits.py
+HEAD=7dc4335f8c7492bacd35622d1fa4d6049d6d6a40
 origin/main=decd1707dabe9ffad8d4811a9c523e37473caae5
-HEAD == origin/main: True
+HEAD == origin/main: False
 ```
 
 ## Manifest
 
 ```json
 {
-  "artifact_count": 4161,
+  "artifact_count": 4179,
   "authorization_record_count": 806,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -43,12 +45,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-04T15:53:09Z",
-  "head": "decd1707dabe9ffad8d4811a9c523e37473caae5",
-  "head_equals_origin_main": true,
+  "generated_at": "2026-06-04T16:10:13Z",
+  "head": "7dc4335f8c7492bacd35622d1fa4d6049d6d6a40",
+  "head_equals_origin_main": false,
   "origin_main": "decd1707dabe9ffad8d4811a9c523e37473caae5",
   "stage": "A7PM-0",
-  "stage_count": 437
+  "stage_count": 440
 }
 ```
 
@@ -61,7 +63,7 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      86 |
+| hold                         | hold                       |      89 |
 | hold                         | diagnostic                 |       7 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
