@@ -1,0 +1,21 @@
+{
+  "activity_ok_count": 1273,
+  "activity_ok_rate": 0.6365,
+  "authorizes_a7ls2_continue_materialization": true,
+  "authorizes_a7ls3_numeric_wave": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7LS2_FIRST_CHECKPOINT_MATERIALIZATION_READY",
+  "eval_failure_count": 0,
+  "executed_arm_count": 4,
+  "executed_rows": 2000,
+  "executed_shard_count": 4,
+  "executes_materialization": true,
+  "executes_numeric_probe": false,
+  "executes_search": false,
+  "generated_at": "2026-06-05T04:08:48Z",
+  "source_decision": "PASS_A7LS1_MULTI_ARM_BLUEPRINT_GENERATION_READY_FOR_A7LS2",
+  "source_stage": "A7LS-1",
+  "stage": "A7LS-2"
+}

@@ -1,0 +1,15 @@
+{
+  "a7ls_arm": "A7LS_B",
+  "activity_ok_count": 367,
+  "activity_ok_rate": 0.734,
+  "eval_failure_count": 0,
+  "eval_success_count": 500,
+  "field_count": 43,
+  "generated_at": "2026-06-05T04:05:42Z",
+  "missing_field_count": 0,
+  "missing_fields": [],
+  "queue_rows": 500,
+  "shard": "a7ls_b_materialization_s020",
+  "symbols_loaded": 96,
+  "timestamps_loaded": 21025
+}

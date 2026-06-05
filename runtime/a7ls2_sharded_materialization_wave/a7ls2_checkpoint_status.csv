@@ -1,0 +1,5 @@
+shard,generated_at,queue_rows,a7ls_arm,field_count,missing_field_count,missing_fields,symbols_loaded,timestamps_loaded,eval_success_count,eval_failure_count,activity_ok_count,activity_ok_rate
+a7ls_a_materialization_s000,2026-06-05T04:03:20Z,500,A7LS_A,3,0,[],96,21025,500,0,433,0.866
+a7ls_b_materialization_s020,2026-06-05T04:05:42Z,500,A7LS_B,43,0,[],96,21025,500,0,367,0.734
+a7ls_c_materialization_s040,2026-06-05T04:06:53Z,500,A7LS_C,6,0,[],96,21025,500,0,66,0.132
+a7ls_d_materialization_s060,2026-06-05T04:08:22Z,500,A7LS_D,13,0,[],96,21025,500,0,407,0.814
