@@ -4076,30 +4076,33 @@ runtime,A7LS-3HR,runtime/a7ls3hr_company_handoff_resize/a7ls3hr_company_numeric_
 runtime,A7LS-3HR,runtime/a7ls3hr_company_handoff_resize/a7ls3hr_company_shard_plan_32_fallback.csv,8bbba4e,resize crypto a7ls3 company handoff,894
 runtime,A7LS-3HR,runtime/a7ls3hr_company_handoff_resize/a7ls3hr_company_shard_plan_64.csv,8bbba4e,resize crypto a7ls3 company handoff,495
 runtime,A7LS-3HR,runtime/a7ls3hr_company_handoff_resize/a7ls3hr_manifest.json,8bbba4e,resize crypto a7ls3 company handoff,680
-runtime,A7LS-3HR-AGG,runtime/a7ls3hr_company_result_aggregate/a7ls3hr_aggregate_manifest.json,fb26f28,add crypto a7ls3hr company result aggregate,675
-runtime,A7LS-3HR-AGG,runtime/a7ls3hr_company_result_aggregate/a7ls3hr_decision_counts.csv,fb26f28,add crypto a7ls3hr company result aggregate,16
-runtime,A7LS-3HR-AGG,runtime/a7ls3hr_company_result_aggregate/a7ls3hr_missing_shards.csv,fb26f28,add crypto a7ls3hr company result aggregate,1856
-runtime,A7LS-3HR-AGG,runtime/a7ls3hr_company_result_aggregate/a7ls3hr_shard_manifest_summary.csv,fb26f28,add crypto a7ls3hr company result aggregate,2
+runtime,A7LS-3HR-AGG,runtime/a7ls3hr_company_result_aggregate/a7ls3hr_aggregate_manifest.json,213a11c,aggregate crypto a7ls3hr company numeric results,621
+runtime,A7LS-3HR-AGG,runtime/a7ls3hr_company_result_aggregate/a7ls3hr_combined_clues.csv,213a11c,aggregate crypto a7ls3hr company numeric results,43515
+runtime,A7LS-3HR-AGG,runtime/a7ls3hr_company_result_aggregate/a7ls3hr_combined_portfolio_candidates.csv,213a11c,aggregate crypto a7ls3hr company numeric results,136022
+runtime,A7LS-3HR-AGG,runtime/a7ls3hr_company_result_aggregate/a7ls3hr_combined_responses.csv,213a11c,aggregate crypto a7ls3hr company numeric results,29893869
+runtime,A7LS-3HR-AGG,runtime/a7ls3hr_company_result_aggregate/a7ls3hr_decision_counts.csv,213a11c,aggregate crypto a7ls3hr company numeric results,803
+runtime,A7LS-3HR-AGG,runtime/a7ls3hr_company_result_aggregate/a7ls3hr_missing_shards.csv,213a11c,aggregate crypto a7ls3hr company numeric results,2
+runtime,A7LS-3HR-AGG,runtime/a7ls3hr_company_result_aggregate/a7ls3hr_shard_manifest_summary.csv,213a11c,aggregate crypto a7ls3hr company numeric results,3417
 report,A7LS0,reports/CRYPTO_A7LS0_CHECKPOINT_LARGE_SEARCH_CONTRACT_20260605.md,f23c657,add crypto a7ls0 checkpoint large search contract,9254
 report,A7LS1,reports/CRYPTO_A7LS1_MULTI_ARM_BLUEPRINT_GENERATION_20260605.md,c469160,generate crypto a7ls1 multi arm blueprint queues,5574
 report,A7LS2,reports/CRYPTO_A7LS2_SHARDED_MATERIALIZATION_WAVE_20260605.md,8ae2133,run crypto a7ls2 materialization checkpoint,7247
 report,A7LS3,reports/CRYPTO_A7LS3_NUMERIC_CHECKPOINT_FROM_MATERIALIZED_20260605.md,b23e316,prepare crypto a7ls3 company numeric handoff,2130
 report,A7LS3H,reports/CRYPTO_A7LS3H_COMPANY_NUMERIC_HANDOFF_20260605.md,b23e316,prepare crypto a7ls3 company numeric handoff,9586
 report,A7LS3HR,reports/CRYPTO_A7LS3HR_COMPANY_HANDOFF_RESIZE_20260605.md,f0315cc,add crypto a7ls3hr company launcher,9982
-report,A7LS3HR,reports/CRYPTO_A7LS3HR_COMPANY_RESULT_AGGREGATE_20260605.md,fb26f28,add crypto a7ls3hr company result aggregate,2936
+report,A7LS3HR,reports/CRYPTO_A7LS3HR_COMPANY_RESULT_AGGREGATE_20260605.md,213a11c,aggregate crypto a7ls3hr company numeric results,2854
 report,A7NIGHT,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_options.json,44bd9de,add crypto a7ff execution contracts,2125
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,8bbba4e,resize crypto a7ls3 company handoff,5598
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,8bbba4e,resize crypto a7ls3 company handoff,665460
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,bcc3632,refresh crypto registry after a7ls3hr handoff,5439
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,bcc3632,refresh crypto registry after a7ls3hr handoff,666453
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,f23c657,add crypto a7ls0 checkpoint large search contract,127716
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,8bbba4e,resize crypto a7ls3 company handoff,264503
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,8bbba4e,resize crypto a7ls3 company handoff,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,bcc3632,refresh crypto registry after a7ls3hr handoff,264510
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,bcc3632,refresh crypto registry after a7ls3hr handoff,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,8bbba4e,resize crypto a7ls3 company handoff,147089
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,bcc3632,refresh crypto registry after a7ls3hr handoff,147399
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -4117,12 +4120,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,8bbba4e,resize crypto a7ls3 company handoff,5483
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,bcc3632,refresh crypto registry after a7ls3hr handoff,5483
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,b37af5d,add crypto core51px execution preflight handoff,372
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,b37af5d,add crypto core51px execution preflight handoff,375
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,b37af5d,add crypto core51px execution preflight handoff,1442
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,8bbba4e,resize crypto a7ls3 company handoff,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,8bbba4e,resize crypto a7ls3 company handoff,425
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,bcc3632,refresh crypto registry after a7ls3hr handoff,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,bcc3632,refresh crypto registry after a7ls3hr handoff,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
