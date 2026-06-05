@@ -1,0 +1,34 @@
+{
+  "checkpoint_policy": "first run 2-4 primary shards, inspect runtime/memory, then scale to parallelism 8-12",
+  "fallback_plan": {
+    "queue_file": "G:/Project_V7_Rotation/alpha_pit_engine_crypto_20260519/runtime/a7ls3hr_company_handoff_resize/a7ls3hr_company_numeric_queue_32_fallback.csv",
+    "recommended_parallelism": 4,
+    "rows_per_shard": 32,
+    "shard_count": 32,
+    "shard_plan_file": "G:/Project_V7_Rotation/alpha_pit_engine_crypto_20260519/runtime/a7ls3hr_company_handoff_resize/a7ls3hr_company_shard_plan_32_fallback.csv"
+  },
+  "per_shard_env_primary": {
+    "A7FF8_AUTH_DECISION": "PASS_A7LS2_FIRST_CHECKPOINT_MATERIALIZATION_READY",
+    "A7FF8_AUTH_MANIFEST": "G:/Project_V7_Rotation/alpha_pit_engine_crypto_20260519/runtime/a7ls2_sharded_materialization_wave/a7ls2_manifest.json",
+    "A7FF8_FAST_NUMERIC_CAP": "64",
+    "A7FF8_FILE_PREFIX": "a7ls3hr_${SHARD}",
+    "A7FF8_MATERIALIZE_CAP": "64",
+    "A7FF8_PORTFOLIO_CAP": "96",
+    "A7FF8_QUEUE_LIMIT": "64",
+    "A7FF8_QUEUE_PATH": "G:/AlphaFactory_CryptoData/research_runtime/a7ls3hr_company_numeric/${SHARD}/queue.csv",
+    "A7FF8_REPORT": "G:/AlphaFactory_CryptoData/research_runtime/a7ls3hr_company_numeric/${SHARD}/A7LS3HR_NUMERIC_DETAIL.md",
+    "A7FF8_RUNTIME": "G:/AlphaFactory_CryptoData/research_runtime/a7ls3hr_company_numeric/${SHARD}",
+    "A7FF8_STAGE": "A7LS-3HR-${SHARD}",
+    "A7FF8_WRITE_CONTROL_DETAIL": "1"
+  },
+  "primary_plan": {
+    "max_parallelism_if_memory_headroom_confirmed": 12,
+    "queue_file": "G:/Project_V7_Rotation/alpha_pit_engine_crypto_20260519/runtime/a7ls3hr_company_handoff_resize/a7ls3hr_company_numeric_queue_64.csv",
+    "recommended_parallelism": 8,
+    "rows_per_shard": 64,
+    "shard_count": 16,
+    "shard_plan_file": "G:/Project_V7_Rotation/alpha_pit_engine_crypto_20260519/runtime/a7ls3hr_company_handoff_resize/a7ls3hr_company_shard_plan_64.csv"
+  },
+  "resume_rule": "skip shard when manifest exists and process returncode == 0",
+  "stage": "A7LS-3HR"
+}

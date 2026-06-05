@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_company_numeric_async_64": true,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7LS3HR_COMPANY_HANDOFF_RESIZED_64_READY",
+  "executes_numeric_probe": false,
+  "executes_search": false,
+  "fallback_rows_per_shard": 32,
+  "fallback_shard_count": 32,
+  "generated_at": "2026-06-05T06:21:34Z",
+  "max_parallelism_if_memory_headroom_confirmed": 12,
+  "primary_rows_per_shard": 64,
+  "primary_shard_count": 16,
+  "queue_rows": 1024,
+  "recommended_parallelism": 8,
+  "source_decision": "PASS_A7LS3H_COMPANY_NUMERIC_HANDOFF_READY",
+  "source_stage": "A7LS-3H",
+  "stage": "A7LS-3HR"
+}

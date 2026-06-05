@@ -1,0 +1,17 @@
+company_numeric_shard,rows,arm_count,semantic_pair_count,motif_count,skeleton_count
+a7ls3hr_s000,64,1,1,2,11
+a7ls3hr_s001,64,1,1,1,7
+a7ls3hr_s002,64,1,1,2,14
+a7ls3hr_s003,64,1,1,2,12
+a7ls3hr_s004,64,1,5,2,16
+a7ls3hr_s005,64,1,7,2,12
+a7ls3hr_s006,64,1,8,2,10
+a7ls3hr_s007,64,1,7,2,7
+a7ls3hr_s008,64,1,1,1,3
+a7ls3hr_s009,64,2,4,2,9
+a7ls3hr_s010,64,1,3,2,9
+a7ls3hr_s011,64,1,3,2,11
+a7ls3hr_s012,64,1,2,2,13
+a7ls3hr_s013,64,2,8,3,13
+a7ls3hr_s014,64,2,6,2,8
+a7ls3hr_s015,64,2,2,2,17
