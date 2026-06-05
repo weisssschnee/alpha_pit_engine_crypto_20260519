@@ -1,21 +1,18 @@
 {
   "authorizes_alpha_proof": false,
   "authorizes_shadow_paper_live": false,
-  "blockers": [
-    "missing_shard_manifests",
-    "no_company_results_found"
-  ],
-  "combined_clue_rows": 0,
-  "combined_portfolio_rows": 0,
-  "combined_response_rows": 0,
-  "completed_shards": 0,
-  "decision": "HOLD_A7LS3HR_COMPANY_RESULTS_INCOMPLETE_OR_NO_CLUES",
+  "blockers": [],
+  "combined_clue_rows": 45,
+  "combined_portfolio_rows": 143,
+  "combined_response_rows": 33280,
+  "completed_shards": 16,
+  "decision": "PASS_A7LS3HR_COMPANY_RESULTS_AGGREGATED_READY_FOR_FORENSIC",
   "executes_numeric_probe": false,
   "executes_search": false,
   "expected_shards": 16,
   "external": "G:\\AlphaFactory_CryptoData\\research_runtime\\a7ls3hr_company_numeric",
-  "generated_at": "2026-06-05T06:41:36Z",
-  "missing_shards": 16,
+  "generated_at": "2026-06-05T08:19:31Z",
+  "missing_shards": 0,
   "stage": "A7LS-3HR-AGG",
   "stress_clean_clue_count_observed": 0
 }
