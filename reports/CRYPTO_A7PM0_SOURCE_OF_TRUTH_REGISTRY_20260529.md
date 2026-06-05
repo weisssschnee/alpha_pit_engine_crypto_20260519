@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-05T01:15:16Z
+Generated: 2026-06-05T01:44:22Z
 
 ## Decision
 
@@ -15,11 +15,13 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-?? reports/CRYPTO_A7FFCORE64_RETEST_AND_FUNDING_STATE_PACKAGE_20260605.md
-?? runtime/a7ffcore64_retest_and_funding_state_package/
-?? scripts/crypto_a7ffcore64_retest_and_funding_state_package.py
-HEAD=62e67b9995a4455e8e63361675014fdb90d10df0
-origin/main=62e67b9995a4455e8e63361675014fdb90d10df0
+?? reports/CRYPTO_A7FFCORE65A_NUMERIC_RETEST_EXECUTION_20260605.md
+?? reports/CRYPTO_A7FFCORE65B_FUNDING_STATE_RETEST_EXECUTION_20260605.md
+?? runtime/a7ffcore65a_numeric_retest_execution/
+?? runtime/a7ffcore65b_funding_state_retest_execution/
+?? scripts/crypto_a7ffcore65b_funding_state_retest_execution.py
+HEAD=20aaa74f40776ddb4e9064d20859e561506faa60
+origin/main=20aaa74f40776ddb4e9064d20859e561506faa60
 HEAD == origin/main: True
 ```
 
@@ -27,7 +29,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 4217,
+  "artifact_count": 4250,
   "authorization_record_count": 821,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -41,12 +43,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-05T01:15:16Z",
-  "head": "62e67b9995a4455e8e63361675014fdb90d10df0",
+  "generated_at": "2026-06-05T01:44:22Z",
+  "head": "20aaa74f40776ddb4e9064d20859e561506faa60",
   "head_equals_origin_main": true,
-  "origin_main": "62e67b9995a4455e8e63361675014fdb90d10df0",
+  "origin_main": "20aaa74f40776ddb4e9064d20859e561506faa60",
   "stage": "A7PM-0",
-  "stage_count": 445
+  "stage_count": 447
 }
 ```
 
@@ -59,7 +61,7 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      92 |
+| hold                         | hold                       |      94 |
 | hold                         | diagnostic                 |       7 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
