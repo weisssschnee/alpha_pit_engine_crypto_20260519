@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-05T06:22:26Z
+Generated: 2026-06-05T06:43:08Z
 
 ## Decision
 
@@ -15,11 +15,8 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-?? reports/CRYPTO_A7LS3HR_COMPANY_HANDOFF_RESIZE_20260605.md
-?? runtime/a7ls3hr_company_handoff_resize/
-?? scripts/crypto_a7ls3hr_company_handoff_resize.py
-HEAD=b23e31611936f7fe85fd8d92fd588e56f3e22656
-origin/main=b23e31611936f7fe85fd8d92fd588e56f3e22656
+HEAD=fb26f2850f3c0d2609568efda68e3a541c593741
+origin/main=fb26f2850f3c0d2609568efda68e3a541c593741
 HEAD == origin/main: True
 ```
 
@@ -27,7 +24,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 4301,
+  "artifact_count": 4306,
   "authorization_record_count": 823,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -41,12 +38,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-05T06:22:26Z",
-  "head": "b23e31611936f7fe85fd8d92fd588e56f3e22656",
+  "generated_at": "2026-06-05T06:43:08Z",
+  "head": "fb26f2850f3c0d2609568efda68e3a541c593741",
   "head_equals_origin_main": true,
-  "origin_main": "b23e31611936f7fe85fd8d92fd588e56f3e22656",
+  "origin_main": "fb26f2850f3c0d2609568efda68e3a541c593741",
   "stage": "A7PM-0",
-  "stage_count": 453
+  "stage_count": 454
 }
 ```
 
@@ -59,7 +56,7 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      95 |
+| hold                         | hold                       |      96 |
 | hold                         | diagnostic                 |       7 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |
