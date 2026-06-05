@@ -1,0 +1,10 @@
+a7ls_arm,semantic_pair,rows
+A7LS_A,basis_premium_like,32
+A7LS_B,liquidity_like,12
+A7LS_B,price_like,10
+A7LS_B,taker_flow_like,10
+A7LS_C,basis_premium_like,48
+A7LS_D,basis_premium_like,3
+A7LS_D,liquidity_like,4
+A7LS_D,low_prior_axes,1
+A7LS_D,low_prior_axes|basis_premium_like,8

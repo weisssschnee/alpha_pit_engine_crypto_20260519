@@ -1,0 +1,19 @@
+{
+  "arm_count": 4,
+  "authorizes_alpha_proof": false,
+  "authorizes_company_numeric_async": true,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7LS3H_COMPANY_NUMERIC_HANDOFF_READY",
+  "executes_numeric_probe": false,
+  "executes_search": false,
+  "generated_at": "2026-06-05T05:14:13Z",
+  "handoff_queue_rows": 1024,
+  "input_activity_ok_rows": 1273,
+  "local_a7ls3_timeout": true,
+  "rows_per_shard": 32,
+  "shard_count": 32,
+  "source_a7ls2_decision": "PASS_A7LS2_FIRST_CHECKPOINT_MATERIALIZATION_READY",
+  "source_local_a7ls3_decision": "HOLD_A7LS3_NUMERIC_CHECKPOINT_WEAK",
+  "stage": "A7LS-3H"
+}

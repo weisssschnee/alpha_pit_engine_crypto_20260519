@@ -1,0 +1,28 @@
+{
+  "authorizes_a7ls4_checkpoint_triage": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "numeric_probe_returncode_nonzero",
+    "numeric_probe_timeout",
+    "numeric_materialization_activity_below_70pct",
+    "non_l7_numeric_clues_lt_4",
+    "selected_portfolio_queue_lt_4"
+  ],
+  "decision": "HOLD_A7LS3_NUMERIC_CHECKPOINT_WEAK",
+  "executes_numeric_probe": true,
+  "executes_search": false,
+  "generated_at": "2026-06-05T05:10:49Z",
+  "input_materialized_rows": 2000,
+  "label_response_rows": 0,
+  "materialized_activity_ok_count": 0,
+  "non_l7_numeric_clue_rows": 0,
+  "numeric_checkpoint_queue_rows": 128,
+  "numeric_decision": "HOLD_A7LS3_NUMERIC_PROBE_TIMEOUT_OR_NO_MANIFEST",
+  "numeric_returncode": -9,
+  "rank_label_diagnostic_clue_rows": 0,
+  "selected_portfolio_queue_count": 0,
+  "source_decision": "PASS_A7LS2_FIRST_CHECKPOINT_MATERIALIZATION_READY",
+  "source_stage": "A7LS-2",
+  "stage": "A7LS-3"
+}
