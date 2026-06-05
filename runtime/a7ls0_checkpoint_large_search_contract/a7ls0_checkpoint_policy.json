@@ -1,0 +1,42 @@
+{
+  "arm_survival_gates": {
+    "activity_ok_rate_min": 0.5,
+    "control_dominated_rate_max": 0.45,
+    "l7_share_max": 0.6,
+    "non_l7_clue_rate_min_after_1000": 0.003,
+    "selected_queue_min_after_1000": 4,
+    "top_semantic_pair_share_max": 0.4
+  },
+  "authorization_boundary": {
+    "authorizes_alpha_proof": false,
+    "authorizes_blueprint_generation": true,
+    "authorizes_materialization_wave": true,
+    "authorizes_numeric_wave": true,
+    "authorizes_shadow_paper_live": false
+  },
+  "checkpoint_interval_numeric_rows": 1000,
+  "early_checkpoint_interval_numeric_rows": 500,
+  "expand_rules": [
+    "non_l7_clue_rate >= 0.008 and selected_queue >= 8",
+    "control_dominated_rate <= 0.25",
+    "at least three semantic pairs or five raw axes active"
+  ],
+  "kill_rules": [
+    "eval_failure_rate > 0.05",
+    "activity_ok_rate < 0.35 after first checkpoint",
+    "control_dominated_rate > 0.60 after first checkpoint",
+    "non_l7_clue_rate == 0 and selected_queue == 0 after two checkpoints",
+    "single semantic pair share > 0.55 after diversity repair"
+  ],
+  "raw_arm_special_rules": {
+    "arm_id": "A7LS_B",
+    "min_active_axes_after_checkpoint": 5,
+    "must_keep_until_numeric_rows": 2000,
+    "reason": "Raw multi-axis search is reserved to test system utility and should not be killed by first-checkpoint noise unless controls dominate.",
+    "top_axis_share_max": 0.25
+  },
+  "stage": "A7LS-0",
+  "total_generated_budget": 240000,
+  "total_materialization_budget": 40000,
+  "total_numeric_budget": 8000
+}

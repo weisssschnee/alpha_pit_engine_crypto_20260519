@@ -1,0 +1,20 @@
+{
+  "arm_count": 4,
+  "authorizes_a7ls1_blueprint_generation": true,
+  "authorizes_a7ls2_materialization_wave": true,
+  "authorizes_a7ls3_numeric_wave": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7LS0_CHECKPOINT_LARGE_SEARCH_CONTRACT_READY",
+  "executes_generation": false,
+  "executes_materialization": false,
+  "executes_numeric_probe": false,
+  "executes_search": false,
+  "generated_at": "2026-06-05T01:58:27Z",
+  "raw_multi_axis_arm_id": "A7LS_B",
+  "raw_multi_axis_generated_budget": 60000,
+  "stage": "A7LS-0",
+  "total_generated_budget": 240000,
+  "total_materialization_budget": 40000,
+  "total_numeric_budget": 8000
+}

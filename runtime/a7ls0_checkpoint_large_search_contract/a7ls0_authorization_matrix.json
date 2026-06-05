@@ -1,0 +1,15 @@
+{
+  "authorized": {
+    "A7LS-1 multi-arm blueprint generation": true,
+    "A7LS-2 sharded materialization wave with checkpoint": true,
+    "A7LS-3 sharded numeric wave with checkpoint": true,
+    "raw_multi_axis_discovery_arm": true
+  },
+  "not_authorized": {
+    "May_in_selector_score": true,
+    "alpha_proof": true,
+    "shadow_paper_live": true,
+    "single_arm_budget_capture": true,
+    "unbounded_full_grammar": true
+  }
+}

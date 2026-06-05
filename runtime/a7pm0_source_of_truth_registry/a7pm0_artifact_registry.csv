@@ -3566,39 +3566,39 @@ runtime,A7FF-CORE64,runtime/a7ffcore64_retest_and_funding_state_package/core64b_
 runtime,A7FF-CORE64,runtime/a7ffcore64_retest_and_funding_state_package/core64b_funding_state_coverage_by_timestamp.csv,20aaa74,add crypto core64 retest and funding state package,1229375
 runtime,A7FF-CORE64,runtime/a7ffcore64_retest_and_funding_state_package/core64b_funding_state_field_contract.csv,20aaa74,add crypto core64 retest and funding state package,906
 runtime,A7FF-CORE64,runtime/a7ffcore64_retest_and_funding_state_package/core64b_funding_state_summary.json,20aaa74,add crypto core64 retest and funding state package,316
-report,A7FF-CORE65A,reports/CRYPTO_A7FFCORE65A_NUMERIC_RETEST_EXECUTION_20260605.md,,,12060
-runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_control_dominance_metrics.csv,,,1317541
-runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_control_summary.csv,,,449
-runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_decision_counts.csv,,,1324
-runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_decision_record.json,,,2599
-runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_family_decision_summary.csv,,,1279
-runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_label_response_metrics.csv,,,380733
-runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_manifest.json,,,2599
-runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_materialization_metrics.csv,,,5692
-runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_nonoverlap_stats.csv,,,50092
-runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_portfolio_marginal_proxy.csv,,,7039
-runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_selected_portfolio_queue.csv,,,1928
-report,A7FF-CORE65B,reports/CRYPTO_A7FFCORE65B_FUNDING_STATE_RETEST_EXECUTION_20260605.md,,,5073
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/CRYPTO_A7FFCORE65B_NUMERIC_DETAIL_20260605.md,,,10229
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_decision_record.json,,,785
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_full_patched_funding_state_queue.csv,,,250279
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_manifest.json,,,785
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_materialization_summary.csv,,,258
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_numeric_probe_stdout.log,,,3722
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_patched_funding_state_retest_queue.csv,,,86748
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_response_summary.csv,,,2294
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_selected_summary.csv,,,96
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_control_dominance_metrics.csv,,,5897061
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_control_summary.csv,,,451
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_decision_counts.csv,,,808
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_decision_record.json,,,2616
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_family_decision_summary.csv,,,402
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_label_response_metrics.csv,,,1634449
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_manifest.json,,,2616
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_materialization_metrics.csv,,,37527
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_nonoverlap_stats.csv,,,234048
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_portfolio_marginal_proxy.csv,,,2025
-runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_selected_portfolio_queue.csv,,,2025
+report,A7FF-CORE65A,reports/CRYPTO_A7FFCORE65A_NUMERIC_RETEST_EXECUTION_20260605.md,694c69c,run crypto core65 retests,12060
+runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_control_dominance_metrics.csv,694c69c,run crypto core65 retests,1317541
+runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_control_summary.csv,694c69c,run crypto core65 retests,449
+runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_decision_counts.csv,694c69c,run crypto core65 retests,1324
+runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_decision_record.json,694c69c,run crypto core65 retests,2599
+runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_family_decision_summary.csv,694c69c,run crypto core65 retests,1279
+runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_label_response_metrics.csv,694c69c,run crypto core65 retests,380733
+runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_manifest.json,694c69c,run crypto core65 retests,2599
+runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_materialization_metrics.csv,694c69c,run crypto core65 retests,5692
+runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_nonoverlap_stats.csv,694c69c,run crypto core65 retests,50092
+runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_portfolio_marginal_proxy.csv,694c69c,run crypto core65 retests,7039
+runtime,A7FF-CORE65A,runtime/a7ffcore65a_numeric_retest_execution/a7ffcore65a_selected_portfolio_queue.csv,694c69c,run crypto core65 retests,1928
+report,A7FF-CORE65B,reports/CRYPTO_A7FFCORE65B_FUNDING_STATE_RETEST_EXECUTION_20260605.md,694c69c,run crypto core65 retests,5073
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/CRYPTO_A7FFCORE65B_NUMERIC_DETAIL_20260605.md,694c69c,run crypto core65 retests,10229
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_decision_record.json,694c69c,run crypto core65 retests,785
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_full_patched_funding_state_queue.csv,694c69c,run crypto core65 retests,250279
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_manifest.json,694c69c,run crypto core65 retests,785
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_materialization_summary.csv,694c69c,run crypto core65 retests,258
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_numeric_probe_stdout.log,694c69c,run crypto core65 retests,3722
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_patched_funding_state_retest_queue.csv,694c69c,run crypto core65 retests,86748
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_response_summary.csv,694c69c,run crypto core65 retests,2294
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/core65b_selected_summary.csv,694c69c,run crypto core65 retests,96
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_control_dominance_metrics.csv,694c69c,run crypto core65 retests,5897061
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_control_summary.csv,694c69c,run crypto core65 retests,451
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_decision_counts.csv,694c69c,run crypto core65 retests,808
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_decision_record.json,694c69c,run crypto core65 retests,2616
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_family_decision_summary.csv,694c69c,run crypto core65 retests,402
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_label_response_metrics.csv,694c69c,run crypto core65 retests,1634449
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_manifest.json,694c69c,run crypto core65 retests,2616
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_materialization_metrics.csv,694c69c,run crypto core65 retests,37527
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_nonoverlap_stats.csv,694c69c,run crypto core65 retests,234048
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_portfolio_marginal_proxy.csv,694c69c,run crypto core65 retests,2025
+runtime,A7FF-CORE65B,runtime/a7ffcore65b_funding_state_retest_execution/numeric_probe/a7ffcore65b_selected_portfolio_queue.csv,694c69c,run crypto core65 retests,2025
 report,A7FF-CORE6E,reports/CRYPTO_A7FFCORE6E_MATERIALIZATION_PREFLIGHT_EXECUTION_20260601.md,70e6950,add crypto a7ffcore6e materialization preflight,9673
 runtime,A7FF-CORE6E,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S00_manifest.json,70e6950,add crypto a7ffcore6e materialization preflight,346
 runtime,A7FF-CORE6E,runtime/a7ffcore6e_materialization_preflight/a7ffcore6e_S00_materialization.csv,70e6950,add crypto a7ffcore6e materialization preflight,63439
@@ -4031,19 +4031,25 @@ report,A7INPUT1,reports/CRYPTO_A7INPUT1_INTEGRATION_SMOKE_20260603.md,72ea63c,ad
 report,A7INPUT2,reports/CRYPTO_A7INPUT2_TAG_AWARE_QUEUE_BUILDER_20260603.md,eb85d29,add crypto input tag aware queues,16425
 report,A7INPUT3,reports/CRYPTO_A7INPUT3_NUMERIC_PROBE_DETAIL_20260603.md,8cd88e0,run crypto input tag aware numeric preflight,46254
 report,A7INPUT3,reports/CRYPTO_A7INPUT3_TAG_AWARE_NUMERIC_PREFLIGHT_20260603.md,8cd88e0,run crypto input tag aware numeric preflight,17166
+runtime,A7LS-0,runtime/a7ls0_checkpoint_large_search_contract/a7ls0_arm_budget_map.csv,,,1439
+runtime,A7LS-0,runtime/a7ls0_checkpoint_large_search_contract/a7ls0_authorization_matrix.json,,,445
+runtime,A7LS-0,runtime/a7ls0_checkpoint_large_search_contract/a7ls0_checkpoint_policy.json,,,1573
+runtime,A7LS-0,runtime/a7ls0_checkpoint_large_search_contract/a7ls0_manifest.json,,,706
+runtime,A7LS-0,runtime/a7ls0_checkpoint_large_search_contract/a7ls0_raw_multi_axis_policy.csv,,,1445
+report,A7LS0,reports/CRYPTO_A7LS0_CHECKPOINT_LARGE_SEARCH_CONTRACT_20260605.md,,,9254
 report,A7NIGHT,reports/CRYPTO_A7NIGHT_TASKFLOW_20260531.md,44bd9de,add crypto a7ff execution contracts,6723
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_options.json,44bd9de,add crypto a7ff execution contracts,2125
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,20aaa74,add crypto core64 retest and funding state package,5637
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,20aaa74,add crypto core64 retest and funding state package,652511
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,694c69c,run crypto core65 retests,5752
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,694c69c,run crypto core65 retests,657060
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,b655847,add crypto search space memory map and dice batch,127135
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,1316
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,20aaa74,add crypto core64 retest and funding state package,260772
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,20aaa74,add crypto core64 retest and funding state package,710
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,694c69c,run crypto core65 retests,260772
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,694c69c,run crypto core65 retests,710
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,50ebaf9,add crypto a7ff52 materialization contract,353
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,20aaa74,add crypto core64 retest and funding state package,144641
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,694c69c,run crypto core65 retests,145232
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,de26507,add crypto a7pm governance registry,302
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -4061,12 +4067,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,20aaa74,add crypto core64 retest and funding state package,5483
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,694c69c,run crypto core65 retests,5483
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,b37af5d,add crypto core51px execution preflight handoff,372
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,b37af5d,add crypto core51px execution preflight handoff,375
 runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,b37af5d,add crypto core51px execution preflight handoff,1442
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,20aaa74,add crypto core64 retest and funding state package,1304
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,20aaa74,add crypto core64 retest and funding state package,425
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,694c69c,run crypto core65 retests,1304
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,694c69c,run crypto core65 retests,425
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663
