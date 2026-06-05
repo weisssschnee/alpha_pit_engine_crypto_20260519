@@ -543,6 +543,7 @@ def main() -> None:
         "queue_total_rows": int(len(queue_all)),
         "queue_offset": QUEUE_OFFSET,
         "queue_limit": QUEUE_LIMIT,
+        "missing_numeric_fields": missing,
         "materialized_activity_ok_count": materialized_count,
         "label_response_rows": int(len(responses)),
         "non_l7_numeric_clue_rows": clue_count,

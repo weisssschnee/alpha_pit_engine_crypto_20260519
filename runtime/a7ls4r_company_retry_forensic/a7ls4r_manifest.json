@@ -1,0 +1,27 @@
+{
+  "authorizes_a7ls5_followup_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7LS4R_RETRY_MISSING_FIELDS_RESOLVED_WITH_NON_L7_CLUES",
+  "executes_generation": false,
+  "executes_numeric_probe": false,
+  "executes_search": false,
+  "external": "G:\\AlphaFactory_CryptoData\\research_runtime\\a7ls4r_company_retry_numeric",
+  "generated_at": "2026-06-05T10:31:18Z",
+  "missing_resolved_shards": 3,
+  "pass_retry_shards": 2,
+  "retry_materialized_activity_ok_count": 191,
+  "retry_non_l7_numeric_clue_rows": 6,
+  "retry_rank_label_diagnostic_rows": 36,
+  "retry_response_rows": 3820,
+  "retry_shard_count": 3,
+  "retry_shards": [
+    "s007",
+    "s013",
+    "s014"
+  ],
+  "source_note": "Retry result for the three A7LS-3HR missing-field shards after syncing current evaluator dependencies to company machine.",
+  "stage": "A7LS-4R"
+}
