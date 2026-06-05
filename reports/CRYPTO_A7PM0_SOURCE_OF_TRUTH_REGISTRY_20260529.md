@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-04T17:11:26Z
+Generated: 2026-06-05T01:15:16Z
 
 ## Decision
 
@@ -15,11 +15,11 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
-?? reports/CRYPTO_A7FFCORE63_DICE_EXECUTION_AUDIT_20260605.md
-?? runtime/a7ffcore63_dice_execution_audit/
-?? scripts/crypto_a7ffcore63_dice_execution_audit.py
-HEAD=b65584774bcf50726ebe347e77b42b01c50bbf0d
-origin/main=b65584774bcf50726ebe347e77b42b01c50bbf0d
+?? reports/CRYPTO_A7FFCORE64_RETEST_AND_FUNDING_STATE_PACKAGE_20260605.md
+?? runtime/a7ffcore64_retest_and_funding_state_package/
+?? scripts/crypto_a7ffcore64_retest_and_funding_state_package.py
+HEAD=62e67b9995a4455e8e63361675014fdb90d10df0
+origin/main=62e67b9995a4455e8e63361675014fdb90d10df0
 HEAD == origin/main: True
 ```
 
@@ -27,7 +27,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 4207,
+  "artifact_count": 4217,
   "authorization_record_count": 821,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -41,12 +41,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-04T17:11:26Z",
-  "head": "b65584774bcf50726ebe347e77b42b01c50bbf0d",
+  "generated_at": "2026-06-05T01:15:16Z",
+  "head": "62e67b9995a4455e8e63361675014fdb90d10df0",
   "head_equals_origin_main": true,
-  "origin_main": "b65584774bcf50726ebe347e77b42b01c50bbf0d",
+  "origin_main": "62e67b9995a4455e8e63361675014fdb90d10df0",
   "stage": "A7PM-0",
-  "stage_count": 444
+  "stage_count": 445
 }
 ```
 
@@ -59,7 +59,7 @@ HEAD == origin/main: True
 | engineering_pass_signal_hold | hold                       |       6 |
 | engineering_pass_signal_hold | contract                   |       4 |
 | engineering_pass_signal_hold | diagnostic                 |       3 |
-| hold                         | hold                       |      91 |
+| hold                         | hold                       |      92 |
 | hold                         | diagnostic                 |       7 |
 | hold                         | alpha_claim_check_required |       2 |
 | hold                         | contract                   |       2 |

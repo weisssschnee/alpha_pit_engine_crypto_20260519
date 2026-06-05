@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_company_retest": true,
+  "authorizes_funding_state_patch": true,
+  "authorizes_search": false,
+  "blockers": [
+    "funding_pair_requires_state_field_retest"
+  ],
+  "core64a_retest_queue_rows": 24,
+  "core64a_semantic_pair_count": 4,
+  "core64a_shard_count": 4,
+  "core64b_panel_rows": 6949596,
+  "core64b_panel_symbols": 498,
+  "core64b_raw_event_coverage_median": 0.2335107203962832,
+  "core64b_state8_over_raw_lift_median": 4.002318034306907,
+  "core64b_state_8h_coverage_median": 0.9542358613300681,
+  "decision": "HOLD_CORE64_PACKAGE_READY_WITH_FUNDING_REPAIR_REQUIRED",
+  "executes_replay": false,
+  "executes_search": false,
+  "generated_at": "2026-06-05T01:14:26Z",
+  "stage": "A7FF-CORE64"
+}

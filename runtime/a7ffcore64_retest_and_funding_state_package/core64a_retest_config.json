@@ -1,0 +1,25 @@
+{
+  "authorizes_search": false,
+  "checkpoint_required": true,
+  "entry_shift_set": [
+    "entry_t0",
+    "entry_t1",
+    "entry_t2"
+  ],
+  "executes_search": false,
+  "hard_reject": [
+    "control_ratio >= 1.0 after retest",
+    "all non-L7 translated labels fail",
+    "entry_t1 and entry_t2 both fail",
+    "same semantic pair dominates selected retest survivors"
+  ],
+  "label_translation_set": [
+    "primary_original_label",
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L5_vol_adjusted_return"
+  ],
+  "retest_queue_rows": 24,
+  "shard_count": 4,
+  "stage": "A7FF-CORE64A"
+}

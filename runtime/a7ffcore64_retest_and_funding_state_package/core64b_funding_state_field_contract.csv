@@ -1,0 +1,6 @@
+field_name,feature_class,allowed_for_alpha,allowed_for_diagnostic,pit_rule,materialization_status
+funding_rate,raw_event,False,True,event timestamp only; sparse raw source; do not use rolling operators directly for ordinary alpha,sparse_event_field
+funding_rate_state_8h,derived_pit_last_known_state,True,True,per-symbol last known funding_rate carried forward for <=8h after event; no backfill before first event,proposed_core64b_repair
+funding_rate_state_24h,derived_pit_last_known_state,False,True,diagnostic carry up to 24h; alpha use requires separate approval because stale carry may wash out event timing,diagnostic_only
+funding_event_age_hours,derived_state_age,True,True,"hours since last observed funding event, computed forward-only per symbol",proposed_core64b_repair
+funding_event_flag,event_indicator,False,True,event-hour indicator only; do not use as standalone alpha,diagnostic_only
