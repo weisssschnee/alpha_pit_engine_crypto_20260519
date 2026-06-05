@@ -33,6 +33,30 @@ A7LS-3HR resizes the company numeric handoff from 32 rows/shard to 64 rows/shard
 }
 ```
 
+## Company Launcher
+
+Primary company execution launcher:
+
+```text
+scripts/crypto_a7ls3hr_company_parallel_launcher.ps1
+```
+
+Default execution shape:
+
+```text
+rows_per_shard: 64
+shard_count: 16
+max_parallel: 8
+optional_max_parallel_if_memory_headroom_confirmed: 12
+```
+
+The launcher is checkpoint-aware: shards with an existing manifest are skipped. It writes per-shard queues and logs under:
+
+```text
+D:\HermesWorker\GDrive\AlphaFactory_CryptoData\research_runtime\a7ls3hr_company_numeric
+D:\HermesWorker\GDrive\AlphaFactory_CryptoData\logs
+```
+
 ## Arm Summary
 
 | a7ls_arm   |   rows |   semantic_pair_count |   motif_count |   skeleton_count |
