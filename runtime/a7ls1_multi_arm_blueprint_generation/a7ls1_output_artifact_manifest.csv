@@ -1,0 +1,4 @@
+path,rows,location,purpose
+G:/AlphaFactory_CryptoData/research_runtime/a7ls1_multi_arm_blueprint_generation_20260605/a7ls1_full_blueprint_pool.csv,240000,external,full 240k generated blueprint atlas
+G:/Project_V7_Rotation/alpha_pit_engine_crypto_20260519/runtime/a7ls1_multi_arm_blueprint_generation/a7ls1_materialization_wave_queue.csv,40000,repo,40k materialization wave queue
+G:/Project_V7_Rotation/alpha_pit_engine_crypto_20260519/runtime/a7ls1_multi_arm_blueprint_generation/a7ls1_numeric_wave_queue.csv,8000,repo,8k numeric checkpoint wave queue

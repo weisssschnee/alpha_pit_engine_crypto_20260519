@@ -1,0 +1,5 @@
+a7ls_arm,generated_rows,unique_expressions,semantic_pair_count,motif_count,skeleton_count,primary_field_count,secondary_field_count,materialization_rows,materialization_semantic_pairs,materialization_motifs,materialization_skeletons,numeric_rows,numeric_semantic_pairs,numeric_motifs,numeric_skeletons
+A7LS_A,60000,60000,6,12,115,10,7,10000,6,12,115,2000,6,12,97
+A7LS_B,60000,60000,55,10,114,49,16,10000,52,10,114,2000,16,9,104
+A7LS_C,60000,60000,14,12,104,29,8,10000,14,12,104,2000,12,12,92
+A7LS_D,60000,60000,11,5,51,20,10,10000,11,5,51,2000,8,5,46
