@@ -1,0 +1,11 @@
+semantic_pair,label_family,rows
+low_prior_axes|basis_premium_like,L5_vol_adjusted_return,10
+basis_premium_like,L5_vol_adjusted_return,8
+low_prior_axes|basis_premium_like,L7_ranked_future_return,7
+liquidity_like,L7_ranked_future_return,7
+open_interest_like,L7_ranked_future_return,6
+basis_premium_like,L7_ranked_future_return,2
+price_like,L5_vol_adjusted_return,2
+basis_premium_like,L3_liquidity_tier_relative_return,1
+open_interest_like,L3_liquidity_tier_relative_return,1
+price_like,L7_ranked_future_return,1

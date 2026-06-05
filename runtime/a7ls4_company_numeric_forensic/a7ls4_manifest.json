@@ -1,0 +1,23 @@
+{
+  "authorizes_a7ls5_repair_and_followup_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "listing_age_fields_missing_for_raw_axis_shards",
+    "clue_family_concentration"
+  ],
+  "decision": "PASS_A7LS4_COMPANY_NUMERIC_FORENSIC_READY_FOR_A7LS5_REPAIR_AND_FOLLOWUP",
+  "executes_numeric_probe": false,
+  "executes_search": false,
+  "generated_at": "2026-06-05T10:05:02Z",
+  "input_clue_rows": 45,
+  "input_portfolio_rows": 143,
+  "input_response_rows": 33280,
+  "l7_rank_label_clue_rows": 23,
+  "missing_field_shards": 3,
+  "non_l7_clue_rows": 22,
+  "pass_shards": 6,
+  "shortlist_rows": 22,
+  "stage": "A7LS-4",
+  "top_clue_semantic_pair_share": 0.37777777777777777
+}
