@@ -1,0 +1,11 @@
+semantic_pair,rows
+volatility_like,12
+volatility_like|premium_close_bps,7
+listing_age_like|regime_state,6
+volatility_like|age_percentile_active_universe,6
+basis_premium_like|realized_vol_168h,3
+open_interest_like|positioning_like,2
+basis_premium_like,1
+open_interest_like|mark_index_basis_bps,1
+basis_premium_like|volume_volatility_ratio_168h,1
+listing_age_like,1
