@@ -1,0 +1,29 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_company_numeric_probe": true,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "company_numeric_queue_rows": 659,
+  "company_shard_count": 11,
+  "decision": "PASS_A7LS6_DEEP_FOLLOWUP_QUEUE_READY_FOR_COMPANY_NUMERIC_NO_SEARCH_AUTH",
+  "executes_generation": true,
+  "executes_numeric_probe": false,
+  "executes_search": false,
+  "followup_family_count": 4,
+  "full_generated_pool_rows": 797,
+  "generated_at": "2026-06-05T11:48:37Z",
+  "hours_per_split_target": 2160,
+  "motif_count": 7,
+  "queue_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ls6_deep_followup_queue_contract\\a7ls6_company_numeric_queue.csv",
+  "rows_per_shard": 64,
+  "seed_rows": 99,
+  "semantic_pair_count": 16,
+  "shard_plan_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ls6_deep_followup_queue_contract\\a7ls6_company_shard_plan.csv",
+  "source_seed_files": [
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ls5_company_result_aggregate\\a7ls5_non_l7_shortlist.csv",
+    "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ls5_company_result_aggregate\\a7ls5_non_l7_numeric_clues.csv"
+  ],
+  "stage": "A7LS-6",
+  "uses_may": false
+}

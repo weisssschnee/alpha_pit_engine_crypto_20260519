@@ -35,7 +35,7 @@ from scripts.crypto_a7ff25r6_dense_funding_state_audit import (  # noqa: E402
     shift_matrix as dense_shift_matrix,
 )
 from scripts.crypto_a7al2z2r_broader_non_oi_materialization_repair import strict_symbols  # noqa: E402
-from scripts.crypto_a7al2z4_broader_non_oi_numeric_replay_preflight import smoke_column_indices, spread_series, tstat  # noqa: E402
+from scripts.crypto_a7al2z4_broader_non_oi_numeric_replay_preflight import spread_series, tstat  # noqa: E402
 
 
 STAGE = os.environ.get("A7FF8_STAGE", "A7FF-8")
@@ -77,6 +77,7 @@ QUEUE_LIMIT = int(os.environ.get("A7FF8_QUEUE_LIMIT", "0"))
 MIN_FINITE_SHARE = float(os.environ.get("A7FF8_MIN_FINITE_SHARE", "0.20"))
 MIN_NONZERO_SHARE = float(os.environ.get("A7FF8_MIN_NONZERO_SHARE", "0.01"))
 WRITE_CONTROL_DETAIL = os.environ.get("A7FF8_WRITE_CONTROL_DETAIL", "1").lower() not in {"0", "false", "no"}
+HOURS_PER_SPLIT_OVERRIDE = int(os.environ.get("A7FF8_HOURS_PER_SPLIT", "720"))
 
 FIELD_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
 OPERATORS = {
@@ -104,6 +105,19 @@ DENSE_FUNDING_FIELDS = {
     "funding_rate_delta_state_24h",
     "funding_state_x_basis_delta",
 }
+
+
+def selected_column_indices(timestamps: pd.DatetimeIndex) -> np.ndarray:
+    split = split_for_timestamps(timestamps)
+    if HOURS_PER_SPLIT_OVERRIDE <= 0:
+        return np.arange(len(timestamps), dtype=int)
+    selected: list[int] = []
+    for split_name in SPLIT_ORDER:
+        idx = np.where(split == split_name)[0]
+        if len(idx) == 0:
+            continue
+        selected.extend(idx[-HOURS_PER_SPLIT_OVERRIDE:].tolist())
+    return np.array(sorted(set(selected)), dtype=int)
 
 
 def now_utc() -> str:
@@ -414,7 +428,7 @@ def main() -> None:
                 numeric["funding_state_x_basis_delta"] = funding_delta_24h * (basis - dense_shift_matrix(basis, 24))
         groups = load_group_fields(loaded_symbols, timestamps, {"liquidity_tier"})
         full_timestamp_count = int(len(timestamps))
-        idx = smoke_column_indices(timestamps)
+        idx = selected_column_indices(timestamps)
         timestamps = pd.DatetimeIndex(timestamps[idx])
         numeric = {key: value[:, idx] for key, value in numeric.items()}
         groups = {key: value[:, idx] for key, value in groups.items()}
@@ -543,6 +557,7 @@ def main() -> None:
         "queue_total_rows": int(len(queue_all)),
         "queue_offset": QUEUE_OFFSET,
         "queue_limit": QUEUE_LIMIT,
+        "hours_per_split": HOURS_PER_SPLIT_OVERRIDE,
         "missing_numeric_fields": missing,
         "materialized_activity_ok_count": materialized_count,
         "label_response_rows": int(len(responses)),
