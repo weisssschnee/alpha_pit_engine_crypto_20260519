@@ -1,0 +1,14 @@
+label_family,label_horizon_h,rows
+L1_cross_sectional_relative_return,24,7
+L0_raw_forward_return,24,6
+L1_cross_sectional_relative_return,8,5
+L3_liquidity_tier_relative_return,24,4
+L0_raw_forward_return,8,4
+L1_cross_sectional_relative_return,4,3
+L0_raw_forward_return,4,3
+L5_vol_adjusted_return,1,2
+L3_liquidity_tier_relative_return,8,2
+L3_liquidity_tier_relative_return,4,1
+L3_liquidity_tier_relative_return,1,1
+L5_vol_adjusted_return,8,1
+L5_vol_adjusted_return,24,1
