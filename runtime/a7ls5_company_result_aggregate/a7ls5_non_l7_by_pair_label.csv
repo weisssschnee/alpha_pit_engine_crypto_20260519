@@ -1,0 +1,10 @@
+semantic_pair,label_family,rows
+basis_premium_like,L5_vol_adjusted_return,31
+basis_premium_like,L1_cross_sectional_relative_return,22
+basis_premium_like,L3_liquidity_tier_relative_return,20
+basis_premium_like,L0_raw_forward_return,19
+listing_age_like,L3_liquidity_tier_relative_return,2
+volatility_like,L3_liquidity_tier_relative_return,2
+listing_age_like,L1_cross_sectional_relative_return,1
+volatility_like,L0_raw_forward_return,1
+volatility_like,L1_cross_sectional_relative_return,1

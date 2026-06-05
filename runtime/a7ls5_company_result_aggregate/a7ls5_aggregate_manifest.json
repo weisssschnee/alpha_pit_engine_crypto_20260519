@@ -1,0 +1,25 @@
+{
+  "authorizes_a7ls6_deep_followup_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [
+    "non_l7_family_concentration_high"
+  ],
+  "completed_shards": 9,
+  "decision": "PASS_A7LS5_COMPANY_NUMERIC_AGGREGATED_READY_FOR_A7LS6_DEEP_FOLLOWUP",
+  "executes_numeric_probe": false,
+  "executes_search": false,
+  "expected_shards": 9,
+  "external": "G:\\AlphaFactory_CryptoData\\research_runtime\\a7ls5_company_numeric",
+  "generated_at": "2026-06-05T11:30:33Z",
+  "materialized_activity_ok_total": 490,
+  "non_l7_numeric_clue_rows": 99,
+  "pass_shards": 7,
+  "rank_label_diagnostic_rows": 68,
+  "response_rows": 9800,
+  "shortlist_rows": 64,
+  "stage": "A7LS-5-AGG",
+  "top_non_l7_semantic_pair_share": 0.9292929292929293,
+  "uses_may": false
+}

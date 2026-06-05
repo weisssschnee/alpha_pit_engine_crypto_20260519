@@ -1,0 +1,10 @@
+shard,manifest_path,decision,blockers,missing_numeric_fields,input_blueprint_count,materialized_activity_ok_count,label_response_rows,non_l7_numeric_clue_rows,rank_label_diagnostic_clue_rows,portfolio_queue_count,selected_portfolio_queue_count,generated_at
+s000,G:\AlphaFactory_CryptoData\research_runtime\a7ls5_company_numeric\shard_000\a7ls5_s000_manifest.json,PASS_A7LS5S000_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,,,64,55,1100,32,14,13,11,2026-06-05T11:20:20Z
+s001,G:\AlphaFactory_CryptoData\research_runtime\a7ls5_company_numeric\shard_001\a7ls5_s001_manifest.json,PASS_A7LS5S001_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,,,64,57,1140,27,11,11,10,2026-06-05T11:20:31Z
+s002,G:\AlphaFactory_CryptoData\research_runtime\a7ls5_company_numeric\shard_002\a7ls5_s002_manifest.json,PASS_A7LS5S002_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,,,64,58,1160,16,9,12,11,2026-06-05T11:20:37Z
+s003,G:\AlphaFactory_CryptoData\research_runtime\a7ls5_company_numeric\shard_003\a7ls5_s003_manifest.json,PASS_A7LS5S003_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,,,64,59,1180,17,3,9,7,2026-06-05T11:20:48Z
+s004,G:\AlphaFactory_CryptoData\research_runtime\a7ls5_company_numeric\shard_004\a7ls5_s004_manifest.json,PASS_A7LS5S004_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,,,64,64,1280,2,5,5,5,2026-06-05T11:20:25Z
+s005,G:\AlphaFactory_CryptoData\research_runtime\a7ls5_company_numeric\shard_005\a7ls5_s005_manifest.json,HOLD_A7LS5S005_PORTFOLIO_QUEUE_TOO_SMALL,portfolio_selected_lt_4,,64,61,1220,1,3,2,2,2026-06-05T11:20:44Z
+s006,G:\AlphaFactory_CryptoData\research_runtime\a7ls5_company_numeric\shard_006\a7ls5_s006_manifest.json,HOLD_A7LS5S006_NO_NON_L7_NUMERIC_CLUES,no_non_l7_numeric_clues,,64,62,1240,0,0,0,0,2026-06-05T11:25:00Z
+s007,G:\AlphaFactory_CryptoData\research_runtime\a7ls5_company_numeric\shard_007\a7ls5_s007_manifest.json,PASS_A7LS5S007_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,,,64,55,1100,1,17,13,12,2026-06-05T11:24:28Z
+s008,G:\AlphaFactory_CryptoData\research_runtime\a7ls5_company_numeric\shard_008\a7ls5_s008_manifest.json,PASS_A7LS5S008_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,,,19,19,380,3,6,4,4,2026-06-05T11:22:19Z
