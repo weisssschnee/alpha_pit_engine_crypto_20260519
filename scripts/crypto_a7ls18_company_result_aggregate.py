@@ -124,7 +124,8 @@ def main() -> None:
     shard_plan = read_csv(external / "a7ls18_shard_plan.csv")
     shard_summary, decision_counts, selected_queue, family_summary = collect_shards(external)
 
-    expected_shards = int(queue_manifest.get("shard_count", len(shard_plan)) or 0)
+    discovered_shards = shard_dirs(external)
+    expected_shards = int(queue_manifest.get("shard_count", len(shard_plan) or len(discovered_shards)) or 0)
     completed_shards = int(shard_summary["has_manifest"].sum()) if not shard_summary.empty else 0
     missing_shards: list[str] = []
     if not shard_plan.empty and "shard_id" in shard_plan.columns:
@@ -178,7 +179,7 @@ def main() -> None:
         "expected_shards": expected_shards,
         "completed_shards": completed_shards,
         "missing_shards": missing_shards,
-        "queue_rows": int(queue_manifest.get("queue_rows", 0) or 0),
+        "queue_rows": int(queue_manifest.get("queue_rows", int(shard_summary["queue_rows"].sum()) if not shard_summary.empty else 0) or 0),
         "label_response_rows": total_responses,
         "materialized_activity_ok_count": total_activity,
         "non_l7_numeric_clue_rows": total_non_l7,
