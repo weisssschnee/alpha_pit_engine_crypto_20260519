@@ -1,0 +1,22 @@
+{
+  "authorizes_a7ls14_replay_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "candidate_level_rows": 31,
+  "decision": "PASS_A7LS13_CONSOLIDATED_REPLAY_PACKET_READY_NO_SEARCH_AUTH",
+  "executes_search": false,
+  "generated_at": "2026-06-06T03:10:21Z",
+  "input_decision": "PASS_A7LS12_DEEP_AUDIT_AGGREGATED_CLUES_FOUND_NO_SEARCH_AUTH",
+  "input_non_l7_clue_rows": 244,
+  "multi_label_control_clean_rows": 11,
+  "packet_label_bundle_count": 5,
+  "packet_next_wave_family_count": 7,
+  "packet_source_axis_count": 4,
+  "priority_multi_label_rows": 11,
+  "replay_packet_rows": 25,
+  "stage": "A7LS-13",
+  "uses_may": false
+}
