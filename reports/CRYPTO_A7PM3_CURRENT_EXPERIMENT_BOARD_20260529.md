@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-06T05:32:34Z
+Generated: 2026-06-06T07:08:40Z
 
 ## Decision
 
@@ -8,23 +8,22 @@ Generated: 2026-06-06T05:32:34Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                             | next                                   |
-|:----------------------------|:----------------|:---------------------------------------------------|:---------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                               | keep registry as source-of-truth       |
-| a7ff_family_diversification | A7LS-16X        | scale_up_authorized_4m_checkpointed_company_search | A7LS17 company sharded materialization |
-| a7ls_scaled_search          | A7LS-14X        | scoped_large_search_authorized                     | A7LS15/A7LS16/A7LS17/A7LS18 pipeline   |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                        | A7FF-24R4E if explicitly authorized    |
-| search_execution            | A7LS-16X        | scale_up_authorized_4m_checkpointed_company_search | A7LS17 company sharded materialization |
+| workstream                  | current_stage   | status                                         | next                                 |
+|:----------------------------|:----------------|:-----------------------------------------------|:-------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                                           | keep registry as source-of-truth     |
+| a7ff_family_diversification | A7LS-17         | company_materialization_pass_ready_for_numeric | A7LS18 company sharded numeric wave  |
+| a7ls_scaled_search          | A7LS-14X        | scoped_large_search_authorized                 | A7LS15/A7LS16/A7LS17/A7LS18 pipeline |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution                    | A7FF-24R4E if explicitly authorized  |
+| search_execution            | A7LS-17         | company_materialization_pass_ready_for_numeric | A7LS18 company sharded numeric wave  |
 
 ## Allowed Next Tasks
 
 | task                                          | reason                                                                                                                    |
 |:----------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------|
-| A7LS17 company sharded materialization        | authorized by A7LS16X; materialization_total <= 400,000; 400 shards; checkpointed                                         |
-| A7LS18 company sharded numeric wave           | authorized after A7LS17; numeric_total <= 100,000; 1,024 shards; checkpointed                                             |
+| A7LS18 company sharded numeric wave           | authorized by A7LS17 aggregate; numeric_total <= 100,000; checkpointed company-machine execution                          |
 | A7LS19 checkpoint arbitration and lane resize | authorized after A7LS18 checkpoints; continue / kill / expand per lane                                                    |
 | A7LS15X expansion queue generation            | authorized by A7LS16X if A7LS15 100k first wave is exhausted or checkpoint-positive; generated_total ceiling <= 4,000,000 |
-| A7PM-0/3 maintenance                          | keep A7LS16X scoped large-search authorization current                                                                    |
+| A7PM-0/3 maintenance                          | keep A7LS17/A7LS18 scoped large-search source-of-truth current                                                            |
 
 ## Blocked Tasks
 

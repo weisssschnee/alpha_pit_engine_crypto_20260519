@@ -1,7 +1,6 @@
 {
   "A7LS15X expansion queue generation": "authorized by A7LS16X if A7LS15 100k first wave is exhausted or checkpoint-positive; generated_total ceiling <= 4,000,000",
-  "A7LS17 company sharded materialization": "authorized by A7LS16X; materialization_total <= 400,000; 400 shards; checkpointed",
-  "A7LS18 company sharded numeric wave": "authorized after A7LS17; numeric_total <= 100,000; 1,024 shards; checkpointed",
+  "A7LS18 company sharded numeric wave": "authorized by A7LS17 aggregate; numeric_total <= 100,000; checkpointed company-machine execution",
   "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
-  "A7PM-0/3 maintenance": "keep A7LS16X scoped large-search authorization current"
+  "A7PM-0/3 maintenance": "keep A7LS17/A7LS18 scoped large-search source-of-truth current"
 }
