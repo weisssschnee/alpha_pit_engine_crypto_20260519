@@ -1,0 +1,10 @@
+next_wave_family,rows
+raw_multi_axis_probe,80
+basis_context_interaction,66
+vol_liquidity_interaction,66
+positioning_context_interaction,64
+listing_state_interaction,40
+vol_liquidity_deep,18
+positioning_flow_recovery,3
+basis_crowding_deep,1
+listing_lifecycle_deep,1
