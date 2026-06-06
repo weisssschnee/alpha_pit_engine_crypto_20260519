@@ -1,0 +1,12 @@
+semantic_pair,rows
+basis_premium|basis_premium,59
+basis_premium_like|age_x_volatility,50
+volatility_like|volume_volatility_ratio_168h,45
+basis_premium|positioning_flow,32
+volatility_like,20
+listing_age_like|regime_state,15
+volatility_like|liquidity_rank_active_universe,14
+volatility_like|trade_volume,6
+open_interest_like|positioning_like,1
+open_interest_like|age_x_liquidity,1
+open_interest_like|liquidity_rank_active_universe,1
