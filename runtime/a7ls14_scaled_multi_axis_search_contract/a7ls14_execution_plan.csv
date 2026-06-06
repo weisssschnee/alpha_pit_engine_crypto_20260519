@@ -1,0 +1,7 @@
+step,name,runs_heavy_compute,output
+A7LS14-0,scaled contract and seed-map freeze,False,this stage
+A7LS15,million-scale multi-axis blueprint generation,False,"1,000,000 blueprint index plus shard plan"
+A7LS16,local preflight and field/materialization smoke,False,512-row preflight
+A7LS17,company sharded materialization,True,"100,000 materialized queue rows"
+A7LS18,company sharded numeric wave,True,"25,000 numeric rows with checkpoints"
+A7LS19,checkpoint arbitration and lane resize,False,continue/kill/expand decisions per lane

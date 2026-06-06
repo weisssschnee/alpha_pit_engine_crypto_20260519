@@ -1,0 +1,16 @@
+{
+  "authorized": {
+    "A7LS15_million_scale_blueprint_generation": true,
+    "A7LS16_local_preflight": true,
+    "A7LS17_company_materialization": true,
+    "A7LS18_company_numeric_wave": true,
+    "raw_multi_axis_reserved_lane": true
+  },
+  "not_authorized": {
+    "May_in_selector_or_reward": true,
+    "alpha_proof": true,
+    "shadow_paper_live": true,
+    "single_lane_budget_capture": true,
+    "unbounded_full_grammar": true
+  }
+}

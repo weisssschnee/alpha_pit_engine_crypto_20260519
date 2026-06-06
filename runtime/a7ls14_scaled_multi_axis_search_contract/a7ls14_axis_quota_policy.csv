@@ -1,0 +1,10 @@
+axis,min_numeric_share,max_numeric_share,can_dominate
+basis_premium,0.08,0.22,False
+vol_liquidity,0.08,0.2,False
+raw_multi_axis,0.2,0.35,False
+positioning,0.08,0.18,False
+listing_state,0.06,0.15,False
+OI,0.06,0.16,False
+taker_flow,0.05,0.14,False
+funding_state,0.05,0.14,False
+control_entropy,0.08,0.18,False

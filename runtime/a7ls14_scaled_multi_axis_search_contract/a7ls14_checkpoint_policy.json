@@ -1,0 +1,46 @@
+{
+  "checkpoint_numeric_intervals": [
+    2000,
+    5000,
+    10000,
+    15000,
+    20000,
+    25000
+  ],
+  "company_max_parallel_default": 3,
+  "company_max_parallel_if_memory_free_gb_ge_18": 4,
+  "company_numeric_shard_target": 256,
+  "execution_style": "large_scale_checkpointed_multi_axis",
+  "generated_total": 1000000,
+  "global_kill_rules": [
+    "eval_failure_rate > 0.05 after 2000 numeric rows",
+    "control_dominated_rate > 0.65 after 5000 numeric rows",
+    "non_l7_numeric_clue_rate == 0 after 5000 numeric rows",
+    "single_source_axis_share > 0.55 after checkpoint diversity repair",
+    "single_skeleton_share > 0.20 in selected queue",
+    "L7_ranked_label_share > 0.55 in selected queue"
+  ],
+  "hard_boundaries": {
+    "alpha_proof": false,
+    "may_in_selector": false,
+    "same_objective_single_lane_capture": false,
+    "shadow_paper_live": false,
+    "unbounded_full_grammar": false
+  },
+  "lane_expand_rules": [
+    "non_l7_numeric_clue_rate >= 0.006",
+    "control_dominated_rate <= 0.35",
+    "at least 3 label families survive",
+    "at least 4 semantic pairs survive",
+    "selected queue has >= 8 candidates after caps"
+  ],
+  "lane_minimum_runtime": {
+    "raw_multi_axis_reserved_search": "do_not_kill_before_3000_numeric_rows_unless_eval_failure_or_control_dominates",
+    "underrepresented_axis_rescue": "do_not_kill_before_2000_numeric_rows_unless_eval_failure_or_control_dominates"
+  },
+  "local_light_preflight_rows": 512,
+  "materialization_total": 100000,
+  "numeric_rows_per_shard_target": 96,
+  "numeric_total": 25000,
+  "stage": "A7LS-14"
+}
