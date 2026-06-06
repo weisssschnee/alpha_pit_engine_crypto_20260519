@@ -69,6 +69,7 @@ DERIVED_DEPS = {
     "open_interest_value_change_24h": {"open_interest_value_last"},
     "funding_rate_persistence_24h": {"funding_rate"},
     "premium_abs_state": {"premium_close_bps"},
+    "quote_volume_z_168h": {"trade_quote_volume"},
     "account_position_divergence": {"top_long_short_position_ratio_last", "top_long_short_account_ratio_last"},
     "top_global_account_divergence": {"top_long_short_account_ratio_last", "global_long_short_account_ratio_last"},
 }
@@ -235,6 +236,8 @@ def load_numeric(fields: set[str]) -> tuple[dict[str, np.ndarray], dict[str, str
         numeric["funding_rate_persistence_24h"] = rolling_mean(numeric["funding_rate"], 24)
     if "premium_abs_state" in derived_fields:
         numeric["premium_abs_state"] = np.abs(numeric["premium_close_bps"])
+    if "quote_volume_z_168h" in derived_fields:
+        numeric["quote_volume_z_168h"] = rolling_mean_std_z(numeric["trade_quote_volume"], 168, 48)
     if "account_position_divergence" in derived_fields:
         numeric["account_position_divergence"] = numeric["top_long_short_position_ratio_last"] - numeric["top_long_short_account_ratio_last"]
     if "top_global_account_divergence" in derived_fields:
