@@ -28,17 +28,18 @@ BLOCKED_TASKS = {
     "A7AL-2Y": "formula generation/search execution not authorized",
     "A7AL-3": "large search not authorized",
     "direct_OI_price_rerun": "same objective rerun not authorized",
-    "formula_search_outside_A7LS14": "not authorized",
-    "large_search_outside_A7LS14": "not authorized; A7LS-14X authorizes only checkpointed A7LS15-A7LS18 scoped large search",
+    "formula_search_outside_A7LS_scope": "not authorized",
+    "large_search_outside_A7LS_scope": "not authorized; A7LS-14X/A7LS-16X authorize only checkpointed A7LS scoped large search",
     "alpha_proof": "not authorized",
     "shadow_paper_live": "not authorized",
 }
 
 NEXT_ALLOWED_TASKS = {
-    "A7LS15 million-scale multi-axis blueprint generation": "authorized by A7LS-14X scoped large-search arbitration; generated_total <= 1,000,000",
-    "A7LS16 local preflight and materialization smoke": "authorized by A7LS-14X before company materialization",
-    "A7LS17 company sharded materialization": "authorized after A7LS16 preflight; materialization_total <= 100,000",
-    "A7LS18 company sharded numeric wave": "authorized after materialization; numeric_total <= 25,000 with checkpoints",
+    "A7LS15 million-scale multi-axis blueprint generation": "completed under A7LS-14X baseline; generated_total = 1,000,000",
+    "A7LS16 local preflight and materialization smoke": "completed; field/operator schema preflight passed",
+    "A7LS16X 4M scale-up authorization": "authorized after A7LS16; generated_total <= 4,000,000, materialization_total <= 400,000, numeric_total <= 100,000",
+    "A7LS17 company sharded materialization": "authorized after A7LS16X; materialization_total <= 400,000",
+    "A7LS18 company sharded numeric wave": "authorized after materialization; numeric_total <= 100,000 with checkpoints",
     "A7FF-52E materialization preflight execution option": "requires explicit authorization; 1200 family-balanced rows; no numeric replay/search",
     "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
@@ -292,8 +293,13 @@ def apply_special_status(row: dict[str, Any]) -> dict[str, Any]:
         notes.append("A7LS-14 authorizes only checkpointed multi-axis A7LS15-A7LS18 large search; proof/live remain blocked")
     elif stage in {"A7LS-14X", "A7LS14X"}:
         row["current_status"] = "current_valid_scoped_large_search_arbitration"
+        row["superseded_by"] = "A7LS-16X"
         row["supersedes"] = "global_large_search_block_for_a7ls14_scope"
-        notes.append("A7LS-14X resolves old global no-large-search record for A7LS14 scope only")
+        notes.append("A7LS-14X resolves old global no-large-search record for A7LS14 baseline scope; A7LS-16X supersedes its scale ceilings")
+    elif stage in {"A7LS-16X", "A7LS16X"}:
+        row["current_status"] = "current_valid_scoped_large_search_scale_up"
+        row["supersedes"] = "A7LS-14X scale ceilings for future company execution"
+        notes.append("A7LS-16X authorizes only checkpointed 4M-scale A7LS company-machine search; proof/live remain blocked")
     elif stage in {"A7AL-2P2", "A7AL2P2"} or "A7AL2P2" in stage:
         row["current_status"] = "superseded_diagnostic"
         row["superseded_by"] = "A7AL-2X0"
@@ -433,6 +439,7 @@ def main() -> None:
         "current_valid_governance",
         "current_valid_scoped_large_search_contract",
         "current_valid_scoped_large_search_arbitration",
+        "current_valid_scoped_large_search_scale_up",
     }
     conflict_df = stage_df[
         stage_df["current_status"].eq("authorization_conflict_review")
@@ -451,6 +458,7 @@ def main() -> None:
                 "engineering_pass_signal_hold",
                 "current_valid_scoped_large_search_contract",
                 "current_valid_scoped_large_search_arbitration",
+                "current_valid_scoped_large_search_scale_up",
             ]
         )
     ].copy()
@@ -483,12 +491,20 @@ def main() -> None:
         "executes_training": False,
         "authorizes_search": bool(
             stage_df["current_status"].isin(
-                ["current_valid_scoped_large_search_contract", "current_valid_scoped_large_search_arbitration"]
+                [
+                    "current_valid_scoped_large_search_contract",
+                    "current_valid_scoped_large_search_arbitration",
+                    "current_valid_scoped_large_search_scale_up",
+                ]
             ).any()
         ),
         "authorizes_large_search": bool(
             stage_df["current_status"].isin(
-                ["current_valid_scoped_large_search_contract", "current_valid_scoped_large_search_arbitration"]
+                [
+                    "current_valid_scoped_large_search_contract",
+                    "current_valid_scoped_large_search_arbitration",
+                    "current_valid_scoped_large_search_scale_up",
+                ]
             ).any()
         ),
         "authorizes_alpha_proof": False,

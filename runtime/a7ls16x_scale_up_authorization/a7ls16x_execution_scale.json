@@ -1,0 +1,35 @@
+{
+  "baseline_stage": "A7LS-14",
+  "checkpoint_materialization_intervals": [
+    25000,
+    50000,
+    100000,
+    200000,
+    300000,
+    400000
+  ],
+  "checkpoint_numeric_intervals": [
+    5000,
+    12000,
+    25000,
+    50000,
+    75000,
+    100000
+  ],
+  "company_materialization_shards": 400,
+  "company_numeric_shard_target": 1024,
+  "company_parallel_default": 3,
+  "company_parallel_hard_cap": 6,
+  "company_parallel_if_free_memory_gb_ge_24": 5,
+  "generated_total": 4000000,
+  "materialization_rows_per_shard": 1000,
+  "materialization_total": 400000,
+  "numeric_rows_per_shard_target": 96,
+  "numeric_total": 100000,
+  "raw_lane_minimum_numeric_before_kill": 12000,
+  "raw_reserved_generated_budget": 1400000,
+  "raw_reserved_numeric_budget": 35000,
+  "scale_profile": "large_company_checkpointed_4m",
+  "stage": "A7LS-16X",
+  "uses_may": false
+}

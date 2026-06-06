@@ -1,7 +1,7 @@
 {
   "May-informed selector/reward": "blocked",
   "alpha proof": "not authorized",
-  "large_search_outside_A7LS14": "blocked: A7LS-14X authorizes only checkpointed A7LS15-A7LS18 scope",
+  "large_search_outside_A7LS_scope": "blocked: A7LS-14X/A7LS-16X authorize only checkpointed A7LS company-machine scope",
   "shadow/paper/live": "not authorized",
   "single_lane_budget_capture": "blocked by A7LS14 quota/checkpoint policy",
   "unbounded_full_grammar": "blocked"

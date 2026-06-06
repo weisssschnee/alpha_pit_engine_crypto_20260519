@@ -1,0 +1,15 @@
+{
+  "authorizes_a7ls15x_expansion_blueprint_generation": true,
+  "authorizes_a7ls17_company_materialization": true,
+  "authorizes_a7ls18_company_numeric_wave": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": true,
+  "authorizes_scoped_large_search": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7LS16X_4M_SCALE_UP_AUTHORIZATION_READY",
+  "generated_total_limit": 4000000,
+  "materialization_total_limit": 400000,
+  "numeric_total_limit": 100000,
+  "scope_boundary": "checkpointed A7LS company-machine pipeline only",
+  "stage": "A7LS-16X"
+}

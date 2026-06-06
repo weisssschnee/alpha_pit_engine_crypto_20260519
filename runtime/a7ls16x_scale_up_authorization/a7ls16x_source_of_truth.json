@@ -1,0 +1,12 @@
+{
+  "current_queue_status": "A7LS15 100k materialization queue remains usable as first wave; A7LS16X authorizes expansion queue generation after A7LS17 checkpoints",
+  "does_not_rewrite_historical_artifacts": true,
+  "local_execution_allowed": "schema/checkpoint bookkeeping only",
+  "remote_execution_required": true,
+  "requires": [
+    "A7LS-14X",
+    "A7LS-15",
+    "A7LS-16"
+  ],
+  "supersedes_scale_limits_from": "A7LS-14 for future A7LS17/A7LS18 execution ceilings only"
+}

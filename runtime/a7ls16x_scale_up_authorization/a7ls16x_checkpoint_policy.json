@@ -1,0 +1,26 @@
+{
+  "expand_rules": [
+    "lane non_l7_numeric_clue_rate >= 0.004 and control_dominated_rate <= 0.45",
+    "at least 3 label families and 4 semantic pairs survive in lane",
+    "portfolio_marginal_proxy positive after cluster cap"
+  ],
+  "hard_boundaries": {
+    "alpha_proof": false,
+    "local_heavy_numeric_execution": false,
+    "may_in_selector_or_reward": false,
+    "shadow_paper_live": false,
+    "single_lane_budget_capture": false,
+    "unbounded_full_grammar": false
+  },
+  "kill_rules_after_minimum_runtime": [
+    "eval_failure_rate > 0.06 after lane minimum numeric rows",
+    "control_dominated_rate > 0.72 after lane minimum numeric rows",
+    "field_contract_violation_count > 0 after adapter repair window",
+    "single_skeleton_share > 0.25 after checkpoint diversity repair"
+  ],
+  "non_kill_rules": [
+    "do not kill raw_multi_axis_frontier for low non-L7 rate before 12,000 numeric rows",
+    "do not kill underrepresented_axis_expansion for low hit rate before 8,000 numeric rows",
+    "do not collapse all lanes into basis_premium even if early checkpoints favor it"
+  ]
+}

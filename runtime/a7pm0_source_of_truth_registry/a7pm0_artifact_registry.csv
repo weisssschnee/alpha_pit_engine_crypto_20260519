@@ -4121,13 +4121,19 @@ runtime,A7LS-15,runtime/a7ls15_million_scale_blueprint_generation/a7ls15_bluepri
 runtime,A7LS-15,runtime/a7ls15_million_scale_blueprint_generation/a7ls15_lane_generation_summary.csv,7d5aa8b,add crypto a7ls15 million scale blueprint generation,735
 runtime,A7LS-15,runtime/a7ls15_million_scale_blueprint_generation/a7ls15_manifest.json,7d5aa8b,add crypto a7ls15 million scale blueprint generation,933
 runtime,A7LS-15,runtime/a7ls15_million_scale_blueprint_generation/a7ls15_materialization_shard_plan.csv,7d5aa8b,add crypto a7ls15 million scale blueprint generation,29550
-runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_error_summary.csv,,,12
-runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_field_schema_audit.csv,,,2151
-runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_lane_preflight_summary.csv,,,130
-runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_manifest.json,,,630
-runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_materialization_smoke_metrics.csv,,,33963
-runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_operator_audit.csv,,,232
-runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_preflight_sample.csv,,,106760
+runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_error_summary.csv,c01a36a,add crypto a7ls16 local preflight,12
+runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_field_schema_audit.csv,c01a36a,add crypto a7ls16 local preflight,2151
+runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_lane_preflight_summary.csv,c01a36a,add crypto a7ls16 local preflight,130
+runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_manifest.json,c01a36a,add crypto a7ls16 local preflight,630
+runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_materialization_smoke_metrics.csv,c01a36a,add crypto a7ls16 local preflight,33963
+runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_operator_audit.csv,c01a36a,add crypto a7ls16 local preflight,232
+runtime,A7LS-16,runtime/a7ls16_local_preflight/a7ls16_preflight_sample.csv,c01a36a,add crypto a7ls16 local preflight,106760
+runtime,A7LS-16X,runtime/a7ls16x_scale_up_authorization/a7ls16x_authorization_matrix.json,,,599
+runtime,A7LS-16X,runtime/a7ls16x_scale_up_authorization/a7ls16x_checkpoint_policy.json,,,1122
+runtime,A7LS-16X,runtime/a7ls16x_scale_up_authorization/a7ls16x_execution_scale.json,,,890
+runtime,A7LS-16X,runtime/a7ls16x_scale_up_authorization/a7ls16x_lane_budget_map.csv,,,1500
+runtime,A7LS-16X,runtime/a7ls16x_scale_up_authorization/a7ls16x_manifest.json,,,1488
+runtime,A7LS-16X,runtime/a7ls16x_scale_up_authorization/a7ls16x_source_of_truth.json,,,490
 runtime,A7LS-2,runtime/a7ls2_sharded_materialization_wave/a7ls2_checkpoint_status.csv,8ae2133,run crypto a7ls2 materialization checkpoint,566
 runtime,A7LS-2,runtime/a7ls2_sharded_materialization_wave/a7ls2_manifest.json,8ae2133,run crypto a7ls2 materialization checkpoint,716
 runtime,A7LS-2,runtime/a7ls2_sharded_materialization_wave/a7ls2_materialization_metrics_executed.csv,8ae2133,run crypto a7ls2 materialization checkpoint,576922
@@ -4279,7 +4285,8 @@ report,A7LS13,reports/CRYPTO_A7LS13_CONSOLIDATION_REPLAY_PACKET_20260606.md,2ff5
 report,A7LS14,reports/CRYPTO_A7LS14_SCALED_MULTI_AXIS_SEARCH_CONTRACT_20260606.md,d19cfc8,add crypto a7ls14 scaled multi axis search contract,8191
 report,A7LS14X,reports/CRYPTO_A7LS14X_AUTHORIZATION_ARBITRATION_20260606.md,3b00007,add crypto a7ls14x scoped search arbitration,4693
 report,A7LS15,reports/CRYPTO_A7LS15_MILLION_SCALE_BLUEPRINT_GENERATION_20260606.md,7d5aa8b,add crypto a7ls15 million scale blueprint generation,2660
-report,A7LS16,reports/CRYPTO_A7LS16_LOCAL_PREFLIGHT_20260606.md,,,2172
+report,A7LS16,reports/CRYPTO_A7LS16_LOCAL_PREFLIGHT_20260606.md,c01a36a,add crypto a7ls16 local preflight,2172
+report,A7LS16X,reports/CRYPTO_A7LS16X_SCALE_UP_AUTHORIZATION_20260606.md,,,6153
 report,A7LS2,reports/CRYPTO_A7LS2_SHARDED_MATERIALIZATION_WAVE_20260605.md,8ae2133,run crypto a7ls2 materialization checkpoint,7247
 report,A7LS3,reports/CRYPTO_A7LS3_NUMERIC_CHECKPOINT_FROM_MATERIALIZED_20260605.md,b23e316,prepare crypto a7ls3 company numeric handoff,2130
 report,A7LS3H,reports/CRYPTO_A7LS3H_COMPANY_NUMERIC_HANDOFF_20260605.md,b23e316,prepare crypto a7ls3 company numeric handoff,9586
@@ -4299,14 +4306,14 @@ runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_approval_opti
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_contracts.json,5604776,add crypto night taskflow contracts,1530
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_manifest.json,44bd9de,add crypto a7ff execution contracts,715
 runtime,A7NIGHT-20260531,runtime/a7night_taskflow_20260531/a7night_selfcheck.csv,44bd9de,add crypto a7ff execution contracts,851
-report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,7d5aa8b,add crypto a7ls15 million scale blueprint generation,7939
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,7d5aa8b,add crypto a7ls15 million scale blueprint generation,695791
+report,A7PM-0,reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md,c01a36a,add crypto a7ls16 local preflight,7882
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv,c01a36a,add crypto a7ls16 local preflight,696885
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv,3b00007,add crypto a7ls14x scoped search arbitration,131576
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json,3b00007,add crypto a7ls14x scoped search arbitration,1419
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,7d5aa8b,add crypto a7ls15 million scale blueprint generation,278706
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,7d5aa8b,add crypto a7ls15 million scale blueprint generation,708
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json,c01a36a,add crypto a7ls16 local preflight,279448
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json,c01a36a,add crypto a7ls16 local preflight,708
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json,3b00007,add crypto a7ls14x scoped search arbitration,848
-runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,7d5aa8b,add crypto a7ls15 million scale blueprint generation,153462
+runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv,c01a36a,add crypto a7ls16 local preflight,153769
 runtime,A7PM-0,runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv,3b00007,add crypto a7ls14x scoped search arbitration,640
 report,A7PM-1,reports/CRYPTO_A7PM1_ASSET_TAXONOMY_AND_MODULARIZATION_PLAN_20260529.md,de26507,add crypto a7pm governance registry,3447
 runtime,A7PM-1,runtime/a7pm1_asset_taxonomy/a7pm1_code_asset_inventory.csv,de26507,add crypto a7pm governance registry,18742
@@ -4324,12 +4331,12 @@ runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_forbidden_transitions.csv
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_label_dictionary.csv,de26507,add crypto a7pm governance registry,866
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_manifest.json,de26507,add crypto a7pm governance registry,457
 runtime,A7PM-2,runtime/a7pm2_candidate_lifecycle/a7pm2_promotion_gate_matrix.csv,de26507,add crypto a7pm governance registry,465
-report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,7d5aa8b,add crypto a7ls15 million scale blueprint generation,2952
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,7d5aa8b,add crypto a7ls15 million scale blueprint generation,488
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,7d5aa8b,add crypto a7ls15 million scale blueprint generation,434
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,3b00007,add crypto a7ls14x scoped search arbitration,349
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,7d5aa8b,add crypto a7ls15 million scale blueprint generation,1302
-runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,7d5aa8b,add crypto a7ls15 million scale blueprint generation,424
+report,A7PM-3,reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md,c01a36a,add crypto a7ls16 local preflight,3693
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv,c01a36a,add crypto a7ls16 local preflight,536
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json,c01a36a,add crypto a7ls16 local preflight,633
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json,3b00007,add crypto a7ls14x scoped search arbitration,368
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json,c01a36a,add crypto a7ls16 local preflight,1302
+runtime,A7PM-3,runtime/a7pm3_experiment_board/a7pm3_manifest.json,c01a36a,add crypto a7ls16 local preflight,424
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_family_distribution.csv,d18f2d5,add crypto response backed alpha pool gates,47
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_generated_pool.csv,d18f2d5,add crypto response backed alpha pool gates,3219
 runtime,A7POOL-0,runtime/a7pool0_alpha_eligible_pool/a7pool0_manifest.json,d18f2d5,add crypto response backed alpha pool gates,663

@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-06T05:11:05Z
+Generated: 2026-06-06T05:31:19Z
 
 ## Decision
 
@@ -15,14 +15,16 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
+ M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
+ M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7LS16_LOCAL_PREFLIGHT_20260606.md
-?? runtime/a7ls16_local_preflight/
-?? scripts/crypto_a7ls16_local_preflight.py
-HEAD=7d5aa8bde69930edb438bc778a9ddb283819b21d
-origin/main=7d5aa8bde69930edb438bc778a9ddb283819b21d
+?? reports/CRYPTO_A7LS16X_SCALE_UP_AUTHORIZATION_20260606.md
+?? runtime/a7ls16x_scale_up_authorization/
+?? scripts/crypto_a7ls16x_scale_up_authorization.py
+HEAD=c01a36ac3af6885a2297976e221ca84217f92572
+origin/main=c01a36ac3af6885a2297976e221ca84217f92572
 HEAD == origin/main: True
 ```
 
@@ -30,8 +32,8 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 4513,
-  "authorization_record_count": 851,
+  "artifact_count": 4520,
+  "authorization_record_count": 864,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
   "authorizes_a7pm3": true,
@@ -44,12 +46,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-06T05:11:05Z",
-  "head": "7d5aa8bde69930edb438bc778a9ddb283819b21d",
+  "generated_at": "2026-06-06T05:31:19Z",
+  "head": "c01a36ac3af6885a2297976e221ca84217f92572",
   "head_equals_origin_main": true,
-  "origin_main": "7d5aa8bde69930edb438bc778a9ddb283819b21d",
+  "origin_main": "c01a36ac3af6885a2297976e221ca84217f92572",
   "stage": "A7PM-0",
-  "stage_count": 472
+  "stage_count": 473
 }
 ```
 
@@ -61,6 +63,7 @@ HEAD == origin/main: True
 | current_valid_governance                      | contract                   |       1 |
 | current_valid_scoped_large_search_arbitration | governance_or_audit        |       1 |
 | current_valid_scoped_large_search_contract    | contract                   |       1 |
+| current_valid_scoped_large_search_scale_up    | governance_or_audit        |       1 |
 | engineering_pass_signal_hold                  | hold                       |       6 |
 | engineering_pass_signal_hold                  | contract                   |       4 |
 | engineering_pass_signal_hold                  | diagnostic                 |       3 |
@@ -78,13 +81,14 @@ HEAD == origin/main: True
 
 ## Supersession Map
 
-| stage_id              | supersedes                                 | superseded_by   | current_status                                | notes                                                                                                 |
-|:----------------------|:-------------------------------------------|:----------------|:----------------------------------------------|:------------------------------------------------------------------------------------------------------|
-| A7AL-2P2              |                                            | A7AL-2X0        | superseded_diagnostic                         | A7AL-2P2 superseded by A7AL-2X0 arbitration                                                           |
-| A7AL-2Q               |                                            | A7AL-2X0        | not_authorized                                | A7AL-2Q local execution not authorized                                                                |
-| A7LS-14               |                                            | A7LS-14X        | current_valid_scoped_large_search_contract    | A7LS-14 authorizes only checkpointed multi-axis A7LS15-A7LS18 large search; proof/live remain blocked |
-| A7LS-14X              | global_large_search_block_for_a7ls14_scope |                 | current_valid_scoped_large_search_arbitration | A7LS-14X resolves old global no-large-search record for A7LS14 scope only                             |
-| COMPANY-A7AL2Q2R-FULL |                                            | A7AL-2X0        | not_authorized                                | A7AL-2Q local execution not authorized                                                                |
+| stage_id              | supersedes                                           | superseded_by   | current_status                                | notes                                                                                                                 |
+|:----------------------|:-----------------------------------------------------|:----------------|:----------------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
+| A7AL-2P2              |                                                      | A7AL-2X0        | superseded_diagnostic                         | A7AL-2P2 superseded by A7AL-2X0 arbitration                                                                           |
+| A7AL-2Q               |                                                      | A7AL-2X0        | not_authorized                                | A7AL-2Q local execution not authorized                                                                                |
+| A7LS-14               |                                                      | A7LS-14X        | current_valid_scoped_large_search_contract    | A7LS-14 authorizes only checkpointed multi-axis A7LS15-A7LS18 large search; proof/live remain blocked                 |
+| A7LS-14X              | global_large_search_block_for_a7ls14_scope           | A7LS-16X        | current_valid_scoped_large_search_arbitration | A7LS-14X resolves old global no-large-search record for A7LS14 baseline scope; A7LS-16X supersedes its scale ceilings |
+| A7LS-16X              | A7LS-14X scale ceilings for future company execution |                 | current_valid_scoped_large_search_scale_up    | A7LS-16X authorizes only checkpointed 4M-scale A7LS company-machine search; proof/live remain blocked                 |
+| COMPANY-A7AL2Q2R-FULL |                                                      | A7AL-2X0        | not_authorized                                | A7AL-2Q local execution not authorized                                                                                |
 
 ## Blocked Tasks
 
@@ -103,8 +107,8 @@ HEAD == origin/main: True
   "A7FF-52E execution": "pending explicit materialization-preflight authorization; A7FF-52 contract is ready but does not execute materialization",
   "alpha_proof": "not authorized",
   "direct_OI_price_rerun": "same objective rerun not authorized",
-  "formula_search_outside_A7LS14": "not authorized",
-  "large_search_outside_A7LS14": "not authorized; A7LS-14X authorizes only checkpointed A7LS15-A7LS18 scoped large search",
+  "formula_search_outside_A7LS_scope": "not authorized",
+  "large_search_outside_A7LS_scope": "not authorized; A7LS-14X/A7LS-16X authorize only checkpointed A7LS scoped large search",
   "shadow_paper_live": "not authorized"
 }
 ```
@@ -115,10 +119,11 @@ HEAD == origin/main: True
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
   "A7FF-52E materialization preflight execution option": "requires explicit authorization; 1200 family-balanced rows; no numeric replay/search",
-  "A7LS15 million-scale multi-axis blueprint generation": "authorized by A7LS-14X scoped large-search arbitration; generated_total <= 1,000,000",
-  "A7LS16 local preflight and materialization smoke": "authorized by A7LS-14X before company materialization",
-  "A7LS17 company sharded materialization": "authorized after A7LS16 preflight; materialization_total <= 100,000",
-  "A7LS18 company sharded numeric wave": "authorized after materialization; numeric_total <= 25,000 with checkpoints",
+  "A7LS15 million-scale multi-axis blueprint generation": "completed under A7LS-14X baseline; generated_total = 1,000,000",
+  "A7LS16 local preflight and materialization smoke": "completed; field/operator schema preflight passed",
+  "A7LS16X 4M scale-up authorization": "authorized after A7LS16; generated_total <= 4,000,000, materialization_total <= 400,000, numeric_total <= 100,000",
+  "A7LS17 company sharded materialization": "authorized after A7LS16X; materialization_total <= 400,000",
+  "A7LS18 company sharded numeric wave": "authorized after materialization; numeric_total <= 100,000 with checkpoints",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }
 ```
