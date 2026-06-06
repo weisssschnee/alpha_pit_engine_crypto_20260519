@@ -1,5 +1,9 @@
 {
   "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
   "A7FF-52E materialization preflight execution option": "requires explicit authorization; 1200 family-balanced rows; no numeric replay/search",
+  "A7LS15 million-scale multi-axis blueprint generation": "authorized by A7LS-14X scoped large-search arbitration; generated_total <= 1,000,000",
+  "A7LS16 local preflight and materialization smoke": "authorized by A7LS-14X before company materialization",
+  "A7LS17 company sharded materialization": "authorized after A7LS16 preflight; materialization_total <= 100,000",
+  "A7LS18 company sharded numeric wave": "authorized after materialization; numeric_total <= 25,000 with checkpoints",
   "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current"
 }

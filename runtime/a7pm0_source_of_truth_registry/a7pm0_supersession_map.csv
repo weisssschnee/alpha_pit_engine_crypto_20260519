@@ -1,4 +1,6 @@
 stage_id,supersedes,superseded_by,current_status,notes
 A7AL-2P2,,A7AL-2X0,superseded_diagnostic,A7AL-2P2 superseded by A7AL-2X0 arbitration
 A7AL-2Q,,A7AL-2X0,not_authorized,A7AL-2Q local execution not authorized
+A7LS-14,,A7LS-14X,current_valid_scoped_large_search_contract,A7LS-14 authorizes only checkpointed multi-axis A7LS15-A7LS18 large search; proof/live remain blocked
+A7LS-14X,global_large_search_block_for_a7ls14_scope,,current_valid_scoped_large_search_arbitration,A7LS-14X resolves old global no-large-search record for A7LS14 scope only
 COMPANY-A7AL2Q2R-FULL,,A7AL-2X0,not_authorized,A7AL-2Q local execution not authorized

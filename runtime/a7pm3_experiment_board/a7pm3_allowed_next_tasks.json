@@ -1,5 +1,8 @@
 {
-  "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
-  "A7FF-CORE51PXE company-machine sharded replay execution": "execution handoff ready; run company orchestrator, monitor shards, aggregate, then import results for CORE52 arbitration",
-  "A7PM-0/3 maintenance": "governance registry maintenance"
+  "A7LS15 million-scale multi-axis blueprint generation": "authorized by A7LS-14X; generated_total <= 1,000,000 across four lanes",
+  "A7LS16 local preflight and materialization smoke": "authorized after A7LS15; 512-row preflight before company load",
+  "A7LS17 company sharded materialization": "authorized after A7LS16; materialization_total <= 100,000",
+  "A7LS18 company sharded numeric wave": "authorized after A7LS17; numeric_total <= 25,000; 256 shards; checkpointed",
+  "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
+  "A7PM-0/3 maintenance": "keep A7LS14 scoped large-search authorization current"
 }

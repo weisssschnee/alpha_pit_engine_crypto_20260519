@@ -612,6 +612,22 @@ A7LS-12,runtime/a7ls12_deep_audit_packet/a7ls12_authorization_matrix.json,input_
 A7LS-12,runtime/a7ls12_deep_audit_packet/a7ls12_authorization_matrix.json,selector_uses_may,false,False
 A7LS-12,runtime/a7ls12_deep_audit_packet/a7ls12_authorization_matrix.json,stage,"""A7LS-12""",False
 A7LS-12,runtime/a7ls12_deep_audit_packet/a7ls12_authorization_matrix.json,uses_may,false,False
+A7LS-14,runtime/a7ls14_scaled_multi_axis_search_contract/a7ls14_authorization_matrix.json,authorized,"{""A7LS15_million_scale_blueprint_generation"": true, ""A7LS16_local_preflight"": true, ""A7LS17_company_materialization"": true, ""A7LS18_company_numeric_wave"": true, ""raw_multi_axis_reserved_lane"": true}",False
+A7LS-14,runtime/a7ls14_scaled_multi_axis_search_contract/a7ls14_authorization_matrix.json,not_authorized,"{""May_in_selector_or_reward"": true, ""alpha_proof"": true, ""shadow_paper_live"": true, ""single_lane_budget_capture"": true, ""unbounded_full_grammar"": true}",False
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,authorizes_a7ls15_generation,true,True
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,authorizes_a7ls16_local_preflight,true,True
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,authorizes_a7ls17_company_materialization,true,True
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,authorizes_a7ls18_company_numeric,true,True
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,authorizes_alpha_proof,false,False
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,authorizes_large_search,true,True
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,authorizes_scoped_large_search,true,True
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,authorizes_shadow_paper_live,false,False
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,decision,"""PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED""",False
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,does_not_supersede_alpha_proof_block,true,True
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,does_not_supersede_shadow_paper_live_block,true,True
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,scope_boundary,"""A7LS14 checkpointed multi-axis pipeline only""",False
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,stage,"""A7LS-14X""",False
+A7LS-14X,runtime/a7ls14x_authorization_arbitration/a7ls14x_authorization_matrix.json,supersedes_global_large_search_block,true,True
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_feature_columns,94,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,agg_symbol_month_count,87,False
 A7S0,runtime/a7s0_data_horizon_contract/a7s0_authorization_matrix.json,authorizes_a7r_horizon_diagnostic_contract,true,True

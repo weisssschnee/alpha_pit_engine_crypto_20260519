@@ -1,14 +1,14 @@
 {
-  "allowed_next_task_count": 3,
+  "allowed_next_task_count": 6,
   "authorizes_alpha_proof": false,
   "authorizes_large_search": false,
   "authorizes_search": false,
   "authorizes_shadow_paper_live": false,
-  "blocked_task_count": 18,
+  "blocked_task_count": 6,
   "decision": "PASS_A7PM3_CURRENT_EXPERIMENT_BOARD_BUILT",
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-06T03:12:30Z",
+  "generated_at": "2026-06-06T03:54:13Z",
   "stage": "A7PM-3"
 }

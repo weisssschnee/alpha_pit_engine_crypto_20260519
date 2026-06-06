@@ -12,7 +12,7 @@
   "A7FF-52E execution": "pending explicit materialization-preflight authorization; A7FF-52 contract is ready but does not execute materialization",
   "alpha_proof": "not authorized",
   "direct_OI_price_rerun": "same objective rerun not authorized",
-  "formula_search": "not authorized",
-  "large_search": "not authorized",
+  "formula_search_outside_A7LS14": "not authorized",
+  "large_search_outside_A7LS14": "not authorized; A7LS-14X authorizes only checkpointed A7LS15-A7LS18 scoped large search",
   "shadow_paper_live": "not authorized"
 }

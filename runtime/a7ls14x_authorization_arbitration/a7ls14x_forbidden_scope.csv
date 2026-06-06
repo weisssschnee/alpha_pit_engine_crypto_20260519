@@ -1,0 +1,7 @@
+scope,authorized,reason
+alpha_proof,False,"A7LS14 is search infrastructure, not proof"
+shadow_paper_live,False,no production or trading authorization
+May_in_selector_or_reward,False,May remains stress/failure attribution only
+unbounded_full_grammar,False,search is bounded by typed lanes and quota policy
+single_lane_budget_capture,False,axis quota and checkpoint policy required
+legacy_large_search_outside_A7LS14,False,old A7AL/A7FF large-search denials remain valid outside A7LS14 scope

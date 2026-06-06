@@ -13,6 +13,8 @@ RUNTIME = REPO / "runtime" / "a7pm3_experiment_board"
 REPORT = REPO / "reports" / "CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md"
 A7PM0 = REPO / "runtime" / "a7pm0_source_of_truth_registry" / "a7pm0_manifest.json"
 A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
+A7LS14 = REPO / "runtime" / "a7ls14_scaled_multi_axis_search_contract" / "a7ls14_manifest.json"
+A7LS14X = REPO / "runtime" / "a7ls14x_authorization_arbitration" / "a7ls14x_manifest.json"
 A7FF52E = REPO / "runtime" / "a7ff52e_materialization_preflight" / "a7ff52e_manifest.json"
 A7FF53 = REPO / "runtime" / "a7ff53_numeric_response_contract" / "a7ff53_manifest.json"
 A7FF53E_S00 = REPO / "runtime" / "a7ff53e_numeric_response_execution_s00" / "a7ff53e_s00_manifest.json"
@@ -192,6 +194,8 @@ BASE_BLOCKED = {
 
 
 def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
+    a7ls14 = read_json(A7LS14)
+    a7ls14x = read_json(A7LS14X)
     a7ff52e = read_json(A7FF52E)
     a7ff53 = read_json(A7FF53)
     a7ff53e_s00 = read_json(A7FF53E_S00)
@@ -355,7 +359,35 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
         "A7PM-0/3 maintenance": "governance registry maintenance",
     }
     blocked = dict(BASE_BLOCKED)
-    if a7ffcore51pxh.get("decision") == "PASS_A7FFCORE51PXH_COMPANY_EXECUTION_HANDOFF_READY":
+    if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED":
+        allowed = {
+            "A7LS15 million-scale multi-axis blueprint generation": "authorized by A7LS-14X; generated_total <= 1,000,000 across four lanes",
+            "A7LS16 local preflight and materialization smoke": "authorized after A7LS15; 512-row preflight before company load",
+            "A7LS17 company sharded materialization": "authorized after A7LS16; materialization_total <= 100,000",
+            "A7LS18 company sharded numeric wave": "authorized after A7LS17; numeric_total <= 25,000; 256 shards; checkpointed",
+            "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
+            "A7PM-0/3 maintenance": "keep A7LS14 scoped large-search authorization current",
+        }
+        blocked = {
+            "large_search_outside_A7LS14": "blocked: A7LS-14X authorizes only checkpointed A7LS15-A7LS18 scope",
+            "unbounded_full_grammar": "blocked",
+            "single_lane_budget_capture": "blocked by A7LS14 quota/checkpoint policy",
+            "May-informed selector/reward": "blocked",
+            "alpha proof": "not authorized",
+            "shadow/paper/live": "not authorized",
+        }
+        current_stage = "A7LS-14X"
+        status = "scoped_large_search_authorized"
+        next_task = "A7LS15 million-scale multi-axis blueprint generation"
+    elif a7ls14.get("decision") == "PASS_A7LS14_SCALED_MULTI_AXIS_SEARCH_CONTRACT_READY":
+        allowed["A7LS14X authorization arbitration"] = (
+            "required to reconcile A7LS14 scoped large-search contract with older global no-large-search records"
+        )
+        blocked["A7LS15 execution"] = "blocked until A7LS14X arbitration is built"
+        current_stage = "A7LS-14"
+        status = "scaled_contract_ready_needs_arbitration"
+        next_task = "A7LS14X authorization arbitration"
+    elif a7ffcore51pxh.get("decision") == "PASS_A7FFCORE51PXH_COMPANY_EXECUTION_HANDOFF_READY":
         allowed["A7FF-CORE51PXE company-machine sharded replay execution"] = (
             "execution handoff ready; run company orchestrator, monitor shards, aggregate, then import results for CORE52 arbitration"
         )
@@ -2096,14 +2128,34 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
         current_stage = "A7FF-52"
         status = "contract_ready_no_materialization"
         next_task = "A7FF-52E if explicitly authorized"
-    active = pd.DataFrame(
-        [
-            {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
-            {"workstream": "a7ff_family_diversification", "current_stage": current_stage, "status": status, "next": next_task},
-            {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R4", "status": "contract_ready_no_execution", "next": "A7FF-24R4E if explicitly authorized"},
-            {"workstream": "search_execution", "current_stage": "blocked", "status": "not_authorized", "next": "none"},
-        ]
-    )
+        active = pd.DataFrame(
+            [
+                {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
+                {"workstream": "a7ff_family_diversification", "current_stage": current_stage, "status": status, "next": next_task},
+                {"workstream": "a7ls_scaled_search", "current_stage": "A7LS-14X", "status": "scoped_large_search_authorized" if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED" else "pending", "next": "A7LS15/A7LS16/A7LS17/A7LS18 pipeline" if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED" else "A7LS14X arbitration"},
+                {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R4", "status": "contract_ready_no_execution", "next": "A7FF-24R4E if explicitly authorized"},
+                {"workstream": "search_execution", "current_stage": current_stage, "status": status, "next": next_task},
+            ]
+        )
+    if "active" not in locals():
+        active = pd.DataFrame(
+            [
+                {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
+                {"workstream": "a7ff_family_diversification", "current_stage": current_stage, "status": status, "next": next_task},
+                {
+                    "workstream": "a7ls_scaled_search",
+                    "current_stage": "A7LS-14X",
+                    "status": "scoped_large_search_authorized"
+                    if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED"
+                    else "pending",
+                    "next": "A7LS15/A7LS16/A7LS17/A7LS18 pipeline"
+                    if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED"
+                    else "A7LS14X arbitration",
+                },
+                {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R4", "status": "contract_ready_no_execution", "next": "A7FF-24R4E if explicitly authorized"},
+                {"workstream": "search_execution", "current_stage": current_stage, "status": status, "next": next_task},
+            ]
+        )
     return allowed, blocked, active
 
 

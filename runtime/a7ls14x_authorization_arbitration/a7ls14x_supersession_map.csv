@@ -1,0 +1,3 @@
+superseded_rule,superseded_by,replacement,still_forbidden_outside_scope
+global_large_search_not_authorized,A7LS-14X,large search authorized only inside A7LS14 checkpointed multi-axis A7LS15-A7LS18 path,True
+A7LS13_no_search_auth,A7LS-14 / A7LS-14X,A7LS13 packet promoted to A7LS14 seed map and scoped large-search contract,True

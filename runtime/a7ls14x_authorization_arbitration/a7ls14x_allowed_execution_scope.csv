@@ -1,0 +1,6 @@
+scope_id,scope,authorized,heavy_compute,limit,checkpoint_required
+A7LS15,million_scale_multi_axis_blueprint_generation,True,False,"generated_total <= 1,000,000",True
+A7LS16,local_preflight_and_materialization_smoke,True,False,local_light_preflight_rows = 512,True
+A7LS17,company_sharded_materialization,True,True,"materialization_total <= 100,000",True
+A7LS18,company_sharded_numeric_wave,True,True,"numeric_total <= 25,000; shards = 256; parallel = 3 default / 4 if memory allows",True
+A7LS19,checkpoint_arbitration_and_lane_resize,True,False,continue / kill / expand decisions only,True

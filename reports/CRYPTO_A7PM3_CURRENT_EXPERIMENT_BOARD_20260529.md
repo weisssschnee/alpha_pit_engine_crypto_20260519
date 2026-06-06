@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-06T03:12:30Z
+Generated: 2026-06-06T03:54:13Z
 
 ## Decision
 
@@ -8,43 +8,35 @@ Generated: 2026-06-06T03:12:30Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                          | next                                                    |
-|:----------------------------|:----------------|:--------------------------------|:--------------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                            | keep registry as source-of-truth                        |
-| a7ff_family_diversification | A7FF-CORE51PXH  | company_execution_handoff_ready | A7FF-CORE51PXE company-machine sharded replay execution |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution     | A7FF-24R4E if explicitly authorized                     |
-| search_execution            | blocked         | not_authorized                  | none                                                    |
+| workstream                  | current_stage   | status                         | next                                                 |
+|:----------------------------|:----------------|:-------------------------------|:-----------------------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                           | keep registry as source-of-truth                     |
+| a7ff_family_diversification | A7LS-14X        | scoped_large_search_authorized | A7LS15 million-scale multi-axis blueprint generation |
+| a7ls_scaled_search          | A7LS-14X        | scoped_large_search_authorized | A7LS15/A7LS16/A7LS17/A7LS18 pipeline                 |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution    | A7FF-24R4E if explicitly authorized                  |
+| search_execution            | A7LS-14X        | scoped_large_search_authorized | A7LS15 million-scale multi-axis blueprint generation |
 
 ## Allowed Next Tasks
 
-| task                                                    | reason                                                                                                                   |
-|:--------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E repaired numeric wave execution option       | requires explicit user authorization; no search and no promotion                                                         |
-| A7PM-0/3 maintenance                                    | governance registry maintenance                                                                                          |
-| A7FF-CORE51PXE company-machine sharded replay execution | execution handoff ready; run company orchestrator, monitor shards, aggregate, then import results for CORE52 arbitration |
+| task                                                 | reason                                                                     |
+|:-----------------------------------------------------|:---------------------------------------------------------------------------|
+| A7LS15 million-scale multi-axis blueprint generation | authorized by A7LS-14X; generated_total <= 1,000,000 across four lanes     |
+| A7LS16 local preflight and materialization smoke     | authorized after A7LS15; 512-row preflight before company load             |
+| A7LS17 company sharded materialization               | authorized after A7LS16; materialization_total <= 100,000                  |
+| A7LS18 company sharded numeric wave                  | authorized after A7LS17; numeric_total <= 25,000; 256 shards; checkpointed |
+| A7LS19 checkpoint arbitration and lane resize        | authorized after A7LS18 checkpoints; continue / kill / expand per lane     |
+| A7PM-0/3 maintenance                                 | keep A7LS14 scoped large-search authorization current                      |
 
 ## Blocked Tasks
 
-| task                                | reason                                                                                                                |
-|:------------------------------------|:----------------------------------------------------------------------------------------------------------------------|
-| A7FF-24R4E execution                | pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but numeric wave execution is not started |
-| A7FF-51 execution                   | not authorized by A7FF-R11; only contract drafting is allowed                                                         |
-| A7FF-50                             | not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps                                   |
-| A7FF-48                             | not authorized by A7FF-47; frozen clues fail non-L5 label translation                                                 |
-| A7FF-45 continuation                | bounded replay passed but is superseded by A7FF-47 L5-only translation hold                                           |
-| A7FF-43 deep forensic               | not authorized by A7FF-42; selected control-strict non-L7 evidence remains single-family                              |
-| A7FF-41 control-strict expansion    | not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family                              |
-| A7FF search execution               | numeric wave has clues but still no replay/search authorization                                                       |
-| A7AL-2Y generation                  | not authorized                                                                                                        |
-| A7AL-3 large search                 | not authorized                                                                                                        |
-| direct OI-price rerun               | superseded weak prior / not authorized                                                                                |
-| A7AL-2Q                             | not authorized by A7AL-2X0                                                                                            |
-| alpha proof                         | not authorized                                                                                                        |
-| shadow/paper/live                   | not authorized                                                                                                        |
-| A7FF-CORE51E local runner retry     | blocked: company execution handoff is source-of-truth                                                                 |
-| A7FF large search                   | blocked: only company sharded replay diagnostics are authorized                                                       |
-| A7FF formula search                 | blocked                                                                                                               |
-| alpha proof / shadow / paper / live | not authorized                                                                                                        |
+| task                         | reason                                                             |
+|:-----------------------------|:-------------------------------------------------------------------|
+| large_search_outside_A7LS14  | blocked: A7LS-14X authorizes only checkpointed A7LS15-A7LS18 scope |
+| unbounded_full_grammar       | blocked                                                            |
+| single_lane_budget_capture   | blocked by A7LS14 quota/checkpoint policy                          |
+| May-informed selector/reward | blocked                                                            |
+| alpha proof                  | not authorized                                                     |
+| shadow/paper/live            | not authorized                                                     |
 
 ## Boundary
 

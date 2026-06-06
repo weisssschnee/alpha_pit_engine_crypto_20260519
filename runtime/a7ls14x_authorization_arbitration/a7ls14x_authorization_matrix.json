@@ -1,0 +1,16 @@
+{
+  "authorizes_a7ls15_generation": true,
+  "authorizes_a7ls16_local_preflight": true,
+  "authorizes_a7ls17_company_materialization": true,
+  "authorizes_a7ls18_company_numeric": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": true,
+  "authorizes_scoped_large_search": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED",
+  "does_not_supersede_alpha_proof_block": true,
+  "does_not_supersede_shadow_paper_live_block": true,
+  "scope_boundary": "A7LS14 checkpointed multi-axis pipeline only",
+  "stage": "A7LS-14X",
+  "supersedes_global_large_search_block": true
+}

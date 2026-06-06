@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": true,
+  "authorizes_scoped_large_search": true,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "company_numeric_shard_target": 256,
+  "decision": "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED",
+  "generated_at": "2026-06-06T03:30:45Z",
+  "generated_total": 1000000,
+  "input_a7ls13_decision": "PASS_A7LS13_CONSOLIDATED_REPLAY_PACKET_READY_NO_SEARCH_AUTH",
+  "input_a7ls14_authorization_keys": [
+    "authorized",
+    "not_authorized"
+  ],
+  "input_a7ls14_decision": "PASS_A7LS14_SCALED_MULTI_AXIS_SEARCH_CONTRACT_READY",
+  "materialization_total": 100000,
+  "numeric_total": 25000,
+  "stage": "A7LS-14X",
+  "uses_may": false
+}

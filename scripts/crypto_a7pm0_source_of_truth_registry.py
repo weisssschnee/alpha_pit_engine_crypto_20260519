@@ -28,13 +28,17 @@ BLOCKED_TASKS = {
     "A7AL-2Y": "formula generation/search execution not authorized",
     "A7AL-3": "large search not authorized",
     "direct_OI_price_rerun": "same objective rerun not authorized",
-    "formula_search": "not authorized",
-    "large_search": "not authorized",
+    "formula_search_outside_A7LS14": "not authorized",
+    "large_search_outside_A7LS14": "not authorized; A7LS-14X authorizes only checkpointed A7LS15-A7LS18 scoped large search",
     "alpha_proof": "not authorized",
     "shadow_paper_live": "not authorized",
 }
 
 NEXT_ALLOWED_TASKS = {
+    "A7LS15 million-scale multi-axis blueprint generation": "authorized by A7LS-14X scoped large-search arbitration; generated_total <= 1,000,000",
+    "A7LS16 local preflight and materialization smoke": "authorized by A7LS-14X before company materialization",
+    "A7LS17 company sharded materialization": "authorized after A7LS16 preflight; materialization_total <= 100,000",
+    "A7LS18 company sharded numeric wave": "authorized after materialization; numeric_total <= 25,000 with checkpoints",
     "A7FF-52E materialization preflight execution option": "requires explicit authorization; 1200 family-balanced rows; no numeric replay/search",
     "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
     "A7PM-0/3 maintenance": "keep source-of-truth and experiment board current",
@@ -153,6 +157,8 @@ def collect_authorization(payload: dict[str, Any], auth_payloads: list[dict[str,
         lower = str(key).lower()
         if "authorize" not in lower and "authorizes" not in lower:
             continue
+        if lower.startswith("does_not") or lower.startswith("not_authorized") or lower.startswith("forbidden"):
+            continue
         authorized = bool_authorized(value)
         if "contract" in lower or "next" in lower or "a7" in lower:
             keys["contract"] = keys["contract"] or authorized
@@ -172,6 +178,8 @@ def collect_authorization(payload: dict[str, Any], auth_payloads: list[dict[str,
     for auth in auth_payloads:
         for key, value in auth.items():
             lower = str(key).lower()
+            if lower.startswith("does_not") or lower.startswith("not_authorized") or lower.startswith("forbidden"):
+                continue
             authorized = bool_authorized(value)
             if "contract" in lower or lower.startswith("a7"):
                 keys["contract"] = keys["contract"] or authorized
@@ -275,7 +283,18 @@ def apply_special_status(row: dict[str, Any]) -> dict[str, Any]:
     row["superseded_by"] = ""
     notes: list[str] = []
 
-    if stage in {"A7AL-2P2", "A7AL2P2"} or "A7AL2P2" in stage:
+    if stage in {"A7PM-0", "A7PM0", "A7PM-3", "A7PM3"}:
+        row["current_status"] = "current_valid_governance"
+        notes.append("A7PM registry/board maintenance record; not a search authorization source")
+    elif stage in {"A7LS-14", "A7LS14"}:
+        row["current_status"] = "current_valid_scoped_large_search_contract"
+        row["superseded_by"] = "A7LS-14X"
+        notes.append("A7LS-14 authorizes only checkpointed multi-axis A7LS15-A7LS18 large search; proof/live remain blocked")
+    elif stage in {"A7LS-14X", "A7LS14X"}:
+        row["current_status"] = "current_valid_scoped_large_search_arbitration"
+        row["supersedes"] = "global_large_search_block_for_a7ls14_scope"
+        notes.append("A7LS-14X resolves old global no-large-search record for A7LS14 scope only")
+    elif stage in {"A7AL-2P2", "A7AL2P2"} or "A7AL2P2" in stage:
         row["current_status"] = "superseded_diagnostic"
         row["superseded_by"] = "A7AL-2X0"
         notes.append("A7AL-2P2 superseded by A7AL-2X0 arbitration")
@@ -410,14 +429,30 @@ def main() -> None:
         stage_df["superseded_by"].astype(str).ne("") | stage_df["supersedes"].astype(str).ne(""),
         ["stage_id", "supersedes", "superseded_by", "current_status", "notes"],
     ].copy()
+    scoped_large_search_statuses = {
+        "current_valid_governance",
+        "current_valid_scoped_large_search_contract",
+        "current_valid_scoped_large_search_arbitration",
+    }
     conflict_df = stage_df[
         stage_df["current_status"].eq("authorization_conflict_review")
-        | stage_df["authorizes_search"]
+        | (
+            stage_df["authorizes_search"]
+            & ~stage_df["current_status"].isin(scoped_large_search_statuses)
+        )
         | stage_df["authorizes_alpha_proof"]
         | stage_df["authorizes_shadow_paper_live"]
     ].copy()
     current_valid = stage_df[
-        stage_df["current_status"].isin(["current_valid_governance", "valid_or_historical_record", "engineering_pass_signal_hold"])
+        stage_df["current_status"].isin(
+            [
+                "current_valid_governance",
+                "valid_or_historical_record",
+                "engineering_pass_signal_hold",
+                "current_valid_scoped_large_search_contract",
+                "current_valid_scoped_large_search_arbitration",
+            ]
+        )
     ].copy()
 
     decision = "PASS_A7PM0_SOURCE_OF_TRUTH_REGISTRY_BUILT"
@@ -446,8 +481,16 @@ def main() -> None:
         "executes_search": False,
         "executes_replay": False,
         "executes_training": False,
-        "authorizes_search": False,
-        "authorizes_large_search": False,
+        "authorizes_search": bool(
+            stage_df["current_status"].isin(
+                ["current_valid_scoped_large_search_contract", "current_valid_scoped_large_search_arbitration"]
+            ).any()
+        ),
+        "authorizes_large_search": bool(
+            stage_df["current_status"].isin(
+                ["current_valid_scoped_large_search_contract", "current_valid_scoped_large_search_arbitration"]
+            ).any()
+        ),
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
         "authorizes_a7pm1": decision.startswith("PASS_"),
