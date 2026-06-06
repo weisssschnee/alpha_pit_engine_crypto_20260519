@@ -23,10 +23,12 @@ from scripts.crypto_a7al2l_fast_derived_replay_preflight import SPLIT_ORDER, spl
 from scripts.crypto_a7al2x5_evaluator_preflight_smoke import (  # noqa: E402
     BASE_DIR,
     LATENT_PANEL,
+    UPPER_REGIME_PANEL,
     load_base,
     load_group_fields,
     load_latent_numeric,
     parquet_schema,
+    rolling_mean,
     shift_matrix,
 )
 from scripts.crypto_a7ff25r6_dense_funding_state_audit import (  # noqa: E402
@@ -105,6 +107,21 @@ DENSE_FUNDING_FIELDS = {
     "funding_rate_delta_state_24h",
     "funding_state_x_basis_delta",
 }
+UPPER_ALIASES = {
+    "market_breadth_state": "R2_market_breadth_state",
+    "liquidity_cycle_state": "R3_liquidity_cycle_state",
+    "leverage_crowding_state": "R4_leverage_crowding_state",
+    "basis_dislocation_state": "R5_basis_premium_dislocation_state",
+    "stress_proxy_state": "R10_stress_proxy_state",
+}
+DERIVED_DEPS = {
+    "open_interest_value_change_24h": {"open_interest_value_last"},
+    "funding_rate_persistence_24h": {"funding_rate"},
+    "premium_abs_state": {"premium_close_bps"},
+    "quote_volume_z_168h": {"trade_quote_volume"},
+    "account_position_divergence": {"top_long_short_position_ratio_last", "top_long_short_account_ratio_last"},
+    "top_global_account_divergence": {"top_long_short_account_ratio_last", "global_long_short_account_ratio_last"},
+}
 
 
 def selected_column_indices(timestamps: pd.DatetimeIndex) -> np.ndarray:
@@ -159,6 +176,28 @@ def expression_fields(expression: str) -> set[str]:
             continue
         fields.add(token)
     return fields
+
+
+def categorical_or_numeric(values: pd.Series, mapping: dict[Any, float]) -> pd.Series:
+    numeric = pd.to_numeric(values, errors="coerce")
+    if numeric.notna().any():
+        return numeric
+    return values.map(mapping).astype("float64")
+
+
+def load_upper_numeric(symbols: list[str], timestamps: pd.DatetimeIndex, fields: set[str]) -> dict[str, np.ndarray]:
+    if not fields:
+        return {}
+    frame = pd.read_parquet(UPPER_REGIME_PANEL, columns=["timestamp", *sorted(fields)], engine="pyarrow")
+    frame["timestamp"] = pd.to_datetime(frame["timestamp"], utc=True)
+    frame = frame.sort_values("timestamp").drop_duplicates("timestamp").set_index("timestamp")
+    out: dict[str, np.ndarray] = {}
+    for field in fields:
+        unique_values = sorted(frame[field].dropna().astype(str).unique().tolist())
+        mapping = {value: float(idx - (len(unique_values) - 1) / 2.0) for idx, value in enumerate(unique_values)}
+        series = categorical_or_numeric(frame[field], mapping).reindex(timestamps)
+        out[field] = np.tile(series.to_numpy(dtype=np.float64), (len(symbols), 1))
+    return out
 
 
 def shifted_for_control(signal: np.ndarray, name: str, rng: np.random.Generator) -> np.ndarray:
@@ -392,6 +431,12 @@ def main() -> None:
         fields.update(expression_fields(expr))
     base_schema = parquet_schema(BASE_DIR)
     latent_schema = parquet_schema(LATENT_PANEL)
+    upper_schema = parquet_schema(UPPER_REGIME_PANEL)
+    requested = set(fields)
+    alias_upper_fields = {UPPER_ALIASES[field] for field in requested if field in UPPER_ALIASES}
+    derived_fields = requested & set(DERIVED_DEPS)
+    derived_deps = set().union(*(DERIVED_DEPS[field] for field in derived_fields)) if derived_fields else set()
+    fields = (requested - set(UPPER_ALIASES) - derived_fields) | alias_upper_fields | derived_deps
     requested_dense_funding = fields & DENSE_FUNDING_FIELDS
     base_fields = {field for field in fields if field in base_schema}
     if requested_dense_funding:
@@ -399,7 +444,8 @@ def main() -> None:
         if "funding_state_x_basis_delta" in requested_dense_funding:
             base_fields.add("mark_index_basis_bps")
     latent_fields = {field for field in fields if field in latent_schema and field not in base_fields}
-    missing = sorted(fields - base_fields - latent_fields - requested_dense_funding)
+    upper_fields = {field for field in fields if field in upper_schema and field not in base_fields and field not in latent_fields}
+    missing = sorted(fields - base_fields - latent_fields - upper_fields - requested_dense_funding)
 
     blockers: list[str] = []
     material_rows: list[dict[str, Any]] = []
@@ -410,9 +456,17 @@ def main() -> None:
         blockers.append("missing_numeric_fields")
     else:
         symbols = strict_symbols()
-        print(f"[{STAGE}] loading symbols={len(symbols)}, base_fields={len(base_fields)}, latent_fields={len(latent_fields)}", flush=True)
+        print(
+            f"[{STAGE}] loading symbols={len(symbols)}, base_fields={len(base_fields)}, "
+            f"latent_fields={len(latent_fields)}, upper_fields={len(upper_fields)}, derived_fields={len(derived_fields)}",
+            flush=True,
+        )
         loaded_symbols, timestamps, numeric = load_base(symbols, base_fields)
         numeric.update(load_latent_numeric(loaded_symbols, timestamps, latent_fields))
+        numeric.update(load_upper_numeric(loaded_symbols, timestamps, upper_fields))
+        for alias, source in UPPER_ALIASES.items():
+            if alias in requested and source in numeric:
+                numeric[alias] = numeric[source]
         if requested_dense_funding:
             raw_funding = numeric["funding_rate"]
             dense_funding, funding_age = dense_ffill_and_age(raw_funding, 8)
@@ -426,6 +480,19 @@ def main() -> None:
             if "funding_state_x_basis_delta" in requested_dense_funding:
                 basis = numeric["mark_index_basis_bps"]
                 numeric["funding_state_x_basis_delta"] = funding_delta_24h * (basis - dense_shift_matrix(basis, 24))
+        if "open_interest_value_change_24h" in derived_fields:
+            values = numeric["open_interest_value_last"]
+            numeric["open_interest_value_change_24h"] = values - dense_shift_matrix(values, 24)
+        if "funding_rate_persistence_24h" in derived_fields:
+            numeric["funding_rate_persistence_24h"] = rolling_mean(numeric["funding_rate"], 24)
+        if "premium_abs_state" in derived_fields:
+            numeric["premium_abs_state"] = np.abs(numeric["premium_close_bps"])
+        if "quote_volume_z_168h" in derived_fields:
+            numeric["quote_volume_z_168h"] = rolling_mean_std_z(numeric["trade_quote_volume"], 168, 48)
+        if "account_position_divergence" in derived_fields:
+            numeric["account_position_divergence"] = numeric["top_long_short_position_ratio_last"] - numeric["top_long_short_account_ratio_last"]
+        if "top_global_account_divergence" in derived_fields:
+            numeric["top_global_account_divergence"] = numeric["top_long_short_account_ratio_last"] - numeric["global_long_short_account_ratio_last"]
         groups = load_group_fields(loaded_symbols, timestamps, {"liquidity_tier"})
         full_timestamp_count = int(len(timestamps))
         idx = selected_column_indices(timestamps)
