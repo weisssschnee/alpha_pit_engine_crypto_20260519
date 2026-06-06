@@ -1,0 +1,14 @@
+operator,status
+Abs,supported
+CSRank,supported
+Clip,supported
+Decay,supported
+Delta,supported
+Mean,supported
+Mul,supported
+Neg,supported
+SafeDiv,supported
+Sign,supported
+Sub,supported
+TSRank,supported
+ZScore,supported

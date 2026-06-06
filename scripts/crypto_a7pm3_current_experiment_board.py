@@ -16,6 +16,7 @@ A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 A7LS14 = REPO / "runtime" / "a7ls14_scaled_multi_axis_search_contract" / "a7ls14_manifest.json"
 A7LS14X = REPO / "runtime" / "a7ls14x_authorization_arbitration" / "a7ls14x_manifest.json"
 A7LS15 = REPO / "runtime" / "a7ls15_million_scale_blueprint_generation" / "a7ls15_manifest.json"
+A7LS16 = REPO / "runtime" / "a7ls16_local_preflight" / "a7ls16_manifest.json"
 A7FF52E = REPO / "runtime" / "a7ff52e_materialization_preflight" / "a7ff52e_manifest.json"
 A7FF53 = REPO / "runtime" / "a7ff53_numeric_response_contract" / "a7ff53_manifest.json"
 A7FF53E_S00 = REPO / "runtime" / "a7ff53e_numeric_response_execution_s00" / "a7ff53e_s00_manifest.json"
@@ -198,6 +199,7 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ls14 = read_json(A7LS14)
     a7ls14x = read_json(A7LS14X)
     a7ls15 = read_json(A7LS15)
+    a7ls16 = read_json(A7LS16)
     a7ff52e = read_json(A7FF52E)
     a7ff53 = read_json(A7FF53)
     a7ff53e_s00 = read_json(A7FF53E_S00)
@@ -362,7 +364,17 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     }
     blocked = dict(BASE_BLOCKED)
     if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED":
-        if a7ls15.get("decision") == "PASS_A7LS15_MILLION_SCALE_BLUEPRINT_GENERATION_READY_FOR_A7LS16":
+        if a7ls16.get("decision") == "PASS_A7LS16_LOCAL_SCHEMA_PREFLIGHT_READY_FOR_A7LS17_COMPANY_MATERIALIZATION":
+            allowed = {
+                "A7LS17 company sharded materialization": "authorized by A7LS16; materialization_total <= 100,000",
+                "A7LS18 company sharded numeric wave": "authorized after A7LS17; numeric_total <= 25,000; 256 shards; checkpointed",
+                "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
+                "A7PM-0/3 maintenance": "keep A7LS scoped large-search authorization current",
+            }
+            current_stage = "A7LS-16"
+            status = "local_schema_preflight_pass"
+            next_task = "A7LS17 company sharded materialization"
+        elif a7ls15.get("decision") == "PASS_A7LS15_MILLION_SCALE_BLUEPRINT_GENERATION_READY_FOR_A7LS16":
             allowed = {
                 "A7LS16 local preflight and materialization smoke": "authorized by A7LS15; 512-row preflight before company materialization",
                 "A7LS17 company sharded materialization": "authorized after A7LS16; materialization_total <= 100,000",

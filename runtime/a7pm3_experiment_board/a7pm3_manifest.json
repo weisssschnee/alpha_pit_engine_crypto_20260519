@@ -1,5 +1,5 @@
 {
-  "allowed_next_task_count": 5,
+  "allowed_next_task_count": 4,
   "authorizes_alpha_proof": false,
   "authorizes_large_search": false,
   "authorizes_search": false,
@@ -9,6 +9,6 @@
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-06T04:14:16Z",
+  "generated_at": "2026-06-06T05:10:46Z",
   "stage": "A7PM-3"
 }

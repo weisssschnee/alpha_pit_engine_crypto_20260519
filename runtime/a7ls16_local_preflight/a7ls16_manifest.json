@@ -1,0 +1,19 @@
+{
+  "authorizes_a7ls17_company_materialization": true,
+  "authorizes_a7ls18_company_numeric": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7LS16_LOCAL_SCHEMA_PREFLIGHT_READY_FOR_A7LS17_COMPANY_MATERIALIZATION",
+  "generated_at": "2026-06-06T05:09:13Z",
+  "input_stage": "A7LS-15",
+  "lane_count": 4,
+  "missing_field_count": 0,
+  "operator_count": 13,
+  "preflight_mode": "local_schema_queue_preflight",
+  "requested_field_count": 61,
+  "sample_rows": 256,
+  "stage": "A7LS-16",
+  "unsupported_operator_count": 0,
+  "uses_may": false
+}

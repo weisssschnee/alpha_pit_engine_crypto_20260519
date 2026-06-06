@@ -1,6 +1,6 @@
 # CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD
 
-Generated: 2026-06-06T04:14:16Z
+Generated: 2026-06-06T05:10:46Z
 
 ## Decision
 
@@ -8,23 +8,22 @@ Generated: 2026-06-06T04:14:16Z
 
 ## Active Workstreams
 
-| workstream                  | current_stage   | status                                | next                                             |
-|:----------------------------|:----------------|:--------------------------------------|:-------------------------------------------------|
-| governance                  | A7PM-0/1/2/3    | pass                                  | keep registry as source-of-truth                 |
-| a7ff_family_diversification | A7LS-15         | million_blueprint_generation_complete | A7LS16 local preflight and materialization smoke |
-| a7ls_scaled_search          | A7LS-14X        | scoped_large_search_authorized        | A7LS15/A7LS16/A7LS17/A7LS18 pipeline             |
-| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution           | A7FF-24R4E if explicitly authorized              |
-| search_execution            | A7LS-15         | million_blueprint_generation_complete | A7LS16 local preflight and materialization smoke |
+| workstream                  | current_stage   | status                         | next                                   |
+|:----------------------------|:----------------|:-------------------------------|:---------------------------------------|
+| governance                  | A7PM-0/1/2/3    | pass                           | keep registry as source-of-truth       |
+| a7ff_family_diversification | A7LS-16         | local_schema_preflight_pass    | A7LS17 company sharded materialization |
+| a7ls_scaled_search          | A7LS-14X        | scoped_large_search_authorized | A7LS15/A7LS16/A7LS17/A7LS18 pipeline   |
+| a7ff_funding_tail           | A7FF-24R4       | contract_ready_no_execution    | A7FF-24R4E if explicitly authorized    |
+| search_execution            | A7LS-16         | local_schema_preflight_pass    | A7LS17 company sharded materialization |
 
 ## Allowed Next Tasks
 
-| task                                             | reason                                                                     |
-|:-------------------------------------------------|:---------------------------------------------------------------------------|
-| A7LS16 local preflight and materialization smoke | authorized by A7LS15; 512-row preflight before company materialization     |
-| A7LS17 company sharded materialization           | authorized after A7LS16; materialization_total <= 100,000                  |
-| A7LS18 company sharded numeric wave              | authorized after A7LS17; numeric_total <= 25,000; 256 shards; checkpointed |
-| A7LS19 checkpoint arbitration and lane resize    | authorized after A7LS18 checkpoints; continue / kill / expand per lane     |
-| A7PM-0/3 maintenance                             | keep A7LS scoped large-search authorization current                        |
+| task                                          | reason                                                                     |
+|:----------------------------------------------|:---------------------------------------------------------------------------|
+| A7LS17 company sharded materialization        | authorized by A7LS16; materialization_total <= 100,000                     |
+| A7LS18 company sharded numeric wave           | authorized after A7LS17; numeric_total <= 25,000; 256 shards; checkpointed |
+| A7LS19 checkpoint arbitration and lane resize | authorized after A7LS18 checkpoints; continue / kill / expand per lane     |
+| A7PM-0/3 maintenance                          | keep A7LS scoped large-search authorization current                        |
 
 ## Blocked Tasks
 
