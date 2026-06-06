@@ -1,0 +1,20 @@
+{
+  "authorizes_a7ls16_preflight": true,
+  "authorizes_a7ls17_company_materialization": false,
+  "authorizes_a7ls18_company_numeric": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7LS15_MILLION_SCALE_BLUEPRINT_GENERATION_READY_FOR_A7LS16",
+  "full_blueprint_index_path": "G:/AlphaFactory_CryptoData/research_runtime/a7ls15_million_scale_blueprint_generation_20260606/a7ls15_full_blueprint_index.csv",
+  "generated_at": "2026-06-06T04:11:27Z",
+  "generated_total": 1000000,
+  "input_stage": "A7LS-14X",
+  "lane_count": 4,
+  "materialization_queue_path": "G:/AlphaFactory_CryptoData/research_runtime/a7ls15_million_scale_blueprint_generation_20260606/a7ls15_materialization_queue_100k.csv",
+  "materialization_queue_rows": 100000,
+  "materialization_shard_count": 100,
+  "repo_sample_rows": 5000,
+  "stage": "A7LS-15",
+  "uses_may": false
+}

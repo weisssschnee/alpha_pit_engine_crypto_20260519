@@ -1,6 +1,6 @@
 # CRYPTO A7PM-0 SOURCE OF TRUTH REGISTRY
 
-Generated: 2026-06-06T03:54:37Z
+Generated: 2026-06-06T04:14:25Z
 
 ## Decision
 
@@ -12,28 +12,17 @@ A7PM-0 builds a machine-readable registry from reports, runtime manifests, autho
 
 ```text
 ## main...origin/main
- M reports/CRYPTO_A7PM0_SOURCE_OF_TRUTH_REGISTRY_20260529.md
  M reports/CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md
- M runtime/a7pm0_source_of_truth_registry/a7pm0_artifact_registry.csv
- M runtime/a7pm0_source_of_truth_registry/a7pm0_authorization_matrix.csv
- M runtime/a7pm0_source_of_truth_registry/a7pm0_blocked_tasks.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_current_valid_records.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_manifest.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_next_allowed_tasks.json
- M runtime/a7pm0_source_of_truth_registry/a7pm0_stage_registry.csv
- M runtime/a7pm0_source_of_truth_registry/a7pm0_supersession_map.csv
  M runtime/a7pm3_experiment_board/a7pm3_active_workstreams.csv
  M runtime/a7pm3_experiment_board/a7pm3_allowed_next_tasks.json
- M runtime/a7pm3_experiment_board/a7pm3_blocked_tasks.json
  M runtime/a7pm3_experiment_board/a7pm3_latest_source_of_truth.json
  M runtime/a7pm3_experiment_board/a7pm3_manifest.json
- M scripts/crypto_a7pm0_source_of_truth_registry.py
  M scripts/crypto_a7pm3_current_experiment_board.py
-?? reports/CRYPTO_A7LS14X_AUTHORIZATION_ARBITRATION_20260606.md
-?? runtime/a7ls14x_authorization_arbitration/
-?? scripts/crypto_a7ls14x_authorization_arbitration.py
-HEAD=d19cfc8089d21be0d41ca5590f8ce921ffd99c25
-origin/main=d19cfc8089d21be0d41ca5590f8ce921ffd99c25
+?? reports/CRYPTO_A7LS15_MILLION_SCALE_BLUEPRINT_GENERATION_20260606.md
+?? runtime/a7ls15_million_scale_blueprint_generation/
+?? scripts/crypto_a7ls15_million_scale_blueprint_generation.py
+HEAD=3b000079ee9bb1dfb3cebf8f7bcea1e07c938e24
+origin/main=3b000079ee9bb1dfb3cebf8f7bcea1e07c938e24
 HEAD == origin/main: True
 ```
 
@@ -41,7 +30,7 @@ HEAD == origin/main: True
 
 ```json
 {
-  "artifact_count": 4499,
+  "artifact_count": 4505,
   "authorization_record_count": 851,
   "authorizes_a7pm1": true,
   "authorizes_a7pm2": true,
@@ -55,12 +44,12 @@ HEAD == origin/main: True
   "executes_replay": false,
   "executes_search": false,
   "executes_training": false,
-  "generated_at": "2026-06-06T03:54:37Z",
-  "head": "d19cfc8089d21be0d41ca5590f8ce921ffd99c25",
+  "generated_at": "2026-06-06T04:14:25Z",
+  "head": "3b000079ee9bb1dfb3cebf8f7bcea1e07c938e24",
   "head_equals_origin_main": true,
-  "origin_main": "d19cfc8089d21be0d41ca5590f8ce921ffd99c25",
+  "origin_main": "3b000079ee9bb1dfb3cebf8f7bcea1e07c938e24",
   "stage": "A7PM-0",
-  "stage_count": 470
+  "stage_count": 471
 }
 ```
 
@@ -81,7 +70,7 @@ HEAD == origin/main: True
 | hold                                          | contract                   |       2 |
 | not_authorized                                | hold                       |       2 |
 | superseded_diagnostic                         | contract                   |       1 |
-| valid_or_historical_record                    | governance_or_audit        |     176 |
+| valid_or_historical_record                    | governance_or_audit        |     177 |
 | valid_or_historical_record                    | contract                   |     126 |
 | valid_or_historical_record                    | diagnostic                 |      29 |
 | valid_or_historical_record                    | smoke                      |       9 |

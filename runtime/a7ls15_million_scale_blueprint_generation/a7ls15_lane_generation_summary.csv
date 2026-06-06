@@ -1,0 +1,5 @@
+lane_id,lane_name,generated_rows,materialization_rows,semantic_pair_count,motif_count,primary_axis_count,skeleton_count,top_semantic_pair,top_semantic_pair_share,top_motif,top_motif_share
+A7LS14_A,exploit_a7ls13_multi_label_packet,320000,32000,71,18,7,292,basis_premium_like|liquidity_like,0.218765625,mul,0.08915
+A7LS14_B,raw_multi_axis_reserved_search,320000,32000,55,10,10,179,funding_state_like,0.020990625,gated_sign,0.13931875
+A7LS14_C,underrepresented_axis_rescue,240000,24000,9,11,4,221,open_interest_like|funding_state_like,0.13469166666666665,state_gate,0.10570416666666667
+A7LS14_D,null_control_and_high_entropy_probe,120000,12000,7,6,4,98,low_prior_axes|price_like,0.20941666666666667,control_flip,0.20256666666666667

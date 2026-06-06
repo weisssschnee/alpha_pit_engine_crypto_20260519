@@ -15,6 +15,7 @@ A7PM0 = REPO / "runtime" / "a7pm0_source_of_truth_registry" / "a7pm0_manifest.js
 A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
 A7LS14 = REPO / "runtime" / "a7ls14_scaled_multi_axis_search_contract" / "a7ls14_manifest.json"
 A7LS14X = REPO / "runtime" / "a7ls14x_authorization_arbitration" / "a7ls14x_manifest.json"
+A7LS15 = REPO / "runtime" / "a7ls15_million_scale_blueprint_generation" / "a7ls15_manifest.json"
 A7FF52E = REPO / "runtime" / "a7ff52e_materialization_preflight" / "a7ff52e_manifest.json"
 A7FF53 = REPO / "runtime" / "a7ff53_numeric_response_contract" / "a7ff53_manifest.json"
 A7FF53E_S00 = REPO / "runtime" / "a7ff53e_numeric_response_execution_s00" / "a7ff53e_s00_manifest.json"
@@ -196,6 +197,7 @@ BASE_BLOCKED = {
 def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     a7ls14 = read_json(A7LS14)
     a7ls14x = read_json(A7LS14X)
+    a7ls15 = read_json(A7LS15)
     a7ff52e = read_json(A7FF52E)
     a7ff53 = read_json(A7FF53)
     a7ff53e_s00 = read_json(A7FF53E_S00)
@@ -360,14 +362,29 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
     }
     blocked = dict(BASE_BLOCKED)
     if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED":
-        allowed = {
-            "A7LS15 million-scale multi-axis blueprint generation": "authorized by A7LS-14X; generated_total <= 1,000,000 across four lanes",
-            "A7LS16 local preflight and materialization smoke": "authorized after A7LS15; 512-row preflight before company load",
-            "A7LS17 company sharded materialization": "authorized after A7LS16; materialization_total <= 100,000",
-            "A7LS18 company sharded numeric wave": "authorized after A7LS17; numeric_total <= 25,000; 256 shards; checkpointed",
-            "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
-            "A7PM-0/3 maintenance": "keep A7LS14 scoped large-search authorization current",
-        }
+        if a7ls15.get("decision") == "PASS_A7LS15_MILLION_SCALE_BLUEPRINT_GENERATION_READY_FOR_A7LS16":
+            allowed = {
+                "A7LS16 local preflight and materialization smoke": "authorized by A7LS15; 512-row preflight before company materialization",
+                "A7LS17 company sharded materialization": "authorized after A7LS16; materialization_total <= 100,000",
+                "A7LS18 company sharded numeric wave": "authorized after A7LS17; numeric_total <= 25,000; 256 shards; checkpointed",
+                "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
+                "A7PM-0/3 maintenance": "keep A7LS scoped large-search authorization current",
+            }
+            current_stage = "A7LS-15"
+            status = "million_blueprint_generation_complete"
+            next_task = "A7LS16 local preflight and materialization smoke"
+        else:
+            allowed = {
+                "A7LS15 million-scale multi-axis blueprint generation": "authorized by A7LS-14X; generated_total <= 1,000,000 across four lanes",
+                "A7LS16 local preflight and materialization smoke": "authorized after A7LS15; 512-row preflight before company load",
+                "A7LS17 company sharded materialization": "authorized after A7LS16; materialization_total <= 100,000",
+                "A7LS18 company sharded numeric wave": "authorized after A7LS17; numeric_total <= 25,000; 256 shards; checkpointed",
+                "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
+                "A7PM-0/3 maintenance": "keep A7LS14 scoped large-search authorization current",
+            }
+            current_stage = "A7LS-14X"
+            status = "scoped_large_search_authorized"
+            next_task = "A7LS15 million-scale multi-axis blueprint generation"
         blocked = {
             "large_search_outside_A7LS14": "blocked: A7LS-14X authorizes only checkpointed A7LS15-A7LS18 scope",
             "unbounded_full_grammar": "blocked",
@@ -376,9 +393,6 @@ def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
             "alpha proof": "not authorized",
             "shadow/paper/live": "not authorized",
         }
-        current_stage = "A7LS-14X"
-        status = "scoped_large_search_authorized"
-        next_task = "A7LS15 million-scale multi-axis blueprint generation"
     elif a7ls14.get("decision") == "PASS_A7LS14_SCALED_MULTI_AXIS_SEARCH_CONTRACT_READY":
         allowed["A7LS14X authorization arbitration"] = (
             "required to reconcile A7LS14 scoped large-search contract with older global no-large-search records"
