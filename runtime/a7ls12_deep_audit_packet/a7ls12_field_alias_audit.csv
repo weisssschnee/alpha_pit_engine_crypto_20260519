@@ -1,0 +1,2 @@
+old_field,replacement_field,queue_rows_rewritten,status
+quote_volume,trade_quote_volume,0,ACTIVE_ALIAS_REWRITE

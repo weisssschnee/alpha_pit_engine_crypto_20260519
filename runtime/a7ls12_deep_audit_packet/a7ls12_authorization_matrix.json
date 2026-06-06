@@ -1,0 +1,14 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_company_deep_audit_execution": true,
+  "authorizes_large_search": false,
+  "authorizes_new_generation": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "execution_hours_per_split": 0,
+  "execution_note": "HOURS_PER_SPLIT=0 means all available timestamps per split in crypto_a7ff8_expanded_numeric_probe.py.",
+  "input_stage": "A7LS-11",
+  "selector_uses_may": false,
+  "stage": "A7LS-12",
+  "uses_may": false
+}

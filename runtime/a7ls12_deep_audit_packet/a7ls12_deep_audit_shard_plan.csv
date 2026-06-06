@@ -1,0 +1,5 @@
+a7ls12_deep_shard,queue_rows,unique_source_axis,unique_label_family,unique_semantic_pair,unique_skeleton,rows_per_shard_target,hours_per_split
+a7ls12_s000,24,3,4,7,12,24,0
+a7ls12_s001,24,3,4,9,17,24,0
+a7ls12_s002,24,4,4,9,14,24,0
+a7ls12_s003,21,4,3,10,15,24,0
