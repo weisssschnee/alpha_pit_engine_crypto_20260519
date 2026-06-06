@@ -1,0 +1,22 @@
+{
+  "activity_ok_count": 75379,
+  "activity_ok_rate": 0.75379,
+  "authorizes_a7ls18_company_numeric": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "completed_shards": 100,
+  "decision": "PASS_A7LS17_COMPANY_MATERIALIZATION_AGGREGATE_READY_FOR_A7LS18",
+  "eval_failure_count": 0,
+  "eval_success_count": 100000,
+  "expected_shards": 100,
+  "generated_at": "2026-06-06T06:53:20Z",
+  "lane_count": 4,
+  "missing_shards": [],
+  "motif_count": 19,
+  "runtime": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7ls17_company_materialization_20260606_r3",
+  "semantic_pair_count": 125,
+  "stage": "A7LS-17",
+  "total_rows": 100000,
+  "uses_may": false
+}
