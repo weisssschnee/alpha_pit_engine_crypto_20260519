@@ -1,0 +1,9 @@
+source_info_axis,next_wave_family,eligible_rows,median_control_ratio,max_deep_followup_score,unique_skeletons,unique_semantic_pairs
+raw_multi_axis,raw_multi_axis_probe,37,0.6133601982652763,836.4193497492805,13,3
+vol_liquidity_x_basis,basis_context_interaction,35,0.6168758865373903,665.491350714527,9,1
+vol_liquidity_x_basis,vol_liquidity_interaction,31,0.7151166228044287,595.9601902918863,8,3
+positioning_x_basis,positioning_context_interaction,24,0.7097257377332991,527.4187294630941,9,2
+vol_liquidity_x_basis,vol_liquidity_deep,6,0.7039536574812162,527.7865201549278,1,1
+listing_x_basis_regime,listing_state_interaction,6,0.722493573694446,400.11403666872593,3,1
+vol_liquidity_x_basis,basis_crowding_deep,1,0.6478525726341747,1189.4117993582395,1,1
+positioning_x_basis,positioning_flow_recovery,1,0.7419174004738766,385.28019789697356,1,1

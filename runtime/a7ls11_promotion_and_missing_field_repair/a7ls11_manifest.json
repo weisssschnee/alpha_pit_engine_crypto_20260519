@@ -1,0 +1,23 @@
+{
+  "authorizes_a7ls12_deep_audit_contract": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_large_search": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7LS11_PROMOTION_AND_FIELD_REPAIR_READY_NO_SEARCH_AUTH",
+  "eligible_next_wave_family_count": 8,
+  "eligible_non_l7_promotion_rows": 141,
+  "eligible_source_info_axis_count": 4,
+  "executes_numeric_probe": false,
+  "executes_search": false,
+  "generated_at": "2026-06-06T01:20:22Z",
+  "immediate_deep_audit_rows": 93,
+  "input_decision": "PASS_A7LS10_COMPANY_NUMERIC_AGGREGATED_CLUES_FOUND_NO_SEARCH_AUTH",
+  "input_non_l7_numeric_clue_rows": 339,
+  "input_stage": "A7LS-10-AGG",
+  "missing_field_repair_rows": 2,
+  "quote_volume_alias_repair_ready": true,
+  "stage": "A7LS-11",
+  "uses_may": false
+}

@@ -1,0 +1,5 @@
+blocked_task,reason
+large_search,"A7LS10 is numeric clue aggregation, not replay or alpha proof"
+alpha_proof_shadow_paper_live,no portfolio/deep replay authorization and no live-forward proof
+reuse_quote_volume_without_alias,quote_volume is not in universe498 v2; use trade_quote_volume alias or block
+rank_label_only_promotion,ranked label diagnostics remain separate from non-L7 promotion
