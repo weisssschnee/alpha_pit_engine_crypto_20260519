@@ -1,0 +1,13 @@
+{
+  "authorized": [
+    "A7LS23 strict candidate-factor review / bias audit packet"
+  ],
+  "not_authorized": [
+    "formula search",
+    "large search",
+    "alpha proof",
+    "shadow",
+    "paper",
+    "live"
+  ]
+}

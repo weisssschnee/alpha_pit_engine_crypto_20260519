@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7LS22_RESEARCH_REVIEW_QUEUE_READY",
+  "diagnostic_l7_count": 3,
+  "duplicate_cluster_count": 12,
+  "executes_search": false,
+  "generated_at": "2026-06-07T14:32:47Z",
+  "input_selected_count": 13,
+  "keep_review_allowed_count": 7,
+  "next_authorized": [
+    "A7LS23 strict candidate-factor review / bias audit packet"
+  ],
+  "non_l7_keep_review_allowed_count": 7,
+  "semantic_pair_count": 11,
+  "stage": "A7LS-22",
+  "top_label_family_share": 0.6153846153846154,
+  "top_semantic_pair_share": 0.15384615384615385,
+  "upstream_decision": "PASS_A7LS21_COMPANY_DEEP_REPLAY_AGGREGATE_READY_FOR_A7LS22",
+  "uses_may": false
+}
