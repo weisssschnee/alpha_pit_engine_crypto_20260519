@@ -1,0 +1,17 @@
+a7ls19_reject_reason,count
+rank_label_diagnostic_only,990
+rank_label_diagnostic_only;control_ratio_too_high,557
+strict_non_l7_eligible,329
+control_ratio_too_high,110
+rank_label_diagnostic_only;placebo_semantic_pair,81
+cost10_not_positive,42
+placebo_semantic_pair,41
+rank_label_diagnostic_only;low_prior_axis,33
+rank_label_diagnostic_only;placebo_semantic_pair;control_ratio_too_high,20
+low_prior_axis,12
+rank_label_diagnostic_only;low_prior_axis;control_ratio_too_high,11
+placebo_semantic_pair;control_ratio_too_high,10
+control_ratio_too_high;cost10_not_positive,9
+low_prior_axis;control_ratio_too_high,6
+placebo_semantic_pair;cost10_not_positive,6
+low_prior_axis;cost10_not_positive,1

@@ -1,0 +1,32 @@
+{
+  "authorizes_a7ls20_checkpoint_deep_replay": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "checkpoint_basis_premium_count": 70,
+  "checkpoint_basis_premium_count_cap": 70,
+  "checkpoint_basis_premium_share": 0.5691056910569106,
+  "checkpoint_l5_share": 0.8455284552845529,
+  "checkpoint_max_semantic_pair_share": 0.0975609756097561,
+  "checkpoint_max_skeleton_share": 0.06504065040650407,
+  "checkpoint_non_l5_count": 19,
+  "checkpoint_queue_count": 123,
+  "control_primary_max": 0.9,
+  "control_strong_max": 0.8,
+  "decision": "PASS_A7LS19_DIVERSIFIED_CHECKPOINT_QUEUE_READY_FOR_A7LS20",
+  "excludes_l7_from_checkpoint": true,
+  "excludes_low_prior_axes_from_checkpoint": true,
+  "excludes_placebo_from_checkpoint": true,
+  "executes_search": false,
+  "generated_at": "2026-06-07T12:21:35Z",
+  "input_selected_count": 2258,
+  "input_stage": "A7LS-18",
+  "stage": "A7LS-19",
+  "strict_non_l7_eligible_count": 329,
+  "strong_non_l7_eligible_count": 228,
+  "target_queue_size": 128,
+  "uses_may": false,
+  "warnings": [
+    "basis_premium_still_dominant"
+  ]
+}
