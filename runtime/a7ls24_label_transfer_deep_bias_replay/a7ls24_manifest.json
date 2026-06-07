@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7LS24_LABEL_TRANSFER_PACKET_READY_FOR_A7LS25",
+  "executes_search": false,
+  "generated_at": "2026-06-07T15:07:59Z",
+  "input_candidate_count": 7,
+  "l5_only_hold_count": 4,
+  "label_transfer_seed_count": 3,
+  "label_transfer_semantic_pair_count": 3,
+  "mechanism_label_transfer_count": 2,
+  "next_authorized": [
+    "A7LS25 label-transfer portfolio contribution replay packet"
+  ],
+  "stage": "A7LS-24",
+  "strong_label_transfer_count": 1,
+  "uses_may": false
+}
