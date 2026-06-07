@@ -1,0 +1,30 @@
+{
+  "aggregate_selected_portfolio_queue_count": 13,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "completed_shards": 4,
+  "decision": "PASS_A7LS21_COMPANY_DEEP_REPLAY_AGGREGATE_READY_FOR_A7LS22",
+  "executes_search": false,
+  "generated_at": "2026-06-07T14:11:37Z",
+  "hold_shards": 2,
+  "input_blueprint_count": 48,
+  "materialized_activity_ok_count": 48,
+  "next_authorized": [
+    "A7LS22 clue attribution / promotion triage"
+  ],
+  "non_l7_numeric_clue_rows": 20,
+  "pass_shards": 2,
+  "rank_label_diagnostic_clue_rows": 9,
+  "result_root": "G:\\AlphaFactory_CryptoData\\research_runtime\\a7ls21_company_deep_replay_20260607",
+  "selected_label_family_count": 4,
+  "selected_semantic_pair_count": 11,
+  "selected_skeleton_count": 12,
+  "stage": "A7LS-21",
+  "top_label_family_share": 0.6153846153846154,
+  "top_motif_share": 0.3076923076923077,
+  "top_semantic_pair_share": 0.15384615384615385,
+  "total_shards": 4,
+  "uses_may": false
+}

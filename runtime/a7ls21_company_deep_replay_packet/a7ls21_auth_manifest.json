@@ -1,0 +1,6 @@
+{
+  "decision": "PASS_A7LS20_MARGINAL_QUEUE_READY_FOR_A7LS21_DEEP_REPLAY_PACKET",
+  "generated_for": "A7LS-21 company deep replay packet",
+  "source_manifest": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ls20_checkpoint_deep_audit\\a7ls20_manifest.json",
+  "stage": "A7LS-20"
+}

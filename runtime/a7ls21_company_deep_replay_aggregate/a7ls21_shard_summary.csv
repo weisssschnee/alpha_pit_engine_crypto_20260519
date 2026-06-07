@@ -1,0 +1,5 @@
+shard_id,manifest_found,decision,blockers,input_blueprint_count,materialized_activity_ok_count,label_response_rows,non_l7_numeric_clue_rows,rank_label_diagnostic_clue_rows,portfolio_queue_count,selected_portfolio_queue_count,uses_may
+s000,True,HOLD_A7LS21s000_PORTFOLIO_QUEUE_TOO_SMALL,portfolio_selected_lt_4,12,12,240,6,2,3,3,False
+s001,True,PASS_A7LS21s001_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,,12,12,240,3,1,4,4,False
+s002,True,PASS_A7LS21s002_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH,,12,12,240,10,6,6,5,False
+s003,True,HOLD_A7LS21s003_PORTFOLIO_QUEUE_TOO_SMALL,portfolio_selected_lt_4,12,12,240,1,0,1,1,False

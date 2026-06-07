@@ -1,0 +1,18 @@
+{
+  "authorizes_alpha_proof": false,
+  "executes_search": false,
+  "hours_per_split": 2160,
+  "labels": [
+    "L0_raw_forward_return",
+    "L1_cross_sectional_relative_return",
+    "L3_liquidity_tier_relative_return",
+    "L5_vol_adjusted_return",
+    "L7_ranked_future_return"
+  ],
+  "remote_repo": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote",
+  "remote_run_root": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7ls21_company_deep_replay_20260607",
+  "rows_per_shard": 12,
+  "shard_count": 4,
+  "stage": "A7LS-21",
+  "uses_may": false
+}

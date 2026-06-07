@@ -1,0 +1,47 @@
+# CRYPTO A7LS21 COMPANY DEEP REPLAY PACKET
+
+Generated: 2026-06-07T13:42:40Z
+
+## Decision
+
+`PASS_A7LS21_COMPANY_DEEP_REPLAY_PACKET_READY`
+
+A7LS21 packages the A7LS20 48-row marginal queue into 4 company-machine numeric shards. This stage builds the packet only; detached company execution is separate.
+
+## Manifest
+
+```json
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_company_detached_execution": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7LS21_COMPANY_DEEP_REPLAY_PACKET_READY",
+  "executes_numeric_probe": false,
+  "executes_search": false,
+  "generated_at": "2026-06-07T13:42:40Z",
+  "hours_per_split": 2160,
+  "input_queue_count": 48,
+  "input_stage": "A7LS-20",
+  "remote_repo": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote",
+  "remote_run_root": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7ls21_company_deep_replay_20260607",
+  "rows_per_shard": 12,
+  "shard_count": 4,
+  "stage": "A7LS-21-PACKET",
+  "uses_may": false
+}
+```
+
+## Shard Plan
+
+| shard_id   |   start_row |   end_row |   rows |   semantic_pair_count |   skeleton_count |   label_family_count |   basis_premium_count |
+|:-----------|------------:|----------:|-------:|----------------------:|-----------------:|---------------------:|----------------------:|
+| s000       |           0 |        12 |     12 |                     7 |               12 |                    1 |                     8 |
+| s001       |          12 |        24 |     12 |                     7 |               10 |                    1 |                    11 |
+| s002       |          24 |        36 |     12 |                    10 |               11 |                    4 |                     5 |
+| s003       |          36 |        48 |     12 |                    10 |               12 |                    3 |                     0 |
+
+## Boundary
+
+- New formula search: not authorized.
+- Alpha proof / shadow / paper / live: not authorized.
+- May is not used.

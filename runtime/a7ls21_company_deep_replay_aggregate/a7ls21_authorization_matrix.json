@@ -1,0 +1,13 @@
+{
+  "authorized": [
+    "A7LS22 clue attribution / promotion triage"
+  ],
+  "not_authorized": [
+    "formula search",
+    "large search",
+    "alpha proof",
+    "shadow",
+    "paper",
+    "live"
+  ]
+}

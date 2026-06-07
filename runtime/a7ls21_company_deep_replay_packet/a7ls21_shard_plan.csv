@@ -1,0 +1,5 @@
+shard_id,start_row,end_row,rows,semantic_pair_count,skeleton_count,label_family_count,basis_premium_count
+s000,0,12,12,7,12,1,8
+s001,12,24,12,7,10,1,11
+s002,24,36,12,10,11,4,5
+s003,36,48,12,10,12,3,0
