@@ -1,0 +1,11 @@
+source_token,count,share
+basis_premium_like,24,0.5
+taker_flow_like,13,0.2708333333333333
+positioning_like,9,0.1875
+liquidity_like,8,0.16666666666666666
+listing_age_like,7,0.14583333333333334
+open_interest_like,7,0.14583333333333334
+price_like,5,0.10416666666666667
+regime_state,5,0.10416666666666667
+funding_state_like,4,0.08333333333333333
+volatility_like,3,0.0625
