@@ -1,0 +1,20 @@
+{
+  "active_worker_set_checked": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "company_concurrency": 2,
+  "decision": "PASS_A7LS26_NUMERIC_WAVE_LAUNCHED_ON_COMPANY_MACHINE",
+  "duplicate_worker_set_stopped": true,
+  "generated_at": "2026-06-08T00:59:45+08:00",
+  "materialized_activity_ok_input_rows": 33971,
+  "motif_count": 17,
+  "numeric_queue_rows": 4096,
+  "remote_root": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7ls26_numeric_wave_20260608",
+  "rows_per_shard": 64,
+  "semantic_pair_count": 12,
+  "shard_count": 64,
+  "skeleton_count": 89,
+  "stage": "A7LS-26",
+  "uses_may": false
+}
