@@ -1,0 +1,41 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "axis_targets": {
+    "oi_positioning": {
+      "semantic_contains": [
+        "open_interest_like",
+        "positioning_like"
+      ],
+      "target": 18000
+    },
+    "oi_taker_flow": {
+      "semantic_contains": [
+        "open_interest_like",
+        "taker_flow_like"
+      ],
+      "target": 18000
+    },
+    "raw_multi_axis_reserved": {
+      "lane": "A7LS14_B",
+      "target": 22000
+    },
+    "strong_positioning_basis": {
+      "semantic_contains": [
+        "positioning_like",
+        "basis_premium_like"
+      ],
+      "target": 22000
+    }
+  },
+  "company_concurrency": 2,
+  "decision": "PASS_A7LS25_LARGE_SEARCH_PACKET_READY_FOR_COMPANY_MATERIALIZATION",
+  "full_index": "G:\\AlphaFactory_CryptoData\\research_runtime\\a7ls15_million_scale_blueprint_generation_20260606\\a7ls15_full_blueprint_index.csv",
+  "generated_at": "2026-06-07T15:19:28Z",
+  "materialization_queue_rows": 40000,
+  "rows_per_shard": 1000,
+  "shard_count": 40,
+  "stage": "A7LS-25",
+  "total_queue_rows": 78744,
+  "uses_may": false
+}
