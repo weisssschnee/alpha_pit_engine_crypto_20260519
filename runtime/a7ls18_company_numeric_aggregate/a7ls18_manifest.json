@@ -1,0 +1,21 @@
+{
+  "authorizes_a7ls19_checkpoint_arbitration": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "completed_shards": 148,
+  "decision": "PASS_A7LS18_COMPANY_NUMERIC_CLUES_READY_FOR_A7LS19",
+  "executes_search": false,
+  "expected_shards": 148,
+  "external": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7ls18_company_numeric_20260606_r2",
+  "generated_at": "2026-06-07T11:53:18Z",
+  "label_response_rows": 1465280,
+  "materialized_activity_ok_count": 73264,
+  "missing_shards": [],
+  "non_l7_numeric_clue_rows": 5946,
+  "queue_rows": 75379,
+  "rank_label_diagnostic_clue_rows": 12136,
+  "selected_portfolio_queue_count": 2258,
+  "stage": "A7LS-18",
+  "uses_may": false
+}
