@@ -1,0 +1,20 @@
+{
+  "a7ls24_deep_replay_queue_count": 7,
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7LS23_STRICT_BIAS_AUDIT_READY_FOR_A7LS24",
+  "executes_search": false,
+  "generated_at": "2026-06-07T14:51:04Z",
+  "input_keep_review_count": 7,
+  "next_authorized": [
+    "A7LS24 deep bias replay packet"
+  ],
+  "priority_deep_replay_count": 3,
+  "secondary_deep_replay_count": 4,
+  "selected_l5_share": 1.0,
+  "semantic_pair_count": 7,
+  "stage": "A7LS-23",
+  "uses_may": false
+}

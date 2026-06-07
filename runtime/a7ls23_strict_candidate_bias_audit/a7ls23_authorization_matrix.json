@@ -1,0 +1,13 @@
+{
+  "authorized": [
+    "A7LS24 deep bias replay packet"
+  ],
+  "not_authorized": [
+    "formula search",
+    "large search",
+    "alpha proof",
+    "shadow",
+    "paper",
+    "live"
+  ]
+}
