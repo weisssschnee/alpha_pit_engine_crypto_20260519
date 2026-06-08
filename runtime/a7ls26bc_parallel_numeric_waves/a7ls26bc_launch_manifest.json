@@ -1,0 +1,35 @@
+{
+  "stage": "A7LS-26B/C",
+  "decision": "PASS_A7LS26BC_PARALLEL_NUMERIC_WAVES_DEPLOYED",
+  "created_at": "2026-06-08",
+  "remote_runtime": {
+    "a7ls26b": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7ls26b_numeric_wave_20260608",
+    "a7ls26c": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7ls26c_raw_diverse_numeric_wave_20260608"
+  },
+  "a7ls26b_queue": {
+    "numeric_queue_rows": 8192,
+    "excluded_previous_a7ls26_rows": 4096,
+    "materialized_activity_ok_remaining_rows": 29875,
+    "axis_count": 2,
+    "semantic_pair_count": 2,
+    "motif_count": 11,
+    "skeleton_count": 151
+  },
+  "a7ls26c_queue": {
+    "numeric_queue_rows": 4096,
+    "excluded_previous_rows": 12288,
+    "materialized_activity_ok_remaining_rows": 21683,
+    "raw_axis_available_rows": 21683,
+    "axis_count": 2,
+    "semantic_pair_count": 2,
+    "motif_count": 11,
+    "skeleton_count": 137
+  },
+  "authorization": {
+    "continue_numeric_waves": true,
+    "aggregate_outputs": true,
+    "alpha_proof": false,
+    "shadow_paper_live": false
+  },
+  "caveat": "Both added numeric waves show semantic_pair_count=2; this is a queue contraction warning and must be audited after aggregation."
+}
