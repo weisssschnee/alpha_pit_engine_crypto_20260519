@@ -1,0 +1,19 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_numeric_compute": false,
+  "authorizes_search": false,
+  "candidate_rows": 129226,
+  "decision": "PASS_A7LS29_PRODUCTIVE_FAMILY_QUEUE_BUILT_NO_NUMERIC_EXECUTION",
+  "field_gate1_field_count": 17,
+  "field_gate1_registry": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ls_field_gate1_contract_backfill_20260609\\a7ls_field_gate1_runner_extension_registry.json",
+  "generated_at": "2026-06-09T09:05:47Z",
+  "input_non_l7_rows": 3847,
+  "queue_rows": 6144,
+  "rows_per_shard": 512,
+  "shard_count": 12,
+  "skeleton_count": 241,
+  "skeleton_key_present": true,
+  "stage": "A7LS-29",
+  "strong_parent_rows": 3134,
+  "target_rows": 6144
+}

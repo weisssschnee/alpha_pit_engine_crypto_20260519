@@ -22,6 +22,7 @@ DEFAULT_QUEUE = Path(
     r"G:\AlphaFactory_CryptoData\research_runtime\a7ls28b_broader_targeted_space_queue_20260609\a7ls28b_targeted_blueprint_queue.csv"
 )
 QUEUE_PATH = Path(os.environ.get("A7LS_FIELD_GATE_QUEUE", str(DEFAULT_QUEUE)))
+EXTENSION_REGISTRY = os.environ.get("A7LS_FIELD_GATE_EXTENSION_REGISTRY", "")
 RUNTIME = Path(
     os.environ.get(
         "A7LS_FIELD_GATE_RUNTIME",
@@ -146,6 +147,7 @@ def classify_field(
     latent_schema: set[str],
     upper_schema: set[str],
     f3_fields: set[str],
+    extension_fields: set[str],
 ) -> dict[str, Any]:
     route = "unresolved"
     canonical = field
@@ -177,6 +179,7 @@ def classify_field(
         dependency_status = "deps_resolved" if not missing_deps else "deps_missing:" + ";".join(missing_deps)
 
     in_f3_contract = field in f3_fields
+    in_extension_registry = field in extension_fields
     if route in {"upper_alias", "dense_funding_generated", "derived_dep_generated"} and not in_f3_contract:
         contract_status = "RESOLVED_BY_RUNNER_EXTENSION_NEEDS_REGISTRY_BACKFILL"
     elif route in {"upper_alias_missing_source", "unresolved"} or dependency_status.startswith("deps_missing"):
@@ -185,6 +188,8 @@ def classify_field(
         contract_status = "OK_IN_A7AIF3_CONTRACT"
     else:
         contract_status = "OK_SCHEMA_DIRECT_NOT_IN_A7AIF3"
+    if in_extension_registry and contract_status != "BLOCK_UNRESOLVED_FIELD":
+        contract_status = "OK_BACKFILLED_BY_EXTENSION_REGISTRY"
 
     return {
         "field": field,
@@ -193,6 +198,7 @@ def classify_field(
         "dependencies": ";".join(deps),
         "dependency_status": dependency_status,
         "in_a7aif3_field_matrix": in_f3_contract,
+        "in_extension_registry": in_extension_registry,
         "contract_status": contract_status,
     }
 
@@ -213,6 +219,15 @@ def main() -> None:
     latent_schema = parquet_schema(LATENT_PANEL)
     upper_schema = parquet_schema(UPPER_REGIME_PANEL)
     f3_fields = load_f3_fields()
+    extension_fields: set[str] = set()
+    extension_registry_path = ""
+    if EXTENSION_REGISTRY:
+        extension_registry_path = EXTENSION_REGISTRY
+        extension_path = Path(EXTENSION_REGISTRY)
+        if not extension_path.exists():
+            raise FileNotFoundError(extension_path)
+        extension = json.loads(extension_path.read_text(encoding="utf-8"))
+        extension_fields = set(extension.get("field_roles", {}).keys())
 
     field_usage: Counter[str] = Counter()
     formula_rows: list[dict[str, Any]] = []
@@ -238,7 +253,7 @@ def main() -> None:
     field_map = pd.DataFrame(
         [
             {
-                **classify_field(field, base_schema, latent_schema, upper_schema, f3_fields),
+                **classify_field(field, base_schema, latent_schema, upper_schema, f3_fields, extension_fields),
                 "formula_usage_count": int(field_usage.get(field, 0)),
                 "is_system_required": field in SYSTEM_FIELDS,
                 "example_expression": field_examples.get(field, ""),
@@ -337,6 +352,8 @@ def main() -> None:
         "expression_field_count": int(len(field_usage)),
         "total_field_count_including_system": int(len(field_map)),
         "a7aif3_field_matrix_count": int(len(f3_fields)),
+        "extension_registry_path": extension_registry_path,
+        "extension_registry_field_count": int(len(extension_fields)),
         "unresolved_field_count": unresolved_count,
         "contract_drift_field_count": drift_count,
         "blocked_formula_count": blocked_formula_count,

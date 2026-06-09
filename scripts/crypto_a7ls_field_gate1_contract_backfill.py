@@ -123,6 +123,19 @@ def bool_str(value: Any) -> bool:
     return str(value).lower() in {"true", "1", "yes"}
 
 
+def clean_text(value: Any) -> str:
+    if value is None:
+        return ""
+    if pd.isna(value):
+        return ""
+    text = str(value).strip()
+    return "" if text.lower() == "nan" else text
+
+
+def split_deps(value: Any) -> list[str]:
+    return [x for x in clean_text(value).split(";") if x]
+
+
 def policy_for(row: pd.Series) -> dict[str, Any]:
     field = str(row["field"])
     route = str(row["route"])
@@ -201,10 +214,10 @@ def main() -> None:
         policy = policy_for(row)
         in_f3 = field in f3_fields
         in_ontology = field in ontology_fields
-        dependencies = str(raw.get("dependencies", "") or "")
-        canonical = str(raw.get("canonical_field", field) or field)
-        route = str(raw.get("route", ""))
-        dependency_status = str(raw.get("dependency_status", ""))
+        dependencies = clean_text(raw.get("dependencies", ""))
+        canonical = clean_text(raw.get("canonical_field", field)) or field
+        route = clean_text(raw.get("route", ""))
+        dependency_status = clean_text(raw.get("dependency_status", ""))
 
         backfill_decision = "PASS_BACKFILL_ROW_READY"
         if policy["allowed_roles_v3"] == "forbidden" or dependency_status.startswith("deps_missing"):
@@ -298,7 +311,7 @@ def main() -> None:
         if route == "upper_alias":
             registry["upper_aliases"][field] = canonical
         if route == "derived_dep_generated":
-            registry["derived_dependencies"][field] = [x for x in dependencies.split(";") if x]
+            registry["derived_dependencies"][field] = split_deps(dependencies)
 
     backfill = pd.DataFrame(backfill_rows)
     f3_append = pd.DataFrame(f3_rows)

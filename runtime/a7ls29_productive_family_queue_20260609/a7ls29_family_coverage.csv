@@ -1,0 +1,6 @@
+semantic_pair,target_rows,candidate_rows,selected_rows,motif_count,skeleton_count
+basis_premium_like|positioning_like,2304,76485,2304,5,103
+open_interest_like|positioning_like|regime_state,1536,17328,1536,1,17
+open_interest_like|positioning_like|listing_age_like,1024,10305,1024,1,63
+basis_premium_like|age_x_volatility|positioning_like,768,16584,768,2,35
+open_interest_like|positioning_like,512,8524,512,2,23
