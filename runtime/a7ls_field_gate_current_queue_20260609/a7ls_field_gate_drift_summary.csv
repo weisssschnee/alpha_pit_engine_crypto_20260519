@@ -1,0 +1,4 @@
+contract_status,route,field_count,formula_usage_count
+OK_SCHEMA_DIRECT_NOT_IN_A7AIF3,latent_schema,8,768
+RESOLVED_BY_RUNNER_EXTENSION_NEEDS_REGISTRY_BACKFILL,derived_dep_generated,4,529
+RESOLVED_BY_RUNNER_EXTENSION_NEEDS_REGISTRY_BACKFILL,upper_alias,5,455

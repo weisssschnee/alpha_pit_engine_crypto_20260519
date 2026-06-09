@@ -1,0 +1,19 @@
+{
+  "a7aif3_field_matrix_count": 32,
+  "authorizes_alpha_proof": false,
+  "authorizes_current_running_wave_to_continue": true,
+  "authorizes_next_search_expansion": false,
+  "blocked_formula_count": 0,
+  "contract_drift_field_count": 17,
+  "contract_drift_formula_count": 1506,
+  "decision": "HOLD_A7LS_FIELD_GATE_CONTRACT_DRIFT_BACKFILL_REQUIRED",
+  "executes_numeric_compute": false,
+  "executes_replay": false,
+  "expression_field_count": 34,
+  "generated_at": "2026-06-09T04:25:19Z",
+  "queue_path": "G:\\AlphaFactory_CryptoData\\research_runtime\\a7ls28b_broader_targeted_space_queue_20260609\\a7ls28b_targeted_blueprint_queue.csv",
+  "queue_rows": 2836,
+  "stage": "A7LS-FIELD-GATE-0",
+  "total_field_count_including_system": 36,
+  "unresolved_field_count": 0
+}
