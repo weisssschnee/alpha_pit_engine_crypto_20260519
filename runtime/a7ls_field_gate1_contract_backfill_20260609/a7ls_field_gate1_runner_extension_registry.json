@@ -1,0 +1,253 @@
+{
+  "dense_funding_fields": [],
+  "derived_dependencies": {
+    "account_position_divergence": [
+      "top_long_short_account_ratio_last",
+      "top_long_short_position_ratio_last"
+    ],
+    "open_interest_value_change_24h": [
+      "open_interest_value_last"
+    ],
+    "premium_abs_state": [
+      "premium_close_bps"
+    ],
+    "top_global_account_divergence": [
+      "global_long_short_account_ratio_last",
+      "top_long_short_account_ratio_last"
+    ]
+  },
+  "field_roles": {
+    "account_position_divergence": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "account_position_divergence",
+      "compiler_role_v3": "regime_neutralizer_interaction_seed",
+      "dependencies": [
+        "top_long_short_account_ratio_last",
+        "top_long_short_position_ratio_last"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "derived_dep_generated",
+      "semantic_type_v3": "positioning_like"
+    },
+    "age_percentile_active_universe": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "age_percentile_active_universe",
+      "compiler_role_v3": "regime_neutralizer_interaction_seed",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "latent_schema",
+      "semantic_type_v3": "listing_age_like"
+    },
+    "age_x_volatility": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "age_x_volatility",
+      "compiler_role_v3": "regime_neutralizer_interaction_seed",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": false,
+      "route": "latent_schema",
+      "semantic_type_v3": "age_x_volatility"
+    },
+    "basis_abs_168h": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "basis_abs_168h",
+      "compiler_role_v3": "regime_neutralizer_interaction_seed",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": false,
+      "route": "latent_schema",
+      "semantic_type_v3": "basis_premium_like"
+    },
+    "basis_dislocation_state": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "R5_basis_premium_dislocation_state",
+      "compiler_role_v3": "state_conditioning_only",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "upper_alias",
+      "semantic_type_v3": "basis_dislocation_regime"
+    },
+    "leverage_crowding_state": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "R4_leverage_crowding_state",
+      "compiler_role_v3": "state_conditioning_only",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "upper_alias",
+      "semantic_type_v3": "leverage_crowding_regime"
+    },
+    "liquidity_cycle_state": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "R3_liquidity_cycle_state",
+      "compiler_role_v3": "state_conditioning_only",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "upper_alias",
+      "semantic_type_v3": "liquidity_regime"
+    },
+    "listing_age_days": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "listing_age_days",
+      "compiler_role_v3": "regime_neutralizer_interaction_seed",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "latent_schema",
+      "semantic_type_v3": "listing_age_like"
+    },
+    "log1p_listing_age_days": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "log1p_listing_age_days",
+      "compiler_role_v3": "regime_neutralizer_interaction_seed",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "latent_schema",
+      "semantic_type_v3": "listing_age_like"
+    },
+    "market_breadth_state": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "R2_market_breadth_state",
+      "compiler_role_v3": "state_conditioning_only",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "upper_alias",
+      "semantic_type_v3": "market_breadth_regime"
+    },
+    "open_interest_value_change_24h": {
+      "allowed_roles_v3": "diagnostic|interaction_modifier",
+      "canonical_field": "open_interest_value_change_24h",
+      "compiler_role_v3": "exploratory_interaction_seed",
+      "dependencies": [
+        "open_interest_value_last"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": false,
+      "route": "derived_dep_generated",
+      "semantic_type_v3": "open_interest_like"
+    },
+    "premium_abs_168h": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "premium_abs_168h",
+      "compiler_role_v3": "regime_neutralizer_interaction_seed",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": false,
+      "route": "latent_schema",
+      "semantic_type_v3": "basis_premium_like"
+    },
+    "premium_abs_state": {
+      "allowed_roles_v3": "regime|diagnostic|interaction_modifier",
+      "canonical_field": "premium_abs_state",
+      "compiler_role_v3": "regime_neutralizer_interaction_seed",
+      "dependencies": [
+        "premium_close_bps"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": false,
+      "route": "derived_dep_generated",
+      "semantic_type_v3": "basis_premium_like"
+    },
+    "rolling_coverage_168h": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "rolling_coverage_168h",
+      "compiler_role_v3": "regime_neutralizer_interaction_seed",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "latent_schema",
+      "semantic_type_v3": "coverage_like"
+    },
+    "sqrt_listing_age_days": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "sqrt_listing_age_days",
+      "compiler_role_v3": "regime_neutralizer_interaction_seed",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "latent_schema",
+      "semantic_type_v3": "listing_age_like"
+    },
+    "stress_proxy_state": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "R10_stress_proxy_state",
+      "compiler_role_v3": "state_conditioning_only",
+      "dependencies": [
+        "nan"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "upper_alias",
+      "semantic_type_v3": "stress_regime"
+    },
+    "top_global_account_divergence": {
+      "allowed_roles_v3": "regime|neutralizer|interaction_modifier",
+      "canonical_field": "top_global_account_divergence",
+      "compiler_role_v3": "regime_neutralizer_interaction_seed",
+      "dependencies": [
+        "global_long_short_account_ratio_last",
+        "top_long_short_account_ratio_last"
+      ],
+      "diagnostic_allowed": true,
+      "ordinary_alpha_allowed": false,
+      "risk_defense_allowed": true,
+      "route": "derived_dep_generated",
+      "semantic_type_v3": "positioning_like"
+    }
+  },
+  "generated_at": "2026-06-09T04:53:00Z",
+  "stage": "A7LS-FIELD-GATE-1",
+  "upper_aliases": {
+    "basis_dislocation_state": "R5_basis_premium_dislocation_state",
+    "leverage_crowding_state": "R4_leverage_crowding_state",
+    "liquidity_cycle_state": "R3_liquidity_cycle_state",
+    "market_breadth_state": "R2_market_breadth_state",
+    "stress_proxy_state": "R10_stress_proxy_state"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_current_running_wave_to_continue": true,
+  "authorizes_next_search_expansion_if_registry_consumed": true,
+  "decision": "PASS_A7LS_FIELD_GATE1_BACKFILL_PACKAGE_BUILT",
+  "hard_rules": [
+    "backfilled fields remain interaction/regime/diagnostic inputs, not ordinary-alpha primary seeds",
+    "next queue builder must consume a7ls_field_gate1_runner_extension_registry.json or equivalent shared registry rows",
+    "any new unresolved field returns to BLOCK_UNRESOLVED_FIELD",
+    "ordinary_alpha promotion still requires response-backed non-L7 evidence"
+  ],
+  "stage": "A7LS-FIELD-GATE-1"
+}

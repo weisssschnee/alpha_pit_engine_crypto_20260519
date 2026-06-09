@@ -1,0 +1,3 @@
+ordinary_alpha_allowed,diagnostic_allowed,risk_defense_allowed,field_count,formula_usage_count
+False,True,False,5,646
+False,True,True,12,1106

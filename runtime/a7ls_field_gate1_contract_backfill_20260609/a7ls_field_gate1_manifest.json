@@ -1,0 +1,17 @@
+{
+  "a7aif3_append_rows": 17,
+  "authorizes_alpha_proof": false,
+  "authorizes_current_running_wave_to_continue": true,
+  "authorizes_next_search_expansion_if_registry_consumed": true,
+  "backfill_field_count": 17,
+  "decision": "PASS_A7LS_FIELD_GATE1_BACKFILL_PACKAGE_BUILT",
+  "executes_numeric_compute": false,
+  "executes_search": false,
+  "generated_at": "2026-06-09T04:53:00Z",
+  "input_drift_field_count": 17,
+  "ontology_patch_rows": 17,
+  "runner_derived_dependency_count": 4,
+  "runner_upper_alias_count": 5,
+  "stage": "A7LS-FIELD-GATE-1",
+  "unresolved_backfill_count": 0
+}
