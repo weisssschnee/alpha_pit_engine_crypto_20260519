@@ -1,0 +1,20 @@
+{
+  "activity_ok_total": 2730,
+  "authorizes_alpha_proof": false,
+  "authorizes_next_search": false,
+  "completion_decision": "COMPLETE_A7LS28B_TARGETED_NUMERIC_WAVE",
+  "decision": "HOLD_A7LS28B_NO_PASS_SHARDS_PORTFOLIO_QUEUE_TOO_SMALL",
+  "hold_count": 12,
+  "label_response_rows_merged": 54600,
+  "materialization_rows_merged": 2836,
+  "missing_count": 0,
+  "non_l7_numeric_clue_rows_total": 3847,
+  "pass_count": 0,
+  "queue_rows": 2836,
+  "rank_label_diagnostic_clue_rows_total": 1715,
+  "requires_field_gate1_registry_for_next_expansion": true,
+  "selected_portfolio_queue_rows_total": 12,
+  "selected_rows_merged": 12,
+  "shard_count": 12,
+  "stage": "A7LS28B_TARGETED_NUMERIC_ACCEPTANCE_20260609"
+}
