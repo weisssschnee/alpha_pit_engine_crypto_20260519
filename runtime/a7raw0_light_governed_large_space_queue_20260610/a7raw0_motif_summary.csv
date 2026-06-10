@@ -1,0 +1,11 @@
+motif,queue_rows
+raw_signed_mul,3533
+raw_safe_div_abs,3508
+raw_spread_rank,3466
+raw_mul,3461
+raw_state_gate,700
+raw_state_relative,695
+raw_same_semantic_spread,571
+raw_basis_oi_scaled_spread,267
+raw_oi_flow_interaction,96
+raw_basis_flow_signed_spread,87

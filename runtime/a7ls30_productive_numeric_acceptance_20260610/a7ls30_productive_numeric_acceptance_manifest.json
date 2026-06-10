@@ -1,0 +1,35 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "best_blueprint_id": "a7ls30_c139d322017158f7",
+  "best_expression": "SafeDiv(SafeDiv(ZScore(Mean(open_interest_value_last,4)),Abs(Mean(account_position_divergence,96))),Abs(ZScore(Mean(open_interest_last,168))))",
+  "counts": {
+    "activity_ok_total": 8181,
+    "hold_count": 0,
+    "input_blueprint_count_total": 8192,
+    "materialization_activity_false_count": 11,
+    "materialization_eval_fail_count": 0,
+    "missing_numeric_field_shards": 0,
+    "non_l7_numeric_clue_rows_total": 11859,
+    "pass_count": 16,
+    "portfolio_queue_rows_total": 4586,
+    "queue_rows": 8192,
+    "rank_label_diagnostic_clue_rows_total": 3936,
+    "selected_portfolio_queue_rows_total": 425,
+    "selected_skeleton_unique": 280,
+    "selected_top_skeleton_share": 0.009411764705882352,
+    "shard_count": 16
+  },
+  "data_runtime": "G:\\AlphaFactory_CryptoData\\research_runtime\\a7ls30_productive_numeric_acceptance_20260610",
+  "decision": "PASS_A7LS30_PRODUCTIVE_NUMERIC_ACCEPTED_NO_SEARCH_AUTH",
+  "generated_at": "2026-06-10T09:21:44Z",
+  "next_allowed": [
+    "A7RAW lightly governed large-space queue compilation",
+    "A7RAW field gate",
+    "A7RAW company numeric probe"
+  ],
+  "pullback_root": "G:\\AlphaFactory_CryptoData\\company_pullback\\a7ls30_productive_numeric_wave_20260610\\unzipped",
+  "runtime": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ls30_productive_numeric_acceptance_20260610",
+  "stage": "A7LS-30"
+}

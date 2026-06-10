@@ -1,0 +1,23 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "candidate_rows_before_governance": 16500,
+  "data_queue_path": "G:\\AlphaFactory_CryptoData\\research_runtime\\a7raw0_light_governed_large_space_queue_20260610\\a7raw0_light_governed_queue.csv",
+  "decision": "PASS_A7RAW0_LIGHT_GOVERNED_QUEUE_BUILT_NO_SEARCH_AUTH",
+  "field_count": 31,
+  "generated_at": "2026-06-10T09:28:56Z",
+  "governance": {
+    "authorizes_search": false,
+    "field_cap": 3277,
+    "field_gate_required": true,
+    "semantic_cap": 2950,
+    "skeleton_cap": 48
+  },
+  "queue_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7raw0_light_governed_large_space_queue_20260610\\a7raw0_light_governed_queue.csv",
+  "queue_rows": 16384,
+  "rows_per_shard": 512,
+  "sampling_attempts": 16622,
+  "semantic_count": 8,
+  "shard_count": 32,
+  "stage": "A7RAW-0"
+}

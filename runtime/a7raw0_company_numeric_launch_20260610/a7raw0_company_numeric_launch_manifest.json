@@ -1,0 +1,15 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "RUNNING_A7RAW0_LIGHT_GOVERNED_NUMERIC_WAVE",
+  "field_gate_decision": "PASS_A7LS_FIELD_GATE_CURRENT_QUEUE_CLEAN",
+  "launch_concurrency": 4,
+  "queue_rows": 16384,
+  "remote_queue": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7raw0_light_governed_numeric_wave_20260610\\a7raw0_light_governed_queue.csv",
+  "remote_run_root": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7raw0_light_governed_numeric_wave_20260610",
+  "rows_per_shard": 512,
+  "shard_count": 32,
+  "stage": "A7RAW-0",
+  "task_id": "job_20260610_173358_727a0e"
+}
