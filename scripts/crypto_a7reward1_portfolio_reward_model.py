@@ -641,13 +641,29 @@ def run_synthetic_smoke() -> pd.DataFrame:
     true_signal = rng.normal(size=(n_assets, n_times))
     label = 0.002 * true_signal + rng.normal(scale=0.01, size=(n_assets, n_times))
     quote_volume = np.exp(rng.normal(12.0, 0.8, size=(n_assets, n_times)))
+    train_mask = split == "train_2024"
+    validation_mask = split == "validation_2025H1"
+    test_mask = split == "test_2025H2"
+    recent_mask = split == "recent_oos_2026JanApr"
+    train_only_overfit = rng.normal(size=(n_assets, n_times))
+    train_only_overfit[:, train_mask] = true_signal[:, train_mask]
+    train_only_overfit[:, validation_mask | test_mask | recent_mask] = -true_signal[:, validation_mask | test_mask | recent_mask]
+    recent_only_overfit = rng.normal(size=(n_assets, n_times))
+    recent_only_overfit[:, recent_mask] = true_signal[:, recent_mask]
+    recent_only_overfit[:, validation_mask | test_mask] = -true_signal[:, validation_mask | test_mask]
+    fast_flip = true_signal * np.where(np.arange(n_times) % 2 == 0, 1.0, -1.0)
     candidates = [
-        ("synthetic_true_positive", true_signal),
-        ("synthetic_shuffle_noise", rng.normal(size=(n_assets, n_times))),
-        ("synthetic_sign_flip", -true_signal),
+        ("synthetic_true_positive", true_signal, True, "stable_signal"),
+        ("synthetic_orientation_equivalent", -true_signal, True, "orientation_equivalent"),
+        ("synthetic_train_only_overfit", train_only_overfit, False, "train_only_overfit"),
+        ("synthetic_recent_only_overfit", recent_only_overfit, False, "recent_only_overfit"),
+        ("synthetic_high_turnover_trap", fast_flip, False, "cost_turnover_trap"),
+        ("synthetic_shuffle_noise", rng.normal(size=(n_assets, n_times)), False, "shuffle_noise"),
     ]
     rows = []
-    for cid, signal in candidates:
+    expectations: dict[str, tuple[bool, str]] = {}
+    for cid, signal, expected_gate_pass, adversarial_case in candidates:
+        expectations[cid] = (expected_gate_pass, adversarial_case)
         candidate = {
             "blueprint_id": cid,
             "semantic_pair": "synthetic",
@@ -675,7 +691,13 @@ def run_synthetic_smoke() -> pd.DataFrame:
             )
     metrics = pd.DataFrame(rows)
     rewards = aggregate_rewards(metrics)
-    rewards["smoke_pass_expected"] = rewards["blueprint_id"].eq("synthetic_true_positive")
+    rewards["smoke_expected_gate_pass"] = rewards["blueprint_id"].map(lambda value: expectations.get(value, (False, ""))[0])
+    rewards["smoke_adversarial_case"] = rewards["blueprint_id"].map(lambda value: expectations.get(value, (False, ""))[1])
+    rewards["smoke_case_pass"] = np.where(
+        rewards["smoke_expected_gate_pass"],
+        rewards["gate_pass"] & ~rewards["hard_reject"],
+        ~rewards["gate_pass"] & rewards["hard_reject"],
+    )
     return rewards
 
 
@@ -703,9 +725,9 @@ def main() -> None:
     smoke.to_csv(runtime / "a7reward1_synthetic_smoke_leaderboard.csv", index=False)
     smoke_pass = (
         not smoke.empty
-        and smoke.iloc[0]["blueprint_id"] == "synthetic_true_positive"
-        and not bool(smoke.iloc[0]["hard_reject"])
-        and bool(smoke[smoke["blueprint_id"].eq("synthetic_shuffle_noise")]["hard_reject"].iloc[0])
+        and bool(smoke["smoke_case_pass"].all())
+        and smoke[smoke["blueprint_id"].eq("synthetic_true_positive")]["gate_pass"].eq(True).all()
+        and smoke[smoke["blueprint_id"].eq("synthetic_shuffle_noise")]["hard_reject"].eq(True).all()
     )
     if args.smoke_only:
         decision = "PASS_A7REWARD1_SYNTHETIC_SMOKE" if smoke_pass else "HOLD_A7REWARD1_SYNTHETIC_SMOKE_FAIL"

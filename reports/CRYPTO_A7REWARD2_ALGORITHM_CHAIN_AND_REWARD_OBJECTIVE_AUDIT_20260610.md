@@ -132,7 +132,133 @@ Synthetic smoke was rerun after the patch:
 PASS_A7REWARD1_SYNTHETIC_SMOKE
 ```
 
-This verifies that the reward evaluator still ranks the true synthetic signal above shuffled noise and hard-rejects the shuffle noise case.
+The smoke is now adversarial, not just true-signal-vs-noise. It verifies:
+
+```text
+synthetic_true_positive:
+  gate_pass = True
+
+synthetic_orientation_equivalent:
+  gate_pass = True
+  verifies train-only orientation handling does not reject an equivalent sign flip
+
+synthetic_train_only_overfit:
+  hard_reject = True
+  rejects a signal that wins in train but reverses in OOS
+
+synthetic_recent_only_overfit:
+  hard_reject = True
+  rejects a signal that has isolated recent-window behavior but fails OOS consistency
+
+synthetic_high_turnover_trap:
+  hard_reject = True
+  rejects a path where a non-overlap metric can look positive while net PnL / controls fail
+
+synthetic_shuffle_noise:
+  hard_reject = True
+  rejects random signal and shuffle-control dominance
+```
+
+This proves the evaluator can detect several expected failure modes. It does not prove market alpha; it proves the reward gate is no longer a trivial scalar that blindly rewards fixed-window response.
+
+## Why The Old Search Produced Invalid Alpha-Like Outputs
+
+The old A7LS/A7RAW numeric search did not lack all scoring. It had a proxy scorer. The problem is that the scorer was not a portfolio reward:
+
+```text
+score_no_may =
+  non_l7_bonus
+  + premay_positive_split_count
+  + lag_ok
+  + robust_ok
+  + (1 - control_ratio)
+  + cost5_recent_oriented * 1000
+```
+
+That can select formulas with numeric response, but it cannot distinguish enough between:
+
+```text
+response surface clue
+vs
+tradable cost-adjusted portfolio path
+vs
+control/shuffle artifact
+vs
+single-window overfit
+vs
+cluster/family repetition
+```
+
+The company checkpoint confirms this failure mode. The completed A7REWARD1 run had:
+
+```text
+completed_candidates: 80
+reward_rows: 320
+metric_rows: 9600
+eval_errors: 0
+```
+
+The old checkpoint leader by `overall_reward` was:
+
+```text
+blueprint_id: a7ls30_fea76deef615bc91
+horizon_h: 8
+expression: SafeDiv(TSRank(mark_index_basis_bps,72),Abs(Decay(account_position_divergence,48)))
+recent_sortino: 13.0146
+recent_sharpe: 6.1920
+recent_rankic: 0.0322
+recent_shuffle_control_ratio: 0.5114
+hard_reject: false
+```
+
+But the same formula at another horizon appeared as:
+
+```text
+horizon_h: 4
+recent_sortino: 12.1887
+recent_shuffle_control_ratio: 1.0931
+hard_reject: true
+hard_reject_reasons:
+  oos_net_mean_not_all_positive
+  shuffle_control_dominated_recent
+```
+
+This is exactly why a single scalar or a single horizon cannot be trusted. The old outputs may contain useful clues, but they were not validated as alpha because the active selection layer did not yet require path-level OOS reward, hard controls, and horizon/split stability.
+
+## Current Reward Validity Claim
+
+The valid claim is narrow and concrete:
+
+```text
+A7REWARD can now evaluate candidate formulas as portfolio paths.
+A7REWARD reports Sortino, Sharpe, IC/RankIC, drawdown, turnover, capacity proxy, controls, and OOS split stability.
+A7REWARD uses gate + Pareto ranking as the primary view.
+A7REWARD can reject synthetic overfit/control/noise cases.
+```
+
+The invalid claim would be:
+
+```text
+A7REWARD has proved alpha.
+A7REWARD has closed the search feedback loop.
+A7REWARD's diagnostic_composite_score is the project best function.
+```
+
+Those remain false.
+
+## Immediate Runtime Action
+
+The patched reward evaluator was uploaded to the company machine and the same A7LS30 top240 queue is being rerun with:
+
+```text
+task_id: job_20260610_215553_e0e563
+candidate_cap: 80
+hours_per_split: 720
+cost_bps: 5
+checkpoint_every: 4
+```
+
+This rerun is reward validation only. It does not create new formulas and does not authorize alpha proof.
 
 ## Remaining Holds
 
