@@ -175,6 +175,25 @@ def add_pareto_columns(rewards: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def accepted_for_next_search(rewards: pd.DataFrame) -> pd.DataFrame:
+    if rewards.empty:
+        return rewards.copy()
+    accepted = rewards[(rewards["gate_pass"].astype(bool)) & (~rewards["hard_reject"].astype(bool))].copy()
+    if accepted.empty:
+        return accepted
+    return accepted.sort_values(
+        [
+            "pareto_rank",
+            "objective_pass_count",
+            "min_oos_floor_sortino",
+            "min_oos_sortino",
+            "recent_shuffle_control_ratio",
+            "recent_sortino",
+        ],
+        ascending=[True, False, False, False, True, False],
+    )
+
+
 def selected_column_indices(timestamps: pd.DatetimeIndex, hours_per_split: int) -> np.ndarray:
     split = split_for_timestamps(timestamps)
     if hours_per_split <= 0:
@@ -804,13 +823,17 @@ def main() -> None:
     metrics.to_csv(runtime / "a7reward1_split_reward_metrics.csv", index=False)
     errors.to_csv(runtime / "a7reward1_eval_errors.csv", index=False)
     rewards.to_csv(runtime / "a7reward1_candidate_reward_leaderboard.csv", index=False)
+    accepted = accepted_for_next_search(rewards)
+    rejected = rewards[~rewards.index.isin(accepted.index)].copy() if not rewards.empty else rewards.copy()
+    accepted.to_csv(runtime / "a7reward1_accepted_for_next_search.csv", index=False)
+    rejected.to_csv(runtime / "a7reward1_validation_gate_rejections.csv", index=False)
 
     best_by_pareto = rewards.sort_values(["gate_pass", "pareto_rank", "objective_pass_count"], ascending=[False, True, False]).head(80)
     best_by_sortino = rewards.sort_values(["hard_reject", "recent_sortino"], ascending=[True, False]).head(40)
     best_by_sharpe = rewards.sort_values(["hard_reject", "recent_sharpe"], ascending=[True, False]).head(40)
     best_by_ic = rewards.sort_values(["hard_reject", "recent_rankic"], ascending=[True, False]).head(40)
     diagnostic_composite = rewards.sort_values(["hard_reject", "diagnostic_composite_score"], ascending=[True, False]).head(80)
-    top_queue = best_by_pareto
+    top_queue = accepted if not accepted.empty else best_by_pareto
     best_overall = diagnostic_composite
     best_by_pareto.to_csv(runtime / "a7reward1_pareto_leaderboard.csv", index=False)
     best_by_sortino.to_csv(runtime / "a7reward1_best_by_sortino.csv", index=False)
@@ -818,10 +841,9 @@ def main() -> None:
     best_by_ic.to_csv(runtime / "a7reward1_best_by_rankic.csv", index=False)
     diagnostic_composite.to_csv(runtime / "a7reward1_diagnostic_composite_leaderboard.csv", index=False)
 
-    valid = rewards[~rewards["hard_reject"]].copy()
     decision = (
         "PASS_A7REWARD1_PORTFOLIO_REWARD_LEADERBOARD_BUILT"
-        if smoke_pass and not valid.empty
+        if smoke_pass and not accepted.empty
         else "HOLD_A7REWARD1_REWARD_MODEL_OR_QUEUE_FAILED"
     )
     manifest = {
@@ -837,6 +859,8 @@ def main() -> None:
         "reward_rows": int(rewards.shape[0]),
         "hard_reject_rows": int(rewards["hard_reject"].sum()) if not rewards.empty else 0,
         "valid_reward_rows": int((~rewards["hard_reject"]).sum()) if not rewards.empty else 0,
+        "accepted_for_next_search_rows": int(accepted.shape[0]),
+        "accepted_for_next_search_unique_blueprints": int(accepted["blueprint_id"].nunique()) if not accepted.empty else 0,
         "eval_error_rows": int(errors.shape[0]),
         "synthetic_smoke_pass": bool(smoke_pass),
         "top_pareto_blueprint_id": str(top_queue.iloc[0]["blueprint_id"]) if not top_queue.empty else "",
@@ -845,6 +869,19 @@ def main() -> None:
         "top_diagnostic_composite_blueprint_id": str(diagnostic_composite.iloc[0]["blueprint_id"]) if not diagnostic_composite.empty else "",
         "top_diagnostic_composite_score": float(diagnostic_composite.iloc[0]["diagnostic_composite_score"]) if not diagnostic_composite.empty else np.nan,
         "ranking_policy": "multi_objective_gate_and_pareto; diagnostic_composite_score_is_not_a_search_reward",
+        "automatic_validation_gate": {
+            "output": str(runtime / "a7reward1_accepted_for_next_search.csv"),
+            "reject_output": str(runtime / "a7reward1_validation_gate_rejections.csv"),
+            "required": [
+                "train_orientation_no_positive_edge not present",
+                "oos_nonoverlap_floor_not_positive not present",
+                "min_oos_sortino > 0",
+                "min_oos_floor_sortino > 0",
+                "recent_shuffle_control_ratio < 1",
+                "hard_reject == false",
+                "gate_pass == true",
+            ],
+        },
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
         "next_required": [
@@ -878,6 +915,8 @@ def main() -> None:
         f"- cost_bps: `{manifest['cost_bps']}`",
         f"- reward_rows: `{manifest['reward_rows']}`",
         f"- valid_reward_rows: `{manifest['valid_reward_rows']}`",
+        f"- accepted_for_next_search_rows: `{manifest['accepted_for_next_search_rows']}`",
+        f"- accepted_for_next_search_unique_blueprints: `{manifest['accepted_for_next_search_unique_blueprints']}`",
         f"- hard_reject_rows: `{manifest['hard_reject_rows']}`",
         f"- eval_error_rows: `{manifest['eval_error_rows']}`",
         f"- synthetic_smoke_pass: `{manifest['synthetic_smoke_pass']}`",
@@ -889,6 +928,10 @@ def main() -> None:
         "## Pareto Leaderboard",
         "",
         md_table(best_by_pareto, 40),
+        "",
+        "## Accepted For Next Search",
+        "",
+        md_table(accepted, 40),
         "",
         "## Diagnostic Composite Leaderboard",
         "",

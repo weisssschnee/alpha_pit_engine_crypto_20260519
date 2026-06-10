@@ -82,6 +82,27 @@ recent_shuffle_control_ratio < 1
 
 This catches candidates whose median non-overlap reward looks good but at least one OOS offset is negative.
 
+## Automatic Promotion Output
+
+The evaluator now writes a machine-readable promotion queue automatically:
+
+```text
+runtime/a7reward1_portfolio_reward_model_20260610/
+  a7reward1_accepted_for_next_search.csv
+  a7reward1_validation_gate_rejections.csv
+```
+
+This removes the previous manual handoff failure mode:
+
+```text
+numeric selected queue
+-> reward evaluator
+-> automatic train/validation/test/recent/stress/control gate
+-> accepted_for_next_search only
+```
+
+The original numeric `selected_top240` is now only an input queue. It is not allowed to become the next search seed by itself.
+
 ## Strict Rerank Result
 
 Input:
@@ -115,6 +136,49 @@ old_top_reject_reasons:
 
 ## New Strict Top
 
+There are two ways to display the strict survivors:
+
+```text
+metric leader:
+  highest recent_sortino among strict survivors
+
+promotion leader:
+  automatic accepted_for_next_search order,
+  prioritizing Pareto rank, objective pass count, min OOS floor, min OOS median,
+  then shuffle/control and recent Sortino
+```
+
+The promotion leader is the one the system should feed forward.
+
+Promotion leader:
+
+```text
+blueprint_id: a7ls30_32f8844234cc65fc
+horizon_h: 4
+semantic_pair: open_interest_like|positioning_like
+motif: safe_div_abs
+expression:
+  SafeDiv(ZScore(Mean(open_interest_value_last,504)),Abs(Mean(account_position_divergence,96)))
+
+train_sortino: 0.7490
+validation_sortino: 8.7359
+validation_floor_sortino: 8.3463
+test_sortino: 15.6199
+test_floor_sortino: 14.6307
+recent_sortino: 8.0398
+recent_floor_sortino: 7.1609
+stress_sortino: 3.4987
+stress_floor_sortino: 3.3254
+recent_sharpe: 4.5867
+recent_rankic: 0.0155
+recent_net_mean: 0.0002628
+recent_max_drawdown: -0.1162
+recent_avg_turnover: 0.00543
+recent_shuffle_control_ratio: 0.6043
+```
+
+Metric leader:
+
 ```text
 blueprint_id: a7ls30_c94e306c3e19bd08
 horizon_h: 8
@@ -140,7 +204,7 @@ recent_avg_turnover: 0.00637
 recent_shuffle_control_ratio: 0.5807
 ```
 
-This is materially cleaner than the old 13 Sortino row, but it is still only a research candidate because the surviving set is narrow.
+Both are materially cleaner than the old 13 Sortino row, but they are still only research candidates because the surviving set is narrow.
 
 ## Remaining Risk
 

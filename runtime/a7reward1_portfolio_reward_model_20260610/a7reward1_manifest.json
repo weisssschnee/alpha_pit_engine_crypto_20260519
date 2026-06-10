@@ -1,11 +1,26 @@
 {
+  "accepted_for_next_search_rows": 6,
+  "accepted_for_next_search_unique_blueprints": 3,
   "authorizes_alpha_proof": false,
   "authorizes_shadow_paper_live": false,
+  "automatic_validation_gate": {
+    "output": "runtime\\a7reward1_portfolio_reward_model_20260610\\a7reward1_accepted_for_next_search.csv",
+    "reject_output": "runtime\\a7reward1_portfolio_reward_model_20260610\\a7reward1_validation_gate_rejections.csv",
+    "required": [
+      "hard_reject == false",
+      "gate_pass == true",
+      "min_oos_sortino > 0",
+      "min_oos_floor_sortino > 0",
+      "recent_shuffle_control_ratio < 1",
+      "train orientation positive edge",
+      "OOS non-overlap floors positive"
+    ]
+  },
   "candidate_cap": 80,
   "cost_bps": 5.0,
   "decision": "PASS_A7REWARD1_PORTFOLIO_REWARD_LEADERBOARD_BUILT",
   "eval_error_rows": 2,
-  "generated_at": "2026-06-10T14:28:55Z",
+  "generated_at": "2026-06-10T16:26:51Z",
   "hard_reject_rows": 306,
   "hours_per_split": 720,
   "next_required": [
@@ -22,8 +37,8 @@
   "synthetic_smoke_pass": true,
   "top_diagnostic_composite_blueprint_id": "a7ls30_fea76deef615bc91",
   "top_diagnostic_composite_score": 6.130211985057072,
-  "top_pareto_blueprint_id": "a7ls30_fea76deef615bc91",
-  "top_pareto_objective_pass_count": 7,
+  "top_pareto_blueprint_id": "a7ls30_32f8844234cc65fc",
+  "top_pareto_objective_pass_count": 8,
   "top_pareto_rank": 1,
   "valid_reward_rows": 9
 }
