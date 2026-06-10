@@ -76,19 +76,29 @@ L7-only evidence without tradable raw PnL support
 duplicate cluster without marginal contribution
 ```
 
-## Composite Reward
+## Ranking Policy
 
 ```text
-overall_reward =
-  0.35 * recent_oos_sortino
-  0.20 * min(validation_sortino, test_sortino, recent_sortino)
-  0.15 * recent_oos_sharpe
-  0.15 * recent_oos_rankic * 20
-  0.05 * may_stress_sortino
-  0.05 * capacity_score
-  -0.15 * max_drawdown_penalty
-  -0.05 * turnover_penalty
-  -0.25 * shuffle_control_penalty
+primary ranking =
+  hard gates
+  + Pareto rank across portfolio objectives
+  + objective_pass_count
+  + metric-specific leaderboards
+```
+
+The old fixed-weight `overall_reward` is deprecated as a search objective. It may remain in outputs only as `diagnostic_composite_score` for compatibility and tie-break diagnostics. It must not define project-level best by itself.
+
+Primary objectives:
+
+```text
+recent_oos_sortino
+min(validation_sortino, test_sortino, recent_sortino)
+recent_oos_sharpe
+recent_oos_rankic
+may_stress_sortino
+max_drawdown
+turnover
+shuffle/control dominance
 ```
 
 ## Leaderboard Policy
@@ -101,7 +111,8 @@ best_by_sharpe
 best_by_rankic
 best_by_stress_survival
 best_by_capacity
-best_overall
+pareto_leaderboard
+diagnostic_composite_leaderboard
 ```
 
 Numeric-proxy leaders may be shown only as:
@@ -131,7 +142,8 @@ runtime/a7reward1_portfolio_reward_model_20260610/
   a7reward1_best_by_sortino.csv
   a7reward1_best_by_sharpe.csv
   a7reward1_best_by_rankic.csv
-  a7reward1_best_overall.csv
+  a7reward1_pareto_leaderboard.csv
+  a7reward1_diagnostic_composite_leaderboard.csv
   a7reward1_manifest.json
 ```
 

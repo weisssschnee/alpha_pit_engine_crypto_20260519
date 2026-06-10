@@ -55,6 +55,16 @@ HORIZONS = [1, 4, 8, 24]
 PREMAY_SPLITS = ["validation_2025H1", "test_2025H2", "recent_oos_2026JanApr"]
 ALL_EVAL_SPLITS = ["train_2024", *PREMAY_SPLITS, "known_may2026_stress"]
 CONTROL_VARIANTS = ["one_bar_lag", "stale_168h", "sign_flip", "time_shuffle", "symbol_shuffle"]
+PARETO_OBJECTIVES = [
+    "obj_recent_sortino",
+    "obj_min_oos_sortino",
+    "obj_recent_sharpe",
+    "obj_recent_rankic",
+    "obj_stress_sortino",
+    "obj_neg_recent_drawdown",
+    "obj_neg_recent_turnover",
+    "obj_neg_shuffle_control_ratio",
+]
 
 
 def now_utc() -> str:
@@ -83,6 +93,74 @@ def md_table(df: pd.DataFrame, max_rows: int = 40) -> str:
         return view.to_markdown(index=False)
     except ImportError:
         return "```text\n" + view.to_string(index=False) + "\n```"
+
+
+def add_pareto_columns(rewards: pd.DataFrame) -> pd.DataFrame:
+    if rewards.empty:
+        return rewards
+    out = rewards.copy()
+    out["min_oos_sortino"] = out[["validation_sortino", "test_sortino", "recent_sortino"]].min(axis=1)
+    out["obj_recent_sortino"] = pd.to_numeric(out["recent_sortino"], errors="coerce")
+    out["obj_min_oos_sortino"] = pd.to_numeric(out["min_oos_sortino"], errors="coerce")
+    out["obj_recent_sharpe"] = pd.to_numeric(out["recent_sharpe"], errors="coerce")
+    out["obj_recent_rankic"] = pd.to_numeric(out["recent_rankic"], errors="coerce")
+    out["obj_stress_sortino"] = pd.to_numeric(out["stress_sortino"], errors="coerce").fillna(-1e9)
+    out["obj_neg_recent_drawdown"] = -pd.to_numeric(out["recent_max_drawdown"], errors="coerce").abs()
+    out["obj_neg_recent_turnover"] = -pd.to_numeric(out["recent_avg_turnover"], errors="coerce")
+    out["obj_neg_shuffle_control_ratio"] = -pd.to_numeric(out["recent_shuffle_control_ratio"], errors="coerce")
+
+    objective_passes = pd.DataFrame(
+        {
+            "recent_sortino_positive": out["recent_sortino"] > 0,
+            "min_oos_sortino_positive": out["min_oos_sortino"] > 0,
+            "recent_sharpe_positive": out["recent_sharpe"] > 0,
+            "recent_rankic_positive": out["recent_rankic"] > 0,
+            "stress_sortino_positive": out["stress_sortino"] > 0,
+            "shuffle_control_not_dominant": out["recent_shuffle_control_ratio"] < 1.0,
+            "net_mean_oos_all_positive": out["oos_positive_split_count"] >= 3,
+        }
+    )
+    out["objective_pass_count"] = objective_passes.sum(axis=1).astype(int)
+    out["gate_pass"] = (~out["hard_reject"]) & (out["min_oos_sortino"] > 0) & (out["recent_shuffle_control_ratio"] < 1.0)
+
+    values = out[PARETO_OBJECTIVES].replace([np.inf, -np.inf], np.nan).fillna(-1e9).to_numpy(dtype=float)
+    n = values.shape[0]
+    dominance_count = np.zeros(n, dtype=int)
+    dominates_count = np.zeros(n, dtype=int)
+    pareto_rank = np.ones(n, dtype=int)
+    remaining = set(range(n))
+    rank = 1
+    while remaining:
+        front = []
+        for i in remaining:
+            dominated = False
+            for j in remaining:
+                if i == j:
+                    continue
+                if np.all(values[j] >= values[i]) and np.any(values[j] > values[i]):
+                    dominated = True
+                    break
+            if not dominated:
+                front.append(i)
+        if not front:
+            break
+        for i in front:
+            pareto_rank[i] = rank
+            remaining.remove(i)
+        rank += 1
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                continue
+            if np.all(values[j] >= values[i]) and np.any(values[j] > values[i]):
+                dominance_count[i] += 1
+            if np.all(values[i] >= values[j]) and np.any(values[i] > values[j]):
+                dominates_count[i] += 1
+    out["pareto_rank"] = pareto_rank
+    out["pareto_front"] = out["pareto_rank"].eq(1)
+    out["dominance_count"] = dominance_count
+    out["dominates_count"] = dominates_count
+    return out
 
 
 def selected_column_indices(timestamps: pd.DatetimeIndex, hours_per_split: int) -> np.ndarray:
@@ -136,7 +214,9 @@ def contract_payload() -> dict[str, Any]:
             "rebalance": "hourly signal timestamps; non-overlap reward uses horizon-stride offsets",
             "transaction_cost": "one-way turnover * cost_bps / 10000",
         },
-        "overall_reward_formula": {
+        "ranking_policy": "multi-objective gates and Pareto ranking define the primary leaderboard; the fixed-weight score is diagnostic only",
+        "pareto_objectives": PARETO_OBJECTIVES,
+        "diagnostic_composite_formula": {
             "recent_sortino": 0.35,
             "min_validation_test_recent_sortino": 0.20,
             "recent_sharpe": 0.15,
@@ -433,8 +513,9 @@ def evaluate_queue(
                     "metric_rows": int(partial_metrics.shape[0]),
                     "reward_rows": int(partial_rewards.shape[0]),
                     "error_rows": int(partial_errors.shape[0]),
-                    "best_overall_blueprint_id": str(partial_rewards.iloc[0]["blueprint_id"]) if not partial_rewards.empty else "",
-                    "best_overall_reward": float(partial_rewards.iloc[0]["overall_reward"]) if not partial_rewards.empty else np.nan,
+                    "top_gate_blueprint_id": str(partial_rewards.iloc[0]["blueprint_id"]) if not partial_rewards.empty else "",
+                    "top_diagnostic_composite_score": float(partial_rewards.iloc[0]["diagnostic_composite_score"]) if not partial_rewards.empty else np.nan,
+                    "ranking_policy": "gate_pass_then_pareto_rank; diagnostic_composite_score_is_tiebreaker_only",
                 },
             )
     return pd.DataFrame(metric_rows), pd.DataFrame(error_rows)
@@ -483,7 +564,7 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
         turnover_penalty = max(0.0, float(recent.get("avg_turnover", 0.0)) - 0.75)
         dd_penalty = abs(min(float(recent.get("max_drawdown", 0.0)), 0.0))
         control_penalty = max(0.0, recent_shuffle_control - 0.8) if np.isfinite(recent_shuffle_control) else 1.0
-        overall = (
+        diagnostic_composite = (
             0.35 * float(recent.get("nonoverlap_median_sortino", np.nan))
             + 0.20 * float(np.nanmin(sortinos))
             + 0.15 * float(recent.get("nonoverlap_median_sharpe", np.nan))
@@ -496,8 +577,8 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
         )
         sample = group.iloc[0].to_dict()
         hard_reject_reasons = []
-        if not np.isfinite(overall):
-            hard_reject_reasons.append("non_finite_overall_reward")
+        if not np.isfinite(diagnostic_composite):
+            hard_reject_reasons.append("non_finite_diagnostic_composite")
         if not (float(recent.get("nonoverlap_median_sortino", np.nan)) > 0):
             hard_reject_reasons.append("recent_sortino_non_positive")
         if not all(oos_positive):
@@ -516,7 +597,8 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
                 "skeleton_key": sample.get("skeleton_key", ""),
                 "expression": sample.get("expression", ""),
                 "horizon_h": int(horizon),
-                "overall_reward": overall,
+                "diagnostic_composite_score": diagnostic_composite,
+                "overall_reward": diagnostic_composite,
                 "train_sortino": train.get("nonoverlap_median_sortino", np.nan),
                 "validation_sortino": validation.get("nonoverlap_median_sortino", np.nan),
                 "test_sortino": test.get("nonoverlap_median_sortino", np.nan),
@@ -537,7 +619,19 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
             }
         )
     out = pd.DataFrame(rows)
-    return out.sort_values(["hard_reject", "overall_reward", "recent_sortino"], ascending=[True, False, False])
+    out = add_pareto_columns(out)
+    return out.sort_values(
+        [
+            "gate_pass",
+            "pareto_rank",
+            "objective_pass_count",
+            "recent_sortino",
+            "min_oos_sortino",
+            "recent_shuffle_control_ratio",
+            "diagnostic_composite_score",
+        ],
+        ascending=[False, True, False, False, False, True, False],
+    )
 
 
 def run_synthetic_smoke() -> pd.DataFrame:
@@ -664,14 +758,18 @@ def main() -> None:
     errors.to_csv(runtime / "a7reward1_eval_errors.csv", index=False)
     rewards.to_csv(runtime / "a7reward1_candidate_reward_leaderboard.csv", index=False)
 
+    best_by_pareto = rewards.sort_values(["gate_pass", "pareto_rank", "objective_pass_count"], ascending=[False, True, False]).head(80)
     best_by_sortino = rewards.sort_values(["hard_reject", "recent_sortino"], ascending=[True, False]).head(40)
     best_by_sharpe = rewards.sort_values(["hard_reject", "recent_sharpe"], ascending=[True, False]).head(40)
     best_by_ic = rewards.sort_values(["hard_reject", "recent_rankic"], ascending=[True, False]).head(40)
-    best_overall = rewards.head(80)
+    diagnostic_composite = rewards.sort_values(["hard_reject", "diagnostic_composite_score"], ascending=[True, False]).head(80)
+    top_queue = best_by_pareto
+    best_overall = diagnostic_composite
+    best_by_pareto.to_csv(runtime / "a7reward1_pareto_leaderboard.csv", index=False)
     best_by_sortino.to_csv(runtime / "a7reward1_best_by_sortino.csv", index=False)
     best_by_sharpe.to_csv(runtime / "a7reward1_best_by_sharpe.csv", index=False)
     best_by_ic.to_csv(runtime / "a7reward1_best_by_rankic.csv", index=False)
-    best_overall.to_csv(runtime / "a7reward1_best_overall.csv", index=False)
+    diagnostic_composite.to_csv(runtime / "a7reward1_diagnostic_composite_leaderboard.csv", index=False)
 
     valid = rewards[~rewards["hard_reject"]].copy()
     decision = (
@@ -694,14 +792,18 @@ def main() -> None:
         "valid_reward_rows": int((~rewards["hard_reject"]).sum()) if not rewards.empty else 0,
         "eval_error_rows": int(errors.shape[0]),
         "synthetic_smoke_pass": bool(smoke_pass),
-        "best_overall_blueprint_id": str(best_overall.iloc[0]["blueprint_id"]) if not best_overall.empty else "",
-        "best_overall_reward": float(best_overall.iloc[0]["overall_reward"]) if not best_overall.empty else np.nan,
+        "top_pareto_blueprint_id": str(top_queue.iloc[0]["blueprint_id"]) if not top_queue.empty else "",
+        "top_pareto_rank": int(top_queue.iloc[0]["pareto_rank"]) if not top_queue.empty else 0,
+        "top_pareto_objective_pass_count": int(top_queue.iloc[0]["objective_pass_count"]) if not top_queue.empty else 0,
+        "top_diagnostic_composite_blueprint_id": str(diagnostic_composite.iloc[0]["blueprint_id"]) if not diagnostic_composite.empty else "",
+        "top_diagnostic_composite_score": float(diagnostic_composite.iloc[0]["diagnostic_composite_score"]) if not diagnostic_composite.empty else np.nan,
+        "ranking_policy": "multi_objective_gate_and_pareto; diagnostic_composite_score_is_not_a_search_reward",
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
         "next_required": [
             "run full A7REWARD on company machine for selected queues",
             "wire A7REWARD leaderboard into A7RAW/A7LS shard outputs",
-            "replace numeric-proxy best with reward-leader best in source-of-truth registry",
+            "replace numeric-proxy best with multi-objective Pareto reward views in source-of-truth registry",
         ],
     }
     write_json(runtime / "a7reward1_manifest.json", manifest)
@@ -715,11 +817,11 @@ def main() -> None:
         "",
         f"`{decision}`",
         "",
-        "A7REWARD1 establishes the portfolio-level reward layer for crypto alpha search. Numeric clue scores remain diagnostic; best candidates must now come from this reward leaderboard.",
+        "A7REWARD1 establishes portfolio-level evaluation for crypto alpha search. Numeric clue scores remain diagnostic. Candidate acceptance is now gated by OOS/stress/control metrics and Pareto rank; the fixed diagnostic composite is not a search reward.",
         "",
         "## Reward Contract",
         "",
-        "Primary reward is OOS cost-adjusted Sortino on a dollar-neutral cross-sectional portfolio. Secondary checks include Sharpe, IC/RankIC, drawdown, turnover, capacity proxy, stress survival, and control dominance.",
+        "Primary ranking uses multi-objective gates and Pareto rank over OOS cost-adjusted Sortino, OOS stability, Sharpe, IC/RankIC, drawdown, turnover, stress survival, and control dominance. The fixed diagnostic composite is retained only as a compatibility/tie-breaker column.",
         "",
         "## Counts",
         "",
@@ -737,9 +839,13 @@ def main() -> None:
         "",
         md_table(smoke, 20),
         "",
-        "## Best Overall",
+        "## Pareto Leaderboard",
         "",
-        md_table(best_overall, 40),
+        md_table(best_by_pareto, 40),
+        "",
+        "## Diagnostic Composite Leaderboard",
+        "",
+        md_table(diagnostic_composite, 30),
         "",
         "## Best By Sortino",
         "",
