@@ -1,0 +1,11 @@
+{
+  "completed_candidates": 80,
+  "error_rows": 2,
+  "generated_at": "2026-06-10T14:28:53Z",
+  "metric_rows": 9430,
+  "ranking_policy": "gate_pass_then_pareto_rank; diagnostic_composite_score_is_tiebreaker_only",
+  "reward_rows": 315,
+  "top_diagnostic_composite_score": 6.130211985057072,
+  "top_gate_blueprint_id": "a7ls30_fea76deef615bc91",
+  "total_candidates": 80
+}

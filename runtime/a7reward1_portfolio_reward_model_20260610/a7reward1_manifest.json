@@ -1,0 +1,29 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_cap": 80,
+  "cost_bps": 5.0,
+  "decision": "PASS_A7REWARD1_PORTFOLIO_REWARD_LEADERBOARD_BUILT",
+  "eval_error_rows": 2,
+  "generated_at": "2026-06-10T14:28:55Z",
+  "hard_reject_rows": 306,
+  "hours_per_split": 720,
+  "next_required": [
+    "run full A7REWARD on company machine for selected queues",
+    "wire A7REWARD leaderboard into A7RAW/A7LS shard outputs",
+    "replace numeric-proxy best with multi-objective Pareto reward views in source-of-truth registry"
+  ],
+  "queue_path": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7ls30_productive_numeric_acceptance_20260610\\a7ls30_selected_top240.csv",
+  "queue_rows": 240,
+  "ranking_policy": "multi_objective_gate_and_pareto; diagnostic_composite_score_is_not_a_search_reward",
+  "reward_rows": 315,
+  "split_metric_rows": 9430,
+  "stage": "A7REWARD-1",
+  "synthetic_smoke_pass": true,
+  "top_diagnostic_composite_blueprint_id": "a7ls30_fea76deef615bc91",
+  "top_diagnostic_composite_score": 6.130211985057072,
+  "top_pareto_blueprint_id": "a7ls30_fea76deef615bc91",
+  "top_pareto_objective_pass_count": 7,
+  "top_pareto_rank": 1,
+  "valid_reward_rows": 9
+}

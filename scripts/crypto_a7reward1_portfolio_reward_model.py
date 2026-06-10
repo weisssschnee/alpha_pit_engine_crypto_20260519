@@ -58,6 +58,7 @@ CONTROL_VARIANTS = ["one_bar_lag", "stale_168h", "sign_flip", "time_shuffle", "s
 PARETO_OBJECTIVES = [
     "obj_recent_sortino",
     "obj_min_oos_sortino",
+    "obj_min_oos_floor_sortino",
     "obj_recent_sharpe",
     "obj_recent_rankic",
     "obj_stress_sortino",
@@ -100,8 +101,13 @@ def add_pareto_columns(rewards: pd.DataFrame) -> pd.DataFrame:
         return rewards
     out = rewards.copy()
     out["min_oos_sortino"] = out[["validation_sortino", "test_sortino", "recent_sortino"]].min(axis=1)
+    if {"validation_floor_sortino", "test_floor_sortino", "recent_floor_sortino"}.issubset(out.columns):
+        out["min_oos_floor_sortino"] = out[["validation_floor_sortino", "test_floor_sortino", "recent_floor_sortino"]].min(axis=1)
+    else:
+        out["min_oos_floor_sortino"] = np.nan
     out["obj_recent_sortino"] = pd.to_numeric(out["recent_sortino"], errors="coerce")
     out["obj_min_oos_sortino"] = pd.to_numeric(out["min_oos_sortino"], errors="coerce")
+    out["obj_min_oos_floor_sortino"] = pd.to_numeric(out["min_oos_floor_sortino"], errors="coerce")
     out["obj_recent_sharpe"] = pd.to_numeric(out["recent_sharpe"], errors="coerce")
     out["obj_recent_rankic"] = pd.to_numeric(out["recent_rankic"], errors="coerce")
     out["obj_stress_sortino"] = pd.to_numeric(out["stress_sortino"], errors="coerce").fillna(-1e9)
@@ -113,6 +119,7 @@ def add_pareto_columns(rewards: pd.DataFrame) -> pd.DataFrame:
         {
             "recent_sortino_positive": out["recent_sortino"] > 0,
             "min_oos_sortino_positive": out["min_oos_sortino"] > 0,
+            "min_oos_floor_sortino_positive": out["min_oos_floor_sortino"] > 0,
             "recent_sharpe_positive": out["recent_sharpe"] > 0,
             "recent_rankic_positive": out["recent_rankic"] > 0,
             "stress_sortino_positive": out["stress_sortino"] > 0,
@@ -121,7 +128,12 @@ def add_pareto_columns(rewards: pd.DataFrame) -> pd.DataFrame:
         }
     )
     out["objective_pass_count"] = objective_passes.sum(axis=1).astype(int)
-    out["gate_pass"] = (~out["hard_reject"]) & (out["min_oos_sortino"] > 0) & (out["recent_shuffle_control_ratio"] < 1.0)
+    out["gate_pass"] = (
+        (~out["hard_reject"])
+        & (out["min_oos_sortino"] > 0)
+        & (out["min_oos_floor_sortino"] > 0)
+        & (out["recent_shuffle_control_ratio"] < 1.0)
+    )
 
     values = out[PARETO_OBJECTIVES].replace([np.inf, -np.inf], np.nan).fillna(-1e9).to_numpy(dtype=float)
     n = values.shape[0]
@@ -552,6 +564,11 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
             float(test.get("nonoverlap_median_sortino", np.nan)),
             float(recent.get("nonoverlap_median_sortino", np.nan)),
         ]
+        floor_sortinos = [
+            float(validation.get("nonoverlap_floor_sortino", np.nan)),
+            float(test.get("nonoverlap_floor_sortino", np.nan)),
+            float(recent.get("nonoverlap_floor_sortino", np.nan)),
+        ]
         oos_positive = [
             float(validation.get("net_mean", np.nan)) > 0,
             float(test.get("net_mean", np.nan)) > 0,
@@ -581,6 +598,10 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
             hard_reject_reasons.append("non_finite_diagnostic_composite")
         if not (float(recent.get("nonoverlap_median_sortino", np.nan)) > 0):
             hard_reject_reasons.append("recent_sortino_non_positive")
+        if not (float(train.get("net_mean", np.nan)) > 0):
+            hard_reject_reasons.append("train_orientation_no_positive_edge")
+        if not all(np.isfinite(value) and value > 0 for value in floor_sortinos):
+            hard_reject_reasons.append("oos_nonoverlap_floor_not_positive")
         if not all(oos_positive):
             hard_reject_reasons.append("oos_net_mean_not_all_positive")
         if not np.isfinite(recent_shuffle_control):
@@ -603,7 +624,11 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
                 "validation_sortino": validation.get("nonoverlap_median_sortino", np.nan),
                 "test_sortino": test.get("nonoverlap_median_sortino", np.nan),
                 "recent_sortino": recent.get("nonoverlap_median_sortino", np.nan),
+                "validation_floor_sortino": validation.get("nonoverlap_floor_sortino", np.nan),
+                "test_floor_sortino": test.get("nonoverlap_floor_sortino", np.nan),
+                "recent_floor_sortino": recent.get("nonoverlap_floor_sortino", np.nan),
                 "stress_sortino": stress.get("nonoverlap_median_sortino", np.nan),
+                "stress_floor_sortino": stress.get("nonoverlap_floor_sortino", np.nan),
                 "recent_sharpe": recent.get("nonoverlap_median_sharpe", np.nan),
                 "recent_ic": recent.get("ic_mean", np.nan),
                 "recent_rankic": recent.get("rankic_mean", np.nan),

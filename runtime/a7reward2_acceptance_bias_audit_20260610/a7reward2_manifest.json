@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "generated_at": "2026-06-10T15:58:18Z",
+  "input_metric_rows": 9430,
+  "stage": "A7REWARD-2-ACCEPTANCE-BIAS-AUDIT",
+  "strict_gate_pass_rows": 6,
+  "strict_gate_pass_unique_blueprints": 3,
+  "strict_reward_rows": 315,
+  "top_old_blueprint_rejected": true,
+  "top_old_reject_reasons": "train_orientation_no_positive_edge;oos_nonoverlap_floor_not_positive",
+  "top_strict_blueprint_id": "a7ls30_c94e306c3e19bd08",
+  "top_strict_expression": "SafeDiv(ZScore(Mean(open_interest_value_last,240)),Abs(Mean(account_position_divergence,72)))",
+  "top_strict_horizon_h": 8,
+  "top_strict_min_oos_floor_sortino": 7.04953819525488,
+  "top_strict_recent_sortino": 8.048541921401895
+}

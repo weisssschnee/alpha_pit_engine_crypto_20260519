@@ -31,7 +31,6 @@
   "pareto_objectives": [
     "obj_recent_sortino",
     "obj_min_oos_sortino",
-    "obj_min_oos_floor_sortino",
     "obj_recent_sharpe",
     "obj_recent_rankic",
     "obj_stress_sortino",

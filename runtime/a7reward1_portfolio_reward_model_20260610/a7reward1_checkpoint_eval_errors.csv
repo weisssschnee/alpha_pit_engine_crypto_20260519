@@ -1,0 +1,3 @@
+blueprint_id,error,expression
+a7ls30_4ccf03d3ec71426c,"MemoryError((96, 3481), dtype('float64'))","Clip(CSRank(Sub(Delta(mark_index_basis_bps,2),ZScore(Mean(global_long_short_account_ratio_last,72)))),-3,3)"
+a7ls30_649adbc6c6bad5f6,"MemoryError((96, 3481), dtype('float64'))","Clip(ZScore(Sub(Delta(mark_index_basis_bps,2),ZScore(Mean(global_long_short_account_ratio_mean,36)))),-3,3)"
