@@ -1,0 +1,6 @@
+gate_decision,semantic_pair,formula_count
+PASS,basis_premium_like|positioning_like,2804
+PASS,open_interest_like|positioning_like|regime_state,2048
+PASS,open_interest_like|positioning_like,1536
+PASS,open_interest_like|positioning_like|listing_age_like,1235
+PASS,basis_premium_like|age_x_volatility|positioning_like,569

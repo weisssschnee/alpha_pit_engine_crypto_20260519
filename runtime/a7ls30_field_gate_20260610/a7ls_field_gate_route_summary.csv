@@ -1,0 +1,6 @@
+route,contract_status,field_count,formula_usage_count
+latent_schema,OK_BACKFILLED_BY_EXTENSION_REGISTRY,8,2699
+upper_alias,OK_BACKFILLED_BY_EXTENSION_REGISTRY,5,2128
+derived_dep_generated,OK_BACKFILLED_BY_EXTENSION_REGISTRY,3,1503
+base_schema,OK_IN_A7AIF3_CONTRACT,15,11594
+latent_schema,OK_IN_A7AIF3_CONTRACT,2,65

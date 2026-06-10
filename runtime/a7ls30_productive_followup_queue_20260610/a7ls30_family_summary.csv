@@ -1,0 +1,12 @@
+semantic_pair,motif,queue_rows
+open_interest_like|positioning_like|regime_state,seed_gated_sign,2048
+open_interest_like|positioning_like|listing_age_like,seed_sub,1235
+open_interest_like|positioning_like,smooth_mul,902
+basis_premium_like|positioning_like,sub,678
+basis_premium_like|positioning_like,spread_rank,678
+basis_premium_like|positioning_like,signed_spread,678
+basis_premium_like|positioning_like,safe_div_abs,678
+open_interest_like|positioning_like,safe_div_abs,634
+basis_premium_like|age_x_volatility|positioning_like,seed_mul,514
+basis_premium_like|positioning_like,mean_reversion_gate,92
+basis_premium_like|age_x_volatility|positioning_like,seed_sub,55

@@ -1,0 +1,25 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_search": false,
+  "candidate_rows_before_balance": 52560,
+  "data_queue_path": "G:\\AlphaFactory_CryptoData\\research_runtime\\a7ls30_productive_followup_queue_20260610\\a7ls30_productive_followup_queue.csv",
+  "decision": "PASS_A7LS30_PRODUCTIVE_FOLLOWUP_QUEUE_BUILT_NO_SEARCH_AUTH",
+  "family_targets": {
+    "basis_premium_like|age_x_volatility|positioning_like": 1024,
+    "basis_premium_like|positioning_like": 2048,
+    "open_interest_like|positioning_like": 1536,
+    "open_interest_like|positioning_like|listing_age_like": 1536,
+    "open_interest_like|positioning_like|regime_state": 2048
+  },
+  "generated_at": "2026-06-10T01:22:15Z",
+  "next_required": [
+    "A7LS30 field gate",
+    "A7LS30 company numeric probe"
+  ],
+  "parent_rows_loaded": 2127,
+  "queue_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ls30_productive_followup_queue_20260610\\a7ls30_productive_followup_queue.csv",
+  "queue_rows": 8192,
+  "rows_per_shard": 512,
+  "shard_count": 16,
+  "stage": "A7LS-30"
+}

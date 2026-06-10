@@ -1,0 +1,21 @@
+{
+  "a7aif3_field_matrix_count": 32,
+  "authorizes_alpha_proof": false,
+  "authorizes_current_running_wave_to_continue": true,
+  "authorizes_next_search_expansion": true,
+  "blocked_formula_count": 0,
+  "contract_drift_field_count": 0,
+  "contract_drift_formula_count": 0,
+  "decision": "PASS_A7LS_FIELD_GATE_CURRENT_QUEUE_CLEAN",
+  "executes_numeric_compute": false,
+  "executes_replay": false,
+  "expression_field_count": 31,
+  "extension_registry_field_count": 17,
+  "extension_registry_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ls_field_gate1_contract_backfill_20260609\\a7ls_field_gate1_runner_extension_registry.json",
+  "generated_at": "2026-06-10T01:22:30Z",
+  "queue_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7ls30_productive_followup_queue_20260610\\a7ls30_productive_followup_queue.csv",
+  "queue_rows": 8192,
+  "stage": "A7LS-FIELD-GATE-0",
+  "total_field_count_including_system": 33,
+  "unresolved_field_count": 0
+}
