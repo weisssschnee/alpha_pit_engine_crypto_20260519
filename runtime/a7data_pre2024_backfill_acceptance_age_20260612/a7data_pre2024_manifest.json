@@ -1,0 +1,47 @@
+{
+  "age_augmented_gold_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe_pre2024_1h_backfill_gold_age_v1_20260612",
+  "age_columns": [
+    "listing_age_hours",
+    "listing_age_days",
+    "log1p_listing_age_days",
+    "sqrt_listing_age_days",
+    "age_percentile_active_universe",
+    "active_universe_size",
+    "history_length_hours",
+    "first_observed_timestamp",
+    "listing_age_source",
+    "age_bucket"
+  ],
+  "authorized_use": [
+    "regime_bank",
+    "stress_prototype",
+    "age_bucket_attribution",
+    "microstructure_1h_feature_source"
+  ],
+  "converted_files": 932,
+  "decision": "PASS_A7DATA_PRE2024_BACKFILL_ACCEPTED_WITH_AGE_AUGMENTATION",
+  "duplicate_timestamp_count": 0,
+  "generated_at": "2026-06-12T08:27:22Z",
+  "listing_age_semantics": "observed first-seen lower bound, consistent with existing A7AK listing_age_days semantics; not exchange true listing date",
+  "max_timestamp": "2023-12-31 23:00:00+00:00",
+  "min_timestamp": "2023-07-01 00:00:00+00:00",
+  "not_authorized_use": [
+    "direct_merge_into_ordinary_alpha_search_panel",
+    "alpha_proof",
+    "shadow_paper_live"
+  ],
+  "output_files": 932,
+  "outputs": {
+    "age_augmented_manifest": "runtime\\a7data_pre2024_backfill_acceptance_age_20260612\\a7data_pre2024_age_augmented_manifest.csv",
+    "age_bucket_summary": "runtime\\a7data_pre2024_backfill_acceptance_age_20260612\\a7data_pre2024_age_bucket_summary.csv",
+    "first_seen_map": "runtime\\a7data_pre2024_backfill_acceptance_age_20260612\\a7data_pre2024_first_seen_map.csv",
+    "report": "reports\\CRYPTO_A7DATA_PRE2024_BACKFILL_ACCEPTANCE_AGE_20260612.md",
+    "symbol_acceptance_summary": "runtime\\a7data_pre2024_backfill_acceptance_age_20260612\\a7data_pre2024_symbol_acceptance_summary.csv"
+  },
+  "raw_404_listing_gaps": 124,
+  "raw_ok_or_existing": 932,
+  "rows_1h": 668590,
+  "source_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe_pre2024_1h_backfill_gold_v1_20260612",
+  "stage": "A7DATA-PRE2024",
+  "symbols": 176
+}
