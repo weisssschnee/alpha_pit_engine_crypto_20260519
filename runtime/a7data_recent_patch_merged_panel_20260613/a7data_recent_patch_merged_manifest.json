@@ -1,0 +1,44 @@
+{
+  "age_semantics": "observed first-seen lower bound; not true exchange listing date",
+  "authorized_use": [
+    "controlled_experiment",
+    "recent_regime_validation",
+    "patch_aware_candidate_validation"
+  ],
+  "decision": "PASS_A7DATA_RECENT_PATCH_MERGED_PANEL_READY_FOR_CONTROLLED_EXPERIMENT",
+  "duplicate_after_merge": 0,
+  "generated_at": "2026-06-12T17:47:57Z",
+  "inf_cells": 0,
+  "main_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v2_20260527",
+  "mean_funding_rate_coverage": 0.24172422614290656,
+  "mean_mark_index_basis_bps_coverage": 0.9965212588837079,
+  "mean_open_interest_last_coverage": 0.9986491341353043,
+  "mean_premium_close_bps_coverage": 0.9989331571508395,
+  "not_authorized_use": [
+    "alpha_proof",
+    "shadow_paper_live",
+    "search_without_field_gates"
+  ],
+  "out_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v3_patch_age_20260613",
+  "outputs": {
+    "coverage": "runtime\\a7data_recent_patch_merged_panel_20260613\\a7data_recent_patch_merged_coverage.csv",
+    "manifest": "runtime\\a7data_recent_patch_merged_panel_20260613\\a7data_recent_patch_merged_manifest.csv",
+    "overlap_rows": "runtime\\a7data_recent_patch_merged_panel_20260613\\a7data_recent_patch_overlap_rows.csv",
+    "report": "reports\\CRYPTO_A7DATA_RECENT_PATCH_MERGED_PANEL_20260613.md",
+    "schema": "runtime\\a7data_recent_patch_merged_panel_20260613\\a7data_recent_patch_merged_schema.csv"
+  },
+  "overlap_rows_dropped": 498,
+  "patch_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_recent_patch_1h_v1_20260612",
+  "required_gates": [
+    "field_contract_enforcement",
+    "premium_coverage_gate",
+    "funding_coverage_gate",
+    "age_control_gate",
+    "source_trace_checksum_before_final_proof"
+  ],
+  "rows": 7152282,
+  "stage": "A7DATA-RECENT-PATCH-MERGE",
+  "symbols": 498,
+  "timestamp_max": "2026-06-11 23:00:00",
+  "timestamp_min": "2024-01-01 00:00:00"
+}
