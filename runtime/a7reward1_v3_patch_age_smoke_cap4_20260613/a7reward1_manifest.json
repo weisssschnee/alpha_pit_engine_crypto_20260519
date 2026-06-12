@@ -1,0 +1,52 @@
+{
+  "accepted_for_next_search_rows": 0,
+  "accepted_for_next_search_unique_blueprints": 0,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "automatic_validation_gate": {
+    "output": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7reward1_v3_patch_age_smoke_cap4_20260613\\a7reward1_accepted_for_next_search.csv",
+    "reject_output": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7reward1_v3_patch_age_smoke_cap4_20260613\\a7reward1_validation_gate_rejections.csv",
+    "required": [
+      "train_orientation_no_positive_edge not present",
+      "oos_nonoverlap_floor_not_positive not present",
+      "min_oos_sortino > 0",
+      "min_oos_floor_sortino > 0",
+      "recent_shuffle_control_ratio < 1",
+      "orientation_sample_too_small not present",
+      "hard_reject == false",
+      "gate_pass == true"
+    ]
+  },
+  "candidate_cap": 4,
+  "cost_bps": 5.0,
+  "decision": "HOLD_A7REWARD1_REWARD_MODEL_OR_QUEUE_FAILED",
+  "eval_error_rows": 0,
+  "generated_at": "2026-06-12T18:42:30Z",
+  "hard_reject_rows": 12,
+  "hours_per_split": 336,
+  "may_stress_hours": 336,
+  "next_required": [
+    "run full A7REWARD on company machine for selected queues",
+    "wire A7REWARD leaderboard into A7RAW/A7LS shard outputs",
+    "replace numeric-proxy best with multi-objective Pareto reward views in source-of-truth registry"
+  ],
+  "orientation_extension_crash_like_hours": 0,
+  "orientation_extension_hours": 720,
+  "orientation_extension_hours_requested": 720,
+  "orientation_train_hours": 2880,
+  "queue_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7reward1_portfolio_reward_model_20260610\\a7reward1_accepted_for_next_search.csv",
+  "queue_rows": 6,
+  "ranking_policy": "multi_objective_gate_and_pareto; diagnostic_composite_score_is_not_a_search_reward",
+  "reward_rows": 12,
+  "split_metric_rows": 288,
+  "stage": "A7REWARD-1",
+  "synthetic_smoke_pass": true,
+  "top_diagnostic_composite_blueprint_id": "a7ls30_32f8844234cc65fc",
+  "top_diagnostic_composite_score": 6.545631035279719,
+  "top_pareto_blueprint_id": "a7ls30_c94e306c3e19bd08",
+  "top_pareto_objective_pass_count": 7,
+  "top_pareto_rank": 1,
+  "train_crash_like_hours": 100,
+  "train_hours_per_split": 2160,
+  "valid_reward_rows": 0
+}

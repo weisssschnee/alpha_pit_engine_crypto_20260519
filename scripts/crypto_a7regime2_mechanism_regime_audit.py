@@ -327,7 +327,7 @@ def summarize_mask(states: pd.DataFrame, name: str, mask: np.ndarray) -> list[di
         "train_rate": train_rate,
         "may_rate": may_rate,
         "may_vs_train_enrichment": enrichment,
-        "next_24h_market_ret_when_on": float(states.loc[mask, "market_ret_24h"].shift(-24).mean()) if mask.any() else np.nan,
+        "future_label_next_24h_market_ret_when_on": float(states["market_ret_24h"].shift(-24).loc[mask].mean()) if mask.any() else np.nan,
         "decision": "candidate_mechanism_regime" if total_hours >= 240 and total_episodes >= 3 else "thin_attribution_only",
     }
     for split_name in SPLIT_ORDER:

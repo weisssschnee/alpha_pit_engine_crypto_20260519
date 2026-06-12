@@ -1,0 +1,28 @@
+{
+  "base_dir": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v3_patch_age_20260613",
+  "decision": "PASS_A7REGIME2_MECHANISM_REGIME_CANDIDATES_FOUND",
+  "generated_at": "2026-06-12T18:12:23Z",
+  "hour_count": 21432,
+  "load_meta": {
+    "base_dir": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v3_patch_age_20260613",
+    "files_read": 498,
+    "max_timestamp": "2026-06-11 23:00:00+00:00",
+    "min_timestamp": "2024-01-01 00:00:00+00:00",
+    "missing_columns_file_counts": {},
+    "row_count": 7152282
+  },
+  "max_timestamp": "2026-06-11 23:00:00+00:00",
+  "min_timestamp": "2024-01-01 00:00:00+00:00",
+  "outputs": {
+    "hourly_state_panel": "runtime\\a7regime2_v3_patch_age_20260613\\a7regime2_hourly_mechanism_state_panel.csv",
+    "regime_priority_recommendations": "runtime\\a7regime2_v3_patch_age_20260613\\a7regime2_regime_priority_recommendations.csv",
+    "report": "reports\\CRYPTO_A7REGIME2_V3_PATCH_AGE_MECHANISM_AUDIT_20260613.md",
+    "state_overlap_matrix": "runtime\\a7regime2_v3_patch_age_20260613\\a7regime2_state_overlap_matrix.csv",
+    "state_sufficiency_and_enrichment": "runtime\\a7regime2_v3_patch_age_20260613\\a7regime2_state_sufficiency_and_enrichment.csv"
+  },
+  "promote_to_mechanism_regime_candidate": 3,
+  "stage": "A7REGIME-2",
+  "state_rows": 30,
+  "symbol_cap": 0,
+  "usable_or_attribution_state_count": 18
+}

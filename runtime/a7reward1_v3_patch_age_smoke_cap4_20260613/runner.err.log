@@ -1,0 +1,26 @@
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7reward1_portfolio_reward_model.py:384: RuntimeWarning: Mean of empty slice
+  centered = ranks - np.nanmean(ranks, axis=0, keepdims=True)
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7reward1_portfolio_reward_model.py:231: RuntimeWarning: All-NaN slice encountered
+  market_ret = np.nanmedian(ret1, axis=0)
+C:\Users\12398\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1593: RuntimeWarning: All-NaN slice encountered
+  return fnb._ureduce(a,
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7al2x5_evaluator_preflight_smoke.py:222: RuntimeWarning: Mean of empty slice
+  mean = np.nanmean(values, axis=0, keepdims=True)
+C:\Users\12398\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1997: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7reward1_portfolio_reward_model.py:384: RuntimeWarning: Mean of empty slice
+  centered = ranks - np.nanmean(ranks, axis=0, keepdims=True)
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7al2x5_evaluator_preflight_smoke.py:222: RuntimeWarning: Mean of empty slice
+  mean = np.nanmean(values, axis=0, keepdims=True)
+C:\Users\12398\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1997: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7reward1_portfolio_reward_model.py:384: RuntimeWarning: Mean of empty slice
+  centered = ranks - np.nanmean(ranks, axis=0, keepdims=True)
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7reward1_portfolio_reward_model.py:384: RuntimeWarning: Mean of empty slice
+  centered = ranks - np.nanmean(ranks, axis=0, keepdims=True)
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7al2x5_evaluator_preflight_smoke.py:222: RuntimeWarning: Mean of empty slice
+  mean = np.nanmean(values, axis=0, keepdims=True)
+C:\Users\12398\AppData\Local\Programs\Python\Python311\Lib\site-packages\numpy\lib\_nanfunctions_impl.py:1997: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+G:\Project_V7_Rotation\alpha_pit_engine_crypto_20260519\scripts\crypto_a7reward1_portfolio_reward_model.py:384: RuntimeWarning: Mean of empty slice
+  centered = ranks - np.nanmean(ranks, axis=0, keepdims=True)
