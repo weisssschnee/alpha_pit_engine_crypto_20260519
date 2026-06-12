@@ -1,0 +1,25 @@
+{
+  "decision": "PASS_A7GUARD0_PRESEARCH_GUARD_READY",
+  "gate_fail_rows": 0,
+  "gate_missing_rows": 0,
+  "gate_rows": 8,
+  "generated_at": "2026-06-12T06:49:53Z",
+  "guard_policy": {
+    "accepted_for_next_search": "allowed_only_after_current_reward_rerun_and_guard_review",
+    "backward_fill": "requires explicit PIT proof",
+    "fit_transform": "requires split-aware fit proof",
+    "negative_shift": "allowed only in label/control code paths",
+    "raw_selected_queues": "not_allowed_directly_without_guard"
+  },
+  "outputs": {
+    "chain_gate_inventory": "runtime\\a7guard0_leakage_chain_audit_20260612\\a7guard0_chain_gate_inventory.csv",
+    "report": "reports\\CRYPTO_A7GUARD0_LEAKAGE_CHAIN_AUDIT_20260612.md",
+    "required_fixes": "runtime\\a7guard0_leakage_chain_audit_20260612\\a7guard0_required_fixes.csv",
+    "runtime_result_inventory": "runtime\\a7guard0_leakage_chain_audit_20260612\\a7guard0_runtime_result_inventory.csv",
+    "static_leakage_scan": "runtime\\a7guard0_leakage_chain_audit_20260612\\a7guard0_static_leakage_scan.csv"
+  },
+  "runtime_artifact_rows": 579,
+  "stage": "A7GUARD-0",
+  "static_hold_review_rows": 0,
+  "static_scan_rows": 94
+}

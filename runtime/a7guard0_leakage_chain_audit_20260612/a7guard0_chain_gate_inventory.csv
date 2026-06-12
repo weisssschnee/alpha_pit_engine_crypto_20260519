@@ -1,0 +1,9 @@
+gate,artifact,status,required_action
+reward_writes_accepted_queue,scripts/crypto_a7reward1_portfolio_reward_model.py,PASS,Reward must auto-write accepted/rejected queues; raw selected queues cannot feed search directly.
+reward_uses_nonoverlap_floor,scripts/crypto_a7reward1_portfolio_reward_model.py,PASS,Reward must reject candidates with negative OOS non-overlap floors.
+reward_has_control_gate,scripts/crypto_a7reward1_portfolio_reward_model.py,PASS,Reward must compare original signal against controls before next-search acceptance.
+reward_orientation_not_tail720_only,scripts/crypto_a7reward1_portfolio_reward_model.py,PASS,Orientation must support full train and explicitly logged contiguous extension; tail-only orientation is not enough.
+accepted_queue_exists,runtime/a7reward1_portfolio_reward_model_20260610/a7reward1_accepted_for_next_search.csv,PASS,Search seeds must come from accepted_for_next_search after rerun under current reward code.
+rejection_queue_exists,runtime/a7reward1_portfolio_reward_model_20260610/a7reward1_validation_gate_rejections.csv,PASS,Rejected candidates and reasons must be retained for audit.
+explicit_presearch_accepted_queue_exists,runtime\a7reward1_portfolio_reward_model_20260610\a7reward1_accepted_for_next_search.csv,PASS,"Pre-search launcher must point to a non-empty accepted_for_next_search queue, not a raw selected queue."
+explicit_presearch_queue_is_accepted_type,runtime\a7reward1_portfolio_reward_model_20260610\a7reward1_accepted_for_next_search.csv,PASS,Queue filename must make the promotion status explicit.

@@ -1,0 +1,3 @@
+priority,issue,evidence,required_action
+P0,Next large search must consume guarded accepted queues only.,"Raw selected queues are discovery artifacts, not promotion artifacts.",Wire pre-search launcher to require A7GUARD-0 PASS plus current reward accepted_for_next_search from the active code version.
+P1,Regime sufficiency remains a data dependency.,"A7REGIME-1 found thin extreme volatility, funding extreme, and liquidity expansion OOS coverage.","Add about six months forward data if available, and prefer earlier-history backfill for high-volatility regimes."

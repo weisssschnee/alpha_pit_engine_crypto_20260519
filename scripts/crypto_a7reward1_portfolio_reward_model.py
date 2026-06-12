@@ -54,6 +54,7 @@ FIELD_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
 HORIZONS = [1, 4, 8, 24]
 PREMAY_SPLITS = ["validation_2025H1", "test_2025H2", "recent_oos_2026JanApr"]
 ALL_EVAL_SPLITS = ["train_2024", *PREMAY_SPLITS, "known_may2026_stress"]
+ORIENTATION_SPLIT = "orientation_contiguous_extension_train"
 CONTROL_VARIANTS = ["one_bar_lag", "stale_168h", "sign_flip", "time_shuffle", "symbol_shuffle"]
 PARETO_OBJECTIVES = [
     "obj_recent_sortino",
@@ -194,16 +195,114 @@ def accepted_for_next_search(rewards: pd.DataFrame) -> pd.DataFrame:
     )
 
 
-def selected_column_indices(timestamps: pd.DatetimeIndex, hours_per_split: int) -> np.ndarray:
+def selected_column_indices(timestamps: pd.DatetimeIndex, hours_per_split: int, train_hours_per_split: int) -> np.ndarray:
     split = split_for_timestamps(timestamps)
-    if hours_per_split <= 0:
+    if hours_per_split <= 0 and train_hours_per_split <= 0:
         return np.arange(len(timestamps), dtype=int)
     selected: list[int] = []
     for split_name in SPLIT_ORDER:
         idx = np.where(split == split_name)[0]
         if len(idx):
-            selected.extend(idx[-hours_per_split:].tolist())
+            limit = train_hours_per_split if split_name == "train_2024" else hours_per_split
+            if limit <= 0:
+                selected.extend(idx.tolist())
+            else:
+                selected.extend(idx[-limit:].tolist())
     return np.array(sorted(set(selected)), dtype=int)
+
+
+def split_csv(value: str) -> list[str]:
+    return [part.strip() for part in str(value).split(",") if part.strip()]
+
+
+def nan_rolling_mean(values: np.ndarray, window: int, min_periods: int | None = None) -> np.ndarray:
+    return pd.Series(values).rolling(window, min_periods=min_periods or max(8, window // 4)).mean().to_numpy()
+
+
+def nan_rolling_std(values: np.ndarray, window: int, min_periods: int | None = None) -> np.ndarray:
+    return pd.Series(values).rolling(window, min_periods=min_periods or max(8, window // 4)).std().to_numpy()
+
+
+def regime_crash_like_mask(numeric: dict[str, np.ndarray], split: np.ndarray) -> tuple[np.ndarray, dict[str, float]]:
+    close = numeric["trade_close"].astype(float)
+    log_close = np.log(np.where(close > 0, close, np.nan))
+    ret1 = log_close - np.roll(log_close, 1, axis=1)
+    ret1[:, 0] = np.nan
+    market_ret = np.nanmedian(ret1, axis=0)
+    neg_share = np.nanmean(ret1 < 0, axis=0)
+    dispersion = np.nanpercentile(ret1, 90, axis=0) - np.nanpercentile(ret1, 10, axis=0)
+    vol_24h = nan_rolling_std(market_ret, 24)
+    vol_168h = nan_rolling_std(market_ret, 168)
+    ret_24h = pd.Series(market_ret).rolling(24, min_periods=8).sum().to_numpy()
+    ret_168h = pd.Series(market_ret).rolling(168, min_periods=42).sum().to_numpy()
+    index = np.nanmedian(log_close, axis=0)
+    peak = pd.Series(index).rolling(24 * 30, min_periods=24).max().to_numpy()
+    drawdown = index - peak
+    volume = numeric.get("trade_quote_volume")
+    if volume is not None:
+        volume_med = np.nanmedian(np.log1p(volume.astype(float)), axis=0)
+        volume_z = (volume_med - nan_rolling_mean(volume_med, 168, 48)) / (nan_rolling_std(volume_med, 168, 48) + 1e-12)
+    else:
+        volume_z = np.full(len(split), np.nan)
+    features = pd.DataFrame(
+        {
+            "market_ret_24h": ret_24h,
+            "market_ret_168h": ret_168h,
+            "neg_asset_share_1h": neg_share,
+            "cs_dispersion_1h": dispersion,
+            "vol_24h": vol_24h,
+            "vol_168h": vol_168h,
+            "drawdown_30d_log": drawdown,
+            "volume_z_168h": volume_z,
+        }
+    ).replace([np.inf, -np.inf], np.nan)
+    train = split == "train_2024"
+    may = split == "known_may2026_stress"
+    mu = features.loc[train].mean(skipna=True)
+    sd = features.loc[train].std(skipna=True).replace(0, np.nan)
+    z = (features - mu) / (sd + 1e-12)
+    components = pd.DataFrame(
+        {
+            "neg_ret_24h_z": -z["market_ret_24h"],
+            "neg_ret_168h_z": -z["market_ret_168h"],
+            "neg_share_z": z["neg_asset_share_1h"],
+            "dispersion_z": z["cs_dispersion_1h"],
+            "vol24_z": z["vol_24h"],
+            "vol168_z": z["vol_168h"],
+            "drawdown_z": -z["drawdown_30d_log"],
+            "low_volume_z": -z["volume_z_168h"],
+        }
+    )
+    stress_score = components.mean(axis=1, skipna=True)
+    may_vec = z.loc[may].mean(skipna=True)
+    valid = [col for col in z.columns if np.isfinite(may_vec.get(col, np.nan))]
+    distance = ((z[valid] - may_vec[valid]) ** 2).mean(axis=1).pow(0.5) if valid else pd.Series(np.nan, index=z.index)
+    may_distance_q75 = float(distance.loc[may].quantile(0.75)) if np.any(may) else np.nan
+    may_stress_q25 = float(stress_score.loc[may].quantile(0.25)) if np.any(may) else np.nan
+    crash_like = (distance <= may_distance_q75) & (stress_score >= may_stress_q25)
+    return crash_like.to_numpy(dtype=bool), {
+        "may_distance_q75": may_distance_q75,
+        "may_stress_score_q25": may_stress_q25,
+        "train_crash_like_hours": int(np.nansum(crash_like.to_numpy(dtype=bool) & train)),
+        "may_stress_hours": int(np.nansum(may)),
+    }
+
+
+def contiguous_orientation_extension_mask(
+    split: np.ndarray,
+    extension_hours: int,
+) -> np.ndarray:
+    mask = np.zeros(len(split), dtype=bool)
+    if extension_hours <= 0:
+        return mask
+    train_idx = np.where(split == "train_2024")[0]
+    if len(train_idx) == 0:
+        return mask
+    start = int(train_idx[-1]) + 1
+    end = min(len(split), start + int(extension_hours))
+    if start < end:
+        mask[start:end] = True
+    return mask
 
 
 def contract_payload() -> dict[str, Any]:
@@ -240,7 +339,7 @@ def contract_payload() -> dict[str, Any]:
         ],
         "portfolio_construction": {
             "signal_to_weight": "cross-sectional percentile rank, demeaned to dollar neutral, normalized to gross 1 per timestamp",
-            "orientation": "chosen on train_2024 net mean return only, then frozen for OOS/stress",
+            "orientation": "chosen on full train_2024 plus optional contiguous post-train extension; extension rows are relabeled out of OOS evaluation",
             "return_label": "raw forward log return for tradable PnL; other label families remain diagnostics",
             "rebalance": "hourly signal timestamps; non-overlap reward uses horizon-stride offsets",
             "transaction_cost": "one-way turnover * cost_bps / 10000",
@@ -423,7 +522,11 @@ def control_signal(signal: np.ndarray, variant: str, rng: np.random.Generator) -
     raise ValueError(f"unknown control variant: {variant}")
 
 
-def load_numeric_for_queue(queue: pd.DataFrame, hours_per_split: int) -> tuple[pd.DatetimeIndex, np.ndarray, dict[str, np.ndarray], dict[str, np.ndarray]]:
+def load_numeric_for_queue(
+    queue: pd.DataFrame,
+    hours_per_split: int,
+    train_hours_per_split: int,
+) -> tuple[pd.DatetimeIndex, np.ndarray, dict[str, np.ndarray], dict[str, np.ndarray]]:
     requested = {"trade_close", "trade_quote_volume"}
     for expression in queue["expression"].dropna().astype(str):
         requested.update(expression_fields(expression))
@@ -483,7 +586,7 @@ def load_numeric_for_queue(queue: pd.DataFrame, hours_per_split: int) -> tuple[p
         numeric["top_global_account_divergence"] = numeric["top_long_short_account_ratio_last"] - numeric["global_long_short_account_ratio_last"]
 
     groups = load_group_fields(loaded_symbols, timestamps, {"liquidity_tier"})
-    idx = selected_column_indices(timestamps, hours_per_split)
+    idx = selected_column_indices(timestamps, hours_per_split, train_hours_per_split)
     timestamps = pd.DatetimeIndex(timestamps[idx])
     numeric = {key: value[:, idx] for key, value in numeric.items()}
     groups = {key: value[:, idx] for key, value in groups.items()}
@@ -494,14 +597,25 @@ def load_numeric_for_queue(queue: pd.DataFrame, hours_per_split: int) -> tuple[p
 def evaluate_queue(
     queue: pd.DataFrame,
     hours_per_split: int,
+    train_hours_per_split: int,
     cost_bps: float,
     candidate_cap: int,
+    orientation_extension_hours: int,
     checkpoint_dir: Path | None = None,
     checkpoint_every: int = 0,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     if candidate_cap > 0:
         queue = queue.head(candidate_cap).copy()
-    timestamps, split, numeric, groups = load_numeric_for_queue(queue, hours_per_split)
+    timestamps, split, numeric, groups = load_numeric_for_queue(queue, hours_per_split, train_hours_per_split)
+    crash_like, regime_payload = regime_crash_like_mask(numeric, split)
+    eval_split = split.copy()
+    orientation_extension_mask = contiguous_orientation_extension_mask(
+        split,
+        orientation_extension_hours,
+    )
+    if np.any(orientation_extension_mask):
+        eval_split[orientation_extension_mask] = ORIENTATION_SPLIT
+    orientation_mask = (split == "train_2024") | orientation_extension_mask
     evaluator = A7AB4Evaluator(numeric, groups)
     raw_labels = {h: horizon_label(numeric["trade_close"], timestamps, split, h) for h in HORIZONS}
     quote_volume = numeric["trade_quote_volume"]
@@ -516,15 +630,16 @@ def evaluate_queue(
             signal = evaluator.eval(str(row["expression"]))
             # Orientation is chosen on train only for each horizon, then frozen.
             for horizon in HORIZONS:
-                train_rows_pos = split_metrics(row, horizon, "orientation_probe", signal, raw_labels[horizon], split, quote_volume, cost_bps, 1.0)
+                oriented_split = np.where(orientation_mask, "train_2024", "out_of_scope")
+                train_rows_pos = split_metrics(row, horizon, "orientation_probe", signal, raw_labels[horizon], oriented_split, quote_volume, cost_bps, 1.0)
                 train_pos = next((x for x in train_rows_pos if x["split"] == "train_2024"), {})
-                train_rows_neg = split_metrics(row, horizon, "orientation_probe", signal, raw_labels[horizon], split, quote_volume, cost_bps, -1.0)
+                train_rows_neg = split_metrics(row, horizon, "orientation_probe", signal, raw_labels[horizon], oriented_split, quote_volume, cost_bps, -1.0)
                 train_neg = next((x for x in train_rows_neg if x["split"] == "train_2024"), {})
                 orientation = 1.0 if float(train_pos.get("net_mean", np.nan)) >= float(train_neg.get("net_mean", np.nan)) else -1.0
-                metric_rows.extend(split_metrics(row, horizon, "original", signal, raw_labels[horizon], split, quote_volume, cost_bps, orientation))
+                metric_rows.extend(split_metrics(row, horizon, "original", signal, raw_labels[horizon], eval_split, quote_volume, cost_bps, orientation))
                 for variant in CONTROL_VARIANTS:
                     ctrl = control_signal(signal, variant, rng)
-                    metric_rows.extend(split_metrics(row, horizon, variant, ctrl, raw_labels[horizon], split, quote_volume, cost_bps, orientation))
+                    metric_rows.extend(split_metrics(row, horizon, variant, ctrl, raw_labels[horizon], eval_split, quote_volume, cost_bps, orientation))
         except Exception as exc:  # keep the reward audit fail-open as data, not as silent loss
             error_rows.append({"blueprint_id": cid, "error": repr(exc), "expression": row.get("expression", "")})
         if checkpoint_dir is not None and checkpoint_every > 0 and (idx_row % checkpoint_every == 0 or idx_row == total_rows):
@@ -547,9 +662,21 @@ def evaluate_queue(
                     "top_gate_blueprint_id": str(partial_rewards.iloc[0]["blueprint_id"]) if not partial_rewards.empty else "",
                     "top_diagnostic_composite_score": float(partial_rewards.iloc[0]["diagnostic_composite_score"]) if not partial_rewards.empty else np.nan,
                     "ranking_policy": "gate_pass_then_pareto_rank; diagnostic_composite_score_is_tiebreaker_only",
+                    "orientation_train_hours": int(np.nansum(orientation_mask)),
+                    "orientation_extension_hours": int(np.nansum(orientation_extension_mask)),
+                    "orientation_extension_crash_like_hours": int(np.nansum(orientation_extension_mask & crash_like)),
+                    "train_crash_like_hours": int(regime_payload["train_crash_like_hours"]),
                 },
             )
-    return pd.DataFrame(metric_rows), pd.DataFrame(error_rows)
+    metrics = pd.DataFrame(metric_rows)
+    if not metrics.empty:
+        metrics["orientation_train_hours"] = int(np.nansum(orientation_mask))
+        metrics["orientation_extension_hours"] = int(np.nansum(orientation_extension_mask))
+        metrics["orientation_extension_crash_like_hours"] = int(np.nansum(orientation_extension_mask & crash_like))
+        metrics["train_crash_like_hours"] = int(regime_payload["train_crash_like_hours"])
+        metrics["may_stress_hours"] = int(regime_payload["may_stress_hours"])
+        metrics["orientation_extension_requested_hours"] = int(orientation_extension_hours)
+    return metrics, pd.DataFrame(error_rows)
 
 
 def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
@@ -619,6 +746,8 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
             hard_reject_reasons.append("recent_sortino_non_positive")
         if not (float(train.get("net_mean", np.nan)) > 0):
             hard_reject_reasons.append("train_orientation_no_positive_edge")
+        if float(train.get("n_obs", 0)) < 250:
+            hard_reject_reasons.append("orientation_sample_too_small")
         if not all(np.isfinite(value) and value > 0 for value in floor_sortinos):
             hard_reject_reasons.append("oos_nonoverlap_floor_not_positive")
         if not all(oos_positive):
@@ -658,6 +787,12 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
                 "recent_control_ratio": recent_control,
                 "recent_shuffle_control_ratio": recent_shuffle_control,
                 "oos_positive_split_count": int(sum(oos_positive)),
+                "orientation_train_hours": sample.get("orientation_train_hours", np.nan),
+                "orientation_extension_hours": sample.get("orientation_extension_hours", np.nan),
+                "orientation_extension_crash_like_hours": sample.get("orientation_extension_crash_like_hours", np.nan),
+                "orientation_extension_requested_hours": sample.get("orientation_extension_requested_hours", np.nan),
+                "train_crash_like_hours": sample.get("train_crash_like_hours", np.nan),
+                "may_stress_hours": sample.get("may_stress_hours", np.nan),
                 "hard_reject": bool(hard_reject_reasons),
                 "hard_reject_reasons": ";".join(hard_reject_reasons),
             }
@@ -750,6 +885,8 @@ def main() -> None:
     parser.add_argument("--queue", default=str(DEFAULT_QUEUE))
     parser.add_argument("--candidate-cap", type=int, default=int(os.environ.get("A7REWARD_CANDIDATE_CAP", "80")))
     parser.add_argument("--hours-per-split", type=int, default=int(os.environ.get("A7REWARD_HOURS_PER_SPLIT", "720")))
+    parser.add_argument("--train-hours-per-split", type=int, default=int(os.environ.get("A7REWARD_TRAIN_HOURS_PER_SPLIT", "0")))
+    parser.add_argument("--orientation-extension-hours", type=int, default=int(os.environ.get("A7REWARD_ORIENTATION_EXTENSION_HOURS", "0")))
     parser.add_argument("--cost-bps", type=float, default=float(os.environ.get("A7REWARD_COST_BPS", "5.0")))
     parser.add_argument("--smoke-only", action="store_true")
     parser.add_argument("--runtime", default=str(RUNTIME))
@@ -814,8 +951,10 @@ def main() -> None:
     metrics, errors = evaluate_queue(
         queue,
         args.hours_per_split,
+        args.train_hours_per_split,
         args.cost_bps,
         args.candidate_cap,
+        args.orientation_extension_hours,
         checkpoint_dir=runtime,
         checkpoint_every=args.checkpoint_every,
     )
@@ -854,6 +993,13 @@ def main() -> None:
         "queue_rows": int(queue.shape[0]),
         "candidate_cap": int(args.candidate_cap),
         "hours_per_split": int(args.hours_per_split),
+        "train_hours_per_split": int(args.train_hours_per_split),
+        "orientation_extension_hours_requested": int(args.orientation_extension_hours),
+        "orientation_train_hours": int(metrics["orientation_train_hours"].max()) if "orientation_train_hours" in metrics else 0,
+        "orientation_extension_hours": int(metrics["orientation_extension_hours"].max()) if "orientation_extension_hours" in metrics else 0,
+        "orientation_extension_crash_like_hours": int(metrics["orientation_extension_crash_like_hours"].max()) if "orientation_extension_crash_like_hours" in metrics else 0,
+        "train_crash_like_hours": int(metrics["train_crash_like_hours"].max()) if "train_crash_like_hours" in metrics else 0,
+        "may_stress_hours": int(metrics["may_stress_hours"].max()) if "may_stress_hours" in metrics else 0,
         "cost_bps": float(args.cost_bps),
         "split_metric_rows": int(metrics.shape[0]),
         "reward_rows": int(rewards.shape[0]),
@@ -878,6 +1024,7 @@ def main() -> None:
                 "min_oos_sortino > 0",
                 "min_oos_floor_sortino > 0",
                 "recent_shuffle_control_ratio < 1",
+                "orientation_sample_too_small not present",
                 "hard_reject == false",
                 "gate_pass == true",
             ],
@@ -912,6 +1059,12 @@ def main() -> None:
         f"- queue_rows: `{manifest['queue_rows']}`",
         f"- candidate_cap: `{manifest['candidate_cap']}`",
         f"- hours_per_split: `{manifest['hours_per_split']}`",
+        f"- train_hours_per_split: `{manifest['train_hours_per_split']}`",
+        f"- orientation_extension_hours_requested: `{manifest['orientation_extension_hours_requested']}`",
+        f"- orientation_train_hours: `{manifest['orientation_train_hours']}`",
+        f"- orientation_extension_hours: `{manifest['orientation_extension_hours']}`",
+        f"- orientation_extension_crash_like_hours: `{manifest['orientation_extension_crash_like_hours']}`",
+        f"- train_crash_like_hours: `{manifest['train_crash_like_hours']}`",
         f"- cost_bps: `{manifest['cost_bps']}`",
         f"- reward_rows: `{manifest['reward_rows']}`",
         f"- valid_reward_rows: `{manifest['valid_reward_rows']}`",
