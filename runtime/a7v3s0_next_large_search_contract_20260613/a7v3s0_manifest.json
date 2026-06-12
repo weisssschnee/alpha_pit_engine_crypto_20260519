@@ -1,0 +1,37 @@
+{
+  "authorizes": [
+    "company_materialization_numeric_probe_after_queue_upload",
+    "reward_gate_followup"
+  ],
+  "blockers": [],
+  "decision": "PASS_A7V3S0_NEXT_LARGE_SEARCH_CONTRACT_READY_NOT_LAUNCHED",
+  "does_not_authorize": [
+    "alpha_proof",
+    "shadow_paper_live",
+    "ungated_search_best_claim"
+  ],
+  "generated_at": "2026-06-12T18:55:23Z",
+  "guard_decision": "PASS_A7GUARD0_PRESEARCH_GUARD_READY",
+  "lane_targets": {
+    "funding_basis_recent_robust": 16384,
+    "mechanism_regime_conditioned": 16384,
+    "oi_flow_cross_mechanism": 16384,
+    "raw_broad_reserved": 16384
+  },
+  "old_queue_policy": "old accepted queue rejected by v3 reward smoke; use only as diagnostic negative control, not seed",
+  "outputs": {
+    "company_launcher": "runtime\\a7v3s0_next_large_search_contract_20260613\\run_a7v3s0_company_materialization.ps1",
+    "field_pool": "runtime\\a7v3s0_next_large_search_contract_20260613\\a7v3s0_field_pool.csv",
+    "queue": "runtime\\a7v3s0_next_large_search_contract_20260613\\a7v3s0_large_search_queue.csv",
+    "report": "reports\\CRYPTO_A7V3S0_NEXT_LARGE_SEARCH_CONTRACT_20260613.md",
+    "shard_plan": "runtime\\a7v3s0_next_large_search_contract_20260613\\a7v3s0_shard_plan.csv"
+  },
+  "queue_rows": 65536,
+  "regime_decision": "PASS_A7REGIME2_MECHANISM_REGIME_CANDIDATES_FOUND",
+  "reward_smoke_accepted_rows": 0,
+  "reward_smoke_decision": "HOLD_A7REWARD1_REWARD_MODEL_OR_QUEUE_FAILED",
+  "rows_per_shard": 1024,
+  "shard_count": 64,
+  "stage": "A7V3S-0",
+  "v3_panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v3_patch_age_20260613"
+}
