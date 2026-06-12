@@ -1,0 +1,23 @@
+{
+  "candidate_decision_rows": 6,
+  "concentration_rows": 30,
+  "cost_bps": 5.0,
+  "decision": "HOLD_A7REGIME3_ACCEPTED_QUEUE_REGIME_CONCENTRATED",
+  "error_rows": 0,
+  "generated_at": "2026-06-12T08:02:30Z",
+  "hours_per_split": 0,
+  "leave_state_out_rows": 480,
+  "outputs": {
+    "candidate_regime_decisions": "runtime\\a7regime3_candidate_regime_attribution_20260612\\a7regime3_candidate_regime_decisions.csv",
+    "eval_errors": "runtime\\a7regime3_candidate_regime_attribution_20260612\\a7regime3_eval_errors.csv",
+    "leave_state_out_metrics": "runtime\\a7regime3_candidate_regime_attribution_20260612\\a7regime3_leave_state_out_metrics.csv",
+    "regime_concentration_summary": "runtime\\a7regime3_candidate_regime_attribution_20260612\\a7regime3_regime_concentration_summary.csv",
+    "report": "reports\\CRYPTO_A7REGIME3_CANDIDATE_REGIME_ATTRIBUTION_20260612.md",
+    "state_conditional_candidate_metrics": "runtime\\a7regime3_candidate_regime_attribution_20260612\\a7regime3_state_conditional_candidate_metrics.csv"
+  },
+  "queue": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7reward1_portfolio_reward_model_20260610\\a7reward1_accepted_for_next_search.csv",
+  "queue_rows": 6,
+  "stage": "A7REGIME-3",
+  "state_metric_rows": 480,
+  "train_hours_per_split": 0
+}
