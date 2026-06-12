@@ -77,7 +77,7 @@ def read_panel_part(path: Path, source: str) -> pd.DataFrame:
     df = pd.read_parquet(path, engine="pyarrow")
     if df.empty:
         return df
-    df["timestamp"] = pd.to_datetime(df["timestamp"], errors="coerce")
+    df["timestamp"] = pd.to_datetime(df["timestamp"], errors="coerce", utc=True).dt.tz_localize(None)
     if "symbol" not in df.columns:
         df["symbol"] = path.parent.name.split("=", 1)[-1]
     df["a7_source_panel"] = source
@@ -113,14 +113,14 @@ def load_first_seen(main_root: Path) -> dict[str, pd.Timestamp]:
         pre = pd.read_csv(PRE2024_FIRST_SEEN)
         if {"symbol", "combined_first_observed_timestamp"}.issubset(pre.columns):
             for row in pre[["symbol", "combined_first_observed_timestamp"]].dropna().to_dict("records"):
-                first_seen[str(row["symbol"])] = pd.Timestamp(row["combined_first_observed_timestamp"]).tz_localize(None)
+                first_seen[str(row["symbol"])] = pd.to_datetime(row["combined_first_observed_timestamp"], utc=True).tz_localize(None)
     for path in main_root.glob("symbol=*/part.parquet"):
         symbol = path.parent.name.split("=", 1)[-1]
         try:
             ts = pd.read_parquet(path, columns=["timestamp"], engine="pyarrow")["timestamp"]
         except Exception:
             continue
-        ts = pd.to_datetime(ts, errors="coerce")
+        ts = pd.to_datetime(ts, errors="coerce", utc=True).dt.tz_localize(None)
         min_ts = ts.min()
         if pd.notna(min_ts):
             cur = first_seen.get(symbol)
