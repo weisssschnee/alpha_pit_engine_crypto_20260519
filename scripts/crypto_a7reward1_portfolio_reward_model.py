@@ -56,6 +56,9 @@ PREMAY_SPLITS = ["validation_2025H1", "test_2025H2", "recent_oos_2026JanApr"]
 ALL_EVAL_SPLITS = ["train_2024", *PREMAY_SPLITS, "known_may2026_stress"]
 ORIENTATION_SPLIT = "orientation_contiguous_extension_train"
 CONTROL_VARIANTS = ["one_bar_lag", "stale_168h", "sign_flip", "time_shuffle", "symbol_shuffle"]
+CONTROL_DOMINANCE_VARIANTS = ["one_bar_lag", "stale_168h", "time_shuffle", "symbol_shuffle"]
+LAG_STALE_VARIANTS = ["one_bar_lag", "stale_168h"]
+SHUFFLE_VARIANTS = ["time_shuffle", "symbol_shuffle"]
 PARETO_OBJECTIVES = [
     "obj_recent_sortino",
     "obj_min_oos_sortino",
@@ -66,6 +69,8 @@ PARETO_OBJECTIVES = [
     "obj_neg_recent_drawdown",
     "obj_neg_recent_turnover",
     "obj_neg_shuffle_control_ratio",
+    "obj_neg_oos_control_dominated_count",
+    "obj_neg_oos_lag_stale_dominated_count",
 ]
 
 
@@ -115,6 +120,15 @@ def add_pareto_columns(rewards: pd.DataFrame) -> pd.DataFrame:
     out["obj_neg_recent_drawdown"] = -pd.to_numeric(out["recent_max_drawdown"], errors="coerce").abs()
     out["obj_neg_recent_turnover"] = -pd.to_numeric(out["recent_avg_turnover"], errors="coerce")
     out["obj_neg_shuffle_control_ratio"] = -pd.to_numeric(out["recent_shuffle_control_ratio"], errors="coerce")
+    out["obj_neg_oos_control_dominated_count"] = -pd.to_numeric(
+        out.get("oos_control_dominated_count", 99), errors="coerce"
+    )
+    out["obj_neg_oos_lag_stale_dominated_count"] = -pd.to_numeric(
+        out.get("oos_lag_stale_dominated_count", 99), errors="coerce"
+    )
+    stress_obs = pd.to_numeric(out.get("stress_n_obs", pd.Series(0, index=out.index)), errors="coerce").fillna(0) > 0
+    stress_floor = pd.to_numeric(out.get("stress_floor_sortino", pd.Series(np.nan, index=out.index)), errors="coerce")
+    stress_floor_clean = (~stress_obs) | (stress_floor > 0)
 
     objective_passes = pd.DataFrame(
         {
@@ -124,7 +138,10 @@ def add_pareto_columns(rewards: pd.DataFrame) -> pd.DataFrame:
             "recent_sharpe_positive": out["recent_sharpe"] > 0,
             "recent_rankic_positive": out["recent_rankic"] > 0,
             "stress_sortino_positive": out["stress_sortino"] > 0,
+            "stress_floor_clean": stress_floor_clean,
             "shuffle_control_not_dominant": out["recent_shuffle_control_ratio"] < 1.0,
+            "oos_control_not_dominant": out.get("oos_control_dominated_count", pd.Series(99, index=out.index)).eq(0),
+            "oos_lag_stale_not_dominant": out.get("oos_lag_stale_dominated_count", pd.Series(99, index=out.index)).eq(0),
             "net_mean_oos_all_positive": out["oos_positive_split_count"] >= 3,
         }
     )
@@ -133,7 +150,10 @@ def add_pareto_columns(rewards: pd.DataFrame) -> pd.DataFrame:
         (~out["hard_reject"])
         & (out["min_oos_sortino"] > 0)
         & (out["min_oos_floor_sortino"] > 0)
+        & stress_floor_clean
         & (out["recent_shuffle_control_ratio"] < 1.0)
+        & out.get("oos_control_dominated_count", pd.Series(99, index=out.index)).eq(0)
+        & out.get("oos_lag_stale_dominated_count", pd.Series(99, index=out.index)).eq(0)
     )
 
     values = out[PARETO_OBJECTIVES].replace([np.inf, -np.inf], np.nan).fillna(-1e9).to_numpy(dtype=float)
@@ -188,10 +208,12 @@ def accepted_for_next_search(rewards: pd.DataFrame) -> pd.DataFrame:
             "objective_pass_count",
             "min_oos_floor_sortino",
             "min_oos_sortino",
+            "oos_control_dominated_count",
+            "oos_lag_stale_dominated_count",
             "recent_shuffle_control_ratio",
             "recent_sortino",
         ],
-        ascending=[True, False, False, False, True, False],
+        ascending=[True, False, False, False, True, True, True, False],
     )
 
 
@@ -332,6 +354,8 @@ def contract_payload() -> dict[str, Any]:
             "recent_oos Sortino <= 0",
             "validation/test/recent OOS not all positive on net mean return",
             "control_ratio_recent >= 1.0",
+            "stress floor Sortino <= 0",
+            "OOS lag/stale/control variant dominates original",
             "ranked-label-only evidence without raw tradable PnL support",
             "missing transaction cost model",
             "turnover excessive relative to reward",
@@ -684,17 +708,29 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame()
     original = metrics[metrics["variant"].eq("original")].copy()
     controls = (
-        metrics[~metrics["variant"].eq("original")]
+        metrics[metrics["variant"].isin(CONTROL_DOMINANCE_VARIANTS)]
         .groupby(["blueprint_id", "horizon_h", "split"], as_index=False)
-        .agg(max_abs_control_net_mean=("net_mean", lambda s: float(np.nanmax(np.abs(s))) if len(s) else np.nan))
+        .agg(
+            max_abs_control_net_mean=("net_mean", lambda s: float(np.nanmax(np.abs(s))) if len(s) else np.nan),
+            max_control_floor_sortino=("nonoverlap_floor_sortino", lambda s: float(np.nanmax(s)) if len(s) else np.nan),
+        )
     )
     shuffle_controls = (
-        metrics[metrics["variant"].isin(["time_shuffle", "symbol_shuffle"])]
+        metrics[metrics["variant"].isin(SHUFFLE_VARIANTS)]
         .groupby(["blueprint_id", "horizon_h", "split"], as_index=False)
-        .agg(max_abs_shuffle_control_net_mean=("net_mean", lambda s: float(np.nanmax(np.abs(s))) if len(s) else np.nan))
+        .agg(
+            max_abs_shuffle_control_net_mean=("net_mean", lambda s: float(np.nanmax(np.abs(s))) if len(s) else np.nan),
+            max_shuffle_floor_sortino=("nonoverlap_floor_sortino", lambda s: float(np.nanmax(s)) if len(s) else np.nan),
+        )
+    )
+    lag_stale_controls = (
+        metrics[metrics["variant"].isin(LAG_STALE_VARIANTS)]
+        .groupby(["blueprint_id", "horizon_h", "split"], as_index=False)
+        .agg(max_lag_stale_floor_sortino=("nonoverlap_floor_sortino", lambda s: float(np.nanmax(s)) if len(s) else np.nan))
     )
     original = original.merge(controls, on=["blueprint_id", "horizon_h", "split"], how="left")
     original = original.merge(shuffle_controls, on=["blueprint_id", "horizon_h", "split"], how="left")
+    original = original.merge(lag_stale_controls, on=["blueprint_id", "horizon_h", "split"], how="left")
     original["control_ratio"] = original["max_abs_control_net_mean"].abs() / (original["net_mean"].abs() + 1e-12)
     original["shuffle_control_ratio"] = original["max_abs_shuffle_control_net_mean"].abs() / (original["net_mean"].abs() + 1e-12)
     rows: list[dict[str, Any]] = []
@@ -714,6 +750,33 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
             float(validation.get("nonoverlap_floor_sortino", np.nan)),
             float(test.get("nonoverlap_floor_sortino", np.nan)),
             float(recent.get("nonoverlap_floor_sortino", np.nan)),
+        ]
+        control_floor_sortinos = [
+            float(validation.get("max_control_floor_sortino", np.nan)),
+            float(test.get("max_control_floor_sortino", np.nan)),
+            float(recent.get("max_control_floor_sortino", np.nan)),
+        ]
+        lag_stale_floor_sortinos = [
+            float(validation.get("max_lag_stale_floor_sortino", np.nan)),
+            float(test.get("max_lag_stale_floor_sortino", np.nan)),
+            float(recent.get("max_lag_stale_floor_sortino", np.nan)),
+        ]
+        shuffle_floor_sortinos = [
+            float(validation.get("max_shuffle_floor_sortino", np.nan)),
+            float(test.get("max_shuffle_floor_sortino", np.nan)),
+            float(recent.get("max_shuffle_floor_sortino", np.nan)),
+        ]
+        oos_control_dominated = [
+            np.isfinite(control) and np.isfinite(original_floor) and control >= original_floor
+            for control, original_floor in zip(control_floor_sortinos, floor_sortinos)
+        ]
+        oos_lag_stale_dominated = [
+            np.isfinite(control) and np.isfinite(original_floor) and control >= original_floor
+            for control, original_floor in zip(lag_stale_floor_sortinos, floor_sortinos)
+        ]
+        oos_shuffle_dominated = [
+            np.isfinite(control) and np.isfinite(original_floor) and control >= original_floor
+            for control, original_floor in zip(shuffle_floor_sortinos, floor_sortinos)
         ]
         oos_positive = [
             float(validation.get("net_mean", np.nan)) > 0,
@@ -750,6 +813,15 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
             hard_reject_reasons.append("orientation_sample_too_small")
         if not all(np.isfinite(value) and value > 0 for value in floor_sortinos):
             hard_reject_reasons.append("oos_nonoverlap_floor_not_positive")
+        stress_n_obs = float(stress.get("n_obs", 0) or 0)
+        if stress_n_obs > 0 and not (float(stress.get("nonoverlap_floor_sortino", np.nan)) > 0):
+            hard_reject_reasons.append("stress_floor_not_positive")
+        if sum(oos_control_dominated) > 0:
+            hard_reject_reasons.append("oos_control_dominated")
+        if sum(oos_lag_stale_dominated) > 0:
+            hard_reject_reasons.append("oos_lag_stale_dominated")
+        if sum(oos_shuffle_dominated) > 0:
+            hard_reject_reasons.append("oos_shuffle_dominated")
         if not all(oos_positive):
             hard_reject_reasons.append("oos_net_mean_not_all_positive")
         if not np.isfinite(recent_shuffle_control):
@@ -777,6 +849,7 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
                 "recent_floor_sortino": recent.get("nonoverlap_floor_sortino", np.nan),
                 "stress_sortino": stress.get("nonoverlap_median_sortino", np.nan),
                 "stress_floor_sortino": stress.get("nonoverlap_floor_sortino", np.nan),
+                "stress_n_obs": stress_n_obs,
                 "recent_sharpe": recent.get("nonoverlap_median_sharpe", np.nan),
                 "recent_ic": recent.get("ic_mean", np.nan),
                 "recent_rankic": recent.get("rankic_mean", np.nan),
@@ -786,6 +859,9 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
                 "recent_capacity_proxy": recent.get("capacity_proxy_median_quote_volume", np.nan),
                 "recent_control_ratio": recent_control,
                 "recent_shuffle_control_ratio": recent_shuffle_control,
+                "oos_control_dominated_count": int(sum(oos_control_dominated)),
+                "oos_lag_stale_dominated_count": int(sum(oos_lag_stale_dominated)),
+                "oos_shuffle_dominated_count": int(sum(oos_shuffle_dominated)),
                 "oos_positive_split_count": int(sum(oos_positive)),
                 "orientation_train_hours": sample.get("orientation_train_hours", np.nan),
                 "orientation_extension_hours": sample.get("orientation_extension_hours", np.nan),
@@ -815,8 +891,8 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
 
 def run_synthetic_smoke() -> pd.DataFrame:
     rng = np.random.default_rng(20260610)
-    n_assets, n_times = 64, 1200
-    split = np.array(["train_2024"] * 300 + ["validation_2025H1"] * 300 + ["test_2025H2"] * 300 + ["recent_oos_2026JanApr"] * 240 + ["known_may2026_stress"] * 60, dtype=object)
+    n_assets, n_times = 64, 1440
+    split = np.array(["train_2024"] * 300 + ["validation_2025H1"] * 300 + ["test_2025H2"] * 300 + ["recent_oos_2026JanApr"] * 240 + ["known_may2026_stress"] * 300, dtype=object)
     true_signal = rng.normal(size=(n_assets, n_times))
     label = 0.002 * true_signal + rng.normal(scale=0.01, size=(n_assets, n_times))
     quote_volume = np.exp(rng.normal(12.0, 0.8, size=(n_assets, n_times)))
@@ -1023,6 +1099,9 @@ def main() -> None:
                 "oos_nonoverlap_floor_not_positive not present",
                 "min_oos_sortino > 0",
                 "min_oos_floor_sortino > 0",
+                "stress_floor_sortino > 0 when stress_n_obs > 0",
+                "oos_control_dominated_count == 0",
+                "oos_lag_stale_dominated_count == 0",
                 "recent_shuffle_control_ratio < 1",
                 "orientation_sample_too_small not present",
                 "hard_reject == false",
