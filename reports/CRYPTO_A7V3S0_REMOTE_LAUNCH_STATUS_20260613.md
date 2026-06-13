@@ -2,9 +2,9 @@
 
 ## Decision
 
-`RUNNING_A7V3S0_COMPANY_MATERIALIZATION_WAVE_C2`
+`RUNNING_A7V3S0_REWARD_SHARDED_GATE`
 
-A7V3S0 search contract was synchronized to the company machine, the v3 patch-age panel was rebuilt on the company machine, and a 64-row remote smoke passed. The initial 4-concurrency materialization wave was stopped after shard metrics showed MemoryError-driven eval failures under concurrent company-machine load. A replacement 2-concurrency wave is now running in a fresh run root and has produced clean first-shard manifests.
+A7V3S0 search contract was synchronized to the company machine, the v3 patch-age panel was rebuilt on the company machine, and a 64-row remote smoke passed. The initial 4-concurrency materialization wave was stopped after shard metrics showed MemoryError-driven eval failures under concurrent company-machine load. A replacement 2-concurrency materialization wave completed cleanly. A 1,024-row diversified reward prequeue was built from the 60,640 activity-ok materialized candidates, and a sharded reward gate is now running.
 
 This authorizes only numeric materialization and downstream reward-gate follow-up. It does not authorize alpha proof, shadow, paper, or live use.
 
@@ -20,6 +20,7 @@ This authorizes only numeric materialization and downstream reward-gate follow-u
 - initial company task id: `job_20260613_031429_d99544`
 - replacement launcher concurrency: `2`
 - replacement company task id: `job_20260613_033314_a7c523`
+- reward sharded task id: `job_20260613_122208_f4fd42`
 
 ## Company Sync
 
@@ -127,6 +128,50 @@ a7v3s0_c2_s001: rows=1024, eval_success=1024, eval_failure=0, activity_ok=949, e
 
 This confirms the replacement wave is materially cleaner than the initial 4-concurrency wave. Keep concurrency at `2` unless the company machine becomes much freer and a new canary proves no MemoryError.
 
+Final C2 materialization aggregate:
+
+```text
+decision: PASS_A7LS17_COMPANY_MATERIALIZATION_AGGREGATE_READY_FOR_A7LS18
+completed_shards: 64 / 64
+total_rows: 65,536
+eval_success_count: 65,536
+eval_failure_count: 0
+activity_ok_count: 60,640
+activity_ok_rate: 0.925293
+lane_count: 4
+semantic_pair_count: 78
+motif_count: 10
+```
+
+## Reward Gate
+
+Reward prequeue:
+
+```text
+decision: PASS_A7V3S0_REWARD_PREQUEUE_READY
+input_activity_ok_rows: 60,640
+selected_rows: 1,024
+lane_count: 4
+semantic_pair_count: 46
+motif_count: 9
+skeleton_count: 865
+```
+
+The first single-process reward diagnostic showed that reward evaluation can be blocked by slow candidates, so the full 1,024-row gate was switched to a 64-shard design:
+
+```text
+runtime: D:\HermesWorker\GDrive\AlphaFactory_CryptoData\research_runtime\a7v3s0_reward_sharded_720h_r2_20260613
+shards: 64
+rows_per_shard: 16
+concurrency: 2
+hours_per_split: 720
+cost_bps: 5.0
+per_shard_timeout_seconds: 1800
+task_id: job_20260613_122208_f4fd42
+```
+
+The earlier bad sharded run root `a7v3s0_reward_sharded_720h_20260613` is invalid because its generated PowerShell shard scripts lost line-continuation markers and failed immediately. Use only the `r2` run root.
+
 ## Runtime Monitoring Notes
 
 At launch, the company machine was not idle; unrelated 1-minute sidecar evaluation processes were also running. The initial 4-concurrency run drove free memory too low and produced MemoryError eval failures. After switching to C2, first-batch eval failures dropped to zero while memory remained in a safer range.
@@ -135,7 +180,20 @@ Do not use the initial 4-concurrency runtime as a result source. It is diagnosti
 
 ## Next Check
 
-Use:
+For reward gate monitoring, use:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File G:\Chengbo\tools\company-remote\company-remote.ps1 `
+  -Action task-status `
+  -TaskId job_20260613_122208_f4fd42
+
+powershell -ExecutionPolicy Bypass -File G:\Chengbo\tools\company-remote\company-remote.ps1 `
+  -Action task-tail `
+  -TaskId job_20260613_122208_f4fd42 `
+  -TailLines 120
+```
+
+For materialization records, use:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File G:\Chengbo\tools\company-remote\company-remote.ps1 `

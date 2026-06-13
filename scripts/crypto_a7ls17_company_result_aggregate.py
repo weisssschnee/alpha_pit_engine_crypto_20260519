@@ -48,7 +48,7 @@ def md_table(df: pd.DataFrame, max_rows: int = 40) -> str:
 def collect(runtime: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
     manifests = []
     metrics_frames = []
-    for manifest_path in sorted((runtime / "shards").glob("a7ls17_s*/a7ls17_manifest.json")):
+    for manifest_path in sorted((runtime / "shards").glob("*/a7ls17_manifest.json")):
         manifest = read_json(manifest_path)
         manifest["manifest_path"] = str(manifest_path)
         manifests.append(manifest)
@@ -68,7 +68,8 @@ def aggregate(runtime: Path, out_runtime: Path, report_path: Path) -> dict[str, 
     manifest_df, metrics = collect(runtime)
 
     expected = int(os.environ.get("A7LS17_EXPECTED_SHARDS", "100"))
-    expected_ids = {f"a7ls17_s{i:03d}" for i in range(expected)}
+    shard_prefix = os.environ.get("A7LS17_EXPECTED_SHARD_PREFIX", "a7ls17_s")
+    expected_ids = {f"{shard_prefix}{i:03d}" for i in range(expected)}
     seen_ids = set(manifest_df["shard_id"].astype(str).tolist()) if not manifest_df.empty else set()
     missing_ids = sorted(expected_ids - seen_ids)
 
@@ -88,6 +89,10 @@ def aggregate(runtime: Path, out_runtime: Path, report_path: Path) -> dict[str, 
             "std_value",
             "error",
         ]].to_csv(out_runtime / "a7ls17_materialization_metrics_compact.csv", index=False)
+        metrics[(metrics["eval_success"].astype(bool)) & (metrics["activity_ok"].astype(bool))].to_csv(
+            out_runtime / "a7ls17_activity_ok_queue.csv",
+            index=False,
+        )
 
     if metrics.empty:
         lane_summary = pd.DataFrame()
@@ -141,6 +146,7 @@ def aggregate(runtime: Path, out_runtime: Path, report_path: Path) -> dict[str, 
         "generated_at": now_iso(),
         "runtime": str(runtime),
         "expected_shards": expected,
+        "expected_shard_prefix": shard_prefix,
         "completed_shards": int(len(seen_ids)),
         "missing_shards": missing_ids,
         "total_rows": total_rows,
