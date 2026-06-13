@@ -1,0 +1,14 @@
+semantic_pair,motif,control_audit_decision,candidates,median_control_margin,min_stress_floor
+positioning|universe_state,state_conditioned_signed,HOLD_CONTROL_DOMINATED,2,-0.15732698025863567,-1.116128084698661
+age|positioning,smooth_mul,HOLD_CONTROL_DOMINATED,2,-0.26020558855401166,-0.966632575174342
+age|positioning,safe_div_abs,HOLD_CONTROL_DOMINATED,2,-0.4383013152549413,5.595190678481434
+age|positioning,state_conditioned_signed,HOLD_CONTROL_DOMINATED,2,-0.560768550979379,-1.116128084698661
+age|positioning,smooth_mul,HOLD_STRESS_WEAK,1,0.04101690250939782,-0.1293900581215897
+positioning|universe_state,smooth_mul,HOLD_STRESS_WEAK,1,0.03367982190093333,-1.116128084698661
+positioning|universe_state,spread_rank,HOLD_STRESS_WEAK,1,0.03367982190093333,-1.116128084698661
+positioning|positioning,signed_rank_gate,HOLD_STRESS_WEAK,1,0.02239432644614059,-1.4255016478496032
+open_interest|regime,safe_div_abs,HOLD_STRESS_WEAK,1,0.0042648577810711075,-1.140500837826403
+open_interest|positioning,smooth_mul,HOLD_CONTROL_DOMINATED,1,-0.06703353702461623,-1.3422894847089235
+open_interest|positioning,safe_div_abs,HOLD_CONTROL_DOMINATED,1,-0.15203553032207218,-0.3965925076759266
+open_interest|positioning,spread_rank,HOLD_CONTROL_DOMINATED,1,-0.16460836331931628,5.530633466474444
+positioning|universe_state,state_conditioned_rank_mul,HOLD_CONTROL_DOMINATED,1,-0.3073051452385407,-0.9799677281886864

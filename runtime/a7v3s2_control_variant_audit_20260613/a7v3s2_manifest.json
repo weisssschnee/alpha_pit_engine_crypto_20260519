@@ -1,0 +1,31 @@
+{
+  "stage": "A7V3S2-CONTROL-VARIANT-AUDIT",
+  "generated_at": "2026-06-13T13:37:45Z",
+  "input": "runtime\\a7v3s1_accepted_candidate_validation_20260613",
+  "runtime": "runtime\\a7v3s2_control_variant_audit_20260613",
+  "report": "reports\\CRYPTO_A7V3S2_CONTROL_VARIANT_AUDIT_20260613.md",
+  "candidate_count": 17,
+  "advance_deep_replay_count": 0,
+  "decision_counts": {
+    "HOLD_CONTROL_DOMINATED": 12,
+    "HOLD_STRESS_WEAK": 5
+  },
+  "flag_counts": {
+    "lag_or_stale_dominated": 17,
+    "stress_floor_not_positive": 13,
+    "control_dominated_oos_majority": 12,
+    "shuffle_dominated": 7,
+    "control_dominated_oos_partial": 5
+  },
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_search_expansion": false,
+  "outputs": {
+    "control_audit": "runtime\\a7v3s2_control_variant_audit_20260613\\a7v3s2_control_variant_audit.csv",
+    "decision_summary": "runtime\\a7v3s2_control_variant_audit_20260613\\a7v3s2_control_decision_summary.csv",
+    "flag_summary": "runtime\\a7v3s2_control_variant_audit_20260613\\a7v3s2_control_flag_summary.csv",
+    "pair_summary": "runtime\\a7v3s2_control_variant_audit_20260613\\a7v3s2_control_pair_summary.csv",
+    "advance_queue": "runtime\\a7v3s2_control_variant_audit_20260613\\a7v3s2_advance_deep_replay_queue.csv",
+    "manifest": "runtime\\a7v3s2_control_variant_audit_20260613\\a7v3s2_manifest.json"
+  }
+}
