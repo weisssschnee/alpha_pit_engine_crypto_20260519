@@ -1,0 +1,36 @@
+{
+  "stage": "A7V3S1-ACCEPTED-CANDIDATE-VALIDATION",
+  "generated_at": "2026-06-13T13:33:28Z",
+  "input": "runtime\\a7v3s0_reward_sharded_720h_r2_aggregate_20260613",
+  "runtime": "runtime\\a7v3s1_accepted_candidate_validation_20260613",
+  "report": "reports\\CRYPTO_A7V3S1_ACCEPTED_CANDIDATE_VALIDATION_20260613.md",
+  "accepted_rows": 40,
+  "unique_blueprints": 17,
+  "next_deep_validation_count": 17,
+  "rejected_from_next_validation_count": 0,
+  "decision_counts": {
+    "ADVANCE_PIT_AND_REGIME_VALIDATION": 12,
+    "ADVANCE_CONTROL_NEUTRALIZATION_VALIDATION": 5
+  },
+  "review_flag_counts": {
+    "matched_control_ratio_ge_1": 17,
+    "numeric_probe_only_not_factor": 17,
+    "stress_floor_non_positive": 13,
+    "structural_listing_or_universe_state_dependency": 12,
+    "stress_sortino_non_positive": 9,
+    "same_skeleton_duplicate_cluster": 2
+  },
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_deep_validation": true,
+  "outputs": {
+    "candidate_review": "runtime\\a7v3s1_accepted_candidate_validation_20260613\\a7v3s1_candidate_review.csv",
+    "duplicate_clusters": "runtime\\a7v3s1_accepted_candidate_validation_20260613\\a7v3s1_duplicate_cluster_audit.csv",
+    "family_concentration": "runtime\\a7v3s1_accepted_candidate_validation_20260613\\a7v3s1_family_concentration.csv",
+    "review_flag_summary": "runtime\\a7v3s1_accepted_candidate_validation_20260613\\a7v3s1_review_flag_summary.csv",
+    "split_matrix": "runtime\\a7v3s1_accepted_candidate_validation_20260613\\a7v3s1_split_window_matrix.csv",
+    "split_summary": "runtime\\a7v3s1_accepted_candidate_validation_20260613\\a7v3s1_split_window_summary.csv",
+    "next_queue": "runtime\\a7v3s1_accepted_candidate_validation_20260613\\a7v3s1_next_deep_validation_queue.csv",
+    "manifest": "runtime\\a7v3s1_accepted_candidate_validation_20260613\\a7v3s1_manifest.json"
+  }
+}
