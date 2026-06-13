@@ -1,0 +1,24 @@
+﻿{
+    "stage":  "A7V3S3_STRICT_REWARD_EARLY_STOP",
+    "run_root":  "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7v3s3_strict_reward_sharded_720h_20260613",
+    "evidence_root":  "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7v3s3_strict_reward_sharded_720h_20260613\\early_stop_evidence_20260613",
+    "checked_at_local":  "2026-06-13T23:22:56",
+    "completed_manifest_count":  18,
+    "rejection_file_count":  18,
+    "rejection_rows":  1152,
+    "accepted_file_count":  18,
+    "accepted_rows":  0,
+    "decision":  "STOP_A7V3S3_STRICT_REWARD_ZERO_ACCEPTED_SYSTEMIC_CONTROL_STALE_REJECTION",
+    "stop_reason":  "Early completed shards produced zero accepted rows; dominant rejection reasons are OOS floor/control/lag-stale/stress failures. Continuing remaining shards would waste compute under the current queue.",
+    "next_allowed":  [
+                         "A7V3S4_NEAR_MISS_MECHANISM_AUDIT",
+                         "SEARCH_SPACE_CONTROL_PREFILTER_REDESIGN"
+                     ],
+    "not_authorized":  [
+                           "continue_same_a7v3s3_queue",
+                           "alpha_proof",
+                           "shadow",
+                           "paper",
+                           "live"
+                       ]
+}
