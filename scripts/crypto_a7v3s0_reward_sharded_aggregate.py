@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -20,6 +21,7 @@ DEFAULT_RUNTIME = Path(
 DEFAULT_REPORT = Path(
     r"D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote\reports\CRYPTO_A7V3S0_REWARD_SHARDED_AGGREGATE_20260613.md"
 )
+SHARD_ID_RE = re.compile(r"^a7v3s0_reward_s\d{3}$")
 
 
 def now_utc() -> str:
@@ -55,7 +57,7 @@ def md_table(frame: pd.DataFrame, max_rows: int = 30) -> str:
 
 def shard_id_from_path(path: Path) -> str:
     for part in path.parts:
-        if part.startswith("a7v3s0_reward_s"):
+        if SHARD_ID_RE.match(part):
             return part
     return ""
 

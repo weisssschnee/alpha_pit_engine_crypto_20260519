@@ -8,9 +8,9 @@
   "decision": "PASS_A7V3S0_REWARD_SHARDED_AGGREGATE_READY",
   "eval_error_rows": 0,
   "expected_shards": 64,
-  "generated_at": "2026-06-13T13:24:20Z",
+  "generated_at": "2026-06-13T13:29:00Z",
   "hard_reject_rows": 4056,
-  "launcher_status_conflicts": 0,
+  "launcher_status_conflicts": 75,
   "manifest_count": 64,
   "outputs": {
     "accepted": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7v3s0_reward_sharded_720h_r2_aggregate_20260613\\a7v3s0_reward_accepted_enriched.csv",

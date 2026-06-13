@@ -12,7 +12,7 @@ Decision: `PASS_A7V3S0_REWARD_SHARDED_AGGREGATE_READY`
 - reward_rows: `4096`
 - split_metric_rows: `122880`
 - eval_error_rows: `0`
-- launcher_status_conflicts: `0`
+- launcher_status_conflicts: `75`
 
 ## Accepted By Semantic Pair
 
