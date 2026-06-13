@@ -1,0 +1,11 @@
+motif,count
+smooth_mul,640
+signed_rank_gate,640
+spread_rank,640
+safe_div_abs,624
+state_conditioned_signed,179
+state_conditioned_rank_mul,163
+oi_flow_scaled_spread,41
+funding_basis_delta_sign,12
+funding_basis_spread_24h,12
+oi_flow_delta_rank,12

@@ -1,0 +1,283 @@
+{
+  "deprioritize_recent_only_pair_motif": [
+    {
+      "motif": "safe_div_abs",
+      "recent_only_artifact": 7,
+      "rows": 8,
+      "semantic_pair": "basis|open_interest"
+    }
+  ],
+  "generated_at": "2026-06-13T15:33:21Z",
+  "hard_block_pair_motif": [
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "signed_rank_gate",
+      "rows": 8,
+      "semantic_pair": "liquidity|open_interest"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "smooth_mul",
+      "rows": 16,
+      "semantic_pair": "funding_dense|open_interest"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "signed_rank_gate",
+      "rows": 16,
+      "semantic_pair": "positioning|positioning"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "safe_div_abs",
+      "rows": 8,
+      "semantic_pair": "taker_flow|taker_flow"
+    },
+    {
+      "control_dom_rate": 0.875,
+      "lag_stale_dom_rate": 0.8333333333333334,
+      "motif": "safe_div_abs",
+      "rows": 24,
+      "semantic_pair": "liquidity|taker_flow"
+    },
+    {
+      "control_dom_rate": 0.91,
+      "lag_stale_dom_rate": 0.87,
+      "motif": "spread_rank",
+      "rows": 100,
+      "semantic_pair": "funding_dense|premium"
+    },
+    {
+      "control_dom_rate": 0.8035714285714286,
+      "lag_stale_dom_rate": 0.75,
+      "motif": "spread_rank",
+      "rows": 56,
+      "semantic_pair": "basis|funding_dense"
+    },
+    {
+      "control_dom_rate": 0.9423076923076923,
+      "lag_stale_dom_rate": 0.9038461538461539,
+      "motif": "smooth_mul",
+      "rows": 52,
+      "semantic_pair": "funding_dense|premium"
+    },
+    {
+      "control_dom_rate": 0.8958333333333334,
+      "lag_stale_dom_rate": 0.875,
+      "motif": "signed_rank_gate",
+      "rows": 48,
+      "semantic_pair": "funding_dense|premium"
+    },
+    {
+      "control_dom_rate": 0.9166666666666666,
+      "lag_stale_dom_rate": 0.8958333333333334,
+      "motif": "safe_div_abs",
+      "rows": 48,
+      "semantic_pair": "liquidity|positioning"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 0.9375,
+      "motif": "safe_div_abs",
+      "rows": 16,
+      "semantic_pair": "funding_dense|premium"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "signed_rank_gate",
+      "rows": 16,
+      "semantic_pair": "liquidity|premium"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "smooth_mul",
+      "rows": 8,
+      "semantic_pair": "positioning|positioning"
+    },
+    {
+      "control_dom_rate": 0.8571428571428571,
+      "lag_stale_dom_rate": 0.8214285714285714,
+      "motif": "smooth_mul",
+      "rows": 28,
+      "semantic_pair": "open_interest|positioning"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "safe_div_abs",
+      "rows": 40,
+      "semantic_pair": "liquidity|open_interest"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 0.9285714285714286,
+      "motif": "safe_div_abs",
+      "rows": 28,
+      "semantic_pair": "open_interest|positioning"
+    },
+    {
+      "control_dom_rate": 0.9166666666666666,
+      "lag_stale_dom_rate": 0.9166666666666666,
+      "motif": "spread_rank",
+      "rows": 24,
+      "semantic_pair": "premium|regime"
+    },
+    {
+      "control_dom_rate": 0.95,
+      "lag_stale_dom_rate": 0.95,
+      "motif": "safe_div_abs",
+      "rows": 20,
+      "semantic_pair": "liquidity|liquidity"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "smooth_mul",
+      "rows": 20,
+      "semantic_pair": "premium|regime"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 0.9375,
+      "motif": "safe_div_abs",
+      "rows": 16,
+      "semantic_pair": "basis|liquidity"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "oi_flow_scaled_spread",
+      "rows": 16,
+      "semantic_pair": "open_interest|positioning"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 0.9166666666666666,
+      "motif": "spread_rank",
+      "rows": 12,
+      "semantic_pair": "liquidity|premium"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 0.8333333333333334,
+      "motif": "signed_rank_gate",
+      "rows": 12,
+      "semantic_pair": "open_interest|positioning"
+    },
+    {
+      "control_dom_rate": 0.9166666666666666,
+      "lag_stale_dom_rate": 0.9166666666666666,
+      "motif": "safe_div_abs",
+      "rows": 12,
+      "semantic_pair": "open_interest|premium"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "signed_rank_gate",
+      "rows": 12,
+      "semantic_pair": "open_interest|premium"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "spread_rank",
+      "rows": 8,
+      "semantic_pair": "liquidity|open_interest"
+    },
+    {
+      "control_dom_rate": 0.875,
+      "lag_stale_dom_rate": 0.875,
+      "motif": "spread_rank",
+      "rows": 8,
+      "semantic_pair": "liquidity|positioning"
+    },
+    {
+      "control_dom_rate": 0.875,
+      "lag_stale_dom_rate": 0.875,
+      "motif": "smooth_mul",
+      "rows": 8,
+      "semantic_pair": "open_interest|premium"
+    },
+    {
+      "control_dom_rate": 0.875,
+      "lag_stale_dom_rate": 0.875,
+      "motif": "safe_div_abs",
+      "rows": 8,
+      "semantic_pair": "premium|premium"
+    },
+    {
+      "control_dom_rate": 0.875,
+      "lag_stale_dom_rate": 0.875,
+      "motif": "oi_flow_scaled_spread",
+      "rows": 8,
+      "semantic_pair": "open_interest|premium"
+    }
+  ],
+  "keep_reduced_cap_mechanism_probe": [],
+  "queue_policy": {
+    "allow_redesign_for_control_polluted_near_miss": true,
+    "allow_reduced_cap_for_mechanism_keep_probe": true,
+    "do_not_continue_a7v3s3_same_queue": true,
+    "reject_if_oos_control_or_lag_stale_dominated_in_prior_audit": true,
+    "require_prefilter_before_reward": true
+  },
+  "redesign_pair_motif_not_reward_as_is": [
+    {
+      "control_dom_rate": 1.0,
+      "control_polluted_near_miss": 3,
+      "lag_stale_dom_rate": 1.0,
+      "motif": "safe_div_abs",
+      "rows": 40,
+      "semantic_pair": "positioning|positioning"
+    },
+    {
+      "control_dom_rate": 0.875,
+      "control_polluted_near_miss": 2,
+      "lag_stale_dom_rate": 0.875,
+      "motif": "spread_rank",
+      "rows": 8,
+      "semantic_pair": "open_interest|positioning"
+    },
+    {
+      "control_dom_rate": 0.9807692307692307,
+      "control_polluted_near_miss": 2,
+      "lag_stale_dom_rate": 0.9423076923076923,
+      "motif": "safe_div_abs",
+      "rows": 52,
+      "semantic_pair": "basis|taker_flow"
+    },
+    {
+      "control_dom_rate": 1.0,
+      "control_polluted_near_miss": 1,
+      "lag_stale_dom_rate": 0.9523809523809523,
+      "motif": "safe_div_abs",
+      "rows": 84,
+      "semantic_pair": "positioning|taker_flow"
+    },
+    {
+      "control_dom_rate": 0.8636363636363636,
+      "control_polluted_near_miss": 1,
+      "lag_stale_dom_rate": 0.8409090909090909,
+      "motif": "safe_div_abs",
+      "rows": 44,
+      "semantic_pair": "basis|positioning"
+    },
+    {
+      "control_dom_rate": 0.4583333333333333,
+      "control_polluted_near_miss": 1,
+      "lag_stale_dom_rate": 0.4166666666666667,
+      "motif": "safe_div_abs",
+      "rows": 24,
+      "semantic_pair": "basis|basis"
+    }
+  ],
+  "rule_scope": "pre_reward_candidate_queue_filter",
+  "stage": "A7V3S4_SEARCH_SPACE_CONTROL_PREFILTER"
+}

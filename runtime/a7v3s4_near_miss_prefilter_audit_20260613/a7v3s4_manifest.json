@@ -1,0 +1,17 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_continue_same_a7v3s3_queue": false,
+  "authorizes_prefiltered_queue_build": true,
+  "control_polluted_near_miss_rows": 10,
+  "decision": "PASS_A7V3S4_PREFILTER_RULES_BUILT",
+  "generated_at": "2026-06-13T15:33:21Z",
+  "hard_block_pair_motif_count": 30,
+  "input_rejections": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7v3s3_strict_reward_early_stop_20260613\\a7v3s3_early_stop_all_rejections.csv",
+  "input_rows": 1152,
+  "keep_reduced_cap_pair_motif_count": 0,
+  "mechanism_keep_probe_rows": 0,
+  "redesign_pair_motif_count": 6,
+  "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7V3S4_NEAR_MISS_PREFILTER_AUDIT_20260613.md",
+  "runtime": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7v3s4_near_miss_prefilter_audit_20260613",
+  "stage": "A7V3S4_NEAR_MISS_PREFILTER_AUDIT"
+}
