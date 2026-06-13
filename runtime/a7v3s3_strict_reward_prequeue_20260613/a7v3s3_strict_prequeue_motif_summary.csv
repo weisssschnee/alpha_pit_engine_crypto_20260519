@@ -1,0 +1,8 @@
+motif,count
+smooth_mul,1085
+safe_div_abs,965
+signed_rank_gate,864
+spread_rank,664
+state_conditioned_signed,215
+state_conditioned_rank_mul,205
+oi_flow_scaled_spread,98
