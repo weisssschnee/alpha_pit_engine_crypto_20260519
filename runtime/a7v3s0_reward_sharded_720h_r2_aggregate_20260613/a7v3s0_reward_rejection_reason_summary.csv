@@ -1,0 +1,7 @@
+hard_reject_reason,count
+oos_nonoverlap_floor_not_positive,4016
+oos_net_mean_not_all_positive,3902
+shuffle_control_dominated_recent,2643
+train_orientation_no_positive_edge,2333
+recent_sortino_non_positive,2225
+non_finite_diagnostic_composite,176

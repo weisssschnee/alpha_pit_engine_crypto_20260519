@@ -1,0 +1,7 @@
+motif,count
+smooth_mul,11
+safe_div_abs,10
+state_conditioned_signed,10
+spread_rank,4
+state_conditioned_rank_mul,3
+signed_rank_gate,2

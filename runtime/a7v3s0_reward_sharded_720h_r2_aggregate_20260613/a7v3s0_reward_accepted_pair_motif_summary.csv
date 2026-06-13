@@ -1,0 +1,13 @@
+semantic_pair,motif,count
+age|positioning,safe_div_abs,6
+positioning|universe_state,state_conditioned_signed,6
+age|positioning,smooth_mul,5
+age|positioning,state_conditioned_signed,4
+positioning|universe_state,state_conditioned_rank_mul,3
+open_interest|positioning,smooth_mul,3
+positioning|universe_state,smooth_mul,3
+positioning|universe_state,spread_rank,3
+open_interest|positioning,safe_div_abs,2
+open_interest|regime,safe_div_abs,2
+positioning|positioning,signed_rank_gate,2
+open_interest|positioning,spread_rank,1
