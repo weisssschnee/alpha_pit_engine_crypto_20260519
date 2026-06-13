@@ -1,0 +1,21 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_full_reward_wave": false,
+  "authorizes_smoke_reward": true,
+  "decision": "PASS_A7V3S7_REDESIGNED_QUEUE_READY",
+  "eligible_rows": 2074,
+  "generated_at": "2026-06-13T19:02:33Z",
+  "hard_block_pair_motif_count": 22,
+  "input_queue": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7v3s5_prefiltered_queue_20260613\\a7v3s5_prefiltered_reward_prequeue.csv",
+  "input_rejections": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7v3s6_prefiltered_reward_smoke_aggregate_20260614\\a7v3s0_reward_rejections_enriched.csv",
+  "input_rows": 2963,
+  "output_queue": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7v3s7_candidate_construction_redesign_20260614\\a7v3s7_redesigned_reward_prequeue.csv",
+  "runtime": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7v3s7_candidate_construction_redesign_20260614",
+  "selected_motif_count": 9,
+  "selected_rows": 1024,
+  "selected_semantic_pair_count": 31,
+  "selected_skeleton_count": 954,
+  "soft_deprioritize_pair_motif_count": 15,
+  "stage": "A7V3S7_CANDIDATE_CONSTRUCTION_REDESIGN",
+  "tested_blueprint_count": 256
+}
