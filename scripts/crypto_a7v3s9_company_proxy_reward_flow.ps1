@@ -82,13 +82,17 @@ function Start-ShardBatch {
     }
     foreach ($entry in $procs) {
       Wait-Process -Id $entry.process.Id
+      $entry.process.Refresh()
       $exit = $entry.process.ExitCode
-      $status = if ($exit -eq 0) { "done" } else { "failed" }
+      $runtimeName = if ($Stage -eq "proxy") { "proxy_runtime" } else { "reward_runtime" }
+      $manifestName = if ($Stage -eq "proxy") { "a7v3s9_proxy_manifest.json" } else { "a7reward1_manifest.json" }
+      $manifestPath = Join-Path (Join-Path (Join-Path (Split-Path $StatusPath -Parent) ("shards\" + $entry.shard_id)) $runtimeName) $manifestName
+      $status = if (Test-Path $manifestPath) { "done" } else { "failed" }
       $statusRows.Add([pscustomobject]@{ shard_id=$entry.shard_id; status=$status; exit_code=$exit; started_at=$entry.started_at; ended_at=(Get-Date -Format o); queue_path=$entry.queue_path })
       "[$(Get-Date -Format o)] END $Stage $($entry.shard_id) exit=$exit" | Out-File -Append -FilePath $Log
-      if ($exit -ne 0) {
+      if (!(Test-Path $manifestPath)) {
         $statusRows | Export-Csv -NoTypeInformation -Path $StatusPath
-        throw "$Stage shard failed $($entry.shard_id) exit=$exit"
+        throw "$Stage shard missing manifest $($entry.shard_id) exit=$exit manifest=$manifestPath"
       }
     }
     $statusRows | Export-Csv -NoTypeInformation -Path $StatusPath
