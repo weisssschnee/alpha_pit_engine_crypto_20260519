@@ -72,6 +72,7 @@ PARETO_OBJECTIVES = [
     "obj_neg_oos_control_dominated_count",
     "obj_neg_oos_lag_stale_dominated_count",
 ]
+COMPUTED_UNIVERSE_STATE_FIELDS = {"active_universe_size"}
 
 
 def now_utc() -> str:
@@ -570,7 +571,15 @@ def load_numeric_for_queue(
             base_fields.add("mark_index_basis_bps")
     latent_fields = {field for field in fields if field in latent_schema and field not in base_fields}
     upper_fields = {field for field in fields if field in upper_schema and field not in base_fields and field not in latent_fields}
-    missing = sorted(fields - base_fields - latent_fields - upper_fields - requested_dense_funding)
+    requested_universe_state = fields & COMPUTED_UNIVERSE_STATE_FIELDS
+    missing = sorted(
+        fields
+        - base_fields
+        - latent_fields
+        - upper_fields
+        - requested_dense_funding
+        - requested_universe_state
+    )
     if missing:
         raise RuntimeError(f"missing numeric fields for reward model: {missing[:20]}")
 
@@ -578,6 +587,9 @@ def load_numeric_for_queue(
     loaded_symbols, timestamps, numeric = load_base(symbols, base_fields)
     numeric.update(load_latent_numeric(loaded_symbols, timestamps, latent_fields))
     numeric.update(load_upper_numeric(loaded_symbols, timestamps, upper_fields))
+    if "active_universe_size" in requested_universe_state:
+        active_count = np.isfinite(numeric["trade_close"].astype(float)).sum(axis=0).astype(float)
+        numeric["active_universe_size"] = np.broadcast_to(active_count, numeric["trade_close"].shape).copy()
     for alias, source in UPPER_ALIASES.items():
         if alias in requested and source in numeric:
             numeric[alias] = numeric[source]

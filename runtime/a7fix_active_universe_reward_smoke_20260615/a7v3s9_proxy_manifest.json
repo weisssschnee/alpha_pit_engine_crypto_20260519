@@ -1,0 +1,33 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_bounded_reward_smoke": false,
+  "authorizes_full_reward_wave": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_cap": 2,
+  "decision": "HOLD_A7V3S9_PREREWARD_PROXY_NO_SELECTABLE",
+  "eval_error_rows": 0,
+  "generated_at": "2026-06-14T16:20:28Z",
+  "hours_per_split": 720,
+  "metric_rows": 80,
+  "near_miss_rows": 0,
+  "output_selected_queue": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7fix_active_universe_reward_smoke_20260615\\a7v3s9_proxy_selected_for_reward.csv",
+  "proxy_control_variants": [
+    "one_bar_lag",
+    "stale_168h",
+    "time_shuffle"
+  ],
+  "proxy_horizons": [
+    8,
+    24
+  ],
+  "queue": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7fix_active_universe_reward_smoke_20260615\\active_universe_smoke_queue.csv",
+  "queue_rows": 2,
+  "reward_rows": 4,
+  "runtime": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7fix_active_universe_reward_smoke_20260615",
+  "selected_motif_count": 0,
+  "selected_rows": 0,
+  "selected_semantic_pair_count": 0,
+  "selected_unique_blueprints": 0,
+  "stage": "A7V3S9_PREREWARD_OOS_CONTROL_PROXY",
+  "strict_pass_rows": 0
+}
