@@ -13,6 +13,9 @@ $RewardReport = Join-Path $Repo "reports\CRYPTO_A7V3S9_SELECTED_FULL_REWARD_AGGR
 $ProxyRowsPerShard = 32
 $RewardRowsPerShard = 16
 $MaxParallel = 5
+if ($env:A7V3S9_MAX_PARALLEL) {
+  $MaxParallel = [int]$env:A7V3S9_MAX_PARALLEL
+}
 $ManifestWaitSeconds = 1800
 
 New-Item -ItemType Directory -Force -Path $RunRoot, $AggregateRuntime, $RewardRunRoot, $RewardAggregateRuntime | Out-Null
