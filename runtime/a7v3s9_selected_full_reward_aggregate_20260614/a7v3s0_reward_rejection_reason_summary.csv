@@ -1,0 +1,8 @@
+hard_reject_reason,count
+oos_control_dominated,15
+oos_lag_stale_dominated,13
+stress_floor_not_positive,11
+shuffle_control_dominated_recent,8
+oos_shuffle_dominated,6
+oos_nonoverlap_floor_not_positive,3
+train_orientation_no_positive_edge,2

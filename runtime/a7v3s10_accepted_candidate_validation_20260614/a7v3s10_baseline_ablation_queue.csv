@@ -1,0 +1,6 @@
+blueprint_id,semantic_pair,motif,skeleton_key,expression
+a7v3s10_component_premium_decay,premium,component,premium_decay_336,"Decay(premium_abs_state,336)"
+a7v3s10_component_basis_abs_z,basis,component,basis_abs_z_168,"Abs(ZScore(Mean(mark_trade_basis_bps,168)))"
+a7v3s10_component_basis_z,basis,component,basis_z_168,"ZScore(Mean(mark_trade_basis_bps,168))"
+a7v3s10_ablation_no_abs,basis|premium,smooth_mul_ablation,basis_premium_no_abs,"Mul(Decay(premium_abs_state,336),ZScore(Mean(mark_trade_basis_bps,168)))"
+a7v3s10_ablation_shorter_basis,basis|premium,smooth_mul_ablation,basis_premium_shorter,"Mul(Decay(premium_abs_state,336),Abs(ZScore(Mean(mark_trade_basis_bps,72))))"

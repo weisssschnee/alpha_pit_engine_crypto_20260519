@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_bounded_full_reward": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7V3S9_PROXY_AGGREGATE_SELECTED",
+  "eval_error_rows": 0,
+  "expected_shards": 32,
+  "generated_at": "2026-06-14T13:45:03Z",
+  "leaderboard_rows": 2048,
+  "manifest_count": 32,
+  "near_miss_rows": 4,
+  "report": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\reports\\CRYPTO_A7V3S9_PREREWARD_OOS_CONTROL_PROXY_AGGREGATE_20260614.md",
+  "run_root": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7v3s9_prereward_oos_control_proxy_20260614",
+  "runtime": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7v3s9_prereward_oos_control_proxy_aggregate_20260614",
+  "selected_queue": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7v3s9_prereward_oos_control_proxy_aggregate_20260614\\a7v3s9_proxy_selected_for_reward.csv",
+  "selected_rows": 4,
+  "selected_unique_blueprints": 4,
+  "stage": "A7V3S9_PROXY_AGGREGATE",
+  "strict_pass_rows": 2
+}

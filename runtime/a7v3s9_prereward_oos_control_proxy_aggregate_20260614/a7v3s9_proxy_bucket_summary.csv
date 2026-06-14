@@ -1,0 +1,4 @@
+proxy_bucket,count
+proxy_reject,2044
+proxy_near_miss,2
+proxy_pass,2

@@ -1,0 +1,20 @@
+{
+  "accepted_blueprint_id": "a7v3s0_37b921db0b74a15a",
+  "accepted_expression": "Mul(Decay(premium_abs_state,336),Abs(ZScore(Mean(mark_trade_basis_bps,168))))",
+  "accepted_horizon_h": 24,
+  "authorizes_alpha_proof": false,
+  "authorizes_next_action": "information_increment_or_broader_search_feedback_only",
+  "authorizes_shadow_paper_live": false,
+  "baseline_accepted_rows": 0,
+  "baseline_queue_rows": 5,
+  "baseline_reward_rows": 20,
+  "decision": "HOLD_RESEARCH",
+  "full_reward_accepted_rows": 1,
+  "issues": [
+    "No single-leg/ablation baseline passed full reward; composite has incremental evidence over tested primitives.",
+    "Train Sortino is modest; OOS strength may be regime/local rather than broad in-sample edge."
+  ],
+  "report": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\reports\\CRYPTO_A7V3S10_ACCEPTED_CANDIDATE_VALIDATION_PACK_20260614.md",
+  "runtime": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\research_runtime\\a7v3s10_accepted_candidate_validation_20260614",
+  "stage": "A7V3S10_ACCEPTED_CANDIDATE_VALIDATION_PACK"
+}
