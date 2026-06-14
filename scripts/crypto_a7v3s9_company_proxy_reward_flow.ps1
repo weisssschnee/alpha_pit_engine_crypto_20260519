@@ -13,6 +13,7 @@ $RewardReport = Join-Path $Repo "reports\CRYPTO_A7V3S9_SELECTED_FULL_REWARD_AGGR
 $ProxyRowsPerShard = 32
 $RewardRowsPerShard = 16
 $MaxParallel = 5
+$ManifestWaitSeconds = 1800
 
 New-Item -ItemType Directory -Force -Path $RunRoot, $AggregateRuntime, $RewardRunRoot, $RewardAggregateRuntime | Out-Null
 Set-Location $Repo
@@ -87,6 +88,10 @@ function Start-ShardBatch {
       $runtimeName = if ($Stage -eq "proxy") { "proxy_runtime" } else { "reward_runtime" }
       $manifestName = if ($Stage -eq "proxy") { "a7v3s9_proxy_manifest.json" } else { "a7reward1_manifest.json" }
       $manifestPath = Join-Path (Join-Path (Join-Path (Split-Path $StatusPath -Parent) ("shards\" + $entry.shard_id)) $runtimeName) $manifestName
+      $waitStart = Get-Date
+      while (!(Test-Path $manifestPath) -and (((Get-Date) - $waitStart).TotalSeconds -lt $ManifestWaitSeconds)) {
+        Start-Sleep -Seconds 10
+      }
       $status = if (Test-Path $manifestPath) { "done" } else { "failed" }
       $statusRows.Add([pscustomobject]@{ shard_id=$entry.shard_id; status=$status; exit_code=$exit; started_at=$entry.started_at; ended_at=(Get-Date -Format o); queue_path=$entry.queue_path })
       "[$(Get-Date -Format o)] END $Stage $($entry.shard_id) exit=$exit" | Out-File -Append -FilePath $Log
