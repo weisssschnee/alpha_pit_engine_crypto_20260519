@@ -6,6 +6,7 @@ import math
 import os
 import re
 import sys
+import gc
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -692,6 +693,14 @@ def evaluate_queue(
                     metric_rows.extend(split_metrics(row, horizon, variant, ctrl, raw_labels[horizon], eval_split, quote_volume, cost_bps, orientation, raw_label_ranks[horizon]))
         except Exception as exc:  # keep the reward audit fail-open as data, not as silent loss
             error_rows.append({"blueprint_id": cid, "error": repr(exc), "expression": row.get("expression", "")})
+        finally:
+            # Candidate expressions materialize large asset x time matrices. Keeping the
+            # whole expression cache for a 1k-row shard can dominate memory and kill
+            # otherwise healthy workers; clear between candidates while preserving
+            # intra-expression caching during a single eval call.
+            evaluator.cache.clear()
+            if idx_row % max(1, checkpoint_every or 64) == 0:
+                gc.collect()
         if checkpoint_dir is not None and checkpoint_every > 0 and (idx_row % checkpoint_every == 0 or idx_row == total_rows):
             checkpoint_dir.mkdir(parents=True, exist_ok=True)
             partial_metrics = pd.DataFrame(metric_rows)
