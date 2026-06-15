@@ -11,6 +11,11 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+try:
+    import bottleneck as bn
+except Exception:  # pragma: no cover - optional acceleration dependency.
+    bn = None
+
 REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
@@ -227,7 +232,14 @@ def cs_zscore(values: np.ndarray) -> np.ndarray:
 
 
 def cs_rank_pct(values: np.ndarray) -> np.ndarray:
-    return pd.DataFrame(values).rank(axis=0, pct=True, method="average").to_numpy(dtype=np.float64)
+    arr = np.asarray(values, dtype=np.float64)
+    if bn is not None:
+        counts = np.isfinite(arr).sum(axis=0).astype(np.float64, copy=False)
+        ranks = bn.nanrankdata(arr, axis=0).astype(np.float64, copy=False)
+        out = np.divide(ranks, counts.reshape(1, -1), out=np.full_like(ranks, np.nan), where=counts.reshape(1, -1) > 0)
+        out[~np.isfinite(arr)] = np.nan
+        return out
+    return pd.DataFrame(arr).rank(axis=0, pct=True, method="average").to_numpy(dtype=np.float64)
 
 
 def group_demean(values: np.ndarray, groups: np.ndarray, min_group: int = 3) -> np.ndarray:
@@ -253,7 +265,7 @@ def group_rank(values: np.ndarray, groups: np.ndarray, min_group: int = 3) -> np
         mask = (grp == g) & np.isfinite(values)
         count = mask.sum(axis=0)
         vals = np.where(mask, values, np.nan)
-        ranked = pd.DataFrame(vals).rank(axis=0, pct=True, method="average").to_numpy(dtype=np.float64)
+        ranked = cs_rank_pct(vals)
         ok = mask & (count.reshape(1, -1) >= min_group)
         out[ok] = ranked[ok]
     return out

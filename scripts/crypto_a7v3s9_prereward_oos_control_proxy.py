@@ -173,6 +173,41 @@ def group_summary(frame: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
     return frame.groupby(columns, dropna=False).size().reset_index(name="count").sort_values("count", ascending=False)
 
 
+def apply_proxy_runtime(full_proxy: bool) -> None:
+    if full_proxy:
+        reward.HORIZONS = [8, 24]
+        reward.CONTROL_VARIANTS = ["one_bar_lag", "stale_168h", "time_shuffle"]
+        reward.CONTROL_DOMINANCE_VARIANTS = ["one_bar_lag", "stale_168h", "time_shuffle"]
+        reward.LAG_STALE_VARIANTS = ["one_bar_lag", "stale_168h"]
+        reward.SHUFFLE_VARIANTS = ["time_shuffle"]
+    else:
+        reward.HORIZONS = [24]
+        reward.CONTROL_VARIANTS = ["time_shuffle"]
+        reward.CONTROL_DOMINANCE_VARIANTS = ["time_shuffle"]
+        reward.LAG_STALE_VARIANTS = []
+        reward.SHUFFLE_VARIANTS = ["time_shuffle"]
+
+
+def halving_keep_queue(queue: pd.DataFrame, stage1_rewards: pd.DataFrame, keep_rows: int) -> pd.DataFrame:
+    if stage1_rewards.empty or keep_rows <= 0 or keep_rows >= len(queue):
+        return queue.copy()
+    ranked = stage1_rewards.copy()
+    if "hard_reject" in ranked.columns:
+        hard = ranked["hard_reject"].astype(bool)
+        soft = ranked[~hard].copy()
+        if soft.shape[0] >= max(1, keep_rows // 4):
+            ranked = soft
+    ranked = ranked.sort_values(
+        ["proxy_selectable", "proxy_strict_pass", "proxy_score", "min_oos_floor_sortino", "recent_sortino"],
+        ascending=[False, False, False, False, False],
+    )
+    keep_ids = ranked["blueprint_id"].dropna().astype(str).head(keep_rows).tolist()
+    if not keep_ids:
+        keep_ids = stage1_rewards["blueprint_id"].dropna().astype(str).head(keep_rows).tolist()
+    keep_set = set(keep_ids)
+    return queue[queue["blueprint_id"].astype(str).isin(keep_set)].copy()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--queue", default=str(DEFAULT_QUEUE))
@@ -188,6 +223,8 @@ def main() -> None:
     parser.add_argument("--pair-cap", type=int, default=24)
     parser.add_argument("--motif-cap", type=int, default=96)
     parser.add_argument("--skeleton-cap", type=int, default=2)
+    parser.add_argument("--successive-halving", action="store_true")
+    parser.add_argument("--halving-keep-rows", type=int, default=0)
     args = parser.parse_args()
 
     queue_path = Path(args.queue)
@@ -198,14 +235,49 @@ def main() -> None:
 
     queue = pd.read_csv(queue_path, low_memory=False)
     candidate_cap = args.candidate_cap if args.candidate_cap and args.candidate_cap > 0 else len(queue)
+    if candidate_cap > 0:
+        queue = queue.head(candidate_cap).copy()
+    stage1_manifest: dict[str, Any] = {}
+    if args.successive_halving and args.halving_keep_rows > 0 and args.halving_keep_rows < len(queue):
+        stage1_runtime = runtime / "stage1_halving"
+        apply_proxy_runtime(full_proxy=False)
+        stage1_metrics, stage1_errors = reward.evaluate_queue(
+            queue,
+            args.hours_per_split,
+            args.train_hours_per_split,
+            args.cost_bps,
+            len(queue),
+            args.orientation_extension_hours,
+            checkpoint_dir=stage1_runtime,
+            checkpoint_every=max(args.checkpoint_every, 64),
+        )
+        stage1_rewards = add_proxy_columns(reward.aggregate_rewards(stage1_metrics))
+        kept_queue = halving_keep_queue(queue, stage1_rewards, args.halving_keep_rows)
+        stage1_metrics.to_csv(stage1_runtime / "a7v3s9_stage1_split_metrics.csv", index=False)
+        stage1_errors.to_csv(stage1_runtime / "a7v3s9_stage1_eval_errors.csv", index=False)
+        stage1_rewards.to_csv(stage1_runtime / "a7v3s9_stage1_leaderboard.csv", index=False)
+        kept_queue.to_csv(stage1_runtime / "a7v3s9_stage1_kept_queue.csv", index=False)
+        stage1_manifest = {
+            "enabled": True,
+            "stage1_runtime": str(stage1_runtime),
+            "stage1_horizons": reward.HORIZONS,
+            "stage1_control_variants": reward.CONTROL_VARIANTS,
+            "stage1_input_rows": int(queue.shape[0]),
+            "stage1_metric_rows": int(stage1_metrics.shape[0]),
+            "stage1_reward_rows": int(stage1_rewards.shape[0]),
+            "stage1_eval_error_rows": int(stage1_errors.shape[0]),
+            "halving_keep_rows_requested": int(args.halving_keep_rows),
+            "halving_kept_rows": int(kept_queue.shape[0]),
+        }
+        write_json(stage1_runtime / "a7v3s9_stage1_halving_manifest.json", stage1_manifest)
+        queue = kept_queue
+        candidate_cap = len(queue)
+    else:
+        stage1_manifest = {"enabled": False}
 
     # Patch the imported reward module for a cheap pre-reward proxy. This keeps the same
     # numeric loader, formula evaluator, label alignment, split logic, and metric code.
-    reward.HORIZONS = [8, 24]
-    reward.CONTROL_VARIANTS = ["one_bar_lag", "stale_168h", "time_shuffle"]
-    reward.CONTROL_DOMINANCE_VARIANTS = ["one_bar_lag", "stale_168h", "time_shuffle"]
-    reward.LAG_STALE_VARIANTS = ["one_bar_lag", "stale_168h"]
-    reward.SHUFFLE_VARIANTS = ["time_shuffle"]
+    apply_proxy_runtime(full_proxy=True)
 
     metrics, errors = reward.evaluate_queue(
         queue,
@@ -248,6 +320,7 @@ def main() -> None:
         "runtime": str(runtime),
         "queue_rows": int(queue.shape[0]),
         "candidate_cap": int(candidate_cap),
+        "successive_halving": stage1_manifest,
         "hours_per_split": int(args.hours_per_split),
         "proxy_horizons": reward.HORIZONS,
         "proxy_control_variants": reward.CONTROL_VARIANTS,

@@ -13,6 +13,11 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+try:
+    import bottleneck as bn
+except Exception:  # pragma: no cover - optional acceleration dependency.
+    bn = None
+
 
 REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
@@ -401,7 +406,14 @@ def finite_corr(x: np.ndarray, y: np.ndarray) -> float:
 
 
 def rank_pct(values: np.ndarray) -> np.ndarray:
-    return pd.DataFrame(values).rank(axis=0, pct=True, method="average").to_numpy(dtype=np.float64)
+    arr = np.asarray(values, dtype=np.float64)
+    if bn is not None:
+        counts = np.isfinite(arr).sum(axis=0).astype(np.float64, copy=False)
+        ranks = bn.nanrankdata(arr, axis=0).astype(np.float64, copy=False)
+        out = np.divide(ranks, counts.reshape(1, -1), out=np.full_like(ranks, np.nan), where=counts.reshape(1, -1) > 0)
+        out[~np.isfinite(arr)] = np.nan
+        return out
+    return pd.DataFrame(arr).rank(axis=0, pct=True, method="average").to_numpy(dtype=np.float64)
 
 
 def signal_to_weights(signal: np.ndarray, gross: float = 1.0, max_abs_weight: float = 0.03) -> np.ndarray:
@@ -478,6 +490,7 @@ def split_metrics(
     quote_volume: np.ndarray,
     cost_bps: float,
     orientation: float,
+    raw_label_rank: np.ndarray | None = None,
 ) -> list[dict[str, Any]]:
     weights = signal_to_weights(signal * orientation)
     gross_forward = np.nansum(weights * raw_label, axis=0)
@@ -485,7 +498,7 @@ def split_metrics(
     net = gross_forward - cost
     periods_per_year = 24.0 * 365.0 / max(1, horizon)
     rank_signal = rank_pct(signal * orientation)
-    rank_label = rank_pct(raw_label)
+    rank_label = raw_label_rank if raw_label_rank is not None else rank_pct(raw_label)
     capacity_series = np.nansum(np.abs(weights) * quote_volume, axis=0)
     rows: list[dict[str, Any]] = []
     for split_name in ALL_EVAL_SPLITS:
@@ -654,6 +667,7 @@ def evaluate_queue(
     orientation_mask = (split == "train_2024") | orientation_extension_mask
     evaluator = A7AB4Evaluator(numeric, groups)
     raw_labels = {h: horizon_label(numeric["trade_close"], timestamps, split, h) for h in HORIZONS}
+    raw_label_ranks = {h: rank_pct(raw_labels[h]) for h in HORIZONS}
     quote_volume = numeric["trade_quote_volume"]
     rng = np.random.default_rng(20260610)
     metric_rows: list[dict[str, Any]] = []
@@ -667,15 +681,15 @@ def evaluate_queue(
             # Orientation is chosen on train only for each horizon, then frozen.
             for horizon in HORIZONS:
                 oriented_split = np.where(orientation_mask, "train_2024", "out_of_scope")
-                train_rows_pos = split_metrics(row, horizon, "orientation_probe", signal, raw_labels[horizon], oriented_split, quote_volume, cost_bps, 1.0)
+                train_rows_pos = split_metrics(row, horizon, "orientation_probe", signal, raw_labels[horizon], oriented_split, quote_volume, cost_bps, 1.0, raw_label_ranks[horizon])
                 train_pos = next((x for x in train_rows_pos if x["split"] == "train_2024"), {})
-                train_rows_neg = split_metrics(row, horizon, "orientation_probe", signal, raw_labels[horizon], oriented_split, quote_volume, cost_bps, -1.0)
+                train_rows_neg = split_metrics(row, horizon, "orientation_probe", signal, raw_labels[horizon], oriented_split, quote_volume, cost_bps, -1.0, raw_label_ranks[horizon])
                 train_neg = next((x for x in train_rows_neg if x["split"] == "train_2024"), {})
                 orientation = 1.0 if float(train_pos.get("net_mean", np.nan)) >= float(train_neg.get("net_mean", np.nan)) else -1.0
-                metric_rows.extend(split_metrics(row, horizon, "original", signal, raw_labels[horizon], eval_split, quote_volume, cost_bps, orientation))
+                metric_rows.extend(split_metrics(row, horizon, "original", signal, raw_labels[horizon], eval_split, quote_volume, cost_bps, orientation, raw_label_ranks[horizon]))
                 for variant in CONTROL_VARIANTS:
                     ctrl = control_signal(signal, variant, rng)
-                    metric_rows.extend(split_metrics(row, horizon, variant, ctrl, raw_labels[horizon], eval_split, quote_volume, cost_bps, orientation))
+                    metric_rows.extend(split_metrics(row, horizon, variant, ctrl, raw_labels[horizon], eval_split, quote_volume, cost_bps, orientation, raw_label_ranks[horizon]))
         except Exception as exc:  # keep the reward audit fail-open as data, not as silent loss
             error_rows.append({"blueprint_id": cid, "error": repr(exc), "expression": row.get("expression", "")})
         if checkpoint_dir is not None and checkpoint_every > 0 and (idx_row % checkpoint_every == 0 or idx_row == total_rows):
