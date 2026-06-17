@@ -42,7 +42,7 @@ def read_csv(path: Path) -> pd.DataFrame:
 
 def collect(run_root: Path, filename: str) -> pd.DataFrame:
     frames: list[pd.DataFrame] = []
-    for path in sorted(run_root.glob(f"shards/a7v3s9_proxy_s*/proxy_runtime/{filename}")):
+    for path in sorted(run_root.glob(f"shards/*/proxy_runtime/{filename}")):
         frame = read_csv(path)
         if frame.empty:
             continue
@@ -55,12 +55,31 @@ def collect(run_root: Path, filename: str) -> pd.DataFrame:
 
 def collect_manifests(run_root: Path) -> pd.DataFrame:
     rows: list[dict[str, Any]] = []
-    for path in sorted(run_root.glob("shards/a7v3s9_proxy_s*/proxy_runtime/a7v3s9_proxy_manifest.json")):
+    for path in sorted(run_root.glob("shards/*/proxy_runtime/a7v3s9_proxy_manifest.json")):
         payload = json.loads(path.read_text(encoding="utf-8"))
         payload["proxy_shard_id"] = path.parts[-3]
         payload["source_file"] = str(path)
         rows.append(payload)
     return pd.DataFrame(rows)
+
+
+def expected_shard_count(run_root: Path, manifest_count: int) -> int:
+    shard_plan = run_root / "a7v3s9_proxy_shard_plan.csv"
+    if shard_plan.exists():
+        return int(len(pd.read_csv(shard_plan)))
+    for prepare_manifest in sorted(run_root.glob("*prepare_manifest.json")):
+        try:
+            payload = json.loads(prepare_manifest.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if "shard_count" in payload:
+            return int(payload["shard_count"])
+    status_path = run_root / "a7fast2_status.csv"
+    if status_path.exists():
+        status = read_csv(status_path)
+        if not status.empty and "shard_id" in status.columns:
+            return int(status["shard_id"].nunique())
+    return int(manifest_count)
 
 
 def main() -> None:
@@ -97,7 +116,7 @@ def main() -> None:
     group_summary(selected, ["semantic_pair"]).to_csv(runtime / "a7v3s9_selected_pair_summary.csv", index=False)
     group_summary(selected, ["motif"]).to_csv(runtime / "a7v3s9_selected_motif_summary.csv", index=False)
 
-    expected_shards = len(pd.read_csv(args.run_root / "a7v3s9_proxy_shard_plan.csv")) if (args.run_root / "a7v3s9_proxy_shard_plan.csv").exists() else 0
+    expected_shards = expected_shard_count(args.run_root, manifests.shape[0])
     strict_pass_rows = int(leaderboard.get("proxy_strict_pass", pd.Series(dtype=bool)).astype(str).str.lower().isin(["true", "1"]).sum()) if not leaderboard.empty else 0
     near_miss_rows = int(leaderboard.get("proxy_near_miss", pd.Series(dtype=bool)).astype(str).str.lower().isin(["true", "1"]).sum()) if not leaderboard.empty else 0
     decision = (
