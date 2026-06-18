@@ -1,0 +1,2303 @@
+from __future__ import annotations
+
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+import pandas as pd
+
+
+REPO = Path(__file__).resolve().parents[1]
+RUNTIME = REPO / "runtime" / "a7pm3_experiment_board"
+REPORT = REPO / "reports" / "CRYPTO_A7PM3_CURRENT_EXPERIMENT_BOARD_20260529.md"
+A7PM0 = REPO / "runtime" / "a7pm0_source_of_truth_registry" / "a7pm0_manifest.json"
+A7PM2 = REPO / "runtime" / "a7pm2_candidate_lifecycle" / "a7pm2_manifest.json"
+A7LS14 = REPO / "runtime" / "a7ls14_scaled_multi_axis_search_contract" / "a7ls14_manifest.json"
+A7LS14X = REPO / "runtime" / "a7ls14x_authorization_arbitration" / "a7ls14x_manifest.json"
+A7LS15 = REPO / "runtime" / "a7ls15_million_scale_blueprint_generation" / "a7ls15_manifest.json"
+A7LS16 = REPO / "runtime" / "a7ls16_local_preflight" / "a7ls16_manifest.json"
+A7LS16X = REPO / "runtime" / "a7ls16x_scale_up_authorization" / "a7ls16x_manifest.json"
+A7LS17 = REPO / "runtime" / "a7ls17_company_materialization_aggregate" / "a7ls17_manifest.json"
+A7FF52E = REPO / "runtime" / "a7ff52e_materialization_preflight" / "a7ff52e_manifest.json"
+A7FF53 = REPO / "runtime" / "a7ff53_numeric_response_contract" / "a7ff53_manifest.json"
+A7FF53E_S00 = REPO / "runtime" / "a7ff53e_numeric_response_execution_s00" / "a7ff53e_s00_manifest.json"
+A7FF53E = REPO / "runtime" / "a7ff53e_numeric_response_summary" / "a7ff53e_manifest.json"
+A7FF54 = REPO / "runtime" / "a7ff54_numeric_clue_consolidation" / "a7ff54_manifest.json"
+A7FF55 = REPO / "runtime" / "a7ff55_selector_repair_contract" / "a7ff55_manifest.json"
+A7FF55D = REPO / "runtime" / "a7ff55d_selector_repair_partial_dryrun" / "a7ff55d_manifest.json"
+A7FF55F = REPO / "runtime" / "a7ff55f_full_primary_input_rebuild" / "a7ff55f_manifest.json"
+A7FF55R = REPO / "runtime" / "a7ff55r_selector_field_family_repair_contract" / "a7ff55r_manifest.json"
+A7FF55R1 = REPO / "runtime" / "a7ff55r1_supplemental_queue_feasibility" / "a7ff55r1_manifest.json"
+A7FF55R2 = REPO / "runtime" / "a7ff55r2_atlas_field_family_generation_repair" / "a7ff55r2_manifest.json"
+A7FF55R3 = REPO / "runtime" / "a7ff55r3_repaired_atlas_dry_generation" / "a7ff55r3_manifest.json"
+A7FF55R4 = REPO / "runtime" / "a7ff55r4_repaired_atlas_coverage_audit" / "a7ff55r4_manifest.json"
+A7FF55R5 = REPO / "runtime" / "a7ff55r5_repaired_atlas_numeric_contract" / "a7ff55r5_manifest.json"
+A7FF55R5E = REPO / "runtime" / "a7ff55r5e_sharded_numeric_summary" / "a7ff55r5e_manifest.json"
+A7FFCORE0 = REPO / "runtime" / "a7ffcore0_typed_ast_governance" / "a7ffcore0_manifest.json"
+A7FFCORE1 = REPO / "runtime" / "a7ffcore1_ast_schema_adapter" / "a7ffcore1_manifest.json"
+A7FFCORE2 = REPO / "runtime" / "a7ffcore2_feature_subgraph_registry" / "a7ffcore2_manifest.json"
+A7FFCORE3 = REPO / "runtime" / "a7ffcore3_formula_gen_subgraph_gate" / "a7ffcore3_manifest.json"
+A7FFCORE4 = REPO / "runtime" / "a7ffcore4_gate_implementation_regression" / "a7ffcore4_manifest.json"
+A7FFCORE5 = REPO / "runtime" / "a7ffcore5_gate_native_generation_dryrun" / "a7ffcore5_manifest.json"
+A7FFCORE6 = REPO / "runtime" / "a7ffcore6_materialization_preflight_contract" / "a7ffcore6_manifest.json"
+A7FFCORE6E = REPO / "runtime" / "a7ffcore6e_materialization_preflight" / "a7ffcore6e_manifest.json"
+A7FFCORE7 = REPO / "runtime" / "a7ffcore7_numeric_response_contract" / "a7ffcore7_manifest.json"
+A7FFCORE7E = REPO / "runtime" / "a7ffcore7e_numeric_response" / "a7ffcore7e_manifest.json"
+A7FFCORE7R = REPO / "runtime" / "a7ffcore7r_control_policy_forensic" / "a7ffcore7r_manifest.json"
+A7FFCORE7ER = REPO / "runtime" / "a7ffcore7er_repaired_numeric_response" / "a7ffcore7er_manifest.json"
+A7FFCORE8 = REPO / "runtime" / "a7ffcore8_numeric_clue_consolidation" / "a7ffcore8_manifest.json"
+A7FFCORE8E = REPO / "runtime" / "a7ffcore8e_replay_preflight_packet_audit" / "a7ffcore8e_manifest.json"
+A7FFCORE9 = REPO / "runtime" / "a7ffcore9_bounded_replay_contract" / "a7ffcore9_manifest.json"
+A7FFCORE9E = REPO / "runtime" / "a7ffcore9e_bounded_replay" / "a7ffcore9e_manifest.json"
+A7FFCORE10E = REPO / "runtime" / "a7ffcore10e_search_readiness_audit" / "a7ffcore10e_manifest.json"
+A7FFCORE11 = REPO / "runtime" / "a7ffcore11_small_expansion_contract" / "a7ffcore11_manifest.json"
+A7FFCORE11E = REPO / "runtime" / "a7ffcore11e_small_dry_generation" / "a7ffcore11e_manifest.json"
+A7FFCORE12 = REPO / "runtime" / "a7ffcore12_blueprint_registration_audit" / "a7ffcore12_manifest.json"
+A7FFCORE12E = REPO / "runtime" / "a7ffcore12e_materialization_preflight" / "a7ffcore12e_manifest.json"
+A7FFCORE13 = REPO / "runtime" / "a7ffcore13_numeric_response_contract" / "a7ffcore13_manifest.json"
+A7FFCORE13E = REPO / "runtime" / "a7ffcore13e_numeric_response" / "a7ffcore13e_manifest.json"
+A7FFCORE14 = REPO / "runtime" / "a7ffcore14_replay_preflight_contract" / "a7ffcore14_manifest.json"
+A7FFCORE14E = REPO / "runtime" / "a7ffcore14e_bounded_replay" / "a7ffcore14e_manifest.json"
+A7FFCORE14R = REPO / "runtime" / "a7ffcore14r_replay_failure_forensic" / "a7ffcore14r_manifest.json"
+A7FFCORE14S = REPO / "runtime" / "a7ffcore14s_replay_packet_repair_contract" / "a7ffcore14s_manifest.json"
+A7FFCORE14SE = REPO / "runtime" / "a7ffcore14se_repaired_packet_construction" / "a7ffcore14se_manifest.json"
+A7FFCORE14SEE = REPO / "runtime" / "a7ffcore14see_sharded_bounded_replay" / "a7ffcore14see_manifest.json"
+A7FFCORE14SER = REPO / "runtime" / "a7ffcore14ser_repaired_replay_forensic" / "a7ffcore14ser_manifest.json"
+A7FFCORE15X = REPO / "runtime" / "a7ffcore15x_objective_surface_reset_contract" / "a7ffcore15x_manifest.json"
+A7FFCORE15Y = REPO / "runtime" / "a7ffcore15y_replay_stability_surface" / "a7ffcore15y_manifest.json"
+A7FFCORE15YR = REPO / "runtime" / "a7ffcore15yr_surface_failure_repair" / "a7ffcore15yr_manifest.json"
+A7FFCORE16 = REPO / "runtime" / "a7ffcore16_primitive_replay_stability_atlas" / "a7ffcore16_manifest.json"
+A7FFCORE16R = REPO / "runtime" / "a7ffcore16r_primitive_atlas_supply_repair" / "a7ffcore16r_manifest.json"
+A7FFCORE16E = REPO / "runtime" / "a7ffcore16e_expanded_primitive_operator_atlas" / "a7ffcore16e_manifest.json"
+A7FFCORE16ER = REPO / "runtime" / "a7ffcore16er_expanded_atlas_forensic" / "a7ffcore16er_manifest.json"
+A7FFCORE16F = REPO / "runtime" / "a7ffcore16f_non_basis_supply_repair_contract" / "a7ffcore16f_manifest.json"
+A7FFCORE16FE = REPO / "runtime" / "a7ffcore16fe_non_basis_atlas_execution" / "a7ffcore16fe_manifest.json"
+A7FFCORE16FER = REPO / "runtime" / "a7ffcore16fer_non_basis_atlas_forensic" / "a7ffcore16fer_manifest.json"
+A7FFCORE16G = REPO / "runtime" / "a7ffcore16g_family_native_interaction_contract" / "a7ffcore16g_manifest.json"
+A7FFCORE16GE = REPO / "runtime" / "a7ffcore16ge_family_native_interaction_probe" / "a7ffcore16ge_manifest.json"
+A7FFCORE16GER = REPO / "runtime" / "a7ffcore16ger_interaction_probe_forensic" / "a7ffcore16ger_manifest.json"
+A7FFCORE16H = REPO / "runtime" / "a7ffcore16h_second_pass_interaction_contract" / "a7ffcore16h_manifest.json"
+A7FFCORE16HE = REPO / "runtime" / "a7ffcore16he_second_pass_interaction_breadth" / "a7ffcore16he_manifest.json"
+A7FFCORE16HER = REPO / "runtime" / "a7ffcore16her_second_pass_forensic" / "a7ffcore16her_manifest.json"
+A7FFCORE16I = REPO / "runtime" / "a7ffcore16i_balanced_preseed_queue_audit" / "a7ffcore16i_manifest.json"
+A7FFCORE16J = REPO / "runtime" / "a7ffcore16j_nearmiss_resolution_audit" / "a7ffcore16j_manifest.json"
+A7FFCORE16K = REPO / "runtime" / "a7ffcore16k_h2_strict_floor_repair_contract" / "a7ffcore16k_manifest.json"
+A7FFCORE16KE = REPO / "runtime" / "a7ffcore16ke_h2_strict_floor_execution" / "a7ffcore16ke_manifest.json"
+A7FFCORE16KR = REPO / "runtime" / "a7ffcore16kr_h2_repair_forensic" / "a7ffcore16kr_manifest.json"
+A7FFCORE16M = REPO / "runtime" / "a7ffcore16m_h2_floor_arbitration_contract" / "a7ffcore16m_manifest.json"
+A7FFCORE16ME = REPO / "runtime" / "a7ffcore16me_broader_h2_repair_execution" / "a7ffcore16me_manifest.json"
+A7FFCORE16L = REPO / "runtime" / "a7ffcore16l_strict_preseed_queue_lock" / "a7ffcore16l_manifest.json"
+A7FFCORE17 = REPO / "runtime" / "a7ffcore17_objective_seed_policy_contract" / "a7ffcore17_manifest.json"
+A7FFCORE17E = REPO / "runtime" / "a7ffcore17e_objective_seed_packet_construction" / "a7ffcore17e_manifest.json"
+A7FFCORE18 = REPO / "runtime" / "a7ffcore18_bounded_replay_preflight_contract" / "a7ffcore18_manifest.json"
+A7FFCORE18E = REPO / "runtime" / "a7ffcore18e_bounded_replay_preflight" / "a7ffcore18e_manifest.json"
+A7FFCORE19 = REPO / "runtime" / "a7ffcore19_bounded_replay_contract" / "a7ffcore19_manifest.json"
+A7FFCORE19E = REPO / "runtime" / "a7ffcore19e_bounded_replay_execution" / "a7ffcore19e_manifest.json"
+A7FFCORE19R = REPO / "runtime" / "a7ffcore19r_bounded_replay_forensic" / "a7ffcore19r_manifest.json"
+A7FFCORE19S = REPO / "runtime" / "a7ffcore19s_bounded_replay_repair_contract" / "a7ffcore19s_manifest.json"
+A7FFCORE19SE = REPO / "runtime" / "a7ffcore19se_bounded_replay_repair_execution" / "a7ffcore19se_manifest.json"
+A7FFCORE19SER = REPO / "runtime" / "a7ffcore19ser_replay_repair_forensic" / "a7ffcore19ser_manifest.json"
+A7FFCORE21 = REPO / "runtime" / "a7ffcore21_replay_translation_reset_contract" / "a7ffcore21_manifest.json"
+A7FFCORE21E = REPO / "runtime" / "a7ffcore21e_replay_translation_matrix_audit" / "a7ffcore21e_manifest.json"
+A7FFCORE21R = REPO / "runtime" / "a7ffcore21r_translation_matrix_forensic" / "a7ffcore21r_manifest.json"
+A7FFCORE22 = REPO / "runtime" / "a7ffcore22_lag_aware_replay_translation_contract" / "a7ffcore22_manifest.json"
+A7FFCORE22E = REPO / "runtime" / "a7ffcore22e_lag_aware_replay_translation_audit" / "a7ffcore22e_manifest.json"
+A7FFCORE22R = REPO / "runtime" / "a7ffcore22r_lag_translation_forensic" / "a7ffcore22r_manifest.json"
+A7FFCORE23 = REPO / "runtime" / "a7ffcore23_executable_horizon_redesign_contract" / "a7ffcore23_manifest.json"
+A7FFCORE23E = REPO / "runtime" / "a7ffcore23e_executable_horizon_diagnostic_audit" / "a7ffcore23e_manifest.json"
+A7FFCORE23R = REPO / "runtime" / "a7ffcore23r_executable_horizon_forensic" / "a7ffcore23r_manifest.json"
+A7FFCORE24 = REPO / "runtime" / "a7ffcore24_executable_lane_repair_contract" / "a7ffcore24_manifest.json"
+A7FFCORE24E = REPO / "runtime" / "a7ffcore24e_executable_lane_repair_packet" / "a7ffcore24e_manifest.json"
+A7FFCORE24R = REPO / "runtime" / "a7ffcore24r_lane_packet_forensic" / "a7ffcore24r_manifest.json"
+A7FFCORE25 = REPO / "runtime" / "a7ffcore25_targeted_lane_horizon_generation_contract" / "a7ffcore25_manifest.json"
+A7FFCORE25E = REPO / "runtime" / "a7ffcore25e_targeted_lane_horizon_generation" / "a7ffcore25e_manifest.json"
+A7FFCORE26 = REPO / "runtime" / "a7ffcore26_targeted_numeric_probe_contract" / "a7ffcore26_manifest.json"
+A7FFCORE26E = REPO / "runtime" / "a7ffcore26e_targeted_numeric_probe_execution" / "a7ffcore26e_manifest.json"
+A7FFCORE26R = REPO / "runtime" / "a7ffcore26r_targeted_numeric_probe_forensic" / "a7ffcore26r_manifest.json"
+A7FFCORE26C = REPO / "runtime" / "a7ffcore26c_split_consistency_repair_contract" / "a7ffcore26c_manifest.json"
+A7FFCORE26CE = REPO / "runtime" / "a7ffcore26ce_split_consistency_repair_probe" / "a7ffcore26ce_manifest.json"
+A7FFCORE26CER = REPO / "runtime" / "a7ffcore26cer_split_repair_forensic" / "a7ffcore26cer_manifest.json"
+A7FFCORE26D = REPO / "runtime" / "a7ffcore26d_non_s0_lane_repair_contract" / "a7ffcore26d_manifest.json"
+A7FFCORE26DE = REPO / "runtime" / "a7ffcore26de_non_s0_lane_repair_probe" / "a7ffcore26de_manifest.json"
+A7FFCORE26DER = REPO / "runtime" / "a7ffcore26der_non_s0_repair_forensic" / "a7ffcore26der_manifest.json"
+A7FFCORE27X = REPO / "runtime" / "a7ffcore27x_search_readiness_arbitration" / "a7ffcore27x_manifest.json"
+A7FFCORE28 = REPO / "runtime" / "a7ffcore28_objective_data_family_reset_contract" / "a7ffcore28_manifest.json"
+A7FFCORE28E = REPO / "runtime" / "a7ffcore28e_independent_data_family_atlas_audit" / "a7ffcore28e_manifest.json"
+A7FFCORE29 = REPO / "runtime" / "a7ffcore29_independent_family_bounded_probe_contract" / "a7ffcore29_manifest.json"
+A7FFCORE29E = REPO / "runtime" / "a7ffcore29e_independent_family_preflight" / "a7ffcore29e_manifest.json"
+A7FFCORE30 = REPO / "runtime" / "a7ffcore30_independent_family_numeric_probe_contract" / "a7ffcore30_manifest.json"
+A7FFCORE30E = REPO / "runtime" / "a7ffcore30e_bounded_numeric_probe" / "a7ffcore30e_manifest.json"
+A7FFCORE31 = REPO / "runtime" / "a7ffcore31_independent_family_clue_consolidation" / "a7ffcore31_manifest.json"
+A7FFCORE32 = REPO / "runtime" / "a7ffcore32_replay_preflight_contract" / "a7ffcore32_manifest.json"
+A7FFCORE32E = REPO / "runtime" / "a7ffcore32e_replay_preflight_execution" / "a7ffcore32e_manifest.json"
+A7FFCORE33 = REPO / "runtime" / "a7ffcore33_bounded_replay_contract" / "a7ffcore33_manifest.json"
+A7FFCORE33E = REPO / "runtime" / "a7ffcore33e_bounded_replay_execution" / "a7ffcore33e_manifest.json"
+A7FFCORE33ER = REPO / "runtime" / "a7ffcore33er_bounded_replay_forensic" / "a7ffcore33er_manifest.json"
+A7FFCORE34 = REPO / "runtime" / "a7ffcore34_orientation_control_repair_contract" / "a7ffcore34_manifest.json"
+A7FFCORE34E = REPO / "runtime" / "a7ffcore34e_orientation_control_repair_execution" / "a7ffcore34e_manifest.json"
+A7FFCORE34ER = REPO / "runtime" / "a7ffcore34er_repair_forensic" / "a7ffcore34er_manifest.json"
+A7FFCORE35 = REPO / "runtime" / "a7ffcore35_search_readiness_arbitration" / "a7ffcore35_manifest.json"
+A7FFCORE36 = REPO / "runtime" / "a7ffcore36_replay_objective_reset_contract" / "a7ffcore36_manifest.json"
+A7FFCORE36E = REPO / "runtime" / "a7ffcore36e_replay_objective_reset_execution" / "a7ffcore36e_manifest.json"
+A7FFCORE36ER = REPO / "runtime" / "a7ffcore36er_replay_objective_forensic" / "a7ffcore36er_manifest.json"
+A7FFCORE37X = REPO / "runtime" / "a7ffcore37x_route_arbitration" / "a7ffcore37x_manifest.json"
+A7FFCORE38 = REPO / "runtime" / "a7ffcore38_portfolio_label_objective_contract" / "a7ffcore38_manifest.json"
+A7FFCORE38E = REPO / "runtime" / "a7ffcore38e_portfolio_label_objective_audit" / "a7ffcore38e_manifest.json"
+A7FFCORE39 = REPO / "runtime" / "a7ffcore39_symbol_level_book_packet_contract" / "a7ffcore39_manifest.json"
+A7FFCORE39E = REPO / "runtime" / "a7ffcore39e_symbol_level_book_packet_audit" / "a7ffcore39e_manifest.json"
+A7FFCORE40 = REPO / "runtime" / "a7ffcore40_book_objective_replay_contract" / "a7ffcore40_manifest.json"
+A7FFCORE40E = REPO / "runtime" / "a7ffcore40e_book_objective_replay_execution" / "a7ffcore40e_manifest.json"
+A7FFCORE40ER = REPO / "runtime" / "a7ffcore40er_book_replay_forensic" / "a7ffcore40er_manifest.json"
+A7FFCORE41 = REPO / "runtime" / "a7ffcore41_book_control_repair_contract" / "a7ffcore41_manifest.json"
+A7FFCORE41E = REPO / "runtime" / "a7ffcore41e_book_control_repair_execution" / "a7ffcore41e_manifest.json"
+A7FFCORE41ER = REPO / "runtime" / "a7ffcore41er_book_control_repair_forensic" / "a7ffcore41er_manifest.json"
+A7FFCORE42 = REPO / "runtime" / "a7ffcore42_book_control_route_arbitration" / "a7ffcore42_manifest.json"
+A7FFCORE43 = REPO / "runtime" / "a7ffcore43_control_orthogonalization_contract" / "a7ffcore43_manifest.json"
+A7FFCORE43E = REPO / "runtime" / "a7ffcore43e_control_vector_rebuild_audit" / "a7ffcore43e_manifest.json"
+A7FFCORE44 = REPO / "runtime" / "a7ffcore44_orthogonal_score_packet_contract" / "a7ffcore44_manifest.json"
+A7FFCORE44E = REPO / "runtime" / "a7ffcore44e_orthogonal_score_packet_construction" / "a7ffcore44e_manifest.json"
+A7FFCORE45 = REPO / "runtime" / "a7ffcore45_orthogonal_book_replay_contract" / "a7ffcore45_manifest.json"
+A7FFCORE45E = REPO / "runtime" / "a7ffcore45e_orthogonal_book_replay_execution" / "a7ffcore45e_manifest.json"
+A7FFCORE45R = REPO / "runtime" / "a7ffcore45r_orthogonal_book_replay_forensic" / "a7ffcore45r_manifest.json"
+A7FFCORE46 = REPO / "runtime" / "a7ffcore46_orthogonal_failure_route_arbitration" / "a7ffcore46_manifest.json"
+A7FFCORE47 = REPO / "runtime" / "a7ffcore47_control_null_aware_factor_compiler_contract" / "a7ffcore47_manifest.json"
+A7FFCORE47E = REPO / "runtime" / "a7ffcore47e_compiler_readiness_audit" / "a7ffcore47e_manifest.json"
+A7FFCORE48 = REPO / "runtime" / "a7ffcore48_null_first_seed_generation_contract" / "a7ffcore48_manifest.json"
+A7FFCORE48E = REPO / "runtime" / "a7ffcore48e_null_first_dry_seed_generation" / "a7ffcore48e_manifest.json"
+A7FFCORE48R = REPO / "runtime" / "a7ffcore48r_dry_seed_generation_forensic" / "a7ffcore48r_manifest.json"
+A7FFCORE48S = REPO / "runtime" / "a7ffcore48s_operator_null_coverage_repair_contract" / "a7ffcore48s_manifest.json"
+A7FFCORE48SE = REPO / "runtime" / "a7ffcore48se_repaired_null_first_dry_generation" / "a7ffcore48se_manifest.json"
+A7FFCORE49 = REPO / "runtime" / "a7ffcore49_full_universe_null_vector_preflight_contract" / "a7ffcore49_manifest.json"
+A7FFCORE49E = REPO / "runtime" / "a7ffcore49e_full_universe_null_vector_preflight_execution" / "a7ffcore49e_manifest.json"
+A7FFCORE50 = REPO / "runtime" / "a7ffcore50_null_vector_preflight_arbitration" / "a7ffcore50_manifest.json"
+A7FFCORE51 = REPO / "runtime" / "a7ffcore51_filtered_replay_contract" / "a7ffcore51_manifest.json"
+A7FFCORE51ER = REPO / "runtime" / "a7ffcore51er_replay_runner_performance_forensic" / "a7ffcore51er_manifest.json"
+A7FFCORE51PR = REPO / "runtime" / "a7ffcore51pr_local_runner_blocker_forensic" / "a7ffcore51pr_manifest.json"
+A7FFCORE51PX = REPO / "runtime" / "a7ffcore51px_company_sharded_replay_runner_contract" / "a7ffcore51px_manifest.json"
+A7FFCORE51PXV = REPO / "runtime" / "a7ffcore51pxv_company_execution_preflight_validator" / "a7ffcore51pxv_manifest.json"
+A7FFCORE51PXH = REPO / "runtime" / "a7ffcore51pxh_company_execution_handoff" / "a7ffcore51pxh_manifest.json"
+
+
+BASE_BLOCKED = {
+    "A7FF-24R4E execution": "pending explicit heavy-execution authorization; A7FF-24R4 contract is ready but numeric wave execution is not started",
+    "A7FF-51 execution": "not authorized by A7FF-R11; only contract drafting is allowed",
+    "A7FF-50": "not authorized by A7FF-49; no non-reference non-L5 candidates exist in current maps",
+    "A7FF-48": "not authorized by A7FF-47; frozen clues fail non-L5 label translation",
+    "A7FF-45 continuation": "bounded replay passed but is superseded by A7FF-47 L5-only translation hold",
+    "A7FF-43 deep forensic": "not authorized by A7FF-42; selected control-strict non-L7 evidence remains single-family",
+    "A7FF-41 control-strict expansion": "not authorized by A7FF-40; selected control-strict non-L7 evidence remains single-family",
+    "A7FF search execution": "numeric wave has clues but still no replay/search authorization",
+    "A7AL-2Y generation": "not authorized",
+    "A7AL-3 large search": "not authorized",
+    "direct OI-price rerun": "superseded weak prior / not authorized",
+    "A7AL-2Q": "not authorized by A7AL-2X0",
+    "alpha proof": "not authorized",
+    "shadow/paper/live": "not authorized",
+}
+
+
+def board_state() -> tuple[dict[str, str], dict[str, str], pd.DataFrame]:
+    a7ls14 = read_json(A7LS14)
+    a7ls14x = read_json(A7LS14X)
+    a7ls15 = read_json(A7LS15)
+    a7ls16 = read_json(A7LS16)
+    a7ls16x = read_json(A7LS16X)
+    a7ls17 = read_json(A7LS17)
+    a7ff52e = read_json(A7FF52E)
+    a7ff53 = read_json(A7FF53)
+    a7ff53e_s00 = read_json(A7FF53E_S00)
+    a7ff53e = read_json(A7FF53E)
+    a7ff54 = read_json(A7FF54)
+    a7ff55 = read_json(A7FF55)
+    a7ff55d = read_json(A7FF55D)
+    a7ff55f = read_json(A7FF55F)
+    a7ff55r = read_json(A7FF55R)
+    a7ff55r1 = read_json(A7FF55R1)
+    a7ff55r2 = read_json(A7FF55R2)
+    a7ff55r3 = read_json(A7FF55R3)
+    a7ff55r4 = read_json(A7FF55R4)
+    a7ff55r5 = read_json(A7FF55R5)
+    a7ff55r5e = read_json(A7FF55R5E)
+    a7ffcore0 = read_json(A7FFCORE0)
+    a7ffcore1 = read_json(A7FFCORE1)
+    a7ffcore2 = read_json(A7FFCORE2)
+    a7ffcore3 = read_json(A7FFCORE3)
+    a7ffcore4 = read_json(A7FFCORE4)
+    a7ffcore5 = read_json(A7FFCORE5)
+    a7ffcore6 = read_json(A7FFCORE6)
+    a7ffcore6e = read_json(A7FFCORE6E)
+    a7ffcore7 = read_json(A7FFCORE7)
+    a7ffcore7e = read_json(A7FFCORE7E)
+    a7ffcore7r = read_json(A7FFCORE7R)
+    a7ffcore7er = read_json(A7FFCORE7ER)
+    a7ffcore8 = read_json(A7FFCORE8)
+    a7ffcore8e = read_json(A7FFCORE8E)
+    a7ffcore9 = read_json(A7FFCORE9)
+    a7ffcore9e = read_json(A7FFCORE9E)
+    a7ffcore10e = read_json(A7FFCORE10E)
+    a7ffcore11 = read_json(A7FFCORE11)
+    a7ffcore11e = read_json(A7FFCORE11E)
+    a7ffcore12 = read_json(A7FFCORE12)
+    a7ffcore12e = read_json(A7FFCORE12E)
+    a7ffcore13 = read_json(A7FFCORE13)
+    a7ffcore13e = read_json(A7FFCORE13E)
+    a7ffcore14 = read_json(A7FFCORE14)
+    a7ffcore14e = read_json(A7FFCORE14E)
+    a7ffcore14r = read_json(A7FFCORE14R)
+    a7ffcore14s = read_json(A7FFCORE14S)
+    a7ffcore14se = read_json(A7FFCORE14SE)
+    a7ffcore14see = read_json(A7FFCORE14SEE)
+    a7ffcore14ser = read_json(A7FFCORE14SER)
+    a7ffcore15x = read_json(A7FFCORE15X)
+    a7ffcore15y = read_json(A7FFCORE15Y)
+    a7ffcore15yr = read_json(A7FFCORE15YR)
+    a7ffcore16 = read_json(A7FFCORE16)
+    a7ffcore16r = read_json(A7FFCORE16R)
+    a7ffcore16e = read_json(A7FFCORE16E)
+    a7ffcore16er = read_json(A7FFCORE16ER)
+    a7ffcore16f = read_json(A7FFCORE16F)
+    a7ffcore16fe = read_json(A7FFCORE16FE)
+    a7ffcore16fer = read_json(A7FFCORE16FER)
+    a7ffcore16g = read_json(A7FFCORE16G)
+    a7ffcore16ge = read_json(A7FFCORE16GE)
+    a7ffcore16ger = read_json(A7FFCORE16GER)
+    a7ffcore16h = read_json(A7FFCORE16H)
+    a7ffcore16he = read_json(A7FFCORE16HE)
+    a7ffcore16her = read_json(A7FFCORE16HER)
+    a7ffcore16i = read_json(A7FFCORE16I)
+    a7ffcore16j = read_json(A7FFCORE16J)
+    a7ffcore16k = read_json(A7FFCORE16K)
+    a7ffcore16ke = read_json(A7FFCORE16KE)
+    a7ffcore16kr = read_json(A7FFCORE16KR)
+    a7ffcore16m = read_json(A7FFCORE16M)
+    a7ffcore16me = read_json(A7FFCORE16ME)
+    a7ffcore16l = read_json(A7FFCORE16L)
+    a7ffcore17 = read_json(A7FFCORE17)
+    a7ffcore17e = read_json(A7FFCORE17E)
+    a7ffcore18 = read_json(A7FFCORE18)
+    a7ffcore18e = read_json(A7FFCORE18E)
+    a7ffcore19 = read_json(A7FFCORE19)
+    a7ffcore19e = read_json(A7FFCORE19E)
+    a7ffcore19r = read_json(A7FFCORE19R)
+    a7ffcore19s = read_json(A7FFCORE19S)
+    a7ffcore19se = read_json(A7FFCORE19SE)
+    a7ffcore19ser = read_json(A7FFCORE19SER)
+    a7ffcore21 = read_json(A7FFCORE21)
+    a7ffcore21e = read_json(A7FFCORE21E)
+    a7ffcore21r = read_json(A7FFCORE21R)
+    a7ffcore22 = read_json(A7FFCORE22)
+    a7ffcore22e = read_json(A7FFCORE22E)
+    a7ffcore22r = read_json(A7FFCORE22R)
+    a7ffcore23 = read_json(A7FFCORE23)
+    a7ffcore23e = read_json(A7FFCORE23E)
+    a7ffcore23r = read_json(A7FFCORE23R)
+    a7ffcore24 = read_json(A7FFCORE24)
+    a7ffcore24e = read_json(A7FFCORE24E)
+    a7ffcore24r = read_json(A7FFCORE24R)
+    a7ffcore25 = read_json(A7FFCORE25)
+    a7ffcore25e = read_json(A7FFCORE25E)
+    a7ffcore26 = read_json(A7FFCORE26)
+    a7ffcore26e = read_json(A7FFCORE26E)
+    a7ffcore26r = read_json(A7FFCORE26R)
+    a7ffcore26c = read_json(A7FFCORE26C)
+    a7ffcore26ce = read_json(A7FFCORE26CE)
+    a7ffcore26cer = read_json(A7FFCORE26CER)
+    a7ffcore26d = read_json(A7FFCORE26D)
+    a7ffcore26de = read_json(A7FFCORE26DE)
+    a7ffcore26der = read_json(A7FFCORE26DER)
+    a7ffcore27x = read_json(A7FFCORE27X)
+    a7ffcore28 = read_json(A7FFCORE28)
+    a7ffcore28e = read_json(A7FFCORE28E)
+    a7ffcore29 = read_json(A7FFCORE29)
+    a7ffcore29e = read_json(A7FFCORE29E)
+    a7ffcore30 = read_json(A7FFCORE30)
+    a7ffcore30e = read_json(A7FFCORE30E)
+    a7ffcore31 = read_json(A7FFCORE31)
+    a7ffcore32 = read_json(A7FFCORE32)
+    a7ffcore32e = read_json(A7FFCORE32E)
+    a7ffcore33 = read_json(A7FFCORE33)
+    a7ffcore33e = read_json(A7FFCORE33E)
+    a7ffcore33er = read_json(A7FFCORE33ER)
+    a7ffcore34 = read_json(A7FFCORE34)
+    a7ffcore34e = read_json(A7FFCORE34E)
+    a7ffcore34er = read_json(A7FFCORE34ER)
+    a7ffcore35 = read_json(A7FFCORE35)
+    a7ffcore36 = read_json(A7FFCORE36)
+    a7ffcore36e = read_json(A7FFCORE36E)
+    a7ffcore36er = read_json(A7FFCORE36ER)
+    a7ffcore37x = read_json(A7FFCORE37X)
+    a7ffcore38 = read_json(A7FFCORE38)
+    a7ffcore38e = read_json(A7FFCORE38E)
+    a7ffcore39 = read_json(A7FFCORE39)
+    a7ffcore39e = read_json(A7FFCORE39E)
+    a7ffcore40 = read_json(A7FFCORE40)
+    a7ffcore40e = read_json(A7FFCORE40E)
+    a7ffcore40er = read_json(A7FFCORE40ER)
+    a7ffcore41 = read_json(A7FFCORE41)
+    a7ffcore41e = read_json(A7FFCORE41E)
+    a7ffcore41er = read_json(A7FFCORE41ER)
+    a7ffcore42 = read_json(A7FFCORE42)
+    a7ffcore43 = read_json(A7FFCORE43)
+    a7ffcore43e = read_json(A7FFCORE43E)
+    a7ffcore44 = read_json(A7FFCORE44)
+    a7ffcore44e = read_json(A7FFCORE44E)
+    a7ffcore45 = read_json(A7FFCORE45)
+    a7ffcore45e = read_json(A7FFCORE45E)
+    a7ffcore45r = read_json(A7FFCORE45R)
+    a7ffcore46 = read_json(A7FFCORE46)
+    a7ffcore47 = read_json(A7FFCORE47)
+    a7ffcore47e = read_json(A7FFCORE47E)
+    a7ffcore48 = read_json(A7FFCORE48)
+    a7ffcore48e = read_json(A7FFCORE48E)
+    a7ffcore48r = read_json(A7FFCORE48R)
+    a7ffcore48s = read_json(A7FFCORE48S)
+    a7ffcore48se = read_json(A7FFCORE48SE)
+    a7ffcore49 = read_json(A7FFCORE49)
+    a7ffcore49e = read_json(A7FFCORE49E)
+    a7ffcore50 = read_json(A7FFCORE50)
+    a7ffcore51 = read_json(A7FFCORE51)
+    a7ffcore51er = read_json(A7FFCORE51ER)
+    a7ffcore51pr = read_json(A7FFCORE51PR)
+    a7ffcore51px = read_json(A7FFCORE51PX)
+    a7ffcore51pxv = read_json(A7FFCORE51PXV)
+    a7ffcore51pxh = read_json(A7FFCORE51PXH)
+    allowed = {
+        "A7FF-24R4E repaired numeric wave execution option": "requires explicit user authorization; no search and no promotion",
+        "A7PM-0/3 maintenance": "governance registry maintenance",
+    }
+    blocked = dict(BASE_BLOCKED)
+    if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED":
+        if a7ls17.get("decision") == "PASS_A7LS17_COMPANY_MATERIALIZATION_AGGREGATE_READY_FOR_A7LS18":
+            allowed = {
+                "A7LS18 company sharded numeric wave": "authorized by A7LS17 aggregate; numeric_total <= 100,000; checkpointed company-machine execution",
+                "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
+                "A7LS15X expansion queue generation": "authorized by A7LS16X if A7LS15 100k first wave is exhausted or checkpoint-positive; generated_total ceiling <= 4,000,000",
+                "A7PM-0/3 maintenance": "keep A7LS17/A7LS18 scoped large-search source-of-truth current",
+            }
+            current_stage = "A7LS-17"
+            status = "company_materialization_pass_ready_for_numeric"
+            next_task = "A7LS18 company sharded numeric wave"
+        elif a7ls16x.get("decision") == "PASS_A7LS16X_4M_SCALE_UP_AUTHORIZATION_READY":
+            allowed = {
+                "A7LS17 company sharded materialization": "authorized by A7LS16X; materialization_total <= 400,000; 400 shards; checkpointed",
+                "A7LS18 company sharded numeric wave": "authorized after A7LS17; numeric_total <= 100,000; 1,024 shards; checkpointed",
+                "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
+                "A7LS15X expansion queue generation": "authorized by A7LS16X if A7LS15 100k first wave is exhausted or checkpoint-positive; generated_total ceiling <= 4,000,000",
+                "A7PM-0/3 maintenance": "keep A7LS16X scoped large-search authorization current",
+            }
+            current_stage = "A7LS-16X"
+            status = "scale_up_authorized_4m_checkpointed_company_search"
+            next_task = "A7LS17 company sharded materialization"
+        elif a7ls16.get("decision") == "PASS_A7LS16_LOCAL_SCHEMA_PREFLIGHT_READY_FOR_A7LS17_COMPANY_MATERIALIZATION":
+            allowed = {
+                "A7LS16X 4M scale-up authorization": "recommended before company execution; raises future ceilings to generated_total <= 4,000,000 / materialization <= 400,000 / numeric <= 100,000",
+                "A7LS17 company sharded materialization": "authorized by A7LS16; baseline materialization_total <= 100,000",
+                "A7LS18 company sharded numeric wave": "authorized after A7LS17; baseline numeric_total <= 25,000; 256 shards; checkpointed",
+                "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
+                "A7PM-0/3 maintenance": "keep A7LS scoped large-search authorization current",
+            }
+            current_stage = "A7LS-16"
+            status = "local_schema_preflight_pass"
+            next_task = "A7LS16X 4M scale-up authorization"
+        elif a7ls15.get("decision") == "PASS_A7LS15_MILLION_SCALE_BLUEPRINT_GENERATION_READY_FOR_A7LS16":
+            allowed = {
+                "A7LS16 local preflight and materialization smoke": "authorized by A7LS15; 512-row preflight before company materialization",
+                "A7LS17 company sharded materialization": "authorized after A7LS16; materialization_total <= 100,000",
+                "A7LS18 company sharded numeric wave": "authorized after A7LS17; numeric_total <= 25,000; 256 shards; checkpointed",
+                "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
+                "A7PM-0/3 maintenance": "keep A7LS scoped large-search authorization current",
+            }
+            current_stage = "A7LS-15"
+            status = "million_blueprint_generation_complete"
+            next_task = "A7LS16 local preflight and materialization smoke"
+        else:
+            allowed = {
+                "A7LS15 million-scale multi-axis blueprint generation": "authorized by A7LS-14X; generated_total <= 1,000,000 across four lanes",
+                "A7LS16 local preflight and materialization smoke": "authorized after A7LS15; 512-row preflight before company load",
+                "A7LS17 company sharded materialization": "authorized after A7LS16; materialization_total <= 100,000",
+                "A7LS18 company sharded numeric wave": "authorized after A7LS17; numeric_total <= 25,000; 256 shards; checkpointed",
+                "A7LS19 checkpoint arbitration and lane resize": "authorized after A7LS18 checkpoints; continue / kill / expand per lane",
+                "A7PM-0/3 maintenance": "keep A7LS14 scoped large-search authorization current",
+            }
+            current_stage = "A7LS-14X"
+            status = "scoped_large_search_authorized"
+            next_task = "A7LS15 million-scale multi-axis blueprint generation"
+        blocked = {
+            "large_search_outside_A7LS_scope": "blocked: A7LS-14X/A7LS-16X authorize only checkpointed A7LS company-machine scope",
+            "unbounded_full_grammar": "blocked",
+            "single_lane_budget_capture": "blocked by A7LS14 quota/checkpoint policy",
+            "May-informed selector/reward": "blocked",
+            "alpha proof": "not authorized",
+            "shadow/paper/live": "not authorized",
+        }
+    elif a7ls14.get("decision") == "PASS_A7LS14_SCALED_MULTI_AXIS_SEARCH_CONTRACT_READY":
+        allowed["A7LS14X authorization arbitration"] = (
+            "required to reconcile A7LS14 scoped large-search contract with older global no-large-search records"
+        )
+        blocked["A7LS15 execution"] = "blocked until A7LS14X arbitration is built"
+        current_stage = "A7LS-14"
+        status = "scaled_contract_ready_needs_arbitration"
+        next_task = "A7LS14X authorization arbitration"
+    elif a7ffcore51pxh.get("decision") == "PASS_A7FFCORE51PXH_COMPANY_EXECUTION_HANDOFF_READY":
+        allowed["A7FF-CORE51PXE company-machine sharded replay execution"] = (
+            "execution handoff ready; run company orchestrator, monitor shards, aggregate, then import results for CORE52 arbitration"
+        )
+        blocked["A7FF-CORE51E local runner retry"] = "blocked: company execution handoff is source-of-truth"
+        blocked["A7FF large search"] = "blocked: only company sharded replay diagnostics are authorized"
+        blocked["A7FF formula search"] = "blocked"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE51PXH"
+        status = "company_execution_handoff_ready"
+        next_task = "A7FF-CORE51PXE company-machine sharded replay execution"
+    elif a7ffcore51pxv.get("decision") == "PASS_A7FFCORE51PXV_COMPANY_EXECUTION_PREFLIGHT_READY":
+        allowed["A7FF-CORE51PXE company-machine sharded replay execution"] = (
+            "preflight ready; company shard package validated; no search/proof/promotion"
+        )
+        blocked["A7FF-CORE51E local runner retry"] = "blocked: CORE51PXV selected company-machine execution"
+        blocked["A7FF large search"] = "blocked"
+        blocked["A7FF formula search"] = "blocked"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE51PXV"
+        status = "company_execution_preflight_ready"
+        next_task = "A7FF-CORE51PXE company-machine sharded replay execution"
+    elif a7ffcore51px.get("decision") == "PASS_A7FFCORE51PX_COMPANY_SHARDED_REPLAY_CONTRACT_READY_FOR_COMPANY_EXECUTION":
+        allowed["A7FF-CORE51PXE company-machine sharded replay execution"] = (
+            "company-machine shard execution option; build compact frame and run 16 candidate shards; no search/proof/promotion"
+        )
+        blocked["A7FF-CORE51E local runner retry"] = "blocked: CORE51PX selected company-machine sharding"
+        blocked["A7FF large search"] = "blocked: only sharded replay diagnostics are authorized"
+        blocked["A7FF formula search"] = "blocked"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE51PX"
+        status = "company_sharded_replay_contract_ready"
+        next_task = "A7FF-CORE51PXE company-machine sharded replay execution"
+    elif a7ffcore51pr.get("decision") == "HOLD_A7FFCORE51PR_LOCAL_REPLAY_RUNNER_INSUFFICIENT_USE_COMPANY_SHARDS":
+        allowed["A7FF-CORE51PX company-machine sharded replay runner contract"] = (
+            "contract/deployment design only; move filtered replay to company-machine shards with compact frame and incremental outputs"
+        )
+        blocked["A7FF-CORE51E local runner retry"] = "blocked: local naive and dense-matrix smokes timed out"
+        blocked["A7FF large search"] = "blocked: replay runner must move to company-machine shards first"
+        blocked["A7FF formula search"] = "blocked"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE51PR"
+        status = "local_replay_runner_blocked_use_company_shards"
+        next_task = "A7FF-CORE51PX company-machine sharded replay runner contract"
+    elif a7ffcore51er.get("decision") == "HOLD_A7FFCORE51ER_REPLAY_RUNNER_PERFORMANCE_BLOCKER":
+        allowed["A7FF-CORE51P optimized replay runner contract / implementation"] = (
+            "runner optimization only; current CORE51E runner timed out on 16-candidate smoke, no search/proof/promotion"
+        )
+        blocked["A7FF-CORE51E current runner rerun"] = "blocked: repeated full-frame groupby/rank timeout"
+        blocked["A7FF large search"] = "blocked: replay runner performance blocker"
+        blocked["A7FF formula search"] = "blocked"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE51ER"
+        status = "replay_runner_performance_blocker"
+        next_task = "A7FF-CORE51P optimized replay runner contract / implementation"
+    elif a7ffcore51.get("decision") == "PASS_A7FFCORE51_FILTERED_REPLAY_CONTRACT_READY_FOR_CORE51E":
+        allowed["A7FF-CORE51E filtered replay preflight/execution"] = (
+            "bounded filtered replay execution option; use CORE50 vector-clean queue and CORE51 controls; no search, proof, promotion, shadow, paper, or live"
+        )
+        blocked["A7FF large search"] = "blocked: CORE51 authorizes bounded filtered replay only"
+        blocked["A7FF formula search"] = "blocked: CORE51E is replay execution, not generation/search"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE51"
+        status = "filtered_replay_contract_ready_for_core51e"
+        next_task = "A7FF-CORE51E filtered replay preflight/execution"
+    elif a7ffcore50.get("decision") == "PASS_A7FFCORE50_NULL_VECTOR_ARBITRATION_READY_FOR_CORE51_FILTERED_REPLAY_CONTRACT":
+        allowed["A7FF-CORE51 filtered replay contract"] = (
+            "contract drafting only; CORE50 filtered 1462 vector-clean seeds, but replay execution remains blocked until CORE51"
+        )
+        blocked["A7FF large search"] = "blocked: CORE50 authorizes CORE51 contract only"
+        blocked["A7FF formula search"] = "blocked: CORE50 is replay-contract preparation, not search"
+        blocked["direct replay execution"] = "not authorized until CORE51 contract explicitly defines execution"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE50"
+        status = "null_vector_arbitration_ready_for_filtered_replay_contract"
+        next_task = "A7FF-CORE51 filtered replay contract"
+    elif a7ffcore50.get("decision") == "HOLD_A7FFCORE50_NULL_VECTOR_ARBITRATION_REPLAY_CONTRACT_BLOCKED":
+        allowed["A7FF-CORE50R null-vector filter repair"] = (
+            "repair only; filtered queue failed seed/family/operator breadth gates"
+        )
+        blocked["A7FF large search"] = "blocked: CORE50 null-vector arbitration blocked replay contract"
+        blocked["A7FF formula search"] = "blocked"
+        blocked["direct replay execution"] = "not authorized"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE50"
+        status = "null_vector_arbitration_hold"
+        next_task = "A7FF-CORE50R null-vector filter repair"
+    elif a7ffcore49e.get("decision") == "PASS_A7FFCORE49E_NULL_VECTOR_PREFLIGHT_READY_FOR_CORE50_CONTRACT":
+        allowed["A7FF-CORE50 null-vector preflight arbitration / replay contract"] = (
+            "contract/arbitration only; CORE49E vectors materialized, but replay/search remain blocked until CORE50 defines the next gate"
+        )
+        blocked["A7FF large search"] = "blocked: CORE49E authorizes CORE50 contract/arbitration only"
+        blocked["A7FF formula search"] = "blocked: CORE49E is vector preflight, not formula search"
+        blocked["numeric replay"] = "not authorized until CORE50 explicitly writes a replay contract"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE49E"
+        status = "full_universe_null_vector_preflight_pass_ready_for_core50"
+        next_task = "A7FF-CORE50 null-vector preflight arbitration / replay contract"
+    elif a7ffcore49e.get("decision") == "HOLD_A7FFCORE49E_NULL_VECTOR_PREFLIGHT_BLOCKERS":
+        allowed["A7FF-CORE49ER null-vector preflight forensic"] = (
+            "forensic only; classify CORE49E materialization/vector blocker before any replay contract"
+        )
+        blocked["A7FF large search"] = "blocked: CORE49E vector preflight blockers"
+        blocked["A7FF formula search"] = "blocked: CORE49E vector preflight blockers"
+        blocked["numeric replay"] = "not authorized"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE49E"
+        status = "full_universe_null_vector_preflight_hold"
+        next_task = "A7FF-CORE49ER null-vector preflight forensic"
+    elif a7ffcore49.get("decision") == "PASS_A7FFCORE49_FULL_UNIVERSE_NULL_VECTOR_PREFLIGHT_CONTRACT_READY_FOR_CORE49E":
+        allowed["A7FF-CORE49E full-universe null-vector preflight execution"] = (
+            "vector preflight only; materialize original/null vectors over repaired seed queue; no replay, search, proof, or promotion"
+        )
+        blocked["A7FF large search"] = "blocked: CORE49 authorizes vector preflight only"
+        blocked["A7FF formula search"] = "blocked: CORE49E is null-vector preflight, not search"
+        blocked["numeric replay"] = "not authorized until CORE49E passes and a replay contract is written"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE49"
+        status = "full_universe_null_vector_preflight_contract_ready"
+        next_task = "A7FF-CORE49E full-universe null-vector preflight execution"
+    elif a7ffcore48se.get("decision") == "PASS_A7FFCORE48SE_REPAIRED_DRY_SEEDS_READY_FOR_CORE49_CONTRACT":
+        allowed["A7FF-CORE49 full-universe null-vector preflight contract"] = (
+            "contract only; define full-universe vector preflight over repaired null-first seed queue"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48SE authorizes CORE49 contract only"
+        blocked["A7FF formula search"] = "blocked: repaired dry seeds are not search candidates yet"
+        blocked["numeric replay"] = "not authorized until null-vector preflight and replay contract pass"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48SE"
+        status = "repaired_null_first_dry_seeds_ready_for_core49_contract"
+        next_task = "A7FF-CORE49 full-universe null-vector preflight contract"
+    elif a7ffcore48se.get("decision") == "HOLD_A7FFCORE48SE_REPAIRED_DRY_SEEDS_INSUFFICIENT":
+        allowed["A7FF-CORE48SER repaired dry seed forensic"] = (
+            "forensic only; classify repaired dry generation failure"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48SE repaired seed generation insufficient"
+        blocked["A7FF formula search"] = "blocked: repaired null-first seed queue not ready"
+        blocked["numeric replay"] = "not authorized"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48SE"
+        status = "repaired_null_first_dry_seed_generation_insufficient"
+        next_task = "A7FF-CORE48SER repaired dry seed forensic"
+    elif a7ffcore48s.get("decision") == "PASS_A7FFCORE48S_OPERATOR_NULL_COVERAGE_REPAIR_CONTRACT_READY_FOR_CORE48SE":
+        allowed["A7FF-CORE48SE repaired null-first dry seed generation"] = (
+            "bounded repaired dry generation only; no replay, search, proof, or promotion"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48S authorizes repaired dry generation only"
+        blocked["A7FF formula search"] = "blocked: CORE48SE is not search execution"
+        blocked["numeric replay"] = "not authorized until repaired seeds pass and CORE49 contract exists"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48S"
+        status = "operator_null_repair_contract_ready_for_core48se"
+        next_task = "A7FF-CORE48SE repaired null-first dry seed generation"
+    elif a7ffcore48r.get("decision") == "PASS_A7FFCORE48R_DRY_SEED_FORENSIC_READY_FOR_CORE48S_OPERATOR_REPAIR":
+        allowed["A7FF-CORE48S operator-null coverage repair contract"] = (
+            "contract only; repair native operator coverage before null-vector preflight"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48R authorizes operator coverage repair contract only"
+        blocked["A7FF formula search"] = "blocked: operator/motif coverage insufficient"
+        blocked["numeric replay"] = "not authorized"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48R"
+        status = "dry_seed_forensic_ready_for_operator_repair_contract"
+        next_task = "A7FF-CORE48S operator-null coverage repair contract"
+    elif a7ffcore48e.get("decision") == "PASS_A7FFCORE48E_NULL_FIRST_DRY_SEEDS_READY_FOR_CORE49_CONTRACT":
+        allowed["A7FF-CORE49 full-universe null-vector preflight contract"] = (
+            "contract only; define vector preflight over null-first eligible seed queue"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48E authorizes CORE49 contract only"
+        blocked["A7FF formula search"] = "blocked: CORE48E dry seeds are not search candidates yet"
+        blocked["numeric replay"] = "not authorized until null-vector preflight and later replay contract pass"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48E"
+        status = "null_first_dry_seeds_ready_for_core49_contract"
+        next_task = "A7FF-CORE49 full-universe null-vector preflight contract"
+    elif a7ffcore48e.get("decision") == "HOLD_A7FFCORE48E_NULL_FIRST_DRY_SEEDS_INSUFFICIENT":
+        allowed["A7FF-CORE48R dry seed generation forensic"] = (
+            "forensic only; diagnose dry seed insufficiency before any preflight/replay"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48E dry seed generation insufficient"
+        blocked["A7FF formula search"] = "blocked: null-first eligible seed supply insufficient"
+        blocked["numeric replay"] = "not authorized"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48E"
+        status = "null_first_dry_seed_generation_insufficient"
+        next_task = "A7FF-CORE48R dry seed generation forensic"
+    elif a7ffcore48.get("decision") == "PASS_A7FFCORE48_NULL_FIRST_SEED_GENERATION_CONTRACT_READY_FOR_CORE48E":
+        allowed["A7FF-CORE48E bounded null-first dry seed generation"] = (
+            "bounded dry generation only; no replay, search, proof, or promotion"
+        )
+        blocked["A7FF large search"] = "blocked: CORE48 authorizes bounded dry generation only"
+        blocked["A7FF formula search"] = "blocked: CORE48E is seed generation/preflight, not formula search"
+        blocked["numeric replay"] = "not authorized until CORE49 or later"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE48"
+        status = "null_first_seed_generation_contract_ready_for_core48e"
+        next_task = "A7FF-CORE48E bounded null-first dry seed generation"
+    elif a7ffcore47e.get("decision") == "PASS_A7FFCORE47E_COMPILER_READINESS_READY_FOR_CORE48_CONTRACT":
+        allowed["A7FF-CORE48 bounded null-first factor seed generation contract"] = (
+            "contract only; define bounded null-first seed generation after compiler readiness passes"
+        )
+        blocked["A7FF large search"] = "blocked: CORE47E authorizes CORE48 contract only"
+        blocked["A7FF formula generation/search"] = "blocked until CORE48 and later execution gates explicitly authorize bounded generation"
+        blocked["current candidate expansion"] = "not authorized: CORE46/47 freeze remains active"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE47E"
+        status = "compiler_readiness_ready_for_core48_contract"
+        next_task = "A7FF-CORE48 bounded null-first factor seed generation contract"
+    elif a7ffcore47e.get("decision") == "HOLD_A7FFCORE47E_COMPILER_READINESS_GAPS":
+        allowed["A7FF-CORE47E repair / rerun"] = (
+            "audit repair only; close readiness gaps before any null-first generation contract"
+        )
+        blocked["A7FF large search"] = "blocked: CORE47E readiness gaps"
+        blocked["A7FF formula generation/search"] = "blocked: compiler readiness incomplete"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE47E"
+        status = "compiler_readiness_gaps"
+        next_task = "A7FF-CORE47E repair / rerun"
+    elif a7ffcore47.get("decision") == "PASS_A7FFCORE47_CONTROL_NULL_AWARE_COMPILER_CONTRACT_READY_FOR_CORE47E":
+        allowed["A7FF-CORE47E control-null-aware compiler readiness audit"] = (
+            "audit only; verify existing artifacts can support null-first field/operator/factor compilation"
+        )
+        blocked["A7FF large search"] = "blocked: CORE47 authorizes readiness audit only"
+        blocked["A7FF formula generation/search"] = "blocked until control-null-aware compiler readiness passes and later generation contract exists"
+        blocked["current candidate expansion"] = "not authorized: CORE47 keeps CORE46 freeze active"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE47"
+        status = "control_null_compiler_contract_ready_for_core47e"
+        next_task = "A7FF-CORE47E control-null-aware compiler readiness audit"
+    elif a7ffcore46.get("decision") == "PASS_A7FFCORE46_ROUTE_ARBITRATION_READY_FOR_CORE47_CONTRACT":
+        allowed["A7FF-CORE47 control-null-aware feature-to-factor compiler contract"] = (
+            "contract only; redesign future generation around original-vs-null separability before replay"
+        )
+        blocked["A7FF large search"] = "blocked: CORE46 authorizes CORE47 contract only"
+        blocked["A7FF formula generation/search"] = "blocked until control-null-aware compiler contract and later gates authorize generation"
+        blocked["current candidate expansion"] = "not authorized: CORE46 rejects current candidate expansion"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE46"
+        status = "route_arbitration_ready_for_core47_contract"
+        next_task = "A7FF-CORE47 control-null-aware feature-to-factor compiler contract"
+    elif a7ffcore45r.get("decision") == "PASS_A7FFCORE45R_ORTHOGONAL_BOOK_REPLAY_FORENSIC_READY_FOR_CORE46_ROUTE_ARBITRATION":
+        allowed["A7FF-CORE46 orthogonal replay failure route arbitration"] = (
+            "arbitration only; freeze control-dominated orthogonal book replay and choose next non-search route"
+        )
+        blocked["A7FF large search"] = "blocked: CORE45R found control-dominated zero-survivor orthogonal replay"
+        blocked["A7FF formula generation/search"] = "blocked until CORE46 selects and authorizes a non-search next route"
+        blocked["current candidate expansion"] = "not authorized: CORE45R rejects current candidate/family expansion"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE45R"
+        status = "orthogonal_book_replay_forensic_ready_for_core46_route_arbitration"
+        next_task = "A7FF-CORE46 orthogonal replay failure route arbitration"
+    elif a7ffcore45e.get("decision") == "PASS_A7FFCORE45E_ORTHOGONAL_BOOK_SURVIVORS_READY_FOR_CORE46_ARBITRATION":
+        allowed["A7FF-CORE46 orthogonal book survivor arbitration"] = (
+            "arbitration only; decide whether orthogonal survivors justify any later controlled expansion"
+        )
+        blocked["A7FF large search"] = "blocked: CORE45E survivors require CORE46 arbitration first"
+        blocked["A7FF formula generation/search"] = "blocked until CORE46 explicitly authorizes a controlled next step"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE45E"
+        status = "orthogonal_book_survivors_ready_for_core46"
+        next_task = "A7FF-CORE46 orthogonal book survivor arbitration"
+    elif a7ffcore45e.get("decision") == "HOLD_A7FFCORE45E_ORTHOGONAL_BOOK_REPLAY_INSUFFICIENT":
+        allowed["A7FF-CORE45R orthogonal book replay forensic"] = (
+            "forensic only; classify residual-book failure after full-universe control orthogonalization"
+        )
+        blocked["A7FF large search"] = "blocked: CORE45E bounded replay insufficient"
+        blocked["A7FF formula generation/search"] = "blocked: orthogonal book replay did not produce enough survivors"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE45E"
+        status = "orthogonal_book_replay_insufficient"
+        next_task = "A7FF-CORE45R orthogonal book replay forensic"
+    elif a7ffcore45.get("decision") == "PASS_A7FFCORE45_ORTHOGONAL_BOOK_REPLAY_CONTRACT_READY_FOR_CORE45E":
+        allowed["A7FF-CORE45E bounded orthogonal book replay execution"] = (
+            "bounded replay execution only over CORE44E orthogonal score packet; no generation, search, proof, or promotion"
+        )
+        blocked["A7FF large search"] = "blocked: CORE45 authorizes bounded replay only"
+        blocked["A7FF formula generation/search"] = "blocked until bounded orthogonal book replay passes and later gates authorize search"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE45"
+        status = "orthogonal_book_replay_contract_ready_for_core45e"
+        next_task = "A7FF-CORE45E bounded orthogonal book replay execution"
+    elif a7ffcore44e.get("decision") == "PASS_A7FFCORE44E_ORTHOGONAL_SCORE_PACKET_READY_FOR_CORE45_CONTRACT":
+        allowed["A7FF-CORE45 bounded orthogonal book replay contract"] = (
+            "contract only; define bounded book replay over CORE44E orthogonal score packet"
+        )
+        blocked["A7FF large search"] = "blocked: CORE44E authorizes CORE45 contract only"
+        blocked["A7FF formula generation/search"] = "blocked until orthogonal book replay and later gates pass"
+        blocked["book replay execution"] = "not authorized until CORE45 contract explicitly allows CORE45E"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE44E"
+        status = "orthogonal_score_packet_ready_for_core45_contract"
+        next_task = "A7FF-CORE45 bounded orthogonal book replay contract"
+    elif a7ffcore44e.get("decision") == "HOLD_A7FFCORE44E_ORTHOGONAL_SCORE_PACKET_INCOMPLETE":
+        allowed["A7FF-CORE44E repair / rerun"] = (
+            "audit repair only; fix missing residual book packet fields or long/short construction gaps"
+        )
+        blocked["A7FF large search"] = "blocked: CORE44E orthogonal score packet incomplete"
+        blocked["A7FF formula generation/search"] = "blocked: no valid orthogonal book-input packet"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE44E"
+        status = "orthogonal_score_packet_incomplete"
+        next_task = "A7FF-CORE44E repair / rerun"
+    elif a7ffcore44.get("decision") == "PASS_A7FFCORE44_ORTHOGONAL_SCORE_PACKET_CONTRACT_READY_FOR_CORE44E":
+        allowed["A7FF-CORE44E orthogonal score packet construction audit"] = (
+            "bounded packet construction audit only; build residual-score book input from CORE43E full-universe vectors"
+        )
+        blocked["A7FF large search"] = "blocked: CORE44 authorizes packet construction audit only"
+        blocked["A7FF formula generation/search"] = "blocked until orthogonal score packet and later replay gates pass"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE44"
+        status = "orthogonal_score_packet_contract_ready_for_core44e"
+        next_task = "A7FF-CORE44E orthogonal score packet construction audit"
+    elif a7ffcore43e.get("decision") == "PASS_A7FFCORE43E_CONTROL_VECTOR_REBUILD_READY_FOR_CORE44":
+        allowed["A7FF-CORE44 full-universe orthogonal score packet construction contract"] = (
+            "contract only; define full-universe residual score packet construction after CORE43E vector rebuild pass"
+        )
+        blocked["A7FF large search"] = "blocked: CORE43E authorizes CORE44 contract only"
+        blocked["A7FF formula generation/search"] = "blocked until full-universe orthogonal score packet passes and later gates authorize search"
+        blocked["book replay from selected packet"] = "not authorized: selected top/bottom packet is insufficient for control orthogonalization"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE43E"
+        status = "control_vector_rebuild_ready_for_core44_contract"
+        next_task = "A7FF-CORE44 full-universe orthogonal score packet construction contract"
+    elif a7ffcore43e.get("decision") == "HOLD_A7FFCORE43E_CONTROL_VECTOR_REBUILD_INCOMPLETE":
+        allowed["A7FF-CORE43E repair / rerun"] = (
+            "audit repair only; fix missing score/control vectors or residualization collapse"
+        )
+        blocked["A7FF large search"] = "blocked: CORE43E control-vector rebuild incomplete"
+        blocked["A7FF formula generation/search"] = "blocked: full-universe control vectors are not available"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE43E"
+        status = "control_vector_rebuild_incomplete"
+        next_task = "A7FF-CORE43E repair / rerun"
+    elif a7ffcore43.get("decision") == "PASS_A7FFCORE43_CONTROL_ORTHOGONALIZATION_CONTRACT_READY_FOR_CORE43E":
+        allowed["A7FF-CORE43E full-universe control-vector rebuild audit"] = (
+            "audit only; verify full-universe original/stale/sign/null score vectors can be rebuilt"
+        )
+        blocked["A7FF large search"] = "blocked: CORE43 authorizes control-vector rebuild audit only"
+        blocked["A7FF formula generation/search"] = "blocked until control-orthogonal vector packet exists and passes audit"
+        blocked["F1b survivor expansion"] = "not authorized: weak single-family evidence only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE43"
+        status = "control_orthogonalization_contract_ready_for_core43e"
+        next_task = "A7FF-CORE43E full-universe control-vector rebuild audit"
+    elif a7ffcore42.get("decision") == "PASS_A7FFCORE42_ROUTE_ARBITRATION_READY_FOR_CORE43_CONTROL_ORTHOGONALIZATION_CONTRACT":
+        allowed["A7FF-CORE43 control orthogonalization / null-model contract"] = (
+            "contract only; redesign controls before any generation/search"
+        )
+        blocked["A7FF large search"] = "blocked: CORE42 freezes current weak single-family survivor path"
+        blocked["A7FF formula generation/search"] = "blocked until CORE43 and any later control-orthogonal evidence pass"
+        blocked["F1b survivor expansion"] = "not authorized: CORE42 rejected weak partial survivor expansion"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE42"
+        status = "route_arbitration_ready_for_core43_control_contract"
+        next_task = "A7FF-CORE43 control orthogonalization / null-model contract"
+    elif a7ffcore41er.get("decision") == "PASS_A7FFCORE41ER_BOOK_CONTROL_REPAIR_FORENSIC_READY_FOR_CORE42":
+        allowed["A7FF-CORE42 book-control route arbitration / freeze contract"] = (
+            "contract only; freeze weak single-family survivor and decide next route"
+        )
+        blocked["A7FF large search"] = "blocked: CORE41ER found only one weak single-family partial survivor"
+        blocked["A7FF formula generation/search"] = "blocked: CORE42 arbitration required after weak survivor forensic"
+        blocked["F1b survivor expansion"] = "not authorized: weak single-family evidence only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE41ER"
+        status = "book_control_repair_forensic_ready_for_core42"
+        next_task = "A7FF-CORE42 book-control route arbitration / freeze contract"
+    elif a7ffcore41e.get("decision") == "HOLD_A7FFCORE41E_BOOK_CONTROL_REPAIR_INSUFFICIENT":
+        allowed["A7FF-CORE41ER book control repair forensic"] = (
+            "forensic only; classify weak partial survivors and remaining control failures"
+        )
+        blocked["A7FF large search"] = "blocked: CORE41E repair insufficient"
+        blocked["A7FF formula generation/search"] = "blocked: CORE41E repair insufficient"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE41E"
+        status = "book_control_repair_insufficient"
+        next_task = "A7FF-CORE41ER book control repair forensic"
+    elif a7ffcore41.get("decision") == "PASS_A7FFCORE41_BOOK_CONTROL_REPAIR_CONTRACT_READY_FOR_CORE41E":
+        allowed["A7FF-CORE41E book control repair execution"] = (
+            "repair execution only; train-only orientation/control repair over existing book variants"
+        )
+        blocked["A7FF large search"] = "blocked: CORE41 authorizes control repair only"
+        blocked["A7FF formula generation/search"] = "blocked: CORE41 authorizes control repair only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE41"
+        status = "book_control_repair_contract_ready_for_core41e"
+        next_task = "A7FF-CORE41E book control repair execution"
+    elif a7ffcore40er.get("decision") == "PASS_A7FFCORE40ER_BOOK_REPLAY_FORENSIC_READY_FOR_CORE41_CONTRACT":
+        allowed["A7FF-CORE41 book-objective control repair contract"] = (
+            "contract only; define repair for stale/sign-flip control dominance"
+        )
+        blocked["A7FF large search"] = "blocked: CORE40ER confirms book objective control dominance"
+        blocked["A7FF formula generation/search"] = "blocked: CORE41 contract required"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE40ER"
+        status = "book_replay_forensic_ready_for_core41"
+        next_task = "A7FF-CORE41 book-objective control repair contract"
+    elif a7ffcore40e.get("decision") == "HOLD_A7FFCORE40E_BOOK_OBJECTIVE_REPLAY_INSUFFICIENT":
+        allowed["A7FF-CORE40ER book-objective replay forensic"] = (
+            "forensic only; classify book objective replay failure"
+        )
+        blocked["A7FF large search"] = "blocked: CORE40E book replay insufficient"
+        blocked["A7FF formula generation/search"] = "blocked: CORE40E book replay insufficient"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE40E"
+        status = "book_objective_replay_insufficient"
+        next_task = "A7FF-CORE40ER book-objective replay forensic"
+    elif a7ffcore40.get("decision") == "PASS_A7FFCORE40_BOOK_OBJECTIVE_REPLAY_CONTRACT_READY_FOR_CORE40E":
+        allowed["A7FF-CORE40E bounded book-objective replay execution"] = (
+            "bounded book replay only over CORE39E symbol-level sample packet; no search"
+        )
+        blocked["A7FF large search"] = "blocked: CORE40 authorizes bounded book replay only"
+        blocked["A7FF formula generation/search"] = "blocked: CORE40 authorizes bounded book replay only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE40"
+        status = "book_objective_replay_contract_ready_for_core40e"
+        next_task = "A7FF-CORE40E bounded book-objective replay execution"
+    elif a7ffcore39e.get("decision") == "PASS_A7FFCORE39E_SYMBOL_LEVEL_PACKET_SAMPLE_READY_FOR_CORE40_CONTRACT":
+        allowed["A7FF-CORE40 bounded book-objective replay contract"] = (
+            "contract only; define bounded book-objective replay using CORE39E symbol-level packet sample"
+        )
+        blocked["A7FF large search"] = "blocked: CORE39E authorizes CORE40 contract only, not search"
+        blocked["A7FF formula generation/search"] = "blocked until CORE40 and any subsequent bounded book replay pass"
+        blocked["book objective replay execution"] = "not authorized until CORE40 contract exists"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE39E"
+        status = "symbol_level_packet_sample_ready_for_core40_contract"
+        next_task = "A7FF-CORE40 bounded book-objective replay contract"
+    elif a7ffcore39.get("decision") == "PASS_A7FFCORE39_SYMBOL_LEVEL_BOOK_PACKET_CONTRACT_READY_FOR_CORE39E":
+        allowed["A7FF-CORE39E symbol-level book packet construction audit"] = (
+            "bounded packet construction audit only; no search or book replay execution"
+        )
+        blocked["A7FF large search"] = "blocked: CORE39 authorizes packet construction audit only"
+        blocked["A7FF formula generation/search"] = "blocked until symbol-level packet exists and passes quality/reconciliation audit"
+        blocked["book objective replay execution"] = "not authorized until CORE39E packet passes and CORE40 contract exists"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE39"
+        status = "symbol_level_book_packet_contract_ready_for_core39e"
+        next_task = "A7FF-CORE39E symbol-level book packet construction audit"
+    elif a7ffcore38e.get("decision") == "HOLD_A7FFCORE38E_BOOK_OBJECTIVE_AUDIT_REQUIRES_SYMBOL_LEVEL_REPLAY_INPUT":
+        allowed["A7FF-CORE39 symbol-level book input packet contract"] = (
+            "contract only; define symbol-level score/return/weight packet required for B1-B4 book objectives"
+        )
+        blocked["A7FF large search"] = "blocked: CORE38E found portfolio objectives cannot be computed from aggregate replay rows"
+        blocked["A7FF formula generation/search"] = "blocked until symbol-level book packet exists and passes audit"
+        blocked["A7FF-CORE38E book objective execution from aggregate rows"] = "not authorized: missing symbol-level input"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE38E"
+        status = "book_objective_audit_requires_symbol_level_input"
+        next_task = "A7FF-CORE39 symbol-level book input packet contract"
+    elif a7ffcore38.get("decision") == "PASS_A7FFCORE38_PORTFOLIO_LABEL_OBJECTIVE_CONTRACT_READY_FOR_CORE38E":
+        allowed["A7FF-CORE38E executable portfolio-label objective adequacy audit"] = (
+            "audit only; test book/label objective adequacy over existing artifacts before any generation"
+        )
+        blocked["A7FF large search"] = "blocked: CORE38 authorizes objective adequacy audit only"
+        blocked["A7FF formula generation/search"] = "blocked until CORE38E proves book-objective survivors"
+        blocked["same CORE33/34/36 queue rerun"] = "not authorized: frozen by CORE37X/CORE38"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE38"
+        status = "portfolio_label_objective_contract_ready_for_core38e"
+        next_task = "A7FF-CORE38E executable portfolio-label objective adequacy audit"
+    elif a7ffcore37x.get("decision") == "PASS_A7FFCORE37X_ROUTE_ARBITRATION_READY_FOR_CORE38_CONTRACT":
+        allowed["A7FF-CORE38 executable portfolio-label objective contract"] = (
+            "contract only; define executable portfolio-label/book objective before any new generation"
+        )
+        blocked["A7FF large search"] = "blocked: CORE37X selected portfolio-label objective contract, not search"
+        blocked["A7FF formula generation/search"] = "blocked until CORE38 contract and any later bounded execution pass"
+        blocked["same CORE33/34/36 queue rerun"] = "not authorized: frozen by CORE37X"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE37X"
+        status = "route_arbitration_ready_for_core38_contract"
+        next_task = "A7FF-CORE38 executable portfolio-label objective contract"
+    elif a7ffcore36er.get("decision") == "PASS_A7FFCORE36ER_REPLAY_OBJECTIVE_FORENSIC_COMPLETE_READY_FOR_CORE37X":
+        allowed["A7FF-CORE37X replay-objective failure freeze / route arbitration contract"] = (
+            "contract only; decide whether to freeze current independent-family replay path or redesign the replay objective"
+        )
+        blocked["A7FF large search"] = "blocked: CORE36ER confirms train-to-OOS executable spread instability"
+        blocked["A7FF formula generation/search"] = "blocked: route arbitration required after replay-objective failure"
+        blocked["same CORE33/34/36 queue rerun"] = "not authorized: exhausted by CORE36E/36ER"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE36ER"
+        status = "replay_objective_forensic_ready_for_core37x"
+        next_task = "A7FF-CORE37X replay-objective failure freeze / route arbitration contract"
+    elif a7ffcore36e.get("decision") == "PASS_A7FFCORE36E_REPLAY_OBJECTIVE_SURVIVORS_READY_FOR_CORE37_CONTRACT":
+        allowed["A7FF-CORE37 bounded replay-objective repair contract"] = (
+            "contract only; CORE36E found executable objective survivors, but no search or proof is authorized"
+        )
+        blocked["A7FF large search"] = "blocked until CORE37 and any subsequent bounded execution prove robust replay survivors"
+        blocked["A7FF formula generation/search"] = "blocked: CORE36E authorizes contract drafting only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE36E"
+        status = "replay_objective_survivors_ready_for_core37_contract"
+        next_task = "A7FF-CORE37 bounded replay-objective repair contract"
+    elif a7ffcore36e.get("decision") == "HOLD_A7FFCORE36E_REPLAY_OBJECTIVE_RESET_NO_EXECUTABLE_SURVIVORS":
+        allowed["A7FF-CORE36ER replay-objective reset forensic"] = (
+            "forensic only; diagnose why executable-spread-first reset still produced no selectable survivors"
+        )
+        blocked["A7FF large search"] = "blocked: CORE36E replay-objective reset found no executable survivors"
+        blocked["A7FF formula generation/search"] = "blocked: replay-objective reset failed before search"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE36E"
+        status = "replay_objective_reset_no_executable_survivors"
+        next_task = "A7FF-CORE36ER replay-objective reset forensic"
+    elif a7ffcore36.get("decision") == "PASS_A7FFCORE36_REPLAY_OBJECTIVE_RESET_CONTRACT_READY_FOR_CORE36E":
+        allowed["A7FF-CORE36E replay-objective reset execution"] = (
+            "bounded re-score only; no new formula generation/search"
+        )
+        blocked["A7FF large search"] = "blocked until CORE36E proves replay-objective survivors"
+        blocked["A7FF formula generation/search"] = "blocked: CORE36 authorizes objective reset execution only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE36"
+        status = "replay_objective_reset_contract_ready_for_core36e"
+        next_task = "A7FF-CORE36E replay-objective reset execution"
+    elif a7ffcore35.get("decision") == "HOLD_A7FFCORE35_SEARCH_NOT_READY_REPLAY_TRANSLATION_FAILURE":
+        allowed["A7FF-CORE36 replay-objective/portfolio-proxy reset contract"] = (
+            "contract only; fix numeric-to-replay translation before any search"
+        )
+        blocked["A7FF large search"] = "blocked: CORE35 search readiness arbitration failed"
+        blocked["A7FF formula generation/search"] = "blocked: replay translation failure must be reset first"
+        blocked["A7FF bounded replay continuation"] = "blocked: CORE34E repair produced zero survivors"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE35"
+        status = "search_not_ready_replay_translation_failure"
+        next_task = "A7FF-CORE36 replay-objective/portfolio-proxy reset contract"
+    elif a7ffcore34er.get("decision") == "PASS_A7FFCORE34ER_REPAIR_FORENSIC_READY_FOR_CORE35_ARBITRATION":
+        allowed["A7FF-CORE35 search-readiness arbitration"] = (
+            "arbitration only; decide whether repair failure allows any search path"
+        )
+        blocked["A7FF large search"] = "blocked until CORE35 arbitration"
+        blocked["A7FF formula generation/search"] = "blocked until CORE35 arbitration"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE34ER"
+        status = "repair_forensic_ready_for_core35_arbitration"
+        next_task = "A7FF-CORE35 search-readiness arbitration"
+    elif a7ffcore34e.get("decision") == "HOLD_A7FFCORE34E_REPAIR_INSUFFICIENT":
+        allowed["A7FF-CORE34ER repair forensic"] = (
+            "forensic only; diagnose failed train-only orientation/control repair"
+        )
+        blocked["A7FF large search"] = "blocked: CORE34E repair insufficient"
+        blocked["A7FF formula generation/search"] = "blocked: repair forensic required"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE34E"
+        status = "orientation_control_repair_insufficient"
+        next_task = "A7FF-CORE34ER repair forensic"
+    elif a7ffcore34.get("decision") == "PASS_A7FFCORE34_ORIENTATION_CONTROL_REPAIR_CONTRACT_READY_FOR_CORE34E":
+        allowed["A7FF-CORE34E train-only orientation/control repair execution"] = (
+            "bounded replay repair only; no new generation/search/promotion"
+        )
+        blocked["A7FF large search"] = "blocked until CORE34E creates repaired bounded replay survivors"
+        blocked["A7FF formula generation/search"] = "blocked: CORE34 authorizes repair execution only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE34"
+        status = "orientation_control_repair_contract_ready_for_core34e"
+        next_task = "A7FF-CORE34E train-only orientation/control repair execution"
+    elif a7ffcore33er.get("decision") == "PASS_A7FFCORE33ER_FORENSIC_READY_FOR_CORE34_ORIENTATION_REPAIR_CONTRACT":
+        allowed["A7FF-CORE34 train-only orientation/control repair contract"] = (
+            "contract only; define train-only sign and control filter repair after bounded replay hold"
+        )
+        blocked["A7FF large search"] = "blocked: CORE33E bounded replay has zero survivors"
+        blocked["A7FF formula generation/search"] = "blocked: repair contract required"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE33ER"
+        status = "bounded_replay_forensic_ready_for_core34_contract"
+        next_task = "A7FF-CORE34 train-only orientation/control repair contract"
+    elif a7ffcore33e.get("decision") == "HOLD_A7FFCORE33E_BOUNDED_REPLAY_INSUFFICIENT":
+        allowed["A7FF-CORE33ER bounded replay forensic"] = (
+            "forensic only; diagnose why bounded replay has zero survivors"
+        )
+        blocked["A7FF large search"] = "blocked: CORE33E bounded replay insufficient"
+        blocked["A7FF formula generation/search"] = "blocked: forensic required before repair"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE33E"
+        status = "bounded_replay_insufficient_forensic_required"
+        next_task = "A7FF-CORE33ER bounded replay forensic"
+    elif a7ffcore33.get("decision") == "PASS_A7FFCORE33_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE33E":
+        allowed["A7FF-CORE33E bounded replay execution"] = (
+            "bounded replay only; no formula search, large search, alpha proof, or live"
+        )
+        blocked["A7FF large search"] = "blocked until CORE33E bounded replay evidence passes promotion gates"
+        blocked["A7FF formula generation/search"] = "blocked: CORE33 authorizes bounded replay only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE33"
+        status = "bounded_replay_contract_ready_for_core33e"
+        next_task = "A7FF-CORE33E bounded replay execution"
+    elif a7ffcore32e.get("decision") == "PASS_A7FFCORE32E_REPLAY_PREFLIGHT_READY_FOR_CORE33_CONTRACT":
+        allowed["A7FF-CORE33 bounded replay contract"] = (
+            "contract only; define bounded replay over CORE32E preflight survivors"
+        )
+        blocked["A7FF replay execution"] = "blocked until CORE33 contract authorizes CORE33E"
+        blocked["A7FF large search"] = "blocked: replay preflight evidence is not search evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE32E authorizes bounded replay contract only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE32E"
+        status = "replay_preflight_ready_for_core33_contract"
+        next_task = "A7FF-CORE33 bounded replay contract"
+    elif a7ffcore32.get("decision") == "PASS_A7FFCORE32_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE32E":
+        allowed["A7FF-CORE32E replay preflight execution"] = (
+            "preflight execution only; no tradable replay/search/promotion"
+        )
+        blocked["A7FF tradable replay"] = "blocked until CORE32E preflight passes all controls and alignment checks"
+        blocked["A7FF large search"] = "blocked: replay preflight contract is not search evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE32 authorizes preflight execution only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE32"
+        status = "replay_preflight_contract_ready_for_core32e"
+        next_task = "A7FF-CORE32E replay preflight execution"
+    elif a7ffcore31.get("decision") == "PASS_A7FFCORE31_CLUE_CONSOLIDATION_READY_FOR_CORE32_REPLAY_PREFLIGHT_CONTRACT":
+        allowed["A7FF-CORE32 replay preflight contract"] = (
+            "contract only; define replay-preflight checks over CORE31 24-row queue"
+        )
+        blocked["A7FF replay execution"] = "blocked until CORE32 contract and any CORE32E preflight pass"
+        blocked["A7FF large search"] = "blocked: numeric clues are not replay evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE31 authorizes replay-preflight contract only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE31"
+        status = "clue_consolidation_ready_for_core32_replay_preflight_contract"
+        next_task = "A7FF-CORE32 replay preflight contract"
+    elif a7ffcore30e.get("decision") == "PASS_A7FFCORE30E_NUMERIC_PROBE_CLUES_READY_FOR_CORE31_CONTRACT":
+        allowed["A7FF-CORE31 independent family clue consolidation contract"] = (
+            "contract only; consolidate CORE30E numeric clues before any replay preflight"
+        )
+        blocked["A7FF replay contract"] = "blocked until CORE31 consolidates clues and defines replay preflight gates"
+        blocked["A7FF large search"] = "blocked: CORE30E is numeric probe evidence only"
+        blocked["A7FF formula generation/search"] = "blocked: no replay/search authorization from numeric probe"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE30E"
+        status = "bounded_numeric_probe_clues_ready_for_core31_contract"
+        next_task = "A7FF-CORE31 independent family clue consolidation contract"
+    elif a7ffcore30.get("decision") == "PASS_A7FFCORE30_NUMERIC_PROBE_CONTRACT_READY_FOR_CORE30E":
+        allowed["A7FF-CORE30E bounded numeric probe execution"] = (
+            "bounded 240-row numeric probe only; no replay/search/promotion"
+        )
+        blocked["A7FF replay contract"] = "blocked until CORE30E numeric probe passes non-L7/control/split gates"
+        blocked["A7FF large search"] = "blocked until independent-family numeric evidence passes"
+        blocked["A7FF formula generation/search"] = "blocked: CORE30 authorizes numeric probe only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE30"
+        status = "independent_family_numeric_probe_contract_ready_for_core30e"
+        next_task = "A7FF-CORE30E bounded numeric probe execution"
+    elif a7ffcore29e.get("decision") == "PASS_A7FFCORE29E_INDEPENDENT_FAMILY_PREFLIGHT_READY_FOR_CORE30_CONTRACT":
+        allowed["A7FF-CORE30 independent family numeric probe contract"] = (
+            "contract only; define bounded 240-row numeric probe after CORE29E preflight pass"
+        )
+        blocked["A7FF-CORE30 numeric execution"] = "blocked until CORE30 contract explicitly authorizes CORE30E"
+        blocked["A7FF large search"] = "blocked until independent-family numeric evidence passes"
+        blocked["A7FF formula generation/search"] = "blocked: CORE29E authorizes numeric-probe contract only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE29E"
+        status = "independent_family_preflight_ready_for_core30_contract"
+        next_task = "A7FF-CORE30 independent family numeric probe contract"
+    elif a7ffcore29.get("decision") == "PASS_A7FFCORE29_INDEPENDENT_FAMILY_BOUNDED_PROBE_CONTRACT_READY_FOR_CORE29E":
+        allowed["A7FF-CORE29E independent family dry-generation/materialization adapter preflight"] = (
+            "bounded preflight only; validate aggTrades/top498 adapters and balanced queues without search"
+        )
+        blocked["A7FF-CORE29 numeric probe"] = "blocked until CORE29E preflight passes"
+        blocked["A7FF large search"] = "blocked until independent-family preflight and numeric evidence pass"
+        blocked["A7FF formula generation/search"] = "blocked: CORE29 authorizes preflight only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE29"
+        status = "independent_family_bounded_probe_contract_ready_for_core29e"
+        next_task = "A7FF-CORE29E independent family dry-generation/materialization adapter preflight"
+    elif a7ffcore28e.get("decision") == "PASS_A7FFCORE28E_INDEPENDENT_DATA_FAMILY_ATLAS_READY_FOR_CORE29_CONTRACT":
+        allowed["A7FF-CORE29 independent family bounded generation/probe contract"] = (
+            "contract only; use CORE28E atlas candidates without executing generation/search"
+        )
+        blocked["A7FF-CORE28 S0 direct continuation"] = "blocked: S0 is diagnostic reference only"
+        blocked["A7FF large search"] = "blocked until CORE29/next bounded evidence creates independent executable lanes"
+        blocked["A7FF formula generation/search"] = "blocked: CORE28E authorizes CORE29 contract only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE28E"
+        status = "independent_data_family_atlas_ready_for_core29_contract"
+        next_task = "A7FF-CORE29 independent family bounded generation/probe contract"
+    elif a7ffcore28.get("decision") == "PASS_A7FFCORE28_OBJECTIVE_DATA_FAMILY_RESET_CONTRACT_READY_FOR_CORE28E":
+        allowed["A7FF-CORE28E independent data-family atlas contract/audit"] = (
+            "contract/audit only; identify independent non-S0 data families before any new search"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: single-lane S0 evidence only"
+        blocked["A7FF large search"] = "blocked until independent multi-lane executable evidence exists"
+        blocked["A7FF formula generation/search"] = "blocked: CORE28 authorizes data-family atlas audit only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE28"
+        status = "objective_data_family_reset_contract_ready_for_core28e"
+        next_task = "A7FF-CORE28E independent data-family atlas contract/audit"
+    elif a7ffcore27x.get("decision") == "HOLD_A7FFCORE27X_SEARCH_NOT_READY_SINGLE_LANE_SUPPLY":
+        allowed["A7FF-CORE28 objective/data-family reset contract"] = (
+            "contract only; reset away from S0 single-lane supply before search"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: search readiness arbitration failed"
+        blocked["A7FF large search"] = "blocked: single-lane S0 supply"
+        current_stage = "A7FF-CORE27X"
+        status = "search_not_ready_single_lane_supply"
+        next_task = "A7FF-CORE28 objective/data-family reset contract"
+    elif a7ffcore26der.get("decision") == "PASS_A7FFCORE26DER_NON_S0_REPAIR_FORENSIC_COMPLETE_READY_FOR_CORE27X":
+        allowed["A7FF-CORE27X search-readiness arbitration / objective reset contract"] = (
+            "arbitration only; decide whether current evidence can support replay/search"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: non-S0 repair has no strict clean candidates"
+        blocked["A7FF large search"] = "blocked until readiness arbitration"
+        current_stage = "A7FF-CORE26DER"
+        status = "non_s0_repair_forensic_ready_for_core27x"
+        next_task = "A7FF-CORE27X search-readiness arbitration / objective reset contract"
+    elif a7ffcore26de.get("decision") == "HOLD_A7FFCORE26DE_NON_S0_REPAIR_INSUFFICIENT":
+        allowed["A7FF-CORE26DER non-S0 repair forensic"] = (
+            "forensic only; freeze non-S0 repair failure"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: non-S0 repair insufficient"
+        blocked["A7FF large search"] = "blocked until non-S0 repair forensic"
+        current_stage = "A7FF-CORE26DE"
+        status = "non_s0_repair_insufficient"
+        next_task = "A7FF-CORE26DER non-S0 repair forensic"
+    elif a7ffcore26d.get("decision") == "PASS_A7FFCORE26D_NON_S0_LANE_REPAIR_CONTRACT_READY_FOR_CORE26DE":
+        allowed["A7FF-CORE26DE non-S0 lane repair numeric probe"] = (
+            "bounded S3/S1-focused numeric probe; S0 is calibration-only; no open generation, search, or promotion"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked until non-S0 lane repair creates independent executable lane evidence"
+        blocked["A7FF large search"] = "blocked: clean evidence remains single-lane S0"
+        blocked["A7FF formula generation/search"] = "blocked: CORE26D authorizes bounded non-S0 lane repair probe only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE26D"
+        status = "non_s0_lane_repair_contract_ready_for_core26de"
+        next_task = "A7FF-CORE26DE non-S0 lane repair numeric probe"
+    elif a7ffcore26cer.get("decision") == "PASS_A7FFCORE26CER_SPLIT_REPAIR_FORENSIC_COMPLETE_READY_FOR_CORE26D":
+        allowed["A7FF-CORE26D non-S0 lane independence repair contract"] = (
+            "contract only; define S3/S1 repair after CORE26CE clean evidence collapses to S0"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: clean supply is single-lane"
+        blocked["A7FF large search"] = "blocked: split repair insufficient"
+        current_stage = "A7FF-CORE26CER"
+        status = "split_repair_forensic_ready_for_core26d"
+        next_task = "A7FF-CORE26D non-S0 lane independence repair contract"
+    elif a7ffcore26ce.get("decision") == "HOLD_A7FFCORE26CE_SPLIT_REPAIR_INSUFFICIENT":
+        allowed["A7FF-CORE26CER split repair forensic"] = (
+            "forensic only; diagnose CORE26CE single-lane clean supply"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: split repair insufficient"
+        blocked["A7FF large search"] = "blocked until split repair forensic"
+        current_stage = "A7FF-CORE26CE"
+        status = "split_consistency_repair_insufficient"
+        next_task = "A7FF-CORE26CER split repair forensic"
+    elif a7ffcore26c.get("decision") == "PASS_A7FFCORE26C_SPLIT_CONSISTENCY_REPAIR_CONTRACT_READY_FOR_CORE26CE":
+        allowed["A7FF-CORE26CE split-consistency repair numeric probe"] = (
+            "bounded S0/S3-focused repair numeric probe; no open generation, search, large search, or promotion"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked until CORE26CE produces three-split executable candidates"
+        blocked["A7FF large search"] = "blocked: targeted numeric probe has split-consistency failure"
+        blocked["A7FF formula generation/search"] = "blocked: CORE26C authorizes bounded repair numeric probe only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE26C"
+        status = "split_consistency_repair_contract_ready_for_core26ce"
+        next_task = "A7FF-CORE26CE split-consistency repair numeric probe"
+    elif a7ffcore26r.get("decision") == "PASS_A7FFCORE26R_TARGETED_NUMERIC_FORENSIC_COMPLETE_READY_FOR_CORE26C":
+        allowed["A7FF-CORE26C coverage-aware numeric probe repair contract"] = (
+            "contract only; separate split-consistency/control failure from coverage after CORE26E hold"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked: no three-split executable candidates"
+        blocked["A7FF large search"] = "blocked: targeted numeric probe insufficient"
+        current_stage = "A7FF-CORE26R"
+        status = "targeted_numeric_forensic_ready_for_core26c"
+        next_task = "A7FF-CORE26C coverage-aware numeric probe repair contract"
+    elif a7ffcore26e.get("decision") == "HOLD_A7FFCORE26E_TARGETED_NUMERIC_PROBE_INSUFFICIENT":
+        allowed["A7FF-CORE26R targeted numeric probe forensic"] = (
+            "forensic only; diagnose targeted numeric probe hold"
+        )
+        blocked["A7FF-CORE27 bounded replay contract"] = "blocked until CORE26R/CORE26C repair"
+        blocked["A7FF large search"] = "blocked: targeted numeric probe insufficient"
+        current_stage = "A7FF-CORE26E"
+        status = "targeted_numeric_probe_insufficient"
+        next_task = "A7FF-CORE26R targeted numeric probe forensic"
+    elif a7ffcore26.get("decision") == "PASS_A7FFCORE26_TARGETED_NUMERIC_PROBE_CONTRACT_READY_FOR_CORE26E":
+        allowed["A7FF-CORE26E targeted numeric probe execution"] = (
+            "bounded 480-row numeric probe over CORE25E targeted packet; no search, large search, alpha proof, or live"
+        )
+        blocked["A7FF large search"] = "blocked until targeted numeric probe produces executable multi-lane evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE26 authorizes numeric probe execution only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE26"
+        status = "targeted_numeric_probe_contract_ready_for_core26e"
+        next_task = "A7FF-CORE26E targeted numeric probe execution"
+    elif a7ffcore25e.get("decision") == "PASS_A7FFCORE25E_TARGETED_GENERATION_PREFLIGHT_PACKET_READY_FOR_CORE26_CONTRACT":
+        allowed["A7FF-CORE26 targeted numeric probe contract"] = (
+            "contract only; define bounded numeric probe over targeted lane/horizon preflight packet"
+        )
+        blocked["A7FF large search"] = "blocked until targeted numeric probe produces executable multi-lane evidence"
+        blocked["A7FF formula generation/search"] = "blocked after bounded packet construction; next is numeric probe contract only"
+        current_stage = "A7FF-CORE25E"
+        status = "targeted_generation_preflight_packet_ready_for_core26"
+        next_task = "A7FF-CORE26 targeted numeric probe contract"
+    elif a7ffcore25.get("decision") == "PASS_A7FFCORE25_TARGETED_LANE_HORIZON_GENERATION_CONTRACT_READY_FOR_CORE25E":
+        allowed["A7FF-CORE25E targeted lane/horizon generation preflight packet"] = (
+            "bounded targeted generation/preflight only; repair S0/S1 executable horizon coverage"
+        )
+        blocked["A7FF large search"] = "blocked: missing lane repair must stay targeted"
+        blocked["A7FF formula generation/search"] = "blocked: CORE25 authorizes targeted preflight packet only"
+        current_stage = "A7FF-CORE25"
+        status = "targeted_lane_horizon_generation_contract_ready_for_core25e"
+        next_task = "A7FF-CORE25E targeted lane/horizon generation preflight packet"
+    elif a7ffcore24r.get("decision") == "PASS_A7FFCORE24R_LANE_PACKET_FORENSIC_COMPLETE_READY_FOR_CORE25":
+        allowed["A7FF-CORE25 targeted executable-lane horizon generation contract"] = (
+            "contract only; define bounded S0/S1 lane/horizon repair generation"
+        )
+        blocked["A7FF large search"] = "blocked: source packet missing executable lane/horizon coverage"
+        blocked["A7FF formula generation/search"] = "blocked until targeted generation contract exists"
+        current_stage = "A7FF-CORE24R"
+        status = "lane_packet_forensic_ready_for_core25"
+        next_task = "A7FF-CORE25 targeted executable-lane horizon generation contract"
+    elif a7ffcore24e.get("decision") == "HOLD_A7FFCORE24E_SOURCE_PACKET_LANE_COVERAGE_INSUFFICIENT":
+        allowed["A7FF-CORE24R lane packet coverage forensic"] = (
+            "forensic only; freeze why old packet cannot repair missing executable lanes"
+        )
+        blocked["A7FF large search"] = "blocked: repair packet still lacks executable lane breadth"
+        blocked["A7FF formula generation/search"] = "blocked until lane packet forensic"
+        current_stage = "A7FF-CORE24E"
+        status = "source_packet_lane_coverage_insufficient"
+        next_task = "A7FF-CORE24R lane packet coverage forensic"
+    elif a7ffcore24.get("decision") == "PASS_A7FFCORE24_EXECUTABLE_LANE_REPAIR_CONTRACT_READY_FOR_CORE24E":
+        allowed["A7FF-CORE24E bounded executable lane repair packet construction"] = (
+            "packet construction only; classify executable clean, same-bar repair, and near-miss seeds"
+        )
+        blocked["A7FF large search"] = "blocked: executable lane supply is too narrow"
+        blocked["A7FF formula generation/search"] = "blocked: CORE24 authorizes packet construction only"
+        current_stage = "A7FF-CORE24"
+        status = "executable_lane_repair_contract_ready_for_core24e"
+        next_task = "A7FF-CORE24E bounded executable lane repair packet construction"
+    elif a7ffcore23r.get("decision") == "PASS_A7FFCORE23R_EXECUTABLE_HORIZON_FORENSIC_COMPLETE_READY_FOR_CORE24":
+        allowed["A7FF-CORE24 lower-turnover executable lane repair contract"] = (
+            "contract only; repair missing executable lane breadth after CORE23E hold"
+        )
+        blocked["A7FF large search"] = "blocked: executable clean supply is 4 candidates / 2 lanes"
+        blocked["A7FF formula generation/search"] = "blocked until executable lane repair contract"
+        current_stage = "A7FF-CORE23R"
+        status = "executable_horizon_forensic_ready_for_core24"
+        next_task = "A7FF-CORE24 lower-turnover executable lane repair contract"
+    elif a7ffcore23e.get("decision") == "HOLD_A7FFCORE23E_EXECUTABLE_HORIZON_SUPPLY_INSUFFICIENT":
+        allowed["A7FF-CORE23R executable-horizon forensic"] = (
+            "forensic only; diagnose lower-turnover executable supply shortage"
+        )
+        blocked["A7FF large search"] = "blocked: executable horizon supply insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until executable-horizon forensic"
+        current_stage = "A7FF-CORE23E"
+        status = "executable_horizon_supply_insufficient"
+        next_task = "A7FF-CORE23R executable-horizon forensic"
+    elif a7ffcore23.get("decision") == "PASS_A7FFCORE23_EXECUTABLE_HORIZON_REDESIGN_CONTRACT_READY_FOR_CORE23E":
+        allowed["A7FF-CORE23E executable-horizon diagnostic audit"] = (
+            "diagnostic audit only; test lower-turnover executable horizons and lane-specific timing translation; no formula generation or search"
+        )
+        blocked["A7FF large search"] = "blocked: same-bar diagnostics dominate one-bar executable evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE23 authorizes executable-horizon diagnostic audit only"
+        blocked["CORE20/CORE22 same-objective repair"] = "blocked/superseded: lag translation is timing-fragile"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE23"
+        status = "executable_horizon_redesign_contract_ready_for_core23e"
+        next_task = "A7FF-CORE23E executable-horizon diagnostic audit"
+    elif a7ffcore22r.get("decision") == "PASS_A7FFCORE22R_LAG_TRANSLATION_FORENSIC_COMPLETE_READY_FOR_CORE23":
+        allowed["A7FF-CORE23 executable-horizon redesign contract"] = (
+            "contract only; redesign replay translation around executable holding horizons after same-bar dominance"
+        )
+        blocked["A7FF large search"] = "blocked: lag translation forensic shows same-bar dominance"
+        blocked["A7FF formula generation/search"] = "blocked until executable-horizon redesign produces evidence"
+        current_stage = "A7FF-CORE22R"
+        status = "lag_translation_forensic_ready_for_core23"
+        next_task = "A7FF-CORE23 executable-horizon redesign contract"
+    elif a7ffcore22e.get("decision") == "HOLD_A7FFCORE22E_LAG_TRANSLATION_INSUFFICIENT":
+        allowed["A7FF-CORE22R lag translation forensic"] = (
+            "forensic only; freeze one-bar lag translation failure and same-bar dominance"
+        )
+        blocked["A7FF large search"] = "blocked: one-bar executable clean supply insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until lag translation forensic/redesign"
+        current_stage = "A7FF-CORE22E"
+        status = "lag_aware_translation_insufficient"
+        next_task = "A7FF-CORE22R lag translation forensic"
+    elif a7ffcore22.get("decision") == "PASS_A7FFCORE22_LAG_AWARE_REPLAY_TRANSLATION_CONTRACT_READY_FOR_CORE22E":
+        allowed["A7FF-CORE22E lag-aware replay translation audit"] = (
+            "audit one-bar/same-bar translation using existing replay rows; no formula generation or search"
+        )
+        blocked["A7FF large search"] = "blocked until lag-aware translation produces executable evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE22 authorizes lag-aware translation audit only"
+        current_stage = "A7FF-CORE22"
+        status = "lag_aware_replay_translation_contract_ready_for_core22e"
+        next_task = "A7FF-CORE22E lag-aware replay translation audit"
+    elif a7ffcore21r.get("decision") == "PASS_A7FFCORE21R_TRANSLATION_MATRIX_FORENSIC_COMPLETE_READY_FOR_CORE22":
+        allowed["A7FF-CORE22 lag-aware replay translation contract"] = (
+            "contract only; address lag and lane translation bottleneck after CORE21E hold"
+        )
+        blocked["A7FF large search"] = "blocked: translation matrix shows lag/lane bottleneck"
+        blocked["A7FF formula generation/search"] = "blocked until lag-aware translation audit produces evidence"
+        current_stage = "A7FF-CORE21R"
+        status = "translation_matrix_forensic_ready_for_core22"
+        next_task = "A7FF-CORE22 lag-aware replay translation contract"
+    elif a7ffcore21e.get("decision") == "HOLD_A7FFCORE21E_TRANSLATION_MATRIX_INSUFFICIENT":
+        allowed["A7FF-CORE21R translation matrix forensic"] = (
+            "forensic only; diagnose label/cost/lag/lane translation failure"
+        )
+        blocked["A7FF large search"] = "blocked: translation matrix insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until translation forensic/redesign"
+        current_stage = "A7FF-CORE21E"
+        status = "translation_matrix_insufficient"
+        next_task = "A7FF-CORE21R translation matrix forensic"
+    elif a7ffcore21.get("decision") == "PASS_A7FFCORE21_REPLAY_TRANSLATION_RESET_CONTRACT_READY_FOR_CORE21E":
+        allowed["A7FF-CORE21E replay translation matrix audit"] = (
+            "audit label/cost/lag/lane translation using existing replay rows; no formula generation or search"
+        )
+        blocked["A7FF large search"] = "blocked until translation reset produces robust multi-lane replay-clean evidence"
+        blocked["A7FF formula generation/search"] = "blocked: CORE21 authorizes translation audit only"
+        blocked["CORE20"] = "blocked/superseded: CORE19 bounded replay repair did not pass"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE21"
+        status = "replay_translation_reset_contract_ready_for_core21e"
+        next_task = "A7FF-CORE21E replay translation matrix audit"
+    elif a7ffcore19ser.get("decision") == "PASS_A7FFCORE19SER_REPLAY_REPAIR_FORENSIC_COMPLETE_READY_FOR_CORE21":
+        allowed["A7FF-CORE21 replay translation reset contract"] = (
+            "contract only; reset label/cost/lag/lane replay translation after CORE19SE hold"
+        )
+        blocked["A7FF large search"] = "blocked: replay-clean supply too narrow after repair"
+        blocked["A7FF formula generation/search"] = "blocked until replay translation reset produces evidence"
+        current_stage = "A7FF-CORE19SER"
+        status = "replay_repair_forensic_ready_for_core21"
+        next_task = "A7FF-CORE21 replay translation reset contract"
+    elif a7ffcore19se.get("decision") == "HOLD_A7FFCORE19SE_REPLAY_REPAIR_INSUFFICIENT":
+        allowed["A7FF-CORE19SER replay repair forensic"] = (
+            "forensic only; freeze failed bounded replay repair"
+        )
+        blocked["A7FF large search"] = "blocked: replay repair insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until replay repair forensic and reset"
+        current_stage = "A7FF-CORE19SE"
+        status = "bounded_replay_repair_insufficient"
+        next_task = "A7FF-CORE19SER replay repair forensic"
+    elif a7ffcore19s.get("decision") == "PASS_A7FFCORE19S_BOUNDED_REPLAY_REPAIR_CONTRACT_READY_FOR_CORE19SE":
+        allowed["A7FF-CORE19SE bounded replay repair execution"] = (
+            "execute cost/lag/label/lane repair attribution using existing CORE19E replay rows"
+        )
+        blocked["A7FF large search"] = "blocked until replay repair passes"
+        blocked["A7FF formula generation/search"] = "blocked: CORE19S authorizes replay repair only"
+        current_stage = "A7FF-CORE19S"
+        status = "bounded_replay_repair_contract_ready_for_core19se"
+        next_task = "A7FF-CORE19SE bounded replay repair execution"
+    elif a7ffcore19r.get("decision") == "PASS_A7FFCORE19R_BOUNDED_REPLAY_FORENSIC_COMPLETE_READY_FOR_CORE19S":
+        allowed["A7FF-CORE19S bounded replay repair contract"] = (
+            "contract only; define cost/lag/label/lane repair after CORE19E hold"
+        )
+        blocked["A7FF large search"] = "blocked: bounded replay clean supply insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until replay repair produces evidence"
+        current_stage = "A7FF-CORE19R"
+        status = "bounded_replay_forensic_ready_for_core19s"
+        next_task = "A7FF-CORE19S bounded replay repair contract"
+    elif a7ffcore19e.get("decision") == "HOLD_A7FFCORE19E_BOUNDED_REPLAY_INSUFFICIENT":
+        allowed["A7FF-CORE19R bounded replay forensic"] = (
+            "forensic only; freeze CORE19E bounded replay hold"
+        )
+        blocked["A7FF large search"] = "blocked: bounded replay clean supply insufficient"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay forensic/repair"
+        current_stage = "A7FF-CORE19E"
+        status = "bounded_replay_insufficient"
+        next_task = "A7FF-CORE19R bounded replay forensic"
+    elif a7ffcore19.get("decision") == "PASS_A7FFCORE19_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE19E":
+        allowed["A7FF-CORE19E bounded replay execution on locked packet"] = (
+            "execute bounded replay on locked 96-row packet only; no formula generation, search expansion, alpha proof, or live"
+        )
+        blocked["A7FF large search"] = "blocked until CORE19E bounded replay produces control-clean evidence and later search-readiness gates pass"
+        blocked["A7FF formula generation/search"] = "blocked: CORE19 authorizes bounded replay execution only"
+        blocked["alpha proof / shadow / paper / live"] = "not authorized"
+        current_stage = "A7FF-CORE19"
+        status = "bounded_replay_contract_ready_for_core19e"
+        next_task = "A7FF-CORE19E bounded replay execution on locked packet"
+    elif a7ffcore18e.get("decision") == "PASS_A7FFCORE18E_BOUNDED_REPLAY_PREFLIGHT_READY_FOR_CORE19_CONTRACT":
+        allowed["A7FF-CORE19 bounded replay contract"] = (
+            "contract only; define bounded replay execution rules for locked packet"
+        )
+        blocked["A7FF bounded replay execution"] = "blocked until CORE19 contract exists"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE18E"
+        status = "bounded_replay_preflight_ready_for_core19"
+        next_task = "A7FF-CORE19 bounded replay contract"
+    elif a7ffcore18.get("decision") == "PASS_A7FFCORE18_BOUNDED_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE18E":
+        allowed["A7FF-CORE18E bounded replay preflight execution"] = (
+            "preflight only; verify locked packet fields/operators/roles before bounded replay contract"
+        )
+        blocked["A7FF bounded replay execution"] = "blocked until CORE18E preflight and CORE19 contract pass"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE18"
+        status = "bounded_replay_preflight_contract_ready_for_core18e"
+        next_task = "A7FF-CORE18E bounded replay preflight execution"
+    elif a7ffcore17e.get("decision") == "PASS_A7FFCORE17E_OBJECTIVE_SEED_PACKET_READY_FOR_CORE18_CONTRACT":
+        allowed["A7FF-CORE18 bounded replay preflight contract"] = (
+            "contract only; define bounded replay preflight gates"
+        )
+        blocked["A7FF bounded replay execution"] = "blocked until CORE18/18E/19 pass"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE17E"
+        status = "objective_seed_packet_ready_for_core18"
+        next_task = "A7FF-CORE18 bounded replay preflight contract"
+    elif a7ffcore17.get("decision") == "PASS_A7FFCORE17_OBJECTIVE_SEED_POLICY_CONTRACT_READY_FOR_CORE17E":
+        allowed["A7FF-CORE17E objective seed packet construction audit"] = (
+            "packet construction/audit only; no replay/search/promotion"
+        )
+        blocked["A7FF bounded replay execution"] = "blocked until CORE17E/18/18E/19 pass"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE17"
+        status = "objective_seed_policy_ready_for_core17e"
+        next_task = "A7FF-CORE17E objective seed packet construction audit"
+    elif a7ffcore16l.get("decision") == "PASS_A7FFCORE16L_STRICT_PRESEED_QUEUE_LOCKED_READY_FOR_CORE17_CONTRACT":
+        allowed["A7FF-CORE17 objective seed policy contract"] = (
+            "contract only; convert locked strict pre-seed queue into seed policy"
+        )
+        blocked["A7FF bounded replay execution"] = "blocked until CORE17/17E/18/18E/19 pass"
+        blocked["A7FF formula generation/search"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE16L"
+        status = "strict_preseed_queue_locked_ready_for_core17"
+        next_task = "A7FF-CORE17 objective seed policy contract"
+    elif a7ffcore16me.get("decision") == "PASS_A7FFCORE16ME_H2_FLOOR_REPAIRED_READY_FOR_CORE16L":
+        allowed["A7FF-CORE16L strict pre-seed queue lock audit"] = (
+            "audit/lock strict queue only; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked until CORE16L locks strict queue"
+        blocked["A7FF formula generation"] = "blocked until bounded replay produces evidence"
+        blocked["A7FF bounded replay"] = "blocked until CORE16L/17/18/19 pass"
+        blocked["A7FF large search"] = "blocked until bounded replay produces control-clean evidence"
+        current_stage = "A7FF-CORE16ME"
+        status = "h2_floor_repaired_ready_for_core16l"
+        next_task = "A7FF-CORE16L strict pre-seed queue lock audit"
+    elif a7ffcore16m.get("decision") == "PASS_A7FFCORE16M_H2_FLOOR_RETAINED_READY_FOR_CORE16ME":
+        allowed["A7FF-CORE16ME broader H2/I4 strict-floor repair execution"] = (
+            "execute broader checkpointed H2/I4 repair only; no replay expansion, search, or promotion"
+        )
+        blocked["A7FF-CORE16L"] = "blocked until CORE16ME produces strict H2 floor and strict queue size"
+        blocked["A7FF-CORE17"] = "blocked until strict queue lock passes"
+        blocked["A7FF formula generation"] = "blocked: CORE16M authorizes H2/I4 repair only"
+        blocked["A7FF bounded replay"] = "blocked: strict pre-seed queue not complete"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16M"
+        status = "h2_floor_retained_ready_for_core16me"
+        next_task = "A7FF-CORE16ME broader H2/I4 strict-floor repair execution"
+    elif a7ffcore16kr.get("decision") == "PASS_A7FFCORE16KR_H2_REPAIR_FORENSIC_COMPLETE_READY_FOR_CORE16M":
+        allowed["A7FF-CORE16M H2 floor arbitration contract"] = (
+            "contract only; arbitrate H2 floor after CORE16KE fell one strict row short; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE16L"] = "blocked: CORE16KE strict queue still below H2 floor"
+        blocked["A7FF-CORE17"] = "blocked until strict queue lock passes"
+        blocked["A7FF formula generation"] = "blocked until CORE16M/CORE16ME resolves H2 floor"
+        blocked["A7FF bounded replay"] = "blocked: strict pre-seed queue incomplete"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16KR"
+        status = "h2_repair_forensic_ready_for_core16m"
+        next_task = "A7FF-CORE16M H2 floor arbitration contract"
+    elif a7ffcore16ke.get("decision") == "HOLD_A7FFCORE16KE_H2_STRICT_FLOOR_REPAIR_INSUFFICIENT":
+        allowed["A7FF-CORE16KR H2 repair forensic"] = (
+            "forensic only; freeze CORE16KE one-row shortfall and define next governance step"
+        )
+        blocked["A7FF-CORE16L"] = "blocked: CORE16KE strict queue still below size/H2 floor"
+        blocked["A7FF-CORE17"] = "blocked until strict queue lock passes"
+        blocked["A7FF formula generation"] = "blocked until CORE16KR/CORE16M resolves H2 floor"
+        blocked["A7FF bounded replay"] = "blocked: strict pre-seed queue incomplete"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16KE"
+        status = "h2_strict_floor_repair_insufficient"
+        next_task = "A7FF-CORE16KR H2 repair forensic"
+    elif a7ffcore16k.get("decision") == "PASS_A7FFCORE16K_H2_STRICT_FLOOR_REPAIR_CONTRACT_READY_FOR_CORE16KE":
+        allowed["A7FF-CORE16KE H2/I4 strict-floor repair execution"] = (
+            "execute H2/I4 strict-floor repair only; no open grammar, replay expansion, search, or promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked until CORE16KE produces strict H2 floor and strict queue size"
+        blocked["A7FF formula generation"] = "blocked: CORE16K authorizes H2/I4 repair only"
+        blocked["A7FF bounded replay"] = "blocked: strict pre-seed queue not complete"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16K"
+        status = "h2_strict_floor_repair_contract_ready_for_core16ke"
+        next_task = "A7FF-CORE16KE H2/I4 strict-floor repair execution"
+    elif a7ffcore16j.get("decision") == "HOLD_A7FFCORE16J_STRICT_QUEUE_H2_FLOOR_INSUFFICIENT":
+        allowed["A7FF-CORE16K H2/I4 strict-floor repair contract"] = (
+            "contract only; repair missing H2/I4 strict rows; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: strict queue size/H2 floor insufficient"
+        blocked["A7FF formula generation"] = "blocked until CORE16K/CORE16KE repairs strict floor"
+        blocked["A7FF bounded replay"] = "blocked: strict pre-seed queue incomplete"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16J"
+        status = "strict_queue_h2_floor_insufficient"
+        next_task = "A7FF-CORE16K H2/I4 strict-floor repair contract"
+    elif a7ffcore16i.get("decision") == "PASS_A7FFCORE16I_BALANCED_PRESEED_QUEUE_READY_FOR_NEARMISS_RESOLUTION":
+        allowed["A7FF-CORE16J near-miss upgrade/exclusion audit"] = (
+            "audit near-miss rows in balanced pre-seed queue; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: near-miss rows unresolved"
+        blocked["A7FF formula generation"] = "blocked until near-miss rows are excluded or repaired"
+        blocked["A7FF bounded replay"] = "blocked: pre-seed queue includes forensic near-miss rows"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16I"
+        status = "balanced_preseed_queue_ready_for_nearmiss_resolution"
+        next_task = "A7FF-CORE16J near-miss upgrade/exclusion audit"
+    elif a7ffcore16her.get("decision") == "PASS_A7FFCORE16HER_SECOND_PASS_FORENSIC_READY_FOR_CORE16I":
+        allowed["A7FF-CORE16I balanced interaction pre-seed queue audit"] = (
+            "construct/audit capped pre-seed queue with near-miss rows role-flagged; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16HE requires balanced pre-seed queue audit"
+        blocked["A7FF formula generation"] = "blocked until strict pre-seed queue passes"
+        blocked["A7FF bounded replay"] = "blocked: no strict pre-seed queue yet"
+        blocked["A7FF large search"] = "blocked until strict pre-seed queue passes"
+        current_stage = "A7FF-CORE16HER"
+        status = "second_pass_forensic_ready_for_core16i"
+        next_task = "A7FF-CORE16I balanced interaction pre-seed queue audit"
+    elif a7ffcore16he.get("decision") == "HOLD_A7FFCORE16HE_SECOND_PASS_BREADTH_INSUFFICIENT":
+        allowed["A7FF-CORE16HER second-pass interaction forensic"] = (
+            "diagnose CORE16HE breadth failure and define balanced queue repair; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16HE breadth gates failed"
+        blocked["A7FF formula generation"] = "blocked until CORE16HER/next queue repair"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until second-pass breadth gates pass"
+        current_stage = "A7FF-CORE16HE"
+        status = "second_pass_breadth_hold"
+        next_task = "A7FF-CORE16HER second-pass interaction forensic"
+    elif a7ffcore16h.get("decision") == "PASS_A7FFCORE16H_SECOND_PASS_INTERACTION_CONTRACT_READY_FOR_CORE16HE":
+        allowed["A7FF-CORE16HE second-pass interaction breadth execution"] = (
+            "execute second-pass typed interaction breadth repair only; no open grammar, replay expansion, search, or promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked until CORE16HE breadth execution passes"
+        blocked["A7FF formula generation"] = "blocked: CORE16H authorizes second-pass typed interaction execution only"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until second-pass interaction gates pass"
+        current_stage = "A7FF-CORE16H"
+        status = "second_pass_interaction_contract_ready_for_core16he"
+        next_task = "A7FF-CORE16HE second-pass interaction breadth execution"
+    elif a7ffcore16ger.get("decision") == "PASS_A7FFCORE16GER_INTERACTION_FORENSIC_COMPLETE_READY_FOR_CORE16H":
+        allowed["A7FF-CORE16H second-pass interaction breadth repair contract"] = (
+            "contract only; repair I3/I5 concentration and expand I4 near-miss lane; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16GE interaction breadth failed"
+        blocked["A7FF formula generation"] = "blocked until CORE16H/next contract defines repair"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until interaction breadth gates pass"
+        current_stage = "A7FF-CORE16GER"
+        status = "interaction_forensic_ready_for_core16h"
+        next_task = "A7FF-CORE16H second-pass interaction breadth repair contract"
+    elif a7ffcore16ge.get("decision") == "HOLD_A7FFCORE16GE_INTERACTION_PROBE_SUPPLY_INSUFFICIENT":
+        allowed["A7FF-CORE16GER interaction probe forensic"] = (
+            "diagnose typed interaction probe failure and decide second-pass repair; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16GE interaction breadth failed"
+        blocked["A7FF formula generation"] = "blocked until CORE16GER/CORE16H repair"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until interaction breadth gates pass"
+        current_stage = "A7FF-CORE16GE"
+        status = "interaction_probe_supply_hold"
+        next_task = "A7FF-CORE16GER interaction probe forensic"
+    elif a7ffcore16g.get("decision") == "PASS_A7FFCORE16G_FAMILY_NATIVE_INTERACTION_CONTRACT_READY_FOR_CORE16GE":
+        allowed["A7FF-CORE16GE family-native interaction probe execution"] = (
+            "execute typed interaction probe only; no open grammar, replay expansion, search, or promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked until CORE16GE typed interaction probe passes"
+        blocked["A7FF formula generation"] = "blocked: CORE16G authorizes typed interaction probe only"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until interaction probe passes"
+        current_stage = "A7FF-CORE16G"
+        status = "family_native_interaction_contract_ready_for_core16ge"
+        next_task = "A7FF-CORE16GE family-native interaction probe execution"
+    elif a7ffcore16fer.get("decision") == "PASS_A7FFCORE16FER_NON_BASIS_FORENSIC_COMPLETE_READY_FOR_CORE16G":
+        allowed["A7FF-CORE16G family-native interaction repair contract"] = (
+            "contract only; convert non-basis near-miss evidence into typed interaction probes; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16FE non-basis single-field supply is insufficient"
+        blocked["A7FF formula generation"] = "blocked until CORE16G/next interaction supply passes gates"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until interaction supply gates pass"
+        current_stage = "A7FF-CORE16FER"
+        status = "non_basis_forensic_ready_for_core16g"
+        next_task = "A7FF-CORE16G family-native interaction repair contract"
+    elif a7ffcore16fe.get("decision") == "HOLD_A7FFCORE16FE_NON_BASIS_ATLAS_SUPPLY_INSUFFICIENT":
+        allowed["A7FF-CORE16FER non-basis atlas forensic / family-native repair"] = (
+            "diagnose non-basis single-field supply failure and define interaction repair; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16FE non-basis supply failed"
+        blocked["A7FF formula generation"] = "blocked until CORE16FER defines repair"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas"
+        blocked["A7FF large search"] = "blocked until non-basis supply gates pass"
+        current_stage = "A7FF-CORE16FE"
+        status = "non_basis_atlas_supply_hold"
+        next_task = "A7FF-CORE16FER non-basis atlas forensic / family-native repair"
+    elif a7ffcore16f.get("decision") == "PASS_A7FFCORE16F_NON_BASIS_SUPPLY_REPAIR_CONTRACT_READY_FOR_CORE16FE":
+        allowed["A7FF-CORE16FE non-basis expanded primitive/operator atlas execution"] = (
+            "execute non-basis family-targeted primitive/operator atlas only; no formula generation/replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked until CORE16FE non-basis supply passes"
+        blocked["A7FF formula generation"] = "blocked until non-basis primitive/operator supply has breadth"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas to replay"
+        blocked["A7FF large search"] = "blocked until non-basis supply gates pass"
+        current_stage = "A7FF-CORE16F"
+        status = "non_basis_supply_repair_contract_ready_for_core16fe"
+        next_task = "A7FF-CORE16FE non-basis expanded primitive/operator atlas execution"
+    elif a7ffcore16er.get("decision") == "PASS_A7FFCORE16ER_EXPANDED_ATLAS_FORENSIC_COMPLETE_READY_FOR_CORE16F":
+        allowed["A7FF-CORE16F non-basis field-family supply repair contract"] = (
+            "contract only; cap saturated basis/premium supply and repair non-basis field-family supply; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16E expanded atlas is basis/premium concentrated"
+        blocked["A7FF formula generation"] = "blocked until CORE16F/next supply repair establishes non-basis breadth"
+        blocked["A7FF bounded replay"] = "blocked: no broad objective atlas to replay"
+        blocked["A7FF large search"] = "blocked until non-basis supply gates pass"
+        current_stage = "A7FF-CORE16ER"
+        status = "expanded_atlas_forensic_ready_for_core16f"
+        next_task = "A7FF-CORE16F non-basis field-family supply repair contract"
+    elif a7ffcore16e.get("decision") == "HOLD_A7FFCORE16E_EXPANDED_PRIMITIVE_ATLAS_INSUFFICIENT":
+        allowed["A7FF-CORE16ER expanded atlas failure forensic"] = (
+            "diagnose CORE16E atlas concentration and define non-basis supply repair; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16E atlas breadth failed"
+        blocked["A7FF formula generation"] = "blocked until CORE16ER/CORE16F defines and repairs non-basis supply"
+        blocked["A7FF large search"] = "blocked until expanded primitive atlas passes"
+        current_stage = "A7FF-CORE16E"
+        status = "expanded_primitive_atlas_hold"
+        next_task = "A7FF-CORE16ER expanded atlas failure forensic"
+    elif a7ffcore16r.get("decision") == "PASS_A7FFCORE16R_PRIMITIVE_ATLAS_SUPPLY_REPAIR_READY_FOR_CORE16E":
+        allowed["A7FF-CORE16E expanded primitive/operator-probe atlas execution"] = (
+            "execute expanded primitive/operator response atlas only; no formula generation/replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16 atlas supply failed; CORE16E repair execution required"
+        blocked["A7FF formula generation"] = "blocked until expanded primitive atlas passes supply gates"
+        blocked["A7FF large search"] = "blocked until CORE16E passes"
+        current_stage = "A7FF-CORE16R"
+        status = "primitive_atlas_supply_repair_ready_for_core16e"
+        next_task = "A7FF-CORE16E expanded primitive/operator-probe atlas execution"
+    elif a7ffcore16.get("decision") == "HOLD_A7FFCORE16_PRIMITIVE_ATLAS_INSUFFICIENT":
+        allowed["A7FF-CORE16R primitive atlas supply repair"] = (
+            "contract only; repair primitive atlas supply after CORE16 insufficiency; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE17"] = "blocked: CORE16 atlas insufficient"
+        blocked["A7FF large search"] = "blocked until primitive atlas supply passes"
+        current_stage = "A7FF-CORE16"
+        status = "primitive_atlas_insufficient"
+        next_task = "A7FF-CORE16R primitive atlas supply repair"
+    elif a7ffcore15yr.get("decision") == "PASS_A7FFCORE15YR_SURFACE_FAILURE_REPAIR_READY_FOR_CORE16_ATLAS":
+        allowed["A7FF-CORE16 primitive-response replay-stability atlas rebuild"] = (
+            "build new objective atlas from primitive response and replay-stability evidence; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE15Z"] = "blocked: CORE15Y surface candidate breadth failed"
+        blocked["A7FF bounded replay rerun"] = "blocked: CORE15YR requires atlas rebuild before any replay"
+        blocked["A7FF large search"] = "blocked until CORE16 atlas passes breadth/control gates"
+        current_stage = "A7FF-CORE15YR"
+        status = "surface_failure_repair_ready_for_core16_atlas"
+        next_task = "A7FF-CORE16 primitive-response replay-stability atlas rebuild"
+    elif a7ffcore15y.get("decision") == "HOLD_A7FFCORE15Y_REPLAY_STABILITY_SURFACE_INSUFFICIENT":
+        allowed["A7FF-CORE15YR objective-surface failure repair"] = (
+            "contract only; diagnose insufficient objective-surface breadth and define atlas rebuild; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE15Z"] = "blocked: CORE15Y surface candidates insufficient"
+        blocked["A7FF large search"] = "blocked: CORE15Y did not establish replay-stable surface"
+        current_stage = "A7FF-CORE15Y"
+        status = "replay_stability_surface_hold"
+        next_task = "A7FF-CORE15YR objective-surface failure repair"
+    elif a7ffcore15x.get("decision") == "PASS_A7FFCORE15X_OBJECTIVE_SURFACE_RESET_CONTRACT_READY_FOR_CORE15Y":
+        allowed["A7FF-CORE15Y replay-stability objective-surface builder"] = (
+            "build replay-stability feature matrix from existing numeric/replay/forensic rows; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE15"] = "blocked: CORE15X requires objective-surface builder before any search-readiness audit"
+        blocked["A7FF bounded replay rerun"] = "blocked: CORE15X forbids rerun before objective-surface repair"
+        blocked["A7FF large search"] = "blocked: replay-stable objective surface is not yet established"
+        current_stage = "A7FF-CORE15X"
+        status = "objective_surface_reset_contract_ready_for_core15y"
+        next_task = "A7FF-CORE15Y replay-stability objective-surface builder"
+    elif a7ffcore14ser.get("decision") == "PASS_A7FFCORE14SER_REPAIRED_REPLAY_FORENSIC_COMPLETE_STOP_REPLAY_EXPANSION":
+        allowed["A7FF-CORE15X objective-surface reset / replay-stability repair contract"] = (
+            "contract only; reset objective surface after repaired replay failure; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE15"] = "blocked: CORE14SER stops replay expansion; clean pool is one candidate in one family"
+        blocked["A7FF-CORE14SEE rerun"] = "blocked until CORE15X defines a new objective-surface or stability policy"
+        blocked["A7FF large search"] = "blocked: repaired packet failed replay-stability gates"
+        current_stage = "A7FF-CORE14SER"
+        status = "repaired_replay_forensic_stop_replay_expansion"
+        next_task = "A7FF-CORE15X objective-surface reset / replay-stability repair contract"
+    elif a7ffcore14see.get("decision") == "HOLD_A7FFCORE14SEE_REPAIRED_BOUNDED_REPLAY_INSUFFICIENT_OR_INCOMPLETE":
+        allowed["A7FF-CORE14SER repaired replay forensic"] = (
+            "diagnose repaired packet replay failure after all shards complete; no rerun/search/promotion"
+        )
+        blocked["A7FF-CORE15"] = "blocked: CORE14SEE repaired replay is insufficient"
+        blocked["A7FF large search"] = "blocked: CORE14SEE did not produce enough clean breadth"
+        current_stage = "A7FF-CORE14SEE"
+        status = "repaired_bounded_replay_hold"
+        next_task = "A7FF-CORE14SER repaired replay forensic"
+    elif a7ffcore14se.get("decision") == "PASS_A7FFCORE14SE_REPAIRED_PACKET_READY_FOR_BOUNDED_REPLAY":
+        allowed["A7FF-CORE14SEE repaired packet bounded replay execution"] = (
+            "execute bounded replay over repaired CORE14SE packet only; no formula search, large search, promotion, or alpha proof"
+        )
+        blocked["A7FF-CORE15"] = "blocked until CORE14SEE produces enough clean breadth"
+        blocked["A7FF large search"] = "blocked: CORE14SE authorizes bounded replay only"
+        blocked["same CORE14 packet rerun"] = "blocked: CORE14SE built a repaired packet; unchanged packet remains superseded"
+        current_stage = "A7FF-CORE14SE"
+        status = "repaired_packet_ready_for_core14see"
+        next_task = "A7FF-CORE14SEE repaired packet bounded replay execution"
+    elif a7ffcore14s.get("decision") == "PASS_A7FFCORE14S_REPLAY_PACKET_REPAIR_CONTRACT_READY_FOR_CORE14SE":
+        allowed["A7FF-CORE14SE repaired packet construction / bounded replay execution"] = (
+            "construct repaired packet under CORE14S rules and run bounded replay only; no formula search, large search, promotion, or alpha proof"
+        )
+        blocked["A7FF-CORE15"] = "blocked until CORE14SE produces enough clean breadth"
+        blocked["A7FF large search"] = "blocked: CORE14S authorizes repaired bounded replay only"
+        blocked["same CORE14 packet rerun"] = "blocked: CORE14S requires repaired packet, not unchanged rerun"
+        current_stage = "A7FF-CORE14S"
+        status = "replay_packet_repair_contract_ready_for_core14se"
+        next_task = "A7FF-CORE14SE repaired packet construction / bounded replay execution"
+    elif a7ffcore14r.get("decision") == "PASS_A7FFCORE14R_FAILURE_ATTRIBUTION_COMPLETE_READY_FOR_CORE14S":
+        allowed["A7FF-CORE14S replay-packet/objective repair contract"] = (
+            "contract only; repair replay packet/objective based on CORE14R control/cost/split attribution; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE15"] = "blocked: CORE14E replay-clean pool insufficient and CORE14R requires repair contract first"
+        blocked["A7FF-CORE14E rerun"] = "blocked until CORE14S defines a concrete repair policy"
+        blocked["A7FF large search"] = "blocked: CORE14R shows current replay packet is not search-ready"
+        current_stage = "A7FF-CORE14R"
+        status = "replay_failure_forensic_ready_for_core14s"
+        next_task = "A7FF-CORE14S replay-packet/objective repair contract"
+    elif a7ffcore14e.get("decision") == "HOLD_A7FFCORE14E_BOUNDED_REPLAY_INSUFFICIENT":
+        allowed["A7FF-CORE14R replay failure forensic"] = (
+            "diagnose CORE14E replay collapse by split/control/family; no rerun/search/promotion"
+        )
+        blocked["A7FF-CORE15"] = "blocked: CORE14E replay-clean pool insufficient"
+        blocked["A7FF-CORE14E rerun"] = "blocked until CORE14R identifies a concrete replay policy or pool repair"
+        blocked["A7FF large search"] = "blocked: CORE14E hold; replay-clean candidates are too narrow"
+        current_stage = "A7FF-CORE14E"
+        status = "bounded_replay_hold_insufficient_clean_pool"
+        next_task = "A7FF-CORE14R replay failure forensic"
+    elif a7ffcore14e.get("decision") == "PASS_A7FFCORE14E_BOUNDED_REPLAY_CLEAN_CANDIDATES_READY_FOR_CORE15":
+        allowed["A7FF-CORE15 replay-clean consolidation / search-readiness audit"] = (
+            "contract/audit only; consolidate CORE14E clean pool and decide whether any small-search gate is met"
+        )
+        blocked["A7FF-CORE14E rerun"] = "bounded replay passed; rerun only if packet or replay policy changes"
+        blocked["A7FF large search"] = "blocked until CORE15 explicitly passes large-search readiness gates"
+        current_stage = "A7FF-CORE14E"
+        status = "bounded_replay_clean_candidates_ready_for_core15"
+        next_task = "A7FF-CORE15 replay-clean consolidation / search-readiness audit"
+    elif a7ffcore14.get("decision") == "PASS_A7FFCORE14_REPLAY_PREFLIGHT_CONTRACT_READY_FOR_CORE14E":
+        allowed["A7FF-CORE14E bounded replay execution"] = (
+            "execute bounded replay over CORE14 128-candidate packet only; no formula search, large search, promotion, or alpha proof"
+        )
+        blocked["A7FF-CORE14 rerun"] = "replay-preflight contract passed; rerun only if CORE13E numeric clues or replay packet policy changes"
+        blocked["A7FF-CORE13E direct replay"] = "superseded by CORE14 replay-preflight packet"
+        blocked["A7FF large search"] = "blocked: CORE14 authorizes bounded replay only, not search"
+        current_stage = "A7FF-CORE14"
+        status = "replay_preflight_contract_ready_for_core14e"
+        next_task = "A7FF-CORE14E bounded replay execution"
+    elif a7ffcore13e.get("decision") == "PASS_A7FFCORE13E_NUMERIC_RESPONSE_READY_FOR_CORE14":
+        allowed["A7FF-CORE14 replay-preflight contract"] = (
+            "contract only; define bounded replay packet from CORE13E numeric clues; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE13E rerun"] = "numeric response passed; rerun only if temp subgraph queue or response policy changes"
+        blocked["A7FF-CORE13 direct replay"] = "blocked: CORE13E authorizes replay-preflight contract only"
+        blocked["A7FF large search"] = "blocked: CORE13E is numeric response, not search authorization"
+        current_stage = "A7FF-CORE13E"
+        status = "numeric_response_ready_for_core14"
+        next_task = "A7FF-CORE14 replay-preflight contract"
+    elif a7ffcore13.get("decision") == "PASS_A7FFCORE13_NUMERIC_RESPONSE_CONTRACT_READY_FOR_CORE13E":
+        allowed["A7FF-CORE13E numeric response execution"] = (
+            "execute bounded primary-label numeric response over 416 CORE12E candidates; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE13 direct replay"] = "blocked until CORE13E numeric response passes"
+        blocked["A7FF-CORE12E rerun"] = "materialization preflight consumed by CORE13 contract"
+        blocked["A7FF large search"] = "blocked: CORE13 authorizes numeric response only"
+        current_stage = "A7FF-CORE13"
+        status = "numeric_response_contract_ready_for_core13e"
+        next_task = "A7FF-CORE13E numeric response execution"
+    elif a7ffcore12e.get("decision") == "PASS_A7FFCORE12E_MATERIALIZATION_PREFLIGHT_READY_FOR_CORE13":
+        allowed["A7FF-CORE13 numeric response contract"] = (
+            "contract only; define primary-label numeric response over CORE12E materialized temp subgraphs; no numeric execution/search/promotion"
+        )
+        blocked["A7FF-CORE12E rerun"] = "materialization preflight passed; rerun only if blueprint registry or evaluator changes"
+        blocked["A7FF-CORE12 direct numeric"] = "blocked: CORE12E authorizes CORE13 contract only"
+        blocked["A7FF large search"] = "blocked: CORE12E only authorizes numeric response contract"
+        current_stage = "A7FF-CORE12E"
+        status = "materialization_preflight_ready_for_core13"
+        next_task = "A7FF-CORE13 numeric response contract"
+    elif a7ffcore12.get("decision") == "PASS_A7FFCORE12_TEMP_SUBGRAPH_REGISTRY_READY_FOR_CORE12E":
+        allowed["A7FF-CORE12E temp-subgraph materialization preflight"] = (
+            "materialization/activity preflight for CORE12 temporary subgraphs; no numeric/replay/search/promotion"
+        )
+        blocked["A7FF-CORE12 direct numeric"] = "blocked until CORE12E materialization preflight passes"
+        blocked["A7FF-CORE11E materialization"] = "superseded by CORE12 temp-subgraph registry"
+        blocked["A7FF large search"] = "blocked: CORE12 only authorizes materialization preflight"
+        current_stage = "A7FF-CORE12"
+        status = "temp_subgraph_registry_ready_for_core12e"
+        next_task = "A7FF-CORE12E temp-subgraph materialization preflight"
+    elif a7ffcore11e.get("decision") == "PASS_A7FFCORE11E_BLUEPRINTS_READY_FOR_CORE12_REGISTRATION":
+        allowed["A7FF-CORE12 blueprint subgraph registration / gate audit"] = (
+            "register/audit CORE11E blueprints under typed subgraph governance; no materialization/numeric/replay/search promotion"
+        )
+        blocked["A7FF-CORE11E materialization"] = "blocked: CORE11E outputs blueprints requiring CORE12 registration first"
+        blocked["A7FF large search"] = "blocked: CORE11E is small blueprint generation only"
+        blocked["A7FF-CORE11 rerun"] = "blueprint generation passed; rerun only if seed pool or grammar changes"
+        current_stage = "A7FF-CORE11E"
+        status = "blueprints_ready_for_core12_registration"
+        next_task = "A7FF-CORE12 blueprint subgraph registration / gate audit"
+    elif a7ffcore11.get("decision") == "PASS_A7FFCORE11_SMALL_EXPANSION_CONTRACT_READY_FOR_CORE11E":
+        allowed["A7FF-CORE11E small gate-native dry generation"] = (
+            "generate 4000 small-expansion formulas from replay-clean seeds under typed AST/subgraph gate; no materialization/numeric/replay/search promotion"
+        )
+        blocked["A7FF large search"] = "blocked: CORE11 only authorizes small dry generation, not large search"
+        blocked["A7FF-CORE11 materialization execution"] = "blocked until CORE11E dry generation produces a valid queue"
+        blocked["A7FF-CORE10E rerun"] = "search-readiness audit consumed by CORE11 contract"
+        current_stage = "A7FF-CORE11"
+        status = "small_expansion_contract_ready_for_core11e"
+        next_task = "A7FF-CORE11E small gate-native dry generation"
+    elif a7ffcore10e.get("decision") == "PASS_A7FFCORE10E_READY_FOR_CORE11_SMALL_SEARCH_CONTRACT":
+        allowed["A7FF-CORE11 small gate-native formula expansion contract"] = (
+            "contract only; define small expansion from 23 replay-clean seeds; no execution until contract is written"
+        )
+        blocked["A7FF large search"] = "blocked: CORE10E large-search gates failed; seed_count < 64 and breadth < large-search minimum"
+        blocked["A7FF-CORE10E rerun"] = "search readiness audit passed for small contract; rerun only if clean pool changes"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE10E gate-native search-readiness path"
+        current_stage = "A7FF-CORE10E"
+        status = "ready_for_core11_small_search_contract_not_large_search"
+        next_task = "A7FF-CORE11 small gate-native formula expansion contract"
+    elif a7ffcore9e.get("decision") == "PASS_A7FFCORE9E_BOUNDED_REPLAY_CLEAN_CANDIDATES_READY_FOR_CORE10":
+        allowed["A7FF-CORE10 replay-clean consolidation / search-readiness contract"] = (
+            "contract only; consolidate CORE9E replay-clean candidates and define search-readiness gates; no formula search or promotion"
+        )
+        blocked["A7FF-CORE9E rerun"] = "bounded replay passed; rerun only if packet, replay policy, or data changes"
+        blocked["A7FF-CORE9 large replay"] = "blocked: CORE9E is bounded replay only and authorizes CORE10 contract"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE9E gate-native replay path"
+        current_stage = "A7FF-CORE9E"
+        status = "bounded_replay_clean_candidates_ready_for_core10"
+        next_task = "A7FF-CORE10 replay-clean consolidation / search-readiness contract"
+    elif a7ffcore9.get("decision") == "PASS_A7FFCORE9_BOUNDED_REPLAY_CONTRACT_READY_FOR_CORE9E":
+        allowed["A7FF-CORE9E bounded replay execution"] = (
+            "bounded replay execution over CORE9 contract packet only; no formula search, large search, promotion, or alpha proof"
+        )
+        blocked["A7FF-CORE9 large replay"] = "blocked: CORE9 authorizes bounded execution only"
+        blocked["A7FF-CORE8 direct replay execution"] = "superseded by CORE9 contract"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE9 gate-native replay path"
+        current_stage = "A7FF-CORE9"
+        status = "bounded_replay_contract_ready_for_core9e"
+        next_task = "A7FF-CORE9E bounded replay execution"
+    elif a7ffcore8e.get("decision") == "PASS_A7FFCORE8E_REPLAY_PREFLIGHT_PACKET_READY_FOR_CORE9_CONTRACT":
+        allowed["A7FF-CORE9 bounded replay contract"] = (
+            "contract only; define bounded replay protocol for CORE8E packet; no replay execution/search/promotion"
+        )
+        blocked["A7FF-CORE8 direct replay execution"] = "blocked: CORE8E authorizes CORE9 contract only"
+        blocked["A7FF-CORE8E rerun"] = "packet audit passed; rerun only if CORE8 packet or audit policy changes"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7/CORE8 gate-native path"
+        current_stage = "A7FF-CORE8E"
+        status = "replay_preflight_packet_ready_for_core9_contract"
+        next_task = "A7FF-CORE9 bounded replay contract"
+    elif a7ffcore8.get("decision") == "PASS_A7FFCORE8_NUMERIC_CLUE_CONSOLIDATION_READY_FOR_CORE8E":
+        allowed["A7FF-CORE8E replay-preflight packet audit"] = (
+            "audit CORE8 candidate packet for expression materialization, label/control coverage, diversity, and replay readiness; no portfolio replay/search/promotion"
+        )
+        blocked["A7FF-CORE8 direct replay execution"] = "blocked: CORE8 authorizes replay-preflight packet audit only"
+        blocked["A7FF-CORE7E rerun"] = "superseded by CORE7ER and CORE8"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7/CORE8 gate-native path"
+        current_stage = "A7FF-CORE8"
+        status = "numeric_clue_consolidation_ready_for_core8e"
+        next_task = "A7FF-CORE8E replay-preflight packet audit"
+    elif a7ffcore7er.get("decision") == "PASS_A7FFCORE7ER_REPAIRED_NUMERIC_RESPONSE_READY_FOR_CORE8":
+        allowed["A7FF-CORE8 numeric clue consolidation / replay-preflight contract"] = (
+            "contract only; consolidate CORE7ER repaired numeric clues and define replay-preflight gate; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE7E rerun"] = "superseded by CORE7ER repaired numeric response"
+        blocked["A7FF-CORE7R continuation"] = "control-policy forensic completed; CORE7ER is canonical repaired numeric response"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7 gate-native path"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "legacy atlas repair superseded; use CORE7ER repaired gate-native response"
+        )
+        current_stage = "A7FF-CORE7ER"
+        status = "repaired_numeric_response_ready_for_core8"
+        next_task = "A7FF-CORE8 numeric clue consolidation / replay-preflight contract"
+    elif a7ffcore7r.get("decision") == "PASS_A7FFCORE7R_CONTROL_POLICY_REPAIR_REQUIRED_READY_FOR_CORE7ER":
+        allowed["A7FF-CORE7ER repaired numeric-response reclassification"] = (
+            "reclassify CORE7E response rows with sign_flip diagnostic-only policy; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE8 numeric clue consolidation"] = "blocked until CORE7ER writes canonical repaired numeric response"
+        blocked["A7FF-CORE7E rerun"] = "blocked: CORE7R identified policy repair path; use CORE7ER reclassification first"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7 gate-native path"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "legacy atlas repair superseded; use CORE7R/CORE7ER on gate-native queue instead"
+        )
+        current_stage = "A7FF-CORE7R"
+        status = "control_policy_repair_ready_for_core7er"
+        next_task = "A7FF-CORE7ER repaired numeric-response reclassification"
+    elif a7ffcore7e.get("decision") == "PASS_A7FFCORE7E_NUMERIC_RESPONSE_READY_FOR_CORE8":
+        allowed["A7FF-CORE8 numeric clue consolidation / replay-preflight contract"] = (
+            "contract only; consolidate CORE7E numeric clues and define replay-preflight gate; no replay/search/promotion"
+        )
+        blocked["A7FF-CORE7E rerun"] = "numeric response execution complete; rerun only if queue, labels, controls, or runner changes"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7E gate-native numeric path"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = "superseded by CORE7E gate-native numeric path"
+        current_stage = "A7FF-CORE7E"
+        status = "numeric_response_ready_for_core8"
+        next_task = "A7FF-CORE8 numeric clue consolidation / replay-preflight contract"
+    elif a7ffcore7e.get("decision") == "HOLD_A7FFCORE7E_NUMERIC_RESPONSE_WEAK":
+        allowed["A7FF-CORE7R response repair / label-control forensic"] = (
+            "forensic/repair only; inspect no-primary-non-L7 clue result and control dominance before changing generation or selector"
+        )
+        blocked["A7FF-CORE8 numeric clue consolidation"] = "blocked: CORE7E produced no primary non-L7 numeric clues"
+        blocked["A7FF-CORE7E rerun"] = "blocked unless queue, labels, controls, or runner changes"
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7E gate-native numeric path"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "legacy atlas repair superseded; use CORE7R on gate-native queue instead"
+        )
+        current_stage = "A7FF-CORE7E"
+        status = "numeric_response_hold_weak"
+        next_task = "A7FF-CORE7R response repair / label-control forensic"
+    elif a7ffcore7.get("decision") == "PASS_A7FFCORE7_NUMERIC_RESPONSE_CONTRACT_READY_FOR_CORE7E":
+        allowed["A7FF-CORE7E gate-native numeric-response execution"] = (
+            "bounded numeric-response execution only over CORE6E materialized queue; no replay/search/promotion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7E gate-native numeric path"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "superseded by CORE7E path; legacy atlas numeric response remains blocked"
+        )
+        current_stage = "A7FF-CORE7"
+        status = "numeric_response_contract_ready_for_core7e"
+        next_task = "A7FF-CORE7E gate-native numeric-response execution"
+    elif a7ffcore6e.get("decision") == "PASS_A7FFCORE6E_MATERIALIZATION_PREFLIGHT_READY_FOR_CORE7":
+        allowed["A7FF-CORE7 gate-native numeric-response contract"] = (
+            "contract only; define label/control response run over materialized CORE6E queue; no execution/replay/search/promotion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "superseded by CORE7 path; legacy numeric execution remains blocked"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "superseded by CORE7 path; gate-native materialization passed, next is numeric-response contract"
+        )
+        current_stage = "A7FF-CORE6E"
+        status = "materialization_preflight_ready_for_core7"
+        next_task = "A7FF-CORE7 gate-native numeric-response contract"
+    elif a7ffcore6.get("decision") == "PASS_A7FFCORE6_MATERIALIZATION_PREFLIGHT_CONTRACT_READY_FOR_CORE6E":
+        allowed["A7FF-CORE6E gate-native materialization preflight execution"] = (
+            "materialization/activity preflight only over CORE5 queue shards; no labels, returns, replay, search, or promotion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked until CORE6E materialization preflight passes and CORE7 numeric-response contract is written"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "superseded by CORE6E path; materialize gate-native queue before any numeric response or atlas repair"
+        )
+        current_stage = "A7FF-CORE6"
+        status = "materialization_preflight_contract_ready_for_core6e"
+        next_task = "A7FF-CORE6E gate-native materialization preflight execution"
+    elif a7ffcore5.get("decision") == "PASS_A7FFCORE5_GATE_NATIVE_DRYRUN_READY_FOR_CORE6":
+        allowed["A7FF-CORE6 gate-native materialization preflight contract"] = (
+            "contract/preflight design only; define materialization checks for CORE5 gate-native queue; no numeric/replay/search/promotion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked until CORE6 materialization preflight and CORE7 numeric contract pass on gate-native queue"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "deprioritized; CORE5 now provides gate-native queue, next work is materialization preflight not legacy atlas repair"
+        )
+        current_stage = "A7FF-CORE5"
+        status = "gate_native_dryrun_ready_for_core6"
+        next_task = "A7FF-CORE6 gate-native materialization preflight contract"
+    elif a7ffcore4.get("decision") == "PASS_A7FFCORE4_GATE_IMPLEMENTATION_REGRESSION_READY_FOR_CORE5":
+        allowed["A7FF-CORE5 gate-native generation compatibility dryrun"] = (
+            "dryrun/compatibility only; build a new generator entrypoint that emits CORE4-gated subgraph references; no numeric/replay/search/promotion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked until CORE5 produces a gate-native generated queue and CORE6 materialization preflight passes"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "deprioritized until CORE5 gate-native generation queue exists; weak numeric response should not drive quarantined legacy generators"
+        )
+        current_stage = "A7FF-CORE4"
+        status = "gate_implementation_regression_ready_for_core5"
+        next_task = "A7FF-CORE5 gate-native generation compatibility dryrun"
+    elif a7ffcore3.get("decision") == "PASS_A7FFCORE3_FORMULAGEN_SUBGRAPH_GATE_READY_FOR_CORE4":
+        allowed["A7FF-CORE4 FormulaGen gate implementation regression"] = (
+            "implementation/regression only; wire active generation entrypoints to CORE3 subgraph gate or quarantine bypass scripts; no generation/numeric/replay/search"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked until CORE4 proves generation entrypoints cannot bypass typed subgraph gate"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "deprioritized until CORE4 closes legacy generation bypass risk; weak numeric response should not drive untyped atlas patches"
+        )
+        current_stage = "A7FF-CORE3"
+        status = "formulagen_subgraph_gate_ready_for_core4"
+        next_task = "A7FF-CORE4 FormulaGen gate implementation regression"
+    elif a7ffcore2.get("decision") == "PASS_A7FFCORE2_FEATURE_SUBGRAPH_REGISTRY_READY_FOR_CORE3":
+        allowed["A7FF-CORE3 FormulaGen subgraph gate"] = (
+            "governance/gate only; require FormulaGen to consume approved typed subgraphs and reject bypassed raw expressions; no generation/numeric/replay/search"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked until FormulaGen subgraph gate is wired and audited"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "deprioritized until FormulaGen consumes typed subgraph registry; weak numeric response should not drive untyped atlas patches"
+        )
+        current_stage = "A7FF-CORE2"
+        status = "feature_subgraph_registry_ready_for_core3"
+        next_task = "A7FF-CORE3 FormulaGen subgraph gate"
+    elif a7ffcore1.get("decision") == "PASS_A7FFCORE1_AST_SCHEMA_ADAPTER_READY_FOR_CORE2":
+        allowed["A7FF-CORE2 FeatureFactory subgraph registry"] = (
+            "registry only; promote parsed AST nodes into reusable feature subgraphs with lineage/PIT/role metadata; no generation/numeric/replay/search"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked until typed subgraph registry and FormulaGen gate are wired"
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "deprioritized until typed subgraph registry is available; weak numeric response should not drive untyped atlas patches"
+        )
+        current_stage = "A7FF-CORE1"
+        status = "ast_schema_adapter_ready_for_core2"
+        next_task = "A7FF-CORE2 FeatureFactory subgraph registry"
+    elif a7ffcore0.get("decision") == "PASS_A7FFCORE0_TYPED_AST_GOVERNANCE_READY_FOR_CORE1":
+        allowed["A7FF-CORE1 AST schema adapter"] = (
+            "governance/adapter only; round-trip expression string to typed AST JSON and back; no generation/numeric/replay/search"
+        )
+        blocked["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "deprioritized until typed AST governance is wired; current issue is generator/feature boundary, not only response forensic"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked: A7FF-CORE0 requires typed AST adapter before expanding repaired atlas"
+        current_stage = "A7FF-CORE0"
+        status = "typed_ast_governance_ready_for_core1"
+        next_task = "A7FF-CORE1 AST schema adapter"
+    elif a7ff55r5e.get("decision") == "HOLD_A7FF55R5E_SHARDED_NUMERIC_WEAK_RESPONSE":
+        allowed["A7FF-55R6 numeric response forensic / atlas repair"] = (
+            "forensic/repair only; inspect weak primary-label response and revise repaired atlas before further numeric expansion"
+        )
+        blocked["A7FF-55R5F expanded sharded numeric execution"] = "blocked: sampled repaired atlas numeric response is too weak"
+        blocked["A7FF-56 replay-preflight contract"] = "blocked: A7FF-55R5E selected queue too small and insufficiently diverse"
+        current_stage = "A7FF-55R5E"
+        status = "sharded_numeric_weak_response_hold"
+        next_task = "A7FF-55R6 numeric response forensic / atlas repair"
+    elif a7ff55r5.get("decision") == "PASS_A7FF55R5_REPAIRED_ATLAS_NUMERIC_CONTRACT_READY_FOR_EXECUTION":
+        allowed["A7FF-55R5E repaired atlas numeric execution"] = (
+            "bounded numeric execution over repaired 2400-row queue; primary labels only; no replay/search/promotion"
+        )
+        blocked["A7FF-56 replay-preflight contract"] = "blocked until A7FF-55R5E numeric response summary passes"
+        current_stage = "A7FF-55R5"
+        status = "repaired_atlas_numeric_contract_ready_for_execution"
+        next_task = "A7FF-55R5E repaired atlas numeric execution"
+    elif a7ff55r4.get("decision") == "PASS_A7FF55R4_REPAIRED_ATLAS_COVERAGE_READY_FOR_NUMERIC_CONTRACT":
+        allowed["A7FF-55R5 repaired atlas numeric contract"] = (
+            "contract drafting only; define bounded primary-label numeric run over repaired 2400-row queue; no numeric/replay/search execution"
+        )
+        blocked["A7FF-55R4 direct numeric execution"] = "blocked: coverage audit authorizes numeric contract only, not execution"
+        blocked["A7FF-56 replay-preflight contract"] = "blocked until repaired atlas numeric response selector queue passes"
+        current_stage = "A7FF-55R4"
+        status = "repaired_atlas_coverage_ready_for_numeric_contract"
+        next_task = "A7FF-55R5 repaired atlas numeric contract"
+    elif a7ff55r3.get("decision") == "PASS_A7FF55R3_REPAIRED_ATLAS_DRY_GENERATION_READY_FOR_COVERAGE_AUDIT":
+        allowed["A7FF-55R4 repaired atlas coverage audit"] = (
+            "coverage audit only; verify repaired 2400-row queue family/motif/base-field balance before numeric execution"
+        )
+        blocked["A7FF-55R3 direct numeric execution"] = "blocked: dry generation only authorizes coverage audit, not numeric execution"
+        blocked["A7FF-56 replay-preflight contract"] = "blocked until repaired atlas numeric response selector queue passes"
+        current_stage = "A7FF-55R3"
+        status = "repaired_atlas_dry_generation_ready_for_coverage_audit"
+        next_task = "A7FF-55R4 repaired atlas coverage audit"
+    elif a7ff55r2.get("decision") == "PASS_A7FF55R2_ATLAS_FIELD_FAMILY_GENERATION_REPAIR_READY_NO_GENERATION_EXEC":
+        allowed["A7FF-55R3 repaired atlas dry generation"] = (
+            "dry generation only; use repaired open_interest/taker-flow/liquidity seed and pair previews; no numeric/replay/search/promotion"
+        )
+        blocked["A7FF-55R1 supplemental numeric execution"] = "blocked until repaired atlas dry generation and coverage audit pass"
+        blocked["A7FF-56 replay-preflight contract"] = "blocked until repaired atlas numeric response selector queue passes"
+        current_stage = "A7FF-55R2"
+        status = "atlas_field_family_generation_repair_ready_no_generation_exec"
+        next_task = "A7FF-55R3 repaired atlas dry generation"
+    elif a7ff55r1.get("decision") == "HOLD_A7FF55R1_SUPPLEMENTAL_QUEUE_ATLAS_COVERAGE_FAIL":
+        allowed["A7FF-55R2 atlas field-family generation repair"] = (
+            "contract/implementation repair only; add missing open_interest/taker-flow families and materializable liquidity queue before numeric execution"
+        )
+        blocked["A7FF-55R1 supplemental numeric execution"] = "blocked: current atlas lacks open_interest/taker-flow formulas and liquidity materialization coverage"
+        blocked["A7FF-56 replay-preflight contract"] = "blocked: A7FF-55R1 atlas coverage fail"
+        current_stage = "A7FF-55R1"
+        status = "supplemental_queue_atlas_coverage_fail"
+        next_task = "A7FF-55R2 atlas field-family generation repair"
+    elif a7ff55r.get("decision") == "PASS_A7FF55R_SELECTOR_FIELD_FAMILY_REPAIR_CONTRACT_READY_NO_EXECUTION_AUTH":
+        allowed["A7FF-55R1 family-diverse supplemental primary-label input generation"] = (
+            "requires explicit heavy execution; over-sample open_interest/positioning/liquidity/volatility/taker-flow primary-label inputs; no replay/search/promotion"
+        )
+        blocked["A7FF-56 replay-preflight contract"] = "blocked: A7FF-55F selected queue still family/motif/label concentrated"
+        blocked["A7FF-55F selected queue replay"] = "blocked: selector dryrun did not pass concentration caps"
+        current_stage = "A7FF-55R"
+        status = "selector_field_family_repair_contract_ready_no_execution"
+        next_task = "A7FF-55R1 family-diverse supplemental primary-label input generation if explicitly authorized"
+    elif a7ff55f.get("decision") == "HOLD_A7FF55F_FULL_PRIMARY_SELECTOR_INPUT_REPAIR_REQUIRED":
+        allowed["A7FF-55R selector / field-family repair contract"] = (
+            "contract drafting only; repair family/motif/top-label concentration before any replay preflight"
+        )
+        blocked["A7FF-56 replay-preflight contract"] = "blocked: A7FF-55F selected queue still family/motif/label concentrated"
+        current_stage = "A7FF-55F"
+        status = "full_primary_selector_input_hold_repair_required"
+        next_task = "A7FF-55R selector / field-family repair contract"
+    elif a7ff55f.get("decision") == "PASS_A7FF55F_FULL_PRIMARY_SELECTOR_INPUT_READY_NO_REPLAY_AUTH":
+        allowed["A7FF-56 replay-preflight contract"] = (
+            "contract drafting only; A7FF-55F selected queue passed primary-label and diversity caps; no replay/search/promotion"
+        )
+        blocked["A7FF-55F direct replay"] = "blocked: A7FF-55F authorizes contract only, not replay execution"
+        current_stage = "A7FF-55F"
+        status = "full_primary_selector_input_ready_no_replay"
+        next_task = "A7FF-56 replay-preflight contract"
+    elif a7ff55d.get("decision") == "HOLD_A7FF55D_PARTIAL_SELECTOR_DRYRUN_REQUIRES_FULL_INPUT_REBUILD":
+        allowed["A7FF-55F full primary-label input rebuild"] = (
+            "requires heavy execution; rebuild S02-S06 primary-label compact inputs with shard outputs; no replay/search/promotion"
+        )
+        blocked["A7FF-55D replay preflight"] = "blocked: partial dryrun still family/motif concentrated and is not full-scope"
+        current_stage = "A7FF-55D"
+        status = "partial_selector_dryrun_hold_full_input_rebuild_required"
+        next_task = "A7FF-55F full primary-label input rebuild"
+    elif a7ff55.get("decision") == "PASS_A7FF55_SELECTOR_REPAIR_CONTRACT_READY_NO_EXECUTION_AUTH":
+        allowed["A7FF-55D selector input rebuild / dryrun option"] = (
+            "requires explicit execution; rebuild primary-label response compact and dryrun selector repair; no replay/search/promotion"
+        )
+        blocked["A7FF-54 selected queue replay"] = "blocked by A7FF-55: no L0/L1/L3 selected rows and L5/L7 absorption"
+        current_stage = "A7FF-55"
+        status = "selector_repair_contract_ready_no_execution"
+        next_task = "A7FF-55D selector input rebuild / dryrun if explicitly authorized"
+    elif a7ff54.get("decision") == "HOLD_A7FF54_SELECTED_QUEUE_LABEL_REPAIR_REQUIRED_NO_REPLAY_AUTH":
+        allowed["A7FF-55 selector repair contract"] = (
+            "contract drafting only; require L0/L1/L3 representation and motif caps before any replay preflight"
+        )
+        blocked["A7FF-54 replay preflight"] = "blocked: selected queue has no L0/L1/L3 rows and non-L7 rows are L5-only"
+        current_stage = "A7FF-54"
+        status = "hold_selector_label_repair_required"
+        next_task = "A7FF-55 selector repair contract"
+    elif a7ff53e.get("decision") == "PASS_A7FF53E_NUMERIC_RESPONSE_SHARD_SUMMARY_READY_NO_SEARCH_AUTH":
+        allowed["A7FF-54 numeric clue consolidation contract"] = (
+            "contract drafting only; consolidate 186 non-L7 clues and 148 selected queue rows; no replay/search/promotion"
+        )
+        blocked["A7FF-53E rerun"] = "numeric response summary complete; rerun only if queue or runner changes"
+        current_stage = "A7FF-53E"
+        status = "numeric_response_summary_pass_no_search"
+        next_task = "A7FF-54 clue consolidation contract"
+    elif a7ff53e_s00.get("decision") == "PASS_A7FF53ES00_NUMERIC_PROBE_CLUES_FOUND_NO_SEARCH_AUTH":
+        allowed["A7FF-53E remaining shard execution option"] = (
+            "requires explicit heavy-task authorization; continue bounded numeric response shards or optimize runner; no replay/search/promotion"
+        )
+        blocked["A7FF-53E full one-shot execution"] = "current runner timed out on 1200-row one-shot; use shard execution or optimize before full run"
+        current_stage = "A7FF-53E-S00"
+        status = "first_numeric_shard_pass_no_search"
+        next_task = "A7FF-53E remaining shards or runner optimization"
+    elif a7ff53.get("decision") == "PASS_A7FF53_NUMERIC_RESPONSE_CONTRACT_READY_NO_EXECUTION_AUTH":
+        allowed["A7FF-53E numeric response execution option"] = (
+            "requires explicit authorization; bounded numeric response only; no replay/search/promotion"
+        )
+        blocked["A7FF-53 execution"] = "contract ready but numeric response execution is not started"
+        blocked["A7FF-52E rerun"] = "already executed; rerun only if A7FF-51E pool or evaluator changes"
+        current_stage = "A7FF-53"
+        status = "numeric_response_contract_ready_no_execution"
+        next_task = "A7FF-53E if explicitly authorized"
+    elif a7ff52e.get("decision") == "PASS_A7FF52E_MATERIALIZATION_PREFLIGHT_READY_FOR_NUMERIC_CONTRACT":
+        allowed["A7FF-53 numeric response contract"] = (
+            "contract drafting only; use A7FF-52E materialization metrics; no numeric execution/search"
+        )
+        blocked["A7FF-52E rerun"] = "already executed; rerun only if A7FF-51E pool or evaluator changes"
+        current_stage = "A7FF-52E"
+        status = "materialization_preflight_pass_no_numeric"
+        next_task = "A7FF-53 numeric response contract"
+    else:
+        allowed["A7FF-52E materialization preflight execution option"] = (
+            "requires explicit authorization; 1200 family-balanced rows; no numeric replay/search"
+        )
+        blocked["A7FF-52E execution"] = (
+            "pending explicit materialization-preflight authorization; A7FF-52 contract is ready but materialization is not started"
+        )
+        current_stage = "A7FF-52"
+        status = "contract_ready_no_materialization"
+        next_task = "A7FF-52E if explicitly authorized"
+        active = pd.DataFrame(
+            [
+                {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
+                {"workstream": "a7ff_family_diversification", "current_stage": current_stage, "status": status, "next": next_task},
+                {"workstream": "a7ls_scaled_search", "current_stage": "A7LS-14X", "status": "scoped_large_search_authorized" if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED" else "pending", "next": "A7LS15/A7LS16/A7LS17/A7LS18 pipeline" if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED" else "A7LS14X arbitration"},
+                {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R4", "status": "contract_ready_no_execution", "next": "A7FF-24R4E if explicitly authorized"},
+                {"workstream": "search_execution", "current_stage": current_stage, "status": status, "next": next_task},
+            ]
+        )
+    if "active" not in locals():
+        active = pd.DataFrame(
+            [
+                {"workstream": "governance", "current_stage": "A7PM-0/1/2/3", "status": "pass", "next": "keep registry as source-of-truth"},
+                {"workstream": "a7ff_family_diversification", "current_stage": current_stage, "status": status, "next": next_task},
+                {
+                    "workstream": "a7ls_scaled_search",
+                    "current_stage": "A7LS-14X",
+                    "status": "scoped_large_search_authorized"
+                    if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED"
+                    else "pending",
+                    "next": "A7LS15/A7LS16/A7LS17/A7LS18 pipeline"
+                    if a7ls14x.get("decision") == "PASS_A7LS14X_CHECKPOINT_LARGE_SEARCH_AUTHORIZATION_ARBITRATED"
+                    else "A7LS14X arbitration",
+                },
+                {"workstream": "a7ff_funding_tail", "current_stage": "A7FF-24R4", "status": "contract_ready_no_execution", "next": "A7FF-24R4E if explicitly authorized"},
+                {"workstream": "search_execution", "current_stage": current_stage, "status": status, "next": next_task},
+            ]
+        )
+    return allowed, blocked, active
+
+
+def now_utc() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def read_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+
+def write_json(path: Path, payload: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+
+
+def md_table(df: pd.DataFrame) -> str:
+    if df.empty:
+        return "`<empty>`"
+    view = df.copy()
+    for col in view.columns:
+        if view[col].dtype == object:
+            view[col] = view[col].astype(str).str.replace("|", "\\|", regex=False)
+    return view.to_markdown(index=False)
+
+
+def main() -> None:
+    RUNTIME.mkdir(parents=True, exist_ok=True)
+    REPORT.parent.mkdir(parents=True, exist_ok=True)
+    pm0 = read_json(A7PM0)
+    pm2 = read_json(A7PM2)
+    if not pm0.get("authorizes_a7pm3") and not pm2.get("authorizes_a7pm3"):
+        raise SystemExit("A7PM source stages do not authorize A7PM-3")
+
+    allowed, blocked, active = board_state()
+    manifest = {
+        "stage": "A7PM-3",
+        "generated_at": now_utc(),
+        "decision": "PASS_A7PM3_CURRENT_EXPERIMENT_BOARD_BUILT",
+        "executes_search": False,
+        "executes_replay": False,
+        "executes_training": False,
+        "authorizes_search": False,
+        "authorizes_large_search": False,
+        "authorizes_alpha_proof": False,
+        "authorizes_shadow_paper_live": False,
+        "allowed_next_task_count": len(allowed),
+        "blocked_task_count": len(blocked),
+    }
+    write_json(RUNTIME / "a7pm3_allowed_next_tasks.json", allowed)
+    write_json(RUNTIME / "a7pm3_blocked_tasks.json", blocked)
+    active.to_csv(RUNTIME / "a7pm3_active_workstreams.csv", index=False)
+    write_json(
+        RUNTIME / "a7pm3_latest_source_of_truth.json",
+        {"a7pm0": pm0, "a7pm2": pm2, "head_equals_origin_main": pm0.get("head_equals_origin_main")},
+    )
+    write_json(RUNTIME / "a7pm3_manifest.json", manifest)
+    allowed_df = pd.DataFrame([{"task": k, "reason": v} for k, v in allowed.items()])
+    blocked_df = pd.DataFrame([{"task": k, "reason": v} for k, v in blocked.items()])
+    lines = [
+        "# CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD",
+        "",
+        f"Generated: {manifest['generated_at']}",
+        "",
+        "## Decision",
+        "",
+        f"`{manifest['decision']}`",
+        "",
+        "## Active Workstreams",
+        "",
+        md_table(active),
+        "",
+        "## Allowed Next Tasks",
+        "",
+        md_table(allowed_df),
+        "",
+        "## Blocked Tasks",
+        "",
+        md_table(blocked_df),
+        "",
+        "## Boundary",
+        "",
+        "```text",
+        "No formula search, large search, alpha proof, shadow, paper, or live execution is authorized.",
+        "A7FF-52E materialization is complete if present in the source-of-truth registry. Next A7FF step is contract-only unless explicitly authorized.",
+        "```",
+    ]
+    REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(json.dumps(manifest, indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()
