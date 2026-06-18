@@ -305,6 +305,9 @@ def build_queue(
     seed: int,
     prior_paths: list[Path],
     entropy_floor: float,
+    skeleton_cap: int,
+    max_pair_share: float,
+    max_field_share: float,
 ) -> tuple[pd.DataFrame, dict[str, Any], pd.DataFrame]:
     rng = random.Random(seed)
     fields = available_field_rows()
@@ -323,9 +326,7 @@ def build_queue(
     pair_counts = Counter()
     skeleton_counts = Counter()
     field_counts = Counter()
-    max_pair_share = 0.12
-    max_skeleton_count = 24
-    max_field_share = 0.18
+    max_skeleton_count = int(skeleton_cap)
     attempts = 0
     max_attempts = queue_rows * 80
 
@@ -413,6 +414,9 @@ def build_queue(
         "prior_rows": int(len(priors)),
         "prior_paths": [str(path) for path in prior_paths],
         "entropy_floor": float(entropy_floor),
+        "skeleton_cap": int(skeleton_cap),
+        "max_pair_share": float(max_pair_share),
+        "max_field_share": float(max_field_share),
         "does_not_authorize": ["alpha_proof", "shadow_paper_live", "strict_acceptance_without_reward"],
     }
     if len(queue) < queue_rows:
@@ -467,6 +471,9 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=20260618)
     parser.add_argument("--max-parallel", type=int, default=8)
     parser.add_argument("--entropy-floor", type=float, default=1.0)
+    parser.add_argument("--skeleton-cap", type=int, default=512)
+    parser.add_argument("--max-pair-share", type=float, default=0.16)
+    parser.add_argument("--max-field-share", type=float, default=0.22)
     parser.add_argument("--prior", action="append", default=[])
     args = parser.parse_args()
 
@@ -479,6 +486,9 @@ def main() -> None:
         seed=args.seed,
         prior_paths=prior_paths,
         entropy_floor=args.entropy_floor,
+        skeleton_cap=args.skeleton_cap,
+        max_pair_share=args.max_pair_share,
+        max_field_share=args.max_field_share,
     )
     queue_path = runtime / "a7search1_cem_uct_ast_queue.csv"
     queue.to_csv(queue_path, index=False)
@@ -568,4 +578,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
