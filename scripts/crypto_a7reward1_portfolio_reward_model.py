@@ -66,6 +66,8 @@ CONTROL_DOMINANCE_VARIANTS = ["one_bar_lag", "stale_168h", "time_shuffle", "symb
 LAG_STALE_VARIANTS = ["one_bar_lag", "stale_168h"]
 SHUFFLE_VARIANTS = ["time_shuffle", "symbol_shuffle"]
 PARETO_OBJECTIVES = [
+    "obj_train_sortino",
+    "obj_train_oos_consistency",
     "obj_recent_sortino",
     "obj_min_oos_sortino",
     "obj_min_oos_floor_sortino",
@@ -114,10 +116,18 @@ def add_pareto_columns(rewards: pd.DataFrame) -> pd.DataFrame:
         return rewards
     out = rewards.copy()
     out["min_oos_sortino"] = out[["validation_sortino", "test_sortino", "recent_sortino"]].min(axis=1)
+    oos_sortino_frame = out[["validation_sortino", "test_sortino", "recent_sortino"]].apply(pd.to_numeric, errors="coerce")
+    out["median_oos_sortino"] = oos_sortino_frame.median(axis=1)
+    out["train_oos_sortino_gap"] = (
+        pd.to_numeric(out["train_sortino"], errors="coerce") - out["median_oos_sortino"]
+    ).abs()
+    out["train_oos_consistency_score"] = -out["train_oos_sortino_gap"]
     if {"validation_floor_sortino", "test_floor_sortino", "recent_floor_sortino"}.issubset(out.columns):
         out["min_oos_floor_sortino"] = out[["validation_floor_sortino", "test_floor_sortino", "recent_floor_sortino"]].min(axis=1)
     else:
         out["min_oos_floor_sortino"] = np.nan
+    out["obj_train_sortino"] = pd.to_numeric(out["train_sortino"], errors="coerce")
+    out["obj_train_oos_consistency"] = pd.to_numeric(out["train_oos_consistency_score"], errors="coerce")
     out["obj_recent_sortino"] = pd.to_numeric(out["recent_sortino"], errors="coerce")
     out["obj_min_oos_sortino"] = pd.to_numeric(out["min_oos_sortino"], errors="coerce")
     out["obj_min_oos_floor_sortino"] = pd.to_numeric(out["min_oos_floor_sortino"], errors="coerce")
@@ -140,6 +150,8 @@ def add_pareto_columns(rewards: pd.DataFrame) -> pd.DataFrame:
     objective_passes = pd.DataFrame(
         {
             "recent_sortino_positive": out["recent_sortino"] > 0,
+            "train_sortino_positive": out["train_sortino"] > 0,
+            "train_oos_consistency_reasonable": out["train_oos_sortino_gap"] <= 6.0,
             "min_oos_sortino_positive": out["min_oos_sortino"] > 0,
             "min_oos_floor_sortino_positive": out["min_oos_floor_sortino"] > 0,
             "recent_sharpe_positive": out["recent_sharpe"] > 0,
@@ -776,11 +788,19 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
         test = by_split.get("test_2025H2", {})
         recent = by_split.get("recent_oos_2026JanApr", {})
         stress = by_split.get("known_may2026_stress", {})
+        train_sortino = float(train.get("nonoverlap_median_sortino", np.nan))
+        validation_sortino = float(validation.get("nonoverlap_median_sortino", np.nan))
+        test_sortino = float(test.get("nonoverlap_median_sortino", np.nan))
+        recent_sortino = float(recent.get("nonoverlap_median_sortino", np.nan))
         sortinos = [
-            float(validation.get("nonoverlap_median_sortino", np.nan)),
-            float(test.get("nonoverlap_median_sortino", np.nan)),
-            float(recent.get("nonoverlap_median_sortino", np.nan)),
+            validation_sortino,
+            test_sortino,
+            recent_sortino,
         ]
+        median_oos_sortino = float(np.nanmedian(sortinos)) if np.isfinite(np.nanmedian(sortinos)) else np.nan
+        train_oos_sortino_gap = abs(train_sortino - median_oos_sortino) if np.isfinite(train_sortino) and np.isfinite(median_oos_sortino) else np.nan
+        train_oos_consistency_penalty = min(train_oos_sortino_gap / 4.0, 3.0) if np.isfinite(train_oos_sortino_gap) else 3.0
+        train_overfit_penalty = max(0.0, train_sortino - median_oos_sortino - 3.0) / 2.0 if np.isfinite(train_sortino) and np.isfinite(median_oos_sortino) else 1.5
         floor_sortinos = [
             float(validation.get("nonoverlap_floor_sortino", np.nan)),
             float(test.get("nonoverlap_floor_sortino", np.nan)),
@@ -826,15 +846,21 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
         dd_penalty = abs(min(float(recent.get("max_drawdown", 0.0)), 0.0))
         control_penalty = max(0.0, recent_shuffle_control - 0.8) if np.isfinite(recent_shuffle_control) else 1.0
         diagnostic_composite = (
-            0.35 * float(recent.get("nonoverlap_median_sortino", np.nan))
-            + 0.20 * float(np.nanmin(sortinos))
-            + 0.15 * float(recent.get("nonoverlap_median_sharpe", np.nan))
-            + 0.15 * float(recent.get("rankic_mean", np.nan)) * 20.0
+            0.24 * train_sortino
+            + 0.18 * validation_sortino
+            + 0.18 * test_sortino
+            + 0.14 * recent_sortino
+            + 0.12 * float(np.nanmin(sortinos))
+            + 0.08 * float(np.nanmin(floor_sortinos))
+            + 0.08 * float(recent.get("nonoverlap_median_sharpe", np.nan))
+            + 0.08 * float(recent.get("rankic_mean", np.nan)) * 20.0
             + 0.05 * float(stress.get("nonoverlap_median_sortino", 0.0) if np.isfinite(float(stress.get("nonoverlap_median_sortino", np.nan))) else 0.0)
             + 0.05 * capacity_score
             - 0.15 * dd_penalty
             - 0.05 * turnover_penalty
             - 0.25 * control_penalty
+            - 0.30 * train_oos_consistency_penalty
+            - 0.20 * train_overfit_penalty
         )
         sample = group.iloc[0].to_dict()
         hard_reject_reasons = []
@@ -842,6 +868,12 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
             hard_reject_reasons.append("non_finite_diagnostic_composite")
         if not (float(recent.get("nonoverlap_median_sortino", np.nan)) > 0):
             hard_reject_reasons.append("recent_sortino_non_positive")
+        if not (train_sortino > 0):
+            hard_reject_reasons.append("train_sortino_non_positive")
+        if not np.isfinite(train_oos_sortino_gap):
+            hard_reject_reasons.append("missing_train_oos_consistency")
+        if np.isfinite(train_sortino) and np.isfinite(median_oos_sortino) and train_sortino > median_oos_sortino + 6.0:
+            hard_reject_reasons.append("train_sortino_overfit_gap")
         if not (float(train.get("net_mean", np.nan)) > 0):
             hard_reject_reasons.append("train_orientation_no_positive_edge")
         if float(train.get("n_obs", 0)) < 250:
@@ -875,10 +907,14 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
                 "horizon_h": int(horizon),
                 "diagnostic_composite_score": diagnostic_composite,
                 "overall_reward": diagnostic_composite,
-                "train_sortino": train.get("nonoverlap_median_sortino", np.nan),
-                "validation_sortino": validation.get("nonoverlap_median_sortino", np.nan),
-                "test_sortino": test.get("nonoverlap_median_sortino", np.nan),
-                "recent_sortino": recent.get("nonoverlap_median_sortino", np.nan),
+                "train_sortino": train_sortino,
+                "validation_sortino": validation_sortino,
+                "test_sortino": test_sortino,
+                "recent_sortino": recent_sortino,
+                "median_oos_sortino": median_oos_sortino,
+                "train_oos_sortino_gap": train_oos_sortino_gap,
+                "train_oos_consistency_penalty": train_oos_consistency_penalty,
+                "train_overfit_penalty": train_overfit_penalty,
                 "validation_floor_sortino": validation.get("nonoverlap_floor_sortino", np.nan),
                 "test_floor_sortino": test.get("nonoverlap_floor_sortino", np.nan),
                 "recent_floor_sortino": recent.get("nonoverlap_floor_sortino", np.nan),
@@ -1080,6 +1116,10 @@ def main() -> None:
 
     best_by_pareto = rewards.sort_values(["gate_pass", "pareto_rank", "objective_pass_count"], ascending=[False, True, False]).head(80)
     best_by_sortino = rewards.sort_values(["hard_reject", "recent_sortino"], ascending=[True, False]).head(40)
+    best_by_train_aligned_reward = rewards.sort_values(
+        ["hard_reject", "gate_pass", "overall_reward", "train_sortino", "min_oos_floor_sortino"],
+        ascending=[True, False, False, False, False],
+    ).head(80)
     best_by_sharpe = rewards.sort_values(["hard_reject", "recent_sharpe"], ascending=[True, False]).head(40)
     best_by_ic = rewards.sort_values(["hard_reject", "recent_rankic"], ascending=[True, False]).head(40)
     diagnostic_composite = rewards.sort_values(["hard_reject", "diagnostic_composite_score"], ascending=[True, False]).head(80)
@@ -1087,6 +1127,7 @@ def main() -> None:
     best_overall = diagnostic_composite
     best_by_pareto.to_csv(runtime / "a7reward1_pareto_leaderboard.csv", index=False)
     best_by_sortino.to_csv(runtime / "a7reward1_best_by_sortino.csv", index=False)
+    best_by_train_aligned_reward.to_csv(runtime / "a7reward1_best_by_train_aligned_reward.csv", index=False)
     best_by_sharpe.to_csv(runtime / "a7reward1_best_by_sharpe.csv", index=False)
     best_by_ic.to_csv(runtime / "a7reward1_best_by_rankic.csv", index=False)
     diagnostic_composite.to_csv(runtime / "a7reward1_diagnostic_composite_leaderboard.csv", index=False)
@@ -1126,10 +1167,18 @@ def main() -> None:
         "top_diagnostic_composite_blueprint_id": str(diagnostic_composite.iloc[0]["blueprint_id"]) if not diagnostic_composite.empty else "",
         "top_diagnostic_composite_score": float(diagnostic_composite.iloc[0]["diagnostic_composite_score"]) if not diagnostic_composite.empty else np.nan,
         "ranking_policy": "multi_objective_gate_and_pareto; diagnostic_composite_score_is_not_a_search_reward",
+        "reward_alignment": {
+            "primary_train_component": "train_sortino",
+            "oos_components": ["validation_sortino", "test_sortino", "recent_sortino", "min_oos_floor_sortino"],
+            "consistency_penalty": "penalize train_oos_sortino_gap; hard reject only when train_sortino materially exceeds OOS median",
+            "recent_sortino_role": "one OOS component, no longer dominant standalone reward",
+        },
         "automatic_validation_gate": {
             "output": str(runtime / "a7reward1_accepted_for_next_search.csv"),
             "reject_output": str(runtime / "a7reward1_validation_gate_rejections.csv"),
             "required": [
+                "train_sortino > 0",
+                "train_sortino_overfit_gap not present",
                 "train_orientation_no_positive_edge not present",
                 "oos_nonoverlap_floor_not_positive not present",
                 "min_oos_sortino > 0",
@@ -1162,11 +1211,11 @@ def main() -> None:
         "",
         f"`{decision}`",
         "",
-        "A7REWARD1 establishes portfolio-level evaluation for crypto alpha search. Numeric clue scores remain diagnostic. Candidate acceptance is now gated by OOS/stress/control metrics and Pareto rank; the fixed diagnostic composite is not a search reward.",
+        "A7REWARD1 establishes portfolio-level evaluation for crypto alpha search. Numeric clue scores remain diagnostic. Candidate acceptance is now gated by train/OOS/stress/control metrics and Pareto rank; the fixed diagnostic composite is not a standalone search reward.",
         "",
         "## Reward Contract",
         "",
-        "Primary ranking uses multi-objective gates and Pareto rank over OOS cost-adjusted Sortino, OOS stability, Sharpe, IC/RankIC, drawdown, turnover, stress survival, and control dominance. The fixed diagnostic composite is retained only as a compatibility/tie-breaker column.",
+        "Primary ranking uses multi-objective gates and Pareto rank over train Sortino, validation/test/recent OOS Sortino, OOS floor stability, Sharpe, IC/RankIC, drawdown, turnover, stress survival, and control dominance. The train/OOS consistency penalty reduces train-only overfit; recent Sortino is one OOS component, not the dominant reward.",
         "",
         "## Counts",
         "",

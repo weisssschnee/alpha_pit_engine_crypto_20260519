@@ -62,7 +62,12 @@ def add_proxy_columns(rewards: pd.DataFrame) -> pd.DataFrame:
         return rewards.copy()
     out = rewards.copy()
     for column in [
+        "train_sortino",
+        "validation_sortino",
+        "test_sortino",
         "recent_sortino",
+        "median_oos_sortino",
+        "train_oos_sortino_gap",
         "min_oos_sortino",
         "min_oos_floor_sortino",
         "stress_floor_sortino",
@@ -73,12 +78,22 @@ def add_proxy_columns(rewards: pd.DataFrame) -> pd.DataFrame:
         "objective_pass_count",
     ]:
         out[column] = num(out, column)
+    if "median_oos_sortino" not in rewards.columns:
+        out["median_oos_sortino"] = pd.concat(
+            [out["validation_sortino"], out["test_sortino"], out["recent_sortino"]],
+            axis=1,
+        ).median(axis=1)
+    if "train_oos_sortino_gap" not in rewards.columns:
+        out["train_oos_sortino_gap"] = (out["train_sortino"] - out["median_oos_sortino"]).abs()
+    out["train_oos_overfit_gap"] = np.maximum(0.0, out["train_sortino"] - out["median_oos_sortino"] - 6.0)
 
     stress_obs = num(out, "stress_n_obs", 0).fillna(0) > 0
     stress_clean = (~stress_obs) | (out["stress_floor_sortino"] > 0)
     out["proxy_strict_pass"] = (
         (~out["hard_reject"].astype(bool))
+        & (out["train_sortino"] > 0)
         & (out["recent_sortino"] > 0)
+        & (out["train_oos_overfit_gap"] <= 0.0)
         & (out["min_oos_sortino"] > 0)
         & (out["min_oos_floor_sortino"] > 0)
         & stress_clean
@@ -89,7 +104,10 @@ def add_proxy_columns(rewards: pd.DataFrame) -> pd.DataFrame:
     out["proxy_near_miss"] = (
         (~contains(out, "hard_reject_reasons", "non_finite_diagnostic_composite"))
         & (~contains(out, "hard_reject_reasons", "train_orientation_no_positive_edge"))
+        & (~contains(out, "hard_reject_reasons", "train_sortino_non_positive"))
+        & (out["train_sortino"] > 0)
         & (out["recent_sortino"] > 0)
+        & (out["train_oos_overfit_gap"] <= 3.0)
         & (out["min_oos_sortino"] > -0.25)
         & (out["min_oos_floor_sortino"] > -0.75)
         & ((~stress_obs) | (out["stress_floor_sortino"] > -0.75))
@@ -101,7 +119,8 @@ def add_proxy_columns(rewards: pd.DataFrame) -> pd.DataFrame:
     out["proxy_selectable"] = out["proxy_strict_pass"] | out["proxy_near_miss"]
 
     out["proxy_score"] = (
-        2.00 * out["min_oos_floor_sortino"].fillna(-10).clip(-10, 10)
+        1.25 * out["train_sortino"].fillna(-10).clip(-10, 10)
+        + 2.00 * out["min_oos_floor_sortino"].fillna(-10).clip(-10, 10)
         + 1.25 * out["min_oos_sortino"].fillna(-10).clip(-10, 10)
         + 0.35 * out["recent_sortino"].fillna(-10).clip(-10, 10)
         + 1.00 * out["stress_floor_sortino"].fillna(0).clip(-10, 10)
@@ -110,6 +129,8 @@ def add_proxy_columns(rewards: pd.DataFrame) -> pd.DataFrame:
         - 1.50 * out["oos_lag_stale_dominated_count"].fillna(4)
         - 1.00 * out["oos_shuffle_dominated_count"].fillna(4)
         - 1.00 * np.maximum(0.0, out["recent_shuffle_control_ratio"].fillna(9) - 0.7)
+        - 0.25 * out["train_oos_sortino_gap"].fillna(12).clip(0, 12)
+        - 1.25 * out["train_oos_overfit_gap"].fillna(12).clip(0, 12)
     )
     out["proxy_bucket"] = np.select(
         [out["proxy_strict_pass"], out["proxy_near_miss"]],
@@ -117,8 +138,8 @@ def add_proxy_columns(rewards: pd.DataFrame) -> pd.DataFrame:
         default="proxy_reject",
     )
     return out.sort_values(
-        ["proxy_selectable", "proxy_strict_pass", "proxy_score", "min_oos_floor_sortino", "recent_sortino"],
-        ascending=[False, False, False, False, False],
+        ["proxy_selectable", "proxy_strict_pass", "proxy_score", "min_oos_floor_sortino", "train_sortino", "recent_sortino"],
+        ascending=[False, False, False, False, False, False],
     )
 
 
@@ -130,8 +151,8 @@ def bounded_select(frame: pd.DataFrame, target: int, pair_cap: int, motif_cap: i
     motif_counts: dict[str, int] = {}
     skeleton_counts: dict[str, int] = {}
     for _, row in frame.sort_values(
-        ["proxy_strict_pass", "proxy_score", "min_oos_floor_sortino", "recent_sortino"],
-        ascending=[False, False, False, False],
+        ["proxy_strict_pass", "proxy_score", "min_oos_floor_sortino", "train_sortino", "recent_sortino"],
+        ascending=[False, False, False, False, False],
     ).iterrows():
         pair = str(row.get("semantic_pair", ""))
         motif = str(row.get("motif", ""))
