@@ -311,6 +311,7 @@ def build_queue(
     max_pair_share: float,
     max_field_share: float,
     memory_prior_path: Path | None = None,
+    memory_shard_size: int = 512,
 ) -> tuple[pd.DataFrame, dict[str, Any], pd.DataFrame, pd.DataFrame]:
     rng = random.Random(seed)
     fields = available_field_rows()
@@ -330,11 +331,10 @@ def build_queue(
     skeleton_counts = Counter()
     field_counts = Counter()
     memory_enforcer = SearchMemoryEnforcer(prior_path=memory_prior_path) if memory_prior_path else None
-    memory_counters: dict[str, Counter[str]] = {
-        "expression_key": Counter(),
-        "skeleton_key": Counter(),
-        "pair_motif": Counter(),
-    }
+    memory_expression_counter: Counter[str] = Counter()
+    memory_shard_counters: dict[int, dict[str, Counter[str]]] = defaultdict(
+        lambda: {"skeleton_key": Counter(), "pair_motif": Counter()}
+    )
     memory_trace_rows: list[dict[str, Any]] = []
     memory_reject_counts: Counter[str] = Counter()
     memory_action_counts: Counter[str] = Counter()
@@ -395,6 +395,13 @@ def build_queue(
             "authorizes": "proxy_only",
         }
         if memory_enforcer is not None:
+            shard_bucket = len(rows) // max(1, int(memory_shard_size))
+            shard_counters = memory_shard_counters[shard_bucket]
+            memory_counters: dict[str, Counter[str]] = {
+                "expression_key": memory_expression_counter,
+                "skeleton_key": shard_counters["skeleton_key"],
+                "pair_motif": shard_counters["pair_motif"],
+            }
             decision = memory_enforcer.decide(candidate, memory_counters)
             memory_trace_rows.append({"attempt": attempts, **candidate, **decision.as_row()})
             memory_action_counts[decision.action] += 1
@@ -402,9 +409,9 @@ def build_queue(
             if not decision.allowed:
                 continue
             candidate.update(decision.as_row())
-            memory_counters["expression_key"][decision.expression_key] += 1
-            memory_counters["skeleton_key"][decision.skeleton_key] += 1
-            memory_counters["pair_motif"][decision.pair_motif] += 1
+            memory_expression_counter[decision.expression_key] += 1
+            shard_counters["skeleton_key"][decision.skeleton_key] += 1
+            shard_counters["pair_motif"][decision.pair_motif] += 1
         policy_counts[policy] += 1
         pair_counts[pair] += 1
         skeleton_counts[skeleton] += 1
@@ -446,6 +453,8 @@ def build_queue(
             "trace_rows": len(memory_trace_rows),
             "action_counts": dict(memory_action_counts),
             "reason_counts": dict(memory_reject_counts),
+            "cap_scope": "expression_global_skeleton_and_pair_motif_per_shard",
+            "memory_shard_size": int(memory_shard_size),
         },
     }
     manifest["stage"] = stage_label
@@ -530,6 +539,7 @@ def main() -> None:
         max_pair_share=args.max_pair_share,
         max_field_share=args.max_field_share,
         memory_prior_path=memory_prior_path,
+        memory_shard_size=args.rows_per_shard,
     )
     queue_path = runtime / "a7search1_cem_uct_ast_queue.csv"
     queue.to_csv(queue_path, index=False)
