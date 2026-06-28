@@ -1,0 +1,460 @@
+{
+  "candidate_memory": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7mem0_search_memory_registry_20260628\\a7mem0_candidate_memory.csv",
+  "cluster_caps": {
+    "max_same_expression_key": 1,
+    "max_same_semantic_pair_motif_per_shard": 16,
+    "max_same_skeleton_key_per_shard": 2,
+    "require_cluster_memory_loaded": true
+  },
+  "cluster_memory": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7mem0_search_memory_registry_20260628\\a7mem0_formula_cluster_memory.csv",
+  "created_at": "2026-06-28T06:47:07Z",
+  "decision": "PASS_A7MEM0_SEARCH_MEMORY_REGISTRY_BUILT",
+  "downweight_pair_motifs": [
+    {
+      "motif": "safe_div_abs_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "age|positioning"
+    },
+    {
+      "motif": "smooth_mul",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "basis|open_interest"
+    },
+    {
+      "motif": "smooth_mul_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "basis|open_interest"
+    },
+    {
+      "motif": "spread_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "basis|open_interest"
+    },
+    {
+      "motif": "additive_composite",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "basis|positioning"
+    },
+    {
+      "motif": "safe_div_abs",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "basis|positioning"
+    },
+    {
+      "motif": "smooth_mul",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "basis|positioning"
+    },
+    {
+      "motif": "smooth_mul_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "basis|positioning"
+    },
+    {
+      "motif": "spread",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "basis|positioning"
+    },
+    {
+      "motif": "spread_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "basis|positioning"
+    },
+    {
+      "motif": "smooth_mul",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "funding_dense|open_interest"
+    },
+    {
+      "motif": "spread",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "funding_dense|open_interest"
+    },
+    {
+      "motif": "spread_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "funding_dense|open_interest"
+    },
+    {
+      "motif": "additive_composite",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "funding_dense|positioning"
+    },
+    {
+      "motif": "additive_composite_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "funding_dense|positioning"
+    },
+    {
+      "motif": "safe_div_abs",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "funding_dense|positioning"
+    },
+    {
+      "motif": "smooth_mul",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "funding_dense|positioning"
+    },
+    {
+      "motif": "spread",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "funding_dense|positioning"
+    },
+    {
+      "motif": "spread_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "funding_dense|positioning"
+    },
+    {
+      "motif": "additive_composite_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "liquidity|open_interest"
+    },
+    {
+      "motif": "safe_div_abs",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "liquidity|open_interest"
+    },
+    {
+      "motif": "smooth_mul",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "liquidity|open_interest"
+    },
+    {
+      "motif": "smooth_mul_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "liquidity|open_interest"
+    },
+    {
+      "motif": "spread_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "liquidity|open_interest"
+    },
+    {
+      "motif": "additive_composite_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "liquidity|positioning"
+    },
+    {
+      "motif": "smooth_mul",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "liquidity|positioning"
+    },
+    {
+      "motif": "smooth_mul_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "liquidity|positioning"
+    },
+    {
+      "motif": "spread",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "liquidity|positioning"
+    },
+    {
+      "motif": "additive_composite_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "open_interest|open_interest"
+    },
+    {
+      "motif": "spread_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "open_interest|open_interest"
+    },
+    {
+      "motif": "additive_composite_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "open_interest|positioning"
+    },
+    {
+      "motif": "spread_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "open_interest|positioning"
+    },
+    {
+      "motif": "safe_div_abs",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "open_interest|premium"
+    },
+    {
+      "motif": "safe_div_abs_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "open_interest|premium"
+    },
+    {
+      "motif": "smooth_mul_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "open_interest|premium"
+    },
+    {
+      "motif": "additive_composite_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "open_interest|taker_flow"
+    },
+    {
+      "motif": "smooth_mul",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "open_interest|taker_flow"
+    },
+    {
+      "motif": "additive_composite_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "positioning|positioning"
+    },
+    {
+      "motif": "safe_div_abs",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "positioning|premium"
+    },
+    {
+      "motif": "additive_composite",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "positioning|taker_flow"
+    },
+    {
+      "motif": "additive_composite_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "positioning|taker_flow"
+    },
+    {
+      "motif": "safe_div_abs",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "positioning|taker_flow"
+    },
+    {
+      "motif": "safe_div_abs_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "positioning|taker_flow"
+    },
+    {
+      "motif": "spread",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "positioning|taker_flow"
+    },
+    {
+      "motif": "spread_gated",
+      "reason": "downweight_or_ban",
+      "search_weight": 0.25,
+      "semantic_pair": "positioning|taker_flow"
+    }
+  ],
+  "hard_ban_rejection_classes": [
+    "control_dominated",
+    "lag_or_stale_dominated",
+    "shuffle_dominated",
+    "train_oos_inconsistent"
+  ],
+  "memory_runtime": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7mem0_search_memory_registry_20260628",
+  "object_id": "a7mem0_next_search_prior",
+  "pair_motif_prior": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7mem0_search_memory_registry_20260628\\a7mem0_pair_motif_prior.csv",
+  "promote_pair_motifs": [
+    {
+      "motif": "additive_composite",
+      "reason": "promote_with_cluster_cap",
+      "search_weight": 2.5,
+      "semantic_pair": "open_interest|taker_flow"
+    },
+    {
+      "motif": "spread",
+      "reason": "promote_with_cluster_cap",
+      "search_weight": 2.5,
+      "semantic_pair": "liquidity|open_interest"
+    },
+    {
+      "motif": "additive_composite",
+      "reason": "promote_with_cluster_cap",
+      "search_weight": 2.5,
+      "semantic_pair": "liquidity|open_interest"
+    },
+    {
+      "motif": "additive_composite",
+      "reason": "promote_with_cluster_cap",
+      "search_weight": 2.5,
+      "semantic_pair": "basis|open_interest"
+    },
+    {
+      "motif": "spread",
+      "reason": "promote_with_cluster_cap",
+      "search_weight": 2.5,
+      "semantic_pair": "basis|open_interest"
+    },
+    {
+      "motif": "additive_composite",
+      "reason": "promote_with_cluster_cap",
+      "search_weight": 2.5,
+      "semantic_pair": "liquidity|positioning"
+    },
+    {
+      "motif": "safe_div_abs_gated",
+      "reason": "promote_with_cluster_cap",
+      "search_weight": 2.5,
+      "semantic_pair": "open_interest|positioning"
+    },
+    {
+      "motif": "additive_composite_gated",
+      "reason": "promote_with_cluster_cap",
+      "search_weight": 2.5,
+      "semantic_pair": "open_interest|premium"
+    },
+    {
+      "motif": "spread_gated",
+      "reason": "promote_with_cluster_cap",
+      "search_weight": 2.5,
+      "semantic_pair": "open_interest|taker_flow"
+    },
+    {
+      "motif": "additive_composite_gated",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "basis|open_interest"
+    },
+    {
+      "motif": "safe_div_abs_gated",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "basis|positioning"
+    },
+    {
+      "motif": "safe_div_abs_gated",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "funding_dense|positioning"
+    },
+    {
+      "motif": "safe_div_abs",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "liquidity|positioning"
+    },
+    {
+      "motif": "safe_div_abs_gated",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "open_interest|open_interest"
+    },
+    {
+      "motif": "smooth_mul_gated",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "open_interest|positioning"
+    },
+    {
+      "motif": "additive_composite",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "open_interest|premium"
+    },
+    {
+      "motif": "smooth_mul",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "open_interest|premium"
+    },
+    {
+      "motif": "spread",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "open_interest|premium"
+    },
+    {
+      "motif": "spread_gated",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "open_interest|premium"
+    },
+    {
+      "motif": "safe_div_abs",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "open_interest|taker_flow"
+    },
+    {
+      "motif": "smooth_mul_gated",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "open_interest|taker_flow"
+    },
+    {
+      "motif": "spread",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "open_interest|taker_flow"
+    },
+    {
+      "motif": "safe_div_abs_gated",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "positioning|positioning"
+    },
+    {
+      "motif": "smooth_mul_gated",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "positioning|positioning"
+    },
+    {
+      "motif": "spread_gated",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "positioning|positioning"
+    },
+    {
+      "motif": "smooth_mul",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "positioning|premium"
+    },
+    {
+      "motif": "smooth_mul",
+      "reason": "exploit_lightly_with_diversity_cap",
+      "search_weight": 1.5,
+      "semantic_pair": "positioning|taker_flow"
+    }
+  ],
+  "required_for_next_large_search": true,
+  "source_record_memory": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7mem0_search_memory_registry_20260628\\a7mem0_source_record_memory.csv",
+  "stage": "A7MEM-0"
+}

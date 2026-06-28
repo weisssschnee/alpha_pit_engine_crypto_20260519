@@ -1,0 +1,229 @@
+# CRYPTO A7SEARCH4 Final Aggregate 20260628
+
+Decision: `PASS_A7SEARCH4_PROXY_SEARCH_COMPLETED_WITH_STRICT_CANDIDATES`
+
+Boundary: proxy search aggregate only. No alpha proof, shadow, paper, or live authorization.
+
+## Counts
+
+- manifests: `128`
+- leaderboard_rows: `32768`
+- strict_rows: `42`
+- selected_rows: `266`
+- near_miss_rows: `266`
+- eval_error_rows: `0`
+
+## Strict Pair Counts
+
+- `open_interest|taker_flow`: `10`
+- `liquidity|open_interest`: `7`
+- `open_interest|premium`: `6`
+- `basis|open_interest`: `5`
+- `liquidity|positioning`: `3`
+- `positioning|positioning`: `3`
+- `open_interest|positioning`: `3`
+- `positioning|premium`: `1`
+- `positioning|taker_flow`: `1`
+- `basis|positioning`: `1`
+- `funding_dense|positioning`: `1`
+- `open_interest|open_interest`: `1`
+
+## Strict Motif Counts
+
+- `additive_composite`: `13`
+- `spread`: `8`
+- `safe_div_abs_gated`: `6`
+- `spread_gated`: `4`
+- `smooth_mul`: `3`
+- `additive_composite_gated`: `3`
+- `smooth_mul_gated`: `3`
+- `safe_div_abs`: `2`
+
+## Best Strict
+
+```json
+[
+  {
+    "shard": "a7search4_proxy_s024",
+    "blueprint_id": "a7search1_7a81585720899bb8",
+    "semantic_pair": "basis|positioning",
+    "motif": "safe_div_abs_gated",
+    "expression": "Mul(SafeDiv(Decay(mark_index_basis_bps,240),Abs(Decay(account_position_divergence,120))),Sign(Decay(trade_quote_volume,336)))",
+    "horizon_h": "24",
+    "proxy_score": "22.780945163301016",
+    "diagnostic_composite_score": "7.012866578542916",
+    "train_sortino": "2.744799358279943",
+    "validation_sortino": "4.696449546937649",
+    "test_sortino": "17.758177612042765",
+    "recent_sortino": "10.414196829973271",
+    "min_oos_floor_sortino": "2.8686834174757037",
+    "stress_floor_sortino": "3.159366564750951",
+    "recent_control_ratio": "0.9896467883407984",
+    "recent_shuffle_control_ratio": "0.09762081882767433",
+    "hard_reject": "False",
+    "hard_reject_reasons": "",
+    "proxy_strict_pass": "True",
+    "proxy_near_miss": "True"
+  },
+  {
+    "shard": "a7search4_proxy_s107",
+    "blueprint_id": "a7search1_b49a560b18ef80ef",
+    "semantic_pair": "open_interest|positioning",
+    "motif": "smooth_mul_gated",
+    "expression": "Mul(Mul(Delta(open_interest_value_last,240),TSRank(top_long_short_position_ratio_last,504)),Sign(CSRank(quote_volume_z_168h)))",
+    "horizon_h": "24",
+    "proxy_score": "20.403317349899037",
+    "diagnostic_composite_score": "4.845566048280389",
+    "train_sortino": "0.44800669575773955",
+    "validation_sortino": "5.483597951534053",
+    "test_sortino": "4.804671580960772",
+    "recent_sortino": "8.715946507957426",
+    "min_oos_floor_sortino": "1.2865896887819508",
+    "stress_floor_sortino": "6.222606662595975",
+    "recent_control_ratio": "0.9802301012980708",
+    "recent_shuffle_control_ratio": "0.000392199994193274",
+    "hard_reject": "False",
+    "hard_reject_reasons": "",
+    "proxy_strict_pass": "True",
+    "proxy_near_miss": "True"
+  },
+  {
+    "shard": "a7search4_proxy_s027",
+    "blueprint_id": "a7search1_932ef19cc0418d76",
+    "semantic_pair": "basis|open_interest",
+    "motif": "spread",
+    "expression": "Sub(CSRank(mark_index_basis_bps),Delta(open_interest_value_mean,240))",
+    "horizon_h": "24",
+    "proxy_score": "20.316264856750376",
+    "diagnostic_composite_score": "5.228179316721289",
+    "train_sortino": "0.9972601249337234",
+    "validation_sortino": "4.206179605207081",
+    "test_sortino": "4.958534135754857",
+    "recent_sortino": "12.667583628300484",
+    "min_oos_floor_sortino": "0.318659423253377",
+    "stress_floor_sortino": "7.4149648502729",
+    "recent_control_ratio": "0.9878734662822551",
+    "recent_shuffle_control_ratio": "0.24373140438047833",
+    "hard_reject": "False",
+    "hard_reject_reasons": "",
+    "proxy_strict_pass": "True",
+    "proxy_near_miss": "True"
+  },
+  {
+    "shard": "a7search4_proxy_s015",
+    "blueprint_id": "a7search1_a4234f64ce341dcd",
+    "semantic_pair": "basis|open_interest",
+    "motif": "additive_composite",
+    "expression": "Add(TSRank(mark_index_basis_bps,36),Delta(open_interest_value_mean,240))",
+    "horizon_h": "24",
+    "proxy_score": "20.31002870415309",
+    "diagnostic_composite_score": "5.228020781592316",
+    "train_sortino": "0.9967563438264592",
+    "validation_sortino": "4.206179605207081",
+    "test_sortino": "4.958534135754857",
+    "recent_sortino": "12.667583628300484",
+    "min_oos_floor_sortino": "0.318659423253377",
+    "stress_floor_sortino": "7.4094843693365116",
+    "recent_control_ratio": "0.987873879179183",
+    "recent_shuffle_control_ratio": "0.009652183753348628",
+    "hard_reject": "False",
+    "hard_reject_reasons": "",
+    "proxy_strict_pass": "True",
+    "proxy_near_miss": "True"
+  },
+  {
+    "shard": "a7search4_proxy_s026",
+    "blueprint_id": "a7search1_4fe2ba7c32485a1f",
+    "semantic_pair": "liquidity|open_interest",
+    "motif": "spread",
+    "expression": "Sub(Sign(Delta(trade_quote_volume,120)),Delta(open_interest_value_mean,240))",
+    "horizon_h": "24",
+    "proxy_score": "20.237290963877275",
+    "diagnostic_composite_score": "5.211594955137754",
+    "train_sortino": "0.9446108630183228",
+    "validation_sortino": "4.206179605207081",
+    "test_sortino": "4.958534135754857",
+    "recent_sortino": "12.667583628300484",
+    "min_oos_floor_sortino": "0.318659423253377",
+    "stress_floor_sortino": "7.4149648502729",
+    "recent_control_ratio": "0.987873879179183",
+    "recent_shuffle_control_ratio": "0.06616715030661113",
+    "hard_reject": "False",
+    "hard_reject_reasons": "",
+    "proxy_strict_pass": "True",
+    "proxy_near_miss": "True"
+  },
+  {
+    "shard": "a7search4_proxy_s127",
+    "blueprint_id": "a7search1_c92f5a189adfc26d",
+    "semantic_pair": "open_interest|taker_flow",
+    "motif": "spread_gated",
+    "expression": "Mul(Sub(Delta(open_interest_value_mean,240),ZScore(taker_buy_sell_volume_ratio_mean)),Sign(CSRank(trade_quote_volume)))",
+    "horizon_h": "24",
+    "proxy_score": "20.237290963877275",
+    "diagnostic_composite_score": "5.211594955137754",
+    "train_sortino": "0.9446108630183228",
+    "validation_sortino": "4.206179605207081",
+    "test_sortino": "4.958534135754857",
+    "recent_sortino": "12.667583628300484",
+    "min_oos_floor_sortino": "0.318659423253377",
+    "stress_floor_sortino": "7.4149648502729",
+    "recent_control_ratio": "0.987873879179183",
+    "recent_shuffle_control_ratio": "0.10674538543933874",
+    "hard_reject": "False",
+    "hard_reject_reasons": "",
+    "proxy_strict_pass": "True",
+    "proxy_near_miss": "True"
+  },
+  {
+    "shard": "a7search4_proxy_s001",
+    "blueprint_id": "a7search1_68ab9585afc936e9",
+    "semantic_pair": "open_interest|taker_flow",
+    "motif": "additive_composite",
+    "expression": "Add(Delta(open_interest_value_mean,240),Abs(ZScore(taker_buy_sell_volume_ratio_last)))",
+    "horizon_h": "24",
+    "proxy_score": "20.237290963877275",
+    "diagnostic_composite_score": "5.211583984425875",
+    "train_sortino": "0.9446108630183228",
+    "validation_sortino": "4.206179605207081",
+    "test_sortino": "4.958534135754857",
+    "recent_sortino": "12.667583628300484",
+    "min_oos_floor_sortino": "0.318659423253377",
+    "stress_floor_sortino": "7.4149648502729",
+    "recent_control_ratio": "0.9878756071874394",
+    "recent_shuffle_control_ratio": "0.13376402364511505",
+    "hard_reject": "False",
+    "hard_reject_reasons": "",
+    "proxy_strict_pass": "True",
+    "proxy_near_miss": "True"
+  },
+  {
+    "shard": "a7search4_proxy_s019",
+    "blueprint_id": "a7search1_f70b47f4dbe3c114",
+    "semantic_pair": "liquidity|open_interest",
+    "motif": "additive_composite",
+    "expression": "Add(CSRank(trade_quote_volume),Delta(open_interest_value_mean,240))",
+    "horizon_h": "24",
+    "proxy_score": "20.231810482940887",
+    "diagnostic_composite_score": "5.211594955137754",
+    "train_sortino": "0.9446108630183228",
+    "validation_sortino": "4.206179605207081",
+    "test_sortino": "4.958534135754857",
+    "recent_sortino": "12.667583628300484",
+    "min_oos_floor_sortino": "0.318659423253377",
+    "stress_floor_sortino": "7.4094843693365116",
+    "recent_control_ratio": "0.987873879179183",
+    "recent_shuffle_control_ratio": "0.1274199784150473",
+    "hard_reject": "False",
+    "hard_reject_reasons": "",
+    "proxy_strict_pass": "True",
+    "proxy_near_miss": "True"
+  }
+]
+```
+
+## Review Notes
+
+- Top selected contains near-miss rows rejected by control or lag-stale dominance; strict rows must be preferred for next stage.
+- Several strict rows share identical split metrics, indicating duplicated economic exposure or evaluator-equivalent formulas; next stage must cluster/dedupe before expensive replay.
+- Output is written to H: because D:/G: is low on space.
