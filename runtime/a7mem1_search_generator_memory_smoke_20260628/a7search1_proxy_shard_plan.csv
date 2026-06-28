@@ -1,0 +1,5 @@
+shard_id,start_row,end_row_exclusive,rows
+a7search1_proxy_s000,0,64,64
+a7search1_proxy_s001,64,128,64
+a7search1_proxy_s002,128,192,64
+a7search1_proxy_s003,192,256,64

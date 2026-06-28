@@ -1,0 +1,6 @@
+blueprint_id,semantic_pair,motif,horizon_h,expression
+a7mem1_exact_duplicate,basis|positioning,safe_div_abs_gated,24,"SafeDiv(Sign(TSRank(sqrt_listing_age_days,8)),Abs(Decay(account_position_divergence,3)))"
+a7mem1_promote_skeleton_1,open_interest|taker_flow,additive_composite,24,"Add(Mean(open_interest_value_last,24),Mean(taker_buy_sell_volume_ratio,24))"
+a7mem1_promote_skeleton_2,open_interest|taker_flow,additive_composite,24,"Add(Mean(open_interest_value_mean,48),Mean(taker_buy_sell_volume_ratio_mean,48))"
+a7mem1_promote_skeleton_3_reject,open_interest|taker_flow,additive_composite,24,"Add(Mean(open_interest_value_last,96),Mean(taker_buy_sell_volume_ratio,96))"
+a7mem1_downweight_pair_motif,age|positioning,safe_div_abs_gated,8,"Mul(SafeDiv(Decay(listing_age_hours,24),Abs(Decay(account_position_divergence,48))),Sign(Decay(trade_quote_volume,96)))"

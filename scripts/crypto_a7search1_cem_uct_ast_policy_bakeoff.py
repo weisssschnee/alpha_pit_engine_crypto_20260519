@@ -19,6 +19,7 @@ if str(REPO) not in __import__("sys").path:
     __import__("sys").path.insert(0, str(REPO))
 
 from scripts.crypto_a7v3s0_next_large_search_contract import FIELD_SPECS, FORBIDDEN_FIELDS, WINDOWS_ALL  # noqa: E402
+from alphafactory_crypto.engines.search_memory_enforcement import SearchMemoryEnforcer  # noqa: E402
 
 
 STAGE = "A7SEARCH1"
@@ -308,7 +309,8 @@ def build_queue(
     skeleton_cap: int,
     max_pair_share: float,
     max_field_share: float,
-) -> tuple[pd.DataFrame, dict[str, Any], pd.DataFrame]:
+    memory_prior_path: Path | None = None,
+) -> tuple[pd.DataFrame, dict[str, Any], pd.DataFrame, pd.DataFrame]:
     rng = random.Random(seed)
     fields = available_field_rows()
     priors, counters = load_priors(prior_paths)
@@ -326,6 +328,15 @@ def build_queue(
     pair_counts = Counter()
     skeleton_counts = Counter()
     field_counts = Counter()
+    memory_enforcer = SearchMemoryEnforcer(prior_path=memory_prior_path) if memory_prior_path else None
+    memory_counters: dict[str, Counter[str]] = {
+        "expression_key": Counter(),
+        "skeleton_key": Counter(),
+        "pair_motif": Counter(),
+    }
+    memory_trace_rows: list[dict[str, Any]] = []
+    memory_reject_counts: Counter[str] = Counter()
+    memory_action_counts: Counter[str] = Counter()
     max_skeleton_count = int(skeleton_cap)
     attempts = 0
     max_attempts = queue_rows * 80
@@ -358,38 +369,48 @@ def build_queue(
             continue
         if field_counts[right["field"]] >= int(queue_rows * max_field_share):
             continue
+        path = f"{policy}/{pair}/{interaction_motif}/{left_motif}:{left_window}/{right_motif}:{right_window}"
+        horizon = int(weighted_choice(rng, prior_weights([str(h) for h in HORIZONS], counters["horizon"], floor=entropy_floor, boost=3.0)))
+        candidate = {
+            "blueprint_id": f"a7search1_{short_hash(str(len(rows)) + '|' + expr, 16)}",
+            "expression": expr,
+            "semantic_pair": pair,
+            "motif": interaction_motif,
+            "horizon_h": horizon,
+            "search_policy": policy,
+            "search_core": "cem_uct_policy_over_typed_ast",
+            "ast_path": path,
+            "ast_skeleton": skeleton,
+            "primary_field": left["field"],
+            "secondary_field": right["field"],
+            "primary_semantic": left["semantic"],
+            "secondary_semantic": right["semantic"],
+            "left_transform_motif": left_motif,
+            "right_transform_motif": right_motif,
+            "left_window": left_window,
+            "right_window": right_window,
+            "candidate_origin": "generated_search_policy",
+            "reward_feedback_source": "strict_accepted_prior" if policy == "cem_ast_prior" else "policy_exploration",
+            "authorizes": "proxy_only",
+        }
+        if memory_enforcer is not None:
+            decision = memory_enforcer.decide(candidate, memory_counters)
+            memory_trace_rows.append({"attempt": attempts, **candidate, **decision.as_row()})
+            memory_action_counts[decision.action] += 1
+            memory_reject_counts[decision.reason] += 1
+            if not decision.allowed:
+                continue
+            candidate.update(decision.as_row())
+            memory_counters["expression_key"][decision.expression_key] += 1
+            memory_counters["skeleton_key"][decision.skeleton_key] += 1
+            memory_counters["pair_motif"][decision.pair_motif] += 1
         policy_counts[policy] += 1
         pair_counts[pair] += 1
         skeleton_counts[skeleton] += 1
         field_counts[left["field"]] += 1
         field_counts[right["field"]] += 1
         seen.add(expr)
-        path = f"{policy}/{pair}/{interaction_motif}/{left_motif}:{left_window}/{right_motif}:{right_window}"
-        horizon = int(weighted_choice(rng, prior_weights([str(h) for h in HORIZONS], counters["horizon"], floor=entropy_floor, boost=3.0)))
-        rows.append(
-            {
-                "blueprint_id": f"a7search1_{short_hash(str(len(rows)) + '|' + expr, 16)}",
-                "expression": expr,
-                "semantic_pair": pair,
-                "motif": interaction_motif,
-                "horizon_h": horizon,
-                "search_policy": policy,
-                "search_core": "cem_uct_policy_over_typed_ast",
-                "ast_path": path,
-                "ast_skeleton": skeleton,
-                "primary_field": left["field"],
-                "secondary_field": right["field"],
-                "primary_semantic": left["semantic"],
-                "secondary_semantic": right["semantic"],
-                "left_transform_motif": left_motif,
-                "right_transform_motif": right_motif,
-                "left_window": left_window,
-                "right_window": right_window,
-                "candidate_origin": "generated_search_policy",
-                "reward_feedback_source": "strict_accepted_prior" if policy == "cem_ast_prior" else "policy_exploration",
-                "authorizes": "proxy_only",
-            }
-        )
+        rows.append(candidate)
 
     queue = pd.DataFrame(rows)
     prior_summary = pd.DataFrame(
@@ -418,11 +439,19 @@ def build_queue(
         "max_pair_share": float(max_pair_share),
         "max_field_share": float(max_field_share),
         "does_not_authorize": ["alpha_proof", "shadow_paper_live", "strict_acceptance_without_reward"],
+        "memory_enforcement": {
+            "enabled": memory_enforcer is not None,
+            "prior_path": str(memory_prior_path) if memory_prior_path else "",
+            "trace_rows": len(memory_trace_rows),
+            "action_counts": dict(memory_action_counts),
+            "reason_counts": dict(memory_reject_counts),
+        },
     }
     if len(queue) < queue_rows:
         manifest["decision"] = "HOLD_A7SEARCH1_QUEUE_UNDERFILLED"
         manifest["blocker"] = "caps_or_attempt_budget_exhausted"
-    return queue, manifest, prior_summary
+    memory_trace = pd.DataFrame(memory_trace_rows)
+    return queue, manifest, prior_summary, memory_trace
 
 
 def write_launcher(runtime: Path, shard_plan: pd.DataFrame, max_parallel: int) -> Path:
@@ -475,13 +504,20 @@ def main() -> None:
     parser.add_argument("--max-pair-share", type=float, default=0.16)
     parser.add_argument("--max-field-share", type=float, default=0.22)
     parser.add_argument("--prior", action="append", default=[])
+    parser.add_argument(
+        "--memory-prior",
+        default=str(REPO / "runtime" / "a7mem0_search_memory_registry_20260628" / "a7mem0_next_search_prior.json"),
+        help="A7MEM next-search prior. Use --no-memory-enforcement only for legacy reproduction.",
+    )
+    parser.add_argument("--no-memory-enforcement", action="store_true")
     args = parser.parse_args()
 
     runtime = Path(args.runtime)
     report = Path(args.report)
     runtime.mkdir(parents=True, exist_ok=True)
     prior_paths = [Path(p) for p in args.prior] if args.prior else DEFAULT_PRIORS
-    queue, manifest, prior_summary = build_queue(
+    memory_prior_path = None if args.no_memory_enforcement else Path(args.memory_prior)
+    queue, manifest, prior_summary, memory_trace = build_queue(
         queue_rows=args.queue_rows,
         seed=args.seed,
         prior_paths=prior_paths,
@@ -489,10 +525,13 @@ def main() -> None:
         skeleton_cap=args.skeleton_cap,
         max_pair_share=args.max_pair_share,
         max_field_share=args.max_field_share,
+        memory_prior_path=memory_prior_path,
     )
     queue_path = runtime / "a7search1_cem_uct_ast_queue.csv"
     queue.to_csv(queue_path, index=False)
     prior_summary.to_csv(runtime / "a7search1_prior_summary.csv", index=False)
+    if not memory_trace.empty:
+        memory_trace.to_csv(runtime / "a7search1_memory_enforcement_trace.csv", index=False)
     policy_summary = queue.groupby("search_policy", dropna=False).size().reset_index(name="rows")
     pair_summary = queue.groupby(["search_policy", "semantic_pair"], dropna=False).size().reset_index(name="rows").sort_values("rows", ascending=False)
     motif_summary = queue.groupby(["search_policy", "motif"], dropna=False).size().reset_index(name="rows").sort_values("rows", ascending=False)
@@ -550,6 +589,8 @@ def main() -> None:
                 f"- semantic_pair_count: `{manifest['semantic_pair_count']}`",
                 f"- motif_count: `{manifest['motif_count']}`",
                 f"- skeleton_count: `{manifest['skeleton_count']}`",
+                f"- memory_enforcement_enabled: `{manifest['memory_enforcement']['enabled']}`",
+                f"- memory_trace_rows: `{manifest['memory_enforcement']['trace_rows']}`",
                 "",
                 "## Policy Summary",
                 "",
@@ -569,6 +610,7 @@ def main() -> None:
                 "- Proxy evaluation is not promotion.",
                 "- Strict reward remains the only accepted-for-next-search gate.",
                 "- Every candidate records search_policy, AST path, semantic pair, motif, fields, windows, and origin.",
+                "- A7MEM prior is fail-closed by default; use --no-memory-enforcement only for legacy reproduction.",
             ]
         ),
         encoding="utf-8",

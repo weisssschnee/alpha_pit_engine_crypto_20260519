@@ -1,0 +1,68 @@
+{
+  "decision": "PASS_A7SEARCH1_CEM_UCT_AST_QUEUE_READY_FOR_PROXY",
+  "does_not_authorize": [
+    "alpha_proof",
+    "shadow_paper_live",
+    "strict_acceptance_without_reward"
+  ],
+  "entropy_floor": 1.0,
+  "generated_at": "2026-06-28T10:35:34Z",
+  "max_field_share": 0.35,
+  "max_pair_share": 0.3,
+  "max_parallel": 1,
+  "memory_enforcement": {
+    "action_counts": {
+      "downweight": 29,
+      "neutral": 205,
+      "promote": 22,
+      "reject": 155
+    },
+    "enabled": true,
+    "prior_path": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7mem0_search_memory_registry_20260628\\a7mem0_next_search_prior.json",
+    "reason_counts": {
+      "carry_forward_prior": 16,
+      "exploit_lightly_with_diversity_cap": 17,
+      "neutral_explore": 189,
+      "pair_motif_downweighted": 29,
+      "promote_with_cluster_cap": 5,
+      "skeleton_key_cap": 155
+    },
+    "trace_rows": 411
+  },
+  "motif_count": 8,
+  "outputs": {
+    "launcher": "runtime\\a7mem1_search_generator_memory_smoke_20260628\\a7search1_proxy_launcher.ps1",
+    "motif_summary": "runtime\\a7mem1_search_generator_memory_smoke_20260628\\a7search1_motif_summary.csv",
+    "pair_summary": "runtime\\a7mem1_search_generator_memory_smoke_20260628\\a7search1_pair_summary.csv",
+    "policy_summary": "runtime\\a7mem1_search_generator_memory_smoke_20260628\\a7search1_policy_summary.csv",
+    "queue": "runtime\\a7mem1_search_generator_memory_smoke_20260628\\a7search1_cem_uct_ast_queue.csv",
+    "shard_plan": "runtime\\a7mem1_search_generator_memory_smoke_20260628\\a7search1_proxy_shard_plan.csv"
+  },
+  "policy_counts": {
+    "cem_ast_prior": 87,
+    "map_elites_diversity": 30,
+    "raw_ast_explore": 52,
+    "uct_ast_tree": 87
+  },
+  "policy_target_share": {
+    "cem_ast_prior": 0.34,
+    "map_elites_diversity": 0.12,
+    "raw_ast_explore": 0.2,
+    "uct_ast_tree": 0.34
+  },
+  "prior_paths": [
+    "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7v3s9_selected_full_reward_aggregate_20260614\\a7v3s0_reward_accepted_enriched.csv",
+    "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7v3s0_reward_sharded_720h_r2_aggregate_20260613\\a7v3s0_reward_accepted_enriched.csv",
+    "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7reward1_portfolio_reward_model_20260610\\a7reward1_accepted_for_next_search.csv"
+  ],
+  "prior_rows": 6,
+  "queue_rows": 256,
+  "queue_rows_requested": 256,
+  "rows_per_shard": 64,
+  "seed": 20260628,
+  "semantic_pair_count": 36,
+  "shard_count": 4,
+  "skeleton_cap": 8,
+  "skeleton_count": 183,
+  "stage": "A7SEARCH1"
+}

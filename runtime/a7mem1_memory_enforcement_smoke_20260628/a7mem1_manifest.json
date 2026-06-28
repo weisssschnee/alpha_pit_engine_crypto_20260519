@@ -1,0 +1,44 @@
+{
+  "accepted_rows": 3,
+  "decision": "PASS_A7MEM1_MEMORY_ENFORCEMENT_CONNECTED",
+  "downweighted_rows": 1,
+  "duplicate_expression_rejected": true,
+  "enforcer_manifest": {
+    "accepted_rows": 3,
+    "action_counts": {
+      "downweight": 1,
+      "promote": 2,
+      "reject": 2
+    },
+    "candidate_memory_rows": 313,
+    "cluster_caps": {
+      "max_same_expression_key": 1,
+      "max_same_semantic_pair_motif_per_shard": 16,
+      "max_same_skeleton_key_per_shard": 2,
+      "require_cluster_memory_loaded": true
+    },
+    "input_rows": 5,
+    "pair_motif_prior_rows": 86,
+    "prior_decision": "PASS_A7MEM0_SEARCH_MEMORY_REGISTRY_BUILT",
+    "prior_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7mem0_search_memory_registry_20260628\\a7mem0_next_search_prior.json",
+    "reason_counts": {
+      "pair_motif_downweighted": 1,
+      "previously_seen_expression_memory": 1,
+      "promote_with_cluster_cap": 2,
+      "skeleton_key_cap": 1
+    },
+    "rejected_rows": 2
+  },
+  "fail_closed_missing_prior": true,
+  "object_id": "crypto_a7mem1_memory_enforcement_smoke",
+  "outputs": {
+    "accepted_rows": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7mem1_memory_enforcement_smoke_20260628\\a7mem1_smoke_accepted_rows.csv",
+    "input_rows": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7mem1_memory_enforcement_smoke_20260628\\a7mem1_smoke_input_rows.csv",
+    "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7MEM1_MEMORY_ENFORCEMENT_SMOKE_20260628.md",
+    "trace": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7mem1_memory_enforcement_smoke_20260628\\a7mem1_smoke_trace.csv"
+  },
+  "prior": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7mem0_search_memory_registry_20260628\\a7mem0_next_search_prior.json",
+  "promoted_rows": 2,
+  "rejected_rows": 2,
+  "skeleton_cap_rejected": true
+}
