@@ -302,6 +302,7 @@ def choose_pair(
 
 def build_queue(
     *,
+    stage_label: str,
     queue_rows: int,
     seed: int,
     prior_paths: list[Path],
@@ -447,6 +448,7 @@ def build_queue(
             "reason_counts": dict(memory_reject_counts),
         },
     }
+    manifest["stage"] = stage_label
     if len(queue) < queue_rows:
         manifest["decision"] = "HOLD_A7SEARCH1_QUEUE_UNDERFILLED"
         manifest["blocker"] = "caps_or_attempt_budget_exhausted"
@@ -495,6 +497,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--runtime", default=str(DEFAULT_RUNTIME))
     parser.add_argument("--report", default=str(DEFAULT_REPORT))
+    parser.add_argument("--stage-label", default=STAGE)
     parser.add_argument("--queue-rows", type=int, default=131_072)
     parser.add_argument("--rows-per-shard", type=int, default=512)
     parser.add_argument("--seed", type=int, default=20260618)
@@ -519,6 +522,7 @@ def main() -> None:
     memory_prior_path = None if args.no_memory_enforcement else Path(args.memory_prior)
     queue, manifest, prior_summary, memory_trace = build_queue(
         queue_rows=args.queue_rows,
+        stage_label=args.stage_label,
         seed=args.seed,
         prior_paths=prior_paths,
         entropy_floor=args.entropy_floor,
