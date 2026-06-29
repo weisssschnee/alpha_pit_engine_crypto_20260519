@@ -1,6 +1,6 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-06-29 10:45 Asia/Hong_Kong
+**Last updated:** 2026-06-29 12:12 Asia/Hong_Kong
 **Status:** active search running; system hardening phase planned
 
 ## Current Source Of Truth
@@ -25,15 +25,19 @@
 
 ## Active Search State
 
-As of the last company-machine check on 2026-06-29 10:33-10:36:
+As of the last company-machine check on 2026-06-29 12:11:
 
-- A7SEARCH5_R2 reports: `40 / 128`
-- Active shard count: `18`
-- Active shards: `s040` through `s057`
-- Supervisor: `D:\HermesWorker\runtime\a7search5_r2_takeover_20260629.ps1`
-- CPU delta check: all 18 child Python workers are consuming CPU.
+- A7SEARCH5_R2 reports: `50 / 128`
+- Active shard count: `16`
+- Active shards: `s050` through `s063`, plus `s065` and `s066`
+- Supervisor: `D:\HermesWorker\runtime\a7search5_r2_lockaware_supervisor_20260629.ps1`
+- Supervisor task id: `job_20260629_120926_3f21c9`
+- Latest lightweight check confirmed active Python workers remain present; next inspection should re-run CPU delta after memory guard allows new starts.
 - Aggregate report: not yet generated.
-- Current warnings: NumPy all-NaN / empty-slice warnings in invalid candidate branches, no fatal traceback observed.
+- Prior takeover supervisor was stopped after repeated restarts of `s064` and `s067`.
+- `s064` and `s067` showed `pyarrow read_table` `MemoryError`; lock-aware supervisor now uses `max_parallel=12`, `min_free_gb_to_start=18`, fresh locks, and max attempt holds.
+- Current memory guard status: free memory was `11.18GB`, so no new shards were started until memory recovers.
+- Current warnings: NumPy all-NaN / empty-slice warnings in invalid candidate branches; confirmed fatal issue so far is memory pressure, not formula traceback.
 
 ## Important Boundaries
 
