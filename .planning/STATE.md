@@ -6,6 +6,8 @@
 ## Current Source Of Truth
 
 - Main branch is clean and aligned with `origin/main` at `1b13a43 fix search memory caps per shard`.
+- Project-level plan: `.planning/PROJECT.md`.
+- Project roadmap: `.planning/ROADMAP.md`.
 - Current durable planning output: `.planning/phases/01-crypto-search-hardening/01-PLAN.md`.
 - Active remote run root: `H:\AlphaFactory_CryptoData_archive\a7search5_memory_enforced_proxy_65k_r2_20260628`.
 - Active aggregate target: `H:\AlphaFactory_CryptoData_archive\a7search5_memory_enforced_proxy_65k_r2_aggregate_20260629`.
@@ -47,4 +49,3 @@ Blocked:
 - Shadow, paper, or live.
 - Treating proxy search output as production alpha.
 - Disabling memory enforcement except for explicit legacy reproduction.
-
