@@ -34,17 +34,31 @@ data and field integrity
 
 ## Current System Map
 
+## Completed Foundation Phases
+
+The current project plan starts after several governance and infrastructure phases have already passed. These are prerequisites, not future work:
+
+- A7PM-0/1/2/3: project source-of-truth registry, asset taxonomy, candidate lifecycle, and experiment board were built.
+- A7AI-F0/F1/F2/F3: field contract ledger, engine enforcement audit, end-to-end role enforcement, and materialization/evaluator parity passed.
+- A7AI-F4: response-backed ordinary-alpha seed promotion found at least one seed, but breadth remained limited.
+- A7AA-0/1/2/3/4: label/feature response contract, primitive response map, feature role classification, selector rewrite contract, and response handoff passed.
+- A7MEM-0/1: search memory registry and generator memory enforcement passed.
+- A7SEARCH4: prior 128-shard proxy search completed with strict candidates.
+
+These passes authorize controlled research/search continuation only. They do not authorize alpha proof, deployment, shadow, paper, or live trading.
+
 ### Data Layer
 
 Current usable data includes:
 
-- Binance universe 1h research panel.
-- 2023-07 to 2023-12 pre-2024 backfill converted through silver 1m, gold 15m, and gold 1h.
+- Binance universe 1h research panel used by the current search/reward stack.
+- Additional pre-2024 backfill package covering 2023-07 to 2023-12, converted through silver 1m, gold 15m, and gold 1h.
 - 2026 recent Binance patch with OI, metrics, funding, mark/index/premium fields.
 - OKX x Binance CE overlay for recent cross-exchange experiments.
 
 Open issues:
 
+- The 2023-07 to 2023-12 package is an incremental backfill window, not the full dataset length.
 - 1m/15m are available as data, but the current search and reward stack is still primarily wired for 1h.
 - Regime/event coverage must be counted explicitly before treating stress tests as sufficient.
 - Source trace/checksum audit is still required before any final proof claim.
@@ -121,4 +135,3 @@ Open issues:
 - `.planning/ROADMAP.md` - phase-level roadmap.
 - `.planning/STATE.md` - current status snapshot.
 - `.planning/phases/01-crypto-search-hardening/01-PLAN.md` - active phase execution plan.
-

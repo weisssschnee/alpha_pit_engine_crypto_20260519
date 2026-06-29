@@ -2,6 +2,18 @@
 
 **Last updated:** 2026-06-29 11:20 Asia/Hong_Kong
 
+## Already Passed Prerequisites
+
+The roadmap below does not restart the project from zero. It assumes the following prior phases are complete and remain part of the current source of truth:
+
+- A7PM-0/1/2/3: governance registry, asset taxonomy, lifecycle state machine, and experiment board.
+- A7AI-F0/F1/F2/F3/F4: field contract enforcement, engine wiring, end-to-end enforcement, materialization/evaluator parity, and response-backed field promotion.
+- A7AA-0/1/2/3/4: label/response contract, primitive response map, role classification, selector rewrite contract, and handoff.
+- A7MEM-0/1: search memory registry and memory-enforced generator.
+- A7SEARCH4: completed proxy search aggregate with strict candidates.
+
+These prerequisites support controlled research/search continuation only.
+
 ## Phase 1 - Crypto Search Hardening
 
 Status: active
@@ -28,7 +40,7 @@ Status: planned
 
 Goal:
 
-Quantify whether available 2023-2026 data has enough regime/event coverage for the current train, validation, test, recent, and stress design.
+Quantify whether available data, including the incremental 2023-07 to 2023-12 pre-2024 backfill and the 2026 recent patch, has enough regime/event coverage for the current train, validation, test, recent, and stress design.
 
 Scope:
 
@@ -134,4 +146,3 @@ Explicitly not authorized:
 - alpha proof;
 - shadow/paper/live;
 - production portfolio construction.
-

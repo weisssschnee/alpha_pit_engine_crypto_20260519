@@ -14,6 +14,7 @@
 
 ## Confirmed System Components
 
+- Prior governance and infrastructure phases are already passed: A7PM-0/1/2/3, A7AI-F0/F1/F2/F3/F4, A7AA-0/1/2/3/4, A7MEM-0/1, and A7SEARCH4.
 - Field/search memory registry exists and is machine-readable:
   `runtime/a7mem0_search_memory_registry_20260628/a7mem0_next_search_prior.json`.
 - Search generator is fail-closed on memory enforcement by default.
