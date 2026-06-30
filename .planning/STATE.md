@@ -1,7 +1,7 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-06-30 20:55 Asia/Hong_Kong
-**Status:** A7SEARCH6 memory-seeded mechanism proxy search running; Phase 5 Wave 1 system rectification executed
+**Last updated:** 2026-07-01 00:30 Asia/Hong_Kong
+**Status:** A7SEARCH6 memory-seeded mechanism proxy search running under duplicate guard and safe supervisor
 
 ## Current Source Of Truth
 
@@ -148,12 +148,21 @@ As of 2026-06-30 20:55:
 
 ## Latest Remote Search Check
 
-As of the latest check on 2026-06-30 20:50-20:55:
+As of the latest check on 2026-07-01 00:27-00:30:
 
 - Company machine had active A7SEARCH6 proxy worker processes.
-- Direct shard checks showed `a7search6_proxy_s000` and `a7search6_proxy_s004` have proxy runtime outputs including `a7v3s9_proxy_manifest.json`, `a7v3s9_proxy_leaderboard.csv`, and checkpoint files.
-- A later SSH status probe timed out; treat this as remote connectivity noise until the next successful process/shard check.
-- Potential issue observed: duplicate workers may exist for the same shard IDs under booster supervisors. Next execution wave should add a lock/process audit before launching more workers.
+- Process audit script: `D:\HermesWorker\runtime\crypto_a7search6_remote_process_audit_20260701.ps1`.
+- Duplicate guard script: `D:\HermesWorker\runtime\crypto_a7search6_remote_duplicate_guard_20260701.ps1`.
+- Safe supervisor script: `D:\HermesWorker\runtime\crypto_a7search6_remote_safe_supervisor_20260701.ps1`.
+- Initial audit found `20` active process rows, `19` completed manifests, active shards `s015,s016,s019,s020,s021,s022,s023`, and duplicate shards `s019,s020,s022`.
+- Duplicate guard stopped booster supervisor parent PIDs `29848,34096`, killed `3` duplicate worker pairs, and marked suspect shards `s019,s020,s022`.
+- Post-guard audit found no duplicate shards.
+- Safe supervisor task id: `job_20260701_002917_3c2272`.
+- Safe supervisor restored utilization to `12` active shards: `s015,s016,s018,s019,s020,s021,s022,s023,s024,s025,s026,s027`.
+- Latest completed manifest count: `20`.
+- Latest free physical memory: about `13.0GB`; total physical memory about `31.6GB`.
+- Remote audit artifacts are under `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_20260630\supervisor_audit`.
+- Boundary: suspect shards must be checked before aggregate acceptance; if their manifests look inconsistent, rerun those shards cleanly before reward.
 
 ## Important Boundaries
 
