@@ -1,14 +1,17 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-06-30 16:02 Asia/Hong_Kong
-**Status:** A7SEARCH6 memory-seeded mechanism proxy search running on company machine
+**Last updated:** 2026-06-30 16:22 Asia/Hong_Kong
+**Status:** A7SEARCH6 memory-seeded mechanism proxy search running; Phase 5 system rectification plan created
 
 ## Current Source Of Truth
 
-- Main branch was clean and aligned with `origin/main` at `b158ce4 add a7search5 validation pack` before the current A7SEARCH6 edits.
+- Local main has unpushed commits beyond `origin/main` because GitHub HTTPS push is currently failing with connection reset / port 443 errors.
+- Local latest commit before this planning update: `a365155 add a7search6 mechanism seed proxy search`.
+- Remote `origin/main` remains at `b158ce4 add a7search5 validation pack` until push succeeds.
 - Project-level plan: `.planning/PROJECT.md`.
 - Project roadmap: `.planning/ROADMAP.md`.
 - Current durable planning output: `.planning/phases/01-crypto-search-hardening/01-PLAN.md`.
+- System rectification planning output: `.planning/phases/05-verified-core-extraction-or-new-repo-decision/05-PLAN.md`.
 - Active remote run root: `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_20260630`.
 - Active aggregate target: `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_aggregate_20260630`.
 
@@ -115,6 +118,20 @@ As of 2026-06-30 15:54-16:00:
 - Current effective workers after boosters: about `12` proxy workers; free physical memory about `9.7GB`.
 - Do not add more workers unless free physical memory remains above `8GB` after sustained progress; the company machine has about `31.6GB` total physical memory.
 - Boundary: A7SEARCH6 is proxy-only. If proxy aggregate later passes, it may authorize bounded full reward only.
+
+## Phase 5 System Rectification Plan
+
+As of 2026-06-30 16:22:
+
+- Phase plan: `.planning/phases/05-verified-core-extraction-or-new-repo-decision/05-PLAN.md`
+- Roadmap status: Phase 5 is `planned, PLAN.md ready`.
+- Purpose: separate verified reusable core components from historical research scripts and decide whether to continue in the existing repo or create a clean successor repo.
+- Execution should start with Wave 1 while A7SEARCH6 runs:
+  - freeze current system state;
+  - build verified-core inventory;
+  - define core interface contracts.
+- Execution must not stop active A7SEARCH6 workers.
+- Stronger execution waves should consume A7SEARCH6 aggregate once available.
 
 ## Important Boundaries
 

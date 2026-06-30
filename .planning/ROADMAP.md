@@ -104,11 +104,15 @@ Exit criteria:
 
 ## Phase 5 - Verified Core Extraction Or New Repo Decision
 
-Status: planned
+Status: planned, PLAN.md ready
 
 Goal:
 
 Separate verified reusable core components from historical research scripts and decide whether to continue in the existing repo or create a clean successor repo.
+
+Primary artifact:
+
+- `.planning/phases/05-verified-core-extraction-or-new-repo-decision/05-PLAN.md`
 
 Scope:
 
@@ -119,11 +123,14 @@ Scope:
 - Memory registry core.
 - Runtime orchestration.
 - Report/version package format.
+- Automatic transition rules between proxy aggregate, strict reward, validation pack, memory triage, and next queue.
 
 Exit criteria:
 
 - Verified core inventory exists.
 - Components are classified as keep, rewrite, archive, or legacy reference.
+- Core interface contracts exist for data, field, formula queue, proxy result, reward result, validation pack, memory update, and run manifest.
+- Search core, search policy, reward, validation, memory, and orchestration are separated in the architecture plan.
 - New repo decision is made with migration plan if needed.
 
 ## Phase 6 - Controlled Expansion
