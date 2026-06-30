@@ -129,6 +129,10 @@ Acceptance criteria:
 
 - A7SEARCH5_R2 aggregate is available as a source-of-truth artifact.
 
+Automation rule:
+
+- When a proxy aggregate completes with `authorizes_bounded_full_reward=true`, automatically launch bounded full reward on the selected queue. Do not pause for user approval unless the aggregate has eval errors, missing shards, or an authorization conflict.
+
 ### 3. Strict Reward And Candidate Triage
 
 Type: validation
@@ -237,4 +241,3 @@ Continue monitoring A7SEARCH5_R2 until either:
 
 - reports reach `128 / 128`, then aggregate and triage; or
 - reports remain stuck across the next inspection window, then diagnose shard-level logs and CPU progress.
-

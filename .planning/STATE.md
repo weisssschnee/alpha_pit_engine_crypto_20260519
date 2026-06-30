@@ -1,7 +1,7 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-06-30 14:32 Asia/Hong_Kong
-**Status:** A7SEARCH5_R2 proxy search completed; aggregate ready for bounded full reward triage
+**Last updated:** 2026-06-30 14:55 Asia/Hong_Kong
+**Status:** A7SEARCH5_R2 proxy search and bounded full reward completed; validation/triage next
 
 ## Current Source Of Truth
 
@@ -44,6 +44,24 @@ As of the last company-machine check on 2026-06-30 14:27-14:29:
 - Selected pair/motif: `open_interest|positioning` / `safe_div_abs`.
 - Boundary: aggregate authorizes bounded full reward only; no alpha proof, shadow, paper, or live.
 - No duplicate active shard groups were observed at completion.
+
+## Latest Full Reward State
+
+As of 2026-06-30 14:51:
+
+- Full reward report: `reports/CRYPTO_A7SEARCH5_SELECTED_FULL_REWARD_R3_AGGREGATE_STATUS_20260630.md`
+- Remote full reward root: `H:\AlphaFactory_CryptoData_archive\a7search5_selected_full_reward_r3_20260630`
+- Remote full reward aggregate root: `H:\AlphaFactory_CryptoData_archive\a7search5_selected_full_reward_r3_aggregate_20260630`
+- Decision: `PASS_A7V3S0_REWARD_SHARDED_AGGREGATE_READY`
+- Input proxy-selected candidates: `2`
+- Reward rows: `8`
+- Split metric rows: `240`
+- Eval error rows: `0`
+- Accepted rows: `3`
+- Accepted unique blueprints: `2`
+- Accepted pair/motif: `open_interest|positioning` / `safe_div_abs`
+- Accepted horizons: `4h` and `8h`
+- Boundary: authorizes validation/triage only, not alpha proof or deployment.
 - Current warnings: NumPy all-NaN / empty-slice warnings in invalid candidate branches; confirmed fatal issue so far is memory pressure, not formula traceback.
 
 ## Important Boundaries
