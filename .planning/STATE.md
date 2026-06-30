@@ -1,16 +1,16 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-06-30 15:50 Asia/Hong_Kong
-**Status:** A7SEARCH5_R2 proxy search and bounded full reward completed; A7SEARCH5 validation pack completed with non-unique increment hold
+**Last updated:** 2026-06-30 16:02 Asia/Hong_Kong
+**Status:** A7SEARCH6 memory-seeded mechanism proxy search running on company machine
 
 ## Current Source Of Truth
 
-- Main branch was clean and aligned with `origin/main` at `a8cb7b8 docs: record a7search5 full reward result` before the current validation-pack edits.
+- Main branch was clean and aligned with `origin/main` at `b158ce4 add a7search5 validation pack` before the current A7SEARCH6 edits.
 - Project-level plan: `.planning/PROJECT.md`.
 - Project roadmap: `.planning/ROADMAP.md`.
 - Current durable planning output: `.planning/phases/01-crypto-search-hardening/01-PLAN.md`.
-- Active remote run root: `H:\AlphaFactory_CryptoData_archive\a7search5_memory_enforced_proxy_65k_r2_20260628`.
-- Active aggregate target: `H:\AlphaFactory_CryptoData_archive\a7search5_memory_enforced_proxy_65k_r2_aggregate_20260629`.
+- Active remote run root: `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_20260630`.
+- Active aggregate target: `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_aggregate_20260630`.
 
 ## Confirmed System Components
 
@@ -84,6 +84,37 @@ As of 2026-06-30 15:42:
 - Operator-ablation accepted rows: `4`
 - Interpretation: the accepted OI value / top-account positioning structure is not explained by single-leg OI or positioning alone, but `SafeDiv(ZScore(OI),CSRank(positioning))` without `Abs` also passes. Treat the signal as a broader OI/positioning relative-scaling mechanism, not as a unique `Abs(SafeDiv)` discovery.
 - Boundary: this authorizes memory-seed triage and dedupe/neutralization follow-up only, not alpha proof or deployment.
+
+## Active A7SEARCH6 State
+
+As of 2026-06-30 15:54-16:00:
+
+- Prepare report: `reports/CRYPTO_A7SEARCH6_MECHANISM_MEMORY_SEED_PROXY_CONTRACT_20260630.md`
+- Local prepare manifest: `runtime/a7search6_prepare_manifest_20260630.json`
+- Remote run root: `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_20260630`
+- Supervisor: `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_20260630\a7search6_proxy_supervisor.ps1`
+- Detached task id: `job_20260630_155424_765773`
+- Booster task id: `job_20260630_160107_15cb00`
+- Second booster task id: `job_20260630_160408_46f4d8`
+- Decision: `PASS_A7SEARCH6_MECHANISM_QUEUE_READY`
+- Queue rows: `65,536`
+- Shards: `128` x `512`
+- Semantic pairs: `13`
+- Motifs: `19`
+- Skeletons: `1,165`
+- Lanes:
+  - `adjacent_mechanism_cross`: `30,866`
+  - `validated_oi_positioning_scale`: `12,288`
+  - `regime_conditioned_mechanism`: `12,142`
+  - `operator_ablation_surface`: `10,240`
+- Memory enforcement accepted rows: `65,536`; rejected attempts: `202,931`.
+- Company memory status at startup: total physical memory about `31.6GB`, free physical memory about `13.7GB` after first workers started.
+- Active workers at startup: `4` proxy shards, with supervisor configured as `max_parallel=12`, `min_free_gb=16`.
+- Booster supervisor was added at 2026-06-30 16:01 to avoid underutilization. It uses directory-lock skipping, starts only shards without an existing shard directory, and adds shards `s004-s007`.
+- Second booster was added at 2026-06-30 16:04 using the same directory-lock skipping and adds shards `s008-s011`.
+- Current effective workers after boosters: about `12` proxy workers; free physical memory about `9.7GB`.
+- Do not add more workers unless free physical memory remains above `8GB` after sustained progress; the company machine has about `31.6GB` total physical memory.
+- Boundary: A7SEARCH6 is proxy-only. If proxy aggregate later passes, it may authorize bounded full reward only.
 
 ## Important Boundaries
 
