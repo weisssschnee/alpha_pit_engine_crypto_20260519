@@ -1,7 +1,7 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-06-30 13:06 Asia/Hong_Kong
-**Status:** active search running; system hardening phase planned
+**Last updated:** 2026-06-30 14:32 Asia/Hong_Kong
+**Status:** A7SEARCH5_R2 proxy search completed; aggregate ready for bounded full reward triage
 
 ## Current Source Of Truth
 
@@ -25,21 +25,25 @@
 
 ## Active Search State
 
-As of the last company-machine check on 2026-06-30 13:04-13:05:
+As of the last company-machine check on 2026-06-30 14:27-14:29:
 
-- A7SEARCH5_R2 reports: `124 / 128`
-- Missing reports: `s124`, `s125`, `s126`, `s127`
-- Active shard count: `4`
-- Active shards: `s124` through `s127`
-- Supervisor: `D:\HermesWorker\runtime\a7search5_r2_lockaware_supervisor_20260629.ps1`
+- A7SEARCH5_R2 reports: `128 / 128`
+- Missing reports: `0`
+- Active shard count: `0`
+- Active shards: none
+- Supervisor: stopped after completion
 - Supervisor task id: `job_20260629_120926_3f21c9`
-- CPU delta check confirmed active workers are consuming CPU.
-- Aggregate report: not yet generated.
+- Aggregate report: `reports/CRYPTO_A7SEARCH5_MEMORY_ENFORCED_PROXY_R2_AGGREGATE_STATUS_20260630.md`
+- Remote aggregate report: `D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote\reports\CRYPTO_A7SEARCH5_MEMORY_ENFORCED_PROXY_R2_AGGREGATE_20260629.md`
+- Remote aggregate root: `H:\AlphaFactory_CryptoData_archive\a7search5_memory_enforced_proxy_65k_r2_aggregate_20260629`
 - Prior takeover supervisor was stopped after repeated restarts of `s064` and `s067`.
 - `s064` and `s067` showed `pyarrow read_table` `MemoryError`; lock-aware supervisor now uses `max_parallel=12`, `min_free_gb_to_start=18`, fresh locks, and max attempt holds.
-- Current memory guard status: free memory was about `18.14GB`; all missing shards are already active, so no additional start is needed.
-- CPU delta check confirmed all 4 active child workers are consuming CPU.
-- No duplicate active shard groups were observed.
+- Aggregate first failed under direct script execution because `from scripts...` could not resolve `scripts`; rerun with `PYTHONPATH=$Repo` and `python -m scripts.crypto_a7v3s9_proxy_aggregate` succeeded.
+- Aggregate decision: `PASS_A7V3S9_PROXY_AGGREGATE_SELECTED`.
+- Aggregate counts: `32768` leaderboard rows, `42` strict pass rows, `323` near-miss rows, `0` eval error rows, `2` selected rows, `2` selected unique blueprints.
+- Selected pair/motif: `open_interest|positioning` / `safe_div_abs`.
+- Boundary: aggregate authorizes bounded full reward only; no alpha proof, shadow, paper, or live.
+- No duplicate active shard groups were observed at completion.
 - Current warnings: NumPy all-NaN / empty-slice warnings in invalid candidate branches; confirmed fatal issue so far is memory pressure, not formula traceback.
 
 ## Important Boundaries
