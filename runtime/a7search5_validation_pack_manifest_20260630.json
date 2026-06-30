@@ -1,0 +1,32 @@
+{
+  "accepted_root": "H:\\AlphaFactory_CryptoData_archive\\a7search5_selected_full_reward_r3_aggregate_20260630",
+  "accepted_rows": 11,
+  "accepted_unique_blueprints": 6,
+  "authorizes_alpha_proof": false,
+  "authorizes_next_search_memory_seed": false,
+  "authorizes_shadow_paper_live": false,
+  "canonical_accepted_rows": 2,
+  "decision": "HOLD_A7SEARCH5_CANONICAL_NOT_UNIQUE_INCREMENT",
+  "eval_error_rows": 0,
+  "generated_at": "2026-06-30T07:42:14Z",
+  "leaderboard_rows": 64,
+  "operator_ablation_accepted_rows": 4,
+  "outputs": {
+    "accepted": "H:\\AlphaFactory_CryptoData_archive\\a7search5_validation_pack_20260630\\reward_runtime\\a7reward1_accepted_for_next_search.csv",
+    "accepted_summary": "H:\\AlphaFactory_CryptoData_archive\\a7search5_validation_pack_20260630\\a7search5_validation_accepted_summary.csv",
+    "errors": "H:\\AlphaFactory_CryptoData_archive\\a7search5_validation_pack_20260630\\reward_runtime\\a7reward1_eval_errors.csv",
+    "group_summary": "H:\\AlphaFactory_CryptoData_archive\\a7search5_validation_pack_20260630\\a7search5_validation_group_summary.csv",
+    "leaderboard": "H:\\AlphaFactory_CryptoData_archive\\a7search5_validation_pack_20260630\\reward_runtime\\a7reward1_candidate_reward_leaderboard.csv",
+    "manifest": "H:\\AlphaFactory_CryptoData_archive\\a7search5_validation_pack_20260630\\a7search5_validation_manifest.json",
+    "metrics": "H:\\AlphaFactory_CryptoData_archive\\a7search5_validation_pack_20260630\\reward_runtime\\a7reward1_split_reward_metrics.csv",
+    "queue": "H:\\AlphaFactory_CryptoData_archive\\a7search5_validation_pack_20260630\\a7search5_validation_ablation_queue.csv",
+    "rejections": "H:\\AlphaFactory_CryptoData_archive\\a7search5_validation_pack_20260630\\reward_runtime\\a7reward1_validation_gate_rejections.csv"
+  },
+  "queue_rows": 16,
+  "report": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\reports\\CRYPTO_A7SEARCH5_VALIDATION_PACK_20260630.md",
+  "reward_returncode": 0,
+  "runtime": "H:\\AlphaFactory_CryptoData_archive\\a7search5_validation_pack_20260630",
+  "single_leg_accepted_rows": 0,
+  "split_metric_rows": 1920,
+  "stage": "A7SEARCH5-VALIDATION-PACK"
+}

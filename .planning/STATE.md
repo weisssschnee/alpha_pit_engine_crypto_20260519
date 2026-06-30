@@ -1,11 +1,11 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-06-30 14:55 Asia/Hong_Kong
-**Status:** A7SEARCH5_R2 proxy search and bounded full reward completed; validation/triage next
+**Last updated:** 2026-06-30 15:50 Asia/Hong_Kong
+**Status:** A7SEARCH5_R2 proxy search and bounded full reward completed; A7SEARCH5 validation pack completed with non-unique increment hold
 
 ## Current Source Of Truth
 
-- Main branch is clean and aligned with `origin/main` at `1b13a43 fix search memory caps per shard`.
+- Main branch was clean and aligned with `origin/main` at `a8cb7b8 docs: record a7search5 full reward result` before the current validation-pack edits.
 - Project-level plan: `.planning/PROJECT.md`.
 - Project roadmap: `.planning/ROADMAP.md`.
 - Current durable planning output: `.planning/phases/01-crypto-search-hardening/01-PLAN.md`.
@@ -63,6 +63,27 @@ As of 2026-06-30 14:51:
 - Accepted horizons: `4h` and `8h`
 - Boundary: authorizes validation/triage only, not alpha proof or deployment.
 - Current warnings: NumPy all-NaN / empty-slice warnings in invalid candidate branches; confirmed fatal issue so far is memory pressure, not formula traceback.
+
+## Latest Validation Pack State
+
+As of 2026-06-30 15:42:
+
+- Validation report: `reports/CRYPTO_A7SEARCH5_VALIDATION_PACK_20260630.md`
+- Remote validation root: `H:\AlphaFactory_CryptoData_archive\a7search5_validation_pack_20260630`
+- Remote validation manifest: `H:\AlphaFactory_CryptoData_archive\a7search5_validation_pack_20260630\a7search5_validation_manifest.json`
+- Local manifest mirror: `runtime/a7search5_validation_pack_manifest_20260630.json`
+- Decision: `HOLD_A7SEARCH5_CANONICAL_NOT_UNIQUE_INCREMENT`
+- Queue rows: `16`
+- Leaderboard rows: `64`
+- Split metric rows: `1920`
+- Eval error rows: `0`
+- Accepted rows: `11`
+- Accepted unique blueprints: `6`
+- Canonical accepted rows: `2`
+- Single-leg accepted rows: `0`
+- Operator-ablation accepted rows: `4`
+- Interpretation: the accepted OI value / top-account positioning structure is not explained by single-leg OI or positioning alone, but `SafeDiv(ZScore(OI),CSRank(positioning))` without `Abs` also passes. Treat the signal as a broader OI/positioning relative-scaling mechanism, not as a unique `Abs(SafeDiv)` discovery.
+- Boundary: this authorizes memory-seed triage and dedupe/neutralization follow-up only, not alpha proof or deployment.
 
 ## Important Boundaries
 
