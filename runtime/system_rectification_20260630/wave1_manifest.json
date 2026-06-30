@@ -1,0 +1,27 @@
+{
+  "active_run_root": "H:\\AlphaFactory_CryptoData_archive\\a7search6_mechanism_memory_seed_proxy_65k_20260630",
+  "active_tasks": [
+    "job_20260630_155424_765773",
+    "job_20260630_160107_15cb00",
+    "job_20260630_160408_46f4d8"
+  ],
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_SYSTEM_RECTIFICATION_WAVE1_BUILT",
+  "generated_at": "2026-06-30T12:54:47Z",
+  "git_status_short": "?? scripts/crypto_system_rectification_wave1.py",
+  "local_head": "e160964",
+  "origin_main": "b158ce4",
+  "outputs": {
+    "architecture_blueprint_report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_SYSTEM_ARCHITECTURE_BLUEPRINT_20260630.md",
+    "architecture_edges": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\system_rectification_20260630\\architecture_edges.csv",
+    "architecture_nodes": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\system_rectification_20260630\\architecture_nodes.csv",
+    "core_interface_contracts": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\system_rectification_20260630\\core_interface_contracts.json",
+    "core_inventory": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\system_rectification_20260630\\core_inventory.csv",
+    "core_inventory_report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_SYSTEM_CORE_INVENTORY_20260630.md",
+    "core_status_summary": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\system_rectification_20260630\\core_status_summary.csv",
+    "interface_contract_report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_SYSTEM_CORE_INTERFACE_CONTRACTS_20260630.md",
+    "state_freeze_report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_SYSTEM_RECTIFICATION_STATE_FREEZE_20260630.md"
+  },
+  "stage": "SYSTEM-RECTIFICATION-WAVE1"
+}

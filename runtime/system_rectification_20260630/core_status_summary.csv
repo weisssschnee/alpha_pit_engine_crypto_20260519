@@ -1,0 +1,16 @@
+subsystem,status,count
+aggregation_reporting,wrap_with_contract,7
+feature_factory,legacy_reference,2871
+feature_response,archive_only,320
+field_contracts,archive_only,246
+formula_generation,wrap_with_contract,1
+planning,keep_core,5
+proxy_evaluation,keep_core,1
+reports,source_of_truth_evidence,230
+reward_validation,keep_core,1
+runtime_artifacts,source_of_truth_evidence,1526
+search_generation,legacy_reference,19
+search_generation,wrap_with_contract,2
+search_memory,keep_core,2
+search_memory,wrap_with_contract,15
+unknown,legacy_reference,215

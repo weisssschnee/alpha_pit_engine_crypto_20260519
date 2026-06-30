@@ -1,0 +1,10 @@
+id,label,type
+data,DataPanelContract,contract
+fields,FieldContractRegistry,contract
+formula,FormulaCandidateQueue,queue
+proxy,ProxyEvaluationResult,evaluation
+reward,RewardGateResult,validation
+validation,ValidationPackResult,validation
+memory,SearchMemoryUpdate,governance
+orchestration,CompanyMachineSupervisor,runtime
+reports,ReportsAndManifests,source_of_truth

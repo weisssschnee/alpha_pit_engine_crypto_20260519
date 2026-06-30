@@ -1,0 +1,153 @@
+{
+  "DataPanelContract": {
+    "authorizes": [
+      "field_materialization"
+    ],
+    "fail_closed_on": [
+      "missing_timestamp",
+      "duplicate_symbol_timestamp",
+      "future_feature_available_time",
+      "unregistered_panel"
+    ],
+    "optional_current": [
+      "open_interest_value_last",
+      "top_long_short_account_ratio_last",
+      "funding_rate",
+      "mark_index_basis_bps"
+    ],
+    "required": [
+      "symbol",
+      "timestamp",
+      "trade_close",
+      "trade_quote_volume"
+    ]
+  },
+  "FieldContractRegistry": {
+    "authorizes": [
+      "formula_queue_generation"
+    ],
+    "fail_closed_on": [
+      "missing_contract",
+      "label_or_future_field",
+      "same_bar_timing_violation"
+    ],
+    "required": [
+      "field",
+      "semantic_type",
+      "role",
+      "pit_status",
+      "latency_status",
+      "allowed_routes"
+    ]
+  },
+  "FormulaCandidateQueue": {
+    "authorizes": [
+      "proxy_evaluation_only"
+    ],
+    "fail_closed_on": [
+      "missing_expression",
+      "memory_reject",
+      "forbidden_field",
+      "unsupported_operator"
+    ],
+    "required": [
+      "blueprint_id",
+      "expression",
+      "semantic_pair",
+      "motif",
+      "horizon_h",
+      "skeleton_key"
+    ]
+  },
+  "ProxyEvaluationResult": {
+    "authorizes": [
+      "bounded_full_reward"
+    ],
+    "fail_closed_on": [
+      "eval_error_rows_nonzero",
+      "missing_shards",
+      "selected_rows_zero"
+    ],
+    "required": [
+      "blueprint_id",
+      "proxy_score",
+      "proxy_strict_pass",
+      "proxy_near_miss",
+      "proxy_selectable",
+      "hard_reject_reasons"
+    ]
+  },
+  "RewardGateResult": {
+    "authorizes": [
+      "validation_pack"
+    ],
+    "fail_closed_on": [
+      "train_orientation_no_positive_edge",
+      "oos_floor_not_positive",
+      "control_dominated",
+      "lag_stale_dominated",
+      "shuffle_dominated"
+    ],
+    "required": [
+      "train_sortino",
+      "validation_sortino",
+      "test_sortino",
+      "recent_sortino",
+      "min_oos_floor_sortino",
+      "stress_floor_sortino",
+      "recent_shuffle_control_ratio"
+    ]
+  },
+  "RunManifest": {
+    "authorizes": [
+      "next_stage_if_explicit"
+    ],
+    "fail_closed_on": [
+      "missing_decision",
+      "authorization_conflict",
+      "stale_source_of_truth"
+    ],
+    "required": [
+      "stage",
+      "decision",
+      "generated_at",
+      "runtime",
+      "report",
+      "authorizes_alpha_proof",
+      "authorizes_shadow_paper_live"
+    ]
+  },
+  "SearchMemoryUpdate": {
+    "authorizes": [
+      "next_queue_generation"
+    ],
+    "fail_closed_on": [
+      "missing_rejection_memory",
+      "missing_cluster_caps",
+      "not_required_for_next_large_search"
+    ],
+    "required": [
+      "candidate_memory",
+      "cluster_memory",
+      "pair_motif_prior",
+      "rejection_memory",
+      "decision"
+    ]
+  },
+  "ValidationPackResult": {
+    "authorizes": [
+      "memory_triage_only"
+    ],
+    "fail_closed_on": [
+      "eval_error_rows_nonzero",
+      "single_leg_dominates",
+      "canonical_failed"
+    ],
+    "required": [
+      "canonical_accepted_rows",
+      "single_leg_accepted_rows",
+      "operator_ablation_accepted_rows",
+      "decision"
+    ]
+  }
+}

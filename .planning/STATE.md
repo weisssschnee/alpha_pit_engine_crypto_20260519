@@ -1,7 +1,7 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-06-30 16:22 Asia/Hong_Kong
-**Status:** A7SEARCH6 memory-seeded mechanism proxy search running; Phase 5 system rectification plan created
+**Last updated:** 2026-06-30 20:55 Asia/Hong_Kong
+**Status:** A7SEARCH6 memory-seeded mechanism proxy search running; Phase 5 Wave 1 system rectification executed
 
 ## Current Source Of Truth
 
@@ -121,17 +121,39 @@ As of 2026-06-30 15:54-16:00:
 
 ## Phase 5 System Rectification Plan
 
-As of 2026-06-30 16:22:
+As of 2026-06-30 20:55:
 
 - Phase plan: `.planning/phases/05-verified-core-extraction-or-new-repo-decision/05-PLAN.md`
-- Roadmap status: Phase 5 is `planned, PLAN.md ready`.
+- Roadmap status: Phase 5 Wave 1 executed.
 - Purpose: separate verified reusable core components from historical research scripts and decide whether to continue in the existing repo or create a clean successor repo.
-- Execution should start with Wave 1 while A7SEARCH6 runs:
-  - freeze current system state;
-  - build verified-core inventory;
-  - define core interface contracts.
+- Wave 1 outputs:
+  - `reports/CRYPTO_SYSTEM_RECTIFICATION_STATE_FREEZE_20260630.md`
+  - `reports/CRYPTO_SYSTEM_CORE_INVENTORY_20260630.md`
+  - `reports/CRYPTO_SYSTEM_CORE_INTERFACE_CONTRACTS_20260630.md`
+  - `reports/CRYPTO_SYSTEM_ARCHITECTURE_BLUEPRINT_20260630.md`
+  - `runtime/system_rectification_20260630/wave1_manifest.json`
+  - `runtime/system_rectification_20260630/core_inventory.csv`
+  - `runtime/system_rectification_20260630/core_status_summary.csv`
+  - `runtime/system_rectification_20260630/core_interface_contracts.json`
+  - `runtime/system_rectification_20260630/architecture_nodes.csv`
+  - `runtime/system_rectification_20260630/architecture_edges.csv`
+- Wave 1 decision: `PASS_SYSTEM_RECTIFICATION_WAVE1_BUILT`.
+- Core candidates identified so far:
+  - keep core: search memory, proxy evaluator, strict reward gate, planning source of truth;
+  - wrap with contract: formula adapter, A7SEARCH6 queue generator, aggregate/reporting scripts;
+  - source-of-truth evidence: reports and runtime manifests;
+  - legacy/archive: old feature/field response/runtime artifacts unless revalidated by contract.
 - Execution must not stop active A7SEARCH6 workers.
 - Stronger execution waves should consume A7SEARCH6 aggregate once available.
+
+## Latest Remote Search Check
+
+As of the latest check on 2026-06-30 20:50-20:55:
+
+- Company machine had active A7SEARCH6 proxy worker processes.
+- Direct shard checks showed `a7search6_proxy_s000` and `a7search6_proxy_s004` have proxy runtime outputs including `a7v3s9_proxy_manifest.json`, `a7v3s9_proxy_leaderboard.csv`, and checkpoint files.
+- A later SSH status probe timed out; treat this as remote connectivity noise until the next successful process/shard check.
+- Potential issue observed: duplicate workers may exist for the same shard IDs under booster supervisors. Next execution wave should add a lock/process audit before launching more workers.
 
 ## Important Boundaries
 
