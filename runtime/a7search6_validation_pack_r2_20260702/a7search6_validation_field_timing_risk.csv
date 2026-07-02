@@ -1,0 +1,45 @@
+source_blueprint_id,source_rank,field,field_family,timing_risk_note
+a7search6_afa93f504b4c29d0,1,funding_rate_delta_state_24h,event_dense_funding,requires funding publication timestamp / ffill-age proof
+a7search6_afa93f504b4c29d0,1,open_interest_value_last,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_84f74066182786e3,2,global_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search6_84f74066182786e3,2,open_interest_value_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_06c5d4a2d2ce5d98,3,global_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search6_06c5d4a2d2ce5d98,3,open_interest_value_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_5be6987af4a13e67,4,account_position_divergence,positioning,requires account/position ratio publication lag proof
+a7search6_5be6987af4a13e67,4,open_interest_value_change_24h,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_4c8a38ddff3fb132,5,account_position_divergence,positioning,requires account/position ratio publication lag proof
+a7search6_4c8a38ddff3fb132,5,open_interest_value_last,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_e7ee64f0ef980aca,6,open_interest_value_last,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_e7ee64f0ef980aca,6,top_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search6_351a19252c9ff820,7,open_interest_value_last,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_351a19252c9ff820,7,top_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search6_5a326bbdc99cd2b9,8,global_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search6_5a326bbdc99cd2b9,8,open_interest_value_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_8185d7e38fbfef0a,9,mark_index_basis_bps,basis_premium,mark/index/premium bar-close alignment proof required
+a7search6_8185d7e38fbfef0a,9,open_interest_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_370b9d993902426e,10,open_interest_value_last,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_370b9d993902426e,10,taker_buy_sell_volume_ratio_last,taker_flow,bar-close flow field; must execute after bar close
+a7search6_229924c832dd5901,11,open_interest_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_229924c832dd5901,11,premium_close_bps,basis_premium,mark/index/premium bar-close alignment proof required
+a7search6_5a7a41644c28a05a,12,open_interest_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_5a7a41644c28a05a,12,premium_close_bps,basis_premium,mark/index/premium bar-close alignment proof required
+a7search6_0159a7544af64b1d,13,account_position_divergence,positioning,requires account/position ratio publication lag proof
+a7search6_0159a7544af64b1d,13,mark_index_basis_bps,basis_premium,mark/index/premium bar-close alignment proof required
+a7search6_2e796ac0b2a688c4,14,open_interest_last,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_2e796ac0b2a688c4,14,premium_close_bps,basis_premium,mark/index/premium bar-close alignment proof required
+a7search6_54fa70ba1036adfc,15,open_interest_value_last,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_54fa70ba1036adfc,15,taker_buy_sell_volume_ratio_mean,taker_flow,bar-close flow field; must execute after bar close
+a7search6_40090b5c3ec8edfc,16,taker_buy_sell_volume_ratio_mean,taker_flow,bar-close flow field; must execute after bar close
+a7search6_40090b5c3ec8edfc,16,top_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search6_05d9f75e309aa068,17,global_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search6_05d9f75e309aa068,17,stress_proxy_state,regime_state,state thresholds must be train-only or rolling-past
+a7search6_215546fe5dfda21c,18,global_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search6_215546fe5dfda21c,18,stress_proxy_state,regime_state,state thresholds must be train-only or rolling-past
+a7search6_9102c722a6bc3e6a,19,open_interest_value_last,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_9102c722a6bc3e6a,19,taker_buy_sell_volume_ratio_mean,taker_flow,bar-close flow field; must execute after bar close
+a7search6_8d74bccf1d25af11,20,quote_volume_z_168h,liquidity,bar-close liquidity field; must execute after bar close
+a7search6_8d74bccf1d25af11,20,top_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search6_9115fe1cea3feca0,21,stress_proxy_state,regime_state,state thresholds must be train-only or rolling-past
+a7search6_9115fe1cea3feca0,21,top_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search6_0bc40820e0608f51,22,open_interest_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search6_0bc40820e0608f51,22,premium_close_bps,basis_premium,mark/index/premium bar-close alignment proof required

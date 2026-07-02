@@ -1,0 +1,8 @@
+field_family,timing_risk_note,fields,source_blueprints
+open_interest,requires OI snapshot timestamp and no same-bar fill proof,5,16
+positioning,requires account/position ratio publication lag proof,3,13
+basis_premium,mark/index/premium bar-close alignment proof required,2,6
+taker_flow,bar-close flow field; must execute after bar close,2,4
+regime_state,state thresholds must be train-only or rolling-past,1,3
+event_dense_funding,requires funding publication timestamp / ffill-age proof,1,1
+liquidity,bar-close liquidity field; must execute after bar close,1,1

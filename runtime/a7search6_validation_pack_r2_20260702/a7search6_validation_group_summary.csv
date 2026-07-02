@@ -1,0 +1,4 @@
+validation_group,candidates,accepted_rows,accepted_unique,max_recent_sortino,max_min_oos_floor_sortino
+canonical,22,18,15,29.054392346582368,8.633900693694594
+operator_neighbor,97,0,0,18.65989839148232,3.464683642897198
+single_leg,176,0,0,24.23645286210768,3.391400019776617

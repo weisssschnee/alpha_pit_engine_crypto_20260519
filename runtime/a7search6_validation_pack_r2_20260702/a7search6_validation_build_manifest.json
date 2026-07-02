@@ -1,0 +1,14 @@
+{
+  "accepted_root": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_selected_full_reward_r1_aggregate_20260702",
+  "accepted_rows": 27,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_validation_reward": true,
+  "compressed_unique_blueprints": 22,
+  "decision": "PASS_A7SEARCH6_VALIDATION_QUEUE_BUILT",
+  "generated_at": "2026-07-02T17:16:48Z",
+  "max_fields_per_formula": 3,
+  "queue_rows": 295,
+  "runtime": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_r2_20260702",
+  "stage": "A7SEARCH6-VALIDATION-PACK"
+}

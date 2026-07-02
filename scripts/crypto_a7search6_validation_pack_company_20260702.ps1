@@ -3,11 +3,11 @@ $ErrorActionPreference = "Stop"
 $Repo = "D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote"
 $Python = "D:\HermesWorker\workspace\.venv\Scripts\python.exe"
 
-$Runtime = Join-Path $Repo "runtime\a7search6_validation_pack_20260702"
+$Runtime = Join-Path $Repo "runtime\a7search6_validation_pack_r2_20260702"
 $AcceptedRoot = Join-Path $Repo "runtime\a7search6_selected_full_reward_r1_aggregate_20260702"
-$RewardRunRoot = "D:\HermesWorker\runtime\a7search6_validation_pack_reward_20260702"
-$RewardAggregateRuntime = Join-Path $Repo "runtime\a7search6_validation_pack_reward_aggregate_20260702"
-$Report = Join-Path $Repo "reports\CRYPTO_A7SEARCH6_VALIDATION_PACK_20260702.md"
+$RewardRunRoot = "D:\HermesWorker\runtime\a7search6_validation_pack_reward_r2_20260702"
+$RewardAggregateRuntime = Join-Path $Repo "runtime\a7search6_validation_pack_reward_r2_aggregate_20260702"
+$Report = Join-Path $Repo "reports\CRYPTO_A7SEARCH6_VALIDATION_PACK_R2_20260702.md"
 $Log = Join-Path $RewardRunRoot "a7search6_validation_pack_company.log"
 $StatusPath = Join-Path $RewardRunRoot "a7search6_validation_reward_status.csv"
 
@@ -151,7 +151,7 @@ if ($ManifestCount -ne $Plan.Count) {
   throw "manifest count mismatch: $ManifestCount / $($Plan.Count)"
 }
 
-& $Python scripts\crypto_a7v3s0_reward_sharded_aggregate.py --run-root $RewardRunRoot --runtime $RewardAggregateRuntime --report (Join-Path $Runtime "CRYPTO_A7SEARCH6_VALIDATION_REWARD_AGGREGATE_20260702.md") *> (Join-Path $RewardRunRoot "reward_aggregate.log")
+& $Python scripts\crypto_a7v3s0_reward_sharded_aggregate.py --run-root $RewardRunRoot --runtime $RewardAggregateRuntime --report (Join-Path $Runtime "CRYPTO_A7SEARCH6_VALIDATION_REWARD_AGGREGATE_R2_20260702.md") *> (Join-Path $RewardRunRoot "reward_aggregate.log")
 if ($LASTEXITCODE -ne 0) {
   throw "reward aggregate failed: $LASTEXITCODE"
 }

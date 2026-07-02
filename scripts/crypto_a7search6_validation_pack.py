@@ -21,8 +21,8 @@ from scripts.crypto_a7reward1_portfolio_reward_model import expression_fields  #
 DATE = "20260702"
 STAGE = "A7SEARCH6-VALIDATION-PACK"
 DEFAULT_ACCEPTED_ROOT = REPO / "runtime" / "a7search6_selected_full_reward_r1_aggregate_20260702"
-DEFAULT_RUNTIME = REPO / "runtime" / "a7search6_validation_pack_20260702"
-DEFAULT_REPORT = REPO / "reports" / "CRYPTO_A7SEARCH6_VALIDATION_PACK_20260702.md"
+DEFAULT_RUNTIME = REPO / "runtime" / "a7search6_validation_pack_r2_20260702"
+DEFAULT_REPORT = REPO / "reports" / "CRYPTO_A7SEARCH6_VALIDATION_PACK_R2_20260702.md"
 
 
 def now_utc() -> str:
@@ -160,8 +160,6 @@ def validation_rows(compressed: pd.DataFrame, max_fields_per_formula: int = 3) -
             add_row(rows, source, "pair_mul_rank", f"Mul(CSRank({left}),CSRank({right}))", "operator_neighbor", "rank multiplication of first two source fields")
             add_row(rows, source, "pair_safe_div_rank", f"SafeDiv(CSRank({left}),Abs(CSRank({right})))", "operator_neighbor", "rank safe-div of first two source fields")
             add_row(rows, source, "pair_safe_div_rank_swapped", f"SafeDiv(CSRank({right}),Abs(CSRank({left})))", "operator_neighbor", "swapped rank safe-div of first two source fields")
-        if expr.startswith("SafeDiv(") and "Abs(" in expr:
-            add_row(rows, source, "operator_no_abs_text", expr.replace("Abs(", "(", 1), "operator_text_ablation", "remove first Abs wrapper textually")
         if expr.startswith("Mul("):
             add_row(rows, source, "operator_signed_sum_proxy", f"Add({fields[0]},{fields[1]})" if len(fields) >= 2 else expr, "operator_neighbor", "replace multiplication with additive proxy")
     return rows

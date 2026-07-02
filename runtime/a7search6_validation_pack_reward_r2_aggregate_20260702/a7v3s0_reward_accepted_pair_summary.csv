@@ -1,0 +1,8 @@
+semantic_pair,count
+open_interest|positioning,7
+open_interest|premium,3
+positioning|regime,3
+funding_dense|open_interest,2
+basis|positioning,1
+liquidity|positioning,1
+open_interest|taker_flow,1

@@ -1,0 +1,30 @@
+{
+  "accepted_rows": 18,
+  "accepted_unique_blueprints": 15,
+  "authorizes_alpha_proof": false,
+  "authorizes_next_search_seed_triage": true,
+  "authorizes_shadow_paper_live": false,
+  "blind_june_status": "NOT_EXECUTED_REWARD_SPLIT_NOT_DEFINED_FOR_JUNE_2026",
+  "canonical_failed_source_count": 7,
+  "compressed_unique_blueprints": 22,
+  "decision": "PASS_A7SEARCH6_VALIDATION_HAS_INCREMENTAL_CANDIDATES",
+  "eval_error_rows": 0,
+  "generated_at": "2026-07-02T18:13:53Z",
+  "incremental_source_count": 15,
+  "non_unique_source_count": 0,
+  "outputs": {
+    "accepted_summary": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_r2_20260702\\a7search6_validation_accepted_summary.csv",
+    "compressed_mechanisms": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_r2_20260702\\a7search6_validation_compressed_mechanisms.csv",
+    "field_timing_risk": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_r2_20260702\\a7search6_validation_field_timing_risk.csv",
+    "field_timing_risk_summary": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_r2_20260702\\a7search6_validation_field_timing_risk_summary.csv",
+    "group_summary": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_r2_20260702\\a7search6_validation_group_summary.csv",
+    "source_decisions": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_r2_20260702\\a7search6_validation_source_decisions.csv",
+    "validation_queue": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_r2_20260702\\a7search6_validation_ablation_queue.csv"
+  },
+  "queue_rows": 295,
+  "report": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\reports\\CRYPTO_A7SEARCH6_VALIDATION_PACK_R2_20260702.md",
+  "reward_aggregate_root": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_reward_r2_aggregate_20260702",
+  "reward_rows": 1180,
+  "runtime": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_r2_20260702",
+  "stage": "A7SEARCH6-VALIDATION-PACK"
+}

@@ -1,0 +1,9 @@
+motif,count
+safe_div_abs_validation,5
+adjacent_signed_rank_validation,3
+adjacent_spread_rank_validation,2
+adjacent_safe_div_csrank_validation,2
+regime_signed_validation,2
+scaled_spread_abs_validation,2
+adjacent_mul_validation,1
+adjacent_safe_div_abs_validation,1
