@@ -1,0 +1,14 @@
+semantic_pair,motif,count
+open_interest|positioning,safe_div_abs,6
+open_interest|taker_flow,adjacent_spread_rank,4
+liquidity|positioning,adjacent_safe_div_abs,2
+open_interest|positioning,scaled_spread_abs,2
+funding_dense|open_interest,adjacent_safe_div_csrank,2
+positioning|regime,regime_signed,2
+open_interest|premium,adjacent_mul,2
+open_interest|premium,adjacent_signed_rank,2
+basis|open_interest,adjacent_signed_rank,1
+basis|positioning,adjacent_spread_rank,1
+open_interest|positioning,z_safe_div_abs_csrank,1
+positioning|regime,adjacent_signed_rank,1
+positioning|taker_flow,adjacent_mul,1

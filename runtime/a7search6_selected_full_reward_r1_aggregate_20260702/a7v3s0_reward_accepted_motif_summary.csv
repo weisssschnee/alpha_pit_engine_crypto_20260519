@@ -1,0 +1,10 @@
+motif,count
+safe_div_abs,6
+adjacent_spread_rank,5
+adjacent_signed_rank,4
+adjacent_mul,3
+adjacent_safe_div_csrank,2
+adjacent_safe_div_abs,2
+regime_signed,2
+scaled_spread_abs,2
+z_safe_div_abs_csrank,1

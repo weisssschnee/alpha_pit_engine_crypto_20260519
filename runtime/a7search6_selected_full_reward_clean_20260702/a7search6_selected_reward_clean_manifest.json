@@ -1,0 +1,20 @@
+﻿{
+    "stage":  "A7SEARCH6-SELECTED-FULL-REWARD-CLEAN-FILTER",
+    "generated_at":  "2026-07-02T14:41:50Z",
+    "decision":  "PASS_A7SEARCH6_SELECTED_REWARD_QUEUE_CLEAN_READY",
+    "selected_queue":  "D:\\HermesWorker\\runtime\\a7search6_selected_aggregate_20260702\\a7search6_proxy_selected_for_reward.csv",
+    "clean_queue":  "D:\\HermesWorker\\runtime\\a7search6_selected_full_reward_clean_20260702\\a7search6_selected_for_reward_clean.csv",
+    "suspect_queue":  "D:\\HermesWorker\\runtime\\a7search6_selected_full_reward_clean_20260702\\a7search6_selected_for_reward_suspect_excluded.csv",
+    "input_rows":  187,
+    "clean_rows":  185,
+    "suspect_excluded_rows":  2,
+    "suspect_shard_ids":  [
+                              "a7search6_proxy_s019",
+                              "a7search6_proxy_s020",
+                              "a7search6_proxy_s022"
+                          ],
+    "has_proxy_shard_id":  true,
+    "authorizes_bounded_full_reward":  true,
+    "authorizes_alpha_proof":  false,
+    "authorizes_shadow_paper_live":  false
+}
