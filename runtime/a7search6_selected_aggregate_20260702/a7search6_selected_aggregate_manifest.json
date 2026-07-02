@@ -1,0 +1,27 @@
+{
+    "stage":  "A7SEARCH6_SELECTED_AGGREGATE",
+    "generated_at":  "2026-07-02T22:29:34.4179094+08:00",
+    "decision":  "PASS_A7SEARCH6_SELECTED_AGGREGATE_READY_WITH_SUSPECT_RECHECK",
+    "run_root":  "H:\\AlphaFactory_CryptoData_archive\\a7search6_mechanism_memory_seed_proxy_65k_20260630",
+    "stage_root":  "D:\\HermesWorker\\runtime\\a7search6_selected_aggregate_staging_20260702",
+    "runtime":  "D:\\HermesWorker\\runtime\\a7search6_selected_aggregate_20260702",
+    "report":  "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\reports\\CRYPTO_A7SEARCH6_SELECTED_AGGREGATE_20260702.md",
+    "expected_shards":  128,
+    "manifest_count":  128,
+    "selected_local_rows":  1299,
+    "selected_rows":  187,
+    "selected_unique_blueprints":  182,
+    "eval_error_rows":  0,
+    "missing_shards":  [
+
+                       ],
+    "suspect_shards":  [
+                           "a7search6_proxy_s019",
+                           "a7search6_proxy_s020",
+                           "a7search6_proxy_s022"
+                       ],
+    "selected_queue":  "D:\\HermesWorker\\runtime\\a7search6_selected_aggregate_20260702\\a7search6_proxy_selected_for_reward.csv",
+    "authorizes_bounded_full_reward":  true,
+    "authorizes_alpha_proof":  false,
+    "authorizes_shadow_paper_live":  false
+}

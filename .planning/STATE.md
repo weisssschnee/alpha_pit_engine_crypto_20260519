@@ -164,6 +164,25 @@ As of the latest check on 2026-07-01 00:27-00:30:
 - Remote audit artifacts are under `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_20260630\supervisor_audit`.
 - Boundary: suspect shards must be checked before aggregate acceptance; if their manifests look inconsistent, rerun those shards cleanly before reward.
 
+## Latest A7SEARCH6 Aggregate State
+
+As of 2026-07-02 22:29 Asia/Hong_Kong:
+
+- A7SEARCH6 proxy search completed: `128 / 128` shard manifests.
+- Direct H: run-root aggregation via Python/pandas and Python stdlib both stalled before writing outputs, likely due H: runtime file access/enumeration behavior.
+- Working route: stage selected/manifest small files from H: to D: and aggregate from D: with PowerShell.
+- Remote staging root: `D:\HermesWorker\runtime\a7search6_selected_aggregate_staging_20260702`.
+- Remote aggregate runtime: `D:\HermesWorker\runtime\a7search6_selected_aggregate_20260702`.
+- Local aggregate manifest: `runtime/a7search6_selected_aggregate_20260702/a7search6_selected_aggregate_manifest.json`.
+- Local aggregate report: `reports/CRYPTO_A7SEARCH6_SELECTED_AGGREGATE_20260702.md`.
+- Decision: `PASS_A7SEARCH6_SELECTED_AGGREGATE_READY_WITH_SUSPECT_RECHECK`.
+- Selected local rows: `1299`.
+- Selected bounded queue rows: `187`.
+- Selected unique blueprints: `182`.
+- Eval error rows: `0`.
+- Suspect shards requiring recheck before reward acceptance: `a7search6_proxy_s019`, `a7search6_proxy_s020`, `a7search6_proxy_s022`.
+- Authorization: bounded full reward queueing only; no alpha proof, shadow, paper, or live.
+
 ## Important Boundaries
 
 Allowed:
