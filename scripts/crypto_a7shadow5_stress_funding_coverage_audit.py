@@ -264,10 +264,24 @@ def build(runtime: Path, report: Path, recent_patch: Path, hours_per_split: int,
     blockers: list[str] = []
     if base_delta8_stress_share < 0.95:
         blockers.append("base_panel_funding_delta_stress_coverage_below_95pct")
-    if patch_stress_hours < stress_hours:
+    if base_delta8_stress_share < 0.95 and patch_stress_hours < stress_hours:
         blockers.append("recent_patch_does_not_cover_full_may_stress_window")
 
     decision = "HOLD_A7SHADOW5_STRESS_FUNDING_COVERAGE_GAP_CONFIRMED" if blockers else "PASS_A7SHADOW5_STRESS_FUNDING_COVERAGE_OK"
+    required_repair = (
+        [
+            "Backfill Binance funding-rate data for 2026-05-01 00:00 through 2026-05-26 00:00 UTC for the strict universe, plus at least 24h lookback before May 1 for funding_delta.",
+            "Merge the repair into the evaluator base panel or set A7AL_BASE_PANEL_ROOT to a merged panel before rerunning A7SHADOW-4.",
+            "Base OI and premium coverage are not the May-stress blocker in this audit, but any rebuilt merged panel should still re-check OI/premium/mark-index source trace.",
+            "If full funding backfill is unavailable, exclude funding_delta candidates from May-stress claims and rerun A7SHADOW-4 on OI/premium candidates only.",
+        ]
+        if blockers
+        else [
+            "No additional May-stress funding coverage repair is required for this evaluated base panel.",
+            "Proceed to A7SHADOW-4 with A7AL_BASE_PANEL_ROOT set to the repaired panel.",
+            "Keep source-trace/checksum audit as a final-proof prerequisite; this stage only validates evaluator coverage.",
+        ]
+    )
     manifest = {
         "stage": "A7SHADOW-5",
         "generated_at": now_utc(),
@@ -289,12 +303,7 @@ def build(runtime: Path, report: Path, recent_patch: Path, hours_per_split: int,
         "authorizes_shadow_paper_live": False,
         "authorizes_shadow_book": False,
         "authorizes_a7shadow4_rerun": not blockers,
-        "required_repair": [
-            "Backfill Binance funding-rate data for 2026-05-01 00:00 through 2026-05-26 00:00 UTC for the strict universe, plus at least 24h lookback before May 1 for funding_delta.",
-            "Merge the repair into the evaluator base panel or set A7AL_BASE_PANEL_ROOT to a merged panel before rerunning A7SHADOW-4.",
-            "Base OI and premium coverage are not the May-stress blocker in this audit, but any rebuilt merged panel should still re-check OI/premium/mark-index source trace.",
-            "If full funding backfill is unavailable, exclude funding_delta candidates from May-stress claims and rerun A7SHADOW-4 on OI/premium candidates only.",
-        ],
+        "required_repair": required_repair,
     }
     write_json(runtime / "a7shadow5_manifest.json", manifest)
 
@@ -331,12 +340,9 @@ def build(runtime: Path, report: Path, recent_patch: Path, hours_per_split: int,
         "",
         md_table(patch, 40),
         "",
-        "## Required Repair",
+        "## Required Repair / Next Step",
         "",
-        "- Backfill `2026-05-01 00:00` through `2026-05-26 00:00 UTC` for funding-rate fields, plus at least 24h lookback before May 1 for `funding_rate_delta_state_24h`.",
-        "- Then build a merged evaluator base panel and rerun A7SHADOW-4.",
-        "- Base OI and premium coverage are not the May-stress blocker in this audit; still re-check OI/premium/mark-index source trace if a merged panel is rebuilt.",
-        "- Without that repair, the OI/funding candidate can be reviewed for recent OOS only, not for May-stress proof.",
+        *[f"- {item}" for item in required_repair],
         "",
         "## Manifest",
         "",

@@ -1,0 +1,22 @@
+{
+  "authorizes_a7shadow4_rerun": true,
+  "authorizes_a7shadow5_rerun": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_book": false,
+  "authorizes_shadow_paper_live": false,
+  "base_panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v2_20260527",
+  "data_manifest": "G:\\AlphaFactory_CryptoData\\manifests\\binance_universe498_replay_1h_v2_may_funding_repair_v1_20260704_manifest.csv",
+  "decision": "PASS_A7SHADOW6_MAY_FUNDING_REPAIR_PANEL_BUILT",
+  "dense_delta_stress_finite_share": 1.0,
+  "fetch_error_count": 0,
+  "generated_at": "2026-07-03T17:50:21Z",
+  "ok_symbol_count": 96,
+  "output_panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v2_may_funding_repair_v1_20260704",
+  "raw_cache_root": "G:\\AlphaFactory_CryptoData\\raw\\binance_api\\funding_rate_may2026_repair_v1_20260704",
+  "repair_end": "2026-05-26T00:00:00Z",
+  "repair_start": "2026-04-30T00:00:00Z",
+  "runtime": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7shadow6_may_funding_repair_20260704",
+  "stage": "A7SHADOW-6",
+  "symbol_count": 96,
+  "vision_cache_root": "G:\\AlphaFactory_CryptoData\\raw\\binance_vision\\fundingRate_may2026_repair_v1_20260704"
+}

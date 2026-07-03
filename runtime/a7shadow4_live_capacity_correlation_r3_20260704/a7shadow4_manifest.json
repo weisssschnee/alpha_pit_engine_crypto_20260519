@@ -1,0 +1,36 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_live_adapter_probe": true,
+  "authorizes_shadow_book": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7SHADOW4_ENGINEERING_REVIEW_PACKET_BUILT",
+  "eval_error_rows": 0,
+  "family_counts": {
+    "funding": 2,
+    "open_interest": 4,
+    "premium_basis": 2
+  },
+  "field_count": 5,
+  "field_health_min_recent": 1.0,
+  "field_health_min_stress": 0.9983361064891847,
+  "generated_at": "2026-07-03T17:52:45Z",
+  "input_rows": 4,
+  "max_abs_recent_net_return_corr": 0.9281842719752638,
+  "max_abs_signal_corr": 1.0,
+  "mean_abs_signal_corr": 0.2898775056902269,
+  "next_required": [
+    "forward-locked live adapter probe on accepted blueprints",
+    "family diversification repair before further large search",
+    "explicit orderbook/spread slippage model before any shadow book"
+  ],
+  "recent_20bps_positive_sortino_blueprints": 3,
+  "recent_30bps_positive_sortino_blueprints": 3,
+  "stage": "A7SHADOW-4",
+  "unique_candidate_horizon_rows": 4,
+  "warnings": [
+    "max_signal_corr_gt_0_85",
+    "max_recent_net_return_corr_gt_0_85",
+    "open_interest_family_concentrated"
+  ]
+}

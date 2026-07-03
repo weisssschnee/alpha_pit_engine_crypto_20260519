@@ -1,0 +1,27 @@
+{
+  "authorizes_a7shadow4_rerun": true,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_book": false,
+  "authorizes_shadow_paper_live": false,
+  "base_delta_ffill8_stress_finite_share": 1.0,
+  "base_open_interest_stress_finite_share": 1.0,
+  "base_panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v2_may_funding_repair_v1_20260704",
+  "base_premium_stress_finite_share": 0.9983361064891847,
+  "best_delta_stress_finite_share_across_ffill_limits": 1.0,
+  "blockers": [],
+  "decision": "PASS_A7SHADOW5_STRESS_FUNDING_COVERAGE_OK",
+  "estimated_stress_hours_not_covered_by_recent_patch": 600,
+  "generated_at": "2026-07-03T17:55:07Z",
+  "hours_per_split": 720,
+  "recent_patch_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_recent_patch_1h_v1_20260612",
+  "recent_patch_stress_overlap_hours": 1,
+  "required_repair": [
+    "No additional May-stress funding coverage repair is required for this evaluated base panel.",
+    "Proceed to A7SHADOW-4 with A7AL_BASE_PANEL_ROOT set to the repaired panel.",
+    "Keep source-trace/checksum audit as a final-proof prerequisite; this stage only validates evaluator coverage."
+  ],
+  "stage": "A7SHADOW-5",
+  "stress_hours": 601,
+  "symbol_count": 96,
+  "train_hours_per_split": 0
+}

@@ -318,6 +318,20 @@ def evaluate(repo: Path, queue_path: Path, runtime: Path, report: Path, hours_pe
             "family diversification repair before further large search",
             "explicit orderbook/spread slippage model before any shadow book",
         ]
+    if blockers:
+        interpretation = (
+            "The surviving candidates remain an engineering-review packet, not a deployable book. "
+            "This stage is on HOLD because at least one hard health/evaluation blocker remains. "
+            "Recent-window metrics may still be useful for diagnosis, but blocked rows must not be "
+            "treated as stress-clean or deployment-ready."
+        )
+    else:
+        interpretation = (
+            "The surviving candidates form an engineering-review packet with field coverage and "
+            "evaluation health passing this stage. This still does not authorize alpha proof, shadow, "
+            "paper, or live trading. The main residual risks are signal/return overlap, family "
+            "concentration, and missing explicit orderbook/spread slippage modelling."
+        )
 
     manifest = {
         "stage": "A7SHADOW-4",
@@ -387,7 +401,7 @@ def evaluate(repo: Path, queue_path: Path, runtime: Path, report: Path, hours_pe
         "",
         "## Interpretation",
         "",
-        "The surviving candidates remain an engineering-review packet, not a deployable book. This R2 stage is on HOLD because stress-window field coverage is incomplete for funding_rate_delta_state_24h. Recent-window field health and cost ladder are usable, but May-stress claims for the OI/funding candidate are not reliable until that coverage gap is repaired or the candidate is excluded from stress claims. It also does not resolve family concentration: OI, funding, and premium/basis still dominate the accepted set.",
+        interpretation,
         "",
         "## Manifest",
         "",

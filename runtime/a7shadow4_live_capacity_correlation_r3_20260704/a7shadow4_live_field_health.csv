@@ -1,0 +1,6 @@
+field,status,overall_finite_ratio,recent_finite_ratio,stress_finite_ratio
+funding_rate_delta_state_24h,OK,0.996041756893316,1.0,1.0
+open_interest_last,OK,0.9979356142630287,1.0,1.0
+open_interest_mean,OK,0.9979356142630287,1.0,1.0
+open_interest_value_last,OK,0.9979356142630287,1.0,1.0
+premium_close_bps,OK,0.9987070521149126,1.0,0.9983361064891847
