@@ -280,11 +280,12 @@ def load_source_lag_passes(path: Path) -> tuple[set[str], set[str]]:
     ids: set[str] = set()
     formulas: set[str] = set()
     for _, row in passed.iterrows():
+        horizon = str(row.get("horizon_h", "") or "")
         for col in ["source_blueprint_id", "blueprint_id"]:
             value = str(row.get(col, "") or "")
             if value:
-                ids.add(value)
-        formulas.add(compact_expr(row.get("formula", "")))
+                ids.add(f"{value}|{horizon}")
+        formulas.add(f"{compact_expr(row.get('formula', ''))}|{horizon}")
     return ids, formulas
 
 
@@ -354,8 +355,9 @@ def apply_source_lag_policy(rewards: pd.DataFrame, source_policy: dict[str, dict
                 fragile_fields.append(field)
 
         blueprint_id = str(row.get("blueprint_id", "") or "")
+        horizon = str(row.get("horizon_h", "") or "")
         formula_key = compact_expr(formula)
-        has_pass = blueprint_id in source_lag_pass_ids or formula_key in source_lag_pass_formulas
+        has_pass = f"{blueprint_id}|{horizon}" in source_lag_pass_ids or f"{formula_key}|{horizon}" in source_lag_pass_formulas
         reject = bool(required_fields) and not has_pass
         if fragile_fields and not has_pass:
             reject = True

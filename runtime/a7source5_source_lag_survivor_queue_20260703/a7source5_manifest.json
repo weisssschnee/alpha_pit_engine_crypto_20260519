@@ -1,0 +1,14 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_reward2": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7SOURCE5_SURVIVOR_REWARD_QUEUE_BUILT",
+  "generated_at": "2026-07-03T06:51:45Z",
+  "output_queue": "runtime\\a7source5_source_lag_survivor_queue_20260703\\a7source5_source_lag_survivor_reward_queue.csv",
+  "queue_rows": 5,
+  "report": "reports\\CRYPTO_A7SOURCE5_SOURCE_LAG_SURVIVOR_QUEUE_20260703.md",
+  "runtime": "runtime\\a7source5_source_lag_survivor_queue_20260703",
+  "source4_summary": "runtime\\a7source4_batch_source_lag_retest_20260703\\a7source4_source_lag_summary.csv",
+  "stage": "A7SOURCE-5-SOURCE-LAG-SURVIVOR-QUEUE",
+  "unique_source_blueprints": 4
+}
