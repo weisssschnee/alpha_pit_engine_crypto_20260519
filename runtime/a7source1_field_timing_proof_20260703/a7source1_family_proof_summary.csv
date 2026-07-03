@@ -1,0 +1,5 @@
+field_family,proof_decision,fields,formulas
+open_interest,HOLD_PUBLICATION_LAG_PROOF_REQUIRED,2,3
+basis_premium,PASS_CONTROLLED_EXPERIMENT,1,1
+funding_state,HOLD_EVENT_PUBLICATION_PROOF_REQUIRED,1,1
+positioning,HOLD_PUBLICATION_LAG_PROOF_REQUIRED,1,1
