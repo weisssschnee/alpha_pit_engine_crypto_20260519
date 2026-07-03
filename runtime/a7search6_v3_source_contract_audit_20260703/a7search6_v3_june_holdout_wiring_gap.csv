@@ -1,0 +1,2 @@
+split_name,available,dataset,start,end,available_symbols,dataset_symbols,mean_coverage,mean_metrics_coverage,mean_funding_coverage,reward_split_wired,blocking_issue,recommended_action
+blind_june2026_20260601_20260611,True,binance_universe498_recent_patch_1h_v1_20260612,2026-06-01 00:00:00,2026-06-11 23:00:00,498,498,1.0,0.9997243877470667,1.0,False,reward split function does not define June blind split and numeric loader does not merge recent patch panel,add explicit blind_june2026 split after May stress; run accepted formulas only after source-contract gate

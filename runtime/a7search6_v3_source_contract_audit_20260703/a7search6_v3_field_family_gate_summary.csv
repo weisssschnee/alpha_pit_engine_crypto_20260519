@@ -1,0 +1,8 @@
+field_family,contract_status,fields,formulas
+open_interest,HOLD_SOURCE_PROOF,5,13
+positioning,HOLD_SOURCE_PROOF,3,12
+basis_premium,PASS_CONTROLLED_CONTRACT,2,4
+regime_state,HOLD_SOURCE_PROOF,1,3
+event_dense_funding,HOLD_SOURCE_PROOF,1,2
+liquidity,PASS_CONTROLLED_CONTRACT,1,1
+taker_flow,PASS_CONTROLLED_CONTRACT,1,1

@@ -1,0 +1,38 @@
+{
+  "accepted_input": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_r2_20260702\\a7search6_validation_accepted_summary.csv",
+  "accepted_rows": 18,
+  "accepted_unique_blueprints": 15,
+  "authorizes_alpha_proof": false,
+  "authorizes_june_holdout_adapter": true,
+  "authorizes_next_search": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_source_contract_repair": true,
+  "decision": "HOLD_A7SEARCH6V3_SOURCE_CONTRACT_PROOF_REQUIRED",
+  "field_contract_status_counts": {
+    "HOLD_SOURCE_PROOF": 10,
+    "PASS_CONTROLLED_CONTRACT": 4
+  },
+  "field_rows": 36,
+  "formula_rows": 18,
+  "formula_source_gate_counts": {
+    "HOLD_SOURCE_CONTRACT_PROOF_REQUIRED": 18
+  },
+  "generated_at": "2026-07-03T01:38:22Z",
+  "hard_hold_formula_count": 18,
+  "june_holdout_available": true,
+  "june_holdout_reward_split_wired": false,
+  "outputs": {
+    "dataset_contract_inventory": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_v3_source_contract_audit_20260703\\a7search6_v3_dataset_contract_inventory.csv",
+    "field_family_gate_summary": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_v3_source_contract_audit_20260703\\a7search6_v3_field_family_gate_summary.csv",
+    "field_source_contract_gate": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_v3_source_contract_audit_20260703\\a7search6_v3_field_source_contract_gate.csv",
+    "formula_field_map": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_v3_source_contract_audit_20260703\\a7search6_v3_formula_field_map.csv",
+    "formula_source_gate": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_v3_source_contract_audit_20260703\\a7search6_v3_formula_source_gate.csv",
+    "june_holdout_wiring_gap": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_v3_source_contract_audit_20260703\\a7search6_v3_june_holdout_wiring_gap.csv",
+    "manifest": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_v3_source_contract_audit_20260703\\a7search6_v3_manifest.json"
+  },
+  "pass_controlled_formula_count": 0,
+  "report": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\reports\\CRYPTO_A7SEARCH6_V3_SOURCE_CONTRACT_AUDIT_20260703.md",
+  "runtime": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_v3_source_contract_audit_20260703",
+  "stage": "A7SEARCH6-V3-SOURCE-CONTRACT",
+  "unique_fields": 14
+}
