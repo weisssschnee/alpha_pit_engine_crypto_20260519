@@ -1,0 +1,18 @@
+{
+  "stage": "A7CLEAN-1",
+  "generated_at": "2026-07-03T14:10:19.109155+00:00",
+  "decision": "PASS_A7CLEAN1_CLEANUP_CANDIDATES_AUDITED",
+  "data_root": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData",
+  "candidate_rows": 10,
+  "audit_output": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7clean1_remote_disk_safety_audit_20260703\\a7clean1_cleanup_candidate_audit.csv",
+  "summary_output": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7clean1_remote_disk_safety_audit_20260703\\a7clean1_cleanup_decision_summary.csv",
+  "total_candidate_gb": 13.684,
+  "delete_candidate_after_manifest_check_gb": 9.937,
+  "likely_safe_delete_or_archive_gb": 3.747,
+  "authorizes_delete": false,
+  "next_required": [
+    "manual confirmation or manifest-level proof before deleting transfer/incoming packages",
+    "codex_sync can be archived separately from alpha data",
+    "do not delete raw/gold/silver from this audit"
+  ]
+}
