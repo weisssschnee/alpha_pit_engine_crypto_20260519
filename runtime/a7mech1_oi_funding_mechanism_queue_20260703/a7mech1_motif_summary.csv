@@ -1,0 +1,10 @@
+motif,count
+oi_only_tsrank,36
+oi_only_cs_tsrank,36
+safe_div_cs_oi_over_abs_funding,19
+oi_rank_times_funding_sign,19
+oi_rank_minus_funding_rank,19
+safe_div_rank_over_funding_rank,18
+funding_only_csrank_zmean,15
+funding_only_sign,15
+base_safe_div_oi_funding,3

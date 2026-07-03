@@ -1,0 +1,14 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_next_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7SOURCE4_BATCH_SOURCE_LAG_SURVIVORS_FOUND",
+  "eval_error_rows": 0,
+  "generated_at": "2026-07-03T07:36:38Z",
+  "metric_rows": 900,
+  "queue_rows": 180,
+  "report": "reports\\CRYPTO_A7MECH2_OI_FUNDING_SOURCE_LAG_RETEST_20260703.md",
+  "runtime": "runtime\\a7mech2_oi_funding_source_lag_retest_20260703",
+  "source_lag_pass_count": 66,
+  "stage": "A7SOURCE-4-BATCH-SOURCE-LAG-RETEST"
+}

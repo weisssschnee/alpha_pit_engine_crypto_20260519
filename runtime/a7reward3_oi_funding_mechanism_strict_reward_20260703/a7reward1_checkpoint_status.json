@@ -1,0 +1,15 @@
+{
+  "completed_candidates": 66,
+  "error_rows": 0,
+  "generated_at": "2026-07-03T10:07:36Z",
+  "metric_rows": 7920,
+  "orientation_extension_crash_like_hours": 0,
+  "orientation_extension_hours": 0,
+  "orientation_train_hours": 8784,
+  "ranking_policy": "gate_pass_then_pareto_rank; diagnostic_composite_score_is_tiebreaker_only",
+  "reward_rows": 264,
+  "top_diagnostic_composite_score": 4.4293992518859175,
+  "top_gate_blueprint_id": "a7mech1_0169_safe_div_rank_over_funding_rank",
+  "total_candidates": 66,
+  "train_crash_like_hours": 2312
+}
