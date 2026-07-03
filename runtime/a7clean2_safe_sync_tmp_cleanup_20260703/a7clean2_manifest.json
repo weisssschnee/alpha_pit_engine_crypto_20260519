@@ -1,0 +1,25 @@
+{
+  "stage": "A7CLEAN-2",
+  "generated_at": "2026-07-03T14:19:16.831784+00:00",
+  "decision": "PASS_A7CLEAN2_SAFE_SYNC_TMP_CLEANED",
+  "data_root": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData",
+  "deleted_scope": "codex_sync/tmp artifacts only",
+  "raw_gold_silver_transfer_incoming_deleted": false,
+  "candidate_rows": 5,
+  "deleted_rows": 4,
+  "missing_rows": 1,
+  "failed_rows": 0,
+  "blocked_rows": 0,
+  "total_freed_gb_by_path_scan": 0.596,
+  "disk_free_gb_before": 9.847,
+  "disk_free_gb_after": 10.453,
+  "disk_free_delta_gb": 0.606,
+  "delete_log": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7clean2_safe_sync_tmp_cleanup_20260703\\a7clean2_safe_delete_log.csv",
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "next_required": [
+    "do not delete transfer/incoming without manifest-level proof",
+    "retry git push if network recovers",
+    "only launch heavy search after disk free space is sufficient for runtime checkpoints"
+  ]
+}

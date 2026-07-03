@@ -1,0 +1,6 @@
+relative_path,absolute_path,safe_within_data_root,size_gb_before,size_gb_after,freed_gb,delete_status,error
+codex_sync/sessions_2026_05,D:\HermesWorker\GDrive\AlphaFactory_CryptoData\codex_sync\sessions_2026_05,True,0.0,0.0,0.0,MISSING,path not present
+codex_sync/tmp,D:\HermesWorker\GDrive\AlphaFactory_CryptoData\codex_sync\tmp,True,0.451,0.0,0.451,DELETED,
+codex_sync/.tmp,D:\HermesWorker\GDrive\AlphaFactory_CryptoData\codex_sync\.tmp,True,0.071,0.0,0.071,DELETED,
+tmp/inspect_THETAUSDT_bookTicker_2024-03-19.zip,D:\HermesWorker\GDrive\AlphaFactory_CryptoData\tmp\inspect_THETAUSDT_bookTicker_2024-03-19.zip,True,0.052,0.0,0.052,DELETED,
+tmp/binance_vision,D:\HermesWorker\GDrive\AlphaFactory_CryptoData\tmp\binance_vision,True,0.022,0.0,0.022,DELETED,
