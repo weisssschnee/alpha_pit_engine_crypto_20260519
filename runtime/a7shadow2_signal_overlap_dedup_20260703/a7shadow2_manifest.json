@@ -1,0 +1,25 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_execution_realism_replay": true,
+  "authorizes_shadow_paper_live": false,
+  "cluster_count": 5,
+  "decision": "PASS_A7SHADOW2_SIGNAL_OVERLAP_DEDUP_BUILT",
+  "dedup_keep_rows": 5,
+  "field_family_counts": {
+    "basis": 1,
+    "funding_dense": 1,
+    "funding_state": 1,
+    "open_interest": 8,
+    "premium": 5
+  },
+  "generated_at": "2026-07-03T15:24:49.121009+00:00",
+  "hold_overlap_variant_rows": 4,
+  "input": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7shadow0_historical_strong_candidate_consolidation_20260703\\a7shadow0_shadow_readiness_review_queue.csv",
+  "input_rows": 9,
+  "next_required": [
+    "run execution realism and cost-capacity replay on a7shadow2_keep_queue",
+    "run live data adapter health check before any shadow book"
+  ],
+  "pairwise_rows": 36,
+  "stage": "A7SHADOW-2"
+}
