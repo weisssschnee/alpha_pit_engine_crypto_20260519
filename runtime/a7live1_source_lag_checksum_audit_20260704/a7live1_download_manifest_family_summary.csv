@@ -1,0 +1,7 @@
+source,family,rows,status_values,checksum_status_values,sha256_present_count,error_count
+binance_fapi_rest,fundingRate,498,downloaded;exists,rest_no_checksum,498,0
+binance_vision_daily,indexPriceKlines,8466,downloaded;exists,not_checked_fast_path,8466,0
+binance_vision_daily,klines,8466,downloaded;exists,not_checked_fast_path,8466,0
+binance_vision_daily,markPriceKlines,8466,downloaded;exists,not_checked_fast_path,8466,0
+binance_vision_daily,metrics,8466,downloaded;exists,not_checked_fast_path,8466,0
+binance_vision_daily,premiumIndexKlines,8466,downloaded;exists;missing_404,not_checked_fast_path,8463,3

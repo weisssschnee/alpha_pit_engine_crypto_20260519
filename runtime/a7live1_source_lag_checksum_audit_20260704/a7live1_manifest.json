@@ -1,0 +1,36 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_family_diversified_search": true,
+  "authorizes_final_proof": false,
+  "authorizes_shadow_book": false,
+  "authorizes_shadow_paper_live": false,
+  "candidate_count": 2,
+  "controlled_research_blockers": [],
+  "coverage_rows": 498,
+  "decision": "PASS_A7LIVE1_CONTROLLED_RESEARCH_SOURCE_LAG_OK_CHECKSUM_PENDING",
+  "download_manifest_rows": 42828,
+  "field_audit_rows": 4,
+  "final_proof_blockers": [
+    "official_checksum_not_closed",
+    "recent_patch_report_fast_checksum_pending",
+    "rest_source_has_no_exchange_checksum"
+  ],
+  "generated_at": "2026-07-03T18:29:05Z",
+  "gold_manifest_rows": 498,
+  "next_required": [
+    "Close official Binance Vision CHECKSUM audit before any final proof claim.",
+    "Treat REST funding source as controlled-research evidence unless an independent archive/source trace is added.",
+    "Proceed to A7SEARCH7 family-diversified queue only if controlled_research_blockers is empty."
+  ],
+  "packet_path": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7shadow7_dedup_review_packet_20260704\\a7shadow7_selected_review_packet.csv",
+  "patch_dataset": "binance_universe498_recent_patch_1h_v1_20260612",
+  "patch_report_decision": "PASS_BINANCE_UNIVERSE498_RECENT_PATCH_READY_WITH_SYMBOL_GAPS_FAST_CHECKSUM_PENDING",
+  "patch_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_recent_patch_1h_v1_20260612",
+  "selected_fields": [
+    "funding_rate_delta_state_24h",
+    "open_interest_mean",
+    "open_interest_value_last",
+    "premium_close_bps"
+  ],
+  "stage": "A7LIVE-1"
+}

@@ -1,12 +1,12 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-07-04 00:40 Asia/Hong_Kong
-**Status:** shadow-engineering packet deduped; forward adapter probe passed; no deployment authorization
+**Last updated:** 2026-07-04 02:30 Asia/Hong_Kong
+**Status:** forward source-lag audit passed for controlled research; final proof checksum still pending; no deployment authorization
 
 ## Current Source Of Truth
 
-- Git status at this snapshot: `HEAD == origin/main == 2a6be0d331e4c6ea691acad2d1b61be77e2d6299`.
-- Latest commit: `2a6be0d validate: dedup shadow packet and probe forward adapter`.
+- Git status at the previous committed snapshot: `HEAD == origin/main == e7f55b9 planning: update crypto shadow taskflow`.
+- Latest pending stage in this update: A7LIVE-1 source-lag/checksum audit.
 - Project-level plan: `.planning/PROJECT.md`.
 - Project roadmap: `.planning/ROADMAP.md`.
 - Active phase plan: `.planning/phases/01-crypto-search-hardening/01-PLAN.md`.
@@ -16,6 +16,7 @@
   - `reports/CRYPTO_A7SHADOW4_LIVE_CAPACITY_CORRELATION_R3_20260704.md`
   - `reports/CRYPTO_A7SHADOW7_DEDUP_REVIEW_PACKET_20260704.md`
   - `reports/CRYPTO_A7LIVE0_FORWARD_ADAPTER_PROBE_20260704.md`
+  - `reports/CRYPTO_A7LIVE1_SOURCE_LAG_CHECKSUM_AUDIT_20260704.md`
 
 ## Confirmed System Components
 
@@ -97,6 +98,26 @@ Mul(CSRank(Mean(open_interest_mean,8)),Sign(Mean(premium_close_bps,48)))
 - Minimum formula active ratio: `0.884446`.
 - Boundary: adapter/materialization evidence only; no alpha proof, no shadow book, no paper/live, no trading authorization.
 
+## Latest Source-Lag / Checksum Audit State
+
+- A7LIVE-1 decision: `PASS_A7LIVE1_CONTROLLED_RESEARCH_SOURCE_LAG_OK_CHECKSUM_PENDING`.
+- Candidate count: `2`.
+- Selected fields:
+  - `funding_rate_delta_state_24h`
+  - `open_interest_mean`
+  - `open_interest_value_last`
+  - `premium_close_bps`
+- Controlled research blockers: none.
+- Patch coverage rows: `498`.
+- Download manifest rows: `42828`.
+- Gold manifest rows: `498`.
+- A7LIVE-1 authorizes family-diversified controlled search: `true`.
+- Final proof blockers remain:
+  - `official_checksum_not_closed`
+  - `recent_patch_report_fast_checksum_pending`
+  - `rest_source_has_no_exchange_checksum`
+- Boundary: this closes the source-lag/PIT concern for controlled research continuation, but still does not authorize alpha proof, shadow book, paper/live, or final proof.
+
 ## Current Remote Compute State
 
 - No long-running A7 Python worker is required by the current stage.
@@ -105,18 +126,15 @@ Mul(CSRank(Mean(open_interest_mean,8)),Sign(Mean(premium_close_bps,48)))
 
 ## Immediate Next Taskflow
 
-1. A7LIVE-1 source-lag/checksum audit for the forward recent patch.
-   - Verify source trace, field timestamp lag, funding event alignment, mark/index/premium aliases, and no same-bar/future leakage.
-   - Output must be machine-readable and block stronger claims if source lag or checksum evidence is incomplete.
-2. A7SEARCH7 family-diversified queue build.
+1. A7SEARCH7 family-diversified queue build.
    - Consume A7SHADOW-7 selected packet and rejected-overlap map.
    - Keep OI/funding/premium winners as memory priors, not as the only search space.
    - Force non-OI families into the queue: liquidity, taker flow, volatility, CE overlay, regime/event state.
    - Apply caps by expression, skeleton, semantic pair, motif, base field, and economic exposure.
-3. A7SEARCH7 proxy run on company machine.
+2. A7SEARCH7 proxy run on company machine.
    - Large enough to test family breadth, but checkpointed and restartable.
    - Must write shard manifests and aggregate selected rows.
-4. Strict reward and dedupe loop.
+3. Strict reward and dedupe loop.
    - Train Sortino, validation/test/recent/stress, controls, shuffle, lag/stale, non-overlap, and family diversification all required.
 
 ## Blocked Claims
