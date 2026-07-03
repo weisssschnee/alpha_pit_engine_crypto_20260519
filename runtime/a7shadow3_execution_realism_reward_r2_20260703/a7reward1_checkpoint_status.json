@@ -1,0 +1,15 @@
+{
+  "completed_candidates": 5,
+  "error_rows": 0,
+  "generated_at": "2026-07-03T15:47:20Z",
+  "metric_rows": 600,
+  "orientation_extension_crash_like_hours": 0,
+  "orientation_extension_hours": 0,
+  "orientation_train_hours": 8784,
+  "ranking_policy": "gate_pass_then_pareto_rank; diagnostic_composite_score_is_tiebreaker_only",
+  "reward_rows": 20,
+  "top_diagnostic_composite_score": 4.199360706263892,
+  "top_gate_blueprint_id": "a7shadow2_c002",
+  "total_candidates": 5,
+  "train_crash_like_hours": 2312
+}

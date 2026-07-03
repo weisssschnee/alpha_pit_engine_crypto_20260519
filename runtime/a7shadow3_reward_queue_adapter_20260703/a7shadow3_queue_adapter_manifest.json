@@ -1,0 +1,14 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_reward_rerun": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7SHADOW3_REWARD_QUEUE_ADAPTED",
+  "duplicate_blueprint_id_rows": 0,
+  "generated_at": "2026-07-03T15:41:27.397183+00:00",
+  "input": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7shadow2_signal_overlap_dedup_20260703\\a7shadow2_keep_queue.csv",
+  "input_rows": 5,
+  "missing_expression_rows": 0,
+  "output": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7shadow3_reward_queue_adapter_20260703\\a7shadow3_reward_input_queue.csv",
+  "output_rows": 5,
+  "stage": "A7SHADOW-3-QUEUE-ADAPTER"
+}

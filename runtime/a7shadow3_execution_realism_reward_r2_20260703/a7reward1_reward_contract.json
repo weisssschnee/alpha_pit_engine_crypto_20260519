@@ -1,0 +1,70 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "diagnostic_composite_formula": {
+    "capacity_score": 0.05,
+    "control_penalty": -0.25,
+    "max_drawdown_penalty": -0.15,
+    "may_stress_sortino": 0.05,
+    "min_validation_test_recent_sortino": 0.2,
+    "recent_rankic_times_20": 0.15,
+    "recent_sharpe": 0.15,
+    "recent_sortino": 0.35,
+    "turnover_penalty": -0.05
+  },
+  "hard_rejects": [
+    "non-finite or missing reward metrics",
+    "recent_oos Sortino <= 0",
+    "validation/test/recent OOS not all positive on net mean return",
+    "control_ratio_recent >= 1.0",
+    "stress floor Sortino <= 0",
+    "OOS lag/stale/control variant dominates original",
+    "ranked-label-only evidence without raw tradable PnL support",
+    "missing transaction cost model",
+    "turnover excessive relative to reward",
+    "same-bar/future/leakage field violations upstream"
+  ],
+  "mature_references_used": [
+    "FinRL portfolio allocation reward: portfolio value/return with trading environment separation",
+    "TensorTrade risk-adjusted reward schemes: Sharpe and Sortino style objective choices",
+    "AlphaGen/AlphaForge style set-level reward: marginal contribution and alpha collection performance",
+    "Crypto RL/backtest practice: transaction costs, drawdown, turnover and tail-risk penalties"
+  ],
+  "pareto_objectives": [
+    "obj_train_sortino",
+    "obj_train_oos_consistency",
+    "obj_recent_sortino",
+    "obj_min_oos_sortino",
+    "obj_min_oos_floor_sortino",
+    "obj_recent_sharpe",
+    "obj_recent_rankic",
+    "obj_stress_sortino",
+    "obj_neg_recent_drawdown",
+    "obj_neg_recent_turnover",
+    "obj_neg_shuffle_control_ratio",
+    "obj_neg_oos_control_dominated_count",
+    "obj_neg_oos_lag_stale_dominated_count"
+  ],
+  "portfolio_construction": {
+    "orientation": "chosen on full train_2024 plus optional contiguous post-train extension; extension rows are relabeled out of OOS evaluation",
+    "rebalance": "hourly signal timestamps; non-overlap reward uses horizon-stride offsets",
+    "return_label": "raw forward log return for tradable PnL; other label families remain diagnostics",
+    "signal_to_weight": "cross-sectional percentile rank, demeaned to dollar neutral, normalized to gross 1 per timestamp",
+    "transaction_cost": "one-way turnover * cost_bps / 10000"
+  },
+  "primary_reward": "OOS cost-adjusted Sortino on dollar-neutral cross-sectional portfolio returns",
+  "ranking_policy": "multi-objective gates and Pareto ranking define the primary leaderboard; the fixed-weight score is diagnostic only",
+  "reward_model": "cost_adjusted_portfolio_reward_v1",
+  "secondary_rewards": [
+    "OOS Sharpe",
+    "OOS IC and RankIC",
+    "May/stress Sortino",
+    "max drawdown",
+    "turnover",
+    "capacity proxy from quote volume weighted by absolute portfolio weights",
+    "control dominance penalty",
+    "split stability",
+    "family and skeleton diversity retained outside this per-candidate evaluator"
+  ],
+  "stage": "A7REWARD-1"
+}

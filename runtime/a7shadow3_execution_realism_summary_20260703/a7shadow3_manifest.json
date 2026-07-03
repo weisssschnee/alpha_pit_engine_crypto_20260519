@@ -1,0 +1,26 @@
+{
+  "accepted_rows": 4,
+  "accepted_unique_blueprints": 3,
+  "adapter_decision": "PASS_A7SHADOW3_REWARD_QUEUE_ADAPTED",
+  "authorizes_alpha_proof": false,
+  "authorizes_next_engineering_review": true,
+  "authorizes_shadow_book": false,
+  "authorizes_shadow_paper_live": false,
+  "cost_bps": 5.0,
+  "decision": "PASS_A7SHADOW3_EXECUTION_REALISM_REWARD_ACCEPTED",
+  "eval_error_rows": 0,
+  "generated_at": "2026-07-03T15:50:14.370481+00:00",
+  "hard_reject_rows": 16,
+  "may_stress_hours": 601,
+  "next_required": [
+    "live data adapter health check for accepted blueprints",
+    "full signal correlation using realized return series, not just token overlap",
+    "execution-capacity replay with explicit slippage/liquidity caps before any shadow book"
+  ],
+  "queue_rows": 5,
+  "reward_decision": "PASS_A7REWARD1_PORTFOLIO_REWARD_LEADERBOARD_BUILT",
+  "reward_rows": 20,
+  "stage": "A7SHADOW-3",
+  "top_pareto_blueprint_id": "a7shadow2_c002",
+  "train_crash_like_hours": 2312
+}
