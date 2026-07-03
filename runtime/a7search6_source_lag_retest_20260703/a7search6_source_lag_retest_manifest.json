@@ -1,0 +1,18 @@
+{
+  "all_risk_lag1_pass_rows": 1,
+  "all_risk_lag2_pass_rows": 1,
+  "authorizes_alpha_proof": false,
+  "authorizes_next_search": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_source_contract_repair_priority": true,
+  "decision": "PASS_A7SEARCH6_SOURCE_LAG_SURVIVORS_FOUND",
+  "error_rows": 0,
+  "generated_at": "2026-07-03T02:06:26Z",
+  "input": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_june_blind_adapter_20260703\\a7search6_june_blind_original_summary.csv",
+  "metric_rows": 102,
+  "panel_root": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v3_patch_age_20260613",
+  "queue_rows": 3,
+  "report": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\reports\\CRYPTO_A7SEARCH6_SOURCE_LAG_RETEST_20260703.md",
+  "runtime": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_source_lag_retest_20260703",
+  "stage": "A7SEARCH6-SOURCE-LAG-RETEST"
+}
