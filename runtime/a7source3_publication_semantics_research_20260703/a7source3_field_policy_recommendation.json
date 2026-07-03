@@ -1,0 +1,65 @@
+{
+  "stage": "A7SOURCE-3",
+  "generated_date": "2026-07-03",
+  "decision": "HOLD_A7SOURCE3_VENDOR_PUBLICATION_SLA_NOT_PROVEN_BUT_SOURCE_LAG_SURVIVES",
+  "authorization": {
+    "controlled_research": true,
+    "source_lag_search": true,
+    "large_search": false,
+    "alpha_proof": false,
+    "shadow_paper_live": false
+  },
+  "field_family_policy": {
+    "basis_premium": {
+      "status": "CONTROLLED_ALLOWED",
+      "fields": ["mark_index_basis_bps", "premium_close_bps"],
+      "required_gate": "standard_bar_close_timing_plus_checksum_before_final_proof"
+    },
+    "liquidity": {
+      "status": "CONTROLLED_ALLOWED",
+      "fields": ["quote_volume_z_168h"],
+      "required_gate": "standard_bar_close_timing"
+    },
+    "taker_flow": {
+      "status": "CONTROLLED_ALLOWED_WITH_SOURCE_TRACE_BEFORE_FINAL",
+      "fields": ["taker_buy_sell_volume_ratio_last"],
+      "required_gate": "source_trace_before_final_proof"
+    },
+    "open_interest": {
+      "status": "SOURCE_LAG_REQUIRED",
+      "fields": ["open_interest_last", "open_interest_value_last"],
+      "required_gate": "source_lag_1h_and_2h_survival_or_publication_time_proof"
+    },
+    "positioning": {
+      "status": "SOURCE_LAG_REQUIRED_AND_CURRENT_FORMULA_FRAGILE",
+      "fields": ["top_long_short_account_ratio_last"],
+      "required_gate": "source_lag_1h_and_2h_survival"
+    },
+    "funding_state": {
+      "status": "EVENT_PUBLICATION_REQUIRED_OR_SOURCE_LAG_REQUIRED",
+      "fields": ["funding_rate_delta_state_24h"],
+      "required_gate": "funding_event_publication_time_or_source_lag_survival"
+    },
+    "regime_state": {
+      "status": "THRESHOLD_LINEAGE_REQUIRED",
+      "fields": ["stress_proxy_state"],
+      "required_gate": "threshold_lineage_and_non_empty_response"
+    }
+  },
+  "candidate_policy": {
+    "keep_diagnostic_source_lag_survivors": [
+      "a7search6_afa93f504b4c29d0",
+      "a7search6_2e796ac0b2a688c4"
+    ],
+    "block_source_lag_fragile": [
+      "a7search6_e7ee64f0ef980aca"
+    ],
+    "mandatory_reward_columns": [
+      "source_lag_1h_sortino",
+      "source_lag_2h_sortino",
+      "source_lag_1h_nonoverlap_floor_sortino",
+      "source_lag_2h_nonoverlap_floor_sortino",
+      "source_lag_gate"
+    ]
+  }
+}
