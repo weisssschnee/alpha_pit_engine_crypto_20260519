@@ -1,0 +1,33 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_live_adapter_probe": true,
+  "authorizes_shadow_book": false,
+  "authorizes_shadow_paper_live": false,
+  "blockers": [],
+  "decision": "PASS_A7SHADOW7_DEDUP_REVIEW_PACKET_BUILT",
+  "generated_at": "2026-07-03T18:10:01Z",
+  "input_candidate_rows": 4,
+  "input_queue": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7shadow3_execution_realism_summary_20260703\\a7shadow3_execution_accepted.csv",
+  "input_shadow4_decision": "PASS_A7SHADOW4_ENGINEERING_REVIEW_PACKET_BUILT",
+  "input_shadow4_runtime": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7shadow4_live_capacity_correlation_r3_20260704",
+  "max_selected_abs_recent_net_return_corr": 0.0532733154551249,
+  "max_selected_abs_signal_corr": 0.0100151181711994,
+  "next_required": [
+    "Run A7LIVE-0 forward-locked adapter probe on the selected review packet.",
+    "Do not treat this packet as a book; selected_count remains small and family concentration remains.",
+    "Use the overlap rejection map as memory for the next family-diversified search."
+  ],
+  "overlap_cluster_count": 2,
+  "rejected_overlap_variant_count": 2,
+  "selected_count": 2,
+  "selected_family_counts": {
+    "funding": 1,
+    "open_interest": 2,
+    "premium_basis": 1
+  },
+  "stage": "A7SHADOW-7",
+  "warnings": [
+    "selected_packet_open_interest_concentrated",
+    "selected_packet_too_small_for_book"
+  ]
+}

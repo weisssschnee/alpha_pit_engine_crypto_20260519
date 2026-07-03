@@ -1,0 +1,4 @@
+left,right,reason,value,threshold
+a7shadow2_c007|h4,a7shadow2_c007|h8,same_expression,1.0,1.0
+a7shadow2_c007|h4,a7shadow2_c007|h8,signal_corr,1.0,0.85
+a7shadow2_c002|h24,a7shadow2_c006|h24,recent_net_return_corr,0.9281842719752638,0.85
