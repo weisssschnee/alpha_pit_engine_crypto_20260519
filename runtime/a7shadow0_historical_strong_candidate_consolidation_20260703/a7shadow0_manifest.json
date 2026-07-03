@@ -1,0 +1,25 @@
+{
+  "stage": "A7SHADOW-0",
+  "generated_at": "2026-07-03T14:45:57.443253+00:00",
+  "decision": "PASS_A7SHADOW0_HISTORICAL_STRONG_CANDIDATES_CONSOLIDATED",
+  "input_source_count": 10,
+  "input_rows": 464,
+  "consolidated_unique_formula_horizon_rows": 423,
+  "shadow_readiness_review_rows": 9,
+  "source_lag_retest_required_rows": 26,
+  "hold_or_diagnostic_rows": 388,
+  "decision_counts": {
+    "SHADOW_READINESS_REVIEW_CANDIDATE": 9,
+    "SOURCE_LAG_RETEST_REQUIRED": 26,
+    "HOLD_REVIEW_REQUIRED": 1,
+    "DIAGNOSTIC_NUMERIC_ONLY": 387
+  },
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_shadow_readiness_review": true,
+  "next_required": [
+    "run signal-correlation and overlap dedup on shadow review queue",
+    "run execution realism/cost-capacity replay on review queue",
+    "build live data adapter health check before any shadow book"
+  ]
+}

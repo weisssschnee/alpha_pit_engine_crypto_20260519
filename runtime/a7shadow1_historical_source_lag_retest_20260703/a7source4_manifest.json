@@ -1,0 +1,14 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_next_search": false,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7SOURCE4_BATCH_SOURCE_LAG_SURVIVORS_FOUND",
+  "eval_error_rows": 0,
+  "generated_at": "2026-07-03T14:44:18Z",
+  "metric_rows": 135,
+  "queue_rows": 27,
+  "report": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\reports\\CRYPTO_A7SHADOW1_HISTORICAL_SOURCE_LAG_RETEST_20260703.md",
+  "runtime": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7shadow1_historical_source_lag_retest_20260703",
+  "source_lag_pass_count": 1,
+  "stage": "A7SOURCE-4-BATCH-SOURCE-LAG-RETEST"
+}
