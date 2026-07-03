@@ -5,7 +5,7 @@ type: system-hardening-and-search-continuation
 status: active
 wave: 1
 autonomous: true
-last_updated: 2026-06-29 10:45 Asia/Hong_Kong
+last_updated: 2026-07-04 00:40 Asia/Hong_Kong
 requirements:
   - preserve active A7SEARCH5_R2 run
   - maintain memory-enforced search
@@ -66,14 +66,14 @@ Mul(
 )
 ```
 
-### A7SEARCH5_R2 Active Run
+### Current A7SHADOW / A7LIVE Engineering State
 
-- Run root: `H:\AlphaFactory_CryptoData_archive\a7search5_memory_enforced_proxy_65k_r2_20260628`
-- Queue: `65536` rows, `128` shards, `512` rows/shard
-- Current completion: `40 / 128` reports at last check
-- Current active parallelism: `18` shards
-- Supervisor: takeover script running
-- Aggregate: pending
+- A7SHADOW-6 repaired May 2026 funding coverage with Binance Vision funding history.
+- A7SHADOW-5 repaired stress coverage now passes with funding delta stress finite share `1.0`.
+- A7SHADOW-4 R3 built an engineering review packet with no blockers, but still showed high overlap and open-interest concentration.
+- A7SHADOW-7 deduped the review packet from `4` candidate-horizon rows to `2` selected rows and rejected `2` overlap variants.
+- A7LIVE-0 forward adapter probe passed on the recent patch with `0` eval errors, no missing fields, and minimum formula active ratio `0.884446`.
+- Current boundary: adapter/materialization evidence only. The packet is too small and too open-interest concentrated for book/deployment language.
 
 ## Success Criteria
 
@@ -86,54 +86,89 @@ Mul(
 
 ## Tasks
 
-### 1. Monitor Active Search
+### 1. Maintain Current Source Of Truth
 
 Type: operations
 
 Actions:
 
-- Check company-machine process health.
-- Confirm active shard count and CPU delta.
-- Confirm no duplicate active shard IDs.
-- Confirm reports count increases over time.
-- Inspect latest `.out.log` and `.err.log` tails.
+- Keep `.planning/STATE.md` aligned after each major run.
+- Keep git remote synchronized after source/report/runtime-index updates.
+- Record every transition with a report path, runtime path, decision, blockers, and authorization boundary.
 
 Verification:
 
-- 18 active child Python workers are expected under current takeover policy.
-- Any 60-90 minute stall at the same report count triggers shard-level diagnosis.
+- `HEAD == origin/main` after each committed taskflow update unless GitHub network is unavailable.
+- State file must not point to stale active searches.
 
 Acceptance criteria:
 
-- Search is either progressing or a concrete stuck shard/failure reason is recorded.
+- A fresh agent can continue from `.planning/STATE.md` without relying on chat history.
 
-### 2. Complete And Aggregate A7SEARCH5_R2
+### 2. A7LIVE-1 Source-Lag / Checksum Audit
+
+Type: data-integrity
+
+Actions:
+
+- Audit the forward recent patch used by A7LIVE-0.
+- Check source trace, field timestamp lag, funding event alignment, mark/index/premium aliases, active universe coverage, and same-bar/future leakage risk.
+- Confirm whether Binance Vision checksum/source evidence exists for every field family used by the selected packet.
+- Block stronger claims if source-lag or checksum evidence is incomplete.
+
+Verification:
+
+- Machine-readable manifest includes pass/blocker status by field family.
+- Any field with uncertain timestamp semantics is marked blocker or diagnostic-only.
+
+Acceptance criteria:
+
+- Forward adapter can be treated as source-lag audited engineering evidence, not merely materialization smoke.
+
+### 3. A7SEARCH7 Family-Diversified Queue
+
+Type: search-preparation
+
+Actions:
+
+- Consume A7SHADOW-7 selected packet and overlap rejection map.
+- Use the two selected OI/funding/premium candidates as positive priors, not as the entire search space.
+- Force non-OI families into the queue: liquidity, taker flow, volatility, CE overlay, regime/event state.
+- Apply caps by expression, skeleton, semantic pair, motif, base field, and economic exposure.
+- Make rejected overlap variants negative memory for near-duplicate structures.
+
+Verification:
+
+- Queue report includes semantic-family coverage and cap enforcement.
+- Open-interest/funding/premium does not dominate the queue.
+- Every row has role/source/field contract trace.
+
+Acceptance criteria:
+
+- Queue is large, checkpointable, and family-diversified enough to test whether current bests are a true mechanism or only a narrow data-access artifact.
+
+### 4. A7SEARCH7 Proxy Run And Aggregate
 
 Type: execution-control
 
 Actions:
 
-- Let takeover supervisor continue until reports reach `128 / 128`.
-- Run aggregate only after all reports exist.
-- Produce aggregate manifest and report.
-- Record exact run root, task/supervisor script, commit, queue size, shard count, and result counts.
+- Run on company machine with shard manifests and restartable checkpoints.
+- Use memory-enforced generator defaults.
+- Monitor CPU/memory and avoid duplicate shard execution.
+- Aggregate only after all expected shard manifests exist or a documented abort reason is written.
 
 Verification:
 
-- Aggregate manifest exists.
-- Aggregate report exists.
 - Completed shard count equals expected shard count.
 - Eval error rows are counted explicitly.
+- Aggregate selected rows are separated from strict accepted rows.
 
 Acceptance criteria:
 
-- A7SEARCH5_R2 aggregate is available as a source-of-truth artifact.
+- Proxy aggregate is available as a source-of-truth artifact and can authorize bounded strict reward only if blockers are absent.
 
-Automation rule:
-
-- When a proxy aggregate completes with `authorizes_bounded_full_reward=true`, automatically launch bounded full reward on the selected queue. Do not pause for user approval unless the aggregate has eval errors, missing shards, or an authorization conflict.
-
-### 3. Strict Reward And Candidate Triage
+### 5. Strict Reward And Candidate Triage
 
 Type: validation
 
@@ -153,7 +188,7 @@ Acceptance criteria:
 
 - A next-search memory update can distinguish positive priors from rejection priors.
 
-### 4. Dedupe And Information-Source Audit
+### 6. Dedupe And Information-Source Audit
 
 Type: governance
 
@@ -173,7 +208,7 @@ Acceptance criteria:
 
 - Memory registry can be updated without collapsing search into one family.
 
-### 5. Reward/Leakage/Regime Gate Review
+### 7. Reward/Leakage/Regime Gate Review
 
 Type: system-audit
 
@@ -237,7 +272,4 @@ After every major update:
 
 ## Current Next Action
 
-Continue monitoring A7SEARCH5_R2 until either:
-
-- reports reach `128 / 128`, then aggregate and triage; or
-- reports remain stuck across the next inspection window, then diagnose shard-level logs and CPU progress.
+Run A7LIVE-1 source-lag/checksum audit first. If it does not find a blocker, build A7SEARCH7 as a family-diversified queue using A7SHADOW-7 selected/rejected memory, then start the checkpointed company-machine proxy run.

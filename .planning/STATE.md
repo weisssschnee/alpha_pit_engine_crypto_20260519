@@ -1,200 +1,128 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-07-01 00:30 Asia/Hong_Kong
-**Status:** A7SEARCH6 memory-seeded mechanism proxy search running under duplicate guard and safe supervisor
+**Last updated:** 2026-07-04 00:40 Asia/Hong_Kong
+**Status:** shadow-engineering packet deduped; forward adapter probe passed; no deployment authorization
 
 ## Current Source Of Truth
 
-- Local main has unpushed commits beyond `origin/main` because GitHub HTTPS push is currently failing with connection reset / port 443 errors.
-- Local latest commit before this planning update: `a365155 add a7search6 mechanism seed proxy search`.
-- Remote `origin/main` remains at `b158ce4 add a7search5 validation pack` until push succeeds.
+- Git status at this snapshot: `HEAD == origin/main == 2a6be0d331e4c6ea691acad2d1b61be77e2d6299`.
+- Latest commit: `2a6be0d validate: dedup shadow packet and probe forward adapter`.
 - Project-level plan: `.planning/PROJECT.md`.
 - Project roadmap: `.planning/ROADMAP.md`.
-- Current durable planning output: `.planning/phases/01-crypto-search-hardening/01-PLAN.md`.
-- System rectification planning output: `.planning/phases/05-verified-core-extraction-or-new-repo-decision/05-PLAN.md`.
-- Active remote run root: `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_20260630`.
-- Active aggregate target: `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_aggregate_20260630`.
+- Active phase plan: `.planning/phases/01-crypto-search-hardening/01-PLAN.md`.
+- Current validated reports:
+  - `reports/CRYPTO_A7SHADOW5_STRESS_FUNDING_COVERAGE_AUDIT_REPAIRED_20260704.md`
+  - `reports/CRYPTO_A7SHADOW6_MAY_FUNDING_REPAIR_20260704.md`
+  - `reports/CRYPTO_A7SHADOW4_LIVE_CAPACITY_CORRELATION_R3_20260704.md`
+  - `reports/CRYPTO_A7SHADOW7_DEDUP_REVIEW_PACKET_20260704.md`
+  - `reports/CRYPTO_A7LIVE0_FORWARD_ADAPTER_PROBE_20260704.md`
 
 ## Confirmed System Components
 
-- Prior governance and infrastructure phases are already passed: A7PM-0/1/2/3, A7AI-F0/F1/F2/F3/F4, A7AA-0/1/2/3/4, A7MEM-0/1, and A7SEARCH4.
-- Field/search memory registry exists and is machine-readable:
-  `runtime/a7mem0_search_memory_registry_20260628/a7mem0_next_search_prior.json`.
-- Search generator is fail-closed on memory enforcement by default.
-- Per-shard memory caps were fixed in commit `1b13a43`.
-- A7MEM-1 smoke passed for duplicate expression rejection, skeleton caps, and prior detection.
-- A7SEARCH4 completed 128/128 shards and produced 42 strict rows from 32,768 leaderboard rows.
-- Reward validation is strict-gated and rejects high headline Sortino if train/OOS/control floors fail.
+- Prior governance and infrastructure phases remain passed: A7PM-0/1/2/3, A7AI-F0/F1/F2/F3/F4, A7AA-0/1/2/3/4, A7MEM-0/1.
+- Reward gate rejects headline Sortino artifacts when train orientation, OOS floors, non-overlap floors, controls, shuffle, lag, or stress fail.
+- May stress funding coverage was repaired from Binance Vision funding history and merged at hourly timestamps.
+- Repaired base panel for stress/correlation work:
+  `G:\AlphaFactory_CryptoData\gold\features\binance_universe498_replay_1h_v2_may_funding_repair_v1_20260704`.
+- Forward recent patch for adapter smoke:
+  `G:\AlphaFactory_CryptoData\gold\features\binance_universe498_recent_patch_1h_v1_20260612`.
 
-## Active Search State
+## Latest Data/Stress Repair State
 
-As of the last company-machine check on 2026-06-30 14:27-14:29:
+- A7SHADOW-6 decision: `PASS_A7SHADOW6_MAY_FUNDING_REPAIR_PANEL_BUILT`.
+- Repaired symbols: `96`.
+- Funding repair window: `2026-04-30T00:00:00Z` to `2026-05-26T00:00:00Z`.
+- Dense funding-delta stress finite share: `1.0`.
+- Fetch errors after Binance Vision fallback: `0`.
+- Boundary: authorizes A7SHADOW-5/A7SHADOW-4 reruns only; no alpha proof, shadow, paper, or live.
 
-- A7SEARCH5_R2 reports: `128 / 128`
-- Missing reports: `0`
-- Active shard count: `0`
-- Active shards: none
-- Supervisor: stopped after completion
-- Supervisor task id: `job_20260629_120926_3f21c9`
-- Aggregate report: `reports/CRYPTO_A7SEARCH5_MEMORY_ENFORCED_PROXY_R2_AGGREGATE_STATUS_20260630.md`
-- Remote aggregate report: `D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote\reports\CRYPTO_A7SEARCH5_MEMORY_ENFORCED_PROXY_R2_AGGREGATE_20260629.md`
-- Remote aggregate root: `H:\AlphaFactory_CryptoData_archive\a7search5_memory_enforced_proxy_65k_r2_aggregate_20260629`
-- Prior takeover supervisor was stopped after repeated restarts of `s064` and `s067`.
-- `s064` and `s067` showed `pyarrow read_table` `MemoryError`; lock-aware supervisor now uses `max_parallel=12`, `min_free_gb_to_start=18`, fresh locks, and max attempt holds.
-- Aggregate first failed under direct script execution because `from scripts...` could not resolve `scripts`; rerun with `PYTHONPATH=$Repo` and `python -m scripts.crypto_a7v3s9_proxy_aggregate` succeeded.
-- Aggregate decision: `PASS_A7V3S9_PROXY_AGGREGATE_SELECTED`.
-- Aggregate counts: `32768` leaderboard rows, `42` strict pass rows, `323` near-miss rows, `0` eval error rows, `2` selected rows, `2` selected unique blueprints.
-- Selected pair/motif: `open_interest|positioning` / `safe_div_abs`.
-- Boundary: aggregate authorizes bounded full reward only; no alpha proof, shadow, paper, or live.
-- No duplicate active shard groups were observed at completion.
+## Latest Coverage/Correlation State
 
-## Latest Full Reward State
+- A7SHADOW-5 repaired decision: `PASS_A7SHADOW5_STRESS_FUNDING_COVERAGE_OK`.
+- Base stress finite shares:
+  - funding delta ffill 8h: `1.0`
+  - open interest: `1.0`
+  - premium: `0.9983361064891847`
+- A7SHADOW-4 R3 decision: `PASS_A7SHADOW4_ENGINEERING_REVIEW_PACKET_BUILT`.
+- A7SHADOW-4 R3 blockers: none.
+- A7SHADOW-4 R3 eval error rows: `0`.
+- Recent positive Sortino blueprints:
+  - 20bps: `3`
+  - 30bps: `3`
+- Remaining warnings:
+  - `max_signal_corr_gt_0_85`
+  - `max_recent_net_return_corr_gt_0_85`
+  - `open_interest_family_concentrated`
+- Interpretation: capacity/correlation packet is usable as engineering review input, but duplicated exposure must be deduped before any stronger step.
 
-As of 2026-06-30 14:51:
+## Latest Dedup Review Packet State
 
-- Full reward report: `reports/CRYPTO_A7SEARCH5_SELECTED_FULL_REWARD_R3_AGGREGATE_STATUS_20260630.md`
-- Remote full reward root: `H:\AlphaFactory_CryptoData_archive\a7search5_selected_full_reward_r3_20260630`
-- Remote full reward aggregate root: `H:\AlphaFactory_CryptoData_archive\a7search5_selected_full_reward_r3_aggregate_20260630`
-- Decision: `PASS_A7V3S0_REWARD_SHARDED_AGGREGATE_READY`
-- Input proxy-selected candidates: `2`
-- Reward rows: `8`
-- Split metric rows: `240`
-- Eval error rows: `0`
-- Accepted rows: `3`
-- Accepted unique blueprints: `2`
-- Accepted pair/motif: `open_interest|positioning` / `safe_div_abs`
-- Accepted horizons: `4h` and `8h`
-- Boundary: authorizes validation/triage only, not alpha proof or deployment.
-- Current warnings: NumPy all-NaN / empty-slice warnings in invalid candidate branches; confirmed fatal issue so far is memory pressure, not formula traceback.
+- A7SHADOW-7 decision: `PASS_A7SHADOW7_DEDUP_REVIEW_PACKET_BUILT`.
+- Input candidate rows: `4`.
+- Selected rows after overlap dedupe: `2`.
+- Rejected overlap variants: `2`.
+- Overlap clusters: `2`.
+- Selected max absolute signal correlation: `0.0100151181711994`.
+- Selected max absolute recent net-return correlation: `0.0532733154551249`.
+- Selected family counts:
+  - open interest: `2`
+  - funding: `1`
+  - premium/basis: `1`
+- Selected formulas:
 
-## Latest Validation Pack State
+```text
+a7shadow2_c007|h8
+SafeDiv(TSRank(open_interest_value_last,336),CSRank(ZScore(Mean(funding_rate_delta_state_24h,72))))
 
-As of 2026-06-30 15:42:
+a7shadow2_c002|h24
+Mul(CSRank(Mean(open_interest_mean,8)),Sign(Mean(premium_close_bps,48)))
+```
 
-- Validation report: `reports/CRYPTO_A7SEARCH5_VALIDATION_PACK_20260630.md`
-- Remote validation root: `H:\AlphaFactory_CryptoData_archive\a7search5_validation_pack_20260630`
-- Remote validation manifest: `H:\AlphaFactory_CryptoData_archive\a7search5_validation_pack_20260630\a7search5_validation_manifest.json`
-- Local manifest mirror: `runtime/a7search5_validation_pack_manifest_20260630.json`
-- Decision: `HOLD_A7SEARCH5_CANONICAL_NOT_UNIQUE_INCREMENT`
-- Queue rows: `16`
-- Leaderboard rows: `64`
-- Split metric rows: `1920`
-- Eval error rows: `0`
-- Accepted rows: `11`
-- Accepted unique blueprints: `6`
-- Canonical accepted rows: `2`
-- Single-leg accepted rows: `0`
-- Operator-ablation accepted rows: `4`
-- Interpretation: the accepted OI value / top-account positioning structure is not explained by single-leg OI or positioning alone, but `SafeDiv(ZScore(OI),CSRank(positioning))` without `Abs` also passes. Treat the signal as a broader OI/positioning relative-scaling mechanism, not as a unique `Abs(SafeDiv)` discovery.
-- Boundary: this authorizes memory-seed triage and dedupe/neutralization follow-up only, not alpha proof or deployment.
+- Warnings:
+  - `selected_packet_open_interest_concentrated`
+  - `selected_packet_too_small_for_book`
+- Boundary: authorizes live adapter probe only; this is not a book and not a deployment packet.
 
-## Active A7SEARCH6 State
+## Latest Forward Adapter Probe State
 
-As of 2026-06-30 15:54-16:00:
+- A7LIVE-0 decision: `PASS_A7LIVE0_FORWARD_ADAPTER_PROBE_READY`.
+- Candidate count: `2`.
+- Loaded symbols: `96`.
+- Timestamp range: `2026-05-26T00:00:00` to `2026-06-11T23:00:00`.
+- Timestamp count: `408`.
+- Eval error count: `0`.
+- Missing fields: none.
+- Minimum field finite share: `0.9411764705882353`.
+- Minimum formula non-null ratio: `0.884446`.
+- Minimum formula active ratio: `0.884446`.
+- Boundary: adapter/materialization evidence only; no alpha proof, no shadow book, no paper/live, no trading authorization.
 
-- Prepare report: `reports/CRYPTO_A7SEARCH6_MECHANISM_MEMORY_SEED_PROXY_CONTRACT_20260630.md`
-- Local prepare manifest: `runtime/a7search6_prepare_manifest_20260630.json`
-- Remote run root: `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_20260630`
-- Supervisor: `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_20260630\a7search6_proxy_supervisor.ps1`
-- Detached task id: `job_20260630_155424_765773`
-- Booster task id: `job_20260630_160107_15cb00`
-- Second booster task id: `job_20260630_160408_46f4d8`
-- Decision: `PASS_A7SEARCH6_MECHANISM_QUEUE_READY`
-- Queue rows: `65,536`
-- Shards: `128` x `512`
-- Semantic pairs: `13`
-- Motifs: `19`
-- Skeletons: `1,165`
-- Lanes:
-  - `adjacent_mechanism_cross`: `30,866`
-  - `validated_oi_positioning_scale`: `12,288`
-  - `regime_conditioned_mechanism`: `12,142`
-  - `operator_ablation_surface`: `10,240`
-- Memory enforcement accepted rows: `65,536`; rejected attempts: `202,931`.
-- Company memory status at startup: total physical memory about `31.6GB`, free physical memory about `13.7GB` after first workers started.
-- Active workers at startup: `4` proxy shards, with supervisor configured as `max_parallel=12`, `min_free_gb=16`.
-- Booster supervisor was added at 2026-06-30 16:01 to avoid underutilization. It uses directory-lock skipping, starts only shards without an existing shard directory, and adds shards `s004-s007`.
-- Second booster was added at 2026-06-30 16:04 using the same directory-lock skipping and adds shards `s008-s011`.
-- Current effective workers after boosters: about `12` proxy workers; free physical memory about `9.7GB`.
-- Do not add more workers unless free physical memory remains above `8GB` after sustained progress; the company machine has about `31.6GB` total physical memory.
-- Boundary: A7SEARCH6 is proxy-only. If proxy aggregate later passes, it may authorize bounded full reward only.
+## Current Remote Compute State
 
-## Phase 5 System Rectification Plan
+- No long-running A7 Python worker is required by the current stage.
+- Company-machine heavy compute should be used for the next large family-diversified search or source-lag/checksum audits.
+- Do not start broad search until the next queue explicitly consumes A7SHADOW-7 overlap rejection memory and caps open-interest concentration.
 
-As of 2026-06-30 20:55:
+## Immediate Next Taskflow
 
-- Phase plan: `.planning/phases/05-verified-core-extraction-or-new-repo-decision/05-PLAN.md`
-- Roadmap status: Phase 5 Wave 1 executed.
-- Purpose: separate verified reusable core components from historical research scripts and decide whether to continue in the existing repo or create a clean successor repo.
-- Wave 1 outputs:
-  - `reports/CRYPTO_SYSTEM_RECTIFICATION_STATE_FREEZE_20260630.md`
-  - `reports/CRYPTO_SYSTEM_CORE_INVENTORY_20260630.md`
-  - `reports/CRYPTO_SYSTEM_CORE_INTERFACE_CONTRACTS_20260630.md`
-  - `reports/CRYPTO_SYSTEM_ARCHITECTURE_BLUEPRINT_20260630.md`
-  - `runtime/system_rectification_20260630/wave1_manifest.json`
-  - `runtime/system_rectification_20260630/core_inventory.csv`
-  - `runtime/system_rectification_20260630/core_status_summary.csv`
-  - `runtime/system_rectification_20260630/core_interface_contracts.json`
-  - `runtime/system_rectification_20260630/architecture_nodes.csv`
-  - `runtime/system_rectification_20260630/architecture_edges.csv`
-- Wave 1 decision: `PASS_SYSTEM_RECTIFICATION_WAVE1_BUILT`.
-- Core candidates identified so far:
-  - keep core: search memory, proxy evaluator, strict reward gate, planning source of truth;
-  - wrap with contract: formula adapter, A7SEARCH6 queue generator, aggregate/reporting scripts;
-  - source-of-truth evidence: reports and runtime manifests;
-  - legacy/archive: old feature/field response/runtime artifacts unless revalidated by contract.
-- Execution must not stop active A7SEARCH6 workers.
-- Stronger execution waves should consume A7SEARCH6 aggregate once available.
+1. A7LIVE-1 source-lag/checksum audit for the forward recent patch.
+   - Verify source trace, field timestamp lag, funding event alignment, mark/index/premium aliases, and no same-bar/future leakage.
+   - Output must be machine-readable and block stronger claims if source lag or checksum evidence is incomplete.
+2. A7SEARCH7 family-diversified queue build.
+   - Consume A7SHADOW-7 selected packet and rejected-overlap map.
+   - Keep OI/funding/premium winners as memory priors, not as the only search space.
+   - Force non-OI families into the queue: liquidity, taker flow, volatility, CE overlay, regime/event state.
+   - Apply caps by expression, skeleton, semantic pair, motif, base field, and economic exposure.
+3. A7SEARCH7 proxy run on company machine.
+   - Large enough to test family breadth, but checkpointed and restartable.
+   - Must write shard manifests and aggregate selected rows.
+4. Strict reward and dedupe loop.
+   - Train Sortino, validation/test/recent/stress, controls, shuffle, lag/stale, non-overlap, and family diversification all required.
 
-## Latest Remote Search Check
-
-As of the latest check on 2026-07-01 00:27-00:30:
-
-- Company machine had active A7SEARCH6 proxy worker processes.
-- Process audit script: `D:\HermesWorker\runtime\crypto_a7search6_remote_process_audit_20260701.ps1`.
-- Duplicate guard script: `D:\HermesWorker\runtime\crypto_a7search6_remote_duplicate_guard_20260701.ps1`.
-- Safe supervisor script: `D:\HermesWorker\runtime\crypto_a7search6_remote_safe_supervisor_20260701.ps1`.
-- Initial audit found `20` active process rows, `19` completed manifests, active shards `s015,s016,s019,s020,s021,s022,s023`, and duplicate shards `s019,s020,s022`.
-- Duplicate guard stopped booster supervisor parent PIDs `29848,34096`, killed `3` duplicate worker pairs, and marked suspect shards `s019,s020,s022`.
-- Post-guard audit found no duplicate shards.
-- Safe supervisor task id: `job_20260701_002917_3c2272`.
-- Safe supervisor restored utilization to `12` active shards: `s015,s016,s018,s019,s020,s021,s022,s023,s024,s025,s026,s027`.
-- Latest completed manifest count: `20`.
-- Latest free physical memory: about `13.0GB`; total physical memory about `31.6GB`.
-- Remote audit artifacts are under `H:\AlphaFactory_CryptoData_archive\a7search6_mechanism_memory_seed_proxy_65k_20260630\supervisor_audit`.
-- Boundary: suspect shards must be checked before aggregate acceptance; if their manifests look inconsistent, rerun those shards cleanly before reward.
-
-## Latest A7SEARCH6 Aggregate State
-
-As of 2026-07-02 22:29 Asia/Hong_Kong:
-
-- A7SEARCH6 proxy search completed: `128 / 128` shard manifests.
-- Direct H: run-root aggregation via Python/pandas and Python stdlib both stalled before writing outputs, likely due H: runtime file access/enumeration behavior.
-- Working route: stage selected/manifest small files from H: to D: and aggregate from D: with PowerShell.
-- Remote staging root: `D:\HermesWorker\runtime\a7search6_selected_aggregate_staging_20260702`.
-- Remote aggregate runtime: `D:\HermesWorker\runtime\a7search6_selected_aggregate_20260702`.
-- Local aggregate manifest: `runtime/a7search6_selected_aggregate_20260702/a7search6_selected_aggregate_manifest.json`.
-- Local aggregate report: `reports/CRYPTO_A7SEARCH6_SELECTED_AGGREGATE_20260702.md`.
-- Decision: `PASS_A7SEARCH6_SELECTED_AGGREGATE_READY_WITH_SUSPECT_RECHECK`.
-- Selected local rows: `1299`.
-- Selected bounded queue rows: `187`.
-- Selected unique blueprints: `182`.
-- Eval error rows: `0`.
-- Suspect shards requiring recheck before reward acceptance: `a7search6_proxy_s019`, `a7search6_proxy_s020`, `a7search6_proxy_s022`.
-- Authorization: bounded full reward queueing only; no alpha proof, shadow, paper, or live.
-
-## Important Boundaries
-
-Allowed:
-
-- Continue memory-enforced proxy search.
-- Aggregate once all shards complete.
-- Run strict reward gate and dedupe/cluster review after aggregate.
-- Harden data/regime/reward/search plumbing.
-
-Blocked:
+## Blocked Claims
 
 - Alpha proof.
-- Shadow, paper, or live.
-- Treating proxy search output as production alpha.
-- Disabling memory enforcement except for explicit legacy reproduction.
+- Shadow book.
+- Paper/live trading.
+- Production portfolio construction.
+- Treating two deduped engineering candidates as a deployable book.
