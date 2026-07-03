@@ -1,0 +1,24 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_next_search": false,
+  "authorizes_shadow_paper_live": false,
+  "cost_bps": 5.0,
+  "decision": "PASS_A7SEARCH6_JUNE_BLIND_DIAGNOSTIC_NONEMPTY",
+  "diagnostic_pass_rows": 3,
+  "eval_error_rows": 0,
+  "generated_at": "2026-07-03T01:47:18Z",
+  "input": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_validation_pack_r2_20260702\\a7search6_validation_accepted_summary.csv",
+  "june_timestamps": 264,
+  "metric_rows": 108,
+  "notes": [
+    "June split is evaluation-only and is not used for orientation or search selection.",
+    "Source contract HOLD from A7SEARCH6-V3 remains in force; this adapter is diagnostic only."
+  ],
+  "panel_root": "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v3_patch_age_20260613",
+  "queue_rows": 18,
+  "report": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\reports\\CRYPTO_A7SEARCH6_JUNE_BLIND_ADAPTER_20260703.md",
+  "runtime": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_june_blind_adapter_20260703",
+  "source_gate": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search6_v3_source_contract_audit_20260703\\a7search6_v3_formula_source_gate.csv",
+  "stage": "A7SEARCH6-JUNE-BLIND-ADAPTER",
+  "train_timestamps_for_orientation": 8784
+}
