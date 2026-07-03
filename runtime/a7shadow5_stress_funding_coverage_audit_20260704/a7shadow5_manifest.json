@@ -1,0 +1,31 @@
+{
+  "authorizes_a7shadow4_rerun": false,
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_book": false,
+  "authorizes_shadow_paper_live": false,
+  "base_delta_ffill8_stress_finite_share": 0.003813089295618414,
+  "base_open_interest_stress_finite_share": 1.0,
+  "base_panel_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_replay_1h_v2_20260527",
+  "base_premium_stress_finite_share": 0.9983361064891847,
+  "best_delta_stress_finite_share_across_ffill_limits": 0.11030227398779811,
+  "blockers": [
+    "base_panel_funding_delta_stress_coverage_below_95pct",
+    "recent_patch_does_not_cover_full_may_stress_window"
+  ],
+  "decision": "HOLD_A7SHADOW5_STRESS_FUNDING_COVERAGE_GAP_CONFIRMED",
+  "estimated_stress_hours_not_covered_by_recent_patch": 600,
+  "generated_at": "2026-07-03T17:04:32Z",
+  "hours_per_split": 720,
+  "recent_patch_root": "G:\\AlphaFactory_CryptoData\\gold\\features\\binance_universe498_recent_patch_1h_v1_20260612",
+  "recent_patch_stress_overlap_hours": 1,
+  "required_repair": [
+    "Backfill Binance funding-rate data for 2026-05-01 00:00 through 2026-05-26 00:00 UTC for the strict universe, plus at least 24h lookback before May 1 for funding_delta.",
+    "Merge the repair into the evaluator base panel or set A7AL_BASE_PANEL_ROOT to a merged panel before rerunning A7SHADOW-4.",
+    "Base OI and premium coverage are not the May-stress blocker in this audit, but any rebuilt merged panel should still re-check OI/premium/mark-index source trace.",
+    "If full funding backfill is unavailable, exclude funding_delta candidates from May-stress claims and rerun A7SHADOW-4 on OI/premium candidates only."
+  ],
+  "stage": "A7SHADOW-5",
+  "stress_hours": 601,
+  "symbol_count": 96,
+  "train_hours_per_split": 0
+}
