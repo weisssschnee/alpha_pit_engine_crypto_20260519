@@ -5,7 +5,7 @@ type: system-hardening-and-search-continuation
 status: active
 wave: 1
 autonomous: true
-last_updated: 2026-07-04 02:30 Asia/Hong_Kong
+last_updated: 2026-07-04 02:40 Asia/Hong_Kong
 requirements:
   - preserve active A7SEARCH5_R2 run
   - maintain memory-enforced search
@@ -75,6 +75,7 @@ Mul(
 - A7LIVE-0 forward adapter probe passed on the recent patch with `0` eval errors, no missing fields, and minimum formula active ratio `0.884446`.
 - A7LIVE-1 source-lag/checksum audit passed for controlled research continuation with no controlled blockers.
 - A7LIVE-1 still blocks final proof on official checksum and REST funding source evidence.
+- A7SEARCH7 family-diversified queue passed coverage gates and launched on the company machine.
 - Current boundary: adapter/materialization evidence only. The packet is too small and too open-interest concentrated for book/deployment language.
 
 ## Success Criteria
@@ -274,4 +275,4 @@ After every major update:
 
 ## Current Next Action
 
-Build A7SEARCH7 as a family-diversified queue using A7SHADOW-7 selected/rejected memory and A7LIVE-1 source-lag authorization, then start the checkpointed company-machine proxy run if queue coverage and cap checks pass.
+Monitor A7SEARCH7 proxy run until all shard manifests exist or a concrete shard failure is documented. Then aggregate selected proxy rows and only proceed to strict reward if the aggregate has no missing/suspect shards.

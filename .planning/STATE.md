@@ -1,12 +1,12 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-07-04 02:30 Asia/Hong_Kong
-**Status:** forward source-lag audit passed for controlled research; final proof checksum still pending; no deployment authorization
+**Last updated:** 2026-07-04 02:40 Asia/Hong_Kong
+**Status:** A7SEARCH7 family-diversified proxy search running on company machine; no deployment authorization
 
 ## Current Source Of Truth
 
 - Git status at the previous committed snapshot: `HEAD == origin/main == e7f55b9 planning: update crypto shadow taskflow`.
-- Latest pending stage in this update: A7LIVE-1 source-lag/checksum audit.
+- Latest pending stage in this update: A7SEARCH7 family-diversified proxy run.
 - Project-level plan: `.planning/PROJECT.md`.
 - Project roadmap: `.planning/ROADMAP.md`.
 - Active phase plan: `.planning/phases/01-crypto-search-hardening/01-PLAN.md`.
@@ -17,6 +17,7 @@
   - `reports/CRYPTO_A7SHADOW7_DEDUP_REVIEW_PACKET_20260704.md`
   - `reports/CRYPTO_A7LIVE0_FORWARD_ADAPTER_PROBE_20260704.md`
   - `reports/CRYPTO_A7LIVE1_SOURCE_LAG_CHECKSUM_AUDIT_20260704.md`
+  - `reports/CRYPTO_A7SEARCH7_FAMILY_DIVERSIFIED_QUEUE_20260704.md`
 
 ## Confirmed System Components
 
@@ -118,22 +119,35 @@ Mul(CSRank(Mean(open_interest_mean,8)),Sign(Mean(premium_close_bps,48)))
   - `rest_source_has_no_exchange_checksum`
 - Boundary: this closes the source-lag/PIT concern for controlled research continuation, but still does not authorize alpha proof, shadow book, paper/live, or final proof.
 
-## Current Remote Compute State
+## Current A7SEARCH7 Search State
 
-- No long-running A7 Python worker is required by the current stage.
-- Company-machine heavy compute should be used for the next large family-diversified search or source-lag/checksum audits.
-- Do not start broad search until the next queue explicitly consumes A7SHADOW-7 overlap rejection memory and caps open-interest concentration.
+- A7SEARCH7 queue decision: `PASS_A7SEARCH7_FAMILY_DIVERSIFIED_QUEUE_READY`.
+- Remote run root: `H:\AlphaFactory_CryptoData_archive\a7search7_family_diversified_proxy_65k_20260704`.
+- Detached supervisor task id: `job_20260704_023743_eede40`.
+- Queue rows: `65536`.
+- Shards: `128` x `512`.
+- Semantic pair count: `40`.
+- Motif count: `22`.
+- Skeleton count: `1423`.
+- OI touch share: `0.0999908447265625`.
+- Non-OI touch share: `0.9000091552734375`.
+- Lane counts:
+  - `shadow_positive_prior_light`: `6553`
+  - `taker_liquidity_mechanism`: `15729`
+  - `funding_basis_premium_mechanism`: `14418`
+  - `regime_conditioned_non_oi`: `13107`
+  - `raw_broad_non_oi`: `15729`
+- A7SEARCH7 authorizes proxy search only.
+- Latest startup check: 12 proxy workers active, free physical memory about `8.3GB`; supervisor configured with `max_parallel=12`, `min_free_gb=10.0`.
+- Full queue and shard outputs stay on H: archive root; git stores only script, report, manifest, and summaries.
 
 ## Immediate Next Taskflow
 
-1. A7SEARCH7 family-diversified queue build.
-   - Consume A7SHADOW-7 selected packet and rejected-overlap map.
-   - Keep OI/funding/premium winners as memory priors, not as the only search space.
-   - Force non-OI families into the queue: liquidity, taker flow, volatility, CE overlay, regime/event state.
-   - Apply caps by expression, skeleton, semantic pair, motif, base field, and economic exposure.
-2. A7SEARCH7 proxy run on company machine.
-   - Large enough to test family breadth, but checkpointed and restartable.
-   - Must write shard manifests and aggregate selected rows.
+1. Monitor A7SEARCH7 proxy run.
+   - Check supervisor task status, active worker count, free memory, completed shard manifests, and duplicate shard groups.
+   - Do not add workers unless memory remains above the floor after sustained progress.
+2. Aggregate A7SEARCH7 after all expected shard manifests exist.
+   - If any shards fail or duplicate, rerun only failed/suspect shards.
 3. Strict reward and dedupe loop.
    - Train Sortino, validation/test/recent/stress, controls, shuffle, lag/stale, non-overlap, and family diversification all required.
 
