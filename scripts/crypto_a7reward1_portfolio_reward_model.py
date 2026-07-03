@@ -64,8 +64,8 @@ DEFAULT_SOURCE_POLICY = (
 DEFAULT_SOURCE_LAG_SUMMARY = (
     REPO
     / "runtime"
-    / "a7source2_source_lag_retest_20260703"
-    / "a7source2_source_lag_summary.csv"
+    / "a7source4_batch_source_lag_retest_20260703"
+    / "a7source4_source_lag_summary.csv"
 )
 
 FIELD_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
@@ -288,6 +288,36 @@ def load_source_lag_passes(path: Path) -> tuple[set[str], set[str]]:
     return ids, formulas
 
 
+def source_policy_for_field(field: str, source_policy: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
+    if field in source_policy:
+        return source_policy[field]
+    if "open_interest" in field:
+        return {
+            "field_family": "open_interest",
+            "status": "SOURCE_LAG_REQUIRED",
+            "required_gate": "source_lag_1h_and_2h_survival_or_publication_time_proof",
+        }
+    if "funding" in field:
+        return {
+            "field_family": "funding_state",
+            "status": "EVENT_PUBLICATION_REQUIRED_OR_SOURCE_LAG_REQUIRED",
+            "required_gate": "funding_event_publication_time_or_source_lag_survival",
+        }
+    if "long_short" in field or "position" in field:
+        return {
+            "field_family": "positioning",
+            "status": "SOURCE_LAG_REQUIRED",
+            "required_gate": "source_lag_1h_and_2h_survival",
+        }
+    if "stress_proxy" in field or "regime" in field:
+        return {
+            "field_family": "regime_state",
+            "status": "THRESHOLD_LINEAGE_REQUIRED",
+            "required_gate": "threshold_lineage_and_non_empty_response",
+        }
+    return None
+
+
 def append_reject_reason(existing: Any, reason: str) -> str:
     parts = [part for part in str(existing or "").split(";") if part]
     if reason not in parts:
@@ -312,7 +342,7 @@ def apply_source_lag_policy(rewards: pd.DataFrame, source_policy: dict[str, dict
         required_families: list[str] = []
         fragile_fields: list[str] = []
         for field in fields:
-            spec = source_policy.get(field)
+            spec = source_policy_for_field(field, source_policy)
             if not spec:
                 continue
             status = str(spec.get("status", ""))
