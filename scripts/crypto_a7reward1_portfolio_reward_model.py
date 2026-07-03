@@ -55,6 +55,18 @@ from scripts.crypto_a7ff8_expanded_numeric_probe import (  # noqa: E402
 DEFAULT_QUEUE = REPO / "runtime" / "a7ls30_productive_numeric_acceptance_20260610" / "a7ls30_selected_top240.csv"
 RUNTIME = REPO / "runtime" / "a7reward1_portfolio_reward_model_20260610"
 REPORT = REPO / "reports" / "CRYPTO_A7REWARD1_PORTFOLIO_REWARD_MODEL_20260610.md"
+DEFAULT_SOURCE_POLICY = (
+    REPO
+    / "runtime"
+    / "a7source3_publication_semantics_research_20260703"
+    / "a7source3_field_policy_recommendation.json"
+)
+DEFAULT_SOURCE_LAG_SUMMARY = (
+    REPO
+    / "runtime"
+    / "a7source2_source_lag_retest_20260703"
+    / "a7source2_source_lag_summary.csv"
+)
 
 FIELD_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
 HORIZONS = [1, 4, 8, 24]
@@ -96,6 +108,12 @@ def read_csv(path: Path) -> pd.DataFrame:
     if not path.exists() or path.stat().st_size == 0:
         return pd.DataFrame()
     return pd.read_csv(path)
+
+
+def read_json(path: Path) -> dict[str, Any]:
+    if not path.exists() or path.stat().st_size == 0:
+        return {}
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def md_table(df: pd.DataFrame, max_rows: int = 40) -> str:
@@ -234,6 +252,118 @@ def accepted_for_next_search(rewards: pd.DataFrame) -> pd.DataFrame:
         ],
         ascending=[True, False, False, False, True, True, True, False],
     )
+
+
+def compact_expr(value: Any) -> str:
+    return re.sub(r"\s+", "", str(value or ""))
+
+
+def load_source_policy(path: Path) -> dict[str, dict[str, Any]]:
+    payload = read_json(path)
+    policy: dict[str, dict[str, Any]] = {}
+    for family, spec in payload.get("field_family_policy", {}).items():
+        status = str(spec.get("status", ""))
+        for field in spec.get("fields", []):
+            policy[str(field)] = {
+                "field_family": family,
+                "status": status,
+                "required_gate": str(spec.get("required_gate", "")),
+            }
+    return policy
+
+
+def load_source_lag_passes(path: Path) -> tuple[set[str], set[str]]:
+    summary = read_csv(path)
+    if summary.empty or "source_lag_gate" not in summary:
+        return set(), set()
+    passed = summary[summary["source_lag_gate"].astype(str).eq("PASS_SOURCE_LAG_1H_2H_DIAGNOSTIC")].copy()
+    ids: set[str] = set()
+    formulas: set[str] = set()
+    for _, row in passed.iterrows():
+        for col in ["source_blueprint_id", "blueprint_id"]:
+            value = str(row.get(col, "") or "")
+            if value:
+                ids.add(value)
+        formulas.add(compact_expr(row.get("formula", "")))
+    return ids, formulas
+
+
+def append_reject_reason(existing: Any, reason: str) -> str:
+    parts = [part for part in str(existing or "").split(";") if part]
+    if reason not in parts:
+        parts.append(reason)
+    return ";".join(parts)
+
+
+def apply_source_lag_policy(rewards: pd.DataFrame, source_policy: dict[str, dict[str, Any]], source_lag_pass_ids: set[str], source_lag_pass_formulas: set[str]) -> pd.DataFrame:
+    if rewards.empty or not source_policy:
+        return rewards.copy()
+    out = rewards.copy()
+    source_statuses: list[str] = []
+    required_fields_values: list[str] = []
+    required_family_values: list[str] = []
+    source_lag_gates: list[str] = []
+    rejects: list[bool] = []
+
+    for idx, row in out.iterrows():
+        formula = str(row.get("expression", "") or "")
+        fields = expression_fields(formula)
+        required_fields: list[str] = []
+        required_families: list[str] = []
+        fragile_fields: list[str] = []
+        for field in fields:
+            spec = source_policy.get(field)
+            if not spec:
+                continue
+            status = str(spec.get("status", ""))
+            family = str(spec.get("field_family", ""))
+            if "SOURCE_LAG_REQUIRED" in status or "EVENT_PUBLICATION_REQUIRED" in status:
+                required_fields.append(field)
+                required_families.append(family)
+            if "FRAGILE" in status:
+                fragile_fields.append(field)
+
+        blueprint_id = str(row.get("blueprint_id", "") or "")
+        formula_key = compact_expr(formula)
+        has_pass = blueprint_id in source_lag_pass_ids or formula_key in source_lag_pass_formulas
+        reject = bool(required_fields) and not has_pass
+        if fragile_fields and not has_pass:
+            reject = True
+
+        if required_fields and has_pass:
+            gate = "PASS_SOURCE_LAG_1H_2H_DIAGNOSTIC"
+            status_value = "SOURCE_LAG_REQUIRED_PASS"
+        elif required_fields:
+            gate = "HOLD_SOURCE_LAG_REQUIRED_NOT_PROVEN"
+            status_value = "SOURCE_LAG_REQUIRED_FAIL_CLOSED"
+        else:
+            gate = "NOT_REQUIRED"
+            status_value = "NO_SOURCE_LAG_REQUIRED"
+
+        if fragile_fields and not has_pass:
+            gate = "HOLD_SOURCE_LAG_FRAGILE_OR_NOT_PROVEN"
+            status_value = "SOURCE_LAG_FRAGILE_FAIL_CLOSED"
+
+        source_statuses.append(status_value)
+        required_fields_values.append("|".join(sorted(set(required_fields))))
+        required_family_values.append("|".join(sorted(set(required_families))))
+        source_lag_gates.append(gate)
+        rejects.append(reject)
+
+        if reject:
+            out.at[idx, "hard_reject"] = True
+            out.at[idx, "gate_pass"] = False
+            out.at[idx, "hard_reject_reasons"] = append_reject_reason(
+                row.get("hard_reject_reasons", ""),
+                "source_lag_required_not_proven",
+            )
+
+    out["source_lag_policy_status"] = source_statuses
+    out["source_lag_required_fields"] = required_fields_values
+    out["source_lag_required_families"] = required_family_values
+    out["source_lag_gate"] = source_lag_gates
+    out["source_lag_policy_reject"] = rejects
+    return out
 
 
 def selected_column_indices(timestamps: pd.DatetimeIndex, hours_per_split: int, train_hours_per_split: int) -> np.ndarray:
@@ -1039,6 +1169,8 @@ def main() -> None:
     parser.add_argument("--runtime", default=str(RUNTIME))
     parser.add_argument("--report", default=str(REPORT))
     parser.add_argument("--checkpoint-every", type=int, default=int(os.environ.get("A7REWARD_CHECKPOINT_EVERY", "8")))
+    parser.add_argument("--source-policy", default=os.environ.get("A7REWARD_SOURCE_POLICY", str(DEFAULT_SOURCE_POLICY)))
+    parser.add_argument("--source-lag-summary", default=os.environ.get("A7REWARD_SOURCE_LAG_SUMMARY", str(DEFAULT_SOURCE_LAG_SUMMARY)))
     args = parser.parse_args()
 
     runtime = Path(args.runtime)
@@ -1106,6 +1238,11 @@ def main() -> None:
         checkpoint_every=args.checkpoint_every,
     )
     rewards = aggregate_rewards(metrics)
+    source_policy_path = Path(args.source_policy)
+    source_lag_summary_path = Path(args.source_lag_summary)
+    source_policy = load_source_policy(source_policy_path)
+    source_lag_pass_ids, source_lag_pass_formulas = load_source_lag_passes(source_lag_summary_path)
+    rewards = apply_source_lag_policy(rewards, source_policy, source_lag_pass_ids, source_lag_pass_formulas)
     metrics.to_csv(runtime / "a7reward1_split_reward_metrics.csv", index=False)
     errors.to_csv(runtime / "a7reward1_eval_errors.csv", index=False)
     rewards.to_csv(runtime / "a7reward1_candidate_reward_leaderboard.csv", index=False)
@@ -1161,6 +1298,11 @@ def main() -> None:
         "accepted_for_next_search_unique_blueprints": int(accepted["blueprint_id"].nunique()) if not accepted.empty else 0,
         "eval_error_rows": int(errors.shape[0]),
         "synthetic_smoke_pass": bool(smoke_pass),
+        "source_policy_path": str(source_policy_path),
+        "source_lag_summary_path": str(source_lag_summary_path),
+        "source_policy_fields": int(len(source_policy)),
+        "source_lag_pass_ids": int(len(source_lag_pass_ids)),
+        "source_lag_policy_reject_rows": int(rewards["source_lag_policy_reject"].sum()) if "source_lag_policy_reject" in rewards else 0,
         "top_pareto_blueprint_id": str(top_queue.iloc[0]["blueprint_id"]) if not top_queue.empty else "",
         "top_pareto_rank": int(top_queue.iloc[0]["pareto_rank"]) if not top_queue.empty else 0,
         "top_pareto_objective_pass_count": int(top_queue.iloc[0]["objective_pass_count"]) if not top_queue.empty else 0,
@@ -1190,6 +1332,7 @@ def main() -> None:
                 "orientation_sample_too_small not present",
                 "hard_reject == false",
                 "gate_pass == true",
+                "source_lag_policy_reject == false",
             ],
         },
         "authorizes_alpha_proof": False,
