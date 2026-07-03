@@ -1,0 +1,4 @@
+semantic_pair_key,base_family_key,canonical_skeleton,input_count,unique_expression_count,selected_count
+open_interest,open_interest,"tsrank(open_interest_mean,n)",3,1,1
+open_interest,open_interest,"csrank(tsrank(open_interest_mean,n))",3,1,1
+open_interest|funding_state,funding_state|open_interest,"safediv(tsrank(open_interest_value_last,n),csrank(zscore(mean(funding_rate_delta_state_nh,n))))",2,1,1

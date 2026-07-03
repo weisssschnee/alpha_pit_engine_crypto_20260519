@@ -1,0 +1,24 @@
+{
+  "stage": "A7DEDUP-1",
+  "generated_at": "2026-07-03T13:39:47.020164+00:00",
+  "decision": "PASS_A7DEDUP1_CANONICAL_QUEUE_BUILT",
+  "input_path": "runtime\\a7reward3_oi_funding_mechanism_strict_reward_20260703\\a7reward1_accepted_for_next_search.csv",
+  "input_rows": 8,
+  "selected_rows": 3,
+  "rejected_rows": 5,
+  "exact_duplicate_groups": 3,
+  "max_per_expression": 1,
+  "max_per_skeleton": 1,
+  "max_per_semantic_pair": 2,
+  "max_per_base_family": 2,
+  "selected_output": "runtime\\a7dedup1_canonical_reward_queue_20260703\\a7dedup1_canonical_selected_queue.csv",
+  "rejected_output": "runtime\\a7dedup1_canonical_reward_queue_20260703\\a7dedup1_dedup_rejections.csv",
+  "summary_output": "runtime\\a7dedup1_canonical_reward_queue_20260703\\a7dedup1_group_summary.csv",
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "next_required": [
+    "feed selected queue into mechanism expansion only as seeds",
+    "enforce canonical expression and skeleton caps inside future selector/search queues",
+    "audit whether OI-only dominance is real mechanism or family concentration artifact"
+  ]
+}
