@@ -122,8 +122,9 @@ Mul(CSRank(Mean(open_interest_mean,8)),Sign(Mean(premium_close_bps,48)))
 ## Current A7SEARCH7 Search State
 
 - A7SEARCH7 queue decision: `PASS_A7SEARCH7_FAMILY_DIVERSIFIED_QUEUE_READY`.
-- Remote run root: `H:\AlphaFactory_CryptoData_archive\a7search7_family_diversified_proxy_65k_20260704`.
-- Detached supervisor task id: `job_20260704_023743_eede40`.
+- Original H: archive run was abandoned as invalid for execution evidence after filesystem/log corruption and incomplete manifests.
+- Active remote run root: `D:\HermesWorker\runtime\a7search7_family_diversified_proxy_65k_r2_20260704`.
+- Detached supervisor task id: `job_20260704_131230_9b836a`.
 - Queue rows: `65536`.
 - Shards: `128` x `512`.
 - Semantic pair count: `40`.
@@ -138,8 +139,19 @@ Mul(CSRank(Mean(open_interest_mean,8)),Sign(Mean(premium_close_bps,48)))
   - `regime_conditioned_non_oi`: `13107`
   - `raw_broad_non_oi`: `15729`
 - A7SEARCH7 authorizes proxy search only.
-- Latest startup check: 12 proxy workers active, free physical memory about `8.3GB`; supervisor configured with `max_parallel=12`, `min_free_gb=10.0`.
-- Full queue and shard outputs stay on H: archive root; git stores only script, report, manifest, and summaries.
+- Latest maintenance check on 2026-07-05: 10 proxy workers active, free physical memory about `13.4GB`, D: free about `9.1GB`.
+- Completed manifests: at least `s000-s031` (`32/128`).
+- Current running shard band: `s032-s041`.
+- Supervisor configured with `max_parallel=10`, `min_free_gb=8.0`.
+- Full queue and shard outputs stay on the remote D: runtime root; git stores only scripts, reports, manifests, and summaries.
+
+## Graphify Maintenance State
+
+- `.planning/config.json` exists and sets `graphify.enabled: true`.
+- `node G:\CodexData\.codex\get-shit-done\bin\gsd-tools.cjs graphify status` is callable from the repo.
+- Current status: no graph has been built yet.
+- Build blocker: local `graphify` executable/package is not installed; CLI reports `uv pip install graphifyy && graphify install`.
+- Do not claim graph freshness or graph query coverage until `graphify build` succeeds and `.planning/graphs/graph.json` exists.
 
 ## Immediate Next Taskflow
 
