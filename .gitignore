@@ -6,6 +6,7 @@
 *.zip
 *.pyc
 __pycache__/
+graphify-out/
 
 raw/
 bronze/
@@ -21,4 +22,3 @@ venv/
 **/*book_returns*.csv
 **/*positions*.csv
 **/*component_panel*.csv
-
