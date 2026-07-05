@@ -82,3 +82,5 @@ This search does not authorize alpha proof, shadow, paper, live, or production p
 ## Non-Architecture Files
 
 The repository contains many historical stage scripts and reports. They are valuable evidence, but they are not all active architecture. Treat them as evolution records unless A7PM/current planning state marks them current.
+
+Use `ARTIFACT_LIFECYCLE.md` to classify process artifacts after milestones. Do not promote fast-iteration runtime outputs, superseded diagnostics, or temp/debug files into the active architecture.

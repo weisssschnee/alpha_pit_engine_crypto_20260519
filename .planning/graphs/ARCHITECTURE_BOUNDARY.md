@@ -13,12 +13,15 @@ The `.planning/graphs/` directory now has three different views. They are intent
 | `GRAPH_REPORT.md` | Raw graph statistics | Check graph size/freshness and artifact scope |
 | `CURRENT_ARCHITECTURE.md` | Curated current architecture | Explain the active research/search system |
 | `EVOLUTION_MAP.md` | Curated evolution map | Explain how A7 phases reached the current state |
+| `ARTIFACT_LIFECYCLE.md` | Artifact lifecycle policy | Decide what to keep, archive, supersede, or delete |
 
 ## Rule
 
 Raw graphify output is not the architecture.
 
 The raw graph is expected to be large and noisy because it sees code, reports, runtime artifacts, planning files, and historical scripts. It can contain obsolete and superseded paths. It is an index, not a decision document.
+
+Raw graph size is also a cleanup signal. A large raw graph does not imply a large architecture; it often indicates fast-iteration process artifacts that should be classified, archived, summarized, or deleted after source-of-truth extraction.
 
 The current architecture is the smaller manually curated system chain that is still active or explicitly authoritative.
 
@@ -29,6 +32,7 @@ The evolution map is the phase history and supersession story. It explains why t
 - Use raw graphify files to locate code and relationships.
 - Use `CURRENT_ARCHITECTURE.md` to reason about the active system.
 - Use `EVOLUTION_MAP.md` to reason about phase history, supersession, and governance.
+- Use `ARTIFACT_LIFECYCLE.md` to classify process artifacts and avoid maintaining historical noise as architecture.
 - Do not infer deployment readiness from any graph file.
 - Do not infer alpha proof, shadow, paper, or live authorization from any graph file.
 - If a raw graph node conflicts with A7PM/source-of-truth records, A7PM and current planning state win.

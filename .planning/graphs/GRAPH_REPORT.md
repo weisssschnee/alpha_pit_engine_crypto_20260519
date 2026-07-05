@@ -21,6 +21,7 @@ Generated: 2026-07-04T16:44:07.893Z
 - `CURRENT_ARCHITECTURE.md`: manually curated current-system architecture view.
 - `EVOLUTION_MAP.md`: manually curated phase/evolution view.
 - `ARCHITECTURE_BOUNDARY.md`: interpretation rules for graphify versus architecture docs.
+- `ARTIFACT_LIFECYCLE.md`: artifact keep/archive/supersede/delete policy.
 
 ## Boundary
 
@@ -28,4 +29,6 @@ This file is not the current system architecture. It reports the raw code knowle
 
 The raw graph contains historical scripts, reports, runtime adapters, planning files, and superseded research artifacts. It is useful for navigation and dependency discovery, but it must not be read as the active architecture or current source-of-truth chain.
 
-Use `CURRENT_ARCHITECTURE.md` for the active architecture and `EVOLUTION_MAP.md` for phase history.
+Use `CURRENT_ARCHITECTURE.md` for the active architecture, `EVOLUTION_MAP.md` for phase history, and `ARTIFACT_LIFECYCLE.md` for cleanup decisions.
+
+Raw graph growth is a cleanup prompt, not an architecture expansion target.
