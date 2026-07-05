@@ -34,6 +34,13 @@ data and field integrity
 
 ## Current System Map
 
+The current system map is split across curated architecture and raw graph files:
+
+- `.planning/graphs/CURRENT_ARCHITECTURE.md` - current active research/search architecture.
+- `.planning/graphs/EVOLUTION_MAP.md` - phase evolution and supersession map.
+- `.planning/graphs/ARCHITECTURE_BOUNDARY.md` - rules for interpreting architecture versus graphify artifacts.
+- `.planning/graphs/graph.json` and `.planning/graphs/graph.html` - raw graphify code/navigation graph, not the current architecture.
+
 ## Completed Foundation Phases
 
 The current project plan starts after several governance and infrastructure phases have already passed. These are prerequisites, not future work:

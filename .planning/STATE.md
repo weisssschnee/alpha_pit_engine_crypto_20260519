@@ -145,13 +145,17 @@ Mul(CSRank(Mean(open_interest_mean,8)),Sign(Mean(premium_close_bps,48)))
 - Supervisor configured with `max_parallel=10`, `min_free_gb=8.0`.
 - Full queue and shard outputs stay on the remote D: runtime root; git stores only scripts, reports, manifests, and summaries.
 
-## Graphify Maintenance State
+## Graphify / Architecture Map State
 
 - `.planning/config.json` exists and sets `graphify.enabled: true`.
-- `node G:\CodexData\.codex\get-shit-done\bin\gsd-tools.cjs graphify status` is callable from the repo.
-- Current status: no graph has been built yet.
-- Build blocker: local `graphify` executable/package is not installed; CLI reports `uv pip install graphifyy && graphify install`.
-- Do not claim graph freshness or graph query coverage until `graphify build` succeeds and `.planning/graphs/graph.json` exists.
+- Raw graphify artifacts exist under `.planning/graphs/graph.json` and `.planning/graphs/graph.html`.
+- Latest raw graph statistics: `15866` nodes and `32165` links.
+- Raw graphify output is explicitly classified as a code/navigation knowledge graph, not the current architecture.
+- Curated architecture files:
+  - `.planning/graphs/CURRENT_ARCHITECTURE.md`
+  - `.planning/graphs/EVOLUTION_MAP.md`
+  - `.planning/graphs/ARCHITECTURE_BOUNDARY.md`
+- Use `CURRENT_ARCHITECTURE.md` for active system reasoning and `EVOLUTION_MAP.md` for phase history. Use raw graphify files only for navigation/query.
 
 ## Immediate Next Taskflow
 
