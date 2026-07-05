@@ -1,6 +1,0 @@
-control_mode,description,promotion_allowed,dominance_rule
-sign_flip,same formula with inverted sign; should not pass as comparable candidate,False,candidate robust score must exceed matched controls; any control research-like pass blocks cell/family
-row_shuffle,symbol-row shuffled within split; detects cross-sectional artifact,False,candidate robust score must exceed matched controls; any control research-like pass blocks cell/family
-time_shuffle,time shuffled signal; detects temporal leakage or static exposure,False,candidate robust score must exceed matched controls; any control research-like pass blocks cell/family
-wrong_lag_stale_24h,"stale/wrong-lag control; previous A7O blocker, must be explicitly dominated",False,candidate robust score must exceed matched controls; any control research-like pass blocks cell/family
-random_placebo,seeded random signal matched to universe/split,False,candidate robust score must exceed matched controls; any control research-like pass blocks cell/family

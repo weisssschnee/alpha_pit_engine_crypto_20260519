@@ -1,6 +1,0 @@
-pattern,status,reason
-static_oi_level_x_realized_vol,blocked_initial,A7AD wrong-lag controls dominated static OI x volatility/trend motifs
-raw_603_column_blind_search,blocked,core39 all-features table is derived-wide; field selection required first
-core3_agg_projected_to_core39,blocked,aggTrades coverage is BTC/ETH/SOL only
-funding_standalone_promotion,blocked,funding family remains benchmark/control after A7D/A7B history
-liquidity_volatility_uncapped,blocked,previous A7M/A7O collapse risk

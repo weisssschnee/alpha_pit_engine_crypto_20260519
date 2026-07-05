@@ -1,6 +1,0 @@
-metric,value,threshold,pass
-max_window,97.0,144,True
-p95_window,96.0,96,True
-p50_window,36.0,,True
-horizon_bucket_count,6.0,6,True
-continuous_window_inflation_flag,23.0,144,True

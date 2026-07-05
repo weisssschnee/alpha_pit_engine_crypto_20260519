@@ -1,5 +1,0 @@
-feature_family,feature_available_time,execution_time,label_start_time,label_end_time,contract_status,notes
-price/volatility/liquidity/flow/basis,bar_close_time,next_1h_bar_open,execution_time,execution_time_plus_horizon,pass,same-bar execution remains forbidden; 1bar lag stress required
-funding_observable_only,fundingTime_ms <= feature_time only,next_1h_bar_open,execution_time,execution_time_plus_horizon,pass,future_next_funding and settlement-after-use remain forbidden
-cross_symbol_relative,same timestamp cross-section after all symbols have current bar data,next_1h_bar_open,execution_time,execution_time_plus_horizon,pass,fixed core12 research universe; no current-constituent survivorship claim
-positioning/liquidation/L2/cross_exchange,not historical-proof eligible,not_authorized,not_authorized,not_authorized,blocked,recent-only or unavailable data; separate data contract required

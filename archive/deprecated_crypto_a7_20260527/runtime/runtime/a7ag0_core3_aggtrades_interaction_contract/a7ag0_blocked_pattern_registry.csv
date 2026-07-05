@@ -1,6 +1,0 @@
-pattern,status,reason
-agg_activity_liquidity_self_reproduction,blocked,A7V rejected activity/liquidity clue family after source trace pass
-raw_agg_notional_or_trade_count_standalone,blocked,standalone activity level can be control-contaminated and May-fragile
-core3_agg_projected_to_core39,blocked,aggTrades panel covers BTC/ETH/SOL only
-may_tuned_symbol_specific_btc_eth_sol_rule,blocked,May is stress-only and cannot tune symbol weights
-blind_699_column_search,blocked,wide table includes derived fields; selected contract required

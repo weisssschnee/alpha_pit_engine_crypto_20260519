@@ -1,2 +1,0 @@
-panel_path,rows,columns,timestamp_min,timestamp_max,file_size_mb
-G:\AlphaFactory_CryptoData\gold\panels\crypto_core12_1h_with_aggtrades_metrics_features_v1.parquet,251148,222,2024-01-01 00:00:00+00:00,2026-05-22 00:00:00+00:00,236.36

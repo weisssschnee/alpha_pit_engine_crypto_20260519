@@ -1,3 +1,0 @@
-artifact,rows,has_active_hour_count,min_active_hour_count,max_active_hour_count
-split_metrics,1440,True,0,7248
-fold_replay_metrics,1248,True,0,7248

@@ -1,9 +1,0 @@
-engine_id,engine_name,source,readiness,generated_per_seed,strict_replay_top_per_seed,deep_audit_top_per_seed,purpose,hard_blocker
-E0,current_A7L_manual_generator,crypto_native_manual_generator,executable,5000,128,16,Control arm representing current manual A7L generator space.,
-E1,FormulaGenV2_crypto_adapter,CN FormulaGenV2 inherited reference,adapter_ready,5000,128,16,Test typed motif formula generation with crypto field dictionary.,
-E2,typed_AST_sampler_crypto_adapter,CN typed AST sampler inherited reference,adapter_ready,5000,128,16,Test typed AST expression diversity under crypto field/operator contract.,
-E3,AST_failure_aware_repair,CN phase3 repair engine,blocked_adapter_needed,5000,128,16,Repair failed crypto candidates using failure taxonomy.,requires crypto failure taxonomy and repair-action adapter preflight
-E4,CEM_adaptive_grammar_crypto,CN CEM adaptive grammar ledger,blocked_adapter_needed,5000,128,16,Learn grammar production weights from non-May failure labels.,"requires crypto CEM ledger, production weights, and May-exclusion preflight"
-E5,surrogate_prioritized_sampler,A7M-1 empirical surrogate,adapter_ready,5000,128,16,Use non-May surrogate scores for cheap filtering and diversity-aware selection.,
-E6,placebo_random_control,negative control,executable,5000,128,16,Detect false-positive replay/gate behavior.,
-E7,adversarial_null_wrong_lag_control,negative control,executable,5000,128,16,Detect wrong-lag/future-sensitive artifact behavior.,

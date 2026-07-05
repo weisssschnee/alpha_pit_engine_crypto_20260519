@@ -1,4 +1,0 @@
-source_field_families,rc_000,rc_001,rc_002,rc_003,rc_004,rc_005,rc_006,rc_007,rc_008,rc_009,rc_010
-basis;liquidity;volatility,0,0,0,4,0,0,0,0,0,0,0
-liquidity,0,0,0,16,0,18,0,0,0,0,0
-liquidity;volatility,245,15,43,29,3,0,1,1,1,2,1

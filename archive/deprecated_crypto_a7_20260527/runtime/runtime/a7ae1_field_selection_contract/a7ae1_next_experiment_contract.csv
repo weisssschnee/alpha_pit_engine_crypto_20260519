@@ -1,4 +1,0 @@
-stage,name,scope
-A7AF0,core39 selected-field replay contract,no replay; build selected field panel/schema and controls
-A7AF1,core39 selected-field small controlled smoke,<=120 candidates; controls mandatory; no May ranking
-A7AG0,core3 aggtrades integration contract,"core3-only order-flow diagnostics, separate from core39"

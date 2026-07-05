@@ -1,4 +1,0 @@
-control_id,control_type,non_core3_output_rows,would_pass_without_contract,decision,notes,feature_available_lag_bars,base_fields
-zero_fill_core12_cross_symbol_rank,forbidden_zero_fill,188172.0,True,BLOCKED_EXPECTED_CONTROL,Shows why missing agg rows cannot be zero-filled before cross-sectional rank.,,
-same_hour_execution_lag0,forbidden_timing,,True,BLOCKED_EXPECTED_CONTROL,Agg 1h bucket may only be used after hour close; same-hour close execution is forbidden.,0.0,
-funding_unrestricted_interaction,forbidden_unrestricted_funding,,True,BLOCKED_EXPECTED_CONTROL,Funding may be a baseline/control or residual target; unrestricted discovery packaging remains blocked.,,agg_flow_imbalance_notional;latest_known_funding_rate

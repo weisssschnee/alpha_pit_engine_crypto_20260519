@@ -1,4 +1,0 @@
-production_family,decision,candidates,unique_expressions,unique_source_fields,min_feature_lag,max_feature_lag
-cross_symbol_self_reproduction_core3,A7V3_DRY_RUN_CANDIDATE,80,80,46,1,1
-interaction_self_reproduction,A7V3_DRY_RUN_CANDIDATE,100,70,35,1,1
-rolling_self_reproduction,A7V3_DRY_RUN_CANDIDATE,180,180,80,4,24

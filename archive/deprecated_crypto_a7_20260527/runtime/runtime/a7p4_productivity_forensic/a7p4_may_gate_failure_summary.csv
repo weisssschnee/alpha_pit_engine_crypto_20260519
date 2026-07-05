@@ -1,7 +1,0 @@
-gate,fail_count,fail_rate
-fail_raw_may_severe,121,0.6302083333333334
-fail_residual_funding_may_negative,107,0.5572916666666666
-fail_residual_gross,53,0.2760416666666667
-fail_raw_gross,53,0.2760416666666667
-fail_residual_active_hours,53,0.2760416666666667
-fail_raw_active_hours,53,0.2760416666666667

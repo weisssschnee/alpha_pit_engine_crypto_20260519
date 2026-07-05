@@ -1,7 +1,0 @@
-mode,runner_supported_by_contract,research_label_allowed_in_preflight,status
-row_shuffle,True,False,pass
-seeded_random,True,False,pass
-sign_flip,True,False,pass
-symbol_shuffle,True,False,pass
-time_shuffle,True,False,pass
-wrong_lag_stale_24h,True,False,pass

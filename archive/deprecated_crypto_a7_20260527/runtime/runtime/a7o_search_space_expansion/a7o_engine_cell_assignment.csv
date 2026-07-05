@@ -1,8 +1,0 @@
-engine,mix_weight,budget_allocation_role
-FormulaGenV2_crypto_adapter,0.2,within_cell_generator_only
-typed_AST_sampler,0.15,within_cell_generator_only
-AST_failure_aware_repair,0.15,within_cell_generator_only
-CEM_adaptive_grammar,0.25,within_cell_generator_only
-surrogate_weak_prior_sampler,0.1,within_cell_generator_only
-manual_cell_template,0.1,within_cell_generator_only
-random_within_cell,0.05,within_cell_generator_only

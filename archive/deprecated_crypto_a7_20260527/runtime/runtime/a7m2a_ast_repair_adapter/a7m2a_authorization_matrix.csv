@@ -1,7 +1,0 @@
-capability,authorized,scope
-AST_failure_aware_repair_crypto_adapter,True,adapter_preflight_ready
-A7M2C_blocker_resolution_input,True,may be used by authorization revision
-A7M2_equal_budget_bakeoff_execution,False,requires A7M-2B and A7M-2C
-adaptive_large_search,False,not authorized
-research_candidate,False,not produced by preflight
-alpha_proof_shadow_paper_live,False,not authorized

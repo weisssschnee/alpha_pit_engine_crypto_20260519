@@ -1,3 +1,0 @@
-field,present,non_null_rate,matches_timestamp_plus_1h_rate,note
-feature_available_time,True,1.0,1.0,primary timing contract field
-metrics_feature_available_time,True,0.25,0.25,"supplemental metadata; incomplete on primary additions, do not use as replay gate"

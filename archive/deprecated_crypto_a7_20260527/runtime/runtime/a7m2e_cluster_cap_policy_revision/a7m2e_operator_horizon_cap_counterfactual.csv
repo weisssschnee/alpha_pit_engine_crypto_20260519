@@ -1,3 +1,0 @@
-policy,pool,count,return_corr_cluster_count,top_return_corr_cluster_share,field_family_count,top_field_family_share,operator_horizon_count,top_operator_horizon_share,engine_count,formula_family_count,placebo_or_null_count
-top_operator_horizon_share <= 0.25,before,0,0,0.0,0,0.0,0,0.0,0,0,0
-top_operator_horizon_share <= 0.25,after_full_caps,0,0,0.0,0,0.0,0,0.0,0,0,0

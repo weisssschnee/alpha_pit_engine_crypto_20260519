@@ -1,5 +1,0 @@
-failure_mode,count,share,interpretation,next_action,total_candidates,contaminating_control_rows,near_miss_rows
-raw_validation_or_recent_fail,62,0.6739130434782609,candidate cannot clear basic non-May raw evidence,do not tune May; lower priority for same-space expansion,92,34,2
-control_contaminated,28,0.30434782608695654,matched null/control can be positive in validation and recent,keep negative-control dominance as hard gate,92,34,2
-may_stress_fail_after_non_may_pass,2,0.021739130434782608,pre-May clean clue does not survive known adversarial stress,record as stress clue only; not candidate,92,34,2
-clean_research_clue,0,0.0,no current A7X family clears all gates,do not run A7X-4 candidate forensic; redesign objective or move to A7S,92,34,2

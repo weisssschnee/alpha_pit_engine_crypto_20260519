@@ -1,5 +1,0 @@
-arm,budget_generated,budget_replay,frequency,may_usage
-I0_basis_premium,250,64,1h,stress_gate_only
-I1_flow_liquidity,250,64,1h,stress_gate_only
-I2_microstructure_lite,250,64,1h,stress_gate_only
-I3_placebo_random,250,64,1h,stress_gate_only

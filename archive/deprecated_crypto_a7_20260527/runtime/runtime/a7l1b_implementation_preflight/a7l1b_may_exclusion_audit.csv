@@ -1,5 +1,0 @@
-check,status,detail
-may_columns_absent_from_dry_candidate_manifest,pass,no May/fresh_forward columns are generated in dry candidate manifest
-may_absent_from_score_reward_selection_terms,pass,rank_score;reward_score;threshold;weight;selected_for_replay;generator_family
-delete_or_shuffle_may_invariant,pass,dry_candidate_hash=4da256cbbd2928c9f1c5cc14d3ebe69cddaa1d6adc4aa738587cd7113546eba9; no May columns exist to affect dry ranking or candidate list
-may_allowed_only_after_selection,pass,allowed uses remain post_selection_stress_label/final_veto_label/failure_attribution

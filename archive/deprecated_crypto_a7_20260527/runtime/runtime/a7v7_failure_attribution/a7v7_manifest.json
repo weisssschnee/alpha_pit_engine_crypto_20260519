@@ -1,7 +1,0 @@
-{
-  "decision": "HOLD_A7V7_ACTIVITY_LIQUIDITY_CLUES_FAIL_MAY_STRESS",
-  "generated_at": "2026-05-22T02:14:05Z",
-  "input_a7v6_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7v6_candidate_control_dominance_forensic",
-  "output_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7v7_failure_attribution",
-  "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7V7_FAILURE_ATTRIBUTION_20260522.md"
-}

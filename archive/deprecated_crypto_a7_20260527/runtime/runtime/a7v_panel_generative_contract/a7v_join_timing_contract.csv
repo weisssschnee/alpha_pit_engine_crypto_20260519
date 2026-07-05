@@ -1,7 +1,0 @@
-rule_id,rule,status
-panel_source,G:\AlphaFactory_CryptoData\gold\panels\crypto_core12_1h_with_aggtrades_features_v1.parquet,primary_experiment_panel
-coverage_scope,Agg features are valid only for BTCUSDT/ETHUSDT/SOLUSDT through 2026-04-30 23:00 UTC; non-core3 rows remain unavailable.,required
-availability_mask,Every formula using agg fields must require agg_features_available == true for the symbol/timestamp.,required
-feature_available_time,"For hour bucket timestamp t, agg features are available after t + 1h; rolling descendants are available after the last required input hour closes.",required
-execution,Primary replay must execute no earlier than next bar after feature availability. Same-hour close execution is forbidden.,required
-negative_controls,"Every agg feature smoke must retain row/time shuffle, wrong-lag, sign-flip, and no-agg controls.",required

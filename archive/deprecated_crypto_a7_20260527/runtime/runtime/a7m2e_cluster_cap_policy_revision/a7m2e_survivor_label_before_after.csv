@@ -1,8 +1,0 @@
-pool,count,return_corr_cluster_count,top_return_corr_cluster_share,field_family_count,top_field_family_share,operator_horizon_count,top_operator_horizon_share,engine_count,formula_family_count,placebo_or_null_count
-pre_may_near_miss_no_cap,379,11,0.6464379947229552,3,0.899736147757256,5,0.5883905013192612,6,6,0
-post_may_eligible_no_cap,0,0,0.0,0,0.0,0,0.0,0,0,0
-post_may_cluster_cap_0.35,0,0,0.0,0,0.0,0,0.0,0,0,0
-post_may_cluster_cap_0.25,0,0,0.0,0,0.0,0,0.0,0,0,0
-post_may_cluster_cap_0.20,0,0,0.0,0,0.0,0,0.0,0,0,0
-post_may_cluster_cap_0.15,0,0,0.0,0,0.0,0,0.0,0,0,0
-post_may_full_caps,0,0,0.0,0,0.0,0,0.0,0,0,0

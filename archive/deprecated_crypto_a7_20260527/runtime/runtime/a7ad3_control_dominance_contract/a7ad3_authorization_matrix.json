@@ -1,9 +1,0 @@
-{
-  "authorizes_a7ad1_rerun_same_contract": false,
-  "authorizes_a7ae0_candidate_redesign_contract": true,
-  "authorizes_alpha_proof": false,
-  "authorizes_formula_search": false,
-  "authorizes_large_search": false,
-  "authorizes_shadow_paper_live": false,
-  "decision": "PASS_A7AD3_CONTROL_DOMINANCE_CONTRACT_READY"
-}

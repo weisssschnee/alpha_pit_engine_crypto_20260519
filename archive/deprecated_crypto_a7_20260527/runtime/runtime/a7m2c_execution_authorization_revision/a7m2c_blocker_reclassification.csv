@@ -1,4 +1,0 @@
-blocker,old_classification,new_classification,blocks_equal_budget_bakeoff,blocks_adaptive_allocation,status_after_revision,detail
-A7M1B_surrogate_cross_source_hold,execution_blocker,allocation_mode_blocker,False,True,active_for_adaptive_allocation_only,"Surrogate can be tested as E5 equal-budget engine, but cannot drive other engines' budgets."
-E3_AST_failure_aware_repair_not_executable,hard_execution_blocker,resolved,False,False,resolved,Resolved by PASS_A7M2A_AST_REPAIR_ADAPTER_PREFLIGHT.
-E4_CEM_adaptive_grammar_not_executable,hard_execution_blocker,resolved,False,False,resolved,Resolved by PASS_A7M2B_CEM_ADAPTIVE_GRAMMAR_PREFLIGHT.

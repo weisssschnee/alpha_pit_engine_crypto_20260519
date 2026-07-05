@@ -1,9 +1,0 @@
-failure_type,source_labels,observed_count,repair_policy,repair_allowed,may_allowed,promotes_candidate,reason
-raw_fail,raw_validation_fail;raw_recent_fail,2705,negative_label_only,False,False,False,Raw failure is not repaired directly into a candidate; it informs mutation priors only.
-residual_fail,residual_funding_validation_fail;residual_funding_recent_fail;residual_core4_recent_fail,1608,orthogonalize_or_penalize,True,False,False,Repair can reduce FundingCore/Core4 beta exposure without using May.
-cost20_fail,cost20_validation_fail;cost20_recent_fail,2779,reduce_turnover_and_smooth,True,False,False,Repair can smooth high-turnover expressions and add liquidity/activity constraints.
-lag1_fail,lag1_validation_fail;lag1_recent_fail,2631,increase_latency_stability,True,False,False,Repair can avoid near-bar features and move to slower horizons.
-activity_coverage_fail,activity_fail;coverage_fail,52,remove_zero_activity_artifacts,True,False,False,Repair can reject all-zero/all-NaN expressions or replace fields with active equivalents.
-beta_fail,funding_beta_fail;core4_beta_fail,41,beta_penalty_or_reject,True,False,False,Repair can reject packaged FundingCore/Core4 exposure or add beta penalty.
-residual_only_clue,clue_label,204,diagnostic_only,False,False,False,Residual-only clues cannot be repaired into standalone alpha candidates.
-near_miss,near_miss_label,125,targeted_non_may_mutation,True,False,False,Near-miss cases can seed targeted mutation using non-May gates only.

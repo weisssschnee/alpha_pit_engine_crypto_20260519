@@ -1,9 +1,0 @@
-{
-  "authorizes_a7k1": true,
-  "authorizes_a7k2": false,
-  "authorizes_alpha_proof": false,
-  "contract": "G:\\AlphaFactory_CryptoData\\alphafactory_crypto\\runtime\\a7k0_generator_space_redesign_contract\\crypto_a7k0_generator_space_contract_20260520.json",
-  "decision": "PASS_A7K0_GENERATOR_SPACE_REDESIGN_CONTRACT",
-  "generated_at": "2026-05-19T17:38:13Z",
-  "stable_contract_hash": "78ec7710a6c028b7726e711b697c20eedb2497294ec7ecbbe7172b61556758df"
-}

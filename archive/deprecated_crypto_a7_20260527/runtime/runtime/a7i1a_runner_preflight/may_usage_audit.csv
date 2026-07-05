@@ -1,7 +1,0 @@
-check_name,pass,detail
-rank_score_components_have_no_may_columns,True,
-candidate_selection_trace_has_no_may_threshold_or_weight,True,may_derived_threshold_used=False; may_derived_weight_used=False
-rank_order_unchanged_after_may_shuffle,True,May stress label shuffled in audit-only column
-rank_order_unchanged_after_may_delete,True,May columns deleted from ranking frame
-selected_for_replay_unchanged_after_may_shuffle_delete,True,selection driven by validation/recent rank score only
-may_affects_only_final_stress_label,True,May stress label is written in classification audit only

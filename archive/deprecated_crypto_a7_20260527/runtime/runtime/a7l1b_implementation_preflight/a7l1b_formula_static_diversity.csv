@@ -1,6 +1,0 @@
-metric,value,status
-dry_candidate_count,417,pass
-unique_expr_ratio,1.0,pass
-field_family_combo_count,20,pass
-operator_combo_count,2,pass
-horizon_count,4,pass

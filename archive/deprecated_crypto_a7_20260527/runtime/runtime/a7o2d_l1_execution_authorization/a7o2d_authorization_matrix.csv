@@ -1,8 +1,0 @@
-scope,authorized,reason
-A7O-L1 pilot shard,True,A7O-2C4 semantic/horizon/fold gates passed
-A7O-L1 full continuation after pilot pass,True,conditional on pilot shard checkpoint gates
-A7O-L1 unconditional full run,False,pilot shard and every-64-cell checkpoint required
-A7O-L2,False,requires L1 eligible pool and diversity pass
-A7O-L3,False,"contract-only, not authorized"
-alpha proof,False,A7O-L1 can only produce research candidate pool
-shadow/paper/live,False,requires future alpha proof and execution validation

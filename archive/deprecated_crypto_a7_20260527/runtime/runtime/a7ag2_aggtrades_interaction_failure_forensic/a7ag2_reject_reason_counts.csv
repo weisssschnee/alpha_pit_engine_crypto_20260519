@@ -1,9 +1,0 @@
-reject_reason,count
-residual_funding_recent_nonpositive,89
-cost20_recent_nonpositive,88
-lag1_recent_nonpositive,83
-lag2_recent_nonpositive,83
-raw_recent_nonpositive,83
-raw_validation_nonpositive,82
-negative_control_not_dominated,3
-may_stress_not_positive,1

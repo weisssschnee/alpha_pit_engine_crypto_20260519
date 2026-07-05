@@ -1,6 +1,0 @@
-quota,value,status,detail
-max_same_family_shortlist_share,0.25,required,No single non-control family may exceed 25% of shortlist.
-placebo_null_fixed_budget,fixed_control,required,Placebo/null are controls and cannot expand adaptively.
-field_family_combo_observed,17,observed,Coverage observed from non-May eligible dataset.
-operator_combo_observed,6,observed,Coverage observed from non-May eligible dataset.
-horizon_observed,3,observed,Coverage observed from non-May eligible dataset.

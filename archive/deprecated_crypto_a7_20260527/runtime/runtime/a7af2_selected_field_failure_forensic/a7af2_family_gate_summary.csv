@@ -1,7 +1,0 @@
-family,count,raw_validation_positive,raw_recent_positive,cost20_recent_positive,lag1_recent_positive,residual_recent_positive,controls_clean,pre_may_core_gate,post_may_positive,post_may_eligible_after_core
-G3_crowding_x_context,24,0,2,1,2,2,24,0,7,0
-G0_basis_premium_dynamic,16,0,0,0,0,0,16,0,0,0
-G1_crowding_x_basis_dynamic,24,0,0,0,0,0,24,0,11,0
-G2_oi_dynamic_x_basis_dynamic,18,0,0,0,0,0,17,0,2,0
-G4_oi_change_x_context,6,0,0,0,0,0,4,0,0,0
-G5_funding_basis_benchmark,4,0,0,0,0,0,4,0,0,0

@@ -1,8 +1,0 @@
-feature_or_family,source,independent_source,allowed_role,blocked_role,must_report
-agg_flow_imbalance_notional_24h,aggTrades enhanced_v1,aggTrades,flow_state_interactor,standalone_activity_alpha,matched controls; 20bps; lag1/lag2; symbol/month LOO; May stress-only label
-agg_signed_flow_z_24h,aggTrades enhanced_v1,aggTrades,signed_flow_state_interactor,single-field replay expansion,control dominance; turnover/cost; post-selection May label
-agg_cross_symbol_signed_flow_share,aggTrades enhanced_v1,aggTrades,cross_symbol_flow_state,core3-only proof object,symbol-tier attribution; BTC/ETH/SOL asymmetry; controls
-open_interest_change_24h,Binance Vision daily metrics,metrics/openInterest,positioning_state_interactor,single OI alpha without LOO,vendor 5m warnings; residual vs FundingCore/Core4; cost/lag; LOO
-global_long_short_account_ratio_zscore_168h,Binance Vision daily metrics,metrics/globalLongShortAccountRatio,crowding_state_or_exposure_control,standalone crowding alpha,A7S4 blocker check; matched controls; symbol/month LOO
-top_long_short_position_ratio_zscore_168h,Binance Vision daily metrics,metrics/topLongShortPositionRatio,large_account_positioning_state,standalone positioning alpha before robustness,PIT vendor warnings; residual/cost/lag/LOO
-agg_features_available / metrics_features_available,unified panel masks,availability metadata,sample_mask_and_coverage_control,predictive signal,coverage by symbol/month; no selection leakage

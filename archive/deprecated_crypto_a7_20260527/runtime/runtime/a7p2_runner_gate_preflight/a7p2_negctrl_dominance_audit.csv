@@ -1,3 +1,0 @@
-control_candidate_id,control_cell_id,control_signal_mode,control_source_field_families,dominance_scope,matched_normal_count,blocked_normal_count,control_score,may_used_for_dominance
-a7o_l1_C0208_1344,C0208,wrong_lag_stale_24h,liquidity;volatility,same_cell,0,0,-0.13852433366736427,False
-a7o_l1_C0208_1344,C0208,wrong_lag_stale_24h,liquidity;volatility,same_hypothesis_feature_operator_horizon,0,0,-0.13852433366736427,False

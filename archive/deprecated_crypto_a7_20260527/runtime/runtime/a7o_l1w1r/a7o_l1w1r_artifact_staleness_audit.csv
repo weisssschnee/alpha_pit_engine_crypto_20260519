@@ -1,7 +1,0 @@
-checkpoint_id,artifact,stored_post_may_eligible,stress_gate_v2_post_may_eligible,stale
-01,G:\AlphaFactory_CryptoData\alphafactory_crypto\runtime\a7o_l1_pilot\a7o_l1_pilot_checkpoint_decision.json,49,12,True
-02,G:\AlphaFactory_CryptoData\alphafactory_crypto\runtime\a7o_l1_checkpoint_02\a7o_l1_checkpoint_02_checkpoint_decision.json,54,24,True
-03,G:\AlphaFactory_CryptoData\alphafactory_crypto\runtime\a7o_l1_checkpoint_03\a7o_l1_checkpoint_03_checkpoint_decision.json,8,8,False
-04,G:\AlphaFactory_CryptoData\alphafactory_crypto\runtime\a7o_l1_checkpoint_04\a7o_l1_checkpoint_04_checkpoint_decision.json,8,8,False
-05,G:\AlphaFactory_CryptoData\alphafactory_crypto\runtime\a7o_l1_checkpoint_05\a7o_l1_checkpoint_05_checkpoint_decision.json,11,11,False
-06,G:\AlphaFactory_CryptoData\alphafactory_crypto\runtime\a7o_l1_checkpoint_06\a7o_l1_checkpoint_06_checkpoint_decision.json,13,13,False

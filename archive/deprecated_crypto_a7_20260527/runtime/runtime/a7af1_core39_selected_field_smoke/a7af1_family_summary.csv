@@ -1,7 +1,0 @@
-family,decision,count
-G0_basis_premium_dynamic,A7AF1_REJECTED,16
-G1_crowding_x_basis_dynamic,A7AF1_REJECTED,24
-G2_oi_dynamic_x_basis_dynamic,A7AF1_REJECTED,18
-G3_crowding_x_context,A7AF1_REJECTED,24
-G4_oi_change_x_context,A7AF1_REJECTED,6
-G5_funding_basis_benchmark,A7AF1_REJECTED,4

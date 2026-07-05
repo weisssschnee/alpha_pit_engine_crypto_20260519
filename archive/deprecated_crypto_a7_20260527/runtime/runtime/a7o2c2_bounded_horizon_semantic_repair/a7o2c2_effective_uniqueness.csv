@@ -1,4 +1,0 @@
-metric,value,threshold,pass
-raw_unique_expr_ratio,0.8129024505615234,0.9,False
-effective_unique_ratio_after_horizon_bucketing,0.7649059295654297,0.85,False
-simplified_effective_unique_ratio_after_bucket,0.7649059295654297,0.75,True

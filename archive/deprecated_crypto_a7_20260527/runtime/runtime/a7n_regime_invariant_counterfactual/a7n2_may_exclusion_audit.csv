@@ -1,5 +1,0 @@
-check,status,detail
-May columns used in A7N score,PASS,No fresh_forward_2026May columns are referenced by score construction.
-May reject reasons used in score,PASS,reject_reasons and refactored labels are evaluation outputs only.
-May used for generator/arm allocation,PASS,A7N-2 executes no generation and no allocation.
-A7N-1 fold source,PASS,Fold library is validation/recent contract-only; May is forbidden.

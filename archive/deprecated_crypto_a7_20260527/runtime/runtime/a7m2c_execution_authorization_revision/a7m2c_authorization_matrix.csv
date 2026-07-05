@@ -1,6 +1,0 @@
-capability,authorized,scope
-A7M-2_equal_budget_inherited_engine_bakeoff,True,8 engines x 4 seeds x 5000 generated; strict replay 4096; deep audit 512; if user starts separately
-surrogate_driven_budget_allocation,False,blocked by A7M-1B cross-source HOLD
-adaptive_large_search,False,requires later A7M-2 results and separate authorization
-alpha_proof,False,not authorized
-shadow_paper_live,False,not authorized

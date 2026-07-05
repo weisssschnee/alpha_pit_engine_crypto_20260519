@@ -1,6 +1,0 @@
-family,status,reason,next_quota
-F0_low_turnover_price_basis,allow_limited,"no research-like controls, but broad raw/cost/residual weakness",32
-F1_funding_residual_controls,benchmark_only,funding controls have sign/wrong-lag pass; do not promote standalone funding motifs,16
-F2_metrics_crowding_oi_interaction,redesign_required,wrong_lag_stale_24h dominates top apparent positives; require delta/persistence/non-stale transformations,48
-F3_cross_symbol_relative_strength,redesign_required,wrong_lag controls pass at high rate; require change-based or regime-conditional variants,24
-F4_volatility_liquidity_capped,quarantine,sign-flip and wrong-lag controls pass; previous liquidity/volatility collapse risk remains,8

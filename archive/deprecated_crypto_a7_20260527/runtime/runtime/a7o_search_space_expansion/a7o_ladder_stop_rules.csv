@@ -1,5 +1,0 @@
-level,status,generated,strict_replay,deep_audit
-A7O-L0,completed,524288,0,0
-A7O-L1,not_authorized_until_A7O_review,2097152,24576,3072
-A7O-L2,not_authorized,8388608,49152,6144
-A7O-L3,contract_only_not_authorized,33554432,131072,16384

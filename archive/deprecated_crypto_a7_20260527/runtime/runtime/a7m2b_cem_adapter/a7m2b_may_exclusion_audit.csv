@@ -1,6 +1,0 @@
-check,status,detail
-may_not_elite_selection,pass,Elite policy marks all May signals forbidden.
-may_not_weight_update,pass,Weight dry-run uses only non-May score components.
-may_not_arm_allocation,pass,A7M-2B does not allocate arms; future CEM allocation forbids May.
-may_not_mutation_prior,pass,Production weights exclude May labels and May margins.
-may_stress_only,pass,May remains stress/veto/failure attribution only.

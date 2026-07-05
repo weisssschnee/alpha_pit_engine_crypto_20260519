@@ -1,7 +1,0 @@
-{
-  "decision": "HOLD_A7V6_NO_POST_MAY_DOMINANT_CANDIDATE",
-  "generated_at": "2026-05-22T02:07:32Z",
-  "input_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7v5_small_replay_smoke",
-  "output_dir": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7v6_candidate_control_dominance_forensic",
-  "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7V6_CANDIDATE_CONTROL_DOMINANCE_FORENSIC_20260522.md"
-}

@@ -1,7 +1,0 @@
-mode,base_orientation,orientation,forced_orientation
-original,-1.0,-1.0,-1.0
-sign_flip,-1.0,1.0,1.0
-wrong_lag_stale_24h,-1.0,-1.0,-1.0
-wrong_lag_future_24h_diagnostic,-1.0,-1.0,-1.0
-row_shuffle,-1.0,-1.0,-1.0
-time_shuffle,-1.0,-1.0,-1.0

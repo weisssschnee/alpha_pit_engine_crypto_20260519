@@ -1,6 +1,0 @@
-route,status,rationale,authorized
-A7X_same_family_expansion,REJECT,A7X-3 produced 0 clean research clues and 28 control-contaminated candidates,False
-A7X_objective_revision,LOW_PRIORITY_DIAGNOSTIC,near-miss motif is narrow and May-negative; useful only to refine weak-prior registry,True
-A7S_new_data_horizon_contract,PRIMARY_NEXT,data-line is clean but current aggTrades objective/family does not produce promotable signal evidence,True
-A7T_forward_locked_observation,PARALLEL_EVIDENCE_HYGIENE,May is already known stress; forward-only observation is needed for clean future evidence,True
-alpha_shadow_paper_live,BLOCKED,no alpha proof object; controls and May stress block promotion,False

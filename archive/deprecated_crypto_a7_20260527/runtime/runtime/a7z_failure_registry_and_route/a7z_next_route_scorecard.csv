@@ -1,6 +1,0 @@
-route_id,route,priority,authorized,scope,why,not_authorized
-A7AA-0,new independent source feasibility + PIT contract,primary,True,"liquidation, historical depth if available, cross-exchange basis/funding/premium",Existing public Binance historical fields are now usable state layers but current signal families remain HOLD.,search/replay/alpha proof before field contract passes
-A7T-0,forward-locked observation,parallel,True,"orderbook forward snapshots, positioning forward collectors, current runner/gate telemetry",May is a known stress set; new evidence must come from append-only windows.,historical proof from forward-only fields
-A7R/A7X diagnostic,small horizon/objective diagnostic on existing fields,low_optional,True,<= small controlled diagnostic only; no broad replay,"Can test horizon mismatch cheaply, but repeated standalone/interaction families failed robustness.",expanded replay of A7V/A7S/A7Y positives
-same_family_expansion,expand A7V/A7S/A7Y positive clues,blocked,False,"activity/liquidity, standalone crowding, small interaction clues","Blocked by May stress, control contamination, cost/LOO, and robustness failures.",any promotion or larger replay
-alpha_shadow_paper_live,alpha proof / shadow / paper / live,blocked,False,all current crypto objects,No robust crypto alpha proof object exists.,all

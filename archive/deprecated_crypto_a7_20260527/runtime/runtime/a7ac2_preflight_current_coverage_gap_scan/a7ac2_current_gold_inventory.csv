@@ -1,8 +1,0 @@
-path,exists,rows,columns,symbols,symbol_list,timestamp_min,timestamp_max,read_error,dataset
-G:\AlphaFactory_CryptoData\gold\panels\crypto_core12_1h_v1.parquet,True,251148,-1,12,"ADAUSDT,AVAXUSDT,BCHUSDT,BNBUSDT,BTCUSDT,DOGEUSDT,ETHUSDT,LINKUSDT,LTCUSDT,SOLUSDT,SUIUSDT,XRPUSDT",2024-01-01 00:00:00+00:00,2026-05-22 00:00:00+00:00,,crypto_core12_1h_v1
-G:\AlphaFactory_CryptoData\gold\panels\crypto_core12_1h_with_aggtrades_features_v1.parquet,True,251148,-1,12,"ADAUSDT,AVAXUSDT,BCHUSDT,BNBUSDT,BTCUSDT,DOGEUSDT,ETHUSDT,LINKUSDT,LTCUSDT,SOLUSDT,SUIUSDT,XRPUSDT",2024-01-01 00:00:00+00:00,2026-05-22 00:00:00+00:00,,crypto_core12_1h_with_aggtrades_features_v1
-G:\AlphaFactory_CryptoData\gold\panels\crypto_core12_1h_with_aggtrades_metrics_features_v1.parquet,True,251148,-1,12,"ADAUSDT,AVAXUSDT,BCHUSDT,BNBUSDT,BTCUSDT,DOGEUSDT,ETHUSDT,LINKUSDT,LTCUSDT,SOLUSDT,SUIUSDT,XRPUSDT",2024-01-01 00:00:00+00:00,2026-05-22 00:00:00+00:00,,crypto_core12_1h_with_aggtrades_metrics_features_v1
-G:\AlphaFactory_CryptoData\gold\features\binance_metrics_1h_features_v1.parquet,True,251028,-1,12,"ADAUSDT,AVAXUSDT,BCHUSDT,BNBUSDT,BTCUSDT,DOGEUSDT,ETHUSDT,LINKUSDT,LTCUSDT,SOLUSDT,SUIUSDT,XRPUSDT",2024-01-01 00:00:00+00:00,2026-05-22 00:00:00+00:00,,binance_metrics_1h_features_v1
-G:\AlphaFactory_CryptoData\gold\panels\crypto_expanded_1h_v1.parquet,False,0,0,0,,,,,crypto_expanded_1h_v1
-G:\AlphaFactory_CryptoData\gold\panels\crypto_core48_1h_v1.parquet,False,0,0,0,,,,,crypto_core48_1h_v1
-G:\AlphaFactory_CryptoData\gold\panels\crypto_liquid80_1h_v1.parquet,False,0,0,0,,,,,crypto_liquid80_1h_v1

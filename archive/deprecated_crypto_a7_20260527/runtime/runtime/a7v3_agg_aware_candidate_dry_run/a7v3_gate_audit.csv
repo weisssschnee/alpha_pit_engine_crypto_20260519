@@ -1,7 +1,0 @@
-gate,value,decision
-all_candidates_require_agg_mask,True,PASS
-no_same_hour_lag,True,PASS
-accepted_candidates,360,PASS
-rejected_candidates,0,PASS
-blocked_controls,5,PASS
-funding_interaction_candidates,15,PASS

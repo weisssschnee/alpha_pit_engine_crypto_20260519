@@ -1,9 +1,0 @@
-{
-  "authorizes_a7ad3_contract_revision": true,
-  "authorizes_alpha_proof": false,
-  "authorizes_formula_search": false,
-  "authorizes_large_search": false,
-  "authorizes_shadow_paper_live": false,
-  "decision": "HOLD_A7AD2_CONTROL_CONTAMINATION_AND_NO_CLUE_CONFIRMED",
-  "recommended_next": "A7AD3 tighten control dominance and redesign candidate families before any new replay"
-}

@@ -1,5 +1,0 @@
-check,pass
-contract_forbids_may_in_generator_tuning,True
-preselection_gate_columns_exclude_may,True
-score_columns_exclude_may,True
-may_columns_present_only_as_stress_metrics,True

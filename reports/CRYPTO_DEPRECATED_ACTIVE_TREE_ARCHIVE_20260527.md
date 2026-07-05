@@ -12,7 +12,9 @@ Deprecated crypto exploration stages were removed from the active `scripts`, `re
 archive/deprecated_crypto_a7_20260527
 ```
 
-This is an archive move, not evidence deletion.
+The original 2026-05-27 action was an archive move, not evidence deletion.
+
+Update 2026-07-05: bulky deprecated runtime payloads were removed from the active git checkout under the artifact lifecycle cleanup policy. Deprecated archived scripts and reports remain in `archive/deprecated_crypto_a7_20260527`; removed runtime payloads remain recoverable from git history if needed.
 
 ## Counts
 
@@ -21,6 +23,15 @@ scripts archived: 107
 reports archived: 181
 runtime directories archived: 116
 total archived entries: 404
+```
+
+Current retained archive payload after 2026-07-05 cleanup:
+
+```text
+scripts retained: 107
+reports retained: 181
+runtime payload retained in active checkout: false
+runtime recovery path: git history before cleanup commit
 ```
 
 ## Active Line Retained

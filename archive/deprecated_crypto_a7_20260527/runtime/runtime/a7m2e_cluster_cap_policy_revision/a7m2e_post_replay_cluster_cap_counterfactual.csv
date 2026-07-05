@@ -1,5 +1,0 @@
-pool,count,return_corr_cluster_count,top_return_corr_cluster_share,field_family_count,top_field_family_share,operator_horizon_count,top_operator_horizon_share,engine_count,formula_family_count,placebo_or_null_count
-cluster_cap_0.35,0,0,0.0,0,0.0,0,0.0,0,0,0
-cluster_cap_0.25,0,0,0.0,0,0.0,0,0.0,0,0,0
-cluster_cap_0.20,0,0,0.0,0,0.0,0,0.0,0,0,0
-cluster_cap_0.15,0,0,0.0,0,0.0,0,0.0,0,0,0

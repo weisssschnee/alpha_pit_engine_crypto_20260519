@@ -1,5 +1,0 @@
-family,count,pre_may_core_gate,post_may_positive,post_may_eligible_after_core,raw_recent_positive,cost20_recent_positive,lag2_recent_positive,residual_recent_positive,control_contaminated
-H0_agg_flow_x_context,64,1,12,0,1,1,1,1,0
-H1_large_trade_x_context,18,0,4,0,6,1,6,0,0
-H2_flow_x_crowding,6,0,0,0,0,0,0,0,3
-H3_flow_pressure_benchmark,2,0,0,0,0,0,0,0,0

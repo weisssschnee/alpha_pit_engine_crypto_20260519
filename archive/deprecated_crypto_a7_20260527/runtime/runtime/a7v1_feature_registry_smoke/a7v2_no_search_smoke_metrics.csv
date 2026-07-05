@@ -1,8 +1,0 @@
-feature_id,rows,non_null_rows,finite_rate_when_non_null,non_core3_output_rows,without_agg_mask_output_rows,may2026_output_rows,available_non_null_rate,min,max,decision
-TSMean_4h__agg_flow_imbalance_notional,250896,61263,1.0,0,0,0,0.9998531139835488,-0.239631955315871,0.2874815622665955,PASS
-Delta_4h__agg_notional,250896,61260,1.0,0,0,0,0.999804151978065,-13339209743.7546,13654342995.25083,PASS
-TSStd_24h__agg_large_notional_share_100k_plus,250896,61203,1.0,0,0,0,0.9988738738738738,0.010644268883913163,0.2020809617811311,PASS
-ZScore_by_symbol__agg_price_range_bps,250896,61272,1.0,0,0,0,1.0,-1.190795461485605,34.10767905987135,PASS
-Mul__agg_signed_flow_z_24h__mark_index_ratio,250896,61239,1.0,0,0,0,0.9994614179396788,-0.006856225030114387,0.03779031514647028,PASS
-CrossSymbolRank_core3__agg_flow_imbalance_notional,250896,61272,1.0,0,0,0,1.0,0.3333333333333333,1.0,PASS
-RelativeToBTC_core3__agg_flow_imbalance_notional,250896,61272,1.0,0,0,0,1.0,-0.5887334197746402,0.692855082266749,PASS

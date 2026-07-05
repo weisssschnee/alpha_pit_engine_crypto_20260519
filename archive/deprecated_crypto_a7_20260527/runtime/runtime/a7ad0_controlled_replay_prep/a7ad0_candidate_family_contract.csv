@@ -1,7 +1,0 @@
-family_id,family_name,allowed_fields,purpose,a7ad1_quota_hint
-F0,low_turnover_price_basis,ret_12;ret_24;realized_vol_24;mark_index_ratio;premium_index,baseline non-funding price/basis family with low-turnover bias,80
-F1,funding_residual_controls,latest_known_funding_rate;funding_rate_z_24;funding_rate_persistence_3,mandatory benchmark/control; cannot promote by itself,48
-F2,metrics_crowding_oi_interaction,open_interest;open_interest_change_24h;open_interest_zscore_168h;global_long_short_account_ratio;top_long_short_position_ratio;taker_buy_sell_volume_ratio,new independent historical metrics source interaction smoke,120
-F3,cross_symbol_relative_strength,ret_24;quote_asset_volume;open_interest_value;market_cap/liquidity tier proxies,"cross-sectional core48 relative structure, not single-symbol trend",80
-F4,volatility_liquidity_capped,realized_vol_24;quote_asset_volume;number_of_trades;open_interest_value,allowed only under family cap because previous searches collapsed into liquidity-volatility motifs,40
-F5,placebo_null_controls,row_shuffle;time_shuffle;sign_flip;wrong_lag_stale;random_placebo,negative controls; must be zero promotable,72

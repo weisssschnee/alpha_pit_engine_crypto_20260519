@@ -1,5 +1,0 @@
-population,count,engine_count,family_count,field_family_count,expr_hash_count,top_engine,top_engine_share,top_field_family,top_field_family_share
-all_strict_replay,4096,8,8,11,2258,E0_current_A7L_manual_generator,0.125,liquidity;volatility,0.665771484375
-deep_audit,512,8,8,8,300,E0_current_A7L_manual_generator,0.125,liquidity;volatility,0.669921875
-positive_deep,379,6,6,3,167,E0_current_A7L_manual_generator,0.16886543535620052,liquidity;volatility,0.899736147757256
-top_cluster,245,6,6,1,73,E5_surrogate_prioritized_sampler,0.24897959183673468,liquidity;volatility,1.0
