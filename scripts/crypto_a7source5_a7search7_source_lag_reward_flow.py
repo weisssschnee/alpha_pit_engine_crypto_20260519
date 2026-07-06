@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 import pandas as pd
+from pandas.errors import EmptyDataError
 
 
 DEFAULT_REPO = Path(r"D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote")
@@ -36,7 +37,10 @@ def write_json(path: Path, payload: Any) -> None:
 def read_csv(path: Path) -> pd.DataFrame:
     if not path.exists() or path.stat().st_size == 0:
         return pd.DataFrame()
-    return pd.read_csv(path, low_memory=False)
+    try:
+        return pd.read_csv(path, low_memory=False)
+    except EmptyDataError:
+        return pd.DataFrame()
 
 
 def log(path: Path, message: str) -> None:
