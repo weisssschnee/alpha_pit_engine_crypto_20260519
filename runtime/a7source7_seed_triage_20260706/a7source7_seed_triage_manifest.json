@@ -1,0 +1,32 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_seed_expansion": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7SOURCE7_SEED_TRIAGE_READY",
+  "failed_or_blocked_count": 1,
+  "generated_at": "2026-07-06T05:56:45Z",
+  "outputs": {
+    "failed_or_blocked": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7source7_seed_triage_20260706\\a7source7_failed_or_blocked_sources.csv",
+    "horizon_summary": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7source7_seed_triage_20260706\\a7source7_horizon_summary.csv",
+    "motif_summary": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7source7_seed_triage_20260706\\a7source7_motif_summary.csv",
+    "promoted_seed_queue": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7source7_seed_triage_20260706\\a7source7_promoted_seed_queue.csv",
+    "search_constraints": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7source7_seed_triage_20260706\\a7source7_search_constraints.json",
+    "semantic_pair_summary": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7source7_seed_triage_20260706\\a7source7_semantic_pair_summary.csv"
+  },
+  "outputs_relative": {
+    "failed_or_blocked": "runtime/a7source7_seed_triage_20260706/a7source7_failed_or_blocked_sources.csv",
+    "horizon_summary": "runtime/a7source7_seed_triage_20260706/a7source7_horizon_summary.csv",
+    "motif_summary": "runtime/a7source7_seed_triage_20260706/a7source7_motif_summary.csv",
+    "promoted_seed_queue": "runtime/a7source7_seed_triage_20260706/a7source7_promoted_seed_queue.csv",
+    "search_constraints": "runtime/a7source7_seed_triage_20260706/a7source7_search_constraints.json",
+    "semantic_pair_summary": "runtime/a7source7_seed_triage_20260706/a7source7_semantic_pair_summary.csv"
+  },
+  "promoted_seed_count": 5,
+  "report": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\reports\\CRYPTO_A7SOURCE7_SEED_TRIAGE_AND_NEXT_SEARCH_CONTRACT_20260706.md",
+  "report_relative": "reports/CRYPTO_A7SOURCE7_SEED_TRIAGE_AND_NEXT_SEARCH_CONTRACT_20260706.md",
+  "runtime": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7source7_seed_triage_20260706",
+  "runtime_relative": "runtime/a7source7_seed_triage_20260706",
+  "source6_decision": "PASS_A7SOURCE6_INCREMENTAL_EVIDENCE_FOUND",
+  "source6_reward_decision": "PASS_A7V3S0_REWARD_SHARDED_AGGREGATE_READY",
+  "stage": "A7SOURCE7-SEED-TRIAGE"
+}

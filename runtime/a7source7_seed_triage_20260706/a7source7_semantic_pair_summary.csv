@@ -1,0 +1,5 @@
+semantic_pair,count,share
+basis|open_interest,2,0.4
+funding_dense|open_interest,1,0.2
+open_interest|positioning,1,0.2
+open_interest|premium,1,0.2
