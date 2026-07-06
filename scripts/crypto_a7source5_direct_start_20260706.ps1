@@ -28,12 +28,15 @@ Set-Location "$Repo"
 & "$Python" -u "$FlowScript" --python "$Python" --max-parallel 8 --rows-per-shard 16
 "@ | Out-File -FilePath $Child -Encoding UTF8
 
-$Args = "-NoProfile -ExecutionPolicy Bypass -File `"$Child`""
-$proc = Start-Process -FilePath "powershell.exe" -ArgumentList $Args -WorkingDirectory $Repo -RedirectStandardOutput $Out -RedirectStandardError $Err -PassThru -WindowStyle Hidden
+$CommandLine = "powershell.exe -NoProfile -ExecutionPolicy Bypass -File `"$Child`" 1> `"$Out`" 2> `"$Err`""
+$created = ([wmiclass]"Win32_Process").Create($CommandLine, $Repo, $null)
+if ($created.ReturnValue -ne 0) {
+  throw "Win32_Process.Create failed: $($created.ReturnValue)"
+}
 @{
   stage = "A7SOURCE5_DIRECT_START"
   started_at = (Get-Date -Format o)
-  pid = $proc.Id
+  pid = $created.ProcessId
   repo = $Repo
   python = $Python
   run_root = $RunRoot
@@ -42,4 +45,4 @@ $proc = Start-Process -FilePath "powershell.exe" -ArgumentList $Args -WorkingDir
   err = $Err
 } | ConvertTo-Json -Depth 4 | Out-File -FilePath $Status -Encoding UTF8
 
-Write-Output "A7SOURCE5_DIRECT_STARTED pid=$($proc.Id) status=$Status"
+Write-Output "A7SOURCE5_DIRECT_STARTED pid=$($created.ProcessId) status=$Status"

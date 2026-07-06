@@ -183,7 +183,13 @@ def main() -> None:
     log(log_path, f"validation_queue={args.validation_queue}")
     log(log_path, f"max_parallel={args.max_parallel} rows_per_shard={args.rows_per_shard}")
 
-    source_plan = split_queue(args.validation_queue, args.source_run_root / "source_queue_shards", args.rows_per_shard)
+    try:
+        log(log_path, "split_queue_begin")
+        source_plan = split_queue(args.validation_queue, args.source_run_root / "source_queue_shards", args.rows_per_shard)
+        log(log_path, f"split_queue_done rows={len(source_plan)}")
+    except Exception as exc:
+        log(log_path, f"FATAL split_queue {type(exc).__name__}: {exc!r}")
+        raise
     source_plan.to_csv(args.source_run_root / "a7source5_source_lag_shard_plan.csv", index=False)
     log(log_path, f"source_shard_count={len(source_plan)}")
 
