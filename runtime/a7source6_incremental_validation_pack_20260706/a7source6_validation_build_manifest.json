@@ -1,0 +1,30 @@
+{
+  "accepted_root": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search7_strict_validation_reward_source5_py_aggregate_20260706",
+  "accepted_root_relative": "runtime/a7search7_strict_validation_reward_source5_py_aggregate_20260706",
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_validation_reward": true,
+  "compatibility_queue": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706\\a7search6_validation_ablation_queue.csv",
+  "compatibility_queue_relative": "runtime/a7source6_incremental_validation_pack_20260706/a7search6_validation_ablation_queue.csv",
+  "compressed_unique_blueprints": 6,
+  "decision": "PASS_A7SOURCE6_INCREMENTAL_VALIDATION_QUEUE_BUILT",
+  "field_timing_rows": 12,
+  "generated_at": "2026-07-06T05:24:04Z",
+  "max_fields_per_formula": 3,
+  "outputs": {
+    "compressed_mechanisms": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706\\a7source6_validation_compressed_mechanisms.csv",
+    "field_timing_risk": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706\\a7source6_validation_field_timing_risk.csv",
+    "queue": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706\\a7source6_validation_ablation_queue.csv",
+    "queue_group_summary": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706\\a7source6_validation_queue_group_summary.csv"
+  },
+  "outputs_relative": {
+    "compressed_mechanisms": "runtime/a7source6_incremental_validation_pack_20260706/a7source6_validation_compressed_mechanisms.csv",
+    "field_timing_risk": "runtime/a7source6_incremental_validation_pack_20260706/a7source6_validation_field_timing_risk.csv",
+    "queue": "runtime/a7source6_incremental_validation_pack_20260706/a7source6_validation_ablation_queue.csv",
+    "queue_group_summary": "runtime/a7source6_incremental_validation_pack_20260706/a7source6_validation_queue_group_summary.csv"
+  },
+  "queue_rows": 81,
+  "runtime": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706",
+  "runtime_relative": "runtime/a7source6_incremental_validation_pack_20260706",
+  "stage": "A7SOURCE6-INCREMENTAL-VALIDATION-PACK"
+}

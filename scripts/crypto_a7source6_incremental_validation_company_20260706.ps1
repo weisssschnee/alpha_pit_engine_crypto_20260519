@@ -3,6 +3,7 @@ $ErrorActionPreference = "Stop"
 $Repo = "D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote"
 $Python = "D:\Python311\python.exe"
 $AcceptedRoot = Join-Path $Repo "runtime\a7search7_strict_validation_reward_source5_py_aggregate_20260706"
+$SourceLagSummary = Join-Path $Repo "runtime\a7source5_a7search7_source_lag_retest_py_aggregate_20260706\a7source5_source_lag_summary.csv"
 $Runtime = Join-Path $Repo "runtime\a7source6_incremental_validation_pack_20260706"
 $Report = Join-Path $Repo "reports\CRYPTO_A7SOURCE6_INCREMENTAL_VALIDATION_PACK_20260706.md"
 $RewardRunRoot = "D:\HermesWorker\runtime\a7source6_incremental_validation_reward_20260706"
@@ -40,12 +41,16 @@ function ManifestPathFor {
 Write-Log "A7SOURCE6 incremental validation start"
 Write-Log "repo=$Repo"
 Write-Log "accepted_root=$AcceptedRoot"
+Write-Log "source_lag_summary=$SourceLagSummary"
 Write-Log "runtime=$Runtime"
 Write-Log "reward_run_root=$RewardRunRoot"
 Write-Log "max_parallel=$MaxParallel rows_per_shard=$RowsPerShard"
 
 if (!(Test-Path $AcceptedRoot)) {
   throw "accepted root missing: $AcceptedRoot"
+}
+if (!(Test-Path $SourceLagSummary)) {
+  throw "source lag summary missing: $SourceLagSummary"
 }
 
 & $Python scripts\crypto_a7source6_incremental_validation_pack.py `
@@ -122,6 +127,7 @@ foreach ($row in $Plan) {
     "--hours-per-split", "720",
     "--cost-bps", "5",
     "--checkpoint-every", "4",
+    "--source-lag-summary", $SourceLagSummary,
     "--runtime", $rewardRuntime,
     "--report", $rewardReport
   )

@@ -1,0 +1,37 @@
+{
+  "accepted_rows": 5,
+  "accepted_unique_blueprints": 5,
+  "authorizes_alpha_proof": false,
+  "authorizes_next_search_seed_triage": true,
+  "authorizes_shadow_paper_live": false,
+  "canonical_failed_source_count": 1,
+  "compressed_unique_blueprints": 6,
+  "decision": "PASS_A7SOURCE6_INCREMENTAL_EVIDENCE_FOUND",
+  "eval_error_rows": 0,
+  "generated_at": "2026-07-06T05:44:37Z",
+  "incremental_source_count": 5,
+  "non_unique_source_count": 0,
+  "outputs": {
+    "accepted_summary": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706\\a7source6_validation_accepted_summary.csv",
+    "field_timing_risk_summary": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706\\a7source6_validation_field_timing_risk_summary.csv",
+    "group_summary": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706\\a7source6_validation_group_summary.csv",
+    "rejection_summary": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706\\a7source6_validation_rejection_summary.csv",
+    "source_decisions": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706\\a7source6_validation_source_decisions.csv"
+  },
+  "outputs_relative": {
+    "accepted_summary": "runtime/a7source6_incremental_validation_pack_20260706/a7source6_validation_accepted_summary.csv",
+    "field_timing_risk_summary": "runtime/a7source6_incremental_validation_pack_20260706/a7source6_validation_field_timing_risk_summary.csv",
+    "group_summary": "runtime/a7source6_incremental_validation_pack_20260706/a7source6_validation_group_summary.csv",
+    "rejection_summary": "runtime/a7source6_incremental_validation_pack_20260706/a7source6_validation_rejection_summary.csv",
+    "source_decisions": "runtime/a7source6_incremental_validation_pack_20260706/a7source6_validation_source_decisions.csv"
+  },
+  "queue_rows": 81,
+  "report": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\reports\\CRYPTO_A7SOURCE6_INCREMENTAL_VALIDATION_PACK_20260706.md",
+  "report_relative": "reports/CRYPTO_A7SOURCE6_INCREMENTAL_VALIDATION_PACK_20260706.md",
+  "reward_aggregate_root": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_reward_aggregate_20260706",
+  "reward_aggregate_root_relative": "runtime/a7source6_incremental_validation_reward_aggregate_20260706",
+  "reward_rows": 324,
+  "runtime": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source6_incremental_validation_pack_20260706",
+  "runtime_relative": "runtime/a7source6_incremental_validation_pack_20260706",
+  "stage": "A7SOURCE6-INCREMENTAL-VALIDATION-PACK"
+}
