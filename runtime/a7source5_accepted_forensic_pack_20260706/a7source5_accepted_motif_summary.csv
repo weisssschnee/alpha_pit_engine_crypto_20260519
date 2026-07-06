@@ -1,0 +1,4 @@
+motif,count,share
+positive_prior_signed_rank_strict_validation,3,0.5
+positive_prior_safe_div_abs_strict_validation,2,0.3333333333333333
+shadow_selected_rank_wrap_strict_validation,1,0.16666666666666666

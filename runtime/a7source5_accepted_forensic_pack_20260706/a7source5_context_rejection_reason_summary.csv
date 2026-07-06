@@ -1,0 +1,15 @@
+hard_reject_reason,count
+oos_control_dominated,989
+source_lag_required_not_proven,955
+oos_lag_stale_dominated,952
+oos_nonoverlap_floor_not_positive,931
+oos_net_mean_not_all_positive,820
+oos_shuffle_dominated,696
+stress_floor_not_positive,651
+shuffle_control_dominated_recent,507
+train_sortino_non_positive,395
+train_orientation_no_positive_edge,394
+recent_sortino_non_positive,290
+train_sortino_overfit_gap,44
+missing_train_oos_consistency,16
+non_finite_diagnostic_composite,16

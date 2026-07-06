@@ -1,0 +1,7 @@
+skeleton_hash,canonical_skeleton,count,share
+4c84af7808912ebb,"CSRank(SafeDiv(TSRank(FIELD,W),CSRank(ZScore(Mean(FIELD,W)))))",1,0.16666666666666666
+5e0f8d47f166d49e,"SafeDiv(Delta(FIELD,W),Abs(Decay(FIELD,W)))",1,0.16666666666666666
+850c6615135f7b68,"Mul(CSRank(Delta(FIELD,W)),Sign(TSRank(FIELD,W)))",1,0.16666666666666666
+95a01af470b3a09e,"SafeDiv(TSRank(FIELD,W),Abs(TSRank(FIELD,W)))",1,0.16666666666666666
+97cacce45a040aab,"Mul(CSRank(CSRank(Delta(FIELD,W))),Sign(Decay(FIELD,W)))",1,0.16666666666666666
+dd3c209de0e9884f,"Mul(CSRank(CSRank(Delta(FIELD,W))),Sign(CSRank(Delta(FIELD,W))))",1,0.16666666666666666

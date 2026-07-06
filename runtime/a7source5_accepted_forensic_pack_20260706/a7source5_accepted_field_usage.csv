@@ -1,0 +1,7 @@
+field,semantic,formula_count,blueprint_count
+open_interest_value_mean,open_interest,5,5
+mark_index_basis_bps,basis,3,3
+funding_rate_delta_state_24h,funding_dense,1,1
+global_long_short_account_ratio_last,positioning,1,1
+open_interest_value_last,open_interest,1,1
+premium_abs_state,premium,1,1
