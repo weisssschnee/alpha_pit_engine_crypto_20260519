@@ -62,7 +62,7 @@ def split_queue(queue_path: Path, shard_dir: Path, rows_per_shard: int) -> pd.Da
     if queue.empty:
         raise RuntimeError(f"empty validation queue: {queue_path}")
     if "horizon_h" not in queue.columns:
-        for alias in ["horizon", "label_horizon_h"]:
+        for alias in ["source_horizon_h", "horizon", "label_horizon_h"]:
             if alias in queue.columns:
                 queue["horizon_h"] = queue[alias]
                 break
@@ -225,10 +225,15 @@ def main() -> None:
     summary_paths = list(args.source_run_root.glob("shards/a7source5_s*/runtime/a7source4_source_lag_summary.csv"))
     metric_paths = list(args.source_run_root.glob("shards/a7source5_s*/runtime/a7source4_source_lag_metrics.csv"))
     error_paths = list(args.source_run_root.glob("shards/a7source5_s*/runtime/a7source4_eval_errors.csv"))
+    log(log_path, f"source_aggregate_begin summary_paths={len(summary_paths)} metric_paths={len(metric_paths)} error_paths={len(error_paths)}")
     source_summary = concat_csv_files(summary_paths, args.source_aggregate_runtime / "a7source5_source_lag_summary.csv")
+    log(log_path, f"source_summary_concat_done rows={len(source_summary)}")
     concat_csv_files(metric_paths, args.source_aggregate_runtime / "a7source5_source_lag_metrics.csv")
+    log(log_path, "source_metrics_concat_done")
     source_errors = concat_csv_files(error_paths, args.source_aggregate_runtime / "a7source5_source_lag_eval_errors.csv")
+    log(log_path, f"source_errors_concat_done rows={len(source_errors)}")
     source_pass_count = int(source_summary.get("source_lag_gate", pd.Series(dtype=str)).astype(str).eq("PASS_SOURCE_LAG_1H_2H_DIAGNOSTIC").sum())
+    log(log_path, f"source_pass_count={source_pass_count}")
     source_manifest_payload = {
         "stage": "A7SOURCE5-PY-A7SEARCH7-SOURCE-LAG-AGGREGATE",
         "generated_at": now_utc(),
@@ -272,7 +277,9 @@ def main() -> None:
     env["A7V3S0_REWARD_PREQUEUE"] = str(args.validation_queue)
     env["A7V3S0_REWARD_SHARD_RUNTIME"] = str(args.reward_run_root)
     env["A7V3S0_REWARD_ROWS_PER_SHARD"] = str(args.rows_per_shard)
+    log(log_path, "reward_shard_queue_begin")
     subprocess.run([args.python, "scripts/crypto_a7v3s0_reward_shard_queue.py"], cwd=str(args.repo), env=env, check=True)
+    log(log_path, "reward_shard_queue_done")
     reward_plan = read_csv(args.reward_run_root / "a7v3s0_reward_shard_plan.csv")
     log(log_path, f"reward_shard_count={len(reward_plan)}")
 
