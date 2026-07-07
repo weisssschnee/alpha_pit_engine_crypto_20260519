@@ -34,10 +34,7 @@ $Log = Join-Path $RunRoot "a7source10_proxy_reward_flow.log"
 "repo=$Repo" | Out-File -Append -FilePath $Log -Encoding UTF8
 "python=$Python" | Out-File -Append -FilePath $Log -Encoding UTF8
 
-git fetch origin main *>> $Log
-git pull --ff-only origin main *>> $Log
-if ($LASTEXITCODE -ne 0) { throw "git pull failed: $LASTEXITCODE" }
-"[$(Get-Date -Format o)] git_head=$(git rev-parse --short HEAD)" | Out-File -Append -FilePath $Log
+"[$(Get-Date -Format o)] asset_mode=uploaded_files source_commit=8c9e35a" | Out-File -Append -FilePath $Log
 
 if (!(Test-Path $Queue)) {
   throw "missing A7SOURCE10 queue: $Queue"
