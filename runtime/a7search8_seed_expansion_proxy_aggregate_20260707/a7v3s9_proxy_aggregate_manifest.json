@@ -1,0 +1,20 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_bounded_full_reward": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7V3S9_PROXY_AGGREGATE_SELECTED",
+  "eval_error_rows": 0,
+  "expected_shards": 64,
+  "generated_at": "2026-07-07T14:38:28Z",
+  "leaderboard_rows": 16384,
+  "manifest_count": 64,
+  "near_miss_rows": 131,
+  "report": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\reports\\CRYPTO_A7SEARCH8_SEED_EXPANSION_PROXY_AGGREGATE_20260707.md",
+  "run_root": "D:\\HermesWorker\\runtime\\a7search8_seed_expansion_proxy_20260706",
+  "runtime": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search8_seed_expansion_proxy_aggregate_20260707",
+  "selected_queue": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7search8_seed_expansion_proxy_aggregate_20260707\\a7v3s9_proxy_selected_for_reward.csv",
+  "selected_rows": 102,
+  "selected_unique_blueprints": 95,
+  "stage": "A7V3S9_PROXY_AGGREGATE",
+  "strict_pass_rows": 23
+}

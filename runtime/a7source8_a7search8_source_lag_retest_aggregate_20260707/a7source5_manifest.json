@@ -1,0 +1,12 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "generated_at": "2026-07-07T14:58:02Z",
+  "source_eval_error_rows": 0,
+  "source_lag_pass_count": 20,
+  "source_lag_summary": "D:\\HermesWorker\\GDrive\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519_remote\\runtime\\a7source8_a7search8_source_lag_retest_aggregate_20260707\\a7source5_source_lag_summary.csv",
+  "source_lag_summary_rows": 92,
+  "source_manifest_count": 7,
+  "source_shards_expected": 7,
+  "stage": "A7SOURCE5-PY-A7SEARCH7-SOURCE-LAG-AGGREGATE"
+}

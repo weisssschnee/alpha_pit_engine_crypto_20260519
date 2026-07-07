@@ -1,0 +1,4 @@
+semantic_pair,motif,count
+funding_dense|open_interest,shadow_selected_exact_probe,5
+funding_dense|open_interest,shadow_selected_rank_wrap,5
+open_interest|positioning,positive_prior_safe_div_abs,1
