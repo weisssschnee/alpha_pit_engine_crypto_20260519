@@ -1,0 +1,28 @@
+{
+  "stage": "A7V3S1-ACCEPTED-CANDIDATE-VALIDATION",
+  "generated_at": "2026-07-07T17:41:39Z",
+  "input": "runtime\\a7search8_strict_reward_source8_aggregate_20260707",
+  "runtime": "runtime\\a7search8a_accepted_candidate_validation_20260708",
+  "report": "reports\\CRYPTO_A7SEARCH8A_ACCEPTED_CANDIDATE_VALIDATION_20260708.md",
+  "accepted_rows": 11,
+  "unique_blueprints": 11,
+  "next_deep_validation_count": 11,
+  "rejected_from_next_validation_count": 0,
+  "decision_counts": {
+    "ADVANCE_DEEP_REPLAY_VALIDATION": 11
+  },
+  "review_flag_counts": {},
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_deep_validation": true,
+  "outputs": {
+    "candidate_review": "runtime\\a7search8a_accepted_candidate_validation_20260708\\a7v3s1_candidate_review.csv",
+    "duplicate_clusters": "runtime\\a7search8a_accepted_candidate_validation_20260708\\a7v3s1_duplicate_cluster_audit.csv",
+    "family_concentration": "runtime\\a7search8a_accepted_candidate_validation_20260708\\a7v3s1_family_concentration.csv",
+    "review_flag_summary": "runtime\\a7search8a_accepted_candidate_validation_20260708\\a7v3s1_review_flag_summary.csv",
+    "split_matrix": "runtime\\a7search8a_accepted_candidate_validation_20260708\\a7v3s1_split_window_matrix.csv",
+    "split_summary": "runtime\\a7search8a_accepted_candidate_validation_20260708\\a7v3s1_split_window_summary.csv",
+    "next_queue": "runtime\\a7search8a_accepted_candidate_validation_20260708\\a7v3s1_next_deep_validation_queue.csv",
+    "manifest": "runtime\\a7search8a_accepted_candidate_validation_20260708\\a7v3s1_manifest.json"
+  }
+}

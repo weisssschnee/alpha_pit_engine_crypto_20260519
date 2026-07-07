@@ -1,0 +1,23 @@
+source_blueprint_id,source_rank,field,field_family,timing_risk_note
+a7search7_9168babaa32dc76c,1,funding_rate_delta_state_24h,event_dense_funding,requires funding publication timestamp / ffill-age proof
+a7search7_9168babaa32dc76c,1,open_interest_value_last,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search7_1579560a060d20ec,2,funding_rate_delta_state_24h,event_dense_funding,requires funding publication timestamp / ffill-age proof
+a7search7_1579560a060d20ec,2,open_interest_value_last,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search7_fa2bcb9f82277249,3,global_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search7_fa2bcb9f82277249,3,open_interest_value_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search7_f57e92c650f903b6,4,global_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search7_f57e92c650f903b6,4,open_interest_value_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search7_4e22e196bfeb8bce,5,global_long_short_account_ratio_last,positioning,requires account/position ratio publication lag proof
+a7search7_4e22e196bfeb8bce,5,open_interest_value_last,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search7_52353a2ad0ece8e8,6,mark_index_basis_bps,basis_premium,mark/index/premium bar-close alignment proof required
+a7search7_52353a2ad0ece8e8,6,open_interest_value_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search7_e7180b1ba6a1df1a,7,mark_index_basis_bps,basis_premium,mark/index/premium bar-close alignment proof required
+a7search7_e7180b1ba6a1df1a,7,open_interest_value_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search7_d404a68b39d27dbd,8,mark_index_basis_bps,basis_premium,mark/index/premium bar-close alignment proof required
+a7search7_d404a68b39d27dbd,8,open_interest_value_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search7_124582cf9a6d54a0,9,mark_index_basis_bps,basis_premium,mark/index/premium bar-close alignment proof required
+a7search7_124582cf9a6d54a0,9,open_interest_value_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search7_8ecc4a9a053a0d59,10,open_interest_value_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search7_8ecc4a9a053a0d59,10,premium_abs_state,basis_premium,mark/index/premium bar-close alignment proof required
+a7search7_b2e42dec52899bd0,11,open_interest_value_mean,open_interest,requires OI snapshot timestamp and no same-bar fill proof
+a7search7_b2e42dec52899bd0,11,premium_abs_state,basis_premium,mark/index/premium bar-close alignment proof required

@@ -1,0 +1,30 @@
+{
+  "accepted_root": "runtime\\a7search8_strict_reward_source8_aggregate_20260707",
+  "accepted_root_relative": "runtime/a7search8_strict_reward_source8_aggregate_20260707",
+  "authorizes_alpha_proof": false,
+  "authorizes_shadow_paper_live": false,
+  "authorizes_validation_reward": true,
+  "compatibility_queue": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708\\a7search6_validation_ablation_queue.csv",
+  "compatibility_queue_relative": "runtime/a7source9_a7search8_incremental_validation_pack_20260708/a7search6_validation_ablation_queue.csv",
+  "compressed_unique_blueprints": 11,
+  "decision": "PASS_A7SOURCE6_INCREMENTAL_VALIDATION_QUEUE_BUILT",
+  "field_timing_rows": 22,
+  "generated_at": "2026-07-07T17:43:36Z",
+  "max_fields_per_formula": 3,
+  "outputs": {
+    "compressed_mechanisms": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708\\a7source6_validation_compressed_mechanisms.csv",
+    "field_timing_risk": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708\\a7source6_validation_field_timing_risk.csv",
+    "queue": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708\\a7source6_validation_ablation_queue.csv",
+    "queue_group_summary": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708\\a7source6_validation_queue_group_summary.csv"
+  },
+  "outputs_relative": {
+    "compressed_mechanisms": "runtime/a7source9_a7search8_incremental_validation_pack_20260708/a7source6_validation_compressed_mechanisms.csv",
+    "field_timing_risk": "runtime/a7source9_a7search8_incremental_validation_pack_20260708/a7source6_validation_field_timing_risk.csv",
+    "queue": "runtime/a7source9_a7search8_incremental_validation_pack_20260708/a7source6_validation_ablation_queue.csv",
+    "queue_group_summary": "runtime/a7source9_a7search8_incremental_validation_pack_20260708/a7source6_validation_queue_group_summary.csv"
+  },
+  "queue_rows": 146,
+  "runtime": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708",
+  "runtime_relative": "runtime/a7source9_a7search8_incremental_validation_pack_20260708",
+  "stage": "A7SOURCE6-INCREMENTAL-VALIDATION-PACK"
+}

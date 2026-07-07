@@ -1,0 +1,4 @@
+validation_group,candidates,gate_pass_rows,accepted_unique,max_recent_sortino,max_min_oos_floor_sortino
+canonical,11,11,11,18.388209619597973,8.633900693694658
+single_leg,88,0,0,14.872987978474107,3.034325310898345
+operator_neighbor,47,0,0,17.067324886512743,0.5998199689266246

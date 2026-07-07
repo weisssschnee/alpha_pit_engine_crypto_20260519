@@ -1,0 +1,12 @@
+skeleton_key,semantic_pair,motif,accepted_rows,unique_blueprints,expression_examples
+"CSRank(CSRank(SafeDiv(TSRank(FIELD,W),CSRank(ZScore(Mean(FIELD,W))))))",funding_dense|open_interest,shadow_selected_rank_wrap,1,1,"CSRank(CSRank(SafeDiv(TSRank(open_interest_value_last,336),CSRank(ZScore(Mean(funding_rate_delta_state_24h,72))))))"
+"CSRank(Mul(CSRank(CSRank(Delta(FIELD,W))),Sign(CSRank(Delta(FIELD,W)))))",funding_dense|open_interest,shadow_selected_rank_wrap,1,1,"CSRank(Mul(CSRank(CSRank(Delta(open_interest_value_mean,240))),Sign(CSRank(Delta(mark_index_basis_bps,12)))))"
+"CSRank(Mul(CSRank(CSRank(Delta(FIELD,W))),Sign(Decay(FIELD,W))))",funding_dense|open_interest,shadow_selected_rank_wrap,1,1,"CSRank(Mul(CSRank(CSRank(Delta(open_interest_value_mean,240))),Sign(Decay(mark_index_basis_bps,72))))"
+"CSRank(Mul(CSRank(Delta(FIELD,W)),Sign(TSRank(FIELD,W))))",funding_dense|open_interest,shadow_selected_rank_wrap,1,1,"CSRank(Mul(CSRank(Delta(open_interest_value_mean,240)),Sign(TSRank(premium_abs_state,504))))"
+"CSRank(SafeDiv(TSRank(FIELD,W),Abs(TSRank(FIELD,W))))",funding_dense|open_interest,shadow_selected_rank_wrap,1,1,"CSRank(SafeDiv(TSRank(open_interest_value_mean,240),Abs(TSRank(global_long_short_account_ratio_last,24))))"
+"CSRank(SafeDiv(TSRank(FIELD,W),CSRank(ZScore(Mean(FIELD,W)))))",funding_dense|open_interest,shadow_selected_exact_probe,1,1,"CSRank(SafeDiv(TSRank(open_interest_value_last,336),CSRank(ZScore(Mean(funding_rate_delta_state_24h,72)))))"
+"Mul(CSRank(CSRank(Delta(FIELD,W))),Sign(CSRank(Delta(FIELD,W))))",funding_dense|open_interest,shadow_selected_exact_probe,1,1,"Mul(CSRank(CSRank(Delta(open_interest_value_mean,240))),Sign(CSRank(Delta(mark_index_basis_bps,12))))"
+"Mul(CSRank(CSRank(Delta(FIELD,W))),Sign(Decay(FIELD,W)))",funding_dense|open_interest,shadow_selected_exact_probe,1,1,"Mul(CSRank(CSRank(Delta(open_interest_value_mean,240))),Sign(Decay(mark_index_basis_bps,72)))"
+"Mul(CSRank(Delta(FIELD,W)),Sign(TSRank(FIELD,W)))",funding_dense|open_interest,shadow_selected_exact_probe,1,1,"Mul(CSRank(Delta(open_interest_value_mean,240)),Sign(TSRank(premium_abs_state,504)))"
+"SafeDiv(Delta(FIELD,W),Abs(ZScore(Mean(FIELD,W))))",open_interest|positioning,positive_prior_safe_div_abs,1,1,"SafeDiv(Delta(open_interest_value_last,240),Abs(ZScore(Mean(global_long_short_account_ratio_last,96))))"
+"SafeDiv(TSRank(FIELD,W),Abs(TSRank(FIELD,W)))",funding_dense|open_interest,shadow_selected_exact_probe,1,1,"SafeDiv(TSRank(open_interest_value_mean,240),Abs(TSRank(global_long_short_account_ratio_last,24)))"

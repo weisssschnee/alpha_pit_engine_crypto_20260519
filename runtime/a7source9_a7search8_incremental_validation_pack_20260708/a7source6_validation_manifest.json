@@ -1,0 +1,37 @@
+{
+  "accepted_rows": 11,
+  "accepted_unique_blueprints": 11,
+  "authorizes_alpha_proof": false,
+  "authorizes_next_search_seed_triage": true,
+  "authorizes_shadow_paper_live": false,
+  "canonical_failed_source_count": 0,
+  "compressed_unique_blueprints": 11,
+  "decision": "PASS_A7SOURCE6_INCREMENTAL_EVIDENCE_FOUND",
+  "eval_error_rows": 0,
+  "generated_at": "2026-07-07T18:33:26Z",
+  "incremental_source_count": 11,
+  "non_unique_source_count": 0,
+  "outputs": {
+    "accepted_summary": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708\\a7source6_validation_accepted_summary.csv",
+    "field_timing_risk_summary": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708\\a7source6_validation_field_timing_risk_summary.csv",
+    "group_summary": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708\\a7source6_validation_group_summary.csv",
+    "rejection_summary": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708\\a7source6_validation_rejection_summary.csv",
+    "source_decisions": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708\\a7source6_validation_source_decisions.csv"
+  },
+  "outputs_relative": {
+    "accepted_summary": "runtime/a7source9_a7search8_incremental_validation_pack_20260708/a7source6_validation_accepted_summary.csv",
+    "field_timing_risk_summary": "runtime/a7source9_a7search8_incremental_validation_pack_20260708/a7source6_validation_field_timing_risk_summary.csv",
+    "group_summary": "runtime/a7source9_a7search8_incremental_validation_pack_20260708/a7source6_validation_group_summary.csv",
+    "rejection_summary": "runtime/a7source9_a7search8_incremental_validation_pack_20260708/a7source6_validation_rejection_summary.csv",
+    "source_decisions": "runtime/a7source9_a7search8_incremental_validation_pack_20260708/a7source6_validation_source_decisions.csv"
+  },
+  "queue_rows": 146,
+  "report": "reports\\CRYPTO_A7SOURCE9_A7SEARCH8_INCREMENTAL_VALIDATION_PACK_20260708.md",
+  "report_relative": "reports/CRYPTO_A7SOURCE9_A7SEARCH8_INCREMENTAL_VALIDATION_PACK_20260708.md",
+  "reward_aggregate_root": "runtime\\a7source9_a7search8_incremental_reward_aggregate_20260708",
+  "reward_aggregate_root_relative": "runtime/a7source9_a7search8_incremental_reward_aggregate_20260708",
+  "reward_rows": 584,
+  "runtime": "runtime\\a7source9_a7search8_incremental_validation_pack_20260708",
+  "runtime_relative": "runtime/a7source9_a7search8_incremental_validation_pack_20260708",
+  "stage": "A7SOURCE6-INCREMENTAL-VALIDATION-PACK"
+}

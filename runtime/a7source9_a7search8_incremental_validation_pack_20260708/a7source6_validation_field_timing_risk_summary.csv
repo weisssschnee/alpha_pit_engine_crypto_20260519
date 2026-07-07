@@ -1,0 +1,5 @@
+field_family,timing_risk_note,fields,source_blueprints
+open_interest,requires OI snapshot timestamp and no same-bar fill proof,2,11
+basis_premium,mark/index/premium bar-close alignment proof required,2,6
+positioning,requires account/position ratio publication lag proof,1,3
+event_dense_funding,requires funding publication timestamp / ffill-age proof,1,2
