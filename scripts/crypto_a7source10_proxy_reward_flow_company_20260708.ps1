@@ -34,7 +34,7 @@ $Log = Join-Path $RunRoot "a7source10_proxy_reward_flow.log"
 "repo=$Repo" | Out-File -Append -FilePath $Log -Encoding UTF8
 "python=$Python" | Out-File -Append -FilePath $Log -Encoding UTF8
 
-"[$(Get-Date -Format o)] asset_mode=uploaded_files source_commit=8c9e35a" | Out-File -Append -FilePath $Log
+"[$(Get-Date -Format o)] asset_mode=uploaded_files source_commit=f01d1ce" | Out-File -Append -FilePath $Log
 
 if (!(Test-Path $Queue)) {
   throw "missing A7SOURCE10 queue: $Queue"
