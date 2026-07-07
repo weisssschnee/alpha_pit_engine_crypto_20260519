@@ -1,0 +1,26 @@
+{
+  "allowed": [
+    "mechanism-local expansion around promoted seeds",
+    "formula identity locked rerun",
+    "source-lag inherited validation only when formula+horizon matches",
+    "strict reward gate with controls"
+  ],
+  "blocked": [
+    "alpha proof",
+    "shadow/paper/live",
+    "single-leg promotion",
+    "large raw search without family caps",
+    "source-lag proof inheritance for mutated formulas"
+  ],
+  "family_caps": {
+    "max_open_interest_family_share": 0.6,
+    "max_semantic_pair_share": 0.4,
+    "require_non_open_interest_new_seed_attempts": true
+  },
+  "next_required": [
+    "A7SOURCE8 formula identity and source-lag inheritance lock",
+    "A7SEARCH8 controlled seed expansion with caps",
+    "A7VAL walk-forward 2026 holdout and execution realism"
+  ],
+  "stage": "A7SOURCE7-SEED-TRIAGE"
+}

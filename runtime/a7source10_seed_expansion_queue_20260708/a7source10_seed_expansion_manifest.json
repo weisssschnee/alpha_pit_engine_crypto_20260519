@@ -1,0 +1,22 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_proxy_search": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7SOURCE10_SEED_EXPANSION_QUEUE_BUILT",
+  "generated_at": "2026-07-07T18:45:29Z",
+  "inputs": {
+    "seeds": "runtime/a7source10_seed_triage_from_source9_20260708/a7source7_promoted_seed_queue.csv"
+  },
+  "outputs": {
+    "queue": "runtime/a7source10_seed_expansion_queue_20260708/a7source10_seed_expansion_proxy_queue.csv",
+    "report": "reports/CRYPTO_A7SOURCE10_SEED_EXPANSION_QUEUE_20260708.md",
+    "runtime": "runtime/a7source10_seed_expansion_queue_20260708",
+    "shard_plan": "runtime/a7source10_seed_expansion_queue_20260708/a7source10_proxy_shard_plan.csv",
+    "summary": "runtime/a7source10_seed_expansion_queue_20260708/a7source10_proxy_queue_summary.csv"
+  },
+  "queue_rows": 3803,
+  "rows_per_shard": 256,
+  "seed_rows": 11,
+  "shards": 15,
+  "stage": "A7SOURCE10-SEED-EXPANSION-QUEUE"
+}

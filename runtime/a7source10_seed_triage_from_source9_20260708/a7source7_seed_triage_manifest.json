@@ -1,0 +1,32 @@
+{
+  "authorizes_alpha_proof": false,
+  "authorizes_seed_expansion": true,
+  "authorizes_shadow_paper_live": false,
+  "decision": "PASS_A7SOURCE7_SEED_TRIAGE_READY",
+  "failed_or_blocked_count": 0,
+  "generated_at": "2026-07-07T18:42:40Z",
+  "outputs": {
+    "failed_or_blocked": "runtime\\a7source10_seed_triage_from_source9_20260708\\a7source7_failed_or_blocked_sources.csv",
+    "horizon_summary": "runtime\\a7source10_seed_triage_from_source9_20260708\\a7source7_horizon_summary.csv",
+    "motif_summary": "runtime\\a7source10_seed_triage_from_source9_20260708\\a7source7_motif_summary.csv",
+    "promoted_seed_queue": "runtime\\a7source10_seed_triage_from_source9_20260708\\a7source7_promoted_seed_queue.csv",
+    "search_constraints": "runtime\\a7source10_seed_triage_from_source9_20260708\\a7source7_search_constraints.json",
+    "semantic_pair_summary": "runtime\\a7source10_seed_triage_from_source9_20260708\\a7source7_semantic_pair_summary.csv"
+  },
+  "outputs_relative": {
+    "failed_or_blocked": "runtime/a7source10_seed_triage_from_source9_20260708/a7source7_failed_or_blocked_sources.csv",
+    "horizon_summary": "runtime/a7source10_seed_triage_from_source9_20260708/a7source7_horizon_summary.csv",
+    "motif_summary": "runtime/a7source10_seed_triage_from_source9_20260708/a7source7_motif_summary.csv",
+    "promoted_seed_queue": "runtime/a7source10_seed_triage_from_source9_20260708/a7source7_promoted_seed_queue.csv",
+    "search_constraints": "runtime/a7source10_seed_triage_from_source9_20260708/a7source7_search_constraints.json",
+    "semantic_pair_summary": "runtime/a7source10_seed_triage_from_source9_20260708/a7source7_semantic_pair_summary.csv"
+  },
+  "promoted_seed_count": 11,
+  "report": "reports\\CRYPTO_A7SOURCE10_SEED_TRIAGE_FROM_SOURCE9_20260708.md",
+  "report_relative": "reports/CRYPTO_A7SOURCE10_SEED_TRIAGE_FROM_SOURCE9_20260708.md",
+  "runtime": "runtime\\a7source10_seed_triage_from_source9_20260708",
+  "runtime_relative": "runtime/a7source10_seed_triage_from_source9_20260708",
+  "source6_decision": "PASS_A7SOURCE6_INCREMENTAL_EVIDENCE_FOUND",
+  "source6_reward_decision": "PASS_A7V3S0_REWARD_SHARDED_AGGREGATE_READY",
+  "stage": "A7SOURCE7-SEED-TRIAGE"
+}
