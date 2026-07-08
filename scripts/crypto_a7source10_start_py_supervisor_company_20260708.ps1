@@ -6,18 +6,14 @@ if (!(Test-Path $Python)) {
   $Python = "D:\HermesWorker\workspace\.venv\Scripts\python.exe"
 }
 $RunRoot = "D:\HermesWorker\runtime\a7source10_seed_expansion_proxy_20260708"
-$Script = Join-Path $Repo "scripts\crypto_a7source10_proxy_reward_flow_company_py_20260708.py"
-$Out = Join-Path $RunRoot "a7source10_py_supervisor.out.log"
-$Err = Join-Path $RunRoot "a7source10_py_supervisor.err.log"
+$Runner = Join-Path $Repo "scripts\crypto_a7source10_run_py_supervisor_company_20260708.ps1"
 
 New-Item -ItemType Directory -Force -Path $RunRoot | Out-Null
-"[$(Get-Date -Format o)] launch python supervisor python=$Python script=$Script" | Out-File -FilePath (Join-Path $RunRoot "a7source10_py_supervisor_launcher.log") -Encoding UTF8
+"[$(Get-Date -Format o)] launch python supervisor runner=$Runner" | Out-File -FilePath (Join-Path $RunRoot "a7source10_py_supervisor_launcher.log") -Encoding UTF8
 
-$proc = Start-Process -FilePath $Python `
-  -ArgumentList @($Script) `
+$proc = Start-Process -FilePath "powershell.exe" `
+  -ArgumentList @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $Runner) `
   -WorkingDirectory $Repo `
-  -RedirectStandardOutput $Out `
-  -RedirectStandardError $Err `
   -PassThru `
   -WindowStyle Hidden
 
