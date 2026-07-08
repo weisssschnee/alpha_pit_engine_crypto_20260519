@@ -28,6 +28,15 @@ REWARD_ROWS_PER_SHARD = 16
 MAX_PARALLEL = int(os.environ.get("A7SOURCE10_MAX_PARALLEL", "8"))
 
 
+def child_env(extra: dict[str, str] | None = None) -> dict[str, str]:
+    env = os.environ.copy()
+    existing = env.get("PYTHONPATH")
+    env["PYTHONPATH"] = str(REPO) if not existing else f"{REPO}{os.pathsep}{existing}"
+    if extra:
+        env.update(extra)
+    return env
+
+
 def ts() -> str:
     return datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
 
@@ -40,7 +49,7 @@ def log(message: str) -> None:
 
 def run(args: list[str], *, env: dict[str, str] | None = None) -> None:
     log("RUN " + " ".join(args))
-    result = subprocess.run(args, cwd=str(REPO), env=env, text=True, capture_output=True)
+    result = subprocess.run(args, cwd=str(REPO), env=child_env(env), text=True, capture_output=True)
     if result.stdout:
         log("STDOUT " + result.stdout[-4000:])
     if result.stderr:
@@ -81,7 +90,7 @@ def launch_batch(jobs: list[tuple[str, list[str], Path, Path]]) -> None:
         log(f"START {sid}")
         out = out_path.open("w", encoding="utf-8")
         err = err_path.open("w", encoding="utf-8")
-        proc = subprocess.Popen(args, cwd=str(REPO), stdout=out, stderr=err)
+        proc = subprocess.Popen(args, cwd=str(REPO), env=child_env(), stdout=out, stderr=err)
         procs.append((sid, proc, out, err))
     for sid, proc, out, err in procs:
         code = proc.wait()
@@ -155,10 +164,11 @@ def run_proxy_aggregate() -> Path:
 
 def ensure_reward_shards(selected_queue: Path) -> list[dict[str, str]]:
     REWARD_RUN_ROOT.mkdir(parents=True, exist_ok=True)
-    env = os.environ.copy()
-    env["A7V3S0_REWARD_PREQUEUE"] = str(selected_queue)
-    env["A7V3S0_REWARD_SHARD_RUNTIME"] = str(REWARD_RUN_ROOT)
-    env["A7V3S0_REWARD_ROWS_PER_SHARD"] = str(REWARD_ROWS_PER_SHARD)
+    env = {
+        "A7V3S0_REWARD_PREQUEUE": str(selected_queue),
+        "A7V3S0_REWARD_SHARD_RUNTIME": str(REWARD_RUN_ROOT),
+        "A7V3S0_REWARD_ROWS_PER_SHARD": str(REWARD_ROWS_PER_SHARD),
+    }
     run([str(PYTHON), r"scripts\crypto_a7v3s0_reward_shard_queue.py"], env=env)
     plan_path = REWARD_RUN_ROOT / "a7v3s0_reward_shard_plan.csv"
     return pd.read_csv(plan_path, low_memory=False).to_dict("records")
