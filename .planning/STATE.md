@@ -200,7 +200,7 @@ Mul(CSRank(Mean(open_interest_mean,8)),Sign(Mean(premium_close_bps,48)))
 
 - `.planning/config.json` exists and sets `graphify.enabled: true`.
 - Raw graphify artifacts exist under `.planning/graphs/graph.json` and `.planning/graphs/graph.html`.
-- Latest raw graph statistics: `19304` nodes, `29160` links, and `9` hyperedges (rebuilt 2026-07-11 after A7EFF2 integration).
+- Latest raw graph statistics: `17661` nodes, `29739` links, and `0` hyperedges (rebuilt from commit `fb27d14` on 2026-07-11).
 - Raw graphify output is explicitly classified as a code/navigation knowledge graph, not the current architecture.
 - Curated architecture files:
   - `.planning/graphs/CURRENT_ARCHITECTURE.md`

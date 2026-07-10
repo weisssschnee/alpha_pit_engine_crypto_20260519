@@ -29,9 +29,9 @@ The raw graph was rebuilt from the crypto project root after the A7EFF2 semantic
 
 ```text
 graph.json:
-  19304 nodes
-  29160 links
-  9 hyperedges
+  17661 nodes
+  29739 links
+  0 hyperedges
 
 GRAPH_REPORT.md:
   regenerated
@@ -42,7 +42,7 @@ graph.html:
 
 Therefore, use `graph.json` and `GRAPH_REPORT.md` as the current raw graph artifacts. Treat `graph.html` as an older browsing artifact unless it is explicitly rebuilt with a higher visualization limit or a reduced corpus.
 
-The build includes navigable nodes for `semantic_domains.py`, `signal_identity.py`, and ADR 0001. JSON policy files are still governed through the curated architecture and ADR even when the raw extractor does not emit a dedicated JSON node.
+The build includes navigable nodes for `semantic_domains.py`, `signal_identity.py`, ADR 0001, and the curated architecture. CSV/JSON policy and evidence files, including `runtime/a7eff2_git_release_20260711/`, remain governed through the curated architecture and release manifest even when the raw extractor does not emit dedicated data-file nodes.
 
 The build emitted cross-chunk node ID collision warnings. This is expected in a repo with many repeated report concepts and historical artifacts, and it reinforces the boundary rule: raw graph reachability is not current architecture or deployment proof.
 

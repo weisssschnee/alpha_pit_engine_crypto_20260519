@@ -1,9 +1,10 @@
 {
   "architecture_graph": {
+    "built_at_commit": "fb27d14c985f3e68429a02f84826e1cddd6293a6",
     "graph_html_current": false,
-    "hyperedges": 9,
-    "links": 29160,
-    "nodes": 19304
+    "hyperedges": 0,
+    "links": 29739,
+    "nodes": 17661
   },
   "boundaries": {
     "authorizes_alpha_proof": false,
@@ -13,14 +14,14 @@
   },
   "canonical_sources": [
     {
-      "bytes": 21175981,
+      "bytes": 20564233,
       "path": ".planning/graphs/graph.json",
-      "sha256": "8211539CDE893A0084354CEABFE5531EDB1F967AE1AC96F95CCA47DAE093D27C"
+      "sha256": "6879005FB6DCC9E2CC19D8802BB3783FADD312FC934AB01A004CDDF349F9357F"
     },
     {
-      "bytes": 623815,
+      "bytes": 466458,
       "path": ".planning/graphs/GRAPH_REPORT.md",
-      "sha256": "C0C59133304A4F39DF03AAAD6483227778A64710AA1C1DCA802C0D24101EF472"
+      "sha256": "4E9946EF0CF24CC90CBF2D56A1BF79589FDC5CB4B604B2228CA7775D14454168"
     },
     {
       "bytes": 9806,
@@ -35,7 +36,7 @@
     {
       "bytes": 12349,
       "path": ".planning/STATE.md",
-      "sha256": "7F500FB3657AE8280E73422397866ABECEA1BC3BDCF1E81951738A82553AC148"
+      "sha256": "C6CED76E122BCEA7E723FFD8114DB959DCE75EB0615D4E71514C4FD66FB0CBC6"
     },
     {
       "bytes": 50026,
@@ -111,6 +112,16 @@
       "bytes": 20785,
       "path": "scripts/crypto_a7v3s0_reward_sharded_aggregate.py",
       "sha256": "D7451768B16916B735A2B68C0C51664452A4CA4AD3A887E80A263A84D831D29F"
+    },
+    {
+      "bytes": 3699,
+      "path": ".planning/graphs/ARCHITECTURE_BOUNDARY.md",
+      "sha256": "57D33DC7008D003ED4D0FC10BF7C5B77F1A9038FEFA09E3787CC3CC1FF6CEFFF"
+    },
+    {
+      "bytes": 5742,
+      "path": ".planning/graphs/ARTIFACT_LIFECYCLE.md",
+      "sha256": "7B9B9B390372A3F570A45950574DA9CB6E7AFF69D7469AB38024E69616765B7F"
     }
   ],
   "decision": "PASS_A7EFF2_GIT_RELEASE_BUNDLE_READY",
@@ -140,7 +151,7 @@
     ],
     "full_ontology_rows": 81
   },
-  "generated_at": "2026-07-10T17:11:30Z",
+  "generated_at": "2026-07-10T17:27:43Z",
   "git_target": "origin/main",
   "outputs": {
     "a7eff2_accepted_train_validation_oos_log.csv": {
