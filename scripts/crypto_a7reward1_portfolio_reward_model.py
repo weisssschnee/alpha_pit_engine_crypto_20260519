@@ -52,6 +52,10 @@ from scripts.crypto_a7ff8_expanded_numeric_probe import (  # noqa: E402
     load_upper_numeric,
 )
 from alphafactory_crypto.engines.semantic_domains import collect_operator_calls  # noqa: E402
+from alphafactory_crypto.evaluation_access import (  # noqa: E402
+    EvaluationAccessViolation,
+    assert_candidate_feedback_columns_allowed,
+)
 
 
 DEFAULT_QUEUE = REPO / "runtime" / "a7ls30_productive_numeric_acceptance_20260610" / "a7ls30_selected_top240.csv"
@@ -244,6 +248,10 @@ def add_pareto_columns(rewards: pd.DataFrame) -> pd.DataFrame:
 def accepted_for_next_search(rewards: pd.DataFrame) -> pd.DataFrame:
     if rewards.empty:
         return rewards.copy()
+    assert_candidate_feedback_columns_allowed(
+        rewards.columns,
+        context="a7reward1.accepted_for_next_search",
+    )
     accepted = rewards[(rewards["gate_pass"].astype(bool)) & (~rewards["hard_reject"].astype(bool))].copy()
     if accepted.empty:
         return accepted
@@ -1295,8 +1303,9 @@ def evaluate_queue(
                     "metric_rows": int(partial_metrics.shape[0]),
                     "reward_rows": int(partial_rewards.shape[0]),
                     "error_rows": int(partial_errors.shape[0]),
-                    "top_gate_blueprint_id": str(partial_rewards.iloc[0]["blueprint_id"]) if not partial_rewards.empty else "",
-                    "top_diagnostic_composite_score": float(partial_rewards.iloc[0]["diagnostic_composite_score"]) if not partial_rewards.empty else np.nan,
+                    "report_only_top_gate_blueprint_id": str(partial_rewards.iloc[0]["blueprint_id"]) if not partial_rewards.empty else "",
+                    "report_only_top_diagnostic_composite_score": float(partial_rewards.iloc[0]["diagnostic_composite_score"]) if not partial_rewards.empty else np.nan,
+                    "candidate_feedback_allowed": False,
                     "ranking_policy": "gate_pass_then_pareto_rank; diagnostic_composite_score_is_tiebreaker_only",
                     "orientation_train_hours": int(np.nansum(orientation_mask)),
                     "orientation_extension_hours": int(np.nansum(orientation_extension_mask)),
@@ -1712,7 +1721,12 @@ def main() -> None:
     metrics.to_csv(runtime / "a7reward1_split_reward_metrics.csv", index=False)
     errors.to_csv(runtime / "a7reward1_eval_errors.csv", index=False)
     rewards.to_csv(runtime / "a7reward1_candidate_reward_leaderboard.csv", index=False)
-    accepted = accepted_for_next_search(rewards)
+    feedback_guard: dict[str, Any] = {}
+    try:
+        accepted = accepted_for_next_search(rewards)
+    except EvaluationAccessViolation as exc:
+        feedback_guard = exc.as_dict()
+        accepted = rewards.head(0).copy()
     rejected = rewards[~rewards.index.isin(accepted.index)].copy() if not rewards.empty else rewards.copy()
     accepted.to_csv(runtime / "a7reward1_accepted_for_next_search.csv", index=False)
     rejected.to_csv(runtime / "a7reward1_validation_gate_rejections.csv", index=False)
@@ -1726,7 +1740,7 @@ def main() -> None:
     best_by_sharpe = rewards.sort_values(["hard_reject", "recent_sharpe"], ascending=[True, False]).head(40)
     best_by_ic = rewards.sort_values(["hard_reject", "recent_rankic"], ascending=[True, False]).head(40)
     diagnostic_composite = rewards.sort_values(["hard_reject", "diagnostic_composite_score"], ascending=[True, False]).head(80)
-    top_queue = accepted if not accepted.empty else best_by_pareto
+    top_queue = accepted if not accepted.empty else rewards.head(0).copy()
     best_overall = diagnostic_composite
     best_by_pareto.to_csv(runtime / "a7reward1_pareto_leaderboard.csv", index=False)
     best_by_sortino.to_csv(runtime / "a7reward1_best_by_sortino.csv", index=False)
@@ -1735,11 +1749,12 @@ def main() -> None:
     best_by_ic.to_csv(runtime / "a7reward1_best_by_rankic.csv", index=False)
     diagnostic_composite.to_csv(runtime / "a7reward1_diagnostic_composite_leaderboard.csv", index=False)
 
-    decision = (
-        "PASS_A7REWARD1_PORTFOLIO_REWARD_LEADERBOARD_BUILT"
-        if smoke_pass and not accepted.empty
-        else "HOLD_A7REWARD1_REWARD_MODEL_OR_QUEUE_FAILED"
-    )
+    if feedback_guard:
+        decision = "HOLD_EVALRESET_SPENT_EVALUATION_FEEDBACK_BLOCKED"
+    elif smoke_pass and not accepted.empty:
+        decision = "PASS_A7REWARD1_PORTFOLIO_REWARD_LEADERBOARD_BUILT"
+    else:
+        decision = "HOLD_A7REWARD1_REWARD_MODEL_OR_QUEUE_FAILED"
     manifest = {
         "stage": "A7REWARD-1",
         "generated_at": now_utc(),
@@ -1764,6 +1779,8 @@ def main() -> None:
         "valid_reward_rows": int((~rewards["hard_reject"]).sum()) if not rewards.empty else 0,
         "accepted_for_next_search_rows": int(accepted.shape[0]),
         "accepted_for_next_search_unique_blueprints": int(accepted["blueprint_id"].nunique()) if not accepted.empty else 0,
+        "candidate_feedback_guard": feedback_guard or {"status": "PASS"},
+        "authorizes_candidate_feedback": not bool(feedback_guard),
         "eval_error_rows": int(errors.shape[0]),
         "synthetic_smoke_pass": bool(smoke_pass),
         "source_policy_path": str(source_policy_path),
@@ -1775,8 +1792,8 @@ def main() -> None:
         "top_pareto_blueprint_id": str(top_queue.iloc[0]["blueprint_id"]) if not top_queue.empty else "",
         "top_pareto_rank": int(top_queue.iloc[0]["pareto_rank"]) if not top_queue.empty else 0,
         "top_pareto_objective_pass_count": int(top_queue.iloc[0]["objective_pass_count"]) if not top_queue.empty else 0,
-        "top_diagnostic_composite_blueprint_id": str(diagnostic_composite.iloc[0]["blueprint_id"]) if not diagnostic_composite.empty else "",
-        "top_diagnostic_composite_score": float(diagnostic_composite.iloc[0]["diagnostic_composite_score"]) if not diagnostic_composite.empty else np.nan,
+        "top_diagnostic_composite_blueprint_id": str(diagnostic_composite.iloc[0]["blueprint_id"]) if not diagnostic_composite.empty and not feedback_guard else "",
+        "top_diagnostic_composite_score": float(diagnostic_composite.iloc[0]["diagnostic_composite_score"]) if not diagnostic_composite.empty and not feedback_guard else np.nan,
         "ranking_policy": "multi_objective_gate_and_pareto; diagnostic_composite_score_is_not_a_search_reward",
         "reward_alignment": {
             "primary_train_component": "train_sortino",

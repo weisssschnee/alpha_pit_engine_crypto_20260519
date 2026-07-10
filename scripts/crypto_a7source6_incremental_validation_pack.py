@@ -15,6 +15,10 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
+from alphafactory_crypto.evaluation_access import (  # noqa: E402
+    EvaluationAccessViolation,
+    assert_candidate_feedback_columns_allowed,
+)
 from scripts import crypto_a7search6_validation_pack as base  # noqa: E402
 
 
@@ -384,6 +388,15 @@ def summarize(args: argparse.Namespace) -> dict[str, Any]:
     rejection_summary.to_csv(outputs["rejection_summary"], index=False)
     semantic_rejections.to_csv(outputs["semantic_gate_rejections"], index=False)
     semantic_rewrites.to_csv(outputs["semantic_canonical_rewrites"], index=False)
+    feedback_guard: dict[str, Any] = {}
+    try:
+        assert_candidate_feedback_columns_allowed(
+            incremental_feedback.columns,
+            context="a7source6.incremental_identity_feedback",
+        )
+    except EvaluationAccessViolation as exc:
+        feedback_guard = exc.as_dict()
+        incremental_feedback = incremental_feedback.head(0).copy()
     incremental_feedback.to_csv(outputs["incremental_identity_feedback"], index=False)
 
     incremental_count = int(source_decisions["decision"].eq("PASS_INCREMENTAL_INTERACTION_EVIDENCE").sum()) if not source_decisions.empty else 0
@@ -395,7 +408,9 @@ def summarize(args: argparse.Namespace) -> dict[str, Any]:
     reward_safediv_review_rows = int(leaderboard["safediv_review_flag"].fillna(False).map(truthy).sum()) if "safediv_review_flag" in leaderboard else 0
     semantic_rewrite_source_count = int(source_decisions["canonical_semantic_rewrite_applied"].fillna(False).map(truthy).sum()) if "canonical_semantic_rewrite_applied" in source_decisions else 0
     eval_error_rows = int(reward_manifest.get("eval_error_rows", errors.shape[0]) or 0)
-    if eval_error_rows > 0:
+    if feedback_guard:
+        decision = "HOLD_EVALRESET_SPENT_EVALUATION_FEEDBACK_BLOCKED"
+    elif eval_error_rows > 0:
         decision = "HOLD_A7SOURCE6_VALIDATION_EVAL_ERRORS"
     elif incremental_count > 0:
         decision = "PASS_A7SOURCE6_INCREMENTAL_EVIDENCE_FOUND"
@@ -432,9 +447,10 @@ def summarize(args: argparse.Namespace) -> dict[str, Any]:
         "semantic_rewrite_source_count": semantic_rewrite_source_count,
         "incremental_identity_feedback_rows": int(incremental_feedback.shape[0]),
         "incremental_identity_feedback_unique_blueprints": int(incremental_feedback["blueprint_id"].nunique()) if not incremental_feedback.empty else 0,
+        "candidate_feedback_guard": feedback_guard or {"status": "PASS"},
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
-        "authorizes_next_search_seed_triage": decision.startswith("PASS_"),
+        "authorizes_next_search_seed_triage": decision.startswith("PASS_") and not feedback_guard,
         "outputs": {key: str(value) for key, value in outputs.items()},
         "outputs_relative": {key: repo_relative(value) for key, value in outputs.items()},
     }

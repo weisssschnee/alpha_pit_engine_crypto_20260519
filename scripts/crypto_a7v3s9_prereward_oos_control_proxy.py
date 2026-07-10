@@ -16,6 +16,11 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 import scripts.crypto_a7reward1_portfolio_reward_model as reward  # noqa: E402
+from alphafactory_crypto.evaluation_access import (  # noqa: E402
+    EvaluationAccessViolation,
+    assert_candidate_feedback_columns_allowed,
+    assert_epoch_candidate_feedback_allowed,
+)
 
 
 DEFAULT_QUEUE = REPO / "runtime" / "a7v3s7_candidate_construction_redesign_20260614" / "a7v3s7_redesigned_reward_prequeue.csv"
@@ -248,6 +253,17 @@ def main() -> None:
     parser.add_argument("--halving-keep-rows", type=int, default=0)
     args = parser.parse_args()
 
+    if args.successive_halving:
+        assert_epoch_candidate_feedback_allowed(
+            [
+                "validation_2025H1_selected_2025_06",
+                "test_2025H2_selected_2025_12",
+                "recent_oos_2026_04",
+                "known_may2026_stress",
+            ],
+            context="a7v3s9.successive_halving_budget_scheduler",
+        )
+
     queue_path = Path(args.queue)
     runtime = Path(args.runtime)
     report_path = Path(args.report)
@@ -318,6 +334,15 @@ def main() -> None:
         args.motif_cap,
         args.skeleton_cap,
     )
+    feedback_guard: dict[str, Any] = {}
+    try:
+        assert_candidate_feedback_columns_allowed(
+            selected.columns,
+            context="a7v3s9.proxy_selected_for_reward",
+        )
+    except EvaluationAccessViolation as exc:
+        feedback_guard = exc.as_dict()
+        selected = selected.head(0).copy()
 
     metrics.to_csv(runtime / "a7v3s9_proxy_split_metrics.csv", index=False)
     errors.to_csv(runtime / "a7v3s9_proxy_eval_errors.csv", index=False)
@@ -328,11 +353,12 @@ def main() -> None:
     group_summary(selected, ["semantic_pair"]).to_csv(runtime / "a7v3s9_selected_pair_summary.csv", index=False)
     group_summary(selected, ["motif"]).to_csv(runtime / "a7v3s9_selected_motif_summary.csv", index=False)
 
-    decision = (
-        "PASS_A7V3S9_PREREWARD_PROXY_SELECTED"
-        if selected.shape[0] > 0 and errors.empty
-        else "HOLD_A7V3S9_PREREWARD_PROXY_NO_SELECTABLE"
-    )
+    if feedback_guard:
+        decision = "HOLD_EVALRESET_SPENT_EVALUATION_FEEDBACK_BLOCKED"
+    elif selected.shape[0] > 0 and errors.empty:
+        decision = "PASS_A7V3S9_PREREWARD_PROXY_SELECTED"
+    else:
+        decision = "HOLD_A7V3S9_PREREWARD_PROXY_NO_SELECTABLE"
     manifest = {
         "stage": "A7V3S9_PREREWARD_OOS_CONTROL_PROXY",
         "generated_at": now_utc(),
@@ -354,8 +380,9 @@ def main() -> None:
         "selected_unique_blueprints": int(selected["blueprint_id"].nunique()) if not selected.empty else 0,
         "selected_semantic_pair_count": int(selected["semantic_pair"].nunique()) if not selected.empty else 0,
         "selected_motif_count": int(selected["motif"].nunique()) if not selected.empty else 0,
+        "candidate_feedback_guard": feedback_guard or {"status": "PASS"},
         "output_selected_queue": str(runtime / "a7v3s9_proxy_selected_for_reward.csv"),
-        "authorizes_bounded_reward_smoke": bool(selected.shape[0] > 0 and errors.empty),
+        "authorizes_bounded_reward_smoke": bool(selected.shape[0] > 0 and errors.empty and not feedback_guard),
         "authorizes_full_reward_wave": False,
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,

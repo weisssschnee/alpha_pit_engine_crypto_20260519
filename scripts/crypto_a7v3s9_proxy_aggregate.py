@@ -2,12 +2,21 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
 
+REPO = Path(__file__).resolve().parents[1]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+
+from alphafactory_crypto.evaluation_access import (
+    EvaluationAccessViolation,
+    assert_candidate_feedback_columns_allowed,
+)
 from scripts.crypto_a7v3s9_prereward_oos_control_proxy import bounded_select, group_summary, md_table, reason_summary
 
 
@@ -105,6 +114,15 @@ def main() -> None:
         if column in selectable.columns:
             selectable[column] = pd.to_numeric(selectable[column], errors="coerce")
     selected = bounded_select(selectable, args.select_target, args.pair_cap, args.motif_cap, args.skeleton_cap)
+    feedback_guard: dict[str, Any] = {}
+    try:
+        assert_candidate_feedback_columns_allowed(
+            selected.columns,
+            context="a7v3s9.aggregate_selected_for_reward",
+        )
+    except EvaluationAccessViolation as exc:
+        feedback_guard = exc.as_dict()
+        selected = selected.head(0).copy()
 
     leaderboard.to_csv(runtime / "a7v3s9_proxy_leaderboard_all.csv", index=False)
     selected_local.to_csv(runtime / "a7v3s9_proxy_selected_local_concat.csv", index=False)
@@ -119,11 +137,12 @@ def main() -> None:
     expected_shards = expected_shard_count(args.run_root, manifests.shape[0])
     strict_pass_rows = int(leaderboard.get("proxy_strict_pass", pd.Series(dtype=bool)).astype(str).str.lower().isin(["true", "1"]).sum()) if not leaderboard.empty else 0
     near_miss_rows = int(leaderboard.get("proxy_near_miss", pd.Series(dtype=bool)).astype(str).str.lower().isin(["true", "1"]).sum()) if not leaderboard.empty else 0
-    decision = (
-        "PASS_A7V3S9_PROXY_AGGREGATE_SELECTED"
-        if manifests.shape[0] == expected_shards and selected.shape[0] > 0 and errors.empty
-        else "HOLD_A7V3S9_PROXY_AGGREGATE_NO_SELECTED_OR_INCOMPLETE"
-    )
+    if feedback_guard:
+        decision = "HOLD_EVALRESET_SPENT_EVALUATION_FEEDBACK_BLOCKED"
+    elif manifests.shape[0] == expected_shards and selected.shape[0] > 0 and errors.empty:
+        decision = "PASS_A7V3S9_PROXY_AGGREGATE_SELECTED"
+    else:
+        decision = "HOLD_A7V3S9_PROXY_AGGREGATE_NO_SELECTED_OR_INCOMPLETE"
     manifest = {
         "stage": "A7V3S9_PROXY_AGGREGATE",
         "generated_at": now_utc(),
@@ -139,8 +158,9 @@ def main() -> None:
         "near_miss_rows": near_miss_rows,
         "selected_rows": int(selected.shape[0]),
         "selected_unique_blueprints": int(selected["blueprint_id"].nunique()) if not selected.empty and "blueprint_id" in selected else 0,
+        "candidate_feedback_guard": feedback_guard or {"status": "PASS"},
         "selected_queue": str(runtime / "a7v3s9_proxy_selected_for_reward.csv"),
-        "authorizes_bounded_full_reward": bool(manifests.shape[0] == expected_shards and selected.shape[0] > 0 and errors.empty),
+        "authorizes_bounded_full_reward": bool(manifests.shape[0] == expected_shards and selected.shape[0] > 0 and errors.empty and not feedback_guard),
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
     }

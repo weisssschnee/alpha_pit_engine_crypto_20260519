@@ -24,6 +24,10 @@ from scripts.crypto_a7reward1_portfolio_reward_model import (  # noqa: E402
     load_source_lag_passes,
     load_source_policy,
 )
+from alphafactory_crypto.evaluation_access import (  # noqa: E402
+    EvaluationAccessViolation,
+    assert_candidate_feedback_columns_allowed,
+)
 
 
 DEFAULT_RUN_ROOT = Path(
@@ -295,6 +299,15 @@ def main() -> None:
         accepted = collect_file(run_root, "a7reward1_accepted_for_next_search.csv")
         rejections = collect_file(run_root, "a7reward1_validation_gate_rejections.csv")
         rewards = collect_file(run_root, "a7reward1_candidate_reward_leaderboard.csv")
+    feedback_guard: dict[str, Any] = {}
+    try:
+        assert_candidate_feedback_columns_allowed(
+            accepted.columns,
+            context="a7v3s0.reward_aggregate_accepted",
+        )
+    except EvaluationAccessViolation as exc:
+        feedback_guard = exc.as_dict()
+        accepted = accepted.head(0).copy()
     accepted = enrich_with_queue(accepted, queue)
     rejections = enrich_with_queue(rejections, queue)
     rewards = enrich_with_queue(rewards, queue)
@@ -373,11 +386,12 @@ def main() -> None:
     hard_reject_rows = int(rewards["hard_reject"].fillna(False).astype(bool).sum()) if "hard_reject" in rewards else 0
     valid_reward_rows = int((~rewards["hard_reject"].fillna(True).astype(bool)).sum()) if "hard_reject" in rewards else 0
 
-    decision = (
-        "PASS_A7V3S0_REWARD_SHARDED_AGGREGATE_READY"
-        if manifest_count == expected_shards and accepted_rows > 0 and accepted_expression_missing == 0 and eval_error_rows == 0
-        else "HOLD_A7V3S0_REWARD_SHARDED_AGGREGATE_INCOMPLETE_OR_DIRTY"
-    )
+    if feedback_guard:
+        decision = "HOLD_EVALRESET_SPENT_EVALUATION_FEEDBACK_BLOCKED"
+    elif manifest_count == expected_shards and accepted_rows > 0 and accepted_expression_missing == 0 and eval_error_rows == 0:
+        decision = "PASS_A7V3S0_REWARD_SHARDED_AGGREGATE_READY"
+    else:
+        decision = "HOLD_A7V3S0_REWARD_SHARDED_AGGREGATE_INCOMPLETE_OR_DIRTY"
     manifest = {
         "stage": "A7V3S0-REWARD-SHARDED-AGGREGATE",
         "generated_at": now_utc(),
@@ -401,10 +415,11 @@ def main() -> None:
         "exact_signal_alias_rows_saved": int(alias_map.shape[0] - alias_map["representative_blueprint_id"].nunique()) if not alias_map.empty else 0,
         "identity_representative_feedback_rows": int(representative_feedback.shape[0]),
         "identity_representative_feedback_unique_blueprints": int(representative_feedback["blueprint_id"].nunique()) if not representative_feedback.empty else 0,
+        "candidate_feedback_guard": feedback_guard or {"status": "PASS"},
         "safediv_review_rows": int(rewards["safediv_review_flag"].fillna(False).astype(bool).sum()) if "safediv_review_flag" in rewards else 0,
         "alias_map": str(args.alias_map) if args.alias_map else "",
         "launcher_status_conflicts": status_conflicts,
-        "authorizes_next_validation_pack": decision.startswith("PASS"),
+        "authorizes_next_validation_pack": decision.startswith("PASS") and not feedback_guard,
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
         "outputs": {key: str(value) for key, value in outputs.items()},

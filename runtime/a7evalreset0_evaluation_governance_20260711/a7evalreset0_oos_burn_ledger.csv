@@ -1,0 +1,5 @@
+epoch_id,selected_start_utc,selected_end_utc,selected_hours,prior_claim,current_classification,burn_reason,candidate_feedback_allowed,final_blind_holdout_eligible,status
+validation_2025H1,2025-06-01T00:00:00Z,2025-06-30T23:00:00Z,720,OOS,SPENT_HISTORICAL_EVALUATION,proxy/reward/admission/memory/scheduler/human decisions,False,False,BURNED_AND_SEALED_FROM_FEEDBACK
+test_2025H2,2025-12-02T00:00:00Z,2025-12-31T23:00:00Z,720,OOS,SPENT_HISTORICAL_EVALUATION,proxy/reward/admission/memory/scheduler/human decisions,False,False,BURNED_AND_SEALED_FROM_FEEDBACK
+recent_oos_2026JanApr,2026-04-01T00:00:00Z,2026-04-30T23:00:00Z,720,OOS,SPENT_HISTORICAL_EVALUATION,proxy/reward/admission/memory/scheduler/human decisions,False,False,BURNED_AND_SEALED_FROM_FEEDBACK
+known_may2026_stress,2026-05-01T00:00:00Z,2026-05-26T00:00:00Z,601,stress,SPENT_HISTORICAL_EVALUATION,proxy/reward/admission/memory/scheduler plus repeated stress veto and human decisions,False,False,BURNED_AND_SEALED_FROM_FEEDBACK

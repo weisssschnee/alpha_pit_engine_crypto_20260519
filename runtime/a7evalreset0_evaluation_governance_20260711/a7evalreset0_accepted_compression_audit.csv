@@ -1,0 +1,7 @@
+level,input_rows,unique_count,retained_percent,duplicate_compression_percent,status,evidence
+accepted_row,16,16,100.00,0.00,ESTABLISHED,A7EFF2 accepted release pack
+canonical_expression,16,6,37.50,62.50,ESTABLISHED,expression exact uniqueness after semantic canonicalization
+exact_signal_identity,16,6,37.50,62.50,ESTABLISHED,signal_weight_exact_fingerprint
+signal_cluster,16,,,,NOT_ESTABLISHED,No current global signal-cluster registry covers A7EFF2 accepted identities.
+pnl_regime_cluster,16,,,,NOT_ESTABLISHED,No candidate-independent PnL/regime clustering registry exists.
+economic_hypothesis,16,,,,NOT_ESTABLISHED,Only 2 observed semantic pairs; semantic pairs are not independent economic hypotheses.

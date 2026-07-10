@@ -19,6 +19,10 @@ from alphafactory_crypto.engines.search_memory import (  # noqa: E402
     expression_memory_key,
     skeleton_memory_key,
 )
+from alphafactory_crypto.evaluation_access import (  # noqa: E402
+    EvaluationAccessViolation,
+    assert_candidate_feedback_records_allowed,
+)
 
 
 DATE_TAG = "20260628"
@@ -396,7 +400,7 @@ def make_report(summary: dict[str, Any], top_priors: list[dict[str, Any]], top_c
         "",
         "## Decision",
         "",
-        "`PASS_A7MEM0_SEARCH_MEMORY_REGISTRY_BUILT`",
+        f"`{summary['decision']}`",
         "",
         "Boundary: search memory and next-search prior only. This does not authorize alpha proof, shadow, paper, or live.",
         "",
@@ -419,8 +423,8 @@ def make_report(summary: dict[str, Any], top_priors: list[dict[str, Any]], top_c
         "",
         "## Mandatory Next-Search Gate",
         "",
-        "Next large search must load `runtime/a7mem0_search_memory_registry_20260628/a7mem0_next_search_prior.json`.",
-        "If the prior file is absent or stale relative to the latest aggregate, the search is not authorized.",
+        "EVALRESET blocks this memory registry from authorizing the next search while candidate inputs contain spent/OOS-derived feedback.",
+        "A future prior requires an unspent inner-validation contract and a passing candidate-feedback guard.",
         "",
         "## Top Pair/Motif Priors",
         "",
@@ -448,17 +452,31 @@ def main() -> None:
     RUNTIME.mkdir(parents=True, exist_ok=True)
     run_registry = []
     candidate_rows = []
+    blocked_sources: list[dict[str, Any]] = []
     for source in SOURCE_FILES:
         path = Path(source["path"])
         exists = path.exists()
         rows = read_csv(path)
+        source_row_count = len(rows)
+        feedback_status = "PASS"
+        try:
+            assert_candidate_feedback_records_allowed(
+                rows,
+                context=f"a7mem0.ingest.{source['run_id']}.{source['source_type']}",
+            )
+        except EvaluationAccessViolation as exc:
+            blocked_sources.append(exc.as_dict() | {"path": str(path)})
+            feedback_status = "BLOCKED_EVALRESET_CANDIDATE_FEEDBACK"
+            rows = []
         run_registry.append(
             {
                 "run_id": source["run_id"],
                 "source_type": source["source_type"],
                 "path": str(path),
                 "exists": str(exists),
-                "row_count": len(rows),
+                "source_row_count": source_row_count,
+                "ingested_row_count": len(rows),
+                "candidate_feedback_status": feedback_status,
                 "sha256": sha256_file(path) if exists else "",
                 "size_bytes": path.stat().st_size if exists else "",
                 "mtime_utc": datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat() if exists else "",
@@ -481,12 +499,19 @@ def main() -> None:
     prior_rows = build_pair_motif_prior(candidate_rows)
     archive_rows = ARCHIVE_POINTERS
 
+    memory_decision = (
+        "HOLD_EVALRESET_SPENT_EVALUATION_FEEDBACK_BLOCKED"
+        if blocked_sources
+        else "PASS_A7MEM0_SEARCH_MEMORY_REGISTRY_BUILT"
+    )
     next_prior = {
         "object_id": "a7mem0_next_search_prior",
         "created_at": now_utc(),
         "stage": STAGE,
-        "decision": "PASS_A7MEM0_SEARCH_MEMORY_REGISTRY_BUILT",
+        "decision": memory_decision,
         "required_for_next_large_search": True,
+        "search_authorized": False,
+        "candidate_feedback_guard": blocked_sources or [{"status": "PASS"}],
         "memory_runtime": str(RUNTIME),
         "candidate_memory": str(RUNTIME / "a7mem0_candidate_memory.csv"),
         "source_record_memory": str(RUNTIME / "a7mem0_source_record_memory.csv"),
@@ -529,7 +554,7 @@ def main() -> None:
     summary = {
         "object_id": "crypto_a7mem0_search_memory_registry",
         "created_at": now_utc(),
-        "decision": "PASS_A7MEM0_SEARCH_MEMORY_REGISTRY_BUILT",
+        "decision": memory_decision,
         "source_files_seen": sum(1 for row in run_registry if row["exists"] == "True"),
         "source_files_missing": sum(1 for row in run_registry if row["exists"] != "True"),
         "candidate_memory_rows": len(candidate_rows),
@@ -540,6 +565,7 @@ def main() -> None:
         "formula_clusters": len(cluster_rows),
         "pair_motif_priors": len(prior_rows),
         "next_search_requires_a7mem_prior": True,
+        "candidate_feedback_guard": blocked_sources or [{"status": "PASS"}],
         "outputs": {
             "search_run_registry": str(RUNTIME / "a7mem0_search_run_registry.csv"),
             "candidate_memory": str(RUNTIME / "a7mem0_candidate_memory.csv"),
@@ -556,7 +582,19 @@ def main() -> None:
     write_csv(
         RUNTIME / "a7mem0_search_run_registry.csv",
         run_registry,
-        ["run_id", "source_type", "path", "exists", "row_count", "sha256", "size_bytes", "mtime_utc", "notes"],
+        [
+            "run_id",
+            "source_type",
+            "path",
+            "exists",
+            "source_row_count",
+            "ingested_row_count",
+            "candidate_feedback_status",
+            "sha256",
+            "size_bytes",
+            "mtime_utc",
+            "notes",
+        ],
     )
     candidate_cols = [
         "memory_id",

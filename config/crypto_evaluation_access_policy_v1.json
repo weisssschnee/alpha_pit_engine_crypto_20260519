@@ -1,0 +1,98 @@
+{
+  "policy_id": "CRYPTO-EVALRESET-ACCESS-V1",
+  "version": 1,
+  "effective_from": "2026-07-11",
+  "default_epoch_classification": "SEALED_FORWARD",
+  "allowed_candidate_feedback_classifications": [
+    "DISCOVERY_TRAIN",
+    "INNER_VALIDATION"
+  ],
+  "audit_only_classifications": [
+    "SPENT_HISTORICAL_EVALUATION",
+    "SEALED_FORWARD"
+  ],
+  "epochs": [
+    {
+      "epoch_id": "train_2024",
+      "start_utc": "2024-01-01T00:00:00Z",
+      "end_utc": "2024-12-31T23:00:00Z",
+      "classification": "DISCOVERY_TRAIN",
+      "candidate_feedback_allowed": true,
+      "reason": "Historical discovery training panel. This is not OOS evidence."
+    },
+    {
+      "epoch_id": "validation_2025H1_selected_2025_06",
+      "start_utc": "2025-06-01T00:00:00Z",
+      "end_utc": "2025-06-30T23:00:00Z",
+      "classification": "SPENT_HISTORICAL_EVALUATION",
+      "candidate_feedback_allowed": false,
+      "reason": "Viewed and used by proxy, reward, admission, scheduling, and human decisions."
+    },
+    {
+      "epoch_id": "test_2025H2_selected_2025_12",
+      "start_utc": "2025-12-02T00:00:00Z",
+      "end_utc": "2025-12-31T23:00:00Z",
+      "classification": "SPENT_HISTORICAL_EVALUATION",
+      "candidate_feedback_allowed": false,
+      "reason": "Viewed and used by reward, admission, scheduling, and human decisions."
+    },
+    {
+      "epoch_id": "recent_oos_2026_04",
+      "start_utc": "2026-04-01T00:00:00Z",
+      "end_utc": "2026-04-30T23:00:00Z",
+      "classification": "SPENT_HISTORICAL_EVALUATION",
+      "candidate_feedback_allowed": false,
+      "reason": "Repeatedly used as an OOS ranking and hard-reject component."
+    },
+    {
+      "epoch_id": "known_may2026_stress",
+      "start_utc": "2026-05-01T00:00:00Z",
+      "end_utc": "2026-05-26T00:00:00Z",
+      "classification": "SPENT_HISTORICAL_EVALUATION",
+      "candidate_feedback_allowed": false,
+      "reason": "Repeatedly used as a known stress veto; it is not a final blind holdout."
+    }
+  ],
+  "candidate_feedback_blocked_column_patterns": [
+    "(^|_)(validation|test|recent|stress|oos|forward|shadow|paper|live)($|_)",
+    "(^|_)report(_only)?($|_)"
+  ],
+  "candidate_feedback_blocked_derived_columns": [
+    "accepted_for_next_search",
+    "decision",
+    "diagnostic_composite_score",
+    "dominance_count",
+    "dominates_count",
+    "gate_pass",
+    "hard_reject",
+    "hard_reject_reasons",
+    "memory_credit_release_status",
+    "memory_status",
+    "objective_pass_count",
+    "overall_reward",
+    "pareto_front",
+    "pareto_rank",
+    "prior_action",
+    "proxy_near_miss",
+    "proxy_selectable",
+    "proxy_strict_pass",
+    "search_weight",
+    "strict_pass"
+  ],
+  "sealed_epoch_rules": {
+    "unknown_epoch_is_sealed": true,
+    "forward_metrics_may_be_read_for_candidate_feedback": false,
+    "spent_metrics_may_be_read_for_candidate_feedback": false,
+    "audit_and_reproduction_reads_are_allowed": true,
+    "declassification_requires": [
+      "epoch_id",
+      "immutable_manifest_sha256",
+      "authorized_purpose",
+      "authorizer",
+      "authorized_at_utc",
+      "access_ledger_entry"
+    ],
+    "declassification_is_not_retroactive": true,
+    "candidate_feedback_outputs_must_fail_closed": true
+  }
+}

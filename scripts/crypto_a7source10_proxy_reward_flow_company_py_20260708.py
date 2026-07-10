@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import subprocess
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -11,6 +12,11 @@ import pandas as pd
 
 
 REPO = Path(r"D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote")
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+
+from alphafactory_crypto.evaluation_access import assert_candidate_feedback_columns_allowed
+
 PYTHON = Path(r"D:\Python311\python.exe")
 if not PYTHON.exists():
     PYTHON = Path(r"D:\HermesWorker\workspace\.venv\Scripts\python.exe")
@@ -164,6 +170,11 @@ def run_proxy_aggregate() -> Path:
 
 def ensure_reward_shards(selected_queue: Path) -> list[dict[str, str]]:
     REWARD_RUN_ROOT.mkdir(parents=True, exist_ok=True)
+    selected = pd.read_csv(selected_queue, nrows=1, low_memory=False)
+    assert_candidate_feedback_columns_allowed(
+        selected.columns,
+        context="a7source10.scheduler_proxy_to_reward",
+    )
     env = {
         "A7V3S0_REWARD_PREQUEUE": str(selected_queue),
         "A7V3S0_REWARD_SHARD_RUNTIME": str(REWARD_RUN_ROOT),
