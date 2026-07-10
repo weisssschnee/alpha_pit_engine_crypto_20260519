@@ -8,6 +8,12 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from alphafactory_crypto.engines.semantic_domains import (
+    canonicalize_semantic_expression,
+    is_numeric_constant_expression,
+    semantic_degeneracy_reasons as domain_semantic_degeneracy_reasons,
+)
+
 
 DEFAULT_CONFIG = Path(__file__).resolve().parents[2] / "config" / "crypto_formula_gen_v2_motif_pack_v1.json"
 
@@ -53,6 +59,22 @@ def tree_depth(expression: str) -> int:
         elif char == ")":
             depth = max(0, depth - 1)
     return max_depth
+
+
+def semantic_degeneracy_reasons(expression: str) -> list[str]:
+    compact = re.sub(r"\s+", "", expression or "")
+    reasons = domain_semantic_degeneracy_reasons(expression)
+    if re.search(r"Sign\((?:CSRank|Rank|TSRank)\(", compact):
+        reasons.append("constant_sign_of_positive_rank")
+    if re.search(r"Sign\((?:Mean|Decay)\((?:CSRank|Rank|TSRank)\(", compact):
+        reasons.append("constant_sign_of_smoothed_positive_rank")
+    if re.search(r"Abs\((?:CSRank|Rank|TSRank)\(", compact):
+        reasons.append("redundant_abs_of_nonnegative_rank")
+    if re.search(r"Abs\((?:Mean|Decay)\((?:CSRank|Rank|TSRank)\(", compact):
+        reasons.append("redundant_abs_of_smoothed_nonnegative_rank")
+    if "Abs(Abs(" in compact:
+        reasons.append("redundant_nested_abs")
+    return list(dict.fromkeys(reasons))
 
 
 def _choice(rng: random.Random, values: list[Any]) -> Any:
@@ -198,6 +220,12 @@ class CryptoFormulaGenV2Adapter:
             template = str(_choice(self.rng, list(spec.get("templates") or [])))
             required_families = list(spec.get("field_families") or [])
             expression, field_families, used_fields = self._format(template, required_families)
+            canonical_expression, canonical_reasons = canonicalize_semantic_expression(expression)
+            if is_numeric_constant_expression(canonical_expression) or any(
+                reason.startswith("constant_sign_") for reason in canonical_reasons
+            ):
+                continue
+            expression = canonical_expression
             validation = validate_expression(
                 expression,
                 self.allowed_fields,
@@ -223,6 +251,7 @@ class CryptoFormulaGenV2Adapter:
                         "source_config": str(DEFAULT_CONFIG),
                         "field_mode": self.field_mode,
                         "semantic_field_enforcement_applied": bool(self.field_enforcement),
+                        "semantic_canonicalization_reasons": canonical_reasons,
                     },
                 )
         raise RuntimeError("failed to generate a valid crypto expression after 128 attempts")
@@ -245,6 +274,7 @@ def validate_expression(
     for token in banned_tokens:
         if str(token).lower() in lowered:
             reasons.append(f"banned_cn_token:{token}")
+    reasons.extend(semantic_degeneracy_reasons(expression))
     fields = set(re.findall(r"\b[a-z][a-z0-9_]*\b", expression))
     function_names = {name.lower() for name in extract_operators(expression)}
     numeric_words = {"nan", "inf"}

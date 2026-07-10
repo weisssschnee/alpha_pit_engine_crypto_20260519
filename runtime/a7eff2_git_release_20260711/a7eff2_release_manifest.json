@@ -1,0 +1,234 @@
+{
+  "architecture_graph": {
+    "graph_html_current": false,
+    "hyperedges": 9,
+    "links": 29160,
+    "nodes": 19304
+  },
+  "boundaries": {
+    "authorizes_alpha_proof": false,
+    "authorizes_shadow_paper_live": false,
+    "contains_full_numeric_cache": false,
+    "contains_raw_market_data": false
+  },
+  "canonical_sources": [
+    {
+      "bytes": 21175981,
+      "path": ".planning/graphs/graph.json",
+      "sha256": "8211539CDE893A0084354CEABFE5531EDB1F967AE1AC96F95CCA47DAE093D27C"
+    },
+    {
+      "bytes": 623815,
+      "path": ".planning/graphs/GRAPH_REPORT.md",
+      "sha256": "C0C59133304A4F39DF03AAAD6483227778A64710AA1C1DCA802C0D24101EF472"
+    },
+    {
+      "bytes": 9806,
+      "path": ".planning/graphs/CURRENT_ARCHITECTURE.md",
+      "sha256": "15D93A3C7479150F70E655088687B95AB2014DE4404DA1489B36409980F64432"
+    },
+    {
+      "bytes": 7677,
+      "path": ".planning/graphs/EVOLUTION_MAP.md",
+      "sha256": "C8E2F087DE46F1E82F2F9EC1319AB31DE68A93F3DA51D6A3A74F90766E311900"
+    },
+    {
+      "bytes": 12349,
+      "path": ".planning/STATE.md",
+      "sha256": "7F500FB3657AE8280E73422397866ABECEA1BC3BDCF1E81951738A82553AC148"
+    },
+    {
+      "bytes": 50026,
+      "path": "runtime/a7ffr1_field_ontology_v3/a7ffr1_field_ontology_v3.csv",
+      "sha256": "48168D169A209A4DAA436C47CC2FA1823F4C0F9352277617BE5FBA5804E9C24E"
+    },
+    {
+      "bytes": 35319,
+      "path": "runtime/a7aif0_field_contract_enforcement_ledger/a7aif0_semantic_field_enforcement_ledger.csv",
+      "sha256": "4FD1EDC81FF61BCB2C6B7A01526D2271DDBC1F2BFC11D27706BC29CF22F354E6"
+    },
+    {
+      "bytes": 9573,
+      "path": "runtime/a7ls_field_gate1_contract_backfill_20260609/a7ls_field_gate1_backfill_field_contract.csv",
+      "sha256": "DF2BE8C8681B4E095102C123170F0E6264D0CAF4845B0F64AA33759926D1A077"
+    },
+    {
+      "bytes": 10186,
+      "path": "runtime/a7input0_input_approval_package/a7input0_input_approval_registry.csv",
+      "sha256": "9ED9784E04795987A02BE632B3B019D0C5AD04FD31376C51C4ADBD013E4EA5F7"
+    },
+    {
+      "bytes": 3236,
+      "path": "config/crypto_field_value_domain_rules_v1.json",
+      "sha256": "7252F22D54A2CC8E48125EFEE8A9E0B67B4825FCED0C44EE6531FFAD0E25B65E"
+    },
+    {
+      "bytes": 484,
+      "path": "runtime/a7al0_top498_alpha_search_contract/a7al_split_definition.csv",
+      "sha256": "3A62ECC196E49DEC6359793D5BFF0365247E4307B567E0808B56DC22F49E9DAC"
+    },
+    {
+      "bytes": 23554,
+      "path": "scripts/crypto_a7al2l_fast_derived_replay_preflight.py",
+      "sha256": "E39B80C7D6C2C37EC7232875F3E14A48EC23AEDE6E17053060F80BBFBAE42780"
+    },
+    {
+      "bytes": 93010,
+      "path": "scripts/crypto_a7reward1_portfolio_reward_model.py",
+      "sha256": "BBC246A15012EDD1F8133E16C4E920529002EE36895351373BCE4FA1161D10F9"
+    },
+    {
+      "bytes": 7336,
+      "path": "reports/CRYPTO_A7EFF2_SEMANTIC_IDENTITY_SAFEDIV_INTEGRATION_20260710.md",
+      "sha256": "9BE44093E0864B6EE19EE9CB56CCA400DF872B1B8C8F96102ADD948EB4546E41"
+    },
+    {
+      "bytes": 12566,
+      "path": "alphafactory_crypto/engines/formula_gen_v2_adapter.py",
+      "sha256": "FBD50A0256B26356041D9D3FB2EDD2EC76F7D2361FFBDE08133BDAA14BCCDDB4"
+    },
+    {
+      "bytes": 12456,
+      "path": "alphafactory_crypto/engines/semantic_domains.py",
+      "sha256": "EB09840D065690D741AB9207EEA11A990FE69A5A3E404BFA4D2AC593F240AD44"
+    },
+    {
+      "bytes": 2818,
+      "path": "alphafactory_crypto/engines/signal_identity.py",
+      "sha256": "C3CD9E17B063D8E5A09D38D8A0B7E73E1E7E86067731C1719452408F48FC4755"
+    },
+    {
+      "bytes": 33179,
+      "path": "scripts/crypto_a7source5_a7search7_source_lag_reward_flow.py",
+      "sha256": "544C366582C1EEB67CE8F4F97C52B049EFA809AF7580CD1F501B9CB6642034AE"
+    },
+    {
+      "bytes": 27588,
+      "path": "scripts/crypto_a7source6_incremental_validation_pack.py",
+      "sha256": "BD84FEABF7369F1F09F4D093071B321126F890619E89FAFB8E3E2E8EBB392B4D"
+    },
+    {
+      "bytes": 20785,
+      "path": "scripts/crypto_a7v3s0_reward_sharded_aggregate.py",
+      "sha256": "D7451768B16916B735A2B68C0C51664452A4CA4AD3A887E80A263A84D831D29F"
+    }
+  ],
+  "decision": "PASS_A7EFF2_GIT_RELEASE_BUNDLE_READY",
+  "field_registry": {
+    "a7input0_approval_rows": 36,
+    "active_field_rows": 10,
+    "active_fields": [
+      "account_position_divergence",
+      "global_long_short_account_ratio_last",
+      "mark_trade_basis_bps",
+      "open_interest_value_last",
+      "open_interest_value_mean",
+      "top_global_account_divergence",
+      "top_long_short_account_ratio_last",
+      "top_long_short_position_ratio_last",
+      "trade_close",
+      "trade_quote_volume"
+    ],
+    "active_not_in_a7input0_count": 6,
+    "active_not_in_a7input0_fields": [
+      "account_position_divergence",
+      "open_interest_value_last",
+      "open_interest_value_mean",
+      "top_global_account_divergence",
+      "top_long_short_account_ratio_last",
+      "top_long_short_position_ratio_last"
+    ],
+    "full_ontology_rows": 81
+  },
+  "generated_at": "2026-07-10T17:11:30Z",
+  "git_target": "origin/main",
+  "outputs": {
+    "a7eff2_accepted_train_validation_oos_log.csv": {
+      "bytes": 13681,
+      "sha256": "65CB07431725FA1CAFF91990BA67305AADAD82616ABA58B2D9010217A5D3946D"
+    },
+    "a7eff2_active_field_registry.csv": {
+      "bytes": 5720,
+      "sha256": "EC6B910B774D3AABDF5329A5752AA3A175DCAA9BD08D35D6FEEE23FFF84AFC63"
+    },
+    "a7eff2_train_validation_oos_split_log.csv": {
+      "bytes": 1853,
+      "sha256": "A8E36D2788D29525C9982B21BA5A616F62E88417A447A915011E682F1B25AEA1"
+    }
+  },
+  "reward_evidence": {
+    "accepted_rows": 16,
+    "eval_errors": 0,
+    "final_incremental_fields": [
+      "account_position_divergence",
+      "open_interest_value_last"
+    ],
+    "final_incremental_fields_missing_a7input0": [
+      "account_position_divergence",
+      "open_interest_value_last"
+    ],
+    "final_incremental_memory_feedback_rows": 1,
+    "memory_credit_release_status": "HOLD_A7INPUT0_COVERAGE_GAP",
+    "memory_credit_released_rows": 0,
+    "metric_rows_all_variants": 3960,
+    "source6_incremental_evidence_rows": 1
+  },
+  "source_evidence": [
+    {
+      "bytes": 92488,
+      "path": "G:\\Chengbo\\runtime\\a7eff2_git_release_source_20260711\\timestamps_ns.npy",
+      "sha256": "59CBE1DF38AFD0DFEE7E844B20E2E42F224BE45D08575A1E18C43F7F61EE078D"
+    },
+    {
+      "bytes": 969908,
+      "path": "G:\\Chengbo\\runtime\\a7eff2_git_release_source_20260711\\split.npy",
+      "sha256": "A53A512528CBCD46954558F4A227FD5EA470E1CFFC6B62872823C6845DC60972"
+    },
+    {
+      "bytes": 2970,
+      "path": "G:\\Chengbo\\runtime\\a7eff2_git_release_source_20260711\\a7reward1_numeric_cache_manifest.json",
+      "sha256": "342805F26D1C92AEE1A42FC3FD18015375993829A7D5CAC3011EADCBE3BF1741"
+    },
+    {
+      "bytes": 9240827,
+      "path": "G:\\Chengbo\\runtime\\a7eff2_semantic_identity_safediv_20260710_v2_results\\reward_aggregate\\a7v3s0_reward_split_metrics_all.csv",
+      "sha256": "B335DEFD11427891C9AC030F2F900885727C2DD765559324F44288D10C300DD5"
+    },
+    {
+      "bytes": 24711,
+      "path": "G:\\Chengbo\\runtime\\a7eff2_semantic_identity_safediv_20260710_v2_results\\reward_aggregate\\a7v3s0_reward_accepted_enriched.csv",
+      "sha256": "A26D829224AE0B372D0CC1440E3FACDBA1C891AF60E41F2D591DE3EEB215557A"
+    },
+    {
+      "bytes": 3659,
+      "path": "G:\\Chengbo\\runtime\\a7eff2_semantic_identity_safediv_20260710_v2_results\\pc2_final_sync\\a7source6_incremental_identity_feedback.csv",
+      "sha256": "75BA01A5F6270F131B47E28C3DBE4AB7DD9842F841E8CE2F29DCC4C4C0B2F5CA"
+    },
+    {
+      "bytes": 686138,
+      "path": "G:\\Chengbo\\runtime\\a7eff2_semantic_identity_safediv_20260710_v2_results\\a7eff2_compact_results_v2_20260710.zip",
+      "sha256": "FBEC60802F5381FD5505BC455269ADA80CC9ED8E5A47067E8A1FD73D3C387801"
+    }
+  ],
+  "split_execution": {
+    "alias_expanded_blueprints": 33,
+    "first_timestamp_utc": "2024-01-01T00:00:00Z",
+    "horizons": [
+      1,
+      4,
+      8,
+      24
+    ],
+    "last_timestamp_utc": "2026-05-26T00:00:00Z",
+    "numeric_identity_representatives": 18,
+    "oos_hours_per_split": 720,
+    "pre2024_backfill_status": "available outside this replay panel; not materialized into A7EFF2 numeric cache",
+    "pre2024_backfill_used": false,
+    "split_rows": 5,
+    "timestamp_count": 11545,
+    "train_hours_per_split": 0,
+    "variants": 6
+  },
+  "stage": "A7EFF2-GIT-RELEASE-BUNDLE",
+  "version": 1
+}

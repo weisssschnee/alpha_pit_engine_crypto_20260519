@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+import numpy as np
 import pandas as pd
 
 
@@ -60,6 +61,12 @@ def read_json(path: Path) -> dict[str, Any]:
     if not path.exists() or path.stat().st_size == 0:
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def truthy(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    return str(value).strip().lower() in {"true", "1", "yes", "y"}
 
 
 def build(args: argparse.Namespace) -> dict[str, Any]:
@@ -135,6 +142,8 @@ def summarize(args: argparse.Namespace) -> dict[str, Any]:
     risks = read_csv(args.runtime / "a7source6_validation_field_timing_risk.csv")
     if risks.empty:
         risks = read_csv(args.runtime / "a7search6_validation_field_timing_risk.csv")
+    semantic_rejections = read_csv(args.runtime / "a7source6_semantic_gate_rejections.csv")
+    semantic_rewrites = read_csv(args.runtime / "a7source6_semantic_canonical_rewrites.csv")
 
     leaderboard = attach_queue_metadata(
         read_csv(args.reward_aggregate_root / "a7v3s0_reward_candidate_leaderboard_all.csv"), queue
@@ -178,18 +187,117 @@ def summarize(args: argparse.Namespace) -> dict[str, Any]:
     )
 
     source_rows: list[dict[str, Any]] = []
+    comparison_metrics = [
+        "validation_sortino",
+        "test_sortino",
+        "recent_sortino",
+        "min_oos_floor_sortino",
+        "stress_floor_sortino",
+    ]
     if "source_blueprint_id" in queue.columns:
         for source_id, source_queue in queue.groupby("source_blueprint_id", dropna=False):
             acc = accepted[accepted["source_blueprint_id"].astype(str).eq(str(source_id))] if not accepted.empty else pd.DataFrame()
+            canonical_expressions = set(
+                source_queue.loc[source_queue["validation_group"].eq("canonical"), "expression"].astype(str)
+            )
+            distinct_acc = (
+                acc[~acc["formula"].astype(str).isin(canonical_expressions)]
+                if not acc.empty and "formula" in acc
+                else acc
+            )
             canonical = int(acc["validation_group"].eq("canonical").sum()) if not acc.empty else 0
-            single = int(acc["validation_group"].eq("single_leg").sum()) if not acc.empty else 0
-            neighbor = int(acc["validation_group"].isin(["operator_neighbor", "operator_text_ablation"]).sum()) if not acc.empty else 0
-            if canonical > 0 and single == 0 and neighbor == 0:
+            single = int(distinct_acc["validation_group"].eq("single_leg").sum()) if not distinct_acc.empty else 0
+            neighbor = int(
+                distinct_acc["validation_group"].isin(["operator_neighbor", "operator_text_ablation"]).sum()
+            ) if not distinct_acc.empty else 0
+            subtree = int(
+                distinct_acc["validation_group"].isin(["source_subtree", "semantic_simplification"]).sum()
+            ) if not distinct_acc.empty else 0
+            canonical_rows = acc[acc["validation_group"].eq("canonical")].copy() if not acc.empty else pd.DataFrame()
+            ablation_rows = distinct_acc[
+                distinct_acc["validation_group"].isin(
+                    ["single_leg", "operator_neighbor", "operator_text_ablation", "source_subtree", "semantic_simplification"]
+                )
+            ].copy() if not distinct_acc.empty else pd.DataFrame()
+            sort_metrics = [metric for metric in ["min_oos_floor_sortino", "stress_floor_sortino", "recent_sortino"] if metric in acc]
+            for frame in [canonical_rows, ablation_rows]:
+                for metric in comparison_metrics:
+                    if metric in frame:
+                        frame[metric] = pd.to_numeric(frame[metric], errors="coerce")
+            if sort_metrics and not canonical_rows.empty:
+                canonical_rows = canonical_rows.sort_values(sort_metrics, ascending=[False] * len(sort_metrics))
+            if sort_metrics and not ablation_rows.empty:
+                ablation_rows = ablation_rows.sort_values(sort_metrics, ascending=[False] * len(sort_metrics))
+            canonical_best = canonical_rows.iloc[0] if not canonical_rows.empty else pd.Series(dtype=object)
+            ablation_best = ablation_rows.iloc[0] if not ablation_rows.empty else pd.Series(dtype=object)
+            deltas: dict[str, float] = {}
+            for metric in comparison_metrics:
+                canonical_value = pd.to_numeric(canonical_best.get(metric), errors="coerce")
+                ablation_value = pd.to_numeric(ablation_best.get(metric), errors="coerce")
+                deltas[metric] = (
+                    float(canonical_value - ablation_value)
+                    if np.isfinite(canonical_value) and np.isfinite(ablation_value)
+                    else np.nan
+                )
+            finite_deltas = [value for value in deltas.values() if np.isfinite(value)]
+            metric_equivalent = bool(finite_deltas) and max(abs(value) for value in finite_deltas) <= 1e-9
+            robust_metrics = ["min_oos_floor_sortino", "stress_floor_sortino", "recent_sortino"]
+            robust_deltas = [deltas[metric] for metric in robust_metrics]
+            robust_pareto_gain = (
+                bool(robust_deltas)
+                and all(np.isfinite(value) and value >= -1e-9 for value in robust_deltas)
+                and any(value > 1e-9 for value in robust_deltas)
+            )
+            canonical_safediv_review = truthy(canonical_best.get("safediv_review_flag", False))
+            source_semantic_rejections = (
+                semantic_rejections[
+                    semantic_rejections["source_blueprint_id"].astype(str).eq(str(source_id))
+                ]
+                if not semantic_rejections.empty and "source_blueprint_id" in semantic_rejections
+                else pd.DataFrame()
+            )
+            canonical_semantic_rejections = (
+                source_semantic_rejections[source_semantic_rejections["validation_group"].astype(str).eq("canonical")]
+                if not source_semantic_rejections.empty and "validation_group" in source_semantic_rejections
+                else pd.DataFrame()
+            )
+            canonical_semantic_rejected = not canonical_semantic_rejections.empty
+            semantic_reason_text = ";".join(
+                sorted(
+                    {
+                        reason
+                        for text in canonical_semantic_rejections.get("semantic_degeneracy_reasons", pd.Series(dtype=str)).fillna("").astype(str)
+                        for reason in text.split(";")
+                        if reason
+                    }
+                )
+            )
+            source_semantic_rewrites = (
+                semantic_rewrites[
+                    semantic_rewrites["source_blueprint_id"].astype(str).eq(str(source_id))
+                ]
+                if not semantic_rewrites.empty and "source_blueprint_id" in semantic_rewrites
+                else pd.DataFrame()
+            )
+            canonical_semantic_rewrites = (
+                source_semantic_rewrites[source_semantic_rewrites["validation_group"].astype(str).eq("canonical")]
+                if not source_semantic_rewrites.empty and "validation_group" in source_semantic_rewrites
+                else pd.DataFrame()
+            )
+            if canonical_semantic_rejected:
+                decision = "HOLD_SEMANTIC_DEGENERACY"
+            elif canonical > 0 and ablation_rows.empty:
                 decision = "PASS_INCREMENTAL_INTERACTION_EVIDENCE"
-            elif canonical > 0:
-                decision = "HOLD_NON_UNIQUE_INFORMATION"
-            else:
+            elif canonical == 0:
                 decision = "HOLD_CANONICAL_DID_NOT_REPASS"
+            elif metric_equivalent:
+                decision = "HOLD_NON_UNIQUE_INFORMATION"
+            elif robust_pareto_gain:
+                decision = "PASS_INCREMENTAL_INTERACTION_EVIDENCE"
+            else:
+                decision = "HOLD_PORTFOLIO_MARGINAL_REVIEW"
+            if decision == "PASS_INCREMENTAL_INTERACTION_EVIDENCE" and canonical_safediv_review:
+                decision = "HOLD_PORTFOLIO_MARGINAL_REVIEW"
             source_rows.append(
                 {
                     "source_blueprint_id": source_id,
@@ -199,11 +307,48 @@ def summarize(args: argparse.Namespace) -> dict[str, Any]:
                     "canonical_accepted_rows": canonical,
                     "single_leg_accepted_rows": single,
                     "operator_neighbor_accepted_rows": neighbor,
+                    "source_subtree_accepted_rows": subtree,
                     "accepted_rows": int(acc.shape[0]),
+                    "best_ablation_group": ablation_best.get("validation_group", ""),
+                    "best_ablation_blueprint_id": ablation_best.get("blueprint_id", ""),
+                    "metric_equivalent_to_best_ablation": metric_equivalent,
+                    "robust_pareto_gain_over_best_ablation": robust_pareto_gain,
+                    "delta_validation_sortino": deltas["validation_sortino"],
+                    "delta_test_sortino": deltas["test_sortino"],
+                    "delta_recent_sortino": deltas["recent_sortino"],
+                    "delta_min_oos_floor_sortino": deltas["min_oos_floor_sortino"],
+                    "delta_stress_floor_sortino": deltas["stress_floor_sortino"],
+                    "canonical_safediv_review_required": canonical_safediv_review,
+                    "canonical_safediv_review_reasons": canonical_best.get("safediv_review_reasons", ""),
+                    "canonical_safediv_q01_to_median": canonical_best.get("safediv_denominator_min_q01_to_median", np.nan),
+                    "canonical_safediv_near_zero_ratio": canonical_best.get("safediv_denominator_max_near_zero_ratio", np.nan),
+                    "canonical_safediv_rank_stability": canonical_best.get("safediv_local_rank_stability_min", np.nan),
+                    "canonical_signal_p99_to_median": canonical_best.get("signal_abs_p99_to_median", np.nan),
+                    "canonical_signal_top1pct_abs_mass_share": canonical_best.get("signal_top1pct_abs_mass_share", np.nan),
+                    "canonical_semantic_rejected": canonical_semantic_rejected,
+                    "canonical_semantic_reject_reasons": semantic_reason_text,
+                    "canonical_semantic_rewrite_applied": not canonical_semantic_rewrites.empty,
+                    "canonical_original_expression": canonical_semantic_rewrites.get("original_expression", pd.Series(dtype=str)).iloc[0] if not canonical_semantic_rewrites.empty else "",
+                    "canonical_rewritten_expression": canonical_semantic_rewrites.get("semantic_canonical_expression", pd.Series(dtype=str)).iloc[0] if not canonical_semantic_rewrites.empty else "",
                     "decision": decision,
                 }
             )
     source_decisions = pd.DataFrame(source_rows).sort_values(["decision", "source_rank"]) if source_rows else pd.DataFrame()
+    incremental_source_ids = set(
+        source_decisions.loc[
+            source_decisions["decision"].eq("PASS_INCREMENTAL_INTERACTION_EVIDENCE"),
+            "source_blueprint_id",
+        ].astype(str)
+    ) if not source_decisions.empty else set()
+    incremental_feedback = (
+        accepted[accepted["source_blueprint_id"].astype(str).isin(incremental_source_ids)].copy()
+        if not accepted.empty and "source_blueprint_id" in accepted
+        else pd.DataFrame()
+    )
+    if not incremental_feedback.empty and "is_signal_identity_representative" in incremental_feedback:
+        incremental_feedback = incremental_feedback[
+            incremental_feedback["is_signal_identity_representative"].fillna(False).map(truthy)
+        ].copy()
 
     risk_summary = (
         risks.groupby(["field_family", "timing_risk_note"], dropna=False)
@@ -228,21 +373,34 @@ def summarize(args: argparse.Namespace) -> dict[str, Any]:
         "source_decisions": args.runtime / "a7source6_validation_source_decisions.csv",
         "field_timing_risk_summary": args.runtime / "a7source6_validation_field_timing_risk_summary.csv",
         "rejection_summary": args.runtime / "a7source6_validation_rejection_summary.csv",
+        "semantic_gate_rejections": args.runtime / "a7source6_validation_semantic_gate_rejections.csv",
+        "semantic_canonical_rewrites": args.runtime / "a7source6_validation_semantic_canonical_rewrites.csv",
+        "incremental_identity_feedback": args.runtime / "a7source6_incremental_identity_feedback.csv",
     }
     accepted_summary.to_csv(outputs["accepted_summary"], index=False)
     group_summary.to_csv(outputs["group_summary"], index=False)
     source_decisions.to_csv(outputs["source_decisions"], index=False)
     risk_summary.to_csv(outputs["field_timing_risk_summary"], index=False)
     rejection_summary.to_csv(outputs["rejection_summary"], index=False)
+    semantic_rejections.to_csv(outputs["semantic_gate_rejections"], index=False)
+    semantic_rewrites.to_csv(outputs["semantic_canonical_rewrites"], index=False)
+    incremental_feedback.to_csv(outputs["incremental_identity_feedback"], index=False)
 
     incremental_count = int(source_decisions["decision"].eq("PASS_INCREMENTAL_INTERACTION_EVIDENCE").sum()) if not source_decisions.empty else 0
     non_unique_count = int(source_decisions["decision"].eq("HOLD_NON_UNIQUE_INFORMATION").sum()) if not source_decisions.empty else 0
+    marginal_review_count = int(source_decisions["decision"].eq("HOLD_PORTFOLIO_MARGINAL_REVIEW").sum()) if not source_decisions.empty else 0
+    safediv_review_count = int(source_decisions["canonical_safediv_review_required"].fillna(False).map(truthy).sum()) if "canonical_safediv_review_required" in source_decisions else 0
     canonical_failed_count = int(source_decisions["decision"].eq("HOLD_CANONICAL_DID_NOT_REPASS").sum()) if not source_decisions.empty else 0
+    semantic_rejected_source_count = int(source_decisions["decision"].eq("HOLD_SEMANTIC_DEGENERACY").sum()) if not source_decisions.empty else 0
+    reward_safediv_review_rows = int(leaderboard["safediv_review_flag"].fillna(False).map(truthy).sum()) if "safediv_review_flag" in leaderboard else 0
+    semantic_rewrite_source_count = int(source_decisions["canonical_semantic_rewrite_applied"].fillna(False).map(truthy).sum()) if "canonical_semantic_rewrite_applied" in source_decisions else 0
     eval_error_rows = int(reward_manifest.get("eval_error_rows", errors.shape[0]) or 0)
     if eval_error_rows > 0:
         decision = "HOLD_A7SOURCE6_VALIDATION_EVAL_ERRORS"
     elif incremental_count > 0:
         decision = "PASS_A7SOURCE6_INCREMENTAL_EVIDENCE_FOUND"
+    elif marginal_review_count > 0:
+        decision = "HOLD_A7SOURCE6_PORTFOLIO_MARGINAL_REVIEW"
     elif non_unique_count > 0:
         decision = "HOLD_A7SOURCE6_NON_UNIQUE_INFORMATION"
     else:
@@ -266,7 +424,14 @@ def summarize(args: argparse.Namespace) -> dict[str, Any]:
         "eval_error_rows": eval_error_rows,
         "incremental_source_count": incremental_count,
         "non_unique_source_count": non_unique_count,
+        "portfolio_marginal_review_count": marginal_review_count,
+        "safediv_review_source_count": safediv_review_count,
         "canonical_failed_source_count": canonical_failed_count,
+        "semantic_rejected_source_count": semantic_rejected_source_count,
+        "reward_safediv_review_rows": reward_safediv_review_rows,
+        "semantic_rewrite_source_count": semantic_rewrite_source_count,
+        "incremental_identity_feedback_rows": int(incremental_feedback.shape[0]),
+        "incremental_identity_feedback_unique_blueprints": int(incremental_feedback["blueprint_id"].nunique()) if not incremental_feedback.empty else 0,
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
         "authorizes_next_search_seed_triage": decision.startswith("PASS_"),
@@ -296,7 +461,13 @@ def summarize(args: argparse.Namespace) -> dict[str, Any]:
         f"- eval_error_rows: `{manifest['eval_error_rows']}`",
         f"- incremental_source_count: `{incremental_count}`",
         f"- non_unique_source_count: `{non_unique_count}`",
+        f"- portfolio_marginal_review_count: `{marginal_review_count}`",
+        f"- safediv_review_source_count: `{safediv_review_count}`",
         f"- canonical_failed_source_count: `{canonical_failed_count}`",
+        f"- semantic_rejected_source_count: `{semantic_rejected_source_count}`",
+        f"- reward_safediv_review_rows: `{reward_safediv_review_rows}`",
+        f"- semantic_rewrite_source_count: `{semantic_rewrite_source_count}`",
+        f"- incremental_identity_feedback_rows: `{manifest['incremental_identity_feedback_rows']}`",
         "",
         "## Validation Group Summary",
         "",

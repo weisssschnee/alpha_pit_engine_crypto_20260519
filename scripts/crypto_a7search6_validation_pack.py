@@ -16,6 +16,7 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 from scripts.crypto_a7reward1_portfolio_reward_model import expression_fields  # noqa: E402
+from alphafactory_crypto.engines.feature_algebra import parse_call  # noqa: E402
 
 
 DATE = "20260702"
@@ -127,6 +128,7 @@ def add_row(rows: list[dict[str, Any]], source: dict[str, Any], suffix: str, exp
             "production_key": f"a7search6_vp_{source_id}_{suffix}",
             "source_blueprint_id": source_id,
             "source_horizon_h": source.get("horizon_h", ""),
+            "horizon_h": source.get("horizon_h", ""),
             "source_rank": source.get("source_rank", ""),
             "source_min_oos_floor_sortino": source.get("min_oos_floor_sortino", ""),
             "source_min_oos_sortino": source.get("min_oos_sortino", ""),
@@ -142,12 +144,48 @@ def add_row(rows: list[dict[str, Any]], source: dict[str, Any], suffix: str, exp
     )
 
 
+def source_subtrees(expression: str, limit: int = 8) -> list[str]:
+    out: list[str] = []
+    seen: set[str] = set()
+
+    def visit(expr: str, depth: int) -> None:
+        if len(out) >= limit:
+            return
+        call = parse_call(expr)
+        if call is None:
+            return
+        _, args = call
+        for arg in args:
+            text = str(arg).strip()
+            if not text or text.replace(".", "", 1).lstrip("-").isdigit():
+                continue
+            if text not in seen:
+                seen.add(text)
+                out.append(text)
+                if len(out) >= limit:
+                    return
+            if depth < 2 and parse_call(text) is not None:
+                visit(text, depth + 1)
+
+    visit(expression, 0)
+    return out
+
+
 def validation_rows(compressed: pd.DataFrame, max_fields_per_formula: int = 3) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for source in compressed.to_dict("records"):
         expr = str(source.get("formula") or source.get("expression") or "")
         fields = sorted(expression_fields(expr))[:max_fields_per_formula]
         add_row(rows, source, "canonical", expr, "canonical", "accepted formula rerun")
+        for idx, subtree in enumerate(source_subtrees(expr), start=1):
+            add_row(
+                rows,
+                source,
+                f"source_subtree_{idx:02d}",
+                subtree,
+                "source_subtree",
+                "exact AST subtree ablation from accepted formula",
+            )
         for field in fields:
             safe = field.replace("|", "_").replace(" ", "_")
             add_row(rows, source, f"single_csrank_{safe}", f"CSRank({field})", "single_leg", f"{field} cross-sectional rank only")
@@ -160,8 +198,8 @@ def validation_rows(compressed: pd.DataFrame, max_fields_per_formula: int = 3) -
             add_row(rows, source, "pair_mul_rank", f"Mul(CSRank({left}),CSRank({right}))", "operator_neighbor", "rank multiplication of first two source fields")
             add_row(rows, source, "pair_safe_div_rank", f"SafeDiv(CSRank({left}),Abs(CSRank({right})))", "operator_neighbor", "rank safe-div of first two source fields")
             add_row(rows, source, "pair_safe_div_rank_swapped", f"SafeDiv(CSRank({right}),Abs(CSRank({left})))", "operator_neighbor", "swapped rank safe-div of first two source fields")
-        if expr.startswith("Mul("):
-            add_row(rows, source, "operator_signed_sum_proxy", f"Add({fields[0]},{fields[1]})" if len(fields) >= 2 else expr, "operator_neighbor", "replace multiplication with additive proxy")
+        if expr.startswith("Mul(") and len(fields) >= 2:
+            add_row(rows, source, "operator_signed_sum_proxy", f"Add({fields[0]},{fields[1]})", "operator_neighbor", "replace multiplication with additive proxy")
     return rows
 
 
@@ -261,10 +299,23 @@ def summarize(runtime: Path, reward_aggregate_root: Path, report: Path) -> dict[
     source_rows = []
     for sid, src in queue.groupby("source_blueprint_id", dropna=False):
         acc = accepted[accepted["source_blueprint_id"].astype(str).eq(str(sid))] if not accepted.empty else pd.DataFrame()
+        canonical_expressions = set(
+            src.loc[src["validation_group"].eq("canonical"), "expression"].astype(str)
+        )
+        distinct_acc = (
+            acc[~acc["formula"].astype(str).isin(canonical_expressions)]
+            if not acc.empty and "formula" in acc
+            else acc
+        )
         canonical = int(acc["validation_group"].eq("canonical").sum()) if not acc.empty else 0
-        single = int(acc["validation_group"].eq("single_leg").sum()) if not acc.empty else 0
-        neighbor = int(acc["validation_group"].isin(["operator_neighbor", "operator_text_ablation"]).sum()) if not acc.empty else 0
-        if canonical > 0 and single == 0 and neighbor == 0:
+        single = int(distinct_acc["validation_group"].eq("single_leg").sum()) if not distinct_acc.empty else 0
+        neighbor = int(
+            distinct_acc["validation_group"].isin(["operator_neighbor", "operator_text_ablation"]).sum()
+        ) if not distinct_acc.empty else 0
+        subtree = int(
+            distinct_acc["validation_group"].isin(["source_subtree", "semantic_simplification"]).sum()
+        ) if not distinct_acc.empty else 0
+        if canonical > 0 and single == 0 and neighbor == 0 and subtree == 0:
             decision = "PASS_INCREMENTAL_INTERACTION_EVIDENCE"
         elif canonical > 0:
             decision = "HOLD_NON_UNIQUE_INFORMATION"
@@ -277,6 +328,7 @@ def summarize(runtime: Path, reward_aggregate_root: Path, report: Path) -> dict[
                 "canonical_accepted_rows": canonical,
                 "single_leg_accepted_rows": single,
                 "operator_neighbor_accepted_rows": neighbor,
+                "source_subtree_accepted_rows": subtree,
                 "accepted_rows": int(acc.shape[0]),
                 "decision": decision,
             }

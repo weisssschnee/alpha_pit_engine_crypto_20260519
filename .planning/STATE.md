@@ -1,12 +1,12 @@
 # Crypto AlphaFactory Planning State
 
-**Last updated:** 2026-07-04 02:40 Asia/Hong_Kong
-**Status:** A7SEARCH7 family-diversified proxy search running on company machine; no deployment authorization
+**Last updated:** 2026-07-10 19:42 Asia/Hong_Kong
+**Status:** A7EFF1 optimized reward flow and A7SOURCE6 exact-subtree validation passed; one incremental interaction and one portfolio-marginal review remain; no deployment authorization
 
 ## Current Source Of Truth
 
 - Git status at the previous committed snapshot: `HEAD == origin/main == e7f55b9 planning: update crypto shadow taskflow`.
-- Latest pending stage in this update: A7SEARCH7 family-diversified proxy run.
+- Latest completed stage in this update: A7EFF1 search/reward efficiency audit plus A7SOURCE6 exact-subtree incremental validation.
 - Project-level plan: `.planning/PROJECT.md`.
 - Project roadmap: `.planning/ROADMAP.md`.
 - Active phase plan: `.planning/phases/01-crypto-search-hardening/01-PLAN.md`.
@@ -18,6 +18,7 @@
   - `reports/CRYPTO_A7LIVE0_FORWARD_ADAPTER_PROBE_20260704.md`
   - `reports/CRYPTO_A7LIVE1_SOURCE_LAG_CHECKSUM_AUDIT_20260704.md`
   - `reports/CRYPTO_A7SEARCH7_FAMILY_DIVERSIFIED_QUEUE_20260704.md`
+  - `reports/CRYPTO_A7EFF1_SEARCH_REWARD_EFFICIENCY_AUDIT_20260710.md`
 
 ## Confirmed System Components
 
@@ -119,7 +120,7 @@ Mul(CSRank(Mean(open_interest_mean,8)),Sign(Mean(premium_close_bps,48)))
   - `rest_source_has_no_exchange_checksum`
 - Boundary: this closes the source-lag/PIT concern for controlled research continuation, but still does not authorize alpha proof, shadow book, paper/live, or final proof.
 
-## Current A7SEARCH7 Search State
+## Historical A7SEARCH7 Search State
 
 - A7SEARCH7 queue decision: `PASS_A7SEARCH7_FAMILY_DIVERSIFIED_QUEUE_READY`.
 - Original H: archive run was abandoned as invalid for execution evidence after filesystem/log corruption and incomplete manifests.
@@ -145,11 +146,61 @@ Mul(CSRank(Mean(open_interest_mean,8)),Sign(Mean(premium_close_bps,48)))
 - Supervisor configured with `max_parallel=10`, `min_free_gb=8.0`.
 - Full queue and shard outputs stay on the remote D: runtime root; git stores only scripts, reports, manifests, and summaries.
 
+## Latest Efficiency And Incremental-Information State
+
+- A7SOURCE6 focused queue: `53` rows from `8` canonical sources.
+- Registry-backed semantic pass:
+  - `8` deterministic identities were rewritten to canonical nonconstant expressions;
+  - `3` standalone positive-sign subtrees collapsed to constants and were rejected;
+  - no valid inner mechanism was removed solely for a redundant wrapper.
+- Source-lag survivors: `33`; only `18` exact portfolio-signal representatives entered strict reward.
+- Exact signal identity avoided `15 / 33` (`45.5%`) survivor reward evaluations; `41` high-similarity pairs remain review-only.
+- Strict reward: `132` rows, `16` accepted rows, `0` eval errors.
+- Reward triage feedback: `6` exact signal representatives, not the `16` alias-expanded accepted rows.
+- Final A7SOURCE6 incremental feedback: `1` representative; positive A7MEM/CEM/UCB credit is held pending A7INPUT0 coverage for `open_interest_value_last` and `account_position_divergence`.
+- Information-source decisions:
+  - `1` incremental interaction;
+  - `5` OOS-equivalent/non-unique sources;
+  - `1` canonical repass failure;
+  - `1` portfolio-marginal review.
+- Reward determinism:
+  - common random controls are invariant to formula spelling, shard assignment, and evaluation order;
+  - duplicate formula+horizon groups have zero decision mismatch;
+  - old/new accepted set matches exactly (`16 / 16`).
+- SafeDiv review:
+  - the nested-`Abs` candidate was canonicalized instead of killed;
+  - denominator q01/median: `0.020154`;
+  - signal abs p99/median: `462.110403`;
+  - top 1% absolute signal mass share: `0.743924`;
+  - standalone reward remains unchanged, while A7SOURCE6 assigns portfolio-marginal review.
+- Efficiency:
+  - source-lag survivors are the only strict-reward inputs;
+  - one shared manifest-backed numeric cache is loaded through read-only memmaps;
+  - stable vectorized IC/RankIC and prepared rank/weight reuse preserve metrics;
+  - measured total flow improved from about `1,735s` to `136.688s` (`~12.7x`);
+  - measured reward stage improved from about `1,718s` to `120.266s` (`~14.3x`).
+- DSL semantic compiler:
+  - value domains now propagate from the field registry through the typed AST;
+  - constant-conditioner collapse is resampled/rejected at generation;
+  - nonconstant redundant wrappers are canonicalized before materialization;
+  - a 5,000-row old-atlas sample found `496` canonical rewrites at about `4,460 rows/s`.
+- Final local evidence:
+  - `G:\Chengbo\runtime\a7pc2_pc1wide_source_lag_reward_20260710_results\strict_reward_optimized_v2_aggregate`;
+  - `G:\Chengbo\runtime\a7pc2_pc1wide_source_lag_reward_20260710_results\a7source6_subtree_incremental_validation`.
+  - `G:\Chengbo\runtime\a7eff2_semantic_identity_safediv_20260710_v2_results`.
+  - PC2-native final Source6 evidence pulled under `G:\Chengbo\runtime\a7eff2_semantic_identity_safediv_20260710_v2_results\pc2_final_sync`; feedback rows: `1`, eval errors: `0`.
+  - report: `reports/CRYPTO_A7EFF2_SEMANTIC_IDENTITY_SAFEDIV_INTEGRATION_20260710.md`.
+- Git release evidence:
+  - `runtime/a7eff2_git_release_20260711/a7eff2_active_field_registry.csv` records the `10` fields actually loaded by the PC2 shared cache and their ontology/value-domain/input-approval state;
+  - `runtime/a7eff2_git_release_20260711/a7eff2_train_validation_oos_split_log.csv` records actual selected timestamps and confirms the 2023H2 backfill was not used;
+  - `runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv` records all `16` accepted alias rows and the single final incremental-memory representative;
+  - `runtime/a7eff2_git_release_20260711/a7eff2_release_manifest.json` hashes the graph, registries, split sources, and external full evidence.
+
 ## Graphify / Architecture Map State
 
 - `.planning/config.json` exists and sets `graphify.enabled: true`.
 - Raw graphify artifacts exist under `.planning/graphs/graph.json` and `.planning/graphs/graph.html`.
-- Latest raw graph statistics: `15866` nodes and `32165` links.
+- Latest raw graph statistics: `19304` nodes, `29160` links, and `9` hyperedges (rebuilt 2026-07-11 after A7EFF2 integration).
 - Raw graphify output is explicitly classified as a code/navigation knowledge graph, not the current architecture.
 - Curated architecture files:
   - `.planning/graphs/CURRENT_ARCHITECTURE.md`
@@ -159,13 +210,13 @@ Mul(CSRank(Mean(open_interest_mean,8)),Sign(Mean(premium_close_bps,48)))
 
 ## Immediate Next Taskflow
 
-1. Monitor A7SEARCH7 proxy run.
-   - Check supervisor task status, active worker count, free memory, completed shard manifests, and duplicate shard groups.
-   - Do not add workers unless memory remains above the floor after sustained progress.
-2. Aggregate A7SEARCH7 after all expected shard manifests exist.
-   - If any shards fail or duplicate, rerun only failed/suspect shards.
-3. Strict reward and dedupe loop.
-   - Train Sortino, validation/test/recent/stress, controls, shuffle, lag/stale, non-overlap, and family diversification all required.
+1. Extend A7INPUT0 decisions to the final incremental formula's `open_interest_value_last` and `account_position_divergence` inputs without auto-rejecting the derived field.
+2. After that approval gate, feed only `a7source6_incremental_identity_feedback.csv` into A7MEM/CEM/UCB credit updates.
+   - Alias-expanded rows and pre-triage reward representatives remain audit/review evidence, not positive token credit.
+3. Add cluster-aware marginal credit for the `41` high-similarity review pairs without hard-killing possible independent information.
+4. Run the next broader reward-integrated search through the canonicalization -> lag-first -> identity -> strict-reward flow.
+   - Preserve the frozen reward/split/cost contract and checkpoint every shard.
+   - Keep the SafeDiv candidate in marginal review until denominator-floor and set-level evidence clears it.
 
 ## Blocked Claims
 

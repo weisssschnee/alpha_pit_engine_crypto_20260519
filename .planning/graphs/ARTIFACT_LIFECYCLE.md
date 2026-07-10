@@ -1,6 +1,6 @@
 # Artifact Lifecycle
 
-Generated: 2026-07-05
+Generated: 2026-07-10
 
 ## Purpose
 
@@ -61,6 +61,51 @@ Do not manually maintain thousands of raw graph nodes. The raw graph keeps file-
 - Keep bulky runtime outputs, queue shards, full logs, and repeated generated surfaces outside git unless explicitly needed.
 - Use `.gitignore` for generated graph/build/runtime folders when appropriate.
 - If a file is necessary only to reproduce a historical decision, prefer a compact report plus manifest over full raw output.
+
+## PC1 Retirement Policy
+
+The old company PC1 may be returned or wiped. Treat this as an asset-custody milestone, not ordinary runtime cleanup.
+
+Before deleting crypto-line assets from PC1, all of the following must be true:
+
+```text
+1. PC1 preserve pack exists locally and on PC2.
+2. Local and PC2 preserve-pack SHA256 match:
+   715F0A23E9AAB23794ED870A14AC5E0B35ED40C45AD15010A8FFE3245A383D07
+3. Local full data root exists:
+   G:\AlphaFactory_CryptoData
+4. PC2 executable subset exists:
+   D:\HermesWorker\data\crypto_line\AlphaFactory_CryptoData
+5. PC2 runtime/search/reward/preserve roots exist:
+   D:\HermesWorker\runtime\crypto_line
+6. Final PC1 inventory confirms no unique crypto report/script/runtime output remains outside the preserve pack or local/PC2 custody.
+7. Effective mother/contract gap pack exists locally and on PC2 with SHA256:
+   `A2ACA1BAED52933226B8A6F27AA02DED1276AAA618917952F2464F8108AA024D`
+8. Source-provenance pack exists locally and on PC2 with SHA256:
+   `FEDC028A25E59F498FE1EFAC4411CB96F0922FEA987E3262CC1FB226D439C487`
+9. Provenance sidecars are expanded on PC2 and include inventory, filelist, manifest, and log for `314300` source-evidence files.
+```
+
+Current PC1 residue known from audit:
+
+```text
+D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote
+D:\HermesWorker\GDrive\AlphaFactory_CryptoData
+D:\HermesWorker\runtime crypto/search outputs
+possible H:\crypto_migration_20260708 backup material
+```
+
+Custody status as of 2026-07-10:
+
+```text
+repo/runtime preserve pack: hash-closed locally and on PC2
+effective mother/contract gap: hash-closed locally and on PC2
+source-provenance evidence: hash-closed locally and on PC2
+PC2 provenance sidecars: expanded and directly queryable
+physical PC1 residue: still present, pending final wipe checklist
+```
+
+Delete only after a final inventory/wipe checklist. Do not infer deletion authorization from raw graph presence or from PC2 executable subset alone; PC2 is not a full 1:1 data mirror, but the effective mother/contract and source-provenance custody gaps are now closed.
 
 ## Current Interpretation
 

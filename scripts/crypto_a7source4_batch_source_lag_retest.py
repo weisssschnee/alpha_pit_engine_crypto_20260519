@@ -27,10 +27,13 @@ import pandas as pd  # noqa: E402
 
 from scripts.crypto_a7reward1_portfolio_reward_model import (  # noqa: E402
     A7AB4Evaluator,
+    compute_safediv_diagnostics,
     control_signal,
     dense_shift_matrix,
     load_numeric_for_queue,
+    signal_to_weights,
 )
+from alphafactory_crypto.engines.signal_identity import signal_identity_payload  # noqa: E402
 from scripts.crypto_a7search6_june_blind_adapter import (  # noqa: E402
     JUNE_END,
     JUNE_START,
@@ -91,14 +94,35 @@ def normalize_queue(path: Path, max_rows: int) -> pd.DataFrame:
 def summarize(metrics: pd.DataFrame) -> pd.DataFrame:
     if metrics.empty:
         return pd.DataFrame()
+    index_columns = ["source_blueprint_id", "blueprint_id", "horizon_h", "formula"]
+    metadata_columns = [
+        column
+        for column in [
+            "signal_weight_exact_fingerprint",
+            "signal_weight_quantized_fingerprint",
+            "signal_weight_similarity_sketch",
+            "safediv_node_count",
+            "safediv_denominator_min_abs_q01",
+            "safediv_denominator_min_abs_q05",
+            "safediv_denominator_min_q01_to_median",
+            "safediv_denominator_max_near_zero_ratio",
+            "safediv_local_rank_stability_min",
+            "signal_abs_p99_to_median",
+            "signal_top1pct_abs_mass_share",
+            "safediv_review_flag",
+            "safediv_review_reasons",
+        ]
+        if column in metrics.columns
+    ]
+    metadata = metrics[index_columns + metadata_columns].drop_duplicates(index_columns, keep="first")
     pivot = metrics.pivot_table(
-        index=["source_blueprint_id", "blueprint_id", "horizon_h", "formula"],
+        index=index_columns,
         columns="variant",
         values=["sortino", "nonoverlap_floor_sortino", "rankic_mean"],
         aggfunc="first",
     )
     pivot.columns = [f"{a}_{b}" for a, b in pivot.columns]
-    out = pivot.reset_index()
+    out = pivot.reset_index().merge(metadata, on=index_columns, how="left")
     required = [
         "sortino_source_lag_1h",
         "sortino_source_lag_2h",
@@ -146,6 +170,8 @@ def write_outputs(runtime: Path, report: Path, queue: pd.DataFrame, metrics: pd.
         "metric_rows": int(metrics.shape[0]),
         "eval_error_rows": int(errors.shape[0]),
         "source_lag_pass_count": pass_count,
+        "signal_identity_rows": int(summary["signal_weight_exact_fingerprint"].notna().sum()) if "signal_weight_exact_fingerprint" in summary else 0,
+        "safediv_review_rows": int(summary["safediv_review_flag"].fillna(False).astype(bool).sum()) if "safediv_review_flag" in summary else 0,
         "authorizes_next_search": False,
         "authorizes_alpha_proof": False,
         "authorizes_shadow_paper_live": False,
@@ -207,6 +233,9 @@ def run(input_path: Path, runtime: Path, report: Path, cost_bps: float, max_rows
     for idx, rec in enumerate(queue.to_dict("records"), start=1):
         try:
             signal = evaluator.eval(str(rec["expression"]))
+            identity = signal_identity_payload(signal_to_weights(signal))
+            safediv_diagnostics = compute_safediv_diagnostics(evaluator, str(rec["expression"]), signal)
+            diagnostics = {**identity, **safediv_diagnostics}
             orientation, pos_mean, neg_mean = orient_on_train(signal, train_label_24, train_mask, quote_volume, cost_bps)
             horizon = int(rec["horizon_h"])
             for variant, lag in variants.items():
@@ -216,11 +245,13 @@ def run(input_path: Path, runtime: Path, report: Path, cost_bps: float, max_rows
                 metric["orientation"] = orientation
                 metric["train_orientation_pos_net_mean_24h"] = pos_mean
                 metric["train_orientation_neg_net_mean_24h"] = neg_mean
+                metric.update(diagnostics)
                 rows.append(metric)
             ctrl = control_signal(signal, "one_bar_lag", rng)
             metric = split_metric_one(rec, horizon, "control_one_bar_lag", ctrl, labels[horizon], june_mask, quote_volume, cost_bps, orientation)
             metric["source_lag_hours"] = 1
             metric["orientation"] = orientation
+            metric.update(diagnostics)
             rows.append(metric)
         except Exception as exc:
             errors.append(

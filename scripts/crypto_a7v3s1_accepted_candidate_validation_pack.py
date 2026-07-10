@@ -54,7 +54,10 @@ def md_table(frame: pd.DataFrame, max_rows: int = 30) -> str:
     if frame.empty:
         return "_empty_"
     view = frame.head(max_rows).copy()
-    return view.to_markdown(index=False)
+    try:
+        return view.to_markdown(index=False)
+    except ImportError:
+        return "```text\n" + view.to_string(index=False) + "\n```"
 
 
 def field_set(row: pd.Series) -> set[str]:

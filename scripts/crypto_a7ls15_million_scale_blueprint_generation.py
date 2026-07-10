@@ -15,12 +15,17 @@ import pandas as pd
 
 
 REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 
 from crypto_a7ls1_multi_arm_blueprint_generation import (  # noqa: E402
     field_catalog as base_field_catalog,
     motif_expr,
     skeleton,
+)
+from alphafactory_crypto.engines.semantic_domains import (  # noqa: E402
+    canonicalize_semantic_expression,
+    is_numeric_constant_expression,
 )
 
 
@@ -372,6 +377,8 @@ def write_lane(
     target = int(lane["generated_budget"])
     generated = 0
     materialized = 0
+    semantic_rejected = 0
+    semantic_rewritten = 0
     counters: dict[str, Counter[str]] = {
         "semantic_pair": Counter(),
         "motif": Counter(),
@@ -394,6 +401,26 @@ def write_lane(
             active_streams.pop(idx)
             continue
         expr = row["expression"]
+        canonical_expr, semantic_reasons = canonicalize_semantic_expression(expr)
+        if is_numeric_constant_expression(canonical_expr) or any(
+            reason.startswith("constant_sign_") for reason in semantic_reasons
+        ):
+            semantic_rejected += 1
+            continue
+        if canonical_expr != expr:
+            semantic_rewritten += 1
+            row = dict(row)
+            row["expression"] = canonical_expr
+            row["blueprint_id"] = stable_id(
+                "a7ls15",
+                f"{lane_id}|{row['level']}|{canonical_expr}|{row['source_seed_id']}",
+            )
+            row["skeleton_key"] = skeleton(canonical_expr)
+            row["checkpoint_group"] = stable_id(
+                "chk",
+                f"{lane_id}|{row['semantic_pair']}|{row['motif']}|{row['skeleton_key']}",
+            )[:24]
+            expr = canonical_expr
         if expr in global_seen:
             continue
         global_seen.add(expr)
@@ -415,6 +442,8 @@ def write_lane(
             "lane_name": lane["lane_name"],
             "generated_rows": generated,
             "materialization_rows": materialized,
+            "semantic_rejected_rows": semantic_rejected,
+            "semantic_rewritten_rows": semantic_rewritten,
             "semantic_pair_count": len(counters["semantic_pair"]),
             "motif_count": len(counters["motif"]),
             "primary_axis_count": len(counters["primary_semantic"]),
@@ -527,6 +556,8 @@ def build() -> dict[str, Any]:
         "full_blueprint_index_path": str(full_path).replace("\\", "/"),
         "materialization_queue_path": str(materialization_path).replace("\\", "/"),
         "repo_sample_rows": sample_count[0],
+        "semantic_rejected_rows": int(summary["semantic_rejected_rows"].sum()),
+        "semantic_rewritten_rows": int(summary["semantic_rewritten_rows"].sum()),
         "lane_count": int(len(summary)),
         "authorizes_a7ls16_preflight": decision.startswith("PASS_"),
         "authorizes_a7ls17_company_materialization": False,
@@ -553,6 +584,8 @@ def build() -> dict[str, Any]:
                 f"- generated_total: {total_generated:,}",
                 f"- materialization_queue_rows: {materialization_rows:,}",
                 f"- materialization_shard_count: {shard_count:,}",
+                f"- semantic_rejected_rows: {manifest['semantic_rejected_rows']:,}",
+                f"- semantic_rewritten_rows: {manifest['semantic_rewritten_rows']:,}",
                 f"- full_blueprint_index_path: `{manifest['full_blueprint_index_path']}`",
                 f"- materialization_queue_path: `{manifest['materialization_queue_path']}`",
                 "",

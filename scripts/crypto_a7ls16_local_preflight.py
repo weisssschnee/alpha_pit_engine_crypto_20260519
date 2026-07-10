@@ -33,6 +33,7 @@ from scripts.crypto_a7ff25r6_dense_funding_state_audit import (  # noqa: E402
 )
 from scripts.crypto_a7ls2_sharded_materialization_wave import A7AB4Evaluator, expression_fields  # noqa: E402
 from alphafactory_crypto.engines.feature_algebra import parse_call  # noqa: E402
+from alphafactory_crypto.engines.formula_gen_v2_adapter import semantic_degeneracy_reasons  # noqa: E402
 
 
 RUNTIME = REPO / "runtime" / "a7ls16_local_preflight"
@@ -278,6 +279,8 @@ def build() -> dict[str, Any]:
 
     queue_path = Path(manifest15["materialization_queue_path"])
     queue = pd.read_csv(queue_path, low_memory=False)
+    semantic_reasons = queue["expression"].fillna("").astype(str).map(semantic_degeneracy_reasons)
+    semantic_degenerate_count = int(semantic_reasons.map(bool).sum())
     sample = balanced_sample(queue, SAMPLE_ROWS)
     sample.to_csv(RUNTIME / "a7ls16_preflight_sample.csv", index=False)
 
@@ -320,6 +323,8 @@ def build() -> dict[str, Any]:
             blockers.append("missing_fields")
         if unsupported_operator_count:
             blockers.append("unsupported_operators")
+        if semantic_degenerate_count:
+            blockers.append("known_semantic_degeneracy")
         decision = "PASS_A7LS16_LOCAL_SCHEMA_PREFLIGHT_READY_FOR_A7LS17_COMPANY_MATERIALIZATION" if not blockers else "HOLD_A7LS16_LOCAL_PREFLIGHT_REPAIR_REQUIRED"
         manifest = {
             "stage": "A7LS-16",
@@ -333,6 +338,7 @@ def build() -> dict[str, Any]:
             "missing_field_count": missing_count,
             "operator_count": int(len(operators)),
             "unsupported_operator_count": unsupported_operator_count,
+            "semantic_degenerate_count": semantic_degenerate_count,
             "lane_count": int(sample["a7ls_lane"].nunique()),
             "authorizes_a7ls17_company_materialization": decision.startswith("PASS_"),
             "authorizes_a7ls18_company_numeric": False,
@@ -363,6 +369,7 @@ def build() -> dict[str, Any]:
                     f"- missing_field_count: {missing_count}",
                     f"- operator_count: {len(operators)}",
                     f"- unsupported_operator_count: {unsupported_operator_count}",
+                    f"- semantic_degenerate_count: {semantic_degenerate_count}",
                     "",
                     "## Lane Summary",
                     "",
@@ -462,6 +469,8 @@ def build() -> dict[str, Any]:
         blockers.append("activity_ok_rate_below_0p60")
     if int(lane_summary["activity_ok_rows"].gt(0).sum()) < 3:
         blockers.append("active_lane_count_lt_3")
+    if semantic_degenerate_count:
+        blockers.append("known_semantic_degeneracy")
     decision = "PASS_A7LS16_LOCAL_PREFLIGHT_READY_FOR_A7LS17_COMPANY_MATERIALIZATION" if not blockers else "HOLD_A7LS16_LOCAL_PREFLIGHT_REPAIR_REQUIRED"
 
     manifest = {
@@ -474,6 +483,7 @@ def build() -> dict[str, Any]:
         "requested_field_count": int(len(fields)),
         "missing_field_count": missing_count,
         "eval_failure_count": eval_failure_count,
+        "semantic_degenerate_count": semantic_degenerate_count,
         "activity_ok_rate": activity_ok_rate,
         "loaded_symbol_count": int(len(symbols)),
         "timestamp_count": int(len(timestamps)),
@@ -502,6 +512,7 @@ def build() -> dict[str, Any]:
                 f"- requested_field_count: {len(fields)}",
                 f"- missing_field_count: {missing_count}",
                 f"- eval_failure_count: {eval_failure_count}",
+                f"- semantic_degenerate_count: {semantic_degenerate_count}",
                 f"- activity_ok_rate: {activity_ok_rate:.4f}",
                 "",
                 "## Lane Summary",

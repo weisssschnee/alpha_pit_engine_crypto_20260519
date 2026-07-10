@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -10,6 +11,19 @@ from typing import Any
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
 from pandas.errors import EmptyDataError
+
+
+REPO = Path(__file__).resolve().parents[1]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+
+from scripts.crypto_a7reward1_portfolio_reward_model import (  # noqa: E402
+    accepted_for_next_search,
+    aggregate_rewards,
+    apply_source_lag_policy,
+    load_source_lag_passes,
+    load_source_policy,
+)
 
 
 DEFAULT_RUN_ROOT = Path(
@@ -118,12 +132,28 @@ def enrich_with_queue(frame: pd.DataFrame, queue: pd.DataFrame) -> pd.DataFrame:
             "search_role",
             "production_key",
             "queue_shard_id",
+            "representative_blueprint_id",
+            "is_signal_identity_representative",
+            "signal_weight_exact_fingerprint",
+            "signal_weight_quantized_fingerprint",
         ]
         if col in queue.columns
     ]
     lookup = queue[keep].drop_duplicates("blueprint_id", keep="first").copy()
     merged = out.merge(lookup, on="blueprint_id", how="left", suffixes=("", "_queue"))
-    for col in ["expression", "primary_field", "secondary_field", "level", "candidate_role", "search_role", "production_key"]:
+    for col in [
+        "expression",
+        "primary_field",
+        "secondary_field",
+        "level",
+        "candidate_role",
+        "search_role",
+        "production_key",
+        "representative_blueprint_id",
+        "is_signal_identity_representative",
+        "signal_weight_exact_fingerprint",
+        "signal_weight_quantized_fingerprint",
+    ]:
         qcol = f"{col}_queue"
         if qcol in merged.columns:
             if col in merged.columns:
@@ -177,11 +207,62 @@ def status_audit(run_root: Path, manifests: pd.DataFrame) -> pd.DataFrame:
     return status
 
 
+def expand_exact_signal_aliases(frame: pd.DataFrame, alias_map: pd.DataFrame) -> pd.DataFrame:
+    if frame.empty or alias_map.empty:
+        return frame.copy()
+    required = {"blueprint_id", "representative_blueprint_id"}
+    if not required.issubset(alias_map.columns):
+        raise RuntimeError(f"alias map missing columns: {sorted(required - set(alias_map.columns))}")
+    aliases = alias_map.copy()
+    aliases["representative_blueprint_id"] = aliases["representative_blueprint_id"].astype(str)
+    aliases["blueprint_id"] = aliases["blueprint_id"].astype(str)
+    out = frame.copy()
+    out["blueprint_id"] = out["blueprint_id"].astype(str)
+    base_columns = list(out.columns)
+    merged = out.merge(
+        aliases,
+        left_on="blueprint_id",
+        right_on="representative_blueprint_id",
+        how="inner",
+        suffixes=("", "_alias"),
+    )
+    merged["representative_evaluated_blueprint_id"] = merged["blueprint_id"]
+    merged["blueprint_id"] = merged["blueprint_id_alias"].astype(str)
+    overlay_columns = [
+        "expression",
+        "semantic_pair",
+        "motif",
+        "skeleton_key",
+        "signal_weight_exact_fingerprint",
+        "signal_weight_quantized_fingerprint",
+        "signal_weight_similarity_sketch",
+        "safediv_node_count",
+        "safediv_denominator_min_abs_q01",
+        "safediv_denominator_min_abs_q05",
+        "safediv_denominator_min_q01_to_median",
+        "safediv_denominator_max_near_zero_ratio",
+        "safediv_local_rank_stability_min",
+        "signal_abs_p99_to_median",
+        "signal_top1pct_abs_mass_share",
+        "safediv_review_flag",
+        "safediv_review_reasons",
+    ]
+    for column in overlay_columns:
+        alias_column = f"{column}_alias"
+        if alias_column in merged.columns:
+            merged[column] = merged[alias_column]
+    keep = list(dict.fromkeys([*base_columns, *overlay_columns, "representative_evaluated_blueprint_id"]))
+    return merged[[column for column in keep if column in merged.columns]].copy()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-root", type=Path, default=DEFAULT_RUN_ROOT)
     parser.add_argument("--runtime", type=Path, default=DEFAULT_RUNTIME)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument("--alias-map", type=Path)
+    parser.add_argument("--source-policy", type=Path)
+    parser.add_argument("--source-lag-summary", type=Path)
     args = parser.parse_args()
 
     run_root = args.run_root
@@ -190,11 +271,33 @@ def main() -> None:
 
     queue = collect_queue(run_root)
     manifests = collect_manifests(run_root)
-    accepted = enrich_with_queue(collect_file(run_root, "a7reward1_accepted_for_next_search.csv"), queue)
-    rejections = enrich_with_queue(collect_file(run_root, "a7reward1_validation_gate_rejections.csv"), queue)
-    rewards = enrich_with_queue(collect_file(run_root, "a7reward1_candidate_reward_leaderboard.csv"), queue)
     split_metrics = collect_file(run_root, "a7reward1_split_reward_metrics.csv")
     eval_errors = collect_file(run_root, "a7reward1_eval_errors.csv")
+    alias_map = read_csv(args.alias_map) if args.alias_map else pd.DataFrame()
+    if not alias_map.empty:
+        if not args.source_policy or not args.source_lag_summary:
+            raise RuntimeError("alias expansion requires --source-policy and --source-lag-summary")
+        split_metrics = expand_exact_signal_aliases(split_metrics, alias_map)
+        eval_errors = expand_exact_signal_aliases(eval_errors, alias_map)
+        rewards = aggregate_rewards(split_metrics)
+        source_policy = load_source_policy(args.source_policy)
+        source_lag_pass_ids, source_lag_pass_formulas = load_source_lag_passes(args.source_lag_summary)
+        rewards = apply_source_lag_policy(
+            rewards,
+            source_policy,
+            source_lag_pass_ids,
+            source_lag_pass_formulas,
+        )
+        accepted = accepted_for_next_search(rewards)
+        rejections = rewards[~rewards.index.isin(accepted.index)].copy()
+        queue = alias_map.copy()
+    else:
+        accepted = collect_file(run_root, "a7reward1_accepted_for_next_search.csv")
+        rejections = collect_file(run_root, "a7reward1_validation_gate_rejections.csv")
+        rewards = collect_file(run_root, "a7reward1_candidate_reward_leaderboard.csv")
+    accepted = enrich_with_queue(accepted, queue)
+    rejections = enrich_with_queue(rejections, queue)
+    rewards = enrich_with_queue(rewards, queue)
     status = status_audit(run_root, manifests)
     reason_summary = explode_reasons(rejections)
 
@@ -220,6 +323,12 @@ def main() -> None:
     accepted_horizon_summary = summary(accepted, ["horizon_h"])
     accepted_pair_motif_summary = summary(accepted, ["semantic_pair", "motif"])
     decision_summary = summary(manifests, ["decision"])
+    if "is_signal_identity_representative" in accepted.columns:
+        representative_feedback = accepted[
+            accepted["is_signal_identity_representative"].fillna(False).astype(bool)
+        ].copy()
+    else:
+        representative_feedback = accepted.copy()
 
     outputs = {
         "accepted": runtime / "a7v3s0_reward_accepted_enriched.csv",
@@ -236,6 +345,7 @@ def main() -> None:
         "horizon_summary": runtime / "a7v3s0_reward_accepted_horizon_summary.csv",
         "pair_motif_summary": runtime / "a7v3s0_reward_accepted_pair_motif_summary.csv",
         "decision_summary": runtime / "a7v3s0_reward_decision_summary.csv",
+        "representative_feedback": runtime / "a7v3s0_reward_identity_representative_feedback.csv",
     }
     accepted.to_csv(outputs["accepted"], index=False)
     unique_best.to_csv(outputs["unique_best"], index=False)
@@ -251,6 +361,7 @@ def main() -> None:
     accepted_horizon_summary.to_csv(outputs["horizon_summary"], index=False)
     accepted_pair_motif_summary.to_csv(outputs["pair_motif_summary"], index=False)
     decision_summary.to_csv(outputs["decision_summary"], index=False)
+    representative_feedback.to_csv(outputs["representative_feedback"], index=False)
 
     expected_shards = len(pd.read_csv(run_root / "a7v3s0_reward_shard_plan.csv")) if (run_root / "a7v3s0_reward_shard_plan.csv").exists() else 0
     manifest_count = int(manifests.shape[0])
@@ -259,8 +370,8 @@ def main() -> None:
     accepted_expression_missing = int(accepted["formula"].fillna("").astype(str).eq("").sum()) if not accepted.empty else 0
     status_conflicts = int(status["status_manifest_conflict"].sum()) if not status.empty and "status_manifest_conflict" in status else 0
     eval_error_rows = int(eval_errors.shape[0])
-    hard_reject_rows = int(pd.to_numeric(manifests.get("hard_reject_rows", pd.Series(dtype=float)), errors="coerce").fillna(0).sum())
-    valid_reward_rows = int(pd.to_numeric(manifests.get("valid_reward_rows", pd.Series(dtype=float)), errors="coerce").fillna(0).sum())
+    hard_reject_rows = int(rewards["hard_reject"].fillna(False).astype(bool).sum()) if "hard_reject" in rewards else 0
+    valid_reward_rows = int((~rewards["hard_reject"].fillna(True).astype(bool)).sum()) if "hard_reject" in rewards else 0
 
     decision = (
         "PASS_A7V3S0_REWARD_SHARDED_AGGREGATE_READY"
@@ -285,6 +396,13 @@ def main() -> None:
         "eval_error_rows": eval_error_rows,
         "hard_reject_rows": hard_reject_rows,
         "valid_reward_rows": valid_reward_rows,
+        "representative_reward_queue_rows": int(queue["is_signal_identity_representative"].fillna(False).astype(bool).sum()) if "is_signal_identity_representative" in queue else int(queue.shape[0]),
+        "expanded_alias_rows": int(alias_map.shape[0]) if not alias_map.empty else 0,
+        "exact_signal_alias_rows_saved": int(alias_map.shape[0] - alias_map["representative_blueprint_id"].nunique()) if not alias_map.empty else 0,
+        "identity_representative_feedback_rows": int(representative_feedback.shape[0]),
+        "identity_representative_feedback_unique_blueprints": int(representative_feedback["blueprint_id"].nunique()) if not representative_feedback.empty else 0,
+        "safediv_review_rows": int(rewards["safediv_review_flag"].fillna(False).astype(bool).sum()) if "safediv_review_flag" in rewards else 0,
+        "alias_map": str(args.alias_map) if args.alias_map else "",
         "launcher_status_conflicts": status_conflicts,
         "authorizes_next_validation_pack": decision.startswith("PASS"),
         "authorizes_alpha_proof": False,

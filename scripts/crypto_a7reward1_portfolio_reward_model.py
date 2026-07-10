@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -50,6 +51,7 @@ from scripts.crypto_a7ff8_expanded_numeric_probe import (  # noqa: E402
     expression_fields,
     load_upper_numeric,
 )
+from alphafactory_crypto.engines.semantic_domains import collect_operator_calls  # noqa: E402
 
 
 DEFAULT_QUEUE = REPO / "runtime" / "a7ls30_productive_numeric_acceptance_20260610" / "a7ls30_selected_top240.csv"
@@ -114,6 +116,12 @@ def read_json(path: Path) -> dict[str, Any]:
     if not path.exists() or path.stat().st_size == 0:
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def truthy(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    return str(value).strip().lower() in {"true", "1", "yes", "y"}
 
 
 def md_table(df: pd.DataFrame, max_rows: int = 40) -> str:
@@ -580,6 +588,32 @@ def finite_corr(x: np.ndarray, y: np.ndarray) -> float:
     return float(np.corrcoef(xx, yy)[0, 1])
 
 
+def finite_corr_columns(x: np.ndarray, y: np.ndarray) -> np.ndarray:
+    """Vectorized equivalent of finite_corr for asset-by-time matrices."""
+    xx = np.asarray(x, dtype=np.float64)
+    yy = np.asarray(y, dtype=np.float64)
+    if xx.shape != yy.shape or xx.ndim != 2:
+        raise ValueError(f"finite_corr_columns shape mismatch: {xx.shape} vs {yy.shape}")
+    mask = np.isfinite(xx) & np.isfinite(yy)
+    counts = mask.sum(axis=0).astype(np.float64, copy=False)
+    x0 = np.where(mask, xx, 0.0)
+    y0 = np.where(mask, yy, 0.0)
+    sum_x = x0.sum(axis=0)
+    sum_y = y0.sum(axis=0)
+    safe_counts = np.where(counts > 0, counts, 1.0)
+    x0 -= sum_x.reshape(1, -1) / safe_counts.reshape(1, -1)
+    y0 -= sum_y.reshape(1, -1) / safe_counts.reshape(1, -1)
+    x0[~mask] = 0.0
+    y0[~mask] = 0.0
+    cov_sum = np.einsum("ij,ij->j", x0, y0)
+    var_x = np.einsum("ij,ij->j", x0, x0)
+    var_y = np.einsum("ij,ij->j", y0, y0)
+    denom = np.sqrt(var_x * var_y)
+    valid = (counts >= 8) & (var_x > counts * 1e-24) & (var_y > counts * 1e-24)
+    out = np.divide(cov_sum, denom, out=np.full_like(cov_sum, np.nan), where=valid)
+    return out
+
+
 def rank_pct(values: np.ndarray) -> np.ndarray:
     arr = np.asarray(values, dtype=np.float64)
     if bn is not None:
@@ -591,15 +625,137 @@ def rank_pct(values: np.ndarray) -> np.ndarray:
     return pd.DataFrame(arr).rank(axis=0, pct=True, method="average").to_numpy(dtype=np.float64)
 
 
-def signal_to_weights(signal: np.ndarray, gross: float = 1.0, max_abs_weight: float = 0.03) -> np.ndarray:
-    ranks = rank_pct(signal)
-    centered = ranks - np.nanmean(ranks, axis=0, keepdims=True)
+def ranked_signal_to_weights(ranks: np.ndarray, gross: float = 1.0, max_abs_weight: float = 0.03) -> np.ndarray:
+    finite_counts = np.isfinite(ranks).sum(axis=0, keepdims=True)
+    rank_means = np.divide(
+        np.nansum(ranks, axis=0, keepdims=True),
+        finite_counts,
+        out=np.zeros((1, ranks.shape[1]), dtype=np.float64),
+        where=finite_counts > 0,
+    )
+    centered = ranks - rank_means
     centered[~np.isfinite(centered)] = 0.0
     denom = np.nansum(np.abs(centered), axis=0, keepdims=True)
     weights = np.divide(centered, denom, out=np.zeros_like(centered), where=denom > 1e-12) * gross
     weights = np.clip(weights, -max_abs_weight, max_abs_weight)
     denom2 = np.nansum(np.abs(weights), axis=0, keepdims=True)
     return np.divide(weights, denom2, out=np.zeros_like(weights), where=denom2 > 1e-12) * gross
+
+
+def signal_to_weights(signal: np.ndarray, gross: float = 1.0, max_abs_weight: float = 0.03) -> np.ndarray:
+    return ranked_signal_to_weights(rank_pct(signal), gross, max_abs_weight)
+
+
+def _bounded_flat_sample(values: np.ndarray, max_values: int = 250_000) -> np.ndarray:
+    flat = np.asarray(values, dtype=np.float64).ravel(order="C")
+    if flat.size > max_values:
+        flat = flat[:: max(1, math.ceil(flat.size / max_values))]
+    return flat[np.isfinite(flat)]
+
+
+def _rank_1d(values: np.ndarray) -> np.ndarray:
+    order = np.argsort(values, kind="mergesort")
+    ranks = np.empty(len(values), dtype=np.float64)
+    ranks[order] = np.arange(len(values), dtype=np.float64)
+    return ranks
+
+
+def compute_safediv_diagnostics(
+    evaluator: A7AB4Evaluator,
+    expression: str,
+    signal: np.ndarray,
+) -> dict[str, Any]:
+    calls = collect_operator_calls(expression, "SafeDiv")
+    if not calls:
+        return {
+            "safediv_node_count": 0,
+            "safediv_denominator_min_abs_q01": np.nan,
+            "safediv_denominator_min_abs_q05": np.nan,
+            "safediv_denominator_min_q01_to_median": np.nan,
+            "safediv_denominator_max_near_zero_ratio": 0.0,
+            "safediv_local_rank_stability_min": np.nan,
+            "signal_abs_p99_to_median": np.nan,
+            "signal_top1pct_abs_mass_share": np.nan,
+            "safediv_review_flag": False,
+            "safediv_review_reasons": "",
+        }
+    signal_abs = np.abs(_bounded_flat_sample(signal))
+    signal_median = float(np.nanmedian(signal_abs)) if signal_abs.size else np.nan
+    signal_p99 = float(np.nanquantile(signal_abs, 0.99)) if signal_abs.size else np.nan
+    signal_tail_ratio = (
+        signal_p99 / max(signal_median, 1e-12)
+        if np.isfinite(signal_p99) and np.isfinite(signal_median)
+        else np.nan
+    )
+    if signal_abs.size and float(np.nansum(signal_abs)) > 0:
+        threshold = float(np.nanquantile(signal_abs, 0.99))
+        top_mass_share = float(np.nansum(signal_abs[signal_abs >= threshold]) / np.nansum(signal_abs))
+    else:
+        top_mass_share = np.nan
+
+    q01_values: list[float] = []
+    q05_values: list[float] = []
+    q01_median_ratios: list[float] = []
+    near_zero_ratios: list[float] = []
+    rank_stabilities: list[float] = []
+    for _, args in calls:
+        if len(args) != 2:
+            continue
+        numerator = np.asarray(evaluator.eval(args[0]), dtype=np.float64).ravel(order="C")
+        denominator = np.asarray(evaluator.eval(args[1]), dtype=np.float64).ravel(order="C")
+        step = max(1, math.ceil(len(denominator) / 250_000))
+        numerator = numerator[::step]
+        denominator = denominator[::step]
+        valid_denominator = np.isfinite(denominator)
+        denominator_abs = np.abs(denominator[valid_denominator])
+        if not denominator_abs.size:
+            continue
+        median_abs = float(np.nanmedian(denominator_abs))
+        q01 = float(np.nanquantile(denominator_abs, 0.01))
+        q05 = float(np.nanquantile(denominator_abs, 0.05))
+        adaptive_floor = max(1e-12, median_abs * 1e-3)
+        q01_values.append(q01)
+        q05_values.append(q05)
+        q01_median_ratios.append(q01 / max(median_abs, 1e-12))
+        near_zero_ratios.append(float(np.mean(denominator_abs <= adaptive_floor)))
+
+        valid = np.isfinite(numerator) & np.isfinite(denominator) & (np.abs(denominator) > 1e-12)
+        if int(valid.sum()) >= 32:
+            raw_ratio = numerator[valid] / denominator[valid]
+            stable_denominator = np.copysign(np.maximum(np.abs(denominator[valid]), adaptive_floor), denominator[valid])
+            stable_ratio = numerator[valid] / stable_denominator
+            finite = np.isfinite(raw_ratio) & np.isfinite(stable_ratio)
+            if int(finite.sum()) >= 32:
+                raw_rank = _rank_1d(raw_ratio[finite])
+                stable_rank = _rank_1d(stable_ratio[finite])
+                rank_stabilities.append(float(np.corrcoef(raw_rank, stable_rank)[0, 1]))
+
+    min_q01_median_ratio = min(q01_median_ratios) if q01_median_ratios else np.nan
+    max_near_zero_ratio = max(near_zero_ratios) if near_zero_ratios else 0.0
+    min_rank_stability = min(rank_stabilities) if rank_stabilities else np.nan
+    review_reasons: list[str] = []
+    if np.isfinite(min_q01_median_ratio) and min_q01_median_ratio < 0.03:
+        review_reasons.append("denominator_q01_below_3pct_median")
+    if calls and max_near_zero_ratio > 0.005:
+        review_reasons.append("denominator_near_zero_share_above_0p5pct")
+    if calls and np.isfinite(min_rank_stability) and min_rank_stability < 0.98:
+        review_reasons.append("denominator_floor_changes_local_rank")
+    if calls and np.isfinite(signal_tail_ratio) and signal_tail_ratio > 100.0:
+        review_reasons.append("signal_p99_to_median_above_100")
+    if calls and np.isfinite(top_mass_share) and top_mass_share > 0.25:
+        review_reasons.append("signal_top1pct_abs_mass_above_25pct")
+    return {
+        "safediv_node_count": int(len(calls)),
+        "safediv_denominator_min_abs_q01": min(q01_values) if q01_values else np.nan,
+        "safediv_denominator_min_abs_q05": min(q05_values) if q05_values else np.nan,
+        "safediv_denominator_min_q01_to_median": min_q01_median_ratio,
+        "safediv_denominator_max_near_zero_ratio": max_near_zero_ratio,
+        "safediv_local_rank_stability_min": min_rank_stability,
+        "signal_abs_p99_to_median": signal_tail_ratio,
+        "signal_top1pct_abs_mass_share": top_mass_share,
+        "safediv_review_flag": bool(review_reasons),
+        "safediv_review_reasons": ";".join(review_reasons),
+    }
 
 
 def turnover_cost(weights: np.ndarray, cost_bps: float) -> np.ndarray:
@@ -666,15 +822,19 @@ def split_metrics(
     cost_bps: float,
     orientation: float,
     raw_label_rank: np.ndarray | None = None,
+    prepared_signal: tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray] | None = None,
 ) -> list[dict[str, Any]]:
-    weights = signal_to_weights(signal * orientation)
+    if prepared_signal is None:
+        rank_signal = rank_pct(signal * orientation)
+        weights = ranked_signal_to_weights(rank_signal)
+        cost = turnover_cost(weights, cost_bps)
+        capacity_series = np.nansum(np.abs(weights) * quote_volume, axis=0)
+    else:
+        weights, cost, rank_signal, capacity_series = prepared_signal
     gross_forward = np.nansum(weights * raw_label, axis=0)
-    cost = turnover_cost(weights, cost_bps)
     net = gross_forward - cost
     periods_per_year = 24.0 * 365.0 / max(1, horizon)
-    rank_signal = rank_pct(signal * orientation)
     rank_label = raw_label_rank if raw_label_rank is not None else rank_pct(raw_label)
-    capacity_series = np.nansum(np.abs(weights) * quote_volume, axis=0)
     rows: list[dict[str, Any]] = []
     for split_name in ALL_EVAL_SPLITS:
         mask = split == split_name
@@ -685,8 +845,8 @@ def split_metrics(
         sig_sub = rank_signal[:, mask]
         lab_sub = raw_label[:, mask]
         rank_lab_sub = rank_label[:, mask]
-        ic_values = [finite_corr(sig_sub[:, i], lab_sub[:, i]) for i in range(sig_sub.shape[1])]
-        rankic_values = [finite_corr(sig_sub[:, i], rank_lab_sub[:, i]) for i in range(sig_sub.shape[1])]
+        ic_values = finite_corr_columns(sig_sub, lab_sub)
+        rankic_values = finite_corr_columns(sig_sub, rank_lab_sub)
         no_sortino_median, no_sortino_floor = nonoverlap_metric(ret, horizon, lambda x: sortino(x, periods_per_year))
         no_sharpe_median, no_sharpe_floor = nonoverlap_metric(ret, horizon, lambda x: sharpe(x, periods_per_year))
         rows.append(
@@ -721,6 +881,63 @@ def split_metrics(
     return rows
 
 
+def prepare_signal_arrays(
+    signal: np.ndarray,
+    quote_volume: np.ndarray,
+    cost_bps: float,
+    orientation: float,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    rank_signal = rank_pct(signal * orientation)
+    weights = ranked_signal_to_weights(rank_signal)
+    cost = turnover_cost(weights, cost_bps)
+    capacity_series = np.nansum(np.abs(weights) * quote_volume, axis=0)
+    return weights, cost, rank_signal, capacity_series
+
+
+def transform_prepared_control(
+    prepared_signal: tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray],
+    variant: str,
+    rng: np.random.Generator,
+    quote_volume: np.ndarray,
+    cost_bps: float,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    weights, _, rank_signal, _ = prepared_signal
+    if variant == "one_bar_lag":
+        transformed_rank = dense_shift_matrix(rank_signal, 1)
+        transformed_weights = np.nan_to_num(dense_shift_matrix(weights, 1), nan=0.0)
+    elif variant == "stale_168h":
+        transformed_rank = dense_shift_matrix(rank_signal, 168)
+        transformed_weights = np.nan_to_num(dense_shift_matrix(weights, 168), nan=0.0)
+    elif variant == "time_shuffle":
+        permutation = rng.permutation(rank_signal.shape[1])
+        transformed_rank = rank_signal[:, permutation]
+        transformed_weights = weights[:, permutation]
+    elif variant == "symbol_shuffle":
+        permutation = rng.permutation(rank_signal.shape[0])
+        transformed_rank = rank_signal[permutation, :]
+        transformed_weights = weights[permutation, :]
+    else:
+        raise ValueError(f"prepared control does not support variant: {variant}")
+    cost = turnover_cost(transformed_weights, cost_bps)
+    capacity_series = np.nansum(np.abs(transformed_weights) * quote_volume, axis=0)
+    return transformed_weights, cost, transformed_rank, capacity_series
+
+
+def select_train_orientation(
+    positive: tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray],
+    negative: tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray],
+    raw_label: np.ndarray,
+    orientation_mask: np.ndarray,
+) -> float:
+    positive_weights, positive_cost, _, _ = positive
+    negative_weights, negative_cost, _, _ = negative
+    positive_net = np.nansum(positive_weights * raw_label, axis=0) - positive_cost
+    negative_net = np.nansum(negative_weights * raw_label, axis=0) - negative_cost
+    positive_mean = float(np.nanmean(positive_net[orientation_mask]))
+    negative_mean = float(np.nanmean(negative_net[orientation_mask]))
+    return 1.0 if positive_mean >= negative_mean else -1.0
+
+
 def control_signal(signal: np.ndarray, variant: str, rng: np.random.Generator) -> np.ndarray:
     if variant == "one_bar_lag":
         return dense_shift_matrix(signal, 1)
@@ -735,11 +952,23 @@ def control_signal(signal: np.ndarray, variant: str, rng: np.random.Generator) -
     raise ValueError(f"unknown control variant: {variant}")
 
 
+def deterministic_control_rng(expression: str, horizon: int, variant: str) -> np.random.Generator:
+    # Common random numbers make control comparisons invariant to candidate ID,
+    # formula spelling, shard assignment, and evaluation order.
+    del expression
+    payload = f"a7reward1-control-v2|{int(horizon)}|{variant}".encode("utf-8")
+    seed = int.from_bytes(hashlib.sha256(payload).digest()[:8], "little", signed=False)
+    return np.random.default_rng(seed)
+
+
 def load_numeric_for_queue(
     queue: pd.DataFrame,
     hours_per_split: int,
     train_hours_per_split: int,
+    numeric_cache: Path | None = None,
 ) -> tuple[pd.DatetimeIndex, np.ndarray, dict[str, np.ndarray], dict[str, np.ndarray]]:
+    if numeric_cache is not None:
+        return load_numeric_cache(numeric_cache, queue, hours_per_split, train_hours_per_split)
     requested = {"trade_close", "trade_quote_volume"}
     for expression in queue["expression"].dropna().astype(str):
         requested.update(expression_fields(expression))
@@ -818,6 +1047,130 @@ def load_numeric_for_queue(
     return timestamps, split, numeric, groups
 
 
+def _cache_array_name(kind: str, key: str) -> str:
+    digest = hashlib.sha256(key.encode("utf-8")).hexdigest()[:12]
+    return f"{kind}_{digest}.npy"
+
+
+def _queue_expression_fingerprint(queue: pd.DataFrame) -> str:
+    expressions = sorted(queue.get("expression", pd.Series(dtype=str)).dropna().astype(str))
+    return hashlib.sha256("\n".join(expressions).encode("utf-8")).hexdigest()
+
+
+def build_numeric_cache(
+    cache_dir: Path,
+    queue: pd.DataFrame,
+    hours_per_split: int,
+    train_hours_per_split: int,
+) -> dict[str, Any]:
+    timestamps, split, numeric, groups = load_numeric_for_queue(
+        queue,
+        hours_per_split,
+        train_hours_per_split,
+        numeric_cache=None,
+    )
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    numeric_files: dict[str, str] = {}
+    group_files: dict[str, str] = {}
+    for key, values in sorted(numeric.items()):
+        filename = _cache_array_name("numeric", key)
+        np.save(cache_dir / filename, np.asarray(values), allow_pickle=False)
+        numeric_files[key] = filename
+    for key, values in sorted(groups.items()):
+        filename = _cache_array_name("group", key)
+        array = np.asarray(values)
+        if array.dtype == object:
+            array = array.astype(str)
+        np.save(cache_dir / filename, array, allow_pickle=False)
+        group_files[key] = filename
+    timestamp_file = "timestamps_ns.npy"
+    split_file = "split.npy"
+    np.save(cache_dir / timestamp_file, timestamps.asi8, allow_pickle=False)
+    np.save(cache_dir / split_file, np.asarray(split, dtype=str), allow_pickle=False)
+    manifest = {
+        "stage": "A7REWARD-1-SHARED-NUMERIC-CACHE",
+        "version": 1,
+        "generated_at": now_utc(),
+        "decision": "PASS_A7REWARD1_SHARED_NUMERIC_CACHE_READY",
+        "queue_rows": int(len(queue)),
+        "queue_expression_fingerprint": _queue_expression_fingerprint(queue),
+        "hours_per_split": int(hours_per_split),
+        "train_hours_per_split": int(train_hours_per_split),
+        "timestamp_count": int(len(timestamps)),
+        "timestamp_timezone": str(timestamps.tz) if timestamps.tz is not None else "",
+        "timestamp_file": timestamp_file,
+        "split_file": split_file,
+        "numeric_files": numeric_files,
+        "group_files": group_files,
+        "numeric_shapes": {key: list(np.asarray(values).shape) for key, values in sorted(numeric.items())},
+        "numeric_dtypes": {key: str(np.asarray(values).dtype) for key, values in sorted(numeric.items())},
+        "base_panel_root": str(BASE_DIR),
+        "latent_panel": str(LATENT_PANEL),
+        "upper_regime_panel": str(UPPER_REGIME_PANEL),
+        "authorizes_alpha_proof": False,
+        "authorizes_shadow_paper_live": False,
+    }
+    write_json(cache_dir / "a7reward1_numeric_cache_manifest.json", manifest)
+    return manifest
+
+
+def load_numeric_cache(
+    cache_dir: Path,
+    queue: pd.DataFrame,
+    hours_per_split: int,
+    train_hours_per_split: int,
+) -> tuple[pd.DatetimeIndex, np.ndarray, dict[str, np.ndarray], dict[str, np.ndarray]]:
+    manifest_path = cache_dir / "a7reward1_numeric_cache_manifest.json"
+    manifest = read_json(manifest_path)
+    if manifest.get("decision") != "PASS_A7REWARD1_SHARED_NUMERIC_CACHE_READY":
+        raise RuntimeError(f"numeric cache is incomplete: {manifest_path}")
+    if int(manifest.get("version", -1)) != 1:
+        raise RuntimeError(f"numeric cache version mismatch: {manifest.get('version')}")
+    if int(manifest.get("hours_per_split", -1)) != int(hours_per_split):
+        raise RuntimeError("numeric cache hours_per_split mismatch")
+    if int(manifest.get("train_hours_per_split", -1)) != int(train_hours_per_split):
+        raise RuntimeError("numeric cache train_hours_per_split mismatch")
+    expected_sources = {
+        "base_panel_root": BASE_DIR,
+        "latent_panel": LATENT_PANEL,
+        "upper_regime_panel": UPPER_REGIME_PANEL,
+    }
+    for manifest_key, current_path in expected_sources.items():
+        cached_path = str(manifest.get(manifest_key) or "")
+        current_normalized = os.path.normcase(os.path.abspath(str(current_path)))
+        cached_normalized = os.path.normcase(os.path.abspath(cached_path)) if cached_path else ""
+        if cached_normalized != current_normalized:
+            raise RuntimeError(
+                f"numeric cache source mismatch for {manifest_key}: {cached_path!r} != {str(current_path)!r}"
+            )
+    numeric_files = dict(manifest.get("numeric_files") or {})
+    required = {"trade_close", "trade_quote_volume"}
+    for expression in queue.get("expression", pd.Series(dtype=str)).dropna().astype(str):
+        required.update(expression_fields(expression))
+    missing = sorted(required - set(numeric_files))
+    if missing:
+        raise RuntimeError(f"numeric cache missing queue fields: {missing[:20]}")
+    numeric = {
+        key: np.load(cache_dir / filename, mmap_mode="r", allow_pickle=False)
+        for key, filename in numeric_files.items()
+    }
+    groups = {
+        key: np.load(cache_dir / filename, mmap_mode="r", allow_pickle=False)
+        for key, filename in dict(manifest.get("group_files") or {}).items()
+    }
+    timestamp_ns = np.load(cache_dir / str(manifest["timestamp_file"]), mmap_mode="r", allow_pickle=False)
+    timezone_name = str(manifest.get("timestamp_timezone") or "")
+    if timezone_name:
+        timestamps = pd.DatetimeIndex(pd.to_datetime(timestamp_ns, utc=True)).tz_convert(timezone_name)
+    else:
+        timestamps = pd.DatetimeIndex(pd.to_datetime(timestamp_ns))
+    split = np.load(cache_dir / str(manifest["split_file"]), mmap_mode="r", allow_pickle=False).astype(object)
+    expected_count = int(manifest.get("timestamp_count", -1))
+    if len(timestamps) != expected_count or any(values.shape[1] != expected_count for values in numeric.values()):
+        raise RuntimeError("numeric cache shape mismatch")
+    return timestamps, split, numeric, groups
+
+
 def evaluate_queue(
     queue: pd.DataFrame,
     hours_per_split: int,
@@ -827,10 +1180,16 @@ def evaluate_queue(
     orientation_extension_hours: int,
     checkpoint_dir: Path | None = None,
     checkpoint_every: int = 0,
+    numeric_cache: Path | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     if candidate_cap > 0:
         queue = queue.head(candidate_cap).copy()
-    timestamps, split, numeric, groups = load_numeric_for_queue(queue, hours_per_split, train_hours_per_split)
+    timestamps, split, numeric, groups = load_numeric_for_queue(
+        queue,
+        hours_per_split,
+        train_hours_per_split,
+        numeric_cache=numeric_cache,
+    )
     crash_like, regime_payload = regime_crash_like_mask(numeric, split)
     eval_split = split.copy()
     orientation_extension_mask = contiguous_orientation_extension_mask(
@@ -844,7 +1203,6 @@ def evaluate_queue(
     raw_labels = {h: horizon_label(numeric["trade_close"], timestamps, split, h) for h in HORIZONS}
     raw_label_ranks = {h: rank_pct(raw_labels[h]) for h in HORIZONS}
     quote_volume = numeric["trade_quote_volume"]
-    rng = np.random.default_rng(20260610)
     metric_rows: list[dict[str, Any]] = []
     error_rows: list[dict[str, Any]] = []
     total_rows = len(queue)
@@ -853,18 +1211,63 @@ def evaluate_queue(
         print(f"[A7REWARD1] evaluating {idx_row}/{total_rows} {cid}", flush=True)
         try:
             signal = evaluator.eval(str(row["expression"]))
+            candidate_metric_start = len(metric_rows)
+            safediv_diagnostics = compute_safediv_diagnostics(evaluator, str(row["expression"]), signal)
+            prepared_by_orientation = {
+                orientation: prepare_signal_arrays(signal, quote_volume, cost_bps, orientation)
+                for orientation in (1.0, -1.0)
+            }
             # Orientation is chosen on train only for each horizon, then frozen.
             for horizon in HORIZONS:
-                oriented_split = np.where(orientation_mask, "train_2024", "out_of_scope")
-                train_rows_pos = split_metrics(row, horizon, "orientation_probe", signal, raw_labels[horizon], oriented_split, quote_volume, cost_bps, 1.0, raw_label_ranks[horizon])
-                train_pos = next((x for x in train_rows_pos if x["split"] == "train_2024"), {})
-                train_rows_neg = split_metrics(row, horizon, "orientation_probe", signal, raw_labels[horizon], oriented_split, quote_volume, cost_bps, -1.0, raw_label_ranks[horizon])
-                train_neg = next((x for x in train_rows_neg if x["split"] == "train_2024"), {})
-                orientation = 1.0 if float(train_pos.get("net_mean", np.nan)) >= float(train_neg.get("net_mean", np.nan)) else -1.0
-                metric_rows.extend(split_metrics(row, horizon, "original", signal, raw_labels[horizon], eval_split, quote_volume, cost_bps, orientation, raw_label_ranks[horizon]))
+                orientation = select_train_orientation(
+                    prepared_by_orientation[1.0],
+                    prepared_by_orientation[-1.0],
+                    raw_labels[horizon],
+                    orientation_mask,
+                )
+                metric_rows.extend(
+                    split_metrics(
+                        row,
+                        horizon,
+                        "original",
+                        signal,
+                        raw_labels[horizon],
+                        eval_split,
+                        quote_volume,
+                        cost_bps,
+                        orientation,
+                        raw_label_ranks[horizon],
+                        prepared_by_orientation[orientation],
+                    )
+                )
                 for variant in CONTROL_VARIANTS:
-                    ctrl = control_signal(signal, variant, rng)
-                    metric_rows.extend(split_metrics(row, horizon, variant, ctrl, raw_labels[horizon], eval_split, quote_volume, cost_bps, orientation, raw_label_ranks[horizon]))
+                    if variant == "sign_flip":
+                        prepared_control = prepared_by_orientation[-orientation]
+                    else:
+                        prepared_control = transform_prepared_control(
+                            prepared_by_orientation[orientation],
+                            variant,
+                            deterministic_control_rng(str(row["expression"]), horizon, variant),
+                            quote_volume,
+                            cost_bps,
+                        )
+                    metric_rows.extend(
+                        split_metrics(
+                            row,
+                            horizon,
+                            variant,
+                            signal,
+                            raw_labels[horizon],
+                            eval_split,
+                            quote_volume,
+                            cost_bps,
+                            orientation,
+                            raw_label_ranks[horizon],
+                            prepared_control,
+                        )
+                    )
+            for metric in metric_rows[candidate_metric_start:]:
+                metric.update(safediv_diagnostics)
         except Exception as exc:  # keep the reward audit fail-open as data, not as silent loss
             error_rows.append({"blueprint_id": cid, "error": repr(exc), "expression": row.get("expression", "")})
         finally:
@@ -1102,6 +1505,16 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
                 "orientation_extension_requested_hours": sample.get("orientation_extension_requested_hours", np.nan),
                 "train_crash_like_hours": sample.get("train_crash_like_hours", np.nan),
                 "may_stress_hours": sample.get("may_stress_hours", np.nan),
+                "safediv_node_count": sample.get("safediv_node_count", 0),
+                "safediv_denominator_min_abs_q01": sample.get("safediv_denominator_min_abs_q01", np.nan),
+                "safediv_denominator_min_abs_q05": sample.get("safediv_denominator_min_abs_q05", np.nan),
+                "safediv_denominator_min_q01_to_median": sample.get("safediv_denominator_min_q01_to_median", np.nan),
+                "safediv_denominator_max_near_zero_ratio": sample.get("safediv_denominator_max_near_zero_ratio", 0.0),
+                "safediv_local_rank_stability_min": sample.get("safediv_local_rank_stability_min", np.nan),
+                "signal_abs_p99_to_median": sample.get("signal_abs_p99_to_median", np.nan),
+                "signal_top1pct_abs_mass_share": sample.get("signal_top1pct_abs_mass_share", np.nan),
+                "safediv_review_flag": truthy(sample.get("safediv_review_flag", False)),
+                "safediv_review_reasons": sample.get("safediv_review_reasons", ""),
                 "hard_reject": bool(hard_reject_reasons),
                 "hard_reject_reasons": ";".join(hard_reject_reasons),
             }
@@ -1203,6 +1616,8 @@ def main() -> None:
     parser.add_argument("--checkpoint-every", type=int, default=int(os.environ.get("A7REWARD_CHECKPOINT_EVERY", "8")))
     parser.add_argument("--source-policy", default=os.environ.get("A7REWARD_SOURCE_POLICY", str(DEFAULT_SOURCE_POLICY)))
     parser.add_argument("--source-lag-summary", default=os.environ.get("A7REWARD_SOURCE_LAG_SUMMARY", str(DEFAULT_SOURCE_LAG_SUMMARY)))
+    parser.add_argument("--numeric-cache", default=os.environ.get("A7REWARD_NUMERIC_CACHE", ""))
+    parser.add_argument("--build-numeric-cache-only", action="store_true")
     args = parser.parse_args()
 
     runtime = Path(args.runtime)
@@ -1212,6 +1627,24 @@ def main() -> None:
 
     contract = contract_payload()
     write_json(runtime / "a7reward1_reward_contract.json", contract)
+
+    if args.build_numeric_cache_only:
+        if not args.numeric_cache:
+            raise SystemExit("--build-numeric-cache-only requires --numeric-cache")
+        queue_path = Path(args.queue)
+        queue = read_csv(queue_path)
+        if queue.empty:
+            raise SystemExit(f"empty reward queue: {queue_path}")
+        if args.candidate_cap > 0:
+            queue = queue.head(args.candidate_cap).copy()
+        manifest = build_numeric_cache(
+            Path(args.numeric_cache),
+            queue,
+            args.hours_per_split,
+            args.train_hours_per_split,
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return
 
     smoke = run_synthetic_smoke()
     smoke.to_csv(runtime / "a7reward1_synthetic_smoke_leaderboard.csv", index=False)
@@ -1268,6 +1701,7 @@ def main() -> None:
         args.orientation_extension_hours,
         checkpoint_dir=runtime,
         checkpoint_every=args.checkpoint_every,
+        numeric_cache=Path(args.numeric_cache) if args.numeric_cache else None,
     )
     rewards = aggregate_rewards(metrics)
     source_policy_path = Path(args.source_policy)
@@ -1315,6 +1749,8 @@ def main() -> None:
         "candidate_cap": int(args.candidate_cap),
         "hours_per_split": int(args.hours_per_split),
         "train_hours_per_split": int(args.train_hours_per_split),
+        "numeric_cache": str(Path(args.numeric_cache)) if args.numeric_cache else "",
+        "numeric_cache_used": bool(args.numeric_cache),
         "orientation_extension_hours_requested": int(args.orientation_extension_hours),
         "orientation_train_hours": int(metrics["orientation_train_hours"].max()) if "orientation_train_hours" in metrics else 0,
         "orientation_extension_hours": int(metrics["orientation_extension_hours"].max()) if "orientation_extension_hours" in metrics else 0,
@@ -1335,6 +1771,7 @@ def main() -> None:
         "source_policy_fields": int(len(source_policy)),
         "source_lag_pass_ids": int(len(source_lag_pass_ids)),
         "source_lag_policy_reject_rows": int(rewards["source_lag_policy_reject"].sum()) if "source_lag_policy_reject" in rewards else 0,
+        "safediv_review_rows": int(rewards["safediv_review_flag"].fillna(False).astype(bool).sum()) if "safediv_review_flag" in rewards else 0,
         "top_pareto_blueprint_id": str(top_queue.iloc[0]["blueprint_id"]) if not top_queue.empty else "",
         "top_pareto_rank": int(top_queue.iloc[0]["pareto_rank"]) if not top_queue.empty else 0,
         "top_pareto_objective_pass_count": int(top_queue.iloc[0]["objective_pass_count"]) if not top_queue.empty else 0,
