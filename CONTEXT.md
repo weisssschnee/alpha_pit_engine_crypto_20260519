@@ -27,3 +27,11 @@ _Avoid_: Exact-identity deduplication, accepted-row compression
 **Hold Research**:
 A governance state that permits bounded contract, audit, and reproduction work while prohibiting search, promotion, forward reads, and positive feedback.
 _Avoid_: Failed project, search authorization
+
+**Funding Payment Event**:
+A venue-settled funding cashflow identified by instrument and native funding settlement time; a repeated last-known funding rate is state, not a new event.
+_Avoid_: Non-null funding rate, hourly funding row
+
+**Funding Observable Time**:
+The first timestamp at which a funding payment record is available to the research system, which may be later than settlement time.
+_Avoid_: Funding time, panel row time

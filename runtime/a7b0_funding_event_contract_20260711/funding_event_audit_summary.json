@@ -1,0 +1,27 @@
+{
+  "decision": "PASS_B0_FUNDING_EVENT_CONTRACT_AND_AUDIT_HARNESS",
+  "fixture_scope": "synthetic contract fixture only",
+  "production_recall_status": "UNMEASURED_NO_NEW_FORWARD_READ",
+  "event_audit": {
+    "tolerance_seconds": 1800.0,
+    "expected_events": 4,
+    "detected_events": 3,
+    "matched_events": 3,
+    "missed_events": 1,
+    "false_positive_events": 0,
+    "recall": 0.75,
+    "precision": 1.0,
+    "timing_error_abs_seconds_max": 1200.0,
+    "cashflow_semantics_pass": true
+  },
+  "cashflow_audit": {
+    "rows": 4,
+    "zero_sum_failures": 0,
+    "payer_sign_failures": 0,
+    "pass": true
+  },
+  "search_started": false,
+  "forward_performance_read": false,
+  "authorizes_generator": false,
+  "authorizes_reward": false
+}

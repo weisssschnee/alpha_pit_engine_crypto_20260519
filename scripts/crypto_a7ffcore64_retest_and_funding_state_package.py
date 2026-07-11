@@ -1,14 +1,21 @@
 from __future__ import annotations
 
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+import numpy as np
 import pandas as pd
 
-
 REPO = Path(__file__).resolve().parents[1]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+
+from alphafactory_crypto.funding_events import funding_event_flags_from_last_time
+
+
 CORE63 = REPO / "runtime" / "a7ffcore63_dice_execution_audit"
 PANEL = Path("G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v2_20260527")
 
@@ -103,10 +110,14 @@ def load_funding_panel(max_symbols: int | None = None) -> pd.DataFrame:
     if max_symbols:
         paths = paths[:max_symbols]
     cols = ["symbol", "timestamp", "funding_rate", "funding_interval_hours", "source_market_funding"]
+    preferred_cols = [*cols, "last_funding_time"]
     frames: list[pd.DataFrame] = []
     for path in paths:
         try:
-            frame = pd.read_parquet(path, columns=cols)
+            try:
+                frame = pd.read_parquet(path, columns=preferred_cols)
+            except Exception:
+                frame = pd.read_parquet(path, columns=cols)
         except Exception:
             continue
         frames.append(frame)
@@ -120,13 +131,22 @@ def build_funding_state_audit(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.Dat
     df = panel.copy()
     df["timestamp"] = pd.to_datetime(df["timestamp"], errors="coerce")
     df = df.sort_values(["symbol", "timestamp"])
-    df["funding_event_flag"] = df["funding_rate"].notna()
-    df["raw_event_available"] = df["funding_rate"].notna()
+    df["funding_event_flag"] = funding_event_flags_from_last_time(df)
+    df["raw_event_available"] = df["funding_event_flag"]
+    df["funding_event_detection_status"] = np.where(
+        "last_funding_time" in df.columns,
+        "NATIVE_EVENT_TIME_CHANGE",
+        "HOLD_MISSING_NATIVE_EVENT_TIME",
+    )
 
     # Event funding is sparse by construction. Candidate alpha features should use PIT last-known state.
     g = df.groupby("symbol", group_keys=False)
     df["funding_rate_last_known"] = g["funding_rate"].ffill()
-    df["last_funding_timestamp"] = df["timestamp"].where(df["funding_event_flag"])
+    if "last_funding_time" in df.columns:
+        native_time = pd.to_datetime(df["last_funding_time"], errors="coerce", utc=True).dt.tz_localize(None)
+        df["last_funding_timestamp"] = native_time.where(df["funding_event_flag"])
+    else:
+        df["last_funding_timestamp"] = pd.NaT
     df["last_funding_timestamp"] = g["last_funding_timestamp"].ffill()
     df["funding_event_age_hours"] = (df["timestamp"] - df["last_funding_timestamp"]).dt.total_seconds() / 3600.0
     df["funding_interval_hours_ffill"] = g["funding_interval_hours"].ffill().fillna(8.0)

@@ -1,0 +1,4 @@
+event_id,venue,instrument,funding_time_utc,observable_time_utc,maturity_time_utc,funding_rate,mark_price,payer_side,receiver_side,long_cashflow_rate,short_cashflow_rate,source_record_id
+funding-013d78e5bf194f4bbf20,BINANCE_UM,BTCUSDT,2026-01-01 00:00:00+00:00,2026-01-01 01:00:00+00:00,2026-01-01 01:00:00+00:00,0.0001,,LONG,SHORT,-0.0001,0.0001,
+funding-4550e57f221405dea6e3,BINANCE_UM,BTCUSDT,2026-01-01 08:20:00+00:00,2026-01-01 09:00:00+00:00,2026-01-01 09:00:00+00:00,-0.0001,,SHORT,LONG,0.0001,-0.0001,
+funding-86ef0f54b7c0610e3a4d,BINANCE_UM,BTCUSDT,2026-01-02 00:00:00+00:00,2026-01-02 01:00:00+00:00,2026-01-02 01:00:00+00:00,0.0001,,LONG,SHORT,-0.0001,0.0001,

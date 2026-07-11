@@ -1,0 +1,37 @@
+{
+  "contract_id": "CRYPTO-FUNDING-EVENT-V1",
+  "version": 1,
+  "event_identity": ["venue", "instrument", "funding_time_utc"],
+  "required_source_fields": ["instrument", "funding_time", "funding_rate"],
+  "event_time_semantics": "exchange funding settlement timestamp",
+  "observable_time_semantics": "first timestamp at which the source record is available to the research system",
+  "default_observable_delay": "1h",
+  "maturity_time_semantics": "funding cashflow is mature at settlement but usable only at or after observable_time",
+  "hourly_panel_detection": "emit only when native last_funding_time changes; repeated last-known rate is state, not a new event",
+  "missing_native_event_time_policy": "FAIL_CLOSED_NO_EVENT",
+  "deduplication_key": ["venue", "instrument", "funding_time_utc"],
+  "cashflow_semantics": {
+    "positive_rate_payer": "LONG",
+    "positive_rate_receiver": "SHORT",
+    "long_cashflow_rate": "-funding_rate",
+    "short_cashflow_rate": "+funding_rate",
+    "zero_sum_required": true
+  },
+  "audit": {
+    "matching": "one-to-one nearest event by venue and instrument",
+    "default_tolerance": "30m",
+    "required_metrics": [
+      "expected_events",
+      "detected_events",
+      "matched_events",
+      "missed_events",
+      "false_positive_events",
+      "recall",
+      "precision",
+      "timing_error_abs_seconds_max",
+      "cashflow_semantics_pass"
+    ]
+  },
+  "allowed_uses_b0": ["contract_test", "historical_audit", "state_fabric_input_design"],
+  "forbidden_uses_b0": ["generator", "candidate_selection", "reward", "positive_memory", "forward_performance"]
+}

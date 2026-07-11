@@ -1,67 +1,30 @@
 # Architecture Boundary
 
-Generated: 2026-07-11
+Generated from registry SHA256: `C3497D0F93DCBA57A51B8BB64C54BA300033737A1A5073CEEE79744CE70E5E83`.
 
-## Purpose
+## Authority
 
-The `.planning/graphs/` directory now has three different views. They are intentionally separate:
+1. Current user instruction and governance decisions.
+2. `config/crypto_architecture_control_registry_v1.json` for architecture nodes and edges.
+3. `config/crypto_phase_state_v1.json` and the EVALRESET decision log for phase state.
+4. Curated architecture documents generated from those sources.
+5. `graph.json` as raw navigation plus deterministic control overlay.
 
-| File | Meaning | Use |
+External graphify is currently unavailable. This does not permit manual architecture claims: `scripts/crypto_architecture_control_plane.py --check` must pass.
+
+## Acceptance Rule
+
+Any code, registry, route, artifact, curated document, STATE, decision log, run manifest, artifact index, or control graph mismatch blocks Phase acceptance.
+
+## Forbidden Edges
+
+| Source | Target | Prohibition |
 |---|---|---|
-| `graph.json` | Raw graphify output | Machine-readable navigation index |
-| `graph.html` | Raw graphify tree | Human browsing of code/file graph |
-| `GRAPH_REPORT.md` | Raw graph statistics | Check graph size/freshness and artifact scope |
-| `CURRENT_ARCHITECTURE.md` | Curated current architecture | Explain the active research/search system |
-| `EVOLUTION_MAP.md` | Curated evolution map | Explain how A7 phases reached the current state |
-| `ARTIFACT_LIFECYCLE.md` | Artifact lifecycle policy | Decide what to keep, archive, supersede, or delete |
-
-## Rule
-
-Raw graphify output is not the architecture.
-
-The raw graph is expected to be large and noisy because it sees code, reports, runtime artifacts, planning files, and historical scripts. It can contain obsolete and superseded paths. It is an index, not a decision document.
-
-Raw graph size is also a cleanup signal. A large raw graph does not imply a large architecture; it often indicates fast-iteration process artifacts that should be classified, archived, summarized, or deleted after source-of-truth extraction.
-
-## 2026-07-11 Build Note
-
-The raw graph was rebuilt from the crypto project root after the A7EFF2 semantic-identity integration:
-
-```text
-graph.json:
-  17661 nodes
-  29739 links
-  0 hyperedges
-
-GRAPH_REPORT.md:
-  regenerated
-
-graph.html:
-  not regenerated in this build because the graph exceeded the default 5000-node HTML visualization limit
-```
-
-Therefore, use `graph.json` and `GRAPH_REPORT.md` as the current raw graph artifacts. Treat `graph.html` as an older browsing artifact unless it is explicitly rebuilt with a higher visualization limit or a reduced corpus.
-
-The build includes navigable nodes for `semantic_domains.py`, `signal_identity.py`, ADR 0001, and the curated architecture. CSV/JSON policy and evidence files, including `runtime/a7eff2_git_release_20260711/`, remain governed through the curated architecture and release manifest even when the raw extractor does not emit dedicated data-file nodes.
-
-The build emitted cross-chunk node ID collision warnings. This is expected in a repo with many repeated report concepts and historical artifacts, and it reinforces the boundary rule: raw graph reachability is not current architecture or deployment proof.
-
-The current architecture is the smaller manually curated system chain that is still active or explicitly authoritative.
-
-The evolution map is the phase history and supersession story. It explains why the repo contains many old artifacts without treating all of them as live architecture.
-
-## Interpretation Contract
-
-- Use raw graphify files to locate code and relationships.
-- Use `CURRENT_ARCHITECTURE.md` to reason about the active system.
-- Use `EVOLUTION_MAP.md` to reason about phase history, supersession, and governance.
-- Use `ARTIFACT_LIFECYCLE.md` to classify process artifacts and avoid maintaining historical noise as architecture.
-- Do not infer deployment readiness from any graph file.
-- Do not infer alpha proof, shadow, paper, or live authorization from any graph file.
-- If a raw graph node conflicts with A7PM/source-of-truth records, A7PM and current planning state win.
-
-## Current Status
-
-The active system remains a controlled research/search stack. It is not authorized for alpha proof, shadow, paper, live trading, or production portfolio construction.
-
-PC1 asset retirement state is an asset-custody concern, not an alpha-readiness claim. Use `CURRENT_ARCHITECTURE.md` and `Plans.md` for the latest migration evidence.
+| spent_evaluation | admission | no candidate ranking |
+| spent_evaluation | generation_lanes | no CEM/UCB/MCTS feedback |
+| spent_evaluation | a7mem | no memory update |
+| sealed_forward | scheduler | no forward OOS scheduling |
+| benchmark_registry | a7mem | no benchmark positive memory |
+| feature_state_fabric | strict_reward | State/event reward edge frozen until B1 |
+| a7input0 | generation_lanes | unapproved fields cannot enter primary generator |
+| bz | admission | undefined BZ cannot promote |

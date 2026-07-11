@@ -1,0 +1,43 @@
+{
+  "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
+  "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
+  "research_status": "HOLD_RESEARCH",
+  "current_phase": "PHASE_B0_CONTRACTS_AND_OBSERVATION_FOUNDATION",
+  "phase_b1_status": "FROZEN",
+  "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
+  "phase_a_remote_sync": {
+    "branch": "audit/evalreset-collapse-forensics-20260711",
+    "local_sha": "e1fa83493b1ee1893992fb37604d21099c5aad65",
+    "remote_sha": "e1fa83493b1ee1893992fb37604d21099c5aad65",
+    "tag": "evalreset-baseline-20260711-ac9fd24",
+    "tag_commit": "ac9fd24ede281bbcbf438f7c2f4f9b1e563b8b76",
+    "status": "VERIFIED_SYNCED_2026_07_11"
+  },
+  "allowed_b0": [
+    "contracts",
+    "registries",
+    "synthetic and historical audit fixtures",
+    "deterministic cache schema",
+    "control-plane graph maintenance"
+  ],
+  "prohibited_b0": [
+    "search execution",
+    "new generator fields",
+    "State/event to reward",
+    "CEM/UCB/MCTS update",
+    "A7MEM positive memory update",
+    "new forward performance read",
+    "spent OOS candidate selection"
+  ],
+  "b0_items": [
+    {"id":"B0.1","name":"Funding event detector and audit","status":"IMPLEMENTED"},
+    {"id":"B0.2","name":"Future wrong-lag negative control","status":"PLANNED"},
+    {"id":"B0.3","name":"A7INPUT0-v2 field roles","status":"PLANNED"},
+    {"id":"B0.4","name":"BZ authority contract","status":"PLANNED"},
+    {"id":"B0.5","name":"Layered identity registry","status":"PLANNED"},
+    {"id":"B0.6","name":"Benchmark registry","status":"PLANNED"},
+    {"id":"B0.7","name":"Temporal/event primitive contract","status":"PLANNED"},
+    {"id":"B0.8","name":"Feature/State Fabric schema and cache contract","status":"PLANNED"}
+  ],
+  "next_acceptance_gate": "All B0.1-B0.8 contracts, registries, tests, graph nodes, STATE, decision log, run manifest, and artifact index are synchronized; then stop before B1."
+}

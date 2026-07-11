@@ -1,167 +1,109 @@
 # Current Architecture
 
-Generated: 2026-07-11
+Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `C3497D0F93DCBA57A51B8BB64C54BA300033737A1A5073CEEE79744CE70E5E83`.
 
-## Scope
+Status: `PHASE_A_GOVERNANCE_ACCEPTED` / `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED` / `HOLD_RESEARCH`.
 
-This is the curated current architecture of the crypto AlphaFactory research/search stack. It intentionally excludes historical stage scripts, superseded reports, raw runtime files, and one-off diagnostics unless they still define an active contract.
+Raw graphify is unavailable in this environment; `graph.json` retains the prior navigation graph plus a deterministic `control_*` architecture overlay. This curated document is the current architecture authority.
 
-This is not alpha proof and not deployment authorization.
-
-## Architecture Diagram
+## Architecture
 
 ```mermaid
 flowchart TD
-  Data["Data Panels\nLocal full AlphaFactory data\nPC2 executable subset\nBinance/OKX crypto panels"]
-  Source["Source / PIT / Lag Controls\nsource trace\nchecksum status\npublication lag\nsame-bar/future leakage block"]
-  Field["Field Contract Layer\nsemantic roles\nallowed fields\nmaterialization parity\nfail-closed evaluator"]
-  Features["Feature / Label / Regime Builders\ntyped fields\nlabels\nregime/event states\nfeature materialization"]
-  Memory["Search Memory\npositive priors\nrejection memory\nfamily/motif/skeleton caps"]
-  Queue["Search Queue Builder\nfamily-diversified queue\nCEM/AST/UCT/raw lanes\nreward-integrated target"]
-  Semantic["Semantic Compiler\nregistry-backed value domains\ncanonical rewrite\nconstant-only rejection"]
-  Proxy["Proxy Evaluator\nA7V3S9 prereward OOS/control proxy\nsuccessive halving\ncheckpointed shards\nnot sufficient as final reward"]
-  LagFilter["Lag-first Survivor Filter\npublication/source lag gate\nstrict reward receives survivors only\ndynamic balanced shards"]
-  Identity["Signal Identity Layer\norientation-canonical weights\nexact representative evaluation\nhigh-correlation review only"]
-  NumericCache["Shared Numeric Cache\nsurvivor field union\nmanifest-backed NumPy memmaps\none panel decode per flow"]
-  Reward["Strict Reward Gate\ntrain orientation\nvalidation/test/recent/stress\ncommon controls\nnon-overlap floors"]
-  Aggregate["Aggregate / Dedupe / Triage\nexact AST source-subtree review\nsignal-equivalence hold\nportfolio-marginal review"]
-  Assets["Asset Custody / PC Migration\nlocal full data\nPC2 preserve pack\nPC1 retirement checklist"]
-  Governance["Governance Registry\nA7PM source of truth\nplanning state\nblocked claims\nallowed next tasks"]
-
-  Assets --> Data --> Source --> Field --> Features
-  Features --> Queue
-  Memory --> Queue
-  Queue --> Semantic --> Proxy --> LagFilter --> Identity --> Reward --> Aggregate
-  Features --> NumericCache --> Reward
-  Aggregate --> Memory
-  Governance -.gates.-> Source
-  Governance -.gates.-> Field
-  Governance -.gates.-> Queue
-  Governance -.gates.-> Reward
-  Governance -.records.-> Aggregate
+  control_data_release["Data release\nIMPLEMENTED"]
+  control_time_block_roles["Time block roles\nIMPLEMENTED"]
+  control_field_ontology["Field ontology\nIMPLEMENTED"]
+  control_a7input0["A7INPUT0 field approval\nPARTIAL"]
+  control_feature_builder["Feature builders\nPARTIAL"]
+  control_label_builder["Label builders\nIMPLEMENTED"]
+  control_regime_builder["Regime builders\nPARTIAL"]
+  control_funding_event_detector["Funding event detector\nIMPLEMENTED"]
+  control_basis_oi_event_detection["Basis/OI event detection\nPARTIAL"]
+  control_semantic_compiler["Semantic compiler\nIMPLEMENTED"]
+  control_exact_signal_identity["Exact signal identity\nIMPLEMENTED"]
+  control_identity_registry["Layered identity registry\nPLANNED"]
+  control_generation_lanes["Generation lanes\nFROZEN"]
+  control_proxy["Proxy evaluator\nFROZEN"]
+  control_strict_reward["Strict reward\nFROZEN"]
+  control_admission["Admission gates\nPARTIAL"]
+  control_a7mem["A7MEM\nFROZEN"]
+  control_scheduler["Scheduler / successive halving\nFROZEN"]
+  control_benchmark_registry["Benchmark registry\nPLANNED"]
+  control_evaluation_access_ledger["Evaluation access ledger\nIMPLEMENTED"]
+  control_spent_evaluation["Spent historical evaluation\nFROZEN"]
+  control_sealed_forward["Sealed forward data\nFROZEN"]
+  control_future_wrong_lag["Future wrong-lag control\nPLANNED"]
+  control_bz["BZ\nPLANNED"]
+  control_temporal_event_contract["Temporal/event primitive contract\nPLANNED"]
+  control_feature_state_fabric["Feature/State Fabric\nPLANNED"]
+  control_data_release --> control_time_block_roles
+  control_time_block_roles --> control_field_ontology
+  control_field_ontology --> control_a7input0
+  control_a7input0 --> control_feature_builder
+  control_feature_builder --> control_semantic_compiler
+  control_semantic_compiler --> control_exact_signal_identity
+  control_exact_signal_identity --> control_admission
+  control_evaluation_access_ledger --> control_proxy
+  control_evaluation_access_ledger --> control_strict_reward
+  control_funding_event_detector --> control_feature_state_fabric
+  control_spent_evaluation --> control_proxy
+  control_spent_evaluation --> control_strict_reward
+  control_spent_evaluation -. forbidden .-> control_admission
+  control_spent_evaluation -. forbidden .-> control_generation_lanes
+  control_spent_evaluation -. forbidden .-> control_a7mem
+  control_sealed_forward -. forbidden .-> control_scheduler
+  control_benchmark_registry -. forbidden .-> control_a7mem
+  control_feature_state_fabric -. forbidden .-> control_strict_reward
+  control_a7input0 -. forbidden .-> control_generation_lanes
+  control_bz -. forbidden .-> control_admission
 ```
 
-## Active Component Contracts
+## Node Registry
 
-| Component | Current role | Current evidence |
+| Node | Status | Implementation | Entrypoint | Input -> Output | Data role | Feedback | Artifact/test | Last verified SHA | Blocker |
+|---|---|---|---|---|---|---|---|---|---|
+| Data release | IMPLEMENTED | runtime/a7eff2_git_release_20260711/a7eff2_release_manifest.json | a7eff2_release_manifest.json | immutable released artifacts -> hash-addressed release evidence | historical release evidence | AUDIT_ONLY | runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_release_integrity_audit.csv | 1D5B5C5D498F65DE0DAC360A4604036F654119666DCEF32E256501B65C2A9D60 | source arrays absent locally |
+| Time block roles | IMPLEMENTED | config/crypto_evaluation_access_policy_v1.json | epoch_access | epoch id -> discovery/spent/sealed role | evaluation governance | TRAIN_OR_INNER_VALIDATION_ONLY | tests/test_evaluation_access.py | 57B23A06C28A64F230C39B82D39E4631B7D195898B686E27B869233EDB728FBC | none |
+| Field ontology | IMPLEMENTED | runtime/a7ffr1_field_ontology_v3/a7ffr1_field_ontology_v3.csv | a7ffr1_field_ontology_v3.csv | source and derived fields -> semantic/value-domain roles | field semantics | NO_DIRECT_FEEDBACK | runtime/a7eff2_git_release_20260711/a7eff2_active_field_registry.csv | 6087848CEA8B417D33446C759D8CBC7B78925617E048A3DC8D25D0C1CEE1205E | ontology is broader than approved inputs |
+| A7INPUT0 field approval | PARTIAL | runtime/a7input0_input_approval_package/a7input0_input_approval_registry.csv | a7input0_input_approval_registry.csv | field ontology -> approved input roles | input authorization | NO_OOS_DERIVATION | runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_risk_closure_audit.csv | 25CD1161A174BAFA5F0BE631FE05EA971181D2EB42D1D452F798C4BFE649E60F | 6 of 10 active fields unapproved; v2 roles pending |
+| Feature builders | PARTIAL | scripts/crypto_a7ak_lv1_latent_state_feature_build.py | feature build scripts | approved observable fields -> historical features | feature construction | NO_NEW_GENERATOR_FIELDS_B0 | runtime/a7al0r_code_feature_regime_readiness_audit/a7al0r_feature_lineage_ledger.csv | 60B7FC55A963B16D6D877D9E0B88C450694CA5F414C84EFE2CDCB220D8C0B493 | Feature/State Fabric contract pending |
+| Label builders | IMPLEMENTED | scripts/crypto_a7aa1_primitive_response_map.py | horizon_label | PIT prices and horizons -> research labels | label only | SPENT_EPOCH_REPORT_ONLY | scripts/crypto_a7al2x5_evaluator_preflight_smoke.py | 278CDCF482AF999B93946C24123877CD919E6AEB7F804F9C051394297A8FB922 | no untouched final OOS |
+| Regime builders | PARTIAL | scripts/crypto_a7al0g_upper_regime_state_builder.py | regime builder scripts | historical features -> regime/state observations | state and audit | FROZEN_FROM_REWARD_UNTIL_B1 | runtime/a7al0g_upper_regime_state_builder/a7al0g_regime_state_contract.csv | 92AE2B97BB46B86A2C2525BF66F6E0A7B92BD276E42138964930774D05EA6288 | reusable State object not established |
+| Funding event detector | IMPLEMENTED | alphafactory_crypto/funding_events.py; config/crypto_funding_event_contract_v1.json; scripts/crypto_b0_funding_event_audit.py | canonicalize_funding_events | native funding settlement records -> canonical payment events and audit | event observation | AUDIT_ONLY_B0 | tests/test_funding_events.py; runtime/a7b0_funding_event_contract_20260711/funding_event_audit_summary.json; reports/CRYPTO_B0_FUNDING_EVENT_CONTRACT_20260711.md | 11D6EC1952E4A0EE8CEC9C970F3E3C78DEF90602500A0F26D547FCDA63996B3F | production recall remains unmeasured without approved truth set |
+| Basis/OI event detection | PARTIAL | scripts/crypto_a7regime2_mechanism_regime_audit.py | mechanism regime audit | basis and OI observations -> historical mechanism states | event/state audit | FROZEN_FROM_REWARD_UNTIL_B1 | runtime/a7regime2_mechanism_regime_audit_20260612/a7regime2_hourly_mechanism_state_panel.csv | CB1EDDE3AA987D74C4478A141D2A775076EC8F01E71B66588A0FF76307A4AAA5 | temporal/event primitive contract pending |
+| Semantic compiler | IMPLEMENTED | alphafactory_crypto/engines/semantic_domains.py | semantic canonicalization | typed AST and field domains -> canonical expression | semantic identity | NO_METRIC_FEEDBACK | docs/adr/0001-controlled-semantic-identity-and-safediv-gates.md | 8673D940C00111D362E55FE1A70B5F52F77D2BA9FA37882221C8CBE0166F2AC3 | none |
+| Exact signal identity | IMPLEMENTED | alphafactory_crypto/engines/signal_identity.py | signal fingerprint | materialized signal weights -> representative and aliases | exact numeric identity | REPORT_ONLY_DURING_HOLD | runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv | FCA93D783E1F0950C899906D810509DA637FD81A8059A9DF3C6DBB2D74B02DF8 | activation and PnL layers pending |
+| Layered identity registry | PLANNED | planned | planned | syntax through economic hypothesis -> six-layer identities and mappings | identity governance | NO_PROMOTION_B0 | planned | D030676B9B64F6ACA0BA6B7D37DA221946417F6692C488DDEB3B72E0895A7743 | B0.5 pending |
+| Generation lanes | FROZEN | scripts/crypto_a7ls1_multi_arm_blueprint_generation.py | generation scripts | approved fields and primitives -> candidate queues | candidate generation | NO_RUN_B0 | verified_core_crypto_20260618/holds/CEM_AST_SEARCH_CORE_HOLD.md | 08493D1801C8D733E3EE1F8B7F755259D4B6CE0D599985DC51B70E046CC051BC | search revoked; A7INPUT0-v2 pending |
+| Proxy evaluator | FROZEN | scripts/crypto_a7v3s9_prereward_oos_control_proxy.py | proxy main | candidate queue and spent historical metrics -> report-only diagnostics | historical evaluation | NO_CANDIDATE_FEEDBACK | tests/test_evaluation_access.py | 227162B70E5897768F07D9E7A7E5C7A7E1FB0EAA81AA0BC4552D210694581128 | spent OOS contamination |
+| Strict reward | FROZEN | scripts/crypto_a7reward1_portfolio_reward_model.py | aggregate_rewards | signals and historical splits -> report-only reward audit | historical evaluation | NO_CANDIDATE_FEEDBACK | tests/test_evaluation_access.py | 260280B26F3DBE1C9696FF6082A11F1F3759D5EB737D2754F014DD37EB49494A | future wrong-lag pending; spent OOS |
+| Admission gates | PARTIAL | scripts/crypto_a7source5_a7search7_source_lag_reward_flow.py | semantic/source-lag/identity gates | candidate rows -> survivors and aliases | candidate admission | REPORT_ONLY_B0 | runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_collapse_stage_audit.csv | 9E4B859D56B665BADB4A6F579CAF31BEAA107A3E45CE70685911F740858A69F1 | independent-information collapse not localized |
+| A7MEM | FROZEN | scripts/crypto_a7mem0_search_memory_registry.py | memory registry main | candidate feedback -> search priors | search memory | NO_POSITIVE_OR_NEGATIVE_UPDATE_B0 | tests/test_evaluation_access.py | 7EC9C27A3FDD1AE8D5CCB6D674B2DBD092704CECB22593C3E228AFAAD3988717 | all current candidate feedback is spent/OOS-derived |
+| Scheduler / successive halving | FROZEN | scripts/crypto_a7source10_proxy_reward_flow_company_py_20260708.py | scheduler main | proxy/reward queues -> budgets and shards | compute allocation | NO_ADAPTIVE_OOS_FEEDBACK | tests/test_evaluation_access.py | AEA93934C17B10B0AC4EA5F833DFC807281F322DD481A3A8C39DCE1637FE53E6 | spent evaluation budget contamination |
+| Benchmark registry | PLANNED | planned | planned | benchmark definitions -> versioned benchmark observations | comparison only | NO_POSITIVE_MEMORY | planned | 540C4BDF71F184F6E0D0D60AF7995700A9AD21F93C71533BB4DA71308B6BB97B | B0.6 pending |
+| Evaluation access ledger | IMPLEMENTED | alphafactory_crypto/evaluation_access.py | assert_candidate_feedback_columns_allowed | epoch and metric access -> allow/block decision | evaluation governance | FAIL_CLOSED | runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_evaluation_access_ledger.csv; tests/test_evaluation_access.py | 25D58EBAFB84B933E27AAEE25DB3BBD5C709440608E686BF3B7D76CA234BF76C | none |
+| Spent historical evaluation | FROZEN | runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_oos_burn_ledger.csv | OOS burn ledger | validation/test/recent/May -> spent classification | historical report only | DENY_CANDIDATE_FEEDBACK | tests/test_evaluation_access.py | CE9A5FE5B41F5858F65B8A1058C44E9C1D3572398A3080CBD32BC48D044F975A | irreversible exposure |
+| Sealed forward data | FROZEN | config/crypto_evaluation_access_policy_v1.json | unknown epoch default | unseen epoch -> SEALED_FORWARD | sealed evaluation | NO_READ_B0 | tests/test_evaluation_access.py | 57B23A06C28A64F230C39B82D39E4631B7D195898B686E27B869233EDB728FBC | requires explicit future authorization |
+| Future wrong-lag control | PLANNED | planned | planned | signal and future shifts -> negative-control metrics | leakage control | AUDIT_ONLY_B0 | planned | FCEEC93C1B0087B996E366D4996DE74222243BB4E3A8B44789B64056D5F99FBB | B0.2 pending |
+| BZ | PLANNED | planned | undefined | undefined -> undefined | unresolved | DENY_ALL_PROMOTION | planned | F88927E4C3AE78ACA13B5CB186582FF768F6CF8B89346096C28CC9A00AF10DBF | no authoritative definition or implementation |
+| Temporal/event primitive contract | PLANNED | planned | planned | observable event streams -> PIT temporal primitives | temporal semantics | NO_REWARD_B0 | planned | 53DCEC71204C1790DD7EDC180AB6BE3C2AB79E4CE84450DC6143E37D9B228758 | B0.7 pending |
+| Feature/State Fabric | PLANNED | planned | planned | approved observations and contracts -> deterministic feature/state cache | feature/state materialization | NO_REWARD_B0 | planned | 635836D46E1ECFCEC7CF9CC3B754E16325FDC5FCB52563261DA4DFA10B651A0B | B0.8 pending |
+
+## Time Block Roles
+
+- 2024 train: discovery training, not OOS proof.
+- 2025-06 validation, 2025-12 test, 2026-04 recent, and 2026-05 stress: `SPENT_HISTORICAL_EVALUATION`, report-only.
+- Unknown/new epochs: `SEALED_FORWARD`, no read in B0.
+
+## Forbidden Edges
+
+| Source | Target | Prohibition |
 |---|---|---|
-| Data panels | Provide controlled research data at 1h primary horizon, with 1m/15m available but not yet primary search stack | `.planning/PROJECT.md`, `.planning/STATE.md` |
-| Asset custody | Keep useful crypto assets off the retiring PC1 and prove migration with hashes/manifests before deletion | PC1 preserve pack hash `715F0A23E9AAB23794ED870A14AC5E0B35ED40C45AD15010A8FFE3245A383D07`, PC2 inventory, local `G:\AlphaFactory_CryptoData` |
-| Source/PIT controls | Block same-bar/future leakage and record source-lag/checksum status | `CRYPTO_A7LIVE1_SOURCE_LAG_CHECKSUM_AUDIT_20260704.md`, A7SOURCE reports |
-| Field contracts | Enforce field role, materialization, evaluator parity, and fail-closed behavior | A7AI-F0/F1/F2/F3/F4 |
-| Feature/label/regime builders | Convert data fields into typed features, labels, and state variables | A7AA, A7FF, A7FFCORE reports |
-| Search memory | Feed prior positives and rejections into next queue construction | A7MEM records and current planning state |
-| Queue builder | Produce bounded, family-diversified, sharded search queues; current next version should be reward-integrated/source-lag-aware rather than proxy-only | A7SEARCH/A7SOURCE planning state |
-| Semantic compiler | Propagate contracted field value domains through ASTs, rewrite nonconstant identities, and reject constant-only collapse before expensive numeric work | ADR 0001, `semantic_domains.py`, `crypto_field_value_domain_rules_v1.json` |
-| Proxy evaluator | Score broad candidates cheaply before strict reward; proxy outputs require fresh source-lag proof and strict reward before promotion | A7V3S9 prereward proxy stack, PC2 source-lag/reward rerun |
-| Strict reward | Reject headline-metric artifacts with train/OOS/stress/control/source-lag gates; use common random controls, prepared rank/weight reuse, and a shared numeric memmap cache | `CRYPTO_A7EFF1_SEARCH_REWARD_EFFICIENCY_AUDIT_20260710.md`, A7REWARD reports |
-| Signal identity | Evaluate one representative per exact portfolio-weight identity, restore aliases before policy gates, and keep high-similarity non-exact signals reviewable | `signal_identity.py`, A7EFF2 PC2 evidence |
-| Aggregate/dedupe/triage | Restore aliases for lineage/source policy, emit representative-only memory feedback, compare exact AST subtrees, and route unstable SafeDiv/marginal trade-offs to review | A7SOURCE6 outputs and `CRYPTO_A7EFF2_SEMANTIC_IDENTITY_SAFEDIV_INTEGRATION_20260710.md` |
-| Governance | Decide what is current, superseded, blocked, or authorized | A7PM registry and planning files |
-
-## Active Runtime Flow
-
-```text
-source-audited data
--> field contract enforcement
--> feature/label/regime construction
--> memory-aware search queue
--> semantic canonicalization / constant-only rejection
--> sharded proxy evaluation
--> source-lag survivor filter
--> exact portfolio-signal representative selection
--> shared numeric cache
--> strict reward gate
--> alias restoration / representative-only memory feedback
--> exact source-subtree / SafeDiv / marginal triage
--> memory update / next queue
-```
-
-## Current Evaluated Data Split
-
-The A7EFF2 frozen regression used the following actual PC2 shared-cache windows, not the full nominal validation/OOS contracts:
-
-| Role | Actual selected UTC window | Hours | Policy |
-|---|---|---:|---|
-| Train/orientation | 2024-01-01 00:00 to 2024-12-31 23:00 | 8784 | Full available 2024 split |
-| Validation OOS | 2025-06-01 00:00 to 2025-06-30 23:00 | 720 | Last 720 hours of 2025H1 |
-| Historical test OOS | 2025-12-02 00:00 to 2025-12-31 23:00 | 720 | Last 720 hours of 2025H2 |
-| Recent OOS | 2026-04-01 00:00 to 2026-04-30 23:00 | 720 | Last 720 hours of Jan-Apr contract |
-| Known stress veto | 2026-05-01 00:00 to 2026-05-26 00:00 | 601 | All available May stress hours |
-
-The delivered 2023H2 backfill exists in data custody but was **not** materialized into this A7EFF2 replay panel or numeric cache. Therefore A7EFF2 does not prove robustness on 2023H2. The machine-readable evidence is under `runtime/a7eff2_git_release_20260711/`.
-
-## Current Search State
-
-No active process is authorized to produce alpha-ready candidates. The PC2 reward-integrated incremental-validation flow is complete.
-
-```text
-focused exact-subtree validation:
-  source_blueprints: 8
-  queue_rows: 53
-  semantic_canonical_rewrites: 8
-  semantic_constant_rejects: 3
-  source_lag_survivors: 33
-  exact_signal_representatives: 18
-  exact_alias_evaluations_avoided: 15
-  reward_rows: 132
-  accepted_rows: 16
-  reward_representative_triage_rows: 6
-  final_incremental_memory_feedback_rows: 1
-  memory_credit_release_status: HOLD_A7INPUT0_COVERAGE_GAP
-  eval_error_rows: 0
-  incremental_interactions: 1
-  oos_equivalent_nonunique: 5
-  canonical_repass_failures: 1
-  portfolio_marginal_reviews: 1
-
-SafeDiv review:
-  denominator_q01_to_median: 0.020154
-  signal_abs_p99_to_median: 462.110403
-  top_1pct_abs_signal_mass_share: 0.743924
-  decision: HOLD_PORTFOLIO_MARGINAL_REVIEW
-
-efficiency verification:
-  baseline_total_seconds: about 1735
-  optimized_v2_total_seconds: 136.688
-  total_speedup: about 12.7x
-  accepted_set_match: exact 16/16
-  gate_and_reject_match: exact
-```
-
-The next architecture objective is to close A7INPUT0 coverage for the final formula's two inputs, then apply cluster-aware marginal credit and representative-only A7MEM/CEM/UCB feedback. Typed State/subgraph governance exists, but reusable State materialization is not yet active in the main search/reward loop. A proxy-only expansion remains diagnostic and must not be used as the source of accepted alpha candidates.
-
-## Asset Custody State
-
-PC1 is being retired. Useful crypto assets must not remain solely on PC1.
-
-```text
-PC1 preserve pack:
-  local path:
-    G:\Chengbo\runtime\pc1_crypto_preserve_pack_20260709_results\pc1_crypto_preserve_pack_20260709.tar
-  PC2 path:
-    D:\HermesWorker\runtime\crypto_line\pc1_crypto_preserve_pack_20260709\pc1_crypto_preserve_pack_20260709.tar
-  SHA256:
-    715F0A23E9AAB23794ED870A14AC5E0B35ED40C45AD15010A8FFE3245A383D07
-
-PC1 still contains:
-  D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote (~1.04GB)
-  D:\HermesWorker\GDrive\AlphaFactory_CryptoData (~94.85GB)
-  D:\HermesWorker\runtime crypto/search outputs
-
-Verified non-PC1 custody:
-  local full data:
-    G:\AlphaFactory_CryptoData (~102.51GB)
-  PC2 executable subset:
-    D:\HermesWorker\data\crypto_line\AlphaFactory_CryptoData (~36.97GB)
-  PC2 runtime/search/reward/preserve roots:
-    D:\HermesWorker\runtime\crypto_line
-```
-
-Deletion of PC1 assets is a separate destructive step. Before deleting, run a final inventory and compare against local/PC2 custody; do not infer deletion readiness from graph files alone.
-
-## Non-Architecture Files
-
-The repository contains many historical stage scripts and reports. They are valuable evidence, but they are not all active architecture. Treat them as evolution records unless A7PM/current planning state marks them current.
-
-Use `ARTIFACT_LIFECYCLE.md` to classify process artifacts after milestones. Do not promote fast-iteration runtime outputs, superseded diagnostics, or temp/debug files into the active architecture.
+| spent_evaluation | admission | no candidate ranking |
+| spent_evaluation | generation_lanes | no CEM/UCB/MCTS feedback |
+| spent_evaluation | a7mem | no memory update |
+| sealed_forward | scheduler | no forward OOS scheduling |
+| benchmark_registry | a7mem | no benchmark positive memory |
+| feature_state_fabric | strict_reward | State/event reward edge frozen until B1 |
+| a7input0 | generation_lanes | unapproved fields cannot enter primary generator |
+| bz | admission | undefined BZ cannot promote |

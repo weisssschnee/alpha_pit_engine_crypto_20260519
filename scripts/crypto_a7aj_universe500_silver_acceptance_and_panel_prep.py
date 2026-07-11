@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import shutil
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -10,8 +11,13 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from alphafactory_crypto.funding_events import funding_event_flags_from_last_time
+
+
 DATA_ROOT = Path(r"G:\AlphaFactory_CryptoData")
 INCOMING_ROOT = DATA_ROOT / "incoming_company" / "crypto_universe500_silver_20260525"
 EXTRACTED_ROOT = INCOMING_ROOT / "extracted"
@@ -201,7 +207,7 @@ def derive_market_features(market: pd.DataFrame) -> pd.DataFrame:
     market["mark_index_basis_bps"] = market["mark_index_ratio"] * 10000.0
     market["premium_close_bps"] = market["premium_close"] * 10000.0
     market["funding_rate_bps"] = market["last_funding_rate"] * 10000.0
-    market["funding_event_observed"] = market["last_funding_rate"].notna()
+    market["funding_event_observed"] = funding_event_flags_from_last_time(market)
     market["market_counts_complete"] = (
         (market["mark_count"] >= 3600)
         & (market["index_count"] >= 3600)
