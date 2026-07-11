@@ -428,17 +428,25 @@
     },
     {
       "id": "bz",
-      "label": "BZ",
-      "status": "PLANNED",
-      "implementation_path": [],
-      "entrypoint": "undefined",
-      "input": "undefined",
-      "output": "undefined",
-      "data_role": "unresolved",
-      "feedback_permission": "DENY_ALL_PROMOTION",
-      "artifact_test": [],
-      "blocker": "no authoritative definition or implementation",
-      "last_verified_sha": "F88927E4C3AE78ACA13B5CB186582FF768F6CF8B89346096C28CC9A00AF10DBF"
+      "label": "BZ / Benchmark Zero",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/bz.py",
+        "config/crypto_bz_benchmark_zero_v1.json",
+        "scripts/crypto_b0_bz_authority.py"
+      ],
+      "entrypoint": "create_benchmark_zero",
+      "input": "benchmark-only fields",
+      "output": "zero-alpha diagnostic benchmark object",
+      "data_role": "benchmark sanity only",
+      "feedback_permission": "NONE",
+      "artifact_test": [
+        "tests/test_bz.py",
+        "runtime/a7b0_bz_authority_20260711/bz_authority_manifest.json",
+        "reports/CRYPTO_B0_BZ_BENCHMARK_ZERO_20260711.md"
+      ],
+      "blocker": "legacy undefined BZ mentions require explicit migration",
+      "last_verified_sha": "1AFC8220B1F63A01959E16049E43D7D0324AA4CE00F246BC669679CEA59B093D"
     },
     {
       "id": "temporal_event_contract",

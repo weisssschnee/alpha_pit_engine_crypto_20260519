@@ -1,13 +1,13 @@
 # Evolution Map
 
-Generated from registry SHA256: `9E61336EB492A1A47845D86047AB11B531EBD0EC3F58ED77A31ECC7D4F98DEF4`.
+Generated from registry SHA256: `483C58342B026BADB1BE759429B30BADCB7913700776EE691201913B89175F3D`.
 
 ## Current Evolution
 
 - Accepted rows compressed from 16 rows to 6 canonical expressions and 6 exact signal identities.
 - Exact-identity admission and strict reward are observed contraction points.
 - Signal, activation, PnL/regime, and economic-hypothesis collapse are not established.
-- Funding event detection, future wrong-lag, A7INPUT0-v2 coverage, and authoritative BZ definition gate research.
+- At Phase B0 entry, funding event detection, future wrong-lag, A7INPUT0 coverage, and authoritative BZ definition blocked research. B0.1-B0.4 close their contract-level gaps; production execution and promotion remain frozen under `HOLD_RESEARCH`.
 - The proposed 400k reward-integrated search is revoked.
 - Phase A governance is accepted while `HOLD_RESEARCH` remains.
 - Phase B1 is frozen.
@@ -23,3 +23,4 @@ Generated from registry SHA256: `9E61336EB492A1A47845D86047AB11B531EBD0EC3F58ED7
 - `EVALRESET-20260711-007` — `B0_1_FUNDING_EVENT_CONTRACT_IMPLEMENTED`: Native settlement time defines event identity; repeated last-known funding rate is state; missing native time fails closed; cashflow semantics and tolerance audit are tested.
 - `EVALRESET-20260711-008` — `B0_2_FUTURE_WRONG_LAG_IMPLEMENTED`: A 24-hour future-shift negative control is integrated into strict reward code and hard-reject semantics; only synthetic harness execution is allowed during HOLD_RESEARCH.
 - `EVALRESET-20260711-009` — `B0_3_A7INPUT0_V2_IMPLEMENTED`: All 81 ontology fields receive exactly one static role across primary, interaction-only, condition-only, state-only, benchmark-only, and blocked; B0 generator enablement remains zero.
+- `EVALRESET-20260711-010` — `B0_4_BZ_AUTHORITY_IMPLEMENTED`: BZ uniquely means Benchmark Zero, accepts benchmark-only inputs, expects zero alpha, and has no promotion, reward, scheduler, or memory permission.

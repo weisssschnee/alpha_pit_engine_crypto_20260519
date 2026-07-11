@@ -4,7 +4,7 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "9E61336EB492A1A47845D86047AB11B531EBD0EC3F58ED77A31ECC7D4F98DEF4",
+      "registry_sha256": "483C58342B026BADB1BE759429B30BADCB7913700776EE691201913B89175F3D",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 26,
@@ -177162,21 +177162,29 @@
     },
     {
       "id": "control_bz",
-      "label": "BZ",
+      "label": "BZ / Benchmark Zero",
       "file_type": "architecture_control",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
-      "status": "PLANNED",
-      "implementation_path": [],
-      "entrypoint": "undefined",
-      "input": "undefined",
-      "output": "undefined",
-      "data_role": "unresolved",
-      "feedback_permission": "DENY_ALL_PROMOTION",
-      "artifact_test": [],
-      "last_verified_sha": "F88927E4C3AE78ACA13B5CB186582FF768F6CF8B89346096C28CC9A00AF10DBF",
-      "blocker": "no authoritative definition or implementation",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/bz.py",
+        "config/crypto_bz_benchmark_zero_v1.json",
+        "scripts/crypto_b0_bz_authority.py"
+      ],
+      "entrypoint": "create_benchmark_zero",
+      "input": "benchmark-only fields",
+      "output": "zero-alpha diagnostic benchmark object",
+      "data_role": "benchmark sanity only",
+      "feedback_permission": "NONE",
+      "artifact_test": [
+        "tests/test_bz.py",
+        "runtime/a7b0_bz_authority_20260711/bz_authority_manifest.json",
+        "reports/CRYPTO_B0_BZ_BENCHMARK_ZERO_20260711.md"
+      ],
+      "last_verified_sha": "1AFC8220B1F63A01959E16049E43D7D0324AA4CE00F246BC669679CEA59B093D",
+      "blocker": "legacy undefined BZ mentions require explicit migration",
       "weight": 1.0
     },
     {
@@ -490726,5 +490734,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "06f476c50ab665015c9b7adf88c45a31728d22ce"
+  "built_at_commit": "6d9042f9ce0815069c1d32fe1a08866d54e99c43"
 }

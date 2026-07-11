@@ -216,7 +216,7 @@ Generated from registry SHA256: `{digest}`.
 - Accepted rows compressed from 16 rows to 6 canonical expressions and 6 exact signal identities.
 - Exact-identity admission and strict reward are observed contraction points.
 - Signal, activation, PnL/regime, and economic-hypothesis collapse are not established.
-- Funding event detection, future wrong-lag, A7INPUT0-v2 coverage, and authoritative BZ definition gate research.
+- At Phase B0 entry, funding event detection, future wrong-lag, A7INPUT0 coverage, and authoritative BZ definition blocked research. B0.1-B0.4 close their contract-level gaps; production execution and promotion remain frozen under `HOLD_RESEARCH`.
 - The proposed 400k reward-integrated search is revoked.
 - Phase A governance is accepted while `HOLD_RESEARCH` remains.
 - Phase B1 is frozen.

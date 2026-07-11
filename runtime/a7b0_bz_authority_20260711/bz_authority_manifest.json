@@ -1,0 +1,32 @@
+{
+  "authority_id": "CRYPTO-BZ-BENCHMARK-ZERO-V1",
+  "object_id": "bz:benchmark-zero:v1",
+  "name": "Benchmark Zero",
+  "input_fields": [
+    "index_close",
+    "mark_close",
+    "trade_close",
+    "trade_return_1h",
+    "trade_return_24h"
+  ],
+  "input_roles": [
+    "benchmark-only",
+    "benchmark-only",
+    "benchmark-only",
+    "benchmark-only",
+    "benchmark-only"
+  ],
+  "expected_alpha": 0.0,
+  "feedback_permission": "NONE",
+  "allowed_uses": [
+    "pipeline_sanity",
+    "benchmark_delta",
+    "diagnostic_report",
+    "cache_parity_test"
+  ],
+  "decision": "PASS_B0_BZ_BENCHMARK_ZERO_AUTHORITY",
+  "legacy_undefined_bz_valid": false,
+  "search_started": false,
+  "forward_performance_read": false,
+  "authorizes_promotion": false
+}

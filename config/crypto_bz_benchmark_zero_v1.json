@@ -1,0 +1,12 @@
+{
+  "authority_id": "CRYPTO-BZ-BENCHMARK-ZERO-V1",
+  "canonical_name": "Benchmark Zero",
+  "canonical_abbreviation": "BZ",
+  "definition": "A non-candidate, zero-alpha comparison object used only for pipeline sanity and diagnostic benchmark deltas.",
+  "implementation_entrypoint": "alphafactory_crypto.bz.create_benchmark_zero",
+  "allowed_input_roles": ["benchmark-only"],
+  "allowed_uses": ["pipeline_sanity", "benchmark_delta", "diagnostic_report", "cache_parity_test"],
+  "forbidden_uses": ["candidate_generation", "candidate_ranking", "promotion", "strict_reward", "scheduler", "successive_halving", "A7MEM", "positive_memory"],
+  "feedback_permission": "NONE",
+  "legacy_undefined_bz_policy": "INVALID_ALIAS_REQUIRES_EXPLICIT_MIGRATION"
+}

@@ -43,3 +43,7 @@ _Avoid_: Forecast horizon, ordinary lag
 **Input Role**:
 One of primary, interaction-only, condition-only, state-only, benchmark-only, or blocked; it describes permitted semantics independently of current candidates and does not itself authorize generator use.
 _Avoid_: Search weight, OOS rank, generator enablement
+
+**Benchmark Zero (BZ)**:
+A non-candidate, zero-alpha comparison object using only benchmark-only inputs for pipeline sanity and diagnostic deltas; it has no feedback or promotion permission.
+_Avoid_: BZ as an undefined policy, candidate baseline, promotion score

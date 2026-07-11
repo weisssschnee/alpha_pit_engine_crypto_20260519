@@ -33,7 +33,7 @@
     {"id":"B0.1","name":"Funding event detector and audit","status":"IMPLEMENTED"},
     {"id":"B0.2","name":"Future wrong-lag negative control","status":"IMPLEMENTED"},
     {"id":"B0.3","name":"A7INPUT0-v2 field roles","status":"IMPLEMENTED"},
-    {"id":"B0.4","name":"BZ authority contract","status":"PLANNED"},
+    {"id":"B0.4","name":"BZ authority contract","status":"IMPLEMENTED"},
     {"id":"B0.5","name":"Layered identity registry","status":"PLANNED"},
     {"id":"B0.6","name":"Benchmark registry","status":"PLANNED"},
     {"id":"B0.7","name":"Temporal/event primitive contract","status":"PLANNED"},

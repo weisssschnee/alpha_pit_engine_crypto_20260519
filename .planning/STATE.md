@@ -1,6 +1,6 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `9E61336EB492A1A47845D86047AB11B531EBD0EC3F58ED77A31ECC7D4F98DEF4`.
+Registry SHA256: `483C58342B026BADB1BE759429B30BADCB7913700776EE691201913B89175F3D`.
 
 ## Formal Status
 
@@ -26,7 +26,7 @@ The earlier unsynchronized state is superseded by the verified remote refs above
 - `B0.1` Funding event detector and audit: `IMPLEMENTED`
 - `B0.2` Future wrong-lag negative control: `IMPLEMENTED`
 - `B0.3` A7INPUT0-v2 field roles: `IMPLEMENTED`
-- `B0.4` BZ authority contract: `PLANNED`
+- `B0.4` BZ authority contract: `IMPLEMENTED`
 - `B0.5` Layered identity registry: `PLANNED`
 - `B0.6` Benchmark registry: `PLANNED`
 - `B0.7` Temporal/event primitive contract: `PLANNED`
