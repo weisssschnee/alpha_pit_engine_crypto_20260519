@@ -1,0 +1,30 @@
+{
+  "contract_id": "CRYPTO-NEXTGEN-DARK-FABRIC-V1",
+  "data_scope": {
+    "role": "DEVELOPMENT_PRE_FORWARD_OBSERVATION_ONLY",
+    "start_utc": "2024-01-01T00:00:00Z",
+    "end_utc_inclusive": "2026-04-30T23:00:00Z",
+    "funding_production_scope": "BINANCE_UM_CORE12_ACCEPTED_RANGE_ONLY"
+  },
+  "feedback_permission": "NONE_NO_REWARD_GENERATOR_MEMORY_PROMOTION",
+  "source_lag": "field_registry_feature_available_time_primary",
+  "maturity": "max(source_maturity,observable_time)",
+  "missing_semantics": "preserve_nan_and_explicit_bitmask",
+  "unapproved_source_policy": "UNAVAILABLE_NO_APPROVED_SOURCE",
+  "state_inputs": {
+    "funding_event_age": ["funding_rate"],
+    "funding_event_intensity": ["funding_rate"],
+    "basis_dislocation": ["mark_trade_basis_bps"],
+    "oi_expansion_contraction": ["open_interest_value_last"],
+    "liquidation_cluster": ["liquidation_notional"],
+    "mark_index_deviation": ["mark_index_basis_bps"],
+    "taker_imbalance_state": ["kline_taker_buy_quote_share"],
+    "depth_liquidity_state": ["depth_notional_10bps"],
+    "liquidity_state": ["trade_quote_volume"],
+    "volatility_state": ["trade_close"],
+    "session_time_of_day": [],
+    "cross_asset_confirmation": ["trade_close"]
+  },
+  "forbidden_columns": ["forward_trade_return_1h", "fwd_ret_1", "reward", "pnl", "sharpe", "sortino"],
+  "cache_contract": "content_addressed_path_independent_order_invariant"
+}

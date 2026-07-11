@@ -21,6 +21,19 @@
     {"primitive_id":"past_window","kind":"temporal","input_role":"approved non-blocked","maturity_rule":"window closes before decision time","feedback_permission":"NONE"},
     {"primitive_id":"event_observed","kind":"event","input_role":"state-only or condition-only","maturity_rule":"event usable time","feedback_permission":"NO_REWARD_B0"},
     {"primitive_id":"event_age","kind":"event","input_role":"state-only or condition-only","maturity_rule":"most recent usable event","feedback_permission":"NO_REWARD_B0"},
-    {"primitive_id":"matured_event_value","kind":"event","input_role":"state-only or condition-only","maturity_rule":"cashflow/value maturity and observability","feedback_permission":"NO_REWARD_B0"}
+    {"primitive_id":"matured_event_value","kind":"event","input_role":"state-only or condition-only","maturity_rule":"cashflow/value maturity and observability","feedback_permission":"NO_REWARD_B0"},
+    {"primitive_id":"Delta","kind":"typed-temporal","input_role":"approved observable","maturity_rule":"source maturity","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"Slope","kind":"typed-temporal","input_role":"approved observable","maturity_rule":"past window complete","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"Acceleration","kind":"typed-temporal","input_role":"approved observable","maturity_rule":"source maturity","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"Persistence","kind":"typed-temporal","input_role":"approved observable","maturity_rule":"past window complete","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"Duration","kind":"typed-event","input_role":"state-only or condition-only","maturity_rule":"latest usable state","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"StateAge","kind":"typed-event","input_role":"state-only or condition-only","maturity_rule":"latest usable state","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"TimeSince","kind":"typed-event","input_role":"state-only or condition-only","maturity_rule":"latest usable event","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"Transition","kind":"typed-event","input_role":"state-only or condition-only","maturity_rule":"both states usable","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"FirstHit","kind":"typed-event","input_role":"state-only or condition-only","maturity_rule":"event usable time","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"LastHit","kind":"typed-event","input_role":"state-only or condition-only","maturity_rule":"event usable time","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"PathShape","kind":"typed-temporal","input_role":"approved observable","maturity_rule":"past window complete","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"EventWindow","kind":"typed-event","input_role":"state-only or condition-only","maturity_rule":"past event window complete","feedback_permission":"NONE_NEXTGEN_DARK"},
+    {"primitive_id":"MultiScaleRelation","kind":"typed-temporal","input_role":"approved observable","maturity_rule":"long past window complete","feedback_permission":"NONE_NEXTGEN_DARK"}
   ]
 }
