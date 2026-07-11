@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `DFCB3AC1B73CEC0474B937CB77A7E3C7CD275D15D011A5D586C0C57B690AAC18`.
+Registry SHA256: `C99769616C9E31F287C35C1E53A45C64FB72F0C927F8532EE5A40237BE4206DE`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `RESEARCH_MODE_CONTROLLED_EPOCH1R_REPAIR_ONLY`
-- Current phase: `EPOCH1R_ADMISSION_PREFLIGHT_PASSED_READY_TO_FREEZE`
+- Current phase: `FROZEN_DEVELOPMENT_EPOCH1R_DESIGN_FROZEN`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,7 +16,7 @@ Registry SHA256: `DFCB3AC1B73CEC0474B937CB77A7E3C7CD275D15D011A5D586C0C57B690AAC
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `EPOCH1R_FULL_PACK_PREFLIGHT_PASSED_READY_TO_FREEZE`
+- Active stage: `EPOCH1R_DESIGN_FROZEN_READY_FOR_SINGLE_STRICT_EXECUTION`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -146,11 +146,12 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## CRYPTO NEXTGEN SEARCH EPOCH-1R
 
-- Status: `EPOCH1R_ADMISSION_PREFLIGHT_PASSED_READY_TO_FREEZE`
+- Status: `FROZEN_DEVELOPMENT_EPOCH1R_DESIGN_FROZEN`
 - Repair scope: `EMPTY_REPRESENTATIVE_SET_ONLY`
 - Failed evidence subject: `403b3519773e18c38033b2eaeaf404c98320595a`
 - Upstream changes — generator / grammar / objective / adaptive / seeds / budgets: `False` / `False` / `False` / `False` / `False` / `False`
-- Design frozen / strict started: `False` / `False`
+- Design frozen / strict started: `True` / `False`
+- Frozen repo / manifest: `90a80795d4978497a2a5810ea02a5cdfdd1fac2e` / `4A04836FD6FC97ACF9F777075C2E8F049257FFC13E3740E318D2AF0D50FBFB15`
 - Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
 
 ## NEXTGEN-DARK Allowed
@@ -193,4 +194,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Commit the immutable proposal pack and passed admission-only preflight evidence, create a new Epoch-1R manifest binding repair code/tests/capacity/assignment and unchanged upstream contracts, synchronize the design-freeze control plane, then execute strict evaluation once.
+Execute the frozen 2052-row Epoch-1R strict assignment exactly once, validate all output hashes and prohibited flags, then perform closure Graph/STATE/manifest/artifact-index synchronization.

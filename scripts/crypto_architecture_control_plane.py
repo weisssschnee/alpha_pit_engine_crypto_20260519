@@ -67,6 +67,7 @@ EPOCH1R_FULL_IDENTITIES_PATH = EPOCH1R_ROOT / "full_identity_records.jsonl.gz"
 EPOCH1R_CAPACITY_PATH = EPOCH1R_ROOT / "admission_capacity_table.csv"
 EPOCH1R_ASSIGNMENT_PATH = EPOCH1R_ROOT / "admission_assignments.csv"
 EPOCH1R_PREFLIGHT_PATH = EPOCH1R_ROOT / "admission_preflight_manifest.json"
+EPOCH1R_FROZEN_PATH = EPOCH1R_ROOT / "epoch1r_frozen_design_manifest.json"
 EPOCH1R_ARTIFACT_INDEX_PATH = EPOCH1R_ROOT / "epoch1r_artifact_index.csv"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
@@ -559,6 +560,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Failed evidence subject: `{state['nextgen_epoch1r']['failed_epoch1_subject_sha']}`
 - Upstream changes — generator / grammar / objective / adaptive / seeds / budgets: `{state['nextgen_epoch1r']['proposal_generator_changed']}` / `{state['nextgen_epoch1r']['grammar_changed']}` / `{state['nextgen_epoch1r']['reward_objective_changed']}` / `{state['nextgen_epoch1r']['adaptive_algorithms_changed']}` / `{state['nextgen_epoch1r']['seeds_changed']}` / `{state['nextgen_epoch1r']['budgets_changed']}`
 - Design frozen / strict started: `{state['nextgen_epoch1r']['design_frozen']}` / `{state['nextgen_epoch1r']['strict_evaluation_started']}`
+- Frozen repo / manifest: `{state['nextgen_epoch1r'].get('frozen_repo_sha', 'not_frozen')}` / `{state['nextgen_epoch1r'].get('frozen_manifest_sha256', 'not_frozen')}`
 - Forward read / promotion / cross-epoch memory: `{state['nextgen_epoch1r']['forward_read']}` / `{state['nextgen_epoch1r']['candidate_promotion']}` / `{state['nextgen_epoch1r']['cross_epoch_memory']}`
 
 ## NEXTGEN-DARK Allowed
@@ -714,6 +716,7 @@ def epoch1r_artifact_paths(registry: dict[str, Any]) -> set[Path]:
         EVOLUTION_PATH, GRAPH_PATH, STATE_PATH, RUN_MANIFEST_PATH, EPOCH1R_PACK_PATH,
         EPOCH1R_PACK_MANIFEST_PATH, EPOCH1R_FULL_IDENTITIES_PATH, EPOCH1R_CAPACITY_PATH,
         EPOCH1R_ASSIGNMENT_PATH, EPOCH1R_PREFLIGHT_PATH,
+        EPOCH1R_FROZEN_PATH,
         REPO / "scripts" / "crypto_architecture_control_plane.py",
         REPO / "tests" / "test_architecture_control_plane.py",
     }
@@ -803,6 +806,7 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "epoch1r_strict_evaluation_started": state["nextgen_epoch1r"]["strict_evaluation_started"],
         "epoch1r_preflight_status": state["nextgen_epoch1r"].get("preflight_status"),
         "epoch1r_strict_assignment_total": state["nextgen_epoch1r"].get("strict_assignment_total"),
+        "epoch1r_frozen_manifest_sha256": state["nextgen_epoch1r"].get("frozen_manifest_sha256"),
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -976,6 +980,8 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "epoch1r_preflight": relative(EPOCH1R_PREFLIGHT_PATH),
         "epoch1r_artifact_index": relative(EPOCH1R_ARTIFACT_INDEX_PATH),
         "epoch1r_strict_assignment_total": state["nextgen_epoch1r"].get("strict_assignment_total"),
+        "epoch1r_frozen_manifest": relative(EPOCH1R_FROZEN_PATH),
+        "epoch1r_frozen_manifest_sha256": state["nextgen_epoch1r"].get("frozen_manifest_sha256"),
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []
@@ -1385,6 +1391,17 @@ def validate_outputs(registry: dict[str, Any]) -> None:
         raise ValueError("Epoch-1R preflight/state assignment count mismatch")
     if manifest.get("epoch1r_preflight") != relative(EPOCH1R_PREFLIGHT_PATH) or manifest.get("epoch1r_strict_assignment_total") != epoch1r_preflight["strict_assignment_total"]:
         raise ValueError("Phase A/B0 manifest Epoch-1R preflight mismatch")
+    epoch1r_frozen = load_json(EPOCH1R_FROZEN_PATH)
+    epoch1r_recorded = epoch1r_frozen.pop("frozen_manifest_sha256")
+    epoch1r_actual = sha256_bytes(json.dumps(epoch1r_frozen, sort_keys=True, separators=(",", ":"), default=str).encode())
+    if epoch1r_actual != epoch1r_recorded or epoch1r_recorded != state["nextgen_epoch1r"].get("frozen_manifest_sha256"):
+        raise ValueError("Epoch-1R frozen manifest identity mismatch")
+    if epoch1r_frozen.get("status") != "EPOCH1R_DESIGN_FROZEN_NOT_STARTED" or epoch1r_frozen.get("strict_evaluation_started"):
+        raise ValueError("Epoch-1R design freeze status mismatch")
+    if epoch1r_frozen.get("strict_assignment_total") != epoch1r_preflight["strict_assignment_total"]:
+        raise ValueError("Epoch-1R frozen/preflight strict assignment mismatch")
+    if manifest.get("epoch1r_frozen_manifest_sha256") != epoch1r_recorded:
+        raise ValueError("Phase A/B0 manifest Epoch-1R frozen identity mismatch")
     with EPOCH1R_ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
         epoch1r_index_rows = list(csv.DictReader(handle))
     if {row["path"] for row in epoch1r_index_rows} != {relative(path) for path in epoch1r_artifact_paths(registry)}:

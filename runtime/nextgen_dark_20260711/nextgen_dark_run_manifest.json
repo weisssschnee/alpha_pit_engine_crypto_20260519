@@ -25,7 +25,7 @@
   "canary_plan": "config/crypto_nextgen_dark_canary_plan_v1.json",
   "canary_status": "PREPARED_NOT_AUTHORIZED_NOT_STARTED",
   "artifact_index": "runtime/nextgen_dark_20260711/nextgen_dark_artifact_index.csv",
-  "registry_sha256": "DFCB3AC1B73CEC0474B937CB77A7E3C7CD275D15D011A5D586C0C57B690AAC18",
+  "registry_sha256": "C99769616C9E31F287C35C1E53A45C64FB72F0C927F8532EE5A40237BE4206DE",
   "test_evidence": {
     "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
     "result": "72 passed in 24.93s",
