@@ -7,7 +7,9 @@ import pandas as pd
 
 from alphafactory_crypto.b1s_canary import FrozenPanel
 from alphafactory_crypto.search_revision import (
+    ADMISSION_RESULT_SCHEMA,
     adaptive_verdict,
+    admission_result_frame,
     admit_full_identity,
     concentration_metrics,
     development_feedback,
@@ -86,3 +88,90 @@ def test_concentration_metrics_report_entropy_and_top_decile_share() -> None:
     metrics = concentration_metrics(frame)
     assert 0 <= metrics["mechanism_entropy"] <= 1
     assert metrics["top_decile_mechanism_share"] == 1.0
+
+
+def assert_empty_outcome(result, rows, requested: int = 32) -> None:
+    assert result.admitted_ids == ()
+    assert result.capacity.feasible_capacity == 0
+    assert result.capacity.assigned_capacity == 0
+    assert result.capacity.natural_underfill is True
+    assert result.capacity.reason == "NO_LEGAL_EXACT_IDENTITIES"
+    assert tuple(admission_result_frame(result, rows).columns) == ADMISSION_RESULT_SCHEMA
+
+
+def test_columnless_empty_dataframe_is_standard_zero_capacity() -> None:
+    rows = pd.DataFrame()
+    assert_empty_outcome(admit_full_identity(rows, 32), rows)
+
+
+def test_schema_empty_dataframe_is_standard_zero_capacity() -> None:
+    rows = pd.DataFrame(columns=["proposal_id", "full_exact_identity", "mechanism_id", "parent_identity", "behaviour_cluster", "ordinal"])
+    assert_empty_outcome(admit_full_identity(rows, 32), rows)
+
+
+def test_one_identity_assigns_once() -> None:
+    result = admit_full_identity([row(1)], 32)
+    assert result.admitted_ids == ("p:1",)
+    assert result.capacity.feasible_capacity == result.capacity.assigned_capacity == 1
+    assert result.capacity.reason == "LEGAL_EXACT_IDENTITY_CAPACITY"
+
+
+def test_alias_rows_without_representative_are_zero_capacity() -> None:
+    rows = [dict(row(i), full_exact_identity="") for i in range(5)]
+    assert_empty_outcome(admit_full_identity(rows, 32), rows)
+
+
+def test_single_and_multiple_mechanisms_are_supported() -> None:
+    single = admit_full_identity([row(i, "one") for i in range(20)], 16)
+    multiple = admit_full_identity([row(i, f"m{i % 4}") for i in range(20)], 16)
+    assert len(single.admitted_ids) == 16
+    assert len(multiple.admitted_ids) == 16
+    assert single.plan.mechanism_family_count == 1
+    assert multiple.plan.mechanism_family_count == 4
+
+
+def test_feasible_capacity_below_and_equal_to_quota() -> None:
+    below = admit_full_identity([row(i) for i in range(7)], 10)
+    equal = admit_full_identity([row(i) for i in range(10)], 10)
+    assert below.capacity.feasible_capacity == below.capacity.assigned_capacity == 7
+    assert below.capacity.natural_underfill
+    assert equal.capacity.feasible_capacity == equal.capacity.assigned_capacity == 10
+    assert not equal.capacity.natural_underfill
+
+
+def test_bbo_single_mechanism_capacity_is_not_redistributed() -> None:
+    bbo = admit_full_identity([row(i, "bbo") for i in range(128)], 128)
+    assert bbo.plan.family_cap == 128
+    assert bbo.capacity.assigned_capacity == 128
+
+
+def test_empty_lane_does_not_change_other_lane_quota() -> None:
+    empty = admit_full_identity([], 32)
+    normal = admit_full_identity([row(i, "normal") for i in range(32)], 32)
+    assert empty.capacity.assigned_capacity == 0
+    assert normal.capacity.assigned_capacity == 32
+    assert empty.capacity.assigned_capacity + normal.capacity.assigned_capacity == 32
+
+
+def test_all_lanes_empty_return_complete_schema() -> None:
+    outcomes = [admit_full_identity(pd.DataFrame(), quota) for quota in (32, 64, 96)]
+    assert all(outcome.capacity.reason == "NO_LEGAL_EXACT_IDENTITIES" for outcome in outcomes)
+    assert all(tuple(admission_result_frame(outcome, []).columns) == ADMISSION_RESULT_SCHEMA for outcome in outcomes)
+
+
+def test_input_order_does_not_change_assignment() -> None:
+    rows = [row(i, f"m{i % 3}") for i in range(30)]
+    forward = admit_full_identity(rows, 20)
+    reverse = admit_full_identity(list(reversed(rows)), 20)
+    assert forward.admitted_ids == reverse.admitted_ids
+    assert forward.capacity == reverse.capacity
+
+
+def test_natural_underfill_never_reallocates_budget() -> None:
+    lanes = {
+        "empty": admit_full_identity([], 10),
+        "limited": admit_full_identity([row(i, "limited") for i in range(3)], 10),
+        "full": admit_full_identity([row(i, "full") for i in range(10)], 10),
+    }
+    assert {key: value.capacity.assigned_capacity for key, value in lanes.items()} == {"empty": 0, "limited": 3, "full": 10}
+    assert sum(value.capacity.assigned_capacity for value in lanes.values()) == 13

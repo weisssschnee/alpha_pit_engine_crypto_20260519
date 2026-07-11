@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `53F8FC93096268AEBA9639B8D5404AF984740FC57077F37324914298A0DF281D`.
+Generated from registry SHA256: `92742C026BADF15834841999AB85C2D4F07F452B6BAD5C3719D38DDC9830A67D`.
 
 ## Authority
 
@@ -69,3 +69,10 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 | epoch1_execution | scheduler | no automatic rerun or next epoch |
 | spent_evaluation | epoch1_execution | spent evaluation cannot enter execution or recommendation |
 | sealed_forward | epoch1_execution | forward remains sealed during and after execution |
+| spent_evaluation | epoch1r_admission_repair | repair and admission preflight cannot read spent evaluation |
+| sealed_forward | epoch1r_admission_repair | repair and admission preflight cannot read forward data |
+| spent_evaluation | epoch1r_execution | spent evaluation cannot enter Epoch-1R strict execution |
+| sealed_forward | epoch1r_execution | forward remains sealed during and after Epoch-1R |
+| epoch1r_execution | a7mem | Epoch-1R cannot persist adaptive state or memory |
+| epoch1r_execution | admission | Epoch-1R cannot promote candidates |
+| epoch1r_execution | scheduler | Epoch-1R cannot auto-rerun, reallocate or schedule another epoch |

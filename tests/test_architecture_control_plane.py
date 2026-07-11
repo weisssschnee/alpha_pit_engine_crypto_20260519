@@ -44,7 +44,9 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertIn(state["current_phase"], {
             "SEARCH_ENGINE_REVISION_COMPLETED", "FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN",
             "FROZEN_DEVELOPMENT_EPOCH1_COMPLETED", "FROZEN_DEVELOPMENT_EPOCH1_PARTIALLY_COMPLETED",
-            "FROZEN_DEVELOPMENT_EPOCH1_FAILED",
+            "FROZEN_DEVELOPMENT_EPOCH1_FAILED", "EPOCH1R_ADMISSION_REPAIR_IMPLEMENTED_PREFLIGHT_PENDING",
+            "FROZEN_DEVELOPMENT_EPOCH1R_DESIGN_FROZEN", "FROZEN_DEVELOPMENT_EPOCH1R_COMPLETED",
+            "FROZEN_DEVELOPMENT_EPOCH1R_COMPLETED_WITH_NATURAL_UNDERFILL", "FROZEN_DEVELOPMENT_EPOCH1R_FAILED",
         })
         self.assertEqual(
             state["production_observation_qualification_status"],
@@ -52,7 +54,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         )
         self.assertEqual(state["phase_b1_status"], "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN")
         self.assertEqual(state["phase_b0p_acceptance"]["status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
-        self.assertTrue(state["active_stage"].startswith("EPOCH1_"))
+        self.assertTrue(state["active_stage"].startswith("EPOCH1"))
         self.assertEqual(state["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
         self.assertEqual(state["phase_b0a_acceptance"]["accepted_subject_sha"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(state["formal_search_status"], "FORMAL_SEARCH_FROZEN")
@@ -66,6 +68,9 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertFalse(state["nextgen_epoch1"]["forward_read"])
         self.assertFalse(state["nextgen_epoch1"]["candidate_promotion"])
         self.assertFalse(state["nextgen_epoch1"]["cross_epoch_memory"])
+        self.assertFalse(state["nextgen_epoch1r"]["forward_read"])
+        self.assertFalse(state["nextgen_epoch1r"]["candidate_promotion"])
+        self.assertFalse(state["nextgen_epoch1r"]["cross_epoch_memory"])
         self.assertEqual(state["adaptive_cross_epoch_memory_status"], "ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN")
         self.assertEqual(state["candidate_promotion_status"], "NO_CANDIDATE_PROMOTION")
 
@@ -98,6 +103,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(manifest["b1s_canary_status"], "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL")
         self.assertEqual(manifest["epoch0_status"], "FROZEN_DEVELOPMENT_EPOCH_COMPLETED")
         self.assertEqual(manifest["epoch1_status"], state["nextgen_epoch1"]["status"])
+        self.assertEqual(manifest["epoch1r_status"], state["nextgen_epoch1r"]["status"])
 
         nodes = {node["id"]: node for node in registry["nodes"]}
         self.assertIn("contract implemented", nodes["feature_builder"]["blocker"])
@@ -125,6 +131,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(graph_control["epoch0_status"], "FROZEN_DEVELOPMENT_EPOCH_COMPLETED")
         self.assertEqual(graph_control["epoch0_total_development_strict_evaluations"], 1801)
         self.assertEqual(graph_control["epoch1_status"], state["nextgen_epoch1"]["status"])
+        self.assertEqual(graph_control["epoch1r_status"], state["nextgen_epoch1r"]["status"])
         self.assertEqual(graph_control["candidate_promotion_status"], "NO_CANDIDATE_PROMOTION")
         self.assertEqual(graph["built_at_accepted_subject"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertNotIn("built_at_commit", graph)

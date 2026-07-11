@@ -45,10 +45,61 @@ class QuotaPlan:
 
 
 @dataclass(frozen=True)
+class CapacitySummary:
+    feasible_capacity: int
+    assigned_capacity: int
+    natural_underfill: bool
+    reason: str
+
+
+@dataclass(frozen=True)
 class AdmissionOutcome:
     admitted_ids: tuple[str, ...]
     rejected: tuple[tuple[str, str], ...]
     plan: QuotaPlan
+    capacity: CapacitySummary
+
+
+ADMISSION_INPUT_SCHEMA = (
+    "proposal_id", "full_exact_identity", "mechanism_id", "parent_identity",
+    "behaviour_cluster", "ordinal",
+)
+ADMISSION_RESULT_SCHEMA = (
+    "proposal_id", "full_exact_identity", "mechanism_id", "parent_identity",
+    "behaviour_cluster", "ordinal", "assignment_status", "rejection_reason",
+)
+
+
+def normalize_admission_rows(rows: Sequence[Mapping[str, Any]] | pd.DataFrame) -> pd.DataFrame:
+    """Return a deterministic, complete admission schema even for a columnless empty input."""
+    if isinstance(rows, pd.DataFrame):
+        frame = rows.copy()
+    else:
+        frame = pd.DataFrame.from_records(list(rows))
+    frame = frame.reindex(columns=ADMISSION_INPUT_SCHEMA)
+    for column in ADMISSION_INPUT_SCHEMA[:-1]:
+        frame[column] = frame[column].fillna("").astype(str)
+    ordinal = pd.to_numeric(frame["ordinal"], errors="coerce")
+    frame["ordinal"] = ordinal.fillna(np.iinfo(np.int64).max).astype(np.int64)
+    return frame.sort_values(
+        ["ordinal", "proposal_id", "full_exact_identity", "mechanism_id", "parent_identity", "behaviour_cluster"],
+        kind="mergesort",
+    ).reset_index(drop=True)
+
+
+def admission_result_frame(
+    outcome: AdmissionOutcome,
+    rows: Sequence[Mapping[str, Any]] | pd.DataFrame,
+) -> pd.DataFrame:
+    """Materialize a stable result table; an empty outcome still has all required columns."""
+    frame = normalize_admission_rows(rows)
+    if frame.empty:
+        return pd.DataFrame(columns=ADMISSION_RESULT_SCHEMA)
+    admitted = set(outcome.admitted_ids)
+    rejected = dict(outcome.rejected)
+    frame["assignment_status"] = np.where(frame["proposal_id"].isin(admitted), "ASSIGNED", "NOT_ASSIGNED")
+    frame["rejection_reason"] = frame["proposal_id"].map(rejected).fillna("")
+    return frame.reindex(columns=ADMISSION_RESULT_SCHEMA)
 
 
 def development_feedback(
@@ -125,29 +176,40 @@ def development_feedback(
     )
 
 
-def quota_plan(rows: Sequence[Mapping[str, Any]], requested: int) -> QuotaPlan:
-    identities = {str(row["full_exact_identity"]) for row in rows if str(row.get("full_exact_identity", ""))}
-    families = {str(row["mechanism_id"]) for row in rows if str(row.get("full_exact_identity", ""))}
+def quota_plan(rows: Sequence[Mapping[str, Any]] | pd.DataFrame, requested: int) -> QuotaPlan:
+    if requested < 0:
+        raise ValueError("requested quota must be non-negative")
+    frame = normalize_admission_rows(rows)
+    representatives = frame[frame["full_exact_identity"] != ""]
+    identities = set(representatives["full_exact_identity"])
+    families = set(representatives["mechanism_id"])
     capacity = len(identities)
-    family_count = max(1, len(families))
+    family_count = len(families)
     feasible = min(requested, capacity)
     # With one legal family the cap equals the requested quota; with more families it prevents domination
     # while leaving at least 1.5x average capacity for naturally uneven mechanisms.
-    family_cap = requested if family_count == 1 else max(2, math.ceil(requested / family_count * 1.5))
+    family_cap = 0 if family_count == 0 else (requested if family_count == 1 else max(2, math.ceil(requested / family_count * 1.5)))
     return QuotaPlan(
         requested=requested, identity_capacity=capacity, mechanism_family_count=family_count,
         feasible_quota=feasible, family_cap=family_cap,
-        parent_cap=max(4, math.ceil(requested / max(4, family_count * 2))),
-        behaviour_cap=max(4, math.ceil(requested / max(8, family_count * 2))),
+        parent_cap=0 if capacity == 0 else max(4, math.ceil(requested / max(4, family_count * 2))),
+        behaviour_cap=0 if capacity == 0 else max(4, math.ceil(requested / max(8, family_count * 2))),
         natural_underfill=requested - feasible,
     )
 
 
-def admit_full_identity(rows: Sequence[Mapping[str, Any]], requested: int) -> AdmissionOutcome:
-    plan = quota_plan(rows, requested)
+def admit_full_identity(rows: Sequence[Mapping[str, Any]] | pd.DataFrame, requested: int) -> AdmissionOutcome:
+    frame = normalize_admission_rows(rows)
+    plan = quota_plan(frame, requested)
+    if plan.identity_capacity == 0 or requested == 0:
+        reason = "NO_LEGAL_EXACT_IDENTITIES" if plan.identity_capacity == 0 else "ZERO_REQUESTED_QUOTA"
+        return AdmissionOutcome(
+            (), (), plan,
+            CapacitySummary(0, 0, requested > 0, reason),
+        )
     representatives: dict[str, Mapping[str, Any]] = {}
-    for row in sorted(rows, key=lambda item: (int(item["ordinal"]), str(item["proposal_id"]))):
-        identity = str(row.get("full_exact_identity", ""))
+    for row in frame.to_dict("records"):
+        identity = str(row["full_exact_identity"])
         if identity:
             representatives.setdefault(identity, row)
     buckets = {
@@ -180,7 +242,16 @@ def admit_full_identity(rows: Sequence[Mapping[str, Any]], requested: int) -> Ad
             families[family] += 1; parents[parent] += 1; behaviours[behaviour] += 1
         if not progressed:
             break
-    return AdmissionOutcome(tuple(admitted), tuple(rejected), plan)
+    if len(admitted) < plan.feasible_quota:
+        reason = "ADMISSION_CAPS"
+    elif len(admitted) < requested:
+        reason = "LEGAL_EXACT_IDENTITY_CAPACITY"
+    else:
+        reason = ""
+    return AdmissionOutcome(
+        tuple(admitted), tuple(rejected), plan,
+        CapacitySummary(plan.feasible_quota, len(admitted), len(admitted) < requested, reason),
+    )
 
 
 def normalized_entropy(values: Iterable[str]) -> float:

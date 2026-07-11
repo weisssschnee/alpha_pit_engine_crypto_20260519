@@ -2,13 +2,13 @@
   "manifest_id": "PHASE-A-B0-B0P-RUN-MANIFEST-20260711",
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
-  "research_status": "RESEARCH_MODE_EPOCH1_FAILED_CLOSED",
-  "current_phase": "FROZEN_DEVELOPMENT_EPOCH1_FAILED",
+  "research_status": "RESEARCH_MODE_CONTROLLED_EPOCH1R_REPAIR_ONLY",
+  "current_phase": "EPOCH1R_ADMISSION_REPAIR_IMPLEMENTED_PREFLIGHT_PENDING",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
-  "registry_sha256": "53F8FC93096268AEBA9639B8D5404AF984740FC57077F37324914298A0DF281D",
+  "registry_sha256": "92742C026BADF15834841999AB85C2D4F07F452B6BAD5C3719D38DDC9830A67D",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-  "active_stage": "EPOCH1_FAILED_CLOSED_AWAITING_SEARCH_ENGINE_REVISION_AUTHORIZATION",
+  "active_stage": "EPOCH1R_NARROW_ADMISSION_REPAIR_COMPLETE_PREFLIGHT_PENDING",
   "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
   "acceptance_attestation": "runtime/a7b0_control_plane_20260711/phase_b0_acceptance_attestation.json",
   "test_evidence": {
@@ -18,8 +18,8 @@
     "output_path": "runtime/a7b0_control_plane_20260711/phase_b0_acceptance_test_output.txt",
     "output_sha256": "23CE54E17A626986D2A60E6279C73BA09C852D26A5220E807FF65EA4A853EBFE"
   },
-  "graph_control_nodes": 46,
-  "graph_control_edges": 89,
+  "graph_control_nodes": 49,
+  "graph_control_edges": 99,
   "b0_items": [
     {
       "id": "B0.1",
@@ -159,7 +159,7 @@
   "epoch0_closure_validation": "runtime/nextgen_epoch0_20260711/epoch0_closure_validation.json",
   "epoch0_total_development_strict_evaluations": 1801,
   "epoch0_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
-  "epoch1_status": "FROZEN_DEVELOPMENT_EPOCH1_FAILED",
+  "epoch1_status": "EPOCH1_EXECUTION_FAILED_PRE_STRICT",
   "epoch1_design_frozen": true,
   "epoch1_performance_started": true,
   "epoch1_execution_status": "FAILED_BEFORE_STRICT_EVALUATION",
@@ -168,10 +168,13 @@
   "epoch1_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
   "epoch1_remote_sync": {
     "branch": "audit/evalreset-collapse-forensics-20260711",
-    "closure_subject_sha": "65c6b46f5e157fb217e3e1896d852b39924193dd",
-    "remote_sha": "UNVERIFIED_NETWORK_UNAVAILABLE",
-    "attempts": 3,
-    "status": "PUSH_PENDING_GITHUB_HTTPS_UNREACHABLE",
-    "last_error": "Failed to connect to github.com port 443"
-  }
+    "closure_subject_sha": "403b3519773e18c38033b2eaeaf404c98320595a",
+    "remote_sha": "403b3519773e18c38033b2eaeaf404c98320595a",
+    "attempts": 4,
+    "status": "VERIFIED_SYNCED_WITH_EVIDENCE_TAG",
+    "tag": "epoch1-failed-pre-strict-403b351"
+  },
+  "epoch1r_status": "REPAIR_EMPTY_ADMISSION_IMPLEMENTED_PREFLIGHT_PENDING",
+  "epoch1r_design_frozen": false,
+  "epoch1r_strict_evaluation_started": false
 }

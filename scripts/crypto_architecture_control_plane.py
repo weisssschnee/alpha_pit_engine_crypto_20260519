@@ -95,6 +95,7 @@ REQUIRED_NODE_IDS = {
     "epoch0_frozen_design",
     "epoch0_execution",
     "epoch1_search_revision", "epoch1_frozen_design", "epoch1_execution",
+    "epoch1r_admission_repair", "epoch1r_frozen_design", "epoch1r_execution",
 }
 REQUIRED_FORBIDDEN_EDGES = {
     ("spent_evaluation", "admission"),
@@ -146,6 +147,13 @@ REQUIRED_FORBIDDEN_EDGES = {
     ("epoch1_execution", "scheduler"),
     ("spent_evaluation", "epoch1_execution"),
     ("sealed_forward", "epoch1_execution"),
+    ("spent_evaluation", "epoch1r_admission_repair"),
+    ("sealed_forward", "epoch1r_admission_repair"),
+    ("spent_evaluation", "epoch1r_execution"),
+    ("sealed_forward", "epoch1r_execution"),
+    ("epoch1r_execution", "a7mem"),
+    ("epoch1r_execution", "admission"),
+    ("epoch1r_execution", "scheduler"),
 }
 VALID_STATUSES = {"IMPLEMENTED", "PARTIAL", "PLANNED", "FROZEN", "DEPRECATED"}
 
@@ -329,7 +337,7 @@ def render_documents(
 
 Generated from `{relative(REGISTRY_PATH)}`. Registry SHA256: `{digest}`.
 
-Status: `{state['current_phase']}` / `{state['nextgen_epoch1']['status']}` / `{state['nextgen_epoch0']['status']}` / `{state['nextgen_dark_status']}` / `{state['canary_status']}` / `{state['production_observation_qualification_status']}` / `{state['formal_search_status']}` / `{state['adaptive_cross_epoch_memory_status']}` / `{state['candidate_promotion_status']}` / `{state['forward_data_status']}`.
+Status: `{state['current_phase']}` / `{state['nextgen_epoch1r']['status']}` / `{state['nextgen_epoch1']['status']}` / `{state['nextgen_epoch0']['status']}` / `{state['nextgen_dark_status']}` / `{state['canary_status']}` / `{state['production_observation_qualification_status']}` / `{state['formal_search_status']}` / `{state['adaptive_cross_epoch_memory_status']}` / `{state['candidate_promotion_status']}` / `{state['forward_data_status']}`.
 
 Authority: `{relative(REGISTRY_PATH)}` is the machine-readable architecture authority; `graph.json` is its deterministic graph view; this file is the human-readable generated view. Raw graphify is unavailable, so `graph.json` retains the prior navigation graph plus a deterministic `control_*` overlay.
 
@@ -403,7 +411,8 @@ Generated from registry SHA256: `{digest}`.
 - Funding capacity expanded to 120 exact identities in typed funding slices, so the earlier 27-identity CANARY ceiling was a grammar/generator limitation. However all lanes produced zero complete development survivors, BBO stratified admission was mechanically capped at 32/128, and UCT concentrated into one reward basin. The validated recommendation is `REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH`, not hypothesis-space expansion or rotating challenge authorization.
 - Epoch-1 revision attributes the Epoch-0 failure across hard gates, net LCB, benchmark increment, stability, turnover, identity capacity and reward-basin concentration. The offline replay restores BBO admission from 32 to 128 using existing sketch identities without rewriting Epoch-0 or reading a new block.
 - Epoch-1 implements full-identity-first feasible admission, positive-net-LCB-aligned hard gates and limited scalarization, equal-root matched controls, adaptive failure rules, UCT exploration/crowding controls, gated CEM elites, Pareto-aware surrogate targets and explicit evolutionary/repair lineage. `{state['nextgen_epoch1']['status']}`; design frozen `{state['nextgen_epoch1']['design_frozen']}`; performance started `{state['nextgen_epoch1']['performance_started']}`.
-- The sole frozen Epoch-1 attempt failed before strict evaluation: an empty post-dedup identity set raised `KeyError: mechanism_id` instead of becoming a zero-capacity natural underfill. The failure remains visible; no rerun or post-freeze contract change occurred, so no Epoch-1 performance conclusion is available.
+- The sole frozen Epoch-1 attempt failed before strict evaluation: an empty post-dedup identity set raised `KeyError: mechanism_id` instead of becoming a zero-capacity natural underfill. This is `EPOCH1_EXECUTION_FAILED_PRE_STRICT`, not evidence against the implemented search revision; `NO_EPOCH1_PERFORMANCE_CONCLUSION` remains explicit.
+- Epoch-1R narrows the repair to admission empty-set semantics. Empty representatives now produce complete-schema zero-capacity natural underfill with `NO_LEGAL_EXACT_IDENTITIES`; CEM, MCTS, surrogate, reward/objective, survivor contract, grammar, seeds, budgets and hypothesis space remain unchanged. Current Epoch-1R state: `{state['nextgen_epoch1r']['status']}`.
 - Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
 - `{state['formal_search_status']}`, `{state['adaptive_cross_epoch_memory_status']}`, `{state['candidate_promotion_status']}`, and `{state['forward_data_status']}` remain frozen.
 
@@ -534,6 +543,15 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Recommendation: `{state['nextgen_epoch1']['recommendation']}`
 - Remote sync: `{state['epoch1_remote_sync']['status']}` for `{state['epoch1_remote_sync']['closure_subject_sha']}` after `{state['epoch1_remote_sync']['attempts']}` attempts
 - Forward read / promotion / cross-epoch memory: `{state['nextgen_epoch1']['forward_read']}` / `{state['nextgen_epoch1']['candidate_promotion']}` / `{state['nextgen_epoch1']['cross_epoch_memory']}`
+
+## CRYPTO NEXTGEN SEARCH EPOCH-1R
+
+- Status: `{state['nextgen_epoch1r']['status']}`
+- Repair scope: `{state['nextgen_epoch1r']['repair_scope']}`
+- Failed evidence subject: `{state['nextgen_epoch1r']['failed_epoch1_subject_sha']}`
+- Upstream changes — generator / grammar / objective / adaptive / seeds / budgets: `{state['nextgen_epoch1r']['proposal_generator_changed']}` / `{state['nextgen_epoch1r']['grammar_changed']}` / `{state['nextgen_epoch1r']['reward_objective_changed']}` / `{state['nextgen_epoch1r']['adaptive_algorithms_changed']}` / `{state['nextgen_epoch1r']['seeds_changed']}` / `{state['nextgen_epoch1r']['budgets_changed']}`
+- Design frozen / strict started: `{state['nextgen_epoch1r']['design_frozen']}` / `{state['nextgen_epoch1r']['strict_evaluation_started']}`
+- Forward read / promotion / cross-epoch memory: `{state['nextgen_epoch1r']['forward_read']}` / `{state['nextgen_epoch1r']['candidate_promotion']}` / `{state['nextgen_epoch1r']['cross_epoch_memory']}`
 
 ## NEXTGEN-DARK Allowed
 
@@ -754,6 +772,9 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "epoch1_execution_status": state["nextgen_epoch1"]["execution_status"],
         "epoch1_recommendation": state["nextgen_epoch1"].get("recommendation"),
         "epoch1_remote_sync_status": state["epoch1_remote_sync"]["status"],
+        "epoch1r_status": state["nextgen_epoch1r"]["status"],
+        "epoch1r_design_frozen": state["nextgen_epoch1r"]["design_frozen"],
+        "epoch1r_strict_evaluation_started": state["nextgen_epoch1r"]["strict_evaluation_started"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -921,6 +942,9 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "epoch1_artifact_index": relative(EPOCH1_ARTIFACT_INDEX_PATH),
         "epoch1_recommendation": state["nextgen_epoch1"].get("recommendation"),
         "epoch1_remote_sync": state["epoch1_remote_sync"],
+        "epoch1r_status": state["nextgen_epoch1r"]["status"],
+        "epoch1r_design_frozen": state["nextgen_epoch1r"]["design_frozen"],
+        "epoch1r_strict_evaluation_started": state["nextgen_epoch1r"]["strict_evaluation_started"],
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []

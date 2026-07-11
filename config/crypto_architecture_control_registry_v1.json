@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "6FCB00C5ADE689ACAEAC05E1762C2A76319D1D92A7D4CF57794A3BFB6203E9C2"
+      "last_verified_sha": "4F4A7B74343800FDDA9B40170EE75D8FED00926E1A20E7A49B5F74FBB730C4E8"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "9312EA6C97DD2EEDDC4924B3EAB752874F81939FC44D4D73C54AD4901E0D646E"
+      "last_verified_sha": "DFB2C88A8D6C394DD1BC5098B465ADE0D914DC847289B29F26DD7E5320205B93"
     },
     {
       "id": "nextgen_mechanism_registry",
@@ -938,7 +938,7 @@
         "runtime/nextgen_epoch1_20260712/revision_diagnosis_manifest.json"
       ],
       "blocker": "empty full-identity capacity was not handled as deterministic natural underfill; post-failure revision requires new authorization",
-      "last_verified_sha": "2C9AEDBFCDC4361E79C2D4BE3E08FD5AFB38257849FD1758995C91252C9006A2"
+      "last_verified_sha": "7C098C0FE818EAE31E00DEFF2A69F4329E28DE7C7EDE1513A7BE535E2340DF52"
     },
     {
       "id": "epoch1_frozen_design",
@@ -979,8 +979,64 @@
         "runtime/nextgen_epoch1_20260712/epoch1_closure_manifest.json",
         "runtime/nextgen_epoch1_20260712/epoch1_closure_test_output.txt"
       ],
-      "blocker": "single execution failed before strict evaluation because empty identity capacity raised KeyError instead of natural underfill; no rerun authorized",
+      "blocker": "execution failed before strict evaluation because empty identity capacity raised KeyError; no Epoch-1 performance conclusion exists and immutable failure evidence is preserved",
       "last_verified_sha": "D3461B2DC6C203C404CFE716F2E41617EF3E79590CBBE7AAC28AF181B9EA746A"
+    },
+    {
+      "id": "epoch1r_admission_repair",
+      "label": "Epoch-1R empty-admission repair",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/search_revision.py",
+        "scripts/crypto_nextgen_epoch1r.py"
+      ],
+      "entrypoint": "normalize_admission_rows / admit_full_identity / crypto_nextgen_epoch1r.py pack/preflight",
+      "input": "unchanged Epoch-1 proposal contract and possibly empty representative sets",
+      "output": "standard-schema zero-capacity natural underfill and isolated Epoch-1R workflow",
+      "data_role": "narrow deterministic admission repair",
+      "feedback_permission": "NO_NEW_PERFORMANCE_CONCLUSION_REPAIR_AND_PREFLIGHT_ONLY",
+      "artifact_test": [
+        "tests/test_search_revision.py",
+        "tests/test_nextgen_epoch1r.py"
+      ],
+      "blocker": "full 32768-proposal admission-only preflight not yet executed",
+      "last_verified_sha": "9EA0AF38E473353C8614E7B2E1DF8818FA255BC526DF49C90198626190A4F4B4"
+    },
+    {
+      "id": "epoch1r_frozen_design",
+      "label": "CRYPTO NEXTGEN SEARCH EPOCH-1R frozen design",
+      "status": "PLANNED",
+      "implementation_path": [
+        "scripts/crypto_nextgen_epoch1r.py"
+      ],
+      "entrypoint": "crypto_nextgen_epoch1r.py freeze",
+      "input": "committed proposal pack, capacity table, assignments, repair code and unchanged Epoch-1 contracts",
+      "output": "new immutable Epoch-1R manifest",
+      "data_role": "frozen repaired development-search control",
+      "feedback_permission": "NO_STRICT_BEFORE_PREFLIGHT_AND_FREEZE",
+      "artifact_test": [
+        "tests/test_nextgen_epoch1r.py"
+      ],
+      "blocker": "proposal pack and admission-only preflight pending",
+      "last_verified_sha": "7FC91FF46EF8AA1571A11DFC444075FA842E2C84B24DE3B5216D0D61A7158E4F"
+    },
+    {
+      "id": "epoch1r_execution",
+      "label": "CRYPTO NEXTGEN SEARCH EPOCH-1R execution",
+      "status": "PLANNED",
+      "implementation_path": [
+        "scripts/crypto_nextgen_epoch1r.py"
+      ],
+      "entrypoint": "crypto_nextgen_epoch1r.py run/check",
+      "input": "frozen Epoch-1R assignment and development-only panels",
+      "output": "strict evaluations and truthful stopped recommendation",
+      "data_role": "controlled development-only strict evaluation",
+      "feedback_permission": "CURRENT_RUNTIME_ONLY_NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_nextgen_epoch1r.py"
+      ],
+      "blocker": "Epoch-1R is not frozen or started",
+      "last_verified_sha": "7FC91FF46EF8AA1571A11DFC444075FA842E2C84B24DE3B5216D0D61A7158E4F"
     }
   ],
   "edges": [
@@ -1517,6 +1573,66 @@
       "target": "epoch1_execution",
       "kind": "FORBIDDEN",
       "label": "forward remains sealed during and after execution"
+    },
+    {
+      "source": "epoch1_execution",
+      "target": "epoch1r_admission_repair",
+      "kind": "ALLOWED",
+      "label": "pre-strict deterministic failure authorizes only the empty-representative repair"
+    },
+    {
+      "source": "epoch1r_admission_repair",
+      "target": "epoch1r_frozen_design",
+      "kind": "ALLOWED",
+      "label": "passed full-pack admission preflight may be frozen without changing upstream search contracts"
+    },
+    {
+      "source": "epoch1r_frozen_design",
+      "target": "epoch1r_execution",
+      "kind": "ALLOWED",
+      "label": "single immutable strict-only Epoch-1R execution"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "epoch1r_admission_repair",
+      "kind": "FORBIDDEN",
+      "label": "repair and admission preflight cannot read spent evaluation"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "epoch1r_admission_repair",
+      "kind": "FORBIDDEN",
+      "label": "repair and admission preflight cannot read forward data"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "epoch1r_execution",
+      "kind": "FORBIDDEN",
+      "label": "spent evaluation cannot enter Epoch-1R strict execution"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "epoch1r_execution",
+      "kind": "FORBIDDEN",
+      "label": "forward remains sealed during and after Epoch-1R"
+    },
+    {
+      "source": "epoch1r_execution",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "Epoch-1R cannot persist adaptive state or memory"
+    },
+    {
+      "source": "epoch1r_execution",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "Epoch-1R cannot promote candidates"
+    },
+    {
+      "source": "epoch1r_execution",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "Epoch-1R cannot auto-rerun, reallocate or schedule another epoch"
     }
   ]
 }

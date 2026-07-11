@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `53F8FC93096268AEBA9639B8D5404AF984740FC57077F37324914298A0DF281D`.
+Registry SHA256: `92742C026BADF15834841999AB85C2D4F07F452B6BAD5C3719D38DDC9830A67D`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
-- `RESEARCH_MODE_EPOCH1_FAILED_CLOSED`
-- Current phase: `FROZEN_DEVELOPMENT_EPOCH1_FAILED`
+- `RESEARCH_MODE_CONTROLLED_EPOCH1R_REPAIR_ONLY`
+- Current phase: `EPOCH1R_ADMISSION_REPAIR_IMPLEMENTED_PREFLIGHT_PENDING`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,7 +16,7 @@ Registry SHA256: `53F8FC93096268AEBA9639B8D5404AF984740FC57077F37324914298A0DF28
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `EPOCH1_FAILED_CLOSED_AWAITING_SEARCH_ENGINE_REVISION_AUTHORIZATION`
+- Active stage: `EPOCH1R_NARROW_ADMISSION_REPAIR_COMPLETE_PREFLIGHT_PENDING`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -133,7 +133,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## CRYPTO NEXTGEN SEARCH EPOCH-1
 
-- Status: `FROZEN_DEVELOPMENT_EPOCH1_FAILED`
+- Status: `EPOCH1_EXECUTION_FAILED_PRE_STRICT`
 - Accepted Epoch-0 subject: `46616450b1477d54eb45e47a42a8ed0541ce6cb7`
 - Revision subject: `da030b362977af6106a39a2584fc7fdc203d4139`
 - BBO offline replay: `32` -> `128`; history rewritten `False`
@@ -141,7 +141,16 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Attempts / persisted strict evaluations / rerun: `1` / `0` / `False`
 - Failure: `EMPTY_FULL_IDENTITY_CAPACITY_NOT_HANDLED_AS_NATURAL_UNDERFILL`
 - Recommendation: `REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH`
-- Remote sync: `PUSH_PENDING_GITHUB_HTTPS_UNREACHABLE` for `65c6b46f5e157fb217e3e1896d852b39924193dd` after `3` attempts
+- Remote sync: `VERIFIED_SYNCED_WITH_EVIDENCE_TAG` for `403b3519773e18c38033b2eaeaf404c98320595a` after `4` attempts
+- Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
+
+## CRYPTO NEXTGEN SEARCH EPOCH-1R
+
+- Status: `REPAIR_EMPTY_ADMISSION_IMPLEMENTED_PREFLIGHT_PENDING`
+- Repair scope: `EMPTY_REPRESENTATIVE_SET_ONLY`
+- Failed evidence subject: `403b3519773e18c38033b2eaeaf404c98320595a`
+- Upstream changes — generator / grammar / objective / adaptive / seeds / budgets: `False` / `False` / `False` / `False` / `False` / `False`
+- Design frozen / strict started: `False` / `False`
 - Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
 
 ## NEXTGEN-DARK Allowed
@@ -184,4 +193,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Independently authorize a post-failure search-engine revision. Before any new freeze, add and test deterministic empty-capacity natural-underfill handling in admit_full_identity. Do not reuse the failed frozen manifest, rerun Epoch-1, open OOS/forward, promote candidates, or persist adaptive memory without new authorization.
+Regenerate and hash the unchanged 32768-proposal pack, complete admission-only full-pack preflight with all panel/lane capacity rows, commit those artifacts, then freeze a new Epoch-1R manifest before any strict evaluation.
