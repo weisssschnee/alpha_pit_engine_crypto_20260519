@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "E939E1C7AC6988B5EC57E52CC528A4BBBD86113BE95BB115408263CD06D8DBCB"
+      "last_verified_sha": "63AC66824874DA3848FE49B687749EDB30239F483258D7A414399F33F7E28908"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -722,7 +722,7 @@
     {
       "id": "canary_plan",
       "label": "Fixed-budget development-only CANARY plan",
-      "status": "FROZEN",
+      "status": "DEPRECATED",
       "implementation_path": [
         "config/crypto_nextgen_dark_canary_plan_v1.json"
       ],
@@ -734,8 +734,82 @@
       "artifact_test": [
         "config/crypto_nextgen_dark_canary_plan_v1.json"
       ],
-      "blocker": "requires independent CANARY execution authorization",
+      "blocker": "superseded by the authorized frozen B1S contract; retained as historical plan",
       "last_verified_sha": "94A302ECCF206DB4B51542602C6A32BD0D6DA4FC778E71369BCA21C0DA84246A"
+    },
+    {
+      "id": "b1s_main_canary",
+      "label": "B1S main capability CANARY",
+      "status": "PARTIAL",
+      "implementation_path": [
+        "alphafactory_crypto/b1s_canary.py",
+        "config/crypto_b1s_canary_v1.json",
+        "scripts/crypto_b1s_canary.py"
+      ],
+      "entrypoint": "crypto_b1s_canary.freeze/run",
+      "input": "Binance UM core12 2024 DISCOVERY_TRAIN approved observations and derived next-hour development labels",
+      "output": "fixed-budget proposals, stratified admissions, strict development evaluations and identity/behaviour evidence",
+      "data_role": "controlled development-only canary",
+      "feedback_permission": "RUNTIME_ONLY_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_b1s_canary.py",
+        "runtime/b1s_canary_20260711/b1s_frozen_run_manifest.json",
+        "runtime/b1s_canary_20260711/b1s_canary_manifest.json",
+        "runtime/b1s_canary_20260711/candidate_table.csv",
+        "runtime/b1s_canary_20260711/admission_table.csv",
+        "runtime/b1s_canary_20260711/strict_evaluation_table.csv",
+        "runtime/b1s_canary_20260711/identity_table.csv",
+        "runtime/b1s_canary_20260711/cluster_table.csv",
+        "runtime/b1s_canary_20260711/lane_summary.csv"
+      ],
+      "blocker": "funding-event supplied only 27 legal exact identities, so fixed one-exact-one-vote strict budget underfilled by five; no rerun or budget extension",
+      "last_verified_sha": "113D425D94EAE1E7277FE0364CD10E1F9A6346BD01136CC135A6AB9BCFF9B4A8"
+    },
+    {
+      "id": "b1s_bbo_micro_canary",
+      "label": "B1S BBO micro-CANARY",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/b1s_canary.py",
+        "config/crypto_b1s_canary_v1.json",
+        "scripts/crypto_b1s_canary.py"
+      ],
+      "entrypoint": "crypto_b1s_canary.run bbo_micro domain",
+      "input": "scoped Binance UM core11 bookTicker BBO coordinates for 2024-01/02",
+      "output": "BBO-only proposal, admission, strict evaluation and behaviour evidence",
+      "data_role": "scoped BBO development micro-canary",
+      "feedback_permission": "BBO_DOMAIN_ONLY_NO_EXTRAPOLATION_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_b1s_canary.py",
+        "runtime/nextgen_dark_20260711/pc1_bookticker_top_of_book_manifest.json",
+        "runtime/b1s_canary_20260711/stratified_vs_global_topk.csv"
+      ],
+      "blocker": "cannot compare directly with main full-period metrics or extrapolate beyond core11 2024-01/02 BBO",
+      "last_verified_sha": "0D98355819B488BC2F5E8F0D56743392292CB04A07E8F30CFDB18A170D0D2FA4"
+    },
+    {
+      "id": "b1s_canary_control",
+      "label": "B1S CANARY frozen control",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "config/crypto_b1s_canary_v1.json",
+        "scripts/crypto_b1s_canary.py"
+      ],
+      "entrypoint": "frozen manifest, equal-budget global-top-K and closure checks",
+      "input": "frozen repo/data/contracts/seeds/budgets and separate panel results",
+      "output": "compact result, failure/runtime tables, test evidence and stopped decision",
+      "data_role": "canary governance and comparison control",
+      "feedback_permission": "NO_CROSS_PANEL_RANKING_NO_PERSISTENCE_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_b1s_canary.py",
+        "tests/test_architecture_control_plane.py",
+        "runtime/b1s_canary_20260711/adaptive_feedback_queries.csv",
+        "runtime/b1s_canary_20260711/stratified_vs_global_topk.csv",
+        "runtime/b1s_canary_20260711/B1S_CANARY_COMPACT_RESULT.md",
+        "runtime/b1s_canary_20260711/b1s_test_output.txt"
+      ],
+      "blocker": "wait for explicit authorization of the next frozen search epoch",
+      "last_verified_sha": "DD1AE5C6D4055B6E0D385C29D7D29AADF12651C426C1E908980CD0E5F66AF1A8"
     }
   ],
   "edges": [
@@ -1008,6 +1082,72 @@
       "target": "scheduler",
       "kind": "FORBIDDEN",
       "label": "CANARY is not authorized and cannot start scheduler"
+    },
+    {
+      "source": "nextgen_observation_fabric",
+      "target": "b1s_main_canary",
+      "kind": "ALLOWED",
+      "label": "approved main development observations only"
+    },
+    {
+      "source": "nextgen_observation_fabric",
+      "target": "b1s_bbo_micro_canary",
+      "kind": "ALLOWED",
+      "label": "scoped BBO observations only"
+    },
+    {
+      "source": "b1s_main_canary",
+      "target": "b1s_canary_control",
+      "kind": "ALLOWED",
+      "label": "separate main-domain result"
+    },
+    {
+      "source": "b1s_bbo_micro_canary",
+      "target": "b1s_canary_control",
+      "kind": "ALLOWED",
+      "label": "separate BBO-domain result"
+    },
+    {
+      "source": "b1s_main_canary",
+      "target": "b1s_bbo_micro_canary",
+      "kind": "FORBIDDEN",
+      "label": "main metrics cannot rank or extrapolate BBO micro results"
+    },
+    {
+      "source": "b1s_bbo_micro_canary",
+      "target": "b1s_main_canary",
+      "kind": "FORBIDDEN",
+      "label": "BBO micro metrics cannot rank main candidates"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "b1s_canary_control",
+      "kind": "FORBIDDEN",
+      "label": "validation/test/recent/May stress cannot enter B1S feedback"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "b1s_canary_control",
+      "kind": "FORBIDDEN",
+      "label": "sealed forward cannot enter B1S"
+    },
+    {
+      "source": "b1s_canary_control",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "B1S cannot update positive or negative A7MEM"
+    },
+    {
+      "source": "b1s_canary_control",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "B1S survivors cannot enter candidate promotion"
+    },
+    {
+      "source": "b1s_canary_control",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "B1S cannot persist policy, elite, learned value, or adaptive budget"
     }
   ]
 }

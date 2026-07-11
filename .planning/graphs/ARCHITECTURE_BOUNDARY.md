@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `3D506C56A75546A985A05AA143B7B73CAE8E797756C1B96D553977B021E517DE`.
+Generated from registry SHA256: `E8B9E113E88217ECB073C64ABC86F5F512C70D87F39888EB55079CAA3517B7B4`.
 
 ## Authority
 
@@ -40,3 +40,10 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 | challenger_harness | a7mem | benchmark/challenger results cannot enter positive memory |
 | sealed_forward | canary_plan | CANARY cannot read sealed forward data |
 | canary_plan | scheduler | CANARY is not authorized and cannot start scheduler |
+| b1s_main_canary | b1s_bbo_micro_canary | main metrics cannot rank or extrapolate BBO micro results |
+| b1s_bbo_micro_canary | b1s_main_canary | BBO micro metrics cannot rank main candidates |
+| spent_evaluation | b1s_canary_control | validation/test/recent/May stress cannot enter B1S feedback |
+| sealed_forward | b1s_canary_control | sealed forward cannot enter B1S |
+| b1s_canary_control | a7mem | B1S cannot update positive or negative A7MEM |
+| b1s_canary_control | admission | B1S survivors cannot enter candidate promotion |
+| b1s_canary_control | scheduler | B1S cannot persist policy, elite, learned value, or adaptive budget |

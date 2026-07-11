@@ -1,20 +1,22 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `3D506C56A75546A985A05AA143B7B73CAE8E797756C1B96D553977B021E517DE`.
+Registry SHA256: `E8B9E113E88217ECB073C64ABC86F5F512C70D87F39888EB55079CAA3517B7B4`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
-- `HOLD_RESEARCH`
-- Current phase: `NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY`
+- `RESEARCH_MODE_CONTROLLED_CANARY_ONLY`
+- Current phase: `B1S_CANARY_PARTIALLY_COMPLETED_STOPPED`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
-- NEXTGEN-DARK: `NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY`
+- NEXTGEN-DARK: `NEXTGEN_DARK_SCOPED_READY`
 - Formal search: `FORMAL_SEARCH_FROZEN`
-- CANARY: `CANARY_PLAN_PREPARED_NOT_AUTHORIZED_NOT_STARTED`
-- Active stage: `NEXTGEN_DARK_CLOSED_WAITING_CANARY_AUTHORIZATION`
+- CANARY: `B1S_CANARY_PARTIALLY_COMPLETED`
+- Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
+- Candidate promotion: `NO_CANDIDATE_PROMOTION`
+- Active stage: `B1S_CANARY_CLOSED_WAITING_FROZEN_SEARCH_EPOCH_AUTHORIZATION`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -93,6 +95,26 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - `ND.7` Fixed-budget CANARY plan: `PREPARED_NOT_AUTHORIZED_NOT_STARTED`
 - `ND.8` Closure control-plane synchronization: `IMPLEMENTED`
 
+## B1S-CANARY Closure
+
+- `B1S.1` Frozen repo/data/capability/budget/contracts: `IMPLEMENTED_SHA_39DBD40`
+- `B1S.2` Main capability CANARY: `PARTIALLY_COMPLETED_FIXED_QUOTA_UNDERFILL`
+- `B1S.3` BBO micro-CANARY: `COMPLETED_SCOPED_BBO_ONLY`
+- `B1S.4` Equal-budget global-top-K controls: `COMPLETED_320_OF_320`
+- `B1S.5` Adaptive challenger runtime namespace: `COMPLETED_64_QUERIES_NOT_PERSISTED`
+- `B1S.6` Candidate promotion and memory boundary: `ENFORCED`
+- `B1S.7` Graph/STATE closure: `IMPLEMENTED`
+
+- Decision: `B1S_CANARY_PARTIALLY_COMPLETED`
+- Frozen repo SHA: `39dbd40e6ce7bde3fbaba0067da6a5bfbae797f8`
+- Frozen manifest SHA256: `897A36543AC4CB4E9F658DFA7CF0B71F869ACB3755F318F451AE039E63FDE1D2`
+- Proposals / legal rate: `5120` / `0.8076171875`
+- Stratified admissions: `564` of planned `640`
+- Stratified strict evaluations: `315` of planned `320`
+- Global-top-K strict evaluations: `320`
+- Adaptive feedback queries: `64`
+- Partial reason: funding_event yielded only 27 legal exact identities, so one-exact-one-vote permitted 27 of 32 strict evaluations; no quota was relaxed and no budget was added
+
 ## NEXTGEN-DARK Allowed
 
 - development/pre-forward observable materialization
@@ -133,4 +155,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-NEXTGEN-DARK remains PARTIALLY_READY because PC1 contains no liquidation/force-order source. PC1 top-of-book liquidity is scoped-qualified for Binance UM bookTicker only over its observed 2024-01/02 subset and is not multi-level depth. The fixed-budget development-only CANARY plan is not authorized and not started. HOLD_RESEARCH, FORMAL_SEARCH_FROZEN, PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.
+B1S-CANARY is stopped at B1S_CANARY_PARTIALLY_COMPLETED. Wait for explicit authorization of the next frozen search epoch. FORMAL_SEARCH_FROZEN, ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN, FORWARD_SEALED, and NO_CANDIDATE_PROMOTION remain in force; main and BBO results remain non-comparable across panels.

@@ -1,0 +1,5 @@
+panel_id,arm,strict_evaluations,canonical_exact_identities,activation_identities,behaviour_clusters,n_eff,top_1_cluster_share,top_3_cluster_share,economic_hypothesis_coverage,new_behaviour_clusters_per_strict_evaluation,development_survivor_count,development_score_median,direct_cross_panel_ranking_performed
+bbo_micro,GLOBAL_TOP_K_CONTROL,32,32,32,29,23.272727272727273,0.125,0.1875,4,0.90625,1,-7.693419578593482,False
+bbo_micro,STRATIFIED_ADMISSION,32,32,32,30,26.94736842105263,0.09375,0.15625,4,0.9375,0,-8.725327093536542,False
+main,GLOBAL_TOP_K_CONTROL,288,288,109,153,49.786314525810326,0.05555555555555555,0.16666666666666666,27,0.53125,5,-10.148717905187866,False
+main,STRATIFIED_ADMISSION,283,210,135,140,30.98220502901354,0.11307420494699646,0.254416961130742,27,0.49469964664310956,0,-14.510086166121871,False

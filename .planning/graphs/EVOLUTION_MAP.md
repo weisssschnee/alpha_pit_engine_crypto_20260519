@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `3D506C56A75546A985A05AA143B7B73CAE8E797756C1B96D553977B021E517DE`.
+Generated from registry SHA256: `E8B9E113E88217ECB073C64ABC86F5F512C70D87F39888EB55079CAA3517B7B4`.
 
 ## Current Evolution
 
@@ -19,8 +19,10 @@ Generated from registry SHA256: `3D506C56A75546A985A05AA143B7B73CAE8E797756C1B96
 - B0A is stopped at `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED` with no reward, selection, scheduler, generator, or memory feedback.
 - NEXTGEN-DARK materializes 245088 Binance UM core12 development/pre-forward coordinates reproducibly without performance columns. Funding, basis, OI, mark/index, taker, liquidity, volatility, session, and cross-asset states materialize. A PC1 supplement scoped-qualifies 14208 top-of-book liquidity rows over 2024-01/02 with 82.22% core12 coordinate coverage; it is BBO only, not multi-level depth. Liquidation remains unavailable because PC1 contains no liquidation/force-order source.
 - Thirteen typed temporal/event primitives, seven isolated no-memory lanes, deterministic anti-collapse quotas, frozen benchmark/challenger interfaces, and non-performance coverage metrics are implemented without execution of formal search or performance comparison.
-- A fixed-budget development-only CANARY plan exists but is not authorized and not started.
-- `FORMAL_SEARCH_FROZEN`, `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`, and `SEALED_NO_NEW_FORWARD_READ` remain frozen.
+- The earlier NEXTGEN-DARK CANARY plan is superseded by the frozen B1S contract and retained as historical configuration.
+- B1S executed 5120 frozen proposals, 315/320 stratified strict evaluations, 320/320 equal-budget global-top-K controls, and 64 adaptive runtime-only queries. Funding-event underfilled strict evaluation by five because only 27 legal exact identities existed under one-exact-one-vote; no budget or threshold changed.
+- Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
+- `FORMAL_SEARCH_FROZEN`, `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`, `NO_CANDIDATE_PROMOTION`, and `SEALED_NO_NEW_FORWARD_READ` remain frozen.
 
 ## Decision Timeline
 
@@ -50,3 +52,5 @@ Generated from registry SHA256: `3D506C56A75546A985A05AA143B7B73CAE8E797756C1B96
 - `EVALRESET-20260711-024` — `NEXTGEN_DARK_AUTHORIZED`: B0A subject 4e09f33159fabe21add8e5d405f76a5a97c61f83 is accepted with fixed compression and stability conclusions. NEXTGEN-DARK is authorized for development/pre-forward infrastructure only; FORMAL_SEARCH_FROZEN, HOLD_RESEARCH, PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.
 - `EVALRESET-20260711-025` — `NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY`: Typed temporal/event programs, isolated no-memory lanes, deterministic anti-collapse admission, frozen benchmark/challenger interfaces, non-performance coverage metrics, and a reproducible Binance UM core12 development-only state materialization are implemented. Liquidation cluster and depth state remain unavailable because A7INPUT0-v2 contains no approved source fields; no proxy was substituted. CANARY is planned but not authorized or started, and no performance, search, forward, reward, scheduler, or memory feedback was used.
 - `EVALRESET-20260711-026` — `PC1_TOP_OF_BOOK_LIQUIDITY_SCOPED_QUALIFIED`: A read-only audit of DESKTOP-7877972 found Binance UM bookTicker BBO assets under the 95GB AlphaFactory_CryptoData root that were absent from the local A7INPUT0 registry. A scoped 1h core12 materialization produced 14208 rows over 2024-01/02, 11 observed symbols, +1h observable time, reproducible artifact SHA F7B89420695B939944F4CFB192BE793E4BB952E6E5AC71B82B004F7C9E19E12A, and explicit 82.22% coordinate coverage. This qualifies top-of-book liquidity only, not multi-level depth. Across 2431 PC1 Parquet schemas and raw/silver/gold filenames, no liquidation or force-order source was found. No performance, search, selection, reward, memory, scheduler, or forward read occurred.
+- `EVALRESET-20260711-027` — `NEXTGEN_DARK_SCOPED_READY_B1S_CANARY_AUTHORIZED`: NEXTGEN-DARK is accepted as scoped-ready. Liquidation/force-order and multi-level depth remain disabled; Binance UM bookTicker is scoped to core11, 2024-01/02, 82.22% coverage, and BBO-only semantics. B1S is authorized for controlled development-only CANARY while formal search, cross-epoch adaptive memory, forward data, and candidate promotion remain frozen.
+- `EVALRESET-20260711-028` — `B1S_CANARY_PARTIALLY_COMPLETED`: Frozen repo 39dbd40 and manifest 897A3654 executed 5120 proposals, 564 stratified admissions, 315 stratified strict evaluations, 320 equal-budget global-top-K strict evaluations, and 64 adaptive runtime-only feedback queries. Funding-event produced only 27 legal exact identities, limiting its one-exact-one-vote strict arm to 27/32; no quota was relaxed and no budget was added. Main and BBO panels were not directly ranked. No validation/test/recent/stress/forward read, A7MEM update, cross-CANARY policy persistence, candidate promotion, or alpha/deployment/OOS claim occurred.

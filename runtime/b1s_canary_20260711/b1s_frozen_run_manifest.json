@@ -1,0 +1,205 @@
+{
+  "adaptive_challenger": {
+    "algorithms": [
+      "cem",
+      "uct_mcts",
+      "evolutionary"
+    ],
+    "max_development_feedback_queries": 64,
+    "namespace": "runtime_only/b1s_canary/adaptive_challenger",
+    "persist_elite": false,
+    "persist_learned_value": false,
+    "persist_policy": false
+  },
+  "admission_contract": {
+    "behaviour_potential_quota": 8,
+    "economic_hypothesis_quota": 24,
+    "family_budget_cap": 24,
+    "fresh_budget_floor": 32,
+    "no_memory": true,
+    "one_exact_identity_one_vote": true,
+    "online_modification_allowed": false,
+    "parent_descendant_cap": 8
+  },
+  "benchmark_contract": {
+    "algorithms": [
+      "cem",
+      "typed_ast",
+      "uct_mcts",
+      "evolutionary_search",
+      "external_competitor_reproduction"
+    ],
+    "feedback_permission": "CANARY_RUNTIME_ONLY_NO_MEMORY",
+    "strategy": [
+      "simple_funding",
+      "simple_basis",
+      "simple_oi",
+      "momentum",
+      "reversal",
+      "volatility",
+      "liquidity",
+      "session_time_of_day"
+    ]
+  },
+  "branch": "audit/evalreset-collapse-forensics-20260711",
+  "candidate_contract": {
+    "candidate_promotion_allowed": false,
+    "forbidden_fields": [
+      "validation",
+      "test",
+      "recent",
+      "stress",
+      "oos",
+      "forward",
+      "reward_history",
+      "a7mem"
+    ],
+    "requires": [
+      "lane",
+      "seed",
+      "lineage",
+      "canonical_program",
+      "economic_hypothesis"
+    ]
+  },
+  "candidate_promotion": false,
+  "capability_matrix": {
+    "bbo_enabled": [
+      "bbo_temporal_event_micro"
+    ],
+    "bookticker": "SCOPED_BBO_QUALIFIED",
+    "force_order": "DISABLED_NO_APPROVED_SOURCE",
+    "liquidation": "DISABLED_NO_APPROVED_SOURCE",
+    "main_enabled": [
+      "static_cross_sectional",
+      "temporal_program",
+      "funding_event",
+      "basis_oi_state",
+      "volatility_session",
+      "cross_asset_state",
+      "orthogonal_exile",
+      "competitor_reproduction",
+      "adaptive_challenger"
+    ],
+    "multi_level_depth": "DISABLED_NO_APPROVED_SOURCE"
+  },
+  "commands": {
+    "check": "python scripts/crypto_b1s_canary.py check",
+    "freeze": "python scripts/crypto_b1s_canary.py freeze",
+    "run": "python scripts/crypto_b1s_canary.py run"
+  },
+  "continuation": "resume only from this exact repo SHA and hash bundle; never add budget or read non-train epochs",
+  "contract_bundle_sha256": "BFB73A1EF7039E50C8A0A351EC6FBB4AD3DB5865213881DA77B6B79DBC15002E",
+  "contracts_sha256": {
+    "alphafactory_crypto/b1s_canary.py": "40C210975F619A66EDEF61B2155DB823ED9BC78CD54415939139E885C86D2FA3",
+    "config/crypto_anti_collapse_admission_v1.json": "0DE19CB4251A508B3CA85EFCCC75CFA268B902A18AC2571B1E5637A3CA0E662E",
+    "config/crypto_b1s_canary_v1.json": "82D2E7125972AD8A6C87FE12FFF46A7994EB2F99295E7D22C826449CE10D883E",
+    "config/crypto_challenger_harness_v1.json": "FD7CF810E782048699E8CACB4946944D93315B08747A573B7AB7A3DC55D2C800",
+    "config/crypto_evaluation_access_policy_v1.json": "CA922AAE19B0BA3713CDFB85093F1DF48506385F42353C9F9B9A23711F9977CE",
+    "config/crypto_nextgen_dark_lanes_v1.json": "4D4B4DD0E4A3A4CACB92E7FC945B506749D86FA02FDD5C38DBE15F52B2090231",
+    "scripts/crypto_b1s_canary.py": "B1F4AE590C3D7B1E47D95FF09325E3F14B6FD1B6CD68BB7CC5BE2004416F1EC3"
+  },
+  "data_release_sha256": "35E1FDEDCE39DEB7A74A62FF84910114D7A10426DFEC2A49DE274B30F7E77AEF",
+  "estimated_cost_time": "5-20 minutes on local workstation; fixed 5120 proposals, 640 logical strict evaluations",
+  "experiment_id": "20260711_b1s_canary_001",
+  "forward_read": false,
+  "frozen_manifest_sha256": "897A36543AC4CB4E9F658DFA7CF0B71F869ACB3755F318F451AE039E63FDE1D2",
+  "global_top_k_control": {
+    "bbo_strict_evaluation_budget": 32,
+    "cross_panel_ranking_allowed": false,
+    "main_strict_evaluation_budget": 288,
+    "ranking_input": "FROZEN_DEVELOPMENT_PROXY_ONLY"
+  },
+  "input_files_sha256": {
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=ADAUSDT/part.parquet": "FD3643F1EAA0000C5D453F0B219B75B475E39FA0D2B12898EC4BDE5FA9F9EBEC",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=AVAXUSDT/part.parquet": "55BDA9B157EF7DA67E5D2F12390F05477692080AE3161304A4DECC8336FAEF1A",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=BCHUSDT/part.parquet": "2E83784C2A9ABF399D23A6FEBB4E6D523CE32B4769D9C39C2E4752486D1AFFAB",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=BNBUSDT/part.parquet": "7BFAE9E902D61A1565C39AF01500539FBDDFC35E6BAB155273A59CB851530242",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=BTCUSDT/part.parquet": "CC2B2B3E5CEA67B49C3AAE4C59AA98FE6DF655A7C41C8E592957AAB1EAEFA0A0",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=DOGEUSDT/part.parquet": "A06FB1C1C3E5AE9757744FA8D32582DE04255813CCD8D3D98762E08FE220528E",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=ETHUSDT/part.parquet": "BCA439BBAB9970D6061420F1BAFCCD8D3CCC8EDCDE292090F43F9DE97FA81BCD",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=LINKUSDT/part.parquet": "6BEDB227C210B9F28FEB159C3C583EDE2222BFFD0A65F470DFCF4CBF22BC149B",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=LTCUSDT/part.parquet": "BDAA4C1E79E7111ECFB5251C27CA2C10509B64FAB284E35AEC30A10BA0EF634E",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=SOLUSDT/part.parquet": "6A68C89F6C70A69F6A0CFF2D4CE571DBF07D1B6D7F1C15E0CE39DFE0E836E14D",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=SUIUSDT/part.parquet": "7F7091D5A78CE1662CE74E598557A6C15141A5DF13101088DDFB059522DDD7D3",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=XRPUSDT/part.parquet": "4354FC60EC228916F03C1C74B2651809EED55BBB0ADB09A5A4E64BC84AA05D24",
+    "G:/AlphaFactory_CryptoData/gold/features/nextgen_dark_bookticker_core12_v1/bookticker_core12_1h_top_of_book_state.parquet": "368ACE1C86D2A4166214CE2B20AF421AEB4503C0C315A49497E03302ECF4352C"
+  },
+  "lane_specs": {
+    "bbo_micro": [
+      "bbo_temporal_event_micro"
+    ],
+    "main": [
+      "static_cross_sectional",
+      "temporal_program",
+      "funding_event",
+      "basis_oi_state",
+      "volatility_session",
+      "cross_asset_state",
+      "orthogonal_exile",
+      "competitor_reproduction",
+      "adaptive_challenger"
+    ]
+  },
+  "mode": "CONTROLLED_CANARY_ONLY",
+  "objective": "compare fixed stratified anti-collapse admission with equal-budget global-top-K inside development-only main and isolated BBO panels",
+  "panel_contracts": {
+    "bbo_micro": {
+      "classification": "DISCOVERY_TRAIN_SCOPED_BBO",
+      "comparison_domain": "BBO_MICRO_ONLY",
+      "coverage_ratio": 0.8222222222222222,
+      "depth_semantics": "TOP_OF_BOOK_BBO_ONLY_NOT_MULTI_LEVEL_DEPTH",
+      "end_utc_inclusive": "2024-02-29T23:00:00Z",
+      "epoch_id": "bookticker_2024_01_02",
+      "start_utc": "2024-01-01T00:00:00Z",
+      "universe": "BINANCE_UM_BOOKTICKER_CORE11_OBSERVED"
+    },
+    "main": {
+      "classification": "DISCOVERY_TRAIN",
+      "comparison_domain": "MAIN_ONLY",
+      "end_utc_inclusive": "2024-12-31T23:00:00Z",
+      "epoch_id": "train_2024",
+      "excluded_capabilities": [
+        "liquidation",
+        "force_order",
+        "multi_level_depth",
+        "bookticker_bbo"
+      ],
+      "start_utc": "2024-01-01T00:00:00Z",
+      "universe": "BINANCE_UM_CORE12"
+    }
+  },
+  "prohibited": [
+    "validation_test_recent_may_stress_or_forward_read",
+    "a7mem_update",
+    "cross_canary_elite_policy_or_value_persistence",
+    "candidate_promotion",
+    "online_budget_reward_threshold_or_admission_change",
+    "midrun_budget_extension",
+    "alpha_ready_deployable_or_oos_proven_claim"
+  ],
+  "proposal_evaluation_budget": {
+    "development_strict_evaluations": 32,
+    "fixed_seeds": [
+      1701,
+      1709
+    ],
+    "proposal_total": 512,
+    "proposals_per_seed": 256,
+    "stratified_admissions": 64
+  },
+  "repo_sha": "39dbd40e6ce7bde3fbaba0067da6a5bfbae797f8",
+  "reward_contract": {
+    "cost_bps_per_unit_turnover": 5.0,
+    "label": "trade_close[t+2]/trade_close[t+1]-1 for observation bucket t available at t+1",
+    "minimum_assets_per_coordinate": 5,
+    "online_modification_allowed": false,
+    "strict_survivor_rule": "coverage>=0.80 and observations>=100 and net_mean>0 and ic_mean>0"
+  },
+  "search_started": false,
+  "seeds": [
+    1701,
+    1709
+  ],
+  "status": "FROZEN_NOT_STARTED"
+}

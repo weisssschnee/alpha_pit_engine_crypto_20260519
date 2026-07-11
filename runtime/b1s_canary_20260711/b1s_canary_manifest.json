@@ -1,0 +1,73 @@
+{
+  "a7mem_updated": false,
+  "actual_runtime_seconds": 166.45850100001553,
+  "adaptive_cross_epoch_memory_updated": false,
+  "adaptive_feedback_queries": 64,
+  "additional_budget_added": false,
+  "alpha_ready_claimed": false,
+  "candidate_promotion": false,
+  "continuation": "stop after closure; wait for independent frozen search epoch authorization",
+  "data_release_sha256": "35E1FDEDCE39DEB7A74A62FF84910114D7A10426DFEC2A49DE274B30F7E77AEF",
+  "decision": "B1S_CANARY_PARTIALLY_COMPLETED",
+  "deployable_claimed": false,
+  "experiment_id": "20260711_b1s_canary_001",
+  "formal_search_status": "FORMAL_SEARCH_FROZEN",
+  "forward_status": "FORWARD_SEALED",
+  "frozen_manifest": "runtime/b1s_canary_20260711/b1s_frozen_run_manifest.json",
+  "frozen_manifest_sha256": "897A36543AC4CB4E9F658DFA7CF0B71F869ACB3755F318F451AE039E63FDE1D2",
+  "global_top_k_strict_evaluations": 320,
+  "legal_candidate_rate": 0.8076171875,
+  "logical_strict_evaluations": 635,
+  "main_and_bbo_directly_ranked": false,
+  "online_budget_or_threshold_changed": false,
+  "oos_proven_claimed": false,
+  "outputs": [
+    {
+      "path": "runtime/b1s_canary_20260711/candidate_table.csv",
+      "purpose": "final_canary_table",
+      "sha256": "65A60A797BA164ED5B3331C4AC8C1837F84CB834F0DB934BD1F954F9F62A0233"
+    },
+    {
+      "path": "runtime/b1s_canary_20260711/admission_table.csv",
+      "purpose": "final_canary_table",
+      "sha256": "F0CEAE25C4C7745989B405CC3AFCD6F5124E7F838A1469D06A6352F2FEDCFE69"
+    },
+    {
+      "path": "runtime/b1s_canary_20260711/strict_evaluation_table.csv",
+      "purpose": "final_canary_table",
+      "sha256": "6286DC81C131A3626FE5640E16AD3EF462F6F2217384924E11F616054CE116FF"
+    },
+    {
+      "path": "runtime/b1s_canary_20260711/identity_table.csv",
+      "purpose": "final_canary_table",
+      "sha256": "98304926C0F5A023783C411584F006EAC02212C05F01C3D87B9B9799FACA30E7"
+    },
+    {
+      "path": "runtime/b1s_canary_20260711/cluster_table.csv",
+      "purpose": "final_canary_table",
+      "sha256": "D3A3F8A0F97BFB40558E2602922103992648FE1088F12C8C60D82CAB08CFE956"
+    },
+    {
+      "path": "runtime/b1s_canary_20260711/lane_summary.csv",
+      "purpose": "final_canary_table",
+      "sha256": "BA7614C129E91334FDC8447E5FECF120A262EA86664484AA89DA2FCD5DCEA8C6"
+    },
+    {
+      "path": "runtime/b1s_canary_20260711/stratified_vs_global_topk.csv",
+      "purpose": "final_canary_table",
+      "sha256": "9A01DFE0DDB28D9C52F9DEC4EF25082990D8D94317B2318B7E5DE1E4953DCD75"
+    },
+    {
+      "path": "runtime/b1s_canary_20260711/adaptive_feedback_queries.csv",
+      "purpose": "final_canary_table",
+      "sha256": "0EC450BBE3E2E2F7ABE076E8D6EB877181214BF42981CB08F9E417A2C6A9C543"
+    }
+  ],
+  "policy_or_elite_persisted": false,
+  "proposal_rows": 5120,
+  "repo_sha": "39dbd40e6ce7bde3fbaba0067da6a5bfbae797f8",
+  "reproducibility": "YES_FROZEN_INPUTS_AND_DETERMINISTIC_SEEDS",
+  "stratified_admissions": 564,
+  "stratified_strict_evaluations": 315,
+  "validation_test_recent_stress_forward_read": false
+}

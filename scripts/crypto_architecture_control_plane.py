@@ -36,6 +36,12 @@ NEXTGEN_ARTIFACT_INDEX_PATH = NEXTGEN_ROOT / "nextgen_dark_artifact_index.csv"
 NEXTGEN_TEST_OUTPUT_PATH = NEXTGEN_ROOT / "nextgen_dark_test_output.txt"
 CANARY_PLAN_PATH = REPO / "config" / "crypto_nextgen_dark_canary_plan_v1.json"
 NEXTGEN_ADR_PATH = REPO / "docs" / "adr" / "0002-nextgen-dark-isolated-observation-infrastructure.md"
+B1S_ROOT = REPO / "runtime" / "b1s_canary_20260711"
+B1S_FROZEN_MANIFEST_PATH = B1S_ROOT / "b1s_frozen_run_manifest.json"
+B1S_RUN_MANIFEST_PATH = B1S_ROOT / "b1s_canary_manifest.json"
+B1S_REPORT_PATH = B1S_ROOT / "B1S_CANARY_COMPACT_RESULT.md"
+B1S_TEST_OUTPUT_PATH = B1S_ROOT / "b1s_test_output.txt"
+B1S_ARTIFACT_INDEX_PATH = B1S_ROOT / "b1s_artifact_index.csv"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -66,6 +72,7 @@ REQUIRED_NODE_IDS = {
     "frozen_signal_behaviour_qualification",
     "nextgen_observation_fabric", "typed_temporal_program", "isolated_hypothesis_lanes",
     "anti_collapse_admission", "challenger_harness", "coverage_observability", "canary_plan",
+    "b1s_main_canary", "b1s_bbo_micro_canary", "b1s_canary_control",
 }
 REQUIRED_FORBIDDEN_EDGES = {
     ("spent_evaluation", "admission"),
@@ -88,6 +95,13 @@ REQUIRED_FORBIDDEN_EDGES = {
     ("challenger_harness", "a7mem"),
     ("sealed_forward", "canary_plan"),
     ("canary_plan", "scheduler"),
+    ("b1s_main_canary", "b1s_bbo_micro_canary"),
+    ("b1s_bbo_micro_canary", "b1s_main_canary"),
+    ("spent_evaluation", "b1s_canary_control"),
+    ("sealed_forward", "b1s_canary_control"),
+    ("b1s_canary_control", "a7mem"),
+    ("b1s_canary_control", "admission"),
+    ("b1s_canary_control", "scheduler"),
 }
 VALID_STATUSES = {"IMPLEMENTED", "PARTIAL", "PLANNED", "FROZEN", "DEPRECATED"}
 
@@ -146,6 +160,20 @@ def nextgen_test_evidence() -> dict[str, str]:
         "result": result,
         "output_path": relative(NEXTGEN_TEST_OUTPUT_PATH),
         "output_sha256": sha256_normalized_text_file(NEXTGEN_TEST_OUTPUT_PATH),
+    }
+
+
+def b1s_test_evidence() -> dict[str, str]:
+    normalized = B1S_TEST_OUTPUT_PATH.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    lines = [line.strip() for line in normalized.splitlines() if line.strip()]
+    result = lines[-1] if lines else ""
+    if not re.fullmatch(r"78 passed in [0-9]+(?:\.[0-9]+)?s", result):
+        raise ValueError("B1S test output does not record exactly 78 passing tests")
+    return {
+        "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
+        "result": result,
+        "output_path": relative(B1S_TEST_OUTPUT_PATH),
+        "output_sha256": sha256_normalized_text_file(B1S_TEST_OUTPUT_PATH),
     }
 
 
@@ -244,7 +272,7 @@ def render_documents(
 
 Generated from `{relative(REGISTRY_PATH)}`. Registry SHA256: `{digest}`.
 
-Status: `{state['current_phase']}` / `{state['nextgen_dark_status']}` / `{state['production_observation_qualification_status']}` / `{state['formal_search_status']}` / `{state['research_status']}` / `{state['phase_b1_status']}` / `{state['forward_data_status']}`.
+Status: `{state['current_phase']}` / `{state['nextgen_dark_status']}` / `{state['canary_status']}` / `{state['production_observation_qualification_status']}` / `{state['formal_search_status']}` / `{state['adaptive_cross_epoch_memory_status']}` / `{state['candidate_promotion_status']}` / `{state['forward_data_status']}`.
 
 Authority: `{relative(REGISTRY_PATH)}` is the machine-readable architecture authority; `graph.json` is its deterministic graph view; this file is the human-readable generated view. Raw graphify is unavailable, so `graph.json` retains the prior navigation graph plus a deterministic `control_*` overlay.
 
@@ -310,8 +338,10 @@ Generated from registry SHA256: `{digest}`.
 - B0A is stopped at `{state['frozen_signal_behaviour_status']}` with no reward, selection, scheduler, generator, or memory feedback.
 - NEXTGEN-DARK materializes 245088 Binance UM core12 development/pre-forward coordinates reproducibly without performance columns. Funding, basis, OI, mark/index, taker, liquidity, volatility, session, and cross-asset states materialize. A PC1 supplement scoped-qualifies 14208 top-of-book liquidity rows over 2024-01/02 with 82.22% core12 coordinate coverage; it is BBO only, not multi-level depth. Liquidation remains unavailable because PC1 contains no liquidation/force-order source.
 - Thirteen typed temporal/event primitives, seven isolated no-memory lanes, deterministic anti-collapse quotas, frozen benchmark/challenger interfaces, and non-performance coverage metrics are implemented without execution of formal search or performance comparison.
-- A fixed-budget development-only CANARY plan exists but is not authorized and not started.
-- `{state['formal_search_status']}`, `{state['phase_b1_status']}`, and `{state['forward_data_status']}` remain frozen.
+- The earlier NEXTGEN-DARK CANARY plan is superseded by the frozen B1S contract and retained as historical configuration.
+- B1S executed 5120 frozen proposals, 315/320 stratified strict evaluations, 320/320 equal-budget global-top-K controls, and 64 adaptive runtime-only queries. Funding-event underfilled strict evaluation by five because only 27 legal exact identities existed under one-exact-one-vote; no budget or threshold changed.
+- Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
+- `{state['formal_search_status']}`, `{state['adaptive_cross_epoch_memory_status']}`, `{state['candidate_promotion_status']}`, and `{state['forward_data_status']}` remain frozen.
 
 ## Decision Timeline
 
@@ -321,6 +351,7 @@ Generated from registry SHA256: `{digest}`.
     b0p_items = "\n".join(f"- `{item['id']}` {item['name']}: `{item['status']}`" for item in state["b0p_items"])
     b0a_items = "\n".join(f"- `{item['id']}` {item['name']}: `{item['status']}`" for item in state["b0a_items"])
     nextgen_items = "\n".join(f"- `{item['id']}` {item['name']}: `{item['status']}`" for item in state["nextgen_dark_items"])
+    b1s_items = "\n".join(f"- `{item['id']}` {item['name']}: `{item['status']}`" for item in state["b1s_canary_items"])
     state_doc = f"""# Crypto AlphaFactory Planning State
 
 Registry SHA256: `{digest}`.
@@ -337,6 +368,8 @@ Registry SHA256: `{digest}`.
 - NEXTGEN-DARK: `{state['nextgen_dark_status']}`
 - Formal search: `{state['formal_search_status']}`
 - CANARY: `{state['canary_status']}`
+- Adaptive cross-epoch memory: `{state['adaptive_cross_epoch_memory_status']}`
+- Candidate promotion: `{state['candidate_promotion_status']}`
 - Active stage: `{state['active_stage']}`
 - Phase B1: `{state['phase_b1_status']}`
 - Forward data: `{state['forward_data_status']}`
@@ -395,6 +428,20 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 {nextgen_items}
 
+## B1S-CANARY Closure
+
+{b1s_items}
+
+- Decision: `{state['phase_b1s_result']['decision']}`
+- Frozen repo SHA: `{state['phase_b1s_result']['frozen_repo_sha']}`
+- Frozen manifest SHA256: `{state['phase_b1s_result']['frozen_manifest_sha256']}`
+- Proposals / legal rate: `{state['phase_b1s_result']['proposal_rows']}` / `{state['phase_b1s_result']['legal_candidate_rate']}`
+- Stratified admissions: `{state['phase_b1s_result']['actual_stratified_admissions']}` of planned `{state['phase_b1s_result']['planned_stratified_admissions']}`
+- Stratified strict evaluations: `{state['phase_b1s_result']['actual_stratified_strict_evaluations']}` of planned `{state['phase_b1s_result']['planned_stratified_strict_evaluations']}`
+- Global-top-K strict evaluations: `{state['phase_b1s_result']['global_top_k_strict_evaluations']}`
+- Adaptive feedback queries: `{state['phase_b1s_result']['adaptive_feedback_queries']}`
+- Partial reason: {state['phase_b1s_result']['partial_reason']}
+
 ## NEXTGEN-DARK Allowed
 
 """ + "\n".join(f"- {x}" for x in state["allowed_nextgen_dark"]) + "\n\n## NEXTGEN-DARK Prohibited\n\n" + "\n".join(f"- {x}" for x in state["prohibited_nextgen_dark"]) + """
@@ -439,6 +486,11 @@ def artifact_paths(registry: dict[str, Any]) -> set[Path]:
         NEXTGEN_RUN_MANIFEST_PATH,
         NEXTGEN_ADR_PATH,
         CANARY_PLAN_PATH,
+        B1S_FROZEN_MANIFEST_PATH,
+        B1S_RUN_MANIFEST_PATH,
+        B1S_REPORT_PATH,
+        B1S_TEST_OUTPUT_PATH,
+        B1S_ARTIFACT_INDEX_PATH,
     }
     for node in registry["nodes"]:
         paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
@@ -463,6 +515,22 @@ def nextgen_artifact_paths(registry: dict[str, Any]) -> set[Path]:
         if node["id"] in node_ids:
             paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
     paths.discard(NEXTGEN_ARTIFACT_INDEX_PATH)
+    return paths
+
+
+def b1s_artifact_paths(registry: dict[str, Any]) -> set[Path]:
+    node_ids = {"b1s_main_canary", "b1s_bbo_micro_canary", "b1s_canary_control"}
+    paths = {
+        REGISTRY_PATH, STATE_SOURCE_PATH, DECISION_LOG_PATH, CURRENT_ARCH_PATH, BOUNDARY_PATH,
+        EVOLUTION_PATH, GRAPH_PATH, STATE_PATH, B1S_FROZEN_MANIFEST_PATH, B1S_RUN_MANIFEST_PATH,
+        B1S_REPORT_PATH, B1S_TEST_OUTPUT_PATH, RUN_MANIFEST_PATH,
+        REPO / "scripts" / "crypto_architecture_control_plane.py",
+        REPO / "tests" / "test_architecture_control_plane.py",
+    }
+    for node in registry["nodes"]:
+        if node["id"] in node_ids:
+            paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
+    paths.discard(B1S_ARTIFACT_INDEX_PATH)
     return paths
 
 
@@ -524,6 +592,10 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "nextgen_dark_status": state["nextgen_dark_status"],
         "formal_search_status": state["formal_search_status"],
         "canary_status": state["canary_status"],
+        "adaptive_cross_epoch_memory_status": state["adaptive_cross_epoch_memory_status"],
+        "candidate_promotion_status": state["candidate_promotion_status"],
+        "b1s_canary_decision": state["phase_b1s_result"]["decision"],
+        "b1s_frozen_repo_sha": state["phase_b1s_result"]["frozen_repo_sha"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -669,6 +741,11 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "formal_search_status": state["formal_search_status"],
         "nextgen_dark_run_manifest": relative(NEXTGEN_RUN_MANIFEST_PATH),
         "nextgen_dark_artifact_index": relative(NEXTGEN_ARTIFACT_INDEX_PATH),
+        "b1s_canary_status": state["phase_b1s_result"]["decision"],
+        "b1s_frozen_run_manifest": relative(B1S_FROZEN_MANIFEST_PATH),
+        "b1s_canary_manifest": relative(B1S_RUN_MANIFEST_PATH),
+        "b1s_artifact_index": relative(B1S_ARTIFACT_INDEX_PATH),
+        "b1s_test_evidence": b1s_test_evidence(),
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []
@@ -685,6 +762,16 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         writer = csv.DictWriter(handle, fieldnames=["path", "exists", "sha256", "role"])
         writer.writeheader()
         writer.writerows(b0a_rows)
+    b1s_rows = []
+    for path in sorted(b1s_artifact_paths(registry), key=lambda item: str(item)):
+        b1s_rows.append({
+            "path": relative(path), "exists": str(path.exists()),
+            "sha256": sha256_file(path) if path.is_file() else "", "role": "b1s_canary_closure",
+        })
+    with B1S_ARTIFACT_INDEX_PATH.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["path", "exists", "sha256", "role"])
+        writer.writeheader()
+        writer.writerows(b1s_rows)
     paths = artifact_paths(registry)
     rows = []
     for path in sorted(paths, key=lambda p: str(p)):
@@ -882,6 +969,40 @@ def validate_outputs(registry: dict[str, Any]) -> None:
     canary = load_json(CANARY_PLAN_PATH)
     if canary.get("execution_authorized") or canary.get("started") or canary.get("data_access", {}).get("forward_read_allowed"):
         raise ValueError("CANARY must remain unauthorized and not started")
+    b1s_frozen = load_json(B1S_FROZEN_MANIFEST_PATH)
+    frozen_recorded = b1s_frozen.pop("frozen_manifest_sha256")
+    frozen_actual = sha256_bytes(json.dumps(b1s_frozen, sort_keys=True, separators=(",", ":"), default=str).encode())
+    if frozen_actual != frozen_recorded or frozen_recorded != state["phase_b1s_result"]["frozen_manifest_sha256"]:
+        raise ValueError("B1S frozen manifest identity mismatch")
+    b1s = load_json(B1S_RUN_MANIFEST_PATH)
+    if b1s.get("decision") != state["phase_b1s_result"]["decision"]:
+        raise ValueError("B1S decision mismatch")
+    prohibited_b1s = [
+        "candidate_promotion", "a7mem_updated", "adaptive_cross_epoch_memory_updated",
+        "validation_test_recent_stress_forward_read", "policy_or_elite_persisted",
+        "online_budget_or_threshold_changed", "additional_budget_added", "alpha_ready_claimed",
+        "deployable_claimed", "oos_proven_claimed", "main_and_bbo_directly_ranked",
+    ]
+    if any(b1s.get(flag) for flag in prohibited_b1s):
+        raise ValueError("B1S manifest records prohibited activity")
+    expected_b1s_counts = {
+        "proposal_rows": 5120, "stratified_admissions": 564, "stratified_strict_evaluations": 315,
+        "global_top_k_strict_evaluations": 320, "logical_strict_evaluations": 635,
+        "adaptive_feedback_queries": 64,
+    }
+    if any(b1s.get(key) != value for key, value in expected_b1s_counts.items()):
+        raise ValueError("B1S fixed-budget actual counts drifted")
+    if b1s.get("repo_sha") != state["phase_b1s_result"]["frozen_repo_sha"]:
+        raise ValueError("B1S frozen repo SHA mismatch")
+    for output in b1s.get("outputs", []):
+        path = REPO / output["path"]
+        if sha256_file(path) != output["sha256"]:
+            raise ValueError(f"B1S output hash drift: {output['path']}")
+    comparison = list(csv.DictReader((B1S_ROOT / "stratified_vs_global_topk.csv").open("r", encoding="utf-8", newline="")))
+    if any(row["direct_cross_panel_ranking_performed"].lower() == "true" for row in comparison):
+        raise PermissionError("B1S main and BBO panels were directly ranked")
+    if manifest.get("b1s_test_evidence") != b1s_test_evidence():
+        raise ValueError("Phase A/B0 manifest B1S test evidence mismatch")
     with ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
         index_rows = list(csv.DictReader(handle))
     indexed_paths = {row["path"] for row in index_rows}
@@ -904,6 +1025,14 @@ def validate_outputs(registry: dict[str, Any]) -> None:
         path = REPO / row["path"]
         if row["exists"] != str(path.exists()) or row["sha256"] != (sha256_file(path) if path.is_file() else ""):
             raise ValueError(f"NEXTGEN-DARK artifact index hash drift: {row['path']}")
+    with B1S_ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
+        b1s_index_rows = list(csv.DictReader(handle))
+    if {row["path"] for row in b1s_index_rows} != {relative(path) for path in b1s_artifact_paths(registry)}:
+        raise ValueError("B1S artifact index paths do not match closure scope")
+    for row in b1s_index_rows:
+        path = REPO / row["path"]
+        if row["exists"] != str(path.exists()) or row["sha256"] != (sha256_file(path) if path.is_file() else ""):
+            raise ValueError(f"B1S artifact index hash drift: {row['path']}")
 
 
 def build() -> None:

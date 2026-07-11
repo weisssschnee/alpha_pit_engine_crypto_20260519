@@ -1,16 +1,18 @@
 {
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
-  "research_status": "HOLD_RESEARCH",
-  "current_phase": "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY",
+  "research_status": "RESEARCH_MODE_CONTROLLED_CANARY_ONLY",
+  "current_phase": "B1S_CANARY_PARTIALLY_COMPLETED_STOPPED",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
-  "active_stage": "NEXTGEN_DARK_CLOSED_WAITING_CANARY_AUTHORIZATION",
+  "active_stage": "B1S_CANARY_CLOSED_WAITING_FROZEN_SEARCH_EPOCH_AUTHORIZATION",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "formal_search_status": "FORMAL_SEARCH_FROZEN",
-  "nextgen_dark_status": "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY",
-  "canary_status": "CANARY_PLAN_PREPARED_NOT_AUTHORIZED_NOT_STARTED",
+  "nextgen_dark_status": "NEXTGEN_DARK_SCOPED_READY",
+  "canary_status": "B1S_CANARY_PARTIALLY_COMPLETED",
+  "adaptive_cross_epoch_memory_status": "ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN",
+  "candidate_promotion_status": "NO_CANDIDATE_PROMOTION",
   "phase_a_remote_sync": {
     "branch": "audit/evalreset-collapse-forensics-20260711",
     "local_sha": "e1fa83493b1ee1893992fb37604d21099c5aad65",
@@ -87,6 +89,31 @@
     {"id":"ND.7","name":"Fixed-budget CANARY plan","status":"PREPARED_NOT_AUTHORIZED_NOT_STARTED"},
     {"id":"ND.8","name":"Closure control-plane synchronization","status":"IMPLEMENTED"}
   ],
+  "b1s_canary_items": [
+    {"id":"B1S.1","name":"Frozen repo/data/capability/budget/contracts","status":"IMPLEMENTED_SHA_39DBD40"},
+    {"id":"B1S.2","name":"Main capability CANARY","status":"PARTIALLY_COMPLETED_FIXED_QUOTA_UNDERFILL"},
+    {"id":"B1S.3","name":"BBO micro-CANARY","status":"COMPLETED_SCOPED_BBO_ONLY"},
+    {"id":"B1S.4","name":"Equal-budget global-top-K controls","status":"COMPLETED_320_OF_320"},
+    {"id":"B1S.5","name":"Adaptive challenger runtime namespace","status":"COMPLETED_64_QUERIES_NOT_PERSISTED"},
+    {"id":"B1S.6","name":"Candidate promotion and memory boundary","status":"ENFORCED"},
+    {"id":"B1S.7","name":"Graph/STATE closure","status":"IMPLEMENTED"}
+  ],
+  "phase_b1s_result": {
+    "decision": "B1S_CANARY_PARTIALLY_COMPLETED",
+    "frozen_repo_sha": "39dbd40e6ce7bde3fbaba0067da6a5bfbae797f8",
+    "frozen_manifest_sha256": "897A36543AC4CB4E9F658DFA7CF0B71F869ACB3755F318F451AE039E63FDE1D2",
+    "proposal_rows": 5120,
+    "legal_candidate_rate": 0.8076171875,
+    "planned_stratified_admissions": 640,
+    "actual_stratified_admissions": 564,
+    "planned_stratified_strict_evaluations": 320,
+    "actual_stratified_strict_evaluations": 315,
+    "global_top_k_strict_evaluations": 320,
+    "adaptive_feedback_queries": 64,
+    "partial_reason": "funding_event yielded only 27 legal exact identities, so one-exact-one-vote permitted 27 of 32 strict evaluations; no quota was relaxed and no budget was added",
+    "main_and_bbo_directly_ranked": false,
+    "candidate_promotion": false
+  },
   "phase_b0a_result": {
     "artifact_path": "runtime/a7b0a_signal_behaviour_20260711/signal_behaviour_sketch.bin",
     "artifact_index_path": "runtime/a7b0a_signal_behaviour_20260711/b0a_artifact_index.csv",
@@ -118,5 +145,5 @@
     "online policy or budget reweighting",
     "automatic CANARY launch or Phase B1 performance integration"
   ],
-  "next_acceptance_gate": "NEXTGEN-DARK remains PARTIALLY_READY because PC1 contains no liquidation/force-order source. PC1 top-of-book liquidity is scoped-qualified for Binance UM bookTicker only over its observed 2024-01/02 subset and is not multi-level depth. The fixed-budget development-only CANARY plan is not authorized and not started. HOLD_RESEARCH, FORMAL_SEARCH_FROZEN, PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force."
+  "next_acceptance_gate": "B1S-CANARY is stopped at B1S_CANARY_PARTIALLY_COMPLETED. Wait for explicit authorization of the next frozen search epoch. FORMAL_SEARCH_FROZEN, ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN, FORWARD_SEALED, and NO_CANDIDATE_PROMOTION remain in force; main and BBO results remain non-comparable across panels."
 }

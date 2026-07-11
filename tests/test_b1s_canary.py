@@ -11,6 +11,7 @@ from alphafactory_crypto.b1s_canary import (
     FrozenPanel, assert_no_cross_panel_comparison, generate_proposals, global_top_k,
     materialize, rank_weights, strict_evaluate, stratified_strict_selection, validate_contract,
 )
+from scripts.crypto_b1s_canary import MAIN_COLUMNS
 
 
 REPO = Path(__file__).resolve().parents[1]
@@ -62,6 +63,10 @@ class B1SCanaryTests(unittest.TestCase):
     def test_cross_panel_ranking_fails_closed(self) -> None:
         with self.assertRaises(PermissionError):
             assert_no_cross_panel_comparison("main", "bbo_micro")
+
+    def test_main_read_projection_has_no_return_or_oos_column(self) -> None:
+        forbidden = ("return", "label", "validation", "test", "recent", "stress", "oos", "forward")
+        self.assertFalse(any(token in column.lower() for column in MAIN_COLUMNS for token in forbidden))
 
 
 if __name__ == "__main__":

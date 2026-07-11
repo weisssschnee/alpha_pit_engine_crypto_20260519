@@ -1,6 +1,6 @@
 {
   "manifest_id": "CRYPTO-NEXTGEN-DARK-CLOSURE-20260711",
-  "decision": "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY",
+  "decision": "NEXTGEN_DARK_SCOPED_READY",
   "accepted_b0a_subject_sha": "4e09f33159fabe21add8e5d405f76a5a97c61f83",
   "materialization_manifest": "runtime/nextgen_dark_20260711/feature_state_materialization_manifest.json",
   "materialization_artifact_hash": "0ACE067C0EC630D59E5F7CDCA75D10F50551BE1400DE74E68B1DDC2B3D0BF873",
@@ -25,7 +25,7 @@
   "canary_plan": "config/crypto_nextgen_dark_canary_plan_v1.json",
   "canary_status": "PREPARED_NOT_AUTHORIZED_NOT_STARTED",
   "artifact_index": "runtime/nextgen_dark_20260711/nextgen_dark_artifact_index.csv",
-  "registry_sha256": "3D506C56A75546A985A05AA143B7B73CAE8E797756C1B96D553977B021E517DE",
+  "registry_sha256": "E8B9E113E88217ECB073C64ABC86F5F512C70D87F39888EB55079CAA3517B7B4",
   "test_evidence": {
     "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
     "result": "72 passed in 24.93s",
