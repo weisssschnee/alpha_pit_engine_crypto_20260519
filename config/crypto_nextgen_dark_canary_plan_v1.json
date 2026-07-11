@@ -1,0 +1,36 @@
+{
+  "plan_id": "CRYPTO-NEXTGEN-DARK-CANARY-V1",
+  "status": "PREPARED_NOT_AUTHORIZED_NOT_STARTED",
+  "data_access": {
+    "epoch_class": "DEVELOPMENT_PRE_FORWARD_ONLY",
+    "start_utc": "2024-01-01T00:00:00Z",
+    "end_utc_inclusive": "2026-04-30T23:00:00Z",
+    "forward_read_allowed": false,
+    "spent_historical_oos_selection_allowed": false
+  },
+  "fixed_budget": {
+    "proposal_total": 320,
+    "strict_eval_total": 64,
+    "proposal_by_lane": {
+      "static_cross_sectional": 48,
+      "temporal_program": 48,
+      "event_conditioned": 40,
+      "state_transition": 40,
+      "orthogonal_exile": 64,
+      "competitor_reproduction": 40,
+      "mcts_evolutionary_challenger": 40
+    }
+  },
+  "policy_freeze": {
+    "online_reweighting": false,
+    "shared_elite": false,
+    "shared_memory": false,
+    "historical_winner_prior": false,
+    "global_top_k_baseline_execution": false
+  },
+  "required_separate_authorization": "CANARY_EXECUTION_AUTHORIZATION",
+  "execution_authorized": false,
+  "started": false,
+  "formal_search_unlocked": false,
+  "phase_b1_unlocked": false
+}

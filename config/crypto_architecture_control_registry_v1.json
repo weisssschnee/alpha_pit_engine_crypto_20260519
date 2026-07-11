@@ -511,7 +511,7 @@
         "reports/CRYPTO_B0_TEMPORAL_EVENT_PRIMITIVE_CONTRACT_20260711.md"
       ],
       "blocker": "primitive execution and State/event reward coupling remain frozen until B1",
-      "last_verified_sha": "8755ED21F49B04334B7F3E272518197884082F91853A30324D4284A1B595E5DF"
+      "last_verified_sha": "91886F71B17073F38BFFDAFAFC292264A890B81E0A56F759D1C0CCCB3646ADF0"
     },
     {
       "id": "feature_state_fabric",
@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "297BD0F4133DA5AB48C9C17A23A10B1C6050792FC90CF9FA193BA9F5DE09E0B4"
+      "last_verified_sha": "B3E31CC8ADF0AE77AD4921F935F63EC365612450CCFC2C78F8B8241FDB3E014B"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -600,6 +600,140 @@
       ],
       "blocker": "B0A does not authorize B1D, search, candidate selection, reward, scheduler, or memory feedback",
       "last_verified_sha": "6381E3B0238D12D502DD049C7BF46097A4441109FFA453DA69E1CD12643EB99A"
+    },
+    {
+      "id": "nextgen_observation_fabric",
+      "label": "NEXTGEN-DARK observation materialization",
+      "status": "PARTIAL",
+      "implementation_path": [
+        "alphafactory_crypto/nextgen_fabric.py",
+        "config/crypto_nextgen_dark_fabric_v1.json",
+        "scripts/crypto_nextgen_dark_materialize.py"
+      ],
+      "entrypoint": "materialize_states / crypto_nextgen_dark_materialize.run",
+      "input": "approved Binance UM core12 development/pre-forward observation columns",
+      "output": "deterministic state frame, missingness mask, availability and lineage manifest",
+      "data_role": "observation-only infrastructure",
+      "feedback_permission": "NONE_NO_REWARD_GENERATOR_MEMORY_PROMOTION",
+      "artifact_test": [
+        "tests/test_nextgen_fabric.py",
+        "runtime/nextgen_dark_20260711/feature_state_materialization_manifest.json"
+      ],
+      "blocker": "liquidation_notional and depth_notional_10bps have no approved A7INPUT0-v2 source; no proxy substituted",
+      "last_verified_sha": "A3374CBB9E7CD1AE07EB80BEDD4A01426EAB9608215D0237540747526DDFEE89"
+    },
+    {
+      "id": "typed_temporal_program",
+      "label": "Typed Temporal/Event Program",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/temporal_program.py",
+        "config/crypto_temporal_event_primitives_v1.json"
+      ],
+      "entrypoint": "TypedProgram / canonical_program / evaluate",
+      "input": "observable and mature approved observation vectors",
+      "output": "13 canonical PIT temporal/event primitive outputs",
+      "data_role": "development observation semantics",
+      "feedback_permission": "NONE_NEXTGEN_DARK",
+      "artifact_test": [
+        "tests/test_temporal_program.py"
+      ],
+      "blocker": "performance integration and reward coupling frozen",
+      "last_verified_sha": "8436E59EC98B6D98411685870BDBF564A612E4C90BA54DF764CE5E70CE1F1565"
+    },
+    {
+      "id": "isolated_hypothesis_lanes",
+      "label": "Isolated hypothesis lanes",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/nextgen_lanes.py",
+        "config/crypto_nextgen_dark_lanes_v1.json"
+      ],
+      "entrypoint": "LaneSpec / validate_lanes",
+      "input": "seven frozen lane definitions",
+      "output": "isolated quotas, archives, lineage, seeds and candidate contracts",
+      "data_role": "proposal interface only",
+      "feedback_permission": "NO_EXECUTION_NO_SHARED_MEMORY",
+      "artifact_test": [
+        "tests/test_nextgen_lanes.py"
+      ],
+      "blocker": "formal proposal execution requires separate CANARY authorization",
+      "last_verified_sha": "E4E42EEB19AA0DF7E24CC3AC7A846237950791EBC2D59AB3A9C26BE1A0C67849"
+    },
+    {
+      "id": "anti_collapse_admission",
+      "label": "Anti-collapse admission",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/anti_collapse.py",
+        "config/crypto_anti_collapse_admission_v1.json"
+      ],
+      "entrypoint": "admit",
+      "input": "identity, behaviour, hypothesis, parent, family and proposal metadata only",
+      "output": "deterministic quota decisions and semantic-volume accounting",
+      "data_role": "non-performance admission contract",
+      "feedback_permission": "QUOTA_TESTS_ONLY_NO_CANDIDATE_SELECTION",
+      "artifact_test": [
+        "tests/test_anti_collapse.py"
+      ],
+      "blocker": "global top-K and performance ranking remain frozen",
+      "last_verified_sha": "5E6FA02A47B2462E8BCFCE4B17867FB9472334101696C0C2EDED36D3FEFA93AE"
+    },
+    {
+      "id": "challenger_harness",
+      "label": "Benchmark / competitor harness",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/challenger_harness.py",
+        "config/crypto_challenger_harness_v1.json"
+      ],
+      "entrypoint": "HarnessSpec / validate_harness",
+      "input": "strategy benchmark and algorithm challenger contracts",
+      "output": "frozen budgets, independent archives and data-access contracts",
+      "data_role": "comparison interface only",
+      "feedback_permission": "REPORT_ONLY_NO_MEMORY_NO_EXECUTION",
+      "artifact_test": [
+        "tests/test_challenger_coverage.py"
+      ],
+      "blocker": "performance comparison is not authorized",
+      "last_verified_sha": "C13F1E123CF5FCA16506F4356BE902B1E6DE999D59B355D3120A661E7D683A55"
+    },
+    {
+      "id": "coverage_observability",
+      "label": "NEXTGEN-DARK coverage observability",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/coverage_metrics.py"
+      ],
+      "entrypoint": "nextgen_coverage_report",
+      "input": "field, grammar, event, hypothesis, behaviour, lineage and lane metadata",
+      "output": "non-performance coverage and entropy metrics",
+      "data_role": "infrastructure coverage only",
+      "feedback_permission": "NO_PERFORMANCE_NO_SELECTION",
+      "artifact_test": [
+        "tests/test_challenger_coverage.py",
+        "runtime/nextgen_dark_20260711/non_performance_coverage_capability.json"
+      ],
+      "blocker": "proposal distributions remain empty until a separately authorized CANARY",
+      "last_verified_sha": "976112C8B20D4BB92E0DD0B21A93F27B29CA18591CDFC88C17F4DD9018F9108C"
+    },
+    {
+      "id": "canary_plan",
+      "label": "Fixed-budget development-only CANARY plan",
+      "status": "FROZEN",
+      "implementation_path": [
+        "config/crypto_nextgen_dark_canary_plan_v1.json"
+      ],
+      "entrypoint": "no executable entrypoint",
+      "input": "fixed per-lane proposal and strict-eval budgets",
+      "output": "prepared plan only",
+      "data_role": "future development-only canary plan",
+      "feedback_permission": "NOT_AUTHORIZED_NOT_STARTED",
+      "artifact_test": [
+        "config/crypto_nextgen_dark_canary_plan_v1.json"
+      ],
+      "blocker": "requires independent CANARY execution authorization",
+      "last_verified_sha": "94A302ECCF206DB4B51542602C6A32BD0D6DA4FC778E71369BCA21C0DA84246A"
     }
   ],
   "edges": [
@@ -800,6 +934,78 @@
       "target": "admission",
       "kind": "FORBIDDEN",
       "label": "undefined BZ cannot promote"
+    },
+    {
+      "source": "a7input0",
+      "target": "nextgen_observation_fabric",
+      "kind": "ALLOWED",
+      "label": "approved observable roles only"
+    },
+    {
+      "source": "nextgen_observation_fabric",
+      "target": "typed_temporal_program",
+      "kind": "ALLOWED",
+      "label": "PIT observation-only programs"
+    },
+    {
+      "source": "typed_temporal_program",
+      "target": "isolated_hypothesis_lanes",
+      "kind": "ALLOWED",
+      "label": "typed candidate contract only"
+    },
+    {
+      "source": "isolated_hypothesis_lanes",
+      "target": "anti_collapse_admission",
+      "kind": "ALLOWED",
+      "label": "proposal metadata and quotas only"
+    },
+    {
+      "source": "isolated_hypothesis_lanes",
+      "target": "coverage_observability",
+      "kind": "ALLOWED",
+      "label": "non-performance metadata accounting"
+    },
+    {
+      "source": "benchmark_registry",
+      "target": "challenger_harness",
+      "kind": "ALLOWED",
+      "label": "report-only benchmark contracts"
+    },
+    {
+      "source": "nextgen_observation_fabric",
+      "target": "strict_reward",
+      "kind": "FORBIDDEN",
+      "label": "NEXTGEN-DARK State/event outputs cannot enter reward"
+    },
+    {
+      "source": "nextgen_observation_fabric",
+      "target": "generation_lanes",
+      "kind": "FORBIDDEN",
+      "label": "new State/event outputs cannot enter legacy generator"
+    },
+    {
+      "source": "isolated_hypothesis_lanes",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "dark lanes cannot share or update A7MEM"
+    },
+    {
+      "source": "challenger_harness",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "benchmark/challenger results cannot enter positive memory"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "canary_plan",
+      "kind": "FORBIDDEN",
+      "label": "CANARY cannot read sealed forward data"
+    },
+    {
+      "source": "canary_plan",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "CANARY is not authorized and cannot start scheduler"
     }
   ]
 }

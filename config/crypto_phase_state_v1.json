@@ -2,12 +2,15 @@
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
   "research_status": "HOLD_RESEARCH",
-  "current_phase": "PHASE_B0_CONTRACTS_ACCEPTED",
+  "current_phase": "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
-  "active_stage": "PHASE_B0A_COMPLETE_STOPPED",
-  "phase_b1_status": "PHASE_B1_FROZEN",
+  "active_stage": "NEXTGEN_DARK_CLOSED_WAITING_CANARY_AUTHORIZATION",
+  "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
+  "formal_search_status": "FORMAL_SEARCH_FROZEN",
+  "nextgen_dark_status": "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY",
+  "canary_status": "CANARY_PLAN_PREPARED_NOT_AUTHORIZED_NOT_STARTED",
   "phase_a_remote_sync": {
     "branch": "audit/evalreset-collapse-forensics-20260711",
     "local_sha": "e1fa83493b1ee1893992fb37604d21099c5aad65",
@@ -74,6 +77,16 @@
     {"id":"B0A.5","name":"PnL/regime no-feedback boundary","status":"ENFORCED"},
     {"id":"B0A.6","name":"Control-plane synchronization","status":"IMPLEMENTED"}
   ],
+  "nextgen_dark_items": [
+    {"id":"ND.1","name":"Development-only Feature/State materialization","status":"PARTIAL_LIQUIDATION_AND_DEPTH_NO_APPROVED_SOURCE"},
+    {"id":"ND.2","name":"Typed Temporal/Event Program","status":"IMPLEMENTED"},
+    {"id":"ND.3","name":"Isolated hypothesis lanes","status":"IMPLEMENTED_NOT_EXECUTED"},
+    {"id":"ND.4","name":"Anti-collapse admission","status":"IMPLEMENTED_QUOTA_TESTS_ONLY"},
+    {"id":"ND.5","name":"Benchmark and competitor harness","status":"IMPLEMENTED_NOT_EXECUTED"},
+    {"id":"ND.6","name":"Non-performance coverage metrics","status":"IMPLEMENTED"},
+    {"id":"ND.7","name":"Fixed-budget CANARY plan","status":"PREPARED_NOT_AUTHORIZED_NOT_STARTED"},
+    {"id":"ND.8","name":"Closure control-plane synchronization","status":"IMPLEMENTED"}
+  ],
   "phase_b0a_result": {
     "artifact_path": "runtime/a7b0a_signal_behaviour_20260711/signal_behaviour_sketch.bin",
     "artifact_index_path": "runtime/a7b0a_signal_behaviour_20260711/b0a_artifact_index.csv",
@@ -84,5 +97,26 @@
     "cross_time_slice_stability_median": 1.0,
     "cross_time_slice_stability_min": 1.0
   },
-  "next_acceptance_gate": "B0A is complete and stopped at FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED. Wait for an independent acceptance before any B1D work; HOLD_RESEARCH, PHASE_B1_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force."
+  "phase_b0a_acceptance": {
+    "accepted_subject_sha": "4e09f33159fabe21add8e5d405f76a5a97c61f83",
+    "status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED"
+  },
+  "allowed_nextgen_dark": [
+    "development/pre-forward observable materialization",
+    "typed temporal/event contract execution without performance",
+    "deterministic lane and admission quota tests",
+    "benchmark/challenger interface construction without comparison",
+    "non-performance coverage accounting",
+    "prepare but do not launch one fixed-budget CANARY plan"
+  ],
+  "prohibited_nextgen_dark": [
+    "formal search execution",
+    "candidate performance evaluation or selection",
+    "new forward read",
+    "State/event connection to reward",
+    "CEM/UCB/MCTS/A7MEM update",
+    "online policy or budget reweighting",
+    "automatic CANARY launch or Phase B1 performance integration"
+  ],
+  "next_acceptance_gate": "NEXTGEN-DARK is closed as PARTIALLY_READY because liquidation and depth have no approved observable source. The fixed-budget development-only CANARY plan is not authorized and not started. HOLD_RESEARCH, FORMAL_SEARCH_FROZEN, PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force."
 }

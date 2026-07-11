@@ -6,6 +6,9 @@ from scripts.crypto_architecture_control_plane import (
     BOUNDARY_PATH,
     B0P_ATTESTATION_PATH,
     B0A_MANIFEST_PATH,
+    NEXTGEN_MATERIALIZATION_PATH,
+    NEXTGEN_RUN_MANIFEST_PATH,
+    CANARY_PLAN_PATH,
     CURRENT_ARCH_PATH,
     GRAPH_PATH,
     REGISTRY_PATH,
@@ -21,6 +24,7 @@ ATTESTATION_PATH = REGISTRY_PATH.parents[1] / "runtime" / "a7b0_control_plane_20
 B0P_MANIFEST_PATH = REGISTRY_PATH.parents[1] / "runtime" / "a7b0p_control_plane_20260711" / "b0p_qualification_manifest.json"
 ACCEPTED_SUBJECT_SHA = "9574d32053d1679d64179fe2d6607d1a05e13db9"
 B0P_ACCEPTED_SUBJECT_SHA = "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e"
+B0A_ACCEPTED_SUBJECT_SHA = "4e09f33159fabe21add8e5d405f76a5a97c61f83"
 
 
 class ArchitectureControlPlaneTests(unittest.TestCase):
@@ -30,15 +34,17 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         validate_outputs(registry)
 
         state = load_json(STATE_SOURCE_PATH)
-        self.assertEqual(state["current_phase"], "PHASE_B0_CONTRACTS_ACCEPTED")
+        self.assertEqual(state["current_phase"], "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY")
         self.assertEqual(
             state["production_observation_qualification_status"],
             "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
         )
-        self.assertEqual(state["phase_b1_status"], "PHASE_B1_FROZEN")
+        self.assertEqual(state["phase_b1_status"], "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN")
         self.assertEqual(state["phase_b0p_acceptance"]["status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
-        self.assertEqual(state["active_stage"], "PHASE_B0A_COMPLETE_STOPPED")
+        self.assertEqual(state["active_stage"], "NEXTGEN_DARK_CLOSED_WAITING_CANARY_AUTHORIZATION")
         self.assertEqual(state["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
+        self.assertEqual(state["phase_b0a_acceptance"]["accepted_subject_sha"], B0A_ACCEPTED_SUBJECT_SHA)
+        self.assertEqual(state["formal_search_status"], "FORMAL_SEARCH_FROZEN")
 
         attestation = load_json(ATTESTATION_PATH)
         self.assertEqual(attestation["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
@@ -77,17 +83,19 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertLess(authority.index("deterministic graph view"), authority.index("human-readable generated view"))
 
         current_architecture = CURRENT_ARCH_PATH.read_text(encoding="utf-8")
-        self.assertIn("PHASE_B0_CONTRACTS_ACCEPTED", current_architecture)
+        self.assertIn("NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY", current_architecture)
         self.assertIn("PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED", current_architecture)
 
         graph = load_json(GRAPH_PATH)
         graph_control = graph["graph"]["architecture_control_plane"]
-        self.assertEqual(graph_control["phase_status"], "PHASE_B0_CONTRACTS_ACCEPTED")
+        self.assertEqual(graph_control["phase_status"], "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY")
         self.assertEqual(graph_control["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph_control["b0p_accepted_subject_sha"], B0P_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph_control["b0p_acceptance_status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
         self.assertEqual(graph_control["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
-        self.assertEqual(graph["built_at_accepted_subject"], ACCEPTED_SUBJECT_SHA)
+        self.assertEqual(graph_control["b0a_accepted_subject_sha"], B0A_ACCEPTED_SUBJECT_SHA)
+        self.assertEqual(graph_control["nextgen_dark_status"], "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY")
+        self.assertEqual(graph["built_at_accepted_subject"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertNotIn("built_at_commit", graph)
 
         b0p_manifest = load_json(B0P_MANIFEST_PATH)
@@ -110,6 +118,25 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertTrue(b0a_manifest["alias_reconstruction_pass"])
         self.assertFalse(b0a_manifest["return_label_read"])
         self.assertFalse(b0a_manifest["reward_read"])
+
+        nextgen = load_json(NEXTGEN_RUN_MANIFEST_PATH)
+        self.assertEqual(nextgen["decision"], "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY")
+        self.assertEqual(nextgen["accepted_b0a_subject_sha"], B0A_ACCEPTED_SUBJECT_SHA)
+        self.assertTrue(nextgen["materialization_reproducible"])
+        self.assertEqual(nextgen["rows"], 245088)
+        self.assertEqual(nextgen["symbols"], 12)
+        self.assertEqual(set(nextgen["unavailable_states"]), {"liquidation_cluster", "depth_liquidity_state"})
+        self.assertFalse(nextgen["search_started"])
+        self.assertFalse(nextgen["performance_evaluated"])
+        self.assertFalse(nextgen["canary_started"])
+        self.assertEqual(nextgen["test_evidence"]["result"], "71 passed in 26.18s")
+
+        materialization = load_json(NEXTGEN_MATERIALIZATION_PATH)
+        self.assertFalse(materialization["forbidden_performance_columns_read"])
+        self.assertFalse(materialization["forward_read"])
+        canary = load_json(CANARY_PLAN_PATH)
+        self.assertFalse(canary["execution_authorized"])
+        self.assertFalse(canary["started"])
 
 
 if __name__ == "__main__":

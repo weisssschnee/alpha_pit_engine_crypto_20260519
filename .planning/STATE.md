@@ -1,18 +1,21 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `6B48E715ED8980832CB3FE0D37EAAD1DDF337D144FCA1CC30358836F807401FB`.
+Registry SHA256: `2EFFB08A37CF4CC0933A2FED70B5F7F50F833B5E58DBB7EACFB45E7DE599ED36`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `HOLD_RESEARCH`
-- Current phase: `PHASE_B0_CONTRACTS_ACCEPTED`
+- Current phase: `NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
-- Active stage: `PHASE_B0A_COMPLETE_STOPPED`
-- Phase B1: `PHASE_B1_FROZEN`
+- NEXTGEN-DARK: `NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY`
+- Formal search: `FORMAL_SEARCH_FROZEN`
+- CANARY: `CANARY_PLAN_PREPARED_NOT_AUTHORIZED_NOT_STARTED`
+- Active stage: `NEXTGEN_DARK_CLOSED_WAITING_CANARY_AUTHORIZATION`
+- Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
 ## Remote Baseline
@@ -79,6 +82,36 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Top-cluster share: `0.5`
 - Cross-time stability median/min: `1.0` / `1.0`
 
+## NEXTGEN-DARK Closure
+
+- `ND.1` Development-only Feature/State materialization: `PARTIAL_LIQUIDATION_AND_DEPTH_NO_APPROVED_SOURCE`
+- `ND.2` Typed Temporal/Event Program: `IMPLEMENTED`
+- `ND.3` Isolated hypothesis lanes: `IMPLEMENTED_NOT_EXECUTED`
+- `ND.4` Anti-collapse admission: `IMPLEMENTED_QUOTA_TESTS_ONLY`
+- `ND.5` Benchmark and competitor harness: `IMPLEMENTED_NOT_EXECUTED`
+- `ND.6` Non-performance coverage metrics: `IMPLEMENTED`
+- `ND.7` Fixed-budget CANARY plan: `PREPARED_NOT_AUTHORIZED_NOT_STARTED`
+- `ND.8` Closure control-plane synchronization: `IMPLEMENTED`
+
+## NEXTGEN-DARK Allowed
+
+- development/pre-forward observable materialization
+- typed temporal/event contract execution without performance
+- deterministic lane and admission quota tests
+- benchmark/challenger interface construction without comparison
+- non-performance coverage accounting
+- prepare but do not launch one fixed-budget CANARY plan
+
+## NEXTGEN-DARK Prohibited
+
+- formal search execution
+- candidate performance evaluation or selection
+- new forward read
+- State/event connection to reward
+- CEM/UCB/MCTS/A7MEM update
+- online policy or budget reweighting
+- automatic CANARY launch or Phase B1 performance integration
+
 ## Phase B0A Allowed
 
 - freeze existing accepted/candidate inputs and their hashes
@@ -100,4 +133,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-B0A is complete and stopped at FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED. Wait for an independent acceptance before any B1D work; HOLD_RESEARCH, PHASE_B1_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.
+NEXTGEN-DARK is closed as PARTIALLY_READY because liquidation and depth have no approved observable source. The fixed-budget development-only CANARY plan is not authorized and not started. HOLD_RESEARCH, FORMAL_SEARCH_FROZEN, PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.

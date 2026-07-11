@@ -1,0 +1,22 @@
+{
+  "artifact_id": "NEXTGEN-DARK-NON-PERFORMANCE-COVERAGE-CAPABILITY-V1",
+  "metric_class": "NON_PERFORMANCE_COVERAGE_ONLY",
+  "implemented_metrics": [
+    "field_family_coverage",
+    "temporal_primitive_coverage",
+    "event_state_coverage",
+    "economic_hypothesis_coverage",
+    "behaviour_cluster_potential",
+    "grammar_cell_entropy",
+    "lineage_entropy",
+    "semantic_volume_imbalance",
+    "per_lane_proposal_distribution"
+  ],
+  "registered_temporal_primitives": 13,
+  "registered_event_states": 12,
+  "registered_lanes": 7,
+  "proposals_executed": 0,
+  "strict_evaluations_executed": 0,
+  "performance_fields_read": false,
+  "forward_read": false
+}

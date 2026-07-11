@@ -8,6 +8,7 @@ import pandas as pd
 from alphafactory_crypto.temporal_program import (
     PRIMITIVES, ObservationVector, TypedProgram, canonical_program, equivalent, evaluate, program_identity,
 )
+from alphafactory_crypto.fabric import FabricArtifactSpec, deterministic_cache_key
 
 
 def observations(lag_hours: int = 0) -> ObservationVector:
@@ -30,8 +31,21 @@ class TemporalProgramTests(unittest.TestCase):
         self.assertEqual(len(PRIMITIVES), 13)
         for primitive in PRIMITIVES:
             program = TypedProgram(primitive, "field:test", params[primitive])
+            canonical = canonical_program(program)
+            self.assertEqual(canonical["observable_time_rule"], "source_observable_time")
+            self.assertEqual(canonical["pit_rule"], "usable_time_lte_decision_time")
+            self.assertEqual(canonical["maturity_rule"], "source_maturity")
+            self.assertTrue(equivalent(program, program))
             self.assertEqual(program_identity(program), program_identity(program))
             self.assertEqual(len(evaluate(program, observations())), 24)
+            cache_spec = FabricArtifactSpec(
+                f"typed:{primitive}", "event_state", "development_pre_forward", "state-only",
+                program_identity(program), ("SOURCE-B", "SOURCE-A"), "FIELD-REGISTRY", "TEMPORAL-CONTRACT",
+                "CODE", "UNIVERSE", "TIMESTAMPS", "<f8", (24,), "little", "preserve",
+                canonical["observable_time_rule"], canonical["maturity_rule"], "NO_REWARD_B0",
+            )
+            reordered = FabricArtifactSpec(**({**cache_spec.__dict__, "source_artifact_shas": ("SOURCE-A", "SOURCE-B")}))
+            self.assertEqual(deterministic_cache_key(cache_spec), deterministic_cache_key(reordered))
 
     def test_pit_source_lag_prevents_same_bar_visibility(self) -> None:
         result = evaluate(TypedProgram("Delta", "field:test", {"periods": 1}), observations(lag_hours=1))
@@ -55,6 +69,9 @@ class TemporalProgramTests(unittest.TestCase):
         bad = ObservationVector(obs.values, obs.observable_time - pd.Timedelta(hours=1), obs.maturity_time)
         with self.assertRaises(ValueError):
             evaluate(TypedProgram("Delta", "x", {"periods": 1}), bad)
+        immature = ObservationVector(obs.values, obs.observable_time, obs.maturity_time - pd.Timedelta(hours=1))
+        with self.assertRaises(ValueError):
+            evaluate(TypedProgram("Delta", "x", {"periods": 1}), immature)
 
 
 if __name__ == "__main__":

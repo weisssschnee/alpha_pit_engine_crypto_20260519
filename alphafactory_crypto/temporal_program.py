@@ -44,6 +44,8 @@ class ObservationVector:
         event = pd.Series(self.values.index, index=self.values.index)
         if (pd.to_datetime(self.observable_time, utc=True) < event).any():
             raise ValueError("observable_time cannot precede event_time")
+        if (pd.to_datetime(self.maturity_time, utc=True) < event).any():
+            raise ValueError("maturity_time cannot precede event_time")
 
     def pit_values(self) -> pd.Series:
         """Return the latest source record usable at each decision coordinate."""
@@ -164,4 +166,3 @@ def evaluate(program: TypedProgram, observations: ObservationVector) -> pd.Serie
         long = _periods(p, "long_periods")
         return x.rolling(short, min_periods=short).mean() - x.rolling(long, min_periods=long).mean()
     raise AssertionError(op)
-

@@ -4,20 +4,24 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "6B48E715ED8980832CB3FE0D37EAAD1DDF337D144FCA1CC30358836F807401FB",
+      "registry_sha256": "2EFFB08A37CF4CC0933A2FED70B5F7F50F833B5E58DBB7EACFB45E7DE599ED36",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
-      "control_node_count": 28,
-      "control_edge_count": 33,
-      "phase_status": "PHASE_B0_CONTRACTS_ACCEPTED",
+      "control_node_count": 35,
+      "control_edge_count": 45,
+      "phase_status": "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "PHASE_B0A_COMPLETE_STOPPED",
+      "active_stage": "NEXTGEN_DARK_CLOSED_WAITING_CANARY_AUTHORIZATION",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
       "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
+      "b0a_accepted_subject_sha": "4e09f33159fabe21add8e5d405f76a5a97c61f83",
+      "nextgen_dark_status": "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY",
+      "formal_search_status": "FORMAL_SEARCH_FROZEN",
+      "canary_status": "CANARY_PLAN_PREPARED_NOT_AUTHORIZED_NOT_STARTED",
       "research_status": "HOLD_RESEARCH",
-      "phase_b1_status": "PHASE_B1_FROZEN",
+      "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
       "forward_data_status": "SEALED_NO_NEW_FORWARD_READ"
     }
   },
@@ -177263,7 +177267,7 @@
         "runtime/a7b0_temporal_event_contract_20260711/temporal_event_contract_manifest.json",
         "reports/CRYPTO_B0_TEMPORAL_EVENT_PRIMITIVE_CONTRACT_20260711.md"
       ],
-      "last_verified_sha": "8755ED21F49B04334B7F3E272518197884082F91853A30324D4284A1B595E5DF",
+      "last_verified_sha": "91886F71B17073F38BFFDAFAFC292264A890B81E0A56F759D1C0CCCB3646ADF0",
       "blocker": "primitive execution and State/event reward coupling remain frozen until B1",
       "weight": 1.0
     },
@@ -177323,7 +177327,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "297BD0F4133DA5AB48C9C17A23A10B1C6050792FC90CF9FA193BA9F5DE09E0B4",
+      "last_verified_sha": "B3E31CC8ADF0AE77AD4921F935F63EC365612450CCFC2C78F8B8241FDB3E014B",
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
       "weight": 1.0
     },
@@ -177368,6 +177372,175 @@
       ],
       "last_verified_sha": "6381E3B0238D12D502DD049C7BF46097A4441109FFA453DA69E1CD12643EB99A",
       "blocker": "B0A does not authorize B1D, search, candidate selection, reward, scheduler, or memory feedback",
+      "weight": 1.0
+    },
+    {
+      "id": "control_nextgen_observation_fabric",
+      "label": "NEXTGEN-DARK observation materialization",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "PARTIAL",
+      "implementation_path": [
+        "alphafactory_crypto/nextgen_fabric.py",
+        "config/crypto_nextgen_dark_fabric_v1.json",
+        "scripts/crypto_nextgen_dark_materialize.py"
+      ],
+      "entrypoint": "materialize_states / crypto_nextgen_dark_materialize.run",
+      "input": "approved Binance UM core12 development/pre-forward observation columns",
+      "output": "deterministic state frame, missingness mask, availability and lineage manifest",
+      "data_role": "observation-only infrastructure",
+      "feedback_permission": "NONE_NO_REWARD_GENERATOR_MEMORY_PROMOTION",
+      "artifact_test": [
+        "tests/test_nextgen_fabric.py",
+        "runtime/nextgen_dark_20260711/feature_state_materialization_manifest.json"
+      ],
+      "last_verified_sha": "A3374CBB9E7CD1AE07EB80BEDD4A01426EAB9608215D0237540747526DDFEE89",
+      "blocker": "liquidation_notional and depth_notional_10bps have no approved A7INPUT0-v2 source; no proxy substituted",
+      "weight": 1.0
+    },
+    {
+      "id": "control_typed_temporal_program",
+      "label": "Typed Temporal/Event Program",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/temporal_program.py",
+        "config/crypto_temporal_event_primitives_v1.json"
+      ],
+      "entrypoint": "TypedProgram / canonical_program / evaluate",
+      "input": "observable and mature approved observation vectors",
+      "output": "13 canonical PIT temporal/event primitive outputs",
+      "data_role": "development observation semantics",
+      "feedback_permission": "NONE_NEXTGEN_DARK",
+      "artifact_test": [
+        "tests/test_temporal_program.py"
+      ],
+      "last_verified_sha": "8436E59EC98B6D98411685870BDBF564A612E4C90BA54DF764CE5E70CE1F1565",
+      "blocker": "performance integration and reward coupling frozen",
+      "weight": 1.0
+    },
+    {
+      "id": "control_isolated_hypothesis_lanes",
+      "label": "Isolated hypothesis lanes",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/nextgen_lanes.py",
+        "config/crypto_nextgen_dark_lanes_v1.json"
+      ],
+      "entrypoint": "LaneSpec / validate_lanes",
+      "input": "seven frozen lane definitions",
+      "output": "isolated quotas, archives, lineage, seeds and candidate contracts",
+      "data_role": "proposal interface only",
+      "feedback_permission": "NO_EXECUTION_NO_SHARED_MEMORY",
+      "artifact_test": [
+        "tests/test_nextgen_lanes.py"
+      ],
+      "last_verified_sha": "E4E42EEB19AA0DF7E24CC3AC7A846237950791EBC2D59AB3A9C26BE1A0C67849",
+      "blocker": "formal proposal execution requires separate CANARY authorization",
+      "weight": 1.0
+    },
+    {
+      "id": "control_anti_collapse_admission",
+      "label": "Anti-collapse admission",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/anti_collapse.py",
+        "config/crypto_anti_collapse_admission_v1.json"
+      ],
+      "entrypoint": "admit",
+      "input": "identity, behaviour, hypothesis, parent, family and proposal metadata only",
+      "output": "deterministic quota decisions and semantic-volume accounting",
+      "data_role": "non-performance admission contract",
+      "feedback_permission": "QUOTA_TESTS_ONLY_NO_CANDIDATE_SELECTION",
+      "artifact_test": [
+        "tests/test_anti_collapse.py"
+      ],
+      "last_verified_sha": "5E6FA02A47B2462E8BCFCE4B17867FB9472334101696C0C2EDED36D3FEFA93AE",
+      "blocker": "global top-K and performance ranking remain frozen",
+      "weight": 1.0
+    },
+    {
+      "id": "control_challenger_harness",
+      "label": "Benchmark / competitor harness",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/challenger_harness.py",
+        "config/crypto_challenger_harness_v1.json"
+      ],
+      "entrypoint": "HarnessSpec / validate_harness",
+      "input": "strategy benchmark and algorithm challenger contracts",
+      "output": "frozen budgets, independent archives and data-access contracts",
+      "data_role": "comparison interface only",
+      "feedback_permission": "REPORT_ONLY_NO_MEMORY_NO_EXECUTION",
+      "artifact_test": [
+        "tests/test_challenger_coverage.py"
+      ],
+      "last_verified_sha": "C13F1E123CF5FCA16506F4356BE902B1E6DE999D59B355D3120A661E7D683A55",
+      "blocker": "performance comparison is not authorized",
+      "weight": 1.0
+    },
+    {
+      "id": "control_coverage_observability",
+      "label": "NEXTGEN-DARK coverage observability",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/coverage_metrics.py"
+      ],
+      "entrypoint": "nextgen_coverage_report",
+      "input": "field, grammar, event, hypothesis, behaviour, lineage and lane metadata",
+      "output": "non-performance coverage and entropy metrics",
+      "data_role": "infrastructure coverage only",
+      "feedback_permission": "NO_PERFORMANCE_NO_SELECTION",
+      "artifact_test": [
+        "tests/test_challenger_coverage.py",
+        "runtime/nextgen_dark_20260711/non_performance_coverage_capability.json"
+      ],
+      "last_verified_sha": "976112C8B20D4BB92E0DD0B21A93F27B29CA18591CDFC88C17F4DD9018F9108C",
+      "blocker": "proposal distributions remain empty until a separately authorized CANARY",
+      "weight": 1.0
+    },
+    {
+      "id": "control_canary_plan",
+      "label": "Fixed-budget development-only CANARY plan",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "FROZEN",
+      "implementation_path": [
+        "config/crypto_nextgen_dark_canary_plan_v1.json"
+      ],
+      "entrypoint": "no executable entrypoint",
+      "input": "fixed per-lane proposal and strict-eval budgets",
+      "output": "prepared plan only",
+      "data_role": "future development-only canary plan",
+      "feedback_permission": "NOT_AUTHORIZED_NOT_STARTED",
+      "artifact_test": [
+        "config/crypto_nextgen_dark_canary_plan_v1.json"
+      ],
+      "last_verified_sha": "94A302ECCF206DB4B51542602C6A32BD0D6DA4FC778E71369BCA21C0DA84246A",
+      "blocker": "requires independent CANARY execution authorization",
       "weight": 1.0
     }
   ],
@@ -491032,8 +491205,152 @@
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
       "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_033",
+      "source": "control_a7input0",
+      "target": "control_nextgen_observation_fabric",
+      "relationship": "ALLOWED",
+      "label": "approved observable roles only",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_034",
+      "source": "control_nextgen_observation_fabric",
+      "target": "control_typed_temporal_program",
+      "relationship": "ALLOWED",
+      "label": "PIT observation-only programs",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_035",
+      "source": "control_typed_temporal_program",
+      "target": "control_isolated_hypothesis_lanes",
+      "relationship": "ALLOWED",
+      "label": "typed candidate contract only",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_036",
+      "source": "control_isolated_hypothesis_lanes",
+      "target": "control_anti_collapse_admission",
+      "relationship": "ALLOWED",
+      "label": "proposal metadata and quotas only",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_037",
+      "source": "control_isolated_hypothesis_lanes",
+      "target": "control_coverage_observability",
+      "relationship": "ALLOWED",
+      "label": "non-performance metadata accounting",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_038",
+      "source": "control_benchmark_registry",
+      "target": "control_challenger_harness",
+      "relationship": "ALLOWED",
+      "label": "report-only benchmark contracts",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_039",
+      "source": "control_nextgen_observation_fabric",
+      "target": "control_strict_reward",
+      "relationship": "FORBIDDEN",
+      "label": "NEXTGEN-DARK State/event outputs cannot enter reward",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_040",
+      "source": "control_nextgen_observation_fabric",
+      "target": "control_generation_lanes",
+      "relationship": "FORBIDDEN",
+      "label": "new State/event outputs cannot enter legacy generator",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_041",
+      "source": "control_isolated_hypothesis_lanes",
+      "target": "control_a7mem",
+      "relationship": "FORBIDDEN",
+      "label": "dark lanes cannot share or update A7MEM",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_042",
+      "source": "control_challenger_harness",
+      "target": "control_a7mem",
+      "relationship": "FORBIDDEN",
+      "label": "benchmark/challenger results cannot enter positive memory",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_043",
+      "source": "control_sealed_forward",
+      "target": "control_canary_plan",
+      "relationship": "FORBIDDEN",
+      "label": "CANARY cannot read sealed forward data",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_044",
+      "source": "control_canary_plan",
+      "target": "control_scheduler",
+      "relationship": "FORBIDDEN",
+      "label": "CANARY is not authorized and cannot start scheduler",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_accepted_subject": "9574d32053d1679d64179fe2d6607d1a05e13db9"
+  "built_at_accepted_subject": "4e09f33159fabe21add8e5d405f76a5a97c61f83"
 }

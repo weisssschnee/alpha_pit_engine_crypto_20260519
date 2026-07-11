@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `6B48E715ED8980832CB3FE0D37EAAD1DDF337D144FCA1CC30358836F807401FB`.
+Generated from registry SHA256: `2EFFB08A37CF4CC0933A2FED70B5F7F50F833B5E58DBB7EACFB45E7DE599ED36`.
 
 ## Current Evolution
 
@@ -17,7 +17,10 @@ Generated from registry SHA256: `6B48E715ED8980832CB3FE0D37EAAD1DDF337D144FCA1CC
 - B0A establishes `16 accepted aliases -> 6 exact signals -> 5 activation identities -> 4 behaviour clusters -> 5 semantic economic hypotheses`; the complete 33-row survivor map still contains 18 exact identities and must not be collapsed to six in reporting.
 - Exact-to-activation and activation-to-behaviour contraction are now observed on the frozen pre-forward coordinate contract. This does not by itself establish collapse of independent economic information because the five economic hypotheses remain semantic registrations.
 - B0A is stopped at `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED` with no reward, selection, scheduler, generator, or memory feedback.
-- Phase B1 is frozen.
+- NEXTGEN-DARK materializes 245088 Binance UM core12 development/pre-forward coordinates reproducibly without performance columns. Funding, basis, OI, mark/index, taker, liquidity, volatility, session, and cross-asset states materialize; liquidation and depth remain explicitly unavailable because no approved source exists.
+- Thirteen typed temporal/event primitives, seven isolated no-memory lanes, deterministic anti-collapse quotas, frozen benchmark/challenger interfaces, and non-performance coverage metrics are implemented without execution of formal search or performance comparison.
+- A fixed-budget development-only CANARY plan exists but is not authorized and not started.
+- `FORMAL_SEARCH_FROZEN`, `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`, and `SEALED_NO_NEW_FORWARD_READ` remain frozen.
 
 ## Decision Timeline
 
@@ -44,3 +47,5 @@ Generated from registry SHA256: `6B48E715ED8980832CB3FE0D37EAAD1DDF337D144FCA1CC
 - `EVALRESET-20260711-021` — `B0P_EVIDENCE_GUARDS_HARDENED`: Review findings were closed with code-owned funding column allowlists, a fixed-SHA physical pre-cutoff event-only truth artifact, pre-canonical duplicate and PIT observable-time audits, manifest/time/count checks, required economic-hypothesis operator validation, component-derived prohibition evidence, exact generated-document checks, exact graph node/edge projection checks, and artifact-index hash validation.
 - `EVALRESET-20260711-022` — `PHASE_B0P_PARTIALLY_ACCEPTED`: Independent partial acceptance attests fixed subject 5219e7899cad1be83f9bcf2ec520ed1ff5037f9e. Funding is qualified only within Binance UM core12, layered identity remains partial, and activation identity remains not qualified. Only B0A frozen signal-behaviour qualification is unlocked; HOLD_RESEARCH, PHASE_B1_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.
 - `EVALRESET-20260711-023` — `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`: B0A binds the frozen 33-row survivor map and 16-row accepted pack, materializes six accepted exact signals on 96 symbols and 20424 pre-forward hourly coordinates with +1h observable-time lag, reproduces artifact SHA CD40C5C521DDBC6A2704D5A45A798CF3DAB5A5A7B6D2CD476D28F6BFB30C7D6B under reversed order, and establishes 5 activation identities and 4 behaviour clusters. The complete 33-row map contains 18 exact identities; only the 16 accepted aliases map to the six accepted exact signals. No return, reward, forward performance, search, selection, scheduler, generator, or memory feedback was used; B1 remains frozen.
+- `EVALRESET-20260711-024` — `NEXTGEN_DARK_AUTHORIZED`: B0A subject 4e09f33159fabe21add8e5d405f76a5a97c61f83 is accepted with fixed compression and stability conclusions. NEXTGEN-DARK is authorized for development/pre-forward infrastructure only; FORMAL_SEARCH_FROZEN, HOLD_RESEARCH, PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.
+- `EVALRESET-20260711-025` — `NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY`: Typed temporal/event programs, isolated no-memory lanes, deterministic anti-collapse admission, frozen benchmark/challenger interfaces, non-performance coverage metrics, and a reproducible Binance UM core12 development-only state materialization are implemented. Liquidation cluster and depth state remain unavailable because A7INPUT0-v2 contains no approved source fields; no proxy was substituted. CANARY is planned but not authorized or started, and no performance, search, forward, reward, scheduler, or memory feedback was used.

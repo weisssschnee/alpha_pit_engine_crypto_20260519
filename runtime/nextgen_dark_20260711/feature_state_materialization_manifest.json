@@ -1,0 +1,138 @@
+{
+  "artifact_hash": "0ACE067C0EC630D59E5F7CDCA75D10F50551BE1400DE74E68B1DDC2B3D0BF873",
+  "artifact_id": "NEXTGEN-DARK-FEATURE-STATE-MATERIALIZATION-V1",
+  "availability": [
+    {
+      "missing_fields": [],
+      "required_fields": [
+        "funding_rate"
+      ],
+      "state_id": "funding_event_age",
+      "status": "MATERIALIZED"
+    },
+    {
+      "missing_fields": [],
+      "required_fields": [
+        "funding_rate"
+      ],
+      "state_id": "funding_event_intensity",
+      "status": "MATERIALIZED"
+    },
+    {
+      "missing_fields": [],
+      "required_fields": [
+        "mark_trade_basis_bps"
+      ],
+      "state_id": "basis_dislocation",
+      "status": "MATERIALIZED"
+    },
+    {
+      "missing_fields": [],
+      "required_fields": [
+        "open_interest_value_last"
+      ],
+      "state_id": "oi_expansion_contraction",
+      "status": "MATERIALIZED"
+    },
+    {
+      "missing_fields": [
+        "liquidation_notional"
+      ],
+      "required_fields": [
+        "liquidation_notional"
+      ],
+      "state_id": "liquidation_cluster",
+      "status": "UNAVAILABLE_NO_APPROVED_SOURCE"
+    },
+    {
+      "missing_fields": [],
+      "required_fields": [
+        "mark_index_basis_bps"
+      ],
+      "state_id": "mark_index_deviation",
+      "status": "MATERIALIZED"
+    },
+    {
+      "missing_fields": [],
+      "required_fields": [
+        "kline_taker_buy_quote_share"
+      ],
+      "state_id": "taker_imbalance_state",
+      "status": "MATERIALIZED"
+    },
+    {
+      "missing_fields": [
+        "depth_notional_10bps"
+      ],
+      "required_fields": [
+        "depth_notional_10bps"
+      ],
+      "state_id": "depth_liquidity_state",
+      "status": "UNAVAILABLE_NO_APPROVED_SOURCE"
+    },
+    {
+      "missing_fields": [],
+      "required_fields": [
+        "trade_quote_volume"
+      ],
+      "state_id": "liquidity_state",
+      "status": "MATERIALIZED"
+    },
+    {
+      "missing_fields": [],
+      "required_fields": [
+        "trade_close"
+      ],
+      "state_id": "volatility_state",
+      "status": "MATERIALIZED"
+    },
+    {
+      "missing_fields": [],
+      "required_fields": [],
+      "state_id": "session_time_of_day",
+      "status": "MATERIALIZED"
+    },
+    {
+      "missing_fields": [],
+      "required_fields": [
+        "trade_close"
+      ],
+      "state_id": "cross_asset_confirmation",
+      "status": "MATERIALIZED"
+    }
+  ],
+  "columns_read": [
+    "symbol",
+    "timestamp",
+    "feature_available_time",
+    "funding_rate",
+    "mark_trade_basis_bps",
+    "mark_index_basis_bps",
+    "open_interest_value_last",
+    "kline_taker_buy_quote_share",
+    "trade_quote_volume",
+    "trade_close"
+  ],
+  "content_sha256": "681336D6A897429B03D6C5F14BE408E9FD8D234DB58753685251ECE8323346EF",
+  "data_path": "G:/AlphaFactory_CryptoData/gold/features/nextgen_dark_core12_state_v1/0ACE067C0EC630D59E5F7CDCA75D10F50551BE1400DE74E68B1DDC2B3D0BF873.parquet",
+  "end_utc": "2026-04-30T23:00:00+00:00",
+  "field_registry_hash": "C201B87CEBDF17AF3231B7DD8CB8A06B561572E58DAA670D5D82F71F95A7628D",
+  "forbidden_performance_columns_read": false,
+  "forward_read": false,
+  "lineage": {
+    "feedback_permission": "NONE_NO_REWARD_GENERATOR_MEMORY_PROMOTION",
+    "field_registry_hash": "C201B87CEBDF17AF3231B7DD8CB8A06B561572E58DAA670D5D82F71F95A7628D",
+    "maturity_rule": "max(source_maturity,observable_time)",
+    "missing_semantics": "preserve_nan_and_explicit_bitmask",
+    "observable_time_rule": "timestamp_plus_source_lag",
+    "production_scope": "BINANCE_UM_CORE12_2024-01-01_THROUGH_2026-04-30",
+    "sort_contract": "symbol_then_timestamp_mergesort",
+    "source_release_hash": "353F92952ABF2713E4F6D8613DE5E5CC7A36BEA0755C1A31B6CD285E75DA7914"
+  },
+  "performance_evaluated": false,
+  "rows": 245088,
+  "search_started": false,
+  "source_release_hash": "353F92952ABF2713E4F6D8613DE5E5CC7A36BEA0755C1A31B6CD285E75DA7914",
+  "start_utc": "2024-01-01T00:00:00+00:00",
+  "symbols": 12
+}

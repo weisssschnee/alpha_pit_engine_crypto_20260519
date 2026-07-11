@@ -27,6 +27,14 @@ B0P_IDENTITY_SUMMARY_PATH = REPO / "runtime" / "a7b0p_identity_qualification_202
 B0A_MANIFEST_PATH = REPO / "runtime" / "a7b0a_signal_behaviour_20260711" / "b0a_run_manifest.json"
 B0A_ARTIFACT_PATH = REPO / "runtime" / "a7b0a_signal_behaviour_20260711" / "signal_behaviour_sketch.bin"
 B0A_ARTIFACT_INDEX_PATH = REPO / "runtime" / "a7b0a_signal_behaviour_20260711" / "b0a_artifact_index.csv"
+NEXTGEN_ROOT = REPO / "runtime" / "nextgen_dark_20260711"
+NEXTGEN_MATERIALIZATION_PATH = NEXTGEN_ROOT / "feature_state_materialization_manifest.json"
+NEXTGEN_COVERAGE_PATH = NEXTGEN_ROOT / "non_performance_coverage_capability.json"
+NEXTGEN_RUN_MANIFEST_PATH = NEXTGEN_ROOT / "nextgen_dark_run_manifest.json"
+NEXTGEN_ARTIFACT_INDEX_PATH = NEXTGEN_ROOT / "nextgen_dark_artifact_index.csv"
+NEXTGEN_TEST_OUTPUT_PATH = NEXTGEN_ROOT / "nextgen_dark_test_output.txt"
+CANARY_PLAN_PATH = REPO / "config" / "crypto_nextgen_dark_canary_plan_v1.json"
+NEXTGEN_ADR_PATH = REPO / "docs" / "adr" / "0002-nextgen-dark-isolated-observation-infrastructure.md"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -55,6 +63,8 @@ REQUIRED_NODE_IDS = {
     "evaluation_access_ledger", "spent_evaluation", "sealed_forward", "future_wrong_lag", "bz",
     "temporal_event_contract", "feature_state_fabric", "production_observation_qualification",
     "frozen_signal_behaviour_qualification",
+    "nextgen_observation_fabric", "typed_temporal_program", "isolated_hypothesis_lanes",
+    "anti_collapse_admission", "challenger_harness", "coverage_observability", "canary_plan",
 }
 REQUIRED_FORBIDDEN_EDGES = {
     ("spent_evaluation", "admission"),
@@ -71,6 +81,12 @@ REQUIRED_FORBIDDEN_EDGES = {
     ("frozen_signal_behaviour_qualification", "a7mem"),
     ("frozen_signal_behaviour_qualification", "scheduler"),
     ("frozen_signal_behaviour_qualification", "strict_reward"),
+    ("nextgen_observation_fabric", "strict_reward"),
+    ("nextgen_observation_fabric", "generation_lanes"),
+    ("isolated_hypothesis_lanes", "a7mem"),
+    ("challenger_harness", "a7mem"),
+    ("sealed_forward", "canary_plan"),
+    ("canary_plan", "scheduler"),
 }
 VALID_STATUSES = {"IMPLEMENTED", "PARTIAL", "PLANNED", "FROZEN", "DEPRECATED"}
 
@@ -115,6 +131,20 @@ def b0p_acceptance_test_evidence(state: dict[str, Any]) -> dict[str, str]:
         "result": result,
         "output_path": relative(B0P_ACCEPTANCE_TEST_OUTPUT_PATH),
         "output_sha256": sha256_normalized_text_file(B0P_ACCEPTANCE_TEST_OUTPUT_PATH),
+    }
+
+
+def nextgen_test_evidence() -> dict[str, str]:
+    normalized = NEXTGEN_TEST_OUTPUT_PATH.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    lines = [line.strip() for line in normalized.splitlines() if line.strip()]
+    result = lines[-1] if lines else ""
+    if not re.fullmatch(r"71 passed in [0-9]+(?:\.[0-9]+)?s", result):
+        raise ValueError("NEXTGEN-DARK test output does not record exactly 71 passing tests")
+    return {
+        "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
+        "result": result,
+        "output_path": relative(NEXTGEN_TEST_OUTPUT_PATH),
+        "output_sha256": sha256_normalized_text_file(NEXTGEN_TEST_OUTPUT_PATH),
     }
 
 
@@ -213,7 +243,7 @@ def render_documents(
 
 Generated from `{relative(REGISTRY_PATH)}`. Registry SHA256: `{digest}`.
 
-Status: `{state['current_phase']}` / `{state['phase_b0p_acceptance']['status']}` / `{state['production_observation_qualification_status']}` / `{state['frozen_signal_behaviour_status']}` / `{state['research_status']}` / `{state['phase_b1_status']}` / `{state['forward_data_status']}`.
+Status: `{state['current_phase']}` / `{state['nextgen_dark_status']}` / `{state['production_observation_qualification_status']}` / `{state['formal_search_status']}` / `{state['research_status']}` / `{state['phase_b1_status']}` / `{state['forward_data_status']}`.
 
 Authority: `{relative(REGISTRY_PATH)}` is the machine-readable architecture authority; `graph.json` is its deterministic graph view; this file is the human-readable generated view. Raw graphify is unavailable, so `graph.json` retains the prior navigation graph plus a deterministic `control_*` overlay.
 
@@ -277,7 +307,10 @@ Generated from registry SHA256: `{digest}`.
 - B0A establishes `16 accepted aliases -> 6 exact signals -> 5 activation identities -> 4 behaviour clusters -> 5 semantic economic hypotheses`; the complete 33-row survivor map still contains 18 exact identities and must not be collapsed to six in reporting.
 - Exact-to-activation and activation-to-behaviour contraction are now observed on the frozen pre-forward coordinate contract. This does not by itself establish collapse of independent economic information because the five economic hypotheses remain semantic registrations.
 - B0A is stopped at `{state['frozen_signal_behaviour_status']}` with no reward, selection, scheduler, generator, or memory feedback.
-- Phase B1 is frozen.
+- NEXTGEN-DARK materializes 245088 Binance UM core12 development/pre-forward coordinates reproducibly without performance columns. Funding, basis, OI, mark/index, taker, liquidity, volatility, session, and cross-asset states materialize; liquidation and depth remain explicitly unavailable because no approved source exists.
+- Thirteen typed temporal/event primitives, seven isolated no-memory lanes, deterministic anti-collapse quotas, frozen benchmark/challenger interfaces, and non-performance coverage metrics are implemented without execution of formal search or performance comparison.
+- A fixed-budget development-only CANARY plan exists but is not authorized and not started.
+- `{state['formal_search_status']}`, `{state['phase_b1_status']}`, and `{state['forward_data_status']}` remain frozen.
 
 ## Decision Timeline
 
@@ -286,6 +319,7 @@ Generated from registry SHA256: `{digest}`.
     items = "\n".join(f"- `{item['id']}` {item['name']}: `{item['status']}`" for item in state["b0_items"])
     b0p_items = "\n".join(f"- `{item['id']}` {item['name']}: `{item['status']}`" for item in state["b0p_items"])
     b0a_items = "\n".join(f"- `{item['id']}` {item['name']}: `{item['status']}`" for item in state["b0a_items"])
+    nextgen_items = "\n".join(f"- `{item['id']}` {item['name']}: `{item['status']}`" for item in state["nextgen_dark_items"])
     state_doc = f"""# Crypto AlphaFactory Planning State
 
 Registry SHA256: `{digest}`.
@@ -299,6 +333,9 @@ Registry SHA256: `{digest}`.
 - Production observation qualification: `{state['production_observation_qualification_status']}`
 - Phase B0P acceptance: `{state['phase_b0p_acceptance']['status']}`
 - Frozen signal behaviour: `{state['frozen_signal_behaviour_status']}`
+- NEXTGEN-DARK: `{state['nextgen_dark_status']}`
+- Formal search: `{state['formal_search_status']}`
+- CANARY: `{state['canary_status']}`
 - Active stage: `{state['active_stage']}`
 - Phase B1: `{state['phase_b1_status']}`
 - Forward data: `{state['forward_data_status']}`
@@ -353,6 +390,14 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Top-cluster share: `{state['phase_b0a_result']['top_cluster_share']}`
 - Cross-time stability median/min: `{state['phase_b0a_result']['cross_time_slice_stability_median']}` / `{state['phase_b0a_result']['cross_time_slice_stability_min']}`
 
+## NEXTGEN-DARK Closure
+
+{nextgen_items}
+
+## NEXTGEN-DARK Allowed
+
+""" + "\n".join(f"- {x}" for x in state["allowed_nextgen_dark"]) + "\n\n## NEXTGEN-DARK Prohibited\n\n" + "\n".join(f"- {x}" for x in state["prohibited_nextgen_dark"]) + """
+
 ## Phase B0A Allowed
 
 """ + "\n".join(f"- {x}" for x in state["allowed_b0a"]) + "\n\n## Prohibited\n\n" + "\n".join(f"- {x}" for x in state["prohibited_b0a"]) + f"\n\n## Next Acceptance Gate\n\n{state['next_acceptance_gate']}\n"
@@ -388,9 +433,34 @@ def artifact_paths(registry: dict[str, Any]) -> set[Path]:
         B0A_MANIFEST_PATH,
         B0A_ARTIFACT_PATH,
         B0A_ARTIFACT_INDEX_PATH,
+        NEXTGEN_MATERIALIZATION_PATH,
+        NEXTGEN_COVERAGE_PATH,
+        NEXTGEN_RUN_MANIFEST_PATH,
+        NEXTGEN_ADR_PATH,
+        CANARY_PLAN_PATH,
     }
     for node in registry["nodes"]:
         paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
+    return paths
+
+
+def nextgen_artifact_paths(registry: dict[str, Any]) -> set[Path]:
+    node_ids = {
+        "nextgen_observation_fabric", "typed_temporal_program", "isolated_hypothesis_lanes",
+        "anti_collapse_admission", "challenger_harness", "coverage_observability", "canary_plan",
+    }
+    paths = {
+        REGISTRY_PATH, STATE_SOURCE_PATH, DECISION_LOG_PATH, CURRENT_ARCH_PATH, BOUNDARY_PATH,
+        EVOLUTION_PATH, GRAPH_PATH, STATE_PATH, NEXTGEN_RUN_MANIFEST_PATH, NEXTGEN_ADR_PATH,
+        CANARY_PLAN_PATH, NEXTGEN_MATERIALIZATION_PATH, NEXTGEN_COVERAGE_PATH,
+        NEXTGEN_TEST_OUTPUT_PATH,
+        REPO / "scripts" / "crypto_architecture_control_plane.py",
+        REPO / "tests" / "test_architecture_control_plane.py",
+    }
+    for node in registry["nodes"]:
+        if node["id"] in node_ids:
+            paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
+    paths.discard(NEXTGEN_ARTIFACT_INDEX_PATH)
     return paths
 
 
@@ -448,11 +518,15 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "b0p_acceptance_status": state["phase_b0p_acceptance"]["status"],
         "b0p_accepted_subject_sha": state["phase_b0p_acceptance"]["accepted_subject_sha"],
         "frozen_signal_behaviour_status": state["frozen_signal_behaviour_status"],
+        "b0a_accepted_subject_sha": state["phase_b0a_acceptance"]["accepted_subject_sha"],
+        "nextgen_dark_status": state["nextgen_dark_status"],
+        "formal_search_status": state["formal_search_status"],
+        "canary_status": state["canary_status"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
     graph.pop("built_at_commit", None)
-    graph["built_at_accepted_subject"] = state["phase_b0_acceptance"]["accepted_subject_sha"]
+    graph["built_at_accepted_subject"] = state["phase_b0a_acceptance"]["accepted_subject_sha"]
     GRAPH_PATH.write_text(json.dumps(graph, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
@@ -473,7 +547,8 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "test_evidence": test_evidence,
         "scope": "control-plane acceptance closure only; no B0 implementation logic changed",
     }
-    ATTESTATION_PATH.write_text(json.dumps(attestation, indent=2) + "\n", encoding="utf-8")
+    if not ATTESTATION_PATH.exists():
+        ATTESTATION_PATH.write_text(json.dumps(attestation, indent=2) + "\n", encoding="utf-8")
     funding_summary = load_json(B0P_FUNDING_SUMMARY_PATH)
     identity_summary = load_json(B0P_IDENTITY_SUMMARY_PATH)
     def observed(flag: str) -> bool:
@@ -499,7 +574,8 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "alpha_ready": observed("alpha_ready"),
     }
     B0P_MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
-    B0P_MANIFEST_PATH.write_text(json.dumps(b0p_manifest, indent=2) + "\n", encoding="utf-8")
+    if not B0P_MANIFEST_PATH.exists():
+        B0P_MANIFEST_PATH.write_text(json.dumps(b0p_manifest, indent=2) + "\n", encoding="utf-8")
     b0p_acceptance = state["phase_b0p_acceptance"]
     b0p_test_evidence = b0p_acceptance_test_evidence(state)
     b0p_attestation = {
@@ -518,8 +594,43 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "test_evidence": b0p_test_evidence,
         "scope": "independent partial acceptance of the fixed B0P subject; no B0P implementation logic changed",
     }
-    B0P_ATTESTATION_PATH.write_text(json.dumps(b0p_attestation, indent=2) + "\n", encoding="utf-8")
+    if not B0P_ATTESTATION_PATH.exists():
+        B0P_ATTESTATION_PATH.write_text(json.dumps(b0p_attestation, indent=2) + "\n", encoding="utf-8")
     b0a_manifest = load_json(B0A_MANIFEST_PATH)
+    nextgen_materialization = load_json(NEXTGEN_MATERIALIZATION_PATH)
+    canary = load_json(CANARY_PLAN_PATH)
+    nextgen_manifest = {
+        "manifest_id": "CRYPTO-NEXTGEN-DARK-CLOSURE-20260711",
+        "decision": state["nextgen_dark_status"],
+        "accepted_b0a_subject_sha": state["phase_b0a_acceptance"]["accepted_subject_sha"],
+        "materialization_manifest": relative(NEXTGEN_MATERIALIZATION_PATH),
+        "materialization_artifact_hash": nextgen_materialization["artifact_hash"],
+        "materialization_content_sha256": nextgen_materialization["content_sha256"],
+        "materialization_reproducible": True,
+        "rows": nextgen_materialization["rows"],
+        "symbols": nextgen_materialization["symbols"],
+        "unavailable_states": [
+            item["state_id"] for item in nextgen_materialization["availability"]
+            if item["status"] != "MATERIALIZED"
+        ],
+        "temporal_primitives_registered": 13,
+        "isolated_lanes_registered": 7,
+        "canary_plan": relative(CANARY_PLAN_PATH),
+        "canary_status": canary["status"],
+        "artifact_index": relative(NEXTGEN_ARTIFACT_INDEX_PATH),
+        "registry_sha256": digest,
+        "test_evidence": nextgen_test_evidence(),
+        "search_started": False,
+        "performance_evaluated": False,
+        "forward_read": False,
+        "state_event_reward_connected": False,
+        "memory_updated": False,
+        "scheduler_started": False,
+        "canary_started": False,
+        "formal_search_unlocked": False,
+        "phase_b1_unlocked": False,
+    }
+    NEXTGEN_RUN_MANIFEST_PATH.write_text(json.dumps(nextgen_manifest, indent=2) + "\n", encoding="utf-8")
     manifest = {
         "manifest_id": "PHASE-A-B0-B0P-RUN-MANIFEST-20260711", "phase_a_status": state["phase_a_status"],
         "collapse_status": state["collapse_status"], "research_status": state["research_status"],
@@ -544,6 +655,10 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "b0a_items": state["b0a_items"],
         "artifact_index": relative(ARTIFACT_INDEX_PATH), "decision_log": relative(DECISION_LOG_PATH),
         "b0p_qualification_manifest": relative(B0P_MANIFEST_PATH),
+        "nextgen_dark_status": state["nextgen_dark_status"],
+        "formal_search_status": state["formal_search_status"],
+        "nextgen_dark_run_manifest": relative(NEXTGEN_RUN_MANIFEST_PATH),
+        "nextgen_dark_artifact_index": relative(NEXTGEN_ARTIFACT_INDEX_PATH),
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []
@@ -571,6 +686,16 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         writer = csv.DictWriter(handle, fieldnames=["path", "exists", "sha256", "role"])
         writer.writeheader()
         writer.writerows(rows)
+    nextgen_rows = []
+    for path in sorted(nextgen_artifact_paths(registry), key=lambda item: str(item)):
+        nextgen_rows.append({
+            "path": relative(path), "exists": str(path.exists()),
+            "sha256": sha256_file(path) if path.is_file() else "", "role": "nextgen_dark_closure",
+        })
+    with NEXTGEN_ARTIFACT_INDEX_PATH.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["path", "exists", "sha256", "role"])
+        writer.writeheader()
+        writer.writerows(nextgen_rows)
 
 
 def validate_outputs(registry: dict[str, Any]) -> None:
@@ -716,6 +841,30 @@ def validate_outputs(registry: dict[str, Any]) -> None:
             raise ValueError(f"B0A artifact index hash drift: {row['path']}")
     if meta.get("frozen_signal_behaviour_status") != state["frozen_signal_behaviour_status"]:
         raise ValueError("graph B0A signal behaviour status mismatch")
+    if meta.get("nextgen_dark_status") != state["nextgen_dark_status"]:
+        raise ValueError("graph NEXTGEN-DARK status mismatch")
+    b0a_subject = state["phase_b0a_acceptance"]["accepted_subject_sha"]
+    if subprocess.run(["git", "merge-base", "--is-ancestor", b0a_subject, "HEAD"], cwd=REPO, check=False).returncode:
+        raise ValueError("B0A accepted subject is not an ancestor of NEXTGEN-DARK closure")
+    nextgen_manifest = load_json(NEXTGEN_RUN_MANIFEST_PATH)
+    prohibited_nextgen = [
+        "search_started", "performance_evaluated", "forward_read", "state_event_reward_connected",
+        "memory_updated", "scheduler_started", "canary_started", "formal_search_unlocked", "phase_b1_unlocked",
+    ]
+    if nextgen_manifest.get("decision") != state["nextgen_dark_status"] or any(
+        nextgen_manifest.get(flag) for flag in prohibited_nextgen
+    ):
+        raise ValueError("NEXTGEN-DARK manifest mismatch or prohibited activity recorded")
+    if nextgen_manifest.get("test_evidence") != nextgen_test_evidence():
+        raise ValueError("NEXTGEN-DARK test evidence mismatch")
+    materialization = load_json(NEXTGEN_MATERIALIZATION_PATH)
+    if materialization.get("artifact_hash") != nextgen_manifest.get("materialization_artifact_hash"):
+        raise ValueError("NEXTGEN-DARK materialization hash mismatch")
+    if materialization.get("forbidden_performance_columns_read") or materialization.get("forward_read"):
+        raise ValueError("NEXTGEN-DARK materialization read prohibited data")
+    canary = load_json(CANARY_PLAN_PATH)
+    if canary.get("execution_authorized") or canary.get("started") or canary.get("data_access", {}).get("forward_read_allowed"):
+        raise ValueError("CANARY must remain unauthorized and not started")
     with ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
         index_rows = list(csv.DictReader(handle))
     indexed_paths = {row["path"] for row in index_rows}
@@ -728,6 +877,16 @@ def validate_outputs(registry: dict[str, Any]) -> None:
         expected_sha = sha256_file(path) if path.is_file() else ""
         if row["exists"] != expected_exists or row["sha256"] != expected_sha:
             raise ValueError(f"artifact index hash drift: {row['path']}")
+    with NEXTGEN_ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
+        nextgen_index_rows = list(csv.DictReader(handle))
+    if {row["path"] for row in nextgen_index_rows} != {
+        relative(path) for path in nextgen_artifact_paths(registry)
+    }:
+        raise ValueError("NEXTGEN-DARK artifact index paths do not match closure scope")
+    for row in nextgen_index_rows:
+        path = REPO / row["path"]
+        if row["exists"] != str(path.exists()) or row["sha256"] != (sha256_file(path) if path.is_file() else ""):
+            raise ValueError(f"NEXTGEN-DARK artifact index hash drift: {row['path']}")
 
 
 def build() -> None:

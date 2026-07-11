@@ -4,10 +4,15 @@ import argparse
 import csv
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 import pandas as pd
 import pyarrow.parquet as pq
+
+REPO = Path(__file__).resolve().parents[1]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
 
 from alphafactory_crypto.nextgen_fabric import materialize_states
 
@@ -48,7 +53,9 @@ def load_core12_observations(feature_root: Path, core12_panel: Path) -> tuple[pd
         raise FileNotFoundError("core12 feature partition missing")
     pieces = []
     for path in files:
-        piece = pq.read_table(path, columns=list(SAFE_COLUMNS)).to_pandas()
+        # ParquetFile avoids Hive partition inference colliding with the physical
+        # symbol column when the file lives under symbol=<value>/.
+        piece = pq.ParquetFile(path).read(columns=list(SAFE_COLUMNS)).to_pandas()
         piece["timestamp"] = pd.to_datetime(piece["timestamp"], utc=True)
         piece = piece[(piece["timestamp"] >= START) & (piece["timestamp"] <= CUTOFF)]
         pieces.append(piece)

@@ -1,0 +1,36 @@
+{
+  "manifest_id": "CRYPTO-NEXTGEN-DARK-CLOSURE-20260711",
+  "decision": "NEXTGEN_DARK_INFRASTRUCTURE_PARTIALLY_READY",
+  "accepted_b0a_subject_sha": "4e09f33159fabe21add8e5d405f76a5a97c61f83",
+  "materialization_manifest": "runtime/nextgen_dark_20260711/feature_state_materialization_manifest.json",
+  "materialization_artifact_hash": "0ACE067C0EC630D59E5F7CDCA75D10F50551BE1400DE74E68B1DDC2B3D0BF873",
+  "materialization_content_sha256": "681336D6A897429B03D6C5F14BE408E9FD8D234DB58753685251ECE8323346EF",
+  "materialization_reproducible": true,
+  "rows": 245088,
+  "symbols": 12,
+  "unavailable_states": [
+    "liquidation_cluster",
+    "depth_liquidity_state"
+  ],
+  "temporal_primitives_registered": 13,
+  "isolated_lanes_registered": 7,
+  "canary_plan": "config/crypto_nextgen_dark_canary_plan_v1.json",
+  "canary_status": "PREPARED_NOT_AUTHORIZED_NOT_STARTED",
+  "artifact_index": "runtime/nextgen_dark_20260711/nextgen_dark_artifact_index.csv",
+  "registry_sha256": "2EFFB08A37CF4CC0933A2FED70B5F7F50F833B5E58DBB7EACFB45E7DE599ED36",
+  "test_evidence": {
+    "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
+    "result": "71 passed in 26.18s",
+    "output_path": "runtime/nextgen_dark_20260711/nextgen_dark_test_output.txt",
+    "output_sha256": "9F85EA27230FAFB861E40196BECBDDA748DAE1159FEEB75F09F335365D35F911"
+  },
+  "search_started": false,
+  "performance_evaluated": false,
+  "forward_read": false,
+  "state_event_reward_connected": false,
+  "memory_updated": false,
+  "scheduler_started": false,
+  "canary_started": false,
+  "formal_search_unlocked": false,
+  "phase_b1_unlocked": false
+}

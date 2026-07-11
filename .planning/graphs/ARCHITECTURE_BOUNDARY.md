@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `6B48E715ED8980832CB3FE0D37EAAD1DDF337D144FCA1CC30358836F807401FB`.
+Generated from registry SHA256: `2EFFB08A37CF4CC0933A2FED70B5F7F50F833B5E58DBB7EACFB45E7DE599ED36`.
 
 ## Authority
 
@@ -34,3 +34,9 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 | feature_state_fabric | strict_reward | State/event reward edge frozen until B1 |
 | a7input0 | generation_lanes | unapproved fields cannot enter primary generator |
 | bz | admission | undefined BZ cannot promote |
+| nextgen_observation_fabric | strict_reward | NEXTGEN-DARK State/event outputs cannot enter reward |
+| nextgen_observation_fabric | generation_lanes | new State/event outputs cannot enter legacy generator |
+| isolated_hypothesis_lanes | a7mem | dark lanes cannot share or update A7MEM |
+| challenger_harness | a7mem | benchmark/challenger results cannot enter positive memory |
+| sealed_forward | canary_plan | CANARY cannot read sealed forward data |
+| canary_plan | scheduler | CANARY is not authorized and cannot start scheduler |
