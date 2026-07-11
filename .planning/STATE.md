@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `92742C026BADF15834841999AB85C2D4F07F452B6BAD5C3719D38DDC9830A67D`.
+Registry SHA256: `DFCB3AC1B73CEC0474B937CB77A7E3C7CD275D15D011A5D586C0C57B690AAC18`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `RESEARCH_MODE_CONTROLLED_EPOCH1R_REPAIR_ONLY`
-- Current phase: `EPOCH1R_ADMISSION_REPAIR_IMPLEMENTED_PREFLIGHT_PENDING`
+- Current phase: `EPOCH1R_ADMISSION_PREFLIGHT_PASSED_READY_TO_FREEZE`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,7 +16,7 @@ Registry SHA256: `92742C026BADF15834841999AB85C2D4F07F452B6BAD5C3719D38DDC9830A6
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `EPOCH1R_NARROW_ADMISSION_REPAIR_COMPLETE_PREFLIGHT_PENDING`
+- Active stage: `EPOCH1R_FULL_PACK_PREFLIGHT_PASSED_READY_TO_FREEZE`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -146,7 +146,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## CRYPTO NEXTGEN SEARCH EPOCH-1R
 
-- Status: `REPAIR_EMPTY_ADMISSION_IMPLEMENTED_PREFLIGHT_PENDING`
+- Status: `EPOCH1R_ADMISSION_PREFLIGHT_PASSED_READY_TO_FREEZE`
 - Repair scope: `EMPTY_REPRESENTATIVE_SET_ONLY`
 - Failed evidence subject: `403b3519773e18c38033b2eaeaf404c98320595a`
 - Upstream changes — generator / grammar / objective / adaptive / seeds / budgets: `False` / `False` / `False` / `False` / `False` / `False`
@@ -193,4 +193,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Regenerate and hash the unchanged 32768-proposal pack, complete admission-only full-pack preflight with all panel/lane capacity rows, commit those artifacts, then freeze a new Epoch-1R manifest before any strict evaluation.
+Commit the immutable proposal pack and passed admission-only preflight evidence, create a new Epoch-1R manifest binding repair code/tests/capacity/assignment and unchanged upstream contracts, synchronize the design-freeze control plane, then execute strict evaluation once.

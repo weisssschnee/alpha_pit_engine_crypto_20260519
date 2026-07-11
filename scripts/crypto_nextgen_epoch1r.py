@@ -7,6 +7,7 @@ import hashlib
 import inspect
 import io
 import json
+import shutil
 import subprocess
 import sys
 import time
@@ -31,6 +32,7 @@ from alphafactory_crypto.nextgen_epoch import (
 )
 from alphafactory_crypto.search_revision import (
     adaptive_verdict, admit_full_identity, concentration_metrics, development_feedback,
+    partition_exact_identity_owners,
 )
 
 
@@ -231,6 +233,12 @@ def load_pack() -> tuple[list[dict[str, Any]], pd.DataFrame, dict[str, ProgramSp
 
 def preflight() -> dict[str, Any]:
     started = time.perf_counter()
+    if PREFLIGHT.exists() and "preflight_revision" not in load_json(PREFLIGHT):
+        archive = OUTPUT_ROOT / "diagnostic_sequential_preflight"
+        archive.mkdir(parents=True, exist_ok=True)
+        for path in (FULL_IDENTITIES, CAPACITY_TABLE, ASSIGNMENTS, PREFLIGHT):
+            if path.exists():
+                shutil.copy2(path, archive / path.name)
     _, candidates, specs = load_pack()
     old = load_json(OLD_FROZEN)
     main = epoch0.load_main_panel(include_target=False)
@@ -257,19 +265,19 @@ def preflight() -> dict[str, Any]:
     write_jsonl_gz(FULL_IDENTITIES, ({"proposal_id": pid, **record} for pid, record in sorted(full_records.items())))
     capacity_rows: list[dict[str, Any]] = []
     assignments: list[dict[str, Any]] = []
-    used: set[tuple[str, str]] = set()
     grouped = {(panel, lane): group for (panel, lane), group in candidates.groupby(["panel_id", "lane_id"], sort=True)}
     expected_groups = [("main", lane) for lane in epoch1.MAIN_LANES] + [("bbo_micro", lane) for lane in epoch1.BBO_LANES]
+    raw_rows_by_group: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    exact_before_by_group: dict[tuple[str, str], set[str]] = {}
     for panel, lane in expected_groups:
         group = grouped[(panel, lane)]
-        quota = int(old["budget"]["strict_by_lane"][lane])
         pool_ids = [pid for arm, pid in strat_pool if arm == "STRATIFIED_ADMISSION" and by_id.loc[pid].panel_id == panel and by_id.loc[pid].lane_id == lane]
         exact_before = {full_records[pid]["exact_identity"] for pid in pool_ids if full_records[pid]["exact_identity"]}
         rows = []
         for pid in pool_ids:
             record = full_records[pid]
             exact = record["exact_identity"]
-            if not exact or (panel, exact) in used:
+            if not exact:
                 continue
             base = by_id.loc[pid]
             rows.append({
@@ -277,17 +285,29 @@ def preflight() -> dict[str, Any]:
                 "parent_identity": base.parent_identity, "behaviour_cluster": record["behaviour_cluster"],
                 "ordinal": int(base.ordinal),
             })
+        raw_rows_by_group[(panel, lane)] = rows
+        exact_before_by_group[(panel, lane)] = exact_before
+    owned_rows_by_group: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for panel, lanes in (("main", epoch1.MAIN_LANES), ("bbo_micro", epoch1.BBO_LANES)):
+        lane_rows = {lane: raw_rows_by_group[(panel, lane)] for lane in lanes}
+        quotas = {lane: int(old["budget"]["strict_by_lane"][lane]) for lane in lanes}
+        owned = partition_exact_identity_owners(lane_rows, quotas, lanes)
+        for lane in lanes:
+            owned_rows_by_group[(panel, lane)] = owned[lane]
+    for panel, lane in expected_groups:
+        group = grouped[(panel, lane)]
+        quota = int(old["budget"]["strict_by_lane"][lane])
+        rows = owned_rows_by_group[(panel, lane)]
         outcome = admit_full_identity(rows, quota)
         for rank, pid in enumerate(outcome.admitted_ids):
             exact = full_records[pid]["exact_identity"]
-            used.add((panel, exact))
             assignments.append({
                 "panel_id": panel, "lane_id": lane, "arm": "STRATIFIED_ADMISSION",
                 "proposal_id": pid, "rank": rank, "full_exact_identity": exact,
             })
         capacity_rows.append({
             "panel_id": panel, "lane_id": lane, "proposal_count": len(group),
-            "legal_count": int(group.legal.sum()), "exact_identity_count": len(exact_before),
+            "legal_count": int(group.legal.sum()), "exact_identity_count": len(exact_before_by_group[(panel, lane)]),
             "representative_count": outcome.plan.identity_capacity,
             "mechanism_count": outcome.plan.mechanism_family_count, "requested_quota": quota,
             "feasible_quota": outcome.capacity.feasible_capacity,
@@ -328,6 +348,10 @@ def preflight() -> dict[str, Any]:
     duplicate = assignment.groupby(["panel_id", "arm"])["full_exact_identity"].apply(lambda values: values.duplicated().any())
     if duplicate.any():
         raise ValueError("duplicate exact identity in strict assignment")
+    enabled_controls = set(epoch1.MATCHED.values())
+    control_counts = assignment[(assignment.panel_id == "main") & (assignment.arm == "STRATIFIED_ADMISSION")].groupby("lane_id").size().to_dict()
+    if any(int(control_counts.get(lane, 0)) == 0 for lane in enabled_controls):
+        raise ValueError("matched-control lane starved by exact-identity ownership")
     expected_total = int(capacity.assigned_quota.sum())
     if len(assignment) != expected_total:
         raise ValueError("assignment total/capacity table mismatch")
@@ -335,7 +359,8 @@ def preflight() -> dict[str, Any]:
     assignment.to_csv(ASSIGNMENTS, index=False)
     manifest = {
         "experiment_id": "20260712_crypto_nextgen_epoch1r_001",
-        "status": "PASS_EPOCH1R_ADMISSION_ONLY_PREFLIGHT", "proposal_pack_sha256": sha256_file(PACK),
+        "status": "PASS_EPOCH1R_ADMISSION_ONLY_PREFLIGHT", "preflight_revision": "FAIR_EXACT_IDENTITY_OWNERSHIP_V1",
+        "proposal_pack_sha256": sha256_file(PACK),
         "full_identity_records_sha256": sha256_file(FULL_IDENTITIES),
         "capacity_table_sha256": sha256_file(CAPACITY_TABLE), "assignment_sha256": sha256_file(ASSIGNMENTS),
         "panel_lane_rows": len(capacity), "strict_assignment_total": len(assignment),
@@ -346,7 +371,8 @@ def preflight() -> dict[str, Any]:
         "hard_gates": {
             "all_panel_lanes_recorded": True, "empty_lanes_returned": True,
             "assigned_lte_feasible": True, "exact_identities_unique_per_panel_arm": True,
-            "assignment_total_bound": True, "admission_exception": False,
+            "assignment_total_bound": True, "admission_exception_absent": True,
+            "matched_controls_non_empty": True,
         },
         "strict_evaluations": 0, "return_label_read_for_preflight": False,
         "forward_read": False, "candidate_promotion": False, "cross_epoch_memory": False,

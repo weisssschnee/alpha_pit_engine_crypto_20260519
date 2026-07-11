@@ -1,0 +1,157 @@
+{
+  "adaptive_feedback_queries": 2048,
+  "candidate_promotion": false,
+  "continuation": "run admission-only preflight; do not perform strict evaluation before preflight passes",
+  "cross_epoch_memory": false,
+  "experiment_id": "20260712_crypto_nextgen_epoch1r_001",
+  "failed_epoch1_subject": "403b3519773e18c38033b2eaeaf404c98320595a",
+  "fixed_seeds": [
+    3701,
+    3709
+  ],
+  "forward_read": false,
+  "lane_budgets": {
+    "bbo_typed_temporal": 2048,
+    "cem": 2560,
+    "cem_matched_control": 2560,
+    "evolutionary": 2560,
+    "evolutionary_matched_control": 2560,
+    "llm_proposal_repair": 2560,
+    "orthogonal_exile": 2560,
+    "surrogate": 2560,
+    "surrogate_matched_control": 2560,
+    "typed_ast": 2560,
+    "typed_random": 2560,
+    "uct_matched_control": 2560,
+    "uct_mcts": 2560
+  },
+  "lane_runtime_seconds": {
+    "bbo_micro/bbo_typed_temporal": 104.24396950000664,
+    "main/cem": 80.96210060000885,
+    "main/cem_matched_control": 2.134867899992969,
+    "main/evolutionary": 190.49514279997675,
+    "main/evolutionary_matched_control": 4.437240799947176,
+    "main/llm_proposal_repair": 16.307015100028366,
+    "main/orthogonal_exile": 329.97985100001097,
+    "main/surrogate": 121.25052539998433,
+    "main/surrogate_matched_control": 1.8011868000030518,
+    "main/typed_ast": 1.5769438999705017,
+    "main/typed_random": 190.5209081999492,
+    "main/uct_matched_control": 3.6501429000054486,
+    "main/uct_mcts": 97.25266679999186
+  },
+  "objective": "regenerate the unchanged Epoch-1 proposal stream and isolate the narrow admission repair",
+  "proposal_pack": "runtime/nextgen_epoch1r_20260712/proposal_pack.jsonl.gz",
+  "proposal_pack_content_sha256": "1EB5E6836C9CE8414A0D7A5D239B5FF93D6D4AC81C3939CCF1249D1E9228FD20",
+  "proposal_pack_sha256": "318811FC93C39719B164CF9FF3212D507B964963E17E08D0B026F6B3E2350A62",
+  "proposal_rows": 32768,
+  "repo_sha": "965ad98192c5dec6ca45041d0127d4c7ca576b90",
+  "reproducibility": "DETERMINISTIC_GZIP_MTIME_ZERO_SORTED_JSON_KEYS_FIXED_SEEDS",
+  "runtime_seconds": 1166.9001411999925,
+  "status": "EPOCH1R_PROPOSAL_PACK_FROZEN_PRE_STRICT",
+  "strict_evaluations": 0,
+  "upstream_contract_guard": {
+    "benchmark_contract": "same frozen simple development benchmarks and 5bps cost as Epoch-0",
+    "budget": {
+      "adaptive_feedback_queries_per_seed": 256,
+      "extension_allowed": false,
+      "fixed_seeds": [
+        3701,
+        3709
+      ],
+      "logical_strict_max": 3072,
+      "proposals_by_lane": {
+        "bbo_typed_temporal": 2048,
+        "cem": 2560,
+        "cem_matched_control": 2560,
+        "evolutionary": 2560,
+        "evolutionary_matched_control": 2560,
+        "llm_proposal_repair": 2560,
+        "orthogonal_exile": 2560,
+        "surrogate": 2560,
+        "surrogate_matched_control": 2560,
+        "typed_ast": 2560,
+        "typed_random": 2560,
+        "uct_matched_control": 2560,
+        "uct_mcts": 2560
+      },
+      "refinement_pool_multiplier": 2,
+      "strict_by_lane": {
+        "bbo_typed_temporal": 96,
+        "cem": 120,
+        "cem_matched_control": 120,
+        "evolutionary": 120,
+        "evolutionary_matched_control": 120,
+        "llm_proposal_repair": 120,
+        "orthogonal_exile": 120,
+        "surrogate": 120,
+        "surrogate_matched_control": 120,
+        "typed_ast": 120,
+        "typed_random": 120,
+        "uct_matched_control": 120,
+        "uct_mcts": 120
+      },
+      "strict_per_arm": 1536,
+      "total_proposals": 32768
+    },
+    "capability_matrix": {
+      "bbo": "SCOPED_CORE11_2024_01_02_ONLY",
+      "force_order": "DISABLED_NO_APPROVED_SOURCE",
+      "liquidation": "DISABLED_NO_APPROVED_SOURCE",
+      "multi_level_depth": "DISABLED_NO_APPROVED_SOURCE"
+    },
+    "lane_specs": [
+      "typed_random",
+      "typed_ast",
+      "cem",
+      "cem_matched_control",
+      "uct_mcts",
+      "uct_matched_control",
+      "evolutionary",
+      "evolutionary_matched_control",
+      "surrogate",
+      "surrogate_matched_control",
+      "llm_proposal_repair",
+      "orthogonal_exile",
+      "bbo_typed_temporal"
+    ],
+    "matched_controls": {
+      "cem": "cem_matched_control",
+      "evolutionary": "evolutionary_matched_control",
+      "surrogate": "surrogate_matched_control",
+      "uct_mcts": "uct_matched_control"
+    },
+    "old_frozen_manifest_sha256": "742646FAF7164DDA2450F9E66727AC8EC8B64DEF5CFC7BA060A53B7D6BC59CD6",
+    "protected_search_logic_ast_sha256": "37FE1110B712AC9D6191585A190B14EC94DB3BC511FF01B016686BD410BED7E3",
+    "reward_contract": {
+      "full_vector_retained": true,
+      "hard_gates_first": true,
+      "limited_scalar": true,
+      "novelty_cannot_compensate_negative_net_or_instability": true,
+      "pareto_archive": true,
+      "scalar_priority": [
+        "net_lcb",
+        "worst_block",
+        "benchmark_increment_lcb",
+        "stability_lcb",
+        "turnover",
+        "cost_drag",
+        "concentration"
+      ]
+    },
+    "survivor_contract": {
+      "benchmark_increment_lcb_positive": true,
+      "hard_gate_pass": true,
+      "ic_lcb_positive": true,
+      "net_lcb_positive": true,
+      "worst_horizon_net_mean_min": -0.001
+    },
+    "unchanged_contracts": {
+      "alphafactory_crypto/nextgen_epoch.py": "B376E5A9C3E7035F07DCBC7B67C3BFF70BC5B08357C2529817AD5F99633C5337",
+      "config/crypto_nextgen_epoch1_v1.json": "9615C3CEF4CC79F56D01DFC3230D878703A81A5358A82FABA8FE4295B4B92C38",
+      "config/crypto_nextgen_mechanism_registry_v1.json": "E3D47B7891FCB643CAC4F708409C96FB49F9211019782E60FCCDC753C369CB38",
+      "scripts/crypto_nextgen_epoch0.py": "63E9992F87C13665991222070D98AFA42B6A07B6619C44C4CCE4908196199033",
+      "scripts/crypto_nextgen_epoch1.py": "FF9AC3DB5B9CDA6C9E904EDE35EA66959B7C0393463D1E21305ECE0530148725"
+    }
+  }
+}

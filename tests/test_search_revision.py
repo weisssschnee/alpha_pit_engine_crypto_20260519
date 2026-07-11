@@ -14,6 +14,7 @@ from alphafactory_crypto.search_revision import (
     concentration_metrics,
     development_feedback,
     epoch0_failure_matrix,
+    partition_exact_identity_owners,
     quota_plan,
 )
 
@@ -175,3 +176,27 @@ def test_natural_underfill_never_reallocates_budget() -> None:
     }
     assert {key: value.capacity.assigned_capacity for key, value in lanes.items()} == {"empty": 0, "limited": 3, "full": 10}
     assert sum(value.capacity.assigned_capacity for value in lanes.values()) == 13
+
+
+def test_shared_exact_identities_are_owned_fairly_without_duplicate_votes() -> None:
+    shared = [row(i, "shared") for i in range(12)]
+    lane_rows = {"adaptive": shared, "control": list(reversed(shared))}
+    owned = partition_exact_identity_owners(lane_rows, {"adaptive": 6, "control": 6}, ("adaptive", "control"))
+    assert len(owned["adaptive"]) == 6
+    assert len(owned["control"]) == 6
+    identities = [item["full_exact_identity"] for rows in owned.values() for item in rows]
+    assert len(identities) == len(set(identities)) == 12
+
+
+def test_fair_identity_ownership_is_order_invariant_and_does_not_move_quota() -> None:
+    lane_rows = {
+        "empty": [],
+        "left": [row(i, "shared") for i in range(8)],
+        "right": [row(i, "shared") for i in reversed(range(8))],
+    }
+    quotas = {"empty": 4, "left": 4, "right": 4}
+    first = partition_exact_identity_owners(lane_rows, quotas, ("empty", "left", "right"))
+    second = partition_exact_identity_owners({key: list(reversed(value)) for key, value in lane_rows.items()}, quotas, ("empty", "left", "right"))
+    assert first == second
+    assert first["empty"] == []
+    assert len(first["left"]) == len(first["right"]) == 4

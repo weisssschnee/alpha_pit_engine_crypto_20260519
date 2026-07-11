@@ -60,6 +60,14 @@ EPOCH1_FROZEN_MANIFEST_PATH = EPOCH1_ROOT / "epoch1_frozen_design_manifest.json"
 EPOCH1_FAILURE_PATH = EPOCH1_ROOT / "epoch1_failure.json"
 EPOCH1_CLOSURE_MANIFEST_PATH = EPOCH1_ROOT / "epoch1_closure_manifest.json"
 EPOCH1_ARTIFACT_INDEX_PATH = EPOCH1_ROOT / "epoch1_artifact_index.csv"
+EPOCH1R_ROOT = REPO / "runtime" / "nextgen_epoch1r_20260712"
+EPOCH1R_PACK_PATH = EPOCH1R_ROOT / "proposal_pack.jsonl.gz"
+EPOCH1R_PACK_MANIFEST_PATH = EPOCH1R_ROOT / "proposal_pack_manifest.json"
+EPOCH1R_FULL_IDENTITIES_PATH = EPOCH1R_ROOT / "full_identity_records.jsonl.gz"
+EPOCH1R_CAPACITY_PATH = EPOCH1R_ROOT / "admission_capacity_table.csv"
+EPOCH1R_ASSIGNMENT_PATH = EPOCH1R_ROOT / "admission_assignments.csv"
+EPOCH1R_PREFLIGHT_PATH = EPOCH1R_ROOT / "admission_preflight_manifest.json"
+EPOCH1R_ARTIFACT_INDEX_PATH = EPOCH1R_ROOT / "epoch1r_artifact_index.csv"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -614,6 +622,7 @@ def artifact_paths(registry: dict[str, Any]) -> set[Path]:
         EPOCH0_COMPARATIVE_REPORT_PATH,
         EPOCH0_FAILURE_PATH,
         EPOCH1_ARTIFACT_INDEX_PATH,
+        EPOCH1R_ARTIFACT_INDEX_PATH,
     }
     for node in registry["nodes"]:
         paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
@@ -698,6 +707,23 @@ def epoch1_artifact_paths(registry: dict[str, Any]) -> set[Path]:
     return paths
 
 
+def epoch1r_artifact_paths(registry: dict[str, Any]) -> set[Path]:
+    node_ids = {"epoch1r_admission_repair", "epoch1r_frozen_design", "epoch1r_execution"}
+    paths = {
+        REGISTRY_PATH, STATE_SOURCE_PATH, DECISION_LOG_PATH, CURRENT_ARCH_PATH, BOUNDARY_PATH,
+        EVOLUTION_PATH, GRAPH_PATH, STATE_PATH, RUN_MANIFEST_PATH, EPOCH1R_PACK_PATH,
+        EPOCH1R_PACK_MANIFEST_PATH, EPOCH1R_FULL_IDENTITIES_PATH, EPOCH1R_CAPACITY_PATH,
+        EPOCH1R_ASSIGNMENT_PATH, EPOCH1R_PREFLIGHT_PATH,
+        REPO / "scripts" / "crypto_architecture_control_plane.py",
+        REPO / "tests" / "test_architecture_control_plane.py",
+    }
+    for node in registry["nodes"]:
+        if node["id"] in node_ids:
+            paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
+    paths.discard(EPOCH1R_ARTIFACT_INDEX_PATH)
+    return paths
+
+
 def b0a_artifact_paths(registry: dict[str, Any]) -> set[Path]:
     node = next(item for item in registry["nodes"] if item["id"] == "frozen_signal_behaviour_qualification")
     paths = {REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]]}
@@ -775,6 +801,8 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "epoch1r_status": state["nextgen_epoch1r"]["status"],
         "epoch1r_design_frozen": state["nextgen_epoch1r"]["design_frozen"],
         "epoch1r_strict_evaluation_started": state["nextgen_epoch1r"]["strict_evaluation_started"],
+        "epoch1r_preflight_status": state["nextgen_epoch1r"].get("preflight_status"),
+        "epoch1r_strict_assignment_total": state["nextgen_epoch1r"].get("strict_assignment_total"),
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -945,6 +973,9 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "epoch1r_status": state["nextgen_epoch1r"]["status"],
         "epoch1r_design_frozen": state["nextgen_epoch1r"]["design_frozen"],
         "epoch1r_strict_evaluation_started": state["nextgen_epoch1r"]["strict_evaluation_started"],
+        "epoch1r_preflight": relative(EPOCH1R_PREFLIGHT_PATH),
+        "epoch1r_artifact_index": relative(EPOCH1R_ARTIFACT_INDEX_PATH),
+        "epoch1r_strict_assignment_total": state["nextgen_epoch1r"].get("strict_assignment_total"),
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []
@@ -991,6 +1022,16 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         writer = csv.DictWriter(handle, fieldnames=["path", "exists", "sha256", "role"])
         writer.writeheader()
         writer.writerows(epoch1_rows)
+    epoch1r_rows = []
+    for path in sorted(epoch1r_artifact_paths(registry), key=lambda item: str(item)):
+        epoch1r_rows.append({
+            "path": relative(path), "exists": str(path.exists()),
+            "sha256": sha256_file(path) if path.is_file() else "", "role": "epoch1r_repair_preflight",
+        })
+    with EPOCH1R_ARTIFACT_INDEX_PATH.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["path", "exists", "sha256", "role"])
+        writer.writeheader()
+        writer.writerows(epoch1r_rows)
     paths = artifact_paths(registry)
     rows = []
     for path in sorted(paths, key=lambda p: str(p)):
@@ -1330,6 +1371,28 @@ def validate_outputs(registry: dict[str, Any]) -> None:
         path = REPO / row["path"]
         if row["exists"] != str(path.exists()) or row["sha256"] != (sha256_file(path) if path.is_file() else ""):
             raise ValueError(f"Epoch-1 artifact index hash drift: {row['path']}")
+    epoch1r_pack = load_json(EPOCH1R_PACK_MANIFEST_PATH)
+    epoch1r_preflight = load_json(EPOCH1R_PREFLIGHT_PATH)
+    if epoch1r_pack.get("proposal_rows") != 32768 or epoch1r_pack.get("strict_evaluations") != 0:
+        raise ValueError("Epoch-1R proposal pack count or strict boundary mismatch")
+    if sha256_file(EPOCH1R_PACK_PATH) != epoch1r_pack.get("proposal_pack_sha256"):
+        raise ValueError("Epoch-1R proposal pack hash drift")
+    if epoch1r_preflight.get("status") != "PASS_EPOCH1R_ADMISSION_ONLY_PREFLIGHT" or epoch1r_preflight.get("strict_evaluations") != 0:
+        raise ValueError("Epoch-1R admission-only preflight status mismatch")
+    if not all(epoch1r_preflight.get("hard_gates", {}).values()) or epoch1r_preflight.get("return_label_read_for_preflight") or epoch1r_preflight.get("forward_read"):
+        raise ValueError("Epoch-1R preflight hard gate or data-access violation")
+    if epoch1r_preflight.get("strict_assignment_total") != state["nextgen_epoch1r"].get("strict_assignment_total"):
+        raise ValueError("Epoch-1R preflight/state assignment count mismatch")
+    if manifest.get("epoch1r_preflight") != relative(EPOCH1R_PREFLIGHT_PATH) or manifest.get("epoch1r_strict_assignment_total") != epoch1r_preflight["strict_assignment_total"]:
+        raise ValueError("Phase A/B0 manifest Epoch-1R preflight mismatch")
+    with EPOCH1R_ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
+        epoch1r_index_rows = list(csv.DictReader(handle))
+    if {row["path"] for row in epoch1r_index_rows} != {relative(path) for path in epoch1r_artifact_paths(registry)}:
+        raise ValueError("Epoch-1R artifact index paths do not match repair/preflight scope")
+    for row in epoch1r_index_rows:
+        path = REPO / row["path"]
+        if row["exists"] != str(path.exists()) or row["sha256"] != (sha256_file(path) if path.is_file() else ""):
+            raise ValueError(f"Epoch-1R artifact index hash drift: {row['path']}")
 
 
 def build() -> None:

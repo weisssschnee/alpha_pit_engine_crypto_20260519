@@ -102,6 +102,49 @@ def admission_result_frame(
     return frame.reindex(columns=ADMISSION_RESULT_SCHEMA)
 
 
+def partition_exact_identity_owners(
+    lane_rows: Mapping[str, Sequence[Mapping[str, Any]] | pd.DataFrame],
+    requested_by_lane: Mapping[str, int],
+    lane_order: Sequence[str],
+) -> dict[str, list[dict[str, Any]]]:
+    """Assign each exact identity to one lane without sequential lane starvation.
+
+    Ownership is deterministic and proportional to each lane's unchanged requested quota. It does
+    not transfer unused strict budget: each lane's downstream assignment remains independently capped.
+    """
+    order = {lane: index for index, lane in enumerate(lane_order)}
+    if set(lane_rows) != set(lane_order) or set(requested_by_lane) != set(lane_order):
+        raise ValueError("lane rows, quotas, and order must describe the same lanes")
+    representatives: dict[str, dict[str, dict[str, Any]]] = {}
+    for lane in lane_order:
+        frame = normalize_admission_rows(lane_rows[lane])
+        lane_representatives: dict[str, dict[str, Any]] = {}
+        for row in frame.to_dict("records"):
+            identity = row["full_exact_identity"]
+            if identity:
+                lane_representatives.setdefault(identity, row)
+        representatives[lane] = lane_representatives
+    identity_options: defaultdict[str, list[tuple[str, dict[str, Any]]]] = defaultdict(list)
+    for lane in lane_order:
+        for identity, row in representatives[lane].items():
+            identity_options[identity].append((lane, row))
+    owned: dict[str, list[dict[str, Any]]] = {lane: [] for lane in lane_order}
+    for identity in sorted(identity_options):
+        options = identity_options[identity]
+        eligible = [(lane, row) for lane, row in options if int(requested_by_lane[lane]) > 0]
+        if not eligible:
+            continue
+        lane, row = min(
+            eligible,
+            key=lambda item: (
+                len(owned[item[0]]) / int(requested_by_lane[item[0]]),
+                order[item[0]],
+            ),
+        )
+        owned[lane].append(row)
+    return owned
+
+
 def development_feedback(
     weights: np.ndarray,
     panel: FrozenPanel,

@@ -1,0 +1,30 @@
+{
+  "assignment_sha256": "2EEC1D5666EBB28984C3B1A6D48AF5025B6BF80B0D02965556D9C9EC7C4BB705",
+  "candidate_promotion": false,
+  "capacity_table_sha256": "7710892112929B6F55B5E2819B872BDC7D11003A840C03F419DFEE560F3E074A",
+  "cross_epoch_memory": false,
+  "empty_lane_rows": 0,
+  "experiment_id": "20260712_crypto_nextgen_epoch1r_001",
+  "forward_read": false,
+  "full_identity_records_sha256": "AF0F185D2868ECDE7E06F5B2A18260DEB90A1EEC691EB4EF2240678F991448AA",
+  "global_assignment_total": 1147,
+  "hard_gates": {
+    "admission_exception_absent": true,
+    "all_panel_lanes_recorded": true,
+    "assigned_lte_feasible": true,
+    "assignment_total_bound": true,
+    "empty_lanes_returned": true,
+    "exact_identities_unique_per_panel_arm": true,
+    "matched_controls_non_empty": true
+  },
+  "natural_underfill_rows": 9,
+  "panel_lane_rows": 15,
+  "preflight_revision": "FAIR_EXACT_IDENTITY_OWNERSHIP_V1",
+  "proposal_pack_sha256": "318811FC93C39719B164CF9FF3212D507B964963E17E08D0B026F6B3E2350A62",
+  "return_label_read_for_preflight": false,
+  "runtime_seconds": 1608.418758600019,
+  "status": "PASS_EPOCH1R_ADMISSION_ONLY_PREFLIGHT",
+  "stratified_assignment_total": 905,
+  "strict_assignment_total": 2052,
+  "strict_evaluations": 0
+}

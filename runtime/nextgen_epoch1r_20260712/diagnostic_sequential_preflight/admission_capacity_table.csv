@@ -1,0 +1,16 @@
+panel_id,lane_id,proposal_count,legal_count,exact_identity_count,representative_count,mechanism_count,requested_quota,feasible_quota,assigned_quota,natural_underfill,underfill_reason
+main,typed_random,2560,1892,212,212,10,120,120,120,False,
+main,typed_ast,2560,1892,212,92,8,120,92,92,True,LEGAL_EXACT_IDENTITY_CAPACITY
+main,cem,2560,1986,207,142,10,120,120,120,False,
+main,cem_matched_control,2560,1892,212,0,0,120,0,0,True,NO_LEGAL_EXACT_IDENTITIES
+main,uct_mcts,2560,2239,207,118,10,120,118,115,True,ADMISSION_CAPS
+main,uct_matched_control,2560,1892,212,0,0,120,0,0,True,NO_LEGAL_EXACT_IDENTITIES
+main,evolutionary,2560,2272,121,107,10,120,107,105,True,ADMISSION_CAPS
+main,evolutionary_matched_control,2560,1892,212,0,0,120,0,0,True,NO_LEGAL_EXACT_IDENTITIES
+main,surrogate,2560,2274,226,187,9,120,120,120,False,
+main,surrogate_matched_control,2560,1892,212,0,0,120,0,0,True,NO_LEGAL_EXACT_IDENTITIES
+main,llm_proposal_repair,2560,1906,209,8,6,120,8,8,True,LEGAL_EXACT_IDENTITY_CAPACITY
+main,orthogonal_exile,2560,1730,177,171,6,120,120,120,False,
+bbo_micro,bbo_typed_temporal,2048,1999,192,192,1,96,96,96,False,
+main,__GLOBAL_TOP_K_CONTROL__,30720,23759,1051,1051,10,1440,1051,1051,True,LEGAL_EXACT_IDENTITY_CAPACITY
+bbo_micro,__GLOBAL_TOP_K_CONTROL__,2048,1999,96,96,1,96,96,96,False,

@@ -1,0 +1,6 @@
+command: G:\PythonProject\.venv\Scripts\python.exe -m pytest -q
+result: 120 passed in 58.48s
+architecture_check: PASS_ARCHITECTURE_CONTROL_PLANE_VALID
+preflight_status: PASS_EPOCH1R_ADMISSION_ONLY_PREFLIGHT
+strict_evaluations: 0
+forward_read: false

@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "4F4A7B74343800FDDA9B40170EE75D8FED00926E1A20E7A49B5F74FBB730C4E8"
+      "last_verified_sha": "67B4B691A97237035AC2FF3A8A2ED85866E206155D666DDB400C0FC5051EBC5C"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "DFB2C88A8D6C394DD1BC5098B465ADE0D914DC847289B29F26DD7E5320205B93"
+      "last_verified_sha": "850D0D0DEFD433EBC25DE7F9371A982D5444DBD83D98E37B3FBD33A60D9415D1"
     },
     {
       "id": "nextgen_mechanism_registry",
@@ -938,7 +938,7 @@
         "runtime/nextgen_epoch1_20260712/revision_diagnosis_manifest.json"
       ],
       "blocker": "empty full-identity capacity was not handled as deterministic natural underfill; post-failure revision requires new authorization",
-      "last_verified_sha": "7C098C0FE818EAE31E00DEFF2A69F4329E28DE7C7EDE1513A7BE535E2340DF52"
+      "last_verified_sha": "34DB0EB0D24DDC4FD1EEA823E4A08C343A898BB7EEEE4ECA66F478DEED3AFCCF"
     },
     {
       "id": "epoch1_frozen_design",
@@ -997,10 +997,14 @@
       "feedback_permission": "NO_NEW_PERFORMANCE_CONCLUSION_REPAIR_AND_PREFLIGHT_ONLY",
       "artifact_test": [
         "tests/test_search_revision.py",
-        "tests/test_nextgen_epoch1r.py"
+        "tests/test_nextgen_epoch1r.py",
+        "runtime/nextgen_epoch1r_20260712/proposal_pack_manifest.json",
+        "runtime/nextgen_epoch1r_20260712/admission_preflight_manifest.json",
+        "runtime/nextgen_epoch1r_20260712/admission_capacity_table.csv",
+        "runtime/nextgen_epoch1r_20260712/admission_assignments.csv"
       ],
-      "blocker": "full 32768-proposal admission-only preflight not yet executed",
-      "last_verified_sha": "9EA0AF38E473353C8614E7B2E1DF8818FA255BC526DF49C90198626190A4F4B4"
+      "blocker": "none; fair exact-identity ownership preflight passed without label or strict evaluation",
+      "last_verified_sha": "4BB80D854A4DDFBAF75F1D09A46904374F3AD8D7546ED1D007524AF8C38DDFF4"
     },
     {
       "id": "epoch1r_frozen_design",
@@ -1015,10 +1019,13 @@
       "data_role": "frozen repaired development-search control",
       "feedback_permission": "NO_STRICT_BEFORE_PREFLIGHT_AND_FREEZE",
       "artifact_test": [
-        "tests/test_nextgen_epoch1r.py"
+        "tests/test_nextgen_epoch1r.py",
+        "runtime/nextgen_epoch1r_20260712/proposal_pack.jsonl.gz",
+        "runtime/nextgen_epoch1r_20260712/full_identity_records.jsonl.gz",
+        "runtime/nextgen_epoch1r_20260712/epoch1r_test_output.txt"
       ],
-      "blocker": "proposal pack and admission-only preflight pending",
-      "last_verified_sha": "7FC91FF46EF8AA1571A11DFC444075FA842E2C84B24DE3B5216D0D61A7158E4F"
+      "blocker": "immutable pack/preflight artifacts ready; new Epoch-1R manifest not yet frozen",
+      "last_verified_sha": "26CD72173720FA417870A05415BB22CCB7B440D4868A09FC757C2BC37A5E54BE"
     },
     {
       "id": "epoch1r_execution",
@@ -1036,7 +1043,7 @@
         "tests/test_nextgen_epoch1r.py"
       ],
       "blocker": "Epoch-1R is not frozen or started",
-      "last_verified_sha": "7FC91FF46EF8AA1571A11DFC444075FA842E2C84B24DE3B5216D0D61A7158E4F"
+      "last_verified_sha": "940C57D93B6EBC10834A47F369438380D7DFD6D89912EDB9957B6F1378938ADA"
     }
   ],
   "edges": [
