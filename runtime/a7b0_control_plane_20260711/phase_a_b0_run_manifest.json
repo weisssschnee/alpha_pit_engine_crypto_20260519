@@ -189,9 +189,10 @@
   "epoch1r_remote_sync": {
     "branch": "audit/evalreset-collapse-forensics-20260711",
     "closure_subject_sha": "a9c119e4447755d76838373178c57ae8e05ab481",
-    "remote_sha": "UNVERIFIED_NETWORK_UNAVAILABLE",
-    "attempts": 3,
-    "status": "PUSH_PENDING_GITHUB_HTTPS_UNREACHABLE",
-    "tag": "epoch1r-completed-natural-underfill-a9c119e"
+    "remote_observed_sha": "944246fbc6495ac3a5c63a6155348d7f2905c077",
+    "attempts": 4,
+    "status": "VERIFIED_REMOTE_CONTAINS_EPOCH1R_CLOSURE",
+    "tag": "epoch1r-completed-natural-underfill-a9c119e",
+    "tag_peeled_commit": "a9c119e4447755d76838373178c57ae8e05ab481"
   }
 }

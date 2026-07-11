@@ -155,7 +155,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Execution / strict / natural underfill: `COMPLETED` / `2052` / `True`
 - Survivors / near misses / positive net LCB / adaptive successes: `0` / `84` / `2` / `0`
 - Recommendation: `REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH`
-- Remote sync: `PUSH_PENDING_GITHUB_HTTPS_UNREACHABLE` for closure `a9c119e4447755d76838373178c57ae8e05ab481` after `3` attempts
+- Remote sync: `VERIFIED_REMOTE_CONTAINS_EPOCH1R_CLOSURE` for closure `a9c119e4447755d76838373178c57ae8e05ab481` after `4` attempts
 - Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
 
 ## NEXTGEN-DARK Allowed
