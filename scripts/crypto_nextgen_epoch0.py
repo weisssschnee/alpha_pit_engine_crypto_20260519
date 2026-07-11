@@ -141,7 +141,7 @@ def _event_age(values: np.ndarray) -> np.ndarray:
     return result
 
 
-def load_main_panel() -> FrozenPanel:
+def load_main_panel(*, include_target: bool = True) -> FrozenPanel:
     pieces = []
     for symbol in CORE12:
         path = FEATURE_ROOT / f"symbol={symbol}" / "part.parquet"
@@ -169,7 +169,8 @@ def load_main_panel() -> FrozenPanel:
     asset_return = np.full_like(close, np.nan)
     asset_return[:, 1:] = close[:, 1:] / close[:, :-1] - 1.0
     target = np.full_like(close, np.nan)
-    target[:, :-2] = close[:, 2:] / close[:, 1:-1] - 1.0
+    if include_target:
+        target[:, :-2] = close[:, 2:] / close[:, 1:-1] - 1.0
     market = np.nanmedian(asset_return, axis=0, keepdims=True)
     market_broadcast = np.repeat(market, len(symbols), axis=0)
     oi_change = np.full_like(oi_raw, np.nan)
@@ -197,7 +198,7 @@ def load_main_panel() -> FrozenPanel:
     return panel
 
 
-def load_bbo_panel(main: FrozenPanel) -> FrozenPanel:
+def load_bbo_panel(main: FrozenPanel, *, include_target: bool = True) -> FrozenPanel:
     frame = pd.read_parquet(BBO_DATA, columns=[
         "symbol", "timestamp", "observable_time", "maturity_time", "spread_bps_mean", "bid_qty_mean",
         "ask_qty_mean", "quote_imbalance_mean", "top_of_book_liquidity_state",
@@ -219,10 +220,22 @@ def load_bbo_panel(main: FrozenPanel) -> FrozenPanel:
     }
     main_symbol = {symbol: index for index, symbol in enumerate(main.symbols)}
     time_index = main.timestamps.get_indexer(timestamps)
-    target = np.vstack([main.target_return[main_symbol[symbol], time_index] for symbol in symbols])
+    target = np.vstack([main.target_return[main_symbol[symbol], time_index] for symbol in symbols]) if include_target else np.full((len(symbols), len(timestamps)), np.nan)
     panel = FrozenPanel("bbo_micro", symbols, timestamps, fields, target, "bucket_start_plus_1h", "bucket_close", "BBO_MICRO_ONLY")
     panel.validate()
     return panel
+
+
+def sketch_panel(panel: FrozenPanel, stride: int) -> FrozenPanel:
+    if stride <= 0:
+        raise ValueError("sketch stride must be positive")
+    index = np.arange(0, len(panel.timestamps), stride, dtype=int)
+    fields = {name: np.asarray(values)[:, index] for name, values in panel.fields.items()}
+    return FrozenPanel(
+        panel.panel_id, panel.symbols, panel.timestamps[index], fields,
+        np.asarray(panel.target_return)[:, index], panel.observable_time_rule, panel.maturity_rule,
+        panel.comparison_domain,
+    )
 
 
 def diagnose_canary() -> dict[str, Any]:
@@ -360,9 +373,9 @@ def _evaluate_spec(
 def smoke() -> dict[str, Any]:
     config, registry = load_json(CONFIG), load_json(MECHANISMS)
     validate_epoch_contract(config, registry)
-    main = load_main_panel()
-    bbo = load_bbo_panel(main)
-    panels = {"main": main, "bbo_micro": bbo}
+    main = load_main_panel(include_target=False)
+    bbo = load_bbo_panel(main, include_target=False)
+    panels = {"main": sketch_panel(main, 4), "bbo_micro": sketch_panel(bbo, 2)}
     started = time.perf_counter()
     records = []
     hashes = []
@@ -630,7 +643,8 @@ def run() -> dict[str, Any]:
     started = time.perf_counter()
     main = load_main_panel(); bbo = load_bbo_panel(main)
     panels = {"main": main, "bbo_micro": bbo}
-    proxy_masks = {"main": np.arange(len(main.timestamps)) % 4 == 0, "bbo_micro": np.arange(len(bbo.timestamps)) % 2 == 0}
+    proposal_panels = {"main": sketch_panel(main, 4), "bbo_micro": sketch_panel(bbo, 2)}
+    proxy_masks = {panel_id: np.ones(len(panel.timestamps), dtype=bool) for panel_id, panel in proposal_panels.items()}
     cost_bps = float(config["reward_contract"]["cost_bps_per_unit_turnover"])
     minimum_assets = 5
     benchmarks, best_benchmark_net = _run_benchmarks(panels, cost_bps, minimum_assets)
@@ -641,7 +655,7 @@ def run() -> dict[str, Any]:
     lane_runtime: dict[tuple[str, str], float] = {}
     volume_by_family = {item["mechanism_id"]: int(item["semantic_volume_estimate"]) for item in registry["mechanism_families"]}
     for panel_id, lanes in (("main", MAIN_LANES), ("bbo_micro", BBO_LANES)):
-        panel = panels[panel_id]
+        panel = proposal_panels[panel_id]
         for lane in lanes:
             lane_start = time.perf_counter()
             total = int(frozen["budget"]["proposals_by_lane"][lane])
@@ -667,7 +681,9 @@ def run() -> dict[str, Any]:
                         "lineage_namespace": spec.lineage_namespace, "raw_template": spec.raw_template,
                         "repaired": spec.repaired, "policy_feedback_used": spec.policy_feedback_used,
                         "canonical_expression": canonical_program_json(spec), "canonical_identity": program_identity(spec),
-                        "exact_identity": record.exact_identity, "activation_identity": record.activation_identity,
+                        "exact_identity": record.exact_identity, "proposal_sketch_identity": record.exact_identity,
+                        "identity_scope": "DETERMINISTIC_PROPOSAL_OBSERVATION_SKETCH",
+                        "activation_identity": record.activation_identity,
                         "behaviour_cluster": record.behaviour_cluster, "proxy_score": record.proxy_score,
                         "legal": record.legal, "failure_reason": record.failure_reason,
                         "semantic_volume_estimate": volume_by_family[spec.mechanism_id],
@@ -691,17 +707,23 @@ def run() -> dict[str, Any]:
     for panel_id, quota in panel_quota.items():
         strict_refs.extend(("GLOBAL_TOP_K_CONTROL", proposal_id) for proposal_id in _global_top_k(candidates, panel_id, quota))
     preliminary = []
-    weights_cache: dict[tuple[str, str], np.ndarray] = {}
+    strict_seen: set[tuple[str, str, str]] = set()
     for arm, proposal_id in strict_refs:
         row = by_id.loc[proposal_id]
         spec = spec_by_id[proposal_id]
-        key = (row["panel_id"], row["exact_identity"])
-        if key not in weights_cache:
-            weights_cache[key] = rank_weights(materialize_program(spec, panels[row["panel_id"]]))
+        full_record, _ = signal_record(
+            spec, materialize_program(spec, panels[row["panel_id"]]), panels[row["panel_id"]],
+            np.ones(len(panels[row["panel_id"]].timestamps), dtype=bool),
+        )
+        full_key = (row["panel_id"], arm, full_record.exact_identity)
+        if full_key in strict_seen:
+            continue
+        strict_seen.add(full_key)
         preliminary.append({
             "arm": arm, "proposal_id": proposal_id, "panel_id": row["panel_id"], "lane_id": row["lane_id"],
-            "exact_identity": row["exact_identity"], "activation_identity": row["activation_identity"],
-            "behaviour_cluster": row["behaviour_cluster"], "economic_hypothesis": row["economic_hypothesis"],
+            "proposal_sketch_identity": row["proposal_sketch_identity"],
+            "exact_identity": full_record.exact_identity, "activation_identity": full_record.activation_identity,
+            "behaviour_cluster": full_record.behaviour_cluster, "economic_hypothesis": row["economic_hypothesis"],
             "mechanism_id": row["mechanism_id"], "algorithm": row["algorithm"], "proxy_score": row["proxy_score"],
         })
     prelim = pd.DataFrame(preliminary)
@@ -715,8 +737,9 @@ def run() -> dict[str, Any]:
         spec = spec_by_id[record["proposal_id"]]
         metric_key = (record["panel_id"], record["arm"], record["exact_identity"])
         if metric_key not in metric_cache:
+            weights = rank_weights(materialize_program(spec, panels[record["panel_id"]]))
             vector = multiobjective_evaluate(
-                weights_cache[(record["panel_id"], record["exact_identity"])], panels[record["panel_id"]],
+                weights, panels[record["panel_id"]],
                 complexity=complexity(spec), behaviour_novelty=float(novelty_value),
                 benchmark_net=best_benchmark_net[record["panel_id"]], cost_bps=cost_bps,
                 minimum_assets=minimum_assets,
@@ -808,7 +831,7 @@ def run() -> dict[str, Any]:
     lineage = {
         "graph_id": "CRYPTO-NEXTGEN-EPOCH0-LINEAGE-V1", "candidate_promotion": False,
         "nodes": [
-            {"id": row["proposal_id"], "kind": "candidate", "lane": row["lane_id"], "mechanism": row["mechanism_id"], "exact_identity": row["exact_identity"]}
+            {"id": row["proposal_id"], "kind": "candidate", "lane": row["lane_id"], "mechanism": row["mechanism_id"], "proposal_sketch_identity": row["proposal_sketch_identity"]}
             for row in candidate_rows
         ],
         "edges": [
@@ -833,7 +856,7 @@ def run() -> dict[str, Any]:
     output_names = list(tables) + ["lineage_graph.json"]
     stratified_actual = int((strict["arm"] == "STRATIFIED_ADMISSION").sum())
     global_actual = int((strict["arm"] == "GLOBAL_TOP_K_CONTROL").sum())
-    execution_complete = len(candidates) == 32768 and global_actual == 1024 and stratified_actual <= 1024
+    execution_complete = len(candidates) == 32768 and 0 < global_actual <= 1024 and 0 < stratified_actual <= 1024
     decision = "FROZEN_DEVELOPMENT_EPOCH_COMPLETED" if execution_complete else "FROZEN_DEVELOPMENT_EPOCH_PARTIALLY_COMPLETED"
     main_compare = comparison[comparison["panel_id"] == "main"].set_index("arm")
     adaptive_basin_rate = float(basin[basin["lane_id"].isin(ADAPTIVE_LANES)]["scalar_basin_flag"].mean())

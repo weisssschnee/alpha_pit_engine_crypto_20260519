@@ -65,3 +65,16 @@ def test_algorithms_have_independent_runtime_lanes() -> None:
     assert runner.ALGORITHM_BY_LANE["evolutionary"] == "evolutionary_search"
     assert runner.ALGORITHM_BY_LANE["surrogate"] == "surrogate"
     assert runner.ALGORITHM_BY_LANE["llm_proposal_repair"] == "llm_proposal_repair"
+
+
+def test_proposal_sketch_is_deterministic_and_keeps_panel_boundary() -> None:
+    frozen = runner.FrozenPanel(
+        "main", ("A", "B"), pd.date_range("2024-01-01", periods=12, freq="h", tz="UTC"),
+        {"x": __import__("numpy").arange(24, dtype=float).reshape(2, 12)},
+        __import__("numpy").zeros((2, 12)), "bucket_start_plus_1h", "bucket_close", "MAIN_ONLY",
+    )
+    first = runner.sketch_panel(frozen, 4)
+    second = runner.sketch_panel(frozen, 4)
+    assert first.timestamps.equals(second.timestamps)
+    assert list(first.timestamps) == list(frozen.timestamps[::4])
+    assert first.comparison_domain == "MAIN_ONLY"

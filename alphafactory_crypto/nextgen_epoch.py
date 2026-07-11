@@ -302,14 +302,31 @@ def _shift(values: np.ndarray, periods: int) -> np.ndarray:
 
 
 def _rolling(values: np.ndarray, window: int, kind: str = "mean") -> np.ndarray:
-    roll = pd.DataFrame(values.T).rolling(window, min_periods=max(2, window // 2))
-    if kind == "std":
-        result = roll.std(ddof=0)
-    elif kind == "max":
-        result = roll.max()
-    else:
-        result = roll.mean()
-    return result.to_numpy(dtype=float).T
+    """NaN-aware O(N) rolling mean/std without constructing a DataFrame per program."""
+    source = np.asarray(values, dtype=float)
+    finite = np.isfinite(source)
+    clean = np.where(finite, source, 0.0)
+    count = np.cumsum(finite.astype(np.int32), axis=1)
+    total = np.cumsum(clean, axis=1)
+    square = np.cumsum(clean * clean, axis=1) if kind == "std" else None
+
+    def windowed(cumulative: np.ndarray) -> np.ndarray:
+        result = cumulative.copy()
+        if window < cumulative.shape[1]:
+            result[:, window:] = cumulative[:, window:] - cumulative[:, :-window]
+        return result
+
+    count_window = windowed(count)
+    total_window = windowed(total)
+    minimum = max(2, window // 2)
+    mean = np.divide(total_window, count_window, out=np.full(source.shape, np.nan), where=count_window >= minimum)
+    if kind == "mean":
+        return mean
+    if kind != "std" or square is None:
+        raise ValueError(f"unsupported rolling kind: {kind}")
+    square_window = windowed(square)
+    variance = np.divide(square_window, count_window, out=np.full(source.shape, np.nan), where=count_window >= minimum) - mean * mean
+    return np.sqrt(np.maximum(variance, 0.0))
 
 
 def _zscore(values: np.ndarray, window: int) -> np.ndarray:
@@ -347,15 +364,16 @@ def _event_age_from_state(state: np.ndarray) -> np.ndarray:
 
 
 def _residual(values: np.ndarray, reference: np.ndarray) -> np.ndarray:
-    out = np.full_like(values, np.nan, dtype=float)
-    for column in range(values.shape[1]):
-        x, y = reference[:, column], values[:, column]
-        valid = np.isfinite(x) & np.isfinite(y)
-        if valid.sum() < 3 or np.var(x[valid]) <= 1e-15:
-            continue
-        beta = np.cov(x[valid], y[valid], ddof=0)[0, 1] / np.var(x[valid])
-        out[valid, column] = y[valid] - beta * x[valid]
-    return out
+    x, y = np.asarray(reference, dtype=float), np.asarray(values, dtype=float)
+    valid = np.isfinite(x) & np.isfinite(y)
+    count = valid.sum(axis=0, keepdims=True)
+    x_clean, y_clean = np.where(valid, x, 0.0), np.where(valid, y, 0.0)
+    x_mean = np.divide(x_clean.sum(axis=0, keepdims=True), count, out=np.zeros((1, x.shape[1])), where=count > 0)
+    y_mean = np.divide(y_clean.sum(axis=0, keepdims=True), count, out=np.zeros((1, y.shape[1])), where=count > 0)
+    xc, yc = np.where(valid, x - x_mean, 0.0), np.where(valid, y - y_mean, 0.0)
+    variance = np.sum(xc * xc, axis=0, keepdims=True)
+    beta = np.divide(np.sum(xc * yc, axis=0, keepdims=True), variance, out=np.zeros((1, x.shape[1])), where=(count >= 3) & (variance > 1e-15))
+    return np.where(valid & (count >= 3) & (variance > 1e-15), y - beta * x, np.nan)
 
 
 def _primitive(values: np.ndarray, primitive: str, window: int, long_window: int, threshold: float) -> np.ndarray:
