@@ -240,6 +240,7 @@ Generated from registry SHA256: `{digest}`.
 - Phase A governance is accepted while `HOLD_RESEARCH` remains.
 - Phase B0 contracts are accepted for subject `{state['phase_b0_acceptance']['accepted_subject_sha']}`.
 - Production observation qualification is pending in B0P.
+- Binance UM core12 funding observation is production-qualified through 2026-04-30; cross-venue qualification is not claimed.
 - Phase B1 is frozen.
 
 ## Decision Timeline
@@ -247,6 +248,7 @@ Generated from registry SHA256: `{digest}`.
 {timeline}
 """
     items = "\n".join(f"- `{item['id']}` {item['name']}: `{item['status']}`" for item in state["b0_items"])
+    b0p_items = "\n".join(f"- `{item['id']}` {item['name']}: `{item['status']}`" for item in state["b0p_items"])
     state_doc = f"""# Crypto AlphaFactory Planning State
 
 Registry SHA256: `{digest}`.
@@ -284,9 +286,13 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 {items}
 
+## Phase B0P Items
+
+{b0p_items}
+
 ## Phase B0P Allowed
 
-""" + "\n".join(f"- {x}" for x in state["allowed_b0p"]) + "\n\n## Prohibited\n\n" + "\n".join(f"- {x}" for x in state["prohibited_b0"]) + f"\n\n## Next Acceptance Gate\n\n{state['next_acceptance_gate']}\n"
+""" + "\n".join(f"- {x}" for x in state["allowed_b0p"]) + "\n\n## Prohibited\n\n" + "\n".join(f"- {x}" for x in state["prohibited_b0p"]) + f"\n\n## Next Acceptance Gate\n\n{state['next_acceptance_gate']}\n"
     CURRENT_ARCH_PATH.write_text(current, encoding="utf-8")
     BOUNDARY_PATH.write_text(boundary, encoding="utf-8")
     EVOLUTION_PATH.write_text(evolution, encoding="utf-8")
@@ -357,6 +363,7 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "acceptance_attestation": relative(ATTESTATION_PATH), "test_evidence": test_evidence,
         "graph_control_nodes": len(registry["nodes"]), "graph_control_edges": len(registry["edges"]),
         "b0_items": state["b0_items"], "search_started": False, "forward_performance_read": False,
+        "b0p_items": state["b0p_items"],
         "artifact_index": relative(ARTIFACT_INDEX_PATH), "decision_log": relative(DECISION_LOG_PATH),
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

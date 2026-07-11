@@ -1,6 +1,6 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `83A6F87ACBB8CC285FF43BE6B956649342822873B6D4202B9B2EB16D4D4F9170`.
+Registry SHA256: `8CF30496E2493072A3B36416C5365BD3C6A771602C2D89C4EB671197852E40D1`.
 
 ## Formal Status
 
@@ -41,6 +41,12 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - `B0.6` Benchmark registry: `IMPLEMENTED`
 - `B0.7` Temporal/event primitive contract: `IMPLEMENTED`
 - `B0.8` Feature/State Fabric schema and cache contract: `IMPLEMENTED`
+
+## Phase B0P Items
+
+- `B0P.1` Funding production observation qualification: `QUALIFIED_BINANCE_UM_CORE12`
+- `B0P.2` Layered identity completion: `PENDING`
+- `B0P.3` Control-plane synchronization: `IN_PROGRESS`
 
 ## Phase B0P Allowed
 

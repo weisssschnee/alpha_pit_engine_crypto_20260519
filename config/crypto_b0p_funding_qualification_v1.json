@@ -1,0 +1,16 @@
+{
+  "qualification_id": "CRYPTO-B0P-FUNDING-PRODUCTION-QUALIFICATION-V1",
+  "venue": "BINANCE_UM",
+  "truth_manifest": "G:/AlphaFactory_CryptoData/manifests/fundingRate_core12_202401_current_manifest.csv",
+  "truth_manifest_sha256": "A362CCCD872C2EAA4F5F5FF8B1422F6945F025A7645A83D6CB813E8684B8DDD8",
+  "truth_allowed_columns": ["symbol", "fundingTime", "fundingRate"],
+  "detector_panel": "G:/AlphaFactory_CryptoData/gold/panels/crypto_core12_1h_v1_pre_forward_refresh_20260519.parquet",
+  "detector_panel_sha256": "35CCEB28015C5F2DF6A7659BBAE54AB4463FE5973ED3994C76E501822E036F0F",
+  "detector_allowed_columns": ["symbol", "timestamp", "bar_close_timestamp", "fundingTime_ms", "latest_known_funding_rate"],
+  "qualification_cutoff_utc": "2026-04-30T23:00:00Z",
+  "matching_tolerance": "1s",
+  "expected_symbols": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT", "DOGEUSDT", "ADAUSDT", "LINKUSDT", "AVAXUSDT", "LTCUSDT", "BCHUSDT", "SUIUSDT"],
+  "price_or_return_columns_allowed": false,
+  "alpha_reward_allowed": false,
+  "candidate_feedback_permission": "NONE"
+}

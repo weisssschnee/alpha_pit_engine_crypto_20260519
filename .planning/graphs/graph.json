@@ -4,7 +4,7 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "83A6F87ACBB8CC285FF43BE6B956649342822873B6D4202B9B2EB16D4D4F9170",
+      "registry_sha256": "8CF30496E2493072A3B36416C5365BD3C6A771602C2D89C4EB671197852E40D1",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 26,
@@ -176806,21 +176806,29 @@
       "status": "IMPLEMENTED",
       "implementation_path": [
         "alphafactory_crypto/funding_events.py",
+        "alphafactory_crypto/funding_qualification.py",
         "config/crypto_funding_event_contract_v1.json",
-        "scripts/crypto_b0_funding_event_audit.py"
+        "config/crypto_b0p_funding_qualification_v1.json",
+        "scripts/crypto_b0_funding_event_audit.py",
+        "scripts/crypto_b0p_funding_qualification.py"
       ],
-      "entrypoint": "canonicalize_funding_events",
+      "entrypoint": "canonicalize_funding_events / qualify_production_funding",
       "input": "native funding settlement records",
       "output": "canonical payment events and audit",
       "data_role": "event observation",
       "feedback_permission": "AUDIT_ONLY_THROUGH_B0P",
       "artifact_test": [
         "tests/test_funding_events.py",
+        "tests/test_funding_qualification.py",
         "runtime/a7b0_funding_event_contract_20260711/funding_event_audit_summary.json",
-        "reports/CRYPTO_B0_FUNDING_EVENT_CONTRACT_20260711.md"
+        "runtime/a7b0p_funding_qualification_20260711/funding_qualification_summary.json",
+        "runtime/a7b0p_funding_qualification_20260711/approved_funding_truth_set.csv",
+        "runtime/a7b0p_funding_qualification_20260711/funding_symbol_month_coverage.csv",
+        "reports/CRYPTO_B0_FUNDING_EVENT_CONTRACT_20260711.md",
+        "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "11D6EC1952E4A0EE8CEC9C970F3E3C78DEF90602500A0F26D547FCDA63996B3F",
-      "blocker": "production recall remains unmeasured without approved truth set",
+      "last_verified_sha": "8864ABDDB019147EFA0767A5F7A7A7F76205B9EC2D38120AED4FF9B30E36C6C3",
+      "blocker": "BINANCE_UM core12 production observation qualified through 2026-04-30; no cross-venue qualification is claimed",
       "weight": 1.0
     },
     {

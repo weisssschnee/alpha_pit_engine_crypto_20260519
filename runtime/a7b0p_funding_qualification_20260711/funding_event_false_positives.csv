@@ -1,0 +1,1 @@
+event_id,venue,instrument,funding_time_utc,observable_time_utc,maturity_time_utc,funding_rate,mark_price,payer_side,receiver_side,long_cashflow_rate,short_cashflow_rate,source_record_id

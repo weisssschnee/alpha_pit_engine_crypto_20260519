@@ -171,37 +171,43 @@ def audit_funding_event_detection(
     det = detected.copy().reset_index(drop=True)
     exp["funding_time_utc"] = _utc(exp["funding_time_utc"])
     det["funding_time_utc"] = _utc(det["funding_time_utc"])
-    used: set[int] = set()
     match_rows: list[dict[str, Any]] = []
     missed_indices: list[int] = []
-    for exp_idx, row in exp.iterrows():
-        candidates = det[
-            det["venue"].astype(str).eq(str(row["venue"]))
-            & det["instrument"].astype(str).eq(str(row["instrument"]))
-            & ~det.index.isin(used)
-        ].copy()
-        if candidates.empty:
-            missed_indices.append(exp_idx)
-            continue
-        candidates["timing_error"] = candidates["funding_time_utc"] - row["funding_time_utc"]
-        candidates["timing_error_abs"] = candidates["timing_error"].abs()
-        best_idx = int(candidates["timing_error_abs"].idxmin())
-        best = candidates.loc[best_idx]
-        if best["timing_error_abs"] > tol:
-            missed_indices.append(exp_idx)
-            continue
-        used.add(best_idx)
-        match_rows.append(
-            {
-                "expected_index": exp_idx,
-                "detected_index": best_idx,
-                "venue": row["venue"],
-                "instrument": row["instrument"],
-                "expected_time_utc": row["funding_time_utc"],
-                "detected_time_utc": best["funding_time_utc"],
-                "timing_error_seconds": float(best["timing_error"].total_seconds()),
-            }
-        )
+    used: set[int] = set()
+    exp_keys = exp[["venue", "instrument"]].astype(str).agg("|".join, axis=1)
+    det_keys = det[["venue", "instrument"]].astype(str).agg("|".join, axis=1)
+    for key in sorted(set(exp_keys)):
+        expected_group = exp.loc[exp_keys.eq(key)].sort_values("funding_time_utc")
+        detected_group = det.loc[det_keys.eq(key)].sort_values("funding_time_utc")
+        expected_rows = list(expected_group.iterrows())
+        detected_rows = list(detected_group.iterrows())
+        exp_pos = 0
+        det_pos = 0
+        while exp_pos < len(expected_rows) and det_pos < len(detected_rows):
+            exp_idx, expected_row = expected_rows[exp_pos]
+            det_idx, detected_row = detected_rows[det_pos]
+            timing_error = detected_row["funding_time_utc"] - expected_row["funding_time_utc"]
+            if abs(timing_error) <= tol:
+                used.add(int(det_idx))
+                match_rows.append(
+                    {
+                        "expected_index": int(exp_idx),
+                        "detected_index": int(det_idx),
+                        "venue": expected_row["venue"],
+                        "instrument": expected_row["instrument"],
+                        "expected_time_utc": expected_row["funding_time_utc"],
+                        "detected_time_utc": detected_row["funding_time_utc"],
+                        "timing_error_seconds": float(timing_error.total_seconds()),
+                    }
+                )
+                exp_pos += 1
+                det_pos += 1
+            elif detected_row["funding_time_utc"] < expected_row["funding_time_utc"] - tol:
+                det_pos += 1
+            else:
+                missed_indices.append(int(exp_idx))
+                exp_pos += 1
+        missed_indices.extend(int(index) for index, _ in expected_rows[exp_pos:])
     matches = pd.DataFrame(match_rows)
     missed = exp.loc[missed_indices].copy()
     false_positives = det.loc[~det.index.isin(used)].copy()
