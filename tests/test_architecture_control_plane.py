@@ -4,6 +4,7 @@ import unittest
 
 from scripts.crypto_architecture_control_plane import (
     BOUNDARY_PATH,
+    B0P_ATTESTATION_PATH,
     CURRENT_ARCH_PATH,
     GRAPH_PATH,
     REGISTRY_PATH,
@@ -18,6 +19,7 @@ from scripts.crypto_architecture_control_plane import (
 ATTESTATION_PATH = REGISTRY_PATH.parents[1] / "runtime" / "a7b0_control_plane_20260711" / "phase_b0_acceptance_attestation.json"
 B0P_MANIFEST_PATH = REGISTRY_PATH.parents[1] / "runtime" / "a7b0p_control_plane_20260711" / "b0p_qualification_manifest.json"
 ACCEPTED_SUBJECT_SHA = "9574d32053d1679d64179fe2d6607d1a05e13db9"
+B0P_ACCEPTED_SUBJECT_SHA = "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e"
 
 
 class ArchitectureControlPlaneTests(unittest.TestCase):
@@ -33,6 +35,8 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
             "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
         )
         self.assertEqual(state["phase_b1_status"], "PHASE_B1_FROZEN")
+        self.assertEqual(state["phase_b0p_acceptance"]["status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
+        self.assertEqual(state["active_stage"], "PHASE_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION")
 
         attestation = load_json(ATTESTATION_PATH)
         self.assertEqual(attestation["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
@@ -44,9 +48,22 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(attestation["test_evidence"]["result"], "39 passed in 22.15s")
         self.assertNotIn("acceptance_attestation_commit", attestation)
 
+        b0p_attestation = load_json(B0P_ATTESTATION_PATH)
+        self.assertEqual(b0p_attestation["accepted_subject_sha"], B0P_ACCEPTED_SUBJECT_SHA)
+        self.assertEqual(b0p_attestation["attestation_status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
+        self.assertEqual(
+            b0p_attestation["funding_status"],
+            "PRODUCTION_FUNDING_OBSERVATION_QUALIFIED_WITHIN_BINANCE_UM_CORE12",
+        )
+        self.assertEqual(b0p_attestation["activation_status"], "ACTIVATION_IDENTITY_NOT_QUALIFIED")
+        self.assertEqual(b0p_attestation["test_evidence"]["result"], "47 passed in 31.10s")
+        self.assertNotIn("acceptance_attestation_commit", b0p_attestation)
+
         manifest = load_json(RUN_MANIFEST_PATH)
         self.assertEqual(manifest["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
         self.assertNotIn("last_verified_remote_sha", manifest)
+        self.assertEqual(manifest["b0p_accepted_subject_sha"], B0P_ACCEPTED_SUBJECT_SHA)
+        self.assertEqual(manifest["b0p_acceptance_status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
 
         nodes = {node["id"]: node for node in registry["nodes"]}
         self.assertIn("contract implemented", nodes["feature_builder"]["blocker"])
@@ -65,6 +82,8 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         graph_control = graph["graph"]["architecture_control_plane"]
         self.assertEqual(graph_control["phase_status"], "PHASE_B0_CONTRACTS_ACCEPTED")
         self.assertEqual(graph_control["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
+        self.assertEqual(graph_control["b0p_accepted_subject_sha"], B0P_ACCEPTED_SUBJECT_SHA)
+        self.assertEqual(graph_control["b0p_acceptance_status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
         self.assertEqual(graph["built_at_accepted_subject"], ACCEPTED_SUBJECT_SHA)
         self.assertNotIn("built_at_commit", graph)
 

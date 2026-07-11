@@ -6,7 +6,7 @@
   "activation_status": "NOT_QUALIFIED_MISSING_FROZEN_SIGNAL_BEHAVIOR_ARTIFACT",
   "funding_summary": "runtime/a7b0p_funding_qualification_20260711/funding_qualification_summary.json",
   "identity_summary": "runtime/a7b0p_identity_qualification_20260711/identity_qualification_manifest.json",
-  "registry_sha256": "03435437A4846074050EA187F735AF7633661CEACF60586C02475C015565C7DB",
+  "registry_sha256": "0F283421A804BAF699FCE3F05270A49C9A60ECEEE379296DE254C025C8CBE1D3",
   "search_started": false,
   "forward_performance_read": false,
   "state_event_reward_connected": false,

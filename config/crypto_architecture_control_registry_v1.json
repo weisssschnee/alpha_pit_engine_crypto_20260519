@@ -553,7 +553,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "funding is qualified for Binance UM core12, but activation identity and clustering are not qualified because no frozen signal behavior matrix is present",
-      "last_verified_sha": "11305F2F1C537A6A14FC1941F46FBD6C29373D529A1C471F0234963C2AB63E82"
+      "last_verified_sha": "2FFA50E5B67AE7F80E04D0804815B4BA5849EB02EC7171F99EACC06D31D58C87"
     }
   ],
   "edges": [

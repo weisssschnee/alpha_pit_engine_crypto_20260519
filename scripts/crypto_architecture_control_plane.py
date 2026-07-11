@@ -20,6 +20,8 @@ ARTIFACT_INDEX_PATH = RUN_ROOT / "phase_a_b0_artifact_index.csv"
 ATTESTATION_PATH = RUN_ROOT / "phase_b0_acceptance_attestation.json"
 ACCEPTANCE_TEST_OUTPUT_PATH = RUN_ROOT / "phase_b0_acceptance_test_output.txt"
 B0P_MANIFEST_PATH = REPO / "runtime" / "a7b0p_control_plane_20260711" / "b0p_qualification_manifest.json"
+B0P_ATTESTATION_PATH = REPO / "runtime" / "a7b0p_control_plane_20260711" / "phase_b0p_partial_acceptance_attestation.json"
+B0P_ACCEPTANCE_TEST_OUTPUT_PATH = REPO / "runtime" / "a7b0p_control_plane_20260711" / "phase_b0p_partial_acceptance_test_output.txt"
 B0P_FUNDING_SUMMARY_PATH = REPO / "runtime" / "a7b0p_funding_qualification_20260711" / "funding_qualification_summary.json"
 B0P_IDENTITY_SUMMARY_PATH = REPO / "runtime" / "a7b0p_identity_qualification_20260711" / "identity_qualification_manifest.json"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
@@ -90,6 +92,21 @@ def acceptance_test_evidence(state: dict[str, Any]) -> dict[str, str]:
         "result": result,
         "output_path": relative(ACCEPTANCE_TEST_OUTPUT_PATH),
         "output_sha256": sha256_normalized_text_file(ACCEPTANCE_TEST_OUTPUT_PATH),
+    }
+
+
+def b0p_acceptance_test_evidence(state: dict[str, Any]) -> dict[str, str]:
+    normalized = B0P_ACCEPTANCE_TEST_OUTPUT_PATH.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    lines = [line.strip() for line in normalized.splitlines() if line.strip()]
+    result = lines[-1] if lines else ""
+    if not re.fullmatch(r"47 passed in [0-9]+(?:\.[0-9]+)?s", result):
+        raise ValueError("B0P partial-acceptance output does not record exactly 47 passing tests")
+    return {
+        "subject_sha": state["phase_b0p_acceptance"]["accepted_subject_sha"],
+        "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
+        "result": result,
+        "output_path": relative(B0P_ACCEPTANCE_TEST_OUTPUT_PATH),
+        "output_sha256": sha256_normalized_text_file(B0P_ACCEPTANCE_TEST_OUTPUT_PATH),
     }
 
 
@@ -188,7 +205,7 @@ def render_documents(
 
 Generated from `{relative(REGISTRY_PATH)}`. Registry SHA256: `{digest}`.
 
-Status: `{state['current_phase']}` / `{state['production_observation_qualification_status']}` / `{state['research_status']}` / `{state['phase_b1_status']}` / `{state['forward_data_status']}`.
+Status: `{state['current_phase']}` / `{state['phase_b0p_acceptance']['status']}` / `{state['production_observation_qualification_status']}` / `{state['research_status']}` / `{state['phase_b1_status']}` / `{state['forward_data_status']}`.
 
 Authority: `{relative(REGISTRY_PATH)}` is the machine-readable architecture authority; `graph.json` is its deterministic graph view; this file is the human-readable generated view. Raw graphify is unavailable, so `graph.json` retains the prior navigation graph plus a deterministic `control_*` overlay.
 
@@ -247,6 +264,7 @@ Generated from registry SHA256: `{digest}`.
 - Phase A governance is accepted while `HOLD_RESEARCH` remains.
 - Phase B0 contracts are accepted for subject `{state['phase_b0_acceptance']['accepted_subject_sha']}`.
 - B0P is stopped at `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED` because funding qualified but activation identity did not.
+- B0P subject `{state['phase_b0p_acceptance']['accepted_subject_sha']}` is independently attested as `{state['phase_b0p_acceptance']['status']}`; only frozen signal-behaviour qualification is unlocked.
 - Binance UM core12 funding observation is production-qualified through 2026-04-30; cross-venue qualification is not claimed.
 - Phase B1 is frozen.
 
@@ -267,6 +285,7 @@ Registry SHA256: `{digest}`.
 - `{state['research_status']}`
 - Current phase: `{state['current_phase']}`
 - Production observation qualification: `{state['production_observation_qualification_status']}`
+- Phase B0P acceptance: `{state['phase_b0p_acceptance']['status']}`
 - Active stage: `{state['active_stage']}`
 - Phase B1: `{state['phase_b1_status']}`
 - Forward data: `{state['forward_data_status']}`
@@ -297,9 +316,18 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 {b0p_items}
 
-## Phase B0P Allowed
+## Phase B0P Partial Acceptance
 
-""" + "\n".join(f"- {x}" for x in state["allowed_b0p"]) + "\n\n## Prohibited\n\n" + "\n".join(f"- {x}" for x in state["prohibited_b0p"]) + f"\n\n## Next Acceptance Gate\n\n{state['next_acceptance_gate']}\n"
+- Accepted subject SHA: `{state['phase_b0p_acceptance']['accepted_subject_sha']}`
+- Accepted subject remote ref: `{state['phase_b0p_acceptance']['accepted_subject_remote_ref']}`
+- Attestation artifact: `{state['phase_b0p_acceptance']['attestation_path']}`
+- Funding: `{state['phase_b0p_acceptance']['funding_status']}`
+- Identity: `{state['phase_b0p_acceptance']['identity_status']}`
+- Activation: `{state['phase_b0p_acceptance']['activation_status']}`
+
+## Phase B0A Allowed
+
+""" + "\n".join(f"- {x}" for x in state["allowed_b0a"]) + "\n\n## Prohibited\n\n" + "\n".join(f"- {x}" for x in state["prohibited_b0a"]) + f"\n\n## Next Acceptance Gate\n\n{state['next_acceptance_gate']}\n"
     return {
         CURRENT_ARCH_PATH: current,
         BOUNDARY_PATH: boundary,
@@ -327,6 +355,8 @@ def artifact_paths(registry: dict[str, Any]) -> set[Path]:
         ATTESTATION_PATH,
         ACCEPTANCE_TEST_OUTPUT_PATH,
         B0P_MANIFEST_PATH,
+        B0P_ATTESTATION_PATH,
+        B0P_ACCEPTANCE_TEST_OUTPUT_PATH,
     }
     for node in registry["nodes"]:
         paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
@@ -360,6 +390,8 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "production_observation_qualification_status": state["production_observation_qualification_status"],
         "active_stage": state["active_stage"],
         "accepted_subject_sha": state["phase_b0_acceptance"]["accepted_subject_sha"],
+        "b0p_acceptance_status": state["phase_b0p_acceptance"]["status"],
+        "b0p_accepted_subject_sha": state["phase_b0p_acceptance"]["accepted_subject_sha"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -412,6 +444,25 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
     }
     B0P_MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
     B0P_MANIFEST_PATH.write_text(json.dumps(b0p_manifest, indent=2) + "\n", encoding="utf-8")
+    b0p_acceptance = state["phase_b0p_acceptance"]
+    b0p_test_evidence = b0p_acceptance_test_evidence(state)
+    b0p_attestation = {
+        "attestation_id": "PHASE-B0P-PARTIAL-ACCEPTANCE-20260711",
+        "attestation_status": b0p_acceptance["status"],
+        "accepted_subject_sha": b0p_acceptance["accepted_subject_sha"],
+        "accepted_subject_remote_ref": b0p_acceptance["accepted_subject_remote_ref"],
+        "attestation_commit_policy": b0p_acceptance["attestation_commit_policy"],
+        "funding_status": b0p_acceptance["funding_status"],
+        "identity_status": b0p_acceptance["identity_status"],
+        "activation_status": b0p_acceptance["activation_status"],
+        "research_status": state["research_status"],
+        "phase_b1_status": state["phase_b1_status"],
+        "forward_data_status": state["forward_data_status"],
+        "authorized_next_stage": "PHASE_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION",
+        "test_evidence": b0p_test_evidence,
+        "scope": "independent partial acceptance of the fixed B0P subject; no B0P implementation logic changed",
+    }
+    B0P_ATTESTATION_PATH.write_text(json.dumps(b0p_attestation, indent=2) + "\n", encoding="utf-8")
     manifest = {
         "manifest_id": "PHASE-A-B0-B0P-RUN-MANIFEST-20260711", "phase_a_status": state["phase_a_status"],
         "collapse_status": state["collapse_status"], "research_status": state["research_status"],
@@ -424,6 +475,10 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "graph_control_nodes": len(registry["nodes"]), "graph_control_edges": len(registry["edges"]),
         "b0_items": state["b0_items"], "search_started": False, "forward_performance_read": False,
         "b0p_items": state["b0p_items"],
+        "b0p_acceptance_status": b0p_acceptance["status"],
+        "b0p_accepted_subject_sha": b0p_acceptance["accepted_subject_sha"],
+        "b0p_acceptance_attestation": relative(B0P_ATTESTATION_PATH),
+        "b0p_acceptance_test_evidence": b0p_test_evidence,
         "artifact_index": relative(ARTIFACT_INDEX_PATH), "decision_log": relative(DECISION_LOG_PATH),
         "b0p_qualification_manifest": relative(B0P_MANIFEST_PATH),
     }
@@ -530,6 +585,30 @@ def validate_outputs(registry: dict[str, Any]) -> None:
     evidence = attestation.get("test_evidence", {})
     if evidence != acceptance_test_evidence(state) or manifest.get("test_evidence") != evidence:
         raise ValueError("acceptance test evidence mismatch")
+    b0p_acceptance = state["phase_b0p_acceptance"]
+    b0p_subject_sha = b0p_acceptance["accepted_subject_sha"]
+    if len(b0p_subject_sha) != 40 or any(char not in "0123456789abcdef" for char in b0p_subject_sha):
+        raise ValueError("invalid B0P accepted subject SHA")
+    if subprocess.run(
+        ["git", "merge-base", "--is-ancestor", b0p_subject_sha, "HEAD"], cwd=REPO, check=False
+    ).returncode:
+        raise ValueError("B0P accepted subject is not an ancestor of the acceptance closure")
+    b0p_attestation = load_json(B0P_ATTESTATION_PATH)
+    if b0p_attestation.get("accepted_subject_sha") != b0p_subject_sha:
+        raise ValueError("B0P partial-acceptance attestation subject mismatch")
+    if "acceptance_attestation_commit" in b0p_attestation:
+        raise ValueError("B0P partial-acceptance attestation must not self-record its commit SHA")
+    b0p_evidence = b0p_attestation.get("test_evidence", {})
+    if b0p_evidence != b0p_acceptance_test_evidence(state):
+        raise ValueError("B0P partial-acceptance test evidence mismatch")
+    if manifest.get("b0p_acceptance_status") != b0p_acceptance["status"]:
+        raise ValueError("run manifest B0P partial-acceptance status mismatch")
+    if manifest.get("b0p_accepted_subject_sha") != b0p_subject_sha:
+        raise ValueError("run manifest B0P accepted subject mismatch")
+    if manifest.get("b0p_acceptance_attestation") != relative(B0P_ATTESTATION_PATH):
+        raise ValueError("run manifest B0P acceptance attestation mismatch")
+    if manifest.get("b0p_acceptance_test_evidence") != b0p_evidence:
+        raise ValueError("run manifest B0P acceptance evidence mismatch")
     with ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
         index_rows = list(csv.DictReader(handle))
     indexed_paths = {row["path"] for row in index_rows}

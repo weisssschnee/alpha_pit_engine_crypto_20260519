@@ -1,0 +1,22 @@
+{
+  "attestation_id": "PHASE-B0P-PARTIAL-ACCEPTANCE-20260711",
+  "attestation_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
+  "accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
+  "accepted_subject_remote_ref": "refs/heads/audit/evalreset-collapse-forensics-20260711",
+  "attestation_commit_policy": "INDEPENDENT_FOLLOWUP_COMMIT_NO_SELF_SHA",
+  "funding_status": "PRODUCTION_FUNDING_OBSERVATION_QUALIFIED_WITHIN_BINANCE_UM_CORE12",
+  "identity_status": "LAYERED_IDENTITY_PARTIALLY_QUALIFIED",
+  "activation_status": "ACTIVATION_IDENTITY_NOT_QUALIFIED",
+  "research_status": "HOLD_RESEARCH",
+  "phase_b1_status": "PHASE_B1_FROZEN",
+  "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
+  "authorized_next_stage": "PHASE_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION",
+  "test_evidence": {
+    "subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
+    "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
+    "result": "47 passed in 31.10s",
+    "output_path": "runtime/a7b0p_control_plane_20260711/phase_b0p_partial_acceptance_test_output.txt",
+    "output_sha256": "BF79830BDDCBAC81CB54590FD60B0028A3DBAA521046C37DB4AD825A9FEFEB00"
+  },
+  "scope": "independent partial acceptance of the fixed B0P subject; no B0P implementation logic changed"
+}

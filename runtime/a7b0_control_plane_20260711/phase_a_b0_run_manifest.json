@@ -6,9 +6,9 @@
   "current_phase": "PHASE_B0_CONTRACTS_ACCEPTED",
   "phase_b1_status": "PHASE_B1_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
-  "registry_sha256": "03435437A4846074050EA187F735AF7633661CEACF60586C02475C015565C7DB",
+  "registry_sha256": "0F283421A804BAF699FCE3F05270A49C9A60ECEEE379296DE254C025C8CBE1D3",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-  "active_stage": "PHASE_B0P_COMPLETE_STOPPED",
+  "active_stage": "PHASE_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION",
   "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
   "acceptance_attestation": "runtime/a7b0_control_plane_20260711/phase_b0_acceptance_attestation.json",
   "test_evidence": {
@@ -81,6 +81,16 @@
       "status": "IMPLEMENTED"
     }
   ],
+  "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
+  "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
+  "b0p_acceptance_attestation": "runtime/a7b0p_control_plane_20260711/phase_b0p_partial_acceptance_attestation.json",
+  "b0p_acceptance_test_evidence": {
+    "subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
+    "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
+    "result": "47 passed in 31.10s",
+    "output_path": "runtime/a7b0p_control_plane_20260711/phase_b0p_partial_acceptance_test_output.txt",
+    "output_sha256": "BF79830BDDCBAC81CB54590FD60B0028A3DBAA521046C37DB4AD825A9FEFEB00"
+  },
   "artifact_index": "runtime/a7b0_control_plane_20260711/phase_a_b0_artifact_index.csv",
   "decision_log": "runtime/a7b0_control_plane_20260711/a7evalreset_decision_change_log.jsonl",
   "b0p_qualification_manifest": "runtime/a7b0p_control_plane_20260711/b0p_qualification_manifest.json"

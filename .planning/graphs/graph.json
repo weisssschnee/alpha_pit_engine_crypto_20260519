@@ -4,15 +4,17 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "03435437A4846074050EA187F735AF7633661CEACF60586C02475C015565C7DB",
+      "registry_sha256": "0F283421A804BAF699FCE3F05270A49C9A60ECEEE379296DE254C025C8CBE1D3",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 27,
       "control_edge_count": 27,
       "phase_status": "PHASE_B0_CONTRACTS_ACCEPTED",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "PHASE_B0P_COMPLETE_STOPPED",
+      "active_stage": "PHASE_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
+      "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
+      "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
       "research_status": "HOLD_RESEARCH",
       "phase_b1_status": "PHASE_B1_FROZEN",
       "forward_data_status": "SEALED_NO_NEW_FORWARD_READ"
@@ -177312,7 +177314,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "11305F2F1C537A6A14FC1941F46FBD6C29373D529A1C471F0234963C2AB63E82",
+      "last_verified_sha": "2FFA50E5B67AE7F80E04D0804815B4BA5849EB02EC7171F99EACC06D31D58C87",
       "blocker": "funding is qualified for Binance UM core12, but activation identity and clustering are not qualified because no frozen signal behavior matrix is present",
       "weight": 1.0
     }

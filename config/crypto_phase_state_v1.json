@@ -4,7 +4,7 @@
   "research_status": "HOLD_RESEARCH",
   "current_phase": "PHASE_B0_CONTRACTS_ACCEPTED",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-  "active_stage": "PHASE_B0P_COMPLETE_STOPPED",
+  "active_stage": "PHASE_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION",
   "phase_b1_status": "PHASE_B1_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "phase_a_remote_sync": {
@@ -23,14 +23,24 @@
     "production_observation_qualification_status_at_acceptance": "PHASE_B0_PRODUCTION_OBSERVATION_QUALIFICATION_PENDING",
     "status": "ATTESTED_PHASE_B0_CONTRACTS_ACCEPTED"
   },
-  "allowed_b0p": [
-    "approved funding truth-set qualification without price returns or Alpha reward",
-    "activation identity and activation clustering from signal behavior only",
-    "PnL/regime identity from spent historical data for diagnostic-only use",
-    "economic hypothesis identity from field, structure, and mechanism semantics only",
-    "control-plane and identity artifact synchronization"
+  "phase_b0p_acceptance": {
+    "accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
+    "accepted_subject_remote_ref": "refs/heads/audit/evalreset-collapse-forensics-20260711",
+    "attestation_path": "runtime/a7b0p_control_plane_20260711/phase_b0p_partial_acceptance_attestation.json",
+    "attestation_commit_policy": "INDEPENDENT_FOLLOWUP_COMMIT_NO_SELF_SHA",
+    "status": "PHASE_B0P_PARTIALLY_ACCEPTED",
+    "funding_status": "PRODUCTION_FUNDING_OBSERVATION_QUALIFIED_WITHIN_BINANCE_UM_CORE12",
+    "identity_status": "LAYERED_IDENTITY_PARTIALLY_QUALIFIED",
+    "activation_status": "ACTIVATION_IDENTITY_NOT_QUALIFIED"
+  },
+  "allowed_b0a": [
+    "freeze existing accepted/candidate inputs and their hashes",
+    "materialize signal behaviour from development and pre-forward observations only",
+    "build activation and behaviour identities without returns, reward, or candidate changes",
+    "verify deterministic materialization and coordinate-order invariance",
+    "synchronize control-plane and B0A evidence artifacts"
   ],
-  "prohibited_b0p": [
+  "prohibited_b0a": [
     "search execution",
     "new generator fields",
     "State/event to reward",
@@ -55,5 +65,5 @@
     {"id":"B0P.2","name":"Layered identity completion","status":"PARTIALLY_QUALIFIED_ACTIVATION_ARTIFACT_MISSING"},
     {"id":"B0P.3","name":"Control-plane synchronization","status":"IMPLEMENTED"}
   ],
-  "next_acceptance_gate": "B0P is stopped at PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED. Any B1 or activation-artifact work requires explicit authorization; large search and alpha-ready claims remain prohibited."
+  "next_acceptance_gate": "Complete B0A frozen signal-behaviour qualification and stop with FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED, FROZEN_SIGNAL_BEHAVIOUR_PARTIALLY_QUALIFIED, or FROZEN_SIGNAL_BEHAVIOUR_NOT_REPRODUCIBLE. B1D requires a separate acceptance."
 }

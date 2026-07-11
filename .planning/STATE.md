@@ -1,6 +1,6 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `03435437A4846074050EA187F735AF7633661CEACF60586C02475C015565C7DB`.
+Registry SHA256: `0F283421A804BAF699FCE3F05270A49C9A60ECEEE379296DE254C025C8CBE1D3`.
 
 ## Formal Status
 
@@ -9,7 +9,8 @@ Registry SHA256: `03435437A4846074050EA187F735AF7633661CEACF60586C02475C015565C7
 - `HOLD_RESEARCH`
 - Current phase: `PHASE_B0_CONTRACTS_ACCEPTED`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
-- Active stage: `PHASE_B0P_COMPLETE_STOPPED`
+- Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
+- Active stage: `PHASE_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION`
 - Phase B1: `PHASE_B1_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -48,13 +49,22 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - `B0P.2` Layered identity completion: `PARTIALLY_QUALIFIED_ACTIVATION_ARTIFACT_MISSING`
 - `B0P.3` Control-plane synchronization: `IMPLEMENTED`
 
-## Phase B0P Allowed
+## Phase B0P Partial Acceptance
 
-- approved funding truth-set qualification without price returns or Alpha reward
-- activation identity and activation clustering from signal behavior only
-- PnL/regime identity from spent historical data for diagnostic-only use
-- economic hypothesis identity from field, structure, and mechanism semantics only
-- control-plane and identity artifact synchronization
+- Accepted subject SHA: `5219e7899cad1be83f9bcf2ec520ed1ff5037f9e`
+- Accepted subject remote ref: `refs/heads/audit/evalreset-collapse-forensics-20260711`
+- Attestation artifact: `runtime/a7b0p_control_plane_20260711/phase_b0p_partial_acceptance_attestation.json`
+- Funding: `PRODUCTION_FUNDING_OBSERVATION_QUALIFIED_WITHIN_BINANCE_UM_CORE12`
+- Identity: `LAYERED_IDENTITY_PARTIALLY_QUALIFIED`
+- Activation: `ACTIVATION_IDENTITY_NOT_QUALIFIED`
+
+## Phase B0A Allowed
+
+- freeze existing accepted/candidate inputs and their hashes
+- materialize signal behaviour from development and pre-forward observations only
+- build activation and behaviour identities without returns, reward, or candidate changes
+- verify deterministic materialization and coordinate-order invariance
+- synchronize control-plane and B0A evidence artifacts
 
 ## Prohibited
 
@@ -69,4 +79,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-B0P is stopped at PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED. Any B1 or activation-artifact work requires explicit authorization; large search and alpha-ready claims remain prohibited.
+Complete B0A frozen signal-behaviour qualification and stop with FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED, FROZEN_SIGNAL_BEHAVIOUR_PARTIALLY_QUALIFIED, or FROZEN_SIGNAL_BEHAVIOUR_NOT_REPRODUCIBLE. B1D requires a separate acceptance.
