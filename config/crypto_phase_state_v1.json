@@ -2,10 +2,10 @@
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
   "research_status": "RESEARCH_MODE_FROZEN_DEVELOPMENT_EPOCH_ONLY",
-  "current_phase": "CRYPTO_NEXTGEN_SEARCH_EPOCH0_EXECUTION_COMPLETED_PENDING_CLOSURE",
+  "current_phase": "FROZEN_DEVELOPMENT_EPOCH_COMPLETED",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
-  "active_stage": "EPOCH0_EXECUTION_COMPLETED_INDEPENDENT_CLOSURE_VALIDATED",
+  "active_stage": "EPOCH0_CLOSED_WAITING_INDEPENDENT_SEARCH_ENGINE_REVISION_AUTHORIZATION",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "formal_search_status": "FORMAL_SEARCH_FROZEN",
@@ -187,5 +187,5 @@
     "cross_epoch_memory": false,
     "forward_read": false
   },
-  "next_acceptance_gate": "Close Epoch-0 with the independently validated recommendation REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH. Do not rerun, rotate, promote, open OOS, or persist adaptive memory. FORMAL_SEARCH_FROZEN, ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN, FORWARD_SEALED, and NO_CANDIDATE_PROMOTION remain in force."
+  "next_acceptance_gate": "Wait for independent authorization to revise search/admission/reward before any repeated frozen development epoch. Do not rerun, rotate, promote, open OOS, or persist adaptive memory. FORMAL_SEARCH_FROZEN, ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN, FORWARD_SEALED, and NO_CANDIDATE_PROMOTION remain in force."
 }

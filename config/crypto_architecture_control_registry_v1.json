@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "43954DF6120F8E4BF5FEDB5835C4316B9A3F0865F5F442F4830199EC6D3FF94C"
+      "last_verified_sha": "AEA897EAB3CAF2D14A9133D31BA230A6FFE564732A8DE076C484767C311E73B3"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "61085B658D9AD0F685EC2700B3676D2B125D7E3859714EB3A2240B6291A8A8CE"
+      "last_verified_sha": "5FC9325FBB414A918762CA057A8F8F904162DB4141656A639D8A83F11D464095"
     },
     {
       "id": "nextgen_mechanism_registry",

@@ -4,14 +4,14 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "D54D4C53D1F4CB7E9849160C5D40714A27EE62A2D469D6942F40D15C9148B292",
+      "registry_sha256": "39ED8B73958330A44D42A06299FE0DD48D66E5E76F3C643DF1645CE067AC79AC",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 43,
       "control_edge_count": 74,
-      "phase_status": "CRYPTO_NEXTGEN_SEARCH_EPOCH0_EXECUTION_COMPLETED_PENDING_CLOSURE",
+      "phase_status": "FROZEN_DEVELOPMENT_EPOCH_COMPLETED",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "EPOCH0_EXECUTION_COMPLETED_INDEPENDENT_CLOSURE_VALIDATED",
+      "active_stage": "EPOCH0_CLOSED_WAITING_INDEPENDENT_SEARCH_ENGINE_REVISION_AUTHORIZATION",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
@@ -177337,7 +177337,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "43954DF6120F8E4BF5FEDB5835C4316B9A3F0865F5F442F4830199EC6D3FF94C",
+      "last_verified_sha": "AEA897EAB3CAF2D14A9133D31BA230A6FFE564732A8DE076C484767C311E73B3",
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
       "weight": 1.0
     },
@@ -177640,7 +177640,7 @@
         "runtime/b1s_canary_20260711/B1S_CANARY_COMPACT_RESULT.md",
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
-      "last_verified_sha": "61085B658D9AD0F685EC2700B3676D2B125D7E3859714EB3A2240B6291A8A8CE",
+      "last_verified_sha": "5FC9325FBB414A918762CA057A8F8F904162DB4141656A639D8A83F11D464095",
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
       "weight": 1.0
     },

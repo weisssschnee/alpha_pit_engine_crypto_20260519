@@ -41,14 +41,14 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         validate_outputs(registry)
 
         state = load_json(STATE_SOURCE_PATH)
-        self.assertEqual(state["current_phase"], "CRYPTO_NEXTGEN_SEARCH_EPOCH0_EXECUTION_COMPLETED_PENDING_CLOSURE")
+        self.assertEqual(state["current_phase"], "FROZEN_DEVELOPMENT_EPOCH_COMPLETED")
         self.assertEqual(
             state["production_observation_qualification_status"],
             "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
         )
         self.assertEqual(state["phase_b1_status"], "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN")
         self.assertEqual(state["phase_b0p_acceptance"]["status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
-        self.assertEqual(state["active_stage"], "EPOCH0_EXECUTION_COMPLETED_INDEPENDENT_CLOSURE_VALIDATED")
+        self.assertEqual(state["active_stage"], "EPOCH0_CLOSED_WAITING_INDEPENDENT_SEARCH_ENGINE_REVISION_AUTHORIZATION")
         self.assertEqual(state["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
         self.assertEqual(state["phase_b0a_acceptance"]["accepted_subject_sha"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(state["formal_search_status"], "FORMAL_SEARCH_FROZEN")
@@ -100,12 +100,12 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertLess(authority.index("deterministic graph view"), authority.index("human-readable generated view"))
 
         current_architecture = CURRENT_ARCH_PATH.read_text(encoding="utf-8")
-        self.assertIn("CRYPTO_NEXTGEN_SEARCH_EPOCH0_EXECUTION_COMPLETED_PENDING_CLOSURE", current_architecture)
+        self.assertIn("FROZEN_DEVELOPMENT_EPOCH_COMPLETED", current_architecture)
         self.assertIn("PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED", current_architecture)
 
         graph = load_json(GRAPH_PATH)
         graph_control = graph["graph"]["architecture_control_plane"]
-        self.assertEqual(graph_control["phase_status"], "CRYPTO_NEXTGEN_SEARCH_EPOCH0_EXECUTION_COMPLETED_PENDING_CLOSURE")
+        self.assertEqual(graph_control["phase_status"], "FROZEN_DEVELOPMENT_EPOCH_COMPLETED")
         self.assertEqual(graph_control["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph_control["b0p_accepted_subject_sha"], B0P_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph_control["b0p_acceptance_status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
