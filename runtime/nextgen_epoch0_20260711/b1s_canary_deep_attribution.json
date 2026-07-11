@@ -1,0 +1,314 @@
+{
+  "actionable_changes": [
+    "replace single-operator adaptive collapse with separate CEM, multi-step UCT/MCTS, evolutionary and surrogate lanes",
+    "expand funding into level/change/surprise/event-age/state-transition programs and remove 128-proposal alias cycle",
+    "use semantic-volume round-robin and exact-identity voting before performance selection",
+    "replace single development score with hard gates, full multi-objective vectors and Pareto archive",
+    "run simple benchmarks under the same development/cost contract and report incremental contribution",
+    "emit compatible within-Epoch behaviour clusters and static historical-reference comparability diagnostics"
+  ],
+  "adaptive": [
+    {
+      "exact_identities": 39,
+      "legal_rate": 0.8125,
+      "operator_distribution": {
+        "blend": 14,
+        "delta": 14,
+        "multiscale": 14,
+        "orthogonal": 8,
+        "slope": 14
+      },
+      "proposals": 64,
+      "proxy_median": 0.6844889180658258,
+      "segment": "pilot"
+    },
+    {
+      "exact_identities": 159,
+      "legal_rate": 0.984375,
+      "operator_distribution": {
+        "blend": 448
+      },
+      "proposals": 448,
+      "proxy_median": 1.1029887941735224,
+      "segment": "post_adaptation"
+    }
+  ],
+  "admission_comparison": [
+    {
+      "behaviour_overlap": 9,
+      "exact_overlap": 9,
+      "global_behaviour_clusters": 29,
+      "global_exact_identities": 32,
+      "global_unique_behaviour": 20,
+      "panel_id": "bbo_micro",
+      "stratified_behaviour_clusters": 30,
+      "stratified_exact_identities": 32,
+      "stratified_unique_behaviour": 21
+    },
+    {
+      "behaviour_overlap": 62,
+      "exact_overlap": 91,
+      "global_behaviour_clusters": 153,
+      "global_exact_identities": 288,
+      "global_unique_behaviour": 91,
+      "panel_id": "main",
+      "stratified_behaviour_clusters": 140,
+      "stratified_exact_identities": 210,
+      "stratified_unique_behaviour": 78
+    }
+  ],
+  "funding_diagnosis": {
+    "canonical": 240,
+    "conclusion": "GENERATOR_AND_PRIMITIVE_CAPACITY_LIMIT_NOT_ECONOMIC_SPACE_PROOF",
+    "exact": 27,
+    "legal": 182,
+    "marginal_quarters": [
+      {
+        "cumulative_exact": 27,
+        "new_exact": 27,
+        "quarter": 1
+      },
+      {
+        "cumulative_exact": 27,
+        "new_exact": 0,
+        "quarter": 2
+      },
+      {
+        "cumulative_exact": 27,
+        "new_exact": 0,
+        "quarter": 3
+      },
+      {
+        "cumulative_exact": 27,
+        "new_exact": 0,
+        "quarter": 4
+      }
+    ],
+    "operator_capacity": {
+      "delta": {
+        "exact": 10,
+        "legal": 40,
+        "proposals": 96
+      },
+      "event_age": {
+        "exact": 1,
+        "legal": 72,
+        "proposals": 108
+      },
+      "event_window": {
+        "exact": 0,
+        "legal": 0,
+        "proposals": 108
+      },
+      "persistence": {
+        "exact": 16,
+        "legal": 70,
+        "proposals": 104
+      },
+      "transition": {
+        "exact": 0,
+        "legal": 0,
+        "proposals": 96
+      }
+    },
+    "proposals": 512,
+    "seed_exact_overlap": 27,
+    "seed_exact_union": 27
+  },
+  "historical_cluster_comparability": {
+    "b0a_clusters": 4,
+    "behaviour_id_overlap": 0,
+    "conclusion": "IDENTITY_SCHEMES_ARE_NOT_DIRECTLY_COMPARABLE; EPOCH0_MUST_EMIT_COMPATIBLE_REFERENCE_DISTANCE",
+    "exact_id_overlap": 0
+  },
+  "lanes": [
+    {
+      "activation_identities": 32,
+      "behaviour_clusters": 30,
+      "canonical_identities": 256,
+      "canonical_to_exact_rate": 0.37109375,
+      "economic_hypothesis_coverage": 4,
+      "exact_identities": 95,
+      "lane_id": "bbo_temporal_event_micro",
+      "legal_rate": 0.95703125,
+      "n_eff": 26.94736842105263,
+      "new_behaviour_clusters_per_strict_evaluation": 0.9375,
+      "panel_id": "bbo_micro",
+      "proposals": 512,
+      "strict_survivor_efficiency": 0.0,
+      "strict_survivors": 0,
+      "top_cluster_share": 0.09375
+    },
+    {
+      "activation_identities": 18,
+      "behaviour_clusters": 22,
+      "canonical_identities": 306,
+      "canonical_to_exact_rate": 0.6013071895424836,
+      "economic_hypothesis_coverage": 3,
+      "exact_identities": 184,
+      "lane_id": "adaptive_challenger",
+      "legal_rate": 0.962890625,
+      "n_eff": 16.516129032258064,
+      "new_behaviour_clusters_per_strict_evaluation": 0.6875,
+      "panel_id": "main",
+      "proposals": 512,
+      "strict_survivor_efficiency": 0.0,
+      "strict_survivors": 0,
+      "top_cluster_share": 0.125
+    },
+    {
+      "activation_identities": 25,
+      "behaviour_clusters": 23,
+      "canonical_identities": 256,
+      "canonical_to_exact_rate": 0.46875,
+      "economic_hypothesis_coverage": 3,
+      "exact_identities": 120,
+      "lane_id": "basis_oi_state",
+      "legal_rate": 0.94921875,
+      "n_eff": 17.655172413793103,
+      "new_behaviour_clusters_per_strict_evaluation": 0.71875,
+      "panel_id": "main",
+      "proposals": 512,
+      "strict_survivor_efficiency": 0.0,
+      "strict_survivors": 0,
+      "top_cluster_share": 0.125
+    },
+    {
+      "activation_identities": 25,
+      "behaviour_clusters": 15,
+      "canonical_identities": 256,
+      "canonical_to_exact_rate": 0.42578125,
+      "economic_hypothesis_coverage": 4,
+      "exact_identities": 109,
+      "lane_id": "competitor_reproduction",
+      "legal_rate": 0.74609375,
+      "n_eff": 8.39344262295082,
+      "new_behaviour_clusters_per_strict_evaluation": 0.46875,
+      "panel_id": "main",
+      "proposals": 512,
+      "strict_survivor_efficiency": 0.0,
+      "strict_survivors": 0,
+      "top_cluster_share": 0.21875
+    },
+    {
+      "activation_identities": 27,
+      "behaviour_clusters": 28,
+      "canonical_identities": 256,
+      "canonical_to_exact_rate": 0.18359375,
+      "economic_hypothesis_coverage": 3,
+      "exact_identities": 47,
+      "lane_id": "cross_asset_state",
+      "legal_rate": 0.78125,
+      "n_eff": 24.38095238095238,
+      "new_behaviour_clusters_per_strict_evaluation": 0.875,
+      "panel_id": "main",
+      "proposals": 512,
+      "strict_survivor_efficiency": 0.0,
+      "strict_survivors": 0,
+      "top_cluster_share": 0.09375
+    },
+    {
+      "activation_identities": 27,
+      "behaviour_clusters": 27,
+      "canonical_identities": 240,
+      "canonical_to_exact_rate": 0.1125,
+      "economic_hypothesis_coverage": 2,
+      "exact_identities": 27,
+      "lane_id": "funding_event",
+      "legal_rate": 0.35546875,
+      "n_eff": 27.0,
+      "new_behaviour_clusters_per_strict_evaluation": 1.0,
+      "panel_id": "main",
+      "proposals": 512,
+      "strict_survivor_efficiency": 0.0,
+      "strict_survivors": 0,
+      "top_cluster_share": 0.037037037037037035
+    },
+    {
+      "activation_identities": 23,
+      "behaviour_clusters": 20,
+      "canonical_identities": 256,
+      "canonical_to_exact_rate": 0.36328125,
+      "economic_hypothesis_coverage": 3,
+      "exact_identities": 93,
+      "lane_id": "orthogonal_exile",
+      "legal_rate": 0.9453125,
+      "n_eff": 11.130434782608695,
+      "new_behaviour_clusters_per_strict_evaluation": 0.625,
+      "panel_id": "main",
+      "proposals": 512,
+      "strict_survivor_efficiency": 0.0,
+      "strict_survivors": 0,
+      "top_cluster_share": 0.21875
+    },
+    {
+      "activation_identities": 16,
+      "behaviour_clusters": 30,
+      "canonical_identities": 256,
+      "canonical_to_exact_rate": 0.58984375,
+      "economic_hypothesis_coverage": 4,
+      "exact_identities": 151,
+      "lane_id": "static_cross_sectional",
+      "legal_rate": 0.984375,
+      "n_eff": 28.444444444444443,
+      "new_behaviour_clusters_per_strict_evaluation": 0.9375,
+      "panel_id": "main",
+      "proposals": 512,
+      "strict_survivor_efficiency": 0.0,
+      "strict_survivors": 0,
+      "top_cluster_share": 0.0625
+    },
+    {
+      "activation_identities": 29,
+      "behaviour_clusters": 20,
+      "canonical_identities": 256,
+      "canonical_to_exact_rate": 0.30859375,
+      "economic_hypothesis_coverage": 3,
+      "exact_identities": 79,
+      "lane_id": "temporal_program",
+      "legal_rate": 0.796875,
+      "n_eff": 11.906976744186046,
+      "new_behaviour_clusters_per_strict_evaluation": 0.625,
+      "panel_id": "main",
+      "proposals": 512,
+      "strict_survivor_efficiency": 0.0,
+      "strict_survivors": 0,
+      "top_cluster_share": 0.15625
+    },
+    {
+      "activation_identities": 20,
+      "behaviour_clusters": 17,
+      "canonical_identities": 256,
+      "canonical_to_exact_rate": 0.22265625,
+      "economic_hypothesis_coverage": 3,
+      "exact_identities": 57,
+      "lane_id": "volatility_session",
+      "legal_rate": 0.59765625,
+      "n_eff": 8.126984126984127,
+      "new_behaviour_clusters_per_strict_evaluation": 0.53125,
+      "panel_id": "main",
+      "proposals": 512,
+      "strict_survivor_efficiency": 0.0,
+      "strict_survivors": 0,
+      "top_cluster_share": 0.25
+    }
+  ],
+  "no_new_evaluation_block_read": true,
+  "status_correction": {
+    "acceptance": "B1S_CANARY_EXECUTION_ACCEPTED",
+    "available_legal_exact_identities": 27,
+    "budget_contract": "FIXED_BUDGET_CONTRACT_PRESERVED",
+    "decision": "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL",
+    "executed_stratified_strict_evaluations": 315,
+    "execution_status": "COMPLETED",
+    "global_top_k_strict_evaluations": 320,
+    "planned_lane_strict_evaluations": 32,
+    "planned_stratified_strict_evaluations": 320,
+    "quota_fill_rate": 0.984375,
+    "rerun_required": false,
+    "total_development_strict_evaluations": 635,
+    "underfill_count": 5,
+    "underfill_lane": "funding_event",
+    "underfill_type": "LEGAL_EXACT_IDENTITY_CAPACITY"
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "a7mem_updated": false,
+  "adaptive_contract": {
+    "algorithms": [
+      "cem",
+      "uct_mcts",
+      "evolutionary",
+      "surrogate"
+    ],
+    "feedback_queries_per_seed": 256,
+    "memory_scope": "LANE_AND_SEED_LOCAL_RUNTIME_ONLY",
+    "persist_elite_policy_value": false
+  },
+  "admission_contract": {
+    "behaviour_cluster_quota_per_lane": 8,
+    "economic_hypothesis_quota_per_lane": 24,
+    "family_budget_cap": 32,
+    "global_top_k_uses_equal_strict_budget": true,
+    "natural_capacity_underfill_allowed": true,
+    "one_exact_identity_one_vote": true,
+    "parent_descendant_cap": 8,
+    "semantic_volume_round_robin": true
+  },
+  "algorithm_competitors": [
+    "typed_random",
+    "typed_ast",
+    "cem",
+    "uct_mcts",
+    "evolutionary_search",
+    "surrogate",
+    "llm_proposal_repair",
+    "global_top_k",
+    "stratified_admission"
+  ],
+  "branch": "audit/evalreset-collapse-forensics-20260711",
+  "budget": {
+    "adaptive_feedback_queries_per_seed": 256,
+    "fixed_seeds": [
+      2701,
+      2709
+    ],
+    "global_top_k_strict_evaluations": 1024,
+    "logical_strict_evaluations": 2048,
+    "online_extension_allowed": false,
+    "proposals_by_lane": {
+      "bbo_typed_temporal": 2048,
+      "cem": 3840,
+      "evolutionary": 3840,
+      "llm_proposal_repair": 3840,
+      "orthogonal_exile": 3840,
+      "surrogate": 3840,
+      "typed_ast": 3840,
+      "typed_random_fresh": 3840,
+      "uct_mcts": 3840
+    },
+    "stratified_strict_by_lane": {
+      "bbo_typed_temporal": 128,
+      "cem": 112,
+      "evolutionary": 112,
+      "llm_proposal_repair": 112,
+      "orthogonal_exile": 112,
+      "surrogate": 112,
+      "typed_ast": 112,
+      "typed_random_fresh": 112,
+      "uct_mcts": 112
+    },
+    "stratified_strict_evaluations": 1024,
+    "total_proposals": 32768
+  },
+  "candidate_promotion": false,
+  "commands": {
+    "check": "python scripts/crypto_nextgen_epoch0.py check",
+    "diagnose_canary": "python scripts/crypto_nextgen_epoch0.py diagnose-canary",
+    "freeze": "python scripts/crypto_nextgen_epoch0.py freeze",
+    "run": "python scripts/crypto_nextgen_epoch0.py run",
+    "smoke": "python scripts/crypto_nextgen_epoch0.py smoke"
+  },
+  "continuation": "run exactly once from a descendant of implementation_subject_sha with identical contract/input hashes; do not inspect intermediate performance",
+  "contract_bundle_sha256": "CC6641A1FC5FF112FEC7ED40EDDEC04FAB215BD7AA03D82E37348CC0D267CF54",
+  "contracts_sha256": {
+    "alphafactory_crypto/nextgen_epoch.py": "B376E5A9C3E7035F07DCBC7B67C3BFF70BC5B08357C2529817AD5F99633C5337",
+    "config/crypto_a7v_feature_registry_v1.json": "1CB71A51B3FB07EC2DAFBD2AE754F3C478930A6F1D7AE9D6EC68C61BF97CE470",
+    "config/crypto_anti_collapse_admission_v1.json": "0DE19CB4251A508B3CA85EFCCC75CFA268B902A18AC2571B1E5637A3CA0E662E",
+    "config/crypto_challenger_harness_v1.json": "FD7CF810E782048699E8CACB4946944D93315B08747A573B7AB7A3DC55D2C800",
+    "config/crypto_evaluation_access_policy_v1.json": "CA922AAE19B0BA3713CDFB85093F1DF48506385F42353C9F9B9A23711F9977CE",
+    "config/crypto_nextgen_epoch0_v1.json": "55AAD66BEE23A8B86BDCB5A0FF657A77A340ADD9066C0B5132B1FD299F53DCC1",
+    "config/crypto_nextgen_mechanism_registry_v1.json": "E3D47B7891FCB643CAC4F708409C96FB49F9211019782E60FCCDC753C369CB38",
+    "config/crypto_temporal_event_primitives_v1.json": "1DC066F8BD288F8FCD1CBBF26673359A6820D14361E65E193CED8598F34D153A",
+    "scripts/crypto_nextgen_epoch0.py": "63E9992F87C13665991222070D98AFA42B6A07B6619C44C4CCE4908196199033"
+  },
+  "cross_epoch_memory_updated": false,
+  "data_release_sha256": "68150BEACEBB4A92AA4C2C34A93D9E56F1538E2685BF683806FDBCB004B1E875",
+  "estimated_cost_time": "1318.1 seconds projected; no budget extension",
+  "experiment_id": "20260711_crypto_nextgen_search_epoch0_001",
+  "forward_read": false,
+  "frozen_manifest_sha256": "CD839D4F095E330DE17EB50E69FC55F8AFDEEA16CADB0C62FF3CE3DE9E6E7E62",
+  "implementation_subject_sha": "3b608e08f3e95af45a00ea1b24694c600a268f9c",
+  "input_files_sha256": {
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=ADAUSDT/part.parquet": "FD3643F1EAA0000C5D453F0B219B75B475E39FA0D2B12898EC4BDE5FA9F9EBEC",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=AVAXUSDT/part.parquet": "55BDA9B157EF7DA67E5D2F12390F05477692080AE3161304A4DECC8336FAEF1A",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=BCHUSDT/part.parquet": "2E83784C2A9ABF399D23A6FEBB4E6D523CE32B4769D9C39C2E4752486D1AFFAB",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=BNBUSDT/part.parquet": "7BFAE9E902D61A1565C39AF01500539FBDDFC35E6BAB155273A59CB851530242",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=BTCUSDT/part.parquet": "CC2B2B3E5CEA67B49C3AAE4C59AA98FE6DF655A7C41C8E592957AAB1EAEFA0A0",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=DOGEUSDT/part.parquet": "A06FB1C1C3E5AE9757744FA8D32582DE04255813CCD8D3D98762E08FE220528E",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=ETHUSDT/part.parquet": "BCA439BBAB9970D6061420F1BAFCCD8D3CCC8EDCDE292090F43F9DE97FA81BCD",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=LINKUSDT/part.parquet": "6BEDB227C210B9F28FEB159C3C583EDE2222BFFD0A65F470DFCF4CBF22BC149B",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=LTCUSDT/part.parquet": "BDAA4C1E79E7111ECFB5251C27CA2C10509B64FAB284E35AEC30A10BA0EF634E",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=SOLUSDT/part.parquet": "6A68C89F6C70A69F6A0CFF2D4CE571DBF07D1B6D7F1C15E0CE39DFE0E836E14D",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=SUIUSDT/part.parquet": "7F7091D5A78CE1662CE74E598557A6C15141A5DF13101088DDFB059522DDD7D3",
+    "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613/symbol=XRPUSDT/part.parquet": "4354FC60EC228916F03C1C74B2651809EED55BBB0ADB09A5A4E64BC84AA05D24",
+    "G:/AlphaFactory_CryptoData/gold/features/nextgen_dark_bookticker_core12_v1/bookticker_core12_1h_top_of_book_state.parquet": "368ACE1C86D2A4166214CE2B20AF421AEB4503C0C315A49497E03302ECF4352C",
+    "runtime/a7b0a_signal_behaviour_20260711/activation_behaviour_identity_registry.csv": "9B66ACF5B94693A983AB0BA2E3EF14176E4476A03C3E849297955E245A13F18B",
+    "runtime/b1s_canary_20260711/candidate_table.csv": "65A60A797BA164ED5B3331C4AC8C1837F84CB834F0DB934BD1F954F9F62A0233",
+    "runtime/b1s_canary_20260711/strict_evaluation_table.csv": "6286DC81C131A3626FE5640E16AD3EF462F6F2217384924E11F616054CE116FF"
+  },
+  "lanes": {
+    "bbo_micro": [
+      "bbo_typed_temporal"
+    ],
+    "main": [
+      "typed_random_fresh",
+      "typed_ast",
+      "cem",
+      "uct_mcts",
+      "evolutionary",
+      "surrogate",
+      "llm_proposal_repair",
+      "orthogonal_exile"
+    ]
+  },
+  "mechanism_registry_sha256": "E3D47B7891FCB643CAC4F708409C96FB49F9211019782E60FCCDC753C369CB38",
+  "mode": "FROZEN_DEVELOPMENT_SEARCH",
+  "objective": "compare isolated next-generation search algorithms and mechanisms under one frozen development-only contract",
+  "panels": {
+    "bbo_micro": {
+      "comparison_domain": "BBO_MICRO_ONLY",
+      "coverage_ratio": 0.8222222222222222,
+      "depth_semantics": "TOP_OF_BOOK_BBO_ONLY_NOT_MULTI_LEVEL_DEPTH",
+      "end_utc_inclusive": "2024-02-29T23:00:00Z",
+      "start_utc": "2024-01-01T00:00:00Z",
+      "universe": "BINANCE_UM_BOOKTICKER_CORE11_OBSERVED"
+    },
+    "main": {
+      "comparison_domain": "MAIN_ONLY",
+      "end_utc_inclusive": "2024-12-31T23:00:00Z",
+      "excluded": [
+        "liquidation",
+        "force_order",
+        "multi_level_depth",
+        "bookticker_bbo"
+      ],
+      "start_utc": "2024-01-01T00:00:00Z",
+      "universe": "BINANCE_UM_CORE12"
+    }
+  },
+  "prohibited": [
+    "validation_test_recent_may_stress_forward_read",
+    "human_midrun_parameter_change",
+    "online_reward_budget_grammar_admission_change",
+    "additional_seed_or_proposal",
+    "candidate_promotion",
+    "a7mem_update",
+    "cross_lane_memory",
+    "cross_epoch_adaptive_memory",
+    "alpha_ready_or_oos_proven_claim"
+  ],
+  "reproducibility": "FROZEN_INPUT_HASHES_CONTRACT_HASHES_SEEDS_AND_BUDGET",
+  "reward_contract": {
+    "cost_bps_per_unit_turnover": 5.0,
+    "full_vector_retained": true,
+    "hard_gates": [
+      "coverage",
+      "observations",
+      "finite_ic",
+      "concentration",
+      "placebo"
+    ],
+    "lane_scalar_audited_for_reward_basin": true,
+    "minimum_assets_per_coordinate": 5,
+    "objectives": [
+      "signal_quality",
+      "portfolio_return_risk",
+      "worst_horizon",
+      "time_block_stability",
+      "cost_turnover",
+      "concentration",
+      "complexity",
+      "behaviour_novelty",
+      "benchmark_incremental_contribution",
+      "null_placebo_controls"
+    ],
+    "online_modification_allowed": false,
+    "pareto_archive": true,
+    "target": "trade_close[t+2]/trade_close[t+1]-1 for completed observation bucket t"
+  },
+  "search_started": false,
+  "status": "EPOCH0_DESIGN_FROZEN_NOT_STARTED",
+  "strategy_benchmarks": [
+    "simple_funding",
+    "simple_basis",
+    "simple_oi",
+    "momentum",
+    "reversal",
+    "volatility",
+    "liquidity",
+    "session_time_of_day",
+    "cross_asset_state"
+  ],
+  "throughput_smoke": "runtime/nextgen_epoch0_20260711/epoch0_throughput_smoke.json",
+  "throughput_smoke_sha256": "5A05398D3FAF2A98C9356F4FD806FBE636A64F7A18E7E166E06F610DD76D8CAB"
+}

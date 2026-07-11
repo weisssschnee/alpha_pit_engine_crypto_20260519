@@ -1,22 +1,22 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `E8B9E113E88217ECB073C64ABC86F5F512C70D87F39888EB55079CAA3517B7B4`.
+Registry SHA256: `11BF9E860163A874E2DD57116DE51BEEF998D4CFF5523AB0DA6E3AD231512607`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
-- `RESEARCH_MODE_CONTROLLED_CANARY_ONLY`
-- Current phase: `B1S_CANARY_PARTIALLY_COMPLETED_STOPPED`
+- `RESEARCH_MODE_FROZEN_DEVELOPMENT_EPOCH_ONLY`
+- Current phase: `CRYPTO_NEXTGEN_SEARCH_EPOCH0_DESIGN_FROZEN`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
 - NEXTGEN-DARK: `NEXTGEN_DARK_SCOPED_READY`
 - Formal search: `FORMAL_SEARCH_FROZEN`
-- CANARY: `B1S_CANARY_PARTIALLY_COMPLETED`
+- CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `B1S_CANARY_CLOSED_WAITING_FROZEN_SEARCH_EPOCH_AUTHORIZATION`
+- Active stage: `EPOCH0_DESIGN_FROZEN_READY_FOR_SINGLE_FIXED_EXECUTION`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -98,14 +98,14 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 ## B1S-CANARY Closure
 
 - `B1S.1` Frozen repo/data/capability/budget/contracts: `IMPLEMENTED_SHA_39DBD40`
-- `B1S.2` Main capability CANARY: `PARTIALLY_COMPLETED_FIXED_QUOTA_UNDERFILL`
+- `B1S.2` Main capability CANARY: `COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - `B1S.3` BBO micro-CANARY: `COMPLETED_SCOPED_BBO_ONLY`
 - `B1S.4` Equal-budget global-top-K controls: `COMPLETED_320_OF_320`
 - `B1S.5` Adaptive challenger runtime namespace: `COMPLETED_64_QUERIES_NOT_PERSISTED`
 - `B1S.6` Candidate promotion and memory boundary: `ENFORCED`
 - `B1S.7` Graph/STATE closure: `IMPLEMENTED`
 
-- Decision: `B1S_CANARY_PARTIALLY_COMPLETED`
+- Decision: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Frozen repo SHA: `39dbd40e6ce7bde3fbaba0067da6a5bfbae797f8`
 - Frozen manifest SHA256: `897A36543AC4CB4E9F658DFA7CF0B71F869ACB3755F318F451AE039E63FDE1D2`
 - Proposals / legal rate: `5120` / `0.8076171875`
@@ -113,7 +113,19 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Stratified strict evaluations: `315` of planned `320`
 - Global-top-K strict evaluations: `320`
 - Adaptive feedback queries: `64`
-- Partial reason: funding_event yielded only 27 legal exact identities, so one-exact-one-vote permitted 27 of 32 strict evaluations; no quota was relaxed and no budget was added
+- Execution acceptance: `B1S_CANARY_EXECUTION_ACCEPTED` / `FIXED_BUDGET_CONTRACT_PRESERVED`
+- Quota fill: `0.984375`; natural underfill `5` in `funding_event`; rerun required `False`
+- Underfill explanation: This was not an interruption or failure. Funding-event yielded only 27 legal exact identities under the frozen proposal budget and one-exact-identity-one-vote contract; no identity was duplicated, admission relaxed, seed changed, proposal added, or budget extended.
+
+## CRYPTO NEXTGEN SEARCH EPOCH-0 Design Freeze
+
+- Status: `EPOCH0_DESIGN_FROZEN_NOT_STARTED`
+- Implementation subject: `3b608e08f3e95af45a00ea1b24694c600a268f9c`
+- Frozen manifest SHA256: `CD839D4F095E330DE17EB50E69FC55F8AFDEEA16CADB0C62FF3CE3DE9E6E7E62`
+- Proposals / lanes / seeds: `32768` / `9` / `[2701, 2709]`
+- Strict budgets: `1024` stratified + `1024` equal-budget global-top-K
+- Performance started: `False`
+- Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
 
 ## NEXTGEN-DARK Allowed
 
@@ -155,4 +167,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-B1S-CANARY is stopped at B1S_CANARY_PARTIALLY_COMPLETED. Wait for explicit authorization of the next frozen search epoch. FORMAL_SEARCH_FROZEN, ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN, FORWARD_SEALED, and NO_CANDIDATE_PROMOTION remain in force; main and BBO results remain non-comparable across panels.
+Execute the single frozen Epoch-0 design exactly once without changing reward, grammar, admission, seeds, or budget. FORMAL_SEARCH_FROZEN, ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN, FORWARD_SEALED, and NO_CANDIDATE_PROMOTION remain in force; main and scoped BBO results remain non-comparable across panels.

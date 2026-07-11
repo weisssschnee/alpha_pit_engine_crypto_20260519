@@ -1,0 +1,72 @@
+{
+  "experiment_id": "20260711_crypto_nextgen_epoch0_throughput_smoke_001",
+  "lane_runtime": [
+    {
+      "lane_id": "typed_random_fresh",
+      "panel_id": "main",
+      "proposals": 16,
+      "seconds": 0.2795600999961607
+    },
+    {
+      "lane_id": "typed_ast",
+      "panel_id": "main",
+      "proposals": 16,
+      "seconds": 0.2173223000136204
+    },
+    {
+      "lane_id": "cem",
+      "panel_id": "main",
+      "proposals": 16,
+      "seconds": 0.2029812000109814
+    },
+    {
+      "lane_id": "uct_mcts",
+      "panel_id": "main",
+      "proposals": 16,
+      "seconds": 0.24797359999502078
+    },
+    {
+      "lane_id": "evolutionary",
+      "panel_id": "main",
+      "proposals": 16,
+      "seconds": 0.17344990000128746
+    },
+    {
+      "lane_id": "surrogate",
+      "panel_id": "main",
+      "proposals": 16,
+      "seconds": 0.16261520003899932
+    },
+    {
+      "lane_id": "llm_proposal_repair",
+      "panel_id": "main",
+      "proposals": 16,
+      "seconds": 0.18326279998291284
+    },
+    {
+      "lane_id": "orthogonal_exile",
+      "panel_id": "main",
+      "proposals": 16,
+      "seconds": 0.2669906999799423
+    },
+    {
+      "lane_id": "bbo_typed_temporal",
+      "panel_id": "bbo_micro",
+      "proposals": 16,
+      "seconds": 0.10305019997758791
+    }
+  ],
+  "objective": "freeze Epoch-0 budget before any Epoch-0 performance result",
+  "performance_read": false,
+  "projected_32768_total_seconds_including_strict_reserve": 1318.0799943208694,
+  "proposals": 144,
+  "proposals_per_second": 78.37734511365092,
+  "repo_sha": "3b608e08f3e95af45a00ea1b24694c600a268f9c",
+  "reward_read": false,
+  "runtime_seconds": 1.8372656000428833,
+  "selected_budget_if_frozen_now": 32768,
+  "signal_content_hash": "1B3DD86AD4887F6CD4FE43BA28810975ED1DB9C08DEEF9375F4E069EFC89A22A",
+  "status": "COMPLETED_NO_PERFORMANCE_READ",
+  "target_return_read": false,
+  "validation_test_recent_may_stress_forward_read": false
+}

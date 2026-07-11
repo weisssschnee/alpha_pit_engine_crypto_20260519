@@ -1,6 +1,10 @@
 # B1S CANARY Compact Result
 
-Decision: `B1S_CANARY_PARTIALLY_COMPLETED`
+Decision: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
+
+Execution acceptance: `B1S_CANARY_EXECUTION_ACCEPTED` / `FIXED_BUDGET_CONTRACT_PRESERVED`.
+
+This was not an interruption or failure. Funding-event produced 27 legal exact identities under the frozen proposal budget and one-exact-identity-one-vote contract. The system correctly did not duplicate identities, relax admission, change seeds, add proposals, or extend budget to fill the five unavailable strict evaluations.
 
 Frozen repo SHA: `39dbd40e6ce7bde3fbaba0067da6a5bfbae797f8`
 Runtime seconds: `166.46`

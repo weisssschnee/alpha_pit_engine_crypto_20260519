@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `E8B9E113E88217ECB073C64ABC86F5F512C70D87F39888EB55079CAA3517B7B4`.
+Generated from registry SHA256: `11BF9E860163A874E2DD57116DE51BEEF998D4CFF5523AB0DA6E3AD231512607`.
 
 ## Authority
 
@@ -47,3 +47,8 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 | b1s_canary_control | a7mem | B1S cannot update positive or negative A7MEM |
 | b1s_canary_control | admission | B1S survivors cannot enter candidate promotion |
 | b1s_canary_control | scheduler | B1S cannot persist policy, elite, learned value, or adaptive budget |
+| spent_evaluation | epoch0_frozen_design | validation/test/recent/May stress cannot enter Epoch-0 |
+| sealed_forward | epoch0_frozen_design | sealed forward cannot enter Epoch-0 |
+| epoch0_frozen_design | a7mem | no cross-epoch elite, policy, value or statistics |
+| epoch0_frozen_design | admission | Epoch-0 cannot promote candidates |
+| epoch0_frozen_design | scheduler | no online budget, grammar, reward or admission changes |

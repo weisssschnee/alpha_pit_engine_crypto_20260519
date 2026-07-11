@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "63AC66824874DA3848FE49B687749EDB30239F483258D7A414399F33F7E28908"
+      "last_verified_sha": "5C9784ADBDFD8C11A8E9B27A8A2BAC722998343ACCB7762D87D85D04DC4B0A98"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -740,7 +740,7 @@
     {
       "id": "b1s_main_canary",
       "label": "B1S main capability CANARY",
-      "status": "PARTIAL",
+      "status": "IMPLEMENTED",
       "implementation_path": [
         "alphafactory_crypto/b1s_canary.py",
         "config/crypto_b1s_canary_v1.json",
@@ -762,8 +762,8 @@
         "runtime/b1s_canary_20260711/cluster_table.csv",
         "runtime/b1s_canary_20260711/lane_summary.csv"
       ],
-      "blocker": "funding-event supplied only 27 legal exact identities, so fixed one-exact-one-vote strict budget underfilled by five; no rerun or budget extension",
-      "last_verified_sha": "113D425D94EAE1E7277FE0364CD10E1F9A6346BD01136CC135A6AB9BCFF9B4A8"
+      "blocker": "none; five unavailable funding-event strict evaluations are accepted natural exact-identity capacity underfill and must not be rerun",
+      "last_verified_sha": "B1F89DCA1622833C50F466909ADAEE5CC4674C4B87BCF34B1ADD41185A288616"
     },
     {
       "id": "b1s_bbo_micro_canary",
@@ -808,8 +808,90 @@
         "runtime/b1s_canary_20260711/B1S_CANARY_COMPACT_RESULT.md",
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
-      "blocker": "wait for explicit authorization of the next frozen search epoch",
-      "last_verified_sha": "DD1AE5C6D4055B6E0D385C29D7D29AADF12651C426C1E908980CD0E5F66AF1A8"
+      "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
+      "last_verified_sha": "D0670F40059F1CE921F3C5E227CCC09C86C5E8321349DFC329B973640E0F2479"
+    },
+    {
+      "id": "nextgen_mechanism_registry",
+      "label": "NEXTGEN mechanism-family registry",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "config/crypto_nextgen_mechanism_registry_v1.json",
+        "alphafactory_crypto/nextgen_epoch.py"
+      ],
+      "entrypoint": "validate_mechanism_registry / make_program / materialize_program",
+      "input": "approved observable development fields and typed temporal/event primitives",
+      "output": "eleven mechanism families with hypotheses, states, templates, canonicalization, semantic volume and failure modes",
+      "data_role": "development-only hypothesis-space authority",
+      "feedback_permission": "EPOCH0_DEVELOPMENT_ONLY_NO_OOS_NO_MEMORY",
+      "artifact_test": [
+        "tests/test_nextgen_epoch.py",
+        "runtime/nextgen_epoch0_20260711/b1s_canary_deep_attribution.json"
+      ],
+      "blocker": "liquidation/force-order and multi-level depth remain disabled; BBO is scoped to core11 Jan-Feb 2024",
+      "last_verified_sha": "63BA2E2B3AB467682C23B31E46A5BF4E45F45F0BD4D3E7BC76BDB77EEAE2ED87"
+    },
+    {
+      "id": "nextgen_search_engine",
+      "label": "NEXTGEN isolated search engine",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/nextgen_epoch.py",
+        "scripts/crypto_nextgen_epoch0.py",
+        "config/crypto_nextgen_epoch0_v1.json"
+      ],
+      "entrypoint": "crypto_nextgen_epoch0 smoke/freeze/run/check",
+      "input": "frozen mechanism registry, lane roots, seeds, semantic-volume and admission contracts",
+      "output": "typed random/AST, CEM, multi-step UCT/MCTS, evolutionary, surrogate, LLM-repair and orthogonal proposals",
+      "data_role": "development-only proposal and lane-local adaptation",
+      "feedback_permission": "CURRENT_EPOCH_LANE_SEED_LOCAL_ONLY_NO_PERSISTENCE",
+      "artifact_test": [
+        "tests/test_nextgen_epoch.py",
+        "tests/test_nextgen_epoch_runner.py"
+      ],
+      "blocker": "execution is limited to the exact frozen Epoch-0 manifest",
+      "last_verified_sha": "D9E6C8A11EBBCDAEEC2E7B238127F5479C0B38E9962E27660FEA6FD1A5717E8C"
+    },
+    {
+      "id": "development_multiobjective_reward",
+      "label": "Development-only multi-objective reward",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/nextgen_epoch.py",
+        "config/crypto_nextgen_epoch0_v1.json"
+      ],
+      "entrypoint": "multiobjective_evaluate / pareto_front",
+      "input": "development-only signal weights, frozen labels, costs, simple benchmark returns and null controls",
+      "output": "hard gates, complete objective vector, lane scalar audit and Pareto archive",
+      "data_role": "development-only evaluation",
+      "feedback_permission": "CURRENT_EPOCH_ONLY_NO_SPENT_OOS_NO_FORWARD_NO_MEMORY",
+      "artifact_test": [
+        "tests/test_nextgen_epoch.py"
+      ],
+      "blocker": "not alpha-ready, promotion evidence, or OOS proof",
+      "last_verified_sha": "69E6DC07A406506EDCA2A6186ABEBAF929551CB9B8CA2E825DFE581B41CBAA7B"
+    },
+    {
+      "id": "epoch0_frozen_design",
+      "label": "CRYPTO NEXTGEN SEARCH EPOCH-0 frozen design",
+      "status": "FROZEN",
+      "implementation_path": [
+        "config/crypto_nextgen_epoch0_v1.json",
+        "scripts/crypto_nextgen_epoch0.py"
+      ],
+      "entrypoint": "epoch0_frozen_design_manifest.json",
+      "input": "implementation SHA, input/contract hashes, no-performance throughput smoke and fixed seeds",
+      "output": "immutable 32768-proposal, 1024+1024 strict-evaluation execution contract",
+      "data_role": "frozen development-search epoch control",
+      "feedback_permission": "FROZEN_DEVELOPMENT_ONLY_NO_ONLINE_CHANGE",
+      "artifact_test": [
+        "runtime/nextgen_epoch0_20260711/epoch0_throughput_smoke_pre_optimization.json",
+        "runtime/nextgen_epoch0_20260711/epoch0_throughput_smoke.json",
+        "runtime/nextgen_epoch0_20260711/epoch0_frozen_design_manifest.json",
+        "runtime/nextgen_epoch0_20260711/B1S_CANARY_COMPARATIVE_DECISION_REPORT.md"
+      ],
+      "blocker": "not yet executed; reward, grammar, admission, seeds and budgets are immutable",
+      "last_verified_sha": "7C00B885F0B023124EEB66E1D5BEAA9D69A55EE56D343EE604FC037BF5118DDD"
     }
   ],
   "edges": [
@@ -1148,6 +1230,78 @@
       "target": "scheduler",
       "kind": "FORBIDDEN",
       "label": "B1S cannot persist policy, elite, learned value, or adaptive budget"
+    },
+    {
+      "source": "nextgen_observation_fabric",
+      "target": "nextgen_mechanism_registry",
+      "kind": "ALLOWED",
+      "label": "approved PIT development observations only"
+    },
+    {
+      "source": "typed_temporal_program",
+      "target": "nextgen_mechanism_registry",
+      "kind": "ALLOWED",
+      "label": "typed temporal and event paths"
+    },
+    {
+      "source": "nextgen_mechanism_registry",
+      "target": "nextgen_search_engine",
+      "kind": "ALLOWED",
+      "label": "balanced mechanism roots and semantic volume"
+    },
+    {
+      "source": "nextgen_search_engine",
+      "target": "epoch0_frozen_design",
+      "kind": "ALLOWED",
+      "label": "frozen lane-local proposals and temporary adaptation"
+    },
+    {
+      "source": "development_multiobjective_reward",
+      "target": "epoch0_frozen_design",
+      "kind": "ALLOWED",
+      "label": "frozen hard gates, vectors, scalar audit and Pareto contract"
+    },
+    {
+      "source": "benchmark_registry",
+      "target": "development_multiobjective_reward",
+      "kind": "ALLOWED",
+      "label": "report-only simple benchmark increment"
+    },
+    {
+      "source": "evaluation_access_ledger",
+      "target": "epoch0_frozen_design",
+      "kind": "CONTROL",
+      "label": "development-only fail-closed access"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "epoch0_frozen_design",
+      "kind": "FORBIDDEN",
+      "label": "validation/test/recent/May stress cannot enter Epoch-0"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "epoch0_frozen_design",
+      "kind": "FORBIDDEN",
+      "label": "sealed forward cannot enter Epoch-0"
+    },
+    {
+      "source": "epoch0_frozen_design",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "no cross-epoch elite, policy, value or statistics"
+    },
+    {
+      "source": "epoch0_frozen_design",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "Epoch-0 cannot promote candidates"
+    },
+    {
+      "source": "epoch0_frozen_design",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "no online budget, grammar, reward or admission changes"
     }
   ]
 }

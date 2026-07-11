@@ -12,6 +12,8 @@ from scripts.crypto_architecture_control_plane import (
     CANARY_PLAN_PATH,
     B1S_FROZEN_MANIFEST_PATH,
     B1S_RUN_MANIFEST_PATH,
+    EPOCH0_FROZEN_MANIFEST_PATH,
+    EPOCH0_SMOKE_PATH,
     CURRENT_ARCH_PATH,
     GRAPH_PATH,
     REGISTRY_PATH,
@@ -37,19 +39,21 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         validate_outputs(registry)
 
         state = load_json(STATE_SOURCE_PATH)
-        self.assertEqual(state["current_phase"], "B1S_CANARY_PARTIALLY_COMPLETED_STOPPED")
+        self.assertEqual(state["current_phase"], "CRYPTO_NEXTGEN_SEARCH_EPOCH0_DESIGN_FROZEN")
         self.assertEqual(
             state["production_observation_qualification_status"],
             "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
         )
         self.assertEqual(state["phase_b1_status"], "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN")
         self.assertEqual(state["phase_b0p_acceptance"]["status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
-        self.assertEqual(state["active_stage"], "B1S_CANARY_CLOSED_WAITING_FROZEN_SEARCH_EPOCH_AUTHORIZATION")
+        self.assertEqual(state["active_stage"], "EPOCH0_DESIGN_FROZEN_READY_FOR_SINGLE_FIXED_EXECUTION")
         self.assertEqual(state["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
         self.assertEqual(state["phase_b0a_acceptance"]["accepted_subject_sha"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(state["formal_search_status"], "FORMAL_SEARCH_FROZEN")
         self.assertEqual(state["nextgen_dark_status"], "NEXTGEN_DARK_SCOPED_READY")
-        self.assertEqual(state["canary_status"], "B1S_CANARY_PARTIALLY_COMPLETED")
+        self.assertEqual(state["canary_status"], "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL")
+        self.assertEqual(state["nextgen_epoch0"]["status"], "EPOCH0_DESIGN_FROZEN_NOT_STARTED")
+        self.assertFalse(state["nextgen_epoch0"]["performance_started"])
         self.assertEqual(state["adaptive_cross_epoch_memory_status"], "ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN")
         self.assertEqual(state["candidate_promotion_status"], "NO_CANDIDATE_PROMOTION")
 
@@ -79,7 +83,8 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertNotIn("last_verified_remote_sha", manifest)
         self.assertEqual(manifest["b0p_accepted_subject_sha"], B0P_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(manifest["b0p_acceptance_status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
-        self.assertEqual(manifest["b1s_canary_status"], "B1S_CANARY_PARTIALLY_COMPLETED")
+        self.assertEqual(manifest["b1s_canary_status"], "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL")
+        self.assertEqual(manifest["epoch0_status"], "EPOCH0_DESIGN_FROZEN_NOT_STARTED")
 
         nodes = {node["id"]: node for node in registry["nodes"]}
         self.assertIn("contract implemented", nodes["feature_builder"]["blocker"])
@@ -91,19 +96,20 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertLess(authority.index("deterministic graph view"), authority.index("human-readable generated view"))
 
         current_architecture = CURRENT_ARCH_PATH.read_text(encoding="utf-8")
-        self.assertIn("B1S_CANARY_PARTIALLY_COMPLETED_STOPPED", current_architecture)
+        self.assertIn("CRYPTO_NEXTGEN_SEARCH_EPOCH0_DESIGN_FROZEN", current_architecture)
         self.assertIn("PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED", current_architecture)
 
         graph = load_json(GRAPH_PATH)
         graph_control = graph["graph"]["architecture_control_plane"]
-        self.assertEqual(graph_control["phase_status"], "B1S_CANARY_PARTIALLY_COMPLETED_STOPPED")
+        self.assertEqual(graph_control["phase_status"], "CRYPTO_NEXTGEN_SEARCH_EPOCH0_DESIGN_FROZEN")
         self.assertEqual(graph_control["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph_control["b0p_accepted_subject_sha"], B0P_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph_control["b0p_acceptance_status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
         self.assertEqual(graph_control["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
         self.assertEqual(graph_control["b0a_accepted_subject_sha"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph_control["nextgen_dark_status"], "NEXTGEN_DARK_SCOPED_READY")
-        self.assertEqual(graph_control["b1s_canary_decision"], "B1S_CANARY_PARTIALLY_COMPLETED")
+        self.assertEqual(graph_control["b1s_canary_decision"], "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL")
+        self.assertEqual(graph_control["epoch0_status"], "EPOCH0_DESIGN_FROZEN_NOT_STARTED")
         self.assertEqual(graph_control["candidate_promotion_status"], "NO_CANDIDATE_PROMOTION")
         self.assertEqual(graph["built_at_accepted_subject"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertNotIn("built_at_commit", graph)
@@ -158,7 +164,10 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(frozen["repo_sha"], "39dbd40e6ce7bde3fbaba0067da6a5bfbae797f8")
         self.assertEqual(frozen["frozen_manifest_sha256"], "897A36543AC4CB4E9F658DFA7CF0B71F869ACB3755F318F451AE039E63FDE1D2")
         b1s = load_json(B1S_RUN_MANIFEST_PATH)
-        self.assertEqual(b1s["decision"], "B1S_CANARY_PARTIALLY_COMPLETED")
+        self.assertEqual(b1s["decision"], "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL")
+        self.assertEqual(b1s["execution_status"], "COMPLETED")
+        self.assertEqual(b1s["quota_fill_rate"], 0.984375)
+        self.assertFalse(b1s["rerun_required"])
         self.assertEqual(b1s["proposal_rows"], 5120)
         self.assertEqual(b1s["stratified_admissions"], 564)
         self.assertEqual(b1s["stratified_strict_evaluations"], 315)
@@ -166,6 +175,15 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(b1s["adaptive_feedback_queries"], 64)
         self.assertFalse(b1s["main_and_bbo_directly_ranked"])
         self.assertFalse(b1s["candidate_promotion"])
+
+        epoch0 = load_json(EPOCH0_FROZEN_MANIFEST_PATH)
+        self.assertEqual(epoch0["status"], "EPOCH0_DESIGN_FROZEN_NOT_STARTED")
+        self.assertEqual(epoch0["budget"]["total_proposals"], 32768)
+        self.assertEqual(epoch0["budget"]["logical_strict_evaluations"], 2048)
+        self.assertFalse(epoch0["search_started"])
+        smoke = load_json(EPOCH0_SMOKE_PATH)
+        self.assertEqual(smoke["selected_budget_if_frozen_now"], 32768)
+        self.assertFalse(smoke["performance_read"])
 
 
 if __name__ == "__main__":

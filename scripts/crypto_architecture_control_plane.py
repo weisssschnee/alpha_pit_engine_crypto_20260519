@@ -42,6 +42,14 @@ B1S_RUN_MANIFEST_PATH = B1S_ROOT / "b1s_canary_manifest.json"
 B1S_REPORT_PATH = B1S_ROOT / "B1S_CANARY_COMPACT_RESULT.md"
 B1S_TEST_OUTPUT_PATH = B1S_ROOT / "b1s_test_output.txt"
 B1S_ARTIFACT_INDEX_PATH = B1S_ROOT / "b1s_artifact_index.csv"
+EPOCH0_ROOT = REPO / "runtime" / "nextgen_epoch0_20260711"
+EPOCH0_SMOKE_PRE_PATH = EPOCH0_ROOT / "epoch0_throughput_smoke_pre_optimization.json"
+EPOCH0_SMOKE_PATH = EPOCH0_ROOT / "epoch0_throughput_smoke.json"
+EPOCH0_FROZEN_MANIFEST_PATH = EPOCH0_ROOT / "epoch0_frozen_design_manifest.json"
+EPOCH0_CANARY_ATTRIBUTION_PATH = EPOCH0_ROOT / "b1s_canary_deep_attribution.json"
+EPOCH0_CANARY_REPORT_PATH = EPOCH0_ROOT / "B1S_CANARY_COMPARATIVE_DECISION_REPORT.md"
+EPOCH0_TEST_OUTPUT_PATH = EPOCH0_ROOT / "epoch0_design_test_output.txt"
+EPOCH0_ARTIFACT_INDEX_PATH = EPOCH0_ROOT / "epoch0_artifact_index.csv"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -73,6 +81,8 @@ REQUIRED_NODE_IDS = {
     "nextgen_observation_fabric", "typed_temporal_program", "isolated_hypothesis_lanes",
     "anti_collapse_admission", "challenger_harness", "coverage_observability", "canary_plan",
     "b1s_main_canary", "b1s_bbo_micro_canary", "b1s_canary_control",
+    "nextgen_mechanism_registry", "nextgen_search_engine", "development_multiobjective_reward",
+    "epoch0_frozen_design",
 }
 REQUIRED_FORBIDDEN_EDGES = {
     ("spent_evaluation", "admission"),
@@ -102,6 +112,11 @@ REQUIRED_FORBIDDEN_EDGES = {
     ("b1s_canary_control", "a7mem"),
     ("b1s_canary_control", "admission"),
     ("b1s_canary_control", "scheduler"),
+    ("spent_evaluation", "epoch0_frozen_design"),
+    ("sealed_forward", "epoch0_frozen_design"),
+    ("epoch0_frozen_design", "a7mem"),
+    ("epoch0_frozen_design", "admission"),
+    ("epoch0_frozen_design", "scheduler"),
 }
 VALID_STATUSES = {"IMPLEMENTED", "PARTIAL", "PLANNED", "FROZEN", "DEPRECATED"}
 
@@ -174,6 +189,19 @@ def b1s_test_evidence() -> dict[str, str]:
         "result": result,
         "output_path": relative(B1S_TEST_OUTPUT_PATH),
         "output_sha256": sha256_normalized_text_file(B1S_TEST_OUTPUT_PATH),
+    }
+
+
+def epoch0_test_evidence() -> dict[str, str]:
+    normalized = EPOCH0_TEST_OUTPUT_PATH.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    match = re.search(r"(?m)^(91 passed in [0-9.]+s)$", normalized)
+    if not match:
+        raise ValueError("Epoch-0 design test output does not record exactly 91 passing tests")
+    return {
+        "command": "G:/PythonProject/.venv/Scripts/python.exe -m pytest -q",
+        "result": match.group(1),
+        "output_path": relative(EPOCH0_TEST_OUTPUT_PATH),
+        "output_sha256": sha256_normalized_text_file(EPOCH0_TEST_OUTPUT_PATH),
     }
 
 
@@ -272,7 +300,7 @@ def render_documents(
 
 Generated from `{relative(REGISTRY_PATH)}`. Registry SHA256: `{digest}`.
 
-Status: `{state['current_phase']}` / `{state['nextgen_dark_status']}` / `{state['canary_status']}` / `{state['production_observation_qualification_status']}` / `{state['formal_search_status']}` / `{state['adaptive_cross_epoch_memory_status']}` / `{state['candidate_promotion_status']}` / `{state['forward_data_status']}`.
+Status: `{state['current_phase']}` / `{state['nextgen_epoch0']['status']}` / `{state['nextgen_dark_status']}` / `{state['canary_status']}` / `{state['production_observation_qualification_status']}` / `{state['formal_search_status']}` / `{state['adaptive_cross_epoch_memory_status']}` / `{state['candidate_promotion_status']}` / `{state['forward_data_status']}`.
 
 Authority: `{relative(REGISTRY_PATH)}` is the machine-readable architecture authority; `graph.json` is its deterministic graph view; this file is the human-readable generated view. Raw graphify is unavailable, so `graph.json` retains the prior navigation graph plus a deterministic `control_*` overlay.
 
@@ -339,7 +367,9 @@ Generated from registry SHA256: `{digest}`.
 - NEXTGEN-DARK materializes 245088 Binance UM core12 development/pre-forward coordinates reproducibly without performance columns. Funding, basis, OI, mark/index, taker, liquidity, volatility, session, and cross-asset states materialize. A PC1 supplement scoped-qualifies 14208 top-of-book liquidity rows over 2024-01/02 with 82.22% core12 coordinate coverage; it is BBO only, not multi-level depth. Liquidation remains unavailable because PC1 contains no liquidation/force-order source.
 - Thirteen typed temporal/event primitives, seven isolated no-memory lanes, deterministic anti-collapse quotas, frozen benchmark/challenger interfaces, and non-performance coverage metrics are implemented without execution of formal search or performance comparison.
 - The earlier NEXTGEN-DARK CANARY plan is superseded by the frozen B1S contract and retained as historical configuration.
-- B1S executed 5120 frozen proposals, 315/320 stratified strict evaluations, 320/320 equal-budget global-top-K controls, and 64 adaptive runtime-only queries. Funding-event underfilled strict evaluation by five because only 27 legal exact identities existed under one-exact-one-vote; no budget or threshold changed.
+- B1S execution is accepted as `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`: 5120 frozen proposals, 315/320 stratified strict evaluations, 320/320 equal-budget global-top-K controls, and 64 adaptive runtime-only queries. Funding-event naturally underfilled by five because only 27 legal exact identities existed under one-exact-one-vote; rerun is forbidden and the fixed budget contract was preserved.
+- CANARY attribution shows funding identities saturated after the first 128 proposals, both seeds produced the same 27 identities, event-window/transition produced zero legal identities, and the former adaptive tail collapsed all 448 proposals to `blend`. Epoch-0 therefore replaces the single adaptive lane with isolated CEM, multi-step UCT/MCTS, evolutionary, surrogate, typed, LLM-repair and orthogonal lanes.
+- Epoch-0 design is frozen at manifest `CD839D4F...`: 32768 proposals, seeds 2701/2709, 1024 stratified strict evaluations and 1024 equal-budget global-top-K controls. No Epoch-0 performance has been produced at the design-freeze node.
 - Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
 - `{state['formal_search_status']}`, `{state['adaptive_cross_epoch_memory_status']}`, `{state['candidate_promotion_status']}`, and `{state['forward_data_status']}` remain frozen.
 
@@ -440,7 +470,19 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Stratified strict evaluations: `{state['phase_b1s_result']['actual_stratified_strict_evaluations']}` of planned `{state['phase_b1s_result']['planned_stratified_strict_evaluations']}`
 - Global-top-K strict evaluations: `{state['phase_b1s_result']['global_top_k_strict_evaluations']}`
 - Adaptive feedback queries: `{state['phase_b1s_result']['adaptive_feedback_queries']}`
-- Partial reason: {state['phase_b1s_result']['partial_reason']}
+- Execution acceptance: `{state['phase_b1s_result']['execution_acceptance']}` / `{state['phase_b1s_result']['fixed_budget_contract_status']}`
+- Quota fill: `{state['phase_b1s_result']['quota_fill_rate']}`; natural underfill `{state['phase_b1s_result']['underfill_count']}` in `{state['phase_b1s_result']['underfill_lane']}`; rerun required `{state['phase_b1s_result']['rerun_required']}`
+- Underfill explanation: {state['phase_b1s_result']['underfill_explanation']}
+
+## CRYPTO NEXTGEN SEARCH EPOCH-0 Design Freeze
+
+- Status: `{state['nextgen_epoch0']['status']}`
+- Implementation subject: `{state['nextgen_epoch0']['implementation_subject_sha']}`
+- Frozen manifest SHA256: `{state['nextgen_epoch0']['frozen_manifest_sha256']}`
+- Proposals / lanes / seeds: `{state['nextgen_epoch0']['total_proposals']}` / `{state['nextgen_epoch0']['independent_lanes']}` / `{state['nextgen_epoch0']['fixed_seeds']}`
+- Strict budgets: `{state['nextgen_epoch0']['planned_stratified_strict_evaluations']}` stratified + `{state['nextgen_epoch0']['planned_global_top_k_strict_evaluations']}` equal-budget global-top-K
+- Performance started: `{state['nextgen_epoch0']['performance_started']}`
+- Forward read / promotion / cross-epoch memory: `{state['nextgen_epoch0']['forward_read']}` / `{state['nextgen_epoch0']['candidate_promotion']}` / `{state['nextgen_epoch0']['cross_epoch_memory']}`
 
 ## NEXTGEN-DARK Allowed
 
@@ -491,6 +533,13 @@ def artifact_paths(registry: dict[str, Any]) -> set[Path]:
         B1S_REPORT_PATH,
         B1S_TEST_OUTPUT_PATH,
         B1S_ARTIFACT_INDEX_PATH,
+        EPOCH0_SMOKE_PRE_PATH,
+        EPOCH0_SMOKE_PATH,
+        EPOCH0_FROZEN_MANIFEST_PATH,
+        EPOCH0_CANARY_ATTRIBUTION_PATH,
+        EPOCH0_CANARY_REPORT_PATH,
+        EPOCH0_TEST_OUTPUT_PATH,
+        EPOCH0_ARTIFACT_INDEX_PATH,
     }
     for node in registry["nodes"]:
         paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
@@ -531,6 +580,26 @@ def b1s_artifact_paths(registry: dict[str, Any]) -> set[Path]:
         if node["id"] in node_ids:
             paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
     paths.discard(B1S_ARTIFACT_INDEX_PATH)
+    return paths
+
+
+def epoch0_artifact_paths(registry: dict[str, Any]) -> set[Path]:
+    node_ids = {
+        "nextgen_mechanism_registry", "nextgen_search_engine", "development_multiobjective_reward",
+        "epoch0_frozen_design",
+    }
+    paths = {
+        REGISTRY_PATH, STATE_SOURCE_PATH, DECISION_LOG_PATH, CURRENT_ARCH_PATH, BOUNDARY_PATH,
+        EVOLUTION_PATH, GRAPH_PATH, STATE_PATH, EPOCH0_SMOKE_PRE_PATH, EPOCH0_SMOKE_PATH,
+        EPOCH0_FROZEN_MANIFEST_PATH, EPOCH0_CANARY_ATTRIBUTION_PATH, EPOCH0_CANARY_REPORT_PATH,
+        EPOCH0_TEST_OUTPUT_PATH, RUN_MANIFEST_PATH,
+        REPO / "scripts" / "crypto_architecture_control_plane.py",
+        REPO / "tests" / "test_architecture_control_plane.py",
+    }
+    for node in registry["nodes"]:
+        if node["id"] in node_ids:
+            paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
+    paths.discard(EPOCH0_ARTIFACT_INDEX_PATH)
     return paths
 
 
@@ -596,6 +665,9 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "candidate_promotion_status": state["candidate_promotion_status"],
         "b1s_canary_decision": state["phase_b1s_result"]["decision"],
         "b1s_frozen_repo_sha": state["phase_b1s_result"]["frozen_repo_sha"],
+        "epoch0_status": state["nextgen_epoch0"]["status"],
+        "epoch0_frozen_manifest_sha256": state["nextgen_epoch0"]["frozen_manifest_sha256"],
+        "epoch0_performance_started": state["nextgen_epoch0"]["performance_started"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -746,6 +818,11 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "b1s_canary_manifest": relative(B1S_RUN_MANIFEST_PATH),
         "b1s_artifact_index": relative(B1S_ARTIFACT_INDEX_PATH),
         "b1s_test_evidence": b1s_test_evidence(),
+        "epoch0_status": state["nextgen_epoch0"]["status"],
+        "epoch0_frozen_design_manifest": relative(EPOCH0_FROZEN_MANIFEST_PATH),
+        "epoch0_frozen_manifest_sha256": state["nextgen_epoch0"]["frozen_manifest_sha256"],
+        "epoch0_artifact_index": relative(EPOCH0_ARTIFACT_INDEX_PATH),
+        "epoch0_test_evidence": epoch0_test_evidence(),
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []
@@ -772,6 +849,16 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         writer = csv.DictWriter(handle, fieldnames=["path", "exists", "sha256", "role"])
         writer.writeheader()
         writer.writerows(b1s_rows)
+    epoch0_rows = []
+    for path in sorted(epoch0_artifact_paths(registry), key=lambda item: str(item)):
+        epoch0_rows.append({
+            "path": relative(path), "exists": str(path.exists()),
+            "sha256": sha256_file(path) if path.is_file() else "", "role": "epoch0_design_freeze",
+        })
+    with EPOCH0_ARTIFACT_INDEX_PATH.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["path", "exists", "sha256", "role"])
+        writer.writeheader()
+        writer.writerows(epoch0_rows)
     paths = artifact_paths(registry)
     rows = []
     for path in sorted(paths, key=lambda p: str(p)):
@@ -992,6 +1079,10 @@ def validate_outputs(registry: dict[str, Any]) -> None:
     }
     if any(b1s.get(key) != value for key, value in expected_b1s_counts.items()):
         raise ValueError("B1S fixed-budget actual counts drifted")
+    if b1s.get("execution_status") != "COMPLETED" or not b1s.get("execution_acceptance") == "B1S_CANARY_EXECUTION_ACCEPTED":
+        raise ValueError("B1S execution acceptance status mismatch")
+    if b1s.get("quota_fill_rate") != 0.984375 or b1s.get("rerun_required"):
+        raise ValueError("B1S natural quota underfill record mismatch")
     if b1s.get("repo_sha") != state["phase_b1s_result"]["frozen_repo_sha"]:
         raise ValueError("B1S frozen repo SHA mismatch")
     for output in b1s.get("outputs", []):
@@ -1003,6 +1094,26 @@ def validate_outputs(registry: dict[str, Any]) -> None:
         raise PermissionError("B1S main and BBO panels were directly ranked")
     if manifest.get("b1s_test_evidence") != b1s_test_evidence():
         raise ValueError("Phase A/B0 manifest B1S test evidence mismatch")
+    epoch0_frozen = load_json(EPOCH0_FROZEN_MANIFEST_PATH)
+    epoch0_recorded = epoch0_frozen.pop("frozen_manifest_sha256")
+    epoch0_actual = sha256_bytes(json.dumps(epoch0_frozen, sort_keys=True, separators=(",", ":"), default=str).encode())
+    if epoch0_actual != epoch0_recorded or epoch0_recorded != state["nextgen_epoch0"]["frozen_manifest_sha256"]:
+        raise ValueError("Epoch-0 frozen design identity mismatch")
+    if epoch0_frozen["status"] != "EPOCH0_DESIGN_FROZEN_NOT_STARTED" or epoch0_frozen["search_started"]:
+        raise ValueError("Epoch-0 design freeze status mismatch")
+    if epoch0_frozen["budget"]["total_proposals"] != 32768 or epoch0_frozen["budget"]["logical_strict_evaluations"] != 2048:
+        raise ValueError("Epoch-0 frozen budget mismatch")
+    smoke_pre = load_json(EPOCH0_SMOKE_PRE_PATH)
+    smoke = load_json(EPOCH0_SMOKE_PATH)
+    smoke_forbidden = ("performance_read", "target_return_read", "reward_read", "validation_test_recent_may_stress_forward_read")
+    if any(smoke_pre.get(key) or smoke.get(key) for key in smoke_forbidden):
+        raise PermissionError("Epoch-0 throughput smoke read performance")
+    if smoke_pre.get("selected_budget_if_frozen_now") is not None or smoke.get("selected_budget_if_frozen_now") != 32768:
+        raise ValueError("Epoch-0 pre/post optimization throughput decision mismatch")
+    if meta.get("epoch0_status") != state["nextgen_epoch0"]["status"] or meta.get("epoch0_performance_started"):
+        raise ValueError("graph Epoch-0 design status mismatch")
+    if manifest.get("epoch0_frozen_manifest_sha256") != epoch0_recorded or manifest.get("epoch0_test_evidence") != epoch0_test_evidence():
+        raise ValueError("Phase A/B0 manifest Epoch-0 design evidence mismatch")
     with ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
         index_rows = list(csv.DictReader(handle))
     indexed_paths = {row["path"] for row in index_rows}
@@ -1033,6 +1144,14 @@ def validate_outputs(registry: dict[str, Any]) -> None:
         path = REPO / row["path"]
         if row["exists"] != str(path.exists()) or row["sha256"] != (sha256_file(path) if path.is_file() else ""):
             raise ValueError(f"B1S artifact index hash drift: {row['path']}")
+    with EPOCH0_ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
+        epoch0_index_rows = list(csv.DictReader(handle))
+    if {row["path"] for row in epoch0_index_rows} != {relative(path) for path in epoch0_artifact_paths(registry)}:
+        raise ValueError("Epoch-0 artifact index paths do not match design-freeze scope")
+    for row in epoch0_index_rows:
+        path = REPO / row["path"]
+        if row["exists"] != str(path.exists()) or row["sha256"] != (sha256_file(path) if path.is_file() else ""):
+            raise ValueError(f"Epoch-0 artifact index hash drift: {row['path']}")
 
 
 def build() -> None:

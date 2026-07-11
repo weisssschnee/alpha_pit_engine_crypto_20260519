@@ -1,16 +1,16 @@
 {
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
-  "research_status": "RESEARCH_MODE_CONTROLLED_CANARY_ONLY",
-  "current_phase": "B1S_CANARY_PARTIALLY_COMPLETED_STOPPED",
+  "research_status": "RESEARCH_MODE_FROZEN_DEVELOPMENT_EPOCH_ONLY",
+  "current_phase": "CRYPTO_NEXTGEN_SEARCH_EPOCH0_DESIGN_FROZEN",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
-  "active_stage": "B1S_CANARY_CLOSED_WAITING_FROZEN_SEARCH_EPOCH_AUTHORIZATION",
+  "active_stage": "EPOCH0_DESIGN_FROZEN_READY_FOR_SINGLE_FIXED_EXECUTION",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "formal_search_status": "FORMAL_SEARCH_FROZEN",
   "nextgen_dark_status": "NEXTGEN_DARK_SCOPED_READY",
-  "canary_status": "B1S_CANARY_PARTIALLY_COMPLETED",
+  "canary_status": "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL",
   "adaptive_cross_epoch_memory_status": "ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN",
   "candidate_promotion_status": "NO_CANDIDATE_PROMOTION",
   "phase_a_remote_sync": {
@@ -91,7 +91,7 @@
   ],
   "b1s_canary_items": [
     {"id":"B1S.1","name":"Frozen repo/data/capability/budget/contracts","status":"IMPLEMENTED_SHA_39DBD40"},
-    {"id":"B1S.2","name":"Main capability CANARY","status":"PARTIALLY_COMPLETED_FIXED_QUOTA_UNDERFILL"},
+    {"id":"B1S.2","name":"Main capability CANARY","status":"COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL"},
     {"id":"B1S.3","name":"BBO micro-CANARY","status":"COMPLETED_SCOPED_BBO_ONLY"},
     {"id":"B1S.4","name":"Equal-budget global-top-K controls","status":"COMPLETED_320_OF_320"},
     {"id":"B1S.5","name":"Adaptive challenger runtime namespace","status":"COMPLETED_64_QUERIES_NOT_PERSISTED"},
@@ -99,7 +99,10 @@
     {"id":"B1S.7","name":"Graph/STATE closure","status":"IMPLEMENTED"}
   ],
   "phase_b1s_result": {
-    "decision": "B1S_CANARY_PARTIALLY_COMPLETED",
+    "decision": "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL",
+    "execution_acceptance": "B1S_CANARY_EXECUTION_ACCEPTED",
+    "execution_status": "COMPLETED",
+    "fixed_budget_contract_status": "FIXED_BUDGET_CONTRACT_PRESERVED",
     "frozen_repo_sha": "39dbd40e6ce7bde3fbaba0067da6a5bfbae797f8",
     "frozen_manifest_sha256": "897A36543AC4CB4E9F658DFA7CF0B71F869ACB3755F318F451AE039E63FDE1D2",
     "proposal_rows": 5120,
@@ -110,7 +113,14 @@
     "actual_stratified_strict_evaluations": 315,
     "global_top_k_strict_evaluations": 320,
     "adaptive_feedback_queries": 64,
-    "partial_reason": "funding_event yielded only 27 legal exact identities, so one-exact-one-vote permitted 27 of 32 strict evaluations; no quota was relaxed and no budget was added",
+    "quota_fill_rate": 0.984375,
+    "underfill_lane": "funding_event",
+    "underfill_type": "LEGAL_EXACT_IDENTITY_CAPACITY",
+    "available_legal_exact_identities": 27,
+    "planned_lane_strict_evaluations": 32,
+    "underfill_count": 5,
+    "rerun_required": false,
+    "underfill_explanation": "This was not an interruption or failure. Funding-event yielded only 27 legal exact identities under the frozen proposal budget and one-exact-identity-one-vote contract; no identity was duplicated, admission relaxed, seed changed, proposal added, or budget extended.",
     "main_and_bbo_directly_ranked": false,
     "candidate_promotion": false
   },
@@ -145,5 +155,22 @@
     "online policy or budget reweighting",
     "automatic CANARY launch or Phase B1 performance integration"
   ],
-  "next_acceptance_gate": "B1S-CANARY is stopped at B1S_CANARY_PARTIALLY_COMPLETED. Wait for explicit authorization of the next frozen search epoch. FORMAL_SEARCH_FROZEN, ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN, FORWARD_SEALED, and NO_CANDIDATE_PROMOTION remain in force; main and BBO results remain non-comparable across panels."
+  "nextgen_epoch0": {
+    "status": "EPOCH0_DESIGN_FROZEN_NOT_STARTED",
+    "frozen_manifest": "runtime/nextgen_epoch0_20260711/epoch0_frozen_design_manifest.json",
+    "frozen_manifest_sha256": "CD839D4F095E330DE17EB50E69FC55F8AFDEEA16CADB0C62FF3CE3DE9E6E7E62",
+    "implementation_subject_sha": "3b608e08f3e95af45a00ea1b24694c600a268f9c",
+    "total_proposals": 32768,
+    "fixed_seeds": [2701, 2709],
+    "independent_lanes": 9,
+    "planned_stratified_strict_evaluations": 1024,
+    "planned_global_top_k_strict_evaluations": 1024,
+    "planned_logical_strict_evaluations": 2048,
+    "adaptive_feedback_queries_per_seed": 256,
+    "performance_started": false,
+    "candidate_promotion": false,
+    "cross_epoch_memory": false,
+    "forward_read": false
+  },
+  "next_acceptance_gate": "Execute the single frozen Epoch-0 design exactly once without changing reward, grammar, admission, seeds, or budget. FORMAL_SEARCH_FROZEN, ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN, FORWARD_SEALED, and NO_CANDIDATE_PROMOTION remain in force; main and scoped BBO results remain non-comparable across panels."
 }
