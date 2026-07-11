@@ -4,7 +4,7 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "3F5602C1357AEBB056CA445673B81011BBE6C9383A9194543DF2CBC7CCF4613E",
+      "registry_sha256": "03435437A4846074050EA187F735AF7633661CEACF60586C02475C015565C7DB",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 27,
@@ -176822,12 +176822,12 @@
         "tests/test_funding_qualification.py",
         "runtime/a7b0_funding_event_contract_20260711/funding_event_audit_summary.json",
         "runtime/a7b0p_funding_qualification_20260711/funding_qualification_summary.json",
-        "runtime/a7b0p_funding_qualification_20260711/approved_funding_truth_set.csv",
+        "runtime/a7b0p_funding_truth_set_20260711/approved_funding_truth_set.csv",
         "runtime/a7b0p_funding_qualification_20260711/funding_symbol_month_coverage.csv",
         "reports/CRYPTO_B0_FUNDING_EVENT_CONTRACT_20260711.md",
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "36680D289F2D9AA0D52F924912C3BF3D0657CB43E8CD84D84DDAF5DD9D751496",
+      "last_verified_sha": "744256F54222CBC1AF80E82530347BC0682CB7685695504BC62F9F09EFD2B03C",
       "blocker": "BINANCE_UM core12 production observation qualified through 2026-04-30; no cross-venue qualification is claimed",
       "weight": 1.0
     },
@@ -177312,7 +177312,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "215B6D8DF41B402C046FE13C047B62D5C5E758772B1638AA0327F237FD040B37",
+      "last_verified_sha": "11305F2F1C537A6A14FC1941F46FBD6C29373D529A1C471F0234963C2AB63E82",
       "blocker": "funding is qualified for Binance UM core12, but activation identity and clustering are not qualified because no frozen signal behavior matrix is present",
       "weight": 1.0
     }

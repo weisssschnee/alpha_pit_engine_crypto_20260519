@@ -32,11 +32,18 @@
   "qualification_id": "CRYPTO-B0P-FUNDING-PRODUCTION-QUALIFICATION-V1",
   "qualification_cutoff_utc": "2026-04-30T23:00:00Z",
   "truth_manifest_sha256": "A362CCCD872C2EAA4F5F5FF8B1422F6945F025A7645A83D6CB813E8684B8DDD8",
+  "approved_truth_set_normalized_sha256": "05A9E4AD568222381F5D561769E981C9533AD4E7E6AF420A2381608B25DA0DF1",
   "detector_panel_sha256": "35CCEB28015C5F2DF6A7659BBAE54AB4463FE5973ED3994C76E501822E036F0F",
   "truth_columns_read": [
-    "symbol",
-    "fundingTime",
-    "fundingRate"
+    "event_id",
+    "venue",
+    "instrument",
+    "funding_time_utc",
+    "observable_time_utc",
+    "funding_rate",
+    "payer_side",
+    "receiver_side",
+    "source_record_id"
   ],
   "detector_columns_read": [
     "symbol",
@@ -45,7 +52,7 @@
     "fundingTime_ms",
     "latest_known_funding_rate"
   ],
-  "truth_independence": "UPSTREAM_RAW_EVENT_LOG_SEPARATE_FROM_DERIVED_HOURLY_DETECTOR_PANEL",
+  "truth_independence": "APPROVED_PHYSICAL_PRE_CUTOFF_EVENT_TRUTH_SET_SEPARATE_FROM_DERIVED_HOURLY_DETECTOR_PANEL",
   "truth_and_detector_artifact_same_path": false,
   "panel_time_boundary_verified": true,
   "truth_rows_match_contract": true,

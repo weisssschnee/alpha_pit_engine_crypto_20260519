@@ -13,7 +13,12 @@ class FundingQualificationError(ValueError):
     pass
 
 
-TRUTH_QUALIFICATION_COLUMNS = frozenset({"symbol", "fundingTime", "fundingRate"})
+TRUTH_QUALIFICATION_COLUMNS = frozenset(
+    {
+        "event_id", "venue", "instrument", "funding_time_utc", "observable_time_utc", "funding_rate",
+        "payer_side", "receiver_side", "source_record_id",
+    }
+)
 DETECTOR_QUALIFICATION_COLUMNS = frozenset(
     {"symbol", "timestamp", "bar_close_timestamp", "fundingTime_ms", "latest_known_funding_rate"}
 )

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import hashlib
-import csv
 import json
 import sys
 from pathlib import Path
@@ -17,7 +16,6 @@ from alphafactory_crypto.funding_events import canonicalize_funding_events, fund
 from alphafactory_crypto.funding_qualification import (
     DETECTOR_QUALIFICATION_COLUMNS,
     TRUTH_QUALIFICATION_COLUMNS,
-    hourly_bar_close_observable_time,
     qualify_production_funding,
     validate_observation_columns,
 )
@@ -36,56 +34,28 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest().upper()
 
 
+def sha256_normalized_text_file(path: Path) -> str:
+    normalized = path.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest().upper()
+
+
 def _write_csv(frame: pd.DataFrame, name: str) -> None:
     RUNTIME.mkdir(parents=True, exist_ok=True)
     frame.to_csv(RUNTIME / name, index=False)
 
 
-def _read_truth_prefix(source_path: Path, *, symbol: str, cutoff_ms: int) -> tuple[pd.DataFrame, dict[str, object]]:
-    rows: list[dict[str, object]] = []
-    prefix_digest = hashlib.sha256()
-    previous_time = -1
-    with source_path.open("r", encoding="utf-8", newline="") as handle:
-        reader = csv.DictReader(handle)
-        if not set(TRUTH_QUALIFICATION_COLUMNS).issubset(reader.fieldnames or []):
-            raise RuntimeError(f"truth source missing approved columns: {source_path}")
-        for source_index, row in enumerate(reader):
-            event_time_ms = int(row["fundingTime"])
-            if event_time_ms < previous_time:
-                raise RuntimeError(f"truth source is not time ordered: {source_path}")
-            previous_time = event_time_ms
-            if event_time_ms > cutoff_ms:
-                break
-            selected = {
-                "symbol": row["symbol"],
-                "fundingTime": event_time_ms,
-                "fundingRate": row["fundingRate"],
-                "source_record_id": f"{source_path.name}:{source_index}",
-            }
-            if selected["symbol"] != symbol:
-                raise RuntimeError(f"truth source symbol mismatch: {source_path}")
-            prefix_digest.update(
-                f"{selected['symbol']}|{selected['fundingTime']}|{selected['fundingRate']}\n".encode("utf-8")
-            )
-            rows.append(selected)
-    frame = pd.DataFrame(rows)
-    metadata = {
-        "qualified_prefix_sha256": prefix_digest.hexdigest().upper(),
-        "qualified_rows": len(frame),
-        "first_event_utc": pd.to_datetime(frame["fundingTime"].min(), unit="ms", utc=True),
-        "last_event_utc": pd.to_datetime(frame["fundingTime"].max(), unit="ms", utc=True),
-    }
-    return frame, metadata
-
-
 def build() -> dict[str, object]:
     config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
     manifest_path = Path(config["truth_manifest"])
+    truth_set_path = REPO / config["approved_truth_set"]
     panel_path = Path(config["detector_panel"])
     if sha256_file(manifest_path) != config["truth_manifest_sha256"]:
         raise RuntimeError("funding truth manifest SHA mismatch")
     if sha256_file(panel_path) != config["detector_panel_sha256"]:
         raise RuntimeError("pre-forward detector panel SHA mismatch")
+    truth_set_sha = sha256_normalized_text_file(truth_set_path)
+    if truth_set_sha != config["approved_truth_set_normalized_sha256"]:
+        raise RuntimeError("approved pre-cutoff funding truth-set SHA mismatch")
 
     truth_columns = list(config["truth_allowed_columns"])
     panel_columns = list(config["detector_allowed_columns"])
@@ -100,53 +70,44 @@ def build() -> dict[str, object]:
     if config.get("alpha_reward_allowed") is not False or config.get("candidate_feedback_permission") != "NONE":
         raise RuntimeError("reward and candidate feedback must remain prohibited")
 
-    manifest = pd.read_csv(manifest_path)
     expected_symbols = set(config["expected_symbols"])
-    manifest = manifest[manifest["symbol"].astype(str).isin(expected_symbols)].copy()
     cutoff = pd.Timestamp(config["qualification_cutoff_utc"])
-    cutoff_ms = int(cutoff.timestamp() * 1000)
     qualification_start = pd.Timestamp(config["qualification_start_utc"])
     required_last_event = pd.Timestamp(config["required_last_event_not_before_utc"])
-    source_rows: list[dict[str, object]] = []
-    truth_parts: list[pd.DataFrame] = []
-    for row in manifest.sort_values("symbol").itertuples(index=False):
-        source_path = Path(str(row.local_path))
-        raw, prefix = _read_truth_prefix(source_path, symbol=str(row.symbol), cutoff_ms=cutoff_ms)
-        file_size_verified = source_path.stat().st_size == int(row.file_size)
-        qualified_rows_verified = len(raw) == int(config["expected_qualified_rows_per_symbol"])
-        time_coverage_verified = (
-            prefix["first_event_utc"] <= qualification_start and prefix["last_event_utc"] >= required_last_event
-        )
-        truth_parts.append(raw)
-        source_rows.append(
+    truth_raw = pd.read_csv(truth_set_path, usecols=truth_columns)
+    truth_raw["funding_time_utc"] = pd.to_datetime(truth_raw["funding_time_utc"], utc=True, format="mixed")
+    truth_raw["observable_time_utc"] = pd.to_datetime(
+        truth_raw["observable_time_utc"], utc=True, format="mixed"
+    )
+    truth_columns_verified = set(truth_raw.columns) == set(TRUTH_QUALIFICATION_COLUMNS)
+    truth_symbols_verified = set(truth_raw["instrument"].astype(str)) == expected_symbols
+    truth_rows_verified = len(truth_raw) == int(config["expected_qualified_events"])
+    truth_time_coverage_verified = bool(
+        truth_raw["funding_time_utc"].min() <= qualification_start
+        and truth_raw["funding_time_utc"].max() >= required_last_event
+        and truth_raw["funding_time_utc"].max() <= cutoff
+    )
+    source_verification = pd.DataFrame(
+        [
             {
-                "symbol": row.symbol,
-                "source_path": source_path.as_posix(),
-                "manifest_declared_full_source_sha256": str(row.sha256).upper(),
-                "full_source_sha_recomputed": False,
-                "qualified_prefix_sha256": prefix["qualified_prefix_sha256"],
-                "manifest_file_size": int(row.file_size),
-                "actual_file_size": source_path.stat().st_size,
-                "file_size_verified": file_size_verified,
-                "qualified_rows": prefix["qualified_rows"],
-                "qualified_rows_verified": qualified_rows_verified,
-                "first_event_utc": prefix["first_event_utc"],
-                "last_event_utc": prefix["last_event_utc"],
-                "time_coverage_verified": time_coverage_verified,
-                "symbol_verified": True,
-                "manifest_status": row.status,
-                "declared_interval": row.interval,
+                "source_role": "APPROVED_PHYSICAL_PRE_CUTOFF_EVENT_TRUTH_SET",
+                "source_path": config["approved_truth_set"],
+                "expected_normalized_sha256": config["approved_truth_set_normalized_sha256"],
+                "actual_sha256": truth_set_sha,
+                "sha_verified": truth_set_sha == config["approved_truth_set_normalized_sha256"],
+                "columns_verified": truth_columns_verified,
+                "rows_verified": truth_rows_verified,
+                "symbols_verified": truth_symbols_verified,
+                "time_coverage_verified": truth_time_coverage_verified,
+                "first_event_utc": truth_raw["funding_time_utc"].min(),
+                "last_event_utc": truth_raw["funding_time_utc"].max(),
+                "upstream_manifest": config["truth_manifest"],
+                "upstream_manifest_sha256": config["truth_manifest_sha256"],
             }
-        )
-    source_verification = pd.DataFrame(source_rows)
+        ]
+    )
     source_integrity_verified = bool(
-        len(source_verification) == len(expected_symbols)
-        and set(source_verification["symbol"].astype(str)) == expected_symbols
-        and source_verification[
-            ["file_size_verified", "qualified_rows_verified", "time_coverage_verified", "symbol_verified"]
-        ].all(axis=None)
-        and source_verification["manifest_status"].astype(str).eq("downloaded").all()
-        and source_verification["declared_interval"].astype(str).eq("8h").all()
+        source_verification[["sha_verified", "columns_verified", "rows_verified", "symbols_verified", "time_coverage_verified"]].all(axis=None)
     )
 
     panel = pd.read_parquet(panel_path, columns=panel_columns)
@@ -172,18 +133,21 @@ def build() -> dict[str, object]:
         venue=config["venue"],
     )
 
-    truth_raw = pd.concat(truth_parts, ignore_index=True)
-    truth_source_duplicate_rows = int(truth_raw.duplicated(["symbol", "fundingTime"], keep=False).sum())
-    truth_event_times = pd.to_datetime(truth_raw["fundingTime"], unit="ms", utc=True)
-    truth_raw["expected_observable_time"] = hourly_bar_close_observable_time(truth_event_times)
+    truth_source_duplicate_rows = int(
+        truth_raw.duplicated(["venue", "instrument", "funding_time_utc"], keep=False).sum()
+    )
     truth = canonicalize_funding_events(
         truth_raw,
-        event_time_col="fundingTime",
-        rate_col="fundingRate",
-        observable_time_col="expected_observable_time",
+        instrument_col="instrument",
+        event_time_col="funding_time_utc",
+        rate_col="funding_rate",
+        observable_time_col="observable_time_utc",
         source_record_col="source_record_id",
         venue=config["venue"],
     )
+    truth_event_id_verified = set(truth["event_id"].astype(str)) == set(truth_raw["event_id"].astype(str))
+    source_integrity_verified = source_integrity_verified and truth_event_id_verified
+    source_verification.loc[0, "event_id_verified"] = truth_event_id_verified
     qualification = qualify_production_funding(
         truth,
         detected,
@@ -197,11 +161,12 @@ def build() -> dict[str, object]:
         "qualification_id": config["qualification_id"],
         "qualification_cutoff_utc": config["qualification_cutoff_utc"],
         "truth_manifest_sha256": config["truth_manifest_sha256"],
+        "approved_truth_set_normalized_sha256": config["approved_truth_set_normalized_sha256"],
         "detector_panel_sha256": config["detector_panel_sha256"],
         "truth_columns_read": truth_columns,
         "detector_columns_read": panel_columns,
-        "truth_independence": "UPSTREAM_RAW_EVENT_LOG_SEPARATE_FROM_DERIVED_HOURLY_DETECTOR_PANEL",
-        "truth_and_detector_artifact_same_path": manifest_path.resolve() == panel_path.resolve(),
+        "truth_independence": "APPROVED_PHYSICAL_PRE_CUTOFF_EVENT_TRUTH_SET_SEPARATE_FROM_DERIVED_HOURLY_DETECTOR_PANEL",
+        "truth_and_detector_artifact_same_path": truth_set_path.resolve() == panel_path.resolve(),
         "panel_time_boundary_verified": panel_time_boundary_verified,
         "truth_rows_match_contract": len(truth) == int(config["expected_qualified_events"]),
         "search_started": False,
@@ -221,10 +186,6 @@ def build() -> dict[str, object]:
         (RUNTIME / obsolete).unlink(missing_ok=True)
     (RUNTIME / "funding_qualification_summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     _write_csv(source_verification, "funding_source_verification.csv")
-    _write_csv(
-        truth[["event_id", "venue", "instrument", "funding_time_utc", "observable_time_utc", "funding_rate", "payer_side", "receiver_side", "source_record_id"]],
-        "approved_funding_truth_set.csv",
-    )
     match_sample = qualification.matches.copy()
     if not match_sample.empty:
         match_sample["month_utc"] = match_sample["expected_time_utc"].dt.strftime("%Y-%m")
