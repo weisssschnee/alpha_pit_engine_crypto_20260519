@@ -1,6 +1,6 @@
 # Current Architecture
 
-Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `483C58342B026BADB1BE759429B30BADCB7913700776EE691201913B89175F3D`.
+Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `F2663F7BDDC3BAEC4E18E9850F1327154E7F1132E7A8F9432539B2B3D1622F63`.
 
 Status: `PHASE_A_GOVERNANCE_ACCEPTED` / `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED` / `HOLD_RESEARCH`.
 
@@ -21,7 +21,7 @@ flowchart TD
   control_basis_oi_event_detection["Basis/OI event detection\nPARTIAL"]
   control_semantic_compiler["Semantic compiler\nIMPLEMENTED"]
   control_exact_signal_identity["Exact signal identity\nIMPLEMENTED"]
-  control_identity_registry["Layered identity registry\nPLANNED"]
+  control_identity_registry["Layered identity registry\nIMPLEMENTED"]
   control_generation_lanes["Generation lanes\nFROZEN"]
   control_proxy["Proxy evaluator\nFROZEN"]
   control_strict_reward["Strict reward\nFROZEN"]
@@ -42,7 +42,8 @@ flowchart TD
   control_a7input0 --> control_feature_builder
   control_feature_builder --> control_semantic_compiler
   control_semantic_compiler --> control_exact_signal_identity
-  control_exact_signal_identity --> control_admission
+  control_exact_signal_identity --> control_identity_registry
+  control_identity_registry --> control_admission
   control_evaluation_access_ledger --> control_proxy
   control_evaluation_access_ledger --> control_strict_reward
   control_funding_event_detector --> control_feature_state_fabric
@@ -72,8 +73,8 @@ flowchart TD
 | Funding event detector | IMPLEMENTED | alphafactory_crypto/funding_events.py; config/crypto_funding_event_contract_v1.json; scripts/crypto_b0_funding_event_audit.py | canonicalize_funding_events | native funding settlement records -> canonical payment events and audit | event observation | AUDIT_ONLY_B0 | tests/test_funding_events.py; runtime/a7b0_funding_event_contract_20260711/funding_event_audit_summary.json; reports/CRYPTO_B0_FUNDING_EVENT_CONTRACT_20260711.md | 11D6EC1952E4A0EE8CEC9C970F3E3C78DEF90602500A0F26D547FCDA63996B3F | production recall remains unmeasured without approved truth set |
 | Basis/OI event detection | PARTIAL | scripts/crypto_a7regime2_mechanism_regime_audit.py | mechanism regime audit | basis and OI observations -> historical mechanism states | event/state audit | FROZEN_FROM_REWARD_UNTIL_B1 | runtime/a7regime2_mechanism_regime_audit_20260612/a7regime2_hourly_mechanism_state_panel.csv | CB1EDDE3AA987D74C4478A141D2A775076EC8F01E71B66588A0FF76307A4AAA5 | temporal/event primitive contract pending |
 | Semantic compiler | IMPLEMENTED | alphafactory_crypto/engines/semantic_domains.py | semantic canonicalization | typed AST and field domains -> canonical expression | semantic identity | NO_METRIC_FEEDBACK | docs/adr/0001-controlled-semantic-identity-and-safediv-gates.md | 8673D940C00111D362E55FE1A70B5F52F77D2BA9FA37882221C8CBE0166F2AC3 | none |
-| Exact signal identity | IMPLEMENTED | alphafactory_crypto/engines/signal_identity.py | signal fingerprint | materialized signal weights -> representative and aliases | exact numeric identity | REPORT_ONLY_DURING_HOLD | runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv | FCA93D783E1F0950C899906D810509DA637FD81A8059A9DF3C6DBB2D74B02DF8 | activation and PnL layers pending |
-| Layered identity registry | PLANNED | planned | planned | syntax through economic hypothesis -> six-layer identities and mappings | identity governance | NO_PROMOTION_B0 | planned | D030676B9B64F6ACA0BA6B7D37DA221946417F6692C488DDEB3B72E0895A7743 | B0.5 pending |
+| Exact signal identity | IMPLEMENTED | alphafactory_crypto/engines/signal_identity.py | signal fingerprint | materialized signal weights -> representative and aliases | exact numeric identity | REPORT_ONLY_DURING_HOLD | runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv | FCA93D783E1F0950C899906D810509DA637FD81A8059A9DF3C6DBB2D74B02DF8 | activation and PnL/regime artifacts remain unresolved |
+| Layered identity registry | IMPLEMENTED | alphafactory_crypto/identity_registry.py; config/crypto_identity_layers_v1.json; scripts/crypto_b0_identity_registry.py | syntax_identity through register_economic_hypothesis | syntax through economic hypothesis -> six-layer identities and mappings | identity governance | NO_PROMOTION_B0 | tests/test_identity_registry.py; runtime/a7b0_identity_registry_20260711/layered_identity_registry.csv; runtime/a7b0_identity_registry_20260711/identity_registry_manifest.json; reports/CRYPTO_B0_LAYERED_IDENTITY_REGISTRY_20260711.md | CDE4384AD367F1EA6CC6A5C09A682A8CDC5EE6C0F8463E8D0A750CDA8179007F | activation, PnL/regime, and economic hypothesis IDs remain unresolved without artifacts/provenance |
 | Generation lanes | FROZEN | scripts/crypto_a7ls1_multi_arm_blueprint_generation.py | generation scripts | approved fields and primitives -> candidate queues | candidate generation | NO_RUN_B0 | verified_core_crypto_20260618/holds/CEM_AST_SEARCH_CORE_HOLD.md | 08493D1801C8D733E3EE1F8B7F755259D4B6CE0D599985DC51B70E046CC051BC | search revoked; role classification does not authorize generation |
 | Proxy evaluator | FROZEN | scripts/crypto_a7v3s9_prereward_oos_control_proxy.py | proxy main | candidate queue and spent historical metrics -> report-only diagnostics | historical evaluation | NO_CANDIDATE_FEEDBACK | tests/test_evaluation_access.py | 227162B70E5897768F07D9E7A7E5C7A7E1FB0EAA81AA0BC4552D210694581128 | spent OOS contamination |
 | Strict reward | FROZEN | scripts/crypto_a7reward1_portfolio_reward_model.py | aggregate_rewards | signals and historical splits -> report-only reward audit | historical evaluation | NO_CANDIDATE_FEEDBACK | tests/test_evaluation_access.py; tests/test_future_wrong_lag.py | 1A1293EF5304B9772109A854F65D7E505653B22E901F024A51B1325ED2DA95CC | spent OOS; production negative control not executed during HOLD_RESEARCH |

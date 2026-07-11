@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `483C58342B026BADB1BE759429B30BADCB7913700776EE691201913B89175F3D`.
+Generated from registry SHA256: `F2663F7BDDC3BAEC4E18E9850F1327154E7F1132E7A8F9432539B2B3D1622F63`.
 
 ## Current Evolution
 
@@ -24,3 +24,4 @@ Generated from registry SHA256: `483C58342B026BADB1BE759429B30BADCB7913700776EE6
 - `EVALRESET-20260711-008` — `B0_2_FUTURE_WRONG_LAG_IMPLEMENTED`: A 24-hour future-shift negative control is integrated into strict reward code and hard-reject semantics; only synthetic harness execution is allowed during HOLD_RESEARCH.
 - `EVALRESET-20260711-009` — `B0_3_A7INPUT0_V2_IMPLEMENTED`: All 81 ontology fields receive exactly one static role across primary, interaction-only, condition-only, state-only, benchmark-only, and blocked; B0 generator enablement remains zero.
 - `EVALRESET-20260711-010` — `B0_4_BZ_AUTHORITY_IMPLEMENTED`: BZ uniquely means Benchmark Zero, accepts benchmark-only inputs, expects zero alpha, and has no promotion, reward, scheduler, or memory permission.
+- `EVALRESET-20260711-011` — `B0_5_LAYERED_IDENTITY_REGISTRY_IMPLEMENTED`: Syntax, canonical, exact signal, activation, PnL/regime, and economic hypothesis layers are contracted; current release establishes only the first three and leaves upper layers unresolved.

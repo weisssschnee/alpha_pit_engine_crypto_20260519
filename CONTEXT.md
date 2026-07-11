@@ -47,3 +47,11 @@ _Avoid_: Search weight, OOS rank, generator enablement
 **Benchmark Zero (BZ)**:
 A non-candidate, zero-alpha comparison object using only benchmark-only inputs for pipeline sanity and diagnostic deltas; it has no feedback or promotion permission.
 _Avoid_: BZ as an undefined policy, candidate baseline, promotion score
+
+**Activation Identity**:
+The identity of a signal's active/nonzero mask over a declared universe and timestamp set, independent of exact signal magnitude.
+_Avoid_: Exact signal identity, trading frequency
+
+**Economic Hypothesis Identity**:
+A manually registered economic thesis with explicit provenance; it cannot be inferred from semantic family, accepted rows, or OOS ranking.
+_Avoid_: Semantic pair, motif, accepted family

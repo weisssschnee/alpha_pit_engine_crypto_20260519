@@ -208,22 +208,31 @@
       "artifact_test": [
         "runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv"
       ],
-      "blocker": "activation and PnL layers pending",
+      "blocker": "activation and PnL/regime artifacts remain unresolved",
       "last_verified_sha": "FCA93D783E1F0950C899906D810509DA637FD81A8059A9DF3C6DBB2D74B02DF8"
     },
     {
       "id": "identity_registry",
       "label": "Layered identity registry",
-      "status": "PLANNED",
-      "implementation_path": [],
-      "entrypoint": "planned",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/identity_registry.py",
+        "config/crypto_identity_layers_v1.json",
+        "scripts/crypto_b0_identity_registry.py"
+      ],
+      "entrypoint": "syntax_identity through register_economic_hypothesis",
       "input": "syntax through economic hypothesis",
       "output": "six-layer identities and mappings",
       "data_role": "identity governance",
       "feedback_permission": "NO_PROMOTION_B0",
-      "artifact_test": [],
-      "blocker": "B0.5 pending",
-      "last_verified_sha": "D030676B9B64F6ACA0BA6B7D37DA221946417F6692C488DDEB3B72E0895A7743"
+      "artifact_test": [
+        "tests/test_identity_registry.py",
+        "runtime/a7b0_identity_registry_20260711/layered_identity_registry.csv",
+        "runtime/a7b0_identity_registry_20260711/identity_registry_manifest.json",
+        "reports/CRYPTO_B0_LAYERED_IDENTITY_REGISTRY_20260711.md"
+      ],
+      "blocker": "activation, PnL/regime, and economic hypothesis IDs remain unresolved without artifacts/provenance",
+      "last_verified_sha": "CDE4384AD367F1EA6CC6A5C09A682A8CDC5EE6C0F8463E8D0A750CDA8179007F"
     },
     {
       "id": "generation_lanes",
@@ -516,9 +525,15 @@
     },
     {
       "source": "exact_signal_identity",
-      "target": "admission",
+      "target": "identity_registry",
       "kind": "ALLOWED",
-      "label": "representatives and aliases"
+      "label": "exact identities and unresolved upper layers"
+    },
+    {
+      "source": "identity_registry",
+      "target": "admission",
+      "kind": "CONTROL",
+      "label": "registered identity evidence only"
     },
     {
       "source": "evaluation_access_ledger",

@@ -1,0 +1,14 @@
+{
+  "decision": "PASS_B0_LAYERED_IDENTITY_REGISTRY_WITH_UPPER_LAYERS_UNRESOLVED",
+  "accepted_rows": 16,
+  "syntax_identities": 6,
+  "canonical_identities": 6,
+  "exact_signal_identities": 6,
+  "activation_identities": 0,
+  "pnl_regime_identities": 0,
+  "economic_hypothesis_identities": 0,
+  "first_independent_economic_information_collapse_identified": false,
+  "search_started": false,
+  "forward_performance_read": false,
+  "authorizes_candidate_feedback": false
+}

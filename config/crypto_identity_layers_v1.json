@@ -1,0 +1,21 @@
+{
+  "registry_id": "CRYPTO-IDENTITY-LAYERS-V1",
+  "layers": ["syntax", "canonical", "exact_signal", "activation", "pnl_regime", "economic_hypothesis"],
+  "layer_contracts": {
+    "syntax": "hash of exact expression spelling after line-ending normalization",
+    "canonical": "hash of semantic compiler canonical expression",
+    "exact_signal": "hash/fingerprint of exact materialized signal weights under declared universe and timestamps",
+    "activation": "hash of active/nonzero mask under declared universe and timestamps",
+    "pnl_regime": "registered equivalence of net PnL vectors and regime-conditioned behavior under an explicit tolerance contract",
+    "economic_hypothesis": "manually registered causal/economic thesis with provenance; never inferred from accepted family or OOS rank"
+  },
+  "automatic_merge_rules": [
+    "multiple syntax identities may map to one canonical identity",
+    "multiple canonical identities may map to one exact signal identity",
+    "multiple exact signals may map to one activation identity only from observed activation masks",
+    "PnL/regime equivalence requires registered net-return and regime artifacts",
+    "economic hypothesis equivalence requires explicit hypothesis registry decision"
+  ],
+  "missing_artifact_policy": "UNRESOLVED_NO_ARTIFACT",
+  "feedback_permission": "REPORT_ONLY_B0"
+}
