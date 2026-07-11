@@ -1,122 +1,122 @@
 field_name,source_class,independent_source,feature_available_rule,may_policy
 symbol,key,False,row identity,May stress-only; not ranking/tuning/selection
 timestamp,key,False,row identity,May stress-only; not ranking/tuning/selection
-funding_interval_hours,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-last_funding_rate,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-mark_open,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-mark_high,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-mark_low,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-mark_close,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-mark_count,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-index_open,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-index_high,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-index_low,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-index_close,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-index_count,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-premium_open,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-premium_high,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-premium_low,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-premium_close,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-premium_count,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-mark_index_ratio,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-mark_index_basis_bps,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-premium_close_bps,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-funding_rate_bps,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-funding_event_observed,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-market_counts_complete,market_funding,True,hourly market/funding aggregate; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_n_5m,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_open_interest_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_open_interest_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_open_interest_value_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_open_interest_value_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_toptrader_account_long_short_ratio_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_toptrader_account_long_short_ratio_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_toptrader_position_long_short_ratio_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_toptrader_position_long_short_ratio_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_global_account_long_short_ratio_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_global_account_long_short_ratio_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_taker_buy_sell_volume_ratio_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_taker_buy_sell_volume_ratio_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-metrics_5m_complete,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_features_available,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_trade_count,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_underlying_trade_count,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_quantity,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_buy_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_sell_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_signed_aggressor_quantity,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_signed_aggressor_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_high_price,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_low_price,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_price_std,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_max_trade_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_open_price,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_close_price,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_vwap,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_buy_vwap,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_sell_vwap,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_avg_agg_trade_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_avg_underlying_trade_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_volume_imbalance,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_buy_sell_notional_ratio,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_price_range_bps,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_close_to_open_bps,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_large_trade_count_100k_plus,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_large_notional_100k_plus,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_large_trade_count_ratio_100k_plus,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_large_notional_ratio_100k_plus,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_vwap_close_bps,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_buy_sell_vwap_spread_bps,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_avg_underlying_trades_per_agg,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_flow_imbalance_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_buy_notional_share,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_sell_notional_share,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_notional_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_quantity_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_signed_notional_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_flow_imbalance_notional_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_large_notional_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_large_notional_share_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_trade_count_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_avg_trade_notional_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_price_range_bps_max_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_close_to_open_bps_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_notional_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_quantity_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_signed_notional_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_flow_imbalance_notional_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_large_notional_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_large_notional_share_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_trade_count_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_avg_trade_notional_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_price_range_bps_max_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_close_to_open_bps_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_signed_flow_z_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_notional_shock_24h_mad,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_notional_accel_4h_vs_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_flow_accel_4h_vs_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_universe_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_universe_signed_abs_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_universe_large_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_cross_symbol_notional_share,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_cross_symbol_signed_flow_share,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_cross_symbol_large_notional_share,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_btcusdt_flow_imbalance_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_flow_minus_btcusdt_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_ethusdt_flow_imbalance_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_flow_minus_ethusdt_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_volume_imbalance_cs_rank,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_signed_flow_z_24h_cs_rank,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_large_notional_share_24h_cs_rank,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_notional_accel_4h_vs_24h_cs_rank,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_cross_symbol_notional_share_cs_rank,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_volume_imbalance_cs_zscore,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_signed_flow_z_24h_cs_zscore,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_large_notional_share_24h_cs_zscore,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_notional_accel_4h_vs_24h_cs_zscore,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_cross_symbol_notional_share_cs_zscore,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
-agg_overlay_available,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close plus conservative 1h lag,May stress-only; not ranking/tuning/selection
+funding_interval_hours,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+last_funding_rate,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+mark_open,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+mark_high,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+mark_low,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+mark_close,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+mark_count,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+index_open,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+index_high,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+index_low,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+index_close,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+index_count,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+premium_open,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+premium_high,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+premium_low,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+premium_close,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+premium_count,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+mark_index_ratio,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+mark_index_basis_bps,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+premium_close_bps,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+funding_rate_bps,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+funding_event_observed,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+market_counts_complete,market_funding,True,hourly market/funding aggregate; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_n_5m,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_open_interest_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_open_interest_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_open_interest_value_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_open_interest_value_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_toptrader_account_long_short_ratio_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_toptrader_account_long_short_ratio_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_toptrader_position_long_short_ratio_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_toptrader_position_long_short_ratio_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_global_account_long_short_ratio_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_global_account_long_short_ratio_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_taker_buy_sell_volume_ratio_last,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_taker_buy_sell_volume_ratio_mean,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+metrics_5m_complete,binance_metrics,True,hourly aggregate from 5m metrics; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_features_available,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_trade_count,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_underlying_trade_count,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_quantity,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_buy_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_sell_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_signed_aggressor_quantity,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_signed_aggressor_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_high_price,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_low_price,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_price_std,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_max_trade_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_open_price,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_close_price,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_vwap,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_buy_vwap,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_sell_vwap,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_avg_agg_trade_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_avg_underlying_trade_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_volume_imbalance,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_buy_sell_notional_ratio,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_price_range_bps,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_close_to_open_bps,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_large_trade_count_100k_plus,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_large_notional_100k_plus,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_large_trade_count_ratio_100k_plus,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_large_notional_ratio_100k_plus,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_vwap_close_bps,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_buy_sell_vwap_spread_bps,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_avg_underlying_trades_per_agg,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_flow_imbalance_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_buy_notional_share,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_sell_notional_share,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_notional_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_quantity_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_signed_notional_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_flow_imbalance_notional_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_large_notional_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_large_notional_share_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_trade_count_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_avg_trade_notional_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_price_range_bps_max_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_close_to_open_bps_sum_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_notional_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_quantity_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_signed_notional_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_flow_imbalance_notional_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_large_notional_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_large_notional_share_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_trade_count_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_avg_trade_notional_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_price_range_bps_max_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_close_to_open_bps_sum_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_signed_flow_z_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_notional_shock_24h_mad,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_notional_accel_4h_vs_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_flow_accel_4h_vs_24h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_universe_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_universe_signed_abs_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_universe_large_notional,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_cross_symbol_notional_share,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_cross_symbol_signed_flow_share,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_cross_symbol_large_notional_share,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_btcusdt_flow_imbalance_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_flow_minus_btcusdt_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_ethusdt_flow_imbalance_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_flow_minus_ethusdt_4h,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_volume_imbalance_cs_rank,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_signed_flow_z_24h_cs_rank,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_large_notional_share_24h_cs_rank,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_notional_accel_4h_vs_24h_cs_rank,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_cross_symbol_notional_share_cs_rank,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_volume_imbalance_cs_zscore,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_signed_flow_z_24h_cs_zscore,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_large_notional_share_24h_cs_zscore,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_notional_accel_4h_vs_24h_cs_zscore,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_cross_symbol_notional_share_cs_zscore,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
+agg_overlay_available,core12_aggtrades_overlay,True,core12 aggTrades hourly/derived; usable after hour close with field-native latency audit,May stress-only; not ranking/tuning/selection
 is_core12,metadata,False,metadata,May stress-only; not ranking/tuning/selection
 feature_available_time,metadata,False,metadata,May stress-only; not ranking/tuning/selection
 execution_time_min,derived,False,derived from accepted source fields,May stress-only; not ranking/tuning/selection

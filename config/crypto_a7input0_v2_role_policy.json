@@ -1,0 +1,16 @@
+{
+  "registry_id": "A7INPUT0-V2",
+  "roles": ["primary", "interaction-only", "condition-only", "state-only", "benchmark-only", "blocked"],
+  "precedence": ["blocked", "state-only", "benchmark-only", "primary", "condition-only", "interaction-only"],
+  "decision_inputs": ["uses_future", "uses_label", "timing_ok", "semantic_type_v3", "compiler_role_v3", "allowed_roles_v3", "feature_role", "economic_role"],
+  "forbidden_decision_inputs": ["accepted_family", "validation_metric", "test_metric", "recent_metric", "stress_metric", "OOS_rank"],
+  "b0_generator_enabled": false,
+  "role_semantics": {
+    "primary": "may be considered as a standalone signal input only after a later explicit generator authorization",
+    "interaction-only": "may modify an approved primary but cannot originate a standalone signal",
+    "condition-only": "may gate or neutralize but cannot contribute standalone magnitude",
+    "state-only": "describes environment/state and is frozen from reward until Phase B1",
+    "benchmark-only": "provides comparison/reference values and cannot drive candidate promotion or memory",
+    "blocked": "cannot enter feature, generator, reward, benchmark promotion, or memory paths"
+  }
+}

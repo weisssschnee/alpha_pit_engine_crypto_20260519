@@ -6,7 +6,7 @@
   "current_phase": "PHASE_B0_CONTRACTS_AND_OBSERVATION_FOUNDATION",
   "phase_b1_status": "FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
-  "registry_sha256": "87F7EFEEA56D7A0BD7A7552F95821F3BF4D91BD407D794758064111C595F7E4D",
+  "registry_sha256": "9E61336EB492A1A47845D86047AB11B531EBD0EC3F58ED77A31ECC7D4F98DEF4",
   "graph_control_nodes": 26,
   "graph_control_edges": 20,
   "b0_items": [
@@ -23,7 +23,7 @@
     {
       "id": "B0.3",
       "name": "A7INPUT0-v2 field roles",
-      "status": "PLANNED"
+      "status": "IMPLEMENTED"
     },
     {
       "id": "B0.4",

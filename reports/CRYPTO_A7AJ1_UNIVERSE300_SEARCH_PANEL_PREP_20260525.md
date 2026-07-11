@@ -1,6 +1,6 @@
 # CRYPTO A7AJ-1 Universe300 Search Panel Prep
 
-Generated: 2026-05-25T02:36:54Z
+Generated: 2026-07-11T05:32:46Z
 
 ## Decision
 
@@ -72,7 +72,8 @@ NOT AUTHORIZED:
 TIMING:
   timestamp = 1h bucket start UTC
   feature_available_time = timestamp + 1h
-  minimum execution_time = timestamp + 2h
+  minimum execution_time = timestamp + 1h / next 1h bar open
+  fixed delay stress = prohibited
 
 MAY:
   this panel has no May 2026 market/funding rows

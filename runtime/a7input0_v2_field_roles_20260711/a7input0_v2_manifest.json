@@ -1,0 +1,17 @@
+{
+  "decision": "PASS_A7INPUT0_V2_COMPLETE_ROLE_REGISTRY",
+  "ontology_rows": 81,
+  "registry_rows": 81,
+  "role_counts": {
+    "benchmark-only": 5,
+    "blocked": 3,
+    "condition-only": 39,
+    "interaction-only": 20,
+    "primary": 4,
+    "state-only": 10
+  },
+  "generator_enabled_rows_b0": 0,
+  "uses_accepted_family_or_oos_rank": false,
+  "search_started": false,
+  "forward_performance_read": false
+}

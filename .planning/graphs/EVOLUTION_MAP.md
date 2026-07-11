@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `87F7EFEEA56D7A0BD7A7552F95821F3BF4D91BD407D794758064111C595F7E4D`.
+Generated from registry SHA256: `9E61336EB492A1A47845D86047AB11B531EBD0EC3F58ED77A31ECC7D4F98DEF4`.
 
 ## Current Evolution
 
@@ -22,3 +22,4 @@ Generated from registry SHA256: `87F7EFEEA56D7A0BD7A7552F95821F3BF4D91BD407D7947
 - `EVALRESET-20260711-006` — `GRAPHIFY_FALLBACK_ACTIVE`: External graphify executable is unavailable; deterministic registry-driven graph overlay and validation are mandatory.
 - `EVALRESET-20260711-007` — `B0_1_FUNDING_EVENT_CONTRACT_IMPLEMENTED`: Native settlement time defines event identity; repeated last-known funding rate is state; missing native time fails closed; cashflow semantics and tolerance audit are tested.
 - `EVALRESET-20260711-008` — `B0_2_FUTURE_WRONG_LAG_IMPLEMENTED`: A 24-hour future-shift negative control is integrated into strict reward code and hard-reject semantics; only synthetic harness execution is allowed during HOLD_RESEARCH.
+- `EVALRESET-20260711-009` — `B0_3_A7INPUT0_V2_IMPLEMENTED`: All 81 ontology fields receive exactly one static role across primary, interaction-only, condition-only, state-only, benchmark-only, and blocked; B0 generator enablement remains zero.

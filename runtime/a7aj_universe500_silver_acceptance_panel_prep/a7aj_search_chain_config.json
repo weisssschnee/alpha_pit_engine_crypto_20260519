@@ -21,8 +21,9 @@
   "stage": "A7AK",
   "timing_contract": {
     "feature_available_time": "timestamp + 1h",
-    "minimum_execution_time": "timestamp + 2h",
+    "fixed_delay_stress_required": false,
+    "minimum_execution_time": "timestamp + 1h / next 1h bar open",
     "timestamp": "1h bucket start UTC"
   },
-  "universe_registry": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\a7aj_universe500_silver_acceptance_panel_prep\\a7aj_universe_registry.csv"
+  "universe_registry": "G:\\Project_V7_Rotation\\worktrees\\crypto_evalreset_20260711\\runtime\\a7aj_universe500_silver_acceptance_panel_prep\\a7aj_universe_registry.csv"
 }

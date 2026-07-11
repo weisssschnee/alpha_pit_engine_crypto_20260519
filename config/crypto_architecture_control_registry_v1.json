@@ -59,21 +59,27 @@
     },
     {
       "id": "a7input0",
-      "label": "A7INPUT0 field approval",
-      "status": "PARTIAL",
+      "label": "A7INPUT0-v2 field roles",
+      "status": "IMPLEMENTED",
       "implementation_path": [
-        "runtime/a7input0_input_approval_package/a7input0_input_approval_registry.csv"
+        "runtime/a7input0_input_approval_package/a7input0_input_approval_registry.csv",
+        "alphafactory_crypto/input_roles.py",
+        "config/crypto_a7input0_v2_role_policy.json",
+        "scripts/crypto_b0_a7input0_v2_registry.py"
       ],
-      "entrypoint": "a7input0_input_approval_registry.csv",
+      "entrypoint": "classify_input_role / a7input0_v2_field_role_registry.csv",
       "input": "field ontology",
       "output": "approved input roles",
       "data_role": "input authorization",
       "feedback_permission": "NO_OOS_DERIVATION",
       "artifact_test": [
-        "runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_risk_closure_audit.csv"
+        "runtime/a7input0_v2_field_roles_20260711/a7input0_v2_field_role_registry.csv",
+        "runtime/a7input0_v2_field_roles_20260711/a7input0_v2_manifest.json",
+        "tests/test_input_roles.py",
+        "reports/CRYPTO_B0_A7INPUT0_V2_FIELD_ROLES_20260711.md"
       ],
-      "blocker": "6 of 10 active fields unapproved; v2 roles pending",
-      "last_verified_sha": "25CD1161A174BAFA5F0BE631FE05EA971181D2EB42D1D452F798C4BFE649E60F"
+      "blocker": "roles are registered but all generator enablement remains false in B0",
+      "last_verified_sha": "1ABE655340B55FDCF259D6F76411A0028F78A6FA58921CBFACE764090F649F9C"
     },
     {
       "id": "feature_builder",
@@ -234,7 +240,7 @@
       "artifact_test": [
         "verified_core_crypto_20260618/holds/CEM_AST_SEARCH_CORE_HOLD.md"
       ],
-      "blocker": "search revoked; A7INPUT0-v2 pending",
+      "blocker": "search revoked; role classification does not authorize generation",
       "last_verified_sha": "08493D1801C8D733E3EE1F8B7F755259D4B6CE0D599985DC51B70E046CC051BC"
     },
     {

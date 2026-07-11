@@ -39,3 +39,7 @@ _Avoid_: Funding time, panel row time
 **Future Wrong-Lag Control**:
 An impossible negative control that applies information from a future signal timestamp to an earlier decision timestamp; dominance over the legal signal is evidence of leakage or time misalignment.
 _Avoid_: Forecast horizon, ordinary lag
+
+**Input Role**:
+One of primary, interaction-only, condition-only, state-only, benchmark-only, or blocked; it describes permitted semantics independently of current candidates and does not itself authorize generator use.
+_Avoid_: Search weight, OOS rank, generator enablement
