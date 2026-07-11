@@ -4,6 +4,7 @@ import argparse
 import csv
 import hashlib
 import json
+import re
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -16,6 +17,8 @@ DECISION_LOG_PATH = REPO / "runtime" / "a7b0_control_plane_20260711" / "a7evalre
 RUN_ROOT = REPO / "runtime" / "a7b0_control_plane_20260711"
 RUN_MANIFEST_PATH = RUN_ROOT / "phase_a_b0_run_manifest.json"
 ARTIFACT_INDEX_PATH = RUN_ROOT / "phase_a_b0_artifact_index.csv"
+ATTESTATION_PATH = RUN_ROOT / "phase_b0_acceptance_attestation.json"
+ACCEPTANCE_TEST_OUTPUT_PATH = RUN_ROOT / "phase_b0_acceptance_test_output.txt"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -65,12 +68,28 @@ def sha256_file(path: Path) -> str:
     return sha256_bytes(path.read_bytes())
 
 
+def sha256_normalized_text_file(path: Path) -> str:
+    normalized = path.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    return sha256_bytes(normalized.encode("utf-8"))
+
+
+def acceptance_test_evidence(state: dict[str, Any]) -> dict[str, str]:
+    normalized = ACCEPTANCE_TEST_OUTPUT_PATH.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    lines = [line.strip() for line in normalized.splitlines() if line.strip()]
+    result = lines[-1] if lines else ""
+    if not re.fullmatch(r"39 passed in [0-9]+(?:\.[0-9]+)?s", result):
+        raise ValueError("acceptance test output does not record exactly 39 passing tests")
+    return {
+        "subject_sha": state["phase_b0_acceptance"]["accepted_subject_sha"],
+        "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
+        "result": result,
+        "output_path": relative(ACCEPTANCE_TEST_OUTPUT_PATH),
+        "output_sha256": sha256_normalized_text_file(ACCEPTANCE_TEST_OUTPUT_PATH),
+    }
+
+
 def relative(path: Path) -> str:
     return str(path.relative_to(REPO)).replace("\\", "/")
-
-
-def git_head() -> str:
-    return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO, text=True).strip()
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -162,9 +181,9 @@ def build_documents(registry: dict[str, Any], state: dict[str, Any], decisions: 
 
 Generated from `{relative(REGISTRY_PATH)}`. Registry SHA256: `{digest}`.
 
-Status: `{state['phase_a_status']}` / `{state['collapse_status']}` / `{state['research_status']}`.
+Status: `{state['current_phase']}` / `{state['production_observation_qualification_status']}` / `{state['research_status']}` / `{state['phase_b1_status']}` / `{state['forward_data_status']}`.
 
-Raw graphify is unavailable in this environment; `graph.json` retains the prior navigation graph plus a deterministic `control_*` architecture overlay. This curated document is the current architecture authority.
+Authority: `{relative(REGISTRY_PATH)}` is the machine-readable architecture authority; `graph.json` is its deterministic graph view; this file is the human-readable generated view. Raw graphify is unavailable, so `graph.json` retains the prior navigation graph plus a deterministic `control_*` overlay.
 
 ## Architecture
 
@@ -191,10 +210,10 @@ Generated from registry SHA256: `{digest}`.
 ## Authority
 
 1. Current user instruction and governance decisions.
-2. `{relative(REGISTRY_PATH)}` for architecture nodes and edges.
-3. `{relative(STATE_SOURCE_PATH)}` and the EVALRESET decision log for phase state.
-4. Curated architecture documents generated from those sources.
-5. `graph.json` as raw navigation plus deterministic control overlay.
+2. `{relative(REGISTRY_PATH)}` is the machine-readable architecture authority.
+3. `graph.json` is the deterministic graph view generated from the registry.
+4. `{relative(CURRENT_ARCH_PATH)}` is the human-readable generated view.
+5. `{relative(STATE_PATH)}`, the EVALRESET decision log, and the run manifest record phase state and history.
 
 External graphify is currently unavailable. This does not permit manual architecture claims: `scripts/crypto_architecture_control_plane.py --check` must pass.
 
@@ -219,6 +238,8 @@ Generated from registry SHA256: `{digest}`.
 - At Phase B0 entry, funding event detection, future wrong-lag, A7INPUT0 coverage, and authoritative BZ definition blocked research. B0.1-B0.4 close their contract-level gaps; production execution and promotion remain frozen under `HOLD_RESEARCH`.
 - The proposed 400k reward-integrated search is revoked.
 - Phase A governance is accepted while `HOLD_RESEARCH` remains.
+- Phase B0 contracts are accepted for subject `{state['phase_b0_acceptance']['accepted_subject_sha']}`.
+- Production observation qualification is pending in B0P.
 - Phase B1 is frozen.
 
 ## Decision Timeline
@@ -236,6 +257,8 @@ Registry SHA256: `{digest}`.
 - `{state['collapse_status']}`
 - `{state['research_status']}`
 - Current phase: `{state['current_phase']}`
+- Production observation qualification: `{state['production_observation_qualification_status']}`
+- Active stage: `{state['active_stage']}`
 - Phase B1: `{state['phase_b1_status']}`
 - Forward data: `{state['forward_data_status']}`
 
@@ -249,27 +272,28 @@ Registry SHA256: `{digest}`.
 
 The earlier Phase A unsynchronized state is superseded by the verified remote refs above.
 
-## Phase B0 Remote Status
+## Phase B0 Acceptance Attestation
 
-- B0 completion SHA: `{state['phase_b0_remote_sync']['b0_completion_sha']}`
-- Last verified remote SHA: `{state['phase_b0_remote_sync']['last_verified_remote_sha']}`
-- Sync status: `{state['phase_b0_remote_sync']['status']}`
-- Blocker: {state['phase_b0_remote_sync']['blocker']}
+- Accepted subject SHA: `{state['phase_b0_acceptance']['accepted_subject_sha']}`
+- Accepted subject remote ref: `{state['phase_b0_acceptance']['accepted_subject_remote_ref']}`
+- Attestation artifact: `{state['phase_b0_acceptance']['attestation_path']}`
+- Attestation commit policy: `{state['phase_b0_acceptance']['attestation_commit_policy']}`
+- Status: `{state['phase_b0_acceptance']['status']}`
 
 ## Phase B0 Items
 
 {items}
 
-## Allowed
+## Phase B0P Allowed
 
-""" + "\n".join(f"- {x}" for x in state["allowed_b0"]) + "\n\n## Prohibited\n\n" + "\n".join(f"- {x}" for x in state["prohibited_b0"]) + f"\n\n## Next Acceptance Gate\n\n{state['next_acceptance_gate']}\n"
+""" + "\n".join(f"- {x}" for x in state["allowed_b0p"]) + "\n\n## Prohibited\n\n" + "\n".join(f"- {x}" for x in state["prohibited_b0"]) + f"\n\n## Next Acceptance Gate\n\n{state['next_acceptance_gate']}\n"
     CURRENT_ARCH_PATH.write_text(current, encoding="utf-8")
     BOUNDARY_PATH.write_text(boundary, encoding="utf-8")
     EVOLUTION_PATH.write_text(evolution, encoding="utf-8")
     STATE_PATH.write_text(state_doc, encoding="utf-8")
 
 
-def update_graph(registry: dict[str, Any], digest: str) -> None:
+def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -> None:
     graph = load_json(GRAPH_PATH)
     graph["nodes"] = [node for node in graph.get("nodes", []) if not str(node.get("id", "")).startswith("control_")]
     graph["links"] = [edge for edge in graph.get("links", []) if not str(edge.get("edge_id", "")).startswith("control_")]
@@ -292,20 +316,45 @@ def update_graph(registry: dict[str, Any], digest: str) -> None:
     graph.setdefault("graph", {})["architecture_control_plane"] = {
         "registry": relative(REGISTRY_PATH), "registry_sha256": digest, "generator": relative(Path(__file__)),
         "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE", "control_node_count": len(registry["nodes"]),
-        "control_edge_count": len(registry["edges"]),
+        "control_edge_count": len(registry["edges"]), "phase_status": state["current_phase"],
+        "production_observation_qualification_status": state["production_observation_qualification_status"],
+        "active_stage": state["active_stage"],
+        "accepted_subject_sha": state["phase_b0_acceptance"]["accepted_subject_sha"],
+        "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
+        "forward_data_status": state["forward_data_status"],
     }
-    graph["built_at_commit"] = git_head()
+    graph.pop("built_at_commit", None)
+    graph["built_at_accepted_subject"] = state["phase_b0_acceptance"]["accepted_subject_sha"]
     GRAPH_PATH.write_text(json.dumps(graph, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
 def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], digest: str) -> None:
     RUN_ROOT.mkdir(parents=True, exist_ok=True)
+    acceptance = state["phase_b0_acceptance"]
+    test_evidence = acceptance_test_evidence(state)
+    attestation = {
+        "attestation_id": "PHASE-B0-ACCEPTANCE-20260711",
+        "attestation_status": state["current_phase"],
+        "accepted_subject_sha": acceptance["accepted_subject_sha"],
+        "accepted_subject_remote_ref": acceptance["accepted_subject_remote_ref"],
+        "attestation_commit_policy": acceptance["attestation_commit_policy"],
+        "production_observation_qualification_status": state["production_observation_qualification_status"],
+        "research_status": state["research_status"],
+        "phase_b1_status": state["phase_b1_status"],
+        "forward_data_status": state["forward_data_status"],
+        "test_evidence": test_evidence,
+        "scope": "control-plane acceptance closure only; no B0 implementation logic changed",
+    }
+    ATTESTATION_PATH.write_text(json.dumps(attestation, indent=2) + "\n", encoding="utf-8")
     manifest = {
         "manifest_id": "PHASE-A-B0-RUN-MANIFEST-20260711", "phase_a_status": state["phase_a_status"],
         "collapse_status": state["collapse_status"], "research_status": state["research_status"],
         "current_phase": state["current_phase"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"], "registry_sha256": digest,
-        "phase_b0_remote_sync": state["phase_b0_remote_sync"],
+        "production_observation_qualification_status": state["production_observation_qualification_status"],
+        "active_stage": state["active_stage"],
+        "accepted_subject_sha": acceptance["accepted_subject_sha"],
+        "acceptance_attestation": relative(ATTESTATION_PATH), "test_evidence": test_evidence,
         "graph_control_nodes": len(registry["nodes"]), "graph_control_edges": len(registry["edges"]),
         "b0_items": state["b0_items"], "search_started": False, "forward_performance_read": False,
         "artifact_index": relative(ARTIFACT_INDEX_PATH), "decision_log": relative(DECISION_LOG_PATH),
@@ -313,7 +362,7 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     paths = {
         REGISTRY_PATH, STATE_SOURCE_PATH, DECISION_LOG_PATH, CURRENT_ARCH_PATH, BOUNDARY_PATH, EVOLUTION_PATH,
-        GRAPH_PATH, STATE_PATH, RUN_MANIFEST_PATH,
+        GRAPH_PATH, STATE_PATH, RUN_MANIFEST_PATH, ATTESTATION_PATH, ACCEPTANCE_TEST_OUTPUT_PATH,
     }
     for node in registry["nodes"]:
         paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
@@ -350,6 +399,29 @@ def validate_outputs(registry: dict[str, Any]) -> None:
     manifest = load_json(RUN_MANIFEST_PATH)
     if manifest.get("registry_sha256") != digest or manifest.get("search_started") or manifest.get("forward_performance_read"):
         raise ValueError("run manifest mismatch or prohibited activity recorded")
+    state = load_json(STATE_SOURCE_PATH)
+    acceptance = state["phase_b0_acceptance"]
+    accepted_subject_sha = acceptance["accepted_subject_sha"]
+    if len(accepted_subject_sha) != 40 or any(char not in "0123456789abcdef" for char in accepted_subject_sha):
+        raise ValueError("invalid accepted subject SHA")
+    if subprocess.run(
+        ["git", "merge-base", "--is-ancestor", accepted_subject_sha, "HEAD"], cwd=REPO, check=False
+    ).returncode:
+        raise ValueError("accepted subject is not an ancestor of the acceptance closure")
+    attestation = load_json(ATTESTATION_PATH)
+    if attestation.get("accepted_subject_sha") != accepted_subject_sha:
+        raise ValueError("acceptance attestation subject mismatch")
+    if "acceptance_attestation_commit" in attestation:
+        raise ValueError("acceptance attestation must not self-record its commit SHA")
+    if manifest.get("accepted_subject_sha") != accepted_subject_sha:
+        raise ValueError("run manifest accepted subject mismatch")
+    if manifest.get("acceptance_attestation") != relative(ATTESTATION_PATH):
+        raise ValueError("run manifest acceptance attestation mismatch")
+    if meta.get("phase_status") != state["current_phase"] or meta.get("accepted_subject_sha") != accepted_subject_sha:
+        raise ValueError("graph phase acceptance metadata mismatch")
+    evidence = attestation.get("test_evidence", {})
+    if evidence != acceptance_test_evidence(state) or manifest.get("test_evidence") != evidence:
+        raise ValueError("acceptance test evidence mismatch")
     if not ARTIFACT_INDEX_PATH.exists():
         raise ValueError("artifact index missing")
 
@@ -361,7 +433,7 @@ def build() -> None:
     state = load_json(STATE_SOURCE_PATH)
     decisions = load_decisions()
     build_documents(registry, state, decisions, digest)
-    update_graph(registry, digest)
+    update_graph(registry, state, digest)
     write_control_artifacts(registry, state, digest)
     validate_outputs(registry)
     print(json.dumps({"status": "PASS_ARCHITECTURE_CONTROL_PLANE_SYNCED", "registry_sha256": digest, "nodes": len(registry["nodes"]), "edges": len(registry["edges"])}, indent=2))

@@ -1,0 +1,19 @@
+{
+  "attestation_id": "PHASE-B0-ACCEPTANCE-20260711",
+  "attestation_status": "PHASE_B0_CONTRACTS_ACCEPTED",
+  "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
+  "accepted_subject_remote_ref": "refs/heads/audit/evalreset-collapse-forensics-20260711",
+  "attestation_commit_policy": "INDEPENDENT_FOLLOWUP_COMMIT_NO_SELF_SHA",
+  "production_observation_qualification_status": "PHASE_B0_PRODUCTION_OBSERVATION_QUALIFICATION_PENDING",
+  "research_status": "HOLD_RESEARCH",
+  "phase_b1_status": "PHASE_B1_FROZEN",
+  "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
+  "test_evidence": {
+    "subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
+    "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
+    "result": "39 passed in 22.15s",
+    "output_path": "runtime/a7b0_control_plane_20260711/phase_b0_acceptance_test_output.txt",
+    "output_sha256": "23CE54E17A626986D2A60E6279C73BA09C852D26A5220E807FF65EA4A853EBFE"
+  },
+  "scope": "control-plane acceptance closure only; no B0 implementation logic changed"
+}

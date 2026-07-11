@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `0CACD837521139E8396D65895EB4B6A64D894BCB9B500A33F9E14FB5951059C4`.
+Generated from registry SHA256: `83A6F87ACBB8CC285FF43BE6B956649342822873B6D4202B9B2EB16D4D4F9170`.
 
 ## Current Evolution
 
@@ -10,6 +10,8 @@ Generated from registry SHA256: `0CACD837521139E8396D65895EB4B6A64D894BCB9B500A3
 - At Phase B0 entry, funding event detection, future wrong-lag, A7INPUT0 coverage, and authoritative BZ definition blocked research. B0.1-B0.4 close their contract-level gaps; production execution and promotion remain frozen under `HOLD_RESEARCH`.
 - The proposed 400k reward-integrated search is revoked.
 - Phase A governance is accepted while `HOLD_RESEARCH` remains.
+- Phase B0 contracts are accepted for subject `9574d32053d1679d64179fe2d6607d1a05e13db9`.
+- Production observation qualification is pending in B0P.
 - Phase B1 is frozen.
 
 ## Decision Timeline
@@ -30,3 +32,4 @@ Generated from registry SHA256: `0CACD837521139E8396D65895EB4B6A64D894BCB9B500A3
 - `EVALRESET-20260711-014` — `B0_8_FEATURE_STATE_FABRIC_CONTRACT_IMPLEMENTED`: Feature/State Fabric schema and deterministic path-independent cache contracts are implemented and tested using synthetic data only; real materialization, generator integration, and reward integration remain frozen pending B1 acceptance.
 - `EVALRESET-20260711-015` — `B0_REMOTE_SYNC_BLOCKED_NETWORK`: B0.1-B0.8 complete locally at a0a36145ccd9666f5a137bee4b8414767aaa7ffd; last verified remote is 32255ee986a9790889164e02ac4b8c168425c68d and three push retries failed due GitHub HTTPS connectivity, so cross-machine dependency, PR, and merge remain prohibited.
 - `EVALRESET-20260711-016` — `B0_REMOTE_SYNC_RESTORED`: A fourth push retry succeeded and refs/heads/audit/evalreset-collapse-forensics-20260711 was verified at 130c76d1abacc36761755b54d6fcf8efe58cd99f, which contains B0.1-B0.8 completion SHA a0a36145ccd9666f5a137bee4b8414767aaa7ffd.
+- `EVALRESET-20260711-017` — `PHASE_B0_CONTRACTS_ACCEPTED`: Independent acceptance attests subject 9574d32053d1679d64179fe2d6607d1a05e13db9. Production observation qualification moves to B0P; HOLD_RESEARCH, PHASE_B1_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.

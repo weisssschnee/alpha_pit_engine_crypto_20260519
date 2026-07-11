@@ -92,11 +92,11 @@
       "input": "approved observable fields",
       "output": "historical features",
       "data_role": "feature construction",
-      "feedback_permission": "NO_NEW_GENERATOR_FIELDS_B0",
+      "feedback_permission": "NO_NEW_GENERATOR_FIELDS_THROUGH_B0P",
       "artifact_test": [
         "runtime/a7al0r_code_feature_regime_readiness_audit/a7al0r_feature_lineage_ledger.csv"
       ],
-      "blocker": "Feature/State Fabric contract pending",
+      "blocker": "Feature/State Fabric contract implemented; production materialization and generator integration remain frozen until B1",
       "last_verified_sha": "60B7FC55A963B16D6D877D9E0B88C450694CA5F414C84EFE2CDCB220D8C0B493"
     },
     {
@@ -148,7 +148,7 @@
       "input": "native funding settlement records",
       "output": "canonical payment events and audit",
       "data_role": "event observation",
-      "feedback_permission": "AUDIT_ONLY_B0",
+      "feedback_permission": "AUDIT_ONLY_THROUGH_B0P",
       "artifact_test": [
         "tests/test_funding_events.py",
         "runtime/a7b0_funding_event_contract_20260711/funding_event_audit_summary.json",
@@ -172,7 +172,7 @@
       "artifact_test": [
         "runtime/a7regime2_mechanism_regime_audit_20260612/a7regime2_hourly_mechanism_state_panel.csv"
       ],
-      "blocker": "temporal/event primitive contract pending",
+      "blocker": "temporal/event primitive contract implemented; production detector qualification and lane integration remain pending",
       "last_verified_sha": "CB1EDDE3AA987D74C4478A141D2A775076EC8F01E71B66588A0FF76307A4AAA5"
     },
     {
@@ -224,7 +224,7 @@
       "input": "syntax through economic hypothesis",
       "output": "six-layer identities and mappings",
       "data_role": "identity governance",
-      "feedback_permission": "NO_PROMOTION_B0",
+      "feedback_permission": "NO_PROMOTION_THROUGH_B0P",
       "artifact_test": [
         "tests/test_identity_registry.py",
         "runtime/a7b0_identity_registry_20260711/layered_identity_registry.csv",
@@ -245,7 +245,7 @@
       "input": "approved fields and primitives",
       "output": "candidate queues",
       "data_role": "candidate generation",
-      "feedback_permission": "NO_RUN_B0",
+      "feedback_permission": "NO_RUN_THROUGH_B0P",
       "artifact_test": [
         "verified_core_crypto_20260618/holds/CEM_AST_SEARCH_CORE_HOLD.md"
       ],
@@ -300,7 +300,7 @@
       "input": "candidate rows",
       "output": "survivors and aliases",
       "data_role": "candidate admission",
-      "feedback_permission": "REPORT_ONLY_B0",
+      "feedback_permission": "REPORT_ONLY_THROUGH_B0P",
       "artifact_test": [
         "runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_collapse_stage_audit.csv"
       ],
@@ -318,7 +318,7 @@
       "input": "candidate feedback",
       "output": "search priors",
       "data_role": "search memory",
-      "feedback_permission": "NO_POSITIVE_OR_NEGATIVE_UPDATE_B0",
+      "feedback_permission": "NO_POSITIVE_OR_NEGATIVE_UPDATE_THROUGH_B0P",
       "artifact_test": [
         "tests/test_evaluation_access.py"
       ],
@@ -414,7 +414,7 @@
       "input": "unseen epoch",
       "output": "SEALED_FORWARD",
       "data_role": "sealed evaluation",
-      "feedback_permission": "NO_READ_B0",
+      "feedback_permission": "NO_READ_THROUGH_B0P",
       "artifact_test": [
         "tests/test_evaluation_access.py"
       ],
@@ -435,7 +435,7 @@
       "input": "signal and future shifts",
       "output": "negative-control metrics",
       "data_role": "leakage control",
-      "feedback_permission": "AUDIT_ONLY_B0",
+      "feedback_permission": "AUDIT_ONLY_THROUGH_B0P",
       "artifact_test": [
         "tests/test_future_wrong_lag.py",
         "runtime/a7b0_future_wrong_lag_control_20260711/future_wrong_lag_audit_summary.json",
@@ -479,7 +479,7 @@
       "input": "observable event streams",
       "output": "PIT temporal primitives",
       "data_role": "temporal semantics",
-      "feedback_permission": "NO_REWARD_B0",
+      "feedback_permission": "NO_REWARD_THROUGH_B0P",
       "artifact_test": [
         "tests/test_temporal_contracts.py",
         "runtime/a7b0_temporal_event_contract_20260711/temporal_event_primitive_registry.csv",
@@ -502,7 +502,7 @@
       "input": "approved observations and contracts",
       "output": "deterministic feature/state cache",
       "data_role": "feature/state materialization",
-      "feedback_permission": "NO_REWARD_B0",
+      "feedback_permission": "NO_REWARD_THROUGH_B0P",
       "artifact_test": [
         "tests/test_fabric.py",
         "runtime/a7b0_feature_state_fabric_20260711/feature_state_fabric_manifest.json",

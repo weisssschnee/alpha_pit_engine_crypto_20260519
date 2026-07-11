@@ -1,14 +1,14 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `0CACD837521139E8396D65895EB4B6A64D894BCB9B500A33F9E14FB5951059C4`.
+Generated from registry SHA256: `83A6F87ACBB8CC285FF43BE6B956649342822873B6D4202B9B2EB16D4D4F9170`.
 
 ## Authority
 
 1. Current user instruction and governance decisions.
-2. `config/crypto_architecture_control_registry_v1.json` for architecture nodes and edges.
-3. `config/crypto_phase_state_v1.json` and the EVALRESET decision log for phase state.
-4. Curated architecture documents generated from those sources.
-5. `graph.json` as raw navigation plus deterministic control overlay.
+2. `config/crypto_architecture_control_registry_v1.json` is the machine-readable architecture authority.
+3. `graph.json` is the deterministic graph view generated from the registry.
+4. `.planning/graphs/CURRENT_ARCHITECTURE.md` is the human-readable generated view.
+5. `.planning/STATE.md`, the EVALRESET decision log, and the run manifest record phase state and history.
 
 External graphify is currently unavailable. This does not permit manual architecture claims: `scripts/crypto_architecture_control_plane.py --check` must pass.
 

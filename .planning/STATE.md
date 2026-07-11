@@ -1,14 +1,16 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `0CACD837521139E8396D65895EB4B6A64D894BCB9B500A33F9E14FB5951059C4`.
+Registry SHA256: `83A6F87ACBB8CC285FF43BE6B956649342822873B6D4202B9B2EB16D4D4F9170`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `HOLD_RESEARCH`
-- Current phase: `PHASE_B0_CONTRACTS_COMPLETE_AWAITING_ACCEPTANCE`
-- Phase B1: `FROZEN`
+- Current phase: `PHASE_B0_CONTRACTS_ACCEPTED`
+- Production observation qualification: `PHASE_B0_PRODUCTION_OBSERVATION_QUALIFICATION_PENDING`
+- Active stage: `PHASE_B0P_PRODUCTION_OBSERVATION_QUALIFICATION`
+- Phase B1: `PHASE_B1_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
 ## Remote Baseline
@@ -21,12 +23,13 @@ Registry SHA256: `0CACD837521139E8396D65895EB4B6A64D894BCB9B500A33F9E14FB5951059
 
 The earlier Phase A unsynchronized state is superseded by the verified remote refs above.
 
-## Phase B0 Remote Status
+## Phase B0 Acceptance Attestation
 
-- B0 completion SHA: `a0a36145ccd9666f5a137bee4b8414767aaa7ffd`
-- Last verified remote SHA: `130c76d1abacc36761755b54d6fcf8efe58cd99f`
-- Sync status: `VERIFIED_REMOTE_CONTAINS_B0_COMPLETION_2026_07_11`
-- Blocker: None for branch transport; Phase B0 acceptance is still required and Phase B1 remains frozen.
+- Accepted subject SHA: `9574d32053d1679d64179fe2d6607d1a05e13db9`
+- Accepted subject remote ref: `refs/heads/audit/evalreset-collapse-forensics-20260711`
+- Attestation artifact: `runtime/a7b0_control_plane_20260711/phase_b0_acceptance_attestation.json`
+- Attestation commit policy: `INDEPENDENT_FOLLOWUP_COMMIT_NO_SELF_SHA`
+- Status: `ATTESTED_PHASE_B0_CONTRACTS_ACCEPTED`
 
 ## Phase B0 Items
 
@@ -39,13 +42,13 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - `B0.7` Temporal/event primitive contract: `IMPLEMENTED`
 - `B0.8` Feature/State Fabric schema and cache contract: `IMPLEMENTED`
 
-## Allowed
+## Phase B0P Allowed
 
-- contracts
-- registries
-- synthetic and historical audit fixtures
-- deterministic cache schema
-- control-plane graph maintenance
+- approved funding truth-set qualification without price returns or Alpha reward
+- activation identity and activation clustering from signal behavior only
+- PnL/regime identity from spent historical data for diagnostic-only use
+- economic hypothesis identity from field, structure, and mechanism semantics only
+- control-plane and identity artifact synchronization
 
 ## Prohibited
 
@@ -53,10 +56,11 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - new generator fields
 - State/event to reward
 - CEM/UCB/MCTS update
-- A7MEM positive memory update
+- A7MEM positive or negative memory update
 - new forward performance read
 - spent OOS candidate selection
+- B1 lane integration
 
 ## Next Acceptance Gate
 
-Independent acceptance of the synchronized B0.1-B0.8 contracts, registries, tests, graph nodes, STATE, decision log, run manifest, and artifact index; B1 remains frozen.
+Complete B0P production observation qualification and stop with QUALIFIED, PARTIALLY_QUALIFIED, or NOT_QUALIFIED; do not authorize large search or claim alpha-ready.
