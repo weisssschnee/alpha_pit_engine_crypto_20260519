@@ -1,0 +1,12 @@
+{
+  "contract_id": "CRYPTO-ANTI-COLLAPSE-ADMISSION-V1",
+  "identity_vote": "ONE_EXACT_IDENTITY_ONE_VOTE",
+  "quota_dimensions": ["behaviour_cluster", "economic_hypothesis", "parent", "family", "fresh_budget"],
+  "semantic_volume_accounting": true,
+  "no_memory_configuration": true,
+  "top_cluster_exile_configuration": true,
+  "global_top_k_baseline": {"configured": true, "enabled_nextgen_dark": false},
+  "sort_inputs": ["proposal_ordinal", "candidate_id"],
+  "performance_inputs_allowed": false,
+  "execution_scope": "DETERMINISM_AND_QUOTA_TESTS_ONLY"
+}

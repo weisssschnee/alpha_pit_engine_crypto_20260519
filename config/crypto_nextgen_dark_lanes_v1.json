@@ -1,0 +1,18 @@
+{
+  "registry_id": "CRYPTO-NEXTGEN-DARK-LANES-V1",
+  "feedback_permission": "NONE_NEXTGEN_DARK",
+  "default_memory_policy": "NO_MEMORY",
+  "default_elite_sharing": false,
+  "default_historical_winner_sharing": false,
+  "lanes": [
+    {"lane_id":"static_cross_sectional","root_distribution":"approved_static_roots","proposal_quota":64,"admission_quota":16,"archive_namespace":"dark/static/archive","lineage_namespace":"dark/static/lineage","seed":1101},
+    {"lane_id":"temporal_program","root_distribution":"typed_temporal_roots","proposal_quota":64,"admission_quota":16,"archive_namespace":"dark/temporal/archive","lineage_namespace":"dark/temporal/lineage","seed":1103},
+    {"lane_id":"event_conditioned","root_distribution":"approved_event_roots","proposal_quota":48,"admission_quota":12,"archive_namespace":"dark/event/archive","lineage_namespace":"dark/event/lineage","seed":1109},
+    {"lane_id":"state_transition","root_distribution":"approved_state_transition_roots","proposal_quota":48,"admission_quota":12,"archive_namespace":"dark/state/archive","lineage_namespace":"dark/state/lineage","seed":1117},
+    {"lane_id":"orthogonal_exile","root_distribution":"top_cluster_exile_new_hypothesis_roots","proposal_quota":64,"admission_quota":24,"archive_namespace":"dark/exile/archive","lineage_namespace":"dark/exile/lineage","seed":1123,"new_economic_hypothesis_first_class":true},
+    {"lane_id":"competitor_reproduction","root_distribution":"frozen_external_contract_roots","proposal_quota":32,"admission_quota":8,"archive_namespace":"dark/competitor/archive","lineage_namespace":"dark/competitor/lineage","seed":1129},
+    {"lane_id":"mcts_evolutionary_challenger","root_distribution":"typed_challenger_roots","proposal_quota":32,"admission_quota":8,"archive_namespace":"dark/challenger/archive","lineage_namespace":"dark/challenger/lineage","seed":1151}
+  ],
+  "candidate_contract": "exact_identity+economic_hypothesis+lineage; no performance fields",
+  "execution_authorized": false
+}

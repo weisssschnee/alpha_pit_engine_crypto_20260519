@@ -1,0 +1,10 @@
+{
+  "registry_id": "CRYPTO-CHALLENGER-HARNESS-V1",
+  "strategy_benchmarks": ["simple_funding","simple_basis","simple_oi","momentum","reversal","volatility","liquidity","session_time_of_day","funding_core","bz_compatible"],
+  "algorithm_challengers": ["cem","typed_ast","uct_mcts","evolutionary_search","surrogate","llm_proposal","external_competitor_reproduction"],
+  "required_contracts": ["proposal_budget","strict_eval_budget","independent_archive","policy_freeze","candidate_submission","data_access"],
+  "data_access": "DEVELOPMENT_ONLY_NO_FORWARD",
+  "feedback_permission": "REPORT_ONLY_NO_MEMORY",
+  "performance_comparison_authorized": false,
+  "execution_authorized": false
+}
