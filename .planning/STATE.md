@@ -1,6 +1,6 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `AC2BA0E2B4DF2A94FEA59595FC361BFB7806112D72CA2FFFA438DE8822409A11`.
+Registry SHA256: `990C66CCFA42B22834E2A5A000F0E1C0821CBA25690B34E29A6893B9CC3E3D17`.
 
 ## Formal Status
 
@@ -155,6 +155,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Execution / strict / natural underfill: `COMPLETED` / `2052` / `True`
 - Survivors / near misses / positive net LCB / adaptive successes: `0` / `84` / `2` / `0`
 - Recommendation: `REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH`
+- Remote sync: `PUSH_PENDING_GITHUB_HTTPS_UNREACHABLE` for closure `a9c119e4447755d76838373178c57ae8e05ab481` after `3` attempts
 - Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
 
 ## NEXTGEN-DARK Allowed

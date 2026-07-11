@@ -565,6 +565,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Execution / strict / natural underfill: `{state['nextgen_epoch1r'].get('execution_status', 'not_started')}` / `{state['nextgen_epoch1r'].get('executed_strict_evaluations', 0)}` / `{state['nextgen_epoch1r'].get('natural_underfill', False)}`
 - Survivors / near misses / positive net LCB / adaptive successes: `{state['nextgen_epoch1r'].get('development_survivors', 0)}` / `{state['nextgen_epoch1r'].get('survivor_near_miss', 0)}` / `{state['nextgen_epoch1r'].get('positive_net_lcb', 0)}` / `{state['nextgen_epoch1r'].get('adaptive_successes', 0)}`
 - Recommendation: `{state['nextgen_epoch1r'].get('recommendation', 'not_available')}`
+- Remote sync: `{state['epoch1r_remote_sync']['status']}` for closure `{state['epoch1r_remote_sync']['closure_subject_sha']}` after `{state['epoch1r_remote_sync']['attempts']}` attempts
 - Forward read / promotion / cross-epoch memory: `{state['nextgen_epoch1r']['forward_read']}` / `{state['nextgen_epoch1r']['candidate_promotion']}` / `{state['nextgen_epoch1r']['cross_epoch_memory']}`
 
 ## NEXTGEN-DARK Allowed
@@ -815,6 +816,7 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "epoch1r_execution_status": state["nextgen_epoch1r"].get("execution_status"),
         "epoch1r_executed_strict_evaluations": state["nextgen_epoch1r"].get("executed_strict_evaluations"),
         "epoch1r_recommendation": state["nextgen_epoch1r"].get("recommendation"),
+        "epoch1r_remote_sync_status": state["epoch1r_remote_sync"]["status"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -994,6 +996,7 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "epoch1r_execution_status": state["nextgen_epoch1r"].get("execution_status"),
         "epoch1r_executed_strict_evaluations": state["nextgen_epoch1r"].get("executed_strict_evaluations"),
         "epoch1r_recommendation": state["nextgen_epoch1r"].get("recommendation"),
+        "epoch1r_remote_sync": state["epoch1r_remote_sync"],
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []
