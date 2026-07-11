@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `11BF9E860163A874E2DD57116DE51BEEF998D4CFF5523AB0DA6E3AD231512607`.
+Registry SHA256: `D54D4C53D1F4CB7E9849160C5D40714A27EE62A2D469D6942F40D15C9148B292`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `RESEARCH_MODE_FROZEN_DEVELOPMENT_EPOCH_ONLY`
-- Current phase: `CRYPTO_NEXTGEN_SEARCH_EPOCH0_DESIGN_FROZEN`
+- Current phase: `CRYPTO_NEXTGEN_SEARCH_EPOCH0_EXECUTION_COMPLETED_PENDING_CLOSURE`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,7 +16,7 @@ Registry SHA256: `11BF9E860163A874E2DD57116DE51BEEF998D4CFF5523AB0DA6E3AD2315126
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `EPOCH0_DESIGN_FROZEN_READY_FOR_SINGLE_FIXED_EXECUTION`
+- Active stage: `EPOCH0_EXECUTION_COMPLETED_INDEPENDENT_CLOSURE_VALIDATED`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -119,12 +119,16 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## CRYPTO NEXTGEN SEARCH EPOCH-0 Design Freeze
 
-- Status: `EPOCH0_DESIGN_FROZEN_NOT_STARTED`
+- Status: `FROZEN_DEVELOPMENT_EPOCH_COMPLETED`
 - Implementation subject: `3b608e08f3e95af45a00ea1b24694c600a268f9c`
 - Frozen manifest SHA256: `CD839D4F095E330DE17EB50E69FC55F8AFDEEA16CADB0C62FF3CE3DE9E6E7E62`
 - Proposals / lanes / seeds: `32768` / `9` / `[2701, 2709]`
 - Strict budgets: `1024` stratified + `1024` equal-budget global-top-K
-- Performance started: `False`
+- Performance started: `True`
+- Execution / strict fill: `COMPLETED` / `1801` of `2048` (`0.87939453125`)
+- Development survivors / Pareto / frozen pack: `0` / `429` / `191`
+- Natural full-identity underfill / rerun required: `True` / `False`
+- Validated recommendation: `REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH` — zero development survivors, infeasible BBO family cap, and UCT reward-basin concentration; funding grammar capacity expanded beyond the B1S 27-identity limit
 - Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
 
 ## NEXTGEN-DARK Allowed
@@ -167,4 +171,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Execute the single frozen Epoch-0 design exactly once without changing reward, grammar, admission, seeds, or budget. FORMAL_SEARCH_FROZEN, ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN, FORWARD_SEALED, and NO_CANDIDATE_PROMOTION remain in force; main and scoped BBO results remain non-comparable across panels.
+Close Epoch-0 with the independently validated recommendation REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH. Do not rerun, rotate, promote, open OOS, or persist adaptive memory. FORMAL_SEARCH_FROZEN, ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN, FORWARD_SEALED, and NO_CANDIDATE_PROMOTION remain in force.

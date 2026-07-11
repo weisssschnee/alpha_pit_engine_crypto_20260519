@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "5C9784ADBDFD8C11A8E9B27A8A2BAC722998343ACCB7762D87D85D04DC4B0A98"
+      "last_verified_sha": "43954DF6120F8E4BF5FEDB5835C4316B9A3F0865F5F442F4830199EC6D3FF94C"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -693,11 +693,11 @@
       "input": "strategy benchmark and algorithm challenger contracts",
       "output": "frozen budgets, independent archives and data-access contracts",
       "data_role": "comparison interface only",
-      "feedback_permission": "REPORT_ONLY_NO_MEMORY_NO_EXECUTION",
+      "feedback_permission": "EPOCH0_DEVELOPMENT_REPORT_ONLY_NO_MEMORY",
       "artifact_test": [
         "tests/test_challenger_coverage.py"
       ],
-      "blocker": "performance comparison is not authorized",
+      "blocker": "Epoch-0 comparison completed with zero development survivors; no promotion or OOS claim",
       "last_verified_sha": "C13F1E123CF5FCA16506F4356BE902B1E6DE999D59B355D3120A661E7D683A55"
     },
     {
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "D0670F40059F1CE921F3C5E227CCC09C86C5E8321349DFC329B973640E0F2479"
+      "last_verified_sha": "61085B658D9AD0F685EC2700B3676D2B125D7E3859714EB3A2240B6291A8A8CE"
     },
     {
       "id": "nextgen_mechanism_registry",
@@ -849,7 +849,7 @@
         "tests/test_nextgen_epoch.py",
         "tests/test_nextgen_epoch_runner.py"
       ],
-      "blocker": "execution is limited to the exact frozen Epoch-0 manifest",
+      "blocker": "Epoch-0 completed but adaptive lanes did not improve survivor production; UCT reward basin concentrated",
       "last_verified_sha": "D9E6C8A11EBBCDAEEC2E7B238127F5479C0B38E9962E27660FEA6FD1A5717E8C"
     },
     {
@@ -868,7 +868,7 @@
       "artifact_test": [
         "tests/test_nextgen_epoch.py"
       ],
-      "blocker": "not alpha-ready, promotion evidence, or OOS proof",
+      "blocker": "1282 hard-gate passes but zero complete development survivors; scalar/admission revision required",
       "last_verified_sha": "69E6DC07A406506EDCA2A6186ABEBAF929551CB9B8CA2E825DFE581B41CBAA7B"
     },
     {
@@ -890,8 +890,31 @@
         "runtime/nextgen_epoch0_20260711/epoch0_frozen_design_manifest.json",
         "runtime/nextgen_epoch0_20260711/B1S_CANARY_COMPARATIVE_DECISION_REPORT.md"
       ],
-      "blocker": "not yet executed; reward, grammar, admission, seeds and budgets are immutable",
+      "blocker": "executed exactly once; immutable design retained as reproducibility authority",
       "last_verified_sha": "7C00B885F0B023124EEB66E1D5BEAA9D69A55EE56D343EE604FC037BF5118DDD"
+    },
+    {
+      "id": "epoch0_execution",
+      "label": "CRYPTO NEXTGEN SEARCH EPOCH-0 execution",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "scripts/crypto_nextgen_epoch0.py",
+        "scripts/crypto_nextgen_epoch0_closure.py"
+      ],
+      "entrypoint": "epoch0_run_manifest.json / epoch0_closure_validation.json",
+      "input": "frozen manifest CD839D4F, development-only main/core12 and scoped BBO/core11 panels",
+      "output": "32768 proposals, 1801 full-identity strict vectors, 429 Pareto rows, benchmark comparison, lineage and frozen no-promotion pack",
+      "data_role": "completed frozen development-search evidence",
+      "feedback_permission": "REPORT_AND_REVISION_DIAGNOSIS_ONLY_NO_PROMOTION_NO_MEMORY",
+      "artifact_test": [
+        "tests/test_nextgen_epoch0_closure.py",
+        "runtime/nextgen_epoch0_20260711/epoch0_run_manifest.json",
+        "runtime/nextgen_epoch0_20260711/epoch0_closure_validation.json",
+        "runtime/nextgen_epoch0_20260711/EPOCH0_COMPARATIVE_DECISION_REPORT.md",
+        "runtime/nextgen_epoch0_20260711/epoch0_failure.json"
+      ],
+      "blocker": "zero development survivors; revise search engine, admission feasibility and reward scalar before another frozen development epoch",
+      "last_verified_sha": "75B139DA071697934D09786E496A3CDE4798280C94A426C3685071951ADBE969"
     }
   ],
   "edges": [
@@ -1302,6 +1325,42 @@
       "target": "scheduler",
       "kind": "FORBIDDEN",
       "label": "no online budget, grammar, reward or admission changes"
+    },
+    {
+      "source": "epoch0_frozen_design",
+      "target": "epoch0_execution",
+      "kind": "ALLOWED",
+      "label": "single immutable development-only execution"
+    },
+    {
+      "source": "epoch0_execution",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "no adaptive statistics, policy, elite or value persistence"
+    },
+    {
+      "source": "epoch0_execution",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "frozen candidate pack cannot promote"
+    },
+    {
+      "source": "epoch0_execution",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "no automatic rotating epoch or rerun"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "epoch0_execution",
+      "kind": "FORBIDDEN",
+      "label": "spent evaluation cannot enter execution or recommendation"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "epoch0_execution",
+      "kind": "FORBIDDEN",
+      "label": "forward remains sealed after completion"
     }
   ]
 }

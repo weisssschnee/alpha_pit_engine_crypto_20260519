@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `11BF9E860163A874E2DD57116DE51BEEF998D4CFF5523AB0DA6E3AD231512607`.
+Generated from registry SHA256: `D54D4C53D1F4CB7E9849160C5D40714A27EE62A2D469D6942F40D15C9148B292`.
 
 ## Authority
 
@@ -52,3 +52,8 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 | epoch0_frozen_design | a7mem | no cross-epoch elite, policy, value or statistics |
 | epoch0_frozen_design | admission | Epoch-0 cannot promote candidates |
 | epoch0_frozen_design | scheduler | no online budget, grammar, reward or admission changes |
+| epoch0_execution | a7mem | no adaptive statistics, policy, elite or value persistence |
+| epoch0_execution | admission | frozen candidate pack cannot promote |
+| epoch0_execution | scheduler | no automatic rotating epoch or rerun |
+| spent_evaluation | epoch0_execution | spent evaluation cannot enter execution or recommendation |
+| sealed_forward | epoch0_execution | forward remains sealed after completion |

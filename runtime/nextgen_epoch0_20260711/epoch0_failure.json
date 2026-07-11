@@ -1,0 +1,10 @@
+{
+  "a7mem_updated": false,
+  "action": "check",
+  "candidate_promotion": false,
+  "error": "Epoch-0 global control budget mismatch",
+  "error_type": "ValueError",
+  "forward_read": false,
+  "repo_sha": "629149756cb02431221352eecd2a5c6bd8340b96",
+  "status": "FAILED_VISIBLE_NOT_DELETED"
+}

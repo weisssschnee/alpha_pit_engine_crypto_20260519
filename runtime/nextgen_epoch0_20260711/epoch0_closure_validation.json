@@ -1,0 +1,51 @@
+{
+  "adaptive_basin_rate": 0.25,
+  "all_positive_objective_rows_before_hard_gate_intersection": 2,
+  "candidate_promotion_status": "NO_CANDIDATE_PROMOTION",
+  "cross_epoch_memory_status": "NO_CROSS_EPOCH_ADAPTIVE_MEMORY",
+  "decision": "FROZEN_DEVELOPMENT_EPOCH_COMPLETED",
+  "development_survivors": 0,
+  "executed_global_top_k_strict_evaluations": 976,
+  "executed_stratified_strict_evaluations": 825,
+  "execution_status": "COMPLETED",
+  "forward_status": "FORWARD_SEALED",
+  "frozen_candidate_pack_rows": 191,
+  "frozen_manifest_sha256": "CD839D4F095E330DE17EB50E69FC55F8AFDEEA16CADB0C62FF3CE3DE9E6E7E62",
+  "funding_expansion": {
+    "b1s_reference_exact_identities": 27,
+    "conclusion": "FUNDING_GRAMMAR_CAPACITY_EXPANDED; HYPOTHESIS_SPACE_IS_NOT_THE_PRIMARY_NEXT_BLOCKER",
+    "typed_ast_exact_identities": 120,
+    "typed_random_exact_identities": 120
+  },
+  "global_top_k_fill_rate": 0.953125,
+  "hard_gate_pass": 1282,
+  "natural_underfill": true,
+  "no_new_evaluation_block_read": true,
+  "original_frozen_checker_failure_preserved": "runtime/nextgen_epoch0_20260711/epoch0_failure.json",
+  "pareto_candidates": 429,
+  "planned_global_top_k_strict_evaluations": 1024,
+  "planned_stratified_strict_evaluations": 1024,
+  "positive_benchmark_incremental_lcb": 29,
+  "positive_ic_lcb": 116,
+  "positive_net_lcb": 3,
+  "proposal_rows": 32768,
+  "recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
+  "recommendation_override_reason": "closure audit adds zero-survivor and admission-feasibility gates that the frozen run reporter omitted",
+  "rerun_required": false,
+  "run_recorded_recommendation": "PREPARE_ROTATING_CHALLENGE_EPOCH",
+  "semantic_exact_conversion": 0.7602250935269892,
+  "stratified_fill_rate": 0.8056640625,
+  "total_development_strict_evaluations": 1801,
+  "total_strict_fill_rate": 0.87939453125,
+  "underfill_causes": {
+    "bbo_stratified_family_cap": {
+      "executed": 32,
+      "family_budget_cap": 32,
+      "planned": 128
+    },
+    "full_identity_dedup_after_proposal_sketch": 103,
+    "global_full_identity_dedup": 48
+  },
+  "underfill_contract_preserved": true,
+  "validation_status": "PASS_EPOCH0_CLOSURE_WITH_NATURAL_FULL_IDENTITY_UNDERFILL"
+}

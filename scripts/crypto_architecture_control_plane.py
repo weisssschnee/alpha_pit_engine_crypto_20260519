@@ -50,6 +50,10 @@ EPOCH0_CANARY_ATTRIBUTION_PATH = EPOCH0_ROOT / "b1s_canary_deep_attribution.json
 EPOCH0_CANARY_REPORT_PATH = EPOCH0_ROOT / "B1S_CANARY_COMPARATIVE_DECISION_REPORT.md"
 EPOCH0_TEST_OUTPUT_PATH = EPOCH0_ROOT / "epoch0_design_test_output.txt"
 EPOCH0_ARTIFACT_INDEX_PATH = EPOCH0_ROOT / "epoch0_artifact_index.csv"
+EPOCH0_RUN_MANIFEST_PATH = EPOCH0_ROOT / "epoch0_run_manifest.json"
+EPOCH0_CLOSURE_VALIDATION_PATH = EPOCH0_ROOT / "epoch0_closure_validation.json"
+EPOCH0_COMPARATIVE_REPORT_PATH = EPOCH0_ROOT / "EPOCH0_COMPARATIVE_DECISION_REPORT.md"
+EPOCH0_FAILURE_PATH = EPOCH0_ROOT / "epoch0_failure.json"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -83,6 +87,7 @@ REQUIRED_NODE_IDS = {
     "b1s_main_canary", "b1s_bbo_micro_canary", "b1s_canary_control",
     "nextgen_mechanism_registry", "nextgen_search_engine", "development_multiobjective_reward",
     "epoch0_frozen_design",
+    "epoch0_execution",
 }
 REQUIRED_FORBIDDEN_EDGES = {
     ("spent_evaluation", "admission"),
@@ -117,6 +122,11 @@ REQUIRED_FORBIDDEN_EDGES = {
     ("epoch0_frozen_design", "a7mem"),
     ("epoch0_frozen_design", "admission"),
     ("epoch0_frozen_design", "scheduler"),
+    ("epoch0_execution", "a7mem"),
+    ("epoch0_execution", "admission"),
+    ("epoch0_execution", "scheduler"),
+    ("spent_evaluation", "epoch0_execution"),
+    ("sealed_forward", "epoch0_execution"),
 }
 VALID_STATUSES = {"IMPLEMENTED", "PARTIAL", "PLANNED", "FROZEN", "DEPRECATED"}
 
@@ -194,9 +204,9 @@ def b1s_test_evidence() -> dict[str, str]:
 
 def epoch0_test_evidence() -> dict[str, str]:
     normalized = EPOCH0_TEST_OUTPUT_PATH.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
-    match = re.search(r"(?m)^(91 passed in [0-9.]+s)$", normalized)
+    match = re.search(r"(?m)^(94 passed in [0-9.]+s)$", normalized)
     if not match:
-        raise ValueError("Epoch-0 design test output does not record exactly 91 passing tests")
+        raise ValueError("Epoch-0 closure test output does not record exactly 94 passing tests")
     return {
         "command": "G:/PythonProject/.venv/Scripts/python.exe -m pytest -q",
         "result": match.group(1),
@@ -370,6 +380,8 @@ Generated from registry SHA256: `{digest}`.
 - B1S execution is accepted as `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`: 5120 frozen proposals, 315/320 stratified strict evaluations, 320/320 equal-budget global-top-K controls, and 64 adaptive runtime-only queries. Funding-event naturally underfilled by five because only 27 legal exact identities existed under one-exact-one-vote; rerun is forbidden and the fixed budget contract was preserved.
 - CANARY attribution shows funding identities saturated after the first 128 proposals, both seeds produced the same 27 identities, event-window/transition produced zero legal identities, and the former adaptive tail collapsed all 448 proposals to `blend`. Epoch-0 therefore replaces the single adaptive lane with isolated CEM, multi-step UCT/MCTS, evolutionary, surrogate, typed, LLM-repair and orthogonal lanes.
 - Epoch-0 design is frozen at manifest `CD839D4F...`: 32768 proposals, seeds 2701/2709, 1024 stratified strict evaluations and 1024 equal-budget global-top-K controls. No Epoch-0 performance has been produced at the design-freeze node.
+- Epoch-0 then completed its single fixed execution: 32768 proposals and 1801 full-identity strict evaluations after deterministic dedup, with no rerun or budget extension. The original frozen checker incorrectly demanded exactly 1024 global rows despite the natural-underfill contract; its visible failure record is retained and an independent closure validator passed.
+- Funding capacity expanded to 120 exact identities in typed funding slices, so the earlier 27-identity CANARY ceiling was a grammar/generator limitation. However all lanes produced zero complete development survivors, BBO stratified admission was mechanically capped at 32/128, and UCT concentrated into one reward basin. The validated recommendation is `REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH`, not hypothesis-space expansion or rotating challenge authorization.
 - Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
 - `{state['formal_search_status']}`, `{state['adaptive_cross_epoch_memory_status']}`, `{state['candidate_promotion_status']}`, and `{state['forward_data_status']}` remain frozen.
 
@@ -482,6 +494,10 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Proposals / lanes / seeds: `{state['nextgen_epoch0']['total_proposals']}` / `{state['nextgen_epoch0']['independent_lanes']}` / `{state['nextgen_epoch0']['fixed_seeds']}`
 - Strict budgets: `{state['nextgen_epoch0']['planned_stratified_strict_evaluations']}` stratified + `{state['nextgen_epoch0']['planned_global_top_k_strict_evaluations']}` equal-budget global-top-K
 - Performance started: `{state['nextgen_epoch0']['performance_started']}`
+- Execution / strict fill: `{state['nextgen_epoch0']['execution_status']}` / `{state['nextgen_epoch0']['total_development_strict_evaluations']}` of `{state['nextgen_epoch0']['planned_logical_strict_evaluations']}` (`{state['nextgen_epoch0']['strict_fill_rate']}`)
+- Development survivors / Pareto / frozen pack: `{state['nextgen_epoch0']['development_survivors']}` / `{state['nextgen_epoch0']['pareto_candidates']}` / `{state['nextgen_epoch0']['frozen_candidate_pack_rows']}`
+- Natural full-identity underfill / rerun required: `{state['nextgen_epoch0']['natural_full_identity_underfill']}` / `{state['nextgen_epoch0']['rerun_required']}`
+- Validated recommendation: `{state['nextgen_epoch0']['recommendation']}` — {state['nextgen_epoch0']['recommendation_basis']}
 - Forward read / promotion / cross-epoch memory: `{state['nextgen_epoch0']['forward_read']}` / `{state['nextgen_epoch0']['candidate_promotion']}` / `{state['nextgen_epoch0']['cross_epoch_memory']}`
 
 ## NEXTGEN-DARK Allowed
@@ -540,6 +556,10 @@ def artifact_paths(registry: dict[str, Any]) -> set[Path]:
         EPOCH0_CANARY_REPORT_PATH,
         EPOCH0_TEST_OUTPUT_PATH,
         EPOCH0_ARTIFACT_INDEX_PATH,
+        EPOCH0_RUN_MANIFEST_PATH,
+        EPOCH0_CLOSURE_VALIDATION_PATH,
+        EPOCH0_COMPARATIVE_REPORT_PATH,
+        EPOCH0_FAILURE_PATH,
     }
     for node in registry["nodes"]:
         paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
@@ -586,19 +606,24 @@ def b1s_artifact_paths(registry: dict[str, Any]) -> set[Path]:
 def epoch0_artifact_paths(registry: dict[str, Any]) -> set[Path]:
     node_ids = {
         "nextgen_mechanism_registry", "nextgen_search_engine", "development_multiobjective_reward",
-        "epoch0_frozen_design",
+        "epoch0_frozen_design", "epoch0_execution",
     }
     paths = {
         REGISTRY_PATH, STATE_SOURCE_PATH, DECISION_LOG_PATH, CURRENT_ARCH_PATH, BOUNDARY_PATH,
         EVOLUTION_PATH, GRAPH_PATH, STATE_PATH, EPOCH0_SMOKE_PRE_PATH, EPOCH0_SMOKE_PATH,
         EPOCH0_FROZEN_MANIFEST_PATH, EPOCH0_CANARY_ATTRIBUTION_PATH, EPOCH0_CANARY_REPORT_PATH,
         EPOCH0_TEST_OUTPUT_PATH, RUN_MANIFEST_PATH,
+        EPOCH0_RUN_MANIFEST_PATH, EPOCH0_CLOSURE_VALIDATION_PATH,
+        EPOCH0_COMPARATIVE_REPORT_PATH, EPOCH0_FAILURE_PATH,
         REPO / "scripts" / "crypto_architecture_control_plane.py",
         REPO / "tests" / "test_architecture_control_plane.py",
     }
     for node in registry["nodes"]:
         if node["id"] in node_ids:
             paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
+    if EPOCH0_RUN_MANIFEST_PATH.exists():
+        run = load_json(EPOCH0_RUN_MANIFEST_PATH)
+        paths.update(REPO / item["path"] for item in run.get("outputs", []))
     paths.discard(EPOCH0_ARTIFACT_INDEX_PATH)
     return paths
 
@@ -668,6 +693,9 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "epoch0_status": state["nextgen_epoch0"]["status"],
         "epoch0_frozen_manifest_sha256": state["nextgen_epoch0"]["frozen_manifest_sha256"],
         "epoch0_performance_started": state["nextgen_epoch0"]["performance_started"],
+        "epoch0_execution_status": state["nextgen_epoch0"].get("execution_status"),
+        "epoch0_total_development_strict_evaluations": state["nextgen_epoch0"].get("total_development_strict_evaluations"),
+        "epoch0_recommendation": state["nextgen_epoch0"].get("recommendation"),
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -823,6 +851,10 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "epoch0_frozen_manifest_sha256": state["nextgen_epoch0"]["frozen_manifest_sha256"],
         "epoch0_artifact_index": relative(EPOCH0_ARTIFACT_INDEX_PATH),
         "epoch0_test_evidence": epoch0_test_evidence(),
+        "epoch0_run_manifest": relative(EPOCH0_RUN_MANIFEST_PATH),
+        "epoch0_closure_validation": relative(EPOCH0_CLOSURE_VALIDATION_PATH),
+        "epoch0_total_development_strict_evaluations": state["nextgen_epoch0"].get("total_development_strict_evaluations"),
+        "epoch0_recommendation": state["nextgen_epoch0"].get("recommendation"),
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []
@@ -1110,10 +1142,34 @@ def validate_outputs(registry: dict[str, Any]) -> None:
         raise PermissionError("Epoch-0 throughput smoke read performance")
     if smoke_pre.get("selected_budget_if_frozen_now") is not None or smoke.get("selected_budget_if_frozen_now") != 32768:
         raise ValueError("Epoch-0 pre/post optimization throughput decision mismatch")
-    if meta.get("epoch0_status") != state["nextgen_epoch0"]["status"] or meta.get("epoch0_performance_started"):
-        raise ValueError("graph Epoch-0 design status mismatch")
+    if meta.get("epoch0_status") != state["nextgen_epoch0"]["status"] or meta.get("epoch0_performance_started") != state["nextgen_epoch0"]["performance_started"]:
+        raise ValueError("graph Epoch-0 status mismatch")
+    epoch0_run = load_json(EPOCH0_RUN_MANIFEST_PATH)
+    epoch0_closure = load_json(EPOCH0_CLOSURE_VALIDATION_PATH)
+    prohibited_epoch0 = [
+        "validation_test_recent_may_stress_forward_read", "candidate_promotion", "a7mem_updated",
+        "cross_lane_memory_persisted", "cross_epoch_memory_persisted", "online_contract_changed",
+        "additional_budget_added", "intermediate_human_reweighting", "alpha_ready_claimed",
+        "oos_proven_claimed", "main_and_bbo_directly_ranked",
+    ]
+    if epoch0_run.get("decision") != "FROZEN_DEVELOPMENT_EPOCH_COMPLETED" or any(epoch0_run.get(flag) for flag in prohibited_epoch0):
+        raise ValueError("Epoch-0 run decision mismatch or prohibited activity")
+    if epoch0_run.get("proposal_rows") != 32768 or epoch0_run.get("total_development_strict_evaluations") != 1801:
+        raise ValueError("Epoch-0 execution counts drifted")
+    if epoch0_closure.get("validation_status") != "PASS_EPOCH0_CLOSURE_WITH_NATURAL_FULL_IDENTITY_UNDERFILL":
+        raise ValueError("Epoch-0 closure validation status mismatch")
+    if epoch0_closure.get("recommendation") != state["nextgen_epoch0"]["recommendation"]:
+        raise ValueError("Epoch-0 closure recommendation mismatch")
+    if epoch0_closure.get("rerun_required") or not epoch0_closure.get("natural_underfill"):
+        raise ValueError("Epoch-0 natural underfill or rerun record mismatch")
+    for output in epoch0_run.get("outputs", []):
+        path = REPO / output["path"]
+        if sha256_file(path) != output["sha256"]:
+            raise ValueError(f"Epoch-0 output hash drift: {output['path']}")
     if manifest.get("epoch0_frozen_manifest_sha256") != epoch0_recorded or manifest.get("epoch0_test_evidence") != epoch0_test_evidence():
-        raise ValueError("Phase A/B0 manifest Epoch-0 design evidence mismatch")
+        raise ValueError("Phase A/B0 manifest Epoch-0 evidence mismatch")
+    if manifest.get("epoch0_total_development_strict_evaluations") != 1801 or manifest.get("epoch0_recommendation") != epoch0_closure["recommendation"]:
+        raise ValueError("Phase A/B0 manifest Epoch-0 execution summary mismatch")
     with ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
         index_rows = list(csv.DictReader(handle))
     indexed_paths = {row["path"] for row in index_rows}

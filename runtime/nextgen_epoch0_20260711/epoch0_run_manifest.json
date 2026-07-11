@@ -1,0 +1,122 @@
+{
+  "a7mem_updated": false,
+  "actual_runtime_seconds": 2120.4363240000093,
+  "adaptive_feedback_queries": 2048,
+  "additional_budget_added": false,
+  "alpha_ready_claimed": false,
+  "candidate_promotion": false,
+  "candidate_promotion_status": "NO_CANDIDATE_PROMOTION",
+  "continuation": "stop after closure; wait for independent decision; never open OOS automatically",
+  "cross_epoch_memory_persisted": false,
+  "cross_epoch_memory_status": "NO_CROSS_EPOCH_ADAPTIVE_MEMORY",
+  "cross_lane_memory_persisted": false,
+  "data_release_sha256": "68150BEACEBB4A92AA4C2C34A93D9E56F1538E2685BF683806FDBCB004B1E875",
+  "decision": "FROZEN_DEVELOPMENT_EPOCH_COMPLETED",
+  "executed_stratified_strict_evaluations": 825,
+  "execution_status": "COMPLETED",
+  "experiment_id": "20260711_crypto_nextgen_search_epoch0_001",
+  "forward_status": "FORWARD_SEALED",
+  "frozen_candidate_pack_rows": 191,
+  "frozen_manifest": "runtime/nextgen_epoch0_20260711/epoch0_frozen_design_manifest.json",
+  "frozen_manifest_sha256": "CD839D4F095E330DE17EB50E69FC55F8AFDEEA16CADB0C62FF3CE3DE9E6E7E62",
+  "global_top_k_strict_evaluations": 976,
+  "implementation_subject_sha": "3b608e08f3e95af45a00ea1b24694c600a268f9c",
+  "intermediate_human_reweighting": false,
+  "main_and_bbo_directly_ranked": false,
+  "next_step_recommendation": "PREPARE_ROTATING_CHALLENGE_EPOCH",
+  "online_contract_changed": false,
+  "oos_proven_claimed": false,
+  "outputs": [
+    {
+      "path": "runtime/nextgen_epoch0_20260711/raw_proposals.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "975D9EE1AAC134666040C0C21E0393F36438FAEF577B34A4280D39F680E58C9B"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/admission_table.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "9BE5CC734D6B93E5518A36BEA1D650EBB35BA51F664C31CB3E6F39B05316FCE8"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/admission_rejections.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "8C74FF2E33A1FF7C89CD7167B11574113F6F4A68440105485075D00C2932103B"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/strict_evaluations.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "7C4428A31319C0C1A3F052AA7290C0DA9880257A41ACA7020B914E649FD4C36C"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/identity_table.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "AA1B3170BDEC49CFBCB3C70BE5181C8864EBC785CD2794ABF257DEA58486953F"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/behaviour_clusters.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "23C92283D3AB0DD8E103745DEE90FB5EA9176EE5F2B347D1B2A42ABC68FCE541"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/economic_hypotheses.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "B83419A43A092AC5BF7B6A5C882B66D0ADF1C3D518F6012855F812BEB44DE6AF"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/pareto_archive.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "86F2630299ACEC2E2537220411CBA5FFD2AFF3508E3346E2C6AAD7D355649E0D"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/benchmark_results.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "EDD1F2F711BCD87C28E4237F58662FF8D9B054F57CCDD5BB7CEEBEC0906C9CC7"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/benchmark_comparisons.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "BC280E8BFB3BCDF270C9D2C3C412EECF145019FD51A186D2415515F2A9118220"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/lane_efficiency.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "63D52D2C7F67579010303445F4DCDAA026BB5802104FEE4754BBF88A2E2A8112"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/semantic_volume_accounting.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "B1944D9AEA6797042765934024ACC678A83B7CA732AAA7BC9466BAF256890F58"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/adaptive_feedback_queries.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "C7CB0E34371066DA61A27F45390A551613BED7D618F80B5349F208B3A94F5767"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/reward_basin_audit.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "CFCED05EACFB02B21C12466EA85C5F0338B409D57791D4BC03C66763A053F87D"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/frozen_candidate_pack.csv",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "33FB924F32DA830BB77504E51217DCC206C56802437D9E93B4F64AE3FFB18DE3"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/lineage_graph.json",
+      "purpose": "epoch0_final_artifact",
+      "sha256": "F04532A96BF9D79B04724B415E9C1D1DCF609E3C399050B572FA545ABC235BE8"
+    },
+    {
+      "path": "runtime/nextgen_epoch0_20260711/EPOCH0_COMPACT_RESULT.md",
+      "purpose": "epoch0_compact_report",
+      "sha256": "95B1890CE410CC1B4208ACAD0C3130D7BD5A95841B3885D06D8580CA77E19DC6"
+    }
+  ],
+  "pareto_candidates": 429,
+  "planned_stratified_strict_evaluations": 1024,
+  "proposal_rows": 32768,
+  "reproducibility": "YES_FROZEN_INPUTS_CONTRACTS_BUDGET_SEEDS_AND_DETERMINISTIC_PROGRAMS",
+  "total_development_strict_evaluations": 1801,
+  "validation_test_recent_may_stress_forward_read": false
+}
