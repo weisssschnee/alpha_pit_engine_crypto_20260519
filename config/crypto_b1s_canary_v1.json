@@ -1,0 +1,88 @@
+{
+  "contract_id": "CRYPTO-B1S-CANARY-V1",
+  "authorization_status": "B1S_CANARY_AUTHORIZED",
+  "research_mode": "RESEARCH_MODE_CONTROLLED_CANARY_ONLY",
+  "formal_search_status": "FORMAL_SEARCH_FROZEN",
+  "adaptive_cross_epoch_memory": "FROZEN",
+  "forward_status": "SEALED_NO_NEW_FORWARD_READ",
+  "panels": {
+    "main": {
+      "epoch_id": "train_2024",
+      "classification": "DISCOVERY_TRAIN",
+      "start_utc": "2024-01-01T00:00:00Z",
+      "end_utc_inclusive": "2024-12-31T23:00:00Z",
+      "universe": "BINANCE_UM_CORE12",
+      "excluded_capabilities": ["liquidation", "force_order", "multi_level_depth", "bookticker_bbo"],
+      "comparison_domain": "MAIN_ONLY"
+    },
+    "bbo_micro": {
+      "epoch_id": "bookticker_2024_01_02",
+      "classification": "DISCOVERY_TRAIN_SCOPED_BBO",
+      "start_utc": "2024-01-01T00:00:00Z",
+      "end_utc_inclusive": "2024-02-29T23:00:00Z",
+      "universe": "BINANCE_UM_BOOKTICKER_CORE11_OBSERVED",
+      "coverage_ratio": 0.8222222222222222,
+      "depth_semantics": "TOP_OF_BOOK_BBO_ONLY_NOT_MULTI_LEVEL_DEPTH",
+      "comparison_domain": "BBO_MICRO_ONLY"
+    }
+  },
+  "main_lanes": [
+    "static_cross_sectional", "temporal_program", "funding_event", "basis_oi_state",
+    "volatility_session", "cross_asset_state", "orthogonal_exile", "competitor_reproduction",
+    "adaptive_challenger"
+  ],
+  "bbo_lanes": ["bbo_temporal_event_micro"],
+  "budget_per_lane": {
+    "proposals_per_seed": 256,
+    "fixed_seeds": [1701, 1709],
+    "proposal_total": 512,
+    "stratified_admissions": 64,
+    "development_strict_evaluations": 32
+  },
+  "adaptive_challenger": {
+    "algorithms": ["cem", "uct_mcts", "evolutionary"],
+    "max_development_feedback_queries": 64,
+    "namespace": "runtime_only/b1s_canary/adaptive_challenger",
+    "persist_policy": false,
+    "persist_elite": false,
+    "persist_learned_value": false
+  },
+  "global_top_k_control": {
+    "main_strict_evaluation_budget": 288,
+    "bbo_strict_evaluation_budget": 32,
+    "ranking_input": "FROZEN_DEVELOPMENT_PROXY_ONLY",
+    "cross_panel_ranking_allowed": false
+  },
+  "reward_contract": {
+    "label": "trade_close[t+2]/trade_close[t+1]-1 for observation bucket t available at t+1",
+    "cost_bps_per_unit_turnover": 5.0,
+    "minimum_assets_per_coordinate": 5,
+    "strict_survivor_rule": "coverage>=0.80 and observations>=100 and net_mean>0 and ic_mean>0",
+    "online_modification_allowed": false
+  },
+  "admission_contract": {
+    "one_exact_identity_one_vote": true,
+    "behaviour_potential_quota": 8,
+    "economic_hypothesis_quota": 24,
+    "parent_descendant_cap": 8,
+    "family_budget_cap": 24,
+    "fresh_budget_floor": 32,
+    "no_memory": true,
+    "online_modification_allowed": false
+  },
+  "candidate_contract": {
+    "requires": ["lane", "seed", "lineage", "canonical_program", "economic_hypothesis"],
+    "forbidden_fields": ["validation", "test", "recent", "stress", "oos", "forward", "reward_history", "a7mem"],
+    "candidate_promotion_allowed": false
+  },
+  "benchmark_contract": {
+    "strategy": ["simple_funding", "simple_basis", "simple_oi", "momentum", "reversal", "volatility", "liquidity", "session_time_of_day"],
+    "algorithms": ["cem", "typed_ast", "uct_mcts", "evolutionary_search", "external_competitor_reproduction"],
+    "feedback_permission": "CANARY_RUNTIME_ONLY_NO_MEMORY"
+  },
+  "prohibited": [
+    "validation_test_recent_may_stress_or_forward_read", "a7mem_update", "cross_canary_elite_policy_or_value_persistence",
+    "candidate_promotion", "online_budget_reward_threshold_or_admission_change", "midrun_budget_extension",
+    "alpha_ready_deployable_or_oos_proven_claim"
+  ]
+}
