@@ -13,8 +13,11 @@
   "source_integrity_verified": true,
   "truth_duplicate_rows": 0,
   "detected_duplicate_rows": 0,
+  "truth_source_duplicate_rows": 0,
+  "detector_source_duplicate_rows": 0,
   "rate_mismatch_events": 0,
   "funding_rate_abs_error_max": 0.0,
+  "observable_time_error_abs_seconds_max": 0.0,
   "truth_symbols": 12,
   "fully_covered_symbols": 12,
   "symbol_coverage_ratio": 1.0,
@@ -42,8 +45,18 @@
     "fundingTime_ms",
     "latest_known_funding_rate"
   ],
+  "truth_independence": "UPSTREAM_RAW_EVENT_LOG_SEPARATE_FROM_DERIVED_HOURLY_DETECTOR_PANEL",
+  "truth_and_detector_artifact_same_path": false,
+  "panel_time_boundary_verified": true,
+  "truth_rows_match_contract": true,
   "search_started": false,
   "forward_performance_read": false,
   "state_event_reward_connected": false,
-  "memory_or_scheduler_updated": false
+  "memory_or_scheduler_updated": false,
+  "cem_ucb_mcts_updated": false,
+  "a7mem_updated": false,
+  "candidate_selection_performed": false,
+  "b1_lane_integration": false,
+  "large_search_authorized": false,
+  "alpha_ready": false
 }

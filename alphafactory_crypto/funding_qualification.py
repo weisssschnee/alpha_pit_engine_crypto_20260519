@@ -13,6 +13,12 @@ class FundingQualificationError(ValueError):
     pass
 
 
+TRUTH_QUALIFICATION_COLUMNS = frozenset({"symbol", "fundingTime", "fundingRate"})
+DETECTOR_QUALIFICATION_COLUMNS = frozenset(
+    {"symbol", "timestamp", "bar_close_timestamp", "fundingTime_ms", "latest_known_funding_rate"}
+)
+
+
 @dataclass(frozen=True)
 class FundingProductionQualification:
     summary: dict[str, Any]
@@ -28,6 +34,13 @@ def validate_observation_columns(requested: Iterable[str], allowed: set[str]) ->
     forbidden = sorted(requested_set.difference(allowed))
     if forbidden:
         raise FundingQualificationError(f"unapproved funding qualification columns: {forbidden}")
+
+
+def hourly_bar_close_observable_time(event_times: pd.Series) -> pd.Series:
+    native = pd.to_datetime(event_times, utc=True, errors="coerce")
+    if native.isna().any():
+        raise FundingQualificationError("native funding event time is invalid")
+    return native.dt.ceil("h") + pd.Timedelta("1h") - pd.Timedelta("1ms")
 
 
 def _duplicate_count(frame: pd.DataFrame) -> int:
@@ -70,6 +83,8 @@ def qualify_production_funding(
     detected: pd.DataFrame,
     *,
     source_integrity_verified: bool,
+    truth_source_duplicate_rows: int = 0,
+    detector_source_duplicate_rows: int = 0,
     tolerance: str | pd.Timedelta = "30m",
     rate_atol: float = 1e-15,
 ) -> FundingProductionQualification:
@@ -78,6 +93,7 @@ def qualify_production_funding(
     if matches.empty:
         rate_mismatch_events = 0
         max_rate_error = 0.0
+        max_observable_time_error = 0.0
     else:
         expected_rates = truth.loc[matches["expected_index"], "funding_rate"].to_numpy(dtype=float)
         detected_rates = detected.loc[matches["detected_index"], "funding_rate"].to_numpy(dtype=float)
@@ -87,6 +103,11 @@ def qualify_production_funding(
         matches["funding_rate_abs_error"] = rate_errors
         rate_mismatch_events = int((rate_errors > rate_atol).sum())
         max_rate_error = float(rate_errors.max(initial=0.0))
+        expected_observable = truth.loc[matches["expected_index"], "observable_time_utc"].reset_index(drop=True)
+        detected_observable = detected.loc[matches["detected_index"], "observable_time_utc"].reset_index(drop=True)
+        observable_errors = (detected_observable - expected_observable).dt.total_seconds().to_numpy(dtype=float)
+        matches["observable_time_error_seconds"] = observable_errors
+        max_observable_time_error = float(np.abs(observable_errors).max(initial=0.0))
 
     misses = audit.missed.copy()
     detected_symbols = set(detected["instrument"].astype(str))
@@ -118,7 +139,10 @@ def qualify_production_funding(
             audit.summary["precision"] == 1.0,
             _duplicate_count(truth) == 0,
             _duplicate_count(detected) == 0,
+            int(truth_source_duplicate_rows) == 0,
+            int(detector_source_duplicate_rows) == 0,
             rate_mismatch_events == 0,
+            max_observable_time_error <= float(audit.summary["tolerance_seconds"]),
             audit.summary["cashflow_semantics_pass"],
             symbol_coverage_ratio == 1.0,
             group_coverage_ratio == 1.0,
@@ -137,8 +161,11 @@ def qualify_production_funding(
         "source_integrity_verified": bool(source_integrity_verified),
         "truth_duplicate_rows": _duplicate_count(truth),
         "detected_duplicate_rows": _duplicate_count(detected),
+        "truth_source_duplicate_rows": int(truth_source_duplicate_rows),
+        "detector_source_duplicate_rows": int(detector_source_duplicate_rows),
         "rate_mismatch_events": rate_mismatch_events,
         "funding_rate_abs_error_max": max_rate_error,
+        "observable_time_error_abs_seconds_max": max_observable_time_error,
         "truth_symbols": len(truth_symbols),
         "fully_covered_symbols": len(fully_covered_symbols),
         "symbol_coverage_ratio": symbol_coverage_ratio,

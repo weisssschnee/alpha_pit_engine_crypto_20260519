@@ -6,30 +6,35 @@
       "hypothesis_id": "hypothesis:oi-change-amplified-by-account-position-divergence",
       "label": "OI change amplified by account-position divergence",
       "required_fields": ["open_interest_value_last", "account_position_divergence"],
+      "required_operators": ["Mul", "Delta"],
       "mechanism": "changes in leveraged inventory interact with disagreement between account and position crowding"
     },
     {
       "hypothesis_id": "hypothesis:oi-expansion-versus-top-account-crowding",
       "label": "OI expansion versus top-account crowding",
       "required_fields": ["open_interest_value_mean", "top_long_short_account_ratio_last"],
+      "required_operators": ["Sub", "Delta"],
       "mechanism": "slow leveraged-inventory change is contrasted with top-account directional crowding"
     },
     {
       "hypothesis_id": "hypothesis:standalone-slow-oi-inventory-change",
       "label": "Standalone slow OI inventory change",
       "required_fields": ["open_interest_value_mean"],
+      "required_operators": ["Delta"],
       "mechanism": "slow changes in aggregate open-interest inventory proxy leverage accumulation or release"
     },
     {
       "hypothesis_id": "hypothesis:oi-change-normalized-by-account-divergence",
       "label": "OI change normalized by account divergence",
       "required_fields": ["open_interest_value_mean", "top_global_account_divergence"],
+      "required_operators": ["SafeDiv", "Delta"],
       "mechanism": "leveraged-inventory change is scaled by the magnitude of global account disagreement"
     },
     {
       "hypothesis_id": "hypothesis:basis-versus-account-crowding-dislocation",
       "label": "Basis versus account-crowding dislocation",
       "required_fields": ["mark_trade_basis_bps", "global_long_short_account_ratio_last"],
+      "required_operators": ["Sub", "CSRank", "Decay"],
       "mechanism": "cross-sectional basis pressure is contrasted with directional account crowding"
     }
   ],

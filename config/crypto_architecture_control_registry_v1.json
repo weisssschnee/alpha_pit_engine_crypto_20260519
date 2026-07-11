@@ -163,7 +163,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md"
       ],
       "blocker": "BINANCE_UM core12 production observation qualified through 2026-04-30; no cross-venue qualification is claimed",
-      "last_verified_sha": "8864ABDDB019147EFA0767A5F7A7A7F76205B9EC2D38120AED4FF9B30E36C6C3"
+      "last_verified_sha": "36680D289F2D9AA0D52F924912C3BF3D0657CB43E8CD84D84DDAF5DD9D751496"
     },
     {
       "id": "basis_oi_event_detection",
@@ -248,7 +248,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "activation identity and clustering are not qualified because the accepted release contains no frozen signal behavior matrix; one spent sign-pattern diagnostic and five semantic hypotheses are registered without feedback permission",
-      "last_verified_sha": "17F8211690B4185237E73678AE0EF86AA01AF503D17D65D3ED1D687CF37517C4"
+      "last_verified_sha": "1C4D53AF230556C320FFB22FD712CDF52DE9726B8E09650C3922E48B0AB7A800"
     },
     {
       "id": "generation_lanes",
@@ -553,7 +553,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "funding is qualified for Binance UM core12, but activation identity and clustering are not qualified because no frozen signal behavior matrix is present",
-      "last_verified_sha": "B07148A7D8D19B4E0A3584077318EE02EA5FC958BFF2115AC058E2B276490CC2"
+      "last_verified_sha": "215B6D8DF41B402C046FE13C047B62D5C5E758772B1638AA0327F237FD040B37"
     }
   ],
   "edges": [

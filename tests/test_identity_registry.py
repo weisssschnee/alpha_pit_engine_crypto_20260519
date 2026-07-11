@@ -54,6 +54,7 @@ class IdentityRegistryTests(unittest.TestCase):
             "hypothesis:oi-versus-crowding",
             expression="Sub(Delta(open_interest_value_mean,240),Mean(top_long_short_account_ratio_last,120))",
             required_fields=["open_interest_value_mean", "top_long_short_account_ratio_last"],
+            required_operators=["Sub", "Delta"],
             mechanism="open-interest change relative to account crowding",
             provenance="config/crypto_b0p_economic_hypothesis_registry_v1.json",
         )
@@ -63,7 +64,17 @@ class IdentityRegistryTests(unittest.TestCase):
                 "hypothesis:missing-field",
                 expression="Delta(open_interest_value_mean,240)",
                 required_fields=["future_return"],
+                required_operators=["Delta"],
                 mechanism="invalid",
+                provenance="test",
+            )
+        with self.assertRaises(ValueError):
+            economic_hypothesis_assignment(
+                "hypothesis:wrong-structure",
+                expression="Delta(open_interest_value_mean,240)",
+                required_fields=["open_interest_value_mean"],
+                required_operators=["SafeDiv"],
+                mechanism="invalid structure",
                 provenance="test",
             )
 

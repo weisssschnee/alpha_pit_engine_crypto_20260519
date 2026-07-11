@@ -105,12 +105,18 @@ def economic_hypothesis_assignment(
     *,
     expression: str,
     required_fields: Iterable[str],
+    required_operators: Iterable[str] = (),
     mechanism: str,
     provenance: str,
 ) -> RegisteredIdentity:
     missing = sorted(field for field in required_fields if str(field) not in str(expression))
     if missing:
         raise ValueError(f"economic hypothesis fields absent from expression: {missing}")
+    missing_operators = sorted(
+        operator for operator in required_operators if f"{str(operator)}(" not in str(expression)
+    )
+    if missing_operators:
+        raise ValueError(f"economic hypothesis operators absent from expression: {missing_operators}")
     performance_terms = {"reward", "sortino", "sharpe", "profit", "pareto", "leaderboard"}
     semantic_text = f"{hypothesis_id} {mechanism}".lower()
     if any(term in semantic_text for term in performance_terms):
@@ -120,5 +126,5 @@ def economic_hypothesis_assignment(
         registered.layer,
         registered.identity_id,
         registered.status,
-        f"{provenance};fields={','.join(sorted(required_fields))};mechanism={mechanism}",
+        f"{provenance};fields={','.join(sorted(required_fields))};operators={','.join(sorted(required_operators))};mechanism={mechanism}",
     )

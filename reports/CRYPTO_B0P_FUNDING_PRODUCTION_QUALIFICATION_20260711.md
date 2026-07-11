@@ -6,6 +6,7 @@ Decision: `PRODUCTION_FUNDING_OBSERVATION_QUALIFIED`
 - recall / precision: `1.0` / `1.0`
 - misses / false positives / duplicates: `0` / `0` / `0`
 - maximum timestamp error: `0.0 seconds`
+- maximum observable-time error: `0.0 seconds`
 - symbol coverage: `12/12`
 - symbol-month coverage: `336/336`
 - funding-rate mismatches: `0`

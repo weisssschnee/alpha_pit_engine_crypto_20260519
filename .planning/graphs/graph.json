@@ -4,7 +4,7 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "79DFE7ACC1430F4A4654A299B52686486B4CCEAD5DACD0F1C55E75012A42AAF2",
+      "registry_sha256": "3F5602C1357AEBB056CA445673B81011BBE6C9383A9194543DF2CBC7CCF4613E",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 27,
@@ -176827,7 +176827,7 @@
         "reports/CRYPTO_B0_FUNDING_EVENT_CONTRACT_20260711.md",
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "8864ABDDB019147EFA0767A5F7A7A7F76205B9EC2D38120AED4FF9B30E36C6C3",
+      "last_verified_sha": "36680D289F2D9AA0D52F924912C3BF3D0657CB43E8CD84D84DDAF5DD9D751496",
       "blocker": "BINANCE_UM core12 production observation qualified through 2026-04-30; no cross-venue qualification is claimed",
       "weight": 1.0
     },
@@ -176932,7 +176932,7 @@
         "reports/CRYPTO_B0_LAYERED_IDENTITY_REGISTRY_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "17F8211690B4185237E73678AE0EF86AA01AF503D17D65D3ED1D687CF37517C4",
+      "last_verified_sha": "1C4D53AF230556C320FFB22FD712CDF52DE9726B8E09650C3922E48B0AB7A800",
       "blocker": "activation identity and clustering are not qualified because the accepted release contains no frozen signal behavior matrix; one spent sign-pattern diagnostic and five semantic hypotheses are registered without feedback permission",
       "weight": 1.0
     },
@@ -177312,7 +177312,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "B07148A7D8D19B4E0A3584077318EE02EA5FC958BFF2115AC058E2B276490CC2",
+      "last_verified_sha": "215B6D8DF41B402C046FE13C047B62D5C5E758772B1638AA0327F237FD040B37",
       "blocker": "funding is qualified for Binance UM core12, but activation identity and clustering are not qualified because no frozen signal behavior matrix is present",
       "weight": 1.0
     }

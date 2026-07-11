@@ -18,5 +18,11 @@
   "search_started": false,
   "forward_performance_read": false,
   "candidate_selection_performed": false,
-  "promotion_memory_scheduler_or_generator_feedback": false
+  "promotion_memory_scheduler_or_generator_feedback": false,
+  "state_event_reward_connected": false,
+  "cem_ucb_mcts_updated": false,
+  "a7mem_updated": false,
+  "b1_lane_integration": false,
+  "large_search_authorized": false,
+  "alpha_ready": false
 }

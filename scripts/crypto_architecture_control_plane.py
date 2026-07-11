@@ -181,7 +181,9 @@ def forbidden_table(registry: dict[str, Any]) -> str:
     return "\n".join(rows)
 
 
-def build_documents(registry: dict[str, Any], state: dict[str, Any], decisions: list[dict[str, Any]], digest: str) -> None:
+def render_documents(
+    registry: dict[str, Any], state: dict[str, Any], decisions: list[dict[str, Any]], digest: str
+) -> dict[Path, str]:
     current = f"""# Current Architecture
 
 Generated from `{relative(REGISTRY_PATH)}`. Registry SHA256: `{digest}`.
@@ -298,10 +300,37 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 ## Phase B0P Allowed
 
 """ + "\n".join(f"- {x}" for x in state["allowed_b0p"]) + "\n\n## Prohibited\n\n" + "\n".join(f"- {x}" for x in state["prohibited_b0p"]) + f"\n\n## Next Acceptance Gate\n\n{state['next_acceptance_gate']}\n"
-    CURRENT_ARCH_PATH.write_text(current, encoding="utf-8")
-    BOUNDARY_PATH.write_text(boundary, encoding="utf-8")
-    EVOLUTION_PATH.write_text(evolution, encoding="utf-8")
-    STATE_PATH.write_text(state_doc, encoding="utf-8")
+    return {
+        CURRENT_ARCH_PATH: current,
+        BOUNDARY_PATH: boundary,
+        EVOLUTION_PATH: evolution,
+        STATE_PATH: state_doc,
+    }
+
+
+def build_documents(registry: dict[str, Any], state: dict[str, Any], decisions: list[dict[str, Any]], digest: str) -> None:
+    for path, content in render_documents(registry, state, decisions, digest).items():
+        path.write_text(content, encoding="utf-8")
+
+
+def artifact_paths(registry: dict[str, Any]) -> set[Path]:
+    paths = {
+        REGISTRY_PATH,
+        STATE_SOURCE_PATH,
+        DECISION_LOG_PATH,
+        CURRENT_ARCH_PATH,
+        BOUNDARY_PATH,
+        EVOLUTION_PATH,
+        GRAPH_PATH,
+        STATE_PATH,
+        RUN_MANIFEST_PATH,
+        ATTESTATION_PATH,
+        ACCEPTANCE_TEST_OUTPUT_PATH,
+        B0P_MANIFEST_PATH,
+    }
+    for node in registry["nodes"]:
+        paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
+    return paths
 
 
 def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -> None:
@@ -359,6 +388,9 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
     ATTESTATION_PATH.write_text(json.dumps(attestation, indent=2) + "\n", encoding="utf-8")
     funding_summary = load_json(B0P_FUNDING_SUMMARY_PATH)
     identity_summary = load_json(B0P_IDENTITY_SUMMARY_PATH)
+    def observed(flag: str) -> bool:
+        return bool(funding_summary.get(flag, False) or identity_summary.get(flag, False))
+
     b0p_manifest = {
         "manifest_id": "CRYPTO-B0P-QUALIFICATION-20260711",
         "decision": state["production_observation_qualification_status"],
@@ -368,15 +400,15 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "funding_summary": relative(B0P_FUNDING_SUMMARY_PATH),
         "identity_summary": relative(B0P_IDENTITY_SUMMARY_PATH),
         "registry_sha256": digest,
-        "search_started": False,
-        "forward_performance_read": False,
-        "state_event_reward_connected": False,
-        "cem_ucb_mcts_updated": False,
-        "a7mem_updated": False,
-        "candidate_selection_performed": False,
-        "b1_lane_integration": False,
-        "large_search_authorized": False,
-        "alpha_ready": False,
+        "search_started": observed("search_started"),
+        "forward_performance_read": observed("forward_performance_read"),
+        "state_event_reward_connected": observed("state_event_reward_connected"),
+        "cem_ucb_mcts_updated": observed("cem_ucb_mcts_updated"),
+        "a7mem_updated": observed("a7mem_updated"),
+        "candidate_selection_performed": observed("candidate_selection_performed"),
+        "b1_lane_integration": observed("b1_lane_integration"),
+        "large_search_authorized": observed("large_search_authorized"),
+        "alpha_ready": observed("alpha_ready"),
     }
     B0P_MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
     B0P_MANIFEST_PATH.write_text(json.dumps(b0p_manifest, indent=2) + "\n", encoding="utf-8")
@@ -396,12 +428,7 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "b0p_qualification_manifest": relative(B0P_MANIFEST_PATH),
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-    paths = {
-        REGISTRY_PATH, STATE_SOURCE_PATH, DECISION_LOG_PATH, CURRENT_ARCH_PATH, BOUNDARY_PATH, EVOLUTION_PATH,
-        GRAPH_PATH, STATE_PATH, RUN_MANIFEST_PATH, ATTESTATION_PATH, ACCEPTANCE_TEST_OUTPUT_PATH, B0P_MANIFEST_PATH,
-    }
-    for node in registry["nodes"]:
-        paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
+    paths = artifact_paths(registry)
     rows = []
     for path in sorted(paths, key=lambda p: str(p)):
         rows.append({
@@ -417,17 +444,48 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
 def validate_outputs(registry: dict[str, Any]) -> None:
     validate_registry(registry)
     digest = sha256_file(REGISTRY_PATH)
-    for path in [CURRENT_ARCH_PATH, BOUNDARY_PATH, EVOLUTION_PATH, STATE_PATH]:
-        if digest not in path.read_text(encoding="utf-8"):
-            raise ValueError(f"stale generated control document: {relative(path)}")
+    state = load_json(STATE_SOURCE_PATH)
+    expected_documents = render_documents(registry, state, load_decisions(), digest)
+    for path, expected_content in expected_documents.items():
+        if path.read_text(encoding="utf-8") != expected_content:
+            raise ValueError(f"generated control document drift: {relative(path)}")
     graph = load_json(GRAPH_PATH)
     meta = graph.get("graph", {}).get("architecture_control_plane", {})
     if meta.get("registry_sha256") != digest:
         raise ValueError("graph control overlay is stale")
-    control_ids = {node["id"] for node in graph["nodes"] if str(node.get("id", "")).startswith("control_")}
-    expected_ids = {f"control_{node['id']}" for node in registry["nodes"]}
-    if control_ids != expected_ids:
-        raise ValueError("graph control nodes do not match registry")
+    actual_control_nodes = {
+        node["id"]: node for node in graph["nodes"] if str(node.get("id", "")).startswith("control_")
+    }
+    expected_control_nodes = {
+        f"control_{node['id']}": {
+            "id": f"control_{node['id']}", "label": node["label"], "file_type": "architecture_control",
+            "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": relative(REGISTRY_PATH),
+            "status": node["status"], "implementation_path": node["implementation_path"],
+            "entrypoint": node["entrypoint"], "input": node["input"], "output": node["output"],
+            "data_role": node["data_role"], "feedback_permission": node["feedback_permission"],
+            "artifact_test": node["artifact_test"], "last_verified_sha": node["last_verified_sha"],
+            "blocker": node["blocker"], "weight": 1.0,
+        }
+        for node in registry["nodes"]
+    }
+    if actual_control_nodes != expected_control_nodes:
+        raise ValueError("graph control node fields do not exactly match registry")
+    actual_control_edges = [
+        edge for edge in graph["links"] if str(edge.get("edge_id", "")).startswith("control_edge_")
+    ]
+    expected_control_edges = [
+        {
+            "edge_id": f"control_edge_{index:03d}", "source": f"control_{edge['source']}",
+            "target": f"control_{edge['target']}", "relationship": edge["kind"], "label": edge["label"],
+            "forbidden": edge["kind"] == "FORBIDDEN", "confidence": "EXTRACTED", "confidence_score": 1.0,
+            "source_file": relative(REGISTRY_PATH), "weight": 1.0,
+        }
+        for index, edge in enumerate(registry["edges"])
+    ]
+    if actual_control_edges != expected_control_edges:
+        raise ValueError("graph control edges do not exactly match registry")
+    if meta.get("control_node_count") != len(registry["nodes"]) or meta.get("control_edge_count") != len(registry["edges"]):
+        raise ValueError("graph control counts do not match registry")
     forbidden = {(edge["source"], edge["target"]) for edge in graph["links"] if edge.get("forbidden")}
     expected_forbidden = {(f"control_{a}", f"control_{b}") for a, b in REQUIRED_FORBIDDEN_EDGES}
     if not expected_forbidden.issubset(forbidden):
@@ -435,7 +493,6 @@ def validate_outputs(registry: dict[str, Any]) -> None:
     manifest = load_json(RUN_MANIFEST_PATH)
     if manifest.get("registry_sha256") != digest or manifest.get("search_started") or manifest.get("forward_performance_read"):
         raise ValueError("run manifest mismatch or prohibited activity recorded")
-    state = load_json(STATE_SOURCE_PATH)
     acceptance = state["phase_b0_acceptance"]
     accepted_subject_sha = acceptance["accepted_subject_sha"]
     if len(accepted_subject_sha) != 40 or any(char not in "0123456789abcdef" for char in accepted_subject_sha):
@@ -462,13 +519,29 @@ def validate_outputs(registry: dict[str, Any]) -> None:
     ]
     if any(b0p_manifest.get(flag) for flag in prohibited_b0p_flags):
         raise ValueError("B0P manifest records prohibited activity or authorization")
+    funding_summary = load_json(B0P_FUNDING_SUMMARY_PATH)
+    identity_summary = load_json(B0P_IDENTITY_SUMMARY_PATH)
+    for flag in prohibited_b0p_flags:
+        observed_flag = bool(funding_summary.get(flag, False) or identity_summary.get(flag, False))
+        if b0p_manifest.get(flag) != observed_flag:
+            raise ValueError(f"B0P aggregate evidence mismatch for {flag}")
     if meta.get("phase_status") != state["current_phase"] or meta.get("accepted_subject_sha") != accepted_subject_sha:
         raise ValueError("graph phase acceptance metadata mismatch")
     evidence = attestation.get("test_evidence", {})
     if evidence != acceptance_test_evidence(state) or manifest.get("test_evidence") != evidence:
         raise ValueError("acceptance test evidence mismatch")
-    if not ARTIFACT_INDEX_PATH.exists():
-        raise ValueError("artifact index missing")
+    with ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
+        index_rows = list(csv.DictReader(handle))
+    indexed_paths = {row["path"] for row in index_rows}
+    expected_paths = {relative(path) for path in artifact_paths(registry)}
+    if indexed_paths != expected_paths:
+        raise ValueError("artifact index paths do not match control registry")
+    for row in index_rows:
+        path = REPO / row["path"]
+        expected_exists = str(path.exists())
+        expected_sha = sha256_file(path) if path.is_file() else ""
+        if row["exists"] != expected_exists or row["sha256"] != expected_sha:
+            raise ValueError(f"artifact index hash drift: {row['path']}")
 
 
 def build() -> None:

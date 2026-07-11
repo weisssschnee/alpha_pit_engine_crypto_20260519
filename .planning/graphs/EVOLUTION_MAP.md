@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `79DFE7ACC1430F4A4654A299B52686486B4CCEAD5DACD0F1C55E75012A42AAF2`.
+Generated from registry SHA256: `3F5602C1357AEBB056CA445673B81011BBE6C9383A9194543DF2CBC7CCF4613E`.
 
 ## Current Evolution
 
@@ -37,3 +37,4 @@ Generated from registry SHA256: `79DFE7ACC1430F4A4654A299B52686486B4CCEAD5DACD0F
 - `EVALRESET-20260711-018` — `B0P_1_FUNDING_PRODUCTION_OBSERVATION_QUALIFIED`: Approved Binance UM core12 truth set and pre-forward hourly panel produced 30636/30636 exact event matches through 2026-04-30 with recall=precision=1, zero misses/duplicates/rate mismatches, complete 12-symbol and 336 symbol-month coverage, and correct cash-flow signs; no price returns or Alpha reward were read.
 - `EVALRESET-20260711-019` — `B0P_2_LAYERED_IDENTITY_PARTIALLY_QUALIFIED`: The frozen accepted release maps 33 alias-expanded blueprints to 18 numeric representatives, 16 accepted rows, 6 canonical/exact signals, one coarse spent split-sign diagnostic identity, and five field/structure/mechanism hypotheses. Activation identity and clustering remain not qualified because the release contains no frozen signal behavior matrix; no expression or performance proxy was substituted.
 - `EVALRESET-20260711-020` — `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`: B0P stops with Binance UM core12 funding qualified and layered identity partially qualified. Activation identity/clustering remains blocked by the absent frozen signal behavior matrix. HOLD_RESEARCH, PHASE_B1_FROZEN, SEALED_NO_NEW_FORWARD_READ, and all no-feedback guards remain in force; no large-search or alpha-ready authorization is issued.
+- `EVALRESET-20260711-021` — `B0P_EVIDENCE_GUARDS_HARDENED`: Review findings were closed with code-owned funding column allowlists, cutoff-bounded truth-prefix reads, pre-canonical duplicate and observable-time audits, manifest interval/time/count checks, required economic-hypothesis operator validation, component-derived prohibition evidence, exact generated-document checks, exact graph node/edge projection checks, and artifact-index hash validation.

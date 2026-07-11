@@ -72,6 +72,7 @@ def build() -> dict[str, object]:
 
     listed_paths = [str(row.get("path", "")) for row in release.get("canonical_sources", [])]
     listed_paths.extend(str(path) for path in release.get("outputs", {}))
+    listed_paths.extend(str(row.get("path", "")) for row in release.get("source_evidence", []))
     activation_artifacts = [path for path in listed_paths if "activation" in path.lower() or "signal_mask" in path.lower()]
     activation_artifact_available = bool(activation_artifacts) and bool(release["boundaries"].get("contains_full_numeric_cache"))
     activation_status = (
@@ -91,6 +92,7 @@ def build() -> dict[str, object]:
             hypothesis_id,
             expression=row["expression"],
             required_fields=definition["required_fields"],
+            required_operators=definition["required_operators"],
             mechanism=definition["mechanism"],
             provenance="config/crypto_b0p_economic_hypothesis_registry_v1.json",
         )
@@ -134,6 +136,7 @@ def build() -> dict[str, object]:
             "hypothesis_id": definition["hypothesis_id"],
             "label": definition["label"],
             "required_fields": "|".join(definition["required_fields"]),
+            "required_operators": "|".join(definition["required_operators"]),
             "mechanism": definition["mechanism"],
             "exact_signal_count": len({
                 row["exact_signal_identity"]
@@ -172,6 +175,12 @@ def build() -> dict[str, object]:
         "forward_performance_read": False,
         "candidate_selection_performed": False,
         "promotion_memory_scheduler_or_generator_feedback": False,
+        "state_event_reward_connected": False,
+        "cem_ucb_mcts_updated": False,
+        "a7mem_updated": False,
+        "b1_lane_integration": False,
+        "large_search_authorized": False,
+        "alpha_ready": False,
     }
     RUNTIME.mkdir(parents=True, exist_ok=True)
     _write_csv(RUNTIME / "layered_identity_registry.csv", registry_rows, list(registry_rows[0]))
