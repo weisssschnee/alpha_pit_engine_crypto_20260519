@@ -1,0 +1,8 @@
+command: G:\PythonProject\.venv\Scripts\python.exe -m pytest -q
+result: 120 passed in 122.13s
+architecture_check: PASS_ARCHITECTURE_CONTROL_PLANE_VALID
+epoch1r_check: PASS_FROZEN_DEVELOPMENT_EPOCH1R_VALID
+decision: FROZEN_DEVELOPMENT_EPOCH1R_COMPLETED_WITH_NATURAL_UNDERFILL
+forward_status: FORWARD_SEALED
+candidate_promotion: false
+cross_epoch_memory: false

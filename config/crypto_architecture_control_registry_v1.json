@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "E59DEE17769B7DDA108754BB6E8F375854DF34C48F3C32F75469A6729535C174"
+      "last_verified_sha": "C684DF14E8E7A8E35D3A2C1F9C6D9ABCD0AA7A654F3AF65E06483CFCD600AF5B"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -1025,13 +1025,13 @@
         "runtime/nextgen_epoch1r_20260712/epoch1r_test_output.txt",
         "runtime/nextgen_epoch1r_20260712/epoch1r_frozen_design_manifest.json"
       ],
-      "blocker": "single immutable strict-only execution authorized but not started",
+      "blocker": "executed exactly once; immutable design retained as reproducibility authority",
       "last_verified_sha": "0E5AABE27E55F4BD34B2D74813F08DBF31F43126ABEFC63351FD5E5F2DA7804C"
     },
     {
       "id": "epoch1r_execution",
       "label": "CRYPTO NEXTGEN SEARCH EPOCH-1R execution",
-      "status": "PLANNED",
+      "status": "IMPLEMENTED",
       "implementation_path": [
         "scripts/crypto_nextgen_epoch1r.py"
       ],
@@ -1041,10 +1041,20 @@
       "data_role": "controlled development-only strict evaluation",
       "feedback_permission": "CURRENT_RUNTIME_ONLY_NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
       "artifact_test": [
-        "tests/test_nextgen_epoch1r.py"
+        "tests/test_nextgen_epoch1r.py",
+        "runtime/nextgen_epoch1r_20260712/epoch1r_run_manifest.json",
+        "runtime/nextgen_epoch1r_20260712/strict_evaluations.csv",
+        "runtime/nextgen_epoch1r_20260712/adaptive_vs_matched_controls.csv",
+        "runtime/nextgen_epoch1r_20260712/lane_summary.csv",
+        "runtime/nextgen_epoch1r_20260712/arm_summary.csv",
+        "runtime/nextgen_epoch1r_20260712/pareto_archive.csv",
+        "runtime/nextgen_epoch1r_20260712/frozen_candidate_pack.csv",
+        "runtime/nextgen_epoch1r_20260712/benchmark_results.csv",
+        "runtime/nextgen_epoch1r_20260712/EPOCH1R_COMPACT_RESULT.md",
+        "runtime/nextgen_epoch1r_20260712/epoch1r_closure_test_output.txt"
       ],
-      "blocker": "frozen 2052-row strict assignment ready; execution not started",
-      "last_verified_sha": "940C57D93B6EBC10834A47F369438380D7DFD6D89912EDB9957B6F1378938ADA"
+      "blocker": "zero development survivors, only two positive net-LCB rows and no adaptive lane success; next action requires independent authorization",
+      "last_verified_sha": "0E81654F608D3346E4B48FCADD285C617471A1375F1F26C28BBC9B55514FE223"
     }
   ],
   "edges": [

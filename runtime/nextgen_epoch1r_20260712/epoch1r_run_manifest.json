@@ -1,0 +1,62 @@
+{
+  "a7mem_updated": false,
+  "adaptive_successes": 0,
+  "additional_budget": false,
+  "admission_changed_after_freeze": false,
+  "candidate_promotion": false,
+  "cross_epoch_memory": false,
+  "cross_panel_ranked": false,
+  "decision": "FROZEN_DEVELOPMENT_EPOCH1R_COMPLETED_WITH_NATURAL_UNDERFILL",
+  "development_survivors": 0,
+  "experiment_id": "20260712_crypto_nextgen_epoch1r_001",
+  "forward_status": "FORWARD_SEALED",
+  "frozen_manifest_sha256": "4A04836FD6FC97ACF9F777075C2E8F049257FFC13E3740E318D2AF0D50FBFB15",
+  "global_strict": 1147,
+  "natural_underfill": true,
+  "online_contract_changed": false,
+  "oos_claim": false,
+  "outputs": [
+    {
+      "path": "runtime/nextgen_epoch1r_20260712/strict_evaluations.csv",
+      "sha256": "41F3D8DAE56CF5C5F6DF45D019CCDD3BDB2A4C6C3853609C1077E20445B7AD6B"
+    },
+    {
+      "path": "runtime/nextgen_epoch1r_20260712/pareto_archive.csv",
+      "sha256": "56F467E12F92B7A9DA0D51920BAC59B71A0026DD985FB9808B71BD29189CA1DD"
+    },
+    {
+      "path": "runtime/nextgen_epoch1r_20260712/frozen_candidate_pack.csv",
+      "sha256": "258E7BDA6DFAACCE5DECF35FA4F5C837B3E628089AF2A8D785A557EB0258930F"
+    },
+    {
+      "path": "runtime/nextgen_epoch1r_20260712/adaptive_vs_matched_controls.csv",
+      "sha256": "CF4C8D07952844AB4120D9050B89F275752DB54C3BA7BEACE2028B6ACB7A726B"
+    },
+    {
+      "path": "runtime/nextgen_epoch1r_20260712/lane_summary.csv",
+      "sha256": "2C2B733F4B6DB4E15A7E2B426BBC0AB3A089F2BFE2726B35364A2782ADF8F580"
+    },
+    {
+      "path": "runtime/nextgen_epoch1r_20260712/arm_summary.csv",
+      "sha256": "D70F128D05B1190BABD628A214C8A5B9D139A0F1342B1D8FDC0BE620E278D737"
+    },
+    {
+      "path": "runtime/nextgen_epoch1r_20260712/benchmark_results.csv",
+      "sha256": "EDD1F2F711BCD87C28E4237F58662FF8D9B054F57CCDD5BB7CEEBEC0906C9CC7"
+    },
+    {
+      "path": "runtime/nextgen_epoch1r_20260712/EPOCH1R_COMPACT_RESULT.md",
+      "sha256": "E20BC645299FB55CDCD65CABF1BF0B1430A73EF56CB8D34C407536259AD575EA"
+    }
+  ],
+  "positive_net_lcb": 2,
+  "proposal_pack_sha256": "318811FC93C39719B164CF9FF3212D507B964963E17E08D0B026F6B3E2350A62",
+  "recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
+  "reward_changed": false,
+  "runtime_seconds": 2663.577100900002,
+  "seed_changed": false,
+  "stratified_strict": 905,
+  "strict_assignment_total": 2052,
+  "survivor_near_miss": 84,
+  "uct_top_concentration": 0.5426008968609866
+}

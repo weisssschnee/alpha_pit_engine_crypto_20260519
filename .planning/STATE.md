@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `C99769616C9E31F287C35C1E53A45C64FB72F0C927F8532EE5A40237BE4206DE`.
+Registry SHA256: `AC2BA0E2B4DF2A94FEA59595FC361BFB7806112D72CA2FFFA438DE8822409A11`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `RESEARCH_MODE_CONTROLLED_EPOCH1R_REPAIR_ONLY`
-- Current phase: `FROZEN_DEVELOPMENT_EPOCH1R_DESIGN_FROZEN`
+- Current phase: `FROZEN_DEVELOPMENT_EPOCH1R_COMPLETED_WITH_NATURAL_UNDERFILL`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,7 +16,7 @@ Registry SHA256: `C99769616C9E31F287C35C1E53A45C64FB72F0C927F8532EE5A40237BE4206
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `EPOCH1R_DESIGN_FROZEN_READY_FOR_SINGLE_STRICT_EXECUTION`
+- Active stage: `EPOCH1R_CLOSED_WAITING_INDEPENDENT_NEXT_EPOCH_DECISION`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -146,12 +146,15 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## CRYPTO NEXTGEN SEARCH EPOCH-1R
 
-- Status: `FROZEN_DEVELOPMENT_EPOCH1R_DESIGN_FROZEN`
+- Status: `FROZEN_DEVELOPMENT_EPOCH1R_COMPLETED_WITH_NATURAL_UNDERFILL`
 - Repair scope: `EMPTY_REPRESENTATIVE_SET_ONLY`
 - Failed evidence subject: `403b3519773e18c38033b2eaeaf404c98320595a`
 - Upstream changes — generator / grammar / objective / adaptive / seeds / budgets: `False` / `False` / `False` / `False` / `False` / `False`
-- Design frozen / strict started: `True` / `False`
+- Design frozen / strict started: `True` / `True`
 - Frozen repo / manifest: `90a80795d4978497a2a5810ea02a5cdfdd1fac2e` / `4A04836FD6FC97ACF9F777075C2E8F049257FFC13E3740E318D2AF0D50FBFB15`
+- Execution / strict / natural underfill: `COMPLETED` / `2052` / `True`
+- Survivors / near misses / positive net LCB / adaptive successes: `0` / `84` / `2` / `0`
+- Recommendation: `REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH`
 - Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
 
 ## NEXTGEN-DARK Allowed
@@ -194,4 +197,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Execute the frozen 2052-row Epoch-1R strict assignment exactly once, validate all output hashes and prohibited flags, then perform closure Graph/STATE/manifest/artifact-index synchronization.
+Wait for independent authorization before any further search-engine revision or development epoch. Epoch-1R is closed with natural underfill, zero survivors, 84 near misses, two positive net-LCB rows and no adaptive success. Do not open OOS/forward, promote candidates or persist adaptive memory.
