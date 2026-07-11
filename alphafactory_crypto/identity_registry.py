@@ -8,6 +8,7 @@ import numpy as np
 
 
 LAYERS = ("syntax", "canonical", "exact_signal", "activation", "pnl_regime", "economic_hypothesis")
+SPENT_DIAGNOSTIC_BLOCKS = ("validation", "test", "recent", "stress")
 
 
 def _id(prefix: str, payload: bytes) -> str:
@@ -40,6 +41,13 @@ def activation_identity(mask: np.ndarray, *, universe_ids: Iterable[str], timest
     return _id("activation", payload)
 
 
+def activation_cluster_identity(activation_id: str) -> str:
+    value = str(activation_id).strip()
+    if not value.startswith("activation:"):
+        raise ValueError("activation cluster requires an activation behavior identity")
+    return _id("activation-cluster", value.encode("utf-8"))
+
+
 @dataclass(frozen=True)
 class RegisteredIdentity:
     layer: str
@@ -58,3 +66,59 @@ def register_economic_hypothesis(hypothesis_id: str, provenance: str) -> Registe
     if not hypothesis_id.startswith("hypothesis:") or not provenance:
         raise ValueError("economic hypothesis requires hypothesis:* id and provenance")
     return RegisteredIdentity("economic_hypothesis", hypothesis_id, "REGISTERED", provenance)
+
+
+def pnl_regime_diagnostic_identity(
+    metrics: dict[str, float], block_roles: dict[str, str]
+) -> RegisteredIdentity:
+    missing = sorted(set(SPENT_DIAGNOSTIC_BLOCKS).difference(metrics))
+    if missing:
+        raise ValueError(f"missing PnL/regime diagnostic blocks: {missing}")
+    invalid_roles = sorted(
+        block for block in SPENT_DIAGNOSTIC_BLOCKS if block_roles.get(block) != "SPENT_HISTORICAL_EVALUATION"
+    )
+    if invalid_roles:
+        raise PermissionError(f"PnL/regime identity requires spent historical blocks: {invalid_roles}")
+    parts = []
+    for block in SPENT_DIAGNOSTIC_BLOCKS:
+        value = float(metrics[block])
+        if not np.isfinite(value):
+            bucket = "MISSING"
+        elif value > 0:
+            bucket = "POS"
+        elif value < 0:
+            bucket = "NEG"
+        else:
+            bucket = "ZERO"
+        parts.append(f"{block}:{bucket}")
+    pattern = "|".join(parts)
+    return RegisteredIdentity(
+        "pnl_regime",
+        _id("pnl-regime", f"spent-split-sign-v1|{pattern}".encode("utf-8")),
+        "REGISTERED_DIAGNOSTIC_ONLY",
+        f"SPENT_HISTORICAL_EVALUATION;sign-buckets-only;{pattern}",
+    )
+
+
+def economic_hypothesis_assignment(
+    hypothesis_id: str,
+    *,
+    expression: str,
+    required_fields: Iterable[str],
+    mechanism: str,
+    provenance: str,
+) -> RegisteredIdentity:
+    missing = sorted(field for field in required_fields if str(field) not in str(expression))
+    if missing:
+        raise ValueError(f"economic hypothesis fields absent from expression: {missing}")
+    performance_terms = {"reward", "sortino", "sharpe", "profit", "pareto", "leaderboard"}
+    semantic_text = f"{hypothesis_id} {mechanism}".lower()
+    if any(term in semantic_text for term in performance_terms):
+        raise ValueError("economic hypothesis cannot be named from performance evidence")
+    registered = register_economic_hypothesis(hypothesis_id, provenance)
+    return RegisteredIdentity(
+        registered.layer,
+        registered.identity_id,
+        registered.status,
+        f"{provenance};fields={','.join(sorted(required_fields))};mechanism={mechanism}",
+    )

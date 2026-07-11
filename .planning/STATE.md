@@ -1,6 +1,6 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `8CF30496E2493072A3B36416C5365BD3C6A771602C2D89C4EB671197852E40D1`.
+Registry SHA256: `C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B9C674F7D9D31489F4`.
 
 ## Formal Status
 
@@ -45,7 +45,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 ## Phase B0P Items
 
 - `B0P.1` Funding production observation qualification: `QUALIFIED_BINANCE_UM_CORE12`
-- `B0P.2` Layered identity completion: `PENDING`
+- `B0P.2` Layered identity completion: `PARTIALLY_QUALIFIED_ACTIVATION_ARTIFACT_MISSING`
 - `B0P.3` Control-plane synchronization: `IN_PROGRESS`
 
 ## Phase B0P Allowed

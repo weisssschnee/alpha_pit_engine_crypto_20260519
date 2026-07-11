@@ -1,12 +1,12 @@
 # Evolution Map
 
-Generated from registry SHA256: `8CF30496E2493072A3B36416C5365BD3C6A771602C2D89C4EB671197852E40D1`.
+Generated from registry SHA256: `C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B9C674F7D9D31489F4`.
 
 ## Current Evolution
 
-- Accepted rows compressed from 16 rows to 6 canonical expressions and 6 exact signal identities.
+- The frozen release compresses 33 alias-expanded blueprints to 18 numeric representatives, 16 accepted rows, 6 canonical expressions, and 6 exact signal identities.
 - Exact-identity admission and strict reward are observed contraction points.
-- Signal, activation, PnL/regime, and economic-hypothesis collapse are not established.
+- Activation collapse remains unestablished because no frozen signal behavior matrix is present. One coarse spent split-sign diagnostic identity and five semantic economic hypotheses are registered, but neither establishes the first collapse of independent economic information.
 - At Phase B0 entry, funding event detection, future wrong-lag, A7INPUT0 coverage, and authoritative BZ definition blocked research. B0.1-B0.4 close their contract-level gaps; production execution and promotion remain frozen under `HOLD_RESEARCH`.
 - The proposed 400k reward-integrated search is revoked.
 - Phase A governance is accepted while `HOLD_RESEARCH` remains.
@@ -35,3 +35,4 @@ Generated from registry SHA256: `8CF30496E2493072A3B36416C5365BD3C6A771602C2D89C
 - `EVALRESET-20260711-016` — `B0_REMOTE_SYNC_RESTORED`: A fourth push retry succeeded and refs/heads/audit/evalreset-collapse-forensics-20260711 was verified at 130c76d1abacc36761755b54d6fcf8efe58cd99f, which contains B0.1-B0.8 completion SHA a0a36145ccd9666f5a137bee4b8414767aaa7ffd.
 - `EVALRESET-20260711-017` — `PHASE_B0_CONTRACTS_ACCEPTED`: Independent acceptance attests subject 9574d32053d1679d64179fe2d6607d1a05e13db9. Production observation qualification moves to B0P; HOLD_RESEARCH, PHASE_B1_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.
 - `EVALRESET-20260711-018` — `B0P_1_FUNDING_PRODUCTION_OBSERVATION_QUALIFIED`: Approved Binance UM core12 truth set and pre-forward hourly panel produced 30636/30636 exact event matches through 2026-04-30 with recall=precision=1, zero misses/duplicates/rate mismatches, complete 12-symbol and 336 symbol-month coverage, and correct cash-flow signs; no price returns or Alpha reward were read.
+- `EVALRESET-20260711-019` — `B0P_2_LAYERED_IDENTITY_PARTIALLY_QUALIFIED`: The frozen accepted release maps 33 alias-expanded blueprints to 18 numeric representatives, 16 accepted rows, 6 canonical/exact signals, one coarse spent split-sign diagnostic identity, and five field/structure/mechanism hypotheses. Activation identity and clustering remain not qualified because the release contains no frozen signal behavior matrix; no expression or performance proxy was substituted.

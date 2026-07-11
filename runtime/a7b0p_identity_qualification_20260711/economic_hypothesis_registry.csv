@@ -1,0 +1,6 @@
+hypothesis_id,label,required_fields,mechanism,exact_signal_count,accepted_row_count,derivation_uses_performance
+hypothesis:oi-change-amplified-by-account-position-divergence,OI change amplified by account-position divergence,open_interest_value_last|account_position_divergence,changes in leveraged inventory interact with disagreement between account and position crowding,1,1,False
+hypothesis:oi-expansion-versus-top-account-crowding,OI expansion versus top-account crowding,open_interest_value_mean|top_long_short_account_ratio_last,slow leveraged-inventory change is contrasted with top-account directional crowding,2,2,False
+hypothesis:standalone-slow-oi-inventory-change,Standalone slow OI inventory change,open_interest_value_mean,slow changes in aggregate open-interest inventory proxy leverage accumulation or release,1,9,False
+hypothesis:oi-change-normalized-by-account-divergence,OI change normalized by account divergence,open_interest_value_mean|top_global_account_divergence,leveraged-inventory change is scaled by the magnitude of global account disagreement,1,1,False
+hypothesis:basis-versus-account-crowding-dislocation,Basis versus account-crowding dislocation,mark_trade_basis_bps|global_long_short_account_ratio_last,cross-sectional basis pressure is contrasted with directional account crowding,1,3,False

@@ -4,11 +4,11 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "8CF30496E2493072A3B36416C5365BD3C6A771602C2D89C4EB671197852E40D1",
+      "registry_sha256": "C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B9C674F7D9D31489F4",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 26,
-      "control_edge_count": 23,
+      "control_edge_count": 24,
       "phase_status": "PHASE_B0_CONTRACTS_ACCEPTED",
       "production_observation_qualification_status": "PHASE_B0_PRODUCTION_OBSERVATION_QUALIFICATION_PENDING",
       "active_stage": "PHASE_B0P_PRODUCTION_OBSERVATION_QUALIFICATION",
@@ -176897,7 +176897,7 @@
         "runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv"
       ],
       "last_verified_sha": "FCA93D783E1F0950C899906D810509DA637FD81A8059A9DF3C6DBB2D74B02DF8",
-      "blocker": "activation and PnL/regime artifacts remain unresolved",
+      "blocker": "exact identities established; frozen activation behavior artifact remains unavailable, while spent PnL/regime diagnostics are registered separately",
       "weight": 1.0
     },
     {
@@ -176911,21 +176911,29 @@
       "implementation_path": [
         "alphafactory_crypto/identity_registry.py",
         "config/crypto_identity_layers_v1.json",
-        "scripts/crypto_b0_identity_registry.py"
+        "config/crypto_b0p_economic_hypothesis_registry_v1.json",
+        "scripts/crypto_b0_identity_registry.py",
+        "scripts/crypto_b0p_identity_qualification.py"
       ],
-      "entrypoint": "syntax_identity through register_economic_hypothesis",
+      "entrypoint": "syntax_identity through economic_hypothesis_assignment and pnl_regime_diagnostic_identity",
       "input": "syntax through economic hypothesis",
       "output": "six-layer identities and mappings",
       "data_role": "identity governance",
-      "feedback_permission": "NO_PROMOTION_THROUGH_B0P",
+      "feedback_permission": "DIAGNOSTIC_ONLY_NO_PROMOTION_MEMORY_SCHEDULER_OR_GENERATOR_FEEDBACK",
       "artifact_test": [
         "tests/test_identity_registry.py",
         "runtime/a7b0_identity_registry_20260711/layered_identity_registry.csv",
         "runtime/a7b0_identity_registry_20260711/identity_registry_manifest.json",
-        "reports/CRYPTO_B0_LAYERED_IDENTITY_REGISTRY_20260711.md"
+        "runtime/a7b0p_identity_qualification_20260711/layered_identity_registry.csv",
+        "runtime/a7b0p_identity_qualification_20260711/identity_qualification_manifest.json",
+        "runtime/a7b0p_identity_qualification_20260711/activation_asset_audit.json",
+        "runtime/a7b0p_identity_qualification_20260711/pnl_regime_diagnostic_registry.csv",
+        "runtime/a7b0p_identity_qualification_20260711/economic_hypothesis_registry.csv",
+        "reports/CRYPTO_B0_LAYERED_IDENTITY_REGISTRY_20260711.md",
+        "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "CDE4384AD367F1EA6CC6A5C09A682A8CDC5EE6C0F8463E8D0A750CDA8179007F",
-      "blocker": "activation, PnL/regime, and economic hypothesis IDs remain unresolved without artifacts/provenance",
+      "last_verified_sha": "17F8211690B4185237E73678AE0EF86AA01AF503D17D65D3ED1D687CF37517C4",
+      "blocker": "activation identity and clustering are not qualified because the accepted release contains no frozen signal behavior matrix; one spent sign-pattern diagnostic and five semantic hypotheses are registered without feedback permission",
       "weight": 1.0
     },
     {
@@ -490630,9 +490638,9 @@
       "edge_id": "control_edge_007",
       "source": "control_identity_registry",
       "target": "control_admission",
-      "relationship": "CONTROL",
-      "label": "registered identity evidence only",
-      "forbidden": false,
+      "relationship": "FORBIDDEN",
+      "label": "B0P identities are diagnostic-only and cannot promote",
+      "forbidden": true,
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
@@ -490640,6 +490648,18 @@
     },
     {
       "edge_id": "control_edge_008",
+      "source": "control_spent_evaluation",
+      "target": "control_identity_registry",
+      "relationship": "CONTROL",
+      "label": "spent split-sign diagnostics only; no candidate feedback",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_009",
       "source": "control_evaluation_access_ledger",
       "target": "control_proxy",
       "relationship": "CONTROL",
@@ -490651,7 +490671,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_009",
+      "edge_id": "control_edge_010",
       "source": "control_evaluation_access_ledger",
       "target": "control_strict_reward",
       "relationship": "CONTROL",
@@ -490663,7 +490683,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_010",
+      "edge_id": "control_edge_011",
       "source": "control_funding_event_detector",
       "target": "control_temporal_event_contract",
       "relationship": "ALLOWED",
@@ -490675,7 +490695,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_011",
+      "edge_id": "control_edge_012",
       "source": "control_temporal_event_contract",
       "target": "control_feature_state_fabric",
       "relationship": "ALLOWED",
@@ -490687,7 +490707,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_012",
+      "edge_id": "control_edge_013",
       "source": "control_bz",
       "target": "control_benchmark_registry",
       "relationship": "ALLOWED",
@@ -490699,7 +490719,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_013",
+      "edge_id": "control_edge_014",
       "source": "control_spent_evaluation",
       "target": "control_proxy",
       "relationship": "REPORT_ONLY",
@@ -490711,7 +490731,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_014",
+      "edge_id": "control_edge_015",
       "source": "control_spent_evaluation",
       "target": "control_strict_reward",
       "relationship": "REPORT_ONLY",
@@ -490723,7 +490743,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_015",
+      "edge_id": "control_edge_016",
       "source": "control_spent_evaluation",
       "target": "control_admission",
       "relationship": "FORBIDDEN",
@@ -490735,7 +490755,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_016",
+      "edge_id": "control_edge_017",
       "source": "control_spent_evaluation",
       "target": "control_generation_lanes",
       "relationship": "FORBIDDEN",
@@ -490747,7 +490767,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_017",
+      "edge_id": "control_edge_018",
       "source": "control_spent_evaluation",
       "target": "control_a7mem",
       "relationship": "FORBIDDEN",
@@ -490759,7 +490779,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_018",
+      "edge_id": "control_edge_019",
       "source": "control_sealed_forward",
       "target": "control_scheduler",
       "relationship": "FORBIDDEN",
@@ -490771,7 +490791,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_019",
+      "edge_id": "control_edge_020",
       "source": "control_benchmark_registry",
       "target": "control_a7mem",
       "relationship": "FORBIDDEN",
@@ -490783,7 +490803,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_020",
+      "edge_id": "control_edge_021",
       "source": "control_feature_state_fabric",
       "target": "control_strict_reward",
       "relationship": "FORBIDDEN",
@@ -490795,7 +490815,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_021",
+      "edge_id": "control_edge_022",
       "source": "control_a7input0",
       "target": "control_generation_lanes",
       "relationship": "FORBIDDEN",
@@ -490807,7 +490827,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_022",
+      "edge_id": "control_edge_023",
       "source": "control_bz",
       "target": "control_admission",
       "relationship": "FORBIDDEN",

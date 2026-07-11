@@ -56,6 +56,7 @@ REQUIRED_FORBIDDEN_EDGES = {
     ("feature_state_fabric", "strict_reward"),
     ("a7input0", "generation_lanes"),
     ("bz", "admission"),
+    ("identity_registry", "admission"),
 }
 VALID_STATUSES = {"IMPLEMENTED", "PARTIAL", "PLANNED", "FROZEN", "DEPRECATED"}
 
@@ -232,9 +233,9 @@ Generated from registry SHA256: `{digest}`.
 
 ## Current Evolution
 
-- Accepted rows compressed from 16 rows to 6 canonical expressions and 6 exact signal identities.
+- The frozen release compresses 33 alias-expanded blueprints to 18 numeric representatives, 16 accepted rows, 6 canonical expressions, and 6 exact signal identities.
 - Exact-identity admission and strict reward are observed contraction points.
-- Signal, activation, PnL/regime, and economic-hypothesis collapse are not established.
+- Activation collapse remains unestablished because no frozen signal behavior matrix is present. One coarse spent split-sign diagnostic identity and five semantic economic hypotheses are registered, but neither establishes the first collapse of independent economic information.
 - At Phase B0 entry, funding event detection, future wrong-lag, A7INPUT0 coverage, and authoritative BZ definition blocked research. B0.1-B0.4 close their contract-level gaps; production execution and promotion remain frozen under `HOLD_RESEARCH`.
 - The proposed 400k reward-integrated search is revoked.
 - Phase A governance is accepted while `HOLD_RESEARCH` remains.

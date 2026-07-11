@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `8CF30496E2493072A3B36416C5365BD3C6A771602C2D89C4EB671197852E40D1`.
+Generated from registry SHA256: `C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B9C674F7D9D31489F4`.
 
 ## Authority
 
@@ -20,6 +20,7 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 
 | Source | Target | Prohibition |
 |---|---|---|
+| identity_registry | admission | B0P identities are diagnostic-only and cannot promote |
 | spent_evaluation | admission | no candidate ranking |
 | spent_evaluation | generation_lanes | no CEM/UCB/MCTS feedback |
 | spent_evaluation | a7mem | no memory update |

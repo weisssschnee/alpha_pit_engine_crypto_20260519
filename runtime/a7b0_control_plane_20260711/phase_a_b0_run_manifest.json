@@ -6,7 +6,7 @@
   "current_phase": "PHASE_B0_CONTRACTS_ACCEPTED",
   "phase_b1_status": "PHASE_B1_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
-  "registry_sha256": "8CF30496E2493072A3B36416C5365BD3C6A771602C2D89C4EB671197852E40D1",
+  "registry_sha256": "C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B9C674F7D9D31489F4",
   "production_observation_qualification_status": "PHASE_B0_PRODUCTION_OBSERVATION_QUALIFICATION_PENDING",
   "active_stage": "PHASE_B0P_PRODUCTION_OBSERVATION_QUALIFICATION",
   "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
@@ -19,7 +19,7 @@
     "output_sha256": "23CE54E17A626986D2A60E6279C73BA09C852D26A5220E807FF65EA4A853EBFE"
   },
   "graph_control_nodes": 26,
-  "graph_control_edges": 23,
+  "graph_control_edges": 24,
   "b0_items": [
     {
       "id": "B0.1",
@@ -73,7 +73,7 @@
     {
       "id": "B0P.2",
       "name": "Layered identity completion",
-      "status": "PENDING"
+      "status": "PARTIALLY_QUALIFIED_ACTIVATION_ARTIFACT_MISSING"
     },
     {
       "id": "B0P.3",

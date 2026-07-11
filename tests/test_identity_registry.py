@@ -6,7 +6,10 @@ import numpy as np
 
 from alphafactory_crypto.identity_registry import (
     activation_identity,
+    activation_cluster_identity,
     canonical_identity,
+    economic_hypothesis_assignment,
+    pnl_regime_diagnostic_identity,
     register_economic_hypothesis,
     syntax_identity,
 )
@@ -29,6 +32,40 @@ class IdentityRegistryTests(unittest.TestCase):
             register_economic_hypothesis("positioning_like", "semantic pair only")
         registered = register_economic_hypothesis("hypothesis:funding-crowding", "docs/hypotheses/funding.md")
         self.assertEqual(registered.status, "REGISTERED")
+
+    def test_activation_cluster_uses_behavior_identity_not_expression(self) -> None:
+        cluster = activation_cluster_identity("activation:abc")
+        self.assertTrue(cluster.startswith("activation-cluster:"))
+        with self.assertRaises(ValueError):
+            activation_cluster_identity("")
+
+    def test_pnl_regime_diagnostic_requires_spent_roles_and_is_sign_only(self) -> None:
+        metrics = {"validation": 1.0, "test": -0.1, "recent": 3.0, "stress": 0.0}
+        roles = {name: "SPENT_HISTORICAL_EVALUATION" for name in metrics}
+        first = pnl_regime_diagnostic_identity(metrics, roles)
+        second = pnl_regime_diagnostic_identity({**metrics, "validation": 99.0}, roles)
+        self.assertEqual(first.identity_id, second.identity_id)
+        self.assertIn("validation:POS", first.provenance)
+        with self.assertRaises(PermissionError):
+            pnl_regime_diagnostic_identity(metrics, {**roles, "test": "SEALED_FORWARD"})
+
+    def test_economic_hypothesis_assignment_uses_fields_not_performance(self) -> None:
+        registered = economic_hypothesis_assignment(
+            "hypothesis:oi-versus-crowding",
+            expression="Sub(Delta(open_interest_value_mean,240),Mean(top_long_short_account_ratio_last,120))",
+            required_fields=["open_interest_value_mean", "top_long_short_account_ratio_last"],
+            mechanism="open-interest change relative to account crowding",
+            provenance="config/crypto_b0p_economic_hypothesis_registry_v1.json",
+        )
+        self.assertEqual(registered.layer, "economic_hypothesis")
+        with self.assertRaises(ValueError):
+            economic_hypothesis_assignment(
+                "hypothesis:missing-field",
+                expression="Delta(open_interest_value_mean,240)",
+                required_fields=["future_return"],
+                mechanism="invalid",
+                provenance="test",
+            )
 
 
 if __name__ == "__main__":

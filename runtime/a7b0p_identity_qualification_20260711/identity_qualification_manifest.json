@@ -1,0 +1,22 @@
+{
+  "decision": "LAYERED_IDENTITY_PARTIALLY_QUALIFIED",
+  "alias_expanded_blueprints": 33,
+  "numeric_identity_representatives": 18,
+  "accepted_rows": 16,
+  "canonical_identities": 6,
+  "exact_signal_identities": 6,
+  "activation_identities": 0,
+  "activation_clusters": 0,
+  "pnl_regime_diagnostic_identities": 1,
+  "economic_hypotheses": 5,
+  "activation_status": "NOT_QUALIFIED_MISSING_FROZEN_SIGNAL_BEHAVIOR_ARTIFACT",
+  "activation_artifact_available": false,
+  "release_contains_full_numeric_cache": false,
+  "pnl_regime_basis": "spent validation/test/recent/stress sign pattern only",
+  "economic_hypothesis_basis": "field, structure, and mechanism semantics only",
+  "first_independent_economic_information_collapse_identified": false,
+  "search_started": false,
+  "forward_performance_read": false,
+  "candidate_selection_performed": false,
+  "promotion_memory_scheduler_or_generator_feedback": false
+}

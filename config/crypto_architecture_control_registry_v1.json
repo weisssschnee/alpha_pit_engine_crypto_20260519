@@ -216,7 +216,7 @@
       "artifact_test": [
         "runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv"
       ],
-      "blocker": "activation and PnL/regime artifacts remain unresolved",
+      "blocker": "exact identities established; frozen activation behavior artifact remains unavailable, while spent PnL/regime diagnostics are registered separately",
       "last_verified_sha": "FCA93D783E1F0950C899906D810509DA637FD81A8059A9DF3C6DBB2D74B02DF8"
     },
     {
@@ -226,21 +226,29 @@
       "implementation_path": [
         "alphafactory_crypto/identity_registry.py",
         "config/crypto_identity_layers_v1.json",
-        "scripts/crypto_b0_identity_registry.py"
+        "config/crypto_b0p_economic_hypothesis_registry_v1.json",
+        "scripts/crypto_b0_identity_registry.py",
+        "scripts/crypto_b0p_identity_qualification.py"
       ],
-      "entrypoint": "syntax_identity through register_economic_hypothesis",
+      "entrypoint": "syntax_identity through economic_hypothesis_assignment and pnl_regime_diagnostic_identity",
       "input": "syntax through economic hypothesis",
       "output": "six-layer identities and mappings",
       "data_role": "identity governance",
-      "feedback_permission": "NO_PROMOTION_THROUGH_B0P",
+      "feedback_permission": "DIAGNOSTIC_ONLY_NO_PROMOTION_MEMORY_SCHEDULER_OR_GENERATOR_FEEDBACK",
       "artifact_test": [
         "tests/test_identity_registry.py",
         "runtime/a7b0_identity_registry_20260711/layered_identity_registry.csv",
         "runtime/a7b0_identity_registry_20260711/identity_registry_manifest.json",
-        "reports/CRYPTO_B0_LAYERED_IDENTITY_REGISTRY_20260711.md"
+        "runtime/a7b0p_identity_qualification_20260711/layered_identity_registry.csv",
+        "runtime/a7b0p_identity_qualification_20260711/identity_qualification_manifest.json",
+        "runtime/a7b0p_identity_qualification_20260711/activation_asset_audit.json",
+        "runtime/a7b0p_identity_qualification_20260711/pnl_regime_diagnostic_registry.csv",
+        "runtime/a7b0p_identity_qualification_20260711/economic_hypothesis_registry.csv",
+        "reports/CRYPTO_B0_LAYERED_IDENTITY_REGISTRY_20260711.md",
+        "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "blocker": "activation, PnL/regime, and economic hypothesis IDs remain unresolved without artifacts/provenance",
-      "last_verified_sha": "CDE4384AD367F1EA6CC6A5C09A682A8CDC5EE6C0F8463E8D0A750CDA8179007F"
+      "blocker": "activation identity and clustering are not qualified because the accepted release contains no frozen signal behavior matrix; one spent sign-pattern diagnostic and five semantic hypotheses are registered without feedback permission",
+      "last_verified_sha": "17F8211690B4185237E73678AE0EF86AA01AF503D17D65D3ED1D687CF37517C4"
     },
     {
       "id": "generation_lanes",
@@ -566,8 +574,14 @@
     {
       "source": "identity_registry",
       "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "B0P identities are diagnostic-only and cannot promote"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "identity_registry",
       "kind": "CONTROL",
-      "label": "registered identity evidence only"
+      "label": "spent split-sign diagnostics only; no candidate feedback"
     },
     {
       "source": "evaluation_access_ledger",

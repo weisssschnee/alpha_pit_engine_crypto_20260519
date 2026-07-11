@@ -51,7 +51,7 @@
   ],
   "b0p_items": [
     {"id":"B0P.1","name":"Funding production observation qualification","status":"QUALIFIED_BINANCE_UM_CORE12"},
-    {"id":"B0P.2","name":"Layered identity completion","status":"PENDING"},
+    {"id":"B0P.2","name":"Layered identity completion","status":"PARTIALLY_QUALIFIED_ACTIVATION_ARTIFACT_MISSING"},
     {"id":"B0P.3","name":"Control-plane synchronization","status":"IN_PROGRESS"}
   ],
   "next_acceptance_gate": "Complete B0P production observation qualification and stop with QUALIFIED, PARTIALLY_QUALIFIED, or NOT_QUALIFIED; do not authorize large search or claim alpha-ready."

@@ -1,0 +1,45 @@
+{
+  "registry_id": "CRYPTO-B0P-ECONOMIC-HYPOTHESIS-REGISTRY-V1",
+  "derivation_rule": "field, operator structure, and mechanism semantics only; never performance rank",
+  "hypotheses": [
+    {
+      "hypothesis_id": "hypothesis:oi-change-amplified-by-account-position-divergence",
+      "label": "OI change amplified by account-position divergence",
+      "required_fields": ["open_interest_value_last", "account_position_divergence"],
+      "mechanism": "changes in leveraged inventory interact with disagreement between account and position crowding"
+    },
+    {
+      "hypothesis_id": "hypothesis:oi-expansion-versus-top-account-crowding",
+      "label": "OI expansion versus top-account crowding",
+      "required_fields": ["open_interest_value_mean", "top_long_short_account_ratio_last"],
+      "mechanism": "slow leveraged-inventory change is contrasted with top-account directional crowding"
+    },
+    {
+      "hypothesis_id": "hypothesis:standalone-slow-oi-inventory-change",
+      "label": "Standalone slow OI inventory change",
+      "required_fields": ["open_interest_value_mean"],
+      "mechanism": "slow changes in aggregate open-interest inventory proxy leverage accumulation or release"
+    },
+    {
+      "hypothesis_id": "hypothesis:oi-change-normalized-by-account-divergence",
+      "label": "OI change normalized by account divergence",
+      "required_fields": ["open_interest_value_mean", "top_global_account_divergence"],
+      "mechanism": "leveraged-inventory change is scaled by the magnitude of global account disagreement"
+    },
+    {
+      "hypothesis_id": "hypothesis:basis-versus-account-crowding-dislocation",
+      "label": "Basis versus account-crowding dislocation",
+      "required_fields": ["mark_trade_basis_bps", "global_long_short_account_ratio_last"],
+      "mechanism": "cross-sectional basis pressure is contrasted with directional account crowding"
+    }
+  ],
+  "assignments": [
+    {"signal_weight_exact_fingerprint": "779bfba96e6b66a9839e83ade5afe1eb4c28e412c0544efe666f0c7d6ae1414c", "hypothesis_id": "hypothesis:oi-change-amplified-by-account-position-divergence"},
+    {"signal_weight_exact_fingerprint": "25fc6c78ee80f71e044454d707a521b0cf89f2af16d7b2b1eccfc9995275f5a6", "hypothesis_id": "hypothesis:oi-expansion-versus-top-account-crowding"},
+    {"signal_weight_exact_fingerprint": "a026c1e4b0e069ee9325996ba0d51191615dcce497c8c41b767aaa5ecd5f2084", "hypothesis_id": "hypothesis:standalone-slow-oi-inventory-change"},
+    {"signal_weight_exact_fingerprint": "5b7a6047a5077efb5fa1eadcaa1eba83b69ab3fc78e526402b0f914a8da43dfb", "hypothesis_id": "hypothesis:oi-expansion-versus-top-account-crowding"},
+    {"signal_weight_exact_fingerprint": "92e52bf59f8b844fad64fdedc0ff9fbc6fad3ebb09494d729f154a564a72fb77", "hypothesis_id": "hypothesis:oi-change-normalized-by-account-divergence"},
+    {"signal_weight_exact_fingerprint": "b418202d6258a693e911d827b8a8c567c6c338cc21b6e81620604fcd2d2d8eb2", "hypothesis_id": "hypothesis:basis-versus-account-crowding-dislocation"}
+  ],
+  "feedback_permission": "DIAGNOSTIC_ONLY_NO_PROMOTION_MEMORY_SCHEDULER_OR_GENERATOR_FEEDBACK"
+}
