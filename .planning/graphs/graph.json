@@ -4,7 +4,7 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "C3497D0F93DCBA57A51B8BB64C54BA300033737A1A5073CEEE79744CE70E5E83",
+      "registry_sha256": "87F7EFEEA56D7A0BD7A7552F95821F3BF4D91BD407D794758064111C595F7E4D",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 26,
@@ -176961,10 +176961,11 @@
       "data_role": "historical evaluation",
       "feedback_permission": "NO_CANDIDATE_FEEDBACK",
       "artifact_test": [
-        "tests/test_evaluation_access.py"
+        "tests/test_evaluation_access.py",
+        "tests/test_future_wrong_lag.py"
       ],
-      "last_verified_sha": "260280B26F3DBE1C9696FF6082A11F1F3759D5EB737D2754F014DD37EB49494A",
-      "blocker": "future wrong-lag pending; spent OOS",
+      "last_verified_sha": "1A1293EF5304B9772109A854F65D7E505653B22E901F024A51B1325ED2DA95CC",
+      "blocker": "spent OOS; production negative control not executed during HOLD_RESEARCH",
       "weight": 1.0
     },
     {
@@ -177132,16 +177133,25 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
-      "status": "PLANNED",
-      "implementation_path": [],
-      "entrypoint": "planned",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/negative_controls.py",
+        "config/crypto_future_wrong_lag_control_v1.json",
+        "scripts/crypto_b0_future_wrong_lag_audit.py",
+        "scripts/crypto_a7reward1_portfolio_reward_model.py"
+      ],
+      "entrypoint": "future_wrong_lag / audit_future_wrong_lag",
       "input": "signal and future shifts",
       "output": "negative-control metrics",
       "data_role": "leakage control",
       "feedback_permission": "AUDIT_ONLY_B0",
-      "artifact_test": [],
-      "last_verified_sha": "FCEEC93C1B0087B996E366D4996DE74222243BB4E3A8B44789B64056D5F99FBB",
-      "blocker": "B0.2 pending",
+      "artifact_test": [
+        "tests/test_future_wrong_lag.py",
+        "runtime/a7b0_future_wrong_lag_control_20260711/future_wrong_lag_audit_summary.json",
+        "reports/CRYPTO_B0_FUTURE_WRONG_LAG_CONTROL_20260711.md"
+      ],
+      "last_verified_sha": "8C10045585A87B577A001D07341FA1B8E06F9C14B5AA681471B760B1D54D4347",
+      "blocker": "production execution frozen during HOLD_RESEARCH",
       "weight": 1.0
     },
     {
@@ -490710,5 +490720,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "2745e9ba95209923bd65b3d185ea71664ba8e31d"
+  "built_at_commit": "075e9634fe29e3178d3ed25d1255f97961892caa"
 }

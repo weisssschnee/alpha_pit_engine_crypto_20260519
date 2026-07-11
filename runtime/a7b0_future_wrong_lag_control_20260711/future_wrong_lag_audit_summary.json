@@ -1,0 +1,22 @@
+{
+  "decision": "PASS_B0_FUTURE_WRONG_LAG_CONTROL_HARNESS",
+  "variant": "future_wrong_lag_24h",
+  "clean_fixture": {
+    "original_metric": 1.2,
+    "future_metric": -0.1,
+    "tolerance": 0.0,
+    "future_dominates": false,
+    "status": "PASS_FUTURE_WRONG_LAG_WEAKER"
+  },
+  "leakage_fixture": {
+    "original_metric": 0.8,
+    "future_metric": 1.5,
+    "tolerance": 0.0,
+    "future_dominates": true,
+    "status": "FAIL_FUTURE_WRONG_LAG_DOMINATES"
+  },
+  "production_control_status": "IMPLEMENTED_NOT_EXECUTED_DURING_HOLD_RESEARCH",
+  "search_started": false,
+  "forward_performance_read": false,
+  "authorizes_candidate_feedback": false
+}

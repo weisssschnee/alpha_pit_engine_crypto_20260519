@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `C3497D0F93DCBA57A51B8BB64C54BA300033737A1A5073CEEE79744CE70E5E83`.
+Generated from registry SHA256: `87F7EFEEA56D7A0BD7A7552F95821F3BF4D91BD407D794758064111C595F7E4D`.
 
 ## Current Evolution
 
@@ -21,3 +21,4 @@ Generated from registry SHA256: `C3497D0F93DCBA57A51B8BB64C54BA300033737A1A5073C
 - `EVALRESET-20260711-005` — `PHASE_B0_UNLOCKED`: Only contracts, registries, detector/control repairs, schemas, deterministic cache contracts, and control-plane maintenance are allowed.
 - `EVALRESET-20260711-006` — `GRAPHIFY_FALLBACK_ACTIVE`: External graphify executable is unavailable; deterministic registry-driven graph overlay and validation are mandatory.
 - `EVALRESET-20260711-007` — `B0_1_FUNDING_EVENT_CONTRACT_IMPLEMENTED`: Native settlement time defines event identity; repeated last-known funding rate is state; missing native time fails closed; cashflow semantics and tolerance audit are tested.
+- `EVALRESET-20260711-008` — `B0_2_FUTURE_WRONG_LAG_IMPLEMENTED`: A 24-hour future-shift negative control is integrated into strict reward code and hard-reject semantics; only synthetic harness execution is allowed during HOLD_RESEARCH.

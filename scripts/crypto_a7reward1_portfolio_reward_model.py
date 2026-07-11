@@ -52,6 +52,10 @@ from scripts.crypto_a7ff8_expanded_numeric_probe import (  # noqa: E402
     load_upper_numeric,
 )
 from alphafactory_crypto.engines.semantic_domains import collect_operator_calls  # noqa: E402
+from alphafactory_crypto.negative_controls import (  # noqa: E402
+    FUTURE_WRONG_LAG_VARIANT,
+    future_wrong_lag,
+)
 from alphafactory_crypto.evaluation_access import (  # noqa: E402
     EvaluationAccessViolation,
     assert_candidate_feedback_columns_allowed,
@@ -79,9 +83,10 @@ HORIZONS = [1, 4, 8, 24]
 PREMAY_SPLITS = ["validation_2025H1", "test_2025H2", "recent_oos_2026JanApr"]
 ALL_EVAL_SPLITS = ["train_2024", *PREMAY_SPLITS, "known_may2026_stress"]
 ORIENTATION_SPLIT = "orientation_contiguous_extension_train"
-CONTROL_VARIANTS = ["one_bar_lag", "stale_168h", "sign_flip", "time_shuffle", "symbol_shuffle"]
-CONTROL_DOMINANCE_VARIANTS = ["one_bar_lag", "stale_168h", "time_shuffle", "symbol_shuffle"]
+CONTROL_VARIANTS = ["one_bar_lag", "stale_168h", FUTURE_WRONG_LAG_VARIANT, "sign_flip", "time_shuffle", "symbol_shuffle"]
+CONTROL_DOMINANCE_VARIANTS = ["one_bar_lag", "stale_168h", FUTURE_WRONG_LAG_VARIANT, "time_shuffle", "symbol_shuffle"]
 LAG_STALE_VARIANTS = ["one_bar_lag", "stale_168h"]
+FUTURE_WRONG_LAG_VARIANTS = [FUTURE_WRONG_LAG_VARIANT]
 SHUFFLE_VARIANTS = ["time_shuffle", "symbol_shuffle"]
 PARETO_OBJECTIVES = [
     "obj_train_sortino",
@@ -916,6 +921,9 @@ def transform_prepared_control(
     elif variant == "stale_168h":
         transformed_rank = dense_shift_matrix(rank_signal, 168)
         transformed_weights = np.nan_to_num(dense_shift_matrix(weights, 168), nan=0.0)
+    elif variant == FUTURE_WRONG_LAG_VARIANT:
+        transformed_rank = future_wrong_lag(rank_signal)
+        transformed_weights = np.nan_to_num(future_wrong_lag(weights), nan=0.0)
     elif variant == "time_shuffle":
         permutation = rng.permutation(rank_signal.shape[1])
         transformed_rank = rank_signal[:, permutation]
@@ -951,6 +959,8 @@ def control_signal(signal: np.ndarray, variant: str, rng: np.random.Generator) -
         return dense_shift_matrix(signal, 1)
     if variant == "stale_168h":
         return dense_shift_matrix(signal, 168)
+    if variant == FUTURE_WRONG_LAG_VARIANT:
+        return future_wrong_lag(signal)
     if variant == "sign_flip":
         return -signal
     if variant == "time_shuffle":
@@ -1349,9 +1359,15 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
         .groupby(["blueprint_id", "horizon_h", "split"], as_index=False)
         .agg(max_lag_stale_floor_sortino=("nonoverlap_floor_sortino", lambda s: float(np.nanmax(s)) if len(s) else np.nan))
     )
+    future_wrong_lag_controls = (
+        metrics[metrics["variant"].isin(FUTURE_WRONG_LAG_VARIANTS)]
+        .groupby(["blueprint_id", "horizon_h", "split"], as_index=False)
+        .agg(max_future_wrong_lag_floor_sortino=("nonoverlap_floor_sortino", lambda s: float(np.nanmax(s)) if len(s) else np.nan))
+    )
     original = original.merge(controls, on=["blueprint_id", "horizon_h", "split"], how="left")
     original = original.merge(shuffle_controls, on=["blueprint_id", "horizon_h", "split"], how="left")
     original = original.merge(lag_stale_controls, on=["blueprint_id", "horizon_h", "split"], how="left")
+    original = original.merge(future_wrong_lag_controls, on=["blueprint_id", "horizon_h", "split"], how="left")
     original["control_ratio"] = original["max_abs_control_net_mean"].abs() / (original["net_mean"].abs() + 1e-12)
     original["shuffle_control_ratio"] = original["max_abs_shuffle_control_net_mean"].abs() / (original["net_mean"].abs() + 1e-12)
     rows: list[dict[str, Any]] = []
@@ -1390,6 +1406,11 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
             float(test.get("max_lag_stale_floor_sortino", np.nan)),
             float(recent.get("max_lag_stale_floor_sortino", np.nan)),
         ]
+        future_wrong_lag_floor_sortinos = [
+            float(validation.get("max_future_wrong_lag_floor_sortino", np.nan)),
+            float(test.get("max_future_wrong_lag_floor_sortino", np.nan)),
+            float(recent.get("max_future_wrong_lag_floor_sortino", np.nan)),
+        ]
         shuffle_floor_sortinos = [
             float(validation.get("max_shuffle_floor_sortino", np.nan)),
             float(test.get("max_shuffle_floor_sortino", np.nan)),
@@ -1402,6 +1423,10 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
         oos_lag_stale_dominated = [
             np.isfinite(control) and np.isfinite(original_floor) and control >= original_floor
             for control, original_floor in zip(lag_stale_floor_sortinos, floor_sortinos)
+        ]
+        oos_future_wrong_lag_dominated = [
+            np.isfinite(control) and np.isfinite(original_floor) and control >= original_floor
+            for control, original_floor in zip(future_wrong_lag_floor_sortinos, floor_sortinos)
         ]
         oos_shuffle_dominated = [
             np.isfinite(control) and np.isfinite(original_floor) and control >= original_floor
@@ -1461,6 +1486,8 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
             hard_reject_reasons.append("oos_control_dominated")
         if sum(oos_lag_stale_dominated) > 0:
             hard_reject_reasons.append("oos_lag_stale_dominated")
+        if sum(oos_future_wrong_lag_dominated) > 0:
+            hard_reject_reasons.append("future_wrong_lag_dominated")
         if sum(oos_shuffle_dominated) > 0:
             hard_reject_reasons.append("oos_shuffle_dominated")
         if not all(oos_positive):
@@ -1506,6 +1533,7 @@ def aggregate_rewards(metrics: pd.DataFrame) -> pd.DataFrame:
                 "recent_shuffle_control_ratio": recent_shuffle_control,
                 "oos_control_dominated_count": int(sum(oos_control_dominated)),
                 "oos_lag_stale_dominated_count": int(sum(oos_lag_stale_dominated)),
+                "oos_future_wrong_lag_dominated_count": int(sum(oos_future_wrong_lag_dominated)),
                 "oos_shuffle_dominated_count": int(sum(oos_shuffle_dominated)),
                 "oos_positive_split_count": int(sum(oos_positive)),
                 "orientation_train_hours": sample.get("orientation_train_hours", np.nan),

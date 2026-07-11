@@ -1,0 +1,10 @@
+{
+  "control_id": "CRYPTO-FUTURE-WRONG-LAG-24H-V1",
+  "variant": "future_wrong_lag_24h",
+  "transform": "signal_at_t := original_signal_at_t_plus_24h",
+  "purpose": "detect leakage or event-time misalignment by measuring an impossible future-informed signal",
+  "dominance_rule": "future control floor metric >= original floor metric is a hard audit failure",
+  "boundary_policy": "the final 24 hours become unavailable and must be NaN/zero-weight, never wrapped",
+  "allowed_uses_b0": ["synthetic_test", "historical_evaluator_audit"],
+  "forbidden_uses_b0": ["candidate_ranking", "generator", "memory", "scheduler", "forward_performance"]
+}

@@ -1,6 +1,6 @@
 # Current Architecture
 
-Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `C3497D0F93DCBA57A51B8BB64C54BA300033737A1A5073CEEE79744CE70E5E83`.
+Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `87F7EFEEA56D7A0BD7A7552F95821F3BF4D91BD407D794758064111C595F7E4D`.
 
 Status: `PHASE_A_GOVERNANCE_ACCEPTED` / `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED` / `HOLD_RESEARCH`.
 
@@ -32,7 +32,7 @@ flowchart TD
   control_evaluation_access_ledger["Evaluation access ledger\nIMPLEMENTED"]
   control_spent_evaluation["Spent historical evaluation\nFROZEN"]
   control_sealed_forward["Sealed forward data\nFROZEN"]
-  control_future_wrong_lag["Future wrong-lag control\nPLANNED"]
+  control_future_wrong_lag["Future wrong-lag control\nIMPLEMENTED"]
   control_bz["BZ\nPLANNED"]
   control_temporal_event_contract["Temporal/event primitive contract\nPLANNED"]
   control_feature_state_fabric["Feature/State Fabric\nPLANNED"]
@@ -76,7 +76,7 @@ flowchart TD
 | Layered identity registry | PLANNED | planned | planned | syntax through economic hypothesis -> six-layer identities and mappings | identity governance | NO_PROMOTION_B0 | planned | D030676B9B64F6ACA0BA6B7D37DA221946417F6692C488DDEB3B72E0895A7743 | B0.5 pending |
 | Generation lanes | FROZEN | scripts/crypto_a7ls1_multi_arm_blueprint_generation.py | generation scripts | approved fields and primitives -> candidate queues | candidate generation | NO_RUN_B0 | verified_core_crypto_20260618/holds/CEM_AST_SEARCH_CORE_HOLD.md | 08493D1801C8D733E3EE1F8B7F755259D4B6CE0D599985DC51B70E046CC051BC | search revoked; A7INPUT0-v2 pending |
 | Proxy evaluator | FROZEN | scripts/crypto_a7v3s9_prereward_oos_control_proxy.py | proxy main | candidate queue and spent historical metrics -> report-only diagnostics | historical evaluation | NO_CANDIDATE_FEEDBACK | tests/test_evaluation_access.py | 227162B70E5897768F07D9E7A7E5C7A7E1FB0EAA81AA0BC4552D210694581128 | spent OOS contamination |
-| Strict reward | FROZEN | scripts/crypto_a7reward1_portfolio_reward_model.py | aggregate_rewards | signals and historical splits -> report-only reward audit | historical evaluation | NO_CANDIDATE_FEEDBACK | tests/test_evaluation_access.py | 260280B26F3DBE1C9696FF6082A11F1F3759D5EB737D2754F014DD37EB49494A | future wrong-lag pending; spent OOS |
+| Strict reward | FROZEN | scripts/crypto_a7reward1_portfolio_reward_model.py | aggregate_rewards | signals and historical splits -> report-only reward audit | historical evaluation | NO_CANDIDATE_FEEDBACK | tests/test_evaluation_access.py; tests/test_future_wrong_lag.py | 1A1293EF5304B9772109A854F65D7E505653B22E901F024A51B1325ED2DA95CC | spent OOS; production negative control not executed during HOLD_RESEARCH |
 | Admission gates | PARTIAL | scripts/crypto_a7source5_a7search7_source_lag_reward_flow.py | semantic/source-lag/identity gates | candidate rows -> survivors and aliases | candidate admission | REPORT_ONLY_B0 | runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_collapse_stage_audit.csv | 9E4B859D56B665BADB4A6F579CAF31BEAA107A3E45CE70685911F740858A69F1 | independent-information collapse not localized |
 | A7MEM | FROZEN | scripts/crypto_a7mem0_search_memory_registry.py | memory registry main | candidate feedback -> search priors | search memory | NO_POSITIVE_OR_NEGATIVE_UPDATE_B0 | tests/test_evaluation_access.py | 7EC9C27A3FDD1AE8D5CCB6D674B2DBD092704CECB22593C3E228AFAAD3988717 | all current candidate feedback is spent/OOS-derived |
 | Scheduler / successive halving | FROZEN | scripts/crypto_a7source10_proxy_reward_flow_company_py_20260708.py | scheduler main | proxy/reward queues -> budgets and shards | compute allocation | NO_ADAPTIVE_OOS_FEEDBACK | tests/test_evaluation_access.py | AEA93934C17B10B0AC4EA5F833DFC807281F322DD481A3A8C39DCE1637FE53E6 | spent evaluation budget contamination |
@@ -84,7 +84,7 @@ flowchart TD
 | Evaluation access ledger | IMPLEMENTED | alphafactory_crypto/evaluation_access.py | assert_candidate_feedback_columns_allowed | epoch and metric access -> allow/block decision | evaluation governance | FAIL_CLOSED | runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_evaluation_access_ledger.csv; tests/test_evaluation_access.py | 25D58EBAFB84B933E27AAEE25DB3BBD5C709440608E686BF3B7D76CA234BF76C | none |
 | Spent historical evaluation | FROZEN | runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_oos_burn_ledger.csv | OOS burn ledger | validation/test/recent/May -> spent classification | historical report only | DENY_CANDIDATE_FEEDBACK | tests/test_evaluation_access.py | CE9A5FE5B41F5858F65B8A1058C44E9C1D3572398A3080CBD32BC48D044F975A | irreversible exposure |
 | Sealed forward data | FROZEN | config/crypto_evaluation_access_policy_v1.json | unknown epoch default | unseen epoch -> SEALED_FORWARD | sealed evaluation | NO_READ_B0 | tests/test_evaluation_access.py | 57B23A06C28A64F230C39B82D39E4631B7D195898B686E27B869233EDB728FBC | requires explicit future authorization |
-| Future wrong-lag control | PLANNED | planned | planned | signal and future shifts -> negative-control metrics | leakage control | AUDIT_ONLY_B0 | planned | FCEEC93C1B0087B996E366D4996DE74222243BB4E3A8B44789B64056D5F99FBB | B0.2 pending |
+| Future wrong-lag control | IMPLEMENTED | alphafactory_crypto/negative_controls.py; config/crypto_future_wrong_lag_control_v1.json; scripts/crypto_b0_future_wrong_lag_audit.py; scripts/crypto_a7reward1_portfolio_reward_model.py | future_wrong_lag / audit_future_wrong_lag | signal and future shifts -> negative-control metrics | leakage control | AUDIT_ONLY_B0 | tests/test_future_wrong_lag.py; runtime/a7b0_future_wrong_lag_control_20260711/future_wrong_lag_audit_summary.json; reports/CRYPTO_B0_FUTURE_WRONG_LAG_CONTROL_20260711.md | 8C10045585A87B577A001D07341FA1B8E06F9C14B5AA681471B760B1D54D4347 | production execution frozen during HOLD_RESEARCH |
 | BZ | PLANNED | planned | undefined | undefined -> undefined | unresolved | DENY_ALL_PROMOTION | planned | F88927E4C3AE78ACA13B5CB186582FF768F6CF8B89346096C28CC9A00AF10DBF | no authoritative definition or implementation |
 | Temporal/event primitive contract | PLANNED | planned | planned | observable event streams -> PIT temporal primitives | temporal semantics | NO_REWARD_B0 | planned | 53DCEC71204C1790DD7EDC180AB6BE3C2AB79E4CE84450DC6143E37D9B228758 | B0.7 pending |
 | Feature/State Fabric | PLANNED | planned | planned | approved observations and contracts -> deterministic feature/state cache | feature/state materialization | NO_REWARD_B0 | planned | 635836D46E1ECFCEC7CF9CC3B754E16325FDC5FCB52563261DA4DFA10B651A0B | B0.8 pending |

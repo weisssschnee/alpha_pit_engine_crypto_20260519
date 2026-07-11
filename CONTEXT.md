@@ -35,3 +35,7 @@ _Avoid_: Non-null funding rate, hourly funding row
 **Funding Observable Time**:
 The first timestamp at which a funding payment record is available to the research system, which may be later than settlement time.
 _Avoid_: Funding time, panel row time
+
+**Future Wrong-Lag Control**:
+An impossible negative control that applies information from a future signal timestamp to an earlier decision timestamp; dominance over the legal signal is evidence of leakage or time misalignment.
+_Avoid_: Forecast horizon, ordinary lag
