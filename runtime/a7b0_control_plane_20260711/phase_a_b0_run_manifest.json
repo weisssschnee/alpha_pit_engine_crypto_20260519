@@ -7,6 +7,13 @@
   "phase_b1_status": "FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "registry_sha256": "0CACD837521139E8396D65895EB4B6A64D894BCB9B500A33F9E14FB5951059C4",
+  "phase_b0_remote_sync": {
+    "branch": "audit/evalreset-collapse-forensics-20260711",
+    "b0_completion_sha": "a0a36145ccd9666f5a137bee4b8414767aaa7ffd",
+    "last_verified_remote_sha": "32255ee986a9790889164e02ac4b8c168425c68d",
+    "status": "UNSYNCED_PUSH_RETRY_FAILED_NETWORK_2026_07_11",
+    "blocker": "GitHub HTTPS connection reset or port 443 unavailable across three retries; cross-machine dependency, PR, and merge remain prohibited until exact ref verification succeeds."
+  },
   "graph_control_nodes": 26,
   "graph_control_edges": 23,
   "b0_items": [

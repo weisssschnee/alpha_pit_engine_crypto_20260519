@@ -247,7 +247,14 @@ Registry SHA256: `{digest}`.
 - Baseline tag commit: `{state['phase_a_remote_sync']['tag_commit']}`
 - Sync status: `{state['phase_a_remote_sync']['status']}`
 
-The earlier unsynchronized state is superseded by the verified remote refs above. Current B0 commits may be locally ahead until their own post-test push.
+The earlier Phase A unsynchronized state is superseded by the verified remote refs above.
+
+## Phase B0 Remote Status
+
+- B0 completion SHA: `{state['phase_b0_remote_sync']['b0_completion_sha']}`
+- Last verified remote SHA: `{state['phase_b0_remote_sync']['last_verified_remote_sha']}`
+- Sync status: `{state['phase_b0_remote_sync']['status']}`
+- Blocker: {state['phase_b0_remote_sync']['blocker']}
 
 ## Phase B0 Items
 
@@ -298,6 +305,7 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "collapse_status": state["collapse_status"], "research_status": state["research_status"],
         "current_phase": state["current_phase"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"], "registry_sha256": digest,
+        "phase_b0_remote_sync": state["phase_b0_remote_sync"],
         "graph_control_nodes": len(registry["nodes"]), "graph_control_edges": len(registry["edges"]),
         "b0_items": state["b0_items"], "search_started": False, "forward_performance_read": False,
         "artifact_index": relative(ARTIFACT_INDEX_PATH), "decision_log": relative(DECISION_LOG_PATH),

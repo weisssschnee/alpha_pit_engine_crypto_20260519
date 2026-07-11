@@ -19,7 +19,14 @@ Registry SHA256: `0CACD837521139E8396D65895EB4B6A64D894BCB9B500A33F9E14FB5951059
 - Baseline tag commit: `ac9fd24ede281bbcbf438f7c2f4f9b1e563b8b76`
 - Sync status: `VERIFIED_SYNCED_2026_07_11`
 
-The earlier unsynchronized state is superseded by the verified remote refs above. Current B0 commits may be locally ahead until their own post-test push.
+The earlier Phase A unsynchronized state is superseded by the verified remote refs above.
+
+## Phase B0 Remote Status
+
+- B0 completion SHA: `a0a36145ccd9666f5a137bee4b8414767aaa7ffd`
+- Last verified remote SHA: `32255ee986a9790889164e02ac4b8c168425c68d`
+- Sync status: `UNSYNCED_PUSH_RETRY_FAILED_NETWORK_2026_07_11`
+- Blocker: GitHub HTTPS connection reset or port 443 unavailable across three retries; cross-machine dependency, PR, and merge remain prohibited until exact ref verification succeeds.
 
 ## Phase B0 Items
 
