@@ -1,0 +1,134 @@
+{
+  "registry_id": "CRYPTO-NEXTGEN-MECHANISM-REGISTRY-V1",
+  "development_only": true,
+  "forbidden_capabilities": [
+    "liquidation",
+    "force_order",
+    "multi_level_depth",
+    "complete_bbo_history"
+  ],
+  "mechanism_families": [
+    {
+      "mechanism_id": "funding_dynamics",
+      "economic_hypotheses": ["funding_level_carry", "funding_change_repricing", "funding_surprise_reversal", "funding_event_age_decay"],
+      "observable_fields": ["funding", "funding_change", "funding_surprise", "funding_event_age", "basis"],
+      "typed_states": ["funding_positive", "funding_extreme", "funding_changed", "post_funding_event"],
+      "temporal_primitives": ["Level", "Delta", "Surprise", "Persistence", "Duration", "StateAge", "Transition", "EventWindow", "MultiScaleRelation"],
+      "legal_program_templates": ["primitive(field)", "primitive(field)|condition(state)", "primitive(field)+interaction(basis)"],
+      "canonicalization": "field identities and named parameters are sorted; neutral wrappers and global positive scale are removed",
+      "semantic_volume_estimate": 6912,
+      "expected_failure_modes": ["sparse eight-hour changes", "event masks identical across symbols", "alias saturation", "funding/basis collinearity"]
+    },
+    {
+      "mechanism_id": "basis_dislocation_convergence",
+      "economic_hypotheses": ["basis_dislocation_reversal", "basis_convergence", "basis_funding_divergence"],
+      "observable_fields": ["basis", "basis_abs", "funding", "funding_surprise"],
+      "typed_states": ["basis_extreme", "basis_widening", "basis_converging"],
+      "temporal_primitives": ["Level", "Delta", "Slope", "Surprise", "Persistence", "Transition", "PathShape", "MultiScaleRelation"],
+      "legal_program_templates": ["primitive(basis)", "primitive(basis)-interaction(funding)", "primitive(basis)|condition(basis_extreme)"],
+      "canonicalization": "commutative interactions sort operands and convergence normalizes to negative delta",
+      "semantic_volume_estimate": 4608,
+      "expected_failure_modes": ["mark/trade basis source lag", "funding overlap", "extreme-state coverage loss"]
+    },
+    {
+      "mechanism_id": "oi_inventory",
+      "economic_hypotheses": ["oi_expansion_confirmation", "oi_contraction_unwind", "oi_price_divergence"],
+      "observable_fields": ["oi", "oi_change", "asset_return", "relative_market_return"],
+      "typed_states": ["oi_expanding", "oi_contracting", "oi_price_divergent"],
+      "temporal_primitives": ["Level", "Delta", "Slope", "Acceleration", "Surprise", "Persistence", "Duration", "Transition", "MultiScaleRelation"],
+      "legal_program_templates": ["primitive(oi_change)", "primitive(oi_change)*interaction(asset_return)", "primitive(oi)|condition(oi_price_divergent)"],
+      "canonicalization": "OI level is log-normalized before temporal composition",
+      "semantic_volume_estimate": 5184,
+      "expected_failure_modes": ["inventory level nonstationarity", "accepted-family overlap", "price confirmation sign ambiguity"]
+    },
+    {
+      "mechanism_id": "mark_index_deviation",
+      "economic_hypotheses": ["mark_index_dislocation", "mark_index_convergence"],
+      "observable_fields": ["mark_index_deviation", "basis", "asset_return"],
+      "typed_states": ["mark_index_extreme", "mark_index_converging"],
+      "temporal_primitives": ["Level", "Delta", "Slope", "Surprise", "Persistence", "Transition", "PathShape"],
+      "legal_program_templates": ["primitive(mark_index_deviation)", "primitive(mark_index_deviation)-interaction(basis)"],
+      "canonicalization": "signed basis points are preserved; negative zero is normalized",
+      "semantic_volume_estimate": 2688,
+      "expected_failure_modes": ["near-zero dispersion", "basis duplication", "venue-specific semantics"]
+    },
+    {
+      "mechanism_id": "taker_imbalance",
+      "economic_hypotheses": ["aggressive_flow_continuation", "aggressive_flow_exhaustion"],
+      "observable_fields": ["taker", "asset_return", "liquidity"],
+      "typed_states": ["taker_buy_dominant", "taker_sell_dominant", "flow_price_divergence"],
+      "temporal_primitives": ["Level", "Delta", "Slope", "Surprise", "Persistence", "Duration", "Transition", "PathShape"],
+      "legal_program_templates": ["primitive(taker)", "primitive(taker)*interaction(asset_return)", "primitive(taker)|condition(liquidity)"],
+      "canonicalization": "buy-share is normalized to signed imbalance in [-1,1]",
+      "semantic_volume_estimate": 3072,
+      "expected_failure_modes": ["flow/return simultaneity", "high turnover", "low-volume noise"]
+    },
+    {
+      "mechanism_id": "volatility_regime",
+      "economic_hypotheses": ["volatility_burst_continuation", "volatility_compression_breakout", "volatility_mean_reversion"],
+      "observable_fields": ["volatility", "volatility_burst", "asset_return", "liquidity"],
+      "typed_states": ["volatility_burst", "volatility_compression"],
+      "temporal_primitives": ["Level", "Delta", "Slope", "Surprise", "Persistence", "Duration", "Transition", "MultiScaleRelation"],
+      "legal_program_templates": ["primitive(volatility_burst)", "primitive(asset_return)|condition(volatility_burst)"],
+      "canonicalization": "volatility windows use completed observations and integer-hour durations",
+      "semantic_volume_estimate": 4608,
+      "expected_failure_modes": ["turnover explosion", "volatility/liquidity confounding", "condition undercoverage"]
+    },
+    {
+      "mechanism_id": "session_time",
+      "economic_hypotheses": ["session_cross_section", "session_transition"],
+      "observable_fields": ["session_sin", "session_cos", "asset_return", "taker"],
+      "typed_states": ["asia_session", "europe_session", "us_session", "session_boundary"],
+      "temporal_primitives": ["Level", "Persistence", "Duration", "StateAge", "Transition", "EventWindow"],
+      "legal_program_templates": ["primitive(asset_return)|condition(session)", "primitive(taker)|condition(session_boundary)"],
+      "canonicalization": "UTC hour is encoded cyclically and session labels use fixed half-open intervals",
+      "semantic_volume_estimate": 2304,
+      "expected_failure_modes": ["condition constant across symbols", "timezone ambiguity", "low cross-sectional dispersion"]
+    },
+    {
+      "mechanism_id": "cross_asset_confirmation",
+      "economic_hypotheses": ["market_confirmation", "relative_strength", "market_decoupling"],
+      "observable_fields": ["asset_return", "market_return", "relative_market_return", "cross_confirmation"],
+      "typed_states": ["market_confirmed", "market_decoupled"],
+      "temporal_primitives": ["Level", "Delta", "Slope", "Persistence", "Duration", "Transition", "MultiScaleRelation"],
+      "legal_program_templates": ["primitive(relative_market_return)", "primitive(asset_return)-interaction(market_return)", "primitive(asset_return)|condition(cross_confirmation)"],
+      "canonicalization": "market reference is the contemporaneous cross-sectional median of observable past returns",
+      "semantic_volume_estimate": 3584,
+      "expected_failure_modes": ["market mode dominance", "small-universe instability", "duplicate residual expressions"]
+    },
+    {
+      "mechanism_id": "liquidity_top_level",
+      "economic_hypotheses": ["bbo_spread_state", "bbo_quote_imbalance", "bbo_top_level_liquidity"],
+      "observable_fields": ["spread", "bid_qty", "ask_qty", "quote_imbalance", "top_of_book_liquidity"],
+      "typed_states": ["spread_wide", "quote_bid_heavy", "quote_ask_heavy", "top_level_liquidity_thin"],
+      "temporal_primitives": ["Level", "Delta", "Slope", "Acceleration", "Surprise", "Persistence", "Duration", "Transition", "EventWindow", "MultiScaleRelation"],
+      "legal_program_templates": ["primitive(spread)", "primitive(quote_imbalance)", "primitive(top_of_book_liquidity)|condition(spread_wide)"],
+      "canonicalization": "BBO means top-of-book only; quantity and spread units remain explicit",
+      "semantic_volume_estimate": 7200,
+      "expected_failure_modes": ["17.78 percent coordinate absence", "short Jan-Feb scope", "symbol-specific quantity scale", "not multi-level depth"],
+      "scope": "BINANCE_UM_BOOKTICKER_CORE11_2024_01_02_ONLY"
+    },
+    {
+      "mechanism_id": "temporal_state_path",
+      "economic_hypotheses": ["state_persistence", "state_duration", "state_transition", "path_shape_reversal"],
+      "observable_fields": ["funding_surprise", "basis", "oi_change", "taker", "volatility_burst", "relative_market_return"],
+      "typed_states": ["persistent_positive", "persistent_negative", "first_transition", "state_age"],
+      "temporal_primitives": ["Persistence", "Duration", "StateAge", "TimeSince", "Transition", "FirstHit", "LastHit", "PathShape", "EventWindow", "MultiScaleRelation"],
+      "legal_program_templates": ["primitive(field)", "primitive(field)|condition(transition)", "primitive(primitive(field))"],
+      "canonicalization": "nested temporal programs retain ordered path structure; equivalent adjacent deltas are combined",
+      "semantic_volume_estimate": 9600,
+      "expected_failure_modes": ["deep-program missingness", "path aliasing", "state threshold sensitivity", "complexity inflation"]
+    },
+    {
+      "mechanism_id": "orthogonal_exile",
+      "economic_hypotheses": ["orthogonal_flow", "orthogonal_session", "orthogonal_volatility", "new_mechanism_exile"],
+      "observable_fields": ["taker", "volatility_burst", "session_sin", "session_cos", "relative_market_return", "liquidity"],
+      "typed_states": ["non_carry_non_oi_state", "exile_transition"],
+      "temporal_primitives": ["Delta", "Slope", "Acceleration", "Surprise", "Persistence", "Duration", "Transition", "PathShape", "MultiScaleRelation"],
+      "legal_program_templates": ["orthogonalize(primitive(field),funding)", "orthogonalize(primitive(field),oi)", "primitive(field)|condition(exile_transition)"],
+      "canonicalization": "orthogonal reference identity and residualization order are part of the program identity",
+      "semantic_volume_estimate": 6144,
+      "expected_failure_modes": ["residual instability", "implicit return exposure", "false novelty from quantization"]
+    }
+  ]
+}

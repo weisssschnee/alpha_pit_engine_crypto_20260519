@@ -1,0 +1,111 @@
+{
+  "contract_id": "CRYPTO-NEXTGEN-SEARCH-EPOCH-0-V1",
+  "authorization_status": "CRYPTO_NEXTGEN_SEARCH_EPOCH_0_AUTHORIZED",
+  "data_access": "TRAIN_DEVELOPMENT_ONLY",
+  "panels": {
+    "main": {
+      "start_utc": "2024-01-01T00:00:00Z",
+      "end_utc_inclusive": "2024-12-31T23:00:00Z",
+      "universe": "BINANCE_UM_CORE12",
+      "comparison_domain": "MAIN_ONLY",
+      "excluded": ["liquidation", "force_order", "multi_level_depth", "bookticker_bbo"]
+    },
+    "bbo_micro": {
+      "start_utc": "2024-01-01T00:00:00Z",
+      "end_utc_inclusive": "2024-02-29T23:00:00Z",
+      "universe": "BINANCE_UM_BOOKTICKER_CORE11_OBSERVED",
+      "coverage_ratio": 0.8222222222222222,
+      "comparison_domain": "BBO_MICRO_ONLY",
+      "depth_semantics": "TOP_OF_BOOK_BBO_ONLY_NOT_MULTI_LEVEL_DEPTH"
+    }
+  },
+  "lanes": {
+    "main": [
+      "typed_random_fresh",
+      "typed_ast",
+      "cem",
+      "uct_mcts",
+      "evolutionary",
+      "surrogate",
+      "llm_proposal_repair",
+      "orthogonal_exile"
+    ],
+    "bbo_micro": ["bbo_typed_temporal"]
+  },
+  "budget_range": {
+    "proposals": [32768, 65536],
+    "stratified_strict_evaluations": [1024, 2048],
+    "equal_budget_global_top_k_control": true
+  },
+  "minimum_fixed_seeds": 2,
+  "throughput_smoke": {
+    "proposals_per_lane": 16,
+    "reads_performance": false,
+    "selection_policy": "choose 32768 proposals and 1024 stratified strict evaluations when projected runtime is at most 90 minutes; otherwise stop without performance"
+  },
+  "adaptive_contract": {
+    "feedback_queries_per_seed": 256,
+    "algorithms": ["cem", "uct_mcts", "evolutionary", "surrogate"],
+    "memory_scope": "LANE_AND_SEED_LOCAL_RUNTIME_ONLY",
+    "persist_elite_policy_value": false
+  },
+  "admission_contract": {
+    "one_exact_identity_one_vote": true,
+    "semantic_volume_round_robin": true,
+    "behaviour_cluster_quota_per_lane": 8,
+    "economic_hypothesis_quota_per_lane": 24,
+    "parent_descendant_cap": 8,
+    "family_budget_cap": 32,
+    "natural_capacity_underfill_allowed": true,
+    "global_top_k_uses_equal_strict_budget": true
+  },
+  "reward_contract": {
+    "target": "trade_close[t+2]/trade_close[t+1]-1 for completed observation bucket t",
+    "cost_bps_per_unit_turnover": 5.0,
+    "minimum_assets_per_coordinate": 5,
+    "objectives": [
+      "signal_quality",
+      "portfolio_return_risk",
+      "worst_horizon",
+      "time_block_stability",
+      "cost_turnover",
+      "concentration",
+      "complexity",
+      "behaviour_novelty",
+      "benchmark_incremental_contribution",
+      "null_placebo_controls"
+    ],
+    "hard_gates": ["coverage", "observations", "finite_ic", "concentration", "placebo"],
+    "pareto_archive": true,
+    "full_vector_retained": true,
+    "lane_scalar_audited_for_reward_basin": true,
+    "online_modification_allowed": false
+  },
+  "strategy_benchmarks": [
+    "simple_funding", "simple_basis", "simple_oi", "momentum", "reversal",
+    "volatility", "liquidity", "session_time_of_day", "cross_asset_state"
+  ],
+  "algorithm_competitors": [
+    "typed_random", "typed_ast", "cem", "uct_mcts", "evolutionary_search",
+    "surrogate", "llm_proposal_repair", "global_top_k", "stratified_admission"
+  ],
+  "contracts": {
+    "one_exact_identity_one_vote": true,
+    "cross_lane_memory": false,
+    "cross_epoch_memory": false,
+    "candidate_promotion": false,
+    "online_budget_reward_grammar_admission_change": false,
+    "seed_or_proposal_extension": false
+  },
+  "prohibited": [
+    "validation_test_recent_may_stress_forward_read",
+    "human_midrun_parameter_change",
+    "online_reward_budget_grammar_admission_change",
+    "additional_seed_or_proposal",
+    "candidate_promotion",
+    "a7mem_update",
+    "cross_lane_memory",
+    "cross_epoch_adaptive_memory",
+    "alpha_ready_or_oos_proven_claim"
+  ]
+}
