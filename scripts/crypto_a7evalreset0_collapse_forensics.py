@@ -355,11 +355,14 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
     write_csv(outputs["release_integrity_audit"], integrity_rows, list(integrity_rows[0]))
 
     exact_sizes = sorted(Counter(row["signal_weight_exact_fingerprint"] for row in accepted_rows).values(), reverse=True)
-    decision = "HOLD_EVALRESET_REQUIRED"
+    decision = "PHASE_A_GOVERNANCE_ACCEPTED"
     result = {
         "stage": "A7EVALRESET-0",
         "generated_at": now_utc(),
         "decision": decision,
+        "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
+        "research_status": "HOLD_RESEARCH",
+        "independent_economic_information_first_collapse_identified": False,
         "baseline_commit": "ac9fd24ede281bbcbf438f7c2f4f9b1e563b8b76",
         "release_decision": manifest["decision"],
         "release_integrity_pass": all(row["status"] == "PASS" for row in integrity_rows),
@@ -409,7 +412,13 @@ flowchart LR
         "",
         f"`{decision}`",
         "",
+        "`SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`",
+        "",
+        "`HOLD_RESEARCH`",
+        "",
         "This is historical forensic evidence only. It authorizes neither alpha proof nor new search, forward reads, positive memory, shadow, paper, or live use.",
+        "",
+        "Exact-identity admission and strict reward are confirmed contraction points. Without signal, activation, PnL/regime, and economic-hypothesis registries, this report does not identify the first collapse of independent economic information.",
         "",
         "## Feedback Graph",
         "",

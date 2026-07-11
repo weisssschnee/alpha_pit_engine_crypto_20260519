@@ -1,12 +1,18 @@
 # CRYPTO A7EVALRESET-0 Collapse Forensics
 
-Generated: `2026-07-10T20:15:43Z`
+Generated: `2026-07-11T05:09:26Z`
 
 ## Decision
 
-`HOLD_EVALRESET_REQUIRED`
+`PHASE_A_GOVERNANCE_ACCEPTED`
+
+`SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
+
+`HOLD_RESEARCH`
 
 This is historical forensic evidence only. It authorizes neither alpha proof nor new search, forward reads, positive memory, shadow, paper, or live use.
+
+Exact-identity admission and strict reward are confirmed contraction points. Without signal, activation, PnL/regime, and economic-hypothesis registries, this report does not identify the first collapse of independent economic information.
 
 ## Feedback Graph
 

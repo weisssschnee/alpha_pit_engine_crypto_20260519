@@ -2,7 +2,8 @@
   "accepted_rows": 16,
   "baseline_commit": "ac9fd24ede281bbcbf438f7c2f4f9b1e563b8b76",
   "canonical_expressions": 6,
-  "decision": "HOLD_EVALRESET_REQUIRED",
+  "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
+  "decision": "PHASE_A_GOVERNANCE_ACCEPTED",
   "exact_identity_group_sizes": [
     9,
     3,
@@ -13,7 +14,8 @@
   ],
   "exact_signal_identities": 6,
   "forward_performance_read": false,
-  "generated_at": "2026-07-10T20:15:43Z",
+  "generated_at": "2026-07-11T05:09:26Z",
+  "independent_economic_information_first_collapse_identified": false,
   "memory_credit_released_rows": 0,
   "outputs": {
     "accepted_compression_audit": "runtime\\a7evalreset0_evaluation_governance_20260711\\a7evalreset0_accepted_compression_audit.csv",
@@ -26,6 +28,7 @@
   "policy": "config\\crypto_evaluation_access_policy_v1.json",
   "release_decision": "PASS_A7EFF2_GIT_RELEASE_BUNDLE_READY",
   "release_integrity_pass": true,
+  "research_status": "HOLD_RESEARCH",
   "search_started": false,
   "spent_epoch_count": 4,
   "stage": "A7EVALRESET-0"

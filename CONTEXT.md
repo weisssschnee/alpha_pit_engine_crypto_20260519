@@ -1,0 +1,29 @@
+# Crypto Alpha Research Governance
+
+This context defines the language used to separate historical research evidence, sealed evaluation, identity, and hypothesis claims in the Crypto Alpha repository.
+
+## Language
+
+**Spent Historical Evaluation**:
+An evaluation epoch whose observations or metrics have already influenced automated or human decisions and therefore cannot serve as untouched OOS evidence or candidate feedback.
+_Avoid_: Fresh OOS, final holdout
+
+**Sealed Forward Epoch**:
+An unknown or explicitly reserved epoch that cannot be read or used until an immutable access authorization is recorded.
+_Avoid_: Available future data, optional holdout
+
+**Governance Acceptance**:
+Acceptance that access controls, ledgers, and prohibitions are correctly established; it is not acceptance of alpha validity or permission to search.
+_Avoid_: Alpha acceptance, research promotion
+
+**Search Collapse Source**:
+A pipeline stage at which candidate representations measurably contract; it does not by itself identify where independent economic information first disappears.
+_Avoid_: Economic-information collapse point
+
+**Independent Economic Information Collapse**:
+The first layer at which distinct economic hypotheses become observationally or economically indistinguishable under registered activation and PnL/regime evidence.
+_Avoid_: Exact-identity deduplication, accepted-row compression
+
+**Hold Research**:
+A governance state that permits bounded contract, audit, and reproduction work while prohibiting search, promotion, forward reads, and positive feedback.
+_Avoid_: Failed project, search authorization
