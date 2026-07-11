@@ -532,6 +532,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Attempts / persisted strict evaluations / rerun: `{state['nextgen_epoch1']['attempts']}` / `{state['nextgen_epoch1']['strict_evaluations_persisted']}` / `{state['nextgen_epoch1']['rerun_performed']}`
 - Failure: `{state['nextgen_epoch1']['failure_type']}`
 - Recommendation: `{state['nextgen_epoch1']['recommendation']}`
+- Remote sync: `{state['epoch1_remote_sync']['status']}` for `{state['epoch1_remote_sync']['closure_subject_sha']}` after `{state['epoch1_remote_sync']['attempts']}` attempts
 - Forward read / promotion / cross-epoch memory: `{state['nextgen_epoch1']['forward_read']}` / `{state['nextgen_epoch1']['candidate_promotion']}` / `{state['nextgen_epoch1']['cross_epoch_memory']}`
 
 ## NEXTGEN-DARK Allowed
@@ -752,6 +753,7 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "epoch1_performance_started": state["nextgen_epoch1"]["performance_started"],
         "epoch1_execution_status": state["nextgen_epoch1"]["execution_status"],
         "epoch1_recommendation": state["nextgen_epoch1"].get("recommendation"),
+        "epoch1_remote_sync_status": state["epoch1_remote_sync"]["status"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -918,6 +920,7 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "epoch1_closure_manifest": relative(EPOCH1_CLOSURE_MANIFEST_PATH),
         "epoch1_artifact_index": relative(EPOCH1_ARTIFACT_INDEX_PATH),
         "epoch1_recommendation": state["nextgen_epoch1"].get("recommendation"),
+        "epoch1_remote_sync": state["epoch1_remote_sync"],
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []

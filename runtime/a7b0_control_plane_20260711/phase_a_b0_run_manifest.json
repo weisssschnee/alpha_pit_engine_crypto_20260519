@@ -6,7 +6,7 @@
   "current_phase": "FROZEN_DEVELOPMENT_EPOCH1_FAILED",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
-  "registry_sha256": "AA58D8A212AC9A148B98612CA6A0D13E2AF91858D1C5925DEDACE6DC56EA4569",
+  "registry_sha256": "53F8FC93096268AEBA9639B8D5404AF984740FC57077F37324914298A0DF281D",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "active_stage": "EPOCH1_FAILED_CLOSED_AWAITING_SEARCH_ENGINE_REVISION_AUTHORIZATION",
   "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
@@ -165,5 +165,13 @@
   "epoch1_execution_status": "FAILED_BEFORE_STRICT_EVALUATION",
   "epoch1_closure_manifest": "runtime/nextgen_epoch1_20260712/epoch1_closure_manifest.json",
   "epoch1_artifact_index": "runtime/nextgen_epoch1_20260712/epoch1_artifact_index.csv",
-  "epoch1_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH"
+  "epoch1_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
+  "epoch1_remote_sync": {
+    "branch": "audit/evalreset-collapse-forensics-20260711",
+    "closure_subject_sha": "65c6b46f5e157fb217e3e1896d852b39924193dd",
+    "remote_sha": "UNVERIFIED_NETWORK_UNAVAILABLE",
+    "attempts": 3,
+    "status": "PUSH_PENDING_GITHUB_HTTPS_UNREACHABLE",
+    "last_error": "Failed to connect to github.com port 443"
+  }
 }

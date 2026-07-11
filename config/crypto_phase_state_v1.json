@@ -218,5 +218,13 @@
     "cross_epoch_memory": false,
     "forward_read": false
   },
+  "epoch1_remote_sync": {
+    "branch": "audit/evalreset-collapse-forensics-20260711",
+    "closure_subject_sha": "65c6b46f5e157fb217e3e1896d852b39924193dd",
+    "remote_sha": "UNVERIFIED_NETWORK_UNAVAILABLE",
+    "attempts": 3,
+    "status": "PUSH_PENDING_GITHUB_HTTPS_UNREACHABLE",
+    "last_error": "Failed to connect to github.com port 443"
+  },
   "next_acceptance_gate": "Independently authorize a post-failure search-engine revision. Before any new freeze, add and test deterministic empty-capacity natural-underfill handling in admit_full_identity. Do not reuse the failed frozen manifest, rerun Epoch-1, open OOS/forward, promote candidates, or persist adaptive memory without new authorization."
 }

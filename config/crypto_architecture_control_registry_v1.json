@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "26477CDF057FB522741675FEE9D8BFB8923E4C5F05A0530C5C13F9EEDBEB2A85"
+      "last_verified_sha": "6FCB00C5ADE689ACAEAC05E1762C2A76319D1D92A7D4CF57794A3BFB6203E9C2"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -980,7 +980,7 @@
         "runtime/nextgen_epoch1_20260712/epoch1_closure_test_output.txt"
       ],
       "blocker": "single execution failed before strict evaluation because empty identity capacity raised KeyError instead of natural underfill; no rerun authorized",
-      "last_verified_sha": "EAAC50FA4C32B50F8D8F39E9D4907A2D1D5F893BF561BFDBD7FB709A856BB60B"
+      "last_verified_sha": "D3461B2DC6C203C404CFE716F2E41617EF3E79590CBBE7AAC28AF181B9EA746A"
     }
   ],
   "edges": [

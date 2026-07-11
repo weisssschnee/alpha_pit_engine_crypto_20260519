@@ -4,7 +4,7 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "AA58D8A212AC9A148B98612CA6A0D13E2AF91858D1C5925DEDACE6DC56EA4569",
+      "registry_sha256": "53F8FC93096268AEBA9639B8D5404AF984740FC57077F37324914298A0DF281D",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 46,
@@ -35,6 +35,7 @@
       "epoch1_performance_started": true,
       "epoch1_execution_status": "FAILED_BEFORE_STRICT_EVALUATION",
       "epoch1_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
+      "epoch1_remote_sync_status": "PUSH_PENDING_GITHUB_HTTPS_UNREACHABLE",
       "research_status": "RESEARCH_MODE_EPOCH1_FAILED_CLOSED",
       "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
       "forward_data_status": "SEALED_NO_NEW_FORWARD_READ"
@@ -177342,7 +177343,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "26477CDF057FB522741675FEE9D8BFB8923E4C5F05A0530C5C13F9EEDBEB2A85",
+      "last_verified_sha": "6FCB00C5ADE689ACAEAC05E1762C2A76319D1D92A7D4CF57794A3BFB6203E9C2",
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
       "weight": 1.0
     },
@@ -177856,7 +177857,7 @@
         "runtime/nextgen_epoch1_20260712/epoch1_closure_manifest.json",
         "runtime/nextgen_epoch1_20260712/epoch1_closure_test_output.txt"
       ],
-      "last_verified_sha": "EAAC50FA4C32B50F8D8F39E9D4907A2D1D5F893BF561BFDBD7FB709A856BB60B",
+      "last_verified_sha": "D3461B2DC6C203C404CFE716F2E41617EF3E79590CBBE7AAC28AF181B9EA746A",
       "blocker": "single execution failed before strict evaluation because empty identity capacity raised KeyError instead of natural underfill; no rerun authorized",
       "weight": 1.0
     }
