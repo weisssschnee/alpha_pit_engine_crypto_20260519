@@ -1,0 +1,14 @@
+{
+  "forward_read": false,
+  "performance_read": false,
+  "projected_total_seconds": 2958.02183679434,
+  "proposals": 156,
+  "proposals_per_second": 58.721716318920194,
+  "repo_sha": "da030b362977af6106a39a2584fc7fdc203d4139",
+  "runtime_seconds": 2.6565980999730527,
+  "selected_proposals": 32768,
+  "selected_strict_per_arm": 1536,
+  "signal_hash": "FE7AC8B684AB0B52BE26AD9F7EF782AAAD5D2D47028DB7F7E4765F7F10EF086F",
+  "status": "COMPLETED_NO_PERFORMANCE_READ",
+  "target_read": false
+}

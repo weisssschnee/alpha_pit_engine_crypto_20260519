@@ -937,13 +937,13 @@
         "runtime/nextgen_epoch1_20260712/epoch0_admission_offline_replay.csv",
         "runtime/nextgen_epoch1_20260712/revision_diagnosis_manifest.json"
       ],
-      "blocker": "Epoch-1 design is not frozen and performance execution has not started",
+      "blocker": "none; revision is closed and superseded by the frozen Epoch-1 design",
       "last_verified_sha": "2C9AEDBFCDC4361E79C2D4BE3E08FD5AFB38257849FD1758995C91252C9006A2"
     },
     {
       "id": "epoch1_frozen_design",
       "label": "CRYPTO NEXTGEN SEARCH EPOCH-1 frozen design",
-      "status": "PLANNED",
+      "status": "FROZEN",
       "implementation_path": [
         "config/crypto_nextgen_epoch1_v1.json",
         "scripts/crypto_nextgen_epoch1.py"
@@ -954,10 +954,12 @@
       "data_role": "frozen development-search epoch control",
       "feedback_permission": "NO_PERFORMANCE_DURING_SMOKE_OR_FREEZE",
       "artifact_test": [
-        "tests/test_nextgen_epoch1.py"
+        "tests/test_nextgen_epoch1.py",
+        "runtime/nextgen_epoch1_20260712/epoch1_throughput_smoke.json",
+        "runtime/nextgen_epoch1_20260712/epoch1_frozen_design_manifest.json"
       ],
-      "blocker": "throughput smoke and design freeze pending",
-      "last_verified_sha": "9A95D52F4EB842418B32576E6ABB80F6BF2A05BCF7B9270180D4E4B988CB20F1"
+      "blocker": "single immutable execution authorized but not started",
+      "last_verified_sha": "CD1A52241FC97B2DB521F5D03D4473C0947BBBD630B04F09EBC9915AB46740AB"
     },
     {
       "id": "epoch1_execution",
@@ -974,7 +976,7 @@
       "artifact_test": [
         "tests/test_nextgen_epoch1.py"
       ],
-      "blocker": "design not frozen; execution not started",
+      "blocker": "frozen design ready; execution not started",
       "last_verified_sha": "674D5B1D503C28271DE8927AA50941B71FD203C9425D6757483E563011913417"
     }
   ],

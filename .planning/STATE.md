@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `532ECCD3A9AB618A8EEACF4BA30A8010CEE8AFF32AF7185D8FD5F63AE67F3CD8`.
+Registry SHA256: `B1B3D537FBFC5E9F68EDF5562BB6C0ADDC74A616BFC47EF628D86CFE4568F4E3`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `RESEARCH_MODE_CONTROLLED_FROZEN_EPOCH_PREPARATION`
-- Current phase: `SEARCH_ENGINE_REVISION_COMPLETED`
+- Current phase: `FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,7 +16,7 @@ Registry SHA256: `532ECCD3A9AB618A8EEACF4BA30A8010CEE8AFF32AF7185D8FD5F63AE67F3C
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `EPOCH1_REVISION_COMPLETE_CONTINUING_TO_DESIGN_FREEZE`
+- Active stage: `EPOCH1_DESIGN_FROZEN_READY_FOR_SINGLE_EXECUTION`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -133,11 +133,11 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## CRYPTO NEXTGEN SEARCH EPOCH-1
 
-- Status: `SEARCH_ENGINE_REVISION_COMPLETED`
+- Status: `FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN`
 - Accepted Epoch-0 subject: `46616450b1477d54eb45e47a42a8ed0541ce6cb7`
-- Revision subject: `ced7c45`
+- Revision subject: `da030b362977af6106a39a2584fc7fdc203d4139`
 - BBO offline replay: `32` -> `128`; history rewritten `False`
-- Design frozen / performance started / execution: `False` / `False` / `NOT_STARTED`
+- Design frozen / performance started / execution: `True` / `False` / `NOT_STARTED`
 - Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
 
 ## NEXTGEN-DARK Allowed
@@ -180,4 +180,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Run the no-performance throughput smoke, freeze and hash the exact Epoch-1 design, synchronize the freeze control plane, then execute once without online changes. FORMAL_SEARCH_FROZEN, ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN, FORWARD_SEALED, and NO_CANDIDATE_PROMOTION remain in force.
+Execute the frozen Epoch-1 design exactly once, validate all frozen hashes, budgets, full-identity votes and prohibited flags, then perform one closure control-plane synchronization. No rerun or online change is authorized.

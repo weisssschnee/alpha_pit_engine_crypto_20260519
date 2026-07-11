@@ -4,14 +4,14 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "532ECCD3A9AB618A8EEACF4BA30A8010CEE8AFF32AF7185D8FD5F63AE67F3CD8",
+      "registry_sha256": "B1B3D537FBFC5E9F68EDF5562BB6C0ADDC74A616BFC47EF628D86CFE4568F4E3",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 46,
       "control_edge_count": 89,
-      "phase_status": "SEARCH_ENGINE_REVISION_COMPLETED",
+      "phase_status": "FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "EPOCH1_REVISION_COMPLETE_CONTINUING_TO_DESIGN_FREEZE",
+      "active_stage": "EPOCH1_DESIGN_FROZEN_READY_FOR_SINGLE_EXECUTION",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
@@ -30,8 +30,8 @@
       "epoch0_execution_status": "COMPLETED",
       "epoch0_total_development_strict_evaluations": 1801,
       "epoch0_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
-      "epoch1_status": "SEARCH_ENGINE_REVISION_COMPLETED",
-      "epoch1_design_frozen": false,
+      "epoch1_status": "FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN",
+      "epoch1_design_frozen": true,
       "epoch1_performance_started": false,
       "epoch1_execution_status": "NOT_STARTED",
       "research_status": "RESEARCH_MODE_CONTROLLED_FROZEN_EPOCH_PREPARATION",
@@ -177804,7 +177804,7 @@
         "runtime/nextgen_epoch1_20260712/revision_diagnosis_manifest.json"
       ],
       "last_verified_sha": "2C9AEDBFCDC4361E79C2D4BE3E08FD5AFB38257849FD1758995C91252C9006A2",
-      "blocker": "Epoch-1 design is not frozen and performance execution has not started",
+      "blocker": "none; revision is closed and superseded by the frozen Epoch-1 design",
       "weight": 1.0
     },
     {
@@ -177814,7 +177814,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
-      "status": "PLANNED",
+      "status": "FROZEN",
       "implementation_path": [
         "config/crypto_nextgen_epoch1_v1.json",
         "scripts/crypto_nextgen_epoch1.py"
@@ -177825,10 +177825,12 @@
       "data_role": "frozen development-search epoch control",
       "feedback_permission": "NO_PERFORMANCE_DURING_SMOKE_OR_FREEZE",
       "artifact_test": [
-        "tests/test_nextgen_epoch1.py"
+        "tests/test_nextgen_epoch1.py",
+        "runtime/nextgen_epoch1_20260712/epoch1_throughput_smoke.json",
+        "runtime/nextgen_epoch1_20260712/epoch1_frozen_design_manifest.json"
       ],
-      "last_verified_sha": "9A95D52F4EB842418B32576E6ABB80F6BF2A05BCF7B9270180D4E4B988CB20F1",
-      "blocker": "throughput smoke and design freeze pending",
+      "last_verified_sha": "CD1A52241FC97B2DB521F5D03D4473C0947BBBD630B04F09EBC9915AB46740AB",
+      "blocker": "single immutable execution authorized but not started",
       "weight": 1.0
     },
     {
@@ -177851,7 +177853,7 @@
         "tests/test_nextgen_epoch1.py"
       ],
       "last_verified_sha": "674D5B1D503C28271DE8927AA50941B71FD203C9425D6757483E563011913417",
-      "blocker": "design not frozen; execution not started",
+      "blocker": "frozen design ready; execution not started",
       "weight": 1.0
     }
   ],
