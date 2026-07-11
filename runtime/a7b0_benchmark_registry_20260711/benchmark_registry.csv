@@ -1,0 +1,5 @@
+benchmark_id,version,kind,input_fields,input_roles,evaluation_space,feedback_permission,execution_allowed_b0,positive_memory_allowed,description
+benchmark:buy-hold-trade-close:v1,1,market,trade_close,benchmark-only,time_series_return,REPORT_ONLY,False,False,buy-and-hold trade-close reference; definition only in B0
+benchmark:cash-zero:v1,1,cash,trade_close,benchmark-only,net_return,REPORT_ONLY,False,False,zero-return cash reference
+benchmark:equal-weight-universe:v1,1,market,trade_return_1h,benchmark-only,cross_sectional_net_return,REPORT_ONLY,False,False,equal-weight tradable-universe reference; definition only in B0
+bz:benchmark-zero:v1,1,zero,trade_close,benchmark-only,pipeline_sanity,REPORT_ONLY,False,False,zero-alpha diagnostic object

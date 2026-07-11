@@ -55,3 +55,7 @@ _Avoid_: Exact signal identity, trading frequency
 **Economic Hypothesis Identity**:
 A manually registered economic thesis with explicit provenance; it cannot be inferred from semantic family, accepted rows, or OOS ranking.
 _Avoid_: Semantic pair, motif, accepted family
+
+**Benchmark Definition**:
+A versioned comparison contract using benchmark-only inputs; its observations are report-only and cannot create candidate or memory credit.
+_Avoid_: Candidate, positive prior, promotion threshold

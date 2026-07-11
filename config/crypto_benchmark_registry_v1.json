@@ -1,0 +1,13 @@
+{
+  "registry_id": "CRYPTO-BENCHMARK-REGISTRY-V1",
+  "definitions": [
+    {"benchmark_id":"bz:benchmark-zero:v1","version":1,"kind":"zero","input_fields":["trade_close"],"input_roles":["benchmark-only"],"evaluation_space":"pipeline_sanity","description":"zero-alpha diagnostic object"},
+    {"benchmark_id":"benchmark:cash-zero:v1","version":1,"kind":"cash","input_fields":["trade_close"],"input_roles":["benchmark-only"],"evaluation_space":"net_return","description":"zero-return cash reference"},
+    {"benchmark_id":"benchmark:equal-weight-universe:v1","version":1,"kind":"market","input_fields":["trade_return_1h"],"input_roles":["benchmark-only"],"evaluation_space":"cross_sectional_net_return","description":"equal-weight tradable-universe reference; definition only in B0"},
+    {"benchmark_id":"benchmark:buy-hold-trade-close:v1","version":1,"kind":"market","input_fields":["trade_close"],"input_roles":["benchmark-only"],"evaluation_space":"time_series_return","description":"buy-and-hold trade-close reference; definition only in B0"}
+  ],
+  "observation_feedback_permission": "REPORT_ONLY",
+  "positive_memory_allowed": false,
+  "candidate_ranking_allowed_b0": false,
+  "execution_allowed_b0": false
+}

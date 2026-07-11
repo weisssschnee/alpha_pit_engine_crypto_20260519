@@ -1,0 +1,9 @@
+{
+  "decision": "PASS_B0_BENCHMARK_REGISTRY_INTERFACE",
+  "definition_count": 4,
+  "executed_benchmark_count": 0,
+  "observation_feedback_permission": "REPORT_ONLY",
+  "positive_memory_allowed": false,
+  "search_started": false,
+  "forward_performance_read": false
+}

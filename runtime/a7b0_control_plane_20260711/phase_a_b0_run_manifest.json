@@ -6,9 +6,9 @@
   "current_phase": "PHASE_B0_CONTRACTS_AND_OBSERVATION_FOUNDATION",
   "phase_b1_status": "FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
-  "registry_sha256": "F2663F7BDDC3BAEC4E18E9850F1327154E7F1132E7A8F9432539B2B3D1622F63",
+  "registry_sha256": "29F07E9AB3F77675961F53B37DCCEFB48B2B0D1462FFF2FD0D97AA1D36E17792",
   "graph_control_nodes": 26,
-  "graph_control_edges": 21,
+  "graph_control_edges": 22,
   "b0_items": [
     {
       "id": "B0.1",
@@ -38,7 +38,7 @@
     {
       "id": "B0.6",
       "name": "Benchmark registry",
-      "status": "PLANNED"
+      "status": "IMPLEMENTED"
     },
     {
       "id": "B0.7",

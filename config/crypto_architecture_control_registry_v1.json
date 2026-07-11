@@ -346,16 +346,25 @@
     {
       "id": "benchmark_registry",
       "label": "Benchmark registry",
-      "status": "PLANNED",
-      "implementation_path": [],
-      "entrypoint": "planned",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/benchmarks.py",
+        "config/crypto_benchmark_registry_v1.json",
+        "scripts/crypto_b0_benchmark_registry.py"
+      ],
+      "entrypoint": "BenchmarkRegistry.register",
       "input": "benchmark definitions",
       "output": "versioned benchmark observations",
       "data_role": "comparison only",
       "feedback_permission": "NO_POSITIVE_MEMORY",
-      "artifact_test": [],
-      "blocker": "B0.6 pending",
-      "last_verified_sha": "540C4BDF71F184F6E0D0D60AF7995700A9AD21F93C71533BB4DA71308B6BB97B"
+      "artifact_test": [
+        "tests/test_benchmarks.py",
+        "runtime/a7b0_benchmark_registry_20260711/benchmark_registry.csv",
+        "runtime/a7b0_benchmark_registry_20260711/benchmark_registry_manifest.json",
+        "reports/CRYPTO_B0_BENCHMARK_REGISTRY_20260711.md"
+      ],
+      "blocker": "benchmark execution remains frozen; observations are report-only",
+      "last_verified_sha": "C163766672593974442708124438F43BCB784B46A9383B2D2975810981CF8CB0"
     },
     {
       "id": "evaluation_access_ledger",
@@ -552,6 +561,12 @@
       "target": "feature_state_fabric",
       "kind": "PLANNED",
       "label": "B0 contract input only"
+    },
+    {
+      "source": "bz",
+      "target": "benchmark_registry",
+      "kind": "ALLOWED",
+      "label": "authoritative zero benchmark definition"
     },
     {
       "source": "spent_evaluation",

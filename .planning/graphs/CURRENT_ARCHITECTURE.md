@@ -1,6 +1,6 @@
 # Current Architecture
 
-Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `F2663F7BDDC3BAEC4E18E9850F1327154E7F1132E7A8F9432539B2B3D1622F63`.
+Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `29F07E9AB3F77675961F53B37DCCEFB48B2B0D1462FFF2FD0D97AA1D36E17792`.
 
 Status: `PHASE_A_GOVERNANCE_ACCEPTED` / `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED` / `HOLD_RESEARCH`.
 
@@ -28,7 +28,7 @@ flowchart TD
   control_admission["Admission gates\nPARTIAL"]
   control_a7mem["A7MEM\nFROZEN"]
   control_scheduler["Scheduler / successive halving\nFROZEN"]
-  control_benchmark_registry["Benchmark registry\nPLANNED"]
+  control_benchmark_registry["Benchmark registry\nIMPLEMENTED"]
   control_evaluation_access_ledger["Evaluation access ledger\nIMPLEMENTED"]
   control_spent_evaluation["Spent historical evaluation\nFROZEN"]
   control_sealed_forward["Sealed forward data\nFROZEN"]
@@ -47,6 +47,7 @@ flowchart TD
   control_evaluation_access_ledger --> control_proxy
   control_evaluation_access_ledger --> control_strict_reward
   control_funding_event_detector --> control_feature_state_fabric
+  control_bz --> control_benchmark_registry
   control_spent_evaluation --> control_proxy
   control_spent_evaluation --> control_strict_reward
   control_spent_evaluation -. forbidden .-> control_admission
@@ -81,7 +82,7 @@ flowchart TD
 | Admission gates | PARTIAL | scripts/crypto_a7source5_a7search7_source_lag_reward_flow.py | semantic/source-lag/identity gates | candidate rows -> survivors and aliases | candidate admission | REPORT_ONLY_B0 | runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_collapse_stage_audit.csv | 9E4B859D56B665BADB4A6F579CAF31BEAA107A3E45CE70685911F740858A69F1 | independent-information collapse not localized |
 | A7MEM | FROZEN | scripts/crypto_a7mem0_search_memory_registry.py | memory registry main | candidate feedback -> search priors | search memory | NO_POSITIVE_OR_NEGATIVE_UPDATE_B0 | tests/test_evaluation_access.py | 7EC9C27A3FDD1AE8D5CCB6D674B2DBD092704CECB22593C3E228AFAAD3988717 | all current candidate feedback is spent/OOS-derived |
 | Scheduler / successive halving | FROZEN | scripts/crypto_a7source10_proxy_reward_flow_company_py_20260708.py | scheduler main | proxy/reward queues -> budgets and shards | compute allocation | NO_ADAPTIVE_OOS_FEEDBACK | tests/test_evaluation_access.py | AEA93934C17B10B0AC4EA5F833DFC807281F322DD481A3A8C39DCE1637FE53E6 | spent evaluation budget contamination |
-| Benchmark registry | PLANNED | planned | planned | benchmark definitions -> versioned benchmark observations | comparison only | NO_POSITIVE_MEMORY | planned | 540C4BDF71F184F6E0D0D60AF7995700A9AD21F93C71533BB4DA71308B6BB97B | B0.6 pending |
+| Benchmark registry | IMPLEMENTED | alphafactory_crypto/benchmarks.py; config/crypto_benchmark_registry_v1.json; scripts/crypto_b0_benchmark_registry.py | BenchmarkRegistry.register | benchmark definitions -> versioned benchmark observations | comparison only | NO_POSITIVE_MEMORY | tests/test_benchmarks.py; runtime/a7b0_benchmark_registry_20260711/benchmark_registry.csv; runtime/a7b0_benchmark_registry_20260711/benchmark_registry_manifest.json; reports/CRYPTO_B0_BENCHMARK_REGISTRY_20260711.md | C163766672593974442708124438F43BCB784B46A9383B2D2975810981CF8CB0 | benchmark execution remains frozen; observations are report-only |
 | Evaluation access ledger | IMPLEMENTED | alphafactory_crypto/evaluation_access.py | assert_candidate_feedback_columns_allowed | epoch and metric access -> allow/block decision | evaluation governance | FAIL_CLOSED | runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_evaluation_access_ledger.csv; tests/test_evaluation_access.py | 25D58EBAFB84B933E27AAEE25DB3BBD5C709440608E686BF3B7D76CA234BF76C | none |
 | Spent historical evaluation | FROZEN | runtime/a7evalreset0_evaluation_governance_20260711/a7evalreset0_oos_burn_ledger.csv | OOS burn ledger | validation/test/recent/May -> spent classification | historical report only | DENY_CANDIDATE_FEEDBACK | tests/test_evaluation_access.py | CE9A5FE5B41F5858F65B8A1058C44E9C1D3572398A3080CBD32BC48D044F975A | irreversible exposure |
 | Sealed forward data | FROZEN | config/crypto_evaluation_access_policy_v1.json | unknown epoch default | unseen epoch -> SEALED_FORWARD | sealed evaluation | NO_READ_B0 | tests/test_evaluation_access.py | 57B23A06C28A64F230C39B82D39E4631B7D195898B686E27B869233EDB728FBC | requires explicit future authorization |
