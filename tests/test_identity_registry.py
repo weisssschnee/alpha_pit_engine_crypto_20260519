@@ -11,6 +11,7 @@ from alphafactory_crypto.identity_registry import (
     economic_hypothesis_assignment,
     pnl_regime_diagnostic_identity,
     register_economic_hypothesis,
+    register_behaviour_identity,
     syntax_identity,
 )
 
@@ -38,6 +39,13 @@ class IdentityRegistryTests(unittest.TestCase):
         self.assertTrue(cluster.startswith("activation-cluster:"))
         with self.assertRaises(ValueError):
             activation_cluster_identity("")
+
+    def test_behaviour_identity_requires_registered_observation_provenance(self) -> None:
+        registered = register_behaviour_identity("behaviour:abc", "runtime/a7b0a_signal_behaviour_20260711")
+        self.assertEqual(registered.layer, "behaviour")
+        self.assertEqual(registered.status, "REGISTERED_OBSERVATION_ONLY")
+        with self.assertRaises(ValueError):
+            register_behaviour_identity("expression:abc", "test")
 
     def test_pnl_regime_diagnostic_requires_spent_roles_and_is_sign_only(self) -> None:
         metrics = {"validation": 1.0, "test": -0.1, "recent": 3.0, "stress": 0.0}

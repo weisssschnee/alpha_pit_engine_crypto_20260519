@@ -4,17 +4,18 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "0F283421A804BAF699FCE3F05270A49C9A60ECEEE379296DE254C025C8CBE1D3",
+      "registry_sha256": "6B48E715ED8980832CB3FE0D37EAAD1DDF337D144FCA1CC30358836F807401FB",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
-      "control_node_count": 27,
-      "control_edge_count": 27,
+      "control_node_count": 28,
+      "control_edge_count": 33,
       "phase_status": "PHASE_B0_CONTRACTS_ACCEPTED",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "PHASE_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION",
+      "active_stage": "PHASE_B0A_COMPLETE_STOPPED",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
+      "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
       "research_status": "HOLD_RESEARCH",
       "phase_b1_status": "PHASE_B1_FROZEN",
       "forward_data_status": "SEALED_NO_NEW_FORWARD_READ"
@@ -176896,10 +176897,12 @@
       "data_role": "exact numeric identity",
       "feedback_permission": "REPORT_ONLY_DURING_HOLD",
       "artifact_test": [
-        "runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv"
+        "runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/activation_behaviour_identity_registry.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/signal_behaviour_sketch.bin"
       ],
-      "last_verified_sha": "FCA93D783E1F0950C899906D810509DA637FD81A8059A9DF3C6DBB2D74B02DF8",
-      "blocker": "exact identities established; frozen activation behavior artifact remains unavailable, while spent PnL/regime diagnostics are registered separately",
+      "last_verified_sha": "C4F7A78B34333B5848AE77FC6D908EA80F69418D60A12D3FB3A4FB634E742CAE",
+      "blocker": "six accepted exact identities are bound to coordinate-specific B0A weight hashes; exact-to-activation contraction is observational only and has no feedback permission",
       "weight": 1.0
     },
     {
@@ -176915,7 +176918,9 @@
         "config/crypto_identity_layers_v1.json",
         "config/crypto_b0p_economic_hypothesis_registry_v1.json",
         "scripts/crypto_b0_identity_registry.py",
-        "scripts/crypto_b0p_identity_qualification.py"
+        "scripts/crypto_b0p_identity_qualification.py",
+        "alphafactory_crypto/signal_behaviour.py",
+        "scripts/crypto_b0a_frozen_signal_behaviour.py"
       ],
       "entrypoint": "syntax_identity through economic_hypothesis_assignment and pnl_regime_diagnostic_identity",
       "input": "syntax through economic hypothesis",
@@ -176931,11 +176936,15 @@
         "runtime/a7b0p_identity_qualification_20260711/activation_asset_audit.json",
         "runtime/a7b0p_identity_qualification_20260711/pnl_regime_diagnostic_registry.csv",
         "runtime/a7b0p_identity_qualification_20260711/economic_hypothesis_registry.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/activation_behaviour_identity_registry.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/behaviour_pair_metrics.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/time_slice_stability.csv",
         "reports/CRYPTO_B0_LAYERED_IDENTITY_REGISTRY_20260711.md",
-        "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
+        "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md",
+        "reports/CRYPTO_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "1C4D53AF230556C320FFB22FD712CDF52DE9726B8E09650C3922E48B0AB7A800",
-      "blocker": "activation identity and clustering are not qualified because the accepted release contains no frozen signal behavior matrix; one spent sign-pattern diagnostic and five semantic hypotheses are registered without feedback permission",
+      "last_verified_sha": "4F58226BE2198E04522064D082BB697F17698481B928E5EE52264D0ED52B9FFD",
+      "blocker": "activation and behaviour identities are qualified for the six accepted exact signals only; economic hypotheses remain semantic and independent economic-information collapse is not claimed",
       "weight": 1.0
     },
     {
@@ -177314,8 +177323,51 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "2FFA50E5B67AE7F80E04D0804815B4BA5849EB02EC7171F99EACC06D31D58C87",
-      "blocker": "funding is qualified for Binance UM core12, but activation identity and clustering are not qualified because no frozen signal behavior matrix is present",
+      "last_verified_sha": "297BD0F4133DA5AB48C9C17A23A10B1C6050792FC90CF9FA193BA9F5DE09E0B4",
+      "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
+      "weight": 1.0
+    },
+    {
+      "id": "control_frozen_signal_behaviour_qualification",
+      "label": "B0A frozen signal behaviour qualification",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/identity_registry.py",
+        "alphafactory_crypto/signal_behaviour.py",
+        "config/crypto_identity_layers_v1.json",
+        "config/crypto_b0a_signal_behaviour_v1.json",
+        "scripts/crypto_b0a_frozen_signal_behaviour.py"
+      ],
+      "entrypoint": "crypto_b0a_frozen_signal_behaviour.build/check",
+      "input": "frozen 33-row survivor mapping, 16-row accepted pack, six exact IDs, 96-symbol pre-forward observation view",
+      "output": "deterministic signal sketch, masks, activation identities, behaviour clusters, coverage and persistence profiles",
+      "data_role": "frozen observation-only identity qualification",
+      "feedback_permission": "NONE_NO_SELECTION_MEMORY_SCHEDULER_GENERATOR_OR_REWARD",
+      "artifact_test": [
+        "tests/test_identity_registry.py",
+        "tests/test_signal_behaviour.py",
+        "runtime/a7b0a_frozen_inputs_20260711/frozen_alias_expression_map.csv",
+        "runtime/a7b0a_frozen_inputs_20260711/alias_source_provenance.json",
+        "runtime/a7b0a_signal_behaviour_20260711/b0a_run_manifest.json",
+        "runtime/a7b0a_signal_behaviour_20260711/frozen_alias_expression_map.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/panel_release_file_hashes.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/field_source_lag_audit.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/materializer_code_hashes.json",
+        "runtime/a7b0a_signal_behaviour_20260711/signal_behaviour_sketch.bin",
+        "runtime/a7b0a_signal_behaviour_20260711/signal_coverage_profile.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/temporal_persistence_profile.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/symbol_month_session_activation_profile.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/behaviour_pair_metrics.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/activation_behaviour_identity_registry.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/time_slice_stability.csv",
+        "reports/CRYPTO_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION_20260711.md"
+      ],
+      "last_verified_sha": "6381E3B0238D12D502DD049C7BF46097A4441109FFA453DA69E1CD12643EB99A",
+      "blocker": "B0A does not authorize B1D, search, candidate selection, reward, scheduler, or memory feedback",
       "weight": 1.0
     }
   ],
@@ -490791,6 +490843,78 @@
     },
     {
       "edge_id": "control_edge_017",
+      "source": "control_exact_signal_identity",
+      "target": "control_frozen_signal_behaviour_qualification",
+      "relationship": "ALLOWED",
+      "label": "fixed accepted identities only",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_018",
+      "source": "control_frozen_signal_behaviour_qualification",
+      "target": "control_identity_registry",
+      "relationship": "ALLOWED",
+      "label": "observation-only activation and behaviour registration",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_019",
+      "source": "control_frozen_signal_behaviour_qualification",
+      "target": "control_admission",
+      "relationship": "FORBIDDEN",
+      "label": "B0A behaviour evidence cannot promote or select candidates",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_020",
+      "source": "control_frozen_signal_behaviour_qualification",
+      "target": "control_a7mem",
+      "relationship": "FORBIDDEN",
+      "label": "B0A behaviour evidence cannot update memory",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_021",
+      "source": "control_frozen_signal_behaviour_qualification",
+      "target": "control_scheduler",
+      "relationship": "FORBIDDEN",
+      "label": "B0A behaviour evidence cannot feed scheduler",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_022",
+      "source": "control_frozen_signal_behaviour_qualification",
+      "target": "control_strict_reward",
+      "relationship": "FORBIDDEN",
+      "label": "B0A behaviour evidence cannot enter reward loop before B1D acceptance",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_023",
       "source": "control_spent_evaluation",
       "target": "control_proxy",
       "relationship": "REPORT_ONLY",
@@ -490802,7 +490926,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_018",
+      "edge_id": "control_edge_024",
       "source": "control_spent_evaluation",
       "target": "control_strict_reward",
       "relationship": "REPORT_ONLY",
@@ -490814,7 +490938,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_019",
+      "edge_id": "control_edge_025",
       "source": "control_spent_evaluation",
       "target": "control_admission",
       "relationship": "FORBIDDEN",
@@ -490826,7 +490950,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_020",
+      "edge_id": "control_edge_026",
       "source": "control_spent_evaluation",
       "target": "control_generation_lanes",
       "relationship": "FORBIDDEN",
@@ -490838,7 +490962,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_021",
+      "edge_id": "control_edge_027",
       "source": "control_spent_evaluation",
       "target": "control_a7mem",
       "relationship": "FORBIDDEN",
@@ -490850,7 +490974,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_022",
+      "edge_id": "control_edge_028",
       "source": "control_sealed_forward",
       "target": "control_scheduler",
       "relationship": "FORBIDDEN",
@@ -490862,7 +490986,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_023",
+      "edge_id": "control_edge_029",
       "source": "control_benchmark_registry",
       "target": "control_a7mem",
       "relationship": "FORBIDDEN",
@@ -490874,7 +490998,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_024",
+      "edge_id": "control_edge_030",
       "source": "control_feature_state_fabric",
       "target": "control_strict_reward",
       "relationship": "FORBIDDEN",
@@ -490886,7 +491010,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_025",
+      "edge_id": "control_edge_031",
       "source": "control_a7input0",
       "target": "control_generation_lanes",
       "relationship": "FORBIDDEN",
@@ -490898,7 +491022,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_026",
+      "edge_id": "control_edge_032",
       "source": "control_bz",
       "target": "control_admission",
       "relationship": "FORBIDDEN",

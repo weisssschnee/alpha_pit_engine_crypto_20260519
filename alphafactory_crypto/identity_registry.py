@@ -7,7 +7,7 @@ from typing import Iterable
 import numpy as np
 
 
-LAYERS = ("syntax", "canonical", "exact_signal", "activation", "pnl_regime", "economic_hypothesis")
+LAYERS = ("syntax", "canonical", "exact_signal", "activation", "behaviour", "pnl_regime", "economic_hypothesis")
 SPENT_DIAGNOSTIC_BLOCKS = ("validation", "test", "recent", "stress")
 
 
@@ -46,6 +46,12 @@ def activation_cluster_identity(activation_id: str) -> str:
     if not value.startswith("activation:"):
         raise ValueError("activation cluster requires an activation behavior identity")
     return _id("activation-cluster", value.encode("utf-8"))
+
+
+def register_behaviour_identity(identity_id: str, provenance: str) -> "RegisteredIdentity":
+    if not str(identity_id).startswith("behaviour:") or not provenance:
+        raise ValueError("behaviour identity requires behaviour:* id and provenance")
+    return RegisteredIdentity("behaviour", identity_id, "REGISTERED_OBSERVATION_ONLY", provenance)
 
 
 @dataclass(frozen=True)

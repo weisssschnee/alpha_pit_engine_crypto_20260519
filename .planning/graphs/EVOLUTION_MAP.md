@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `0F283421A804BAF699FCE3F05270A49C9A60ECEEE379296DE254C025C8CBE1D3`.
+Generated from registry SHA256: `6B48E715ED8980832CB3FE0D37EAAD1DDF337D144FCA1CC30358836F807401FB`.
 
 ## Current Evolution
 
@@ -14,6 +14,9 @@ Generated from registry SHA256: `0F283421A804BAF699FCE3F05270A49C9A60ECEEE379296
 - B0P is stopped at `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED` because funding qualified but activation identity did not.
 - B0P subject `5219e7899cad1be83f9bcf2ec520ed1ff5037f9e` is independently attested as `PHASE_B0P_PARTIALLY_ACCEPTED`; only frozen signal-behaviour qualification is unlocked.
 - Binance UM core12 funding observation is production-qualified through 2026-04-30; cross-venue qualification is not claimed.
+- B0A establishes `16 accepted aliases -> 6 exact signals -> 5 activation identities -> 4 behaviour clusters -> 5 semantic economic hypotheses`; the complete 33-row survivor map still contains 18 exact identities and must not be collapsed to six in reporting.
+- Exact-to-activation and activation-to-behaviour contraction are now observed on the frozen pre-forward coordinate contract. This does not by itself establish collapse of independent economic information because the five economic hypotheses remain semantic registrations.
+- B0A is stopped at `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED` with no reward, selection, scheduler, generator, or memory feedback.
 - Phase B1 is frozen.
 
 ## Decision Timeline
@@ -40,3 +43,4 @@ Generated from registry SHA256: `0F283421A804BAF699FCE3F05270A49C9A60ECEEE379296
 - `EVALRESET-20260711-020` — `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`: B0P stops with Binance UM core12 funding qualified and layered identity partially qualified. Activation identity/clustering remains blocked by the absent frozen signal behavior matrix. HOLD_RESEARCH, PHASE_B1_FROZEN, SEALED_NO_NEW_FORWARD_READ, and all no-feedback guards remain in force; no large-search or alpha-ready authorization is issued.
 - `EVALRESET-20260711-021` — `B0P_EVIDENCE_GUARDS_HARDENED`: Review findings were closed with code-owned funding column allowlists, a fixed-SHA physical pre-cutoff event-only truth artifact, pre-canonical duplicate and PIT observable-time audits, manifest/time/count checks, required economic-hypothesis operator validation, component-derived prohibition evidence, exact generated-document checks, exact graph node/edge projection checks, and artifact-index hash validation.
 - `EVALRESET-20260711-022` — `PHASE_B0P_PARTIALLY_ACCEPTED`: Independent partial acceptance attests fixed subject 5219e7899cad1be83f9bcf2ec520ed1ff5037f9e. Funding is qualified only within Binance UM core12, layered identity remains partial, and activation identity remains not qualified. Only B0A frozen signal-behaviour qualification is unlocked; HOLD_RESEARCH, PHASE_B1_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.
+- `EVALRESET-20260711-023` — `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`: B0A binds the frozen 33-row survivor map and 16-row accepted pack, materializes six accepted exact signals on 96 symbols and 20424 pre-forward hourly coordinates with +1h observable-time lag, reproduces artifact SHA CD40C5C521DDBC6A2704D5A45A798CF3DAB5A5A7B6D2CD476D28F6BFB30C7D6B under reversed order, and establishes 5 activation identities and 4 behaviour clusters. The complete 33-row map contains 18 exact identities; only the 16 accepted aliases map to the six accepted exact signals. No return, reward, forward performance, search, selection, scheduler, generator, or memory feedback was used; B1 remains frozen.

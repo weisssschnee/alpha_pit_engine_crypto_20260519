@@ -5,6 +5,7 @@ import unittest
 from scripts.crypto_architecture_control_plane import (
     BOUNDARY_PATH,
     B0P_ATTESTATION_PATH,
+    B0A_MANIFEST_PATH,
     CURRENT_ARCH_PATH,
     GRAPH_PATH,
     REGISTRY_PATH,
@@ -36,7 +37,8 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         )
         self.assertEqual(state["phase_b1_status"], "PHASE_B1_FROZEN")
         self.assertEqual(state["phase_b0p_acceptance"]["status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
-        self.assertEqual(state["active_stage"], "PHASE_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION")
+        self.assertEqual(state["active_stage"], "PHASE_B0A_COMPLETE_STOPPED")
+        self.assertEqual(state["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
 
         attestation = load_json(ATTESTATION_PATH)
         self.assertEqual(attestation["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
@@ -84,6 +86,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(graph_control["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph_control["b0p_accepted_subject_sha"], B0P_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph_control["b0p_acceptance_status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
+        self.assertEqual(graph_control["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
         self.assertEqual(graph["built_at_accepted_subject"], ACCEPTED_SUBJECT_SHA)
         self.assertNotIn("built_at_commit", graph)
 
@@ -93,6 +96,20 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(b0p_manifest["identity_status"], "LAYERED_IDENTITY_PARTIALLY_QUALIFIED")
         self.assertFalse(b0p_manifest["search_started"])
         self.assertFalse(b0p_manifest["forward_performance_read"])
+
+        b0a_manifest = load_json(B0A_MANIFEST_PATH)
+        self.assertEqual(b0a_manifest["decision"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
+        self.assertEqual(b0a_manifest["full_survivor_rows"], 33)
+        self.assertEqual(b0a_manifest["full_survivor_exact_identities"], 18)
+        self.assertEqual(b0a_manifest["accepted_alias_rows_materialized"], 16)
+        self.assertEqual(b0a_manifest["canonical_exact_signals_materialized"], 6)
+        self.assertEqual(b0a_manifest["activation_identities"], 5)
+        self.assertEqual(b0a_manifest["behaviour_clusters"], 4)
+        self.assertEqual(b0a_manifest["economic_hypotheses"], 5)
+        self.assertTrue(b0a_manifest["reproducible"])
+        self.assertTrue(b0a_manifest["alias_reconstruction_pass"])
+        self.assertFalse(b0a_manifest["return_label_read"])
+        self.assertFalse(b0a_manifest["reward_read"])
 
 
 if __name__ == "__main__":

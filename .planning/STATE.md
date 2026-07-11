@@ -1,6 +1,6 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `0F283421A804BAF699FCE3F05270A49C9A60ECEEE379296DE254C025C8CBE1D3`.
+Registry SHA256: `6B48E715ED8980832CB3FE0D37EAAD1DDF337D144FCA1CC30358836F807401FB`.
 
 ## Formal Status
 
@@ -10,7 +10,8 @@ Registry SHA256: `0F283421A804BAF699FCE3F05270A49C9A60ECEEE379296DE254C025C8CBE1
 - Current phase: `PHASE_B0_CONTRACTS_ACCEPTED`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
-- Active stage: `PHASE_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION`
+- Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
+- Active stage: `PHASE_B0A_COMPLETE_STOPPED`
 - Phase B1: `PHASE_B1_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -58,6 +59,26 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Identity: `LAYERED_IDENTITY_PARTIALLY_QUALIFIED`
 - Activation: `ACTIVATION_IDENTITY_NOT_QUALIFIED`
 
+## Phase B0A Items
+
+- `B0A.1` Frozen input binding: `IMPLEMENTED`
+- `B0A.2` Signal behaviour sketch and masks: `IMPLEMENTED`
+- `B0A.3` Deterministic repeat materialization: `QUALIFIED`
+- `B0A.4` Activation and behaviour identities: `QUALIFIED`
+- `B0A.5` PnL/regime no-feedback boundary: `ENFORCED`
+- `B0A.6` Control-plane synchronization: `IMPLEMENTED`
+
+## Phase B0A Result
+
+- Decision: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
+- Artifact: `runtime/a7b0a_signal_behaviour_20260711/signal_behaviour_sketch.bin`
+- Artifact index: `runtime/a7b0a_signal_behaviour_20260711/b0a_artifact_index.csv`
+- Artifact SHA256: `CD40C5C521DDBC6A2704D5A45A798CF3DAB5A5A7B6D2CD476D28F6BFB30C7D6B`
+- Compression: `33 survivor rows -> 18 exact identities; accepted scope 16 aliases -> 6 exact -> 5 activation -> 4 behaviour -> 5 semantic hypotheses`
+- N_eff: `3.0`
+- Top-cluster share: `0.5`
+- Cross-time stability median/min: `1.0` / `1.0`
+
 ## Phase B0A Allowed
 
 - freeze existing accepted/candidate inputs and their hashes
@@ -79,4 +100,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Complete B0A frozen signal-behaviour qualification and stop with FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED, FROZEN_SIGNAL_BEHAVIOUR_PARTIALLY_QUALIFIED, or FROZEN_SIGNAL_BEHAVIOUR_NOT_REPRODUCIBLE. B1D requires a separate acceptance.
+B0A is complete and stopped at FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED. Wait for an independent acceptance before any B1D work; HOLD_RESEARCH, PHASE_B1_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.

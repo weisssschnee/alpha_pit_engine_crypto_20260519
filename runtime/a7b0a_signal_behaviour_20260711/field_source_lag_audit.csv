@@ -1,0 +1,9 @@
+field_name,pit_lag_required,feature_available_time_primary,lag_contract_pass
+account_position_divergence,+1h primary,timestamp + 1h,True
+global_long_short_account_ratio_last,+1h primary,timestamp + 1h,True
+mark_trade_basis_bps,+1h primary,timestamp + 1h,True
+open_interest_value_last,+1h primary,timestamp + 1h,True
+open_interest_value_mean,+1h primary,timestamp + 1h,True
+top_global_account_divergence,+1h primary,timestamp + 1h,True
+top_long_short_account_ratio_last,+1h primary,timestamp + 1h,True
+top_long_short_position_ratio_last,+1h primary,timestamp + 1h,True

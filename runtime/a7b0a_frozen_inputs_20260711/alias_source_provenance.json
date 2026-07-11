@@ -1,0 +1,25 @@
+{
+  "allowed_columns": [
+    "blueprint_id",
+    "production_key",
+    "source_blueprint_id",
+    "horizon_h",
+    "semantic_pair",
+    "motif",
+    "skeleton_key",
+    "expression",
+    "original_expression",
+    "semantic_canonical_expression",
+    "semantic_rewrite_applied",
+    "signal_weight_exact_fingerprint",
+    "signal_weight_quantized_fingerprint",
+    "representative_blueprint_id",
+    "representative_expression",
+    "is_signal_identity_representative"
+  ],
+  "performance_columns_copied": false,
+  "safe_snapshot_path": "runtime/a7b0a_frozen_inputs_20260711/frozen_alias_expression_map.csv",
+  "safe_snapshot_sha256": "09D234FD284CFE36796F93497E34F0A67984339B5A8E9FBC03D7DED6B5526C31",
+  "source_path": "G:/Chengbo/runtime/a7eff2_semantic_identity_safediv_20260710_v2_results/source_aggregate/a7source5_signal_identity_alias_map.csv",
+  "source_sha256": "11B336D394C3CCB9E9E51A039E1061FBDA8F2E40F3D709491C4FF4F8F09F8AF6"
+}

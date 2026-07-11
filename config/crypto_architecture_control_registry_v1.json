@@ -214,10 +214,12 @@
       "data_role": "exact numeric identity",
       "feedback_permission": "REPORT_ONLY_DURING_HOLD",
       "artifact_test": [
-        "runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv"
+        "runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/activation_behaviour_identity_registry.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/signal_behaviour_sketch.bin"
       ],
-      "blocker": "exact identities established; frozen activation behavior artifact remains unavailable, while spent PnL/regime diagnostics are registered separately",
-      "last_verified_sha": "FCA93D783E1F0950C899906D810509DA637FD81A8059A9DF3C6DBB2D74B02DF8"
+      "blocker": "six accepted exact identities are bound to coordinate-specific B0A weight hashes; exact-to-activation contraction is observational only and has no feedback permission",
+      "last_verified_sha": "C4F7A78B34333B5848AE77FC6D908EA80F69418D60A12D3FB3A4FB634E742CAE"
     },
     {
       "id": "identity_registry",
@@ -228,7 +230,9 @@
         "config/crypto_identity_layers_v1.json",
         "config/crypto_b0p_economic_hypothesis_registry_v1.json",
         "scripts/crypto_b0_identity_registry.py",
-        "scripts/crypto_b0p_identity_qualification.py"
+        "scripts/crypto_b0p_identity_qualification.py",
+        "alphafactory_crypto/signal_behaviour.py",
+        "scripts/crypto_b0a_frozen_signal_behaviour.py"
       ],
       "entrypoint": "syntax_identity through economic_hypothesis_assignment and pnl_regime_diagnostic_identity",
       "input": "syntax through economic hypothesis",
@@ -244,11 +248,15 @@
         "runtime/a7b0p_identity_qualification_20260711/activation_asset_audit.json",
         "runtime/a7b0p_identity_qualification_20260711/pnl_regime_diagnostic_registry.csv",
         "runtime/a7b0p_identity_qualification_20260711/economic_hypothesis_registry.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/activation_behaviour_identity_registry.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/behaviour_pair_metrics.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/time_slice_stability.csv",
         "reports/CRYPTO_B0_LAYERED_IDENTITY_REGISTRY_20260711.md",
-        "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
+        "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md",
+        "reports/CRYPTO_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION_20260711.md"
       ],
-      "blocker": "activation identity and clustering are not qualified because the accepted release contains no frozen signal behavior matrix; one spent sign-pattern diagnostic and five semantic hypotheses are registered without feedback permission",
-      "last_verified_sha": "1C4D53AF230556C320FFB22FD712CDF52DE9726B8E09650C3922E48B0AB7A800"
+      "blocker": "activation and behaviour identities are qualified for the six accepted exact signals only; economic hypotheses remain semantic and independent economic-information collapse is not claimed",
+      "last_verified_sha": "4F58226BE2198E04522064D082BB697F17698481B928E5EE52264D0ED52B9FFD"
     },
     {
       "id": "generation_lanes",
@@ -552,8 +560,46 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "blocker": "funding is qualified for Binance UM core12, but activation identity and clustering are not qualified because no frozen signal behavior matrix is present",
-      "last_verified_sha": "2FFA50E5B67AE7F80E04D0804815B4BA5849EB02EC7171F99EACC06D31D58C87"
+      "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
+      "last_verified_sha": "297BD0F4133DA5AB48C9C17A23A10B1C6050792FC90CF9FA193BA9F5DE09E0B4"
+    },
+    {
+      "id": "frozen_signal_behaviour_qualification",
+      "label": "B0A frozen signal behaviour qualification",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/identity_registry.py",
+        "alphafactory_crypto/signal_behaviour.py",
+        "config/crypto_identity_layers_v1.json",
+        "config/crypto_b0a_signal_behaviour_v1.json",
+        "scripts/crypto_b0a_frozen_signal_behaviour.py"
+      ],
+      "entrypoint": "crypto_b0a_frozen_signal_behaviour.build/check",
+      "input": "frozen 33-row survivor mapping, 16-row accepted pack, six exact IDs, 96-symbol pre-forward observation view",
+      "output": "deterministic signal sketch, masks, activation identities, behaviour clusters, coverage and persistence profiles",
+      "data_role": "frozen observation-only identity qualification",
+      "feedback_permission": "NONE_NO_SELECTION_MEMORY_SCHEDULER_GENERATOR_OR_REWARD",
+      "artifact_test": [
+        "tests/test_identity_registry.py",
+        "tests/test_signal_behaviour.py",
+        "runtime/a7b0a_frozen_inputs_20260711/frozen_alias_expression_map.csv",
+        "runtime/a7b0a_frozen_inputs_20260711/alias_source_provenance.json",
+        "runtime/a7b0a_signal_behaviour_20260711/b0a_run_manifest.json",
+        "runtime/a7b0a_signal_behaviour_20260711/frozen_alias_expression_map.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/panel_release_file_hashes.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/field_source_lag_audit.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/materializer_code_hashes.json",
+        "runtime/a7b0a_signal_behaviour_20260711/signal_behaviour_sketch.bin",
+        "runtime/a7b0a_signal_behaviour_20260711/signal_coverage_profile.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/temporal_persistence_profile.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/symbol_month_session_activation_profile.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/behaviour_pair_metrics.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/activation_behaviour_identity_registry.csv",
+        "runtime/a7b0a_signal_behaviour_20260711/time_slice_stability.csv",
+        "reports/CRYPTO_B0A_FROZEN_SIGNAL_BEHAVIOUR_QUALIFICATION_20260711.md"
+      ],
+      "blocker": "B0A does not authorize B1D, search, candidate selection, reward, scheduler, or memory feedback",
+      "last_verified_sha": "6381E3B0238D12D502DD049C7BF46097A4441109FFA453DA69E1CD12643EB99A"
     }
   ],
   "edges": [
@@ -658,6 +704,42 @@
       "target": "admission",
       "kind": "FORBIDDEN",
       "label": "partial B0P qualification cannot promote or authorize search"
+    },
+    {
+      "source": "exact_signal_identity",
+      "target": "frozen_signal_behaviour_qualification",
+      "kind": "ALLOWED",
+      "label": "fixed accepted identities only"
+    },
+    {
+      "source": "frozen_signal_behaviour_qualification",
+      "target": "identity_registry",
+      "kind": "ALLOWED",
+      "label": "observation-only activation and behaviour registration"
+    },
+    {
+      "source": "frozen_signal_behaviour_qualification",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "B0A behaviour evidence cannot promote or select candidates"
+    },
+    {
+      "source": "frozen_signal_behaviour_qualification",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "B0A behaviour evidence cannot update memory"
+    },
+    {
+      "source": "frozen_signal_behaviour_qualification",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "B0A behaviour evidence cannot feed scheduler"
+    },
+    {
+      "source": "frozen_signal_behaviour_qualification",
+      "target": "strict_reward",
+      "kind": "FORBIDDEN",
+      "label": "B0A behaviour evidence cannot enter reward loop before B1D acceptance"
     },
     {
       "source": "spent_evaluation",

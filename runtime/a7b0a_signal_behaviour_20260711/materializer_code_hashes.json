@@ -1,0 +1,29 @@
+{
+  "combined_sha256": "8D714B10AE616B63D717C5C70D58EEE0C56C10BAE70DC91DD714138C6BA5F0B8",
+  "files": [
+    {
+      "path": "alphafactory_crypto/identity_registry.py",
+      "sha256": "DB369F85F0E5C370F992967A12DE61E22C5BB89272ECEE99C48407B268649D60"
+    },
+    {
+      "path": "alphafactory_crypto/signal_behaviour.py",
+      "sha256": "6979017B45DEC849A2137242E0907572D15CF97B02ECFFD40B51B7D34CEA0CDB"
+    },
+    {
+      "path": "alphafactory_crypto/engines/signal_identity.py",
+      "sha256": "A175DAE0A9AB30EEAEF02142F92FFC424971F9852FC003291E7CB88D7F963C0B"
+    },
+    {
+      "path": "scripts/crypto_a7ab4_materialization_preflight.py",
+      "sha256": "B47E9058B863A6F3F8984304EDE20E7B6487A6BBBD5D21BF7A6BE463A584E175"
+    },
+    {
+      "path": "scripts/crypto_a7al2x5_evaluator_preflight_smoke.py",
+      "sha256": "8CFBCB9AA0DBF94812F3D384A173085DBE5095525DED95DAD45ADC818A81347F"
+    },
+    {
+      "path": "scripts/crypto_b0a_frozen_signal_behaviour.py",
+      "sha256": "E0AADB2DE824362FBE1E627E4041253FBBE6229268A68C8F0C5C239BF8D26D62"
+    }
+  ]
+}

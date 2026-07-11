@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `0F283421A804BAF699FCE3F05270A49C9A60ECEEE379296DE254C025C8CBE1D3`.
+Generated from registry SHA256: `6B48E715ED8980832CB3FE0D37EAAD1DDF337D144FCA1CC30358836F807401FB`.
 
 ## Authority
 
@@ -22,6 +22,10 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 |---|---|---|
 | identity_registry | admission | B0P identities are diagnostic-only and cannot promote |
 | production_observation_qualification | admission | partial B0P qualification cannot promote or authorize search |
+| frozen_signal_behaviour_qualification | admission | B0A behaviour evidence cannot promote or select candidates |
+| frozen_signal_behaviour_qualification | a7mem | B0A behaviour evidence cannot update memory |
+| frozen_signal_behaviour_qualification | scheduler | B0A behaviour evidence cannot feed scheduler |
+| frozen_signal_behaviour_qualification | strict_reward | B0A behaviour evidence cannot enter reward loop before B1D acceptance |
 | spent_evaluation | admission | no candidate ranking |
 | spent_evaluation | generation_lanes | no CEM/UCB/MCTS feedback |
 | spent_evaluation | a7mem | no memory update |

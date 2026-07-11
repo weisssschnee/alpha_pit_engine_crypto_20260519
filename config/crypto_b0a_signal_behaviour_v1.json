@@ -1,0 +1,79 @@
+{
+  "contract_id": "CRYPTO-B0A-FROZEN-SIGNAL-BEHAVIOUR-V1",
+  "phase": "B0A",
+  "accepted_pack": "runtime/a7eff2_git_release_20260711/a7eff2_accepted_train_validation_oos_log.csv",
+  "accepted_release_manifest": "runtime/a7eff2_git_release_20260711/a7eff2_release_manifest.json",
+  "frozen_alias_source": "runtime/a7b0a_frozen_inputs_20260711/frozen_alias_expression_map.csv",
+  "frozen_alias_provenance": "runtime/a7b0a_frozen_inputs_20260711/alias_source_provenance.json",
+  "frozen_alias_provenance_source": "G:/Chengbo/runtime/a7eff2_semantic_identity_safediv_20260710_v2_results/source_aggregate/a7source5_signal_identity_alias_map.csv",
+  "field_registry": "runtime/a7input0_v2_field_roles_20260711/a7input0_v2_field_role_registry.csv",
+  "active_field_registry": "runtime/a7eff2_git_release_20260711/a7eff2_active_field_registry.csv",
+  "symbol_universe_source": "runtime/a7al0_top498_alpha_search_contract/a7al_split_coverage_by_symbol.csv",
+  "panel_root": "G:/AlphaFactory_CryptoData/gold/features/binance_universe498_replay_1h_v3_patch_age_20260613",
+  "development_pre_forward_interval": {
+    "start_utc": "2024-01-01T00:00:00Z",
+    "end_utc_inclusive": "2026-04-30T23:00:00Z"
+  },
+  "symbol_universe_contract": {
+    "eligibility": "strict_full_history",
+    "sort": "LEXICOGRAPHIC_ASCENDING",
+    "cap_after_sort": 96,
+    "expected_symbols": 96
+  },
+  "coordinate_selection_contract": {
+    "axis_order": "signal,symbol,timestamp",
+    "timestamp_frequency": "1h",
+    "timestamp_sort": "ASCENDING_UNIQUE",
+    "symbol_sort": "LEXICOGRAPHIC_ASCENDING",
+    "duplicate_policy": "FAIL_CLOSED",
+    "missing_coordinate_policy": "REINDEX_TO_COMPLETE_GRID_AND_PRESERVE_MISSINGNESS",
+    "source_lag_hours": 1,
+    "source_lag_basis": "feature_available_time_primary=timestamp+1h"
+  },
+  "allowed_panel_columns": [
+    "timestamp",
+    "open_interest_value_last",
+    "open_interest_value_mean",
+    "top_long_short_account_ratio_last",
+    "top_long_short_position_ratio_last",
+    "global_long_short_account_ratio_last",
+    "mark_trade_basis_bps"
+  ],
+  "derived_observation_fields": {
+    "account_position_divergence": "top_long_short_position_ratio_last-top_long_short_account_ratio_last",
+    "top_global_account_divergence": "top_long_short_account_ratio_last-global_long_short_account_ratio_last"
+  },
+  "selection_contract": {
+    "rank_method": "average_pct_cross_sectional",
+    "gross": 1.0,
+    "max_abs_weight": 0.03,
+    "top_fraction": 0.2,
+    "bottom_fraction": 0.2,
+    "activation_epsilon": 1e-12,
+    "global_inverse_canonicalized": true,
+    "nan_to_zero_for_exact_weight_hash_only": true,
+    "missingness_preserved_separately": true
+  },
+  "behaviour_cluster_thresholds": {
+    "activation_jaccard_min": 0.98,
+    "sign_agreement_min": 0.98,
+    "rank_correlation_min": 0.98,
+    "top_bottom_overlap_min": 0.95,
+    "holding_weight_distance_max": 0.05,
+    "persistence_difference_max": 0.05,
+    "symbol_month_stability_difference_max": 0.05
+  },
+  "persistence_lags_hours": [1, 24, 168],
+  "weight_sketch_size": 4096,
+  "forbidden_inputs": [
+    "return_label",
+    "forward_return",
+    "reward",
+    "sortino",
+    "sharpe",
+    "pnl",
+    "new_forward_oos"
+  ],
+  "feedback_permission": "NONE_NO_SELECTION_MEMORY_SCHEDULER_GENERATOR_OR_REWARD",
+  "pnl_regime_boundary": "SPENT_HISTORICAL_DIAGNOSTIC_ONLY_NO_SELECTION_NO_MEMORY_NO_SCHEDULER_FEEDBACK"
+}
