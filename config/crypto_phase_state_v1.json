@@ -2,7 +2,7 @@
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
   "research_status": "HOLD_RESEARCH",
-  "current_phase": "PHASE_B0_CONTRACTS_AND_OBSERVATION_FOUNDATION",
+  "current_phase": "PHASE_B0_CONTRACTS_COMPLETE_AWAITING_ACCEPTANCE",
   "phase_b1_status": "FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "phase_a_remote_sync": {
@@ -37,7 +37,7 @@
     {"id":"B0.5","name":"Layered identity registry","status":"IMPLEMENTED"},
     {"id":"B0.6","name":"Benchmark registry","status":"IMPLEMENTED"},
     {"id":"B0.7","name":"Temporal/event primitive contract","status":"IMPLEMENTED"},
-    {"id":"B0.8","name":"Feature/State Fabric schema and cache contract","status":"PLANNED"}
+    {"id":"B0.8","name":"Feature/State Fabric schema and cache contract","status":"IMPLEMENTED"}
   ],
-  "next_acceptance_gate": "All B0.1-B0.8 contracts, registries, tests, graph nodes, STATE, decision log, run manifest, and artifact index are synchronized; then stop before B1."
+  "next_acceptance_gate": "Independent acceptance of the synchronized B0.1-B0.8 contracts, registries, tests, graph nodes, STATE, decision log, run manifest, and artifact index; B1 remains frozen."
 }

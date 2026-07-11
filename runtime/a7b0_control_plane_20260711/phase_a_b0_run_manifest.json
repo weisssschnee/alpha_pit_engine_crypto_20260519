@@ -3,10 +3,10 @@
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
   "research_status": "HOLD_RESEARCH",
-  "current_phase": "PHASE_B0_CONTRACTS_AND_OBSERVATION_FOUNDATION",
+  "current_phase": "PHASE_B0_CONTRACTS_COMPLETE_AWAITING_ACCEPTANCE",
   "phase_b1_status": "FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
-  "registry_sha256": "98AB2C162E8F356A20F5B19FCC03EBEAFCFC62330F004A43F12EECB8D88909F7",
+  "registry_sha256": "0CACD837521139E8396D65895EB4B6A64D894BCB9B500A33F9E14FB5951059C4",
   "graph_control_nodes": 26,
   "graph_control_edges": 23,
   "b0_items": [
@@ -48,7 +48,7 @@
     {
       "id": "B0.8",
       "name": "Feature/State Fabric schema and cache contract",
-      "status": "PLANNED"
+      "status": "IMPLEMENTED"
     }
   ],
   "search_started": false,

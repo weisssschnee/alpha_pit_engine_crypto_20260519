@@ -1,0 +1,30 @@
+{
+  "artifact_id": "synthetic:event-age:v1",
+  "artifact_kind": "event_state",
+  "cache_key": "fabric:c462bab59053aa66fed6ef9dd755dcc5ece8b6fe00bb2372644c2d83188c322c",
+  "code_sha": "2E8DD60FB6E8148C186B3878BDAE85B8096FED3A30C725113D0F9ED0CB21591E",
+  "content_sha256": "84A6E8B7AFDD286A48AB0AAB2C72227FFF91A935B0489E633018914BD01693CD",
+  "contract_sha": "63673EBB3B9BCC37FFD6BE396F8412AF06F1CB79D7EBFBB205E46E45EAEC3488",
+  "data_file": "c462bab59053aa66fed6ef9dd755dcc5ece8b6fe00bb2372644c2d83188c322c.bin",
+  "data_role": "synthetic_contract_fixture",
+  "dtype": "<f8",
+  "endianness": "little",
+  "feedback_permission": "NO_REWARD_B0",
+  "field_registry_sha": "C201B87CEBDF17AF3231B7DD8CB8A06B561572E58DAA670D5D82F71F95A7628D",
+  "input_role": "state-only",
+  "maturity_rule": "event_state_matured",
+  "nan_policy": "preserve",
+  "observable_time_rule": "usable_time_at_or_before_row_time",
+  "primitive_equivalence_id": "temporal-equivalence:synthetic-event-age",
+  "schema_version": 1,
+  "shape": [
+    2,
+    3
+  ],
+  "source_artifact_shas": [
+    "SYNTHETIC_SOURCE_SHA"
+  ],
+  "timestamps_sha": "SYNTHETIC_TIMESTAMPS_SHA",
+  "universe_sha": "SYNTHETIC_UNIVERSE_SHA",
+  "write_mode": "atomic_replace"
+}

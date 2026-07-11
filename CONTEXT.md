@@ -67,3 +67,11 @@ _Avoid_: Event time, row timestamp, publication date alone
 **Temporal Equivalence**:
 Equality of canonical primitive, source identity, event identity policy, observable policy, maturity rule, and tolerance; metric similarity is not temporal equivalence.
 _Avoid_: Correlation, similar backtest, same motif
+
+**Feature/State Fabric**:
+The contract-governed materialization layer that turns approved observations and temporal primitives into content-addressed feature, state, event-state, or benchmark artifacts.
+_Avoid_: Generator, reward loop, ad-hoc feature cache
+
+**Deterministic Cache Key**:
+A path-independent digest of source, registry, contract, code, universe, timestamps, primitive, dtype, shape, and policy identities; performance metrics and machine paths are excluded.
+_Avoid_: Output filename, runtime directory, experiment score

@@ -1,0 +1,23 @@
+{
+  "contract_id": "CRYPTO-FEATURE-STATE-FABRIC-V1",
+  "schema_version": 1,
+  "artifact_kinds": ["feature", "state", "event_state", "benchmark"],
+  "required_manifest_fields": [
+    "artifact_id", "artifact_kind", "data_role", "input_role", "primitive_equivalence_id",
+    "source_artifact_shas", "field_registry_sha", "contract_sha", "code_sha",
+    "universe_sha", "timestamps_sha", "dtype", "shape", "endianness", "nan_policy",
+    "observable_time_rule", "maturity_rule", "feedback_permission", "cache_key", "content_sha256"
+  ],
+  "cache_key_inputs": [
+    "schema_version", "artifact_id", "artifact_kind", "data_role", "input_role", "primitive_equivalence_id",
+    "source_artifact_shas", "field_registry_sha", "contract_sha", "code_sha",
+    "universe_sha", "timestamps_sha", "dtype", "shape", "endianness", "nan_policy",
+    "observable_time_rule", "maturity_rule", "feedback_permission"
+  ],
+  "cache_key_excludes": ["absolute_path", "machine_name", "workspace_root", "generated_at", "performance_metric"],
+  "write_contract": "atomic temp write then replace; content SHA verified before publish",
+  "read_contract": "read-only; manifest cache key and content SHA must verify",
+  "implicit_fill_allowed": false,
+  "state_event_reward_allowed_b0": false,
+  "generator_enabled_b0": false
+}

@@ -1,0 +1,11 @@
+{
+  "decision": "PASS_B0_FEATURE_STATE_FABRIC_SCHEMA_AND_CACHE_CONTRACT",
+  "synthetic_cache_key": "fabric:c462bab59053aa66fed6ef9dd755dcc5ece8b6fe00bb2372644c2d83188c322c",
+  "synthetic_content_sha256": "84A6E8B7AFDD286A48AB0AAB2C72227FFF91A935B0489E633018914BD01693CD",
+  "deterministic_rebuild_match": true,
+  "real_feature_or_state_built": false,
+  "state_event_reward_allowed_b0": false,
+  "generator_enabled_b0": false,
+  "search_started": false,
+  "forward_performance_read": false
+}

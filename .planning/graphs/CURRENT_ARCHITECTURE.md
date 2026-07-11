@@ -1,6 +1,6 @@
 # Current Architecture
 
-Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `98AB2C162E8F356A20F5B19FCC03EBEAFCFC62330F004A43F12EECB8D88909F7`.
+Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `0CACD837521139E8396D65895EB4B6A64D894BCB9B500A33F9E14FB5951059C4`.
 
 Status: `PHASE_A_GOVERNANCE_ACCEPTED` / `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED` / `HOLD_RESEARCH`.
 
@@ -35,7 +35,7 @@ flowchart TD
   control_future_wrong_lag["Future wrong-lag control\nIMPLEMENTED"]
   control_bz["BZ / Benchmark Zero\nIMPLEMENTED"]
   control_temporal_event_contract["Temporal/event primitive contract\nIMPLEMENTED"]
-  control_feature_state_fabric["Feature/State Fabric\nPLANNED"]
+  control_feature_state_fabric["Feature/State Fabric\nIMPLEMENTED"]
   control_data_release --> control_time_block_roles
   control_time_block_roles --> control_field_ontology
   control_field_ontology --> control_a7input0
@@ -90,7 +90,7 @@ flowchart TD
 | Future wrong-lag control | IMPLEMENTED | alphafactory_crypto/negative_controls.py; config/crypto_future_wrong_lag_control_v1.json; scripts/crypto_b0_future_wrong_lag_audit.py; scripts/crypto_a7reward1_portfolio_reward_model.py | future_wrong_lag / audit_future_wrong_lag | signal and future shifts -> negative-control metrics | leakage control | AUDIT_ONLY_B0 | tests/test_future_wrong_lag.py; runtime/a7b0_future_wrong_lag_control_20260711/future_wrong_lag_audit_summary.json; reports/CRYPTO_B0_FUTURE_WRONG_LAG_CONTROL_20260711.md | 8C10045585A87B577A001D07341FA1B8E06F9C14B5AA681471B760B1D54D4347 | production execution frozen during HOLD_RESEARCH |
 | BZ / Benchmark Zero | IMPLEMENTED | alphafactory_crypto/bz.py; config/crypto_bz_benchmark_zero_v1.json; scripts/crypto_b0_bz_authority.py | create_benchmark_zero | benchmark-only fields -> zero-alpha diagnostic benchmark object | benchmark sanity only | NONE | tests/test_bz.py; runtime/a7b0_bz_authority_20260711/bz_authority_manifest.json; reports/CRYPTO_B0_BZ_BENCHMARK_ZERO_20260711.md | 1AFC8220B1F63A01959E16049E43D7D0324AA4CE00F246BC669679CEA59B093D | legacy undefined BZ mentions require explicit migration |
 | Temporal/event primitive contract | IMPLEMENTED | alphafactory_crypto/temporal_contracts.py; config/crypto_temporal_event_primitives_v1.json; scripts/crypto_b0_temporal_event_contract.py | TemporalObservation / canonicalize_primitive / temporal_equivalent | observable event streams -> PIT temporal primitives | temporal semantics | NO_REWARD_B0 | tests/test_temporal_contracts.py; runtime/a7b0_temporal_event_contract_20260711/temporal_event_primitive_registry.csv; runtime/a7b0_temporal_event_contract_20260711/temporal_event_contract_manifest.json; reports/CRYPTO_B0_TEMPORAL_EVENT_PRIMITIVE_CONTRACT_20260711.md | 8755ED21F49B04334B7F3E272518197884082F91853A30324D4284A1B595E5DF | primitive execution and State/event reward coupling remain frozen until B1 |
-| Feature/State Fabric | PLANNED | planned | planned | approved observations and contracts -> deterministic feature/state cache | feature/state materialization | NO_REWARD_B0 | planned | 635836D46E1ECFCEC7CF9CC3B754E16325FDC5FCB52563261DA4DFA10B651A0B | B0.8 pending |
+| Feature/State Fabric | IMPLEMENTED | alphafactory_crypto/fabric.py; config/crypto_feature_state_fabric_v1.json; scripts/crypto_b0_feature_state_fabric.py | FabricArtifactSpec / deterministic_cache_key / write_deterministic_array_cache / validate_cache | approved observations and contracts -> deterministic feature/state cache | feature/state materialization | NO_REWARD_B0 | tests/test_fabric.py; runtime/a7b0_feature_state_fabric_20260711/feature_state_fabric_manifest.json; reports/CRYPTO_B0_FEATURE_STATE_FABRIC_20260711.md | B010B2324E71057D4879FC9AA4C875BC6896A9C341610DFE4741D5B9DE14C997 | real materialization, generator integration, and reward integration remain frozen until B1 |
 
 ## Time Block Roles
 

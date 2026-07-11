@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `98AB2C162E8F356A20F5B19FCC03EBEAFCFC62330F004A43F12EECB8D88909F7`.
+Registry SHA256: `0CACD837521139E8396D65895EB4B6A64D894BCB9B500A33F9E14FB5951059C4`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `HOLD_RESEARCH`
-- Current phase: `PHASE_B0_CONTRACTS_AND_OBSERVATION_FOUNDATION`
+- Current phase: `PHASE_B0_CONTRACTS_COMPLETE_AWAITING_ACCEPTANCE`
 - Phase B1: `FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -30,7 +30,7 @@ The earlier unsynchronized state is superseded by the verified remote refs above
 - `B0.5` Layered identity registry: `IMPLEMENTED`
 - `B0.6` Benchmark registry: `IMPLEMENTED`
 - `B0.7` Temporal/event primitive contract: `IMPLEMENTED`
-- `B0.8` Feature/State Fabric schema and cache contract: `PLANNED`
+- `B0.8` Feature/State Fabric schema and cache contract: `IMPLEMENTED`
 
 ## Allowed
 
@@ -52,4 +52,4 @@ The earlier unsynchronized state is superseded by the verified remote refs above
 
 ## Next Acceptance Gate
 
-All B0.1-B0.8 contracts, registries, tests, graph nodes, STATE, decision log, run manifest, and artifact index are synchronized; then stop before B1.
+Independent acceptance of the synchronized B0.1-B0.8 contracts, registries, tests, graph nodes, STATE, decision log, run manifest, and artifact index; B1 remains frozen.

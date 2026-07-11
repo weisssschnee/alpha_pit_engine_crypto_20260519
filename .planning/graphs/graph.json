@@ -4,7 +4,7 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "98AB2C162E8F356A20F5B19FCC03EBEAFCFC62330F004A43F12EECB8D88909F7",
+      "registry_sha256": "0CACD837521139E8396D65895EB4B6A64D894BCB9B500A33F9E14FB5951059C4",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 26,
@@ -177240,16 +177240,24 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
-      "status": "PLANNED",
-      "implementation_path": [],
-      "entrypoint": "planned",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/fabric.py",
+        "config/crypto_feature_state_fabric_v1.json",
+        "scripts/crypto_b0_feature_state_fabric.py"
+      ],
+      "entrypoint": "FabricArtifactSpec / deterministic_cache_key / write_deterministic_array_cache / validate_cache",
       "input": "approved observations and contracts",
       "output": "deterministic feature/state cache",
       "data_role": "feature/state materialization",
       "feedback_permission": "NO_REWARD_B0",
-      "artifact_test": [],
-      "last_verified_sha": "635836D46E1ECFCEC7CF9CC3B754E16325FDC5FCB52563261DA4DFA10B651A0B",
-      "blocker": "B0.8 pending",
+      "artifact_test": [
+        "tests/test_fabric.py",
+        "runtime/a7b0_feature_state_fabric_20260711/feature_state_fabric_manifest.json",
+        "reports/CRYPTO_B0_FEATURE_STATE_FABRIC_20260711.md"
+      ],
+      "last_verified_sha": "B010B2324E71057D4879FC9AA4C875BC6896A9C341610DFE4741D5B9DE14C997",
+      "blocker": "real materialization, generator integration, and reward integration remain frozen until B1",
       "weight": 1.0
     }
   ],
@@ -490655,7 +490663,7 @@
       "edge_id": "control_edge_011",
       "source": "control_temporal_event_contract",
       "target": "control_feature_state_fabric",
-      "relationship": "PLANNED",
+      "relationship": "ALLOWED",
       "label": "contracted B0 input only",
       "forbidden": false,
       "confidence": "EXTRACTED",
@@ -490797,5 +490805,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "05d36d76cd40113c98a5ec41940a9a24bb056115"
+  "built_at_commit": "ad883bd7ebdae26810c078ea78696dba3df13f17"
 }

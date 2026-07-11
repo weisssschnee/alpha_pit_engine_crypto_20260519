@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `98AB2C162E8F356A20F5B19FCC03EBEAFCFC62330F004A43F12EECB8D88909F7`.
+Generated from registry SHA256: `0CACD837521139E8396D65895EB4B6A64D894BCB9B500A33F9E14FB5951059C4`.
 
 ## Current Evolution
 
@@ -27,3 +27,4 @@ Generated from registry SHA256: `98AB2C162E8F356A20F5B19FCC03EBEAFCFC62330F004A4
 - `EVALRESET-20260711-011` — `B0_5_LAYERED_IDENTITY_REGISTRY_IMPLEMENTED`: Syntax, canonical, exact signal, activation, PnL/regime, and economic hypothesis layers are contracted; current release establishes only the first three and leaves upper layers unresolved.
 - `EVALRESET-20260711-012` — `B0_6_BENCHMARK_REGISTRY_IMPLEMENTED`: Versioned benchmark definitions accept benchmark-only inputs; B0 executes no benchmarks and all future observations are report-only with no positive-memory permission.
 - `EVALRESET-20260711-013` — `B0_7_TEMPORAL_EVENT_CONTRACT_IMPLEMENTED`: PIT, event time, observable time, maturity, usable time, canonicalization, and equivalence are contracted; State/event outputs remain forbidden from reward until B1.
+- `EVALRESET-20260711-014` — `B0_8_FEATURE_STATE_FABRIC_CONTRACT_IMPLEMENTED`: Feature/State Fabric schema and deterministic path-independent cache contracts are implemented and tested using synthetic data only; real materialization, generator integration, and reward integration remain frozen pending B1 acceptance.
