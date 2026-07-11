@@ -526,6 +526,34 @@
       ],
       "blocker": "real materialization, generator integration, and reward integration remain frozen until B1",
       "last_verified_sha": "B010B2324E71057D4879FC9AA4C875BC6896A9C341610DFE4741D5B9DE14C997"
+    },
+    {
+      "id": "production_observation_qualification",
+      "label": "B0P production observation qualification",
+      "status": "PARTIAL",
+      "implementation_path": [
+        "alphafactory_crypto/funding_qualification.py",
+        "alphafactory_crypto/identity_registry.py",
+        "scripts/crypto_b0p_funding_qualification.py",
+        "scripts/crypto_b0p_identity_qualification.py",
+        "scripts/crypto_architecture_control_plane.py"
+      ],
+      "entrypoint": "qualify_production_funding / crypto_b0p_identity_qualification.build",
+      "input": "approved funding truth set, pre-forward observation panel, frozen accepted release, spent diagnostic blocks",
+      "output": "funding qualification and layered identity qualification",
+      "data_role": "production observation and identity qualification",
+      "feedback_permission": "NONE_NO_PROMOTION_MEMORY_SCHEDULER_GENERATOR_OR_REWARD",
+      "artifact_test": [
+        "tests/test_funding_qualification.py",
+        "tests/test_identity_registry.py",
+        "tests/test_architecture_control_plane.py",
+        "runtime/a7b0p_funding_qualification_20260711/funding_qualification_summary.json",
+        "runtime/a7b0p_identity_qualification_20260711/identity_qualification_manifest.json",
+        "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
+        "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
+      ],
+      "blocker": "funding is qualified for Binance UM core12, but activation identity and clustering are not qualified because no frozen signal behavior matrix is present",
+      "last_verified_sha": "B07148A7D8D19B4E0A3584077318EE02EA5FC958BFF2115AC058E2B276490CC2"
     }
   ],
   "edges": [
@@ -612,6 +640,24 @@
       "target": "benchmark_registry",
       "kind": "ALLOWED",
       "label": "authoritative zero benchmark definition"
+    },
+    {
+      "source": "funding_event_detector",
+      "target": "production_observation_qualification",
+      "kind": "ALLOWED",
+      "label": "approved truth-set qualification"
+    },
+    {
+      "source": "identity_registry",
+      "target": "production_observation_qualification",
+      "kind": "ALLOWED",
+      "label": "diagnostic identity qualification"
+    },
+    {
+      "source": "production_observation_qualification",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "partial B0P qualification cannot promote or authorize search"
     },
     {
       "source": "spent_evaluation",

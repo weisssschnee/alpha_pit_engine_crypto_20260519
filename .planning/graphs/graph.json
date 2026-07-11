@@ -4,14 +4,14 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B9C674F7D9D31489F4",
+      "registry_sha256": "79DFE7ACC1430F4A4654A299B52686486B4CCEAD5DACD0F1C55E75012A42AAF2",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
-      "control_node_count": 26,
-      "control_edge_count": 24,
+      "control_node_count": 27,
+      "control_edge_count": 27,
       "phase_status": "PHASE_B0_CONTRACTS_ACCEPTED",
-      "production_observation_qualification_status": "PHASE_B0_PRODUCTION_OBSERVATION_QUALIFICATION_PENDING",
-      "active_stage": "PHASE_B0P_PRODUCTION_OBSERVATION_QUALIFICATION",
+      "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
+      "active_stage": "PHASE_B0P_COMPLETE_STOPPED",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "research_status": "HOLD_RESEARCH",
       "phase_b1_status": "PHASE_B1_FROZEN",
@@ -177281,6 +177281,39 @@
       ],
       "last_verified_sha": "B010B2324E71057D4879FC9AA4C875BC6896A9C341610DFE4741D5B9DE14C997",
       "blocker": "real materialization, generator integration, and reward integration remain frozen until B1",
+      "weight": 1.0
+    },
+    {
+      "id": "control_production_observation_qualification",
+      "label": "B0P production observation qualification",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "PARTIAL",
+      "implementation_path": [
+        "alphafactory_crypto/funding_qualification.py",
+        "alphafactory_crypto/identity_registry.py",
+        "scripts/crypto_b0p_funding_qualification.py",
+        "scripts/crypto_b0p_identity_qualification.py",
+        "scripts/crypto_architecture_control_plane.py"
+      ],
+      "entrypoint": "qualify_production_funding / crypto_b0p_identity_qualification.build",
+      "input": "approved funding truth set, pre-forward observation panel, frozen accepted release, spent diagnostic blocks",
+      "output": "funding qualification and layered identity qualification",
+      "data_role": "production observation and identity qualification",
+      "feedback_permission": "NONE_NO_PROMOTION_MEMORY_SCHEDULER_GENERATOR_OR_REWARD",
+      "artifact_test": [
+        "tests/test_funding_qualification.py",
+        "tests/test_identity_registry.py",
+        "tests/test_architecture_control_plane.py",
+        "runtime/a7b0p_funding_qualification_20260711/funding_qualification_summary.json",
+        "runtime/a7b0p_identity_qualification_20260711/identity_qualification_manifest.json",
+        "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
+        "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
+      ],
+      "last_verified_sha": "B07148A7D8D19B4E0A3584077318EE02EA5FC958BFF2115AC058E2B276490CC2",
+      "blocker": "funding is qualified for Binance UM core12, but activation identity and clustering are not qualified because no frozen signal behavior matrix is present",
       "weight": 1.0
     }
   ],
@@ -490720,6 +490753,42 @@
     },
     {
       "edge_id": "control_edge_014",
+      "source": "control_funding_event_detector",
+      "target": "control_production_observation_qualification",
+      "relationship": "ALLOWED",
+      "label": "approved truth-set qualification",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_015",
+      "source": "control_identity_registry",
+      "target": "control_production_observation_qualification",
+      "relationship": "ALLOWED",
+      "label": "diagnostic identity qualification",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_016",
+      "source": "control_production_observation_qualification",
+      "target": "control_admission",
+      "relationship": "FORBIDDEN",
+      "label": "partial B0P qualification cannot promote or authorize search",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_017",
       "source": "control_spent_evaluation",
       "target": "control_proxy",
       "relationship": "REPORT_ONLY",
@@ -490731,7 +490800,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_015",
+      "edge_id": "control_edge_018",
       "source": "control_spent_evaluation",
       "target": "control_strict_reward",
       "relationship": "REPORT_ONLY",
@@ -490743,7 +490812,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_016",
+      "edge_id": "control_edge_019",
       "source": "control_spent_evaluation",
       "target": "control_admission",
       "relationship": "FORBIDDEN",
@@ -490755,7 +490824,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_017",
+      "edge_id": "control_edge_020",
       "source": "control_spent_evaluation",
       "target": "control_generation_lanes",
       "relationship": "FORBIDDEN",
@@ -490767,7 +490836,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_018",
+      "edge_id": "control_edge_021",
       "source": "control_spent_evaluation",
       "target": "control_a7mem",
       "relationship": "FORBIDDEN",
@@ -490779,7 +490848,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_019",
+      "edge_id": "control_edge_022",
       "source": "control_sealed_forward",
       "target": "control_scheduler",
       "relationship": "FORBIDDEN",
@@ -490791,7 +490860,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_020",
+      "edge_id": "control_edge_023",
       "source": "control_benchmark_registry",
       "target": "control_a7mem",
       "relationship": "FORBIDDEN",
@@ -490803,7 +490872,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_021",
+      "edge_id": "control_edge_024",
       "source": "control_feature_state_fabric",
       "target": "control_strict_reward",
       "relationship": "FORBIDDEN",
@@ -490815,7 +490884,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_022",
+      "edge_id": "control_edge_025",
       "source": "control_a7input0",
       "target": "control_generation_lanes",
       "relationship": "FORBIDDEN",
@@ -490827,7 +490896,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_023",
+      "edge_id": "control_edge_026",
       "source": "control_bz",
       "target": "control_admission",
       "relationship": "FORBIDDEN",

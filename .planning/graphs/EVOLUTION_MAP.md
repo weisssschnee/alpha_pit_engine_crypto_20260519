@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B9C674F7D9D31489F4`.
+Generated from registry SHA256: `79DFE7ACC1430F4A4654A299B52686486B4CCEAD5DACD0F1C55E75012A42AAF2`.
 
 ## Current Evolution
 
@@ -11,7 +11,7 @@ Generated from registry SHA256: `C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B
 - The proposed 400k reward-integrated search is revoked.
 - Phase A governance is accepted while `HOLD_RESEARCH` remains.
 - Phase B0 contracts are accepted for subject `9574d32053d1679d64179fe2d6607d1a05e13db9`.
-- Production observation qualification is pending in B0P.
+- B0P is stopped at `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED` because funding qualified but activation identity did not.
 - Binance UM core12 funding observation is production-qualified through 2026-04-30; cross-venue qualification is not claimed.
 - Phase B1 is frozen.
 
@@ -36,3 +36,4 @@ Generated from registry SHA256: `C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B
 - `EVALRESET-20260711-017` — `PHASE_B0_CONTRACTS_ACCEPTED`: Independent acceptance attests subject 9574d32053d1679d64179fe2d6607d1a05e13db9. Production observation qualification moves to B0P; HOLD_RESEARCH, PHASE_B1_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.
 - `EVALRESET-20260711-018` — `B0P_1_FUNDING_PRODUCTION_OBSERVATION_QUALIFIED`: Approved Binance UM core12 truth set and pre-forward hourly panel produced 30636/30636 exact event matches through 2026-04-30 with recall=precision=1, zero misses/duplicates/rate mismatches, complete 12-symbol and 336 symbol-month coverage, and correct cash-flow signs; no price returns or Alpha reward were read.
 - `EVALRESET-20260711-019` — `B0P_2_LAYERED_IDENTITY_PARTIALLY_QUALIFIED`: The frozen accepted release maps 33 alias-expanded blueprints to 18 numeric representatives, 16 accepted rows, 6 canonical/exact signals, one coarse spent split-sign diagnostic identity, and five field/structure/mechanism hypotheses. Activation identity and clustering remain not qualified because the release contains no frozen signal behavior matrix; no expression or performance proxy was substituted.
+- `EVALRESET-20260711-020` — `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`: B0P stops with Binance UM core12 funding qualified and layered identity partially qualified. Activation identity/clustering remains blocked by the absent frozen signal behavior matrix. HOLD_RESEARCH, PHASE_B1_FROZEN, SEALED_NO_NEW_FORWARD_READ, and all no-feedback guards remain in force; no large-search or alpha-ready authorization is issued.

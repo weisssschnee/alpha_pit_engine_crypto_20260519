@@ -16,6 +16,7 @@ from scripts.crypto_architecture_control_plane import (
 
 
 ATTESTATION_PATH = REGISTRY_PATH.parents[1] / "runtime" / "a7b0_control_plane_20260711" / "phase_b0_acceptance_attestation.json"
+B0P_MANIFEST_PATH = REGISTRY_PATH.parents[1] / "runtime" / "a7b0p_control_plane_20260711" / "b0p_qualification_manifest.json"
 ACCEPTED_SUBJECT_SHA = "9574d32053d1679d64179fe2d6607d1a05e13db9"
 
 
@@ -29,12 +30,16 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(state["current_phase"], "PHASE_B0_CONTRACTS_ACCEPTED")
         self.assertEqual(
             state["production_observation_qualification_status"],
-            "PHASE_B0_PRODUCTION_OBSERVATION_QUALIFICATION_PENDING",
+            "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
         )
         self.assertEqual(state["phase_b1_status"], "PHASE_B1_FROZEN")
 
         attestation = load_json(ATTESTATION_PATH)
         self.assertEqual(attestation["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
+        self.assertEqual(
+            attestation["production_observation_qualification_status"],
+            "PHASE_B0_PRODUCTION_OBSERVATION_QUALIFICATION_PENDING",
+        )
         self.assertEqual(attestation["test_evidence"]["subject_sha"], ACCEPTED_SUBJECT_SHA)
         self.assertEqual(attestation["test_evidence"]["result"], "39 passed in 22.15s")
         self.assertNotIn("acceptance_attestation_commit", attestation)
@@ -54,7 +59,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
 
         current_architecture = CURRENT_ARCH_PATH.read_text(encoding="utf-8")
         self.assertIn("PHASE_B0_CONTRACTS_ACCEPTED", current_architecture)
-        self.assertIn("PHASE_B0_PRODUCTION_OBSERVATION_QUALIFICATION_PENDING", current_architecture)
+        self.assertIn("PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED", current_architecture)
 
         graph = load_json(GRAPH_PATH)
         graph_control = graph["graph"]["architecture_control_plane"]
@@ -62,6 +67,13 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(graph_control["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph["built_at_accepted_subject"], ACCEPTED_SUBJECT_SHA)
         self.assertNotIn("built_at_commit", graph)
+
+        b0p_manifest = load_json(B0P_MANIFEST_PATH)
+        self.assertEqual(b0p_manifest["decision"], "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED")
+        self.assertEqual(b0p_manifest["funding_status"], "PRODUCTION_FUNDING_OBSERVATION_QUALIFIED")
+        self.assertEqual(b0p_manifest["identity_status"], "LAYERED_IDENTITY_PARTIALLY_QUALIFIED")
+        self.assertFalse(b0p_manifest["search_started"])
+        self.assertFalse(b0p_manifest["forward_performance_read"])
 
 
 if __name__ == "__main__":

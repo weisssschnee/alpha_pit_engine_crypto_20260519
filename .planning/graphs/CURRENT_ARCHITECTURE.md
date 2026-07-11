@@ -1,8 +1,8 @@
 # Current Architecture
 
-Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B9C674F7D9D31489F4`.
+Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `79DFE7ACC1430F4A4654A299B52686486B4CCEAD5DACD0F1C55E75012A42AAF2`.
 
-Status: `PHASE_B0_CONTRACTS_ACCEPTED` / `PHASE_B0_PRODUCTION_OBSERVATION_QUALIFICATION_PENDING` / `HOLD_RESEARCH` / `PHASE_B1_FROZEN` / `SEALED_NO_NEW_FORWARD_READ`.
+Status: `PHASE_B0_CONTRACTS_ACCEPTED` / `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED` / `HOLD_RESEARCH` / `PHASE_B1_FROZEN` / `SEALED_NO_NEW_FORWARD_READ`.
 
 Authority: `config/crypto_architecture_control_registry_v1.json` is the machine-readable architecture authority; `graph.json` is its deterministic graph view; this file is the human-readable generated view. Raw graphify is unavailable, so `graph.json` retains the prior navigation graph plus a deterministic `control_*` overlay.
 
@@ -36,6 +36,7 @@ flowchart TD
   control_bz["BZ / Benchmark Zero\nIMPLEMENTED"]
   control_temporal_event_contract["Temporal/event primitive contract\nIMPLEMENTED"]
   control_feature_state_fabric["Feature/State Fabric\nIMPLEMENTED"]
+  control_production_observation_qualification["B0P production observation qualification\nPARTIAL"]
   control_data_release --> control_time_block_roles
   control_time_block_roles --> control_field_ontology
   control_field_ontology --> control_a7input0
@@ -50,6 +51,9 @@ flowchart TD
   control_funding_event_detector --> control_temporal_event_contract
   control_temporal_event_contract --> control_feature_state_fabric
   control_bz --> control_benchmark_registry
+  control_funding_event_detector --> control_production_observation_qualification
+  control_identity_registry --> control_production_observation_qualification
+  control_production_observation_qualification -. forbidden .-> control_admission
   control_spent_evaluation --> control_proxy
   control_spent_evaluation --> control_strict_reward
   control_spent_evaluation -. forbidden .-> control_admission
@@ -92,6 +96,7 @@ flowchart TD
 | BZ / Benchmark Zero | IMPLEMENTED | alphafactory_crypto/bz.py; config/crypto_bz_benchmark_zero_v1.json; scripts/crypto_b0_bz_authority.py | create_benchmark_zero | benchmark-only fields -> zero-alpha diagnostic benchmark object | benchmark sanity only | NONE | tests/test_bz.py; runtime/a7b0_bz_authority_20260711/bz_authority_manifest.json; reports/CRYPTO_B0_BZ_BENCHMARK_ZERO_20260711.md | 1AFC8220B1F63A01959E16049E43D7D0324AA4CE00F246BC669679CEA59B093D | legacy undefined BZ mentions require explicit migration |
 | Temporal/event primitive contract | IMPLEMENTED | alphafactory_crypto/temporal_contracts.py; config/crypto_temporal_event_primitives_v1.json; scripts/crypto_b0_temporal_event_contract.py | TemporalObservation / canonicalize_primitive / temporal_equivalent | observable event streams -> PIT temporal primitives | temporal semantics | NO_REWARD_THROUGH_B0P | tests/test_temporal_contracts.py; runtime/a7b0_temporal_event_contract_20260711/temporal_event_primitive_registry.csv; runtime/a7b0_temporal_event_contract_20260711/temporal_event_contract_manifest.json; reports/CRYPTO_B0_TEMPORAL_EVENT_PRIMITIVE_CONTRACT_20260711.md | 8755ED21F49B04334B7F3E272518197884082F91853A30324D4284A1B595E5DF | primitive execution and State/event reward coupling remain frozen until B1 |
 | Feature/State Fabric | IMPLEMENTED | alphafactory_crypto/fabric.py; config/crypto_feature_state_fabric_v1.json; scripts/crypto_b0_feature_state_fabric.py | FabricArtifactSpec / deterministic_cache_key / write_deterministic_array_cache / validate_cache | approved observations and contracts -> deterministic feature/state cache | feature/state materialization | NO_REWARD_THROUGH_B0P | tests/test_fabric.py; runtime/a7b0_feature_state_fabric_20260711/feature_state_fabric_manifest.json; reports/CRYPTO_B0_FEATURE_STATE_FABRIC_20260711.md | B010B2324E71057D4879FC9AA4C875BC6896A9C341610DFE4741D5B9DE14C997 | real materialization, generator integration, and reward integration remain frozen until B1 |
+| B0P production observation qualification | PARTIAL | alphafactory_crypto/funding_qualification.py; alphafactory_crypto/identity_registry.py; scripts/crypto_b0p_funding_qualification.py; scripts/crypto_b0p_identity_qualification.py; scripts/crypto_architecture_control_plane.py | qualify_production_funding / crypto_b0p_identity_qualification.build | approved funding truth set, pre-forward observation panel, frozen accepted release, spent diagnostic blocks -> funding qualification and layered identity qualification | production observation and identity qualification | NONE_NO_PROMOTION_MEMORY_SCHEDULER_GENERATOR_OR_REWARD | tests/test_funding_qualification.py; tests/test_identity_registry.py; tests/test_architecture_control_plane.py; runtime/a7b0p_funding_qualification_20260711/funding_qualification_summary.json; runtime/a7b0p_identity_qualification_20260711/identity_qualification_manifest.json; reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md; reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md | B07148A7D8D19B4E0A3584077318EE02EA5FC958BFF2115AC058E2B276490CC2 | funding is qualified for Binance UM core12, but activation identity and clustering are not qualified because no frozen signal behavior matrix is present |
 
 ## Time Block Roles
 
@@ -104,6 +109,7 @@ flowchart TD
 | Source | Target | Prohibition |
 |---|---|---|
 | identity_registry | admission | B0P identities are diagnostic-only and cannot promote |
+| production_observation_qualification | admission | partial B0P qualification cannot promote or authorize search |
 | spent_evaluation | admission | no candidate ranking |
 | spent_evaluation | generation_lanes | no CEM/UCB/MCTS feedback |
 | spent_evaluation | a7mem | no memory update |

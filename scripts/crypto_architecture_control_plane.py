@@ -19,6 +19,9 @@ RUN_MANIFEST_PATH = RUN_ROOT / "phase_a_b0_run_manifest.json"
 ARTIFACT_INDEX_PATH = RUN_ROOT / "phase_a_b0_artifact_index.csv"
 ATTESTATION_PATH = RUN_ROOT / "phase_b0_acceptance_attestation.json"
 ACCEPTANCE_TEST_OUTPUT_PATH = RUN_ROOT / "phase_b0_acceptance_test_output.txt"
+B0P_MANIFEST_PATH = REPO / "runtime" / "a7b0p_control_plane_20260711" / "b0p_qualification_manifest.json"
+B0P_FUNDING_SUMMARY_PATH = REPO / "runtime" / "a7b0p_funding_qualification_20260711" / "funding_qualification_summary.json"
+B0P_IDENTITY_SUMMARY_PATH = REPO / "runtime" / "a7b0p_identity_qualification_20260711" / "identity_qualification_manifest.json"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -45,7 +48,7 @@ REQUIRED_NODE_IDS = {
     "semantic_compiler", "exact_signal_identity", "identity_registry", "generation_lanes", "proxy",
     "strict_reward", "admission", "a7mem", "scheduler", "benchmark_registry",
     "evaluation_access_ledger", "spent_evaluation", "sealed_forward", "future_wrong_lag", "bz",
-    "temporal_event_contract", "feature_state_fabric",
+    "temporal_event_contract", "feature_state_fabric", "production_observation_qualification",
 }
 REQUIRED_FORBIDDEN_EDGES = {
     ("spent_evaluation", "admission"),
@@ -57,6 +60,7 @@ REQUIRED_FORBIDDEN_EDGES = {
     ("a7input0", "generation_lanes"),
     ("bz", "admission"),
     ("identity_registry", "admission"),
+    ("production_observation_qualification", "admission"),
 }
 VALID_STATUSES = {"IMPLEMENTED", "PARTIAL", "PLANNED", "FROZEN", "DEPRECATED"}
 
@@ -240,7 +244,7 @@ Generated from registry SHA256: `{digest}`.
 - The proposed 400k reward-integrated search is revoked.
 - Phase A governance is accepted while `HOLD_RESEARCH` remains.
 - Phase B0 contracts are accepted for subject `{state['phase_b0_acceptance']['accepted_subject_sha']}`.
-- Production observation qualification is pending in B0P.
+- B0P is stopped at `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED` because funding qualified but activation identity did not.
 - Binance UM core12 funding observation is production-qualified through 2026-04-30; cross-venue qualification is not claimed.
 - Phase B1 is frozen.
 
@@ -345,7 +349,7 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "accepted_subject_sha": acceptance["accepted_subject_sha"],
         "accepted_subject_remote_ref": acceptance["accepted_subject_remote_ref"],
         "attestation_commit_policy": acceptance["attestation_commit_policy"],
-        "production_observation_qualification_status": state["production_observation_qualification_status"],
+        "production_observation_qualification_status": acceptance["production_observation_qualification_status_at_acceptance"],
         "research_status": state["research_status"],
         "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
@@ -353,8 +357,31 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "scope": "control-plane acceptance closure only; no B0 implementation logic changed",
     }
     ATTESTATION_PATH.write_text(json.dumps(attestation, indent=2) + "\n", encoding="utf-8")
+    funding_summary = load_json(B0P_FUNDING_SUMMARY_PATH)
+    identity_summary = load_json(B0P_IDENTITY_SUMMARY_PATH)
+    b0p_manifest = {
+        "manifest_id": "CRYPTO-B0P-QUALIFICATION-20260711",
+        "decision": state["production_observation_qualification_status"],
+        "funding_status": funding_summary["decision"],
+        "identity_status": identity_summary["decision"],
+        "activation_status": identity_summary["activation_status"],
+        "funding_summary": relative(B0P_FUNDING_SUMMARY_PATH),
+        "identity_summary": relative(B0P_IDENTITY_SUMMARY_PATH),
+        "registry_sha256": digest,
+        "search_started": False,
+        "forward_performance_read": False,
+        "state_event_reward_connected": False,
+        "cem_ucb_mcts_updated": False,
+        "a7mem_updated": False,
+        "candidate_selection_performed": False,
+        "b1_lane_integration": False,
+        "large_search_authorized": False,
+        "alpha_ready": False,
+    }
+    B0P_MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
+    B0P_MANIFEST_PATH.write_text(json.dumps(b0p_manifest, indent=2) + "\n", encoding="utf-8")
     manifest = {
-        "manifest_id": "PHASE-A-B0-RUN-MANIFEST-20260711", "phase_a_status": state["phase_a_status"],
+        "manifest_id": "PHASE-A-B0-B0P-RUN-MANIFEST-20260711", "phase_a_status": state["phase_a_status"],
         "collapse_status": state["collapse_status"], "research_status": state["research_status"],
         "current_phase": state["current_phase"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"], "registry_sha256": digest,
@@ -366,11 +393,12 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "b0_items": state["b0_items"], "search_started": False, "forward_performance_read": False,
         "b0p_items": state["b0p_items"],
         "artifact_index": relative(ARTIFACT_INDEX_PATH), "decision_log": relative(DECISION_LOG_PATH),
+        "b0p_qualification_manifest": relative(B0P_MANIFEST_PATH),
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     paths = {
         REGISTRY_PATH, STATE_SOURCE_PATH, DECISION_LOG_PATH, CURRENT_ARCH_PATH, BOUNDARY_PATH, EVOLUTION_PATH,
-        GRAPH_PATH, STATE_PATH, RUN_MANIFEST_PATH, ATTESTATION_PATH, ACCEPTANCE_TEST_OUTPUT_PATH,
+        GRAPH_PATH, STATE_PATH, RUN_MANIFEST_PATH, ATTESTATION_PATH, ACCEPTANCE_TEST_OUTPUT_PATH, B0P_MANIFEST_PATH,
     }
     for node in registry["nodes"]:
         paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
@@ -425,6 +453,15 @@ def validate_outputs(registry: dict[str, Any]) -> None:
         raise ValueError("run manifest accepted subject mismatch")
     if manifest.get("acceptance_attestation") != relative(ATTESTATION_PATH):
         raise ValueError("run manifest acceptance attestation mismatch")
+    b0p_manifest = load_json(B0P_MANIFEST_PATH)
+    if b0p_manifest.get("decision") != state["production_observation_qualification_status"]:
+        raise ValueError("B0P qualification status mismatch")
+    prohibited_b0p_flags = [
+        "search_started", "forward_performance_read", "state_event_reward_connected", "cem_ucb_mcts_updated",
+        "a7mem_updated", "candidate_selection_performed", "b1_lane_integration", "large_search_authorized", "alpha_ready",
+    ]
+    if any(b0p_manifest.get(flag) for flag in prohibited_b0p_flags):
+        raise ValueError("B0P manifest records prohibited activity or authorization")
     if meta.get("phase_status") != state["current_phase"] or meta.get("accepted_subject_sha") != accepted_subject_sha:
         raise ValueError("graph phase acceptance metadata mismatch")
     evidence = attestation.get("test_evidence", {})

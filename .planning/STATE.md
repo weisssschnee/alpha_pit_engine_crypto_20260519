@@ -1,6 +1,6 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B9C674F7D9D31489F4`.
+Registry SHA256: `79DFE7ACC1430F4A4654A299B52686486B4CCEAD5DACD0F1C55E75012A42AAF2`.
 
 ## Formal Status
 
@@ -8,8 +8,8 @@ Registry SHA256: `C98E763E6F6E156DE169E2D0829330C348B3D306B19EA1B9C674F7D9D31489
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `HOLD_RESEARCH`
 - Current phase: `PHASE_B0_CONTRACTS_ACCEPTED`
-- Production observation qualification: `PHASE_B0_PRODUCTION_OBSERVATION_QUALIFICATION_PENDING`
-- Active stage: `PHASE_B0P_PRODUCTION_OBSERVATION_QUALIFICATION`
+- Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
+- Active stage: `PHASE_B0P_COMPLETE_STOPPED`
 - Phase B1: `PHASE_B1_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -46,7 +46,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 - `B0P.1` Funding production observation qualification: `QUALIFIED_BINANCE_UM_CORE12`
 - `B0P.2` Layered identity completion: `PARTIALLY_QUALIFIED_ACTIVATION_ARTIFACT_MISSING`
-- `B0P.3` Control-plane synchronization: `IN_PROGRESS`
+- `B0P.3` Control-plane synchronization: `IMPLEMENTED`
 
 ## Phase B0P Allowed
 
@@ -69,4 +69,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Complete B0P production observation qualification and stop with QUALIFIED, PARTIALLY_QUALIFIED, or NOT_QUALIFIED; do not authorize large search or claim alpha-ready.
+B0P is stopped at PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED. Any B1 or activation-artifact work requires explicit authorization; large search and alpha-ready claims remain prohibited.
