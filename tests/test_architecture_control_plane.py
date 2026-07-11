@@ -7,6 +7,7 @@ from scripts.crypto_architecture_control_plane import (
     B0P_ATTESTATION_PATH,
     B0A_MANIFEST_PATH,
     NEXTGEN_MATERIALIZATION_PATH,
+    NEXTGEN_BOOKTICKER_PATH,
     NEXTGEN_RUN_MANIFEST_PATH,
     CANARY_PLAN_PATH,
     CURRENT_ARCH_PATH,
@@ -125,15 +126,21 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertTrue(nextgen["materialization_reproducible"])
         self.assertEqual(nextgen["rows"], 245088)
         self.assertEqual(nextgen["symbols"], 12)
-        self.assertEqual(set(nextgen["unavailable_states"]), {"liquidation_cluster", "depth_liquidity_state"})
+        self.assertEqual(set(nextgen["unavailable_states"]), {"liquidation_cluster"})
+        self.assertEqual(nextgen["partially_available_states"], ["depth_liquidity_state"])
+        self.assertEqual(nextgen["pc1_top_of_book_rows"], 14208)
+        self.assertEqual(nextgen["pc1_top_of_book_depth_semantics"], "TOP_OF_BOOK_BBO_ONLY_NOT_MULTI_LEVEL_DEPTH")
         self.assertFalse(nextgen["search_started"])
         self.assertFalse(nextgen["performance_evaluated"])
         self.assertFalse(nextgen["canary_started"])
-        self.assertEqual(nextgen["test_evidence"]["result"], "71 passed in 26.18s")
+        self.assertRegex(nextgen["test_evidence"]["result"], r"^72 passed in ")
 
         materialization = load_json(NEXTGEN_MATERIALIZATION_PATH)
         self.assertFalse(materialization["forbidden_performance_columns_read"])
         self.assertFalse(materialization["forward_read"])
+        bookticker = load_json(NEXTGEN_BOOKTICKER_PATH)
+        self.assertTrue(bookticker["reproducible"])
+        self.assertFalse(bookticker["liquidation_source_found_on_pc1"])
         canary = load_json(CANARY_PLAN_PATH)
         self.assertFalse(canary["execution_authorized"])
         self.assertFalse(canary["started"])

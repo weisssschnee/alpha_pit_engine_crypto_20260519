@@ -9,20 +9,28 @@
   "rows": 245088,
   "symbols": 12,
   "unavailable_states": [
-    "liquidation_cluster",
+    "liquidation_cluster"
+  ],
+  "partially_available_states": [
     "depth_liquidity_state"
   ],
+  "pc1_top_of_book_manifest": "runtime/nextgen_dark_20260711/pc1_bookticker_top_of_book_manifest.json",
+  "pc1_top_of_book_qualification": "SCOPED_TOP_OF_BOOK_LIQUIDITY_OBSERVATION_PARTIALLY_QUALIFIED",
+  "pc1_top_of_book_artifact_hash": "F7B89420695B939944F4CFB192BE793E4BB952E6E5AC71B82B004F7C9E19E12A",
+  "pc1_top_of_book_rows": 14208,
+  "pc1_top_of_book_coordinate_coverage_ratio": 0.8222222222222222,
+  "pc1_top_of_book_depth_semantics": "TOP_OF_BOOK_BBO_ONLY_NOT_MULTI_LEVEL_DEPTH",
   "temporal_primitives_registered": 13,
   "isolated_lanes_registered": 7,
   "canary_plan": "config/crypto_nextgen_dark_canary_plan_v1.json",
   "canary_status": "PREPARED_NOT_AUTHORIZED_NOT_STARTED",
   "artifact_index": "runtime/nextgen_dark_20260711/nextgen_dark_artifact_index.csv",
-  "registry_sha256": "2EFFB08A37CF4CC0933A2FED70B5F7F50F833B5E58DBB7EACFB45E7DE599ED36",
+  "registry_sha256": "3D506C56A75546A985A05AA143B7B73CAE8E797756C1B96D553977B021E517DE",
   "test_evidence": {
     "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
-    "result": "71 passed in 26.18s",
+    "result": "72 passed in 24.93s",
     "output_path": "runtime/nextgen_dark_20260711/nextgen_dark_test_output.txt",
-    "output_sha256": "9F85EA27230FAFB861E40196BECBDDA748DAE1159FEEB75F09F335365D35F911"
+    "output_sha256": "7FDBD7EAE06577992F8909B0DBFA47C52EF605365C721FFF91431B029313AA7C"
   },
   "search_started": false,
   "performance_evaluated": false,

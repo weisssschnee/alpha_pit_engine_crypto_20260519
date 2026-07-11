@@ -30,6 +30,7 @@ B0A_ARTIFACT_INDEX_PATH = REPO / "runtime" / "a7b0a_signal_behaviour_20260711" /
 NEXTGEN_ROOT = REPO / "runtime" / "nextgen_dark_20260711"
 NEXTGEN_MATERIALIZATION_PATH = NEXTGEN_ROOT / "feature_state_materialization_manifest.json"
 NEXTGEN_COVERAGE_PATH = NEXTGEN_ROOT / "non_performance_coverage_capability.json"
+NEXTGEN_BOOKTICKER_PATH = NEXTGEN_ROOT / "pc1_bookticker_top_of_book_manifest.json"
 NEXTGEN_RUN_MANIFEST_PATH = NEXTGEN_ROOT / "nextgen_dark_run_manifest.json"
 NEXTGEN_ARTIFACT_INDEX_PATH = NEXTGEN_ROOT / "nextgen_dark_artifact_index.csv"
 NEXTGEN_TEST_OUTPUT_PATH = NEXTGEN_ROOT / "nextgen_dark_test_output.txt"
@@ -138,8 +139,8 @@ def nextgen_test_evidence() -> dict[str, str]:
     normalized = NEXTGEN_TEST_OUTPUT_PATH.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
     lines = [line.strip() for line in normalized.splitlines() if line.strip()]
     result = lines[-1] if lines else ""
-    if not re.fullmatch(r"71 passed in [0-9]+(?:\.[0-9]+)?s", result):
-        raise ValueError("NEXTGEN-DARK test output does not record exactly 71 passing tests")
+    if not re.fullmatch(r"72 passed in [0-9]+(?:\.[0-9]+)?s", result):
+        raise ValueError("NEXTGEN-DARK test output does not record exactly 72 passing tests")
     return {
         "command": "G:\\PythonProject\\.venv\\Scripts\\python.exe -m pytest -q",
         "result": result,
@@ -307,7 +308,7 @@ Generated from registry SHA256: `{digest}`.
 - B0A establishes `16 accepted aliases -> 6 exact signals -> 5 activation identities -> 4 behaviour clusters -> 5 semantic economic hypotheses`; the complete 33-row survivor map still contains 18 exact identities and must not be collapsed to six in reporting.
 - Exact-to-activation and activation-to-behaviour contraction are now observed on the frozen pre-forward coordinate contract. This does not by itself establish collapse of independent economic information because the five economic hypotheses remain semantic registrations.
 - B0A is stopped at `{state['frozen_signal_behaviour_status']}` with no reward, selection, scheduler, generator, or memory feedback.
-- NEXTGEN-DARK materializes 245088 Binance UM core12 development/pre-forward coordinates reproducibly without performance columns. Funding, basis, OI, mark/index, taker, liquidity, volatility, session, and cross-asset states materialize; liquidation and depth remain explicitly unavailable because no approved source exists.
+- NEXTGEN-DARK materializes 245088 Binance UM core12 development/pre-forward coordinates reproducibly without performance columns. Funding, basis, OI, mark/index, taker, liquidity, volatility, session, and cross-asset states materialize. A PC1 supplement scoped-qualifies 14208 top-of-book liquidity rows over 2024-01/02 with 82.22% core12 coordinate coverage; it is BBO only, not multi-level depth. Liquidation remains unavailable because PC1 contains no liquidation/force-order source.
 - Thirteen typed temporal/event primitives, seven isolated no-memory lanes, deterministic anti-collapse quotas, frozen benchmark/challenger interfaces, and non-performance coverage metrics are implemented without execution of formal search or performance comparison.
 - A fixed-budget development-only CANARY plan exists but is not authorized and not started.
 - `{state['formal_search_status']}`, `{state['phase_b1_status']}`, and `{state['forward_data_status']}` remain frozen.
@@ -453,6 +454,7 @@ def nextgen_artifact_paths(registry: dict[str, Any]) -> set[Path]:
         REGISTRY_PATH, STATE_SOURCE_PATH, DECISION_LOG_PATH, CURRENT_ARCH_PATH, BOUNDARY_PATH,
         EVOLUTION_PATH, GRAPH_PATH, STATE_PATH, NEXTGEN_RUN_MANIFEST_PATH, NEXTGEN_ADR_PATH,
         CANARY_PLAN_PATH, NEXTGEN_MATERIALIZATION_PATH, NEXTGEN_COVERAGE_PATH,
+        NEXTGEN_BOOKTICKER_PATH,
         NEXTGEN_TEST_OUTPUT_PATH,
         REPO / "scripts" / "crypto_architecture_control_plane.py",
         REPO / "tests" / "test_architecture_control_plane.py",
@@ -598,6 +600,7 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         B0P_ATTESTATION_PATH.write_text(json.dumps(b0p_attestation, indent=2) + "\n", encoding="utf-8")
     b0a_manifest = load_json(B0A_MANIFEST_PATH)
     nextgen_materialization = load_json(NEXTGEN_MATERIALIZATION_PATH)
+    nextgen_bookticker = load_json(NEXTGEN_BOOKTICKER_PATH)
     canary = load_json(CANARY_PLAN_PATH)
     nextgen_manifest = {
         "manifest_id": "CRYPTO-NEXTGEN-DARK-CLOSURE-20260711",
@@ -611,8 +614,15 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "symbols": nextgen_materialization["symbols"],
         "unavailable_states": [
             item["state_id"] for item in nextgen_materialization["availability"]
-            if item["status"] != "MATERIALIZED"
+            if item["status"] != "MATERIALIZED" and item["state_id"] != "depth_liquidity_state"
         ],
+        "partially_available_states": ["depth_liquidity_state"],
+        "pc1_top_of_book_manifest": relative(NEXTGEN_BOOKTICKER_PATH),
+        "pc1_top_of_book_qualification": nextgen_bookticker["qualification"],
+        "pc1_top_of_book_artifact_hash": nextgen_bookticker["artifact_hash"],
+        "pc1_top_of_book_rows": nextgen_bookticker["rows"],
+        "pc1_top_of_book_coordinate_coverage_ratio": nextgen_bookticker["coordinate_coverage_ratio"],
+        "pc1_top_of_book_depth_semantics": nextgen_bookticker["depth_semantics"],
         "temporal_primitives_registered": 13,
         "isolated_lanes_registered": 7,
         "canary_plan": relative(CANARY_PLAN_PATH),
@@ -862,6 +872,13 @@ def validate_outputs(registry: dict[str, Any]) -> None:
         raise ValueError("NEXTGEN-DARK materialization hash mismatch")
     if materialization.get("forbidden_performance_columns_read") or materialization.get("forward_read"):
         raise ValueError("NEXTGEN-DARK materialization read prohibited data")
+    bookticker = load_json(NEXTGEN_BOOKTICKER_PATH)
+    if not bookticker.get("reproducible") or bookticker.get("performance_values_read") or bookticker.get("forward_performance_read"):
+        raise ValueError("PC1 bookTicker qualification is non-reproducible or read prohibited data")
+    if bookticker.get("depth_semantics") != "TOP_OF_BOOK_BBO_ONLY_NOT_MULTI_LEVEL_DEPTH":
+        raise ValueError("PC1 bookTicker source must not claim multi-level depth")
+    if bookticker.get("liquidation_source_found_on_pc1"):
+        raise ValueError("PC1 audit evidence unexpectedly claims a liquidation source")
     canary = load_json(CANARY_PLAN_PATH)
     if canary.get("execution_authorized") or canary.get("started") or canary.get("data_access", {}).get("forward_read_allowed"):
         raise ValueError("CANARY must remain unauthorized and not started")

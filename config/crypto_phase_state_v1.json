@@ -78,7 +78,7 @@
     {"id":"B0A.6","name":"Control-plane synchronization","status":"IMPLEMENTED"}
   ],
   "nextgen_dark_items": [
-    {"id":"ND.1","name":"Development-only Feature/State materialization","status":"PARTIAL_LIQUIDATION_AND_DEPTH_NO_APPROVED_SOURCE"},
+    {"id":"ND.1","name":"Development-only Feature/State materialization","status":"PARTIAL_LIQUIDATION_NO_SOURCE_TOP_OF_BOOK_LIQUIDITY_SCOPED_QUALIFIED"},
     {"id":"ND.2","name":"Typed Temporal/Event Program","status":"IMPLEMENTED"},
     {"id":"ND.3","name":"Isolated hypothesis lanes","status":"IMPLEMENTED_NOT_EXECUTED"},
     {"id":"ND.4","name":"Anti-collapse admission","status":"IMPLEMENTED_QUOTA_TESTS_ONLY"},
@@ -118,5 +118,5 @@
     "online policy or budget reweighting",
     "automatic CANARY launch or Phase B1 performance integration"
   ],
-  "next_acceptance_gate": "NEXTGEN-DARK is closed as PARTIALLY_READY because liquidation and depth have no approved observable source. The fixed-budget development-only CANARY plan is not authorized and not started. HOLD_RESEARCH, FORMAL_SEARCH_FROZEN, PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force."
+  "next_acceptance_gate": "NEXTGEN-DARK remains PARTIALLY_READY because PC1 contains no liquidation/force-order source. PC1 top-of-book liquidity is scoped-qualified for Binance UM bookTicker only over its observed 2024-01/02 subset and is not multi-level depth. The fixed-budget development-only CANARY plan is not authorized and not started. HOLD_RESEARCH, FORMAL_SEARCH_FROZEN, PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force."
 }

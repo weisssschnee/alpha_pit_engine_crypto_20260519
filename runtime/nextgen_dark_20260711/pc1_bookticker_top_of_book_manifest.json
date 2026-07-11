@@ -1,0 +1,54 @@
+{
+  "artifact_id": "PC1-BINANCE-UM-CORE12-TOP-OF-BOOK-STATE-V1",
+  "qualification": "SCOPED_TOP_OF_BOOK_LIQUIDITY_OBSERVATION_PARTIALLY_QUALIFIED",
+  "source_machine": "DESKTOP-7877972",
+  "source_root": "D:/HermesWorker/GDrive/AlphaFactory_CryptoData/silver/binance_vision",
+  "source_datasets": [
+    "bookticker_multires_top50_202401_smallfirst_v1_20260525",
+    "bookticker_multires_top50_202402_smallfirst_v1_20260526"
+  ],
+  "local_external_artifact": "G:/AlphaFactory_CryptoData/gold/features/nextgen_dark_bookticker_core12_v1/bookticker_core12_1h_top_of_book_state.parquet",
+  "artifact_hash": "F7B89420695B939944F4CFB192BE793E4BB952E6E5AC71B82B004F7C9E19E12A",
+  "repeat_artifact_hash": "F7B89420695B939944F4CFB192BE793E4BB952E6E5AC71B82B004F7C9E19E12A",
+  "reproducible": true,
+  "content_sha256": "368ACE1C86D2A4166214CE2B20AF421AEB4503C0C315A49497E03302ECF4352C",
+  "source_files": 592,
+  "source_files_sha256": "DD13D951F16A98F719AD351C68F182415DAFD5E4111A5210E1CF649D07394457",
+  "rows": 14208,
+  "requested_symbols": 12,
+  "observed_symbols": 11,
+  "missing_symbols": ["SUIUSDT"],
+  "first_timestamp": "2024-01-01T00:00:00+00:00",
+  "last_timestamp": "2024-02-29T23:00:00+00:00",
+  "coordinate_coverage_ratio": 0.8222222222222222,
+  "complete_symbol_month_groups": 17,
+  "requested_symbol_month_groups": 24,
+  "coverage_gaps": [
+    "LTCUSDT missing 2024-01-24",
+    "SOLUSDT missing 2024-01-07 and 2024-02-22 through 2024-02-29",
+    "BTCUSDT and ETHUSDT absent in 2024-02 small-first dataset",
+    "SUIUSDT absent in both source datasets",
+    "no coverage after 2024-02-29"
+  ],
+  "source_columns": [
+    "bookticker_n", "best_bid_mean", "best_ask_mean", "bid_qty_mean", "ask_qty_mean",
+    "best_bid_last", "best_ask_last", "bid_qty_last", "ask_qty_last", "spread_bps_mean",
+    "spread_bps_max", "quote_imbalance_mean"
+  ],
+  "derived_fields": [
+    "top_of_book_quote_notional_mean", "top_of_book_liquidity_state", "depth_liquidity_state"
+  ],
+  "observable_time_rule": "hour_bucket_start_plus_1h",
+  "maturity_rule": "hour_bucket_close_equals_observable_time",
+  "pit_rule": "usable_time_lte_decision_time",
+  "depth_semantics": "TOP_OF_BOOK_BBO_ONLY_NOT_MULTI_LEVEL_DEPTH",
+  "field_role_registry": "config/crypto_nextgen_dark_observation_source_roles_v1.json",
+  "feedback_permission": "NONE_NO_REWARD_GENERATOR_MEMORY_PROMOTION",
+  "performance_values_read": false,
+  "forward_performance_read": false,
+  "search_started": false,
+  "candidate_selection_performed": false,
+  "liquidation_source_found_on_pc1": false,
+  "pc1_parquet_schemas_scanned": 2431,
+  "pc1_liquidation_or_force_order_files_found": 0
+}

@@ -4,7 +4,7 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "2EFFB08A37CF4CC0933A2FED70B5F7F50F833B5E58DBB7EACFB45E7DE599ED36",
+      "registry_sha256": "3D506C56A75546A985A05AA143B7B73CAE8E797756C1B96D553977B021E517DE",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 35,
@@ -177327,7 +177327,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "B3E31CC8ADF0AE77AD4921F935F63EC365612450CCFC2C78F8B8241FDB3E014B",
+      "last_verified_sha": "E939E1C7AC6988B5EC57E52CC528A4BBBD86113BE95BB115408263CD06D8DBCB",
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
       "weight": 1.0
     },
@@ -177385,6 +177385,7 @@
       "implementation_path": [
         "alphafactory_crypto/nextgen_fabric.py",
         "config/crypto_nextgen_dark_fabric_v1.json",
+        "config/crypto_nextgen_dark_observation_source_roles_v1.json",
         "scripts/crypto_nextgen_dark_materialize.py"
       ],
       "entrypoint": "materialize_states / crypto_nextgen_dark_materialize.run",
@@ -177394,10 +177395,11 @@
       "feedback_permission": "NONE_NO_REWARD_GENERATOR_MEMORY_PROMOTION",
       "artifact_test": [
         "tests/test_nextgen_fabric.py",
-        "runtime/nextgen_dark_20260711/feature_state_materialization_manifest.json"
+        "runtime/nextgen_dark_20260711/feature_state_materialization_manifest.json",
+        "runtime/nextgen_dark_20260711/pc1_bookticker_top_of_book_manifest.json"
       ],
-      "last_verified_sha": "A3374CBB9E7CD1AE07EB80BEDD4A01426EAB9608215D0237540747526DDFEE89",
-      "blocker": "liquidation_notional and depth_notional_10bps have no approved A7INPUT0-v2 source; no proxy substituted",
+      "last_verified_sha": "BC14D1C0930DAD6DCFF0FC6D650C9FFB663396EF8C25BC2391F9947508A7EBA6",
+      "blocker": "PC1 has no liquidation/force-order source; top-of-book liquidity is scoped-qualified for 2024-01/02 only and is not multi-level depth",
       "weight": 1.0
     },
     {

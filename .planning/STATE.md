@@ -1,6 +1,6 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `2EFFB08A37CF4CC0933A2FED70B5F7F50F833B5E58DBB7EACFB45E7DE599ED36`.
+Registry SHA256: `3D506C56A75546A985A05AA143B7B73CAE8E797756C1B96D553977B021E517DE`.
 
 ## Formal Status
 
@@ -84,7 +84,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## NEXTGEN-DARK Closure
 
-- `ND.1` Development-only Feature/State materialization: `PARTIAL_LIQUIDATION_AND_DEPTH_NO_APPROVED_SOURCE`
+- `ND.1` Development-only Feature/State materialization: `PARTIAL_LIQUIDATION_NO_SOURCE_TOP_OF_BOOK_LIQUIDITY_SCOPED_QUALIFIED`
 - `ND.2` Typed Temporal/Event Program: `IMPLEMENTED`
 - `ND.3` Isolated hypothesis lanes: `IMPLEMENTED_NOT_EXECUTED`
 - `ND.4` Anti-collapse admission: `IMPLEMENTED_QUOTA_TESTS_ONLY`
@@ -133,4 +133,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-NEXTGEN-DARK is closed as PARTIALLY_READY because liquidation and depth have no approved observable source. The fixed-budget development-only CANARY plan is not authorized and not started. HOLD_RESEARCH, FORMAL_SEARCH_FROZEN, PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.
+NEXTGEN-DARK remains PARTIALLY_READY because PC1 contains no liquidation/force-order source. PC1 top-of-book liquidity is scoped-qualified for Binance UM bookTicker only over its observed 2024-01/02 subset and is not multi-level depth. The fixed-budget development-only CANARY plan is not authorized and not started. HOLD_RESEARCH, FORMAL_SEARCH_FROZEN, PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN, and SEALED_NO_NEW_FORWARD_READ remain in force.
