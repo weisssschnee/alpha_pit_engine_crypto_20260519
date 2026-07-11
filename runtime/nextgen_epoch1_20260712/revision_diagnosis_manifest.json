@@ -1,0 +1,8 @@
+{
+  "bbo_old_admissions": 32,
+  "bbo_replay_admissions": 128,
+  "epoch0_history_rewritten": false,
+  "matrix_rows": 8,
+  "new_evaluation_block_read": false,
+  "status": "SEARCH_ENGINE_REVISION_DIAGNOSIS_COMPLETE"
+}

@@ -1,0 +1,9 @@
+failure_axis,affected_rows,evidence
+proposal_quality,1685,non-positive IC LCB
+admission_quota_waste,1936,BBO Epoch-0 FAMILY_BUDGET_CAP rejections
+identity_dedup_timing,103,main stratified sketch-to-full identity slot loss
+scalar_survivor_misalignment,1798,scalar discovery without positive net LCB
+cost_turnover,995,positive gross flipped non-positive after cost
+stability_worst_block,1754,less than half positive development blocks
+benchmark_increment,1772,non-positive benchmark incremental LCB
+adaptive_proxy_basin,1,UCT top mechanism/primitive concentration 66.58%/63.93%

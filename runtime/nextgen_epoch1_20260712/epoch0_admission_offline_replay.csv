@@ -1,0 +1,10 @@
+panel_id,lane_id,historical_epoch0_admissions,offline_replay_admissions,requested,identity_scope,identity_capacity,legal_family_count,dynamic_family_cap,mechanical_waste_eliminated,history_rewritten
+bbo_micro,bbo_typed_temporal,32,128,128,EPOCH0_EXISTING_SKETCH_IDENTITY_OFFLINE_REPLAY,1968,1.0,128.0,True,False
+main,cem,112,112,112,EPOCH0_EXISTING_ADMISSION_RECORD_NO_REEVALUATION,112,,,True,False
+main,evolutionary,112,112,112,EPOCH0_EXISTING_ADMISSION_RECORD_NO_REEVALUATION,112,,,True,False
+main,llm_proposal_repair,112,112,112,EPOCH0_EXISTING_ADMISSION_RECORD_NO_REEVALUATION,112,,,True,False
+main,orthogonal_exile,112,112,112,EPOCH0_EXISTING_ADMISSION_RECORD_NO_REEVALUATION,112,,,True,False
+main,surrogate,112,112,112,EPOCH0_EXISTING_ADMISSION_RECORD_NO_REEVALUATION,112,,,True,False
+main,typed_ast,112,112,112,EPOCH0_EXISTING_ADMISSION_RECORD_NO_REEVALUATION,112,,,True,False
+main,typed_random_fresh,112,112,112,EPOCH0_EXISTING_ADMISSION_RECORD_NO_REEVALUATION,112,,,True,False
+main,uct_mcts,112,112,112,EPOCH0_EXISTING_ADMISSION_RECORD_NO_REEVALUATION,112,,,True,False

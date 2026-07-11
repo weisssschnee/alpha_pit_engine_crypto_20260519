@@ -1,0 +1,75 @@
+{
+  "contract_id": "CRYPTO-NEXTGEN-SEARCH-EPOCH-1-V1",
+  "authorization_status": "SEARCH_ENGINE_REVISION_AND_FROZEN_EPOCH1_AUTHORIZED",
+  "data_access": "TRAIN_DEVELOPMENT_ONLY",
+  "budget_range": {"proposals": [32768, 65536], "strict_per_arm": [1536, 2048]},
+  "throughput_smoke": {"proposals_per_lane": 12, "reads_performance": false, "maximum_projected_seconds": 5400},
+  "panels": {
+    "main": {"universe": "BINANCE_UM_CORE12", "interval": "2024", "comparison_domain": "MAIN_ONLY"},
+    "bbo_micro": {"universe": "BINANCE_UM_BOOKTICKER_CORE11_OBSERVED", "interval": "2024-01/02", "coverage_ratio": 0.8222222222222222, "comparison_domain": "BBO_MICRO_ONLY", "depth_semantics": "TOP_OF_BOOK_BBO_ONLY_NOT_MULTI_LEVEL_DEPTH"}
+  },
+  "main_lanes": [
+    "typed_random", "typed_ast", "cem", "cem_matched_control", "uct_mcts", "uct_matched_control",
+    "evolutionary", "evolutionary_matched_control", "surrogate", "surrogate_matched_control",
+    "llm_proposal_repair", "orthogonal_exile"
+  ],
+  "bbo_lanes": ["bbo_typed_temporal"],
+  "matched_controls": {
+    "cem": "cem_matched_control",
+    "uct_mcts": "uct_matched_control",
+    "evolutionary": "evolutionary_matched_control",
+    "surrogate": "surrogate_matched_control"
+  },
+  "adaptive_contract": {
+    "feedback_queries_per_seed": 256,
+    "feedback_vector": ["net_lcb", "worst_block", "positive_block_fraction", "turnover", "cost_drag", "benchmark_increment_lcb", "concentration"],
+    "matched_budget_required": true,
+    "memory_scope": "LANE_AND_SEED_LOCAL_RUNTIME_ONLY",
+    "persist_elite_policy_value": false
+  },
+  "admission_contract": {
+    "full_identity_before_strict_assignment": true,
+    "refinement_pool_multiplier": 2,
+    "quota_feasibility_check": true,
+    "one_exact_identity_one_vote": true,
+    "dynamic_family_cap": true,
+    "parent_cap": true,
+    "behaviour_cap": true,
+    "natural_underfill_without_relaxation": true,
+    "equal_budget_global_top_k": true
+  },
+  "objective_contract": {
+    "hard_gates_first": true,
+    "pareto_archive": true,
+    "limited_scalar": true,
+    "novelty_cannot_compensate_negative_net_or_instability": true,
+    "scalar_priority": ["net_lcb", "worst_block", "benchmark_increment_lcb", "stability_lcb", "turnover", "cost_drag", "concentration"],
+    "full_vector_retained": true
+  },
+  "survivor_contract": {
+    "hard_gate_pass": true,
+    "ic_lcb_positive": true,
+    "net_lcb_positive": true,
+    "benchmark_increment_lcb_positive": true,
+    "worst_horizon_net_mean_min": -0.001
+  },
+  "adaptive_success_contract": {
+    "survivor_or_near_miss_gain_required": true,
+    "cluster_yield_floor_ratio": 0.9,
+    "top_concentration_max_degradation": 0.05,
+    "runtime_ratio_max": 2.0,
+    "benchmark_increment_not_worse": true,
+    "failure_label": "ADAPTIVE_FAILURE_NO_SURVIVOR_GAIN"
+  },
+  "capability_matrix": {
+    "liquidation": "DISABLED_NO_APPROVED_SOURCE",
+    "force_order": "DISABLED_NO_APPROVED_SOURCE",
+    "multi_level_depth": "DISABLED_NO_APPROVED_SOURCE",
+    "bbo": "SCOPED_CORE11_2024_01_02_ONLY"
+  },
+  "prohibited": [
+    "validation_test_recent_may_stress_forward_read", "midrun_configuration_change",
+    "additional_budget_or_seed", "reward_or_admission_change", "a7mem_update",
+    "cross_epoch_memory", "candidate_promotion", "cross_panel_ranking", "alpha_ready_or_oos_claim"
+  ]
+}
