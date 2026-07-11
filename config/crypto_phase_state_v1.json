@@ -1,11 +1,11 @@
 {
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
-  "research_status": "RESEARCH_MODE_CONTROLLED_FROZEN_EPOCH_PREPARATION",
-  "current_phase": "FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN",
+  "research_status": "RESEARCH_MODE_EPOCH1_FAILED_CLOSED",
+  "current_phase": "FROZEN_DEVELOPMENT_EPOCH1_FAILED",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
-  "active_stage": "EPOCH1_DESIGN_FROZEN_READY_FOR_SINGLE_EXECUTION",
+  "active_stage": "EPOCH1_FAILED_CLOSED_AWAITING_SEARCH_ENGINE_REVISION_AUTHORIZATION",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "formal_search_status": "FORMAL_SEARCH_FROZEN",
@@ -188,7 +188,7 @@
     "forward_read": false
   },
   "nextgen_epoch1": {
-    "status": "FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN",
+    "status": "FROZEN_DEVELOPMENT_EPOCH1_FAILED",
     "accepted_epoch0_subject_sha": "46616450b1477d54eb45e47a42a8ed0541ce6cb7",
     "revision_subject_sha": "da030b362977af6106a39a2584fc7fdc203d4139",
     "failure_matrix": "runtime/nextgen_epoch1_20260712/epoch0_failure_attribution_matrix.csv",
@@ -204,11 +204,19 @@
     "planned_stratified_strict_evaluations": 1536,
     "planned_global_top_k_strict_evaluations": 1536,
     "design_frozen": true,
-    "performance_started": false,
-    "execution_status": "NOT_STARTED",
+    "performance_started": true,
+    "execution_status": "FAILED_BEFORE_STRICT_EVALUATION",
+    "attempts": 1,
+    "proposal_rows_generated_in_memory": 32768,
+    "strict_evaluations_persisted": 0,
+    "failure_artifact": "runtime/nextgen_epoch1_20260712/epoch1_failure.json",
+    "closure_manifest": "runtime/nextgen_epoch1_20260712/epoch1_closure_manifest.json",
+    "failure_type": "EMPTY_FULL_IDENTITY_CAPACITY_NOT_HANDLED_AS_NATURAL_UNDERFILL",
+    "recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
+    "rerun_performed": false,
     "candidate_promotion": false,
     "cross_epoch_memory": false,
     "forward_read": false
   },
-  "next_acceptance_gate": "Execute the frozen Epoch-1 design exactly once, validate all frozen hashes, budgets, full-identity votes and prohibited flags, then perform one closure control-plane synchronization. No rerun or online change is authorized."
+  "next_acceptance_gate": "Independently authorize a post-failure search-engine revision. Before any new freeze, add and test deterministic empty-capacity natural-underfill handling in admit_full_identity. Do not reuse the failed frozen manifest, rerun Epoch-1, open OOS/forward, promote candidates, or persist adaptive memory without new authorization."
 }

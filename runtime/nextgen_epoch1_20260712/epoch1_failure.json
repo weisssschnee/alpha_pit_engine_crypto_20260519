@@ -1,0 +1,9 @@
+{
+  "action": "run",
+  "status": "FAILED_VISIBLE_NOT_DELETED",
+  "error_type": "KeyError",
+  "error": "'mechanism_id'",
+  "repo_sha": "776e43261a5960203b5c2d07be6c6e837e600573",
+  "forward_read": false,
+  "candidate_promotion": false
+}

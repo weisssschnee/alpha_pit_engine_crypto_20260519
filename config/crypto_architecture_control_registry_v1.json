@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "0218F04F2F834D8CA1CE9745FB25DD4FD43EBC848FCCC7DCF6390C35BAE50D52"
+      "last_verified_sha": "26477CDF057FB522741675FEE9D8BFB8923E4C5F05A0530C5C13F9EEDBEB2A85"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -937,7 +937,7 @@
         "runtime/nextgen_epoch1_20260712/epoch0_admission_offline_replay.csv",
         "runtime/nextgen_epoch1_20260712/revision_diagnosis_manifest.json"
       ],
-      "blocker": "none; revision is closed and superseded by the frozen Epoch-1 design",
+      "blocker": "empty full-identity capacity was not handled as deterministic natural underfill; post-failure revision requires new authorization",
       "last_verified_sha": "2C9AEDBFCDC4361E79C2D4BE3E08FD5AFB38257849FD1758995C91252C9006A2"
     },
     {
@@ -964,7 +964,7 @@
     {
       "id": "epoch1_execution",
       "label": "CRYPTO NEXTGEN SEARCH EPOCH-1 execution",
-      "status": "PLANNED",
+      "status": "PARTIAL",
       "implementation_path": [
         "scripts/crypto_nextgen_epoch1.py"
       ],
@@ -974,10 +974,13 @@
       "data_role": "controlled development-only search evidence",
       "feedback_permission": "CURRENT_RUNTIME_ONLY_NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
       "artifact_test": [
-        "tests/test_nextgen_epoch1.py"
+        "tests/test_nextgen_epoch1.py",
+        "runtime/nextgen_epoch1_20260712/epoch1_failure.json",
+        "runtime/nextgen_epoch1_20260712/epoch1_closure_manifest.json",
+        "runtime/nextgen_epoch1_20260712/epoch1_closure_test_output.txt"
       ],
-      "blocker": "frozen design ready; execution not started",
-      "last_verified_sha": "674D5B1D503C28271DE8927AA50941B71FD203C9425D6757483E563011913417"
+      "blocker": "single execution failed before strict evaluation because empty identity capacity raised KeyError instead of natural underfill; no rerun authorized",
+      "last_verified_sha": "EAAC50FA4C32B50F8D8F39E9D4907A2D1D5F893BF561BFDBD7FB709A856BB60B"
     }
   ],
   "edges": [

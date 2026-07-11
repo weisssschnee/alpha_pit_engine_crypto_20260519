@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `B1B3D537FBFC5E9F68EDF5562BB6C0ADDC74A616BFC47EF628D86CFE4568F4E3`.
+Registry SHA256: `AA58D8A212AC9A148B98612CA6A0D13E2AF91858D1C5925DEDACE6DC56EA4569`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
-- `RESEARCH_MODE_CONTROLLED_FROZEN_EPOCH_PREPARATION`
-- Current phase: `FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN`
+- `RESEARCH_MODE_EPOCH1_FAILED_CLOSED`
+- Current phase: `FROZEN_DEVELOPMENT_EPOCH1_FAILED`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,7 +16,7 @@ Registry SHA256: `B1B3D537FBFC5E9F68EDF5562BB6C0ADDC74A616BFC47EF628D86CFE4568F4
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `EPOCH1_DESIGN_FROZEN_READY_FOR_SINGLE_EXECUTION`
+- Active stage: `EPOCH1_FAILED_CLOSED_AWAITING_SEARCH_ENGINE_REVISION_AUTHORIZATION`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -133,11 +133,14 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## CRYPTO NEXTGEN SEARCH EPOCH-1
 
-- Status: `FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN`
+- Status: `FROZEN_DEVELOPMENT_EPOCH1_FAILED`
 - Accepted Epoch-0 subject: `46616450b1477d54eb45e47a42a8ed0541ce6cb7`
 - Revision subject: `da030b362977af6106a39a2584fc7fdc203d4139`
 - BBO offline replay: `32` -> `128`; history rewritten `False`
-- Design frozen / performance started / execution: `True` / `False` / `NOT_STARTED`
+- Design frozen / performance started / execution: `True` / `True` / `FAILED_BEFORE_STRICT_EVALUATION`
+- Attempts / persisted strict evaluations / rerun: `1` / `0` / `False`
+- Failure: `EMPTY_FULL_IDENTITY_CAPACITY_NOT_HANDLED_AS_NATURAL_UNDERFILL`
+- Recommendation: `REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH`
 - Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
 
 ## NEXTGEN-DARK Allowed
@@ -180,4 +183,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Execute the frozen Epoch-1 design exactly once, validate all frozen hashes, budgets, full-identity votes and prohibited flags, then perform one closure control-plane synchronization. No rerun or online change is authorized.
+Independently authorize a post-failure search-engine revision. Before any new freeze, add and test deterministic empty-capacity natural-underfill handling in admit_full_identity. Do not reuse the failed frozen manifest, rerun Epoch-1, open OOS/forward, promote candidates, or persist adaptive memory without new authorization.

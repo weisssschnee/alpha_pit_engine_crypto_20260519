@@ -54,6 +54,12 @@ EPOCH0_RUN_MANIFEST_PATH = EPOCH0_ROOT / "epoch0_run_manifest.json"
 EPOCH0_CLOSURE_VALIDATION_PATH = EPOCH0_ROOT / "epoch0_closure_validation.json"
 EPOCH0_COMPARATIVE_REPORT_PATH = EPOCH0_ROOT / "EPOCH0_COMPARATIVE_DECISION_REPORT.md"
 EPOCH0_FAILURE_PATH = EPOCH0_ROOT / "epoch0_failure.json"
+EPOCH1_ROOT = REPO / "runtime" / "nextgen_epoch1_20260712"
+EPOCH1_SMOKE_PATH = EPOCH1_ROOT / "epoch1_throughput_smoke.json"
+EPOCH1_FROZEN_MANIFEST_PATH = EPOCH1_ROOT / "epoch1_frozen_design_manifest.json"
+EPOCH1_FAILURE_PATH = EPOCH1_ROOT / "epoch1_failure.json"
+EPOCH1_CLOSURE_MANIFEST_PATH = EPOCH1_ROOT / "epoch1_closure_manifest.json"
+EPOCH1_ARTIFACT_INDEX_PATH = EPOCH1_ROOT / "epoch1_artifact_index.csv"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -397,6 +403,7 @@ Generated from registry SHA256: `{digest}`.
 - Funding capacity expanded to 120 exact identities in typed funding slices, so the earlier 27-identity CANARY ceiling was a grammar/generator limitation. However all lanes produced zero complete development survivors, BBO stratified admission was mechanically capped at 32/128, and UCT concentrated into one reward basin. The validated recommendation is `REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH`, not hypothesis-space expansion or rotating challenge authorization.
 - Epoch-1 revision attributes the Epoch-0 failure across hard gates, net LCB, benchmark increment, stability, turnover, identity capacity and reward-basin concentration. The offline replay restores BBO admission from 32 to 128 using existing sketch identities without rewriting Epoch-0 or reading a new block.
 - Epoch-1 implements full-identity-first feasible admission, positive-net-LCB-aligned hard gates and limited scalarization, equal-root matched controls, adaptive failure rules, UCT exploration/crowding controls, gated CEM elites, Pareto-aware surrogate targets and explicit evolutionary/repair lineage. `{state['nextgen_epoch1']['status']}`; design frozen `{state['nextgen_epoch1']['design_frozen']}`; performance started `{state['nextgen_epoch1']['performance_started']}`.
+- The sole frozen Epoch-1 attempt failed before strict evaluation: an empty post-dedup identity set raised `KeyError: mechanism_id` instead of becoming a zero-capacity natural underfill. The failure remains visible; no rerun or post-freeze contract change occurred, so no Epoch-1 performance conclusion is available.
 - Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
 - `{state['formal_search_status']}`, `{state['adaptive_cross_epoch_memory_status']}`, `{state['candidate_promotion_status']}`, and `{state['forward_data_status']}` remain frozen.
 
@@ -522,6 +529,9 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Revision subject: `{state['nextgen_epoch1']['revision_subject_sha']}`
 - BBO offline replay: `{state['nextgen_epoch1']['bbo_replay_old_admissions']}` -> `{state['nextgen_epoch1']['bbo_replay_feasible_admissions']}`; history rewritten `{state['nextgen_epoch1']['history_rewritten']}`
 - Design frozen / performance started / execution: `{state['nextgen_epoch1']['design_frozen']}` / `{state['nextgen_epoch1']['performance_started']}` / `{state['nextgen_epoch1']['execution_status']}`
+- Attempts / persisted strict evaluations / rerun: `{state['nextgen_epoch1']['attempts']}` / `{state['nextgen_epoch1']['strict_evaluations_persisted']}` / `{state['nextgen_epoch1']['rerun_performed']}`
+- Failure: `{state['nextgen_epoch1']['failure_type']}`
+- Recommendation: `{state['nextgen_epoch1']['recommendation']}`
 - Forward read / promotion / cross-epoch memory: `{state['nextgen_epoch1']['forward_read']}` / `{state['nextgen_epoch1']['candidate_promotion']}` / `{state['nextgen_epoch1']['cross_epoch_memory']}`
 
 ## NEXTGEN-DARK Allowed
@@ -584,6 +594,7 @@ def artifact_paths(registry: dict[str, Any]) -> set[Path]:
         EPOCH0_CLOSURE_VALIDATION_PATH,
         EPOCH0_COMPARATIVE_REPORT_PATH,
         EPOCH0_FAILURE_PATH,
+        EPOCH1_ARTIFACT_INDEX_PATH,
     }
     for node in registry["nodes"]:
         paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
@@ -649,6 +660,22 @@ def epoch0_artifact_paths(registry: dict[str, Any]) -> set[Path]:
         run = load_json(EPOCH0_RUN_MANIFEST_PATH)
         paths.update(REPO / item["path"] for item in run.get("outputs", []))
     paths.discard(EPOCH0_ARTIFACT_INDEX_PATH)
+    return paths
+
+
+def epoch1_artifact_paths(registry: dict[str, Any]) -> set[Path]:
+    node_ids = {"epoch1_search_revision", "epoch1_frozen_design", "epoch1_execution"}
+    paths = {
+        REGISTRY_PATH, STATE_SOURCE_PATH, DECISION_LOG_PATH, CURRENT_ARCH_PATH, BOUNDARY_PATH,
+        EVOLUTION_PATH, GRAPH_PATH, STATE_PATH, RUN_MANIFEST_PATH, EPOCH1_SMOKE_PATH,
+        EPOCH1_FROZEN_MANIFEST_PATH, EPOCH1_FAILURE_PATH, EPOCH1_CLOSURE_MANIFEST_PATH,
+        REPO / "scripts" / "crypto_architecture_control_plane.py",
+        REPO / "tests" / "test_architecture_control_plane.py",
+    }
+    for node in registry["nodes"]:
+        if node["id"] in node_ids:
+            paths.update(REPO / raw for raw in [*node["implementation_path"], *node["artifact_test"]])
+    paths.discard(EPOCH1_ARTIFACT_INDEX_PATH)
     return paths
 
 
@@ -724,6 +751,7 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "epoch1_design_frozen": state["nextgen_epoch1"]["design_frozen"],
         "epoch1_performance_started": state["nextgen_epoch1"]["performance_started"],
         "epoch1_execution_status": state["nextgen_epoch1"]["execution_status"],
+        "epoch1_recommendation": state["nextgen_epoch1"].get("recommendation"),
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -887,6 +915,9 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "epoch1_design_frozen": state["nextgen_epoch1"]["design_frozen"],
         "epoch1_performance_started": state["nextgen_epoch1"]["performance_started"],
         "epoch1_execution_status": state["nextgen_epoch1"]["execution_status"],
+        "epoch1_closure_manifest": relative(EPOCH1_CLOSURE_MANIFEST_PATH),
+        "epoch1_artifact_index": relative(EPOCH1_ARTIFACT_INDEX_PATH),
+        "epoch1_recommendation": state["nextgen_epoch1"].get("recommendation"),
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []
@@ -923,6 +954,16 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         writer = csv.DictWriter(handle, fieldnames=["path", "exists", "sha256", "role"])
         writer.writeheader()
         writer.writerows(epoch0_rows)
+    epoch1_rows = []
+    for path in sorted(epoch1_artifact_paths(registry), key=lambda item: str(item)):
+        epoch1_rows.append({
+            "path": relative(path), "exists": str(path.exists()),
+            "sha256": sha256_file(path) if path.is_file() else "", "role": "epoch1_failed_closure",
+        })
+    with EPOCH1_ARTIFACT_INDEX_PATH.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["path", "exists", "sha256", "role"])
+        writer.writeheader()
+        writer.writerows(epoch1_rows)
     paths = artifact_paths(registry)
     rows = []
     for path in sorted(paths, key=lambda p: str(p)):
@@ -1240,6 +1281,28 @@ def validate_outputs(registry: dict[str, Any]) -> None:
         path = REPO / row["path"]
         if row["exists"] != str(path.exists()) or row["sha256"] != (sha256_file(path) if path.is_file() else ""):
             raise ValueError(f"Epoch-0 artifact index hash drift: {row['path']}")
+    epoch1_closure = load_json(EPOCH1_CLOSURE_MANIFEST_PATH)
+    epoch1_failure = load_json(EPOCH1_FAILURE_PATH)
+    prohibited_epoch1 = [
+        "candidate_promotion", "a7mem_updated", "cross_epoch_memory", "online_contract_changed",
+        "additional_budget", "seed_changed", "reward_changed", "admission_changed_after_freeze", "oos_claim",
+    ]
+    if epoch1_closure.get("decision") != "FROZEN_DEVELOPMENT_EPOCH1_FAILED" or any(epoch1_closure.get(flag) for flag in prohibited_epoch1):
+        raise ValueError("Epoch-1 failed closure decision mismatch or prohibited activity")
+    if epoch1_closure.get("attempts") != 1 or epoch1_closure.get("rerun_performed") or epoch1_closure.get("strict_evaluations_persisted") != 0:
+        raise ValueError("Epoch-1 failed execution counts or rerun record mismatch")
+    if epoch1_failure.get("status") != "FAILED_VISIBLE_NOT_DELETED" or epoch1_failure.get("error_type") != "KeyError":
+        raise ValueError("Epoch-1 visible failure evidence mismatch")
+    if manifest.get("epoch1_closure_manifest") != relative(EPOCH1_CLOSURE_MANIFEST_PATH) or manifest.get("epoch1_recommendation") != epoch1_closure["recommendation"]:
+        raise ValueError("Phase A/B0 manifest Epoch-1 closure mismatch")
+    with EPOCH1_ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
+        epoch1_index_rows = list(csv.DictReader(handle))
+    if {row["path"] for row in epoch1_index_rows} != {relative(path) for path in epoch1_artifact_paths(registry)}:
+        raise ValueError("Epoch-1 artifact index paths do not match failed-closure scope")
+    for row in epoch1_index_rows:
+        path = REPO / row["path"]
+        if row["exists"] != str(path.exists()) or row["sha256"] != (sha256_file(path) if path.is_file() else ""):
+            raise ValueError(f"Epoch-1 artifact index hash drift: {row['path']}")
 
 
 def build() -> None:

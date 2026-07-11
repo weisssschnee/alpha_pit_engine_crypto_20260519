@@ -4,14 +4,14 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "B1B3D537FBFC5E9F68EDF5562BB6C0ADDC74A616BFC47EF628D86CFE4568F4E3",
+      "registry_sha256": "AA58D8A212AC9A148B98612CA6A0D13E2AF91858D1C5925DEDACE6DC56EA4569",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 46,
       "control_edge_count": 89,
-      "phase_status": "FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN",
+      "phase_status": "FROZEN_DEVELOPMENT_EPOCH1_FAILED",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "EPOCH1_DESIGN_FROZEN_READY_FOR_SINGLE_EXECUTION",
+      "active_stage": "EPOCH1_FAILED_CLOSED_AWAITING_SEARCH_ENGINE_REVISION_AUTHORIZATION",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
@@ -30,11 +30,12 @@
       "epoch0_execution_status": "COMPLETED",
       "epoch0_total_development_strict_evaluations": 1801,
       "epoch0_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
-      "epoch1_status": "FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN",
+      "epoch1_status": "FROZEN_DEVELOPMENT_EPOCH1_FAILED",
       "epoch1_design_frozen": true,
-      "epoch1_performance_started": false,
-      "epoch1_execution_status": "NOT_STARTED",
-      "research_status": "RESEARCH_MODE_CONTROLLED_FROZEN_EPOCH_PREPARATION",
+      "epoch1_performance_started": true,
+      "epoch1_execution_status": "FAILED_BEFORE_STRICT_EVALUATION",
+      "epoch1_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
+      "research_status": "RESEARCH_MODE_EPOCH1_FAILED_CLOSED",
       "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
       "forward_data_status": "SEALED_NO_NEW_FORWARD_READ"
     }
@@ -177341,7 +177342,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "0218F04F2F834D8CA1CE9745FB25DD4FD43EBC848FCCC7DCF6390C35BAE50D52",
+      "last_verified_sha": "26477CDF057FB522741675FEE9D8BFB8923E4C5F05A0530C5C13F9EEDBEB2A85",
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
       "weight": 1.0
     },
@@ -177804,7 +177805,7 @@
         "runtime/nextgen_epoch1_20260712/revision_diagnosis_manifest.json"
       ],
       "last_verified_sha": "2C9AEDBFCDC4361E79C2D4BE3E08FD5AFB38257849FD1758995C91252C9006A2",
-      "blocker": "none; revision is closed and superseded by the frozen Epoch-1 design",
+      "blocker": "empty full-identity capacity was not handled as deterministic natural underfill; post-failure revision requires new authorization",
       "weight": 1.0
     },
     {
@@ -177840,7 +177841,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
-      "status": "PLANNED",
+      "status": "PARTIAL",
       "implementation_path": [
         "scripts/crypto_nextgen_epoch1.py"
       ],
@@ -177850,10 +177851,13 @@
       "data_role": "controlled development-only search evidence",
       "feedback_permission": "CURRENT_RUNTIME_ONLY_NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
       "artifact_test": [
-        "tests/test_nextgen_epoch1.py"
+        "tests/test_nextgen_epoch1.py",
+        "runtime/nextgen_epoch1_20260712/epoch1_failure.json",
+        "runtime/nextgen_epoch1_20260712/epoch1_closure_manifest.json",
+        "runtime/nextgen_epoch1_20260712/epoch1_closure_test_output.txt"
       ],
-      "last_verified_sha": "674D5B1D503C28271DE8927AA50941B71FD203C9425D6757483E563011913417",
-      "blocker": "frozen design ready; execution not started",
+      "last_verified_sha": "EAAC50FA4C32B50F8D8F39E9D4907A2D1D5F893BF561BFDBD7FB709A856BB60B",
+      "blocker": "single execution failed before strict evaluation because empty identity capacity raised KeyError instead of natural underfill; no rerun authorized",
       "weight": 1.0
     }
   ],
