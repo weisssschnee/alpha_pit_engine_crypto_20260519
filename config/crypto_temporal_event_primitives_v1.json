@@ -1,0 +1,26 @@
+{
+  "contract_id": "CRYPTO-TEMPORAL-EVENT-PRIMITIVES-V1",
+  "time_semantics": {
+    "event_time": "time the underlying phenomenon occurs",
+    "observable_time": "first time the research system can know the record",
+    "maturity_time": "time the value, window, or cashflow semantics are complete",
+    "usable_time": "max(observable_time, maturity_time)"
+  },
+  "pit_rule": "primitive output at decision time may depend only on records with usable_time <= decision_time",
+  "canonicalization": [
+    "normalize durations to integer nanoseconds",
+    "sort named parameters",
+    "Lag(x,0) becomes Identity(x)",
+    "nested Lag periods add",
+    "past windows are left-closed/right-open with no decision-bar input"
+  ],
+  "equivalence": "same canonical primitive, source identity, event identity policy, observable policy, maturity rule, and tolerance",
+  "primitives": [
+    {"primitive_id":"identity","kind":"static","input_role":"approved non-blocked","maturity_rule":"source maturity","feedback_permission":"NONE"},
+    {"primitive_id":"lag","kind":"temporal","input_role":"approved non-blocked","maturity_rule":"source maturity plus lag","feedback_permission":"NONE"},
+    {"primitive_id":"past_window","kind":"temporal","input_role":"approved non-blocked","maturity_rule":"window closes before decision time","feedback_permission":"NONE"},
+    {"primitive_id":"event_observed","kind":"event","input_role":"state-only or condition-only","maturity_rule":"event usable time","feedback_permission":"NO_REWARD_B0"},
+    {"primitive_id":"event_age","kind":"event","input_role":"state-only or condition-only","maturity_rule":"most recent usable event","feedback_permission":"NO_REWARD_B0"},
+    {"primitive_id":"matured_event_value","kind":"event","input_role":"state-only or condition-only","maturity_rule":"cashflow/value maturity and observability","feedback_permission":"NO_REWARD_B0"}
+  ]
+}

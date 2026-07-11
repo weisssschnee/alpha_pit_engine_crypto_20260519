@@ -1,0 +1,7 @@
+primitive_id,kind,input_role,maturity_rule,feedback_permission
+identity,static,approved non-blocked,source maturity,NONE
+lag,temporal,approved non-blocked,source maturity plus lag,NONE
+past_window,temporal,approved non-blocked,window closes before decision time,NONE
+event_observed,event,state-only or condition-only,event usable time,NO_REWARD_B0
+event_age,event,state-only or condition-only,most recent usable event,NO_REWARD_B0
+matured_event_value,event,state-only or condition-only,cashflow/value maturity and observability,NO_REWARD_B0

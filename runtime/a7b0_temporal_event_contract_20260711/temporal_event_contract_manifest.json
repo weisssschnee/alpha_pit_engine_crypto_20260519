@@ -1,0 +1,9 @@
+{
+  "decision": "PASS_B0_TEMPORAL_EVENT_PRIMITIVE_CONTRACT",
+  "primitive_count": 6,
+  "pit_rule": "primitive output at decision time may depend only on records with usable_time <= decision_time",
+  "usable_time_rule": "max(observable_time, maturity_time)",
+  "state_event_reward_allowed_b0": false,
+  "search_started": false,
+  "forward_performance_read": false
+}

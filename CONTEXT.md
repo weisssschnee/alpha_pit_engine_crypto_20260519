@@ -59,3 +59,11 @@ _Avoid_: Semantic pair, motif, accepted family
 **Benchmark Definition**:
 A versioned comparison contract using benchmark-only inputs; its observations are report-only and cannot create candidate or memory credit.
 _Avoid_: Candidate, positive prior, promotion threshold
+
+**Usable Time**:
+The later of observable time and maturity time; a temporal or event value cannot influence a decision before this timestamp.
+_Avoid_: Event time, row timestamp, publication date alone
+
+**Temporal Equivalence**:
+Equality of canonical primitive, source identity, event identity policy, observable policy, maturity rule, and tolerance; metric similarity is not temporal equivalence.
+_Avoid_: Correlation, similar backtest, same motif

@@ -36,7 +36,7 @@
     {"id":"B0.4","name":"BZ authority contract","status":"IMPLEMENTED"},
     {"id":"B0.5","name":"Layered identity registry","status":"IMPLEMENTED"},
     {"id":"B0.6","name":"Benchmark registry","status":"IMPLEMENTED"},
-    {"id":"B0.7","name":"Temporal/event primitive contract","status":"PLANNED"},
+    {"id":"B0.7","name":"Temporal/event primitive contract","status":"IMPLEMENTED"},
     {"id":"B0.8","name":"Feature/State Fabric schema and cache contract","status":"PLANNED"}
   ],
   "next_acceptance_gate": "All B0.1-B0.8 contracts, registries, tests, graph nodes, STATE, decision log, run manifest, and artifact index are synchronized; then stop before B1."

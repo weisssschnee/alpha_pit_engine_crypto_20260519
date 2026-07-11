@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `29F07E9AB3F77675961F53B37DCCEFB48B2B0D1462FFF2FD0D97AA1D36E17792`.
+Generated from registry SHA256: `98AB2C162E8F356A20F5B19FCC03EBEAFCFC62330F004A43F12EECB8D88909F7`.
 
 ## Current Evolution
 
@@ -26,3 +26,4 @@ Generated from registry SHA256: `29F07E9AB3F77675961F53B37DCCEFB48B2B0D1462FFF2F
 - `EVALRESET-20260711-010` — `B0_4_BZ_AUTHORITY_IMPLEMENTED`: BZ uniquely means Benchmark Zero, accepts benchmark-only inputs, expects zero alpha, and has no promotion, reward, scheduler, or memory permission.
 - `EVALRESET-20260711-011` — `B0_5_LAYERED_IDENTITY_REGISTRY_IMPLEMENTED`: Syntax, canonical, exact signal, activation, PnL/regime, and economic hypothesis layers are contracted; current release establishes only the first three and leaves upper layers unresolved.
 - `EVALRESET-20260711-012` — `B0_6_BENCHMARK_REGISTRY_IMPLEMENTED`: Versioned benchmark definitions accept benchmark-only inputs; B0 executes no benchmarks and all future observations are report-only with no positive-memory permission.
+- `EVALRESET-20260711-013` — `B0_7_TEMPORAL_EVENT_CONTRACT_IMPLEMENTED`: PIT, event time, observable time, maturity, usable time, canonicalization, and equivalence are contracted; State/event outputs remain forbidden from reward until B1.

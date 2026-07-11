@@ -4,11 +4,11 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "29F07E9AB3F77675961F53B37DCCEFB48B2B0D1462FFF2FD0D97AA1D36E17792",
+      "registry_sha256": "98AB2C162E8F356A20F5B19FCC03EBEAFCFC62330F004A43F12EECB8D88909F7",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 26,
-      "control_edge_count": 22
+      "control_edge_count": 23
     }
   },
   "nodes": [
@@ -177212,16 +177212,25 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
-      "status": "PLANNED",
-      "implementation_path": [],
-      "entrypoint": "planned",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/temporal_contracts.py",
+        "config/crypto_temporal_event_primitives_v1.json",
+        "scripts/crypto_b0_temporal_event_contract.py"
+      ],
+      "entrypoint": "TemporalObservation / canonicalize_primitive / temporal_equivalent",
       "input": "observable event streams",
       "output": "PIT temporal primitives",
       "data_role": "temporal semantics",
       "feedback_permission": "NO_REWARD_B0",
-      "artifact_test": [],
-      "last_verified_sha": "53DCEC71204C1790DD7EDC180AB6BE3C2AB79E4CE84450DC6143E37D9B228758",
-      "blocker": "B0.7 pending",
+      "artifact_test": [
+        "tests/test_temporal_contracts.py",
+        "runtime/a7b0_temporal_event_contract_20260711/temporal_event_primitive_registry.csv",
+        "runtime/a7b0_temporal_event_contract_20260711/temporal_event_contract_manifest.json",
+        "reports/CRYPTO_B0_TEMPORAL_EVENT_PRIMITIVE_CONTRACT_20260711.md"
+      ],
+      "last_verified_sha": "8755ED21F49B04334B7F3E272518197884082F91853A30324D4284A1B595E5DF",
+      "blocker": "primitive execution and State/event reward coupling remain frozen until B1",
       "weight": 1.0
     },
     {
@@ -490633,9 +490642,9 @@
     {
       "edge_id": "control_edge_010",
       "source": "control_funding_event_detector",
-      "target": "control_feature_state_fabric",
-      "relationship": "PLANNED",
-      "label": "B0 contract input only",
+      "target": "control_temporal_event_contract",
+      "relationship": "ALLOWED",
+      "label": "native event timing contract",
       "forbidden": false,
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -490644,6 +490653,18 @@
     },
     {
       "edge_id": "control_edge_011",
+      "source": "control_temporal_event_contract",
+      "target": "control_feature_state_fabric",
+      "relationship": "PLANNED",
+      "label": "contracted B0 input only",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_012",
       "source": "control_bz",
       "target": "control_benchmark_registry",
       "relationship": "ALLOWED",
@@ -490655,7 +490676,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_012",
+      "edge_id": "control_edge_013",
       "source": "control_spent_evaluation",
       "target": "control_proxy",
       "relationship": "REPORT_ONLY",
@@ -490667,7 +490688,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_013",
+      "edge_id": "control_edge_014",
       "source": "control_spent_evaluation",
       "target": "control_strict_reward",
       "relationship": "REPORT_ONLY",
@@ -490679,7 +490700,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_014",
+      "edge_id": "control_edge_015",
       "source": "control_spent_evaluation",
       "target": "control_admission",
       "relationship": "FORBIDDEN",
@@ -490691,7 +490712,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_015",
+      "edge_id": "control_edge_016",
       "source": "control_spent_evaluation",
       "target": "control_generation_lanes",
       "relationship": "FORBIDDEN",
@@ -490703,7 +490724,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_016",
+      "edge_id": "control_edge_017",
       "source": "control_spent_evaluation",
       "target": "control_a7mem",
       "relationship": "FORBIDDEN",
@@ -490715,7 +490736,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_017",
+      "edge_id": "control_edge_018",
       "source": "control_sealed_forward",
       "target": "control_scheduler",
       "relationship": "FORBIDDEN",
@@ -490727,7 +490748,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_018",
+      "edge_id": "control_edge_019",
       "source": "control_benchmark_registry",
       "target": "control_a7mem",
       "relationship": "FORBIDDEN",
@@ -490739,7 +490760,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_019",
+      "edge_id": "control_edge_020",
       "source": "control_feature_state_fabric",
       "target": "control_strict_reward",
       "relationship": "FORBIDDEN",
@@ -490751,7 +490772,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_020",
+      "edge_id": "control_edge_021",
       "source": "control_a7input0",
       "target": "control_generation_lanes",
       "relationship": "FORBIDDEN",
@@ -490763,7 +490784,7 @@
       "weight": 1.0
     },
     {
-      "edge_id": "control_edge_021",
+      "edge_id": "control_edge_022",
       "source": "control_bz",
       "target": "control_admission",
       "relationship": "FORBIDDEN",
@@ -490776,5 +490797,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "65eab7f564530f1e69638c03efaf1c45fac354bd"
+  "built_at_commit": "05d36d76cd40113c98a5ec41940a9a24bb056115"
 }

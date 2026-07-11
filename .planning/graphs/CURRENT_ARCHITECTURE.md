@@ -1,6 +1,6 @@
 # Current Architecture
 
-Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `29F07E9AB3F77675961F53B37DCCEFB48B2B0D1462FFF2FD0D97AA1D36E17792`.
+Generated from `config/crypto_architecture_control_registry_v1.json`. Registry SHA256: `98AB2C162E8F356A20F5B19FCC03EBEAFCFC62330F004A43F12EECB8D88909F7`.
 
 Status: `PHASE_A_GOVERNANCE_ACCEPTED` / `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED` / `HOLD_RESEARCH`.
 
@@ -34,7 +34,7 @@ flowchart TD
   control_sealed_forward["Sealed forward data\nFROZEN"]
   control_future_wrong_lag["Future wrong-lag control\nIMPLEMENTED"]
   control_bz["BZ / Benchmark Zero\nIMPLEMENTED"]
-  control_temporal_event_contract["Temporal/event primitive contract\nPLANNED"]
+  control_temporal_event_contract["Temporal/event primitive contract\nIMPLEMENTED"]
   control_feature_state_fabric["Feature/State Fabric\nPLANNED"]
   control_data_release --> control_time_block_roles
   control_time_block_roles --> control_field_ontology
@@ -46,7 +46,8 @@ flowchart TD
   control_identity_registry --> control_admission
   control_evaluation_access_ledger --> control_proxy
   control_evaluation_access_ledger --> control_strict_reward
-  control_funding_event_detector --> control_feature_state_fabric
+  control_funding_event_detector --> control_temporal_event_contract
+  control_temporal_event_contract --> control_feature_state_fabric
   control_bz --> control_benchmark_registry
   control_spent_evaluation --> control_proxy
   control_spent_evaluation --> control_strict_reward
@@ -88,7 +89,7 @@ flowchart TD
 | Sealed forward data | FROZEN | config/crypto_evaluation_access_policy_v1.json | unknown epoch default | unseen epoch -> SEALED_FORWARD | sealed evaluation | NO_READ_B0 | tests/test_evaluation_access.py | 57B23A06C28A64F230C39B82D39E4631B7D195898B686E27B869233EDB728FBC | requires explicit future authorization |
 | Future wrong-lag control | IMPLEMENTED | alphafactory_crypto/negative_controls.py; config/crypto_future_wrong_lag_control_v1.json; scripts/crypto_b0_future_wrong_lag_audit.py; scripts/crypto_a7reward1_portfolio_reward_model.py | future_wrong_lag / audit_future_wrong_lag | signal and future shifts -> negative-control metrics | leakage control | AUDIT_ONLY_B0 | tests/test_future_wrong_lag.py; runtime/a7b0_future_wrong_lag_control_20260711/future_wrong_lag_audit_summary.json; reports/CRYPTO_B0_FUTURE_WRONG_LAG_CONTROL_20260711.md | 8C10045585A87B577A001D07341FA1B8E06F9C14B5AA681471B760B1D54D4347 | production execution frozen during HOLD_RESEARCH |
 | BZ / Benchmark Zero | IMPLEMENTED | alphafactory_crypto/bz.py; config/crypto_bz_benchmark_zero_v1.json; scripts/crypto_b0_bz_authority.py | create_benchmark_zero | benchmark-only fields -> zero-alpha diagnostic benchmark object | benchmark sanity only | NONE | tests/test_bz.py; runtime/a7b0_bz_authority_20260711/bz_authority_manifest.json; reports/CRYPTO_B0_BZ_BENCHMARK_ZERO_20260711.md | 1AFC8220B1F63A01959E16049E43D7D0324AA4CE00F246BC669679CEA59B093D | legacy undefined BZ mentions require explicit migration |
-| Temporal/event primitive contract | PLANNED | planned | planned | observable event streams -> PIT temporal primitives | temporal semantics | NO_REWARD_B0 | planned | 53DCEC71204C1790DD7EDC180AB6BE3C2AB79E4CE84450DC6143E37D9B228758 | B0.7 pending |
+| Temporal/event primitive contract | IMPLEMENTED | alphafactory_crypto/temporal_contracts.py; config/crypto_temporal_event_primitives_v1.json; scripts/crypto_b0_temporal_event_contract.py | TemporalObservation / canonicalize_primitive / temporal_equivalent | observable event streams -> PIT temporal primitives | temporal semantics | NO_REWARD_B0 | tests/test_temporal_contracts.py; runtime/a7b0_temporal_event_contract_20260711/temporal_event_primitive_registry.csv; runtime/a7b0_temporal_event_contract_20260711/temporal_event_contract_manifest.json; reports/CRYPTO_B0_TEMPORAL_EVENT_PRIMITIVE_CONTRACT_20260711.md | 8755ED21F49B04334B7F3E272518197884082F91853A30324D4284A1B595E5DF | primitive execution and State/event reward coupling remain frozen until B1 |
 | Feature/State Fabric | PLANNED | planned | planned | approved observations and contracts -> deterministic feature/state cache | feature/state materialization | NO_REWARD_B0 | planned | 635836D46E1ECFCEC7CF9CC3B754E16325FDC5FCB52563261DA4DFA10B651A0B | B0.8 pending |
 
 ## Time Block Roles

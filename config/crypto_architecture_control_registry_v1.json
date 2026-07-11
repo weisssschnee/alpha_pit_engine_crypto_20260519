@@ -469,16 +469,25 @@
     {
       "id": "temporal_event_contract",
       "label": "Temporal/event primitive contract",
-      "status": "PLANNED",
-      "implementation_path": [],
-      "entrypoint": "planned",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/temporal_contracts.py",
+        "config/crypto_temporal_event_primitives_v1.json",
+        "scripts/crypto_b0_temporal_event_contract.py"
+      ],
+      "entrypoint": "TemporalObservation / canonicalize_primitive / temporal_equivalent",
       "input": "observable event streams",
       "output": "PIT temporal primitives",
       "data_role": "temporal semantics",
       "feedback_permission": "NO_REWARD_B0",
-      "artifact_test": [],
-      "blocker": "B0.7 pending",
-      "last_verified_sha": "53DCEC71204C1790DD7EDC180AB6BE3C2AB79E4CE84450DC6143E37D9B228758"
+      "artifact_test": [
+        "tests/test_temporal_contracts.py",
+        "runtime/a7b0_temporal_event_contract_20260711/temporal_event_primitive_registry.csv",
+        "runtime/a7b0_temporal_event_contract_20260711/temporal_event_contract_manifest.json",
+        "reports/CRYPTO_B0_TEMPORAL_EVENT_PRIMITIVE_CONTRACT_20260711.md"
+      ],
+      "blocker": "primitive execution and State/event reward coupling remain frozen until B1",
+      "last_verified_sha": "8755ED21F49B04334B7F3E272518197884082F91853A30324D4284A1B595E5DF"
     },
     {
       "id": "feature_state_fabric",
@@ -558,9 +567,15 @@
     },
     {
       "source": "funding_event_detector",
+      "target": "temporal_event_contract",
+      "kind": "ALLOWED",
+      "label": "native event timing contract"
+    },
+    {
+      "source": "temporal_event_contract",
       "target": "feature_state_fabric",
       "kind": "PLANNED",
-      "label": "B0 contract input only"
+      "label": "contracted B0 input only"
     },
     {
       "source": "bz",
