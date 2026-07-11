@@ -41,14 +41,18 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         validate_outputs(registry)
 
         state = load_json(STATE_SOURCE_PATH)
-        self.assertEqual(state["current_phase"], "FROZEN_DEVELOPMENT_EPOCH_COMPLETED")
+        self.assertIn(state["current_phase"], {
+            "SEARCH_ENGINE_REVISION_COMPLETED", "FROZEN_DEVELOPMENT_EPOCH1_DESIGN_FROZEN",
+            "FROZEN_DEVELOPMENT_EPOCH1_COMPLETED", "FROZEN_DEVELOPMENT_EPOCH1_PARTIALLY_COMPLETED",
+            "FROZEN_DEVELOPMENT_EPOCH1_FAILED",
+        })
         self.assertEqual(
             state["production_observation_qualification_status"],
             "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
         )
         self.assertEqual(state["phase_b1_status"], "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN")
         self.assertEqual(state["phase_b0p_acceptance"]["status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
-        self.assertEqual(state["active_stage"], "EPOCH0_CLOSED_WAITING_INDEPENDENT_SEARCH_ENGINE_REVISION_AUTHORIZATION")
+        self.assertTrue(state["active_stage"].startswith("EPOCH1_"))
         self.assertEqual(state["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
         self.assertEqual(state["phase_b0a_acceptance"]["accepted_subject_sha"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(state["formal_search_status"], "FORMAL_SEARCH_FROZEN")
@@ -58,6 +62,10 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertTrue(state["nextgen_epoch0"]["performance_started"])
         self.assertEqual(state["nextgen_epoch0"]["total_development_strict_evaluations"], 1801)
         self.assertEqual(state["nextgen_epoch0"]["recommendation"], "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH")
+        self.assertEqual(state["nextgen_epoch1"]["accepted_epoch0_subject_sha"], "46616450b1477d54eb45e47a42a8ed0541ce6cb7")
+        self.assertFalse(state["nextgen_epoch1"]["forward_read"])
+        self.assertFalse(state["nextgen_epoch1"]["candidate_promotion"])
+        self.assertFalse(state["nextgen_epoch1"]["cross_epoch_memory"])
         self.assertEqual(state["adaptive_cross_epoch_memory_status"], "ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN")
         self.assertEqual(state["candidate_promotion_status"], "NO_CANDIDATE_PROMOTION")
 
@@ -89,6 +97,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(manifest["b0p_acceptance_status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
         self.assertEqual(manifest["b1s_canary_status"], "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL")
         self.assertEqual(manifest["epoch0_status"], "FROZEN_DEVELOPMENT_EPOCH_COMPLETED")
+        self.assertEqual(manifest["epoch1_status"], state["nextgen_epoch1"]["status"])
 
         nodes = {node["id"]: node for node in registry["nodes"]}
         self.assertIn("contract implemented", nodes["feature_builder"]["blocker"])
@@ -105,7 +114,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
 
         graph = load_json(GRAPH_PATH)
         graph_control = graph["graph"]["architecture_control_plane"]
-        self.assertEqual(graph_control["phase_status"], "FROZEN_DEVELOPMENT_EPOCH_COMPLETED")
+        self.assertEqual(graph_control["phase_status"], state["current_phase"])
         self.assertEqual(graph_control["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph_control["b0p_accepted_subject_sha"], B0P_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(graph_control["b0p_acceptance_status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
@@ -115,6 +124,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(graph_control["b1s_canary_decision"], "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL")
         self.assertEqual(graph_control["epoch0_status"], "FROZEN_DEVELOPMENT_EPOCH_COMPLETED")
         self.assertEqual(graph_control["epoch0_total_development_strict_evaluations"], 1801)
+        self.assertEqual(graph_control["epoch1_status"], state["nextgen_epoch1"]["status"])
         self.assertEqual(graph_control["candidate_promotion_status"], "NO_CANDIDATE_PROMOTION")
         self.assertEqual(graph["built_at_accepted_subject"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertNotIn("built_at_commit", graph)

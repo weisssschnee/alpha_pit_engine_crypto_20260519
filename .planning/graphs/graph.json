@@ -4,14 +4,14 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "39ED8B73958330A44D42A06299FE0DD48D66E5E76F3C643DF1645CE067AC79AC",
+      "registry_sha256": "532ECCD3A9AB618A8EEACF4BA30A8010CEE8AFF32AF7185D8FD5F63AE67F3CD8",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
-      "control_node_count": 43,
-      "control_edge_count": 74,
-      "phase_status": "FROZEN_DEVELOPMENT_EPOCH_COMPLETED",
+      "control_node_count": 46,
+      "control_edge_count": 89,
+      "phase_status": "SEARCH_ENGINE_REVISION_COMPLETED",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "EPOCH0_CLOSED_WAITING_INDEPENDENT_SEARCH_ENGINE_REVISION_AUTHORIZATION",
+      "active_stage": "EPOCH1_REVISION_COMPLETE_CONTINUING_TO_DESIGN_FREEZE",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
@@ -30,7 +30,11 @@
       "epoch0_execution_status": "COMPLETED",
       "epoch0_total_development_strict_evaluations": 1801,
       "epoch0_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
-      "research_status": "RESEARCH_MODE_FROZEN_DEVELOPMENT_EPOCH_ONLY",
+      "epoch1_status": "SEARCH_ENGINE_REVISION_COMPLETED",
+      "epoch1_design_frozen": false,
+      "epoch1_performance_started": false,
+      "epoch1_execution_status": "NOT_STARTED",
+      "research_status": "RESEARCH_MODE_CONTROLLED_FROZEN_EPOCH_PREPARATION",
       "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
       "forward_data_status": "SEALED_NO_NEW_FORWARD_READ"
     }
@@ -177337,7 +177341,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "AEA897EAB3CAF2D14A9133D31BA230A6FFE564732A8DE076C484767C311E73B3",
+      "last_verified_sha": "0218F04F2F834D8CA1CE9745FB25DD4FD43EBC848FCCC7DCF6390C35BAE50D52",
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
       "weight": 1.0
     },
@@ -177640,7 +177644,7 @@
         "runtime/b1s_canary_20260711/B1S_CANARY_COMPACT_RESULT.md",
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
-      "last_verified_sha": "5FC9325FBB414A918762CA057A8F8F904162DB4141656A639D8A83F11D464095",
+      "last_verified_sha": "9312EA6C97DD2EEDDC4924B3EAB752874F81939FC44D4D73C54AD4901E0D646E",
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
       "weight": 1.0
     },
@@ -177772,6 +177776,82 @@
       ],
       "last_verified_sha": "75B139DA071697934D09786E496A3CDE4798280C94A426C3685071951ADBE969",
       "blocker": "zero development survivors; revise search engine, admission feasibility and reward scalar before another frozen development epoch",
+      "weight": 1.0
+    },
+    {
+      "id": "control_epoch1_search_revision",
+      "label": "Epoch-1 search/admission/reward revision",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/search_revision.py",
+        "config/crypto_nextgen_epoch1_v1.json",
+        "scripts/crypto_nextgen_epoch1.py"
+      ],
+      "entrypoint": "diagnose-replay / development_feedback / admit_full_identity",
+      "input": "immutable Epoch-0 artifacts and development-only observations",
+      "output": "failure attribution, offline admission replay, matched-control and survivor-aligned contracts",
+      "data_role": "development-only search-engine revision",
+      "feedback_permission": "OFFLINE_REPLAY_AND_CURRENT_EPOCH_RUNTIME_ONLY_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_search_revision.py",
+        "tests/test_nextgen_epoch1.py",
+        "runtime/nextgen_epoch1_20260712/epoch0_failure_attribution_matrix.csv",
+        "runtime/nextgen_epoch1_20260712/epoch0_admission_offline_replay.csv",
+        "runtime/nextgen_epoch1_20260712/revision_diagnosis_manifest.json"
+      ],
+      "last_verified_sha": "2C9AEDBFCDC4361E79C2D4BE3E08FD5AFB38257849FD1758995C91252C9006A2",
+      "blocker": "Epoch-1 design is not frozen and performance execution has not started",
+      "weight": 1.0
+    },
+    {
+      "id": "control_epoch1_frozen_design",
+      "label": "CRYPTO NEXTGEN SEARCH EPOCH-1 frozen design",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "PLANNED",
+      "implementation_path": [
+        "config/crypto_nextgen_epoch1_v1.json",
+        "scripts/crypto_nextgen_epoch1.py"
+      ],
+      "entrypoint": "crypto_nextgen_epoch1.py smoke / freeze",
+      "input": "committed revision, immutable data and contract hashes, fixed seeds and budgets",
+      "output": "hashed Epoch-1 design manifest",
+      "data_role": "frozen development-search epoch control",
+      "feedback_permission": "NO_PERFORMANCE_DURING_SMOKE_OR_FREEZE",
+      "artifact_test": [
+        "tests/test_nextgen_epoch1.py"
+      ],
+      "last_verified_sha": "9A95D52F4EB842418B32576E6ABB80F6BF2A05BCF7B9270180D4E4B988CB20F1",
+      "blocker": "throughput smoke and design freeze pending",
+      "weight": 1.0
+    },
+    {
+      "id": "control_epoch1_execution",
+      "label": "CRYPTO NEXTGEN SEARCH EPOCH-1 execution",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "PLANNED",
+      "implementation_path": [
+        "scripts/crypto_nextgen_epoch1.py"
+      ],
+      "entrypoint": "crypto_nextgen_epoch1.py run / check",
+      "input": "frozen Epoch-1 design and development-only observations",
+      "output": "strict evaluations, matched controls, Pareto archive, lineage and stopped decision",
+      "data_role": "controlled development-only search evidence",
+      "feedback_permission": "CURRENT_RUNTIME_ONLY_NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_nextgen_epoch1.py"
+      ],
+      "last_verified_sha": "674D5B1D503C28271DE8927AA50941B71FD203C9425D6757483E563011913417",
+      "blocker": "design not frozen; execution not started",
       "weight": 1.0
     }
   ],
@@ -491923,6 +492003,186 @@
       "target": "control_epoch0_execution",
       "relationship": "FORBIDDEN",
       "label": "forward remains sealed after completion",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_074",
+      "source": "control_epoch0_execution",
+      "target": "control_epoch1_search_revision",
+      "relationship": "ALLOWED",
+      "label": "immutable Epoch-0 artifacts support offline root-cause analysis only",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_075",
+      "source": "control_epoch1_search_revision",
+      "target": "control_epoch1_frozen_design",
+      "relationship": "ALLOWED",
+      "label": "committed revision may be frozen after a no-performance throughput smoke",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_076",
+      "source": "control_epoch1_frozen_design",
+      "target": "control_epoch1_execution",
+      "relationship": "ALLOWED",
+      "label": "one immutable development-only execution",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_077",
+      "source": "control_spent_evaluation",
+      "target": "control_epoch1_search_revision",
+      "relationship": "FORBIDDEN",
+      "label": "spent evaluation cannot tune revision contracts",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_078",
+      "source": "control_sealed_forward",
+      "target": "control_epoch1_search_revision",
+      "relationship": "FORBIDDEN",
+      "label": "sealed forward cannot enter revision or replay",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_079",
+      "source": "control_spent_evaluation",
+      "target": "control_epoch1_frozen_design",
+      "relationship": "FORBIDDEN",
+      "label": "validation/test/recent/May stress cannot enter Epoch-1",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_080",
+      "source": "control_sealed_forward",
+      "target": "control_epoch1_frozen_design",
+      "relationship": "FORBIDDEN",
+      "label": "sealed forward cannot enter Epoch-1",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_081",
+      "source": "control_epoch1_frozen_design",
+      "target": "control_a7mem",
+      "relationship": "FORBIDDEN",
+      "label": "no cross-epoch elite, policy, value or statistics",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_082",
+      "source": "control_epoch1_frozen_design",
+      "target": "control_admission",
+      "relationship": "FORBIDDEN",
+      "label": "Epoch-1 cannot promote candidates",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_083",
+      "source": "control_epoch1_frozen_design",
+      "target": "control_scheduler",
+      "relationship": "FORBIDDEN",
+      "label": "no online budget, reward, seed, grammar or admission changes",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_084",
+      "source": "control_epoch1_execution",
+      "target": "control_a7mem",
+      "relationship": "FORBIDDEN",
+      "label": "no adaptive policy or learned value persistence",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_085",
+      "source": "control_epoch1_execution",
+      "target": "control_admission",
+      "relationship": "FORBIDDEN",
+      "label": "Epoch-1 candidates cannot promote",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_086",
+      "source": "control_epoch1_execution",
+      "target": "control_scheduler",
+      "relationship": "FORBIDDEN",
+      "label": "no automatic rerun or next epoch",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_087",
+      "source": "control_spent_evaluation",
+      "target": "control_epoch1_execution",
+      "relationship": "FORBIDDEN",
+      "label": "spent evaluation cannot enter execution or recommendation",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_088",
+      "source": "control_sealed_forward",
+      "target": "control_epoch1_execution",
+      "relationship": "FORBIDDEN",
+      "label": "forward remains sealed during and after execution",
       "forbidden": true,
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,

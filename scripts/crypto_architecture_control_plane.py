@@ -88,6 +88,7 @@ REQUIRED_NODE_IDS = {
     "nextgen_mechanism_registry", "nextgen_search_engine", "development_multiobjective_reward",
     "epoch0_frozen_design",
     "epoch0_execution",
+    "epoch1_search_revision", "epoch1_frozen_design", "epoch1_execution",
 }
 REQUIRED_FORBIDDEN_EDGES = {
     ("spent_evaluation", "admission"),
@@ -127,6 +128,18 @@ REQUIRED_FORBIDDEN_EDGES = {
     ("epoch0_execution", "scheduler"),
     ("spent_evaluation", "epoch0_execution"),
     ("sealed_forward", "epoch0_execution"),
+    ("spent_evaluation", "epoch1_search_revision"),
+    ("sealed_forward", "epoch1_search_revision"),
+    ("spent_evaluation", "epoch1_frozen_design"),
+    ("sealed_forward", "epoch1_frozen_design"),
+    ("epoch1_frozen_design", "a7mem"),
+    ("epoch1_frozen_design", "admission"),
+    ("epoch1_frozen_design", "scheduler"),
+    ("epoch1_execution", "a7mem"),
+    ("epoch1_execution", "admission"),
+    ("epoch1_execution", "scheduler"),
+    ("spent_evaluation", "epoch1_execution"),
+    ("sealed_forward", "epoch1_execution"),
 }
 VALID_STATUSES = {"IMPLEMENTED", "PARTIAL", "PLANNED", "FROZEN", "DEPRECATED"}
 
@@ -310,7 +323,7 @@ def render_documents(
 
 Generated from `{relative(REGISTRY_PATH)}`. Registry SHA256: `{digest}`.
 
-Status: `{state['current_phase']}` / `{state['nextgen_epoch0']['status']}` / `{state['nextgen_dark_status']}` / `{state['canary_status']}` / `{state['production_observation_qualification_status']}` / `{state['formal_search_status']}` / `{state['adaptive_cross_epoch_memory_status']}` / `{state['candidate_promotion_status']}` / `{state['forward_data_status']}`.
+Status: `{state['current_phase']}` / `{state['nextgen_epoch1']['status']}` / `{state['nextgen_epoch0']['status']}` / `{state['nextgen_dark_status']}` / `{state['canary_status']}` / `{state['production_observation_qualification_status']}` / `{state['formal_search_status']}` / `{state['adaptive_cross_epoch_memory_status']}` / `{state['candidate_promotion_status']}` / `{state['forward_data_status']}`.
 
 Authority: `{relative(REGISTRY_PATH)}` is the machine-readable architecture authority; `graph.json` is its deterministic graph view; this file is the human-readable generated view. Raw graphify is unavailable, so `graph.json` retains the prior navigation graph plus a deterministic `control_*` overlay.
 
@@ -382,6 +395,8 @@ Generated from registry SHA256: `{digest}`.
 - Epoch-0 design is frozen at manifest `CD839D4F...`: 32768 proposals, seeds 2701/2709, 1024 stratified strict evaluations and 1024 equal-budget global-top-K controls. No Epoch-0 performance has been produced at the design-freeze node.
 - Epoch-0 then completed its single fixed execution: 32768 proposals and 1801 full-identity strict evaluations after deterministic dedup, with no rerun or budget extension. The original frozen checker incorrectly demanded exactly 1024 global rows despite the natural-underfill contract; its visible failure record is retained and an independent closure validator passed.
 - Funding capacity expanded to 120 exact identities in typed funding slices, so the earlier 27-identity CANARY ceiling was a grammar/generator limitation. However all lanes produced zero complete development survivors, BBO stratified admission was mechanically capped at 32/128, and UCT concentrated into one reward basin. The validated recommendation is `REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH`, not hypothesis-space expansion or rotating challenge authorization.
+- Epoch-1 revision attributes the Epoch-0 failure across hard gates, net LCB, benchmark increment, stability, turnover, identity capacity and reward-basin concentration. The offline replay restores BBO admission from 32 to 128 using existing sketch identities without rewriting Epoch-0 or reading a new block.
+- Epoch-1 implements full-identity-first feasible admission, positive-net-LCB-aligned hard gates and limited scalarization, equal-root matched controls, adaptive failure rules, UCT exploration/crowding controls, gated CEM elites, Pareto-aware surrogate targets and explicit evolutionary/repair lineage. `{state['nextgen_epoch1']['status']}`; design frozen `{state['nextgen_epoch1']['design_frozen']}`; performance started `{state['nextgen_epoch1']['performance_started']}`.
 - Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
 - `{state['formal_search_status']}`, `{state['adaptive_cross_epoch_memory_status']}`, `{state['candidate_promotion_status']}`, and `{state['forward_data_status']}` remain frozen.
 
@@ -499,6 +514,15 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Natural full-identity underfill / rerun required: `{state['nextgen_epoch0']['natural_full_identity_underfill']}` / `{state['nextgen_epoch0']['rerun_required']}`
 - Validated recommendation: `{state['nextgen_epoch0']['recommendation']}` — {state['nextgen_epoch0']['recommendation_basis']}
 - Forward read / promotion / cross-epoch memory: `{state['nextgen_epoch0']['forward_read']}` / `{state['nextgen_epoch0']['candidate_promotion']}` / `{state['nextgen_epoch0']['cross_epoch_memory']}`
+
+## CRYPTO NEXTGEN SEARCH EPOCH-1
+
+- Status: `{state['nextgen_epoch1']['status']}`
+- Accepted Epoch-0 subject: `{state['nextgen_epoch1']['accepted_epoch0_subject_sha']}`
+- Revision subject: `{state['nextgen_epoch1']['revision_subject_sha']}`
+- BBO offline replay: `{state['nextgen_epoch1']['bbo_replay_old_admissions']}` -> `{state['nextgen_epoch1']['bbo_replay_feasible_admissions']}`; history rewritten `{state['nextgen_epoch1']['history_rewritten']}`
+- Design frozen / performance started / execution: `{state['nextgen_epoch1']['design_frozen']}` / `{state['nextgen_epoch1']['performance_started']}` / `{state['nextgen_epoch1']['execution_status']}`
+- Forward read / promotion / cross-epoch memory: `{state['nextgen_epoch1']['forward_read']}` / `{state['nextgen_epoch1']['candidate_promotion']}` / `{state['nextgen_epoch1']['cross_epoch_memory']}`
 
 ## NEXTGEN-DARK Allowed
 
@@ -696,6 +720,10 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "epoch0_execution_status": state["nextgen_epoch0"].get("execution_status"),
         "epoch0_total_development_strict_evaluations": state["nextgen_epoch0"].get("total_development_strict_evaluations"),
         "epoch0_recommendation": state["nextgen_epoch0"].get("recommendation"),
+        "epoch1_status": state["nextgen_epoch1"]["status"],
+        "epoch1_design_frozen": state["nextgen_epoch1"]["design_frozen"],
+        "epoch1_performance_started": state["nextgen_epoch1"]["performance_started"],
+        "epoch1_execution_status": state["nextgen_epoch1"]["execution_status"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -855,6 +883,10 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "epoch0_closure_validation": relative(EPOCH0_CLOSURE_VALIDATION_PATH),
         "epoch0_total_development_strict_evaluations": state["nextgen_epoch0"].get("total_development_strict_evaluations"),
         "epoch0_recommendation": state["nextgen_epoch0"].get("recommendation"),
+        "epoch1_status": state["nextgen_epoch1"]["status"],
+        "epoch1_design_frozen": state["nextgen_epoch1"]["design_frozen"],
+        "epoch1_performance_started": state["nextgen_epoch1"]["performance_started"],
+        "epoch1_execution_status": state["nextgen_epoch1"]["execution_status"],
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []

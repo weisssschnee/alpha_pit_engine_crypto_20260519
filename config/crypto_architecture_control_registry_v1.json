@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "AEA897EAB3CAF2D14A9133D31BA230A6FFE564732A8DE076C484767C311E73B3"
+      "last_verified_sha": "0218F04F2F834D8CA1CE9745FB25DD4FD43EBC848FCCC7DCF6390C35BAE50D52"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "5FC9325FBB414A918762CA057A8F8F904162DB4141656A639D8A83F11D464095"
+      "last_verified_sha": "9312EA6C97DD2EEDDC4924B3EAB752874F81939FC44D4D73C54AD4901E0D646E"
     },
     {
       "id": "nextgen_mechanism_registry",
@@ -915,6 +915,67 @@
       ],
       "blocker": "zero development survivors; revise search engine, admission feasibility and reward scalar before another frozen development epoch",
       "last_verified_sha": "75B139DA071697934D09786E496A3CDE4798280C94A426C3685071951ADBE969"
+    },
+    {
+      "id": "epoch1_search_revision",
+      "label": "Epoch-1 search/admission/reward revision",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "alphafactory_crypto/search_revision.py",
+        "config/crypto_nextgen_epoch1_v1.json",
+        "scripts/crypto_nextgen_epoch1.py"
+      ],
+      "entrypoint": "diagnose-replay / development_feedback / admit_full_identity",
+      "input": "immutable Epoch-0 artifacts and development-only observations",
+      "output": "failure attribution, offline admission replay, matched-control and survivor-aligned contracts",
+      "data_role": "development-only search-engine revision",
+      "feedback_permission": "OFFLINE_REPLAY_AND_CURRENT_EPOCH_RUNTIME_ONLY_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_search_revision.py",
+        "tests/test_nextgen_epoch1.py",
+        "runtime/nextgen_epoch1_20260712/epoch0_failure_attribution_matrix.csv",
+        "runtime/nextgen_epoch1_20260712/epoch0_admission_offline_replay.csv",
+        "runtime/nextgen_epoch1_20260712/revision_diagnosis_manifest.json"
+      ],
+      "blocker": "Epoch-1 design is not frozen and performance execution has not started",
+      "last_verified_sha": "2C9AEDBFCDC4361E79C2D4BE3E08FD5AFB38257849FD1758995C91252C9006A2"
+    },
+    {
+      "id": "epoch1_frozen_design",
+      "label": "CRYPTO NEXTGEN SEARCH EPOCH-1 frozen design",
+      "status": "PLANNED",
+      "implementation_path": [
+        "config/crypto_nextgen_epoch1_v1.json",
+        "scripts/crypto_nextgen_epoch1.py"
+      ],
+      "entrypoint": "crypto_nextgen_epoch1.py smoke / freeze",
+      "input": "committed revision, immutable data and contract hashes, fixed seeds and budgets",
+      "output": "hashed Epoch-1 design manifest",
+      "data_role": "frozen development-search epoch control",
+      "feedback_permission": "NO_PERFORMANCE_DURING_SMOKE_OR_FREEZE",
+      "artifact_test": [
+        "tests/test_nextgen_epoch1.py"
+      ],
+      "blocker": "throughput smoke and design freeze pending",
+      "last_verified_sha": "9A95D52F4EB842418B32576E6ABB80F6BF2A05BCF7B9270180D4E4B988CB20F1"
+    },
+    {
+      "id": "epoch1_execution",
+      "label": "CRYPTO NEXTGEN SEARCH EPOCH-1 execution",
+      "status": "PLANNED",
+      "implementation_path": [
+        "scripts/crypto_nextgen_epoch1.py"
+      ],
+      "entrypoint": "crypto_nextgen_epoch1.py run / check",
+      "input": "frozen Epoch-1 design and development-only observations",
+      "output": "strict evaluations, matched controls, Pareto archive, lineage and stopped decision",
+      "data_role": "controlled development-only search evidence",
+      "feedback_permission": "CURRENT_RUNTIME_ONLY_NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_nextgen_epoch1.py"
+      ],
+      "blocker": "design not frozen; execution not started",
+      "last_verified_sha": "674D5B1D503C28271DE8927AA50941B71FD203C9425D6757483E563011913417"
     }
   ],
   "edges": [
@@ -1361,6 +1422,96 @@
       "target": "epoch0_execution",
       "kind": "FORBIDDEN",
       "label": "forward remains sealed after completion"
+    },
+    {
+      "source": "epoch0_execution",
+      "target": "epoch1_search_revision",
+      "kind": "ALLOWED",
+      "label": "immutable Epoch-0 artifacts support offline root-cause analysis only"
+    },
+    {
+      "source": "epoch1_search_revision",
+      "target": "epoch1_frozen_design",
+      "kind": "ALLOWED",
+      "label": "committed revision may be frozen after a no-performance throughput smoke"
+    },
+    {
+      "source": "epoch1_frozen_design",
+      "target": "epoch1_execution",
+      "kind": "ALLOWED",
+      "label": "one immutable development-only execution"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "epoch1_search_revision",
+      "kind": "FORBIDDEN",
+      "label": "spent evaluation cannot tune revision contracts"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "epoch1_search_revision",
+      "kind": "FORBIDDEN",
+      "label": "sealed forward cannot enter revision or replay"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "epoch1_frozen_design",
+      "kind": "FORBIDDEN",
+      "label": "validation/test/recent/May stress cannot enter Epoch-1"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "epoch1_frozen_design",
+      "kind": "FORBIDDEN",
+      "label": "sealed forward cannot enter Epoch-1"
+    },
+    {
+      "source": "epoch1_frozen_design",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "no cross-epoch elite, policy, value or statistics"
+    },
+    {
+      "source": "epoch1_frozen_design",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "Epoch-1 cannot promote candidates"
+    },
+    {
+      "source": "epoch1_frozen_design",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "no online budget, reward, seed, grammar or admission changes"
+    },
+    {
+      "source": "epoch1_execution",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "no adaptive policy or learned value persistence"
+    },
+    {
+      "source": "epoch1_execution",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "Epoch-1 candidates cannot promote"
+    },
+    {
+      "source": "epoch1_execution",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "no automatic rerun or next epoch"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "epoch1_execution",
+      "kind": "FORBIDDEN",
+      "label": "spent evaluation cannot enter execution or recommendation"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "epoch1_execution",
+      "kind": "FORBIDDEN",
+      "label": "forward remains sealed during and after execution"
     }
   ]
 }

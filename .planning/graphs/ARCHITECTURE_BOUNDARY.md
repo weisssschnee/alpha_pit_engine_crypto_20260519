@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `39ED8B73958330A44D42A06299FE0DD48D66E5E76F3C643DF1645CE067AC79AC`.
+Generated from registry SHA256: `532ECCD3A9AB618A8EEACF4BA30A8010CEE8AFF32AF7185D8FD5F63AE67F3CD8`.
 
 ## Authority
 
@@ -57,3 +57,15 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 | epoch0_execution | scheduler | no automatic rotating epoch or rerun |
 | spent_evaluation | epoch0_execution | spent evaluation cannot enter execution or recommendation |
 | sealed_forward | epoch0_execution | forward remains sealed after completion |
+| spent_evaluation | epoch1_search_revision | spent evaluation cannot tune revision contracts |
+| sealed_forward | epoch1_search_revision | sealed forward cannot enter revision or replay |
+| spent_evaluation | epoch1_frozen_design | validation/test/recent/May stress cannot enter Epoch-1 |
+| sealed_forward | epoch1_frozen_design | sealed forward cannot enter Epoch-1 |
+| epoch1_frozen_design | a7mem | no cross-epoch elite, policy, value or statistics |
+| epoch1_frozen_design | admission | Epoch-1 cannot promote candidates |
+| epoch1_frozen_design | scheduler | no online budget, reward, seed, grammar or admission changes |
+| epoch1_execution | a7mem | no adaptive policy or learned value persistence |
+| epoch1_execution | admission | Epoch-1 candidates cannot promote |
+| epoch1_execution | scheduler | no automatic rerun or next epoch |
+| spent_evaluation | epoch1_execution | spent evaluation cannot enter execution or recommendation |
+| sealed_forward | epoch1_execution | forward remains sealed during and after execution |
