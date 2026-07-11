@@ -19,7 +19,7 @@
     "liquidation_cluster": ["liquidation_notional"],
     "mark_index_deviation": ["mark_index_basis_bps"],
     "taker_imbalance_state": ["kline_taker_buy_quote_share"],
-    "depth_liquidity_state": ["depth_notional_10bps"],
+    "depth_liquidity_state": {"any_of": ["depth_notional_10bps", "top_of_book_quote_notional_mean"]},
     "liquidity_state": ["trade_quote_volume"],
     "volatility_state": ["trade_close"],
     "session_time_of_day": [],

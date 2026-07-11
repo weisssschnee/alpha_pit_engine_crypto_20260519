@@ -1,0 +1,25 @@
+{
+  "registry_id": "A7INPUT0-V2-NEXTGEN-DARK-OBSERVATION-SUPPLEMENT-V1",
+  "parent_registry": "A7INPUT0-V2",
+  "parent_registry_sha256": "C201B87CEBDF17AF3231B7DD8CB8A06B561572E58DAA670D5D82F71F95A7628D",
+  "scope": "BINANCE_UM_BOOKTICKER_TOP_OF_BOOK_2024_01_AND_2024_02_SCOPED_ONLY",
+  "fields": [
+    {"field_name":"bookticker_n","input_role":"state-only","semantics":"observed BBO update count in completed bucket"},
+    {"field_name":"best_bid_mean","input_role":"state-only","semantics":"mean best bid in completed bucket"},
+    {"field_name":"best_ask_mean","input_role":"state-only","semantics":"mean best ask in completed bucket"},
+    {"field_name":"bid_qty_mean","input_role":"state-only","semantics":"mean displayed best-bid quantity in completed bucket"},
+    {"field_name":"ask_qty_mean","input_role":"state-only","semantics":"mean displayed best-ask quantity in completed bucket"},
+    {"field_name":"spread_bps_mean","input_role":"state-only","semantics":"mean BBO spread in completed bucket"},
+    {"field_name":"spread_bps_max","input_role":"state-only","semantics":"maximum BBO spread in completed bucket"},
+    {"field_name":"quote_imbalance_mean","input_role":"state-only","semantics":"mean displayed BBO quantity imbalance in completed bucket"},
+    {"field_name":"top_of_book_quote_notional_mean","input_role":"state-only","semantics":"derived displayed BBO quote notional; not multi-level depth"}
+  ],
+  "observable_time_rule": "hour_bucket_start_plus_1h",
+  "maturity_rule": "hour_bucket_close_equals_observable_time",
+  "generator_enabled": false,
+  "reward_enabled": false,
+  "candidate_promotion_enabled": false,
+  "memory_enabled": false,
+  "scheduler_feedback_enabled": false,
+  "depth_claim": "TOP_OF_BOOK_BBO_ONLY_NOT_MULTI_LEVEL_DEPTH"
+}

@@ -17,7 +17,7 @@ STATE_INPUTS: dict[str, tuple[str, ...]] = {
     "liquidation_cluster": ("liquidation_notional",),
     "mark_index_deviation": ("mark_index_basis_bps",),
     "taker_imbalance_state": ("kline_taker_buy_quote_share",),
-    "depth_liquidity_state": ("depth_notional_10bps",),
+    "depth_liquidity_state": (),
     "liquidity_state": ("trade_quote_volume",),
     "volatility_state": ("trade_close",),
     "session_time_of_day": (),
@@ -26,6 +26,9 @@ STATE_INPUTS: dict[str, tuple[str, ...]] = {
 
 ALLOWED_INPUT_ROLES = {"primary", "interaction-only", "condition-only", "state-only", "benchmark-only"}
 NO_FEEDBACK = "NONE_NO_REWARD_GENERATOR_MEMORY_PROMOTION"
+STATE_INPUT_ALTERNATIVES: dict[str, tuple[tuple[str, ...], ...]] = {
+    "depth_liquidity_state": (("depth_notional_10bps",), ("top_of_book_quote_notional_mean",)),
+}
 
 
 @dataclass(frozen=True)
@@ -89,11 +92,22 @@ def materialize_states(
     available: list[StateAvailability] = []
     outputs = ordered[["symbol", "timestamp", "observable_time", "maturity_time"]].copy()
     for state_id, required in STATE_INPUTS.items():
-        unapproved = [f for f in required if field_roles.get(f) not in ALLOWED_INPUT_ROLES]
-        absent = [f for f in required if f not in ordered.columns]
-        missing = tuple(sorted(set(unapproved + absent)))
+        alternatives = STATE_INPUT_ALTERNATIVES.get(state_id, (required,))
+        valid_alternative = next(
+            (
+                fields for fields in alternatives
+                if all(field in ordered.columns and field_roles.get(field) in ALLOWED_INPUT_ROLES for field in fields)
+            ),
+            None,
+        )
+        missing = () if valid_alternative is not None else tuple(
+            sorted({field for fields in alternatives for field in fields})
+        )
+        required_for_record = valid_alternative if valid_alternative is not None else tuple(
+            field for fields in alternatives for field in fields
+        )
         status = "MATERIALIZED" if not missing else "UNAVAILABLE_NO_APPROVED_SOURCE"
-        available.append(StateAvailability(state_id, status, required, missing))
+        available.append(StateAvailability(state_id, status, tuple(required_for_record), missing))
         if missing:
             outputs[state_id] = np.nan
 
@@ -111,6 +125,13 @@ def materialize_states(
         outputs["taker_imbalance_state"] = 2.0 * ordered["kline_taker_buy_quote_share"] - 1.0
     if "trade_quote_volume" in ordered:
         outputs["liquidity_state"] = groups["trade_quote_volume"].transform(lambda s: _rolling_z(np.log1p(s.clip(lower=0))))
+    depth_source = next(
+        (field for field in ("depth_notional_10bps", "top_of_book_quote_notional_mean") if field in ordered), None
+    )
+    if depth_source:
+        outputs["depth_liquidity_state"] = groups[depth_source].transform(
+            lambda s: _rolling_z(np.log1p(s.clip(lower=0)))
+        )
     if "trade_close" in ordered:
         returns = groups["trade_close"].pct_change(fill_method=None)
         outputs["volatility_state"] = returns.groupby(ordered["symbol"], sort=False).transform(
@@ -139,4 +160,3 @@ def materialize_states(
         (_stable_frame_hash(outputs) + json.dumps(lineage, sort_keys=True, separators=(",", ":"))).encode()
     ).hexdigest().upper()
     return MaterializationResult(outputs, tuple(available), lineage, artifact_hash)
-
