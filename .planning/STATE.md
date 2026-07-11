@@ -24,9 +24,9 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 ## Phase B0 Remote Status
 
 - B0 completion SHA: `a0a36145ccd9666f5a137bee4b8414767aaa7ffd`
-- Last verified remote SHA: `32255ee986a9790889164e02ac4b8c168425c68d`
-- Sync status: `UNSYNCED_PUSH_RETRY_FAILED_NETWORK_2026_07_11`
-- Blocker: GitHub HTTPS connection reset or port 443 unavailable across three retries; cross-machine dependency, PR, and merge remain prohibited until exact ref verification succeeds.
+- Last verified remote SHA: `130c76d1abacc36761755b54d6fcf8efe58cd99f`
+- Sync status: `VERIFIED_REMOTE_CONTAINS_B0_COMPLETION_2026_07_11`
+- Blocker: None for branch transport; Phase B0 acceptance is still required and Phase B1 remains frozen.
 
 ## Phase B0 Items
 
