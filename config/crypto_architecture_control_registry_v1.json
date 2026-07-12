@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "1EBF077CE96B4264312F0E78752A9F5FC1395EAF814C5D6D47DD8A2077949E52"
+      "last_verified_sha": "C784378F6194CFD5D58D1D93612BB0DBCDDC6D55CA83FA5AD6D06C590BA13ADA"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "5438B86952E31A7F2954879A9D4C4719ADBD1D4B27849E7CEA6652821394059E"
+      "last_verified_sha": "AE618DB3F69056B22BEFDFA3219CE7DBB57FEA49002D107F275D31BD577E7A02"
     },
     {
       "id": "nextgen_mechanism_registry",
@@ -1142,10 +1142,11 @@
     {
       "id": "epoch2_execution",
       "label": "CRYPTO EPOCH-2 execution",
-      "status": "PLANNED",
+      "status": "PARTIAL",
       "implementation_path": [
         "config/crypto_epoch2_v1.json",
-        "scripts/crypto_epoch2.py"
+        "scripts/crypto_epoch2.py",
+        "scripts/crypto_epoch2_postprocess_repair.py"
       ],
       "entrypoint": "python scripts/crypto_epoch2.py run; python scripts/crypto_epoch2.py check",
       "input": "frozen 49152 proposals and three equal-budget admission policies",
@@ -1154,10 +1155,15 @@
       "feedback_permission": "NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
       "artifact_test": [
         "tests/test_epoch2.py",
-        "runtime/epoch2_20260712/epoch2_implementation_test_output.txt"
+        "tests/test_epoch2_postprocess_repair.py",
+        "runtime/epoch2_20260712/epoch2_implementation_test_output.txt",
+        "runtime/epoch2_20260712/proposal_pack.jsonl.gz",
+        "runtime/epoch2_20260712/admission_assignments.csv",
+        "runtime/epoch2_20260712/strict_evaluations.csv",
+        "runtime/epoch2_20260712/epoch2_failure.json"
       ],
-      "blocker": "single frozen development execution authorized but not started",
-      "last_verified_sha": "B6359AD33CF97F75522C25035BAAAA1E29415EC59B7470AEADC1E0F956E9682A"
+      "blocker": "49152 proposals and 2304 strict rows complete; report-only proposal_id schema recovery pending with zero new performance queries",
+      "last_verified_sha": "B79CE62528944B325AF0338D08F87EE1AB9249C57286FBEBDDFD04F532C53D7D"
     }
   ],
   "edges": [

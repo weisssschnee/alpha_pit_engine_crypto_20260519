@@ -1,0 +1,9 @@
+blocker_type,action_index,action,parameter,choice,visits,root_visit_share,mean_gate_directed_value,policy_persisted
+BENCHMARK_INCREMENT_ONLY,0,orthogonalize_benchmark,interaction,residual,60,1.0,0.22940228203382526,False
+COST_ONLY,0,reduce_turnover,window,24,281,0.18012820512820513,-1.2673784227723253,False
+COST_ONLY,1,reduce_turnover,window,48,573,0.36730769230769234,-1.2018883762005221,False
+COST_ONLY,2,reduce_turnover,window,72,4,0.002564102564102564,-4.621938701020223,False
+COST_ONLY,3,reduce_turnover,window,168,702,0.45,-1.1010779172427678,False
+NET_LCB_NEAR_ZERO,0,improve_net_lcb,interaction,none,1483,0.45007587253414266,-1.9914918483728283,False
+NET_LCB_NEAR_ZERO,1,improve_net_lcb,interaction,residual,329,0.09984825493171472,-2.302608987620727,False
+NET_LCB_NEAR_ZERO,2,improve_net_lcb,interaction,condition,1483,0.45007587253414266,-0.711615914134777,False

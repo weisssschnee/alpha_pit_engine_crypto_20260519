@@ -1,0 +1,8 @@
+{
+  "action": "run",
+  "status": "FAILED_VISIBLE_NOT_DELETED",
+  "error_type": "KeyError",
+  "error": "'proposal_id'",
+  "forward_read": false,
+  "candidate_promotion": false
+}
