@@ -2,10 +2,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 from pathlib import Path
 
 import pandas as pd
+
+REPO = Path(__file__).resolve().parents[1]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
 
 import scripts.crypto_epoch2 as epoch2
 from alphafactory_crypto.nextgen_epoch import effective_count
