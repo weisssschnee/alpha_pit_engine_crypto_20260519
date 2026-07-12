@@ -73,6 +73,9 @@ EPOCH1R_ARTIFACT_INDEX_PATH = EPOCH1R_ROOT / "epoch1r_artifact_index.csv"
 MECHANISM_DATA_ROOT = REPO / "runtime" / "mechanism_data_expansion0_20260712"
 MECHANISM_DATA_INVENTORY_MANIFEST_PATH = MECHANISM_DATA_ROOT / "inventory_completion_manifest.json"
 MECHANISM_DATA_INVENTORY_INDEX_PATH = MECHANISM_DATA_ROOT / "inventory_artifact_index.csv"
+NATIVE_AGGTRADES_RELEASE_ROOT = MECHANISM_DATA_ROOT / "native_aggtrades_release_v1"
+NATIVE_AGGTRADES_RELEASE_MANIFEST_PATH = NATIVE_AGGTRADES_RELEASE_ROOT / "release_manifest.json"
+NATIVE_AGGTRADES_RELEASE_INDEX_PATH = NATIVE_AGGTRADES_RELEASE_ROOT / "release_artifact_index.csv"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -112,6 +115,7 @@ REQUIRED_NODE_IDS = {
     "epoch2_survivor_calibration", "epoch2_blocker_taxonomy", "epoch2_blocker_directed_search",
     "epoch2_frozen_design", "epoch2_execution",
     "mechanism_data_inventory",
+    "native_aggtrades_release",
 }
 REQUIRED_FORBIDDEN_EDGES = {
     ("spent_evaluation", "admission"),
@@ -436,6 +440,7 @@ Generated from registry SHA256: `{digest}`.
 - Epoch-2 strict evidence is accepted, the historical Hybrid comparison is invalid, and blocker-directed repair is rejected. Epoch-2B read 6157 existing strict rows with zero new performance queries: 72/84 parents have no reliable gross edge, all 24 adaptive operator-blocker cells lack causal gate control, and main NET_LCB near-miss distance worsened despite count growth.
 - Epoch-2B selects `{state['epoch2b_audit']['main_recommendation']}` as the single main route. BBO full-2024 physically isolated acquisition remains a secondary engineering line with no winner selection.
 - MECHANISM/DATA EXPANSION-0 inventory scans `{state['mechanism_data_expansion0']['local_files']}` local and `{state['mechanism_data_expansion0']['pc1_files']}` PC1 file observations without row data, performance, or forward access. Cross-venue history, multi-level depth, forced-flow and options remain unavailable; full-year BBO remains under-covered. Binance UM native aggTrades is the first release-qualification candidate based on longitudinal source availability, not accepted identities or performance.
+- The first new release is `{state['mechanism_data_expansion0']['first_release_status']}`: `{state['mechanism_data_expansion0']['first_release_qualified_symbol_months']}/{state['mechanism_data_expansion0']['first_release_planned_symbol_months']}` core12 symbol-months over 2024-01..10, with physically isolated 2024-01..06 development and 2024-07..10 challenge directories. Development/challenge coverage is `{state['mechanism_data_expansion0']['first_release_development_coverage_ratio']}` / `{state['mechanism_data_expansion0']['first_release_challenge_coverage_ratio']}`; no interpolation or performance read occurred. The pre-performance horizons are frozen at 1h and 4h.
 - Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
 - `{state['formal_search_status']}`, `{state['adaptive_cross_epoch_memory_status']}`, `{state['candidate_promotion_status']}`, and `{state['forward_data_status']}` remain frozen.
 
@@ -471,6 +476,8 @@ Registry SHA256: `{digest}`.
 - Forward data: `{state['forward_data_status']}`
 - Mechanism/data inventory: `{state['mechanism_data_expansion0']['inventory_status']}`
 - First release-qualification candidate: `{state['mechanism_data_expansion0']['first_release_candidate']}`
+- First qualified release: `{state['mechanism_data_expansion0']['first_release_status']}`
+- Release content SHA256: `{state['mechanism_data_expansion0']['first_release_content_sha256']}`
 
 ## Remote Baseline
 
@@ -862,6 +869,8 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "epoch2b_new_performance_queries": state["epoch2b_audit"]["new_performance_queries"],
         "mechanism_data_inventory_status": state["mechanism_data_expansion0"]["inventory_status"],
         "mechanism_data_first_release_candidate": state["mechanism_data_expansion0"]["first_release_candidate"],
+        "mechanism_data_first_release_status": state["mechanism_data_expansion0"]["first_release_status"],
+        "mechanism_data_first_release_content_sha256": state["mechanism_data_expansion0"]["first_release_content_sha256"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -1054,6 +1063,10 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "mechanism_data_inventory_manifest": relative(MECHANISM_DATA_INVENTORY_MANIFEST_PATH),
         "mechanism_data_inventory_artifact_index": relative(MECHANISM_DATA_INVENTORY_INDEX_PATH),
         "mechanism_data_first_release_candidate": state["mechanism_data_expansion0"]["first_release_candidate"],
+        "mechanism_data_first_release_status": state["mechanism_data_expansion0"]["first_release_status"],
+        "native_aggtrades_release_manifest": relative(NATIVE_AGGTRADES_RELEASE_MANIFEST_PATH),
+        "native_aggtrades_release_artifact_index": relative(NATIVE_AGGTRADES_RELEASE_INDEX_PATH),
+        "native_aggtrades_release_content_sha256": state["mechanism_data_expansion0"]["first_release_content_sha256"],
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []

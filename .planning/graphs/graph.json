@@ -4,14 +4,14 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "6D5B9961801C892EEC673F4B789D11F280EC440F10BE142D08ED677014C43F6E",
+      "registry_sha256": "1B481B1F193C487CFF925E1F3302C6911773374430656E465D67AB006773FE81",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
-      "control_node_count": 55,
-      "control_edge_count": 117,
-      "phase_status": "MECHANISM_DATA_EXPANSION0_INVENTORY_COMPLETED",
+      "control_node_count": 56,
+      "control_edge_count": 124,
+      "phase_status": "MECHANISM_DATA_EXPANSION0_FIRST_RELEASE_QUALIFIED",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "NATIVE_AGGTRADES_RELEASE_QUALIFICATION_NO_PERFORMANCE",
+      "active_stage": "MECHANISM_BENCHMARK_CANARY_FROZEN_DESIGN_PENDING",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
@@ -54,6 +54,8 @@
       "epoch2b_new_performance_queries": 0,
       "mechanism_data_inventory_status": "DATA_MECHANISM_INVENTORY_COMPLETED",
       "mechanism_data_first_release_candidate": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_HISTORY",
+      "mechanism_data_first_release_status": "NATIVE_AGGTRADES_RELEASE_QUALIFIED_SCOPED",
+      "mechanism_data_first_release_content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
       "research_status": "ANALYSIS_AND_ENGINEERING_ALLOWED",
       "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
       "forward_data_status": "SEALED_NO_NEW_FORWARD_READ"
@@ -177361,7 +177363,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "FA351302D6506C6D4E717EDA62794AD613D70092141F3AAD167E0F8B7183B0DE",
+      "last_verified_sha": "AC10B0970A886F309227D5F8B8416F5C3EA82DA73866F660AB25E24C9A53B9F9",
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
       "weight": 1.0
     },
@@ -177664,7 +177666,7 @@
         "runtime/b1s_canary_20260711/B1S_CANARY_COMPACT_RESULT.md",
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
-      "last_verified_sha": "BA76B61D494037B03BB13B19D383E573BE5295DD8B7B2078C0B2A425703E226B",
+      "last_verified_sha": "697929695A40DC6BB66173CEA10AC5E0B2EC3AB21FDB828DBBAF2946C72C7392",
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
       "weight": 1.0
     },
@@ -178151,6 +178153,37 @@
       ],
       "last_verified_sha": "703F37A25625A93F20FD6002C39EE82EFB75ED3F57AEB1E13C54307CF092F7E4",
       "blocker": "cross-venue history, multi-level depth, forced-flow and options unavailable; full-year BBO under-covered; native aggTrades requires physical release qualification",
+      "weight": 1.0
+    },
+    {
+      "id": "control_native_aggtrades_release",
+      "label": "Native aggTrades scoped data release",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "config/crypto_native_aggtrades_release_v1.json",
+        "scripts/crypto_native_aggtrades_release.py"
+      ],
+      "entrypoint": "python scripts/crypto_native_aggtrades_release.py run|check",
+      "input": "Binance UM core12 hourly native aggTrades features plus official-checksum source lineage",
+      "output": "physically isolated 2024-01..06 development and 2024-07..10 challenge release with 117 qualified symbol-months",
+      "data_role": "new mechanism observation release; no labels or performance values",
+      "feedback_permission": "SIMPLE_FIXED_BENCHMARK_CANARY_ONLY_NO_GENERATOR_MEMORY_PROMOTION",
+      "artifact_test": [
+        "tests/test_native_aggtrades_release.py",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_manifest.json",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/coverage_ledger.csv",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/read_ledger.csv",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/cache_provenance.json",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/mechanism_horizon_contract.json",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_artifact_index.csv",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/NATIVE_AGGTRADES_RELEASE_REPORT.md"
+      ],
+      "last_verified_sha": "61176951C4FA3908187B59CE40224E6491AF397DA9A39489461EBFFEDCD4F951",
+      "blocker": "release is scoped rather than full-year; benchmark CANARY is not yet frozen or executed; three coordinates excluded for checksum-lineage gaps",
       "weight": 1.0
     }
   ],
@@ -492818,6 +492851,90 @@
       "target": "control_a7mem",
       "relationship": "FORBIDDEN",
       "label": "source availability and future benchmark results cannot update memory",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_117",
+      "source": "control_mechanism_data_inventory",
+      "target": "control_native_aggtrades_release",
+      "relationship": "ALLOWED",
+      "label": "longitudinal native aggTrades source enters deterministic no-performance qualification",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_118",
+      "source": "control_native_aggtrades_release",
+      "target": "control_benchmark_registry",
+      "relationship": "ALLOWED",
+      "label": "qualified physical release and frozen horizons allow only simple fixed benchmark CANARY",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_119",
+      "source": "control_sealed_forward",
+      "target": "control_native_aggtrades_release",
+      "relationship": "FORBIDDEN",
+      "label": "release qualification cannot read sealed forward blocks or forward performance",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_120",
+      "source": "control_spent_evaluation",
+      "target": "control_native_aggtrades_release",
+      "relationship": "FORBIDDEN",
+      "label": "spent historical evaluation cannot set release scope, fields, missing policy or horizons",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_121",
+      "source": "control_native_aggtrades_release",
+      "target": "control_generation_lanes",
+      "relationship": "FORBIDDEN",
+      "label": "qualified release fields remain outside generators during the mechanism benchmark",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_122",
+      "source": "control_native_aggtrades_release",
+      "target": "control_a7mem",
+      "relationship": "FORBIDDEN",
+      "label": "release and benchmark evidence cannot update positive or negative memory",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_123",
+      "source": "control_native_aggtrades_release",
+      "target": "control_admission",
+      "relationship": "FORBIDDEN",
+      "label": "release qualification cannot admit or promote candidates",
       "forbidden": true,
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,

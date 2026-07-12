@@ -2,10 +2,10 @@
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
   "research_status": "ANALYSIS_AND_ENGINEERING_ALLOWED",
-  "current_phase": "MECHANISM_DATA_EXPANSION0_INVENTORY_COMPLETED",
+  "current_phase": "MECHANISM_DATA_EXPANSION0_FIRST_RELEASE_QUALIFIED",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
-  "active_stage": "NATIVE_AGGTRADES_RELEASE_QUALIFICATION_NO_PERFORMANCE",
+  "active_stage": "MECHANISM_BENCHMARK_CANARY_FROZEN_DESIGN_PENDING",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "formal_search_status": "NEW_PERFORMANCE_SEARCH_FROZEN",
@@ -328,7 +328,21 @@
     "remote_task_id": "mechanism_inventory_20260712_1747",
     "remote_machine": "DESKTOP-7877972",
     "selection_used_accepted_identities": false,
-    "selection_used_performance": false
+    "selection_used_performance": false,
+    "first_release_status": "NATIVE_AGGTRADES_RELEASE_QUALIFIED_SCOPED",
+    "first_release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+    "first_release_content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+    "first_release_planned_symbol_months": 120,
+    "first_release_qualified_symbol_months": 117,
+    "first_release_coverage_ratio": 0.975,
+    "first_release_development_coverage_ratio": 0.9722222222222222,
+    "first_release_challenge_coverage_ratio": 0.9791666666666666,
+    "first_release_physical_split": true,
+    "first_release_reverse_order_invariant": true,
+    "first_release_horizons": ["1h", "4h"],
+    "first_release_performance_queries": 0,
+    "first_release_manifest": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_manifest.json",
+    "first_release_artifact_index": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_artifact_index.csv"
   },
-  "next_acceptance_gate": "Qualify a physically isolated deterministic development/challenge release for Binance UM native aggTrades before freezing mechanism-specific horizons or running any simple benchmark CANARY."
+  "next_acceptance_gate": "Freeze and execute only a simple native-trade-flow benchmark CANARY with sign-flip, wrong-lag, shuffled-timing, matched-random and incumbent controls; no complex generator or search may participate."
 }

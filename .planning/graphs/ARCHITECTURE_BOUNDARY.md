@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `6D5B9961801C892EEC673F4B789D11F280EC440F10BE142D08ED677014C43F6E`.
+Generated from registry SHA256: `1B481B1F193C487CFF925E1F3302C6911773374430656E465D67AB006773FE81`.
 
 ## Authority
 
@@ -86,3 +86,8 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 | mechanism_data_inventory | strict_reward | inventory cannot trigger performance before data release qualification and horizon freeze |
 | mechanism_data_inventory | generation_lanes | new source fields cannot enter generators at the inventory checkpoint |
 | mechanism_data_inventory | a7mem | source availability and future benchmark results cannot update memory |
+| sealed_forward | native_aggtrades_release | release qualification cannot read sealed forward blocks or forward performance |
+| spent_evaluation | native_aggtrades_release | spent historical evaluation cannot set release scope, fields, missing policy or horizons |
+| native_aggtrades_release | generation_lanes | qualified release fields remain outside generators during the mechanism benchmark |
+| native_aggtrades_release | a7mem | release and benchmark evidence cannot update positive or negative memory |
+| native_aggtrades_release | admission | release qualification cannot admit or promote candidates |

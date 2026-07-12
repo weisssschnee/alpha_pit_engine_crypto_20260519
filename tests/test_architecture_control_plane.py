@@ -52,6 +52,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
             "FROZEN_DEVELOPMENT_EPOCH2_DESIGN_FROZEN", "EPOCH2_STRICT_EXECUTION_COMPLETE_POSTPROCESS_FAILED",
             "FROZEN_DEVELOPMENT_EPOCH2_COMPLETED", "FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED", "FROZEN_DEVELOPMENT_EPOCH2_FAILED",
             "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED", "MECHANISM_DATA_EXPANSION0_INVENTORY_COMPLETED",
+            "MECHANISM_DATA_EXPANSION0_FIRST_RELEASE_QUALIFIED",
         })
         self.assertEqual(
             state["production_observation_qualification_status"],
@@ -59,7 +60,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         )
         self.assertEqual(state["phase_b1_status"], "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN")
         self.assertEqual(state["phase_b0p_acceptance"]["status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
-        self.assertTrue(state["active_stage"].startswith(("EPOCH1", "EPOCH2", "NEW_PERFORMANCE", "NATIVE_AGGTRADES")))
+        self.assertTrue(state["active_stage"].startswith(("EPOCH1", "EPOCH2", "NEW_PERFORMANCE", "NATIVE_AGGTRADES", "MECHANISM_BENCHMARK")))
         self.assertEqual(state["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
         self.assertEqual(state["phase_b0a_acceptance"]["accepted_subject_sha"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertIn(state["formal_search_status"], {"FORMAL_SEARCH_FROZEN", "NEW_PERFORMANCE_SEARCH_FROZEN"})

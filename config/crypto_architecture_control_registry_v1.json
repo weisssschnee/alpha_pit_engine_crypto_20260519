@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "FA351302D6506C6D4E717EDA62794AD613D70092141F3AAD167E0F8B7183B0DE"
+      "last_verified_sha": "AC10B0970A886F309227D5F8B8416F5C3EA82DA73866F660AB25E24C9A53B9F9"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "BA76B61D494037B03BB13B19D383E573BE5295DD8B7B2078C0B2A425703E226B"
+      "last_verified_sha": "697929695A40DC6BB66173CEA10AC5E0B2EC3AB21FDB828DBBAF2946C72C7392"
     },
     {
       "id": "nextgen_mechanism_registry",
@@ -1210,6 +1210,32 @@
       ],
       "blocker": "cross-venue history, multi-level depth, forced-flow and options unavailable; full-year BBO under-covered; native aggTrades requires physical release qualification",
       "last_verified_sha": "703F37A25625A93F20FD6002C39EE82EFB75ED3F57AEB1E13C54307CF092F7E4"
+    },
+    {
+      "id": "native_aggtrades_release",
+      "label": "Native aggTrades scoped data release",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "config/crypto_native_aggtrades_release_v1.json",
+        "scripts/crypto_native_aggtrades_release.py"
+      ],
+      "entrypoint": "python scripts/crypto_native_aggtrades_release.py run|check",
+      "input": "Binance UM core12 hourly native aggTrades features plus official-checksum source lineage",
+      "output": "physically isolated 2024-01..06 development and 2024-07..10 challenge release with 117 qualified symbol-months",
+      "data_role": "new mechanism observation release; no labels or performance values",
+      "feedback_permission": "SIMPLE_FIXED_BENCHMARK_CANARY_ONLY_NO_GENERATOR_MEMORY_PROMOTION",
+      "artifact_test": [
+        "tests/test_native_aggtrades_release.py",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_manifest.json",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/coverage_ledger.csv",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/read_ledger.csv",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/cache_provenance.json",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/mechanism_horizon_contract.json",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_artifact_index.csv",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/NATIVE_AGGTRADES_RELEASE_REPORT.md"
+      ],
+      "blocker": "release is scoped rather than full-year; benchmark CANARY is not yet frozen or executed; three coordinates excluded for checksum-lineage gaps",
+      "last_verified_sha": "61176951C4FA3908187B59CE40224E6491AF397DA9A39489461EBFFEDCD4F951"
     }
   ],
   "edges": [
@@ -1914,6 +1940,48 @@
       "target": "a7mem",
       "kind": "FORBIDDEN",
       "label": "source availability and future benchmark results cannot update memory"
+    },
+    {
+      "source": "mechanism_data_inventory",
+      "target": "native_aggtrades_release",
+      "kind": "ALLOWED",
+      "label": "longitudinal native aggTrades source enters deterministic no-performance qualification"
+    },
+    {
+      "source": "native_aggtrades_release",
+      "target": "benchmark_registry",
+      "kind": "ALLOWED",
+      "label": "qualified physical release and frozen horizons allow only simple fixed benchmark CANARY"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "native_aggtrades_release",
+      "kind": "FORBIDDEN",
+      "label": "release qualification cannot read sealed forward blocks or forward performance"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "native_aggtrades_release",
+      "kind": "FORBIDDEN",
+      "label": "spent historical evaluation cannot set release scope, fields, missing policy or horizons"
+    },
+    {
+      "source": "native_aggtrades_release",
+      "target": "generation_lanes",
+      "kind": "FORBIDDEN",
+      "label": "qualified release fields remain outside generators during the mechanism benchmark"
+    },
+    {
+      "source": "native_aggtrades_release",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "release and benchmark evidence cannot update positive or negative memory"
+    },
+    {
+      "source": "native_aggtrades_release",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "release qualification cannot admit or promote candidates"
     }
   ]
 }

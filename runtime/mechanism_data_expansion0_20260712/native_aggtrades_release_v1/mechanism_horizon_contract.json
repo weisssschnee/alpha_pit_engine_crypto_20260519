@@ -1,0 +1,12 @@
+{
+  "cost_model": "5.0 bps per unit turnover",
+  "execution_delay": "1h",
+  "freeze_before_performance": true,
+  "horizons": [
+    "1h",
+    "4h"
+  ],
+  "label": "future log mid/close return beginning after one complete 1h execution delay",
+  "mechanism": "native_trade_flow_transmission",
+  "performance_values_materialized_in_release": false
+}

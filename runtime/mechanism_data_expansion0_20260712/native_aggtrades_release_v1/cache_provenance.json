@@ -1,0 +1,15 @@
+{
+  "content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+  "forward_order_hash": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+  "forward_read": false,
+  "output_files": 117,
+  "performance_values_read": false,
+  "release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+  "release_root": "G:\\AlphaFactory_CryptoData\\curated\\mechanism_data_expansion0\\native_aggtrades_core12_2024m01_m10_v1",
+  "return_labels_read": false,
+  "reverse_order_hash": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+  "reverse_order_invariant": true,
+  "shard_order_invariant": true,
+  "source_feature_root": "G:\\AlphaFactory_CryptoData\\gold\\microstructure\\aggtrades_1h_flow_enhanced_v1",
+  "source_manifest_root": "G:\\AlphaFactory_CryptoData\\manifests"
+}
