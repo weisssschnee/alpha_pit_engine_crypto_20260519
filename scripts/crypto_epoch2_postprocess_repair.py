@@ -25,6 +25,7 @@ POLICY = ROOT / "admission_policy_comparison.csv"
 LANE = ROOT / "lane_comparison.csv"
 ADAPTIVE = ROOT / "adaptive_vs_matched_controls.csv"
 HYBRID_AUDIT = ROOT / "hybrid_admission_contract_audit.csv"
+BIAS_AUDIT = ROOT / "epoch2_bias_audit.json"
 REPORT = ROOT / "EPOCH2_COMPACT_RESULT.md"
 RECOVERY = ROOT / "epoch2_postprocess_recovery_manifest.json"
 INDEX = ROOT / "epoch2_artifact_index.csv"
@@ -210,6 +211,26 @@ def recover() -> dict[str, object]:
         recommendation = "REVISE_SURVIVOR_CONTRACT_WITHOUT_OOS_ACCESS"
     else:
         recommendation = "REVISE_BLOCKER_DIRECTED_SEARCH_AND_REPEAT"
+    bias_audit = {
+        "decision": "HOLD_RESEARCH",
+        "oos_grade": "NONE",
+        "data_access": "DEVELOPMENT_ONLY",
+        "planted_control_pass_rate": frozen["calibration"]["planted_pass_rate"],
+        "null_control_pass_rate": frozen["calibration"]["null_pass_rate"],
+        "logical_strict_rows": len(strict),
+        "shared_exact_evaluation_queries": strict.groupby(["panel_id", "exact_identity"]).ngroups,
+        "same_development_domain_used_for_admission_and_strict": True,
+        "three_policy_comparison_is_exploratory_not_oos": True,
+        "hybrid_60_40_contract_preserved": hybrid_contract_preserved,
+        "main_positive_net_lcb": int(((strict.panel_id == "main") & (strict.net_lcb > 0)).sum()),
+        "bbo_micro_positive_net_lcb": int(((strict.panel_id == "bbo_micro") & (strict.net_lcb > 0)).sum()),
+        "bbo_scope_extrapolation_allowed": False,
+        "development_survivors": survivors,
+        "candidate_promotion": False,
+        "forward_read": False,
+        "conclusion": "No OOS or deployability claim; revise blocker search and Hybrid identity quota before another frozen development epoch.",
+    }
+    BIAS_AUDIT.write_text(json.dumps(bias_audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     recovery = {
         "status": "STRICT_EXECUTION_COMPLETE_POSTPROCESS_SCHEMA_REPAIRED",
@@ -241,6 +262,7 @@ def recover() -> dict[str, object]:
         f"- Local MCTS top mechanism/primitive concentration: {mcts_concentration:.6f}",
         f"- Hybrid admitted-identity 60/40 contract preserved: {hybrid_contract_preserved}",
         "- Hybrid results must not be described as a valid 60/40 control because quality share was applied before exact-identity dedup.",
+        "- Bias audit: `HOLD_RESEARCH`; all comparisons are development-only and OOS grade is NONE.",
         "- `FORWARD_SEALED`", "- `NO_CANDIDATE_PROMOTION`", "- `NO_CROSS_EPOCH_ADAPTIVE_MEMORY`",
     ]
     REPORT.write_text("\n".join(report) + "\n", encoding="utf-8")
@@ -248,7 +270,7 @@ def recover() -> dict[str, object]:
         epoch2.FROZEN, epoch2.PACK, epoch2.ASSIGN, epoch2.STRICT, epoch2.FAILURE,
         REPAIRED_STRICT, ROOT / "search_role_diagnostics.csv", ROOT / "cem_diagnostic.csv",
         ROOT / "local_mcts_root_visits.csv", ATTRIBUTION, LINEAGE, SURROGATE, POLICY, LANE,
-        ADAPTIVE, HYBRID_AUDIT, REPORT, RECOVERY,
+        ADAPTIVE, HYBRID_AUDIT, BIAS_AUDIT, REPORT, RECOVERY,
     ]
     index = pd.DataFrame([{"path": epoch2.rel(path), "sha256": epoch2.sha(path), "exists": True} for path in artifact_paths])
     index.to_csv(INDEX, index=False)
@@ -277,6 +299,7 @@ def recover() -> dict[str, object]:
         "median_blocker_distance_delta": median_blocker_delta,
         "fixed_budget_contract_preserved": True,
         "hybrid_60_40_contract_preserved": hybrid_contract_preserved,
+        "bias_audit": "HOLD_RESEARCH_DEVELOPMENT_ONLY_OOS_NONE",
         "postprocess_recovery": True,
         "new_performance_queries_for_recovery": 0,
         "runtime_seconds_postprocess_only": time.perf_counter() - started,
