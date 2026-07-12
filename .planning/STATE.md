@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `3518545F5447AF04FCB3927F5D848322F323E62D76F6FA348D787D73FEC79C94`.
+Registry SHA256: `6D5B9961801C892EEC673F4B789D11F280EC440F10BE142D08ED677014C43F6E`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `ANALYSIS_AND_ENGINEERING_ALLOWED`
-- Current phase: `ECONOMIC_BOTTLENECK_AUDIT_COMPLETED`
+- Current phase: `MECHANISM_DATA_EXPANSION0_INVENTORY_COMPLETED`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,9 +16,11 @@ Registry SHA256: `3518545F5447AF04FCB3927F5D848322F323E62D76F6FA348D787D73FEC79C
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `NEW_PERFORMANCE_SEARCH_FROZEN_AWAITING_NEW_MECHANISM_DATA_PLAN`
+- Active stage: `NATIVE_AGGTRADES_RELEASE_QUALIFICATION_NO_PERFORMANCE`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
+- Mechanism/data inventory: `DATA_MECHANISM_INVENTORY_COMPLETED`
+- First release-qualification candidate: `BINANCE_UM_NATIVE_AGGTRADES_CORE12_HISTORY`
 
 ## Remote Baseline
 
@@ -220,4 +222,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Define and independently authorize a new mechanism, field, label or horizon acquisition plan before any new strict budget. BBO full-2024 physically isolated development acquisition may proceed as a secondary engineering line without winner selection.
+Qualify a physically isolated deterministic development/challenge release for Binance UM native aggTrades before freezing mechanism-specific horizons or running any simple benchmark CANARY.

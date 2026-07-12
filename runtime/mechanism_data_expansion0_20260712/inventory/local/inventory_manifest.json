@@ -1,0 +1,34 @@
+{
+  "experiment_id": "20260712_mechanism_data_inventory_001",
+  "families": 7489,
+  "files": 171639,
+  "machine": "DESKTOP-SR4PA0E",
+  "metadata_files_inspected": 4840,
+  "metadata_samples_per_dataset": 3,
+  "outputs": [
+    {
+      "path": "runtime\\mechanism_data_expansion0_20260712\\inventory\\local\\file_inventory.csv",
+      "sha256": "A299B8AFD9629D40F7716D5E59948E13BE83ECBF8CF9254B53938399A82B22DC"
+    },
+    {
+      "path": "runtime\\mechanism_data_expansion0_20260712\\inventory\\local\\data_family_inventory.csv",
+      "sha256": "CF0850978D7763F8548BA680DE36C47F5A95116A99BD73C6621BA31FDB140BCE"
+    },
+    {
+      "path": "runtime\\mechanism_data_expansion0_20260712\\inventory\\local\\symbol_month_ledger.csv",
+      "sha256": "BBE0A8091E0B65FE632C6C7F7D0C4AE9D2C31BFFEC296A38510854D86030D5F4"
+    },
+    {
+      "path": "runtime\\mechanism_data_expansion0_20260712\\inventory\\local\\mechanism_source_availability.json",
+      "sha256": "2A13515F1F28A2D7AE36AD19D8C3C82A0F6E435100D1FE7798F9EBA46723042F"
+    }
+  ],
+  "performance_queries": 0,
+  "reproducible": true,
+  "roots": [
+    "G:\\AlphaFactory_CryptoData"
+  ],
+  "row_data_read": false,
+  "scan_seconds": 223.04392299999017,
+  "sealed_paths_footer_read": false
+}

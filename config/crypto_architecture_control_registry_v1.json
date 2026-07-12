@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "8FDF8EC645385BB2D1869A7F6768847DEE5AC77E9519D25DBE80AC3C4EBC9BAD"
+      "last_verified_sha": "FA351302D6506C6D4E717EDA62794AD613D70092141F3AAD167E0F8B7183B0DE"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "9177ECBBCADBE4F27C61D0112D46FD23A00A3FACA0EA45AD9528D56C6A1B94F2"
+      "last_verified_sha": "BA76B61D494037B03BB13B19D383E573BE5295DD8B7B2078C0B2A425703E226B"
     },
     {
       "id": "nextgen_mechanism_registry",
@@ -1184,6 +1184,32 @@
       ],
       "blocker": "strict evidence accepted, Hybrid historical comparison invalid and blocker-directed repair rejected; next route is new mechanism or data with performance frozen",
       "last_verified_sha": "1386CC2EB1B615EE3BB7C659246474E6E6BE5F6B2F0D26B74F4F2CFA77620C3D"
+    },
+    {
+      "id": "mechanism_data_inventory",
+      "label": "MECHANISM/DATA EXPANSION-0 inventory",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "config/crypto_mechanism_data_expansion0_v1.json",
+        "scripts/crypto_mechanism_data_inventory.py",
+        "scripts/crypto_mechanism_data_expansion0_inventory.py",
+        "scripts/pc1_mechanism_data_inventory_worker.ps1"
+      ],
+      "entrypoint": "python scripts/crypto_mechanism_data_inventory.py; python scripts/crypto_mechanism_data_expansion0_inventory.py",
+      "input": "metadata-only local and PC1 AlphaFactory_CryptoData raw/silver/gold file inventories",
+      "output": "combined data-family inventory, symbol-month ledgers, mechanism source registry and first release-qualification route",
+      "data_role": "inventory and source qualification only",
+      "feedback_permission": "NO_PERFORMANCE_NO_FORWARD_NO_GENERATOR_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_mechanism_data_inventory.py",
+        "tests/test_mechanism_data_expansion0_inventory.py",
+        "runtime/mechanism_data_expansion0_20260712/inventory_completion_manifest.json",
+        "runtime/mechanism_data_expansion0_20260712/mechanism_source_registry.csv",
+        "runtime/mechanism_data_expansion0_20260712/inventory_artifact_index.csv",
+        "runtime/mechanism_data_expansion0_20260712/MECHANISM_DATA_INVENTORY_REPORT.md"
+      ],
+      "blocker": "cross-venue history, multi-level depth, forced-flow and options unavailable; full-year BBO under-covered; native aggTrades requires physical release qualification",
+      "last_verified_sha": "703F37A25625A93F20FD6002C39EE82EFB75ED3F57AEB1E13C54307CF092F7E4"
     }
   ],
   "edges": [
@@ -1846,6 +1872,48 @@
       "target": "scheduler",
       "kind": "FORBIDDEN",
       "label": "Epoch-2 cannot auto-rerun or extend budget"
+    },
+    {
+      "source": "epoch2_execution",
+      "target": "mechanism_data_inventory",
+      "kind": "ALLOWED",
+      "label": "accepted economic bottleneck evidence authorizes metadata-only new source inventory"
+    },
+    {
+      "source": "mechanism_data_inventory",
+      "target": "data_release",
+      "kind": "ALLOWED",
+      "label": "only a discovered longitudinal source may enter deterministic release qualification"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "mechanism_data_inventory",
+      "kind": "FORBIDDEN",
+      "label": "sealed forward rows and performance remain unreadable during source inventory"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "mechanism_data_inventory",
+      "kind": "FORBIDDEN",
+      "label": "spent evaluation cannot select a new data family or mechanism"
+    },
+    {
+      "source": "mechanism_data_inventory",
+      "target": "strict_reward",
+      "kind": "FORBIDDEN",
+      "label": "inventory cannot trigger performance before data release qualification and horizon freeze"
+    },
+    {
+      "source": "mechanism_data_inventory",
+      "target": "generation_lanes",
+      "kind": "FORBIDDEN",
+      "label": "new source fields cannot enter generators at the inventory checkpoint"
+    },
+    {
+      "source": "mechanism_data_inventory",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "source availability and future benchmark results cannot update memory"
     }
   ]
 }

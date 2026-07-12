@@ -1,0 +1,19 @@
+{
+  "cross_venue": "UNAVAILABLE_NO_VERIFIED_HISTORICAL_SOURCE",
+  "forced_flow": "UNAVAILABLE_NO_VERIFIED_HISTORICAL_SOURCE",
+  "forward_read": false,
+  "full_year_bbo": "HOLD_FOR_MORE_DATA",
+  "local_files": 171639,
+  "multi_level_depth": "UNAVAILABLE_NO_VERIFIED_HISTORICAL_SOURCE",
+  "native_aggtrades": "DISCOVERED_REQUIRES_RELEASE_QUALIFICATION",
+  "new_performance_queries": 0,
+  "options": "UNAVAILABLE_NO_VERIFIED_HISTORICAL_SOURCE",
+  "pc1_files": 436434,
+  "resource_reallocation": "unavailable cross-venue/forced-flow/options effort moves to the next real available family: native aggTrades",
+  "row_data_read": false,
+  "selected_release_qualification_candidate": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_HISTORY",
+  "selection_used_accepted_identities": false,
+  "selection_used_performance": false,
+  "status": "DATA_MECHANISM_INVENTORY_COMPLETED",
+  "total_file_observations": 608073
+}

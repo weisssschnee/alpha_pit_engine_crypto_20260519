@@ -3,12 +3,12 @@
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
   "research_status": "ANALYSIS_AND_ENGINEERING_ALLOWED",
-  "current_phase": "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED",
+  "current_phase": "MECHANISM_DATA_EXPANSION0_INVENTORY_COMPLETED",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
-  "registry_sha256": "3518545F5447AF04FCB3927F5D848322F323E62D76F6FA348D787D73FEC79C94",
+  "registry_sha256": "6D5B9961801C892EEC673F4B789D11F280EC440F10BE142D08ED677014C43F6E",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-  "active_stage": "NEW_PERFORMANCE_SEARCH_FROZEN_AWAITING_NEW_MECHANISM_DATA_PLAN",
+  "active_stage": "NATIVE_AGGTRADES_RELEASE_QUALIFICATION_NO_PERFORMANCE",
   "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
   "acceptance_attestation": "runtime/a7b0_control_plane_20260711/phase_b0_acceptance_attestation.json",
   "test_evidence": {
@@ -18,8 +18,8 @@
     "output_path": "runtime/a7b0_control_plane_20260711/phase_b0_acceptance_test_output.txt",
     "output_sha256": "23CE54E17A626986D2A60E6279C73BA09C852D26A5220E807FF65EA4A853EBFE"
   },
-  "graph_control_nodes": 54,
-  "graph_control_edges": 110,
+  "graph_control_nodes": 55,
+  "graph_control_edges": 117,
   "b0_items": [
     {
       "id": "B0.1",
@@ -202,5 +202,9 @@
   "epoch2_performance_started": true,
   "epoch2b_status": "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED",
   "epoch2b_main_recommendation": "PIVOT_TO_NEW_MECHANISM_OR_DATA",
-  "epoch2b_new_performance_queries": 0
+  "epoch2b_new_performance_queries": 0,
+  "mechanism_data_inventory_status": "DATA_MECHANISM_INVENTORY_COMPLETED",
+  "mechanism_data_inventory_manifest": "runtime/mechanism_data_expansion0_20260712/inventory_completion_manifest.json",
+  "mechanism_data_inventory_artifact_index": "runtime/mechanism_data_expansion0_20260712/inventory_artifact_index.csv",
+  "mechanism_data_first_release_candidate": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_HISTORY"
 }

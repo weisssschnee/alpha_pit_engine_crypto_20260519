@@ -1,0 +1,14 @@
+{
+  "cross_venue_price_discovery": "DISCOVERED_REQUIRES_QUALIFICATION",
+  "forced_flow_liquidation": "DISCOVERED_REQUIRES_QUALIFICATION",
+  "multi_level_depth": "DISCOVERED_REQUIRES_QUALIFICATION",
+  "native_bbo": "DISCOVERED_REQUIRES_QUALIFICATION",
+  "observed_venues": [
+    "BINANCE",
+    "BYBIT",
+    "OKX"
+  ],
+  "options_expectation_state": "UNAVAILABLE_NO_VERIFIED_HISTORICAL_SOURCE",
+  "proxy_substitution_allowed": false,
+  "trade_flow": "DISCOVERED_REQUIRES_QUALIFICATION"
+}

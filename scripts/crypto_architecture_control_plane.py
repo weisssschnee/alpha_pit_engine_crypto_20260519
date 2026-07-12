@@ -70,6 +70,9 @@ EPOCH1R_PREFLIGHT_PATH = EPOCH1R_ROOT / "admission_preflight_manifest.json"
 EPOCH1R_FROZEN_PATH = EPOCH1R_ROOT / "epoch1r_frozen_design_manifest.json"
 EPOCH1R_RUN_PATH = EPOCH1R_ROOT / "epoch1r_run_manifest.json"
 EPOCH1R_ARTIFACT_INDEX_PATH = EPOCH1R_ROOT / "epoch1r_artifact_index.csv"
+MECHANISM_DATA_ROOT = REPO / "runtime" / "mechanism_data_expansion0_20260712"
+MECHANISM_DATA_INVENTORY_MANIFEST_PATH = MECHANISM_DATA_ROOT / "inventory_completion_manifest.json"
+MECHANISM_DATA_INVENTORY_INDEX_PATH = MECHANISM_DATA_ROOT / "inventory_artifact_index.csv"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -108,6 +111,7 @@ REQUIRED_NODE_IDS = {
     "epoch1r_admission_repair", "epoch1r_frozen_design", "epoch1r_execution",
     "epoch2_survivor_calibration", "epoch2_blocker_taxonomy", "epoch2_blocker_directed_search",
     "epoch2_frozen_design", "epoch2_execution",
+    "mechanism_data_inventory",
 }
 REQUIRED_FORBIDDEN_EDGES = {
     ("spent_evaluation", "admission"),
@@ -431,6 +435,7 @@ Generated from registry SHA256: `{digest}`.
 - All 84 Epoch-1R near-miss evaluation rows are frozen as explicit repair parents without reselection; blocker counts are `{state['nextgen_epoch2']['blocker_counts']}`.
 - Epoch-2 strict evidence is accepted, the historical Hybrid comparison is invalid, and blocker-directed repair is rejected. Epoch-2B read 6157 existing strict rows with zero new performance queries: 72/84 parents have no reliable gross edge, all 24 adaptive operator-blocker cells lack causal gate control, and main NET_LCB near-miss distance worsened despite count growth.
 - Epoch-2B selects `{state['epoch2b_audit']['main_recommendation']}` as the single main route. BBO full-2024 physically isolated acquisition remains a secondary engineering line with no winner selection.
+- MECHANISM/DATA EXPANSION-0 inventory scans `{state['mechanism_data_expansion0']['local_files']}` local and `{state['mechanism_data_expansion0']['pc1_files']}` PC1 file observations without row data, performance, or forward access. Cross-venue history, multi-level depth, forced-flow and options remain unavailable; full-year BBO remains under-covered. Binance UM native aggTrades is the first release-qualification candidate based on longitudinal source availability, not accepted identities or performance.
 - Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
 - `{state['formal_search_status']}`, `{state['adaptive_cross_epoch_memory_status']}`, `{state['candidate_promotion_status']}`, and `{state['forward_data_status']}` remain frozen.
 
@@ -464,6 +469,8 @@ Registry SHA256: `{digest}`.
 - Active stage: `{state['active_stage']}`
 - Phase B1: `{state['phase_b1_status']}`
 - Forward data: `{state['forward_data_status']}`
+- Mechanism/data inventory: `{state['mechanism_data_expansion0']['inventory_status']}`
+- First release-qualification candidate: `{state['mechanism_data_expansion0']['first_release_candidate']}`
 
 ## Remote Baseline
 
@@ -853,6 +860,8 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "epoch2b_status": state["epoch2b_audit"]["status"],
         "epoch2b_main_recommendation": state["epoch2b_audit"]["main_recommendation"],
         "epoch2b_new_performance_queries": state["epoch2b_audit"]["new_performance_queries"],
+        "mechanism_data_inventory_status": state["mechanism_data_expansion0"]["inventory_status"],
+        "mechanism_data_first_release_candidate": state["mechanism_data_expansion0"]["first_release_candidate"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -1041,6 +1050,10 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "epoch2b_status": state["epoch2b_audit"]["status"],
         "epoch2b_main_recommendation": state["epoch2b_audit"]["main_recommendation"],
         "epoch2b_new_performance_queries": state["epoch2b_audit"]["new_performance_queries"],
+        "mechanism_data_inventory_status": state["mechanism_data_expansion0"]["inventory_status"],
+        "mechanism_data_inventory_manifest": relative(MECHANISM_DATA_INVENTORY_MANIFEST_PATH),
+        "mechanism_data_inventory_artifact_index": relative(MECHANISM_DATA_INVENTORY_INDEX_PATH),
+        "mechanism_data_first_release_candidate": state["mechanism_data_expansion0"]["first_release_candidate"],
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []

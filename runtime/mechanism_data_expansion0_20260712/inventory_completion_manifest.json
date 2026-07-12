@@ -1,0 +1,63 @@
+{
+  "experiment_id": "20260712_crypto_mechanism_data_expansion0_inventory_001",
+  "forward_read": false,
+  "inputs": [
+    {
+      "path": "config/crypto_mechanism_data_expansion0_v1.json",
+      "sha256": "74112E975C862A180A74416DA6C03A2F6934C3E1F985C6D0D9AEA2577A2A6D27"
+    },
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/inventory/local/inventory_manifest.json",
+      "sha256": "3AE8D54AE1C811E3E749BC93B870B30ED77F7AC5DE9FB16EE6F720742A69D5B2"
+    },
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/inventory/local/data_family_inventory.csv",
+      "sha256": "CF0850978D7763F8548BA680DE36C47F5A95116A99BD73C6621BA31FDB140BCE"
+    },
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/inventory/local/symbol_month_ledger.csv",
+      "sha256": "BBE0A8091E0B65FE632C6C7F7D0C4AE9D2C31BFFEC296A38510854D86030D5F4"
+    },
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/inventory/pc1/inventory_manifest.json",
+      "sha256": "F18BE22023161C94C8434E739FA2A8FD5F490EF8142B8BF26A3CBD559E72B3ED"
+    },
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/inventory/pc1/data_family_inventory.csv",
+      "sha256": "8719CB10F4D58FCAB05041AA0605B180836F5E8E103C4A73B18708F71903AD56"
+    },
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/inventory/pc1/symbol_month_ledger.csv",
+      "sha256": "6B89E9DB058B8404AD89529A6A81F1D91CAE64AD80CD5B8702CA2DECB0BB48C0"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/combined_data_family_inventory.csv",
+      "sha256": "3C9C79FC04535F562E2AC515F127E75DEDD5408F781F89359F0DB9778A43BB60"
+    },
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/mechanism_source_registry.csv",
+      "sha256": "CF80E437D00BEF9B9A4D72D22328FEDE27030D1F878C17F09251267E8E0E993F"
+    },
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/inventory_decision.json",
+      "sha256": "48F7BC1869B6BD7C5A6E5C3A1823D80A38ABDEFCD0DD221C73F7AC0E5DEE4390"
+    },
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/MECHANISM_DATA_INVENTORY_REPORT.md",
+      "sha256": "62088F4F3D214E3188CDAC8DDB1D788F6CDB7EB2E1FC39F085E265D9A48AECDF"
+    }
+  ],
+  "performance_queries": 0,
+  "remote_task": {
+    "data_root": "D:/HermesWorker/GDrive/AlphaFactory_CryptoData",
+    "exit_code": 0,
+    "machine": "DESKTOP-7877972",
+    "output_root": "H:/CodexRuntime/mechanism_data_expansion0_inventory_20260712/pc1",
+    "task_id": "mechanism_inventory_20260712_1747"
+  },
+  "repo_sha_at_run": "32FD2833E06DED22EB13E8CB4E4EF0BA77C8B55C",
+  "row_data_read": false,
+  "status": "DATA_MECHANISM_INVENTORY_COMPLETED"
+}

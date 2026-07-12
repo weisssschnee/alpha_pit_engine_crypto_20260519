@@ -1,0 +1,28 @@
+{
+  "stage": "CRYPTO_MECHANISM_DATA_EXPANSION_0",
+  "status": "ANALYSIS_AND_ENGINEERING_ALLOWED",
+  "performance_search": "FROZEN",
+  "forward_access": "SEALED_NO_NEW_FORWARD_READ",
+  "candidate_promotion": "PROHIBITED",
+  "cross_epoch_memory": "PROHIBITED",
+  "core12": [
+    "ADAUSDT", "AVAXUSDT", "BCHUSDT", "BNBUSDT", "BTCUSDT", "DOGEUSDT",
+    "ETHUSDT", "LINKUSDT", "LTCUSDT", "SOLUSDT", "SUIUSDT", "XRPUSDT"
+  ],
+  "resource_allocation": {
+    "cross_venue_price_discovery_trade_flow": 0.50,
+    "native_bbo_order_book_microstructure": 0.25,
+    "forced_flow_liquidation_source_qualification": 0.15,
+    "options_regime_feasibility": 0.10
+  },
+  "ineligible_path_tokens": [
+    "forward", "validation", "test", "recent", "stress", "oos",
+    "source_probes", "30d", "90d", "may2026", "202605"
+  ],
+  "inventory_roots": {
+    "local": "G:/AlphaFactory_CryptoData",
+    "pc1": "D:/HermesWorker/GDrive/AlphaFactory_CryptoData"
+  },
+  "first_release_qualification_candidate": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_HISTORY",
+  "selection_basis": "longitudinal raw-source availability and physical split feasibility only; no accepted identity or performance result used"
+}

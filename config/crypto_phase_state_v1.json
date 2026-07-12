@@ -2,10 +2,10 @@
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
   "research_status": "ANALYSIS_AND_ENGINEERING_ALLOWED",
-  "current_phase": "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED",
+  "current_phase": "MECHANISM_DATA_EXPANSION0_INVENTORY_COMPLETED",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
-  "active_stage": "NEW_PERFORMANCE_SEARCH_FROZEN_AWAITING_NEW_MECHANISM_DATA_PLAN",
+  "active_stage": "NATIVE_AGGTRADES_RELEASE_QUALIFICATION_NO_PERFORMANCE",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "formal_search_status": "NEW_PERFORMANCE_SEARCH_FROZEN",
@@ -308,5 +308,27 @@
     "bbo_positive_net_exact_identities":5,"bbo_behaviour_clusters":5,"bbo_coverage_ratio":0.8222222222222222,
     "forward_read":false,"candidate_promotion":false,"cross_epoch_memory":false
   },
-  "next_acceptance_gate": "Define and independently authorize a new mechanism, field, label or horizon acquisition plan before any new strict budget. BBO full-2024 physically isolated development acquisition may proceed as a secondary engineering line without winner selection."
+  "mechanism_data_expansion0": {
+    "inventory_status": "DATA_MECHANISM_INVENTORY_COMPLETED",
+    "local_files": 171639,
+    "pc1_files": 436434,
+    "total_file_observations": 608073,
+    "performance_queries": 0,
+    "row_data_read": false,
+    "forward_read": false,
+    "cross_venue_historical": "UNAVAILABLE_NO_VERIFIED_HISTORICAL_SOURCE",
+    "full_year_bbo": "HOLD_FOR_MORE_DATA",
+    "multi_level_depth": "UNAVAILABLE_NO_VERIFIED_HISTORICAL_SOURCE",
+    "forced_flow": "UNAVAILABLE_NO_VERIFIED_HISTORICAL_SOURCE",
+    "options": "UNAVAILABLE_NO_VERIFIED_HISTORICAL_SOURCE",
+    "native_aggtrades": "DISCOVERED_REQUIRES_RELEASE_QUALIFICATION",
+    "first_release_candidate": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_HISTORY",
+    "inventory_manifest": "runtime/mechanism_data_expansion0_20260712/inventory_completion_manifest.json",
+    "artifact_index": "runtime/mechanism_data_expansion0_20260712/inventory_artifact_index.csv",
+    "remote_task_id": "mechanism_inventory_20260712_1747",
+    "remote_machine": "DESKTOP-7877972",
+    "selection_used_accepted_identities": false,
+    "selection_used_performance": false
+  },
+  "next_acceptance_gate": "Qualify a physically isolated deterministic development/challenge release for Binance UM native aggTrades before freezing mechanism-specific horizons or running any simple benchmark CANARY."
 }

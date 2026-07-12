@@ -1,0 +1,34 @@
+{
+  "experiment_id": "20260712_mechanism_data_inventory_001",
+  "families": 622,
+  "files": 436434,
+  "machine": "DESKTOP-7877972",
+  "metadata_files_inspected": 1272,
+  "metadata_samples_per_dataset": 3,
+  "outputs": [
+    {
+      "path": "H:\\CodexRuntime\\mechanism_data_expansion0_inventory_20260712\\pc1\\file_inventory.csv",
+      "sha256": "74277AC281C0002B4995C0B494936500F1DB1CA3DFE57A3B8639414573AEE1F5"
+    },
+    {
+      "path": "H:\\CodexRuntime\\mechanism_data_expansion0_inventory_20260712\\pc1\\data_family_inventory.csv",
+      "sha256": "8719CB10F4D58FCAB05041AA0605B180836F5E8E103C4A73B18708F71903AD56"
+    },
+    {
+      "path": "H:\\CodexRuntime\\mechanism_data_expansion0_inventory_20260712\\pc1\\symbol_month_ledger.csv",
+      "sha256": "6B89E9DB058B8404AD89529A6A81F1D91CAE64AD80CD5B8702CA2DECB0BB48C0"
+    },
+    {
+      "path": "H:\\CodexRuntime\\mechanism_data_expansion0_inventory_20260712\\pc1\\mechanism_source_availability.json",
+      "sha256": "1319AFE93D429CD90AF999D5375BDC78A6E5DC8689D2E40F96CC7ADD706F96C6"
+    }
+  ],
+  "performance_queries": 0,
+  "reproducible": true,
+  "roots": [
+    "D:\\HermesWorker\\GDrive\\AlphaFactory_CryptoData"
+  ],
+  "row_data_read": false,
+  "scan_seconds": 239.7297366000712,
+  "sealed_paths_footer_read": false
+}

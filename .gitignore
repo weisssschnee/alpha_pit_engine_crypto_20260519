@@ -22,3 +22,7 @@ venv/
 **/*book_returns*.csv
 **/*positions*.csv
 **/*component_panel*.csv
+
+# MECHANISM/DATA EXPANSION-0 keeps full per-file inventories off Git; their
+# hashes and machine locations are bound by the checked-in inventory manifests.
+runtime/mechanism_data_expansion0_20260712/inventory/*/file_inventory.csv

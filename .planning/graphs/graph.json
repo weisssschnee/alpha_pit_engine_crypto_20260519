@@ -4,14 +4,14 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "3518545F5447AF04FCB3927F5D848322F323E62D76F6FA348D787D73FEC79C94",
+      "registry_sha256": "6D5B9961801C892EEC673F4B789D11F280EC440F10BE142D08ED677014C43F6E",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
-      "control_node_count": 54,
-      "control_edge_count": 110,
-      "phase_status": "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED",
+      "control_node_count": 55,
+      "control_edge_count": 117,
+      "phase_status": "MECHANISM_DATA_EXPANSION0_INVENTORY_COMPLETED",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "NEW_PERFORMANCE_SEARCH_FROZEN_AWAITING_NEW_MECHANISM_DATA_PLAN",
+      "active_stage": "NATIVE_AGGTRADES_RELEASE_QUALIFICATION_NO_PERFORMANCE",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
@@ -52,6 +52,8 @@
       "epoch2b_status": "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED",
       "epoch2b_main_recommendation": "PIVOT_TO_NEW_MECHANISM_OR_DATA",
       "epoch2b_new_performance_queries": 0,
+      "mechanism_data_inventory_status": "DATA_MECHANISM_INVENTORY_COMPLETED",
+      "mechanism_data_first_release_candidate": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_HISTORY",
       "research_status": "ANALYSIS_AND_ENGINEERING_ALLOWED",
       "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
       "forward_data_status": "SEALED_NO_NEW_FORWARD_READ"
@@ -177359,7 +177361,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "8FDF8EC645385BB2D1869A7F6768847DEE5AC77E9519D25DBE80AC3C4EBC9BAD",
+      "last_verified_sha": "FA351302D6506C6D4E717EDA62794AD613D70092141F3AAD167E0F8B7183B0DE",
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
       "weight": 1.0
     },
@@ -177662,7 +177664,7 @@
         "runtime/b1s_canary_20260711/B1S_CANARY_COMPACT_RESULT.md",
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
-      "last_verified_sha": "9177ECBBCADBE4F27C61D0112D46FD23A00A3FACA0EA45AD9528D56C6A1B94F2",
+      "last_verified_sha": "BA76B61D494037B03BB13B19D383E573BE5295DD8B7B2078C0B2A425703E226B",
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
       "weight": 1.0
     },
@@ -178118,6 +178120,37 @@
       ],
       "last_verified_sha": "1386CC2EB1B615EE3BB7C659246474E6E6BE5F6B2F0D26B74F4F2CFA77620C3D",
       "blocker": "strict evidence accepted, Hybrid historical comparison invalid and blocker-directed repair rejected; next route is new mechanism or data with performance frozen",
+      "weight": 1.0
+    },
+    {
+      "id": "control_mechanism_data_inventory",
+      "label": "MECHANISM/DATA EXPANSION-0 inventory",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "config/crypto_mechanism_data_expansion0_v1.json",
+        "scripts/crypto_mechanism_data_inventory.py",
+        "scripts/crypto_mechanism_data_expansion0_inventory.py",
+        "scripts/pc1_mechanism_data_inventory_worker.ps1"
+      ],
+      "entrypoint": "python scripts/crypto_mechanism_data_inventory.py; python scripts/crypto_mechanism_data_expansion0_inventory.py",
+      "input": "metadata-only local and PC1 AlphaFactory_CryptoData raw/silver/gold file inventories",
+      "output": "combined data-family inventory, symbol-month ledgers, mechanism source registry and first release-qualification route",
+      "data_role": "inventory and source qualification only",
+      "feedback_permission": "NO_PERFORMANCE_NO_FORWARD_NO_GENERATOR_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_mechanism_data_inventory.py",
+        "tests/test_mechanism_data_expansion0_inventory.py",
+        "runtime/mechanism_data_expansion0_20260712/inventory_completion_manifest.json",
+        "runtime/mechanism_data_expansion0_20260712/mechanism_source_registry.csv",
+        "runtime/mechanism_data_expansion0_20260712/inventory_artifact_index.csv",
+        "runtime/mechanism_data_expansion0_20260712/MECHANISM_DATA_INVENTORY_REPORT.md"
+      ],
+      "last_verified_sha": "703F37A25625A93F20FD6002C39EE82EFB75ED3F57AEB1E13C54307CF092F7E4",
+      "blocker": "cross-venue history, multi-level depth, forced-flow and options unavailable; full-year BBO under-covered; native aggTrades requires physical release qualification",
       "weight": 1.0
     }
   ],
@@ -492701,6 +492734,90 @@
       "target": "control_scheduler",
       "relationship": "FORBIDDEN",
       "label": "Epoch-2 cannot auto-rerun or extend budget",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_110",
+      "source": "control_epoch2_execution",
+      "target": "control_mechanism_data_inventory",
+      "relationship": "ALLOWED",
+      "label": "accepted economic bottleneck evidence authorizes metadata-only new source inventory",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_111",
+      "source": "control_mechanism_data_inventory",
+      "target": "control_data_release",
+      "relationship": "ALLOWED",
+      "label": "only a discovered longitudinal source may enter deterministic release qualification",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_112",
+      "source": "control_sealed_forward",
+      "target": "control_mechanism_data_inventory",
+      "relationship": "FORBIDDEN",
+      "label": "sealed forward rows and performance remain unreadable during source inventory",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_113",
+      "source": "control_spent_evaluation",
+      "target": "control_mechanism_data_inventory",
+      "relationship": "FORBIDDEN",
+      "label": "spent evaluation cannot select a new data family or mechanism",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_114",
+      "source": "control_mechanism_data_inventory",
+      "target": "control_strict_reward",
+      "relationship": "FORBIDDEN",
+      "label": "inventory cannot trigger performance before data release qualification and horizon freeze",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_115",
+      "source": "control_mechanism_data_inventory",
+      "target": "control_generation_lanes",
+      "relationship": "FORBIDDEN",
+      "label": "new source fields cannot enter generators at the inventory checkpoint",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_116",
+      "source": "control_mechanism_data_inventory",
+      "target": "control_a7mem",
+      "relationship": "FORBIDDEN",
+      "label": "source availability and future benchmark results cannot update memory",
       "forbidden": true,
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,

@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `3518545F5447AF04FCB3927F5D848322F323E62D76F6FA348D787D73FEC79C94`.
+Generated from registry SHA256: `6D5B9961801C892EEC673F4B789D11F280EC440F10BE142D08ED677014C43F6E`.
 
 ## Authority
 
@@ -81,3 +81,8 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 | epoch2_execution | a7mem | Epoch-2 cannot persist adaptive state or memory |
 | epoch2_execution | admission | Epoch-2 cannot promote candidates |
 | epoch2_execution | scheduler | Epoch-2 cannot auto-rerun or extend budget |
+| sealed_forward | mechanism_data_inventory | sealed forward rows and performance remain unreadable during source inventory |
+| spent_evaluation | mechanism_data_inventory | spent evaluation cannot select a new data family or mechanism |
+| mechanism_data_inventory | strict_reward | inventory cannot trigger performance before data release qualification and horizon freeze |
+| mechanism_data_inventory | generation_lanes | new source fields cannot enter generators at the inventory checkpoint |
+| mechanism_data_inventory | a7mem | source availability and future benchmark results cannot update memory |
