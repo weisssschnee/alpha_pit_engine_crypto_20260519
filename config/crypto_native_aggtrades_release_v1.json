@@ -1,0 +1,41 @@
+{
+  "release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+  "source": "Binance Vision futures UM monthly aggTrades",
+  "source_feature_root": "G:/AlphaFactory_CryptoData/gold/microstructure/aggtrades_1h_flow_enhanced_v1",
+  "source_manifest_root": "G:/AlphaFactory_CryptoData/manifests",
+  "release_root": "G:/AlphaFactory_CryptoData/curated/mechanism_data_expansion0/native_aggtrades_core12_2024m01_m10_v1",
+  "core_symbols": [
+    "ADAUSDT", "AVAXUSDT", "BCHUSDT", "BNBUSDT", "BTCUSDT", "DOGEUSDT",
+    "ETHUSDT", "LINKUSDT", "LTCUSDT", "SOLUSDT", "SUIUSDT", "XRPUSDT"
+  ],
+  "development_months": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06"],
+  "challenge_months": ["2024-07", "2024-08", "2024-09", "2024-10"],
+  "quarantined_months": ["2024-11", "2024-12"],
+  "minimum_symbol_month_coverage": 0.95,
+  "sampling_frequency": "1h",
+  "aggregation": "UTC calendar-hour native aggregate-trade flow",
+  "event_time": "native transact time within the UTC hour",
+  "observable_time": "hour bucket close",
+  "source_lag": "0s after completed bucket; partial current hour prohibited",
+  "maturity": "hour bucket close",
+  "missing_policy": "explicit missing coordinate and row masks; no interpolation; no cross-symbol fill",
+  "fields": [
+    "trade_count", "underlying_trade_count", "quantity", "notional",
+    "buy_agg_trade_count", "sell_agg_trade_count", "buy_quantity", "sell_quantity",
+    "buy_notional", "sell_notional", "signed_aggressor_quantity", "signed_aggressor_notional",
+    "vwap", "buy_vwap", "sell_vwap", "volume_imbalance", "buy_sell_notional_ratio",
+    "price_range_bps", "close_to_open_bps", "large_trade_count_ratio_100k_plus",
+    "large_notional_ratio_100k_plus"
+  ],
+  "mechanism_horizon_contract": {
+    "mechanism": "native_trade_flow_transmission",
+    "horizons": ["1h", "4h"],
+    "label": "future log mid/close return beginning after one complete 1h execution delay",
+    "execution_delay": "1h",
+    "cost_model": "5.0 bps per unit turnover",
+    "freeze_before_performance": true,
+    "performance_values_materialized_in_release": false
+  },
+  "prohibited_columns": ["return", "fwd", "forward", "label", "reward", "target", "pnl"],
+  "feedback_permission": "NONE_RELEASE_QUALIFICATION_ONLY"
+}
