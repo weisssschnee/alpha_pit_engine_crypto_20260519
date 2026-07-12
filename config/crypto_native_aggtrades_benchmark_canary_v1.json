@@ -1,0 +1,40 @@
+{
+  "canary_id": "NATIVE_AGGTRADES_SIMPLE_BENCHMARK_CANARY_V1",
+  "release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+  "release_content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+  "roles": ["DEVELOPMENT", "CHALLENGE"],
+  "horizons_hours": [1, 4],
+  "execution_delay_hours": 1,
+  "cost_bps_per_unit_turnover": 5.0,
+  "weight_contract": "cross-sectional centered percentile rank, unit gross exposure, one identity one benchmark",
+  "variants": ["BASE", "SIGN_FLIP", "WRONG_LAG_24H", "SHUFFLED_WITHIN_SYMBOL_MONTH", "MATCHED_RANDOM"],
+  "fixed_seed": 7401,
+  "benchmarks": [
+    {"benchmark_id": "flow_imbalance_level", "operator": "LEVEL", "field": "volume_imbalance", "hypothesis": "aggressive flow continuation"},
+    {"benchmark_id": "signed_notional_level", "operator": "LEVEL", "field": "signed_aggressor_notional", "hypothesis": "signed notional pressure"},
+    {"benchmark_id": "flow_imbalance_change", "operator": "DELTA_1H", "field": "volume_imbalance", "hypothesis": "flow acceleration"},
+    {"benchmark_id": "flow_imbalance_zscore", "operator": "ZSCORE_24H", "field": "volume_imbalance", "hypothesis": "flow shock"},
+    {"benchmark_id": "large_flow_concentration", "operator": "LEVEL", "field": "large_notional_ratio_100k_plus", "hypothesis": "large-trade concentration"},
+    {"benchmark_id": "flow_persistence", "operator": "PERSISTENCE_4H", "field": "volume_imbalance", "hypothesis": "persistent aggressive flow"},
+    {"benchmark_id": "flow_transition", "operator": "TRANSITION", "field": "volume_imbalance", "hypothesis": "aggressor-side transition"},
+    {"benchmark_id": "impact_flow_divergence", "operator": "DIVERGENCE", "field": "volume_imbalance", "secondary_field": "close_to_open_bps", "hypothesis": "flow absorption or impact transmission"}
+  ],
+  "incumbent": {"benchmark_id": "incumbent_hourly_momentum", "operator": "LEVEL", "field": "close_to_open_bps"},
+  "fixed_evaluation_count": 164,
+  "lcb_contract": "mean of monthly means minus 1.645 standard errors across months",
+  "future_search_admission": {
+    "base_positive_gross_lcb": true,
+    "base_positive_net_lcb": true,
+    "challenge_positive_net_lcb": true,
+    "benchmark_increment_lcb_positive": true,
+    "positive_month_fraction_min": 0.5,
+    "negative_controls_must_not_match_base": true,
+    "max_abs_weight_correlation_to_incumbent": 0.9
+  },
+  "online_adjustment": false,
+  "additional_budget": false,
+  "complex_search_participation": false,
+  "forward_access": false,
+  "candidate_promotion": false,
+  "memory_update": false
+}
