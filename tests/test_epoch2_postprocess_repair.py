@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from scripts.crypto_epoch2_postprocess_repair import reconstruct_proposal_ids
+from scripts.crypto_epoch2_postprocess_repair import audit_hybrid_contract, reconstruct_proposal_ids
 
 
 def _frames(rows=2304):
@@ -35,3 +35,20 @@ def test_rejects_ambiguous_identity_join():
     assignments.loc[1, ["admission_policy", "panel_id", "exact_identity"]] = assignments.loc[0, ["admission_policy", "panel_id", "exact_identity"]]
     with pytest.raises(ValueError, match="one-to-one"):
         reconstruct_proposal_ids(strict, assignments)
+
+
+def test_hybrid_audit_is_on_admitted_identity_rows_not_raw_budget_only():
+    proposal_rows = []
+    assignment_rows = []
+    for panel, quota in {"main": 744, "bbo_micro": 24}.items():
+        for ordinal in range(quota + 10):
+            proposal_rows.append({"panel_id": panel, "proposal_id": f"{panel}-{ordinal}", "legal": True, "near_score": quota - ordinal, "quality": quota - ordinal})
+        for ordinal in range(quota):
+            assignment_rows.append({"panel_id": panel, "proposal_id": f"{panel}-{ordinal}", "admission_policy": "HYBRID_QUALITY_DIVERSITY"})
+    audit = audit_hybrid_contract(pd.DataFrame(proposal_rows), pd.DataFrame(assignment_rows))
+    assert audit.contract_pass.all()
+
+    assignments = pd.DataFrame(assignment_rows)
+    assignments.loc[0, "proposal_id"] = "main-750"
+    audit = audit_hybrid_contract(pd.DataFrame(proposal_rows), assignments)
+    assert not audit.loc[audit.panel_id == "main", "contract_pass"].iloc[0]

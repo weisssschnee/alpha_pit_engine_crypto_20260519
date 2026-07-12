@@ -24,6 +24,7 @@ SURROGATE = ROOT / "surrogate_crossfit_diagnostic.csv"
 POLICY = ROOT / "admission_policy_comparison.csv"
 LANE = ROOT / "lane_comparison.csv"
 ADAPTIVE = ROOT / "adaptive_vs_matched_controls.csv"
+HYBRID_AUDIT = ROOT / "hybrid_admission_contract_audit.csv"
 REPORT = ROOT / "EPOCH2_COMPACT_RESULT.md"
 RECOVERY = ROOT / "epoch2_postprocess_recovery_manifest.json"
 INDEX = ROOT / "epoch2_artifact_index.csv"
@@ -41,6 +42,34 @@ def reconstruct_proposal_ids(strict: pd.DataFrame, assignments: pd.DataFrame) ->
     if repaired["proposal_id"].isna().any() or len(repaired) != len(strict):
         raise ValueError("proposal_id reconstruction is incomplete")
     return repaired
+
+
+def audit_hybrid_contract(proposals: pd.DataFrame, assignments: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    for panel_id, quota in epoch2.PANEL_STRICT_BUDGETS.items():
+        legal = proposals[(proposals.panel_id == panel_id) & proposals.legal].copy()
+        quality = list(legal.sort_values(
+            ["near_score", "quality", "proposal_id"], ascending=[False, False, True]
+        ).proposal_id)
+        expected = round(quota * .60)
+        raw_quality_prefix = set(quality[:expected])
+        selected = assignments[
+            (assignments.panel_id == panel_id) &
+            (assignments.admission_policy == "HYBRID_QUALITY_DIVERSITY")
+        ]
+        observed = int(selected.proposal_id.isin(raw_quality_prefix).sum())
+        rows.append({
+            "panel_id": panel_id,
+            "hybrid_rows": len(selected),
+            "expected_quality_identity_rows": expected,
+            "observed_quality_prefix_identity_rows": observed,
+            "expected_quality_share": .60,
+            "observed_quality_share": observed / max(1, len(selected)),
+            "contract_pass": observed == expected,
+            "cause": "QUALITY_SHARE_APPLIED_TO_RAW_PROPOSAL_PREFIX_BEFORE_EXACT_IDENTITY_DEDUP",
+            "rerun_performed": False,
+        })
+    return pd.DataFrame(rows)
 
 
 def _summary_tables(strict: pd.DataFrame, attribution: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
@@ -113,6 +142,11 @@ def recover() -> dict[str, object]:
     strict["parent_row_id"] = strict["parent_row_id"].fillna("")
     strict["repair_action"] = strict["repair_action"].fillna("")
     strict.to_csv(REPAIRED_STRICT, index=False)
+    proposal_rows = epoch2.read_gz(epoch2.PACK)
+    proposals = pd.DataFrame([{key: value for key, value in row.items() if key != "spec"} for row in proposal_rows])
+    hybrid_audit = audit_hybrid_contract(proposals, assignments)
+    hybrid_audit.to_csv(HYBRID_AUDIT, index=False)
+    hybrid_contract_preserved = bool(hybrid_audit.contract_pass.all())
 
     parents = pd.read_csv(epoch2.PARENTS)
     parent_lookup = parents.set_index("frozen_parent_row_id").to_dict("index")
@@ -194,6 +228,7 @@ def recover() -> dict[str, object]:
         "candidate_promotion": False,
         "cross_epoch_memory": False,
         "online_contract_change": False,
+        "hybrid_60_40_contract_preserved": hybrid_contract_preserved,
     }
     RECOVERY.write_text(json.dumps(recovery, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     report = [
@@ -204,6 +239,8 @@ def recover() -> dict[str, object]:
         f"- Shared exact evaluation queries: {strict.groupby(['panel_id', 'exact_identity']).ngroups} / 2304 logical strict rows",
         f"- Median parent-to-child blocker distance delta: {median_blocker_delta:.8g}",
         f"- Local MCTS top mechanism/primitive concentration: {mcts_concentration:.6f}",
+        f"- Hybrid admitted-identity 60/40 contract preserved: {hybrid_contract_preserved}",
+        "- Hybrid results must not be described as a valid 60/40 control because quality share was applied before exact-identity dedup.",
         "- `FORWARD_SEALED`", "- `NO_CANDIDATE_PROMOTION`", "- `NO_CROSS_EPOCH_ADAPTIVE_MEMORY`",
     ]
     REPORT.write_text("\n".join(report) + "\n", encoding="utf-8")
@@ -211,7 +248,7 @@ def recover() -> dict[str, object]:
         epoch2.FROZEN, epoch2.PACK, epoch2.ASSIGN, epoch2.STRICT, epoch2.FAILURE,
         REPAIRED_STRICT, ROOT / "search_role_diagnostics.csv", ROOT / "cem_diagnostic.csv",
         ROOT / "local_mcts_root_visits.csv", ATTRIBUTION, LINEAGE, SURROGATE, POLICY, LANE,
-        ADAPTIVE, REPORT, RECOVERY,
+        ADAPTIVE, HYBRID_AUDIT, REPORT, RECOVERY,
     ]
     index = pd.DataFrame([{"path": epoch2.rel(path), "sha256": epoch2.sha(path), "exists": True} for path in artifact_paths])
     index.to_csv(INDEX, index=False)
@@ -238,6 +275,8 @@ def recover() -> dict[str, object]:
         "adaptive_successes": adaptive_successes,
         "mcts_top_concentration": mcts_concentration,
         "median_blocker_distance_delta": median_blocker_delta,
+        "fixed_budget_contract_preserved": True,
+        "hybrid_60_40_contract_preserved": hybrid_contract_preserved,
         "postprocess_recovery": True,
         "new_performance_queries_for_recovery": 0,
         "runtime_seconds_postprocess_only": time.perf_counter() - started,
@@ -268,6 +307,9 @@ def check() -> None:
         raise ValueError("postprocess-repaired strict table is incomplete")
     if recovery["new_performance_queries"] != 0 or manifest["new_performance_queries_for_recovery"] != 0:
         raise PermissionError("postprocess repair performed a new performance query")
+    hybrid_audit = pd.read_csv(HYBRID_AUDIT)
+    if manifest["hybrid_60_40_contract_preserved"] != bool(hybrid_audit.contract_pass.all()):
+        raise ValueError("hybrid admission audit/manifest mismatch")
     if epoch2.sha(epoch2.FAILURE) != recovery["original_failure_sha256"]:
         raise ValueError("original failure evidence drift")
     print("PASS_EPOCH2_POSTPROCESS_RECOVERY_VALID")
