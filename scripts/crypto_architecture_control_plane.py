@@ -429,6 +429,8 @@ Generated from registry SHA256: `{digest}`.
 - Epoch-1R narrows the repair to admission empty-set semantics. Empty representatives now produce complete-schema zero-capacity natural underfill with `NO_LEGAL_EXACT_IDENTITIES`; CEM, MCTS, surrogate, reward/objective, survivor contract, grammar, seeds, budgets and hypothesis space remain unchanged. Current Epoch-1R state: `{state['nextgen_epoch1r']['status']}`.
 - Epoch-2 calibration proves the frozen survivor contract reachable: planted controls pass `{state['nextgen_epoch2']['planted_pass_rate']}` and null controls pass `{state['nextgen_epoch2']['null_pass_rate']}`. OOS grade remains NONE and the bias-audit decision is HOLD_RESEARCH.
 - All 84 Epoch-1R near-miss evaluation rows are frozen as explicit repair parents without reselection; blocker counts are `{state['nextgen_epoch2']['blocker_counts']}`.
+- Epoch-2 strict evidence is accepted, the historical Hybrid comparison is invalid, and blocker-directed repair is rejected. Epoch-2B read 6157 existing strict rows with zero new performance queries: 72/84 parents have no reliable gross edge, all 24 adaptive operator-blocker cells lack causal gate control, and main NET_LCB near-miss distance worsened despite count growth.
+- Epoch-2B selects `{state['epoch2b_audit']['main_recommendation']}` as the single main route. BBO full-2024 physically isolated acquisition remains a secondary engineering line with no winner selection.
 - Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
 - `{state['formal_search_status']}`, `{state['adaptive_cross_epoch_memory_status']}`, `{state['candidate_promotion_status']}`, and `{state['forward_data_status']}` remain frozen.
 
@@ -576,12 +578,25 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 ## CRYPTO EPOCH-2
 
 - Status: `{state['nextgen_epoch2']['status']}`
+- Hybrid comparison: `{state['nextgen_epoch2']['hybrid_comparison_status']}`
+- Repair strategy: `{state['nextgen_epoch2']['repair_strategy_status']}`
 - Calibration: `{state['nextgen_epoch2']['calibration_decision']}`; planted/null pass `{state['nextgen_epoch2']['planted_pass_rate']}` / `{state['nextgen_epoch2']['null_pass_rate']}`
 - Frozen parents: `{state['nextgen_epoch2']['parent_rows']}` rows / `{state['nextgen_epoch2']['unique_parent_proposals']}` proposals / `{state['nextgen_epoch2']['unique_parent_exact_identities']}` exact identities
 - Budget: `{state['nextgen_epoch2']['proposal_budget']}` proposals / `{state['nextgen_epoch2']['strict_budget']}` strict / seeds `{state['nextgen_epoch2']['fixed_seeds']}`
 - Bias audit: `{state['nextgen_epoch2']['bias_audit']}`
 - Design frozen / performance started: `{state['nextgen_epoch2']['design_frozen']}` / `{state['nextgen_epoch2']['performance_started']}`
 - Forward read / promotion / cross-epoch memory: `{state['nextgen_epoch1r']['forward_read']}` / `{state['nextgen_epoch1r']['candidate_promotion']}` / `{state['nextgen_epoch1r']['cross_epoch_memory']}`
+
+## CRYPTO EPOCH-2B Economic Bottleneck Audit
+
+- Status: `{state['epoch2b_audit']['status']}`
+- Main recommendation: `{state['epoch2b_audit']['main_recommendation']}`
+- Existing logical strict rows read / new performance queries: `{state['epoch2b_audit']['logical_strict_rows_read']}` / `{state['epoch2b_audit']['new_performance_queries']}`
+- Main median positive gross-LCB proxy fraction / rare-edge cost-kill share: `{state['epoch2b_audit']['main_positive_gross_lcb_proxy_fraction_median']}` / `{state['epoch2b_audit']['cost_killed_share_of_rare_positive_gross_lcb']}`
+- Parent classes — no edge / portfolio transform / unstable: `{state['epoch2b_audit']['parents_no_economic_edge']}` / `{state['epoch2b_audit']['parents_portfolio_transform_required']}` / `{state['epoch2b_audit']['parents_unstable_neighbourhood']}`
+- Adaptive operator cells without causal control / target crossing / collateral damage: `{state['epoch2b_audit']['adaptive_operator_cells_no_causal_control']}` / `{state['epoch2b_audit']['adaptive_target_gate_crossing_rate']}` / `{state['epoch2b_audit']['adaptive_collateral_damage_rate']}`
+- Main NET_LCB near misses Epoch-1R -> Epoch-2 / distance change: `{state['epoch2b_audit']['epoch1r_main_net_near_misses']}` -> `{state['epoch2b_audit']['epoch2_main_net_near_misses']}` / `{state['epoch2b_audit']['near_miss_distance_relative_change']}`
+- BBO secondary line: `{state['epoch2b_audit']['bbo_secondary_line']}`; positive exact / clusters / coverage `{state['epoch2b_audit']['bbo_positive_net_exact_identities']}` / `{state['epoch2b_audit']['bbo_behaviour_clusters']}` / `{state['epoch2b_audit']['bbo_coverage_ratio']}`
 
 ## NEXTGEN-DARK Allowed
 
@@ -835,6 +850,9 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "epoch2_status": state["nextgen_epoch2"]["status"],
         "epoch2_design_frozen": state["nextgen_epoch2"]["design_frozen"],
         "epoch2_performance_started": state["nextgen_epoch2"]["performance_started"],
+        "epoch2b_status": state["epoch2b_audit"]["status"],
+        "epoch2b_main_recommendation": state["epoch2b_audit"]["main_recommendation"],
+        "epoch2b_new_performance_queries": state["epoch2b_audit"]["new_performance_queries"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -1020,6 +1038,9 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "epoch2_parent_rows": state["nextgen_epoch2"]["parent_rows"],
         "epoch2_design_frozen": state["nextgen_epoch2"]["design_frozen"],
         "epoch2_performance_started": state["nextgen_epoch2"]["performance_started"],
+        "epoch2b_status": state["epoch2b_audit"]["status"],
+        "epoch2b_main_recommendation": state["epoch2b_audit"]["main_recommendation"],
+        "epoch2b_new_performance_queries": state["epoch2b_audit"]["new_performance_queries"],
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []

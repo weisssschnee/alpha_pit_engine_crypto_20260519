@@ -1,0 +1,214 @@
+{
+  "epoch1r_main_net_lcb_distance_abs_median": 4.601436258040138e-05,
+  "epoch1r_main_net_lcb_near_misses": 55,
+  "epoch1r_to_epoch2_near_miss_interpretation": "SAME_NET_LCB_BOTTLENECK_WITH_MORE_ROWS_BUT_NO_DISTANCE_IMPROVEMENT; MEDIAN_ABSOLUTE_DISTANCE_INCREASED",
+  "epoch2_main_net_lcb_distance_abs_median": 5.210727551582361e-05,
+  "epoch2_main_net_lcb_near_misses": 174,
+  "gross_lcb_limitation": {
+    "exact_gross_series_variance_available": false,
+    "method": "SUMMARY_PROXY_NET_LCB_PLUS_MEAN_COST_DRAG",
+    "promotion_evidence": false
+  },
+  "largest_elimination": {
+    "individual_gate": "NET_LCB_FAILS_ALMOST_ALL_MAIN_EXACT_IDENTITIES",
+    "sequential": [
+      {
+        "all_stage_drops": {
+          "all_strict_TO_positive_gross": 699,
+          "benchmark_incremental_TO_survivor": 1,
+          "positive_gross_TO_positive_gross_lcb_proxy": 850,
+          "positive_gross_lcb_proxy_TO_positive_net": 44,
+          "positive_net_TO_positive_net_lcb": 2,
+          "positive_net_lcb_TO_stable_worst_block": 0,
+          "stable_worst_block_TO_benchmark_incremental": 0
+        },
+        "dropped_exact": 850,
+        "epoch": "EPOCH0",
+        "largest_sequential_drop": "positive_gross_TO_positive_gross_lcb_proxy"
+      },
+      {
+        "all_stage_drops": {
+          "all_strict_TO_positive_gross": 585,
+          "benchmark_incremental_TO_survivor": 1,
+          "positive_gross_TO_positive_gross_lcb_proxy": 735,
+          "positive_gross_lcb_proxy_TO_positive_net": 30,
+          "positive_net_TO_positive_net_lcb": 11,
+          "positive_net_lcb_TO_stable_worst_block": 0,
+          "stable_worst_block_TO_benchmark_incremental": 0
+        },
+        "dropped_exact": 735,
+        "epoch": "EPOCH1R",
+        "largest_sequential_drop": "positive_gross_TO_positive_gross_lcb_proxy"
+      },
+      {
+        "all_stage_drops": {
+          "all_strict_TO_positive_gross": 680,
+          "benchmark_incremental_TO_survivor": 0,
+          "positive_gross_TO_positive_gross_lcb_proxy": 727,
+          "positive_gross_lcb_proxy_TO_positive_net": 22,
+          "positive_net_TO_positive_net_lcb": 19,
+          "positive_net_lcb_TO_stable_worst_block": 0,
+          "stable_worst_block_TO_benchmark_incremental": 0
+        },
+        "dropped_exact": 727,
+        "epoch": "EPOCH2",
+        "largest_sequential_drop": "positive_gross_TO_positive_gross_lcb_proxy"
+      }
+    ]
+  },
+  "main_gross_edge_or_cost": "RELIABLE_GROSS_EDGE_IS_NEAR_ZERO; THE_RARE_POSITIVE_GROSS_LCB_PROXY_ROWS_ARE_ALMOST_ALL_KILLED_BY_COST, BUT THEY_ARE_TOO_SPARSE_TO_JUSTIFY_PORTFOLIO_TRANSFORM_AS_MAIN_ROUTE",
+  "mechanisms_with_visible_gross_not_net": [
+    {
+      "epoch": "EPOCH0",
+      "mechanism_id": "basis_dislocation_convergence",
+      "positive_gross_lcb_proxy": 2,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH0",
+      "mechanism_id": "cross_asset_confirmation",
+      "positive_gross_lcb_proxy": 5,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH0",
+      "mechanism_id": "mark_index_deviation",
+      "positive_gross_lcb_proxy": 5,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH0",
+      "mechanism_id": "oi_inventory",
+      "positive_gross_lcb_proxy": 9,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH0",
+      "mechanism_id": "orthogonal_exile",
+      "positive_gross_lcb_proxy": 3,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH0",
+      "mechanism_id": "session_time",
+      "positive_gross_lcb_proxy": 3,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH0",
+      "mechanism_id": "taker_imbalance",
+      "positive_gross_lcb_proxy": 7,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH0",
+      "mechanism_id": "volatility_regime",
+      "positive_gross_lcb_proxy": 10,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH1R",
+      "mechanism_id": "basis_dislocation_convergence",
+      "positive_gross_lcb_proxy": 1,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH1R",
+      "mechanism_id": "cross_asset_confirmation",
+      "positive_gross_lcb_proxy": 6,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH1R",
+      "mechanism_id": "funding_dynamics",
+      "positive_gross_lcb_proxy": 1,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH1R",
+      "mechanism_id": "mark_index_deviation",
+      "positive_gross_lcb_proxy": 5,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH1R",
+      "mechanism_id": "orthogonal_exile",
+      "positive_gross_lcb_proxy": 7,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH1R",
+      "mechanism_id": "session_time",
+      "positive_gross_lcb_proxy": 5,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH1R",
+      "mechanism_id": "taker_imbalance",
+      "positive_gross_lcb_proxy": 2,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH1R",
+      "mechanism_id": "temporal_state_path",
+      "positive_gross_lcb_proxy": 5,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH1R",
+      "mechanism_id": "volatility_regime",
+      "positive_gross_lcb_proxy": 7,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH2",
+      "mechanism_id": "basis_dislocation_convergence",
+      "positive_gross_lcb_proxy": 19,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH2",
+      "mechanism_id": "cross_asset_confirmation",
+      "positive_gross_lcb_proxy": 10,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH2",
+      "mechanism_id": "mark_index_deviation",
+      "positive_gross_lcb_proxy": 1,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH2",
+      "mechanism_id": "orthogonal_exile",
+      "positive_gross_lcb_proxy": 1,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH2",
+      "mechanism_id": "session_time",
+      "positive_gross_lcb_proxy": 1,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH2",
+      "mechanism_id": "taker_imbalance",
+      "positive_gross_lcb_proxy": 2,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH2",
+      "mechanism_id": "temporal_state_path",
+      "positive_gross_lcb_proxy": 1,
+      "positive_net_lcb": 0
+    },
+    {
+      "epoch": "EPOCH2",
+      "mechanism_id": "volatility_regime",
+      "positive_gross_lcb_proxy": 6,
+      "positive_net_lcb": 0
+    }
+  ],
+  "near_miss_distance_relative_change": 0.13241328562959054,
+  "near_miss_primary_type": "NET_LCB"
+}

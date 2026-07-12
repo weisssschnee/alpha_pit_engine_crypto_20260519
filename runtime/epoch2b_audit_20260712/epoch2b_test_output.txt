@@ -1,0 +1,13 @@
+date: 2026-07-12
+command: G:\PythonProject\.venv\Scripts\python.exe -m pytest tests/test_epoch2b_audit.py tests/test_epoch2.py tests/test_epoch2_postprocess_repair.py tests/test_architecture_control_plane.py -q
+result: 19 passed in 10.21s
+epoch2b_checker: PASS_ECONOMIC_BOTTLENECK_AUDIT_VALID
+architecture_build: PASS_ARCHITECTURE_CONTROL_PLANE_SYNCED
+architecture_check: PASS_ARCHITECTURE_CONTROL_PLANE_VALID
+architecture_nodes: 54
+architecture_edges: 110
+new_performance_queries: 0
+return_label_read: false
+forward_read: false
+candidate_promotion: false
+cross_epoch_memory: false

@@ -1,0 +1,45 @@
+{
+  "historical_epoch_rewritten": false,
+  "new_performance_queries": 0,
+  "panels": [
+    {
+      "behaviour_clusters": 24,
+      "diversity_rows": 10,
+      "diversity_share": 0.4166666666666667,
+      "exact_identities": 24,
+      "global_exact_overlap": 18,
+      "historical_epoch_rewritten": false,
+      "n_eff": 24.0,
+      "near_misses": 4,
+      "new_performance_queries": 0,
+      "panel_id": "bbo_micro",
+      "positive_net_lcb": 4,
+      "quality_rows": 14,
+      "quality_share": 0.5833333333333334,
+      "stratified_exact_overlap": 12,
+      "strict_rows": 24,
+      "survivors": 0,
+      "top_cluster_share": 0.041666666666666664
+    },
+    {
+      "behaviour_clusters": 560,
+      "diversity_rows": 298,
+      "diversity_share": 0.40053763440860213,
+      "exact_identities": 744,
+      "global_exact_overlap": 515,
+      "historical_epoch_rewritten": false,
+      "n_eff": 139.64076690211908,
+      "near_misses": 118,
+      "new_performance_queries": 0,
+      "panel_id": "main",
+      "positive_net_lcb": 0,
+      "quality_rows": 446,
+      "quality_share": 0.5994623655913979,
+      "stratified_exact_overlap": 261,
+      "strict_rows": 744,
+      "survivors": 0,
+      "top_cluster_share": 0.04838709677419355
+    }
+  ],
+  "status": "REPORT_ONLY_REPLAY_COMPLETED"
+}

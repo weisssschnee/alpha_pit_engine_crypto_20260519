@@ -1,0 +1,135 @@
+{
+  "actual_runtime_seconds": 19.252555300015956,
+  "candidate_promotion": false,
+  "commands": [
+    "python scripts/crypto_epoch2b_audit.py run",
+    "python scripts/crypto_epoch2b_audit.py check"
+  ],
+  "continuation": "stop performance search; implement only the independently authorized new-mechanism/data acquisition plan",
+  "cross_epoch_memory": false,
+  "experiment_id": "20260712_crypto_epoch2b_audit_001",
+  "failure": null,
+  "forward_read": false,
+  "historical_epoch_rewritten": false,
+  "input_sha256": {
+    "config/crypto_epoch2b_audit_v1.json": "AB54E58D10239DC3C52526821A79AC51E22BFB85EDCAFD84A3E73B95DEEE614B",
+    "runtime/epoch2_20260712/admission_assignments.csv": "22388C3D8A16A4FD6A1D5D3ECAA84F80C15583CEDD98A9351D9E9A49AF3C57D3",
+    "runtime/epoch2_20260712/proposal_pack.jsonl.gz": "C9A4730C5570501D07DE6055C3197FF1824FE39EEAF32D00630BBD5C5C81B8DA",
+    "runtime/epoch2_20260712/strict_evaluations_repaired.csv": "C0CA813CA18E8F913D99FBA02636376BE6FD93E3E146A805383DB8C750F2875B",
+    "runtime/epoch2_calibration_20260712/frozen_near_miss_parent_pack.csv": "DB6C599C5BC736022A4E8D46BBBC387B9829A348EC0E217B0FA55EFBE992DE81",
+    "runtime/nextgen_dark_20260711/pc1_bookticker_top_of_book_manifest.json": "92AA00E217437B22D89D35FD8D9B4981CF9168EE30F63FEA006938AB918CFDAA",
+    "runtime/nextgen_epoch0_20260711/strict_evaluations.csv": "7C4428A31319C0C1A3F052AA7290C0DA9880257A41ACA7020B914E649FD4C36C",
+    "runtime/nextgen_epoch1r_20260712/benchmark_results.csv": "EDD1F2F711BCD87C28E4237F58662FF8D9B054F57CCDD5BB7CEEBEC0906C9CC7",
+    "runtime/nextgen_epoch1r_20260712/proposal_pack.jsonl.gz": "318811FC93C39719B164CF9FF3212D507B964963E17E08D0B026F6B3E2350A62",
+    "runtime/nextgen_epoch1r_20260712/strict_evaluations.csv": "41F3D8DAE56CF5C5F6DF45D019CCDD3BDB2A4C6C3853609C1077E20445B7AD6B",
+    "scripts/crypto_epoch2b_audit.py": "64014D308AA0AF3730BBC51E252A3832684E6C53A6F79F0E9D3936DED8442634",
+    "tests/test_epoch2b_audit.py": "D30E20B11DDA30E9C17313F7C6A29B5189355C17CAD68670FA5ECFE63A62EB19"
+  },
+  "logical_strict_rows_read": 6157,
+  "main_recommendation": "PIVOT_TO_NEW_MECHANISM_OR_DATA",
+  "new_performance_queries": 0,
+  "objective": "classify the economic bottleneck and operator causal control using existing strict evidence only",
+  "outputs": [
+    {
+      "path": "runtime/epoch2b_audit_20260712/gross_to_net_gate_funnel.csv",
+      "sha256": "CE36D099542FECD5C7D3E1FB7B74999B1820B6C116954452FDEB53E51FD1C536"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/gate_elimination.csv",
+      "sha256": "5FF9ED9BF16B2AA7C3F4FFF13856D74C5718F3E49F6894A977B529256B138304"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/mechanism_gross_to_net.csv",
+      "sha256": "973C8B37C302FC748AA9E7448EE239BDAFFA63AC62C1F888AC1370714820A241"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/near_miss_transition.csv",
+      "sha256": "CC2BF477E44FD1D8C3781C4579756494FC43C5466E1812D788F9622809059D02"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/operator_child_causal_rows.csv",
+      "sha256": "C90AFFF7A619D07A9842A8EABF6757F8699BE9031988A3FD1B3918D36010A3B2"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/operator_causal_summary.csv",
+      "sha256": "01C7C99C14A753210D9FF68FC0B849E2F46C1F9C2E720CD5EB7C7678C9FA92E2"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/parent_selection_audit.csv",
+      "sha256": "0A66CF3E0981E8D2E258D4710142BE1FF33EBADC7F58E61970F0CEAF3DAE9A90"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/parent_class_summary.csv",
+      "sha256": "46FEA355C2ADA5288E6C9703BB4DAD2EED4140E2740DFB90B5661BDE8B4FC782"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/hybrid_report_only_replay_rows.csv",
+      "sha256": "8AF193C614FD48EA51EE16775B6A5B111AFD7D52D0C393E6359BC427AA33C8B0"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/hybrid_report_only_gate_funnel.csv",
+      "sha256": "4B28DB2474F1A68BF3AE0251C403B28D0313CDA1CB5568BA8D04D828235449F7"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/bbo_positive_net_audit.csv",
+      "sha256": "D707D2DB08E1225DC690A056F0E58FF65F73743D1ADD35A063FED45EB5959DF1"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/benchmark_gross_net_proxy.csv",
+      "sha256": "B72F8420518DB373C5D2A549501C7A56A42FDBA80811387D8AEA075069544B19"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/gross_to_net_answers.json",
+      "sha256": "D4B575EE7E11912228C9BD70A9595D07FD1E80D62B631BD66C5F33E51F83036C"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/hybrid_report_only_replay_summary.json",
+      "sha256": "FBDFDF53D3C749C1ACDE8E0FCED8EC6D8A14B3576747612C9E0DFCEBB96912B4"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/bbo_development_acquisition_plan.json",
+      "sha256": "034B380E3CE91E41FD6F6EF71497E6C64F426C286CDB1BCF6F6C368378E6A059"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/economic_bottleneck_decision.json",
+      "sha256": "42CF6701FB39E0230C60D6A38A34D60215CE539373E1F2F361046DD6B6B74F5F"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/epoch2b_bias_audit.json",
+      "sha256": "FCE4D4BC395EFBCA22C3724408B2CE4C3EEA5F75936E74E4883EC89C1811DE66"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/EPOCH2B_ECONOMIC_BOTTLENECK_REPORT.md",
+      "sha256": "885F94FF86E9FA7502EBCDD7CC22EA17F97BEA41FB2C758129D7B2D030914E3E"
+    },
+    {
+      "path": "runtime/epoch2b_audit_20260712/epoch2b_artifact_index.csv",
+      "sha256": "98EC8C2AF2D2AE84BB15D36DC90070CF1770CC72A629E54675769404F69241E7"
+    }
+  ],
+  "parameters": {
+    "bootstrap": {
+      "cluster_key": "frozen_parent_row_id",
+      "confidence_level": 0.95,
+      "resamples": 2000,
+      "seed": 6209
+    },
+    "cost_bps": 5.0,
+    "route_thresholds": {
+      "bbo_coverage_insufficient_below": 0.9,
+      "bbo_nontrivial_behaviour_clusters_min": 2,
+      "bbo_nontrivial_exposure_cells_min": 2,
+      "cost_killed_share_of_positive_gross_lcb_min": 0.5,
+      "main_positive_gross_lcb_fraction_near_zero_max": 0.05,
+      "no_edge_or_unstable_parent_share_min": 0.5,
+      "stability_failure_share_min": 0.3,
+      "substantial_main_positive_gross_lcb_fraction_min": 0.2
+    }
+  },
+  "repo_sha": "0df60fb6f235a871d72596bbd7d490794e14413b",
+  "reproducible": true,
+  "return_label_read": false,
+  "signal_materialized": false,
+  "status": "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED",
+  "unique_epoch_panel_exact_rows": 4748
+}

@@ -1,0 +1,75 @@
+{
+  "current_scope": {
+    "coverage_ratio": 0.8222222222222222,
+    "months": [
+      "2024-01",
+      "2024-02"
+    ],
+    "observed_symbols": 11,
+    "requested_symbols": 12
+  },
+  "future_split": {
+    "development_extension": [
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08"
+    ],
+    "historical_calibration_only": [
+      "2024-01",
+      "2024-02"
+    ],
+    "oos_claim": false,
+    "sealed_development_challenge": [
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12"
+    ]
+  },
+  "observable_time": "usable_time=max(exchange_event_time,hour_bucket_close,source_ingest_time); decision_time must be >= hour_bucket_start+1h",
+  "performance_query_authorized": false,
+  "physical_isolation": "release_id/panel_role={development|challenge}/month=YYYY-MM/symbol=SYMBOL/part-*.parquet; challenge row groups in separate immutable manifest and not mounted to generator",
+  "requested_backfill": {
+    "gap_repairs": [
+      "LTCUSDT missing 2024-01-24",
+      "SOLUSDT missing 2024-01-07 and 2024-02-22 through 2024-02-29",
+      "BTCUSDT and ETHUSDT absent in 2024-02 small-first dataset",
+      "SUIUSDT absent in both source datasets",
+      "no coverage after 2024-02-29"
+    ],
+    "minimum_symbol_month_coordinate_coverage": 0.95,
+    "months": [
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12"
+    ],
+    "symbols": [
+      "ADAUSDT",
+      "AVAXUSDT",
+      "BCHUSDT",
+      "BNBUSDT",
+      "BTCUSDT",
+      "DOGEUSDT",
+      "ETHUSDT",
+      "LINKUSDT",
+      "LTCUSDT",
+      "SOLUSDT",
+      "SUIUSDT",
+      "XRPUSDT"
+    ]
+  },
+  "status": "DEVELOPMENT_DATA_ACQUISITION_PLAN_ONLY",
+  "winner_selection_before_coverage": false
+}

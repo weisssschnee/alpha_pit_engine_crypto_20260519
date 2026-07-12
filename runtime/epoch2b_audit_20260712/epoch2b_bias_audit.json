@@ -1,0 +1,19 @@
+{
+  "bbo_limit": "CORE11_2024_01_02_ONLY_82.22_PERCENT_COVERAGE; MONTH_SYMBOL_SESSION_DEPENDENCE_NOT_IDENTIFIABLE_FROM_AGGREGATED_CACHE",
+  "candidate_promotion": false,
+  "cost_model": "5_BPS_PER_UNIT_TURNOVER",
+  "decision": "HOLD_RESEARCH",
+  "discovery_status": "POST_HOC_CAUSAL_AUDIT_AND_REPORT_ONLY_REPLAY",
+  "formal_state": [
+    "NEW_PERFORMANCE_SEARCH_FROZEN",
+    "ANALYSIS_AND_ENGINEERING_ALLOWED"
+  ],
+  "gross_lcb_caveat": "SUMMARY PROXY; gross-series variance was not retained and was not recomputed",
+  "hybrid_replay": "REPORT_ONLY_FROM_CACHED_EXACT_RESULTS; NOT_A_NEW_EPOCH",
+  "look_ahead": "NO_NEW_SERIES_ACCESS; RELIES_ON_PRIOR_PIT_QUALIFIED_STRICT SUMMARIES",
+  "new_performance_queries": 0,
+  "oos_grade": "NONE",
+  "required_next_action": "PIVOT_TO_NEW_MECHANISM_OR_DATA",
+  "return_label_read": false,
+  "signal_materialized": false
+}

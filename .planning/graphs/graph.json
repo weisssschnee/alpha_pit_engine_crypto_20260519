@@ -4,21 +4,21 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "9404EDC978D35A68E27C5B3765B4D8BADC3E778D1C98D176079C5DDF79DC61D6",
+      "registry_sha256": "3518545F5447AF04FCB3927F5D848322F323E62D76F6FA348D787D73FEC79C94",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 54,
       "control_edge_count": 110,
-      "phase_status": "FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED",
+      "phase_status": "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "EPOCH2_STOPPED_AWAITING_INDEPENDENT_DECISION",
+      "active_stage": "NEW_PERFORMANCE_SEARCH_FROZEN_AWAITING_NEW_MECHANISM_DATA_PLAN",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
       "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
       "b0a_accepted_subject_sha": "4e09f33159fabe21add8e5d405f76a5a97c61f83",
       "nextgen_dark_status": "NEXTGEN_DARK_SCOPED_READY",
-      "formal_search_status": "FORMAL_SEARCH_FROZEN",
+      "formal_search_status": "NEW_PERFORMANCE_SEARCH_FROZEN",
       "canary_status": "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL",
       "adaptive_cross_epoch_memory_status": "ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN",
       "candidate_promotion_status": "NO_CANDIDATE_PROMOTION",
@@ -46,10 +46,13 @@
       "epoch1r_executed_strict_evaluations": 2052,
       "epoch1r_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
       "epoch1r_remote_sync_status": "VERIFIED_REMOTE_CONTAINS_EPOCH1R_CLOSURE",
-      "epoch2_status": "FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED",
+      "epoch2_status": "EPOCH2_STRICT_EVIDENCE_ACCEPTED",
       "epoch2_design_frozen": true,
       "epoch2_performance_started": true,
-      "research_status": "RESEARCH_MODE_CONTROLLED_EPOCH2_DEVELOPMENT_ONLY",
+      "epoch2b_status": "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED",
+      "epoch2b_main_recommendation": "PIVOT_TO_NEW_MECHANISM_OR_DATA",
+      "epoch2b_new_performance_queries": 0,
+      "research_status": "ANALYSIS_AND_ENGINEERING_ALLOWED",
       "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
       "forward_data_status": "SEALED_NO_NEW_FORWARD_READ"
     }
@@ -177356,7 +177359,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "C784378F6194CFD5D58D1D93612BB0DBCDDC6D55CA83FA5AD6D06C590BA13ADA",
+      "last_verified_sha": "8FDF8EC645385BB2D1869A7F6768847DEE5AC77E9519D25DBE80AC3C4EBC9BAD",
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
       "weight": 1.0
     },
@@ -177659,7 +177662,7 @@
         "runtime/b1s_canary_20260711/B1S_CANARY_COMPACT_RESULT.md",
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
-      "last_verified_sha": "AE618DB3F69056B22BEFDFA3219CE7DBB57FEA49002D107F275D31BD577E7A02",
+      "last_verified_sha": "9177ECBBCADBE4F27C61D0112D46FD23A00A3FACA0EA45AD9528D56C6A1B94F2",
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
       "weight": 1.0
     },
@@ -177695,7 +177698,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
-      "status": "IMPLEMENTED",
+      "status": "FROZEN",
       "implementation_path": [
         "alphafactory_crypto/nextgen_epoch.py",
         "scripts/crypto_nextgen_epoch0.py",
@@ -177711,7 +177714,7 @@
         "tests/test_nextgen_epoch_runner.py"
       ],
       "last_verified_sha": "D9E6C8A11EBBCDAEEC2E7B238127F5479C0B38E9962E27660FEA6FD1A5717E8C",
-      "blocker": "Epoch-0 completed but adaptive lanes did not improve survivor production; UCT reward basin concentrated",
+      "blocker": "new performance search frozen; Epoch-2B requires a new mechanism or data plan before any additional strict budget",
       "weight": 1.0
     },
     {
@@ -178023,22 +178026,25 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
-      "status": "IMPLEMENTED",
+      "status": "DEPRECATED",
       "implementation_path": [
         "config/crypto_epoch2_v1.json",
-        "scripts/crypto_epoch2.py"
+        "scripts/crypto_epoch2.py",
+        "scripts/crypto_epoch2b_audit.py"
       ],
       "entrypoint": "python scripts/crypto_epoch2.py run",
       "input": "frozen parent pack and fresh typed roots",
       "output": "49152 fixed proposals, local repair evidence, CEM/surrogate diagnostics and repair lineage",
       "data_role": "development-only proposal search",
-      "feedback_permission": "CURRENT_EPOCH_ONLY_NO_CROSS_EPOCH_POLICY_OR_VALUE",
+      "feedback_permission": "HISTORICAL_EVIDENCE_ONLY_NO_REPEAT_NO_NEW_PERFORMANCE",
       "artifact_test": [
         "tests/test_epoch2.py",
-        "runtime/epoch2_20260712/epoch2_implementation_test_output.txt"
+        "runtime/epoch2_20260712/epoch2_implementation_test_output.txt",
+        "runtime/epoch2b_audit_20260712/operator_causal_summary.csv",
+        "runtime/epoch2b_audit_20260712/parent_class_summary.csv"
       ],
-      "last_verified_sha": "B6359AD33CF97F75522C25035BAAAA1E29415EC59B7470AEADC1E0F956E9682A",
-      "blocker": "none; implementation tests pass and performance remains not started",
+      "last_verified_sha": "DE648C089BA0B52ABA782EC60D6C660137339B61BC4C2C8B6FF297CF26F4A638",
+      "blocker": "strategy rejected: 24/24 adaptive operator-blocker cells lack causal gate control and zero children crossed the target gate",
       "weight": 1.0
     },
     {
@@ -178073,15 +178079,16 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
-      "status": "PARTIAL",
+      "status": "IMPLEMENTED",
       "implementation_path": [
         "config/crypto_epoch2_v1.json",
         "scripts/crypto_epoch2.py",
-        "scripts/crypto_epoch2_postprocess_repair.py"
+        "scripts/crypto_epoch2_postprocess_repair.py",
+        "scripts/crypto_epoch2b_audit.py"
       ],
       "entrypoint": "python scripts/crypto_epoch2.py run; python scripts/crypto_epoch2_postprocess_repair.py check",
       "input": "frozen 49152 proposals and three equal-budget admission policies",
-      "output": "2304 strict evaluations, matched-repair attribution, admission comparison and stopped recommendation",
+      "output": "accepted strict evidence plus report-only economic bottleneck, operator causal, parent suitability, Hybrid replay and BBO scope audits",
       "data_role": "controlled development-only evidence",
       "feedback_permission": "NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
       "artifact_test": [
@@ -178100,10 +178107,17 @@
         "runtime/epoch2_20260712/epoch2_postprocess_recovery_manifest.json",
         "runtime/epoch2_20260712/epoch2_run_manifest.json",
         "runtime/epoch2_20260712/epoch2_artifact_index.csv",
-        "runtime/epoch2_20260712/EPOCH2_COMPACT_RESULT.md"
+        "runtime/epoch2_20260712/EPOCH2_COMPACT_RESULT.md",
+        "tests/test_epoch2b_audit.py",
+        "runtime/epoch2b_audit_20260712/epoch2b_test_output.txt",
+        "runtime/epoch2b_audit_20260712/epoch2b_run_manifest.json",
+        "runtime/epoch2b_audit_20260712/economic_bottleneck_decision.json",
+        "runtime/epoch2b_audit_20260712/EPOCH2B_ECONOMIC_BOTTLENECK_REPORT.md",
+        "runtime/epoch2b_audit_20260712/epoch2b_bias_audit.json",
+        "runtime/epoch2b_audit_20260712/epoch2b_artifact_index.csv"
       ],
-      "last_verified_sha": "65AC1BABBE81DD85A40943F84E47A729323E741F24458C843B9F25DE9E586853",
-      "blocker": "zero survivors, zero adaptive successes, negative median blocker change and Hybrid 60/40 admitted-identity contract not preserved; stopped pending revision",
+      "last_verified_sha": "1386CC2EB1B615EE3BB7C659246474E6E6BE5F6B2F0D26B74F4F2CFA77620C3D",
+      "blocker": "strict evidence accepted, Hybrid historical comparison invalid and blocker-directed repair rejected; next route is new mechanism or data with performance frozen",
       "weight": 1.0
     }
   ],

@@ -1,22 +1,22 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `9404EDC978D35A68E27C5B3765B4D8BADC3E778D1C98D176079C5DDF79DC61D6`.
+Registry SHA256: `3518545F5447AF04FCB3927F5D848322F323E62D76F6FA348D787D73FEC79C94`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
-- `RESEARCH_MODE_CONTROLLED_EPOCH2_DEVELOPMENT_ONLY`
-- Current phase: `FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED`
+- `ANALYSIS_AND_ENGINEERING_ALLOWED`
+- Current phase: `ECONOMIC_BOTTLENECK_AUDIT_COMPLETED`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
 - NEXTGEN-DARK: `NEXTGEN_DARK_SCOPED_READY`
-- Formal search: `FORMAL_SEARCH_FROZEN`
+- Formal search: `NEW_PERFORMANCE_SEARCH_FROZEN`
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `EPOCH2_STOPPED_AWAITING_INDEPENDENT_DECISION`
+- Active stage: `NEW_PERFORMANCE_SEARCH_FROZEN_AWAITING_NEW_MECHANISM_DATA_PLAN`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -159,13 +159,26 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## CRYPTO EPOCH-2
 
-- Status: `FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED`
+- Status: `EPOCH2_STRICT_EVIDENCE_ACCEPTED`
+- Hybrid comparison: `EPOCH2_HYBRID_COMPARISON_INVALID`
+- Repair strategy: `BLOCKER_DIRECTED_REPAIR_STRATEGY_REJECTED`
 - Calibration: `SURVIVOR_CONTRACT_CALIBRATED_REACHABLE`; planted/null pass `1.0` / `0.0`
 - Frozen parents: `84` rows / `64` proposals / `57` exact identities
 - Budget: `49152` proposals / `2304` strict / seeds `[5201, 5209]`
 - Bias audit: `HOLD_RESEARCH_DEVELOPMENT_ONLY_OOS_NONE`
 - Design frozen / performance started: `True` / `True`
 - Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
+
+## CRYPTO EPOCH-2B Economic Bottleneck Audit
+
+- Status: `ECONOMIC_BOTTLENECK_AUDIT_COMPLETED`
+- Main recommendation: `PIVOT_TO_NEW_MECHANISM_OR_DATA`
+- Existing logical strict rows read / new performance queries: `6157` / `0`
+- Main median positive gross-LCB proxy fraction / rare-edge cost-kill share: `0.02944862155388471` / `0.9846153846153847`
+- Parent classes — no edge / portfolio transform / unstable: `72` / `9` / `3`
+- Adaptive operator cells without causal control / target crossing / collateral damage: `24` / `0.0` / `0.9036334913112164`
+- Main NET_LCB near misses Epoch-1R -> Epoch-2 / distance change: `55` -> `174` / `0.13241328562959054`
+- BBO secondary line: `BBO_DEVELOPMENT_COVERAGE_ACQUISITION_PLAN_ONLY`; positive exact / clusters / coverage `5` / `5` / `0.8222222222222222`
 
 ## NEXTGEN-DARK Allowed
 
@@ -207,4 +220,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Independently review the Epoch-2 partial result; repair admitted-identity Hybrid quotas and blocker-directed operators before any newly frozen development epoch. Formal search, forward access, promotion and cross-epoch memory remain frozen.
+Define and independently authorize a new mechanism, field, label or horizon acquisition plan before any new strict budget. BBO full-2024 physically isolated development acquisition may proceed as a secondary engineering line without winner selection.

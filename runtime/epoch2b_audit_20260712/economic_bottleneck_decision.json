@@ -1,0 +1,28 @@
+{
+  "condition_results": {
+    "EXPAND_BBO_DEVELOPMENT_COVERAGE": true,
+    "PIVOT_TO_NEW_MECHANISM_OR_DATA": true,
+    "PIVOT_TO_PORTFOLIO_TRANSFORM_SEARCH": false,
+    "PIVOT_TO_STATE_CONDITIONED_SEARCH": false
+  },
+  "main_recommendation": "PIVOT_TO_NEW_MECHANISM_OR_DATA",
+  "metrics": {
+    "bbo_behaviour_clusters": 5,
+    "bbo_coverage_ratio": 0.8222222222222222,
+    "bbo_exposure_cells": 5,
+    "bbo_positive_net_exact_identities": 5,
+    "cost_killed_share_of_positive_gross_lcb_proxy": 0.9846153846153847,
+    "epoch_main_positive_gross_lcb_proxy_fraction": {
+      "EPOCH0": 0.02944862155388471,
+      "EPOCH1R": 0.030837004405286344,
+      "EPOCH2": 0.028314917127071824
+    },
+    "median_epoch_main_positive_gross_lcb_proxy_fraction": 0.02944862155388471,
+    "no_edge_or_unstable_parent_share": 0.8928571428571429,
+    "simple_main_benchmark_positive_gross_lcb_proxy_count": 0,
+    "stability_only_share_of_main_near_misses": 0.0
+  },
+  "performance_search_authorized": false,
+  "secondary_line": "BBO_DEVELOPMENT_COVERAGE_ACQUISITION_PLAN_ONLY",
+  "status": "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED"
+}

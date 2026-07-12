@@ -1,14 +1,14 @@
 {
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
-  "research_status": "RESEARCH_MODE_CONTROLLED_EPOCH2_DEVELOPMENT_ONLY",
-  "current_phase": "FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED",
+  "research_status": "ANALYSIS_AND_ENGINEERING_ALLOWED",
+  "current_phase": "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
-  "active_stage": "EPOCH2_STOPPED_AWAITING_INDEPENDENT_DECISION",
+  "active_stage": "NEW_PERFORMANCE_SEARCH_FROZEN_AWAITING_NEW_MECHANISM_DATA_PLAN",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
-  "formal_search_status": "FORMAL_SEARCH_FROZEN",
+  "formal_search_status": "NEW_PERFORMANCE_SEARCH_FROZEN",
   "nextgen_dark_status": "NEXTGEN_DARK_SCOPED_READY",
   "canary_status": "B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL",
   "adaptive_cross_epoch_memory_status": "ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN",
@@ -283,7 +283,7 @@
     "tag_peeled_commit": "a9c119e4447755d76838373178c57ae8e05ab481"
   },
   "nextgen_epoch2": {
-    "status":"FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED","accepted_epoch1r_subject_sha":"b1b9544bb6443894fda3abf7cc63c6d492693242",
+    "status":"EPOCH2_STRICT_EVIDENCE_ACCEPTED","accepted_epoch1r_subject_sha":"b1b9544bb6443894fda3abf7cc63c6d492693242",
     "calibration_decision":"SURVIVOR_CONTRACT_CALIBRATED_REACHABLE","planted_pass_rate":1.0,"null_pass_rate":0.0,
     "parent_rows":84,"unique_parent_proposals":64,"unique_parent_exact_identities":57,
     "blocker_counts":{"NET_LCB_NEAR_ZERO":56,"COST_ONLY":26,"BENCHMARK_INCREMENT_ONLY":1,"STRUCTURAL_UNREPAIRABLE":1},
@@ -293,8 +293,20 @@
     "proposal_rows_executed":49152,"strict_rows_executed":2304,"shared_exact_evaluation_queries":1488,"execution_failure_scope":"POST_STRICT_REPORT_SCHEMA_PROPOSAL_ID_OMITTED_RECOVERED","new_performance_queries_for_recovery":0,
     "development_survivors":0,"survivor_near_misses":237,"positive_net_lcb":8,"adaptive_successes":0,"mcts_top_concentration":0.3438409311348205,"median_blocker_distance_delta":-0.00003722529932946653,
     "main_positive_net_lcb":0,"bbo_micro_positive_net_lcb":8,"hybrid_60_40_contract_preserved":false,"fixed_budget_contract_preserved":true,
-    "recommendation":"REVISE_BLOCKER_DIRECTED_SEARCH_AND_REPEAT","postprocess_recovery":"VALIDATED_ZERO_NEW_PERFORMANCE_QUERIES",
+    "hybrid_comparison_status":"EPOCH2_HYBRID_COMPARISON_INVALID","repair_strategy_status":"BLOCKER_DIRECTED_REPAIR_STRATEGY_REJECTED",
+    "recommendation":"DO_NOT_REPEAT_BLOCKER_DIRECTED_REPAIR","postprocess_recovery":"VALIDATED_ZERO_NEW_PERFORMANCE_QUERIES",
     "bias_audit":"HOLD_RESEARCH_DEVELOPMENT_ONLY_OOS_NONE","candidate_promotion":false,"cross_epoch_memory":false,"forward_read":false
   },
-  "next_acceptance_gate": "Independently review the Epoch-2 partial result; repair admitted-identity Hybrid quotas and blocker-directed operators before any newly frozen development epoch. Formal search, forward access, promotion and cross-epoch memory remain frozen."
+  "epoch2b_audit": {
+    "status":"ECONOMIC_BOTTLENECK_AUDIT_COMPLETED","main_recommendation":"PIVOT_TO_NEW_MECHANISM_OR_DATA",
+    "logical_strict_rows_read":6157,"new_performance_queries":0,"gross_lcb_method":"SUMMARY_PROXY_NET_LCB_PLUS_MEAN_COST_DRAG",
+    "main_positive_gross_lcb_proxy_fraction_median":0.02944862155388471,"cost_killed_share_of_rare_positive_gross_lcb":0.9846153846153847,
+    "parents_no_economic_edge":72,"parents_portfolio_transform_required":9,"parents_unstable_neighbourhood":3,
+    "adaptive_operator_cells_no_causal_control":24,"adaptive_target_gate_crossing_rate":0.0,"adaptive_collateral_damage_rate":0.9036334913112164,
+    "epoch1r_main_net_near_misses":55,"epoch2_main_net_near_misses":174,"near_miss_distance_relative_change":0.13241328562959054,
+    "hybrid_report_only_replay":"TRUE_60_40_AFTER_EXACT_DEDUP_NO_NEW_PERFORMANCE","bbo_secondary_line":"BBO_DEVELOPMENT_COVERAGE_ACQUISITION_PLAN_ONLY",
+    "bbo_positive_net_exact_identities":5,"bbo_behaviour_clusters":5,"bbo_coverage_ratio":0.8222222222222222,
+    "forward_read":false,"candidate_promotion":false,"cross_epoch_memory":false
+  },
+  "next_acceptance_gate": "Define and independently authorize a new mechanism, field, label or horizon acquisition plan before any new strict budget. BBO full-2024 physically isolated development acquisition may proceed as a secondary engineering line without winner selection."
 }
