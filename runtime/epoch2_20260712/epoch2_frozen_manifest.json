@@ -1,0 +1,105 @@
+{
+  "admission_policies": {
+    "GLOBAL_QUALITY": {
+      "diversity_share": 0.0,
+      "quality_share": 1.0
+    },
+    "HYBRID_QUALITY_DIVERSITY": {
+      "diversity_share": 0.4,
+      "quality_share": 0.6
+    },
+    "STRATIFIED_DIVERSITY": {
+      "diversity_share": 1.0,
+      "quality_share": 0.0
+    }
+  },
+  "benchmark_contract": "Epoch-1R frozen simple development benchmarks; panels remain separately ranked",
+  "bias_audit": "HOLD_RESEARCH",
+  "calibration": {
+    "candidate_promotion": false,
+    "continuation": "proceed to frozen near-miss taxonomy only if decision is reachable",
+    "cost_bps": 5.0,
+    "data_access": "DEVELOPMENT_AND_SYNTHETIC_CALIBRATION_ONLY",
+    "decision": "SURVIVOR_CONTRACT_CALIBRATED_REACHABLE",
+    "experiment_id": "20260712_epoch2_survivor_calibration_001",
+    "forward_read": false,
+    "memory_updated": false,
+    "null_pass_rate": 0.0,
+    "oos_grade": "NONE",
+    "planted_pass_rate": 1.0,
+    "repo_sha": "b1b9544bb6443894fda3abf7cc63c6d492693242",
+    "reproducibility": "FIXED_SEEDS_AND_HASHED_OUTPUT",
+    "rows": 18,
+    "strict_search_started": false,
+    "table": "runtime/epoch2_calibration_20260712/survivor_contract_calibration.csv",
+    "table_sha256": "0221135C180182D1431A28F0EB14F1F68E407BC6DDC8C676BFFD8E690542F7E4"
+  },
+  "candidate_promotion": false,
+  "cost_bps": 5.0,
+  "cross_epoch_memory": false,
+  "diagnostic_components": {
+    "cem": "early_gate_eligible_elite_only_no_separate_budget",
+    "surrogate": "fixed_two_seed_cross_fit_no_selection_use"
+  },
+  "estimated_runtime_seconds": 5400,
+  "experiment_id": "20260712_crypto_epoch2_001",
+  "fixed_seeds": [
+    5201,
+    5209
+  ],
+  "forward_read": false,
+  "frozen_manifest_sha256": "0778E46A397E58E35C38827DDEB3673E685D7440F6435FD7BBA118C065105850",
+  "hybrid_ratio": "60_QUALITY_40_DIVERSITY",
+  "inputs_sha256": {
+    "alphafactory_crypto/nextgen_epoch.py": "B376E5A9C3E7035F07DCBC7B67C3BFF70BC5B08357C2529817AD5F99633C5337",
+    "alphafactory_crypto/search_revision.py": "37A7ADA3F8CDF6B44EE46C1380CE13FED3DA03CF7647C9786C0C472F761C525F",
+    "config/crypto_epoch2_v1.json": "C1FA98185DBB05919017C0F5ACC9A442CECDE0DB885A2E254CBDDE8BF0AA0AF4",
+    "runtime/epoch2_20260712/epoch2_implementation_test_output.txt": "9FDCBFF64289457F9D750337CD753E2A188A87545B5D05E3239A046C161D61FB",
+    "runtime/epoch2_calibration_20260712/calibration_manifest.json": "09C0CFB038CCA0F0640BF53CE4A120CAE6730767FB6F5D467E0CCD17205E17CE",
+    "runtime/epoch2_calibration_20260712/frozen_near_miss_parent_pack.csv": "DB6C599C5BC736022A4E8D46BBBC387B9829A348EC0E217B0FA55EFBE992DE81",
+    "runtime/epoch2_calibration_20260712/taxonomy_manifest.json": "45746B24E8D738CD84DDC9B10849719C62BBB429E4D88FCA868B54513C1A2DC7",
+    "scripts/crypto_epoch2.py": "A2B09D06C87EBC109F706442ECBCE59DA64E5B16C9683267AED94CB21450FEF4",
+    "tests/test_epoch2.py": "71E9C842EC94EC1538A66F0C764D6A8102A1B636DCBE459C64D0BED200DBE1E6"
+  },
+  "lane_budgets": {
+    "evolutionary_random_control": 8601,
+    "evolutionary_repair": 8602,
+    "llm_random_repair_control": 3686,
+    "llm_typed_repair": 3687,
+    "local_mcts_random_control": 4915,
+    "local_mcts_repair": 4915,
+    "orthogonal_exile_fresh": 4916,
+    "typed_ast_fresh": 4915,
+    "typed_random_fresh": 4915
+  },
+  "mcts_contract": "local_two_step_blocker_repair_with_deterministic_action_exploration_floor_and_matched_random_control",
+  "online_change": false,
+  "oos_grade": "NONE",
+  "panel_strict_budget_per_policy": {
+    "bbo_micro": 24,
+    "main": 744
+  },
+  "performance_started": false,
+  "proposal_budget": 49152,
+  "repo_sha": "c31f3497ca18572f3add5cfefc8f33fa41e68632",
+  "shared_exact_evaluation_cache": true,
+  "status": "EPOCH2_DESIGN_FROZEN_NOT_STARTED",
+  "strict_budget": 2304,
+  "strict_per_policy": 768,
+  "survivor_contract": "hard_gate AND ic_lcb>0 AND net_lcb>0 AND benchmark_increment_lcb>0 AND worst_block>-0.001",
+  "taxonomy": {
+    "forward_read": false,
+    "memory_updated": false,
+    "parent_pack_sha256": "DB6C599C5BC736022A4E8D46BBBC387B9829A348EC0E217B0FA55EFBE992DE81",
+    "parent_rows": 84,
+    "performance_reoptimized": false,
+    "selection_replayed": false,
+    "source_proposal_pack_sha256": "318811FC93C39719B164CF9FF3212D507B964963E17E08D0B026F6B3E2350A62",
+    "source_strict_sha256": "41F3D8DAE56CF5C5F6DF45D019CCDD3BDB2A4C6C3853609C1077E20445B7AD6B",
+    "status": "EPOCH2_NEAR_MISS_PARENTS_FROZEN",
+    "summary_sha256": "386D5294408B30233F8CEF9EC477B6B713E915102849BE817B1C51CA8FF41E7C",
+    "taxonomy_sha256": "DB6C599C5BC736022A4E8D46BBBC387B9829A348EC0E217B0FA55EFBE992DE81",
+    "unique_exact_identities": 57,
+    "unique_proposal_ids": 64
+  }
+}

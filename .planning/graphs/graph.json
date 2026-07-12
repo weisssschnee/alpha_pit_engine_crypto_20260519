@@ -4,14 +4,14 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "27A2B09389855011B96FA065D375B6D339C8588C4EC840C98CFDE96A5A43FF0C",
+      "registry_sha256": "D81BB314FB28F7090D647AE63CEB0F52FE5C88545F38027058790A086CE9735B",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 54,
       "control_edge_count": 110,
-      "phase_status": "EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION_READY",
+      "phase_status": "FROZEN_DEVELOPMENT_EPOCH2_DESIGN_FROZEN",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "EPOCH2_DESIGN_FREEZE_PENDING",
+      "active_stage": "EPOCH2_SINGLE_EXECUTION_AUTHORIZED_NOT_STARTED",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
@@ -46,8 +46,8 @@
       "epoch1r_executed_strict_evaluations": 2052,
       "epoch1r_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
       "epoch1r_remote_sync_status": "VERIFIED_REMOTE_CONTAINS_EPOCH1R_CLOSURE",
-      "epoch2_status": "EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION_READY",
-      "epoch2_design_frozen": false,
+      "epoch2_status": "FROZEN_DEVELOPMENT_EPOCH2_DESIGN_FROZEN",
+      "epoch2_design_frozen": true,
       "epoch2_performance_started": false,
       "research_status": "RESEARCH_MODE_CONTROLLED_EPOCH2_DEVELOPMENT_ONLY",
       "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
@@ -178048,7 +178048,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "config/crypto_architecture_control_registry_v1.json",
-      "status": "PLANNED",
+      "status": "IMPLEMENTED",
       "implementation_path": [
         "config/crypto_epoch2_v1.json",
         "scripts/crypto_epoch2.py"
@@ -178058,9 +178058,12 @@
       "output": "immutable Epoch-2 manifest",
       "data_role": "frozen development-search control",
       "feedback_permission": "NO_PERFORMANCE_BEFORE_FREEZE",
-      "artifact_test": [],
-      "last_verified_sha": "7D22F503753FDB31FE43D07ECF58707113BBB57C246CB2439E91AF93B8EB237D",
-      "blocker": "implementation commit and immutable freeze manifest pending",
+      "artifact_test": [
+        "runtime/epoch2_20260712/epoch2_frozen_manifest.json",
+        "runtime/epoch2_20260712/epoch2_implementation_test_output.txt"
+      ],
+      "last_verified_sha": "36C7CFC4451D7B938F778E834FEEA82EEC95C3B6D14FF91BE887B5249E911BD3",
+      "blocker": "none; frozen at c31f349 with performance not started",
       "weight": 1.0
     },
     {
@@ -178085,7 +178088,7 @@
         "runtime/epoch2_20260712/epoch2_implementation_test_output.txt"
       ],
       "last_verified_sha": "B6359AD33CF97F75522C25035BAAAA1E29415EC59B7470AEADC1E0F956E9682A",
-      "blocker": "immutable Epoch-2 design not yet frozen; performance not started",
+      "blocker": "single frozen development execution authorized but not started",
       "weight": 1.0
     }
   ],

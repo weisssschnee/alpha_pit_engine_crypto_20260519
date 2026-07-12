@@ -1122,7 +1122,7 @@
     {
       "id": "epoch2_frozen_design",
       "label": "CRYPTO EPOCH-2 frozen design",
-      "status": "PLANNED",
+      "status": "IMPLEMENTED",
       "implementation_path": [
         "config/crypto_epoch2_v1.json",
         "scripts/crypto_epoch2.py"
@@ -1132,9 +1132,12 @@
       "output": "immutable Epoch-2 manifest",
       "data_role": "frozen development-search control",
       "feedback_permission": "NO_PERFORMANCE_BEFORE_FREEZE",
-      "artifact_test": [],
-      "blocker": "implementation commit and immutable freeze manifest pending",
-      "last_verified_sha": "7D22F503753FDB31FE43D07ECF58707113BBB57C246CB2439E91AF93B8EB237D"
+      "artifact_test": [
+        "runtime/epoch2_20260712/epoch2_frozen_manifest.json",
+        "runtime/epoch2_20260712/epoch2_implementation_test_output.txt"
+      ],
+      "blocker": "none; frozen at c31f349 with performance not started",
+      "last_verified_sha": "36C7CFC4451D7B938F778E834FEEA82EEC95C3B6D14FF91BE887B5249E911BD3"
     },
     {
       "id": "epoch2_execution",
@@ -1153,7 +1156,7 @@
         "tests/test_epoch2.py",
         "runtime/epoch2_20260712/epoch2_implementation_test_output.txt"
       ],
-      "blocker": "immutable Epoch-2 design not yet frozen; performance not started",
+      "blocker": "single frozen development execution authorized but not started",
       "last_verified_sha": "B6359AD33CF97F75522C25035BAAAA1E29415EC59B7470AEADC1E0F956E9682A"
     }
   ],

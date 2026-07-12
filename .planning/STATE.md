@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `27A2B09389855011B96FA065D375B6D339C8588C4EC840C98CFDE96A5A43FF0C`.
+Registry SHA256: `D81BB314FB28F7090D647AE63CEB0F52FE5C88545F38027058790A086CE9735B`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `RESEARCH_MODE_CONTROLLED_EPOCH2_DEVELOPMENT_ONLY`
-- Current phase: `EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION_READY`
+- Current phase: `FROZEN_DEVELOPMENT_EPOCH2_DESIGN_FROZEN`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,7 +16,7 @@ Registry SHA256: `27A2B09389855011B96FA065D375B6D339C8588C4EC840C98CFDE96A5A43FF
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `EPOCH2_DESIGN_FREEZE_PENDING`
+- Active stage: `EPOCH2_SINGLE_EXECUTION_AUTHORIZED_NOT_STARTED`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -159,12 +159,12 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## CRYPTO EPOCH-2
 
-- Status: `EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION_READY`
+- Status: `FROZEN_DEVELOPMENT_EPOCH2_DESIGN_FROZEN`
 - Calibration: `SURVIVOR_CONTRACT_CALIBRATED_REACHABLE`; planted/null pass `1.0` / `0.0`
 - Frozen parents: `84` rows / `64` proposals / `57` exact identities
 - Budget: `49152` proposals / `2304` strict / seeds `[5201, 5209]`
 - Bias audit: `HOLD_RESEARCH_DEVELOPMENT_ONLY_OOS_NONE`
-- Design frozen / performance started: `False` / `False`
+- Design frozen / performance started: `True` / `False`
 - Forward read / promotion / cross-epoch memory: `False` / `False` / `False`
 
 ## NEXTGEN-DARK Allowed
@@ -207,4 +207,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Commit the tested Epoch-2 runner, freeze its repo SHA and contracts, verify the immutable manifest, then execute exactly once without online changes.
+Verify the frozen Epoch-2 manifest and execute the single fixed-budget development run once; then close artifacts without online changes or additional budget.

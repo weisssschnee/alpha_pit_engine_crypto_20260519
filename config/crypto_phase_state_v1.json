@@ -2,10 +2,10 @@
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
   "research_status": "RESEARCH_MODE_CONTROLLED_EPOCH2_DEVELOPMENT_ONLY",
-  "current_phase": "EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION_READY",
+  "current_phase": "FROZEN_DEVELOPMENT_EPOCH2_DESIGN_FROZEN",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
-  "active_stage": "EPOCH2_DESIGN_FREEZE_PENDING",
+  "active_stage": "EPOCH2_SINGLE_EXECUTION_AUTHORIZED_NOT_STARTED",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "formal_search_status": "FORMAL_SEARCH_FROZEN",
@@ -283,13 +283,14 @@
     "tag_peeled_commit": "a9c119e4447755d76838373178c57ae8e05ab481"
   },
   "nextgen_epoch2": {
-    "status":"EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION_READY","accepted_epoch1r_subject_sha":"b1b9544bb6443894fda3abf7cc63c6d492693242",
+    "status":"FROZEN_DEVELOPMENT_EPOCH2_DESIGN_FROZEN","accepted_epoch1r_subject_sha":"b1b9544bb6443894fda3abf7cc63c6d492693242",
     "calibration_decision":"SURVIVOR_CONTRACT_CALIBRATED_REACHABLE","planted_pass_rate":1.0,"null_pass_rate":0.0,
     "parent_rows":84,"unique_parent_proposals":64,"unique_parent_exact_identities":57,
     "blocker_counts":{"NET_LCB_NEAR_ZERO":56,"COST_ONLY":26,"BENCHMARK_INCREMENT_ONLY":1,"STRUCTURAL_UNREPAIRABLE":1},
-    "proposal_budget":49152,"strict_budget":2304,"fixed_seeds":[5201,5209],"panel_strict_budget_per_policy":{"main":744,"bbo_micro":24},"design_frozen":false,"performance_started":false,
+    "proposal_budget":49152,"strict_budget":2304,"fixed_seeds":[5201,5209],"panel_strict_budget_per_policy":{"main":744,"bbo_micro":24},"design_frozen":true,"performance_started":false,
+    "frozen_repo_sha":"c31f3497ca18572f3add5cfefc8f33fa41e68632","frozen_manifest_sha256":"0778E46A397E58E35C38827DDEB3673E685D7440F6435FD7BBA118C065105850",
     "implementation_tests":"11_PASSED","mcts_role":"LOCAL_BLOCKER_REPAIR_ONLY","cem_role":"DIAGNOSTIC_ONLY","surrogate_role":"FIXED_CROSS_FIT_DIAGNOSTIC_ONLY",
     "bias_audit":"HOLD_RESEARCH_DEVELOPMENT_ONLY_OOS_NONE","candidate_promotion":false,"cross_epoch_memory":false,"forward_read":false
   },
-  "next_acceptance_gate": "Commit the tested Epoch-2 runner, freeze its repo SHA and contracts, verify the immutable manifest, then execute exactly once without online changes."
+  "next_acceptance_gate": "Verify the frozen Epoch-2 manifest and execute the single fixed-budget development run once; then close artifacts without online changes or additional budget."
 }
