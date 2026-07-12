@@ -1,0 +1,99 @@
+{
+  "additional_budget": false,
+  "benchmarks": [
+    {
+      "benchmark_id": "flow_imbalance_level",
+      "field": "volume_imbalance",
+      "hypothesis": "aggressive flow continuation",
+      "operator": "LEVEL"
+    },
+    {
+      "benchmark_id": "signed_notional_level",
+      "field": "signed_aggressor_notional",
+      "hypothesis": "signed notional pressure",
+      "operator": "LEVEL"
+    },
+    {
+      "benchmark_id": "flow_imbalance_change",
+      "field": "volume_imbalance",
+      "hypothesis": "flow acceleration",
+      "operator": "DELTA_1H"
+    },
+    {
+      "benchmark_id": "flow_imbalance_zscore",
+      "field": "volume_imbalance",
+      "hypothesis": "flow shock",
+      "operator": "ZSCORE_24H"
+    },
+    {
+      "benchmark_id": "large_flow_concentration",
+      "field": "large_notional_ratio_100k_plus",
+      "hypothesis": "large-trade concentration",
+      "operator": "LEVEL"
+    },
+    {
+      "benchmark_id": "flow_persistence",
+      "field": "volume_imbalance",
+      "hypothesis": "persistent aggressive flow",
+      "operator": "PERSISTENCE_4H"
+    },
+    {
+      "benchmark_id": "flow_transition",
+      "field": "volume_imbalance",
+      "hypothesis": "aggressor-side transition",
+      "operator": "TRANSITION"
+    },
+    {
+      "benchmark_id": "impact_flow_divergence",
+      "field": "volume_imbalance",
+      "hypothesis": "flow absorption or impact transmission",
+      "operator": "DIVERGENCE",
+      "secondary_field": "close_to_open_bps"
+    }
+  ],
+  "candidate_promotion": false,
+  "complex_search_participation": false,
+  "config_sha256": "6F6850FAB3144B05E0DA0CD9F2A3FDC59C3F4B906F18FED0EC04120B2B9375F7",
+  "cost_bps_per_unit_turnover": 5.0,
+  "execution_delay_hours": 1,
+  "fixed_evaluation_count": 164,
+  "fixed_seed": 7401,
+  "forward_read": false,
+  "frozen_manifest_sha256": "E07ED915584C58A8975F5F0AA2E12A6959B292809BB6D256F693EE9E903A5423",
+  "future_search_admission": {
+    "base_positive_gross_lcb": true,
+    "base_positive_net_lcb": true,
+    "benchmark_increment_lcb_positive": true,
+    "challenge_positive_net_lcb": true,
+    "max_abs_weight_correlation_to_incumbent": 0.9,
+    "negative_controls_must_not_match_base": true,
+    "positive_month_fraction_min": 0.5
+  },
+  "horizons_hours": [
+    1,
+    4
+  ],
+  "incumbent": {
+    "benchmark_id": "incumbent_hourly_momentum",
+    "field": "close_to_open_bps",
+    "operator": "LEVEL"
+  },
+  "memory_update": false,
+  "online_adjustment": false,
+  "performance_started": false,
+  "release_content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+  "release_output_files": 117,
+  "repo_sha": "37cb619d7590f99f612139230820d15d47b356dc",
+  "roles": [
+    "DEVELOPMENT",
+    "CHALLENGE"
+  ],
+  "status": "NATIVE_AGGTRADES_BENCHMARK_CANARY_DESIGN_FROZEN",
+  "variants": [
+    "BASE",
+    "SIGN_FLIP",
+    "WRONG_LAG_24H",
+    "SHUFFLED_WITHIN_SYMBOL_MONTH",
+    "MATCHED_RANDOM"
+  ]
+}
