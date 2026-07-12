@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "A0F4BD388B2384CC18FB87CC9FC7A998B6606875D3F0011612F0BF5A4C9B1D1D"
+      "last_verified_sha": "EE04D8C82D469E1EA474B802E8EACE25550C024FF4553E1177764A1E459BBC4A"
     },
     {
       "id": "frozen_signal_behaviour_qualification",

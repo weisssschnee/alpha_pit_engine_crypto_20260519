@@ -490,6 +490,8 @@ Registry SHA256: `{digest}`.
 - Native aggTrades benchmark: `{state['mechanism_data_expansion0']['benchmark_status']}`; admitted horizons `{state['mechanism_data_expansion0']['benchmark_admitted_horizons']}`
 - Full-year BBO source availability: `{state['mechanism_data_expansion0']['bbo_full_year_available_coordinates']}/{state['mechanism_data_expansion0']['bbo_full_year_required_coordinates']}`
 - Stage recommendation: `{state['mechanism_data_expansion0']['stage_recommendation']}`
+- Epoch-2B remote sync: `{state['epoch2b_remote_sync']['status']}`; tag peeled commit `{state['epoch2b_remote_sync']['tag_peeled_commit']}`
+- Mechanism/data closure remote sync: `{state['mechanism_data_expansion0']['closure_remote_status']}` for `{state['mechanism_data_expansion0']['closure_subject_sha']}`
 
 ## Remote Baseline
 
@@ -886,6 +888,8 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "mechanism_data_benchmark_status": state["mechanism_data_expansion0"]["benchmark_status"],
         "mechanism_data_stage_status": state["mechanism_data_expansion0"]["stage_status"],
         "mechanism_data_stage_recommendation": state["mechanism_data_expansion0"]["stage_recommendation"],
+        "epoch2b_remote_sync_status": state["epoch2b_remote_sync"]["status"],
+        "mechanism_data_closure_remote_status": state["mechanism_data_expansion0"]["closure_remote_status"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -1089,6 +1093,9 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "mechanism_data_stage_recommendation": state["mechanism_data_expansion0"]["stage_recommendation"],
         "mechanism_data_stage_closure_manifest": relative(MECHANISM_DATA_CLOSURE_MANIFEST_PATH),
         "mechanism_data_stage_artifact_index": relative(MECHANISM_DATA_CLOSURE_INDEX_PATH),
+        "epoch2b_remote_sync": state["epoch2b_remote_sync"],
+        "mechanism_data_closure_subject_sha": state["mechanism_data_expansion0"]["closure_subject_sha"],
+        "mechanism_data_closure_remote_status": state["mechanism_data_expansion0"]["closure_remote_status"],
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []

@@ -308,6 +308,15 @@
     "bbo_positive_net_exact_identities":5,"bbo_behaviour_clusters":5,"bbo_coverage_ratio":0.8222222222222222,
     "forward_read":false,"candidate_promotion":false,"cross_epoch_memory":false
   },
+  "epoch2b_remote_sync": {
+    "branch": "audit/evalreset-collapse-forensics-20260711",
+    "closure_subject_sha": "5d8be3d26a4e2dd57b733e3de4938081c69501a8",
+    "remote_branch_observed_sha": "97f279bb9204b3e709f41fca37160357c1adea5f",
+    "tag": "epoch2b-economic-bottleneck-5d8be3d",
+    "tag_object_sha": "9e57a2f2b91908e4fcd2b278494002c096f15774",
+    "tag_peeled_commit": "5d8be3d26a4e2dd57b733e3de4938081c69501a8",
+    "status": "VERIFIED_REMOTE_BRANCH_CONTAINS_CLOSURE_AND_TAG_PEELED_MATCHES"
+  },
   "mechanism_data_expansion0": {
     "inventory_status": "DATA_MECHANISM_INVENTORY_COMPLETED",
     "local_files": 171639,
@@ -361,7 +370,9 @@
     "stage_status": "MECHANISM_DATA_EXPANSION0_PARTIALLY_COMPLETED",
     "stage_recommendation": "STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA",
     "stage_closure_manifest": "runtime/mechanism_data_expansion0_20260712/stage_closure_manifest.json",
-    "stage_artifact_index": "runtime/mechanism_data_expansion0_20260712/stage_artifact_index.csv"
+    "stage_artifact_index": "runtime/mechanism_data_expansion0_20260712/stage_artifact_index.csv",
+    "closure_subject_sha": "97f279bb9204b3e709f41fca37160357c1adea5f",
+    "closure_remote_status": "VERIFIED_REMOTE_CONTAINS_MECHANISM_DATA_EXPANSION0_CLOSURE"
   },
   "next_acceptance_gate": "Provide and independently qualify a new longitudinal external historical source for cross-venue price discovery, full-year BBO, forced-flow/liquidation or options before any new mechanism benchmark or frozen search authorization."
 }

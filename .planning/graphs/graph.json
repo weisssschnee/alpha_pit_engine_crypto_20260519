@@ -4,7 +4,7 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "96D3BC8B9CA3F44036C9B130D93200F6E5FA69D0141E2424CD379AC0E6ABBD73",
+      "registry_sha256": "0A42AACE270C301CBD94E5B0BCCAE1C436CC85205043273FAB4D5A0230A8552E",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 59,
@@ -59,6 +59,8 @@
       "mechanism_data_benchmark_status": "NATIVE_AGGTRADES_SIMPLE_BENCHMARK_CANARY_COMPLETED",
       "mechanism_data_stage_status": "MECHANISM_DATA_EXPANSION0_PARTIALLY_COMPLETED",
       "mechanism_data_stage_recommendation": "STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA",
+      "epoch2b_remote_sync_status": "VERIFIED_REMOTE_BRANCH_CONTAINS_CLOSURE_AND_TAG_PEELED_MATCHES",
+      "mechanism_data_closure_remote_status": "VERIFIED_REMOTE_CONTAINS_MECHANISM_DATA_EXPANSION0_CLOSURE",
       "research_status": "HOLD_RESEARCH_EXTERNAL_DATA_REQUIRED",
       "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
       "forward_data_status": "SEALED_NO_NEW_FORWARD_READ"
@@ -177366,7 +177368,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "A0F4BD388B2384CC18FB87CC9FC7A998B6606875D3F0011612F0BF5A4C9B1D1D",
+      "last_verified_sha": "EE04D8C82D469E1EA474B802E8EACE25550C024FF4553E1177764A1E459BBC4A",
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
       "weight": 1.0
     },
