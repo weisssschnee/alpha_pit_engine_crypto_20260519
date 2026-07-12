@@ -5,7 +5,6 @@ import gzip
 import hashlib
 import io
 import json
-import math
 import subprocess
 import sys
 import time
@@ -516,6 +515,10 @@ def run() -> dict[str, Any]:
     ).reset_index()
     mechanism["gross_lcb_to_net_conversion_rate"] = mechanism.positive_net_lcb / mechanism.positive_gross_lcb_proxy.replace(0, np.nan)
 
+    epoch1r_net_near = near_transition[(near_transition.epoch == "EPOCH1R") & (near_transition.panel_id == "main") & (near_transition.near_miss_type == "NET_LCB")].iloc[0]
+    epoch2_net_near = near_transition[(near_transition.epoch == "EPOCH2") & (near_transition.panel_id == "main") & (near_transition.near_miss_type == "NET_LCB")].iloc[0]
+    near_distance_change = float(epoch2_net_near.failed_gate_distance_abs_median / epoch1r_net_near.failed_gate_distance_abs_median - 1.0)
+
     main_epoch = funnel[(funnel.unit == "UNIQUE_EXACT") & (funnel.group_type == "PANEL") & (funnel.panel_id == "main")]
     largest_sequential = []
     stages = ["all_strict", "positive_gross", "positive_gross_lcb_proxy", "positive_net", "positive_net_lcb", "stable_worst_block", "benchmark_incremental", "survivor"]
@@ -529,7 +532,12 @@ def run() -> dict[str, Any]:
         "largest_elimination": {"sequential": largest_sequential, "individual_gate": "NET_LCB_FAILS_ALMOST_ALL_MAIN_EXACT_IDENTITIES"},
         "mechanisms_with_visible_gross_not_net": mechanism[(mechanism.panel_id == "main") & (mechanism.positive_gross_lcb_proxy > 0) & (mechanism.positive_net_lcb == 0)][["epoch", "mechanism_id", "positive_gross_lcb_proxy", "positive_net_lcb"]].to_dict("records"),
         "near_miss_primary_type": "NET_LCB",
-        "epoch1r_to_epoch2_near_miss_interpretation": "MOST_GROWTH_REMAINS_CLOSER_TO_THE_SAME_NET_LCB_GATE; IT_IS_NOT_NEW_SURVIVOR_EVIDENCE",
+        "epoch1r_to_epoch2_near_miss_interpretation": "SAME_NET_LCB_BOTTLENECK_WITH_MORE_ROWS_BUT_NO_DISTANCE_IMPROVEMENT; MEDIAN_ABSOLUTE_DISTANCE_INCREASED",
+        "epoch1r_main_net_lcb_near_misses": int(epoch1r_net_near.near_misses),
+        "epoch2_main_net_lcb_near_misses": int(epoch2_net_near.near_misses),
+        "epoch1r_main_net_lcb_distance_abs_median": float(epoch1r_net_near.failed_gate_distance_abs_median),
+        "epoch2_main_net_lcb_distance_abs_median": float(epoch2_net_near.failed_gate_distance_abs_median),
+        "near_miss_distance_relative_change": near_distance_change,
         "gross_lcb_limitation": config["gross_lcb_contract"],
     }
 
@@ -577,15 +585,18 @@ def run() -> dict[str, Any]:
         (ROOT / name).write_text(json.dumps(payload, indent=2, sort_keys=True, default=str) + "\n", encoding="utf-8")
 
     main_funnel = main_epoch[["epoch", "all_strict", "positive_gross", "positive_gross_lcb_proxy", "positive_net", "positive_net_lcb", "stable_worst_block", "benchmark_incremental", "survivor"]]
+    adaptive_children = children[children.lane_id.isin(["evolutionary_repair", "local_mcts_repair", "llm_typed_repair"])]
     report = [
         "# CRYPTO EPOCH-2B — Economic Bottleneck and Operator Causal Audit", "",
         "Status: `ECONOMIC_BOTTLENECK_AUDIT_COMPLETED`", f"Main recommendation: `{decision['main_recommendation']}`", "",
         "## Main Gross-to-Net Funnel", "", main_funnel.to_markdown(index=False), "",
         f"- Main median epoch positive gross-LCB proxy fraction: {decision['metrics']['median_epoch_main_positive_gross_lcb_proxy_fraction']:.4%}.",
         f"- Cost-killed share among the rare positive gross-LCB proxy rows: {decision['metrics']['cost_killed_share_of_positive_gross_lcb_proxy']:.4%}.",
+        f"- Main NET_LCB near-misses grew from {int(epoch1r_net_near.near_misses)} to {int(epoch2_net_near.near_misses)}, while median absolute distance changed from {float(epoch1r_net_near.failed_gate_distance_abs_median):.8g} to {float(epoch2_net_near.failed_gate_distance_abs_median):.8g} ({near_distance_change:+.2%}).",
         "- The gross-LCB value is a summary proxy (`net_lcb + mean_cost_drag`), not an exact recomputation.", "",
         "## Operator Causal Result", "",
         f"- Operators marked no causal control: {int((operators.causal_gate_control_status == 'OPERATOR_HAS_NO_CAUSAL_GATE_CONTROL').sum())} / {int(operators.lane_id.isin(['evolutionary_repair','local_mcts_repair','llm_typed_repair']).sum())} adaptive operator-blocker cells.",
+        f"- Adaptive child target-gate crossing rate: {float(adaptive_children.target_gate_crossed.mean()):.2%}; non-target collateral-damage rate: {float((adaptive_children.non_target_collateral_damage_count > 0).mean()):.2%}.",
         f"- Parents classified NO_ECONOMIC_EDGE or UNSTABLE_NEIGHBOURHOOD: {decision['metrics']['no_edge_or_unstable_parent_share']:.2%}.",
         "- Mutation labels and LLM explanations were not treated as causal evidence.", "",
         "## Hybrid Report-only Replay", "", pd.DataFrame(replay_summary["panels"]).to_markdown(index=False), "",
