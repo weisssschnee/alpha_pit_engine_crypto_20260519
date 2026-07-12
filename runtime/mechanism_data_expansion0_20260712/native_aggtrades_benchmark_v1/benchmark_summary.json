@@ -1,0 +1,16 @@
+{
+  "additional_budget": false,
+  "admitted": [],
+  "admitted_benchmark_horizons": 0,
+  "behaviour_neff": 3.372187470495215,
+  "candidate_promotion": false,
+  "complex_search_participation": false,
+  "fixed_evaluations": 164,
+  "forward_read": false,
+  "frozen_manifest_sha256": "E07ED915584C58A8975F5F0AA2E12A6959B292809BB6D256F693EE9E903A5423",
+  "memory_update": false,
+  "performance_scope": "NEW_PHYSICALLY_ISOLATED_DEVELOPMENT_AND_CHALLENGE_ONLY",
+  "recommendation": "PIVOT_TO_DIFFERENT_DATA_FAMILY",
+  "spent_evaluation_read": false,
+  "status": "NATIVE_AGGTRADES_SIMPLE_BENCHMARK_CANARY_COMPLETED"
+}

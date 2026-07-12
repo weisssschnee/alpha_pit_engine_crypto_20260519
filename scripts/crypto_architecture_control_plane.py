@@ -76,6 +76,11 @@ MECHANISM_DATA_INVENTORY_INDEX_PATH = MECHANISM_DATA_ROOT / "inventory_artifact_
 NATIVE_AGGTRADES_RELEASE_ROOT = MECHANISM_DATA_ROOT / "native_aggtrades_release_v1"
 NATIVE_AGGTRADES_RELEASE_MANIFEST_PATH = NATIVE_AGGTRADES_RELEASE_ROOT / "release_manifest.json"
 NATIVE_AGGTRADES_RELEASE_INDEX_PATH = NATIVE_AGGTRADES_RELEASE_ROOT / "release_artifact_index.csv"
+NATIVE_AGGTRADES_BENCHMARK_ROOT = MECHANISM_DATA_ROOT / "native_aggtrades_benchmark_v1"
+NATIVE_AGGTRADES_BENCHMARK_SUMMARY_PATH = NATIVE_AGGTRADES_BENCHMARK_ROOT / "benchmark_summary.json"
+BBO_ACQUISITION_SUMMARY_PATH = MECHANISM_DATA_ROOT / "bbo_full_year_acquisition" / "bbo_acquisition_capacity_summary.json"
+MECHANISM_DATA_CLOSURE_MANIFEST_PATH = MECHANISM_DATA_ROOT / "stage_closure_manifest.json"
+MECHANISM_DATA_CLOSURE_INDEX_PATH = MECHANISM_DATA_ROOT / "stage_artifact_index.csv"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -116,6 +121,7 @@ REQUIRED_NODE_IDS = {
     "epoch2_frozen_design", "epoch2_execution",
     "mechanism_data_inventory",
     "native_aggtrades_release",
+    "native_aggtrades_benchmark", "bbo_full_year_acquisition", "mechanism_data_expansion0_closure",
 }
 REQUIRED_FORBIDDEN_EDGES = {
     ("spent_evaluation", "admission"),
@@ -441,6 +447,9 @@ Generated from registry SHA256: `{digest}`.
 - Epoch-2B selects `{state['epoch2b_audit']['main_recommendation']}` as the single main route. BBO full-2024 physically isolated acquisition remains a secondary engineering line with no winner selection.
 - MECHANISM/DATA EXPANSION-0 inventory scans `{state['mechanism_data_expansion0']['local_files']}` local and `{state['mechanism_data_expansion0']['pc1_files']}` PC1 file observations without row data, performance, or forward access. Cross-venue history, multi-level depth, forced-flow and options remain unavailable; full-year BBO remains under-covered. Binance UM native aggTrades is the first release-qualification candidate based on longitudinal source availability, not accepted identities or performance.
 - The first new release is `{state['mechanism_data_expansion0']['first_release_status']}`: `{state['mechanism_data_expansion0']['first_release_qualified_symbol_months']}/{state['mechanism_data_expansion0']['first_release_planned_symbol_months']}` core12 symbol-months over 2024-01..10, with physically isolated 2024-01..06 development and 2024-07..10 challenge directories. Development/challenge coverage is `{state['mechanism_data_expansion0']['first_release_development_coverage_ratio']}` / `{state['mechanism_data_expansion0']['first_release_challenge_coverage_ratio']}`; no interpolation or performance read occurred. The pre-performance horizons are frozen at 1h and 4h.
+- The fixed native aggTrades simple benchmark CANARY completed `{state['mechanism_data_expansion0']['benchmark_fixed_evaluations']}` evaluations. Five of 32 base role/horizon rows have positive gross LCB, zero have positive net LCB and zero benchmark-horizons satisfy future-search admission; native aggTrades is `REJECT_NO_EDGE`.
+- Binance Vision monthly bookTicker exposes only `{state['mechanism_data_expansion0']['bbo_full_year_available_coordinates']}/{state['mechanism_data_expansion0']['bbo_full_year_required_coordinates']}` core12 full-2024 symbol-months. May through December return HTTP 404, so downloading the available `{state['mechanism_data_expansion0']['bbo_full_year_available_compressed_gib']}` GiB cannot satisfy the 95% full-year BBO gate.
+- MECHANISM/DATA EXPANSION-0 closes as `{state['mechanism_data_expansion0']['stage_status']}` with recommendation `{state['mechanism_data_expansion0']['stage_recommendation']}`. Formal search, forward access, candidate promotion and cross-epoch memory remain frozen.
 - Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
 - `{state['formal_search_status']}`, `{state['adaptive_cross_epoch_memory_status']}`, `{state['candidate_promotion_status']}`, and `{state['forward_data_status']}` remain frozen.
 
@@ -478,6 +487,9 @@ Registry SHA256: `{digest}`.
 - First release-qualification candidate: `{state['mechanism_data_expansion0']['first_release_candidate']}`
 - First qualified release: `{state['mechanism_data_expansion0']['first_release_status']}`
 - Release content SHA256: `{state['mechanism_data_expansion0']['first_release_content_sha256']}`
+- Native aggTrades benchmark: `{state['mechanism_data_expansion0']['benchmark_status']}`; admitted horizons `{state['mechanism_data_expansion0']['benchmark_admitted_horizons']}`
+- Full-year BBO source availability: `{state['mechanism_data_expansion0']['bbo_full_year_available_coordinates']}/{state['mechanism_data_expansion0']['bbo_full_year_required_coordinates']}`
+- Stage recommendation: `{state['mechanism_data_expansion0']['stage_recommendation']}`
 
 ## Remote Baseline
 
@@ -871,6 +883,9 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "mechanism_data_first_release_candidate": state["mechanism_data_expansion0"]["first_release_candidate"],
         "mechanism_data_first_release_status": state["mechanism_data_expansion0"]["first_release_status"],
         "mechanism_data_first_release_content_sha256": state["mechanism_data_expansion0"]["first_release_content_sha256"],
+        "mechanism_data_benchmark_status": state["mechanism_data_expansion0"]["benchmark_status"],
+        "mechanism_data_stage_status": state["mechanism_data_expansion0"]["stage_status"],
+        "mechanism_data_stage_recommendation": state["mechanism_data_expansion0"]["stage_recommendation"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -1067,6 +1082,13 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "native_aggtrades_release_manifest": relative(NATIVE_AGGTRADES_RELEASE_MANIFEST_PATH),
         "native_aggtrades_release_artifact_index": relative(NATIVE_AGGTRADES_RELEASE_INDEX_PATH),
         "native_aggtrades_release_content_sha256": state["mechanism_data_expansion0"]["first_release_content_sha256"],
+        "native_aggtrades_benchmark_summary": relative(NATIVE_AGGTRADES_BENCHMARK_SUMMARY_PATH),
+        "native_aggtrades_benchmark_status": state["mechanism_data_expansion0"]["benchmark_status"],
+        "bbo_full_year_acquisition_summary": relative(BBO_ACQUISITION_SUMMARY_PATH),
+        "mechanism_data_stage_status": state["mechanism_data_expansion0"]["stage_status"],
+        "mechanism_data_stage_recommendation": state["mechanism_data_expansion0"]["stage_recommendation"],
+        "mechanism_data_stage_closure_manifest": relative(MECHANISM_DATA_CLOSURE_MANIFEST_PATH),
+        "mechanism_data_stage_artifact_index": relative(MECHANISM_DATA_CLOSURE_INDEX_PATH),
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []

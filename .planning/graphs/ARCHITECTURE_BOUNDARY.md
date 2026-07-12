@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `1B481B1F193C487CFF925E1F3302C6911773374430656E465D67AB006773FE81`.
+Generated from registry SHA256: `96D3BC8B9CA3F44036C9B130D93200F6E5FA69D0141E2424CD379AC0E6ABBD73`.
 
 ## Authority
 
@@ -91,3 +91,11 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 | native_aggtrades_release | generation_lanes | qualified release fields remain outside generators during the mechanism benchmark |
 | native_aggtrades_release | a7mem | release and benchmark evidence cannot update positive or negative memory |
 | native_aggtrades_release | admission | release qualification cannot admit or promote candidates |
+| bbo_full_year_acquisition | benchmark_registry | 33.33% full-year source capacity cannot enter a BBO benchmark |
+| native_aggtrades_benchmark | generation_lanes | rejected native-flow benchmark cannot seed a generator or new search |
+| native_aggtrades_benchmark | a7mem | benchmark results cannot update positive or negative cross-epoch memory |
+| native_aggtrades_benchmark | admission | zero admitted benchmark-horizons and no candidate promotion |
+| sealed_forward | mechanism_data_expansion0_closure | stage closure cannot read or authorize forward evaluation |
+| spent_evaluation | mechanism_data_expansion0_closure | spent evaluation cannot change mechanism decisions |
+| mechanism_data_expansion0_closure | scheduler | partial closure cannot schedule another search or benchmark without external data |
+| mechanism_data_expansion0_closure | a7mem | closure cannot persist candidate or mechanism memory |

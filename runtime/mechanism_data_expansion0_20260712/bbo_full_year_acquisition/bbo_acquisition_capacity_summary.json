@@ -1,0 +1,31 @@
+{
+  "accepted_identity_used": false,
+  "available_coordinates": 48,
+  "compressed_bytes_total": 93901796295,
+  "compressed_gib_total": 87.4528626864776,
+  "depth_claim": false,
+  "forward_read": false,
+  "largest_monthly_file_bytes": 8415159827,
+  "largest_monthly_file_gib": 7.837228315882385,
+  "license": "MIT for public-data helper repository; exchange data access terms remain source-governed",
+  "official_source_repository": "https://github.com/binance/binance-public-data",
+  "peak_raw_disk_requirement_bytes": 8415159827,
+  "performance_queries": 0,
+  "processing_contract": "one symbol-month at a time: download, official checksum, aggregate BBO, delete raw zip",
+  "smallest_coordinate": {
+    "bytes": 9098236,
+    "checksum_status": "HTTP_200",
+    "etag": "\"e505a17a1cd692511fa0425fe5045f4d-2\"",
+    "last_modified": "Thu, 16 May 2024 14:38:42 GMT",
+    "month": "2024-04",
+    "status": "HTTP_200",
+    "symbol": "LINKUSDT",
+    "url": "https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-04.zip"
+  },
+  "source": "Binance Vision USD-M monthly bookTicker",
+  "source_availability_ratio": 0.3333333333333333,
+  "source_coordinates": 144,
+  "status": "BBO_FULL_YEAR_SOURCE_CAPACITY_PLANNED",
+  "target": "Binance UM core12 full-2024 BBO >=95% symbol-month coverage",
+  "verified_on": "2026-07-12"
+}

@@ -2,13 +2,13 @@
   "manifest_id": "PHASE-A-B0-B0P-RUN-MANIFEST-20260711",
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
-  "research_status": "ANALYSIS_AND_ENGINEERING_ALLOWED",
-  "current_phase": "MECHANISM_DATA_EXPANSION0_FIRST_RELEASE_QUALIFIED",
+  "research_status": "HOLD_RESEARCH_EXTERNAL_DATA_REQUIRED",
+  "current_phase": "MECHANISM_DATA_EXPANSION0_PARTIALLY_COMPLETED",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
-  "registry_sha256": "1B481B1F193C487CFF925E1F3302C6911773374430656E465D67AB006773FE81",
+  "registry_sha256": "96D3BC8B9CA3F44036C9B130D93200F6E5FA69D0141E2424CD379AC0E6ABBD73",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-  "active_stage": "MECHANISM_BENCHMARK_CANARY_FROZEN_DESIGN_PENDING",
+  "active_stage": "STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA",
   "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
   "acceptance_attestation": "runtime/a7b0_control_plane_20260711/phase_b0_acceptance_attestation.json",
   "test_evidence": {
@@ -18,8 +18,8 @@
     "output_path": "runtime/a7b0_control_plane_20260711/phase_b0_acceptance_test_output.txt",
     "output_sha256": "23CE54E17A626986D2A60E6279C73BA09C852D26A5220E807FF65EA4A853EBFE"
   },
-  "graph_control_nodes": 56,
-  "graph_control_edges": 124,
+  "graph_control_nodes": 59,
+  "graph_control_edges": 136,
   "b0_items": [
     {
       "id": "B0.1",
@@ -210,5 +210,12 @@
   "mechanism_data_first_release_status": "NATIVE_AGGTRADES_RELEASE_QUALIFIED_SCOPED",
   "native_aggtrades_release_manifest": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_manifest.json",
   "native_aggtrades_release_artifact_index": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_artifact_index.csv",
-  "native_aggtrades_release_content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D"
+  "native_aggtrades_release_content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+  "native_aggtrades_benchmark_summary": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_benchmark_v1/benchmark_summary.json",
+  "native_aggtrades_benchmark_status": "NATIVE_AGGTRADES_SIMPLE_BENCHMARK_CANARY_COMPLETED",
+  "bbo_full_year_acquisition_summary": "runtime/mechanism_data_expansion0_20260712/bbo_full_year_acquisition/bbo_acquisition_capacity_summary.json",
+  "mechanism_data_stage_status": "MECHANISM_DATA_EXPANSION0_PARTIALLY_COMPLETED",
+  "mechanism_data_stage_recommendation": "STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA",
+  "mechanism_data_stage_closure_manifest": "runtime/mechanism_data_expansion0_20260712/stage_closure_manifest.json",
+  "mechanism_data_stage_artifact_index": "runtime/mechanism_data_expansion0_20260712/stage_artifact_index.csv"
 }

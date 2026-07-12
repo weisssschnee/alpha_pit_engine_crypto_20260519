@@ -1,11 +1,11 @@
 {
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
-  "research_status": "ANALYSIS_AND_ENGINEERING_ALLOWED",
-  "current_phase": "MECHANISM_DATA_EXPANSION0_FIRST_RELEASE_QUALIFIED",
+  "research_status": "HOLD_RESEARCH_EXTERNAL_DATA_REQUIRED",
+  "current_phase": "MECHANISM_DATA_EXPANSION0_PARTIALLY_COMPLETED",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
-  "active_stage": "MECHANISM_BENCHMARK_CANARY_FROZEN_DESIGN_PENDING",
+  "active_stage": "STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "formal_search_status": "NEW_PERFORMANCE_SEARCH_FROZEN",
@@ -342,7 +342,26 @@
     "first_release_horizons": ["1h", "4h"],
     "first_release_performance_queries": 0,
     "first_release_manifest": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_manifest.json",
-    "first_release_artifact_index": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_artifact_index.csv"
+    "first_release_artifact_index": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_artifact_index.csv",
+    "benchmark_status": "NATIVE_AGGTRADES_SIMPLE_BENCHMARK_CANARY_COMPLETED",
+    "benchmark_frozen_manifest_sha256": "E07ED915584C58A8975F5F0AA2E12A6959B292809BB6D256F693EE9E903A5423",
+    "benchmark_fixed_evaluations": 164,
+    "benchmark_base_rows": 32,
+    "benchmark_positive_gross_lcb_rows": 5,
+    "benchmark_positive_net_lcb_rows": 0,
+    "benchmark_admitted_horizons": 0,
+    "benchmark_behaviour_neff": 3.372187470495215,
+    "native_aggtrades_decision": "REJECT_NO_EDGE",
+    "bbo_full_year_source_status": "HOLD_FOR_MORE_DATA",
+    "bbo_full_year_available_coordinates": 48,
+    "bbo_full_year_required_coordinates": 144,
+    "bbo_full_year_source_availability_ratio": 0.3333333333333333,
+    "bbo_full_year_available_compressed_gib": 87.4528626864776,
+    "bbo_full_year_missing_months": ["2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"],
+    "stage_status": "MECHANISM_DATA_EXPANSION0_PARTIALLY_COMPLETED",
+    "stage_recommendation": "STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA",
+    "stage_closure_manifest": "runtime/mechanism_data_expansion0_20260712/stage_closure_manifest.json",
+    "stage_artifact_index": "runtime/mechanism_data_expansion0_20260712/stage_artifact_index.csv"
   },
-  "next_acceptance_gate": "Freeze and execute only a simple native-trade-flow benchmark CANARY with sign-flip, wrong-lag, shuffled-timing, matched-random and incumbent controls; no complex generator or search may participate."
+  "next_acceptance_gate": "Provide and independently qualify a new longitudinal external historical source for cross-venue price discovery, full-year BBO, forced-flow/liquidation or options before any new mechanism benchmark or frozen search authorization."
 }

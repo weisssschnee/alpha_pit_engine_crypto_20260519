@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "AC10B0970A886F309227D5F8B8416F5C3EA82DA73866F660AB25E24C9A53B9F9"
+      "last_verified_sha": "A0F4BD388B2384CC18FB87CC9FC7A998B6606875D3F0011612F0BF5A4C9B1D1D"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "697929695A40DC6BB66173CEA10AC5E0B2EC3AB21FDB828DBBAF2946C72C7392"
+      "last_verified_sha": "6BAB17EF8E44FFA443F525B825DD75D15F6E64DA0215D52A9FAE01CB2C344A18"
     },
     {
       "id": "nextgen_mechanism_registry",
@@ -1234,8 +1234,77 @@
         "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_artifact_index.csv",
         "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/NATIVE_AGGTRADES_RELEASE_REPORT.md"
       ],
-      "blocker": "release is scoped rather than full-year; benchmark CANARY is not yet frozen or executed; three coordinates excluded for checksum-lineage gaps",
+      "blocker": "release is scoped rather than full-year; native-flow benchmark completed with zero admitted horizons; three coordinates excluded for checksum-lineage gaps",
       "last_verified_sha": "61176951C4FA3908187B59CE40224E6491AF397DA9A39489461EBFFEDCD4F951"
+    },
+    {
+      "id": "native_aggtrades_benchmark",
+      "label": "Native aggTrades simple benchmark CANARY",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "config/crypto_native_aggtrades_benchmark_canary_v1.json",
+        "scripts/crypto_native_aggtrades_benchmark.py"
+      ],
+      "entrypoint": "python scripts/crypto_native_aggtrades_benchmark.py freeze|run|check",
+      "input": "qualified physical native aggTrades development/challenge release and frozen 1h/4h label contract",
+      "output": "164 fixed benchmark/control evaluations, zero positive-net-LCB base rows and zero future-search admissions",
+      "data_role": "new scoped development/challenge mechanism evidence only",
+      "feedback_permission": "REPORT_ONLY_REJECT_NO_EDGE_NO_SEARCH_MEMORY_PROMOTION",
+      "artifact_test": [
+        "tests/test_native_aggtrades_benchmark.py",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_benchmark_v1/benchmark_frozen_manifest.json",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_benchmark_v1/benchmark_results.csv",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_benchmark_v1/benchmark_decisions.csv",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_benchmark_v1/benchmark_summary.json",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_benchmark_v1/benchmark_artifact_index.csv",
+        "runtime/mechanism_data_expansion0_20260712/native_aggtrades_benchmark_v1/NATIVE_AGGTRADES_BENCHMARK_REPORT.md"
+      ],
+      "blocker": "five base rows have positive gross LCB but all 32 base rows have negative net LCB and no challenge-stable admission",
+      "last_verified_sha": "0FC831A77ED90F75C06E5D278F74D87880FB55530CF64D252C08973E37ECBA45"
+    },
+    {
+      "id": "bbo_full_year_acquisition",
+      "label": "Binance UM full-year BBO acquisition capacity",
+      "status": "PARTIAL",
+      "implementation_path": [
+        "scripts/crypto_bbo_full_year_acquisition_plan.py"
+      ],
+      "entrypoint": "python scripts/crypto_bbo_full_year_acquisition_plan.py",
+      "input": "official Binance Vision monthly core12 bookTicker URL/checksum HEAD grid for 2024",
+      "output": "48/144 available source coordinates, 87.45 GiB available compressed capacity and explicit May-Dec HTTP 404 gap",
+      "data_role": "source-capacity planning only; no BBO performance",
+      "feedback_permission": "NONE_HOLD_FOR_MORE_DATA_NO_DOWNLOAD_NO_BENCHMARK",
+      "artifact_test": [
+        "tests/test_bbo_full_year_acquisition_plan.py",
+        "runtime/mechanism_data_expansion0_20260712/bbo_full_year_acquisition/bbo_source_capacity.csv",
+        "runtime/mechanism_data_expansion0_20260712/bbo_full_year_acquisition/bbo_acquisition_capacity_summary.json",
+        "runtime/mechanism_data_expansion0_20260712/bbo_full_year_acquisition/bbo_acquisition_plan_manifest.json"
+      ],
+      "blocker": "official public source ends after 2024-04 and cannot satisfy full-year symbol-month coverage >=95%",
+      "last_verified_sha": "4132A9E66B8321E55757F96B193519133949459F321F5DBF2317DC9FDCE60F72"
+    },
+    {
+      "id": "mechanism_data_expansion0_closure",
+      "label": "MECHANISM/DATA EXPANSION-0 closure",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "scripts/crypto_mechanism_data_expansion0_closure.py"
+      ],
+      "entrypoint": "python scripts/crypto_mechanism_data_expansion0_closure.py",
+      "input": "inventory, qualified release, fixed benchmark evidence and BBO source-capacity audit",
+      "output": "per-mechanism decisions and STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA recommendation",
+      "data_role": "stage closure and governance evidence",
+      "feedback_permission": "NO_SEARCH_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_mechanism_data_expansion0_closure.py",
+        "runtime/mechanism_data_expansion0_20260712/stage_closure_manifest.json",
+        "runtime/mechanism_data_expansion0_20260712/mechanism_final_decisions.csv",
+        "runtime/mechanism_data_expansion0_20260712/mechanism_data_expansion0_bias_audit.json",
+        "runtime/mechanism_data_expansion0_20260712/stage_artifact_index.csv",
+        "runtime/mechanism_data_expansion0_20260712/MECHANISM_DATA_EXPANSION0_CLOSURE_REPORT.md"
+      ],
+      "blocker": "future crypto-alpha work requires a new independently verified longitudinal external historical source",
+      "last_verified_sha": "A4C2DBF9C48B9ED263BAD38F08E95EC09AFEEC0788328776B7B84E04C8CE45BB"
     }
   ],
   "edges": [
@@ -1982,6 +2051,78 @@
       "target": "admission",
       "kind": "FORBIDDEN",
       "label": "release qualification cannot admit or promote candidates"
+    },
+    {
+      "source": "native_aggtrades_release",
+      "target": "native_aggtrades_benchmark",
+      "kind": "ALLOWED",
+      "label": "qualified physical split and frozen horizons permit one fixed simple benchmark CANARY"
+    },
+    {
+      "source": "mechanism_data_inventory",
+      "target": "bbo_full_year_acquisition",
+      "kind": "ALLOWED",
+      "label": "inventory gap authorizes official source-capacity planning without performance"
+    },
+    {
+      "source": "bbo_full_year_acquisition",
+      "target": "benchmark_registry",
+      "kind": "FORBIDDEN",
+      "label": "33.33% full-year source capacity cannot enter a BBO benchmark"
+    },
+    {
+      "source": "native_aggtrades_benchmark",
+      "target": "generation_lanes",
+      "kind": "FORBIDDEN",
+      "label": "rejected native-flow benchmark cannot seed a generator or new search"
+    },
+    {
+      "source": "native_aggtrades_benchmark",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "benchmark results cannot update positive or negative cross-epoch memory"
+    },
+    {
+      "source": "native_aggtrades_benchmark",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "zero admitted benchmark-horizons and no candidate promotion"
+    },
+    {
+      "source": "native_aggtrades_benchmark",
+      "target": "mechanism_data_expansion0_closure",
+      "kind": "ALLOWED",
+      "label": "fixed benchmark evidence enters report-only stage closure"
+    },
+    {
+      "source": "bbo_full_year_acquisition",
+      "target": "mechanism_data_expansion0_closure",
+      "kind": "ALLOWED",
+      "label": "source availability evidence enters report-only stage closure"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "mechanism_data_expansion0_closure",
+      "kind": "FORBIDDEN",
+      "label": "stage closure cannot read or authorize forward evaluation"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "mechanism_data_expansion0_closure",
+      "kind": "FORBIDDEN",
+      "label": "spent evaluation cannot change mechanism decisions"
+    },
+    {
+      "source": "mechanism_data_expansion0_closure",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "partial closure cannot schedule another search or benchmark without external data"
+    },
+    {
+      "source": "mechanism_data_expansion0_closure",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "closure cannot persist candidate or mechanism memory"
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "experiment_id": "20260712_bbo_full_year_source_capacity_001",
+  "forward_read": false,
+  "outputs": [
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/bbo_full_year_acquisition/bbo_source_capacity.csv",
+      "sha256": "24F9393DB87F7EA2D7021EFF8205A5D1E0E97137A2DF8CC4AF313FA9329B0A90"
+    },
+    {
+      "path": "runtime/mechanism_data_expansion0_20260712/bbo_full_year_acquisition/bbo_acquisition_capacity_summary.json",
+      "sha256": "1A99CD3437DC5BB0BF021B5BEBAEB87FDC8A1B000C2200FF1EEDF37558562D3E"
+    }
+  ],
+  "performance_queries": 0,
+  "row_data_read": false
+}

@@ -1,0 +1,7 @@
+mechanism,decision,evidence
+cross_venue_price_discovery,UNAVAILABLE_NO_SOURCE,only recent/May short probes; no verified longitudinal source
+native_aggtrades_trade_flow,REJECT_NO_EDGE,qualified 97.5% scoped release; 164 fixed evaluations; zero admitted benchmark-horizons; every base net LCB negative
+native_bbo_full_year,HOLD_FOR_MORE_DATA,official monthly source only 48/144 symbol-months (33.33%); May-Dec HTTP 404
+multi_level_order_book_depth,UNAVAILABLE_NO_SOURCE,no verified historical snapshots/deltas; BBO not relabelled as depth
+forced_flow_liquidation,UNAVAILABLE_NO_SOURCE,no verified historical force-order/liquidation source; proxy substitution prohibited
+options_expectation_state,UNAVAILABLE_NO_SOURCE,no options historical source found on local or PC1

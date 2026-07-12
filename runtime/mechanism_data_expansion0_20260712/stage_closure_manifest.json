@@ -1,0 +1,55 @@
+{
+  "bbo_available_compressed_gib": 87.4528626864776,
+  "bbo_official_source_coordinates": 48,
+  "bbo_required_coordinates": 144,
+  "bbo_source_availability_ratio": 0.3333333333333333,
+  "benchmark_admitted_horizons": 0,
+  "benchmark_base_rows": 32,
+  "benchmark_behaviour_neff": 3.372187470495215,
+  "benchmark_fixed_evaluations": 164,
+  "benchmark_positive_gross_lcb_rows": 5,
+  "benchmark_positive_net_lcb_rows": 0,
+  "candidate_promotion": false,
+  "cross_epoch_memory": false,
+  "formal_search_unlocked": false,
+  "forward_read": false,
+  "inventory_file_observations": 608073,
+  "per_mechanism_decisions": [
+    {
+      "decision": "UNAVAILABLE_NO_SOURCE",
+      "evidence": "only recent/May short probes; no verified longitudinal source",
+      "mechanism": "cross_venue_price_discovery"
+    },
+    {
+      "decision": "REJECT_NO_EDGE",
+      "evidence": "qualified 97.5% scoped release; 164 fixed evaluations; zero admitted benchmark-horizons; every base net LCB negative",
+      "mechanism": "native_aggtrades_trade_flow"
+    },
+    {
+      "decision": "HOLD_FOR_MORE_DATA",
+      "evidence": "official monthly source only 48/144 symbol-months (33.33%); May-Dec HTTP 404",
+      "mechanism": "native_bbo_full_year"
+    },
+    {
+      "decision": "UNAVAILABLE_NO_SOURCE",
+      "evidence": "no verified historical snapshots/deltas; BBO not relabelled as depth",
+      "mechanism": "multi_level_order_book_depth"
+    },
+    {
+      "decision": "UNAVAILABLE_NO_SOURCE",
+      "evidence": "no verified historical force-order/liquidation source; proxy substitution prohibited",
+      "mechanism": "forced_flow_liquidation"
+    },
+    {
+      "decision": "UNAVAILABLE_NO_SOURCE",
+      "evidence": "no options historical source found on local or PC1",
+      "mechanism": "options_expectation_state"
+    }
+  ],
+  "performance_queries_outside_fixed_canary": 0,
+  "qualified_release": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+  "recommendation": "STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA",
+  "release_coverage_ratio": 0.975,
+  "spent_evaluation_read": false,
+  "status": "MECHANISM_DATA_EXPANSION0_PARTIALLY_COMPLETED"
+}

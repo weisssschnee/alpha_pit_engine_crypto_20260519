@@ -1,0 +1,21 @@
+{
+  "costs": "5 bps per unit turnover applied to every benchmark and control",
+  "decision": "HOLD_RESEARCH_EXTERNAL_DATA_REQUIRED",
+  "discovery_vs_evaluation": "simple hypotheses and horizons frozen before the new physical development/challenge release was evaluated",
+  "leakage_controls": [
+    "one-hour execution delay",
+    "observable-time bucket close",
+    "wrong-lag",
+    "shuffled timing",
+    "matched random",
+    "sign flip"
+  ],
+  "limitations": [
+    "challenge contains four months",
+    "three checksum-lineage coordinates excluded before performance",
+    "no external cross-venue, forced-flow, full-year BBO or options history"
+  ],
+  "multiple_testing": "eight fixed simple benchmarks, two fixed horizons and five fixed variants; no online selection or budget extension",
+  "oos_grade": "NEW_SCOPED_CHALLENGE_ONLY_NOT_FORWARD_OOS",
+  "promotion_allowed": false
+}

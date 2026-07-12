@@ -1,0 +1,145 @@
+bytes,checksum_status,error,etag,last_modified,month,status,symbol,url
+1252990520,HTTP_200,,"""eb053d7e224e6041f31dcdd7c682cdf5-150""","Sun, 18 Feb 2024 02:19:25 GMT",2024-01,HTTP_200,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-01.zip
+1143335242,HTTP_200,,"""e1bcba4eab2b72c8b07080adec48fa21-137""","Tue, 19 Mar 2024 12:43:58 GMT",2024-02,HTTP_200,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-02.zip
+1901014808,HTTP_200,,"""20cf470010107a643055bbcbc5748134-227""","Thu, 18 Apr 2024 01:06:21 GMT",2024-03,HTTP_200,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-03.zip
+12494323,HTTP_200,,"""272b5e866f48bd8b253ebb796b7654b1-2""","Thu, 16 May 2024 14:38:35 GMT",2024-04,HTTP_200,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,ADAUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ADAUSDT/ADAUSDT-bookTicker-2024-12.zip
+1361073913,HTTP_200,,"""dc7b62a389510078cc1a07945bc0203e-163""","Sun, 18 Feb 2024 02:20:01 GMT",2024-01,HTTP_200,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-01.zip
+971232639,HTTP_200,,"""2e6992b539cb75a0a2f45e316cc396d5-116""","Tue, 19 Mar 2024 12:44:44 GMT",2024-02,HTTP_200,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-02.zip
+1828985831,HTTP_200,,"""c27adbc37c33ecc2e4ce972783b0172d-219""","Thu, 18 Apr 2024 01:08:35 GMT",2024-03,HTTP_200,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-03.zip
+12021030,HTTP_200,,"""f7db5ed9d5d2dc959873f45f4483f292-2""","Thu, 16 May 2024 14:38:36 GMT",2024-04,HTTP_200,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,AVAXUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/AVAXUSDT/AVAXUSDT-bookTicker-2024-12.zip
+749510989,HTTP_200,,"""af4cb00bb226adc33af81357ce21c54b-90""","Sun, 18 Feb 2024 02:20:12 GMT",2024-01,HTTP_200,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-01.zip
+654933345,HTTP_200,,"""041e999226a0af7ad71461fb9c1fd371-79""","Tue, 19 Mar 2024 12:44:51 GMT",2024-02,HTTP_200,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-02.zip
+1704328091,HTTP_200,,"""aaba32fa7f44a263b447d52b05ef5d81-204""","Thu, 18 Apr 2024 01:09:05 GMT",2024-03,HTTP_200,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-03.zip
+21720736,HTTP_200,,"""0bc964a4860404e44f98adbf1d1cd72a-3""","Thu, 16 May 2024 14:38:36 GMT",2024-04,HTTP_200,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,BCHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BCHUSDT/BCHUSDT-bookTicker-2024-12.zip
+1145581776,HTTP_200,,"""fec5ad5f257ca194bdeeaaf83bb233ae-137""","Sun, 18 Feb 2024 02:20:24 GMT",2024-01,HTTP_200,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-01.zip
+1045383297,HTTP_200,,"""3134df4b950c3267654b6f68885b5c50-125""","Tue, 19 Mar 2024 12:45:02 GMT",2024-02,HTTP_200,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-02.zip
+2109831758,HTTP_200,,"""fd273c0671a2fa019025d7a4ddb547b6-252""","Thu, 18 Apr 2024 01:09:45 GMT",2024-03,HTTP_200,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-03.zip
+12467898,HTTP_200,,"""b6146cd29f83d77a3542a72b5fb986d5-2""","Thu, 16 May 2024 14:38:37 GMT",2024-04,HTTP_200,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,BNBUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BNBUSDT/BNBUSDT-bookTicker-2024-12.zip
+6952660870,HTTP_200,,"""7ddbcd51e7f4f32686aaf9b3a26a62b1-829""","Sun, 18 Feb 2024 02:20:32 GMT",2024-01,HTTP_200,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-01.zip
+8270743447,HTTP_200,,"""443423222cef9803f49b4767c3b508e9-986""","Tue, 19 Mar 2024 12:45:09 GMT",2024-02,HTTP_200,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-02.zip
+6712517585,HTTP_200,,"""2d58773ac57eefd56eb99b13649f3e1d-801""","Thu, 18 Apr 2024 01:10:09 GMT",2024-03,HTTP_200,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-03.zip
+37761761,HTTP_200,,"""ed0730b4ba62b189a12e92acc564dc41-5""","Thu, 16 May 2024 14:38:37 GMT",2024-04,HTTP_200,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,BTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/BTCUSDT/BTCUSDT-bookTicker-2024-12.zip
+1218377628,HTTP_200,,"""7dbd82309b8b22958dd0c31883540bc4-146""","Sun, 18 Feb 2024 02:21:11 GMT",2024-01,HTTP_200,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-01.zip
+1218339799,HTTP_200,,"""a6f32a205ad7d7f1113a2c501f2ca536-146""","Tue, 19 Mar 2024 12:46:05 GMT",2024-02,HTTP_200,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-02.zip
+3791112259,HTTP_200,,"""90d9fbb83800aa6d324fe58d7fe36328-452""","Thu, 18 Apr 2024 01:12:29 GMT",2024-03,HTTP_200,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-03.zip
+29825903,HTTP_200,,"""45ecb450b62bbbeb820ce32c294e8450-4""","Thu, 16 May 2024 14:38:39 GMT",2024-04,HTTP_200,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,DOGEUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/DOGEUSDT/DOGEUSDT-bookTicker-2024-12.zip
+6921187399,HTTP_200,,"""e0b52667d5acd2367e299819995bd2db-826""","Sun, 18 Feb 2024 02:21:39 GMT",2024-01,HTTP_200,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-01.zip
+8415159827,HTTP_200,,"""bbf0cc28d171f025c06fd503a588a1bf-1004""","Tue, 19 Mar 2024 12:46:40 GMT",2024-02,HTTP_200,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-02.zip
+5384737931,HTTP_200,,"""11c2efc1218eed20e0c11560f7bd37e8-642""","Thu, 18 Apr 2024 01:14:04 GMT",2024-03,HTTP_200,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-03.zip
+31343866,HTTP_200,,"""babdae430d65f3971c2641c26f0c4f97-4""","Thu, 16 May 2024 14:38:39 GMT",2024-04,HTTP_200,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,ETHUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/ETHUSDT/ETHUSDT-bookTicker-2024-12.zip
+1128985418,HTTP_200,,"""7901ec5326e5561fef7340f9612f4923-135""","Sun, 18 Feb 2024 02:23:06 GMT",2024-01,HTTP_200,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-01.zip
+1313558725,HTTP_200,,"""f861ddba86cd93502bb528d6d081f6aa-157""","Tue, 19 Mar 2024 12:48:27 GMT",2024-02,HTTP_200,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-02.zip
+1459156812,HTTP_200,,"""3ea14c3316bcf2e4062deff8023c24c4-174""","Thu, 18 Apr 2024 01:18:33 GMT",2024-03,HTTP_200,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-03.zip
+9098236,HTTP_200,,"""e505a17a1cd692511fa0425fe5045f4d-2""","Thu, 16 May 2024 14:38:42 GMT",2024-04,HTTP_200,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,LINKUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LINKUSDT/LINKUSDT-bookTicker-2024-12.zip
+878712395,HTTP_200,,"""ce09c6d428192ba79ff71637ff78b592-105""","Sun, 18 Feb 2024 02:23:20 GMT",2024-01,HTTP_200,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-01.zip
+859113644,HTTP_200,,"""71d5387b4e24745f98b8058b218b236f-103""","Tue, 19 Mar 2024 12:48:40 GMT",2024-02,HTTP_200,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-02.zip
+1577769939,HTTP_200,,"""c1a66c665f7a9b4fa32f42e5425b114e-189""","Thu, 18 Apr 2024 01:18:58 GMT",2024-03,HTTP_200,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-03.zip
+16268045,HTTP_200,,"""0625ec628bb3930a95d4ba47629bc2d7-2""","Thu, 16 May 2024 14:38:42 GMT",2024-04,HTTP_200,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,LTCUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/LTCUSDT/LTCUSDT-bookTicker-2024-12.zip
+3676029516,HTTP_200,,"""6295d9081cc6b4435107088a36242910-439""","Sun, 18 Feb 2024 02:24:55 GMT",2024-01,HTTP_200,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-01.zip
+4021701482,HTTP_200,,"""0502bd0163fcba1cf904d0d0f1c4ee19-480""","Tue, 19 Mar 2024 12:50:24 GMT",2024-02,HTTP_200,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-02.zip
+3952724227,HTTP_200,,"""00fe4feff16195550093b6d8dec40b8f-472""","Thu, 18 Apr 2024 01:23:34 GMT",2024-03,HTTP_200,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-03.zip
+24390426,HTTP_200,,"""f57e4e72b907db7d0185b116c1786020-3""","Thu, 16 May 2024 14:38:45 GMT",2024-04,HTTP_200,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,SOLUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SOLUSDT/SOLUSDT-bookTicker-2024-12.zip
+1759335148,HTTP_200,,"""017a1b8e50e66ff6442c37485f66d106-210""","Sun, 18 Feb 2024 02:25:09 GMT",2024-01,HTTP_200,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-01.zip
+1234849791,HTTP_200,,"""8290156d186b7658d475b485f7e70202-148""","Tue, 19 Mar 2024 12:50:43 GMT",2024-02,HTTP_200,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-02.zip
+1359296861,HTTP_200,,"""49965c0a671693e66ff0210f38f17d3e-163""","Thu, 18 Apr 2024 01:24:19 GMT",2024-03,HTTP_200,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-03.zip
+11879499,HTTP_200,,"""74c61624b20629c933f467352e655639-2""","Thu, 16 May 2024 14:38:46 GMT",2024-04,HTTP_200,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,SUIUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/SUIUSDT/SUIUSDT-bookTicker-2024-12.zip
+1494954109,HTTP_200,,"""1e2d155c4ab82c0372c44a2b18159e8e-179""","Sun, 18 Feb 2024 02:26:13 GMT",2024-01,HTTP_200,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-01.zip
+1511180887,HTTP_200,,"""86bfa3666bd281b5277cb10aa7369464-181""","Tue, 19 Mar 2024 12:51:44 GMT",2024-02,HTTP_200,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-02.zip
+2686380421,HTTP_200,,"""12ca2631e4746412b6150a5947905a9d-321""","Thu, 18 Apr 2024 01:26:47 GMT",2024-03,HTTP_200,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-03.zip
+15736243,HTTP_200,,"""b56fc010072b7777ebebafc4a99f1acc-2""","Thu, 16 May 2024 14:38:47 GMT",2024-04,HTTP_200,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-04.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-05,UNAVAILABLE,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-05.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-06,UNAVAILABLE,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-06.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-07,UNAVAILABLE,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-07.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-08,UNAVAILABLE,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-08.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-09,UNAVAILABLE,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-09.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-10,UNAVAILABLE,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-10.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-11,UNAVAILABLE,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-11.zip
+-1,UNAVAILABLE,HTTPError:HTTP Error 404: Not Found,,,2024-12,UNAVAILABLE,XRPUSDT,https://data.binance.vision/data/futures/um/monthly/bookTicker/XRPUSDT/XRPUSDT-bookTicker-2024-12.zip

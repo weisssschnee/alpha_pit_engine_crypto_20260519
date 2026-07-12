@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `1B481B1F193C487CFF925E1F3302C6911773374430656E465D67AB006773FE81`.
+Registry SHA256: `96D3BC8B9CA3F44036C9B130D93200F6E5FA69D0141E2424CD379AC0E6ABBD73`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
-- `ANALYSIS_AND_ENGINEERING_ALLOWED`
-- Current phase: `MECHANISM_DATA_EXPANSION0_FIRST_RELEASE_QUALIFIED`
+- `HOLD_RESEARCH_EXTERNAL_DATA_REQUIRED`
+- Current phase: `MECHANISM_DATA_EXPANSION0_PARTIALLY_COMPLETED`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,13 +16,16 @@ Registry SHA256: `1B481B1F193C487CFF925E1F3302C6911773374430656E465D67AB006773FE
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `MECHANISM_BENCHMARK_CANARY_FROZEN_DESIGN_PENDING`
+- Active stage: `STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 - Mechanism/data inventory: `DATA_MECHANISM_INVENTORY_COMPLETED`
 - First release-qualification candidate: `BINANCE_UM_NATIVE_AGGTRADES_CORE12_HISTORY`
 - First qualified release: `NATIVE_AGGTRADES_RELEASE_QUALIFIED_SCOPED`
 - Release content SHA256: `9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D`
+- Native aggTrades benchmark: `NATIVE_AGGTRADES_SIMPLE_BENCHMARK_CANARY_COMPLETED`; admitted horizons `0`
+- Full-year BBO source availability: `48/144`
+- Stage recommendation: `STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA`
 
 ## Remote Baseline
 
@@ -224,4 +227,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Freeze and execute only a simple native-trade-flow benchmark CANARY with sign-flip, wrong-lag, shuffled-timing, matched-random and incumbent controls; no complex generator or search may participate.
+Provide and independently qualify a new longitudinal external historical source for cross-venue price discovery, full-year BBO, forced-flow/liquidation or options before any new mechanism benchmark or frozen search authorization.
