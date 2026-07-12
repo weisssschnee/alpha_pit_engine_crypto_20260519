@@ -1,0 +1,73 @@
+{
+  "contract_id": "CRYPTO-EPOCH2B-ECONOMIC-BOTTLENECK-CAUSAL-AUDIT-V1",
+  "experiment_id": "20260712_crypto_epoch2b_audit_001",
+  "mode": "REPORT_ONLY_EXISTING_STRICT_EVIDENCE",
+  "performance_queries_allowed": 0,
+  "input_strict_evidence": {
+    "EPOCH0": "runtime/nextgen_epoch0_20260711/strict_evaluations.csv",
+    "EPOCH1R": "runtime/nextgen_epoch1r_20260712/strict_evaluations.csv",
+    "EPOCH2": "runtime/epoch2_20260712/strict_evaluations_repaired.csv"
+  },
+  "parent_pack": "runtime/epoch2_calibration_20260712/frozen_near_miss_parent_pack.csv",
+  "epoch1r_proposal_pack": "runtime/nextgen_epoch1r_20260712/proposal_pack.jsonl.gz",
+  "epoch2_proposal_pack": "runtime/epoch2_20260712/proposal_pack.jsonl.gz",
+  "epoch2_assignments": "runtime/epoch2_20260712/admission_assignments.csv",
+  "benchmark_evidence": "runtime/nextgen_epoch1r_20260712/benchmark_results.csv",
+  "bbo_source_manifest": "runtime/nextgen_dark_20260711/pc1_bookticker_top_of_book_manifest.json",
+  "cost_bps": 5.0,
+  "gross_lcb_contract": {
+    "method": "SUMMARY_PROXY_NET_LCB_PLUS_MEAN_COST_DRAG",
+    "exact_gross_series_variance_available": false,
+    "promotion_evidence": false
+  },
+  "survivor_contract": {
+    "hard_gate_pass": true,
+    "ic_lcb_positive": true,
+    "net_lcb_positive": true,
+    "benchmark_increment_lcb_positive": true,
+    "worst_horizon_net_mean_min": -0.001
+  },
+  "parent_classification": {
+    "minimum_strict_neighbours": 3,
+    "unstable_target_delta_std": 0.0001,
+    "locally_repairable_abs_target_distance_max": 0.00005
+  },
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 6209,
+    "confidence_level": 0.95,
+    "cluster_key": "frozen_parent_row_id"
+  },
+  "route_thresholds": {
+    "substantial_main_positive_gross_lcb_fraction_min": 0.20,
+    "main_positive_gross_lcb_fraction_near_zero_max": 0.05,
+    "cost_killed_share_of_positive_gross_lcb_min": 0.50,
+    "stability_failure_share_min": 0.30,
+    "no_edge_or_unstable_parent_share_min": 0.50,
+    "bbo_nontrivial_behaviour_clusters_min": 2,
+    "bbo_nontrivial_exposure_cells_min": 2,
+    "bbo_coverage_insufficient_below": 0.90
+  },
+  "route_priority": [
+    "PIVOT_TO_PORTFOLIO_TRANSFORM_SEARCH",
+    "PIVOT_TO_STATE_CONDITIONED_SEARCH",
+    "PIVOT_TO_NEW_MECHANISM_OR_DATA",
+    "EXPAND_BBO_DEVELOPMENT_COVERAGE"
+  ],
+  "hybrid_report_only_replay": {
+    "quality_share": 0.60,
+    "diversity_share": 0.40,
+    "dedup_before_quota": true,
+    "uses_only_cached_strict_exact_identities": true,
+    "historical_epoch_rewrite": false
+  },
+  "prohibited": [
+    "new_performance_query",
+    "signal_materialization",
+    "return_label_read",
+    "validation_test_recent_may_stress_forward_read",
+    "candidate_promotion",
+    "cross_epoch_adaptive_memory",
+    "historical_epoch_rewrite"
+  ]
+}
