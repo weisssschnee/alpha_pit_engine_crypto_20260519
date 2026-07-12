@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "A12D30DC350F04B99B6298F832AE31AEF4101EE7455577BF171121DCBB66526D"
+      "last_verified_sha": "1EBF077CE96B4264312F0E78752A9F5FC1395EAF814C5D6D47DD8A2077949E52"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "A31228B37A78E79F7CE519F28F8D00BD13965E008ACB444DE79D792AF0BEFC83"
+      "last_verified_sha": "5438B86952E31A7F2954879A9D4C4719ADBD1D4B27849E7CEA6652821394059E"
     },
     {
       "id": "nextgen_mechanism_registry",
@@ -1075,7 +1075,7 @@
         "runtime/epoch2_calibration_20260712/survivor_contract_calibration.csv"
       ],
       "blocker": "none; planted pass 100% and null pass 0% prove development survivor contract reachable",
-      "last_verified_sha": "4DF2BBD6EFF22620524A483662D036AE7A0CD50E131C3510100A9A44D94B1F8A"
+      "last_verified_sha": "99CDED18C66B79DB52218F39F3FDC5C957443AD74EAC4EFC73FE1EF389B0900D"
     },
     {
       "id": "epoch2_blocker_taxonomy",
@@ -1102,50 +1102,59 @@
     {
       "id": "epoch2_blocker_directed_search",
       "label": "Epoch-2 blocker-directed search",
-      "status": "PLANNED",
+      "status": "IMPLEMENTED",
       "implementation_path": [
-        "config/crypto_epoch2_v1.json"
+        "config/crypto_epoch2_v1.json",
+        "scripts/crypto_epoch2.py"
       ],
-      "entrypoint": "planned Epoch-2 runner",
+      "entrypoint": "python scripts/crypto_epoch2.py run",
       "input": "frozen parent pack and fresh typed roots",
-      "output": "49152 fixed proposals and repair lineage",
+      "output": "49152 fixed proposals, local repair evidence, CEM/surrogate diagnostics and repair lineage",
       "data_role": "development-only proposal search",
       "feedback_permission": "CURRENT_EPOCH_ONLY_NO_CROSS_EPOCH_POLICY_OR_VALUE",
-      "artifact_test": [],
-      "blocker": "runner and tests pending",
-      "last_verified_sha": "B444CE28AF8649924C3C14BE1776771A050F2E7B0AFEC2A146A9A04D6957AC4F"
+      "artifact_test": [
+        "tests/test_epoch2.py",
+        "runtime/epoch2_20260712/epoch2_implementation_test_output.txt"
+      ],
+      "blocker": "none; implementation tests pass and performance remains not started",
+      "last_verified_sha": "B6359AD33CF97F75522C25035BAAAA1E29415EC59B7470AEADC1E0F956E9682A"
     },
     {
       "id": "epoch2_frozen_design",
       "label": "CRYPTO EPOCH-2 frozen design",
       "status": "PLANNED",
       "implementation_path": [
-        "config/crypto_epoch2_v1.json"
+        "config/crypto_epoch2_v1.json",
+        "scripts/crypto_epoch2.py"
       ],
-      "entrypoint": "planned freeze",
+      "entrypoint": "python scripts/crypto_epoch2.py freeze",
       "input": "calibration, taxonomy, actions, budgets, policies, seeds and evaluator hash",
       "output": "immutable Epoch-2 manifest",
       "data_role": "frozen development-search control",
       "feedback_permission": "NO_PERFORMANCE_BEFORE_FREEZE",
       "artifact_test": [],
-      "blocker": "search implementation and freeze pending",
-      "last_verified_sha": "B444CE28AF8649924C3C14BE1776771A050F2E7B0AFEC2A146A9A04D6957AC4F"
+      "blocker": "implementation commit and immutable freeze manifest pending",
+      "last_verified_sha": "7D22F503753FDB31FE43D07ECF58707113BBB57C246CB2439E91AF93B8EB237D"
     },
     {
       "id": "epoch2_execution",
       "label": "CRYPTO EPOCH-2 execution",
       "status": "PLANNED",
       "implementation_path": [
-        "config/crypto_epoch2_v1.json"
+        "config/crypto_epoch2_v1.json",
+        "scripts/crypto_epoch2.py"
       ],
-      "entrypoint": "planned run/check",
+      "entrypoint": "python scripts/crypto_epoch2.py run; python scripts/crypto_epoch2.py check",
       "input": "frozen 49152 proposals and three equal-budget admission policies",
       "output": "2304 strict evaluations and stopped recommendation",
       "data_role": "controlled development-only evidence",
       "feedback_permission": "NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
-      "artifact_test": [],
-      "blocker": "not frozen or started",
-      "last_verified_sha": "B444CE28AF8649924C3C14BE1776771A050F2E7B0AFEC2A146A9A04D6957AC4F"
+      "artifact_test": [
+        "tests/test_epoch2.py",
+        "runtime/epoch2_20260712/epoch2_implementation_test_output.txt"
+      ],
+      "blocker": "immutable Epoch-2 design not yet frozen; performance not started",
+      "last_verified_sha": "B6359AD33CF97F75522C25035BAAAA1E29415EC59B7470AEADC1E0F956E9682A"
     }
   ],
   "edges": [

@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `B5D5BB8297C01EC9F74F72B00B2A456B2885A4F6B256B485EBB9EB4E2CE30355`.
+Registry SHA256: `27A2B09389855011B96FA065D375B6D339C8588C4EC840C98CFDE96A5A43FF0C`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `RESEARCH_MODE_CONTROLLED_EPOCH2_DEVELOPMENT_ONLY`
-- Current phase: `EPOCH2_CALIBRATION_AND_TAXONOMY_QUALIFIED`
+- Current phase: `EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION_READY`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,7 +16,7 @@ Registry SHA256: `B5D5BB8297C01EC9F74F72B00B2A456B2885A4F6B256B485EBB9EB4E2CE303
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION`
+- Active stage: `EPOCH2_DESIGN_FREEZE_PENDING`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -159,7 +159,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## CRYPTO EPOCH-2
 
-- Status: `EPOCH2_CALIBRATION_AND_TAXONOMY_QUALIFIED`
+- Status: `EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION_READY`
 - Calibration: `SURVIVOR_CONTRACT_CALIBRATED_REACHABLE`; planted/null pass `1.0` / `0.0`
 - Frozen parents: `84` rows / `64` proposals / `57` exact identities
 - Budget: `49152` proposals / `2304` strict / seeds `[5201, 5209]`
@@ -207,4 +207,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Implement and test blocker-directed repair plus three equal-budget admission policies, synchronize calibration control artifacts, freeze Epoch-2 before performance, then execute once without online changes.
+Commit the tested Epoch-2 runner, freeze its repo SHA and contracts, verify the immutable manifest, then execute exactly once without online changes.

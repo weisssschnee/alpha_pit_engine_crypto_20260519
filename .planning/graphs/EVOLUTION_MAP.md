@@ -1,6 +1,6 @@
 # Evolution Map
 
-Generated from registry SHA256: `B5D5BB8297C01EC9F74F72B00B2A456B2885A4F6B256B485EBB9EB4E2CE30355`.
+Generated from registry SHA256: `27A2B09389855011B96FA065D375B6D339C8588C4EC840C98CFDE96A5A43FF0C`.
 
 ## Current Evolution
 
@@ -79,3 +79,4 @@ Generated from registry SHA256: `B5D5BB8297C01EC9F74F72B00B2A456B2885A4F6B256B48
 - `EVALRESET-20260712-041` — `EPOCH1R_REMOTE_SYNC_PENDING`: Epoch-1R closure subject a9c119e and local tag epoch1r-completed-natural-underfill-a9c119e are complete. Three HTTPS push attempts failed with connection reset or GitHub port 443 unreachable. The earlier failed Epoch-1 evidence subject 403b351 and its tag remain remotely verified. Epoch-1R remote SHA is unverified; no remote synchronization claim is made.
 - `EVALRESET-20260712-042` — `EPOCH1R_REMOTE_CLOSURE_VERIFIED`: Network recovered. Remote branch audit/evalreset-collapse-forensics-20260711 was observed at 944246f and contains Epoch-1R closure a9c119e. Remote annotated tag epoch1r-completed-natural-underfill-a9c119e peels exactly to a9c119e4447755d76838373178c57ae8e05ab481. Failed Epoch-1 evidence tag remains preserved separately.
 - `EVALRESET-20260712-043` — `EPOCH2_CALIBRATION_AND_TAXONOMY_QUALIFIED`: Epoch-1R subject b1b9544 is accepted. Development-only calibration produced 100% planted-control survivor pass and 0% null-control pass, proving the frozen survivor contract reachable; OOS grade remains NONE and bias-audit decision HOLD_RESEARCH. All 84 frozen near-miss evaluation rows are retained as 64 proposal IDs and 57 exact identities: 56 NET_LCB_NEAR_ZERO, 26 COST_ONLY, one BENCHMARK_INCREMENT_ONLY and one STRUCTURAL_UNREPAIRABLE. No reselection, new evaluation block, promotion or memory update occurred. Epoch-2 budget is fixed at 49152 proposals and 2304 strict evaluations pending implementation and freeze.
+- `EVALRESET-20260712-044` — `EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION_READY`: The development-only Epoch-2 runner and 11 focused tests are implemented. The fixed 49152-proposal mix, two seeds, three 768-row policies, shared exact cache, separate main/BBO ranking, parent-to-child blocker attribution, local non-persistent UCB repair, matched random controls, CEM early-gate diagnostic and fixed two-seed surrogate diagnostic are encoded before performance. No design freeze or Epoch-2 performance has started; forward remains sealed and candidate promotion, A7MEM and cross-epoch adaptive memory remain forbidden.

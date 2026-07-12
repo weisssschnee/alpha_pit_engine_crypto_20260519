@@ -1,0 +1,8 @@
+command: G:\PythonProject\.venv\Scripts\python.exe -m pytest tests/test_epoch2.py tests/test_epoch2_calibration.py tests/test_epoch2_taxonomy.py tests/test_architecture_control_plane.py -q
+date: 2026-07-12
+result: 12 passed in 9.81s
+architecture_build: PASS_ARCHITECTURE_CONTROL_PLANE_SYNCED
+architecture_check: PASS_ARCHITECTURE_CONTROL_PLANE_VALID
+forward_read: false
+candidate_promotion: false
+cross_epoch_memory: false

@@ -5,6 +5,10 @@
   "fixed_seeds": [5201, 5209],
   "strict_budget": 2304,
   "strict_budget_per_admission_policy": 768,
+  "panel_strict_budget_per_policy": {
+    "main": 744,
+    "bbo_micro": 24
+  },
   "proposal_mix": {
     "blocker_directed_evolutionary_repair": 17203,
     "local_mcts_repair": 9830,
@@ -18,6 +22,16 @@
     "HYBRID_QUALITY_DIVERSITY": {"quality_share": 0.6, "diversity_share": 0.4}
   },
   "shared_exact_evaluation_cache": true,
+  "matched_repair_controls": {
+    "evolutionary_repair": "evolutionary_random_control",
+    "local_mcts_repair": "local_mcts_random_control",
+    "llm_typed_repair": "llm_random_repair_control"
+  },
+  "diagnostic_components": {
+    "cem": "early-gate-eligible elite diagnostic only; no separate proposal budget",
+    "surrogate": "fixed two-seed development cross-fit; no admission or selection use"
+  },
+  "panel_comparison_contract": "main and bbo_micro are ranked separately; BBO is not extrapolated beyond its scoped panel",
   "repair_parent_source": "runtime/epoch2_calibration_20260712/frozen_near_miss_parent_pack.csv",
   "prohibited": ["validation_test_recent_may_stress_forward", "online_parameter_change", "additional_seed_or_budget", "survivor_contract_change", "candidate_promotion", "a7mem", "cross_epoch_adaptive_memory"]
 }
