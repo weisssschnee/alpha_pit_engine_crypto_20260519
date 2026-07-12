@@ -217,6 +217,10 @@ def recover() -> dict[str, object]:
     index.to_csv(INDEX, index=False)
     outputs = artifact_paths + [INDEX]
     policy_counts = {str(key): int(value) for key, value in assignments.groupby("admission_policy").size().items()}
+    panel_policy_counts = [
+        {"panel_id": panel, "admission_policy": policy_name, "rows": int(count)}
+        for (panel, policy_name), count in assignments.groupby(["panel_id", "admission_policy"]).size().items()
+    ]
     manifest = {
         "experiment_id": frozen["experiment_id"],
         "execution_status": "STRICT_COMPLETED_POSTPROCESS_RECOVERED",
@@ -227,6 +231,7 @@ def recover() -> dict[str, object]:
         "logical_strict_rows": len(strict),
         "shared_cache_queries": strict.groupby(["panel_id", "exact_identity"]).ngroups,
         "policy_counts": policy_counts,
+        "panel_policy_counts": panel_policy_counts,
         "survivors": survivors,
         "near_misses": near_misses,
         "positive_net_lcb": positive_net,
