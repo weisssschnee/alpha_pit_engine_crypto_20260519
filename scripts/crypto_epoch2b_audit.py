@@ -650,7 +650,8 @@ def check() -> None:
             raise ValueError(f"Epoch-2B output drift: {output['path']}")
     replay = load_json(ROOT / "hybrid_report_only_replay_summary.json")
     for panel in replay["panels"]:
-        if not math.isclose(panel["quality_share"], .60, abs_tol=.01) or panel["exact_identities"] != panel["strict_rows"]:
+        expected_quality = round(panel["strict_rows"] * .60)
+        if panel["quality_rows"] != expected_quality or panel["diversity_rows"] != panel["strict_rows"] - expected_quality or panel["exact_identities"] != panel["strict_rows"]:
             raise ValueError("Hybrid report-only replay did not preserve admitted-identity composition")
     operators = pd.read_csv(ROOT / "operator_causal_summary.csv")
     adaptive = operators[operators.lane_id.isin(["evolutionary_repair", "local_mcts_repair", "llm_typed_repair"])]
