@@ -1,0 +1,23 @@
+{
+  "contract_id": "CRYPTO-EPOCH2-BLOCKER-DIRECTED-V1",
+  "development_only": true,
+  "proposal_budget": 49152,
+  "fixed_seeds": [5201, 5209],
+  "strict_budget": 2304,
+  "strict_budget_per_admission_policy": 768,
+  "proposal_mix": {
+    "blocker_directed_evolutionary_repair": 17203,
+    "local_mcts_repair": 9830,
+    "llm_typed_repair": 7373,
+    "typed_fresh_matched_controls": 9830,
+    "orthogonal_exile_fresh": 4916
+  },
+  "admission_policies": {
+    "GLOBAL_QUALITY": {"quality_share": 1.0, "diversity_share": 0.0},
+    "STRATIFIED_DIVERSITY": {"quality_share": 0.0, "diversity_share": 1.0},
+    "HYBRID_QUALITY_DIVERSITY": {"quality_share": 0.6, "diversity_share": 0.4}
+  },
+  "shared_exact_evaluation_cache": true,
+  "repair_parent_source": "runtime/epoch2_calibration_20260712/frozen_near_miss_parent_pack.csv",
+  "prohibited": ["validation_test_recent_may_stress_forward", "online_parameter_change", "additional_seed_or_budget", "survivor_contract_change", "candidate_promotion", "a7mem", "cross_epoch_adaptive_memory"]
+}

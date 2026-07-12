@@ -1,11 +1,11 @@
 {
   "phase_a_status": "PHASE_A_GOVERNANCE_ACCEPTED",
   "collapse_status": "SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED",
-  "research_status": "RESEARCH_MODE_CONTROLLED_EPOCH1R_REPAIR_ONLY",
-  "current_phase": "FROZEN_DEVELOPMENT_EPOCH1R_COMPLETED_WITH_NATURAL_UNDERFILL",
+  "research_status": "RESEARCH_MODE_CONTROLLED_EPOCH2_DEVELOPMENT_ONLY",
+  "current_phase": "EPOCH2_CALIBRATION_AND_TAXONOMY_QUALIFIED",
   "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
   "frozen_signal_behaviour_status": "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED",
-  "active_stage": "EPOCH1R_CLOSED_WAITING_INDEPENDENT_NEXT_EPOCH_DECISION",
+  "active_stage": "EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION",
   "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
   "forward_data_status": "SEALED_NO_NEW_FORWARD_READ",
   "formal_search_status": "FORMAL_SEARCH_FROZEN",
@@ -282,5 +282,13 @@
     "tag": "epoch1r-completed-natural-underfill-a9c119e",
     "tag_peeled_commit": "a9c119e4447755d76838373178c57ae8e05ab481"
   },
-  "next_acceptance_gate": "Wait for independent authorization before any further search-engine revision or development epoch. Epoch-1R is closed with natural underfill, zero survivors, 84 near misses, two positive net-LCB rows and no adaptive success. Do not open OOS/forward, promote candidates or persist adaptive memory."
+  "nextgen_epoch2": {
+    "status":"EPOCH2_CALIBRATION_AND_TAXONOMY_QUALIFIED","accepted_epoch1r_subject_sha":"b1b9544bb6443894fda3abf7cc63c6d492693242",
+    "calibration_decision":"SURVIVOR_CONTRACT_CALIBRATED_REACHABLE","planted_pass_rate":1.0,"null_pass_rate":0.0,
+    "parent_rows":84,"unique_parent_proposals":64,"unique_parent_exact_identities":57,
+    "blocker_counts":{"NET_LCB_NEAR_ZERO":56,"COST_ONLY":26,"BENCHMARK_INCREMENT_ONLY":1,"STRUCTURAL_UNREPAIRABLE":1},
+    "proposal_budget":49152,"strict_budget":2304,"fixed_seeds":[5201,5209],"design_frozen":false,"performance_started":false,
+    "bias_audit":"HOLD_RESEARCH_DEVELOPMENT_ONLY_OOS_NONE","candidate_promotion":false,"cross_epoch_memory":false,"forward_read":false
+  },
+  "next_acceptance_gate": "Implement and test blocker-directed repair plus three equal-budget admission policies, synchronize calibration control artifacts, freeze Epoch-2 before performance, then execute once without online changes."
 }

@@ -1,0 +1,19 @@
+{
+  "candidate_promotion": false,
+  "continuation": "proceed to frozen near-miss taxonomy only if decision is reachable",
+  "cost_bps": 5.0,
+  "data_access": "DEVELOPMENT_AND_SYNTHETIC_CALIBRATION_ONLY",
+  "decision": "SURVIVOR_CONTRACT_CALIBRATED_REACHABLE",
+  "experiment_id": "20260712_epoch2_survivor_calibration_001",
+  "forward_read": false,
+  "memory_updated": false,
+  "null_pass_rate": 0.0,
+  "oos_grade": "NONE",
+  "planted_pass_rate": 1.0,
+  "repo_sha": "b1b9544bb6443894fda3abf7cc63c6d492693242",
+  "reproducibility": "FIXED_SEEDS_AND_HASHED_OUTPUT",
+  "rows": 18,
+  "strict_search_started": false,
+  "table": "runtime/epoch2_calibration_20260712/survivor_contract_calibration.csv",
+  "table_sha256": "0221135C180182D1431A28F0EB14F1F68E407BC6DDC8C676BFFD8E690542F7E4"
+}

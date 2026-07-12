@@ -48,6 +48,8 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
             "EPOCH1R_ADMISSION_PREFLIGHT_PASSED_READY_TO_FREEZE",
             "FROZEN_DEVELOPMENT_EPOCH1R_DESIGN_FROZEN", "FROZEN_DEVELOPMENT_EPOCH1R_COMPLETED",
             "FROZEN_DEVELOPMENT_EPOCH1R_COMPLETED_WITH_NATURAL_UNDERFILL", "FROZEN_DEVELOPMENT_EPOCH1R_FAILED",
+            "EPOCH2_CALIBRATION_AND_TAXONOMY_QUALIFIED", "FROZEN_DEVELOPMENT_EPOCH2_DESIGN_FROZEN",
+            "FROZEN_DEVELOPMENT_EPOCH2_COMPLETED", "FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED", "FROZEN_DEVELOPMENT_EPOCH2_FAILED",
         })
         self.assertEqual(
             state["production_observation_qualification_status"],
@@ -55,7 +57,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         )
         self.assertEqual(state["phase_b1_status"], "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN")
         self.assertEqual(state["phase_b0p_acceptance"]["status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
-        self.assertTrue(state["active_stage"].startswith("EPOCH1"))
+        self.assertTrue(state["active_stage"].startswith(("EPOCH1", "EPOCH2")))
         self.assertEqual(state["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
         self.assertEqual(state["phase_b0a_acceptance"]["accepted_subject_sha"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertEqual(state["formal_search_status"], "FORMAL_SEARCH_FROZEN")
@@ -72,6 +74,8 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertFalse(state["nextgen_epoch1r"]["forward_read"])
         self.assertFalse(state["nextgen_epoch1r"]["candidate_promotion"])
         self.assertFalse(state["nextgen_epoch1r"]["cross_epoch_memory"])
+        self.assertFalse(state["nextgen_epoch2"]["forward_read"])
+        self.assertFalse(state["nextgen_epoch2"]["candidate_promotion"])
         self.assertEqual(state["adaptive_cross_epoch_memory_status"], "ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN")
         self.assertEqual(state["candidate_promotion_status"], "NO_CANDIDATE_PROMOTION")
 

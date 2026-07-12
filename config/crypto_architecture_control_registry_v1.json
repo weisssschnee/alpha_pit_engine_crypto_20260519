@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "9FC67EC3F2CF517FE506046F01E25B317D1BECBAB3C00154EDF9790B3AE80D65"
+      "last_verified_sha": "A12D30DC350F04B99B6298F832AE31AEF4101EE7455577BF171121DCBB66526D"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "850D0D0DEFD433EBC25DE7F9371A982D5444DBD83D98E37B3FBD33A60D9415D1"
+      "last_verified_sha": "A31228B37A78E79F7CE519F28F8D00BD13965E008ACB444DE79D792AF0BEFC83"
     },
     {
       "id": "nextgen_mechanism_registry",
@@ -1055,6 +1055,97 @@
       ],
       "blocker": "zero development survivors, only two positive net-LCB rows and no adaptive lane success; next action requires independent authorization",
       "last_verified_sha": "0E81654F608D3346E4B48FCADD285C617471A1375F1F26C28BBC9B55514FE223"
+    },
+    {
+      "id": "epoch2_survivor_calibration",
+      "label": "Epoch-2 survivor contract calibration",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "scripts/crypto_epoch2_calibration.py",
+        "config/crypto_epoch2_v1.json"
+      ],
+      "entrypoint": "crypto_epoch2_calibration.py",
+      "input": "development coordinates plus isolated synthetic planted/null controls",
+      "output": "gate pass rates, distances and reachability decision",
+      "data_role": "evaluator calibration only",
+      "feedback_permission": "CALIBRATION_ONLY_NO_GENERATOR_MEMORY_CANDIDATE_OR_PROMOTION",
+      "artifact_test": [
+        "tests/test_epoch2_calibration.py",
+        "runtime/epoch2_calibration_20260712/calibration_manifest.json",
+        "runtime/epoch2_calibration_20260712/survivor_contract_calibration.csv"
+      ],
+      "blocker": "none; planted pass 100% and null pass 0% prove development survivor contract reachable",
+      "last_verified_sha": "4DF2BBD6EFF22620524A483662D036AE7A0CD50E131C3510100A9A44D94B1F8A"
+    },
+    {
+      "id": "epoch2_blocker_taxonomy",
+      "label": "Epoch-2 frozen near-miss blocker taxonomy",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "scripts/crypto_epoch2_taxonomy.py"
+      ],
+      "entrypoint": "crypto_epoch2_taxonomy.py",
+      "input": "frozen 84 Epoch-1R near-miss evaluation rows",
+      "output": "parent pack, blocker distances, taxonomy and priority",
+      "data_role": "authorized frozen repair parents",
+      "feedback_permission": "REPAIR_PARENT_INPUT_ONLY_NO_AUTOMATIC_MEMORY",
+      "artifact_test": [
+        "tests/test_epoch2_taxonomy.py",
+        "runtime/epoch2_calibration_20260712/taxonomy_manifest.json",
+        "runtime/epoch2_calibration_20260712/frozen_near_miss_parent_pack.csv",
+        "runtime/epoch2_calibration_20260712/near_miss_blocker_taxonomy.csv",
+        "runtime/epoch2_calibration_20260712/blocker_summary.csv"
+      ],
+      "blocker": "none; 84 rows frozen without reselection",
+      "last_verified_sha": "E431B6FEE047E5B4743271A047CB8FA66D5AFCBDE3BA5D19072340ED4218F0FE"
+    },
+    {
+      "id": "epoch2_blocker_directed_search",
+      "label": "Epoch-2 blocker-directed search",
+      "status": "PLANNED",
+      "implementation_path": [
+        "config/crypto_epoch2_v1.json"
+      ],
+      "entrypoint": "planned Epoch-2 runner",
+      "input": "frozen parent pack and fresh typed roots",
+      "output": "49152 fixed proposals and repair lineage",
+      "data_role": "development-only proposal search",
+      "feedback_permission": "CURRENT_EPOCH_ONLY_NO_CROSS_EPOCH_POLICY_OR_VALUE",
+      "artifact_test": [],
+      "blocker": "runner and tests pending",
+      "last_verified_sha": "B444CE28AF8649924C3C14BE1776771A050F2E7B0AFEC2A146A9A04D6957AC4F"
+    },
+    {
+      "id": "epoch2_frozen_design",
+      "label": "CRYPTO EPOCH-2 frozen design",
+      "status": "PLANNED",
+      "implementation_path": [
+        "config/crypto_epoch2_v1.json"
+      ],
+      "entrypoint": "planned freeze",
+      "input": "calibration, taxonomy, actions, budgets, policies, seeds and evaluator hash",
+      "output": "immutable Epoch-2 manifest",
+      "data_role": "frozen development-search control",
+      "feedback_permission": "NO_PERFORMANCE_BEFORE_FREEZE",
+      "artifact_test": [],
+      "blocker": "search implementation and freeze pending",
+      "last_verified_sha": "B444CE28AF8649924C3C14BE1776771A050F2E7B0AFEC2A146A9A04D6957AC4F"
+    },
+    {
+      "id": "epoch2_execution",
+      "label": "CRYPTO EPOCH-2 execution",
+      "status": "PLANNED",
+      "implementation_path": [
+        "config/crypto_epoch2_v1.json"
+      ],
+      "entrypoint": "planned run/check",
+      "input": "frozen 49152 proposals and three equal-budget admission policies",
+      "output": "2304 strict evaluations and stopped recommendation",
+      "data_role": "controlled development-only evidence",
+      "feedback_permission": "NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [],
+      "blocker": "not frozen or started",
+      "last_verified_sha": "B444CE28AF8649924C3C14BE1776771A050F2E7B0AFEC2A146A9A04D6957AC4F"
     }
   ],
   "edges": [
@@ -1651,6 +1742,72 @@
       "target": "scheduler",
       "kind": "FORBIDDEN",
       "label": "Epoch-1R cannot auto-rerun, reallocate or schedule another epoch"
+    },
+    {
+      "source": "epoch1r_execution",
+      "target": "epoch2_survivor_calibration",
+      "kind": "ALLOWED",
+      "label": "accepted development evidence supports isolated evaluator calibration"
+    },
+    {
+      "source": "epoch1r_execution",
+      "target": "epoch2_blocker_taxonomy",
+      "kind": "ALLOWED",
+      "label": "84 frozen near-miss evaluation rows are explicitly authorized repair parents"
+    },
+    {
+      "source": "epoch2_survivor_calibration",
+      "target": "epoch2_blocker_directed_search",
+      "kind": "CONTROL",
+      "label": "search allowed only because planted pass and null fail prove reachability"
+    },
+    {
+      "source": "epoch2_blocker_taxonomy",
+      "target": "epoch2_blocker_directed_search",
+      "kind": "ALLOWED",
+      "label": "blocker distances direct local repair actions"
+    },
+    {
+      "source": "epoch2_blocker_directed_search",
+      "target": "epoch2_frozen_design",
+      "kind": "ALLOWED",
+      "label": "fixed proposal mix and hybrid admission contracts"
+    },
+    {
+      "source": "epoch2_frozen_design",
+      "target": "epoch2_execution",
+      "kind": "ALLOWED",
+      "label": "single immutable development-only execution"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "epoch2_execution",
+      "kind": "FORBIDDEN",
+      "label": "forward remains sealed during Epoch-2"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "epoch2_execution",
+      "kind": "FORBIDDEN",
+      "label": "spent evaluation cannot enter Epoch-2"
+    },
+    {
+      "source": "epoch2_execution",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "Epoch-2 cannot persist adaptive state or memory"
+    },
+    {
+      "source": "epoch2_execution",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "Epoch-2 cannot promote candidates"
+    },
+    {
+      "source": "epoch2_execution",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "Epoch-2 cannot auto-rerun or extend budget"
     }
   ]
 }

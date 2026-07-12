@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `990C66CCFA42B22834E2A5A000F0E1C0821CBA25690B34E29A6893B9CC3E3D17`.
+Generated from registry SHA256: `B5D5BB8297C01EC9F74F72B00B2A456B2885A4F6B256B485EBB9EB4E2CE30355`.
 
 ## Authority
 
@@ -76,3 +76,8 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 | epoch1r_execution | a7mem | Epoch-1R cannot persist adaptive state or memory |
 | epoch1r_execution | admission | Epoch-1R cannot promote candidates |
 | epoch1r_execution | scheduler | Epoch-1R cannot auto-rerun, reallocate or schedule another epoch |
+| sealed_forward | epoch2_execution | forward remains sealed during Epoch-2 |
+| spent_evaluation | epoch2_execution | spent evaluation cannot enter Epoch-2 |
+| epoch2_execution | a7mem | Epoch-2 cannot persist adaptive state or memory |
+| epoch2_execution | admission | Epoch-2 cannot promote candidates |
+| epoch2_execution | scheduler | Epoch-2 cannot auto-rerun or extend budget |

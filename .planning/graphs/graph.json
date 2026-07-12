@@ -4,14 +4,14 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "990C66CCFA42B22834E2A5A000F0E1C0821CBA25690B34E29A6893B9CC3E3D17",
+      "registry_sha256": "B5D5BB8297C01EC9F74F72B00B2A456B2885A4F6B256B485EBB9EB4E2CE30355",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
-      "control_node_count": 49,
-      "control_edge_count": 99,
-      "phase_status": "FROZEN_DEVELOPMENT_EPOCH1R_COMPLETED_WITH_NATURAL_UNDERFILL",
+      "control_node_count": 54,
+      "control_edge_count": 110,
+      "phase_status": "EPOCH2_CALIBRATION_AND_TAXONOMY_QUALIFIED",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "EPOCH1R_CLOSED_WAITING_INDEPENDENT_NEXT_EPOCH_DECISION",
+      "active_stage": "EPOCH2_BLOCKER_DIRECTED_SEARCH_IMPLEMENTATION",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
@@ -46,7 +46,10 @@
       "epoch1r_executed_strict_evaluations": 2052,
       "epoch1r_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
       "epoch1r_remote_sync_status": "VERIFIED_REMOTE_CONTAINS_EPOCH1R_CLOSURE",
-      "research_status": "RESEARCH_MODE_CONTROLLED_EPOCH1R_REPAIR_ONLY",
+      "epoch2_status": "EPOCH2_CALIBRATION_AND_TAXONOMY_QUALIFIED",
+      "epoch2_design_frozen": false,
+      "epoch2_performance_started": false,
+      "research_status": "RESEARCH_MODE_CONTROLLED_EPOCH2_DEVELOPMENT_ONLY",
       "phase_b1_status": "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN",
       "forward_data_status": "SEALED_NO_NEW_FORWARD_READ"
     }
@@ -177353,7 +177356,7 @@
         "reports/CRYPTO_B0P_FUNDING_PRODUCTION_QUALIFICATION_20260711.md",
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
-      "last_verified_sha": "9FC67EC3F2CF517FE506046F01E25B317D1BECBAB3C00154EDF9790B3AE80D65",
+      "last_verified_sha": "A12D30DC350F04B99B6298F832AE31AEF4101EE7455577BF171121DCBB66526D",
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
       "weight": 1.0
     },
@@ -177656,7 +177659,7 @@
         "runtime/b1s_canary_20260711/B1S_CANARY_COMPACT_RESULT.md",
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
-      "last_verified_sha": "850D0D0DEFD433EBC25DE7F9371A982D5444DBD83D98E37B3FBD33A60D9415D1",
+      "last_verified_sha": "A31228B37A78E79F7CE519F28F8D00BD13965E008ACB444DE79D792AF0BEFC83",
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
       "weight": 1.0
     },
@@ -177958,6 +177961,122 @@
       ],
       "last_verified_sha": "0E81654F608D3346E4B48FCADD285C617471A1375F1F26C28BBC9B55514FE223",
       "blocker": "zero development survivors, only two positive net-LCB rows and no adaptive lane success; next action requires independent authorization",
+      "weight": 1.0
+    },
+    {
+      "id": "control_epoch2_survivor_calibration",
+      "label": "Epoch-2 survivor contract calibration",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "scripts/crypto_epoch2_calibration.py",
+        "config/crypto_epoch2_v1.json"
+      ],
+      "entrypoint": "crypto_epoch2_calibration.py",
+      "input": "development coordinates plus isolated synthetic planted/null controls",
+      "output": "gate pass rates, distances and reachability decision",
+      "data_role": "evaluator calibration only",
+      "feedback_permission": "CALIBRATION_ONLY_NO_GENERATOR_MEMORY_CANDIDATE_OR_PROMOTION",
+      "artifact_test": [
+        "tests/test_epoch2_calibration.py",
+        "runtime/epoch2_calibration_20260712/calibration_manifest.json",
+        "runtime/epoch2_calibration_20260712/survivor_contract_calibration.csv"
+      ],
+      "last_verified_sha": "4DF2BBD6EFF22620524A483662D036AE7A0CD50E131C3510100A9A44D94B1F8A",
+      "blocker": "none; planted pass 100% and null pass 0% prove development survivor contract reachable",
+      "weight": 1.0
+    },
+    {
+      "id": "control_epoch2_blocker_taxonomy",
+      "label": "Epoch-2 frozen near-miss blocker taxonomy",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "scripts/crypto_epoch2_taxonomy.py"
+      ],
+      "entrypoint": "crypto_epoch2_taxonomy.py",
+      "input": "frozen 84 Epoch-1R near-miss evaluation rows",
+      "output": "parent pack, blocker distances, taxonomy and priority",
+      "data_role": "authorized frozen repair parents",
+      "feedback_permission": "REPAIR_PARENT_INPUT_ONLY_NO_AUTOMATIC_MEMORY",
+      "artifact_test": [
+        "tests/test_epoch2_taxonomy.py",
+        "runtime/epoch2_calibration_20260712/taxonomy_manifest.json",
+        "runtime/epoch2_calibration_20260712/frozen_near_miss_parent_pack.csv",
+        "runtime/epoch2_calibration_20260712/near_miss_blocker_taxonomy.csv",
+        "runtime/epoch2_calibration_20260712/blocker_summary.csv"
+      ],
+      "last_verified_sha": "E431B6FEE047E5B4743271A047CB8FA66D5AFCBDE3BA5D19072340ED4218F0FE",
+      "blocker": "none; 84 rows frozen without reselection",
+      "weight": 1.0
+    },
+    {
+      "id": "control_epoch2_blocker_directed_search",
+      "label": "Epoch-2 blocker-directed search",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "PLANNED",
+      "implementation_path": [
+        "config/crypto_epoch2_v1.json"
+      ],
+      "entrypoint": "planned Epoch-2 runner",
+      "input": "frozen parent pack and fresh typed roots",
+      "output": "49152 fixed proposals and repair lineage",
+      "data_role": "development-only proposal search",
+      "feedback_permission": "CURRENT_EPOCH_ONLY_NO_CROSS_EPOCH_POLICY_OR_VALUE",
+      "artifact_test": [],
+      "last_verified_sha": "B444CE28AF8649924C3C14BE1776771A050F2E7B0AFEC2A146A9A04D6957AC4F",
+      "blocker": "runner and tests pending",
+      "weight": 1.0
+    },
+    {
+      "id": "control_epoch2_frozen_design",
+      "label": "CRYPTO EPOCH-2 frozen design",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "PLANNED",
+      "implementation_path": [
+        "config/crypto_epoch2_v1.json"
+      ],
+      "entrypoint": "planned freeze",
+      "input": "calibration, taxonomy, actions, budgets, policies, seeds and evaluator hash",
+      "output": "immutable Epoch-2 manifest",
+      "data_role": "frozen development-search control",
+      "feedback_permission": "NO_PERFORMANCE_BEFORE_FREEZE",
+      "artifact_test": [],
+      "last_verified_sha": "B444CE28AF8649924C3C14BE1776771A050F2E7B0AFEC2A146A9A04D6957AC4F",
+      "blocker": "search implementation and freeze pending",
+      "weight": 1.0
+    },
+    {
+      "id": "control_epoch2_execution",
+      "label": "CRYPTO EPOCH-2 execution",
+      "file_type": "architecture_control",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "status": "PLANNED",
+      "implementation_path": [
+        "config/crypto_epoch2_v1.json"
+      ],
+      "entrypoint": "planned run/check",
+      "input": "frozen 49152 proposals and three equal-budget admission policies",
+      "output": "2304 strict evaluations and stopped recommendation",
+      "data_role": "controlled development-only evidence",
+      "feedback_permission": "NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [],
+      "last_verified_sha": "B444CE28AF8649924C3C14BE1776771A050F2E7B0AFEC2A146A9A04D6957AC4F",
+      "blocker": "not frozen or started",
       "weight": 1.0
     }
   ],
@@ -492409,6 +492528,138 @@
       "target": "control_scheduler",
       "relationship": "FORBIDDEN",
       "label": "Epoch-1R cannot auto-rerun, reallocate or schedule another epoch",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_099",
+      "source": "control_epoch1r_execution",
+      "target": "control_epoch2_survivor_calibration",
+      "relationship": "ALLOWED",
+      "label": "accepted development evidence supports isolated evaluator calibration",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_100",
+      "source": "control_epoch1r_execution",
+      "target": "control_epoch2_blocker_taxonomy",
+      "relationship": "ALLOWED",
+      "label": "84 frozen near-miss evaluation rows are explicitly authorized repair parents",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_101",
+      "source": "control_epoch2_survivor_calibration",
+      "target": "control_epoch2_blocker_directed_search",
+      "relationship": "CONTROL",
+      "label": "search allowed only because planted pass and null fail prove reachability",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_102",
+      "source": "control_epoch2_blocker_taxonomy",
+      "target": "control_epoch2_blocker_directed_search",
+      "relationship": "ALLOWED",
+      "label": "blocker distances direct local repair actions",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_103",
+      "source": "control_epoch2_blocker_directed_search",
+      "target": "control_epoch2_frozen_design",
+      "relationship": "ALLOWED",
+      "label": "fixed proposal mix and hybrid admission contracts",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_104",
+      "source": "control_epoch2_frozen_design",
+      "target": "control_epoch2_execution",
+      "relationship": "ALLOWED",
+      "label": "single immutable development-only execution",
+      "forbidden": false,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_105",
+      "source": "control_sealed_forward",
+      "target": "control_epoch2_execution",
+      "relationship": "FORBIDDEN",
+      "label": "forward remains sealed during Epoch-2",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_106",
+      "source": "control_spent_evaluation",
+      "target": "control_epoch2_execution",
+      "relationship": "FORBIDDEN",
+      "label": "spent evaluation cannot enter Epoch-2",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_107",
+      "source": "control_epoch2_execution",
+      "target": "control_a7mem",
+      "relationship": "FORBIDDEN",
+      "label": "Epoch-2 cannot persist adaptive state or memory",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_108",
+      "source": "control_epoch2_execution",
+      "target": "control_admission",
+      "relationship": "FORBIDDEN",
+      "label": "Epoch-2 cannot promote candidates",
+      "forbidden": true,
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config/crypto_architecture_control_registry_v1.json",
+      "weight": 1.0
+    },
+    {
+      "edge_id": "control_edge_109",
+      "source": "control_epoch2_execution",
+      "target": "control_scheduler",
+      "relationship": "FORBIDDEN",
+      "label": "Epoch-2 cannot auto-rerun or extend budget",
       "forbidden": true,
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,

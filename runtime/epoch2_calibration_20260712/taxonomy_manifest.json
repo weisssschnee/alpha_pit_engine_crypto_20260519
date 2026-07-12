@@ -1,0 +1,15 @@
+{
+  "forward_read": false,
+  "memory_updated": false,
+  "parent_pack_sha256": "DB6C599C5BC736022A4E8D46BBBC387B9829A348EC0E217B0FA55EFBE992DE81",
+  "parent_rows": 84,
+  "performance_reoptimized": false,
+  "selection_replayed": false,
+  "source_proposal_pack_sha256": "318811FC93C39719B164CF9FF3212D507B964963E17E08D0B026F6B3E2350A62",
+  "source_strict_sha256": "41F3D8DAE56CF5C5F6DF45D019CCDD3BDB2A4C6C3853609C1077E20445B7AD6B",
+  "status": "EPOCH2_NEAR_MISS_PARENTS_FROZEN",
+  "summary_sha256": "386D5294408B30233F8CEF9EC477B6B713E915102849BE817B1C51CA8FF41E7C",
+  "taxonomy_sha256": "DB6C599C5BC736022A4E8D46BBBC387B9829A348EC0E217B0FA55EFBE992DE81",
+  "unique_exact_identities": 57,
+  "unique_proposal_ids": 64
+}
