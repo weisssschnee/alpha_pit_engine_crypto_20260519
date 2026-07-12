@@ -1,0 +1,148 @@
+{
+  "a7mem_updated": false,
+  "adaptive_successes": 0,
+  "additional_budget": false,
+  "bias_audit": "HOLD_RESEARCH_DEVELOPMENT_ONLY_OOS_NONE",
+  "candidate_promotion": false,
+  "cross_epoch_memory": false,
+  "decision": "FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED",
+  "execution_status": "STRICT_COMPLETED_POSTPROCESS_RECOVERED",
+  "experiment_id": "20260712_crypto_epoch2_001",
+  "fixed_budget_contract_preserved": true,
+  "forward_status": "FORWARD_SEALED",
+  "frozen_manifest_sha256": "0778E46A397E58E35C38827DDEB3673E685D7440F6435FD7BBA118C065105850",
+  "hybrid_60_40_contract_preserved": false,
+  "logical_strict_rows": 2304,
+  "mcts_top_concentration": 0.3438409311348205,
+  "median_blocker_distance_delta": -3.722529932946653e-05,
+  "near_misses": 237,
+  "new_performance_queries_for_recovery": 0,
+  "online_change": false,
+  "oos_claim": false,
+  "outputs": [
+    {
+      "path": "runtime/epoch2_20260712/epoch2_frozen_manifest.json",
+      "sha256": "449FC4F0D9D57AD97768B169EC9F591A6F5A7D760771F9E7026123909C2E9E2F"
+    },
+    {
+      "path": "runtime/epoch2_20260712/proposal_pack.jsonl.gz",
+      "sha256": "C9A4730C5570501D07DE6055C3197FF1824FE39EEAF32D00630BBD5C5C81B8DA"
+    },
+    {
+      "path": "runtime/epoch2_20260712/admission_assignments.csv",
+      "sha256": "22388C3D8A16A4FD6A1D5D3ECAA84F80C15583CEDD98A9351D9E9A49AF3C57D3"
+    },
+    {
+      "path": "runtime/epoch2_20260712/strict_evaluations.csv",
+      "sha256": "8BFE77CB33CA48FBEE2815A7F2A008627FE7721697AAEFF6544475956FDA45A7"
+    },
+    {
+      "path": "runtime/epoch2_20260712/epoch2_failure.json",
+      "sha256": "691B24E88688178807449F1008F15071845A6FD718A2BCCBA2947DB0E02B2BDC"
+    },
+    {
+      "path": "runtime/epoch2_20260712/strict_evaluations_repaired.csv",
+      "sha256": "C0CA813CA18E8F913D99FBA02636376BE6FD93E3E146A805383DB8C750F2875B"
+    },
+    {
+      "path": "runtime/epoch2_20260712/search_role_diagnostics.csv",
+      "sha256": "5098721DDCF83F5A5248F402356DABF78D01D5298A2B0ED712408E3380CED83E"
+    },
+    {
+      "path": "runtime/epoch2_20260712/cem_diagnostic.csv",
+      "sha256": "1BC4FA3A8D8FC023E2E67B90931C7430129EC07C838D3FC1987781CEADE814A5"
+    },
+    {
+      "path": "runtime/epoch2_20260712/local_mcts_root_visits.csv",
+      "sha256": "D2CA64F32512D14816D2F2EB5FDF8B72B84089E0915DF4EAFFE91AACAFF6F429"
+    },
+    {
+      "path": "runtime/epoch2_20260712/repair_child_attribution.csv",
+      "sha256": "5052FBA318672F32FBB2F0DB29B41BB119DC2C12C1DD3A948F7C1A4240B1CF2D"
+    },
+    {
+      "path": "runtime/epoch2_20260712/repair_lineage_attribution.csv",
+      "sha256": "390712BF648C1D5FF7015B57E64FC8D08AB9BDEA948B628943D888F0926A742F"
+    },
+    {
+      "path": "runtime/epoch2_20260712/surrogate_crossfit_diagnostic.csv",
+      "sha256": "9845B50DA944513BEA7E1E2445652F1A1DE7F1FA6924D321CA5CE9E1907A2DE8"
+    },
+    {
+      "path": "runtime/epoch2_20260712/admission_policy_comparison.csv",
+      "sha256": "5F1335C3F1B5B246C2B932158E4D7FFF8F4A53E3DB68EE5FDEE16C50297EF309"
+    },
+    {
+      "path": "runtime/epoch2_20260712/lane_comparison.csv",
+      "sha256": "59A3B15AD42330FEC72098B519A3B7D97020A481441170C3E49662AC63A76BD8"
+    },
+    {
+      "path": "runtime/epoch2_20260712/adaptive_vs_matched_controls.csv",
+      "sha256": "8DA16EB49C9D758D053C21DF1BFFB2012F569010626BDD35E33620A3A611335E"
+    },
+    {
+      "path": "runtime/epoch2_20260712/hybrid_admission_contract_audit.csv",
+      "sha256": "8D9E7B8C854EBD383598D00280B145C7CB24D2469172BE03B7DCAF02124E08C0"
+    },
+    {
+      "path": "runtime/epoch2_20260712/epoch2_bias_audit.json",
+      "sha256": "8E863F2A11D9B9284C7E7D42F66BC5E4CD5AEF3C90BAD07F80CDB4DB63AC9A30"
+    },
+    {
+      "path": "runtime/epoch2_20260712/EPOCH2_COMPACT_RESULT.md",
+      "sha256": "1E9A8C022E9AF675BEE1CCF0C28F56883627760806ED0AA0A042762466A563D9"
+    },
+    {
+      "path": "runtime/epoch2_20260712/epoch2_postprocess_recovery_manifest.json",
+      "sha256": "F0C821E11D97812640609B48BA3DD1A6AB8FEC7B6F3B60527A274FD95421F0C9"
+    },
+    {
+      "path": "runtime/epoch2_20260712/epoch2_artifact_index.csv",
+      "sha256": "F3BCB9F68675CC48FC9E96917246FE07152363EAFC4CBD5C2300C73775CCCC08"
+    }
+  ],
+  "panel_policy_counts": [
+    {
+      "admission_policy": "GLOBAL_QUALITY",
+      "panel_id": "bbo_micro",
+      "rows": 24
+    },
+    {
+      "admission_policy": "HYBRID_QUALITY_DIVERSITY",
+      "panel_id": "bbo_micro",
+      "rows": 24
+    },
+    {
+      "admission_policy": "STRATIFIED_DIVERSITY",
+      "panel_id": "bbo_micro",
+      "rows": 24
+    },
+    {
+      "admission_policy": "GLOBAL_QUALITY",
+      "panel_id": "main",
+      "rows": 744
+    },
+    {
+      "admission_policy": "HYBRID_QUALITY_DIVERSITY",
+      "panel_id": "main",
+      "rows": 744
+    },
+    {
+      "admission_policy": "STRATIFIED_DIVERSITY",
+      "panel_id": "main",
+      "rows": 744
+    }
+  ],
+  "policy_counts": {
+    "GLOBAL_QUALITY": 768,
+    "HYBRID_QUALITY_DIVERSITY": 768,
+    "STRATIFIED_DIVERSITY": 768
+  },
+  "positive_net_lcb": 8,
+  "postprocess_recovery": true,
+  "proposal_rows": 49152,
+  "recommendation": "REVISE_BLOCKER_DIRECTED_SEARCH_AND_REPEAT",
+  "runtime_seconds_postprocess_only": 14.01729610003531,
+  "shared_cache_queries": 1488,
+  "survivors": 0
+}

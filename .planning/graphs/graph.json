@@ -4,14 +4,14 @@
   "graph": {
     "architecture_control_plane": {
       "registry": "config/crypto_architecture_control_registry_v1.json",
-      "registry_sha256": "8BCFB60BD0941E8C60236A2DBCA7E2776040CA184AD09CA7FFA644EE988301DF",
+      "registry_sha256": "9404EDC978D35A68E27C5B3765B4D8BADC3E778D1C98D176079C5DDF79DC61D6",
       "generator": "scripts/crypto_architecture_control_plane.py",
       "graphify_status": "UNAVAILABLE_REGISTRY_OVERLAY_ACTIVE",
       "control_node_count": 54,
       "control_edge_count": 110,
-      "phase_status": "EPOCH2_STRICT_EXECUTION_COMPLETE_POSTPROCESS_FAILED",
+      "phase_status": "FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED",
       "production_observation_qualification_status": "PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED",
-      "active_stage": "EPOCH2_REPORT_ONLY_SCHEMA_RECOVERY_PENDING",
+      "active_stage": "EPOCH2_STOPPED_AWAITING_INDEPENDENT_DECISION",
       "accepted_subject_sha": "9574d32053d1679d64179fe2d6607d1a05e13db9",
       "b0p_acceptance_status": "PHASE_B0P_PARTIALLY_ACCEPTED",
       "b0p_accepted_subject_sha": "5219e7899cad1be83f9bcf2ec520ed1ff5037f9e",
@@ -46,7 +46,7 @@
       "epoch1r_executed_strict_evaluations": 2052,
       "epoch1r_recommendation": "REVISE_SEARCH_ENGINE_AND_REPEAT_DEVELOPMENT_EPOCH",
       "epoch1r_remote_sync_status": "VERIFIED_REMOTE_CONTAINS_EPOCH1R_CLOSURE",
-      "epoch2_status": "EPOCH2_STRICT_EXECUTION_COMPLETE_POSTPROCESS_FAILED",
+      "epoch2_status": "FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED",
       "epoch2_design_frozen": true,
       "epoch2_performance_started": true,
       "research_status": "RESEARCH_MODE_CONTROLLED_EPOCH2_DEVELOPMENT_ONLY",
@@ -178079,9 +178079,9 @@
         "scripts/crypto_epoch2.py",
         "scripts/crypto_epoch2_postprocess_repair.py"
       ],
-      "entrypoint": "python scripts/crypto_epoch2.py run; python scripts/crypto_epoch2.py check",
+      "entrypoint": "python scripts/crypto_epoch2.py run; python scripts/crypto_epoch2_postprocess_repair.py check",
       "input": "frozen 49152 proposals and three equal-budget admission policies",
-      "output": "2304 strict evaluations and stopped recommendation",
+      "output": "2304 strict evaluations, matched-repair attribution, admission comparison and stopped recommendation",
       "data_role": "controlled development-only evidence",
       "feedback_permission": "NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
       "artifact_test": [
@@ -178091,10 +178091,19 @@
         "runtime/epoch2_20260712/proposal_pack.jsonl.gz",
         "runtime/epoch2_20260712/admission_assignments.csv",
         "runtime/epoch2_20260712/strict_evaluations.csv",
-        "runtime/epoch2_20260712/epoch2_failure.json"
+        "runtime/epoch2_20260712/epoch2_failure.json",
+        "runtime/epoch2_20260712/strict_evaluations_repaired.csv",
+        "runtime/epoch2_20260712/repair_child_attribution.csv",
+        "runtime/epoch2_20260712/adaptive_vs_matched_controls.csv",
+        "runtime/epoch2_20260712/hybrid_admission_contract_audit.csv",
+        "runtime/epoch2_20260712/epoch2_bias_audit.json",
+        "runtime/epoch2_20260712/epoch2_postprocess_recovery_manifest.json",
+        "runtime/epoch2_20260712/epoch2_run_manifest.json",
+        "runtime/epoch2_20260712/epoch2_artifact_index.csv",
+        "runtime/epoch2_20260712/EPOCH2_COMPACT_RESULT.md"
       ],
-      "last_verified_sha": "B79CE62528944B325AF0338D08F87EE1AB9249C57286FBEBDDFD04F532C53D7D",
-      "blocker": "49152 proposals and 2304 strict rows complete; report-only proposal_id schema recovery pending with zero new performance queries",
+      "last_verified_sha": "65AC1BABBE81DD85A40943F84E47A729323E741F24458C843B9F25DE9E586853",
+      "blocker": "zero survivors, zero adaptive successes, negative median blocker change and Hybrid 60/40 admitted-identity contract not preserved; stopped pending revision",
       "weight": 1.0
     }
   ],

@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `8BCFB60BD0941E8C60236A2DBCA7E2776040CA184AD09CA7FFA644EE988301DF`.
+Registry SHA256: `9404EDC978D35A68E27C5B3765B4D8BADC3E778D1C98D176079C5DDF79DC61D6`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `RESEARCH_MODE_CONTROLLED_EPOCH2_DEVELOPMENT_ONLY`
-- Current phase: `EPOCH2_STRICT_EXECUTION_COMPLETE_POSTPROCESS_FAILED`
+- Current phase: `FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,7 +16,7 @@ Registry SHA256: `8BCFB60BD0941E8C60236A2DBCA7E2776040CA184AD09CA7FFA644EE988301
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `EPOCH2_REPORT_ONLY_SCHEMA_RECOVERY_PENDING`
+- Active stage: `EPOCH2_STOPPED_AWAITING_INDEPENDENT_DECISION`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 
@@ -159,7 +159,7 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## CRYPTO EPOCH-2
 
-- Status: `EPOCH2_STRICT_EXECUTION_COMPLETE_POSTPROCESS_FAILED`
+- Status: `FROZEN_DEVELOPMENT_EPOCH2_PARTIALLY_COMPLETED`
 - Calibration: `SURVIVOR_CONTRACT_CALIBRATED_REACHABLE`; planted/null pass `1.0` / `0.0`
 - Frozen parents: `84` rows / `64` proposals / `57` exact identities
 - Budget: `49152` proposals / `2304` strict / seeds `[5201, 5209]`
@@ -207,4 +207,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Commit the complete strict/failure evidence and tested report-only recovery code, reconstruct the omitted proposal_id with zero new performance queries, validate hashes, then close Epoch-2.
+Independently review the Epoch-2 partial result; repair admitted-identity Hybrid quotas and blocker-directed operators before any newly frozen development epoch. Formal search, forward access, promotion and cross-epoch memory remain frozen.

@@ -1148,9 +1148,9 @@
         "scripts/crypto_epoch2.py",
         "scripts/crypto_epoch2_postprocess_repair.py"
       ],
-      "entrypoint": "python scripts/crypto_epoch2.py run; python scripts/crypto_epoch2.py check",
+      "entrypoint": "python scripts/crypto_epoch2.py run; python scripts/crypto_epoch2_postprocess_repair.py check",
       "input": "frozen 49152 proposals and three equal-budget admission policies",
-      "output": "2304 strict evaluations and stopped recommendation",
+      "output": "2304 strict evaluations, matched-repair attribution, admission comparison and stopped recommendation",
       "data_role": "controlled development-only evidence",
       "feedback_permission": "NO_OOS_NO_FORWARD_NO_MEMORY_NO_PROMOTION",
       "artifact_test": [
@@ -1160,10 +1160,19 @@
         "runtime/epoch2_20260712/proposal_pack.jsonl.gz",
         "runtime/epoch2_20260712/admission_assignments.csv",
         "runtime/epoch2_20260712/strict_evaluations.csv",
-        "runtime/epoch2_20260712/epoch2_failure.json"
+        "runtime/epoch2_20260712/epoch2_failure.json",
+        "runtime/epoch2_20260712/strict_evaluations_repaired.csv",
+        "runtime/epoch2_20260712/repair_child_attribution.csv",
+        "runtime/epoch2_20260712/adaptive_vs_matched_controls.csv",
+        "runtime/epoch2_20260712/hybrid_admission_contract_audit.csv",
+        "runtime/epoch2_20260712/epoch2_bias_audit.json",
+        "runtime/epoch2_20260712/epoch2_postprocess_recovery_manifest.json",
+        "runtime/epoch2_20260712/epoch2_run_manifest.json",
+        "runtime/epoch2_20260712/epoch2_artifact_index.csv",
+        "runtime/epoch2_20260712/EPOCH2_COMPACT_RESULT.md"
       ],
-      "blocker": "49152 proposals and 2304 strict rows complete; report-only proposal_id schema recovery pending with zero new performance queries",
-      "last_verified_sha": "B79CE62528944B325AF0338D08F87EE1AB9249C57286FBEBDDFD04F532C53D7D"
+      "blocker": "zero survivors, zero adaptive successes, negative median blocker change and Hybrid 60/40 admitted-identity contract not preserved; stopped pending revision",
+      "last_verified_sha": "65AC1BABBE81DD85A40943F84E47A729323E741F24458C843B9F25DE9E586853"
     }
   ],
   "edges": [

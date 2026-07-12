@@ -1,0 +1,19 @@
+{
+  "bbo_micro_positive_net_lcb": 8,
+  "bbo_scope_extrapolation_allowed": false,
+  "candidate_promotion": false,
+  "conclusion": "No OOS or deployability claim; revise blocker search and Hybrid identity quota before another frozen development epoch.",
+  "data_access": "DEVELOPMENT_ONLY",
+  "decision": "HOLD_RESEARCH",
+  "development_survivors": 0,
+  "forward_read": false,
+  "hybrid_60_40_contract_preserved": false,
+  "logical_strict_rows": 2304,
+  "main_positive_net_lcb": 0,
+  "null_control_pass_rate": 0.0,
+  "oos_grade": "NONE",
+  "planted_control_pass_rate": 1.0,
+  "same_development_domain_used_for_admission_and_strict": true,
+  "shared_exact_evaluation_queries": 1488,
+  "three_policy_comparison_is_exploratory_not_oos": true
+}

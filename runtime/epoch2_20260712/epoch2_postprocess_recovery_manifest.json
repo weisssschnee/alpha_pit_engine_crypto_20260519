@@ -1,0 +1,19 @@
+{
+  "assignment_sha256": "22388C3D8A16A4FD6A1D5D3ECAA84F80C15583CEDD98A9351D9E9A49AF3C57D3",
+  "candidate_promotion": false,
+  "cross_epoch_memory": false,
+  "forward_read": false,
+  "frozen_manifest_sha256": "0778E46A397E58E35C38827DDEB3673E685D7440F6435FD7BBA118C065105850",
+  "hybrid_60_40_contract_preserved": false,
+  "new_performance_queries": 0,
+  "new_proposals": 0,
+  "new_strict_evaluations": 0,
+  "online_contract_change": false,
+  "original_failure_path": "runtime/epoch2_20260712/epoch2_failure.json",
+  "original_failure_sha256": "691B24E88688178807449F1008F15071845A6FD718A2BCCBA2947DB0E02B2BDC",
+  "original_strict_sha256": "8BFE77CB33CA48FBEE2815A7F2A008627FE7721697AAEFF6544475956FDA45A7",
+  "repair_scope": "RESTORE_OMITTED_PROPOSAL_ID_AND_GENERATE_REPORTS_ONLY",
+  "return_label_reread": false,
+  "status": "STRICT_EXECUTION_COMPLETE_POSTPROCESS_SCHEMA_REPAIRED",
+  "strict_rows_reused": 2304
+}
