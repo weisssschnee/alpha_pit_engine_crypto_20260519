@@ -1,0 +1,212 @@
+{
+  "additional_budget": false,
+  "arena_systems": [
+    "INTERNAL_FORMULA_20D_CS_MOMENTUM",
+    "SIMPLE_ECONOMIC_20D_TSMOM",
+    "QLIB_ALPHA158_LIGHTGBM",
+    "QLIB_PRICE_KBAR_CONTROL",
+    "DEEP_MOMENTUM_LSTM",
+    "DEEP_MOMENTUM_NO_TURNOVER_CONTROL"
+  ],
+  "candidate_promotion": false,
+  "commands": {
+    "check": "python scripts/crypto_external_frontier_assimilation.py check",
+    "freeze": "python scripts/crypto_external_frontier_assimilation.py freeze",
+    "prepare": "python scripts/crypto_external_frontier_assimilation.py prepare",
+    "run": "python scripts/crypto_external_frontier_assimilation.py run"
+  },
+  "config_sha256": "D7F08E10337005965771703EEE8F397E316A596A4AD1BA98EB5E23105C421926",
+  "cross_sprint_memory_update": false,
+  "dataset_contract": {
+    "common_cost_bps_per_unit_turnover": 5.0,
+    "daily_maturity": "next UTC day 00:00",
+    "daily_observable_time": "next UTC day 00:00 after a completed daily bucket",
+    "execution_delay_days": 1,
+    "label": "close[t+2] / close[t+1] - 1",
+    "minimum_symbols_per_day": 6,
+    "missing_policy": "no cross-symbol fill; missing coordinates remain absent; train-only median feature imputation",
+    "source_lag_seconds": 0
+  },
+  "dmn_contract": {
+    "epochs": 80,
+    "feature_horizons_days": [
+      1,
+      5,
+      20,
+      60
+    ],
+    "hidden_size": 16,
+    "learning_rate": 0.003,
+    "macd_pairs_days": [
+      [
+        4,
+        12
+      ],
+      [
+        8,
+        24
+      ],
+      [
+        16,
+        48
+      ]
+    ],
+    "matched_control": "SAME_LSTM_ZERO_TURNOVER_PENALTY",
+    "native_cost_bps_per_unit_turnover": 3.0,
+    "native_deviation": "252-day return and one-year sequence are unavailable inside the qualified ten-month release; no claim about the full Momentum Transformer is permitted.",
+    "online_tuning": false,
+    "seeds": [
+      1901,
+      1907
+    ],
+    "sequence_length_days": 20,
+    "turnover_penalty": 0.0005,
+    "volatility_span_days": 60,
+    "volatility_target_annual": 0.15,
+    "weight_decay": 0.0001
+  },
+  "estimated_cost_time": "CPU-only, eight fixed fits, expected under 20 minutes; no paid service",
+  "evaluation_contract": {
+    "common_metrics": [
+      "gross_mean",
+      "net_mean",
+      "net_lcb",
+      "annualized_sharpe",
+      "max_drawdown",
+      "positive_month_fraction",
+      "turnover_mean",
+      "coverage",
+      "runtime_seconds",
+      "complexity",
+      "behaviour_overlap",
+      "failure_mode"
+    ],
+    "migration_gate": {
+      "challenge_net_lcb_positive": true,
+      "challenge_positive_month_fraction_min": 0.5,
+      "development_and_challenge_increment_over_matched_control": true,
+      "max_abs_behaviour_correlation_to_internal": 0.95
+    },
+    "roles": [
+      "DEVELOPMENT",
+      "CHALLENGE"
+    ],
+    "systems": [
+      "INTERNAL_FORMULA_20D_CS_MOMENTUM",
+      "SIMPLE_ECONOMIC_20D_TSMOM",
+      "QLIB_ALPHA158_LIGHTGBM",
+      "QLIB_PRICE_KBAR_CONTROL",
+      "DEEP_MOMENTUM_LSTM",
+      "DEEP_MOMENTUM_NO_TURNOVER_CONTROL"
+    ]
+  },
+  "experiment_id": "20260713_crypto_frontier_assimilation_001",
+  "external_reproductions": [
+    "MICROSOFT_QLIB_ALPHA158_LIGHTGBM",
+    "DEEP_MOMENTUM_NETWORK"
+  ],
+  "fixed_budget": {
+    "additional_budget": false,
+    "external_reproductions": 2,
+    "matched_controls": 2,
+    "model_fits": 8,
+    "performance_roles": 2
+  },
+  "forward_read": false,
+  "frozen_manifest_sha256": "E6EE8088CF6033778E28552706D5BDAD0B3FC78CF070186E3870D66B99DE2A0E",
+  "implementation_hashes": {
+    "arena_module": "193D78CBF87E60A2771D7D1222FFBAEA5B9647D26D1B0DE41602B9D788281B22",
+    "runner": "D54B0767BE10C3CC60BD38AB892C994786F1E2841C1C89A689A49E468FF50F51",
+    "tests": "3F0FE24FF204B99B02430C8B19F40CE479C6EE35C5E00E392040F384622CD6D3"
+  },
+  "input_artifacts": [
+    {
+      "artifact": "runtime/crypto_external_frontier_assimilation_20260713/daily_observation_panel.parquet",
+      "producer": "prepare",
+      "role": "PIT_DAILY_OBSERVATION",
+      "sha256": "193B2C9A4826139FF4FE5B28433FBEEEEBC4BC0BA0138336CC9D41B780F8BF0E",
+      "size_bytes": 392696
+    },
+    {
+      "artifact": "runtime/crypto_external_frontier_assimilation_20260713/alpha158_daily_panel.parquet",
+      "producer": "prepare",
+      "role": "QLIB_NATIVE_REPRESENTATION",
+      "sha256": "D26FBC222516F65F561C655190158A166E2FDF5ED751577D1BDD084ACC5B4278",
+      "size_bytes": 4402844
+    },
+    {
+      "artifact": "runtime/crypto_external_frontier_assimilation_20260713/dmn_daily_panel.parquet",
+      "producer": "prepare",
+      "role": "DMN_NATIVE_REPRESENTATION",
+      "sha256": "C5BC01924256ECAC69F8BD5C9877A3F51AE5E87CDE524C6852C9BD6003A62B67",
+      "size_bytes": 642822
+    },
+    {
+      "artifact": "runtime/crypto_external_frontier_assimilation_20260713/external_frontier_map.csv",
+      "producer": "prepare",
+      "role": "EXTERNAL_REFERENCE_MAP",
+      "sha256": "7D10819D3917CDA9A8CC4B67F931489752CB90E1EE4F8C58BF3663AF1C43A964",
+      "size_bytes": 4736
+    },
+    {
+      "artifact": "runtime/crypto_external_frontier_assimilation_20260713/external_data_ingress_registry.csv",
+      "producer": "prepare",
+      "role": "NEW_DATA_DIRECT_ENTRY",
+      "sha256": "DD58B37E29AFEC69AC1FC10CC3DFBCFCD39636C537D3DDDDD201305CF050CDDB",
+      "size_bytes": 1204
+    }
+  ],
+  "input_bundle_sha256": "DB464BE6F750C99E576082F9BB16B555AFC2E9D47C9CEF5AE1531D99A82B994C",
+  "objective": "Determine whether materially different public research paradigms improve the existing Crypto development system, or whether the remaining bottleneck is data representation and coverage.",
+  "online_adjustment": false,
+  "package_versions": {
+    "lightgbm": "4.6.0",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "python": "3.11.9",
+    "scikit_learn": "1.6.1",
+    "torch": "2.12.1+cpu"
+  },
+  "performance_started": false,
+  "qlib_contract": {
+    "feature_count": 158,
+    "matched_control": "PRICE_KBAR_ONLY_SAME_MODEL",
+    "model": {
+      "colsample_bytree": 0.8,
+      "learning_rate": 0.03,
+      "max_depth": 6,
+      "min_child_samples": 20,
+      "n_estimators": 160,
+      "n_jobs": 4,
+      "num_leaves": 31,
+      "reg_alpha": 0.1,
+      "reg_lambda": 1.0,
+      "subsample": 0.8
+    },
+    "model_seeds": [
+      1701,
+      1709
+    ],
+    "native_close_cost_bps": 15.0,
+    "native_drop": 1,
+    "native_open_cost_bps": 5.0,
+    "native_topk": 3,
+    "online_tuning": false,
+    "rolling_windows": [
+      5,
+      10,
+      20,
+      30,
+      60
+    ]
+  },
+  "release_content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+  "release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+  "repo_sha": "6ef581d8c6d494e34de0688ef83c0c253cf7c207",
+  "roles": [
+    "DEVELOPMENT",
+    "CHALLENGE"
+  ],
+  "spent_evaluation_read": false,
+  "status": "CRYPTO_EXTERNAL_FRONTIER_ASSIMILATION_DESIGN_FROZEN"
+}
