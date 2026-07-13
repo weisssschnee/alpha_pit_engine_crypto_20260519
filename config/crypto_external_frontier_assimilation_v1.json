@@ -1,0 +1,273 @@
+{
+  "sprint_id": "CRYPTO_EXTERNAL_FRONTIER_ASSIMILATION_20260713",
+  "version": 1,
+  "research_objective": "Determine whether materially different public research paradigms improve the existing Crypto development system, or whether the remaining bottleneck is data representation and coverage.",
+  "release": {
+    "release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+    "config": "config/crypto_native_aggtrades_release_v1.json",
+    "content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+    "frequency": "1d_from_qualified_1h",
+    "development_months": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06"],
+    "challenge_months": ["2024-07", "2024-08", "2024-09", "2024-10"],
+    "quarantined_months": ["2024-11", "2024-12"],
+    "forward_access": false,
+    "spent_evaluation_access": false
+  },
+  "external_sources": [
+    {
+      "source_id": "MICROSOFT_QLIB_ALPHA158_LIGHTGBM",
+      "paradigms": ["cross_sectional_factor_ranking", "classical_supervised_ml"],
+      "method_version": "qlib-v0.9.7 Alpha158/LightGBM workflow",
+      "source_url": "https://github.com/microsoft/qlib",
+      "method_url": "https://github.com/microsoft/qlib/blob/main/examples/benchmarks/LightGBM/workflow_config_lightgbm_Alpha158.yaml",
+      "license": "MIT",
+      "accessed_utc": "2026-07-13"
+    },
+    {
+      "source_id": "DEEP_MOMENTUM_NETWORK",
+      "paradigms": ["sequence_temporal_representation", "portfolio_first_optimisation", "end_to_end_differentiable_trading"],
+      "method_version": "arXiv:1904.04912v3",
+      "source_url": "https://arxiv.org/abs/1904.04912v3",
+      "method_url": "https://github.com/kieranjwood/trading-momentum-transformer",
+      "license": "paper method; companion repository MIT",
+      "accessed_utc": "2026-07-13"
+    }
+  ],
+  "frontier_map": [
+    {
+      "competitor_id": "QLIB_ALPHA158_LIGHTGBM",
+      "paradigm": "cross_sectional_factor_ranking_and_classical_supervised_ml",
+      "native_input": "daily OHLCV transformed into 158 k-bar, price and rolling features",
+      "native_target": "cross-sectionally normalized next-day close return after one-day execution delay",
+      "native_horizon": "1 trading day",
+      "model_search": "LightGBM regression with a fixed workflow",
+      "portfolio_mapping": "TopKDropout",
+      "cost": "5bp open plus 15bp close in the published workflow",
+      "evaluation": "IC, Rank IC, ICIR and portfolio analysis",
+      "main_assumption": "cross-sectional supervised prediction preserves more information than formula admission",
+      "challenge_to_current_system": "changes representation, target and portfolio instead of adding formula operators",
+      "sprint_disposition": "REPRODUCE"
+    },
+    {
+      "competitor_id": "G_RESEARCH_CRYPTO_LIGHTGBM",
+      "paradigm": "public_competition_winning_pipeline",
+      "native_input": "minute crypto bars across fourteen assets",
+      "native_target": "short-horizon market-residualized crypto return",
+      "native_horizon": "15 minutes",
+      "model_search": "LightGBM used by all top-three competition teams",
+      "portfolio_mapping": "none in competition; weighted forecast correlation",
+      "cost": "not part of leaderboard metric",
+      "evaluation": "asset-weighted Pearson correlation",
+      "main_assumption": "explicit residualized forecasting target is more learnable than direct strategy reward",
+      "challenge_to_current_system": "separates forecast skill from portfolio and cost",
+      "sprint_disposition": "MAP_ONLY_NATIVE_MINUTE_RELEASE_NOT_QUALIFIED"
+    },
+    {
+      "competitor_id": "DEEP_MOMENTUM_LSTM",
+      "paradigm": "sequence_temporal_and_portfolio_first",
+      "native_input": "volatility-normalized multi-horizon returns and MACD sequences",
+      "native_target": "no detached label; position is optimized against next-day portfolio return",
+      "native_horizon": "1 trading day",
+      "model_search": "shared LSTM position model trained by differentiable Sharpe",
+      "portfolio_mapping": "volatility-scaled positions averaged across assets",
+      "cost": "turnover regularization and 0-3bp published cost tests",
+      "evaluation": "portfolio Sharpe net of costs",
+      "main_assumption": "joint trend and sizing learning preserves edge lost by signal-first evaluation",
+      "challenge_to_current_system": "optimizes the portfolio rather than exact signal identities",
+      "sprint_disposition": "REPRODUCE_SCOPED"
+    },
+    {
+      "competitor_id": "MOMENTUM_TRANSFORMER",
+      "paradigm": "sequence_temporal_and_regime_conditioned",
+      "native_input": "one-year sequences, multi-scale normalized returns, MACD and optional changepoints",
+      "native_target": "next-day volatility-scaled portfolio return",
+      "native_horizon": "1 trading day",
+      "model_search": "attention-LSTM decoder-only TFT",
+      "portfolio_mapping": "portfolio Sharpe objective",
+      "cost": "net transaction-cost evaluation",
+      "evaluation": "risk-adjusted return and attention/variable interpretation",
+      "main_assumption": "attention identifies long dependencies and regime changes",
+      "challenge_to_current_system": "learned temporal representation replaces fixed temporal primitives",
+      "sprint_disposition": "DATA_INCOMPATIBLE_HISTORY_TOO_SHORT_FOR_NATIVE_ONE_YEAR_TRAINING"
+    },
+    {
+      "competitor_id": "DEEPM_2026",
+      "paradigm": "regime_state_conditioned_portfolio_first",
+      "native_input": "multi-asset sequences with lagged cross-section and economic graph",
+      "native_target": "pooled portfolio Sharpe plus soft-min window Sharpe",
+      "native_horizon": "daily multi-period portfolio",
+      "model_search": "graph and cross-asset attention with exact coupled-Sharpe gradients",
+      "portfolio_mapping": "direct multi-asset positions with cost-aware objective",
+      "cost": "asset-specific transaction costs in training",
+      "evaluation": "pooled and worst-window risk-adjusted performance",
+      "main_assumption": "causal cross-asset structure and worst-regime loss improve robustness",
+      "challenge_to_current_system": "changes both representation and stability objective",
+      "sprint_disposition": "MAP_ONLY_REQUIRES_LONG_MULTI_REGIME_HISTORY"
+    },
+    {
+      "competitor_id": "DEEPLOB_DIGITAL_ASSET",
+      "paradigm": "microstructure_order_flow",
+      "native_input": "multi-level limit-order-book states at event or sub-second frequency",
+      "native_target": "future mid-price movement class",
+      "native_horizon": "event count or seconds",
+      "model_search": "CNN/Inception plus LSTM or temporal CNN",
+      "portfolio_mapping": "classification-to-execution bridge required",
+      "cost": "spread, queue and latency required",
+      "evaluation": "walk-forward classification plus execution bridge",
+      "main_assumption": "spatial order-book state contains predictive information absent from bars",
+      "challenge_to_current_system": "requires a fundamentally richer data representation",
+      "sprint_disposition": "DATA_INCOMPATIBLE_MULTI_LEVEL_L2_UNAVAILABLE"
+    },
+    {
+      "competitor_id": "DEEPDOW",
+      "paradigm": "end_to_end_differentiable_portfolio",
+      "native_input": "lookback tensor across assets and channels",
+      "native_target": "future return tensor used directly by portfolio losses",
+      "native_horizon": "configurable multi-step",
+      "model_search": "neural allocation network",
+      "portfolio_mapping": "model outputs weights directly",
+      "cost": "loss-composable portfolio costs",
+      "evaluation": "portfolio loss distribution",
+      "main_assumption": "allocation is part of learning rather than a post-processing step",
+      "challenge_to_current_system": "removes signal-to-portfolio information loss",
+      "sprint_disposition": "MAP_AND_COMPONENT_REFERENCE"
+    },
+    {
+      "competitor_id": "FINRL",
+      "paradigm": "end_to_end_reinforcement_learning",
+      "native_input": "market state, holdings and account state",
+      "native_target": "sequential reward from portfolio value",
+      "native_horizon": "episode",
+      "model_search": "A2C/PPO/SAC/DDPG/TD3 agents",
+      "portfolio_mapping": "environment actions",
+      "cost": "environment transaction costs and constraints",
+      "evaluation": "train-test-trade backtest",
+      "main_assumption": "sequential actions and inventory state matter",
+      "challenge_to_current_system": "optimizes dynamic execution and allocation",
+      "sprint_disposition": "MAP_ONLY_SAMPLE_AND_SIMULATOR_CONTRACT_TOO_WEAK"
+    },
+    {
+      "competitor_id": "ALPHAGEN",
+      "paradigm": "symbolic_evolutionary_alpha_discovery",
+      "native_input": "Qlib stock panel and expression grammar",
+      "native_target": "single and synergistic alpha-pool IC",
+      "native_horizon": "dataset label horizon",
+      "model_search": "reinforcement learning over formula collections",
+      "portfolio_mapping": "downstream Qlib evaluation",
+      "cost": "not intrinsic to alpha-pool objective",
+      "evaluation": "IC and alpha-pool synergy",
+      "main_assumption": "sets of complementary formulas dominate single-formula search",
+      "challenge_to_current_system": "joint pool reward counters exact-identity collapse",
+      "sprint_disposition": "NOT_REPEATED_EXISTING_CEM_MCTS_SYMBOLIC_SPACE_ALREADY_EXHAUSTED"
+    }
+  ],
+  "dataset": {
+    "daily_observable_time": "next UTC day 00:00 after a completed daily bucket",
+    "daily_maturity": "next UTC day 00:00",
+    "source_lag_seconds": 0,
+    "missing_policy": "no cross-symbol fill; missing coordinates remain absent; train-only median feature imputation",
+    "minimum_symbols_per_day": 6,
+    "label": "close[t+2] / close[t+1] - 1",
+    "execution_delay_days": 1,
+    "common_cost_bps_per_unit_turnover": 5.0
+  },
+  "qlib_reproduction": {
+    "feature_count": 158,
+    "rolling_windows": [5, 10, 20, 30, 60],
+    "model_seeds": [1701, 1709],
+    "model": {
+      "n_estimators": 160,
+      "learning_rate": 0.03,
+      "num_leaves": 31,
+      "max_depth": 6,
+      "min_child_samples": 20,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8,
+      "reg_alpha": 0.1,
+      "reg_lambda": 1.0,
+      "n_jobs": 4
+    },
+    "native_topk": 3,
+    "native_drop": 1,
+    "native_open_cost_bps": 5.0,
+    "native_close_cost_bps": 15.0,
+    "matched_control": "PRICE_KBAR_ONLY_SAME_MODEL",
+    "online_tuning": false
+  },
+  "dmn_reproduction": {
+    "feature_horizons_days": [1, 5, 20, 60],
+    "macd_pairs_days": [[4, 12], [8, 24], [16, 48]],
+    "volatility_span_days": 60,
+    "volatility_target_annual": 0.15,
+    "sequence_length_days": 20,
+    "hidden_size": 16,
+    "epochs": 80,
+    "learning_rate": 0.003,
+    "weight_decay": 0.0001,
+    "turnover_penalty": 0.0005,
+    "native_cost_bps_per_unit_turnover": 3.0,
+    "seeds": [1901, 1907],
+    "matched_control": "SAME_LSTM_ZERO_TURNOVER_PENALTY",
+    "online_tuning": false,
+    "native_deviation": "252-day return and one-year sequence are unavailable inside the qualified ten-month release; no claim about the full Momentum Transformer is permitted."
+  },
+  "arena": {
+    "systems": [
+      "INTERNAL_FORMULA_20D_CS_MOMENTUM",
+      "SIMPLE_ECONOMIC_20D_TSMOM",
+      "QLIB_ALPHA158_LIGHTGBM",
+      "QLIB_PRICE_KBAR_CONTROL",
+      "DEEP_MOMENTUM_LSTM",
+      "DEEP_MOMENTUM_NO_TURNOVER_CONTROL"
+    ],
+    "roles": ["DEVELOPMENT", "CHALLENGE"],
+    "common_metrics": [
+      "gross_mean", "net_mean", "net_lcb", "annualized_sharpe", "max_drawdown",
+      "positive_month_fraction", "turnover_mean", "coverage", "runtime_seconds",
+      "complexity", "behaviour_overlap", "failure_mode"
+    ],
+    "migration_gate": {
+      "challenge_net_lcb_positive": true,
+      "challenge_positive_month_fraction_min": 0.5,
+      "development_and_challenge_increment_over_matched_control": true,
+      "max_abs_behaviour_correlation_to_internal": 0.95
+    }
+  },
+  "external_data_contracts": [
+    {
+      "family": "cross_venue_trades_quotes",
+      "required_schema": ["venue", "symbol", "event_time", "observed_time", "price", "quantity", "side"],
+      "compatible_paradigms": ["cross_venue_price_discovery", "sequence_temporal", "supervised_ml"]
+    },
+    {
+      "family": "multi_level_l2",
+      "required_schema": ["venue", "symbol", "event_time", "observed_time", "side", "level", "price", "quantity"],
+      "compatible_paradigms": ["deeplob", "digital_asset_temporal_cnn", "execution_aware_portfolio"]
+    },
+    {
+      "family": "forced_flow_liquidation",
+      "required_schema": ["venue", "symbol", "event_time", "observed_time", "side", "price", "quantity", "notional"],
+      "compatible_paradigms": ["event_conditioned", "regime_state", "sequence_temporal"]
+    },
+    {
+      "family": "options_expectation_state",
+      "required_schema": ["venue", "underlying", "event_time", "observed_time", "expiry", "strike", "option_type", "iv", "open_interest"],
+      "compatible_paradigms": ["regime_state", "cross_asset_supervised", "portfolio_first"]
+    }
+  ],
+  "fixed_budget": {
+    "external_reproductions": 2,
+    "matched_controls": 2,
+    "model_fits": 8,
+    "performance_roles": 2,
+    "additional_budget": false
+  },
+  "prohibitions": {
+    "new_performance_search": true,
+    "forward_read": true,
+    "candidate_promotion": true,
+    "cross_sprint_adaptive_memory": true,
+    "validation_test_recent_may_stress_read": true,
+    "online_budget_or_threshold_change": true
+  }
+}
