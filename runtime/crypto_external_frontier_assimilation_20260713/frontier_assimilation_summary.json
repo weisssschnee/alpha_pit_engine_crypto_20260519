@@ -1,0 +1,33 @@
+{
+  "additional_budget": false,
+  "arena_common_results": 12,
+  "arena_native_results": 8,
+  "arena_systems": 6,
+  "behaviour_clusters": 5,
+  "behaviour_neff": 4.31890579061537,
+  "candidate_promotion": false,
+  "cross_sprint_adaptive_memory": false,
+  "data_hard_blockers": [
+    "DEEPLOB_DIGITAL_ASSET_WITHOUT_MULTI_LEVEL_L2",
+    "FULL_MOMENTUM_TRANSFORMER_WITHOUT_ONE_YEAR_TRAINING_HISTORY",
+    "G_RESEARCH_NATIVE_15MIN_WITHOUT_QUALIFIED_MINUTE_RELEASE",
+    "DEEPM_WITHOUT_LONG_MULTI_REGIME_CROSS_ASSET_HISTORY"
+  ],
+  "external_frontier_entries": 9,
+  "fixed_model_fits": 8,
+  "forward_read": false,
+  "frozen_manifest_sha256": "E6EE8088CF6033778E28552706D5BDAD0B3FC78CF070186E3870D66B99DE2A0E",
+  "main_recommendation": "WAIT_FOR_EXTERNAL_DATA_WITH_ARENA_READY",
+  "matched_controls": 2,
+  "migrated_components": [],
+  "new_performance_search_frozen": true,
+  "outcome_class": "B_DATA_BOTTLENECK_WITH_ARENA_READY",
+  "performance_scope": "QUALIFIED_DEVELOPMENT_AND_PREVIOUSLY_OPENED_PRE_FORWARD_CHALLENGE_ONLY",
+  "real_end_to_end_reproductions": 2,
+  "reproducibility": "DETERMINISTIC_SEEDS_HASHED_INPUTS_FIXED_BUDGET_SINGLE_EXECUTION",
+  "runtime_seconds": 131.29605229990557,
+  "spent_evaluation_read": false,
+  "status": "CRYPTO_FRONTIER_ASSIMILATION_COMPLETED",
+  "top_cluster_share": 0.3333333333333333,
+  "weakest_layer": "APPROVED_DATA_REPRESENTATION_AND_HISTORY_DEPTH"
+}

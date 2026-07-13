@@ -81,6 +81,11 @@ NATIVE_AGGTRADES_BENCHMARK_SUMMARY_PATH = NATIVE_AGGTRADES_BENCHMARK_ROOT / "ben
 BBO_ACQUISITION_SUMMARY_PATH = MECHANISM_DATA_ROOT / "bbo_full_year_acquisition" / "bbo_acquisition_capacity_summary.json"
 MECHANISM_DATA_CLOSURE_MANIFEST_PATH = MECHANISM_DATA_ROOT / "stage_closure_manifest.json"
 MECHANISM_DATA_CLOSURE_INDEX_PATH = MECHANISM_DATA_ROOT / "stage_artifact_index.csv"
+FRONTIER_ROOT = REPO / "runtime" / "crypto_external_frontier_assimilation_20260713"
+FRONTIER_FROZEN_MANIFEST_PATH = FRONTIER_ROOT / "frozen_experiment_manifest.json"
+FRONTIER_SUMMARY_PATH = FRONTIER_ROOT / "frontier_assimilation_summary.json"
+FRONTIER_CLOSURE_MANIFEST_PATH = FRONTIER_ROOT / "frontier_closure_manifest.json"
+FRONTIER_ARTIFACT_INDEX_PATH = FRONTIER_ROOT / "frontier_artifact_index.csv"
 CURRENT_ARCH_PATH = REPO / ".planning" / "graphs" / "CURRENT_ARCHITECTURE.md"
 BOUNDARY_PATH = REPO / ".planning" / "graphs" / "ARCHITECTURE_BOUNDARY.md"
 EVOLUTION_PATH = REPO / ".planning" / "graphs" / "EVOLUTION_MAP.md"
@@ -122,6 +127,8 @@ REQUIRED_NODE_IDS = {
     "mechanism_data_inventory",
     "native_aggtrades_release",
     "native_aggtrades_benchmark", "bbo_full_year_acquisition", "mechanism_data_expansion0_closure",
+    "external_frontier_map", "qlib_frontier_reproduction", "dmn_frontier_reproduction",
+    "multi_paradigm_arena", "external_data_ingress", "frontier_assimilation_closure",
 }
 REQUIRED_FORBIDDEN_EDGES = {
     ("spent_evaluation", "admission"),
@@ -182,6 +189,20 @@ REQUIRED_FORBIDDEN_EDGES = {
     ("epoch1r_execution", "scheduler"),
     ("sealed_forward", "epoch2_execution"), ("spent_evaluation", "epoch2_execution"),
     ("epoch2_execution", "a7mem"), ("epoch2_execution", "admission"), ("epoch2_execution", "scheduler"),
+    ("sealed_forward", "qlib_frontier_reproduction"),
+    ("spent_evaluation", "qlib_frontier_reproduction"),
+    ("sealed_forward", "dmn_frontier_reproduction"),
+    ("spent_evaluation", "dmn_frontier_reproduction"),
+    ("sealed_forward", "multi_paradigm_arena"),
+    ("spent_evaluation", "multi_paradigm_arena"),
+    ("multi_paradigm_arena", "a7mem"),
+    ("multi_paradigm_arena", "admission"),
+    ("multi_paradigm_arena", "scheduler"),
+    ("frontier_assimilation_closure", "a7mem"),
+    ("frontier_assimilation_closure", "admission"),
+    ("frontier_assimilation_closure", "scheduler"),
+    ("external_data_ingress", "strict_reward"),
+    ("external_data_ingress", "generation_lanes"),
 }
 VALID_STATUSES = {"IMPLEMENTED", "PARTIAL", "PLANNED", "FROZEN", "DEPRECATED"}
 
@@ -450,6 +471,8 @@ Generated from registry SHA256: `{digest}`.
 - The fixed native aggTrades simple benchmark CANARY completed `{state['mechanism_data_expansion0']['benchmark_fixed_evaluations']}` evaluations. Five of 32 base role/horizon rows have positive gross LCB, zero have positive net LCB and zero benchmark-horizons satisfy future-search admission; native aggTrades is `REJECT_NO_EDGE`.
 - Binance Vision monthly bookTicker exposes only `{state['mechanism_data_expansion0']['bbo_full_year_available_coordinates']}/{state['mechanism_data_expansion0']['bbo_full_year_required_coordinates']}` core12 full-2024 symbol-months. May through December return HTTP 404, so downloading the available `{state['mechanism_data_expansion0']['bbo_full_year_available_compressed_gib']}` GiB cannot satisfy the 95% full-year BBO gate.
 - MECHANISM/DATA EXPANSION-0 closes as `{state['mechanism_data_expansion0']['stage_status']}` with recommendation `{state['mechanism_data_expansion0']['stage_recommendation']}`. Formal search, forward access, candidate promotion and cross-epoch memory remain frozen.
+- External frontier assimilation maps `{state['external_frontier_assimilation']['frontier_entries']}` public paradigms and completes `{state['external_frontier_assimilation']['real_end_to_end_reproductions']}` fixed end-to-end reproductions plus `{state['external_frontier_assimilation']['matched_controls']}` matched controls in one native/common Arena. Eight predeclared fits produce five behaviour clusters (`N_eff={state['external_frontier_assimilation']['behaviour_neff']}`), but no component passes its stable matched-control migration gate.
+- The result domain closes as `{state['external_frontier_assimilation']['status']}` / `{state['external_frontier_assimilation']['outcome_class']}`. The weakest layer is `{state['external_frontier_assimilation']['weakest_layer']}` and the sole recommendation is `{state['external_frontier_assimilation']['recommendation']}`; the Arena and external-data ingress are ready, while new performance work remains frozen.
 - Main and BBO micro results remain separate comparison domains. BBO is core11 2024-01/02 top-of-book only and cannot rank main candidates or imply multi-level depth.
 - `{state['formal_search_status']}`, `{state['adaptive_cross_epoch_memory_status']}`, `{state['candidate_promotion_status']}`, and `{state['forward_data_status']}` remain frozen.
 
@@ -490,6 +513,10 @@ Registry SHA256: `{digest}`.
 - Native aggTrades benchmark: `{state['mechanism_data_expansion0']['benchmark_status']}`; admitted horizons `{state['mechanism_data_expansion0']['benchmark_admitted_horizons']}`
 - Full-year BBO source availability: `{state['mechanism_data_expansion0']['bbo_full_year_available_coordinates']}/{state['mechanism_data_expansion0']['bbo_full_year_required_coordinates']}`
 - Stage recommendation: `{state['mechanism_data_expansion0']['stage_recommendation']}`
+- External frontier assimilation: `{state['external_frontier_assimilation']['status']}` / `{state['external_frontier_assimilation']['outcome_class']}`
+- Frontier recommendation: `{state['external_frontier_assimilation']['recommendation']}`
+- Frontier evidence: `{state['external_frontier_assimilation']['real_end_to_end_reproductions']}` reproductions / `{state['external_frontier_assimilation']['fixed_model_fits']}` fixed fits / `{state['external_frontier_assimilation']['behaviour_clusters']}` behaviour clusters / N_eff `{state['external_frontier_assimilation']['behaviour_neff']}`
+- Migrated components: `{state['external_frontier_assimilation']['migrated_components']}`
 - Epoch-2B remote sync: `{state['epoch2b_remote_sync']['status']}`; tag peeled commit `{state['epoch2b_remote_sync']['tag_peeled_commit']}`
 - Mechanism/data closure remote sync: `{state['mechanism_data_expansion0']['closure_remote_status']}` for `{state['mechanism_data_expansion0']['closure_subject_sha']}`
 
@@ -625,6 +652,18 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Adaptive operator cells without causal control / target crossing / collateral damage: `{state['epoch2b_audit']['adaptive_operator_cells_no_causal_control']}` / `{state['epoch2b_audit']['adaptive_target_gate_crossing_rate']}` / `{state['epoch2b_audit']['adaptive_collateral_damage_rate']}`
 - Main NET_LCB near misses Epoch-1R -> Epoch-2 / distance change: `{state['epoch2b_audit']['epoch1r_main_net_near_misses']}` -> `{state['epoch2b_audit']['epoch2_main_net_near_misses']}` / `{state['epoch2b_audit']['near_miss_distance_relative_change']}`
 - BBO secondary line: `{state['epoch2b_audit']['bbo_secondary_line']}`; positive exact / clusters / coverage `{state['epoch2b_audit']['bbo_positive_net_exact_identities']}` / `{state['epoch2b_audit']['bbo_behaviour_clusters']}` / `{state['epoch2b_audit']['bbo_coverage_ratio']}`
+
+## CRYPTO External Frontier Assimilation
+
+- Status / outcome: `{state['external_frontier_assimilation']['status']}` / `{state['external_frontier_assimilation']['outcome_class']}`
+- Frozen repo / manifest / inputs: `{state['external_frontier_assimilation']['frozen_repo_sha']}` / `{state['external_frontier_assimilation']['frozen_manifest_sha256']}` / `{state['external_frontier_assimilation']['input_bundle_sha256']}`
+- Frontier / actual reproductions / matched controls: `{state['external_frontier_assimilation']['frontier_entries']}` / `{state['external_frontier_assimilation']['real_end_to_end_reproductions']}` / `{state['external_frontier_assimilation']['matched_controls']}`
+- Fixed fits / Arena systems / common results / native results: `{state['external_frontier_assimilation']['fixed_model_fits']}` / `{state['external_frontier_assimilation']['arena_systems']}` / `{state['external_frontier_assimilation']['arena_common_results']}` / `{state['external_frontier_assimilation']['arena_native_results']}`
+- Behaviour clusters / N_eff / top share: `{state['external_frontier_assimilation']['behaviour_clusters']}` / `{state['external_frontier_assimilation']['behaviour_neff']}` / `{state['external_frontier_assimilation']['top_cluster_share']}`
+- Migrated components: `{state['external_frontier_assimilation']['migrated_components']}`
+- Weakest layer: `{state['external_frontier_assimilation']['weakest_layer']}`
+- Recommendation: `{state['external_frontier_assimilation']['recommendation']}`
+- Forward / spent evaluation / promotion / cross-sprint memory / extra budget: `{state['external_frontier_assimilation']['forward_read']}` / `{state['external_frontier_assimilation']['spent_evaluation_read']}` / `{state['external_frontier_assimilation']['candidate_promotion']}` / `{state['external_frontier_assimilation']['cross_sprint_adaptive_memory']}` / `{state['external_frontier_assimilation']['additional_budget']}`
 
 ## NEXTGEN-DARK Allowed
 
@@ -890,6 +929,12 @@ def update_graph(registry: dict[str, Any], state: dict[str, Any], digest: str) -
         "mechanism_data_stage_recommendation": state["mechanism_data_expansion0"]["stage_recommendation"],
         "epoch2b_remote_sync_status": state["epoch2b_remote_sync"]["status"],
         "mechanism_data_closure_remote_status": state["mechanism_data_expansion0"]["closure_remote_status"],
+        "external_frontier_assimilation_status": state["external_frontier_assimilation"]["status"],
+        "external_frontier_outcome_class": state["external_frontier_assimilation"]["outcome_class"],
+        "external_frontier_recommendation": state["external_frontier_assimilation"]["recommendation"],
+        "external_frontier_frozen_manifest_sha256": state["external_frontier_assimilation"]["frozen_manifest_sha256"],
+        "external_frontier_real_reproductions": state["external_frontier_assimilation"]["real_end_to_end_reproductions"],
+        "external_frontier_behaviour_neff": state["external_frontier_assimilation"]["behaviour_neff"],
         "research_status": state["research_status"], "phase_b1_status": state["phase_b1_status"],
         "forward_data_status": state["forward_data_status"],
     }
@@ -1096,6 +1141,14 @@ def write_control_artifacts(registry: dict[str, Any], state: dict[str, Any], dig
         "epoch2b_remote_sync": state["epoch2b_remote_sync"],
         "mechanism_data_closure_subject_sha": state["mechanism_data_expansion0"]["closure_subject_sha"],
         "mechanism_data_closure_remote_status": state["mechanism_data_expansion0"]["closure_remote_status"],
+        "external_frontier_assimilation_status": state["external_frontier_assimilation"]["status"],
+        "external_frontier_outcome_class": state["external_frontier_assimilation"]["outcome_class"],
+        "external_frontier_recommendation": state["external_frontier_assimilation"]["recommendation"],
+        "external_frontier_closure_manifest": state["external_frontier_assimilation"]["closure_manifest"],
+        "external_frontier_artifact_index": state["external_frontier_assimilation"]["artifact_index"],
+        "external_frontier_report": state["external_frontier_assimilation"]["report"],
+        "external_frontier_fixed_model_fits": state["external_frontier_assimilation"]["fixed_model_fits"],
+        "external_frontier_migrated_components": state["external_frontier_assimilation"]["migrated_components"],
     }
     RUN_MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     b0a_rows = []
@@ -1261,6 +1314,50 @@ def validate_outputs(registry: dict[str, Any]) -> None:
             raise ValueError(f"B0P aggregate evidence mismatch for {flag}")
     if meta.get("phase_status") != state["current_phase"] or meta.get("accepted_subject_sha") != accepted_subject_sha:
         raise ValueError("graph phase acceptance metadata mismatch")
+    frontier_state = state["external_frontier_assimilation"]
+    frontier_summary = load_json(FRONTIER_SUMMARY_PATH)
+    frontier_closure = load_json(FRONTIER_CLOSURE_MANIFEST_PATH)
+    frontier_frozen = load_json(FRONTIER_FROZEN_MANIFEST_PATH)
+    if frontier_summary.get("status") != frontier_state["status"] or frontier_closure.get("status") != frontier_state["status"]:
+        raise ValueError("external frontier closure status mismatch")
+    if frontier_summary.get("outcome_class") != frontier_state["outcome_class"] or frontier_closure.get("outcome_class") != frontier_state["outcome_class"]:
+        raise ValueError("external frontier outcome mismatch")
+    if frontier_summary.get("main_recommendation") != frontier_state["recommendation"] or frontier_closure.get("recommendation") != frontier_state["recommendation"]:
+        raise ValueError("external frontier recommendation mismatch")
+    if frontier_frozen.get("frozen_manifest_sha256") != frontier_state["frozen_manifest_sha256"]:
+        raise ValueError("external frontier frozen manifest mismatch")
+    if frontier_closure.get("fixed_execution", {}).get("model_fits") != frontier_state["fixed_model_fits"]:
+        raise ValueError("external frontier fixed fit count mismatch")
+    if frontier_closure.get("migration", {}).get("migrated_components") != frontier_state["migrated_components"]:
+        raise ValueError("external frontier migration record mismatch")
+    frontier_prohibited = (
+        "forward_read", "spent_evaluation_read", "candidate_promotion",
+        "cross_sprint_adaptive_memory", "formal_search_unlocked",
+    )
+    if any(frontier_closure.get(flag) for flag in frontier_prohibited):
+        raise PermissionError("external frontier closure records prohibited activity")
+    frontier_test = frontier_closure.get("test_evidence", {})
+    if frontier_test.get("status") != "PASS" or not re.fullmatch(r"177 passed in [0-9]+(?:\.[0-9]+)?s", frontier_test.get("result", "")):
+        raise ValueError("external frontier test evidence is not final")
+    frontier_test_path = REPO / frontier_test.get("output", "")
+    if not frontier_test_path.is_file() or sha256_file(frontier_test_path) != frontier_test.get("output_sha256"):
+        raise ValueError("external frontier test output hash mismatch")
+    if manifest.get("external_frontier_assimilation_status") != frontier_state["status"]:
+        raise ValueError("run manifest external frontier status mismatch")
+    if manifest.get("external_frontier_recommendation") != frontier_state["recommendation"]:
+        raise ValueError("run manifest external frontier recommendation mismatch")
+    if manifest.get("external_frontier_closure_manifest") != relative(FRONTIER_CLOSURE_MANIFEST_PATH):
+        raise ValueError("run manifest external frontier closure path mismatch")
+    if meta.get("external_frontier_assimilation_status") != frontier_state["status"]:
+        raise ValueError("graph external frontier status mismatch")
+    if meta.get("external_frontier_recommendation") != frontier_state["recommendation"]:
+        raise ValueError("graph external frontier recommendation mismatch")
+    with FRONTIER_ARTIFACT_INDEX_PATH.open("r", encoding="utf-8", newline="") as handle:
+        frontier_index_rows = list(csv.DictReader(handle))
+    for row in frontier_index_rows:
+        path = REPO / row["artifact"]
+        if not path.is_file() or row["sha256"] != sha256_file(path):
+            raise ValueError(f"external frontier artifact index drift: {row['artifact']}")
     evidence = attestation.get("test_evidence", {})
     if evidence != acceptance_test_evidence(state) or manifest.get("test_evidence") != evidence:
         raise ValueError("acceptance test evidence mismatch")

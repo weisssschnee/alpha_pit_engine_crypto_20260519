@@ -54,6 +54,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
             "ECONOMIC_BOTTLENECK_AUDIT_COMPLETED", "MECHANISM_DATA_EXPANSION0_INVENTORY_COMPLETED",
             "MECHANISM_DATA_EXPANSION0_FIRST_RELEASE_QUALIFIED",
             "MECHANISM_DATA_EXPANSION0_PARTIALLY_COMPLETED",
+            "CRYPTO_FRONTIER_ASSIMILATION_COMPLETED",
         })
         self.assertEqual(
             state["production_observation_qualification_status"],
@@ -61,7 +62,7 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         )
         self.assertEqual(state["phase_b1_status"], "PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN")
         self.assertEqual(state["phase_b0p_acceptance"]["status"], "PHASE_B0P_PARTIALLY_ACCEPTED")
-        self.assertTrue(state["active_stage"].startswith(("EPOCH1", "EPOCH2", "NEW_PERFORMANCE", "NATIVE_AGGTRADES", "MECHANISM_BENCHMARK", "STOP_CRYPTO")))
+        self.assertTrue(state["active_stage"].startswith(("EPOCH1", "EPOCH2", "NEW_PERFORMANCE", "NATIVE_AGGTRADES", "MECHANISM_BENCHMARK", "STOP_CRYPTO", "WAIT_FOR_EXTERNAL_DATA")))
         self.assertEqual(state["frozen_signal_behaviour_status"], "FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED")
         self.assertEqual(state["phase_b0a_acceptance"]["accepted_subject_sha"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertIn(state["formal_search_status"], {"FORMAL_SEARCH_FROZEN", "NEW_PERFORMANCE_SEARCH_FROZEN"})
@@ -82,6 +83,11 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertFalse(state["nextgen_epoch2"]["candidate_promotion"])
         self.assertEqual(state["adaptive_cross_epoch_memory_status"], "ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN")
         self.assertEqual(state["candidate_promotion_status"], "NO_CANDIDATE_PROMOTION")
+        self.assertEqual(state["external_frontier_assimilation"]["status"], "CRYPTO_FRONTIER_ASSIMILATION_COMPLETED")
+        self.assertEqual(state["external_frontier_assimilation"]["outcome_class"], "B_DATA_BOTTLENECK_WITH_ARENA_READY")
+        self.assertEqual(state["external_frontier_assimilation"]["recommendation"], "WAIT_FOR_EXTERNAL_DATA_WITH_ARENA_READY")
+        self.assertFalse(state["external_frontier_assimilation"]["forward_read"])
+        self.assertFalse(state["external_frontier_assimilation"]["candidate_promotion"])
 
         attestation = load_json(ATTESTATION_PATH)
         self.assertEqual(attestation["accepted_subject_sha"], ACCEPTED_SUBJECT_SHA)
@@ -141,6 +147,8 @@ class ArchitectureControlPlaneTests(unittest.TestCase):
         self.assertEqual(graph_control["epoch0_total_development_strict_evaluations"], 1801)
         self.assertEqual(graph_control["epoch1_status"], state["nextgen_epoch1"]["status"])
         self.assertEqual(graph_control["epoch1r_status"], state["nextgen_epoch1r"]["status"])
+        self.assertEqual(graph_control["external_frontier_assimilation_status"], "CRYPTO_FRONTIER_ASSIMILATION_COMPLETED")
+        self.assertEqual(graph_control["external_frontier_recommendation"], "WAIT_FOR_EXTERNAL_DATA_WITH_ARENA_READY")
         self.assertEqual(graph_control["candidate_promotion_status"], "NO_CANDIDATE_PROMOTION")
         self.assertEqual(graph["built_at_accepted_subject"], B0A_ACCEPTED_SUBJECT_SHA)
         self.assertNotIn("built_at_commit", graph)

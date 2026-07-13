@@ -1,0 +1,54 @@
+{
+  "architecture_assumptions_to_overturn": [
+    "one_formula_signal_identity is the universal research object",
+    "all paradigms must share one target and portfolio mapper",
+    "search-engine repair can compensate for missing mechanism data"
+  ],
+  "cost_model": {
+    "common_cost_bps": 5.0,
+    "conclusion": "COST_AWARE_ALL_COMMON_DECISIONS_NET",
+    "dmn_native_cost_bps": 3.0,
+    "qlib_native_cost_bps_average": 10.0
+  },
+  "directly_transplantable_components": [],
+  "evaluator": {
+    "conclusion": "MULTI_PARADIGM_BRIDGE_IMPLEMENTED",
+    "native_and_common_separated": true
+  },
+  "model_expression": {
+    "conclusion": "NO_STABLE_INCREMENT",
+    "dmn_challenge_net_lcb": -0.00411857008697469
+  },
+  "next_generation_architecture": "ARENA_FIRST_EXTERNAL_DATA_ADAPTERS_WITH_FORMULA_SEARCH_FROZEN",
+  "portfolio_mapping": {
+    "conclusion": "PORTFOLIO_MAPPING_NOT_ALLOWED_TO_HIDE_FORECAST_FAILURE",
+    "native_and_common_both_reported": true
+  },
+  "regime_state": {
+    "conclusion": "NATIVE_LONG_REGIME_HISTORY_UNAVAILABLE",
+    "time_blocks": 10
+  },
+  "representation": {
+    "conclusion": "NO_STABLE_INCREMENT",
+    "full_minus_price_control_challenge_net_mean": 0.00018681009256058564,
+    "qlib_alpha158_challenge_ic": 0.017677660137131065,
+    "qlib_alpha158_challenge_rank_ic": 0.000641507253077498
+  },
+  "search_training": {
+    "conclusion": "EXTERNAL_FIXED_TRAINING_DID_NOT_REMOVE_DATA_BOTTLENECK",
+    "fixed_model_fits": 8,
+    "online_tuning": false
+  },
+  "target_horizon": {
+    "conclusion": "INSUFFICIENT_EVIDENCE_TO_REDEFINE",
+    "dmn_target": "direct next-day portfolio return",
+    "qlib_target": "close[t+2] / close[t+1] - 1"
+  },
+  "unadaptable_paradigms": [
+    "DEEPLOB_DIGITAL_ASSET_WITHOUT_MULTI_LEVEL_L2",
+    "FULL_MOMENTUM_TRANSFORMER_WITHOUT_ONE_YEAR_TRAINING_HISTORY",
+    "G_RESEARCH_NATIVE_15MIN_WITHOUT_QUALIFIED_MINUTE_RELEASE",
+    "DEEPM_WITHOUT_LONG_MULTI_REGIME_CROSS_ASSET_HISTORY"
+  ],
+  "weakest_layer": "APPROVED_DATA_REPRESENTATION_AND_HISTORY_DEPTH"
+}

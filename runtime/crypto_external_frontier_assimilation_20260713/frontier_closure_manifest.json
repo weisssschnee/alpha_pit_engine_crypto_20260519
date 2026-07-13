@@ -1,0 +1,71 @@
+{
+  "manifest_id": "CRYPTO-EXTERNAL-FRONTIER-ASSIMILATION-CLOSURE-20260713",
+  "experiment_id": "20260713_crypto_frontier_assimilation_001",
+  "status": "CRYPTO_FRONTIER_ASSIMILATION_COMPLETED",
+  "outcome_class": "B_DATA_BOTTLENECK_WITH_ARENA_READY",
+  "recommendation": "WAIT_FOR_EXTERNAL_DATA_WITH_ARENA_READY",
+  "weakest_layer": "APPROVED_DATA_REPRESENTATION_AND_HISTORY_DEPTH",
+  "frozen_repo_sha": "6ef581d8c6d494e34de0688ef83c0c253cf7c207",
+  "frozen_manifest_commit_sha": "9b6b7fee3046b4e678a791eca93a5d06a15d4a3e",
+  "frozen_manifest_sha256": "E6EE8088CF6033778E28552706D5BDAD0B3FC78CF070186E3870D66B99DE2A0E",
+  "input_bundle_sha256": "DB464BE6F750C99E576082F9BB16B555AFC2E9D47C9CEF5AE1531D99A82B994C",
+  "release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+  "release_content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+  "performance_scope": "QUALIFIED_DEVELOPMENT_AND_PREVIOUSLY_OPENED_PRE_FORWARD_CHALLENGE_ONLY",
+  "fixed_execution": {
+    "frontier_entries": 9,
+    "real_end_to_end_reproductions": 2,
+    "matched_controls": 2,
+    "model_fits": 8,
+    "arena_systems": 6,
+    "common_results": 12,
+    "native_results": 8,
+    "additional_budget": false,
+    "online_adjustment": false,
+    "rerun_performed": false
+  },
+  "behaviour_evidence": {
+    "clusters": 5,
+    "n_eff": 4.31890579061537,
+    "top_cluster_share": 0.3333333333333333
+  },
+  "migration": {
+    "migrated_components": [],
+    "qlib_alpha158_challenge_ic": 0.017677660137131065,
+    "qlib_alpha158_challenge_rank_ic": 0.000641507253077498,
+    "qlib_full_minus_control_challenge_net_mean": 0.00018681009256058564,
+    "qlib_challenge_net_lcb": -0.0016794064978129268,
+    "dmn_turnover_minus_zero_penalty_challenge_net_mean": -0.00006756093669405103,
+    "dmn_challenge_net_lcb": -0.00411857008697469
+  },
+  "data_hard_blockers": [
+    "DEEPLOB_DIGITAL_ASSET_WITHOUT_MULTI_LEVEL_L2",
+    "FULL_MOMENTUM_TRANSFORMER_WITHOUT_ONE_YEAR_TRAINING_HISTORY",
+    "G_RESEARCH_NATIVE_15MIN_WITHOUT_QUALIFIED_MINUTE_RELEASE",
+    "DEEPM_WITHOUT_LONG_MULTI_REGIME_CROSS_ASSET_HISTORY"
+  ],
+  "bias_audit_decision": "HOLD_RESEARCH",
+  "oos_sample_grade": "NONE",
+  "test_evidence": {
+    "status": "PASS",
+    "command": "python -m pytest -q",
+    "result": "177 passed in 27.41s",
+    "output": "runtime/crypto_external_frontier_assimilation_20260713/frontier_test_output.txt",
+    "output_sha256": "5F5CF0A83D7AD6336135534EEE3D66802E8B793ED168A8EDAE3D95F11D80DE75"
+  },
+  "artifacts": {
+    "summary": "runtime/crypto_external_frontier_assimilation_20260713/frontier_assimilation_summary.json",
+    "comparison": "runtime/crypto_external_frontier_assimilation_20260713/arena_comparison.csv",
+    "native_metrics": "runtime/crypto_external_frontier_assimilation_20260713/native_forecast_metrics.csv",
+    "migration_decisions": "runtime/crypto_external_frontier_assimilation_20260713/component_migration_decisions.csv",
+    "layer_gap_analysis": "runtime/crypto_external_frontier_assimilation_20260713/layer_gap_analysis.json",
+    "bias_audit": "runtime/crypto_external_frontier_assimilation_20260713/bias_audit.json",
+    "report": "runtime/crypto_external_frontier_assimilation_20260713/CRYPTO_FRONTIER_ASSIMILATION_REPORT.md",
+    "artifact_index": "runtime/crypto_external_frontier_assimilation_20260713/frontier_artifact_index.csv"
+  },
+  "forward_read": false,
+  "spent_evaluation_read": false,
+  "candidate_promotion": false,
+  "cross_sprint_adaptive_memory": false,
+  "formal_search_unlocked": false
+}

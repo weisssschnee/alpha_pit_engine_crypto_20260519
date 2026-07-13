@@ -1,13 +1,13 @@
 # Crypto AlphaFactory Planning State
 
-Registry SHA256: `0A42AACE270C301CBD94E5B0BCCAE1C436CC85205043273FAB4D5A0230A8552E`.
+Registry SHA256: `599D9A52006636F9E2787FA7BDE3F6354944109753CDF01E81E14888C55AF3A8`.
 
 ## Formal Status
 
 - `PHASE_A_GOVERNANCE_ACCEPTED`
 - `SEARCH_COLLAPSE_SOURCE_PARTIALLY_IDENTIFIED`
 - `HOLD_RESEARCH_EXTERNAL_DATA_REQUIRED`
-- Current phase: `MECHANISM_DATA_EXPANSION0_PARTIALLY_COMPLETED`
+- Current phase: `CRYPTO_FRONTIER_ASSIMILATION_COMPLETED`
 - Production observation qualification: `PRODUCTION_OBSERVATION_PARTIALLY_QUALIFIED`
 - Phase B0P acceptance: `PHASE_B0P_PARTIALLY_ACCEPTED`
 - Frozen signal behaviour: `FROZEN_SIGNAL_BEHAVIOUR_QUALIFIED`
@@ -16,7 +16,7 @@ Registry SHA256: `0A42AACE270C301CBD94E5B0BCCAE1C436CC85205043273FAB4D5A0230A855
 - CANARY: `B1S_CANARY_COMPLETED_WITH_NATURAL_QUOTA_UNDERFILL`
 - Adaptive cross-epoch memory: `ADAPTIVE_CROSS_EPOCH_MEMORY_FROZEN`
 - Candidate promotion: `NO_CANDIDATE_PROMOTION`
-- Active stage: `STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA`
+- Active stage: `WAIT_FOR_EXTERNAL_DATA_WITH_ARENA_READY`
 - Phase B1: `PHASE_B1_PERFORMANCE_INTEGRATION_FROZEN`
 - Forward data: `SEALED_NO_NEW_FORWARD_READ`
 - Mechanism/data inventory: `DATA_MECHANISM_INVENTORY_COMPLETED`
@@ -26,6 +26,10 @@ Registry SHA256: `0A42AACE270C301CBD94E5B0BCCAE1C436CC85205043273FAB4D5A0230A855
 - Native aggTrades benchmark: `NATIVE_AGGTRADES_SIMPLE_BENCHMARK_CANARY_COMPLETED`; admitted horizons `0`
 - Full-year BBO source availability: `48/144`
 - Stage recommendation: `STOP_CRYPTO_ALPHA_DISCOVERY_PENDING_EXTERNAL_DATA`
+- External frontier assimilation: `CRYPTO_FRONTIER_ASSIMILATION_COMPLETED` / `B_DATA_BOTTLENECK_WITH_ARENA_READY`
+- Frontier recommendation: `WAIT_FOR_EXTERNAL_DATA_WITH_ARENA_READY`
+- Frontier evidence: `2` reproductions / `8` fixed fits / `5` behaviour clusters / N_eff `4.31890579061537`
+- Migrated components: `[]`
 - Epoch-2B remote sync: `VERIFIED_REMOTE_BRANCH_CONTAINS_CLOSURE_AND_TAG_PEELED_MATCHES`; tag peeled commit `5d8be3d26a4e2dd57b733e3de4938081c69501a8`
 - Mechanism/data closure remote sync: `VERIFIED_REMOTE_CONTAINS_MECHANISM_DATA_EXPANSION0_CLOSURE` for `97f279bb9204b3e709f41fca37160357c1adea5f`
 
@@ -189,6 +193,18 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 - Main NET_LCB near misses Epoch-1R -> Epoch-2 / distance change: `55` -> `174` / `0.13241328562959054`
 - BBO secondary line: `BBO_DEVELOPMENT_COVERAGE_ACQUISITION_PLAN_ONLY`; positive exact / clusters / coverage `5` / `5` / `0.8222222222222222`
 
+## CRYPTO External Frontier Assimilation
+
+- Status / outcome: `CRYPTO_FRONTIER_ASSIMILATION_COMPLETED` / `B_DATA_BOTTLENECK_WITH_ARENA_READY`
+- Frozen repo / manifest / inputs: `6ef581d8c6d494e34de0688ef83c0c253cf7c207` / `E6EE8088CF6033778E28552706D5BDAD0B3FC78CF070186E3870D66B99DE2A0E` / `DB464BE6F750C99E576082F9BB16B555AFC2E9D47C9CEF5AE1531D99A82B994C`
+- Frontier / actual reproductions / matched controls: `9` / `2` / `2`
+- Fixed fits / Arena systems / common results / native results: `8` / `6` / `12` / `8`
+- Behaviour clusters / N_eff / top share: `5` / `4.31890579061537` / `0.3333333333333333`
+- Migrated components: `[]`
+- Weakest layer: `APPROVED_DATA_REPRESENTATION_AND_HISTORY_DEPTH`
+- Recommendation: `WAIT_FOR_EXTERNAL_DATA_WITH_ARENA_READY`
+- Forward / spent evaluation / promotion / cross-sprint memory / extra budget: `False` / `False` / `False` / `False` / `False`
+
 ## NEXTGEN-DARK Allowed
 
 - development/pre-forward observable materialization
@@ -229,4 +245,4 @@ The earlier Phase A unsynchronized state is superseded by the verified remote re
 
 ## Next Acceptance Gate
 
-Provide and independently qualify a new longitudinal external historical source for cross-venue price discovery, full-year BBO, forced-flow/liquidation or options before any new mechanism benchmark or frozen search authorization.
+Provide and independently qualify new longitudinal external mechanism data through the frozen Arena ingress contract for cross-venue price discovery, multi-level L2, forced-flow/liquidation, options or sufficiently long multi-regime history before any new performance program or frozen search authorization.

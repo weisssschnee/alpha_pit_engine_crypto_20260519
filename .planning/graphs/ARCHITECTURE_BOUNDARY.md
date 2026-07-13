@@ -1,6 +1,6 @@
 # Architecture Boundary
 
-Generated from registry SHA256: `0A42AACE270C301CBD94E5B0BCCAE1C436CC85205043273FAB4D5A0230A8552E`.
+Generated from registry SHA256: `599D9A52006636F9E2787FA7BDE3F6354944109753CDF01E81E14888C55AF3A8`.
 
 ## Authority
 
@@ -99,3 +99,17 @@ Any code, registry, route, artifact, curated document, STATE, decision log, run 
 | spent_evaluation | mechanism_data_expansion0_closure | spent evaluation cannot change mechanism decisions |
 | mechanism_data_expansion0_closure | scheduler | partial closure cannot schedule another search or benchmark without external data |
 | mechanism_data_expansion0_closure | a7mem | closure cannot persist candidate or mechanism memory |
+| sealed_forward | qlib_frontier_reproduction | Qlib reproduction cannot read sealed validation, test, recent, stress or forward blocks |
+| spent_evaluation | qlib_frontier_reproduction | spent historical evaluation cannot tune the Qlib representation or migration gate |
+| sealed_forward | dmn_frontier_reproduction | DMN reproduction cannot read sealed validation, test, recent, stress or forward blocks |
+| spent_evaluation | dmn_frontier_reproduction | spent historical evaluation cannot tune the DMN objective or migration gate |
+| sealed_forward | multi_paradigm_arena | Arena comparison is limited to qualified development and previously opened pre-forward challenge roles |
+| spent_evaluation | multi_paradigm_arena | spent validation, test, recent and stress metrics cannot rank Arena systems |
+| multi_paradigm_arena | a7mem | Arena reproduction evidence cannot update positive or negative memory |
+| multi_paradigm_arena | admission | Arena reproduction evidence cannot admit or promote candidates |
+| multi_paradigm_arena | scheduler | Arena evidence cannot schedule a rerun, extend budget or open a new epoch |
+| frontier_assimilation_closure | a7mem | frontier closure cannot persist cross-sprint adaptive memory |
+| frontier_assimilation_closure | admission | frontier closure includes no component or candidate promotion |
+| frontier_assimilation_closure | scheduler | WAIT_FOR_EXTERNAL_DATA cannot auto-start another performance program |
+| external_data_ingress | strict_reward | unqualified external data cannot enter strict reward |
+| external_data_ingress | generation_lanes | unqualified external fields cannot enter any generator lane |

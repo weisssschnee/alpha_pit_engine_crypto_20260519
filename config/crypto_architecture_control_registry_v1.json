@@ -561,7 +561,7 @@
         "reports/CRYPTO_B0P_LAYERED_IDENTITY_QUALIFICATION_20260711.md"
       ],
       "blocker": "B0P remains partially accepted historically; funding scope is Binance UM core12 and B0A activation evidence is a separate later qualification",
-      "last_verified_sha": "EE04D8C82D469E1EA474B802E8EACE25550C024FF4553E1177764A1E459BBC4A"
+      "last_verified_sha": "3530119F46E0B522C0569D150D3ACFF5CFE0952FD9BB735B02DC326430C4C82F"
     },
     {
       "id": "frozen_signal_behaviour_qualification",
@@ -809,7 +809,7 @@
         "runtime/b1s_canary_20260711/b1s_test_output.txt"
       ],
       "blocker": "none; execution accepted and superseded by frozen Epoch-0 design",
-      "last_verified_sha": "6BAB17EF8E44FFA443F525B825DD75D15F6E64DA0215D52A9FAE01CB2C344A18"
+      "last_verified_sha": "7F6D3707024D5E9086327F055A2313E2EF068BAD0E7EAA672723B9EE4B1F9909"
     },
     {
       "id": "nextgen_mechanism_registry",
@@ -1305,6 +1305,145 @@
       ],
       "blocker": "future crypto-alpha work requires a new independently verified longitudinal external historical source",
       "last_verified_sha": "A4C2DBF9C48B9ED263BAD38F08E95EC09AFEEC0788328776B7B84E04C8CE45BB"
+    },
+    {
+      "id": "external_frontier_map",
+      "label": "External research frontier map",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "config/crypto_external_frontier_assimilation_v1.json",
+        "scripts/crypto_external_frontier_assimilation.py"
+      ],
+      "entrypoint": "python scripts/crypto_external_frontier_assimilation.py prepare|check",
+      "input": "public primary-source paradigm contracts plus the frozen qualified release boundary",
+      "output": "nine-paradigm map and two predeclared end-to-end reproduction contracts with matched controls",
+      "data_role": "research-method reference and fixed design input only",
+      "feedback_permission": "NO_GENERATOR_NO_MEMORY_NO_PROMOTION",
+      "artifact_test": [
+        "tests/test_external_frontier_assimilation.py",
+        "runtime/crypto_external_frontier_assimilation_20260713/external_frontier_map.csv",
+        "runtime/crypto_external_frontier_assimilation_20260713/preparation_manifest.json",
+        "runtime/crypto_external_frontier_assimilation_20260713/frozen_experiment_manifest.json"
+      ],
+      "blocker": "map entries beyond the two reproduced paradigms require unavailable native frequency, L2 or long-history data",
+      "last_verified_sha": "E72DD63901C80AFAD39AA35CE3B305A29E49AB5DD2C8967820E0439AD74CD241"
+    },
+    {
+      "id": "qlib_frontier_reproduction",
+      "label": "Qlib Alpha158 LightGBM reproduction",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "config/crypto_external_frontier_assimilation_v1.json",
+        "alphafactory_crypto/frontier_arena.py",
+        "scripts/crypto_external_frontier_assimilation.py"
+      ],
+      "entrypoint": "python scripts/crypto_external_frontier_assimilation.py run",
+      "input": "qualified core12 daily PIT panel, exact 158-feature family, fixed seeds and 13-feature matched control",
+      "output": "native forecast metrics, common Arena paths and component migration decision",
+      "data_role": "development and previously opened pre-forward challenge reproduction evidence only",
+      "feedback_permission": "REPORT_ONLY_NO_CANDIDATE_PROMOTION_NO_MEMORY",
+      "artifact_test": [
+        "tests/test_external_frontier_assimilation.py",
+        "runtime/crypto_external_frontier_assimilation_20260713/native_forecast_metrics.csv",
+        "runtime/crypto_external_frontier_assimilation_20260713/component_migration_decisions.csv",
+        "runtime/crypto_external_frontier_assimilation_20260713/model_fit_ledger.csv"
+      ],
+      "blocker": "challenge rank IC is near zero and the Alpha158 increment has a negative common net LCB; no component migration",
+      "last_verified_sha": "D43824658C8DA9F389335E1F1BCF3DDA0AD02E82D7197361D2ADEE04CF3BA658"
+    },
+    {
+      "id": "dmn_frontier_reproduction",
+      "label": "Scoped Deep Momentum LSTM reproduction",
+      "status": "PARTIAL",
+      "implementation_path": [
+        "config/crypto_external_frontier_assimilation_v1.json",
+        "alphafactory_crypto/frontier_arena.py",
+        "scripts/crypto_external_frontier_assimilation.py"
+      ],
+      "entrypoint": "python scripts/crypto_external_frontier_assimilation.py run",
+      "input": "seven fixed momentum features, 20-day sequences, two seeds and zero-turnover-penalty matched control",
+      "output": "direct portfolio-weight paths, native/common metrics and turnover-aware component migration decision",
+      "data_role": "scoped development and previously opened pre-forward challenge reproduction evidence only",
+      "feedback_permission": "REPORT_ONLY_NO_CANDIDATE_PROMOTION_NO_MEMORY",
+      "artifact_test": [
+        "tests/test_external_frontier_assimilation.py",
+        "runtime/crypto_external_frontier_assimilation_20260713/dmn_training_curve.csv",
+        "runtime/crypto_external_frontier_assimilation_20260713/component_migration_decisions.csv",
+        "runtime/crypto_external_frontier_assimilation_20260713/model_fit_ledger.csv"
+      ],
+      "blocker": "ten-month qualified history cannot reproduce the native one-year sequence and the turnover-aware model does not beat its matched control",
+      "last_verified_sha": "A5C63CFC06C0222DB386096AF6F97BAF8D2BAA196C2D036CA92AAAF12D86D110"
+    },
+    {
+      "id": "multi_paradigm_arena",
+      "label": "Native/common multi-paradigm Arena",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "config/crypto_external_frontier_assimilation_v1.json",
+        "alphafactory_crypto/frontier_arena.py",
+        "scripts/crypto_external_frontier_assimilation.py"
+      ],
+      "entrypoint": "python scripts/crypto_external_frontier_assimilation.py run|check",
+      "input": "frozen internal controls, Qlib and DMN systems with native objectives and a common delayed cost-aware evaluator",
+      "output": "six-system comparison, behaviour overlap, time stability, N_eff and layer-gap attribution",
+      "data_role": "bounded reproduction comparison; OOS grade NONE",
+      "feedback_permission": "REPORT_ONLY_NO_SCHEDULER_NO_ADMISSION_NO_MEMORY",
+      "artifact_test": [
+        "tests/test_external_frontier_assimilation.py",
+        "runtime/crypto_external_frontier_assimilation_20260713/arena_comparison.csv",
+        "runtime/crypto_external_frontier_assimilation_20260713/behaviour_overlap_matrix.csv",
+        "runtime/crypto_external_frontier_assimilation_20260713/behaviour_summary.json",
+        "runtime/crypto_external_frontier_assimilation_20260713/time_block_stability.csv",
+        "runtime/crypto_external_frontier_assimilation_20260713/layer_gap_analysis.json"
+      ],
+      "blocker": "no reproduced external component passes stable matched-control migration; Arena must await new approved data",
+      "last_verified_sha": "68B0A5CCB5115AA4D951DFACA0A7104879ECF81F042799BDA4EDFBC4638320DB"
+    },
+    {
+      "id": "external_data_ingress",
+      "label": "External mechanism data direct ingress",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "config/crypto_external_frontier_assimilation_v1.json",
+        "alphafactory_crypto/frontier_arena.py",
+        "scripts/crypto_external_frontier_assimilation.py"
+      ],
+      "entrypoint": "python scripts/crypto_external_frontier_assimilation.py ingress-preflight --family <family> --schema-json <path>",
+      "input": "candidate cross-venue, multi-level L2, forced-flow/liquidation or options schema plus source lineage",
+      "output": "non-performance schema preflight and release-qualification handoff",
+      "data_role": "new-data contract validation only until an independent release is qualified",
+      "feedback_permission": "NO_PERFORMANCE_NO_GENERATOR_NO_REWARD_BEFORE_RELEASE_QUALIFICATION",
+      "artifact_test": [
+        "tests/test_external_frontier_assimilation.py",
+        "runtime/crypto_external_frontier_assimilation_20260713/external_data_ingress_registry.csv"
+      ],
+      "blocker": "no independently qualified longitudinal external source is currently registered",
+      "last_verified_sha": "5918A23DBA50FD668E904B15976E6B827124E39CDAC3704EB1589AB9B0AB4517"
+    },
+    {
+      "id": "frontier_assimilation_closure",
+      "label": "Crypto external frontier assimilation closure",
+      "status": "IMPLEMENTED",
+      "implementation_path": [
+        "scripts/crypto_external_frontier_assimilation.py",
+        "scripts/crypto_architecture_control_plane.py"
+      ],
+      "entrypoint": "python scripts/crypto_external_frontier_assimilation.py check && python scripts/crypto_architecture_control_plane.py check",
+      "input": "frontier map, frozen manifests, eight fixed fits, Arena evidence, migration gates and bias audit",
+      "output": "B_DATA_BOTTLENECK_WITH_ARENA_READY and WAIT_FOR_EXTERNAL_DATA_WITH_ARENA_READY",
+      "data_role": "result-domain closure and governance evidence",
+      "feedback_permission": "NO_NEW_SEARCH_NO_FORWARD_NO_PROMOTION_NO_CROSS_SPRINT_MEMORY",
+      "artifact_test": [
+        "tests/test_external_frontier_assimilation.py",
+        "tests/test_architecture_control_plane.py",
+        "runtime/crypto_external_frontier_assimilation_20260713/frontier_assimilation_summary.json",
+        "runtime/crypto_external_frontier_assimilation_20260713/bias_audit.json",
+        "runtime/crypto_external_frontier_assimilation_20260713/frontier_closure_manifest.json",
+        "runtime/crypto_external_frontier_assimilation_20260713/frontier_artifact_index.csv",
+        "runtime/crypto_external_frontier_assimilation_20260713/CRYPTO_FRONTIER_ASSIMILATION_REPORT.md"
+      ],
+      "blocker": "new performance work remains blocked until new external data passes the frozen ingress and release contracts",
+      "last_verified_sha": "9B60DC98E3D21FD8E10271550D5B1CE0327E1B6F4211ACA4C02799B624461706"
     }
   ],
   "edges": [
@@ -2123,6 +2262,156 @@
       "target": "a7mem",
       "kind": "FORBIDDEN",
       "label": "closure cannot persist candidate or mechanism memory"
+    },
+    {
+      "source": "mechanism_data_expansion0_closure",
+      "target": "external_frontier_map",
+      "kind": "ALLOWED",
+      "label": "the accepted data bottleneck authorizes fixed public-method mapping without opening formal search"
+    },
+    {
+      "source": "external_frontier_map",
+      "target": "qlib_frontier_reproduction",
+      "kind": "ALLOWED",
+      "label": "the frozen map selects one cross-sectional representation reproduction before performance"
+    },
+    {
+      "source": "external_frontier_map",
+      "target": "dmn_frontier_reproduction",
+      "kind": "ALLOWED",
+      "label": "the frozen map selects one portfolio-first temporal reproduction before performance"
+    },
+    {
+      "source": "native_aggtrades_release",
+      "target": "qlib_frontier_reproduction",
+      "kind": "ALLOWED",
+      "label": "the qualified physical release is materialized into a delayed daily Alpha158 panel"
+    },
+    {
+      "source": "native_aggtrades_release",
+      "target": "dmn_frontier_reproduction",
+      "kind": "ALLOWED",
+      "label": "the qualified physical release is materialized into a delayed daily momentum sequence panel"
+    },
+    {
+      "source": "qlib_frontier_reproduction",
+      "target": "multi_paradigm_arena",
+      "kind": "ALLOWED",
+      "label": "native forecast output and common weights enter separate fixed Arena views"
+    },
+    {
+      "source": "dmn_frontier_reproduction",
+      "target": "multi_paradigm_arena",
+      "kind": "ALLOWED",
+      "label": "native portfolio objective and common weights enter separate fixed Arena views"
+    },
+    {
+      "source": "benchmark_registry",
+      "target": "multi_paradigm_arena",
+      "kind": "ALLOWED",
+      "label": "frozen internal and simple economic controls provide matched Arena baselines"
+    },
+    {
+      "source": "multi_paradigm_arena",
+      "target": "frontier_assimilation_closure",
+      "kind": "ALLOWED",
+      "label": "fixed native/common evidence enters report-only layer attribution and closure"
+    },
+    {
+      "source": "frontier_assimilation_closure",
+      "target": "external_data_ingress",
+      "kind": "ALLOWED",
+      "label": "data-bottleneck outcome exposes only the frozen non-performance external-data ingress"
+    },
+    {
+      "source": "external_data_ingress",
+      "target": "multi_paradigm_arena",
+      "kind": "ALLOWED",
+      "label": "an independently qualified future release may enter Arena adapters under a separately frozen experiment"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "qlib_frontier_reproduction",
+      "kind": "FORBIDDEN",
+      "label": "Qlib reproduction cannot read sealed validation, test, recent, stress or forward blocks"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "qlib_frontier_reproduction",
+      "kind": "FORBIDDEN",
+      "label": "spent historical evaluation cannot tune the Qlib representation or migration gate"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "dmn_frontier_reproduction",
+      "kind": "FORBIDDEN",
+      "label": "DMN reproduction cannot read sealed validation, test, recent, stress or forward blocks"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "dmn_frontier_reproduction",
+      "kind": "FORBIDDEN",
+      "label": "spent historical evaluation cannot tune the DMN objective or migration gate"
+    },
+    {
+      "source": "sealed_forward",
+      "target": "multi_paradigm_arena",
+      "kind": "FORBIDDEN",
+      "label": "Arena comparison is limited to qualified development and previously opened pre-forward challenge roles"
+    },
+    {
+      "source": "spent_evaluation",
+      "target": "multi_paradigm_arena",
+      "kind": "FORBIDDEN",
+      "label": "spent validation, test, recent and stress metrics cannot rank Arena systems"
+    },
+    {
+      "source": "multi_paradigm_arena",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "Arena reproduction evidence cannot update positive or negative memory"
+    },
+    {
+      "source": "multi_paradigm_arena",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "Arena reproduction evidence cannot admit or promote candidates"
+    },
+    {
+      "source": "multi_paradigm_arena",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "Arena evidence cannot schedule a rerun, extend budget or open a new epoch"
+    },
+    {
+      "source": "frontier_assimilation_closure",
+      "target": "a7mem",
+      "kind": "FORBIDDEN",
+      "label": "frontier closure cannot persist cross-sprint adaptive memory"
+    },
+    {
+      "source": "frontier_assimilation_closure",
+      "target": "admission",
+      "kind": "FORBIDDEN",
+      "label": "frontier closure includes no component or candidate promotion"
+    },
+    {
+      "source": "frontier_assimilation_closure",
+      "target": "scheduler",
+      "kind": "FORBIDDEN",
+      "label": "WAIT_FOR_EXTERNAL_DATA cannot auto-start another performance program"
+    },
+    {
+      "source": "external_data_ingress",
+      "target": "strict_reward",
+      "kind": "FORBIDDEN",
+      "label": "unqualified external data cannot enter strict reward"
+    },
+    {
+      "source": "external_data_ingress",
+      "target": "generation_lanes",
+      "kind": "FORBIDDEN",
+      "label": "unqualified external fields cannot enter any generator lane"
     }
   ]
 }

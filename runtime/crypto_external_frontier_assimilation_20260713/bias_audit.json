@@ -1,0 +1,31 @@
+{
+  "benchmark": "internal 20d formula momentum and simple 20d TSMOM",
+  "blocking_issues": [
+    "no untouched OOS is available or accessed",
+    "fixed core12 universe carries scoped survivorship limitations",
+    "DMN native 252-day and one-year sequence features are not reproducible in ten months"
+  ],
+  "cost_model": "common 5bp per unit turnover; native Qlib and DMN costs reported separately",
+  "data_source_and_universe": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1 qualified core12 coordinates only",
+  "decision": "HOLD_RESEARCH",
+  "development_challenge_window": "2024-07 through 2024-10; previously opened pre-forward release role",
+  "discovery_status": "REPRODUCTION",
+  "factor": "multi-paradigm frontier reproductions",
+  "findings": {
+    "costs": "PASS_NATIVE_AND_COMMON_COSTS_EXPLICIT",
+    "date_alignment": "PASS_LABEL_START_T_PLUS_1_TO_T_PLUS_2",
+    "label_horizon": "PASS_NON_OVERLAPPING_DAILY_DECISION_RETURN",
+    "look_ahead": "PASS_PIT_FEATURES_AND_ONE_DAY_EXECUTION_DELAY",
+    "multi_window_stability": "DEVELOPMENT_AND_CHALLENGE_MONTHS_REPORTED",
+    "replay_vs_discovery": "REPRODUCTION_NOT_NEW_ALPHA_DISCOVERY",
+    "survivorship": "SCOPED_FIXED_CORE12_RELEASE_NOT_A_DYNAMIC_UNIVERSE",
+    "turnover": "PASS_ACTUAL_WEIGHT_TURNOVER"
+  },
+  "frequency_and_horizon": "daily; one-day execution delay; next-day return",
+  "in_sample_window": "2024-01 through 2024-06",
+  "oos_sample_grade": "NONE",
+  "oos_window": "NONE; sealed forward not accessed",
+  "required_next_action": "ingest approved external mechanism data through the frozen Arena contract before any new performance program",
+  "run_experiment_id": "20260713_crypto_frontier_assimilation_001",
+  "turnover": "reported from actual portfolio weights"
+}
