@@ -58,7 +58,7 @@
         "scripts/crypto_latest_instrument_semantics_audit.py"
       ],
       "critical": true,
-      "semantic_role": "instrument_qualification",
+      "semantic_role": "historical_instrument_diagnosis",
       "active_authority": true,
       "authority": {
         "path": "reports/CRYPTO_LATEST_EVIDENCE_INDEPENDENT_AUDIT.md",
@@ -188,8 +188,270 @@
       }
     },
     {
+      "id": "internal_search_instrument",
+      "label": "Internal Search Instrument capability path",
+      "kind": "capability_harness",
+      "lifecycle": "EXPERIMENTAL",
+      "paths": [
+        "docs/adr/0002-capability-only-search-instrument-authority.md",
+        "alphafactory_crypto/instrument_capability/harness.py",
+        "scripts/crypto_instrument_capability.py",
+        "reports/CRYPTO_INSTRUMENT_CAPABILITY_REPORT.md"
+      ],
+      "critical": true,
+      "semantic_role": "capability_instrument_execution",
+      "active_authority": false,
+      "authority": {
+        "path": "docs/adr/0002-capability-only-search-instrument-authority.md",
+        "repo_ref": "repair/crypto-instrument-capability-20260715",
+        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+        "sha256": "8B0A6ACE052E470BCD16B38C5B842D2C9227E2D362D74E84D3583AB8C5E987FF"
+      },
+      "contracts": [
+        {
+          "id": "synthetic_capability_authority",
+          "type": "AUTHORITY",
+          "rule": "This path owns only fixed finite-grammar synthetic capability qualification; it does not own economic research or historical Epoch execution",
+          "severity": "HARD",
+          "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_INSTRUMENT_CAPABILITY_QUALIFICATION.json"
+        },
+        {
+          "id": "qualification_does_not_open_execution",
+          "type": "BOUNDARY",
+          "rule": "A capability PASS cannot start real development search, open sealed roles, integrate data, promote a candidate, or write cross-sprint memory",
+          "severity": "HARD",
+          "bypass_forbidden": true
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_INSTRUMENT_CAPABILITY_QUALIFICATION.json",
+        "evidence_sha256": "D245E74762380CDB8B04554C17A9D69D479D4EFF8C1C0343FC034E5FA8ECCA2C",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      },
+      "promotion_requirements": [
+        "explicit boundary authorization",
+        "non-synthetic development protocol",
+        "non-stale accepted evidence"
+      ]
+    },
+    {
+      "id": "legacy_b1s_epoch0_gross_feedback",
+      "label": "B1S / Epoch-0 zero-cost gross feedback",
+      "kind": "legacy_feedback",
+      "lifecycle": "DEPRECATED",
+      "paths": [
+        "alphafactory_crypto/instrument_capability/legacy.py",
+        "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv"
+      ],
+      "critical": true,
+      "semantic_role": "legacy_proposal_parity_source",
+      "active_authority": false,
+      "authority": {
+        "path": "alphafactory_crypto/instrument_capability/legacy.py",
+        "repo_ref": "repair/crypto-instrument-capability-20260715",
+        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+        "sha256": "3CDD2A76190D59365ACF95FAF86F941A7DAE44782E2435F38FC5D317F0778722"
+      },
+      "contracts": [
+        {
+          "id": "legacy_source_only",
+          "type": "EVIDENCE",
+          "rule": "Historical B1S/Epoch implementations may supply fixed proposal or parity evidence but cannot own primitive semantics, mapping, feedback, survivor, or lifecycle authority",
+          "severity": "HARD",
+          "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv",
+        "evidence_sha256": "B9355EEF9B7E43CE13DD6CF7C93D5C0905C51AE85D95A9635C4893EE85EEAD75",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
+      "id": "canonical_primitive_authority",
+      "label": "Canonical Primitive Authority",
+      "kind": "semantic_authority",
+      "lifecycle": "ACTIVE",
+      "paths": [
+        "alphafactory_crypto/instrument_capability/primitives.py",
+        "runtime/crypto_instrument_capability_20260715/CRYPTO_CANONICAL_PRIMITIVE_CONTRACT.json",
+        "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_SYNTHETIC_PARITY.json"
+      ],
+      "critical": true,
+      "semantic_role": "primitive_semantic_authority",
+      "active_authority": true,
+      "authority": {
+        "path": "alphafactory_crypto/instrument_capability/primitives.py",
+        "repo_ref": "repair/crypto-instrument-capability-20260715",
+        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+        "sha256": "853D06AEAF30DD5388083E8D41F777F976CC4107E099E6708FD81F43E48EB875"
+      },
+      "contracts": [
+        {
+          "id": "unique_active_primitive_semantics",
+          "type": "AUTHORITY",
+          "rule": "Each active primitive_id has exactly one canonical mathematical semantics and implementation; source-qualified legacy aliases cannot silently override it",
+          "severity": "HARD",
+          "enforced_by": "instrument_capability.primitives and proposal admission receipts",
+          "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_SYNTHETIC_PARITY.json"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_SYNTHETIC_PARITY.json",
+        "evidence_sha256": "BB5F1E7B119E9503247B1786E191039B7A1114B76EA80A3DDDDAA2A5D6782041",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
+      "id": "explicit_portfolio_mapping",
+      "label": "Explicit Portfolio Mapping Authority",
+      "kind": "portfolio_mapping",
+      "lifecycle": "ACTIVE",
+      "paths": [
+        "alphafactory_crypto/instrument_capability/mapping.py",
+        "runtime/crypto_instrument_capability_20260715/CRYPTO_PORTFOLIO_MAPPING_CONTRACT.json",
+        "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_SYNTHETIC_BEHAVIOR.json"
+      ],
+      "critical": true,
+      "semantic_role": "portfolio_mapping_authority",
+      "active_authority": true,
+      "authority": {
+        "path": "alphafactory_crypto/instrument_capability/mapping.py",
+        "repo_ref": "repair/crypto-instrument-capability-20260715",
+        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+        "sha256": "6ACA0A358349EAD0290BD1EF82AFE3F277600AFBBCE913AC4092A4286E60CBFC"
+      },
+      "contracts": [
+        {
+          "id": "explicit_mapping_admission",
+          "type": "ADMISSION",
+          "rule": "A candidate must carry a supported portfolio_mapping_id and content-hashed mapping contract before entering the capability evaluator",
+          "severity": "HARD",
+          "enforced_by": "instrument_capability.mapping and evaluator",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_SYNTHETIC_BEHAVIOR.json"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_SYNTHETIC_BEHAVIOR.json",
+        "evidence_sha256": "0583B74989AB1CA2C447414A92931645C4E1E017FD35AA01BA250B0CB3D6B52E",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
+      "id": "adaptive_strict_feasibility_feedback",
+      "label": "Adaptive Strict-Feasibility Feedback Authority",
+      "kind": "feedback_authority",
+      "lifecycle": "ACTIVE",
+      "paths": [
+        "alphafactory_crypto/instrument_capability/feedback.py",
+        "runtime/crypto_instrument_capability_20260715/CRYPTO_ADAPTIVE_FEEDBACK_CONTRACT.json",
+        "runtime/crypto_instrument_capability_20260715/CRYPTO_PROXY_STRICT_ALIGNMENT_SYNTHETIC.json"
+      ],
+      "critical": true,
+      "semantic_role": "adaptive_feedback_authority",
+      "active_authority": true,
+      "authority": {
+        "path": "alphafactory_crypto/instrument_capability/feedback.py",
+        "repo_ref": "repair/crypto-instrument-capability-20260715",
+        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+        "sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0"
+      },
+      "contracts": [
+        {
+          "id": "strict_feedback_admission",
+          "type": "ADMISSION",
+          "rule": "Wrong lag, missing mapping, illegal proposals, non-finite strict metrics, and non-canonical primitive authority fail closed before survivor ordering",
+          "severity": "HARD",
+          "enforced_by": "proposal admission receipts and aligned_feedback",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PROXY_STRICT_ALIGNMENT_SYNTHETIC.json"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PROXY_STRICT_ALIGNMENT_SYNTHETIC.json",
+        "evidence_sha256": "60561B98A1CDBD675063F78209B81C4D45222037CC2A0E4A2D1C69FEF36A1996",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
+      "id": "formal_performance_search",
+      "label": "Formal Performance Search",
+      "kind": "boundary",
+      "lifecycle": "FORBIDDEN",
+      "critical": true,
+      "semantic_role": "performance_search_boundary",
+      "authority": {
+        "path": ".planning/STATE.md",
+        "repo_ref": "repair/crypto-instrument-capability-20260715"
+      },
+      "contracts": [
+        {
+          "id": "new_performance_search_frozen",
+          "type": "BOUNDARY",
+          "rule": "NEW_PERFORMANCE_SEARCH_FROZEN remains in force; synthetic qualification cannot activate a real market search",
+          "severity": "HARD",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
+        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
+      "id": "new_data_integration",
+      "label": "New-data Integration",
+      "kind": "boundary",
+      "lifecycle": "FORBIDDEN",
+      "critical": true,
+      "semantic_role": "new_data_integration_boundary",
+      "authority": {
+        "path": ".planning/STATE.md",
+        "repo_ref": "repair/crypto-instrument-capability-20260715"
+      },
+      "contracts": [
+        {
+          "id": "no_new_data_integration",
+          "type": "BOUNDARY",
+          "rule": "NO_NEW_DATA_INTEGRATION remains in force; this repair consumes no new release and cannot activate one",
+          "severity": "HARD",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
+        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
       "id": "sealed_research_boundaries",
-      "label": "Sealed research and mutation boundaries",
+      "label": "Forward / Challenge / Promotion boundaries",
       "kind": "boundary",
       "lifecycle": "FORBIDDEN",
       "paths": [
@@ -199,6 +461,7 @@
       ],
       "critical": true,
       "semantic_role": "evaluation_access_boundary",
+      "active_authority": true,
       "authority": {
         "path": "config/crypto_evaluation_access_policy_v1.json",
         "repo_ref": "crypto-frontier-provenance-closure-20260714",
@@ -217,7 +480,7 @@
         {
           "id": "frozen_mutations",
           "type": "BOUNDARY",
-          "rule": "New performance search, candidate promotion, cross-sprint adaptive memory, and new-data integration remain forbidden",
+          "rule": "Candidate promotion and cross-sprint adaptive memory remain forbidden; separate CURRENT nodes retain the performance-search and new-data boundaries",
           "severity": "HARD",
           "bypass_forbidden": true
         },
@@ -240,6 +503,188 @@
   ],
   "edges": [
     {
+      "id": "instrument_uses_canonical_primitive_authority",
+      "source": "internal_search_instrument",
+      "target": "canonical_primitive_authority",
+      "relation": "uses_semantic_authority",
+      "lifecycle": "EXPERIMENTAL",
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "canonical_primitive_wiring",
+        "type": "AUTHORITY",
+        "rule": "Every generated proposal resolves its active primitive through the canonical primitive authority before admission",
+        "severity": "HARD",
+        "enforced_by": "ProposalContract primitive receipt",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_SYNTHETIC_PARITY.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_SYNTHETIC_PARITY.json",
+        "evidence_sha256": "BB5F1E7B119E9503247B1786E191039B7A1114B76EA80A3DDDDAA2A5D6782041",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
+      "id": "instrument_requires_explicit_portfolio_mapping",
+      "source": "internal_search_instrument",
+      "target": "explicit_portfolio_mapping",
+      "relation": "requires_explicit_mapping",
+      "lifecycle": "EXPERIMENTAL",
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "mapping_receipt_wiring",
+        "type": "ADMISSION",
+        "rule": "The evaluator accepts only MappingResult objects backed by an explicit mapping identity and contract hash",
+        "severity": "HARD",
+        "enforced_by": "instrument_capability.evaluator",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_SYNTHETIC_BEHAVIOR.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_SYNTHETIC_BEHAVIOR.json",
+        "evidence_sha256": "0583B74989AB1CA2C447414A92931645C4E1E017FD35AA01BA250B0CB3D6B52E",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
+      "id": "instrument_uses_aligned_strict_feedback",
+      "source": "internal_search_instrument",
+      "target": "adaptive_strict_feasibility_feedback",
+      "relation": "uses_aligned_feedback",
+      "lifecycle": "EXPERIMENTAL",
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "strict_feedback_wiring",
+        "type": "AUTHORITY",
+        "rule": "Survivor ordering consumes the frozen strict-feasibility tuple and never the legacy zero-cost gross proxy",
+        "severity": "HARD",
+        "enforced_by": "instrument_capability.search feedback_sort_key",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PROXY_STRICT_ALIGNMENT_SYNTHETIC.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PROXY_STRICT_ALIGNMENT_SYNTHETIC.json",
+        "evidence_sha256": "60561B98A1CDBD675063F78209B81C4D45222037CC2A0E4A2D1C69FEF36A1996",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
+      "id": "instrument_reads_fixed_legacy_proposals",
+      "source": "internal_search_instrument",
+      "target": "legacy_b1s_epoch0_gross_feedback",
+      "relation": "reads_fixed_legacy_proposals",
+      "lifecycle": "DEPRECATED",
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "legacy_parity_only_wiring",
+        "type": "EVIDENCE",
+        "rule": "Only mechanically fixed legal proposal coordinates and exact closure-tag code may enter legacy parity; performance fields cannot select them",
+        "severity": "HARD",
+        "enforced_by": "instrument_capability.legacy",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv",
+        "evidence_sha256": "B9355EEF9B7E43CE13DD6CF7C93D5C0905C51AE85D95A9635C4893EE85EEAD75",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
+      "id": "instrument_real_search_activation_forbidden",
+      "source": "internal_search_instrument",
+      "target": "formal_performance_search",
+      "relation": "activation_forbidden",
+      "lifecycle": "FORBIDDEN",
+      "forbidden": true,
+      "critical": true,
+      "evidence_type": "DECLARED",
+      "contract": {
+        "id": "capability_not_search_authority",
+        "type": "BOUNDARY",
+        "rule": "Capability qualification cannot activate formal performance search",
+        "severity": "HARD",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json"
+      },
+      "validation": {
+        "level": "DECLARED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
+        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
+      "id": "instrument_new_data_integration_forbidden",
+      "source": "internal_search_instrument",
+      "target": "new_data_integration",
+      "relation": "integration_forbidden",
+      "lifecycle": "FORBIDDEN",
+      "forbidden": true,
+      "critical": true,
+      "evidence_type": "DECLARED",
+      "contract": {
+        "id": "capability_not_data_authority",
+        "type": "BOUNDARY",
+        "rule": "Capability qualification cannot integrate or activate a new data release",
+        "severity": "HARD",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json"
+      },
+      "validation": {
+        "level": "DECLARED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
+        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
+      "id": "instrument_boundary_opening_forbidden",
+      "source": "internal_search_instrument",
+      "target": "sealed_research_boundaries",
+      "relation": "boundary_opening_forbidden",
+      "lifecycle": "FORBIDDEN",
+      "forbidden": true,
+      "critical": true,
+      "evidence_type": "DECLARED",
+      "contract": {
+        "id": "capability_not_boundary_authority",
+        "type": "BOUNDARY",
+        "rule": "Capability qualification cannot open forward, challenge, recent, May stress, promotion, or cross-sprint memory boundaries",
+        "severity": "HARD",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json"
+      },
+      "validation": {
+        "level": "DECLARED",
+        "result": "PASS",
+        "profile": "evidence-boundary-change",
+        "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
+        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
+        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+      }
+    },
+    {
       "id": "sealed_candidate_feedback_forbidden",
       "source": "sealed_research_boundaries",
       "target": "multi_paradigm_arena",
@@ -247,7 +692,7 @@
       "lifecycle": "FORBIDDEN",
       "forbidden": true,
       "critical": true,
-      "evidence_type": "RUNTIME",
+      "evidence_type": "STATIC",
       "contract": {
         "id": "sealed_feedback_bypass_forbidden",
         "type": "BOUNDARY",
@@ -273,9 +718,12 @@
   ],
   "semantic_authorities": [
     {"semantic_role": "research_decision_authority", "authoritative_component": "accepted_frontier_closure"},
-    {"semantic_role": "instrument_qualification", "authoritative_component": "instrument_semantics_audit"},
+    {"semantic_role": "historical_instrument_diagnosis", "authoritative_component": "instrument_semantics_audit"},
     {"semantic_role": "development_arena", "authoritative_component": "multi_paradigm_arena"},
     {"semantic_role": "large_experiment_admission", "authoritative_component": "data_adequacy_gate"},
-    {"semantic_role": "evaluation_access_boundary", "authoritative_component": "sealed_research_boundaries"}
+    {"semantic_role": "evaluation_access_boundary", "authoritative_component": "sealed_research_boundaries"},
+    {"semantic_role": "primitive_semantic_authority", "authoritative_component": "canonical_primitive_authority"},
+    {"semantic_role": "portfolio_mapping_authority", "authoritative_component": "explicit_portfolio_mapping"},
+    {"semantic_role": "adaptive_feedback_authority", "authoritative_component": "adaptive_strict_feasibility_feedback"}
   ]
 }
