@@ -1,6 +1,6 @@
 # Crypto AlphaFactory Planning State
 
-Last updated: 2026-07-14 Asia/Hong_Kong
+Last updated: 2026-07-15 Asia/Hong_Kong
 
 ## Current status
 
@@ -11,6 +11,7 @@ CURRENT_DATA_UNDERPOWERED
 FINANCIAL_GATE_HOLD_RESEARCH
 CRYPTO_SEARCH_INSTRUMENT_MISMATCH_CONFIRMED
 GRAPH_RAW_CURRENT_SEPARATION_ACTIVE
+CURRENT_CONTRACT_CAPSULE_ACTIVE
 ```
 
 Accepted closure identity:
@@ -30,7 +31,7 @@ The checked-out repository line is `main`; this independent audit is rooted at b
 1. Current user boundaries and sealed-block instructions.
 2. Committed source, data contracts, manifests, and real run assets on their exact branch/SHA.
 3. The accepted closure tag and independent Reproducer/Gatekeeper decisions.
-4. `.planning/graphs/CURRENT_ARCHITECTURE.md` for the branch-aware current view.
+4. `config/architecture_overlay.json` for approved lifecycle/contracts and generated `.planning/graphs/current.json` for the checked assurance view.
 5. RAW Graphify artifacts for code navigation only.
 6. Older planning reports and status text as historical evidence.
 
@@ -46,11 +47,15 @@ No single status code overrides source or execution facts.
 ## Graph state
 
 - RAW: `.planning/graphs/graph.json`, `GRAPH_REPORT.md`, and optional `graph.html`; generated from the current checkout for navigation/query.
-- CURRENT: `.planning/graphs/CURRENT_ARCHITECTURE.md`; concise manual fact view with explicit branch and lifecycle labels.
-- Maintenance: `scripts/maintain_crypto_navigation_graph.ps1 build|check|query`.
-- Ignore contract: `.graphifyignore` prevents RAW products from being re-ingested as source.
-- `main` has no `crypto_architecture_control_registry_v1.json`; none is fabricated for this Graph task.
-- No `architecture_overlay.json`, `current.json`, execution trace, second registry, full runtime trace, edge-level fail-closed gate, hook, or heavyweight CI layer is added.
+- CURRENT input: `config/architecture_overlay.json`; it contains five critical nodes, one critical forbidden edge, and only Authority, Boundary, Admission, and Evidence capsules.
+- CURRENT outputs: `.planning/graphs/current.json` and `current.html`; both are generated and must not be edited by hand.
+- Assurance is independent from lifecycle color. `checked_at` is generated; exact evidence SHA/path/hash may be refreshed automatically, but lifecycle transitions still require an explicit accepted decision.
+- Profiles are limited to the two explicitly referenced files under `profiles/`; no directory scanning, newest-file selection, or per-experiment profile growth is allowed.
+- Maintenance: RAW uses `scripts/maintain_crypto_navigation_graph.ps1 build|check|query`; CURRENT uses `node "$env:CODEX_HOME\get-shit-done\bin\gsd-tools.cjs" graphify maintain` and strict audit only with an explicit trace/profile.
+- Ignore contract: `.graphifyignore` prevents RAW and CURRENT products, the overlay, and profiles from being re-ingested as source.
+- `main` still does not import the historical `crypto_architecture_control_registry_v1.json`; that 65-node closure-line registry remains historical evidence rather than the new CURRENT input.
+- The former hand-maintained `CURRENT_ARCHITECTURE.md` is superseded and removed from the live tree; Git history preserves it.
+- No second registry, automatic runtime inference, large contract file, hook, or heavyweight CI layer is added.
 
 The old RAW graph built from `fb27d14c` is superseded by the refreshed navigation graph. Historical Graph artifacts remain recoverable through Git.
 
@@ -81,7 +86,7 @@ No existing Graph, report, historical metric, or inventory row can open those bo
 
 ## Decision after the independent audit
 
-Graph maintenance may rebuild or query RAW and update CURRENT when committed facts change. It must remain lightweight.
+Graph maintenance may rebuild or query RAW and regenerate CURRENT when committed facts change. It must remain lightweight. A passing validation refresh cannot by itself activate an experimental component, open a sealed boundary, start a search, integrate data, or promote a candidate.
 
 Economic work remains `HOLD_RESEARCH`. A future decision may qualify or repair the research instrument, or evaluate a genuinely new release, but neither route starts automatically. If new-data integration is later authorized, use the accepted closure line's existing activation entry: ingress preflight, hash-bound observed release facts, Data Adequacy Gate, at most two best-matched external paradigms plus the internal baseline, then one frozen-budget development-only Arena. If adequacy fails, stop at `DATA_ADEQUACY_UNDERPOWERED` / `NO_LARGE_EXPERIMENT`.
 

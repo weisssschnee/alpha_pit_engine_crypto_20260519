@@ -23,8 +23,28 @@ $GraphHtml = Join-Path $GraphDir "graph.html"
 $GeneratedRelativePaths = @(
     ".planning/graphs/graph.json",
     ".planning/graphs/GRAPH_REPORT.md",
-    ".planning/graphs/graph.html"
+    ".planning/graphs/graph.html",
+    ".planning/graphs/current.json",
+    ".planning/graphs/current.html"
 )
+$RawFreshnessNeutralExact = @(
+    $GeneratedRelativePaths
+    ".planning/config.json"
+    "config/architecture_overlay.json"
+)
+$RawFreshnessNeutralPrefixes = @(
+    ".planning/graphs/execution_traces/",
+    "config/architecture_profiles/",
+    "profiles/"
+)
+
+function Test-RawFreshnessNeutral([string]$Path) {
+    $normalized = $Path.Replace("\", "/").TrimStart("/")
+    if ($RawFreshnessNeutralExact -contains $normalized) {
+        return $true
+    }
+    return @($RawFreshnessNeutralPrefixes | Where-Object { $normalized.StartsWith($_, [StringComparison]::OrdinalIgnoreCase) }).Count -gt 0
+}
 
 function Resolve-GraphifyExecutable {
     if ($GraphifyExecutable) {
@@ -106,7 +126,7 @@ function Invoke-GraphCheck {
     }
 
     $changedPaths = @(Get-ChangedPaths -BuiltCommit $builtCommit -HeadCommit $headCommit)
-    $nonGeneratedChanges = @($changedPaths | Where-Object { $GeneratedRelativePaths -notcontains $_ })
+    $nonGeneratedChanges = @($changedPaths | Where-Object { -not (Test-RawFreshnessNeutral -Path $_) })
     if ($nonGeneratedChanges.Count -gt 0) {
         throw "Raw graph is stale or the worktree has non-Graph changes: $($nonGeneratedChanges -join ', ')"
     }
@@ -129,8 +149,9 @@ function Invoke-GraphCheck {
         nodes = @($graph.nodes).Count
         edges = $edgeCount
         html_present = Test-Path -LiteralPath $GraphHtml -PathType Leaf
-        current_view = ".planning/graphs/CURRENT_ARCHITECTURE.md"
-        current_view_is_generated = $false
+        current_view = ".planning/graphs/current.json"
+        current_view_is_generated = $true
+        current_present = Test-Path -LiteralPath (Join-Path $GraphDir "current.json") -PathType Leaf
     } | ConvertTo-Json -Depth 3
 }
 

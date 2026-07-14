@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "schema_ref": "gsd-graphify-runtime-fidelity/schemas/architecture-overlay.schema.json",
+  "nodes": [
+    {
+      "id": "accepted_frontier_closure",
+      "label": "Accepted Frontier closure and economic decision",
+      "kind": "decision",
+      "lifecycle": "ACTIVE",
+      "critical": true,
+      "semantic_role": "research_decision_authority",
+      "active_authority": true,
+      "authority": {
+        "path": "runtime/crypto_frontier_provenance_closure_20260714/closure_manifest.json",
+        "repo_ref": "crypto-frontier-provenance-closure-20260714",
+        "verified_sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+        "sha256": "648E2021DD156D794AC0CAB105A0AACB36FF79C8EF2E4B227B7361864B38447F"
+      },
+      "contracts": [
+        {
+          "id": "accepted_economic_state",
+          "type": "AUTHORITY",
+          "rule": "The annotated closure tag and committed closure manifest own CURRENT_DATA_UNDERPOWERED and HOLD_RESEARCH",
+          "severity": "HARD",
+          "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/closure_manifest.json"
+        },
+        {
+          "id": "development_evidence_scope",
+          "type": "EVIDENCE",
+          "rule": "Architecture completion or development evidence is not OOS proof and cannot authorize promotion",
+          "severity": "HARD",
+          "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/independent_closure_decisions.json"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "evidence-boundary-change",
+        "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/independent_closure_decisions.json",
+        "evidence_sha256": "FE4A1D1306DB3B3FE13B3EAC795B03AFBB5F01FC1D3A7CE1D4B8AB216384B983",
+        "verified_at_sha": "4726795f61052470d56e2d1475e4f6da9d262943"
+      },
+      "promotion_requirements": [
+        "runtime evidence",
+        "non-stale evidence",
+        "accepted report",
+        "explicit authorization"
+      ]
+    },
+    {
+      "id": "instrument_semantics_audit",
+      "label": "Search-instrument semantics qualification",
+      "kind": "assurance",
+      "lifecycle": "ACTIVE",
+      "paths": [
+        "reports/CRYPTO_LATEST_EVIDENCE_INDEPENDENT_AUDIT.md",
+        "scripts/crypto_latest_feature_space_audit.py",
+        "scripts/crypto_latest_instrument_semantics_audit.py"
+      ],
+      "critical": true,
+      "semantic_role": "instrument_qualification",
+      "active_authority": true,
+      "authority": {
+        "path": "reports/CRYPTO_LATEST_EVIDENCE_INDEPENDENT_AUDIT.md",
+        "repo_ref": "main",
+        "verified_sha": "4eda31c9637b2faeaaa39910a084ad456f393542",
+        "sha256": "50FD9DA3F51E9C7818E90DAA98EE6ED419797D8E4892B3CEE98E539156E47F53"
+      },
+      "contracts": [
+        {
+          "id": "bounded_instrument_conclusion",
+          "type": "EVIDENCE",
+          "rule": "CRYPTO_SEARCH_INSTRUMENT_MISMATCH_CONFIRMED is a bounded static and development-evidence conclusion, not proof that alpha is absent or data is the unique bottleneck",
+          "severity": "HARD",
+          "evidence_ref": "reports/CRYPTO_LATEST_EVIDENCE_INDEPENDENT_AUDIT.md"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "reports/CRYPTO_LATEST_EVIDENCE_INDEPENDENT_AUDIT.md",
+        "evidence_sha256": "50FD9DA3F51E9C7818E90DAA98EE6ED419797D8E4892B3CEE98E539156E47F53",
+        "verified_at_sha": "4eda31c9637b2faeaaa39910a084ad456f393542"
+      },
+      "promotion_requirements": [
+        "runtime-qualified repaired instrument",
+        "non-stale development evidence",
+        "explicit authorization"
+      ]
+    },
+    {
+      "id": "multi_paradigm_arena",
+      "label": "Multi-paradigm development Arena",
+      "kind": "evaluation",
+      "lifecycle": "ACTIVE",
+      "paths": [
+        "docs/adr/0003-multi-paradigm-frontier-arena-and-artifact-contracts.md",
+        "alphafactory_crypto/frontier_v2/arena.py",
+        "alphafactory_crypto/frontier_v2/qlib_v097.py",
+        "alphafactory_crypto/frontier_v2/deepdow_v023.py",
+        "alphafactory_crypto/frontier_v2/release.py"
+      ],
+      "critical": true,
+      "semantic_role": "development_arena",
+      "active_authority": true,
+      "authority": {
+        "path": "docs/adr/0003-multi-paradigm-frontier-arena-and-artifact-contracts.md",
+        "repo_ref": "crypto-frontier-provenance-closure-20260714",
+        "verified_sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+        "sha256": "0D5E4E92285A2339C1917DF46D29B66842C68D5E38E02532186BCB3548FB6317"
+      },
+      "contracts": [
+        {
+          "id": "native_paradigm_fidelity",
+          "type": "EVIDENCE",
+          "rule": "ForecastArtifact and PortfolioArtifact retain their native learner, mapping, and evaluator semantics before bridge comparison",
+          "severity": "HARD",
+          "evidence_ref": "runtime/crypto_frontier_research_v2_20260713/architecture_decision.json"
+        },
+        {
+          "id": "development_only_bridge",
+          "type": "BOUNDARY",
+          "rule": "The common bridge is one-day delayed with 5 bps L1-turnover cost and cannot replace native evidence or imply OOS qualification",
+          "severity": "HARD",
+          "bypass_forbidden": true
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_frontier_research_v2_20260713/architecture_decision.json",
+        "evidence_sha256": "9940FCA2C8607A3991DF4EF75ABADCF51C25812F034E42EBF5396D8B5EA0E2D1",
+        "verified_at_sha": "4726795f61052470d56e2d1475e4f6da9d262943"
+      },
+      "promotion_requirements": [
+        "runtime evidence",
+        "adequate independent evaluation blocks",
+        "accepted OOS report",
+        "explicit authorization"
+      ]
+    },
+    {
+      "id": "data_adequacy_gate",
+      "label": "Paradigm-aware Data Adequacy Gate",
+      "kind": "admission_gate",
+      "lifecycle": "ACTIVE",
+      "paths": [
+        "config/crypto_frontier_evidence_qualification_v1.json",
+        "alphafactory_crypto/frontier_v2/qualification.py"
+      ],
+      "critical": true,
+      "semantic_role": "large_experiment_admission",
+      "active_authority": true,
+      "authority": {
+        "path": "config/crypto_frontier_evidence_qualification_v1.json",
+        "repo_ref": "crypto-frontier-provenance-closure-20260714",
+        "verified_sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+        "sha256": "38A21EF12CCEA7C82217CEB5BC5FA957EE9612DCC496FEAE07C0059681C77D02"
+      },
+      "contracts": [
+        {
+          "id": "paradigm_information_minimum",
+          "type": "ADMISSION",
+          "rule": "A paradigm that fails predeclared dates, samples, assets, coverage, variance, history, label, turnover, or independent-block minima is DATA_ADEQUACY_UNDERPOWERED and cannot enter a large experiment",
+          "severity": "HARD",
+          "enforced_by": "frontier_v2.qualification",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/data_adequacy_gate.json"
+        },
+        {
+          "id": "new_release_fail_closed",
+          "type": "ADMISSION",
+          "rule": "A new release requires ingress preflight and content-hash-bound observed facts; at most two matched external paradigms plus baseline may run, otherwise NO_LARGE_EXPERIMENT",
+          "severity": "HARD",
+          "enforced_by": "crypto_frontier_evidence_qualification activation-plan",
+          "bypass_forbidden": true
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/data_adequacy_gate.json",
+        "evidence_sha256": "51EAEFBA3A76ED869D07FEC391116F4E159BA949E852BBC693C6040742A49B61",
+        "verified_at_sha": "4726795f61052470d56e2d1475e4f6da9d262943"
+      }
+    },
+    {
+      "id": "sealed_research_boundaries",
+      "label": "Sealed research and mutation boundaries",
+      "kind": "boundary",
+      "lifecycle": "FORBIDDEN",
+      "paths": [
+        "config/crypto_evaluation_access_policy_v1.json",
+        "alphafactory_crypto/evaluation_access.py",
+        ".planning/STATE.md"
+      ],
+      "critical": true,
+      "semantic_role": "evaluation_access_boundary",
+      "authority": {
+        "path": "config/crypto_evaluation_access_policy_v1.json",
+        "repo_ref": "crypto-frontier-provenance-closure-20260714",
+        "verified_sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+        "sha256": "CA922AAE19B0BA3713CDFB85093F1DF48506385F42353C9F9B9A23711F9977CE"
+      },
+      "contracts": [
+        {
+          "id": "sealed_evaluation_roles",
+          "type": "BOUNDARY",
+          "rule": "Validation, test, recent, May stress, forward, and challenge roles are report-only or sealed and cannot feed search, ranking, scheduling, memory, or promotion",
+          "severity": "HARD",
+          "enforced_by": "evaluation_access role gates",
+          "bypass_forbidden": true
+        },
+        {
+          "id": "frozen_mutations",
+          "type": "BOUNDARY",
+          "rule": "New performance search, candidate promotion, cross-sprint adaptive memory, and new-data integration remain forbidden",
+          "severity": "HARD",
+          "bypass_forbidden": true
+        },
+        {
+          "id": "explicit_boundary_authority",
+          "type": "AUTHORITY",
+          "rule": "Only explicit user authorization and an accepted non-stale decision may change a sealed lifecycle state",
+          "severity": "HARD"
+        }
+      ],
+      "validation": {
+        "level": "PARTIAL",
+        "result": "PASS",
+        "profile": "evidence-boundary-change",
+        "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/execution_identity.json",
+        "evidence_sha256": "471715704F061327BED566A91AA728FD81AF00F6ED1C6B3534C1539A063BDFCD",
+        "verified_at_sha": "4726795f61052470d56e2d1475e4f6da9d262943"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "sealed_candidate_feedback_forbidden",
+      "source": "sealed_research_boundaries",
+      "target": "multi_paradigm_arena",
+      "relation": "candidate_feedback",
+      "lifecycle": "FORBIDDEN",
+      "forbidden": true,
+      "critical": true,
+      "evidence_type": "RUNTIME",
+      "contract": {
+        "id": "sealed_feedback_bypass_forbidden",
+        "type": "BOUNDARY",
+        "rule": "Sealed or spent evaluation roles may produce audit reports but may not enter candidate feedback, search, memory, scheduling, or promotion",
+        "severity": "HARD",
+        "enforced_by": "evaluation_access and frontier qualification gates",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/execution_identity.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "evidence-boundary-change",
+        "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/execution_identity.json",
+        "evidence_sha256": "471715704F061327BED566A91AA728FD81AF00F6ED1C6B3534C1539A063BDFCD",
+        "verified_at_sha": "4726795f61052470d56e2d1475e4f6da9d262943"
+      }
+    }
+  ],
+  "profile_refs": [
+    "profiles/crypto-development-research.json",
+    "profiles/evidence-boundary-change.json"
+  ],
+  "semantic_authorities": [
+    {"semantic_role": "research_decision_authority", "authoritative_component": "accepted_frontier_closure"},
+    {"semantic_role": "instrument_qualification", "authoritative_component": "instrument_semantics_audit"},
+    {"semantic_role": "development_arena", "authoritative_component": "multi_paradigm_arena"},
+    {"semantic_role": "large_experiment_admission", "authoritative_component": "data_adequacy_gate"},
+    {"semantic_role": "evaluation_access_boundary", "authoritative_component": "sealed_research_boundaries"}
+  ]
+}

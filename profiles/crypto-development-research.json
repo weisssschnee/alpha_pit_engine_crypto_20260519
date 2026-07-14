@@ -1,0 +1,9 @@
+{
+  "id": "crypto-development-research",
+  "required_components": [
+    "instrument_semantics_audit",
+    "multi_paradigm_arena",
+    "data_adequacy_gate"
+  ],
+  "required_edges": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "evidence-boundary-change",
+  "required_components": [
+    "accepted_frontier_closure",
+    "sealed_research_boundaries"
+  ],
+  "required_edges": []
+}

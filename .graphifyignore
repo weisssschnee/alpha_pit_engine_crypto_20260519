@@ -2,3 +2,7 @@
 /.planning/graphs/graph.json
 /.planning/graphs/graph.html
 /.planning/graphs/GRAPH_REPORT.md
+/.planning/graphs/current.json
+/.planning/graphs/current.html
+/config/architecture_overlay.json
+/profiles/*.json
