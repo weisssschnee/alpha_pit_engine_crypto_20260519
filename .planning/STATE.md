@@ -26,7 +26,7 @@ tag:    crypto-frontier-provenance-closure-20260714
 
 `REPOSITORY_PROVENANCE_CLOSURE_COMPLETED` is the committed manifest status. `CRYPTO_FRONTIER_PROVENANCE_CLOSURE_ACCEPTED` is the user-accepted interpretation of the annotated closure tag, whose attestation records Reproducer PASS, Gatekeeper PASS, and base bundle SHA256 `99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2`.
 
-The checked-out repository line is `repair/crypto-instrument-capability-20260715`, rooted at `origin/main` commit `9b8d9b105c92fa7427b450290ee2efc0d3f2488b`. Capability source is bound to `1d8f76e6b07db3e3c13abb9f7d8230de08e50f58`; its 14-artifact evidence bundle was committed at `b8551ecf1453d5559dd464b05748bab2a2c5c959`. The main and accepted closure lines remain distinct. Fixed parity reads exact closure-tag source without merging it or pretending closure-only runners are executable on this branch.
+The checked-out repository line is `repair/crypto-instrument-capability-20260715`, rooted at `origin/main` commit `9b8d9b105c92fa7427b450290ee2efc0d3f2488b`. Capability source is bound to `46280c5ad2acf6783d0ede0eb27fd93e3713d6f0`; its 14-artifact evidence bundle was committed at `6055bc9ce9794113178a40c8f6f403e1ccd3781e`. The main and accepted closure lines remain distinct. Fixed parity reads exact closure-tag source without merging it or pretending closure-only runners are executable on this branch.
 
 ## Source-of-truth order
 
@@ -45,7 +45,7 @@ No single status code overrides source or execution facts.
 - DeepDow learned non-identical parameters and produced non-identical challenger/control weights. It is not an exact comparison, fit, or mapping collapse. Its economic status is `DATA_ADEQUACY_UNDERPOWERED`, not `INFORMATIVE_NEGATIVE`.
 - The corrected Arena still has only 23 development dates. Qlib and DeepDow fail multiple predeclared adequacy conditions. No external component increment, OOS robustness, or promotion eligibility was established.
 - The accepted financial gate is `HOLD_RESEARCH`.
-- The repaired capability-only path has one canonical authority for 13 temporal primitives, three explicit portfolio mappings, full-L1 turnover at a fixed 5 bps, frozen strict-feasibility feedback, and a nine-rule finite proposal grammar. All 31 deterministic tests and all 10 qualification criteria pass across seven planted families and two fixed seeds.
+- The repaired capability-only path has one canonical authority for 13 temporal primitives, three explicit portfolio mappings, full-L1 turnover at a fixed 5 bps, frozen strict-feasibility feedback, and a nine-rule finite proposal grammar. Its evolutionary path uses label-blind structural parent/child mutation receipts, and qualification fails closed below two distinct fixed seeds. All 35 deterministic tests and all 10 qualification criteria pass across seven planted families and two fixed seeds.
 - `CRYPTO_INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_QUALIFIED` is scoped to fixed finite-grammar synthetic expression, reachability, mapping, costing, feedback, and survivor retention. It is not a market, economic, OOS, open-generator recall, or historical-runner repair conclusion.
 
 ## Graph state

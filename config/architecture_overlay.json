@@ -204,8 +204,8 @@
       "authority": {
         "path": "docs/adr/0002-capability-only-search-instrument-authority.md",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
-        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
-        "sha256": "8B0A6ACE052E470BCD16B38C5B842D2C9227E2D362D74E84D3583AB8C5E987FF"
+        "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0",
+        "sha256": "C9160FBF5C8C4B91BCF8E4E7B0ECDE2807A7E91D0519DFE87CEE32AAFF2FE75C"
       },
       "contracts": [
         {
@@ -228,8 +228,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_INSTRUMENT_CAPABILITY_QUALIFICATION.json",
-        "evidence_sha256": "D245E74762380CDB8B04554C17A9D69D479D4EFF8C1C0343FC034E5FA8ECCA2C",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "F47457BD0E4FABE8A9D579CAE4E53C4B095A0432E72A25A1A93E18EC4E0CB35C",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
       "promotion_requirements": [
         "explicit boundary authorization",
@@ -252,7 +252,7 @@
       "authority": {
         "path": "alphafactory_crypto/instrument_capability/legacy.py",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
-        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+        "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0",
         "sha256": "3CDD2A76190D59365ACF95FAF86F941A7DAE44782E2435F38FC5D317F0778722"
       },
       "contracts": [
@@ -269,8 +269,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv",
-        "evidence_sha256": "B9355EEF9B7E43CE13DD6CF7C93D5C0905C51AE85D95A9635C4893EE85EEAD75",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "C80825E15DD740F1CE0CE1E41C76466358795F95F462E75D23A42E220D8F94B0",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -289,7 +289,7 @@
       "authority": {
         "path": "alphafactory_crypto/instrument_capability/primitives.py",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
-        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+        "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0",
         "sha256": "853D06AEAF30DD5388083E8D41F777F976CC4107E099E6708FD81F43E48EB875"
       },
       "contracts": [
@@ -307,8 +307,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_SYNTHETIC_PARITY.json",
-        "evidence_sha256": "BB5F1E7B119E9503247B1786E191039B7A1114B76EA80A3DDDDAA2A5D6782041",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "C67028338A8CE83D093AF49F011B1D7C7C69A21B7E7B6AC39E65780EF5D4CFEA",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -327,7 +327,7 @@
       "authority": {
         "path": "alphafactory_crypto/instrument_capability/mapping.py",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
-        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+        "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0",
         "sha256": "6ACA0A358349EAD0290BD1EF82AFE3F277600AFBBCE913AC4092A4286E60CBFC"
       },
       "contracts": [
@@ -346,8 +346,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_SYNTHETIC_BEHAVIOR.json",
-        "evidence_sha256": "0583B74989AB1CA2C447414A92931645C4E1E017FD35AA01BA250B0CB3D6B52E",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "52F24CB8AD94C7FB22350370C9429A5E65DE88DA4DA1DE3FC591FEE61DDF79C9",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -366,7 +366,7 @@
       "authority": {
         "path": "alphafactory_crypto/instrument_capability/feedback.py",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
-        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+        "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0",
         "sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0"
       },
       "contracts": [
@@ -385,8 +385,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PROXY_STRICT_ALIGNMENT_SYNTHETIC.json",
-        "evidence_sha256": "60561B98A1CDBD675063F78209B81C4D45222037CC2A0E4A2D1C69FEF36A1996",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "462C5EAA057091E880AFB8474167FFFA0FC986044E66509D8FCF3C5A49CBF7CC",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -415,8 +415,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
-        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -445,8 +445,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
-        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -524,8 +524,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_SYNTHETIC_PARITY.json",
-        "evidence_sha256": "BB5F1E7B119E9503247B1786E191039B7A1114B76EA80A3DDDDAA2A5D6782041",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "C67028338A8CE83D093AF49F011B1D7C7C69A21B7E7B6AC39E65780EF5D4CFEA",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -550,8 +550,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_SYNTHETIC_BEHAVIOR.json",
-        "evidence_sha256": "0583B74989AB1CA2C447414A92931645C4E1E017FD35AA01BA250B0CB3D6B52E",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "52F24CB8AD94C7FB22350370C9429A5E65DE88DA4DA1DE3FC591FEE61DDF79C9",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -576,8 +576,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PROXY_STRICT_ALIGNMENT_SYNTHETIC.json",
-        "evidence_sha256": "60561B98A1CDBD675063F78209B81C4D45222037CC2A0E4A2D1C69FEF36A1996",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "462C5EAA057091E880AFB8474167FFFA0FC986044E66509D8FCF3C5A49CBF7CC",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -602,8 +602,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv",
-        "evidence_sha256": "B9355EEF9B7E43CE13DD6CF7C93D5C0905C51AE85D95A9635C4893EE85EEAD75",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "C80825E15DD740F1CE0CE1E41C76466358795F95F462E75D23A42E220D8F94B0",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -628,8 +628,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
-        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -654,8 +654,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
-        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -680,8 +680,8 @@
         "result": "PASS",
         "profile": "evidence-boundary-change",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
-        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
