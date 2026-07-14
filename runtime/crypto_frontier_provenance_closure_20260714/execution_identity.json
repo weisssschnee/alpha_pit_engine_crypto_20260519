@@ -30,6 +30,16 @@
     "fit_count": 0,
     "metric_recomputation": false
   },
+  "post_review_activation_trust_boundary_repair": {
+    "reason": "Independent Reviewer found that activation trusted self-reported adequacy profiles and information-match scores after ingress preflight. The repair binds adequacy evidence to the observed release content hash, derives upper bounds from actual ingress files, rejects claims above those facts, derives the match score, and adds a spoof-negative test.",
+    "failed_evidence_subject_sha": "b8647a077b8cea9a0f991ef0351acb81dbe84535",
+    "qualification_module_sha256": "5A5D58F4368B4D6C23D0B06EE81B9BB74A5EB60A3250FB06673FFC12CA38A366",
+    "release_module_sha256": "E878D105F28AC48FB472F77E753FB88FDAD7A5ABD85E4A93DE4078B91F684D4B",
+    "qualification_test_sha256": "D0783E1696089C5593D7157C16C1DC78F6C008A98C5D53E31008F5BB6F29F4F4",
+    "fit_count": 0,
+    "metric_recomputation": false,
+    "new_performance_search": false
+  },
   "failed_pre_training_attempt": {
     "stage": "ENTRYPOINT_IMPORT_BEFORE_DATA_LOAD",
     "fits_started": 0,

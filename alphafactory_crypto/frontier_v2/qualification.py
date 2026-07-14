@@ -1003,6 +1003,141 @@ def build_artifact_index(repo: Path, output_root: Path) -> dict[str, Any]:
     }
 
 
+ADEQUACY_EVIDENCE_SCHEMA = ["paradigm", "metric", "value"]
+ADEQUACY_PROFILE_METRICS = (
+    "development_dates",
+    "training_samples",
+    "cross_sectional_assets",
+    "feature_non_null_rate",
+    "positive_variance_feature_fraction",
+    "history_days",
+    "label_support",
+    "turnover_observations",
+    "independent_evaluation_blocks",
+)
+
+
+def _load_bound_adequacy_evidence(
+    manifest_path: Path,
+    manifest: dict[str, Any],
+    preflight: dict[str, Any],
+    thresholds_by_paradigm: dict[str, Any],
+) -> tuple[dict[str, dict[str, float]], dict[str, Any]]:
+    entry = manifest.get("adequacy_evidence")
+    failures: list[str] = []
+    if not isinstance(entry, dict):
+        return {}, {"status": "FAILED", "failures": ["ADEQUACY_EVIDENCE_MISSING"]}
+    path_value = entry.get("path")
+    evidence_path = Path(path_value) if path_value else None
+    if evidence_path is not None and not evidence_path.is_absolute():
+        evidence_path = (manifest_path.parent / evidence_path).resolve()
+    if evidence_path is None or not evidence_path.is_file():
+        return {}, {"status": "FAILED", "failures": ["ADEQUACY_EVIDENCE_FILE_MISSING"]}
+    lowered = evidence_path.as_posix().lower()
+    if any(token in lowered for token in ("challenge", "forward", "recent", "may_stress", "/test/")):
+        failures.append("ADEQUACY_EVIDENCE_PROHIBITED_PATH")
+    observed_sha = sha256_file(evidence_path)
+    if observed_sha != str(entry.get("sha256", "")).upper():
+        failures.append("ADEQUACY_EVIDENCE_HASH_MISMATCH")
+    if str(entry.get("source_content_sha256", "")).upper() != str(
+        preflight.get("observed_content_sha256", "")
+    ).upper():
+        failures.append("ADEQUACY_EVIDENCE_SOURCE_BINDING_MISMATCH")
+    if list(entry.get("schema", [])) != ADEQUACY_EVIDENCE_SCHEMA:
+        failures.append("ADEQUACY_EVIDENCE_DECLARED_SCHEMA_MISMATCH")
+    if not entry.get("producer_id"):
+        failures.append("ADEQUACY_EVIDENCE_PRODUCER_MISSING")
+    if evidence_path.suffix.lower() != ".csv":
+        failures.append("ADEQUACY_EVIDENCE_FORMAT_UNSUPPORTED")
+        frame = pd.DataFrame(columns=ADEQUACY_EVIDENCE_SCHEMA)
+    else:
+        frame = pd.read_csv(evidence_path)
+    if list(frame.columns) != ADEQUACY_EVIDENCE_SCHEMA:
+        failures.append("ADEQUACY_EVIDENCE_FILE_SCHEMA_MISMATCH")
+        frame = pd.DataFrame(columns=ADEQUACY_EVIDENCE_SCHEMA)
+    if frame.duplicated(["paradigm", "metric"]).any():
+        failures.append("ADEQUACY_EVIDENCE_DUPLICATE_METRIC")
+    frame["value"] = pd.to_numeric(frame.get("value"), errors="coerce")
+    if frame["value"].isna().any() or (~np.isfinite(frame["value"])).any() or (frame["value"] < 0).any():
+        failures.append("ADEQUACY_EVIDENCE_INVALID_VALUE")
+
+    profiles: dict[str, dict[str, float]] = {}
+    for paradigm in thresholds_by_paradigm:
+        if paradigm == "INTERNAL_LONG_ONLY_DAILY":
+            continue
+        subset = frame.loc[frame["paradigm"] == paradigm]
+        actual_metrics = set(subset["metric"].astype(str))
+        missing = sorted(set(ADEQUACY_PROFILE_METRICS) - actual_metrics)
+        unknown = sorted(actual_metrics - set(ADEQUACY_PROFILE_METRICS))
+        if missing:
+            failures.append(f"ADEQUACY_EVIDENCE_MISSING_METRICS:{paradigm}:{','.join(missing)}")
+        if unknown:
+            failures.append(f"ADEQUACY_EVIDENCE_UNKNOWN_METRICS:{paradigm}:{','.join(unknown)}")
+        profiles[paradigm] = {
+            str(row.metric): float(row.value)
+            for row in subset.itertuples()
+            if str(row.metric) in ADEQUACY_PROFILE_METRICS and np.isfinite(row.value)
+        }
+    return profiles, {
+        "status": "PASS" if not failures else "FAILED",
+        "failures": sorted(set(failures)),
+        "path": evidence_path.as_posix(),
+        "sha256": observed_sha,
+        "source_content_sha256": str(entry.get("source_content_sha256", "")).upper(),
+        "producer_id": entry.get("producer_id"),
+    }
+
+
+def _bound_profile_to_release_facts(
+    paradigm: str,
+    profile: dict[str, float],
+    thresholds: dict[str, Any],
+    facts: dict[str, Any],
+) -> tuple[dict[str, float], list[str]]:
+    block_days = int(thresholds["evaluation_block_days"])
+    upper_bounds = {
+        "development_dates": float(facts.get("unique_dates", 0)),
+        "training_samples": float(facts.get("row_count", 0)),
+        "cross_sectional_assets": float(facts.get("minimum_cross_sectional_assets", 0)),
+        "feature_non_null_rate": float(facts.get("feature_non_null_rate", 0.0)),
+        "positive_variance_feature_fraction": float(
+            facts.get("positive_variance_feature_fraction", 0.0)
+        ),
+        "history_days": float(facts.get("history_days", 0)),
+        "label_support": 1.0,
+        "turnover_observations": float(facts.get("maximum_turnover_observations", 0)),
+        "independent_evaluation_blocks": float(int(facts.get("unique_dates", 0)) // block_days),
+    }
+    bounded: dict[str, float] = {}
+    failures: list[str] = []
+    for metric in ADEQUACY_PROFILE_METRICS:
+        claimed = float(profile.get(metric, 0.0))
+        upper = upper_bounds[metric]
+        if claimed > upper + 1e-12:
+            failures.append(f"ADEQUACY_EVIDENCE_EXCEEDS_RELEASE_FACTS:{paradigm}:{metric}")
+        bounded[metric] = min(claimed, upper)
+    return bounded, failures
+
+
+def _information_match_score(profile: dict[str, float], thresholds: dict[str, Any], coverage: float) -> float:
+    threshold_keys = {
+        "development_dates": "min_development_dates",
+        "training_samples": "min_training_samples",
+        "cross_sectional_assets": "min_cross_sectional_assets",
+        "feature_non_null_rate": "min_feature_non_null_rate",
+        "positive_variance_feature_fraction": "min_positive_variance_feature_fraction",
+        "history_days": "min_history_days",
+        "label_support": "min_label_support",
+        "turnover_observations": "min_turnover_observations",
+        "independent_evaluation_blocks": "min_independent_evaluation_blocks",
+    }
+    ratios = []
+    for metric, threshold_key in threshold_keys.items():
+        minimum = float(thresholds[threshold_key])
+        ratios.append(1.0 if minimum <= 0 else min(float(profile.get(metric, 0.0)) / minimum, 1.0))
+    return float(np.mean(ratios) * min(max(float(coverage), 0.0), 1.0))
+
+
 def plan_new_release_activation(
     manifest_path: Path,
     base_config: dict[str, Any],
@@ -1019,29 +1154,46 @@ def plan_new_release_activation(
             "preflight": preflight,
         }
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    profiles = manifest.get("adequacy_profiles", {})
+    profiles, evidence = _load_bound_adequacy_evidence(
+        manifest_path,
+        manifest,
+        preflight,
+        qualification_config["data_adequacy_gate"],
+    )
+    evidence_failures = list(evidence["failures"])
     gate_rows = []
     eligible = []
     for paradigm, thresholds in qualification_config["data_adequacy_gate"].items():
         if paradigm == "INTERNAL_LONG_ONLY_DAILY" or paradigm not in profiles:
             continue
-        profile = profiles[paradigm]
+        profile, fact_failures = _bound_profile_to_release_facts(
+            paradigm,
+            profiles[paradigm],
+            thresholds,
+            preflight.get("observed_release_facts", {}),
+        )
+        evidence_failures.extend(fact_failures)
         rows, summary = evaluate_data_adequacy({paradigm: thresholds}, {paradigm: profile})
         gate_rows.extend(rows.to_dict(orient="records"))
         if summary[paradigm]["status"] == "PASS":
             eligible.append(
                 {
                     "paradigm": paradigm,
-                    "information_match_score": float(profile.get("information_match_score", 0.0)),
+                    "information_match_score": _information_match_score(
+                        profile, thresholds, preflight.get("coverage_ratio", 0.0)
+                    ),
                 }
             )
     eligible = sorted(eligible, key=lambda item: (-item["information_match_score"], item["paradigm"]))
     selected = eligible[: int(qualification_config["new_release_activation"]["maximum_external_paradigms"])]
-    ready = len(selected) == int(qualification_config["new_release_activation"]["maximum_external_paradigms"])
+    ready = not evidence_failures and len(selected) == int(
+        qualification_config["new_release_activation"]["maximum_external_paradigms"]
+    )
     return {
         "status": "READY_FOR_NEW_DATA_ARENA" if ready else "DATA_ADEQUACY_UNDERPOWERED",
         "run_authorized": ready,
         "preflight": preflight,
+        "adequacy_evidence": {**evidence, "failures": sorted(set(evidence_failures))},
         "data_adequacy_checks": gate_rows,
         "selected_external_paradigms": selected,
         "include_internal_baseline": True,

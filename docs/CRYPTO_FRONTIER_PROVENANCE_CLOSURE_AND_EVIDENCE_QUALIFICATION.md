@@ -77,7 +77,7 @@ Run:
 python scripts/crypto_frontier_evidence_qualification.py activation-plan --manifest <release-manifest>
 ```
 
-The entry first runs the existing `ingress-preflight`, then applies the frozen adequacy profiles, selects at most the two highest information-match external paradigms and adds the internal baseline. It authorizes a fixed development-only Arena only when both external paradigms pass. Otherwise it returns `DATA_ADEQUACY_UNDERPOWERED` and `NO_LARGE_EXPERIMENT`.
+The entry first runs the existing `ingress-preflight`. It derives row, date, history, asset, feature and turnover upper bounds from the content-hashed ingress files, then requires a separately hashed adequacy-evidence CSV bound to the observed release content hash. Inline `adequacy_profiles` and `information_match_score` are ignored. Evidence claims above observed release facts are rejected, and the match score is derived from verified adequacy ratios and coverage. The entry selects at most the two highest information-match external paradigms and adds the internal baseline. It authorizes a fixed development-only Arena only when both external paradigms pass. Otherwise it returns `DATA_ADEQUACY_UNDERPOWERED` and `NO_LARGE_EXPERIMENT`.
 
 ## Bias and promotion boundary
 

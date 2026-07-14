@@ -215,6 +215,54 @@ def preflight_external_release(manifest_path: Path, contract: dict[str, Any]) ->
     if not manifest.get("consumer_ids"):
         failures.append("NO_REGISTERED_CONSUMER")
 
+    observed_release_facts: dict[str, Any] = {
+        "row_count": int(len(combined)),
+        "unique_dates": 0,
+        "history_days": 0,
+        "minimum_cross_sectional_assets": 0,
+        "feature_non_null_rate": 0.0,
+        "positive_variance_feature_fraction": 0.0,
+        "maximum_turnover_observations": 0,
+    }
+    if not combined.empty and event_field in combined.columns:
+        observed_event = pd.to_datetime(combined[event_field], utc=True, errors="coerce")
+        valid_event = observed_event.dropna()
+        if not valid_event.empty:
+            event_day = observed_event.dt.floor("D")
+            unique_dates = int(event_day.nunique())
+            observed_release_facts["unique_dates"] = unique_dates
+            observed_release_facts["history_days"] = int(
+                (valid_event.max().floor("D") - valid_event.min().floor("D")).days + 1
+            )
+            observed_release_facts["maximum_turnover_observations"] = max(unique_dates - 1, 0)
+            asset_field = manifest.get("adequacy_asset_field")
+            if not asset_field:
+                preferred = [column for column in ("symbol", "asset", "instrument", "ticker") if column in combined]
+                non_time_primary = [
+                    column
+                    for column in primary_key
+                    if column not in {event_field, observable_field, maturity_field}
+                ]
+                asset_field = (preferred or non_time_primary or [None])[0]
+            if asset_field in combined.columns:
+                per_day_assets = combined.assign(__event_day=event_day).groupby("__event_day")[asset_field].nunique()
+                if not per_day_assets.empty:
+                    observed_release_facts["minimum_cross_sectional_assets"] = int(per_day_assets.min())
+
+    excluded_fields = set(primary_key) | {event_field, observable_field, maturity_field}
+    declared_features = [column for column in manifest.get("adequacy_feature_fields", []) if column in combined]
+    numeric_features = declared_features or [
+        column
+        for column in combined.select_dtypes(include=[np.number]).columns
+        if column not in excluded_fields
+    ]
+    if numeric_features:
+        feature_frame = combined[numeric_features]
+        observed_release_facts["feature_non_null_rate"] = float(feature_frame.notna().mean().min())
+        observed_release_facts["positive_variance_feature_fraction"] = float(
+            (feature_frame.nunique(dropna=True) > 1).mean()
+        )
+
     unique_failures = sorted(set(failures))
     result.update(
         {
@@ -227,6 +275,7 @@ def preflight_external_release(manifest_path: Path, contract: dict[str, Any]) ->
             "per_file_checks": file_records,
             "coverage_ratio": coverage,
             "minimum_coverage_ratio": minimum_coverage,
+            "observed_release_facts": observed_release_facts,
             "point_in_time_checked": not any(
                 failure in unique_failures
                 for failure in ("TIME_FIELDS_MISSING", "TIME_PARSE_FAILURE", "POINT_IN_TIME_ORDER_VIOLATION")

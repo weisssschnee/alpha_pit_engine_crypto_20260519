@@ -13,13 +13,24 @@
     "run_only_if_data_adequacy_passes": true
   },
   "entry_command": "python scripts/crypto_frontier_evidence_qualification.py activation-plan --manifest <release-manifest>",
-  "required_manifest_extension": "adequacy_profiles keyed by registered paradigm id",
+  "required_manifest_extension": "content-hash-bound adequacy_evidence CSV with source_content_sha256, exact schema and producer identity",
+  "trust_boundary": {
+    "inline_adequacy_profiles_trusted": false,
+    "inline_information_match_score_trusted": false,
+    "observed_release_facts_derived_from_ingress_files": true,
+    "evidence_claims_above_observed_facts_rejected": true,
+    "information_match_score_derived_from_verified_adequacy_ratios_and_coverage": true
+  },
   "sequence": [
     "existing ingress-preflight",
+    "derive row/date/history/asset/feature/turnover facts from content-hashed ingress files",
+    "verify adequacy-evidence hash, source binding, exact schema and producer",
+    "reject or clamp evidence claims that exceed observed release facts",
     "paradigm compatibility and Data Adequacy Gate",
     "select the two highest information-match external paradigms",
     "add current internal baseline",
     "freeze fixed development-only budget",
     "run Arena only when both selected paradigms pass adequacy"
-  ]
+  ],
+  "spoof_negative_contract": "A two-date one-asset release that claims threshold-passing profiles must return DATA_ADEQUACY_UNDERPOWERED, run_authorized=false and NO_LARGE_EXPERIMENT."
 }

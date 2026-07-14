@@ -1,0 +1,30 @@
+{
+  "repair_id": "NEW_DATA_ACTIVATION_TRUST_BOUNDARY_REPAIR_20260714",
+  "failed_evidence_subject_sha": "b8647a077b8cea9a0f991ef0351acb81dbe84535",
+  "review_decision": "REVIEW_FAIL",
+  "blocking_issue": "Activation trusted manifest-inline adequacy profiles and information-match scores after ingress preflight, allowing an inadequate release to self-authorize a large Arena.",
+  "repair": {
+    "inline_adequacy_profiles_trusted": false,
+    "inline_information_match_score_trusted": false,
+    "adequacy_evidence_hash_required": true,
+    "adequacy_evidence_source_content_binding_required": true,
+    "adequacy_evidence_exact_schema_required": true,
+    "adequacy_evidence_producer_required": true,
+    "observed_release_facts_derived_from_ingress_files": true,
+    "claims_above_observed_release_facts_rejected": true,
+    "information_match_score_derived": true
+  },
+  "spoof_negative": {
+    "release_days": 2,
+    "release_assets": 1,
+    "inline_profiles_claim_pass": true,
+    "hash_bound_evidence_claims_pass": true,
+    "expected_status": "DATA_ADEQUACY_UNDERPOWERED",
+    "expected_run_authorized": false,
+    "expected_budget_action": "NO_LARGE_EXPERIMENT",
+    "test_status": "PASS"
+  },
+  "fit_count": 0,
+  "performance_search": false,
+  "forbidden_roles_opened": false
+}

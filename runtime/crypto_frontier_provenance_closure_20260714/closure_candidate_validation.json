@@ -3,22 +3,24 @@
   "status": "PASS_CLOSURE_CANDIDATE_LOCAL",
   "tests": {
     "command": "python -m pytest tests/test_crypto_frontier_evidence_qualification.py tests/test_crypto_frontier_research_v2.py tests/test_external_frontier_assimilation.py tests/test_native_aggtrades_release.py tests/test_native_aggtrades_benchmark.py -q",
-    "passed": 30,
+    "passed": 31,
     "failed": 0,
     "warnings": 2,
-    "runtime_seconds": 11.54
+    "runtime_seconds": 12.88
   },
   "base_frontier_check": "CRYPTO_FRONTIER_RESEARCH_CHECK_PASSED",
   "base_artifact_count": 122,
   "base_bundle_sha256": "99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2",
   "qualification_check": "CRYPTO_FRONTIER_EVIDENCE_QUALIFICATION_CHECK_PASSED",
-  "qualification_artifact_count_before_this_validation_record": 26,
+  "qualification_artifact_count": 29,
   "main_conclusion": "CURRENT_DATA_UNDERPOWERED",
   "git_diff_check": "PASS",
   "architecture_control_registry_modified": false,
   "generated_project_graph_modified": false,
-  "independent_reproducer": "PENDING_AT_EVIDENCE_SUBJECT_SHA",
-  "independent_gatekeeper": "PENDING_AT_EVIDENCE_SUBJECT_SHA",
+  "prior_evidence_subject_sha": "b8647a077b8cea9a0f991ef0351acb81dbe84535",
+  "independent_reviewer": "REVIEW_FAIL_ACTIVATION_TRUST_BOUNDARY_REPAIRED_PENDING_REREVIEW",
+  "independent_reproducer": "PENDING_AT_REPAIRED_EVIDENCE_SUBJECT_SHA",
+  "independent_gatekeeper": "PENDING_AT_REPAIRED_EVIDENCE_SUBJECT_SHA",
   "candidate_promotion": false,
   "forward_read": false
 }

@@ -4,7 +4,6 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
 
 import numpy as np
 import pandas as pd
@@ -17,11 +16,113 @@ from alphafactory_crypto.frontier_v2.qualification import (
     evaluate_data_adequacy,
     plan_new_release_activation,
 )
+from alphafactory_crypto.frontier_v2.release import canonical_sha256, sha256_file
 
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG = REPO / "config" / "crypto_frontier_evidence_qualification_v1.json"
+BASE_CONFIG = REPO / "config" / "crypto_frontier_research_v2.json"
 BASE_ROOT = REPO / "runtime" / "crypto_frontier_research_v2_20260713"
+
+
+def _write_activation_release(
+    root: Path,
+    qualification_config: dict,
+    *,
+    days: int,
+    assets: int,
+    include_spoofed_inline_profiles: bool = False,
+) -> Path:
+    dates = pd.date_range("2024-01-01", periods=days, freq="D", tz="UTC")
+    repeated_dates = dates.repeat(assets)
+    symbols = np.tile([f"ASSET_{index:02d}" for index in range(assets)], days)
+    rows = len(repeated_dates)
+    data = pd.DataFrame(
+        {
+            "symbol": symbols,
+            "event_time": repeated_dates.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "observed_time": (repeated_dates + pd.Timedelta(seconds=1)).strftime(
+                "%Y-%m-%dT%H:%M:%SZ"
+            ),
+            "maturity": (repeated_dates + pd.Timedelta(seconds=1)).strftime(
+                "%Y-%m-%dT%H:%M:%SZ"
+            ),
+            "price": np.arange(rows, dtype=float) + 1.0,
+            "quantity": (np.arange(rows, dtype=float) % 17.0) + 1.0,
+        }
+    )
+    data_path = root / "development.csv"
+    data.to_csv(data_path, index=False, lineterminator="\n")
+    coverage_path = root / "coverage.csv"
+    pd.DataFrame({"symbol": sorted(set(symbols)), "coverage": 1.0}).to_csv(
+        coverage_path, index=False, lineterminator="\n"
+    )
+    file_record = {"path": data_path.name, "sha256": sha256_file(data_path), "rows": rows}
+    content_sha = canonical_sha256(
+        [{"path": data_path.resolve().as_posix(), "sha256": file_record["sha256"], "rows": rows}]
+    )
+
+    evidence_rows = []
+    metric_to_threshold = {
+        "development_dates": "min_development_dates",
+        "training_samples": "min_training_samples",
+        "cross_sectional_assets": "min_cross_sectional_assets",
+        "feature_non_null_rate": "min_feature_non_null_rate",
+        "positive_variance_feature_fraction": "min_positive_variance_feature_fraction",
+        "history_days": "min_history_days",
+        "label_support": "min_label_support",
+        "turnover_observations": "min_turnover_observations",
+        "independent_evaluation_blocks": "min_independent_evaluation_blocks",
+    }
+    spoofed_profiles = {}
+    for paradigm in ("QLIB_CROSS_SECTIONAL_DAILY", "DEEPDOW_DIRECT_5D"):
+        thresholds = qualification_config["data_adequacy_gate"][paradigm]
+        spoofed_profiles[paradigm] = {}
+        for metric, threshold_key in metric_to_threshold.items():
+            value = thresholds[threshold_key]
+            evidence_rows.append({"paradigm": paradigm, "metric": metric, "value": value})
+            spoofed_profiles[paradigm][metric] = value
+        spoofed_profiles[paradigm]["information_match_score"] = 999.0
+    evidence_path = root / "adequacy_evidence.csv"
+    pd.DataFrame(evidence_rows, columns=["paradigm", "metric", "value"]).to_csv(
+        evidence_path, index=False, lineterminator="\n"
+    )
+
+    manifest = {
+        "release_id": "TEST_ACTIVATION_RELEASE",
+        "family": "cross_venue_trades_quotes",
+        "data_role": "DEVELOPMENT",
+        "source_url": "https://example.invalid/source",
+        "license": "test",
+        "content_sha256": content_sha,
+        "schema": list(data.columns),
+        "event_time_semantics": "exchange event timestamp",
+        "observable_time_semantics": "arrival timestamp",
+        "maturity_semantics": "arrival timestamp",
+        "coverage_ledger": {"path": coverage_path.name, "sha256": sha256_file(coverage_path)},
+        "missing_policy": "no fill",
+        "allowed_research_roles": ["DEVELOPMENT_ONLY_REPRODUCTION"],
+        "files": [file_record],
+        "primary_key": ["symbol", "event_time"],
+        "time_fields": {"event": "event_time", "observable": "observed_time", "maturity": "maturity"},
+        "coverage_ratio": 1.0,
+        "minimum_coverage_ratio": 0.95,
+        "consumer_ids": ["QLIB_CROSS_SECTIONAL_DAILY", "DEEPDOW_DIRECT_5D"],
+        "adequacy_asset_field": "symbol",
+        "adequacy_feature_fields": ["price", "quantity"],
+        "adequacy_evidence": {
+            "path": evidence_path.name,
+            "sha256": sha256_file(evidence_path),
+            "schema": ["paradigm", "metric", "value"],
+            "source_content_sha256": content_sha,
+            "producer_id": "TEST_FIXED_ADAPTER_V1",
+        },
+    }
+    if include_spoofed_inline_profiles:
+        manifest["adequacy_profiles"] = spoofed_profiles
+    manifest_path = root / "release.json"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    return manifest_path
 
 
 class EvidenceQualificationTests(unittest.TestCase):
@@ -136,42 +237,39 @@ class EvidenceQualificationTests(unittest.TestCase):
 
     def test_direct_activation_selects_two_adequate_external_paradigms(self) -> None:
         config = json.loads(CONFIG.read_text(encoding="utf-8"))
-        profiles = {}
-        for paradigm in ("QLIB_CROSS_SECTIONAL_DAILY", "DEEPDOW_DIRECT_5D"):
-            threshold = config["data_adequacy_gate"][paradigm]
-            profiles[paradigm] = {
-                "development_dates": threshold["min_development_dates"],
-                "training_samples": threshold["min_training_samples"],
-                "cross_sectional_assets": threshold["min_cross_sectional_assets"],
-                "feature_non_null_rate": threshold["min_feature_non_null_rate"],
-                "positive_variance_feature_fraction": threshold[
-                    "min_positive_variance_feature_fraction"
-                ],
-                "history_days": threshold["min_history_days"],
-                "label_support": threshold["min_label_support"],
-                "turnover_observations": threshold["min_turnover_observations"],
-                "independent_evaluation_blocks": threshold[
-                    "min_independent_evaluation_blocks"
-                ],
-                "information_match_score": 0.9 if paradigm.startswith("QLIB") else 0.8,
-            }
+        base_config = json.loads(BASE_CONFIG.read_text(encoding="utf-8"))
         with tempfile.TemporaryDirectory(dir=REPO / "runtime") as directory:
-            manifest = Path(directory) / "release.json"
-            manifest.write_text(json.dumps({"adequacy_profiles": profiles}), encoding="utf-8")
-            with patch(
-                "alphafactory_crypto.frontier_v2.qualification.preflight_external_release",
-                return_value={"ready": True, "failures": []},
-            ):
-                result = plan_new_release_activation(
-                    manifest,
-                    {"external_release_entry": {}},
-                    config,
-                )
+            manifest = _write_activation_release(Path(directory), config, days=600, assets=20)
+            result = plan_new_release_activation(manifest, base_config, config)
         self.assertEqual(result["status"], "READY_FOR_NEW_DATA_ARENA")
         self.assertTrue(result["run_authorized"])
         self.assertEqual(len(result["selected_external_paradigms"]), 2)
         self.assertEqual(result["budget_action"], "FREEZE_FIXED_DEVELOPMENT_ONLY_BUDGET")
+        self.assertEqual(result["adequacy_evidence"]["status"], "PASS")
+        self.assertTrue(all(item["information_match_score"] <= 1.0 for item in result["selected_external_paradigms"]))
         self.assertFalse(result["boundaries"]["candidate_promotion"])
+
+    def test_direct_activation_rejects_spoofed_adequacy_above_release_facts(self) -> None:
+        config = json.loads(CONFIG.read_text(encoding="utf-8"))
+        base_config = json.loads(BASE_CONFIG.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory(dir=REPO / "runtime") as directory:
+            manifest = _write_activation_release(
+                Path(directory),
+                config,
+                days=2,
+                assets=1,
+                include_spoofed_inline_profiles=True,
+            )
+            result = plan_new_release_activation(manifest, base_config, config)
+        self.assertEqual(result["status"], "DATA_ADEQUACY_UNDERPOWERED")
+        self.assertFalse(result["run_authorized"])
+        self.assertEqual(result["budget_action"], "NO_LARGE_EXPERIMENT")
+        self.assertTrue(
+            any(
+                failure.startswith("ADEQUACY_EVIDENCE_EXCEEDS_RELEASE_FACTS")
+                for failure in result["adequacy_evidence"]["failures"]
+            )
+        )
 
 
 if __name__ == "__main__":
