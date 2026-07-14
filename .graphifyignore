@@ -1,0 +1,4 @@
+# Generated Graphify products are outputs, never graph inputs.
+/.planning/graphs/graph.json
+/.planning/graphs/graph.html
+/.planning/graphs/GRAPH_REPORT.md

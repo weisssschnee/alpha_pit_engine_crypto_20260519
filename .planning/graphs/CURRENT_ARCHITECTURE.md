@@ -1,167 +1,150 @@
-# Current Architecture
+# Crypto Current Architecture
 
-Generated: 2026-07-11
+Updated: 2026-07-14 Asia/Hong_Kong
 
-## Scope
+## Scope and authority
 
-This is the curated current architecture of the crypto AlphaFactory research/search stack. It intentionally excludes historical stage scripts, superseded reports, raw runtime files, and one-off diagnostics unless they still define an active contract.
+This file is the small, human-maintained view of the currently accepted Crypto architecture and evidence boundaries. It is deliberately branch-aware.
 
-This is not alpha proof and not deployment authorization.
+- **RAW**: `.planning/graphs/graph.json`, `GRAPH_REPORT.md`, and optional `graph.html` are generated from the checked-out `main` tree. They are code-navigation aids only.
+- **CURRENT**: this file records the accepted architecture and decision state. It is not generated from RAW and is not runtime proof.
+- **History**: Git commits, tags, manifests, reports, and runtime artifacts remain immutable evidence. Supersession changes their interpretation, not their contents.
 
-## Architecture Diagram
+There is no architecture registry in `main@dfe2012107955997c200ec5e199e5bdae4344d9c`. The existing `crypto_architecture_control_registry_v1.json` and frontier execution stack live on the accepted audit closure line. They are not copied into `main` merely to make a diagram. No second registry, `current.json`, declared/static/observed graph set, runtime-trace framework, or edge-level Graph gate is authorized.
+
+## Branch-aware architecture map
 
 ```mermaid
-flowchart TD
-  Data["Data Panels\nLocal full AlphaFactory data\nPC2 executable subset\nBinance/OKX crypto panels"]
-  Source["Source / PIT / Lag Controls\nsource trace\nchecksum status\npublication lag\nsame-bar/future leakage block"]
-  Field["Field Contract Layer\nsemantic roles\nallowed fields\nmaterialization parity\nfail-closed evaluator"]
-  Features["Feature / Label / Regime Builders\ntyped fields\nlabels\nregime/event states\nfeature materialization"]
-  Memory["Search Memory\npositive priors\nrejection memory\nfamily/motif/skeleton caps"]
-  Queue["Search Queue Builder\nfamily-diversified queue\nCEM/AST/UCT/raw lanes\nreward-integrated target"]
-  Semantic["Semantic Compiler\nregistry-backed value domains\ncanonical rewrite\nconstant-only rejection"]
-  Proxy["Proxy Evaluator\nA7V3S9 prereward OOS/control proxy\nsuccessive halving\ncheckpointed shards\nnot sufficient as final reward"]
-  LagFilter["Lag-first Survivor Filter\npublication/source lag gate\nstrict reward receives survivors only\ndynamic balanced shards"]
-  Identity["Signal Identity Layer\norientation-canonical weights\nexact representative evaluation\nhigh-correlation review only"]
-  NumericCache["Shared Numeric Cache\nsurvivor field union\nmanifest-backed NumPy memmaps\none panel decode per flow"]
-  Reward["Strict Reward Gate\ntrain orientation\nvalidation/test/recent/stress\ncommon controls\nnon-overlap floors"]
-  Aggregate["Aggregate / Dedupe / Triage\nexact AST source-subtree review\nsignal-equivalence hold\nportfolio-marginal review"]
-  Assets["Asset Custody / PC Migration\nlocal full data\nPC2 preserve pack\nPC1 retirement checklist"]
-  Governance["Governance Registry\nA7PM source of truth\nplanning state\nblocked claims\nallowed next tasks"]
+flowchart LR
+  Base["Common base\nac9fd24"]
+  Main["MAIN CHECKOUT\ndfe2012 baseline\nfeature/runtime inventory metadata"]
+  Inventory["Inventory snapshot\n94 base fields\n5,211 derived specs\n10 A7EFF2-loaded fields\nNO search authorization"]
+  Audit["ACCEPTED AUDIT LINE\n4726795\nclosure tag"]
+  Arena["Multi-paradigm contracts\nForecastArtifact / PortfolioArtifact\nnative evaluator + common bridge"]
+  Qualification["Evidence qualification\nQlib comparison repaired\nDeepDow diagnosed\nData Adequacy Gate"]
+  Hold["CURRENT_DATA_UNDERPOWERED\nFINANCIAL_GATE_HOLD_RESEARCH"]
+  NewData["Dormant new-data activation\ningress-preflight -> adequacy gate\nmax 2 external paradigms + baseline"]
+  Sealed["SEALED\nchallenge / forward / recent / May stress\nno promotion / no adaptive memory"]
+  Legacy["Historical A7 / B1S / Epoch-0/1R/2/2B\nevidence lineage, not one current Epoch"]
 
-  Assets --> Data --> Source --> Field --> Features
-  Features --> Queue
-  Memory --> Queue
-  Queue --> Semantic --> Proxy --> LagFilter --> Identity --> Reward --> Aggregate
-  Features --> NumericCache --> Reward
-  Aggregate --> Memory
-  Governance -.gates.-> Source
-  Governance -.gates.-> Field
-  Governance -.gates.-> Queue
-  Governance -.gates.-> Reward
-  Governance -.records.-> Aggregate
+  Base --> Main --> Inventory
+  Base --> Audit --> Arena --> Qualification --> Hold
+  Legacy --> Audit
+  Hold -. "only after a qualified new release" .-> NewData
+  Hold --> Sealed
+
+  classDef main fill:#dbeafe,stroke:#2563eb,color:#172554
+  classDef accepted fill:#dcfce7,stroke:#16a34a,color:#052e16
+  classDef dormant fill:#fef3c7,stroke:#d97706,color:#451a03
+  classDef sealed fill:#fee2e2,stroke:#dc2626,color:#450a0a
+  classDef historical fill:#e5e7eb,stroke:#6b7280,color:#111827
+  class Main,Inventory main
+  class Audit,Arena,Qualification,Hold accepted
+  class NewData dormant
+  class Sealed sealed
+  class Base,Legacy historical
 ```
 
-## Active Component Contracts
+Colors supplement the text labels; they do not carry meaning by themselves. Blue is the checked-out `main` baseline, green is accepted evidence on the closure line, yellow is dormant and conditional, red is sealed, and gray is historical lineage.
 
-| Component | Current role | Current evidence |
+## Repository HEAD reality
+
+`main@dfe2012` contains the 2026-07-14 static runtime inventory and the earlier A7 code/history. The inventory is metadata and lineage evidence only:
+
+- 94 aggTrades base-registry rows and 5,211 derived specs were recovered from historical commit `1ed5acd`;
+- ten fields are verified as loaded by the A7EFF2 release entrypoint;
+- the inventory does not authorize search, replay, alpha proof, forward use, or a claim that A7EFF2 is the whole program's current Epoch;
+- frontier Arena, Qlib/DeepDow qualification, Data Adequacy Gate, and direct new-data activation code are not executable from this `main` checkout.
+
+The phrase “current Epoch” in `reports/CRYPTO_FEATURE_RUNTIME_INVENTORY_20260714.md` is therefore local to that inventory: it means the latest verifiable A7 release represented by that package. It must not collapse B1S, Epoch-0, Epoch-1R, Epoch-2, Epoch-2B, and Frontier into A7EFF2.
+
+## Accepted project evidence
+
+The accepted project evidence is anchored at:
+
+```text
+branch: origin/audit/evalreset-collapse-forensics-20260711
+commit: 4726795f61052470d56e2d1475e4f6da9d262943
+tag:    crypto-frontier-provenance-closure-20260714
+```
+
+That closure proves the following within its stated development-only scope:
+
+| Capability or result | Qualified status | Evidence identity |
 |---|---|---|
-| Data panels | Provide controlled research data at 1h primary horizon, with 1m/15m available but not yet primary search stack | `.planning/PROJECT.md`, `.planning/STATE.md` |
-| Asset custody | Keep useful crypto assets off the retiring PC1 and prove migration with hashes/manifests before deletion | PC1 preserve pack hash `715F0A23E9AAB23794ED870A14AC5E0B35ED40C45AD15010A8FFE3245A383D07`, PC2 inventory, local `G:\AlphaFactory_CryptoData` |
-| Source/PIT controls | Block same-bar/future leakage and record source-lag/checksum status | `CRYPTO_A7LIVE1_SOURCE_LAG_CHECKSUM_AUDIT_20260704.md`, A7SOURCE reports |
-| Field contracts | Enforce field role, materialization, evaluator parity, and fail-closed behavior | A7AI-F0/F1/F2/F3/F4 |
-| Feature/label/regime builders | Convert data fields into typed features, labels, and state variables | A7AA, A7FF, A7FFCORE reports |
-| Search memory | Feed prior positives and rejections into next queue construction | A7MEM records and current planning state |
-| Queue builder | Produce bounded, family-diversified, sharded search queues; current next version should be reward-integrated/source-lag-aware rather than proxy-only | A7SEARCH/A7SOURCE planning state |
-| Semantic compiler | Propagate contracted field value domains through ASTs, rewrite nonconstant identities, and reject constant-only collapse before expensive numeric work | ADR 0001, `semantic_domains.py`, `crypto_field_value_domain_rules_v1.json` |
-| Proxy evaluator | Score broad candidates cheaply before strict reward; proxy outputs require fresh source-lag proof and strict reward before promotion | A7V3S9 prereward proxy stack, PC2 source-lag/reward rerun |
-| Strict reward | Reject headline-metric artifacts with train/OOS/stress/control/source-lag gates; use common random controls, prepared rank/weight reuse, and a shared numeric memmap cache | `CRYPTO_A7EFF1_SEARCH_REWARD_EFFICIENCY_AUDIT_20260710.md`, A7REWARD reports |
-| Signal identity | Evaluate one representative per exact portfolio-weight identity, restore aliases before policy gates, and keep high-similarity non-exact signals reviewable | `signal_identity.py`, A7EFF2 PC2 evidence |
-| Aggregate/dedupe/triage | Restore aliases for lineage/source policy, emit representative-only memory feedback, compare exact AST subtrees, and route unstable SafeDiv/marginal trade-offs to review | A7SOURCE6 outputs and `CRYPTO_A7EFF2_SEMANTIC_IDENTITY_SAFEDIV_INTEGRATION_20260710.md` |
-| Governance | Decide what is current, superseded, blocked, or authorized | A7PM registry and planning files |
+| Adapter-neutral forecast and direct-portfolio artifacts | `ACCEPTED_DEVELOPMENT_ONLY` | `runtime/crypto_frontier_research_v2_20260713/architecture_decision.json` on the closure tag |
+| Native Qlib v0.9.7 reproduction | Reproduced; original full/control fit was degenerate | closure-tagged Qlib reproduction and qualification assets |
+| Native DeepDow v0.2.3 reproduction | Reproduced; comparison, fit, and mapping are not exactly degenerate | closure-tagged DeepDow reproduction and qualification assets |
+| Common development bridge | One-day delayed weights with 5 bps L1-turnover cost | corrected Arena evidence on the closure tag |
+| Qlib repair | `EXTERNAL_PARADIGM_COMPARISON_DEGENERATE_FIXED` | full/control predictions and weights differ after one frozen non-search repair |
+| Qlib economic qualification | `DATA_ADEQUACY_UNDERPOWERED` | 23 development dates; LCB crosses zero |
+| DeepDow economic qualification | `DATA_ADEQUACY_UNDERPOWERED` | only five independent five-day development blocks |
+| Data Adequacy Gate | Implemented on closure line | predeclared minimum dates, samples, assets, history, label, turnover, and independent blocks |
+| New-data activation | Implemented on closure line, dormant | content-hash-bound ingress facts; no large run unless adequacy passes |
 
-## Active Runtime Flow
+The machine-readable closure manifest reports `REPOSITORY_PROVENANCE_CLOSURE_COMPLETED`. The annotated tag records `Final Reproducer: PASS`, `Final Gatekeeper: PASS`, base bundle SHA256 `99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2`, `CURRENT_DATA_UNDERPOWERED`, and `HOLD_RESEARCH`.
+
+The user-accepted project interpretation, which governs subsequent work, is:
 
 ```text
-source-audited data
--> field contract enforcement
--> feature/label/regime construction
--> memory-aware search queue
--> semantic canonicalization / constant-only rejection
--> sharded proxy evaluation
--> source-lag survivor filter
--> exact portfolio-signal representative selection
--> shared numeric cache
--> strict reward gate
--> alias restoration / representative-only memory feedback
--> exact source-subtree / SafeDiv / marginal triage
--> memory update / next queue
+CRYPTO_FRONTIER_PROVENANCE_CLOSURE_ACCEPTED
+CURRENT_DATA_UNDERPOWERED
+FINANCIAL_GATE_HOLD_RESEARCH
 ```
 
-## Current Evaluated Data Split
+This does **not** establish that data is the unique bottleneck, that Qlib or DeepDow is economically ineffective, that an external component has a development increment, that any system is OOS robust, or that a candidate is promotion-eligible.
 
-The A7EFF2 frozen regression used the following actual PC2 shared-cache windows, not the full nominal validation/OOS contracts:
-
-| Role | Actual selected UTC window | Hours | Policy |
-|---|---|---:|---|
-| Train/orientation | 2024-01-01 00:00 to 2024-12-31 23:00 | 8784 | Full available 2024 split |
-| Validation OOS | 2025-06-01 00:00 to 2025-06-30 23:00 | 720 | Last 720 hours of 2025H1 |
-| Historical test OOS | 2025-12-02 00:00 to 2025-12-31 23:00 | 720 | Last 720 hours of 2025H2 |
-| Recent OOS | 2026-04-01 00:00 to 2026-04-30 23:00 | 720 | Last 720 hours of Jan-Apr contract |
-| Known stress veto | 2026-05-01 00:00 to 2026-05-26 00:00 | 601 | All available May stress hours |
-
-The delivered 2023H2 backfill exists in data custody but was **not** materialized into this A7EFF2 replay panel or numeric cache. Therefore A7EFF2 does not prove robustness on 2023H2. The machine-readable evidence is under `runtime/a7eff2_git_release_20260711/`.
-
-## Current Search State
-
-No active process is authorized to produce alpha-ready candidates. The PC2 reward-integrated incremental-validation flow is complete.
+## Accepted causal chain
 
 ```text
-focused exact-subtree validation:
-  source_blueprints: 8
-  queue_rows: 53
-  semantic_canonical_rewrites: 8
-  semantic_constant_rejects: 3
-  source_lag_survivors: 33
-  exact_signal_representatives: 18
-  exact_alias_evaluations_avoided: 15
-  reward_rows: 132
-  accepted_rows: 16
-  reward_representative_triage_rows: 6
-  final_incremental_memory_feedback_rows: 1
-  memory_credit_release_status: HOLD_A7INPUT0_COVERAGE_GAP
-  eval_error_rows: 0
-  incremental_interactions: 1
-  oos_equivalent_nonunique: 5
-  canonical_repass_failures: 1
-  portfolio_marginal_reviews: 1
-
-SafeDiv review:
-  denominator_q01_to_median: 0.020154
-  signal_abs_p99_to_median: 462.110403
-  top_1pct_abs_signal_mass_share: 0.743924
-  decision: HOLD_PORTFOLIO_MARGINAL_REVIEW
-
-efficiency verification:
-  baseline_total_seconds: about 1735
-  optimized_v2_total_seconds: 136.688
-  total_speedup: about 12.7x
-  accepted_set_match: exact 16/16
-  gate_and_reject_match: exact
+qualified data release
+-> paradigm-native representation and target/horizon
+-> native learner or direct allocation model
+-> ForecastArtifact or PortfolioArtifact
+-> native evaluator
+-> explicit delayed common bridge
+-> actual weight-change turnover and costs
+-> Data Adequacy Gate
+-> development evidence qualification
+-> OOS proof (absent and sealed)
 ```
 
-The next architecture objective is to close A7INPUT0 coverage for the final formula's two inputs, then apply cluster-aware marginal credit and representative-only A7MEM/CEM/UCB feedback. Typed State/subgraph governance exists, but reusable State materialization is not yet active in the main search/reward loop. A proxy-only expansion remains diagnostic and must not be used as the source of accepted alpha candidates.
+The key architecture advance is the ability to carry both forecast-first and portfolio-first paradigms without forcing both through the old single formula-score mapping. Native and bridge evaluators remain separate.
 
-## Asset Custody State
+## Superseded current-state claims
 
-PC1 is being retired. Useful crypto assets must not remain solely on PC1.
+The following old planning claims are no longer current instructions:
+
+- “close A7INPUT0 coverage, update A7MEM/CEM/UCB, then run a broader reward-integrated search”;
+- “A7EFF2 is the current Crypto Epoch” outside the inventory's narrow release meaning;
+- “Qlib full vs control 0/0 means Alpha158 has no increment”;
+- “DeepDow is an informative negative”;
+- any implication that existing positive historical metrics reopen challenge, forward, recent, May stress, promotion, or adaptive cross-sprint memory.
+
+Historical files remain in Git as evidence. This document supersedes only their use as the current action plan.
+
+## Frozen boundaries
 
 ```text
-PC1 preserve pack:
-  local path:
-    G:\Chengbo\runtime\pc1_crypto_preserve_pack_20260709_results\pc1_crypto_preserve_pack_20260709.tar
-  PC2 path:
-    D:\HermesWorker\runtime\crypto_line\pc1_crypto_preserve_pack_20260709\pc1_crypto_preserve_pack_20260709.tar
-  SHA256:
-    715F0A23E9AAB23794ED870A14AC5E0B35ED40C45AD15010A8FFE3245A383D07
-
-PC1 still contains:
-  D:\HermesWorker\GDrive\Project_V7_Rotation\alpha_pit_engine_crypto_20260519_remote (~1.04GB)
-  D:\HermesWorker\GDrive\AlphaFactory_CryptoData (~94.85GB)
-  D:\HermesWorker\runtime crypto/search outputs
-
-Verified non-PC1 custody:
-  local full data:
-    G:\AlphaFactory_CryptoData (~102.51GB)
-  PC2 executable subset:
-    D:\HermesWorker\data\crypto_line\AlphaFactory_CryptoData (~36.97GB)
-  PC2 runtime/search/reward/preserve roots:
-    D:\HermesWorker\runtime\crypto_line
+NEW_PERFORMANCE_SEARCH_FROZEN
+FORWARD_SEALED
+CHALLENGE_SEALED
+RECENT_SEALED
+MAY_STRESS_SEALED
+NO_CANDIDATE_PROMOTION
+NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 ```
 
-Deletion of PC1 assets is a separate destructive step. Before deleting, run a final inventory and compare against local/PC2 custody; do not infer deletion readiness from graph files alone.
+The next legal economic trigger is a genuinely new, independently delivered release. On the closure line, activation must run ingress preflight, derive hash-bound observed facts, pass the predeclared Data Adequacy Gate, select at most the two highest-information-match external paradigms, add the internal baseline, and freeze a development-only budget. Failure of adequacy returns `DATA_ADEQUACY_UNDERPOWERED` and `NO_LARGE_EXPERIMENT`.
 
-## Non-Architecture Files
+## Lightweight Graph maintenance
 
-The repository contains many historical stage scripts and reports. They are valuable evidence, but they are not all active architecture. Treat them as evolution records unless A7PM/current planning state marks them current.
+The project-local entrypoint is intentionally small:
 
-Use `ARTIFACT_LIFECYCLE.md` to classify process artifacts after milestones. Do not promote fast-iteration runtime outputs, superseded diagnostics, or temp/debug files into the active architecture.
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/maintain_crypto_navigation_graph.ps1 build
+powershell -ExecutionPolicy Bypass -File scripts/maintain_crypto_navigation_graph.ps1 check
+powershell -ExecutionPolicy Bypass -File scripts/maintain_crypto_navigation_graph.ps1 query -Question "Which entrypoint consumes signal identity?"
+```
+
+`build` regenerates RAW in an isolated temporary output directory, copies only the raw Graph products, and removes stale HTML when the graph is too large to render. `check` verifies source freshness and prevents the generated Graph files from indexing themselves. CURRENT remains this explicit human view; the maintenance entry does not generate an overlay or infer runtime execution.
