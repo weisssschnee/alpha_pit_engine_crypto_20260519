@@ -33,14 +33,14 @@
       "source": "internal_search_instrument",
       "target": "canonical_primitive_authority",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_SYNTHETIC_PARITY.json",
-        "evidence_sha256": "BB5F1E7B119E9503247B1786E191039B7A1114B76EA80A3DDDDAA2A5D6782041",
+        "evidence_sha256": "C67028338A8CE83D093AF49F011B1D7C7C69A21B7E7B6AC39E65780EF5D4CFEA",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -67,14 +67,14 @@
       "source": "internal_search_instrument",
       "target": "explicit_portfolio_mapping",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_SYNTHETIC_BEHAVIOR.json",
-        "evidence_sha256": "0583B74989AB1CA2C447414A92931645C4E1E017FD35AA01BA250B0CB3D6B52E",
+        "evidence_sha256": "52F24CB8AD94C7FB22350370C9429A5E65DE88DA4DA1DE3FC591FEE61DDF79C9",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -101,14 +101,14 @@
       "source": "internal_search_instrument",
       "target": "adaptive_strict_feasibility_feedback",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PROXY_STRICT_ALIGNMENT_SYNTHETIC.json",
-        "evidence_sha256": "60561B98A1CDBD675063F78209B81C4D45222037CC2A0E4A2D1C69FEF36A1996",
+        "evidence_sha256": "462C5EAA057091E880AFB8474167FFFA0FC986044E66509D8FCF3C5A49CBF7CC",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -135,14 +135,14 @@
       "source": "internal_search_instrument",
       "target": "legacy_b1s_epoch0_gross_feedback",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv",
-        "evidence_sha256": "B9355EEF9B7E43CE13DD6CF7C93D5C0905C51AE85D95A9635C4893EE85EEAD75",
+        "evidence_sha256": "C80825E15DD740F1CE0CE1E41C76466358795F95F462E75D23A42E220D8F94B0",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -169,14 +169,14 @@
       "source": "internal_search_instrument",
       "target": "formal_performance_search",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
-        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
+        "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "level": "DECLARED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -203,14 +203,14 @@
       "source": "internal_search_instrument",
       "target": "new_data_integration",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
-        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
+        "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "level": "DECLARED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -237,14 +237,14 @@
       "source": "internal_search_instrument",
       "target": "sealed_research_boundaries",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
-        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
+        "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "level": "DECLARED",
         "notes": [],
         "profile": "evidence-boundary-change",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       }
     },
     {
@@ -282,7 +282,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-14T19:37:36.303968+00:00",
+  "generated_at": "2026-07-14T20:15:37.393350+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -616,8 +616,8 @@
       "authority": {
         "path": "docs/adr/0002-capability-only-search-instrument-authority.md",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
-        "sha256": "8B0A6ACE052E470BCD16B38C5B842D2C9227E2D362D74E84D3583AB8C5E987FF",
-        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58"
+        "sha256": "C9160FBF5C8C4B91BCF8E4E7B0ECDE2807A7E91D0519DFE87CEE32AAFF2FE75C",
+        "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0"
       },
       "color": "#f9a825",
       "contracts": [
@@ -664,6 +664,7 @@
         "alphafactory_crypto_instrument_capability_harness_admission_receipt",
         "alphafactory_crypto_instrument_capability_harness_behavior_identity",
         "alphafactory_crypto_instrument_capability_harness_build_proposals",
+        "alphafactory_crypto_instrument_capability_harness_build_structural_mutation_space",
         "alphafactory_crypto_instrument_capability_harness_build_synthetic_case",
         "alphafactory_crypto_instrument_capability_harness_candidateevidence",
         "alphafactory_crypto_instrument_capability_harness_canonical_signal",
@@ -680,21 +681,26 @@
         "alphafactory_crypto_instrument_capability_harness_observable",
         "alphafactory_crypto_instrument_capability_harness_proposal_identity",
         "alphafactory_crypto_instrument_capability_harness_proposal_identity_payload",
+        "alphafactory_crypto_instrument_capability_harness_proposal_mutation_genes",
         "alphafactory_crypto_instrument_capability_harness_proposal_receipt",
         "alphafactory_crypto_instrument_capability_harness_proposalcontract",
         "alphafactory_crypto_instrument_capability_harness_proposalgrammarrule",
         "alphafactory_crypto_instrument_capability_harness_qualify_family",
         "alphafactory_crypto_instrument_capability_harness_rationale_1",
-        "alphafactory_crypto_instrument_capability_harness_rationale_131",
-        "alphafactory_crypto_instrument_capability_harness_rationale_61",
-        "alphafactory_crypto_instrument_capability_harness_rationale_621",
-        "alphafactory_crypto_instrument_capability_harness_rationale_700",
-        "alphafactory_crypto_instrument_capability_harness_rationale_755",
+        "alphafactory_crypto_instrument_capability_harness_rationale_136",
+        "alphafactory_crypto_instrument_capability_harness_rationale_163",
+        "alphafactory_crypto_instrument_capability_harness_rationale_179",
+        "alphafactory_crypto_instrument_capability_harness_rationale_66",
+        "alphafactory_crypto_instrument_capability_harness_rationale_688",
+        "alphafactory_crypto_instrument_capability_harness_rationale_767",
+        "alphafactory_crypto_instrument_capability_harness_rationale_822",
+        "alphafactory_crypto_instrument_capability_harness_rationale_924",
         "alphafactory_crypto_instrument_capability_harness_reason_set",
         "alphafactory_crypto_instrument_capability_harness_run_qualification",
         "alphafactory_crypto_instrument_capability_harness_serialize_candidate",
         "alphafactory_crypto_instrument_capability_harness_serialize_feedback",
         "alphafactory_crypto_instrument_capability_harness_serialize_metrics",
+        "alphafactory_crypto_instrument_capability_harness_serialize_search_outcome",
         "alphafactory_crypto_instrument_capability_harness_syntheticcase",
         "docs_adr_0002_capability_only_search_instrument_authority",
         "docs_adr_0002_capability_only_search_instrument_authority_adr_0002_capability_only_search_instrument_authority",
@@ -739,6 +745,7 @@
         "scripts_crypto_instrument_capability_rows_with_provenance",
         "scripts_crypto_instrument_capability_sha256",
         "scripts_crypto_instrument_capability_source_inventory",
+        "scripts_crypto_instrument_capability_two_fixed_seed_reproduction_pass",
         "scripts_crypto_instrument_capability_verify_source_branch",
         "scripts_crypto_instrument_capability_with_provenance",
         "tests_test_instrument_capability_harness",
@@ -754,9 +761,12 @@
         "tests_test_instrument_capability_harness_plantedharnesstests_test_all_seven_families_pass_one_seed_and_reject_required_decoys",
         "tests_test_instrument_capability_harness_plantedharnesstests_test_b1s_algorithm_names_remain_classified_degenerate",
         "tests_test_instrument_capability_harness_plantedharnesstests_test_cross_seed_reproduces_canonical_family_and_behavior",
+        "tests_test_instrument_capability_harness_plantedharnesstests_test_evolutionary_rejects_mutation_children_outside_frozen_grammar",
+        "tests_test_instrument_capability_harness_plantedharnesstests_test_evolutionary_uses_label_blind_structural_parent_child_mutation",
         "tests_test_instrument_capability_harness_plantedharnesstests_test_mapping_preservation_uses_family_specific_semantics",
         "tests_test_instrument_capability_harness_plantedharnesstests_test_proposal_grammar_is_frozen_and_search_sees_only_grammar_identity",
         "tests_test_instrument_capability_harness_plantedharnesstests_test_qualification_is_deterministic_for_fixed_seed",
+        "tests_test_instrument_capability_harness_plantedharnesstests_test_qualification_requires_two_distinct_fixed_seeds",
         "tests_test_instrument_capability_harness_plantedharnesstests_test_relabelling_does_not_bypass_lag_or_primitive_receipts",
         "tests_test_instrument_capability_harness_plantedharnesstests_test_same_case_exposes_explicit_mapping_contract",
         "tests_test_instrument_capability_harness_plantedharnesstests_test_search_policies_have_distinct_observed_behavior"
@@ -764,14 +774,14 @@
       "required": false,
       "semantic_role": "capability_instrument_execution",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_INSTRUMENT_CAPABILITY_QUALIFICATION.json",
-        "evidence_sha256": "D245E74762380CDB8B04554C17A9D69D479D4EFF8C1C0343FC034E5FA8ECCA2C",
+        "evidence_sha256": "F47457BD0E4FABE8A9D579CAE4E53C4B095A0432E72A25A1A93E18EC4E0CB35C",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
       "visible_by_default": true
     },
@@ -781,7 +791,7 @@
         "path": "alphafactory_crypto/instrument_capability/legacy.py",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
         "sha256": "3CDD2A76190D59365ACF95FAF86F941A7DAE44782E2435F38FC5D317F0778722",
-        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58"
+        "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0"
       },
       "color": "#757575",
       "contracts": [
@@ -830,14 +840,14 @@
       "required": false,
       "semantic_role": "legacy_proposal_parity_source",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv",
-        "evidence_sha256": "B9355EEF9B7E43CE13DD6CF7C93D5C0905C51AE85D95A9635C4893EE85EEAD75",
+        "evidence_sha256": "C80825E15DD740F1CE0CE1E41C76466358795F95F462E75D23A42E220D8F94B0",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
       "visible_by_default": false
     },
@@ -847,7 +857,7 @@
         "path": "alphafactory_crypto/instrument_capability/primitives.py",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
         "sha256": "853D06AEAF30DD5388083E8D41F777F976CC4107E099E6708FD81F43E48EB875",
-        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58"
+        "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0"
       },
       "color": "#2e7d32",
       "contracts": [
@@ -914,14 +924,14 @@
       "required": false,
       "semantic_role": "primitive_semantic_authority",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_SYNTHETIC_PARITY.json",
-        "evidence_sha256": "BB5F1E7B119E9503247B1786E191039B7A1114B76EA80A3DDDDAA2A5D6782041",
+        "evidence_sha256": "C67028338A8CE83D093AF49F011B1D7C7C69A21B7E7B6AC39E65780EF5D4CFEA",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
       "visible_by_default": true
     },
@@ -931,7 +941,7 @@
         "path": "alphafactory_crypto/instrument_capability/mapping.py",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
         "sha256": "6ACA0A358349EAD0290BD1EF82AFE3F277600AFBBCE913AC4092A4286E60CBFC",
-        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58"
+        "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0"
       },
       "color": "#2e7d32",
       "contracts": [
@@ -1015,14 +1025,14 @@
       "required": false,
       "semantic_role": "portfolio_mapping_authority",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_SYNTHETIC_BEHAVIOR.json",
-        "evidence_sha256": "0583B74989AB1CA2C447414A92931645C4E1E017FD35AA01BA250B0CB3D6B52E",
+        "evidence_sha256": "52F24CB8AD94C7FB22350370C9429A5E65DE88DA4DA1DE3FC591FEE61DDF79C9",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
       "visible_by_default": true
     },
@@ -1032,7 +1042,7 @@
         "path": "alphafactory_crypto/instrument_capability/feedback.py",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
         "sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0",
-        "verified_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58"
+        "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0"
       },
       "color": "#2e7d32",
       "contracts": [
@@ -1101,14 +1111,14 @@
       "required": false,
       "semantic_role": "adaptive_feedback_authority",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_PROXY_STRICT_ALIGNMENT_SYNTHETIC.json",
-        "evidence_sha256": "60561B98A1CDBD675063F78209B81C4D45222037CC2A0E4A2D1C69FEF36A1996",
+        "evidence_sha256": "462C5EAA057091E880AFB8474167FFFA0FC986044E66509D8FCF3C5A49CBF7CC",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
       "visible_by_default": true
     },
@@ -1117,8 +1127,8 @@
       "authority": {
         "path": ".planning/STATE.md",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
-        "sha256": "E47FECF8F003D92D64A91B9DB084C643CEAFA9399B61504BD949A424510E6975",
-        "verified_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "sha256": "6B3773B462103991C86A1DD950E87EDCD7C27EB20CF04854B8C08D0F6BCBAAB7",
+        "verified_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
       "color": "#c62828",
       "contracts": [
@@ -1146,14 +1156,14 @@
       "required": false,
       "semantic_role": "performance_search_boundary",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
-        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
+        "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
       "visible_by_default": true
     },
@@ -1162,8 +1172,8 @@
       "authority": {
         "path": ".planning/STATE.md",
         "repo_ref": "repair/crypto-instrument-capability-20260715",
-        "sha256": "E47FECF8F003D92D64A91B9DB084C643CEAFA9399B61504BD949A424510E6975",
-        "verified_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "sha256": "6B3773B462103991C86A1DD950E87EDCD7C27EB20CF04854B8C08D0F6BCBAAB7",
+        "verified_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
       "color": "#c62828",
       "contracts": [
@@ -1191,14 +1201,14 @@
       "required": false,
       "semantic_role": "new_data_integration_boundary",
       "validation": {
-        "checked_at": "2026-07-14T19:37:36.303968+00:00",
+        "checked_at": "2026-07-14T20:15:37.393350+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
-        "evidence_sha256": "EF4488AA2EBA89532A3583C115A30C0CDA67CD2743A11AEEA83DC6A6E9827D1F",
+        "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "b8551ecf1453d5559dd464b05748bab2a2c5c959"
+        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
       "visible_by_default": true
     },
@@ -1283,7 +1293,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "B0EC87A2F17C419FC5C510C0208190A892AC65D762D735E252FC99E1F2B6611A"
+    "sha256": "F2F8EEBB0DE197098795D976915D11F0C93A27788BE5E965855BAC3F37C31F11"
   },
   "profile_id": null,
   "profiles": [
@@ -1299,13 +1309,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "3a951f634db0b8e72b2de2b4288f8f55a00191d2",
-    "edge_count": 29555,
-    "node_count": 16727,
+    "built_at_commit": "4122496eda038299e43ad956f428f5401c11c55d",
+    "edge_count": 29615,
+    "node_count": 16744,
     "path": ".planning/graphs/graph.json",
-    "sha256": "69CC2A0CC0550153EC0410AB3F8CB80A99D74F6BD9B6F92EA1CC1CCCDA977F87"
+    "sha256": "4B6264478199DB0BBD48634E83E52F245BC5E7BF92FBB4A74409D09D13477EB2"
   },
-  "repo_head": "3a951f634db0b8e72b2de2b4288f8f55a00191d2",
+  "repo_head": "4122496eda038299e43ad956f428f5401c11c55d",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
