@@ -23,7 +23,7 @@
   "cross_sprint_adaptive_memory": false,
   "data_adequacy_gate_sha256": "51EAEFBA3A76ED869D07FEC391116F4E159BA949E852BBC693C6040742A49B61",
   "deepdow_qualification": "DATA_ADEQUACY_UNDERPOWERED",
-  "evidence_subject_repo_sha": "986b0f900be7ede8e11c042db1cfef601bdcae26",
+  "evidence_subject_repo_sha": "6447c36656e54ab0c838f110572fca0bdcf8bdf5",
   "forward_read": false,
   "intended_tag": "crypto-frontier-provenance-closure-20260714",
   "main_conclusion": "CURRENT_DATA_UNDERPOWERED",
@@ -33,5 +33,17 @@
   "qlib_qualification": "DATA_ADEQUACY_UNDERPOWERED",
   "qualification_config": "config/crypto_frontier_evidence_qualification_v1.json",
   "qualification_config_sha256": "38A21EF12CCEA7C82217CEB5BC5FA957EE9612DCC496FEAE07C0059681C77D02",
-  "status": "REPOSITORY_PROVENANCE_CLOSURE_PENDING"
+  "independent_decisions": {
+    "reviewer": "REVIEW_PASS",
+    "reproducer": "PASS",
+    "gatekeeper": "GATEKEEPER_PASS",
+    "financial_gate": "HOLD_RESEARCH"
+  },
+  "qualification_bundle_at_evidence_subject": {
+    "artifact_count": 29,
+    "artifact_index_sha256": "E5C96E754830BAC418FBD65F1DAAB01148040299F289262B8CB439A1404587BD",
+    "bundle_sha256": "6268808CE379E1C2E1CB48329FC0F42EAB6078853873433F7E9805FFAD078333"
+  },
+  "final_sha_verification_policy": "Reproducer and Gatekeeper must verify the attestation-only closure commit; their final-SHA decisions are recorded in the annotated tag object to avoid a self-referential commit.",
+  "status": "REPOSITORY_PROVENANCE_CLOSURE_COMPLETED"
 }

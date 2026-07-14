@@ -57,7 +57,7 @@
     "data_adequacy_gate": "runtime/crypto_frontier_provenance_closure_20260714/data_adequacy_gate.json",
     "direct_activation": "runtime/crypto_frontier_provenance_closure_20260714/new_data_direct_activation_contract.json"
   },
-  "reproducibility": "PENDING_INDEPENDENT_REPRODUCER_AT_CLOSURE_SHA",
+  "reproducibility": "PASS_AT_EVIDENCE_SUBJECT_6447C36656E54AB0C838F110572FCA0BDCF8BDF5",
   "financial_gate": "HOLD_RESEARCH",
   "candidate_promotion": false,
   "continuation": "Do not run a large experiment unless ingress-preflight passes and two external paradigms pass the frozen Data Adequacy Gate."

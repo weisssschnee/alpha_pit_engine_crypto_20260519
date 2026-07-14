@@ -1,6 +1,6 @@
 {
   "validation_id": "CRYPTO_FRONTIER_CLOSURE_CANDIDATE_VALIDATION_20260714",
-  "status": "PASS_CLOSURE_CANDIDATE_LOCAL",
+  "status": "PASS_EVIDENCE_SUBJECT_INDEPENDENT",
   "tests": {
     "command": "python -m pytest tests/test_crypto_frontier_evidence_qualification.py tests/test_crypto_frontier_research_v2.py tests/test_external_frontier_assimilation.py tests/test_native_aggtrades_release.py tests/test_native_aggtrades_benchmark.py -q",
     "passed": 31,
@@ -20,9 +20,11 @@
   "prior_evidence_subject_sha": "b8647a077b8cea9a0f991ef0351acb81dbe84535",
   "intermediate_base_identity_drift_sha": "0141d2446df7c5fcb86e93f5a95dad60c411b0e4",
   "intermediate_reproducer": "FAIL_BASE_IMPLEMENTATION_IDENTITY_DRIFT",
-  "independent_reviewer": "REVIEW_FAIL_ACTIVATION_TRUST_BOUNDARY_REPAIRED_PENDING_REREVIEW",
-  "independent_reproducer": "PENDING_AT_IDENTITY_PRESERVING_EVIDENCE_SUBJECT_SHA",
-  "independent_gatekeeper": "PENDING_AT_IDENTITY_PRESERVING_EVIDENCE_SUBJECT_SHA",
+  "independent_reviewer": "REVIEW_PASS_AT_6447C36656E54AB0C838F110572FCA0BDCF8BDF5",
+  "independent_reproducer": "PASS_AT_6447C36656E54AB0C838F110572FCA0BDCF8BDF5",
+  "independent_gatekeeper": "GATEKEEPER_PASS_AT_6447C36656E54AB0C838F110572FCA0BDCF8BDF5",
+  "financial_gate": "HOLD_RESEARCH",
+  "final_attestation_sha_review": "PENDING_DOWNSTREAM_NON_SELF_REFERENTIAL_TAG_ATTESTATION",
   "candidate_promotion": false,
   "forward_read": false
 }

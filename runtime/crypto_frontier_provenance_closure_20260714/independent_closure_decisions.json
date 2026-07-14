@@ -1,0 +1,47 @@
+{
+  "decision_id": "CRYPTO_FRONTIER_INDEPENDENT_CLOSURE_DECISIONS_20260714",
+  "evidence_subject_sha": "6447c36656e54ab0c838f110572fca0bdcf8bdf5",
+  "supersession_chain": [
+    {
+      "sha": "b8647a077b8cea9a0f991ef0351acb81dbe84535",
+      "decision": "FAIL",
+      "reason": "new-data activation trusted manifest-inline adequacy profiles and information-match scores"
+    },
+    {
+      "sha": "0141d2446df7c5fcb86e93f5a95dad60c411b0e4",
+      "decision": "FAIL",
+      "reason": "activation repair changed the sealed base release-module implementation identity"
+    },
+    {
+      "sha": "6447c36656e54ab0c838f110572fca0bdcf8bdf5",
+      "decision": "PASS",
+      "reason": "activation is fail-closed in qualification-local code and base release identity is preserved"
+    }
+  ],
+  "reviewer": {
+    "decision": "REVIEW_PASS",
+    "scope": "provenance and evidence qualification only"
+  },
+  "reproducer": {
+    "decision": "PASS",
+    "tests": "31 passed, 2 warnings",
+    "base_check": "CRYPTO_FRONTIER_RESEARCH_CHECK_PASSED",
+    "qualification_check": "CRYPTO_FRONTIER_EVIDENCE_QUALIFICATION_CHECK_PASSED",
+    "base_bundle_sha256": "99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2",
+    "qualification_bundle_sha256": "6268808CE379E1C2E1CB48329FC0F42EAB6078853873433F7E9805FFAD078333"
+  },
+  "gatekeeper": {
+    "decision": "GATEKEEPER_PASS",
+    "main_conclusion": "CURRENT_DATA_UNDERPOWERED",
+    "financial_gate": "HOLD_RESEARCH",
+    "safe_to_create_final_attestation": true
+  },
+  "cannot_infer": [
+    "Qlib Alpha158 is economically ineffective",
+    "DeepDow is an informative negative",
+    "an external component has development increment",
+    "any system is OOS robust",
+    "any candidate is promotion eligible"
+  ],
+  "frozen_boundaries_intact": true
+}
