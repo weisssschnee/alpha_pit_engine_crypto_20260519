@@ -10,15 +10,16 @@ This file is the small, human-maintained view of the currently accepted Crypto a
 - **CURRENT**: this file records the accepted architecture and decision state. It is not generated from RAW and is not runtime proof.
 - **History**: Git commits, tags, manifests, reports, and runtime artifacts remain immutable evidence. Supersession changes their interpretation, not their contents.
 
-There is no architecture registry in `main@dfe2012107955997c200ec5e199e5bdae4344d9c`. The existing `crypto_architecture_control_registry_v1.json` and frontier execution stack live on the accepted audit closure line. They are not copied into `main` merely to make a diagram. No second registry, `current.json`, declared/static/observed graph set, runtime-trace framework, or edge-level Graph gate is authorized.
+There is no architecture registry in the audited `main@09ac397c61b0b462497e9a8c0ea84981cc6a93f9` baseline. The existing `crypto_architecture_control_registry_v1.json` and frontier execution stack live on the accepted audit closure line. They are not copied into `main` merely to make a diagram. No second registry, `current.json`, declared/static/observed graph set, runtime-trace framework, or edge-level Graph gate is authorized.
 
 ## Branch-aware architecture map
 
 ```mermaid
 flowchart LR
   Base["Common base\nac9fd24"]
-  Main["MAIN CHECKOUT\ndfe2012 baseline\nfeature/runtime inventory metadata"]
+  Main["MAIN CHECKOUT\n09ac397 audit baseline\nnavigation + inventory metadata"]
   Inventory["Inventory snapshot\n94 base fields\n5,211 derived specs\n10 A7EFF2-loaded fields\nNO search authorization"]
+  Instrument["Static instrument audit\n26 resolved dependency buckets\nobjective + primitive + mapping qualification"]
   Audit["ACCEPTED AUDIT LINE\n4726795\nclosure tag"]
   Arena["Multi-paradigm contracts\nForecastArtifact / PortfolioArtifact\nnative evaluator + common bridge"]
   Qualification["Evidence qualification\nQlib comparison repaired\nDeepDow diagnosed\nData Adequacy Gate"]
@@ -28,6 +29,7 @@ flowchart LR
   Legacy["Historical A7 / B1S / Epoch-0/1R/2/2B\nevidence lineage, not one current Epoch"]
 
   Base --> Main --> Inventory
+  Main --> Instrument --> Hold
   Base --> Audit --> Arena --> Qualification --> Hold
   Legacy --> Audit
   Hold -. "only after a qualified new release" .-> NewData
@@ -38,7 +40,7 @@ flowchart LR
   classDef dormant fill:#fef3c7,stroke:#d97706,color:#451a03
   classDef sealed fill:#fee2e2,stroke:#dc2626,color:#450a0a
   classDef historical fill:#e5e7eb,stroke:#6b7280,color:#111827
-  class Main,Inventory main
+  class Main,Inventory,Instrument main
   class Audit,Arena,Qualification,Hold accepted
   class NewData dormant
   class Sealed sealed
@@ -49,7 +51,7 @@ Colors supplement the text labels; they do not carry meaning by themselves. Blue
 
 ## Repository HEAD reality
 
-`main@dfe2012` contains the 2026-07-14 static runtime inventory and the earlier A7 code/history. The inventory is metadata and lineage evidence only:
+`main@09ac397` is the baseline for the 2026-07-14 independent audit. It contains the static runtime inventory, lightweight RAW Graph maintenance, and earlier A7 code/history. The inventory is metadata and lineage evidence only:
 
 - 94 aggTrades base-registry rows and 5,211 derived specs were recovered from historical commit `1ed5acd`;
 - ten fields are verified as loaded by the A7EFF2 release entrypoint;
@@ -57,6 +59,19 @@ Colors supplement the text labels; they do not carry meaning by themselves. Blue
 - frontier Arena, Qlib/DeepDow qualification, Data Adequacy Gate, and direct new-data activation code are not executable from this `main` checkout.
 
 The phrase “current Epoch” in `reports/CRYPTO_FEATURE_RUNTIME_INVENTORY_20260714.md` is therefore local to that inventory: it means the latest verifiable A7 release represented by that package. It must not collapse B1S, Epoch-0, Epoch-1R, Epoch-2, Epoch-2B, and Frontier into A7EFF2.
+
+## Latest independent instrument audit
+
+The static audit rooted at `main@09ac397` and the accepted closure source confirms `CRYPTO_SEARCH_INSTRUMENT_MISMATCH_CONFIRMED` within a bounded scope:
+
+- the 5,211 A7V1 rows are registered specs, not 5,211 materialized independent signals; independent information-axis count is not statically identifiable, while the deterministic taxonomy finds 26 formula-resolved canonical dependency buckets and 29 unresolved sets;
+- B1S and Epoch-0 adapt on a zero-cost gross proxy that omits material strict-evaluator axes;
+- Epoch-1 materially repaired feedback with cost, benchmark increment, stability, turnover, and concentration, while Epoch-1R changed admission rather than that feedback; strict-only IC, placebo, and Pareto axes remain outside the adaptive scalar;
+- Epoch-2 tests blocker-local repair actions, not unrestricted mechanism discovery; its recorded LLM repair is deterministic typed repair with no model call;
+- multiple temporal primitives drift or collapse into code aliases across implementations;
+- rank mapping demonstrably removes common-mode and confidence information and can create reranking turnover, but its historical causal share of turnover is not identified.
+
+These facts qualify the research instrument. They do not establish that the market has no alpha, that the mechanism space is exhausted, or that new data is the unique next step. The economic gate remains `HOLD_RESEARCH`; no repair or search is automatically authorized by this audit.
 
 ## Accepted project evidence
 
@@ -133,9 +148,10 @@ RECENT_SEALED
 MAY_STRESS_SEALED
 NO_CANDIDATE_PROMOTION
 NO_CROSS_SPRINT_ADAPTIVE_MEMORY
+NO_NEW_DATA_INTEGRATION
 ```
 
-The next legal economic trigger is a genuinely new, independently delivered release. On the closure line, activation must run ingress preflight, derive hash-bound observed facts, pass the predeclared Data Adequacy Gate, select at most the two highest-information-match external paradigms, add the internal baseline, and freeze a development-only budget. Failure of adequacy returns `DATA_ADEQUACY_UNDERPOWERED` and `NO_LARGE_EXPERIMENT`.
+A genuinely new, independently delivered release remains one conditional future route, not a proven unique remedy. If later authorized on the closure line, activation must run ingress preflight, derive hash-bound observed facts, pass the predeclared Data Adequacy Gate, select at most the two highest-information-match external paradigms, add the internal baseline, and freeze a development-only budget. Failure of adequacy returns `DATA_ADEQUACY_UNDERPOWERED` and `NO_LARGE_EXPERIMENT`. This audit performs no data integration.
 
 ## Lightweight Graph maintenance
 
