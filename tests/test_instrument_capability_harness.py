@@ -20,10 +20,13 @@ from alphafactory_crypto.instrument_capability.feedback import (
 )
 from alphafactory_crypto.instrument_capability.harness import (
     FAMILY_IDS,
+    MUTATION_GENE_FIELDS,
     PROPOSAL_GRAMMAR,
     PROPOSAL_GRAMMAR_ID,
     build_synthetic_case,
+    build_structural_mutation_space,
     evaluate_proposal,
+    proposal_mutation_genes,
     qualify_family,
     run_qualification,
     serialize_candidate,
@@ -41,7 +44,9 @@ from alphafactory_crypto.instrument_capability.mapping import (
 )
 from alphafactory_crypto.instrument_capability.search import (
     B1S_LABELS_DEGENERATE,
+    MutationOption,
     SUPPORTED_ALGORITHMS,
+    run_search,
 )
 
 
@@ -111,6 +116,18 @@ class PlantedHarnessTests(unittest.TestCase):
                 self.assertEqual(serialized["proposal_receipt"]["evidence_label"], "positive")
                 self.assertTrue(serialized["proposal_receipt"]["identity_excludes_evidence_label"])
 
+        positive = next(item for item in case.proposals if item.role_id == "CANONICAL_PLANTED")
+        role_relabelled = replace(
+            positive,
+            role_id="MATCHED_NULL",
+            evidence_label="opaque-report-label",
+        )
+        role_evidence = evaluate_proposal(case, role_relabelled)
+        self.assertEqual(role_evidence.candidate_id, positive.grammar_identity)
+        self.assertTrue(role_evidence.admission_receipt["grammar"]["identity_valid"])
+        self.assertFalse(role_evidence.admission_receipt["grammar"]["member"])
+        self.assertTrue(role_evidence.proposal_receipt["identity_excludes_role_id"])
+
     def test_proposal_grammar_is_frozen_and_search_sees_only_grammar_identity(self) -> None:
         with self.assertRaises(FrozenInstanceError):
             PROPOSAL_GRAMMAR[0].evidence_label = "changed"  # type: ignore[misc]
@@ -147,6 +164,86 @@ class PlantedHarnessTests(unittest.TestCase):
             self.assertTrue(row["exact_reproduction"])
             self.assertTrue(row["canonical_mechanism_reproduction"])
             self.assertTrue(row["behavior_reproduction"])
+
+    def test_qualification_requires_two_distinct_fixed_seeds(self) -> None:
+        for seeds in ((123,), (123, 123)):
+            with self.subTest(seeds=seeds):
+                payload = run_qualification(seeds)
+                self.assertEqual(payload["qualification"], "PARTIALLY_QUALIFIED")
+                self.assertFalse(payload["minimum_distinct_seed_count_met"])
+                self.assertFalse(payload["cross_seed_qualified"])
+
+    def test_evolutionary_uses_label_blind_structural_parent_child_mutation(self) -> None:
+        case = build_synthetic_case("CROSS_SECTIONAL_RELATIVE_ALPHA", 20260715)
+        relabelled = tuple(
+            replace(proposal, evidence_label=f"opaque-{index}")
+            for index, proposal in enumerate(case.proposals)
+        )
+        self.assertEqual(
+            build_structural_mutation_space(case.proposals),
+            build_structural_mutation_space(relabelled),
+        )
+        self.assertEqual(
+            build_structural_mutation_space(case.proposals),
+            build_structural_mutation_space(tuple(reversed(case.proposals))),
+        )
+        row = qualify_family("CROSS_SECTIONAL_RELATIVE_ALPHA", 20260715)
+        contract = row["proposal_grammar"]["evolutionary_mutation_contract"]
+        receipts = row["searches"]["evolutionary"]["mutation_receipts"]
+        identities = set(row["proposal_grammar"]["proposal_identities"])
+        proposals_by_id = {
+            proposal.grammar_identity: proposal for proposal in case.proposals
+        }
+        self.assertEqual(
+            contract["selection_basis"],
+            "MINIMUM_POSITIVE_STRUCTURAL_GENE_DISTANCE",
+        )
+        self.assertFalse(contract["evidence_label_visible_to_mutation"])
+        self.assertFalse(contract["role_id_visible_to_mutation"])
+        self.assertEqual(len(receipts), 27 - len(PROPOSAL_GRAMMAR))
+        self.assertEqual(
+            [receipt["child_id"] for receipt in receipts],
+            row["searches"]["evolutionary"]["proposal_order"][len(PROPOSAL_GRAMMAR) :],
+        )
+        for receipt in receipts:
+            self.assertIn(receipt["parent_id"], identities)
+            self.assertIn(receipt["child_id"], identities)
+            self.assertNotEqual(receipt["parent_id"], receipt["child_id"])
+            self.assertTrue(receipt["changed_genes"])
+            self.assertLessEqual(set(receipt["changed_genes"]), set(MUTATION_GENE_FIELDS))
+            self.assertNotIn("evidence_label", receipt["changed_genes"])
+            self.assertNotIn("role_id", receipt["changed_genes"])
+            parent_genes = proposal_mutation_genes(
+                proposals_by_id[receipt["parent_id"]]
+            )
+            child_genes = proposal_mutation_genes(
+                proposals_by_id[receipt["child_id"]]
+            )
+            expected_changed = [
+                field
+                for field in MUTATION_GENE_FIELDS
+                if parent_genes[field] != child_genes[field]
+            ]
+            self.assertEqual(receipt["changed_genes"], expected_changed)
+
+    def test_evolutionary_rejects_mutation_children_outside_frozen_grammar(self) -> None:
+        case = build_synthetic_case("CROSS_SECTIONAL_RELATIVE_ALPHA", 20260715)
+        evaluated = [evaluate_proposal(case, proposal) for proposal in case.proposals]
+        candidate_ids = tuple(proposal.grammar_identity for proposal in case.proposals)
+        decisions = {row.candidate_id: row.feedback for row in evaluated}
+        bad_space = {
+            candidate_id: (MutationOption("not-a-grammar-member", ("signal_recipe",)),)
+            for candidate_id in candidate_ids
+        }
+        with self.assertRaisesRegex(ValueError, "candidate universe"):
+            run_search(
+                "evolutionary",
+                candidate_ids,
+                decisions,
+                seed=20260715,
+                budget=27,
+                mutation_space=bad_space,
+            )
 
     def test_search_policies_have_distinct_observed_behavior(self) -> None:
         row = qualify_family("CROSS_SECTIONAL_RELATIVE_ALPHA", 20260715)

@@ -29,7 +29,8 @@ Add one small capability-only path under
    conflicts blocked before strict evaluation;
 5. a deterministic planted-mechanism harness covering a canonical typed
    sampler, CEM-like policy, UCT/UCB-like policy, and evolutionary
-   parent/mutation path.
+   parent/mutation path over explicit structural grammar genes. Reporting
+   labels and planted roles are excluded from proposal identity and mutation.
 
 Historical B1S/Epoch code remains a commit-bound proposal/parity source. A
 legacy alias cannot become canonical through parity. `typed_random` and
@@ -45,7 +46,8 @@ remain classified as degenerate rather than promoted to independent algorithms.
 - Directional and sparse mappings are not subjected to a universal
   cross-sectional IC or five-active-asset gate.
 - Evidence is deterministic, non-market, fixed-seed, and reproducible through a
-  single `build/check` entrypoint.
+  single `build/check` entrypoint. Qualification requires at least two distinct
+  fixed seeds; a singleton or repeated seed fails closed.
 - A capability-qualified result authorizes neither development search nor data
   integration, challenge/forward/recent/May-stress access, promotion, or
   cross-sprint memory.

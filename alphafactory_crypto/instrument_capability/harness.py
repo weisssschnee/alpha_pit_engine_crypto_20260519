@@ -29,7 +29,12 @@ from .mapping import (
     turnover_decomposition,
 )
 from .primitives import CANONICAL_PRIMITIVES, evaluate_primitive
-from .search import SUPPORTED_ALGORITHMS as ALGORITHMS, SearchOutcome, run_search
+from .search import (
+    SUPPORTED_ALGORITHMS as ALGORITHMS,
+    MutationOption,
+    SearchOutcome,
+    run_search,
+)
 
 
 FAMILY_IDS = (
@@ -144,6 +149,71 @@ class ProposalContract:
     required_output_lag: int
     portfolio_mapping_id: str
     mapping_contract_sha256: str
+
+
+MUTATION_GENE_FIELDS = (
+    "signal_recipe",
+    "requested_primitive_id",
+    "applied_output_lag",
+    "mapping_contract",
+)
+
+
+def proposal_mutation_genes(proposal: ProposalContract) -> dict[str, object]:
+    """Return only structural genes; reporting labels and planted roles are excluded."""
+
+    return {
+        "signal_recipe": proposal.signal_recipe,
+        "requested_primitive_id": proposal.requested_primitive_id,
+        "applied_output_lag": proposal.applied_output_lag,
+        "mapping_contract": (
+            proposal.portfolio_mapping_id,
+            proposal.mapping_contract_sha256,
+        ),
+    }
+
+
+def build_structural_mutation_space(
+    proposals: tuple[ProposalContract, ...],
+) -> Mapping[str, tuple[MutationOption, ...]]:
+    """Build deterministic one-step children in the frozen finite grammar.
+
+    A child is a pre-enumerated frozen-grammar member at the minimum positive structural
+    Hamming distance from its parent.  The search receives identities and
+    changed-gene receipts, never ``evidence_label`` or ``role_id``.
+    """
+
+    if len({proposal.grammar_identity for proposal in proposals}) != len(proposals):
+        raise ValueError("mutation-space proposal identities must be unique")
+    if proposals and len({proposal.grammar_id for proposal in proposals}) != 1:
+        raise ValueError("mutation-space proposals must share one frozen grammar")
+    genes_by_id = {
+        proposal.grammar_identity: proposal_mutation_genes(proposal)
+        for proposal in proposals
+    }
+    result: dict[str, tuple[MutationOption, ...]] = {}
+    for parent_id, parent_genes in genes_by_id.items():
+        alternatives: list[tuple[str, tuple[str, ...]]] = []
+        for child_id, child_genes in genes_by_id.items():
+            if child_id == parent_id:
+                continue
+            changed = tuple(
+                field
+                for field in MUTATION_GENE_FIELDS
+                if parent_genes[field] != child_genes[field]
+            )
+            if changed:
+                alternatives.append((child_id, changed))
+        if not alternatives:
+            result[parent_id] = ()
+            continue
+        minimum_distance = min(len(changed) for _, changed in alternatives)
+        result[parent_id] = tuple(
+            MutationOption(child_id, changed)
+            for child_id, changed in sorted(alternatives)
+            if len(changed) == minimum_distance
+        )
+    return MappingProxyType(result)
 
 
 @dataclass(frozen=True)
@@ -351,7 +421,6 @@ def _mapping_role_contracts(mapping_id: str) -> dict[str, MappingContract]:
 def _proposal_identity_payload(
     *,
     family_id: str,
-    role_id: str,
     signal_recipe: str,
     requested_primitive_id: str,
     required_primitive_id: str,
@@ -364,7 +433,6 @@ def _proposal_identity_payload(
         "schema_version": 1,
         "grammar_id": PROPOSAL_GRAMMAR_ID,
         "family_id": family_id,
-        "role_id": role_id,
         "signal_recipe": signal_recipe,
         "requested_primitive_id": requested_primitive_id,
         "required_primitive_id": required_primitive_id,
@@ -405,7 +473,6 @@ def _build_proposals(
         mapping_contract = mapping_roles[rule.mapping_role]
         payload = _proposal_identity_payload(
             family_id=family.family_id,
-            role_id=rule.role_id,
             signal_recipe=rule.signal_recipe,
             requested_primitive_id=requested_primitive_id,
             required_primitive_id=family.primitive_id,
@@ -515,6 +582,7 @@ def _proposal_receipt(proposal: ProposalContract) -> dict[str, Any]:
         "grammar_identity": proposal.grammar_identity,
         "identity_kind": "STRUCTURAL_SPEC_SHA256_PREFIX",
         "identity_excludes_evidence_label": True,
+        "identity_excludes_role_id": True,
         "family_id": proposal.family_id,
         "role_id": proposal.role_id,
         "evidence_label": proposal.evidence_label,
@@ -539,7 +607,6 @@ def _admission_receipt(
     if contract is not None:
         identity_payload = _proposal_identity_payload(
             family_id=proposal.family_id,
-            role_id=proposal.role_id,
             signal_recipe=proposal.signal_recipe,
             requested_primitive_id=proposal.requested_primitive_id,
             required_primitive_id=proposal.required_primitive_id,
@@ -850,6 +917,22 @@ def _mapping_preservation_receipt(case: SyntheticCase) -> dict[str, Any]:
     }
 
 
+def _serialize_search_outcome(
+    outcome: SearchOutcome,
+    variant_by_id: Mapping[str, str],
+) -> dict[str, object]:
+    """Join reporting labels only after the identity-only search has completed."""
+
+    payload = outcome.to_dict()
+    payload["proposal_variants"] = [
+        variant_by_id.get(candidate_id) for candidate_id in outcome.proposal_order
+    ]
+    payload["survivor_variant"] = (
+        variant_by_id.get(outcome.survivor_id) if outcome.survivor_id else None
+    )
+    return payload
+
+
 def qualify_family(family_id: str, seed: int, search_budget: int = 27) -> dict[str, Any]:
     case = build_synthetic_case(family_id, seed)
     evaluated = [evaluate_proposal(case, proposal) for proposal in case.proposals]
@@ -858,14 +941,23 @@ def qualify_family(family_id: str, seed: int, search_budget: int = 27) -> dict[s
     candidate_ids = [proposal.grammar_identity for proposal in case.proposals]
     by_id = {row.candidate_id: row.feedback for row in candidates.values()}
     variant_by_id = {row.candidate_id: row.variant for row in candidates.values()}
+    mutation_space = build_structural_mutation_space(case.proposals)
     searches: dict[str, SearchOutcome] = {
-        algorithm: run_search(algorithm, candidate_ids, by_id, seed=seed, budget=search_budget)
+        algorithm: run_search(
+            algorithm,
+            candidate_ids,
+            by_id,
+            seed=seed,
+            budget=search_budget,
+            mutation_space=mutation_space if algorithm == "evolutionary" else None,
+        )
         for algorithm in ALGORITHMS
     }
     positive = by_role["CANONICAL_PLANTED"]
     null = by_role["MATCHED_NULL"]
     mapping_preservation = _mapping_preservation_receipt(case)
     grammar_identities = {proposal.grammar_identity for proposal in case.proposals}
+    evolutionary_receipts = searches["evolutionary"].mutation_receipts
     checks = {
         "proposal_generated_from_frozen_grammar": bool(
             len(case.proposals) == len(PROPOSAL_GRAMMAR)
@@ -894,6 +986,32 @@ def qualify_family(family_id: str, seed: int, search_budget: int = 27) -> dict[s
         "survivor_selected_only_from_visited_feedback": all(
             outcome.survivor_id in outcome.proposal_order for outcome in searches.values()
         ),
+        "evolutionary_parent_mutation_exercised": bool(
+            search_budget > len(case.proposals)
+            and len(evolutionary_receipts) == search_budget - len(case.proposals)
+            and tuple(receipt.child_id for receipt in evolutionary_receipts)
+            == searches["evolutionary"].proposal_order[len(case.proposals) :]
+            and all(
+                receipt.parent_id in grammar_identities
+                and receipt.child_id in grammar_identities
+                and receipt.parent_id != receipt.child_id
+                and bool(receipt.changed_genes)
+                and any(
+                    option.child_id == receipt.child_id
+                    and option.changed_genes == receipt.changed_genes
+                    for option in mutation_space[receipt.parent_id]
+                )
+                for receipt in evolutionary_receipts
+            )
+        ),
+        "evolutionary_mutation_is_structural_and_label_blind": bool(
+            "evidence_label" not in MUTATION_GENE_FIELDS
+            and "role_id" not in MUTATION_GENE_FIELDS
+            and all(
+                set(receipt.changed_genes) <= set(MUTATION_GENE_FIELDS)
+                for receipt in evolutionary_receipts
+            )
+        ),
     }
     return {
         "family_contract": asdict(case.family),
@@ -901,6 +1019,14 @@ def qualify_family(family_id: str, seed: int, search_budget: int = 27) -> dict[s
             "grammar_id": PROPOSAL_GRAMMAR_ID,
             "frozen_rule_count": len(PROPOSAL_GRAMMAR),
             "proposal_identities": candidate_ids,
+            "evolutionary_mutation_contract": {
+                "selection_basis": "MINIMUM_POSITIVE_STRUCTURAL_GENE_DISTANCE",
+                "structural_gene_fields": list(MUTATION_GENE_FIELDS),
+                "evidence_label_visible_to_mutation": False,
+                "role_id_visible_to_mutation": False,
+                "parent_count": len(mutation_space),
+                "edge_count": sum(len(options) for options in mutation_space.values()),
+            },
         },
         "seed": seed,
         "observable_sha256": _hash_array(case.observable),
@@ -909,13 +1035,18 @@ def qualify_family(family_id: str, seed: int, search_budget: int = 27) -> dict[s
         "positive_behavior_identity": _behavior_identity(case.positive_mapping.weights),
         "mapping_preservation_receipt": mapping_preservation,
         "candidates": {variant: serialize_candidate(row) for variant, row in candidates.items()},
-        "searches": {algorithm: outcome.to_dict(variant_by_id) for algorithm, outcome in searches.items()},
+        "searches": {
+            algorithm: _serialize_search_outcome(outcome, variant_by_id)
+            for algorithm, outcome in searches.items()
+        },
         "qualification_checks": checks,
         "qualified": all(checks.values()),
     }
 
 
 def run_qualification(seeds: tuple[int, ...] = (20260715, 20260716), search_budget: int = 27) -> dict[str, Any]:
+    distinct_seed_count = len(set(seeds))
+    minimum_distinct_seed_count_met = distinct_seed_count >= 2
     runs = [qualify_family(family_id, seed, search_budget) for seed in seeds for family_id in FAMILY_IDS]
     cross_seed: dict[str, Any] = {}
     for family_id in FAMILY_IDS:
@@ -938,14 +1069,20 @@ def run_qualification(seeds: tuple[int, ...] = (20260715, 20260716), search_budg
         for algorithm in ALGORITHMS
     }
     all_qualified = all(row["qualified"] for row in runs)
-    cross_seed_qualified = all(
-        row["canonical_mechanism_reproduction"] and row["behavior_reproduction"]
-        for row in cross_seed.values()
+    cross_seed_qualified = bool(
+        minimum_distinct_seed_count_met
+        and all(
+            row["canonical_mechanism_reproduction"] and row["behavior_reproduction"]
+            for row in cross_seed.values()
+        )
     )
     return {
         "schema_version": 1,
         "scope": "deterministic synthetic capability only; no market or sealed data",
         "seeds": list(seeds),
+        "distinct_seed_count": distinct_seed_count,
+        "minimum_distinct_seed_count_required": 2,
+        "minimum_distinct_seed_count_met": minimum_distinct_seed_count_met,
         "search_budget_per_family_algorithm_seed": search_budget,
         "algorithms": list(ALGORITHMS),
         "families": list(FAMILY_IDS),
@@ -970,9 +1107,11 @@ __all__ = [
     "SyntheticCase",
     "VARIANTS",
     "build_synthetic_case",
+    "build_structural_mutation_space",
     "evaluate_candidate",
     "evaluate_proposal",
     "qualify_family",
+    "proposal_mutation_genes",
     "run_qualification",
     "serialize_candidate",
 ]

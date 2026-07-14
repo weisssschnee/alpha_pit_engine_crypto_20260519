@@ -435,6 +435,21 @@ def _execution_boundary_receipt(
     }
 
 
+def _two_fixed_seed_reproduction_pass(harness: Mapping[str, Any]) -> bool:
+    cross_seed = harness.get("cross_seed_reproduction", {})
+    return bool(
+        harness.get("minimum_distinct_seed_count_met")
+        and int(harness.get("distinct_seed_count", 0)) >= 2
+        and harness.get("cross_seed_qualified")
+        and cross_seed
+        and all(
+            bool(row.get("canonical_mechanism_reproduction"))
+            and bool(row.get("behavior_reproduction"))
+            for row in cross_seed.values()
+        )
+    )
+
+
 def _qualification_criteria(
     primitive_parity: Mapping[str, Any],
     mapping_behavior: Mapping[str, Any],
@@ -540,12 +555,7 @@ def _qualification_criteria(
         ),
         (
             "TWO_FIXED_SEEDS_REPRODUCE_CANONICAL_MECHANISM",
-            len(harness.get("seeds", [])) >= 2
-            and all(
-                bool(row.get("canonical_mechanism_reproduction"))
-                and bool(row.get("behavior_reproduction"))
-                for row in cross_seed.values()
-            ),
+            _two_fixed_seed_reproduction_pass(harness),
             "CRYPTO_INSTRUMENT_CAPABILITY_QUALIFICATION.json",
         ),
         (
@@ -710,6 +720,7 @@ def _render_report(
         "",
         f"Capability harness 中实际运行且 behavior hash 区分的策略为 {algorithm_list}。`typed_random`/`typed_ast` 不被伪装成两个算法；历史 B1S 标签 `{', '.join(B1S_LABELS_DEGENERATE['labels'])}` 继续标记为 `{B1S_LABELS_DEGENERATE['classification']}`。策略定义："
         + "; ".join(f"`{key}`={value}" for key, value in POLICY_BEHAVIOR.items())
+        + "。结构 proposal identity 与 evolutionary mutation 均排除 role_id 和 evidence label；mutation receipt 绑定 parent、child 与精确 changed genes；资格门槛要求至少两个不同的固定 seed"
         + "。这里的 discovery 是固定小型 proposal grammar 的可达、评价与保留；每个策略先覆盖 grammar，再执行各自 adaptive update，不等于宽泛真实市场 generator search。",
         "",
         "### 10. 是否可启动小型 development-only canary",

@@ -42,7 +42,7 @@ POLICY_BEHAVIOR: Mapping[str, str] = MappingProxyType(
         "canonical_typed_random": "random_without_replacement_then_reshuffled_cycles",
         "cem_like": "full_coverage_then_elite_categorical_update",
         "uct_ucb_like": "one_visit_per_arm_then_ucb",
-        "evolutionary": "full_coverage_then_aligned_parent_neighbor_mutation",
+        "evolutionary": "full_coverage_then_aligned_parent_structural_gene_mutation",
     }
 )
 
@@ -50,8 +50,33 @@ CEM_ELITE_FRACTION = 0.25
 CEM_ELITE_WEIGHT = 4
 CEM_BASE_WEIGHT = 1
 EVOLUTION_PARENT_FRACTION = 0.25
-EVOLUTION_NEIGHBOR_OFFSETS = (-2, -1, 1, 2)
 UCB_EXPLORATION = math.sqrt(2.0)
+
+
+@dataclass(frozen=True, slots=True)
+class MutationOption:
+    """One legal child produced by changing explicit proposal-grammar genes."""
+
+    child_id: str
+    changed_genes: tuple[str, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class MutationReceipt:
+    """Auditable parent/child realization from the evolutionary adaptive phase."""
+
+    generation: int
+    parent_id: str
+    child_id: str
+    changed_genes: tuple[str, ...]
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "generation": self.generation,
+            "parent_id": self.parent_id,
+            "child_id": self.child_id,
+            "changed_genes": list(self.changed_genes),
+        }
 
 
 @dataclass(frozen=True, slots=True)
@@ -61,17 +86,18 @@ class SearchOutcome:
     survivor_id: str | None
     behavior_hash: str
     independent_behavior: bool
+    mutation_receipts: tuple[MutationReceipt, ...] = ()
 
-    def to_dict(self, variant_by_id: Mapping[str, str] | None = None) -> dict[str, object]:
-        variants = variant_by_id or {}
+    def to_dict(self) -> dict[str, object]:
+        """Serialize search-native identities without reporting/evidence labels."""
+
         return {
             "proposal_order": list(self.proposal_order),
-            "proposal_variants": [variants.get(candidate_id) for candidate_id in self.proposal_order],
             "visit_counts": dict(self.visit_counts),
             "survivor_id": self.survivor_id,
-            "survivor_variant": variants.get(self.survivor_id) if self.survivor_id else None,
             "behavior_hash": self.behavior_hash,
             "independent_behavior": self.independent_behavior,
+            "mutation_receipts": [receipt.to_dict() for receipt in self.mutation_receipts],
         }
 
 
@@ -89,6 +115,7 @@ def _validate_inputs(
     candidates: tuple[str, ...],
     decisions_by_id: Mapping[str, FeedbackDecision],
     budget: int,
+    mutation_space: Mapping[str, tuple[MutationOption, ...]] | None,
 ) -> None:
     if algorithm not in SUPPORTED_ALGORITHMS:
         raise ValueError(f"unsupported capability search algorithm: {algorithm}")
@@ -101,6 +128,21 @@ def _validate_inputs(
         raise KeyError(f"missing aligned feedback for candidates: {missing[:5]}")
     if algorithm != "canonical_typed_random" and budget < len(candidates):
         raise ValueError(f"{algorithm} requires budget >= candidate count for frozen initial coverage")
+    if algorithm != "evolutionary":
+        return
+    if mutation_space is None:
+        raise ValueError("evolutionary requires an explicit structural mutation space")
+    if set(mutation_space) != set(candidates):
+        raise ValueError("mutation space must cover exactly the candidate universe")
+    universe = set(candidates)
+    for parent_id, options in mutation_space.items():
+        if len(candidates) > 1 and not options:
+            raise ValueError(f"mutation parent has no legal children: {parent_id}")
+        for option in options:
+            if option.child_id not in universe or option.child_id == parent_id:
+                raise ValueError("mutation children must be distinct members of the candidate universe")
+            if not option.changed_genes or len(option.changed_genes) != len(set(option.changed_genes)):
+                raise ValueError("mutation options require unique non-empty changed genes")
 
 
 def _coverage_order(candidates: tuple[str, ...], seed: int) -> list[str]:
@@ -213,7 +255,8 @@ def _evolutionary(
     decisions: Mapping[str, FeedbackDecision],
     seed: int,
     budget: int,
-) -> list[str]:
+    mutation_space: Mapping[str, tuple[MutationOption, ...]],
+) -> tuple[list[str], list[MutationReceipt]]:
     proposals = _coverage_order(candidates, seed)
     ranked = sorted(
         candidates,
@@ -222,19 +265,24 @@ def _evolutionary(
     )
     parent_count = max(1, math.ceil(len(candidates) * EVOLUTION_PARENT_FRACTION))
     parents = tuple(ranked[:parent_count])
-    sequence_index = {candidate_id: index for index, candidate_id in enumerate(candidates)}
-    offsets = tuple(offset for offset in EVOLUTION_NEIGHBOR_OFFSETS if offset % len(candidates))
-    if not offsets:
-        offsets = (0,)
     rng = random.Random(seed)
     replay = list(candidates)
     rng.shuffle(replay)
+    receipts: list[MutationReceipt] = []
     while len(proposals) < budget:
         parent = parents[rng.randrange(len(parents))]
-        offset = offsets[rng.randrange(len(offsets))]
-        child_index = (sequence_index[parent] + offset) % len(candidates)
-        proposals.append(candidates[child_index])
-    return proposals
+        options = mutation_space[parent]
+        option = options[rng.randrange(len(options))]
+        proposals.append(option.child_id)
+        receipts.append(
+            MutationReceipt(
+                generation=len(receipts) + 1,
+                parent_id=parent,
+                child_id=option.child_id,
+                changed_genes=option.changed_genes,
+            )
+        )
+    return proposals, receipts
 
 
 def _survivor(
@@ -250,13 +298,17 @@ def _survivor(
 
 
 def _behavior_hash(
-    proposals: tuple[str, ...], visit_counts: Mapping[str, int], survivor_id: str | None
+    proposals: tuple[str, ...],
+    visit_counts: Mapping[str, int],
+    survivor_id: str | None,
+    mutation_receipts: tuple[MutationReceipt, ...],
 ) -> str:
     # Algorithm label is deliberately excluded so label-only aliases hash equal.
     payload = {
         "proposal_order": proposals,
         "visit_counts": sorted(visit_counts.items()),
         "survivor_id": survivor_id,
+        "mutation_receipts": [receipt.to_dict() for receipt in mutation_receipts],
     }
     encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
@@ -268,12 +320,13 @@ def run_search(
     decisions_by_id: Mapping[str, FeedbackDecision],
     seed: int,
     budget: int,
+    mutation_space: Mapping[str, tuple[MutationOption, ...]] | None = None,
 ) -> SearchOutcome:
     """Run one fixed-budget capability policy over aligned candidate feedback."""
 
     algorithm = str(algorithm)
     candidates = _candidate_universe(candidate_ids)
-    _validate_inputs(algorithm, candidates, decisions_by_id, budget)
+    _validate_inputs(algorithm, candidates, decisions_by_id, budget, mutation_space)
     budget = int(budget)
     seed = int(seed)
 
@@ -281,14 +334,19 @@ def run_search(
         proposal_order: tuple[str, ...] = ()
         visit_counts: dict[str, int] = {}
         survivor_id = None
+        mutation_receipts: tuple[MutationReceipt, ...] = ()
         return SearchOutcome(
             proposal_order=proposal_order,
             visit_counts=visit_counts,
             survivor_id=survivor_id,
-            behavior_hash=_behavior_hash(proposal_order, visit_counts, survivor_id),
+            behavior_hash=_behavior_hash(
+                proposal_order, visit_counts, survivor_id, mutation_receipts
+            ),
             independent_behavior=False,
+            mutation_receipts=mutation_receipts,
         )
 
+    mutation_receipts = ()
     if algorithm == "canonical_typed_random":
         proposals = _canonical_typed_random(candidates, seed, budget)
     elif algorithm == "cem_like":
@@ -296,13 +354,19 @@ def run_search(
     elif algorithm == "uct_ucb_like":
         proposals = _uct_ucb_like(candidates, decisions_by_id, seed, budget)
     else:
-        proposals = _evolutionary(candidates, decisions_by_id, seed, budget)
+        assert mutation_space is not None
+        proposals, evolutionary_receipts = _evolutionary(
+            candidates, decisions_by_id, seed, budget, mutation_space
+        )
+        mutation_receipts = tuple(evolutionary_receipts)
 
     proposal_order = tuple(proposals)
     counts = Counter(proposal_order)
     visit_counts = {candidate_id: int(counts[candidate_id]) for candidate_id in candidates}
     survivor_id = _survivor(proposal_order, decisions_by_id)
-    behavior_hash = _behavior_hash(proposal_order, visit_counts, survivor_id)
+    behavior_hash = _behavior_hash(
+        proposal_order, visit_counts, survivor_id, mutation_receipts
+    )
     adaptive_behavior_exercised = algorithm == "canonical_typed_random" or (
         len(candidates) > 1 and budget > len(candidates)
     )
@@ -312,4 +376,16 @@ def run_search(
         survivor_id=survivor_id,
         behavior_hash=behavior_hash,
         independent_behavior=adaptive_behavior_exercised,
+        mutation_receipts=mutation_receipts,
     )
+
+
+__all__ = [
+    "B1S_LABELS_DEGENERATE",
+    "MutationOption",
+    "MutationReceipt",
+    "POLICY_BEHAVIOR",
+    "SUPPORTED_ALGORITHMS",
+    "SearchOutcome",
+    "run_search",
+]
