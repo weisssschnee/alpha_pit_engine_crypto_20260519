@@ -1,0 +1,65 @@
+{
+  "architecture_components_migrated": 5,
+  "candidate_promotion": false,
+  "challenge_read": false,
+  "completion_route": "B",
+  "config_sha256": "56CAB3FE3EF998866787CE778D32354347E3F91D711ED12C02D5C9F7D4820C95",
+  "cross_sprint_adaptive_memory": false,
+  "data_only_bottleneck_status": "INSUFFICIENT_EVIDENCE",
+  "development_only": true,
+  "economic_components_promoted": 0,
+  "forward_read": false,
+  "matched_controls": 2,
+  "multi_paradigm_arena_systems": [
+    "INTERNAL_LONG_ONLY_20D_MOMENTUM",
+    "QLIB_V097_NATIVE_FULL",
+    "QLIB_V097_NATIVE_13_FEATURE_CONTROL",
+    "DEEPDOW_V023_KEYNESNET_FLOW",
+    "DEEPDOW_V023_ASSET_ROTATED_FLOW_CONTROL",
+    "ONE_OVER_N"
+  ],
+  "narrow_data_blockers": [
+    "DeepLOB native input requires multi-level L2",
+    "full 2019 DMN/long-history transformer requires unavailable 252-day history",
+    "G-Research native target requires a qualified minute release",
+    "exact fixed core12 direct-allocation tensor is unavailable without filling two missing symbol-months"
+  ],
+  "native_reproduction_ids": [
+    "MICROSOFT_QLIB_V097_ALPHA158_LIGHTGBM_TOPKDROPOUT",
+    "DEEPDOW_V023_UPSTREAM_NATIVE_FRAMEWORK_RUN"
+  ],
+  "paired_component_results": [
+    {
+      "candidate_promotion": false,
+      "challenger_id": "QLIB_V097_NATIVE_FULL",
+      "conclusion": "INSUFFICIENT_EVIDENCE",
+      "control_id": "QLIB_V097_NATIVE_13_FEATURE_CONTROL",
+      "economic_migration_gate": "HOLD",
+      "first_date": "2024-06-01 00:00:00+00:00",
+      "last_date": "2024-06-23 00:00:00+00:00",
+      "observations": 23,
+      "paired_net_increment_lcb_95": 0.0,
+      "paired_net_increment_mean": 0.0,
+      "positive_day_fraction": 0.0
+    },
+    {
+      "candidate_promotion": false,
+      "challenger_id": "DEEPDOW_V023_KEYNESNET_FLOW",
+      "conclusion": "INSUFFICIENT_EVIDENCE",
+      "control_id": "DEEPDOW_V023_ASSET_ROTATED_FLOW_CONTROL",
+      "economic_migration_gate": "HOLD",
+      "first_date": "2024-06-01 00:00:00+00:00",
+      "last_date": "2024-06-23 00:00:00+00:00",
+      "observations": 23,
+      "paired_net_increment_lcb_95": -0.0002290061652674488,
+      "paired_net_increment_mean": -8.148161572622863e-08,
+      "positive_day_fraction": 0.4782608695652174
+    }
+  ],
+  "real_native_reproductions": 2,
+  "release_entry_status": "IMPLEMENTED_HASH_AND_PIT_GATED",
+  "repo_sha_at_run": "986b0f900be7ede8e11c042db1cfef601bdcae26",
+  "research_id": "CRYPTO_FRONTIER_RESEARCH_V2_20260713",
+  "runtime_seconds": 1542.4567356000189,
+  "status": "CRYPTO_FRONTIER_RESEARCH_COMPLETED"
+}

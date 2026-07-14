@@ -1,0 +1,99 @@
+{
+  "experiment_id": "20260714_crypto_frontier_evidence_qualification_001",
+  "objective": "Classify the existing Qlib and DeepDow negative results as informative, degenerate or underpowered without opening any sealed role.",
+  "status": "PLANNED_FROZEN",
+  "mode": "LIGHT_CPU_REPRODUCTION",
+  "approval_status": "USER_AUTHORIZED_SAME_FROZEN_BUDGET_RERUN",
+  "input_files": [
+    {
+      "path": "config/crypto_frontier_research_v2.json",
+      "sha256": "56CAB3FE3EF998866787CE778D32354347E3F91D711ED12C02D5C9F7D4820C95"
+    },
+    {
+      "path": "config/crypto_frontier_evidence_qualification_v1.json",
+      "sha256": "38A21EF12CCEA7C82217CEB5BC5FA957EE9612DCC496FEAE07C0059681C77D02"
+    },
+    {
+      "path": "runtime/crypto_frontier_research_v2_20260713/artifact_index.csv",
+      "sha256": "4DED0FD95362608FFC71D0EE7FDDD216FF44BD12A85D4CFC8D3C250F89FF2099"
+    },
+    {
+      "path": "runtime/crypto_frontier_research_v2_20260713/development_daily_panel.parquet",
+      "sha256": "DF95655938A4E35DB5B16B4C99E0AAAE055B9548270D043E1D79AF2714CA8A8F"
+    },
+    {
+      "path": "alphafactory_crypto/frontier_v2/qualification.py",
+      "sha256": "5066BBEDA3354991735D5CF98003705515D2836CE6459D31CB312DEE1B46E308"
+    },
+    {
+      "path": "scripts/crypto_frontier_evidence_qualification.py",
+      "sha256": "1ABD3FC8E272626740D3071242C8C09F814EEBB7EE7BB89757D9CCB80B2ED78E"
+    }
+  ],
+  "data": {
+    "role": "DEVELOPMENT",
+    "universe": "fixed complete core10",
+    "frequency": "UTC daily",
+    "history": "2024-01-01 through 2024-06-30",
+    "train": "2024-02-01 through 2024-04-24",
+    "valid": "2024-05-01 through 2024-05-24",
+    "development_holdout": "2024-06-01 through 2024-06-24",
+    "oos": "NONE",
+    "timestamp_policy": "features mature before decision; Qlib one-day and DeepDow five-day targets start only after the declared execution gap",
+    "normalization": "Qlib official processors; DeepDow train-only standard scaler",
+    "shuffle": false
+  },
+  "budget": {
+    "qlib_fixed_fits": 2,
+    "deepdow_fixed_fits": 4,
+    "total_fixed_fits": 6,
+    "parameter_trials": 1,
+    "hpo": false,
+    "qlib_max_boost_rounds": 1000,
+    "qlib_early_stopping_rounds": 50,
+    "deepdow_epochs_per_fit": 12,
+    "deepdow_batch_size": 32,
+    "deepdow_seeds": [1701, 1709],
+    "device": "CPU",
+    "maximum_wall_clock_minutes": 15,
+    "maximum_new_storage_mb": 10
+  },
+  "qlib_repair": {
+    "id": "ZERO_CSI300_REGULARIZATION_ONE_SHOT",
+    "only_changes": {
+      "lambda_l1": 0.0,
+      "lambda_l2": 0.0
+    },
+    "unchanged": "features, label, splits, seed, fit count, maximum rounds, early stopping, TopK mapping, executor and costs",
+    "search_performed": false
+  },
+  "deepdow_observation_rerun": {
+    "semantic_changes": false,
+    "instrumentation": "batch loss, gradient norm, upstream history, initial/final state hash, parameter delta and per-seed portfolio weights"
+  },
+  "baselines": [
+    "Qlib first-13 official features",
+    "DeepDow asset-rotated flow",
+    "internal 20-day long-only momentum",
+    "one-over-N"
+  ],
+  "checkpoint_policy": "No reusable candidate checkpoint; persist Qlib model-string hashes and DeepDow initial/final state hashes by variant and seed.",
+  "command": "powershell -ExecutionPolicy Bypass -File scripts/run_crypto_frontier_evidence_qualification.ps1 -Command run",
+  "failed_pre_training_attempt": {
+    "started_at": "2026-07-14T10:07:55.0479849+08:00",
+    "finished_at": "2026-07-14T10:08:05.6916553+08:00",
+    "stage": "ENTRYPOINT_IMPORT_BEFORE_DATA_LOAD",
+    "error": "ModuleNotFoundError: No module named 'alphafactory_crypto'",
+    "fits_started": 0,
+    "budget_consumed": false,
+    "fix": "insert repository root into sys.path before package imports"
+  },
+  "preflight_result": "PASS",
+  "financial_gate": "HOLD_RESEARCH",
+  "candidate_promotion": false,
+  "forward_read": false,
+  "challenge_read": false,
+  "recent_read": false,
+  "may_stress_read": false,
+  "cross_sprint_adaptive_memory": false
+}

@@ -1,0 +1,25 @@
+{
+  "boundaries": {
+    "candidate_promotion": false,
+    "challenge_read": false,
+    "cross_sprint_adaptive_memory": false,
+    "development_only": true,
+    "forward_read": false,
+    "include_internal_baseline": true,
+    "maximum_external_paradigms": 2,
+    "may_stress_read": false,
+    "new_performance_search": false,
+    "recent_read": false,
+    "run_only_if_data_adequacy_passes": true
+  },
+  "entry_command": "python scripts/crypto_frontier_evidence_qualification.py activation-plan --manifest <release-manifest>",
+  "required_manifest_extension": "adequacy_profiles keyed by registered paradigm id",
+  "sequence": [
+    "existing ingress-preflight",
+    "paradigm compatibility and Data Adequacy Gate",
+    "select the two highest information-match external paradigms",
+    "add current internal baseline",
+    "freeze fixed development-only budget",
+    "run Arena only when both selected paradigms pass adequacy"
+  ]
+}

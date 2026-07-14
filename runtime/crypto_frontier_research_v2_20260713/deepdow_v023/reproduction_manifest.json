@@ -1,0 +1,70 @@
+{
+  "candidate_promotion": false,
+  "challenge_read": false,
+  "classification": "NATIVE_REPRODUCED",
+  "decision_date_range": [
+    "2024-01-21 00:00:00+00:00",
+    "2024-06-24 00:00:00+00:00"
+  ],
+  "forward_read": false,
+  "matched_control": "ASSET_ROTATED_FLOW_CHANNELS_SAME_RETURN_CHANNEL_MODEL_SPLITS_AND_SEEDS",
+  "native_contract": {
+    "execution_gap_days": 1,
+    "horizon_days": 5,
+    "input_shape": [
+      156,
+      4,
+      20,
+      10
+    ],
+    "lookback_days": 20,
+    "native_evaluator": "DeepDow per-sample multi-step buy-and-hold losses, rebalance=False",
+    "portfolio_mapping": "KeynesNet SoftmaxAllocator long-only fully-invested weights",
+    "target_shape": [
+      156,
+      4,
+      5,
+      10
+    ]
+  },
+  "reproduction_id": "DEEPDOW_V023_UPSTREAM_NATIVE_FRAMEWORK_RUN",
+  "scope_limit": "framework workflow reproduced on fixed complete crypto core10; no claim of reproducing a published DeepDow market benchmark",
+  "split_sample_counts": {
+    "development_holdout": 24,
+    "train": 84,
+    "valid": 24
+  },
+  "status": "NATIVE_CODE_REPRODUCED_WITH_CRYPTO_ADAPTATIONS",
+  "symbols": [
+    "ADAUSDT",
+    "BCHUSDT",
+    "BNBUSDT",
+    "DOGEUSDT",
+    "ETHUSDT",
+    "LINKUSDT",
+    "LTCUSDT",
+    "SOLUSDT",
+    "SUIUSDT",
+    "XRPUSDT"
+  ],
+  "upstream_parity": {
+    "portfolio_returns_example": [
+      [
+        0.1600000113248825,
+        0.03137931227684021
+      ]
+    ],
+    "upstream_KeynesNet_used": true,
+    "upstream_Run_used": true,
+    "upstream_losses_used": true,
+    "weights_nonnegative_and_sum_one": true
+  },
+  "upstream_verification": {
+    "package_path": "G:\\Chengbo\\runtime\\crypto_frontier\\deps\\deepdow\\__init__.py",
+    "package_version": "0.2.3",
+    "source_clean": true,
+    "source_commit": "384e18acc17c982ac5a4362187b348bdbdb07b98",
+    "torch_version": "2.12.1",
+    "wheel_sha256": "4395FA147A07C9B96AFFAFA2C2E8C940053EC8224E6F4A6EEFAD6D3946C72087"
+  }
+}

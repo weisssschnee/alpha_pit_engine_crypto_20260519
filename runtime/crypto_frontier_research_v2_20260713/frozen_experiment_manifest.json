@@ -1,0 +1,36 @@
+{
+  "boundaries": {
+    "allowed_role": "DEVELOPMENT",
+    "candidate_promotion_forbidden": true,
+    "challenge_validation_test_recent_may_stress_forbidden": true,
+    "cross_sprint_adaptive_memory_forbidden": true,
+    "development_only": true,
+    "forward_sealed": true,
+    "new_performance_search_frozen": true
+  },
+  "budget": {
+    "deepdow_fits": 4,
+    "expected_cpu_minutes_max": 20,
+    "gpu": false,
+    "paid_services": false,
+    "qlib_fits": 2
+  },
+  "candidate_promotion": false,
+  "challenge_read": false,
+  "config_sha256": "9787D2C07127589148C1C9DD0BC7BD3FF20DDBDC9727B59F2546E28B61F7967C",
+  "development_panel_sha256": "DF95655938A4E35DB5B16B4C99E0AAAE055B9548270D043E1D79AF2714CA8A8F",
+  "forward_read": false,
+  "implementation_hashes": {
+    "arena": "5C5AEDDA372636C96396EC43447B10844475A8A14E19DFAA7D1065B59856CD63",
+    "deepdow": "E5F875E5CB51CDB3BAE78BDFC85A82C86476D24B6FDA0FAE3CF73334DE7269DA",
+    "qlib": "DEF2ED4F4084CEB6DC95CC0F687943A63A9B740DB2394BCAE12C941C4935E192",
+    "release": "9E2F4FC6AF6F7B082C08EC778DF70CEAC56DABE639A6DEE553FBEEAF76BCDBD6",
+    "runner": "EAA89E1879DD68AF7CB219001E145A1FE868468C249E173D6335FC2E7C1B7826"
+  },
+  "performance_started": false,
+  "release_evidence_sha256": "9809A8C4ED1356EBC9FAD7736D672B6F353D02E54E7D1DE55BC4B71BD14D674E",
+  "repo_sha": "986b0f900be7ede8e11c042db1cfef601bdcae26",
+  "research_id": "CRYPTO_FRONTIER_RESEARCH_V2_20260713",
+  "runtime_seconds": 25.49619039997924,
+  "status": "CRYPTO_FRONTIER_V2_DESIGN_FROZEN"
+}

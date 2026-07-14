@@ -1,0 +1,20 @@
+{
+  "decision": "replace the single formula-score pipeline assumption with adapter-neutral ForecastArtifact and PortfolioArtifact contracts, retain each native evaluator, and compare only through an explicit common bridge",
+  "decision_id": "ADR_CRYPTO_FRONTIER_MULTI_PARADIGM_ARENA_V2",
+  "economic_selection": "NO_CHALLENGER_PROMOTED",
+  "forbidden_conclusions": [
+    "Qlib is ineffective",
+    "DeepDow is ineffective",
+    "data is the unique remaining bottleneck",
+    "development holdout is OOS promotion evidence"
+  ],
+  "migrated_components": [
+    "multi-step future-return tensor target contract",
+    "direct portfolio weight artifact",
+    "stateful native portfolio position artifact",
+    "native-versus-bridge evaluator separation",
+    "hash-verified development-only external release entry"
+  ],
+  "reason": "architecture result B is achieved by making a previously inexpressible direct-allocation paradigm runnable; economic increments remain subject to paired development evidence",
+  "status": "ACCEPTED_DEVELOPMENT_ONLY"
+}

@@ -1,0 +1,45 @@
+{
+  "candidate_promotion": false,
+  "challenge_read": false,
+  "cross_sprint_adaptive_memory": false,
+  "data_adequacy": {
+    "DEEPDOW_DIRECT_5D": "DATA_ADEQUACY_UNDERPOWERED",
+    "INTERNAL_LONG_ONLY_DAILY": "DATA_ADEQUACY_UNDERPOWERED",
+    "QLIB_CROSS_SECTIONAL_DAILY": "DATA_ADEQUACY_UNDERPOWERED"
+  },
+  "deepdow": {
+    "current_economic_status": "DATA_ADEQUACY_UNDERPOWERED",
+    "exact_comparison_degenerate": false
+  },
+  "forward_read": false,
+  "may_stress_read": false,
+  "paired_comparisons": [
+    {
+      "challenger_id": "QLIB_V097_REPAIRED_FULL",
+      "control_id": "QLIB_V097_REPAIRED_13_FEATURE_CONTROL",
+      "first_date": "2024-06-01 00:00:00+00:00",
+      "last_date": "2024-06-23 00:00:00+00:00",
+      "observations": 23,
+      "paired_net_increment_lcb_95": -0.00313472746141736,
+      "paired_net_increment_mean": 0.0025697824097431314,
+      "positive_day_fraction": 0.5217391304347826
+    },
+    {
+      "challenger_id": "DEEPDOW_V023_KEYNESNET_FLOW",
+      "control_id": "DEEPDOW_V023_ASSET_ROTATED_FLOW_CONTROL",
+      "first_date": "2024-06-01 00:00:00+00:00",
+      "last_date": "2024-06-23 00:00:00+00:00",
+      "observations": 23,
+      "paired_net_increment_lcb_95": -0.0002360815261567031,
+      "paired_net_increment_mean": -8.148161572622863e-08,
+      "positive_day_fraction": 0.4782608695652174
+    }
+  ],
+  "qlib": {
+    "current_economic_status": "DATA_ADEQUACY_UNDERPOWERED",
+    "historical_0_0": "MODEL_FIT_DEGENERATE",
+    "repair": "EXTERNAL_PARADIGM_COMPARISON_DEGENERATE_FIXED"
+  },
+  "recent_read": false,
+  "status": "CURRENT_DATA_UNDERPOWERED"
+}

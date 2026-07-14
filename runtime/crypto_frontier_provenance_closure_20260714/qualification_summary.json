@@ -1,0 +1,30 @@
+{
+  "arena_systems": [
+    "INTERNAL_LONG_ONLY_20D_MOMENTUM",
+    "QLIB_V097_REPAIRED_FULL",
+    "QLIB_V097_REPAIRED_13_FEATURE_CONTROL",
+    "DEEPDOW_V023_KEYNESNET_FLOW",
+    "DEEPDOW_V023_ASSET_ROTATED_FLOW_CONTROL",
+    "ONE_OVER_N"
+  ],
+  "base_artifacts_verified": 122,
+  "base_bundle_sha256": "99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2",
+  "candidate_promotion": false,
+  "challenge_read": false,
+  "deepdow": "DATA_ADEQUACY_UNDERPOWERED",
+  "fixed_model_fits": 6,
+  "forward_read": false,
+  "may_stress_read": false,
+  "parameter_search_performed": false,
+  "qlib": {
+    "deepdow_current_economic_status": "DATA_ADEQUACY_UNDERPOWERED",
+    "main_conclusion": "CURRENT_DATA_UNDERPOWERED",
+    "qlib_current_economic_status": "DATA_ADEQUACY_UNDERPOWERED",
+    "qlib_original": "MODEL_FIT_DEGENERATE",
+    "qlib_repair_status": "EXTERNAL_PARADIGM_COMPARISON_DEGENERATE_FIXED"
+  },
+  "qualification_id": "CRYPTO_FRONTIER_EVIDENCE_QUALIFICATION_20260714",
+  "recent_read": false,
+  "repository_status": "REPOSITORY_PROVENANCE_CLOSURE_PENDING",
+  "status": "CURRENT_DATA_UNDERPOWERED"
+}

@@ -1,0 +1,49 @@
+{
+  "identity_id": "CRYPTO_FRONTIER_EVIDENCE_QUALIFICATION_EXECUTION_20260714",
+  "successful_run": {
+    "started_at": "2026-07-14T10:17:18.1028707+08:00",
+    "finished_at": "2026-07-14T10:20:34.8242813+08:00",
+    "exit_code": 0,
+    "qualification_config_sha256": "38A21EF12CCEA7C82217CEB5BC5FA957EE9612DCC496FEAE07C0059681C77D02",
+    "base_config_sha256": "56CAB3FE3EF998866787CE778D32354347E3F91D711ED12C02D5C9F7D4820C95",
+    "base_artifact_index_sha256": "4DED0FD95362608FFC71D0EE7FDDD216FF44BD12A85D4CFC8D3C250F89FF2099",
+    "daily_panel_sha256": "DF95655938A4E35DB5B16B4C99E0AAAE055B9548270D043E1D79AF2714CA8A8F",
+    "qualification_module_sha256": "5066BBEDA3354991735D5CF98003705515D2836CE6459D31CB312DEE1B46E308",
+    "runner_python_sha256": "1ABD3FC8E272626740D3071242C8C09F814EEBB7EE7BB89757D9CCB80B2ED78E",
+    "wrapper_sha256": "A3D478BD91B97CBBD562B149AF414BFC39C0DC0BD7296087A565D96D6DE49749",
+    "fixed_fits": 6,
+    "parameter_trials": 1,
+    "parameter_search_performed": false
+  },
+  "post_run_no_fit_finalization": {
+    "reason": "The first classification treated best_iteration=1 as degenerate even when the retained tree had nonzero split nodes, changing loss and nonconstant predictions. Reclassification uses split-node, loss-change and prediction-variance evidence and does not refit or recompute weights or returns.",
+    "qualification_module_sha256": "BC80DB40CAB0AD4108EAF84517526BAE7FAFA1C156E4591235A257EDDAAC1971",
+    "runner_python_sha256": "396D296D18C9A56F6F4100D43F69CFC59CEEAB36F21C645AD7D549EE70E55D6B",
+    "wrapper_sha256": "2E79E7A0894CD6714E87FE427811DD51652E6A22832CE64460191B2A6F7714BE",
+    "fit_count": 0,
+    "metric_recomputation": false,
+    "classification_only": true
+  },
+  "post_run_manifest_finalization": {
+    "reason": "Generate the 122-row storage-class manifest and bind it into closure_manifest without fitting or changing economic metrics.",
+    "runner_python_sha256": "56A3E0E7B71E2D293EB51BD11596193CE7D0B43DABCB943C436B3C12724BB2C9",
+    "fit_count": 0,
+    "metric_recomputation": false
+  },
+  "failed_pre_training_attempt": {
+    "stage": "ENTRYPOINT_IMPORT_BEFORE_DATA_LOAD",
+    "fits_started": 0,
+    "budget_consumed": false,
+    "error": "ModuleNotFoundError: No module named 'alphafactory_crypto'"
+  },
+  "boundaries": {
+    "development_only": true,
+    "new_performance_search": false,
+    "challenge_read": false,
+    "forward_read": false,
+    "recent_read": false,
+    "may_stress_read": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false
+  }
+}

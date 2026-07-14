@@ -1,0 +1,62 @@
+{
+  "audit_id": "CRYPTO_FRONTIER_EVIDENCE_QUALIFICATION_BIAS_AUDIT_20260714",
+  "decision": "HOLD_RESEARCH",
+  "requested_stage": "development-only evidence qualification and repository closure; no KEEP or promotion",
+  "candidates": [
+    "QLIB_V097_REPAIRED_FULL versus QLIB_V097_REPAIRED_13_FEATURE_CONTROL",
+    "DEEPDOW_V023_KEYNESNET_FLOW versus DEEPDOW_V023_ASSET_ROTATED_FLOW_CONTROL"
+  ],
+  "provenance": {
+    "qlib": "pyqlib 0.9.7 commit da920b7f954f48ab1bb64117c976710de198373e; Alpha158 LightGBM TopkDropout reproduction with fixed crypto adaptations",
+    "deepdow": "deepdow 0.2.3 commit 384e18acc17c982ac5a4362187b348bdbdb07b98; KeynesNet framework reproduction with asset-rotated-flow matched control",
+    "discovery_status": "reproduction plus one-shot predeclared model-fit repair; not discovery"
+  },
+  "data_and_universe": {
+    "source": "qualified Binance USD-M native aggTrades daily release BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+    "universe": "fixed complete core10 over 2024-01-01 through 2024-06-30; BTCUSDT and AVAXUSDT excluded because each lacks one qualified month",
+    "survivorship_scope": "fixed complete-contract crypto universe, not a historical constituent universe; conclusions are limited to this selected core10 development axis"
+  },
+  "date_alignment": {
+    "feature_date": "UTC daily close and same-day qualified flow aggregates",
+    "signal_date": "daily feature date after historical-only rolling computation",
+    "rebalance_date": "next execution step represented by the delayed label/native executor",
+    "execution_date": "one day after signal for DeepDow; Qlib label uses Ref(close,-2)/Ref(close,-1)-1 and common bridge uses label_1d_delayed",
+    "label_start": "signal date plus one day",
+    "label_end": "signal date plus one day for common bridge and Qlib; plus five days for DeepDow native target",
+    "timezone": "UTC",
+    "finding": "No same-day label inclusion or forbidden-role read was found; DeepDow five-day targets overlap and this is explicitly reflected by non-overlapping block counts."
+  },
+  "windows": {
+    "train": "2024-02-01 through 2024-04-24",
+    "validation": "2024-05-01 through 2024-05-24",
+    "development_holdout": "2024-06-01 through 2024-06-24",
+    "purge_days_minimum": 6,
+    "oos_window": null,
+    "oos_sample_grade": "NONE",
+    "development_dates": 23,
+    "deepdow_independent_five_day_blocks": 5
+  },
+  "costs_and_turnover": {
+    "qlib_native": "open cost 5 bps, close cost 15 bps, min cost zero",
+    "common_bridge": "5 bps per unit L1 turnover",
+    "turnover_basis": "actual post-constraint portfolio weights",
+    "finding": "Gross, cost and net results are persisted; only 23 turnover observations are available."
+  },
+  "findings": {
+    "look_ahead": "PASS_WITH_SCOPE: features are historical or same-day qualified observations and evaluation labels start after the signal date.",
+    "survivorship": "LIMITATION: fixed core10 selection is explicit and appropriate for matched development comparison, but cannot support broad-universe or listing-survival claims.",
+    "date_alignment": "PASS_WITH_SCOPE: UTC alignment, one-day execution gap and delayed labels are explicit.",
+    "label_horizon": "PASS_WITH_SCOPE: one-day common labels and overlapping five-day DeepDow labels are disclosed and block-counted.",
+    "costs": "PASS_FOR_DEVELOPMENT: native Qlib costs and common 5 bps turnover costs are applied; no liquidity/market-impact claim is made.",
+    "turnover": "UNDERPOWERED: calculated from mapped weights but only 23 observations.",
+    "multi_window_stability": "NOT_ESTABLISHED: one development holdout, four Qlib and five DeepDow independent evaluation blocks.",
+    "replay_vs_discovery": "REPRODUCTION: no new alpha discovery or promotion evidence."
+  },
+  "blocking_issues": [
+    "No OOS evidence was opened.",
+    "All three Data Adequacy Gate profiles fail on current data.",
+    "Development holdout and independent block counts are insufficient for an informative economic negative."
+  ],
+  "required_next_action": "Keep HOLD_RESEARCH. Run only the existing ingress-preflight and frozen Data Adequacy Gate when a new release arrives; do not run a large Arena unless two external paradigms pass, and do not open challenge, forward, recent, May stress, test or promotion.",
+  "promotion_authorized": false
+}

@@ -1,0 +1,37 @@
+{
+  "architecture_status": "ARCHITECTURE_EXECUTION_COMPLETED",
+  "base_artifact_storage_manifest": "runtime/crypto_frontier_provenance_closure_20260714/base_122_artifact_storage_manifest.csv",
+  "base_artifact_storage_manifest_sha256": "BA6BE22A2D168F0FD64323F5889AE7E4150B62C8A40ECD145D946D984346A1A8",
+  "base_bundle": {
+    "artifact_count": 122,
+    "artifact_index": "runtime/crypto_frontier_research_v2_20260713/artifact_index.csv",
+    "artifact_index_sha256": "4DED0FD95362608FFC71D0EE7FDDD216FF44BD12A85D4CFC8D3C250F89FF2099",
+    "bundle_sha256": "99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2",
+    "commit_policy": {
+      "content_hash_manifest_committed": true,
+      "evidence_artifacts_committed": true,
+      "regenerable_provider_handler_and_tracking_caches_ignored": true
+    },
+    "content_verification": {
+      "drift": [],
+      "missing": [],
+      "verified_count": 122
+    }
+  },
+  "closure_id": "CRYPTO_FRONTIER_PROVENANCE_CLOSURE_20260714",
+  "corrected_arena_status_sha256": "D65E17F9A5C371179B04160960CD5C3E1770973FC2308264019CCBC8A92AEA6C",
+  "cross_sprint_adaptive_memory": false,
+  "data_adequacy_gate_sha256": "51EAEFBA3A76ED869D07FEC391116F4E159BA949E852BBC693C6040742A49B61",
+  "deepdow_qualification": "DATA_ADEQUACY_UNDERPOWERED",
+  "evidence_subject_repo_sha": "986b0f900be7ede8e11c042db1cfef601bdcae26",
+  "forward_read": false,
+  "intended_tag": "crypto-frontier-provenance-closure-20260714",
+  "main_conclusion": "CURRENT_DATA_UNDERPOWERED",
+  "new_performance_search": false,
+  "promotion": false,
+  "qlib_degenerate_comparison_fixed": "EXTERNAL_PARADIGM_COMPARISON_DEGENERATE_FIXED",
+  "qlib_qualification": "DATA_ADEQUACY_UNDERPOWERED",
+  "qualification_config": "config/crypto_frontier_evidence_qualification_v1.json",
+  "qualification_config_sha256": "38A21EF12CCEA7C82217CEB5BC5FA957EE9612DCC496FEAE07C0059681C77D02",
+  "status": "REPOSITORY_PROVENANCE_CLOSURE_PENDING"
+}

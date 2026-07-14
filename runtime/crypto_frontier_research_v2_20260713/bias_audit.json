@@ -1,0 +1,35 @@
+{
+  "audit_id": "CRYPTO_FRONTIER_RESEARCH_V2_BIAS_AUDIT_20260714",
+  "decision": "HOLD_RESEARCH",
+  "research_id": "CRYPTO_FRONTIER_RESEARCH_V2_20260713",
+  "discovery_status": "REPRODUCTION",
+  "data_source": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1 development role, fixed complete core10 adaptation",
+  "frequency_and_horizon": "daily; Qlib next-one-day and DeepDow next-five-day native horizons; common bridge next-one-day",
+  "is_window": "chronological development train and valid segments within 2024-01..05",
+  "oos_window": "NONE; 2024-06 is an internal development holdout",
+  "oos_sample_grade": "NONE",
+  "common_holdout_observations": 23,
+  "cost_model": "common bridge 5 bps per unit actual L1 weight turnover; Qlib native 5 bps buy and 15 bps sell; DeepDow native evaluator has no cross-sample transaction cost",
+  "turnover": "computed from actual portfolio weights including initial cash-to-portfolio transition",
+  "benchmark": "matched Qlib first-13 official features; DeepDow asset-rotated flow; internal momentum and one-over-N Arena controls",
+  "findings": {
+    "look_ahead": "No blocking leakage found: release loader is role/path/hash gated; train-only scaling is recorded; decision features precede the one-day execution gap; future tensors begin after the gap.",
+    "survivorship": "Fixed complete core10 excludes two incomplete core12 assets and is therefore unsuitable for universe-general economic promotion; acceptable for bounded architecture reproduction only.",
+    "date_alignment": "UTC daily decision date, execution gap, label start/end and common bridge dates are explicit; all common comparisons use 2024-06-01 through 2024-06-23.",
+    "label_horizon": "Qlib one-day and DeepDow overlapping five-day native labels are disclosed; native metrics are not pooled with the one-day bridge.",
+    "costs": "Common economic comparison includes fixed 5 bps turnover cost; native cost semantics remain adapter-specific and separately labelled.",
+    "turnover": "Actual post-mapping weights are used, not raw signal changes.",
+    "multi_window_stability": "Unavailable: only one development holdout month; no sign or regime stability claim is permitted.",
+    "replay_vs_discovery": "Pinned external reproductions and fixed matched controls, not new alpha discovery."
+  },
+  "blocking_issues": [
+    "No OOS evidence",
+    "Only 23 common development holdout observations",
+    "Single holdout month",
+    "Fixed complete core10 survivorship/coverage adaptation",
+    "No liquidity-capacity or market-impact model"
+  ],
+  "required_next_action": "Retain HOLD and all freezes. Promotion would require a pre-authorized, independently sealed multi-window OOS evaluation with a qualified universe/release and capacity-aware costs.",
+  "candidate_promotion": false,
+  "forward_read": false
+}

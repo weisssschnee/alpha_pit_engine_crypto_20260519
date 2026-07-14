@@ -1,0 +1,567 @@
+{
+  "adaptations": [
+    "fixed complete crypto core10 rather than dynamic CSI300",
+    "UTC 365-day calendar rather than China exchange calendar",
+    "topk=3 and n_drop=1 for a ten-asset universe",
+    "ETHUSDT benchmark rather than SH000300",
+    "single-thread deterministic LightGBM seed"
+  ],
+  "candidate_promotion": false,
+  "challenge_read": false,
+  "classification": "NATIVE_REPRODUCED",
+  "forward_read": false,
+  "matched_control": "OFFICIAL_FIRST_13_KBAR_PRICE_EXPRESSIONS_SAME_MODEL_AND_EXECUTOR",
+  "native_contract": {
+    "feature_expression_count": 158,
+    "feature_expression_sha256": "B1154A5B310EC5F8EAD6CA064C06AE4A1121DC1C9A0D4FF7DCD00EFCF20704E5",
+    "label": "Ref($close, -2)/Ref($close, -1) - 1",
+    "learn_processors": [
+      "DropnaLabel",
+      "CSZScoreNorm(label)"
+    ],
+    "model": "Qlib LGBModel with official Alpha158 workflow parameters",
+    "native_evaluator": "Qlib IC/RankIC plus order/cash/position backtest and 238-day risk_analysis",
+    "portfolio_mapping": "Qlib TopkDropoutStrategy topk=3 n_drop=1"
+  },
+  "provider": {
+    "cache_status": "VERIFIED_CACHE_HIT",
+    "csv_root": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv",
+    "dump_command": [
+      "G:\\PythonProject\\.venv\\Scripts\\python.exe",
+      "G:\\Chengbo\\runtime\\crypto_frontier\\upstream\\qlib-v0.9.7\\scripts\\dump_bin.py",
+      "dump_all",
+      "--data_path=G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv",
+      "--qlib_dir=G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_provider",
+      "--freq=day",
+      "--max_workers=1",
+      "--date_field_name=date",
+      "--symbol_field_name=symbol",
+      "--include_fields=open,high,low,close,vwap,volume,factor,change"
+    ],
+    "dump_stderr_tail": "",
+    "dump_stdout_tail": "",
+    "input_bundle_sha256": "F1AC1CE3BAD0E92F7E553B87A949DCF43B14EA95DDB4EED0F6172C5306BCBC91",
+    "provider_bundle_sha256": "7BAF4DD9EA7E1AD2A5C68CA38511EDC142F7443D3634A7D2B3F2EF288EA74126",
+    "provider_files": [
+      {
+        "path": "calendars/day.txt",
+        "sha256": "AFFF5C53D86D6E157DA03AB7B5FE0328C53832A7BDDBCC099598B1EB71071B60",
+        "size_bytes": 2184
+      },
+      {
+        "path": "features/adausdt/change.day.bin",
+        "sha256": "878A890965B0AEB8E5FBAABA8197FCC92C1A9527ED28F0AE43B9097DFE4EADD0",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/adausdt/close.day.bin",
+        "sha256": "52181D39410B34AE142DF32951BDAAA10B2DDDF68AF3C35D05ED1C60E84B8571",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/adausdt/factor.day.bin",
+        "sha256": "7568C2D5F9EEBC7F994873EB05EF2E4328796E6B3C4A5F233B1C6789744C8F0B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/adausdt/high.day.bin",
+        "sha256": "E52E356D08D5C40C0662BA2F340042C3196E53F836F36D04FD9D77767CAE3746",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/adausdt/low.day.bin",
+        "sha256": "6995883B9B9BDC8833FDB4A6ED7B7D6516A180234F9AC4CB084042EADC0488A8",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/adausdt/open.day.bin",
+        "sha256": "9C40CF2A4C5D686F3AB1A854F14BFEAABD73FFFF4DDCBD6B8B14EA4E0E6541F7",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/adausdt/volume.day.bin",
+        "sha256": "52625BAB55A44421152085820B3A9B49F7C963A5F78B10E8512DA0FD4A95AD91",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/adausdt/vwap.day.bin",
+        "sha256": "94B4744C0F28D68C5884CDA1BA058CEEE82E2A8D6F49643C3E04D29CFCED8640",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bchusdt/change.day.bin",
+        "sha256": "B6DE1F2C48532FEEBE23873E9FDF1673F316C75F8BC5E8961B59982A1C83CDDF",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bchusdt/close.day.bin",
+        "sha256": "E0ACA7039D8244D2E455D7514F7DD8917923C6C17E8F21962673A636FE422BB2",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bchusdt/factor.day.bin",
+        "sha256": "7568C2D5F9EEBC7F994873EB05EF2E4328796E6B3C4A5F233B1C6789744C8F0B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bchusdt/high.day.bin",
+        "sha256": "89B7180CD02610D4F53C1746A2DA31723171612856BB6C7065FE00FFEB1D5623",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bchusdt/low.day.bin",
+        "sha256": "2D395AED45BED1EFB5FEDCC40A70FFA588458F6B6A4A678B1326760662A76B50",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bchusdt/open.day.bin",
+        "sha256": "CEE684ABBA5C0D89C640214B7EC9230447798A1E382189752E5B47293D1D2606",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bchusdt/volume.day.bin",
+        "sha256": "55D9FEACCAF04269CFC5AFDDB7CDA8A647EF82F2A496D8EC4C4AF36836CA032F",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bchusdt/vwap.day.bin",
+        "sha256": "830452E2672EB354EC865B41B3223E82428941981EE48B47E519A5A3DFBA6B89",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bnbusdt/change.day.bin",
+        "sha256": "1D8AD1E210772284B89FD8C5D668F22B9B1B95AA3003B21A6E127108566F9857",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bnbusdt/close.day.bin",
+        "sha256": "51C360CF606B6C6290389822EEB87C874132678E54723FB06AD966C3684D7549",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bnbusdt/factor.day.bin",
+        "sha256": "7568C2D5F9EEBC7F994873EB05EF2E4328796E6B3C4A5F233B1C6789744C8F0B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bnbusdt/high.day.bin",
+        "sha256": "B2E2672BCC03839F9788D24DBE411F0C3FBFA0934FBC7E1861F8546CEFFBFE5B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bnbusdt/low.day.bin",
+        "sha256": "E581A4B05985E2BDA5100302AB9B3BA87551A32866E6968400B2C251FDA53C00",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bnbusdt/open.day.bin",
+        "sha256": "F9582694F16D763C4F905B173523C511102A9ADE94363D9AA4CB72617F7F01CF",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bnbusdt/volume.day.bin",
+        "sha256": "352C8D96412A2B51B72012142E2916865A517AF6811E0A0899F7422AA735E67F",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/bnbusdt/vwap.day.bin",
+        "sha256": "9EB032FAA6666B011842007ACF66F760788878CF05A624502CD47EC4FF4AAD33",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/dogeusdt/change.day.bin",
+        "sha256": "A0C13FD763F34C9907F849910B2F223880AE617FC1A3BB8988506FB6D7AEBC8F",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/dogeusdt/close.day.bin",
+        "sha256": "2B58AFD7173EE9A008208ACF4814B576DE15BF57CBAC0465193E75332A09358A",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/dogeusdt/factor.day.bin",
+        "sha256": "7568C2D5F9EEBC7F994873EB05EF2E4328796E6B3C4A5F233B1C6789744C8F0B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/dogeusdt/high.day.bin",
+        "sha256": "1D895E76A84BB55AF079FDDF69EC52A121719CC68B4D4A9C37A1D5A19E2B9C07",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/dogeusdt/low.day.bin",
+        "sha256": "653D1B2BECECA2D9A93E05ACD10DE06B291F3230D625F2DF0D0F3FECD80D7002",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/dogeusdt/open.day.bin",
+        "sha256": "E7B3CEDF912D9380B2F1056CD0830ABC9E75D3171AC68E42E7310CD7E54C9105",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/dogeusdt/volume.day.bin",
+        "sha256": "92B8DBE4B0F4F1A9495F5F2083DBAD53F17914E83DE047A3542917DD1DA05D81",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/dogeusdt/vwap.day.bin",
+        "sha256": "0C9EACB7E259B6ABC1C3E4E84C2192F675F877E9FB58140EF02738F7804B5F7E",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ethusdt/change.day.bin",
+        "sha256": "AFA7480AFBC3F0DFAF06DFB0BDD36826DBDDE306CBD2138B6F51B4CFD27F664A",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ethusdt/close.day.bin",
+        "sha256": "DC4C363D5F36E4DB3FD6C6862C74B8479E0BF7926EFBB570F1096F7BD3A08801",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ethusdt/factor.day.bin",
+        "sha256": "7568C2D5F9EEBC7F994873EB05EF2E4328796E6B3C4A5F233B1C6789744C8F0B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ethusdt/high.day.bin",
+        "sha256": "0B86F3625E3B3CA15BF96B88E8ED5E18BC0FC9D270F753E7EF456B020FC8CFBB",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ethusdt/low.day.bin",
+        "sha256": "B65A5C484D7753EE200123A88DA7053C087B9A4BC6DD150D38471A4ED9D5045F",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ethusdt/open.day.bin",
+        "sha256": "6564EC7911292F18416395948A828D44BB49B8E973BC5E9E2D563C8316C1384C",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ethusdt/volume.day.bin",
+        "sha256": "F722B1ADE26A15AA0CC97E4E459D94534C01EB1B26C14B0BBFB9BA2DB073FE0A",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ethusdt/vwap.day.bin",
+        "sha256": "7F4EC60B560CA782635D3EA36D70BCD1A312827FF5F370A02A3DDEE40EC105EE",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/linkusdt/change.day.bin",
+        "sha256": "7E96D4609234344207AD1388EC31CEE835DEAF1D27D912CA993D8F7643242A87",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/linkusdt/close.day.bin",
+        "sha256": "C5C12E8822463F1A18EB07C86DD52B04A97BF631165CEB7340FEA04DC30CA298",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/linkusdt/factor.day.bin",
+        "sha256": "7568C2D5F9EEBC7F994873EB05EF2E4328796E6B3C4A5F233B1C6789744C8F0B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/linkusdt/high.day.bin",
+        "sha256": "5F1210B6E558DDB31EBCCE24E96268A105F793D6E6FF0AF311ADABAB356F00E4",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/linkusdt/low.day.bin",
+        "sha256": "88D3E96CF16FF89DE6D5880C9EBE58E3D6A7E832535EF7CD751ABA8BB241044A",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/linkusdt/open.day.bin",
+        "sha256": "7E685CB241EE21DAAE68DBE81B70CF18B1F76B63211F8D4B0BD30D0F40DD26F3",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/linkusdt/volume.day.bin",
+        "sha256": "DBFB8288332C0C30D9D7265107D9AAD3DDE7D5B6AB1F007D25432B0B30368EF6",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/linkusdt/vwap.day.bin",
+        "sha256": "07E8C26C11DE7A94DF81A1E1108A473A917EE270D3BA931E8D5BE4F8BA4351DD",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ltcusdt/change.day.bin",
+        "sha256": "E72EC9A03D0EDBB20072A4E1A363EA4D8F860F8792EDA38CC42917CB94651766",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ltcusdt/close.day.bin",
+        "sha256": "A89AA9A1A43AA5907681B3F2E692F85E36AC6B24FF73709A91F7E2C0C3794CAA",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ltcusdt/factor.day.bin",
+        "sha256": "7568C2D5F9EEBC7F994873EB05EF2E4328796E6B3C4A5F233B1C6789744C8F0B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ltcusdt/high.day.bin",
+        "sha256": "F7FC07D20E8111BBBD4B65C10EB7B84357A5A44E3C35DF41C3A7F8635C3C45AB",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ltcusdt/low.day.bin",
+        "sha256": "B1A7B146BFAD85E709778AFA4393C960AA65E71DD89B6626736CEA9888B21130",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ltcusdt/open.day.bin",
+        "sha256": "F82A2AF1361A3FE9B3F41C5B1084C539B6C1B6D835DC4B4FFEC37224AC3ED045",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ltcusdt/volume.day.bin",
+        "sha256": "6A75FFA016F212D9A825B7E1DA68CF728A49298F88C0EAE573ED3DB1E4904D40",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/ltcusdt/vwap.day.bin",
+        "sha256": "697D26336F055AAA96A7A77DD21B7DE41DA68ABA8F1C770DB6523ABC5F52ACAF",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/solusdt/change.day.bin",
+        "sha256": "637BCBBCFF8603B6F2376EF65173F43088F03EFAA729B35A7A584581434F3A5B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/solusdt/close.day.bin",
+        "sha256": "E1F58D11D838A3E9D64E658FD481B3845E34C15E2E437BF9BF4F582F1535A4A5",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/solusdt/factor.day.bin",
+        "sha256": "7568C2D5F9EEBC7F994873EB05EF2E4328796E6B3C4A5F233B1C6789744C8F0B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/solusdt/high.day.bin",
+        "sha256": "A422B493D71A4D00BAB9676E79E6F0AFD07F18FE54BF0A4D21B598465FF05C17",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/solusdt/low.day.bin",
+        "sha256": "1A22EAB4BDC7B4C094600623B4287FB230AB400EA8AEDC56DF124F17BA4E8A2E",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/solusdt/open.day.bin",
+        "sha256": "30D151B51DF569057B2F67608E482CD1A391AA4E22DEEFFF755E16C34FAD2BCC",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/solusdt/volume.day.bin",
+        "sha256": "EF9F7F78208413B72192C489D2814BE3E081613E989941268ECC4D339CDCC41E",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/solusdt/vwap.day.bin",
+        "sha256": "2482D5409840A36B7014636CCFC77924143E71D71AA1AF803AE530D11AD4C563",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/suiusdt/change.day.bin",
+        "sha256": "F3A7FA152383EC262EE9B38055D107628125D1F7F630D603D2E0ACBA3BD7D06B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/suiusdt/close.day.bin",
+        "sha256": "DD49E400DA39DA9828D8F2E601F7355EB1B4726F8B3DB7F2BE400C33DCDB315A",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/suiusdt/factor.day.bin",
+        "sha256": "7568C2D5F9EEBC7F994873EB05EF2E4328796E6B3C4A5F233B1C6789744C8F0B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/suiusdt/high.day.bin",
+        "sha256": "EF06C95A67BF479A23989856EA9097FF7133ED8A63462806F2C63F4597125268",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/suiusdt/low.day.bin",
+        "sha256": "91A6CB8F653727DF829F27FD05050D8740E148B66BCCD3303D6ED4F0680CEA33",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/suiusdt/open.day.bin",
+        "sha256": "425FA8D1A9AD5640DFA9F8508F2379D0387B07FFF38B562F0DF573200252DBAA",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/suiusdt/volume.day.bin",
+        "sha256": "E5CC097858D2BE3625414EC606BCC52E9E5A177498CB51E85A87111B1327A9E5",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/suiusdt/vwap.day.bin",
+        "sha256": "A41C92F442F6CAC382C9AA2D9407F96197E1AD7DFB94195C344248293777F742",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/xrpusdt/change.day.bin",
+        "sha256": "38F6BFB9C6603F025E9CF66B3CF088DABB1EA3B151287CF6CD06158A25D1E727",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/xrpusdt/close.day.bin",
+        "sha256": "392184B04A92F807EFEB6E94943CCFB8F155F31C315672A21E46AAEC2C586179",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/xrpusdt/factor.day.bin",
+        "sha256": "7568C2D5F9EEBC7F994873EB05EF2E4328796E6B3C4A5F233B1C6789744C8F0B",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/xrpusdt/high.day.bin",
+        "sha256": "7488EA2D3ABD7D94F8BC45D79C9BA380667E91B80EBD084FB01624595812CD63",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/xrpusdt/low.day.bin",
+        "sha256": "87F4B314FA7B7CFDEB3BE9545C421FA7181C419E56F32F610BA6812173EAC854",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/xrpusdt/open.day.bin",
+        "sha256": "A6DE5A008DA48D4A48DE99D73C53C1A44730DD131FE12677D2CA342443F62571",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/xrpusdt/volume.day.bin",
+        "sha256": "3A3BB6E91F242FFAD344F56198D172CF31469227399D9C1438F4F45F95755901",
+        "size_bytes": 732
+      },
+      {
+        "path": "features/xrpusdt/vwap.day.bin",
+        "sha256": "2C4DA5A455A87698D89E028A6FA126861F5E60803FD4CBD37CC291497350A847",
+        "size_bytes": 732
+      },
+      {
+        "path": "instruments/all.txt",
+        "sha256": "3924FCABD6D25C7931E391CFA6641404523BE59F8749B4D362F63D474702423D",
+        "size_bytes": 312
+      }
+    ],
+    "provider_root": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_provider",
+    "source_csv_bundle_sha256": "37D24769ADAD07BAF6169474ED3C396EF677004712E5486F0EBBF6194A8104C7",
+    "source_files": [
+      {
+        "path": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv\\adausdt.csv",
+        "rows": 182,
+        "sha256": "23B83C88BEFAE384D164380E921CC4CA4CB2F13D5D88CB65CD1628DC2032D6E3",
+        "symbol": "ADAUSDT"
+      },
+      {
+        "path": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv\\bchusdt.csv",
+        "rows": 182,
+        "sha256": "8F22109FC8C8F9AA187A5582F51E62AEF2675FBC42148ABC4BFEC4858FFC16B6",
+        "symbol": "BCHUSDT"
+      },
+      {
+        "path": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv\\bnbusdt.csv",
+        "rows": 182,
+        "sha256": "24A44BEAF02575FF9A53E352D777D950D9DEF8F8BE51F3E07695EE8241EB8B1E",
+        "symbol": "BNBUSDT"
+      },
+      {
+        "path": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv\\dogeusdt.csv",
+        "rows": 182,
+        "sha256": "15151CB0DAC2C60BC98450274294CDC44E4A14B962D084ADD928D970D9054507",
+        "symbol": "DOGEUSDT"
+      },
+      {
+        "path": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv\\ethusdt.csv",
+        "rows": 182,
+        "sha256": "ED28218450E90B1B28BA8C7B9EBA1A235F035EACEF72EBCC9D24FD104B369F72",
+        "symbol": "ETHUSDT"
+      },
+      {
+        "path": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv\\linkusdt.csv",
+        "rows": 182,
+        "sha256": "465547CCCAF32A39693254B926CF4B97B9F43FE5BBE7B9BD3E7FB63D1F7C81CE",
+        "symbol": "LINKUSDT"
+      },
+      {
+        "path": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv\\ltcusdt.csv",
+        "rows": 182,
+        "sha256": "2942AD1BFF2B8CFE5A173261601FA4C2530E349ECBACA4DCD3D55EA2F96339CC",
+        "symbol": "LTCUSDT"
+      },
+      {
+        "path": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv\\solusdt.csv",
+        "rows": 182,
+        "sha256": "BDBF64F84BA481B157697EB9B70BD4662AA921DDBF096FA163E9863F9A46D0B7",
+        "symbol": "SOLUSDT"
+      },
+      {
+        "path": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv\\suiusdt.csv",
+        "rows": 182,
+        "sha256": "8D73B518DF74E64AB475353163A6EBE99E3B91730F14E0BC9680FD3206530326",
+        "symbol": "SUIUSDT"
+      },
+      {
+        "path": "G:\\Chengbo\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_frontier_research_v2_20260713\\qlib_source_csv\\xrpusdt.csv",
+        "rows": 182,
+        "sha256": "C7794D7F080D16B711D892880078CC37985BEC33BA807A8FFDCEFC735EB6FD2F",
+        "symbol": "XRPUSDT"
+      }
+    ]
+  },
+  "reproduction_id": "MICROSOFT_QLIB_V097_ALPHA158_LIGHTGBM_TOPKDROPOUT",
+  "scope_limit": "native Qlib code path reproduced on a fixed crypto core10 adaptation; original CSI300 benchmark performance is not reproduced",
+  "status": "NATIVE_CODE_REPRODUCED_WITH_CRYPTO_ADAPTATIONS",
+  "upstream_parity": {
+    "installed_source_matches_tag": true,
+    "official_Alpha158_used": true,
+    "official_LGBModel_used": true,
+    "official_TopkDropoutStrategy_used": true,
+    "official_dump_bin_used": true,
+    "official_risk_analysis_used": true
+  },
+  "upstream_verification": {
+    "lightgbm_version": "4.6.0",
+    "package_path": "G:\\PythonProject\\.venv\\Lib\\site-packages\\qlib",
+    "package_version": "0.9.7",
+    "source_clean": true,
+    "source_commit": "da920b7f954f48ab1bb64117c976710de198373e",
+    "verified_module_bundle_sha256": "88E8702575790A6F36F96ED7A91BDBB2F5F96D86F97B2CF265AEB79AB71A8DFE",
+    "verified_modules": [
+      {
+        "file": "contrib/data/loader.py",
+        "sha256": "472F9DC84ABD20D7A662C12D66EC49EDC09A66A6CA9B30DEB1AE083EC00D0A6E"
+      },
+      {
+        "file": "contrib/data/handler.py",
+        "sha256": "19722325F35B11EDA4CDEA87025B733EAC7AF3BA40B16A8607C745E6E83631D2"
+      },
+      {
+        "file": "contrib/model/gbdt.py",
+        "sha256": "062874B847EBD6426B5F54A263D5DBCE49B18D528EA35DAE96B6A31DBF7F3C66"
+      },
+      {
+        "file": "contrib/strategy/signal_strategy.py",
+        "sha256": "71938038DB147C7BCC98EA6802F8A823610D5F954516D884B2C88408142F6811"
+      },
+      {
+        "file": "contrib/eva/alpha.py",
+        "sha256": "4015BF16F7F46E721D8BE46A7A1F6636ADF8011DB04B1BCC48F72715FA0D2BF2"
+      },
+      {
+        "file": "contrib/evaluate.py",
+        "sha256": "481CC823D65ADB3C8729933C797E42199FAEB699E0BC0DC8F1D8A112717774A2"
+      }
+    ]
+  }
+}

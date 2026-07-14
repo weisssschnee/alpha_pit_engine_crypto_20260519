@@ -1,0 +1,40 @@
+{
+  "content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+  "coordinate_count": 60,
+  "first_timestamp": "2024-01-01 00:00:00+00:00",
+  "last_timestamp": "2024-06-30 23:00:00+00:00",
+  "months": [
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06"
+  ],
+  "no_fill": true,
+  "qualification_bundle_sha256": "B5C0B913DCC980DC8453782FF2FB442E64F3E12989E7AECDF2BFC8181951C468",
+  "qualification_index_mismatches": [
+    "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/coverage_ledger.csv",
+    "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/coverage_summary.csv",
+    "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/read_ledger.csv"
+  ],
+  "release_bundle_sha256": "CA183D5BB3FE366D1475ADBC9B44C1BD625FB63F3AFEAA2656BA7BF196D78333",
+  "release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+  "role": "DEVELOPMENT",
+  "row_count_daily": 1820,
+  "row_count_hourly": 43680,
+  "source_and_release_hashes_verified": true,
+  "source_bundle_sha256": "12459C2F2224C8CFA6CED13FF831986BA8D3680E86EA941EF04EB3B47A9BE17E",
+  "symbols": [
+    "ADAUSDT",
+    "BCHUSDT",
+    "BNBUSDT",
+    "DOGEUSDT",
+    "ETHUSDT",
+    "LINKUSDT",
+    "LTCUSDT",
+    "SOLUSDT",
+    "SUIUSDT",
+    "XRPUSDT"
+  ]
+}

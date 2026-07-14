@@ -1,0 +1,6 @@
+layer,old_capability,v2_capability,remaining_gap,attribution
+data_representation,hourly Main plus scoped daily aggregation,hash-verified development-only fixed core10 daily tensor with release lineage,core12 fixed axis missing BTC March and AVAX April; multi-level L2 and qualified minute data absent,NARROW_DATA_BLOCKERS_ONLY
+target_and_horizon,single delayed one-day label,coexisting Qlib one-day normalized label and DeepDow five-day future return tensor,no generic target registry for event-time or residualized minute labels,EXPRESSIVITY_GAP_CLOSED_FOR_MULTI_STEP_DAILY
+model_and_search,formula/program search plus scoped manual ML canaries,pinned upstream supervised and direct-allocation adapters with separate fit ledgers,no long-history transformer or event-time LOB model,MODEL_MONOCULTURE_REJECTED
+portfolio_mapping,mostly cross-sectional rank weights,native stateful TopK holdings and direct neural long-only weights retained into bridge,execution-aware shorting and inventory state remain absent,DIRECT_PORTFOLIO_CONTRACT_MIGRATED
+evaluator,native label applied to a generic evaluator,native evaluator artifacts kept distinct from a one-day common economic bridge,holdout is one development month and cannot support promotion,NATIVE_BRIDGE_SEPARATION_MIGRATED

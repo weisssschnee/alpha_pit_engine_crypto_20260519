@@ -1,0 +1,53 @@
+{
+  "identity_id": "CRYPTO_FRONTIER_V2_EXECUTION_IDENTITY_SUPERSESSION_20260714",
+  "status": "ACCEPTED_PRE_RUN_OPERATIONAL_SUPERSESSION",
+  "recorded_at": "2026-07-14T06:11:59.6459757+08:00",
+  "research_id": "CRYPTO_FRONTIER_RESEARCH_V2_20260713",
+  "reason": "The original prepare manifest preceded Windows-safe Qlib provider cache and scheduling changes. The actual run used the revised files, all revised files were stable before run start, and no target, model, split, fit count, portfolio or evaluator semantics changed.",
+  "original_frozen_manifest": {
+    "path": "runtime/crypto_frontier_research_v2_20260713/frozen_experiment_manifest.json",
+    "sha256": "1E4ACC6E8EDD7F9D97E06A2A8DBD0E685B1AAEA6F6ABEFBAA0FE60C25543BD7D",
+    "config_sha256": "9787D2C07127589148C1C9DD0BC7BD3FF20DDBDC9727B59F2546E28B61F7967C",
+    "qlib_implementation_sha256": "DEF2ED4F4084CEB6DC95CC0F687943A63A9B740DB2394BCAE12C941C4935E192",
+    "runner_implementation_sha256": "EAA89E1879DD68AF7CB219001E145A1FE868468C249E173D6335FC2E7C1B7826"
+  },
+  "actual_run_identity": {
+    "config_sha256": "56CAB3FE3EF998866787CE778D32354347E3F91D711ED12C02D5C9F7D4820C95",
+    "implementation_hashes": {
+      "arena": "5C5AEDDA372636C96396EC43447B10844475A8A14E19DFAA7D1065B59856CD63",
+      "deepdow": "E5F875E5CB51CDB3BAE78BDFC85A82C86476D24B6FDA0FAE3CF73334DE7269DA",
+      "qlib": "B0525F7C278AFBF19447AC2C55ED88953284FCA30215ACA20E008B18F8CA6C5F",
+      "release": "9E2F4FC6AF6F7B082C08EC778DF70CEAC56DABE639A6DEE553FBEEAF76BCDBD6",
+      "runner": "EAA89E1879DD68AF7CB219001E145A1FE868468C249E173D6335FC2E7C1B7826"
+    },
+    "run_started_at": "2026-07-14T04:54:23.1866719+08:00",
+    "run_finished_at": "2026-07-14T05:23:26.9279779+08:00",
+    "run_exit_code": 0,
+    "config_last_write_time": "2026-07-14T03:01:58.4236940+08:00",
+    "qlib_last_write_time": "2026-07-14T04:05:06.0149396+08:00"
+  },
+  "operational_changes": [
+    "Set qlib.provider_workers to 1",
+    "Set qlib.joblib_backend to threading",
+    "Reuse a provider only after semantic CSV equality, required provider structure and actual file-bundle hashes pass",
+    "Record actual source/provider hashes and cache status in the native reproduction manifest"
+  ],
+  "research_semantics_changed": false,
+  "unchanged_contracts": [
+    "development-only role and source release",
+    "symbols, dates and splits",
+    "Qlib Alpha158 expressions, processors, LGBModel parameters, TopK mapping and evaluator",
+    "DeepDow tensor, network, loss, epochs and seeds",
+    "fit budgets: Qlib 2 and DeepDow 4",
+    "common bridge, cost and matched controls",
+    "all four frozen boundaries"
+  ],
+  "post_run_verification_code": {
+    "runner_sha256": "1E3EB6D37C7EE2DF6A5BA49EF30CDA21D09BF54910913BDB66411D6920791CF3",
+    "wrapper_sha256": "F54DE7FC7821232F6AEC43996DDB3F3ACD31BC64B86D86F4FA61ACEA54927844",
+    "change_scope": "exclude volatile execution logs/status from the immutable artifact bundle and enforce this identity supersession in check; no fit or metric recomputation"
+  },
+  "candidate_promotion": false,
+  "forward_read": false,
+  "cross_sprint_adaptive_memory": false
+}

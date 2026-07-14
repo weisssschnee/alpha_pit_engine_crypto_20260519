@@ -1,0 +1,162 @@
+{
+  "research_id": "CRYPTO_FRONTIER_RESEARCH_V2_20260713",
+  "version": 2,
+  "supersedes": {
+    "research_id": "CRYPTO_EXTERNAL_FRONTIER_ASSIMILATION_20260713",
+    "reason": "source and runtime audit found that the two prior systems were scoped reimplementations rather than native reproductions and that the data-only bottleneck conclusion was not matched-controlled",
+    "historical_assets_immutable": true
+  },
+  "boundaries": {
+    "development_only": true,
+    "allowed_role": "DEVELOPMENT",
+    "new_performance_search_frozen": true,
+    "forward_sealed": true,
+    "candidate_promotion_forbidden": true,
+    "cross_sprint_adaptive_memory_forbidden": true,
+    "challenge_validation_test_recent_may_stress_forbidden": true
+  },
+  "release": {
+    "release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+    "release_config": "config/crypto_native_aggtrades_release_v1.json",
+    "qualification_root": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1",
+    "content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+    "development_months": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06"],
+    "fixed_complete_universe": [
+      "ADAUSDT", "BCHUSDT", "BNBUSDT", "DOGEUSDT", "ETHUSDT",
+      "LINKUSDT", "LTCUSDT", "SOLUSDT", "SUIUSDT", "XRPUSDT"
+    ],
+    "excluded_from_fixed_axis": {
+      "BTCUSDT": "missing qualified 2024-03 coordinate",
+      "AVAXUSDT": "missing qualified 2024-04 coordinate"
+    },
+    "verify_source_and_release_hashes": true,
+    "required_hours_per_day": 24,
+    "no_fill": true
+  },
+  "splits": {
+    "provider_start": "2024-01-01",
+    "provider_end": "2024-06-30",
+    "train": ["2024-02-01", "2024-04-24"],
+    "valid": ["2024-05-01", "2024-05-24"],
+    "development_holdout": ["2024-06-01", "2024-06-24"],
+    "minimum_purge_days": 6
+  },
+  "qlib": {
+    "provider_workers": 1,
+    "joblib_backend": "threading",
+    "source_id": "MICROSOFT_QLIB_V097_ALPHA158_LIGHTGBM_TOPKDROPOUT",
+    "package": "pyqlib",
+    "version": "0.9.7",
+    "git_commit": "da920b7f954f48ab1bb64117c976710de198373e",
+    "source_root": "G:/Chengbo/runtime/crypto_frontier/upstream/qlib-v0.9.7",
+    "dependency_path": "G:/Chengbo/runtime/crypto_frontier/deps",
+    "workflow_url": "https://github.com/microsoft/qlib/blob/v0.9.7/examples/benchmarks/LightGBM/workflow_config_lightgbm_Alpha158.yaml",
+    "classification_before_run": "NOT_REPRODUCED",
+    "adaptations": [
+      "fixed complete crypto core10 rather than dynamic CSI300",
+      "UTC 365-day calendar rather than China exchange calendar",
+      "topk=3 and n_drop=1 for a ten-asset universe",
+      "ETHUSDT benchmark rather than SH000300",
+      "single-thread deterministic LightGBM seed"
+    ],
+    "model": {
+      "loss": "mse",
+      "learning_rate": 0.2,
+      "colsample_bytree": 0.8879,
+      "subsample": 0.8789,
+      "lambda_l1": 205.6999,
+      "lambda_l2": 580.9768,
+      "max_depth": 8,
+      "num_leaves": 210,
+      "num_threads": 1,
+      "seed": 1701,
+      "num_boost_round": 1000,
+      "early_stopping_rounds": 50
+    },
+    "topk": 3,
+    "n_drop": 1,
+    "account": 1000000,
+    "benchmark": "ETHUSDT",
+    "open_cost": 0.0005,
+    "close_cost": 0.0015,
+    "min_cost": 0,
+    "matched_control": "OFFICIAL_FIRST_13_KBAR_PRICE_EXPRESSIONS_SAME_MODEL_AND_EXECUTOR",
+    "fixed_fits": 2
+  },
+  "deepdow": {
+    "source_id": "DEEPDOW_V023_UPSTREAM_NATIVE_FRAMEWORK_RUN",
+    "package": "deepdow",
+    "version": "0.2.3",
+    "git_commit": "384e18acc17c982ac5a4362187b348bdbdb07b98",
+    "wheel_sha256": "4395FA147A07C9B96AFFAFA2C2E8C940053EC8224E6F4A6EEFAD6D3946C72087",
+    "wheel_path": "G:/Chengbo/runtime/crypto_frontier/packages/deepdow-0.2.3-py3-none-any.whl",
+    "dependency_path": "G:/Chengbo/runtime/crypto_frontier/deps",
+    "source_root": "G:/Chengbo/runtime/crypto_frontier/upstream/deepdow-v0.2.3",
+    "classification_before_run": "NOT_REPRODUCED",
+    "lookback_days": 20,
+    "execution_gap_days": 1,
+    "horizon_days": 5,
+    "channels": ["log_close_return", "flow_imbalance", "log1p_notional", "log1p_trade_count"],
+    "network": {
+      "class": "KeynesNet",
+      "hidden_size": 8,
+      "transform_type": "RNN",
+      "n_groups": 2
+    },
+    "loss": {
+      "class": "SharpeRatio_plus_SquaredWeights",
+      "input_type": "simple",
+      "eps": 0.0001,
+      "squared_weight_coefficient": 0.05
+    },
+    "training": {
+      "epochs": 12,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "amsgrad": true,
+      "seeds": [1701, 1709]
+    },
+    "matched_control": "ASSET_ROTATED_FLOW_CHANNELS_SAME_RETURN_CHANNEL_MODEL_SPLITS_AND_SEEDS",
+    "fixed_fits": 4
+  },
+  "arena": {
+    "systems": [
+      "INTERNAL_LONG_ONLY_20D_MOMENTUM",
+      "QLIB_V097_NATIVE_FULL",
+      "QLIB_V097_NATIVE_13_FEATURE_CONTROL",
+      "DEEPDOW_V023_KEYNESNET_FLOW",
+      "DEEPDOW_V023_ASSET_ROTATED_FLOW_CONTROL",
+      "ONE_OVER_N"
+    ],
+    "common_role": "DEVELOPMENT_INTERNAL_HOLDOUT",
+    "common_horizon_days": 1,
+    "common_cost_bps_per_unit_turnover": 5.0,
+    "annualization": 365,
+    "paired_block_bootstrap_days": 5,
+    "paired_bootstrap_samples": 2000,
+    "migration_gate": {
+      "paired_increment_lcb_positive": true,
+      "positive_month_fraction_min": 0.5,
+      "no_target_or_portfolio_semantic_mismatch": true
+    }
+  },
+  "external_release_entry": {
+    "required_metadata": [
+      "release_id", "family", "data_role", "source_url", "license", "content_sha256",
+      "schema", "event_time_semantics", "observable_time_semantics", "maturity_semantics",
+      "coverage_ledger", "missing_policy", "allowed_research_roles", "files",
+      "primary_key", "time_fields", "coverage_ratio", "consumer_ids"
+    ],
+    "required_checks": [
+      "content_hash", "per_file_hash", "schema", "duplicate_primary_key", "coverage",
+      "point_in_time", "role_policy", "prohibited_future_columns", "consumer_compatibility"
+    ]
+  },
+  "budget": {
+    "qlib_fits": 2,
+    "deepdow_fits": 4,
+    "gpu": false,
+    "paid_services": false,
+    "expected_cpu_minutes_max": 20
+  }
+}

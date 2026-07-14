@@ -1,0 +1,28 @@
+{
+  "changes": [
+    {
+      "new_status": "0_AT_START_OF_V2",
+      "old_claim": "real_end_to_end_reproductions=2",
+      "reason": "prior Qlib and DMN paths were scoped manual reimplementations without upstream parity"
+    },
+    {
+      "new_status": "INSUFFICIENT_EVIDENCE",
+      "old_claim": "data is the weakest or unique bottleneck",
+      "reason": "no matched data control and no direct-allocation paradigm had been run"
+    },
+    {
+      "new_status": "COMMON_BRIDGE_ONLY_SCOPED",
+      "old_claim": "native evaluators reproduced",
+      "reason": "prior native rows reused the internal generic evaluator"
+    }
+  ],
+  "decision_id": "CRYPTO_FRONTIER_V2_SUPERSESSION_20260713",
+  "historical_assets_immutable": true,
+  "preserved_narrow_findings": [
+    "formula/rank-weight hourly Main has rare reliable gross edge in the audited cached search rows",
+    "blocker-directed repair did not beat matched random controls in Epoch-2B",
+    "simple fixed native aggTrades benchmarks produced no admitted net row",
+    "DeepLOB remains data-incompatible without multi-level L2"
+  ],
+  "supersedes_research_id": "CRYPTO_EXTERNAL_FRONTIER_ASSIMILATION_20260713"
+}

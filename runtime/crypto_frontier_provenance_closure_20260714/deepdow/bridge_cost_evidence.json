@@ -1,0 +1,18 @@
+[
+  {
+    "cost_mean": 2.3382104722674306e-05,
+    "gross_mean": -0.005915603455100689,
+    "gross_minus_net": 2.3382104722674306e-05,
+    "net_mean": -0.005938985559823363,
+    "observations": 23,
+    "system_id": "DEEPDOW_V023_KEYNESNET_FLOW"
+  },
+  {
+    "cost_mean": 2.307253871846194e-05,
+    "gross_mean": -0.0059158315394891746,
+    "gross_minus_net": 2.307253871846194e-05,
+    "net_mean": -0.005938904078207637,
+    "observations": 23,
+    "system_id": "DEEPDOW_V023_ASSET_ROTATED_FLOW_CONTROL"
+  }
+]

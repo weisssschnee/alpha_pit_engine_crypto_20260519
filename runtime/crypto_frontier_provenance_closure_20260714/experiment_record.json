@@ -1,0 +1,64 @@
+{
+  "experiment_id": "20260714_crypto_frontier_evidence_qualification_001",
+  "objective": "Qualify Qlib and DeepDow negative evidence and freeze a data adequacy gate.",
+  "status": "COMPLETED_ECONOMIC_HOLD",
+  "mode": "LIGHT_CPU_REPRODUCTION",
+  "command": "powershell -ExecutionPolicy Bypass -File scripts/run_crypto_frontier_evidence_qualification.ps1 -Command run",
+  "inputs": {
+    "experiment_plan": "runtime/crypto_frontier_provenance_closure_20260714/experiment_plan.json",
+    "execution_identity": "runtime/crypto_frontier_provenance_closure_20260714/execution_identity.json",
+    "base_bundle_sha256": "99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2",
+    "data_window": "2024-01-01 through 2024-06-30 DEVELOPMENT core10"
+  },
+  "budget": {
+    "qlib_fits": 2,
+    "deepdow_fits": 4,
+    "total_fits": 6,
+    "parameter_trials": 1,
+    "hpo": false,
+    "actual_wall_clock_seconds": 196.72,
+    "new_storage_bytes_before_cache_cleanup": 1101118
+  },
+  "qlib": {
+    "historical_classification": "MODEL_FIT_DEGENERATE",
+    "historical_mapping": "PORTFOLIO_MAPPING_COLLAPSE",
+    "repair": "EXTERNAL_PARADIGM_COMPARISON_DEGENERATE_FIXED",
+    "repaired_full_control_prediction_value_correlation": 0.060170971475702384,
+    "repaired_full_control_prediction_rank_correlation": 0.1778739636661516,
+    "repaired_prediction_max_absolute_difference": 0.37153406533357203,
+    "repaired_mean_daily_weight_l1_difference": 1.3824458982901375,
+    "repaired_full_split_nodes": 25,
+    "repaired_control_split_nodes": 17,
+    "paired_net_increment_mean": 0.0025697824097431314,
+    "paired_net_increment_lcb_95": -0.00313472746141736,
+    "current_economic_status": "DATA_ADEQUACY_UNDERPOWERED"
+  },
+  "deepdow": {
+    "comparison_degenerate": false,
+    "minimum_parameter_l2_change": 0.31673303246498108,
+    "minimum_observed_gradient_l2_norm": 0.012917871586978436,
+    "ensemble_mean_daily_weight_l1_difference": 0.09616634994745255,
+    "challenger_hhi_mean": 0.10067436009902386,
+    "challenger_mean_daily_l1_from_one_over_n": 0.07135646647463242,
+    "development_nonoverlapping_five_day_blocks": 5,
+    "paired_net_increment_mean": -8.148161572622863e-08,
+    "paired_net_increment_lcb_95": -0.0002360815261567031,
+    "current_economic_status": "DATA_ADEQUACY_UNDERPOWERED"
+  },
+  "data_adequacy": {
+    "QLIB_CROSS_SECTIONAL_DAILY": "DATA_ADEQUACY_UNDERPOWERED",
+    "DEEPDOW_DIRECT_5D": "DATA_ADEQUACY_UNDERPOWERED",
+    "INTERNAL_LONG_ONLY_DAILY": "DATA_ADEQUACY_UNDERPOWERED"
+  },
+  "main_conclusion": "CURRENT_DATA_UNDERPOWERED",
+  "outputs": {
+    "manifest": "runtime/crypto_frontier_provenance_closure_20260714/artifact_index.csv",
+    "corrected_arena": "runtime/crypto_frontier_provenance_closure_20260714/corrected_arena_evidence_status.json",
+    "data_adequacy_gate": "runtime/crypto_frontier_provenance_closure_20260714/data_adequacy_gate.json",
+    "direct_activation": "runtime/crypto_frontier_provenance_closure_20260714/new_data_direct_activation_contract.json"
+  },
+  "reproducibility": "PENDING_INDEPENDENT_REPRODUCER_AT_CLOSURE_SHA",
+  "financial_gate": "HOLD_RESEARCH",
+  "candidate_promotion": false,
+  "continuation": "Do not run a large experiment unless ingress-preflight passes and two external paradigms pass the frozen Data Adequacy Gate."
+}

@@ -1,0 +1,101 @@
+{
+  "DEEPDOW_DIRECT_5D": {
+    "actual": {
+      "cross_sectional_assets": 10.0,
+      "development_dates": 23.0,
+      "feature_non_null_rate": 1.0,
+      "history_days": 182.0,
+      "independent_evaluation_blocks": 5.0,
+      "label_support": 1.0,
+      "positive_variance_feature_fraction": 1.0,
+      "training_samples": 84.0,
+      "turnover_observations": 23.0
+    },
+    "failed_conditions": [
+      "development_dates",
+      "training_samples",
+      "history_days",
+      "turnover_observations",
+      "independent_evaluation_blocks"
+    ],
+    "status": "DATA_ADEQUACY_UNDERPOWERED",
+    "thresholds": {
+      "evaluation_block_days": 5,
+      "min_cross_sectional_assets": 10,
+      "min_development_dates": 60,
+      "min_feature_non_null_rate": 1.0,
+      "min_history_days": 600,
+      "min_independent_evaluation_blocks": 12,
+      "min_label_support": 1.0,
+      "min_positive_variance_feature_fraction": 1.0,
+      "min_training_samples": 500,
+      "min_turnover_observations": 60
+    }
+  },
+  "INTERNAL_LONG_ONLY_DAILY": {
+    "actual": {
+      "cross_sectional_assets": 10.0,
+      "development_dates": 23.0,
+      "feature_non_null_rate": 1.0,
+      "history_days": 182.0,
+      "independent_evaluation_blocks": 1.0,
+      "label_support": 0.989010989010989,
+      "positive_variance_feature_fraction": 1.0,
+      "training_samples": 0.0,
+      "turnover_observations": 23.0
+    },
+    "failed_conditions": [
+      "development_dates",
+      "turnover_observations",
+      "independent_evaluation_blocks"
+    ],
+    "status": "DATA_ADEQUACY_UNDERPOWERED",
+    "thresholds": {
+      "evaluation_block_days": 20,
+      "min_cross_sectional_assets": 10,
+      "min_development_dates": 60,
+      "min_feature_non_null_rate": 0.95,
+      "min_history_days": 90,
+      "min_independent_evaluation_blocks": 3,
+      "min_label_support": 0.95,
+      "min_positive_variance_feature_fraction": 1.0,
+      "min_training_samples": 0,
+      "min_turnover_observations": 60
+    }
+  },
+  "QLIB_CROSS_SECTIONAL_DAILY": {
+    "actual": {
+      "cross_sectional_assets": 10.0,
+      "development_dates": 23.0,
+      "feature_non_null_rate": 0.6666666666666666,
+      "history_days": 182.0,
+      "independent_evaluation_blocks": 4.0,
+      "label_support": 1.0,
+      "positive_variance_feature_fraction": 1.0,
+      "training_samples": 840.0,
+      "turnover_observations": 23.0
+    },
+    "failed_conditions": [
+      "development_dates",
+      "training_samples",
+      "cross_sectional_assets",
+      "feature_non_null_rate",
+      "history_days",
+      "turnover_observations",
+      "independent_evaluation_blocks"
+    ],
+    "status": "DATA_ADEQUACY_UNDERPOWERED",
+    "thresholds": {
+      "evaluation_block_days": 5,
+      "min_cross_sectional_assets": 20,
+      "min_development_dates": 60,
+      "min_feature_non_null_rate": 0.95,
+      "min_history_days": 365,
+      "min_independent_evaluation_blocks": 12,
+      "min_label_support": 0.95,
+      "min_positive_variance_feature_fraction": 0.9,
+      "min_training_samples": 5000,
+      "min_turnover_observations": 60
+    }
+  }
+}

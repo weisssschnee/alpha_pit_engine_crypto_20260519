@@ -1,0 +1,88 @@
+{
+  "qualification_id": "CRYPTO_FRONTIER_EVIDENCE_QUALIFICATION_20260714",
+  "base_config": "config/crypto_frontier_research_v2.json",
+  "base_run_root": "runtime/crypto_frontier_research_v2_20260713",
+  "output_root": "runtime/crypto_frontier_provenance_closure_20260714",
+  "allowed_role": "DEVELOPMENT",
+  "prohibited_roles": [
+    "challenge",
+    "forward",
+    "recent",
+    "may_stress",
+    "test"
+  ],
+  "status_before_closure": [
+    "ARCHITECTURE_EXECUTION_COMPLETED",
+    "REPOSITORY_PROVENANCE_CLOSURE_PENDING"
+  ],
+  "qlib_one_shot_repair": {
+    "repair_id": "ZERO_CSI300_REGULARIZATION_ONE_SHOT",
+    "reason": "The pinned CSI300 workflow regularization produced zero-split trees on 840 crypto training rows. Remove only lambda_l1 and lambda_l2; retain feature sets, label, splits, seed, fit count, boosting budget, early stopping, TopK mapping and costs.",
+    "model_overrides": {
+      "lambda_l1": 0.0,
+      "lambda_l2": 0.0
+    },
+    "fixed_fits": 2,
+    "parameter_trials": 1,
+    "search_performed": false
+  },
+  "data_adequacy_gate": {
+    "QLIB_CROSS_SECTIONAL_DAILY": {
+      "min_development_dates": 60,
+      "min_training_samples": 5000,
+      "min_cross_sectional_assets": 20,
+      "min_feature_non_null_rate": 0.95,
+      "min_positive_variance_feature_fraction": 0.90,
+      "min_history_days": 365,
+      "min_label_support": 0.95,
+      "min_turnover_observations": 60,
+      "min_independent_evaluation_blocks": 12,
+      "evaluation_block_days": 5
+    },
+    "DEEPDOW_DIRECT_5D": {
+      "min_development_dates": 60,
+      "min_training_samples": 500,
+      "min_cross_sectional_assets": 10,
+      "min_feature_non_null_rate": 1.0,
+      "min_positive_variance_feature_fraction": 1.0,
+      "min_history_days": 600,
+      "min_label_support": 1.0,
+      "min_turnover_observations": 60,
+      "min_independent_evaluation_blocks": 12,
+      "evaluation_block_days": 5
+    },
+    "INTERNAL_LONG_ONLY_DAILY": {
+      "min_development_dates": 60,
+      "min_training_samples": 0,
+      "min_cross_sectional_assets": 10,
+      "min_feature_non_null_rate": 0.95,
+      "min_positive_variance_feature_fraction": 1.0,
+      "min_history_days": 90,
+      "min_label_support": 0.95,
+      "min_turnover_observations": 60,
+      "min_independent_evaluation_blocks": 3,
+      "evaluation_block_days": 20
+    }
+  },
+  "classification_precedence": [
+    "COMPETITOR_COMPARISON_DEGENERATE",
+    "MODEL_FIT_DEGENERATE",
+    "PORTFOLIO_MAPPING_COLLAPSE",
+    "DATA_ADEQUACY_UNDERPOWERED",
+    "UNDERPOWERED",
+    "INFORMATIVE_NEGATIVE"
+  ],
+  "new_release_activation": {
+    "maximum_external_paradigms": 2,
+    "include_internal_baseline": true,
+    "development_only": true,
+    "run_only_if_data_adequacy_passes": true,
+    "new_performance_search": false,
+    "challenge_read": false,
+    "forward_read": false,
+    "recent_read": false,
+    "may_stress_read": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false
+  }
+}

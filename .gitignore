@@ -5,7 +5,12 @@
 *.npz
 *.zip
 *.pyc
+*.pkl
 __pycache__/
+.pytest_cache/
+mlruns/
+**/mlruns/
+**/tensorboard/
 graphify-out/
 
 raw/
@@ -26,3 +31,25 @@ venv/
 # MECHANISM/DATA EXPANSION-0 keeps full per-file inventories off Git; their
 # hashes and machine locations are bound by the checked-in inventory manifests.
 runtime/mechanism_data_expansion0_20260712/inventory/*/file_inventory.csv
+
+# Crypto Frontier closure: commit compact decision evidence, not regenerable
+# provider/handler/tracking caches or volatile runner state.
+runtime/crypto_frontier_research_v2_20260713/qlib_provider/
+runtime/crypto_frontier_research_v2_20260713/qlib_source_csv/
+runtime/crypto_frontier_research_v2_20260713/qlib_provider_cache_manifest.json
+runtime/crypto_frontier_research_v2_20260713/development_daily_panel.parquet
+runtime/crypto_frontier_research_v2_20260713/runner.*
+runtime/crypto_frontier_research_v2_20260713/seal_result.json
+runtime/crypto_frontier_research_v2_20260713/check_result.json
+runtime/crypto_frontier_provenance_closure_20260714/runner.*
+runtime/crypto_frontier_provenance_closure_20260714/seal_result.json
+runtime/crypto_frontier_provenance_closure_20260714/check_result.json
+
+# These small parquet files are economic evidence and intentionally override
+# the repository-wide parquet cache rule above.
+!runtime/crypto_frontier_research_v2_20260713/arena_common_paths.parquet
+!runtime/crypto_frontier_research_v2_20260713/qlib_v097/native_backtest_report.parquet
+!runtime/crypto_frontier_research_v2_20260713/qlib_v097/native_position_weights.parquet
+!runtime/crypto_frontier_research_v2_20260713/qlib_v097/native_predictions.parquet
+!runtime/crypto_frontier_research_v2_20260713/deepdow_v023/native_position_weights.parquet
+!runtime/crypto_frontier_research_v2_20260713/deepdow_v023/per_seed_weights.parquet
