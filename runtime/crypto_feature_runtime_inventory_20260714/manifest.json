@@ -1,0 +1,86 @@
+{
+  "boundaries": {
+    "a7v1_assets_recovered_from_git_history": true,
+    "a7v1_authorizes_full_search": false,
+    "a7v1_current_epoch_loaded": false,
+    "inventory_is_static_metadata_not_numeric_proof": true
+  },
+  "counts": {
+    "active_fields": 10,
+    "aggtrades_base_features": 94,
+    "aggtrades_derived_specs": 5211,
+    "input_approval_rows": 36,
+    "inventory_rows": 5388,
+    "lineage_rows": 5388,
+    "ontology_rows": 81,
+    "runtime_loaded_rows": 10
+  },
+  "epoch_interpretation": "Latest verifiable runtime epoch is A7EFF2_GIT_RELEASE_20260711.",
+  "files": [
+    {
+      "bytes": 25496,
+      "file": "aggtrades_base_feature_registry_94.csv",
+      "rows": 94,
+      "sha256": "F5CCBB8500F16A0B6A7EE21623377AA601BE506010B57803F16E39DEED9E14DC",
+      "source_path": "git:1ed5acd:archive/deprecated_crypto_a7_20260527/runtime/runtime/a7v1_feature_registry_smoke/a7v1_base_feature_registry.csv"
+    },
+    {
+      "bytes": 797898,
+      "file": "aggtrades_derived_feature_specs_5211.csv",
+      "rows": 5211,
+      "sha256": "45765DE2354E8B9BDBFADA21AF708AAD48150FC45137DB5F0FAFCFCC7F13C3F3",
+      "source_path": "git:1ed5acd:archive/deprecated_crypto_a7_20260527/runtime/runtime/a7v1_feature_registry_smoke/a7v1_derived_feature_specs.csv"
+    },
+    {
+      "bytes": 5720,
+      "file": "latest_active_field_registry.csv",
+      "rows": 10,
+      "sha256": "EC6B910B774D3AABDF5329A5752AA3A175DCAA9BD08D35D6FEEE23FFF84AFC63",
+      "source_path": "runtime/a7eff2_git_release_20260711/a7eff2_active_field_registry.csv"
+    },
+    {
+      "bytes": 10186,
+      "file": "latest_input_approval_registry.csv",
+      "rows": 36,
+      "sha256": "9ED9784E04795987A02BE632B3B019D0C5AD04FD31376C51C4ADBD013E4EA5F7",
+      "source_path": "runtime/a7input0_input_approval_package/a7input0_input_approval_registry.csv"
+    },
+    {
+      "bytes": 1567301,
+      "file": "feature_lineage_ledger.csv",
+      "rows": 5388,
+      "sha256": "91D6B4421C0EC67650373D3241FF4A01F11A75F20A47ED3900759D5E7A4EA66E",
+      "source_path": "git:1ed5acd:archive/deprecated_crypto_a7_20260527/runtime/runtime/a7v1_feature_registry_smoke/a7v1_base_feature_registry.csv;git:1ed5acd:archive/deprecated_crypto_a7_20260527/runtime/runtime/a7v1_feature_registry_smoke/a7v1_derived_feature_specs.csv;runtime/a7ffr1_field_ontology_v3/a7ffr1_field_ontology_v3.csv;runtime/a7al0r_code_feature_regime_readiness_audit/a7al0r_feature_lineage_ledger.csv;runtime/a7eff2_git_release_20260711/a7eff2_active_field_registry.csv"
+    },
+    {
+      "bytes": 6956,
+      "file": "current_epoch_runtime_fields.csv",
+      "rows": 10,
+      "sha256": "0BE477CA91A941FA37AD97A4766D78612A73C832BF66B37A168EC46B92C77154",
+      "source_path": "runtime/a7eff2_git_release_20260711/a7eff2_active_field_registry.csv"
+    },
+    {
+      "bytes": 1866562,
+      "file": "field_representation_lane_generator_map.csv",
+      "rows": 5388,
+      "sha256": "7E7711C30CEE625F134ACB1F0BD6D6A64003567659F565BEDAE088000D2FA0D3",
+      "source_path": "generated from CRYPTO_FEATURE_RUNTIME_INVENTORY.csv"
+    },
+    {
+      "bytes": 2369329,
+      "file": "CRYPTO_FEATURE_RUNTIME_INVENTORY.csv",
+      "rows": 5388,
+      "sha256": "F3D82AD889DA40C1754EB6A905C679958EA7A8D7AD9A0CDDD93B63AF3E763672",
+      "source_path": "union of A7V1 registry/specs, ontology v3, A7INPUT0, and A7EFF2 active registry"
+    }
+  ],
+  "generated_at": "2026-07-14T12:08:07Z",
+  "graph": {
+    "built_at_commit": "fb27d14c985f3e68429a02f84826e1cddd6293a6",
+    "graph_file_commit": "ac9fd24ede281bbcbf438f7c2f4f9b1e563b8b76",
+    "graph_sha256": "6879005FB6DCC9E2CC19D8802BB3783FADD312FC934AB01A004CDDF349F9357F",
+    "source_path": ".planning/graphs/graph.json"
+  },
+  "source_head": "ac9fd24ede281bbcbf438f7c2f4f9b1e563b8b76",
+  "stage": "CRYPTO_FEATURE_RUNTIME_INVENTORY"
+}
