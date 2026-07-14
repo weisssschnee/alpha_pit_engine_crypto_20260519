@@ -1088,6 +1088,93 @@ def _load_bound_adequacy_evidence(
     }
 
 
+def _derive_observed_release_facts(
+    manifest: dict[str, Any],
+    preflight: dict[str, Any],
+) -> tuple[dict[str, Any], list[str]]:
+    failures: list[str] = []
+    frames: list[pd.DataFrame] = []
+    expected_schema = list(manifest.get("schema", []))
+    for record in preflight.get("per_file_checks", []):
+        path = Path(record["path"])
+        if not path.is_file() or sha256_file(path) != str(record.get("sha256", "")).upper():
+            failures.append("ACTIVATION_SOURCE_FILE_DRIFT_AFTER_PREFLIGHT")
+            continue
+        if path.suffix.lower() == ".parquet":
+            frame = pd.read_parquet(path)
+        elif path.suffix.lower() == ".csv":
+            frame = pd.read_csv(path)
+        else:
+            failures.append("ACTIVATION_SOURCE_FORMAT_UNSUPPORTED")
+            continue
+        if list(frame.columns) != expected_schema:
+            failures.append("ACTIVATION_SOURCE_SCHEMA_DRIFT_AFTER_PREFLIGHT")
+            continue
+        frames.append(frame)
+    combined = pd.concat(frames, ignore_index=True) if frames else pd.DataFrame(columns=expected_schema)
+    facts: dict[str, Any] = {
+        "row_count": int(len(combined)),
+        "unique_dates": 0,
+        "history_days": 0,
+        "minimum_cross_sectional_assets": 0,
+        "feature_non_null_rate": 0.0,
+        "positive_variance_feature_fraction": 0.0,
+        "maximum_turnover_observations": 0,
+    }
+    time_fields = manifest.get("time_fields", {})
+    event_field = time_fields.get("event")
+    observable_field = time_fields.get("observable")
+    maturity_field = time_fields.get("maturity")
+    primary_key = list(manifest.get("primary_key", []))
+    if not combined.empty and event_field in combined.columns:
+        observed_event = pd.to_datetime(combined[event_field], utc=True, errors="coerce")
+        valid_event = observed_event.dropna()
+        if not valid_event.empty:
+            event_day = observed_event.dt.floor("D")
+            unique_dates = int(event_day.nunique())
+            facts["unique_dates"] = unique_dates
+            facts["history_days"] = int(
+                (valid_event.max().floor("D") - valid_event.min().floor("D")).days + 1
+            )
+            facts["maximum_turnover_observations"] = max(unique_dates - 1, 0)
+            asset_field = manifest.get("adequacy_asset_field")
+            if not asset_field:
+                preferred = [
+                    column
+                    for column in ("symbol", "asset", "instrument", "ticker")
+                    if column in combined
+                ]
+                non_time_primary = [
+                    column
+                    for column in primary_key
+                    if column not in {event_field, observable_field, maturity_field}
+                ]
+                asset_field = (preferred or non_time_primary or [None])[0]
+            if asset_field in combined.columns:
+                per_day_assets = combined.assign(__event_day=event_day).groupby("__event_day")[
+                    asset_field
+                ].nunique()
+                if not per_day_assets.empty:
+                    facts["minimum_cross_sectional_assets"] = int(per_day_assets.min())
+
+    excluded_fields = set(primary_key) | {event_field, observable_field, maturity_field}
+    declared_features = [
+        column for column in manifest.get("adequacy_feature_fields", []) if column in combined
+    ]
+    numeric_features = declared_features or [
+        column
+        for column in combined.select_dtypes(include=[np.number]).columns
+        if column not in excluded_fields
+    ]
+    if numeric_features:
+        feature_frame = combined[numeric_features]
+        facts["feature_non_null_rate"] = float(feature_frame.notna().mean().min())
+        facts["positive_variance_feature_fraction"] = float(
+            (feature_frame.nunique(dropna=True) > 1).mean()
+        )
+    return facts, sorted(set(failures))
+
+
 def _bound_profile_to_release_facts(
     paradigm: str,
     profile: dict[str, float],
@@ -1154,13 +1241,14 @@ def plan_new_release_activation(
             "preflight": preflight,
         }
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed_facts, source_fact_failures = _derive_observed_release_facts(manifest, preflight)
     profiles, evidence = _load_bound_adequacy_evidence(
         manifest_path,
         manifest,
         preflight,
         qualification_config["data_adequacy_gate"],
     )
-    evidence_failures = list(evidence["failures"])
+    evidence_failures = list(evidence["failures"]) + source_fact_failures
     gate_rows = []
     eligible = []
     for paradigm, thresholds in qualification_config["data_adequacy_gate"].items():
@@ -1170,7 +1258,7 @@ def plan_new_release_activation(
             paradigm,
             profiles[paradigm],
             thresholds,
-            preflight.get("observed_release_facts", {}),
+            observed_facts,
         )
         evidence_failures.extend(fact_failures)
         rows, summary = evaluate_data_adequacy({paradigm: thresholds}, {paradigm: profile})
@@ -1193,6 +1281,7 @@ def plan_new_release_activation(
         "status": "READY_FOR_NEW_DATA_ARENA" if ready else "DATA_ADEQUACY_UNDERPOWERED",
         "run_authorized": ready,
         "preflight": preflight,
+        "observed_release_facts": observed_facts,
         "adequacy_evidence": {**evidence, "failures": sorted(set(evidence_failures))},
         "data_adequacy_checks": gate_rows,
         "selected_external_paradigms": selected,

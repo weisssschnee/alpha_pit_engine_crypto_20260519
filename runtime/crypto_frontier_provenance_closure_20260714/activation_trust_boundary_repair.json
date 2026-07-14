@@ -1,6 +1,7 @@
 {
   "repair_id": "NEW_DATA_ACTIVATION_TRUST_BOUNDARY_REPAIR_20260714",
   "failed_evidence_subject_sha": "b8647a077b8cea9a0f991ef0351acb81dbe84535",
+  "intermediate_base_identity_drift_sha": "0141d2446df7c5fcb86e93f5a95dad60c411b0e4",
   "review_decision": "REVIEW_FAIL",
   "blocking_issue": "Activation trusted manifest-inline adequacy profiles and information-match scores after ingress preflight, allowing an inadequate release to self-authorize a large Arena.",
   "repair": {
@@ -12,7 +13,9 @@
     "adequacy_evidence_producer_required": true,
     "observed_release_facts_derived_from_ingress_files": true,
     "claims_above_observed_release_facts_rejected": true,
-    "information_match_score_derived": true
+    "information_match_score_derived": true,
+    "qualification_only_implementation": true,
+    "base_release_module_identity_preserved": true
   },
   "spoof_negative": {
     "release_days": 2,

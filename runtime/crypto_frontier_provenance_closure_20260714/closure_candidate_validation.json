@@ -6,7 +6,7 @@
     "passed": 31,
     "failed": 0,
     "warnings": 2,
-    "runtime_seconds": 12.88
+    "runtime_seconds": 12.50
   },
   "base_frontier_check": "CRYPTO_FRONTIER_RESEARCH_CHECK_PASSED",
   "base_artifact_count": 122,
@@ -18,9 +18,11 @@
   "architecture_control_registry_modified": false,
   "generated_project_graph_modified": false,
   "prior_evidence_subject_sha": "b8647a077b8cea9a0f991ef0351acb81dbe84535",
+  "intermediate_base_identity_drift_sha": "0141d2446df7c5fcb86e93f5a95dad60c411b0e4",
+  "intermediate_reproducer": "FAIL_BASE_IMPLEMENTATION_IDENTITY_DRIFT",
   "independent_reviewer": "REVIEW_FAIL_ACTIVATION_TRUST_BOUNDARY_REPAIRED_PENDING_REREVIEW",
-  "independent_reproducer": "PENDING_AT_REPAIRED_EVIDENCE_SUBJECT_SHA",
-  "independent_gatekeeper": "PENDING_AT_REPAIRED_EVIDENCE_SUBJECT_SHA",
+  "independent_reproducer": "PENDING_AT_IDENTITY_PRESERVING_EVIDENCE_SUBJECT_SHA",
+  "independent_gatekeeper": "PENDING_AT_IDENTITY_PRESERVING_EVIDENCE_SUBJECT_SHA",
   "candidate_promotion": false,
   "forward_read": false
 }
