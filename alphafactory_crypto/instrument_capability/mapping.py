@@ -1,0 +1,404 @@
+"""Explicit portfolio mappings and full-L1 turnover/cost attribution."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from dataclasses import asdict, dataclass
+from typing import Any, Mapping
+
+import numpy as np
+
+
+CROSS_SECTIONAL_ZERO_NET = "CROSS_SECTIONAL_ZERO_NET"
+TIME_SERIES_DIRECTIONAL_STATEFUL = "TIME_SERIES_DIRECTIONAL_STATEFUL"
+SPARSE_EVENT_OR_CARRY = "SPARSE_EVENT_OR_CARRY"
+
+
+@dataclass(frozen=True)
+class MappingContract:
+    portfolio_mapping_id: str
+    parameters: Mapping[str, Any]
+    rebalance_cadence: str
+    hold_semantics: str
+    cost_model: Mapping[str, Any]
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
+class MappingResult:
+    portfolio_mapping_id: str
+    contract_sha256: str
+    weights: np.ndarray
+    feasible: np.ndarray
+    transition_reasons: tuple[tuple[str, ...], ...]
+    diagnostics: Mapping[str, Any]
+
+
+DEFAULT_MAPPING_CONTRACTS: Mapping[str, MappingContract] = {
+    CROSS_SECTIONAL_ZERO_NET: MappingContract(
+        portfolio_mapping_id=CROSS_SECTIONAL_ZERO_NET,
+        parameters={
+            "rank_method": "average",
+            "demean": True,
+            "gross_target": 1.0,
+            "position_cap": 0.20,
+            "clip_renormalize_order": "rank_then_demean_then_sidewise_capped_allocation;never_post_cap_renormalize",
+            "minimum_asset_count": 3,
+            "singleton_behavior": "NO_TRADE_INFEASIBLE",
+            "missing_handling": "exclude_nonfinite_assets_per_coordinate",
+        },
+        rebalance_cadence="every synthetic coordinate",
+        hold_semantics="stateless cross-sectional rerank",
+        cost_model={"id": "FULL_L1_FIXED_BPS", "cost_bps": 5.0, "initial_establishment_charged": True},
+    ),
+    TIME_SERIES_DIRECTIONAL_STATEFUL: MappingContract(
+        portfolio_mapping_id=TIME_SERIES_DIRECTIONAL_STATEFUL,
+        parameters={
+            "entry_threshold": 0.60,
+            "exit_threshold": 0.20,
+            "maximum_position": 0.25,
+            "gross_cap": 1.0,
+            "rebalance_interval": 1,
+            "missing_handling": "hold_existing_state_no_new_entry",
+            "demean": False,
+        },
+        rebalance_cadence="explicit interval; default every synthetic coordinate",
+        hold_semantics="hysteresis; retain entry position until exit, reversal, or gross-cap scaling",
+        cost_model={"id": "FULL_L1_FIXED_BPS", "cost_bps": 5.0, "initial_establishment_charged": True},
+    ),
+    SPARSE_EVENT_OR_CARRY: MappingContract(
+        portfolio_mapping_id=SPARSE_EVENT_OR_CARRY,
+        parameters={
+            "event_threshold": 0.75,
+            "fixed_holding_period": 4,
+            "settlement_interval": 1,
+            "maximum_position": 0.25,
+            "gross_cap": 1.0,
+            "singleton_behavior": "PRESERVE_SINGLETON_EVENT",
+            "missing_handling": "hold_existing_position_no_new_entry",
+            "explicit_no_trade_state": True,
+        },
+        rebalance_cadence="event/settlement aligned",
+        hold_semantics="fixed hold from eligible event, then explicit exit",
+        cost_model={"id": "FULL_L1_FIXED_BPS", "cost_bps": 5.0, "initial_establishment_charged": True},
+    ),
+}
+
+
+def mapping_contract_sha256(contract: MappingContract) -> str:
+    encoded = json.dumps(contract.to_dict(), sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest().upper()
+
+
+def _matrix(values: np.ndarray, name: str) -> np.ndarray:
+    result = np.asarray(values, dtype=float)
+    if result.ndim != 2 or result.shape[1] == 0:
+        raise ValueError(f"{name} must have shape [asset,time] with nonempty time")
+    return result
+
+
+def _average_ranks(values: np.ndarray) -> np.ndarray:
+    order = np.argsort(values, kind="mergesort")
+    ranks = np.empty(len(values), dtype=float)
+    start = 0
+    while start < len(values):
+        end = start + 1
+        while end < len(values) and values[order[end]] == values[order[start]]:
+            end += 1
+        ranks[order[start:end]] = 0.5 * (start + 1 + end)
+        start = end
+    return ranks
+
+
+def _capped_allocation(scores: np.ndarray, target: float, cap: float) -> np.ndarray:
+    """Allocate a nonnegative target proportionally without ever breaking cap."""
+
+    allocation = np.zeros(scores.shape, dtype=float)
+    active = scores > 0
+    remaining = float(target)
+    while remaining > 1e-14 and np.any(active):
+        indices = np.flatnonzero(active)
+        scale = scores[indices].sum()
+        proposal = remaining * (scores[indices] / scale)
+        capacity = cap - allocation[indices]
+        saturated = proposal >= capacity - 1e-14
+        if not np.any(saturated):
+            allocation[indices] += proposal
+            remaining = 0.0
+            break
+        saturated_indices = indices[saturated]
+        allocation[saturated_indices] = cap
+        active[saturated_indices] = False
+        remaining = target - float(allocation.sum())
+    if remaining > 1e-10:
+        raise ValueError("capped allocation target is infeasible")
+    return allocation
+
+
+def _cross_sectional(signal: np.ndarray, contract: MappingContract) -> MappingResult:
+    parameters = contract.parameters
+    gross_target = float(parameters["gross_target"])
+    cap = float(parameters["position_cap"])
+    minimum = int(parameters["minimum_asset_count"])
+    if gross_target <= 0 or cap <= 0 or cap > 1:
+        raise ValueError("invalid cross-sectional gross/cap parameters")
+    weights = np.zeros(signal.shape, dtype=float)
+    feasible = np.zeros(signal.shape[1], dtype=bool)
+    reasons: list[tuple[str, ...]] = []
+    achieved_gross: list[float] = []
+    for column in range(signal.shape[1]):
+        finite_index = np.flatnonzero(np.isfinite(signal[:, column]))
+        column_reasons: list[str] = []
+        if len(finite_index) < minimum:
+            column_reasons.append("MINIMUM_ASSET_COUNT_NOT_MET")
+            reasons.append(tuple(column_reasons))
+            achieved_gross.append(0.0)
+            continue
+        values = signal[finite_index, column]
+        ranks = _average_ranks(values)
+        centered = ranks - ranks.mean()
+        positive = centered > 0
+        negative = centered < 0
+        if not positive.any() or not negative.any():
+            column_reasons.append("NO_CROSS_SECTIONAL_DISPERSION")
+            reasons.append(tuple(column_reasons))
+            achieved_gross.append(0.0)
+            continue
+        requested_side = gross_target / 2.0
+        side_target = min(requested_side, cap * int(positive.sum()), cap * int(negative.sum()))
+        if side_target < requested_side - 1e-12:
+            column_reasons.append("GROSS_REDUCED_FOR_CAP_FEASIBILITY")
+        positive_allocation = _capped_allocation(np.where(positive, centered, 0.0), side_target, cap)
+        negative_allocation = _capped_allocation(np.where(negative, -centered, 0.0), side_target, cap)
+        local = positive_allocation - negative_allocation
+        weights[finite_index, column] = local
+        feasible[column] = True
+        achieved_gross.append(float(np.abs(local).sum()))
+        reasons.append(tuple(column_reasons or ["MAPPED"]))
+    diagnostics = {
+        "requested_gross": gross_target,
+        "achieved_gross": achieved_gross,
+        "position_cap": cap,
+        "max_final_abs_weight": float(np.max(np.abs(weights))) if weights.size else 0.0,
+        "max_abs_net_exposure": float(np.max(np.abs(weights.sum(axis=0)))) if weights.size else 0.0,
+        "gross_reduced_coordinates": int(sum("GROSS_REDUCED_FOR_CAP_FEASIBILITY" in item for item in reasons)),
+    }
+    return MappingResult(contract.portfolio_mapping_id, mapping_contract_sha256(contract), weights, feasible, tuple(reasons), diagnostics)
+
+
+def _directional(signal: np.ndarray, contract: MappingContract) -> MappingResult:
+    p = contract.parameters
+    entry = float(p["entry_threshold"])
+    exit_threshold = float(p["exit_threshold"])
+    maximum = float(p["maximum_position"])
+    gross_cap = float(p["gross_cap"])
+    interval = int(p["rebalance_interval"])
+    if not (0 <= exit_threshold < entry and 0 < maximum <= gross_cap and interval >= 1):
+        raise ValueError("invalid directional mapping parameters")
+    weights = np.zeros(signal.shape, dtype=float)
+    current = np.zeros(signal.shape[0], dtype=float)
+    reasons: list[tuple[str, ...]] = []
+    for column in range(signal.shape[1]):
+        coordinate_reasons: list[str] = []
+        if column % interval == 0:
+            for asset, value in enumerate(signal[:, column]):
+                if not np.isfinite(value):
+                    if current[asset] != 0:
+                        coordinate_reasons.append("MISSING_SIGNAL_HELD")
+                    continue
+                confidence = abs(float(value))
+                direction = float(np.sign(value))
+                if current[asset] == 0:
+                    if confidence >= entry:
+                        current[asset] = direction * min(maximum, confidence)
+                        coordinate_reasons.append("ENTRY")
+                elif confidence <= exit_threshold:
+                    current[asset] = 0.0
+                    coordinate_reasons.append("EXIT_THRESHOLD")
+                elif direction != np.sign(current[asset]):
+                    if confidence >= entry:
+                        current[asset] = direction * min(maximum, confidence)
+                        coordinate_reasons.append("REVERSAL")
+                    else:
+                        current[asset] = 0.0
+                        coordinate_reasons.append("EXIT_ON_WEAK_REVERSAL")
+                else:
+                    coordinate_reasons.append("HOLD")
+        else:
+            coordinate_reasons.append("CADENCE_HOLD")
+        gross = float(np.abs(current).sum())
+        if gross > gross_cap:
+            current *= gross_cap / gross
+            coordinate_reasons.append("GROSS_CAP_SCALED")
+        weights[:, column] = current
+        reasons.append(tuple(coordinate_reasons or ["NO_TRADE"]))
+    diagnostics = {
+        "entry_threshold": entry,
+        "exit_threshold": exit_threshold,
+        "maximum_position": maximum,
+        "gross_cap": gross_cap,
+        "max_final_abs_weight": float(np.max(np.abs(weights))) if weights.size else 0.0,
+        "max_gross": float(np.max(np.abs(weights).sum(axis=0))) if weights.size else 0.0,
+        "common_mode_preserved": bool(np.any(np.abs(weights.sum(axis=0)) > 1e-12)),
+        "state_out": {"positions": current.tolist()},
+    }
+    return MappingResult(contract.portfolio_mapping_id, mapping_contract_sha256(contract), weights, np.ones(signal.shape[1], dtype=bool), tuple(reasons), diagnostics)
+
+
+def _sparse(signal: np.ndarray, contract: MappingContract) -> MappingResult:
+    p = contract.parameters
+    threshold = float(p["event_threshold"])
+    hold_period = int(p["fixed_holding_period"])
+    settlement = int(p["settlement_interval"])
+    maximum = float(p["maximum_position"])
+    gross_cap = float(p["gross_cap"])
+    if threshold <= 0 or hold_period <= 0 or settlement <= 0 or maximum <= 0 or gross_cap <= 0:
+        raise ValueError("invalid sparse mapping parameters")
+    weights = np.zeros(signal.shape, dtype=float)
+    current = np.zeros(signal.shape[0], dtype=float)
+    remaining = np.zeros(signal.shape[0], dtype=int)
+    reasons: list[tuple[str, ...]] = []
+    opportunity_mask: list[bool] = []
+    entry_mask: list[bool] = []
+    for column in range(signal.shape[1]):
+        coordinate_reasons: list[str] = []
+        opportunity_mask.append(
+            bool(
+                column % settlement == 0
+                and np.any(np.isfinite(signal[:, column]) & (np.abs(signal[:, column]) >= threshold))
+            )
+        )
+        for asset, value in enumerate(signal[:, column]):
+            if remaining[asset] > 0:
+                remaining[asset] -= 1
+                if remaining[asset] == 0:
+                    current[asset] = 0.0
+                    coordinate_reasons.append("EXPLICIT_HOLD_EXIT")
+            if remaining[asset] == 0 and column % settlement == 0 and np.isfinite(value) and abs(value) >= threshold:
+                current[asset] = np.sign(value) * min(maximum, abs(float(value)))
+                remaining[asset] = hold_period
+                coordinate_reasons.append("EVENT_ENTRY")
+            elif not np.isfinite(value) and current[asset] != 0:
+                coordinate_reasons.append("MISSING_SIGNAL_HELD")
+        gross = float(np.abs(current).sum())
+        if gross > gross_cap:
+            current *= gross_cap / gross
+            coordinate_reasons.append("GROSS_CAP_SCALED")
+        weights[:, column] = current
+        entry_mask.append("EVENT_ENTRY" in coordinate_reasons)
+        reasons.append(tuple(coordinate_reasons or ["EXPLICIT_NO_TRADE_OR_HOLD"]))
+    active_assets = (np.abs(weights) > 1e-12).sum(axis=0)
+    diagnostics = {
+        "event_threshold": threshold,
+        "fixed_holding_period": hold_period,
+        "maximum_position": maximum,
+        "gross_cap": gross_cap,
+        "max_final_abs_weight": float(np.max(np.abs(weights))) if weights.size else 0.0,
+        "singleton_active_coordinates": int(np.count_nonzero(active_assets == 1)),
+        "singleton_preserved": bool(np.any(active_assets == 1)),
+        "event_opportunity_mask": opportunity_mask,
+        "event_entry_mask": entry_mask,
+        "event_opportunity_count": int(sum(opportunity_mask)),
+        "event_entry_count": int(sum(entry_mask)),
+        "state_out": {
+            "positions": current.tolist(),
+            "remaining_holding_period": remaining.astype(int).tolist(),
+        },
+    }
+    return MappingResult(contract.portfolio_mapping_id, mapping_contract_sha256(contract), weights, np.ones(signal.shape[1], dtype=bool), tuple(reasons), diagnostics)
+
+
+def map_portfolio(signal: np.ndarray, contract: MappingContract) -> MappingResult:
+    source = _matrix(signal, "signal")
+    if contract.portfolio_mapping_id == CROSS_SECTIONAL_ZERO_NET:
+        return _cross_sectional(source, contract)
+    if contract.portfolio_mapping_id == TIME_SERIES_DIRECTIONAL_STATEFUL:
+        return _directional(source, contract)
+    if contract.portfolio_mapping_id == SPARSE_EVENT_OR_CARRY:
+        return _sparse(source, contract)
+    raise ValueError(f"unknown portfolio_mapping_id: {contract.portfolio_mapping_id}")
+
+
+def portfolio_series(weights: np.ndarray, target_return: np.ndarray, cost_bps: float = 5.0) -> dict[str, np.ndarray]:
+    mapped = _matrix(weights, "weights")
+    target = _matrix(target_return, "target_return")
+    if mapped.shape != target.shape:
+        raise ValueError("weights and target_return shape mismatch")
+    valid = np.isfinite(target)
+    gross = np.sum(np.where(valid, mapped * target, 0.0), axis=0)
+    previous = np.zeros(mapped.shape, dtype=float)
+    if mapped.shape[1] > 1:
+        previous[:, 1:] = mapped[:, :-1]
+    turnover = np.sum(np.abs(mapped - previous), axis=0)
+    cost = turnover * float(cost_bps) / 10_000.0
+    return {"gross": gross, "turnover": turnover, "cost": cost, "net": gross - cost}
+
+
+def _direct_signal_reference(signal: np.ndarray, maximum_position: float = 0.20, gross_cap: float = 1.0) -> np.ndarray:
+    reference = np.where(np.isfinite(signal), np.clip(signal, -maximum_position, maximum_position), 0.0)
+    gross = np.abs(reference).sum(axis=0, keepdims=True)
+    scale = np.minimum(1.0, np.divide(gross_cap, gross, out=np.ones_like(gross), where=gross > 0))
+    return reference * scale
+
+
+def turnover_decomposition(signal: np.ndarray, weights: np.ndarray, cost_bps: float = 5.0) -> dict[str, Any]:
+    raw = _matrix(signal, "signal")
+    mapped = _matrix(weights, "weights")
+    if raw.shape != mapped.shape:
+        raise ValueError("signal and weights shape mismatch")
+    previous = np.zeros(mapped.shape, dtype=float)
+    if mapped.shape[1] > 1:
+        previous[:, 1:] = mapped[:, :-1]
+    current_zero = np.abs(mapped) <= 1e-12
+    previous_zero = np.abs(previous) <= 1e-12
+    sign_flip = (~current_zero) & (~previous_zero) & (np.sign(mapped) != np.sign(previous))
+    entry = np.where((previous_zero & ~current_zero) | sign_flip, np.abs(mapped), 0.0).sum(axis=0)
+    exit_ = np.where((~previous_zero & current_zero) | sign_flip, np.abs(previous), 0.0).sum(axis=0)
+    rebalance = np.where((~previous_zero & ~current_zero & ~sign_flip), np.abs(mapped - previous), 0.0).sum(axis=0)
+    mapped_turnover = entry + exit_ + rebalance
+    raw_previous = np.full(raw.shape, np.nan, dtype=float)
+    if raw.shape[1] > 1:
+        raw_previous[:, 1:] = raw[:, :-1]
+    raw_movement = np.nansum(np.abs(raw - raw_previous), axis=0)
+    direct = _direct_signal_reference(raw)
+    direct_previous = np.zeros(direct.shape, dtype=float)
+    if direct.shape[1] > 1:
+        direct_previous[:, 1:] = direct[:, :-1]
+    direct_turnover = np.abs(direct - direct_previous).sum(axis=0)
+    excess = mapped_turnover - direct_turnover
+    return {
+        "raw_signal_movement_l1_native_units": raw_movement.tolist(),
+        "entry_portfolio_establishment_l1": entry.tolist(),
+        "rebalance_turnover_l1": rebalance.tolist(),
+        "exit_turnover_l1": exit_.tolist(),
+        "mapped_full_l1_turnover": mapped_turnover.tolist(),
+        "direct_clipped_signal_counterfactual_turnover": direct_turnover.tolist(),
+        "mapping_excess_vs_direct_counterfactual_l1": excess.tolist(),
+        "fixed_cost_bps": float(cost_bps),
+        "fixed_cost": (mapped_turnover * float(cost_bps) / 10_000.0).tolist(),
+        "unmodeled": ["spread", "slippage", "impact", "fill_probability", "capacity"],
+        "causal_warning": "raw movement and weight turnover use different units; excess is a declared direct-signal counterfactual, not historical causal attribution",
+    }
+
+
+def mapping_contract_payload() -> dict[str, Any]:
+    return {
+        "schema_version": 1,
+        "cost_formula": {
+            "gross": "sum_i(weight[i,t] * target_return[i,t])",
+            "turnover": "sum_i(abs(weight[i,t] - weight[i,t-1]))",
+            "cost": "turnover * cost_bps / 10000",
+            "net": "gross - cost",
+            "turnover_convention": "full_L1_no_divide_by_two; initial establishment from zero is charged",
+        },
+        "contracts": [
+            {
+                **contract.to_dict(),
+                "contract_sha256": mapping_contract_sha256(contract),
+            }
+            for contract in DEFAULT_MAPPING_CONTRACTS.values()
+        ],
+    }
