@@ -428,9 +428,9 @@
     "economic_increment_claimed": false,
     "evidence_scope": "DETERMINISTIC_SYNTHETIC_CAPABILITY_ONLY",
     "market_data_read": false,
-    "repo_ref": "repair/crypto-instrument-capability-20260715@1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "repo_ref": "repair/crypto-instrument-capability-20260715@46280c5ad2acf6783d0ede0eb27fd93e3713d6f0",
     "sealed_data_read": false,
-    "source_commit_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "source_commit_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0",
     "verified_branch": "repair/crypto-instrument-capability-20260715"
   },
   "schema_version": 1,

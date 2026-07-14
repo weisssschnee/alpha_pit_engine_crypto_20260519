@@ -4,74 +4,74 @@
   "artifact_count": 14,
   "artifacts": [
     {
-      "bytes": 7007,
+      "bytes": 7222,
       "path": "reports/CRYPTO_INSTRUMENT_CAPABILITY_REPORT.md",
-      "sha256": "BC6BB3112B1BBF6866BEE668B3F2AE0D29C953546FBB9C2A3EA61573E8706EFA"
+      "sha256": "5970FEF3115750E5E6EA3642772D2BB5A90E95291F855503112D1F6E74FF2BBD"
     },
     {
       "bytes": 2146,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_ADAPTIVE_FEEDBACK_CONTRACT.json",
-      "sha256": "A587D904906C1A57017D3EE3A75C37E163618B07C97CB0119557EF82741BAC3F"
+      "sha256": "79F1AFF0139F24AC142D759BE2CFA5BFB44F95B63F1CAEA407AFCDC83C0A0AED"
     },
     {
       "bytes": 14022,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_CANONICAL_PRIMITIVE_CONTRACT.json",
-      "sha256": "491F95622BDA83A47F1C543AD66412DF1B77E01D40EA6B27A7BC57E6D6C0BA7B"
+      "sha256": "1F70E64E18D8DEDA4B75BA4019799AD54379B9F03A32EA45A100928547F01ED2"
     },
     {
       "bytes": 31269,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_INSTRUMENT_CAPABILITY_MATRIX.csv",
-      "sha256": "7ECAEAABD689F8D8594F9FF86CBD3F8547DE2A2567EBCEB6A06DCEE7DD525667"
+      "sha256": "6F740CC527106B6F2A67DE1CF53820C1AA56C80E5DD10EB489E8BF152E4B5119"
     },
     {
-      "bytes": 3684786,
+      "bytes": 3780835,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_INSTRUMENT_CAPABILITY_QUALIFICATION.json",
-      "sha256": "D245E74762380CDB8B04554C17A9D69D479D4EFF8C1C0343FC034E5FA8ECCA2C"
+      "sha256": "F47457BD0E4FABE8A9D579CAE4E53C4B095A0432E72A25A1A93E18EC4E0CB35C"
     },
     {
       "bytes": 21607,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv",
-      "sha256": "B9355EEF9B7E43CE13DD6CF7C93D5C0905C51AE85D95A9635C4893EE85EEAD75"
+      "sha256": "C80825E15DD740F1CE0CE1E41C76466358795F95F462E75D23A42E220D8F94B0"
     },
     {
       "bytes": 13886,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_COST_COUNTERFACTUAL.json",
-      "sha256": "EA75013989DB75E3B234AC8E881247CE58DA79CC461655013F595C52B10EC587"
+      "sha256": "8B9C1D17832F75ED19A5B33AA9437853E025E8CB181B9298C18A1D63A5665603"
     },
     {
       "bytes": 10115,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_SYNTHETIC_BEHAVIOR.json",
-      "sha256": "0583B74989AB1CA2C447414A92931645C4E1E017FD35AA01BA250B0CB3D6B52E"
+      "sha256": "52F24CB8AD94C7FB22350370C9429A5E65DE88DA4DA1DE3FC591FEE61DDF79C9"
     },
     {
       "bytes": 5525,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_TURNOVER_DECOMPOSITION.csv",
-      "sha256": "AD044987322FC910C90BB8DAE8E60F14D849EC07166C20F1416FA4D0CF022C45"
+      "sha256": "1ACA250CF06042D68F54BA34B162F669E65DA2804DFC8B464F459AFA81425AC3"
     },
     {
       "bytes": 98993,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_PLANTED_MECHANISM_RESULTS.csv",
-      "sha256": "924DE4C98D97BA5116870A8FA0B9332FD8D89393937CD35BA974EFAC10EDD902"
+      "sha256": "AE422AA16EAE666AA5DFDE5508B398E6D9C58144E1BF41B55503D0CB6AF484F6"
     },
     {
       "bytes": 3330,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_PORTFOLIO_MAPPING_CONTRACT.json",
-      "sha256": "FE08FABF2CBD7AC75AB666E5E747000B822DA1A3AF49A4278612D0FB1245BA55"
+      "sha256": "E14B59470E4DB3FEBBC65990B9539E7A367F487D44CE4FD7BCC49C6F1287543A"
     },
     {
       "bytes": 33726,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_IMPLEMENTATION_AUTHORITY.csv",
-      "sha256": "558C3C7E2712728294FF27817FB1E336A68F8DCAFA2538D86A1E53FE83E5FF24"
+      "sha256": "2F225EABAC2F370961C328885FF0C5EC35BD10833C77210E809A695D57409129"
     },
     {
       "bytes": 177707,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_SYNTHETIC_PARITY.json",
-      "sha256": "BB5F1E7B119E9503247B1786E191039B7A1114B76EA80A3DDDDAA2A5D6782041"
+      "sha256": "C67028338A8CE83D093AF49F011B1D7C7C69A21B7E7B6AC39E65780EF5D4CFEA"
     },
     {
       "bytes": 79825,
       "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_PROXY_STRICT_ALIGNMENT_SYNTHETIC.json",
-      "sha256": "60561B98A1CDBD675063F78209B81C4D45222037CC2A0E4A2D1C69FEF36A1996"
+      "sha256": "462C5EAA057091E880AFB8474167FFFA0FC986044E66509D8FCF3C5A49CBF7CC"
     }
   ],
   "boundaries": {
@@ -86,7 +86,7 @@
     "recent_opened": false,
     "sealed_data_read": false
   },
-  "bundle_hash_sha256": "9EF56DA7D3AAE80CE8E652FB87894D9054FF0304E057744DE15643F677D70D36",
+  "bundle_hash_sha256": "8D48F8E67D8F1DEE9906AC42333F13FF1B9970A53CD5C5BE64279F265A6A1E91",
   "bundle_id": "crypto-instrument-capability-20260715",
   "environment": {
     "numpy": "2.1.3",
@@ -167,7 +167,7 @@
           "typing"
         ],
         "path": "alphafactory_crypto/instrument_capability/search.py",
-        "sha256": "1E70204685ED8A2C58A02D36626BFFEE82D81630D289CDC5566144DF8101A4EE"
+        "sha256": "2635020349A3C17CAE87A71FA2920D1F47D834BA03C989954F53D803E1D9A938"
       },
       {
         "forbidden_calls": [],
@@ -182,7 +182,7 @@
           "typing"
         ],
         "path": "alphafactory_crypto/instrument_capability/harness.py",
-        "sha256": "10870F8336471BA930B377EDA63026D908FD9E5579766EA24154E03C1E665281"
+        "sha256": "1D9E2F5E95AB4C5A041E8E293B3943BDA08FDE1393130F702D38A24885519438"
       }
     ],
     "forbidden_call_findings": [],
@@ -222,7 +222,7 @@
     "real_performance_search_result": "PASS",
     "schema_version": 1,
     "sealed_data_read_result": "PASS",
-    "source_commit_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "source_commit_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0",
     "synthetic_run_shape_result": "PASS"
   },
   "final_status": "CRYPTO_INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_QUALIFIED",
@@ -236,7 +236,7 @@
   },
   "schema_version": 1,
   "search_budget_per_family_algorithm_seed": 27,
-  "source_commit_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+  "source_commit_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0",
   "source_files": [
     {
       "bytes": 666,
@@ -275,16 +275,16 @@
       "sha256": "3CDD2A76190D59365ACF95FAF86F941A7DAE44782E2435F38FC5D317F0778722"
     },
     {
-      "bytes": 11176,
-      "git_blob": "5b79f35ab49b857c695d8356f865c0f324b15bd1",
+      "bytes": 13730,
+      "git_blob": "f2cde7d39cccad0a6d76a2c74e0e6042eae93810",
       "path": "alphafactory_crypto/instrument_capability/search.py",
-      "sha256": "1E70204685ED8A2C58A02D36626BFFEE82D81630D289CDC5566144DF8101A4EE"
+      "sha256": "2635020349A3C17CAE87A71FA2920D1F47D834BA03C989954F53D803E1D9A938"
     },
     {
-      "bytes": 41625,
-      "git_blob": "1923eb5a0bf4815084bdee3e86b25c6d4e2367fd",
+      "bytes": 47059,
+      "git_blob": "8a8d320e18e2a44481386e705c1405ee5a527008",
       "path": "alphafactory_crypto/instrument_capability/harness.py",
-      "sha256": "10870F8336471BA930B377EDA63026D908FD9E5579766EA24154E03C1E665281"
+      "sha256": "1D9E2F5E95AB4C5A041E8E293B3943BDA08FDE1393130F702D38A24885519438"
     },
     {
       "bytes": 22700,
@@ -305,10 +305,10 @@
       "sha256": "C901B4AC843BC396CEECAD2389AE9071BDAB0E2771316C2553625DB063526BE3"
     },
     {
-      "bytes": 39488,
-      "git_blob": "ade01ee53abcf2510ba02e161683e1801300d8f7",
+      "bytes": 40043,
+      "git_blob": "e20581cf315ef4bfcf8aa1f3e0f9abf3bea3bf24",
       "path": "scripts/crypto_instrument_capability.py",
-      "sha256": "EA25B326A57CC5095B567D1FEDF53E43E97B96A01FBF22FFD27D2403DDE76652"
+      "sha256": "E6D5AA82CD6284879373934DC476FB02CD3D2B5A7B8A5D9AC6A7CBF3F0243AF8"
     },
     {
       "bytes": 10511,
@@ -317,22 +317,22 @@
       "sha256": "8AC6515FB5194E58095BC57A609E6004E3B03DF2361C7BF75394B65B694BDC20"
     },
     {
-      "bytes": 10049,
-      "git_blob": "6bc961d34b9d090806221ed01656493cfcc8f669",
+      "bytes": 14749,
+      "git_blob": "71e6c31242b9b5fcafaa3201f12bc9b47394dbdc",
       "path": "tests/test_instrument_capability_harness.py",
-      "sha256": "2C0728A9EA00148305E613DF802EF524AE1A7BFBB4DCF34833012572CA7CCB9D"
+      "sha256": "99AEB72FAD56376C1ED0ACC1A07A3A016BC2925DFC05D0A3C04005F1FA82B99F"
     },
     {
-      "bytes": 1183,
-      "git_blob": "2216175aaf8aa929071cf5195ef912fdf545dab8",
+      "bytes": 2203,
+      "git_blob": "db988df226ca4dd97a9c574645845be3879ec8de",
       "path": "tests/test_instrument_capability_reproducer.py",
-      "sha256": "960C2263B3F8278C1E122161ED644E1A41975A95F4A1E57220442A10651CD147"
+      "sha256": "2E436532B6F17D4F282667B5D85C29BC87B88FAFF208137365895394A4E94B20"
     },
     {
-      "bytes": 2473,
-      "git_blob": "a85b4a9d77fe362254e06793db83c9424f986ecf",
+      "bytes": 2703,
+      "git_blob": "c145e70cf02ab458c6f39899a078fefa3f024e40",
       "path": "docs/adr/0002-capability-only-search-instrument-authority.md",
-      "sha256": "8B0A6ACE052E470BCD16B38C5B842D2C9227E2D362D74E84D3583AB8C5E987FF"
+      "sha256": "C9160FBF5C8C4B91BCF8E4E7B0ECDE2807A7E91D0519DFE87CEE32AAFF2FE75C"
     }
   ],
   "verified_branch": "repair/crypto-instrument-capability-20260715"

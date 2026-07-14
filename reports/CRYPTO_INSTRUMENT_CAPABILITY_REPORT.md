@@ -1,7 +1,7 @@
 # Crypto Internal Search Instrument Capability Report
 
 **Final status:** `CRYPTO_INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_QUALIFIED`  
-**Source commit:** `1d8f76e6b07db3e3c13abb9f7d8230de08e50f58`  
+**Source commit:** `46280c5ad2acf6783d0ede0eb27fd93e3713d6f0`  
 **Accepted closure:** `crypto-frontier-provenance-closure-20260714` → `4726795f61052470d56e2d1475e4f6da9d262943`  
 **Scope:** deterministic synthetic capability only; no market alpha or economic increment claim.
 
@@ -58,7 +58,7 @@ Closure tag 中 `temporal_program`、`nextgen_epoch` 与 `b1s_canary` 的同名�
 
 ### 9. 实际独立搜索行为
 
-Capability harness 中实际运行且 behavior hash 区分的策略为 `canonical_typed_random`, `cem_like`, `uct_ucb_like`, `evolutionary`。`typed_random`/`typed_ast` 不被伪装成两个算法；历史 B1S 标签 `cem, uct_mcts, evolutionary` 继续标记为 `ALGORITHM_LABEL_DEGENERATE`。策略定义：`canonical_typed_random`=random_without_replacement_then_reshuffled_cycles; `cem_like`=full_coverage_then_elite_categorical_update; `uct_ucb_like`=one_visit_per_arm_then_ucb; `evolutionary`=full_coverage_then_aligned_parent_neighbor_mutation。这里的 discovery 是固定小型 proposal grammar 的可达、评价与保留；每个策略先覆盖 grammar，再执行各自 adaptive update，不等于宽泛真实市场 generator search。
+Capability harness 中实际运行且 behavior hash 区分的策略为 `canonical_typed_random`, `cem_like`, `uct_ucb_like`, `evolutionary`。`typed_random`/`typed_ast` 不被伪装成两个算法；历史 B1S 标签 `cem, uct_mcts, evolutionary` 继续标记为 `ALGORITHM_LABEL_DEGENERATE`。策略定义：`canonical_typed_random`=random_without_replacement_then_reshuffled_cycles; `cem_like`=full_coverage_then_elite_categorical_update; `uct_ucb_like`=one_visit_per_arm_then_ucb; `evolutionary`=full_coverage_then_aligned_parent_structural_gene_mutation。结构 proposal identity 与 evolutionary mutation 均排除 role_id 和 evidence label；mutation receipt 绑定 parent、child 与精确 changed genes；资格门槛要求至少两个不同的固定 seed。这里的 discovery 是固定小型 proposal grammar 的可达、评价与保留；每个策略先覆盖 grammar，再执行各自 adaptive update，不等于宽泛真实市场 generator search。
 
 ### 10. 是否可启动小型 development-only canary
 
