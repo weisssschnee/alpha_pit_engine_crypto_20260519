@@ -1,0 +1,73 @@
+{
+  "axis_order": [
+    "mapped_net_metric",
+    "benchmark_increment",
+    "worst_block_margin",
+    "positive_block_fraction",
+    "turnover",
+    "cost",
+    "concentration",
+    "support"
+  ],
+  "directions": {
+    "benchmark_increment": 1,
+    "concentration": -1,
+    "cost": -1,
+    "mapped_net_metric": 1,
+    "positive_block_fraction": 1,
+    "support": 1,
+    "turnover": -1,
+    "worst_block_margin": 1
+  },
+  "hard_blocks_before_strict": [
+    "ILLEGAL_PROPOSAL",
+    "MAPPING_MISSING",
+    "WRONG_LAG",
+    "PRIMITIVE_ALIAS_CONFLICT",
+    "NON_FINITE_STRICT_METRICS"
+  ],
+  "legacy_zero_cost_gross_proxy_role": "DIAGNOSTIC_ONLY_NOT_IN_ORDERING",
+  "method": "LEXICOGRAPHIC_STRICT_FEASIBILITY_ORDERING",
+  "missing_handling": "HARD_BLOCK_BEFORE_STRICT_ORDERING",
+  "normalization": {
+    "benchmark_increment": 0.0001,
+    "concentration": 0.05,
+    "cost": 0.0001,
+    "mapped_net_metric": 0.0001,
+    "positive_block_fraction": 0.1,
+    "support": 0.1,
+    "turnover": 0.3,
+    "worst_block_margin": 0.0001
+  },
+  "normalized_margin_clip": 10.0,
+  "provenance": {
+    "accepted_closure_sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+    "accepted_closure_tag": "crypto-frontier-provenance-closure-20260714",
+    "economic_increment_claimed": false,
+    "evidence_scope": "DETERMINISTIC_SYNTHETIC_CAPABILITY_ONLY",
+    "market_data_read": false,
+    "repo_ref": "repair/crypto-instrument-capability-20260715@1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "sealed_data_read": false,
+    "source_commit_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "verified_branch": "repair/crypto-instrument-capability-20260715"
+  },
+  "scalar_weights": null,
+  "schema_version": 1,
+  "scope": "deterministic synthetic capability; not economic performance evidence",
+  "strict_only_axes": [
+    "complete IC surface",
+    "placebo",
+    "complete Pareto coordinates",
+    "expensive controls"
+  ],
+  "thresholds": {
+    "benchmark_increment": 0.0,
+    "concentration": 0.25,
+    "cost": 0.0006,
+    "mapped_net_metric": 0.0,
+    "positive_block_fraction": 0.4,
+    "support": 0.8,
+    "turnover": 1.2,
+    "worst_block_margin": 0.0
+  }
+}

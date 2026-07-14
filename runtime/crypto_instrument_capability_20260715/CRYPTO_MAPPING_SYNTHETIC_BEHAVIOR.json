@@ -1,0 +1,438 @@
+{
+  "all_checks_pass": true,
+  "cases": {
+    "common_mode": {
+      "cross_sectional_weight_turnover": 0.0,
+      "cross_sectional_weights": [
+        [
+          -0.2,
+          -0.2
+        ],
+        [
+          -0.2,
+          -0.2
+        ],
+        [
+          -0.09999999999999998,
+          -0.09999999999999998
+        ],
+        [
+          0.09999999999999998,
+          0.09999999999999998
+        ],
+        [
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2
+        ]
+      ],
+      "directional_net_exposure": [
+        0.9999999999999999,
+        0.9999999999999999,
+        0.9999999999999999
+      ],
+      "directional_weights": [
+        [
+          0.16666666666666666,
+          0.16666666666666666,
+          0.16666666666666666
+        ],
+        [
+          0.16666666666666666,
+          0.16666666666666666,
+          0.16666666666666666
+        ],
+        [
+          0.16666666666666666,
+          0.16666666666666666,
+          0.16666666666666666
+        ],
+        [
+          0.16666666666666666,
+          0.16666666666666666,
+          0.16666666666666666
+        ],
+        [
+          0.16666666666666666,
+          0.16666666666666666,
+          0.16666666666666666
+        ],
+        [
+          0.16666666666666666,
+          0.16666666666666666,
+          0.16666666666666666
+        ]
+      ]
+    },
+    "cross_sectional_missing": {
+      "signal": [
+        [
+          -1.0
+        ],
+        [
+          -0.5
+        ],
+        [
+          null
+        ],
+        [
+          0.5
+        ],
+        [
+          1.0
+        ],
+        [
+          1.5
+        ]
+      ],
+      "weights": [
+        [
+          -0.2
+        ],
+        [
+          -0.2
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.2
+        ],
+        [
+          0.2
+        ]
+      ]
+    },
+    "directional_hysteresis": {
+      "signal": [
+        [
+          0.0,
+          0.8,
+          0.4,
+          null,
+          0.1
+        ]
+      ],
+      "transition_reasons": [
+        [
+          "NO_TRADE"
+        ],
+        [
+          "ENTRY"
+        ],
+        [
+          "HOLD"
+        ],
+        [
+          "MISSING_SIGNAL_HELD"
+        ],
+        [
+          "EXIT_THRESHOLD"
+        ]
+      ],
+      "weights": [
+        0.0,
+        0.25,
+        0.25,
+        0.25,
+        0.0
+      ]
+    },
+    "event_hold_exit_and_missing": {
+      "expected_active_coordinates": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "observed_active_coordinates": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "signal": [
+        [
+          0.0,
+          1.0,
+          null,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "transition_reasons": [
+        [
+          "EXPLICIT_NO_TRADE_OR_HOLD"
+        ],
+        [
+          "EVENT_ENTRY"
+        ],
+        [
+          "MISSING_SIGNAL_HELD"
+        ],
+        [
+          "EXPLICIT_NO_TRADE_OR_HOLD"
+        ],
+        [
+          "EXPLICIT_NO_TRADE_OR_HOLD"
+        ],
+        [
+          "EXPLICIT_HOLD_EXIT"
+        ],
+        [
+          "EXPLICIT_NO_TRADE_OR_HOLD"
+        ]
+      ],
+      "weights": [
+        0.0,
+        0.25,
+        0.25,
+        0.25,
+        0.25,
+        0.0,
+        0.0
+      ]
+    },
+    "position_cap": {
+      "all_mappings_pass": true,
+      "contract_sha256": "E835E2EE46F3349928CDC6983C9F720BC651E7722234F4EA12D11886AF4C683F",
+      "declared_cap": 0.2,
+      "final_max_abs_weight": 0.2,
+      "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+      "mappings": {
+        "CROSS_SECTIONAL_ZERO_NET": {
+          "contract_sha256": "E835E2EE46F3349928CDC6983C9F720BC651E7722234F4EA12D11886AF4C683F",
+          "declared_gross_cap": 1.0,
+          "declared_position_cap": 0.2,
+          "final_max_abs_weight": 0.2,
+          "final_max_gross": 0.8,
+          "gross_cap_holds": true,
+          "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+          "position_cap_holds": true,
+          "signal_sha256": "9F300056B279F07D467A9C2E70AF2387AFC2734D0622846798FF02312375E58B",
+          "transition_reasons": [
+            [
+              "GROSS_REDUCED_FOR_CAP_FEASIBILITY"
+            ]
+          ],
+          "weights_sha256": "7D23D3B7D07506A04203081E055641A969CB1D8B2D16C6828475D81B184DABE2"
+        },
+        "SPARSE_EVENT_OR_CARRY": {
+          "contract_sha256": "E50D8D207849BB5E98D3DC5F70F0DD1CD250A109D6F92DC5120C5639F19A315F",
+          "declared_gross_cap": 1.0,
+          "declared_position_cap": 0.25,
+          "final_max_abs_weight": 0.1,
+          "final_max_gross": 0.9999999999999999,
+          "gross_cap_holds": true,
+          "mapping_id": "SPARSE_EVENT_OR_CARRY",
+          "position_cap_holds": true,
+          "signal_sha256": "E1495AF7AAFEF278629F3D7F5E80B90333980B9EB15CBA0B0629324E542733D3",
+          "transition_reasons": [
+            [
+              "EVENT_ENTRY",
+              "EVENT_ENTRY",
+              "EVENT_ENTRY",
+              "EVENT_ENTRY",
+              "EVENT_ENTRY",
+              "EVENT_ENTRY",
+              "EVENT_ENTRY",
+              "EVENT_ENTRY",
+              "EVENT_ENTRY",
+              "EVENT_ENTRY",
+              "GROSS_CAP_SCALED"
+            ],
+            [
+              "EXPLICIT_NO_TRADE_OR_HOLD"
+            ],
+            [
+              "EXPLICIT_NO_TRADE_OR_HOLD"
+            ],
+            [
+              "EXPLICIT_NO_TRADE_OR_HOLD"
+            ],
+            [
+              "EXPLICIT_HOLD_EXIT",
+              "EXPLICIT_HOLD_EXIT",
+              "EXPLICIT_HOLD_EXIT",
+              "EXPLICIT_HOLD_EXIT",
+              "EXPLICIT_HOLD_EXIT",
+              "EXPLICIT_HOLD_EXIT",
+              "EXPLICIT_HOLD_EXIT",
+              "EXPLICIT_HOLD_EXIT",
+              "EXPLICIT_HOLD_EXIT",
+              "EXPLICIT_HOLD_EXIT"
+            ],
+            [
+              "EXPLICIT_NO_TRADE_OR_HOLD"
+            ]
+          ],
+          "weights_sha256": "0180C651E21DC51FC43368BBB2205F155384ED9260B7171F5B176C08A5130D3A"
+        },
+        "TIME_SERIES_DIRECTIONAL_STATEFUL": {
+          "contract_sha256": "B95F9BB3AF80EE6601ED2B04DDFE9E2C5FDCD93D6E027966F76DF7F5160A3F2B",
+          "declared_gross_cap": 1.0,
+          "declared_position_cap": 0.25,
+          "final_max_abs_weight": 0.125,
+          "final_max_gross": 1.0,
+          "gross_cap_holds": true,
+          "mapping_id": "TIME_SERIES_DIRECTIONAL_STATEFUL",
+          "position_cap_holds": true,
+          "signal_sha256": "8610A4DABF3A62C8EAF63536B94B7EFAC83AAB0275DC49AEC24D4FC83A5A6BFF",
+          "transition_reasons": [
+            [
+              "ENTRY",
+              "ENTRY",
+              "ENTRY",
+              "ENTRY",
+              "ENTRY",
+              "ENTRY",
+              "ENTRY",
+              "ENTRY",
+              "GROSS_CAP_SCALED"
+            ],
+            [
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "GROSS_CAP_SCALED"
+            ],
+            [
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "REVERSAL",
+              "GROSS_CAP_SCALED"
+            ]
+          ],
+          "weights_sha256": "99658CF22FD84024B772D5F70F55F87CEAF3D89527CE1BB1D89B25FFD82B0A00"
+        }
+      },
+      "realized_gross": 0.8,
+      "requested_gross": 1.0,
+      "transition_reasons": [
+        [
+          "GROSS_REDUCED_FOR_CAP_FEASIBILITY"
+        ]
+      ]
+    },
+    "singleton_sparse_event": {
+      "active_assets_by_coordinate": [
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "contract_sha256": "E50D8D207849BB5E98D3DC5F70F0DD1CD250A109D6F92DC5120C5639F19A315F",
+      "weights": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    }
+  },
+  "checks": {
+    "cross_sectional_common_mode_deleted": true,
+    "cross_sectional_missing_asset_excluded": true,
+    "directional_common_mode_preserved": true,
+    "directional_hysteresis_holds_then_exits": true,
+    "directional_missing_observation_holds_state": true,
+    "explicit_no_trade_stays_flat": true,
+    "final_position_cap_holds": true,
+    "final_position_cap_holds_all_mappings": true,
+    "infeasible_unit_gross_is_explicitly_reduced": true,
+    "singleton_sparse_event_preserved": true,
+    "sparse_event_holds_then_explicitly_exits": true,
+    "sparse_missing_observation_holds_state": true
+  },
+  "provenance": {
+    "accepted_closure_sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+    "accepted_closure_tag": "crypto-frontier-provenance-closure-20260714",
+    "economic_increment_claimed": false,
+    "evidence_scope": "DETERMINISTIC_SYNTHETIC_CAPABILITY_ONLY",
+    "market_data_read": false,
+    "repo_ref": "repair/crypto-instrument-capability-20260715@1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "sealed_data_read": false,
+    "source_commit_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "verified_branch": "repair/crypto-instrument-capability-20260715"
+  },
+  "schema_version": 1,
+  "scope": "deterministic synthetic mapping behavior; no market or sealed data"
+}

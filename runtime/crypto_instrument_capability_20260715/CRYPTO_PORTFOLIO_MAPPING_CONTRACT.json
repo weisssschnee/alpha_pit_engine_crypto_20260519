@@ -1,0 +1,85 @@
+{
+  "contracts": [
+    {
+      "contract_sha256": "E835E2EE46F3349928CDC6983C9F720BC651E7722234F4EA12D11886AF4C683F",
+      "cost_model": {
+        "cost_bps": 5.0,
+        "id": "FULL_L1_FIXED_BPS",
+        "initial_establishment_charged": true
+      },
+      "hold_semantics": "stateless cross-sectional rerank",
+      "parameters": {
+        "clip_renormalize_order": "rank_then_demean_then_sidewise_capped_allocation;never_post_cap_renormalize",
+        "demean": true,
+        "gross_target": 1.0,
+        "minimum_asset_count": 3,
+        "missing_handling": "exclude_nonfinite_assets_per_coordinate",
+        "position_cap": 0.2,
+        "rank_method": "average",
+        "singleton_behavior": "NO_TRADE_INFEASIBLE"
+      },
+      "portfolio_mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+      "rebalance_cadence": "every synthetic coordinate"
+    },
+    {
+      "contract_sha256": "B95F9BB3AF80EE6601ED2B04DDFE9E2C5FDCD93D6E027966F76DF7F5160A3F2B",
+      "cost_model": {
+        "cost_bps": 5.0,
+        "id": "FULL_L1_FIXED_BPS",
+        "initial_establishment_charged": true
+      },
+      "hold_semantics": "hysteresis; retain entry position until exit, reversal, or gross-cap scaling",
+      "parameters": {
+        "demean": false,
+        "entry_threshold": 0.6,
+        "exit_threshold": 0.2,
+        "gross_cap": 1.0,
+        "maximum_position": 0.25,
+        "missing_handling": "hold_existing_state_no_new_entry",
+        "rebalance_interval": 1
+      },
+      "portfolio_mapping_id": "TIME_SERIES_DIRECTIONAL_STATEFUL",
+      "rebalance_cadence": "explicit interval; default every synthetic coordinate"
+    },
+    {
+      "contract_sha256": "E50D8D207849BB5E98D3DC5F70F0DD1CD250A109D6F92DC5120C5639F19A315F",
+      "cost_model": {
+        "cost_bps": 5.0,
+        "id": "FULL_L1_FIXED_BPS",
+        "initial_establishment_charged": true
+      },
+      "hold_semantics": "fixed hold from eligible event, then explicit exit",
+      "parameters": {
+        "event_threshold": 0.75,
+        "explicit_no_trade_state": true,
+        "fixed_holding_period": 4,
+        "gross_cap": 1.0,
+        "maximum_position": 0.25,
+        "missing_handling": "hold_existing_position_no_new_entry",
+        "settlement_interval": 1,
+        "singleton_behavior": "PRESERVE_SINGLETON_EVENT"
+      },
+      "portfolio_mapping_id": "SPARSE_EVENT_OR_CARRY",
+      "rebalance_cadence": "event/settlement aligned"
+    }
+  ],
+  "cost_formula": {
+    "cost": "turnover * cost_bps / 10000",
+    "gross": "sum_i(weight[i,t] * target_return[i,t])",
+    "net": "gross - cost",
+    "turnover": "sum_i(abs(weight[i,t] - weight[i,t-1]))",
+    "turnover_convention": "full_L1_no_divide_by_two; initial establishment from zero is charged"
+  },
+  "provenance": {
+    "accepted_closure_sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+    "accepted_closure_tag": "crypto-frontier-provenance-closure-20260714",
+    "economic_increment_claimed": false,
+    "evidence_scope": "DETERMINISTIC_SYNTHETIC_CAPABILITY_ONLY",
+    "market_data_read": false,
+    "repo_ref": "repair/crypto-instrument-capability-20260715@1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "sealed_data_read": false,
+    "source_commit_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "verified_branch": "repair/crypto-instrument-capability-20260715"
+  },
+  "schema_version": 1
+}

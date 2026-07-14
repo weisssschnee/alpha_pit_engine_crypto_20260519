@@ -1,0 +1,296 @@
+{
+  "active_primitive_ids": [
+    "Delta",
+    "Slope",
+    "Acceleration",
+    "Persistence",
+    "Duration",
+    "StateAge",
+    "TimeSince",
+    "LastHit",
+    "FirstHit",
+    "Transition",
+    "PathShape",
+    "EventWindow",
+    "MultiScaleRelation"
+  ],
+  "authority": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+  "contracts": [
+    {
+      "activation_semantics": "active where the lagged difference is finite and nonzero",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "x[t] - x[t-window]",
+      "deprecated_aliases": [
+        "b1s:delta",
+        "nextgen:Delta"
+      ],
+      "event_state_assumptions": "no event state",
+      "expected_invariants": [
+        "constant input is zero after warm-up",
+        "linear input has constant delta"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN unless both endpoints are finite",
+      "output_domain": "float panel shaped [asset,time]",
+      "primitive_id": "Delta",
+      "warm_up_rule": "window coordinates",
+      "window_semantics": "window is a lag distance"
+    },
+    {
+      "activation_semantics": "active where a complete window has nonzero fitted slope",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "ordinary-least-squares slope over the trailing window including t",
+      "deprecated_aliases": [
+        "legacy_nextgen:endpoint_slope",
+        "legacy_b1s:endpoint_slope"
+      ],
+      "event_state_assumptions": "no event state",
+      "expected_invariants": [
+        "linear input recovers its per-coordinate slope",
+        "constant input is zero"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN unless the complete trailing window is finite",
+      "output_domain": "float panel shaped [asset,time]",
+      "primitive_id": "Slope",
+      "warm_up_rule": "window-1 coordinates",
+      "window_semantics": "window is the full OLS sample length"
+    },
+    {
+      "activation_semantics": "active where the lag-window second difference is finite and nonzero",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "(x[t]-x[t-window]) - (x[t-window]-x[t-2*window])",
+      "deprecated_aliases": [
+        "b1s:acceleration",
+        "nextgen:Acceleration"
+      ],
+      "event_state_assumptions": "no event state",
+      "expected_invariants": [
+        "linear input is zero after warm-up",
+        "quadratic input has stable sign"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN unless all three lag endpoints are finite",
+      "output_domain": "float panel shaped [asset,time]",
+      "primitive_id": "Acceleration",
+      "warm_up_rule": "2*window coordinates",
+      "window_semantics": "window is the lag used by both first differences"
+    },
+    {
+      "activation_semantics": "continuous occupancy fraction; not an event counter",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "fraction of values strictly above threshold in the complete trailing window",
+      "deprecated_aliases": [
+        "legacy_nextgen:zscore_state_persistence"
+      ],
+      "event_state_assumptions": "state is raw x > threshold, never an implicit rolling z-score",
+      "expected_invariants": [
+        "bounded in [0,1]",
+        "all-active window equals one",
+        "all-inactive window equals zero"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN unless the complete trailing window is finite",
+      "output_domain": "float panel in [0,1]",
+      "primitive_id": "Persistence",
+      "warm_up_rule": "window-1 coordinates",
+      "window_semantics": "window is the occupancy sample length"
+    },
+    {
+      "activation_semantics": "increments only while x > threshold and resets to zero otherwise",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "length of the current consecutive active run, including t; zero while inactive",
+      "deprecated_aliases": [
+        "legacy_nextgen:zscore_state_duration"
+      ],
+      "event_state_assumptions": "raw threshold state",
+      "expected_invariants": [
+        "inactive is zero",
+        "first active coordinate is one",
+        "missing values reset the run"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN resets the run; output is NaN at the missing coordinate",
+      "output_domain": "nonnegative float panel",
+      "primitive_id": "Duration",
+      "warm_up_rule": "none after a finite coordinate",
+      "window_semantics": "window is not used; threshold defines active state"
+    },
+    {
+      "activation_semantics": "tracks both active and inactive state age",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "age of the current boolean state since its most recent transition; zero on transition",
+      "deprecated_aliases": [
+        "legacy_nextgen:event_age_alias",
+        "legacy_b1s:numeric_change_age"
+      ],
+      "event_state_assumptions": "raw threshold state; distinct from active-only Duration",
+      "expected_invariants": [
+        "zero on each state change",
+        "increments while either state persists",
+        "missing resets age"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN resets state identity; output is NaN at the missing coordinate",
+      "output_domain": "nonnegative float panel",
+      "primitive_id": "StateAge",
+      "warm_up_rule": "none after a finite coordinate",
+      "window_semantics": "window is not used; threshold defines boolean state"
+    },
+    {
+      "activation_semantics": "increments after a rising activation until the next activation",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "elapsed coordinates since the latest rising threshold activation; zero at a hit",
+      "deprecated_aliases": [
+        "legacy_nextgen:event_age_alias",
+        "legacy_b1s:numeric_change_age"
+      ],
+      "event_state_assumptions": "event is a false-to-true raw-threshold transition",
+      "expected_invariants": [
+        "zero at every rising event",
+        "increments by one between hits",
+        "never equals absolute hit index"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN resets hit history",
+      "output_domain": "nonnegative float panel with NaN before first hit",
+      "primitive_id": "TimeSince",
+      "warm_up_rule": "NaN until the first rising activation in each finite segment",
+      "window_semantics": "window is not used"
+    },
+    {
+      "activation_semantics": "holds the last activation coordinate until the next activation",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "absolute time-coordinate index of the latest rising threshold activation",
+      "deprecated_aliases": [
+        "legacy_nextgen:event_age_alias",
+        "legacy_b1s:numeric_change_age"
+      ],
+      "event_state_assumptions": "event is a false-to-true raw-threshold transition",
+      "expected_invariants": [
+        "equals coordinate index at a hit",
+        "is piecewise constant between hits",
+        "is not event age"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN resets hit history",
+      "output_domain": "float coordinate-index panel with NaN before first hit",
+      "primitive_id": "LastHit",
+      "warm_up_rule": "NaN until the first rising activation in each finite segment",
+      "window_semantics": "window is not used"
+    },
+    {
+      "activation_semantics": "one at only the first activation, zero at later activations in the segment",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "one-shot pulse at the first rising threshold activation of each finite segment",
+      "deprecated_aliases": [
+        "legacy_nextgen:transition_alias"
+      ],
+      "event_state_assumptions": "event is a false-to-true raw-threshold transition",
+      "expected_invariants": [
+        "at most one pulse per finite segment",
+        "later transitions are not FirstHit"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN resets the segment; output is NaN at the missing coordinate",
+      "output_domain": "binary float panel",
+      "primitive_id": "FirstHit",
+      "warm_up_rule": "none after a finite coordinate",
+      "window_semantics": "window is not used"
+    },
+    {
+      "activation_semantics": "reports every state transition, not only the first",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "signed boolean-state change: +1 rising, -1 falling, 0 unchanged",
+      "deprecated_aliases": [
+        "legacy_temporal:rising_only_transition",
+        "legacy_nextgen:rising_only_transition",
+        "legacy_b1s:any_numeric_change"
+      ],
+      "event_state_assumptions": "raw threshold state",
+      "expected_invariants": [
+        "rising is +1",
+        "falling is -1",
+        "unchanged state is zero"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN resets state; first finite active state is a +1 activation",
+      "output_domain": "float panel in {-1,0,1}",
+      "primitive_id": "Transition",
+      "warm_up_rule": "none after a finite coordinate",
+      "window_semantics": "window is not used"
+    },
+    {
+      "activation_semantics": "active where early and late path thirds differ",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "mean(last third) - mean(first third) inside the complete trailing window",
+      "deprecated_aliases": [
+        "legacy_nextgen:multiscale_alias"
+      ],
+      "event_state_assumptions": "path geometry; not a short-minus-long moving average",
+      "expected_invariants": [
+        "constant path is zero",
+        "is distinct from MultiScaleRelation"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN unless the complete trailing window is finite",
+      "output_domain": "float panel shaped [asset,time]",
+      "primitive_id": "PathShape",
+      "warm_up_rule": "window-1 coordinates",
+      "window_semantics": "window is split into non-overlapping first/last thirds and must be >=3"
+    },
+    {
+      "activation_semantics": "counts rising activations, not active-state occupancy or arbitrary value changes",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "count of rising threshold activations in the trailing window",
+      "deprecated_aliases": [
+        "legacy_temporal:active_state_count",
+        "legacy_b1s:any_numeric_change_rate"
+      ],
+      "event_state_assumptions": "event is a false-to-true raw-threshold transition",
+      "expected_invariants": [
+        "singleton event count is one",
+        "persistent active state does not create repeated events"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN resets event history; windows never cross a missing coordinate",
+      "output_domain": "nonnegative integer-valued float panel",
+      "primitive_id": "EventWindow",
+      "warm_up_rule": "window-1 coordinates inside each finite segment",
+      "window_semantics": "window is the event-count lookback including t"
+    },
+    {
+      "activation_semantics": "active where short and long path levels differ",
+      "canonical_implementation": "alphafactory_crypto.instrument_capability.primitives.evaluate_primitive",
+      "canonical_semantics": "trailing short-window mean minus trailing long-window mean",
+      "deprecated_aliases": [
+        "b1s:multiscale",
+        "nextgen:MultiScaleRelation"
+      ],
+      "event_state_assumptions": "multi-scale level relation; not PathShape",
+      "expected_invariants": [
+        "constant path is zero",
+        "short window must be strictly smaller than long window"
+      ],
+      "input_domain": "finite numeric panel shaped [asset,time]",
+      "missing_value_rule": "NaN unless both complete windows are finite",
+      "output_domain": "float panel shaped [asset,time]",
+      "primitive_id": "MultiScaleRelation",
+      "warm_up_rule": "long_window-1 coordinates",
+      "window_semantics": "short_window < long_window; both include t"
+    }
+  ],
+  "provenance": {
+    "accepted_closure_sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+    "accepted_closure_tag": "crypto-frontier-provenance-closure-20260714",
+    "economic_increment_claimed": false,
+    "evidence_scope": "DETERMINISTIC_SYNTHETIC_CAPABILITY_ONLY",
+    "market_data_read": false,
+    "repo_ref": "repair/crypto-instrument-capability-20260715@1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "sealed_data_read": false,
+    "source_commit_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "verified_branch": "repair/crypto-instrument-capability-20260715"
+  },
+  "schema_version": 1,
+  "scope": "deterministic non-market capability qualification only"
+}

@@ -1,0 +1,339 @@
+{
+  "accepted_closure_sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+  "accepted_closure_tag": "crypto-frontier-provenance-closure-20260714",
+  "artifact_count": 14,
+  "artifacts": [
+    {
+      "bytes": 7007,
+      "path": "reports/CRYPTO_INSTRUMENT_CAPABILITY_REPORT.md",
+      "sha256": "BC6BB3112B1BBF6866BEE668B3F2AE0D29C953546FBB9C2A3EA61573E8706EFA"
+    },
+    {
+      "bytes": 2146,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_ADAPTIVE_FEEDBACK_CONTRACT.json",
+      "sha256": "A587D904906C1A57017D3EE3A75C37E163618B07C97CB0119557EF82741BAC3F"
+    },
+    {
+      "bytes": 14022,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_CANONICAL_PRIMITIVE_CONTRACT.json",
+      "sha256": "491F95622BDA83A47F1C543AD66412DF1B77E01D40EA6B27A7BC57E6D6C0BA7B"
+    },
+    {
+      "bytes": 31269,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_INSTRUMENT_CAPABILITY_MATRIX.csv",
+      "sha256": "7ECAEAABD689F8D8594F9FF86CBD3F8547DE2A2567EBCEB6A06DCEE7DD525667"
+    },
+    {
+      "bytes": 3684786,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_INSTRUMENT_CAPABILITY_QUALIFICATION.json",
+      "sha256": "D245E74762380CDB8B04554C17A9D69D479D4EFF8C1C0343FC034E5FA8ECCA2C"
+    },
+    {
+      "bytes": 21607,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv",
+      "sha256": "B9355EEF9B7E43CE13DD6CF7C93D5C0905C51AE85D95A9635C4893EE85EEAD75"
+    },
+    {
+      "bytes": 13886,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_COST_COUNTERFACTUAL.json",
+      "sha256": "EA75013989DB75E3B234AC8E881247CE58DA79CC461655013F595C52B10EC587"
+    },
+    {
+      "bytes": 10115,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_SYNTHETIC_BEHAVIOR.json",
+      "sha256": "0583B74989AB1CA2C447414A92931645C4E1E017FD35AA01BA250B0CB3D6B52E"
+    },
+    {
+      "bytes": 5525,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_MAPPING_TURNOVER_DECOMPOSITION.csv",
+      "sha256": "AD044987322FC910C90BB8DAE8E60F14D849EC07166C20F1416FA4D0CF022C45"
+    },
+    {
+      "bytes": 98993,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_PLANTED_MECHANISM_RESULTS.csv",
+      "sha256": "924DE4C98D97BA5116870A8FA0B9332FD8D89393937CD35BA974EFAC10EDD902"
+    },
+    {
+      "bytes": 3330,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_PORTFOLIO_MAPPING_CONTRACT.json",
+      "sha256": "FE08FABF2CBD7AC75AB666E5E747000B822DA1A3AF49A4278612D0FB1245BA55"
+    },
+    {
+      "bytes": 33726,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_IMPLEMENTATION_AUTHORITY.csv",
+      "sha256": "558C3C7E2712728294FF27817FB1E336A68F8DCAFA2538D86A1E53FE83E5FF24"
+    },
+    {
+      "bytes": 177707,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_PRIMITIVE_SYNTHETIC_PARITY.json",
+      "sha256": "BB5F1E7B119E9503247B1786E191039B7A1114B76EA80A3DDDDAA2A5D6782041"
+    },
+    {
+      "bytes": 79825,
+      "path": "runtime/crypto_instrument_capability_20260715/CRYPTO_PROXY_STRICT_ALIGNMENT_SYNTHETIC.json",
+      "sha256": "60561B98A1CDBD675063F78209B81C4D45222037CC2A0E4A2D1C69FEF36A1996"
+    }
+  ],
+  "boundaries": {
+    "candidate_promoted": false,
+    "challenge_opened": false,
+    "cross_sprint_adaptive_memory_written": false,
+    "forward_opened": false,
+    "historical_frontier_closure_rewritten": false,
+    "may_stress_opened": false,
+    "new_data_integrated": false,
+    "new_performance_search_run": false,
+    "recent_opened": false,
+    "sealed_data_read": false
+  },
+  "bundle_hash_sha256": "9EF56DA7D3AAE80CE8E652FB87894D9054FF0304E057744DE15643F677D70D36",
+  "bundle_id": "crypto-instrument-capability-20260715",
+  "environment": {
+    "numpy": "2.1.3",
+    "python": "3.11.9"
+  },
+  "execution_boundary_receipt": {
+    "allowed_infrastructure_reads_outside_execution_path": [
+      "current committed source files for content identity",
+      "three exact accepted-closure Python blobs for legacy semantic parity"
+    ],
+    "assurance_level": "STATIC_VERIFIED_CLOSED_INPUT_SURFACE",
+    "closed_input_surface_result": "PASS",
+    "conclusion_boundary": "Static closed-input assurance; not a formal GraphSkill runtime trace and not economic evidence",
+    "execution_files": [
+      {
+        "forbidden_calls": [],
+        "forbidden_imports": [],
+        "imports": [
+          "__future__",
+          "dataclasses",
+          "numpy",
+          "typing"
+        ],
+        "path": "alphafactory_crypto/instrument_capability/primitives.py",
+        "sha256": "853D06AEAF30DD5388083E8D41F777F976CC4107E099E6708FD81F43E48EB875"
+      },
+      {
+        "forbidden_calls": [],
+        "forbidden_imports": [],
+        "imports": [
+          "__future__",
+          "dataclasses",
+          "hashlib",
+          "json",
+          "numpy",
+          "typing"
+        ],
+        "path": "alphafactory_crypto/instrument_capability/mapping.py",
+        "sha256": "6ACA0A358349EAD0290BD1EF82AFE3F277600AFBBCE913AC4092A4286E60CBFC"
+      },
+      {
+        "forbidden_calls": [],
+        "forbidden_imports": [],
+        "imports": [
+          "__future__",
+          "dataclasses",
+          "math",
+          "types",
+          "typing"
+        ],
+        "path": "alphafactory_crypto/instrument_capability/feedback.py",
+        "sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0"
+      },
+      {
+        "forbidden_calls": [],
+        "forbidden_imports": [],
+        "imports": [
+          "__future__",
+          "math",
+          "numpy",
+          "typing"
+        ],
+        "path": "alphafactory_crypto/instrument_capability/evaluator.py",
+        "sha256": "9EB9BA4706CA22CC6C3E0DA62B8B8417770579852CAD46DE7BA337972A4BB2AF"
+      },
+      {
+        "forbidden_calls": [],
+        "forbidden_imports": [],
+        "imports": [
+          "__future__",
+          "collections",
+          "dataclasses",
+          "hashlib",
+          "json",
+          "math",
+          "random",
+          "types",
+          "typing"
+        ],
+        "path": "alphafactory_crypto/instrument_capability/search.py",
+        "sha256": "1E70204685ED8A2C58A02D36626BFFEE82D81630D289CDC5566144DF8101A4EE"
+      },
+      {
+        "forbidden_calls": [],
+        "forbidden_imports": [],
+        "imports": [
+          "__future__",
+          "dataclasses",
+          "hashlib",
+          "json",
+          "numpy",
+          "types",
+          "typing"
+        ],
+        "path": "alphafactory_crypto/instrument_capability/harness.py",
+        "sha256": "10870F8336471BA930B377EDA63026D908FD9E5579766EA24154E03C1E665281"
+      }
+    ],
+    "forbidden_call_findings": [],
+    "forbidden_call_names": [
+      "__import__",
+      "compile",
+      "eval",
+      "exec",
+      "fetch",
+      "load",
+      "open",
+      "read_bytes",
+      "read_csv",
+      "read_json",
+      "read_parquet",
+      "read_text",
+      "urlopen"
+    ],
+    "forbidden_import_findings": [],
+    "forbidden_import_roots": [
+      "boto3",
+      "duckdb",
+      "fsspec",
+      "os",
+      "pandas",
+      "pathlib",
+      "polars",
+      "pyarrow",
+      "requests",
+      "socket",
+      "sqlalchemy",
+      "subprocess",
+      "urllib"
+    ],
+    "formal_runtime_trace_supplied": false,
+    "observed_run_kind": "FIXED_SYNTHETIC_FINITE_GRAMMAR_CAPABILITY",
+    "real_performance_search_result": "PASS",
+    "schema_version": 1,
+    "sealed_data_read_result": "PASS",
+    "source_commit_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+    "synthetic_run_shape_result": "PASS"
+  },
+  "final_status": "CRYPTO_INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_QUALIFIED",
+  "fixed_seeds": [
+    20260715,
+    20260716
+  ],
+  "reproducer": {
+    "build": "python scripts/crypto_instrument_capability.py build --source-sha <sha>",
+    "check": "python scripts/crypto_instrument_capability.py check"
+  },
+  "schema_version": 1,
+  "search_budget_per_family_algorithm_seed": 27,
+  "source_commit_sha": "1d8f76e6b07db3e3c13abb9f7d8230de08e50f58",
+  "source_files": [
+    {
+      "bytes": 666,
+      "git_blob": "df2c9b9b54a8b43c554a19a02dc1e53bef764333",
+      "path": "alphafactory_crypto/instrument_capability/__init__.py",
+      "sha256": "BFDCE9DF83DD7ED08AE0CA550556867FAFB0CC46292514807BBE9C6381CAA120"
+    },
+    {
+      "bytes": 17625,
+      "git_blob": "594e0884f12c3798c5c7071d9ea44ac724cd9fb5",
+      "path": "alphafactory_crypto/instrument_capability/primitives.py",
+      "sha256": "853D06AEAF30DD5388083E8D41F777F976CC4107E099E6708FD81F43E48EB875"
+    },
+    {
+      "bytes": 18475,
+      "git_blob": "06f86e071d7653b0b11271382000b7132d27d2d3",
+      "path": "alphafactory_crypto/instrument_capability/mapping.py",
+      "sha256": "6ACA0A358349EAD0290BD1EF82AFE3F277600AFBBCE913AC4092A4286E60CBFC"
+    },
+    {
+      "bytes": 7650,
+      "git_blob": "9304c31a5c693f9b95879f8f922dfed710a5d561",
+      "path": "alphafactory_crypto/instrument_capability/feedback.py",
+      "sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0"
+    },
+    {
+      "bytes": 14823,
+      "git_blob": "b856013022498c982ed3eb6c19937232147d7161",
+      "path": "alphafactory_crypto/instrument_capability/evaluator.py",
+      "sha256": "9EB9BA4706CA22CC6C3E0DA62B8B8417770579852CAD46DE7BA337972A4BB2AF"
+    },
+    {
+      "bytes": 17708,
+      "git_blob": "5b179b6665bbfe7de0385315b6cd25b02ad5eb6f",
+      "path": "alphafactory_crypto/instrument_capability/legacy.py",
+      "sha256": "3CDD2A76190D59365ACF95FAF86F941A7DAE44782E2435F38FC5D317F0778722"
+    },
+    {
+      "bytes": 11176,
+      "git_blob": "5b79f35ab49b857c695d8356f865c0f324b15bd1",
+      "path": "alphafactory_crypto/instrument_capability/search.py",
+      "sha256": "1E70204685ED8A2C58A02D36626BFFEE82D81630D289CDC5566144DF8101A4EE"
+    },
+    {
+      "bytes": 41625,
+      "git_blob": "1923eb5a0bf4815084bdee3e86b25c6d4e2367fd",
+      "path": "alphafactory_crypto/instrument_capability/harness.py",
+      "sha256": "10870F8336471BA930B377EDA63026D908FD9E5579766EA24154E03C1E665281"
+    },
+    {
+      "bytes": 22700,
+      "git_blob": "495ed79fcb6725621f1356ecd5f69a7cf71e52fb",
+      "path": "alphafactory_crypto/instrument_capability/evidence_primitives.py",
+      "sha256": "40967C4A62CE4EC7B0ED88C1FBE3487BA28315A890AEE08D32A531983C9D2C31"
+    },
+    {
+      "bytes": 19451,
+      "git_blob": "d49ad0cefafa55aaf7a9f965fe83974f0c29ffc1",
+      "path": "alphafactory_crypto/instrument_capability/evidence_mapping.py",
+      "sha256": "E16CFE06C09CABD72BE1D2B1DDC3853B9295FBEA81B12886B291856FB2027CE4"
+    },
+    {
+      "bytes": 15982,
+      "git_blob": "49aa32be5f61da0b88fa40c15cf0c56a15686ec9",
+      "path": "alphafactory_crypto/instrument_capability/evidence_feedback.py",
+      "sha256": "C901B4AC843BC396CEECAD2389AE9071BDAB0E2771316C2553625DB063526BE3"
+    },
+    {
+      "bytes": 39488,
+      "git_blob": "ade01ee53abcf2510ba02e161683e1801300d8f7",
+      "path": "scripts/crypto_instrument_capability.py",
+      "sha256": "EA25B326A57CC5095B567D1FEDF53E43E97B96A01FBF22FFD27D2403DDE76652"
+    },
+    {
+      "bytes": 10511,
+      "git_blob": "bb24a8a79374f3108ccafa180c94c97b2456ee98",
+      "path": "tests/test_instrument_capability_primitives_mapping.py",
+      "sha256": "8AC6515FB5194E58095BC57A609E6004E3B03DF2361C7BF75394B65B694BDC20"
+    },
+    {
+      "bytes": 10049,
+      "git_blob": "6bc961d34b9d090806221ed01656493cfcc8f669",
+      "path": "tests/test_instrument_capability_harness.py",
+      "sha256": "2C0728A9EA00148305E613DF802EF524AE1A7BFBB4DCF34833012572CA7CCB9D"
+    },
+    {
+      "bytes": 1183,
+      "git_blob": "2216175aaf8aa929071cf5195ef912fdf545dab8",
+      "path": "tests/test_instrument_capability_reproducer.py",
+      "sha256": "960C2263B3F8278C1E122161ED644E1A41975A95F4A1E57220442A10651CD147"
+    },
+    {
+      "bytes": 2473,
+      "git_blob": "a85b4a9d77fe362254e06793db83c9424f986ecf",
+      "path": "docs/adr/0002-capability-only-search-instrument-authority.md",
+      "sha256": "8B0A6ACE052E470BCD16B38C5B842D2C9227E2D362D74E84D3583AB8C5E987FF"
+    }
+  ],
+  "verified_branch": "repair/crypto-instrument-capability-20260715"
+}
