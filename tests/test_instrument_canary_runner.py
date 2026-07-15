@@ -14,8 +14,10 @@ from alphafactory_crypto.instrument_canary.runner import (
     GRAPH_CONTRACT_IDS,
     SOURCE_AUTHORITY_PATHS,
     _affine_preflight_indices,
+    _numeric_alias_integrity,
     _numeric_evaluation_key,
     _real_feedback_contract,
+    _replayed_metric_matches,
     validate_frozen_canary_contract,
 )
 
@@ -103,6 +105,41 @@ class CanaryRunnerContractTests(unittest.TestCase):
         )
         self.assertNotEqual(first, changed_feasible)
         self.assertNotEqual(first, changed_diagnostics)
+
+    def test_numeric_alias_integrity_treats_matching_nan_evidence_as_equal(self) -> None:
+        representative = {
+            "candidate_id": "representative",
+            "first_evaluation": True,
+            "numeric_evaluation_key": "numeric-key",
+            "numeric_alias_cache_hit": False,
+            "numeric_representative_candidate_id": "representative",
+            "worst_block_margin": float("nan"),
+            "positive_block_fraction": float("nan"),
+        }
+        alias = {
+            **representative,
+            "candidate_id": "alias",
+            "numeric_alias_cache_hit": True,
+        }
+        self.assertTrue(
+            _numeric_alias_integrity(
+                [representative, alias],
+                {
+                    "search": {
+                        "first_evaluations": 2,
+                        "numeric_representative_evaluations": 1,
+                        "exact_numeric_alias_savings": 1,
+                    }
+                },
+            )
+        )
+
+    def test_independent_replay_matches_same_nonfinite_metric(self) -> None:
+        self.assertTrue(_replayed_metric_matches(float("nan"), float("nan")))
+        self.assertTrue(_replayed_metric_matches(None, float("nan")))
+        self.assertTrue(_replayed_metric_matches(float("inf"), float("inf")))
+        self.assertFalse(_replayed_metric_matches(float("nan"), 0.0))
+        self.assertFalse(_replayed_metric_matches(float("inf"), float("-inf")))
 
     def test_graph_profile_and_source_authority_are_explicit_and_nonempty(self) -> None:
         profile = json.loads(

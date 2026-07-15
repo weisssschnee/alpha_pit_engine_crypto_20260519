@@ -157,6 +157,47 @@ def _payload_sha256(value: Any) -> str:
     return hashlib.sha256(_canonical_bytes(value)).hexdigest().upper()
 
 
+def _evidence_values_equal(left: Any, right: Any) -> bool:
+    """Compare exact evidence while treating matching NaNs as the same value."""
+
+    if isinstance(left, np.generic):
+        left = left.item()
+    if isinstance(right, np.generic):
+        right = right.item()
+    if isinstance(left, float) and isinstance(right, float):
+        if math.isnan(left) or math.isnan(right):
+            return math.isnan(left) and math.isnan(right)
+        return left == right
+    if isinstance(left, Mapping) and isinstance(right, Mapping):
+        return set(left) == set(right) and all(
+            _evidence_values_equal(left[key], right[key]) for key in left
+        )
+    if isinstance(left, (list, tuple)) and isinstance(right, (list, tuple)):
+        return len(left) == len(right) and all(
+            _evidence_values_equal(left_item, right_item)
+            for left_item, right_item in zip(left, right)
+        )
+    return bool(left == right)
+
+
+def _replayed_metric_matches(expected: Any, observed: float) -> bool:
+    """Match a replayed metric without turning equal missing values into drift."""
+
+    if expected is None or expected == "":
+        return not math.isfinite(observed)
+    expected_value = float(expected)
+    if math.isnan(expected_value) or math.isnan(observed):
+        return math.isnan(expected_value) and math.isnan(observed)
+    if math.isinf(expected_value) or math.isinf(observed):
+        return expected_value == observed
+    return math.isclose(
+        observed,
+        expected_value,
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
+
+
 def _write_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -1046,15 +1087,9 @@ def _strict_feedback_audit(
         for name in (*FEASIBILITY_ORDER, "gross_proxy"):
             expected = original.get(name)
             observed = float(getattr(replay_metrics, name))
-            if expected in (None, ""):
-                metric_match = metric_match and not math.isfinite(observed)
-            else:
-                metric_match = metric_match and math.isclose(
-                    observed,
-                    float(expected),
-                    rel_tol=1e-12,
-                    abs_tol=1e-12,
-                )
+            metric_match = metric_match and _replayed_metric_matches(
+                expected, observed
+            )
         decision_match = (
             replay_decision.blocked == bool(original["feedback_blocked"])
             and replay_decision.feasible == bool(original["feedback_feasible"])
@@ -1441,7 +1476,12 @@ def _numeric_alias_integrity(
             if (
                 str(row.get("numeric_representative_candidate_id"))
                 != representative_id
-                or any(row.get(name) != representative.get(name) for name in comparable)
+                or any(
+                    not _evidence_values_equal(
+                        row.get(name), representative.get(name)
+                    )
+                    for name in comparable
+                )
             ):
                 return False
         alias_savings += len(rows) - 1
