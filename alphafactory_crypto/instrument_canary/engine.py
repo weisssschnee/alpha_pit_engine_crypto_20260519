@@ -312,11 +312,18 @@ class LazySearchEngine:
                             "seed": seed,
                             "algorithm": str(algorithm),
                             "step": step,
+                            "proposal_id": (
+                                f"{lane_id}:step={step}:ordinal={proposal.ordinal}:"
+                                f"{proposal.candidate_id}"
+                            ),
                             "proposal_ordinal": proposal.ordinal,
                             "candidate_id": proposal.candidate_id,
+                            "structural_genome": proposal.genome.canonical_dict(),
                             "cache_key": cache_key,
                             "cache_hit": cache_hit,
+                            "first_visit": not cache_hit,
                             "first_evaluation": not cache_hit,
+                            "evaluation_executed": not cache_hit,
                             "first_evaluation_lane_id": cache_entry.first_lane_id,
                             "proposal_sequence": proposal_sequence,
                             "authorization_started_sequence": authorization_sequence,
@@ -325,11 +332,14 @@ class LazySearchEngine:
                             "evaluation_sequence": evaluation_sequence,
                             "first_evaluation_sequence": cache_entry.first_evaluation_sequence,
                             "feedback_sequence": feedback_sequence,
+                            "feedback_available_after_step": step,
                             "policy_update_sequence": update_sequence,
                             "feedback_exposed": True,
                             "policy_state_before_proposal": state_before,
+                            "policy_state_hash_before": state_before,
                             "policy_state_after_proposal": proposed_state,
                             "policy_state_after_update": state_after,
+                            "policy_state_hash_after": state_after,
                             "parent_id": proposal.parent_id,
                             "mutation_receipt": (
                                 json.dumps(
@@ -354,9 +364,7 @@ class LazySearchEngine:
                 transcript_sha = hashlib.sha256(
                     canonical_json_bytes(
                         {
-                            "lane_id": lane_id,
                             "candidate_ids": lane_candidate_ids,
-                            "policy_state_hash": policy.state_hash(),
                         }
                     )
                 ).hexdigest().upper()

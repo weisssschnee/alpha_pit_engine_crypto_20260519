@@ -15,6 +15,8 @@ from alphafactory_crypto.instrument_canary.grammar import (
 )
 from alphafactory_crypto.instrument_canary.materialize import materialize_authorized
 from alphafactory_crypto.instrument_canary.release import canonical_sha256
+from alphafactory_crypto.instrument_canary.runner import _evaluation_evidence
+from alphafactory_crypto.instrument_capability.mapping import MappingResult
 
 
 SOURCE_SHA = "a" * 40
@@ -338,3 +340,83 @@ def test_tampered_receipt_fails_before_field_reader() -> None:
             field_reader=lambda name: reads.append(name) or np.ones((5, 8)),
         )
     assert reads == []
+
+
+def test_actual_materialization_records_runtime_field_primitive_and_mapping() -> None:
+    class Trace:
+        def __init__(self) -> None:
+            self.fields: list[str] = []
+            self.components: list[str] = []
+            self.edges: list[tuple[str, str, str]] = []
+
+        def record_field(self, field_id: str, **_: object) -> None:
+            self.fields.append(field_id)
+
+        def observe_component(self, component_id: str, **_: object) -> None:
+            self.components.append(component_id)
+
+        def observe_edge(
+            self, source: str, target: str, *, relationship: str, **_: object
+        ) -> None:
+            self.edges.append((source, target, relationship))
+
+    trace = Trace()
+    receipt = _authorize(_genome())
+    materialized = materialize_authorized(
+        receipt,
+        field_reader=lambda _: np.arange(40, dtype=float).reshape(5, 8),
+        runtime_trace=trace,
+    )
+    assert trace.fields == [receipt.field_id]
+    assert trace.components == [
+        "canonical_primitive_authority",
+        "explicit_portfolio_mapping",
+    ]
+    assert trace.edges == [
+        (
+            "real_data_lazy_search_canary",
+            "canonical_primitive_authority",
+            "executes_canonical_primitive",
+        ),
+        (
+            "real_data_lazy_search_canary",
+            "explicit_portfolio_mapping",
+            "applies_explicit_mapping",
+        ),
+    ]
+    evidence = _evaluation_evidence(
+        receipt, materialized, None, elapsed_ms=1.0
+    )
+    assert evidence["feasible_array_sha256"] == materialized.feasible_array_sha256
+    assert (
+        evidence["mapping_diagnostics_sha256"]
+        == materialized.mapping_diagnostics_sha256
+    )
+    assert evidence["mapping_execution_sha256"] == materialized.mapping_execution_sha256
+
+
+def test_mapping_execution_receipt_is_read_only_and_detects_feasibility_tamper() -> None:
+    receipt = _authorize(_genome())
+    source = np.vstack([np.arange(12, dtype=float) + shift for shift in range(5)])
+    materialized = materialize_authorized(receipt, field_reader=lambda _: source)
+    materialized.verify_integrity()
+    with pytest.raises(ValueError):
+        materialized.signal[0, 0] = 99.0
+    with pytest.raises(ValueError):
+        materialized.mapped.feasible[0] = False
+
+    forged_feasible = np.asarray(materialized.mapped.feasible).copy()
+    forged_feasible[:] = ~forged_feasible
+    forged = replace(
+        materialized,
+        mapped=MappingResult(
+            materialized.mapped.portfolio_mapping_id,
+            materialized.mapped.contract_sha256,
+            materialized.mapped.weights,
+            forged_feasible,
+            materialized.mapped.transition_reasons,
+            materialized.mapped.diagnostics,
+        ),
+    )
+    with pytest.raises(ValueError, match="content hash"):
+        forged.verify_integrity()

@@ -30,6 +30,12 @@ from .evaluator import array_sha256
 from .grammar import FrozenGrammar
 
 
+_MATERIALIZATION_AUTHORITY = object()
+_CANONICAL_MAPPING_IMPLEMENTATION = (
+    "alphafactory_crypto.instrument_capability.mapping.map_portfolio"
+)
+
+
 def apply_frozen_representation(
     representation_id: str, values: np.ndarray, *, value_domain: str
 ) -> np.ndarray:
@@ -95,6 +101,24 @@ def _readonly(values: np.ndarray, *, dtype: Any = float) -> np.ndarray:
     result = np.asarray(values, dtype=dtype).copy()
     result.setflags(write=False)
     return result
+
+
+def _freeze_json(value: Any) -> Any:
+    if isinstance(value, Mapping):
+        return MappingProxyType({str(key): _freeze_json(item) for key, item in value.items()})
+    if isinstance(value, (list, tuple)):
+        return tuple(_freeze_json(item) for item in value)
+    if isinstance(value, np.generic):
+        return value.item()
+    return value
+
+
+def _thaw_json(value: Any) -> Any:
+    if isinstance(value, Mapping):
+        return {str(key): _thaw_json(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_thaw_json(item) for item in value]
+    return value
 
 
 def _current_representation_contract(
@@ -199,6 +223,47 @@ class MaterializedCandidate:
     represented_array_sha256: str
     signal_array_sha256: str
     weight_array_sha256: str
+    feasible_array_sha256: str
+    mapping_diagnostics_sha256: str
+    mapping_execution_sha256: str
+    authority_token: Any
+
+    def verify_integrity(self) -> None:
+        if self.authority_token is not _MATERIALIZATION_AUTHORITY:
+            raise ValueError("materialization lacks canonical runtime authority")
+        self.receipt.verify_integrity()
+        observed = {
+            "signal": array_sha256(self.signal),
+            "weight": array_sha256(self.mapped.weights),
+            "feasible": array_sha256(self.mapped.feasible),
+            "diagnostics": _sha256(
+                {"diagnostics": _thaw_json(self.mapped.diagnostics)}
+            ),
+        }
+        expected = {
+            "signal": self.signal_array_sha256,
+            "weight": self.weight_array_sha256,
+            "feasible": self.feasible_array_sha256,
+            "diagnostics": self.mapping_diagnostics_sha256,
+        }
+        if observed != expected:
+            raise ValueError("materialized mapping execution content hash mismatch")
+        execution = _sha256(
+            {
+                "authorization_receipt_sha256": self.receipt.receipt_sha256,
+                "candidate_id": self.receipt.candidate_id,
+                "mapping_id": self.mapped.portfolio_mapping_id,
+                "mapping_contract_sha256": self.mapped.contract_sha256,
+                "canonical_implementation": _CANONICAL_MAPPING_IMPLEMENTATION,
+                "source_code_sha": self.receipt.source_code_sha,
+                "signal_array_sha256": observed["signal"],
+                "weight_array_sha256": observed["weight"],
+                "feasible_array_sha256": observed["feasible"],
+                "mapping_diagnostics_sha256": observed["diagnostics"],
+            }
+        )
+        if execution != self.mapping_execution_sha256:
+            raise ValueError("materialized mapping execution receipt mismatch")
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -215,7 +280,10 @@ class MaterializedCandidate:
             "represented_array_sha256": self.represented_array_sha256,
             "signal_array_sha256": self.signal_array_sha256,
             "weight_array_sha256": self.weight_array_sha256,
-            "mapping_diagnostics": dict(self.mapped.diagnostics),
+            "feasible_array_sha256": self.feasible_array_sha256,
+            "mapping_diagnostics_sha256": self.mapping_diagnostics_sha256,
+            "mapping_execution_sha256": self.mapping_execution_sha256,
+            "mapping_diagnostics": _thaw_json(self.mapped.diagnostics),
         }
 
 
@@ -223,6 +291,7 @@ def materialize_authorized(
     receipt: CandidateAuthorizationReceipt,
     *,
     field_reader: Callable[[str], np.ndarray],
+    runtime_trace: Any | None = None,
 ) -> MaterializedCandidate:
     """Read exactly one authorized field and call canonical execution routes."""
 
@@ -233,15 +302,52 @@ def materialize_authorized(
     field_values = np.asarray(field_reader(receipt.field_id), dtype=float).copy()
     if field_values.ndim != 2 or not all(size > 0 for size in field_values.shape):
         raise ValueError("field reader must return nonempty [asset,time] values")
+    if runtime_trace is not None:
+        runtime_trace.record_field(
+            receipt.field_id,
+            consumer_component="real_data_lazy_search_canary",
+            representation_id=receipt.representation_id,
+            route_id=receipt.primitive_id,
+        )
     represented = apply_frozen_representation(
         receipt.representation_id,
         field_values,
         value_domain=str(receipt.representation_contract["value_domain"]),
     )
     signal = _evaluate_receipt_primitive(receipt, represented)
+    if runtime_trace is not None:
+        runtime_trace.observe_component(
+            "canonical_primitive_authority",
+            implementation_path="alphafactory_crypto/instrument_capability/primitives.py",
+            function="evaluate_primitive",
+            semantic_role="primitive_semantic_authority",
+            evidence_produced=True,
+        )
+        runtime_trace.observe_edge(
+            "real_data_lazy_search_canary",
+            "canonical_primitive_authority",
+            edge_type="RUNTIME_CALL",
+            relationship="executes_canonical_primitive",
+            evidence={"candidate_id": receipt.candidate_id},
+        )
 
     mapping_contract = DEFAULT_MAPPING_CONTRACTS[receipt.mapping_id]
     mapped = map_portfolio(signal, mapping_contract)
+    if runtime_trace is not None:
+        runtime_trace.observe_component(
+            "explicit_portfolio_mapping",
+            implementation_path="alphafactory_crypto/instrument_capability/mapping.py",
+            function="map_portfolio",
+            semantic_role="portfolio_mapping_authority",
+            evidence_produced=True,
+        )
+        runtime_trace.observe_edge(
+            "real_data_lazy_search_canary",
+            "explicit_portfolio_mapping",
+            edge_type="RUNTIME_CALL",
+            relationship="applies_explicit_mapping",
+            evidence={"candidate_id": receipt.candidate_id},
+        )
     if mapped.contract_sha256 != receipt.mapping_contract_sha256:
         raise ValueError("runtime mapping contract differs from authorization receipt")
     field_values = _readonly(field_values)
@@ -253,9 +359,29 @@ def materialize_authorized(
         weights=_readonly(mapped.weights),
         feasible=_readonly(mapped.feasible, dtype=bool),
         transition_reasons=tuple(tuple(row) for row in mapped.transition_reasons),
-        diagnostics=MappingProxyType(dict(mapped.diagnostics)),
+        diagnostics=_freeze_json(mapped.diagnostics),
     )
-    return MaterializedCandidate(
+    signal_sha = array_sha256(signal)
+    weight_sha = array_sha256(mapped.weights)
+    feasible_sha = array_sha256(mapped.feasible)
+    diagnostics_sha = _sha256(
+        {"diagnostics": _thaw_json(mapped.diagnostics)}
+    )
+    execution_sha = _sha256(
+        {
+            "authorization_receipt_sha256": receipt.receipt_sha256,
+            "candidate_id": receipt.candidate_id,
+            "mapping_id": mapped.portfolio_mapping_id,
+            "mapping_contract_sha256": mapped.contract_sha256,
+            "canonical_implementation": _CANONICAL_MAPPING_IMPLEMENTATION,
+            "source_code_sha": receipt.source_code_sha,
+            "signal_array_sha256": signal_sha,
+            "weight_array_sha256": weight_sha,
+            "feasible_array_sha256": feasible_sha,
+            "mapping_diagnostics_sha256": diagnostics_sha,
+        }
+    )
+    result = MaterializedCandidate(
         receipt=receipt,
         field_values=field_values,
         represented_values=represented,
@@ -266,9 +392,15 @@ def materialize_authorized(
         ),
         field_array_sha256=array_sha256(field_values),
         represented_array_sha256=array_sha256(represented),
-        signal_array_sha256=array_sha256(signal),
-        weight_array_sha256=array_sha256(mapped.weights),
+        signal_array_sha256=signal_sha,
+        weight_array_sha256=weight_sha,
+        feasible_array_sha256=feasible_sha,
+        mapping_diagnostics_sha256=diagnostics_sha,
+        mapping_execution_sha256=execution_sha,
+        authority_token=_MATERIALIZATION_AUTHORITY,
     )
+    result.verify_integrity()
+    return result
 
 
 __all__ = [

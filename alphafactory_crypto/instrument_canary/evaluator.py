@@ -15,7 +15,6 @@ from alphafactory_crypto.instrument_capability.mapping import (
     DEFAULT_MAPPING_CONTRACTS,
     SPARSE_EVENT_OR_CARRY,
     MappingResult,
-    map_portfolio,
     mapping_contract_sha256,
 )
 
@@ -73,6 +72,7 @@ class StrictEvaluation:
     weight_sha256: str
     target_sha256: str
     cross_sectional_rank_ic_mean: float | None
+    cross_sectional_rank_ic_role: str
     lcb_warning: str
 
     def to_dict(self) -> dict[str, Any]:
@@ -362,10 +362,11 @@ def evaluate_real_mapping(
         signal_sha256=array_sha256(signal_array),
         weight_sha256=array_sha256(weights),
         target_sha256=array_sha256(target),
-        cross_sectional_rank_ic_mean=(
-            _rank_ic(weights, target)
+        cross_sectional_rank_ic_mean=None,
+        cross_sectional_rank_ic_role=(
+            "NOT_COMPUTED_NOT_A_FEEDBACK_AXIS"
             if mapped.portfolio_mapping_id == CROSS_SECTIONAL_ZERO_NET
-            else None
+            else "NOT_APPLICABLE"
         ),
         lcb_warning="ordinary standard error; no serial-correlation or multiple-testing correction",
     )
@@ -396,6 +397,7 @@ def evaluate_authorized_materialization(
     ):
         raise ValueError("materialization/authorization candidate identity mismatch")
     receipt.verify_integrity()
+    materialized.verify_integrity()
     mapping_id = str(getattr(receipt, "mapping_id"))
     horizon = int(getattr(receipt, "target_horizon_hours"))
     release_view_sha = str(getattr(receipt, "release_view_sha256"))
@@ -408,25 +410,6 @@ def evaluate_authorized_materialization(
         raise ValueError("materialized signal hash mismatch")
     if array_sha256(mapped.weights) != str(getattr(materialized, "weight_array_sha256")):
         raise ValueError("materialized weight hash mismatch")
-    canonical_mapped = map_portfolio(signal, DEFAULT_MAPPING_CONTRACTS[mapping_id])
-    if not np.array_equal(
-        np.asarray(mapped.weights), np.asarray(canonical_mapped.weights), equal_nan=True
-    ):
-        raise ValueError("materialized weights differ from canonical mapping replay")
-    if not np.array_equal(
-        np.asarray(mapped.feasible, dtype=bool),
-        np.asarray(canonical_mapped.feasible, dtype=bool),
-    ):
-        raise ValueError("materialized feasibility differs from canonical mapping replay")
-    if mapping_id == SPARSE_EVENT_OR_CARRY:
-        for name in ("event_opportunity_mask", "event_entry_mask"):
-            if list(mapped.diagnostics.get(name, ())) != list(
-                canonical_mapped.diagnostics.get(name, ())
-            ):
-                raise ValueError(
-                    "materialized sparse diagnostics differ from canonical mapping replay"
-                )
-    mapped = canonical_mapped
     target = panel.target_return(horizon)
     months = tuple(FROZEN_DEVELOPMENT_MONTHS) if require_full_development_blocks else None
     return evaluate_real_mapping(

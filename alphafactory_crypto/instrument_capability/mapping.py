@@ -8,6 +8,7 @@ from dataclasses import asdict, dataclass
 from typing import Any, Mapping
 
 import numpy as np
+import pandas as pd
 
 
 CROSS_SECTIONAL_ZERO_NET = "CROSS_SECTIONAL_ZERO_NET"
@@ -138,6 +139,45 @@ def _capped_allocation(scores: np.ndarray, target: float, cap: float) -> np.ndar
     return allocation
 
 
+def _capped_allocation_columns(
+    scores: np.ndarray, targets: np.ndarray, cap: float
+) -> np.ndarray:
+    """Column-vectorized equivalent of ``_capped_allocation``."""
+
+    allocation = np.zeros_like(scores, dtype=float)
+    active = scores > 0.0
+    remaining = np.asarray(targets, dtype=float).copy()
+    for _ in range(scores.shape[0]):
+        pending = remaining > 1e-14
+        if not np.any(pending):
+            break
+        scale = np.sum(np.where(active, scores, 0.0), axis=0)
+        proposal = np.divide(
+            remaining[None, :] * scores,
+            scale[None, :],
+            out=np.zeros_like(scores, dtype=float),
+            where=active & (scale[None, :] > 0.0),
+        )
+        capacity = cap - allocation
+        saturated = active & (proposal >= capacity - 1e-14)
+        has_saturation = saturated.any(axis=0) & pending
+        unsaturated_columns = pending & ~has_saturation
+        if np.any(unsaturated_columns):
+            allocation[:, unsaturated_columns] += proposal[:, unsaturated_columns]
+            remaining[unsaturated_columns] = 0.0
+            active[:, unsaturated_columns] = False
+        if np.any(has_saturation):
+            allocation[saturated] = cap
+            active[saturated] = False
+            remaining[has_saturation] = (
+                targets[has_saturation]
+                - allocation[:, has_saturation].sum(axis=0)
+            )
+    if np.any(remaining > 1e-10):
+        raise ValueError("capped allocation target is infeasible")
+    return allocation
+
+
 def _cross_sectional(signal: np.ndarray, contract: MappingContract) -> MappingResult:
     parameters = contract.parameters
     gross_target = float(parameters["gross_target"])
@@ -145,39 +185,59 @@ def _cross_sectional(signal: np.ndarray, contract: MappingContract) -> MappingRe
     minimum = int(parameters["minimum_asset_count"])
     if gross_target <= 0 or cap <= 0 or cap > 1:
         raise ValueError("invalid cross-sectional gross/cap parameters")
-    weights = np.zeros(signal.shape, dtype=float)
-    feasible = np.zeros(signal.shape[1], dtype=bool)
+    finite = np.isfinite(signal)
+    finite_count = finite.sum(axis=0)
+    ranks = pd.DataFrame(signal).rank(
+        axis=0, method="average", na_option="keep"
+    ).to_numpy(dtype=float)
+    rank_mean = np.divide(
+        np.nansum(ranks, axis=0),
+        finite_count,
+        out=np.zeros(signal.shape[1], dtype=float),
+        where=finite_count > 0,
+    )
+    centered = ranks - rank_mean
+    positive = centered > 0.0
+    negative = centered < 0.0
+    requested_side = gross_target / 2.0
+    side_targets = np.minimum.reduce(
+        (
+            np.full(signal.shape[1], requested_side, dtype=float),
+            cap * positive.sum(axis=0),
+            cap * negative.sum(axis=0),
+        )
+    )
+    positive_allocation = _capped_allocation_columns(
+        np.where(positive, centered, 0.0), side_targets, cap
+    )
+    negative_allocation = _capped_allocation_columns(
+        np.where(negative, -centered, 0.0), side_targets, cap
+    )
+    weights = np.where(finite, positive_allocation - negative_allocation, 0.0)
+    feasible = (
+        (finite_count >= minimum)
+        & positive.any(axis=0)
+        & negative.any(axis=0)
+    )
+    weights[:, ~feasible] = 0.0
     reasons: list[tuple[str, ...]] = []
     achieved_gross: list[float] = []
     for column in range(signal.shape[1]):
-        finite_index = np.flatnonzero(np.isfinite(signal[:, column]))
-        column_reasons: list[str] = []
-        if len(finite_index) < minimum:
-            column_reasons.append("MINIMUM_ASSET_COUNT_NOT_MET")
-            reasons.append(tuple(column_reasons))
+        if finite_count[column] < minimum:
+            reasons.append(("MINIMUM_ASSET_COUNT_NOT_MET",))
             achieved_gross.append(0.0)
-            continue
-        values = signal[finite_index, column]
-        ranks = _average_ranks(values)
-        centered = ranks - ranks.mean()
-        positive = centered > 0
-        negative = centered < 0
-        if not positive.any() or not negative.any():
-            column_reasons.append("NO_CROSS_SECTIONAL_DISPERSION")
-            reasons.append(tuple(column_reasons))
+        elif not positive[:, column].any() or not negative[:, column].any():
+            reasons.append(("NO_CROSS_SECTIONAL_DISPERSION",))
             achieved_gross.append(0.0)
-            continue
-        requested_side = gross_target / 2.0
-        side_target = min(requested_side, cap * int(positive.sum()), cap * int(negative.sum()))
-        if side_target < requested_side - 1e-12:
-            column_reasons.append("GROSS_REDUCED_FOR_CAP_FEASIBILITY")
-        positive_allocation = _capped_allocation(np.where(positive, centered, 0.0), side_target, cap)
-        negative_allocation = _capped_allocation(np.where(negative, -centered, 0.0), side_target, cap)
-        local = positive_allocation - negative_allocation
-        weights[finite_index, column] = local
-        feasible[column] = True
-        achieved_gross.append(float(np.abs(local).sum()))
-        reasons.append(tuple(column_reasons or ["MAPPED"]))
+        else:
+            reasons.append(
+                ("GROSS_REDUCED_FOR_CAP_FEASIBILITY",)
+                if side_targets[column] < requested_side - 1e-12
+                else ("MAPPED",)
+            )
+            achieved_gross.append(
+                float(np.abs(weights[finite[:, column], column]).sum())
+            )
     diagnostics = {
         "requested_gross": gross_target,
         "achieved_gross": achieved_gross,

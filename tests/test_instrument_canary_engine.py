@@ -3,7 +3,7 @@ from __future__ import annotations
 import unittest
 from dataclasses import dataclass
 
-from alphafactory_crypto.instrument_canary.contracts import Proposal
+from alphafactory_crypto.instrument_canary.contracts import CandidateGenome, Proposal
 from alphafactory_crypto.instrument_canary.engine import (
     CandidateObservation,
     LazySearchEngine,
@@ -148,6 +148,21 @@ class InstrumentCanaryEngineTests(unittest.TestCase):
         self.assertLess(row["cache_lookup_sequence"], row["evaluation_sequence"])
         self.assertLess(row["evaluation_sequence"], row["feedback_sequence"])
         self.assertLess(row["feedback_sequence"], row["policy_update_sequence"])
+        self.assertTrue(row["proposal_id"])
+        genome_payload = dict(row["structural_genome"])
+        genome_payload.pop("schema_version")
+        self.assertEqual(
+            CandidateGenome(**genome_payload).candidate_id, row["candidate_id"]
+        )
+        self.assertEqual(row["first_visit"], row["first_evaluation"])
+        self.assertEqual(row["evaluation_executed"], row["first_evaluation"])
+        self.assertEqual(row["feedback_available_after_step"], row["step"])
+        self.assertEqual(
+            row["policy_state_hash_before"], row["policy_state_before_proposal"]
+        )
+        self.assertEqual(
+            row["policy_state_hash_after"], row["policy_state_after_update"]
+        )
 
     def test_hard_cap_counts_preflight_and_fails_before_extra_evaluation(self) -> None:
         evaluated: list[str] = []

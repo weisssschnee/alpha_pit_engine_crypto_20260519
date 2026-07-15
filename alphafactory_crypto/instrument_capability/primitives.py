@@ -252,6 +252,33 @@ def _rolling_apply(values: np.ndarray, window: int, function: Callable[[np.ndarr
     return result
 
 
+def _complete_windows(values: np.ndarray, window: int) -> tuple[np.ndarray, np.ndarray]:
+    """Return a zero-copy trailing-window view and its complete-finite mask."""
+
+    if window > values.shape[1]:
+        return (
+            np.empty((values.shape[0], 0, window), dtype=float),
+            np.empty((values.shape[0], 0), dtype=bool),
+        )
+    windows = np.lib.stride_tricks.sliding_window_view(values, window, axis=1)
+    return windows, np.isfinite(windows).all(axis=-1)
+
+
+def _rolling_complete_reduction(
+    values: np.ndarray,
+    window: int,
+    reducer: Callable[[np.ndarray], np.ndarray],
+) -> np.ndarray:
+    """Vectorized equivalent of ``_rolling_apply`` for fixed reductions."""
+
+    result = np.full(values.shape, np.nan, dtype=float)
+    windows, complete = _complete_windows(values, window)
+    if windows.shape[1]:
+        reduced = np.asarray(reducer(windows), dtype=float)
+        result[:, window - 1 :] = np.where(complete, reduced, np.nan)
+    return result
+
+
 def _state_events(values: np.ndarray, threshold: float) -> tuple[np.ndarray, np.ndarray]:
     finite = np.isfinite(values)
     state = np.where(finite, values > threshold, False)
@@ -297,24 +324,43 @@ def evaluate_primitive(
         axis = np.arange(window, dtype=float)
         centered = axis - axis.mean()
         denominator = float(np.sum(centered * centered))
-        return _rolling_apply(source, window, lambda segment: np.sum(centered * segment) / denominator)
+        return _rolling_complete_reduction(
+            source,
+            window,
+            lambda windows: np.sum(windows * centered, axis=-1) / denominator,
+        )
     if primitive_id == "Acceleration":
         lagged = _shift(source, window)
         twice = _shift(source, 2 * window)
         valid = finite & np.isfinite(lagged) & np.isfinite(twice)
         return np.where(valid, source - 2.0 * lagged + twice, np.nan)
     if primitive_id == "Persistence":
-        return _rolling_apply(source, window, lambda segment: np.mean(segment > threshold))
+        return _rolling_complete_reduction(
+            source,
+            window,
+            lambda windows: np.mean(windows > threshold, axis=-1),
+        )
     if primitive_id == "PathShape":
         if window < 3:
             raise ValueError("PathShape requires window >= 3")
         third = max(1, window // 3)
-        return _rolling_apply(source, window, lambda segment: np.mean(segment[-third:]) - np.mean(segment[:third]))
+        return _rolling_complete_reduction(
+            source,
+            window,
+            lambda windows: (
+                np.mean(windows[..., -third:], axis=-1)
+                - np.mean(windows[..., :third], axis=-1)
+            ),
+        )
     if primitive_id == "MultiScaleRelation":
         if long_window <= window:
             raise ValueError("MultiScaleRelation requires long_window > window")
-        short = _rolling_apply(source, window, np.mean)
-        long = _rolling_apply(source, long_window, np.mean)
+        short = _rolling_complete_reduction(
+            source, window, lambda windows: np.mean(windows, axis=-1)
+        )
+        long = _rolling_complete_reduction(
+            source, long_window, lambda windows: np.mean(windows, axis=-1)
+        )
         return np.where(np.isfinite(short) & np.isfinite(long), short - long, np.nan)
 
     state, rising = _state_events(source, threshold)

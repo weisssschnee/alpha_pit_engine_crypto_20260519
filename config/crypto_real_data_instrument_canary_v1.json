@@ -152,6 +152,7 @@
     "maximum_proposal_steps_per_seed_algorithm": 256,
     "formal_proposal_steps": 1024,
     "cost_preflight_evaluations": 32,
+    "superseded_development_preflight_evaluations": 32,
     "total_first_evaluation_hard_cap": 2048,
     "fixed_lane_order": "seed ascending then algorithm listed order",
     "global_cache_scope": "THIS_CANARY_RUN_ONLY",
@@ -166,6 +167,12 @@
     "policy_update_enabled": false,
     "persist_economic_metrics": false
   },
+  "resource_admission": {
+    "maximum_estimated_2048_seconds_p95": 3600.0,
+    "maximum_sampled_peak_rss_delta_bytes": 2147483648,
+    "maximum_release_load_seconds": 120.0,
+    "rss_sampling_interval_ms": 50
+  },
   "strict_audit_sample": {
     "top_feedback": 8,
     "deterministic_random": 8,
@@ -173,6 +180,11 @@
     "high_concentration": 8,
     "low_feedback": 8,
     "random_seed": 20260731
+  },
+  "behavior_qualification": {
+    "maximum_pairwise_visit_jaccard": 0.95,
+    "evolutionary_bootstrap_visits_per_lane": 8,
+    "expected_evolutionary_mutation_receipts_per_lane": 120
   },
   "outputs": {
     "runtime_root": "runtime/crypto_real_data_instrument_canary_20260715",

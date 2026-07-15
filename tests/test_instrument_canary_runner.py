@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 from alphafactory_crypto.instrument_canary.admission import (
     _sha256,
@@ -10,7 +11,10 @@ from alphafactory_crypto.instrument_canary.admission import (
 )
 from alphafactory_crypto.instrument_canary.grammar import FrozenGrammar
 from alphafactory_crypto.instrument_canary.runner import (
+    GRAPH_CONTRACT_IDS,
+    SOURCE_AUTHORITY_PATHS,
     _affine_preflight_indices,
+    _numeric_evaluation_key,
     _real_feedback_contract,
     validate_frozen_canary_contract,
 )
@@ -73,6 +77,47 @@ class CanaryRunnerContractTests(unittest.TestCase):
                 mutate(config)
                 with self.assertRaises(ValueError):
                     validate_frozen_canary_contract(config, self.grammar)
+
+    def test_numeric_cache_identity_binds_sparse_support_and_diagnostics(self) -> None:
+        receipt = SimpleNamespace(
+            release_view_sha256="release",
+            target_horizon_hours=1,
+            mapping_contract_sha256="mapping",
+            cost_contract_sha256="cost",
+        )
+        base = {
+            "weight_array_sha256": "weights",
+            "feasible_array_sha256": "feasible-a",
+            "mapping_diagnostics_sha256": "diagnostics-a",
+        }
+        first = _numeric_evaluation_key(receipt, SimpleNamespace(**base))
+        changed_feasible = _numeric_evaluation_key(
+            receipt,
+            SimpleNamespace(**{**base, "feasible_array_sha256": "feasible-b"}),
+        )
+        changed_diagnostics = _numeric_evaluation_key(
+            receipt,
+            SimpleNamespace(
+                **{**base, "mapping_diagnostics_sha256": "diagnostics-b"}
+            ),
+        )
+        self.assertNotEqual(first, changed_feasible)
+        self.assertNotEqual(first, changed_diagnostics)
+
+    def test_graph_profile_and_source_authority_are_explicit_and_nonempty(self) -> None:
+        profile = json.loads(
+            (REPO_ROOT / "profiles" / "crypto-real-data-instrument-canary.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(profile["id"], "crypto-real-data-instrument-canary")
+        self.assertEqual(len(profile["required_components"]), 8)
+        self.assertEqual(len(profile["required_edges"]), 7)
+        self.assertEqual(len(GRAPH_CONTRACT_IDS), 18)
+        self.assertIn(
+            "alphafactory_crypto/instrument_capability/feedback.py",
+            SOURCE_AUTHORITY_PATHS,
+        )
 
 
 if __name__ == "__main__":

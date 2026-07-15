@@ -28,14 +28,18 @@ The feature bucket at `t` is observable at `t+1h`; execution is at `t+2h`. Targe
 
 The numerical strict-feasibility thresholds remain frozen, but their old synthetic-only scope is superseded by a content-hash-bound real-data development-canary capsule. This changes scope, not thresholds. The six monthly blocks participate in train feedback and are explicitly not OOS blocks.
 
-Before the formal 1,024-proposal run, a 32-candidate affine-stride cost preflight withholds feedback, disables policy updates, and persists no economic metrics. These evaluations count toward the 2,048 first-evaluation hard cap.
+The field/domain registry in this package is a canary-local, versioned admission authority for the named existing release only. It does not claim to replace a future global data registry, and it cannot authorize fields outside the frozen release contract.
+
+Before the formal 1,024-proposal run, a 32-candidate affine-stride cost preflight withholds feedback, disables policy updates, and persists no economic metrics. These evaluations count toward the 2,048 first-evaluation hard cap. An earlier 32-candidate development preflight exposed the unoptimized cost path; it is explicitly superseded but remains charged to the same cap rather than being erased.
 
 ## Assurance
 
 - Authorization receipts bind genome, field/representation, primitive and parameters, family-derived mapping and hash, target/horizon, PIT/lag, cost, real-data feedback capsule, release view and bundle hashes, source commit, and cache identity.
-- Materialized arrays are read-only; the evaluator replays the canonical mapping and verifies candidate, signal, weight, feasibility, and sparse support identities.
+- Materialized arrays are read-only; the evaluator verifies candidate, signal, weight, feasibility, sparse diagnostics, and a content-hashed canonical mapping-execution receipt. Exact numerical reuse additionally binds horizon, cost, oriented weights, feasibility, and sparse diagnostics; sign-inverted or support-different portfolios are not aliases.
 - The evidence builder independently recomputes every feedback decision and the preregistered top/random/high-cost/high-concentration/low sample, checks pairwise ordering, rejects invalid-field/alias/mapping/lag decoys before reads, and replays policy transcripts without market data.
 - Formal evidence generation requires a clean committed source tree and binds every artifact to that source commit.
+- The formal CLI opens the GraphSkill trace before executing the canary and records components, fields, and edges only at the actual release, admission, primitive, mapping, evaluator, feedback, and boundary call sites. A post-hoc script cannot manufacture runtime evidence.
+- Domain execution can produce only `CRYPTO_REAL_DATA_INSTRUMENT_CANARY_PARTIALLY_QUALIFIED`. A separate finalizer independently verifies the bundle, exact trace, strict CURRENT profile, lifecycle boundaries, and immutable trace/CURRENT hashes before it may emit `CRYPTO_REAL_DATA_INSTRUMENT_CANARY_EXECUTION_QUALIFIED`.
 
 ## Consequences
 
