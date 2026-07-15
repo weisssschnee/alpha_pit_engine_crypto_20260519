@@ -449,7 +449,8 @@ row is returned, no formal search was run, and no economic claim is made.
 - unique hourly timestamps: {coverage['unique_timestamps']:,}
 - assets observed: {coverage['assets']}
 - assets with any 2024 rows: {coverage['assets_any_2024']}
-- assets covering every 2024 month: {coverage['assets_full_2024']}
+- assets present in every 2024 month: {coverage['assets_present_all_2024_months']}
+- assets with all 8,784 hours in 2024: {coverage['assets_full_8784h_2024']}
 - assets spanning both 2023H2 and 2024: {coverage['assets_spanning_pre2024_and_2024']}
 - monthly active asset range: {coverage['monthly_active_assets_min']} to {coverage['monthly_active_assets_max']}
 - continuous months: {coverage['continuous_months']}
@@ -523,6 +524,7 @@ def build_qualification(
     duplicates = 0
     availability_lags: list[float] = []
     segment_rows: dict[str, int] = defaultdict(int)
+    symbol_2024_rows: dict[str, int] = defaultdict(int)
     for symbol, frame in iter_train_symbols(config, fields=runtime_fields):
         assets.add(symbol)
         total_rows += int(frame.shape[0])
@@ -531,6 +533,7 @@ def build_qualification(
         duplicates += int(frame.duplicated(["symbol", "timestamp"]).sum())
         timestamp_union.update(frame["timestamp"].tolist())
         month_values = frame["timestamp"].dt.strftime("%Y-%m")
+        symbol_2024_rows[symbol] += int(month_values.str.startswith("2024-").sum())
         for month, count in month_values.value_counts().items():
             month_assets[str(month)].add(symbol)
             month_rows[str(month)] += int(count)
@@ -680,7 +683,12 @@ def build_qualification(
     months_pre2024 = [month for month in months if month.startswith("2023-")]
     assets_2024 = set().union(*(month_assets[month] for month in months_2024))
     assets_pre2024 = set().union(*(month_assets[month] for month in months_pre2024))
-    assets_full_2024 = set.intersection(*(month_assets[month] for month in months_2024))
+    assets_present_all_2024_months = set.intersection(
+        *(month_assets[month] for month in months_2024)
+    )
+    assets_full_8784h_2024 = {
+        symbol for symbol, rows in symbol_2024_rows.items() if rows == 8784
+    }
     assets_present_all_18m = set.intersection(*(month_assets[month] for month in months))
     decision = {
         "schema_version": 1,
@@ -699,7 +707,8 @@ def build_qualification(
             "duplicates": duplicates,
             "segment_rows": dict(sorted(segment_rows.items())),
             "assets_any_2024": len(assets_2024),
-            "assets_full_2024": len(assets_full_2024),
+            "assets_present_all_2024_months": len(assets_present_all_2024_months),
+            "assets_full_8784h_2024": len(assets_full_8784h_2024),
             "assets_spanning_pre2024_and_2024": len(assets_pre2024 & assets_2024),
             "assets_present_all_18_months": len(assets_present_all_18m),
         },
