@@ -28,7 +28,7 @@
     "behavior_alias_rate": 0.393,
     "behavior_identity_over_exact_identity": 0.607,
     "behavior_unique": 1214,
-    "elapsed_seconds": 582.2312508999603,
+    "elapsed_seconds": 642.9271221000236,
     "exact_unique": 2000,
     "mapped_weight_alias_rate": 0.379,
     "mapped_weight_unique": 1242,
@@ -42,6 +42,6 @@
     "unique_materialized_surfaces": 2000
   },
   "schema_version": 1,
-  "source_sha": "76c222b75f569ee54b5215552a20481c5e5f231e",
+  "source_sha": "6950ea75e7848a94ecbc87cb3aee022cecee5901",
   "support_size": 9576
 }

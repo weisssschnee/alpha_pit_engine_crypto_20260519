@@ -188,6 +188,19 @@
     "TradeCountScale",
     "VolatilityScale"
   ],
+  "operator_contracts": {
+    "Log": "non-negative or positive domain only",
+    "NotionalScale": "trailing window required",
+    "SafeAdd/SafeSub/NormalizedDifference": "matching units required",
+    "SafeMul": "at least one dimensionless operand required",
+    "TradeCountScale": "trailing window required"
+  },
+  "pit_rules": [
+    "Every rolling operator uses the trailing window ending at t",
+    "No normalizer may estimate scale from future coordinates",
+    "Expression observable lag is the maximum lag of its raw inputs",
+    "Cross-sectional transforms use only the current observable cross-section"
+  ],
   "schema_version": 1,
   "value_types": [
     "BPS",
