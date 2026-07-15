@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "attempt_id": "CRYPTO_REAL_DATA_INSTRUMENT_CANARY_20260715_ATTEMPT2",
+  "classification": "SUPERSEDED_QUALIFICATION_SCOPE_VIOLATION",
+  "source_code_sha": "3819c6f6c5912f2bc53a7ce8d2e7663028dd3e25",
+  "original_status": "CRYPTO_REAL_DATA_INSTRUMENT_CANARY_EXECUTION_QUALIFIED",
+  "supersession_reason": "The global exact-candidate cache was compliant, but a second numeric-alias cache reused strict evaluations across 221 distinct candidate_id first visits. Those rows recorded evaluation_executed=true although evaluate_authorized_materialization was not called. The user contract authorized skipping only repeated exact candidates, so this attempt cannot qualify the complete first-visit execution chain.",
+  "repair_scope": "Remove cross-candidate numeric evaluation reuse, record strict evaluator execution separately from first visit, retain only exact-candidate cache reuse, and rerun the identical frozen grammar, mapping, feedback, target, cost, seeds, and proposal budget.",
+  "preservation": {
+    "layout": "Original repository-relative runtime, report, trace, CURRENT, overlay, and profile paths are preserved beneath this directory.",
+    "artifact_count": 16,
+    "bundle_sha256": "CCF03A2A5F03EC34CAC6D561B2AB1E9DD0716B93E8E7D67C8EE9C5CA7250F884",
+    "artifact_manifest_sha256": "09B2D6A33CA7A3890238E9249290A6BE1DD9CCBC05784763E3D5EA8240246856",
+    "result_sha256": "2629CDC26212B32BA03E9734278EA6DE265A041A8A4BC29CA1E32A52AE216407",
+    "graph_qualification_sha256": "7D0AD2DAF0A61D34B509CD606BE9CD371813081E33CD07255684018683ED1FEB",
+    "runtime_trace_sha256": "30ED9739B3D1A176CA519C96D0A1B97ACEFC1B021C78FC72988F2E6BC3ACE277",
+    "current_sha256": "30D0474DE43B362D6F93142C7E5CBC7C6CDD7C459B71B2EB105B23F2400F0A3D",
+    "raw_graph_sha256": "D0E986914627969F62FD0FCC2D4AE48B19F7CEB1B98488FA69FD3467FE6F6264"
+  },
+  "diagnostic_scope": {
+    "proposals": 1024,
+    "distinct_candidate_first_visits": 702,
+    "actual_strict_evaluator_calls": 481,
+    "numeric_alias_shortcut_rows": 221,
+    "ledger_rows_claiming_evaluation_executed": 702,
+    "sealed_reads": 0
+  }
+}

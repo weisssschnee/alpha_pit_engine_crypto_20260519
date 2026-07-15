@@ -99,7 +99,7 @@ DOMAIN_CHECK_NAMES = frozenset(
         "first_evaluation_cap",
         "all_feedback_is_visited",
         "run_cache_exact",
-        "numeric_representative_cache",
+        "strict_evaluator_every_first_visit",
         "numeric_alias_integrity",
         "sealed_reads_zero",
         "strict_feedback_alignment",
@@ -799,17 +799,20 @@ def _numeric_evaluation_key(
 
 
 class RealDataFirstVisitEvaluator:
-    """Materialize lazily and evaluate one representative per exact weight identity."""
+    """Materialize and strictly evaluate every exact-candidate first visit.
+
+    Numerically identical mapped inputs are recorded as diagnostic aliases, but
+    they never bypass strict evaluation.  Only the engine's exact-candidate
+    cache is authorized to reuse a completed observation.
+    """
 
     def __init__(self, panel: ReleasePanel, *, runtime_trace: Any | None = None) -> None:
         self.panel = panel
         self.runtime_trace = runtime_trace
-        self._numeric_cache: dict[
-            str, tuple[StrictEvaluation | None, Any, str, str]
-        ] = {}
+        self._numeric_first_candidate: dict[str, str] = {}
         self.materializations = 0
-        self.representative_evaluations = 0
-        self.exact_alias_savings = 0
+        self.strict_evaluator_calls = 0
+        self.numeric_alias_observations = 0
 
     def __call__(self, receipt: CandidateAuthorizationReceipt) -> CandidateObservation:
         started = time.perf_counter_ns()
@@ -824,73 +827,67 @@ class RealDataFirstVisitEvaluator:
             materialized.weight_array_sha256, negated_weight_sha
         )
         evaluation_key = _numeric_evaluation_key(receipt, materialized)
-        cached = self._numeric_cache.get(evaluation_key)
-        if cached is None:
-            evaluation: StrictEvaluation | None
-            error = ""
-            try:
-                evaluation = evaluate_authorized_materialization(
-                    receipt, materialized, self.panel
-                )
-                metrics = evaluation.metrics
-            except ValueError as caught:
-                if "no evaluable development coordinate" not in str(caught):
-                    raise
-                error = "NO_EVALUABLE_DEVELOPMENT_COORDINATE"
-                evaluation = None
-                metrics = StrictMetrics(
-                    *(float("nan") for _ in range(9)), finite=False
-                )
-            if self.runtime_trace is not None:
-                self.runtime_trace.observe_component(
-                    "real_data_mapping_cost_evaluator",
-                    implementation_path="alphafactory_crypto/instrument_canary/evaluator.py",
-                    function="evaluate_authorized_materialization",
-                    semantic_role="mapped_cost_evaluator",
-                    evidence_produced=True,
-                )
-                self.runtime_trace.observe_edge(
-                    "real_data_lazy_search_canary",
-                    "real_data_mapping_cost_evaluator",
-                    edge_type="RUNTIME_CALL",
-                    relationship="evaluates_mapped_turnover_cost",
-                    evidence={"candidate_id": receipt.candidate_id},
-                )
-            decision = aligned_feedback(
-                metrics,
-                legal=True,
-                mapping_present=True,
-                wrong_lag=False,
-                primitive_alias_conflict=False,
-            )
-            if self.runtime_trace is not None:
-                self.runtime_trace.observe_component(
-                    "adaptive_strict_feasibility_feedback",
-                    implementation_path="alphafactory_crypto/instrument_capability/feedback.py",
-                    function="aligned_feedback",
-                    semantic_role="adaptive_feedback_authority",
-                    evidence_produced=True,
-                )
-                self.runtime_trace.observe_edge(
-                    "real_data_lazy_search_canary",
-                    "adaptive_strict_feasibility_feedback",
-                    edge_type="RUNTIME_CALL",
-                    relationship="consumes_aligned_visited_feedback",
-                    evidence={"candidate_id": receipt.candidate_id},
-                )
-            representative_candidate_id = receipt.candidate_id
-            self._numeric_cache[evaluation_key] = (
-                evaluation,
-                decision,
-                representative_candidate_id,
-                error,
-            )
-            self.representative_evaluations += 1
-            numeric_alias_cache_hit = False
+        group_first_candidate_id = self._numeric_first_candidate.get(evaluation_key)
+        numeric_alias_detected = group_first_candidate_id is not None
+        if group_first_candidate_id is None:
+            group_first_candidate_id = receipt.candidate_id
+            self._numeric_first_candidate[evaluation_key] = group_first_candidate_id
         else:
-            evaluation, decision, representative_candidate_id, error = cached
-            self.exact_alias_savings += 1
-            numeric_alias_cache_hit = True
+            self.numeric_alias_observations += 1
+
+        evaluation: StrictEvaluation | None
+        error = ""
+        try:
+            evaluation = evaluate_authorized_materialization(
+                receipt, materialized, self.panel
+            )
+            metrics = evaluation.metrics
+        except ValueError as caught:
+            if "no evaluable development coordinate" not in str(caught):
+                raise
+            error = "NO_EVALUABLE_DEVELOPMENT_COORDINATE"
+            evaluation = None
+            metrics = StrictMetrics(
+                *(float("nan") for _ in range(9)), finite=False
+            )
+        self.strict_evaluator_calls += 1
+        if self.runtime_trace is not None:
+            self.runtime_trace.observe_component(
+                "real_data_mapping_cost_evaluator",
+                implementation_path="alphafactory_crypto/instrument_canary/evaluator.py",
+                function="evaluate_authorized_materialization",
+                semantic_role="mapped_cost_evaluator",
+                evidence_produced=True,
+            )
+            self.runtime_trace.observe_edge(
+                "real_data_lazy_search_canary",
+                "real_data_mapping_cost_evaluator",
+                edge_type="RUNTIME_CALL",
+                relationship="evaluates_mapped_turnover_cost",
+                evidence={"candidate_id": receipt.candidate_id},
+            )
+        decision = aligned_feedback(
+            metrics,
+            legal=True,
+            mapping_present=True,
+            wrong_lag=False,
+            primitive_alias_conflict=False,
+        )
+        if self.runtime_trace is not None:
+            self.runtime_trace.observe_component(
+                "adaptive_strict_feasibility_feedback",
+                implementation_path="alphafactory_crypto/instrument_capability/feedback.py",
+                function="aligned_feedback",
+                semantic_role="adaptive_feedback_authority",
+                evidence_produced=True,
+            )
+            self.runtime_trace.observe_edge(
+                "real_data_lazy_search_canary",
+                "adaptive_strict_feasibility_feedback",
+                edge_type="RUNTIME_CALL",
+                relationship="consumes_aligned_visited_feedback",
+                evidence={"candidate_id": receipt.candidate_id},
+            )
         elapsed_ms = (time.perf_counter_ns() - started) / 1_000_000.0
         evidence = _evaluation_evidence(
             receipt,
@@ -901,13 +898,19 @@ class RealDataFirstVisitEvaluator:
         )
         evidence.update(
             {
+                "strict_evaluator_call_confirmed": True,
                 "numeric_evaluation_key": evaluation_key,
                 "orientation_invariant_weight_fingerprint": orientation_invariant_fingerprint,
-                "numeric_alias_cache_hit": numeric_alias_cache_hit,
-                "numeric_representative_candidate_id": representative_candidate_id,
+                "numeric_alias_detected": numeric_alias_detected,
+                "numeric_alias_cache_hit": False,
+                "numeric_alias_group_first_candidate_id": group_first_candidate_id,
             }
         )
         return CandidateObservation(feedback=decision, evidence=evidence)
+
+    @property
+    def numeric_unique_inputs(self) -> int:
+        return len(self._numeric_first_candidate)
 
 
 def _strict_metrics_from_ledger(row: Mapping[str, Any]) -> StrictMetrics:
@@ -1344,6 +1347,8 @@ def _read_ledger(path: Path) -> list[dict[str, Any]]:
                 "first_visit",
                 "first_evaluation",
                 "evaluation_executed",
+                "strict_evaluator_call_confirmed",
+                "numeric_alias_detected",
                 "numeric_alias_cache_hit",
             ):
                 row[name] = str(row.get(name, "")).lower() == "true"
@@ -1392,6 +1397,7 @@ def _ledger_contract_pass(ledger: Sequence[Mapping[str, Any]]) -> bool:
         "structural_genome",
         "first_visit",
         "evaluation_executed",
+        "strict_evaluator_call_confirmed",
         "feedback_available_after_step",
         "policy_state_hash_before",
         "policy_state_hash_after",
@@ -1414,6 +1420,7 @@ def _ledger_contract_pass(ledger: Sequence[Mapping[str, Any]]) -> bool:
             genome.candidate_id == row["candidate_id"]
             and bool(row["first_visit"]) == first
             and bool(row["evaluation_executed"]) == first
+            and (not first or bool(row["strict_evaluator_call_confirmed"]))
             and (row.get("evaluation_sequence") not in (None, "")) == first
             and int(row["feedback_available_after_step"]) == int(row["step"])
             and row["policy_state_hash_before"]
@@ -1463,19 +1470,20 @@ def _numeric_alias_integrity(
         "feedback_sort_key",
         "feedback_reason",
     )
-    alias_savings = 0
+    alias_observations = 0
     for rows in groups.values():
-        representatives = [
-            row for row in rows if not bool(row.get("numeric_alias_cache_hit"))
-        ]
-        if len(representatives) != 1:
+        first_candidate_id = str(rows[0]["candidate_id"])
+        if bool(rows[0].get("numeric_alias_detected")):
             return False
-        representative = representatives[0]
-        representative_id = str(representative["candidate_id"])
-        for row in rows:
+        representative = rows[0]
+        for index, row in enumerate(rows):
             if (
-                str(row.get("numeric_representative_candidate_id"))
-                != representative_id
+                not bool(row.get("evaluation_executed"))
+                or not bool(row.get("strict_evaluator_call_confirmed"))
+                or bool(row.get("numeric_alias_cache_hit"))
+                or bool(row.get("numeric_alias_detected")) != (index > 0)
+                or str(row.get("numeric_alias_group_first_candidate_id"))
+                != first_candidate_id
                 or any(
                     not _evidence_values_equal(
                         row.get(name), representative.get(name)
@@ -1484,13 +1492,16 @@ def _numeric_alias_integrity(
                 )
             ):
                 return False
-        alias_savings += len(rows) - 1
+        alias_observations += len(rows) - 1
     search = result.get("search", {})
     return bool(
         len(first_rows) == int(search.get("first_evaluations", -1))
-        and len(groups) == int(search.get("numeric_representative_evaluations", -1))
-        and alias_savings == int(search.get("exact_numeric_alias_savings", -1))
-        and len(groups) + alias_savings == len(first_rows)
+        and len(first_rows) == int(search.get("strict_evaluator_calls", -1))
+        and len(groups) == int(search.get("numeric_unique_inputs", -1))
+        and alias_observations
+        == int(search.get("numeric_alias_observations", -1))
+        and int(search.get("exact_numeric_alias_savings", -1)) == 0
+        and len(groups) + alias_observations == len(first_rows)
     )
 
 
@@ -1617,7 +1628,8 @@ This is an execution-instrument qualification on the approved 2024 development-t
 - Grammar support: {result['grammar']['support_size']:,} structural candidates.
 - Formal proposals: {result['search']['proposals']:,} across four algorithms and two seeds.
 - First evaluations: {result['search']['first_evaluations']:,}; cache hits: {result['search']['cache_hits']:,}.
-- Exact-candidate cache hits and numeric aliases are separate: {result['search']['cache_hits']:,} candidate-cache hits; {result['search']['exact_numeric_alias_savings']:,} strict evaluations saved only after exact mapped-input identity.
+- Exact-candidate cache hits and numeric aliases are separate: {result['search']['cache_hits']:,} exact-candidate cache hits skipped evaluation; {result['search']['numeric_alias_observations']:,} distinct-candidate numeric aliases were each strictly re-evaluated and saved 0 strict calls.
+- Strict evaluator calls: {result['search']['strict_evaluator_calls']:,}, exactly one per first evaluation.
 - Cost preflight first evaluations: {result['search']['preflight_first_evaluations']:,}.
 - Target: feature bucket t, observable t+1h, execute t+2h; horizons 1h and 4h.
 - 4h execution: four equal-capital offset sleeves, each rebalanced every four hours.
@@ -2356,11 +2368,9 @@ def build_evidence(
             else "FAIL"
         ),
         "run_cache_exact": "PASS" if search.cache_size == search.first_evaluations else "FAIL",
-        "numeric_representative_cache": (
+        "strict_evaluator_every_first_visit": (
             "PASS"
-            if numeric_evaluator.representative_evaluations
-            + numeric_evaluator.exact_alias_savings
-            == search.first_evaluations
+            if numeric_evaluator.strict_evaluator_calls == search.first_evaluations
             else "FAIL"
         ),
         "numeric_alias_integrity": (
@@ -2370,8 +2380,10 @@ def build_evidence(
                 {
                     "search": {
                         "first_evaluations": search.first_evaluations,
-                        "numeric_representative_evaluations": numeric_evaluator.representative_evaluations,
-                        "exact_numeric_alias_savings": numeric_evaluator.exact_alias_savings,
+                        "strict_evaluator_calls": numeric_evaluator.strict_evaluator_calls,
+                        "numeric_unique_inputs": numeric_evaluator.numeric_unique_inputs,
+                        "numeric_alias_observations": numeric_evaluator.numeric_alias_observations,
+                        "exact_numeric_alias_savings": 0,
                     }
                 },
             )
@@ -2413,8 +2425,10 @@ def build_evidence(
             "first_evaluations": search.first_evaluations,
             "cache_hits": search.cache_hits,
             "cache_size": search.cache_size,
-            "numeric_representative_evaluations": numeric_evaluator.representative_evaluations,
-            "exact_numeric_alias_savings": numeric_evaluator.exact_alias_savings,
+            "strict_evaluator_calls": numeric_evaluator.strict_evaluator_calls,
+            "numeric_unique_inputs": numeric_evaluator.numeric_unique_inputs,
+            "numeric_alias_observations": numeric_evaluator.numeric_alias_observations,
+            "exact_numeric_alias_savings": 0,
             "preflight_first_evaluations": int(config["budget"]["cost_preflight_evaluations"]),
             "superseded_development_preflight_evaluations": int(
                 config["budget"]["superseded_development_preflight_evaluations"]

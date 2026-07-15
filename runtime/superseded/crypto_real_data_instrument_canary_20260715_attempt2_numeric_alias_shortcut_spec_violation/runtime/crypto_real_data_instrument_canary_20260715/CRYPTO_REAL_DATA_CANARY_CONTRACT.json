@@ -1,0 +1,412 @@
+{
+  "canonical_mapping_contract_sha256": "093E15CF6639DD3266D50981E71AD7AC755216C9A9C3FF7A292692FE9D74DD85",
+  "canonical_primitive_contract_sha256": "79E86E13DDE9163A585DE4377796AE26BE883A05BF21579F6674828EF33C92FE",
+  "config": {
+    "accepted_closure": {
+      "immutable": true,
+      "sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+      "tag": "crypto-frontier-provenance-closure-20260714"
+    },
+    "authorization": "BOUNDED_EXISTING_RELEASE_DEVELOPMENT_CANARY",
+    "base_capability_sha": "dba5972893568e4eccedfb724288d02105f69363",
+    "behavior_qualification": {
+      "evolutionary_bootstrap_visits_per_lane": 8,
+      "expected_evolutionary_mutation_receipts_per_lane": 120,
+      "maximum_pairwise_visit_jaccard": 0.95
+    },
+    "boundaries": {
+      "allowed_data_role": "DEVELOPMENT_TRAIN_ONLY",
+      "candidate_promotion": false,
+      "cross_sprint_adaptive_memory": false,
+      "economic_alpha_claim": false,
+      "historical_runner_activation": false,
+      "new_data_integration": false,
+      "sealed_roles": [
+        "VALIDATION",
+        "HOLDOUT",
+        "TEST",
+        "RECENT",
+        "FORWARD",
+        "CHALLENGE",
+        "MAY_STRESS"
+      ]
+    },
+    "budget": {
+      "algorithms": [
+        "canonical_typed_random",
+        "cem_like",
+        "uct_ucb_like",
+        "evolutionary"
+      ],
+      "cost_preflight_evaluations": 32,
+      "fixed_lane_order": "seed ascending then algorithm listed order",
+      "formal_proposal_steps": 1024,
+      "global_cache_scope": "THIS_CANARY_RUN_ONLY",
+      "maximum_proposal_attempts_per_step": 64,
+      "maximum_proposal_steps_per_seed_algorithm": 256,
+      "proposal_steps_per_seed_algorithm": 128,
+      "seeds": [
+        20260715,
+        20260716
+      ],
+      "superseded_development_preflight_evaluations": 32,
+      "total_first_evaluation_hard_cap": 2048
+    },
+    "canary_id": "CRYPTO_REAL_DATA_INSTRUMENT_CANARY_20260715",
+    "cost": {
+      "cost_bps": 5.0,
+      "initial_establishment_charged": true,
+      "model_id": "FULL_L1_FIXED_5BPS_WITH_INITIAL_AND_TERMINAL",
+      "terminal_liquidation_charged": true,
+      "unmodeled": [
+        "spread",
+        "slippage",
+        "impact",
+        "fill_probability",
+        "capacity"
+      ]
+    },
+    "cost_preflight": {
+      "candidate_selection": "first 32 coordinates of a predeclared full-cycle affine grammar stride; no complete-universe ranking and no economic metric participates",
+      "feedback_exposed": false,
+      "persist_economic_metrics": false,
+      "policy_update_enabled": false,
+      "selection_seed": 20260715,
+      "time_end": "2024-01-14T23:00:00Z",
+      "time_start": "2024-01-01T00:00:00Z"
+    },
+    "evaluation_blocks": {
+      "feedback_role": true,
+      "kind": "FROZEN_UTC_CALENDAR_MONTHS",
+      "labels": [
+        "DEV_TRAIN_2024_01",
+        "DEV_TRAIN_2024_02",
+        "DEV_TRAIN_2024_03",
+        "DEV_TRAIN_2024_04",
+        "DEV_TRAIN_2024_05",
+        "DEV_TRAIN_2024_06"
+      ],
+      "oos_role": false,
+      "selection_or_tuning_role": true
+    },
+    "execution": {
+      "horizon_1h_sleeves": 1,
+      "horizon_4h_sleeves": 4,
+      "model_id": "EQUAL_CAPITAL_HORIZON_OFFSET_SLEEVES",
+      "overlapping_full_capital_hourly_rebalance": false,
+      "rule": "A horizon-h proposal is executed as h interleaved sleeves, each with 1/h capital and h-hour rebalance cadence"
+    },
+    "grammar": {
+      "contract_sha256": "37372B724F1C4800C8F335CDC2DA30375C36AF625C81316AFCA7BC8D680BD010",
+      "deprecated_aliases_allowed": false,
+      "exact_unique_legal_candidates": 9576,
+      "mapping_is_search_gene": false,
+      "materialize_full_universe": false,
+      "minimum_unique_legal_candidates": 8192,
+      "wrong_lag_candidates_allowed": false
+    },
+    "mapping": {
+      "CROSS_SECTIONAL_RELATIVE": "CROSS_SECTIONAL_ZERO_NET",
+      "DIRECTIONAL_STATEFUL": "TIME_SERIES_DIRECTIONAL_STATEFUL",
+      "SPARSE_EVENT_CARRY": "SPARSE_EVENT_OR_CARRY"
+    },
+    "outputs": {
+      "report": "reports/CRYPTO_REAL_DATA_INSTRUMENT_CANARY_REPORT.md",
+      "runtime_root": "runtime/crypto_real_data_instrument_canary_20260715"
+    },
+    "release": {
+      "development_view_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE10_2024M01_M06_DEV_ONLY_V1",
+      "expected_coordinate_files": 60,
+      "expected_hourly_rows": 43680,
+      "expected_output_bundle_sha256": "CA183D5BB3FE366D1475ADBC9B44C1BD625FB63F3AFEAA2656BA7BF196D78333",
+      "expected_source_bundle_sha256": "12459C2F2224C8CFA6CED13FF831986BA8D3680E86EA941EF04EB3B47A9BE17E",
+      "expected_timestamps": 4368,
+      "missing_policy": "NO_FILL_FAIL_CLOSED",
+      "months": [
+        "2024-01",
+        "2024-02",
+        "2024-03",
+        "2024-04",
+        "2024-05",
+        "2024-06"
+      ],
+      "parent_release_content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+      "parent_release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+      "pit_fields": [
+        "timestamp",
+        "observable_time",
+        "maturity",
+        "source_lag_seconds",
+        "missing_any"
+      ],
+      "release_root": "G:/AlphaFactory_CryptoData/curated/mechanism_data_expansion0/native_aggtrades_core12_2024m01_m10_v1/development",
+      "searchable_fields": [
+        "trade_count",
+        "underlying_trade_count",
+        "quantity",
+        "notional",
+        "buy_agg_trade_count",
+        "sell_agg_trade_count",
+        "buy_quantity",
+        "sell_quantity",
+        "buy_notional",
+        "sell_notional",
+        "signed_aggressor_quantity",
+        "signed_aggressor_notional",
+        "vwap",
+        "buy_vwap",
+        "sell_vwap",
+        "volume_imbalance",
+        "buy_sell_notional_ratio",
+        "price_range_bps",
+        "close_to_open_bps",
+        "large_trade_count_ratio_100k_plus",
+        "large_notional_ratio_100k_plus"
+      ],
+      "source_and_output_hash_verification": true,
+      "source_root": "G:/AlphaFactory_CryptoData/gold/microstructure/aggtrades_1h_flow_enhanced_v1",
+      "superseded_qualification_index_mismatches": [
+        {
+          "declared_sha256": "15C8F89EC46BF4BC442255A03D54CC8C1F153E2252F1D327117B7BE1691FC21A",
+          "observed_sha256": "130E5CE64C53C1558A93D3EED4F4B1F2C2C9A7978ACFA89DB895D321AC1918B5",
+          "path": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/mechanism_horizon_contract.json"
+        },
+        {
+          "declared_sha256": "053CC0670DE2312A215E815CBC3EC55EC46A59C9094D45E97862DD8166913595",
+          "observed_sha256": "A8DC52C59EFC3AE96DF035D6C8B73AECDA4C299F57D5CC25D61B828126E838B4",
+          "path": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/cache_provenance.json"
+        },
+        {
+          "declared_sha256": "3378E48CFDEB226BE1F86434691168D289434E36FBF39959C400AD322EA36ED8",
+          "observed_sha256": "4300B8486A6D9D8BCB91C58CBDD64657EE72993A65AA92FA2272C206C4CC129A",
+          "path": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_manifest.json"
+        },
+        {
+          "declared_sha256": "CFCE5E9C3BDC79285B031B4BB4414E67830A31C2E1A40A5EF9665AD915536D36",
+          "observed_sha256": "23EDFE1B43B19138886FD29AD792BD69842309B9D2EF89E1C20C3D16E386AD34",
+          "path": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/NATIVE_AGGTRADES_RELEASE_REPORT.md"
+        }
+      ],
+      "symbols": [
+        "ADAUSDT",
+        "BCHUSDT",
+        "BNBUSDT",
+        "DOGEUSDT",
+        "ETHUSDT",
+        "LINKUSDT",
+        "LTCUSDT",
+        "SOLUSDT",
+        "SUIUSDT",
+        "XRPUSDT"
+      ],
+      "target_only_fields": [
+        "close_price"
+      ]
+    },
+    "resource_admission": {
+      "maximum_estimated_2048_seconds_p95": 3600.0,
+      "maximum_release_load_seconds": 120.0,
+      "maximum_sampled_peak_rss_delta_bytes": 2147483648,
+      "rss_sampling_interval_ms": 50
+    },
+    "strict_audit_sample": {
+      "deterministic_random": 8,
+      "high_concentration": 8,
+      "high_cost": 8,
+      "low_feedback": 8,
+      "random_seed": 20260731,
+      "top_feedback": 8
+    },
+    "target_horizon": {
+      "all_metrics_role": "DEVELOPMENT_TRAIN_ONLY",
+      "execution_delay_after_observable_hours": 1,
+      "execution_time": "t+2h",
+      "feature_bucket_coordinate": "t",
+      "feature_observable_time": "t+1h",
+      "formula": "log(close[t+2h+horizon] / close[t+2h])",
+      "horizons_hours": [
+        1,
+        4
+      ],
+      "price_source": "source close_price; target-only and forbidden from grammar",
+      "supersedes_ambiguous_old_boundary": "old native benchmark began target at t+1h, the same instant as observable_time; this canary applies one complete hour after observability"
+    },
+    "version": 1
+  },
+  "config_sha256": "5A8548033DF3EBFF5260248F9476AE11605079F4852CDF918FE6704A288C82B5",
+  "contract_check": {
+    "first_evaluation_hard_cap": 2048,
+    "formal_proposals": 1024,
+    "grammar_contract_sha256": "37372B724F1C4800C8F335CDC2DA30375C36AF625C81316AFCA7BC8D680BD010",
+    "grammar_support_size": 9576,
+    "preflight_evaluations": 32,
+    "result": "PASS",
+    "superseded_preflight_evaluations": 32
+  },
+  "grammar_contract_sha256": "37372B724F1C4800C8F335CDC2DA30375C36AF625C81316AFCA7BC8D680BD010",
+  "real_data_feedback_contract": {
+    "adaptive_role": "POLICY_UPDATE_WITHIN_THIS_CANARY_ONLY",
+    "axis_order": [
+      "mapped_net_metric",
+      "benchmark_increment",
+      "worst_block_margin",
+      "positive_block_fraction",
+      "turnover",
+      "cost",
+      "concentration",
+      "support"
+    ],
+    "contract_sha256": "43BE093BFEEF1FC58296E1444B9B601050DB793D12A05DC78965E553B5197F0B",
+    "directions": {
+      "benchmark_increment": 1,
+      "concentration": -1,
+      "cost": -1,
+      "mapped_net_metric": 1,
+      "positive_block_fraction": 1,
+      "support": 1,
+      "turnover": -1,
+      "worst_block_margin": 1
+    },
+    "economic_alpha_claim": false,
+    "hard_blocks_before_strict": [
+      "ILLEGAL_PROPOSAL",
+      "MAPPING_MISSING",
+      "WRONG_LAG",
+      "PRIMITIVE_ALIAS_CONFLICT",
+      "NON_FINITE_STRICT_METRICS"
+    ],
+    "id": "REAL_DATA_TRAIN_ONLY_STRICT_FEASIBILITY_FEEDBACK_V1",
+    "legacy_gross_proxy_role": "DIAGNOSTIC_ONLY_NOT_IN_ORDERING",
+    "method": "LEXICOGRAPHIC_STRICT_FEASIBILITY_ORDERING",
+    "normalization": {
+      "benchmark_increment": 0.0001,
+      "concentration": 0.05,
+      "cost": 0.0001,
+      "mapped_net_metric": 0.0001,
+      "positive_block_fraction": 0.1,
+      "support": 0.1,
+      "turnover": 0.3,
+      "worst_block_margin": 0.0001
+    },
+    "numerical_rule_source_sha256": "DC5CEFC735F5A7A1AF19DCB0ADD0719DA70E9CFC03895F152B3C68CF7B156809",
+    "oos_role": false,
+    "schema_version": 1,
+    "scope": "REAL_EXISTING_RELEASE_DEVELOPMENT_TRAIN_ONLY_CANARY",
+    "thresholds": {
+      "benchmark_increment": 0.0,
+      "concentration": 0.25,
+      "cost": 0.0006,
+      "mapped_net_metric": 0.0,
+      "positive_block_fraction": 0.4,
+      "support": 0.8,
+      "turnover": 1.2,
+      "worst_block_margin": 0.0
+    }
+  },
+  "schema_version": 1,
+  "source_blobs": [
+    {
+      "bytes": 7650,
+      "git_blob": "9304c31a5c693f9b95879f8f922dfed710a5d561",
+      "path": "alphafactory_crypto/instrument_capability/feedback.py",
+      "sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0"
+    },
+    {
+      "bytes": 20290,
+      "git_blob": "bbf9ee820e8b7ce4c555db52853fe24e5c70d90c",
+      "path": "alphafactory_crypto/instrument_capability/mapping.py",
+      "sha256": "EFB7160B46A35DE3798EF1C36ABFC86E017B16283B7E98B522259E5E3F0A2C88"
+    },
+    {
+      "bytes": 19029,
+      "git_blob": "1e95af6dff9594d490fddcddf50b060c35cc5408",
+      "path": "alphafactory_crypto/instrument_capability/primitives.py",
+      "sha256": "93EA813FA259F875CE8B221CE9BCD387FAC28AB274B4AA5C9579FBD01E6FB8F8"
+    },
+    {
+      "bytes": 1517,
+      "git_blob": "65682f373d5917396732d9bd7054b0f22d74acdd",
+      "path": "alphafactory_crypto/instrument_canary/__init__.py",
+      "sha256": "55F93EBA5969B72C366A2224D7CA431A3C4DB0F3355724F9A775E52DE5D1E671"
+    },
+    {
+      "bytes": 22906,
+      "git_blob": "9043e11cf034211b2de6afd485aac84a8320ffbd",
+      "path": "alphafactory_crypto/instrument_canary/admission.py",
+      "sha256": "1D87617D00557DD2863240FF00406AC5F005F3014A5D543F3C4009B375E5FEFF"
+    },
+    {
+      "bytes": 6833,
+      "git_blob": "e0c045180559d9bfc7b49d5258a01b16a9a95578",
+      "path": "alphafactory_crypto/instrument_canary/contracts.py",
+      "sha256": "5A154EE76BBFB87AEF1FD77BF2158C41DDE2A16CD4A88860425AF4401A2C5B13"
+    },
+    {
+      "bytes": 18917,
+      "git_blob": "775adfff08af192d1ee41c079b7eea84ad8eb966",
+      "path": "alphafactory_crypto/instrument_canary/engine.py",
+      "sha256": "4B7E0E4CC31505C910FCA4BA2DBE48C7504042F5C47F7853FF416E7C3B8DCF24"
+    },
+    {
+      "bytes": 17452,
+      "git_blob": "0adf5fec6d6a1ca9e8d683c093d0b7c075f93375",
+      "path": "alphafactory_crypto/instrument_canary/evaluator.py",
+      "sha256": "83329690EC557AE5D27F748669F7DAECA504B9F3B80468868D01EB7015E0DE53"
+    },
+    {
+      "bytes": 26634,
+      "git_blob": "c6948f8cac5a3195c8bb57538e041a33a6c11e2a",
+      "path": "alphafactory_crypto/instrument_canary/grammar.py",
+      "sha256": "0EC46865116DE3C1F40C01A7ABCEBD4AFDF51940057974772B1B841516884741"
+    },
+    {
+      "bytes": 17010,
+      "git_blob": "63562ad44af519e1c2b877e2d6f88f35717feb6d",
+      "path": "alphafactory_crypto/instrument_canary/materialize.py",
+      "sha256": "B4F0924C419BFE9C757FFE8DDE30FF5CE83959C0E4C4D0B3A152CF23C80CB581"
+    },
+    {
+      "bytes": 20303,
+      "git_blob": "7695cd070e155ab29bf44a58e504b06f5a52b6d8",
+      "path": "alphafactory_crypto/instrument_canary/policies.py",
+      "sha256": "3FAAC73945755E0BCFDA02A2855510F24FCD2EE6C5DA87CCEE3F9ED8D6A55C78"
+    },
+    {
+      "bytes": 15707,
+      "git_blob": "11d2df2e62b16b206e2e994138612613bfe5b621",
+      "path": "alphafactory_crypto/instrument_canary/release.py",
+      "sha256": "6BA73C078D748FDDF3586C34E00341957DA7443D5A1F7BF1A17456D23B38FE54"
+    },
+    {
+      "bytes": 104781,
+      "git_blob": "90babe220965dc09cbb03530005c2c5cbef98443",
+      "path": "alphafactory_crypto/instrument_canary/runner.py",
+      "sha256": "EB966D51A31B0749204E4D4FEA2399DE09BC95AF8648ABA7121DF6FB9B8B3E7B"
+    },
+    {
+      "bytes": 7858,
+      "git_blob": "b5f2e8beb6306fa92fa8659514d67e7a1f7d3a86",
+      "path": "config/crypto_real_data_instrument_canary_v1.json",
+      "sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724"
+    },
+    {
+      "bytes": 5640,
+      "git_blob": "41edae6c0e12a1d243b5104281bf1eab42693313",
+      "path": "docs/adr/0003-bounded-real-data-lazy-search-instrument-canary.md",
+      "sha256": "2FF3073252BAF427D8398502E264ADC754822D09EE6C26D69A47DEAD77F3B12C"
+    },
+    {
+      "bytes": 6021,
+      "git_blob": "dde2206e52868151307054957580495b30f403ef",
+      "path": "scripts/crypto_real_data_instrument_canary.py",
+      "sha256": "E5BCF06E9F002E39B36595A03BEF81B2F12170B740D20DD0FC7C33CFB0BD77FB"
+    },
+    {
+      "bytes": 1925,
+      "git_blob": "3236a13b5b96afe672ce181ba62065810e4cbbe8",
+      "path": "profiles/crypto-real-data-instrument-canary.json",
+      "sha256": "B125FCE247AD0F0E880312012D8DFFFAFD39F1FB6F25303B7AB73F990BC224EC"
+    }
+  ],
+  "source_code_sha": "3819c6f6c5912f2bc53a7ce8d2e7663028dd3e25"
+}

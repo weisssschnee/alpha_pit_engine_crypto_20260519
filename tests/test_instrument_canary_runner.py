@@ -4,6 +4,9 @@ import json
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
+
+import numpy as np
 
 from alphafactory_crypto.instrument_canary.admission import (
     _sha256,
@@ -12,6 +15,7 @@ from alphafactory_crypto.instrument_canary.admission import (
 from alphafactory_crypto.instrument_canary.grammar import FrozenGrammar
 from alphafactory_crypto.instrument_canary.runner import (
     GRAPH_CONTRACT_IDS,
+    RealDataFirstVisitEvaluator,
     SOURCE_AUTHORITY_PATHS,
     _affine_preflight_indices,
     _numeric_alias_integrity,
@@ -106,20 +110,23 @@ class CanaryRunnerContractTests(unittest.TestCase):
         self.assertNotEqual(first, changed_feasible)
         self.assertNotEqual(first, changed_diagnostics)
 
-    def test_numeric_alias_integrity_treats_matching_nan_evidence_as_equal(self) -> None:
+    def test_numeric_aliases_are_diagnostic_and_each_strictly_evaluated(self) -> None:
         representative = {
             "candidate_id": "representative",
             "first_evaluation": True,
+            "evaluation_executed": True,
+            "strict_evaluator_call_confirmed": True,
             "numeric_evaluation_key": "numeric-key",
+            "numeric_alias_detected": False,
             "numeric_alias_cache_hit": False,
-            "numeric_representative_candidate_id": "representative",
+            "numeric_alias_group_first_candidate_id": "representative",
             "worst_block_margin": float("nan"),
             "positive_block_fraction": float("nan"),
         }
         alias = {
             **representative,
             "candidate_id": "alias",
-            "numeric_alias_cache_hit": True,
+            "numeric_alias_detected": True,
         }
         self.assertTrue(
             _numeric_alias_integrity(
@@ -127,11 +134,125 @@ class CanaryRunnerContractTests(unittest.TestCase):
                 {
                     "search": {
                         "first_evaluations": 2,
-                        "numeric_representative_evaluations": 1,
+                        "strict_evaluator_calls": 2,
+                        "numeric_unique_inputs": 1,
+                        "numeric_alias_observations": 1,
+                        "exact_numeric_alias_savings": 0,
+                    }
+                },
+            )
+        )
+
+    def test_numeric_alias_cache_reuse_fails_integrity(self) -> None:
+        rows = [
+            {
+                "candidate_id": "first",
+                "first_evaluation": True,
+                "evaluation_executed": True,
+                "strict_evaluator_call_confirmed": True,
+                "numeric_evaluation_key": "same-input",
+                "numeric_alias_detected": False,
+                "numeric_alias_cache_hit": False,
+                "numeric_alias_group_first_candidate_id": "first",
+            },
+            {
+                "candidate_id": "second",
+                "first_evaluation": True,
+                "evaluation_executed": True,
+                "strict_evaluator_call_confirmed": False,
+                "numeric_evaluation_key": "same-input",
+                "numeric_alias_detected": True,
+                "numeric_alias_cache_hit": True,
+                "numeric_alias_group_first_candidate_id": "first",
+            },
+        ]
+        self.assertFalse(
+            _numeric_alias_integrity(
+                rows,
+                {
+                    "search": {
+                        "first_evaluations": 2,
+                        "strict_evaluator_calls": 1,
+                        "numeric_unique_inputs": 1,
+                        "numeric_alias_observations": 1,
                         "exact_numeric_alias_savings": 1,
                     }
                 },
             )
+        )
+
+    def test_distinct_candidates_with_same_numeric_input_are_both_evaluated(self) -> None:
+        genome = SimpleNamespace(
+            field_id="field",
+            representation_id="representation",
+            primitive_id="primitive",
+            window=1,
+            long_window=None,
+            threshold=None,
+            mechanism_family="family",
+        )
+
+        def receipt(candidate_id: str) -> SimpleNamespace:
+            return SimpleNamespace(
+                candidate_id=candidate_id,
+                genome=genome,
+                mapping_id="mapping",
+                mapping_contract_sha256="mapping-sha",
+                cost_contract_sha256="cost-sha",
+                target_horizon_hours=1,
+                release_view_sha256="release-sha",
+                receipt_sha256=f"receipt-{candidate_id}",
+            )
+
+        materialized = SimpleNamespace(
+            mapped=SimpleNamespace(weights=np.asarray([[1.0, 0.0]])),
+            field_array_sha256="field-sha",
+            represented_array_sha256="represented-sha",
+            signal_array_sha256="signal-sha",
+            weight_array_sha256="weight-sha",
+            feasible_array_sha256="feasible-sha",
+            mapping_diagnostics_sha256="diagnostics-sha",
+            mapping_execution_sha256="execution-sha",
+            endpoint_clip_count=0,
+        )
+        feedback = SimpleNamespace(
+            blocked=True,
+            feasible=False,
+            violations=(),
+            distance=1.0,
+            sort_key=(1.0,),
+            reason="test",
+        )
+        evaluator = RealDataFirstVisitEvaluator(SimpleNamespace(fields={}))
+        with (
+            patch(
+                "alphafactory_crypto.instrument_canary.runner.materialize_authorized",
+                return_value=materialized,
+            ),
+            patch(
+                "alphafactory_crypto.instrument_canary.runner.evaluate_authorized_materialization",
+                side_effect=ValueError("no evaluable development coordinate"),
+            ) as strict_evaluate,
+            patch(
+                "alphafactory_crypto.instrument_canary.runner.aligned_feedback",
+                return_value=feedback,
+            ) as feedback_call,
+        ):
+            first = evaluator(receipt("first"))
+            second = evaluator(receipt("second"))
+
+        self.assertEqual(strict_evaluate.call_count, 2)
+        self.assertEqual(feedback_call.call_count, 2)
+        self.assertEqual(evaluator.strict_evaluator_calls, 2)
+        self.assertEqual(evaluator.numeric_unique_inputs, 1)
+        self.assertEqual(evaluator.numeric_alias_observations, 1)
+        self.assertTrue(first.evidence["strict_evaluator_call_confirmed"])
+        self.assertFalse(first.evidence["numeric_alias_detected"])
+        self.assertTrue(second.evidence["strict_evaluator_call_confirmed"])
+        self.assertTrue(second.evidence["numeric_alias_detected"])
+        self.assertFalse(second.evidence["numeric_alias_cache_hit"])
+        self.assertEqual(
+            second.evidence["numeric_alias_group_first_candidate_id"], "first"
         )
 
     def test_independent_replay_matches_same_nonfinite_metric(self) -> None:
