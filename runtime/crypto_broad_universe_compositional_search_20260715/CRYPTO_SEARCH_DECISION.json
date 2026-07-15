@@ -1,0 +1,79 @@
+{
+  "actual_universe_mode": null,
+  "branch": "experiment/crypto-broad-universe-compositional-search-20260715",
+  "candidate_promotion": "FORBIDDEN",
+  "cannot_conclude": [
+    "No qualified-data no-edge conclusion",
+    "No compositional representation increment conclusion",
+    "No policy comparison conclusion",
+    "No OOS or promotion conclusion"
+  ],
+  "challenge": "SEALED",
+  "data_gate": {
+    "broad_cross_sectional": {
+      "assets": 176,
+      "checks": {
+        "assets_at_least_40": true,
+        "continuous_months_at_least_18": false,
+        "core_agg_price_asset_month_coverage_at_least_90pct": true,
+        "dynamic_eligibility_pit_qualified": false,
+        "monthly_active_assets_at_least_30": true,
+        "native_order_field_coverage_not_fragmented": false
+      },
+      "continuous_months": 6,
+      "monthly_active_assets": {
+        "2023-07": 140,
+        "2023-08": 145,
+        "2023-09": 147,
+        "2023-10": 155,
+        "2023-11": 169,
+        "2023-12": 176
+      },
+      "months": [
+        "2023-07",
+        "2023-08",
+        "2023-09",
+        "2023-10",
+        "2023-11",
+        "2023-12"
+      ]
+    },
+    "explicit_core_time_series": {
+      "checks": {
+        "assets": 10,
+        "broad_conclusions_forbidden": true,
+        "continuous_months_at_least_24": false,
+        "fixed_product_universe_explicit": true
+      },
+      "continuous_months": 6,
+      "months": [
+        "2024-01",
+        "2024-02",
+        "2024-03",
+        "2024-04",
+        "2024-05",
+        "2024-06"
+      ]
+    },
+    "failure_classes": [
+      "TIME_HISTORY_TOO_SHORT",
+      "SURVIVORSHIP_OR_ELIGIBILITY_UNRESOLVED",
+      "ORDER_FIELD_COVERAGE_FRAGMENTED",
+      "EXPLICIT_CORE_TIME_HISTORY_TOO_SHORT"
+    ],
+    "gate_result": "CRYPTO_DATA_UNIVERSE_NOT_RESEARCH_QUALIFIED",
+    "qualified_mode": null
+  },
+  "epoch_id": "CRYPTO_BROAD_UNIVERSE_COMPOSITIONAL_ALPHA_SEARCH_EPOCH1",
+  "formal_performance_search": "FORBIDDEN",
+  "forward": "SEALED",
+  "grammar_status": "CRYPTO_COMPOSITIONAL_GRAMMAR_BOTTLENECK_CONFIRMED",
+  "main_status": "CRYPTO_BROAD_SEARCH_DATA_UNIVERSE_BLOCKED",
+  "matched_positive_clusters": 0,
+  "proposal_attempts": 0,
+  "robust_positive_clusters": 0,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_sha": "8e15d8b93e695dcbb0ed5752c477fd31bb40e31f",
+  "strict_pairs": 0
+}

@@ -12,6 +12,9 @@ FINANCIAL_GATE_HOLD_RESEARCH
 CRYPTO_SEARCH_INSTRUMENT_MISMATCH_CONFIRMED
 CRYPTO_INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_QUALIFIED
 INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_PATH_EXPERIMENTAL
+CRYPTO_BROAD_SEARCH_DATA_UNIVERSE_BLOCKED
+CRYPTO_COMPOSITIONAL_GRAMMAR_BOTTLENECK_CONFIRMED
+BROAD_UNIVERSE_COMPOSITIONAL_SEARCH_EXPERIMENTAL_NON_FORMAL
 GRAPH_RAW_CURRENT_SEPARATION_ACTIVE
 CURRENT_CONTRACT_CAPSULE_ACTIVE
 ```
@@ -26,7 +29,7 @@ tag:    crypto-frontier-provenance-closure-20260714
 
 `REPOSITORY_PROVENANCE_CLOSURE_COMPLETED` is the committed manifest status. `CRYPTO_FRONTIER_PROVENANCE_CLOSURE_ACCEPTED` is the user-accepted interpretation of the annotated closure tag, whose attestation records Reproducer PASS, Gatekeeper PASS, and base bundle SHA256 `99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2`.
 
-The checked-out repository line is `repair/crypto-instrument-capability-20260715`, rooted at `origin/main` commit `9b8d9b105c92fa7427b450290ee2efc0d3f2488b`. Capability source is bound to `46280c5ad2acf6783d0ede0eb27fd93e3713d6f0`; its 14-artifact evidence bundle was committed at `6055bc9ce9794113178a40c8f6f403e1ccd3781e`. The main and accepted closure lines remain distinct. Fixed parity reads exact closure-tag source without merging it or pretending closure-only runners are executable on this branch.
+The checked-out repository line is `experiment/crypto-broad-universe-compositional-search-20260715`, created from exact source closure `aae38db148a56a04d843db89caf8e62015148661`. The broad-search qualification source is bound to `8e15d8b93e695dcbb0ed5752c477fd31bb40e31f`; the accepted closure tag remains fixed at `4726795f61052470d56e2d1475e4f6da9d262943`. These lines remain distinct.
 
 ## Source-of-truth order
 
@@ -47,14 +50,16 @@ No single status code overrides source or execution facts.
 - The accepted financial gate is `HOLD_RESEARCH`.
 - The repaired capability-only path has one canonical authority for 13 temporal primitives, three explicit portfolio mappings, full-L1 turnover at a fixed 5 bps, frozen strict-feasibility feedback, and a nine-rule finite proposal grammar. Its evolutionary path uses label-blind structural parent/child mutation receipts, and qualification fails closed below two distinct fixed seeds. All 35 deterministic tests and all 10 qualification criteria pass across seven planted families and two fixed seeds.
 - `CRYPTO_INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_QUALIFIED` is scoped to fixed finite-grammar synthetic expression, reachability, mapping, costing, feedback, and survivor retention. It is not a market, economic, OOS, open-generator recall, or historical-runner repair conclusion.
+- Broad data inventory observed 176 official-archive symbol-month histories over only six continuous months (2023-07 through 2023-12). Monthly active assets are 140, 145, 147, 155, 169, and 176, but the symbol seed came from a 2026 current exchangeInfo/metrics probe; historical delisted-contract completeness is unresolved. The native aggTrades development release remains core10 over six months. Broad 18-month and explicit-core 24-month gates both fail, so the 64-pair preflight and large search were not run.
+- The deterministic 2,000-candidate audit of the 9,576 grammar found 2,000 exact identities, 951 numeric identities, 931 rank identities, 1,242 mapped-weight identities, and 1,214 quantized behavior identities. Irrespective of the behavior ratio, source proves field arity 1 and zero cross-field interactions. `CRYPTO_COMPOSITIONAL_GRAMMAR_BOTTLENECK_CONFIRMED` is therefore qualified; it does not prove that the experimental typed DAG has economic value.
 
 ## Graph state
 
 - RAW: `.planning/graphs/graph.json`, `GRAPH_REPORT.md`, and optional `graph.html`; generated from the current checkout for navigation/query.
-- CURRENT input: `config/architecture_overlay.json`; it contains twelve critical nodes and eight critical edges, using only Authority, Boundary, Admission, and Evidence capsules.
+- CURRENT input: `config/architecture_overlay.json`; it contains thirteen critical nodes and nine critical edges, using only Authority, Boundary, Admission, and Evidence capsules.
 - CURRENT outputs: `.planning/graphs/current.json` and `current.html`; both are generated and must not be edited by hand.
 - Assurance is independent from lifecycle color. `checked_at` is generated; exact evidence SHA/path/hash may be refreshed automatically, but lifecycle transitions still require an explicit accepted decision.
-- Profiles remain limited to the same two explicitly referenced files under `profiles/`; this repair adds no profile, registry, control plane, or automatic lifecycle inference.
+- Profiles remain an explicit five-file allowlist under `profiles/`; the broad-compositional profile adds no registry, control plane, or automatic lifecycle inference.
 - Maintenance: RAW uses `scripts/maintain_crypto_navigation_graph.ps1 build|check|query`; CURRENT uses `node "$env:CODEX_HOME\get-shit-done\bin\gsd-tools.cjs" graphify maintain` and strict audit only with an explicit trace/profile.
 - Ignore contract: `.graphifyignore` prevents RAW and CURRENT products, the overlay, and profiles from being re-ingested as source.
 - `main` still does not import the historical `crypto_architecture_control_registry_v1.json`; that 65-node closure-line registry remains historical evidence rather than the new CURRENT input.
@@ -75,6 +80,8 @@ The bounded result is `CRYPTO_SEARCH_INSTRUMENT_MISMATCH_CONFIRMED`: B1S/Epoch-0
 
 The repaired path supersedes the prior `NOT_FULLY_QUALIFIED` capability finding only for the frozen nine-rule proposal grammar and deterministic synthetic harness. It does not supersede the historical diagnosis of legacy runners, establish open-generator recall, or change any economic boundary.
 
+The broad-universe epoch supersedes any interpretation of core10 x six months as a broad Alpha research surface. It records `TIME_HISTORY_TOO_SHORT`, `SURVIVORSHIP_OR_ELIGIBILITY_UNRESOLVED`, `ORDER_FIELD_COVERAGE_FRAGMENTED`, and `EXPLICIT_CORE_TIME_HISTORY_TOO_SHORT` separately. Empty proposal/strict/robust artifacts mean `NOT_RUN_DATA_GATE_BLOCKED`, never zero edge.
+
 ## Frozen boundaries
 
 ```text
@@ -94,7 +101,7 @@ No existing Graph, report, historical metric, or inventory row can open those bo
 
 Graph maintenance may rebuild or query RAW and regenerate CURRENT when committed facts change. It must remain lightweight. A passing validation refresh cannot by itself activate an experimental component, open a sealed boundary, start a search, integrate data, or promote a candidate.
 
-Economic work remains `HOLD_RESEARCH`. The repaired instrument is capability-qualified only inside its frozen finite grammar; this decision does not authorize a real development canary, repair historical runners, or open any sealed block. If new-data integration is later authorized, use the accepted closure line's existing activation entry: ingress preflight, hash-bound observed release facts, Data Adequacy Gate, at most two best-matched external paradigms plus the internal baseline, then one frozen-budget development-only Arena. If adequacy fails, stop at `DATA_ADEQUACY_UNDERPOWERED` / `NO_LARGE_EXPERIMENT`.
+Economic work remains `HOLD_RESEARCH`. The broad epoch is `EXPERIMENTAL_CURRENT_NON_FORMAL`; its typed DAG and matched-ablation contract are implemented but not connected to formal evaluation and have no economic evidence. A survivorship-safe historical universe and sufficient time history must pass the Data Adequacy Gate before the 64-pair resource preflight. Until then, no large development search is authorized. Sealed blocks and promotion remain unchanged.
 
 ## Blocked claims
 
@@ -104,6 +111,8 @@ Economic work remains `HOLD_RESEARCH`. The repaired instrument is capability-qua
 - Capability qualification repairs or validates the historical search runners.
 - Capability qualification authorizes a real development canary or any frozen-boundary change.
 - The implemented mechanism space has been exhausted.
+- Qualified-data compositional search found no gross or net edge.
+- The experimental typed DAG or matched-ablation design has a development increment.
 - New data is the unique next step.
 - An external component has a credible development increment.
 - Any system has OOS proof.

@@ -188,6 +188,62 @@
       }
     },
     {
+      "id": "broad_universe_compositional_search",
+      "label": "Broad-Universe Compositional Search",
+      "kind": "development_experiment",
+      "lifecycle": "EXPERIMENTAL",
+      "paths": [
+        "alphafactory_crypto/broad_search/audit.py",
+        "alphafactory_crypto/broad_search/expression.py",
+        "scripts/crypto_broad_universe_compositional_search.py",
+        "config/crypto_broad_universe_compositional_search_epoch1_v1.json",
+        "reports/CRYPTO_BROAD_UNIVERSE_COMPOSITIONAL_SEARCH_REPORT.md"
+      ],
+      "critical": true,
+      "semantic_role": "experimental_broad_compositional_qualification",
+      "active_authority": false,
+      "authority": {
+        "path": "docs/adr/0005-broad-universe-compositional-search-epoch1.md",
+        "repo_ref": "experiment/crypto-broad-universe-compositional-search-20260715",
+        "verified_sha": "8e15d8b93e695dcbb0ed5752c477fd31bb40e31f"
+      },
+      "contracts": [
+        {
+          "id": "broad_search_data_gate_first",
+          "type": "ADMISSION",
+          "rule": "The 64-pair preflight and large development search require a qualified BROAD_CROSS_SECTIONAL or EXPLICIT_CORE_TIME_SERIES release; a failed gate produces NOT_RUN artifacts, never zero performance",
+          "severity": "HARD",
+          "enforced_by": "broad_search.audit.qualify_data_mode",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_SEARCH_DECISION.json"
+        },
+        {
+          "id": "compositional_representation_non_formal",
+          "type": "EVIDENCE",
+          "rule": "The typed DAG and matched-ablation contract are experimental representation capabilities only and do not establish economic increment, OOS evidence, or promotion authority",
+          "severity": "HARD",
+          "enforced_by": "broad_search.audit.build_evidence",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_CURRENT_GRAMMAR_EXPRESSIVITY_AUDIT.json"
+        }
+      ],
+      "validation": {
+        "level": "RUNTIME_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-broad-compositional-epoch1",
+        "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_CURRENT_GRAMMAR_EXPRESSIVITY_AUDIT.json",
+        "evidence_sha256": "523263584E5AFA2007CEB5C5A81BB28A1C40B56B791045CDFEE25DC0E02A5E36",
+        "verified_at_sha": "8e15d8b93e695dcbb0ed5752c477fd31bb40e31f"
+      },
+      "promotion_requirements": [
+        "qualified development data mode",
+        "64-pair resource preflight",
+        "matched-control runtime evidence",
+        "robust cross-seed and cross-month evidence",
+        "separate explicit authorization"
+      ]
+    },
+    {
       "id": "internal_search_instrument",
       "label": "Internal Search Instrument capability path",
       "kind": "capability_harness",
@@ -699,6 +755,32 @@
   ],
   "edges": [
     {
+      "id": "broad_compositional_search_is_non_formal_and_data_gated",
+      "source": "broad_universe_compositional_search",
+      "target": "data_adequacy_gate",
+      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
+      "lifecycle": "EXPERIMENTAL",
+      "critical": true,
+      "evidence_type": "RUNTIME",
+      "contract": {
+        "id": "broad_search_non_formal_relation",
+        "type": "ADMISSION",
+        "rule": "Current evidence qualifies a six-month data and grammar bottleneck only; the Data Adequacy Gate blocks resource preflight and economic search",
+        "severity": "HARD",
+        "enforced_by": "broad_search.audit.check_evidence",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_SEARCH_DECISION.json"
+      },
+      "validation": {
+        "level": "RUNTIME_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-broad-compositional-epoch1",
+        "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_SEARCH_DECISION.json",
+        "evidence_sha256": "A28F5F00C0A2C75B3BAEEBACF0B87281472EBBF4BDAC48E5E4A6DECB7FB2E885",
+        "verified_at_sha": "8e15d8b93e695dcbb0ed5752c477fd31bb40e31f"
+      }
+    },
+    {
       "id": "cem_diversity_uses_non_formal_canary",
       "source": "cem_diversity_ab_experiment",
       "target": "real_data_lazy_search_canary",
@@ -1105,7 +1187,8 @@
     "profiles/crypto-development-research.json",
     "profiles/evidence-boundary-change.json",
     "profiles/crypto-real-data-instrument-canary.json",
-    "profiles/crypto-cem-diversity-ab.json"
+    "profiles/crypto-cem-diversity-ab.json",
+    "profiles/crypto-broad-compositional-epoch1.json"
   ],
   "semantic_authorities": [
     {"semantic_role": "research_decision_authority", "authoritative_component": "accepted_frontier_closure"},

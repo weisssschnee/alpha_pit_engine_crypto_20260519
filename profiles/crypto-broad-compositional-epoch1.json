@@ -1,0 +1,16 @@
+{
+  "id": "crypto-broad-compositional-epoch1",
+  "required_components": [
+    "broad_universe_compositional_search",
+    "data_adequacy_gate",
+    "sealed_research_boundaries"
+  ],
+  "required_edges": [
+    {
+      "id": "broad_compositional_search_is_non_formal_and_data_gated",
+      "source": "broad_universe_compositional_search",
+      "target": "data_adequacy_gate",
+      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL"
+    }
+  ]
+}

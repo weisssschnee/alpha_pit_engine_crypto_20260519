@@ -1,0 +1,223 @@
+{
+  "families": [
+    {
+      "assurance": {
+        "cross_asset_normalizations": 0,
+        "depth": 2,
+        "observable_lag_hours": 1,
+        "raw_fields": [
+          "signed_aggressor_notional",
+          "notional"
+        ],
+        "regime_gates": 0,
+        "rolling_windows": [],
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      "expression": {
+        "field_id": null,
+        "inputs": [
+          {
+            "field_id": "signed_aggressor_notional",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          },
+          {
+            "field_id": "notional",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          }
+        ],
+        "operator": "FlowPerNotional",
+        "parameters": {}
+      },
+      "expression_id": "BB563E977E668E80982F1757F5B86EA2E95E84872D40EE89C0EEE81575A7A409",
+      "family": "flow_pressure_notional"
+    },
+    {
+      "assurance": {
+        "cross_asset_normalizations": 0,
+        "depth": 2,
+        "observable_lag_hours": 1,
+        "raw_fields": [
+          "signed_aggressor_notional",
+          "trade_count"
+        ],
+        "regime_gates": 0,
+        "rolling_windows": [],
+        "unit": "quote_asset/trade",
+        "value_type": "RATIO"
+      },
+      "expression": {
+        "field_id": null,
+        "inputs": [
+          {
+            "field_id": "signed_aggressor_notional",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          },
+          {
+            "field_id": "trade_count",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          }
+        ],
+        "operator": "FlowPerTrade",
+        "parameters": {}
+      },
+      "expression_id": "2B76915F27F268D6D3F07215B6F9692DDE4B12D5A8EB5C1CADF111D64EB0406C",
+      "family": "flow_per_trade"
+    },
+    {
+      "assurance": {
+        "cross_asset_normalizations": 0,
+        "depth": 2,
+        "observable_lag_hours": 1,
+        "raw_fields": [
+          "buy_vwap",
+          "sell_vwap"
+        ],
+        "regime_gates": 0,
+        "rolling_windows": [],
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      "expression": {
+        "field_id": null,
+        "inputs": [
+          {
+            "field_id": "buy_vwap",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          },
+          {
+            "field_id": "sell_vwap",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          }
+        ],
+        "operator": "NormalizedDifference",
+        "parameters": {}
+      },
+      "expression_id": "C265D0BB3B8CEE83AF6563BC00FA593E230F4600AE088FE39618AD2E2A45142D",
+      "family": "vwap_gap"
+    },
+    {
+      "assurance": {
+        "cross_asset_normalizations": 0,
+        "depth": 2,
+        "observable_lag_hours": 1,
+        "raw_fields": [
+          "price_range_bps",
+          "signed_aggressor_notional"
+        ],
+        "regime_gates": 0,
+        "rolling_windows": [],
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      "expression": {
+        "field_id": null,
+        "inputs": [
+          {
+            "field_id": "price_range_bps",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          },
+          {
+            "field_id": "signed_aggressor_notional",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          }
+        ],
+        "operator": "PriceImpactRatio",
+        "parameters": {}
+      },
+      "expression_id": "482B18A385B4C1D53BEF46441E5394F4EA3BBD717C073F64B0015724FF6161D7",
+      "family": "price_flow_impact"
+    },
+    {
+      "assurance": {
+        "cross_asset_normalizations": 0,
+        "depth": 2,
+        "observable_lag_hours": 1,
+        "raw_fields": [
+          "large_notional_ratio_100k_plus",
+          "volume_imbalance"
+        ],
+        "regime_gates": 0,
+        "rolling_windows": [],
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      "expression": {
+        "field_id": null,
+        "inputs": [
+          {
+            "field_id": "large_notional_ratio_100k_plus",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          },
+          {
+            "field_id": "volume_imbalance",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          }
+        ],
+        "operator": "SafeMul",
+        "parameters": {}
+      },
+      "expression_id": "8D3908365C6E0E27FDF5031674637ED4BE23D44FDCD0F6371145F6C5F698CE03",
+      "family": "large_trade_modulated_flow"
+    },
+    {
+      "assurance": {
+        "cross_asset_normalizations": 1,
+        "depth": 2,
+        "observable_lag_hours": 1,
+        "raw_fields": [
+          "volume_imbalance",
+          "buy_sell_notional_ratio"
+        ],
+        "regime_gates": 0,
+        "rolling_windows": [],
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      "expression": {
+        "field_id": null,
+        "inputs": [
+          {
+            "field_id": "volume_imbalance",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          },
+          {
+            "field_id": "buy_sell_notional_ratio",
+            "inputs": [],
+            "operator": "Raw",
+            "parameters": {}
+          }
+        ],
+        "operator": "CrossAssetRelative",
+        "parameters": {}
+      },
+      "expression_id": "CE99AB8BC45AE91AA753E4CB49F6791CC074BD64995FF48CFEEDA75FA940AFFF",
+      "family": "cross_asset_flow_state"
+    }
+  ],
+  "lifecycle": "EXPERIMENTAL",
+  "materialization": "LAZY_ONLY",
+  "schema_version": 1
+}

@@ -1,0 +1,26 @@
+{
+  "cost_preflight_pairs": 0,
+  "cost_preflight_status": "NOT_RUN_DATA_GATE_BLOCKED",
+  "data_gate": "CRYPTO_DATA_UNIVERSE_NOT_RESEARCH_QUALIFIED",
+  "frozen_hard_caps": {
+    "algorithms": [
+      "canonical_typed_random",
+      "cem_diversity_v2",
+      "uct_ucb_like",
+      "evolutionary"
+    ],
+    "cost_preflight_pairs": 64,
+    "hard_cap_pairs": 8192,
+    "hard_cap_strict_calls": 16384,
+    "maximum_stage_b_pairs": 4096,
+    "minimum_behavior_diverse": 25000,
+    "minimum_legal_exact_unique": 100000,
+    "minimum_seeds": 4,
+    "minimum_structural_proposal_attempts": 500000,
+    "stage_a_pairs": 4096
+  },
+  "large_search_authorized": false,
+  "official_backfill_reason": "Historical universe completeness must be resolved before a survivorship-safe download plan can be sized.",
+  "official_backfill_status": "NOT_STARTED",
+  "schema_version": 1
+}

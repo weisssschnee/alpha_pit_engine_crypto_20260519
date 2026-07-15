@@ -1,0 +1,31 @@
+{
+  "ablation_routes": {
+    "cross-asset relative": "asset-local signal",
+    "flow-price interaction": "flow-only",
+    "large-trade modulation": "unmodulated flow",
+    "persistence modulation": "instantaneous signal",
+    "regime gate": "ungated signal"
+  },
+  "admission": "NO_MATCHED_CONTROL_NO_FINAL_MECHANISM_CONCLUSION",
+  "feedback": "EXISTING_STRICT_FEEDBACK_ONLY",
+  "lifecycle": "EXPERIMENTAL_NOT_RUN_DATA_GATE_BLOCKED",
+  "match_on": [
+    "raw fields",
+    "representations",
+    "rolling windows",
+    "target horizon",
+    "portfolio mapping",
+    "support mask",
+    "cost model"
+  ],
+  "required_outputs": [
+    "primary net metric",
+    "control net metric",
+    "matched increment",
+    "matched turnover increment",
+    "support overlap",
+    "behavior equivalence"
+  ],
+  "robust_audit": "REPORT_ONLY_NEVER_FED_BACK_TO_SEARCH",
+  "schema_version": 1
+}

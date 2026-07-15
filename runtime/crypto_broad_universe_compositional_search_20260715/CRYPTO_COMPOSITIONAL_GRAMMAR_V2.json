@@ -1,0 +1,205 @@
+{
+  "authority": "NON_FORMAL_REPRESENTATION_ONLY",
+  "binary_operators": [
+    "ConditionGate",
+    "CrossAssetRelative",
+    "FlowPerNotional",
+    "FlowPerTrade",
+    "NormalizedDifference",
+    "PriceImpactRatio",
+    "Residual",
+    "SafeAdd",
+    "SafeDiv",
+    "SafeMul",
+    "SafeSub",
+    "ShortMinusLong"
+  ],
+  "fields": [
+    {
+      "field_id": "buy_agg_trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "trades",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "buy_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "buy_quantity",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "base_asset",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "buy_sell_notional_ratio",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "buy_vwap",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "close_to_open_bps",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "bps",
+      "value_type": "BPS"
+    },
+    {
+      "field_id": "large_notional_ratio_100k_plus",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "dimensionless",
+      "value_type": "UNIT_INTERVAL"
+    },
+    {
+      "field_id": "large_trade_count_ratio_100k_plus",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "dimensionless",
+      "value_type": "UNIT_INTERVAL"
+    },
+    {
+      "field_id": "notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "price_range_bps",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "bps",
+      "value_type": "BPS"
+    },
+    {
+      "field_id": "quantity",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "base_asset",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "sell_agg_trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "trades",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "sell_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "sell_quantity",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "base_asset",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "sell_vwap",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "signed_aggressor_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "quote_asset",
+      "value_type": "SIGNED_FLOW"
+    },
+    {
+      "field_id": "signed_aggressor_quantity",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "base_asset",
+      "value_type": "SIGNED_FLOW"
+    },
+    {
+      "field_id": "trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "trades",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "underlying_trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "trades",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "volume_imbalance",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "vwap",
+      "observable_lag_hours": 1,
+      "pit_authority": "SOURCE_OBSERVABLE_TIME",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    }
+  ],
+  "lifecycle": "EXPERIMENTAL",
+  "limits": {
+    "cross_asset_normalizations": 1,
+    "depth": [
+      1,
+      4
+    ],
+    "raw_inputs": [
+      1,
+      4
+    ],
+    "regime_gates": 1,
+    "rolling_windows": 3
+  },
+  "normalizers": [
+    "CrossSectionalRank",
+    "HistoricalPercentile",
+    "Log",
+    "NotionalScale",
+    "RobustScale",
+    "RollingZScore",
+    "SignedLog",
+    "TradeCountScale",
+    "VolatilityScale"
+  ],
+  "schema_version": 1,
+  "value_types": [
+    "BPS",
+    "COUNT",
+    "EVENT",
+    "NOTIONAL",
+    "PRICE",
+    "RATIO",
+    "SIGNED_FLOW",
+    "STATE",
+    "UNIT_INTERVAL",
+    "VOLATILITY",
+    "VOLUME"
+  ]
+}

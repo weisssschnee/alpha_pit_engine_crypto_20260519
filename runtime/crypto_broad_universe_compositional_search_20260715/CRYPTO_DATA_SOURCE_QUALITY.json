@@ -1,0 +1,200 @@
+{
+  "current_probe_generated_at": "2026-05-22T10:51:27Z",
+  "current_probe_total_usdt_perp_trading": 527,
+  "discovered_but_not_admitted_releases": [
+    {
+      "identity": "binance_universe498_replay_1h_v1/v2",
+      "reason": "coverage manifests co-mingle admitted development dates with sealed/recent dates; no content was opened"
+    },
+    {
+      "identity": "core39_market_structure",
+      "reason": "limited universe and date/field contracts were not sufficient for either data mode"
+    },
+    {
+      "identity": "bookTicker/BBO and depth snapshots",
+      "reason": "local names were discovered but no registered qualified broad release was found"
+    },
+    {
+      "identity": "liquidation/force orders",
+      "reason": "no registered qualified broad release was found"
+    },
+    {
+      "identity": "OKX open-interest clean218 30d",
+      "reason": "history is far below the 18-month broad gate and cross-venue identity is not qualified"
+    }
+  ],
+  "field_family_limits": {
+    "bookTicker_BBO": "PRESENT_ELSEWHERE_WITH_LIMITED_COVERAGE_NOT_ADMITTED",
+    "cross_asset_market_context": "DERIVABLE_ONLY_AFTER_PIT_UNIVERSE_QUALIFICATION",
+    "depth_snapshots": "NOT_RESEARCH_QUALIFIED_IN_SCANNED_RELEASES",
+    "liquidation_force_orders": "NOT_RESEARCH_QUALIFIED_IN_SCANNED_RELEASES"
+  },
+  "filesystem_inventory": {
+    "manifest_entry_count": 307,
+    "report_entry_count": 297,
+    "root": "G:/AlphaFactory_CryptoData",
+    "scope": "TOP_LEVEL_ROOTS_PLUS_REGISTERED_CONTENT_HASHED_MANIFESTS",
+    "sealed_role_directories_not_entered": [
+      "challenge",
+      "forward",
+      "holdout",
+      "may_stress",
+      "recent",
+      "test",
+      "validation"
+    ],
+    "top_level_entries": [
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "alphafactory_crypto"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "codex_sync"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "company_pullback"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "curated"
+      },
+      {
+        "bytes": 4626,
+        "kind": "file",
+        "name": "DATA_LAYER_SPEC.md"
+      },
+      {
+        "bytes": 3441,
+        "kind": "file",
+        "name": "DATA_PLAN.md"
+      },
+      {
+        "bytes": 2553,
+        "kind": "file",
+        "name": "DATASETS.csv"
+      },
+      {
+        "bytes": 4509,
+        "kind": "file",
+        "name": "DESIGN_FINAL.md"
+      },
+      {
+        "bytes": 4328,
+        "kind": "file",
+        "name": "FEATURE_STATE_SPACE.md"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "git_backups"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "gold"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "incoming_company"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "logs"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "manifests"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "metadata"
+      },
+      {
+        "bytes": 3580,
+        "kind": "file",
+        "name": "QUALITY_MASK_SPEC.md"
+      },
+      {
+        "bytes": 2299,
+        "kind": "file",
+        "name": "QUALITY_PROTOCOL.md"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "raw"
+      },
+      {
+        "bytes": 1537,
+        "kind": "file",
+        "name": "README.md"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "repair_quarantine"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "reports"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "research_runtime"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "scratch"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "scripts"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "silver"
+      },
+      {
+        "bytes": null,
+        "kind": "directory",
+        "name": "transfer"
+      },
+      {
+        "bytes": 1076,
+        "kind": "file",
+        "name": "UNIVERSE_CORE.csv"
+      }
+    ]
+  },
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_authority": {
+    "native_aggtrades_core10": "qualified official Binance archive release",
+    "pre2024_derivatives": "official Binance Vision and Binance Futures API",
+    "pre2024_price_flow": "official Binance Vision monthly archive"
+  },
+  "source_hashes": {
+    "current_probe": "8E859AD0A827C8F6EAC6250DA39C9740E906CAF97B179D045CE5B40A8322E696",
+    "derivatives_coverage": "9C72C8A6EF53E9DFEF49D1095F741D4FDAE6AC00C48E21ACFF77826B5278767C",
+    "price_coverage": "920F2E3440292B39F9D47765188209087A0943E3A44EF37DC1D66C049FCE9920",
+    "price_manifest": "50E9C2D16467F161D4B76C39EAAFF046861BFB81BDF856CFEE8A025F7E1C817A",
+    "universe_seed": "44BA04B1BD061989C88B62F7570F2390D043DA63B564E698843C4B6EDA738A1A"
+  },
+  "universe_provenance_reason": "The 176-symbol historical download seed was selected from a 2026 current exchangeInfo snapshot plus current checkpoint availability; official file existence proves a listed asset-month but cannot prove that delisted historical contracts were not omitted.",
+  "universe_provenance_result": "SURVIVORSHIP_OR_ELIGIBILITY_UNRESOLVED"
+}

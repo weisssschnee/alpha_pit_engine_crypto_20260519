@@ -1,0 +1,47 @@
+{
+  "bottleneck_rules": {
+    "behavior_identity_over_exact_below_0_30": false,
+    "cross_field_interaction_count_equals_zero": true,
+    "field_arity_equals_one": true
+  },
+  "cannot_conclude": [
+    "No claim about compositional grammar economic value",
+    "No claim about OOS performance",
+    "No claim that adding windows repairs the bottleneck"
+  ],
+  "cross_field_interaction_count": 0,
+  "decision": "CRYPTO_COMPOSITIONAL_GRAMMAR_BOTTLENECK_CONFIRMED",
+  "derived_field_dag_count": 0,
+  "dimension_aware_arithmetic_count": 0,
+  "epoch_id": "CRYPTO_BROAD_UNIVERSE_COMPOSITIONAL_ALPHA_SEARCH_EPOCH1",
+  "expression_depth": 2,
+  "field_arity": 1,
+  "field_representation_routes": 42,
+  "grammar_contract_sha256": "37372B724F1C4800C8F335CDC2DA30375C36AF625C81316AFCA7BC8D680BD010",
+  "materializer_source_fact": "materialize_authorized reads receipt.field_id exactly once, applies one representation, then one primitive",
+  "mechanism_count": 3,
+  "parameter_routes": 49,
+  "primitive_count": 13,
+  "raw_field_count": 21,
+  "representation_id_count": 6,
+  "sample": {
+    "behavior_alias_rate": 0.393,
+    "behavior_identity_over_exact_identity": 0.607,
+    "behavior_unique": 1214,
+    "elapsed_seconds": 523.5113998999586,
+    "exact_unique": 2000,
+    "mapped_weight_alias_rate": 0.379,
+    "mapped_weight_unique": 1242,
+    "numeric_alias_rate": 0.5245,
+    "numeric_unique": 951,
+    "rank_alias_rate": 0.5345,
+    "rank_unique": 931,
+    "requested": 2000,
+    "seed": 20260715,
+    "selection": "deterministic full-cycle affine grammar coordinates",
+    "unique_materialized_surfaces": 2000
+  },
+  "schema_version": 1,
+  "source_sha": "8e15d8b93e695dcbb0ed5752c477fd31bb40e31f",
+  "support_size": 9576
+}
