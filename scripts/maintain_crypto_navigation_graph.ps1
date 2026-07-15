@@ -31,11 +31,14 @@ $RawFreshnessNeutralExact = @(
     $GeneratedRelativePaths
     ".planning/config.json"
     "config/architecture_overlay.json"
+    "reports/CRYPTO_REAL_DATA_INSTRUMENT_CANARY_REPORT.md"
 )
 $RawFreshnessNeutralPrefixes = @(
     ".planning/graphs/execution_traces/",
     "config/architecture_profiles/",
-    "profiles/"
+    "profiles/",
+    "runtime/crypto_real_data_instrument_canary_",
+    "runtime/superseded/crypto_real_data_instrument_canary_"
 )
 
 function Test-RawFreshnessNeutral([string]$Path) {
