@@ -1,0 +1,14 @@
+{
+  "current_path": ".planning/graphs/current.json",
+  "current_sha256": "1D184EBF5BEEFC05E03C0F2DADF258DFE62E8741C154F8FCDD9FB34FAE2E984C",
+  "lifecycle_promotions": 0,
+  "profile_id": "crypto-real-data-instrument-canary",
+  "result": "PASS",
+  "runtime_edges": 7,
+  "runtime_nodes": 8,
+  "schema_version": 1,
+  "sealed_boundaries_opened": 0,
+  "source_code_sha": "e943f14aba1d0c0287f61746567a4ed26d702035",
+  "trace_path": ".planning/graphs/execution_traces/crypto-real-data-instrument-canary-20260715-e943f14aba1d.json",
+  "trace_sha256": "9A9126881400C42DE6772C5754022FEF5FCA3CB05D236FCED6C534D74CDF1AF2"
+}

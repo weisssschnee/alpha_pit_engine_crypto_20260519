@@ -1,0 +1,152 @@
+{
+  "behavior_hash_definition": "SHA256_OF_ORDERED_CANDIDATE_IDS_ONLY",
+  "behavior_hashes": {
+    "canonical_typed_random:seed=20260715": "801FFB6EC6CCDC437EF2BACD9E69C7658524F000E854AECB6B287BF655C43E54",
+    "canonical_typed_random:seed=20260716": "7BFA75C2DA1EEB39F4C8865F0D37B01AA0383B108B8EAA86AC2BC0A9DC6EBCE2",
+    "cem_like:seed=20260715": "10911CDE3A7E55DB1B1798EC3A3E0903DB36942B03140960CF01F8CFB8DFDA1F",
+    "cem_like:seed=20260716": "05E528043ED89EE5530BB66D0947D9FCE1B1DCAC0FE4A1135E39C4AD034EBE55",
+    "evolutionary:seed=20260715": "307CB283958CDF2E965222DF61B1EF6FC5118592AB540B494F009E4A82C7C0FF",
+    "evolutionary:seed=20260716": "F449302D8ACDA8F777273888EAE8EA7F45E556D44029FF36BFEC8187AE1EA01A",
+    "uct_ucb_like:seed=20260715": "FD11BA4F22CD7C2A82F58EF7738394C34C30F741CFE2D7D4847F9223F6330CCB",
+    "uct_ucb_like:seed=20260716": "DD731228CB18EFA884C93EC23304A183D98EB76EF84A78B1DE6062F8CE1551BF"
+  },
+  "behavior_hashes_distinct": true,
+  "evolutionary_runtime_mutation_receipts": true,
+  "maximum_pairwise_visit_jaccard": 0.95,
+  "pairwise_visit_comparisons": [
+    {
+      "intersection": 1,
+      "jaccard": 0.006024096385542169,
+      "left_algorithm": "canonical_typed_random",
+      "left_unique_visits": 128,
+      "pass": true,
+      "right_algorithm": "cem_like",
+      "right_unique_visits": 39,
+      "seed": 20260715,
+      "union": 166
+    },
+    {
+      "intersection": 1,
+      "jaccard": 0.005405405405405406,
+      "left_algorithm": "canonical_typed_random",
+      "left_unique_visits": 128,
+      "pass": true,
+      "right_algorithm": "uct_ucb_like",
+      "right_unique_visits": 58,
+      "seed": 20260715,
+      "union": 185
+    },
+    {
+      "intersection": 1,
+      "jaccard": 0.0043859649122807015,
+      "left_algorithm": "canonical_typed_random",
+      "left_unique_visits": 128,
+      "pass": true,
+      "right_algorithm": "evolutionary",
+      "right_unique_visits": 101,
+      "seed": 20260715,
+      "union": 228
+    },
+    {
+      "intersection": 1,
+      "jaccard": 0.010416666666666666,
+      "left_algorithm": "cem_like",
+      "left_unique_visits": 39,
+      "pass": true,
+      "right_algorithm": "uct_ucb_like",
+      "right_unique_visits": 58,
+      "seed": 20260715,
+      "union": 96
+    },
+    {
+      "intersection": 0,
+      "jaccard": 0.0,
+      "left_algorithm": "cem_like",
+      "left_unique_visits": 39,
+      "pass": true,
+      "right_algorithm": "evolutionary",
+      "right_unique_visits": 101,
+      "seed": 20260715,
+      "union": 140
+    },
+    {
+      "intersection": 0,
+      "jaccard": 0.0,
+      "left_algorithm": "uct_ucb_like",
+      "left_unique_visits": 58,
+      "pass": true,
+      "right_algorithm": "evolutionary",
+      "right_unique_visits": 101,
+      "seed": 20260715,
+      "union": 159
+    },
+    {
+      "intersection": 1,
+      "jaccard": 0.0051813471502590676,
+      "left_algorithm": "canonical_typed_random",
+      "left_unique_visits": 128,
+      "pass": true,
+      "right_algorithm": "cem_like",
+      "right_unique_visits": 66,
+      "seed": 20260716,
+      "union": 193
+    },
+    {
+      "intersection": 1,
+      "jaccard": 0.00411522633744856,
+      "left_algorithm": "canonical_typed_random",
+      "left_unique_visits": 128,
+      "pass": true,
+      "right_algorithm": "uct_ucb_like",
+      "right_unique_visits": 116,
+      "seed": 20260716,
+      "union": 243
+    },
+    {
+      "intersection": 3,
+      "jaccard": 0.013761467889908258,
+      "left_algorithm": "canonical_typed_random",
+      "left_unique_visits": 128,
+      "pass": true,
+      "right_algorithm": "evolutionary",
+      "right_unique_visits": 93,
+      "seed": 20260716,
+      "union": 218
+    },
+    {
+      "intersection": 1,
+      "jaccard": 0.0055248618784530384,
+      "left_algorithm": "cem_like",
+      "left_unique_visits": 66,
+      "pass": true,
+      "right_algorithm": "uct_ucb_like",
+      "right_unique_visits": 116,
+      "seed": 20260716,
+      "union": 181
+    },
+    {
+      "intersection": 4,
+      "jaccard": 0.025806451612903226,
+      "left_algorithm": "cem_like",
+      "left_unique_visits": 66,
+      "pass": true,
+      "right_algorithm": "evolutionary",
+      "right_unique_visits": 93,
+      "seed": 20260716,
+      "union": 155
+    },
+    {
+      "intersection": 1,
+      "jaccard": 0.004807692307692308,
+      "left_algorithm": "uct_ucb_like",
+      "left_unique_visits": 116,
+      "pass": true,
+      "right_algorithm": "evolutionary",
+      "right_unique_visits": 93,
+      "seed": 20260716,
+      "union": 208
+    }
+  ],
+  "result": "PASS",
+  "schema_version": 1
+}
