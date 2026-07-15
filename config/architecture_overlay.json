@@ -188,6 +188,75 @@
       }
     },
     {
+      "id": "observed_archive_train_surface",
+      "label": "Observed-archive 18M train surface",
+      "kind": "data_release",
+      "lifecycle": "ACTIVE",
+      "paths": [
+        "docs/adr/0006-observed-archive-18m-train-surface.md",
+        "config/crypto_train_surface_18m_v1.json",
+        "alphafactory_crypto/train_surface.py",
+        "scripts/crypto_train_surface_18m.py",
+        "reports/CRYPTO_TRAIN_SURFACE_18M_QUALIFICATION_20260716.md"
+      ],
+      "critical": true,
+      "semantic_role": "train_surface_authority",
+      "active_authority": true,
+      "authority": {
+        "path": "config/crypto_train_surface_18m_v1.json",
+        "repo_ref": "repair/crypto-train-surface-reconciliation-20260716",
+        "verified_sha": "a88552589c92161a3cfb7593cc82c8e20f0c5f5c",
+        "sha256": "3C83B2CB0BDE461B8C8B5106DF870C021C5B51DFCEF46BAD138354F1A8276076"
+      },
+      "contracts": [
+        {
+          "id": "train_interval_and_field_authority",
+          "type": "AUTHORITY",
+          "rule": "The versioned train-surface config and loader own the 2023-07-01 through 2024-12-31 interval and activate exactly the ten current Git runtime fields by default",
+          "severity": "HARD",
+          "enforced_by": "train_surface.load_symbol_train",
+          "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_FIELD_RECONCILIATION.csv"
+        },
+        {
+          "id": "train_only_no_sealed_rows",
+          "type": "BOUNDARY",
+          "rule": "The loader must return no 2025+ row and no forward-label, recent-patch, execution, validation, test, stress, challenge, or promotion input",
+          "severity": "HARD",
+          "enforced_by": "train_surface.load_symbol_train",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json"
+        },
+        {
+          "id": "physical_presence_not_field_authority",
+          "type": "EVIDENCE",
+          "rule": "A physical column or inventory identity does not become search-authorized; non-current fields remain registered but inactive",
+          "severity": "HARD",
+          "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_FIELD_RECONCILIATION.csv"
+        },
+        {
+          "id": "observed_archive_scope",
+          "type": "EVIDENCE",
+          "rule": "The 18-month result qualifies an observed official-archive current-seeded universe and cannot prove historical delisted-contract completeness",
+          "severity": "HARD",
+          "evidence_ref": "reports/CRYPTO_TRAIN_SURFACE_18M_QUALIFICATION_20260716.md"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
+        "evidence_sha256": "08942FE05F517245E4AC2B9FEABA2E4356A8CF352934390BFF21955062711718",
+        "verified_at_sha": "c964ea47256e6177139de839c18196ac8accc46c"
+      },
+      "promotion_requirements": [
+        "survivorship-safe historical eligibility",
+        "qualified native order-field history",
+        "matched development evidence",
+        "explicit search authorization"
+      ]
+    },
+    {
       "id": "broad_universe_compositional_search",
       "label": "Broad-Universe Compositional Search",
       "kind": "development_experiment",
@@ -755,6 +824,85 @@
   ],
   "edges": [
     {
+      "id": "train_surface_qualifies_observed_archive_history",
+      "source": "observed_archive_train_surface",
+      "target": "data_adequacy_gate",
+      "relation": "qualifies_train_scope",
+      "lifecycle": "ACTIVE",
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "train_scope_data_admission",
+        "type": "ADMISSION",
+        "rule": "The 18-month surface passes dates, rows, assets, variance, label support, and independent-month checks for train-only development use; it does not pass survivorship or native-order-field gates",
+        "severity": "HARD",
+        "enforced_by": "train_surface.build_qualification",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
+        "evidence_sha256": "08942FE05F517245E4AC2B9FEABA2E4356A8CF352934390BFF21955062711718",
+        "verified_at_sha": "c964ea47256e6177139de839c18196ac8accc46c"
+      }
+    },
+    {
+      "id": "train_surface_supersedes_broad_history_scope",
+      "source": "observed_archive_train_surface",
+      "target": "broad_universe_compositional_search",
+      "relation": "supersedes_train_history_finding",
+      "lifecycle": "ACTIVE",
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "bounded_history_supersession",
+        "type": "EVIDENCE",
+        "rule": "TIME_HISTORY_TOO_SHORT is superseded only for observed-archive kline/derivatives training; survivorship, native aggTrades, grammar, search, and economic findings remain unchanged",
+        "severity": "HARD",
+        "enforced_by": "docs/adr/0006-observed-archive-18m-train-surface.md",
+        "bypass_forbidden": true,
+        "evidence_ref": "reports/CRYPTO_TRAIN_SURFACE_18M_QUALIFICATION_20260716.md"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "reports/CRYPTO_TRAIN_SURFACE_18M_QUALIFICATION_20260716.md",
+        "evidence_sha256": "BE48A84EEC29AFAA3C7CBD178A94CD4EE7006D3E9B3AC83A4DA0DE17445902E6",
+        "verified_at_sha": "c964ea47256e6177139de839c18196ac8accc46c"
+      }
+    },
+    {
+      "id": "train_surface_performance_search_forbidden",
+      "source": "observed_archive_train_surface",
+      "target": "formal_performance_search",
+      "relation": "activation_forbidden",
+      "lifecycle": "FORBIDDEN",
+      "forbidden": true,
+      "critical": true,
+      "evidence_type": "DECLARED",
+      "contract": {
+        "id": "train_data_not_search_authority",
+        "type": "BOUNDARY",
+        "rule": "Train-surface qualification cannot activate formal performance search, open sealed evaluation, or promote a candidate",
+        "severity": "HARD",
+        "enforced_by": "config/crypto_train_surface_18m_v1.json",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "evidence-boundary-change",
+        "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
+        "evidence_sha256": "08942FE05F517245E4AC2B9FEABA2E4356A8CF352934390BFF21955062711718",
+        "verified_at_sha": "c964ea47256e6177139de839c18196ac8accc46c"
+      }
+    },
+    {
       "id": "broad_compositional_search_is_non_formal_and_data_gated",
       "source": "broad_universe_compositional_search",
       "target": "data_adequacy_gate",
@@ -1195,6 +1343,7 @@
     {"semantic_role": "historical_instrument_diagnosis", "authoritative_component": "instrument_semantics_audit"},
     {"semantic_role": "development_arena", "authoritative_component": "multi_paradigm_arena"},
     {"semantic_role": "large_experiment_admission", "authoritative_component": "data_adequacy_gate"},
+    {"semantic_role": "train_surface_authority", "authoritative_component": "observed_archive_train_surface"},
     {"semantic_role": "evaluation_access_boundary", "authoritative_component": "sealed_research_boundaries"},
     {"semantic_role": "bounded_real_data_lazy_search", "authoritative_component": "real_data_lazy_search_canary"},
     {"semantic_role": "development_release_authority", "authoritative_component": "approved_existing_development_release"},
