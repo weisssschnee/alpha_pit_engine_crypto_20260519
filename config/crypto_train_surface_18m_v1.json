@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "surface_id": "CRYPTO_OBSERVED_ARCHIVE_TRAIN_18M_V1",
+  "authorization": "USER_AUTHORIZED_TRAIN_SURFACE_QUALIFICATION_ONLY_20260716",
+  "data_root": "G:/AlphaFactory_CryptoData",
+  "train_start_utc": "2023-07-01T00:00:00Z",
+  "train_end_exclusive_utc": "2025-01-01T00:00:00Z",
+  "sources": {
+    "pre2024_complete": "gold/features/binance_universe_pre2024_complete_replay_1h_v1_20260612",
+    "pre2024_age": "gold/features/binance_universe_pre2024_1h_backfill_gold_age_v1_20260612",
+    "top498_v3": "gold/features/binance_universe498_replay_1h_v3_patch_age_20260613"
+  },
+  "source_evidence": [
+    "G:/AlphaFactory_CryptoData/reports/binance_universe_pre2024_complete_replay_1h_v1_20260612.json",
+    "G:/AlphaFactory_CryptoData/gold/metadata/binance_universe_pre2024_complete_replay_1h_v1_20260612_field_contract.json",
+    "runtime/a7data_pre2024_backfill_acceptance_age_20260612/a7data_pre2024_manifest.json",
+    "runtime/a7data_recent_patch_merged_panel_20260613/a7data_recent_patch_merged_manifest.json",
+    "runtime/a7al0_top498_alpha_search_contract/a7al_split_definition.csv",
+    "runtime/a7eff2_git_release_20260711/a7eff2_train_validation_oos_split_log.csv"
+  ],
+  "registries": {
+    "inventory": "runtime/crypto_feature_runtime_inventory_20260714/CRYPTO_FEATURE_RUNTIME_INVENTORY.csv",
+    "lineage": "runtime/crypto_feature_runtime_inventory_20260714/feature_lineage_ledger.csv",
+    "lane_map": "runtime/crypto_feature_runtime_inventory_20260714/field_representation_lane_generator_map.csv",
+    "ontology": "runtime/a7ffr1_field_ontology_v3/a7ffr1_field_ontology_v3.csv",
+    "approval": "runtime/crypto_feature_runtime_inventory_20260714/latest_input_approval_registry.csv",
+    "current_runtime": "runtime/crypto_feature_runtime_inventory_20260714/current_epoch_runtime_fields.csv"
+  },
+  "runtime_fields": [
+    "account_position_divergence",
+    "global_long_short_account_ratio_last",
+    "mark_trade_basis_bps",
+    "open_interest_value_last",
+    "open_interest_value_mean",
+    "top_global_account_divergence",
+    "top_long_short_account_ratio_last",
+    "top_long_short_position_ratio_last",
+    "trade_close",
+    "trade_quote_volume"
+  ],
+  "target_horizons_hours": [1, 4, 8, 24],
+  "data_adequacy": {
+    "minimum_continuous_months": 18,
+    "minimum_assets": 40,
+    "minimum_monthly_active_assets": 30,
+    "minimum_runtime_field_non_null_ratio": 0.70,
+    "minimum_independent_month_blocks": 12,
+    "minimum_label_observations": 100000
+  },
+  "boundaries": {
+    "returned_roles": ["TRAIN"],
+    "sealed_reads_allowed": false,
+    "formal_performance_search": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "economic_claim": false,
+    "universe_scope": "OBSERVED_OFFICIAL_ARCHIVE_CURRENT_SEED",
+    "full_exchange_survivorship_safe": false
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_train_surface_18m_qualification_20260716",
+    "report": "reports/CRYPTO_TRAIN_SURFACE_18M_QUALIFICATION_20260716.md"
+  }
+}
