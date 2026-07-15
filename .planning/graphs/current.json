@@ -10,6 +10,108 @@
   ],
   "edges": [
     {
+      "color": "#2e7d32",
+      "contract": {
+        "bypass_forbidden": true,
+        "enforced_by": "train_surface.build_qualification",
+        "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
+        "id": "train_scope_data_admission",
+        "rule": "The 18-month surface passes dates, rows, assets, variance, label support, and independent-month checks for train-only development use; it does not pass survivorship or native-order-field gates",
+        "severity": "HARD",
+        "type": "ADMISSION"
+      },
+      "critical": true,
+      "declared": true,
+      "declared_evidence_type": "STATIC",
+      "evidence": "DECLARED",
+      "forbidden": false,
+      "id": "train_surface_qualifies_observed_archive_history",
+      "lifecycle": "ACTIVE",
+      "line_style": "dotted",
+      "relation": "qualifies_train_scope",
+      "required": false,
+      "source": "observed_archive_train_surface",
+      "target": "data_adequacy_gate",
+      "validation": {
+        "checked_at": "2026-07-15T18:02:29.219416+00:00",
+        "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
+        "evidence_sha256": "08942FE05F517245E4AC2B9FEABA2E4356A8CF352934390BFF21955062711718",
+        "level": "STATIC_VERIFIED",
+        "notes": [],
+        "profile": "crypto-development-research",
+        "result": "PASS",
+        "verified_at_sha": "c964ea47256e6177139de839c18196ac8accc46c"
+      }
+    },
+    {
+      "color": "#2e7d32",
+      "contract": {
+        "bypass_forbidden": true,
+        "enforced_by": "docs/adr/0006-observed-archive-18m-train-surface.md",
+        "evidence_ref": "reports/CRYPTO_TRAIN_SURFACE_18M_QUALIFICATION_20260716.md",
+        "id": "bounded_history_supersession",
+        "rule": "TIME_HISTORY_TOO_SHORT is superseded only for observed-archive kline/derivatives training; survivorship, native aggTrades, grammar, search, and economic findings remain unchanged",
+        "severity": "HARD",
+        "type": "EVIDENCE"
+      },
+      "critical": true,
+      "declared": true,
+      "declared_evidence_type": "STATIC",
+      "evidence": "DECLARED",
+      "forbidden": false,
+      "id": "train_surface_supersedes_broad_history_scope",
+      "lifecycle": "ACTIVE",
+      "line_style": "dotted",
+      "relation": "supersedes_train_history_finding",
+      "required": false,
+      "source": "observed_archive_train_surface",
+      "target": "broad_universe_compositional_search",
+      "validation": {
+        "checked_at": "2026-07-15T18:02:29.219416+00:00",
+        "evidence_ref": "reports/CRYPTO_TRAIN_SURFACE_18M_QUALIFICATION_20260716.md",
+        "evidence_sha256": "BE48A84EEC29AFAA3C7CBD178A94CD4EE7006D3E9B3AC83A4DA0DE17445902E6",
+        "level": "STATIC_VERIFIED",
+        "notes": [],
+        "profile": "crypto-development-research",
+        "result": "PASS",
+        "verified_at_sha": "c964ea47256e6177139de839c18196ac8accc46c"
+      }
+    },
+    {
+      "color": "#c62828",
+      "contract": {
+        "bypass_forbidden": true,
+        "enforced_by": "config/crypto_train_surface_18m_v1.json",
+        "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
+        "id": "train_data_not_search_authority",
+        "rule": "Train-surface qualification cannot activate formal performance search, open sealed evaluation, or promote a candidate",
+        "severity": "HARD",
+        "type": "BOUNDARY"
+      },
+      "critical": true,
+      "declared": true,
+      "declared_evidence_type": "DECLARED",
+      "evidence": "DECLARED",
+      "forbidden": true,
+      "id": "train_surface_performance_search_forbidden",
+      "lifecycle": "FORBIDDEN",
+      "line_style": "dotted",
+      "relation": "activation_forbidden",
+      "required": false,
+      "source": "observed_archive_train_surface",
+      "target": "formal_performance_search",
+      "validation": {
+        "checked_at": "2026-07-15T18:02:29.219416+00:00",
+        "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
+        "evidence_sha256": "08942FE05F517245E4AC2B9FEABA2E4356A8CF352934390BFF21955062711718",
+        "level": "STATIC_VERIFIED",
+        "notes": [],
+        "profile": "evidence-boundary-change",
+        "result": "PASS",
+        "verified_at_sha": "c964ea47256e6177139de839c18196ac8accc46c"
+      }
+    },
+    {
       "color": "#f9a825",
       "contract": {
         "bypass_forbidden": true,
@@ -604,7 +706,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-15T16:29:02.720358+00:00",
+  "generated_at": "2026-07-15T18:19:01.960685+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -950,6 +1052,139 @@
         "profile": "crypto-development-research",
         "result": "PASS",
         "verified_at_sha": "4726795f61052470d56e2d1475e4f6da9d262943"
+      },
+      "visible_by_default": true
+    },
+    {
+      "active_authority": true,
+      "authority": {
+        "path": "config/crypto_train_surface_18m_v1.json",
+        "repo_ref": "repair/crypto-train-surface-reconciliation-20260716",
+        "sha256": "3C83B2CB0BDE461B8C8B5106DF870C021C5B51DFCEF46BAD138354F1A8276076",
+        "verified_sha": "a88552589c92161a3cfb7593cc82c8e20f0c5f5c"
+      },
+      "color": "#2e7d32",
+      "contracts": [
+        {
+          "bypass_forbidden": false,
+          "enforced_by": "train_surface.load_symbol_train",
+          "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_FIELD_RECONCILIATION.csv",
+          "id": "train_interval_and_field_authority",
+          "rule": "The versioned train-surface config and loader own the 2023-07-01 through 2024-12-31 interval and activate exactly the ten current Git runtime fields by default",
+          "severity": "HARD",
+          "type": "AUTHORITY"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "train_surface.load_symbol_train",
+          "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
+          "id": "train_only_no_sealed_rows",
+          "rule": "The loader must return no 2025+ row and no forward-label, recent-patch, execution, validation, test, stress, challenge, or promotion input",
+          "severity": "HARD",
+          "type": "BOUNDARY"
+        },
+        {
+          "bypass_forbidden": false,
+          "enforced_by": "",
+          "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_FIELD_RECONCILIATION.csv",
+          "id": "physical_presence_not_field_authority",
+          "rule": "A physical column or inventory identity does not become search-authorized; non-current fields remain registered but inactive",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        },
+        {
+          "bypass_forbidden": false,
+          "enforced_by": "",
+          "evidence_ref": "reports/CRYPTO_TRAIN_SURFACE_18M_QUALIFICATION_20260716.md",
+          "id": "observed_archive_scope",
+          "rule": "The 18-month result qualifies an observed official-archive current-seeded universe and cannot prove historical delisted-contract completeness",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        }
+      ],
+      "critical": true,
+      "evidence": "STATIC",
+      "expires_at": "",
+      "id": "observed_archive_train_surface",
+      "kind": "data_release",
+      "label": "Observed-archive 18M train surface",
+      "lifecycle": "ACTIVE",
+      "owner": "",
+      "paths": [
+        "docs/adr/0006-observed-archive-18m-train-surface.md",
+        "config/crypto_train_surface_18m_v1.json",
+        "alphafactory_crypto/train_surface.py",
+        "scripts/crypto_train_surface_18m.py",
+        "reports/CRYPTO_TRAIN_SURFACE_18M_QUALIFICATION_20260716.md"
+      ],
+      "promotion_requirements": [
+        "survivorship-safe historical eligibility",
+        "qualified native order-field history",
+        "matched development evidence",
+        "explicit search authorization"
+      ],
+      "raw_node_ids": [
+        "alphafactory_crypto_train_surface",
+        "alphafactory_crypto_train_surface_apply_derivations",
+        "alphafactory_crypto_train_surface_bool",
+        "alphafactory_crypto_train_surface_build_qualification",
+        "alphafactory_crypto_train_surface_check_qualification",
+        "alphafactory_crypto_train_surface_git_sha",
+        "alphafactory_crypto_train_surface_iter_train_symbols",
+        "alphafactory_crypto_train_surface_load_symbol_train",
+        "alphafactory_crypto_train_surface_longest_contiguous_months",
+        "alphafactory_crypto_train_surface_month_ord",
+        "alphafactory_crypto_train_surface_normalise_frame",
+        "alphafactory_crypto_train_surface_normalised_pre_columns",
+        "alphafactory_crypto_train_surface_payload_sha",
+        "alphafactory_crypto_train_surface_pre2024_raw_fields",
+        "alphafactory_crypto_train_surface_rationale_1",
+        "alphafactory_crypto_train_surface_rationale_209",
+        "alphafactory_crypto_train_surface_read_json",
+        "alphafactory_crypto_train_surface_read_parquet_file",
+        "alphafactory_crypto_train_surface_registry_reconciliation",
+        "alphafactory_crypto_train_surface_report_text",
+        "alphafactory_crypto_train_surface_required_physical_fields",
+        "alphafactory_crypto_train_surface_runningstats",
+        "alphafactory_crypto_train_surface_runningstats_payload",
+        "alphafactory_crypto_train_surface_runningstats_update",
+        "alphafactory_crypto_train_surface_schema_columns",
+        "alphafactory_crypto_train_surface_sha256_file",
+        "alphafactory_crypto_train_surface_source_roots",
+        "alphafactory_crypto_train_surface_timestamp",
+        "alphafactory_crypto_train_surface_write_json",
+        "docs_adr_0006_observed_archive_18m_train_surface",
+        "docs_adr_0006_observed_archive_18m_train_surface_adr_0006_observed_archive_18_month_train_surface",
+        "docs_adr_0006_observed_archive_18m_train_surface_consequences",
+        "docs_adr_0006_observed_archive_18m_train_surface_context",
+        "docs_adr_0006_observed_archive_18m_train_surface_decision",
+        "reports_crypto_train_surface_18m_qualification_20260716",
+        "reports_crypto_train_surface_18m_qualification_20260716_boundaries",
+        "reports_crypto_train_surface_18m_qualification_20260716_corrected_train_facts",
+        "reports_crypto_train_surface_18m_qualification_20260716_crypto_train_surface_18m_qualification",
+        "reports_crypto_train_surface_18m_qualification_20260716_decision",
+        "reports_crypto_train_surface_18m_qualification_20260716_git_field_reconciliation",
+        "reports_crypto_train_surface_18m_qualification_20260716_runtime_field_quality",
+        "reports_crypto_train_surface_18m_qualification_20260716_supersession_scope",
+        "scripts_crypto_train_surface_18m",
+        "scripts_crypto_train_surface_18m_main",
+        "tests_test_train_surface",
+        "tests_test_train_surface_base_frame",
+        "tests_test_train_surface_config",
+        "tests_test_train_surface_test_loader_defaults_to_current_runtime_fields",
+        "tests_test_train_surface_test_loader_joins_train_segments_and_excludes_sealed_rows"
+      ],
+      "required": false,
+      "semantic_role": "train_surface_authority",
+      "validation": {
+        "checked_at": "2026-07-15T18:19:01.960685+00:00",
+        "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
+        "evidence_sha256": "08942FE05F517245E4AC2B9FEABA2E4356A8CF352934390BFF21955062711718",
+        "level": "STATIC_VERIFIED",
+        "notes": [],
+        "profile": "crypto-development-research",
+        "result": "PASS",
+        "verified_at_sha": "c964ea47256e6177139de839c18196ac8accc46c"
       },
       "visible_by_default": true
     },
@@ -3439,7 +3674,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "FBE063D02921D39199449616E9B62A2EFC7422F23852D1282882C48872CDA6EE"
+    "sha256": "62D1ABA0D006262E7727733FA4C80C2E9A65F09A8CEDB63B096E7BEC142214DB"
   },
   "profile_id": null,
   "profiles": [
@@ -3470,20 +3705,20 @@
     }
   ],
   "raw": {
-    "built_at_commit": "09d23a4f3ebc7ab2f2137d424561e4b7579e3ce4",
-    "edge_count": 31440,
-    "node_count": 17306,
+    "built_at_commit": "1f102b646f9c48968c4ace4c4261f144823e171b",
+    "edge_count": 31573,
+    "node_count": 17361,
     "path": ".planning/graphs/graph.json",
-    "sha256": "621B3A83A163AE8FFC0CA12A42AD2760BFBB5CCCD78A3EAC41B4D996EBE363E0"
+    "sha256": "E943CB4EFCAAD8BA1095C25525E7D8FEE74C242EFF19385A47249344787EAFC7"
   },
-  "repo_head": "09d23a4f3ebc7ab2f2137d424561e4b7579e3ce4",
+  "repo_head": "1f102b646f9c48968c4ace4c4261f144823e171b",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
   "strict_ready": false,
   "summary": {
-    "current_edges": 17,
-    "current_nodes": 18,
+    "current_edges": 20,
+    "current_nodes": 19,
     "errors": 0,
     "runtime_edges": 0,
     "runtime_nodes": 0,
