@@ -1,0 +1,74 @@
+{
+  "authorization": {
+    "candidate_promotion": false,
+    "economic_claim": false,
+    "formal_performance_search": false,
+    "large_search": false,
+    "sealed_evaluation": false,
+    "train_loader": true
+  },
+  "coverage": {
+    "assets": 276,
+    "assets_any_2024": 276,
+    "assets_full_8784h_2024": 176,
+    "assets_present_all_18_months": 140,
+    "assets_present_all_2024_months": 183,
+    "assets_spanning_pre2024_and_2024": 176,
+    "continuous_months": 18,
+    "duplicates": 0,
+    "end_exclusive_utc": "2025-01-01T00:00:00Z",
+    "monthly_active_assets_max": 276,
+    "monthly_active_assets_min": 140,
+    "rows": 2549139,
+    "segment_rows": {
+      "PRE2024_COMPLETE_REPLAY": 668590,
+      "TOP498_V3_TRAIN_2024": 1880549
+    },
+    "start_utc": "2023-07-01T00:00:00Z",
+    "unique_timestamps": 13200
+  },
+  "data_adequacy_checks": {
+    "assets": true,
+    "availability_not_before_timestamp": true,
+    "continuous_months": true,
+    "duplicate_rows_zero": true,
+    "independent_month_blocks": true,
+    "label_support": true,
+    "monthly_active_assets": true,
+    "runtime_fields": true,
+    "sealed_rows_returned_zero": true
+  },
+  "decision": "PASS_CRYPTO_TRAIN_SURFACE_18M_DEVELOPMENT_READY_WITH_SCOPE_LIMITS",
+  "field_reconciliation": {
+    "common_physical_fields": 72,
+    "common_registered_fields": 51,
+    "current_runtime_admitted": 10,
+    "current_runtime_fields": 10,
+    "inventory_identities": 5388
+  },
+  "producer_source_sha": "a88552589c92161a3cfb7593cc82c8e20f0c5f5c",
+  "schema_version": 1,
+  "source_content_bundle_sha256": "8CEB549ED8AF73611163D827AD15DD5F409DCD422A6831ABCA28E86B8627D439",
+  "source_schema_variants": {
+    "pre2024_age": 1,
+    "pre2024_complete": 5,
+    "top498_v3": 2
+  },
+  "source_timing": {
+    "feature_available_lag_hours_max": 1.0,
+    "feature_available_lag_hours_min": 1.0
+  },
+  "supersession": {
+    "remaining_findings": [
+      "SURVIVORSHIP_OR_ELIGIBILITY_UNRESOLVED",
+      "ORDER_FIELD_COVERAGE_FRAGMENTED",
+      "EXPLICIT_CORE_AGGTRADES_TIME_HISTORY_TOO_SHORT",
+      "COMPOSITIONAL_GRAMMAR_BOTTLENECK_NO_NEW_ECONOMIC_TEST"
+    ],
+    "superseded_findings": [
+      "TIME_HISTORY_TOO_SHORT_FOR_OBSERVED_ARCHIVE_KLINE_DERIVATIVES_TRAIN_SURFACE",
+      "A7EFF2_96_ASSETS_AS_PHYSICAL_PANEL_LIMIT"
+    ]
+  },
+  "surface_id": "CRYPTO_OBSERVED_ARCHIVE_TRAIN_18M_V1"
+}

@@ -1,0 +1,60 @@
+{
+  "artifacts": [
+    {
+      "bytes": 36092,
+      "path": "alphafactory_crypto/train_surface.py",
+      "sha256": "4347498A6BA394F94E37EB54A8160DB90C50FE83CEEE049DCFCCBA26712B6F55"
+    },
+    {
+      "bytes": 3026,
+      "path": "config/crypto_train_surface_18m_v1.json",
+      "sha256": "3C83B2CB0BDE461B8C8B5106DF870C021C5B51DFCEF46BAD138354F1A8276076"
+    },
+    {
+      "bytes": 3353,
+      "path": "reports/CRYPTO_TRAIN_SURFACE_18M_QUALIFICATION_20260716.md",
+      "sha256": "BE48A84EEC29AFAA3C7CBD178A94CD4EE7006D3E9B3AC83A4DA0DE17445902E6"
+    },
+    {
+      "bytes": 2345,
+      "path": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
+      "sha256": "08942FE05F517245E4AC2B9FEABA2E4356A8CF352934390BFF21955062711718"
+    },
+    {
+      "bytes": 913070,
+      "path": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_FIELD_RECONCILIATION.csv",
+      "sha256": "6D9660497E68B897AC1990E8E1A29E9A6CD1476FE147D736B47F4C5CDC7E0D75"
+    },
+    {
+      "bytes": 648,
+      "path": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_LABEL_SUPPORT.csv",
+      "sha256": "907D5AA1BE3BB8BB6178615842A096823D0C9EA1AA78C554144027BE98855038"
+    },
+    {
+      "bytes": 480,
+      "path": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_MONTH_COVERAGE.csv",
+      "sha256": "664ADC63DF85A41DD5F30ADAF67711D240488AE6B5D10FA73672FF9C7C566007"
+    },
+    {
+      "bytes": 1426,
+      "path": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_RUNTIME_FIELD_QUALITY.csv",
+      "sha256": "269A4914847EB64A9BA1BEED694100B619473E344EE891F74C96B8C4FFAA6FAB"
+    },
+    {
+      "bytes": 538206,
+      "path": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_SOURCE_CONTENT_MANIFEST.csv",
+      "sha256": "60E66EC060C613A624BDD1A611D26083AFF72DB40C5879D73ADC03B566A1332B"
+    },
+    {
+      "bytes": 2091,
+      "path": "scripts/crypto_train_surface_18m.py",
+      "sha256": "6660056D8B2EC2D3A9982FE14072CA8E6CA34772E46E73080EEB50444F1E304C"
+    }
+  ],
+  "bundle_sha256": "21435BC136B23A284DFEE2E835CA8E141A999910E1FFBA0D44B468CEA03670E3",
+  "data_role": "TRAIN_ONLY",
+  "producer_source_sha": "a88552589c92161a3cfb7593cc82c8e20f0c5f5c",
+  "schema_version": 1,
+  "sealed_rows_returned": 0,
+  "source_content_bundle_sha256": "8CEB549ED8AF73611163D827AD15DD5F409DCD422A6831ABCA28E86B8627D439"
+}
