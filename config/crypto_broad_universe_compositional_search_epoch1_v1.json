@@ -1,0 +1,93 @@
+{
+  "epoch_id": "CRYPTO_BROAD_UNIVERSE_COMPOSITIONAL_ALPHA_SEARCH_EPOCH1",
+  "version": 1,
+  "branch": "experiment/crypto-broad-universe-compositional-search-20260715",
+  "source_closure_sha": "aae38db148a56a04d843db89caf8e62015148661",
+  "accepted_closure": {
+    "tag": "crypto-frontier-provenance-closure-20260714",
+    "sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+    "immutable": true
+  },
+  "authorization": "BOUNDED_DEVELOPMENT_ONLY_DATA_AND_REPRESENTATION_QUALIFICATION",
+  "boundaries": {
+    "formal_performance_search": false,
+    "sealed_reads_allowed": false,
+    "sealed_roles": [
+      "VALIDATION",
+      "HOLDOUT",
+      "TEST",
+      "RECENT",
+      "FORWARD",
+      "CHALLENGE",
+      "MAY_STRESS"
+    ],
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "economic_alpha_claim": false
+  },
+  "base_canary_config": "config/crypto_real_data_instrument_canary_v1.json",
+  "data_inventory": {
+    "root": "G:/AlphaFactory_CryptoData",
+    "sources": {
+      "pre2024_kline_flow": {
+        "coverage_manifest": "G:/AlphaFactory_CryptoData/manifests/binance_universe_pre2024_1m_backfill_silver_v1_20260612_coverage.csv",
+        "content_manifest": "G:/AlphaFactory_CryptoData/manifests/binance_universe_pre2024_1m_backfill_silver_v1_20260612_manifest.csv",
+        "authority": "official Binance Vision archive",
+        "admitted_months": ["2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12"]
+      },
+      "pre2024_derivatives": {
+        "coverage_manifest": "G:/AlphaFactory_CryptoData/manifests/binance_universe_pre2024_complete_replay_1h_v1_20260612_coverage.csv",
+        "authority": "official Binance Vision archive and Binance Futures API",
+        "admitted_months": ["2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12"]
+      },
+      "universe_seed": {
+        "path": "G:/AlphaFactory_CryptoData/metadata/universe_pre2024_eligible_symbols_20260612.txt",
+        "probe_report": "G:/AlphaFactory_CryptoData/reports/binance_full_perp_universe_probe_20260522_full527_company_remote.json",
+        "provenance_limit": "2026 current exchangeInfo plus checkpoint-availability selection"
+      },
+      "native_aggtrades_core10": {
+        "authority_ref": "config/crypto_real_data_instrument_canary_v1.json",
+        "admitted_role": "DEVELOPMENT_TRAIN_ONLY",
+        "admitted_months": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06"]
+      }
+    }
+  },
+  "data_gate": {
+    "broad_cross_sectional": {
+      "minimum_assets": 40,
+      "minimum_continuous_months": 18,
+      "minimum_core_agg_price_asset_month_coverage": 0.9,
+      "minimum_median_active_assets": 30,
+      "dynamic_monthly_eligibility_required": true,
+      "survivorship_inference_forbidden": true
+    },
+    "explicit_core_time_series": {
+      "minimum_continuous_months": 24,
+      "fixed_product_universe_required": true,
+      "broad_conclusions_forbidden": true
+    },
+    "forbidden_large_search_surface": "10 assets x 6 months"
+  },
+  "grammar_audit": {
+    "sample_candidates": 2000,
+    "seed": 20260715,
+    "behavior_identity_over_exact_bottleneck_threshold": 0.3
+  },
+  "search_budget": {
+    "cost_preflight_pairs": 64,
+    "minimum_structural_proposal_attempts": 500000,
+    "minimum_legal_exact_unique": 100000,
+    "minimum_behavior_diverse": 25000,
+    "stage_a_pairs": 4096,
+    "maximum_stage_b_pairs": 4096,
+    "hard_cap_pairs": 8192,
+    "hard_cap_strict_calls": 16384,
+    "algorithms": ["canonical_typed_random", "cem_diversity_v2", "uct_ucb_like", "evolutionary"],
+    "minimum_seeds": 4
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_broad_universe_compositional_search_20260715",
+    "report": "reports/CRYPTO_BROAD_UNIVERSE_COMPOSITIONAL_SEARCH_REPORT.md",
+    "failure_report": "reports/CRYPTO_BROAD_SEARCH_FAILURE_ATTRIBUTION.md"
+  }
+}
