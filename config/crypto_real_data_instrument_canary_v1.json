@@ -1,0 +1,181 @@
+{
+  "canary_id": "CRYPTO_REAL_DATA_INSTRUMENT_CANARY_20260715",
+  "version": 1,
+  "authorization": "BOUNDED_EXISTING_RELEASE_DEVELOPMENT_CANARY",
+  "base_capability_sha": "dba5972893568e4eccedfb724288d02105f69363",
+  "accepted_closure": {
+    "tag": "crypto-frontier-provenance-closure-20260714",
+    "sha": "4726795f61052470d56e2d1475e4f6da9d262943",
+    "immutable": true
+  },
+  "boundaries": {
+    "allowed_data_role": "DEVELOPMENT_TRAIN_ONLY",
+    "sealed_roles": [
+      "VALIDATION",
+      "HOLDOUT",
+      "TEST",
+      "RECENT",
+      "FORWARD",
+      "CHALLENGE",
+      "MAY_STRESS"
+    ],
+    "new_data_integration": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "historical_runner_activation": false,
+    "economic_alpha_claim": false
+  },
+  "release": {
+    "parent_release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1",
+    "parent_release_content_sha256": "9A715BD4EC8461E533BFBA43B33CC67A30596E026800DF90CD604BBB02BF9A3D",
+    "development_view_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE10_2024M01_M06_DEV_ONLY_V1",
+    "release_root": "G:/AlphaFactory_CryptoData/curated/mechanism_data_expansion0/native_aggtrades_core12_2024m01_m10_v1/development",
+    "source_root": "G:/AlphaFactory_CryptoData/gold/microstructure/aggtrades_1h_flow_enhanced_v1",
+    "symbols": [
+      "ADAUSDT",
+      "BCHUSDT",
+      "BNBUSDT",
+      "DOGEUSDT",
+      "ETHUSDT",
+      "LINKUSDT",
+      "LTCUSDT",
+      "SOLUSDT",
+      "SUIUSDT",
+      "XRPUSDT"
+    ],
+    "months": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06"],
+    "expected_coordinate_files": 60,
+    "expected_hourly_rows": 43680,
+    "expected_timestamps": 4368,
+    "expected_source_bundle_sha256": "12459C2F2224C8CFA6CED13FF831986BA8D3680E86EA941EF04EB3B47A9BE17E",
+    "expected_output_bundle_sha256": "CA183D5BB3FE366D1475ADBC9B44C1BD625FB63F3AFEAA2656BA7BF196D78333",
+    "missing_policy": "NO_FILL_FAIL_CLOSED",
+    "source_and_output_hash_verification": true,
+    "searchable_fields": [
+      "trade_count",
+      "underlying_trade_count",
+      "quantity",
+      "notional",
+      "buy_agg_trade_count",
+      "sell_agg_trade_count",
+      "buy_quantity",
+      "sell_quantity",
+      "buy_notional",
+      "sell_notional",
+      "signed_aggressor_quantity",
+      "signed_aggressor_notional",
+      "vwap",
+      "buy_vwap",
+      "sell_vwap",
+      "volume_imbalance",
+      "buy_sell_notional_ratio",
+      "price_range_bps",
+      "close_to_open_bps",
+      "large_trade_count_ratio_100k_plus",
+      "large_notional_ratio_100k_plus"
+    ],
+    "target_only_fields": ["close_price"],
+    "pit_fields": ["timestamp", "observable_time", "maturity", "source_lag_seconds", "missing_any"],
+    "superseded_qualification_index_mismatches": [
+      {
+        "path": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/mechanism_horizon_contract.json",
+        "declared_sha256": "15C8F89EC46BF4BC442255A03D54CC8C1F153E2252F1D327117B7BE1691FC21A",
+        "observed_sha256": "130E5CE64C53C1558A93D3EED4F4B1F2C2C9A7978ACFA89DB895D321AC1918B5"
+      },
+      {
+        "path": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/cache_provenance.json",
+        "declared_sha256": "053CC0670DE2312A215E815CBC3EC55EC46A59C9094D45E97862DD8166913595",
+        "observed_sha256": "A8DC52C59EFC3AE96DF035D6C8B73AECDA4C299F57D5CC25D61B828126E838B4"
+      },
+      {
+        "path": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/release_manifest.json",
+        "declared_sha256": "3378E48CFDEB226BE1F86434691168D289434E36FBF39959C400AD322EA36ED8",
+        "observed_sha256": "4300B8486A6D9D8BCB91C58CBDD64657EE72993A65AA92FA2272C206C4CC129A"
+      },
+      {
+        "path": "runtime/mechanism_data_expansion0_20260712/native_aggtrades_release_v1/NATIVE_AGGTRADES_RELEASE_REPORT.md",
+        "declared_sha256": "CFCE5E9C3BDC79285B031B4BB4414E67830A31C2E1A40A5EF9665AD915536D36",
+        "observed_sha256": "23EDFE1B43B19138886FD29AD792BD69842309B9D2EF89E1C20C3D16E386AD34"
+      }
+    ]
+  },
+  "target_horizon": {
+    "price_source": "source close_price; target-only and forbidden from grammar",
+    "horizons_hours": [1, 4],
+    "feature_bucket_coordinate": "t",
+    "feature_observable_time": "t+1h",
+    "execution_time": "t+2h",
+    "execution_delay_after_observable_hours": 1,
+    "formula": "log(close[t+2h+horizon] / close[t+2h])",
+    "supersedes_ambiguous_old_boundary": "old native benchmark began target at t+1h, the same instant as observable_time; this canary applies one complete hour after observability",
+    "all_metrics_role": "DEVELOPMENT_TRAIN_ONLY"
+  },
+  "evaluation_blocks": {
+    "kind": "FROZEN_UTC_CALENDAR_MONTHS",
+    "labels": ["DEV_TRAIN_2024_01", "DEV_TRAIN_2024_02", "DEV_TRAIN_2024_03", "DEV_TRAIN_2024_04", "DEV_TRAIN_2024_05", "DEV_TRAIN_2024_06"],
+    "feedback_role": true,
+    "selection_or_tuning_role": true,
+    "oos_role": false
+  },
+  "mapping": {
+    "CROSS_SECTIONAL_RELATIVE": "CROSS_SECTIONAL_ZERO_NET",
+    "DIRECTIONAL_STATEFUL": "TIME_SERIES_DIRECTIONAL_STATEFUL",
+    "SPARSE_EVENT_CARRY": "SPARSE_EVENT_OR_CARRY"
+  },
+  "cost": {
+    "model_id": "FULL_L1_FIXED_5BPS_WITH_INITIAL_AND_TERMINAL",
+    "cost_bps": 5.0,
+    "initial_establishment_charged": true,
+    "terminal_liquidation_charged": true,
+    "unmodeled": ["spread", "slippage", "impact", "fill_probability", "capacity"]
+  },
+  "execution": {
+    "model_id": "EQUAL_CAPITAL_HORIZON_OFFSET_SLEEVES",
+    "rule": "A horizon-h proposal is executed as h interleaved sleeves, each with 1/h capital and h-hour rebalance cadence",
+    "horizon_1h_sleeves": 1,
+    "horizon_4h_sleeves": 4,
+    "overlapping_full_capital_hourly_rebalance": false
+  },
+  "grammar": {
+    "minimum_unique_legal_candidates": 8192,
+    "exact_unique_legal_candidates": 9576,
+    "contract_sha256": "37372B724F1C4800C8F335CDC2DA30375C36AF625C81316AFCA7BC8D680BD010",
+    "mapping_is_search_gene": false,
+    "deprecated_aliases_allowed": false,
+    "wrong_lag_candidates_allowed": false,
+    "materialize_full_universe": false
+  },
+  "budget": {
+    "seeds": [20260715, 20260716],
+    "algorithms": ["canonical_typed_random", "cem_like", "uct_ucb_like", "evolutionary"],
+    "proposal_steps_per_seed_algorithm": 128,
+    "maximum_proposal_steps_per_seed_algorithm": 256,
+    "formal_proposal_steps": 1024,
+    "cost_preflight_evaluations": 32,
+    "total_first_evaluation_hard_cap": 2048,
+    "fixed_lane_order": "seed ascending then algorithm listed order",
+    "global_cache_scope": "THIS_CANARY_RUN_ONLY",
+    "maximum_proposal_attempts_per_step": 64
+  },
+  "cost_preflight": {
+    "time_start": "2024-01-01T00:00:00Z",
+    "time_end": "2024-01-14T23:00:00Z",
+    "candidate_selection": "first 32 coordinates of a predeclared full-cycle affine grammar stride; no complete-universe ranking and no economic metric participates",
+    "selection_seed": 20260715,
+    "feedback_exposed": false,
+    "policy_update_enabled": false,
+    "persist_economic_metrics": false
+  },
+  "strict_audit_sample": {
+    "top_feedback": 8,
+    "deterministic_random": 8,
+    "high_cost": 8,
+    "high_concentration": 8,
+    "low_feedback": 8,
+    "random_seed": 20260731
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_real_data_instrument_canary_20260715",
+    "report": "reports/CRYPTO_REAL_DATA_INSTRUMENT_CANARY_REPORT.md"
+  }
+}
