@@ -205,7 +205,7 @@
       "authority": {
         "path": "docs/adr/0005-broad-universe-compositional-search-epoch1.md",
         "repo_ref": "experiment/crypto-broad-universe-compositional-search-20260715",
-        "verified_sha": "76c222b75f569ee54b5215552a20481c5e5f231e"
+        "verified_sha": "6950ea75e7848a94ecbc87cb3aee022cecee5901"
       },
       "contracts": [
         {
@@ -228,12 +228,12 @@
         }
       ],
       "validation": {
-        "level": "RUNTIME_VERIFIED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-broad-compositional-epoch1",
         "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_CURRENT_GRAMMAR_EXPRESSIVITY_AUDIT.json",
-        "evidence_sha256": "EE008E2370B2A85C0F4CA2A3B44006AE127A281D84EA0D613F7EF2B5CD736252",
-        "verified_at_sha": "05e5f54b03bba1ca36be70894fca55c6e9a7b9da"
+        "evidence_sha256": "B8EA6C50B0D65482812791EC3731E08B0609A4E9C14858C1B8087E2125E40FD1",
+        "verified_at_sha": "24878d99ffca4aca46473b9d0ff3860fcb47d416"
       },
       "promotion_requirements": [
         "qualified development data mode",
@@ -761,7 +761,7 @@
       "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
       "lifecycle": "EXPERIMENTAL",
       "critical": true,
-      "evidence_type": "RUNTIME",
+      "evidence_type": "STATIC",
       "contract": {
         "id": "broad_search_non_formal_relation",
         "type": "ADMISSION",
@@ -772,12 +772,12 @@
         "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_SEARCH_DECISION.json"
       },
       "validation": {
-        "level": "RUNTIME_VERIFIED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-broad-compositional-epoch1",
         "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_SEARCH_DECISION.json",
-        "evidence_sha256": "3BEEE11C17FC6B52938B4178E447E90CCFAF863480DFB6FEA40E90B5DFED7AD0",
-        "verified_at_sha": "05e5f54b03bba1ca36be70894fca55c6e9a7b9da"
+        "evidence_sha256": "52125DC80C0590E8ACE0D77C17FE616A4092B9A469B259FEBC37A4CA01435C98",
+        "verified_at_sha": "24878d99ffca4aca46473b9d0ff3860fcb47d416"
       }
     },
     {
