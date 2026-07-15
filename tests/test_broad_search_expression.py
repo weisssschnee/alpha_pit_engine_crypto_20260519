@@ -82,3 +82,24 @@ def test_data_gate_does_not_promote_six_month_archive() -> None:
     assert result["gate_result"] == "CRYPTO_DATA_UNIVERSE_NOT_RESEARCH_QUALIFIED"
     assert "TIME_HISTORY_TOO_SHORT" in result["failure_classes"]
     assert "SURVIVORSHIP_OR_ELIGIBILITY_UNRESOLVED" in result["failure_classes"]
+
+
+def test_trailing_scale_has_no_future_influence() -> None:
+    registry = TypedExpressionRegistry(FIELD_CONTRACTS)
+    expression = Expression(
+        "NotionalScale",
+        (Expression.raw("notional"),),
+        parameters={"window": 2},
+    )
+    original = np.array([[1.0, 2.0, 3.0, 4.0]])
+    changed_future = np.array([[1.0, 2.0, 3.0, 4000.0]])
+
+    left = materialize_expression(
+        expression, registry=registry, field_reader=lambda _: original
+    )
+    right = materialize_expression(
+        expression, registry=registry, field_reader=lambda _: changed_future
+    )
+
+    assert np.allclose(left[:, :3], right[:, :3], equal_nan=True)
+    assert not np.allclose(left[:, 3:], right[:, 3:])

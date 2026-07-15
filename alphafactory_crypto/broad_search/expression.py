@@ -181,10 +181,21 @@ class TypedExpressionRegistry:
             child = children[0]
             windows = child.rolling_windows
             cross_asset = child.cross_asset_normalizations
+            if expression.operator == "Log" and child.value_type not in {
+                "COUNT",
+                "VOLUME",
+                "NOTIONAL",
+                "PRICE",
+                "UNIT_INTERVAL",
+                "VOLATILITY",
+            }:
+                raise ValueError("Log requires a non-negative or positive domain")
             if expression.operator in {
                 "RollingZScore",
                 "RobustScale",
                 "VolatilityScale",
+                "NotionalScale",
+                "TradeCountScale",
                 "HistoricalPercentile",
             }:
                 window = int(expression.parameters.get("window", 0))
@@ -223,6 +234,14 @@ class TypedExpressionRegistry:
                 raise ValueError("SafeMul requires at least one dimensionless operand")
             selected = right if left.unit == "dimensionless" else left
             output_type, output_unit = selected.value_type, selected.unit
+        elif expression.operator == "SafeDiv":
+            output_unit = (
+                "dimensionless"
+                if left.unit == right.unit
+                else f"{left.unit}/{right.unit}"
+            )
+        elif expression.operator == "NormalizedDifference":
+            _same_unit(left, right)
         elif expression.operator == "FlowPerTrade":
             if left.value_type not in {"SIGNED_FLOW", "NOTIONAL", "VOLUME"} or right.value_type != "COUNT":
                 raise ValueError("FlowPerTrade requires flow/notional/volume over count")
@@ -243,6 +262,7 @@ class TypedExpressionRegistry:
             output_type, output_unit = left.value_type, left.unit
             gates += 1
         elif expression.operator == "CrossAssetRelative":
+            _same_unit(left, right)
             if right.value_type not in {"RATIO", "UNIT_INTERVAL", "STATE", left.value_type}:
                 raise ValueError("CrossAssetRelative requires comparable market context")
             output_type, output_unit = left.value_type, left.unit
@@ -274,6 +294,19 @@ class TypedExpressionRegistry:
             "value_types": sorted(VALUE_TYPES),
             "normalizers": sorted(NORMALIZERS),
             "binary_operators": sorted(BINARY_OPERATORS),
+            "pit_rules": [
+                "Every rolling operator uses the trailing window ending at t",
+                "No normalizer may estimate scale from future coordinates",
+                "Expression observable lag is the maximum lag of its raw inputs",
+                "Cross-sectional transforms use only the current observable cross-section",
+            ],
+            "operator_contracts": {
+                "Log": "non-negative or positive domain only",
+                "NotionalScale": "trailing window required",
+                "TradeCountScale": "trailing window required",
+                "SafeAdd/SafeSub/NormalizedDifference": "matching units required",
+                "SafeMul": "at least one dimensionless operand required",
+            },
             "fields": [
                 {
                     "field_id": item.field_id,
@@ -338,7 +371,8 @@ def materialize_expression(
                 scale = _rolling_view(left, window, lambda x: np.std(x, axis=1))
                 result = left / np.maximum(scale, epsilon)
             elif node.operator in {"NotionalScale", "TradeCountScale"}:
-                result = left / np.maximum(np.abs(left).mean(axis=1, keepdims=True), epsilon)
+                scale = _rolling_view(left, window, lambda x: np.mean(np.abs(x), axis=1))
+                result = left / np.maximum(scale, epsilon)
             elif node.operator == "HistoricalPercentile":
                 result = _rolling_view(left, window, lambda x: np.mean(x <= x[:, -1:], axis=1))
             elif node.operator == "CrossSectionalRank":
