@@ -1,0 +1,64 @@
+{
+  "id": "crypto-cem-diversity-ab",
+  "required_components": [
+    "cem_diversity_ab_experiment",
+    "real_data_lazy_search_canary",
+    "approved_existing_development_release",
+    "real_data_candidate_authorization",
+    "canonical_primitive_authority",
+    "explicit_portfolio_mapping",
+    "real_data_mapping_cost_evaluator",
+    "adaptive_strict_feasibility_feedback",
+    "sealed_research_boundaries"
+  ],
+  "required_edges": [
+    {
+      "id": "cem_diversity_uses_non_formal_canary",
+      "source": "cem_diversity_ab_experiment",
+      "target": "real_data_lazy_search_canary",
+      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL"
+    },
+    {
+      "id": "canary_loads_approved_development_release",
+      "source": "real_data_lazy_search_canary",
+      "target": "approved_existing_development_release",
+      "relation": "loads_approved_development_release"
+    },
+    {
+      "id": "canary_authorizes_first_visit_candidate",
+      "source": "real_data_lazy_search_canary",
+      "target": "real_data_candidate_authorization",
+      "relation": "authorizes_first_visit_candidate"
+    },
+    {
+      "id": "canary_executes_canonical_primitive",
+      "source": "real_data_lazy_search_canary",
+      "target": "canonical_primitive_authority",
+      "relation": "executes_canonical_primitive"
+    },
+    {
+      "id": "canary_applies_explicit_mapping",
+      "source": "real_data_lazy_search_canary",
+      "target": "explicit_portfolio_mapping",
+      "relation": "applies_explicit_mapping"
+    },
+    {
+      "id": "canary_evaluates_mapped_turnover_cost",
+      "source": "real_data_lazy_search_canary",
+      "target": "real_data_mapping_cost_evaluator",
+      "relation": "evaluates_mapped_turnover_cost"
+    },
+    {
+      "id": "canary_consumes_aligned_visited_feedback",
+      "source": "real_data_lazy_search_canary",
+      "target": "adaptive_strict_feasibility_feedback",
+      "relation": "consumes_aligned_visited_feedback"
+    },
+    {
+      "id": "canary_enforces_sealed_boundaries",
+      "source": "real_data_lazy_search_canary",
+      "target": "sealed_research_boundaries",
+      "relation": "enforces_sealed_boundaries"
+    }
+  ]
+}

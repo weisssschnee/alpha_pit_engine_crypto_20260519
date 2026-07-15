@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "experiment_id": "CRYPTO_CEM_DIVERSITY_AB_20260715",
+  "authorization": "BOUNDED_EXISTING_RELEASE_DEVELOPMENT_CEM_DIVERSITY_AB",
+  "base_canary_config": {
+    "path": "config/crypto_real_data_instrument_canary_v1.json",
+    "sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724"
+  },
+  "baseline": {
+    "closure_sha": "abef0622382d5691274164faff1643404b170640",
+    "source_authority_sha": "e943f14aba1d0c0287f61746567a4ed26d702035",
+    "result_path": "runtime/crypto_real_data_instrument_canary_20260715/CRYPTO_REAL_DATA_INSTRUMENT_CANARY_RESULT.json",
+    "ledger_path": "runtime/crypto_real_data_instrument_canary_20260715/CRYPTO_LAZY_EVALUATION_LEDGER.csv",
+    "algorithm_behavior_path": "runtime/crypto_real_data_instrument_canary_20260715/CRYPTO_ALGORITHM_BEHAVIOR_AUDIT.json",
+    "checkout_artifact_sha256": {
+      "result": "6D4AA17739CA4D8E70D90C5819AA9EF5FC01EC465224662638F4844688C805B5",
+      "ledger": "2ADE0131B17D457A781BCC4E2AAF02F00FE8F6B754729DD020F728C621737C3C",
+      "algorithm_behavior": "E50933FD1B569404DDAB07A8F6EA0C57EBE72528DB71EE68D6CE41440947B05B"
+    },
+    "closure_blob_sha256": {
+      "result": "977227CE4A9C1E7D5BBE34BB49CF35F902AC3F70CBB04957FBC32668EBD32EB5",
+      "ledger": "0E84A2255CEDCE114DF45DC781FD275F3CEEDA74C7A6A074D42D8323576DE16E",
+      "algorithm_behavior": "BBBA43E1BB523EB408F019F4CAB336A2769120B0C07862FE3C925A545B197758"
+    },
+    "cem_lane_behavior_sha256": {
+      "20260715": "10911CDE3A7E55DB1B1798EC3A3E0903DB36942B03140960CF01F8CFB8DFDA1F",
+      "20260716": "05E528043ED89EE5530BB66D0947D9FCE1B1DCAC0FE4A1135E39C4AD034EBE55"
+    },
+    "lanes": [
+      "cem_like:seed=20260715",
+      "cem_like:seed=20260716"
+    ],
+    "observed_global_cache": {
+      "20260715": {
+        "proposals": 128,
+        "first_evaluations": 38,
+        "exact_cache_hits": 90
+      },
+      "20260716": {
+        "proposals": 128,
+        "first_evaluations": 58,
+        "exact_cache_hits": 70
+      }
+    },
+    "matched_policy_local": {
+      "20260715": {
+        "proposals": 128,
+        "unique_candidates": 39,
+        "within_lane_repeats": 89
+      },
+      "20260716": {
+        "proposals": 128,
+        "unique_candidates": 66,
+        "within_lane_repeats": 62
+      },
+      "pooled_unique_candidates": 105,
+      "pooled_proposals": 256
+    }
+  },
+  "challenger": {
+    "policy_name": "cem_diversity_v2",
+    "seeds": [20260715, 20260716],
+    "proposals_per_seed": 128,
+    "fresh_run_cache_per_seed": true,
+    "exploration_probability": 0.2,
+    "duplicate_resample_limit": 16,
+    "feedback_warmup_steps": 8,
+    "branch_draws_per_proposal": 1,
+    "exploration_method": "UNIFORM_GRAMMAR_INDEX_WITHOUT_UNIVERSE_MATERIALIZATION",
+    "maximum_total_proposals": 256,
+    "maximum_strict_evaluator_calls": 256,
+    "prior_conservative_physical_strict_calls": 1728,
+    "maximum_post_experiment_conservative_calls": 1984,
+    "global_hard_cap": 2048,
+    "neutral_feedback": {
+      "applied_from_update_ordinal": 0,
+      "blocked": false,
+      "feasible": false,
+      "violations": ["FIXED_NEUTRAL_POLICY_REPLAY_ONLY"],
+      "distance": 0.0,
+      "sort_key": [1, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "reason": "FIXED_NEUTRAL_POLICY_REPLAY_ONLY"
+    }
+  },
+  "comparison": {
+    "primary_coverage_metric": "POLICY_LOCAL_UNIQUE_PROPOSAL_RATE",
+    "observed_global_cache_first_evaluations_role": "PROVENANCE_ONLY_NOT_PRIMARY_AB_EFFECT",
+    "qualified_requires_observed_and_matched_thresholds": true,
+    "entropy_log_base": "NATURAL",
+    "effective_support_formula": "exp(shannon_entropy)",
+    "distribution_divergence": "JENSEN_SHANNON_NATURAL_LOG_NO_SMOOTHING",
+    "top_feedback_selection": "POOLED_GLOBAL_UNIQUE_CANDIDATES_SORTED_BY_FROZEN_FEEDBACK_SORT_KEY_DESCENDING",
+    "top_feedback_count": 16,
+    "baseline_unique_candidate_top16_median_feedback_distance": -0.9098252298484152,
+    "feedback_distance_noninferiority_floor": -1.0008077528332566,
+    "feedback_distance_noninferiority_formula": "baseline_median - 0.10 * abs(baseline_median)"
+  },
+  "qualification_thresholds": {
+    "per_seed_first_evaluation_rate_improvement_points": 0.15,
+    "pooled_first_evaluation_rate_improvement_points": 0.2,
+    "per_seed_duplicate_rate_relative_reduction": 0.3,
+    "top16_feedback_distance_max_relative_degradation": 0.1,
+    "matched_minimum_unique_candidates": {
+      "20260715": 59,
+      "20260716": 86,
+      "pooled": 157
+    },
+    "maximum_within_lane_repeats": {
+      "20260715": 62,
+      "20260716": 43
+    },
+    "decision_precedence": [
+      "CRYPTO_CEM_DIVERSITY_REPAIR_INVALID",
+      "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED",
+      "CRYPTO_CEM_DIVERSITY_REPAIR_MIXED",
+      "CRYPTO_CEM_DIVERSITY_REPAIR_NO_IMPROVEMENT"
+    ]
+  },
+  "boundaries": {
+    "allowed_data_role": "DEVELOPMENT_TRAIN_ONLY",
+    "sealed_roles": [
+      "VALIDATION",
+      "HOLDOUT",
+      "TEST",
+      "RECENT",
+      "FORWARD",
+      "CHALLENGE",
+      "MAY_STRESS"
+    ],
+    "new_data_integration": false,
+    "formal_performance_search": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "baseline_overwrite": false,
+    "economic_alpha_claim": false
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_cem_diversity_ab_20260715",
+    "report": "reports/CRYPTO_CEM_DIVERSITY_AB_REPORT.md"
+  }
+}
