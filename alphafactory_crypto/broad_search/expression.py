@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import warnings
 from dataclasses import dataclass, field
 from typing import Any, Callable, Mapping, Sequence
 
@@ -22,6 +23,7 @@ VALUE_TYPES = frozenset(
         "VOLUME",
         "NOTIONAL",
         "PRICE",
+        "RETURN",
         "BPS",
         "SIGNED_FLOW",
         "RATIO",
@@ -29,6 +31,7 @@ VALUE_TYPES = frozenset(
         "VOLATILITY",
         "STATE",
         "EVENT",
+        "AGE",
     }
 )
 
@@ -43,6 +46,7 @@ NORMALIZERS = frozenset(
         "NotionalScale",
         "TradeCountScale",
         "HistoricalPercentile",
+        "CrossSectionalRobustZScore",
     }
 )
 
@@ -60,8 +64,12 @@ BINARY_OPERATORS = frozenset(
         "ShortMinusLong",
         "ConditionGate",
         "CrossAssetRelative",
+        "RatioInteraction",
+        "StateModulation",
     }
 )
+
+CONTROL_OPERATORS = frozenset({"SupportMatchedPayload"})
 
 
 @dataclass(frozen=True, slots=True)
@@ -202,7 +210,7 @@ class TypedExpressionRegistry:
                 if window < 2:
                     raise ValueError(f"{expression.operator} requires window >= 2")
                 windows = (*windows, window)
-            if expression.operator == "CrossSectionalRank":
+            if expression.operator in {"CrossSectionalRank", "CrossSectionalRobustZScore"}:
                 cross_asset += 1
             output_type = "RATIO" if expression.operator != "HistoricalPercentile" else "UNIT_INTERVAL"
             return ExpressionAssurance(
@@ -216,11 +224,11 @@ class TypedExpressionRegistry:
                 child.observable_lag_hours,
             )
 
-        if expression.operator not in BINARY_OPERATORS or len(children) != 2:
+        if expression.operator not in BINARY_OPERATORS | CONTROL_OPERATORS or len(children) != 2:
             raise ValueError(f"unsupported or non-binary operator: {expression.operator}")
         left, right = children
         raw_fields = tuple(dict.fromkeys((*left.raw_fields, *right.raw_fields)))
-        windows = tuple(dict.fromkeys((*left.rolling_windows, *right.rolling_windows)))
+        windows = (*left.rolling_windows, *right.rolling_windows)
         cross_asset = left.cross_asset_normalizations + right.cross_asset_normalizations
         gates = left.regime_gates + right.regime_gates
         output_type = "RATIO"
@@ -261,6 +269,18 @@ class TypedExpressionRegistry:
                 raise ValueError("ConditionGate requires state-like second input")
             output_type, output_unit = left.value_type, left.unit
             gates += 1
+        elif expression.operator == "StateModulation":
+            if left.unit != "dimensionless":
+                raise ValueError("StateModulation payload must be normalized")
+            if right.value_type not in {"STATE", "EVENT", "RATIO", "UNIT_INTERVAL", "AGE"}:
+                raise ValueError("StateModulation requires state-like second input")
+            output_type, output_unit = left.value_type, left.unit
+            gates += 1
+        elif expression.operator == "RatioInteraction":
+            if left.unit != "dimensionless" or right.unit != "dimensionless":
+                raise ValueError("RatioInteraction requires dimensionless operands")
+        elif expression.operator == "SupportMatchedPayload":
+            output_type, output_unit = left.value_type, left.unit
         elif expression.operator == "CrossAssetRelative":
             _same_unit(left, right)
             if right.value_type not in {"RATIO", "UNIT_INTERVAL", "STATE", left.value_type}:
@@ -294,6 +314,7 @@ class TypedExpressionRegistry:
             "value_types": sorted(VALUE_TYPES),
             "normalizers": sorted(NORMALIZERS),
             "binary_operators": sorted(BINARY_OPERATORS),
+            "control_operators": sorted(CONTROL_OPERATORS),
             "pit_rules": [
                 "Every rolling operator uses the trailing window ending at t",
                 "No normalizer may estimate scale from future coordinates",
@@ -306,6 +327,7 @@ class TypedExpressionRegistry:
                 "TradeCountScale": "trailing window required",
                 "SafeAdd/SafeSub/NormalizedDifference": "matching units required",
                 "SafeMul": "at least one dimensionless operand required",
+                "SupportMatchedPayload": "control-only; left payload with right input retained in the support contract",
             },
             "fields": [
                 {
@@ -327,10 +349,57 @@ def _rolling_view(values: np.ndarray, window: int, reducer: Callable[[np.ndarray
     return output
 
 
+def _rolling_moments(values: np.ndarray, window: int) -> tuple[np.ndarray, np.ndarray]:
+    """Trailing mean/std with a complete-window requirement and no future reads."""
+
+    finite = np.isfinite(values)
+    safe = np.where(finite, values, 0.0)
+    count = np.pad(np.cumsum(finite, axis=1, dtype=np.int32), ((0, 0), (1, 0)))
+    total = np.pad(np.cumsum(safe, axis=1, dtype=np.float64), ((0, 0), (1, 0)))
+    square = np.pad(np.cumsum(safe * safe, axis=1, dtype=np.float64), ((0, 0), (1, 0)))
+    rolling_count = count[:, window:] - count[:, :-window]
+    rolling_total = total[:, window:] - total[:, :-window]
+    rolling_square = square[:, window:] - square[:, :-window]
+    mean = np.full(values.shape, np.nan, dtype=float)
+    std = np.full(values.shape, np.nan, dtype=float)
+    complete = rolling_count == window
+    local_mean = rolling_total / float(window)
+    local_variance = np.maximum(rolling_square / float(window) - local_mean * local_mean, 0.0)
+    mean[:, window - 1 :] = np.where(complete, local_mean, np.nan)
+    std[:, window - 1 :] = np.where(complete, np.sqrt(local_variance), np.nan)
+    return mean, std
+
+
+def _rolling_robust_scale(values: np.ndarray, window: int) -> tuple[np.ndarray, np.ndarray]:
+    """Trailing median/IQR scale with a complete-window requirement."""
+
+    import pandas as pd
+
+    frame = pd.DataFrame(values.T)
+    rolling = frame.rolling(window=window, min_periods=window)
+    median = rolling.median().to_numpy(dtype=float).T
+    q25 = rolling.quantile(0.25).to_numpy(dtype=float).T
+    q75 = rolling.quantile(0.75).to_numpy(dtype=float).T
+    return median, (q75 - q25) / 1.349
+
+
 def _cross_sectional_rank(values: np.ndarray) -> np.ndarray:
-    order = np.argsort(values, axis=0, kind="mergesort")
-    ranks = np.argsort(order, axis=0, kind="mergesort").astype(float)
-    return ranks / max(1, values.shape[0] - 1)
+    import pandas as pd
+
+    ranks = pd.DataFrame(values).rank(axis=0, method="average", na_option="keep")
+    count = np.isfinite(values).sum(axis=0)
+    denominator = np.maximum(count - 1, 1)
+    return (ranks.to_numpy(dtype=float) - 1.0) / denominator[None, :]
+
+
+def _cross_sectional_robust_zscore(values: np.ndarray, epsilon: float) -> np.ndarray:
+    # An all-ineligible timestamp is a valid dynamic-universe state.  NumPy's
+    # all-NaN warning is therefore expected here and the output remains NaN.
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=RuntimeWarning)
+        median = np.nanmedian(values, axis=0, keepdims=True)
+        mad = np.nanmedian(np.abs(values - median), axis=0, keepdims=True)
+    return (values - median) / np.maximum(1.4826 * mad, epsilon)
 
 
 def materialize_expression(
@@ -338,18 +407,25 @@ def materialize_expression(
     *,
     registry: TypedExpressionRegistry,
     field_reader: Callable[[str], np.ndarray],
+    eligible_mask: np.ndarray | None = None,
+    candidate_cache: dict[str, np.ndarray] | None = None,
     epsilon: float = 1e-12,
 ) -> np.ndarray:
     """Lazily evaluate one validated DAG using only past/current observations."""
 
     registry.validate(expression)
-    cache: dict[str, np.ndarray] = {}
+    cache = candidate_cache if candidate_cache is not None else {}
+    eligible = None if eligible_mask is None else np.asarray(eligible_mask, dtype=bool)
 
     def evaluate(node: Expression) -> np.ndarray:
         if node.expression_id in cache:
             return cache[node.expression_id]
         if node.operator == "Raw":
             result = np.asarray(field_reader(str(node.field_id)), dtype=float)
+            if eligible is not None:
+                if eligible.shape != result.shape:
+                    raise ValueError("eligible mask and raw field shape mismatch")
+                result = np.where(eligible, result, np.nan)
         else:
             children = [evaluate(value) for value in node.inputs]
             left = children[0]
@@ -360,28 +436,36 @@ def materialize_expression(
             elif node.operator == "SignedLog":
                 result = np.sign(left) * np.log1p(np.abs(left))
             elif node.operator == "RollingZScore":
-                mean = _rolling_view(left, window, lambda x: np.mean(x, axis=1))
-                std = _rolling_view(left, window, lambda x: np.std(x, axis=1))
+                mean, std = _rolling_moments(left, window)
                 result = (left - mean) / np.maximum(std, epsilon)
             elif node.operator == "RobustScale":
-                median = _rolling_view(left, window, lambda x: np.median(x, axis=1))
-                mad = _rolling_view(left, window, lambda x: np.median(np.abs(x - np.median(x, axis=1, keepdims=True)), axis=1))
-                result = (left - median) / np.maximum(1.4826 * mad, epsilon)
+                median, scale = _rolling_robust_scale(left, window)
+                result = (left - median) / np.maximum(scale, epsilon)
             elif node.operator == "VolatilityScale":
-                scale = _rolling_view(left, window, lambda x: np.std(x, axis=1))
+                _, scale = _rolling_moments(left, window)
                 result = left / np.maximum(scale, epsilon)
             elif node.operator in {"NotionalScale", "TradeCountScale"}:
-                scale = _rolling_view(left, window, lambda x: np.mean(np.abs(x), axis=1))
+                scale, _ = _rolling_moments(np.abs(left), window)
                 result = left / np.maximum(scale, epsilon)
             elif node.operator == "HistoricalPercentile":
-                result = _rolling_view(left, window, lambda x: np.mean(x <= x[:, -1:], axis=1))
+                import pandas as pd
+
+                result = (
+                    pd.DataFrame(left.T)
+                    .rolling(window=window, min_periods=window)
+                    .rank(method="average", pct=True)
+                    .to_numpy(dtype=float)
+                    .T
+                )
             elif node.operator == "CrossSectionalRank":
                 result = _cross_sectional_rank(left)
+            elif node.operator == "CrossSectionalRobustZScore":
+                result = _cross_sectional_robust_zscore(left, epsilon)
             elif node.operator == "SafeAdd":
                 result = left + right
             elif node.operator in {"SafeSub", "ShortMinusLong"}:
                 result = left - right
-            elif node.operator == "SafeMul":
+            elif node.operator in {"SafeMul", "RatioInteraction", "StateModulation"}:
                 result = left * right
             elif node.operator in {"SafeDiv", "FlowPerTrade", "FlowPerNotional", "PriceImpactRatio"}:
                 result = left / np.where(np.abs(right) > epsilon, right, np.where(right < 0, -epsilon, epsilon))
@@ -394,7 +478,9 @@ def materialize_expression(
                 threshold = float(node.parameters.get("threshold", 0.0))
                 result = np.where(right > threshold, left, 0.0)
             elif node.operator == "CrossAssetRelative":
-                result = left - np.nanmedian(right, axis=0, keepdims=True)
+                result = left - _cross_sectional_robust_zscore(right, epsilon)
+            elif node.operator == "SupportMatchedPayload":
+                result = np.where(np.isfinite(right), left, np.nan)
             else:  # pragma: no cover - validator owns this branch
                 raise ValueError(node.operator)
         if result.ndim != 2:
@@ -413,20 +499,22 @@ def ablate_expression(expression: Expression) -> Expression:
         "PriceImpactRatio",
         "FlowPerTrade",
         "FlowPerNotional",
+        "SafeDiv",
         "SafeMul",
+        "RatioInteraction",
+        "StateModulation",
         "CrossAssetRelative",
         "ConditionGate",
     }:
-        return expression.inputs[0]
-    if expression.operator == "NormalizedDifference":
-        return Expression("SafeSub", expression.inputs)
-    if expression.operator == "Residual":
-        return expression.inputs[0]
+        return Expression("SupportMatchedPayload", expression.inputs)
+    if expression.operator in {"NormalizedDifference", "Residual", "SafeSub", "ShortMinusLong"}:
+        return Expression("SupportMatchedPayload", expression.inputs)
     raise ValueError("expression has no registered matched ablation")
 
 
 __all__ = [
     "BINARY_OPERATORS",
+    "CONTROL_OPERATORS",
     "NORMALIZERS",
     "VALUE_TYPES",
     "Expression",

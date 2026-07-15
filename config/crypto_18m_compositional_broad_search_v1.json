@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "epoch_id": "CRYPTO_18M_COMPOSITIONAL_BROAD_ALPHA_SEARCH_EPOCH1",
+  "branch": "experiment/crypto-18m-compositional-broad-search-20260716",
+  "base_closure_sha": "a115913ae333696482059b497472864871cebc9f",
+  "authorization": "EXPERIMENTAL_BOUNDED_18M_DEVELOPMENT_SEARCH",
+  "train_surface_config": "config/crypto_train_surface_18m_v1.json",
+  "cache_root": ".cache/crypto_18m_compositional_broad_search_v1",
+  "boundaries": {
+    "sealed_reads_allowed": false,
+    "sealed_roles": [
+      "VALIDATION",
+      "TEST",
+      "RECENT",
+      "MAY_STRESS",
+      "FORMAL_CHALLENGE",
+      "FORWARD",
+      "EXECUTION_RECOMMENDATION"
+    ],
+    "development_report_only_is_formal_challenge": false,
+    "formal_performance_search": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "accepted_tag_movement": false,
+    "economic_claim_scope": "DEVELOPMENT_ONLY_OBSERVED_ARCHIVE_CURRENT_SEED"
+  },
+  "dynamic_eligibility": {
+    "minimum_history_hours": 168,
+    "future_survival_filter": false,
+    "future_volume_rank": false,
+    "future_field_coverage": false,
+    "balanced_140_asset_slice_role": "REPORT_ONLY_NOT_PRIMARY"
+  },
+  "expressivity": {
+    "numeric_audit_candidates": 50000,
+    "minimum_distinct_skeletons": 40,
+    "minimum_median_field_arity": 2,
+    "minimum_cross_field_interaction_rate": 0.60,
+    "minimum_exact_unique": 50000,
+    "minimum_behavior_unique_over_exact": 0.30,
+    "minimum_matched_control_valid_rate": 0.90
+  },
+  "budget": {
+    "proposal_attempts": 500000,
+    "minimum_legal_exact_unique": 100000,
+    "minimum_behavior_diverse": 25000,
+    "cost_preflight_pairs": 64,
+    "stage_a_pairs": 4096,
+    "maximum_stage_b_pairs": 4096,
+    "hard_cap_pairs": 8192,
+    "hard_cap_standalone_evaluations": 16384,
+    "hard_cap_incremental_sleeve_evaluations": 8192,
+    "policies": [
+      "canonical_typed_random",
+      "cem_diversity_v2",
+      "uct_ucb_like",
+      "evolutionary"
+    ],
+    "seeds": [20260716, 20260717, 20260718, 20260719],
+    "cem_diversity_v2": {
+      "exploration_probability": 0.20,
+      "duplicate_resample_limit": 16
+    }
+  },
+  "resources": {
+    "max_workers": 2,
+    "maximum_worker_peak_rss_bytes": 2147483648,
+    "maximum_estimated_stage_a_seconds": 28800,
+    "cache_kind": "RAW_INPUT_NUMPY_MEMMAP",
+    "derived_cache": "CANDIDATE_LOCAL_ONLY"
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_18m_compositional_broad_search_20260716",
+    "report": "reports/CRYPTO_18M_COMPOSITIONAL_BROAD_SEARCH_REPORT.md",
+    "failure_report": "reports/CRYPTO_18M_SEARCH_FAILURE_ATTRIBUTION.md"
+  }
+}

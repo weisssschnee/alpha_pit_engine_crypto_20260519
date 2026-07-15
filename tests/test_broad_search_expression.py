@@ -41,7 +41,9 @@ def test_flow_per_notional_is_lazy_and_matched_ablation_removes_interaction() ->
 
     assert calls == ["signed_aggressor_notional", "notional"]
     assert np.allclose(values, [[0.5, -0.5], [0.5, 0.5]])
-    assert ablate_expression(expression) == Expression.raw("signed_aggressor_notional")
+    control = ablate_expression(expression)
+    assert control.operator == "SupportMatchedPayload"
+    assert registry.validate(control).raw_fields == registry.validate(expression).raw_fields
 
 
 def test_data_gate_does_not_promote_six_month_archive() -> None:

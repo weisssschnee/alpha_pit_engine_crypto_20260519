@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from alphafactory_crypto.train_surface import load_symbol_train
+from alphafactory_crypto.train_surface import _apply_temporal_derivations, load_symbol_train
 
 
 RUNTIME_FIELDS = [
@@ -20,6 +20,19 @@ RUNTIME_FIELDS = [
     "trade_close",
     "trade_quote_volume",
 ]
+
+
+def test_oi_change_rebuild_is_trailing_and_segment_independent() -> None:
+    frame = pd.DataFrame(
+        {
+            "timestamp": pd.date_range("2023-12-31 22:00:00", periods=5, freq="1h", tz="UTC"),
+            "source_segment": ["PRE2024_COMPLETE_REPLAY"] * 2 + ["TOP498_V3_TRAIN_2024"] * 3,
+            "open_interest_last": [100.0, 110.0, 121.0, 133.1, 146.41],
+        }
+    )
+    rebuilt = _apply_temporal_derivations(frame, ["open_interest_last_change_1h"])
+    assert pd.isna(rebuilt.loc[0, "open_interest_last_change_1h"])
+    assert rebuilt.loc[1:, "open_interest_last_change_1h"].tolist() == pytest.approx([0.1] * 4)
 
 
 def _base_frame(timestamps: list[str], *, old_names: bool) -> pd.DataFrame:

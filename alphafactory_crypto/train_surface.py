@@ -66,6 +66,12 @@ DERIVED_DEPENDENCIES: dict[str, tuple[str, ...]] = {
         "global_long_short_account_ratio_last",
     ),
     "mark_trade_basis_bps": ("mark_close", "trade_close"),
+    "open_interest_last_change_1h": ("open_interest_last",),
+    "open_interest_last_change_4h": ("open_interest_last",),
+    "open_interest_last_change_24h": ("open_interest_last",),
+    "open_interest_value_last_change_1h": ("open_interest_value_last",),
+    "open_interest_value_last_change_4h": ("open_interest_value_last",),
+    "open_interest_value_last_change_24h": ("open_interest_value_last",),
 }
 
 FORBIDDEN_SOURCE_FEATURES = frozenset(
@@ -158,6 +164,34 @@ def _apply_derivations(frame: pd.DataFrame) -> pd.DataFrame:
             pd.to_numeric(out["top_long_short_account_ratio_last"], errors="coerce")
             - pd.to_numeric(out["global_long_short_account_ratio_last"], errors="coerce")
         )
+    return out
+
+
+def _apply_temporal_derivations(
+    frame: pd.DataFrame, requested: Sequence[str]
+) -> pd.DataFrame:
+    """Rebuild lagged OI changes identically across both physical segments."""
+
+    out = frame.copy()
+    timestamps = _timestamp(out["timestamp"])
+    sources = {
+        "open_interest_last": "open_interest_last_change_{}h",
+        "open_interest_value_last": "open_interest_value_last_change_{}h",
+    }
+    requested_set = set(requested)
+    for source, template in sources.items():
+        if source not in out:
+            continue
+        values = pd.to_numeric(out[source], errors="coerce")
+        for horizon in (1, 4, 24):
+            target = template.format(horizon)
+            if target not in requested_set:
+                continue
+            lagged = values.shift(horizon)
+            lagged_time = timestamps.shift(horizon)
+            contiguous = timestamps.sub(lagged_time).eq(pd.Timedelta(hours=horizon))
+            denominator = lagged.replace(0.0, np.nan)
+            out[target] = ((values / denominator) - 1.0).where(contiguous)
     return out
 
 
@@ -267,6 +301,7 @@ def load_symbol_train(
     forbidden = FORBIDDEN_SOURCE_FEATURES & set(out.columns)
     if forbidden:
         raise PermissionError(f"forbidden source features escaped loader: {sorted(forbidden)}")
+    out = _apply_temporal_derivations(out, requested)
     columns = [column for column in (*IDENTITY_COLUMNS, *requested) if column in out]
     return out.loc[:, columns].reset_index(drop=True)
 
