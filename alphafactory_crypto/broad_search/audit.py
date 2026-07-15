@@ -98,10 +98,11 @@ def _payload_sha(value: Any) -> str:
 
 def _write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        json.dumps(value, indent=2, sort_keys=True, ensure_ascii=True, default=str) + "\n",
-        encoding="utf-8",
-    )
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(
+            json.dumps(value, indent=2, sort_keys=True, ensure_ascii=True, default=str)
+            + "\n"
+        )
 
 
 def _assert_safe_path(path: Path) -> Path:
@@ -676,7 +677,11 @@ def _empty_outputs(runtime_root: Path, data_gate: Mapping[str, Any]) -> None:
     pd.DataFrame(metadata).to_parquet(runtime_root / "CRYPTO_STRICT_PAIR_RESULTS.parquet", index=False)
     pd.DataFrame(metadata).to_parquet(runtime_root / "CRYPTO_ROBUST_STATISTICAL_AUDIT.parquet", index=False)
     with (runtime_root / "CRYPTO_ADMISSION_WATERFALL.csv").open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["stage", "count", "status", "reason"])
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=["stage", "count", "status", "reason"],
+            lineterminator="\n",
+        )
         writer.writeheader()
         for stage in (
             "generated",
@@ -831,18 +836,19 @@ def build_evidence(repo_root: Path, *, config_path: Path, source_sha: str | None
     report_path = repo_root / config["outputs"]["report"]
     failure_path = repo_root / config["outputs"]["failure_report"]
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(_report_text(decision, grammar_audit), encoding="utf-8")
-    failure_path.write_text(
-        "# Crypto Broad Search Failure Attribution\n\n"
-        + "Main status: `CRYPTO_BROAD_SEARCH_DATA_UNIVERSE_BLOCKED`.\n\n"
-        + "| Layer | Classification | Evidence |\n|---|---|---|\n"
-        + "| Time history | TIME_HISTORY_TOO_SHORT | broad=6/18 months; core=6/24 months |\n"
-        + "| Historical eligibility | SURVIVORSHIP_OR_ELIGIBILITY_UNRESOLVED | current-snapshot seed may omit delisted contracts |\n"
-        + "| Order fields | ORDER_FIELD_COVERAGE_FRAGMENTED | native aggTrades is limited to core10 development; broad history is kline aggregates |\n"
-        + "| Representation | COMPOSITIONAL_GRAMMAR_TOO_SHALLOW | current materializer is one-field/one-representation/one-primitive |\n"
-        + "| Search/economics | NOT_RUN | data gate blocked 64-pair preflight and large search |\n",
-        encoding="utf-8",
-    )
+    with report_path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(_report_text(decision, grammar_audit))
+    with failure_path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(
+            "# Crypto Broad Search Failure Attribution\n\n"
+            + "Main status: `CRYPTO_BROAD_SEARCH_DATA_UNIVERSE_BLOCKED`.\n\n"
+            + "| Layer | Classification | Evidence |\n|---|---|---|\n"
+            + "| Time history | TIME_HISTORY_TOO_SHORT | broad=6/18 months; core=6/24 months |\n"
+            + "| Historical eligibility | SURVIVORSHIP_OR_ELIGIBILITY_UNRESOLVED | current-snapshot seed may omit delisted contracts |\n"
+            + "| Order fields | ORDER_FIELD_COVERAGE_FRAGMENTED | native aggTrades is limited to core10 development; broad history is kline aggregates |\n"
+            + "| Representation | COMPOSITIONAL_GRAMMAR_TOO_SHALLOW | current materializer is one-field/one-representation/one-primitive |\n"
+            + "| Search/economics | NOT_RUN | data gate blocked 64-pair preflight and large search |\n"
+        )
 
     artifact_paths = [
         runtime_root / name for name in RUNTIME_OUTPUTS if name != RUNTIME_OUTPUTS[-1]

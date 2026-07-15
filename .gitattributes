@@ -1,0 +1,6 @@
+# Byte-stable evidence produced by the broad compositional qualification.
+runtime/crypto_broad_universe_compositional_search_20260715/*.json text eol=lf
+runtime/crypto_broad_universe_compositional_search_20260715/*.csv text eol=lf
+reports/CRYPTO_BROAD_UNIVERSE_COMPOSITIONAL_SEARCH_REPORT.md text eol=lf
+reports/CRYPTO_BROAD_SEARCH_FAILURE_ATTRIBUTION.md text eol=lf
+config/crypto_broad_universe_compositional_search_epoch1_v1.json text eol=lf
