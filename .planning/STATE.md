@@ -29,7 +29,7 @@ tag:    crypto-frontier-provenance-closure-20260714
 
 `REPOSITORY_PROVENANCE_CLOSURE_COMPLETED` is the committed manifest status. `CRYPTO_FRONTIER_PROVENANCE_CLOSURE_ACCEPTED` is the user-accepted interpretation of the annotated closure tag, whose attestation records Reproducer PASS, Gatekeeper PASS, and base bundle SHA256 `99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2`.
 
-The checked-out repository line is `experiment/crypto-broad-universe-compositional-search-20260715`, created from exact source closure `aae38db148a56a04d843db89caf8e62015148661`. The broad-search qualification source is bound to `8e15d8b93e695dcbb0ed5752c477fd31bb40e31f`; the accepted closure tag remains fixed at `4726795f61052470d56e2d1475e4f6da9d262943`. These lines remain distinct.
+The checked-out repository line is `experiment/crypto-broad-universe-compositional-search-20260715`, created from exact source closure `aae38db148a56a04d843db89caf8e62015148661`. The broad-search qualification source is bound to `76c222b75f569ee54b5215552a20481c5e5f231e`; the byte-stable evidence bundle is committed at `05e5f54b03bba1ca36be70894fca55c6e9a7b9da` with bundle SHA256 `DE44C3B83B7D6A2D3D158D1F8836F922D62EC0F41C8BC3C289F9C0537C14ADD9`. The accepted closure tag remains fixed at `4726795f61052470d56e2d1475e4f6da9d262943`; these lines remain distinct.
 
 ## Source-of-truth order
 

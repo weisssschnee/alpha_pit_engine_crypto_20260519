@@ -205,7 +205,7 @@
       "authority": {
         "path": "docs/adr/0005-broad-universe-compositional-search-epoch1.md",
         "repo_ref": "experiment/crypto-broad-universe-compositional-search-20260715",
-        "verified_sha": "8e15d8b93e695dcbb0ed5752c477fd31bb40e31f"
+        "verified_sha": "76c222b75f569ee54b5215552a20481c5e5f231e"
       },
       "contracts": [
         {
@@ -232,8 +232,8 @@
         "result": "PASS",
         "profile": "crypto-broad-compositional-epoch1",
         "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_CURRENT_GRAMMAR_EXPRESSIVITY_AUDIT.json",
-        "evidence_sha256": "523263584E5AFA2007CEB5C5A81BB28A1C40B56B791045CDFEE25DC0E02A5E36",
-        "verified_at_sha": "8e15d8b93e695dcbb0ed5752c477fd31bb40e31f"
+        "evidence_sha256": "EE008E2370B2A85C0F4CA2A3B44006AE127A281D84EA0D613F7EF2B5CD736252",
+        "verified_at_sha": "05e5f54b03bba1ca36be70894fca55c6e9a7b9da"
       },
       "promotion_requirements": [
         "qualified development data mode",
@@ -776,8 +776,8 @@
         "result": "PASS",
         "profile": "crypto-broad-compositional-epoch1",
         "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_SEARCH_DECISION.json",
-        "evidence_sha256": "A28F5F00C0A2C75B3BAEEBACF0B87281472EBBF4BDAC48E5E4A6DECB7FB2E885",
-        "verified_at_sha": "8e15d8b93e695dcbb0ed5752c477fd31bb40e31f"
+        "evidence_sha256": "3BEEE11C17FC6B52938B4178E447E90CCFAF863480DFB6FEA40E90B5DFED7AD0",
+        "verified_at_sha": "05e5f54b03bba1ca36be70894fca55c6e9a7b9da"
       }
     },
     {
