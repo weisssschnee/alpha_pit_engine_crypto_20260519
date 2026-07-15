@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "run_id": "CRYPTO_CEM_DIVERSITY_CHECKER_ENVIRONMENT_20260715",
+  "repo_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+  "entrypoint": "$env:PYTHONHASHSEED='33'; G:\\PythonProject\\.venv\\Scripts\\python.exe scripts\\crypto_cem_diversity_ab.py check",
+  "profile_id": null,
+  "status": "COMPLETED",
+  "observed_components": [
+    {
+      "component_id": "cem_diversity_ab_experiment",
+      "observation": "offline_evidence_qualification"
+    }
+  ],
+  "observed_edges": [],
+  "loaded_fields": [],
+  "contract_bindings": {},
+  "artifacts": [
+    {
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_ARTIFACT_MANIFEST.json",
+      "sha256": "1BCAC307242E8C07FDB8F9B3CD1355D81864E8AB958A1EE34FD727B7DA22F75F"
+    }
+  ],
+  "errors": [],
+  "qualification_id": "CRYPTO_CEM_DIVERSITY_CHECKER_ENVIRONMENT_20260715",
+  "execution_source_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+  "bundle_sha256": "0AB91D6B9FB3D09AE6AD36BD6DAFB8E1D37ED93FAF80AD91BEFD32AA27F98EFD",
+  "initial_check": {
+    "environment": "default randomized Python hash seed",
+    "result": "FAIL",
+    "only_error": "distribution_semantic_recomputation"
+  },
+  "root_cause": {
+    "field": "cross_seed.baseline.mechanism_distribution_divergence",
+    "persisted": 0.10231469535963182,
+    "recomputed": 0.10231469535963181,
+    "absolute_difference": 1.3877787807814457e-17,
+    "mechanism": "unordered set iteration changes floating-point summation order by one ULP",
+    "decision_relevance": "NONE; JS divergence is diagnostic and does not enter proposal generation, strict evaluation, top-16 noninferiority, or the four-state decision"
+  },
+  "qualified_check": {
+    "environment": {
+      "PYTHONHASHSEED": "33"
+    },
+    "command": "$env:PYTHONHASHSEED='33'; G:\\PythonProject\\.venv\\Scripts\\python.exe scripts\\crypto_cem_diversity_ab.py check",
+    "result": "PASS",
+    "errors": [],
+    "artifact_count": 8
+  },
+  "market_evaluator_rerun": false,
+  "formal_artifacts_mutated": false,
+  "qualification_status": "PASS_WITH_REPRODUCER_ENVIRONMENT_PIN"
+}

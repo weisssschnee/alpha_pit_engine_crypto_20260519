@@ -5,6 +5,40 @@
       "color": "#f9a825",
       "contract": {
         "bypass_forbidden": true,
+        "enforced_by": "instrument_canary.cem_diversity_runner.check_evidence",
+        "evidence_ref": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+        "id": "cem_diversity_non_formal_relation",
+        "rule": "The qualified result proves only improved proposal coverage and retained feedback direction inside the frozen development instrument",
+        "severity": "HARD",
+        "type": "EVIDENCE"
+      },
+      "critical": true,
+      "declared": true,
+      "declared_evidence_type": "RUNTIME",
+      "evidence": "RUNTIME",
+      "forbidden": false,
+      "id": "cem_diversity_uses_non_formal_canary",
+      "lifecycle": "EXPERIMENTAL",
+      "line_style": "solid",
+      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
+      "required": true,
+      "source": "cem_diversity_ab_experiment",
+      "target": "real_data_lazy_search_canary",
+      "validation": {
+        "checked_at": "2026-07-15T12:06:46.905845+00:00",
+        "evidence_ref": "config/crypto_cem_diversity_ab_v1.json",
+        "evidence_sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A",
+        "level": "RUNTIME_VERIFIED",
+        "notes": [],
+        "profile": "crypto-cem-diversity-ab",
+        "result": "PASS",
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
+      }
+    },
+    {
+      "color": "#f9a825",
+      "contract": {
+        "bypass_forbidden": true,
         "enforced_by": "instrument_canary.release.load_development_release",
         "evidence_ref": "runtime/crypto_real_data_instrument_canary_20260715/CRYPTO_REAL_DATA_RELEASE_MANIFEST.json",
         "id": "canary_loads_approved_development_release",
@@ -25,7 +59,7 @@
       "source": "real_data_lazy_search_canary",
       "target": "approved_existing_development_release",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "runtime/crypto_real_data_instrument_canary_20260715/CRYPTO_REAL_DATA_RELEASE_MANIFEST.json",
         "evidence_sha256": "E03F547E38EDBE4F9D860F64FAB8B8156CC480D728C4374B3E0E742AFCF3A0A7",
         "level": "RUNTIME_VERIFIED",
@@ -59,7 +93,7 @@
       "source": "real_data_lazy_search_canary",
       "target": "real_data_candidate_authorization",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "runtime/crypto_real_data_instrument_canary_20260715/CRYPTO_CANDIDATE_AUTHORIZATION_RECEIPTS.jsonl",
         "evidence_sha256": "8E407ADFB74557A1687E8803803209EDF975BFC2C0E96DF53E666737EB2D535B",
         "level": "RUNTIME_ENFORCED",
@@ -93,7 +127,7 @@
       "source": "real_data_lazy_search_canary",
       "target": "canonical_primitive_authority",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "runtime/crypto_real_data_instrument_canary_20260715/CRYPTO_REAL_DATA_CANARY_CONTRACT.json",
         "evidence_sha256": "200A12F216DF55978A086733B9716420A7F8A948BAEDAB281808565D3F2CFF99",
         "level": "RUNTIME_VERIFIED",
@@ -127,7 +161,7 @@
       "source": "real_data_lazy_search_canary",
       "target": "explicit_portfolio_mapping",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "runtime/crypto_real_data_instrument_canary_20260715/CRYPTO_REAL_DATA_CANARY_CONTRACT.json",
         "evidence_sha256": "200A12F216DF55978A086733B9716420A7F8A948BAEDAB281808565D3F2CFF99",
         "level": "RUNTIME_VERIFIED",
@@ -161,7 +195,7 @@
       "source": "real_data_lazy_search_canary",
       "target": "real_data_mapping_cost_evaluator",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "runtime/crypto_real_data_instrument_canary_20260715/CRYPTO_REAL_DATA_MAPPING_COST_ATTRIBUTION.csv",
         "evidence_sha256": "522541636E30FDEE5B6027639C47CA64A872F94A523B368E65866FCFD4F8F649",
         "level": "RUNTIME_ENFORCED",
@@ -195,7 +229,7 @@
       "source": "real_data_lazy_search_canary",
       "target": "adaptive_strict_feasibility_feedback",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "runtime/crypto_real_data_instrument_canary_20260715/CRYPTO_STRICT_FEEDBACK_AUDIT.json",
         "evidence_sha256": "8E0DC266D21188B2E5D44D57E3A82A0296BF3819F13818B0A53166A3F0678217",
         "level": "RUNTIME_VERIFIED",
@@ -229,7 +263,7 @@
       "source": "real_data_lazy_search_canary",
       "target": "sealed_research_boundaries",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "runtime/crypto_real_data_instrument_canary_20260715/CRYPTO_REAL_DATA_CANARY_CONTRACT.json",
         "evidence_sha256": "200A12F216DF55978A086733B9716420A7F8A948BAEDAB281808565D3F2CFF99",
         "level": "RUNTIME_ENFORCED",
@@ -512,7 +546,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-15T08:33:04.236600+00:00",
+  "generated_at": "2026-07-15T12:06:46.905845+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -1151,6 +1185,39 @@
         "candidate promotion decision"
       ],
       "raw_node_ids": [
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_build_evidence",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_cache_reuse_is_completed",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_check_evidence",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_cross_seed_metrics",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_decision",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_distribution",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_distribution_metrics",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_experiment_source_blobs",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_feedback_sensitivity_replay",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_git_sha",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_git_show",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_js_divergence",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_lane_summary",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_load_baseline_binding",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_manifest_payload",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_metadata",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_parse_ledger",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_policy_factory",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_rank_key",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_rationale_1",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_rationale_105",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_read_json",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_recompute_runtime_core",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_report_text",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_run_challenger",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_run_tests",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_sha256_bytes",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_top_ranked",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_top_unique",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_unique_rows",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_validate_experiment_contract",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_windows_checkout_bytes",
         "alphafactory_crypto_instrument_canary_engine",
         "alphafactory_crypto_instrument_canary_engine_cacheentry",
         "alphafactory_crypto_instrument_canary_engine_candidatefeedback",
@@ -1310,6 +1377,22 @@
         "scripts_crypto_real_data_instrument_canary_print",
         "scripts_crypto_real_data_instrument_canary_sha",
         "scripts_crypto_real_data_instrument_canary_sha256",
+        "tests_test_cem_diversity_runner",
+        "tests_test_cem_diversity_runner_config",
+        "tests_test_cem_diversity_runner_feedback",
+        "tests_test_cem_diversity_runner_policy_ledger",
+        "tests_test_cem_diversity_runner_summaries",
+        "tests_test_cem_diversity_runner_test_baseline_is_loaded_from_immutable_closure_with_policy_local_counts",
+        "tests_test_cem_diversity_runner_test_cache_hit_requires_an_earlier_completed_exact_observation",
+        "tests_test_cem_diversity_runner_test_contract_rejects_baseline_and_neutral_feedback_tampering",
+        "tests_test_cem_diversity_runner_test_contract_rejects_preregistered_field_tampering",
+        "tests_test_cem_diversity_runner_test_decision_precedence_is_invalid_then_qualified_mixed_no_improvement",
+        "tests_test_cem_diversity_runner_test_experiment_contract_reuses_exact_frozen_canary",
+        "tests_test_cem_diversity_runner_test_lane_summary_distinguishes_policy_repeats_from_global_cache_hits",
+        "tests_test_cem_diversity_runner_test_neutral_policy_only_replay_starts_at_update_zero_and_diverges_after_warmup",
+        "tests_test_cem_diversity_runner_test_pooled_top16_globally_deduplicates_cross_seed_candidate_identity",
+        "tests_test_cem_diversity_runner_test_runtime_recomputation_fails_closed_on_strict_call_tamper",
+        "tests_test_cem_diversity_runner_test_runtime_recomputation_rejects_truncated_lane_shape",
         "tests_test_instrument_canary_engine",
         "tests_test_instrument_canary_engine_dummyfeedback",
         "tests_test_instrument_canary_engine_dummyreceipt",
@@ -1372,14 +1455,141 @@
       "required": true,
       "semantic_role": "bounded_real_data_lazy_search",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "config/crypto_real_data_instrument_canary_v1.json",
         "evidence_sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724",
         "level": "RUNTIME_VERIFIED",
         "notes": [],
         "profile": "crypto-real-data-instrument-canary",
         "result": "PASS",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
+      },
+      "visible_by_default": true
+    },
+    {
+      "active_authority": false,
+      "authority": {
+        "path": "docs/adr/0004-cem-diversity-ab-experiment.md",
+        "repo_ref": "experiment/crypto-cem-diversity-ab-20260715",
+        "sha256": "353FDFC1B61D6693512E168D6B32FB5C243CA6DE1E2CA94AE7DD611F700BBEAC",
+        "verified_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
+      },
+      "color": "#f9a825",
+      "contracts": [
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "instrument_canary.cem_diversity_runner.validate_experiment_contract",
+          "evidence_ref": "config/crypto_cem_diversity_ab_v1.json",
+          "id": "cem_diversity_development_only",
+          "rule": "This A/B may use only the frozen development release and cannot authorize formal search, sealed-role access, promotion, or cross-sprint memory",
+          "severity": "HARD",
+          "type": "BOUNDARY"
+        }
+      ],
+      "critical": true,
+      "evidence": "RUNTIME",
+      "expires_at": "",
+      "id": "cem_diversity_ab_experiment",
+      "kind": "development_experiment",
+      "label": "CEM Diversity Repair A/B",
+      "lifecycle": "EXPERIMENTAL",
+      "owner": "",
+      "paths": [
+        "alphafactory_crypto/instrument_canary/cem_diversity.py",
+        "alphafactory_crypto/instrument_canary/cem_diversity_runner.py",
+        "scripts/crypto_cem_diversity_ab.py",
+        "config/crypto_cem_diversity_ab_v1.json",
+        "reports/CRYPTO_CEM_DIVERSITY_AB_REPORT.md"
+      ],
+      "promotion_requirements": [
+        "separate explicit authorization",
+        "non-stale OOS evidence",
+        "accepted economic report",
+        "candidate promotion decision"
+      ],
+      "raw_node_ids": [
+        "alphafactory_crypto_instrument_canary_cem_diversity",
+        "alphafactory_crypto_instrument_canary_cem_diversity_cem_diversity_v2",
+        "alphafactory_crypto_instrument_canary_cem_diversity_cemdiversityv2policy",
+        "alphafactory_crypto_instrument_canary_cem_diversity_cemdiversityv2policy_init",
+        "alphafactory_crypto_instrument_canary_cem_diversity_cemdiversityv2policy_proposal_diagnostics",
+        "alphafactory_crypto_instrument_canary_cem_diversity_cemdiversityv2policy_propose",
+        "alphafactory_crypto_instrument_canary_cem_diversity_cemdiversityv2policy_sample_exploitation_genome",
+        "alphafactory_crypto_instrument_canary_cem_diversity_cemdiversityv2policy_sample_exploration_genome",
+        "alphafactory_crypto_instrument_canary_cem_diversity_cemdiversityv2policy_seen_candidate_ids",
+        "alphafactory_crypto_instrument_canary_cem_diversity_cemdiversityv2policy_specific_state_payload",
+        "alphafactory_crypto_instrument_canary_cem_diversity_rationale_1",
+        "alphafactory_crypto_instrument_canary_cem_diversity_rationale_150",
+        "alphafactory_crypto_instrument_canary_cem_diversity_rationale_156",
+        "alphafactory_crypto_instrument_canary_cem_diversity_rationale_176",
+        "alphafactory_crypto_instrument_canary_cem_diversity_rationale_24",
+        "alphafactory_crypto_instrument_canary_cem_diversity_rationale_34",
+        "alphafactory_crypto_instrument_canary_cem_diversity_rationale_39",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_build_evidence",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_cache_reuse_is_completed",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_check_evidence",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_cross_seed_metrics",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_decision",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_distribution",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_distribution_metrics",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_experiment_source_blobs",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_feedback_sensitivity_replay",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_git_sha",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_git_show",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_js_divergence",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_lane_summary",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_load_baseline_binding",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_manifest_payload",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_metadata",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_parse_ledger",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_policy_factory",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_rank_key",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_rationale_1",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_rationale_105",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_read_json",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_recompute_runtime_core",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_report_text",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_run_challenger",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_run_tests",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_sha256_bytes",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_top_ranked",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_top_unique",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_unique_rows",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_validate_experiment_contract",
+        "alphafactory_crypto_instrument_canary_cem_diversity_runner_windows_checkout_bytes",
+        "scripts_crypto_cem_diversity_ab",
+        "scripts_crypto_cem_diversity_ab_load_trace_module",
+        "scripts_crypto_cem_diversity_ab_main",
+        "scripts_crypto_cem_diversity_ab_sha",
+        "tests_test_cem_diversity_runner",
+        "tests_test_cem_diversity_runner_config",
+        "tests_test_cem_diversity_runner_feedback",
+        "tests_test_cem_diversity_runner_policy_ledger",
+        "tests_test_cem_diversity_runner_summaries",
+        "tests_test_cem_diversity_runner_test_baseline_is_loaded_from_immutable_closure_with_policy_local_counts",
+        "tests_test_cem_diversity_runner_test_cache_hit_requires_an_earlier_completed_exact_observation",
+        "tests_test_cem_diversity_runner_test_contract_rejects_baseline_and_neutral_feedback_tampering",
+        "tests_test_cem_diversity_runner_test_contract_rejects_preregistered_field_tampering",
+        "tests_test_cem_diversity_runner_test_decision_precedence_is_invalid_then_qualified_mixed_no_improvement",
+        "tests_test_cem_diversity_runner_test_experiment_contract_reuses_exact_frozen_canary",
+        "tests_test_cem_diversity_runner_test_lane_summary_distinguishes_policy_repeats_from_global_cache_hits",
+        "tests_test_cem_diversity_runner_test_neutral_policy_only_replay_starts_at_update_zero_and_diverges_after_warmup",
+        "tests_test_cem_diversity_runner_test_pooled_top16_globally_deduplicates_cross_seed_candidate_identity",
+        "tests_test_cem_diversity_runner_test_runtime_recomputation_fails_closed_on_strict_call_tamper",
+        "tests_test_cem_diversity_runner_test_runtime_recomputation_rejects_truncated_lane_shape"
+      ],
+      "required": true,
+      "semantic_role": "experimental_non_formal_cem_ab",
+      "validation": {
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
+        "evidence_ref": "config/crypto_cem_diversity_ab_v1.json",
+        "evidence_sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A",
+        "level": "RUNTIME_VERIFIED",
+        "notes": [],
+        "profile": "crypto-cem-diversity-ab",
+        "result": "PASS",
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
       "visible_by_default": true
     },
@@ -1440,14 +1650,14 @@
       "required": true,
       "semantic_role": "development_release_authority",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "config/crypto_real_data_instrument_canary_v1.json",
         "evidence_sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724",
         "level": "RUNTIME_VERIFIED",
         "notes": [],
         "profile": "crypto-real-data-instrument-canary",
         "result": "PASS",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
       "visible_by_default": true
     },
@@ -1532,14 +1742,14 @@
       "required": true,
       "semantic_role": "candidate_admission",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_canary/admission.py",
         "evidence_sha256": "1D87617D00557DD2863240FF00406AC5F005F3014A5D543F3C4009B375E5FEFF",
         "level": "RUNTIME_ENFORCED",
         "notes": [],
         "profile": "crypto-real-data-instrument-canary",
         "result": "PASS",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
       "visible_by_default": true
     },
@@ -1613,14 +1823,14 @@
       "required": true,
       "semantic_role": "mapped_cost_evaluator",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_canary/evaluator.py",
         "evidence_sha256": "83329690EC557AE5D27F748669F7DAECA504B9F3B80468868D01EB7015E0DE53",
         "level": "RUNTIME_ENFORCED",
         "notes": [],
         "profile": "crypto-real-data-instrument-canary",
         "result": "PASS",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
       "visible_by_default": true
     },
@@ -1701,14 +1911,14 @@
       "required": true,
       "semantic_role": "primitive_semantic_authority",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_capability/primitives.py",
         "evidence_sha256": "93EA813FA259F875CE8B221CE9BCD387FAC28AB274B4AA5C9579FBD01E6FB8F8",
         "level": "RUNTIME_VERIFIED",
         "notes": [],
         "profile": "crypto-real-data-instrument-canary",
         "result": "PASS",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
       "visible_by_default": true
     },
@@ -1804,14 +2014,14 @@
       "required": true,
       "semantic_role": "portfolio_mapping_authority",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_capability/mapping.py",
         "evidence_sha256": "EFB7160B46A35DE3798EF1C36ABFC86E017B16283B7E98B522259E5E3F0A2C88",
         "level": "RUNTIME_VERIFIED",
         "notes": [],
         "profile": "crypto-real-data-instrument-canary",
         "result": "PASS",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
       "visible_by_default": true
     },
@@ -1890,14 +2100,14 @@
       "required": true,
       "semantic_role": "adaptive_feedback_authority",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_capability/feedback.py",
         "evidence_sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0",
         "level": "RUNTIME_VERIFIED",
         "notes": [],
         "profile": "crypto-real-data-instrument-canary",
         "result": "PASS",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
       "visible_by_default": true
     },
@@ -2056,23 +2266,23 @@
       "required": true,
       "semantic_role": "evaluation_access_boundary",
       "validation": {
-        "checked_at": "2026-07-15T08:33:04.236600+00:00",
+        "checked_at": "2026-07-15T11:46:29.918054+00:00",
         "evidence_ref": ".planning/STATE.md",
         "evidence_sha256": "ED3007BFE6C05AAE8FABA7F1F6E198D024DAD5109A62E69C1B861EF002B61474",
         "level": "RUNTIME_ENFORCED",
         "notes": [],
         "profile": "crypto-real-data-instrument-canary",
         "result": "PASS",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
       "visible_by_default": true
     }
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "9AE5FE2FE00B9B2B8E2528164CCD21CF2ACF9FFC7C92A0372221ED30F22E01C6"
+    "sha256": "BEE5AB4807997E8F6457FC438594E27F43E86F72597E016BF6B5BF1F1ADBF432"
   },
-  "profile_id": "crypto-real-data-instrument-canary",
+  "profile_id": "crypto-cem-diversity-ab",
   "profiles": [
     {
       "id": "crypto-development-research",
@@ -2088,30 +2298,35 @@
       "id": "crypto-real-data-instrument-canary",
       "path": "profiles/crypto-real-data-instrument-canary.json",
       "sha256": "B125FCE247AD0F0E880312012D8DFFFAFD39F1FB6F25303B7AB73F990BC224EC"
+    },
+    {
+      "id": "crypto-cem-diversity-ab",
+      "path": "profiles/crypto-cem-diversity-ab.json",
+      "sha256": "FC74D3F311583E4874738903159A2E5BE5EEA1E2C0A7FEAC64CD3B867C365D5C"
     }
   ],
   "raw": {
-    "built_at_commit": "e943f14aba1d0c0287f61746567a4ed26d702035",
-    "edge_count": 30917,
-    "node_count": 17144,
+    "built_at_commit": "5066c20234b6a4f778fa3644e09200a38a076114",
+    "edge_count": 31253,
+    "node_count": 17234,
     "path": ".planning/graphs/graph.json",
-    "sha256": "F56167B4861D02404267CD13AAC4AA8D8FCF20CB1A67BCCA5D40D593174F2F47"
+    "sha256": "DF754B6D207235969EE749EF9FA65825DECD9600B1BD478C1B8A57852BF063BD"
   },
-  "repo_head": "e943f14aba1d0c0287f61746567a4ed26d702035",
+  "repo_head": "5066c20234b6a4f778fa3644e09200a38a076114",
   "schema_version": 1,
   "status": "PASS",
   "strict_mode": true,
   "strict_ready": true,
   "summary": {
-    "current_edges": 15,
-    "current_nodes": 16,
+    "current_edges": 16,
+    "current_nodes": 17,
     "errors": 0,
-    "runtime_edges": 7,
-    "runtime_nodes": 8,
+    "runtime_edges": 8,
+    "runtime_nodes": 9,
     "warnings": 0
   },
   "trace": {
-    "path": ".planning/graphs/execution_traces/crypto-real-data-instrument-canary-20260715-e943f14aba1d.json",
-    "repo_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+    "path": ".planning/graphs/execution_traces/crypto-cem-diversity-ab-20260715-5066c20234b6.json",
+    "repo_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
   }
 }

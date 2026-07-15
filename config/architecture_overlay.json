@@ -315,10 +315,55 @@
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": "config/crypto_real_data_instrument_canary_v1.json",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
       "promotion_requirements": [
         "explicit new authorization",
+        "non-stale OOS evidence",
+        "accepted economic report",
+        "candidate promotion decision"
+      ]
+    },
+    {
+      "id": "cem_diversity_ab_experiment",
+      "label": "CEM Diversity Repair A/B",
+      "kind": "development_experiment",
+      "lifecycle": "EXPERIMENTAL",
+      "paths": [
+        "alphafactory_crypto/instrument_canary/cem_diversity.py",
+        "alphafactory_crypto/instrument_canary/cem_diversity_runner.py",
+        "scripts/crypto_cem_diversity_ab.py",
+        "config/crypto_cem_diversity_ab_v1.json",
+        "reports/CRYPTO_CEM_DIVERSITY_AB_REPORT.md"
+      ],
+      "critical": true,
+      "semantic_role": "experimental_non_formal_cem_ab",
+      "active_authority": false,
+      "authority": {
+        "path": "docs/adr/0004-cem-diversity-ab-experiment.md",
+        "repo_ref": "experiment/crypto-cem-diversity-ab-20260715",
+        "verified_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
+      },
+      "contracts": [
+        {
+          "id": "cem_diversity_development_only",
+          "type": "BOUNDARY",
+          "rule": "This A/B may use only the frozen development release and cannot authorize formal search, sealed-role access, promotion, or cross-sprint memory",
+          "severity": "HARD",
+          "enforced_by": "instrument_canary.cem_diversity_runner.validate_experiment_contract",
+          "bypass_forbidden": true,
+          "evidence_ref": "config/crypto_cem_diversity_ab_v1.json"
+        }
+      ],
+      "validation": {
+        "level": "RUNTIME_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-cem-diversity-ab",
+        "evidence_ref": "config/crypto_cem_diversity_ab_v1.json",
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
+      },
+      "promotion_requirements": [
+        "separate explicit authorization",
         "non-stale OOS evidence",
         "accepted economic report",
         "candidate promotion decision"
@@ -357,7 +402,7 @@
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": "config/crypto_real_data_instrument_canary_v1.json",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       }
     },
     {
@@ -393,7 +438,7 @@
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": "alphafactory_crypto/instrument_canary/admission.py",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       }
     },
     {
@@ -428,7 +473,7 @@
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": "alphafactory_crypto/instrument_canary/evaluator.py",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       }
     },
     {
@@ -464,7 +509,7 @@
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": "alphafactory_crypto/instrument_capability/primitives.py",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       }
     },
     {
@@ -501,7 +546,7 @@
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": "alphafactory_crypto/instrument_capability/mapping.py",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       }
     },
     {
@@ -538,7 +583,7 @@
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": "alphafactory_crypto/instrument_capability/feedback.py",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       }
     },
     {
@@ -648,11 +693,36 @@
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": ".planning/STATE.md",
-        "verified_at_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       }
     }
   ],
   "edges": [
+    {
+      "id": "cem_diversity_uses_non_formal_canary",
+      "source": "cem_diversity_ab_experiment",
+      "target": "real_data_lazy_search_canary",
+      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
+      "lifecycle": "EXPERIMENTAL",
+      "critical": true,
+      "evidence_type": "RUNTIME",
+      "contract": {
+        "id": "cem_diversity_non_formal_relation",
+        "type": "EVIDENCE",
+        "rule": "The qualified result proves only improved proposal coverage and retained feedback direction inside the frozen development instrument",
+        "severity": "HARD",
+        "enforced_by": "instrument_canary.cem_diversity_runner.check_evidence",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json"
+      },
+      "validation": {
+        "level": "RUNTIME_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-cem-diversity-ab",
+        "evidence_ref": "config/crypto_cem_diversity_ab_v1.json",
+        "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
+      }
+    },
     {
       "id": "canary_loads_approved_development_release",
       "source": "real_data_lazy_search_canary",
@@ -1034,7 +1104,8 @@
   "profile_refs": [
     "profiles/crypto-development-research.json",
     "profiles/evidence-boundary-change.json",
-    "profiles/crypto-real-data-instrument-canary.json"
+    "profiles/crypto-real-data-instrument-canary.json",
+    "profiles/crypto-cem-diversity-ab.json"
   ],
   "semantic_authorities": [
     {"semantic_role": "research_decision_authority", "authoritative_component": "accepted_frontier_closure"},

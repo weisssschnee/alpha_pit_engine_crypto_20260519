@@ -1,0 +1,385 @@
+{
+  "cross_seed": {
+    "baseline": {
+      "candidate_set_jaccard": 0.0,
+      "first_evaluation_rate_stability_absolute_difference": 0.2109375,
+      "mechanism_distribution_divergence": 0.10231469535963182,
+      "primitive_distribution_divergence": 0.08447867226089237
+    },
+    "challenger": {
+      "candidate_set_jaccard": 0.05785123966942149,
+      "first_evaluation_rate_stability_absolute_difference": 0.0,
+      "mechanism_distribution_divergence": 0.06533176425939233,
+      "primitive_distribution_divergence": 0.05293217348893815
+    }
+  },
+  "data_role": "DEVELOPMENT_TRAIN_ONLY",
+  "lanes": {
+    "baseline:20260715": {
+      "field_representation": {
+        "counts": {
+          "buy_notional|identity": 1,
+          "large_notional_ratio_100k_plus|identity": 70,
+          "large_notional_ratio_100k_plus|logit_clip_1e6": 1,
+          "large_trade_count_ratio_100k_plus|identity": 49,
+          "large_trade_count_ratio_100k_plus|logit_clip_1e6": 1,
+          "notional|identity": 1,
+          "price_range_bps|log1p_nonnegative": 1,
+          "sell_agg_trade_count|identity": 2,
+          "sell_quantity|log1p_nonnegative": 1,
+          "underlying_trade_count|log1p_nonnegative": 1
+        },
+        "effective_support_size": 2.79537578296342,
+        "entropy": 1.0279665458571505,
+        "top_share": 0.546875
+      },
+      "mechanism_family": {
+        "counts": {
+          "CROSS_SECTIONAL_RELATIVE": 22,
+          "DIRECTIONAL_STATEFUL": 102,
+          "SPARSE_EVENT_CARRY": 4
+        },
+        "effective_support_size": 1.8074381083319138,
+        "entropy": 0.5919104328777565,
+        "top_share": 0.796875
+      },
+      "parameter_tuple": {
+        "counts": {
+          "12||": 3,
+          "12||0.0": 27,
+          "24|48|": 1,
+          "24||": 4,
+          "24||0.0": 58,
+          "2||": 3,
+          "2||0.0": 2,
+          "4||0.0": 1,
+          "8||0.0": 2,
+          "||0.0": 27
+        },
+        "effective_support_size": 4.505193523869659,
+        "entropy": 1.5052308477113823,
+        "top_share": 0.453125
+      },
+      "primitive": {
+        "counts": {
+          "Acceleration": 2,
+          "Delta": 4,
+          "Duration": 1,
+          "EventWindow": 89,
+          "FirstHit": 5,
+          "LastHit": 1,
+          "MultiScaleRelation": 1,
+          "Persistence": 1,
+          "Slope": 4,
+          "StateAge": 10,
+          "TimeSince": 7,
+          "Transition": 3
+        },
+        "effective_support_size": 3.5205866941199617,
+        "entropy": 1.2586276501872584,
+        "top_share": 0.6953125
+      },
+      "target_horizon": {
+        "counts": {
+          "1": 4,
+          "4": 124
+        },
+        "effective_support_size": 1.1491939670970752,
+        "entropy": 0.13906079845474112,
+        "top_share": 0.96875
+      },
+      "top_exact_candidate_share": 0.3515625,
+      "unique_grammar_cells": 39
+    },
+    "baseline:20260716": {
+      "field_representation": {
+        "counts": {
+          "buy_quantity|log1p_nonnegative": 1,
+          "buy_vwap|identity": 1,
+          "large_trade_count_ratio_100k_plus|identity": 1,
+          "price_range_bps|identity": 2,
+          "price_range_bps|log1p_nonnegative": 5,
+          "quantity|identity": 1,
+          "sell_notional|log1p_nonnegative": 1,
+          "signed_aggressor_notional|identity": 7,
+          "signed_aggressor_notional|signed_log1p_abs": 31,
+          "signed_aggressor_quantity|identity": 25,
+          "signed_aggressor_quantity|signed_log1p_abs": 52,
+          "volume_imbalance|atanh_clip_0_999": 1
+        },
+        "effective_support_size": 4.984663946426705,
+        "entropy": 1.6063659881879269,
+        "top_share": 0.40625
+      },
+      "mechanism_family": {
+        "counts": {
+          "CROSS_SECTIONAL_RELATIVE": 11,
+          "DIRECTIONAL_STATEFUL": 70,
+          "SPARSE_EVENT_CARRY": 47
+        },
+        "effective_support_size": 2.4814404816124296,
+        "entropy": 0.9088392309148521,
+        "top_share": 0.546875
+      },
+      "parameter_tuple": {
+        "counts": {
+          "12||0.0": 3,
+          "24||": 4,
+          "24||0.0": 29,
+          "2||": 2,
+          "2||0.0": 11,
+          "4||0.0": 1,
+          "8|12|": 1,
+          "8||": 6,
+          "8||0.0": 57,
+          "||0.0": 14
+        },
+        "effective_support_size": 5.104387378382575,
+        "entropy": 1.6301004401809853,
+        "top_share": 0.4453125
+      },
+      "primitive": {
+        "counts": {
+          "Acceleration": 2,
+          "Delta": 2,
+          "Duration": 2,
+          "EventWindow": 80,
+          "FirstHit": 5,
+          "LastHit": 1,
+          "MultiScaleRelation": 1,
+          "PathShape": 6,
+          "Persistence": 21,
+          "Slope": 2,
+          "StateAge": 1,
+          "TimeSince": 3,
+          "Transition": 2
+        },
+        "effective_support_size": 4.002877238789414,
+        "entropy": 1.3870134122380153,
+        "top_share": 0.625
+      },
+      "target_horizon": {
+        "counts": {
+          "1": 10,
+          "4": 118
+        },
+        "effective_support_size": 1.3154330346667444,
+        "entropy": 0.27416591535017265,
+        "top_share": 0.921875
+      },
+      "top_exact_candidate_share": 0.109375,
+      "unique_grammar_cells": 66
+    },
+    "challenger:20260715": {
+      "field_representation": {
+        "counts": {
+          "buy_agg_trade_count|identity": 3,
+          "buy_quantity|identity": 1,
+          "buy_sell_notional_ratio|identity": 1,
+          "buy_sell_notional_ratio|log1p_nonnegative": 2,
+          "buy_vwap|identity": 11,
+          "buy_vwap|log_positive": 21,
+          "large_notional_ratio_100k_plus|identity": 1,
+          "large_trade_count_ratio_100k_plus|identity": 2,
+          "notional|identity": 1,
+          "notional|log1p_nonnegative": 2,
+          "price_range_bps|log1p_nonnegative": 1,
+          "sell_agg_trade_count|identity": 2,
+          "sell_notional|identity": 1,
+          "sell_notional|log1p_nonnegative": 1,
+          "sell_quantity|identity": 1,
+          "sell_quantity|log1p_nonnegative": 1,
+          "sell_vwap|identity": 17,
+          "sell_vwap|log_positive": 19,
+          "signed_aggressor_notional|identity": 1,
+          "signed_aggressor_notional|signed_log1p_abs": 1,
+          "signed_aggressor_quantity|signed_log1p_abs": 1,
+          "underlying_trade_count|identity": 2,
+          "underlying_trade_count|log1p_nonnegative": 2,
+          "volume_imbalance|atanh_clip_0_999": 1,
+          "vwap|identity": 11,
+          "vwap|log_positive": 21
+        },
+        "effective_support_size": 12.63948326701275,
+        "entropy": 2.536825507108762,
+        "top_share": 0.1640625
+      },
+      "mechanism_family": {
+        "counts": {
+          "CROSS_SECTIONAL_RELATIVE": 45,
+          "DIRECTIONAL_STATEFUL": 72,
+          "SPARSE_EVENT_CARRY": 11
+        },
+        "effective_support_size": 2.4646668972627825,
+        "entropy": 0.9020566654070981,
+        "top_share": 0.5625
+      },
+      "parameter_tuple": {
+        "counts": {
+          "12|24|None": 1,
+          "12|48|None": 1,
+          "12|None|0.0": 9,
+          "12|None|None": 9,
+          "24|48|None": 1,
+          "24|None|0.0": 2,
+          "24|None|None": 3,
+          "2|12|None": 1,
+          "2|48|None": 1,
+          "2|None|0.0": 15,
+          "2|None|None": 3,
+          "4|24|None": 3,
+          "4|8|None": 1,
+          "4|None|0.0": 18,
+          "4|None|None": 5,
+          "8|24|None": 1,
+          "8|48|None": 1,
+          "8|None|0.0": 2,
+          "8|None|None": 3,
+          "None|None|0.0": 48
+        },
+        "effective_support_size": 8.846417699313767,
+        "entropy": 2.1800125973358484,
+        "top_share": 0.375
+      },
+      "primitive": {
+        "counts": {
+          "Acceleration": 3,
+          "Delta": 8,
+          "Duration": 14,
+          "EventWindow": 8,
+          "FirstHit": 5,
+          "LastHit": 7,
+          "MultiScaleRelation": 11,
+          "PathShape": 5,
+          "Persistence": 38,
+          "Slope": 7,
+          "StateAge": 4,
+          "TimeSince": 11,
+          "Transition": 7
+        },
+        "effective_support_size": 9.947764868089138,
+        "entropy": 2.2973478895630213,
+        "top_share": 0.296875
+      },
+      "target_horizon": {
+        "counts": {
+          "1": 27,
+          "4": 101
+        },
+        "effective_support_size": 1.6739668050924115,
+        "entropy": 0.5151961421767727,
+        "top_share": 0.7890625
+      },
+      "top_exact_candidate_share": 0.0078125,
+      "unique_grammar_cells": 128
+    },
+    "challenger:20260716": {
+      "field_representation": {
+        "counts": {
+          "buy_agg_trade_count|log1p_nonnegative": 2,
+          "buy_quantity|log1p_nonnegative": 1,
+          "buy_sell_notional_ratio|log1p_nonnegative": 1,
+          "buy_vwap|identity": 3,
+          "buy_vwap|log_positive": 36,
+          "large_notional_ratio_100k_plus|identity": 1,
+          "large_notional_ratio_100k_plus|logit_clip_1e6": 1,
+          "notional|identity": 3,
+          "notional|log1p_nonnegative": 1,
+          "price_range_bps|identity": 2,
+          "quantity|identity": 1,
+          "quantity|log1p_nonnegative": 1,
+          "sell_agg_trade_count|identity": 1,
+          "sell_agg_trade_count|log1p_nonnegative": 4,
+          "sell_notional|identity": 1,
+          "sell_quantity|log1p_nonnegative": 2,
+          "sell_vwap|log_positive": 13,
+          "signed_aggressor_notional|signed_log1p_abs": 3,
+          "signed_aggressor_quantity|identity": 1,
+          "signed_aggressor_quantity|signed_log1p_abs": 5,
+          "trade_count|identity": 1,
+          "trade_count|log1p_nonnegative": 1,
+          "underlying_trade_count|log1p_nonnegative": 1,
+          "volume_imbalance|identity": 1,
+          "vwap|identity": 1,
+          "vwap|log_positive": 40
+        },
+        "effective_support_size": 9.161044916885166,
+        "entropy": 2.2149602460758673,
+        "top_share": 0.3125
+      },
+      "mechanism_family": {
+        "counts": {
+          "CROSS_SECTIONAL_RELATIVE": 86,
+          "DIRECTIONAL_STATEFUL": 28,
+          "SPARSE_EVENT_CARRY": 14
+        },
+        "effective_support_size": 2.32030592734992,
+        "entropy": 0.8416990422217969,
+        "top_share": 0.671875
+      },
+      "parameter_tuple": {
+        "counts": {
+          "12|24|None": 1,
+          "12|48|None": 5,
+          "12|None|0.0": 13,
+          "12|None|None": 9,
+          "24|48|None": 1,
+          "24|None|0.0": 10,
+          "24|None|None": 2,
+          "2|12|None": 3,
+          "2|24|None": 1,
+          "2|8|None": 1,
+          "2|None|0.0": 8,
+          "2|None|None": 5,
+          "4|48|None": 1,
+          "4|None|0.0": 2,
+          "4|None|None": 4,
+          "8|12|None": 2,
+          "8|48|None": 3,
+          "8|None|0.0": 5,
+          "8|None|None": 5,
+          "None|None|0.0": 47
+        },
+        "effective_support_size": 10.326046759125855,
+        "entropy": 2.334669514737526,
+        "top_share": 0.3671875
+      },
+      "primitive": {
+        "counts": {
+          "Acceleration": 8,
+          "Delta": 2,
+          "Duration": 8,
+          "EventWindow": 10,
+          "FirstHit": 6,
+          "LastHit": 13,
+          "MultiScaleRelation": 18,
+          "PathShape": 2,
+          "Persistence": 28,
+          "Slope": 13,
+          "StateAge": 13,
+          "TimeSince": 3,
+          "Transition": 4
+        },
+        "effective_support_size": 10.181825727596971,
+        "entropy": 2.3206043395997233,
+        "top_share": 0.21875
+      },
+      "target_horizon": {
+        "counts": {
+          "1": 72,
+          "4": 56
+        },
+        "effective_support_size": 1.9843952490181156,
+        "entropy": 0.6853142072764582,
+        "top_share": 0.5625
+      },
+      "top_exact_candidate_share": 0.0078125,
+      "unique_grammar_cells": 128
+    }
+  },
+  "lifecycle": "EXPERIMENTAL",
+  "producer": "alphafactory_crypto.instrument_canary.cem_diversity_runner",
+  "schema_version": 1,
+  "source_code_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+  "status": "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED"
+}

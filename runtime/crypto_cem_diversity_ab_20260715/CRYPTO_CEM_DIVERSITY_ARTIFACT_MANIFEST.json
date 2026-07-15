@@ -1,0 +1,256 @@
+{
+  "artifacts": [
+    {
+      "bytes": 991,
+      "content_sha256": "DDCAC8758EA6562E410D0E746B3E81839F264301BAA7353E61F7A9ECA66AD58D",
+      "data_role": "DEVELOPMENT_TRAIN_ONLY",
+      "lifecycle": "EXPERIMENTAL",
+      "path": "reports/CRYPTO_CEM_DIVERSITY_AB_REPORT.md",
+      "producer": "alphafactory_crypto.instrument_canary.cem_diversity_runner",
+      "source_code_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+      "status": "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED"
+    },
+    {
+      "bytes": 10002,
+      "content_sha256": "7C8BF0C527AA6B93F05EAF84C7DB02D9B6D099CCDB5574B8EA790CC8873B91E9",
+      "data_role": "DEVELOPMENT_TRAIN_ONLY",
+      "lifecycle": "EXPERIMENTAL",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_BASELINE_BINDING.json",
+      "producer": "alphafactory_crypto.instrument_canary.cem_diversity_runner",
+      "source_code_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+      "status": "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED"
+    },
+    {
+      "bytes": 13650,
+      "content_sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB",
+      "data_role": "DEVELOPMENT_TRAIN_ONLY",
+      "lifecycle": "EXPERIMENTAL",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "producer": "alphafactory_crypto.instrument_canary.cem_diversity_runner",
+      "source_code_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+      "status": "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED"
+    },
+    {
+      "bytes": 19506,
+      "content_sha256": "418994B044A2C8AF839E75E64934076A3981A554303DB50A6F8FF096BF738D35",
+      "data_role": "DEVELOPMENT_TRAIN_ONLY",
+      "lifecycle": "EXPERIMENTAL",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_RESULT.json",
+      "producer": "alphafactory_crypto.instrument_canary.cem_diversity_runner",
+      "source_code_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+      "status": "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED"
+    },
+    {
+      "bytes": 12466,
+      "content_sha256": "D8383978A8181E0E10A4599B97C2D1EC5FAB6FE92F5A075F4042F0B59EBE55A1",
+      "data_role": "DEVELOPMENT_TRAIN_ONLY",
+      "lifecycle": "EXPERIMENTAL",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_DISTRIBUTION_METRICS.json",
+      "producer": "alphafactory_crypto.instrument_canary.cem_diversity_runner",
+      "source_code_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+      "status": "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED"
+    },
+    {
+      "bytes": 8474,
+      "content_sha256": "396DF99D4F7C415F29EDEAE5C76784F79235977F2FAE778C38F4302FDC0C24D2",
+      "data_role": "DEVELOPMENT_TRAIN_ONLY",
+      "lifecycle": "EXPERIMENTAL",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_LANE_METRICS.csv",
+      "producer": "alphafactory_crypto.instrument_canary.cem_diversity_runner",
+      "source_code_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+      "status": "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED"
+    },
+    {
+      "bytes": 4559418,
+      "content_sha256": "7DF275E9FFA8DECB73EBA8DACA19A3EF30E668190025C3EFF0CA1E7D7CBD4357",
+      "data_role": "DEVELOPMENT_TRAIN_ONLY",
+      "lifecycle": "EXPERIMENTAL",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_RUNTIME_EVENT_LOG.json",
+      "producer": "alphafactory_crypto.instrument_canary.cem_diversity_runner",
+      "source_code_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+      "status": "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED"
+    },
+    {
+      "bytes": 2225,
+      "content_sha256": "CD2DD8FD6558CA8FFEBB2B4E20E47DC123F60319054225FC500EF2C58F14CA93",
+      "data_role": "DEVELOPMENT_TRAIN_ONLY",
+      "lifecycle": "EXPERIMENTAL",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_FEEDBACK_SENSITIVITY.json",
+      "producer": "alphafactory_crypto.instrument_canary.cem_diversity_runner",
+      "source_code_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+      "status": "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED"
+    }
+  ],
+  "bundle_sha256": "0AB91D6B9FB3D09AE6AD36BD6DAFB8E1D37ED93FAF80AD91BEFD32AA27F98EFD",
+  "data_role": "DEVELOPMENT_TRAIN_ONLY",
+  "lifecycle": "EXPERIMENTAL",
+  "manifest_self_excluded": true,
+  "producer": "alphafactory_crypto.instrument_canary.cem_diversity_runner",
+  "schema_version": 1,
+  "source_blobs": [
+    {
+      "bytes": 7650,
+      "git_blob": "9304c31a5c693f9b95879f8f922dfed710a5d561",
+      "path": "alphafactory_crypto/instrument_capability/feedback.py",
+      "sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0"
+    },
+    {
+      "bytes": 20290,
+      "git_blob": "bbf9ee820e8b7ce4c555db52853fe24e5c70d90c",
+      "path": "alphafactory_crypto/instrument_capability/mapping.py",
+      "sha256": "EFB7160B46A35DE3798EF1C36ABFC86E017B16283B7E98B522259E5E3F0A2C88"
+    },
+    {
+      "bytes": 19029,
+      "git_blob": "1e95af6dff9594d490fddcddf50b060c35cc5408",
+      "path": "alphafactory_crypto/instrument_capability/primitives.py",
+      "sha256": "93EA813FA259F875CE8B221CE9BCD387FAC28AB274B4AA5C9579FBD01E6FB8F8"
+    },
+    {
+      "bytes": 1517,
+      "git_blob": "65682f373d5917396732d9bd7054b0f22d74acdd",
+      "path": "alphafactory_crypto/instrument_canary/__init__.py",
+      "sha256": "55F93EBA5969B72C366A2224D7CA431A3C4DB0F3355724F9A775E52DE5D1E671"
+    },
+    {
+      "bytes": 22906,
+      "git_blob": "9043e11cf034211b2de6afd485aac84a8320ffbd",
+      "path": "alphafactory_crypto/instrument_canary/admission.py",
+      "sha256": "1D87617D00557DD2863240FF00406AC5F005F3014A5D543F3C4009B375E5FEFF"
+    },
+    {
+      "bytes": 6833,
+      "git_blob": "e0c045180559d9bfc7b49d5258a01b16a9a95578",
+      "path": "alphafactory_crypto/instrument_canary/contracts.py",
+      "sha256": "5A154EE76BBFB87AEF1FD77BF2158C41DDE2A16CD4A88860425AF4401A2C5B13"
+    },
+    {
+      "bytes": 18917,
+      "git_blob": "775adfff08af192d1ee41c079b7eea84ad8eb966",
+      "path": "alphafactory_crypto/instrument_canary/engine.py",
+      "sha256": "4B7E0E4CC31505C910FCA4BA2DBE48C7504042F5C47F7853FF416E7C3B8DCF24"
+    },
+    {
+      "bytes": 17452,
+      "git_blob": "0adf5fec6d6a1ca9e8d683c093d0b7c075f93375",
+      "path": "alphafactory_crypto/instrument_canary/evaluator.py",
+      "sha256": "83329690EC557AE5D27F748669F7DAECA504B9F3B80468868D01EB7015E0DE53"
+    },
+    {
+      "bytes": 26634,
+      "git_blob": "c6948f8cac5a3195c8bb57538e041a33a6c11e2a",
+      "path": "alphafactory_crypto/instrument_canary/grammar.py",
+      "sha256": "0EC46865116DE3C1F40C01A7ABCEBD4AFDF51940057974772B1B841516884741"
+    },
+    {
+      "bytes": 17010,
+      "git_blob": "63562ad44af519e1c2b877e2d6f88f35717feb6d",
+      "path": "alphafactory_crypto/instrument_canary/materialize.py",
+      "sha256": "B4F0924C419BFE9C757FFE8DDE30FF5CE83959C0E4C4D0B3A152CF23C80CB581"
+    },
+    {
+      "bytes": 20303,
+      "git_blob": "7695cd070e155ab29bf44a58e504b06f5a52b6d8",
+      "path": "alphafactory_crypto/instrument_canary/policies.py",
+      "sha256": "3FAAC73945755E0BCFDA02A2855510F24FCD2EE6C5DA87CCEE3F9ED8D6A55C78"
+    },
+    {
+      "bytes": 15707,
+      "git_blob": "11d2df2e62b16b206e2e994138612613bfe5b621",
+      "path": "alphafactory_crypto/instrument_canary/release.py",
+      "sha256": "6BA73C078D748FDDF3586C34E00341957DA7443D5A1F7BF1A17456D23B38FE54"
+    },
+    {
+      "bytes": 105690,
+      "git_blob": "882219a230b8b8f19165aa5604d2019460f356ec",
+      "path": "alphafactory_crypto/instrument_canary/runner.py",
+      "sha256": "EF422C54BBA9AFFBADBB638EF5B84D48605AE1CFEFF45D24E651D2EB49B2761D"
+    },
+    {
+      "bytes": 7858,
+      "git_blob": "b5f2e8beb6306fa92fa8659514d67e7a1f7d3a86",
+      "path": "config/crypto_real_data_instrument_canary_v1.json",
+      "sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724"
+    },
+    {
+      "bytes": 5640,
+      "git_blob": "41edae6c0e12a1d243b5104281bf1eab42693313",
+      "path": "docs/adr/0003-bounded-real-data-lazy-search-instrument-canary.md",
+      "sha256": "2FF3073252BAF427D8398502E264ADC754822D09EE6C26D69A47DEAD77F3B12C"
+    },
+    {
+      "bytes": 6021,
+      "git_blob": "dde2206e52868151307054957580495b30f403ef",
+      "path": "scripts/crypto_real_data_instrument_canary.py",
+      "sha256": "E5BCF06E9F002E39B36595A03BEF81B2F12170B740D20DD0FC7C33CFB0BD77FB"
+    },
+    {
+      "bytes": 1925,
+      "git_blob": "3236a13b5b96afe672ce181ba62065810e4cbbe8",
+      "path": "profiles/crypto-real-data-instrument-canary.json",
+      "sha256": "B125FCE247AD0F0E880312012D8DFFFAFD39F1FB6F25303B7AB73F990BC224EC"
+    },
+    {
+      "bytes": 7283,
+      "git_blob": "30f1a69cd60ead6a78b44a9ec8c51033f212433d",
+      "path": "alphafactory_crypto/instrument_canary/cem_diversity.py",
+      "sha256": "F954C53BF76892D1EBA82C09AECB99303C2BBDF424618916304A84FCC931C24A"
+    },
+    {
+      "bytes": 64015,
+      "git_blob": "446da88426fccf4d5c88f96c654c0537fd895e15",
+      "path": "alphafactory_crypto/instrument_canary/cem_diversity_runner.py",
+      "sha256": "4ABEFCF089011365E760069ABC857429CA7D1563D7CBFBC75DA033B3EDDA11CE"
+    },
+    {
+      "bytes": 5393,
+      "git_blob": "9581651bc5dda226413957442b7baaa7c2c35f54",
+      "path": "config/crypto_cem_diversity_ab_v1.json",
+      "sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A"
+    },
+    {
+      "bytes": 3537,
+      "git_blob": "36819302eabeba6d6420638bfdf47f37a11cab16",
+      "path": "docs/adr/0004-cem-diversity-ab-experiment.md",
+      "sha256": "353FDFC1B61D6693512E168D6B32FB5C243CA6DE1E2CA94AE7DD611F700BBEAC"
+    },
+    {
+      "bytes": 2161,
+      "git_blob": "9fef2556f2f7c042c8ce9ba12cab3b105e41da5e",
+      "path": "profiles/crypto-cem-diversity-ab.json",
+      "sha256": "FC74D3F311583E4874738903159A2E5BE5EEA1E2C0A7FEAC64CD3B867C365D5C"
+    },
+    {
+      "bytes": 3914,
+      "git_blob": "e0d1749987546332e090b49a796d3303e50c20af",
+      "path": "scripts/crypto_cem_diversity_ab.py",
+      "sha256": "F07A0856C904D4DC16FD75598C20E7B14E9FD03CF14E9B4A202B2983348E1BCB"
+    },
+    {
+      "bytes": 864,
+      "git_blob": "28badd93c94f99411b801e5cc3b1f780397d732f",
+      "path": ".graphifyignore",
+      "sha256": "35A7D8D536EDA73D6D4692742CECD42355C7A6C79957EE62DE80AE95B4A72E5D"
+    },
+    {
+      "bytes": 8309,
+      "git_blob": "43a15453a6cd0243a5f37f5622dc92d0f03e41d2",
+      "path": "scripts/maintain_crypto_navigation_graph.ps1",
+      "sha256": "8303EA4679AB7CA3AA8AA2F7FDD360F38903062DB0635DF43EF4AAD2504E8843"
+    },
+    {
+      "bytes": 6186,
+      "git_blob": "587590fc0d914ffd13cf9c1bbe423130e9f6b12f",
+      "path": "tests/test_cem_diversity_policy.py",
+      "sha256": "373BAA8A137E2859F4FE7DF973AAE3087239813BB78797566E0AC0DD019D74C5"
+    },
+    {
+      "bytes": 15153,
+      "git_blob": "5ae87d194ee3ecdff40a79fd6de208f87b6e899b",
+      "path": "tests/test_cem_diversity_runner.py",
+      "sha256": "83D6B25047FE3CD13721BF342969D1E1397F98769BA1B0F88972061ACFC19602"
+    }
+  ],
+  "source_code_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+  "status": "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED"
+}

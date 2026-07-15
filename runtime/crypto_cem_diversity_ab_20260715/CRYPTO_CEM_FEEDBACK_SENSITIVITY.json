@@ -1,0 +1,63 @@
+{
+  "data_role": "DEVELOPMENT_TRAIN_ONLY",
+  "lanes": [
+    {
+      "evaluator_calls": 0,
+      "first_difference_proposal_ordinal": 8,
+      "first_warmup_proposals_equal": true,
+      "neutral_final_policy_state_sha256": "BCB6416FC364099EA28F4324189B88E3371690B609F7F87D3303B63897BCDA13",
+      "neutral_transcript_sha256": "63B4FC1BCD67187693B27F28C3D2686DA77C0FAEAC132FD9BF2C87BAE08EE410",
+      "post_warmup_transcript_diverged": true,
+      "real_final_policy_state_sha256": "A68CAAA6E2A21EF4155D0E525469F068B6480BEAC5B04C2D4E501618E29CDE8D",
+      "real_replay_result": "PASS",
+      "real_transcript_sha256": "25F5D2B36DED5E3101325C07984D28BA38B5DF06EFED5E04014E1465B9F06866",
+      "result": "PASS",
+      "seed": 20260715
+    },
+    {
+      "evaluator_calls": 0,
+      "first_difference_proposal_ordinal": 9,
+      "first_warmup_proposals_equal": true,
+      "neutral_final_policy_state_sha256": "0A55F2CAF9586927468891F7B879BF4BC19CF541D9230E36E167E56CDF1EAB05",
+      "neutral_transcript_sha256": "4DB60A31D1006C5DE1E2842554CD3AEF86A66ADF041B1474E272B9D92DC0AB21",
+      "post_warmup_transcript_diverged": true,
+      "real_final_policy_state_sha256": "44FE05B6827479BB2D185FD25B5407C1DA51753477F403D611DCED85527D9377",
+      "real_replay_result": "PASS",
+      "real_transcript_sha256": "60FBF281636438F51D9F663641100439C3D8BF42197D52158DAC995C6A357D54",
+      "result": "PASS",
+      "seed": 20260716
+    }
+  ],
+  "lifecycle": "EXPERIMENTAL",
+  "neutral_feedback": {
+    "applied_from_update_ordinal": 0,
+    "blocked": false,
+    "distance": 0.0,
+    "feasible": false,
+    "reason": "FIXED_NEUTRAL_POLICY_REPLAY_ONLY",
+    "sort_key": [
+      1,
+      0,
+      0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "violations": [
+      "FIXED_NEUTRAL_POLICY_REPLAY_ONLY"
+    ]
+  },
+  "producer": "alphafactory_crypto.instrument_canary.cem_diversity_runner",
+  "result": "PASS",
+  "schema_version": 1,
+  "scope": "POLICY_ONLY_COUNTERFACTUAL_NO_MARKET_DATA",
+  "source_code_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+  "status": "CRYPTO_CEM_DIVERSITY_REPAIR_QUALIFIED"
+}

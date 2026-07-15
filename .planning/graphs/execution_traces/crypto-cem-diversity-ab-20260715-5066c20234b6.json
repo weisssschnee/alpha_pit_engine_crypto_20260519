@@ -1,0 +1,601 @@
+{
+  "artifacts": [
+    {
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_BASELINE_BINDING.json",
+      "producer_component": "cem_diversity_ab_experiment",
+      "recorded_at": "2026-07-15T11:31:23.162739+00:00",
+      "sha256": "7C8BF0C527AA6B93F05EAF84C7DB02D9B6D099CCDB5574B8EA790CC8873B91E9"
+    },
+    {
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "producer_component": "cem_diversity_ab_experiment",
+      "recorded_at": "2026-07-15T11:31:23.165728+00:00",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    {
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_RESULT.json",
+      "producer_component": "cem_diversity_ab_experiment",
+      "recorded_at": "2026-07-15T11:31:23.169729+00:00",
+      "sha256": "418994B044A2C8AF839E75E64934076A3981A554303DB50A6F8FF096BF738D35"
+    },
+    {
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_ARTIFACT_MANIFEST.json",
+      "producer_component": "cem_diversity_ab_experiment",
+      "recorded_at": "2026-07-15T11:31:23.172733+00:00",
+      "sha256": "1BCAC307242E8C07FDB8F9B3CD1355D81864E8AB958A1EE34FD727B7DA22F75F"
+    },
+    {
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_DISTRIBUTION_METRICS.json",
+      "producer_component": "cem_diversity_ab_experiment",
+      "recorded_at": "2026-07-15T11:31:23.175729+00:00",
+      "sha256": "D8383978A8181E0E10A4599B97C2D1EC5FAB6FE92F5A075F4042F0B59EBE55A1"
+    },
+    {
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_LANE_METRICS.csv",
+      "producer_component": "cem_diversity_ab_experiment",
+      "recorded_at": "2026-07-15T11:31:23.181725+00:00",
+      "sha256": "396DF99D4F7C415F29EDEAE5C76784F79235977F2FAE778C38F4302FDC0C24D2"
+    },
+    {
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_RUNTIME_EVENT_LOG.json",
+      "producer_component": "cem_diversity_ab_experiment",
+      "recorded_at": "2026-07-15T11:31:23.191737+00:00",
+      "sha256": "7DF275E9FFA8DECB73EBA8DACA19A3EF30E668190025C3EFF0CA1E7D7CBD4357"
+    },
+    {
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_FEEDBACK_SENSITIVITY.json",
+      "producer_component": "cem_diversity_ab_experiment",
+      "recorded_at": "2026-07-15T11:31:23.195462+00:00",
+      "sha256": "CD2DD8FD6558CA8FFEBB2B4E20E47DC123F60319054225FC500EF2C58F14CA93"
+    },
+    {
+      "path": "reports/CRYPTO_CEM_DIVERSITY_AB_REPORT.md",
+      "producer_component": "cem_diversity_ab_experiment",
+      "recorded_at": "2026-07-15T11:31:23.197455+00:00",
+      "sha256": "DDCAC8758EA6562E410D0E746B3E81839F264301BAA7353E61F7A9ECA66AD58D"
+    }
+  ],
+  "completed_at": "2026-07-15T11:31:23.205458+00:00",
+  "contract_bindings": {
+    "approved_existing_release_only": {
+      "contract_id": "approved_existing_release_only",
+      "path": "config/crypto_real_data_instrument_canary_v1.json",
+      "sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724"
+    },
+    "bounded_existing_release_canary_authority": {
+      "contract_id": "bounded_existing_release_canary_authority",
+      "path": "config/crypto_real_data_instrument_canary_v1.json",
+      "sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724"
+    },
+    "canary_applies_explicit_mapping": {
+      "contract_id": "canary_applies_explicit_mapping",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    "canary_authorizes_first_visit_candidate": {
+      "contract_id": "canary_authorizes_first_visit_candidate",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    "canary_consumes_aligned_visited_feedback": {
+      "contract_id": "canary_consumes_aligned_visited_feedback",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    "canary_enforces_sealed_boundaries": {
+      "contract_id": "canary_enforces_sealed_boundaries",
+      "path": "config/crypto_cem_diversity_ab_v1.json",
+      "sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A"
+    },
+    "canary_evaluates_mapped_turnover_cost": {
+      "contract_id": "canary_evaluates_mapped_turnover_cost",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    "canary_executes_canonical_primitive": {
+      "contract_id": "canary_executes_canonical_primitive",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    "canary_loads_approved_development_release": {
+      "contract_id": "canary_loads_approved_development_release",
+      "path": "config/crypto_real_data_instrument_canary_v1.json",
+      "sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724"
+    },
+    "cem_diversity_development_only": {
+      "contract_id": "cem_diversity_development_only",
+      "path": "config/crypto_cem_diversity_ab_v1.json",
+      "sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A"
+    },
+    "cem_diversity_non_formal_relation": {
+      "contract_id": "cem_diversity_non_formal_relation",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    "explicit_boundary_authority": {
+      "contract_id": "explicit_boundary_authority",
+      "path": "config/crypto_cem_diversity_ab_v1.json",
+      "sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A"
+    },
+    "explicit_mapping_admission": {
+      "contract_id": "explicit_mapping_admission",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    "fail_closed_candidate_authorization": {
+      "contract_id": "fail_closed_candidate_authorization",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    "fixed_full_l1_cost_evaluator": {
+      "contract_id": "fixed_full_l1_cost_evaluator",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    "frozen_mutations": {
+      "contract_id": "frozen_mutations",
+      "path": "config/crypto_cem_diversity_ab_v1.json",
+      "sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A"
+    },
+    "lazy_first_visit_feedback_only": {
+      "contract_id": "lazy_first_visit_feedback_only",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    "sealed_evaluation_roles": {
+      "contract_id": "sealed_evaluation_roles",
+      "path": "config/crypto_cem_diversity_ab_v1.json",
+      "sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A"
+    },
+    "strict_feedback_admission": {
+      "contract_id": "strict_feedback_admission",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    },
+    "unique_active_primitive_semantics": {
+      "contract_id": "unique_active_primitive_semantics",
+      "path": "runtime/crypto_cem_diversity_ab_20260715/CRYPTO_CEM_DIVERSITY_AB_CONTRACT.json",
+      "sha256": "7E5C6C81F5772BE9327B006256908183E7FEB42C61EDED979AB3972643715ABB"
+    }
+  },
+  "entrypoint": "scripts/crypto_cem_diversity_ab.py",
+  "errors": [],
+  "host": "DESKTOP-SR4PA0E",
+  "loaded_fields": [
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "buy_sell_notional_ratio",
+      "observed_at": "2026-07-15T11:29:52.760971+00:00",
+      "representation_id": "log1p_nonnegative",
+      "route_id": "Acceleration"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "notional",
+      "observed_at": "2026-07-15T11:29:53.057364+00:00",
+      "representation_id": "log1p_nonnegative",
+      "route_id": "EventWindow"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "signed_aggressor_quantity",
+      "observed_at": "2026-07-15T11:29:53.315840+00:00",
+      "representation_id": "signed_log1p_abs",
+      "route_id": "MultiScaleRelation"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "underlying_trade_count",
+      "observed_at": "2026-07-15T11:29:53.584204+00:00",
+      "representation_id": "log1p_nonnegative",
+      "route_id": "StateAge"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "buy_vwap",
+      "observed_at": "2026-07-15T11:29:54.314794+00:00",
+      "representation_id": "log_positive",
+      "route_id": "Transition"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "vwap",
+      "observed_at": "2026-07-15T11:29:54.891401+00:00",
+      "representation_id": "identity",
+      "route_id": "MultiScaleRelation"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "sell_vwap",
+      "observed_at": "2026-07-15T11:29:55.113859+00:00",
+      "representation_id": "identity",
+      "route_id": "Duration"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "notional",
+      "observed_at": "2026-07-15T11:29:55.678212+00:00",
+      "representation_id": "identity",
+      "route_id": "Duration"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "sell_vwap",
+      "observed_at": "2026-07-15T11:29:56.473887+00:00",
+      "representation_id": "log_positive",
+      "route_id": "Persistence"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "buy_vwap",
+      "observed_at": "2026-07-15T11:29:56.859217+00:00",
+      "representation_id": "identity",
+      "route_id": "Duration"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "buy_quantity",
+      "observed_at": "2026-07-15T11:29:57.870725+00:00",
+      "representation_id": "identity",
+      "route_id": "FirstHit"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "underlying_trade_count",
+      "observed_at": "2026-07-15T11:29:58.279208+00:00",
+      "representation_id": "identity",
+      "route_id": "Slope"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "vwap",
+      "observed_at": "2026-07-15T11:29:58.508302+00:00",
+      "representation_id": "log_positive",
+      "route_id": "Persistence"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "large_trade_count_ratio_100k_plus",
+      "observed_at": "2026-07-15T11:30:00.471583+00:00",
+      "representation_id": "identity",
+      "route_id": "Duration"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "buy_sell_notional_ratio",
+      "observed_at": "2026-07-15T11:30:06.429158+00:00",
+      "representation_id": "identity",
+      "route_id": "MultiScaleRelation"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "buy_agg_trade_count",
+      "observed_at": "2026-07-15T11:30:09.558539+00:00",
+      "representation_id": "identity",
+      "route_id": "Delta"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "sell_quantity",
+      "observed_at": "2026-07-15T11:30:09.998085+00:00",
+      "representation_id": "log1p_nonnegative",
+      "route_id": "Persistence"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "sell_notional",
+      "observed_at": "2026-07-15T11:30:12.274727+00:00",
+      "representation_id": "identity",
+      "route_id": "Delta"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "sell_agg_trade_count",
+      "observed_at": "2026-07-15T11:30:12.908102+00:00",
+      "representation_id": "identity",
+      "route_id": "MultiScaleRelation"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "signed_aggressor_notional",
+      "observed_at": "2026-07-15T11:30:13.154662+00:00",
+      "representation_id": "identity",
+      "route_id": "Transition"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "volume_imbalance",
+      "observed_at": "2026-07-15T11:30:14.056661+00:00",
+      "representation_id": "atanh_clip_0_999",
+      "route_id": "MultiScaleRelation"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "price_range_bps",
+      "observed_at": "2026-07-15T11:30:22.391199+00:00",
+      "representation_id": "log1p_nonnegative",
+      "route_id": "MultiScaleRelation"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "sell_notional",
+      "observed_at": "2026-07-15T11:30:22.656771+00:00",
+      "representation_id": "log1p_nonnegative",
+      "route_id": "Transition"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "sell_quantity",
+      "observed_at": "2026-07-15T11:30:22.869651+00:00",
+      "representation_id": "identity",
+      "route_id": "EventWindow"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "large_notional_ratio_100k_plus",
+      "observed_at": "2026-07-15T11:30:23.101387+00:00",
+      "representation_id": "identity",
+      "route_id": "Persistence"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "signed_aggressor_notional",
+      "observed_at": "2026-07-15T11:30:33.064581+00:00",
+      "representation_id": "signed_log1p_abs",
+      "route_id": "MultiScaleRelation"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "sell_agg_trade_count",
+      "observed_at": "2026-07-15T11:30:39.474954+00:00",
+      "representation_id": "log1p_nonnegative",
+      "route_id": "StateAge"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "price_range_bps",
+      "observed_at": "2026-07-15T11:30:41.120163+00:00",
+      "representation_id": "identity",
+      "route_id": "FirstHit"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "trade_count",
+      "observed_at": "2026-07-15T11:30:41.621206+00:00",
+      "representation_id": "log1p_nonnegative",
+      "route_id": "FirstHit"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "buy_agg_trade_count",
+      "observed_at": "2026-07-15T11:30:43.857431+00:00",
+      "representation_id": "log1p_nonnegative",
+      "route_id": "Delta"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "signed_aggressor_quantity",
+      "observed_at": "2026-07-15T11:30:45.101693+00:00",
+      "representation_id": "identity",
+      "route_id": "LastHit"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "trade_count",
+      "observed_at": "2026-07-15T11:30:48.339877+00:00",
+      "representation_id": "identity",
+      "route_id": "MultiScaleRelation"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "quantity",
+      "observed_at": "2026-07-15T11:30:57.801904+00:00",
+      "representation_id": "log1p_nonnegative",
+      "route_id": "Persistence"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "large_notional_ratio_100k_plus",
+      "observed_at": "2026-07-15T11:31:01.676633+00:00",
+      "representation_id": "logit_clip_1e6",
+      "route_id": "Persistence"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "buy_quantity",
+      "observed_at": "2026-07-15T11:31:04.130332+00:00",
+      "representation_id": "log1p_nonnegative",
+      "route_id": "StateAge"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "quantity",
+      "observed_at": "2026-07-15T11:31:09.182808+00:00",
+      "representation_id": "identity",
+      "route_id": "Transition"
+    },
+    {
+      "consumer_component": "real_data_lazy_search_canary",
+      "field_id": "volume_imbalance",
+      "observed_at": "2026-07-15T11:31:21.332453+00:00",
+      "representation_id": "identity",
+      "route_id": "Acceleration"
+    }
+  ],
+  "observed_components": [
+    {
+      "component_id": "cem_diversity_ab_experiment",
+      "evidence_produced": true,
+      "function": "build_evidence",
+      "implementation_path": "alphafactory_crypto/instrument_canary/cem_diversity_runner.py",
+      "implementation_sha256": "4ABEFCF089011365E760069ABC857429CA7D1563D7CBFBC75DA033B3EDDA11CE",
+      "observed_at": "2026-07-15T11:29:52.737297+00:00",
+      "semantic_role": "experimental_non_formal_cem_ab"
+    },
+    {
+      "component_id": "real_data_lazy_search_canary",
+      "evidence_produced": true,
+      "function": "LazySearchEngine.run",
+      "implementation_path": "alphafactory_crypto/instrument_canary/engine.py",
+      "implementation_sha256": "4B7E0E4CC31505C910FCA4BA2DBE48C7504042F5C47F7853FF416E7C3B8DCF24",
+      "observed_at": "2026-07-15T11:29:52.739291+00:00",
+      "semantic_role": "bounded_real_data_lazy_search"
+    },
+    {
+      "component_id": "approved_existing_development_release",
+      "evidence_produced": true,
+      "function": "load_development_release",
+      "implementation_path": "alphafactory_crypto/instrument_canary/release.py",
+      "implementation_sha256": "6BA73C078D748FDDF3586C34E00341957DA7443D5A1F7BF1A17456D23B38FE54",
+      "observed_at": "2026-07-15T11:29:52.742289+00:00",
+      "semantic_role": "development_release_authority"
+    },
+    {
+      "component_id": "sealed_research_boundaries",
+      "evidence_produced": true,
+      "function": "validate_experiment_contract",
+      "implementation_path": "alphafactory_crypto/instrument_canary/cem_diversity_runner.py",
+      "implementation_sha256": "4ABEFCF089011365E760069ABC857429CA7D1563D7CBFBC75DA033B3EDDA11CE",
+      "observed_at": "2026-07-15T11:29:52.747297+00:00",
+      "semantic_role": "evaluation_access_boundary"
+    },
+    {
+      "component_id": "real_data_candidate_authorization",
+      "evidence_produced": true,
+      "function": "authorize_candidate",
+      "implementation_path": "alphafactory_crypto/instrument_canary/admission.py",
+      "implementation_sha256": "1D87617D00557DD2863240FF00406AC5F005F3014A5D543F3C4009B375E5FEFF",
+      "observed_at": "2026-07-15T11:29:52.757967+00:00",
+      "semantic_role": "candidate_admission"
+    },
+    {
+      "component_id": "canonical_primitive_authority",
+      "evidence_produced": true,
+      "function": "evaluate_primitive",
+      "implementation_path": "alphafactory_crypto/instrument_capability/primitives.py",
+      "implementation_sha256": "93EA813FA259F875CE8B221CE9BCD387FAC28AB274B4AA5C9579FBD01E6FB8F8",
+      "observed_at": "2026-07-15T11:29:52.774515+00:00",
+      "semantic_role": "primitive_semantic_authority"
+    },
+    {
+      "component_id": "explicit_portfolio_mapping",
+      "evidence_produced": true,
+      "function": "map_portfolio",
+      "implementation_path": "alphafactory_crypto/instrument_capability/mapping.py",
+      "implementation_sha256": "EFB7160B46A35DE3798EF1C36ABFC86E017B16283B7E98B522259E5E3F0A2C88",
+      "observed_at": "2026-07-15T11:29:52.918483+00:00",
+      "semantic_role": "portfolio_mapping_authority"
+    },
+    {
+      "component_id": "real_data_mapping_cost_evaluator",
+      "evidence_produced": true,
+      "function": "evaluate_authorized_materialization",
+      "implementation_path": "alphafactory_crypto/instrument_canary/evaluator.py",
+      "implementation_sha256": "83329690EC557AE5D27F748669F7DAECA504B9F3B80468868D01EB7015E0DE53",
+      "observed_at": "2026-07-15T11:29:53.036834+00:00",
+      "semantic_role": "mapped_cost_evaluator"
+    },
+    {
+      "component_id": "adaptive_strict_feasibility_feedback",
+      "evidence_produced": true,
+      "function": "aligned_feedback",
+      "implementation_path": "alphafactory_crypto/instrument_capability/feedback.py",
+      "implementation_sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0",
+      "observed_at": "2026-07-15T11:29:53.040367+00:00",
+      "semantic_role": "adaptive_feedback_authority"
+    }
+  ],
+  "observed_edges": [
+    {
+      "evidence": {},
+      "observed_at": "2026-07-15T11:29:52.739291+00:00",
+      "relationship": "EXPERIMENTAL_CURRENT_NON_FORMAL",
+      "source": "cem_diversity_ab_experiment",
+      "target": "real_data_lazy_search_canary",
+      "type": "RUNTIME_CALL"
+    },
+    {
+      "evidence": {
+        "release_id": "BINANCE_UM_NATIVE_AGGTRADES_CORE12_2024M01_M10_V1"
+      },
+      "observed_at": "2026-07-15T11:29:52.742289+00:00",
+      "relationship": "loads_approved_development_release",
+      "source": "real_data_lazy_search_canary",
+      "target": "approved_existing_development_release",
+      "type": "RUNTIME_CALL"
+    },
+    {
+      "evidence": {
+        "contract_result": "PASS"
+      },
+      "observed_at": "2026-07-15T11:29:52.747297+00:00",
+      "relationship": "enforces_sealed_boundaries",
+      "source": "real_data_lazy_search_canary",
+      "target": "sealed_research_boundaries",
+      "type": "RUNTIME_CALL"
+    },
+    {
+      "evidence": {
+        "candidate_id": "crypto-candidate:6f1262f1ffc1ffc09c24930836915a0190a951ff13867be88d5bffe2e15e2b2b"
+      },
+      "observed_at": "2026-07-15T11:29:52.757967+00:00",
+      "relationship": "authorizes_first_visit_candidate",
+      "source": "real_data_lazy_search_canary",
+      "target": "real_data_candidate_authorization",
+      "type": "RUNTIME_CALL"
+    },
+    {
+      "evidence": {
+        "candidate_id": "crypto-candidate:6f1262f1ffc1ffc09c24930836915a0190a951ff13867be88d5bffe2e15e2b2b"
+      },
+      "observed_at": "2026-07-15T11:29:52.774515+00:00",
+      "relationship": "executes_canonical_primitive",
+      "source": "real_data_lazy_search_canary",
+      "target": "canonical_primitive_authority",
+      "type": "RUNTIME_CALL"
+    },
+    {
+      "evidence": {
+        "candidate_id": "crypto-candidate:6f1262f1ffc1ffc09c24930836915a0190a951ff13867be88d5bffe2e15e2b2b"
+      },
+      "observed_at": "2026-07-15T11:29:52.918483+00:00",
+      "relationship": "applies_explicit_mapping",
+      "source": "real_data_lazy_search_canary",
+      "target": "explicit_portfolio_mapping",
+      "type": "RUNTIME_CALL"
+    },
+    {
+      "evidence": {
+        "candidate_id": "crypto-candidate:6f1262f1ffc1ffc09c24930836915a0190a951ff13867be88d5bffe2e15e2b2b"
+      },
+      "observed_at": "2026-07-15T11:29:53.036834+00:00",
+      "relationship": "evaluates_mapped_turnover_cost",
+      "source": "real_data_lazy_search_canary",
+      "target": "real_data_mapping_cost_evaluator",
+      "type": "RUNTIME_CALL"
+    },
+    {
+      "evidence": {
+        "candidate_id": "crypto-candidate:6f1262f1ffc1ffc09c24930836915a0190a951ff13867be88d5bffe2e15e2b2b"
+      },
+      "observed_at": "2026-07-15T11:29:53.040367+00:00",
+      "relationship": "consumes_aligned_visited_feedback",
+      "source": "real_data_lazy_search_canary",
+      "target": "adaptive_strict_feasibility_feedback",
+      "type": "RUNTIME_CALL"
+    }
+  ],
+  "profile_id": "crypto-cem-diversity-ab",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "repo_sha": "5066c20234b6a4f778fa3644e09200a38a076114",
+  "run_id": "crypto-cem-diversity-ab-20260715-5066c20234b6",
+  "schema_version": 1,
+  "started_at": "2026-07-15T11:28:48.632796+00:00",
+  "status": "COMPLETED",
+  "tracer_authority": {
+    "runtime_trace_path": "G:\\CodexData\\.codex\\skills\\gsd-graphify-runtime-fidelity\\scripts\\runtime_trace.py",
+    "runtime_trace_sha256": "886E95F2224EC491BCCCC7F349F1B6A83372CF219227E9AAE3F9F9B2A7F680AD",
+    "skill_path": "G:\\CodexData\\.codex\\skills\\gsd-graphify-runtime-fidelity\\SKILL.md",
+    "skill_sha256": "1321FADA1F12CF7C82A92BB194E79E74040C01BE10A0D2521E4A57524AD91919"
+  }
+}
