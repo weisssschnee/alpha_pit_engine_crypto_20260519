@@ -841,6 +841,58 @@
       }
     },
     {
+      "id": "explicit_latent_adaptive_experiment",
+      "label": "Explicit + Latent Adaptive TCN",
+      "kind": "development_experiment",
+      "lifecycle": "EXPERIMENTAL",
+      "paths": [
+        "alphafactory_crypto/latent_adaptive/experiment.py",
+        "config/crypto_explicit_latent_adaptive_v1.json",
+        "runtime/crypto_explicit_latent_adaptive_v1_20260717/decision.json",
+        "reports/crypto_explicit_latent_adaptive_v1_20260717/REPORT.md"
+      ],
+      "critical": true,
+      "semantic_role": "adaptive_latent_challenger_evidence",
+      "active_authority": false,
+      "authority": {
+        "path": "alphafactory_crypto/latent_adaptive/experiment.py",
+        "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
+        "verified_sha": "54615174055edb38b8761fe58b1d62fdc2a520e5"
+      },
+      "contracts": [
+        {
+          "id": "latent_adaptive_only_boundary",
+          "type": "BOUNDARY",
+          "rule": "The fixed five-arm TCN comparison may use only 2023-07-01 through 2024-07-01 adaptive development data and cannot read spent report-only, sealed, forward, challenge, or promotion roles",
+          "severity": "HARD",
+          "enforced_by": "latent_adaptive.prepare_data and experiment split binding",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_explicit_latent_adaptive_v1_20260717/data_and_split_binding.json"
+        },
+        {
+          "id": "latent_negative_claim_scope",
+          "type": "EVIDENCE",
+          "rule": "The qualified result is a non-degenerate adaptive-development negative for these fixed small TCN residual and structured-proxy arms; it is not OOS evidence and does not reject all latent representations",
+          "severity": "HARD",
+          "evidence_ref": "runtime/crypto_explicit_latent_adaptive_v1_20260717/decision.json"
+        }
+      ],
+      "validation": {
+        "level": "RUNTIME_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_explicit_latent_adaptive_v1_20260717/decision.json",
+        "evidence_sha256": "5631C05B492F4FCF839C084B4F86F49BFF64F3B70941F5CACAC2ADF0A318C95F",
+        "verified_at_sha": "54615174055edb38b8761fe58b1d62fdc2a520e5"
+      },
+      "promotion_requirements": [
+        "independent OOS authorization",
+        "non-stale OOS evidence",
+        "accepted economic report",
+        "explicit promotion authorization"
+      ]
+    },
+    {
       "id": "formal_performance_search",
       "label": "Formal Performance Search",
       "kind": "boundary",
@@ -1535,6 +1587,31 @@
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
         "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
+      }
+    },
+    {
+      "id": "latent_adaptive_evaluated_in_development_arena",
+      "source": "explicit_latent_adaptive_experiment",
+      "target": "multi_paradigm_arena",
+      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
+      "lifecycle": "EXPERIMENTAL",
+      "critical": true,
+      "evidence_type": "RUNTIME",
+      "contract": {
+        "id": "latent_common_bridge_scope",
+        "type": "EVIDENCE",
+        "rule": "All five arms use the same t+2 execution, 4h target, zero-net mapping, full-L1 turnover, and 5 bps cost; the result changes only adaptive development evidence",
+        "severity": "HARD",
+        "enforced_by": "latent_adaptive.economic_metrics",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_explicit_latent_adaptive_v1_20260717/experiment_contract.json"
+      },
+      "validation": {
+        "level": "RUNTIME_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_explicit_latent_adaptive_v1_20260717/decision.json",
+        "verified_at_sha": "54615174055edb38b8761fe58b1d62fdc2a520e5"
       }
     },
     {
