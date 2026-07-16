@@ -1,0 +1,9 @@
+{
+  "candidate_id_recorded_for_non_issuance_only": "E35D9F1CC2D69E7E5F8985606315DBE5351FF13241D67A3135821CCF5AAAF751",
+  "classification": "INSUFFICIENT_INDEPENDENT_EVIDENCE",
+  "issued": false,
+  "not_a_specification": true,
+  "promotion": "FORBIDDEN",
+  "reason": "Only LOCALIZED_DEVELOPMENT_INCREMENT_OBSERVED or LEGITIMATE_REGIME_LOCALIZATION may issue an immutable challenger.  Independent evidence requirements were not met.",
+  "schema_version": 1
+}

@@ -1,0 +1,83 @@
+{
+  "artifacts": [
+    {
+      "bytes": 101337,
+      "path": "alphafactory_crypto/broad_search/qualification18m.py",
+      "sha256": "D0B37CA7C291735981F61C343A90CB5445CA97B403B66A39AFBA34230B7B8609"
+    },
+    {
+      "bytes": 2869,
+      "path": "config/crypto_localized_mechanism_qualification_v1.json",
+      "sha256": "02822E9575C870D1E5C57F6BC05674A9B83C625F412F1460D61AE7E19D03C47A"
+    },
+    {
+      "bytes": 3945,
+      "path": "reports/CRYPTO_LOCALIZED_MECHANISM_QUALIFICATION_REPORT.md",
+      "sha256": "69FA92BD24C32B14D11756EBCE0F42BA565C81CC6A50406952190951CE8FDFE7"
+    },
+    {
+      "bytes": 8752,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_ARTIFACT_MANIFEST.json",
+      "sha256": "10BD7DF9DBAAE90F4B1F13CDA5397107CBDC4B3B972A2DE87992F4EB27EF8F16"
+    },
+    {
+      "bytes": 11711,
+      "path": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_CROSS_SEED_MECHANISM_AUDIT.json",
+      "sha256": "132BB41B74863F5FD30CAA6A9A6F9EB274681E9BC63AE605E3ECEBED9BECEF2A"
+    },
+    {
+      "bytes": 408516,
+      "path": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_ECONOMIC_DECOMPOSITION.parquet",
+      "sha256": "C31EDC4BBEFB344BA0BFA05566DA81FEA294B65A16101EB8E9E6CDFC57DF67D3"
+    },
+    {
+      "bytes": 38777,
+      "path": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_IDENTITY_AUDIT.json",
+      "sha256": "CF20900C2E7CE507BB7FBE8BC4D5A10C5F1AEA178EA6ACF582F806DB526C56F4"
+    },
+    {
+      "bytes": 457,
+      "path": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_IMMUTABLE_CHALLENGER_SPECIFICATION.json",
+      "sha256": "FF6E9D23FDF11BFD9D1AF0A63116F227F468DC0DC0168C9613E89D41E5B2C3EE"
+    },
+    {
+      "bytes": 2345,
+      "path": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
+      "sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622"
+    },
+    {
+      "bytes": 2549,
+      "path": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_REPORT_ONLY_INDEPENDENCE_AUDIT.json",
+      "sha256": "60DB6EB335A98D31346F2BF63AFDBE043A0EAFD23C2FB460B4C1ACEC417AB08C"
+    },
+    {
+      "bytes": 12285,
+      "path": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_SELECTION_LINEAGE_AUDIT.json",
+      "sha256": "F93897A7820B8008D7ED6A96DC821D179EB9741EC0EC200FDE22BC464C951538"
+    },
+    {
+      "bytes": 135824,
+      "path": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_STATE_REGIME_ABLATION.json",
+      "sha256": "8D5A33C06E190F9CB588965934E76858D7EDE5AA78D2F84F27FB3DF67AD6FA20"
+    },
+    {
+      "bytes": 1452,
+      "path": "scripts/crypto_localized_mechanism_qualification.py",
+      "sha256": "F1992AE14EA21AC8437121D2DC9289E7B8BB0E7207ED2876B700E6A288BE97A2"
+    },
+    {
+      "bytes": 4660,
+      "path": "tests/test_crypto_localized_mechanism_qualification.py",
+      "sha256": "5243771D3991F4CB6744A22DF71F15A9EFD09F58202E9CDB45456C81A587C66E"
+    }
+  ],
+  "audit_implementation_sha": "859ba537c2a71a14d7540ab343df956ead4c6202",
+  "base_closure_sha": "d1a28a50606d4ee65e23a02e6c136fe73b3e66e2",
+  "bundle_sha256": "0C6193E81FEAB8271B8BAE05AD04604D74494EAB2710794C59A7F42919DD68EB",
+  "decision_producer_sha": "d9295a9d59cb8059046e3ea746eb507355fe57a9",
+  "final_classification": "INSUFFICIENT_INDEPENDENT_EVIDENCE",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_bundle_sha256": "EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492",
+  "task_id": "CRYPTO_LOCALIZED_MECHANISM_EVIDENCE_QUALIFICATION"
+}

@@ -1,0 +1,61 @@
+{
+  "audit_implementation_sha": "859ba537c2a71a14d7540ab343df956ead4c6202",
+  "boundaries": {
+    "CROSS_SPRINT_MEMORY_REMAINS_FORBIDDEN": true,
+    "FORWARD_REMAINS_SEALED": true,
+    "NEW_SEARCH_REMAINS_FROZEN": true,
+    "PROMOTION_REMAINS_FORBIDDEN": true,
+    "STRICT_OOS_REMAINS_NOT_AUTHORIZED": true
+  },
+  "candidate_id": "E35D9F1CC2D69E7E5F8985606315DBE5351FF13241D67A3135821CCF5AAAF751",
+  "cannot_conclude": [
+    "ALPHA_FOUND",
+    "OOS_PASS",
+    "PROMOTION_READY",
+    "formal challenge qualification",
+    "live execution readiness"
+  ],
+  "challenger_frozen": false,
+  "challenger_specification": "NOT_ISSUED",
+  "claim_scope": "authorized 2023-07 through 2024-12 development coordinates only",
+  "decision_producer_sha": "d9295a9d59cb8059046e3ea746eb507355fe57a9",
+  "final_classification": "INSUFFICIENT_INDEPENDENT_EVIDENCE",
+  "qualification": {
+    "accidental_concentration": false,
+    "adaptive_native_net_lcb": 1.307560671168927e-05,
+    "artifact_flags": {
+      "artifact_reproduction_failed": false,
+      "formula_identity_equals_control": false,
+      "matched_occupancy_A_equals_B": false,
+      "portfolio_identity_equals_control_on_any_block": false
+    },
+    "concentration_breaches": {
+      "leave_one_month": false,
+      "leave_top3_assets": false,
+      "top1_asset": false,
+      "top1_month": false,
+      "top3_month": false
+    },
+    "independent_evidence_failures": {
+      "no_independent_mechanism_replication": true,
+      "report_only_candidate_net_lcb_not_positive": true,
+      "report_only_midsearch_visibility_contract_failed": true,
+      "robust_statistic_reuses_adaptive_selection_months": true
+    },
+    "insufficient_independent_evidence": true,
+    "legitimate_regime_localization_evidence": {
+      "A_differs_from_B_portfolio": true,
+      "A_report_only_incremental_mean_positive": true,
+      "A_robust_positive": true,
+      "C_regime_only_robust_positive": true,
+      "G_placebo_not_robust_positive": true
+    },
+    "localized_development_increment_evidence": true,
+    "mapping_or_identity_artifact": false,
+    "report_only_native_net_lcb": -9.706555164731221e-06
+  },
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_bundle_sha256": "EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492",
+  "task_id": "CRYPTO_LOCALIZED_MECHANISM_EVIDENCE_QUALIFICATION"
+}
