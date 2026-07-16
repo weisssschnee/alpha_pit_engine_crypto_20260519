@@ -4,8 +4,10 @@
   "branch": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
   "base_closure_sha": "828f344cbe1131d208e6cd6383bb2ce0cac80dc5",
   "compatible_training_source_shas": [
-    "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    "8a9431d1ba04af5604cd8aa3e2894180b571e952",
+    "153d305752dd9b978184dbe9733f695b4b8ff7f5"
   ],
+  "pretrained_checkpoint_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952",
   "authorization": {
     "adaptive_development_training": true,
     "spent_report_only_access": false,

@@ -1225,18 +1225,21 @@ def run_experiment(
     formal_results: list[Mapping[str, Any]] = []
     checkpoints: dict[tuple[str, int], Path] = {}
     compatible_training_shas = set(config.get("compatible_training_source_shas", []))
+    pretrained_source_sha = config.get("pretrained_checkpoint_source_sha")
     for arm in (ARM_A, ARM_B, ARM_C, ARM_E, ARM_D):
         for seed in config["training"]["seeds"]:
             seed = int(seed)
             checkpoint = checkpoint_root / "formal" / f"{arm}_{seed}.pt"
             known_checkpoint = checkpoints.get((ARM_A, seed)) if arm == ARM_D else None
             diagnostic_path = checkpoint.with_suffix(".json")
+            trained_now = False
             if diagnostic_path.exists() and checkpoint.exists():
                 cached = json.loads(diagnostic_path.read_text(encoding="utf-8"))
                 if (
                     (
                         cached.get("training_source_sha") == source_sha
                         or cached.get("training_source_sha") in compatible_training_shas
+                        or pretrained_source_sha in compatible_training_shas
                     )
                     and cached.get("checkpoint_sha256") == file_sha(checkpoint)
                 ):
@@ -1253,6 +1256,7 @@ def run_experiment(
                         pilot=False,
                         known_checkpoint=known_checkpoint,
                     )
+                    trained_now = True
             else:
                 result = train_model(
                     arm=arm,
@@ -1264,7 +1268,16 @@ def run_experiment(
                     pilot=False,
                     known_checkpoint=known_checkpoint,
                 )
-            result = {**result, "training_source_sha": source_sha}
+                trained_now = True
+            result = {
+                **result,
+                "training_source_sha": (
+                    source_sha
+                    if trained_now
+                    else pretrained_source_sha or result["training_source_sha"]
+                ),
+                "evaluation_source_sha": source_sha,
+            }
             write_json(diagnostic_path, result)
             if result["status"] != "PASS":
                 decision = {

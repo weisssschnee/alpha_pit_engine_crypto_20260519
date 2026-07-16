@@ -136,6 +136,10 @@ def test_budget_is_hard_capped_and_pilots_are_short() -> None:
     assert CONFIG["training"]["pilot_steps"] <= (
         CONFIG["training"]["formal_steps"] * 0.1
     )
+    assert (
+        CONFIG["pretrained_checkpoint_source_sha"]
+        in CONFIG["compatible_training_source_shas"]
+    )
 
 
 def test_cli_supports_non_retraining_formal_stage() -> None:
