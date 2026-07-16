@@ -1,0 +1,32 @@
+{
+  "clusters": [
+    {
+      "adaptive_matched_positive": 0,
+      "candidates": 29,
+      "challenge_matched_positive": 2,
+      "challenge_positive_seeds": [
+        20260716,
+        20260718
+      ],
+      "cluster_id": "DDD0F8DDFB1610762CD67204267658097B0FE508413A64BF29EC6EE60F5A33C1",
+      "cross_seed_reproduced": true,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "skeleton_id": "state_regime_modulation_v4"
+    },
+    {
+      "adaptive_matched_positive": 0,
+      "candidates": 6,
+      "challenge_matched_positive": 3,
+      "challenge_positive_seeds": [
+        20260717,
+        20260719
+      ],
+      "cluster_id": "7332C1CADE575067BB7195F8B1E46F3ECF0C3E6B6556F87135D11EBF5AC9FBF3",
+      "cross_seed_reproduced": true,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "skeleton_id": "state_regime_modulation_v5"
+    }
+  ],
+  "cross_seed_reproduced_clusters": 2,
+  "schema_version": 1
+}

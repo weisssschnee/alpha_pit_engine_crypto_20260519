@@ -1,0 +1,857 @@
+{
+  "mechanism_families": [
+    "OI_PRICE_DIVERGENCE",
+    "OI_ACTIVITY_INTERACTION",
+    "BASIS_PREMIUM_STATE",
+    "TOP_GLOBAL_CROWDING",
+    "ACCOUNT_POSITION_DIVERGENCE",
+    "PRICE_ACTIVITY_RESPONSE",
+    "CROSS_ASSET_RELATIVE_STATE",
+    "STATE_REGIME_MODULATION"
+  ],
+  "schema_version": 1,
+  "skeleton_count": 40,
+  "skeleton_registry_sha256": "7C20B5AB32BACD1070A9CD6543CEBF8CCB62787D036A6AF0F03BC7BEAA28080C",
+  "skeletons": [
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "oi_change",
+        "price_return"
+      ],
+      "field_roles": [
+        "oi_change",
+        "price_return"
+      ],
+      "financial_hypothesis": "Open-interest change unsupported by price response identifies crowded or fragile positioning.",
+      "matched_ablation": "divergence to one component axis",
+      "maximum_depth": 4,
+      "mechanism_family": "OI_PRICE_DIVERGENCE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "NormalizedDifference",
+      "skeleton_id": "oi_price_divergence_v1",
+      "unit_signature": "typed registry validated",
+      "variant": 1,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "oi_change",
+        "price_return"
+      ],
+      "field_roles": [
+        "oi_change",
+        "price_return"
+      ],
+      "financial_hypothesis": "Open-interest change unsupported by price response identifies crowded or fragile positioning.",
+      "matched_ablation": "divergence to one component axis",
+      "maximum_depth": 4,
+      "mechanism_family": "OI_PRICE_DIVERGENCE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeSub",
+      "skeleton_id": "oi_price_divergence_v2",
+      "unit_signature": "typed registry validated",
+      "variant": 2,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "oi_change",
+        "price_return"
+      ],
+      "field_roles": [
+        "oi_change",
+        "price_return"
+      ],
+      "financial_hypothesis": "Open-interest change unsupported by price response identifies crowded or fragile positioning.",
+      "matched_ablation": "divergence to one component axis",
+      "maximum_depth": 4,
+      "mechanism_family": "OI_PRICE_DIVERGENCE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "RatioInteraction",
+      "skeleton_id": "oi_price_divergence_v3",
+      "unit_signature": "typed registry validated",
+      "variant": 3,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "oi_change",
+        "price_return"
+      ],
+      "field_roles": [
+        "oi_change",
+        "price_return"
+      ],
+      "financial_hypothesis": "Open-interest change unsupported by price response identifies crowded or fragile positioning.",
+      "matched_ablation": "divergence to one component axis",
+      "maximum_depth": 4,
+      "mechanism_family": "OI_PRICE_DIVERGENCE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "Residual",
+      "skeleton_id": "oi_price_divergence_v4",
+      "unit_signature": "typed registry validated",
+      "variant": 4,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "oi_change",
+        "price_return"
+      ],
+      "field_roles": [
+        "oi_change",
+        "price_return"
+      ],
+      "financial_hypothesis": "Open-interest change unsupported by price response identifies crowded or fragile positioning.",
+      "matched_ablation": "divergence to one component axis",
+      "maximum_depth": 4,
+      "mechanism_family": "OI_PRICE_DIVERGENCE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeMul",
+      "skeleton_id": "oi_price_divergence_v5",
+      "unit_signature": "typed registry validated",
+      "variant": 5,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "oi",
+        "activity"
+      ],
+      "field_roles": [
+        "oi",
+        "activity"
+      ],
+      "financial_hypothesis": "Open-interest state has different meaning when participation or quote activity changes.",
+      "matched_ablation": "interaction to single-axis payload",
+      "maximum_depth": 4,
+      "mechanism_family": "OI_ACTIVITY_INTERACTION",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeMul",
+      "skeleton_id": "oi_activity_interaction_v1",
+      "unit_signature": "typed registry validated",
+      "variant": 1,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "oi",
+        "activity"
+      ],
+      "field_roles": [
+        "oi",
+        "activity"
+      ],
+      "financial_hypothesis": "Open-interest state has different meaning when participation or quote activity changes.",
+      "matched_ablation": "interaction to single-axis payload",
+      "maximum_depth": 4,
+      "mechanism_family": "OI_ACTIVITY_INTERACTION",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeDiv",
+      "skeleton_id": "oi_activity_interaction_v2",
+      "unit_signature": "typed registry validated",
+      "variant": 2,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "oi",
+        "activity"
+      ],
+      "field_roles": [
+        "oi",
+        "activity"
+      ],
+      "financial_hypothesis": "Open-interest state has different meaning when participation or quote activity changes.",
+      "matched_ablation": "interaction to single-axis payload",
+      "maximum_depth": 4,
+      "mechanism_family": "OI_ACTIVITY_INTERACTION",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "RatioInteraction",
+      "skeleton_id": "oi_activity_interaction_v3",
+      "unit_signature": "typed registry validated",
+      "variant": 3,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "oi",
+        "activity"
+      ],
+      "field_roles": [
+        "oi",
+        "activity"
+      ],
+      "financial_hypothesis": "Open-interest state has different meaning when participation or quote activity changes.",
+      "matched_ablation": "interaction to single-axis payload",
+      "maximum_depth": 4,
+      "mechanism_family": "OI_ACTIVITY_INTERACTION",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "NormalizedDifference",
+      "skeleton_id": "oi_activity_interaction_v4",
+      "unit_signature": "typed registry validated",
+      "variant": 4,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "oi",
+        "activity"
+      ],
+      "field_roles": [
+        "oi",
+        "activity"
+      ],
+      "financial_hypothesis": "Open-interest state has different meaning when participation or quote activity changes.",
+      "matched_ablation": "interaction to single-axis payload",
+      "maximum_depth": 4,
+      "mechanism_family": "OI_ACTIVITY_INTERACTION",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "Residual",
+      "skeleton_id": "oi_activity_interaction_v5",
+      "unit_signature": "typed registry validated",
+      "variant": 5,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "basis",
+        "price_return"
+      ],
+      "field_roles": [
+        "basis",
+        "price_return"
+      ],
+      "financial_hypothesis": "Persistent or transitioning basis changes the interpretation of subsequent price response.",
+      "matched_ablation": "basis relation to one component axis",
+      "maximum_depth": 4,
+      "mechanism_family": "BASIS_PREMIUM_STATE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "StateModulation",
+      "skeleton_id": "basis_premium_state_v1",
+      "unit_signature": "typed registry validated",
+      "variant": 1,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "basis",
+        "price_return"
+      ],
+      "field_roles": [
+        "basis",
+        "price_return"
+      ],
+      "financial_hypothesis": "Persistent or transitioning basis changes the interpretation of subsequent price response.",
+      "matched_ablation": "basis relation to one component axis",
+      "maximum_depth": 4,
+      "mechanism_family": "BASIS_PREMIUM_STATE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeMul",
+      "skeleton_id": "basis_premium_state_v2",
+      "unit_signature": "typed registry validated",
+      "variant": 2,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "basis",
+        "price_return"
+      ],
+      "field_roles": [
+        "basis",
+        "price_return"
+      ],
+      "financial_hypothesis": "Persistent or transitioning basis changes the interpretation of subsequent price response.",
+      "matched_ablation": "basis relation to one component axis",
+      "maximum_depth": 4,
+      "mechanism_family": "BASIS_PREMIUM_STATE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "NormalizedDifference",
+      "skeleton_id": "basis_premium_state_v3",
+      "unit_signature": "typed registry validated",
+      "variant": 3,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "basis",
+        "price_return"
+      ],
+      "field_roles": [
+        "basis",
+        "price_return"
+      ],
+      "financial_hypothesis": "Persistent or transitioning basis changes the interpretation of subsequent price response.",
+      "matched_ablation": "basis relation to one component axis",
+      "maximum_depth": 4,
+      "mechanism_family": "BASIS_PREMIUM_STATE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeSub",
+      "skeleton_id": "basis_premium_state_v4",
+      "unit_signature": "typed registry validated",
+      "variant": 4,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "basis",
+        "price_return"
+      ],
+      "field_roles": [
+        "basis",
+        "price_return"
+      ],
+      "financial_hypothesis": "Persistent or transitioning basis changes the interpretation of subsequent price response.",
+      "matched_ablation": "basis relation to one component axis",
+      "maximum_depth": 4,
+      "mechanism_family": "BASIS_PREMIUM_STATE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "RatioInteraction",
+      "skeleton_id": "basis_premium_state_v5",
+      "unit_signature": "typed registry validated",
+      "variant": 5,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "top_account",
+        "global_account"
+      ],
+      "field_roles": [
+        "top_account",
+        "global_account"
+      ],
+      "financial_hypothesis": "Top-account positioning relative to the global account population measures crowding asymmetry.",
+      "matched_ablation": "top-global relation to top axis",
+      "maximum_depth": 4,
+      "mechanism_family": "TOP_GLOBAL_CROWDING",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeSub",
+      "skeleton_id": "top_global_crowding_v1",
+      "unit_signature": "typed registry validated",
+      "variant": 1,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "top_account",
+        "global_account"
+      ],
+      "field_roles": [
+        "top_account",
+        "global_account"
+      ],
+      "financial_hypothesis": "Top-account positioning relative to the global account population measures crowding asymmetry.",
+      "matched_ablation": "top-global relation to top axis",
+      "maximum_depth": 4,
+      "mechanism_family": "TOP_GLOBAL_CROWDING",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "NormalizedDifference",
+      "skeleton_id": "top_global_crowding_v2",
+      "unit_signature": "typed registry validated",
+      "variant": 2,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "top_account",
+        "global_account"
+      ],
+      "field_roles": [
+        "top_account",
+        "global_account"
+      ],
+      "financial_hypothesis": "Top-account positioning relative to the global account population measures crowding asymmetry.",
+      "matched_ablation": "top-global relation to top axis",
+      "maximum_depth": 4,
+      "mechanism_family": "TOP_GLOBAL_CROWDING",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "Residual",
+      "skeleton_id": "top_global_crowding_v3",
+      "unit_signature": "typed registry validated",
+      "variant": 3,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "top_account",
+        "global_account"
+      ],
+      "field_roles": [
+        "top_account",
+        "global_account"
+      ],
+      "financial_hypothesis": "Top-account positioning relative to the global account population measures crowding asymmetry.",
+      "matched_ablation": "top-global relation to top axis",
+      "maximum_depth": 4,
+      "mechanism_family": "TOP_GLOBAL_CROWDING",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "RatioInteraction",
+      "skeleton_id": "top_global_crowding_v4",
+      "unit_signature": "typed registry validated",
+      "variant": 4,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "top_account",
+        "global_account"
+      ],
+      "field_roles": [
+        "top_account",
+        "global_account"
+      ],
+      "financial_hypothesis": "Top-account positioning relative to the global account population measures crowding asymmetry.",
+      "matched_ablation": "top-global relation to top axis",
+      "maximum_depth": 4,
+      "mechanism_family": "TOP_GLOBAL_CROWDING",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeMul",
+      "skeleton_id": "top_global_crowding_v5",
+      "unit_signature": "typed registry validated",
+      "variant": 5,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "position",
+        "account"
+      ],
+      "field_roles": [
+        "position",
+        "account"
+      ],
+      "financial_hypothesis": "Account and position ratios diverge when participant counts and capital concentration disagree.",
+      "matched_ablation": "account-position relation to one axis",
+      "maximum_depth": 4,
+      "mechanism_family": "ACCOUNT_POSITION_DIVERGENCE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "NormalizedDifference",
+      "skeleton_id": "account_position_divergence_v1",
+      "unit_signature": "typed registry validated",
+      "variant": 1,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "position",
+        "account"
+      ],
+      "field_roles": [
+        "position",
+        "account"
+      ],
+      "financial_hypothesis": "Account and position ratios diverge when participant counts and capital concentration disagree.",
+      "matched_ablation": "account-position relation to one axis",
+      "maximum_depth": 4,
+      "mechanism_family": "ACCOUNT_POSITION_DIVERGENCE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeSub",
+      "skeleton_id": "account_position_divergence_v2",
+      "unit_signature": "typed registry validated",
+      "variant": 2,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "position",
+        "account"
+      ],
+      "field_roles": [
+        "position",
+        "account"
+      ],
+      "financial_hypothesis": "Account and position ratios diverge when participant counts and capital concentration disagree.",
+      "matched_ablation": "account-position relation to one axis",
+      "maximum_depth": 4,
+      "mechanism_family": "ACCOUNT_POSITION_DIVERGENCE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "Residual",
+      "skeleton_id": "account_position_divergence_v3",
+      "unit_signature": "typed registry validated",
+      "variant": 3,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "position",
+        "account"
+      ],
+      "field_roles": [
+        "position",
+        "account"
+      ],
+      "financial_hypothesis": "Account and position ratios diverge when participant counts and capital concentration disagree.",
+      "matched_ablation": "account-position relation to one axis",
+      "maximum_depth": 4,
+      "mechanism_family": "ACCOUNT_POSITION_DIVERGENCE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "RatioInteraction",
+      "skeleton_id": "account_position_divergence_v4",
+      "unit_signature": "typed registry validated",
+      "variant": 4,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "position",
+        "account"
+      ],
+      "field_roles": [
+        "position",
+        "account"
+      ],
+      "financial_hypothesis": "Account and position ratios diverge when participant counts and capital concentration disagree.",
+      "matched_ablation": "account-position relation to one axis",
+      "maximum_depth": 4,
+      "mechanism_family": "ACCOUNT_POSITION_DIVERGENCE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeMul",
+      "skeleton_id": "account_position_divergence_v5",
+      "unit_signature": "typed registry validated",
+      "variant": 5,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "price_return",
+        "activity"
+      ],
+      "field_roles": [
+        "price_return",
+        "activity"
+      ],
+      "financial_hypothesis": "Weak price response to high activity can indicate absorption or exhaustion without claiming native order flow.",
+      "matched_ablation": "response interaction to price axis",
+      "maximum_depth": 4,
+      "mechanism_family": "PRICE_ACTIVITY_RESPONSE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeDiv",
+      "skeleton_id": "price_activity_response_v1",
+      "unit_signature": "typed registry validated",
+      "variant": 1,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "price_return",
+        "activity"
+      ],
+      "field_roles": [
+        "price_return",
+        "activity"
+      ],
+      "financial_hypothesis": "Weak price response to high activity can indicate absorption or exhaustion without claiming native order flow.",
+      "matched_ablation": "response interaction to price axis",
+      "maximum_depth": 4,
+      "mechanism_family": "PRICE_ACTIVITY_RESPONSE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeMul",
+      "skeleton_id": "price_activity_response_v2",
+      "unit_signature": "typed registry validated",
+      "variant": 2,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "price_return",
+        "activity"
+      ],
+      "field_roles": [
+        "price_return",
+        "activity"
+      ],
+      "financial_hypothesis": "Weak price response to high activity can indicate absorption or exhaustion without claiming native order flow.",
+      "matched_ablation": "response interaction to price axis",
+      "maximum_depth": 4,
+      "mechanism_family": "PRICE_ACTIVITY_RESPONSE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "RatioInteraction",
+      "skeleton_id": "price_activity_response_v3",
+      "unit_signature": "typed registry validated",
+      "variant": 3,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "price_return",
+        "activity"
+      ],
+      "field_roles": [
+        "price_return",
+        "activity"
+      ],
+      "financial_hypothesis": "Weak price response to high activity can indicate absorption or exhaustion without claiming native order flow.",
+      "matched_ablation": "response interaction to price axis",
+      "maximum_depth": 4,
+      "mechanism_family": "PRICE_ACTIVITY_RESPONSE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "NormalizedDifference",
+      "skeleton_id": "price_activity_response_v4",
+      "unit_signature": "typed registry validated",
+      "variant": 4,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "price_return",
+        "activity"
+      ],
+      "field_roles": [
+        "price_return",
+        "activity"
+      ],
+      "financial_hypothesis": "Weak price response to high activity can indicate absorption or exhaustion without claiming native order flow.",
+      "matched_ablation": "response interaction to price axis",
+      "maximum_depth": 4,
+      "mechanism_family": "PRICE_ACTIVITY_RESPONSE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "Residual",
+      "skeleton_id": "price_activity_response_v5",
+      "unit_signature": "typed registry validated",
+      "variant": 5,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "local",
+        "market_context"
+      ],
+      "field_roles": [
+        "local",
+        "market_context"
+      ],
+      "financial_hypothesis": "An asset-local state is informative only relative to the contemporaneously eligible market cross-section.",
+      "matched_ablation": "cross-asset relative to asset-local payload",
+      "maximum_depth": 4,
+      "mechanism_family": "CROSS_ASSET_RELATIVE_STATE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "CrossAssetRelative",
+      "skeleton_id": "cross_asset_relative_state_v1",
+      "unit_signature": "typed registry validated",
+      "variant": 1,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "local",
+        "market_context"
+      ],
+      "field_roles": [
+        "local",
+        "market_context"
+      ],
+      "financial_hypothesis": "An asset-local state is informative only relative to the contemporaneously eligible market cross-section.",
+      "matched_ablation": "cross-asset relative to asset-local payload",
+      "maximum_depth": 4,
+      "mechanism_family": "CROSS_ASSET_RELATIVE_STATE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "CrossAssetRelative",
+      "skeleton_id": "cross_asset_relative_state_v2",
+      "unit_signature": "typed registry validated",
+      "variant": 2,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "local",
+        "market_context"
+      ],
+      "field_roles": [
+        "local",
+        "market_context"
+      ],
+      "financial_hypothesis": "An asset-local state is informative only relative to the contemporaneously eligible market cross-section.",
+      "matched_ablation": "cross-asset relative to asset-local payload",
+      "maximum_depth": 4,
+      "mechanism_family": "CROSS_ASSET_RELATIVE_STATE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "CrossAssetRelative",
+      "skeleton_id": "cross_asset_relative_state_v3",
+      "unit_signature": "typed registry validated",
+      "variant": 3,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "local",
+        "market_context"
+      ],
+      "field_roles": [
+        "local",
+        "market_context"
+      ],
+      "financial_hypothesis": "An asset-local state is informative only relative to the contemporaneously eligible market cross-section.",
+      "matched_ablation": "cross-asset relative to asset-local payload",
+      "maximum_depth": 4,
+      "mechanism_family": "CROSS_ASSET_RELATIVE_STATE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "CrossAssetRelative",
+      "skeleton_id": "cross_asset_relative_state_v4",
+      "unit_signature": "typed registry validated",
+      "variant": 4,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "local",
+        "market_context"
+      ],
+      "field_roles": [
+        "local",
+        "market_context"
+      ],
+      "financial_hypothesis": "An asset-local state is informative only relative to the contemporaneously eligible market cross-section.",
+      "matched_ablation": "cross-asset relative to asset-local payload",
+      "maximum_depth": 4,
+      "mechanism_family": "CROSS_ASSET_RELATIVE_STATE",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "CrossAssetRelative",
+      "skeleton_id": "cross_asset_relative_state_v5",
+      "unit_signature": "typed registry validated",
+      "variant": 5,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "payload",
+        "state"
+      ],
+      "field_roles": [
+        "payload",
+        "state"
+      ],
+      "financial_hypothesis": "Market or maturity state modulates an otherwise local observable mechanism.",
+      "matched_ablation": "state modulation or gate to unmodulated payload",
+      "maximum_depth": 4,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "ConditionGate",
+      "skeleton_id": "state_regime_modulation_v1",
+      "unit_signature": "typed registry validated",
+      "variant": 1,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "payload",
+        "state"
+      ],
+      "field_roles": [
+        "payload",
+        "state"
+      ],
+      "financial_hypothesis": "Market or maturity state modulates an otherwise local observable mechanism.",
+      "matched_ablation": "state modulation or gate to unmodulated payload",
+      "maximum_depth": 4,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "StateModulation",
+      "skeleton_id": "state_regime_modulation_v2",
+      "unit_signature": "typed registry validated",
+      "variant": 2,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "payload",
+        "state"
+      ],
+      "field_roles": [
+        "payload",
+        "state"
+      ],
+      "financial_hypothesis": "Market or maturity state modulates an otherwise local observable mechanism.",
+      "matched_ablation": "state modulation or gate to unmodulated payload",
+      "maximum_depth": 4,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "SafeMul",
+      "skeleton_id": "state_regime_modulation_v3",
+      "unit_signature": "typed registry validated",
+      "variant": 3,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "payload",
+        "state"
+      ],
+      "field_roles": [
+        "payload",
+        "state"
+      ],
+      "financial_hypothesis": "Market or maturity state modulates an otherwise local observable mechanism.",
+      "matched_ablation": "state modulation or gate to unmodulated payload",
+      "maximum_depth": 4,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "RatioInteraction",
+      "skeleton_id": "state_regime_modulation_v4",
+      "unit_signature": "typed registry validated",
+      "variant": 4,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    },
+    {
+      "eligible_universe_rule": "point-in-time observed, required fields finite, no future survival filter",
+      "field_family_constraints": [
+        "payload",
+        "state"
+      ],
+      "field_roles": [
+        "payload",
+        "state"
+      ],
+      "financial_hypothesis": "Market or maturity state modulates an otherwise local observable mechanism.",
+      "matched_ablation": "state modulation or gate to unmodulated payload",
+      "maximum_depth": 4,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "observable_lag": "maximum raw-input lag",
+      "operator_DAG": "ConditionGate",
+      "skeleton_id": "state_regime_modulation_v5",
+      "unit_signature": "typed registry validated",
+      "variant": 5,
+      "warm_up": "maximum rolling window and 168h dynamic-universe minimum"
+    }
+  ]
+}

@@ -1,0 +1,375 @@
+{
+  "behavior_unique": 42409,
+  "behavior_unique_over_audited_exact": 0.84818,
+  "elapsed_seconds": 251.89357230009045,
+  "failures": {
+    "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 2465
+  },
+  "gates": {
+    "behavior_diverse_target": true,
+    "behavior_unique_over_audited_exact": true,
+    "cross_field_interaction_rate": true,
+    "distinct_skeletons": true,
+    "exact_unique": true,
+    "full_generation_exact_unique": true,
+    "matched_control_valid_rate": true,
+    "median_field_arity": true
+  },
+  "mapping_hash": "E835E2EE46F3349928CDC6983C9F720BC651E7722234F4EA12D11886AF4C683F",
+  "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+  "matched_control_by_skeleton": [
+    {
+      "attempted": 1337,
+      "failures": {},
+      "skeleton_id": "account_position_divergence_v1",
+      "valid": 1337,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1344,
+      "failures": {},
+      "skeleton_id": "account_position_divergence_v2",
+      "valid": 1344,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1397,
+      "failures": {},
+      "skeleton_id": "account_position_divergence_v3",
+      "valid": 1397,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1338,
+      "failures": {},
+      "skeleton_id": "account_position_divergence_v4",
+      "valid": 1338,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1343,
+      "failures": {},
+      "skeleton_id": "account_position_divergence_v5",
+      "valid": 1343,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 818,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 108
+      },
+      "skeleton_id": "basis_premium_state_v1",
+      "valid": 710,
+      "valid_rate": 0.8679706601466992
+    },
+    {
+      "attempted": 1183,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 157
+      },
+      "skeleton_id": "basis_premium_state_v2",
+      "valid": 1026,
+      "valid_rate": 0.8672865595942519
+    },
+    {
+      "attempted": 1157,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 140
+      },
+      "skeleton_id": "basis_premium_state_v3",
+      "valid": 1017,
+      "valid_rate": 0.8789974070872947
+    },
+    {
+      "attempted": 1143,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 157
+      },
+      "skeleton_id": "basis_premium_state_v4",
+      "valid": 986,
+      "valid_rate": 0.8626421697287839
+    },
+    {
+      "attempted": 1160,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 159
+      },
+      "skeleton_id": "basis_premium_state_v5",
+      "valid": 1001,
+      "valid_rate": 0.8629310344827587
+    },
+    {
+      "attempted": 1409,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 10
+      },
+      "skeleton_id": "cross_asset_relative_state_v1",
+      "valid": 1399,
+      "valid_rate": 0.992902767920511
+    },
+    {
+      "attempted": 1405,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 12
+      },
+      "skeleton_id": "cross_asset_relative_state_v2",
+      "valid": 1393,
+      "valid_rate": 0.9914590747330961
+    },
+    {
+      "attempted": 1408,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 7
+      },
+      "skeleton_id": "cross_asset_relative_state_v3",
+      "valid": 1401,
+      "valid_rate": 0.9950284090909091
+    },
+    {
+      "attempted": 1407,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 10
+      },
+      "skeleton_id": "cross_asset_relative_state_v4",
+      "valid": 1397,
+      "valid_rate": 0.9928926794598436
+    },
+    {
+      "attempted": 1408,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 9
+      },
+      "skeleton_id": "cross_asset_relative_state_v5",
+      "valid": 1399,
+      "valid_rate": 0.9936079545454546
+    },
+    {
+      "attempted": 1388,
+      "failures": {},
+      "skeleton_id": "oi_activity_interaction_v1",
+      "valid": 1388,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1389,
+      "failures": {},
+      "skeleton_id": "oi_activity_interaction_v2",
+      "valid": 1389,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1390,
+      "failures": {},
+      "skeleton_id": "oi_activity_interaction_v3",
+      "valid": 1390,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1397,
+      "failures": {},
+      "skeleton_id": "oi_activity_interaction_v4",
+      "valid": 1397,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1408,
+      "failures": {},
+      "skeleton_id": "oi_activity_interaction_v5",
+      "valid": 1408,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1174,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 159
+      },
+      "skeleton_id": "oi_price_divergence_v1",
+      "valid": 1015,
+      "valid_rate": 0.8645655877342419
+    },
+    {
+      "attempted": 1184,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 150
+      },
+      "skeleton_id": "oi_price_divergence_v2",
+      "valid": 1034,
+      "valid_rate": 0.8733108108108109
+    },
+    {
+      "attempted": 1157,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 149
+      },
+      "skeleton_id": "oi_price_divergence_v3",
+      "valid": 1008,
+      "valid_rate": 0.8712186689714779
+    },
+    {
+      "attempted": 1328,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 177
+      },
+      "skeleton_id": "oi_price_divergence_v4",
+      "valid": 1151,
+      "valid_rate": 0.8667168674698795
+    },
+    {
+      "attempted": 1177,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 145
+      },
+      "skeleton_id": "oi_price_divergence_v5",
+      "valid": 1032,
+      "valid_rate": 0.8768054375531011
+    },
+    {
+      "attempted": 1213,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 154
+      },
+      "skeleton_id": "price_activity_response_v1",
+      "valid": 1059,
+      "valid_rate": 0.8730420445177246
+    },
+    {
+      "attempted": 1185,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 147
+      },
+      "skeleton_id": "price_activity_response_v2",
+      "valid": 1038,
+      "valid_rate": 0.8759493670886076
+    },
+    {
+      "attempted": 1191,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 143
+      },
+      "skeleton_id": "price_activity_response_v3",
+      "valid": 1048,
+      "valid_rate": 0.8799328295549959
+    },
+    {
+      "attempted": 1198,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 139
+      },
+      "skeleton_id": "price_activity_response_v4",
+      "valid": 1059,
+      "valid_rate": 0.8839732888146912
+    },
+    {
+      "attempted": 1352,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 192
+      },
+      "skeleton_id": "price_activity_response_v5",
+      "valid": 1160,
+      "valid_rate": 0.8579881656804734
+    },
+    {
+      "attempted": 1126,
+      "failures": {},
+      "skeleton_id": "state_regime_modulation_v1",
+      "valid": 1126,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1256,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 44
+      },
+      "skeleton_id": "state_regime_modulation_v2",
+      "valid": 1212,
+      "valid_rate": 0.964968152866242
+    },
+    {
+      "attempted": 1262,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 44
+      },
+      "skeleton_id": "state_regime_modulation_v3",
+      "valid": 1218,
+      "valid_rate": 0.96513470681458
+    },
+    {
+      "attempted": 1257,
+      "failures": {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY": 53
+      },
+      "skeleton_id": "state_regime_modulation_v4",
+      "valid": 1204,
+      "valid_rate": 0.9578361177406524
+    },
+    {
+      "attempted": 1131,
+      "failures": {},
+      "skeleton_id": "state_regime_modulation_v5",
+      "valid": 1131,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1050,
+      "failures": {},
+      "skeleton_id": "top_global_crowding_v1",
+      "valid": 1050,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1072,
+      "failures": {},
+      "skeleton_id": "top_global_crowding_v2",
+      "valid": 1072,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1322,
+      "failures": {},
+      "skeleton_id": "top_global_crowding_v3",
+      "valid": 1322,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1070,
+      "failures": {},
+      "skeleton_id": "top_global_crowding_v4",
+      "valid": 1070,
+      "valid_rate": 1.0
+    },
+    {
+      "attempted": 1066,
+      "failures": {},
+      "skeleton_id": "top_global_crowding_v5",
+      "valid": 1066,
+      "valid_rate": 1.0
+    }
+  ],
+  "matched_control_valid": 47535,
+  "matched_control_valid_rate": 0.9507,
+  "numeric_audit_candidates": 50000,
+  "numeric_unique": 42194,
+  "probe": {
+    "assets": 12,
+    "behavior_fingerprint": "quantized primary minus control cross-sectional rank; exact portfolio mapping is qualified in the 64-pair preflight",
+    "economic_evaluation": false,
+    "hours": 1008,
+    "selection": "highest observed eligibility for representation audit only; never a search universe",
+    "shared_leaf_cache_entries": 803,
+    "start_coordinate": 168
+  },
+  "rank_unique": 41801,
+  "schema_version": 1,
+  "status": "PASS",
+  "structural": {
+    "cross_field_interaction_rate": 1.0,
+    "distinct_skeletons": 40,
+    "elapsed_seconds": 83.49821770004928,
+    "exact_unique": 261798,
+    "grammar_legal": 500000,
+    "median_field_arity": 2.0,
+    "proposal_attempts": 500000,
+    "rejections": {},
+    "retained_for_numeric_audit": 50000
+  }
+}

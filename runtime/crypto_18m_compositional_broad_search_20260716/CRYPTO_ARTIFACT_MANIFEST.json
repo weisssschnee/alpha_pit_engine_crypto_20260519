@@ -1,0 +1,214 @@
+{
+  "artifacts": [
+    {
+      "bytes": 27520,
+      "path": "alphafactory_crypto/broad_search/compositional18m.py",
+      "sha256": "385C09DCBE4DDE192E2BADCC9A70FFD0EECF30627D53518791FBEAB205932147"
+    },
+    {
+      "bytes": 22088,
+      "path": "alphafactory_crypto/broad_search/expression.py",
+      "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+    },
+    {
+      "bytes": 17147,
+      "path": "alphafactory_crypto/broad_search/pair18m.py",
+      "sha256": "117342BF9EAA0F423CBE666246DE8520927C956ADDEE84563BA0B9AEDA82A4B8"
+    },
+    {
+      "bytes": 26368,
+      "path": "alphafactory_crypto/broad_search/panel18m.py",
+      "sha256": "3CF902D90629E6C5435A99C1EB57C1F2278C793815C89494013DB9BDEE95864A"
+    },
+    {
+      "bytes": 58148,
+      "path": "alphafactory_crypto/broad_search/runner18m.py",
+      "sha256": "BF3C6B1929CD1F3E1FA8A776F47AEB08E7FB4F6B1BADA58F7CB90F5FD3D270E9"
+    },
+    {
+      "bytes": 2626,
+      "path": "config/crypto_18m_compositional_broad_search_v1.json",
+      "sha256": "61EA0DD0784A6770883506498D765547E9C9C07C8D0AF3D8C2A51A601860DCD2"
+    },
+    {
+      "bytes": 3026,
+      "path": "config/crypto_train_surface_18m_v1.json",
+      "sha256": "3C83B2CB0BDE461B8C8B5106DF870C021C5B51DFCEF46BAD138354F1A8276076"
+    },
+    {
+      "bytes": 1157,
+      "path": "reports/CRYPTO_18M_COMPOSITIONAL_BROAD_SEARCH_REPORT.md",
+      "sha256": "7C0D7D7315A1D3B69473421DA9AB6C843C23BEB22FA8D3ABC010500AAFD91BBA"
+    },
+    {
+      "bytes": 358,
+      "path": "reports/CRYPTO_18M_SEARCH_FAILURE_ATTRIBUTION.md",
+      "sha256": "54666AA84C61CC369CE9F2AC8500E94FF52B76A615AC8FBEDFFE4D9D3DE6F064"
+    },
+    {
+      "bytes": 15916,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY.json",
+      "sha256": "3BCF7B884EB44264B5BE4DC9A0BCF2D3355F59BA1AA33B1E5B81525061E94277"
+    },
+    {
+      "bytes": 14214,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_FIELD_ADMISSION_AUDIT.csv",
+      "sha256": "198EA748FC94287BD071B5CB178BE64FC58D4CD71C436B404E5DB2B32A4C82D6"
+    },
+    {
+      "bytes": 2150,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_SEARCH_CONTRACT.json",
+      "sha256": "E2557A1C16FC10C4E7AA2DD8845DE21C9D12DBC1321FDA7B89A95B7634F94B14"
+    },
+    {
+      "bytes": 407,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_ADMISSION_WATERFALL.csv",
+      "sha256": "AD3415DD9DCA1770AA93F5F73F2D95B3EE7F8C65B7E570CB4680B736C8030170"
+    },
+    {
+      "bytes": 517312,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_BEHAVIOR_CLUSTERS.json",
+      "sha256": "25DBA9FEC9ED65BD5A1860BD045A1F91F229C324C68E1BF122B3B59C1416288E"
+    },
+    {
+      "bytes": 33986,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_COMPOSITIONAL_SKELETON_REGISTRY.json",
+      "sha256": "0156FD9BD1B47D24276214BBFBEC3861A4A9EA8311F308129CA54F3E8119A396"
+    },
+    {
+      "bytes": 928,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_CROSS_SEED_REPRODUCTION.json",
+      "sha256": "276A1A379C49F84EBCFC1565596A5DE9663845B1DDBCB2A570C93871E53E56BA"
+    },
+    {
+      "bytes": 26548261,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_DEVELOPMENT_CHALLENGE_RESULTS.parquet",
+      "sha256": "FE65701F129D23C57C8A28B718DE05AF973B5A0E61412C03A330D2D1A2E5664F"
+    },
+    {
+      "bytes": 37812529,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_DYNAMIC_ELIGIBILITY_LEDGER.parquet",
+      "sha256": "6620707CA00AAF7D25086072ACD2177F092A81E9A2136507096297F8EE0570D1"
+    },
+    {
+      "bytes": 154986,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_FIELD_EQUIVALENCE_AUDIT.csv",
+      "sha256": "0CEEFE0717D11DAB4D66CA983E2D9B5547BE973DDCAAC227CA3C133331EE68C3"
+    },
+    {
+      "bytes": 9386,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_GENERATOR_EXPRESSIVITY_AUDIT.json",
+      "sha256": "EEC30CB284AAFEE27F354664BDA1194D8F94D7541E241870EEEAF50E3CFE908E"
+    },
+    {
+      "bytes": 1616687,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_INCREMENTAL_SLEEVE_RESULTS.parquet",
+      "sha256": "79486C92D2C39E48D484F1CA0EAACEFE0D445DF41C590FD5602D1A3533E16166"
+    },
+    {
+      "bytes": 747,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_MATCHED_ABLATION_PAIR_CONTRACT.json",
+      "sha256": "73643959EEA990364BA65E476C6FDB420FDC75CAC46E6EF8C91B8E5C5C06D888"
+    },
+    {
+      "bytes": 817,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_PAIR_NATIVE_FEEDBACK_CONTRACT.json",
+      "sha256": "A8297A563DC74562D95DAE029678D0C7482A29AEA3FA3B87340E1D80586C0DE8"
+    },
+    {
+      "bytes": 11897,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_POLICY_BEHAVIOR_AUDIT.json",
+      "sha256": "269AC42172F9716029C52686A924C6F36F1D842CDC1159AE99CC8022AF35AFDA"
+    },
+    {
+      "bytes": 1858807,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_PROPOSAL_EXPOSURE_LEDGER.parquet",
+      "sha256": "E98ED76802B81DB16D9F40A4A75EEE1EEBF1270D8558B30B662A817F47F95E1A"
+    },
+    {
+      "bytes": 14326,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_RESOURCE_PREFLIGHT.json",
+      "sha256": "446D075AFABC1E19928C3481EA080A78FC3A78C3153B47C6C207DE2C15F3A72A"
+    },
+    {
+      "bytes": 1004649,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_ROBUST_STATISTICAL_AUDIT.parquet",
+      "sha256": "EAEE5367C2C7F01F5FDE404207C81EBB783EACDA1670BE389D25F62316635C96"
+    },
+    {
+      "bytes": 1631,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json",
+      "sha256": "BE826CD390EBC44DCAB0195C7E40ADFC7E23584154341F28F1E5727ADBF70D69"
+    },
+    {
+      "bytes": 41270477,
+      "path": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_STRICT_PAIR_RESULTS.parquet",
+      "sha256": "56213D54DB0F00BDE966CB272EDCABA100B224353C45F4D2617906472D2E7523"
+    },
+    {
+      "bytes": 1196,
+      "path": "scripts/crypto_18m_compositional_broad_search.py",
+      "sha256": "0150C0500D26BC375C6DB651BC411202410CAAB77F98E9A2FCD2C54B6E58CF00"
+    },
+    {
+      "bytes": 3637,
+      "path": "tests/test_broad_search_expression.py",
+      "sha256": "BBBE80570569FD83E5894C252F88545DD6BA1FEE1406B6ECCA2F2D0A3FC3B486"
+    },
+    {
+      "bytes": 9129,
+      "path": "tests/test_crypto_18m_compositional_search.py",
+      "sha256": "289327A81873CED1DDBB0CFB81EBE9CA9618D6E2E3DA0F7CBD1EA6F1A8739589"
+    }
+  ],
+  "base_closure_sha": "a115913ae333696482059b497472864871cebc9f",
+  "bindings": {
+    "DAG_grammar_hash": "0873F3C3275F3F7F56DB7EC7966C0807197DCE5DDFA6BCC6EA2E6A866F581249",
+    "adaptive_report_only_split_hash": "6AEFF472CA663D0804A182E30EB403828B06E710E1E7455C9A4445C80C599A57",
+    "budget": {
+      "cem_diversity_v2": {
+        "duplicate_resample_limit": 16,
+        "exploration_probability": 0.2
+      },
+      "cost_preflight_pairs": 64,
+      "hard_cap_incremental_sleeve_evaluations": 8192,
+      "hard_cap_pairs": 8192,
+      "hard_cap_standalone_evaluations": 16384,
+      "maximum_stage_b_pairs": 4096,
+      "minimum_behavior_diverse": 25000,
+      "minimum_legal_exact_unique": 100000,
+      "policies": [
+        "canonical_typed_random",
+        "cem_diversity_v2",
+        "uct_ucb_like",
+        "evolutionary"
+      ],
+      "proposal_attempts": 500000,
+      "seeds": [
+        20260716,
+        20260717,
+        20260718,
+        20260719
+      ],
+      "stage_a_pairs": 4096
+    },
+    "cost_hash": "3C39A629A03C243FB45ECCA4538944E55224868E9AC36A03AC677F785CA96E9E",
+    "field_registry_hash": "D88D5B884C2693BB2A7FF7464EE0EC7E148A4CED54589CD87D579C14B2AFFA27",
+    "mapping_hash": "E835E2EE46F3349928CDC6983C9F720BC651E7722234F4EA12D11886AF4C683F",
+    "pair_feedback_hash": "0328A6E0EDE9F2DDCD086304FA0808E30ED1BB0171E00E4853A0D785A01413B2",
+    "seeds": [
+      20260716,
+      20260717,
+      20260718,
+      20260719
+    ],
+    "skeleton_registry_hash": "7C20B5AB32BACD1070A9CD6543CEBF8CCB62787D036A6AF0F03BC7BEAA28080C",
+    "train_content_bundle_sha256": "8CEB549ED8AF73611163D827AD15DD5F409DCD422A6831ABCA28E86B8627D439",
+    "train_surface_id": "CRYPTO_OBSERVED_ARCHIVE_TRAIN_18M_V1"
+  },
+  "bundle_sha256": "EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492",
+  "epoch_id": "CRYPTO_18M_COMPOSITIONAL_BROAD_ALPHA_SEARCH_EPOCH1",
+  "producer_source_sha": "b251733d51053cbbc99a3b79409debcee24ae760",
+  "schema_version": 1,
+  "sealed_reads": 0
+}

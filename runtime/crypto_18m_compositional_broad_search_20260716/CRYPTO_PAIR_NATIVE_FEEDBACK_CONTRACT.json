@@ -1,0 +1,27 @@
+{
+  "authoritative_feedback": "incremental sleeve strict feasibility distance",
+  "control_has_adaptive_memory": false,
+  "control_has_independent_vote": false,
+  "feedback_block": "2023-07-01/2024-07-01 development adaptive block only",
+  "normalization_scales": {
+    "concentration_mean": 0.1,
+    "cost_mean": 0.0001,
+    "net_lcb": 0.0001,
+    "positive_month_fraction": 0.1,
+    "support": 0.1,
+    "turnover_mean": 0.3,
+    "worst_month": 0.0001
+  },
+  "report_only_block": "2024-07-01/2025-01-01 development report-only block",
+  "report_only_metrics_visible_to_policy": false,
+  "schema_version": 1,
+  "thresholds": {
+    "concentration_mean": 0.4,
+    "cost_mean": 0.0006,
+    "net_lcb": 0.0,
+    "positive_month_fraction": 0.4,
+    "support": 0.8,
+    "turnover_mean": 1.2,
+    "worst_month": -0.001
+  }
+}

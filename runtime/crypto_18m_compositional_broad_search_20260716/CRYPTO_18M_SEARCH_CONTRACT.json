@@ -1,0 +1,70 @@
+{
+  "adaptive_block": {
+    "end_exclusive": "2024-07-01T00:00:00Z",
+    "feedback": true,
+    "start": "2023-07-01T00:00:00Z"
+  },
+  "authorization": "EXPERIMENTAL_BOUNDED_18M_DEVELOPMENT_SEARCH",
+  "base_closure_sha": "a115913ae333696482059b497472864871cebc9f",
+  "boundaries": {
+    "accepted_tag_movement": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "development_report_only_is_formal_challenge": false,
+    "economic_claim_scope": "DEVELOPMENT_ONLY_OBSERVED_ARCHIVE_CURRENT_SEED",
+    "formal_performance_search": false,
+    "sealed_reads_allowed": false,
+    "sealed_roles": [
+      "VALIDATION",
+      "TEST",
+      "RECENT",
+      "MAY_STRESS",
+      "FORMAL_CHALLENGE",
+      "FORWARD",
+      "EXECUTION_RECOMMENDATION"
+    ]
+  },
+  "budget": {
+    "cem_diversity_v2": {
+      "duplicate_resample_limit": 16,
+      "exploration_probability": 0.2
+    },
+    "cost_preflight_pairs": 64,
+    "hard_cap_incremental_sleeve_evaluations": 8192,
+    "hard_cap_pairs": 8192,
+    "hard_cap_standalone_evaluations": 16384,
+    "maximum_stage_b_pairs": 4096,
+    "minimum_behavior_diverse": 25000,
+    "minimum_legal_exact_unique": 100000,
+    "policies": [
+      "canonical_typed_random",
+      "cem_diversity_v2",
+      "uct_ucb_like",
+      "evolutionary"
+    ],
+    "proposal_attempts": 500000,
+    "seeds": [
+      20260716,
+      20260717,
+      20260718,
+      20260719
+    ],
+    "stage_a_pairs": 4096
+  },
+  "development_report_only_block": {
+    "end_exclusive": "2025-01-01T00:00:00Z",
+    "feedback": false,
+    "start": "2024-07-01T00:00:00Z"
+  },
+  "dynamic_eligibility": "observed at t, required inputs available at t, at least 168 completed consecutive hours; no future survival selection",
+  "epoch_id": "CRYPTO_18M_COMPOSITIONAL_BROAD_ALPHA_SEARCH_EPOCH1",
+  "horizons_hours": [
+    1,
+    4
+  ],
+  "schema_version": 1,
+  "source_sha": "b251733d51053cbbc99a3b79409debcee24ae760",
+  "target": "log(close[t+2+h] / close[t+2])",
+  "train_content_bundle_sha256": "8CEB549ED8AF73611163D827AD15DD5F409DCD422A6831ABCA28E86B8627D439",
+  "train_surface_id": "CRYPTO_OBSERVED_ARCHIVE_TRAIN_18M_V1"
+}

@@ -1,0 +1,433 @@
+{
+  "adaptive_policy_quality_improvement_vs_typed_random": {
+    "cem_diversity_v2": true,
+    "evolutionary": true,
+    "uct_ucb_like": true
+  },
+  "any_cross_seed_stable_policy_improvement": true,
+  "cross_policy_private_state_reads": 0,
+  "deterministic_replay_required": true,
+  "development_report_only_feedback_writes": 0,
+  "lane_resources": [
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1770.7099390999647,
+      "peak_private_bytes": 1372106752,
+      "peak_rss_bytes": 673443840,
+      "policy": "cem_diversity_v2",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1795.6029370001052,
+      "peak_private_bytes": 1373487104,
+      "peak_rss_bytes": 675037184,
+      "policy": "canonical_typed_random",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1750.5564820000436,
+      "peak_private_bytes": 1376489472,
+      "peak_rss_bytes": 678326272,
+      "policy": "evolutionary",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1861.7400941000087,
+      "peak_private_bytes": 1372241920,
+      "peak_rss_bytes": 673447936,
+      "policy": "uct_ucb_like",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1959.6272266999586,
+      "peak_private_bytes": 1375535104,
+      "peak_rss_bytes": 676163584,
+      "policy": "canonical_typed_random",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1940.3789989999495,
+      "peak_private_bytes": 1372770304,
+      "peak_rss_bytes": 673140736,
+      "policy": "cem_diversity_v2",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1811.6502806999488,
+      "peak_private_bytes": 1374932992,
+      "peak_rss_bytes": 676573184,
+      "policy": "evolutionary",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1905.9239516999805,
+      "peak_private_bytes": 1374769152,
+      "peak_rss_bytes": 675217408,
+      "policy": "uct_ucb_like",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1615.2399527999805,
+      "peak_private_bytes": 1373491200,
+      "peak_rss_bytes": 674242560,
+      "policy": "cem_diversity_v2",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1664.3859739999752,
+      "peak_private_bytes": 1372725248,
+      "peak_rss_bytes": 673316864,
+      "policy": "canonical_typed_random",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1651.2281588000478,
+      "peak_private_bytes": 1374056448,
+      "peak_rss_bytes": 674533376,
+      "policy": "uct_ucb_like",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1654.9753441000357,
+      "peak_private_bytes": 1372729344,
+      "peak_rss_bytes": 672538624,
+      "policy": "evolutionary",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2045.7158958000364,
+      "peak_private_bytes": 1375019008,
+      "peak_rss_bytes": 675610624,
+      "policy": "canonical_typed_random",
+      "seed": 20260719
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2108.6417997999815,
+      "peak_private_bytes": 1373495296,
+      "peak_rss_bytes": 672878592,
+      "policy": "cem_diversity_v2",
+      "seed": 20260719
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2282.509741100017,
+      "peak_private_bytes": 1373671424,
+      "peak_rss_bytes": 673603584,
+      "policy": "evolutionary",
+      "seed": 20260719
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2464.214211100014,
+      "peak_private_bytes": 1374806016,
+      "peak_rss_bytes": 675840000,
+      "policy": "uct_ucb_like",
+      "seed": 20260719
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1601.515289700008,
+      "peak_private_bytes": 1375858688,
+      "peak_rss_bytes": 676597760,
+      "policy": "cem_diversity_v2",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1629.1555510000326,
+      "peak_private_bytes": 1377624064,
+      "peak_rss_bytes": 677212160,
+      "policy": "canonical_typed_random",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1976.3220751000335,
+      "peak_private_bytes": 1382510592,
+      "peak_rss_bytes": 682631168,
+      "policy": "evolutionary",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2075.504574700026,
+      "peak_private_bytes": 1375526912,
+      "peak_rss_bytes": 675942400,
+      "policy": "uct_ucb_like",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1871.68323529989,
+      "peak_private_bytes": 1375395840,
+      "peak_rss_bytes": 677068800,
+      "policy": "canonical_typed_random",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1851.6961833999958,
+      "peak_private_bytes": 1377648640,
+      "peak_rss_bytes": 678305792,
+      "policy": "cem_diversity_v2",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1881.498226399999,
+      "peak_private_bytes": 1379225600,
+      "peak_rss_bytes": 680890368,
+      "policy": "evolutionary",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2002.7774556999793,
+      "peak_private_bytes": 1375850496,
+      "peak_rss_bytes": 677228544,
+      "policy": "uct_ucb_like",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1906.2977432000916,
+      "peak_private_bytes": 1377222656,
+      "peak_rss_bytes": 677691392,
+      "policy": "canonical_typed_random",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1868.2057909999276,
+      "peak_private_bytes": 1376649216,
+      "peak_rss_bytes": 677228544,
+      "policy": "cem_diversity_v2",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2121.6317029000493,
+      "peak_private_bytes": 1375494144,
+      "peak_rss_bytes": 674627584,
+      "policy": "evolutionary",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2163.194382900023,
+      "peak_private_bytes": 1378074624,
+      "peak_rss_bytes": 651460608,
+      "policy": "uct_ucb_like",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2172.5224730999907,
+      "peak_private_bytes": 1375723520,
+      "peak_rss_bytes": 627982336,
+      "policy": "cem_diversity_v2",
+      "seed": 20260719
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2188.4898836000357,
+      "peak_private_bytes": 1379127296,
+      "peak_rss_bytes": 625696768,
+      "policy": "canonical_typed_random",
+      "seed": 20260719
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2032.851688500028,
+      "peak_private_bytes": 1376374784,
+      "peak_rss_bytes": 625258496,
+      "policy": "evolutionary",
+      "seed": 20260719
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2249.944570999942,
+      "peak_private_bytes": 1376198656,
+      "peak_rss_bytes": 628842496,
+      "policy": "uct_ucb_like",
+      "seed": 20260719
+    }
+  ],
+  "lanes": [
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.280284460461544,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "canonical_typed_random",
+      "seed": 20260716,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.331976278733286,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "canonical_typed_random",
+      "seed": 20260717,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.185793494021155,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "canonical_typed_random",
+      "seed": 20260718,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.217886708444539,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "canonical_typed_random",
+      "seed": 20260719,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.208145755633546,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "cem_diversity_v2",
+      "seed": 20260716,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.140338510780477,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "cem_diversity_v2",
+      "seed": 20260717,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.217173538059882,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "cem_diversity_v2",
+      "seed": 20260718,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.1210275585499545,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "cem_diversity_v2",
+      "seed": 20260719,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 1,
+      "mean_pair_reward": -3.902331608395099,
+      "mutation_receipts": 504,
+      "pairs": 512,
+      "policy": "evolutionary",
+      "seed": 20260716,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 1,
+      "mean_pair_reward": -3.897481189504891,
+      "mutation_receipts": 504,
+      "pairs": 512,
+      "policy": "evolutionary",
+      "seed": 20260717,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.256221941383296,
+      "mutation_receipts": 504,
+      "pairs": 512,
+      "policy": "evolutionary",
+      "seed": 20260718,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -3.9186775419415856,
+      "mutation_receipts": 504,
+      "pairs": 512,
+      "policy": "evolutionary",
+      "seed": 20260719,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.075849838824505,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "uct_ucb_like",
+      "seed": 20260716,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 1,
+      "mean_pair_reward": -4.022692454734662,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "uct_ucb_like",
+      "seed": 20260717,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.036659961620818,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "uct_ucb_like",
+      "seed": 20260718,
+      "unique_candidates": 512
+    },
+    {
+      "cache_hits": 0,
+      "matched_positive": 0,
+      "mean_pair_reward": -4.089298281577703,
+      "mutation_receipts": 0,
+      "pairs": 512,
+      "policy": "uct_ucb_like",
+      "seed": 20260719,
+      "unique_candidates": 512
+    }
+  ],
+  "schema_version": 1,
+  "unvisited_candidate_feedback": 0
+}
