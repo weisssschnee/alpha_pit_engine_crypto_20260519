@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "task_id": "CRYPTO_LOCALIZED_MECHANISM_EVIDENCE_QUALIFICATION",
+  "branch": "audit/crypto-localized-mechanism-qualification-20260716",
+  "base_closure_sha": "d1a28a50606d4ee65e23a02e6c136fe73b3e66e2",
+  "source_runtime_root": "runtime/crypto_18m_compositional_broad_search_20260716",
+  "source_cache_root": ".cache/crypto_18m_compositional_broad_search_v1",
+  "source_bundle_sha256": "EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492",
+  "unique_robust_candidate_id": "E35D9F1CC2D69E7E5F8985606315DBE5351FF13241D67A3135821CCF5AAAF751",
+  "cross_seed_cluster_ids": [
+    "DDD0F8DDFB1610762CD67204267658097B0FE508413A64BF29EC6EE60F5A33C1",
+    "7332C1CADE575067BB7195F8B1E46F3ECF0C3E6B6556F87135D11EBF5AC9FBF3"
+  ],
+  "authorized_blocks": {
+    "adaptive": {
+      "start": "2023-07-01T00:00:00Z",
+      "end_exclusive": "2024-07-01T00:00:00Z",
+      "role": "DEVELOPMENT_ADAPTIVE_FEEDBACK"
+    },
+    "report_only": {
+      "start": "2024-07-01T00:00:00Z",
+      "end_exclusive": "2025-01-01T00:00:00Z",
+      "role": "DEVELOPMENT_REPORT_ONLY_NO_FEEDBACK"
+    }
+  },
+  "boundaries": {
+    "new_proposals": false,
+    "search_or_tuning": false,
+    "grammar_changes": false,
+    "field_changes": false,
+    "window_changes": false,
+    "mapping_changes": false,
+    "reward_changes": false,
+    "evaluator_changes": false,
+    "cluster_changes": false,
+    "control_changes": false,
+    "candidate_pack_changes": false,
+    "sealed_reads": false,
+    "formal_search": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "forward": "SEALED"
+  },
+  "fixed_ablation": {
+    "seed": 20260716,
+    "lag_hours": 4,
+    "time_shuffle_scope": "WITHIN_CALENDAR_MONTH",
+    "placebo": "DETERMINISTIC_CROSS_ASSET_STATE_ROTATION",
+    "mapping_bridge": "REFERENCE_WEIGHT_MULTISET_RANK_RELABEL",
+    "variants": [
+      "A_FULL_CANDIDATE",
+      "B_BASE_SIGNAL_ONLY",
+      "C_REGIME_ONLY",
+      "D_NEUTRAL_REGIME",
+      "E_TIME_SHUFFLED_REGIME",
+      "F_LAGGED_REGIME",
+      "G_MATCHED_OCCUPANCY_PLACEBO"
+    ]
+  },
+  "qualification_rules": {
+    "accidental_concentration": {
+      "maximum_top1_month_positive_contribution_share": 0.5,
+      "maximum_top3_month_positive_contribution_share": 0.85,
+      "maximum_top1_asset_positive_contribution_share": 0.25,
+      "minimum_leave_one_month_net_mean": 0.0,
+      "minimum_leave_top3_assets_net_mean": 0.0
+    },
+    "independent_evidence": {
+      "report_only_midsearch_visibility_forbidden": true,
+      "minimum_report_only_net_lcb": 0.0,
+      "minimum_independent_mechanism_replications": 1,
+      "adaptive_data_cannot_count_as_independent_retest": true
+    }
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_localized_mechanism_qualification_20260716",
+    "report": "reports/CRYPTO_LOCALIZED_MECHANISM_QUALIFICATION_REPORT.md"
+  }
+}
