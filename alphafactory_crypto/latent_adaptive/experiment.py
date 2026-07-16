@@ -852,8 +852,8 @@ def predict_block(
             offset = block.start - left
             local = output["prediction"][:, offset:].numpy() * data.target_scale
             predictions[start:stop] = local.astype(np.float32)
-            latent = output["latent_repr"][:, offset:].numpy()
-            known_repr = output["known_repr"][:, offset:].numpy()
+            latent = output["latent_repr"][:, :, offset:].numpy()
+            known_repr = output["known_repr"][:, :, offset:].numpy()
             latent_variances.append(float(np.var(latent)))
             common = min(latent.shape[1], known_repr.shape[1])
             x = latent[:, :common].reshape(-1)
@@ -1224,6 +1224,7 @@ def run_experiment(
         return decision
     formal_results: list[Mapping[str, Any]] = []
     checkpoints: dict[tuple[str, int], Path] = {}
+    compatible_training_shas = set(config.get("compatible_training_source_shas", []))
     for arm in (ARM_A, ARM_B, ARM_C, ARM_E, ARM_D):
         for seed in config["training"]["seeds"]:
             seed = int(seed)
@@ -1233,7 +1234,10 @@ def run_experiment(
             if diagnostic_path.exists() and checkpoint.exists():
                 cached = json.loads(diagnostic_path.read_text(encoding="utf-8"))
                 if (
-                    cached.get("training_source_sha") == source_sha
+                    (
+                        cached.get("training_source_sha") == source_sha
+                        or cached.get("training_source_sha") in compatible_training_shas
+                    )
                     and cached.get("checkpoint_sha256") == file_sha(checkpoint)
                 ):
                     result = cached
@@ -1378,6 +1382,11 @@ def run_experiment(
                 "path": str(path.relative_to(repo_root)),
                 "sha256": file_sha(path),
                 "bytes": path.stat().st_size,
+                "training_source_sha": next(
+                    row["training_source_sha"]
+                    for row in formal_results
+                    if row["arm"] == arm and row["seed"] == seed
+                ),
             }
             for (arm, seed), path in sorted(checkpoints.items())
         ],

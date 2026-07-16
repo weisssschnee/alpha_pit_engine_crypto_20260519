@@ -17,6 +17,7 @@ from alphafactory_crypto.latent_adaptive.experiment import (
     causal_rolling_mean,
     future_volatility,
     known_window,
+    predict_block,
     shifted_delta,
 )
 
@@ -178,3 +179,30 @@ def test_adaptive_decision_reads_prediction_variance_from_representation() -> No
             )
     decision = adaptive_decision(economics, representations)
     assert set(decision["winning_arms"]) == {ARM_D, ARM_E}
+
+
+def test_prediction_representation_slices_time_not_channels() -> None:
+    rng = np.random.default_rng(7)
+    values = rng.normal(size=(2, 4, 400)).astype(np.float32)
+    data = SimpleNamespace(
+        values=values,
+        masks=np.ones_like(values, dtype=bool),
+        target=np.ones((2, 400), dtype=np.float32),
+        target_scale=1.0,
+        eligibility=np.ones((2, 400), dtype=bool),
+    )
+    slots = {
+        "position_pressure": (0, 1),
+        "liquidity_absorption": (2, 3),
+        "extreme_state_proximity": (0, 2),
+        "crowding_state": (1, 3),
+    }
+    model = LatentModel(ARM_A, 4, 16, CONFIG["model"], slots)
+    prediction, representation = predict_block(
+        model,
+        data,
+        slice(200, 300),
+        config=CONFIG,
+    )
+    assert prediction.shape == (2, 100)
+    assert np.isfinite(representation["latent_variance"])
