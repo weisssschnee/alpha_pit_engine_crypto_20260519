@@ -134,3 +134,10 @@ def test_budget_is_hard_capped_and_pilots_are_short() -> None:
     assert CONFIG["training"]["pilot_steps"] <= (
         CONFIG["training"]["formal_steps"] * 0.1
     )
+
+
+def test_cli_supports_non_retraining_formal_stage() -> None:
+    script = (
+        ROOT / "scripts" / "crypto_explicit_latent_adaptive_v1.py"
+    ).read_text(encoding="utf-8")
+    assert 'choices=("stage0", "formal", "all")' in script

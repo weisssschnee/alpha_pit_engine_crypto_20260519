@@ -1104,15 +1104,17 @@ def run_experiment(
     artifact_root.mkdir(parents=True, exist_ok=True)
     build_contracts(repo_root, config, runtime_root)
     data = prepare_data(repo_root, config, runtime_root)
+    source_sha = current_sha(repo_root)
+    budget_path = runtime_root / "model_pack.json"
     budget = {
         "schema_version": 1,
+        "source_sha": source_sha,
         "environment": environment_payload(config),
         "training": config["training"],
         "model": config["model"],
         "budget": config["budget"],
         "status": "FROZEN_BEFORE_PILOT",
     }
-    write_json(runtime_root / "model_pack.json", budget)
     if data.capability["status"] != "DATA_ADEQUACY_PASS":
         decision = {
             "status": "DATA_ADEQUACY_BLOCKED",
@@ -1124,22 +1126,49 @@ def run_experiment(
         return decision
     checkpoint_root = artifact_root / "checkpoints"
     metrics: list[Mapping[str, Any]] = []
-    pilot_results: list[Mapping[str, Any]] = []
-    pilot_known = checkpoint_root / "pilot" / f"{ARM_A}_{config['training']['pilot_seed']}.pt"
-    for arm in ARMS:
-        checkpoint = checkpoint_root / "pilot" / f"{arm}_{config['training']['pilot_seed']}.pt"
-        result = train_model(
-            arm=arm,
-            seed=int(config["training"]["pilot_seed"]),
-            data=data,
-            config=config,
-            checkpoint=checkpoint,
-            steps=int(config["training"]["pilot_steps"]),
-            pilot=True,
-            known_checkpoint=pilot_known if arm == ARM_D else None,
+    pilot_results: list[Mapping[str, Any]]
+    if stage == "formal":
+        if not budget_path.exists():
+            raise RuntimeError("formal stage requires a committed-source Stage-0 model pack")
+        budget = json.loads(budget_path.read_text(encoding="utf-8"))
+        if budget.get("source_sha") != source_sha:
+            raise RuntimeError("Stage-0 source SHA does not match current source SHA")
+        if budget.get("status") != "PILOT_PASS_BUDGET_PASS":
+            raise RuntimeError("formal stage requires PILOT_PASS_BUDGET_PASS")
+        pilot_results = list(budget["pilot_results"])
+        for result in pilot_results:
+            checkpoint = Path(result["checkpoint"])
+            if not checkpoint.is_absolute():
+                checkpoint = repo_root / checkpoint
+            if not checkpoint.exists() or file_sha(checkpoint) != result["checkpoint_sha256"]:
+                raise RuntimeError(f"pilot checkpoint identity mismatch: {checkpoint}")
+            metrics.append({"record_type": "pilot", **result})
+    else:
+        write_json(budget_path, budget)
+        pilot_results = []
+        pilot_known = (
+            checkpoint_root
+            / "pilot"
+            / f"{ARM_A}_{config['training']['pilot_seed']}.pt"
         )
-        pilot_results.append(result)
-        metrics.append({"record_type": "pilot", **result})
+        for arm in ARMS:
+            checkpoint = (
+                checkpoint_root
+                / "pilot"
+                / f"{arm}_{config['training']['pilot_seed']}.pt"
+            )
+            result = train_model(
+                arm=arm,
+                seed=int(config["training"]["pilot_seed"]),
+                data=data,
+                config=config,
+                checkpoint=checkpoint,
+                steps=int(config["training"]["pilot_steps"]),
+                pilot=True,
+                known_checkpoint=pilot_known if arm == ARM_D else None,
+            )
+            pilot_results.append(result)
+            metrics.append({"record_type": "pilot", **result})
     pilot_status = (
         "PASS"
         if all(row["status"] == "PASS" for row in pilot_results)
@@ -1162,7 +1191,7 @@ def run_experiment(
         if pilot_status != "PASS"
         else "RESOURCE_BUDGET_BLOCKED"
     )
-    write_json(runtime_root / "model_pack.json", budget)
+    write_json(budget_path, budget)
     if stage == "stage0" or budget["status"] != "PILOT_PASS_BUDGET_PASS":
         decision = {
             "status": (

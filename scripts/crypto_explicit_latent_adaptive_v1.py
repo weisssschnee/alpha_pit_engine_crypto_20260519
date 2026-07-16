@@ -17,7 +17,9 @@ def main() -> None:
         "--config",
         default="config/crypto_explicit_latent_adaptive_v1.json",
     )
-    parser.add_argument("--stage", choices=("stage0", "all"), default="all")
+    parser.add_argument(
+        "--stage", choices=("stage0", "formal", "all"), default="all"
+    )
     args = parser.parse_args()
     repo_root = REPO_ROOT
     decision = run_experiment(
