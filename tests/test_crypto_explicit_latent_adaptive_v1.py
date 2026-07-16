@@ -13,6 +13,7 @@ from alphafactory_crypto.latent_adaptive.experiment import (
     ARM_D,
     ARM_E,
     LatentModel,
+    adaptive_decision,
     causal_rolling_mean,
     future_volatility,
     known_window,
@@ -141,3 +142,39 @@ def test_cli_supports_non_retraining_formal_stage() -> None:
         ROOT / "scripts" / "crypto_explicit_latent_adaptive_v1.py"
     ).read_text(encoding="utf-8")
     assert 'choices=("stage0", "formal", "all")' in script
+
+
+def test_adaptive_decision_reads_prediction_variance_from_representation() -> None:
+    economics = []
+    representations = []
+    for arm in (ARM_D, ARM_E):
+        for seed in CONFIG["training"]["seeds"]:
+            increment = {
+                "net_mean": 0.01,
+                "gross_mean": 0.02,
+                "month_metrics": [
+                    {"net_mean": 0.01},
+                    {"net_mean": 0.02},
+                ],
+            }
+            economics.append(
+                {
+                    "record_type": "economic",
+                    "split": "stability",
+                    "arm": arm,
+                    "seed": seed,
+                    "model": {},
+                    "increment": increment,
+                }
+            )
+            representations.append(
+                {
+                    "record_type": "representation",
+                    "split": "stability",
+                    "arm": arm,
+                    "seed": seed,
+                    "prediction_variance": 0.1,
+                }
+            )
+    decision = adaptive_decision(economics, representations)
+    assert set(decision["winning_arms"]) == {ARM_D, ARM_E}

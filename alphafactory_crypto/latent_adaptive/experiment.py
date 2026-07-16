@@ -814,6 +814,7 @@ def predict_block(
     config: Mapping[str, Any],
     frozen_known: LatentModel | None = None,
     slot_drop: str | None = None,
+    known_cache: np.ndarray | None = None,
 ) -> tuple[np.ndarray, Mapping[str, Any]]:
     model.eval()
     if frozen_known is not None:
@@ -834,7 +835,9 @@ def predict_block(
                 data.masks[start:stop, :, left:block.stop].copy()
             ).float()
             known = torch.from_numpy(
-                known_window(data, slice(start, stop), left, block.stop)
+                known_cache[start:stop]
+                if known_cache is not None
+                else known_window(data, slice(start, stop), left, block.stop)
             )
             frozen_prediction = None
             if frozen_known is not None:
@@ -986,6 +989,11 @@ def adaptive_decision(
     stability = [
         row for row in economics if row["record_type"] == "economic" and row["split"] == "stability"
     ]
+    representation_by_arm_seed = {
+        (row["arm"], row["seed"]): row
+        for row in representations
+        if row["record_type"] == "representation" and row["split"] == "stability"
+    }
     candidates: dict[str, list[Mapping[str, Any]]] = {ARM_D: [], ARM_E: []}
     for row in stability:
         if row["arm"] in candidates:
@@ -1001,7 +1009,13 @@ def adaptive_decision(
                 len(rows) == 3
                 and sum(_monthly_not_single_driver(row["increment"]) for row in rows) >= 2
             ),
-            "prediction_noncollapsed": all(row["model"]["prediction_variance"] > 1e-12 for row in rows),
+            "prediction_noncollapsed": all(
+                representation_by_arm_seed[(row["arm"], row["seed"])][
+                    "prediction_variance"
+                ]
+                > 1e-12
+                for row in rows
+            ),
             "not_turnover_only": bool(
                 len(rows) == 3
                 and np.mean([row["increment"]["gross_mean"] for row in rows]) > 0
@@ -1215,16 +1229,39 @@ def run_experiment(
             seed = int(seed)
             checkpoint = checkpoint_root / "formal" / f"{arm}_{seed}.pt"
             known_checkpoint = checkpoints.get((ARM_A, seed)) if arm == ARM_D else None
-            result = train_model(
-                arm=arm,
-                seed=seed,
-                data=data,
-                config=config,
-                checkpoint=checkpoint,
-                steps=int(config["training"]["formal_steps"]),
-                pilot=False,
-                known_checkpoint=known_checkpoint,
-            )
+            diagnostic_path = checkpoint.with_suffix(".json")
+            if diagnostic_path.exists() and checkpoint.exists():
+                cached = json.loads(diagnostic_path.read_text(encoding="utf-8"))
+                if (
+                    cached.get("training_source_sha") == source_sha
+                    and cached.get("checkpoint_sha256") == file_sha(checkpoint)
+                ):
+                    result = cached
+                else:
+                    diagnostic_path.unlink()
+                    result = train_model(
+                        arm=arm,
+                        seed=seed,
+                        data=data,
+                        config=config,
+                        checkpoint=checkpoint,
+                        steps=int(config["training"]["formal_steps"]),
+                        pilot=False,
+                        known_checkpoint=known_checkpoint,
+                    )
+            else:
+                result = train_model(
+                    arm=arm,
+                    seed=seed,
+                    data=data,
+                    config=config,
+                    checkpoint=checkpoint,
+                    steps=int(config["training"]["formal_steps"]),
+                    pilot=False,
+                    known_checkpoint=known_checkpoint,
+                )
+            result = {**result, "training_source_sha": source_sha}
+            write_json(diagnostic_path, result)
             if result["status"] != "PASS":
                 decision = {
                     "status": "MODEL_FIT_DEGENERATE",
@@ -1241,6 +1278,15 @@ def run_experiment(
     economics: list[Mapping[str, Any]] = []
     representations: list[Mapping[str, Any]] = []
     prediction_cache: dict[tuple[str, int, str], tuple[np.ndarray, np.ndarray]] = {}
+    known_by_split = {
+        split: known_window(
+            data,
+            slice(None),
+            max(0, data.slices[split].start - int(config["model"]["sequence_length"])),
+            data.slices[split].stop,
+        )
+        for split in ("selection", "stability")
+    }
     for split in ("selection", "stability"):
         block = data.slices[split]
         for seed in config["training"]["seeds"]:
@@ -1254,7 +1300,12 @@ def run_experiment(
                     else None
                 )
                 prediction, representation = predict_block(
-                    model, data, block, config=config, frozen_known=frozen_known
+                    model,
+                    data,
+                    block,
+                    config=config,
+                    frozen_known=frozen_known,
+                    known_cache=known_by_split[split],
                 )
                 model_metrics, weights = economic_metrics(prediction, data, block)
                 if arm == ARM_A:
@@ -1297,6 +1348,7 @@ def run_experiment(
                 data.slices["stability"],
                 config=config,
                 slot_drop=slot,
+                known_cache=known_by_split["stability"],
             )
             model_metrics, weights = economic_metrics(
                 prediction, data, data.slices["stability"]
