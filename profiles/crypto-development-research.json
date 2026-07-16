@@ -3,7 +3,8 @@
   "required_components": [
     "instrument_semantics_audit",
     "multi_paradigm_arena",
-    "data_adequacy_gate"
+    "data_adequacy_gate",
+    "observed_archive_18m_compositional_search"
   ],
   "required_edges": []
 }

@@ -258,7 +258,7 @@
     },
     {
       "id": "broad_universe_compositional_search",
-      "label": "Broad-Universe Compositional Search",
+      "label": "Broad-Universe Compositional Search (6M gate audit)",
       "kind": "development_experiment",
       "lifecycle": "EXPERIMENTAL",
       "paths": [
@@ -310,6 +310,70 @@
         "matched-control runtime evidence",
         "robust cross-seed and cross-month evidence",
         "separate explicit authorization"
+      ]
+    },
+    {
+      "id": "observed_archive_18m_compositional_search",
+      "label": "Observed-archive 18M compositional search",
+      "kind": "development_experiment",
+      "lifecycle": "EXPERIMENTAL",
+      "paths": [
+        "alphafactory_crypto/broad_search/runner18m.py",
+        "alphafactory_crypto/broad_search/compositional18m.py",
+        "scripts/crypto_18m_compositional_broad_search.py",
+        "config/crypto_18m_compositional_broad_search_v1.json",
+        "reports/CRYPTO_18M_COMPOSITIONAL_BROAD_SEARCH_REPORT.md"
+      ],
+      "critical": true,
+      "semantic_role": "experimental_18m_compositional_search_evidence",
+      "active_authority": false,
+      "authority": {
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "repo_ref": "experiment/crypto-18m-compositional-broad-search-20260716",
+        "verified_sha": "b251733d51053cbbc99a3b79409debcee24ae760",
+        "sha256": "BF3C6B1929CD1F3E1FA8A776F47AEB08E7FB4F6B1BADA58F7CB90F5FD3D270E9"
+      },
+      "contracts": [
+        {
+          "id": "bounded_18m_search_authority",
+          "type": "AUTHORITY",
+          "rule": "The frozen config, typed-DAG runner, field registry, mapping, cost, seeds, and pair budget own this one development-only execution",
+          "severity": "HARD",
+          "enforced_by": "broad_search.runner18m.build_evidence",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_SEARCH_CONTRACT.json"
+        },
+        {
+          "id": "report_only_feedback_boundary",
+          "type": "BOUNDARY",
+          "rule": "The six-month report-only block never feeds policy updates; sealed reads, formal performance search, forward access, candidate promotion, and accepted-tag movement remain forbidden",
+          "severity": "HARD",
+          "enforced_by": "broad_search.runner18m.build_evidence",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_PAIR_NATIVE_FEEDBACK_CONTRACT.json"
+        },
+        {
+          "id": "localized_mechanism_claim_scope",
+          "type": "EVIDENCE",
+          "rule": "The run supports localized state-regime mechanisms and challenge instability only; it does not establish OOS validity, broad economic increment, promotion readiness, or absence of alpha",
+          "severity": "HARD",
+          "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json",
+        "evidence_sha256": "BE826CD390EBC44DCAB0195C7E40ADFC7E23584154341F28F1E5727ADBF70D69",
+        "verified_at_sha": "390c00ea480ad73ea8342fb7006b488c7f0cdc03"
+      },
+      "promotion_requirements": [
+        "independent non-feedback reproduction",
+        "survivorship-safe historical eligibility",
+        "formal OOS authorization and evidence",
+        "accepted report",
+        "explicit promotion authorization"
       ]
     },
     {
@@ -913,7 +977,7 @@
       "contract": {
         "id": "broad_search_non_formal_relation",
         "type": "ADMISSION",
-        "rule": "Current evidence qualifies a six-month data and grammar bottleneck only; the Data Adequacy Gate blocks resource preflight and economic search",
+        "rule": "This historical six-month Epoch-1 evidence qualifies a data and grammar bottleneck only; it does not govern the later bounded 18-month execution",
         "severity": "HARD",
         "enforced_by": "broad_search.audit.check_evidence",
         "bypass_forbidden": true,
@@ -926,6 +990,85 @@
         "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_SEARCH_DECISION.json",
         "evidence_sha256": "52125DC80C0590E8ACE0D77C17FE616A4092B9A469B259FEBC37A4CA01435C98",
         "verified_at_sha": "24878d99ffca4aca46473b9d0ff3860fcb47d416"
+      }
+    },
+    {
+      "id": "train_surface_supplies_18m_compositional_search",
+      "source": "observed_archive_train_surface",
+      "target": "observed_archive_18m_compositional_search",
+      "relation": "supplies_train_only_surface",
+      "lifecycle": "EXPERIMENTAL",
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "content_bound_train_surface_admission",
+        "type": "ADMISSION",
+        "rule": "The search may consume only the content-hash-bound observed-archive 18-month train surface and its admitted field registry; no 2025+ or sealed role is eligible",
+        "severity": "HARD",
+        "enforced_by": "broad_search.runner18m.build_evidence",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_SEARCH_CONTRACT.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_SEARCH_CONTRACT.json",
+        "evidence_sha256": "E2557A1C16FC10C4E7AA2DD8845DE21C9D12DBC1321FDA7B89A95B7634F94B14",
+        "verified_at_sha": "390c00ea480ad73ea8342fb7006b488c7f0cdc03"
+      }
+    },
+    {
+      "id": "search_18m_enforces_sealed_boundaries",
+      "source": "observed_archive_18m_compositional_search",
+      "target": "sealed_research_boundaries",
+      "relation": "respects_sealed_boundaries",
+      "lifecycle": "EXPERIMENTAL",
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "search_18m_development_only_boundary",
+        "type": "BOUNDARY",
+        "rule": "The execution is train-development-only with zero sealed reads; report-only observations cannot feed search, memory, scheduling, promotion, or boundary changes",
+        "severity": "HARD",
+        "enforced_by": "broad_search.runner18m.check_evidence",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "evidence-boundary-change",
+        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json",
+        "evidence_sha256": "BE826CD390EBC44DCAB0195C7E40ADFC7E23584154341F28F1E5727ADBF70D69",
+        "verified_at_sha": "390c00ea480ad73ea8342fb7006b488c7f0cdc03"
+      }
+    },
+    {
+      "id": "search_18m_formal_activation_forbidden",
+      "source": "observed_archive_18m_compositional_search",
+      "target": "formal_performance_search",
+      "relation": "activation_forbidden",
+      "lifecycle": "FORBIDDEN",
+      "forbidden": true,
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "development_result_not_formal_search_authority",
+        "type": "BOUNDARY",
+        "rule": "A development matched-positive or robust-positive result cannot activate formal performance search, forward access, candidate promotion, or accepted-tag movement",
+        "severity": "HARD",
+        "enforced_by": "broad_search.runner18m.check_evidence",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "evidence-boundary-change",
+        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json",
+        "evidence_sha256": "BE826CD390EBC44DCAB0195C7E40ADFC7E23584154341F28F1E5727ADBF70D69",
+        "verified_at_sha": "390c00ea480ad73ea8342fb7006b488c7f0cdc03"
       }
     },
     {

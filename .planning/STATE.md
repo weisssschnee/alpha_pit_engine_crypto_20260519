@@ -12,11 +12,14 @@ FINANCIAL_GATE_HOLD_RESEARCH
 CRYPTO_SEARCH_INSTRUMENT_MISMATCH_CONFIRMED
 CRYPTO_INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_QUALIFIED
 INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_PATH_EXPERIMENTAL
-CRYPTO_BROAD_SEARCH_DATA_UNIVERSE_BLOCKED
+CRYPTO_6M_BROAD_SEARCH_DATA_UNIVERSE_BLOCKED_HISTORICAL
 CRYPTO_COMPOSITIONAL_GRAMMAR_BOTTLENECK_CONFIRMED
 BROAD_UNIVERSE_COMPOSITIONAL_SEARCH_EXPERIMENTAL_NON_FORMAL
 CRYPTO_TRAIN_SURFACE_18M_DEVELOPMENT_READY_WITH_SCOPE_LIMITS
 CRYPTO_TRAIN_FIELD_REGISTRY_RECONCILED
+CRYPTO_18M_COMPOSITIONAL_SEARCH_EXECUTION_COMPLETED
+CRYPTO_18M_COMPOSITIONAL_SEARCH_LOCALIZED_MECHANISMS_ONLY
+CRYPTO_18M_SEARCH_PRIMARY_BOTTLENECK_CHALLENGE_INSTABILITY
 GRAPH_RAW_CURRENT_SEPARATION_ACTIVE
 CURRENT_CONTRACT_CAPSULE_ACTIVE
 ```
@@ -31,7 +34,7 @@ tag:    crypto-frontier-provenance-closure-20260714
 
 `REPOSITORY_PROVENANCE_CLOSURE_COMPLETED` is the committed manifest status. `CRYPTO_FRONTIER_PROVENANCE_CLOSURE_ACCEPTED` is the user-accepted interpretation of the annotated closure tag, whose attestation records Reproducer PASS, Gatekeeper PASS, and base bundle SHA256 `99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2`.
 
-The checked-out repository line is `repair/crypto-train-surface-reconciliation-20260716`. The train-only loader/config source is bound to `a88552589c92161a3cfb7593cc82c8e20f0c5f5c`; its evidence is committed at `c964ea47256e6177139de839c18196ac8accc46c`, with source-content bundle SHA256 `8CEB549ED8AF73611163D827AD15DD5F409DCD422A6831ABCA28E86B8627D439` and artifact bundle SHA256 `21435BC136B23A284DFEE2E835CA8E141A999910E1FFBA0D44B468CEA03670E3`. The broad-search evidence at `24878d99ffca4aca46473b9d0ff3860fcb47d416` and accepted closure tag at `4726795f61052470d56e2d1475e4f6da9d262943` remain distinct historical authorities.
+The checked-out repository line is `experiment/crypto-18m-compositional-broad-search-20260716`. The bounded search implementation is bound to source SHA `b251733d51053cbbc99a3b79409debcee24ae760`; its runtime evidence is committed at `390c00ea480ad73ea8342fb7006b488c7f0cdc03`, its report/provenance closure at `b689a17ad03cb2d180e92e944f253dd834846474`, and its content-hash bundle is `EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492`. The train-only loader/config source remains bound to `a88552589c92161a3cfb7593cc82c8e20f0c5f5c`; its source-content bundle SHA256 is `8CEB549ED8AF73611163D827AD15DD5F409DCD422A6831ABCA28E86B8627D439`. The six-month broad-search evidence at `24878d99ffca4aca46473b9d0ff3860fcb47d416` and accepted closure tag at `4726795f61052470d56e2d1475e4f6da9d262943` remain distinct historical authorities.
 
 ## Source-of-truth order
 
@@ -54,6 +57,7 @@ No single status code overrides source or execution facts.
 - `CRYPTO_INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_QUALIFIED` is scoped to fixed finite-grammar synthetic expression, reachability, mapping, costing, feedback, and survivor retention. It is not a market, economic, OOS, open-generator recall, or historical-runner repair conclusion.
 - The corrected train inventory joins the 2023H2 complete replay to Top498 v3's 2024 train block only. It contains 2,549,139 rows, 13,200 unique hours, 276 observed assets, 176 assets spanning both periods, 176 assets with all 8,784 hours in 2024, and 140 to 276 monthly active assets. All ten current runtime fields pass non-null and variance gates; 5,388 Git inventory identities were reconciled, with 72 common normalized physical fields and 51 same-name inventory registrations. This qualifies the observed-archive 18-month train surface, not a survivorship-complete exchange universe. The symbol seed may omit delisted contracts, and native aggTrades remains core10 over six months.
 - The deterministic 2,000-candidate audit of the 9,576 grammar found 2,000 exact identities, 951 numeric identities, 931 rank identities, 1,242 mapped-weight identities, and 1,214 quantized behavior identities. Irrespective of the behavior ratio, source proves field arity 1 and zero cross-field interactions. `CRYPTO_COMPOSITIONAL_GRAMMAR_BOTTLENECK_CONFIRMED` is therefore qualified; it does not prove that the experimental typed DAG has economic value.
+- The explicitly authorized 18-month development-only compositional run admitted 41 fields across 12 families, audited 500,000 proposals, evaluated 8,192 adaptive matched pairs plus 8,192 non-feedback report-only pairs, and made zero sealed reads. It found three adaptive matched-positive clusters, six report-only matched-positive clusters, two cross-seed reproduced clusters, and one robust-positive candidate/cluster, all localized to the authorized representation and observed-archive scope. The qualified result is `CRYPTO_18M_COMPOSITIONAL_SEARCH_LOCALIZED_MECHANISMS_ONLY`; `CHALLENGE_INSTABILITY` remains the primary bottleneck. This is not formal OOS evidence, broad component increment, candidate promotion evidence, or proof that the mechanism space is exhausted.
 
 ## Graph state
 
@@ -61,7 +65,7 @@ No single status code overrides source or execution facts.
 - CURRENT input: `config/architecture_overlay.json`; critical nodes and edges use only Authority, Boundary, Admission, and Evidence capsules.
 - CURRENT outputs: `.planning/graphs/current.json` and `current.html`; both are generated and must not be edited by hand.
 - Assurance is independent from lifecycle color. `checked_at` is generated; exact evidence SHA/path/hash may be refreshed automatically, but lifecycle transitions still require an explicit accepted decision.
-- Profiles remain an explicit five-file allowlist under `profiles/`; the broad-compositional profile adds no registry, control plane, or automatic lifecycle inference.
+- Profiles remain an explicit five-file allowlist under `profiles/`; the 18-month experiment reuses the stable development and boundary profiles and adds no registry, control plane, or automatic lifecycle inference.
 - Maintenance: RAW uses `scripts/maintain_crypto_navigation_graph.ps1 build|check|query`; CURRENT uses `node "$env:CODEX_HOME\get-shit-done\bin\gsd-tools.cjs" graphify maintain` and strict audit only with an explicit trace/profile.
 - Ignore contract: `.graphifyignore` prevents RAW and CURRENT products, the overlay, and profiles from being re-ingested as source.
 - `main` still does not import the historical `crypto_architecture_control_registry_v1.json`; that 65-node closure-line registry remains historical evidence rather than the new CURRENT input.
@@ -103,7 +107,7 @@ No existing Graph, report, historical metric, or inventory row can open those bo
 
 Graph maintenance may rebuild or query RAW and regenerate CURRENT when committed facts change. It must remain lightweight. A passing validation refresh cannot by itself activate an experimental component, open a sealed boundary, start a search, integrate data, or promote a candidate.
 
-Economic work remains `HOLD_RESEARCH`. The 18-month train loader is active for development-only data access, but it does not activate the experimental typed DAG or any performance search. A survivorship-safe historical universe, qualified native order-field history, and explicit search authorization are still required before the 64-pair resource preflight. Sealed blocks and promotion remain unchanged.
+Economic work remains `HOLD_RESEARCH`. A one-time, explicitly authorized 18-month typed-DAG development search has now executed; that authorization is exhausted by this frozen run and does not activate another performance search. The result localizes limited state-regime evidence but does not qualify an OOS challenger, promotion candidate, or broad system increment. A survivorship-safe historical universe, qualified native order-field history, formal OOS authorization, and independent non-feedback reproduction remain required. Sealed blocks and promotion remain unchanged.
 
 ## Blocked claims
 
@@ -113,8 +117,9 @@ Economic work remains `HOLD_RESEARCH`. The 18-month train loader is active for d
 - Capability qualification repairs or validates the historical search runners.
 - Capability qualification authorizes a real development canary or any frozen-boundary change.
 - The implemented mechanism space has been exhausted.
-- Qualified-data compositional search found no gross or net edge.
-- The experimental typed DAG or matched-ablation design has a development increment.
+- The experimental typed DAG broadly improves the current system or has an OOS-qualified component increment.
+- The localized robust-positive cluster is promotion-ready or generalizes beyond the authorized observed-archive development surface.
+- The report-only block is formal validation, challenge, forward, recent, May stress, or OOS evidence.
 - The 18-month train-surface qualification makes the earlier Qlib or DeepDow economic result informative.
 - New data is the unique next step.
 - An external component has a credible development increment.
