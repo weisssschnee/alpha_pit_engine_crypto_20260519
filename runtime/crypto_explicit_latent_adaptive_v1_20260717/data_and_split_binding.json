@@ -1,0 +1,26 @@
+{
+  "panel_cache": ".cache/crypto_18m_compositional_broad_search_v1",
+  "panel_metadata_sha256": "CCEB67F08F7525C71F5EA25A4B658324B5EF376E414318CB1220A1507465E539",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "spent_report_only_access": "NOT_AUTHORIZED",
+  "splits": {
+    "selection": {
+      "end_exclusive": "2024-05-01T00:00:00Z",
+      "start": "2024-03-01T00:00:00Z"
+    },
+    "spent_report_only": {
+      "end_exclusive": "2025-01-01T00:00:00Z",
+      "start": "2024-07-01T00:00:00Z",
+      "status": "HISTORICALLY_CONSUMED_NOT_AUTHORIZED"
+    },
+    "stability": {
+      "end_exclusive": "2024-07-01T00:00:00Z",
+      "start": "2024-05-01T00:00:00Z"
+    },
+    "train": {
+      "end_exclusive": "2024-03-01T00:00:00Z",
+      "start": "2023-07-01T00:00:00Z"
+    }
+  }
+}

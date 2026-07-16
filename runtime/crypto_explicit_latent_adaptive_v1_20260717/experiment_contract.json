@@ -1,0 +1,58 @@
+{
+  "authorization": {
+    "adaptive_development_training": true,
+    "cross_sprint_memory": false,
+    "formula_search": false,
+    "promotion": false,
+    "sealed_reads": false,
+    "spent_report_only_access": false,
+    "strict_oos": false
+  },
+  "budget": {
+    "formal_neural_jobs": 15,
+    "hard_job_cap": 25,
+    "max_checkpoint_storage_bytes": 1073741824,
+    "max_peak_rss_bytes": 8589934592,
+    "max_total_cpu_hours": 12.0,
+    "maximum_extra_trained_controls": 3,
+    "non_neural_baselines": 2,
+    "pilot_jobs": 5
+  },
+  "economic_contract": {
+    "cost_bps": 5.0,
+    "execution": "t_plus_2h",
+    "feature_bucket": "t",
+    "feature_observable": "t_plus_1h",
+    "horizon_hours": 4,
+    "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+    "target": "log(close[t+6] / close[t+2])",
+    "turnover": "FULL_L1_WITH_INITIAL_ESTABLISHMENT_AND_TERMINAL_LIQUIDATION"
+  },
+  "evidence_scope": "ADAPTIVE_DEVELOPMENT_ONLY",
+  "experiment_id": "CRYPTO_EXPLICIT_LATENT_ADAPTIVE_V1",
+  "question_answered": "Whether fixed small TCN residual or structured proxy latent representations add stable 4h adaptive-development increment over a strong deterministic Known State baseline.",
+  "question_not_answered": [
+    "independent report-only qualification",
+    "OOS validity",
+    "causal market ecology",
+    "promotion readiness"
+  ],
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_files": {
+    "field_registry": {
+      "path": "runtime\\crypto_18m_compositional_broad_search_20260716\\CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY.json",
+      "sha256": "3BCF7B884EB44264B5BE4DC9A0BCF2D3355F59BA1AA33B1E5B81525061E94277"
+    },
+    "search_contract": {
+      "path": "runtime\\crypto_18m_compositional_broad_search_20260716\\CRYPTO_18M_SEARCH_CONTRACT.json",
+      "sha256": "E2557A1C16FC10C4E7AA2DD8845DE21C9D12DBC1321FDA7B89A95B7634F94B14"
+    },
+    "train_surface_config": {
+      "path": "config\\crypto_train_surface_18m_v1.json",
+      "sha256": "3C83B2CB0BDE461B8C8B5106DF870C021C5B51DFCEF46BAD138354F1A8276076"
+    }
+  },
+  "source_sha": "2ba947a03de5e025ee2d8cbda7f1e8d604cf6911",
+  "spent_report_only_reads": 0
+}

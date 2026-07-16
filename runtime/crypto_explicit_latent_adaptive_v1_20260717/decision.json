@@ -1,0 +1,31 @@
+{
+  "arm_gates": {
+    "D_KNOWN_RESIDUAL": {
+      "aggregate_increment_positive": false,
+      "not_single_month_driven": false,
+      "not_turnover_only": true,
+      "pass": false,
+      "prediction_noncollapsed": true,
+      "three_seed_rows": true,
+      "two_of_three_positive": false
+    },
+    "E_KNOWN_STRUCTURED_PROXY": {
+      "aggregate_increment_positive": false,
+      "not_single_month_driven": false,
+      "not_turnover_only": true,
+      "pass": false,
+      "prediction_noncollapsed": true,
+      "three_seed_rows": true,
+      "two_of_three_positive": false
+    }
+  },
+  "evidence_scope": "ADAPTIVE_DEVELOPMENT_ONLY",
+  "oos_grade": "NONE",
+  "promotion_implication": "NONE",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "spent_report_only_access": "NOT_PERFORMED",
+  "spent_report_only_reads": 0,
+  "status": "ADAPTIVE_NO_STABLE_LATENT_INCREMENT",
+  "winning_arms": []
+}

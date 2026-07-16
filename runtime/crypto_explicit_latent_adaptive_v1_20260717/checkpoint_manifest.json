@@ -1,0 +1,125 @@
+{
+  "checkpoints": [
+    {
+      "arm": "A_KNOWN_ONLY",
+      "bytes": 175491,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\A_KNOWN_ONLY_20260717.pt",
+      "seed": 20260717,
+      "sha256": "ECCFD14F08535941E9D4083EE1AA828F83C6DE7B0556AB8D2A990138EA661B4C",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "A_KNOWN_ONLY",
+      "bytes": 175491,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\A_KNOWN_ONLY_20260718.pt",
+      "seed": 20260718,
+      "sha256": "43D8C3C6F4DB102400C38CF70469F429900CC6E378499EB85999B0E50CEA2ACF",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "A_KNOWN_ONLY",
+      "bytes": 175491,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\A_KNOWN_ONLY_20260719.pt",
+      "seed": 20260719,
+      "sha256": "4E9CCE4DE9822DF74112931119374A21D6D91C3FA4306F4362BF67E4B2822807",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "B_LATENT_ONLY",
+      "bytes": 175597,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\B_LATENT_ONLY_20260717.pt",
+      "seed": 20260717,
+      "sha256": "D2AABD7BB99B82875A3C24EEC171A7F392AF3881D5124FD1E10E69DC55307CFD",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "B_LATENT_ONLY",
+      "bytes": 175597,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\B_LATENT_ONLY_20260718.pt",
+      "seed": 20260718,
+      "sha256": "7A61CD54317CAABF2A1DC6FFA88C05CEB195DB050D35680BFB2D23BFE31D91B5",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "B_LATENT_ONLY",
+      "bytes": 175597,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\B_LATENT_ONLY_20260719.pt",
+      "seed": 20260719,
+      "sha256": "0E78D1DAA77AA3B57879164F9D20130BD3CF5F84779BB2DF994939940836630E",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "C_KNOWN_GENERIC",
+      "bytes": 175937,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\C_KNOWN_GENERIC_20260717.pt",
+      "seed": 20260717,
+      "sha256": "266518D47E3915AF1047B214428C0ABFF2E6170F5703C42F3850A45C951B14F4",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "C_KNOWN_GENERIC",
+      "bytes": 175937,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\C_KNOWN_GENERIC_20260718.pt",
+      "seed": 20260718,
+      "sha256": "A8E7A43EF1BB726C0FE2AE75084793978EDD53E02842AF33DAFA1307B5B6FC3B",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "C_KNOWN_GENERIC",
+      "bytes": 175937,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\C_KNOWN_GENERIC_20260719.pt",
+      "seed": 20260719,
+      "sha256": "23AE8EA269ED20507B323A60F617F15F8347F517995A31F356D4101419C1F73D",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "D_KNOWN_RESIDUAL",
+      "bytes": 175723,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\D_KNOWN_RESIDUAL_20260717.pt",
+      "seed": 20260717,
+      "sha256": "AC69CE3E3441D9AA69737F8992641E888C858D4269DFEABACC462F415199E5F6",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "D_KNOWN_RESIDUAL",
+      "bytes": 175723,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\D_KNOWN_RESIDUAL_20260718.pt",
+      "seed": 20260718,
+      "sha256": "D3C6F4AE5BA7B72FD44C152BFBC77650091F4AA8F2745E8888980940FBBF6B3F",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "D_KNOWN_RESIDUAL",
+      "bytes": 175723,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\D_KNOWN_RESIDUAL_20260719.pt",
+      "seed": 20260719,
+      "sha256": "85773387B962DA9368C9E906EFFBBAA37A4B81710036DE55D3FC471EDA959F8E",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "E_KNOWN_STRUCTURED_PROXY",
+      "bytes": 130267,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\E_KNOWN_STRUCTURED_PROXY_20260717.pt",
+      "seed": 20260717,
+      "sha256": "185080D826C84EA9F0ED61E0412D8B78497C0521853D62DDF0F2EC3C9D1CDAFE",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "E_KNOWN_STRUCTURED_PROXY",
+      "bytes": 130267,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\E_KNOWN_STRUCTURED_PROXY_20260718.pt",
+      "seed": 20260718,
+      "sha256": "8F1C199949774338EECC9F3140786B751EBD7491E90B288C04FBBFB691CBD22F",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    },
+    {
+      "arm": "E_KNOWN_STRUCTURED_PROXY",
+      "bytes": 130267,
+      "path": ".cache\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoints\\formal\\E_KNOWN_STRUCTURED_PROXY_20260719.pt",
+      "seed": 20260719,
+      "sha256": "D4F5DEB77A187CA09C66AA2BE57688B06460F114DABCDDDBA495946410AC3053",
+      "training_source_sha": "8a9431d1ba04af5604cd8aa3e2894180b571e952"
+    }
+  ],
+  "schema_version": 1
+}

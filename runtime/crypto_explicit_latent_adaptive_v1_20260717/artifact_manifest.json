@@ -1,0 +1,50 @@
+{
+  "artifact_root_hash": "1D54265F269E4F3B92E87AB3C2456A970FAB87C522721781AD08A1C02FAA7C0E",
+  "artifacts": [
+    {
+      "bytes": 18822,
+      "path": "runtime\\crypto_explicit_latent_adaptive_v1_20260717\\capability_gate.json",
+      "sha256": "0C38DAD6A61DDBAE917F8424D9CB96C387468C9A8F9491909EC4CD393F4B335B"
+    },
+    {
+      "bytes": 5709,
+      "path": "runtime\\crypto_explicit_latent_adaptive_v1_20260717\\checkpoint_manifest.json",
+      "sha256": "C6A3019229B39218788864FD9DFA49D03ED8F80D9102A55CFAD48642F65F5B98"
+    },
+    {
+      "bytes": 806,
+      "path": "runtime\\crypto_explicit_latent_adaptive_v1_20260717\\data_and_split_binding.json",
+      "sha256": "6B6B7AB17C47C8E58040793BAC3A7314C566D1F8E65BAD666DBA2E91EDE41C4F"
+    },
+    {
+      "bytes": 924,
+      "path": "runtime\\crypto_explicit_latent_adaptive_v1_20260717\\decision.json",
+      "sha256": "2FF2651B8F388C1CCA0FF0305D0F975D8738FB02A7C2C19C6A77A4A97D921003"
+    },
+    {
+      "bytes": 2181,
+      "path": "runtime\\crypto_explicit_latent_adaptive_v1_20260717\\experiment_contract.json",
+      "sha256": "982733B049F7DE340C6D574BF58409F3DBFE61B39060575AE8EA97F024864A8C"
+    },
+    {
+      "bytes": 129464,
+      "path": "runtime\\crypto_explicit_latent_adaptive_v1_20260717\\metrics.parquet",
+      "sha256": "9AAFECAF6F6CE997198AC8A71A27713A0D6C8296E68FB929329526FC38BA740F"
+    },
+    {
+      "bytes": 10361,
+      "path": "runtime\\crypto_explicit_latent_adaptive_v1_20260717\\model_pack.json",
+      "sha256": "A77C183980C297904B67DD428200AE39C4F2F86305B76073E2CAC8C3CDBA6CF5"
+    },
+    {
+      "bytes": 993,
+      "path": "reports\\crypto_explicit_latent_adaptive_v1_20260717\\REPORT.md",
+      "sha256": "0F2CE9599CA370FEE7CDB086513656E7CF7575A79A0E5C546A94EAD9F6AFE317"
+    }
+  ],
+  "experiment_id": "CRYPTO_EXPLICIT_LATENT_ADAPTIVE_V1",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_sha": "2ba947a03de5e025ee2d8cbda7f1e8d604cf6911",
+  "spent_report_only_reads": 0
+}
