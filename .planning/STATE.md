@@ -20,6 +20,9 @@ CRYPTO_TRAIN_FIELD_REGISTRY_RECONCILED
 CRYPTO_18M_COMPOSITIONAL_SEARCH_EXECUTION_COMPLETED
 CRYPTO_18M_COMPOSITIONAL_SEARCH_LOCALIZED_MECHANISMS_ONLY
 CRYPTO_18M_SEARCH_PRIMARY_BOTTLENECK_CHALLENGE_INSTABILITY
+CRYPTO_LOCALIZED_MECHANISM_QUALIFICATION_COMPLETED
+INSUFFICIENT_INDEPENDENT_EVIDENCE
+CRYPTO_IMMUTABLE_CHALLENGER_NOT_ISSUED
 GRAPH_RAW_CURRENT_SEPARATION_ACTIVE
 CURRENT_CONTRACT_CAPSULE_ACTIVE
 ```
@@ -34,7 +37,7 @@ tag:    crypto-frontier-provenance-closure-20260714
 
 `REPOSITORY_PROVENANCE_CLOSURE_COMPLETED` is the committed manifest status. `CRYPTO_FRONTIER_PROVENANCE_CLOSURE_ACCEPTED` is the user-accepted interpretation of the annotated closure tag, whose attestation records Reproducer PASS, Gatekeeper PASS, and base bundle SHA256 `99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2`.
 
-The checked-out repository line is `experiment/crypto-18m-compositional-broad-search-20260716`. The bounded search implementation is bound to source SHA `b251733d51053cbbc99a3b79409debcee24ae760`; its runtime evidence is committed at `390c00ea480ad73ea8342fb7006b488c7f0cdc03`, its report/provenance closure at `b689a17ad03cb2d180e92e944f253dd834846474`, and its content-hash bundle is `EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492`. The train-only loader/config source remains bound to `a88552589c92161a3cfb7593cc82c8e20f0c5f5c`; its source-content bundle SHA256 is `8CEB549ED8AF73611163D827AD15DD5F409DCD422A6831ABCA28E86B8627D439`. The six-month broad-search evidence at `24878d99ffca4aca46473b9d0ff3860fcb47d416` and accepted closure tag at `4726795f61052470d56e2d1475e4f6da9d262943` remain distinct historical authorities.
+The checked-out repository line is `audit/crypto-localized-mechanism-qualification-20260716`. The bounded search implementation remains bound to source SHA `b251733d51053cbbc99a3b79409debcee24ae760`; its runtime evidence is committed at `390c00ea480ad73ea8342fb7006b488c7f0cdc03`, its report/provenance closure at `b689a17ad03cb2d180e92e944f253dd834846474`, and its content-hash bundle is `EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492`. The localized qualification implementation is fixed at `859ba537c2a71a14d7540ab343df956ead4c6202`, its six audit assets at `7f2e387e71c71c703085ce311640459a08b1d2a8`, and its decision/report closure at `eae955593355b1f8e6466167f66200bfb0ddc29b`; qualification bundle SHA256 is `0C6193E81FEAB8271B8BAE05AD04604D74494EAB2710794C59A7F42919DD68EB`. The train-only loader/config source remains bound to `a88552589c92161a3cfb7593cc82c8e20f0c5f5c`; its source-content bundle SHA256 is `8CEB549ED8AF73611163D827AD15DD5F409DCD422A6831ABCA28E86B8627D439`. The six-month broad-search evidence at `24878d99ffca4aca46473b9d0ff3860fcb47d416` and accepted closure tag at `4726795f61052470d56e2d1475e4f6da9d262943` remain distinct historical authorities.
 
 ## Source-of-truth order
 
@@ -58,6 +61,8 @@ No single status code overrides source or execution facts.
 - The corrected train inventory joins the 2023H2 complete replay to Top498 v3's 2024 train block only. It contains 2,549,139 rows, 13,200 unique hours, 276 observed assets, 176 assets spanning both periods, 176 assets with all 8,784 hours in 2024, and 140 to 276 monthly active assets. All ten current runtime fields pass non-null and variance gates; 5,388 Git inventory identities were reconciled, with 72 common normalized physical fields and 51 same-name inventory registrations. This qualifies the observed-archive 18-month train surface, not a survivorship-complete exchange universe. The symbol seed may omit delisted contracts, and native aggTrades remains core10 over six months.
 - The deterministic 2,000-candidate audit of the 9,576 grammar found 2,000 exact identities, 951 numeric identities, 931 rank identities, 1,242 mapped-weight identities, and 1,214 quantized behavior identities. Irrespective of the behavior ratio, source proves field arity 1 and zero cross-field interactions. `CRYPTO_COMPOSITIONAL_GRAMMAR_BOTTLENECK_CONFIRMED` is therefore qualified; it does not prove that the experimental typed DAG has economic value.
 - The explicitly authorized 18-month development-only compositional run admitted 41 fields across 12 families, audited 500,000 proposals, evaluated 8,192 adaptive matched pairs plus 8,192 non-feedback report-only pairs, and made zero sealed reads. It found three adaptive matched-positive clusters, six report-only matched-positive clusters, two cross-seed reproduced clusters, and one robust-positive candidate/cluster, all localized to the authorized representation and observed-archive scope. The qualified result is `CRYPTO_18M_COMPOSITIONAL_SEARCH_LOCALIZED_MECHANISMS_ONLY`; `CHALLENGE_INSTABILITY` remains the primary bottleneck. This is not formal OOS evidence, broad component increment, candidate promotion evidence, or proof that the mechanism space is exhausted.
+- The follow-on qualification exactly reproduced the unique candidate's adaptive/report-only identities and economics. It is not a formula, receipt, runtime, or exact portfolio duplicate; its fixed-portfolio contribution is not accidentally concentrated (Top-1 month positive share 0.238746, Top-3 months 0.523251, Top-1 asset 0.067670, and all required leave-outs remain positive). Native StateModulation changes portfolio occupancy materially on the adaptive block, so the fixed A-G audit also held A's realized weight multiset and support constant. A and regime-only C remain development robust-positive while the matched-occupancy placebo fails, which is compatible with listing-age/maturity localization rather than a pure mapping artifact.
+- Independent qualification is still insufficient. The candidate's six-month report-only net LCB is `-9.706555164731221e-06`; the 18-month robust statistic reuses 12 adaptive selection months; neither reproduced cluster supplies a distinct mechanism that is matched-positive on both blocks. The runner also exposed Stage-A report-only cluster/yield statistics to the Stage-B OR gate contrary to the visibility contract, although adaptive policy improvement independently authorized Stage B, so the frozen candidate pack is counterfactually unchanged. The final classification is `INSUFFICIENT_INDEPENDENT_EVIDENCE`; no immutable challenger was issued.
 
 ## Graph state
 
@@ -72,7 +77,7 @@ No single status code overrides source or execution facts.
 - The former hand-maintained `CURRENT_ARCHITECTURE.md` is superseded and removed from the live tree; Git history preserves it.
 - No second registry, automatic runtime inference, large contract file, hook, or heavyweight CI layer is added.
 
-The old RAW graph built from `fb27d14c` is superseded by the refreshed navigation graph. Historical Graph artifacts remain recoverable through Git.
+The RAW graph built from the prior 18-month search closure is superseded by the localized-qualification refresh. Historical Graph artifacts remain recoverable through Git.
 
 ## Planning supersession
 

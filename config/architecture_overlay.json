@@ -346,33 +346,98 @@
         {
           "id": "report_only_feedback_boundary",
           "type": "BOUNDARY",
-          "rule": "The six-month report-only block never feeds policy updates; sealed reads, formal performance search, forward access, candidate promotion, and accepted-tag movement remain forbidden",
+          "rule": "Report-only rewards never update lane state, but the frozen runner exposed Stage-A report-only cluster/yield statistics to the Stage-B gate; the qualification audit owns this non-causal contract failure and future scheduling visibility remains forbidden",
           "severity": "HARD",
-          "enforced_by": "broad_search.runner18m.build_evidence",
+          "enforced_by": "broad_search.qualification18m.check_evidence",
           "bypass_forbidden": true,
-          "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_PAIR_NATIVE_FEEDBACK_CONTRACT.json"
+          "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_REPORT_ONLY_INDEPENDENCE_AUDIT.json"
         },
         {
           "id": "localized_mechanism_claim_scope",
           "type": "EVIDENCE",
-          "rule": "The run supports localized state-regime mechanisms and challenge instability only; it does not establish OOS validity, broad economic increment, promotion readiness, or absence of alpha",
+          "rule": "The unique candidate is neither an identity artifact nor accidentally concentrated, but its independent report-only LCB is negative and the reproduced clusters are same-family report-only variants; the qualified conclusion is INSUFFICIENT_INDEPENDENT_EVIDENCE",
           "severity": "HARD",
-          "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json"
+          "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json"
         }
       ],
       "validation": {
-        "level": "STATIC_VERIFIED",
-        "result": "PASS",
+        "level": "PARTIAL",
+        "result": "WARN",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json",
-        "evidence_sha256": "BE826CD390EBC44DCAB0195C7E40ADFC7E23584154341F28F1E5727ADBF70D69",
-        "verified_at_sha": "390c00ea480ad73ea8342fb7006b488c7f0cdc03"
+        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
+        "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
+        "verified_at_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
       },
       "promotion_requirements": [
         "independent non-feedback reproduction",
         "survivorship-safe historical eligibility",
         "formal OOS authorization and evidence",
         "accepted report",
+        "explicit promotion authorization"
+      ]
+    },
+    {
+      "id": "localized_mechanism_qualification",
+      "label": "Localized mechanism evidence qualification",
+      "kind": "assurance",
+      "lifecycle": "EXPERIMENTAL",
+      "paths": [
+        "alphafactory_crypto/broad_search/qualification18m.py",
+        "scripts/crypto_localized_mechanism_qualification.py",
+        "config/crypto_localized_mechanism_qualification_v1.json",
+        "reports/CRYPTO_LOCALIZED_MECHANISM_QUALIFICATION_REPORT.md"
+      ],
+      "critical": true,
+      "semantic_role": "localized_mechanism_evidence_qualification",
+      "active_authority": false,
+      "authority": {
+        "path": "alphafactory_crypto/broad_search/qualification18m.py",
+        "repo_ref": "audit/crypto-localized-mechanism-qualification-20260716",
+        "verified_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b",
+        "sha256": "D0B37CA7C291735981F61C343A90CB5445CA97B403B66A39AFBA34230B7B8609"
+      },
+      "contracts": [
+        {
+          "id": "localized_qualification_authority",
+          "type": "AUTHORITY",
+          "rule": "The content-hash-bound qualification audits and decision own the interpretation of the unique robust-positive candidate and the two reproduced clusters",
+          "severity": "HARD",
+          "enforced_by": "broad_search.qualification18m.check_evidence",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_QUALIFICATION_ARTIFACT_MANIFEST.json"
+        },
+        {
+          "id": "independent_evidence_admission",
+          "type": "EVIDENCE",
+          "rule": "Adaptive selection months cannot serve as an independent retest; positive report-only LCB and an independent mechanism replication are required before freezing a challenger",
+          "severity": "HARD",
+          "enforced_by": "broad_search.qualification18m._classify",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json"
+        },
+        {
+          "id": "challenger_non_issuance_boundary",
+          "type": "BOUNDARY",
+          "rule": "INSUFFICIENT_INDEPENDENT_EVIDENCE cannot issue an immutable challenger, open strict OOS, activate new search, or authorize promotion",
+          "severity": "HARD",
+          "enforced_by": "broad_search.qualification18m.build_decision",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_IMMUTABLE_CHALLENGER_SPECIFICATION.json"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "evidence-boundary-change",
+        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
+        "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
+        "verified_at_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
+      },
+      "promotion_requirements": [
+        "positive independent report-only LCB",
+        "independent mechanism replication",
+        "explicit strict OOS authorization",
+        "non-stale accepted evidence",
         "explicit promotion authorization"
       ]
     },
@@ -1029,19 +1094,45 @@
       "contract": {
         "id": "search_18m_development_only_boundary",
         "type": "BOUNDARY",
-        "rule": "The execution is train-development-only with zero sealed reads; report-only observations cannot feed search, memory, scheduling, promotion, or boundary changes",
+        "rule": "The execution made zero sealed reads and no report-only reward entered lane state, but Stage-A report-only statistics were visible to the Stage-B scheduling gate; the frozen pack was counterfactually unchanged and the visibility defect remains recorded",
         "severity": "HARD",
-        "enforced_by": "broad_search.runner18m.check_evidence",
+        "enforced_by": "broad_search.qualification18m.check_evidence",
         "bypass_forbidden": true,
-        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json"
+        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_REPORT_ONLY_INDEPENDENCE_AUDIT.json"
+      },
+      "validation": {
+        "level": "PARTIAL",
+        "result": "WARN",
+        "profile": "evidence-boundary-change",
+        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_REPORT_ONLY_INDEPENDENCE_AUDIT.json",
+        "evidence_sha256": "60DB6EB335A98D31346F2BF63AFDBE043A0EAFD23C2FB460B4C1ACEC417AB08C",
+        "verified_at_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
+      }
+    },
+    {
+      "id": "search_18m_is_qualified_by_localized_mechanism_audit",
+      "source": "observed_archive_18m_compositional_search",
+      "target": "localized_mechanism_qualification",
+      "relation": "evidence_qualified_by",
+      "lifecycle": "EXPERIMENTAL",
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "localized_qualification_supersession",
+        "type": "EVIDENCE",
+        "rule": "The qualification decision supersedes broad interpretations of the unique robust-positive candidate and the two reproduced clusters without changing the historical runtime artifacts",
+        "severity": "HARD",
+        "enforced_by": "broad_search.qualification18m.check_evidence",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json"
       },
       "validation": {
         "level": "STATIC_VERIFIED",
         "result": "PASS",
-        "profile": "evidence-boundary-change",
-        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json",
-        "evidence_sha256": "BE826CD390EBC44DCAB0195C7E40ADFC7E23584154341F28F1E5727ADBF70D69",
-        "verified_at_sha": "390c00ea480ad73ea8342fb7006b488c7f0cdc03"
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
+        "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
+        "verified_at_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
       }
     },
     {
@@ -1056,19 +1147,19 @@
       "contract": {
         "id": "development_result_not_formal_search_authority",
         "type": "BOUNDARY",
-        "rule": "A development matched-positive or robust-positive result cannot activate formal performance search, forward access, candidate promotion, or accepted-tag movement",
+        "rule": "INSUFFICIENT_INDEPENDENT_EVIDENCE and a non-issued challenger cannot activate formal performance search, strict OOS, forward access, candidate promotion, or accepted-tag movement",
         "severity": "HARD",
-        "enforced_by": "broad_search.runner18m.check_evidence",
+        "enforced_by": "broad_search.qualification18m.check_evidence",
         "bypass_forbidden": true,
-        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json"
+        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json"
       },
       "validation": {
         "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "evidence-boundary-change",
-        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_SEARCH_DECISION.json",
-        "evidence_sha256": "BE826CD390EBC44DCAB0195C7E40ADFC7E23584154341F28F1E5727ADBF70D69",
-        "verified_at_sha": "390c00ea480ad73ea8342fb7006b488c7f0cdc03"
+        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
+        "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
+        "verified_at_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
       }
     },
     {
