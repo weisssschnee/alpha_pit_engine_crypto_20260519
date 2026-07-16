@@ -1,0 +1,299 @@
+{
+  "audit_source_sha": "859ba537c2a71a14d7540ab343df956ead4c6202",
+  "candidate_lineage": {
+    "candidate_id": "E35D9F1CC2D69E7E5F8985606315DBE5351FF13241D67A3135821CCF5AAAF751",
+    "control_formula": "SupportMatchedPayload(RollingZScore(Raw(open_interest_last), window=336), CrossSectionalRobustZScore(Raw(history_length_hours)))",
+    "field_families": [
+      "open_interest_level_change",
+      "listing_age_context"
+    ],
+    "formula": "StateModulation(RollingZScore(Raw(open_interest_last), window=336), CrossSectionalRobustZScore(Raw(history_length_hours)))",
+    "horizon_hours": 4,
+    "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+    "raw_fields": [
+      "open_interest_last",
+      "history_length_hours"
+    ],
+    "rolling_windows": [
+      336
+    ]
+  },
+  "cluster_lineage": {
+    "candidate_cluster_id": "9B06EB4373C0DA280F324C12446D945C9727036CBC3AF94813544783345F4BE4",
+    "candidate_cluster_members": 28,
+    "source_cross_seed_clusters": [
+      {
+        "adaptive_matched_positive": 0,
+        "candidates": 29,
+        "challenge_matched_positive": 2,
+        "challenge_positive_seeds": [
+          20260716,
+          20260718
+        ],
+        "cluster_id": "DDD0F8DDFB1610762CD67204267658097B0FE508413A64BF29EC6EE60F5A33C1",
+        "cross_seed_reproduced": true,
+        "mechanism_family": "STATE_REGIME_MODULATION",
+        "skeleton_id": "state_regime_modulation_v4"
+      },
+      {
+        "adaptive_matched_positive": 0,
+        "candidates": 6,
+        "challenge_matched_positive": 3,
+        "challenge_positive_seeds": [
+          20260717,
+          20260719
+        ],
+        "cluster_id": "7332C1CADE575067BB7195F8B1E46F3ECF0C3E6B6556F87135D11EBF5AC9FBF3",
+        "cross_seed_reproduced": true,
+        "mechanism_family": "STATE_REGIME_MODULATION",
+        "skeleton_id": "state_regime_modulation_v5"
+      }
+    ],
+    "stage_a_cross_seed_clusters": [
+      {
+        "adaptive_matched_positive": 0,
+        "candidates": 9,
+        "challenge_matched_positive": 2,
+        "challenge_positive_seeds": [
+          20260716,
+          20260718
+        ],
+        "cluster_id": "DDD0F8DDFB1610762CD67204267658097B0FE508413A64BF29EC6EE60F5A33C1",
+        "cross_seed_reproduced": true,
+        "mechanism_family": "STATE_REGIME_MODULATION",
+        "skeleton_id": "state_regime_modulation_v4"
+      }
+    ]
+  },
+  "effective_trial_count": {
+    "cluster_trials": 1347,
+    "exact_formula_trials": 8002,
+    "portfolio_behavior_trials": 7549,
+    "proposal_occurrences": 8192,
+    "robust_positive_tests": 1,
+    "robust_post_selection_tests": 8192,
+    "selection_warning": "The 18-month robust statistic reuses 12 adaptive months that participated in proposal selection; only the six report-only months are an independent temporal retest."
+  },
+  "family_lineage": {
+    "adaptive_matched_positive": 2,
+    "exact_unique_candidates": 2297,
+    "mechanism_family": "STATE_REGIME_MODULATION",
+    "report_only_matched_positive": 10,
+    "skeleton_exposure": {
+      "state_regime_modulation_v1": 189,
+      "state_regime_modulation_v2": 583,
+      "state_regime_modulation_v3": 174,
+      "state_regime_modulation_v4": 711,
+      "state_regime_modulation_v5": 712
+    },
+    "strict_pairs": 2369
+  },
+  "proposal_lineage": [
+    {
+      "candidate_id": "427AE08B4AB98E93DF5EE8B8185AA684F51D2FD40989A6C75B62BF16C4534484",
+      "matched_positive": false,
+      "mutation_receipt": null,
+      "pair_reward": -4.0,
+      "parent_id": null,
+      "policy_state_hash_after": "2D977C48C44BB9DEC5C3995E57B5669A45059CC5BB737017513BC5E6D31246C3",
+      "policy_state_hash_before": "7AFE77FF9876EF8B5CBBF684A93A5939093F2F953C6575CD55969C135D46A663",
+      "proposal_step": 0,
+      "skeleton_id": "state_regime_modulation_v2"
+    },
+    {
+      "candidate_id": "F9EA707AEF64220DAAF21C6A5E19547183603B28B818255C0E8938D1BD4B60AE",
+      "matched_positive": false,
+      "mutation_receipt": {
+        "changed_genes": [
+          "raw_fields",
+          "operator_path"
+        ],
+        "child_id": "F9EA707AEF64220DAAF21C6A5E19547183603B28B818255C0E8938D1BD4B60AE",
+        "parent_id": "427AE08B4AB98E93DF5EE8B8185AA684F51D2FD40989A6C75B62BF16C4534484"
+      },
+      "pair_reward": -2.3333333333333335,
+      "parent_id": "427AE08B4AB98E93DF5EE8B8185AA684F51D2FD40989A6C75B62BF16C4534484",
+      "policy_state_hash_after": "021B52D93D62AFF309EB8EC4BD0C3D78B901D0619B6C127FD143F5523754855E",
+      "policy_state_hash_before": "5392C8E3BBD0517CFFA093E1CEFEF527FB8CE84EACBC568CF76F42D0E96F18A9",
+      "proposal_step": 10,
+      "skeleton_id": "state_regime_modulation_v2"
+    },
+    {
+      "candidate_id": "388316BAEBAA43090EAB33358D20137C71F160605A7B0C4509F9C59703277AFC",
+      "matched_positive": false,
+      "mutation_receipt": {
+        "changed_genes": [
+          "raw_fields",
+          "rolling_windows",
+          "horizon_hours",
+          "operator_path"
+        ],
+        "child_id": "388316BAEBAA43090EAB33358D20137C71F160605A7B0C4509F9C59703277AFC",
+        "parent_id": "F9EA707AEF64220DAAF21C6A5E19547183603B28B818255C0E8938D1BD4B60AE"
+      },
+      "pair_reward": -0.4163982089336546,
+      "parent_id": "F9EA707AEF64220DAAF21C6A5E19547183603B28B818255C0E8938D1BD4B60AE",
+      "policy_state_hash_after": "3EA4F6E04C50E2E471ED3298E50F57720291F8F93460E3AF233C5C7CFDE6F07F",
+      "policy_state_hash_before": "CF8974E0BC03909795CB4543C992960FC6B75A7C9AD3E42AD86D702476ABB828",
+      "proposal_step": 14,
+      "skeleton_id": "state_regime_modulation_v2"
+    },
+    {
+      "candidate_id": "AF9FBED74A022F49CA070A96EC91BA98553AD54D33F2415C2BD6905DA156FE58",
+      "matched_positive": false,
+      "mutation_receipt": {
+        "changed_genes": [
+          "raw_fields",
+          "rolling_windows",
+          "horizon_hours",
+          "operator_path"
+        ],
+        "child_id": "AF9FBED74A022F49CA070A96EC91BA98553AD54D33F2415C2BD6905DA156FE58",
+        "parent_id": "388316BAEBAA43090EAB33358D20137C71F160605A7B0C4509F9C59703277AFC"
+      },
+      "pair_reward": -2.3333333333333335,
+      "parent_id": "388316BAEBAA43090EAB33358D20137C71F160605A7B0C4509F9C59703277AFC",
+      "policy_state_hash_after": "A34201CF23AA14960234A7D7183A6FAD762C9AB1586B9760BF0539EC0E2ED576",
+      "policy_state_hash_before": "250E939298BDA44902BFC60AD29EB02228D39D1CEFCD0134B49BF4E729AF0D62",
+      "proposal_step": 57,
+      "skeleton_id": "state_regime_modulation_v2"
+    },
+    {
+      "candidate_id": "B2CF9B08F547C5CC5C03660CE8D84BC03D64C232F4CA075942112F31877368B9",
+      "matched_positive": false,
+      "mutation_receipt": {
+        "changed_genes": [
+          "raw_fields",
+          "rolling_windows"
+        ],
+        "child_id": "B2CF9B08F547C5CC5C03660CE8D84BC03D64C232F4CA075942112F31877368B9",
+        "parent_id": "AF9FBED74A022F49CA070A96EC91BA98553AD54D33F2415C2BD6905DA156FE58"
+      },
+      "pair_reward": -0.7674360275843872,
+      "parent_id": "AF9FBED74A022F49CA070A96EC91BA98553AD54D33F2415C2BD6905DA156FE58",
+      "policy_state_hash_after": "B5F7CFCE7662C5C976BACABAEE8C42E5E4AD83A46430E7BBF83F3C6A2CB0B62A",
+      "policy_state_hash_before": "7E2C906CEE095217282D7F19655238F8211D2BFFADEFB076505B95B4E3416E6A",
+      "proposal_step": 121,
+      "skeleton_id": "state_regime_modulation_v2"
+    },
+    {
+      "candidate_id": "E6F80223C8B0994DF2DF22454817F07A76ECEA9A603076A182AF771E54C4CDD5",
+      "matched_positive": false,
+      "mutation_receipt": {
+        "changed_genes": [
+          "raw_fields",
+          "rolling_windows",
+          "operator_path"
+        ],
+        "child_id": "E6F80223C8B0994DF2DF22454817F07A76ECEA9A603076A182AF771E54C4CDD5",
+        "parent_id": "B2CF9B08F547C5CC5C03660CE8D84BC03D64C232F4CA075942112F31877368B9"
+      },
+      "pair_reward": -0.11558177720948253,
+      "parent_id": "B2CF9B08F547C5CC5C03660CE8D84BC03D64C232F4CA075942112F31877368B9",
+      "policy_state_hash_after": "09C99F401086E1A8D89168B0BBA850848D57BB93317837C78E18DB9371C4466B",
+      "policy_state_hash_before": "5F693C34389CD58FCCD1F66C2D2AA7F6A1229175C879F5EB610582B42DBB178C",
+      "proposal_step": 125,
+      "skeleton_id": "state_regime_modulation_v2"
+    },
+    {
+      "candidate_id": "E35D9F1CC2D69E7E5F8985606315DBE5351FF13241D67A3135821CCF5AAAF751",
+      "matched_positive": true,
+      "mutation_receipt": {
+        "changed_genes": [
+          "raw_fields",
+          "rolling_windows",
+          "operator_path"
+        ],
+        "child_id": "E35D9F1CC2D69E7E5F8985606315DBE5351FF13241D67A3135821CCF5AAAF751",
+        "parent_id": "E6F80223C8B0994DF2DF22454817F07A76ECEA9A603076A182AF771E54C4CDD5"
+      },
+      "pair_reward": 0.1307560671168927,
+      "parent_id": "E6F80223C8B0994DF2DF22454817F07A76ECEA9A603076A182AF771E54C4CDD5",
+      "policy_state_hash_after": "41CE5CF7B320A5A103C03430440D76F8E8F439287C389B79EB583E7C796E9555",
+      "policy_state_hash_before": "F390E1081DE1C59817287295429E21852FD7899C5AAE9833FCFA8AF05DA62C87",
+      "proposal_step": 340,
+      "skeleton_id": "state_regime_modulation_v2"
+    }
+  ],
+  "proposal_to_robust_chain": {
+    "admission": {
+      "matched_positive_adaptive": true,
+      "matched_positive_report_only": false,
+      "pair_evaluation_status": "PASS",
+      "pair_reward_adaptive": 0.1307560671168927,
+      "pair_reward_report_only": -0.0970655516473122
+    },
+    "behavior_identity": "BFBA13A425583CAEB11CCDF28BDA428B2E3919028DD3D2631178A1C22BBDCD01",
+    "cluster_id": "9B06EB4373C0DA280F324C12446D945C9727036CBC3AF94813544783345F4BE4",
+    "cross_seed_reproduced_same_cluster": false,
+    "exact_identity": "E35D9F1CC2D69E7E5F8985606315DBE5351FF13241D67A3135821CCF5AAAF751",
+    "proposal": {
+      "candidate_id": "E35D9F1CC2D69E7E5F8985606315DBE5351FF13241D67A3135821CCF5AAAF751",
+      "cumulative_skeleton_exposure": 299,
+      "mutation_receipt": {
+        "changed_genes": [
+          "raw_fields",
+          "rolling_windows",
+          "operator_path"
+        ],
+        "child_id": "E35D9F1CC2D69E7E5F8985606315DBE5351FF13241D67A3135821CCF5AAAF751",
+        "parent_id": "E6F80223C8B0994DF2DF22454817F07A76ECEA9A603076A182AF771E54C4CDD5"
+      },
+      "parent_id": "E6F80223C8B0994DF2DF22454817F07A76ECEA9A603076A182AF771E54C4CDD5",
+      "policy": "evolutionary",
+      "proposal_step": 340,
+      "seed": 20260716,
+      "stage": "B"
+    },
+    "robust": {
+      "adaptive_challenge_sign_agreement": true,
+      "adaptive_net_mean": 3.5343464121682496e-05,
+      "challenge_net_mean": 1.5459490192899925e-05,
+      "hac_lcb": 1.0375206041339685e-05,
+      "hac_standard_error": 9.677385661775626e-06,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "months": 18,
+      "moving_block_bootstrap_p05": 1.377776962057301e-05,
+      "moving_block_bootstrap_p50": 2.800590287478611e-05,
+      "policy": "evolutionary",
+      "robust_positive": true,
+      "seed": 20260716
+    }
+  },
+  "schema_version": 1,
+  "selection_exposure": {
+    "adaptive_exposure": 8192,
+    "behavior_duplicate_occurrences": 643,
+    "behavior_unique_delta_weight_hashes": 7549,
+    "candidate_stage_a_absent": true,
+    "candidate_stage_b_ordinal_within_lane": 340,
+    "cluster_count": 1347,
+    "duplicate_candidate_occurrences": 190,
+    "exact_unique_candidates": 8002,
+    "report_only_exposure": 8192,
+    "report_only_occurrences": 8192,
+    "strict_occurrences": 8192,
+    "strict_report_only_pack_multiset_equal": true
+  },
+  "source_bundle_sha256": "EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492",
+  "stage_b_gate": {
+    "adaptive_only_counterfactual_gate_result": true,
+    "conclusion": "STAGE_B_COUNTERFACTUALLY_AUTHORIZED_BY_ADAPTIVE_ONLY_EVIDENCE",
+    "full_gate_result": true,
+    "report_only_terms_were_causally_necessary": false,
+    "stage_a_counts": {
+      "adaptive_positive_clusters": 1,
+      "challenge_positive_clusters": 3,
+      "cross_seed_reproduced_clusters": 1,
+      "maximum_family_challenge_yield": 0.004351610095735422,
+      "reproduced_families": 1
+    },
+    "trigger_values": {
+      "adaptive_cross_seed_stable_policy_improvement": true,
+      "adaptive_positive_clusters_ge_10": false,
+      "report_only_maximum_family_yield_gt_0_005": false,
+      "report_only_positive_clusters_ge_5": false
+    }
+  },
+  "task_id": "CRYPTO_LOCALIZED_MECHANISM_EVIDENCE_QUALIFICATION"
+}

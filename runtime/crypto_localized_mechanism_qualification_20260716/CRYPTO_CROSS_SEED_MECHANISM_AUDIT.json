@@ -1,0 +1,295 @@
+{
+  "clusters": [
+    {
+      "adaptive_matched_positive": 0,
+      "adaptive_matched_positive_candidates": 0,
+      "candidates": 29,
+      "challenge_matched_positive": 2,
+      "challenge_positive_seeds": [
+        20260716,
+        20260718
+      ],
+      "cluster_id": "DDD0F8DDFB1610762CD67204267658097B0FE508413A64BF29EC6EE60F5A33C1",
+      "cross_seed_reproduced": true,
+      "mechanism_assessment": "REPORT_ONLY_SAME_FAMILY_VARIANTS_NOT_INDEPENDENT_REPLICATION",
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "qualified_member_count": 29,
+      "report_only_positive_candidates": [
+        {
+          "adaptive": {
+            "matched_positive": false,
+            "net_lcb": -1.5115163845717033e-05,
+            "net_mean": 4.06394686420863e-06
+          },
+          "ast_distance_to_unique_robust": 0.8888888888888888,
+          "block_comparisons": [
+            {
+              "behavior_active_overlap_jaccard": 0.4754694918102765,
+              "block": "adaptive",
+              "pnl_correlation": 0.041544752205077466,
+              "portfolio_correlation": 0.010059962909954598,
+              "portfolio_exact_equality": false,
+              "rank_correlation": 0.04062433693934817,
+              "signal_correlation": 0.3025827414740666
+            },
+            {
+              "behavior_active_overlap_jaccard": 0.8727768582727917,
+              "block": "report_only",
+              "pnl_correlation": 0.05405382811845161,
+              "portfolio_correlation": 0.05373926750203264,
+              "portfolio_exact_equality": false,
+              "rank_correlation": 0.03326425094006075,
+              "signal_correlation": 0.31650528132224354
+            }
+          ],
+          "candidate_id": "80231FC28B8718EBB0CE7D13A9CADC48F932D4D0A702192FA8465D3B74012C80",
+          "field_families": [
+            "open_interest_value",
+            "listing_age_context"
+          ],
+          "field_lineage_jaccard": 0.0,
+          "formula": "RatioInteraction(HistoricalPercentile(Raw(open_interest_value_last), window=720), CrossSectionalRobustZScore(Raw(listing_age_days)))",
+          "horizon_hours": 4,
+          "mechanism_family_match": true,
+          "policy": "uct_ucb_like",
+          "proposal_step": 136,
+          "raw_fields": [
+            "open_interest_value_last",
+            "listing_age_days"
+          ],
+          "relationship": "SAME_FAMILY_VARIANT",
+          "report_only": {
+            "matched_positive": true,
+            "net_lcb": 1.196260223701502e-05,
+            "net_mean": 3.3179161810164946e-05
+          },
+          "seed": 20260716
+        },
+        {
+          "adaptive": {
+            "matched_positive": false,
+            "net_lcb": -3.516267808688081e-06,
+            "net_mean": 1.096595663563345e-05
+          },
+          "ast_distance_to_unique_robust": 0.75,
+          "block_comparisons": [
+            {
+              "behavior_active_overlap_jaccard": 0.6828441648218478,
+              "block": "adaptive",
+              "pnl_correlation": 0.11603921283804697,
+              "portfolio_correlation": -0.00592545068688557,
+              "portfolio_exact_equality": false,
+              "rank_correlation": 0.012404156315327972,
+              "signal_correlation": 0.3957988758300423
+            },
+            {
+              "behavior_active_overlap_jaccard": 0.8728168054561375,
+              "block": "report_only",
+              "pnl_correlation": 0.04714780969228505,
+              "portfolio_correlation": 0.005753328729319309,
+              "portfolio_exact_equality": false,
+              "rank_correlation": -0.03546112180322461,
+              "signal_correlation": 0.3365601685737054
+            }
+          ],
+          "candidate_id": "3AD150233450287CD3D256CCE67D672F0F2291232F9B879D4E6E6D374AB74979",
+          "field_families": [
+            "open_interest_value",
+            "listing_age_context"
+          ],
+          "field_lineage_jaccard": 0.3333333333333333,
+          "formula": "RatioInteraction(HistoricalPercentile(Raw(open_interest_value_last), window=720), CrossSectionalRobustZScore(Raw(history_length_hours)))",
+          "horizon_hours": 4,
+          "mechanism_family_match": true,
+          "policy": "canonical_typed_random",
+          "proposal_step": 40,
+          "raw_fields": [
+            "open_interest_value_last",
+            "history_length_hours"
+          ],
+          "relationship": "SAME_FAMILY_VARIANT",
+          "report_only": {
+            "matched_positive": true,
+            "net_lcb": 8.210931566164514e-06,
+            "net_mean": 3.11948944307338e-05
+          },
+          "seed": 20260718
+        }
+      ],
+      "skeleton_id": "state_regime_modulation_v4"
+    },
+    {
+      "adaptive_matched_positive": 0,
+      "adaptive_matched_positive_candidates": 0,
+      "candidates": 6,
+      "challenge_matched_positive": 3,
+      "challenge_positive_seeds": [
+        20260717,
+        20260719
+      ],
+      "cluster_id": "7332C1CADE575067BB7195F8B1E46F3ECF0C3E6B6556F87135D11EBF5AC9FBF3",
+      "cross_seed_reproduced": true,
+      "mechanism_assessment": "REPORT_ONLY_SAME_FAMILY_VARIANTS_NOT_INDEPENDENT_REPLICATION",
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "qualified_member_count": 6,
+      "report_only_positive_candidates": [
+        {
+          "adaptive": {
+            "matched_positive": false,
+            "net_lcb": -3.232690665100315e-05,
+            "net_mean": -2.0227071047961515e-05
+          },
+          "ast_distance_to_unique_robust": 0.8888888888888888,
+          "block_comparisons": [
+            {
+              "behavior_active_overlap_jaccard": 0.0,
+              "block": "adaptive",
+              "pnl_correlation": 0.0,
+              "portfolio_correlation": 0.0,
+              "portfolio_exact_equality": false,
+              "rank_correlation": 0.004025833187040591,
+              "signal_correlation": 0.0
+            },
+            {
+              "behavior_active_overlap_jaccard": 0.0,
+              "block": "report_only",
+              "pnl_correlation": 0.0,
+              "portfolio_correlation": 0.0,
+              "portfolio_exact_equality": false,
+              "rank_correlation": 0.0006380586878729042,
+              "signal_correlation": 0.0
+            }
+          ],
+          "candidate_id": "3FB920DE1F11497B4F4E82F28B881C24A9E4E742755F95A5F667D48A69C79418",
+          "field_families": [
+            "account_position_divergence",
+            "listing_age_context"
+          ],
+          "field_lineage_jaccard": 0.0,
+          "formula": "ConditionGate(VolatilityScale(Raw(account_position_divergence), window=72), CrossSectionalRobustZScore(Raw(age_percentile_active_universe)), threshold=0.0)",
+          "horizon_hours": 4,
+          "mechanism_family_match": true,
+          "policy": "evolutionary",
+          "proposal_step": 68,
+          "raw_fields": [
+            "account_position_divergence",
+            "age_percentile_active_universe"
+          ],
+          "relationship": "SAME_FAMILY_VARIANT",
+          "report_only": {
+            "matched_positive": true,
+            "net_lcb": 8.404295120292373e-06,
+            "net_mean": 2.2067062617117784e-05
+          },
+          "seed": 20260719
+        },
+        {
+          "adaptive": {
+            "matched_positive": false,
+            "net_lcb": -3.509146213736455e-05,
+            "net_mean": -2.380261519859103e-05
+          },
+          "ast_distance_to_unique_robust": 0.75,
+          "block_comparisons": [
+            {
+              "behavior_active_overlap_jaccard": 0.0,
+              "block": "adaptive",
+              "pnl_correlation": 0.0,
+              "portfolio_correlation": 0.0,
+              "portfolio_exact_equality": false,
+              "rank_correlation": 0.004025833187040591,
+              "signal_correlation": 0.0
+            },
+            {
+              "behavior_active_overlap_jaccard": 0.0,
+              "block": "report_only",
+              "pnl_correlation": 0.0,
+              "portfolio_correlation": 0.0,
+              "portfolio_exact_equality": false,
+              "rank_correlation": 0.0006380586878729042,
+              "signal_correlation": 0.0
+            }
+          ],
+          "candidate_id": "478FA186C435CFD646BE508925B0D3E0DE886EF1303F47AB57ECEB5D163DEDA2",
+          "field_families": [
+            "account_position_divergence",
+            "listing_age_context"
+          ],
+          "field_lineage_jaccard": 0.3333333333333333,
+          "formula": "ConditionGate(VolatilityScale(Raw(account_position_divergence), window=336), CrossSectionalRobustZScore(Raw(history_length_hours)), threshold=0.0)",
+          "horizon_hours": 4,
+          "mechanism_family_match": true,
+          "policy": "evolutionary",
+          "proposal_step": 114,
+          "raw_fields": [
+            "account_position_divergence",
+            "history_length_hours"
+          ],
+          "relationship": "SAME_FAMILY_VARIANT",
+          "report_only": {
+            "matched_positive": true,
+            "net_lcb": 1.0155544258612948e-05,
+            "net_mean": 2.3067436625128476e-05
+          },
+          "seed": 20260719
+        },
+        {
+          "adaptive": {
+            "matched_positive": false,
+            "net_lcb": -3.333297354173187e-05,
+            "net_mean": -2.150539668712109e-05
+          },
+          "ast_distance_to_unique_robust": 0.75,
+          "block_comparisons": [
+            {
+              "behavior_active_overlap_jaccard": 0.0,
+              "block": "adaptive",
+              "pnl_correlation": 0.0,
+              "portfolio_correlation": 0.0,
+              "portfolio_exact_equality": false,
+              "rank_correlation": 0.004025833187040591,
+              "signal_correlation": 0.0
+            },
+            {
+              "behavior_active_overlap_jaccard": 0.0,
+              "block": "report_only",
+              "pnl_correlation": 0.0,
+              "portfolio_correlation": 0.0,
+              "portfolio_exact_equality": false,
+              "rank_correlation": 0.0006380586878729042,
+              "signal_correlation": 0.0
+            }
+          ],
+          "candidate_id": "ECE37453D9278788A3ACB5EB4E3918EA329A427999916516BC24634D80355F69",
+          "field_families": [
+            "account_position_divergence",
+            "listing_age_context"
+          ],
+          "field_lineage_jaccard": 0.3333333333333333,
+          "formula": "ConditionGate(VolatilityScale(Raw(account_position_divergence), window=168), CrossSectionalRobustZScore(Raw(history_length_hours)), threshold=0.0)",
+          "horizon_hours": 4,
+          "mechanism_family_match": true,
+          "policy": "cem_diversity_v2",
+          "proposal_step": 442,
+          "raw_fields": [
+            "account_position_divergence",
+            "history_length_hours"
+          ],
+          "relationship": "SAME_FAMILY_VARIANT",
+          "report_only": {
+            "matched_positive": true,
+            "net_lcb": 8.903723245445183e-06,
+            "net_mean": 2.2257261488160166e-05
+          },
+          "seed": 20260717
+        }
+      ],
+      "skeleton_id": "state_regime_modulation_v5"
+    }
+  ],
+  "conclusion": "The two reproduced clusters are report-only positive, same-family variants.  Neither supplies a distinct mechanism that is matched-positive on both the adaptive and report-only blocks, so they do not independently reproduce the unique StateModulation candidate.",
+  "independent_mechanism_replications": 0,
+  "schema_version": 1,
+  "unique_robust_candidate_id": "E35D9F1CC2D69E7E5F8985606315DBE5351FF13241D67A3135821CCF5AAAF751",
+  "unique_robust_cluster_id": "9B06EB4373C0DA280F324C12446D945C9727036CBC3AF94813544783345F4BE4"
+}

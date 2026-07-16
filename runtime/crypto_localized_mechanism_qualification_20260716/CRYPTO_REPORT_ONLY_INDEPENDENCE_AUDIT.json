@@ -1,0 +1,62 @@
+{
+  "candidate_generation": {
+    "candidate_pack_counterfactual_unchanged_without_report_only_metrics": true,
+    "report_only_occurrences": 8192,
+    "stage_a_stage_b_exact_identity_overlap": 47,
+    "strict_occurrences": 8192,
+    "strict_report_only_occurrence_multiset_equal": true
+  },
+  "cluster_threshold": {
+    "actual_trigger_values": {
+      "adaptive_cross_seed_stable_policy_improvement": true,
+      "adaptive_positive_clusters_ge_10": false,
+      "report_only_maximum_family_yield_gt_0_005": false,
+      "report_only_positive_clusters_ge_5": false
+    },
+    "contract_result": "FAIL",
+    "reason": "The feedback contract says report-only metrics are not visible to policy, but build_evidence reads report-only cluster/yield statistics before deciding Stage B.  Adaptive policy improvement independently made the gate true, so the read did not change this frozen candidate pack.",
+    "report_only_metrics_visible_to_stage_b_gate": true,
+    "report_only_terms_causally_necessary": false,
+    "visibility_patterns": {
+      "stage_a_report_only_evaluated_before_stage_b": true,
+      "stage_b_gate_reads_report_only_cluster_count": true,
+      "stage_b_gate_reads_report_only_family_yield": true,
+      "stage_b_prior_is_adaptive_rows_only": true
+    }
+  },
+  "family_prior": {
+    "report_only_reward_written_to_lane_state": false,
+    "stage_b_prior_contains_only_stage_a_adaptive_rows": true
+  },
+  "ordering": {
+    "ordering_reused_by_policy": false,
+    "report_only_order": "seed, policy, candidate_id",
+    "report_only_order_difference_is_evaluation_only": true,
+    "strict_order": "seed, policy, proposal_step"
+  },
+  "pairing": {
+    "artifact_identity_reuse_error_observed": false,
+    "candidate_id_is_pair_join_key": true,
+    "duplicate_candidate_occurrences": 190,
+    "duplicate_report_only_metric_inconsistencies": 0
+  },
+  "schema_version": 1,
+  "scope": {
+    "authorized_blocks_only": true,
+    "cannot_conclude": [
+      "formal OOS independence",
+      "promotion readiness",
+      "absence of selection bias in the 18-month robust statistic"
+    ],
+    "sealed_reads": 0
+  },
+  "selection": {
+    "adaptive_months_reused_in_robust_statistic": 12,
+    "independent_report_only_months": 6,
+    "policy_feedback_is_adaptive_only": true,
+    "policy_feedback_writes": 0,
+    "robust_and_cross_seed_reports_use_report_only_metrics": true,
+    "robust_selection_is_post_search_evidence_selection": true
+  },
+  "status": "CANDIDATE_PACK_COUNTERFACTUALLY_INDEPENDENT_BUT_REPORT_ONLY_VISIBILITY_CONTRACT_FAILED"
+}
