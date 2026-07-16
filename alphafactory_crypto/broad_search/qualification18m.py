@@ -2377,9 +2377,10 @@ candidate's independent report-only LCB is negative.
 - G matched-occupancy placebo robust positive: `{ablation["combined_18m_monthly_robustness"]["G_MATCHED_OCCUPANCY_PLACEBO"]["robust_positive"]}`
 
 The results are compatible with a listing-age/maturity localization, but they
-do not isolate a unique contemporaneous regime mechanism: the 4-hour lag maps
-identically, and the time-shuffled state retains part of the development
-increment.
+do not isolate a unique contemporaneous regime mechanism.  The 4-hour lag
+remains highly portfolio-correlated with A and is still robust-positive.  The
+time-shuffled state loses standalone robustness but retains a positive
+incremental-vs-base mean on both development blocks.
 
 ## Cross-seed qualification
 
