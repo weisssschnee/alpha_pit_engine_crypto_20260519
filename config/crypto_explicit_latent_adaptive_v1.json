@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "experiment_id": "CRYPTO_EXPLICIT_LATENT_ADAPTIVE_V1",
+  "branch": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
+  "base_closure_sha": "828f344cbe1131d208e6cd6383bb2ce0cac80dc5",
+  "authorization": {
+    "adaptive_development_training": true,
+    "spent_report_only_access": false,
+    "sealed_reads": false,
+    "formula_search": false,
+    "strict_oos": false,
+    "promotion": false,
+    "cross_sprint_memory": false
+  },
+  "source": {
+    "panel_cache": ".cache/crypto_18m_compositional_broad_search_v1",
+    "field_registry": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY.json",
+    "train_surface_config": "config/crypto_train_surface_18m_v1.json",
+    "search_contract": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_SEARCH_CONTRACT.json"
+  },
+  "splits": {
+    "train": {
+      "start": "2023-07-01T00:00:00Z",
+      "end_exclusive": "2024-03-01T00:00:00Z"
+    },
+    "selection": {
+      "start": "2024-03-01T00:00:00Z",
+      "end_exclusive": "2024-05-01T00:00:00Z"
+    },
+    "stability": {
+      "start": "2024-05-01T00:00:00Z",
+      "end_exclusive": "2024-07-01T00:00:00Z"
+    },
+    "spent_report_only": {
+      "start": "2024-07-01T00:00:00Z",
+      "end_exclusive": "2025-01-01T00:00:00Z",
+      "status": "HISTORICALLY_CONSUMED_NOT_AUTHORIZED"
+    }
+  },
+  "economic_contract": {
+    "feature_bucket": "t",
+    "feature_observable": "t_plus_1h",
+    "execution": "t_plus_2h",
+    "target": "log(close[t+6] / close[t+2])",
+    "horizon_hours": 4,
+    "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+    "turnover": "FULL_L1_WITH_INITIAL_ESTABLISHMENT_AND_TERMINAL_LIQUIDATION",
+    "cost_bps": 5.0
+  },
+  "data_adequacy": {
+    "minimum_fields": 16,
+    "minimum_field_families": 8,
+    "minimum_assets": 40,
+    "minimum_train_timestamps": 4000,
+    "minimum_selection_timestamps": 1000,
+    "minimum_stability_timestamps": 1000,
+    "minimum_effective_sequences": 100000,
+    "minimum_family_coverage_ratio": 0.8,
+    "minimum_model_input_exposure_ratio": 0.8
+  },
+  "model": {
+    "encoder_family": "TCN",
+    "sequence_length": 168,
+    "latent_channels": 32,
+    "structured_slot_channels": 8,
+    "kernel_size": 3,
+    "dilations": [1, 2, 4, 8, 16, 32],
+    "known_hidden_channels": 64,
+    "dropout": 0.05,
+    "masked_reconstruction_probability": 0.1,
+    "return_loss_weight": 1.0,
+    "volatility_loss_weight": 0.2,
+    "reconstruction_loss_weight": 0.1,
+    "gradient_clip_norm": 1.0
+  },
+  "training": {
+    "seeds": [20260717, 20260718, 20260719],
+    "pilot_seed": 20260717,
+    "pilot_steps": 20,
+    "pilot_max_wall_clock_seconds_per_arm": 1800,
+    "formal_steps": 400,
+    "formal_max_wall_clock_seconds_per_run": 3600,
+    "batch_assets": 8,
+    "segment_length": 384,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "early_stop_patience_checks": 6,
+    "selection_check_interval": 40,
+    "max_checkpoints_per_run": 1,
+    "mixed_precision": false,
+    "torch_threads": 6
+  },
+  "budget": {
+    "pilot_jobs": 5,
+    "formal_neural_jobs": 15,
+    "non_neural_baselines": 2,
+    "maximum_extra_trained_controls": 3,
+    "hard_job_cap": 25,
+    "max_total_cpu_hours": 12.0,
+    "max_peak_rss_bytes": 8589934592,
+    "max_checkpoint_storage_bytes": 1073741824
+  },
+  "arms": ["A_KNOWN_ONLY", "B_LATENT_ONLY", "C_KNOWN_GENERIC", "D_KNOWN_RESIDUAL", "E_KNOWN_STRUCTURED_PROXY"],
+  "matched_controls": [
+    "PARAMETER_MATCHED_KNOWN_MLP",
+    "WINDOW_MATCHED_EXPLICIT_MODEL",
+    "RANDOM_PERMUTED_LATENT"
+  ],
+  "outputs": {
+    "runtime_root": "runtime/crypto_explicit_latent_adaptive_v1_20260717",
+    "report_root": "reports/crypto_explicit_latent_adaptive_v1_20260717",
+    "artifact_root": ".cache/crypto_explicit_latent_adaptive_v1_20260717"
+  }
+}
