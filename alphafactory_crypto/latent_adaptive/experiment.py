@@ -1433,7 +1433,7 @@ def run_experiment(
     (report_root / "REPORT.md").write_text("\n".join(report) + "\n", encoding="utf-8")
     artifacts = []
     for path in sorted(runtime_root.glob("*")):
-        if path.is_file():
+        if path.is_file() and path.name != "artifact_manifest.json":
             artifacts.append(
                 {
                     "path": str(path.relative_to(repo_root)),
