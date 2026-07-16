@@ -1,6 +1,6 @@
 # Crypto AlphaFactory Planning State
 
-Last updated: 2026-07-16 Asia/Hong_Kong
+Last updated: 2026-07-17 Asia/Hong_Kong
 
 ## Current status
 
@@ -23,6 +23,8 @@ CRYPTO_18M_SEARCH_PRIMARY_BOTTLENECK_CHALLENGE_INSTABILITY
 CRYPTO_LOCALIZED_MECHANISM_QUALIFICATION_COMPLETED
 INSUFFICIENT_INDEPENDENT_EVIDENCE
 CRYPTO_IMMUTABLE_CHALLENGER_NOT_ISSUED
+CRYPTO_EXPLICIT_LATENT_ADAPTIVE_EXECUTION_COMPLETED
+CRYPTO_EXPLICIT_LATENT_ADAPTIVE_INFORMATIVE_NEGATIVE
 GRAPH_RAW_CURRENT_SEPARATION_ACTIVE
 CURRENT_CONTRACT_CAPSULE_ACTIVE
 ```
@@ -37,7 +39,7 @@ tag:    crypto-frontier-provenance-closure-20260714
 
 `REPOSITORY_PROVENANCE_CLOSURE_COMPLETED` is the committed manifest status. `CRYPTO_FRONTIER_PROVENANCE_CLOSURE_ACCEPTED` is the user-accepted interpretation of the annotated closure tag, whose attestation records Reproducer PASS, Gatekeeper PASS, and base bundle SHA256 `99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2`.
 
-The checked-out repository line is `audit/crypto-localized-mechanism-qualification-20260716`. The bounded search implementation remains bound to source SHA `b251733d51053cbbc99a3b79409debcee24ae760`; its runtime evidence is committed at `390c00ea480ad73ea8342fb7006b488c7f0cdc03`, its report/provenance closure at `b689a17ad03cb2d180e92e944f253dd834846474`, and its content-hash bundle is `EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492`. The localized qualification implementation is fixed at `859ba537c2a71a14d7540ab343df956ead4c6202`, its six audit assets at `7f2e387e71c71c703085ce311640459a08b1d2a8`, and its decision/report closure at `eae955593355b1f8e6466167f66200bfb0ddc29b`; qualification bundle SHA256 is `0C6193E81FEAB8271B8BAE05AD04604D74494EAB2710794C59A7F42919DD68EB`. The train-only loader/config source remains bound to `a88552589c92161a3cfb7593cc82c8e20f0c5f5c`; its source-content bundle SHA256 is `8CEB549ED8AF73611163D827AD15DD5F409DCD422A6831ABCA28E86B8627D439`. The six-month broad-search evidence at `24878d99ffca4aca46473b9d0ff3860fcb47d416` and accepted closure tag at `4726795f61052470d56e2d1475e4f6da9d262943` remain distinct historical authorities.
+The checked-out repository line is `experiment/crypto-explicit-latent-adaptive-v1-20260717`. Its 15 formal checkpoints remain bound to training source SHA `8a9431d1ba04af5604cd8aa3e2894180b571e952`; the corrected evaluation and content-hash closure are bound to source SHA `2ba947a03de5e025ee2d8cbda7f1e8d604cf6911` with artifact root hash `1D54265F269E4F3B92E87AB3C2456A970FAB87C522721781AD08A1C02FAA7C0E`. The bounded search implementation remains bound to source SHA `b251733d51053cbbc99a3b79409debcee24ae760`; its runtime evidence is committed at `390c00ea480ad73ea8342fb7006b488c7f0cdc03`, its report/provenance closure at `b689a17ad03cb2d180e92e944f253dd834846474`, and its content-hash bundle is `EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492`. The localized qualification implementation is fixed at `859ba537c2a71a14d7540ab343df956ead4c6202`, its six audit assets at `7f2e387e71c71c703085ce311640459a08b1d2a8`, and its decision/report closure at `eae955593355b1f8e6466167f66200bfb0ddc29b`; qualification bundle SHA256 is `0C6193E81FEAB8271B8BAE05AD04604D74494EAB2710794C59A7F42919DD68EB`. The train-only loader/config source remains bound to `a88552589c92161a3cfb7593cc82c8e20f0c5f5c`; its source-content bundle SHA256 is `8CEB549ED8AF73611163D827AD15DD5F409DCD422A6831ABCA28E86B8627D439`. The six-month broad-search evidence at `24878d99ffca4aca46473b9d0ff3860fcb47d416` and accepted closure tag at `4726795f61052470d56e2d1475e4f6da9d262943` remain distinct historical authorities.
 
 ## Source-of-truth order
 
@@ -63,6 +65,7 @@ No single status code overrides source or execution facts.
 - The explicitly authorized 18-month development-only compositional run admitted 41 fields across 12 families, audited 500,000 proposals, evaluated 8,192 adaptive matched pairs plus 8,192 non-feedback report-only pairs, and made zero sealed reads. It found three adaptive matched-positive clusters, six report-only matched-positive clusters, two cross-seed reproduced clusters, and one robust-positive candidate/cluster, all localized to the authorized representation and observed-archive scope. The qualified result is `CRYPTO_18M_COMPOSITIONAL_SEARCH_LOCALIZED_MECHANISMS_ONLY`; `CHALLENGE_INSTABILITY` remains the primary bottleneck. This is not formal OOS evidence, broad component increment, candidate promotion evidence, or proof that the mechanism space is exhausted.
 - The follow-on qualification exactly reproduced the unique candidate's adaptive/report-only identities and economics. It is not a formula, receipt, runtime, or exact portfolio duplicate; its fixed-portfolio contribution is not accidentally concentrated (Top-1 month positive share 0.238746, Top-3 months 0.523251, Top-1 asset 0.067670, and all required leave-outs remain positive). Native StateModulation changes portfolio occupancy materially on the adaptive block, so the fixed A-G audit also held A's realized weight multiset and support constant. A and regime-only C remain development robust-positive while the matched-occupancy placebo fails, which is compatible with listing-age/maturity localization rather than a pure mapping artifact.
 - Independent qualification is still insufficient. The candidate's six-month report-only net LCB is `-9.706555164731221e-06`; the 18-month robust statistic reuses 12 adaptive selection months; neither reproduced cluster supplies a distinct mechanism that is matched-positive on both blocks. The runner also exposed Stage-A report-only cluster/yield statistics to the Stage-B OR gate contrary to the visibility contract, although adaptive policy improvement independently authorized Stage B, so the frozen candidate pack is counterfactually unchanged. The final classification is `INSUFFICIENT_INDEPENDENT_EVIDENCE`; no immutable challenger was issued.
+- The fixed explicit/latent comparison admitted all 41 fields across 12 families and used 899,410 train, 287,406 selection, and 300,321 stability coordinates. All five arms trained without fit or prediction collapse across three seeds. The residual D arm and structured-proxy E arm produced positive mean gross increments on stability, but full-L1 turnover at 5 bps made their mean net increments negative (`-4.92e-05` and `-5.20e-05` per evaluated timestamp); neither achieved two-of-three positive seeds or multi-month stability. The qualified scope is therefore `CRYPTO_EXPLICIT_LATENT_ADAPTIVE_INFORMATIVE_NEGATIVE`: informative for these fixed small TCN arms on adaptive development only, not a rejection of all latent representations and not OOS evidence.
 
 ## Graph state
 
@@ -122,6 +125,7 @@ Economic work remains `HOLD_RESEARCH`. A one-time, explicitly authorized 18-mont
 - Capability qualification repairs or validates the historical search runners.
 - Capability qualification authorizes a real development canary or any frozen-boundary change.
 - The implemented mechanism space has been exhausted.
+- All latent or learned-representation paradigms are economically ineffective.
 - The experimental typed DAG broadly improves the current system or has an OOS-qualified component increment.
 - The localized robust-positive cluster is promotion-ready or generalizes beyond the authorized observed-archive development surface.
 - The report-only block is formal validation, challenge, forward, recent, May stress, or OOS evidence.
