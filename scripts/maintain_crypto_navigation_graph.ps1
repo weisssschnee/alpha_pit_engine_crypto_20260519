@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Position = 0)]
-    [ValidateSet("build", "check", "query")]
+    [ValidateSet("build", "maintain", "check", "query")]
     [string]$Command = "check",
 
     [string]$Question,
@@ -20,6 +20,9 @@ $GraphDir = Join-Path $RepoRoot ".planning\graphs"
 $GraphJson = Join-Path $GraphDir "graph.json"
 $GraphReport = Join-Path $GraphDir "GRAPH_REPORT.md"
 $GraphHtml = Join-Path $GraphDir "graph.html"
+$CurrentJson = Join-Path $GraphDir "current.json"
+$CurrentHtml = Join-Path $GraphDir "current.html"
+$CurrentOverlay = Join-Path $RepoRoot "config\architecture_overlay.json"
 $GeneratedRelativePaths = @(
     ".planning/graphs/graph.json",
     ".planning/graphs/GRAPH_REPORT.md",
@@ -147,6 +150,7 @@ function Invoke-GraphCheck {
     }
 
     $edgeCount = if ($null -ne $graph.links) { @($graph.links).Count } else { @($graph.edges).Count }
+    $currentFresh = Test-CurrentFreshness
     [pscustomobject]@{
         status = "RAW_NAVIGATION_GRAPH_FRESH"
         built_at_commit = $builtCommit
@@ -156,8 +160,60 @@ function Invoke-GraphCheck {
         html_present = Test-Path -LiteralPath $GraphHtml -PathType Leaf
         current_view = ".planning/graphs/current.json"
         current_view_is_generated = $true
-        current_present = Test-Path -LiteralPath (Join-Path $GraphDir "current.json") -PathType Leaf
+        current_present = $true
+        current_fresh = $currentFresh
     } | ConvertTo-Json -Depth 3
+}
+
+function Get-Sha256([string]$Path) {
+    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToUpperInvariant()
+}
+
+function Test-CurrentFreshness {
+    foreach ($required in @($CurrentJson, $CurrentHtml, $CurrentOverlay)) {
+        if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
+            throw "Required CURRENT architecture artifact is missing: $required"
+        }
+    }
+
+    $current = Get-Content -LiteralPath $CurrentJson -Raw -Encoding UTF8 | ConvertFrom-Json
+    if ([string]$current.raw.sha256 -ne (Get-Sha256 -Path $GraphJson)) {
+        throw "CURRENT is stale against RAW graph.json. Run maintain."
+    }
+    if ([string]$current.overlay.sha256 -ne (Get-Sha256 -Path $CurrentOverlay)) {
+        throw "CURRENT is stale against config/architecture_overlay.json. Run maintain."
+    }
+    foreach ($profile in @($current.profiles)) {
+        $profilePath = Join-Path $RepoRoot ([string]$profile.path)
+        if (-not (Test-Path -LiteralPath $profilePath -PathType Leaf)) {
+            throw "CURRENT profile is missing: $($profile.path)"
+        }
+        if ([string]$profile.sha256 -ne (Get-Sha256 -Path $profilePath)) {
+            throw "CURRENT is stale against profile: $($profile.path). Run maintain."
+        }
+    }
+    return $true
+}
+
+function Invoke-CurrentArchitectureProjection {
+    $python = 'G:\PythonProject\.venv\Scripts\python.exe'
+    $syncScript = 'G:\CodexData\.codex\skills\gsd-graphify-runtime-fidelity\scripts\architecture_sync.py'
+
+    if (-not (Test-Path -LiteralPath $python -PathType Leaf)) {
+        throw "CURRENT projection Python runtime not found: $python"
+    }
+    if (-not (Test-Path -LiteralPath $syncScript -PathType Leaf)) {
+        throw "CURRENT projection renderer not found: $syncScript"
+    }
+
+    & $python $syncScript `
+        --project-root $RepoRoot `
+        --overlay $CurrentOverlay `
+        --raw-graph $GraphJson `
+        --out-dir $GraphDir
+    if ($LASTEXITCODE -ne 0) {
+        throw "CURRENT architecture projection failed with exit code $LASTEXITCODE"
+    }
 }
 
 function Invoke-GraphBuild([string]$Executable) {
@@ -202,6 +258,7 @@ function Invoke-GraphBuild([string]$Executable) {
         }
     }
 
+    Invoke-CurrentArchitectureProjection
     Invoke-GraphCheck
 }
 
@@ -211,6 +268,10 @@ Assert-CompatibleGraphify -Executable $graphify
 switch ($Command) {
     "build" {
         Invoke-GraphBuild -Executable $graphify
+    }
+    "maintain" {
+        Invoke-CurrentArchitectureProjection
+        Invoke-GraphCheck
     }
     "check" {
         Invoke-GraphCheck
