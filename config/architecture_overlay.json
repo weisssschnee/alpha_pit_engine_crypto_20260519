@@ -977,7 +977,7 @@
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json",
         "evidence_sha256": "20301588F6A6D6721AC794DB5638D6251E8DB37A1ABE0D5E6C64BB47680A3D95",
-        "verified_at_sha": "057e31df71f55f9e3a6e8ea3b48d53293d7d2e13"
+        "verified_at_sha": "2a8f615abcdf7849155f19825c7dd50c9c65899d"
       },
       "promotion_requirements": [
         "context-matched data adequacy",
@@ -1706,7 +1706,7 @@
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json",
         "evidence_sha256": "20301588F6A6D6721AC794DB5638D6251E8DB37A1ABE0D5E6C64BB47680A3D95",
-        "verified_at_sha": "057e31df71f55f9e3a6e8ea3b48d53293d7d2e13"
+        "verified_at_sha": "2a8f615abcdf7849155f19825c7dd50c9c65899d"
       }
     },
     {
