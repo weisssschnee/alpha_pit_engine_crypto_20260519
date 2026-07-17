@@ -31,14 +31,20 @@ def _git_sha() -> str:
 
 
 def _month_ids(timestamps: np.ndarray) -> np.ndarray:
-    return pd.to_datetime(timestamps, utc=True).to_period("M").astype(str).to_numpy()
+    return pd.to_datetime(timestamps, utc=True).strftime("%Y-%m").to_numpy()
+
+
+def _timestamp_iso(value: int | np.datetime64) -> str:
+    return pd.Timestamp(value, tz="UTC").isoformat().replace("+00:00", "Z")
 
 
 def _field_meta(catalog: pd.DataFrame) -> dict[str, dict[str, Any]]:
     return catalog.set_index("field_id", drop=False).to_dict("index")
 
 
-def _broad_context(config: dict[str, Any], catalog: pd.DataFrame) -> pd.DataFrame:
+def _broad_context(
+    config: dict[str, Any], catalog: pd.DataFrame
+) -> tuple[pd.DataFrame, dict[str, Any]]:
     spec = config["contexts"]["BROAD_PANEL_BASELINE"]
     store = RawPanelStore.open(ROOT / config["inputs"]["broad_cache"])
     source_slice = store.block_slice(spec["start"], spec["end_exclusive"])
@@ -64,9 +70,9 @@ def _broad_context(config: dict[str, Any], catalog: pd.DataFrame) -> pd.DataFram
             family=row["field_family"],
             availability_scope="OBSERVED_ARCHIVE_ADAPTIVE_DEVELOPMENT",
             pit_source_status="DECLARED_1H_LAG_NOT_REVERIFIED_BY_CENSUS",
-            runtime_loaded=bool(row.get("current_runtime_baseline", False)),
+            current_runtime_member=bool(row.get("current_runtime_baseline", False)),
         )
-    return information_census(
+    census = information_census(
         context_id="BROAD_PANEL_BASELINE",
         provider=provider,
         field_ids=fields,
@@ -80,9 +86,21 @@ def _broad_context(config: dict[str, Any], catalog: pd.DataFrame) -> pd.DataFram
         maximum_samples=config["statistics"]["maximum_samples_per_field"],
         null_shifts_hours=config["statistics"]["block_permutation_shifts_hours"],
     )
+    summary = {
+        "assets": int(provider.asset_count),
+        "timestamps": int(provider.time_count),
+        "eligible_observations": int(eligible.sum()),
+        "actual_start": _timestamp_iso(int(timestamps.min())),
+        "actual_end_inclusive": _timestamp_iso(int(timestamps.max())),
+        "latest_timestamp_exclusive": spec["end_exclusive"],
+        "target": f"log_return_t_plus_2_to_t_plus_{2 + int(spec['target_horizon_hours'])}",
+    }
+    return census, summary
 
 
-def _core3_context(config: dict[str, Any], catalog: pd.DataFrame) -> pd.DataFrame:
+def _core3_context(
+    config: dict[str, Any], catalog: pd.DataFrame
+) -> tuple[pd.DataFrame, dict[str, Any]]:
     spec = config["contexts"]["CORE3_MICROSTRUCTURE_PILOT"]
     base = pd.read_csv(ROOT / config["inputs"]["aggtrades_base"])
     fields = base["field_name"].tolist()
@@ -123,7 +141,15 @@ def _core3_context(config: dict[str, Any], catalog: pd.DataFrame) -> pd.DataFram
         np.searchsorted(timestamp_ns, pd.Timestamp(spec["bin_fit_end_exclusive"]).value)
     )
     meta = _field_meta(catalog)
-    return information_census(
+    for field in fields:
+        current = meta.setdefault(field, {})
+        current.update(
+            census_loaded=True,
+            current_runtime_member=False,
+            availability_scope="CORE3_AGGTRADES_MASKED_PILOT",
+            pit_source_status="DECLARED_AGGTRADES_CONTRACT_NOT_REVERIFIED_BY_CENSUS",
+        )
+    census = information_census(
         context_id="CORE3_MICROSTRUCTURE_PILOT",
         provider=provider,
         field_ids=fields,
@@ -137,6 +163,18 @@ def _core3_context(config: dict[str, Any], catalog: pd.DataFrame) -> pd.DataFram
         maximum_samples=config["statistics"]["maximum_samples_per_field"],
         null_shifts_hours=config["statistics"]["block_permutation_shifts_hours"],
     )
+    summary = {
+        "assets": len(spec["symbols"]),
+        "symbols": spec["symbols"],
+        "timestamps": int(len(timestamp_ns)),
+        "eligible_observations": int(eligible.sum()),
+        "actual_start": _timestamp_iso(int(timestamp_ns.min())),
+        "actual_end_inclusive": _timestamp_iso(int(timestamp_ns.max())),
+        "latest_timestamp_exclusive": spec["end_exclusive"],
+        "target": "log_return_t_plus_2_to_t_plus_6",
+        "claim_scope": spec["claim_scope"],
+    }
+    return census, summary
 
 
 def _report(census: pd.DataFrame, core_pack: list[dict[str, Any]], manifest: dict[str, Any]) -> str:
@@ -157,6 +195,8 @@ def _report(census: pd.DataFrame, core_pack: list[dict[str, Any]], manifest: dic
             f"## {context}",
             "",
             f"- Fields audited: {len(group)}",
+            f"- Census-loaded fields: {int(group['census_loaded'].sum())}",
+            f"- Current-runtime members: {int(group['current_runtime_member'].sum())}",
             f"- Median coverage: {group['coverage_ratio'].median():.6f}",
             f"- Missingness flags: {(group['missingness_flag'] != '').sum()}",
             f"- Redundancy clusters: {group['redundancy_cluster_id'].nunique()}",
@@ -188,13 +228,14 @@ def run(config_path: Path) -> dict[str, Any]:
     report_path.parent.mkdir(parents=True, exist_ok=True)
 
     catalog = compile_token_catalog(ROOT, config)
-    broad = _broad_context(config, catalog)
-    core3 = _core3_context(config, catalog)
+    broad, broad_summary = _broad_context(config, catalog)
+    core3, core3_summary = _core3_context(config, catalog)
     census = pd.concat([broad, core3], ignore_index=True)
     pack = build_core_pack(census, catalog, **{
         "minimum_size": config["core_pack"]["minimum_size"],
         "target_size": config["core_pack"]["target_size"],
         "maximum_size": config["core_pack"]["maximum_size"],
+        "derived_transforms": config["core_pack"]["derived_transforms"],
     })
 
     token_path = runtime_root / "token_catalog.parquet"
@@ -226,16 +267,27 @@ def run(config_path: Path) -> dict[str, Any]:
             "unmaterialized_derived_specs": int((catalog["token_kind"] == "DERIVED").sum()),
         },
         "contexts": {
-            "BROAD_PANEL_BASELINE": {"latest_timestamp_exclusive": "2024-07-01T00:00:00Z"},
-            "CORE3_MICROSTRUCTURE_PILOT": {
-                "symbols": config["contexts"]["CORE3_MICROSTRUCTURE_PILOT"]["symbols"],
-                "latest_timestamp_exclusive": "2024-07-01T00:00:00Z",
-                "claim_scope": "CORE3_MICROSTRUCTURE_MECHANISM_EVIDENCE",
-            },
+            "BROAD_PANEL_BASELINE": broad_summary,
+            "CORE3_MICROSTRUCTURE_PILOT": core3_summary,
+        },
+        "input_identities": {
+            name: sha256_file(ROOT / config["inputs"][name])
+            for name in ("inventory", "lineage", "aggtrades_base", "aggtrades_derived", "broad_registry")
         },
         "boundaries": config["boundaries"],
         "files": {},
     }
+    cache_metadata_path = ROOT / config["inputs"]["broad_cache"] / "metadata.json"
+    cache_metadata = json.loads(cache_metadata_path.read_text(encoding="utf-8"))
+    manifest["input_identities"]["broad_cache_metadata_sha256"] = sha256_file(
+        cache_metadata_path
+    )
+    manifest["input_identities"]["broad_cache_identity_sha256"] = cache_metadata.get(
+        "identity_sha256", ""
+    )
+    core3_panel = Path(config["inputs"]["core3_panel"])
+    manifest["input_identities"]["core3_panel_sha256"] = sha256_file(core3_panel)
+    manifest["input_identities"]["core3_panel_bytes"] = core3_panel.stat().st_size
     manifest["identity_sha256"] = payload_sha256({k: v for k, v in manifest.items() if k != "files"})
     report_path.write_text(_report(census, pack, manifest), encoding="utf-8")
     for path in [token_path, census_path, pack_path, report_path]:

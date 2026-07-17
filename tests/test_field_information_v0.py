@@ -25,6 +25,7 @@ def test_token_catalog_traces_existing_inventory_without_new_authority() -> None
     catalog = compile_token_catalog(ROOT, CONFIG)
     assert len(catalog) == 5388
     assert catalog["field_id"].nunique() == 5388
+    assert catalog["token_id"].nunique() == 5388
     assert (catalog["token_kind"] == "DERIVED").sum() == 5211
     base = catalog.loc[catalog["field_id"] == "agg_signed_aggressor_notional"].iloc[0]
     assert base["token_id"] == "FIELD:agg_signed_aggressor_notional"
@@ -95,7 +96,7 @@ def test_core_pack_balances_base_and_lazy_derived_tokens() -> None:
                     "coverage_ratio": 0.99,
                     "normalized_value_entropy": 0.8,
                     "missingness_flag": "",
-                    "runtime_loaded": context == "BROAD_PANEL_BASELINE" and index < 10,
+                    "current_runtime_member": context == "BROAD_PANEL_BASELINE" and index < 10,
                     "residual_mi_excess": 0.02 / (index + 1),
                     "mutual_information_excess": 0.01 / (index + 1),
                     "block_q25": 0.005 / (index + 1),

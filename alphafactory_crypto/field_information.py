@@ -169,7 +169,7 @@ def compile_token_catalog(repo_root: Path, config: Mapping[str, Any]) -> pd.Data
                 "pit_source_status": str(lineage_row.get("lineage_status") or "UNVERIFIED"),
                 "availability_scope": str(base_row.get("availability_scope") or ""),
                 "generator_enabled": bool(base_row.get("generator_enabled", is_derived)),
-                "runtime_loaded": bool(item.get("runtime_loaded", False)),
+                "current_runtime_member": bool(item.get("runtime_loaded", False)),
                 "search_allowed": bool(item.get("search_allowed", False)),
                 "input_approval": status,
                 "blocker": blocker,
@@ -307,7 +307,7 @@ def information_census(
     )
     target_bins = apply_bins(target, target_edges)
     residual_bins = apply_bins(residual_target, residual_edges)
-    months = pd.to_datetime(timestamps, utc=True).to_period("M").astype(str).to_numpy()
+    months = pd.to_datetime(timestamps, utc=True).strftime("%Y-%m").to_numpy()
     asset_sample, time_sample = _sample_coordinates(eligible & np.isfinite(target), maximum_samples)
     rows: list[dict[str, Any]] = []
     redundancy_values: dict[str, np.ndarray] = {}
@@ -365,7 +365,8 @@ def information_census(
                 ) if block_values else 0.0,
                 "availability_scope": str(meta.get("availability_scope") or ""),
                 "pit_source_status": str(meta.get("pit_source_status") or "UNVERIFIED"),
-                "runtime_loaded": bool(meta.get("runtime_loaded", False)),
+                "census_loaded": True,
+                "current_runtime_member": bool(meta.get("current_runtime_member", False)),
                 "missingness_flag": (
                     "MISSINGNESS_DOMINATED"
                     if missing_mi > max(observed_mi, residual_mi)
@@ -428,6 +429,7 @@ def build_core_pack(
     minimum_size: int = 80,
     target_size: int = 120,
     maximum_size: int = 160,
+    derived_transforms: Mapping[str, Sequence[int]] | None = None,
 ) -> list[dict[str, Any]]:
     scored = census.copy()
     scored["score"] = (
@@ -441,7 +443,9 @@ def build_core_pack(
         & (scored["normalized_value_entropy"] > 0.05)
         & (scored["missingness_flag"] == "")
     ].copy()
-    baseline = adequate.loc[adequate["runtime_loaded"]].sort_values("score", ascending=False)
+    baseline = adequate.loc[adequate["current_runtime_member"]].sort_values(
+        "score", ascending=False
+    )
     remainder = adequate.loc[~adequate.index.isin(baseline.index)].sort_values(
         ["family", "score"], ascending=[True, False]
     )
@@ -457,10 +461,16 @@ def build_core_pack(
                 break
 
     selected_ids = {row["field_id"] for row in selected}
+    transform_spec = derived_transforms or {
+        "Delta": (4, 24, 72),
+        "ZScore": (24, 72),
+        "TSMean": (4, 24),
+        "Decay": (24,),
+    }
     allowed = {
-        ("Delta", 4), ("Delta", 24), ("Delta", 72),
-        ("ZScore", 24), ("ZScore", 72),
-        ("TSMean", 4), ("TSMean", 24), ("Decay", 24),
+        (str(transform), int(window))
+        for transform, windows in transform_spec.items()
+        for window in windows
     }
     derived = token_catalog.loc[token_catalog["token_kind"] == "DERIVED"].copy()
     candidates = []
