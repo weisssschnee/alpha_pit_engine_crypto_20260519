@@ -125,6 +125,7 @@ def test_dense_probe_reaches_updates_and_ablates_every_channel() -> None:
     assert summary["gradient_reachable_channels"] == 6
     assert summary["updated_value_channels"] == 6
     assert summary["ablation_sensitive_channels"] == 6
+    assert isinstance(summary["training_loss_decreased"], bool)
     materialized = [
         {"finite_rows": 1024, "finite_ratio": 1.0, "variance": 1.0} for _ in rows
     ]

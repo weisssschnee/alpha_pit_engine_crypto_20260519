@@ -390,6 +390,7 @@ def dense_consumption_probe(
         "target_normalization": "CONTEXT_SAMPLE_ZSCORE",
         "initial_training_loss": initial_loss,
         "final_training_loss": final_loss,
+        "training_loss_decreased": bool(final_loss < float(initial_loss)),
         "gradient_reachable_channels": int((gradient > 1e-12).sum()),
         "updated_value_channels": int((weight_update > 1e-12).sum()),
         "ablation_sensitive_channels": int((np.asarray(sensitivity) > 1e-12).sum()),

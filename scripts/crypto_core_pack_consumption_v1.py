@@ -74,6 +74,7 @@ def _report(manifest: dict[str, Any], contexts: dict[str, Any], rows: pd.DataFra
                 f"- Gradient reachable: {probe['gradient_reachable_channels']}/{probe['value_channels']}",
                 f"- First-layer parameters updated: {probe['updated_value_channels']}/{probe['value_channels']}",
                 f"- Prediction-sensitive under zero ablation: {probe['ablation_sensitive_channels']}/{probe['value_channels']}",
+                f"- Training loss decreased: {probe['training_loss_decreased']}",
                 f"- Data range: {summary['materialization']['actual_start']} through {summary['materialization']['actual_end']}",
                 "",
             ]
@@ -91,6 +92,7 @@ def _report(manifest: dict[str, Any], contexts: dict[str, Any], rows: pd.DataFra
             "## Claim boundary",
             "",
             "A passing token proves loadability, materialization, tensor exposure, gradient reachability, parameter update, and prediction sensitivity in this frozen probe. It does not prove unique information, stable learning value, portfolio increment, economic value, or OOS validity.",
+            "The context-level training-loss flag is reported separately and is not part of token consumption admission.",
             "",
         ]
     )
