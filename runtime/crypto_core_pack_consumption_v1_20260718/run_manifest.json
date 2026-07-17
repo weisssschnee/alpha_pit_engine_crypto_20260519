@@ -1,0 +1,190 @@
+{
+  "boundaries": {
+    "candidate_promotion": false,
+    "context_merge_allowed": false,
+    "cross_sprint_adaptive_memory": false,
+    "economic_evaluation": false,
+    "formal_performance_search": false,
+    "latest_timestamp_exclusive": "2024-07-01T00:00:00Z",
+    "portfolio_mapping": false,
+    "sealed_reads_allowed": false
+  },
+  "command": "python scripts/crypto_core_pack_consumption_v1.py",
+  "contexts": {
+    "BROAD_PANEL_BASELINE": {
+      "materialization": {
+        "actual_end": "2024-06-30T23:00:00+00:00",
+        "actual_start": "2023-07-01T00:00:00+00:00",
+        "assets_total": 498,
+        "probe_assets": 32,
+        "probe_symbols": [
+          "1000BONKUSDT",
+          "1000FLOKIUSDT",
+          "1000LUNCUSDT",
+          "1000PEPEUSDT",
+          "1000RATSUSDT",
+          "1000SATSUSDT",
+          "1000SHIBUSDT",
+          "1000XECUSDT",
+          "1INCHUSDT",
+          "AAVEUSDT",
+          "ACEUSDT",
+          "ACHUSDT",
+          "ADAUSDT",
+          "AGLDUSDT",
+          "ALGOUSDT",
+          "ALICEUSDT",
+          "ANKRUSDT",
+          "APEUSDT",
+          "API3USDT",
+          "APTUSDT",
+          "ARBUSDT",
+          "ARKMUSDT",
+          "ARKUSDT",
+          "ARPAUSDT",
+          "ARUSDT",
+          "ASTRUSDT",
+          "ATOMUSDT",
+          "AUCTIONUSDT",
+          "AVAXUSDT",
+          "AXSUSDT",
+          "BANDUSDT",
+          "BATUSDT"
+        ],
+        "tensor_channels": 39,
+        "tensor_rows": 139776,
+        "timestamps_full": 8784,
+        "timestamps_probe": 4368
+      },
+      "probe": {
+        "ablation_sensitive_channels": 37,
+        "claim_boundary": "CONSUMPTION_PLUMBING_ONLY_NOT_MODEL_QUALITY_OR_ECONOMIC_EVIDENCE",
+        "epochs": 12,
+        "final_training_loss": 0.019149145111441612,
+        "gradient_reachable_channels": 39,
+        "hidden_width": 32,
+        "initial_training_loss": 0.04813620075583458,
+        "mask_channels": 39,
+        "model_input_channels": 78,
+        "samples": 8192,
+        "seed": 20260718,
+        "updated_value_channels": 37,
+        "value_channels": 39
+      }
+    },
+    "CORE3_MICROSTRUCTURE_PILOT": {
+      "materialization": {
+        "actual_end": "2024-06-30T23:00:00+00:00",
+        "actual_start": "2024-01-01T00:00:00+00:00",
+        "derived_channels": 45,
+        "maximum_alignment_shift_bars": 71,
+        "symbols": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ],
+        "tensor_channels": 81,
+        "tensor_rows": 13104,
+        "timestamps": 4368
+      },
+      "probe": {
+        "ablation_sensitive_channels": 81,
+        "claim_boundary": "CONSUMPTION_PLUMBING_ONLY_NOT_MODEL_QUALITY_OR_ECONOMIC_EVIDENCE",
+        "epochs": 12,
+        "final_training_loss": 0.11061219871044159,
+        "gradient_reachable_channels": 81,
+        "hidden_width": 32,
+        "initial_training_loss": 0.017910217866301537,
+        "mask_channels": 81,
+        "model_input_channels": 162,
+        "samples": 8192,
+        "seed": 20260718,
+        "updated_value_channels": 81,
+        "value_channels": 81
+      }
+    }
+  },
+  "cost_time": {
+    "actual_wall_seconds": 20.745088599971496,
+    "estimated_peak_memory_gb": 2.0,
+    "estimated_wall_minutes": 8
+  },
+  "counts": {
+    "base_tokens": 75,
+    "broad_tokens": 39,
+    "consumption_pass_tokens": 118,
+    "core3_tokens": 81,
+    "derived_tokens": 45,
+    "tokens": 120
+  },
+  "created_at": "2026-07-17T19:23:20Z",
+  "decision": "N/A_CONSUMPTION_QUALIFICATION_ONLY",
+  "experiment_id": "20260718_core_pack_consumption_001",
+  "files": {
+    "reports/CRYPTO_CORE_PACK_CONSUMPTION_V1_20260718.md": "C50F1B1A7FEBA00FAB7CE09A96878DB7D4C31FA6379FB47CB7D245861DFBD74F",
+    "runtime/crypto_core_pack_consumption_v1_20260718/context_consumption_summary.json": "D9761F9338E59BD850B4157731DECDE98CD62793A35605DF85EA71D7209F60AA",
+    "runtime/crypto_core_pack_consumption_v1_20260718/resolved_token_contract.json": "98FAAF389E31B4C3B2A3CD9FE2C8B364EF29F9792239CF64C171492AF97E1D9C",
+    "runtime/crypto_core_pack_consumption_v1_20260718/token_consumption_evidence.csv": "FF9F2E6929A5A798D2E6616CD74D10F411C30144C2773243CF5A7ADFBFDA9877"
+  },
+  "identity_sha256": "E5E5CB19610E91CE27C4673FECB400977F87EBDFDE8D786AA41FAE5734F4BB2A",
+  "input_identities": {
+    "aggtrades_base_sha256": "F5CCBB8500F16A0B6A7EE21623377AA601BE506010B57803F16E39DEED9E14DC",
+    "aggtrades_derived_sha256": "45765DE2354E8B9BDBFADA21AF708AAD48150FC45137DB5F0FAFCFCC7F13C3F3",
+    "broad_cache_identity_sha256": "CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0",
+    "broad_cache_metadata_sha256": "CCEB67F08F7525C71F5EA25A4B658324B5EF376E414318CB1220A1507465E539",
+    "broad_registry_sha256": "3BCF7B884EB44264B5BE4DC9A0BCF2D3355F59BA1AA33B1E5B81525061E94277",
+    "config_sha256": "791A2772599273E6C533C44D2F9946125DDF6F9391EEFE2EA932263AC6AF8E6E",
+    "core3_panel_bytes": 160877933,
+    "core3_panel_sha256": "174CA773E0CC0B6DC76986CE66554A8F627EB908B9F8CA691E64ED6343D0AB97",
+    "core_pack_sha256": "B6765D5A60B9A348A47A88BB53D503A48E024C1BAF83BCB14B2F4BF06E248D00",
+    "resolved_contract_identity_sha256": "35E54F79576A6D7A1D94AE697E8066CB9FB49CF9A97979259F39490E3281914E"
+  },
+  "objective": "Qualify actual context-bound consumption of the frozen 120-token Core Pack without performance search or economic evaluation",
+  "parameters": {
+    "consumer_probe": {
+      "ablation_samples": 2048,
+      "epochs": 12,
+      "hidden_width": 32,
+      "learning_rate": 0.01,
+      "maximum_samples_per_context": 8192,
+      "minimum_finite_ratio": 0.05,
+      "seed": 20260718
+    },
+    "contexts": {
+      "BROAD_PANEL_BASELINE": {
+        "end_exclusive": "2024-07-01T00:00:00Z",
+        "probe_assets": 32,
+        "probe_start": "2024-01-01T00:00:00Z",
+        "start": "2023-07-01T00:00:00Z",
+        "target_horizon_hours": 4
+      },
+      "CORE3_MICROSTRUCTURE_PILOT": {
+        "end_exclusive": "2024-07-01T00:00:00Z",
+        "start": "2024-01-01T00:00:00Z",
+        "symbols": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ]
+      }
+    },
+    "frozen_budget": {
+      "contexts": 2,
+      "estimated_peak_memory_gb": 2.0,
+      "estimated_wall_minutes": 8,
+      "hyperparameter_search": false,
+      "models_per_context": 1,
+      "seeds": 1,
+      "tokens": 120
+    }
+  },
+  "reproducibility": {
+    "continuation": "Rerun the exact command at source_sha with the same content-hash-bound inputs; do not merge contexts or open economic evaluation.",
+    "failure": "See token_consumption_evidence.csv",
+    "fixed_seed": 20260718,
+    "reproducible": true
+  },
+  "schema_version": 1,
+  "source_sha": "5d672c374040ae59ec90d79ef7f3a38738d976f5",
+  "status": "CORE_PACK_CONSUMPTION_PARTIAL"
+}

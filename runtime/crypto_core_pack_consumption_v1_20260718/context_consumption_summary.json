@@ -1,0 +1,94 @@
+{
+  "BROAD_PANEL_BASELINE": {
+    "materialization": {
+      "actual_end": "2024-06-30T23:00:00+00:00",
+      "actual_start": "2023-07-01T00:00:00+00:00",
+      "assets_total": 498,
+      "probe_assets": 32,
+      "probe_symbols": [
+        "1000BONKUSDT",
+        "1000FLOKIUSDT",
+        "1000LUNCUSDT",
+        "1000PEPEUSDT",
+        "1000RATSUSDT",
+        "1000SATSUSDT",
+        "1000SHIBUSDT",
+        "1000XECUSDT",
+        "1INCHUSDT",
+        "AAVEUSDT",
+        "ACEUSDT",
+        "ACHUSDT",
+        "ADAUSDT",
+        "AGLDUSDT",
+        "ALGOUSDT",
+        "ALICEUSDT",
+        "ANKRUSDT",
+        "APEUSDT",
+        "API3USDT",
+        "APTUSDT",
+        "ARBUSDT",
+        "ARKMUSDT",
+        "ARKUSDT",
+        "ARPAUSDT",
+        "ARUSDT",
+        "ASTRUSDT",
+        "ATOMUSDT",
+        "AUCTIONUSDT",
+        "AVAXUSDT",
+        "AXSUSDT",
+        "BANDUSDT",
+        "BATUSDT"
+      ],
+      "tensor_channels": 39,
+      "tensor_rows": 139776,
+      "timestamps_full": 8784,
+      "timestamps_probe": 4368
+    },
+    "probe": {
+      "ablation_sensitive_channels": 37,
+      "claim_boundary": "CONSUMPTION_PLUMBING_ONLY_NOT_MODEL_QUALITY_OR_ECONOMIC_EVIDENCE",
+      "epochs": 12,
+      "final_training_loss": 0.019149145111441612,
+      "gradient_reachable_channels": 39,
+      "hidden_width": 32,
+      "initial_training_loss": 0.04813620075583458,
+      "mask_channels": 39,
+      "model_input_channels": 78,
+      "samples": 8192,
+      "seed": 20260718,
+      "updated_value_channels": 37,
+      "value_channels": 39
+    }
+  },
+  "CORE3_MICROSTRUCTURE_PILOT": {
+    "materialization": {
+      "actual_end": "2024-06-30T23:00:00+00:00",
+      "actual_start": "2024-01-01T00:00:00+00:00",
+      "derived_channels": 45,
+      "maximum_alignment_shift_bars": 71,
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "tensor_channels": 81,
+      "tensor_rows": 13104,
+      "timestamps": 4368
+    },
+    "probe": {
+      "ablation_sensitive_channels": 81,
+      "claim_boundary": "CONSUMPTION_PLUMBING_ONLY_NOT_MODEL_QUALITY_OR_ECONOMIC_EVIDENCE",
+      "epochs": 12,
+      "final_training_loss": 0.11061219871044159,
+      "gradient_reachable_channels": 81,
+      "hidden_width": 32,
+      "initial_training_loss": 0.017910217866301537,
+      "mask_channels": 81,
+      "model_input_channels": 162,
+      "samples": 8192,
+      "seed": 20260718,
+      "updated_value_channels": 81,
+      "value_channels": 81
+    }
+  }
+}
