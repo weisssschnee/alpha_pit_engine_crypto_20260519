@@ -1,0 +1,1937 @@
+{
+  "boundaries": {
+    "candidate_promotion": false,
+    "context_merge_allowed": false,
+    "cross_sprint_adaptive_memory": false,
+    "economic_evaluation": false,
+    "formal_performance_search": false,
+    "latest_timestamp_exclusive": "2024-07-01T00:00:00Z",
+    "portfolio_mapping": false,
+    "sealed_reads_allowed": false
+  },
+  "identity_sha256": "35E54F79576A6D7A1D94AE697E8066CB9FB49CF9A97979259F39490E3281914E",
+  "schema_version": 1,
+  "status": "FROZEN_EXECUTABLE_CONTEXT_CONTRACT",
+  "tokens": [
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "top_global_account_divergence"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "top_global_account_divergence",
+      "family": "account_position_divergence",
+      "feature_available_lag_bars": 1,
+      "field_id": "top_global_account_divergence",
+      "ordinal": 1,
+      "token_id": "FIELD:top_global_account_divergence",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "mark_trade_basis_bps"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "mark_trade_basis_bps",
+      "family": "basis_premium",
+      "feature_available_lag_bars": 1,
+      "field_id": "mark_trade_basis_bps",
+      "ordinal": 2,
+      "token_id": "FIELD:mark_trade_basis_bps",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "trade_quote_volume"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "trade_quote_volume",
+      "family": "quote_volume_activity",
+      "feature_available_lag_bars": 1,
+      "field_id": "trade_quote_volume",
+      "ordinal": 3,
+      "token_id": "FIELD:trade_quote_volume",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "account_position_divergence"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "account_position_divergence",
+      "family": "account_position_divergence",
+      "feature_available_lag_bars": 1,
+      "field_id": "account_position_divergence",
+      "ordinal": 4,
+      "token_id": "FIELD:account_position_divergence",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "global_long_short_account_ratio_last"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "global_long_short_account_ratio_last",
+      "family": "account_crowding",
+      "feature_available_lag_bars": 1,
+      "field_id": "global_long_short_account_ratio_last",
+      "ordinal": 5,
+      "token_id": "FIELD:global_long_short_account_ratio_last",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "open_interest_value_last"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "open_interest_value_last",
+      "family": "open_interest_value",
+      "feature_available_lag_bars": 1,
+      "field_id": "open_interest_value_last",
+      "ordinal": 6,
+      "token_id": "FIELD:open_interest_value_last",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "open_interest_value_mean"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "open_interest_value_mean",
+      "family": "open_interest_value",
+      "feature_available_lag_bars": 1,
+      "field_id": "open_interest_value_mean",
+      "ordinal": 7,
+      "token_id": "FIELD:open_interest_value_mean",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "top_long_short_account_ratio_last"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "top_long_short_account_ratio_last",
+      "family": "account_crowding",
+      "feature_available_lag_bars": 1,
+      "field_id": "top_long_short_account_ratio_last",
+      "ordinal": 8,
+      "token_id": "FIELD:top_long_short_account_ratio_last",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "trade_close"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "trade_close",
+      "family": "price_level",
+      "feature_available_lag_bars": 1,
+      "field_id": "trade_close",
+      "ordinal": 9,
+      "token_id": "FIELD:trade_close",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "top_long_short_position_ratio_last"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "top_long_short_position_ratio_last",
+      "family": "position_crowding",
+      "feature_available_lag_bars": 1,
+      "field_id": "top_long_short_position_ratio_last",
+      "ordinal": 10,
+      "token_id": "FIELD:top_long_short_position_ratio_last",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "global_long_short_account_ratio_mean"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "global_long_short_account_ratio_mean",
+      "family": "account_crowding",
+      "feature_available_lag_bars": 1,
+      "field_id": "global_long_short_account_ratio_mean",
+      "ordinal": 11,
+      "token_id": "FIELD:global_long_short_account_ratio_mean",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_notional_100_1k"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_notional_100_1k",
+      "family": "activity_liquidity",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_notional_100_1k",
+      "ordinal": 12,
+      "token_id": "FIELD:agg_notional_100_1k",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "premium_high"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "premium_high",
+      "family": "basis_premium",
+      "feature_available_lag_bars": 1,
+      "field_id": "premium_high",
+      "ordinal": 13,
+      "token_id": "FIELD:premium_high",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "active_universe_size"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "active_universe_size",
+      "family": "cross_asset_market_state",
+      "feature_available_lag_bars": 1,
+      "field_id": "active_universe_size",
+      "ordinal": 14,
+      "token_id": "FIELD:active_universe_size",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_universe_notional"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_universe_notional",
+      "family": "cross_symbol",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_universe_notional",
+      "ordinal": 15,
+      "token_id": "FIELD:agg_universe_notional",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_buy_quantity"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_buy_quantity",
+      "family": "flow",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_buy_quantity",
+      "ordinal": 16,
+      "token_id": "FIELD:agg_buy_quantity",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_large_notional_ratio_100k_plus"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_large_notional_ratio_100k_plus",
+      "family": "large_trade",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_large_notional_ratio_100k_plus",
+      "ordinal": 17,
+      "token_id": "FIELD:agg_large_notional_ratio_100k_plus",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "listing_age_days"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "listing_age_days",
+      "family": "listing_age_context",
+      "feature_available_lag_bars": 1,
+      "field_id": "listing_age_days",
+      "ordinal": 18,
+      "token_id": "FIELD:listing_age_days",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "open_interest_last_change_1h"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "open_interest_last_change_1h",
+      "family": "open_interest_level_change",
+      "feature_available_lag_bars": 1,
+      "field_id": "open_interest_last_change_1h",
+      "ordinal": 19,
+      "token_id": "FIELD:open_interest_last_change_1h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "open_interest_value_last_change_1h"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "open_interest_value_last_change_1h",
+      "family": "open_interest_value",
+      "feature_available_lag_bars": 1,
+      "field_id": "open_interest_value_last_change_1h",
+      "ordinal": 20,
+      "token_id": "FIELD:open_interest_value_last_change_1h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_avg_underlying_trades_per_agg"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_avg_underlying_trades_per_agg",
+      "family": "other",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_avg_underlying_trades_per_agg",
+      "ordinal": 21,
+      "token_id": "FIELD:agg_avg_underlying_trades_per_agg",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "top_long_short_position_ratio_mean"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "top_long_short_position_ratio_mean",
+      "family": "position_crowding",
+      "feature_available_lag_bars": 1,
+      "field_id": "top_long_short_position_ratio_mean",
+      "ordinal": 22,
+      "token_id": "FIELD:top_long_short_position_ratio_mean",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "index_open"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "index_open",
+      "family": "price_level",
+      "feature_available_lag_bars": 1,
+      "field_id": "index_open",
+      "ordinal": 23,
+      "token_id": "FIELD:index_open",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_price_range_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_price_range_bps",
+      "family": "price_microstructure",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_price_range_bps",
+      "ordinal": 24,
+      "token_id": "FIELD:agg_price_range_bps",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "trade_return_1h"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "trade_return_1h",
+      "family": "price_return",
+      "feature_available_lag_bars": 1,
+      "field_id": "trade_return_1h",
+      "ordinal": 25,
+      "token_id": "FIELD:trade_return_1h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "trade_count"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "trade_count",
+      "family": "quote_volume_activity",
+      "feature_available_lag_bars": 1,
+      "field_id": "trade_count",
+      "ordinal": 26,
+      "token_id": "FIELD:trade_count",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_price_range_bps_max_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_price_range_bps_max_24h",
+      "family": "rolling",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_price_range_bps_max_24h",
+      "ordinal": 27,
+      "token_id": "FIELD:agg_price_range_bps_max_24h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "top_long_short_account_ratio_mean"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "top_long_short_account_ratio_mean",
+      "family": "account_crowding",
+      "feature_available_lag_bars": 1,
+      "field_id": "top_long_short_account_ratio_mean",
+      "ordinal": 28,
+      "token_id": "FIELD:top_long_short_account_ratio_mean",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_quantity"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_quantity",
+      "family": "activity_liquidity",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_quantity",
+      "ordinal": 29,
+      "token_id": "FIELD:agg_quantity",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "premium_open"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "premium_open",
+      "family": "basis_premium",
+      "feature_available_lag_bars": 1,
+      "field_id": "premium_open",
+      "ordinal": 30,
+      "token_id": "FIELD:premium_open",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_flow_minus_btcusdt_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_flow_minus_btcusdt_4h",
+      "family": "cross_symbol",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_flow_minus_btcusdt_4h",
+      "ordinal": 31,
+      "token_id": "FIELD:agg_flow_minus_btcusdt_4h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_sell_quantity"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_sell_quantity",
+      "family": "flow",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_sell_quantity",
+      "ordinal": 32,
+      "token_id": "FIELD:agg_sell_quantity",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_large_notional_share_100k_plus"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_large_notional_share_100k_plus",
+      "family": "large_trade",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_large_notional_share_100k_plus",
+      "ordinal": 33,
+      "token_id": "FIELD:agg_large_notional_share_100k_plus",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "history_length_hours"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "history_length_hours",
+      "family": "listing_age_context",
+      "feature_available_lag_bars": 1,
+      "field_id": "history_length_hours",
+      "ordinal": 34,
+      "token_id": "FIELD:history_length_hours",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "open_interest_last_change_4h"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "open_interest_last_change_4h",
+      "family": "open_interest_level_change",
+      "feature_available_lag_bars": 1,
+      "field_id": "open_interest_last_change_4h",
+      "ordinal": 35,
+      "token_id": "FIELD:open_interest_last_change_4h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "open_interest_value_last_change_4h"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "open_interest_value_last_change_4h",
+      "family": "open_interest_value",
+      "feature_available_lag_bars": 1,
+      "field_id": "open_interest_value_last_change_4h",
+      "ordinal": 36,
+      "token_id": "FIELD:open_interest_value_last_change_4h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_first_agg_trade_id"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_first_agg_trade_id",
+      "family": "other",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_first_agg_trade_id",
+      "ordinal": 37,
+      "token_id": "FIELD:agg_first_agg_trade_id",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "index_low"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "index_low",
+      "family": "price_level",
+      "feature_available_lag_bars": 1,
+      "field_id": "index_low",
+      "ordinal": 38,
+      "token_id": "FIELD:index_low",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_buy_sell_vwap_spread_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_buy_sell_vwap_spread_bps",
+      "family": "price_microstructure",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_buy_sell_vwap_spread_bps",
+      "ordinal": 39,
+      "token_id": "FIELD:agg_buy_sell_vwap_spread_bps",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "taker_buy_sell_volume_ratio_last"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "taker_buy_sell_volume_ratio_last",
+      "family": "quote_volume_activity",
+      "feature_available_lag_bars": 1,
+      "field_id": "taker_buy_sell_volume_ratio_last",
+      "ordinal": 40,
+      "token_id": "FIELD:taker_buy_sell_volume_ratio_last",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_price_range_bps_max_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_price_range_bps_max_4h",
+      "family": "rolling",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_price_range_bps_max_4h",
+      "ordinal": 41,
+      "token_id": "FIELD:agg_price_range_bps_max_4h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_trade_count_1k_10k"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_trade_count_1k_10k",
+      "family": "activity_liquidity",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_trade_count_1k_10k",
+      "ordinal": 42,
+      "token_id": "FIELD:agg_trade_count_1k_10k",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "premium_low"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "premium_low",
+      "family": "basis_premium",
+      "feature_available_lag_bars": 1,
+      "field_id": "premium_low",
+      "ordinal": 43,
+      "token_id": "FIELD:premium_low",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_flow_minus_ethusdt_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_flow_minus_ethusdt_4h",
+      "family": "cross_symbol",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_flow_minus_ethusdt_4h",
+      "ordinal": 44,
+      "token_id": "FIELD:agg_flow_minus_ethusdt_4h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_buy_agg_trade_count"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_buy_agg_trade_count",
+      "family": "flow",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_buy_agg_trade_count",
+      "ordinal": 45,
+      "token_id": "FIELD:agg_buy_agg_trade_count",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_large_trade_count_ratio_100k_plus"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_large_trade_count_ratio_100k_plus",
+      "family": "large_trade",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_large_trade_count_ratio_100k_plus",
+      "ordinal": 46,
+      "token_id": "FIELD:agg_large_trade_count_ratio_100k_plus",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "age_percentile_active_universe"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "age_percentile_active_universe",
+      "family": "listing_age_context",
+      "feature_available_lag_bars": 1,
+      "field_id": "age_percentile_active_universe",
+      "ordinal": 47,
+      "token_id": "FIELD:age_percentile_active_universe",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "open_interest_last_change_24h"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "open_interest_last_change_24h",
+      "family": "open_interest_level_change",
+      "feature_available_lag_bars": 1,
+      "field_id": "open_interest_last_change_24h",
+      "ordinal": 48,
+      "token_id": "FIELD:open_interest_last_change_24h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "open_interest_value_last_change_24h"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "open_interest_value_last_change_24h",
+      "family": "open_interest_value",
+      "feature_available_lag_bars": 1,
+      "field_id": "open_interest_value_last_change_24h",
+      "ordinal": 49,
+      "token_id": "FIELD:open_interest_value_last_change_24h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_last_agg_trade_id"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_last_agg_trade_id",
+      "family": "other",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_last_agg_trade_id",
+      "ordinal": 50,
+      "token_id": "FIELD:agg_last_agg_trade_id",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "index_high"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "index_high",
+      "family": "price_level",
+      "feature_available_lag_bars": 1,
+      "field_id": "index_high",
+      "ordinal": 51,
+      "token_id": "FIELD:index_high",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_close_to_open_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_close_to_open_bps",
+      "family": "price_microstructure",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_close_to_open_bps",
+      "ordinal": 52,
+      "token_id": "FIELD:agg_close_to_open_bps",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "taker_buy_sell_volume_ratio_mean"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "taker_buy_sell_volume_ratio_mean",
+      "family": "quote_volume_activity",
+      "feature_available_lag_bars": 1,
+      "field_id": "taker_buy_sell_volume_ratio_mean",
+      "ordinal": 53,
+      "token_id": "FIELD:taker_buy_sell_volume_ratio_mean",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_quantity_sum_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_quantity_sum_4h",
+      "family": "rolling",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_quantity_sum_4h",
+      "ordinal": 54,
+      "token_id": "FIELD:agg_quantity_sum_4h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_trade_count_100_1k"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_trade_count_100_1k",
+      "family": "activity_liquidity",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_trade_count_100_1k",
+      "ordinal": 55,
+      "token_id": "FIELD:agg_trade_count_100_1k",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "mark_index_basis_bps"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "mark_index_basis_bps",
+      "family": "basis_premium",
+      "feature_available_lag_bars": 1,
+      "field_id": "mark_index_basis_bps",
+      "ordinal": 56,
+      "token_id": "FIELD:mark_index_basis_bps",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_btcusdt_flow_imbalance_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_btcusdt_flow_imbalance_4h",
+      "family": "cross_symbol",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_btcusdt_flow_imbalance_4h",
+      "ordinal": 57,
+      "token_id": "FIELD:agg_btcusdt_flow_imbalance_4h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_signed_aggressor_quantity"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_signed_aggressor_quantity",
+      "family": "flow",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_signed_aggressor_quantity",
+      "ordinal": 58,
+      "token_id": "FIELD:agg_signed_aggressor_quantity",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_large_count_share_100k_plus"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_large_count_share_100k_plus",
+      "family": "large_trade",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_large_count_share_100k_plus",
+      "ordinal": 59,
+      "token_id": "FIELD:agg_large_count_share_100k_plus",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "open_interest_mean"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "open_interest_mean",
+      "family": "open_interest_level_change",
+      "feature_available_lag_bars": 1,
+      "field_id": "open_interest_mean",
+      "ordinal": 60,
+      "token_id": "FIELD:open_interest_mean",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_first_transact_time_ms"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_first_transact_time_ms",
+      "family": "other",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_first_transact_time_ms",
+      "ordinal": 61,
+      "token_id": "FIELD:agg_first_transact_time_ms",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_vwap_close_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_vwap_close_bps",
+      "family": "price_microstructure",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_vwap_close_bps",
+      "ordinal": 62,
+      "token_id": "FIELD:agg_vwap_close_bps",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "taker_buy_quote_volume"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "taker_buy_quote_volume",
+      "family": "quote_volume_activity",
+      "feature_available_lag_bars": 1,
+      "field_id": "taker_buy_quote_volume",
+      "ordinal": 63,
+      "token_id": "FIELD:taker_buy_quote_volume",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_quantity_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_quantity_sum_24h",
+      "family": "rolling",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_quantity_sum_24h",
+      "ordinal": 64,
+      "token_id": "FIELD:agg_quantity_sum_24h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_notional_1k_10k"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_notional_1k_10k",
+      "family": "activity_liquidity",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_notional_1k_10k",
+      "ordinal": 65,
+      "token_id": "FIELD:agg_notional_1k_10k",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "premium_close"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "premium_close",
+      "family": "basis_premium",
+      "feature_available_lag_bars": 1,
+      "field_id": "premium_close",
+      "ordinal": 66,
+      "token_id": "FIELD:premium_close",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_universe_large_notional"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_universe_large_notional",
+      "family": "cross_symbol",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_universe_large_notional",
+      "ordinal": 67,
+      "token_id": "FIELD:agg_universe_large_notional",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_sell_agg_trade_count"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_sell_agg_trade_count",
+      "family": "flow",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_sell_agg_trade_count",
+      "ordinal": 68,
+      "token_id": "FIELD:agg_sell_agg_trade_count",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_large_trade_count_100k_plus"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_large_trade_count_100k_plus",
+      "family": "large_trade",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_large_trade_count_100k_plus",
+      "ordinal": 69,
+      "token_id": "FIELD:agg_large_trade_count_100k_plus",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "open_interest_last"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "open_interest_last",
+      "family": "open_interest_level_change",
+      "feature_available_lag_bars": 1,
+      "field_id": "open_interest_last",
+      "ordinal": 70,
+      "token_id": "FIELD:open_interest_last",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_last_transact_time_ms"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_last_transact_time_ms",
+      "family": "other",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_last_transact_time_ms",
+      "ordinal": 71,
+      "token_id": "FIELD:agg_last_transact_time_ms",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_price_std"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_price_std",
+      "family": "price_microstructure",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_price_std",
+      "ordinal": 72,
+      "token_id": "FIELD:agg_price_std",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY",
+      "base_dependencies": [
+        "trade_volume"
+      ],
+      "context_id": "BROAD_PANEL_BASELINE",
+      "execution_semantics": "RAW_PANEL_ALIGNED_BASE_FIELD",
+      "expression": "trade_volume",
+      "family": "quote_volume_activity",
+      "feature_available_lag_bars": 1,
+      "field_id": "trade_volume",
+      "ordinal": 73,
+      "token_id": "FIELD:trade_volume",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_close_to_open_bps_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_close_to_open_bps_sum_24h",
+      "family": "rolling",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_close_to_open_bps_sum_24h",
+      "ordinal": 74,
+      "token_id": "FIELD:agg_close_to_open_bps_sum_24h",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 0,
+      "authority_ref": "aggtrades_base_feature_registry_94.csv",
+      "base_dependencies": [
+        "agg_trade_count"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "CORE3_AGGTRADES_BASE_FIELD",
+      "expression": "agg_trade_count",
+      "family": "activity_liquidity",
+      "feature_available_lag_bars": 1,
+      "field_id": "agg_trade_count",
+      "ordinal": 75,
+      "token_id": "FIELD:agg_trade_count",
+      "token_kind": "BASE"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_LINEAR_DECAY",
+      "expression": "Decay(agg_price_range_bps_max_24h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Decay_24h__agg_price_range_bps_max_24h",
+      "ordinal": 76,
+      "token_id": "FIELD:agg_price_range_bps_max_24h|TRANSFORM:DECAY|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_price_range_bps_max_24h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Delta_24h__agg_price_range_bps_max_24h",
+      "ordinal": 77,
+      "token_id": "FIELD:agg_price_range_bps_max_24h|TRANSFORM:DELTA|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 3,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_price_range_bps_max_24h,4)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 4,
+      "field_id": "Delta_4h__agg_price_range_bps_max_24h",
+      "ordinal": 78,
+      "token_id": "FIELD:agg_price_range_bps_max_24h|TRANSFORM:DELTA|WINDOW:4H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 71,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_price_range_bps_max_24h,72)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 72,
+      "field_id": "Delta_72h__agg_price_range_bps_max_24h",
+      "ordinal": 79,
+      "token_id": "FIELD:agg_price_range_bps_max_24h|TRANSFORM:DELTA|WINDOW:72H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_MEAN",
+      "expression": "Mean(agg_price_range_bps_max_24h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "TSMean_24h__agg_price_range_bps_max_24h",
+      "ordinal": 80,
+      "token_id": "FIELD:agg_price_range_bps_max_24h|TRANSFORM:TSMEAN|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 3,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_MEAN",
+      "expression": "Mean(agg_price_range_bps_max_24h,4)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 4,
+      "field_id": "TSMean_4h__agg_price_range_bps_max_24h",
+      "ordinal": 81,
+      "token_id": "FIELD:agg_price_range_bps_max_24h|TRANSFORM:TSMEAN|WINDOW:4H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_MEAN_THEN_TIMESTAMP_CROSS_SECTIONAL_ZSCORE",
+      "expression": "ZScore(Mean(agg_price_range_bps_max_24h,24))",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "ZScore_24h__agg_price_range_bps_max_24h",
+      "ordinal": 82,
+      "token_id": "FIELD:agg_price_range_bps_max_24h|TRANSFORM:ZSCORE|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 71,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_MEAN_THEN_TIMESTAMP_CROSS_SECTIONAL_ZSCORE",
+      "expression": "ZScore(Mean(agg_price_range_bps_max_24h,72))",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 72,
+      "field_id": "ZScore_72h__agg_price_range_bps_max_24h",
+      "ordinal": 83,
+      "token_id": "FIELD:agg_price_range_bps_max_24h|TRANSFORM:ZSCORE|WINDOW:72H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_LINEAR_DECAY",
+      "expression": "Decay(agg_price_range_bps_max_4h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Decay_24h__agg_price_range_bps_max_4h",
+      "ordinal": 84,
+      "token_id": "FIELD:agg_price_range_bps_max_4h|TRANSFORM:DECAY|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_price_range_bps_max_4h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Delta_24h__agg_price_range_bps_max_4h",
+      "ordinal": 85,
+      "token_id": "FIELD:agg_price_range_bps_max_4h|TRANSFORM:DELTA|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 3,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_price_range_bps_max_4h,4)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 4,
+      "field_id": "Delta_4h__agg_price_range_bps_max_4h",
+      "ordinal": 86,
+      "token_id": "FIELD:agg_price_range_bps_max_4h|TRANSFORM:DELTA|WINDOW:4H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 71,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_price_range_bps_max_4h,72)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 72,
+      "field_id": "Delta_72h__agg_price_range_bps_max_4h",
+      "ordinal": 87,
+      "token_id": "FIELD:agg_price_range_bps_max_4h|TRANSFORM:DELTA|WINDOW:72H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_MEAN",
+      "expression": "Mean(agg_price_range_bps_max_4h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "TSMean_24h__agg_price_range_bps_max_4h",
+      "ordinal": 88,
+      "token_id": "FIELD:agg_price_range_bps_max_4h|TRANSFORM:TSMEAN|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 3,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_MEAN",
+      "expression": "Mean(agg_price_range_bps_max_4h,4)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 4,
+      "field_id": "TSMean_4h__agg_price_range_bps_max_4h",
+      "ordinal": 89,
+      "token_id": "FIELD:agg_price_range_bps_max_4h|TRANSFORM:TSMEAN|WINDOW:4H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_MEAN_THEN_TIMESTAMP_CROSS_SECTIONAL_ZSCORE",
+      "expression": "ZScore(Mean(agg_price_range_bps_max_4h,24))",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "ZScore_24h__agg_price_range_bps_max_4h",
+      "ordinal": 90,
+      "token_id": "FIELD:agg_price_range_bps_max_4h|TRANSFORM:ZSCORE|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 71,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps_max_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_MEAN_THEN_TIMESTAMP_CROSS_SECTIONAL_ZSCORE",
+      "expression": "ZScore(Mean(agg_price_range_bps_max_4h,72))",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 72,
+      "field_id": "ZScore_72h__agg_price_range_bps_max_4h",
+      "ordinal": 91,
+      "token_id": "FIELD:agg_price_range_bps_max_4h|TRANSFORM:ZSCORE|WINDOW:72H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_LINEAR_DECAY",
+      "expression": "Decay(agg_price_range_bps,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Decay_24h__agg_price_range_bps",
+      "ordinal": 92,
+      "token_id": "FIELD:agg_price_range_bps|TRANSFORM:DECAY|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_price_range_bps,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Delta_24h__agg_price_range_bps",
+      "ordinal": 93,
+      "token_id": "FIELD:agg_price_range_bps|TRANSFORM:DELTA|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 3,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_price_range_bps,4)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 4,
+      "field_id": "Delta_4h__agg_price_range_bps",
+      "ordinal": 94,
+      "token_id": "FIELD:agg_price_range_bps|TRANSFORM:DELTA|WINDOW:4H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 71,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_price_range_bps,72)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 72,
+      "field_id": "Delta_72h__agg_price_range_bps",
+      "ordinal": 95,
+      "token_id": "FIELD:agg_price_range_bps|TRANSFORM:DELTA|WINDOW:72H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_MEAN",
+      "expression": "Mean(agg_price_range_bps,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "TSMean_24h__agg_price_range_bps",
+      "ordinal": 96,
+      "token_id": "FIELD:agg_price_range_bps|TRANSFORM:TSMEAN|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 3,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_MEAN",
+      "expression": "Mean(agg_price_range_bps,4)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 4,
+      "field_id": "TSMean_4h__agg_price_range_bps",
+      "ordinal": 97,
+      "token_id": "FIELD:agg_price_range_bps|TRANSFORM:TSMEAN|WINDOW:4H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_MEAN_THEN_TIMESTAMP_CROSS_SECTIONAL_ZSCORE",
+      "expression": "ZScore(Mean(agg_price_range_bps,24))",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "ZScore_24h__agg_price_range_bps",
+      "ordinal": 98,
+      "token_id": "FIELD:agg_price_range_bps|TRANSFORM:ZSCORE|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 71,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_price_range_bps"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_MEAN_THEN_TIMESTAMP_CROSS_SECTIONAL_ZSCORE",
+      "expression": "ZScore(Mean(agg_price_range_bps,72))",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 72,
+      "field_id": "ZScore_72h__agg_price_range_bps",
+      "ordinal": 99,
+      "token_id": "FIELD:agg_price_range_bps|TRANSFORM:ZSCORE|WINDOW:72H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_LINEAR_DECAY",
+      "expression": "Decay(agg_quantity_sum_4h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Decay_24h__agg_quantity_sum_4h",
+      "ordinal": 100,
+      "token_id": "FIELD:agg_quantity_sum_4h|TRANSFORM:DECAY|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_quantity_sum_4h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Delta_24h__agg_quantity_sum_4h",
+      "ordinal": 101,
+      "token_id": "FIELD:agg_quantity_sum_4h|TRANSFORM:DELTA|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 3,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_quantity_sum_4h,4)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 4,
+      "field_id": "Delta_4h__agg_quantity_sum_4h",
+      "ordinal": 102,
+      "token_id": "FIELD:agg_quantity_sum_4h|TRANSFORM:DELTA|WINDOW:4H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 71,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_quantity_sum_4h,72)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 72,
+      "field_id": "Delta_72h__agg_quantity_sum_4h",
+      "ordinal": 103,
+      "token_id": "FIELD:agg_quantity_sum_4h|TRANSFORM:DELTA|WINDOW:72H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_MEAN",
+      "expression": "Mean(agg_quantity_sum_4h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "TSMean_24h__agg_quantity_sum_4h",
+      "ordinal": 104,
+      "token_id": "FIELD:agg_quantity_sum_4h|TRANSFORM:TSMEAN|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 3,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_MEAN",
+      "expression": "Mean(agg_quantity_sum_4h,4)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 4,
+      "field_id": "TSMean_4h__agg_quantity_sum_4h",
+      "ordinal": 105,
+      "token_id": "FIELD:agg_quantity_sum_4h|TRANSFORM:TSMEAN|WINDOW:4H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_MEAN_THEN_TIMESTAMP_CROSS_SECTIONAL_ZSCORE",
+      "expression": "ZScore(Mean(agg_quantity_sum_4h,24))",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "ZScore_24h__agg_quantity_sum_4h",
+      "ordinal": 106,
+      "token_id": "FIELD:agg_quantity_sum_4h|TRANSFORM:ZSCORE|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 71,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_4h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_MEAN_THEN_TIMESTAMP_CROSS_SECTIONAL_ZSCORE",
+      "expression": "ZScore(Mean(agg_quantity_sum_4h,72))",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 72,
+      "field_id": "ZScore_72h__agg_quantity_sum_4h",
+      "ordinal": 107,
+      "token_id": "FIELD:agg_quantity_sum_4h|TRANSFORM:ZSCORE|WINDOW:72H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_LINEAR_DECAY",
+      "expression": "Decay(agg_quantity_sum_24h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Decay_24h__agg_quantity_sum_24h",
+      "ordinal": 108,
+      "token_id": "FIELD:agg_quantity_sum_24h|TRANSFORM:DECAY|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_quantity_sum_24h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Delta_24h__agg_quantity_sum_24h",
+      "ordinal": 109,
+      "token_id": "FIELD:agg_quantity_sum_24h|TRANSFORM:DELTA|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 3,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_quantity_sum_24h,4)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 4,
+      "field_id": "Delta_4h__agg_quantity_sum_24h",
+      "ordinal": 110,
+      "token_id": "FIELD:agg_quantity_sum_24h|TRANSFORM:DELTA|WINDOW:4H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 71,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_quantity_sum_24h,72)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 72,
+      "field_id": "Delta_72h__agg_quantity_sum_24h",
+      "ordinal": 111,
+      "token_id": "FIELD:agg_quantity_sum_24h|TRANSFORM:DELTA|WINDOW:72H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_MEAN",
+      "expression": "Mean(agg_quantity_sum_24h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "TSMean_24h__agg_quantity_sum_24h",
+      "ordinal": 112,
+      "token_id": "FIELD:agg_quantity_sum_24h|TRANSFORM:TSMEAN|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 3,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_MEAN",
+      "expression": "Mean(agg_quantity_sum_24h,4)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 4,
+      "field_id": "TSMean_4h__agg_quantity_sum_24h",
+      "ordinal": 113,
+      "token_id": "FIELD:agg_quantity_sum_24h|TRANSFORM:TSMEAN|WINDOW:4H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_MEAN_THEN_TIMESTAMP_CROSS_SECTIONAL_ZSCORE",
+      "expression": "ZScore(Mean(agg_quantity_sum_24h,24))",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "ZScore_24h__agg_quantity_sum_24h",
+      "ordinal": 114,
+      "token_id": "FIELD:agg_quantity_sum_24h|TRANSFORM:ZSCORE|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 71,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_quantity_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_MEAN_THEN_TIMESTAMP_CROSS_SECTIONAL_ZSCORE",
+      "expression": "ZScore(Mean(agg_quantity_sum_24h,72))",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 72,
+      "field_id": "ZScore_72h__agg_quantity_sum_24h",
+      "ordinal": 115,
+      "token_id": "FIELD:agg_quantity_sum_24h|TRANSFORM:ZSCORE|WINDOW:72H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_close_to_open_bps_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_LINEAR_DECAY",
+      "expression": "Decay(agg_close_to_open_bps_sum_24h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Decay_24h__agg_close_to_open_bps_sum_24h",
+      "ordinal": 116,
+      "token_id": "FIELD:agg_close_to_open_bps_sum_24h|TRANSFORM:DECAY|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_close_to_open_bps_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_close_to_open_bps_sum_24h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "Delta_24h__agg_close_to_open_bps_sum_24h",
+      "ordinal": 117,
+      "token_id": "FIELD:agg_close_to_open_bps_sum_24h|TRANSFORM:DELTA|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 3,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_close_to_open_bps_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_close_to_open_bps_sum_24h,4)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 4,
+      "field_id": "Delta_4h__agg_close_to_open_bps_sum_24h",
+      "ordinal": 118,
+      "token_id": "FIELD:agg_close_to_open_bps_sum_24h|TRANSFORM:DELTA|WINDOW:4H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 71,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_close_to_open_bps_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_DIFFERENCE",
+      "expression": "Delta(agg_close_to_open_bps_sum_24h,72)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 72,
+      "field_id": "Delta_72h__agg_close_to_open_bps_sum_24h",
+      "ordinal": 119,
+      "token_id": "FIELD:agg_close_to_open_bps_sum_24h|TRANSFORM:DELTA|WINDOW:72H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    },
+    {
+      "alignment_shift_bars": 23,
+      "authority_ref": "aggtrades_derived_feature_specs_5211.csv+CryptoFeatureAlgebra",
+      "base_dependencies": [
+        "agg_close_to_open_bps_sum_24h"
+      ],
+      "context_id": "CORE3_MICROSTRUCTURE_PILOT",
+      "execution_semantics": "TRAILING_SAME_SYMBOL_MEAN",
+      "expression": "Mean(agg_close_to_open_bps_sum_24h,24)",
+      "family": "rolling_self_reproduction",
+      "feature_available_lag_bars": 24,
+      "field_id": "TSMean_24h__agg_close_to_open_bps_sum_24h",
+      "ordinal": 120,
+      "token_id": "FIELD:agg_close_to_open_bps_sum_24h|TRANSFORM:TSMEAN|WINDOW:24H|SCOPE:SAME_SYMBOL",
+      "token_kind": "DERIVED"
+    }
+  ]
+}
