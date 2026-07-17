@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "experiment_id": "20260718_core_pack_consumption_001",
+  "experiment_id": "20260718_core_pack_consumption_002",
   "objective": "Qualify actual context-bound consumption of the frozen 120-token Core Pack without performance search or economic evaluation",
   "inputs": {
     "core_pack": "runtime/crypto_field_information_v0_20260717/core_pack_manifest.json",
@@ -15,7 +15,7 @@
     "BROAD_PANEL_BASELINE": {
       "start": "2023-07-01T00:00:00Z",
       "end_exclusive": "2024-07-01T00:00:00Z",
-      "probe_start": "2024-01-01T00:00:00Z",
+      "probe_start": "2023-07-01T00:00:00Z",
       "target_horizon_hours": 4,
       "probe_assets": 32
     },
@@ -54,7 +54,7 @@
     "cross_sprint_adaptive_memory": false
   },
   "outputs": {
-    "runtime_root": "runtime/crypto_core_pack_consumption_v1_20260718",
-    "report": "reports/CRYPTO_CORE_PACK_CONSUMPTION_V1_20260718.md"
+    "runtime_root": "runtime/crypto_core_pack_consumption_v1_20260718_repaired",
+    "report": "reports/CRYPTO_CORE_PACK_CONSUMPTION_V1_20260718_REPAIRED.md"
   }
 }

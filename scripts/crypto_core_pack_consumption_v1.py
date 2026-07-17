@@ -34,7 +34,9 @@ def _git_sha() -> str:
 
 def _write_json(path: Path, payload: Any) -> None:
     path.write_text(
-        json.dumps(payload, indent=2, sort_keys=True, default=str) + "\n", encoding="utf-8"
+        json.dumps(payload, indent=2, sort_keys=True, default=str) + "\n",
+        encoding="utf-8",
+        newline="\n",
     )
 
 
@@ -52,7 +54,8 @@ def _report(manifest: dict[str, Any], contexts: dict[str, Any], rows: pd.DataFra
         f"- Source SHA: `{manifest['source_sha']}`",
         f"- Status: `{manifest['status']}`",
         f"- Core Pack identity: `{manifest['input_identities']['core_pack_sha256']}`",
-        f"- Tokens consumed: {manifest['counts']['consumption_pass_tokens']}/{manifest['counts']['tokens']}",
+        f"- Plumbing-connected tokens: {manifest['counts']['plumbing_pass_tokens']}/{manifest['counts']['tokens']}",
+        f"- Nontrivially utilized tokens: {manifest['counts']['consumption_pass_tokens']}/{manifest['counts']['tokens']}",
         f"- Runtime seconds: {manifest['cost_time']['actual_wall_seconds']:.3f}",
         "",
         "## Context separation",
@@ -211,6 +214,7 @@ def run(config_path: Path) -> dict[str, Any]:
             "base_tokens": int((token_rows["token_kind"] == "BASE").sum()),
             "derived_tokens": int((token_rows["token_kind"] == "DERIVED").sum()),
             "consumption_pass_tokens": passed,
+            "plumbing_pass_tokens": int(token_rows["plumbing_pass"].sum()),
         },
         "contexts": context_evidence,
         "cost_time": {
@@ -231,7 +235,9 @@ def run(config_path: Path) -> dict[str, Any]:
     manifest["identity_sha256"] = payload_sha256(
         {key: value for key, value in manifest.items() if key != "files"}
     )
-    report_path.write_text(_report(manifest, context_evidence, token_rows), encoding="utf-8")
+    report_path.write_text(
+        _report(manifest, context_evidence, token_rows), encoding="utf-8", newline="\n"
+    )
     for path in (contract_path, token_path, context_path, report_path):
         manifest["files"][path.relative_to(ROOT).as_posix()] = sha256_file(path)
     _write_json(manifest_path, manifest)

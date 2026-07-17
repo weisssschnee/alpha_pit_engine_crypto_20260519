@@ -34,3 +34,6 @@ tests/test_core_pack_consumption_v1.py text eol=lf
 runtime/crypto_core_pack_consumption_v1_20260718/*.json text eol=lf
 runtime/crypto_core_pack_consumption_v1_20260718/*.csv text eol=lf
 reports/CRYPTO_CORE_PACK_CONSUMPTION_V1_20260718.md text eol=lf
+runtime/crypto_core_pack_consumption_v1_20260718_repaired/*.json text eol=lf
+runtime/crypto_core_pack_consumption_v1_20260718_repaired/*.csv text eol=lf
+reports/CRYPTO_CORE_PACK_CONSUMPTION_V1_20260718_REPAIRED.md text eol=lf

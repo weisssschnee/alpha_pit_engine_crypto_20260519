@@ -319,6 +319,11 @@ def dense_consumption_probe(
         eligible = eligible[positions]
     selected = x_raw[eligible]
     target_selected = y_raw[eligible]
+    target_mean = float(np.mean(target_selected))
+    target_scale = float(np.std(target_selected))
+    if not np.isfinite(target_scale) or target_scale <= 1e-12:
+        raise ValueError("probe target has no usable variation")
+    target_selected = (target_selected - target_mean) / target_scale
     means = np.nanmean(selected, axis=0)
     scales = np.nanstd(selected, axis=0)
     scales = np.where(np.isfinite(scales) & (scales > 1e-12), scales, 1.0)
@@ -382,6 +387,7 @@ def dense_consumption_probe(
         "epochs": int(epochs),
         "hidden_width": int(hidden_width),
         "seed": int(seed),
+        "target_normalization": "CONTEXT_SAMPLE_ZSCORE",
         "initial_training_loss": initial_loss,
         "final_training_loss": final_loss,
         "gradient_reachable_channels": int((gradient > 1e-12).sum()),
@@ -415,6 +421,11 @@ def qualify_consumption_rows(
                 **dict(materialized),
                 **dict(probed),
                 **{f"check_{key}": value for key, value in checks.items()},
+                "plumbing_pass": all(
+                    checks[key]
+                    for key in ("materialized", "finite_adequacy", "gradient_reachable")
+                ),
+                "nontrivial_utilization_pass": all(checks.values()),
                 "consumption_pass": all(checks.values()),
             }
         )

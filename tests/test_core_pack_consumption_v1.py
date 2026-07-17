@@ -129,4 +129,6 @@ def test_dense_probe_reaches_updates_and_ablates_every_channel() -> None:
         {"finite_rows": 1024, "finite_ratio": 1.0, "variance": 1.0} for _ in rows
     ]
     qualified = qualify_consumption_rows(materialized, rows, minimum_finite_ratio=0.05)
+    assert all(row["plumbing_pass"] for row in qualified)
+    assert all(row["nontrivial_utilization_pass"] for row in qualified)
     assert all(row["consumption_pass"] for row in qualified)
