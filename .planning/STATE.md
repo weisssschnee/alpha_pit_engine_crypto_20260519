@@ -4,9 +4,9 @@ Last updated: 2026-07-18 Asia/Hong_Kong
 
 ## Current phase
 
-`LIQUIDATION_SUPPLIER_INGRESS_QUALIFIED_STITCHING_BLOCKED`
+`CORE_PACK_CONTEXT_BOUND_CONSUMPTION_VERIFIED_MODEL_FIT_PARTIAL`
 
-The CryptoHFT liquidation history release is content-hash bound and ingress-qualified, but remains quarantined from research. Binance WebSocket history is not present in the current repository or delivery roots, so event-count, notional, and large-liquidation overlap qualification has not run and source stitching remains blocked.
+The frozen 120-token Core Pack now has a real, context-bound consumer: all 39 Broad tokens and all 81 Core3 tokens were materialized and reached the probe through tensor exposure, input gradients, first-layer updates, and prediction-sensitive token ablation. This verifies consumption plumbing, not stable model learning or economic value. Broad training loss decreased under the frozen probe; Core3 training loss did not. Separately, the CryptoHFT liquidation release remains quarantined because no independent canonical Binance forceOrder WebSocket history is available for overlap qualification.
 
 ## Current decisions
 
@@ -24,7 +24,8 @@ IMPLEMENTATION_SPECIFIC_INFORMATIVE_NEGATIVE
 GRAPH_RAW_CURRENT_SEPARATION_ACTIVE
 CURRENT_CONTRACT_CAPSULE_ACTIVE
 CRYPTO_FIELD_INFORMATION_V0_COMPLETED
-CONTEXT_BOUND_CORE_PACK_PROPOSED
+CORE_PACK_CONTEXT_BOUND_CONSUMPTION_VERIFIED
+CORE3_CONSUMPTION_MODEL_FIT_NOT_QUALIFIED
 LIQUIDATION_SUPPLIER_INGRESS_QUALIFIED_QUARANTINED
 LIQUIDATION_STITCHING_BLOCKED_NO_WS_OVERLAP_INPUT
 ```
@@ -40,6 +41,8 @@ LIQUIDATION_STITCHING_BLOCKED_NO_WS_OVERLAP_INPUT
 - 18-month compositional bundle SHA256: `EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492`.
 - Localized qualification bundle SHA256: `0C6193E81FEAB8271B8BAE05AD04604D74494EAB2710794C59A7F42919DD68EB`.
 - Liquidation ingress implementation: `d64a783dac4c148d1924f76acb7b8a80cbcc7f1a`; byte-stable evidence commit: `58ff34e48cb88acc0005e741c8aaa52d3528177e`; release identity SHA256: `C9717263EC6F97839466A4BC13D8DBA803E3D0D5854AE6E3A005F4C6F0F34D7A`.
+- Core Pack consumption implementation source: `f01d0d22a40ae9949a027fe138c52998fb23c1ef`; evidence commit: `e3631d31ae5022b6765b0a333fb9c32015312c01`.
+- Core Pack identity SHA256: `B6765D5A60B9A348A47A88BB53D503A48E024C1BAF83BCB14B2F4BF06E248D00`; resolved execution-contract identity SHA256: `35E54F79576A6D7A1D94AE697E8066CB9FB49CF9A97979259F39490E3281914E`; run identity SHA256: `7DE0F5FB394970C804AC483D42A63231687C461528AF0947D85855D91000A149`.
 
 ## Evidence-qualified position
 
@@ -51,7 +54,8 @@ LIQUIDATION_STITCHING_BLOCKED_NO_WS_OVERLAP_INPUT
 - Explicit/latent comparison: 41/41 means cache loadability plus minimum adaptive-surface nonmissing/variance. Arm D is implementation-verified. Arm E is an overlapping field-family grouped structured proxy with shared objectives and zero-out ablation; its configured semantic matched controls were not executed. The result is an implementation-specific development negative after 5 bps cost, not OOS evidence or rejection of latent-state research.
 - Field Information V0: the compiled view contains 177 base/registered tokens and 5,211 derived specifications. Census loading succeeded for 41/41 broad fields and 94/94 Core3 aggTrades fields. `census_loaded` is not `current_runtime_member`: only ten broad fields are current-runtime members, while the 94 Core3 fields remain a separate three-asset mechanism context.
 - Volume and flow are materially represented: the broad context contains seven quote-volume/activity fields; the Core3 registry contains 19 activity/liquidity, 16 flow, 6 large-trade, and 26 rolling fields. Trade count, quote volume, size-bucket notional, buy/sell quantity, and price-range fields lead the information census.
-- Proposed Core Pack: 120 unique tokens = 75 base plus 45 lazy derived; 39 tokens belong to the broad context and 81 to Core3. This is a context-qualified candidate collection, not a claim that all 120 coexist on the 498-asset broad panel.
+- Core Pack consumption: 120 unique tokens = 75 base plus 45 lazy derived, split into independent Broad (39) and Core3 (81) consumers. The repaired full-context probe verified 120/120 loadability, materialization, tensor exposure, gradient reachability, first-layer update, and prediction sensitivity. A preserved late-window attempt reached 118/120 because `active_universe_size` and `age_percentile_active_universe` were constant in that narrower Broad probe; the full authorized Broad period restored their variation. No 120-channel joint panel was created.
+- Model-fit boundary: Broad probe loss decreased from 1.054226 to 1.011711. Core3 probe loss increased from 1.015130 to 1.107231, so Core3 model fit is not qualified even though all 81 channels were genuinely consumed. Neither result is a matched alpha comparison, portfolio result, economic increment, or OOS proof.
 - Liquidation supplier release: 762 Parquet partitions across 381 dates passed schema, count, primary-key, PIT-delay, and content-identity preflight. Of 500 symbols and 11,138,396 events, 464 linear USDT/USDC symbols with 11,101,810 events are eligible for source comparison. Nineteen inverse/delivery and seventeen unknown-semantics symbols remain notional-quarantined because the supplier's quantity-times-price value is not a qualified common notional for those contracts. This is ingress evidence only, not a research field admission or economic result.
 
 ## Active execution plan
@@ -59,8 +63,8 @@ LIQUIDATION_STITCHING_BLOCKED_NO_WS_OVERLAP_INPUT
 1. Keep the liquidation supplier release quarantined; do not join it to any Binance WebSocket capture by filename, symbol, or assumed venue semantics.
 2. When an explicit Binance WS landing root is available, rerun `scripts/crypto_liquidation_supplier_ingress.py --ws-root <path>` under the frozen overlap thresholds. A pass only makes stitching eligible for a separate explicit activation decision.
 3. After source compatibility, require the existing Data Adequacy Gate before any research use; the 2025-2026 release does not enter the current 2023H2/2024 train surface.
-4. Treat the 120-token output as two context-bound candidate surfaces, not one merged training matrix.
-5. For a future model comparison, choose exactly one context and materialize only its frozen selected fields; do not expand all 5,211 derived specifications.
+4. Treat the verified 120-token consumer as two context-bound surfaces, not one merged training matrix; consumption admission does not satisfy model-fit or economic admission.
+5. For any future model comparison, choose exactly one context, require its Data Adequacy Gate, freeze the budget and matched control, and use only the selected fields; do not expand all 5,211 derived specifications.
 6. Keep challenge, recent, May stress, forward, promotion, and cross-sprint memory closed.
 
 No large experiment is authorized merely by this plan.
@@ -68,6 +72,7 @@ No large experiment is authorized merely by this plan.
 ## Blockers
 
 - Historical aggTrades coverage is not yet equivalent to the 18-month observed-archive surface; the qualified Core3 slice has 3 assets, 4,368 hours, and 13,068 eligible observations.
+- Core3 consumption is verified, but the fixed one-seed probe did not reduce training loss; stable model fit and incremental information remain unqualified.
 - Existing external-paradigm samples lack independent evaluation power.
 - The localized compositional mechanism remains challenge-unstable.
 - The structured-proxy comparison lacks executed semantic matched controls and does not identify independent latent states.
@@ -98,4 +103,4 @@ No status code overrides observed runtime or source facts.
 
 ## Next action
 
-Run no large experiment. The next liquidation action is only to provide or locate the canonical Binance WS history root and rerun the existing overlap gate; do not stitch or expose the supplier release to research before that result and a separate explicit activation decision.
+Run no large experiment. Core Pack consumption qualification is closed. Any next model action must select one context and first qualify data and fixed-budget model fit against a matched control; it cannot open performance search. The independent liquidation action remains limited to locating a canonical Binance forceOrder WS history root and rerunning the existing overlap gate; do not stitch or expose the supplier release to research before that result and a separate explicit activation decision.

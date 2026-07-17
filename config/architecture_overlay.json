@@ -918,7 +918,7 @@
     },
     {
       "id": "field_information_qualification_v0",
-      "label": "Context-bound field information qualification V0",
+      "label": "Context-bound Core Pack information and consumption qualification",
       "kind": "representation_qualification",
       "lifecycle": "EXPERIMENTAL",
       "paths": [
@@ -926,7 +926,12 @@
         "alphafactory_crypto/field_information.py",
         "scripts/crypto_field_information_v0.py",
         "runtime/crypto_field_information_v0_20260717/run_manifest.json",
-        "reports/CRYPTO_FIELD_INFORMATION_V0_20260717.md"
+        "reports/CRYPTO_FIELD_INFORMATION_V0_20260717.md",
+        "alphafactory_crypto/core_pack_consumption.py",
+        "config/crypto_core_pack_consumption_v1.json",
+        "scripts/crypto_core_pack_consumption_v1.py",
+        "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json",
+        "reports/CRYPTO_CORE_PACK_CONSUMPTION_V1_20260718_REPAIRED.md"
       ],
       "critical": true,
       "semantic_role": "context_bound_feature_information_qualification",
@@ -954,13 +959,29 @@
           "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json"
         },
         {
-          "id": "proposed_pack_requires_admission",
+          "id": "context_bound_consumption_verified",
+          "type": "EVIDENCE",
+          "rule": "The frozen consumer separately materializes 39 Broad and 81 Core3 tokens; all 120 reached tensor exposure, input gradients, first-layer updates, and prediction-sensitive token ablation without creating a pooled 120-channel panel",
+          "severity": "HARD",
+          "enforced_by": "core_pack_consumption.run_context_probe",
+          "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json"
+        },
+        {
+          "id": "consumption_not_model_fit",
+          "type": "EVIDENCE",
+          "rule": "Token consumption does not prove stable learning or economic value; Broad probe loss decreased, while Core3 probe loss increased and Core3 model fit remains unqualified",
+          "severity": "HARD",
+          "enforced_by": "core_pack_consumption.run_context_probe",
+          "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/context_consumption_summary.json"
+        },
+        {
+          "id": "consumed_pack_requires_model_admission",
           "type": "ADMISSION",
-          "rule": "The 120-token Core Pack is proposed and context-bound; model use requires a matching data-adequacy decision and explicit development-only authorization",
+          "rule": "The 120-token Core Pack has a real context-bound consumer, but any model or economic comparison still requires a matching data-adequacy decision, frozen matched control, and explicit development-only authorization",
           "severity": "HARD",
           "enforced_by": "data_adequacy_gate",
           "bypass_forbidden": true,
-          "evidence_ref": "runtime/crypto_field_information_v0_20260717/core_pack_manifest.json"
+          "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json"
         },
         {
           "id": "field_census_sealed_boundary",
@@ -972,17 +993,18 @@
         }
       ],
       "validation": {
-        "level": "RUNTIME_VERIFIED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json",
-        "evidence_sha256": "6209A8461589924887ED5B04795B619D883F797BB1AC038B209A80C346E30999",
-        "verified_at_sha": "2a8f615abcdf7849155f19825c7dd50c9c65899d"
+        "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json",
+        "evidence_sha256": "48C0A0B425E510FE6ADAF3450B0EB88E96DC8B69B3021F3AE37B85E23D72B800",
+        "verified_at_sha": "e3631d31ae5022b6765b0a333fb9c32015312c01"
       },
       "promotion_requirements": [
         "context-matched data adequacy",
-        "materialized model input receipt",
-        "development-only matched comparison",
+        "qualified context-specific model fit",
+        "frozen development-only matched control",
+        "economic evidence only under separately authorized boundaries",
         "explicit authorization"
       ]
     },
@@ -1757,19 +1779,19 @@
       "contract": {
         "id": "no_cross_context_adequacy_inference",
         "type": "ADMISSION",
-        "rule": "Field-level information evidence does not satisfy model-level data adequacy; each future model must use one coherent context with sufficient assets, history, labels, and independent blocks",
+        "rule": "Verified token consumption does not satisfy model-level data adequacy or model fit; each future model must use one coherent context with sufficient assets, history, labels, turnover observations, and independent blocks",
         "severity": "HARD",
         "enforced_by": "data_adequacy_gate",
         "bypass_forbidden": true,
-        "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json"
+        "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json"
       },
       "validation": {
-        "level": "RUNTIME_VERIFIED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json",
-        "evidence_sha256": "6209A8461589924887ED5B04795B619D883F797BB1AC038B209A80C346E30999",
-        "verified_at_sha": "2a8f615abcdf7849155f19825c7dd50c9c65899d"
+        "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json",
+        "evidence_sha256": "48C0A0B425E510FE6ADAF3450B0EB88E96DC8B69B3021F3AE37B85E23D72B800",
+        "verified_at_sha": "e3631d31ae5022b6765b0a333fb9c32015312c01"
       }
     },
     {
