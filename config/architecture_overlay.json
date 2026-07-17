@@ -976,7 +976,7 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json",
-        "evidence_sha256": "20301588F6A6D6721AC794DB5638D6251E8DB37A1ABE0D5E6C64BB47680A3D95",
+        "evidence_sha256": "6209A8461589924887ED5B04795B619D883F797BB1AC038B209A80C346E30999",
         "verified_at_sha": "2a8f615abcdf7849155f19825c7dd50c9c65899d"
       },
       "promotion_requirements": [
@@ -1705,7 +1705,7 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json",
-        "evidence_sha256": "20301588F6A6D6721AC794DB5638D6251E8DB37A1ABE0D5E6C64BB47680A3D95",
+        "evidence_sha256": "6209A8461589924887ED5B04795B619D883F797BB1AC038B209A80C346E30999",
         "verified_at_sha": "2a8f615abcdf7849155f19825c7dd50c9c65899d"
       }
     },
