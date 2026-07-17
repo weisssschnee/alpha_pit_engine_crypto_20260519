@@ -1,0 +1,69 @@
+{
+  "boundaries": {
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "derived_dense_materialization": false,
+    "economic_claim": false,
+    "formal_performance_search": false,
+    "latest_timestamp_exclusive": "2024-07-01T00:00:00Z",
+    "sealed_reads_allowed": false
+  },
+  "config_sha256": "BE2021B0C493CFA51E19A3F5DECD527AF27CA797031A0E59239E6F94B3CF9CA6",
+  "contexts": {
+    "BROAD_PANEL_BASELINE": {
+      "actual_end_inclusive": "2024-06-30T23:00:00Z",
+      "actual_start": "2023-07-01T00:00:00Z",
+      "assets": 498,
+      "eligible_observations": 1487272,
+      "latest_timestamp_exclusive": "2024-07-01T00:00:00Z",
+      "target": "log_return_t_plus_2_to_t_plus_6",
+      "timestamps": 8784
+    },
+    "CORE3_MICROSTRUCTURE_PILOT": {
+      "actual_end_inclusive": "2024-06-30T23:00:00Z",
+      "actual_start": "2024-01-01T00:00:00Z",
+      "assets": 3,
+      "claim_scope": "CORE3_MICROSTRUCTURE_MECHANISM_EVIDENCE",
+      "eligible_observations": 13068,
+      "latest_timestamp_exclusive": "2024-07-01T00:00:00Z",
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "target": "log_return_t_plus_2_to_t_plus_6",
+      "timestamps": 4368
+    }
+  },
+  "counts": {
+    "base_or_registered_tokens": 177,
+    "broad_fields_audited": 41,
+    "census_rows": 135,
+    "core3_base_fields_audited": 94,
+    "core_pack_tokens": 120,
+    "derived_spec_tokens": 5211,
+    "token_rows": 5388,
+    "unmaterialized_derived_specs": 5211
+  },
+  "files": {
+    "reports/CRYPTO_FIELD_INFORMATION_V0_20260717.md": "EB1AE40955C733E8F0253F9AD3816EA218C0CC56C124E23F19297D7B6885FFA3",
+    "runtime/crypto_field_information_v0_20260717/core_pack_manifest.json": "B6765D5A60B9A348A47A88BB53D503A48E024C1BAF83BCB14B2F4BF06E248D00",
+    "runtime/crypto_field_information_v0_20260717/information_census.parquet": "62488287AABCA93FCE0DE3313A0D64CF14C8939D4F5AC0502E3B8994D54F3BA9",
+    "runtime/crypto_field_information_v0_20260717/token_catalog.parquet": "A4885AADF152FEB202742D52AC6770F742103CB4427A883B63F30D2BD25DFBA2"
+  },
+  "identity_sha256": "623036F48CBC8089CC61E81876F3A1E14199FC781456BF9F39183F8A129E53D6",
+  "input_identities": {
+    "aggtrades_base": "F5CCBB8500F16A0B6A7EE21623377AA601BE506010B57803F16E39DEED9E14DC",
+    "aggtrades_derived": "45765DE2354E8B9BDBFADA21AF708AAD48150FC45137DB5F0FAFCFCC7F13C3F3",
+    "broad_cache_identity_sha256": "CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0",
+    "broad_cache_metadata_sha256": "CCEB67F08F7525C71F5EA25A4B658324B5EF376E414318CB1220A1507465E539",
+    "broad_registry": "3BCF7B884EB44264B5BE4DC9A0BCF2D3355F59BA1AA33B1E5B81525061E94277",
+    "core3_panel_bytes": 160877933,
+    "core3_panel_sha256": "174CA773E0CC0B6DC76986CE66554A8F627EB908B9F8CA691E64ED6343D0AB97",
+    "inventory": "F3D82AD889DA40C1754EB6A905C679958EA7A8D7AD9A0CDDD93B63AF3E763672",
+    "lineage": "91D6B4421C0EC67650373D3241FF4A01F11A75F20A47ED3900759D5E7A4EA66E"
+  },
+  "run_id": "CRYPTO_FIELD_INFORMATION_V0_20260717",
+  "schema_version": 1,
+  "source_sha": "057e31df71f55f9e3a6e8ea3b48d53293d7d2e13"
+}
