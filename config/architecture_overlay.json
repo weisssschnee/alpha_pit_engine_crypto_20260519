@@ -936,6 +936,12 @@
       "critical": true,
       "semantic_role": "context_bound_feature_information_qualification",
       "active_authority": false,
+      "claim_badges": [
+        "CONSUMPTION VERIFIED",
+        "MODEL FIT PARTIAL",
+        "NO ECONOMIC CLAIM",
+        "NO OOS"
+      ],
       "authority": {
         "path": "config/crypto_field_information_v0.json",
         "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
@@ -1775,7 +1781,7 @@
       "relation": "admission_required",
       "lifecycle": "EXPERIMENTAL",
       "critical": true,
-      "evidence_type": "RUNTIME",
+      "evidence_type": "STATIC",
       "contract": {
         "id": "no_cross_context_adequacy_inference",
         "type": "ADMISSION",
