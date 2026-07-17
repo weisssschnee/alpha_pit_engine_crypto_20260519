@@ -878,6 +878,40 @@
       }
     },
     {
+      "color": "#2e7d32",
+      "contract": {
+        "bypass_forbidden": true,
+        "enforced_by": "data_adequacy_gate",
+        "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
+        "id": "source_compatibility_not_research_admission",
+        "rule": "Supplier preflight or overlap compatibility cannot admit the release to research; a paradigm-specific Data Adequacy Gate pass and explicit activation are still required",
+        "severity": "HARD",
+        "type": "ADMISSION"
+      },
+      "critical": true,
+      "declared": true,
+      "declared_evidence_type": "RUNTIME",
+      "evidence": "DECLARED",
+      "forbidden": false,
+      "id": "liquidation_release_requires_data_adequacy",
+      "lifecycle": "ACTIVE",
+      "line_style": "dotted",
+      "relation": "admission_required",
+      "required": false,
+      "source": "liquidation_supplier_ingress",
+      "target": "data_adequacy_gate",
+      "validation": {
+        "checked_at": "2026-07-17T18:36:56.219627+00:00",
+        "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
+        "evidence_sha256": "6F81941B0D08EF082F49309A4FFA33E4E173B3CCA999861B07452BD37668AEEC",
+        "level": "STATIC_VERIFIED",
+        "notes": [],
+        "profile": "crypto-development-research",
+        "result": "PASS",
+        "verified_at_sha": "c7ee32e1a4be635a6720cc13ef4a66b3e36f4ca8"
+      }
+    },
+    {
       "color": "#c62828",
       "contract": {
         "bypass_forbidden": true,
@@ -912,7 +946,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-17T15:12:38.704708+00:00",
+  "generated_at": "2026-07-17T18:36:56.219627+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3333,7 +3367,7 @@
       "required": false,
       "semantic_role": "bounded_real_data_lazy_search",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-17T18:36:56.219627+00:00",
         "evidence_ref": "config/crypto_real_data_instrument_canary_v1.json",
         "evidence_sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724",
         "level": "PARTIAL",
@@ -4545,6 +4579,121 @@
     {
       "active_authority": true,
       "authority": {
+        "path": "config/crypto_liquidation_supplier_ingress_v1.json",
+        "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
+        "sha256": "AA4DB810885F9EBAEF1BACAA1C7C3D789755D7CC7D469BC4A4819127C4D73C8C",
+        "verified_sha": "d64a783dac4c148d1924f76acb7b8a80cbcc7f1a"
+      },
+      "claim_badges": [],
+      "color": "#2e7d32",
+      "contracts": [
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "liquidation_ingress.qualify_overlap",
+          "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/overlap_qualification.json",
+          "id": "supplier_ws_source_independence",
+          "rule": "CryptoHFT history and Binance WebSocket captures are independent sources; stitching requires a frozen overlap comparison of event count, notional, and large-liquidation coverage",
+          "severity": "HARD",
+          "type": "ADMISSION"
+        },
+        {
+          "bypass_forbidden": false,
+          "enforced_by": "liquidation_ingress.classify_contract",
+          "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/release_preflight.json",
+          "id": "linear_contract_notional_only",
+          "rule": "Only linear USDT/USDC symbols are notional-comparable; inverse, delivery, and unknown contracts remain quarantined until an explicit multiplier contract exists",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "crypto_liquidation_supplier_ingress run manifest",
+          "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
+          "id": "liquidation_release_research_quarantine",
+          "rule": "The 2025-2026 release is ingress and compatibility evidence only; it cannot enter research, economic evaluation, sealed roles, promotion, or adaptive memory",
+          "severity": "HARD",
+          "type": "BOUNDARY"
+        }
+      ],
+      "critical": true,
+      "evidence": "STATIC",
+      "expires_at": "",
+      "id": "liquidation_supplier_ingress",
+      "kind": "data_ingress",
+      "label": "Liquidation supplier ingress (quarantined)",
+      "lifecycle": "ACTIVE",
+      "owner": "",
+      "paths": [
+        "alphafactory_crypto/liquidation_ingress.py",
+        "config/crypto_liquidation_supplier_ingress_v1.json",
+        "scripts/crypto_liquidation_supplier_ingress.py",
+        "reports/CRYPTO_LIQUIDATION_SUPPLIER_INGRESS_20260718.md"
+      ],
+      "promotion_requirements": [
+        "canonical Binance WebSocket history root",
+        "frozen overlap gate pass",
+        "paradigm-aware data adequacy pass",
+        "explicit research activation"
+      ],
+      "raw_node_ids": [
+        "alphafactory_crypto_liquidation_ingress",
+        "alphafactory_crypto_liquidation_ingress_canonical_sha256",
+        "alphafactory_crypto_liquidation_ingress_check_required_columns",
+        "alphafactory_crypto_liquidation_ingress_classify_contract",
+        "alphafactory_crypto_liquidation_ingress_dates",
+        "alphafactory_crypto_liquidation_ingress_file_record",
+        "alphafactory_crypto_liquidation_ingress_file_records",
+        "alphafactory_crypto_liquidation_ingress_first_column",
+        "alphafactory_crypto_liquidation_ingress_load_vendor_overlap_events",
+        "alphafactory_crypto_liquidation_ingress_load_ws_events",
+        "alphafactory_crypto_liquidation_ingress_normalize_events",
+        "alphafactory_crypto_liquidation_ingress_partition_paths",
+        "alphafactory_crypto_liquidation_ingress_preflight_supplier_release",
+        "alphafactory_crypto_liquidation_ingress_qualify_overlap",
+        "alphafactory_crypto_liquidation_ingress_rationale_1",
+        "alphafactory_crypto_liquidation_ingress_read_event_file",
+        "alphafactory_crypto_liquidation_ingress_schema_columns",
+        "alphafactory_crypto_liquidation_ingress_sha256_file",
+        "alphafactory_crypto_liquidation_ingress_supplierpreflight",
+        "alphafactory_crypto_liquidation_ingress_symmetric_coverage",
+        "alphafactory_crypto_liquidation_ingress_utc_timestamp",
+        "reports_crypto_liquidation_supplier_ingress_20260718",
+        "reports_crypto_liquidation_supplier_ingress_20260718_boundaries",
+        "reports_crypto_liquidation_supplier_ingress_20260718_contract_classes",
+        "reports_crypto_liquidation_supplier_ingress_20260718_crypto_liquidation_supplier_ingress",
+        "reports_crypto_liquidation_supplier_ingress_20260718_overlap_gate",
+        "scripts_crypto_liquidation_supplier_ingress",
+        "scripts_crypto_liquidation_supplier_ingress_git_sha",
+        "scripts_crypto_liquidation_supplier_ingress_main",
+        "scripts_crypto_liquidation_supplier_ingress_report",
+        "scripts_crypto_liquidation_supplier_ingress_run",
+        "scripts_crypto_liquidation_supplier_ingress_write_json",
+        "tests_test_liquidation_ingress",
+        "tests_test_liquidation_ingress_fixture",
+        "tests_test_liquidation_ingress_test_binance_nested_force_order_payload_is_supported",
+        "tests_test_liquidation_ingress_test_contract_classification_does_not_treat_inverse_quantity_as_base_asset",
+        "tests_test_liquidation_ingress_test_equivalent_ws_overlap_passes_but_never_auto_stitches",
+        "tests_test_liquidation_ingress_test_overlap_is_blocked_without_ws_input",
+        "tests_test_liquidation_ingress_test_pit_drift_fails_preflight",
+        "tests_test_liquidation_ingress_test_supplier_release_is_qualified_but_quarantined"
+      ],
+      "required": false,
+      "semantic_role": "liquidation_source_ingress",
+      "validation": {
+        "checked_at": "2026-07-17T18:36:56.219627+00:00",
+        "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
+        "evidence_sha256": "6F81941B0D08EF082F49309A4FFA33E4E173B3CCA999861B07452BD37668AEEC",
+        "level": "STATIC_VERIFIED",
+        "notes": [],
+        "profile": "crypto-development-research",
+        "result": "PASS",
+        "verified_at_sha": "c7ee32e1a4be635a6720cc13ef4a66b3e36f4ca8"
+      },
+      "visible_by_default": true
+    },
+    {
+      "active_authority": true,
+      "authority": {
         "path": ".planning/STATE.md",
         "repo_ref": "canary/crypto-real-data-instrument-20260715",
         "sha256": "ED3007BFE6C05AAE8FABA7F1F6E198D024DAD5109A62E69C1B861EF002B61474",
@@ -4609,7 +4758,7 @@
       "required": false,
       "semantic_role": "evaluation_access_boundary",
       "validation": {
-        "checked_at": "2026-07-17T13:11:22.017283+00:00",
+        "checked_at": "2026-07-17T18:36:56.219627+00:00",
         "evidence_ref": ".planning/STATE.md",
         "evidence_sha256": "ED3007BFE6C05AAE8FABA7F1F6E198D024DAD5109A62E69C1B861EF002B61474",
         "level": "PARTIAL",
@@ -4625,7 +4774,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "2741BA3AECCC2E2C00CD47D30472F0569C0D0AED10D243091B76666B933C3347"
+    "sha256": "6B333B6688853F0508D40BADD04911602B385ECC02AB38C482B7BA7838EF18C9"
   },
   "profile_id": null,
   "profiles": [
@@ -4656,20 +4805,20 @@
     }
   ],
   "raw": {
-    "built_at_commit": "b7535a28a119982528d2f704e134c0933b7c66e9",
-    "edge_count": 32636,
-    "node_count": 17686,
+    "built_at_commit": "a1eb918f8f464fd8f68e26260b879f67f665ae34",
+    "edge_count": 32765,
+    "node_count": 17733,
     "path": ".planning/graphs/graph.json",
-    "sha256": "502732D46C550812F7B7E60E0BAF390FB9BEE7A53B074E3AA3BFA1E005D4B70A"
+    "sha256": "4B52E7C40C5403D497D8DEFB0BF0072225959C32E82CF53D1D2EF715B918E572"
   },
-  "repo_head": "b7535a28a119982528d2f704e134c0933b7c66e9",
+  "repo_head": "a1eb918f8f464fd8f68e26260b879f67f665ae34",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
   "strict_ready": false,
   "summary": {
-    "current_edges": 26,
-    "current_nodes": 23,
+    "current_edges": 27,
+    "current_nodes": 24,
     "errors": 0,
     "runtime_edges": 0,
     "runtime_nodes": 0,
