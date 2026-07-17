@@ -1099,8 +1099,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
-        "evidence_sha256": "6F81941B0D08EF082F49309A4FFA33E4E173B3CCA999861B07452BD37668AEEC",
-        "verified_at_sha": "c7ee32e1a4be635a6720cc13ef4a66b3e36f4ca8"
+        "evidence_sha256": "3FC88E4A96DD2CDCE4A64E40B8BD0AB0237E8E5CECEA99E02D736E39D153B329",
+        "verified_at_sha": "58ff34e48cb88acc0005e741c8aaa52d3528177e"
       },
       "promotion_requirements": [
         "canonical Binance WebSocket history root",
@@ -1819,8 +1819,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
-        "evidence_sha256": "6F81941B0D08EF082F49309A4FFA33E4E173B3CCA999861B07452BD37668AEEC",
-        "verified_at_sha": "c7ee32e1a4be635a6720cc13ef4a66b3e36f4ca8"
+        "evidence_sha256": "3FC88E4A96DD2CDCE4A64E40B8BD0AB0237E8E5CECEA99E02D736E39D153B329",
+        "verified_at_sha": "58ff34e48cb88acc0005e741c8aaa52d3528177e"
       }
     },
     {
