@@ -1,0 +1,10 @@
+{
+  "comparison_pass": false,
+  "required_metrics": [
+    "event_count_coverage",
+    "notional_coverage",
+    "large_liquidation_count_coverage"
+  ],
+  "status": "STITCHING_BLOCKED_NO_WS_OVERLAP_INPUT",
+  "stitching_allowed": false
+}

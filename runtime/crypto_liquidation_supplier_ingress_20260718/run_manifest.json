@@ -1,0 +1,32 @@
+{
+  "boundaries": {
+    "automatic_stitching_allowed": false,
+    "candidate_promotion": false,
+    "challenge_read": false,
+    "cross_sprint_adaptive_memory": false,
+    "data_role": "QUARANTINED_INGRESS_AND_SOURCE_COMPATIBILITY_ONLY",
+    "economic_evaluation_allowed": false,
+    "forward_research_read": false,
+    "may_stress_research_read": false,
+    "new_performance_search": false,
+    "recent_research_read": false,
+    "research_input_allowed": false
+  },
+  "config_sha256": "AA4DB810885F9EBAEF1BACAA1C7C3D789755D7CC7D469BC4A4819127C4D73C8C",
+  "files": {
+    "reports/CRYPTO_LIQUIDATION_SUPPLIER_INGRESS_20260718.md": "13CB931CBC394F4F88434A422B7DB12A28AEC424B1237F6CC9FFC351AB98EBD4",
+    "runtime/crypto_liquidation_supplier_ingress_20260718/overlap_qualification.json": "6DFAEC47E4E7E7561C042749FE7490FB6E2782BE7010DA5ACEC2287D81FD2C38",
+    "runtime/crypto_liquidation_supplier_ingress_20260718/partition_manifest.json": "8D9DEBB39490AA479E1710AEFF5FCBA245EAD1A6331EDF897C45D16A6F369971",
+    "runtime/crypto_liquidation_supplier_ingress_20260718/release_preflight.json": "516FAF999B8926028D537E35FB38A765E1134073F0AC4C782BFABD8AC8F4AB78"
+  },
+  "overlap_status": "STITCHING_BLOCKED_NO_WS_OVERLAP_INPUT",
+  "preflight_status": "QUALIFIED_QUARANTINED",
+  "release_identity_sha256": "C9717263EC6F97839466A4BC13D8DBA803E3D0D5854AE6E3A005F4C6F0F34D7A",
+  "research_admitted": false,
+  "run_id": "CRYPTO_LIQUIDATION_SUPPLIER_INGRESS_20260718",
+  "run_identity_sha256": "1F3DB0CFD4DC000961D175701C3C862C28FC4A02E4B11838B2FD977BC738DAB9",
+  "schema_version": 1,
+  "source_sha": "d64a783dac4c148d1924f76acb7b8a80cbcc7f1a",
+  "stitching_allowed": false,
+  "ws_root": null
+}

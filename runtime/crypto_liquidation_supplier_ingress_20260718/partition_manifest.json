@@ -1,0 +1,5338 @@
+{
+  "records": [
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-06-28/part-000.parquet",
+      "rows": 2118,
+      "sha256": "32B7EC34B0EA7E8134D4AD94BC3237998DA0A813395A06FAD48ED1C177EDE31B",
+      "size_bytes": 208683
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-06-29/part-000.parquet",
+      "rows": 3437,
+      "sha256": "223282E242EB63500B420352CD3E1042A5DA69FEE7F06DCA6A11428A9E9DA31C",
+      "size_bytes": 332412
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-06-30/part-000.parquet",
+      "rows": 3610,
+      "sha256": "188B41F3765833F9ED399D89C7DB61304A7AB09E083D44BB7EEDBE469D1B1364",
+      "size_bytes": 346293
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-01/part-000.parquet",
+      "rows": 3995,
+      "sha256": "284D5A5FF2BBFBBDBFC8E34B568A77E8C8ED68F1403AD6C0B78DE59E2C6EBCA7",
+      "size_bytes": 379966
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-02/part-000.parquet",
+      "rows": 3679,
+      "sha256": "1071638221DC7E45D260644E9495F37C416263E53DA77FADB7B839F4D78B3E31",
+      "size_bytes": 359761
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-03/part-000.parquet",
+      "rows": 3400,
+      "sha256": "1CE324FB88CF24D0C97EC978A217229C5BAC9D28E3E640FCF5A6E78B4DBDC797",
+      "size_bytes": 329407
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-04/part-000.parquet",
+      "rows": 3667,
+      "sha256": "97AAB435C2E3321EF78C415DC395B8208A0811F44451D0BB4A879BED5BF01467",
+      "size_bytes": 348438
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-05/part-000.parquet",
+      "rows": 2828,
+      "sha256": "66A2C9078F300E1F529719195F4072A7111B304C600AFA04A7130296D82F0D6F",
+      "size_bytes": 276159
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-06/part-000.parquet",
+      "rows": 2731,
+      "sha256": "DBC741B988A1253F1EE25C8FF1B788D29E491C9D58432AD67E40D70286E65230",
+      "size_bytes": 268563
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-07/part-000.parquet",
+      "rows": 3185,
+      "sha256": "A07AF4183CB4C59461BA5C714173600A32E1648EBF5C444CB1B9C86F9F157359",
+      "size_bytes": 310906
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-08/part-000.parquet",
+      "rows": 2962,
+      "sha256": "A564644CEF7D5DCA146D72D52AC8519D8FA55225D0B28B2F4DA7DA8CEE038BF3",
+      "size_bytes": 290221
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-09/part-000.parquet",
+      "rows": 3815,
+      "sha256": "1556E9533C878E332BE119F7F865D0C70D7BA2406278461274D48C63D80BC277",
+      "size_bytes": 374103
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-10/part-000.parquet",
+      "rows": 4835,
+      "sha256": "942342CB6151F7EC2A07E0A48DB005EA9C6B6B47599EAD75B93018B695085D7A",
+      "size_bytes": 487660
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-11/part-000.parquet",
+      "rows": 5116,
+      "sha256": "D8E49C9E6E8D362C2BEFF17CF450A023BF3C69784A81975BE255C5C700771A77",
+      "size_bytes": 512669
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-12/part-000.parquet",
+      "rows": 3804,
+      "sha256": "0B6EF7059DB7DF2CCC718AFE50C456DE1409EB7298EFA376B532EB264D0B6CBA",
+      "size_bytes": 369007
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-13/part-000.parquet",
+      "rows": 3983,
+      "sha256": "1B716498E8EF73B88092843217E730A56B50F84AFA911362EB6F014E43622806",
+      "size_bytes": 386871
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-14/part-000.parquet",
+      "rows": 4405,
+      "sha256": "809027A6877AD701DE4A21F1222D0B7F9A1A0FE31F456342D66E17C8BB4BDC97",
+      "size_bytes": 430882
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-15/part-000.parquet",
+      "rows": 4408,
+      "sha256": "EA36D117EB086C4AFA23194C97D9207AFB3AEF379D165E3AF3C48F091DCFCB9E",
+      "size_bytes": 429350
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-16/part-000.parquet",
+      "rows": 4214,
+      "sha256": "30583709D93A0B917D7FE9FBA06062E930610567895F42F6921FAF54EEAD6F54",
+      "size_bytes": 414277
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-17/part-000.parquet",
+      "rows": 4530,
+      "sha256": "9EE686B5803166E3DA794A13F776FFD314DA375F9154EE93FF9194199DBF59B7",
+      "size_bytes": 447924
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-18/part-000.parquet",
+      "rows": 4814,
+      "sha256": "64DFDB1978D23323529DBD2B2D86419B8C44002FD35DFEF6A9B834D0E7D4A35B",
+      "size_bytes": 474121
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-19/part-000.parquet",
+      "rows": 3414,
+      "sha256": "5AB00D9A2AFD44809E2B3B8C84017B3D3E5EC28234D4009860DB6732AE3B084D",
+      "size_bytes": 329718
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-20/part-000.parquet",
+      "rows": 4014,
+      "sha256": "4F98B795E17FF0846CEA781FDBDD06E1D1AA3924967F37C1B0DC3532B24B9C43",
+      "size_bytes": 394438
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-21/part-000.parquet",
+      "rows": 4387,
+      "sha256": "BDAF04B75AD6E840590230A12A93CCB10E2A3B2A141630386C3FEC51CBFA0908",
+      "size_bytes": 428124
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-22/part-000.parquet",
+      "rows": 4338,
+      "sha256": "1CE748D6CB08358D180F8FED1AC76FBD56E73B03358FD6ED560EA57553E14441",
+      "size_bytes": 425718
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-23/part-000.parquet",
+      "rows": 4684,
+      "sha256": "8E6025CEA31680986ECA969529152E8C795650DC644C6CC5337DAFD2674C6C81",
+      "size_bytes": 457730
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-24/part-000.parquet",
+      "rows": 4351,
+      "sha256": "572E5A02A700EEE2C16C0ACE5A3F5566B439A1D34EF9567DCC95DAB4F9BAE577",
+      "size_bytes": 422318
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-25/part-000.parquet",
+      "rows": 3996,
+      "sha256": "8B6A4BD93098FE9666B228E1B9D7B9CEE8DA86556A2B36E953A158A13157B839",
+      "size_bytes": 385025
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-26/part-000.parquet",
+      "rows": 2728,
+      "sha256": "5399A637636D67A2436A8F11B3472DBCD3A636C4A6B478757219F61BE4A29D75",
+      "size_bytes": 265738
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-27/part-000.parquet",
+      "rows": 3431,
+      "sha256": "51053E75F854932727D339E53041D24664381C0166C84DFB63AE3CE1D89CB7CD",
+      "size_bytes": 335709
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-28/part-000.parquet",
+      "rows": 4563,
+      "sha256": "8B7510BE7A98FFBC3D855FB188D14C9D8F57C143C55B730676DED3E0971AE3AF",
+      "size_bytes": 432946
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-29/part-000.parquet",
+      "rows": 4214,
+      "sha256": "4517EC5CCAC151FBD77FA7F27CB923E333E6C184BDE085E5DB32B5B1C37CF862",
+      "size_bytes": 401981
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-30/part-000.parquet",
+      "rows": 3972,
+      "sha256": "69EBED35F3835C039032366C5DB97061A5CE0164FC8887DDB812137A7287A567",
+      "size_bytes": 380348
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-07-31/part-000.parquet",
+      "rows": 3849,
+      "sha256": "3B3BA354D6A8B37940DEC43957BB43391E9C54C195FD53C9EF14E57A740BC233",
+      "size_bytes": 359731
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-01/part-000.parquet",
+      "rows": 4346,
+      "sha256": "3AE7A4CDF893DC6794A15699D78B76B6AE64016ECCEE0332A1B350DB63168B0D",
+      "size_bytes": 419555
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-02/part-000.parquet",
+      "rows": 3458,
+      "sha256": "49600C519D02A5FDB845843726530F85B1F664763BB83911CD6149364B2D39C0",
+      "size_bytes": 331268
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-03/part-000.parquet",
+      "rows": 2447,
+      "sha256": "A2F885E07BC3368A91A34DC1E0188D6EDB9864EBEA3CFF497359E6F85BA3ED54",
+      "size_bytes": 238628
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-04/part-000.parquet",
+      "rows": 3601,
+      "sha256": "65074F374E414EB4781DE873D907250C521110F599856FE6E252417390E0F482",
+      "size_bytes": 351095
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-05/part-000.parquet",
+      "rows": 4993,
+      "sha256": "C798B51F3F5287226B4324232D3342F7DCEEDE2413275185714741D967A287C2",
+      "size_bytes": 487773
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-06/part-000.parquet",
+      "rows": 3340,
+      "sha256": "36C722B9FA444400C56F80BBF55688013C3F87474FE9C9510ADD7245B7F62F42",
+      "size_bytes": 321523
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-07/part-000.parquet",
+      "rows": 3774,
+      "sha256": "B4881EF847F12E7457ED8D7CAA216175CD975C50174466954F544018658EC383",
+      "size_bytes": 362243
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-08/part-000.parquet",
+      "rows": 3424,
+      "sha256": "55BF35C158829CC40130E4B9BA4B370165B5ECC15EFC84F4C23BBF0953073788",
+      "size_bytes": 334047
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-09/part-000.parquet",
+      "rows": 4081,
+      "sha256": "3E789C388C62E0228A36765B5BAED24B9311B9B2C647B3243DB490BECA278CC4",
+      "size_bytes": 396938
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-10/part-000.parquet",
+      "rows": 3916,
+      "sha256": "A8B28D18E5C90C6CA4A6B578674BD3486C698BC1DBC9568BC879D6DD85D8BF1A",
+      "size_bytes": 376421
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-11/part-000.parquet",
+      "rows": 4514,
+      "sha256": "73D5C4C432C4E1B60269040A511602DF4F4078E5FEC32F6261CB2C5249E02E2E",
+      "size_bytes": 428096
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-12/part-000.parquet",
+      "rows": 3850,
+      "sha256": "4C4A5BE6448B16F55A111A5A08981D1AF329ECAA4330F9D79BAD1541F72ADBB5",
+      "size_bytes": 371529
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-13/part-000.parquet",
+      "rows": 3922,
+      "sha256": "A142F00742D5AFF0A45A7460E64FB5055D7941CB01F8C74B77E18CD8E93B41A2",
+      "size_bytes": 376773
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-14/part-000.parquet",
+      "rows": 4641,
+      "sha256": "8091A9D374ACBDF2E34B1697DF46123DE6452DA3427464861DEB73F3A633344E",
+      "size_bytes": 445459
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-15/part-000.parquet",
+      "rows": 3377,
+      "sha256": "B0002020A20612ABA61CD77792B1CE45C1BAC47477DD0D87AAFC2174575FEB7C",
+      "size_bytes": 322399
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-16/part-000.parquet",
+      "rows": 2521,
+      "sha256": "6FA7E026821CC13888AC8EB146361083F5FE7CAB85A1A428AC64E5730109BAAB",
+      "size_bytes": 243085
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-17/part-000.parquet",
+      "rows": 3003,
+      "sha256": "5281826E6B36E066D3B5D13E14708E1272B7FE2B5C41DCC36489F76E2537AA79",
+      "size_bytes": 286797
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-18/part-000.parquet",
+      "rows": 3717,
+      "sha256": "F2264DE05C7B0404DEFA6C0BCDF136B14427400CEA1AA149616AE811FFAEF144",
+      "size_bytes": 348596
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-19/part-000.parquet",
+      "rows": 4842,
+      "sha256": "F766A479C3BFA3CF1A735A6CF3DCD04614BABEA67D8BB8A40FB0FD08A607A18D",
+      "size_bytes": 453439
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-20/part-000.parquet",
+      "rows": 3176,
+      "sha256": "EC2273C9C221AF67F1FEB8795CE75FE76CD33A1588CF8BA621B452FFC7609BEB",
+      "size_bytes": 308807
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-21/part-000.parquet",
+      "rows": 3126,
+      "sha256": "460829E5C6B1678CE916EF16C0C3C2DBC1A5F7423F8A93D5AC03629E15663A0E",
+      "size_bytes": 296862
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-22/part-000.parquet",
+      "rows": 4111,
+      "sha256": "9111E05A4CC0797EA85EAA15E26585B209D1A75FA153EDED4B36DE01BC996D24",
+      "size_bytes": 398514
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-23/part-000.parquet",
+      "rows": 3258,
+      "sha256": "17A890118DDA5D3A95686A309C3235A5771D9BFC319D13BADC03D866134F4F24",
+      "size_bytes": 312772
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-24/part-000.parquet",
+      "rows": 4080,
+      "sha256": "58AD7973E575EEAC46B4543F0C292A9C8B763B9F0DD9A84898F98D3B09CB4155",
+      "size_bytes": 385897
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-25/part-000.parquet",
+      "rows": 4402,
+      "sha256": "1158DD4979B5F8B0E63C4A22F095F816207BB3946E1C139C1B7D955257723541",
+      "size_bytes": 410546
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-26/part-000.parquet",
+      "rows": 2951,
+      "sha256": "2E71B8FA8048984855A8D987578126670FC8AEB1243C8542D8DE3F752E3EAB1E",
+      "size_bytes": 287547
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-27/part-000.parquet",
+      "rows": 3401,
+      "sha256": "D2BF6291DC6F4CFDE6E0AB983DC27C61041796F0B537FAED9EF9B39C955DCB1E",
+      "size_bytes": 327298
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-28/part-000.parquet",
+      "rows": 3157,
+      "sha256": "9C8A48A1CD86E427EBE0948BC5DA41D43A0FCECC310E16172796CE219CED35A4",
+      "size_bytes": 303779
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-29/part-000.parquet",
+      "rows": 4118,
+      "sha256": "63E54C95344E254EC9EEF4A57B1F7074F271BD28F8E1F0758163E4135399BD9E",
+      "size_bytes": 385917
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-30/part-000.parquet",
+      "rows": 2520,
+      "sha256": "F399C5B68F28D7AA3CF3A6A0BBF00239A553EA332F3580B7A448EA703504FEB4",
+      "size_bytes": 243560
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-08-31/part-000.parquet",
+      "rows": 2753,
+      "sha256": "B40BC4ED1A00BB2AF6C5A1EDB4BB2A5B7432359C68CFB9A055848B92ED7397CB",
+      "size_bytes": 262922
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-01/part-000.parquet",
+      "rows": 4631,
+      "sha256": "62EBE835AB2C0C434130172419A67C2E6B8210F8AA1599F4B3B6085B0EF3134F",
+      "size_bytes": 434066
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-02/part-000.parquet",
+      "rows": 3181,
+      "sha256": "B3E781AFFB451D1DD916FC1B2B51F154D9106892AFFF7B218A848AECC24FF9C7",
+      "size_bytes": 310921
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-03/part-000.parquet",
+      "rows": 2758,
+      "sha256": "6E6023D2E9C12E8EB8248B2AC235253E8E7ECC9DEF961020B8168FB363E8BFB3",
+      "size_bytes": 268154
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-04/part-000.parquet",
+      "rows": 3599,
+      "sha256": "26E9AF1B786DCE96180002669AFB94361092EEE940A83B39B6BBBA69E8E90196",
+      "size_bytes": 336853
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-05/part-000.parquet",
+      "rows": 2661,
+      "sha256": "34B69364BE32982B785D6B03052B44F238C0E3F670043C7D9F83F0BFBA503451",
+      "size_bytes": 257865
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-06/part-000.parquet",
+      "rows": 2447,
+      "sha256": "DFA7E4894C49CA6717C4F82EA31DBE12CBCDE71C0EFF9037AF144E72CEEAACA2",
+      "size_bytes": 237469
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-07/part-000.parquet",
+      "rows": 3209,
+      "sha256": "DA83DB1F532B75CC21CD1F8E969565CDC7FE599ECA7FC4855272B9A29E20F77A",
+      "size_bytes": 313900
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-08/part-000.parquet",
+      "rows": 4679,
+      "sha256": "DD9B55684CA0C8B02CBBA16E55F60121D1AC00700CAF793105B15F88B2EC6302",
+      "size_bytes": 463665
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-09/part-000.parquet",
+      "rows": 4423,
+      "sha256": "12DF7D216497C3D6B63508272684F0ACC271171264FDAD47D70CECD0938E56E6",
+      "size_bytes": 434836
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-10/part-000.parquet",
+      "rows": 3525,
+      "sha256": "85E0CB4583BC8972F90EF88283D638934B68D02CD517D98629A4E711962034B2",
+      "size_bytes": 342665
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-11/part-000.parquet",
+      "rows": 3354,
+      "sha256": "2D135631157C74D81B5F363248F3805DFB67A7397B1386386B559C32D2129025",
+      "size_bytes": 323129
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-12/part-000.parquet",
+      "rows": 4079,
+      "sha256": "80EC96B92EC4A85BF4A1DACFA4192D413F2EF01E396BAA0518C527013E3BAB32",
+      "size_bytes": 404377
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-13/part-000.parquet",
+      "rows": 3797,
+      "sha256": "E09AD7CF8AA89E0DCA431F4E7ECE79C14880490F7012B80EC4384ABF11C22473",
+      "size_bytes": 366635
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-14/part-000.parquet",
+      "rows": 4066,
+      "sha256": "AFCA5B7A7CAD7998043423D6E0BDBBB74BCE9BDBBB2B89A4578A175A834242CC",
+      "size_bytes": 381960
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-15/part-000.parquet",
+      "rows": 4017,
+      "sha256": "7AE0A5EFE045A9D987E6EC1E3D18E9F59A0EF8A285149F72D8DE7BD2D0757AD7",
+      "size_bytes": 376345
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-16/part-000.parquet",
+      "rows": 2889,
+      "sha256": "4331CC1B14F479EDC509548ADE3EE55213B1FE3A7B4137C92739B3EF8816F9BF",
+      "size_bytes": 281356
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-17/part-000.parquet",
+      "rows": 3909,
+      "sha256": "190FC4E69D9BB49401164BAD2554FFEEACEE50EE6E676378134186FE0C14B6C3",
+      "size_bytes": 373654
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-18/part-000.parquet",
+      "rows": 3131,
+      "sha256": "533FF65F926FF06A1EAFCE3EF45E6B0E201D7FB23BCC5FBE9879577B4704E8D2",
+      "size_bytes": 306657
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-19/part-000.parquet",
+      "rows": 4002,
+      "sha256": "843656CA911A8A2AA288800A7374F10CBE49572E1ADF18FB91B199C8EEEFAB11",
+      "size_bytes": 375907
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-20/part-000.parquet",
+      "rows": 3381,
+      "sha256": "63034B039DC34F239BCEE1678033F4F1A1E432EED1FCDB8968516E8B24D6803D",
+      "size_bytes": 328515
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-21/part-000.parquet",
+      "rows": 3658,
+      "sha256": "8CF29235A993FA75C4356EFAC0621A42409236ADF95A2851782EC522B0E3BAD0",
+      "size_bytes": 356142
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-22/part-000.parquet",
+      "rows": 4788,
+      "sha256": "4BA99D99D918C469CF38EB99484DF3434D26138C792FE6C81641BF32EC554419",
+      "size_bytes": 464398
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-23/part-000.parquet",
+      "rows": 3896,
+      "sha256": "0621E478CBDC19A57592A97C0EBCD02FA1A75B53B660C4319A2E6CB387375391",
+      "size_bytes": 369997
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-24/part-000.parquet",
+      "rows": 3282,
+      "sha256": "02B576ED001D3E11678A7711985791347CA0352E8A1D15804D27EA2787956F24",
+      "size_bytes": 317165
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-25/part-000.parquet",
+      "rows": 5107,
+      "sha256": "E1C3A056CAD990D32C2CA856B17DA613715D4C943CC133B10153FE4606BE04FC",
+      "size_bytes": 481236
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-26/part-000.parquet",
+      "rows": 3550,
+      "sha256": "54F4F0FE91ABC2C0206DF11D94128BA6BC0E5ED3492CF3F886667F2D80CC4DD4",
+      "size_bytes": 344370
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-27/part-000.parquet",
+      "rows": 3020,
+      "sha256": "BF02EB3E64072DB5F754B8E5D55B5089006ADB3EC074E6986A6AA4EC004E748F",
+      "size_bytes": 294673
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-28/part-000.parquet",
+      "rows": 3247,
+      "sha256": "D6799133EE756FCEEDC3F784A6766750274D76F40CAFF0119F08EB3F708665B5",
+      "size_bytes": 311868
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-29/part-000.parquet",
+      "rows": 3722,
+      "sha256": "B6759CDAAD698A76A281926C3C799B45894F7D8ECBBA64AA5C8E47E50C6338A6",
+      "size_bytes": 357963
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-09-30/part-000.parquet",
+      "rows": 4211,
+      "sha256": "7047BC76552641C46AF2631344B0C62404B9354AE85769657CC98EB7D0CCC6F3",
+      "size_bytes": 406617
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-01/part-000.parquet",
+      "rows": 3518,
+      "sha256": "F1F11B0DC8A3B69AE292A5DBA6E2C64750BBB29E0F6A6B045A7FB0F8F59147C8",
+      "size_bytes": 342667
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-02/part-000.parquet",
+      "rows": 4392,
+      "sha256": "782F1EA26949EF7F4A68DF6ADE5E86F512FBC6B7B4622E690EA2165250254378",
+      "size_bytes": 425495
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-03/part-000.parquet",
+      "rows": 3798,
+      "sha256": "431878182D45F3B64DDADCCBE0B0A16D073C99EE61456121697D82708141FA6E",
+      "size_bytes": 371693
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-04/part-000.parquet",
+      "rows": 3743,
+      "sha256": "B84031A6A7C4DCEF1C1B341D141E4F270655D7D90EF67156519038C0B6CB01F2",
+      "size_bytes": 360169
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-05/part-000.parquet",
+      "rows": 3757,
+      "sha256": "3C3FCE6D7282BA5C43B076D615D8E23DB08D487D24F66B37E1217C6AF610437C",
+      "size_bytes": 359303
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-06/part-000.parquet",
+      "rows": 4180,
+      "sha256": "55E2CA86684F7B8051AF8D74469B407628A6FE4741A8C18678058CBF28EABE95",
+      "size_bytes": 414387
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-07/part-000.parquet",
+      "rows": 4489,
+      "sha256": "1DB35814747061CCBD9CFC52CBB14AC4D82466643FE5E64F08798A74813DB16E",
+      "size_bytes": 426809
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-08/part-000.parquet",
+      "rows": 3970,
+      "sha256": "1975DE4D43CFF221ED90275DAD1250EA37DA2C622F233A3C96AC37E15F37F5C8",
+      "size_bytes": 381934
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-09/part-000.parquet",
+      "rows": 4219,
+      "sha256": "959CAB75B969D2732D03D53D55B22AE6D4B895454F7E5ECB9FED520484D85590",
+      "size_bytes": 403092
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-10/part-000.parquet",
+      "rows": 5144,
+      "sha256": "19ED73CAC48C4F69505D2901DBB27BE343C7262BF1FD2651A67EA77EC0D7B074",
+      "size_bytes": 519781
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-11/part-000.parquet",
+      "rows": 5463,
+      "sha256": "31A91AC9195A08932A1DE1650CA8F2B24E68B315006B0243E0EB9A31477E7457",
+      "size_bytes": 541106
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-12/part-000.parquet",
+      "rows": 4553,
+      "sha256": "BCE14DD2AEF2817D5F28E24BA00D999CC9F351AF160CFE99E77CA71E4E6BD24A",
+      "size_bytes": 451994
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-13/part-000.parquet",
+      "rows": 4498,
+      "sha256": "F568FA2644C4731C51696DC291CBF2AECA2F6A42532B21852A8CE822A2839AF2",
+      "size_bytes": 441557
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-14/part-000.parquet",
+      "rows": 4878,
+      "sha256": "1FAAA72F6AE9B4CF19A134BCAEEAB05E093DFA9D2357A01ACB276E9C46AAAA99",
+      "size_bytes": 471638
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-15/part-000.parquet",
+      "rows": 4434,
+      "sha256": "DCB43EE04E90C8084D134235A85030AF2D0A25F9AD9F2116319A35BC02C1F282",
+      "size_bytes": 427523
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-16/part-000.parquet",
+      "rows": 4494,
+      "sha256": "4F1ECD379EE60017E3248FF3155F8F34CEC711B56BF2EB05E64E4E71FAE31CB1",
+      "size_bytes": 438873
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-17/part-000.parquet",
+      "rows": 4271,
+      "sha256": "B010AF7C1045C65E1CDA33E92852A7F6040098DD5F4166CA646CD73539276987",
+      "size_bytes": 423447
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-18/part-000.parquet",
+      "rows": 3295,
+      "sha256": "E30AB7DD6FEB003037E00885DCD7B82B03669A110CE804384F76EE3C559592A3",
+      "size_bytes": 321371
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-19/part-000.parquet",
+      "rows": 3476,
+      "sha256": "0A6547572641266CD17EFA1E17953257F7DD1BAEF846FDD1BF03F87CEAE6FFA4",
+      "size_bytes": 336128
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-20/part-000.parquet",
+      "rows": 3372,
+      "sha256": "3ED3052A1177893A7E6AB34F998D7FD70907B5B5E75ECE3F3C818A36FA85DBB1",
+      "size_bytes": 327829
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-21/part-000.parquet",
+      "rows": 4743,
+      "sha256": "D60EC098968BFA81610DEE39817041C3EE2C5EEEC68131414BCEEA1A8ECE48D2",
+      "size_bytes": 451786
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-22/part-000.parquet",
+      "rows": 4316,
+      "sha256": "C987DA7A379EDA353104A3B1869A99560AEA6FBFE5A0914BFBBE742DBF6A297E",
+      "size_bytes": 408481
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-23/part-000.parquet",
+      "rows": 3122,
+      "sha256": "80D7768C6634900970A295F62C8A2C2ED250F4857BD51240BD1AA65920F8D51A",
+      "size_bytes": 306902
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-24/part-000.parquet",
+      "rows": 3313,
+      "sha256": "40472666730E4005FF648ED416BD47F110C992EEA44A9AA04BA78FBB238F8C75",
+      "size_bytes": 324166
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-25/part-000.parquet",
+      "rows": 2813,
+      "sha256": "E79A2A5986DB25CAD1A531A70AC43B68387BB93489AE324F7A333B1D843044EA",
+      "size_bytes": 278127
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-26/part-000.parquet",
+      "rows": 3346,
+      "sha256": "80864D2F0A652A01BA02D87C174D5C4EEBDB6C67817981B7E754BA5AC584BE61",
+      "size_bytes": 327391
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-27/part-000.parquet",
+      "rows": 4489,
+      "sha256": "265BD74DA1A8AC991738D348F2E059BA996A4BB52950130CD07A88A70F6DC15C",
+      "size_bytes": 427474
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-28/part-000.parquet",
+      "rows": 4110,
+      "sha256": "95BF4F37A38E36542D9B048AAFF3F696F848179212D0DBAD89F005EFEB7771AF",
+      "size_bytes": 393169
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-29/part-000.parquet",
+      "rows": 3828,
+      "sha256": "09F9DB3AF9F523147D45AB0E79D69DE520A373D7C265DFADF69F019923D370C6",
+      "size_bytes": 371208
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-30/part-000.parquet",
+      "rows": 5044,
+      "sha256": "BA5015069CDBC87E5BD8B29B3DB2DD750EC3CAA1721D9F28D5C02AAB2F672368",
+      "size_bytes": 480714
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-10-31/part-000.parquet",
+      "rows": 3409,
+      "sha256": "F5A9E14AB03A5E9BF981D8699E4D437EC04A7FDF2127438F6BA82EFC141FF156",
+      "size_bytes": 334764
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-01/part-000.parquet",
+      "rows": 3205,
+      "sha256": "8F692AC92CD1E2CA16BA02E7F2C2D84954189828A0CB3B90CA6DE2CB5D8159BF",
+      "size_bytes": 313255
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-02/part-000.parquet",
+      "rows": 3606,
+      "sha256": "5A0B659B2DC0409FBDA5A381A49AA7502AC9C3B33B0CD059241321AEE4C89219",
+      "size_bytes": 345280
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-03/part-000.parquet",
+      "rows": 5495,
+      "sha256": "2A0DE71F1E46E40A774D95C4849CD90453BBAAADB7A389D5D34A0243DAD89321",
+      "size_bytes": 529716
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-04/part-000.parquet",
+      "rows": 5700,
+      "sha256": "7A64B53EBA06FA96869AE66E860A34094EBF34A865C8C654E67E62AAF2A69F67",
+      "size_bytes": 581372
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-05/part-000.parquet",
+      "rows": 3968,
+      "sha256": "C2A8A1C18D7C60BDF36B7992DC8998E3196054660F5FF6D3F3FF00678A8357B3",
+      "size_bytes": 386958
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-06/part-000.parquet",
+      "rows": 4503,
+      "sha256": "6AD16F8B13E2D09C6232D1809BF55C62095CB63E3A06279D55352C08045D5819",
+      "size_bytes": 436467
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-07/part-000.parquet",
+      "rows": 6000,
+      "sha256": "B5979AEACFEE899C227A9B89FC90CDB445F458E99265B246EBF848009B54A569",
+      "size_bytes": 585633
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-08/part-000.parquet",
+      "rows": 3769,
+      "sha256": "BBB0DC3685546B7D3BE8D58CBD729FD15301D30B5ED6EDB229FCA68A81FCF7D1",
+      "size_bytes": 365996
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-09/part-000.parquet",
+      "rows": 3717,
+      "sha256": "E47D8632ECC9D2C47BBE00C54B51A2CB3FD3E330D9B2F2E424569361AD444AEA",
+      "size_bytes": 359690
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-10/part-000.parquet",
+      "rows": 3861,
+      "sha256": "90B73A3D8DC2793521BB876C0412B2B1C2350D535A7AD4F00080776FC28D33F9",
+      "size_bytes": 373542
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-11/part-000.parquet",
+      "rows": 4761,
+      "sha256": "C7E2C58E84BE3007A391AA18863AB3B353B609726E452D0A7A51DEBBB8A4D249",
+      "size_bytes": 446769
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-12/part-000.parquet",
+      "rows": 4006,
+      "sha256": "7ACD2332DD57A885BEA8AA6D6A3B1053E66A5D2CFC103240ECA74E604F5F8FFE",
+      "size_bytes": 388936
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-13/part-000.parquet",
+      "rows": 4534,
+      "sha256": "2ED550DC1E4B45754B14C1F74B230544CEAC8C22C25A1B907F343C337ED20C22",
+      "size_bytes": 433965
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-14/part-000.parquet",
+      "rows": 4650,
+      "sha256": "D55059FE51996AF5E308D902AE9FBBE41BA75EA7EAEAB01E477DACC16B511609",
+      "size_bytes": 452782
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-15/part-000.parquet",
+      "rows": 3315,
+      "sha256": "D9CDA746007A6737CA5EF34C041AB42EE4A7D4390998C07DAB4D759EAA7EE761",
+      "size_bytes": 321678
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-16/part-000.parquet",
+      "rows": 4347,
+      "sha256": "81E2ABE3D3519833D0FAC4183CDCA3862550E343E23550A1E34D28BB271642E3",
+      "size_bytes": 413561
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-17/part-000.parquet",
+      "rows": 4012,
+      "sha256": "5668E11679AFC6C8BBB5FA84A8B337A53C9CDDA1936983F5D8264E6B4F7EBD1E",
+      "size_bytes": 385787
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-18/part-000.parquet",
+      "rows": 3845,
+      "sha256": "B81AFA88934C45E1267D4CE93E334E2535E862F996C066C4324A93C015B4968C",
+      "size_bytes": 372348
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-19/part-000.parquet",
+      "rows": 4332,
+      "sha256": "7906879121D4F9FFFB3D3C8CA43AFD7C3D49F1B9AB0DBED011B96BA5AB3797CC",
+      "size_bytes": 411822
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-20/part-000.parquet",
+      "rows": 4720,
+      "sha256": "38C15802EE68C3ADDCCE7BBB054B7B19556CF6847CF71493CC9CC222F1194FB6",
+      "size_bytes": 468386
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-21/part-000.parquet",
+      "rows": 4952,
+      "sha256": "D16C7C9134421A227D3F4A34528D9B0C9E54FBD3131E9FBA498A5EFC6B3C0248",
+      "size_bytes": 484249
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-22/part-000.parquet",
+      "rows": 3809,
+      "sha256": "FA1D7EBE5EACF4F6A231A54277BA6DEF320C212887207F567C41C933712512E9",
+      "size_bytes": 367444
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-23/part-000.parquet",
+      "rows": 3652,
+      "sha256": "F6EA1209163E8BB973966F091E11056C6FD99A7661C0963810EA2A794C4C04C4",
+      "size_bytes": 353752
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-24/part-000.parquet",
+      "rows": 4115,
+      "sha256": "4FADD19828FDA11E121BEE196DA657AB28F66792D904F4AB6C599B008EF73DF6",
+      "size_bytes": 401513
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-25/part-000.parquet",
+      "rows": 3548,
+      "sha256": "7FF098ED157CD55DE618995994BEEEB07EDEB587544F3B1D8E3BA9BC759DBDD9",
+      "size_bytes": 344162
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-26/part-000.parquet",
+      "rows": 3474,
+      "sha256": "B54FE387FD5B8F3254C300F4305FD5E9A21E8BCC873AFBE83E66872AF972B58A",
+      "size_bytes": 336287
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-27/part-000.parquet",
+      "rows": 3253,
+      "sha256": "17E99AFA160B1BDD4911A347D2B49C3FAFD3A26C099AC05E893DFB80EA37DE98",
+      "size_bytes": 311286
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-28/part-000.parquet",
+      "rows": 3863,
+      "sha256": "BE2ED9685B95DAC584333E23FADF354E919218B278508D53A75B0DA49A6C010A",
+      "size_bytes": 366522
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-29/part-000.parquet",
+      "rows": 3285,
+      "sha256": "32C88503A968A1D7285FA99D2DF1949C756E49FABCDB4FE309BC216140632A94",
+      "size_bytes": 312275
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-11-30/part-000.parquet",
+      "rows": 3793,
+      "sha256": "CC282286D3C652BF95EFB113E96A329D2B52E6D7A7217530AD0B95C821A939CF",
+      "size_bytes": 362264
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-01/part-000.parquet",
+      "rows": 4897,
+      "sha256": "BE78C4AA4D2138DD757CB558F924897582E049E92A7E70310337284B6A5E11DF",
+      "size_bytes": 473982
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-02/part-000.parquet",
+      "rows": 3436,
+      "sha256": "F0F1194E4B9106353D04C10C16B040B8067FC326772C95EC7821C716E43219D9",
+      "size_bytes": 332437
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-03/part-000.parquet",
+      "rows": 3834,
+      "sha256": "9AE70D3399C91CC0727AE31BE9FB2F8F6F263AC22D0619D5F6E0789F8DE851A8",
+      "size_bytes": 371496
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-04/part-000.parquet",
+      "rows": 3388,
+      "sha256": "FB7DC90033E44A124B5850526E83099DBC8C040A234E4072B85A069578861DFB",
+      "size_bytes": 327627
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-05/part-000.parquet",
+      "rows": 3838,
+      "sha256": "56DEA6CC4D0BF271386E538378774DF6999FB331BB5514DFB27E0A6CFDCE16DA",
+      "size_bytes": 363324
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-06/part-000.parquet",
+      "rows": 3384,
+      "sha256": "44002C8CDAE7AFA32B919C557AF8F95ACAC7A51A34C4C556E4386551A0887BA3",
+      "size_bytes": 324851
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-07/part-000.parquet",
+      "rows": 3664,
+      "sha256": "18E6D2649B5CAC3719E6E8D3F3F7514E5D08693D23160864BB23D8BC79004F91",
+      "size_bytes": 348361
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-08/part-000.parquet",
+      "rows": 2777,
+      "sha256": "2D4875DA1C3DC5AAD43DF67CBFA90815D41AC34A8C50D39453AD1AA15EF47B16",
+      "size_bytes": 270552
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-09/part-000.parquet",
+      "rows": 3603,
+      "sha256": "3744AB6E0808AB4C6352DDEB9B6AE16F7BE582E2C9DB55CE74F18F85330FF781",
+      "size_bytes": 344645
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-10/part-000.parquet",
+      "rows": 3658,
+      "sha256": "E451D799A567455A661E98FFAE98AE95527345062FB7D423B7E727AFFEA7BD2C",
+      "size_bytes": 349666
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-11/part-000.parquet",
+      "rows": 4050,
+      "sha256": "8CF9B9662187EDB464B7495F42BC40B7C7DD17A11B195C485F6356B8C45C4DF5",
+      "size_bytes": 376572
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-12/part-000.parquet",
+      "rows": 3124,
+      "sha256": "0A4E14575567983F797C3B0E061713C90C3552F5FC0528A73E6AC094D96D48C3",
+      "size_bytes": 301142
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-13/part-000.parquet",
+      "rows": 2509,
+      "sha256": "825DEF7E556F9C9C6FE4A9E7EF92768D66BF3EF6EDF374A252AC04232F9A7C6F",
+      "size_bytes": 244992
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-14/part-000.parquet",
+      "rows": 4233,
+      "sha256": "1B2EA30DAE24B8351853DB328365B2F435D52DD98F3A6BA5D8CED9F568B8B270",
+      "size_bytes": 392919
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-15/part-000.parquet",
+      "rows": 3865,
+      "sha256": "0B4999001E861693B8D6C157F592FF43135E24CD40148B5EE89D3D3A4CFED337",
+      "size_bytes": 370011
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-16/part-000.parquet",
+      "rows": 3126,
+      "sha256": "C93A4A5843FA81A836E77E88E4D76C9BCE70332ABC5DE6C8A0726A2BBB3DDF65",
+      "size_bytes": 303317
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-17/part-000.parquet",
+      "rows": 4239,
+      "sha256": "4C950E8EFBC391BB9A2E484523BC0332D06BAD4BB974A437D16B2350CBDBF1E6",
+      "size_bytes": 400633
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-18/part-000.parquet",
+      "rows": 3901,
+      "sha256": "3AEE09998A18EB5603B1FBDD72127D8622CDA387C213B69B90B782AB3C2268AA",
+      "size_bytes": 370752
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-19/part-000.parquet",
+      "rows": 3092,
+      "sha256": "6917E12C8AB5C862DF367FB720DE0C7D1876B8DFEF6238E3A118D14118BF97A7",
+      "size_bytes": 300100
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-20/part-000.parquet",
+      "rows": 2809,
+      "sha256": "DDC6CFCC7E5C8A62DEB9FF436CC8B7F54FBE53AD4DF08E7CA26FED6FA7595A2F",
+      "size_bytes": 274509
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-21/part-000.parquet",
+      "rows": 3444,
+      "sha256": "968B095BD5366CDB9443E7CF757BB57CEE2E18EEA21F3356035331E8423FF2E5",
+      "size_bytes": 329805
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-22/part-000.parquet",
+      "rows": 2822,
+      "sha256": "88062FA781F611BB39E967E176FCE94654B9126913493BD8A7997C139965B451",
+      "size_bytes": 274219
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-23/part-000.parquet",
+      "rows": 3078,
+      "sha256": "006AA91A180AC23B69100670CAD059F72F521D40E23D4D8BDD0832B92FEA950A",
+      "size_bytes": 293513
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-24/part-000.parquet",
+      "rows": 3130,
+      "sha256": "3B8CB2DFD60FFCDC742F660AC139A2EFD709B94864F05DD72522920E9C0F79D0",
+      "size_bytes": 301004
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-25/part-000.parquet",
+      "rows": 3075,
+      "sha256": "D4C6A38E322ED778395F3125E4DD2FF8ADA45CDAB2395C33762D2249D853715B",
+      "size_bytes": 296015
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-26/part-000.parquet",
+      "rows": 2659,
+      "sha256": "2370EDEB21F610C84F818691B8ECA4D0CAAD41FBFF85AD4206B29359D210885E",
+      "size_bytes": 259451
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-27/part-000.parquet",
+      "rows": 2360,
+      "sha256": "944467A476DFBBAE9695087E1E464DE3530F9C8A4F7BA9E2ACEB4F3BD65664EB",
+      "size_bytes": 231263
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-28/part-000.parquet",
+      "rows": 2809,
+      "sha256": "0CDF7F53F645D64DF7C2501295ABE48A7B160DDACC16AD22A8BE9FFCE99A1D2F",
+      "size_bytes": 269565
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-29/part-000.parquet",
+      "rows": 3552,
+      "sha256": "79309BE639E974B703798C004FEE0CBCFF0F777F26021498616DBB9E05824B8D",
+      "size_bytes": 334849
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-30/part-000.parquet",
+      "rows": 2918,
+      "sha256": "E6AC7779277928D995338AD58699811B6B1BDF681A3E59F2D87DCB7A415543CF",
+      "size_bytes": 276992
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2025-12-31/part-000.parquet",
+      "rows": 4124,
+      "sha256": "2CCA82588749D769489C2A4A1D4EA6A188196FDBEBF3C581C555AF08DB03EFD2",
+      "size_bytes": 394056
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-01/part-000.parquet",
+      "rows": 3268,
+      "sha256": "89CFC436DE6BF6F8B9844AD7183BDC166D26F27E7EF1AFB83A1313BE7A4934B3",
+      "size_bytes": 315548
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-02/part-000.parquet",
+      "rows": 3444,
+      "sha256": "1631DC704EAE3798F7E75EECB355796043287C7513DB65AA2994F479702A9C93",
+      "size_bytes": 330923
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-03/part-000.parquet",
+      "rows": 2875,
+      "sha256": "F01CF18496E821AE490100F9EF001A4699552B2660A99AB995F25581115CDE7C",
+      "size_bytes": 275604
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-04/part-000.parquet",
+      "rows": 3465,
+      "sha256": "77CF99EDEF47904D8317FC212FE0EB01F2832D118111B411654D7CA613B34B93",
+      "size_bytes": 335266
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-05/part-000.parquet",
+      "rows": 3761,
+      "sha256": "23F15507B3F4306AA7E9561E9AA2B8A89017072D12B9FFDBC1294A9550DAC5AD",
+      "size_bytes": 361642
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-06/part-000.parquet",
+      "rows": 3954,
+      "sha256": "85B63B629080B297DA0364CEB1CFD6BFB62301438E846A937D6B6842C626FF8F",
+      "size_bytes": 378954
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-07/part-000.parquet",
+      "rows": 3593,
+      "sha256": "AF35669FAEB8A09CFA45DBD355DBE6EDE840FAE28822C3E57DC8F2E209DAD5FA",
+      "size_bytes": 334164
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-08/part-000.parquet",
+      "rows": 4020,
+      "sha256": "8233E2B284927C380535208861A054C692B592A79688D2EF8088112229DB2589",
+      "size_bytes": 375868
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-09/part-000.parquet",
+      "rows": 2816,
+      "sha256": "A9DC0151FA9966C8595A795028A331DCFB1750CE81CD1F9085F03F0EE9A58A6D",
+      "size_bytes": 272782
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-10/part-000.parquet",
+      "rows": 2537,
+      "sha256": "621D3C9FB6E782473BB38912E732ED60A31D4EF1BED8DD22C736925E9C5581E7",
+      "size_bytes": 241883
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-11/part-000.parquet",
+      "rows": 3078,
+      "sha256": "2C8D068CCEDFC854E81B0A34634BE8975FBFAED8CBE3DFC05C6ECA17C059D6AB",
+      "size_bytes": 289595
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-12/part-000.parquet",
+      "rows": 3569,
+      "sha256": "08AF463A772E10977570E8B87E34E9EEF1FECE4CC00E665A4C5EB5C1094F6326",
+      "size_bytes": 336959
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-13/part-000.parquet",
+      "rows": 3580,
+      "sha256": "D2426A9A5D29C579EB664E24DDB5E7BDF1DA3BCC9D3282689ACA0A072E6B23E2",
+      "size_bytes": 348798
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-14/part-000.parquet",
+      "rows": 3801,
+      "sha256": "243D35E3F94A0196F253F001B8D9F53588DC0AACB545978EF153362404C796B8",
+      "size_bytes": 366621
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-15/part-000.parquet",
+      "rows": 3898,
+      "sha256": "A7F997ECAA7BE3BF80DE0F308D777CB3BA343F46C80D9824929538587592D4DB",
+      "size_bytes": 364420
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-16/part-000.parquet",
+      "rows": 3169,
+      "sha256": "8CB04D3A3346D2F6133D6F5093FC057FE473707E814B338CDC85E66708385EF0",
+      "size_bytes": 305164
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-17/part-000.parquet",
+      "rows": 3171,
+      "sha256": "54B558A659600AAF73C063AD1C4C5FC84E88ACFA2860DE10958C78CBBB9A155D",
+      "size_bytes": 302004
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-18/part-000.parquet",
+      "rows": 3200,
+      "sha256": "8BFD3D7A0589EDC647436C77550741FDC571408DDDCC5D9F6A92F96A79961B54",
+      "size_bytes": 303976
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-19/part-000.parquet",
+      "rows": 3299,
+      "sha256": "E595E3BF0FC899482B89385071510673B8B084DD9AFDD093472B7613C82BCD57",
+      "size_bytes": 320024
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-20/part-000.parquet",
+      "rows": 4543,
+      "sha256": "C09A9005F505A3EF83FDECF1C2C687C14F1D32942B5A1DD72953C1370F56E0F1",
+      "size_bytes": 423427
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-21/part-000.parquet",
+      "rows": 3742,
+      "sha256": "1C24C2F201256EDD3C468EAEF0A6FDEDDF7AFD8B22E471898B618A9FF403E28D",
+      "size_bytes": 357568
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-22/part-000.parquet",
+      "rows": 3513,
+      "sha256": "738A8E7D616A2F9DA8C8364972F98569F269908E3654A5DCBF93BB62ABD4118D",
+      "size_bytes": 333791
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-23/part-000.parquet",
+      "rows": 2900,
+      "sha256": "97F18D57383A6B7B2886E16588D17BB18E4F8585DCDE797C0B5A6E8A095F0CF9",
+      "size_bytes": 282958
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-24/part-000.parquet",
+      "rows": 2566,
+      "sha256": "EBDA68AE380D1DF4709423AF29559E29CBF3FA2DE81FCB5500A559715D91014E",
+      "size_bytes": 249156
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-25/part-000.parquet",
+      "rows": 4315,
+      "sha256": "BF56A7019A85528CDBD76A221486A5F4C3833747BFD8ABC9E2521DB239E8A7CB",
+      "size_bytes": 410050
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-26/part-000.parquet",
+      "rows": 2879,
+      "sha256": "9C6D2642807F48AC893100F830E0C4B199CEE0A1A83B9439CF229FFC5765FFE2",
+      "size_bytes": 280069
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-27/part-000.parquet",
+      "rows": 3025,
+      "sha256": "0863A7924387EB089C8686C3187CF5D0A3BB4E56F1FF430D1B6FD6831F1F46C3",
+      "size_bytes": 289884
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-28/part-000.parquet",
+      "rows": 3356,
+      "sha256": "CD5A2B062910CEC15D8094C1E0136CF370C523A68F75D0512AEE95E92CF5B0A5",
+      "size_bytes": 317758
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-29/part-000.parquet",
+      "rows": 4440,
+      "sha256": "C9AB010159039398F42068C46C1BB1640182F4F79ECB0924D3D21F93512AECAA",
+      "size_bytes": 412311
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-30/part-000.parquet",
+      "rows": 3776,
+      "sha256": "C4331CF2B44B010400A0EE04173F4ADBC5DA8DFE181D4BBD97EB85A423D7BE2A",
+      "size_bytes": 361421
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-01-31/part-000.parquet",
+      "rows": 5201,
+      "sha256": "4D3E7BBA686BA637DF64AC2CCE093040313C11F42245D6D53E60F2C9C8845B2B",
+      "size_bytes": 506550
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-01/part-000.parquet",
+      "rows": 4243,
+      "sha256": "7FD7D7CFD73DE6E54568215EE510A015C06B2722A9709F15CD702700D48851F2",
+      "size_bytes": 407347
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-02/part-000.parquet",
+      "rows": 3359,
+      "sha256": "85405074EC315682F6562C4060535875C0157F2A51F61DCB2B829FB67CE85567",
+      "size_bytes": 325911
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-03/part-000.parquet",
+      "rows": 3833,
+      "sha256": "928624D36CC26BA0D95A6AA0D283885DAF69A1049E95BCDD4A4E6F04FD973917",
+      "size_bytes": 361816
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-04/part-000.parquet",
+      "rows": 3456,
+      "sha256": "A1A97F79EC61FD247A2E9DE5363020B87FEE156E363C1ADF6E289D2E208415AF",
+      "size_bytes": 329132
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-05/part-000.parquet",
+      "rows": 5303,
+      "sha256": "B1ADC8E8C82918FAC3325FCC9697D432AFD73058BAA24EA3099D10154E9938B6",
+      "size_bytes": 508536
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-06/part-000.parquet",
+      "rows": 3936,
+      "sha256": "AFA078CC11EA9700CC41FA59EBD06BD8D65B13C06491EA3E430B47D80C266DEE",
+      "size_bytes": 385077
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-07/part-000.parquet",
+      "rows": 3273,
+      "sha256": "45A8F02C976D5F96F6576571C7BD77039503AF6748F0B7B2395A8401E51532FC",
+      "size_bytes": 315876
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-08/part-000.parquet",
+      "rows": 2862,
+      "sha256": "CCE5C2A98987FF82CF00B6906BDB8B8D63FD83194D3BBC7011C70AA33697E524",
+      "size_bytes": 274130
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-09/part-000.parquet",
+      "rows": 2860,
+      "sha256": "587CA46ACAAA50DD2F73B6A0F546DC64D8F6BDB765E0165D97426F0C217B7FFF",
+      "size_bytes": 272906
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-10/part-000.parquet",
+      "rows": 2869,
+      "sha256": "8B5CCE5F963846F93B2B186119BD5A952B061362EB4D5A295C59ABDDE37042B3",
+      "size_bytes": 272927
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-11/part-000.parquet",
+      "rows": 3899,
+      "sha256": "831D23B8AB285988F89C9837653DF20F2DD6541F636B311C7C0B57E168F0FEC5",
+      "size_bytes": 368422
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-12/part-000.parquet",
+      "rows": 3159,
+      "sha256": "8ED77D9DB058A412CCB393D1C55719246E7EBE4A1603D6DF5B19B597AA60BB24",
+      "size_bytes": 304869
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-13/part-000.parquet",
+      "rows": 2997,
+      "sha256": "7324D4C34E5DF1B55D72F0FED40C8D5FB2D4BD0FE656D2D1A87C3F9F3F11469C",
+      "size_bytes": 290757
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-14/part-000.parquet",
+      "rows": 3137,
+      "sha256": "F5D87DD4D95C862130902A08880D0D0A101EE28B08A7E6C81D972BE670D958A9",
+      "size_bytes": 300027
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-15/part-000.parquet",
+      "rows": 3505,
+      "sha256": "2920DBA969E5DDA3984DA8D524E025F249BBC11FC3DC987A7296B6EC3249AEA9",
+      "size_bytes": 329882
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-16/part-000.parquet",
+      "rows": 2709,
+      "sha256": "2B5EF0EC91285228591226A174AE6818D5341D3790A62E57CCD2425CBA5AD4A4",
+      "size_bytes": 262825
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-17/part-000.parquet",
+      "rows": 2735,
+      "sha256": "5136232FD3702704F0433BDCCBEF18AEE585F6819E075D457DB9ABA1AD6782A2",
+      "size_bytes": 261215
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-18/part-000.parquet",
+      "rows": 3525,
+      "sha256": "08B08037126541FCCEC7098A1C4AE24FA625B2901780B0EDBAE5AA859935F953",
+      "size_bytes": 325684
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-19/part-000.parquet",
+      "rows": 2930,
+      "sha256": "909D37F60F7E5C5EA1C7BF502C002FF7492946D603CA9BDCAA74A3F2AA6BC900",
+      "size_bytes": 275488
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-20/part-000.parquet",
+      "rows": 2815,
+      "sha256": "DDCB643937D8CD01C6CC6B4698A7058EF3481B5C17F27131DE38DE48A9A6A080",
+      "size_bytes": 270970
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-21/part-000.parquet",
+      "rows": 2426,
+      "sha256": "CB50B59030D0EFE5844020210006CBE5387D994FA02F592AEC0C2D03A27D836E",
+      "size_bytes": 231116
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-22/part-000.parquet",
+      "rows": 3233,
+      "sha256": "29CBA2B8C272670FE4E2F89D6C958AA2EA3F0C6A777A34AF27BF1A250F71326C",
+      "size_bytes": 296412
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-23/part-000.parquet",
+      "rows": 3482,
+      "sha256": "7DBA4CD468B9818CA1F6B19E0038F7A3634D6EABDD405CF05ABC7D587C17B27B",
+      "size_bytes": 328514
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-24/part-000.parquet",
+      "rows": 3795,
+      "sha256": "5BCE7F3CFFD45CFAEF7DF2C43525C7AB735FF4A7BB8C8E681C300BC485134DAC",
+      "size_bytes": 356601
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-25/part-000.parquet",
+      "rows": 3548,
+      "sha256": "337A449408093D28FD41FAD03DDBDF000890EF90A867165AA17C684178DC4F29",
+      "size_bytes": 339735
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-26/part-000.parquet",
+      "rows": 3568,
+      "sha256": "6281FA9545FB2A95F41F208DAB07E41AD59D84490B95D403A57C28C09748BA0C",
+      "size_bytes": 344567
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-27/part-000.parquet",
+      "rows": 3421,
+      "sha256": "41C0FB4C7700374C558233F24F2C84B8926A5528EDB9B44C33B6C34F544C0AF1",
+      "size_bytes": 320496
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-02-28/part-000.parquet",
+      "rows": 3683,
+      "sha256": "7C8DC6CA7BD82E54394DE5FCEBFEBC9C96B8329F212B142CAC9DB9C5C83CB6D8",
+      "size_bytes": 348861
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-01/part-000.parquet",
+      "rows": 3249,
+      "sha256": "336A8352BE82DDA9EFAB23A07148E72EF2D95FC6513660664F56D209AF4035F1",
+      "size_bytes": 308684
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-02/part-000.parquet",
+      "rows": 3018,
+      "sha256": "902BC2F5147587FA74B8DC8580673ED7E85C5DF11EE430752816136C8B3D3D4A",
+      "size_bytes": 291453
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-03/part-000.parquet",
+      "rows": 3483,
+      "sha256": "6B07F8BA72757DA1787C7D60C10DDCD417D2C4B26FCC152235F43D9DC836718A",
+      "size_bytes": 327161
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-04/part-000.parquet",
+      "rows": 3531,
+      "sha256": "C24EF1BFA9EC84AACF5DD9C6152DAB84075FA2EA8621FFDF51AE45EF904821BC",
+      "size_bytes": 334754
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-05/part-000.parquet",
+      "rows": 2925,
+      "sha256": "31D4AE54BF83529D399A0D16B262ADC04FB5845D93FA2529A35EEA3B742D1BCE",
+      "size_bytes": 279611
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-06/part-000.parquet",
+      "rows": 3183,
+      "sha256": "A49534F374D1C4425D65AB1915A1B7C172CFB2599147EF0381EA5E1F44EE38C0",
+      "size_bytes": 298848
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-07/part-000.parquet",
+      "rows": 3211,
+      "sha256": "892FF3AE546AE076C5C33C2E9C9E135366473C56688E88DB474AE97D378D5283",
+      "size_bytes": 299507
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-08/part-000.parquet",
+      "rows": 3490,
+      "sha256": "75EB1DC1320CDC5210165F69C81BD2C0FF64AE44A172805894F5340B3270E8B7",
+      "size_bytes": 325256
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-09/part-000.parquet",
+      "rows": 3097,
+      "sha256": "A9C69E696C7E147732663526002FF7A4D134EB7599487AE7BC6260A9E7A0C0F1",
+      "size_bytes": 294504
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-10/part-000.parquet",
+      "rows": 3123,
+      "sha256": "B6F32E600398BAB4FC15273A01A42B963A1B57F3B43442843AC3A9E82B0C19B1",
+      "size_bytes": 299722
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-11/part-000.parquet",
+      "rows": 3306,
+      "sha256": "6455F268F15844DA83A1CEA5F6C6731783B92E817AE7FA5D26B5338C51B7308D",
+      "size_bytes": 317420
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-12/part-000.parquet",
+      "rows": 2683,
+      "sha256": "F4B9578836CA5A4C3BA040EE754B6B1C5CFB8E22C26B5568BDD711BC342026BB",
+      "size_bytes": 255900
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-13/part-000.parquet",
+      "rows": 3241,
+      "sha256": "5EFCEBB8197BDB65F2E75C6358FE05653560EA4D79A1B37AA05EACC2A3F05E71",
+      "size_bytes": 308703
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-14/part-000.parquet",
+      "rows": 2688,
+      "sha256": "8E054351BD1FA19D81152EE23C6482BB5B2FA3033B6929ED79DDA10B7D56B234",
+      "size_bytes": 253844
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-15/part-000.parquet",
+      "rows": 2684,
+      "sha256": "4F4A89843E787E0F485B32E6A33751A5A202DEAEFF7FB8115437E9A3AD37EE54",
+      "size_bytes": 256582
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-16/part-000.parquet",
+      "rows": 3491,
+      "sha256": "3BDE91E97942AD1CBD3F9545DEA006FA6FA2775BD142E6202F9A64826B222D47",
+      "size_bytes": 336369
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-17/part-000.parquet",
+      "rows": 3497,
+      "sha256": "10B5AEE20E17B7C95694A01D0E97108D4F6FB3EF2078B707C30B712D84998B8C",
+      "size_bytes": 333484
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-18/part-000.parquet",
+      "rows": 4310,
+      "sha256": "0260BD09F093ED0D377948C9E11DDE3F8F4FB3507A2C75A17B463DC127422088",
+      "size_bytes": 405542
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-19/part-000.parquet",
+      "rows": 3464,
+      "sha256": "25C09C134B588BC4FF548B6AB55CBDADB44649B8D029CC2B3795C4A692098526",
+      "size_bytes": 326482
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-20/part-000.parquet",
+      "rows": 3023,
+      "sha256": "EFCAB0FD26B5BB2C0F2AC2943F4BC73013ED20E32CA04704541C609E7E54FD76",
+      "size_bytes": 288406
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-21/part-000.parquet",
+      "rows": 2567,
+      "sha256": "F9659123DD763BFC84B7B0D89261D6B2BBC61A7897B3AE4A2004D1C482DF4EEA",
+      "size_bytes": 243597
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-22/part-000.parquet",
+      "rows": 4979,
+      "sha256": "800BC078E4D6C78F81807683E87F145F92A39239683CBD75BACCAB0ED5BFB929",
+      "size_bytes": 481752
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-23/part-000.parquet",
+      "rows": 3291,
+      "sha256": "508E3DA0CBFBE3B71C4474093BFA80A86CB17B63D6285F4981AF80DE5EC482F7",
+      "size_bytes": 316665
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-24/part-000.parquet",
+      "rows": 2938,
+      "sha256": "9BF6644FE5051B9682ACEC9AA2DEE919F81714BC6769AD2B8325EFCD0B144016",
+      "size_bytes": 283067
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-25/part-000.parquet",
+      "rows": 2652,
+      "sha256": "C0681747DF93B1E5682AD8E14E84287B1EE38751405391A915D031AD039172D7",
+      "size_bytes": 257569
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-26/part-000.parquet",
+      "rows": 3591,
+      "sha256": "911BE30D017D4C2C195F684C994F25435152D5B00D9869AEF7BEF79A0F1AF425",
+      "size_bytes": 327581
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-27/part-000.parquet",
+      "rows": 3855,
+      "sha256": "CEFF4BD8D2AADCC2753F9E31F4A02DC38E44FCDB8823A6E6257EC5CF022C8424",
+      "size_bytes": 358176
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-28/part-000.parquet",
+      "rows": 3035,
+      "sha256": "3F44B09CFAF6B133E3E259FB09FC558094B83ABDEFCF0B7CC2D2D977A39D53F2",
+      "size_bytes": 284917
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-29/part-000.parquet",
+      "rows": 2834,
+      "sha256": "720CAC411B1EE5D64164193FDFDEFAC504541C020EFA62BB54073F3A2F1066CB",
+      "size_bytes": 264962
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-30/part-000.parquet",
+      "rows": 2651,
+      "sha256": "27AA3CDB68D3D1370CB78D61616BBB88531E770F688C059343280C0382AA3CEA",
+      "size_bytes": 251866
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-03-31/part-000.parquet",
+      "rows": 2846,
+      "sha256": "231DB8DA3D64B62CE1B4C856736A515BB3D37C41197E30B32B6795FC890E75D3",
+      "size_bytes": 273976
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-01/part-000.parquet",
+      "rows": 3700,
+      "sha256": "39EC10E11DE8CC5861DC89BFF0CAF00DDC48DBD3B912259F876ACC5F560CCC38",
+      "size_bytes": 354883
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-02/part-000.parquet",
+      "rows": 4753,
+      "sha256": "9961CEC7109801C3C5945F31AD620462D6DC7B48BD7BCD3DC34A0D8558C360EC",
+      "size_bytes": 457317
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-03/part-000.parquet",
+      "rows": 2935,
+      "sha256": "11F3659189A3CECEC14B69E9A467D119042A04BD4E2DB26F0D3527974F4A123E",
+      "size_bytes": 283552
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-04/part-000.parquet",
+      "rows": 2629,
+      "sha256": "0D24EE43039579DFD9E8D0DF243F63F072654C869745066BF32697C63AF496A3",
+      "size_bytes": 252380
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-05/part-000.parquet",
+      "rows": 3045,
+      "sha256": "E1CB094B92313F97409886C809A69BA4B3D533386D3D59DDFAC421FBB948DD84",
+      "size_bytes": 286158
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-06/part-000.parquet",
+      "rows": 2989,
+      "sha256": "A3FA1CC984CC9EADB07EA90B085781CC824B01866D666578B49DDBC62D00EFAA",
+      "size_bytes": 282590
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-07/part-000.parquet",
+      "rows": 3806,
+      "sha256": "014417594952015BFEFA751D40A6617E4B28EC32C6B8721EEC4120D51AC03ECE",
+      "size_bytes": 359620
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-08/part-000.parquet",
+      "rows": 2997,
+      "sha256": "98EA4766C645DBE4A1B4F8E3DBA3F6A3705CD37805E9EC6FCB1D00DCED61AE1F",
+      "size_bytes": 288705
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-09/part-000.parquet",
+      "rows": 3224,
+      "sha256": "D282AD3F92CAC4E8727A524D84730FB29BCB66A0F73A9038A8A3814EAB23D19D",
+      "size_bytes": 316169
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-10/part-000.parquet",
+      "rows": 2056,
+      "sha256": "D8FC3C8671A3A53751C04FE48943297154ADE37D3689209227B8192713A04C1C",
+      "size_bytes": 215875
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-11/part-000.parquet",
+      "rows": 2206,
+      "sha256": "8AF814700A12B0689FF11DAC54B4F926E68D6700B98D8513BF1C183462EF0003",
+      "size_bytes": 227040
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-12/part-000.parquet",
+      "rows": 3551,
+      "sha256": "B74EDB9A5147BEF0643385A6F28763F7DA0D14D46388B0F661A970AC7B0B05B5",
+      "size_bytes": 347959
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-13/part-000.parquet",
+      "rows": 3236,
+      "sha256": "D65D8E7BBE0F3E022DC0CAD1A7D3349A280532E62663103B1848942A46CA2039",
+      "size_bytes": 331011
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-14/part-000.parquet",
+      "rows": 3034,
+      "sha256": "FF753963DBAE6C94A120387F57341D649B209D57B2403F1C5CAF29E3E2EF6439",
+      "size_bytes": 304931
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-15/part-000.parquet",
+      "rows": 2252,
+      "sha256": "F5DCBE1FDED90A678BD82C15EE2DC46289631534D98342327707AE8F22BA662A",
+      "size_bytes": 233995
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-16/part-000.parquet",
+      "rows": 3645,
+      "sha256": "F1D80A2FE87CF14914CD317A069A2FE213F91FA6DE035ED244E4980D1E964FE8",
+      "size_bytes": 363456
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-17/part-000.parquet",
+      "rows": 3247,
+      "sha256": "3DCA7F52CE11F29DCA32582ABAF22448BFFDF897CF37FA4DFEF7C758747CF101",
+      "size_bytes": 325097
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-18/part-000.parquet",
+      "rows": 4090,
+      "sha256": "F46253731A34343FEB2FF44403435304431C24DAFEEDABF876F99A10E616BE3F",
+      "size_bytes": 395568
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-19/part-000.parquet",
+      "rows": 3688,
+      "sha256": "F9B0A23306589F019F964FD4ABAF83E919076FEB4527A42249DDE9D97CC4C081",
+      "size_bytes": 354246
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-20/part-000.parquet",
+      "rows": 2116,
+      "sha256": "6D809BFD1BBE32F87FC4D3DCF99F80A09DF10027DD5E35F56166F12EFA3D0B2A",
+      "size_bytes": 223078
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-21/part-000.parquet",
+      "rows": 2018,
+      "sha256": "DBF31344105F561A415EAAA58806769DDDA5ACF2C46DDFA610C71AEA3EB8EECA",
+      "size_bytes": 210836
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-22/part-000.parquet",
+      "rows": 1894,
+      "sha256": "C637CC3D0C634944A2CF908243B97EE52B7E51D06D94912B40AE21716DDF0B4A",
+      "size_bytes": 196898
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-23/part-000.parquet",
+      "rows": 1846,
+      "sha256": "5866BBE446023B381FB845670B0C092D8C1C832989479470749E27974AA8B837",
+      "size_bytes": 184329
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-24/part-000.parquet",
+      "rows": 864,
+      "sha256": "B8ABA5597B4F15A71FA999B878572366E61B604460A08CBE907EFD9A132039A6",
+      "size_bytes": 96150
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-25/part-000.parquet",
+      "rows": 1929,
+      "sha256": "B8C815B21A87F3AE091FBC9D8648DF7F53716C8F1543431C2D12F53229ACE571",
+      "size_bytes": 196895
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-26/part-000.parquet",
+      "rows": 1447,
+      "sha256": "36220C0893B745B106226D6E5B474657349F809D054111E53540D67DBC511E54",
+      "size_bytes": 158767
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-27/part-000.parquet",
+      "rows": 2756,
+      "sha256": "65A2E69B9175539A5641E66624DE26D1469936155EE4FC9AEAC8840E8B87C43B",
+      "size_bytes": 270341
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-28/part-000.parquet",
+      "rows": 1795,
+      "sha256": "E9A21DEC078670A0BF0CC17E5662D4261B5B5E9CCB676FB22E3100C7B6B5DC1E",
+      "size_bytes": 187224
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-29/part-000.parquet",
+      "rows": 2634,
+      "sha256": "4D1567D7C042F2CC33AD634130EA784F443599A499DFE3E49A9DE9D5C69F0481",
+      "size_bytes": 262409
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-04-30/part-000.parquet",
+      "rows": 1697,
+      "sha256": "E89E3289626FDC207E335E707618A7F6E83C80339FB17A18E8F082AD26EAD909",
+      "size_bytes": 181264
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-01/part-000.parquet",
+      "rows": 1667,
+      "sha256": "790DF69D3DC9F4355698859DE1BB93B5AEBCDB5DDA333D4ED04F8814953B3C16",
+      "size_bytes": 178448
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-02/part-000.parquet",
+      "rows": 2513,
+      "sha256": "A608DF930ABF1F522E1311F22A77EACE8AC83F8E2D8F0A182C06E4556B102101",
+      "size_bytes": 260636
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-03/part-000.parquet",
+      "rows": 1807,
+      "sha256": "9787628CD467EB477FBFBC56281F32DDE2FA397C586C9A16F2E8AB6AA1180E30",
+      "size_bytes": 187020
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-04/part-000.parquet",
+      "rows": 2489,
+      "sha256": "E2334DC19F9257556F2C123193FF90DF6FBD335890619B5E4012C7D10E850E8C",
+      "size_bytes": 249237
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-05/part-000.parquet",
+      "rows": 1963,
+      "sha256": "47849F19C3DC47611A22BB67DEEA1032B6CEC549669327134FB80A003BF844AE",
+      "size_bytes": 205334
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-06/part-000.parquet",
+      "rows": 2600,
+      "sha256": "0CE8C1EDD4C7A4234C3A71FA7FB9324DE3270C7FCABDB4A0B8B659E50FAED5B9",
+      "size_bytes": 264448
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-07/part-000.parquet",
+      "rows": 2470,
+      "sha256": "81A6B54F3AF05FDC868A06F60ECD7B1A5C759A9D2541A8D6F6074E63FAE9F2B3",
+      "size_bytes": 252560
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-08/part-000.parquet",
+      "rows": 1672,
+      "sha256": "811457B95644A4EF149A69730CD5B1021CC5E6B214E8BF82C6D35CF077E34055",
+      "size_bytes": 177608
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-09/part-000.parquet",
+      "rows": 2197,
+      "sha256": "FE5C89214471A9E9E710B44FB39F55695DEC46E4DBD2AFE688FD312082FF3482",
+      "size_bytes": 225157
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-10/part-000.parquet",
+      "rows": 2151,
+      "sha256": "CD04F36FF06ECD389C3898304DC00E2B6B321512CFF691A9E32A85CFFC0B9EB8",
+      "size_bytes": 218631
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-11/part-000.parquet",
+      "rows": 2158,
+      "sha256": "9B0EEBDFD33DB4434ED9579F2A29F9313BDE200EC9553C7E74C12DE9A15AB99F",
+      "size_bytes": 220695
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-12/part-000.parquet",
+      "rows": 2798,
+      "sha256": "A4DF6121EC808A2464A1858EDB1FEF7B49C04D3DBE6E92BFD6D3E8A52CF5E66E",
+      "size_bytes": 273613
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-13/part-000.parquet",
+      "rows": 2932,
+      "sha256": "B1976DDDE2B7D943D669DE010D804C7BAEC7166777CFB72FA076298088BA5EE7",
+      "size_bytes": 284995
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-14/part-000.parquet",
+      "rows": 2483,
+      "sha256": "34595699EE0B35EE56876AE55BA3EED1347A80B17290C02351BA617ABE4AD3D8",
+      "size_bytes": 246647
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-15/part-000.parquet",
+      "rows": 2435,
+      "sha256": "255BCE1AB3FBBA7362E9CCF2EE0EF3255D60811CB45B10D09D21F881B64E4BB3",
+      "size_bytes": 240203
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-16/part-000.parquet",
+      "rows": 2362,
+      "sha256": "2E6EB227BA511D5E45BEA3DD071302CF1CC1728FE8F6D26ED2B532FC50616A55",
+      "size_bytes": 232652
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-17/part-000.parquet",
+      "rows": 1855,
+      "sha256": "926624EB4086232AE229440FDEF55DB7844B37932AC2FE6E5D12D849E7A0613B",
+      "size_bytes": 188837
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-18/part-000.parquet",
+      "rows": 2032,
+      "sha256": "39F686F94AA5FE63D042E0DEA11190ADA6AF358C8BCFB6BBB7156A69F8E2E6AB",
+      "size_bytes": 204976
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-19/part-000.parquet",
+      "rows": 1995,
+      "sha256": "F9C9DED684457EBF3AB4C2B21165D776898FFB8F54F86A8C5477AC1731A45A7F",
+      "size_bytes": 203856
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-20/part-000.parquet",
+      "rows": 1970,
+      "sha256": "EF2C297F7E5BEC76FA2594E82AE7363552CA47BB86EF2C2A97371AC350B20839",
+      "size_bytes": 205772
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-21/part-000.parquet",
+      "rows": 1620,
+      "sha256": "62E52D91E03CFB0D78C925E4DFB9112498D540FF3B4F14A6FB842D31FEBD26A0",
+      "size_bytes": 171414
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-22/part-000.parquet",
+      "rows": 2615,
+      "sha256": "3E0AACE32047751537E7FA73337556CF28169B904BA1A65B5E4D56CCFD14EC6F",
+      "size_bytes": 260272
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-23/part-000.parquet",
+      "rows": 2028,
+      "sha256": "E9220A530A31C303B6C3D064A43F9F226EE26260DB421AB34A25BA49B7A1C043",
+      "size_bytes": 207874
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-24/part-000.parquet",
+      "rows": 1704,
+      "sha256": "5F1614910FCAE0775E6CE97319765628D43403702E903888C95D94733BB742B3",
+      "size_bytes": 173631
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-25/part-000.parquet",
+      "rows": 1588,
+      "sha256": "B73085DF2128112D3C5AAC23E842FAA98A32A6082FCB96322121EED3026B4D19",
+      "size_bytes": 167258
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-26/part-000.parquet",
+      "rows": 2568,
+      "sha256": "FF0D58B419291CDCAF5A0F1E0D8487CB9B94170B202292602CF3F3FBEE491B58",
+      "size_bytes": 251912
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-27/part-000.parquet",
+      "rows": 2744,
+      "sha256": "7571F0B3841CB86C40088AD7FF0BF8663BD9DCDEC4726E6CD5E13671CE73C20E",
+      "size_bytes": 269066
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-28/part-000.parquet",
+      "rows": 3245,
+      "sha256": "260084DFC2067306953BF6E0285F8691086B63A144B4227FDC445C1ED7A8F3E4",
+      "size_bytes": 315011
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-29/part-000.parquet",
+      "rows": 2685,
+      "sha256": "EE31ABC58EA40420217D29AC7F2270ABDCFE4C1E7FE8017F5CFE17D1801B2AA1",
+      "size_bytes": 271179
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-30/part-000.parquet",
+      "rows": 1486,
+      "sha256": "88A93AE95F9918650637FDD31FD802C022C09CB149B3D9930250ECAB4A7DA676",
+      "size_bytes": 160077
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-05-31/part-000.parquet",
+      "rows": 2221,
+      "sha256": "E3031889873AE38C2D55054404FC2AE850F47F4493F5FC14EDFABEB7C05D32AE",
+      "size_bytes": 227144
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-01/part-000.parquet",
+      "rows": 3550,
+      "sha256": "299382A0648E096C60617FE83FBF85A29EC0DCA309A7379F63A90D506A485004",
+      "size_bytes": 347561
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-02/part-000.parquet",
+      "rows": 4786,
+      "sha256": "3B59EB194D6A6C2C14C6D13129CAB0C5F1B5E19F2FD8B5FE6546A962D56FDE0B",
+      "size_bytes": 464485
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-03/part-000.parquet",
+      "rows": 3641,
+      "sha256": "2B2689AA7AA206327D908314D16153CB9EE4A5761755891EBBED782307BC0B09",
+      "size_bytes": 351375
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-04/part-000.parquet",
+      "rows": 4509,
+      "sha256": "22A082525CA26B5CCB33C24AC867F1AD56A0D7B2986767D0EB708F571493AFE0",
+      "size_bytes": 430227
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-05/part-000.parquet",
+      "rows": 5700,
+      "sha256": "69C5263CC3F579DF9A34A7D88CB31E884EC61E29C8CC07ACE66927D44F4FFB0C",
+      "size_bytes": 538064
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-06/part-000.parquet",
+      "rows": 3078,
+      "sha256": "63C53FBD3DB7D1272075B8EC2793FED367140B995D8ADCCC5926E965D1E12A75",
+      "size_bytes": 302154
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-07/part-000.parquet",
+      "rows": 2344,
+      "sha256": "B175F1D3BF0ED03A2274BF8FA3288CDCFAA250F130B5BF44949E91A574B659B0",
+      "size_bytes": 238741
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-08/part-000.parquet",
+      "rows": 2031,
+      "sha256": "51EF2C21E85A0709431FB154002E2076FF5E4629A6C789AB8796CE8A527F641F",
+      "size_bytes": 211094
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-09/part-000.parquet",
+      "rows": 2770,
+      "sha256": "3258A62A8BCB28B5DEDEE9382FA2EABF6B6C76B53776C6998FF5E1145761F8AE",
+      "size_bytes": 274417
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-10/part-000.parquet",
+      "rows": 3680,
+      "sha256": "38D2245F6F9CE6020ECD69795B1EA52D2CD904A01CB3E4CE56D4E5627BEE97B2",
+      "size_bytes": 358230
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-11/part-000.parquet",
+      "rows": 2496,
+      "sha256": "E460FBD23DB124322DC3B7E9C750596880B8D444899475C34E656EC32BBB8C93",
+      "size_bytes": 259853
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-12/part-000.parquet",
+      "rows": 2699,
+      "sha256": "E36054416A25115179F9B1071286EA3D3111B6A15F3C59AE21E8C12334F913DA",
+      "size_bytes": 264188
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-13/part-000.parquet",
+      "rows": 2758,
+      "sha256": "4C6C924419702DC238F56A3C2491C92E746906B111D82699EEDC0E06D2B057B1",
+      "size_bytes": 264159
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-14/part-000.parquet",
+      "rows": 3264,
+      "sha256": "8DCA72BAD63084F360820B312407EB2708E04E41A52E496B646C44084984EBC3",
+      "size_bytes": 309707
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-15/part-000.parquet",
+      "rows": 3251,
+      "sha256": "63713AC1964D420D44679F994A050242F1A98660CE93E8CF6F42243933A0A728",
+      "size_bytes": 309938
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-16/part-000.parquet",
+      "rows": 2726,
+      "sha256": "45F647131B7537CBCA0B23FA4D4A8CBFC459B18439EDAF2A1712DBE070BC1F58",
+      "size_bytes": 260342
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-17/part-000.parquet",
+      "rows": 3294,
+      "sha256": "2190396A2412A1BE2615A69DA22D15BCBE0CFBD6C585FE2B5DC5F136749E5142",
+      "size_bytes": 313869
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-18/part-000.parquet",
+      "rows": 3521,
+      "sha256": "F6EE5B5415045649721C41F978F738FE85A89B6ED98191968912C5745C63B07A",
+      "size_bytes": 332703
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-19/part-000.parquet",
+      "rows": 3115,
+      "sha256": "824AD9A01F5B1F0E1271769302C7CD588CDA471D3FCF51B5A2D6AFE1A34DC314",
+      "size_bytes": 297520
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-20/part-000.parquet",
+      "rows": 2877,
+      "sha256": "7B385FC4998D144FA9CC057FBD809E3D3C7B3A113F16DEB0D0FB3A43C652875B",
+      "size_bytes": 278868
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-21/part-000.parquet",
+      "rows": 2764,
+      "sha256": "8264C81AA2393567C4609EAC01D2B6FB0F9AD2772A8A1F349C74B3669D19D3DC",
+      "size_bytes": 263100
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-22/part-000.parquet",
+      "rows": 3249,
+      "sha256": "264D052F45740E40F7491732D72AC44D35ECCFA3E0BC5EF15BDDF40733F979DC",
+      "size_bytes": 307995
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-23/part-000.parquet",
+      "rows": 3519,
+      "sha256": "A5C22E7DAED5576622FEA138A2419885E0EB72FD63C733F7D5A64FE12D8BEDA3",
+      "size_bytes": 333799
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-24/part-000.parquet",
+      "rows": 4100,
+      "sha256": "ACC99A4F1C9F72DDC7BA26C63BCEAB3573C7DC0C4977773D7F01FB50E907FED8",
+      "size_bytes": 387802
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-25/part-000.parquet",
+      "rows": 3092,
+      "sha256": "8062FFD4D886B14D58BAB9C42DB33CD80CD5011E6DAA79ED55A859A76836D6D9",
+      "size_bytes": 305159
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-26/part-000.parquet",
+      "rows": 3267,
+      "sha256": "0A3AD6C351FEE5AF92535EBB9F0E9895EFB25DEAAE5D917BE174FFEF5DD6F9C8",
+      "size_bytes": 313565
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-27/part-000.parquet",
+      "rows": 2953,
+      "sha256": "4FEF71B0EBE6DE7174F9B7A8B6F2E01D5FEBA3B17821CBA1C7ECB89411E0BBCD",
+      "size_bytes": 281282
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-28/part-000.parquet",
+      "rows": 2772,
+      "sha256": "1F827A03327A55415D4C410EB73CE1E43F90852709F8270B1D96ADE36FEF6762",
+      "size_bytes": 261901
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-29/part-000.parquet",
+      "rows": 3043,
+      "sha256": "3C3B697D127D901677F67024F66ACC73C88501982E65B2DD9026E8E75D94374F",
+      "size_bytes": 291493
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-06-30/part-000.parquet",
+      "rows": 3590,
+      "sha256": "A3B2B7FE5774D2EB5A793C699C78651C7F0200CC2F3F3D6E233F9B34A2303C3C",
+      "size_bytes": 335742
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-01/part-000.parquet",
+      "rows": 4300,
+      "sha256": "86C78843C9DA09EDBBA5BFA141E697D5810C5FB486630D11E4CFE5F21A396713",
+      "size_bytes": 408867
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-02/part-000.parquet",
+      "rows": 3162,
+      "sha256": "AEDBD0DC34122AA9FF4C0962A05A9AD67314C0882FCA2F64E06C8CECEBCD218B",
+      "size_bytes": 301733
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-03/part-000.parquet",
+      "rows": 2867,
+      "sha256": "F123ED92D4111FFAFE66BFA50C48D7F899647B3748ABC2A011AF82382F44FD10",
+      "size_bytes": 273643
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-04/part-000.parquet",
+      "rows": 2751,
+      "sha256": "4FC16A7C894A4C820D02627E75A44B6B373E6FD1BC49E2E14C9CFE0A55C7FA9D",
+      "size_bytes": 263340
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-05/part-000.parquet",
+      "rows": 2808,
+      "sha256": "B689A7D26678E36E3FCE3B11C66E7CBE954CF29954DAB23B5BE0C90BBFAFA525",
+      "size_bytes": 265331
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-06/part-000.parquet",
+      "rows": 3658,
+      "sha256": "044DC0DEA9B058613557498B70EEB2CE13E16E412ECF14D9391DB429B2EB995B",
+      "size_bytes": 343178
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-07/part-000.parquet",
+      "rows": 4098,
+      "sha256": "06B35629A50517A843C010161E83122185689128F4011427AB50EB5AB23635AF",
+      "size_bytes": 380087
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-08/part-000.parquet",
+      "rows": 3892,
+      "sha256": "D16FDF802C4903F202BF669900C30A21A60ABBD91440AAD3FD7DD2A757AB5FFB",
+      "size_bytes": 361919
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-09/part-000.parquet",
+      "rows": 2497,
+      "sha256": "F2815DE85F8C8199B8225956BAB589F07C4DFD9FECC926FCBD6C0A32C35159F7",
+      "size_bytes": 238541
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-10/part-000.parquet",
+      "rows": 2436,
+      "sha256": "E34689E730F57C0839094D036BBB1AE4ADFCBFBB135A16CC95220EA1F9FD8659",
+      "size_bytes": 232657
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-11/part-000.parquet",
+      "rows": 2524,
+      "sha256": "7267B2EE9B3E3652C0F12CC52AB785CBA31103D84BE7F034C695824EA4C7AFE5",
+      "size_bytes": 239004
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-12/part-000.parquet",
+      "rows": 2731,
+      "sha256": "053953CACF8F25453097A5319D9AF67127D5045C6CE87985507E4F9B8A3CCB93",
+      "size_bytes": 257905
+    },
+    {
+      "layer": "gold_hourly_sparse",
+      "path": "gold/hourly_sparse/date=2026-07-13/part-000.parquet",
+      "rows": 3823,
+      "sha256": "FD3B8180FFF4606A02B25765C4BA7AE9ED8853110C2AE6B01150848DD366CFA8",
+      "size_bytes": 353706
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-06-28/part-000.parquet",
+      "rows": 10187,
+      "sha256": "44AFC7D7B09CAFF608F219E1A7CC5521808511D458AB42849984423D119272B8",
+      "size_bytes": 1125572
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-06-29/part-000.parquet",
+      "rows": 24132,
+      "sha256": "E2DDDBA91D81FD496BE6551C57435BA8E82CED3A93F9DFC913BA23A336245460",
+      "size_bytes": 2453172
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-06-30/part-000.parquet",
+      "rows": 23773,
+      "sha256": "DAF3918CB89C04984B5585567E5E455D803D9598A4550C4BE77EAD3D56E22AAB",
+      "size_bytes": 2456825
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-01/part-000.parquet",
+      "rows": 30716,
+      "sha256": "ADF4CC3CDDD9EB79605D159EABD45DAB7EBCA7DAF7B2E9C77B489CBACCCF6DDD",
+      "size_bytes": 3086377
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-02/part-000.parquet",
+      "rows": 26623,
+      "sha256": "EED72B7BC3F5ECDBFEFD9C9FB00F934889749BE4F6144199D132A136622F0812",
+      "size_bytes": 2718696
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-03/part-000.parquet",
+      "rows": 25072,
+      "sha256": "21A1F7224DCBEDABC73E696BAB5639B82EC731D134885A6E31110E3EAE01588D",
+      "size_bytes": 2631395
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-04/part-000.parquet",
+      "rows": 29320,
+      "sha256": "190EBCA03F9FFAEB04D654EA7C5A0AF8638B61258C604103E8265CD919BBC0C2",
+      "size_bytes": 2989026
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-05/part-000.parquet",
+      "rows": 19080,
+      "sha256": "8D40F68CC18E26F0BAC9D4EEFC3DC9E2E1E31EBFC642BA612D475E4B7D137821",
+      "size_bytes": 2003304
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-06/part-000.parquet",
+      "rows": 18540,
+      "sha256": "5FA2CEE33F503061042070535EE77025B3BD8A7CE21E900582CD096B26BEEAD3",
+      "size_bytes": 1962164
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-07/part-000.parquet",
+      "rows": 20615,
+      "sha256": "71887D109FDD1F97B35939A7BA77CEEE0EF031BB55AFD19B93DBFDAB4E032877",
+      "size_bytes": 2157343
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-08/part-000.parquet",
+      "rows": 21535,
+      "sha256": "FCA82CB963181FC36CDAD5142DBFE6ADC6D35C739E20E0088AE8216D7A2006D9",
+      "size_bytes": 2217700
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-09/part-000.parquet",
+      "rows": 32925,
+      "sha256": "E0C29FCE3C0B5A7F6C7712414FEE1E54A6274EE84DB3032FE09F9CEF62D2BCB3",
+      "size_bytes": 3231029
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-10/part-000.parquet",
+      "rows": 59091,
+      "sha256": "0414E5BEF6224A87A3DFA305959C59598E4936B02E79BAAB86E3F4748FAD27D6",
+      "size_bytes": 5557263
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-11/part-000.parquet",
+      "rows": 65247,
+      "sha256": "CE71ADDA65ECB8686A6B9D8F39A0FEA7AD49B03954E38D6B7C7EFA22763CDED0",
+      "size_bytes": 6270232
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-12/part-000.parquet",
+      "rows": 38637,
+      "sha256": "72E516FE04C6C0CDE54AAC6452A058289C1B54CE7560485FDB76ADADC9E4D89C",
+      "size_bytes": 3813319
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-13/part-000.parquet",
+      "rows": 30885,
+      "sha256": "9C5EDA98C6857375BD9C83E39144A3B489F8C26C6F6E42D61D615CD54AFC014A",
+      "size_bytes": 3145710
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-14/part-000.parquet",
+      "rows": 35193,
+      "sha256": "5FD2DC7A25130BAB7647EB50CEC01C729DEEFB57722B78BDD5A150C301C11EB7",
+      "size_bytes": 3579832
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-15/part-000.parquet",
+      "rows": 37653,
+      "sha256": "A1E8D7D98996E4711409A7E7D7472EF0299B503596447E4336ADD9B63AF00712",
+      "size_bytes": 3816304
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-16/part-000.parquet",
+      "rows": 33196,
+      "sha256": "D3E4AD1CA3FB8954F221A6318DD7AEA1FFF5B7B464E8A96A8FA25FE30D25DFA4",
+      "size_bytes": 3449712
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-17/part-000.parquet",
+      "rows": 47477,
+      "sha256": "3B23EB467E61A6787CE28EECF48A59F227C10D3B788ACAB81283455CC52F685D",
+      "size_bytes": 4802567
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-18/part-000.parquet",
+      "rows": 56268,
+      "sha256": "8ABFE9F000C75CCACB2AB9EA32788814BF0A51C654FCAA1733CFDEC718922847",
+      "size_bytes": 5613322
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-19/part-000.parquet",
+      "rows": 25857,
+      "sha256": "912615B62007EEE8CBB95D61C1A05E238E42DBC23C848815A2512600759929D5",
+      "size_bytes": 2686401
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-20/part-000.parquet",
+      "rows": 36898,
+      "sha256": "AAF1D40DC8DC6BD9C8EBA7B840B883A7E296B0B51DA2733EE0F351288D769599",
+      "size_bytes": 3683182
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-21/part-000.parquet",
+      "rows": 35499,
+      "sha256": "28ADB13B4C74884680C698A7D2987538B37D97F380020EE45F993A4D734755C8",
+      "size_bytes": 3556056
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-22/part-000.parquet",
+      "rows": 37931,
+      "sha256": "AC38A93351AD973DBAC9ADC9319E1B6E0249B0D2BD1FC462CB7086CEBA212374",
+      "size_bytes": 3808661
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-23/part-000.parquet",
+      "rows": 52193,
+      "sha256": "A13FA7CE76E64D5CACB1FF2A037386DAC48A5C1BE229A2B8861C11F757D95C77",
+      "size_bytes": 5192800
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-24/part-000.parquet",
+      "rows": 45047,
+      "sha256": "7FDC2C54AC75BF670C7A37DA74766C75629F6835FD92B4DE8272B970CAF15F8D",
+      "size_bytes": 4437880
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-25/part-000.parquet",
+      "rows": 32667,
+      "sha256": "CC89E2C93C3B936E6FB2490E9D15CE92B4AAEC58A5093CA5E59E993AFB36D59D",
+      "size_bytes": 3236012
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-26/part-000.parquet",
+      "rows": 15851,
+      "sha256": "243F6B1B6BDAF3A0CA9DD182F954F510EA95D97B9C66C1E1AFFB9CB8794C932D",
+      "size_bytes": 1658629
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-27/part-000.parquet",
+      "rows": 22909,
+      "sha256": "B889CB99EA9195B1C629F93CEB4858BAEEA11676CDFF3B1E37E7AE03F53A8526",
+      "size_bytes": 2330601
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-28/part-000.parquet",
+      "rows": 39699,
+      "sha256": "128760AED0D6A231BCE490B96CFC776629B7349B54321BF36EFEBEDAF3AF5BBE",
+      "size_bytes": 4067536
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-29/part-000.parquet",
+      "rows": 35919,
+      "sha256": "52B80B0340747938D826591D99B75462FF5DB630B1B46E70B0B75DAD47B7FAB9",
+      "size_bytes": 3666582
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-30/part-000.parquet",
+      "rows": 34781,
+      "sha256": "B49ADB1D54D9A29F81A571C67FE3114D6AFBD14D928C83A9BD238346C4E5A6A1",
+      "size_bytes": 3491669
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-07-31/part-000.parquet",
+      "rows": 29099,
+      "sha256": "467D2CC2BCE4DBC5DD0DA470FFD902E6B61720771016C7D8DC5A60E15B02D26C",
+      "size_bytes": 2946324
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-01/part-000.parquet",
+      "rows": 47313,
+      "sha256": "D4626B76E08C9261A5D2FD220ED56A915E46DDC2F8DBFA59846F6E2FB9BE75E7",
+      "size_bytes": 4625774
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-02/part-000.parquet",
+      "rows": 29101,
+      "sha256": "A31CEA17B86B806D8474A8647A4BDED5FA8AD0184263D8A9EC9CFD8470A2C721",
+      "size_bytes": 2911504
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-03/part-000.parquet",
+      "rows": 13179,
+      "sha256": "613C360E74A871A27BEB0F49F1C4089D2CE64E9E777350D9075DB1E945F7869E",
+      "size_bytes": 1372509
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-04/part-000.parquet",
+      "rows": 22305,
+      "sha256": "95823D8E32092903A3C432D98FF88E5E2FD45CC70362C10E72176EE35913FE5A",
+      "size_bytes": 2225238
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-05/part-000.parquet",
+      "rows": 38932,
+      "sha256": "336095F0FBB7D4D812F1C8B4FB93638D8C3A5D0EE42A6734E0E55FAEAEE99C31",
+      "size_bytes": 3775421
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-06/part-000.parquet",
+      "rows": 18703,
+      "sha256": "725DEAE02A3749292652ACBFE46C911781D8F9BEBD4553ECDEA0FF41735DAB4E",
+      "size_bytes": 1984809
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-07/part-000.parquet",
+      "rows": 27758,
+      "sha256": "53211EFA6FF57C44B235D943F5D1219669B32FE7E7035F04FD47FEA56BD388A6",
+      "size_bytes": 2877723
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-08/part-000.parquet",
+      "rows": 24166,
+      "sha256": "464DD86BD6E29EF812A574D3DAF61C8A6A5BE3B5DA542E61F0CAEFB2571AC9D6",
+      "size_bytes": 2530729
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-09/part-000.parquet",
+      "rows": 29695,
+      "sha256": "4B9EF23F5DDA83186A96102EFE1FAFAE6C23110F28080BB7CD2F9703E5A74195",
+      "size_bytes": 3023843
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-10/part-000.parquet",
+      "rows": 25440,
+      "sha256": "041D567DFC5F07418B47D535E5369FBCD254273FD4816D0896EC19F8A14664B9",
+      "size_bytes": 2610689
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-11/part-000.parquet",
+      "rows": 37730,
+      "sha256": "06B84222794A1B5DC2A20BC0D233A7604E2E69F21C0905BEDC5C4040DAE670AD",
+      "size_bytes": 3815223
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-12/part-000.parquet",
+      "rows": 27970,
+      "sha256": "CD782099D9F13DB4278F5E94915D205A2EDFD02FC83504BCA79019D1DF0B473A",
+      "size_bytes": 2809650
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-13/part-000.parquet",
+      "rows": 26901,
+      "sha256": "279DFD2B8931ACE38959D127F705BE02E215F5FDA2C819C539C4BBB56F0A9746",
+      "size_bytes": 2694344
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-14/part-000.parquet",
+      "rows": 50507,
+      "sha256": "76977984BE0FC98215DE908AA3C7C50F16DF1E7EA4C6B477B06BFB9B1899F693",
+      "size_bytes": 4963867
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-15/part-000.parquet",
+      "rows": 25815,
+      "sha256": "3063DC74EFF09EED1E48F58820AF723687245D09C00665F3A27268FB2B233118",
+      "size_bytes": 2599640
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-16/part-000.parquet",
+      "rows": 15047,
+      "sha256": "451C92E7386B935336840FD2FD5E166FFC01D01BFD599D5C52736F30F3CC57FF",
+      "size_bytes": 1548888
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-17/part-000.parquet",
+      "rows": 18841,
+      "sha256": "A3D0359FEDC95EA27411F52BB6EDD7AA5020708F1DBE421FD1176715D88DABE0",
+      "size_bytes": 1941657
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-18/part-000.parquet",
+      "rows": 32208,
+      "sha256": "05699FAFF6767A3DA055F57A1AFCDC9B1374859926E663DF9A096F036C808DC8",
+      "size_bytes": 3191057
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-19/part-000.parquet",
+      "rows": 42204,
+      "sha256": "5E7B2C5BBA6D1554343F4DE8363DDAC323F2536BF606D4CBBC1376F18AA08E08",
+      "size_bytes": 4155830
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-20/part-000.parquet",
+      "rows": 26511,
+      "sha256": "FFF845D63BFC27671CA9D0906C8F05B23D33A2A8AB631B1BFD2335CB222869E1",
+      "size_bytes": 2699365
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-21/part-000.parquet",
+      "rows": 20570,
+      "sha256": "9A161CC15D15AED31BAF506047991D26343F7FBE151875B4141B48D6E621F13B",
+      "size_bytes": 2120020
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-22/part-000.parquet",
+      "rows": 42941,
+      "sha256": "B0C907EE1FA5E4F0818344F1B1DF84F4A091D93D646B4EA6FC7DA93DEB1C64A7",
+      "size_bytes": 4281325
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-23/part-000.parquet",
+      "rows": 26581,
+      "sha256": "31E592543B073D5DBCB7D2000ACF8FC0E0E8E8F26DFF1224E1C6DDAFCCF7FE79",
+      "size_bytes": 2707998
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-24/part-000.parquet",
+      "rows": 33165,
+      "sha256": "4818F2CE4EF33D432B955D7C3D60CD4B4D245FDDA09F0F0A106072C14BABA40E",
+      "size_bytes": 3368098
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-25/part-000.parquet",
+      "rows": 48687,
+      "sha256": "072EF8F760B257D72125DA0092F654549314F8C202F48FCE16E321704ECE2213",
+      "size_bytes": 4813609
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-26/part-000.parquet",
+      "rows": 19825,
+      "sha256": "8990F5C851FCE084F00223A13C4E67C5DD9330FC8FFDF992B153ED44600F268F",
+      "size_bytes": 2044551
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-27/part-000.parquet",
+      "rows": 25753,
+      "sha256": "F526B376280EC02A69BD184A16ECDB342E31D0F2E800339EC7ED208F48674A1B",
+      "size_bytes": 2639894
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-28/part-000.parquet",
+      "rows": 21342,
+      "sha256": "B4D3EC88675919F85A5D832ED2E1849E4B61144A7C6D31B729D207CAA7515834",
+      "size_bytes": 2192955
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-29/part-000.parquet",
+      "rows": 33520,
+      "sha256": "A8984EEB578F048BB5717B07D2578206DF9D658F503D7D3CA2EF5BC77D569DF2",
+      "size_bytes": 3411174
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-30/part-000.parquet",
+      "rows": 17288,
+      "sha256": "3673DDBDB7F2C0818AD59303FD10981237334E83FD77DE8F874BE719212C8176",
+      "size_bytes": 1822301
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-08-31/part-000.parquet",
+      "rows": 20938,
+      "sha256": "B6DAB64D4EC496442137D6DA03866FAC161C41BD87102566CACFF61A81B93492",
+      "size_bytes": 2194316
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-01/part-000.parquet",
+      "rows": 41706,
+      "sha256": "73CE81DA3994756C3766492705B543BBDDCA02E1AB18A643DF3585477E103963",
+      "size_bytes": 4185518
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-02/part-000.parquet",
+      "rows": 24494,
+      "sha256": "A84FAFA00F67641FBF92A4C7E53F8807B58937D697DDD1B5F7A3AD8DFD375D35",
+      "size_bytes": 2462744
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-03/part-000.parquet",
+      "rows": 19831,
+      "sha256": "646E3C0349A3628E353F2FCCD56618F9BF398FB209D4F86C1417160575E37543",
+      "size_bytes": 2045945
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-04/part-000.parquet",
+      "rows": 26855,
+      "sha256": "29CECD07CEC5D27BE5DC6AD119587B6507C1120FB4DF28EA1529979E6E8B545B",
+      "size_bytes": 2673123
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-05/part-000.parquet",
+      "rows": 18271,
+      "sha256": "C883C3612EC4E7F8556281C75C2CA1D3468CAD1E2B88CB8B091BE19D6EE1055C",
+      "size_bytes": 1861029
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-06/part-000.parquet",
+      "rows": 14289,
+      "sha256": "2E155A8A118E2FFDBCE7B20EFFE5F0E721AFCD79F30BFAA6E901860BD69B13D0",
+      "size_bytes": 1464509
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-07/part-000.parquet",
+      "rows": 17243,
+      "sha256": "F50AAC352C636A8DE41A435728953A89FECAA0F88A9581455834FD45D8780E41",
+      "size_bytes": 1755955
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-08/part-000.parquet",
+      "rows": 33303,
+      "sha256": "74DD3681248E45725E0A0C8E1CD223529029444605AF3A069B28F8D85844A040",
+      "size_bytes": 3185195
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-09/part-000.parquet",
+      "rows": 33287,
+      "sha256": "B9AD1EB21B0C2052D1B613BC953F78A83913AAB162B4F6943131862B34FF47C6",
+      "size_bytes": 3292449
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-10/part-000.parquet",
+      "rows": 36839,
+      "sha256": "C33743A41125FE7902DE31BD838A45AACDEB1D9A46DC8477DACCE74DB0ED9279",
+      "size_bytes": 3491262
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-11/part-000.parquet",
+      "rows": 27420,
+      "sha256": "D46978EED8A4CCC495194FFB334539CE0C6C8F47764D8B388ED0D851C2385DB3",
+      "size_bytes": 2755186
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-12/part-000.parquet",
+      "rows": 36856,
+      "sha256": "3A17BB6A148A88FF853A4AD9C1343DCA05F3F6190D48BC0BD68C033D20A6B128",
+      "size_bytes": 3582250
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-13/part-000.parquet",
+      "rows": 31524,
+      "sha256": "08C681E8D2662191A6C1D0743BBBEFD29121E3333FA75CCF63D17B211173BB1D",
+      "size_bytes": 3191802
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-14/part-000.parquet",
+      "rows": 34804,
+      "sha256": "DF195E647774083D603DD9ED2FBBCC51099BE84BDE438EB2A285291A92D591EC",
+      "size_bytes": 3496474
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-15/part-000.parquet",
+      "rows": 41609,
+      "sha256": "C851684859DD1DC71F79BEE1F5762565D6B7BB914304B696AD010A2409B0813D",
+      "size_bytes": 4157205
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-16/part-000.parquet",
+      "rows": 20798,
+      "sha256": "44AAC76DD5FC5F9E4491FAEDC568CBF6D5A56C32FFF8FE4C92450B4BFAD1A685",
+      "size_bytes": 2150841
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-17/part-000.parquet",
+      "rows": 27963,
+      "sha256": "B4AF630B09AB5682100803F5F63B35C9590E6E464B83F63D8ACBAEBAF325EE8B",
+      "size_bytes": 2825203
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-18/part-000.parquet",
+      "rows": 26989,
+      "sha256": "DC91A7E009007964D163846E060EFFABA1D0B9EDAC7ABD93B06E068C3502A83F",
+      "size_bytes": 2708933
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-19/part-000.parquet",
+      "rows": 31649,
+      "sha256": "1D9F3E14D85A3703B183BC9677B9076B63C23C08A167154CD6CEEDEC708F6C9B",
+      "size_bytes": 3149301
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-20/part-000.parquet",
+      "rows": 24772,
+      "sha256": "40D5C25C75CF492F97DABBEBCDF7CEB7B2255BFB79B9F8D5BB1841CC39E1FB9E",
+      "size_bytes": 2459921
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-21/part-000.parquet",
+      "rows": 38511,
+      "sha256": "72A45F71C39E2555D2DFA09658E413F6A9666956AB95EF7A26210D4F06F26717",
+      "size_bytes": 3801236
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-22/part-000.parquet",
+      "rows": 69634,
+      "sha256": "218C8BE3E8B8DDE080F231B22C2581B950E024267E9D9929A62FA9FE550CDC80",
+      "size_bytes": 6783263
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-23/part-000.parquet",
+      "rows": 39558,
+      "sha256": "B773A7F94B68C90FEC8B1D09BF876DF3B29A78296952B9C23D5D1C56E072801B",
+      "size_bytes": 4030960
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-24/part-000.parquet",
+      "rows": 32215,
+      "sha256": "594CA9BA1370EBAF1CA77220968698A48F022B723D399F294CB484DBD71D5E3A",
+      "size_bytes": 3264108
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-25/part-000.parquet",
+      "rows": 60230,
+      "sha256": "17E8E4EE6FBBE8273D1FA89864EB4442181972FB1370C14C281F65B8B5CEC087",
+      "size_bytes": 5923155
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-26/part-000.parquet",
+      "rows": 34575,
+      "sha256": "1558CC0152E59EF4FDE14CA2613C7F0E020AEBAE26BA687232BB38747682AC65",
+      "size_bytes": 3499456
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-27/part-000.parquet",
+      "rows": 29835,
+      "sha256": "20446C3460F9CAA9B89588026EDC839B2A038D91D16413DBA045383092EC2FD1",
+      "size_bytes": 3093065
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-28/part-000.parquet",
+      "rows": 28770,
+      "sha256": "586FEC539E111BD3E7102F11B8545ED66F4B1CFCFB023DC3438AD5D06F103A69",
+      "size_bytes": 2937316
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-29/part-000.parquet",
+      "rows": 34355,
+      "sha256": "6D8C0E67282636EBD6C6BAFC4B6568EBA3620F622C46918F091D9C882375DEC6",
+      "size_bytes": 3496458
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-09-30/part-000.parquet",
+      "rows": 44359,
+      "sha256": "F382FFC1FE0CF717F6304AF7F4BF6A18D9789F0980824A641E953C2D34085F7D",
+      "size_bytes": 4407442
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-01/part-000.parquet",
+      "rows": 32971,
+      "sha256": "FC34E511AE798FEE3DD2C726CE0BD65628DDA991FECFA0F864F079F571BEB77D",
+      "size_bytes": 3164633
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-02/part-000.parquet",
+      "rows": 42671,
+      "sha256": "FE435777A6268BC7F29D4FEE53BC7AE88CAE4CBA354CF0D20390664CACD33843",
+      "size_bytes": 4233637
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-03/part-000.parquet",
+      "rows": 39010,
+      "sha256": "C9E212D72A83F908E3485D49DE9534E2BF443C152E801191FE2F65558665BBFC",
+      "size_bytes": 3971514
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-04/part-000.parquet",
+      "rows": 37396,
+      "sha256": "7C010CA06A595F1B488664C8CC2BACCF6F31FC81A48EB4F50491E5EE7D7DB656",
+      "size_bytes": 3814601
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-05/part-000.parquet",
+      "rows": 29985,
+      "sha256": "E78AB7AD93558DE590BC0E0CC5740B052E75A5E711024F693FD71114743A331C",
+      "size_bytes": 3009839
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-06/part-000.parquet",
+      "rows": 46016,
+      "sha256": "58B7B421B4FF0C744A38E44E32501A4D0A5FEE33D6D9EA82800C9358F303D261",
+      "size_bytes": 4604523
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-07/part-000.parquet",
+      "rows": 49678,
+      "sha256": "1D8E24BB69579B801516511A1CCD8A152B2F378535A7CAF3BE32D923C7667E9A",
+      "size_bytes": 5072628
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-08/part-000.parquet",
+      "rows": 40967,
+      "sha256": "E38271B0313D0162D6ED194B0DA0E14B02614C0E257E449DE8731BB591E82360",
+      "size_bytes": 4200164
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-09/part-000.parquet",
+      "rows": 54419,
+      "sha256": "5540F19F11DE565F9CC9AE7382224F153BA579C77F788AB234905CA89225EA30",
+      "size_bytes": 5428482
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-10/part-000.parquet",
+      "rows": 181643,
+      "sha256": "2EE1737DECFA3BD912458E30D8CFDEA887A35C752808CD739531C29B146BC7C6",
+      "size_bytes": 16310967
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-11/part-000.parquet",
+      "rows": 60191,
+      "sha256": "2D4093F8BCA2B309DB42096F95EADCEE63A6F8F4A9A30B5FF64886A0C4261F5B",
+      "size_bytes": 5953752
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-12/part-000.parquet",
+      "rows": 50960,
+      "sha256": "1C1D7BE910A80232685BC012F5E90081285FF7E3CF014558C9E66EDF257C6CF3",
+      "size_bytes": 5012726
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-13/part-000.parquet",
+      "rows": 48764,
+      "sha256": "A7131F53920DF59915CDF70132FA06EBBB07673E51E956AEFF40069274A5EECD",
+      "size_bytes": 4883995
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-14/part-000.parquet",
+      "rows": 63013,
+      "sha256": "C10CDE3C9403505F26E34ABF0D1660FD9A0BA5FE768FC83BBDCF44335D750C7B",
+      "size_bytes": 6134868
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-15/part-000.parquet",
+      "rows": 52874,
+      "sha256": "FA33BF606BF7E0BA15EFB44DD40A29E8583415D05FA83C3A7C7C3728C8EDD111",
+      "size_bytes": 5310672
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-16/part-000.parquet",
+      "rows": 56890,
+      "sha256": "21D9F3B74ABE7D4B8651FC3A9E66127929711FE44B962A6C96D6B69248E8AF0F",
+      "size_bytes": 5677195
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-17/part-000.parquet",
+      "rows": 61696,
+      "sha256": "D45EEE10854856ABE4FC71911975ED3E4DA7DCC045AD3D6894C7675B3EB76421",
+      "size_bytes": 6028931
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-18/part-000.parquet",
+      "rows": 31167,
+      "sha256": "39B3533941E5D2F4E8121BA1D42236E513028101A1CCB7F2A861919C7D75CEAE",
+      "size_bytes": 3137929
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-19/part-000.parquet",
+      "rows": 32633,
+      "sha256": "9E75F0A044B97FA2E4A5650D41DAA7783347DA08177D35C5EAFE8B0A690B24BD",
+      "size_bytes": 3328055
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-20/part-000.parquet",
+      "rows": 32955,
+      "sha256": "ED87D40C8D4891ECA0C261E5AA70651C1A3A6E8245408902B05FCBE1DD8ADA56",
+      "size_bytes": 3350931
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-21/part-000.parquet",
+      "rows": 54013,
+      "sha256": "92A840356EFBB6553CF271C8A64908CB3BC7604A5083CE42841A3AEE47F67631",
+      "size_bytes": 5375435
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-22/part-000.parquet",
+      "rows": 40519,
+      "sha256": "5708FA0468FB6CA052296BAD01968026DB21EB066D2108811502FD7C5274B98A",
+      "size_bytes": 4068210
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-23/part-000.parquet",
+      "rows": 30680,
+      "sha256": "0ADCADB67D76A8D1979D2A00863CB46BB68B3484E327C4E64D6D377F4AFEF736",
+      "size_bytes": 3053421
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-24/part-000.parquet",
+      "rows": 34044,
+      "sha256": "A99DCEF51CAF406C35C3D2F7CFA990440090BC6E47D5B1EB3EF7F3224A417445",
+      "size_bytes": 3398765
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-25/part-000.parquet",
+      "rows": 31944,
+      "sha256": "F6AE9688B13FA3B0550DB32DC77F37F1FD21F2A521EA54957B7652E6C5420602",
+      "size_bytes": 3192300
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-26/part-000.parquet",
+      "rows": 29686,
+      "sha256": "1730923A4E9A517C04A0451D788406E1A26964C265A00D069E7E7AAB6E2E0F31",
+      "size_bytes": 2939765
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-27/part-000.parquet",
+      "rows": 41465,
+      "sha256": "BC8C597EDDEFB1D94407A088FA6ABF7AD3A57B6C819B9BC3CED03E349581487B",
+      "size_bytes": 4146092
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-28/part-000.parquet",
+      "rows": 40586,
+      "sha256": "7EFE93E9AEEC6FB99E3C280DC597494F603753E794F13671049DBCCF6067A7BE",
+      "size_bytes": 4066739
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-29/part-000.parquet",
+      "rows": 35707,
+      "sha256": "1B074F4F0705D0CC94D86636EDC253E0C6B88E7C3AAEC1BDC179D1F188178250",
+      "size_bytes": 3497067
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-30/part-000.parquet",
+      "rows": 64684,
+      "sha256": "130724A63AB7EB3928CE3044845519727EDADD1502BA53DF7B8A04CF473CF58C",
+      "size_bytes": 6241202
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-10-31/part-000.parquet",
+      "rows": 33518,
+      "sha256": "C1F7B0602EE5EF9BAD96111CFC902AD0E7A527D459AF5C99A0FA1F7EAE68889F",
+      "size_bytes": 3322286
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-01/part-000.parquet",
+      "rows": 23861,
+      "sha256": "DAD411EBC3698313E98AF4D0FCA7CF8E5C2F937C7B7A80C37CD4D1AFF8981D58",
+      "size_bytes": 2423909
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-02/part-000.parquet",
+      "rows": 31051,
+      "sha256": "ACFB5EC0E054C5A993C3A3D2F3DF51519C5EF1E76319CC8ECD23408324776E29",
+      "size_bytes": 3034143
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-03/part-000.parquet",
+      "rows": 84468,
+      "sha256": "B282C1420AC5663191C4E4974D134995C463CE2F0D38AB4E15205D9E1BD467BF",
+      "size_bytes": 7946097
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-04/part-000.parquet",
+      "rows": 112873,
+      "sha256": "57ECCC77BEE5DAE52EEF838B955280EAACFABFCAE1BE0B0F50F3035A7C54F6E7",
+      "size_bytes": 10441630
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-05/part-000.parquet",
+      "rows": 52439,
+      "sha256": "1E8195F3A7CD4DFFD5062913A790105BF968A17BBED6E13572AF1FC99CA99E71",
+      "size_bytes": 5103061
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-06/part-000.parquet",
+      "rows": 52502,
+      "sha256": "4CA6166FB52C8A8BC6CDE07C717A6E6765C7AABA9945A98C6D52536B8121DBC5",
+      "size_bytes": 5105806
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-07/part-000.parquet",
+      "rows": 71953,
+      "sha256": "00C11BCACB8179A09343014307C2FAD42B2B94543327AE5F9D04372E91F2A484",
+      "size_bytes": 6863973
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-08/part-000.parquet",
+      "rows": 42652,
+      "sha256": "1FEB89A1D5E71F24FCE2F318BA2C197EE86F2CE54338F0ED8DA661801EAA82B0",
+      "size_bytes": 4145970
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-09/part-000.parquet",
+      "rows": 37499,
+      "sha256": "9100C15A76E0D410E5C08A5AE32E83728A726317979D8C6D33B603D8E20AC162",
+      "size_bytes": 3659046
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-10/part-000.parquet",
+      "rows": 38633,
+      "sha256": "96067FAD0811ED7BE49CB59CD45AC07EBE82EFE2D7B1AA41426A9CAE951EEB39",
+      "size_bytes": 3886092
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-11/part-000.parquet",
+      "rows": 44231,
+      "sha256": "ED3A2C225BFB5AB49DF292D4FD9580A70AB2655B90576BC67848FDEB6152DDD8",
+      "size_bytes": 4352984
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-12/part-000.parquet",
+      "rows": 42467,
+      "sha256": "9C01707A681730E1223FFDD5480657B8EAB6FDB1A81496B830F5499A4F62E9A1",
+      "size_bytes": 4119943
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-13/part-000.parquet",
+      "rows": 55605,
+      "sha256": "1F65CB248E14DF9458010088FFA1A8DDC44B3F5B73B82072D642DEDC86E3F946",
+      "size_bytes": 5365362
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-14/part-000.parquet",
+      "rows": 53777,
+      "sha256": "59CA15BAAAB1D6BEC06C180A111B4EA3489D96BCC560B0CBBECFF1564C8442A3",
+      "size_bytes": 5207340
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-15/part-000.parquet",
+      "rows": 24029,
+      "sha256": "D04DD60A1F3D526E78C488DFD1C822ADDCDF61AF7DF14EC236A21A6759195D46",
+      "size_bytes": 2402157
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-16/part-000.parquet",
+      "rows": 37270,
+      "sha256": "B94E806E7AC9CFA9335EA422CD31D1EE86208FE4E300ECE30075362043BB0746",
+      "size_bytes": 3653675
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-17/part-000.parquet",
+      "rows": 39158,
+      "sha256": "A1E09A3B699E3567AEF6C2F37530591DF7CD9A9AFD0F829EDE7DE8E471CDB336",
+      "size_bytes": 3869576
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-18/part-000.parquet",
+      "rows": 29927,
+      "sha256": "F27040E7FE8D666F79229ACB5488622897D4DDD66088D7A88B5ADD4CF4BC1352",
+      "size_bytes": 3001363
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-19/part-000.parquet",
+      "rows": 41201,
+      "sha256": "7D1C603FFA016D71C679D25F8F41CCE7CA5C4B6DC748DFB9CEA747421EC6710E",
+      "size_bytes": 3969973
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-20/part-000.parquet",
+      "rows": 55026,
+      "sha256": "690AE1C3FB94E4D0D37282803061B84665D74FE8B57A67743A57D198930EED30",
+      "size_bytes": 5326004
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-21/part-000.parquet",
+      "rows": 68563,
+      "sha256": "EA544C0AD2357617A9F6E76A986BD538FFD5DC248C2A9CAB2D0F450A49F304BB",
+      "size_bytes": 6604217
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-22/part-000.parquet",
+      "rows": 32030,
+      "sha256": "D3F9C140E88D0BFBAEFCB3FC311FA983062B03C1CFDA357E6F2C06ADE42910AB",
+      "size_bytes": 3120889
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-23/part-000.parquet",
+      "rows": 27293,
+      "sha256": "5E4AABD4B20DFC6B15904D520676D80950EE473B5A8DC532BEDD6155F229BF51",
+      "size_bytes": 2720385
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-24/part-000.parquet",
+      "rows": 27860,
+      "sha256": "601C91223062067F8951154478CC361DADA6AA1CCB000DA56874D2A65583D36D",
+      "size_bytes": 2822195
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-25/part-000.parquet",
+      "rows": 25756,
+      "sha256": "CBCBA48D6B992384D71CE2DDE8C6BEC6F36C8075F9CE270D79D9153D0694F664",
+      "size_bytes": 2593328
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-26/part-000.parquet",
+      "rows": 29181,
+      "sha256": "B9D909E669F095D486D08BB2582F481A54ADFD37ABBB64E0F2988F7232758E92",
+      "size_bytes": 2958159
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-27/part-000.parquet",
+      "rows": 24668,
+      "sha256": "49DEF3CD40068781BA7183A06B0DB90928B4EDCDE85E678301FA1BDC4A62B8BD",
+      "size_bytes": 2520436
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-28/part-000.parquet",
+      "rows": 27192,
+      "sha256": "12ADBF346B87274EB970CBE71DBDC58E9FF90B24720E6F6AA9F749AFEDA65481",
+      "size_bytes": 2759529
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-29/part-000.parquet",
+      "rows": 18317,
+      "sha256": "F25685CB9F0DBE06CA7642B9C3B5BB2444D79A9A6FA025445350753567ABAEB4",
+      "size_bytes": 1888785
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-11-30/part-000.parquet",
+      "rows": 24396,
+      "sha256": "93CDAF31ADFE5B7D4B97B4FEDD3196414A46E1678006B11E68B9D53C87A7421E",
+      "size_bytes": 2434242
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-01/part-000.parquet",
+      "rows": 60769,
+      "sha256": "D3A251E35B65C7BF8C0A0422A03A5AF46AB8AB5B91EACB7CD8413D12DBEF87D2",
+      "size_bytes": 5732664
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-02/part-000.parquet",
+      "rows": 23736,
+      "sha256": "EE7FA35C2FC5201AFC75473A5D70FCCFE7D35640F888C40056C34438B51DD01F",
+      "size_bytes": 2408474
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-03/part-000.parquet",
+      "rows": 26916,
+      "sha256": "4F239143A57C4F4CFAAB647962D6CAC8B8D65B4946B63B1C33FDCDD0FFD1AD55",
+      "size_bytes": 2653240
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-04/part-000.parquet",
+      "rows": 22949,
+      "sha256": "6715A6D5AB59C08597FD84365679D1C5B798C360A7E8F6D59CF5AE429692B852",
+      "size_bytes": 2313029
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-05/part-000.parquet",
+      "rows": 33384,
+      "sha256": "A54EC1C06F48E8BEB6B49E3728A96ED05E4F707209587F15D03136AD720AFA09",
+      "size_bytes": 3328733
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-06/part-000.parquet",
+      "rows": 23928,
+      "sha256": "2CEBBB1C60A7735B9224C562D892DAB9ED89D19C5576F6CAEA88F78EDC028871",
+      "size_bytes": 2427138
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-07/part-000.parquet",
+      "rows": 31809,
+      "sha256": "49F2CC15F5D5FE7E8F67396A58561EF3A6400C2B664417B06B486ADFE1A0FF46",
+      "size_bytes": 3181725
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-08/part-000.parquet",
+      "rows": 20724,
+      "sha256": "5BDDEEAA678A30ABB2A14A01696AB07530FDB75D995A54016CC052EF0CCE9C54",
+      "size_bytes": 2165419
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-09/part-000.parquet",
+      "rows": 28053,
+      "sha256": "60033F9A806F90A53DDC49453DB3955BDB4A31AAE96ACD72DE22087B363D2AE4",
+      "size_bytes": 2807797
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-10/part-000.parquet",
+      "rows": 26133,
+      "sha256": "7D153FC7D42997A4F189406D9B32BC0E9A57299EC203E59FC1A2043D725770C5",
+      "size_bytes": 2648129
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-11/part-000.parquet",
+      "rows": 37218,
+      "sha256": "DCFBA2FC201D52DDC9143D39D7BABEB798EB4C31FF4C8109D8C3392B7F91A173",
+      "size_bytes": 3618825
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-12/part-000.parquet",
+      "rows": 31525,
+      "sha256": "737D279D597E056857B2FBED8CA6CFE87AAB7540D9FD24106D1C5193EFC21758",
+      "size_bytes": 3077712
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-13/part-000.parquet",
+      "rows": 21447,
+      "sha256": "5D67C3BA694B78651B9071E0B137A4B036FF8ACED25BF8541BA55251869B3C0E",
+      "size_bytes": 2147627
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-14/part-000.parquet",
+      "rows": 35726,
+      "sha256": "A8D93170091D305168338491CDA0527CF367F781BF0BF8D4E315F29A21F6E16A",
+      "size_bytes": 3562489
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-15/part-000.parquet",
+      "rows": 46215,
+      "sha256": "32E8B2E48E24AA126B085DF830E1156D8F948AF40949268185DA4CAA00854171",
+      "size_bytes": 4534034
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-16/part-000.parquet",
+      "rows": 26455,
+      "sha256": "29098853C9A3D366AC86CBFD688E4A44147A7BC8E33A0F835F08F42778E00E01",
+      "size_bytes": 2681468
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-17/part-000.parquet",
+      "rows": 39456,
+      "sha256": "E2B35CFD3DA336D4C2D66046143BC8A5348C78897BDAF220BB97AC3469334556",
+      "size_bytes": 3893608
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-18/part-000.parquet",
+      "rows": 42969,
+      "sha256": "F2F947D344CE64F21D0A52726573BCC8F507AB058DDC812FBCD5727C38C36418",
+      "size_bytes": 4237419
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-19/part-000.parquet",
+      "rows": 24422,
+      "sha256": "217F615C0A8D27F808CAAB5A6F811B2E999CE39BD09EC1B0BB40902D06BB6D29",
+      "size_bytes": 2476466
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-20/part-000.parquet",
+      "rows": 20313,
+      "sha256": "2044FED1A55E196E54028C87CE6E13EC8EB1E684335F9851180627B562587A22",
+      "size_bytes": 2088009
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-21/part-000.parquet",
+      "rows": 32869,
+      "sha256": "5FFEB5604C1C57FA99DEC48BD93BA135C45C99846F74B5C5C3C01F7937A4C5C4",
+      "size_bytes": 3225512
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-22/part-000.parquet",
+      "rows": 22213,
+      "sha256": "C3E8626AF617F542CE2AE6279300A2EE3A2088350EDDBEC15EE6A2E8FB7BD0F2",
+      "size_bytes": 2253949
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-23/part-000.parquet",
+      "rows": 23656,
+      "sha256": "BA5FBAA92D90B7AAD0F884FC2FEC3AEF18FC6BC706ECA41E81D4512E20ED7B9E",
+      "size_bytes": 2400061
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-24/part-000.parquet",
+      "rows": 21371,
+      "sha256": "487078F1D0C8064BDC9F63535AB74B1E604C8008923246155C715C9BBC085552",
+      "size_bytes": 2141012
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-25/part-000.parquet",
+      "rows": 22243,
+      "sha256": "08AF67E0DD1FFF289A8FED53993B64A8DC30FA3EF000A7A0EFDEA538E9D8B97C",
+      "size_bytes": 2211281
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-26/part-000.parquet",
+      "rows": 20264,
+      "sha256": "9697834A71CF54E3AFBCDF031E4D0BE3A9C968CD33B711C64CC0B5500F623A1B",
+      "size_bytes": 2036409
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-27/part-000.parquet",
+      "rows": 13960,
+      "sha256": "B6113D893CA8753B1E0F41765924E17E778970F318396E6667F1CDDB39199D96",
+      "size_bytes": 1423145
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-28/part-000.parquet",
+      "rows": 15334,
+      "sha256": "932B96E3122C614759B5CCFA778BD4BC0AC11B8BC87F4F5DDC66B5F7189744D2",
+      "size_bytes": 1593665
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-29/part-000.parquet",
+      "rows": 21644,
+      "sha256": "D4783C3E3CA98C0804F920330C6AB68A3F2ECF5EDE9150A0D44AC7CD5E60E6F4",
+      "size_bytes": 2184581
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-30/part-000.parquet",
+      "rows": 16948,
+      "sha256": "5282535936647702D2E2A9F1F0E08551ED7B0C7FDC3CBD32BDEFC1B46812CDBA",
+      "size_bytes": 1730644
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2025-12-31/part-000.parquet",
+      "rows": 34377,
+      "sha256": "5118E9C2A6493B3E82B7075FD667DA9A9136E942D16E47D10AA24630511AAD43",
+      "size_bytes": 3354762
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-01/part-000.parquet",
+      "rows": 24011,
+      "sha256": "7C1A4E4853707280FD5B6E8D44B577364C767C36807475BBD9D3A74F2D5DC76D",
+      "size_bytes": 2422111
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-02/part-000.parquet",
+      "rows": 21362,
+      "sha256": "EF96AA660404207FB628817DC0AC664BDBBB48941B07371D0DCBD2BE545D7196",
+      "size_bytes": 2200108
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-03/part-000.parquet",
+      "rows": 17688,
+      "sha256": "45D211059BFF13BFDE5E9BDCB77D7301643582F87A392BF5255F8776F533C79E",
+      "size_bytes": 1807214
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-04/part-000.parquet",
+      "rows": 22720,
+      "sha256": "E2038427A4CB0F57B83CCF2292875698DE6E81FA6748D87449AC195636CE2982",
+      "size_bytes": 2362143
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-05/part-000.parquet",
+      "rows": 25163,
+      "sha256": "C07F965CDAA3F0AD16D6EDE32157CFE7FB2C5BD7E43808FC55E9E299C809E1D3",
+      "size_bytes": 2548139
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-06/part-000.parquet",
+      "rows": 29928,
+      "sha256": "C4AA1ED55989CE12BEDE938669BE30C740496B63E935D75B4C91852D66E1D61C",
+      "size_bytes": 2976031
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-07/part-000.parquet",
+      "rows": 23204,
+      "sha256": "35BF5D23D45240D101488C1269C535170CF1A36E0F274694E3334EFFEE4E4D07",
+      "size_bytes": 2339138
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-08/part-000.parquet",
+      "rows": 26586,
+      "sha256": "4087AF1F653EFCDE2B214A0ABA6ABE36D7C152C01CAB1D6E7D15A31682AAB1EE",
+      "size_bytes": 2643843
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-09/part-000.parquet",
+      "rows": 18245,
+      "sha256": "A005E66A9B132AD734D528F6DFBCDA1FDAB810DC0262D62F1878FF14AB6DBC38",
+      "size_bytes": 1859657
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-10/part-000.parquet",
+      "rows": 15565,
+      "sha256": "EA0006D590977643EEDFAC412F36FED5209951890741B21B568FA866FBD98999",
+      "size_bytes": 1608203
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-11/part-000.parquet",
+      "rows": 17354,
+      "sha256": "57E0DB222A9A584481ADEBADBD360F1EA1D2A5AB8DB327D4090F43406CB3BF5D",
+      "size_bytes": 1776725
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-12/part-000.parquet",
+      "rows": 22766,
+      "sha256": "AC1983B294C483D2596C39DE3C7FCBCD518DDA9B1E438A5F5BEEB93EE671FA9D",
+      "size_bytes": 2289766
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-13/part-000.parquet",
+      "rows": 26533,
+      "sha256": "34B7AD64A7560F7BBD7C74B73FC3CA8F4FF9D768C8677A599FCD4AF1E2A3CBA1",
+      "size_bytes": 2620539
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-14/part-000.parquet",
+      "rows": 29950,
+      "sha256": "EB405DC90368C46E2CC6C8655C0F6015F83D6646D5A820A577A8B14CC9726F70",
+      "size_bytes": 2914880
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-15/part-000.parquet",
+      "rows": 34031,
+      "sha256": "14C576204BD3827B4EAD810892A3EFF0AA4E882A516E00EA3EE7DF169E8FDA7A",
+      "size_bytes": 3349348
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-16/part-000.parquet",
+      "rows": 22364,
+      "sha256": "2935621645DAA15875939986A806EFAF50ABC45E7395B377C4C64B0E6CF65D09",
+      "size_bytes": 2238334
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-17/part-000.parquet",
+      "rows": 20842,
+      "sha256": "FE76ADF47D42D8337196A51344A1BE2300A2AE81EB2E1027A317826E7596F0D5",
+      "size_bytes": 2035778
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-18/part-000.parquet",
+      "rows": 29342,
+      "sha256": "35F735193CADA5299A2FC9A94F2C05D8E7BDE3AABD8924AB8E37913FB9F3EB92",
+      "size_bytes": 2825041
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-19/part-000.parquet",
+      "rows": 30664,
+      "sha256": "AA122A46D798805625D91CC4BE79DF1E24EC66C63C77B905E00DD84A2FAE1BD3",
+      "size_bytes": 2929431
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-20/part-000.parquet",
+      "rows": 38245,
+      "sha256": "0CD032594E3DB464AFF73B51C0E704AF15F7FA954645C9681828B58336620B72",
+      "size_bytes": 3724860
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-21/part-000.parquet",
+      "rows": 30064,
+      "sha256": "4AB441E7C42014595754A0DC827595F3C102C8B81767609589C73E87455792B5",
+      "size_bytes": 2931990
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-22/part-000.parquet",
+      "rows": 23543,
+      "sha256": "C5CDFD8E99869D78FB6F395F0C9685DE4492475026BEB21EEF9145C2023FC51B",
+      "size_bytes": 2306662
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-23/part-000.parquet",
+      "rows": 22794,
+      "sha256": "AA7E41D327840626F9957E4EB64EA2FF7417557F6FAB99400D962F8903E0F35A",
+      "size_bytes": 2286908
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-24/part-000.parquet",
+      "rows": 19805,
+      "sha256": "F99265E4EFFD474A76816EF8AF150E3E1287F042A5F2EFB2E9DAAEAF11FFC9D4",
+      "size_bytes": 2017308
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-25/part-000.parquet",
+      "rows": 45227,
+      "sha256": "E577E30A72DF7070BBF27910D7C75B7B81D38CC6C888902AB78CB308BBD18317",
+      "size_bytes": 4404619
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-26/part-000.parquet",
+      "rows": 18651,
+      "sha256": "BBC37BD0DE80A78402A300ABC85207702D4687829B0AC76B218A6AD907EC80AE",
+      "size_bytes": 1943686
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-27/part-000.parquet",
+      "rows": 19282,
+      "sha256": "6986A0E3F1F4213BF263E1D5A63A4D484FFA1BE2ABE358695A243215FCD8AF4C",
+      "size_bytes": 1968204
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-28/part-000.parquet",
+      "rows": 18234,
+      "sha256": "25C23F92696B5BFD22E28FA3EDB6577D9A86C8758F0465EDD0161103A4A9EB6B",
+      "size_bytes": 1849314
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-29/part-000.parquet",
+      "rows": 41922,
+      "sha256": "4694282236A9271251B458A2A91A72D79C5BE9C5570D09232256DA71E0D3EB4B",
+      "size_bytes": 4062883
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-30/part-000.parquet",
+      "rows": 32910,
+      "sha256": "CB2DFBE02439E3BF0FA217ADB8A3B5EEB17E0FD98D0FF94F89FE0A9B50AEC418",
+      "size_bytes": 3234747
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-01-31/part-000.parquet",
+      "rows": 76678,
+      "sha256": "A86B34A3243A9940131AF14806412357CF9ECE6939244B64AB61F839B3947375",
+      "size_bytes": 7122692
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-01/part-000.parquet",
+      "rows": 32540,
+      "sha256": "6992DD7C916614D4867543537CE2C8C82A8B2BB8CAAD0C5D8F2A06EFE2031FBA",
+      "size_bytes": 3198922
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-02/part-000.parquet",
+      "rows": 25480,
+      "sha256": "71F6ED97A435C861402DA30DCAEF161C90FA3046698FB223E2D2EB3B3CFA5FE6",
+      "size_bytes": 2553626
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-03/part-000.parquet",
+      "rows": 33075,
+      "sha256": "1003389DE8D94B639E87277205051F5019CE1EE7081E3DD5E0BD77334814F0B5",
+      "size_bytes": 3285675
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-04/part-000.parquet",
+      "rows": 26105,
+      "sha256": "ABF5902725F59B50E89E74AEB227820CB509F2FB36F9D0C97D392A0995A09799",
+      "size_bytes": 2608008
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-05/part-000.parquet",
+      "rows": 70885,
+      "sha256": "48FFA6585E2088C78CD63263CC960A6F247A7E68B983703D445A0DB449FD082E",
+      "size_bytes": 6596815
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-06/part-000.parquet",
+      "rows": 50771,
+      "sha256": "B5BFCABAE2751E9BEE0011D6C63E4D8D549CF0F7626B10C3070D1DEAB9FEEF95",
+      "size_bytes": 4840738
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-07/part-000.parquet",
+      "rows": 25550,
+      "sha256": "0924507FD3DA4DAEAEAA3EB5D7FF7461B2EC51644AEE195D2FAB6A7AF5CA6BA6",
+      "size_bytes": 2537958
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-08/part-000.parquet",
+      "rows": 18849,
+      "sha256": "9A99771D90B80D971EF31F0DD512D35B6E98C033FEB4C99B65CD54B3F21A4880",
+      "size_bytes": 1927855
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-09/part-000.parquet",
+      "rows": 19289,
+      "sha256": "8B11C9E404FF7725AAC662BC3BE771E2F103755F00E23201CDD4411EFE8AD348",
+      "size_bytes": 1967285
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-10/part-000.parquet",
+      "rows": 16248,
+      "sha256": "F714B8DF855982B1C65A6298B4306BFE7D1F0FAF82294B223CF55F671A1BA3E6",
+      "size_bytes": 1685696
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-11/part-000.parquet",
+      "rows": 26385,
+      "sha256": "6672DA8955EC1403105C5BB9BEDF98452F1D0E13AF5A987497D41E0E8D423813",
+      "size_bytes": 2657175
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-12/part-000.parquet",
+      "rows": 22772,
+      "sha256": "E98DD359763EFF310C87C2415625842CD3B61D798E2545B73896B0D0B196A5DF",
+      "size_bytes": 2324133
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-13/part-000.parquet",
+      "rows": 20269,
+      "sha256": "033BDD06A0FA9D7972106BC1DB4574078F7855C347057EA63AFFD91AC1BC2DEB",
+      "size_bytes": 2072926
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-14/part-000.parquet",
+      "rows": 16900,
+      "sha256": "ED64132E576A7CBC51DEFE5663A2674C09975C85FD2BA88341E93B1E795636B0",
+      "size_bytes": 1770647
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-15/part-000.parquet",
+      "rows": 23140,
+      "sha256": "9387AE747539D8E11067D042959FB03B01E89EA543F0F17CDA7421735110335B",
+      "size_bytes": 2372627
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-16/part-000.parquet",
+      "rows": 16067,
+      "sha256": "314DD678B9DC14268329B0399090F1F30E90C507AA887FD64393D5E6F753B419",
+      "size_bytes": 1661269
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-17/part-000.parquet",
+      "rows": 14480,
+      "sha256": "659C40739E8554953ED0ACE7FB02FD7FF8D6BF0DF654C01FFD9DBEF619C6FD28",
+      "size_bytes": 1512334
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-18/part-000.parquet",
+      "rows": 19505,
+      "sha256": "04B1143712CD7945BD1AB543BF8D6BB625E75BC190C3B4BA12EA286BF2706F11",
+      "size_bytes": 2003487
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-19/part-000.parquet",
+      "rows": 16601,
+      "sha256": "623135689FE5A1A14EAFC8A25A07A03CF62C6B8789A94ACC09080E702686A589",
+      "size_bytes": 1705418
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-20/part-000.parquet",
+      "rows": 17426,
+      "sha256": "B5041DD8857E501FE64007FC281193077AA38473CF98D1FBBA35857555B8E52D",
+      "size_bytes": 1787046
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-21/part-000.parquet",
+      "rows": 11639,
+      "sha256": "248B22DE05C7568D4F90DFB7F2141B4E19D78833153A3677F3F49206BDBBA47C",
+      "size_bytes": 1223090
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-22/part-000.parquet",
+      "rows": 14675,
+      "sha256": "0A41684B379BD659FFC10CE9A7A78EBE8584DEF4CE669C16C662C2A09073743C",
+      "size_bytes": 1523152
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-23/part-000.parquet",
+      "rows": 30483,
+      "sha256": "3654CED913F87368E4C1CA0F2141F0B23EC057A4D9A50CF94BFEF02CBCD757F4",
+      "size_bytes": 2937593
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-24/part-000.parquet",
+      "rows": 23601,
+      "sha256": "3B2F80156E3FAE629E1972FC76A4D37F6679E588149C9ADAC8C996BA4251E651",
+      "size_bytes": 2388581
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-25/part-000.parquet",
+      "rows": 27226,
+      "sha256": "303E6263316FB0E2ED2783B6B7F598EB662484F5922D4A7F807145853416164F",
+      "size_bytes": 2771328
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-26/part-000.parquet",
+      "rows": 27684,
+      "sha256": "09D3EB5A95D6A8CBB2CE6D5633C1BBC294ACC45EA959C95E1F602607364780AC",
+      "size_bytes": 2708888
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-27/part-000.parquet",
+      "rows": 20281,
+      "sha256": "46265BFBEB1143E8FD1E5EE463B0E17B48FEAB6518751AED58CE8FFAF3384947",
+      "size_bytes": 2090774
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-02-28/part-000.parquet",
+      "rows": 28932,
+      "sha256": "B9F53F38961EB2AF6E28EC2EDA686E7303A5BD758D6BE98AD46738111DE920D5",
+      "size_bytes": 2870834
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-01/part-000.parquet",
+      "rows": 20170,
+      "sha256": "74A0D0B4D87BB648491DB39805DA94D85A539516CC2D32C5295089B98C5AF6CB",
+      "size_bytes": 2087251
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-02/part-000.parquet",
+      "rows": 19516,
+      "sha256": "ECAB32FA3F15879D4E282F1B5DEEF3C0C514E53FDCDFB5BC41744D3FEAA42579",
+      "size_bytes": 1994732
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-03/part-000.parquet",
+      "rows": 18666,
+      "sha256": "30F97CFDBB743482BA4223D129612F20BB49E9E2FF8A6777613F41DF4CB2E402",
+      "size_bytes": 1911955
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-04/part-000.parquet",
+      "rows": 22462,
+      "sha256": "1F3858603CDE168E02F9DA0B6D27A1121B235B3B9C663F3104E2FC7AE21B45C4",
+      "size_bytes": 2269130
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-05/part-000.parquet",
+      "rows": 18760,
+      "sha256": "D7B7099850A359A5254B8826B3BFC17F64E2D5012D24CFC123D156D15E957241",
+      "size_bytes": 1930884
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-06/part-000.parquet",
+      "rows": 20647,
+      "sha256": "A7DDC2A587AD444073A62C224214DCA04AF594F90ABD17F49D6B36A1AADA4ADF",
+      "size_bytes": 2125267
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-07/part-000.parquet",
+      "rows": 15887,
+      "sha256": "807DC3E3B4C70289222F3D31BCE19F8B6035B6E3A0034AA4BAA14C3814FA4B89",
+      "size_bytes": 1685658
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-08/part-000.parquet",
+      "rows": 18808,
+      "sha256": "2A2B722B20C724A91156CD2145F836134C1911A58100BFDC141ED92B2CC8BDAA",
+      "size_bytes": 1962464
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-09/part-000.parquet",
+      "rows": 16464,
+      "sha256": "EE0EC88B5BE6B1F6CC461E78C9732AF57E6B877868594D6E2239F76900D153A8",
+      "size_bytes": 1720821
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-10/part-000.parquet",
+      "rows": 19061,
+      "sha256": "00B3E3B3D1F33C39120AB8F4D44556628E45177D6A35BD7C8740B64EBB5BF341",
+      "size_bytes": 2004996
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-11/part-000.parquet",
+      "rows": 18779,
+      "sha256": "7FA9114B642E4ADE45B4A42DE486D6BF8740110690A168A0185CC246D686B1AD",
+      "size_bytes": 1980284
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-12/part-000.parquet",
+      "rows": 15784,
+      "sha256": "F87B630F72B8AC18155009EAFEB3A6EBD72648CCD87D8DE914CB8C13FAB125DD",
+      "size_bytes": 1686686
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-13/part-000.parquet",
+      "rows": 19090,
+      "sha256": "0D3569446B681429D4B6A0FECD751A74F43FFAE38A157F3DDE710904319888BA",
+      "size_bytes": 2010903
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-14/part-000.parquet",
+      "rows": 14868,
+      "sha256": "6D092A13B70A6D047A9622B2497A849ADAFF5F7B9762ED91785BB2384F91AD6D",
+      "size_bytes": 1607252
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-15/part-000.parquet",
+      "rows": 14472,
+      "sha256": "CC043270E3F33D43AC041F9B6DABEDEB45CE6B7FB2B1C4942548A5BA1DBE44A6",
+      "size_bytes": 1528708
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-16/part-000.parquet",
+      "rows": 24674,
+      "sha256": "386748C04EE631FF673DBB07A19234F56C14126DFC6B317246652F465AB65402",
+      "size_bytes": 2523653
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-17/part-000.parquet",
+      "rows": 21313,
+      "sha256": "19FB1C112D6E29BA2991EC3726146455A6B39AB7F7523BDD1FC0DCBBB2FF8DD5",
+      "size_bytes": 2202857
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-18/part-000.parquet",
+      "rows": 31555,
+      "sha256": "CFA8E93ADFBC270EBD820BE00A55058B13778AD7C0EA69BA6FBE6C31A5D2C369",
+      "size_bytes": 3133351
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-19/part-000.parquet",
+      "rows": 24078,
+      "sha256": "F9D90C52B0C128E70B7E114900AF1A99509DF750E887CD9182F237BFA6128C57",
+      "size_bytes": 2406180
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-20/part-000.parquet",
+      "rows": 17093,
+      "sha256": "815833B698D91216BA31CACD1EB7C0BA41273D02037271E3A6F46DC9BAF7A688",
+      "size_bytes": 1768286
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-21/part-000.parquet",
+      "rows": 13561,
+      "sha256": "FBB0EBD84F8C6E789BEC1BDE92F0EEBAB3115BC52E944FC4C42B03E744DBC7BE",
+      "size_bytes": 1439888
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-22/part-000.parquet",
+      "rows": 41473,
+      "sha256": "AEB8E6FC3ED76A256552918B1F851823CC4358B3AADE8B12A10699DFC4C7F513",
+      "size_bytes": 3940273
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-23/part-000.parquet",
+      "rows": 24608,
+      "sha256": "3F5D05182D640413CC2BE593E32D618647D676798B966C3B1097FDE54F9F713B",
+      "size_bytes": 2543750
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-24/part-000.parquet",
+      "rows": 18594,
+      "sha256": "66B6DB1066D21A5D2F738FBF426F32E05A755DA0B26A365BD69944A5E1B1FA9B",
+      "size_bytes": 1935973
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-25/part-000.parquet",
+      "rows": 15348,
+      "sha256": "E62E999B33C1C910947241DF8B7122077BA5B7F73A88C3C67A4D75EDE4DCEDF9",
+      "size_bytes": 1595471
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-26/part-000.parquet",
+      "rows": 18254,
+      "sha256": "64982F606586186F852B141616987ED53CC3848E014D56D1475E03728273A08E",
+      "size_bytes": 1888186
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-27/part-000.parquet",
+      "rows": 22514,
+      "sha256": "07187885ABA92C4BC24B34036598DF617FA5B791B9E764FB8BF9BDFB164554AE",
+      "size_bytes": 2268844
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-28/part-000.parquet",
+      "rows": 13972,
+      "sha256": "701524094DA3411FC139C21976B1F26F2918FE937B5C2BBB47B42B9677D4ECC0",
+      "size_bytes": 1477308
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-29/part-000.parquet",
+      "rows": 14662,
+      "sha256": "95464F834275702106AEA7B7B1D887FF576E16B649922A464B8C209B7CC8C3CB",
+      "size_bytes": 1529367
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-30/part-000.parquet",
+      "rows": 12654,
+      "sha256": "419F9391BAABD43991BD9493C3EF785D100867FC6410EAA7C42C9252EF8001C5",
+      "size_bytes": 1313584
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-03-31/part-000.parquet",
+      "rows": 16206,
+      "sha256": "928691B21A33068EDAEA4DA82C662A02CBCD48CD3FC0E0BDF3357424CF9354CB",
+      "size_bytes": 1670213
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-01/part-000.parquet",
+      "rows": 21234,
+      "sha256": "DCE60DB49CE2AC1E5119AC03077C77EFD958AE6CC89294C822E6645796B8B756",
+      "size_bytes": 2132911
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-02/part-000.parquet",
+      "rows": 35403,
+      "sha256": "27867E79EE63C5E7BFA58DE2AC7E1E1473FA390D52FEC1292DF707566A3B7202",
+      "size_bytes": 3369517
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-03/part-000.parquet",
+      "rows": 20193,
+      "sha256": "FFAFC40EE7C684A4231BFE2F95178298FD00B9B05B3F5F0C44EA11D3BF580237",
+      "size_bytes": 2028490
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-04/part-000.parquet",
+      "rows": 14205,
+      "sha256": "3EFEDD125F1255038EF54C26218A909947B931CE03D99EF1A77937ADEACBF942",
+      "size_bytes": 1499882
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-05/part-000.parquet",
+      "rows": 15599,
+      "sha256": "1B841653BF393D7E076B82D2E7770D0BED323B4707EE6D7C5A14DC237C00E18D",
+      "size_bytes": 1635454
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-06/part-000.parquet",
+      "rows": 15585,
+      "sha256": "FCA6C1932CD03FF3AA5E8A6D787036D35E4C54CAA8BF4D457C1E92499DD20125",
+      "size_bytes": 1639694
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-07/part-000.parquet",
+      "rows": 23464,
+      "sha256": "16F7D32828262FFA2E66E75972107C05A0CE54070999155F86FFCB285B1254C6",
+      "size_bytes": 2406740
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-08/part-000.parquet",
+      "rows": 19038,
+      "sha256": "12970F9C0DE7D3AE7DB3E2C95194F4A8EEA8DC17CCF4FDF50146EAAA6232E768",
+      "size_bytes": 1967427
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-09/part-000.parquet",
+      "rows": 27914,
+      "sha256": "15F19FCA2F51094D80D27134C8BFFB0072C649618D4F13FF92CA4A21D36F07A8",
+      "size_bytes": 2766832
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-10/part-000.parquet",
+      "rows": 21483,
+      "sha256": "B8643E7BA10E97F553D8E9867E1C747F8EB8FAC9862ACD8E5979E87230ED43F1",
+      "size_bytes": 2219270
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-11/part-000.parquet",
+      "rows": 19170,
+      "sha256": "337C584242A4C9A6FD6F3420C3D5080609AD1C07B3C1F838DB3736EC3D591837",
+      "size_bytes": 1989145
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-12/part-000.parquet",
+      "rows": 29708,
+      "sha256": "02BA74A90B8DC4CE79BBBD8ACD40F0501510A0B8D9B0392042EACA8B8DA4F0DE",
+      "size_bytes": 2936403
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-13/part-000.parquet",
+      "rows": 29944,
+      "sha256": "ED259B8915F68D7655FCFFFA1E910C589CAE4CDE01746437F60E3C7C650CA817",
+      "size_bytes": 2994002
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-14/part-000.parquet",
+      "rows": 31990,
+      "sha256": "AF8F38D946B2B174413FD36CC698A9A6D66025B18E1E151AD0E4B1BC1CCDE7DC",
+      "size_bytes": 3261381
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-15/part-000.parquet",
+      "rows": 25982,
+      "sha256": "35CBCBA241AF593E28101F9F438E592DD5B30196CA268D7595DC1436B433BF88",
+      "size_bytes": 2653015
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-16/part-000.parquet",
+      "rows": 32478,
+      "sha256": "8AA22AEF7B5C2363A1A571D44C058A813205EFB982B771E42E30E608B6A7BA72",
+      "size_bytes": 3306359
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-17/part-000.parquet",
+      "rows": 30565,
+      "sha256": "A1DEBF50C04F19B579116E72DC12E132DBD1FA69DBF65B2B0C7120843B9C5761",
+      "size_bytes": 3177217
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-18/part-000.parquet",
+      "rows": 38229,
+      "sha256": "E7DC99783792725C7FD89334F9032FAA3196E01CFA1EAA0CE62880F80E3D092A",
+      "size_bytes": 3907190
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-19/part-000.parquet",
+      "rows": 32960,
+      "sha256": "049F68400FB4CE96BA6F57A9472BE046C0C7F8071D6B0EBE49437BF9A4BFFB94",
+      "size_bytes": 3410261
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-20/part-000.parquet",
+      "rows": 19749,
+      "sha256": "40D61DA4C88FDE0F3B909850AEA1BA6191F10CF0260C4405B96E6A3CADCCC903",
+      "size_bytes": 2084462
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-21/part-000.parquet",
+      "rows": 20082,
+      "sha256": "C79B427B08C6A828B32ABE6DA870FEA1FE5F6A1756AE8E01973D71DB7C9D4DA6",
+      "size_bytes": 2124539
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-22/part-000.parquet",
+      "rows": 21172,
+      "sha256": "E82AEADCFCB1E2021C5FA3186FE5279A5D2AF0D30BA07B527C8616996B05CCAF",
+      "size_bytes": 2210412
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-23/part-000.parquet",
+      "rows": 17079,
+      "sha256": "9B5EF523A23BA00395E76B6646D191CD3A531F276782952C018ED4D27338CBEF",
+      "size_bytes": 1809793
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-24/part-000.parquet",
+      "rows": 7176,
+      "sha256": "C0074E0A022B4BA2C825FFFE3260E2D698A5C3F11E5B0ABDC78383FB12BDF6B2",
+      "size_bytes": 729939
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-25/part-000.parquet",
+      "rows": 22304,
+      "sha256": "9A4EABA0713C286EF6E047F00D2661CE6FCEA32B2E6C7B462C19CAF5F8FAC8FE",
+      "size_bytes": 2221614
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-26/part-000.parquet",
+      "rows": 15270,
+      "sha256": "8FC7C932D6F14AB2FBE55D57BA0084A1E7F1945117205E01CF649C51279B0C46",
+      "size_bytes": 1598097
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-27/part-000.parquet",
+      "rows": 22932,
+      "sha256": "3C8F38015907F76A3CE5261DC24F32CFB116F1D0433D2A73DC1DD350FBFF6D48",
+      "size_bytes": 2378044
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-28/part-000.parquet",
+      "rows": 14971,
+      "sha256": "D32081F1F030B7BFF7432F72E68E3C588E5B0364C9C4FC3DA3A2FA8E0AB35413",
+      "size_bytes": 1568066
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-29/part-000.parquet",
+      "rows": 24475,
+      "sha256": "F12AAB41A44A2F779C8941C1779E4F11ABB5430EC27461E52C23DA8E758DC455",
+      "size_bytes": 2551272
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-04-30/part-000.parquet",
+      "rows": 16118,
+      "sha256": "60F94E91FBDD3319FAE1B7898A2D6722A61A30D576A31B214556A861E68DAF87",
+      "size_bytes": 1698737
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-01/part-000.parquet",
+      "rows": 16752,
+      "sha256": "C48FC48AA271A117B60D37E23B4CEC348F76C0FFF8F5337BE94F4237BF14B70A",
+      "size_bytes": 1729149
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-02/part-000.parquet",
+      "rows": 28510,
+      "sha256": "B450D2ED5222AE339C73834FDD7D4BE70B5290002327EFF90EB22911ACFC6559",
+      "size_bytes": 2774402
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-03/part-000.parquet",
+      "rows": 22426,
+      "sha256": "D6F9F953D314273BAC80FC54A834E55FF74E9B5EFE71751CF5F53AC861D3F6B9",
+      "size_bytes": 2286216
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-04/part-000.parquet",
+      "rows": 24137,
+      "sha256": "331DE875CF87BA602DF750AAB6BA37EFE5018B7F3F8DF3BF8AA1E4AB6FDB9735",
+      "size_bytes": 2457237
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-05/part-000.parquet",
+      "rows": 23995,
+      "sha256": "068E27AE9DC9EEFD91875886DD3A9F8FF599A906CD8950B33156FF508358B9D8",
+      "size_bytes": 2538549
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-06/part-000.parquet",
+      "rows": 25012,
+      "sha256": "C96E72C27F6256C0D6C21EFBBAED50E3FD24570C5DD699DE2E24D16FC276A7EE",
+      "size_bytes": 2584378
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-07/part-000.parquet",
+      "rows": 23741,
+      "sha256": "80E46EFC595648C73CA669E93822D94EF50AF34E7805866061F169156E53E8F3",
+      "size_bytes": 2523386
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-08/part-000.parquet",
+      "rows": 14848,
+      "sha256": "70C3E593DB1ADE8F063FED1FDA90DBF4D3691E3D347646F2CC24BABF6FD98DA8",
+      "size_bytes": 1603795
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-09/part-000.parquet",
+      "rows": 15464,
+      "sha256": "BA769239F6A4FB15F8C83CAE6FDDE97C78B7E5D214B6F6D2E94712A5B13BFD8E",
+      "size_bytes": 1670439
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-10/part-000.parquet",
+      "rows": 20221,
+      "sha256": "2AA36C57F166E12AA8710F4B53610A0104A8D1060425C962289563EB589AFB62",
+      "size_bytes": 2200759
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-11/part-000.parquet",
+      "rows": 17882,
+      "sha256": "53E96763BAFB517F706E678CDB8070832052A0B7C4C567AA7F78F5EF4B9E6ED9",
+      "size_bytes": 1893624
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-12/part-000.parquet",
+      "rows": 19988,
+      "sha256": "10F1B93EBB4E2FDD35ACA1E83D95EC2F6FA57B7EDF6118EB78A0F54AE3FADB01",
+      "size_bytes": 2111312
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-13/part-000.parquet",
+      "rows": 26994,
+      "sha256": "69E95170B495DF3CDFCBE6811FA7A4D230E60800325B147440B666ACD56F730D",
+      "size_bytes": 2795630
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-14/part-000.parquet",
+      "rows": 18641,
+      "sha256": "76A026E07EABB60B244F8AF0497691050AF4930DE201EBB6619CE6D047870A9C",
+      "size_bytes": 1967543
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-15/part-000.parquet",
+      "rows": 27864,
+      "sha256": "E9B2561D7312B363B3BCF3BFE6CFD16246A7C53F099FCA8BD5FD8DC8D9442BEA",
+      "size_bytes": 2836171
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-16/part-000.parquet",
+      "rows": 21403,
+      "sha256": "79EDD048229E75AFEDA9A7D9EAED90921BC41328D1AB57F33B02E0AA20A441E5",
+      "size_bytes": 2219785
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-17/part-000.parquet",
+      "rows": 23378,
+      "sha256": "E10B78BE5566D57A36D2604190607E5B4B5089A2E7D182FF4FEBB8D8D9018E40",
+      "size_bytes": 2428078
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-18/part-000.parquet",
+      "rows": 16888,
+      "sha256": "FD5FFD039EE7449AA3690D8791C413F58D80E27746155ABFFAA3E4B503DA5B1B",
+      "size_bytes": 1785786
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-19/part-000.parquet",
+      "rows": 15963,
+      "sha256": "8F78809496E69F98A131B20C138A6976F95C322532B8E0CAF462D5AE2C5B8303",
+      "size_bytes": 1708974
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-20/part-000.parquet",
+      "rows": 18974,
+      "sha256": "15D18E9638A23CA845F39A1D49ED78D2569037E6379048566955F06B3B77FC19",
+      "size_bytes": 1998101
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-21/part-000.parquet",
+      "rows": 16058,
+      "sha256": "5D3D80E3E4657F5970081F6B0E411A1B21AF757862E0611AD74E232A54274F44",
+      "size_bytes": 1720772
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-22/part-000.parquet",
+      "rows": 28017,
+      "sha256": "8F6CB5C69453C989FEB7D4739C2DBE31C3FDEB80872D0EF03F24DAEEA44F5059",
+      "size_bytes": 2917690
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-23/part-000.parquet",
+      "rows": 24964,
+      "sha256": "37A97A90E4B59C89A38F17DD5DAEB77DD4F8F5DF47675FB0923C445DF13450F5",
+      "size_bytes": 2569283
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-24/part-000.parquet",
+      "rows": 16149,
+      "sha256": "65908BB2E165665EB7CFFD53DA87C463928BB9F5F2420F5B43215C438207ED3E",
+      "size_bytes": 1714291
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-25/part-000.parquet",
+      "rows": 14337,
+      "sha256": "6F9ACB9DD43D13C988B8BB5D2C9AFDE8E83329BB32DE26DFE838E271517E5038",
+      "size_bytes": 1510776
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-26/part-000.parquet",
+      "rows": 21677,
+      "sha256": "DB96094E423455DD010CBBD3BD3BCF76A464A696CDD79794CBB51C7B6B9083CF",
+      "size_bytes": 2215442
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-27/part-000.parquet",
+      "rows": 23291,
+      "sha256": "BDB2B340F3F8F79C4190E9EEB8D2893F19DEBE3334C959B80CD275BEE8DA4D12",
+      "size_bytes": 2397909
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-28/part-000.parquet",
+      "rows": 33158,
+      "sha256": "764735BE64F0036405528216717E35E0255267BB2A21801C92F7F0C2F77EDCF1",
+      "size_bytes": 3308707
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-29/part-000.parquet",
+      "rows": 24094,
+      "sha256": "6ED0B4999368F8A72ECC8D1F9043D9CEE2DAE426CBB644CA88CB0FD0B2F6BE06",
+      "size_bytes": 2503888
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-30/part-000.parquet",
+      "rows": 13992,
+      "sha256": "F95AB021A4734BFFCE92F1F3CAA9DA6885C60356036DC4A18B3AE09DD6450C7D",
+      "size_bytes": 1499582
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-05-31/part-000.parquet",
+      "rows": 17118,
+      "sha256": "CA3B699EEDEB3E0DB8685F5F3CBBF8EC821E93E660BB80834437ECA027D624CC",
+      "size_bytes": 1797021
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-01/part-000.parquet",
+      "rows": 29826,
+      "sha256": "18DE5B9E5A4A035511C5D4F5DE4BDE51E4D0802172E099B2787107CA741D44EE",
+      "size_bytes": 3048477
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-02/part-000.parquet",
+      "rows": 51150,
+      "sha256": "84506662E3ADAF75980BD7D3B38C4106DC00D89E2BC3B53FBBD74240156D3046",
+      "size_bytes": 5091586
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-03/part-000.parquet",
+      "rows": 29802,
+      "sha256": "DD0307530E4F3B1FCF577C023ADF3AD0236852BB3C1B087326B5823BC3E20401",
+      "size_bytes": 3006531
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-04/part-000.parquet",
+      "rows": 54977,
+      "sha256": "1AEF393BE828583584ACD6619262C0349BEFDB2626AC1A28569B96A8119DE896",
+      "size_bytes": 5445754
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-05/part-000.parquet",
+      "rows": 64497,
+      "sha256": "5CFFA7336A08F5D944889B9742DBBF094C83FA29F7E9AC485FB5B3E406C1EF0B",
+      "size_bytes": 6325841
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-06/part-000.parquet",
+      "rows": 30043,
+      "sha256": "3BC38E846F3F9B825B044B0078B7B55EC656D21D9F520F712582BD81D85C76C7",
+      "size_bytes": 3070594
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-07/part-000.parquet",
+      "rows": 24509,
+      "sha256": "4B13916C5B57A73D919A262118B37F21EA23136C48C42F73A3F64F219FCC965A",
+      "size_bytes": 2582226
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-08/part-000.parquet",
+      "rows": 21506,
+      "sha256": "6AE0C89AE4FE689CDA44B99C669907594D6386E320760FA1B51D5CE64F35A849",
+      "size_bytes": 2285292
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-09/part-000.parquet",
+      "rows": 26770,
+      "sha256": "C04AD2288B7D0CEC2D42AA7EB8E7B045E2D6A0F3071CFE2AE8FF4D76AC1CADD5",
+      "size_bytes": 2790690
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-10/part-000.parquet",
+      "rows": 29649,
+      "sha256": "69C665CD69D2603ADA9C32FE857AF3538C84B28FFA087EF032F57E29B3004738",
+      "size_bytes": 3028823
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-11/part-000.parquet",
+      "rows": 21517,
+      "sha256": "454BB69F3D1AD7240580AF497BFA4285DD67960B709DB35C793EAE83D813BDD7",
+      "size_bytes": 2247235
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-12/part-000.parquet",
+      "rows": 18043,
+      "sha256": "7246531232137C100B1704D7E33ED4D9A0487D5F23A90B26E201C9437FBD5133",
+      "size_bytes": 1912357
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-13/part-000.parquet",
+      "rows": 16203,
+      "sha256": "9C4067726034782A86B6150F931DD81E35F9ABFC808F7B94582D28DE63D2ED3B",
+      "size_bytes": 1730266
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-14/part-000.parquet",
+      "rows": 18415,
+      "sha256": "9CEB6CA7F264F5D00A1C9753C4A827EBBFF2495095B826F8CC16770627E4ED91",
+      "size_bytes": 1966259
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-15/part-000.parquet",
+      "rows": 19886,
+      "sha256": "0763779696B45786BFAFCB62D662394668DB3B9319853D7ECECFEC1E1C5E1DC7",
+      "size_bytes": 2104794
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-16/part-000.parquet",
+      "rows": 17686,
+      "sha256": "61BB53ECC5A2F9E38CCDFA39EBFBE3A98A63D779DEFA761F5F4CA240CB0F4938",
+      "size_bytes": 1872883
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-17/part-000.parquet",
+      "rows": 20771,
+      "sha256": "718568D9C38B14CF536DD00D71AC10EFEE1476F0975F9CA99637763B3826F695",
+      "size_bytes": 2210093
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-18/part-000.parquet",
+      "rows": 25913,
+      "sha256": "A326C39ED26F3340D912FA4F74CE9BBF48D486D02BDA790FE7A9F683C2CC838A",
+      "size_bytes": 2681541
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-19/part-000.parquet",
+      "rows": 17385,
+      "sha256": "0CAE81148CAB2E227E968A14A9B19764B0F927DDB62782FE9C36248096ECEAF0",
+      "size_bytes": 1834041
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-20/part-000.parquet",
+      "rows": 18913,
+      "sha256": "3AC5EF2C119D8B82A28A0E990F9A4EA19575B5B201A05FCBDBE7ECBEACEC8CA7",
+      "size_bytes": 1999425
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-21/part-000.parquet",
+      "rows": 15829,
+      "sha256": "A7D6284550BC5ADE7EE822CA891BC1B4E3E5D1FCE8800A6C943AF5A42BB84D98",
+      "size_bytes": 1693460
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-22/part-000.parquet",
+      "rows": 18234,
+      "sha256": "BEB078EA9A910ED445F044A1278D08019F57D5CD8F190613DC840BBCDC0B3DF9",
+      "size_bytes": 1944887
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-23/part-000.parquet",
+      "rows": 27287,
+      "sha256": "D333651BA352F382F22994A6C54141B7E907423A551100548C2DF9D251FFE11D",
+      "size_bytes": 2807091
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-24/part-000.parquet",
+      "rows": 37780,
+      "sha256": "70FCDD63C49F1513E20B77EF1A14FD0354ED8708BD50F85E79CD6EA276D5697C",
+      "size_bytes": 3780133
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-25/part-000.parquet",
+      "rows": 31039,
+      "sha256": "79278D679ACD342B9BDEE0E16E44E64D5274D53531959CF8F6CC7C9B8904A119",
+      "size_bytes": 3119886
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-26/part-000.parquet",
+      "rows": 22072,
+      "sha256": "35057F4A127014340F0B60EC2C4357BEB36EE546A5DF5690CA87ABAEBA024FF8",
+      "size_bytes": 2294913
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-27/part-000.parquet",
+      "rows": 15467,
+      "sha256": "DC01B79BD5AE4B2329E14A33CC964B04194C5D71317680625802423A19F524CD",
+      "size_bytes": 1589138
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-28/part-000.parquet",
+      "rows": 14380,
+      "sha256": "DD3D8C37E498986218DA20BA93F033A5EFF75B62DADBBFDAC5C279EB2D53F956",
+      "size_bytes": 1563117
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-29/part-000.parquet",
+      "rows": 15916,
+      "sha256": "A3C8F689ADD7B09D11875AA233BCA9DA7127937698490A97D6E990831016DBC2",
+      "size_bytes": 1662191
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-06-30/part-000.parquet",
+      "rows": 20533,
+      "sha256": "0F674A934ED6A84BB5DC87BC76EF45F63A7385E7251F623D6DF54FD07C4C8666",
+      "size_bytes": 2154619
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-01/part-000.parquet",
+      "rows": 25617,
+      "sha256": "6DD76C1A85091F625858FF0A220912A631E7FABC5D6E3BA791A99744369A8A6E",
+      "size_bytes": 2598838
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-02/part-000.parquet",
+      "rows": 21378,
+      "sha256": "999A9B65C057A0664E0E01B25748A8979097CB328736AC56D12849B7D3EB71C1",
+      "size_bytes": 2214165
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-03/part-000.parquet",
+      "rows": 16598,
+      "sha256": "05C5A9C4E6389499AE3ED84FF85CC525A2B5A077C258E620EE52FCF6D3CECB63",
+      "size_bytes": 1733022
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-04/part-000.parquet",
+      "rows": 14433,
+      "sha256": "C01A994C7D8635A938394DBC3B92ABC6BEF210A9698FE13469465F2E51DED759",
+      "size_bytes": 1570514
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-05/part-000.parquet",
+      "rows": 13082,
+      "sha256": "96FF0B69EC4383F27D338783607EBBC8254288F1E0C88F85FDCD3B6C8233239F",
+      "size_bytes": 1429520
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-06/part-000.parquet",
+      "rows": 20478,
+      "sha256": "BB28A993878B76F38B9F102C7D80B1132C9D91E18BA1814DDDE0575A772FD3AB",
+      "size_bytes": 2153570
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-07/part-000.parquet",
+      "rows": 26431,
+      "sha256": "8EAF5AE49B8868451662DA398194A1EB79704986152254F474EFBBF3CE3C0DFB",
+      "size_bytes": 2707648
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-08/part-000.parquet",
+      "rows": 28947,
+      "sha256": "B4C2E7EC97A8D911EAF7371D2F136C77E327F6C2015104209DB2A5F5BE8140E2",
+      "size_bytes": 2881884
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-09/part-000.parquet",
+      "rows": 12165,
+      "sha256": "23E9AC619FD2A952FF8B992D36CA964BDC88BAB812AC817B6F9CF41D33F2DBC3",
+      "size_bytes": 1281605
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-10/part-000.parquet",
+      "rows": 11351,
+      "sha256": "51AF0A3E97E9FFB3B0870316443F267575BB576E8FA13DD7A1D7A90EB232A5F9",
+      "size_bytes": 1228577
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-11/part-000.parquet",
+      "rows": 13324,
+      "sha256": "58A1BB9115E5713B226B22C37B75EF4989B9AA46BA7A74E668466F0FE7C7EBDD",
+      "size_bytes": 1400224
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-12/part-000.parquet",
+      "rows": 14705,
+      "sha256": "08C686C13DADB11E399796447597BB5F0BC7FD73177614A31526258FFCC8D1BA",
+      "size_bytes": 1556035
+    },
+    {
+      "layer": "silver_events",
+      "path": "silver/events_daily/date=2026-07-13/part-000.parquet",
+      "rows": 23313,
+      "sha256": "87F4283A2507F3AE7374D7CBBD5A7275D767A5199AB81AB4163AFD3EAC123A2C",
+      "size_bytes": 2455204
+    }
+  ]
+}
