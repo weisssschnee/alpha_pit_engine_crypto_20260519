@@ -917,6 +917,76 @@
       ]
     },
     {
+      "id": "field_information_qualification_v0",
+      "label": "Context-bound field information qualification V0",
+      "kind": "representation_qualification",
+      "lifecycle": "EXPERIMENTAL",
+      "paths": [
+        "config/crypto_field_information_v0.json",
+        "alphafactory_crypto/field_information.py",
+        "scripts/crypto_field_information_v0.py",
+        "runtime/crypto_field_information_v0_20260717/run_manifest.json",
+        "reports/CRYPTO_FIELD_INFORMATION_V0_20260717.md"
+      ],
+      "critical": true,
+      "semantic_role": "context_bound_feature_information_qualification",
+      "active_authority": false,
+      "authority": {
+        "path": "config/crypto_field_information_v0.json",
+        "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
+        "verified_sha": "057e31df71f55f9e3a6e8ea3b48d53293d7d2e13",
+        "sha256": "BE2021B0C493CFA51E19A3F5DECD527AF27CA797031A0E59239E6F94B3CF9CA6"
+      },
+      "contracts": [
+        {
+          "id": "compiled_token_view_not_authority",
+          "type": "AUTHORITY",
+          "rule": "The 5,388-token catalog is a traceable compiled view over existing registries; it is not a new feature authority and cannot activate any field",
+          "severity": "HARD",
+          "enforced_by": "field_information.compile_token_catalog",
+          "evidence_ref": "runtime/crypto_field_information_v0_20260717/token_catalog.parquet"
+        },
+        {
+          "id": "context_bound_information_scope",
+          "type": "EVIDENCE",
+          "rule": "The 41-field broad census and 94-field Core3 aggTrades census are separately qualified contexts; their rows, assets, and evidence cannot be pooled into a single 120-field training-panel claim",
+          "severity": "HARD",
+          "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json"
+        },
+        {
+          "id": "proposed_pack_requires_admission",
+          "type": "ADMISSION",
+          "rule": "The 120-token Core Pack is proposed and context-bound; model use requires a matching data-adequacy decision and explicit development-only authorization",
+          "severity": "HARD",
+          "enforced_by": "data_adequacy_gate",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_field_information_v0_20260717/core_pack_manifest.json"
+        },
+        {
+          "id": "field_census_sealed_boundary",
+          "type": "BOUNDARY",
+          "rule": "The census reads no timestamp after 2024-06-30 23:00 UTC and cannot authorize performance search, OOS access, promotion, or cross-sprint memory",
+          "severity": "HARD",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json"
+        }
+      ],
+      "validation": {
+        "level": "RUNTIME_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json",
+        "evidence_sha256": "20301588F6A6D6721AC794DB5638D6251E8DB37A1ABE0D5E6C64BB47680A3D95",
+        "verified_at_sha": "057e31df71f55f9e3a6e8ea3b48d53293d7d2e13"
+      },
+      "promotion_requirements": [
+        "context-matched data adequacy",
+        "materialized model input receipt",
+        "development-only matched comparison",
+        "explicit authorization"
+      ]
+    },
+    {
       "id": "formal_performance_search",
       "label": "Formal Performance Search",
       "kind": "boundary",
@@ -1611,6 +1681,32 @@
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
         "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
+      }
+    },
+    {
+      "id": "field_pack_requires_data_adequacy",
+      "source": "field_information_qualification_v0",
+      "target": "data_adequacy_gate",
+      "relation": "admission_required",
+      "lifecycle": "EXPERIMENTAL",
+      "critical": true,
+      "evidence_type": "RUNTIME",
+      "contract": {
+        "id": "no_cross_context_adequacy_inference",
+        "type": "ADMISSION",
+        "rule": "Field-level information evidence does not satisfy model-level data adequacy; each future model must use one coherent context with sufficient assets, history, labels, and independent blocks",
+        "severity": "HARD",
+        "enforced_by": "data_adequacy_gate",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json"
+      },
+      "validation": {
+        "level": "RUNTIME_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_field_information_v0_20260717/run_manifest.json",
+        "evidence_sha256": "20301588F6A6D6721AC794DB5638D6251E8DB37A1ABE0D5E6C64BB47680A3D95",
+        "verified_at_sha": "057e31df71f55f9e3a6e8ea3b48d53293d7d2e13"
       }
     },
     {

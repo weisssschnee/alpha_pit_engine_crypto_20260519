@@ -4,9 +4,9 @@ Last updated: 2026-07-17 Asia/Hong_Kong
 
 ## Current phase
 
-`DEVELOPMENT_DATA_AND_REPRESENTATION_ADEQUACY`
+`CONTEXT_BOUND_FIELD_INFORMATION_QUALIFIED`
 
-The immediate task is to qualify a compact volume/flow representation expansion against the observed-archive train surface. Do not bulk-enable the 5,211 static derived specifications and do not start a new performance search.
+Field Information V0 is complete. It preserves the complete 5,388-token inventory view, audits all 41 broad-panel fields and all 94 Core3 aggTrades base fields, and proposes a context-bound 120-token Core Pack without bulk materializing 5,211 derived specifications. It does not establish one unified 120-field training panel or authorize a new performance search.
 
 ## Current decisions
 
@@ -23,6 +23,8 @@ CRYPTO_IMMUTABLE_CHALLENGER_NOT_ISSUED
 IMPLEMENTATION_SPECIFIC_INFORMATIVE_NEGATIVE
 GRAPH_RAW_CURRENT_SEPARATION_ACTIVE
 CURRENT_CONTRACT_CAPSULE_ACTIVE
+CRYPTO_FIELD_INFORMATION_V0_COMPLETED
+CONTEXT_BOUND_CORE_PACK_PROPOSED
 ```
 
 ## Accepted identities
@@ -30,6 +32,7 @@ CURRENT_CONTRACT_CAPSULE_ACTIVE
 - Provenance closure: branch `origin/audit/evalreset-collapse-forensics-20260711`, commit `4726795f61052470d56e2d1475e4f6da9d262943`, tag `crypto-frontier-provenance-closure-20260714`.
 - Current research branch: `experiment/crypto-explicit-latent-adaptive-v1-20260717`.
 - Latest implementation qualification: `7389a36ebb4ee62f57aeb818cf4db7157bd1ea9f`.
+- Field Information V0 source: `057e31df71f55f9e3a6e8ea3b48d53293d7d2e13`; run identity SHA256: `623036F48CBC8089CC61E81876F3A1E14199FC781456BF9F39183F8A129E53D6`.
 - Latest qualified Graph closure before this maintenance phase: `920e0ad35c07e2e2cee3ed2be8ad0753937f86f4`.
 - Accepted closure bundle SHA256: `99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2`.
 - 18-month compositional bundle SHA256: `EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492`.
@@ -43,21 +46,23 @@ CURRENT_CONTRACT_CAPSULE_ACTIVE
 - Observed-archive train surface: 2,549,139 rows, 13,200 unique hours, and 276 observed assets across the joined 2023H2/2024 train archive. It is not survivorship-complete; native aggTrades history remains much narrower.
 - 18-month compositional run: 41 fields across 12 families, 500,000 proposal audit, 8,192 adaptive matched pairs, and zero sealed reads. Localized mechanisms did not supply independent evidence sufficient to issue a challenger.
 - Explicit/latent comparison: 41/41 means cache loadability plus minimum adaptive-surface nonmissing/variance. Arm D is implementation-verified. Arm E is an overlapping field-family grouped structured proxy with shared objectives and zero-out ablation; its configured semantic matched controls were not executed. The result is an implementation-specific development negative after 5 bps cost, not OOS evidence or rejection of latent-state research.
-- Feature inventory: 94 recovered aggTrades base specifications and 5,211 derived specifications exist, but 5,378 of 5,388 inventory rows are not runtime-loaded. Static formula presence is not 18-month data admission.
+- Field Information V0: the compiled view contains 177 base/registered tokens and 5,211 derived specifications. Census loading succeeded for 41/41 broad fields and 94/94 Core3 aggTrades fields. `census_loaded` is not `current_runtime_member`: only ten broad fields are current-runtime members, while the 94 Core3 fields remain a separate three-asset mechanism context.
+- Volume and flow are materially represented: the broad context contains seven quote-volume/activity fields; the Core3 registry contains 19 activity/liquidity, 16 flow, 6 large-trade, and 26 rolling fields. Trade count, quote volume, size-bucket notional, buy/sell quantity, and price-range fields lead the information census.
+- Proposed Core Pack: 120 unique tokens = 75 base plus 45 lazy derived; 39 tokens belong to the broad context and 81 to Core3. This is a context-qualified candidate collection, not a claim that all 120 coexist on the 498-asset broad panel.
 
 ## Active execution plan
 
-1. Define a 30-80 field volume/flow core pack from existing economically distinct base fields.
-2. Run ingress/data-adequacy checks for history, assets, nonmissingness, variance, PIT lag, and independent evaluation blocks.
-3. Remove mechanical duplicates by lineage and correlation before model input.
-4. If adequate, freeze one development-only comparison against the current 41-field baseline; otherwise report `DATA_ADEQUACY_UNDERPOWERED` and stop.
+1. Treat the 120-token output as two context-bound candidate surfaces, not one merged training matrix.
+2. For a future model comparison, choose exactly one context and run the existing Data Adequacy Gate before materialization.
+3. The broad context may compare selected currently available fields against the 41-field baseline; the Core3 context may test microstructure mechanisms only and must retain the three-asset scope label.
+4. Materialize only the selected base and lazy transforms required by that frozen comparison; do not expand all 5,211 derived specifications.
 5. Keep challenge, recent, May stress, forward, promotion, and cross-sprint memory closed.
 
 No large experiment is authorized merely by this plan.
 
 ## Blockers
 
-- Historical aggTrades coverage is not yet equivalent to the 18-month observed-archive surface.
+- Historical aggTrades coverage is not yet equivalent to the 18-month observed-archive surface; the qualified Core3 slice has 3 assets, 4,368 hours, and 13,068 eligible observations.
 - Existing external-paradigm samples lack independent evaluation power.
 - The localized compositional mechanism remains challenge-unstable.
 - The structured-proxy comparison lacks executed semantic matched controls and does not identify independent latent states.
@@ -87,4 +92,4 @@ No status code overrides observed runtime or source facts.
 
 ## Next action
 
-Create and qualify the compact volume/flow core-pack contract. Do not materialize the full 5,211-field expansion until the smaller package proves adequate coverage and a bounded comparison is explicitly authorized.
+Run no large experiment yet. The next bounded decision is whether to admit one coherent context to a small development-only matched model comparison; otherwise wait for broader aligned aggTrades history. Do not materialize the full 5,211-field expansion.
