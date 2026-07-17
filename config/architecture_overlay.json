@@ -565,7 +565,7 @@
         }
       ],
       "validation": {
-        "level": "RUNTIME_VERIFIED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": "config/crypto_real_data_instrument_canary_v1.json",
@@ -1047,6 +1047,69 @@
       }
     },
     {
+      "id": "liquidation_supplier_ingress",
+      "label": "Liquidation supplier ingress (quarantined)",
+      "kind": "data_ingress",
+      "lifecycle": "ACTIVE",
+      "paths": [
+        "alphafactory_crypto/liquidation_ingress.py",
+        "config/crypto_liquidation_supplier_ingress_v1.json",
+        "scripts/crypto_liquidation_supplier_ingress.py",
+        "reports/CRYPTO_LIQUIDATION_SUPPLIER_INGRESS_20260718.md"
+      ],
+      "critical": true,
+      "semantic_role": "liquidation_source_ingress",
+      "active_authority": true,
+      "authority": {
+        "path": "config/crypto_liquidation_supplier_ingress_v1.json",
+        "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
+        "verified_sha": "d64a783dac4c148d1924f76acb7b8a80cbcc7f1a",
+        "sha256": "AA4DB810885F9EBAEF1BACAA1C7C3D789755D7CC7D469BC4A4819127C4D73C8C"
+      },
+      "contracts": [
+        {
+          "id": "supplier_ws_source_independence",
+          "type": "ADMISSION",
+          "rule": "CryptoHFT history and Binance WebSocket captures are independent sources; stitching requires a frozen overlap comparison of event count, notional, and large-liquidation coverage",
+          "severity": "HARD",
+          "enforced_by": "liquidation_ingress.qualify_overlap",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/overlap_qualification.json"
+        },
+        {
+          "id": "linear_contract_notional_only",
+          "type": "EVIDENCE",
+          "rule": "Only linear USDT/USDC symbols are notional-comparable; inverse, delivery, and unknown contracts remain quarantined until an explicit multiplier contract exists",
+          "severity": "HARD",
+          "enforced_by": "liquidation_ingress.classify_contract",
+          "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/release_preflight.json"
+        },
+        {
+          "id": "liquidation_release_research_quarantine",
+          "type": "BOUNDARY",
+          "rule": "The 2025-2026 release is ingress and compatibility evidence only; it cannot enter research, economic evaluation, sealed roles, promotion, or adaptive memory",
+          "severity": "HARD",
+          "enforced_by": "crypto_liquidation_supplier_ingress run manifest",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json"
+        }
+      ],
+      "validation": {
+        "level": "RUNTIME_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
+        "evidence_sha256": "6F81941B0D08EF082F49309A4FFA33E4E173B3CCA999861B07452BD37668AEEC",
+        "verified_at_sha": "c7ee32e1a4be635a6720cc13ef4a66b3e36f4ca8"
+      },
+      "promotion_requirements": [
+        "canonical Binance WebSocket history root",
+        "frozen overlap gate pass",
+        "paradigm-aware data adequacy pass",
+        "explicit research activation"
+      ]
+    },
+    {
       "id": "sealed_research_boundaries",
       "label": "Forward / Challenge / Promotion boundaries",
       "kind": "boundary",
@@ -1089,7 +1152,7 @@
         }
       ],
       "validation": {
-        "level": "RUNTIME_ENFORCED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": ".planning/STATE.md",
@@ -1735,6 +1798,32 @@
       }
     },
     {
+      "id": "liquidation_release_requires_data_adequacy",
+      "source": "liquidation_supplier_ingress",
+      "target": "data_adequacy_gate",
+      "relation": "admission_required",
+      "lifecycle": "ACTIVE",
+      "critical": true,
+      "evidence_type": "RUNTIME",
+      "contract": {
+        "id": "source_compatibility_not_research_admission",
+        "type": "ADMISSION",
+        "rule": "Supplier preflight or overlap compatibility cannot admit the release to research; a paradigm-specific Data Adequacy Gate pass and explicit activation are still required",
+        "severity": "HARD",
+        "enforced_by": "data_adequacy_gate",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json"
+      },
+      "validation": {
+        "level": "RUNTIME_ENFORCED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
+        "evidence_sha256": "6F81941B0D08EF082F49309A4FFA33E4E173B3CCA999861B07452BD37668AEEC",
+        "verified_at_sha": "c7ee32e1a4be635a6720cc13ef4a66b3e36f4ca8"
+      }
+    },
+    {
       "id": "sealed_candidate_feedback_forbidden",
       "source": "sealed_research_boundaries",
       "target": "multi_paradigm_arena",
@@ -1782,6 +1871,7 @@
     {"semantic_role": "mapped_cost_evaluator", "authoritative_component": "real_data_mapping_cost_evaluator"},
     {"semantic_role": "primitive_semantic_authority", "authoritative_component": "canonical_primitive_authority"},
     {"semantic_role": "portfolio_mapping_authority", "authoritative_component": "explicit_portfolio_mapping"},
-    {"semantic_role": "adaptive_feedback_authority", "authoritative_component": "adaptive_strict_feasibility_feedback"}
+    {"semantic_role": "adaptive_feedback_authority", "authoritative_component": "adaptive_strict_feasibility_feedback"},
+    {"semantic_role": "liquidation_source_ingress", "authoritative_component": "liquidation_supplier_ingress"}
   ]
 }
