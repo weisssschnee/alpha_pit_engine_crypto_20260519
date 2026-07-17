@@ -901,14 +901,14 @@
       "source": "liquidation_supplier_ingress",
       "target": "data_adequacy_gate",
       "validation": {
-        "checked_at": "2026-07-17T18:36:56.219627+00:00",
+        "checked_at": "2026-07-17T18:52:31.706831+00:00",
         "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
-        "evidence_sha256": "6F81941B0D08EF082F49309A4FFA33E4E173B3CCA999861B07452BD37668AEEC",
+        "evidence_sha256": "3FC88E4A96DD2CDCE4A64E40B8BD0AB0237E8E5CECEA99E02D736E39D153B329",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "c7ee32e1a4be635a6720cc13ef4a66b3e36f4ca8"
+        "verified_at_sha": "58ff34e48cb88acc0005e741c8aaa52d3528177e"
       }
     },
     {
@@ -946,7 +946,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-17T18:36:56.219627+00:00",
+  "generated_at": "2026-07-17T18:52:31.706831+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -4680,14 +4680,14 @@
       "required": false,
       "semantic_role": "liquidation_source_ingress",
       "validation": {
-        "checked_at": "2026-07-17T18:36:56.219627+00:00",
+        "checked_at": "2026-07-17T18:52:31.706831+00:00",
         "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
-        "evidence_sha256": "6F81941B0D08EF082F49309A4FFA33E4E173B3CCA999861B07452BD37668AEEC",
+        "evidence_sha256": "3FC88E4A96DD2CDCE4A64E40B8BD0AB0237E8E5CECEA99E02D736E39D153B329",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "c7ee32e1a4be635a6720cc13ef4a66b3e36f4ca8"
+        "verified_at_sha": "58ff34e48cb88acc0005e741c8aaa52d3528177e"
       },
       "visible_by_default": true
     },
@@ -4774,7 +4774,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "6B333B6688853F0508D40BADD04911602B385ECC02AB38C482B7BA7838EF18C9"
+    "sha256": "DD4187FD4C9CFDE4C14177631D9760D560C4798CC2DA4E527504C5C93E13245F"
   },
   "profile_id": null,
   "profiles": [
@@ -4805,13 +4805,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "a1eb918f8f464fd8f68e26260b879f67f665ae34",
+    "built_at_commit": "945087473f977c069f5870d4e8cc499308cfaa34",
     "edge_count": 32765,
     "node_count": 17733,
     "path": ".planning/graphs/graph.json",
-    "sha256": "4B52E7C40C5403D497D8DEFB0BF0072225959C32E82CF53D1D2EF715B918E572"
+    "sha256": "53A74D9412AFBFFFB028C6792AECCCDCC2AFE0BF1431A40BAECC157216C93ED3"
   },
-  "repo_head": "a1eb918f8f464fd8f68e26260b879f67f665ae34",
+  "repo_head": "945087473f977c069f5870d4e8cc499308cfaa34",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
