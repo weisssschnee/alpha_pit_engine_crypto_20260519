@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "20260718_core_pack_consumption_001",
+  "objective": "Qualify actual context-bound consumption of the frozen 120-token Core Pack without performance search or economic evaluation",
+  "inputs": {
+    "core_pack": "runtime/crypto_field_information_v0_20260717/core_pack_manifest.json",
+    "field_information_config": "config/crypto_field_information_v0.json",
+    "broad_registry": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY.json",
+    "broad_cache": ".cache/crypto_18m_compositional_broad_search_v1",
+    "aggtrades_base": "runtime/crypto_feature_runtime_inventory_20260714/aggtrades_base_feature_registry_94.csv",
+    "aggtrades_derived": "runtime/crypto_feature_runtime_inventory_20260714/aggtrades_derived_feature_specs_5211.csv",
+    "core3_panel": "G:/AlphaFactory_CryptoData/gold/panels/crypto_core12_1h_with_aggtrades_features_v1.parquet"
+  },
+  "contexts": {
+    "BROAD_PANEL_BASELINE": {
+      "start": "2023-07-01T00:00:00Z",
+      "end_exclusive": "2024-07-01T00:00:00Z",
+      "probe_start": "2024-01-01T00:00:00Z",
+      "target_horizon_hours": 4,
+      "probe_assets": 32
+    },
+    "CORE3_MICROSTRUCTURE_PILOT": {
+      "symbols": ["BTCUSDT", "ETHUSDT", "SOLUSDT"],
+      "start": "2024-01-01T00:00:00Z",
+      "end_exclusive": "2024-07-01T00:00:00Z"
+    }
+  },
+  "consumer_probe": {
+    "seed": 20260718,
+    "maximum_samples_per_context": 8192,
+    "epochs": 12,
+    "hidden_width": 32,
+    "learning_rate": 0.01,
+    "ablation_samples": 2048,
+    "minimum_finite_ratio": 0.05
+  },
+  "frozen_budget": {
+    "contexts": 2,
+    "tokens": 120,
+    "models_per_context": 1,
+    "seeds": 1,
+    "hyperparameter_search": false,
+    "estimated_wall_minutes": 8,
+    "estimated_peak_memory_gb": 2.0
+  },
+  "boundaries": {
+    "context_merge_allowed": false,
+    "sealed_reads_allowed": false,
+    "latest_timestamp_exclusive": "2024-07-01T00:00:00Z",
+    "formal_performance_search": false,
+    "portfolio_mapping": false,
+    "economic_evaluation": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_core_pack_consumption_v1_20260718",
+    "report": "reports/CRYPTO_CORE_PACK_CONSUMPTION_V1_20260718.md"
+  }
+}
