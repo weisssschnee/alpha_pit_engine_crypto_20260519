@@ -42,7 +42,6 @@ $RawFreshnessNeutralPrefixes = @(
     "config/architecture_profiles/",
     "profiles/",
     "runtime/crypto_real_data_instrument_canary_",
-    "runtime/superseded/crypto_real_data_instrument_canary_",
     "runtime/crypto_cem_diversity_ab_"
 )
 
