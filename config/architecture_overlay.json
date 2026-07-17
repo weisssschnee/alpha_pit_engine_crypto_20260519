@@ -565,7 +565,7 @@
         }
       ],
       "validation": {
-        "level": "STATIC_VERIFIED",
+        "level": "RUNTIME_VERIFIED",
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": "config/crypto_real_data_instrument_canary_v1.json",
@@ -1095,7 +1095,7 @@
         }
       ],
       "validation": {
-        "level": "RUNTIME_VERIFIED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
@@ -1152,7 +1152,7 @@
         }
       ],
       "validation": {
-        "level": "STATIC_VERIFIED",
+        "level": "RUNTIME_ENFORCED",
         "result": "PASS",
         "profile": "crypto-real-data-instrument-canary",
         "evidence_ref": ".planning/STATE.md",
@@ -1815,7 +1815,7 @@
         "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json"
       },
       "validation": {
-        "level": "RUNTIME_ENFORCED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
