@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "run_id": "CRYPTO_LIQUIDATION_SUPPLIER_INGRESS_20260718",
+  "release": {
+    "release_id": "CRYPTOHFT_LIQUIDATIONS_20250628_20260713",
+    "root": "G:/AlphaFactory_CryptoData/deliveries/cryptohft_liquidations_20250628_20260713",
+    "start_date": "2025-06-28",
+    "end_date": "2026-07-13",
+    "silver_layer": "silver/events_daily",
+    "gold_layer": "gold/hourly_sparse",
+    "expected_summary": {
+      "daily_partition_count": 381,
+      "silver_rows": 11138396,
+      "gold_rows": 1304850,
+      "symbol_count": 500,
+      "event_count": 11138396,
+      "parse_error_count": 0,
+      "unknown_side_count": 0,
+      "source_date_mismatch_count": 0
+    }
+  },
+  "hash_workers": 8,
+  "schemas": {
+    "silver_required": [
+      "event_time_utc",
+      "observable_time",
+      "symbol",
+      "side",
+      "effective_quantity",
+      "effective_price",
+      "liquidation_notional",
+      "liquidation_direction",
+      "source_key"
+    ],
+    "gold_required": [
+      "symbol",
+      "timestamp",
+      "liquidation_event_count",
+      "liquidation_buy_count",
+      "liquidation_sell_count",
+      "liquidation_total_notional",
+      "liquidation_event_notional_max",
+      "first_observable_time",
+      "last_observable_time",
+      "feature_available_time",
+      "execution_time_min",
+      "exact_duplicate_rows_dropped"
+    ]
+  },
+  "overlap_gate": {
+    "minimum_overlap_days": 14,
+    "minimum_common_symbols": 20,
+    "minimum_ws_events": 1000,
+    "minimum_large_events_per_threshold": 10,
+    "minimum_event_count_coverage": 0.8,
+    "minimum_notional_coverage": 0.8,
+    "minimum_large_count_coverage": 0.75,
+    "large_notional_thresholds": [10000, 100000, 1000000],
+    "vendor_mapping": {
+      "event_time": ["event_time_utc", "event_time", "trade_time_utc"],
+      "symbol": ["symbol"],
+      "side": ["side"],
+      "notional": ["liquidation_notional"],
+      "quantity": ["effective_quantity"],
+      "price": ["effective_price"]
+    },
+    "ws_mapping": {
+      "event_time": ["event_time_utc", "event_time", "trade_time_utc", "timestamp", "E", "T"],
+      "symbol": ["symbol", "s", "o.s"],
+      "side": ["side", "S", "o.S"],
+      "notional": ["liquidation_notional", "notional"],
+      "quantity": ["effective_quantity", "filled_quantity", "quantity", "z", "q", "o.z", "o.q"],
+      "price": ["effective_price", "average_price", "price", "ap", "p", "o.ap", "o.p"]
+    }
+  },
+  "boundaries": {
+    "data_role": "QUARANTINED_INGRESS_AND_SOURCE_COMPATIBILITY_ONLY",
+    "research_input_allowed": false,
+    "economic_evaluation_allowed": false,
+    "automatic_stitching_allowed": false,
+    "new_performance_search": false,
+    "challenge_read": false,
+    "forward_research_read": false,
+    "recent_research_read": false,
+    "may_stress_research_read": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_liquidation_supplier_ingress_20260718",
+    "report": "reports/CRYPTO_LIQUIDATION_SUPPLIER_INGRESS_20260718.md"
+  }
+}
