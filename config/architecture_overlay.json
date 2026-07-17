@@ -849,7 +849,8 @@
         "alphafactory_crypto/latent_adaptive/experiment.py",
         "config/crypto_explicit_latent_adaptive_v1.json",
         "runtime/crypto_explicit_latent_adaptive_v1_20260717/decision.json",
-        "reports/crypto_explicit_latent_adaptive_v1_20260717/REPORT.md"
+        "reports/crypto_explicit_latent_adaptive_v1_20260717/REPORT.md",
+        "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md"
       ],
       "critical": true,
       "semantic_role": "adaptive_latent_challenger_evidence",
@@ -857,7 +858,8 @@
       "authority": {
         "path": "alphafactory_crypto/latent_adaptive/experiment.py",
         "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
-        "verified_sha": "54615174055edb38b8761fe58b1d62fdc2a520e5"
+        "verified_sha": "7389a36ebb4ee62f57aeb818cf4db7157bd1ea9f",
+        "sha256": "15A6236404487643B1EFB60F241D0C3955A8BFEAE9FAB65F5FC71FF417942D98"
       },
       "contracts": [
         {
@@ -870,20 +872,42 @@
           "evidence_ref": "runtime/crypto_explicit_latent_adaptive_v1_20260717/data_and_split_binding.json"
         },
         {
+          "id": "adaptive_surface_capability_scope",
+          "type": "EVIDENCE",
+          "rule": "The 41/41 gate establishes cache loadability plus minimum adaptive-surface nonmissing and variance; it does not establish per-field lineage/PIT re-verification, gradient reachability, learned utilization, or nonredundancy",
+          "severity": "HARD",
+          "evidence_ref": "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md"
+        },
+        {
+          "id": "structured_proxy_claim_scope",
+          "type": "EVIDENCE",
+          "rule": "Arm E is an overlapping field-family grouped multi-branch TCN with shared objectives and zero-out ablation, not a slot-supervised, disentangled, causally identified ecosystem latent model",
+          "severity": "HARD",
+          "evidence_ref": "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md"
+        },
+        {
           "id": "latent_negative_claim_scope",
           "type": "EVIDENCE",
-          "rule": "The qualified result is a non-degenerate adaptive-development negative for these fixed small TCN residual and structured-proxy arms; it is not OOS evidence and does not reject all latent representations",
+          "rule": "The result is an implementation-specific adaptive-development negative for fixed D/E arms; configured semantic matched controls were not executed, and the result is neither OOS evidence nor a rejection of all latent representations",
           "severity": "HARD",
-          "evidence_ref": "runtime/crypto_explicit_latent_adaptive_v1_20260717/decision.json"
+          "evidence_ref": "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md"
         }
       ],
+      "claim_badges": [
+        "ARM D IMPLEMENTATION VERIFIED",
+        "DEVELOPMENT NEGATIVE",
+        "STRUCTURED-PROXY CLAIM PARTIAL",
+        "NO MATCHED-CONTROL RUNTIME",
+        "NO RUNTIME-FORMAL TRACE",
+        "NO OOS"
+      ],
       "validation": {
-        "level": "RUNTIME_VERIFIED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_explicit_latent_adaptive_v1_20260717/decision.json",
-        "evidence_sha256": "5631C05B492F4FCF839C084B4F86F49BFF64F3B70941F5CACAC2ADF0A318C95F",
-        "verified_at_sha": "54615174055edb38b8761fe58b1d62fdc2a520e5"
+        "evidence_ref": "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md",
+        "evidence_sha256": "DC2E109B222F0E9999F7498F91306845A4939D46B5B961B0E677F3A51ECB1DBC",
+        "verified_at_sha": "7389a36ebb4ee62f57aeb818cf4db7157bd1ea9f"
       },
       "promotion_requirements": [
         "independent OOS authorization",
@@ -1221,7 +1245,7 @@
       "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
       "lifecycle": "EXPERIMENTAL",
       "critical": true,
-      "evidence_type": "RUNTIME",
+      "evidence_type": "STATIC",
       "contract": {
         "id": "cem_diversity_non_formal_relation",
         "type": "EVIDENCE",
@@ -1600,18 +1624,18 @@
       "contract": {
         "id": "latent_common_bridge_scope",
         "type": "EVIDENCE",
-        "rule": "All five arms use the same t+2 execution, 4h target, zero-net mapping, full-L1 turnover, and 5 bps cost; the result changes only adaptive development evidence",
+        "rule": "All five arms use the same t+2 execution, 4h target, zero-net mapping, full-L1 turnover, and 5 bps cost; D is implementation-verified, while E remains a structured-proxy comparison without executed semantic matched controls",
         "severity": "HARD",
         "enforced_by": "latent_adaptive.economic_metrics",
         "bypass_forbidden": true,
-        "evidence_ref": "runtime/crypto_explicit_latent_adaptive_v1_20260717/experiment_contract.json"
+        "evidence_ref": "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md"
       },
       "validation": {
-        "level": "RUNTIME_VERIFIED",
-        "result": "PASS",
+        "level": "PARTIAL",
+        "result": "INSUFFICIENT_EVIDENCE",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_explicit_latent_adaptive_v1_20260717/decision.json",
-        "verified_at_sha": "54615174055edb38b8761fe58b1d62fdc2a520e5"
+        "evidence_ref": "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md",
+        "verified_at_sha": "7389a36ebb4ee62f57aeb818cf4db7157bd1ea9f"
       }
     },
     {
