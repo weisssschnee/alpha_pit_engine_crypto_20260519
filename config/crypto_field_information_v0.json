@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "run_id": "CRYPTO_FIELD_INFORMATION_V0_20260717",
+  "authorization": "DEVELOPMENT_ONLY_FIELD_INFORMATION_QUALIFICATION",
+  "inputs": {
+    "inventory": "runtime/crypto_feature_runtime_inventory_20260714/CRYPTO_FEATURE_RUNTIME_INVENTORY.csv",
+    "lineage": "runtime/crypto_feature_runtime_inventory_20260714/feature_lineage_ledger.csv",
+    "aggtrades_base": "runtime/crypto_feature_runtime_inventory_20260714/aggtrades_base_feature_registry_94.csv",
+    "aggtrades_derived": "runtime/crypto_feature_runtime_inventory_20260714/aggtrades_derived_feature_specs_5211.csv",
+    "broad_registry": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY.json",
+    "broad_cache": ".cache/crypto_18m_compositional_broad_search_v1",
+    "core3_panel": "G:/AlphaFactory_CryptoData/gold/panels/crypto_core12_1h_with_aggtrades_features_v1.parquet"
+  },
+  "contexts": {
+    "BROAD_PANEL_BASELINE": {
+      "start": "2023-07-01T00:00:00Z",
+      "end_exclusive": "2024-07-01T00:00:00Z",
+      "bin_fit_end_exclusive": "2024-03-01T00:00:00Z",
+      "target_horizon_hours": 4,
+      "known_fields": [
+        "account_position_divergence",
+        "global_long_short_account_ratio_last",
+        "mark_trade_basis_bps",
+        "open_interest_value_last",
+        "open_interest_value_mean",
+        "top_global_account_divergence",
+        "top_long_short_account_ratio_last",
+        "top_long_short_position_ratio_last",
+        "trade_close",
+        "trade_quote_volume"
+      ]
+    },
+    "CORE3_MICROSTRUCTURE_PILOT": {
+      "symbols": ["BTCUSDT", "ETHUSDT", "SOLUSDT"],
+      "start": "2024-01-01T00:00:00Z",
+      "end_exclusive": "2024-07-01T00:00:00Z",
+      "bin_fit_end_exclusive": "2024-03-01T00:00:00Z",
+      "known_fields": [
+        "ret_1",
+        "quote_asset_volume",
+        "taker_imbalance",
+        "realized_vol_12",
+        "mark_index_ratio",
+        "premium_index",
+        "latest_known_funding_rate"
+      ],
+      "claim_scope": "CORE3_MICROSTRUCTURE_MECHANISM_EVIDENCE"
+    }
+  },
+  "statistics": {
+    "quantile_bins": 16,
+    "maximum_samples_per_field": 200000,
+    "block_permutation_shifts_hours": [168, 336, 504, 672, 840, 1008, 1176, 1344],
+    "redundancy_abs_spearman_threshold": 0.95,
+    "ridge": 0.001
+  },
+  "core_pack": {
+    "minimum_size": 80,
+    "target_size": 120,
+    "maximum_size": 160,
+    "derived_transforms": {
+      "Delta": [4, 24, 72],
+      "ZScore": [24, 72],
+      "TSMean": [4, 24],
+      "Decay": [24]
+    }
+  },
+  "boundaries": {
+    "sealed_reads_allowed": false,
+    "latest_timestamp_exclusive": "2024-07-01T00:00:00Z",
+    "formal_performance_search": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "economic_claim": false,
+    "derived_dense_materialization": false
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_field_information_v0_20260717",
+    "report": "reports/CRYPTO_FIELD_INFORMATION_V0_20260717.md"
+  }
+}
