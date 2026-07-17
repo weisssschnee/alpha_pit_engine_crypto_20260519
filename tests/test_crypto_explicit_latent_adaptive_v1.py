@@ -18,6 +18,7 @@ from alphafactory_crypto.latent_adaptive.experiment import (
     future_volatility,
     known_window,
     predict_block,
+    qualify_adaptive_surface_field,
     shifted_delta,
 )
 
@@ -210,3 +211,26 @@ def test_prediction_representation_slices_time_not_channels() -> None:
     )
     assert prediction.shape == (2, 100)
     assert np.isfinite(representation["latent_variance"])
+
+
+def test_field_qualification_does_not_overclaim_model_utilization() -> None:
+    local = np.array([[1.0, 2.0, np.nan], [2.0, 3.0, 4.0]])
+    eligibility = np.ones_like(local, dtype=bool)
+    row = qualify_adaptive_surface_field(
+        {
+            "field_id": "trade_quote_volume",
+            "field_family": "quote_volume_activity",
+            "observable_lag_hours": 1,
+        },
+        local,
+        eligibility,
+    )
+    assert row["cache_loadable"] is True
+    assert row["tensor_materialized"] is True
+    assert row["adaptive_surface_adequate"] is True
+    assert row["source_lineage_reverified"] is False
+    assert row["pit_semantics_reverified"] is False
+    assert row["gradient_reachability_measured"] is False
+    assert row["output_utilization_measured"] is False
+    assert "PIT_qualified" not in row
+    assert "model_input_exposed" not in row

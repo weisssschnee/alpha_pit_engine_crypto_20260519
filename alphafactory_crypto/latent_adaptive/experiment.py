@@ -189,6 +189,45 @@ def _slice(store: RawPanelStore, spec: Mapping[str, str]) -> slice:
     return store.block_slice(spec["start"], spec["end_exclusive"])
 
 
+def qualify_adaptive_surface_field(
+    registry_item: Mapping[str, Any],
+    local: np.ndarray,
+    local_eligibility: np.ndarray,
+) -> dict[str, Any]:
+    """Describe only what this experiment actually checks for one field.
+
+    Loading a registry field into the adaptive tensor and observing minimum
+    coverage/variance does not re-verify source lineage, PIT semantics, batch
+    exposure, gradient reachability, or learned utilization.
+    """
+
+    finite = np.isfinite(local)
+    nonmissing_ratio = float(finite.mean())
+    variance = float(np.nanvar(local))
+    return {
+        "field_id": str(registry_item["field_id"]),
+        "field_family": str(registry_item["field_family"]),
+        "cache_loadable": True,
+        "observable_lag_hours_declared": registry_item.get("observable_lag_hours"),
+        "source_lineage_reverified": False,
+        "pit_semantics_reverified": False,
+        "tensor_materialized": True,
+        "structural_model_input_wired": True,
+        "batch_exposure_measured": False,
+        "gradient_reachability_measured": False,
+        "output_utilization_measured": False,
+        "nonmissing_ratio": nonmissing_ratio,
+        "variance": variance,
+        "adaptive_surface_adequate": nonmissing_ratio > 0.05 and variance > 0,
+        "eligible_asset_count": int(
+            np.any(finite & local_eligibility, axis=1).sum()
+        ),
+        "effective_time_count": int(
+            np.any(finite & local_eligibility, axis=0).sum()
+        ),
+    }
+
+
 def prepare_data(
     repo_root: Path, config: Mapping[str, Any], runtime_root: Path
 ) -> PreparedData:
@@ -199,8 +238,9 @@ def prepare_data(
     )
     fields = tuple(item["field_id"] for item in registry["fields"])
     families = tuple(sorted(set(item["field_family"] for item in registry["fields"])))
+    registry_by_field = {item["field_id"]: item for item in registry["fields"]}
     family_by_field = {
-        item["field_id"]: item["field_family"] for item in registry["fields"]
+        field: item["field_family"] for field, item in registry_by_field.items()
     }
     field_family = tuple(family_by_field[field] for field in fields)
     slices = {
@@ -274,28 +314,11 @@ def prepare_data(
     train = slices["train"]
     for index, field in enumerate(fields):
         local = raw[:, index, train]
-        field_rows.append(
-            {
-                "field_id": field,
-                "field_family": field_family[index],
-                "source_available": True,
-                "PIT_qualified": True,
-                "representation_materialized": True,
-                "model_input_exposed": True,
-                "nonmissing_ratio": float(np.isfinite(local).mean()),
-                "variance": float(np.nanvar(local)),
-                "eligible_asset_count": int(
-                    np.any(np.isfinite(local) & eligibility[:, train], axis=1).sum()
-                ),
-                "effective_time_count": int(
-                    np.any(np.isfinite(local) & eligibility[:, train], axis=0).sum()
-                ),
-            }
-        )
+        field_rows.append(qualify_adaptive_surface_field(
+            registry_by_field[field], local, eligibility[:, train]
+        ))
     family_covered = len({row["field_family"] for row in field_rows if row["variance"] > 0})
-    effective_fields = sum(
-        row["nonmissing_ratio"] > 0.05 and row["variance"] > 0 for row in field_rows
-    )
+    effective_fields = sum(row["adaptive_surface_adequate"] for row in field_rows)
     gates = {
         "field_count": len(fields) >= int(config["data_adequacy"]["minimum_fields"]),
         "field_families": len(families)
@@ -312,21 +335,30 @@ def prepare_data(
         >= int(config["data_adequacy"]["minimum_effective_sequences"]),
         "family_coverage": family_covered / max(len(families), 1)
         >= float(config["data_adequacy"]["minimum_family_coverage_ratio"]),
-        "model_input_exposure": effective_fields / max(len(fields), 1)
+        "adaptive_surface_field_adequacy": effective_fields / max(len(fields), 1)
         >= float(config["data_adequacy"]["minimum_model_input_exposure_ratio"]),
         "structured_slots_nonempty": all(slot_indices.values()),
     }
     capability = {
-        "schema_version": 1,
+        "schema_version": 2,
         "status": "DATA_ADEQUACY_PASS" if all(gates.values()) else "DATA_ADEQUACY_BLOCKED",
+        "qualification_scope": "ADAPTIVE_SURFACE_LOADABILITY_NONMISSING_VARIANCE",
+        "does_not_establish": [
+            "source_lineage_reverification",
+            "pit_semantics_reverification",
+            "per_field_batch_exposure",
+            "per_field_gradient_reachability",
+            "learned_output_utilization",
+            "nonredundant_information_content",
+        ],
         "gates": gates,
         "panel_identity": store.metadata["identity_sha256"],
         "field_registry_sha256": registry["registry_sha256"],
         "fields": field_rows,
         "field_count": len(fields),
         "field_family_count": len(families),
-        "effective_input_fields": effective_fields,
-        "model_input_exposure_ratio": effective_fields / max(len(fields), 1),
+        "adaptive_surface_adequate_fields": effective_fields,
+        "adaptive_surface_field_adequacy_ratio": effective_fields / max(len(fields), 1),
         "family_coverage_ratio": family_covered / max(len(families), 1),
         "effective_input_dimensions": {
             "latent_values": len(fields),
@@ -1419,9 +1451,10 @@ def run_experiment(
         "",
         "## Capability",
         "",
-        f"- Fields exposed: {data.capability['effective_input_fields']} / {data.capability['field_count']}",
+        f"- Adaptive-surface adequate fields: {data.capability['adaptive_surface_adequate_fields']} / {data.capability['field_count']}",
         f"- Families: {data.capability['field_family_count']}",
-        f"- Model-input exposure: {data.capability['model_input_exposure_ratio']:.4f}",
+        f"- Loadability/nonmissing/variance adequacy: {data.capability['adaptive_surface_field_adequacy_ratio']:.4f}",
+        "- This gate does not establish per-field lineage/PIT re-verification, gradient reachability, or learned utilization.",
         f"- Projected CPU wall hours: {projected_cpu_hours:.3f}",
         "",
         "## Adaptive gate",
