@@ -17,3 +17,11 @@ alphafactory_crypto/broad_search/expression.py text eol=lf
 scripts/crypto_18m_compositional_broad_search.py text eol=lf
 tests/test_broad_search_expression.py text eol=lf
 tests/test_crypto_18m_compositional_search.py text eol=lf
+
+# Byte-stable evidence produced by the liquidation supplier ingress.
+runtime/crypto_liquidation_supplier_ingress_20260718/*.json text eol=lf
+reports/CRYPTO_LIQUIDATION_SUPPLIER_INGRESS_20260718.md text eol=lf
+config/crypto_liquidation_supplier_ingress_v1.json text eol=lf
+alphafactory_crypto/liquidation_ingress.py text eol=lf
+scripts/crypto_liquidation_supplier_ingress.py text eol=lf
+tests/test_liquidation_ingress.py text eol=lf
