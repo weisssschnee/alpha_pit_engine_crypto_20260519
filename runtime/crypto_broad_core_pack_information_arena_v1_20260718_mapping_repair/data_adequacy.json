@@ -1,0 +1,38 @@
+{
+  "checks": {
+    "cross_sectional_assets": true,
+    "development_dates": true,
+    "field_non_null": true,
+    "field_variance": true,
+    "fields": true,
+    "history_length": true,
+    "independent_evaluation_blocks": true,
+    "label_support": true,
+    "training_samples": true,
+    "turnover_observations": true
+  },
+  "claim_scope": "BROAD_39_FIELD_FIXED_DEVELOPMENT_ARENA_ONLY",
+  "field_non_null_minimum": 0.9935245040548277,
+  "field_variance_positive": 39,
+  "split_support": {
+    "selection": {
+      "eligible_assets": 202,
+      "months": 2,
+      "target_samples": 287406,
+      "timestamps": 1464
+    },
+    "stability": {
+      "eligible_assets": 211,
+      "months": 2,
+      "target_samples": 300321,
+      "timestamps": 1464
+    },
+    "train": {
+      "eligible_assets": 189,
+      "months": 8,
+      "target_samples": 899545,
+      "timestamps": 5856
+    }
+  },
+  "status": "DATA_ADEQUACY_PASS"
+}
