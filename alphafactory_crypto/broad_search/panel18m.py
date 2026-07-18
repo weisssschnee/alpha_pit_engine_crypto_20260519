@@ -505,12 +505,20 @@ def field_equivalence_audit(
     *,
     sample_size: int = 5000,
     seed: int = 20260716,
+    block_start: str | None = None,
+    block_end: str | None = None,
 ) -> pd.DataFrame:
     rng = np.random.default_rng(seed)
-    total = store.shape[0] * store.shape[1]
+    time_slice = (
+        store.block_slice(block_start, block_end)
+        if block_start is not None and block_end is not None
+        else slice(0, store.shape[1])
+    )
+    hours = int(time_slice.stop) - int(time_slice.start)
+    total = store.shape[0] * hours
     coordinates = np.sort(rng.choice(total, size=min(sample_size, total), replace=False))
     sampled = {
-        field: np.asarray(store.field(field)).reshape(-1)[coordinates].astype(float)
+        field: np.asarray(store.field(field)[:, time_slice]).reshape(-1)[coordinates].astype(float)
         for field in fields
     }
     rows: list[dict[str, Any]] = []
@@ -546,7 +554,14 @@ def field_equivalence_audit(
                     "rank_correlation": rank_correlation,
                 }
             )
-    return pd.DataFrame(rows)
+    result = pd.DataFrame(rows)
+    result["qualification_block"] = (
+        "DEVELOPMENT_ADAPTIVE_ONLY"
+        if block_start is not None and block_end is not None
+        else "FULL_STORE"
+    )
+    result["field_selection_effect"] = "NONE_AUDIT_ONLY"
+    return result
 
 
 def qualify_fields(

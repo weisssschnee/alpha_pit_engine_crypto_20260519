@@ -8,6 +8,7 @@ import random
 import statistics
 import time
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 
 import numpy as np
@@ -206,6 +207,14 @@ def _variant_operator(family: str, variant: int) -> str:
 def _field_roles(contracts: Sequence[FieldContract]) -> dict[str, list[str]]:
     fields = [item.field_id for item in contracts]
     families = {field: infer_family(field) for field in fields}
+    current_price_level_routes = any(
+        item.pit_authority
+        in {
+            "CURRENT_FIELD_SURFACE_BINDING",
+            "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+        }
+        for item in contracts
+    )
     role_map = {
         "oi_change": [field for field in fields if families[field].startswith("open_interest") and ("change" in field or "zscore" in field)],
         "oi": [field for field in fields if families[field].startswith("open_interest")],
@@ -218,13 +227,45 @@ def _field_roles(contracts: Sequence[FieldContract]) -> dict[str, list[str]]:
         "account": [field for field in fields if families[field] in {"account_crowding", "account_position_divergence"}],
         "state": [field for field in fields if families[field] in {"listing_age_context", "cross_asset_market_state", "funding"}],
     }
-    role_map["local"] = [field for field in fields if families[field] not in {"price_level", "listing_age_context", "cross_asset_market_state"}]
+    # Price levels enter only through the existing rolling-normalized local/state
+    # routes.  Keeping them out of directional return roles preserves the frozen
+    # skeleton semantics while making the current Broad price-state tokens
+    # proposal-reachable.
+    role_map["local"] = [
+        field
+        for field in fields
+        if families[field] not in {"listing_age_context", "cross_asset_market_state"}
+        and (families[field] != "price_level" or current_price_level_routes)
+    ]
     role_map["market_context"] = role_map["local"]
     role_map["payload"] = [field for field in role_map["local"] if families[field] != "funding"]
     for role, values in role_map.items():
         if not values:
             raise ValueError(f"admitted field registry cannot satisfy skeleton role: {role}")
     return role_map
+
+
+def field_role_coverage(
+    contracts: Sequence[FieldContract],
+) -> dict[str, Any]:
+    """Return the deterministic generator reachability of a field contract.
+
+    This is an inline continuation binding, not a second registry.  The caller
+    can fail before proposal generation when a current field is materializable
+    but absent from every frozen skeleton role.
+    """
+
+    roles = _field_roles(contracts)
+    declared = tuple(item.field_id for item in contracts)
+    reachable = tuple(sorted({field for values in roles.values() for field in values}))
+    unreachable = tuple(sorted(set(declared) - set(reachable)))
+    return {
+        "declared_fields": list(declared),
+        "reachable_fields": list(reachable),
+        "unreachable_fields": list(unreachable),
+        "roles": {name: list(values) for name, values in sorted(roles.items())},
+        "all_fields_reachable": not unreachable,
+    }
 
 
 def _normalized(
@@ -415,6 +456,7 @@ def audit_numeric_expressivity(
     candidates: Sequence[CandidateSpec],
     structural: Mapping[str, Any],
     maximum_candidates: int = 50000,
+    checkpoint_path: Path | None = None,
 ) -> dict[str, Any]:
     sample = list(candidates[:maximum_candidates])
     if not sample:
@@ -438,7 +480,7 @@ def audit_numeric_expressivity(
     failures_by_skeleton: dict[str, dict[str, int]] = {}
     mapping = DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET]
     leaf_cache: dict[str, np.ndarray] = {}
-    checkpoint_path = store.cache_root / "expressivity_checkpoint.json"
+    checkpoint_path = checkpoint_path or store.cache_root / "expressivity_checkpoint.json"
     checkpoint_identity = _payload_sha(
         {
             "candidate_count": len(sample),
@@ -584,7 +626,7 @@ def audit_numeric_expressivity(
         status = "MATCHED_CONTROL_CONSTRUCTION_BOTTLENECK"
     else:
         status = "PASS"
-    return {
+    result = {
         "schema_version": 1,
         "status": status,
         "structural": dict(structural),
@@ -621,6 +663,8 @@ def audit_numeric_expressivity(
         ],
         "elapsed_seconds": time.perf_counter() - started,
     }
+    checkpoint_path.unlink(missing_ok=True)
+    return result
 
 
 def skeleton_payload() -> dict[str, Any]:
@@ -641,6 +685,7 @@ __all__ = [
     "Skeleton",
     "audit_numeric_expressivity",
     "expression_from_dict",
+    "field_role_coverage",
     "generate_candidate",
     "generate_structural_pool",
     "operator_path",

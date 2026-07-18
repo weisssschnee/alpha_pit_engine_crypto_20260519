@@ -6,11 +6,15 @@ import concurrent.futures
 import ctypes
 import gc
 import hashlib
+import importlib.metadata
 import json
 import math
 import os
+import platform
 import random
+import shutil
 import subprocess
+import sys
 import time
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
@@ -32,6 +36,7 @@ from .compositional18m import (
     CandidateSpec,
     MECHANISM_FAMILIES,
     audit_numeric_expressivity,
+    field_role_coverage,
     generate_candidate,
     generate_structural_pool,
     skeleton_payload,
@@ -48,12 +53,18 @@ from .pair18m import (
 from .panel18m import (
     RawPanelStore,
     build_raw_panel_cache,
+    economic_role,
     field_equivalence_audit,
+    infer_family,
+    infer_type_unit,
     qualify_fields,
 )
 
 
 EPOCH_ID = "CRYPTO_18M_COMPOSITIONAL_BROAD_ALPHA_SEARCH_EPOCH1"
+CURRENT_FIELD_CONTINUATION_EPOCH_ID = (
+    "CRYPTO_18M_COMPOSITIONAL_CURRENT_FIELD_CONTINUATION_V1"
+)
 POLICIES = (
     "canonical_typed_random",
     "cem_diversity_v2",
@@ -65,6 +76,14 @@ ADAPTIVE_START = "2023-07-01T00:00:00Z"
 ADAPTIVE_END = "2024-07-01T00:00:00Z"
 REPORT_ONLY_START = "2024-07-01T00:00:00Z"
 REPORT_ONLY_END = "2025-01-01T00:00:00Z"
+
+COMPILER_BINDING_PATHS = (
+    "alphafactory_crypto/broad_search/expression.py",
+    "alphafactory_crypto/broad_search/panel18m.py",
+    "alphafactory_crypto/broad_search/compositional18m.py",
+    "alphafactory_crypto/broad_search/pair18m.py",
+    "alphafactory_crypto/broad_search/runner18m.py",
+)
 
 RUNTIME_OUTPUTS = (
     "CRYPTO_18M_SEARCH_CONTRACT.json",
@@ -140,6 +159,362 @@ def _write_json(path: Path, value: Any) -> None:
 
 def _read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _compiler_binding(repo_root: Path) -> dict[str, Any]:
+    rows = [
+        {
+            "path": relative,
+            "bytes": (repo_root / relative).stat().st_size,
+            "sha256": sha256_file(repo_root / relative),
+        }
+        for relative in COMPILER_BINDING_PATHS
+    ]
+    return {
+        "paths": rows,
+        "bundle_sha256": _payload_sha(rows),
+    }
+
+
+def _environment_fingerprint() -> dict[str, Any]:
+    packages = {}
+    for name in ("numpy", "pandas", "pyarrow", "scipy", "psutil"):
+        try:
+            packages[name] = importlib.metadata.version(name)
+        except importlib.metadata.PackageNotFoundError:
+            packages[name] = "NOT_INSTALLED"
+    return {
+        "python_version": platform.python_version(),
+        "python_implementation": platform.python_implementation(),
+        "python_executable": sys.executable,
+        "platform": platform.platform(),
+        "machine": platform.machine(),
+        "processor": platform.processor(),
+        "packages": packages,
+        "thread_caps": {
+            name: os.environ.get(name)
+            for name in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS")
+        },
+    }
+
+
+def _current_field_surface_binding(
+    repo_root: Path, config: Mapping[str, Any]
+) -> tuple[dict[str, Any] | None, tuple[str, ...] | None]:
+    """Bind a continuation to one context of the committed Core Pack.
+
+    Contexts remain separate.  This continuation intentionally consumes only
+    the Broad base-token view that the frozen 40-skeleton compiler can express.
+    """
+
+    surface = config.get("field_surface")
+    if surface is None:
+        return None, None
+    contract_path = repo_root / str(surface["contract"])
+    observed_file_sha = sha256_file(contract_path)
+    if observed_file_sha != str(surface["contract_file_sha256"]).upper():
+        raise ValueError("current field contract file identity changed")
+    payload = _read_json(contract_path)
+    if payload.get("identity_sha256") != str(
+        surface["contract_identity_sha256"]
+    ).upper():
+        raise ValueError("current field contract logical identity changed")
+    if payload.get("boundaries", {}).get("context_merge_allowed") is not False:
+        raise PermissionError("current field contract does not forbid context pooling")
+
+    context_id = str(surface["context_id"])
+    tokens = [
+        row for row in payload.get("tokens", []) if row.get("context_id") == context_id
+    ]
+    if len(tokens) != int(surface["expected_fields"]):
+        raise ValueError("current field context count changed")
+    if any(row.get("token_kind") != "BASE" for row in tokens):
+        raise ValueError("Broad continuation accepts base tokens only")
+    family_mismatches = [
+        str(row["field_id"])
+        for row in tokens
+        if str(row.get("family")) != infer_family(str(row["field_id"]))
+    ]
+    if family_mismatches:
+        raise ValueError(
+            "current field contract family mismatch: " + ",".join(family_mismatches)
+        )
+    field_ids = tuple(str(row["field_id"]) for row in tokens)
+    if len(field_ids) != len(set(field_ids)):
+        raise ValueError("current field context contains duplicate fields")
+    market_state = sum(
+        str(row.get("family")) == "cross_asset_market_state" for row in tokens
+    )
+    asset_local = len(tokens) - market_state
+    expected_views = surface["expected_views"]
+    if (
+        asset_local != int(expected_views["asset_local"])
+        or market_state != int(expected_views["market_state"])
+    ):
+        raise ValueError("current Broad 38+1 view changed")
+
+    provisional_contracts = tuple(
+        FieldContract(
+            field_id,
+            "STATE",
+            "dimensionless",
+            1,
+            "CURRENT_FIELD_SURFACE_BINDING",
+        )
+        for field_id in field_ids
+    )
+    coverage = field_role_coverage(provisional_contracts)
+    if not coverage["all_fields_reachable"]:
+        raise ValueError(
+            "current field surface is not generator-reachable: "
+            + ",".join(coverage["unreachable_fields"])
+        )
+    context_counts = Counter(str(row.get("context_id")) for row in payload["tokens"])
+    binding = {
+        "contract_path": contract_path.relative_to(repo_root).as_posix(),
+        "contract_file_sha256": observed_file_sha,
+        "contract_identity_sha256": payload["identity_sha256"],
+        "selected_context_id": context_id,
+        "selected_field_count": len(field_ids),
+        "selected_field_ids": list(field_ids),
+        "view_counts": {
+            "asset_local": asset_local,
+            "market_state": market_state,
+        },
+        "all_context_counts": dict(sorted(context_counts.items())),
+        "context_pooling": False,
+        "selection_role": "FROZEN_CURRENT_SURFACE_BEFORE_CONTINUATION",
+        "excluded_contexts": list(surface.get("excluded_contexts", [])),
+        "generator_role_coverage": coverage,
+    }
+    return binding, field_ids
+
+
+def _directory_bundle(root: Path) -> dict[str, Any]:
+    metadata = _read_json(root / "metadata.json")
+    required_root = {
+        "metadata.json",
+        "timestamp_ns.npy",
+        "observed.npy",
+        "base_eligible.npy",
+        "source_segment.npy",
+        "target_return_1h.npy",
+        "target_return_4h.npy",
+    }
+    paths = [root / name for name in sorted(required_root)] + [
+        root / "fields" / f"{field_id}.npy"
+        for field_id in sorted(metadata["field_ids"])
+    ]
+    missing = [path for path in paths if not path.is_file()]
+    if missing:
+        raise FileNotFoundError(f"raw cache file missing: {missing[0]}")
+    rows = [
+        {
+            "path": path.relative_to(root).as_posix(),
+            "bytes": path.stat().st_size,
+            "sha256": sha256_file(path),
+        }
+        for path in paths
+    ]
+    return {
+        "file_count": len(rows),
+        "bytes": sum(int(row["bytes"]) for row in rows),
+        "bundle_sha256": _payload_sha(rows),
+    }
+
+
+def _load_pinned_cache_inputs(
+    repo_root: Path,
+    *,
+    cache_root: Path,
+    runtime_root: Path,
+    cache_reuse: Mapping[str, Any],
+) -> tuple[RawPanelStore, dict[str, Any]]:
+    """Open the prior content-bound raw cache without rebuilding its data plane."""
+
+    if cache_reuse.get("mode") != "PINNED_EXISTING_RAW_CACHE":
+        raise ValueError("unsupported cache reuse mode")
+    if not cache_root.is_dir():
+        raise FileNotFoundError(f"pinned raw cache is unavailable: {cache_root}")
+    metadata = _read_json(cache_root / "metadata.json")
+    if metadata.get("identity_sha256") != str(
+        cache_reuse["expected_identity_sha256"]
+    ).upper():
+        raise ValueError("pinned raw cache metadata identity changed")
+    if metadata.get("source_sha") != str(
+        cache_reuse["expected_producer_source_sha"]
+    ).lower():
+        raise ValueError("pinned raw cache producer changed")
+    observed_bundle = _directory_bundle(cache_root)
+    expected_bundle = cache_reuse["directory_bundle"]
+    if observed_bundle != {
+        "file_count": int(expected_bundle["file_count"]),
+        "bytes": int(expected_bundle["bytes"]),
+        "bundle_sha256": str(expected_bundle["bundle_sha256"]).upper(),
+    }:
+        raise ValueError("pinned raw cache content bundle changed")
+
+    inputs = cache_reuse["evidence_inputs"]
+    resolved: dict[str, Path] = {}
+    for name, record in inputs.items():
+        path = repo_root / str(record["path"])
+        if not path.is_file() or sha256_file(path) != str(record["sha256"]).upper():
+            raise ValueError(f"pinned cache evidence input changed: {name}")
+        resolved[name] = path
+
+    eligibility_target = runtime_root / RUNTIME_OUTPUTS[4]
+    eligibility_target.parent.mkdir(parents=True, exist_ok=True)
+    if resolved["eligibility_ledger"].resolve() != eligibility_target.resolve():
+        shutil.copyfile(resolved["eligibility_ledger"], eligibility_target)
+    cache_metadata = {
+        **metadata,
+        "reuse_validation": {
+            "mode": cache_reuse["mode"],
+            "directory_bundle": observed_bundle,
+            "evidence_input_sha256": {
+                name: str(record["sha256"]).upper()
+                for name, record in sorted(inputs.items())
+            },
+        },
+    }
+    return RawPanelStore.open(cache_root), cache_metadata
+
+
+def _adaptive_surface_qualification(
+    store: RawPanelStore,
+    *,
+    field_ids: Sequence[str],
+    current_runtime_fields: Iterable[str],
+) -> tuple[pd.DataFrame, dict[str, Any], tuple[FieldContract, ...], pd.DataFrame]:
+    """Qualify the frozen surface using adaptive dates only.
+
+    The current Core Pack chooses the fields before this run.  This gate may
+    abort for missing/constant inputs, but it never selects fields using the
+    report-only block and never removes fields because of equivalence.
+    """
+
+    requested = tuple(field_ids)
+    if len(requested) != len(set(requested)):
+        raise ValueError("adaptive field surface contains duplicates")
+    missing = sorted(set(requested) - set(store.metadata["field_ids"]))
+    if missing:
+        raise ValueError("adaptive field surface is absent from cache: " + ",".join(missing))
+    time_slice = store.block_slice(ADAPTIVE_START, ADAPTIVE_END)
+    timestamps = np.asarray(store.timestamp_ns[time_slice], dtype=np.int64)
+    observed = np.asarray(store.observed()[:, time_slice], dtype=bool)
+    pre_columns = timestamps < pd.Timestamp("2024-01-01T00:00:00Z").value
+    top_columns = ~pre_columns
+    current = set(current_runtime_fields)
+    rows: list[dict[str, Any]] = []
+    for field_id in requested:
+        values = np.asarray(store.field(field_id)[:, time_slice], dtype=float)
+        finite = np.isfinite(values) & observed
+        clean = values[finite]
+        asset_maximum = np.max(np.where(finite, values, -np.inf), axis=1)
+        asset_minimum = np.min(np.where(finite, values, np.inf), axis=1)
+        varying_assets = int(
+            np.sum(
+                np.isfinite(asset_maximum)
+                & np.isfinite(asset_minimum)
+                & ((asset_maximum - asset_minimum) > 1e-12)
+            )
+        )
+        scope_rows = int(observed.sum())
+        valid_rows = int(finite.sum())
+        pre_scope = int(observed[:, pre_columns].sum())
+        top_scope = int(observed[:, top_columns].sum())
+        pre_valid = int(finite[:, pre_columns].sum())
+        top_valid = int(finite[:, top_columns].sum())
+        non_null_ratio = valid_rows / max(1, scope_rows)
+        pre_non_null_ratio = pre_valid / max(1, pre_scope)
+        top_non_null_ratio = top_valid / max(1, top_scope)
+        coverage_ok = non_null_ratio >= 0.95 and varying_assets >= 80
+        segment_ok = pre_non_null_ratio > 0.0 and top_non_null_ratio > 0.0
+        family = infer_family(field_id)
+        family_ok = family != "other"
+        status = "ADMITTED" if coverage_ok and segment_ok and family_ok else "REJECTED"
+        reasons = []
+        if not segment_ok:
+            reasons.append("ADAPTIVE_TWO_SEGMENT_MATERIALIZATION_FAILED")
+        if not coverage_ok:
+            reasons.append("ADAPTIVE_NON_NULL_OR_TIME_VARIATION_GATE")
+        if not family_ok:
+            reasons.append("NO_ECONOMIC_ROLE")
+        value_type, unit = infer_type_unit(field_id)
+        rows.append(
+            {
+                "field_id": field_id,
+                "rows": scope_rows,
+                "valid_rows": valid_rows,
+                "non_null_ratio": non_null_ratio,
+                "pre2024_non_null_ratio": pre_non_null_ratio,
+                "top2024_non_null_ratio": top_non_null_ratio,
+                "mean": float(np.mean(clean)) if clean.size else None,
+                "variance": float(np.var(clean)) if clean.size else None,
+                "minimum": float(np.min(clean)) if clean.size else None,
+                "maximum": float(np.max(clean)) if clean.size else None,
+                "assets_with_time_variation": varying_assets,
+                "field_family": family,
+                "value_type": value_type,
+                "unit": unit,
+                "sparse_semantics": False,
+                "observable_lag_hours": 1,
+                "lineage_ok": True,
+                "economic_role": economic_role(field_id),
+                "current_runtime_baseline": field_id in current,
+                "admission_status": status,
+                "rejection_reason": ";".join(reasons),
+                "qualification_block": "DEVELOPMENT_ADAPTIVE_ONLY",
+                "report_only_rows_read_for_admission": 0,
+                "field_selection_role": "FROZEN_CURRENT_SURFACE_FAIL_CLOSED_ONLY",
+            }
+        )
+    audit = pd.DataFrame(rows)
+    admitted_rows = audit[audit["admission_status"].eq("ADMITTED")]
+    contracts = tuple(
+        FieldContract(
+            str(row.field_id),
+            str(row.value_type),
+            str(row.unit),
+            int(row.observable_lag_hours),
+            "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+        )
+        for row in admitted_rows.itertuples(index=False)
+    )
+    registry_rows = [
+        {
+            "field_id": row.field_id,
+            "field_family": row.field_family,
+            "value_type": row.value_type,
+            "unit": row.unit,
+            "observable_lag_hours": int(row.observable_lag_hours),
+            "economic_role": row.economic_role,
+            "current_runtime_baseline": bool(row.current_runtime_baseline),
+            "non_null_ratio": float(row.non_null_ratio),
+            "assets_with_time_variation": int(row.assets_with_time_variation),
+        }
+        for row in admitted_rows.itertuples(index=False)
+    ]
+    registry = {
+        "schema_version": 1,
+        "status": "ADMITTED_ADAPTIVE_ONLY" if len(contracts) == len(requested) else "DATA_ADEQUACY_UNDERPOWERED",
+        "field_count": len(contracts),
+        "field_families": sorted({str(row["field_family"]) for row in registry_rows}),
+        "fields": registry_rows,
+        "qualification_block": {
+            "start": ADAPTIVE_START,
+            "end_exclusive": ADAPTIVE_END,
+            "report_only_rows_read_for_admission": 0,
+        },
+    }
+    registry["registry_sha256"] = _payload_sha(registry_rows)
+    equivalence = field_equivalence_audit(
+        store,
+        requested,
+        block_start=ADAPTIVE_START,
+        block_end=ADAPTIVE_END,
+    )
+    return audit, registry, contracts, equivalence
 
 
 def _contracts_payload(contracts: Sequence[FieldContract]) -> list[dict[str, Any]]:
@@ -622,21 +997,67 @@ def _cluster_evidence(
     return clusters, reproduction, counts
 
 
-def _policy_audit(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+def _policy_audit(
+    rows: Sequence[Mapping[str, Any]], *, minimum_positive_seed_count: int = 2
+) -> dict[str, Any]:
     summaries = []
     by_lane: dict[tuple[str, int], list[Mapping[str, Any]]] = defaultdict(list)
     for row in rows:
         by_lane[(str(row["policy"]), int(row["seed"]))].append(row)
     for (policy, seed), local in sorted(by_lane.items()):
+        rewards = [float(row["pair_reward"]) for row in local]
+        top_count = max(1, int(math.ceil(0.10 * len(rewards)))) if rewards else 0
+        top_decile = sorted(rewards, reverse=True)[:top_count]
+        candidate_rewards = {
+            str(row["candidate_id"]): float(row["pair_reward"]) for row in local
+        }
+        parent_uplifts = [
+            float(row["pair_reward"]) - candidate_rewards[str(row["parent_id"])]
+            for row in local
+            if row.get("parent_id")
+            and str(row["parent_id"]) in candidate_rewards
+        ]
+        field_ids: set[str] = set()
+        for row in local:
+            if row.get("candidate_spec_json"):
+                field_ids.update(
+                    CandidateSpec.from_dict(
+                        json.loads(str(row["candidate_spec_json"]))
+                    ).raw_fields
+                )
         summaries.append(
             {
                 "policy": policy,
                 "seed": seed,
                 "pairs": len(local),
                 "unique_candidates": len({row["candidate_id"] for row in local}),
-                "mean_pair_reward": float(np.mean([float(row["pair_reward"]) for row in local])),
+                "unique_candidate_rate": len({row["candidate_id"] for row in local})
+                / max(1, len(local)),
+                "mean_pair_reward": float(np.mean(rewards)) if rewards else None,
+                "top_decile_mean_pair_reward": (
+                    float(np.mean(top_decile)) if top_decile else None
+                ),
                 "matched_positive": sum(bool(row["matched_positive"]) for row in local),
+                "matched_positive_yield": sum(
+                    bool(row["matched_positive"]) for row in local
+                )
+                / max(1, len(local)),
+                "skeleton_coverage": len({str(row["skeleton_id"]) for row in local}),
+                "mechanism_family_coverage": len(
+                    {str(row["mechanism_family"]) for row in local}
+                ),
+                "field_coverage": len(field_ids),
                 "mutation_receipts": sum(str(row["mutation_receipt_json"]) != "null" for row in local),
+                "parent_child_comparisons": len(parent_uplifts),
+                "mean_parent_child_reward_uplift": (
+                    float(np.mean(parent_uplifts)) if parent_uplifts else None
+                ),
+                "positive_parent_child_uplift_rate": (
+                    sum(value > 0.0 for value in parent_uplifts)
+                    / len(parent_uplifts)
+                    if parent_uplifts
+                    else None
+                ),
                 "cache_hits": sum(bool(row["cache_hit"]) for row in local),
             }
         )
@@ -646,6 +1067,7 @@ def _policy_audit(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         if row["policy"] == "canonical_typed_random"
     }
     stable_improvement: dict[str, bool] = {}
+    productivity_vs_random: dict[str, list[dict[str, Any]]] = {}
     for policy in POLICIES[1:]:
         margins = [
             row["mean_pair_reward"] - random_by_seed.get(row["seed"], float("nan"))
@@ -653,10 +1075,79 @@ def _policy_audit(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
             if row["policy"] == policy
         ]
         stable_improvement[policy] = len(margins) >= 2 and sum(value > 0 for value in margins) >= 2
+        comparisons: list[dict[str, Any]] = []
+        for row in summaries:
+            if row["policy"] != policy:
+                continue
+            baseline = next(
+                (
+                    item
+                    for item in summaries
+                    if item["policy"] == "canonical_typed_random"
+                    and item["seed"] == row["seed"]
+                ),
+                None,
+            )
+            if baseline is None:
+                continue
+            comparisons.append(
+                {
+                    "seed": row["seed"],
+                    "mean_pair_reward_margin": row["mean_pair_reward"]
+                    - baseline["mean_pair_reward"],
+                    "top_decile_reward_margin": row["top_decile_mean_pair_reward"]
+                    - baseline["top_decile_mean_pair_reward"],
+                    "matched_positive_yield_margin": row["matched_positive_yield"]
+                    - baseline["matched_positive_yield"],
+                    "unique_candidate_rate_margin": row["unique_candidate_rate"]
+                    - baseline["unique_candidate_rate"],
+                }
+            )
+        productivity_vs_random[policy] = comparisons
+    cem_passes = sum(
+        row["mean_pair_reward_margin"] > 0.0
+        and row["top_decile_reward_margin"] > 0.0
+        for row in productivity_vs_random.get("cem_diversity_v2", [])
+    )
+    evolutionary_joint_passes = sum(
+        row["mean_pair_reward_margin"] > 0.0
+        and row["top_decile_reward_margin"] > 0.0
+        for row in productivity_vs_random.get("evolutionary", [])
+    )
+    evolutionary_parent_passes = sum(
+        row["policy"] == "evolutionary"
+        and row["mean_parent_child_reward_uplift"] is not None
+        and row["mean_parent_child_reward_uplift"] > 0.0
+        for row in summaries
+    )
     return {
         "schema_version": 1,
         "lanes": summaries,
         "adaptive_policy_quality_improvement_vs_typed_random": stable_improvement,
+        "policy_productivity_vs_typed_random": productivity_vs_random,
+        "post_search_upgrade_qualification": {
+            "minimum_positive_seed_count": minimum_positive_seed_count,
+            "cem_diversity_v2": {
+                "joint_mean_and_top_decile_positive_seeds": cem_passes,
+                "decision": (
+                    "ELIGIBLE_FOR_DISTRIBUTION_SEARCH_UPGRADE"
+                    if cem_passes >= minimum_positive_seed_count
+                    else "RETAIN_LITE_INSUFFICIENT_PRODUCTIVITY"
+                ),
+            },
+            "evolutionary": {
+                "joint_mean_and_top_decile_positive_seeds": evolutionary_joint_passes,
+                "mean_parent_child_uplift_positive_seeds": evolutionary_parent_passes,
+                "parent_child_inference_role": "UNMATCHED_DIAGNOSTIC_NOT_DECISION_AUTHORITY",
+                "decision": (
+                    "ELIGIBLE_FOR_TYPED_MUTATION_UPGRADE"
+                    if evolutionary_joint_passes >= minimum_positive_seed_count
+                    else "RETAIN_LITE_INSUFFICIENT_PRODUCTIVITY"
+                ),
+            },
+            "role": "REPORT_ONLY_FUTURE_COMPILER_DECISION",
+            "current_run_feedback": False,
+        },
         "any_cross_seed_stable_policy_improvement": any(stable_improvement.values()),
         "unvisited_candidate_feedback": 0,
         "cross_policy_private_state_reads": 0,
@@ -891,6 +1382,9 @@ typed DAG, mapping, cost, and observed-archive scope.
 
 
 def _validate_config(config: Mapping[str, Any]) -> None:
+    epoch_id = str(config.get("epoch_id"))
+    if epoch_id not in {EPOCH_ID, CURRENT_FIELD_CONTINUATION_EPOCH_ID}:
+        raise ValueError("unsupported 18M search epoch")
     if config["base_closure_sha"].lower() != "a115913ae333696482059b497472864871cebc9f":
         raise ValueError("base data authority changed")
     boundaries = config["boundaries"]
@@ -911,6 +1405,70 @@ def _validate_config(config: Mapping[str, Any]) -> None:
         raise ValueError("seed contract changed")
     if tuple(budget["policies"]) != POLICIES:
         raise ValueError("policy contract changed")
+    if epoch_id == CURRENT_FIELD_CONTINUATION_EPOCH_ID:
+        exact_budget = {
+            "proposal_attempts": 500000,
+            "minimum_legal_exact_unique": 100000,
+            "minimum_behavior_diverse": 25000,
+            "cost_preflight_pairs": 64,
+            "stage_a_pairs": 4096,
+            "maximum_stage_b_pairs": 4096,
+            "hard_cap_pairs": 8192,
+            "hard_cap_standalone_evaluations": 16384,
+            "hard_cap_incremental_sleeve_evaluations": 8192,
+        }
+        if any(int(budget.get(key, -1)) != value for key, value in exact_budget.items()):
+            raise ValueError("continuation frozen budget changed")
+        if int(config["expressivity"].get("numeric_audit_candidates", -1)) != 50000:
+            raise ValueError("continuation numeric audit budget changed")
+        if config["budget"].get("cem_diversity_v2") != {
+            "exploration_probability": 0.20,
+            "duplicate_resample_limit": 16,
+        }:
+            raise ValueError("continuation CEM-lite contract changed")
+        if int(config["resources"].get("max_workers", 0)) != 8:
+            raise ValueError("continuation PC2 worker budget changed")
+        if config.get("expected_environment") != {
+            "python_version": "3.11.9",
+            "packages": {
+                "numpy": "2.1.3",
+                "pandas": "2.2.3",
+                "pyarrow": "19.0.1",
+                "scipy": "1.17.1",
+                "psutil": "7.0.0",
+            },
+        }:
+            raise ValueError("continuation environment binding changed")
+        if config.get("authorization") != "BOUNDED_DEVELOPMENT_ONLY_CURRENT_FIELD_CONTINUATION":
+            raise ValueError("current-field continuation authorization changed")
+        if config.get("fresh_policy_state") is not True:
+            raise ValueError("continuation must start from fresh policy state")
+        surface = config.get("field_surface", {})
+        if (
+            surface.get("context_id") != "BROAD_PANEL_BASELINE"
+            or int(surface.get("expected_fields", 0)) != 39
+            or surface.get("excluded_contexts") != ["CORE3_MICROSTRUCTURE_PILOT"]
+        ):
+            raise ValueError("current Broad field-surface contract changed")
+        if budget.get("stage_b_activation") != "FROZEN_FULL_BUDGET":
+            raise ValueError("continuation Stage B must be frozen before execution")
+        cache_reuse = config.get("cache_reuse", {})
+        if (
+            cache_reuse.get("mode") != "PINNED_EXISTING_RAW_CACHE"
+            or cache_reuse.get("expected_identity_sha256")
+            != "CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0"
+            or cache_reuse.get("directory_bundle", {}).get("bundle_sha256")
+            != "D120C0444B2A5828CBE0C7B538DEF81A1D2E50689C941F4B1A96D2AE60D93FED"
+        ):
+            raise ValueError("continuation raw-cache binding changed")
+        productivity = config.get("post_search_policy_productivity_gate", {})
+        if (
+            productivity.get("role")
+            != "REPORT_ONLY_FUTURE_COMPILER_DECISION"
+            or productivity.get("no_effect_on_current_run") is not True
+            or int(productivity.get("minimum_positive_seed_count", 0)) != 2
+        ):
+            raise ValueError("post-search policy productivity gate changed")
 
 
 def build_evidence(
@@ -918,6 +1476,16 @@ def build_evidence(
 ) -> dict[str, Any]:
     config = _read_json(config_path)
     _validate_config(config)
+    for name, value in config.get("resources", {}).get("thread_caps", {}).items():
+        os.environ[str(name)] = str(value)
+    execution_environment = _environment_fingerprint()
+    expected_environment = config.get("expected_environment")
+    if expected_environment and (
+        execution_environment["python_version"]
+        != expected_environment["python_version"]
+        or execution_environment["packages"] != expected_environment["packages"]
+    ):
+        raise RuntimeError("execution environment does not match the frozen binding")
     source_sha = (source_sha or _git_sha(repo_root)).lower()
     if source_sha != _git_sha(repo_root):
         raise ValueError("runtime must bind the checked-out source implementation SHA")
@@ -929,6 +1497,11 @@ def build_evidence(
         repo_root, allowed_paths=(runtime_root, report_path, failure_path)
     ):
         raise RuntimeError("source execution requires a clean implementation tree; only its own generated evidence may exist")
+    epoch_id = str(config["epoch_id"])
+    field_surface_binding, field_surface_ids = _current_field_surface_binding(
+        repo_root, config
+    )
+    compiler_binding = _compiler_binding(repo_root)
     runtime_root.mkdir(parents=True, exist_ok=True)
     train_config_path = repo_root / config["train_surface_config"]
     train_config = _read_json(train_config_path)
@@ -942,10 +1515,18 @@ def build_evidence(
 
     search_contract = {
         "schema_version": 1,
-        "epoch_id": EPOCH_ID,
-        "authorization": "EXPERIMENTAL_BOUNDED_18M_DEVELOPMENT_SEARCH",
+        "epoch_id": epoch_id,
+        "authorization": config["authorization"],
         "base_closure_sha": config["base_closure_sha"],
         "source_sha": source_sha,
+        "fresh_policy_state": bool(config.get("fresh_policy_state", True)),
+        "compiler_binding": compiler_binding,
+        "field_surface_binding": field_surface_binding,
+        "cache_input_binding": config.get("cache_reuse"),
+        "post_search_policy_productivity_gate": config.get(
+            "post_search_policy_productivity_gate"
+        ),
+        "execution_environment": execution_environment,
         "train_surface_id": train_config["surface_id"],
         "train_content_bundle_sha256": train_decision["source_content_bundle_sha256"],
         "adaptive_block": {"start": ADAPTIVE_START, "end_exclusive": ADAPTIVE_END, "feedback": True},
@@ -958,21 +1539,93 @@ def build_evidence(
     }
     _write_json(runtime_root / RUNTIME_OUTPUTS[0], search_contract)
 
-    store, quality, registry_rows, cache_metadata = build_raw_panel_cache(
-        repo_root,
-        train_config=train_config,
-        cache_root=cache_root,
-        eligibility_path=runtime_root / RUNTIME_OUTPUTS[4],
-        source_sha=source_sha,
-        warmup_hours=int(config["dynamic_eligibility"]["minimum_history_hours"]),
-    )
-    equivalence = field_equivalence_audit(store, quality["field_id"].tolist())
-    field_audit, field_registry, contracts = qualify_fields(
-        quality=quality,
-        registry_rows=registry_rows,
-        equivalence=equivalence,
-        current_runtime_fields=train_config["runtime_fields"],
-    )
+    if config.get("cache_reuse"):
+        store, cache_metadata = _load_pinned_cache_inputs(
+            repo_root,
+            cache_root=cache_root,
+            runtime_root=runtime_root,
+            cache_reuse=config["cache_reuse"],
+        )
+        if field_surface_ids is None:
+            raise ValueError("pinned cache reuse requires a frozen field surface")
+        field_audit, field_registry, contracts, equivalence = (
+            _adaptive_surface_qualification(
+                store,
+                field_ids=field_surface_ids,
+                current_runtime_fields=train_config["runtime_fields"],
+            )
+        )
+    else:
+        store, quality, registry_rows, cache_metadata = build_raw_panel_cache(
+            repo_root,
+            train_config=train_config,
+            cache_root=cache_root,
+            eligibility_path=runtime_root / RUNTIME_OUTPUTS[4],
+            source_sha=source_sha,
+            warmup_hours=int(
+                config["dynamic_eligibility"]["minimum_history_hours"]
+            ),
+        )
+        equivalence = field_equivalence_audit(store, quality["field_id"].tolist())
+        field_audit, field_registry, contracts = qualify_fields(
+            quality=quality,
+            registry_rows=registry_rows,
+            equivalence=equivalence,
+            current_runtime_fields=train_config["runtime_fields"],
+        )
+    if field_surface_ids is not None:
+        surface_set = set(field_surface_ids)
+        admitted_by_id = {item.field_id: item for item in contracts}
+        missing = sorted(surface_set - set(admitted_by_id))
+        if missing:
+            raise ValueError(
+                "current field surface failed data admission: " + ",".join(missing)
+            )
+        contracts = tuple(
+            admitted_by_id[field_id] for field_id in sorted(surface_set)
+        )
+        coverage = field_role_coverage(contracts)
+        if not coverage["all_fields_reachable"]:
+            raise ValueError(
+                "admitted current fields are not generator-reachable: "
+                + ",".join(coverage["unreachable_fields"])
+            )
+        field_audit = field_audit.copy()
+        field_audit["continuation_surface_member"] = field_audit["field_id"].isin(
+            surface_set
+        )
+        excluded = field_audit["admission_status"].eq("ADMITTED") & ~field_audit[
+            "continuation_surface_member"
+        ]
+        field_audit.loc[excluded, "admission_status"] = (
+            "EXCLUDED_NOT_CURRENT_FIELD_SURFACE"
+        )
+        field_audit.loc[excluded, "rejection_reason"] = (
+            "NOT_IN_CURRENT_FIELD_SURFACE"
+        )
+        selected_registry_rows = [
+            row for row in field_registry["fields"] if row["field_id"] in surface_set
+        ]
+        field_registry = {
+            **field_registry,
+            "status": "ADMITTED_CURRENT_FIELD_SURFACE",
+            "field_count": len(selected_registry_rows),
+            "field_families": sorted(
+                {str(row["field_family"]) for row in selected_registry_rows}
+            ),
+            "fields": selected_registry_rows,
+            "registry_sha256": _payload_sha(selected_registry_rows),
+            "source_contract_identity_sha256": field_surface_binding[
+                "contract_identity_sha256"
+            ],
+            "generator_role_coverage": coverage,
+        }
+        search_contract["field_surface_binding"] = {
+            **field_surface_binding,
+            "admitted_registry_sha256": field_registry["registry_sha256"],
+            "admitted_fields": [item.field_id for item in contracts],
+        }
+        _write_json(runtime_root / RUNTIME_OUTPUTS[0], search_contract)
     field_audit.to_csv(runtime_root / RUNTIME_OUTPUTS[1], index=False, lineterminator="\n")
     _write_json(runtime_root / RUNTIME_OUTPUTS[2], field_registry)
     equivalence.to_csv(runtime_root / RUNTIME_OUTPUTS[3], index=False, lineterminator="\n")
@@ -994,6 +1647,7 @@ def build_evidence(
         candidates=structural_candidates,
         structural=structural,
         maximum_candidates=int(config["expressivity"]["numeric_audit_candidates"]),
+        checkpoint_path=runtime_root / ".expressivity_checkpoint.json",
     )
     _write_json(runtime_root / RUNTIME_OUTPUTS[6], expressivity)
 
@@ -1016,6 +1670,10 @@ def build_evidence(
     preflight_pass = sum(row["pair_evaluation_status"] == "PASS" for row in preflight_rows)
     estimated_stage_a_seconds = preflight_seconds * int(config["budget"]["stage_a_pairs"]) / 64.0
     peak_rss = max((int(row["peak_rss_bytes"]) for row in preflight_resources), default=0)
+    available_memory = int(psutil.virtual_memory().available)
+    minimum_free_memory = int(
+        config["resources"].get("minimum_free_memory_before_stage_a_bytes", 0)
+    )
     stage_a_authorized = (
         len(contracts) >= 16
         and len(field_registry["field_families"]) >= 5
@@ -1023,9 +1681,11 @@ def build_evidence(
         and preflight_pass == 64
         and estimated_stage_a_seconds <= float(config["resources"]["maximum_estimated_stage_a_seconds"])
         and peak_rss <= int(config["resources"]["maximum_worker_peak_rss_bytes"])
+        and available_memory >= minimum_free_memory
     )
     resource = {
         "schema_version": 1,
+        "execution_environment": execution_environment,
         "cache_build": cache_metadata,
         "preflight_pairs": 64,
         "preflight_pass": preflight_pass,
@@ -1033,6 +1693,7 @@ def build_evidence(
         "pair_seconds": [sum(float(row.get(name) or 0.0) for name in ("field_read_seconds", "dag_materialization_seconds", "mapping_seconds", "standalone_evaluator_seconds", "incremental_sleeve_seconds")) for row in preflight_rows],
         "worker_resources": preflight_resources,
         "peak_worker_rss_bytes": peak_rss,
+        "available_memory_before_stage_a_bytes": available_memory,
         "estimated_stage_a_seconds": estimated_stage_a_seconds,
         "estimated_stage_a_plus_report_only_seconds": estimated_stage_a_seconds * 2.0,
         "max_workers": max_workers,
@@ -1044,6 +1705,7 @@ def build_evidence(
             "preflight_64_of_64": preflight_pass == 64,
             "time_budget": estimated_stage_a_seconds <= float(config["resources"]["maximum_estimated_stage_a_seconds"]),
             "rss_budget": peak_rss <= int(config["resources"]["maximum_worker_peak_rss_bytes"]),
+            "free_memory_budget": available_memory >= minimum_free_memory,
         },
     }
     _write_json(runtime_root / RUNTIME_OUTPUTS[18], resource)
@@ -1063,21 +1725,31 @@ def build_evidence(
         )
         adaptive_rows.extend(stage_a)
         lane_resources.extend(stage_a_resources)
-        stage_a_challenge = _parallel_challenge(
-            cache_root=cache_root,
-            contracts=contracts,
-            rows=stage_a,
-            max_workers=max_workers,
+        fixed_full_stage_b = (
+            config["budget"].get("stage_b_activation")
+            == "FROZEN_FULL_BUDGET"
         )
-        challenge_rows.extend(stage_a_challenge)
-        clusters_a, reproduction_a, counts_a = _cluster_evidence(stage_a, stage_a_challenge)
-        policy_a = _policy_audit(stage_a)
-        continue_stage_b = (
-            counts_a["adaptive_positive_clusters"] >= 10
-            or counts_a["challenge_positive_clusters"] >= 5
-            or counts_a["maximum_family_challenge_yield"] > 0.005
-            or bool(policy_a["any_cross_seed_stable_policy_improvement"])
-        )
+        if fixed_full_stage_b:
+            # The continuation freezes its entire adaptive budget before any
+            # report-only metric exists.  No report-only result can affect
+            # scheduling, policy state, or survivor exposure.
+            continue_stage_b = True
+        else:
+            stage_a_challenge = _parallel_challenge(
+                cache_root=cache_root,
+                contracts=contracts,
+                rows=stage_a,
+                max_workers=max_workers,
+            )
+            challenge_rows.extend(stage_a_challenge)
+            _, _, counts_a = _cluster_evidence(stage_a, stage_a_challenge)
+            policy_a = _policy_audit(stage_a)
+            continue_stage_b = (
+                counts_a["adaptive_positive_clusters"] >= 10
+                or counts_a["challenge_positive_clusters"] >= 5
+                or counts_a["maximum_family_challenge_yield"] > 0.005
+                or bool(policy_a["any_cross_seed_stable_policy_improvement"])
+            )
         if continue_stage_b:
             prior: dict[tuple[str, int], list[Mapping[str, Any]]] = defaultdict(list)
             for row in stage_a:
@@ -1092,18 +1764,72 @@ def build_evidence(
             )
             adaptive_rows.extend(stage_b)
             lane_resources.extend(stage_b_resources)
+            if not fixed_full_stage_b:
+                challenge_rows.extend(
+                    _parallel_challenge(
+                        cache_root=cache_root,
+                        contracts=contracts,
+                        rows=stage_b,
+                        max_workers=max_workers,
+                    )
+                )
+        if fixed_full_stage_b:
             challenge_rows.extend(
                 _parallel_challenge(
                     cache_root=cache_root,
                     contracts=contracts,
-                    rows=stage_b,
+                    rows=adaptive_rows,
                     max_workers=max_workers,
                 )
             )
     if len(adaptive_rows) > int(config["budget"]["hard_cap_pairs"]):
         raise AssertionError("strict hard cap exceeded")
+    if 2 * len(adaptive_rows) > int(
+        config["budget"]["hard_cap_standalone_evaluations"]
+    ):
+        raise AssertionError("adaptive standalone evaluator hard cap exceeded")
+    if len(adaptive_rows) > int(
+        config["budget"]["hard_cap_incremental_sleeve_evaluations"]
+    ):
+        raise AssertionError("adaptive incremental sleeve hard cap exceeded")
 
-    policy_audit = _policy_audit(adaptive_rows)
+    policy_audit = _policy_audit(
+        adaptive_rows,
+        minimum_positive_seed_count=int(
+            config.get("post_search_policy_productivity_gate", {}).get(
+                "minimum_positive_seed_count", 2
+            )
+        ),
+    )
+    field_exposure: Counter[str] = Counter()
+    for row in adaptive_rows:
+        if row.get("candidate_spec_json"):
+            field_exposure.update(
+                CandidateSpec.from_dict(
+                    json.loads(str(row["candidate_spec_json"]))
+                ).raw_fields
+            )
+    expected_fields = {item.field_id for item in contracts}
+    missing_field_exposure = sorted(expected_fields - set(field_exposure))
+    policy_audit["current_field_exposure"] = {
+        "expected_field_count": len(expected_fields),
+        "exposed_field_count": len(expected_fields & set(field_exposure)),
+        "missing_fields": missing_field_exposure,
+        "proposal_counts": {
+            field_id: int(field_exposure.get(field_id, 0))
+            for field_id in sorted(expected_fields)
+        },
+        "scope": "DEVELOPMENT_ADAPTIVE_PAIRS",
+    }
+    if (
+        epoch_id == CURRENT_FIELD_CONTINUATION_EPOCH_ID
+        and adaptive_rows
+        and missing_field_exposure
+    ):
+        raise AssertionError(
+            "current field surface lacks adaptive proposal exposure: "
+            + ",".join(missing_field_exposure)
+        )
     policy_audit["lane_resources"] = lane_resources
     policy_audit["development_report_only_feedback_writes"] = sum(
         bool(row["policy_feedback_written"]) for row in challenge_rows
@@ -1183,6 +1909,16 @@ def build_evidence(
         challenge=challenge_rows,
         resource=resource,
     )
+    if config.get("cache_reuse"):
+        post_run_cache_bundle = _directory_bundle(cache_root)
+        pre_run_cache_bundle = cache_metadata["reuse_validation"]["directory_bundle"]
+        if post_run_cache_bundle != pre_run_cache_bundle:
+            raise RuntimeError("pinned raw cache changed during the continuation")
+        resource["cache_build"]["reuse_validation"][
+            "post_run_directory_bundle"
+        ] = post_run_cache_bundle
+        resource["cache_build"]["reuse_validation"]["post_run_unchanged"] = True
+        _write_json(runtime_root / RUNTIME_OUTPUTS[18], resource)
     status = _main_status(
         field_count=len(contracts),
         expressivity=expressivity,
@@ -1193,7 +1929,7 @@ def build_evidence(
     )
     decision = {
         "schema_version": 1,
-        "epoch_id": EPOCH_ID,
+        "epoch_id": epoch_id,
         "main_status": status,
         "source_sha": source_sha,
         "base_closure_sha": config["base_closure_sha"],
@@ -1209,6 +1945,10 @@ def build_evidence(
         "stage_a_pairs": min(len(adaptive_rows), int(config["budget"]["stage_a_pairs"])),
         "stage_b_pairs": max(0, len(adaptive_rows) - int(config["budget"]["stage_a_pairs"])),
         "report_only_pairs": len(challenge_rows),
+        "adaptive_standalone_evaluator_calls": 2 * len(adaptive_rows),
+        "adaptive_incremental_sleeve_calls": len(adaptive_rows),
+        "report_only_standalone_evaluator_calls": 2 * len(challenge_rows),
+        "report_only_incremental_sleeve_calls": len(challenge_rows),
         "standalone_evaluator_calls": 2 * (len(adaptive_rows) + len(challenge_rows)),
         "incremental_sleeve_calls": len(adaptive_rows) + len(challenge_rows),
         "adaptive_matched_positive_clusters": counts["adaptive_positive_clusters"],
@@ -1226,6 +1966,11 @@ def build_evidence(
         "forward": "SEALED",
         "accepted_tag_movement": "FORBIDDEN",
         "claim_scope": "observed-official-archive current-seeded 18M development surface only",
+        "field_surface_binding": search_contract.get("field_surface_binding"),
+        "compiler_bundle_sha256": compiler_binding["bundle_sha256"],
+        "stage_b_activation": config["budget"].get(
+            "stage_b_activation", "LEGACY_REPORT_VISIBLE_CONDITIONAL"
+        ),
         "cannot_conclude": [
             "formal OOS validity",
             "full historical delisted-contract coverage",
@@ -1259,6 +2004,8 @@ def build_evidence(
         repo_root / "tests" / "test_broad_search_expression.py",
         repo_root / "tests" / "test_crypto_18m_compositional_search.py",
     ]
+    if field_surface_binding is not None:
+        artifact_paths.append(repo_root / field_surface_binding["contract_path"])
     artifact_rows = [
         {
             "path": path.relative_to(repo_root).as_posix(),
@@ -1269,13 +2016,15 @@ def build_evidence(
     ]
     manifest = {
         "schema_version": 1,
-        "epoch_id": EPOCH_ID,
+        "epoch_id": epoch_id,
         "producer_source_sha": source_sha,
         "base_closure_sha": config["base_closure_sha"],
         "bindings": {
             "train_surface_id": train_config["surface_id"],
             "train_content_bundle_sha256": train_decision["source_content_bundle_sha256"],
             "field_registry_hash": field_registry["registry_sha256"],
+            "field_surface": search_contract.get("field_surface_binding"),
+            "compiler": compiler_binding,
             "DAG_grammar_hash": _payload_sha(registry.contract_payload()),
             "skeleton_registry_hash": skeletons["skeleton_registry_sha256"],
             "mapping_hash": mapping_contract_sha256(DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET]),
@@ -1286,6 +2035,12 @@ def build_evidence(
             ),
             "seeds": list(SEEDS),
             "budget": config["budget"],
+            "fresh_policy_state": bool(config.get("fresh_policy_state", True)),
+            "cache_input": config.get("cache_reuse"),
+            "post_search_policy_productivity_gate": config.get(
+                "post_search_policy_productivity_gate"
+            ),
+            "execution_environment": execution_environment,
         },
         "sealed_reads": 0,
         "artifacts": artifact_rows,
@@ -1341,6 +2096,64 @@ def check_evidence(repo_root: Path, *, config_path: Path) -> dict[str, Any]:
         errors.append("hard_cap")
     if policy.get("development_report_only_feedback_writes") != 0:
         errors.append("report_only_feedback")
+    if config["epoch_id"] == CURRENT_FIELD_CONTINUATION_EPOCH_ID:
+        if manifest.get("epoch_id") != CURRENT_FIELD_CONTINUATION_EPOCH_ID or decision.get(
+            "epoch_id"
+        ) != CURRENT_FIELD_CONTINUATION_EPOCH_ID:
+            errors.append("continuation_epoch")
+        exact_decision = {
+            "admitted_field_count": 39,
+            "proposal_attempts": 500000,
+            "stage_a_pairs": 4096,
+            "stage_b_pairs": 4096,
+            "strict_pairs": 8192,
+            "report_only_pairs": 8192,
+            "adaptive_standalone_evaluator_calls": 16384,
+            "adaptive_incremental_sleeve_calls": 8192,
+        }
+        for key, expected in exact_decision.items():
+            if int(decision.get(key, -1)) != expected:
+                errors.append(f"continuation_exact:{key}")
+        if int(expressivity.get("numeric_audit_candidates", -1)) != 50000:
+            errors.append("continuation_numeric_audit")
+        if resource.get("preflight_pairs") != 64 or resource.get("preflight_pass") != 64:
+            errors.append("continuation_preflight")
+        if resource.get("max_workers") != 8 or resource.get("stage_a_authorized") is not True:
+            errors.append("continuation_resource_authorization")
+        if field_registry.get("field_count") != 39:
+            errors.append("continuation_field_count")
+        if policy.get("current_field_exposure", {}).get("missing_fields") != []:
+            errors.append("continuation_field_exposure")
+        if decision.get("stage_b_activation") != "FROZEN_FULL_BUDGET":
+            errors.append("continuation_stage_b_activation")
+        surface = manifest.get("bindings", {}).get("field_surface", {})
+        if (
+            surface.get("contract_identity_sha256")
+            != config["field_surface"]["contract_identity_sha256"]
+            or surface.get("selected_field_count") != 39
+        ):
+            errors.append("continuation_field_surface_binding")
+        environment = manifest.get("bindings", {}).get("execution_environment", {})
+        if (
+            environment.get("python_version")
+            != config["expected_environment"]["python_version"]
+            or environment.get("packages")
+            != config["expected_environment"]["packages"]
+        ):
+            errors.append("continuation_environment_binding")
+        field_audit = pd.read_csv(runtime_root / RUNTIME_OUTPUTS[1])
+        if (
+            set(field_audit.get("qualification_block", []))
+            != {"DEVELOPMENT_ADAPTIVE_ONLY"}
+            or int(field_audit.get("report_only_rows_read_for_admission", pd.Series([1])).sum())
+            != 0
+        ):
+            errors.append("continuation_adaptive_only_field_qualification")
+        equivalence = pd.read_csv(runtime_root / RUNTIME_OUTPUTS[3])
+        if set(equivalence.get("qualification_block", [])) != {
+            "DEVELOPMENT_ADAPTIVE_ONLY"
+        }:
+            errors.append("continuation_adaptive_only_equivalence")
     try:
         subprocess.check_call(
             ["git", "cat-file", "-e", f"{manifest['producer_source_sha']}^{{commit}}"],
@@ -1364,6 +2177,7 @@ def check_evidence(repo_root: Path, *, config_path: Path) -> dict[str, Any]:
 __all__ = [
     "ADAPTIVE_END",
     "ADAPTIVE_START",
+    "CURRENT_FIELD_CONTINUATION_EPOCH_ID",
     "EPOCH_ID",
     "POLICIES",
     "REPORT_ONLY_END",

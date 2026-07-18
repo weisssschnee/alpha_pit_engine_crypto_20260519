@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import random
+from copy import deepcopy
 from pathlib import Path
 
 import numpy as np
@@ -9,6 +10,7 @@ import pytest
 
 from alphafactory_crypto.broad_search.compositional18m import (
     CandidateSpec,
+    field_role_coverage,
     generate_candidate,
     skeleton_registry,
 )
@@ -23,7 +25,13 @@ from alphafactory_crypto.broad_search.pair18m import (
     evaluate_pair,
     feedback_contract_payload,
 )
-from alphafactory_crypto.broad_search.runner18m import LanePolicy
+from alphafactory_crypto.broad_search.runner18m import (
+    LanePolicy,
+    _current_field_surface_binding,
+    _directory_bundle,
+    _policy_audit,
+    _validate_config,
+)
 from alphafactory_crypto.instrument_capability.mapping import CROSS_SECTIONAL_ZERO_NET
 
 
@@ -119,6 +127,20 @@ def test_all_forty_skeletons_generate_typed_matched_pairs() -> None:
         assert registry.validate(candidate.expression).raw_fields == registry.validate(
             candidate.control
         ).raw_fields
+
+
+def test_current_price_levels_are_reachable_without_new_skeletons() -> None:
+    contracts = tuple(_role_complete_registry().fields.values()) + (
+        FieldContract("trade_close", "PRICE", "quote_per_base", 1, "CURRENT_FIELD_SURFACE_BINDING"),
+        FieldContract("index_open", "PRICE", "quote_per_base", 1, "CURRENT_FIELD_SURFACE_BINDING"),
+        FieldContract("index_high", "PRICE", "quote_per_base", 1, "CURRENT_FIELD_SURFACE_BINDING"),
+        FieldContract("index_low", "PRICE", "quote_per_base", 1, "CURRENT_FIELD_SURFACE_BINDING"),
+    )
+    coverage = field_role_coverage(contracts)
+    assert coverage["all_fields_reachable"] is True
+    for field_id in ("trade_close", "index_open", "index_high", "index_low"):
+        assert field_id in coverage["roles"]["local"]
+        assert field_id not in coverage["roles"]["price_return"]
 
 
 class _FakeStore:
@@ -237,3 +259,146 @@ def test_frozen_config_keeps_sealed_reads_and_promotion_disabled() -> None:
     assert config["boundaries"]["candidate_promotion"] is False
     assert config["boundaries"]["formal_performance_search"] is False
     assert config["budget"]["stage_a_pairs"] == 4096
+
+
+def test_current_field_continuation_binds_broad_39_and_original_policies() -> None:
+    repo_root = Path(__file__).parents[1]
+    config = json.loads(
+        (
+            repo_root
+            / "config"
+            / "crypto_18m_current_field_four_policy_continuation_v1.json"
+        ).read_text()
+    )
+    _validate_config(config)
+    binding, fields = _current_field_surface_binding(repo_root, config)
+    assert len(fields or ()) == 39
+    assert binding is not None
+    assert binding["view_counts"] == {"asset_local": 38, "market_state": 1}
+    assert binding["excluded_contexts"] == ["CORE3_MICROSTRUCTURE_PILOT"]
+    assert binding["generator_role_coverage"]["all_fields_reachable"] is True
+    assert config["budget"]["policies"] == [
+        "canonical_typed_random",
+        "cem_diversity_v2",
+        "uct_ucb_like",
+        "evolutionary",
+    ]
+    assert config["budget"]["stage_b_activation"] == "FROZEN_FULL_BUDGET"
+    assert config["fresh_policy_state"] is True
+    assert config["boundaries"]["sealed_reads_allowed"] is False
+    assert config["boundaries"]["candidate_promotion"] is False
+
+
+def test_policy_productivity_gate_uses_seed_matched_random_controls() -> None:
+    rows = []
+    for seed in (20260716, 20260717):
+        rows.extend(
+            [
+                {
+                    "policy": "canonical_typed_random",
+                    "seed": seed,
+                    "candidate_id": f"random-parent-{seed}",
+                    "parent_id": None,
+                    "pair_reward": 0.0,
+                    "matched_positive": False,
+                    "skeleton_id": "random-a",
+                    "mechanism_family": "OI_PRICE_DIVERGENCE",
+                    "mutation_receipt_json": "null",
+                    "cache_hit": False,
+                },
+                {
+                    "policy": "canonical_typed_random",
+                    "seed": seed,
+                    "candidate_id": f"random-child-{seed}",
+                    "parent_id": None,
+                    "pair_reward": 0.1,
+                    "matched_positive": True,
+                    "skeleton_id": "random-b",
+                    "mechanism_family": "OI_ACTIVITY_INTERACTION",
+                    "mutation_receipt_json": "null",
+                    "cache_hit": False,
+                },
+                {
+                    "policy": "cem_diversity_v2",
+                    "seed": seed,
+                    "candidate_id": f"cem-{seed}",
+                    "parent_id": None,
+                    "pair_reward": 0.5,
+                    "matched_positive": True,
+                    "skeleton_id": "cem-a",
+                    "mechanism_family": "BASIS_PREMIUM_STATE",
+                    "mutation_receipt_json": "null",
+                    "cache_hit": False,
+                },
+                {
+                    "policy": "evolutionary",
+                    "seed": seed,
+                    "candidate_id": f"evo-parent-{seed}",
+                    "parent_id": None,
+                    "pair_reward": 0.2,
+                    "matched_positive": True,
+                    "skeleton_id": "evo-a",
+                    "mechanism_family": "PRICE_ACTIVITY_RESPONSE",
+                    "mutation_receipt_json": "{}",
+                    "cache_hit": False,
+                },
+                {
+                    "policy": "evolutionary",
+                    "seed": seed,
+                    "candidate_id": f"evo-child-{seed}",
+                    "parent_id": f"evo-parent-{seed}",
+                    "pair_reward": 0.6,
+                    "matched_positive": True,
+                    "skeleton_id": "evo-b",
+                    "mechanism_family": "STATE_REGIME_MODULATION",
+                    "mutation_receipt_json": "{}",
+                    "cache_hit": False,
+                },
+            ]
+        )
+    audit = _policy_audit(rows, minimum_positive_seed_count=2)
+    decisions = audit["post_search_upgrade_qualification"]
+    assert (
+        decisions["cem_diversity_v2"]["decision"]
+        == "ELIGIBLE_FOR_DISTRIBUTION_SEARCH_UPGRADE"
+    )
+    assert (
+        decisions["evolutionary"]["decision"]
+        == "ELIGIBLE_FOR_TYPED_MUTATION_UPGRADE"
+    )
+    assert decisions["current_run_feedback"] is False
+
+
+def test_raw_cache_bundle_excludes_run_logs_and_checkpoints(tmp_path: Path) -> None:
+    (tmp_path / "fields").mkdir()
+    metadata = {"field_ids": ["x"]}
+    (tmp_path / "metadata.json").write_text(json.dumps(metadata))
+    for name in (
+        "timestamp_ns.npy",
+        "observed.npy",
+        "base_eligible.npy",
+        "source_segment.npy",
+        "target_return_1h.npy",
+        "target_return_4h.npy",
+    ):
+        np.save(tmp_path / name, np.array([0]))
+    np.save(tmp_path / "fields" / "x.npy", np.array([1.0]))
+    before = _directory_bundle(tmp_path)
+    (tmp_path / "formal_run.stdout.log").write_text("runtime log")
+    (tmp_path / "expressivity_checkpoint.json").write_text("{}")
+    assert _directory_bundle(tmp_path) == before
+
+
+def test_current_continuation_exact_budget_fails_closed() -> None:
+    repo_root = Path(__file__).parents[1]
+    config = json.loads(
+        (
+            repo_root
+            / "config"
+            / "crypto_18m_current_field_four_policy_continuation_v1.json"
+        ).read_text()
+    )
+    changed = deepcopy(config)
+    changed["budget"]["maximum_stage_b_pairs"] = 2048
+    with pytest.raises(ValueError, match="frozen budget"):
+        _validate_config(changed)
