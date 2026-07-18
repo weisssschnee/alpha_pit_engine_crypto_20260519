@@ -32,18 +32,18 @@
     },
     "capture_id": "BINANCE_FORCE_ORDER_FORWARD_CAPTURE_V1_20260718",
     "capture_identity_sha256": "22411352F986AB29B4AC2D3E0F5241486D86FA940D7A5C63B5D98FD3E13CB934",
-    "checked_at": "2026-07-18T05:07:50Z",
+    "checked_at": "2026-07-18T07:33:28Z",
     "counts": {
-      "bytes_written": 130349,
+      "bytes_written": 796769,
       "connection_failures": 0,
       "connections": 1,
-      "messages": 145,
+      "messages": 887,
       "parse_failures": 0
     },
-    "current_file": "G:/AlphaFactory_CryptoData/raw/binance_force_order_ws_v1/date=2026-07-18/hour=05/force_orders.jsonl",
+    "current_file": "G:/AlphaFactory_CryptoData/raw/binance_force_order_ws_v1/date=2026-07-18/hour=07/force_orders.jsonl",
     "endpoint": "wss://stream.binancefuture.com/market/ws/!forceOrder@arr",
     "last_error": null,
-    "last_received_time_utc": "2026-07-18T05:07:20.278114Z",
+    "last_received_time_utc": "2026-07-18T07:32:58.872607Z",
     "output_root": "G:/AlphaFactory_CryptoData/raw/binance_force_order_ws_v1",
     "pid": 28560,
     "schema_version": 1,
@@ -51,7 +51,7 @@
     "status": "RUNNING",
     "stream": "!forceOrder@arr"
   },
-  "created_at": "2026-07-18T05:07:54Z",
+  "created_at": "2026-07-18T07:33:55Z",
   "current_supplier_release_end": "2026-07-13",
   "current_supplier_release_overlap": false,
   "endpoint": "wss://stream.binancefuture.com/market/ws/!forceOrder@arr",
@@ -64,31 +64,43 @@
     },
     {
       "path": "G:/AlphaFactory_CryptoData/raw/binance_force_order_ws_v1/date=2026-07-18/hour=05/force_orders.jsonl",
-      "prefix_bytes": 25108,
-      "prefix_sha256": "12CBA4C2CEFDFF25BD3FDE6B314ED9E22685313381431E31612E6A7E1C52E595",
-      "records": 28
+      "prefix_bytes": 175133,
+      "prefix_sha256": "1F27E01E7802C3B5701BCB408B5B8EC23D54B54CFA949C7DF902F111F6168208",
+      "records": 195
+    },
+    {
+      "path": "G:/AlphaFactory_CryptoData/raw/binance_force_order_ws_v1/date=2026-07-18/hour=06/force_orders.jsonl",
+      "prefix_bytes": 243535,
+      "prefix_sha256": "D63FDE0D5CA916A337833E7377309DBF1EEBE620F308F601238353AC0A8F00D5",
+      "records": 271
+    },
+    {
+      "path": "G:/AlphaFactory_CryptoData/raw/binance_force_order_ws_v1/date=2026-07-18/hour=07/force_orders.jsonl",
+      "prefix_bytes": 272860,
+      "prefix_sha256": "637917626F941C15AB4399AAEEE22585759163474F067B122A9597BFAB8E59E0",
+      "records": 304
     }
   ],
   "observed": {
     "contract_failures": 0,
     "event_types": {
-      "forceOrder": 145
+      "forceOrder": 887
     },
-    "files": 2,
+    "files": 4,
     "first_received_time_utc": "2026-07-18T04:48:52.057694Z",
     "invalid_json": 0,
-    "last_received_time_utc": "2026-07-18T05:07:20.278114Z",
+    "last_received_time_utc": "2026-07-18T07:32:58.872607Z",
     "raw_hash_failures": 0,
-    "records": 145,
+    "records": 887,
     "source_failures": 0,
     "symbol_types": {
-      "1": 145
+      "1": 887
     },
-    "unique_symbols": 28
+    "unique_symbols": 134
   },
   "schema_version": 1,
   "snapshot_id": "BINANCE_FORCE_ORDER_FORWARD_CAPTURE_SNAPSHOT_20260718",
-  "source_sha": "ecb8ca11792e24e2f86666ac5009cb32d621bbb7",
+  "source_sha": "3bd334c7e11dcb3583a0b3ebba3c577242172fef",
   "status": "FORWARD_CAPTURE_ACTIVE_NO_CURRENT_PACKAGE_OVERLAP",
   "stream": "!forceOrder@arr"
 }
