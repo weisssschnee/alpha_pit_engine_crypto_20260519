@@ -4,6 +4,7 @@ import numpy as np
 
 from alphafactory_crypto.broad_information_arena import (
     FixedMLP,
+    causal_trailing_mean,
     deterministic_coordinates,
     model_matrix,
     paired_surface_diagnostics,
@@ -60,3 +61,12 @@ def test_pair_diagnostics_separate_prediction_difference_from_mapping_collapse()
     )
     assert result["comparison_degenerate"] is False
     assert result["portfolio_mapping_collapse"] is True
+
+
+def test_causal_trailing_mean_uses_no_future_values() -> None:
+    values = np.asarray([[1.0, 2.0, 3.0, 100.0]])
+    result = causal_trailing_mean(values, 3)
+    assert result[0, 0] == 1.0
+    assert result[0, 1] == 1.5
+    assert result[0, 2] == 2.0
+    assert result[0, 3] == 35.0

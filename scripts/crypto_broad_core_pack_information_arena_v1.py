@@ -21,18 +21,23 @@ if str(ROOT) not in sys.path:
 
 from alphafactory_crypto.broad_information_arena import (  # noqa: E402
     CONTROL_SURFACE,
+    DIRECT_DELTA_MAPPING,
     FULL_SURFACE,
+    HORIZON_MEAN_DELTA_MAPPING,
     MLP_MODEL,
     RIDGE_MODEL,
     FixedMLP,
     arena_decision,
+    array_sha256,
     data_adequacy,
     deterministic_coordinates,
     economic_metrics,
     fit_normalization,
     information_evidence,
+    incremental_signal_mapping,
     load_broad_arena_data,
     model_matrix,
+    mapping_repair_decision,
     paired_increment,
     paired_surface_diagnostics,
     payload_sha256,
@@ -81,6 +86,7 @@ def _report(manifest: dict[str, Any], decision: dict[str, Any], adequacy: dict[s
             f"- Economic increment gate: {decision['economic_increment_gate_pass']}",
             f"- Cost-killed under frozen mapping: {decision['cost_killed_under_frozen_mapping']}",
             f"- Degenerate prediction/mapping pairs: {decision['degenerate_pairs']}",
+            f"- Mapping repair: `{decision['mapping_repair']['status']}`",
             "",
             "## Why entropy is not used alone",
             "",
@@ -89,6 +95,10 @@ def _report(manifest: dict[str, Any], decision: dict[str, Any], adequacy: dict[s
             "## Split increment summary",
             "",
             pd.DataFrame(decision["split_increment_summary"]).to_markdown(index=False),
+            "",
+            "## Mapping repair summary",
+            "",
+            pd.DataFrame(decision["mapping_repair"]["summary"]).to_markdown(index=False),
             "",
             "## Boundaries",
             "",
@@ -228,8 +238,45 @@ def run(config_path: Path) -> dict[str, Any]:
     decision["model_fit_degenerate_runs"] = fit_degenerate
     if fit_degenerate:
         decision["status"] = "BROAD_CORE_PACK_MODEL_FIT_DEGENERATE"
+    mapping_rows: list[dict[str, Any]] = []
+    for family, seed in ((RIDGE_MODEL, 0), *[(MLP_MODEL, int(seed)) for seed in config["models"]["mlp_seeds"]]):
+        for split in ("selection", "stability"):
+            full_prediction = predictions[(family, seed, split, FULL_SURFACE)]
+            control_prediction = predictions[(family, seed, split, CONTROL_SURFACE)]
+            for variant, window in (
+                (DIRECT_DELTA_MAPPING, 1),
+                (
+                    HORIZON_MEAN_DELTA_MAPPING,
+                    int(config["mapping_repair"]["horizon_smoothing_hours"]),
+                ),
+            ):
+                metrics, variant_weights, signal = incremental_signal_mapping(
+                    full_prediction,
+                    control_prediction,
+                    data,
+                    data.slices[split],
+                    smoothing_window=window,
+                )
+                mapping_rows.append(
+                    {
+                        "variant": variant,
+                        "model_family": family,
+                        "seed": seed,
+                        "split": split,
+                        "smoothing_window_hours": window,
+                        "metrics": metrics,
+                        "signal_sha256": array_sha256(signal),
+                        "weight_sha256": array_sha256(variant_weights),
+                    }
+                )
+    decision["mapping_repair"] = mapping_repair_decision(
+        mapping_rows, float(config["decision"]["minimum_positive_run_ratio"])
+    )
+    if decision["mapping_repair"]["passed_variants"]:
+        decision["status"] = "BROAD_CORE_PACK_PORTFOLIO_MAPPING_DEVELOPMENT_INCREMENT_OBSERVED"
     _write_jsonl(output_root / "model_evidence.jsonl", model_rows)
     _write_jsonl(output_root / "paired_increment_evidence.jsonl", increment_rows)
+    _write_jsonl(output_root / "mapping_repair_evidence.jsonl", mapping_rows)
     _write_json(output_root / "decision.json", decision)
 
     input_paths = {
@@ -244,7 +291,7 @@ def run(config_path: Path) -> dict[str, Any]:
         "source_sha": _git_sha(),
         "created_at": _now(),
         "command": "python scripts/crypto_broad_core_pack_information_arena_v1.py",
-        "parameters": {key: config[key] for key in ("splits", "information", "models", "data_adequacy", "frozen_budget", "economic_contract")},
+        "parameters": {key: config[key] for key in ("splits", "information", "models", "data_adequacy", "mapping_repair", "frozen_budget", "economic_contract")},
         "input_identities": {
             **{f"{name}_sha256": sha256_file(path) for name, path in input_paths.items()},
             "broad_cache_metadata_sha256": sha256_file(cache_metadata),
@@ -279,6 +326,7 @@ def run(config_path: Path) -> dict[str, Any]:
         information_path,
         output_root / "model_evidence.jsonl",
         output_root / "paired_increment_evidence.jsonl",
+        output_root / "mapping_repair_evidence.jsonl",
         output_root / "decision.json",
         report_path,
     ):

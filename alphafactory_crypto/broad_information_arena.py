@@ -35,6 +35,8 @@ CONTROL_SURFACE = "CURRENT_10"
 FULL_SURFACE = "BROAD_CORE_PACK_39"
 RIDGE_MODEL = "RIDGE"
 MLP_MODEL = "FIXED_MLP"
+DIRECT_DELTA_MAPPING = "DIRECT_DELTA_SIGNAL_ZERO_NET"
+HORIZON_MEAN_DELTA_MAPPING = "HORIZON_4H_CAUSAL_MEAN_DELTA_ZERO_NET"
 
 
 def payload_sha256(value: Any) -> str:
@@ -372,6 +374,61 @@ def paired_increment(
     )
 
 
+def causal_trailing_mean(values: np.ndarray, window: int) -> np.ndarray:
+    source = np.asarray(values, dtype=float)
+    finite = np.isfinite(source)
+    sums = np.cumsum(np.where(finite, source, 0.0), axis=1)
+    counts = np.cumsum(finite.astype(np.int32), axis=1)
+    sums = np.concatenate([np.zeros((source.shape[0], 1)), sums], axis=1)
+    counts = np.concatenate([np.zeros((source.shape[0], 1), dtype=np.int32), counts], axis=1)
+    output = np.full(source.shape, np.nan, dtype=float)
+    for stop in range(1, source.shape[1] + 1):
+        start = max(0, stop - int(window))
+        total = sums[:, stop] - sums[:, start]
+        count = counts[:, stop] - counts[:, start]
+        output[:, stop - 1] = np.divide(
+            total,
+            count,
+            out=np.full(source.shape[0], np.nan, dtype=float),
+            where=count > 0,
+        )
+    return output
+
+
+def incremental_signal_mapping(
+    full_prediction: np.ndarray,
+    control_prediction: np.ndarray,
+    data: BroadArenaData,
+    block: slice,
+    *,
+    smoothing_window: int,
+) -> tuple[dict[str, Any], np.ndarray, np.ndarray]:
+    common = np.isfinite(full_prediction) & np.isfinite(control_prediction)
+    signal = np.where(common, full_prediction - control_prediction, np.nan)
+    if int(smoothing_window) > 1:
+        signal = causal_trailing_mean(signal, int(smoothing_window))
+        signal[~common] = np.nan
+    mapped = map_portfolio(signal, DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET])
+    weights = np.asarray(mapped.weights, dtype=float)
+    target = np.asarray(data.target[:, block], dtype=float)
+    active = np.abs(weights) > 1e-12
+    missing_target = np.any(active & ~np.isfinite(target), axis=0)
+    evaluation = (
+        (data.eligibility[:, block].sum(axis=0) >= 3)
+        & ~missing_target
+        & np.any(np.isfinite(signal), axis=0)
+    )
+    months = pd.to_datetime(data.timestamps[block], utc=True).strftime("%Y-%m").to_numpy()
+    metrics = _series_metrics(
+        weights=weights,
+        target=target,
+        months=months,
+        evaluation_mask=evaluation,
+        horizon=4,
+    )
+    return metrics, weights, signal
+
+
 def _split_information(
     value_bins: np.ndarray,
     target_bins: np.ndarray,
@@ -661,22 +718,70 @@ def arena_decision(
     }
 
 
+def mapping_repair_decision(
+    rows: Sequence[Mapping[str, Any]], minimum_positive_run_ratio: float
+) -> dict[str, Any]:
+    frame = pd.DataFrame(
+        [
+            {
+                "variant": row["variant"],
+                "split": row["split"],
+                "gross_mean": row["metrics"]["gross_mean"],
+                "net_mean": row["metrics"]["net_mean"],
+            }
+            for row in rows
+        ]
+    )
+    summary = (
+        frame.groupby(["variant", "split"], sort=False)
+        .agg(
+            gross_median=("gross_mean", "median"),
+            net_median=("net_mean", "median"),
+            positive_net_ratio=("net_mean", lambda values: float(np.mean(np.asarray(values) > 0))),
+        )
+        .reset_index()
+    )
+    passed = []
+    for variant, block in summary.groupby("variant", sort=False):
+        if (
+            set(block["split"]) == {"selection", "stability"}
+            and bool((block["gross_median"] > 0).all())
+            and bool((block["net_median"] > 0).all())
+            and bool((block["positive_net_ratio"] >= float(minimum_positive_run_ratio)).all())
+        ):
+            passed.append(str(variant))
+    return {
+        "status": (
+            "PORTFOLIO_MAPPING_DEVELOPMENT_INCREMENT_OBSERVED"
+            if passed
+            else "PORTFOLIO_MAPPING_REPAIR_NOT_ESTABLISHED"
+        ),
+        "passed_variants": passed,
+        "summary": summary.to_dict("records"),
+    }
+
+
 __all__ = [
     "CONTROL_SURFACE",
+    "DIRECT_DELTA_MAPPING",
     "FULL_SURFACE",
+    "HORIZON_MEAN_DELTA_MAPPING",
     "MLP_MODEL",
     "RIDGE_MODEL",
     "BroadArenaData",
     "FixedMLP",
     "arena_decision",
     "array_sha256",
+    "causal_trailing_mean",
     "data_adequacy",
     "deterministic_coordinates",
     "economic_metrics",
     "fit_normalization",
     "information_evidence",
+    "incremental_signal_mapping",
     "load_broad_arena_data",
     "model_matrix",
+    "mapping_repair_decision",
     "paired_increment",
     "paired_surface_diagnostics",
     "payload_sha256",

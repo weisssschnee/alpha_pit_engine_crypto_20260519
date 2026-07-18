@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "experiment_id": "20260718_broad_core_pack_information_arena_002",
+  "experiment_id": "20260718_broad_core_pack_information_arena_003",
   "objective": "Determine whether the 29 added Broad Core Pack fields contain stable conditional information and development-only economic increment over the current 10-field surface",
   "inputs": {
     "resolved_core_pack": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/resolved_token_contract.json",
@@ -44,11 +44,20 @@
     "minimum_independent_evaluation_months": 4
   },
   "decision": {"minimum_positive_run_ratio": 0.6},
+  "mapping_repair": {
+    "variants": [
+      "DIRECT_DELTA_SIGNAL_ZERO_NET",
+      "HORIZON_4H_CAUSAL_MEAN_DELTA_ZERO_NET"
+    ],
+    "horizon_smoothing_hours": 4,
+    "hyperparameter_search": false
+  },
   "frozen_budget": {
     "control_fields": 10,
     "full_fields": 39,
     "ridge_arms": 2,
     "mlp_arms": 6,
+    "mapping_evaluations": 16,
     "hyperparameter_search": false,
     "estimated_wall_minutes": 45,
     "estimated_peak_memory_gb": 4.0
@@ -68,7 +77,7 @@
     "cross_sprint_adaptive_memory": false
   },
   "outputs": {
-    "runtime_root": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_qualified",
-    "report": "reports/CRYPTO_BROAD_CORE_PACK_INFORMATION_ARENA_V1_20260718_QUALIFIED.md"
+    "runtime_root": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair",
+    "report": "reports/CRYPTO_BROAD_CORE_PACK_INFORMATION_ARENA_V1_20260718_MAPPING_REPAIR.md"
   }
 }
