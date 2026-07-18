@@ -812,7 +812,7 @@
       "contract": {
         "bypass_forbidden": true,
         "enforced_by": "data_adequacy_gate",
-        "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/data_adequacy.json",
+        "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/data_adequacy.json",
         "id": "no_cross_context_adequacy_inference",
         "rule": "The Broad fixed Arena passed its context-specific data gate, but Core3 and every future model remain separate admissions requiring coherent assets, history, labels, turnover observations, and independent blocks",
         "severity": "HARD",
@@ -820,7 +820,7 @@
       },
       "critical": true,
       "declared": true,
-      "declared_evidence_type": "STATIC",
+      "declared_evidence_type": "RUNTIME",
       "evidence": "DECLARED",
       "forbidden": false,
       "id": "field_pack_requires_data_adequacy",
@@ -831,14 +831,16 @@
       "source": "field_information_qualification_v0",
       "target": "data_adequacy_gate",
       "validation": {
-        "checked_at": "2026-07-18T05:30:01.794986+00:00",
-        "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/data_adequacy.json",
-        "evidence_sha256": "8CB7D2D93F504BA4CD1569D22C2CEB6ED3E0591504043FC247B21081B70DC62A",
-        "level": "STATIC_VERIFIED",
-        "notes": [],
+        "checked_at": "2026-07-18T07:52:05.020736+00:00",
+        "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/data_adequacy.json",
+        "evidence_sha256": "B8DAF630F59492ABB3308D2715F988CFB73C833263A9526D2AF7AB77089B1B8F",
+        "level": "PARTIAL",
+        "notes": [
+          "runtime assurance needs a completed matching trace with all contract bindings"
+        ],
         "profile": "crypto-development-research",
-        "result": "PASS",
-        "verified_at_sha": "edc3cda3a5324a4f0a21e9d6b9fa1406b88f4d06"
+        "result": "INSUFFICIENT_EVIDENCE",
+        "verified_at_sha": "3bd334c7e11dcb3583a0b3ebba3c577242172fef"
       }
     },
     {
@@ -880,9 +882,9 @@
       "contract": {
         "bypass_forbidden": true,
         "enforced_by": "data_adequacy_gate",
-        "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
+        "evidence_ref": "runtime/crypto_bitfinex_liquidation_ingress_20260718/run_manifest.json",
         "id": "source_compatibility_not_research_admission",
-        "rule": "Supplier preflight or overlap compatibility cannot admit the release to research; a paradigm-specific Data Adequacy Gate pass and explicit activation are still required",
+        "rule": "Supplier preflight, Bitfinex file integrity, or future overlap compatibility cannot admit any liquidation release to research; source-specific coverage plus a paradigm-specific Data Adequacy Gate pass and explicit activation are still required",
         "severity": "HARD",
         "type": "ADMISSION"
       },
@@ -899,14 +901,16 @@
       "source": "liquidation_supplier_ingress",
       "target": "data_adequacy_gate",
       "validation": {
-        "checked_at": "2026-07-17T18:52:31.706831+00:00",
-        "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
-        "evidence_sha256": "3FC88E4A96DD2CDCE4A64E40B8BD0AB0237E8E5CECEA99E02D736E39D153B329",
-        "level": "STATIC_VERIFIED",
-        "notes": [],
+        "checked_at": "2026-07-18T07:52:05.020736+00:00",
+        "evidence_ref": "runtime/crypto_bitfinex_liquidation_ingress_20260718/run_manifest.json",
+        "evidence_sha256": "354C9110F63EE9111820D80C7D3B58951D456880684B2CF8713E36F94CB64946",
+        "level": "PARTIAL",
+        "notes": [
+          "runtime assurance needs a completed matching trace with all contract bindings"
+        ],
         "profile": "crypto-development-research",
-        "result": "PASS",
-        "verified_at_sha": "58ff34e48cb88acc0005e741c8aaa52d3528177e"
+        "result": "INSUFFICIENT_EVIDENCE",
+        "verified_at_sha": "2c8086093412a70eaf3694359e7651bfe96f3ce6"
       }
     },
     {
@@ -944,7 +948,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-18T06:41:58.313252+00:00",
+  "generated_at": "2026-07-18T07:52:05.020736+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -1206,6 +1210,7 @@
       ],
       "raw_node_ids": [
         "alphafactory_crypto_broad_information_arena",
+        "alphafactory_crypto_broad_information_arena_apply_linear_return_calibration",
         "alphafactory_crypto_broad_information_arena_arena_decision",
         "alphafactory_crypto_broad_information_arena_array_sha256",
         "alphafactory_crypto_broad_information_arena_broadarenadata",
@@ -1213,6 +1218,7 @@
         "alphafactory_crypto_broad_information_arena_data_adequacy",
         "alphafactory_crypto_broad_information_arena_deterministic_coordinates",
         "alphafactory_crypto_broad_information_arena_economic_metrics",
+        "alphafactory_crypto_broad_information_arena_fit_nonnegative_linear_return_calibration",
         "alphafactory_crypto_broad_information_arena_fit_normalization",
         "alphafactory_crypto_broad_information_arena_fixedmlp",
         "alphafactory_crypto_broad_information_arena_fixedmlp_fit",
@@ -1228,8 +1234,9 @@
         "alphafactory_crypto_broad_information_arena_payload_sha256",
         "alphafactory_crypto_broad_information_arena_predict_split",
         "alphafactory_crypto_broad_information_arena_prediction_metrics",
+        "alphafactory_crypto_broad_information_arena_purge_label_boundary",
         "alphafactory_crypto_broad_information_arena_rationale_1",
-        "alphafactory_crypto_broad_information_arena_rationale_440",
+        "alphafactory_crypto_broad_information_arena_rationale_513",
         "alphafactory_crypto_broad_information_arena_raw_matrix",
         "alphafactory_crypto_broad_information_arena_slice",
         "alphafactory_crypto_broad_information_arena_split_information",
@@ -1254,9 +1261,13 @@
         "tests_test_broad_information_arena_test_causal_trailing_mean_uses_no_future_values",
         "tests_test_broad_information_arena_test_deterministic_coordinates_are_time_major_and_capped",
         "tests_test_broad_information_arena_test_fixed_mlp_learns_a_nonconstant_small_mapping",
+        "tests_test_broad_information_arena_test_label_boundary_purge_removes_execution_delay_plus_horizon_tail",
         "tests_test_broad_information_arena_test_model_matrix_exposes_values_and_missing_masks",
+        "tests_test_broad_information_arena_test_nonnegative_calibration_recovers_positive_scale_and_flags_direction_flip",
         "tests_test_broad_information_arena_test_pair_diagnostics_separate_prediction_difference_from_mapping_collapse",
+        "tests_test_broad_information_arena_test_sticky_gate_counts_degenerate_arm_as_failure",
         "tests_test_broad_information_arena_test_turnover_aware_sticky_mapping_uses_horizon_cohort_and_fixed_cost_gate",
+        "tests_test_broad_information_arena_test_zero_net_sticky_decision_is_invariant_to_calibration_intercept",
         "tests_test_instrument_canary_release",
         "tests_test_instrument_canary_release_releasepaneltests",
         "tests_test_instrument_canary_release_releasepaneltests_panel",
@@ -1266,7 +1277,7 @@
       "required": false,
       "semantic_role": "development_arena",
       "validation": {
-        "checked_at": "2026-07-18T06:02:52.308733+00:00",
+        "checked_at": "2026-07-18T07:52:05.020736+00:00",
         "evidence_ref": "runtime/crypto_frontier_research_v2_20260713/architecture_decision.json",
         "evidence_sha256": "9940FCA2C8607A3991DF4EF75ABADCF51C25812F034E42EBF5396D8B5EA0E2D1",
         "level": "STATIC_VERIFIED",
@@ -4406,10 +4417,10 @@
       },
       "claim_badges": [
         "CONSUMPTION VERIFIED",
-        "CONDITIONAL INFORMATION VERIFIED",
-        "STICKY COST REDUCTION VERIFIED",
-        "PREDICTION SCALE RISK CONFIRMED",
-        "INCREMENT NOT QUALIFIED",
+        "PURGED CONDITIONAL INFORMATION VERIFIED",
+        "HELD-OUT CALIBRATION VERIFIED",
+        "UNPURGED EVIDENCE SUPERSEDED",
+        "ECONOMIC INCREMENT NOT ESTABLISHED",
         "NO OOS"
       ],
       "color": "#f9a825",
@@ -4453,36 +4464,36 @@
         {
           "bypass_forbidden": false,
           "enforced_by": "broad_information_arena.information_evidence",
-          "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json",
+          "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
           "id": "broad_conditional_information_verified",
-          "rule": "In the 39-field Broad context, 13 of 29 added fields carry stable block-matched residual information over the ten-field Ridge control; marginal quantile entropy alone is not treated as an alpha selector",
+          "rule": "After purging every role by the 2h execution delay plus 4h target horizon, 12 of 29 added Broad fields retain stable block-matched residual information over the ten-field Ridge control; marginal quantile entropy remains an adequacy diagnostic rather than an alpha selector",
           "severity": "HARD",
           "type": "EVIDENCE"
         },
         {
           "bypass_forbidden": false,
           "enforced_by": "broad_information_arena.mapping_repair_decision",
-          "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json",
+          "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
           "id": "broad_economic_mapping_scope",
-          "rule": "The nondegenerate fixed 2x2 Arena has positive gross but negative 5 bps net increments; direct delta-signal and predeclared 4h causal mapping repairs also remain net-negative, which limits only these tested mappings and not all turnover-aware mechanisms",
+          "rule": "In the purged fixed Arena, full-minus-control paired net medians are negative in selection and stability, and both direct-delta and fixed 4h causal repairs remain net-negative in every arm; this limits the tested 39-field, 4h, 5 bps implementation only",
           "severity": "HARD",
           "type": "EVIDENCE"
         },
         {
           "bypass_forbidden": false,
           "enforced_by": "broad_information_arena.turnover_aware_sticky_weights and sticky_mapping_decision",
-          "evidence_ref": "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/run_manifest.json",
+          "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
           "id": "broad_sticky_mapping_scope",
-          "rule": "The fixed 4h-cohort sticky gate exactly reproduced all 16 prior prediction identities and materially reduced turnover, but stability was positive in only 2 of 4 matched runs; cost reduction is verified while a Broad component development increment is not",
+          "rule": "The old exact prediction identities are superseded because their roles were not purged. In the repaired run, sticky turnover reduction does not yield a matched Broad increment: matched net medians are negative in both development blocks before calibration",
           "severity": "HARD",
           "type": "EVIDENCE"
         },
         {
           "bypass_forbidden": false,
-          "enforced_by": "crypto_broad_prediction_scale_audit_v1",
-          "evidence_ref": "runtime/crypto_broad_prediction_scale_audit_v1_20260718/run_manifest.json",
-          "id": "broad_prediction_scale_calibration_risk",
-          "rule": "Across the 16 frozen surfaces, prediction amplitude nearly determines sticky acceptance and turnover but does not track net quality; threshold tuning is forbidden and any repair must estimate return scale on train-only data",
+          "enforced_by": "broad_information_arena.fit_nonnegative_linear_return_calibration and sticky_mapping_decision",
+          "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
+          "id": "broad_prediction_scale_calibration_replay",
+          "rule": "A dedicated held-out development calibration role fitted eight nonnegative return-scale coefficients without threshold search. Seven arms preserve candidate weights, one Broad MLP arm is direction-degenerate and retained as a failure; calibrated support is 1 of 4 in selection and 0 of 4 in stability, so increment is not established",
           "severity": "HARD",
           "type": "EVIDENCE"
         },
@@ -4527,13 +4538,8 @@
         "alphafactory_crypto/broad_information_arena.py",
         "config/crypto_broad_core_pack_information_arena_v1.json",
         "scripts/crypto_broad_core_pack_information_arena_v1.py",
-        "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json",
-        "reports/CRYPTO_BROAD_CORE_PACK_INFORMATION_ARENA_V1_20260718_MAPPING_REPAIR.md",
-        "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/run_manifest.json",
-        "reports/CRYPTO_BROAD_CORE_PACK_STICKY_MAPPING_V1_20260718.md",
-        "scripts/crypto_broad_prediction_scale_audit_v1.py",
-        "runtime/crypto_broad_prediction_scale_audit_v1_20260718/run_manifest.json",
-        "reports/CRYPTO_BROAD_PREDICTION_SCALE_AUDIT_V1_20260718.md"
+        "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
+        "reports/CRYPTO_BROAD_PURGED_CALIBRATED_STICKY_V1_20260718.md"
       ],
       "promotion_requirements": [
         "context-matched data adequacy",
@@ -4544,6 +4550,7 @@
       ],
       "raw_node_ids": [
         "alphafactory_crypto_broad_information_arena",
+        "alphafactory_crypto_broad_information_arena_apply_linear_return_calibration",
         "alphafactory_crypto_broad_information_arena_arena_decision",
         "alphafactory_crypto_broad_information_arena_array_sha256",
         "alphafactory_crypto_broad_information_arena_broadarenadata",
@@ -4551,6 +4558,7 @@
         "alphafactory_crypto_broad_information_arena_data_adequacy",
         "alphafactory_crypto_broad_information_arena_deterministic_coordinates",
         "alphafactory_crypto_broad_information_arena_economic_metrics",
+        "alphafactory_crypto_broad_information_arena_fit_nonnegative_linear_return_calibration",
         "alphafactory_crypto_broad_information_arena_fit_normalization",
         "alphafactory_crypto_broad_information_arena_fixedmlp",
         "alphafactory_crypto_broad_information_arena_fixedmlp_fit",
@@ -4566,8 +4574,9 @@
         "alphafactory_crypto_broad_information_arena_payload_sha256",
         "alphafactory_crypto_broad_information_arena_predict_split",
         "alphafactory_crypto_broad_information_arena_prediction_metrics",
+        "alphafactory_crypto_broad_information_arena_purge_label_boundary",
         "alphafactory_crypto_broad_information_arena_rationale_1",
-        "alphafactory_crypto_broad_information_arena_rationale_440",
+        "alphafactory_crypto_broad_information_arena_rationale_513",
         "alphafactory_crypto_broad_information_arena_raw_matrix",
         "alphafactory_crypto_broad_information_arena_slice",
         "alphafactory_crypto_broad_information_arena_split_information",
@@ -4610,23 +4619,15 @@
         "alphafactory_crypto_field_information_role_for_family",
         "alphafactory_crypto_field_information_sample_coordinates",
         "alphafactory_crypto_field_information_sha256_file",
-        "reports_crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair",
-        "reports_crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair_boundaries",
-        "reports_crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair_broad_core_pack_information_and_fixed_2x2_development_arena",
-        "reports_crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair_mapping_repair_summary",
-        "reports_crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair_split_increment_summary",
-        "reports_crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair_why_entropy_is_not_used_alone",
-        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718",
-        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_boundaries",
-        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_broad_core_pack_information_and_fixed_2x2_development_arena",
-        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_mapping_repair_summary",
-        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_split_increment_summary",
-        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_turnover_aware_sticky_mapping_summary",
-        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_why_entropy_is_not_used_alone",
-        "reports_crypto_broad_prediction_scale_audit_v1_20260718",
-        "reports_crypto_broad_prediction_scale_audit_v1_20260718_boundaries",
-        "reports_crypto_broad_prediction_scale_audit_v1_20260718_broad_prediction_scale_audit",
-        "reports_crypto_broad_prediction_scale_audit_v1_20260718_scope_correlations",
+        "reports_crypto_broad_purged_calibrated_sticky_v1_20260718",
+        "reports_crypto_broad_purged_calibrated_sticky_v1_20260718_boundaries",
+        "reports_crypto_broad_purged_calibrated_sticky_v1_20260718_boundary_repair",
+        "reports_crypto_broad_purged_calibrated_sticky_v1_20260718_broad_core_pack_purged_model_fit_calibration_development_arena",
+        "reports_crypto_broad_purged_calibrated_sticky_v1_20260718_mapping_repair_summary",
+        "reports_crypto_broad_purged_calibrated_sticky_v1_20260718_split_increment_summary",
+        "reports_crypto_broad_purged_calibrated_sticky_v1_20260718_train_only_calibrated_sticky_summary",
+        "reports_crypto_broad_purged_calibrated_sticky_v1_20260718_turnover_aware_sticky_mapping_summary",
+        "reports_crypto_broad_purged_calibrated_sticky_v1_20260718_why_entropy_is_not_used_alone",
         "reports_crypto_core_pack_consumption_v1_20260718_repaired",
         "reports_crypto_core_pack_consumption_v1_20260718_repaired_broad_panel_baseline",
         "reports_crypto_core_pack_consumption_v1_20260718_repaired_claim_boundary",
@@ -4649,14 +4650,6 @@
         "scripts_crypto_broad_core_pack_information_arena_v1_run",
         "scripts_crypto_broad_core_pack_information_arena_v1_write_json",
         "scripts_crypto_broad_core_pack_information_arena_v1_write_jsonl",
-        "scripts_crypto_broad_prediction_scale_audit_v1",
-        "scripts_crypto_broad_prediction_scale_audit_v1_git_sha",
-        "scripts_crypto_broad_prediction_scale_audit_v1_main",
-        "scripts_crypto_broad_prediction_scale_audit_v1_now",
-        "scripts_crypto_broad_prediction_scale_audit_v1_rank_correlation",
-        "scripts_crypto_broad_prediction_scale_audit_v1_read_jsonl",
-        "scripts_crypto_broad_prediction_scale_audit_v1_run",
-        "scripts_crypto_broad_prediction_scale_audit_v1_write_json",
         "scripts_crypto_core_pack_consumption_v1",
         "scripts_crypto_core_pack_consumption_v1_git_sha",
         "scripts_crypto_core_pack_consumption_v1_main",
@@ -4678,21 +4671,27 @@
         "tests_test_broad_information_arena_test_causal_trailing_mean_uses_no_future_values",
         "tests_test_broad_information_arena_test_deterministic_coordinates_are_time_major_and_capped",
         "tests_test_broad_information_arena_test_fixed_mlp_learns_a_nonconstant_small_mapping",
+        "tests_test_broad_information_arena_test_label_boundary_purge_removes_execution_delay_plus_horizon_tail",
         "tests_test_broad_information_arena_test_model_matrix_exposes_values_and_missing_masks",
+        "tests_test_broad_information_arena_test_nonnegative_calibration_recovers_positive_scale_and_flags_direction_flip",
         "tests_test_broad_information_arena_test_pair_diagnostics_separate_prediction_difference_from_mapping_collapse",
-        "tests_test_broad_information_arena_test_turnover_aware_sticky_mapping_uses_horizon_cohort_and_fixed_cost_gate"
+        "tests_test_broad_information_arena_test_sticky_gate_counts_degenerate_arm_as_failure",
+        "tests_test_broad_information_arena_test_turnover_aware_sticky_mapping_uses_horizon_cohort_and_fixed_cost_gate",
+        "tests_test_broad_information_arena_test_zero_net_sticky_decision_is_invariant_to_calibration_intercept"
       ],
       "required": false,
       "semantic_role": "context_bound_feature_information_qualification",
       "validation": {
-        "checked_at": "2026-07-18T06:41:58.313252+00:00",
-        "evidence_ref": "runtime/crypto_broad_prediction_scale_audit_v1_20260718/run_manifest.json",
-        "evidence_sha256": "09383153CDA32287170BAEF220E669287E5C03681C403F95A1EF57C477D4085C",
-        "level": "STATIC_VERIFIED",
-        "notes": [],
+        "checked_at": "2026-07-18T07:52:05.020736+00:00",
+        "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
+        "evidence_sha256": "92BF05B0046FE258BA708871EE52ED764C61EAA61E46F0ACCDA1A7FAEE73E6FA",
+        "level": "PARTIAL",
+        "notes": [
+          "runtime assurance needs a completed matching trace with all contract bindings"
+        ],
         "profile": "crypto-development-research",
-        "result": "PASS",
-        "verified_at_sha": "39751d71d0905c7527d696f2088108e749c2412a"
+        "result": "INSUFFICIENT_EVIDENCE",
+        "verified_at_sha": "3bd334c7e11dcb3583a0b3ebba3c577242172fef"
       },
       "visible_by_default": true
     },
@@ -4798,6 +4797,8 @@
       },
       "claim_badges": [
         "SUPPLIER QUARANTINED",
+        "BITFINEX COVERAGE UNVERIFIED",
+        "BITFINEX ADEQUACY UNDERPOWERED",
         "FORWARD RAW CAPTURE ACTIVE",
         "NO CURRENT OVERLAP",
         "NO RESEARCH ADMISSION"
@@ -4839,6 +4840,15 @@
           "rule": "The independent Binance !forceOrder@arr collector is raw-provenance capture only; it began after the current supplier package ended and cannot authorize historical compatibility, stitching, normalization, research use, or economic evaluation",
           "severity": "HARD",
           "type": "BOUNDARY"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "bitfinex_liquidation_ingress.preflight_bitfinex_release",
+          "evidence_ref": "runtime/crypto_bitfinex_liquidation_ingress_20260718/run_manifest.json",
+          "id": "bitfinex_file_integrity_not_source_coverage",
+          "rule": "Bitfinex monthly files and aggregates reconcile internally, but absent request/page/cursor receipts plus sparse and page-boundary-like coverage prevent a continuous-history claim; its event-study Data Adequacy is underpowered and it cannot validate Binance or CryptoHFT",
+          "severity": "HARD",
+          "type": "EVIDENCE"
         }
       ],
       "critical": true,
@@ -4859,7 +4869,12 @@
         "scripts/binance_force_order_capture.py",
         "scripts/binance_force_order_capture_snapshot.py",
         "runtime/binance_force_order_capture_activation_20260718/snapshot.json",
-        "reports/BINANCE_FORCE_ORDER_CAPTURE_ACTIVATION_20260718.md"
+        "reports/BINANCE_FORCE_ORDER_CAPTURE_ACTIVATION_20260718.md",
+        "alphafactory_crypto/bitfinex_liquidation_ingress.py",
+        "config/crypto_bitfinex_liquidation_ingress_v1.json",
+        "scripts/crypto_bitfinex_liquidation_ingress.py",
+        "runtime/crypto_bitfinex_liquidation_ingress_20260718/run_manifest.json",
+        "reports/CRYPTO_BITFINEX_LIQUIDATION_INGRESS_20260718.md"
       ],
       "promotion_requirements": [
         "at least 14 independent Binance forceOrder overlap dates",
@@ -4877,6 +4892,20 @@
         "alphafactory_crypto_binance_force_order_capture_rationale_1",
         "alphafactory_crypto_binance_force_order_capture_rationale_39",
         "alphafactory_crypto_binance_force_order_capture_utc_iso_from_ns",
+        "alphafactory_crypto_bitfinex_liquidation_ingress",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_as_utc",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_bitfinexpreflight",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_canonical_sha256",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_classify_symbol",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_compare_gold",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_effective_count",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_file_record",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_months",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_preflight_bitfinex_release",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_rationale_1",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_raw_rows",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_schema",
+        "alphafactory_crypto_bitfinex_liquidation_ingress_sha256_file",
         "alphafactory_crypto_liquidation_ingress",
         "alphafactory_crypto_liquidation_ingress_canonical_sha256",
         "alphafactory_crypto_liquidation_ingress_check_required_columns",
@@ -4900,6 +4929,13 @@
         "alphafactory_crypto_liquidation_ingress_utc_timestamp",
         "reports_binance_force_order_capture_activation_20260718",
         "reports_binance_force_order_capture_activation_20260718_binance_forceorder_forward_capture_activation",
+        "reports_crypto_bitfinex_liquidation_ingress_20260718",
+        "reports_crypto_bitfinex_liquidation_ingress_20260718_bitfinex_liquidation_ingress_preflight",
+        "reports_crypto_bitfinex_liquidation_ingress_20260718_data_adequacy_gaps",
+        "reports_crypto_bitfinex_liquidation_ingress_20260718_decision",
+        "reports_crypto_bitfinex_liquidation_ingress_20260718_observed_data",
+        "reports_crypto_bitfinex_liquidation_ingress_20260718_reproduction",
+        "reports_crypto_bitfinex_liquidation_ingress_20260718_semantic_boundary",
         "reports_crypto_liquidation_supplier_ingress_20260718",
         "reports_crypto_liquidation_supplier_ingress_20260718_boundaries",
         "reports_crypto_liquidation_supplier_ingress_20260718_contract_classes",
@@ -4916,6 +4952,12 @@
         "scripts_binance_force_order_capture_snapshot_snapshot",
         "scripts_binance_force_order_capture_snapshot_write_json",
         "scripts_binance_force_order_capture_write_json_atomic",
+        "scripts_crypto_bitfinex_liquidation_ingress",
+        "scripts_crypto_bitfinex_liquidation_ingress_git_context",
+        "scripts_crypto_bitfinex_liquidation_ingress_main",
+        "scripts_crypto_bitfinex_liquidation_ingress_report",
+        "scripts_crypto_bitfinex_liquidation_ingress_run",
+        "scripts_crypto_bitfinex_liquidation_ingress_write_json",
         "scripts_crypto_liquidation_supplier_ingress",
         "scripts_crypto_liquidation_supplier_ingress_git_sha",
         "scripts_crypto_liquidation_supplier_ingress_main",
@@ -4927,6 +4969,13 @@
         "tests_test_binance_force_order_capture_test_capture_identity_is_stable",
         "tests_test_binance_force_order_capture_test_capture_partition_and_ingress_replay_are_compatible",
         "tests_test_binance_force_order_capture_test_capture_record_preserves_exact_exchange_text_and_receive_time",
+        "tests_test_bitfinex_liquidation_ingress",
+        "tests_test_bitfinex_liquidation_ingress_fixture",
+        "tests_test_bitfinex_liquidation_ingress_hash",
+        "tests_test_bitfinex_liquidation_ingress_test_gold_delay_drift_fails_preflight",
+        "tests_test_bitfinex_liquidation_ingress_test_internal_layers_pass_but_source_coverage_and_research_remain_unqualified",
+        "tests_test_bitfinex_liquidation_ingress_test_raw_hash_drift_fails_preflight",
+        "tests_test_bitfinex_liquidation_ingress_test_symbol_semantics_quarantine_non_ust_and_test_contracts",
         "tests_test_liquidation_ingress",
         "tests_test_liquidation_ingress_fixture",
         "tests_test_liquidation_ingress_test_binance_nested_force_order_payload_is_supported",
@@ -4939,14 +4988,16 @@
       "required": false,
       "semantic_role": "liquidation_source_ingress",
       "validation": {
-        "checked_at": "2026-07-18T05:30:01.794986+00:00",
+        "checked_at": "2026-07-18T07:52:05.020736+00:00",
         "evidence_ref": "runtime/binance_force_order_capture_activation_20260718/snapshot.json",
-        "evidence_sha256": "B14AF15A2ADAB216335B2B54F2065C7C1A7313C8C6BE1A6BC264325E9CC5FB57",
-        "level": "STATIC_VERIFIED",
-        "notes": [],
+        "evidence_sha256": "E4B6916E3C04C384E797DC5707178B0127E743B6E255300121D61B377F364751",
+        "level": "PARTIAL",
+        "notes": [
+          "runtime assurance needs a completed matching trace with all contract bindings"
+        ],
         "profile": "crypto-development-research",
-        "result": "PASS",
-        "verified_at_sha": "d3c1527944e077643db1cdcb009007e914802da5"
+        "result": "INSUFFICIENT_EVIDENCE",
+        "verified_at_sha": "949b277845a8ad4945dc14b6b75339b9eb7acbaa"
       },
       "visible_by_default": true
     },
@@ -5033,7 +5084,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "7723F22D948EEB59E75B379D14590EE70EF5270FC3BB7FA457F744FF21B94727"
+    "sha256": "21EE9AA5E87362035FF76897CF688BFD920B2C609E62B70BB6D6FDFF5394146B"
   },
   "profile_id": null,
   "profiles": [
@@ -5064,13 +5115,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "9590b2d5346e10da10062d5526d229edcc424920",
-    "edge_count": 33245,
-    "node_count": 17911,
+    "built_at_commit": "c34702d3482576eebab29a92ad6347ec6c20618d",
+    "edge_count": 33372,
+    "node_count": 17968,
     "path": ".planning/graphs/graph.json",
-    "sha256": "E3D6BC69EBCBA35F36937F82A6298793CECBB0E02F5F0BD84493E9E07106A9B0"
+    "sha256": "37F1BBDF4C35B39D35701BFA21EAA77D96A88AC8ED1B7731D69475F5AF71A712"
   },
-  "repo_head": "9590b2d5346e10da10062d5526d229edcc424920",
+  "repo_head": "c34702d3482576eebab29a92ad6347ec6c20618d",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
