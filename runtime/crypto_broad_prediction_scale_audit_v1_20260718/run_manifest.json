@@ -1,0 +1,105 @@
+{
+  "boundaries": {
+    "candidate_promotion": false,
+    "model_training": false,
+    "sealed_reads_allowed": false,
+    "threshold_tuning": false
+  },
+  "command": "python scripts/crypto_broad_prediction_scale_audit_v1.py",
+  "cost_time": {
+    "actual_wall_seconds": 0.23441110004205257,
+    "estimated_wall_seconds": 30
+  },
+  "created_at": "2026-07-18T06:27:39Z",
+  "decision": {
+    "cannot_infer": [
+      "a calibrated mapping would produce positive net increment",
+      "directional alpha quality from prediction amplitude",
+      "OOS qualification",
+      "candidate promotion"
+    ],
+    "checks": {
+      "full_mlp_acceptance_dispersion": true,
+      "prediction_identity_complete": true,
+      "scale_controls_acceptance": true,
+      "scale_controls_turnover": true,
+      "scale_not_positive_net_quality": true
+    },
+    "claim_scope": "FROZEN_STICKY_MAPPING_DIAGNOSTIC_ONLY",
+    "correlations": {
+      "all": {
+        "observations": 16,
+        "scale_vs_acceptance": 0.9749642385002278,
+        "scale_vs_net": -0.1250920132623678,
+        "scale_vs_pearson": -0.7441176470588236,
+        "scale_vs_spearman": -0.3147058823529411,
+        "scale_vs_turnover": 0.9727743619579425
+      },
+      "control": {
+        "observations": 8,
+        "scale_vs_acceptance": 0.9639253854237598,
+        "scale_vs_net": -0.5149792926227014,
+        "scale_vs_pearson": -0.19047619047619052,
+        "scale_vs_spearman": 0.5000000000000001,
+        "scale_vs_turnover": 0.9461247469114746
+      },
+      "full": {
+        "observations": 8,
+        "scale_vs_acceptance": 0.9761904761904763,
+        "scale_vs_net": -0.6190476190476191,
+        "scale_vs_pearson": -0.4761904761904762,
+        "scale_vs_spearman": -0.4761904761904762,
+        "scale_vs_turnover": 0.9761904761904763
+      },
+      "full_mlp": {
+        "observations": 6,
+        "scale_vs_acceptance": 0.942857142857143,
+        "scale_vs_net": -0.2571428571428572,
+        "scale_vs_pearson": -0.5428571428571429,
+        "scale_vs_spearman": -0.2,
+        "scale_vs_turnover": 0.942857142857143
+      }
+    },
+    "criteria": {
+      "maximum_scale_net_rank_correlation_for_quality": 0.3,
+      "minimum_full_mlp_acceptance_range": 0.5,
+      "minimum_scale_acceptance_rank_correlation": 0.8,
+      "minimum_scale_turnover_rank_correlation": 0.8
+    },
+    "full_mlp_acceptance_range": 0.7192622950819672,
+    "next_action": "Do not tune the observed sticky threshold. Any repair must estimate a return-scale calibration on train-only data and replay the same frozen development comparison.",
+    "status": "PREDICTION_SCALE_CALIBRATION_RISK_CONFIRMED"
+  },
+  "experiment_id": "20260718_broad_prediction_scale_audit_005",
+  "files": {
+    "reports/CRYPTO_BROAD_PREDICTION_SCALE_AUDIT_V1_20260718.md": "92391547FC8E89F5D38E65683CCCBDD1348F8C3706A1E8785C2F4AA448A60069",
+    "runtime/crypto_broad_prediction_scale_audit_v1_20260718/decision.json": "39E0401CD19ABB94277D5A27EF5549A190B32F86AC6E2D651D4C9AB91BFAFA73",
+    "runtime/crypto_broad_prediction_scale_audit_v1_20260718/scale_diagnostics.csv": "7AF2A889B73832E0FA44C866D181A1E50AB6A6C3245B4F7A686B46AF147003D9"
+  },
+  "identity_sha256": "98493E159D5AA36A5C1BCC7E52F33D47B3C3B8E6D52FEE6BC332B288F66C7C35",
+  "inputs": {
+    "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/model_evidence.jsonl": "E925A870FBBE57BC4C1DF3565153E2E2260EF642B3718A8C4BC341F726408F62",
+    "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/sticky_pair_evidence.jsonl": "D4133CF90E5F1724BEF6F54114746119C08D66BAC1F5C9CA00BE3832A7469387",
+    "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/sticky_surface_evidence.jsonl": "878D1E3732357C648E9509E8B07D19FD02EDA57FBB8BA5CCF65191B045922EB8"
+  },
+  "objective": "Determine whether frozen prediction amplitude rather than economic quality controls the sticky cost gate",
+  "parameters": {
+    "maximum_scale_net_rank_correlation_for_quality": 0.3,
+    "minimum_full_mlp_acceptance_range": 0.5,
+    "minimum_scale_acceptance_rank_correlation": 0.8,
+    "minimum_scale_turnover_rank_correlation": 0.8
+  },
+  "reproducibility": {
+    "continuation": "Rerun the exact command against the content-hash-bound sticky evidence.",
+    "failure": null,
+    "reproducible": true
+  },
+  "runtime": {
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "python": "3.11.9"
+  },
+  "schema_version": 1,
+  "source_sha": "172340ac129b9f0ed79bfcbecd5126adfe662c76",
+  "status": "PREDICTION_SCALE_CALIBRATION_RISK_CONFIRMED"
+}

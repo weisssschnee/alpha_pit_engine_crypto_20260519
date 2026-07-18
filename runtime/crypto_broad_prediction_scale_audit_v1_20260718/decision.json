@@ -1,0 +1,59 @@
+{
+  "cannot_infer": [
+    "a calibrated mapping would produce positive net increment",
+    "directional alpha quality from prediction amplitude",
+    "OOS qualification",
+    "candidate promotion"
+  ],
+  "checks": {
+    "full_mlp_acceptance_dispersion": true,
+    "prediction_identity_complete": true,
+    "scale_controls_acceptance": true,
+    "scale_controls_turnover": true,
+    "scale_not_positive_net_quality": true
+  },
+  "claim_scope": "FROZEN_STICKY_MAPPING_DIAGNOSTIC_ONLY",
+  "correlations": {
+    "all": {
+      "observations": 16,
+      "scale_vs_acceptance": 0.9749642385002278,
+      "scale_vs_net": -0.1250920132623678,
+      "scale_vs_pearson": -0.7441176470588236,
+      "scale_vs_spearman": -0.3147058823529411,
+      "scale_vs_turnover": 0.9727743619579425
+    },
+    "control": {
+      "observations": 8,
+      "scale_vs_acceptance": 0.9639253854237598,
+      "scale_vs_net": -0.5149792926227014,
+      "scale_vs_pearson": -0.19047619047619052,
+      "scale_vs_spearman": 0.5000000000000001,
+      "scale_vs_turnover": 0.9461247469114746
+    },
+    "full": {
+      "observations": 8,
+      "scale_vs_acceptance": 0.9761904761904763,
+      "scale_vs_net": -0.6190476190476191,
+      "scale_vs_pearson": -0.4761904761904762,
+      "scale_vs_spearman": -0.4761904761904762,
+      "scale_vs_turnover": 0.9761904761904763
+    },
+    "full_mlp": {
+      "observations": 6,
+      "scale_vs_acceptance": 0.942857142857143,
+      "scale_vs_net": -0.2571428571428572,
+      "scale_vs_pearson": -0.5428571428571429,
+      "scale_vs_spearman": -0.2,
+      "scale_vs_turnover": 0.942857142857143
+    }
+  },
+  "criteria": {
+    "maximum_scale_net_rank_correlation_for_quality": 0.3,
+    "minimum_full_mlp_acceptance_range": 0.5,
+    "minimum_scale_acceptance_rank_correlation": 0.8,
+    "minimum_scale_turnover_rank_correlation": 0.8
+  },
+  "full_mlp_acceptance_range": 0.7192622950819672,
+  "next_action": "Do not tune the observed sticky threshold. Any repair must estimate a return-scale calibration on train-only data and replay the same frozen development comparison.",
+  "status": "PREDICTION_SCALE_CALIBRATION_RISK_CONFIRMED"
+}
