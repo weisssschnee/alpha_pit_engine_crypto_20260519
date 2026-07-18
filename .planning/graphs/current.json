@@ -944,7 +944,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-18T05:30:01.794986+00:00",
+  "generated_at": "2026-07-18T06:02:52.308733+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -1229,9 +1229,13 @@
         "alphafactory_crypto_broad_information_arena_predict_split",
         "alphafactory_crypto_broad_information_arena_prediction_metrics",
         "alphafactory_crypto_broad_information_arena_rationale_1",
+        "alphafactory_crypto_broad_information_arena_rationale_440",
         "alphafactory_crypto_broad_information_arena_raw_matrix",
         "alphafactory_crypto_broad_information_arena_slice",
         "alphafactory_crypto_broad_information_arena_split_information",
+        "alphafactory_crypto_broad_information_arena_sticky_mapping_decision",
+        "alphafactory_crypto_broad_information_arena_turnover_aware_sticky_mapping",
+        "alphafactory_crypto_broad_information_arena_turnover_aware_sticky_weights",
         "alphafactory_crypto_instrument_canary_release",
         "alphafactory_crypto_instrument_canary_release_calendar_hours",
         "alphafactory_crypto_instrument_canary_release_canonical_sha256",
@@ -1252,6 +1256,7 @@
         "tests_test_broad_information_arena_test_fixed_mlp_learns_a_nonconstant_small_mapping",
         "tests_test_broad_information_arena_test_model_matrix_exposes_values_and_missing_masks",
         "tests_test_broad_information_arena_test_pair_diagnostics_separate_prediction_difference_from_mapping_collapse",
+        "tests_test_broad_information_arena_test_turnover_aware_sticky_mapping_uses_horizon_cohort_and_fixed_cost_gate",
         "tests_test_instrument_canary_release",
         "tests_test_instrument_canary_release_releasepaneltests",
         "tests_test_instrument_canary_release_releasepaneltests_panel",
@@ -1261,7 +1266,7 @@
       "required": false,
       "semantic_role": "development_arena",
       "validation": {
-        "checked_at": "2026-07-18T05:26:43.648933+00:00",
+        "checked_at": "2026-07-18T06:02:52.308733+00:00",
         "evidence_ref": "runtime/crypto_frontier_research_v2_20260713/architecture_decision.json",
         "evidence_sha256": "9940FCA2C8607A3991DF4EF75ABADCF51C25812F034E42EBF5396D8B5EA0E2D1",
         "level": "STATIC_VERIFIED",
@@ -4404,7 +4409,8 @@
         "CONDITIONAL INFORMATION VERIFIED",
         "MODEL FIT PARTIAL",
         "FIXED MAPPING COST KILLED",
-        "NO OOS"
+        "STICKY COST REDUCTION VERIFIED",
+        "INCREMENT NOT QUALIFIED"
       ],
       "color": "#f9a825",
       "contracts": [
@@ -4463,6 +4469,15 @@
           "type": "EVIDENCE"
         },
         {
+          "bypass_forbidden": false,
+          "enforced_by": "broad_information_arena.turnover_aware_sticky_weights and sticky_mapping_decision",
+          "evidence_ref": "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/run_manifest.json",
+          "id": "broad_sticky_mapping_scope",
+          "rule": "The fixed 4h-cohort sticky gate exactly reproduced all 16 prior prediction identities and materially reduced turnover, but stability was positive in only 2 of 4 matched runs; cost reduction is verified while a Broad component development increment is not",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        },
+        {
           "bypass_forbidden": true,
           "enforced_by": "data_adequacy_gate",
           "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json",
@@ -4504,13 +4519,15 @@
         "config/crypto_broad_core_pack_information_arena_v1.json",
         "scripts/crypto_broad_core_pack_information_arena_v1.py",
         "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json",
-        "reports/CRYPTO_BROAD_CORE_PACK_INFORMATION_ARENA_V1_20260718_MAPPING_REPAIR.md"
+        "reports/CRYPTO_BROAD_CORE_PACK_INFORMATION_ARENA_V1_20260718_MAPPING_REPAIR.md",
+        "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/run_manifest.json",
+        "reports/CRYPTO_BROAD_CORE_PACK_STICKY_MAPPING_V1_20260718.md"
       ],
       "promotion_requirements": [
         "context-matched data adequacy",
         "qualified context-specific model fit",
         "frozen development-only matched control",
-        "predeclared turnover-aware mechanism with positive net matched increment",
+        "non-scale-sensitive cross-seed positive net matched increment",
         "explicit authorization"
       ],
       "raw_node_ids": [
@@ -4538,9 +4555,13 @@
         "alphafactory_crypto_broad_information_arena_predict_split",
         "alphafactory_crypto_broad_information_arena_prediction_metrics",
         "alphafactory_crypto_broad_information_arena_rationale_1",
+        "alphafactory_crypto_broad_information_arena_rationale_440",
         "alphafactory_crypto_broad_information_arena_raw_matrix",
         "alphafactory_crypto_broad_information_arena_slice",
         "alphafactory_crypto_broad_information_arena_split_information",
+        "alphafactory_crypto_broad_information_arena_sticky_mapping_decision",
+        "alphafactory_crypto_broad_information_arena_turnover_aware_sticky_mapping",
+        "alphafactory_crypto_broad_information_arena_turnover_aware_sticky_weights",
         "alphafactory_crypto_core_pack_consumption",
         "alphafactory_crypto_core_pack_consumption_bool",
         "alphafactory_crypto_core_pack_consumption_channel_statistics",
@@ -4583,6 +4604,13 @@
         "reports_crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair_mapping_repair_summary",
         "reports_crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair_split_increment_summary",
         "reports_crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair_why_entropy_is_not_used_alone",
+        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718",
+        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_boundaries",
+        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_broad_core_pack_information_and_fixed_2x2_development_arena",
+        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_mapping_repair_summary",
+        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_split_increment_summary",
+        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_turnover_aware_sticky_mapping_summary",
+        "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_why_entropy_is_not_used_alone",
         "reports_crypto_core_pack_consumption_v1_20260718_repaired",
         "reports_crypto_core_pack_consumption_v1_20260718_repaired_broad_panel_baseline",
         "reports_crypto_core_pack_consumption_v1_20260718_repaired_claim_boundary",
@@ -4600,6 +4628,7 @@
         "scripts_crypto_broad_core_pack_information_arena_v1_git_sha",
         "scripts_crypto_broad_core_pack_information_arena_v1_main",
         "scripts_crypto_broad_core_pack_information_arena_v1_now",
+        "scripts_crypto_broad_core_pack_information_arena_v1_read_jsonl",
         "scripts_crypto_broad_core_pack_information_arena_v1_report",
         "scripts_crypto_broad_core_pack_information_arena_v1_run",
         "scripts_crypto_broad_core_pack_information_arena_v1_write_json",
@@ -4626,19 +4655,20 @@
         "tests_test_broad_information_arena_test_deterministic_coordinates_are_time_major_and_capped",
         "tests_test_broad_information_arena_test_fixed_mlp_learns_a_nonconstant_small_mapping",
         "tests_test_broad_information_arena_test_model_matrix_exposes_values_and_missing_masks",
-        "tests_test_broad_information_arena_test_pair_diagnostics_separate_prediction_difference_from_mapping_collapse"
+        "tests_test_broad_information_arena_test_pair_diagnostics_separate_prediction_difference_from_mapping_collapse",
+        "tests_test_broad_information_arena_test_turnover_aware_sticky_mapping_uses_horizon_cohort_and_fixed_cost_gate"
       ],
       "required": false,
       "semantic_role": "context_bound_feature_information_qualification",
       "validation": {
-        "checked_at": "2026-07-18T05:30:01.794986+00:00",
-        "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json",
-        "evidence_sha256": "48BCC6CD9C52E7FA87D9CFE50AE054E85B1BA3768386A8F07CB0E8B4CC6D84BA",
+        "checked_at": "2026-07-18T06:02:52.308733+00:00",
+        "evidence_ref": "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/run_manifest.json",
+        "evidence_sha256": "A753209F9E65E2D5077B1CAE13427150FE4331E46EB59156CAF9A8E1FACCB57F",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "edc3cda3a5324a4f0a21e9d6b9fa1406b88f4d06"
+        "verified_at_sha": "66bb993467818102c9736bf900f1284506571b7c"
       },
       "visible_by_default": true
     },
@@ -4979,7 +5009,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "B41649049FFF1F7A8C4EC09746007522BA1C388731AFDED348C6C45A02EF4826"
+    "sha256": "CDEA289D547053F75CF1FE7AD2376D5A70B27C04D5E652357077766BC9DC0725"
   },
   "profile_id": null,
   "profiles": [
@@ -5010,13 +5040,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "723bddf512e722513d820168044389608b00f014",
-    "edge_count": 33178,
-    "node_count": 17883,
+    "built_at_commit": "e5a215393ac739af57ef0551ba1d0473a7e91dfb",
+    "edge_count": 33213,
+    "node_count": 17896,
     "path": ".planning/graphs/graph.json",
-    "sha256": "4573DF8CED1AA7FA26372BAA1B7CA29FB7ACB29FB8A62006DCDF77766A080960"
+    "sha256": "C0F2030E9424924513335822FE26EC34820F7B99CFCC848DE0B638C3FE542654"
   },
-  "repo_head": "723bddf512e722513d820168044389608b00f014",
+  "repo_head": "e5a215393ac739af57ef0551ba1d0473a7e91dfb",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
