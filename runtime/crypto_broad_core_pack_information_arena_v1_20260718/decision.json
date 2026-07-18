@@ -1,0 +1,26 @@
+{
+  "cannot_infer": [
+    "formal_performance_search_authority",
+    "OOS_qualification",
+    "candidate_promotion",
+    "future_or_recent_performance"
+  ],
+  "economic_increment_gate_pass": false,
+  "information_gate_pass": true,
+  "split_increment_summary": [
+    {
+      "gross_median": 3.508598785974694e-05,
+      "net_median": -6.775419989865796e-05,
+      "positive_net_ratio": 0.0,
+      "split": "selection"
+    },
+    {
+      "gross_median": 5.171744810292315e-06,
+      "net_median": -8.648000908944823e-05,
+      "positive_net_ratio": 0.0,
+      "split": "stability"
+    }
+  ],
+  "stable_added_residual_information_ratio": 0.4482758620689655,
+  "status": "BROAD_CORE_PACK_INFORMATION_INCREMENT_ONLY"
+}
