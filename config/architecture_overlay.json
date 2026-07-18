@@ -942,7 +942,7 @@
         "path": "alphafactory_crypto/relational_policy.py",
         "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
         "verified_sha": "c8af3c3396b380f190ca323e630ae59f6b54b706",
-        "sha256": "1CFC3DFB721361DAE675E11733A94EB5F2F8CEE76935E0721C76CEA8181C0856"
+        "sha256": "65E33CD77B841C63400778D1A240B671149D7005EFFB5A1BD1DD29915E455455"
       },
       "contracts": [
         {
@@ -977,15 +977,6 @@
         "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
         "evidence_sha256": "71FE5D71779DD75372534CD853D68A49695F4149F4159066502F7AF6498749C6",
         "verified_at_sha": "c8af3c3396b380f190ca323e630ae59f6b54b706"
-      },
-      "research_evidence": {
-        "status": "RELATIONAL_REPRESENTATION_INCREMENT_NOT_ESTABLISHED",
-        "scope": "SPENT_DEVELOPMENT_IMPLEMENTATION_SPECIFIC",
-        "evidence_ref": "runtime/crypto_relational_policy_stage1_20260718/decision.json",
-        "evidence_sha256": "CB7963C83C280F4E53700ABFB6F7BBDB782BC8182AF13FED89DEBB1149B8C54F",
-        "runtime_source_sha": "7421d4c0ef78f9212f692c46fa9e023438257ed2",
-        "temporary_scaffold": "EVICTED_AT_STAGE1_DECISION_CLOSURE",
-        "stage2_authorized": false
       },
       "promotion_requirements": [
         "matched development evidence",

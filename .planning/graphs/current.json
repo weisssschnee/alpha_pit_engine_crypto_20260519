@@ -982,7 +982,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-18T11:16:48.195247+00:00",
+  "generated_at": "2026-07-18T14:27:06.269415+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -4449,12 +4449,13 @@
         "path": "alphafactory_crypto/relational_policy.py",
         "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
         "sha256": "65E33CD77B841C63400778D1A240B671149D7005EFFB5A1BD1DD29915E455455",
-        "verified_sha": "9c5f2f64691013033a0edf583fe57de86cd966c0"
+        "verified_sha": "c8af3c3396b380f190ca323e630ae59f6b54b706"
       },
       "claim_badges": [
         "DEVELOPMENT SMOKE PASS",
         "DYNAMIC MEMBERSHIP CONSUMED",
         "COST PATH IDENTICAL",
+        "STAGE1 MATCHED NEGATIVE",
         "NO ECONOMIC CLAIM",
         "NO OOS"
       ],
@@ -4481,9 +4482,9 @@
         {
           "bypass_forbidden": false,
           "enforced_by": "",
-          "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
+          "evidence_ref": "runtime/crypto_relational_policy_stage1_20260718/decision.json",
           "id": "architecture_smoke_claim_scope",
-          "rule": "The smoke verifies dynamic eligibility consumption, asset permutation equivariance, previous-weight recurrence, portfolio constraints, and exact strict-evaluator cost parity; it is not matched economic or OOS evidence",
+          "rule": "Stage 0 verifies dynamic eligibility, recurrence, constraints, and strict-evaluator cost parity; the separate non-degenerate Stage-1 attribution did not establish synchronized-relational increment over temporal-only. Neither result is economic or OOS evidence",
           "severity": "HARD",
           "type": "EVIDENCE"
         }
@@ -4538,14 +4539,14 @@
       "required": false,
       "semantic_role": "relational_direct_weight_policy_challenger",
       "validation": {
-        "checked_at": "2026-07-18T11:16:48.195247+00:00",
+        "checked_at": "2026-07-18T14:27:06.269415+00:00",
         "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
         "evidence_sha256": "71FE5D71779DD75372534CD853D68A49695F4149F4159066502F7AF6498749C6",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "9c5f2f64691013033a0edf583fe57de86cd966c0"
+        "verified_at_sha": "c8af3c3396b380f190ca323e630ae59f6b54b706"
       },
       "visible_by_default": true
     },
@@ -5199,6 +5200,7 @@
         "planning_state_accepted_identities",
         "planning_state_active_execution_plan",
         "planning_state_blockers",
+        "planning_state_candidate_next_stage_search_preparation",
         "planning_state_closed_lines_and_reusable_capability",
         "planning_state_crypto_alphafactory_current_state",
         "planning_state_current_decisions",
@@ -5206,13 +5208,12 @@
         "planning_state_evidence_qualified_position",
         "planning_state_graph_and_maintenance",
         "planning_state_next_action",
-        "planning_state_proposed_future_large_scale_search_envelope",
         "planning_state_source_of_truth_order"
       ],
       "required": false,
       "semantic_role": "evaluation_access_boundary",
       "validation": {
-        "checked_at": "2026-07-18T11:16:48.195247+00:00",
+        "checked_at": "2026-07-18T14:20:38.135217+00:00",
         "evidence_ref": ".planning/STATE.md",
         "evidence_sha256": "ED3007BFE6C05AAE8FABA7F1F6E198D024DAD5109A62E69C1B861EF002B61474",
         "level": "PARTIAL",
@@ -5228,7 +5229,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "66839C69337A41473360828C21D1CDCA93E59E9E0FADD7A3A3E41E05647D26F0"
+    "sha256": "A0EE8AC69F2F5C14180E1B5275D36448EAC63F7EB7106C3A511B24B1975FF10D"
   },
   "profile_id": null,
   "profiles": [
@@ -5259,13 +5260,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "89c11a0684579d9080bc069d3396044d7b820789",
-    "edge_count": 33470,
-    "node_count": 18003,
+    "built_at_commit": "991401da8bd1d00bdd417daff7382eff1e2d5ae1",
+    "edge_count": 33475,
+    "node_count": 18009,
     "path": ".planning/graphs/graph.json",
-    "sha256": "2E37269EC9053EA406B1C01FA1B755504994104203533E6382B70F3664A07959"
+    "sha256": "B036C56CA866321262A484F8851E3AD1B3111162A3EDB10AC03747C8E5C1DF30"
   },
-  "repo_head": "89c11a0684579d9080bc069d3396044d7b820789",
+  "repo_head": "991401da8bd1d00bdd417daff7382eff1e2d5ae1",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
