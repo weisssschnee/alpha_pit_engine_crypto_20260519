@@ -931,15 +931,21 @@
         "config/crypto_core_pack_consumption_v1.json",
         "scripts/crypto_core_pack_consumption_v1.py",
         "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json",
-        "reports/CRYPTO_CORE_PACK_CONSUMPTION_V1_20260718_REPAIRED.md"
+        "reports/CRYPTO_CORE_PACK_CONSUMPTION_V1_20260718_REPAIRED.md",
+        "alphafactory_crypto/broad_information_arena.py",
+        "config/crypto_broad_core_pack_information_arena_v1.json",
+        "scripts/crypto_broad_core_pack_information_arena_v1.py",
+        "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json",
+        "reports/CRYPTO_BROAD_CORE_PACK_INFORMATION_ARENA_V1_20260718_MAPPING_REPAIR.md"
       ],
       "critical": true,
       "semantic_role": "context_bound_feature_information_qualification",
       "active_authority": false,
       "claim_badges": [
         "CONSUMPTION VERIFIED",
+        "CONDITIONAL INFORMATION VERIFIED",
         "MODEL FIT PARTIAL",
-        "NO ECONOMIC CLAIM",
+        "FIXED MAPPING COST KILLED",
         "NO OOS"
       ],
       "authority": {
@@ -981,6 +987,22 @@
           "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/context_consumption_summary.json"
         },
         {
+          "id": "broad_conditional_information_verified",
+          "type": "EVIDENCE",
+          "rule": "In the 39-field Broad context, 13 of 29 added fields carry stable block-matched residual information over the ten-field Ridge control; marginal quantile entropy alone is not treated as an alpha selector",
+          "severity": "HARD",
+          "enforced_by": "broad_information_arena.information_evidence",
+          "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json"
+        },
+        {
+          "id": "broad_economic_mapping_scope",
+          "type": "EVIDENCE",
+          "rule": "The nondegenerate fixed 2x2 Arena has positive gross but negative 5 bps net increments; direct delta-signal and predeclared 4h causal mapping repairs also remain net-negative, which limits only these tested mappings and not all turnover-aware mechanisms",
+          "severity": "HARD",
+          "enforced_by": "broad_information_arena.mapping_repair_decision",
+          "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json"
+        },
+        {
           "id": "consumed_pack_requires_model_admission",
           "type": "ADMISSION",
           "rule": "The 120-token Core Pack has a real context-bound consumer, but any model or economic comparison still requires a matching data-adequacy decision, frozen matched control, and explicit development-only authorization",
@@ -999,18 +1021,18 @@
         }
       ],
       "validation": {
-        "level": "STATIC_VERIFIED",
+        "level": "RUNTIME_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json",
-        "evidence_sha256": "48C0A0B425E510FE6ADAF3450B0EB88E96DC8B69B3021F3AE37B85E23D72B800",
-        "verified_at_sha": "e3631d31ae5022b6765b0a333fb9c32015312c01"
+        "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json",
+        "evidence_sha256": "48BCC6CD9C52E7FA87D9CFE50AE054E85B1BA3768386A8F07CB0E8B4CC6D84BA",
+        "verified_at_sha": "edc3cda"
       },
       "promotion_requirements": [
         "context-matched data adequacy",
         "qualified context-specific model fit",
         "frozen development-only matched control",
-        "economic evidence only under separately authorized boundaries",
+        "predeclared turnover-aware mechanism with positive net matched increment",
         "explicit authorization"
       ]
     },
@@ -1083,11 +1105,23 @@
         "alphafactory_crypto/liquidation_ingress.py",
         "config/crypto_liquidation_supplier_ingress_v1.json",
         "scripts/crypto_liquidation_supplier_ingress.py",
-        "reports/CRYPTO_LIQUIDATION_SUPPLIER_INGRESS_20260718.md"
+        "reports/CRYPTO_LIQUIDATION_SUPPLIER_INGRESS_20260718.md",
+        "alphafactory_crypto/binance_force_order_capture.py",
+        "config/binance_force_order_capture_v1.json",
+        "scripts/binance_force_order_capture.py",
+        "scripts/binance_force_order_capture_snapshot.py",
+        "runtime/binance_force_order_capture_activation_20260718/snapshot.json",
+        "reports/BINANCE_FORCE_ORDER_CAPTURE_ACTIVATION_20260718.md"
       ],
       "critical": true,
       "semantic_role": "liquidation_source_ingress",
       "active_authority": true,
+      "claim_badges": [
+        "SUPPLIER QUARANTINED",
+        "FORWARD RAW CAPTURE ACTIVE",
+        "NO CURRENT OVERLAP",
+        "NO RESEARCH ADMISSION"
+      ],
       "authority": {
         "path": "config/crypto_liquidation_supplier_ingress_v1.json",
         "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
@@ -1120,18 +1154,27 @@
           "enforced_by": "crypto_liquidation_supplier_ingress run manifest",
           "bypass_forbidden": true,
           "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json"
+        },
+        {
+          "id": "forward_capture_not_overlap_evidence",
+          "type": "BOUNDARY",
+          "rule": "The independent Binance !forceOrder@arr collector is raw-provenance capture only; it began after the current supplier package ended and cannot authorize historical compatibility, stitching, normalization, research use, or economic evaluation",
+          "severity": "HARD",
+          "enforced_by": "binance_force_order_capture and liquidation overlap gate",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/binance_force_order_capture_activation_20260718/snapshot.json"
         }
       ],
       "validation": {
-        "level": "STATIC_VERIFIED",
+        "level": "RUNTIME_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
-        "evidence_sha256": "3FC88E4A96DD2CDCE4A64E40B8BD0AB0237E8E5CECEA99E02D736E39D153B329",
-        "verified_at_sha": "58ff34e48cb88acc0005e741c8aaa52d3528177e"
+        "evidence_ref": "runtime/binance_force_order_capture_activation_20260718/snapshot.json",
+        "evidence_sha256": "B14AF15A2ADAB216335B2B54F2065C7C1A7313C8C6BE1A6BC264325E9CC5FB57",
+        "verified_at_sha": "d3c1527"
       },
       "promotion_requirements": [
-        "canonical Binance WebSocket history root",
+        "at least 14 independent Binance forceOrder overlap dates",
         "frozen overlap gate pass",
         "paradigm-aware data adequacy pass",
         "explicit research activation"
@@ -1785,19 +1828,19 @@
       "contract": {
         "id": "no_cross_context_adequacy_inference",
         "type": "ADMISSION",
-        "rule": "Verified token consumption does not satisfy model-level data adequacy or model fit; each future model must use one coherent context with sufficient assets, history, labels, turnover observations, and independent blocks",
+        "rule": "The Broad fixed Arena passed its context-specific data gate, but Core3 and every future model remain separate admissions requiring coherent assets, history, labels, turnover observations, and independent blocks",
         "severity": "HARD",
         "enforced_by": "data_adequacy_gate",
         "bypass_forbidden": true,
-        "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json"
+        "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/data_adequacy.json"
       },
       "validation": {
-        "level": "STATIC_VERIFIED",
+        "level": "RUNTIME_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json",
-        "evidence_sha256": "48C0A0B425E510FE6ADAF3450B0EB88E96DC8B69B3021F3AE37B85E23D72B800",
-        "verified_at_sha": "e3631d31ae5022b6765b0a333fb9c32015312c01"
+        "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/data_adequacy.json",
+        "evidence_sha256": "8CB7D2D93F504BA4CD1569D22C2CEB6ED3E0591504043FC247B21081B70DC62A",
+        "verified_at_sha": "edc3cda"
       }
     },
     {

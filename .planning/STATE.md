@@ -4,9 +4,9 @@ Last updated: 2026-07-18 Asia/Hong_Kong
 
 ## Current phase
 
-`CORE_PACK_CONTEXT_BOUND_CONSUMPTION_VERIFIED_MODEL_FIT_PARTIAL`
+`BROAD_CORE_PACK_CONDITIONAL_INFORMATION_VERIFIED_ECONOMIC_INCREMENT_COST_KILLED`
 
-The frozen 120-token Core Pack now has a real, context-bound consumer: all 39 Broad tokens and all 81 Core3 tokens were materialized and reached the probe through tensor exposure, input gradients, first-layer updates, and prediction-sensitive token ablation. This verifies consumption plumbing, not stable model learning or economic value. Broad training loss decreased under the frozen probe; Core3 training loss did not. Separately, the CryptoHFT liquidation release remains quarantined because no independent canonical Binance forceOrder WebSocket history is available for overlap qualification.
+The 39-field Broad context has now passed a frozen information-and-economics qualification over train plus two development blocks. Thirteen of the 29 added fields carry stable residual information over the current ten-field Ridge control, versus two of ten control fields, and neither model fit nor full/control predictions or weights were degenerate. Gross paired increments were positive but all net increments remained negative at 5 bps; direct delta-signal and target-horizon-aligned 4h causal mapping repairs reduced costs but did not establish a net development increment. Separately, an independent Binance `!forceOrder@arr` raw forward capture is active, but it starts after the current CryptoHFT package ends and therefore supplies no overlap evidence for stitching.
 
 ## Current decisions
 
@@ -26,15 +26,19 @@ CURRENT_CONTRACT_CAPSULE_ACTIVE
 CRYPTO_FIELD_INFORMATION_V0_COMPLETED
 CORE_PACK_CONTEXT_BOUND_CONSUMPTION_VERIFIED
 CORE3_CONSUMPTION_MODEL_FIT_NOT_QUALIFIED
+BROAD_CORE_PACK_CONDITIONAL_INFORMATION_VERIFIED
+BROAD_CORE_PACK_INFORMATION_INCREMENT_COST_KILLED
+BROAD_CORE_PACK_FIXED_MAPPING_REPAIR_NOT_ESTABLISHED
 LIQUIDATION_SUPPLIER_INGRESS_QUALIFIED_QUARANTINED
-LIQUIDATION_STITCHING_BLOCKED_NO_WS_OVERLAP_INPUT
+BINANCE_FORCE_ORDER_FORWARD_CAPTURE_ACTIVE
+LIQUIDATION_STITCHING_BLOCKED_NO_OVERLAP_DATES
 ```
 
 ## Accepted identities
 
 - Provenance closure: branch `origin/audit/evalreset-collapse-forensics-20260711`, commit `4726795f61052470d56e2d1475e4f6da9d262943`, tag `crypto-frontier-provenance-closure-20260714`.
 - Current research branch: `experiment/crypto-explicit-latent-adaptive-v1-20260717`.
-- Latest implementation qualification: `7389a36ebb4ee62f57aeb818cf4db7157bd1ea9f`.
+- Explicit/latent implementation qualification: `7389a36ebb4ee62f57aeb818cf4db7157bd1ea9f`.
 - Field Information V0 source: `057e31df71f55f9e3a6e8ea3b48d53293d7d2e13`; run identity SHA256: `623036F48CBC8089CC61E81876F3A1E14199FC781456BF9F39183F8A129E53D6`.
 - Latest qualified Graph closure before this maintenance phase: `920e0ad35c07e2e2cee3ed2be8ad0753937f86f4`.
 - Accepted closure bundle SHA256: `99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2`.
@@ -43,6 +47,8 @@ LIQUIDATION_STITCHING_BLOCKED_NO_WS_OVERLAP_INPUT
 - Liquidation ingress implementation: `d64a783dac4c148d1924f76acb7b8a80cbcc7f1a`; byte-stable evidence commit: `58ff34e48cb88acc0005e741c8aaa52d3528177e`; release identity SHA256: `C9717263EC6F97839466A4BC13D8DBA803E3D0D5854AE6E3A005F4C6F0F34D7A`.
 - Core Pack consumption implementation source: `f01d0d22a40ae9949a027fe138c52998fb23c1ef`; evidence commit: `e3631d31ae5022b6765b0a333fb9c32015312c01`.
 - Core Pack identity SHA256: `B6765D5A60B9A348A47A88BB53D503A48E024C1BAF83BCB14B2F4BF06E248D00`; resolved execution-contract identity SHA256: `35E54F79576A6D7A1D94AE697E8066CB9FB49CF9A97979259F39490E3281914E`; run identity SHA256: `7DE0F5FB394970C804AC483D42A63231687C461528AF0947D85855D91000A149`.
+- Broad information Arena implementation source: `4aa96ba65a950adca07c4bdb9b0db734f729bdd0`; evidence commit: `edc3cda`; run identity SHA256: `E9DE6B6A98E6986D99E08571322CD66B0E2B5B145D3B392E251587FFDEE619E1`.
+- Binance forceOrder forward-capture snapshot source: `ecb8ca11792e24e2f86666ac5009cb32d621bbb7`; evidence commit: `d3c1527`; capture identity SHA256: `22411352F986AB29B4AC2D3E0F5241486D86FA940D7A5C63B5D98FD3E13CB934`.
 
 ## Evidence-qualified position
 
@@ -56,16 +62,19 @@ LIQUIDATION_STITCHING_BLOCKED_NO_WS_OVERLAP_INPUT
 - Volume and flow are materially represented: the broad context contains seven quote-volume/activity fields; the Core3 registry contains 19 activity/liquidity, 16 flow, 6 large-trade, and 26 rolling fields. Trade count, quote volume, size-bucket notional, buy/sell quantity, and price-range fields lead the information census.
 - Core Pack consumption: 120 unique tokens = 75 base plus 45 lazy derived, split into independent Broad (39) and Core3 (81) consumers. The repaired full-context probe verified 120/120 loadability, materialization, tensor exposure, gradient reachability, first-layer update, and prediction sensitivity. A preserved late-window attempt reached 118/120 because `active_universe_size` and `age_percentile_active_universe` were constant in that narrower Broad probe; the full authorized Broad period restored their variation. No 120-channel joint panel was created.
 - Model-fit boundary: Broad probe loss decreased from 1.054226 to 1.011711. Core3 probe loss increased from 1.015130 to 1.107231, so Core3 model fit is not qualified even though all 81 channels were genuinely consumed. Neither result is a matched alpha comparison, portfolio result, economic increment, or OOS proof.
+- Broad conditional-information qualification: quantile-binned marginal entropy is near its maximum for almost every nondegenerate field and is therefore an adequacy check, not a useful standalone selector. Block-matched mutual-information excess and residual information over the ten-field Ridge control found stable residual information in 13/29 added fields versus 2/10 controls. The frozen Ridge plus three-seed MLP 2x2 Arena had no fit-degenerate runs, exact-equal predictions, or portfolio collapse.
+- Broad economic boundary: paired gross median increment was `+3.51e-05` in selection and `+5.17e-06` in stability, while paired net median increment was `-6.78e-05` and `-8.65e-05`. Direct full-minus-control signal mapping and the predeclared 4h causal mean repair remained net-negative in every run; the 4h repair narrowed median net loss to `-1.28e-05` and `-4.28e-05`. This is evidence that added information exists but is too weak for the tested 5 bps mappings, not evidence that the fields are useless or that no turnover-aware architecture can work.
 - Liquidation supplier release: 762 Parquet partitions across 381 dates passed schema, count, primary-key, PIT-delay, and content-identity preflight. Of 500 symbols and 11,138,396 events, 464 linear USDT/USDC symbols with 11,101,810 events are eligible for source comparison. Nineteen inverse/delivery and seventeen unknown-semantics symbols remain notional-quarantined because the supplier's quantity-times-price value is not a qualified common notional for those contracts. This is ingress evidence only, not a research field admission or economic result.
+- Binance raw provenance capture: the official `!forceOrder@arr` forward collector is active at `G:/AlphaFactory_CryptoData/raw/binance_force_order_ws_v1`. The accepted snapshot contains 145 valid records across 28 symbols with zero parse, hash, source, or forceOrder-contract failures. Capture began on 2026-07-18 after the supplier package ended on 2026-07-13, so current-package overlap is zero and stitching remains blocked.
 
 ## Active execution plan
 
-1. Keep the liquidation supplier release quarantined; do not join it to any Binance WebSocket capture by filename, symbol, or assumed venue semantics.
-2. When an explicit Binance WS landing root is available, rerun `scripts/crypto_liquidation_supplier_ingress.py --ws-root <path>` under the frozen overlap thresholds. A pass only makes stitching eligible for a separate explicit activation decision.
+1. Keep the liquidation supplier release quarantined and the independent Binance forward capture raw-only; do not join them by filename, symbol, or assumed venue semantics.
+2. Run the existing overlap gate only when an independent historical archive or a supplier extension supplies at least 14 overlapping dates with the active capture. A pass only makes stitching eligible for a separate explicit activation decision.
 3. After source compatibility, require the existing Data Adequacy Gate before any research use; the 2025-2026 release does not enter the current 2023H2/2024 train surface.
-4. Treat the verified 120-token consumer as two context-bound surfaces, not one merged training matrix; consumption admission does not satisfy model-fit or economic admission.
-5. For any future model comparison, choose exactly one context, require its Data Adequacy Gate, freeze the budget and matched control, and use only the selected fields; do not expand all 5,211 derived specifications.
-6. Keep challenge, recent, May stress, forward, promotion, and cross-sprint memory closed.
+4. Preserve the Broad information result as a component-level positive and mapping-level negative. Do not repeat marginal-entropy ranking or expand model/search budgets without a predeclared turnover-aware mechanism and the same matched control.
+5. Treat the verified 120-token consumer as two context-bound surfaces, not one merged training matrix; consumption admission does not satisfy Core3 model fit or economic admission.
+6. Keep challenge, recent, May stress, forward evaluation, promotion, and cross-sprint memory closed. Raw forward data capture is permitted but does not authorize forward evaluation.
 
 No large experiment is authorized merely by this plan.
 
@@ -76,7 +85,8 @@ No large experiment is authorized merely by this plan.
 - Existing external-paradigm samples lack independent evaluation power.
 - The localized compositional mechanism remains challenge-unstable.
 - The structured-proxy comparison lacks executed semantic matched controls and does not identify independent latent states.
-- No canonical Binance WebSocket liquidation history landing was found, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
+- Broad added-field information is stable, but its gross strength is below tested 5 bps turnover costs under both the original full/control weight difference and two fixed delta-signal mappings.
+- The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 
 ## Source-of-truth order
 
@@ -103,4 +113,4 @@ No status code overrides observed runtime or source facts.
 
 ## Next action
 
-Run no large experiment. Core Pack consumption qualification is closed. Any next model action must select one context and first qualify data and fixed-budget model fit against a matched control; it cannot open performance search. The independent liquidation action remains limited to locating a canonical Binance forceOrder WS history root and rerunning the existing overlap gate; do not stitch or expose the supplier release to research before that result and a separate explicit activation decision.
+Run no large search. Broad information qualification and the two fixed mapping repairs are closed: conditional information exists, but the tested economic mappings are cost-killed. A next Broad model action is justified only if it predeclares one turnover-aware mechanism against the same ten-field matched control; it cannot open performance search. Keep the Binance raw collector running independently and run the existing supplier overlap gate only after at least 14 common dates exist; do not stitch or expose the supplier release to research before a gate pass and separate explicit activation decision.
