@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "20260718_broad_core_pack_information_arena_001",
+  "objective": "Determine whether the 29 added Broad Core Pack fields contain stable conditional information and development-only economic increment over the current 10-field surface",
+  "inputs": {
+    "resolved_core_pack": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/resolved_token_contract.json",
+    "field_information_config": "config/crypto_field_information_v0.json",
+    "prior_information_census": "runtime/crypto_field_information_v0_20260717/information_census.parquet",
+    "broad_cache": ".cache/crypto_18m_compositional_broad_search_v1"
+  },
+  "splits": {
+    "train": {"start": "2023-07-01T00:00:00Z", "end_exclusive": "2024-03-01T00:00:00Z"},
+    "selection": {"start": "2024-03-01T00:00:00Z", "end_exclusive": "2024-05-01T00:00:00Z"},
+    "stability": {"start": "2024-05-01T00:00:00Z", "end_exclusive": "2024-07-01T00:00:00Z"}
+  },
+  "target_horizon_hours": 4,
+  "information": {
+    "quantile_bins": 16,
+    "maximum_samples": 200000,
+    "within_block_null_shifts_hours": [24, 72, 168, 336, 504],
+    "minimum_positive_month_ratio": 0.5,
+    "minimum_stable_added_field_ratio": 0.2
+  },
+  "models": {
+    "train_samples": 150000,
+    "rank_metric_samples": 200000,
+    "ridge_alpha": 10.0,
+    "mlp_seeds": [20260718, 20260719, 20260720],
+    "mlp_hidden": [64, 32],
+    "mlp_epochs": 8,
+    "mlp_batch_size": 4096,
+    "mlp_learning_rate": 0.001,
+    "mlp_weight_decay": 0.0001,
+    "torch_threads": 6
+  },
+  "data_adequacy": {
+    "minimum_development_dates": 300,
+    "minimum_training_samples": 100000,
+    "minimum_assets": 100,
+    "minimum_field_non_null_ratio": 0.05,
+    "minimum_train_hours": 4000,
+    "minimum_block_label_samples": 100000,
+    "minimum_turnover_observations": 2000,
+    "minimum_independent_evaluation_months": 4
+  },
+  "decision": {"minimum_positive_run_ratio": 0.6},
+  "frozen_budget": {
+    "control_fields": 10,
+    "full_fields": 39,
+    "ridge_arms": 2,
+    "mlp_arms": 6,
+    "hyperparameter_search": false,
+    "estimated_wall_minutes": 45,
+    "estimated_peak_memory_gb": 4.0
+  },
+  "economic_contract": {
+    "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+    "horizon_hours": 4,
+    "turnover": "FULL_L1_WITH_INITIAL_ESTABLISHMENT_AND_TERMINAL_LIQUIDATION",
+    "cost_bps": 5.0
+  },
+  "boundaries": {
+    "latest_timestamp_exclusive": "2024-07-01T00:00:00Z",
+    "sealed_reads_allowed": false,
+    "formal_performance_search": false,
+    "hyperparameter_search": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_broad_core_pack_information_arena_v1_20260718",
+    "report": "reports/CRYPTO_BROAD_CORE_PACK_INFORMATION_ARENA_V1_20260718.md"
+  }
+}
