@@ -1,0 +1,171 @@
+{
+  "bias_audit": {
+    "OOS_sample_grade": "NONE_SPENT_DEVELOPMENT_EVIDENCE",
+    "cannot_infer": [
+      "OOS qualification",
+      "candidate promotion",
+      "future performance",
+      "independent statistical power from four model arms",
+      "survivorship-complete observed archive"
+    ],
+    "checks": {
+      "all_calibrations_use_dedicated_calibration_role": true,
+      "all_development_blocks_purged": true,
+      "all_last_labels_end_before_role_boundary": true,
+      "boundary_horizon_matches_target": true,
+      "calibration_fit_degenerate_arms_counted_as_gate_failures": true,
+      "calibration_is_held_out_from_model_fit": true,
+      "intercept_does_not_change_sticky_weights": true,
+      "nonnegative_slopes_preserve_direction": true,
+      "positive_slope_raw_and_calibrated_candidate_weights_invariant": true,
+      "purge_equals_execution_delay_plus_horizon": true,
+      "selection_stability_not_used_for_fit": true
+    },
+    "cost_model": "full-L1 5 bps with initial establishment and terminal liquidation",
+    "decision": "PASS",
+    "discovery_status": "predeclared repair reproduction",
+    "execution_date": "signal timestamp plus 2h",
+    "feature_date": "signal timestamp",
+    "label_horizon": "4h after execution",
+    "requested_stage": "development-only matched replay"
+  },
+  "cannot_infer": [
+    "formal_performance_search_authority",
+    "OOS_qualification",
+    "candidate_promotion",
+    "future_or_recent_performance"
+  ],
+  "cost_killed_under_frozen_mapping": false,
+  "degenerate_pairs": 0,
+  "economic_increment_gate_pass": false,
+  "information_gate_pass": true,
+  "mapping_repair": {
+    "passed_variants": [],
+    "status": "PORTFOLIO_MAPPING_REPAIR_NOT_ESTABLISHED",
+    "summary": [
+      {
+        "gross_median": 1.6207892431385002e-05,
+        "net_median": -8.257210467879292e-05,
+        "positive_net_ratio": 0.0,
+        "split": "selection",
+        "variant": "DIRECT_DELTA_SIGNAL_ZERO_NET"
+      },
+      {
+        "gross_median": 9.072060705933853e-06,
+        "net_median": -5.904185606934467e-05,
+        "positive_net_ratio": 0.0,
+        "split": "selection",
+        "variant": "HORIZON_4H_CAUSAL_MEAN_DELTA_ZERO_NET"
+      },
+      {
+        "gross_median": 7.617220305833663e-06,
+        "net_median": -8.030495378504238e-05,
+        "positive_net_ratio": 0.0,
+        "split": "stability",
+        "variant": "DIRECT_DELTA_SIGNAL_ZERO_NET"
+      },
+      {
+        "gross_median": 6.395352037024359e-06,
+        "net_median": -4.631872898181106e-05,
+        "positive_net_ratio": 0.0,
+        "split": "stability",
+        "variant": "HORIZON_4H_CAUSAL_MEAN_DELTA_ZERO_NET"
+      }
+    ]
+  },
+  "model_fit_degenerate_runs": [],
+  "reference_supersession": {
+    "mismatched_prediction_identities": 16,
+    "policy": "SUPERSEDE_UNPURGED_REFERENCE",
+    "reason": "The prior run neither purged the final execution-delay-plus-horizon coordinates nor separated model fitting from calibration.",
+    "status": "PRIOR_UNPURGED_REFERENCE_SUPERSEDED",
+    "total_prediction_identities": 16
+  },
+  "split_increment_summary": [
+    {
+      "gross_median": 1.4483804031414151e-05,
+      "net_median": -0.00010240967799856864,
+      "positive_net_ratio": 0.0,
+      "split": "selection"
+    },
+    {
+      "gross_median": -6.302957821234143e-06,
+      "net_median": -0.0001217086057109389,
+      "positive_net_ratio": 0.0,
+      "split": "stability"
+    }
+  ],
+  "stable_added_residual_information_ratio": 0.41379310344827586,
+  "status": "BROAD_PURGED_CALIBRATED_STICKY_INCREMENT_NOT_ESTABLISHED",
+  "train_only_calibrated_sticky": {
+    "arm_interpretation": "Ridge plus three MLP seeds are model-robustness arms, not independent statistical samples.",
+    "calibration_fit_degenerate_arms": 1,
+    "cost_reduction_only": true,
+    "development_increment_observed": false,
+    "evidence_scope": "SPENT_DEVELOPMENT_SELECTION_AND_STABILITY_ONLY",
+    "gate_degenerate_pairs": 2,
+    "status": "TURNOVER_AWARE_MAPPING_COST_REDUCTION_ONLY",
+    "summary": [
+      {
+        "arm_count": 4,
+        "control_net_improvement_median": -1.76139485110443e-05,
+        "control_turnover_reduction_ratio_median": 0.7293957813388554,
+        "degenerate_pair_count": 1,
+        "delta_sleeve_net_median": 5.711423826509051e-06,
+        "delta_sleeve_positive_ratio": 0.25,
+        "full_net_improvement_median": 4.469755483040569e-05,
+        "full_turnover_reduction_ratio_median": 1.0,
+        "matched_net_difference_median": 6.397294882750477e-06,
+        "matched_positive_ratio": 0.25,
+        "split": "selection"
+      },
+      {
+        "arm_count": 4,
+        "control_net_improvement_median": 5.041703091260803e-06,
+        "control_turnover_reduction_ratio_median": 0.9039762049353168,
+        "degenerate_pair_count": 1,
+        "delta_sleeve_net_median": 0.0,
+        "delta_sleeve_positive_ratio": 0.0,
+        "full_net_improvement_median": 2.3982731323214926e-05,
+        "full_turnover_reduction_ratio_median": 1.0,
+        "matched_net_difference_median": 0.0,
+        "matched_positive_ratio": 0.0,
+        "split": "stability"
+      }
+    ]
+  },
+  "turnover_aware_mapping": {
+    "cost_reduction_only": true,
+    "development_increment_observed": false,
+    "gate_degenerate_pairs": 0,
+    "status": "TURNOVER_AWARE_MAPPING_COST_REDUCTION_ONLY",
+    "summary": [
+      {
+        "arm_count": 4,
+        "control_net_improvement_median": 6.263169537918828e-05,
+        "control_turnover_reduction_ratio_median": 0.9700546370314507,
+        "degenerate_pair_count": 0,
+        "delta_sleeve_net_median": -6.248263241922173e-05,
+        "delta_sleeve_positive_ratio": 0.25,
+        "full_net_improvement_median": 3.512894459900579e-05,
+        "full_turnover_reduction_ratio_median": 0.2919482545264993,
+        "matched_net_difference_median": -5.969577006836731e-05,
+        "matched_positive_ratio": 0.25,
+        "split": "selection"
+      },
+      {
+        "arm_count": 4,
+        "control_net_improvement_median": 2.701837722386936e-05,
+        "control_turnover_reduction_ratio_median": 0.9875451522479005,
+        "degenerate_pair_count": 0,
+        "delta_sleeve_net_median": -1.0263119786298573e-05,
+        "delta_sleeve_positive_ratio": 0.0,
+        "full_net_improvement_median": 4.167686103111015e-05,
+        "full_turnover_reduction_ratio_median": 0.506713702443238,
+        "matched_net_difference_median": -9.020440933186583e-06,
+        "matched_positive_ratio": 0.0,
+        "split": "stability"
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "checks": {
+    "cross_sectional_assets": true,
+    "development_dates": true,
+    "field_non_null": true,
+    "field_variance": true,
+    "fields": true,
+    "history_length": true,
+    "independent_evaluation_blocks": true,
+    "label_support": true,
+    "training_samples": true,
+    "turnover_observations": true
+  },
+  "claim_scope": "BROAD_39_FIELD_FIXED_DEVELOPMENT_ARENA_ONLY",
+  "field_non_null_minimum": 0.9968178563538682,
+  "field_variance_positive": 39,
+  "split_support": {
+    "calibration": {
+      "eligible_assets": 189,
+      "months": 2,
+      "target_samples": 259118,
+      "timestamps": 1434
+    },
+    "model_fit": {
+      "eligible_assets": 174,
+      "months": 6,
+      "target_samples": 638249,
+      "timestamps": 4410
+    },
+    "selection": {
+      "eligible_assets": 202,
+      "months": 2,
+      "target_samples": 286194,
+      "timestamps": 1458
+    },
+    "stability": {
+      "eligible_assets": 211,
+      "months": 2,
+      "target_samples": 299055,
+      "timestamps": 1458
+    }
+  },
+  "status": "DATA_ADEQUACY_PASS"
+}

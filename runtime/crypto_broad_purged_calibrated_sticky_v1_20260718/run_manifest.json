@@ -1,0 +1,448 @@
+{
+  "boundaries": {
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "formal_performance_search": false,
+    "hyperparameter_search": false,
+    "latest_timestamp_exclusive": "2024-07-01T00:00:00Z",
+    "sealed_reads_allowed": false
+  },
+  "command": "python scripts/crypto_broad_core_pack_information_arena_v1.py",
+  "cost_time": {
+    "actual_wall_seconds": 221.80767299991567,
+    "estimated_peak_memory_gb": 4.0,
+    "estimated_wall_minutes": 8
+  },
+  "created_at": "2026-07-18T07:32:06Z",
+  "data_adequacy": {
+    "checks": {
+      "cross_sectional_assets": true,
+      "development_dates": true,
+      "field_non_null": true,
+      "field_variance": true,
+      "fields": true,
+      "history_length": true,
+      "independent_evaluation_blocks": true,
+      "label_support": true,
+      "training_samples": true,
+      "turnover_observations": true
+    },
+    "claim_scope": "BROAD_39_FIELD_FIXED_DEVELOPMENT_ARENA_ONLY",
+    "field_non_null_minimum": 0.9968178563538682,
+    "field_variance_positive": 39,
+    "split_support": {
+      "calibration": {
+        "eligible_assets": 189,
+        "months": 2,
+        "target_samples": 259118,
+        "timestamps": 1434
+      },
+      "model_fit": {
+        "eligible_assets": 174,
+        "months": 6,
+        "target_samples": 638249,
+        "timestamps": 4410
+      },
+      "selection": {
+        "eligible_assets": 202,
+        "months": 2,
+        "target_samples": 286194,
+        "timestamps": 1458
+      },
+      "stability": {
+        "eligible_assets": 211,
+        "months": 2,
+        "target_samples": 299055,
+        "timestamps": 1458
+      }
+    },
+    "status": "DATA_ADEQUACY_PASS"
+  },
+  "decision": {
+    "bias_audit": {
+      "OOS_sample_grade": "NONE_SPENT_DEVELOPMENT_EVIDENCE",
+      "cannot_infer": [
+        "OOS qualification",
+        "candidate promotion",
+        "future performance",
+        "independent statistical power from four model arms",
+        "survivorship-complete observed archive"
+      ],
+      "checks": {
+        "all_calibrations_use_dedicated_calibration_role": true,
+        "all_development_blocks_purged": true,
+        "all_last_labels_end_before_role_boundary": true,
+        "boundary_horizon_matches_target": true,
+        "calibration_fit_degenerate_arms_counted_as_gate_failures": true,
+        "calibration_is_held_out_from_model_fit": true,
+        "intercept_does_not_change_sticky_weights": true,
+        "nonnegative_slopes_preserve_direction": true,
+        "positive_slope_raw_and_calibrated_candidate_weights_invariant": true,
+        "purge_equals_execution_delay_plus_horizon": true,
+        "selection_stability_not_used_for_fit": true
+      },
+      "cost_model": "full-L1 5 bps with initial establishment and terminal liquidation",
+      "decision": "PASS",
+      "discovery_status": "predeclared repair reproduction",
+      "execution_date": "signal timestamp plus 2h",
+      "feature_date": "signal timestamp",
+      "label_horizon": "4h after execution",
+      "requested_stage": "development-only matched replay"
+    },
+    "cannot_infer": [
+      "formal_performance_search_authority",
+      "OOS_qualification",
+      "candidate_promotion",
+      "future_or_recent_performance"
+    ],
+    "cost_killed_under_frozen_mapping": false,
+    "degenerate_pairs": 0,
+    "economic_increment_gate_pass": false,
+    "information_gate_pass": true,
+    "mapping_repair": {
+      "passed_variants": [],
+      "status": "PORTFOLIO_MAPPING_REPAIR_NOT_ESTABLISHED",
+      "summary": [
+        {
+          "gross_median": 1.6207892431385002e-05,
+          "net_median": -8.257210467879292e-05,
+          "positive_net_ratio": 0.0,
+          "split": "selection",
+          "variant": "DIRECT_DELTA_SIGNAL_ZERO_NET"
+        },
+        {
+          "gross_median": 9.072060705933853e-06,
+          "net_median": -5.904185606934467e-05,
+          "positive_net_ratio": 0.0,
+          "split": "selection",
+          "variant": "HORIZON_4H_CAUSAL_MEAN_DELTA_ZERO_NET"
+        },
+        {
+          "gross_median": 7.617220305833663e-06,
+          "net_median": -8.030495378504238e-05,
+          "positive_net_ratio": 0.0,
+          "split": "stability",
+          "variant": "DIRECT_DELTA_SIGNAL_ZERO_NET"
+        },
+        {
+          "gross_median": 6.395352037024359e-06,
+          "net_median": -4.631872898181106e-05,
+          "positive_net_ratio": 0.0,
+          "split": "stability",
+          "variant": "HORIZON_4H_CAUSAL_MEAN_DELTA_ZERO_NET"
+        }
+      ]
+    },
+    "model_fit_degenerate_runs": [],
+    "reference_supersession": {
+      "mismatched_prediction_identities": 16,
+      "policy": "SUPERSEDE_UNPURGED_REFERENCE",
+      "reason": "The prior run neither purged the final execution-delay-plus-horizon coordinates nor separated model fitting from calibration.",
+      "status": "PRIOR_UNPURGED_REFERENCE_SUPERSEDED",
+      "total_prediction_identities": 16
+    },
+    "split_increment_summary": [
+      {
+        "gross_median": 1.4483804031414151e-05,
+        "net_median": -0.00010240967799856864,
+        "positive_net_ratio": 0.0,
+        "split": "selection"
+      },
+      {
+        "gross_median": -6.302957821234143e-06,
+        "net_median": -0.0001217086057109389,
+        "positive_net_ratio": 0.0,
+        "split": "stability"
+      }
+    ],
+    "stable_added_residual_information_ratio": 0.41379310344827586,
+    "status": "BROAD_PURGED_CALIBRATED_STICKY_INCREMENT_NOT_ESTABLISHED",
+    "train_only_calibrated_sticky": {
+      "arm_interpretation": "Ridge plus three MLP seeds are model-robustness arms, not independent statistical samples.",
+      "calibration_fit_degenerate_arms": 1,
+      "cost_reduction_only": true,
+      "development_increment_observed": false,
+      "evidence_scope": "SPENT_DEVELOPMENT_SELECTION_AND_STABILITY_ONLY",
+      "gate_degenerate_pairs": 2,
+      "status": "TURNOVER_AWARE_MAPPING_COST_REDUCTION_ONLY",
+      "summary": [
+        {
+          "arm_count": 4,
+          "control_net_improvement_median": -1.76139485110443e-05,
+          "control_turnover_reduction_ratio_median": 0.7293957813388554,
+          "degenerate_pair_count": 1,
+          "delta_sleeve_net_median": 5.711423826509051e-06,
+          "delta_sleeve_positive_ratio": 0.25,
+          "full_net_improvement_median": 4.469755483040569e-05,
+          "full_turnover_reduction_ratio_median": 1.0,
+          "matched_net_difference_median": 6.397294882750477e-06,
+          "matched_positive_ratio": 0.25,
+          "split": "selection"
+        },
+        {
+          "arm_count": 4,
+          "control_net_improvement_median": 5.041703091260803e-06,
+          "control_turnover_reduction_ratio_median": 0.9039762049353168,
+          "degenerate_pair_count": 1,
+          "delta_sleeve_net_median": 0.0,
+          "delta_sleeve_positive_ratio": 0.0,
+          "full_net_improvement_median": 2.3982731323214926e-05,
+          "full_turnover_reduction_ratio_median": 1.0,
+          "matched_net_difference_median": 0.0,
+          "matched_positive_ratio": 0.0,
+          "split": "stability"
+        }
+      ]
+    },
+    "turnover_aware_mapping": {
+      "cost_reduction_only": true,
+      "development_increment_observed": false,
+      "gate_degenerate_pairs": 0,
+      "status": "TURNOVER_AWARE_MAPPING_COST_REDUCTION_ONLY",
+      "summary": [
+        {
+          "arm_count": 4,
+          "control_net_improvement_median": 6.263169537918828e-05,
+          "control_turnover_reduction_ratio_median": 0.9700546370314507,
+          "degenerate_pair_count": 0,
+          "delta_sleeve_net_median": -6.248263241922173e-05,
+          "delta_sleeve_positive_ratio": 0.25,
+          "full_net_improvement_median": 3.512894459900579e-05,
+          "full_turnover_reduction_ratio_median": 0.2919482545264993,
+          "matched_net_difference_median": -5.969577006836731e-05,
+          "matched_positive_ratio": 0.25,
+          "split": "selection"
+        },
+        {
+          "arm_count": 4,
+          "control_net_improvement_median": 2.701837722386936e-05,
+          "control_turnover_reduction_ratio_median": 0.9875451522479005,
+          "degenerate_pair_count": 0,
+          "delta_sleeve_net_median": -1.0263119786298573e-05,
+          "delta_sleeve_positive_ratio": 0.0,
+          "full_net_improvement_median": 4.167686103111015e-05,
+          "full_turnover_reduction_ratio_median": 0.506713702443238,
+          "matched_net_difference_median": -9.020440933186583e-06,
+          "matched_positive_ratio": 0.0,
+          "split": "stability"
+        }
+      ]
+    }
+  },
+  "economic_mapping_sha256": "E835E2EE46F3349928CDC6983C9F720BC651E7722234F4EA12D11886AF4C683F",
+  "experiment_id": "20260718_broad_purged_calibrated_sticky_006",
+  "files": {
+    "reports/CRYPTO_BROAD_PURGED_CALIBRATED_STICKY_V1_20260718.md": "D1F999EF37D20E1B8413E0981DF76483B859EAF4BE47714579DC10E161C72DFF",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/calibrated_sticky_pair_evidence.jsonl": "163B591F1AFDB5AC58A76242510E6A750223D5369F3BCF3A9384C0C3BB118BFA",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/calibrated_sticky_surface_evidence.jsonl": "094A903CFC25E633F1AAD6E032A27C8A90FEB567B041F664B5784E2D57FFCA56",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/data_adequacy.json": "B8DAF630F59492ABB3308D2715F988CFB73C833263A9526D2AF7AB77089B1B8F",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/decision.json": "FD21184359C6E1FE5DBCD113BFDCE4AA3D7327968320A96F13813DC9D2C18FCA",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/information_evidence.csv": "02A40104C6451D30FB1A22B533105CDB81B5B550D98224A866369612F59CA5B0",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/mapping_repair_evidence.jsonl": "05469DB7C27F0BFEA02A5E007E9ED0F5136FD1D0FB51C8F1E7C0B086E0B7E920",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/model_evidence.jsonl": "A856C5943354CA4B1654E4068215E2F3307C0B485968CD6CBAE7287E9E6E1749",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/paired_increment_evidence.jsonl": "BB02A9CC4FBD3D7D8C9A418ACE117E7FA505518B2DE478E614BD86FB2EA7A8E6",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/prediction_identity_evidence.jsonl": "7A772DD746298928BC4533B071263286606267F9893A2B31B2DAC20732FA1921",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/split_boundary_evidence.json": "B195425F90C4CC886D3A401E8FB85AD469C1DF170E7B7932C9B785E5BBE893DB",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/sticky_pair_evidence.jsonl": "A419FA27875F81DA3A3FAEA33F5E98502C35250F4B3F2C49289621479A8E56A9",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/sticky_surface_evidence.jsonl": "1B94D80DA4BF71F3DD85C00D0F37937B4C0427732FB3CCAD00F7DF6C2B7F1A9B",
+    "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/train_calibration_evidence.jsonl": "3D7396A9A825666A1FEBC748C9CBA03BD0F66783530BEF854EADC0C6B89E2CEE"
+  },
+  "identity_sha256": "154731A3608CB3FFA4765E98F8C167C7776386F6115C51DCF5265D17FCF1035B",
+  "input_identities": {
+    "broad_cache_identity_sha256": "CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0",
+    "broad_cache_metadata_sha256": "CCEB67F08F7525C71F5EA25A4B658324B5EF376E414318CB1220A1507465E539",
+    "field_information_config_sha256": "BE2021B0C493CFA51E19A3F5DECD527AF27CA797031A0E59239E6F94B3CF9CA6",
+    "prior_information_census_sha256": "62488287AABCA93FCE0DE3313A0D64CF14C8939D4F5AC0502E3B8994D54F3BA9",
+    "reference_model_evidence_sha256": "1D7E6CE973F6B429FE6946B5D281D706A109E3B9C38C2C032A3FA21E34904A91",
+    "resolved_core_pack_sha256": "2C6E334DD25BD2745371995B93CC5E0440D943F68A591419F34C48EDB34BA08A"
+  },
+  "model_fit_identity": {
+    "asset_coordinates_sha256": "91A8DDF7C64342256F603C94495C5944646D91C7E92C51BCC100DE1E192625B2",
+    "role": "model_fit",
+    "sample_count": 150000,
+    "sampled_target_sha256": "9D82D965FD13350104954081E54B01BC6E5DBA3AF9E23C35AB4D2B16CB8E450A",
+    "time_coordinates_sha256": "A2193EA6F7F00B29EB99352D703E458BD94B25EA51C3C95571048BCCF53F5392"
+  },
+  "objective": "Repair label-boundary leakage, fit one train-only return-scale calibration, and determine whether the calibrated Broad sticky mapping has development-only net increment over the current 10-field surface",
+  "parameters": {
+    "data_adequacy": {
+      "minimum_assets": 100,
+      "minimum_block_label_samples": 100000,
+      "minimum_development_dates": 300,
+      "minimum_field_non_null_ratio": 0.05,
+      "minimum_independent_evaluation_months": 4,
+      "minimum_train_hours": 4000,
+      "minimum_training_samples": 100000,
+      "minimum_turnover_observations": 2000
+    },
+    "economic_contract": {
+      "cost_bps": 5.0,
+      "horizon_hours": 4,
+      "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+      "turnover": "FULL_L1_WITH_INITIAL_ESTABLISHMENT_AND_TERMINAL_LIQUIDATION"
+    },
+    "frozen_budget": {
+      "calibrated_sticky_matched_pairs": 8,
+      "calibrated_sticky_surface_evaluations": 16,
+      "control_fields": 10,
+      "estimated_peak_memory_gb": 4.0,
+      "estimated_wall_minutes": 8,
+      "full_fields": 39,
+      "hyperparameter_search": false,
+      "mapping_evaluations": 16,
+      "mlp_arms": 6,
+      "purged_model_refits": 8,
+      "reference_prediction_identity_checks": 16,
+      "ridge_arms": 2,
+      "sticky_matched_pairs": 8,
+      "sticky_surface_evaluations": 16,
+      "train_calibration_predictions": 8
+    },
+    "information": {
+      "maximum_samples": 200000,
+      "minimum_positive_month_ratio": 0.5,
+      "minimum_stable_added_field_ratio": 0.2,
+      "quantile_bins": 16,
+      "within_block_null_shifts_hours": [
+        24,
+        72,
+        168,
+        336,
+        504
+      ]
+    },
+    "label_boundary_contract": {
+      "execution_delay_hours": 2,
+      "purge_hours": 6,
+      "rule": "Every train, selection, and stability block excludes its final execution-delay-plus-horizon coordinates",
+      "target_horizon_hours": 4
+    },
+    "mapping_repair": {
+      "horizon_smoothing_hours": 4,
+      "hyperparameter_search": false,
+      "variants": [
+        "DIRECT_DELTA_SIGNAL_ZERO_NET",
+        "HORIZON_4H_CAUSAL_MEAN_DELTA_ZERO_NET"
+      ]
+    },
+    "models": {
+      "mlp_batch_size": 4096,
+      "mlp_epochs": 8,
+      "mlp_hidden": [
+        64,
+        32
+      ],
+      "mlp_learning_rate": 0.001,
+      "mlp_seeds": [
+        20260718,
+        20260719,
+        20260720
+      ],
+      "mlp_weight_decay": 0.0001,
+      "rank_metric_samples": 200000,
+      "ridge_alpha": 10.0,
+      "torch_threads": 6,
+      "train_samples": 150000
+    },
+    "reference_prediction_policy": "SUPERSEDE_UNPURGED_REFERENCE",
+    "splits": {
+      "calibration": {
+        "end_exclusive": "2024-03-01T00:00:00Z",
+        "start": "2024-01-01T00:00:00Z"
+      },
+      "model_fit": {
+        "end_exclusive": "2024-01-01T00:00:00Z",
+        "start": "2023-07-01T00:00:00Z"
+      },
+      "selection": {
+        "end_exclusive": "2024-05-01T00:00:00Z",
+        "start": "2024-03-01T00:00:00Z"
+      },
+      "stability": {
+        "end_exclusive": "2024-07-01T00:00:00Z",
+        "start": "2024-05-01T00:00:00Z"
+      }
+    },
+    "train_only_calibration": {
+      "coefficient_clipping": false,
+      "direction_flip_allowed": false,
+      "fit_independence": "HELD_OUT_FROM_MODEL_FIT_WITHIN_DEVELOPMENT_TRAIN",
+      "fit_role": "calibration",
+      "hyperparameter_search": false,
+      "method": "NONNEGATIVE_OLS_WITH_INTERCEPT",
+      "model_fit_role": "model_fit",
+      "parent_role": "development_train",
+      "selection_or_stability_fit_allowed": false
+    },
+    "turnover_aware_mapping": {
+      "cost_bps": 5.0,
+      "horizon_hours": 4,
+      "hyperparameter_search": false,
+      "mapping_id": "HORIZON_COHORT_STICKY_COST_GATE_ZERO_NET",
+      "round_trip_multiplier": 2.0,
+      "threshold_source": "FIXED_ECONOMIC_CONTRACT_NOT_SEARCHED"
+    }
+  },
+  "reproducibility": {
+    "continuation": "Rerun the exact command at source_sha with the same content-hash-bound inputs; do not tune models or open sealed roles.",
+    "failure": null,
+    "reproducible": true
+  },
+  "runtime": {
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "python": "3.11.9",
+    "sklearn": "1.6.1"
+  },
+  "schema_version": 1,
+  "source_sha": "35546635450cba974457e90c0b0a3d0257689cd4",
+  "split_boundary_evidence": {
+    "execution_delay_hours": 2,
+    "label_definition": "log(close[t+2+4]/close[t+2])",
+    "purge_hours": 6,
+    "roles": {
+      "calibration": {
+        "declared_end_exclusive": "2024-03-01T00:00:00Z",
+        "declared_start": "2024-01-01T00:00:00Z",
+        "effective_last_signal_timestamp": "2024-02-29 17:00:00+00:00",
+        "eligible_label_samples": 259118,
+        "eligible_mask_sha256": "6C9D574A0C395BE227A84BD7D19504B0FE7EAD2887E2D132986C5B5349E30540",
+        "last_label_end_before_declared_end": true,
+        "last_label_end_timestamp": "2024-02-29 23:00:00+00:00",
+        "target_block_sha256": "95C16CBE82BCAB1C52CFB9CB2F21F962F9EA93F58B2D8E45DB678AD1AECE8A31"
+      },
+      "model_fit": {
+        "declared_end_exclusive": "2024-01-01T00:00:00Z",
+        "declared_start": "2023-07-01T00:00:00Z",
+        "effective_last_signal_timestamp": "2023-12-31 17:00:00+00:00",
+        "eligible_label_samples": 638249,
+        "eligible_mask_sha256": "E36D9A7DF4E785708EF61B54F5BAD8707DD5390B8DCDE5172F77FDC275590B2F",
+        "last_label_end_before_declared_end": true,
+        "last_label_end_timestamp": "2023-12-31 23:00:00+00:00",
+        "target_block_sha256": "8D5D420600E6CC9185621FCCDC3D226CE29EF119958B7D036B45F7B87969D0D5"
+      },
+      "selection": {
+        "declared_end_exclusive": "2024-05-01T00:00:00Z",
+        "declared_start": "2024-03-01T00:00:00Z",
+        "effective_last_signal_timestamp": "2024-04-30 17:00:00+00:00",
+        "eligible_label_samples": 286194,
+        "eligible_mask_sha256": "D65B38DCF6964E72A33B31353698169FB22DA910634971655F6BBF9A7F2B788A",
+        "last_label_end_before_declared_end": true,
+        "last_label_end_timestamp": "2024-04-30 23:00:00+00:00",
+        "target_block_sha256": "0EE2054E74375760E7D55C4901C99564AEC21A7A8D1AE69A387D26E32DA112E8"
+      },
+      "stability": {
+        "declared_end_exclusive": "2024-07-01T00:00:00Z",
+        "declared_start": "2024-05-01T00:00:00Z",
+        "effective_last_signal_timestamp": "2024-06-30 17:00:00+00:00",
+        "eligible_label_samples": 299055,
+        "eligible_mask_sha256": "4B39F9F77780AE4BA498F5E2EF033A9CE0EE990EF573F77B8EF798A4A8187923",
+        "last_label_end_before_declared_end": true,
+        "last_label_end_timestamp": "2024-06-30 23:00:00+00:00",
+        "target_block_sha256": "B4910F222E312DCF43F012F0A154B8223DEE5FED98F5EB8CCE6D6DA78633C136"
+      }
+    },
+    "target_horizon_hours": 4
+  },
+  "status": "BROAD_PURGED_CALIBRATED_STICKY_INCREMENT_NOT_ESTABLISHED"
+}

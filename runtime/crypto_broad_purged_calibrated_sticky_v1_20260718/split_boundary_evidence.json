@@ -1,0 +1,48 @@
+{
+  "execution_delay_hours": 2,
+  "label_definition": "log(close[t+2+4]/close[t+2])",
+  "purge_hours": 6,
+  "roles": {
+    "calibration": {
+      "declared_end_exclusive": "2024-03-01T00:00:00Z",
+      "declared_start": "2024-01-01T00:00:00Z",
+      "effective_last_signal_timestamp": "2024-02-29 17:00:00+00:00",
+      "eligible_label_samples": 259118,
+      "eligible_mask_sha256": "6C9D574A0C395BE227A84BD7D19504B0FE7EAD2887E2D132986C5B5349E30540",
+      "last_label_end_before_declared_end": true,
+      "last_label_end_timestamp": "2024-02-29 23:00:00+00:00",
+      "target_block_sha256": "95C16CBE82BCAB1C52CFB9CB2F21F962F9EA93F58B2D8E45DB678AD1AECE8A31"
+    },
+    "model_fit": {
+      "declared_end_exclusive": "2024-01-01T00:00:00Z",
+      "declared_start": "2023-07-01T00:00:00Z",
+      "effective_last_signal_timestamp": "2023-12-31 17:00:00+00:00",
+      "eligible_label_samples": 638249,
+      "eligible_mask_sha256": "E36D9A7DF4E785708EF61B54F5BAD8707DD5390B8DCDE5172F77FDC275590B2F",
+      "last_label_end_before_declared_end": true,
+      "last_label_end_timestamp": "2023-12-31 23:00:00+00:00",
+      "target_block_sha256": "8D5D420600E6CC9185621FCCDC3D226CE29EF119958B7D036B45F7B87969D0D5"
+    },
+    "selection": {
+      "declared_end_exclusive": "2024-05-01T00:00:00Z",
+      "declared_start": "2024-03-01T00:00:00Z",
+      "effective_last_signal_timestamp": "2024-04-30 17:00:00+00:00",
+      "eligible_label_samples": 286194,
+      "eligible_mask_sha256": "D65B38DCF6964E72A33B31353698169FB22DA910634971655F6BBF9A7F2B788A",
+      "last_label_end_before_declared_end": true,
+      "last_label_end_timestamp": "2024-04-30 23:00:00+00:00",
+      "target_block_sha256": "0EE2054E74375760E7D55C4901C99564AEC21A7A8D1AE69A387D26E32DA112E8"
+    },
+    "stability": {
+      "declared_end_exclusive": "2024-07-01T00:00:00Z",
+      "declared_start": "2024-05-01T00:00:00Z",
+      "effective_last_signal_timestamp": "2024-06-30 17:00:00+00:00",
+      "eligible_label_samples": 299055,
+      "eligible_mask_sha256": "4B39F9F77780AE4BA498F5E2EF033A9CE0EE990EF573F77B8EF798A4A8187923",
+      "last_label_end_before_declared_end": true,
+      "last_label_end_timestamp": "2024-06-30 23:00:00+00:00",
+      "target_block_sha256": "B4910F222E312DCF43F012F0A154B8223DEE5FED98F5EB8CCE6D6DA78633C136"
+    }
+  },
+  "target_horizon_hours": 4
+}
