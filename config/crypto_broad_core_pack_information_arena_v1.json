@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
-  "experiment_id": "20260718_broad_core_pack_information_arena_003",
-  "objective": "Determine whether the 29 added Broad Core Pack fields contain stable conditional information and development-only economic increment over the current 10-field surface",
+  "experiment_id": "20260718_broad_core_pack_sticky_mapping_004",
+  "objective": "Determine whether one horizon-cohort sticky cost gate can convert the qualified Broad conditional information into a development-only net increment over the current 10-field surface",
   "inputs": {
     "resolved_core_pack": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/resolved_token_contract.json",
     "field_information_config": "config/crypto_field_information_v0.json",
     "prior_information_census": "runtime/crypto_field_information_v0_20260717/information_census.parquet",
+    "reference_model_evidence": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/model_evidence.jsonl",
     "broad_cache": ".cache/crypto_18m_compositional_broad_search_v1"
   },
   "splits": {
@@ -52,14 +53,25 @@
     "horizon_smoothing_hours": 4,
     "hyperparameter_search": false
   },
+  "turnover_aware_mapping": {
+    "mapping_id": "HORIZON_COHORT_STICKY_COST_GATE_ZERO_NET",
+    "horizon_hours": 4,
+    "cost_bps": 5.0,
+    "round_trip_multiplier": 2.0,
+    "threshold_source": "FIXED_ECONOMIC_CONTRACT_NOT_SEARCHED",
+    "hyperparameter_search": false
+  },
   "frozen_budget": {
     "control_fields": 10,
     "full_fields": 39,
     "ridge_arms": 2,
     "mlp_arms": 6,
     "mapping_evaluations": 16,
+    "sticky_surface_evaluations": 16,
+    "sticky_matched_pairs": 8,
+    "reference_prediction_identity_checks": 16,
     "hyperparameter_search": false,
-    "estimated_wall_minutes": 45,
+    "estimated_wall_minutes": 5,
     "estimated_peak_memory_gb": 4.0
   },
   "economic_contract": {
@@ -77,7 +89,7 @@
     "cross_sprint_adaptive_memory": false
   },
   "outputs": {
-    "runtime_root": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair",
-    "report": "reports/CRYPTO_BROAD_CORE_PACK_INFORMATION_ARENA_V1_20260718_MAPPING_REPAIR.md"
+    "runtime_root": "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718",
+    "report": "reports/CRYPTO_BROAD_CORE_PACK_STICKY_MAPPING_V1_20260718.md"
   }
 }

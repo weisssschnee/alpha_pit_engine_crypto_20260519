@@ -37,6 +37,7 @@ RIDGE_MODEL = "RIDGE"
 MLP_MODEL = "FIXED_MLP"
 DIRECT_DELTA_MAPPING = "DIRECT_DELTA_SIGNAL_ZERO_NET"
 HORIZON_MEAN_DELTA_MAPPING = "HORIZON_4H_CAUSAL_MEAN_DELTA_ZERO_NET"
+TURNOVER_AWARE_STICKY_MAPPING = "HORIZON_COHORT_STICKY_COST_GATE_ZERO_NET"
 
 
 def payload_sha256(value: Any) -> str:
@@ -429,6 +430,139 @@ def incremental_signal_mapping(
     return metrics, weights, signal
 
 
+def turnover_aware_sticky_weights(
+    prediction: np.ndarray,
+    *,
+    horizon: int,
+    cost_bps: float,
+    round_trip_multiplier: float,
+) -> tuple[np.ndarray, dict[str, Any]]:
+    """Apply one causal cost gate independently to each horizon cohort.
+
+    The frozen 4h evaluator treats columns t, t-4, ... as one sleeve.  The
+    incumbent position for a decision at t is therefore the position at
+    t-horizon, not t-1.  Both the incumbent and candidate are valid zero-net
+    mapped portfolios, so holding either preserves the mapping constraints.
+    """
+
+    source = np.asarray(prediction, dtype=float)
+    if source.ndim != 2 or source.shape[1] == 0:
+        raise ValueError("prediction must have shape [asset,time]")
+    if int(horizon) <= 0:
+        raise ValueError("horizon must be positive")
+    if float(cost_bps) < 0.0 or float(round_trip_multiplier) <= 0.0:
+        raise ValueError("cost contract must be nonnegative with positive round trip")
+    target = np.asarray(
+        map_portfolio(source, DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET]).weights,
+        dtype=float,
+    )
+    weights = np.zeros_like(target)
+    cost_rate = float(cost_bps) / 10_000.0
+    accepted = 0
+    rejected = 0
+    no_change = 0
+    forced_unavailable = 0
+    predicted_improvements: list[float] = []
+    required_edges: list[float] = []
+    turnovers: list[float] = []
+    decisions: list[str] = []
+    for column in range(source.shape[1]):
+        previous = (
+            weights[:, column - int(horizon)].copy()
+            if column >= int(horizon)
+            else np.zeros(source.shape[0], dtype=float)
+        )
+        candidate = target[:, column]
+        signal = source[:, column]
+        turnover = float(np.abs(candidate - previous).sum())
+        unavailable_held = bool(np.any((np.abs(previous) > 1e-12) & ~np.isfinite(signal)))
+        if unavailable_held:
+            weights[:, column] = candidate
+            forced_unavailable += 1
+            decisions.append("FORCED_UNAVAILABLE_REMAP")
+            continue
+        if turnover <= 1e-12:
+            weights[:, column] = previous
+            no_change += 1
+            decisions.append("NO_CHANGE")
+            continue
+        finite = np.isfinite(signal)
+        predicted_improvement = float(
+            np.sum((candidate[finite] - previous[finite]) * signal[finite])
+        )
+        required_edge = (
+            float(round_trip_multiplier) * cost_rate * turnover
+        )
+        predicted_improvements.append(predicted_improvement)
+        required_edges.append(required_edge)
+        turnovers.append(turnover)
+        if predicted_improvement > required_edge:
+            weights[:, column] = candidate
+            accepted += 1
+            decisions.append("REBALANCE_EDGE_EXCEEDS_ROUND_TRIP_COST")
+        else:
+            weights[:, column] = previous
+            rejected += 1
+            decisions.append("HOLD_NO_TRADE_BAND")
+    return weights, {
+        "mapping_id": TURNOVER_AWARE_STICKY_MAPPING,
+        "horizon_cohort_hours": int(horizon),
+        "cost_bps": float(cost_bps),
+        "round_trip_multiplier": float(round_trip_multiplier),
+        "accepted_rebalances": int(accepted),
+        "rejected_rebalances": int(rejected),
+        "no_change_coordinates": int(no_change),
+        "forced_unavailable_remaps": int(forced_unavailable),
+        "acceptance_ratio": float(accepted / max(accepted + rejected, 1)),
+        "mean_candidate_turnover_l1": float(np.mean(turnovers)) if turnovers else 0.0,
+        "mean_predicted_improvement": (
+            float(np.mean(predicted_improvements)) if predicted_improvements else 0.0
+        ),
+        "mean_required_round_trip_edge": (
+            float(np.mean(required_edges)) if required_edges else 0.0
+        ),
+        "decision_counts": {
+            reason: int(decisions.count(reason)) for reason in sorted(set(decisions))
+        },
+        "target_weight_sha256": array_sha256(target),
+        "sticky_weight_sha256": array_sha256(weights),
+    }
+
+
+def turnover_aware_sticky_mapping(
+    prediction: np.ndarray,
+    data: BroadArenaData,
+    block: slice,
+    *,
+    horizon: int,
+    cost_bps: float,
+    round_trip_multiplier: float,
+) -> tuple[dict[str, Any], np.ndarray, dict[str, Any]]:
+    weights, diagnostics = turnover_aware_sticky_weights(
+        prediction,
+        horizon=horizon,
+        cost_bps=cost_bps,
+        round_trip_multiplier=round_trip_multiplier,
+    )
+    target = np.asarray(data.target[:, block], dtype=float)
+    active = np.abs(weights) > 1e-12
+    missing_target = np.any(active & ~np.isfinite(target), axis=0)
+    evaluation = (
+        (data.eligibility[:, block].sum(axis=0) >= 3)
+        & ~missing_target
+        & np.any(np.isfinite(prediction), axis=0)
+    )
+    months = pd.to_datetime(data.timestamps[block], utc=True).strftime("%Y-%m").to_numpy()
+    metrics = _series_metrics(
+        weights=weights,
+        target=target,
+        months=months,
+        evaluation_mask=evaluation,
+        horizon=int(horizon),
+    )
+    return metrics, weights, diagnostics
+
+
 def _split_information(
     value_bins: np.ndarray,
     target_bins: np.ndarray,
@@ -761,6 +895,78 @@ def mapping_repair_decision(
     }
 
 
+def sticky_mapping_decision(
+    rows: Sequence[Mapping[str, Any]], minimum_positive_run_ratio: float
+) -> dict[str, Any]:
+    frame = pd.DataFrame(
+        [
+            {
+                "split": row["split"],
+                "matched_net_difference": row["matched_surface_difference"]["net_mean"],
+                "delta_sleeve_net_mean": row["delta_sleeve_metrics"]["net_mean"],
+                "full_net_improvement_vs_reference": row["full"]["net_improvement_vs_reference"],
+                "control_net_improvement_vs_reference": row["control"]["net_improvement_vs_reference"],
+                "full_turnover_reduction_ratio": row["full"]["turnover_reduction_ratio"],
+                "control_turnover_reduction_ratio": row["control"]["turnover_reduction_ratio"],
+            }
+            for row in rows
+        ]
+    )
+    summary = (
+        frame.groupby("split", sort=False)
+        .agg(
+            matched_net_difference_median=("matched_net_difference", "median"),
+            matched_positive_ratio=(
+                "matched_net_difference",
+                lambda values: float(np.mean(np.asarray(values) > 0.0)),
+            ),
+            delta_sleeve_net_median=("delta_sleeve_net_mean", "median"),
+            delta_sleeve_positive_ratio=(
+                "delta_sleeve_net_mean",
+                lambda values: float(np.mean(np.asarray(values) > 0.0)),
+            ),
+            full_net_improvement_median=("full_net_improvement_vs_reference", "median"),
+            control_net_improvement_median=("control_net_improvement_vs_reference", "median"),
+            full_turnover_reduction_ratio_median=("full_turnover_reduction_ratio", "median"),
+            control_turnover_reduction_ratio_median=("control_turnover_reduction_ratio", "median"),
+        )
+        .reset_index()
+    )
+    complete = set(summary["split"]) == {"selection", "stability"}
+    increment_observed = bool(
+        complete
+        and (summary["matched_net_difference_median"] > 0.0).all()
+        and (summary["delta_sleeve_net_median"] > 0.0).all()
+        and (
+            summary["matched_positive_ratio"] >= float(minimum_positive_run_ratio)
+        ).all()
+        and (
+            summary["delta_sleeve_positive_ratio"] >= float(minimum_positive_run_ratio)
+        ).all()
+    )
+    cost_reduction_only = bool(
+        complete
+        and (summary["full_turnover_reduction_ratio_median"] > 0.0).all()
+        and (summary["full_net_improvement_median"] > 0.0).all()
+        and not increment_observed
+    )
+    status = (
+        "TURNOVER_AWARE_MAPPING_DEVELOPMENT_INCREMENT_OBSERVED"
+        if increment_observed
+        else (
+            "TURNOVER_AWARE_MAPPING_COST_REDUCTION_ONLY"
+            if cost_reduction_only
+            else "TURNOVER_AWARE_MAPPING_NOT_ESTABLISHED"
+        )
+    )
+    return {
+        "status": status,
+        "development_increment_observed": increment_observed,
+        "cost_reduction_only": cost_reduction_only,
+        "summary": summary.to_dict("records"),
+    }
+
+
 __all__ = [
     "CONTROL_SURFACE",
     "DIRECT_DELTA_MAPPING",
@@ -768,6 +974,7 @@ __all__ = [
     "HORIZON_MEAN_DELTA_MAPPING",
     "MLP_MODEL",
     "RIDGE_MODEL",
+    "TURNOVER_AWARE_STICKY_MAPPING",
     "BroadArenaData",
     "FixedMLP",
     "arena_decision",
@@ -787,4 +994,7 @@ __all__ = [
     "payload_sha256",
     "predict_split",
     "prediction_metrics",
+    "sticky_mapping_decision",
+    "turnover_aware_sticky_mapping",
+    "turnover_aware_sticky_weights",
 ]

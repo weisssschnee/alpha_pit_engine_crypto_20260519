@@ -26,6 +26,7 @@ from alphafactory_crypto.broad_information_arena import (  # noqa: E402
     HORIZON_MEAN_DELTA_MAPPING,
     MLP_MODEL,
     RIDGE_MODEL,
+    TURNOVER_AWARE_STICKY_MAPPING,
     FixedMLP,
     arena_decision,
     array_sha256,
@@ -43,6 +44,8 @@ from alphafactory_crypto.broad_information_arena import (  # noqa: E402
     payload_sha256,
     predict_split,
     prediction_metrics,
+    sticky_mapping_decision,
+    turnover_aware_sticky_mapping,
 )
 from alphafactory_crypto.core_pack_consumption import sha256_file  # noqa: E402
 from alphafactory_crypto.instrument_capability.mapping import (  # noqa: E402
@@ -68,6 +71,10 @@ def _write_jsonl(path: Path, values: list[dict[str, Any]]) -> None:
     path.write_text("".join(json.dumps(row, sort_keys=True, default=str) + "\n" for row in values), encoding="utf-8", newline="\n")
 
 
+def _read_jsonl(path: Path) -> list[dict[str, Any]]:
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
 def _report(manifest: dict[str, Any], decision: dict[str, Any], adequacy: dict[str, Any], information: pd.DataFrame) -> str:
     added = information.loc[information["surface_role"] == "ADDED"]
     control = information.loc[information["surface_role"] == "CONTROL"]
@@ -87,6 +94,7 @@ def _report(manifest: dict[str, Any], decision: dict[str, Any], adequacy: dict[s
             f"- Cost-killed under frozen mapping: {decision['cost_killed_under_frozen_mapping']}",
             f"- Degenerate prediction/mapping pairs: {decision['degenerate_pairs']}",
             f"- Mapping repair: `{decision['mapping_repair']['status']}`",
+            f"- Turnover-aware sticky mapping: `{decision['turnover_aware_mapping']['status']}`",
             "",
             "## Why entropy is not used alone",
             "",
@@ -99,6 +107,10 @@ def _report(manifest: dict[str, Any], decision: dict[str, Any], adequacy: dict[s
             "## Mapping repair summary",
             "",
             pd.DataFrame(decision["mapping_repair"]["summary"]).to_markdown(index=False),
+            "",
+            "## Turnover-aware sticky mapping summary",
+            "",
+            pd.DataFrame(decision["turnover_aware_mapping"]["summary"]).to_markdown(index=False),
             "",
             "## Boundaries",
             "",
@@ -116,6 +128,11 @@ def run(config_path: Path) -> dict[str, Any]:
     output_root.mkdir(parents=True, exist_ok=True)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     data = load_broad_arena_data(ROOT, config)
+    reference_rows = _read_jsonl(ROOT / config["inputs"]["reference_model_evidence"])
+    reference_by_key = {
+        (row["model_family"], int(row["seed"]), row["split"], row["surface"]): row
+        for row in reference_rows
+    }
     adequacy = data_adequacy(data, config)
     _write_json(output_root / "data_adequacy.json", adequacy)
     if adequacy["status"] != "DATA_ADEQUACY_PASS":
@@ -171,6 +188,7 @@ def run(config_path: Path) -> dict[str, Any]:
     information.to_csv(information_path, index=False, lineterminator="\n")
 
     model_rows: list[dict[str, Any]] = []
+    prediction_identity_rows: list[dict[str, Any]] = []
     weights: dict[tuple[str, int, str, str], np.ndarray] = {}
     predictions: dict[tuple[str, int, str, str], np.ndarray] = {}
     for family, surface, seed, model, diagnostic, indices in models:
@@ -188,6 +206,24 @@ def run(config_path: Path) -> dict[str, Any]:
                 target_scale=target_scale,
             )
             predictive = prediction_metrics(prediction, data.target[:, block], int(config["models"]["rank_metric_samples"]))
+            identity_key = (family, int(seed), split, surface)
+            if identity_key not in reference_by_key:
+                raise ValueError(f"REFERENCE_PREDICTION_KEY_MISSING:{identity_key}")
+            expected_prediction_sha256 = reference_by_key[identity_key]["predictive"]["prediction_sha256"]
+            prediction_identity_match = predictive["prediction_sha256"] == expected_prediction_sha256
+            prediction_identity_rows.append(
+                {
+                    "model_family": family,
+                    "surface": surface,
+                    "seed": int(seed),
+                    "split": split,
+                    "expected_prediction_sha256": expected_prediction_sha256,
+                    "observed_prediction_sha256": predictive["prediction_sha256"],
+                    "match": prediction_identity_match,
+                }
+            )
+            if not prediction_identity_match:
+                raise ValueError(f"REFERENCE_PREDICTION_IDENTITY_MISMATCH:{identity_key}")
             economic, local_weights = economic_metrics(prediction, data, block)
             weights[(family, seed, split, surface)] = local_weights
             predictions[(family, seed, split, surface)] = prediction
@@ -274,9 +310,90 @@ def run(config_path: Path) -> dict[str, Any]:
     )
     if decision["mapping_repair"]["passed_variants"]:
         decision["status"] = "BROAD_CORE_PACK_PORTFOLIO_MAPPING_DEVELOPMENT_INCREMENT_OBSERVED"
+    sticky = config["turnover_aware_mapping"]
+    sticky_surface_rows: list[dict[str, Any]] = []
+    sticky_surface_by_key: dict[tuple[str, int, str, str], dict[str, Any]] = {}
+    sticky_weights: dict[tuple[str, int, str, str], np.ndarray] = {}
+    for key, prediction in predictions.items():
+        family, seed, split, surface = key
+        metrics, local_weights, diagnostics = turnover_aware_sticky_mapping(
+            prediction,
+            data,
+            data.slices[split],
+            horizon=int(sticky["horizon_hours"]),
+            cost_bps=float(sticky["cost_bps"]),
+            round_trip_multiplier=float(sticky["round_trip_multiplier"]),
+        )
+        reference_economic = reference_by_key[key]["economic"]
+        reference_turnover = float(reference_economic["turnover_mean"])
+        row = {
+            "mapping_id": TURNOVER_AWARE_STICKY_MAPPING,
+            "model_family": family,
+            "surface": surface,
+            "seed": int(seed),
+            "split": split,
+            "metrics": metrics,
+            "diagnostics": diagnostics,
+            "reference_prediction_sha256": reference_by_key[key]["predictive"]["prediction_sha256"],
+            "reference_weight_sha256": reference_economic["weight_sha256"],
+            "net_improvement_vs_reference": float(metrics["net_mean"] - reference_economic["net_mean"]),
+            "turnover_reduction_ratio": float(
+                1.0 - metrics["turnover_mean"] / reference_turnover
+                if reference_turnover > 0.0
+                else 0.0
+            ),
+        }
+        sticky_surface_rows.append(row)
+        sticky_surface_by_key[key] = row
+        sticky_weights[key] = local_weights
+    sticky_pair_rows: list[dict[str, Any]] = []
+    for family, seed in ((RIDGE_MODEL, 0), *[(MLP_MODEL, int(seed)) for seed in config["models"]["mlp_seeds"]]):
+        for split in ("selection", "stability"):
+            full_key = (family, seed, split, FULL_SURFACE)
+            control_key = (family, seed, split, CONTROL_SURFACE)
+            full = sticky_surface_by_key[full_key]
+            control = sticky_surface_by_key[control_key]
+            full_metrics = full["metrics"]
+            control_metrics = control["metrics"]
+            sticky_pair_rows.append(
+                {
+                    "mapping_id": TURNOVER_AWARE_STICKY_MAPPING,
+                    "model_family": family,
+                    "seed": int(seed),
+                    "split": split,
+                    "full": full,
+                    "control": control,
+                    "matched_surface_difference": {
+                        "gross_mean": float(full_metrics["gross_mean"] - control_metrics["gross_mean"]),
+                        "cost_mean": float(full_metrics["cost_mean"] - control_metrics["cost_mean"]),
+                        "net_mean": float(full_metrics["net_mean"] - control_metrics["net_mean"]),
+                    },
+                    "delta_sleeve_metrics": paired_increment(
+                        sticky_weights[full_key],
+                        sticky_weights[control_key],
+                        data,
+                        data.slices[split],
+                    ),
+                    "comparison": paired_surface_diagnostics(
+                        predictions[full_key],
+                        predictions[control_key],
+                        sticky_weights[full_key],
+                        sticky_weights[control_key],
+                        maximum_rank_samples=int(config["models"]["rank_metric_samples"]),
+                    ),
+                }
+            )
+    decision["turnover_aware_mapping"] = sticky_mapping_decision(
+        sticky_pair_rows, float(config["decision"]["minimum_positive_run_ratio"])
+    )
+    if decision["turnover_aware_mapping"]["development_increment_observed"]:
+        decision["status"] = "BROAD_CORE_PACK_TURNOVER_AWARE_MAPPING_DEVELOPMENT_INCREMENT_OBSERVED"
     _write_jsonl(output_root / "model_evidence.jsonl", model_rows)
+    _write_jsonl(output_root / "prediction_identity_evidence.jsonl", prediction_identity_rows)
     _write_jsonl(output_root / "paired_increment_evidence.jsonl", increment_rows)
     _write_jsonl(output_root / "mapping_repair_evidence.jsonl", mapping_rows)
+    _write_jsonl(output_root / "sticky_surface_evidence.jsonl", sticky_surface_rows)
+    _write_jsonl(output_root / "sticky_pair_evidence.jsonl", sticky_pair_rows)
     _write_json(output_root / "decision.json", decision)
 
     input_paths = {
@@ -291,7 +408,7 @@ def run(config_path: Path) -> dict[str, Any]:
         "source_sha": _git_sha(),
         "created_at": _now(),
         "command": "python scripts/crypto_broad_core_pack_information_arena_v1.py",
-        "parameters": {key: config[key] for key in ("splits", "information", "models", "data_adequacy", "mapping_repair", "frozen_budget", "economic_contract")},
+        "parameters": {key: config[key] for key in ("splits", "information", "models", "data_adequacy", "mapping_repair", "turnover_aware_mapping", "frozen_budget", "economic_contract")},
         "input_identities": {
             **{f"{name}_sha256": sha256_file(path) for name, path in input_paths.items()},
             "broad_cache_metadata_sha256": sha256_file(cache_metadata),
@@ -325,8 +442,11 @@ def run(config_path: Path) -> dict[str, Any]:
         output_root / "data_adequacy.json",
         information_path,
         output_root / "model_evidence.jsonl",
+        output_root / "prediction_identity_evidence.jsonl",
         output_root / "paired_increment_evidence.jsonl",
         output_root / "mapping_repair_evidence.jsonl",
+        output_root / "sticky_surface_evidence.jsonl",
+        output_root / "sticky_pair_evidence.jsonl",
         output_root / "decision.json",
         report_path,
     ):

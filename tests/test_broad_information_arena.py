@@ -8,6 +8,7 @@ from alphafactory_crypto.broad_information_arena import (
     deterministic_coordinates,
     model_matrix,
     paired_surface_diagnostics,
+    turnover_aware_sticky_weights,
 )
 
 
@@ -70,3 +71,20 @@ def test_causal_trailing_mean_uses_no_future_values() -> None:
     assert result[0, 1] == 1.5
     assert result[0, 2] == 2.0
     assert result[0, 3] == 35.0
+
+
+def test_turnover_aware_sticky_mapping_uses_horizon_cohort_and_fixed_cost_gate() -> None:
+    strong = np.asarray([0.01, 0.005, -0.005, -0.01])
+    prediction = np.column_stack([strong, strong, strong, strong, np.asarray([4e-5, -4e-5, 3e-5, -3e-5])])
+    weights, diagnostics = turnover_aware_sticky_weights(
+        prediction,
+        horizon=4,
+        cost_bps=5.0,
+        round_trip_multiplier=2.0,
+    )
+    assert np.allclose(weights.sum(axis=0), 0.0)
+    assert np.any(np.abs(weights[:, 0]) > 0.0)
+    assert np.array_equal(weights[:, 4], weights[:, 0])
+    assert diagnostics["accepted_rebalances"] == 4
+    assert diagnostics["rejected_rebalances"] == 1
+    assert diagnostics["decision_counts"]["HOLD_NO_TRADE_BAND"] == 1
