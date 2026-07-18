@@ -940,8 +940,8 @@
       "authority": {
         "path": "alphafactory_crypto/relational_policy.py",
         "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
-        "verified_sha": "78616e7156e6c48509a99c0afcaa75be33b7ae0c",
-        "sha256": "26D80B0EDEB257D3FF08C5C4B0309683D360FB985AD0086039E69633C5C3FF9C"
+        "verified_sha": "9c5f2f64691013033a0edf583fe57de86cd966c0",
+        "sha256": "65E33CD77B841C63400778D1A240B671149D7005EFFB5A1BD1DD29915E455455"
       },
       "contracts": [
         {
@@ -975,7 +975,7 @@
         "profile": "crypto-development-research",
         "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
         "evidence_sha256": "71FE5D71779DD75372534CD853D68A49695F4149F4159066502F7AF6498749C6",
-        "verified_at_sha": "78616e7156e6c48509a99c0afcaa75be33b7ae0c"
+        "verified_at_sha": "9c5f2f64691013033a0edf583fe57de86cd966c0"
       },
       "promotion_requirements": [
         "matched development evidence",
@@ -1967,7 +1967,7 @@
         "profile": "crypto-development-research",
         "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
         "evidence_sha256": "71FE5D71779DD75372534CD853D68A49695F4149F4159066502F7AF6498749C6",
-        "verified_at_sha": "78616e7156e6c48509a99c0afcaa75be33b7ae0c"
+        "verified_at_sha": "9c5f2f64691013033a0edf583fe57de86cd966c0"
       }
     },
     {
