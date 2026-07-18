@@ -917,6 +917,73 @@
       ]
     },
     {
+      "id": "relational_direct_weight_vertical_slice",
+      "label": "Dynamic-universe relational direct-weight policy slice",
+      "kind": "development_capability",
+      "lifecycle": "EXPERIMENTAL",
+      "paths": [
+        "alphafactory_crypto/relational_policy.py",
+        "config/crypto_relational_policy_vertical_slice_v1.json",
+        "scripts/crypto_relational_policy_vertical_slice.py",
+        "tests/test_crypto_relational_policy_vertical_slice.py"
+      ],
+      "critical": true,
+      "semantic_role": "relational_direct_weight_policy_challenger",
+      "active_authority": false,
+      "claim_badges": [
+        "DEVELOPMENT SMOKE PASS",
+        "DYNAMIC MEMBERSHIP CONSUMED",
+        "COST PATH IDENTICAL",
+        "NO ECONOMIC CLAIM",
+        "NO OOS"
+      ],
+      "authority": {
+        "path": "alphafactory_crypto/relational_policy.py",
+        "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
+        "verified_sha": "78616e7156e6c48509a99c0afcaa75be33b7ae0c",
+        "sha256": "26D80B0EDEB257D3FF08C5C4B0309683D360FB985AD0086039E69633C5C3FF9C"
+      },
+      "contracts": [
+        {
+          "id": "context_local_field_views_only",
+          "type": "AUTHORITY",
+          "rule": "The committed 120-token contract is exposed as separate Broad 38+1 and Core3 31+5+45 views; no pooled 120-channel panel is implied or authorized",
+          "severity": "HARD",
+          "enforced_by": "relational_policy.resolve_field_views",
+          "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py"
+        },
+        {
+          "id": "relational_slice_development_boundary",
+          "type": "BOUNDARY",
+          "rule": "The slice may run only the bounded pre-2024 development smoke; performance search, sealed reads, promotion, and cross-sprint memory remain forbidden",
+          "severity": "HARD",
+          "enforced_by": "relational_policy.run_vertical_slice_smoke",
+          "bypass_forbidden": true,
+          "evidence_ref": "config/crypto_relational_policy_vertical_slice_v1.json"
+        },
+        {
+          "id": "architecture_smoke_claim_scope",
+          "type": "EVIDENCE",
+          "rule": "The smoke verifies dynamic eligibility consumption, asset permutation equivariance, previous-weight recurrence, portfolio constraints, and exact strict-evaluator cost parity; it is not matched economic or OOS evidence",
+          "severity": "HARD",
+          "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
+        "evidence_sha256": "71FE5D71779DD75372534CD853D68A49695F4149F4159066502F7AF6498749C6",
+        "verified_at_sha": "78616e7156e6c48509a99c0afcaa75be33b7ae0c"
+      },
+      "promotion_requirements": [
+        "matched development evidence",
+        "fresh admissible data",
+        "explicit authorization"
+      ]
+    },
+    {
       "id": "field_information_qualification_v0",
       "label": "Context-bound Core Pack information and consumption qualification",
       "kind": "representation_qualification",
@@ -1874,6 +1941,33 @@
         "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/data_adequacy.json",
         "evidence_sha256": "B8DAF630F59492ABB3308D2715F988CFB73C833263A9526D2AF7AB77089B1B8F",
         "verified_at_sha": "3bd334c7e11dcb3583a0b3ebba3c577242172fef"
+      }
+    },
+    {
+      "id": "relational_direct_weights_use_strict_bridge",
+      "source": "relational_direct_weight_vertical_slice",
+      "target": "real_data_mapping_cost_evaluator",
+      "relation": "direct_weights_evaluated_by_strict_bridge",
+      "lifecycle": "EXPERIMENTAL",
+      "required": false,
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "honest_direct_weight_mapping_admission",
+        "type": "ADMISSION",
+        "rule": "Model-produced portfolios must pass the canonical direct-weight MappingResult contract before the existing full-L1 5 bps evaluator accepts them; they may not masquerade as rank-mapped signals",
+        "severity": "HARD",
+        "enforced_by": "instrument_capability.mapping.validate_direct_weights and instrument_canary.evaluator.evaluate_real_mapping",
+        "bypass_forbidden": true,
+        "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
+        "evidence_sha256": "71FE5D71779DD75372534CD853D68A49695F4149F4159066502F7AF6498749C6",
+        "verified_at_sha": "78616e7156e6c48509a99c0afcaa75be33b7ae0c"
       }
     },
     {
