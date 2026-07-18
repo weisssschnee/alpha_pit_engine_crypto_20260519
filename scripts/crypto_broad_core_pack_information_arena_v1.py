@@ -34,6 +34,7 @@ from alphafactory_crypto.broad_information_arena import (  # noqa: E402
     load_broad_arena_data,
     model_matrix,
     paired_increment,
+    paired_surface_diagnostics,
     payload_sha256,
     predict_split,
     prediction_metrics,
@@ -78,6 +79,8 @@ def _report(manifest: dict[str, Any], decision: dict[str, Any], adequacy: dict[s
             f"- Control fields with stable residual information: {int(control['stable_residual_information'].sum())}/{len(control)}",
             f"- Information gate: {decision['information_gate_pass']}",
             f"- Economic increment gate: {decision['economic_increment_gate_pass']}",
+            f"- Cost-killed under frozen mapping: {decision['cost_killed_under_frozen_mapping']}",
+            f"- Degenerate prediction/mapping pairs: {decision['degenerate_pairs']}",
             "",
             "## Why entropy is not used alone",
             "",
@@ -159,6 +162,7 @@ def run(config_path: Path) -> dict[str, Any]:
 
     model_rows: list[dict[str, Any]] = []
     weights: dict[tuple[str, int, str, str], np.ndarray] = {}
+    predictions: dict[tuple[str, int, str, str], np.ndarray] = {}
     for family, surface, seed, model, diagnostic, indices in models:
         for split in ("selection", "stability"):
             block = data.slices[split]
@@ -176,6 +180,7 @@ def run(config_path: Path) -> dict[str, Any]:
             predictive = prediction_metrics(prediction, data.target[:, block], int(config["models"]["rank_metric_samples"]))
             economic, local_weights = economic_metrics(prediction, data, block)
             weights[(family, seed, split, surface)] = local_weights
+            predictions[(family, seed, split, surface)] = prediction
             model_rows.append({
                 "model_family": family,
                 "surface": surface,
@@ -189,6 +194,10 @@ def run(config_path: Path) -> dict[str, Any]:
     increment_rows: list[dict[str, Any]] = []
     for family, seed in ((RIDGE_MODEL, 0), *[(MLP_MODEL, int(seed)) for seed in config["models"]["mlp_seeds"]]):
         for split in ("selection", "stability"):
+            full_prediction = predictions[(family, seed, split, FULL_SURFACE)]
+            control_prediction = predictions[(family, seed, split, CONTROL_SURFACE)]
+            full_weights = weights[(family, seed, split, FULL_SURFACE)]
+            control_weights = weights[(family, seed, split, CONTROL_SURFACE)]
             increment_rows.append({
                 "model_family": family,
                 "seed": seed,
@@ -196,13 +205,29 @@ def run(config_path: Path) -> dict[str, Any]:
                 "full_surface": FULL_SURFACE,
                 "control_surface": CONTROL_SURFACE,
                 "metrics": paired_increment(
-                    weights[(family, seed, split, FULL_SURFACE)],
-                    weights[(family, seed, split, CONTROL_SURFACE)],
+                    full_weights,
+                    control_weights,
                     data,
                     data.slices[split],
                 ),
+                "comparison": paired_surface_diagnostics(
+                    full_prediction,
+                    control_prediction,
+                    full_weights,
+                    control_weights,
+                    maximum_rank_samples=int(config["models"]["rank_metric_samples"]),
+                ),
             })
     decision = arena_decision(information, increment_rows, config)
+    fit_degenerate = [
+        {"model_family": family, "surface": surface, "seed": seed}
+        for family, surface, seed, _, diagnostic, _ in models
+        if (family == MLP_MODEL and not diagnostic["training_loss_decreased"])
+        or (family == RIDGE_MODEL and diagnostic["training_score"] <= 0.0)
+    ]
+    decision["model_fit_degenerate_runs"] = fit_degenerate
+    if fit_degenerate:
+        decision["status"] = "BROAD_CORE_PACK_MODEL_FIT_DEGENERATE"
     _write_jsonl(output_root / "model_evidence.jsonl", model_rows)
     _write_jsonl(output_root / "paired_increment_evidence.jsonl", increment_rows)
     _write_json(output_root / "decision.json", decision)

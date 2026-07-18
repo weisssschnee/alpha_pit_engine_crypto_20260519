@@ -6,6 +6,7 @@ from alphafactory_crypto.broad_information_arena import (
     FixedMLP,
     deterministic_coordinates,
     model_matrix,
+    paired_surface_diagnostics,
 )
 
 
@@ -44,3 +45,18 @@ def test_fixed_mlp_learns_a_nonconstant_small_mapping() -> None:
     prediction = model.predict(x)
     assert result["training_loss_decreased"] is True
     assert np.var(prediction) > 0.01
+
+
+def test_pair_diagnostics_separate_prediction_difference_from_mapping_collapse() -> None:
+    full_prediction = np.asarray([[1.0, 2.0], [2.0, 1.0]])
+    control_prediction = np.asarray([[1.0, 1.0], [2.0, 2.0]])
+    identical_weights = np.asarray([[0.5, -0.5], [-0.5, 0.5]])
+    result = paired_surface_diagnostics(
+        full_prediction,
+        control_prediction,
+        identical_weights,
+        identical_weights,
+        maximum_rank_samples=100,
+    )
+    assert result["comparison_degenerate"] is False
+    assert result["portfolio_mapping_collapse"] is True

@@ -280,6 +280,59 @@ def prediction_metrics(
     }
 
 
+def paired_surface_diagnostics(
+    full_prediction: np.ndarray,
+    control_prediction: np.ndarray,
+    full_weights: np.ndarray,
+    control_weights: np.ndarray,
+    *,
+    maximum_rank_samples: int,
+) -> dict[str, Any]:
+    common = np.isfinite(full_prediction) & np.isfinite(control_prediction)
+    full = np.asarray(full_prediction[common], dtype=float)
+    control = np.asarray(control_prediction[common], dtype=float)
+    if len(full) > int(maximum_rank_samples):
+        chosen = np.linspace(0, len(full) - 1, int(maximum_rank_samples), dtype=int)
+        full_rank, control_rank = full[chosen], control[chosen]
+    else:
+        full_rank, control_rank = full, control
+    value_correlation = (
+        float(np.corrcoef(full, control)[0, 1])
+        if len(full) > 1 and np.std(full) > 0 and np.std(control) > 0
+        else 0.0
+    )
+    rank_correlation = float(
+        pd.Series(full_rank).corr(pd.Series(control_rank), method="spearman")
+    )
+    weight_difference = np.asarray(full_weights, dtype=float) - np.asarray(
+        control_weights, dtype=float
+    )
+    full_weight_flat = np.asarray(full_weights, dtype=float).reshape(-1)
+    control_weight_flat = np.asarray(control_weights, dtype=float).reshape(-1)
+    weight_correlation = (
+        float(np.corrcoef(full_weight_flat, control_weight_flat)[0, 1])
+        if np.std(full_weight_flat) > 0 and np.std(control_weight_flat) > 0
+        else 0.0
+    )
+    prediction_exact_ratio = float(np.mean(full == control)) if len(full) else 1.0
+    weight_exact_ratio = float(np.mean(weight_difference == 0.0))
+    prediction_identical = bool(prediction_exact_ratio == 1.0)
+    mapping_collapse = bool(weight_exact_ratio == 1.0)
+    return {
+        "common_prediction_coordinates": int(len(full)),
+        "prediction_value_correlation": value_correlation,
+        "prediction_rank_correlation": rank_correlation,
+        "prediction_exact_equality_ratio": prediction_exact_ratio,
+        "prediction_mean_abs_difference": float(np.mean(np.abs(full - control))),
+        "prediction_identical": prediction_identical,
+        "weight_value_correlation": weight_correlation,
+        "weight_exact_equality_ratio": weight_exact_ratio,
+        "weight_mean_abs_difference": float(np.mean(np.abs(weight_difference))),
+        "portfolio_mapping_collapse": mapping_collapse,
+        "comparison_degenerate": prediction_identical,
+    }
+
+
 def economic_metrics(
     prediction: np.ndarray, data: BroadArenaData, block: slice
 ) -> tuple[dict[str, Any], np.ndarray]:
@@ -492,9 +545,7 @@ def data_adequacy(data: BroadArenaData, config: Mapping[str, Any]) -> dict[str, 
             "timestamps": int(block.stop - block.start),
             "eligible_assets": int(np.any(local, axis=1).sum()),
             "target_samples": int(local.sum()),
-            "months": int(
-                pd.to_datetime(data.timestamps[block], utc=True).to_period("M").nunique()
-            ),
+            "months": int(pd.Series(pd.to_datetime(data.timestamps[block], utc=True).strftime("%Y-%m")).nunique()),
         }
     train = data.slices["train"]
     coverage = []
@@ -569,9 +620,26 @@ def arena_decision(
             >= float(config["decision"]["minimum_positive_run_ratio"])
         )
     )
+    degenerate_pairs = int(
+        sum(
+            bool(row.get("comparison", {}).get("comparison_degenerate"))
+            or bool(row.get("comparison", {}).get("portfolio_mapping_collapse"))
+            for row in increments
+        )
+    )
+    cost_killed = bool(
+        info_pass
+        and all(by_split["gross_median"] > 0)
+        and all(by_split["net_median"] < 0)
+        and all(by_split["positive_net_ratio"] == 0)
+    )
     status = (
-        "BROAD_CORE_PACK_DEVELOPMENT_INCREMENT_OBSERVED"
+        "BROAD_CORE_PACK_COMPARISON_DEGENERATE"
+        if degenerate_pairs
+        else "BROAD_CORE_PACK_DEVELOPMENT_INCREMENT_OBSERVED"
         if info_pass and economic_pass
+        else "BROAD_CORE_PACK_INFORMATION_INCREMENT_COST_KILLED"
+        if cost_killed
         else "BROAD_CORE_PACK_INFORMATION_INCREMENT_ONLY"
         if info_pass
         else "BROAD_CORE_PACK_INCREMENT_NOT_ESTABLISHED"
@@ -581,6 +649,8 @@ def arena_decision(
         "stable_added_residual_information_ratio": info_ratio,
         "information_gate_pass": info_pass,
         "economic_increment_gate_pass": economic_pass,
+        "cost_killed_under_frozen_mapping": cost_killed,
+        "degenerate_pairs": degenerate_pairs,
         "split_increment_summary": by_split.reset_index().to_dict("records"),
         "cannot_infer": [
             "formal_performance_search_authority",
@@ -608,6 +678,7 @@ __all__ = [
     "load_broad_arena_data",
     "model_matrix",
     "paired_increment",
+    "paired_surface_diagnostics",
     "payload_sha256",
     "predict_split",
     "prediction_metrics",
