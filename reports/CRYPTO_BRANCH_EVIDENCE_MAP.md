@@ -65,3 +65,34 @@ The separate static qualification in this audit is `CRYPTO_SEARCH_INSTRUMENT_MIS
 - `runtime/crypto_latest_evidence_independent_audit_20260714/CRYPTO_RUNTIME_STAGE_LINEAGE.csv`
 
 Both files use `NOT_RECOVERED`, `UNKNOWN`, `NOT_MATERIALIZED`, or `NOT_APPLICABLE` rather than filling gaps by inference.
+
+## 2026-07-18 residual / orthogonal / score-path closure
+
+The repository already contains implemented residual/orthogonal variants and the current mapping/cost primitives. Renaming or wrapping these pieces is maintenance, not a new research result.
+
+| Existing capability | Current asset | Qualified scope |
+|---|---|---|
+| Cross-fitted baseline residual | `alphafactory_crypto/field_information.py::cross_fitted_ridge_residual` | Residual-information diagnosis |
+| Frozen-baseline residual learner | `alphafactory_crypto/latent_adaptive/experiment.py`, Arm D | TCN-specific implementation pattern; development negative under its fixed zero-net, full-L1, 5 bps evaluator |
+| Full/control prediction, weight, direct-delta, causal-delta, sticky, and calibration diagnostics | `alphafactory_crypto/broad_information_arena.py` plus the purged Broad replay | Reusable matched diagnostics; no stable economic increment |
+| Canonical portfolio mapping | `alphafactory_crypto/instrument_capability/mapping.py` | Current explicit mapping authority |
+| Full-L1 turnover and cost | `alphafactory_crypto/instrument_canary/evaluator.py` | Current strict evaluator |
+| Orthogonal score packet and book replay | CORE43E, CORE44E, CORE45E reports and scripts | Historical reference implementation only |
+
+Current supersession order is:
+
+```text
+purged Broad replay
+  > unpurged Broad Arena / mapping-repair / sticky artifacts
+
+current cost authority:
+  explicit mapping + full-L1 evaluator
+
+historical non-comparable cost evidence:
+  CORE45E abs(book_weight) * 5 bps
+
+current sealed-role boundaries
+  > historical CORE43-47 and archived A7H0 role usage
+```
+
+The executed variants established reusable implementation capability, not stable economic increment. The CORE43-47 chain remains `REFERENCE_ONLY` under its inherited historical split and replay contracts; CORE45E specifically uses the obsolete non-turnover cost rule. Archived A7H0 additionally reads roles that are now sealed. Within this residual/orthogonal/score-path closure, the identified small gaps are an executable label-ranked ceiling, a typed ordering-score-versus-calibrated-edge distinction, and a compact transfer table. These diagnostics must not become standalone projects; implement only the subset required by the relational policy's matched controls.

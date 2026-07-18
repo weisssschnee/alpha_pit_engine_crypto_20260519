@@ -4,9 +4,9 @@ Last updated: 2026-07-18 Asia/Hong_Kong
 
 ## Current phase
 
-`BROAD_PURGED_CALIBRATION_REPLAY_COMPLETED_INCREMENT_NOT_ESTABLISHED`
+`COMPLETED_VARIANTS_ARCHIVED_RELATIONAL_POLICY_SLICE_NEXT`
 
-The prior Broad Arena omitted the final 6 hours needed to keep its 2h execution delay plus 4h label inside each role. Those artifacts remain immutable but are superseded for current inference. A same-budget repair split development train into model-fit and held-out calibration roles, purged all four role tails, and passed the bias audit. Twelve of 29 added fields retained stable residual information, but the calibrated sticky comparison reached only 1/4 positive matched arms in selection and 0/4 in stability; one Broad MLP calibration was direction-degenerate and correctly counted as a failure. The result is an implementation-specific development negative, not OOS evidence. Bitfinex file integrity is qualified but source-interval coverage and event-study adequacy are not; the independent Binance `!forceOrder@arr` capture remains raw-only with no dates overlapping CryptoHFT.
+The executed finite-grammar search, CORE43-47 orthogonal replay, Broad mapping/calibration/sticky variants, and fixed Arm D/E implementations are closed for further tuning on their inspected surfaces. They do not close the broader residual, relational, latent-state, or portfolio-policy paradigms, and the canonical mapping authority remains active. Historical source snapshots, committed runtime/report assets, and Git identities remain recoverable evidence. The purged Broad replay remains the current inference for its stack: 12/29 added fields retain residual information, but stable net increment was not established. The next system increment is a compact dynamic-universe relational, previous-weight-aware, cost-aware portfolio-policy vertical slice. Liquidation capture and source qualification continue as a background data line and no longer block main-system development.
 
 ## Current decisions
 
@@ -17,29 +17,19 @@ CURRENT_DATA_UNDERPOWERED
 FINANCIAL_GATE_HOLD_RESEARCH
 CRYPTO_INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_QUALIFIED
 CRYPTO_COMPOSITIONAL_GRAMMAR_BOTTLENECK_CONFIRMED
-CRYPTO_18M_COMPOSITIONAL_SEARCH_LOCALIZED_MECHANISMS_ONLY
-INSUFFICIENT_INDEPENDENT_EVIDENCE
-CRYPTO_IMMUTABLE_CHALLENGER_NOT_ISSUED
 IMPLEMENTATION_SPECIFIC_INFORMATIVE_NEGATIVE
 GRAPH_RAW_CURRENT_SEPARATION_ACTIVE
 CURRENT_CONTRACT_CAPSULE_ACTIVE
 CRYPTO_FIELD_INFORMATION_V0_COMPLETED
-CORE_PACK_CONTEXT_BOUND_CONSUMPTION_VERIFIED
-CORE3_CONSUMPTION_MODEL_FIT_NOT_QUALIFIED
-BROAD_CORE_PACK_CONDITIONAL_INFORMATION_VERIFIED
-BROAD_CORE_PACK_INFORMATION_INCREMENT_COST_KILLED
-BROAD_CORE_PACK_FIXED_MAPPING_REPAIR_NOT_ESTABLISHED
-BROAD_CORE_PACK_TURNOVER_AWARE_MAPPING_COST_REDUCTION_ONLY
-BROAD_CORE_PACK_DEVELOPMENT_INCREMENT_NOT_ESTABLISHED
-BROAD_PREDICTION_SCALE_CALIBRATION_RISK_CONFIRMED
-BROAD_UNPURGED_REFERENCE_SUPERSEDED_LABEL_BOUNDARY
-BROAD_PURGED_CALIBRATION_BIAS_AUDIT_PASS
 BROAD_PURGED_CALIBRATED_STICKY_INCREMENT_NOT_ESTABLISHED
+EXECUTED_RESIDUAL_ORTHOGONAL_VARIANTS_ARCHIVED
+DYNAMIC_UNIVERSE_RELATIONAL_COST_AWARE_POLICY_NEXT
 LIQUIDATION_SUPPLIER_INGRESS_QUALIFIED_QUARANTINED
-BITFINEX_FILE_INTEGRITY_QUALIFIED_SOURCE_COVERAGE_UNVERIFIED
-BITFINEX_DATA_ADEQUACY_UNDERPOWERED
 BINANCE_FORCE_ORDER_FORWARD_CAPTURE_ACTIVE
-LIQUIDATION_STITCHING_BLOCKED_NO_OVERLAP_DATES
+NEW_PERFORMANCE_SEARCH_FROZEN
+FORWARD_SEALED
+NO_CANDIDATE_PROMOTION
+NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 ```
 
 ## Accepted identities
@@ -81,26 +71,54 @@ LIQUIDATION_STITCHING_BLOCKED_NO_OVERLAP_DATES
 - Bitfinex liquidation ingress: all 18 declared monthly bundles and 127 files reconcile internally, with 89,273 raw rows and 81,231 silver rows. This does not prove continuous source coverage: only 135/544 requested dates contain events, 17/18 months have at least seven trailing event-free days, 15/18 raw counts are page-boundary-like, and no request/page/cursor ledger exists. The USTF0 proxy has 55,195 rows but only 7.14 effective months and 4.39 effective symbols, with no price-label bridge or turnover observations. Status: `FILE_INTEGRITY_QUALIFIED_SOURCE_COVERAGE_UNVERIFIED` plus `DATA_ADEQUACY_UNDERPOWERED`; it cannot validate Binance/CryptoHFT or enter research.
 - Binance raw provenance capture: the official `!forceOrder@arr` forward collector is active at `G:/AlphaFactory_CryptoData/raw/binance_force_order_ws_v1`. The latest committed prefix snapshot contains 887 valid records across 134 symbols and four hourly files with zero parse, hash, source, or forceOrder-contract failures. Capture began on 2026-07-18 after the supplier package ended on 2026-07-13, so current-package overlap is zero and stitching remains blocked.
 
+## Closed lines and reusable capability
+
+The implemented residual/orthogonal variants and current signal-to-portfolio primitives are inventoried in `reports/CRYPTO_BRANCH_EVIDENCE_MAP.md`. The purged Broad replay owns current inference for its stack; historical CORE43-47/A7H0 remains reference-only under its recorded contracts. CURRENT marks the Broad 6M, observed-archive 18M, localized-mechanism, CEM diversity, and explicit/latent branches `DEPRECATED` without deleting their evidence. Generic residual packets, transfer probes, or label oracles must not become standalone projects; implement only the subset needed by a new challenger's matched controls.
+
 ## Active execution plan
 
-1. Keep the CryptoHFT and Bitfinex releases quarantined and the independent Binance forward capture raw-only; do not join venues or sources by filename, symbol, or assumed notional semantics.
-2. Run the existing overlap gate only when an independent historical archive or a supplier extension supplies at least 14 overlapping dates with the active capture. A pass only makes stitching eligible for a separate explicit activation decision.
-3. After source compatibility, require the existing Data Adequacy Gate before any research use; the 2025-2026 release does not enter the current 2023H2/2024 train surface.
-4. Treat the purged Broad replay as the current evidence. Do not spend more budget tuning its calibration, cost multiplier, or sticky threshold: held-out calibration passed its implementation audit but produced only 1/4 selection and 0/4 stability support. Preserve the information-level positive and report no component development increment.
-5. Treat the verified 120-token consumer as two context-bound surfaces, not one merged training matrix; consumption admission does not satisfy Core3 model fit or economic admission.
-6. Keep challenge, recent, May stress, forward evaluation, promotion, and cross-sprint memory closed. Raw forward data capture is permitted but does not authorize forward evaluation.
+1. Implement only the Stage-0 vertical slice as one small package with two public objects: `DynamicUniverseBatch` and `RelationalCostAwarePolicy`. Keep the temporal/relational encoder and differentiable projector internal until a second consumer exists. Reuse the existing portfolio artifact and strict bridge evaluator; do not add a new control plane.
+2. Prove dynamic membership, permutation equivariance, causal masking and horizon-tail purge, zero-net/gross/cap projection, previous-weight gradient reachability, and exact 5 bps cost-path parity on synthetic and tiny local/PC2 canaries.
+3. Keep the data line asynchronous: CryptoHFT and Bitfinex stay quarantined, Binance capture stays raw-only, and the existing overlap and Data Adequacy gates remain the only activation path. Data waiting does not block Stage 0.
+4. Do not rebuild residual, score-packet, prediction-scale, rank/edge, calibration, or sticky machinery as standalone projects. Reuse them only inside a challenger with a genuinely new identifiable hypothesis.
+5. Keep challenge, recent, May stress, forward evaluation, promotion, and cross-sprint memory closed. Raw forward capture is permitted but cannot authorize evaluation.
 
-No large experiment is authorized merely by this plan.
+Only Stage 0 is the next implementation action. No market training or large experiment is authorized merely by this plan.
+
+## Proposed future large-scale search envelope
+
+This section is a non-authorizing design and budget ceiling, not a frozen experiment contract, proposal queue, or permission to run Stages 1-4. Any later execution requires a separate committed config with exact steps/epochs, sample and batch caps, checkpoint sharing, job accounting, data identity, and explicit authorization under the then-current boundaries.
+
+The candidate matched study is:
+
+```text
+A  per-asset temporal forecast + current rank mapper
+B  relational forecast + current rank mapper
+C  relational direct weights + DeepDow-style cost-blind objective
+D  relational previous-weight policy + 5 bps cost-aware objective
+```
+
+With an otherwise matched temporal backend, loss, parameter scale, and training budget, `A -> B` identifies cross-asset relational information. `B -> C` compares the forecast-plus-rank pipeline with a direct-weight pipeline; it does not isolate the mapper alone. `C -> D` compares a cost-blind direct-weight policy with a combined previous-weight/action/cost-aware policy; on final challengers, add `D0`, identical to D but with zero training-cost coefficient, so `D0 -> D` isolates the training-cost term. C is a new internal matched cost-blind ablation. Historical DeepDow is an external native reference for direct-weight, cost-blind training semantics, not a matched A/B/C/D control.
+
+| Stage | Frozen work | Admission / stop rule | PC2 hard cap |
+|---|---|---|---:|
+| 0 | Four-component vertical slice and local/PC2 parity | All causal, constraint, gradient, and cost identities pass | 4 machine-hours |
+| 1 | 24 relational encoders: history `{168h,336h}` x patch `{6h,24h}` x relation `{global, market-token, past-only sparse}` x width `{32,64}` | Real cross-asset input must beat temporal-only and time-shifted null in at least 4/6 rolling blocks without representation collapse; stable asset-ID embeddings and future membership are forbidden; keep at most 3 | 8 machine-hours |
+| 2 | 12 policy contracts: at most 3 encoders x action `{absolute, delta}` x cadence `{4h/4h,24h/12h}`, with one fixed downside objective | Deterministic successive halving; reject NaN, constraint failure, abnormal no-trade rate, insufficient active assets, projection infeasibility, and gross-negative proposals; keep at most 4 structurally diverse policies | 8 machine-hours |
+| 3 | Four policies x two frozen seeds with matched A/B/C/D controls | Both seeds non-degenerate; matched net difference against B and C is directionally consistent; at least half of internal validation blocks positive | 14 machine-hours |
+| 4 | At most two challengers x three frozen seeds, plus finalist-only D0 controls | Requires a genuinely new unspent development confirmation surface; renaming or repartitioning inspected dates is not sufficient. Without separately authorized Broad-equivalent data this stage is `NOT_RUN` | 24 machine-hours |
+| Closure | One comparison pack and one report | Stop at the first failed causal link; do not compensate by expanding budget | 2 machine-hours |
+
+The future planning ceiling is 60 PC2 machine-hours, inclusive of controls, failed tasks, and retries; `machine-hour` must be defined in the eventual frozen contract as summed PC2 job wall-clock occupancy. Local recompute is capped at 8 hours, peak memory at 16 GB, and retained artifacts at 10 GB. If the ceiling cannot support matched fidelity, reduce proposals or finalists rather than shorten training into a non-comparable run or expand the ceiling. Each proposal keeps at most one checkpoint. The eventual run may produce only one frozen config, one deterministic proposal JSONL ledger, top checkpoints, one final comparison pack, and one closure report. Every stage records source SHA, package lock, data identity, parameters, exact command, output manifest, compute estimate/actual, continuation state, and failure reason. PC2 performs detached training and returns raw predictions, weights, and ledgers; the local machine recomputes winner selection and strict evaluation and owns implementation, parity reference, result aggregation, Git, and closure. If PC2 is unavailable, Stages 1-4 pause rather than fall back to a long local run.
+
+Before each horizon/cadence is admitted, it must pass its own label-support, independent-block, turnover-observation, and horizon-tail-purge preflight. Stages 1-3 may use only the existing observed-archive Broad surface for engineering and layer attribution. They cannot establish fresh economic confirmation because its historical development blocks have been repeatedly inspected. Stage 4 therefore requires a new unspent development block or explicit authorization of an equivalent preregistered surface; it cannot be manufactured by renaming or resplitting existing dates and cannot automatically use recent, forward, May stress, or Binance capture. It still does not open OOS, forward, challenge, recent, May stress, or promotion.
 
 ## Blockers
 
-- Historical aggTrades coverage is not yet equivalent to the 18-month observed-archive surface; the qualified Core3 slice has 3 assets, 4,368 hours, and 13,068 eligible observations.
-- Core3 consumption is verified, but the fixed one-seed probe did not reduce training loss; stable model fit and incremental information remain unqualified.
-- Existing external-paradigm samples lack independent evaluation power.
-- The localized compositional mechanism remains challenge-unstable.
-- The structured-proxy comparison lacks executed semantic matched controls and does not identify independent latent states.
-- Broad added-field information is stable, but its gross strength is below tested 5 bps turnover costs under both the original full/control weight difference and two fixed delta-signal mappings.
-- The purged, held-out calibration replay is implementation-qualified but economically unsupported: selection is positive in 1/4 matched arms and stability in 0/4, with one direction-degenerate Broad calibration arm.
+- The current system has no dynamic-universe relational encoder, no previous-weight-conditioned policy, and no differentiable projector proven cost-identical to the strict evaluator.
+- The observed-archive surface is not survivorship-complete, and its selection/stability blocks are spent; they can support engineering attribution but not fresh confirmation.
+- Historical aggTrades coverage remains narrower than the observed-archive surface; the qualified Core3 slice has 3 assets, 4,368 hours, and 13,068 eligible observations.
+- Qlib and DeepDow remain data-underpowered; neither supplies a clean economic negative for its full external paradigm.
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 
@@ -129,4 +147,4 @@ No status code overrides observed runtime or source facts.
 
 ## Next action
 
-Run no further threshold, calibration, or sticky-mapping search on this Broad stack. Its single held-out calibration repair is complete and did not establish development increment. Mainline research should next use a genuinely lower-frequency or event-driven representation only after its own Data Adequacy preflight and frozen matched contract; this does not open formal performance search. Keep Bitfinex quarantined unless an independently qualified request/page ledger and price-label bridge arrive. Keep the Binance raw collector running independently and run the existing supplier overlap gate only after at least 14 common dates exist; do not stitch or admit any release before a gate pass and separate explicit activation decision.
+Build and review the Stage-0 dynamic-universe relational cost-aware policy vertical slice only. Do not run market training, architecture search, or Stage 1 until the causal, constraint, cost-parity, memory, and PC2 throughput canaries pass and a frozen experiment contract is committed. Continue the liquidation data line independently without allowing it to block the vertical slice or enter research before its existing gates pass.

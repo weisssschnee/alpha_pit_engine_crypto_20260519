@@ -260,7 +260,7 @@
       "id": "broad_universe_compositional_search",
       "label": "Broad-Universe Compositional Search (6M gate audit)",
       "kind": "development_experiment",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "paths": [
         "alphafactory_crypto/broad_search/audit.py",
         "alphafactory_crypto/broad_search/expression.py",
@@ -316,7 +316,7 @@
       "id": "observed_archive_18m_compositional_search",
       "label": "Observed-archive 18M compositional search",
       "kind": "development_experiment",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "paths": [
         "alphafactory_crypto/broad_search/runner18m.py",
         "alphafactory_crypto/broad_search/compositional18m.py",
@@ -380,7 +380,7 @@
       "id": "localized_mechanism_qualification",
       "label": "Localized mechanism evidence qualification",
       "kind": "assurance",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "paths": [
         "alphafactory_crypto/broad_search/qualification18m.py",
         "scripts/crypto_localized_mechanism_qualification.py",
@@ -582,7 +582,7 @@
       "id": "cem_diversity_ab_experiment",
       "label": "CEM Diversity Repair A/B",
       "kind": "development_experiment",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "paths": [
         "alphafactory_crypto/instrument_canary/cem_diversity.py",
         "alphafactory_crypto/instrument_canary/cem_diversity_runner.py",
@@ -844,7 +844,7 @@
       "id": "explicit_latent_adaptive_experiment",
       "label": "Explicit + Latent Adaptive TCN",
       "kind": "development_experiment",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "paths": [
         "alphafactory_crypto/latent_adaptive/experiment.py",
         "config/crypto_explicit_latent_adaptive_v1.json",
@@ -1348,8 +1348,8 @@
       "id": "broad_compositional_search_is_non_formal_and_data_gated",
       "source": "broad_universe_compositional_search",
       "target": "data_adequacy_gate",
-      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
-      "lifecycle": "EXPERIMENTAL",
+      "relation": "DEPRECATED_NON_FORMAL_EVIDENCE",
+      "lifecycle": "DEPRECATED",
       "critical": true,
       "evidence_type": "STATIC",
       "contract": {
@@ -1375,7 +1375,7 @@
       "source": "observed_archive_train_surface",
       "target": "observed_archive_18m_compositional_search",
       "relation": "supplies_train_only_surface",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "critical": true,
       "evidence_type": "STATIC",
       "contract": {
@@ -1401,7 +1401,7 @@
       "source": "observed_archive_18m_compositional_search",
       "target": "sealed_research_boundaries",
       "relation": "respects_sealed_boundaries",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "critical": true,
       "evidence_type": "STATIC",
       "contract": {
@@ -1427,7 +1427,7 @@
       "source": "observed_archive_18m_compositional_search",
       "target": "localized_mechanism_qualification",
       "relation": "evidence_qualified_by",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "critical": true,
       "evidence_type": "STATIC",
       "contract": {
@@ -1479,8 +1479,8 @@
       "id": "cem_diversity_uses_non_formal_canary",
       "source": "cem_diversity_ab_experiment",
       "target": "real_data_lazy_search_canary",
-      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
-      "lifecycle": "EXPERIMENTAL",
+      "relation": "DEPRECATED_NON_FORMAL_EVIDENCE",
+      "lifecycle": "DEPRECATED",
       "critical": true,
       "evidence_type": "STATIC",
       "contract": {
@@ -1880,8 +1880,8 @@
       "id": "latent_adaptive_evaluated_in_development_arena",
       "source": "explicit_latent_adaptive_experiment",
       "target": "multi_paradigm_arena",
-      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
-      "lifecycle": "EXPERIMENTAL",
+      "relation": "DEPRECATED_NON_FORMAL_EVIDENCE",
+      "lifecycle": "DEPRECATED",
       "critical": true,
       "evidence_type": "RUNTIME",
       "contract": {
