@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "capture_id": "BINANCE_FORCE_ORDER_FORWARD_CAPTURE_V1_20260718",
-  "endpoint": "wss://fstream.binance.com/market/ws/!forceOrder@arr",
+  "endpoint": "wss://stream.binancefuture.com/market/ws/!forceOrder@arr",
   "stream": "!forceOrder@arr",
   "output_root": "G:/AlphaFactory_CryptoData/raw/binance_force_order_ws_v1",
   "state_root": ".cache/binance_force_order_capture_v1",
