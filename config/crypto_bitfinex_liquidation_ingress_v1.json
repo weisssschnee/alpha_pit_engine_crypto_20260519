@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "run_id": "CRYPTO_BITFINEX_LIQUIDATION_INGRESS_20260718",
+  "objective": "Qualify Bitfinex file integrity and event support without treating it as Binance or CryptoHFT source-comparison evidence.",
+  "release": {
+    "release_id": "BITFINEX_LIQUIDATIONS_20240101_20250627",
+    "root": "G:/AlphaFactory_CryptoData/external/bitfinex_liquidations_20240101_20250627",
+    "start_date": "2024-01-01",
+    "end_date": "2025-06-27",
+    "source": "https://api-pub.bitfinex.com/v2/liquidations/hist",
+    "publication_time_available": false,
+    "source_interval_coverage_ledger": null
+  },
+  "gold_resolutions": ["1min", "5min", "15min", "1h"],
+  "schemas": {
+    "silver_required": [
+      "timestamp",
+      "venue",
+      "symbol",
+      "side",
+      "quantity",
+      "price",
+      "notional",
+      "position_id",
+      "is_match",
+      "is_market_sold",
+      "source_observable_time"
+    ]
+  },
+  "large_event_thresholds": [10000, 100000, 1000000],
+  "event_data_adequacy": {
+    "minimum_eligible_events": 10000,
+    "minimum_active_event_dates": 120,
+    "minimum_eligible_symbols": 20,
+    "minimum_effective_months": 12.0,
+    "minimum_effective_symbols": 10.0,
+    "minimum_price_label_match_ratio": 0.8,
+    "minimum_turnover_observations": 100
+  },
+  "boundaries": {
+    "data_role": "INDEPENDENT_BITFINEX_INGRESS_ONLY",
+    "binance_reference_allowed": false,
+    "cryptohft_coverage_validation_allowed": false,
+    "research_input_allowed": false,
+    "economic_evaluation_allowed": false,
+    "automatic_stitching_allowed": false,
+    "new_performance_search": false,
+    "challenge_read": false,
+    "forward_research_read": false,
+    "recent_research_read": false,
+    "may_stress_research_read": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_bitfinex_liquidation_ingress_20260718",
+    "report": "reports/CRYPTO_BITFINEX_LIQUIDATION_INGRESS_20260718.md"
+  }
+}
