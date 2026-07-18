@@ -4,9 +4,9 @@ Last updated: 2026-07-18 Asia/Hong_Kong
 
 ## Current phase
 
-`BROAD_CORE_PACK_TURNOVER_AWARE_MAPPING_COST_REDUCTION_ONLY`
+`BROAD_STICKY_COST_REDUCTION_SCALE_CALIBRATION_RISK_CONFIRMED`
 
-The 39-field Broad context has stable residual information but its original mappings were cost-killed. A single predeclared 4h-cohort sticky cost gate then reproduced all 16 frozen prediction identities exactly and reduced full-surface turnover by median 34% in selection and 56% in stability. Median matched and delta-sleeve net increments became positive in both blocks, but positive-run support was 3/4 in selection and only 2/4 in stability, below the frozen 60% requirement. This verifies material cost reduction but not a reliable Broad component development increment. Separately, the independent Binance `!forceOrder@arr` raw forward capture remains active without dates overlapping the current CryptoHFT package.
+The 39-field Broad context has stable residual information but its original mappings were cost-killed. A single predeclared 4h-cohort sticky cost gate reproduced all 16 frozen prediction identities exactly and materially reduced turnover, but positive-run support remained 3/4 in selection and 2/4 in stability. A follow-up audit over the same committed evidence found prediction standard deviation almost determines sticky acceptance and turnover while failing to predict net quality. This confirms a prediction-scale calibration risk: cost reduction is real, but neither threshold tuning nor a reliable Broad component development increment is justified. The independent Binance `!forceOrder@arr` raw forward capture remains active without dates overlapping the current CryptoHFT package.
 
 ## Current decisions
 
@@ -31,6 +31,7 @@ BROAD_CORE_PACK_INFORMATION_INCREMENT_COST_KILLED
 BROAD_CORE_PACK_FIXED_MAPPING_REPAIR_NOT_ESTABLISHED
 BROAD_CORE_PACK_TURNOVER_AWARE_MAPPING_COST_REDUCTION_ONLY
 BROAD_CORE_PACK_DEVELOPMENT_INCREMENT_NOT_ESTABLISHED
+BROAD_PREDICTION_SCALE_CALIBRATION_RISK_CONFIRMED
 LIQUIDATION_SUPPLIER_INGRESS_QUALIFIED_QUARANTINED
 BINANCE_FORCE_ORDER_FORWARD_CAPTURE_ACTIVE
 LIQUIDATION_STITCHING_BLOCKED_NO_OVERLAP_DATES
@@ -51,6 +52,7 @@ LIQUIDATION_STITCHING_BLOCKED_NO_OVERLAP_DATES
 - Core Pack identity SHA256: `B6765D5A60B9A348A47A88BB53D503A48E024C1BAF83BCB14B2F4BF06E248D00`; resolved execution-contract identity SHA256: `35E54F79576A6D7A1D94AE697E8066CB9FB49CF9A97979259F39490E3281914E`; run identity SHA256: `7DE0F5FB394970C804AC483D42A63231687C461528AF0947D85855D91000A149`.
 - Broad information Arena implementation source: `4aa96ba65a950adca07c4bdb9b0db734f729bdd0`; evidence commit: `edc3cda`; run identity SHA256: `E9DE6B6A98E6986D99E08571322CD66B0E2B5B145D3B392E251587FFDEE619E1`.
 - Broad sticky mapping implementation source: `7fee8559c1819a779f4a5fc22e2ee21e4d84e807`; evidence commit: `66bb993`; run identity SHA256: `90FB47E5B54B410AF56B2B985E98AAD8077359E9364E6A233792A5BE66384439`.
+- Broad prediction-scale audit source: `172340ac129b9f0ed79bfcbecd5126adfe662c76`; evidence commit: `39751d7`; run identity SHA256: `98493E159D5AA36A5C1BCC7E52F33D47B3C3B8E6D52FEE6BC332B288F66C7C35`.
 - Binance forceOrder forward-capture snapshot source: `ecb8ca11792e24e2f86666ac5009cb32d621bbb7`; evidence commit: `d3c1527`; capture identity SHA256: `22411352F986AB29B4AC2D3E0F5241486D86FA940D7A5C63B5D98FD3E13CB934`.
 
 ## Evidence-qualified position
@@ -68,6 +70,7 @@ LIQUIDATION_STITCHING_BLOCKED_NO_OVERLAP_DATES
 - Broad conditional-information qualification: quantile-binned marginal entropy is near its maximum for almost every nondegenerate field and is therefore an adequacy check, not a useful standalone selector. Block-matched mutual-information excess and residual information over the ten-field Ridge control found stable residual information in 13/29 added fields versus 2/10 controls. The frozen Ridge plus three-seed MLP 2x2 Arena had no fit-degenerate runs, exact-equal predictions, or portfolio collapse.
 - Broad economic boundary: paired gross median increment was `+3.51e-05` in selection and `+5.17e-06` in stability, while paired net median increment was `-6.78e-05` and `-8.65e-05`. Direct full-minus-control signal mapping and the predeclared 4h causal mean repair remained net-negative in every run; the 4h repair narrowed median net loss to `-1.28e-05` and `-4.28e-05`. This is evidence that added information exists but is too weak for the tested 5 bps mappings, not evidence that the fields are useless or that no turnover-aware architecture can work.
 - Turnover-aware mapping qualification: the fixed mapping compares each cohort only with its `t-4` incumbent and trades only when the model-predicted improvement exceeds a 5 bps single-side, 2x round-trip cost gate. All 16 prediction hashes exactly matched the prior frozen run. Full-surface median turnover fell 33.8%/55.7% in selection/stability; matched net-difference medians became `+1.44e-05`/`+5.28e-06`, and delta-sleeve medians became `+1.36e-05`/`+4.29e-06`. Selection was positive in 3/4 runs, stability in 2/4, so the frozen 60% cross-run gate failed. The result is `TURNOVER_AWARE_MAPPING_COST_REDUCTION_ONLY`, not a development increment. Large cross-seed acceptance-rate variation also leaves prediction-scale calibration as an unresolved mechanism risk.
+- Prediction-scale diagnosis: across all 16 frozen surfaces, prediction standard deviation has Spearman `0.975` with sticky acceptance and `0.973` with turnover, but only `-0.125` with net return. Within the full surface, scale versus net is `-0.619`; full-MLP acceptance spans 0.242 to 0.962. Prediction amplitude therefore controls trade frequency without representing economic quality. This confirms calibration risk and rejects post-hoc threshold tuning; it does not prove that a train-only calibration repair would create increment.
 - Liquidation supplier release: 762 Parquet partitions across 381 dates passed schema, count, primary-key, PIT-delay, and content-identity preflight. Of 500 symbols and 11,138,396 events, 464 linear USDT/USDC symbols with 11,101,810 events are eligible for source comparison. Nineteen inverse/delivery and seventeen unknown-semantics symbols remain notional-quarantined because the supplier's quantity-times-price value is not a qualified common notional for those contracts. This is ingress evidence only, not a research field admission or economic result.
 - Binance raw provenance capture: the official `!forceOrder@arr` forward collector is active at `G:/AlphaFactory_CryptoData/raw/binance_force_order_ws_v1`. The accepted snapshot contains 145 valid records across 28 symbols with zero parse, hash, source, or forceOrder-contract failures. Capture began on 2026-07-18 after the supplier package ended on 2026-07-13, so current-package overlap is zero and stitching remains blocked.
 
@@ -90,7 +93,7 @@ No large experiment is authorized merely by this plan.
 - The localized compositional mechanism remains challenge-unstable.
 - The structured-proxy comparison lacks executed semantic matched controls and does not identify independent latent states.
 - Broad added-field information is stable, but its gross strength is below tested 5 bps turnover costs under both the original full/control weight difference and two fixed delta-signal mappings.
-- The sticky gate materially lowers turnover, but stability support is only 2/4 and MLP acceptance rates vary sharply by seed, so prediction-scale calibration and cross-seed reliability remain unresolved.
+- The sticky gate materially lowers turnover, but stability support is only 2/4 and prediction amplitude controls trade frequency without tracking net quality; a train-only calibration method has not been reproduced.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 
 ## Source-of-truth order
@@ -118,4 +121,4 @@ No status code overrides observed runtime or source facts.
 
 ## Next action
 
-Run no threshold or mapping search. The single sticky mechanism is closed as material cost reduction without reliable cross-seed increment. Do not move directly to cost-aware training on this evidence. A future Broad action must either qualify return-scale calibration under the same frozen predictions or switch to a genuinely lower-frequency/event-driven representation; neither action opens performance search. Keep the Binance raw collector running independently and run the existing supplier overlap gate only after at least 14 common dates exist; do not stitch or expose the supplier release to research before a gate pass and separate explicit activation decision.
+Run no threshold or mapping search. Prediction-scale calibration risk is confirmed, but no calibration repair is yet qualified. If Broad continues, the only justified repair is a single train-only return-scale calibration fixed before replaying the same predictions and sticky gate; otherwise switch to a genuinely lower-frequency/event-driven representation. Neither action opens performance search. Keep the Binance raw collector running independently and run the existing supplier overlap gate only after at least 14 common dates exist; do not stitch or expose the supplier release to research before a gate pass and separate explicit activation decision.
