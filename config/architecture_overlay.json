@@ -949,11 +949,9 @@
       "claim_badges": [
         "CONSUMPTION VERIFIED",
         "CONDITIONAL INFORMATION VERIFIED",
-        "MODEL FIT PARTIAL",
-        "FIXED MAPPING COST KILLED",
         "STICKY COST REDUCTION VERIFIED",
-        "INCREMENT NOT QUALIFIED",
         "PREDICTION SCALE RISK CONFIRMED",
+        "INCREMENT NOT QUALIFIED",
         "NO OOS"
       ],
       "authority": {
