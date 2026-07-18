@@ -944,7 +944,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-18T06:02:52.308733+00:00",
+  "generated_at": "2026-07-18T06:41:58.313252+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -4407,10 +4407,10 @@
       "claim_badges": [
         "CONSUMPTION VERIFIED",
         "CONDITIONAL INFORMATION VERIFIED",
-        "MODEL FIT PARTIAL",
-        "FIXED MAPPING COST KILLED",
         "STICKY COST REDUCTION VERIFIED",
-        "INCREMENT NOT QUALIFIED"
+        "PREDICTION SCALE RISK CONFIRMED",
+        "INCREMENT NOT QUALIFIED",
+        "NO OOS"
       ],
       "color": "#f9a825",
       "contracts": [
@@ -4478,6 +4478,15 @@
           "type": "EVIDENCE"
         },
         {
+          "bypass_forbidden": false,
+          "enforced_by": "crypto_broad_prediction_scale_audit_v1",
+          "evidence_ref": "runtime/crypto_broad_prediction_scale_audit_v1_20260718/run_manifest.json",
+          "id": "broad_prediction_scale_calibration_risk",
+          "rule": "Across the 16 frozen surfaces, prediction amplitude nearly determines sticky acceptance and turnover but does not track net quality; threshold tuning is forbidden and any repair must estimate return scale on train-only data",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        },
+        {
           "bypass_forbidden": true,
           "enforced_by": "data_adequacy_gate",
           "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json",
@@ -4521,7 +4530,10 @@
         "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json",
         "reports/CRYPTO_BROAD_CORE_PACK_INFORMATION_ARENA_V1_20260718_MAPPING_REPAIR.md",
         "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/run_manifest.json",
-        "reports/CRYPTO_BROAD_CORE_PACK_STICKY_MAPPING_V1_20260718.md"
+        "reports/CRYPTO_BROAD_CORE_PACK_STICKY_MAPPING_V1_20260718.md",
+        "scripts/crypto_broad_prediction_scale_audit_v1.py",
+        "runtime/crypto_broad_prediction_scale_audit_v1_20260718/run_manifest.json",
+        "reports/CRYPTO_BROAD_PREDICTION_SCALE_AUDIT_V1_20260718.md"
       ],
       "promotion_requirements": [
         "context-matched data adequacy",
@@ -4611,6 +4623,10 @@
         "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_split_increment_summary",
         "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_turnover_aware_sticky_mapping_summary",
         "reports_crypto_broad_core_pack_sticky_mapping_v1_20260718_why_entropy_is_not_used_alone",
+        "reports_crypto_broad_prediction_scale_audit_v1_20260718",
+        "reports_crypto_broad_prediction_scale_audit_v1_20260718_boundaries",
+        "reports_crypto_broad_prediction_scale_audit_v1_20260718_broad_prediction_scale_audit",
+        "reports_crypto_broad_prediction_scale_audit_v1_20260718_scope_correlations",
         "reports_crypto_core_pack_consumption_v1_20260718_repaired",
         "reports_crypto_core_pack_consumption_v1_20260718_repaired_broad_panel_baseline",
         "reports_crypto_core_pack_consumption_v1_20260718_repaired_claim_boundary",
@@ -4633,6 +4649,14 @@
         "scripts_crypto_broad_core_pack_information_arena_v1_run",
         "scripts_crypto_broad_core_pack_information_arena_v1_write_json",
         "scripts_crypto_broad_core_pack_information_arena_v1_write_jsonl",
+        "scripts_crypto_broad_prediction_scale_audit_v1",
+        "scripts_crypto_broad_prediction_scale_audit_v1_git_sha",
+        "scripts_crypto_broad_prediction_scale_audit_v1_main",
+        "scripts_crypto_broad_prediction_scale_audit_v1_now",
+        "scripts_crypto_broad_prediction_scale_audit_v1_rank_correlation",
+        "scripts_crypto_broad_prediction_scale_audit_v1_read_jsonl",
+        "scripts_crypto_broad_prediction_scale_audit_v1_run",
+        "scripts_crypto_broad_prediction_scale_audit_v1_write_json",
         "scripts_crypto_core_pack_consumption_v1",
         "scripts_crypto_core_pack_consumption_v1_git_sha",
         "scripts_crypto_core_pack_consumption_v1_main",
@@ -4661,14 +4685,14 @@
       "required": false,
       "semantic_role": "context_bound_feature_information_qualification",
       "validation": {
-        "checked_at": "2026-07-18T06:02:52.308733+00:00",
-        "evidence_ref": "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/run_manifest.json",
-        "evidence_sha256": "A753209F9E65E2D5077B1CAE13427150FE4331E46EB59156CAF9A8E1FACCB57F",
+        "checked_at": "2026-07-18T06:41:58.313252+00:00",
+        "evidence_ref": "runtime/crypto_broad_prediction_scale_audit_v1_20260718/run_manifest.json",
+        "evidence_sha256": "09383153CDA32287170BAEF220E669287E5C03681C403F95A1EF57C477D4085C",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "66bb993467818102c9736bf900f1284506571b7c"
+        "verified_at_sha": "39751d71d0905c7527d696f2088108e749c2412a"
       },
       "visible_by_default": true
     },
@@ -5009,7 +5033,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "CDEA289D547053F75CF1FE7AD2376D5A70B27C04D5E652357077766BC9DC0725"
+    "sha256": "7723F22D948EEB59E75B379D14590EE70EF5270FC3BB7FA457F744FF21B94727"
   },
   "profile_id": null,
   "profiles": [
@@ -5040,13 +5064,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "e5a215393ac739af57ef0551ba1d0473a7e91dfb",
-    "edge_count": 33213,
-    "node_count": 17896,
+    "built_at_commit": "9590b2d5346e10da10062d5526d229edcc424920",
+    "edge_count": 33245,
+    "node_count": 17911,
     "path": ".planning/graphs/graph.json",
-    "sha256": "C0F2030E9424924513335822FE26EC34820F7B99CFCC848DE0B638C3FE542654"
+    "sha256": "E3D6BC69EBCBA35F36937F82A6298793CECBB0E02F5F0BD84493E9E07106A9B0"
   },
-  "repo_head": "e5a215393ac739af57ef0551ba1d0473a7e91dfb",
+  "repo_head": "9590b2d5346e10da10062d5526d229edcc424920",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
