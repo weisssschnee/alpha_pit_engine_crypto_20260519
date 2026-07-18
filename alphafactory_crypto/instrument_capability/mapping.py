@@ -435,13 +435,13 @@ def validate_direct_weights(
         "gross cap": gross > gross_cap + zero_net_tolerance,
         "position cap": maximum > position_cap + zero_net_tolerance,
         "zero net": np.abs(net) > zero_net_tolerance,
-        "minimum eligible assets": (gross > ineligible_tolerance)
-        & (eligible_count < minimum_assets),
+        "minimum active assets": (gross > ineligible_tolerance)
+        & (active < minimum_assets),
     }
     failed = [name for name, coordinates in violations.items() if np.any(coordinates)]
     if failed:
         raise ValueError("direct weight contract violation: " + ", ".join(failed))
-    feasible = (gross > ineligible_tolerance) & (active >= 2)
+    feasible = (gross > ineligible_tolerance) & (active >= minimum_assets)
     reasons = tuple(
         ("DIRECT_WEIGHTS_VALIDATED",) if valid else ("EXPLICIT_NO_TRADE",)
         for valid in feasible

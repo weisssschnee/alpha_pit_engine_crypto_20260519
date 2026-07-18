@@ -54,11 +54,18 @@ class RelationalPolicyVerticalSliceTests(unittest.TestCase):
     def test_one_step_relational_direct_weight_path_is_equivariant_and_cost_closed(self) -> None:
         torch.manual_seed(20260718)
         batch_size, history, assets = 4, 12, 8
+        eligibility = torch.ones(batch_size, history, assets, dtype=torch.bool)
+        eligibility[:, : history // 2, 0] = False
+        eligibility[1, -1, 3] = False
+        previous_weights = torch.zeros(batch_size, assets, requires_grad=True)
+        with torch.no_grad():
+            previous_weights[:, 0] = 0.10
+            previous_weights[:, 1] = -0.10
         batch = DynamicUniverseBatch(
             asset_values=torch.randn(batch_size, history, assets, 6),
             market_values=torch.randn(batch_size, history, 2),
-            eligibility=torch.ones(batch_size, history, assets, dtype=torch.bool),
-            previous_weights=torch.zeros(batch_size, assets),
+            eligibility=eligibility,
+            previous_weights=previous_weights,
             target_returns=torch.randn(batch_size, assets) * 0.001,
         )
         batch.validate()
@@ -89,6 +96,8 @@ class RelationalPolicyVerticalSliceTests(unittest.TestCase):
             if parameter.grad is not None
         )
         self.assertGreater(gradient_l1, 0.0)
+        self.assertIsNotNone(batch.previous_weights.grad)
+        self.assertGreater(float(batch.previous_weights.grad.abs().sum()), 0.0)
         optimizer.step()
 
         model.eval()
@@ -121,6 +130,7 @@ class RelationalPolicyVerticalSliceTests(unittest.TestCase):
         self.assertLessEqual(float(np.max(np.abs(mapped.weights))), 0.2 + 1e-6)
         self.assertLessEqual(float(np.max(np.abs(mapped.weights).sum(axis=0))), 1.0 + 1e-6)
         self.assertLessEqual(float(np.max(np.abs(mapped.weights.sum(axis=0)))), 1e-6)
+        self.assertEqual(float(mapped.weights[3, 1]), 0.0)
 
         evaluation = evaluate_real_mapping(
             mapped,
@@ -135,6 +145,12 @@ class RelationalPolicyVerticalSliceTests(unittest.TestCase):
         expected_turnover += float(np.abs(mapped.weights[:, -1]).sum())
         self.assertAlmostEqual(evaluation.total_turnover_l1, expected_turnover, places=6)
         self.assertAlmostEqual(evaluation.total_cost, expected_turnover * 5.0 / 10_000.0)
+
+        invalid_eligibility = batch.eligibility[:, -1].numpy().T.copy()
+        active_asset, active_time = np.argwhere(np.abs(mapped.weights) > 1e-8)[0]
+        invalid_eligibility[active_asset, active_time] = False
+        with self.assertRaisesRegex(ValueError, "ineligible asset"):
+            validate_direct_weights(mapped.weights, invalid_eligibility)
 
 
 if __name__ == "__main__":

@@ -136,7 +136,7 @@ class RelationalCostAwarePolicy(nn.Module):
         self.gross_cap = float(gross_cap)
         self.position_cap = float(position_cap)
         self.temporal = nn.Conv1d(
-            int(asset_features + market_features),
+            int(asset_features + market_features + 1),
             int(hidden_size),
             kernel_size=self.temporal_kernel,
         )
@@ -167,7 +167,10 @@ class RelationalCostAwarePolicy(nn.Module):
     ) -> tuple[torch.Tensor, torch.Tensor]:
         batch, history, assets, _ = asset_values.shape
         market = market_values[:, :, None, :].expand(-1, -1, assets, -1)
-        temporal_input = torch.cat((asset_values, market), dim=-1)
+        historical_eligibility = eligibility.unsqueeze(-1).to(dtype=asset_values.dtype)
+        temporal_input = torch.cat(
+            (asset_values * historical_eligibility, market, historical_eligibility), dim=-1
+        )
         temporal_input = temporal_input.permute(0, 2, 3, 1).reshape(
             batch * assets, temporal_input.shape[-1], history
         )
@@ -192,12 +195,79 @@ def direct_net_utility_loss(
     target_returns: torch.Tensor,
     *,
     cost_bps: float,
+    target_horizon_hours: int = 1,
+    terminal_liquidation: bool = True,
 ) -> torch.Tensor:
+    gross, _, cost = _direct_utility_paths(
+        weights,
+        previous_weights,
+        target_returns,
+        cost_bps=cost_bps,
+        target_horizon_hours=target_horizon_hours,
+        terminal_liquidation=terminal_liquidation,
+    )
+    return -(gross - cost).mean()
+
+
+def _direct_utility_paths(
+    weights: torch.Tensor,
+    previous_weights: torch.Tensor,
+    target_returns: torch.Tensor,
+    *,
+    cost_bps: float,
+    target_horizon_hours: int,
+    terminal_liquidation: bool,
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     if weights.shape != previous_weights.shape or weights.shape != target_returns.shape:
         raise ValueError("weights, previous_weights and target_returns must share shape")
-    gross = (weights * target_returns).sum(dim=1)
-    turnover = (weights - previous_weights).abs().sum(dim=1)
-    return -(gross - turnover * float(cost_bps) / 10_000.0).mean()
+    horizon = int(target_horizon_hours)
+    if horizon not in (1, 4):
+        raise ValueError("target horizon is outside the frozen sleeve contract")
+    scale = 1.0 / float(horizon)
+    gross = (weights * target_returns).sum(dim=1) * scale
+    turnover = (weights - previous_weights).abs().sum(dim=1) * scale
+    if terminal_liquidation and weights.shape[0]:
+        terminal = torch.zeros_like(turnover)
+        for offset in range(min(horizon, weights.shape[0])):
+            index = weights.shape[0] - 1 - (
+                (weights.shape[0] - 1 - offset) % horizon
+            )
+            terminal[index] = terminal[index] + weights[index].abs().sum() * scale
+        turnover = turnover + terminal
+    cost = turnover * float(cost_bps) / 10_000.0
+    return gross, turnover, cost
+
+
+def _rollout_policy(
+    model: RelationalCostAwarePolicy,
+    batch: DynamicUniverseBatch,
+    *,
+    target_horizon_hours: int,
+    detach_state: bool,
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """Roll each horizon-offset sleeve with its own previous portfolio."""
+
+    weights: list[torch.Tensor] = []
+    scores: list[torch.Tensor] = []
+    previous: list[torch.Tensor] = []
+    horizon = int(target_horizon_hours)
+    for index in range(batch.asset_values.shape[0]):
+        if index < horizon:
+            state = batch.previous_weights[index]
+        else:
+            state = weights[index - horizon]
+            if detach_state:
+                state = state.detach()
+        local_weights, local_scores = model(
+            batch.asset_values[index : index + 1],
+            batch.market_values[index : index + 1],
+            batch.eligibility[index : index + 1],
+            state.unsqueeze(0),
+        )
+        previous.append(state)
+        weights.append(local_weights.squeeze(0))
+        scores.append(local_scores.squeeze(0))
+    return torch.stack(weights), torch.stack(scores), torch.stack(previous)
 
 
 def _normalize_with_missing(values: np.ndarray, axes: tuple[int, ...]) -> np.ndarray:
@@ -221,9 +291,13 @@ def load_broad_smoke_batch(
     smoke = config["smoke"]
     store = RawPanelStore.open(repo_root / str(config["inputs"]["broad_cache"]))
     timestamps = np.asarray(store.timestamp_ns, dtype=np.int64)
+    declared_end = pd.Timestamp(smoke["end_exclusive"])
+    sealed_boundary = pd.Timestamp(config["boundaries"]["latest_timestamp_exclusive"])
+    if declared_end > sealed_boundary:
+        raise ValueError("smoke window crosses the declared development boundary")
     start = int(np.searchsorted(timestamps, pd.Timestamp(smoke["start"]).value, side="left"))
     stop = int(
-        np.searchsorted(timestamps, pd.Timestamp(smoke["end_exclusive"]).value, side="left")
+        np.searchsorted(timestamps, declared_end.value, side="left")
     )
     history = int(smoke["history_hours"])
     decisions = int(smoke["decision_coordinates"])
@@ -231,10 +305,17 @@ def load_broad_smoke_batch(
         raise ValueError("smoke window does not satisfy history/development boundaries")
     decision_times = np.arange(start, start + decisions, dtype=int)
     horizon = int(smoke["target_horizon_hours"])
+    target_end = pd.Timestamp(int(timestamps[decision_times[-1]]), tz="UTC") + pd.Timedelta(
+        hours=horizon
+    )
+    if target_end >= declared_end or target_end >= sealed_boundary:
+        raise ValueError("smoke target horizon crosses the development boundary")
     target_store = np.asarray(store.target_return(horizon), dtype=np.float32)
     base_eligible = np.asarray(store.base_eligible(), dtype=bool)
-    candidate = base_eligible[:, decision_times].all(axis=1)
-    candidate &= np.isfinite(target_store[:, decision_times]).all(axis=1)
+    # Universe membership and coverage ranking are frozen at the first
+    # decision coordinate.  Later coordinates may invalidate the smoke, but
+    # may not reach backward and influence which assets were selected.
+    candidate = base_eligible[:, start] & np.isfinite(target_store[:, start])
     candidate_indices = np.flatnonzero(candidate)
     requested_assets = int(smoke["assets"])
     if candidate_indices.size < requested_assets:
@@ -245,8 +326,12 @@ def load_broad_smoke_batch(
     coverage = np.zeros(candidate_indices.size, dtype=float)
     asset_arrays = {field: store.field(field) for field in asset_fields}
     for values in asset_arrays.values():
-        coverage += np.isfinite(values[candidate_indices, history_start : start + decisions]).mean(axis=1)
+        coverage += np.isfinite(values[candidate_indices, history_start : start + 1]).mean(axis=1)
     selected = candidate_indices[np.argsort(-coverage, kind="stable")[:requested_assets]]
+    if not base_eligible[selected[:, None], decision_times[None, :]].all():
+        raise ValueError("first-coordinate asset set did not remain eligible during smoke")
+    if not np.isfinite(target_store[selected[:, None], decision_times[None, :]]).all():
+        raise ValueError("first-coordinate asset set lacks complete smoke targets")
 
     asset_batches: list[np.ndarray] = []
     market_batches: list[np.ndarray] = []
@@ -289,6 +374,14 @@ def load_broad_smoke_batch(
                 encoding="utf-8"
             )
         )["identity_sha256"],
+        "historical_eligibility_transitions": int(
+            np.count_nonzero(
+                np.diff(np.stack(eligibility_batches).astype(np.int8), axis=1)
+            )
+        ),
+        "historical_ineligible_cells": int(
+            np.count_nonzero(~np.stack(eligibility_batches))
+        ),
     }
     return batch, metadata
 
@@ -322,17 +415,19 @@ def run_vertical_slice_smoke(
         position_cap=float(smoke["position_cap"]),
     )
     optimizer = torch.optim.Adam(model.parameters(), lr=float(smoke["learning_rate"]))
-    weights, _ = model(
-        batch.asset_values,
-        batch.market_values,
-        batch.eligibility,
-        batch.previous_weights,
+    weights, _, previous_weights = _rollout_policy(
+        model,
+        batch,
+        target_horizon_hours=int(smoke["target_horizon_hours"]),
+        detach_state=True,
     )
     loss = direct_net_utility_loss(
         weights,
-        batch.previous_weights,
+        previous_weights,
         batch.target_returns,
         cost_bps=float(smoke["cost_bps"]),
+        target_horizon_hours=int(smoke["target_horizon_hours"]),
+        terminal_liquidation=True,
     )
     optimizer.zero_grad(set_to_none=True)
     loss.backward()
@@ -344,18 +439,25 @@ def run_vertical_slice_smoke(
     optimizer.step()
     model.eval()
     with torch.no_grad():
-        weights, scores = model(
-            batch.asset_values,
-            batch.market_values,
-            batch.eligibility,
-            batch.previous_weights,
+        weights, scores, previous_weights = _rollout_policy(
+            model,
+            batch,
+            target_horizon_hours=int(smoke["target_horizon_hours"]),
+            detach_state=False,
         )
         permutation = torch.arange(weights.shape[1] - 1, -1, -1)
-        permuted_weights, _ = model(
-            batch.asset_values[:, :, permutation],
-            batch.market_values,
-            batch.eligibility[:, :, permutation],
-            batch.previous_weights[:, permutation],
+        permuted_batch = DynamicUniverseBatch(
+            asset_values=batch.asset_values[:, :, permutation],
+            market_values=batch.market_values,
+            eligibility=batch.eligibility[:, :, permutation],
+            previous_weights=batch.previous_weights[:, permutation],
+            target_returns=batch.target_returns[:, permutation],
+        )
+        permuted_weights, _, _ = _rollout_policy(
+            model,
+            permuted_batch,
+            target_horizon_hours=int(smoke["target_horizon_hours"]),
+            detach_state=False,
         )
     permutation_error = float(
         (permuted_weights - weights[:, permutation]).abs().max()
@@ -372,6 +474,14 @@ def run_vertical_slice_smoke(
         target_horizon_hours=int(smoke["target_horizon_hours"]),
         expected_mapping_id=DIRECT_ZERO_NET_COST_AWARE,
     )
+    _, training_turnover, training_cost = _direct_utility_paths(
+        weights,
+        previous_weights,
+        batch.target_returns,
+        cost_bps=float(smoke["cost_bps"]),
+        target_horizon_hours=int(smoke["target_horizon_hours"]),
+        terminal_liquidation=True,
+    )
     elapsed = float(time.perf_counter() - started)
     if elapsed > float(smoke["maximum_wall_seconds"]):
         raise RuntimeError(f"vertical-slice smoke exceeded wall budget: {elapsed:.3f}s")
@@ -384,6 +494,13 @@ def run_vertical_slice_smoke(
         "source_contract_identity_sha256": metadata["source_contract_identity_sha256"],
         "real_asset_count": len(metadata["asset_ids"]),
         "real_decision_coordinates": len(metadata["decision_timestamps"]),
+        "historical_eligibility_transitions": metadata[
+            "historical_eligibility_transitions"
+        ],
+        "historical_ineligible_cells": metadata["historical_ineligible_cells"],
+        "nonzero_previous_weight_coordinates": int(
+            torch.count_nonzero(previous_weights.abs().sum(dim=1) > 1e-8)
+        ),
         "first_decision_timestamp": metadata["decision_timestamps"][0],
         "last_decision_timestamp": metadata["decision_timestamps"][-1],
         "gradient_l1": gradient_l1,
@@ -393,11 +510,11 @@ def run_vertical_slice_smoke(
         "strict_evaluator_mapping_id": evaluation.mapping_id,
         "strict_evaluator_total_turnover_l1": evaluation.total_turnover_l1,
         "strict_evaluator_total_cost": evaluation.total_cost,
-        "cost_identity_closed": bool(
-            np.isclose(
-                evaluation.total_cost,
-                evaluation.total_turnover_l1 * float(smoke["cost_bps"]) / 10_000.0,
-            )
+        "training_evaluator_turnover_identity_closed": bool(
+            np.isclose(float(training_turnover.sum()), evaluation.total_turnover_l1)
+        ),
+        "training_evaluator_cost_identity_closed": bool(
+            np.isclose(float(training_cost.sum()), evaluation.total_cost)
         ),
         "wall_seconds": elapsed,
         "boundaries": dict(config["boundaries"]),
