@@ -844,6 +844,40 @@
       }
     },
     {
+      "color": "#f9a825",
+      "contract": {
+        "bypass_forbidden": true,
+        "enforced_by": "instrument_capability.mapping.validate_direct_weights and instrument_canary.evaluator.evaluate_real_mapping",
+        "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
+        "id": "honest_direct_weight_mapping_admission",
+        "rule": "Model-produced portfolios must pass the canonical direct-weight MappingResult contract before the existing full-L1 5 bps evaluator accepts them; they may not masquerade as rank-mapped signals",
+        "severity": "HARD",
+        "type": "ADMISSION"
+      },
+      "critical": true,
+      "declared": true,
+      "declared_evidence_type": "STATIC",
+      "evidence": "STATIC",
+      "forbidden": false,
+      "id": "relational_direct_weights_use_strict_bridge",
+      "lifecycle": "EXPERIMENTAL",
+      "line_style": "dashed",
+      "relation": "direct_weights_evaluated_by_strict_bridge",
+      "required": false,
+      "source": "relational_direct_weight_vertical_slice",
+      "target": "real_data_mapping_cost_evaluator",
+      "validation": {
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
+        "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
+        "evidence_sha256": "71FE5D71779DD75372534CD853D68A49695F4149F4159066502F7AF6498749C6",
+        "level": "STATIC_VERIFIED",
+        "notes": [],
+        "profile": "crypto-development-research",
+        "result": "PASS",
+        "verified_at_sha": "9c5f2f64691013033a0edf583fe57de86cd966c0"
+      }
+    },
+    {
       "color": "#757575",
       "contract": {
         "bypass_forbidden": true,
@@ -948,7 +982,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-18T09:41:47.562591+00:00",
+  "generated_at": "2026-07-18T11:16:48.195247+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -1014,7 +1048,7 @@
       "required": false,
       "semantic_role": "research_decision_authority",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/independent_closure_decisions.json",
         "evidence_sha256": "FE4A1D1306DB3B3FE13B3EAC795B03AFBB5F01FC1D3A7CE1D4B8AB216384B983",
         "level": "STATIC_VERIFIED",
@@ -1146,7 +1180,7 @@
       "required": false,
       "semantic_role": "historical_instrument_diagnosis",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "reports/CRYPTO_LATEST_EVIDENCE_INDEPENDENT_AUDIT.md",
         "evidence_sha256": "50FD9DA3F51E9C7818E90DAA98EE6ED419797D8E4892B3CEE98E539156E47F53",
         "level": "STATIC_VERIFIED",
@@ -1277,7 +1311,7 @@
       "required": false,
       "semantic_role": "development_arena",
       "validation": {
-        "checked_at": "2026-07-18T07:52:05.020736+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_frontier_research_v2_20260713/architecture_decision.json",
         "evidence_sha256": "9940FCA2C8607A3991DF4EF75ABADCF51C25812F034E42EBF5396D8B5EA0E2D1",
         "level": "STATIC_VERIFIED",
@@ -1343,7 +1377,7 @@
       "required": false,
       "semantic_role": "large_experiment_admission",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/data_adequacy_gate.json",
         "evidence_sha256": "51EAEFBA3A76ED869D07FEC391116F4E159BA949E852BBC693C6040742A49B61",
         "level": "STATIC_VERIFIED",
@@ -1480,7 +1514,7 @@
       "required": false,
       "semantic_role": "train_surface_authority",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
         "evidence_sha256": "08942FE05F517245E4AC2B9FEABA2E4356A8CF352934390BFF21955062711718",
         "level": "STATIC_VERIFIED",
@@ -2569,7 +2603,7 @@
       "required": false,
       "semantic_role": "experimental_broad_compositional_qualification",
       "validation": {
-        "checked_at": "2026-07-18T09:23:35.292228+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_CURRENT_GRAMMAR_EXPRESSIVITY_AUDIT.json",
         "evidence_sha256": "B8EA6C50B0D65482812791EC3731E08B0609A4E9C14858C1B8087E2125E40FD1",
         "level": "STATIC_VERIFIED",
@@ -2711,7 +2745,7 @@
       "required": false,
       "semantic_role": "experimental_18m_compositional_search_evidence",
       "validation": {
-        "checked_at": "2026-07-18T09:23:35.292228+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
         "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
         "level": "PARTIAL",
@@ -2840,7 +2874,7 @@
       "required": false,
       "semantic_role": "localized_mechanism_evidence_qualification",
       "validation": {
-        "checked_at": "2026-07-18T09:23:35.292228+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
         "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
         "level": "STATIC_VERIFIED",
@@ -3015,7 +3049,7 @@
       "required": false,
       "semantic_role": "capability_instrument_execution",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_INSTRUMENT_CAPABILITY_QUALIFICATION.json",
         "evidence_sha256": "F47457BD0E4FABE8A9D579CAE4E53C4B095A0432E72A25A1A93E18EC4E0CB35C",
         "level": "STATIC_VERIFIED",
@@ -3082,7 +3116,7 @@
       "required": false,
       "semantic_role": "legacy_proposal_parity_source",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv",
         "evidence_sha256": "C80825E15DD740F1CE0CE1E41C76466358795F95F462E75D23A42E220D8F94B0",
         "level": "STATIC_VERIFIED",
@@ -3414,7 +3448,7 @@
       "required": false,
       "semantic_role": "bounded_real_data_lazy_search",
       "validation": {
-        "checked_at": "2026-07-17T18:36:56.219627+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "config/crypto_real_data_instrument_canary_v1.json",
         "evidence_sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724",
         "level": "PARTIAL",
@@ -3544,7 +3578,7 @@
       "required": false,
       "semantic_role": "experimental_non_formal_cem_ab",
       "validation": {
-        "checked_at": "2026-07-18T09:23:35.292228+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "config/crypto_cem_diversity_ab_v1.json",
         "evidence_sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A",
         "level": "PARTIAL",
@@ -3615,7 +3649,7 @@
       "required": false,
       "semantic_role": "development_release_authority",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "config/crypto_real_data_instrument_canary_v1.json",
         "evidence_sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724",
         "level": "PARTIAL",
@@ -3710,7 +3744,7 @@
       "required": false,
       "semantic_role": "candidate_admission",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_canary/admission.py",
         "evidence_sha256": "1D87617D00557DD2863240FF00406AC5F005F3014A5D543F3C4009B375E5FEFF",
         "level": "PARTIAL",
@@ -3768,7 +3802,7 @@
         "alphafactory_crypto_instrument_canary_evaluator_rationale_1",
         "alphafactory_crypto_instrument_canary_evaluator_rationale_100",
         "alphafactory_crypto_instrument_canary_evaluator_rationale_154",
-        "alphafactory_crypto_instrument_canary_evaluator_rationale_382",
+        "alphafactory_crypto_instrument_canary_evaluator_rationale_386",
         "alphafactory_crypto_instrument_canary_evaluator_strictevaluation",
         "alphafactory_crypto_instrument_canary_evaluator_strictevaluation_to_dict",
         "alphafactory_crypto_instrument_canary_evaluator_turnover_parts",
@@ -3794,7 +3828,7 @@
       "required": false,
       "semantic_role": "mapped_cost_evaluator",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_canary/evaluator.py",
         "evidence_sha256": "83329690EC557AE5D27F748669F7DAECA504B9F3B80468868D01EB7015E0DE53",
         "level": "PARTIAL",
@@ -3885,7 +3919,7 @@
       "required": false,
       "semantic_role": "primitive_semantic_authority",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_capability/primitives.py",
         "evidence_sha256": "93EA813FA259F875CE8B221CE9BCD387FAC28AB274B4AA5C9579FBD01E6FB8F8",
         "level": "PARTIAL",
@@ -3965,10 +3999,12 @@
         "alphafactory_crypto_instrument_capability_mapping_matrix",
         "alphafactory_crypto_instrument_capability_mapping_portfolio_series",
         "alphafactory_crypto_instrument_capability_mapping_rationale_1",
-        "alphafactory_crypto_instrument_capability_mapping_rationale_118",
-        "alphafactory_crypto_instrument_capability_mapping_rationale_145",
+        "alphafactory_crypto_instrument_capability_mapping_rationale_134",
+        "alphafactory_crypto_instrument_capability_mapping_rationale_161",
+        "alphafactory_crypto_instrument_capability_mapping_rationale_410",
         "alphafactory_crypto_instrument_capability_mapping_sparse",
         "alphafactory_crypto_instrument_capability_mapping_turnover_decomposition",
+        "alphafactory_crypto_instrument_capability_mapping_validate_direct_weights",
         "tests_test_instrument_capability_primitives_mapping",
         "tests_test_instrument_capability_primitives_mapping_canonicalprimitivetests",
         "tests_test_instrument_capability_primitives_mapping_canonicalprimitivetests_test_contract_has_exact_requested_primitive_authority",
@@ -3991,7 +4027,7 @@
       "required": false,
       "semantic_role": "portfolio_mapping_authority",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_capability/mapping.py",
         "evidence_sha256": "EFB7160B46A35DE3798EF1C36ABFC86E017B16283B7E98B522259E5E3F0A2C88",
         "level": "PARTIAL",
@@ -4080,7 +4116,7 @@
       "required": false,
       "semantic_role": "adaptive_feedback_authority",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_capability/feedback.py",
         "evidence_sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0",
         "level": "PARTIAL",
@@ -4396,7 +4432,7 @@
       "required": false,
       "semantic_role": "adaptive_latent_challenger_evidence",
       "validation": {
-        "checked_at": "2026-07-18T09:23:35.292228+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md",
         "evidence_sha256": "DC2E109B222F0E9999F7498F91306845A4939D46B5B961B0E677F3A51ECB1DBC",
         "level": "STATIC_VERIFIED",
@@ -4406,6 +4442,112 @@
         "verified_at_sha": "7389a36ebb4ee62f57aeb818cf4db7157bd1ea9f"
       },
       "visible_by_default": false
+    },
+    {
+      "active_authority": false,
+      "authority": {
+        "path": "alphafactory_crypto/relational_policy.py",
+        "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
+        "sha256": "65E33CD77B841C63400778D1A240B671149D7005EFFB5A1BD1DD29915E455455",
+        "verified_sha": "9c5f2f64691013033a0edf583fe57de86cd966c0"
+      },
+      "claim_badges": [
+        "DEVELOPMENT SMOKE PASS",
+        "DYNAMIC MEMBERSHIP CONSUMED",
+        "COST PATH IDENTICAL",
+        "NO ECONOMIC CLAIM",
+        "NO OOS"
+      ],
+      "color": "#f9a825",
+      "contracts": [
+        {
+          "bypass_forbidden": false,
+          "enforced_by": "relational_policy.resolve_field_views",
+          "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
+          "id": "context_local_field_views_only",
+          "rule": "The committed 120-token contract is exposed as separate Broad 38+1 and Core3 31+5+45 views; no pooled 120-channel panel is implied or authorized",
+          "severity": "HARD",
+          "type": "AUTHORITY"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "relational_policy.run_vertical_slice_smoke",
+          "evidence_ref": "config/crypto_relational_policy_vertical_slice_v1.json",
+          "id": "relational_slice_development_boundary",
+          "rule": "The slice may run only the bounded pre-2024 development smoke; performance search, sealed reads, promotion, and cross-sprint memory remain forbidden",
+          "severity": "HARD",
+          "type": "BOUNDARY"
+        },
+        {
+          "bypass_forbidden": false,
+          "enforced_by": "",
+          "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
+          "id": "architecture_smoke_claim_scope",
+          "rule": "The smoke verifies dynamic eligibility consumption, asset permutation equivariance, previous-weight recurrence, portfolio constraints, and exact strict-evaluator cost parity; it is not matched economic or OOS evidence",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        }
+      ],
+      "critical": true,
+      "evidence": "STATIC",
+      "expires_at": "",
+      "id": "relational_direct_weight_vertical_slice",
+      "kind": "development_capability",
+      "label": "Dynamic-universe relational direct-weight policy slice",
+      "lifecycle": "EXPERIMENTAL",
+      "owner": "",
+      "paths": [
+        "alphafactory_crypto/relational_policy.py",
+        "config/crypto_relational_policy_vertical_slice_v1.json",
+        "scripts/crypto_relational_policy_vertical_slice.py",
+        "tests/test_crypto_relational_policy_vertical_slice.py"
+      ],
+      "promotion_requirements": [
+        "matched development evidence",
+        "fresh admissible data",
+        "explicit authorization"
+      ],
+      "raw_node_ids": [
+        "alphafactory_crypto_relational_policy",
+        "alphafactory_crypto_relational_policy_direct_net_utility_loss",
+        "alphafactory_crypto_relational_policy_direct_utility_paths",
+        "alphafactory_crypto_relational_policy_dynamicuniversebatch",
+        "alphafactory_crypto_relational_policy_dynamicuniversebatch_validate",
+        "alphafactory_crypto_relational_policy_load_broad_smoke_batch",
+        "alphafactory_crypto_relational_policy_normalize_with_missing",
+        "alphafactory_crypto_relational_policy_payload_sha256",
+        "alphafactory_crypto_relational_policy_rationale_1",
+        "alphafactory_crypto_relational_policy_rationale_117",
+        "alphafactory_crypto_relational_policy_rationale_248",
+        "alphafactory_crypto_relational_policy_rationale_288",
+        "alphafactory_crypto_relational_policy_rationale_50",
+        "alphafactory_crypto_relational_policy_relationalcostawarepolicy",
+        "alphafactory_crypto_relational_policy_relationalcostawarepolicy_forward",
+        "alphafactory_crypto_relational_policy_relationalcostawarepolicy_init",
+        "alphafactory_crypto_relational_policy_relationalcostawarepolicy_project",
+        "alphafactory_crypto_relational_policy_resolve_field_views",
+        "alphafactory_crypto_relational_policy_rollout_policy",
+        "alphafactory_crypto_relational_policy_run_vertical_slice_smoke",
+        "scripts_crypto_relational_policy_vertical_slice",
+        "scripts_crypto_relational_policy_vertical_slice_main",
+        "tests_test_crypto_relational_policy_vertical_slice",
+        "tests_test_crypto_relational_policy_vertical_slice_relationalpolicyverticalslicetests",
+        "tests_test_crypto_relational_policy_vertical_slice_relationalpolicyverticalslicetests_test_context_bound_field_views_are_exhaustive_without_fake_merged_panel",
+        "tests_test_crypto_relational_policy_vertical_slice_relationalpolicyverticalslicetests_test_one_step_relational_direct_weight_path_is_equivariant_and_cost_closed"
+      ],
+      "required": false,
+      "semantic_role": "relational_direct_weight_policy_challenger",
+      "validation": {
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
+        "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
+        "evidence_sha256": "71FE5D71779DD75372534CD853D68A49695F4149F4159066502F7AF6498749C6",
+        "level": "STATIC_VERIFIED",
+        "notes": [],
+        "profile": "crypto-development-research",
+        "result": "PASS",
+        "verified_at_sha": "9c5f2f64691013033a0edf583fe57de86cd966c0"
+      },
+      "visible_by_default": true
     },
     {
       "active_authority": false,
@@ -4682,7 +4824,7 @@
       "required": false,
       "semantic_role": "context_bound_feature_information_qualification",
       "validation": {
-        "checked_at": "2026-07-18T07:52:05.020736+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
         "evidence_sha256": "92BF05B0046FE258BA708871EE52ED764C61EAA61E46F0ACCDA1A7FAEE73E6FA",
         "level": "PARTIAL",
@@ -4730,7 +4872,7 @@
       "required": false,
       "semantic_role": "performance_search_boundary",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
         "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "level": "STATIC_VERIFIED",
@@ -4776,7 +4918,7 @@
       "required": false,
       "semantic_role": "new_data_integration_boundary",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
         "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "level": "STATIC_VERIFIED",
@@ -4988,7 +5130,7 @@
       "required": false,
       "semantic_role": "liquidation_source_ingress",
       "validation": {
-        "checked_at": "2026-07-18T07:52:05.020736+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": "runtime/binance_force_order_capture_activation_20260718/snapshot.json",
         "evidence_sha256": "E4B6916E3C04C384E797DC5707178B0127E743B6E255300121D61B377F364751",
         "level": "PARTIAL",
@@ -5070,7 +5212,7 @@
       "required": false,
       "semantic_role": "evaluation_access_boundary",
       "validation": {
-        "checked_at": "2026-07-18T09:41:47.562591+00:00",
+        "checked_at": "2026-07-18T11:16:48.195247+00:00",
         "evidence_ref": ".planning/STATE.md",
         "evidence_sha256": "ED3007BFE6C05AAE8FABA7F1F6E198D024DAD5109A62E69C1B861EF002B61474",
         "level": "PARTIAL",
@@ -5086,7 +5228,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "D94D34E1F522D92712A86FFD581A9AFDB9A2597EAF7BB704AD65289525B321BA"
+    "sha256": "66839C69337A41473360828C21D1CDCA93E59E9E0FADD7A3A3E41E05647D26F0"
   },
   "profile_id": null,
   "profiles": [
@@ -5117,20 +5259,20 @@
     }
   ],
   "raw": {
-    "built_at_commit": "cc6ba9e17c63681cc19478d77f310e1edf5223ce",
-    "edge_count": 33375,
-    "node_count": 17971,
+    "built_at_commit": "89c11a0684579d9080bc069d3396044d7b820789",
+    "edge_count": 33470,
+    "node_count": 18003,
     "path": ".planning/graphs/graph.json",
-    "sha256": "7C1638F21D1C226DD5629F44602B83F91D72CA34343CEFEC7310E203519D5206"
+    "sha256": "2E37269EC9053EA406B1C01FA1B755504994104203533E6382B70F3664A07959"
   },
-  "repo_head": "cc6ba9e17c63681cc19478d77f310e1edf5223ce",
+  "repo_head": "89c11a0684579d9080bc069d3396044d7b820789",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
   "strict_ready": false,
   "summary": {
-    "current_edges": 27,
-    "current_nodes": 24,
+    "current_edges": 28,
+    "current_nodes": 25,
     "errors": 0,
     "runtime_edges": 0,
     "runtime_nodes": 0,
