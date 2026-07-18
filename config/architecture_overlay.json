@@ -935,23 +935,18 @@
         "alphafactory_crypto/broad_information_arena.py",
         "config/crypto_broad_core_pack_information_arena_v1.json",
         "scripts/crypto_broad_core_pack_information_arena_v1.py",
-        "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json",
-        "reports/CRYPTO_BROAD_CORE_PACK_INFORMATION_ARENA_V1_20260718_MAPPING_REPAIR.md",
-        "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/run_manifest.json",
-        "reports/CRYPTO_BROAD_CORE_PACK_STICKY_MAPPING_V1_20260718.md",
-        "scripts/crypto_broad_prediction_scale_audit_v1.py",
-        "runtime/crypto_broad_prediction_scale_audit_v1_20260718/run_manifest.json",
-        "reports/CRYPTO_BROAD_PREDICTION_SCALE_AUDIT_V1_20260718.md"
+        "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
+        "reports/CRYPTO_BROAD_PURGED_CALIBRATED_STICKY_V1_20260718.md"
       ],
       "critical": true,
       "semantic_role": "context_bound_feature_information_qualification",
       "active_authority": false,
       "claim_badges": [
         "CONSUMPTION VERIFIED",
-        "CONDITIONAL INFORMATION VERIFIED",
-        "STICKY COST REDUCTION VERIFIED",
-        "PREDICTION SCALE RISK CONFIRMED",
-        "INCREMENT NOT QUALIFIED",
+        "PURGED CONDITIONAL INFORMATION VERIFIED",
+        "HELD-OUT CALIBRATION VERIFIED",
+        "UNPURGED EVIDENCE SUPERSEDED",
+        "ECONOMIC INCREMENT NOT ESTABLISHED",
         "NO OOS"
       ],
       "authority": {
@@ -995,34 +990,34 @@
         {
           "id": "broad_conditional_information_verified",
           "type": "EVIDENCE",
-          "rule": "In the 39-field Broad context, 13 of 29 added fields carry stable block-matched residual information over the ten-field Ridge control; marginal quantile entropy alone is not treated as an alpha selector",
+          "rule": "After purging every role by the 2h execution delay plus 4h target horizon, 12 of 29 added Broad fields retain stable block-matched residual information over the ten-field Ridge control; marginal quantile entropy remains an adequacy diagnostic rather than an alpha selector",
           "severity": "HARD",
           "enforced_by": "broad_information_arena.information_evidence",
-          "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json"
+          "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json"
         },
         {
           "id": "broad_economic_mapping_scope",
           "type": "EVIDENCE",
-          "rule": "The nondegenerate fixed 2x2 Arena has positive gross but negative 5 bps net increments; direct delta-signal and predeclared 4h causal mapping repairs also remain net-negative, which limits only these tested mappings and not all turnover-aware mechanisms",
+          "rule": "In the purged fixed Arena, full-minus-control paired net medians are negative in selection and stability, and both direct-delta and fixed 4h causal repairs remain net-negative in every arm; this limits the tested 39-field, 4h, 5 bps implementation only",
           "severity": "HARD",
           "enforced_by": "broad_information_arena.mapping_repair_decision",
-          "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json"
+          "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json"
         },
         {
           "id": "broad_sticky_mapping_scope",
           "type": "EVIDENCE",
-          "rule": "The fixed 4h-cohort sticky gate exactly reproduced all 16 prior prediction identities and materially reduced turnover, but stability was positive in only 2 of 4 matched runs; cost reduction is verified while a Broad component development increment is not",
+          "rule": "The old exact prediction identities are superseded because their roles were not purged. In the repaired run, sticky turnover reduction does not yield a matched Broad increment: matched net medians are negative in both development blocks before calibration",
           "severity": "HARD",
           "enforced_by": "broad_information_arena.turnover_aware_sticky_weights and sticky_mapping_decision",
-          "evidence_ref": "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718/run_manifest.json"
+          "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json"
         },
         {
-          "id": "broad_prediction_scale_calibration_risk",
+          "id": "broad_prediction_scale_calibration_replay",
           "type": "EVIDENCE",
-          "rule": "Across the 16 frozen surfaces, prediction amplitude nearly determines sticky acceptance and turnover but does not track net quality; threshold tuning is forbidden and any repair must estimate return scale on train-only data",
+          "rule": "A dedicated held-out development calibration role fitted eight nonnegative return-scale coefficients without threshold search. Seven arms preserve candidate weights, one Broad MLP arm is direction-degenerate and retained as a failure; calibrated support is 1 of 4 in selection and 0 of 4 in stability, so increment is not established",
           "severity": "HARD",
-          "enforced_by": "crypto_broad_prediction_scale_audit_v1",
-          "evidence_ref": "runtime/crypto_broad_prediction_scale_audit_v1_20260718/run_manifest.json"
+          "enforced_by": "broad_information_arena.fit_nonnegative_linear_return_calibration and sticky_mapping_decision",
+          "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json"
         },
         {
           "id": "consumed_pack_requires_model_admission",
@@ -1043,12 +1038,12 @@
         }
       ],
       "validation": {
-        "level": "STATIC_VERIFIED",
+        "level": "RUNTIME_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_broad_prediction_scale_audit_v1_20260718/run_manifest.json",
-        "evidence_sha256": "09383153CDA32287170BAEF220E669287E5C03681C403F95A1EF57C477D4085C",
-        "verified_at_sha": "39751d7"
+        "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
+        "evidence_sha256": "92BF05B0046FE258BA708871EE52ED764C61EAA61E46F0ACCDA1A7FAEE73E6FA",
+        "verified_at_sha": "3bd334c7e11dcb3583a0b3ebba3c577242172fef"
       },
       "promotion_requirements": [
         "context-matched data adequacy",
@@ -1133,13 +1128,20 @@
         "scripts/binance_force_order_capture.py",
         "scripts/binance_force_order_capture_snapshot.py",
         "runtime/binance_force_order_capture_activation_20260718/snapshot.json",
-        "reports/BINANCE_FORCE_ORDER_CAPTURE_ACTIVATION_20260718.md"
+        "reports/BINANCE_FORCE_ORDER_CAPTURE_ACTIVATION_20260718.md",
+        "alphafactory_crypto/bitfinex_liquidation_ingress.py",
+        "config/crypto_bitfinex_liquidation_ingress_v1.json",
+        "scripts/crypto_bitfinex_liquidation_ingress.py",
+        "runtime/crypto_bitfinex_liquidation_ingress_20260718/run_manifest.json",
+        "reports/CRYPTO_BITFINEX_LIQUIDATION_INGRESS_20260718.md"
       ],
       "critical": true,
       "semantic_role": "liquidation_source_ingress",
       "active_authority": true,
       "claim_badges": [
         "SUPPLIER QUARANTINED",
+        "BITFINEX COVERAGE UNVERIFIED",
+        "BITFINEX ADEQUACY UNDERPOWERED",
         "FORWARD RAW CAPTURE ACTIVE",
         "NO CURRENT OVERLAP",
         "NO RESEARCH ADMISSION"
@@ -1185,15 +1187,24 @@
           "enforced_by": "binance_force_order_capture and liquidation overlap gate",
           "bypass_forbidden": true,
           "evidence_ref": "runtime/binance_force_order_capture_activation_20260718/snapshot.json"
+        },
+        {
+          "id": "bitfinex_file_integrity_not_source_coverage",
+          "type": "EVIDENCE",
+          "rule": "Bitfinex monthly files and aggregates reconcile internally, but absent request/page/cursor receipts plus sparse and page-boundary-like coverage prevent a continuous-history claim; its event-study Data Adequacy is underpowered and it cannot validate Binance or CryptoHFT",
+          "severity": "HARD",
+          "enforced_by": "bitfinex_liquidation_ingress.preflight_bitfinex_release",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_bitfinex_liquidation_ingress_20260718/run_manifest.json"
         }
       ],
       "validation": {
-        "level": "STATIC_VERIFIED",
+        "level": "RUNTIME_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/binance_force_order_capture_activation_20260718/snapshot.json",
-        "evidence_sha256": "B14AF15A2ADAB216335B2B54F2065C7C1A7313C8C6BE1A6BC264325E9CC5FB57",
-        "verified_at_sha": "d3c1527"
+        "evidence_sha256": "E4B6916E3C04C384E797DC5707178B0127E743B6E255300121D61B377F364751",
+        "verified_at_sha": "949b277845a8ad4945dc14b6b75339b9eb7acbaa"
       },
       "promotion_requirements": [
         "at least 14 independent Binance forceOrder overlap dates",
@@ -1846,7 +1857,7 @@
       "relation": "admission_required",
       "lifecycle": "EXPERIMENTAL",
       "critical": true,
-      "evidence_type": "STATIC",
+      "evidence_type": "RUNTIME",
       "contract": {
         "id": "no_cross_context_adequacy_inference",
         "type": "ADMISSION",
@@ -1854,15 +1865,15 @@
         "severity": "HARD",
         "enforced_by": "data_adequacy_gate",
         "bypass_forbidden": true,
-        "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/data_adequacy.json"
+        "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/data_adequacy.json"
       },
       "validation": {
-        "level": "STATIC_VERIFIED",
+        "level": "RUNTIME_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/data_adequacy.json",
-        "evidence_sha256": "8CB7D2D93F504BA4CD1569D22C2CEB6ED3E0591504043FC247B21081B70DC62A",
-        "verified_at_sha": "edc3cda"
+        "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/data_adequacy.json",
+        "evidence_sha256": "B8DAF630F59492ABB3308D2715F988CFB73C833263A9526D2AF7AB77089B1B8F",
+        "verified_at_sha": "3bd334c7e11dcb3583a0b3ebba3c577242172fef"
       }
     },
     {
@@ -1901,19 +1912,19 @@
       "contract": {
         "id": "source_compatibility_not_research_admission",
         "type": "ADMISSION",
-        "rule": "Supplier preflight or overlap compatibility cannot admit the release to research; a paradigm-specific Data Adequacy Gate pass and explicit activation are still required",
+        "rule": "Supplier preflight, Bitfinex file integrity, or future overlap compatibility cannot admit any liquidation release to research; source-specific coverage plus a paradigm-specific Data Adequacy Gate pass and explicit activation are still required",
         "severity": "HARD",
         "enforced_by": "data_adequacy_gate",
         "bypass_forbidden": true,
-        "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json"
+        "evidence_ref": "runtime/crypto_bitfinex_liquidation_ingress_20260718/run_manifest.json"
       },
       "validation": {
-        "level": "STATIC_VERIFIED",
+        "level": "RUNTIME_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_liquidation_supplier_ingress_20260718/run_manifest.json",
-        "evidence_sha256": "3FC88E4A96DD2CDCE4A64E40B8BD0AB0237E8E5CECEA99E02D736E39D153B329",
-        "verified_at_sha": "58ff34e48cb88acc0005e741c8aaa52d3528177e"
+        "evidence_ref": "runtime/crypto_bitfinex_liquidation_ingress_20260718/run_manifest.json",
+        "evidence_sha256": "354C9110F63EE9111820D80C7D3B58951D456880684B2CF8713E36F94CB64946",
+        "verified_at_sha": "2c8086093412a70eaf3694359e7651bfe96f3ce6"
       }
     },
     {
