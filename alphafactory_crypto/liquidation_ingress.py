@@ -325,6 +325,17 @@ def _utc_timestamp(values: pd.Series) -> pd.Series:
 
 
 def normalize_events(frame: pd.DataFrame, mapping: Mapping[str, Sequence[str]]) -> pd.DataFrame:
+    if "payload" in frame.columns and frame["payload"].map(
+        lambda value: isinstance(value, Mapping)
+    ).any():
+        payload = pd.json_normalize(
+            frame["payload"].map(
+                lambda value: value if isinstance(value, Mapping) else {}
+            )
+        )
+        for column in payload.columns:
+            if column not in frame.columns:
+                frame[column] = payload[column]
     if "o" in frame.columns and frame["o"].map(lambda value: isinstance(value, Mapping)).any():
         order = pd.json_normalize(frame["o"].map(lambda value: value if isinstance(value, Mapping) else {}))
         order.columns = [f"o.{column}" for column in order.columns]

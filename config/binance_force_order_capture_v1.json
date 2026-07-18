@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "capture_id": "BINANCE_FORCE_ORDER_FORWARD_CAPTURE_V1_20260718",
+  "endpoint": "wss://fstream.binance.com/market/ws/!forceOrder@arr",
+  "stream": "!forceOrder@arr",
+  "output_root": "G:/AlphaFactory_CryptoData/raw/binance_force_order_ws_v1",
+  "state_root": ".cache/binance_force_order_capture_v1",
+  "connection": {
+    "ping_interval_seconds": 20,
+    "ping_timeout_seconds": 20,
+    "close_timeout_seconds": 10,
+    "maximum_message_bytes": 1048576,
+    "minimum_reconnect_seconds": 1,
+    "maximum_reconnect_seconds": 60
+  },
+  "durability": {
+    "state_update_every_messages": 1
+  },
+  "boundaries": {
+    "raw_capture_only": true,
+    "normalization_allowed": false,
+    "aggregation_allowed": false,
+    "automatic_stitching_allowed": false,
+    "research_input_allowed": false,
+    "economic_evaluation_allowed": false,
+    "candidate_promotion": false
+  }
+}
