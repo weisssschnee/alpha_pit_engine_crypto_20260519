@@ -4,9 +4,9 @@ Last updated: 2026-07-18 Asia/Hong_Kong
 
 ## Current phase
 
-`RELATIONAL_POLICY_STAGE0_LOCAL_COMPLETED_LAYER_ATTRIBUTION_NEXT`
+`RELATIONAL_POLICY_STAGE1_COMPLETED_CURRENT_IMPLEMENTATION_LINE_CLOSED`
 
-The executed finite-grammar search, CORE43-47 orthogonal replay, Broad mapping/calibration/sticky variants, and fixed Arm D/E implementations are closed for further tuning on their inspected surfaces. They do not close the broader residual, relational, latent-state, or portfolio-policy paradigms, and the canonical mapping authority remains active. The purged Broad replay remains the current inference for its stack: 12/29 added fields retain residual information, but stable net increment was not established. The compact Stage-0 dynamic-universe relational, previous-weight-aware, direct-weight policy path is now locally executable and cost-identical to the strict evaluator. It remains an experimental architecture capability, not economic evidence. The next increment is a reduced relational layer-attribution study, not a new search platform. Liquidation capture and source qualification continue asynchronously.
+The fixed Stage-1 attribution completed on PC2 after exact source/data/package parity. All three 12,993-parameter arms were non-degenerate, but synchronized relational representation beat temporal-only on only 1/6 seed-aggregated blocks and had an inconsistent seed direction. It beat the 336h shifted-peer control on 4/6 blocks, which shows the comparison was informative, but does not establish a stable increment over the asset-local temporal model. Stage 2 is not authorized. The temporary Stage-1 scaffold has been removed; the compact Stage-0 direct-weight slice remains an experimental reusable capability only. Liquidation capture and source qualification continue asynchronously.
 
 ## Current decisions
 
@@ -24,7 +24,10 @@ CRYPTO_FIELD_INFORMATION_V0_COMPLETED
 BROAD_PURGED_CALIBRATED_STICKY_INCREMENT_NOT_ESTABLISHED
 EXECUTED_RESIDUAL_ORTHOGONAL_VARIANTS_ARCHIVED
 DYNAMIC_UNIVERSE_RELATIONAL_COST_AWARE_POLICY_STAGE0_LOCAL_COMPLETED
-RELATIONAL_LAYER_ATTRIBUTION_CONTRACT_NEXT
+RELATIONAL_POLICY_STAGE1_LAYER_ATTRIBUTION_COMPLETED
+RELATIONAL_REPRESENTATION_INCREMENT_NOT_ESTABLISHED
+RELATIONAL_STAGE2_NOT_AUTHORIZED
+RELATIONAL_STAGE1_TEMPORARY_SCAFFOLD_EVICTED
 LIQUIDATION_SUPPLIER_INGRESS_QUALIFIED_QUARANTINED
 BINANCE_FORCE_ORDER_FORWARD_CAPTURE_ACTIVE
 NEW_PERFORMANCE_SEARCH_FROZEN
@@ -51,6 +54,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 - Broad prediction-scale audit source: `172340ac129b9f0ed79bfcbecd5126adfe662c76`; evidence commit: `39751d7`; run identity SHA256: `98493E159D5AA36A5C1BCC7E52F33D47B3C3B8E6D52FEE6BC332B288F66C7C35`.
 - Purged Broad calibration replay source: `35546635450cba974457e90c0b0a3d0257689cd4`; evidence commit: `3bd334c7e11dcb3583a0b3ebba3c577242172fef`; run identity SHA256: `154731A3608CB3FFA4765E98F8C167C7776386F6115C51DCF5265D17FCF1035B`.
 - Relational direct-weight vertical slice: initial implementation `2097fd70`; state/cost repair `dac123fb`; real dynamic-membership repair `78616e7156e6c48509a99c0afcaa75be33b7ae0c`; fail-closed smoke source `9c5f2f64691013033a0edf583fe57de86cd966c0`; field-view identity SHA256 `D48789F4BECC74536A077B2D6C092CBC23E789A7D4BBAF9BC61C825CF2592DC1`.
+- Relational Stage-1 attribution: frozen source `7421d4c0ef78f9212f692c46fa9e023438257ed2`; evidence commit `0626dd4`; scaffold-expiry commit `c8af3c3396b380f190ca323e630ae59f6b54b706`; config SHA256 `EE9C8D55ACD7492A26984D58C888BBBDF96A3F185930FC16CE294B69F2467074`; parity SHA256 `A9F34935C9BE8B103449CDFCA2F61022F49B01919F1CB50E0630862B41C91B0F`; logical data identity `93CD5FA4587BC0813B8AC3BD20051F5A664664A82BF8766A7D06C69C38728E0F`; decision SHA256 `CB7963C83C280F4E53700ABFB6F7BBDB782BC8182AF13FED89DEBB1149B8C54F`.
 - Bitfinex liquidation ingress source: `7a5dfee6a7d1097ca37b06d85f3c3882a8ece388`; evidence commit: `2c8086093412a70eaf3694359e7651bfe96f3ce6`; run identity SHA256: `DB8E56C85ABD2008ECF6F97E046ED00A2CCC571B2C517BCACA9F786CEAF5320A`.
 - Binance forceOrder forward-capture snapshot source: `3bd334c7e11dcb3583a0b3ebba3c577242172fef`; evidence commit: `949b277845a8ad4945dc14b6b75339b9eb7acbaa`; capture identity SHA256: `22411352F986AB29B4AC2D3E0F5241486D86FA940D7A5C63B5D98FD3E13CB934`.
 
@@ -68,7 +72,8 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 - Model-fit boundary: Broad probe loss decreased from 1.054226 to 1.011711. Core3 probe loss increased from 1.015130 to 1.107231, so Core3 model fit is not qualified even though all 81 channels were genuinely consumed. Neither result is a matched alpha comparison, portfolio result, economic increment, or OOS proof.
 - Broad supersession and conditional information: the earlier Arena and sticky artifacts omitted a 6h role-tail purge and are no longer current inference evidence. The repaired run fits normalization and eight fixed models only on 2023-07 through 2023-12, fits eight independent nonnegative calibration coefficients only on 2024-01 through 2024-02, and purges the final 6h from model-fit, calibration, selection, and stability. All boundary and fit-independence checks pass. Stable residual information remains in 12/29 added fields, so the information gate still passes; marginal entropy remains an adequacy diagnostic, not an alpha selector.
 - Purged Broad economic boundary: the uncalibrated full-minus-control paired net medians are `-1.02e-04` in selection and `-1.22e-04` in stability. Direct delta and the fixed 4h causal repair remain net-negative in every arm. The sticky mechanism reduces turnover, but the repaired matched Broad differences are `-5.97e-05` and `-9.02e-06`; it is cost-management behavior, not a Broad component increment.
-- Relational Stage 0: the committed selector resolves the 120-token contract into separate Broad `38+1` and Core3 `31+5+45` views without pooling contexts. One real pre-2024 smoke used 16 assets, 168h history, eight 4h-sleeve decisions, one real eligibility transition, four nonzero recurrent previous-weight coordinates, zero ineligible weight, and exact training/evaluator turnover and 5 bps cost parity. This is architecture/runtime qualification only; no matched performance, economic increment, OOS, or promotion claim is made. PC2 deployment parity moves to the launch preflight of the first authorized attribution run rather than remaining a standalone Stage-0 project.
+- Relational Stage 0: the committed selector resolves the 120-token contract into separate Broad `38+1` and Core3 `31+5+45` views without pooling contexts. One real pre-2024 smoke used 16 assets, 168h history, eight 4h-sleeve decisions, one real eligibility transition, four nonzero recurrent previous-weight coordinates, zero ineligible weight, and exact training/evaluator turnover and 5 bps cost parity. This remains architecture/runtime qualification only; the completed Stage-1 parity and attribution did not turn it into an economic, OOS, or promotion authority.
+- Relational Stage 1: local/PC2 parity passed for source, packages, logical data, 128 assets, field order, schedule, scaler, inputs, initialization, and all six arm/seed forwards; the largest absolute forward difference was `2.38e-07`. Each arm/seed completed 245 fixed optimizer steps in 508.92 seconds. B-minus-A won only 1/6 seed-aggregated blocks; seed means were `+1.04e-06` and `-3.95e-06`. B-minus-N won 4/6 blocks and both seed means were positive. All arms were non-degenerate and B/A exact-equality ratio was zero. Status: `RELATIONAL_REPRESENTATION_INCREMENT_NOT_ESTABLISHED`; this is spent-development, implementation-specific evidence with no economic, fresh, OOS, or promotion authority.
 - Held-out calibration qualification: seven of eight slopes are positive and preserve raw candidate weights; one Broad MLP slope is negative before the nonnegative constraint and is marked `CALIBRATION_FIT_DEGENERATE`. Intercepts do not change zero-net sticky weights. Degenerate arms stay in the denominator. Calibrated matched-net and delta-sleeve medians are positive only in selection, with 1/4 positive arms; stability medians are zero with 0/4 positive arms. Bias audit: `PASS`. Economic result: `BROAD_PURGED_CALIBRATED_STICKY_INCREMENT_NOT_ESTABLISHED`.
 - Liquidation supplier release: 762 Parquet partitions across 381 dates passed schema, count, primary-key, PIT-delay, and content-identity preflight. Of 500 symbols and 11,138,396 events, 464 linear USDT/USDC symbols with 11,101,810 events are eligible for source comparison. Nineteen inverse/delivery and seventeen unknown-semantics symbols remain notional-quarantined because the supplier's quantity-times-price value is not a qualified common notional for those contracts. This is ingress evidence only, not a research field admission or economic result.
 - Bitfinex liquidation ingress: all 18 declared monthly bundles and 127 files reconcile internally, with 89,273 raw rows and 81,231 silver rows. This does not prove continuous source coverage: only 135/544 requested dates contain events, 17/18 months have at least seven trailing event-free days, 15/18 raw counts are page-boundary-like, and no request/page/cursor ledger exists. The USTF0 proxy has 55,195 rows but only 7.14 effective months and 4.39 effective symbols, with no price-label bridge or turnover observations. Status: `FILE_INTEGRITY_QUALIFIED_SOURCE_COVERAGE_UNVERIFIED` plus `DATA_ADEQUACY_UNDERPOWERED`; it cannot validate Binance/CryptoHFT or enter research.
@@ -76,47 +81,24 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 
 ## Closed lines and reusable capability
 
-The implemented residual/orthogonal variants and current signal-to-portfolio primitives are inventoried in `reports/CRYPTO_BRANCH_EVIDENCE_MAP.md`. The purged Broad replay owns current inference for its stack; historical CORE43-47/A7H0 remains reference-only under its recorded contracts. CURRENT marks the Broad 6M, observed-archive 18M, localized-mechanism, CEM diversity, and explicit/latent branches `DEPRECATED` without deleting their evidence. Generic residual packets, transfer probes, or label oracles must not become standalone projects; implement only the subset needed by a new challenger's matched controls.
+The implemented residual/orthogonal variants and current signal-to-portfolio primitives are inventoried in `reports/CRYPTO_BRANCH_EVIDENCE_MAP.md`. The purged Broad replay owns current inference for its stack; historical CORE43-47/A7H0 remains reference-only under its recorded contracts. CURRENT marks the Broad 6M, observed-archive 18M, localized-mechanism, CEM diversity, and explicit/latent branches `DEPRECATED` without deleting their evidence. The current synchronized-relational forecast implementation is also closed for rescue tuning after its matched Stage-1 negative; the Stage-0 direct-weight slice remains only as reusable architecture. Generic residual packets, transfer probes, or label oracles must not become standalone projects.
 
 ## Active execution plan
 
-1. Treat Stage 0 as a completed local architecture slice and keep it `EXPERIMENTAL`; tests or smoke results do not make it an accepted economic authority.
-2. Prepare one small frozen Stage-1 config for exactly three matched representations (`temporal-only`, `relational`, `time-shifted relational null`) and two seeds. Do not build a generic searcher, checkpoint service, or experiment database.
-3. Make one PC2 single-batch source/data/package parity check part of Stage-1 launch. If parity fails, stop before training; do not turn parity into a separate workstream.
-4. Stop after Stage 1 unless the relational arm is non-degenerate and beats both temporal-only and shifted-null controls on the predeclared development blocks. A failed causal link ends the line without budget expansion.
+1. Keep the Stage-1 decision closed: no width, attention, seed, horizon, field, or learning-rate rescue and no B/C/D/D0 Stage 2.
+2. Keep Stage 0 `EXPERIMENTAL` as a reusable direct-weight/cost-path capability; it is not an economic authority.
+3. Reuse the already packaged Broad `38+1` and Core3 `31+5+45` views as separate typed search surfaces. Do not create a pooled 120-channel panel or another registry.
+4. The next task may prepare one compact typed-search budget manifest and one short compile/reachability audit over the existing generator. It must expire when the next large-search contract is accepted or rejected; it may not become a new control plane.
 5. Keep CryptoHFT and Bitfinex quarantined, Binance capture raw-only, and challenge, recent, May stress, forward, promotion, and cross-sprint memory closed.
 
-No market training or large experiment is authorized merely by this plan. The immediate action is contract preparation only.
+No performance search or large experiment is authorized merely by this plan.
 
-## Proposed future large-scale search envelope
+## Candidate next-stage search preparation
 
-This section is a non-authorizing design and budget ceiling, not a frozen experiment contract, proposal queue, or permission to run Stages 1-4. Any later execution requires a separate committed config with exact steps/epochs, sample and batch caps, checkpoint sharing, job accounting, data identity, and explicit authorization under the then-current boundaries.
-
-The candidate matched study is:
-
-```text
-A  per-asset temporal forecast + current rank mapper
-B  relational forecast + current rank mapper
-C  relational direct weights + DeepDow-style cost-blind objective
-D  relational previous-weight policy + 5 bps cost-aware objective
-```
-
-With an otherwise matched temporal backend, loss, parameter scale, and training budget, `A -> B` identifies cross-asset relational information. `B -> C` compares the forecast-plus-rank pipeline with a direct-weight pipeline; it does not isolate the mapper alone. `C -> D` compares a cost-blind direct-weight policy with a combined previous-weight/action/cost-aware policy; on final challengers, add `D0`, identical to D but with zero training-cost coefficient, so `D0 -> D` isolates the training-cost term. C is a new internal matched cost-blind ablation. Historical DeepDow is an external native reference for direct-weight, cost-blind training semantics, not a matched A/B/C/D control.
-
-| Stage | Frozen work | Admission / stop rule | PC2 hard cap |
-|---|---|---|---:|
-| 0 | Local vertical slice | Completed: constraints, dynamic membership, recurrent state, and cost identities pass | complete |
-| 1 | `temporal-only`, `relational`, and `time-shifted relational null`, each at two seeds; one fixed 168h/width-32 backend | Relational must be non-degenerate and beat both controls on at least 4/6 predeclared development blocks; otherwise stop | 6 machine-hours |
-| 2 | One admitted encoder with matched `B/C/D/D0` policy semantics at two seeds | Run only after Stage 1 passes; require directionally consistent matched deltas and no constraint/mapping collapse | 6 machine-hours |
-| Closure | One compact comparison pack and one decision note | Stop at the first failed causal link; no budget expansion | 2 machine-hours |
-
-The reduced planning ceiling is 14 PC2 machine-hours inclusive of parity, controls, failures, and retries. Local recompute is capped at 2 hours, peak memory at 12 GB, and retained artifacts at 3 GB. The eventual run may add only one frozen config, one compact task ledger, admitted checkpoints, one comparison pack, and one decision note. If the ceiling cannot support matched fidelity, stop rather than reduce controls or grow infrastructure. PC2 performs detached fixed jobs; the local machine owns strict evaluation, decisions, Git, and closure.
-
-Before each horizon/cadence is admitted, it must pass its own label-support, independent-block, turnover-observation, and horizon-tail-purge preflight. Stages 1-3 may use only the existing observed-archive Broad surface for engineering and layer attribution. They cannot establish fresh economic confirmation because its historical development blocks have been repeatedly inspected. Stage 4 therefore requires a new unspent development block or explicit authorization of an equivalent preregistered surface; it cannot be manufactured by renaming or resplitting existing dates and cannot automatically use recent, forward, May stress, or Binance capture. It still does not open OOS, forward, challenge, recent, May stress, or promotion.
+The next useful increment is generator/search enablement, not another relational model rescue. Reuse the existing Field Information V0 contracts and loaders, then measure whether the current generator can compile diverse candidates across context, field family, operator family, and expression depth. The smallest useful preparation is one typed budget table plus a compile-only stratified sample; no market score, HPO, new database, checkpoint service, or new Graph node is needed. If coverage is already adequate, delete the temporary audit code and freeze the next development-search contract. If coverage is not adequate, patch only the missing generator route and repeat the same short audit once. A later performance run still requires an explicit frozen budget and remains development-only under the current sealed boundaries.
 
 ## Blockers
 
-- The local relational/direct-weight path is executable, but it has no matched relational-versus-temporal development evidence and no PC2 deployment parity yet.
 - The observed-archive surface is not survivorship-complete, and its selection/stability blocks are spent; they can support engineering attribution but not fresh confirmation.
 - Historical aggTrades coverage remains narrower than the observed-archive surface; the qualified Core3 slice has 3 assets, 4,368 hours, and 13,068 eligible observations.
 - Qlib and DeepDow remain data-underpowered; neither supplies a clean economic negative for its full external paradigm.
@@ -148,4 +130,4 @@ No status code overrides observed runtime or source facts.
 
 ## Next action
 
-Prepare and review the reduced Stage-1 `temporal-only / relational / shifted-null` frozen contract. Do not launch training until its one-batch PC2 parity preflight passes. Continue the liquidation data line independently and do not open sealed roles, search expansion, or promotion.
+Prepare one small, expiring typed-search coverage contract against the existing Broad and Core3 field packs, then run only its compile/reachability audit. Do not run performance search, reopen the relational Stage-1 line, execute Stage 2, or open sealed roles. Continue the liquidation data line independently.

@@ -934,14 +934,15 @@
         "DEVELOPMENT SMOKE PASS",
         "DYNAMIC MEMBERSHIP CONSUMED",
         "COST PATH IDENTICAL",
+        "STAGE1 MATCHED NEGATIVE",
         "NO ECONOMIC CLAIM",
         "NO OOS"
       ],
       "authority": {
         "path": "alphafactory_crypto/relational_policy.py",
         "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
-        "verified_sha": "9c5f2f64691013033a0edf583fe57de86cd966c0",
-        "sha256": "65E33CD77B841C63400778D1A240B671149D7005EFFB5A1BD1DD29915E455455"
+        "verified_sha": "c8af3c3396b380f190ca323e630ae59f6b54b706",
+        "sha256": "1CFC3DFB721361DAE675E11733A94EB5F2F8CEE76935E0721C76CEA8181C0856"
       },
       "contracts": [
         {
@@ -964,9 +965,9 @@
         {
           "id": "architecture_smoke_claim_scope",
           "type": "EVIDENCE",
-          "rule": "The smoke verifies dynamic eligibility consumption, asset permutation equivariance, previous-weight recurrence, portfolio constraints, and exact strict-evaluator cost parity; it is not matched economic or OOS evidence",
+          "rule": "Stage 0 verifies dynamic eligibility, recurrence, constraints, and strict-evaluator cost parity; the separate non-degenerate Stage-1 attribution did not establish synchronized-relational increment over temporal-only. Neither result is economic or OOS evidence",
           "severity": "HARD",
-          "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py"
+          "evidence_ref": "runtime/crypto_relational_policy_stage1_20260718/decision.json"
         }
       ],
       "validation": {
@@ -975,7 +976,16 @@
         "profile": "crypto-development-research",
         "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
         "evidence_sha256": "71FE5D71779DD75372534CD853D68A49695F4149F4159066502F7AF6498749C6",
-        "verified_at_sha": "9c5f2f64691013033a0edf583fe57de86cd966c0"
+        "verified_at_sha": "c8af3c3396b380f190ca323e630ae59f6b54b706"
+      },
+      "research_evidence": {
+        "status": "RELATIONAL_REPRESENTATION_INCREMENT_NOT_ESTABLISHED",
+        "scope": "SPENT_DEVELOPMENT_IMPLEMENTATION_SPECIFIC",
+        "evidence_ref": "runtime/crypto_relational_policy_stage1_20260718/decision.json",
+        "evidence_sha256": "CB7963C83C280F4E53700ABFB6F7BBDB782BC8182AF13FED89DEBB1149B8C54F",
+        "runtime_source_sha": "7421d4c0ef78f9212f692c46fa9e023438257ed2",
+        "temporary_scaffold": "EVICTED_AT_STAGE1_DECISION_CLOSURE",
+        "stage2_authorized": false
       },
       "promotion_requirements": [
         "matched development evidence",
