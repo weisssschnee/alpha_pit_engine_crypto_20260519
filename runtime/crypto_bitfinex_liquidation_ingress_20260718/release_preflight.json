@@ -1,0 +1,416 @@
+{
+  "automatic_stitching_allowed": false,
+  "binance_reference_allowed": false,
+  "boundaries": {
+    "automatic_stitching_allowed": false,
+    "binance_reference_allowed": false,
+    "candidate_promotion": false,
+    "challenge_read": false,
+    "cross_sprint_adaptive_memory": false,
+    "cryptohft_coverage_validation_allowed": false,
+    "data_role": "INDEPENDENT_BITFINEX_INGRESS_ONLY",
+    "economic_evaluation_allowed": false,
+    "forward_research_read": false,
+    "may_stress_research_read": false,
+    "new_performance_search": false,
+    "recent_research_read": false,
+    "research_input_allowed": false
+  },
+  "bundle_sha256": "750016FF02F26C161F24C510549FEFC57CD803E1C9F4A8AB1279BD094E4762ED",
+  "contract_classification": [
+    {
+      "common_usd_notional_comparable": false,
+      "contract_class": "LEGACY_OR_UNKNOWN_SYMBOL_QUARANTINED",
+      "event_study_eligible_proxy": false,
+      "raw_quantity_times_price": 86411739.10603538,
+      "rows": 4132,
+      "symbols": 55
+    },
+    {
+      "common_usd_notional_comparable": false,
+      "contract_class": "NON_UST_DERIVATIVE_QUOTE_QUARANTINED",
+      "event_study_eligible_proxy": false,
+      "raw_quantity_times_price": 2732665.6386687662,
+      "rows": 633,
+      "symbols": 26
+    },
+    {
+      "common_usd_notional_comparable": false,
+      "contract_class": "TEST_SYMBOL_QUARANTINED",
+      "event_study_eligible_proxy": false,
+      "raw_quantity_times_price": 974313833159.4435,
+      "rows": 21271,
+      "symbols": 20
+    },
+    {
+      "common_usd_notional_comparable": false,
+      "contract_class": "USTF0_QUOTE_PROXY",
+      "event_study_eligible_proxy": true,
+      "raw_quantity_times_price": 220867979562.7981,
+      "rows": 55195,
+      "symbols": 68
+    }
+  ],
+  "cryptohft_coverage_validation_allowed": false,
+  "data_adequacy": {
+    "checks": {
+      "active_event_dates": {
+        "minimum": 120,
+        "observed": 135,
+        "pass": true
+      },
+      "effective_cross_sectional_symbols": {
+        "minimum": 10.0,
+        "observed": 4.3948697192264445,
+        "pass": false
+      },
+      "effective_independent_months": {
+        "minimum": 12.0,
+        "observed": 7.140609903675549,
+        "pass": false
+      },
+      "eligible_events": {
+        "minimum": 10000,
+        "observed": 55195,
+        "pass": true
+      },
+      "eligible_symbols": {
+        "minimum": 20,
+        "observed": 68,
+        "pass": true
+      },
+      "price_label_match_ratio": {
+        "minimum": 0.8,
+        "observed": null,
+        "pass": false,
+        "reason": "No price/label bridge is included in this ingress package."
+      },
+      "source_interval_completeness": {
+        "minimum": true,
+        "observed": false,
+        "pass": false
+      },
+      "turnover_observations": {
+        "minimum": 100,
+        "observed": null,
+        "pass": false,
+        "reason": "No portfolio mapping is authorized by ingress preflight."
+      }
+    },
+    "interpretation": "Event rows are numerous, but interval completeness, label support, turnover observations, and concentration-adjusted independence must pass before a large event experiment.",
+    "status": "DATA_ADEQUACY_UNDERPOWERED"
+  },
+  "failures": [],
+  "file_count": 127,
+  "internal_file_and_aggregation_checks_pass": true,
+  "month_diagnostics": [
+    {
+      "active_dates": 3,
+      "first_event": "2024-01-01T03:43:36.461000+00:00",
+      "last_event": "2024-01-03T12:01:40.563000+00:00",
+      "month": "2024-01",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 999,
+      "requested_end_exclusive": "2024-02-01T00:00:00+00:00",
+      "silver_rows": 747,
+      "tail_without_events_days": 28.498836076388887
+    },
+    {
+      "active_dates": 6,
+      "first_event": "2024-02-01T00:36:10.062000+00:00",
+      "last_event": "2024-02-06T10:45:19.040000+00:00",
+      "month": "2024-02",
+      "page_boundary_like_raw_count": false,
+      "raw_rows": 997,
+      "requested_end_exclusive": "2024-03-01T00:00:00+00:00",
+      "silver_rows": 818,
+      "tail_without_events_days": 23.55186296296296
+    },
+    {
+      "active_dates": 3,
+      "first_event": "2024-03-01T00:59:54.458000+00:00",
+      "last_event": "2024-03-03T07:27:53.624000+00:00",
+      "month": "2024-03",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 999,
+      "requested_end_exclusive": "2024-04-01T00:00:00+00:00",
+      "silver_rows": 806,
+      "tail_without_events_days": 28.68896268518519
+    },
+    {
+      "active_dates": 12,
+      "first_event": "2024-04-01T00:04:18.675000+00:00",
+      "last_event": "2024-04-12T18:33:35.682000+00:00",
+      "month": "2024-04",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 15999,
+      "requested_end_exclusive": "2024-05-01T00:00:00+00:00",
+      "silver_rows": 14559,
+      "tail_without_events_days": 18.22667034722222
+    },
+    {
+      "active_dates": 2,
+      "first_event": "2024-05-01T02:09:38.935000+00:00",
+      "last_event": "2024-05-02T18:49:35.305000+00:00",
+      "month": "2024-05",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 1499,
+      "requested_end_exclusive": "2024-06-01T00:00:00+00:00",
+      "silver_rows": 1298,
+      "tail_without_events_days": 29.215563599537035
+    },
+    {
+      "active_dates": 16,
+      "first_event": "2024-06-01T04:15:26.482000+00:00",
+      "last_event": "2024-06-16T00:28:34.581000+00:00",
+      "month": "2024-06",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 14499,
+      "requested_end_exclusive": "2024-07-01T00:00:00+00:00",
+      "silver_rows": 13618,
+      "tail_without_events_days": 14.980155312499999
+    },
+    {
+      "active_dates": 3,
+      "first_event": "2024-07-01T00:38:20.618000+00:00",
+      "last_event": "2024-07-03T19:04:29.343000+00:00",
+      "month": "2024-07",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 999,
+      "requested_end_exclusive": "2024-08-01T00:00:00+00:00",
+      "silver_rows": 851,
+      "tail_without_events_days": 28.2052159375
+    },
+    {
+      "active_dates": 1,
+      "first_event": "2024-08-01T00:26:27.364000+00:00",
+      "last_event": "2024-08-01T19:04:37.151000+00:00",
+      "month": "2024-08",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 1999,
+      "requested_end_exclusive": "2024-09-01T00:00:00+00:00",
+      "silver_rows": 1824,
+      "tail_without_events_days": 30.205125567129627
+    },
+    {
+      "active_dates": 10,
+      "first_event": "2024-09-01T02:21:26.420000+00:00",
+      "last_event": "2024-09-10T14:11:20.182000+00:00",
+      "month": "2024-09",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 1999,
+      "requested_end_exclusive": "2024-10-01T00:00:00+00:00",
+      "silver_rows": 1410,
+      "tail_without_events_days": 20.408794189814813
+    },
+    {
+      "active_dates": 31,
+      "first_event": "2024-10-01T01:13:18.282000+00:00",
+      "last_event": "2024-10-31T20:59:11.362000+00:00",
+      "month": "2024-10",
+      "page_boundary_like_raw_count": false,
+      "raw_rows": 25794,
+      "requested_end_exclusive": "2024-11-01T00:00:00+00:00",
+      "silver_rows": 24357,
+      "tail_without_events_days": 0.1255629398148148
+    },
+    {
+      "active_dates": 2,
+      "first_event": "2024-11-01T01:21:27.687000+00:00",
+      "last_event": "2024-11-02T18:23:16.822000+00:00",
+      "month": "2024-11",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 499,
+      "requested_end_exclusive": "2024-12-01T00:00:00+00:00",
+      "silver_rows": 449,
+      "tail_without_events_days": 28.2338330787037
+    },
+    {
+      "active_dates": 2,
+      "first_event": "2024-12-01T00:37:13.364000+00:00",
+      "last_event": "2024-12-02T02:18:20.451000+00:00",
+      "month": "2024-12",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 1499,
+      "requested_end_exclusive": "2025-01-01T00:00:00+00:00",
+      "silver_rows": 1356,
+      "tail_without_events_days": 29.90392996527778
+    },
+    {
+      "active_dates": 9,
+      "first_event": "2025-01-01T01:17:46.663000+00:00",
+      "last_event": "2025-01-09T13:32:15.344000+00:00",
+      "month": "2025-01",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 1499,
+      "requested_end_exclusive": "2025-02-01T00:00:00+00:00",
+      "silver_rows": 1069,
+      "tail_without_events_days": 22.435933518518517
+    },
+    {
+      "active_dates": 2,
+      "first_event": "2025-02-01T00:46:34.846000+00:00",
+      "last_event": "2025-02-02T11:46:21.970000+00:00",
+      "month": "2025-02",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 1499,
+      "requested_end_exclusive": "2025-03-01T00:00:00+00:00",
+      "silver_rows": 1385,
+      "tail_without_events_days": 26.50946793981481
+    },
+    {
+      "active_dates": 4,
+      "first_event": "2025-03-01T00:00:28.971000+00:00",
+      "last_event": "2025-03-04T01:44:37.924000+00:00",
+      "month": "2025-03",
+      "page_boundary_like_raw_count": false,
+      "raw_rows": 1997,
+      "requested_end_exclusive": "2025-04-01T00:00:00+00:00",
+      "silver_rows": 1563,
+      "tail_without_events_days": 27.92733884259259
+    },
+    {
+      "active_dates": 6,
+      "first_event": "2025-04-01T00:55:58.571000+00:00",
+      "last_event": "2025-04-06T17:30:27.936000+00:00",
+      "month": "2025-04",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 9499,
+      "requested_end_exclusive": "2025-05-01T00:00:00+00:00",
+      "silver_rows": 9156,
+      "tail_without_events_days": 24.27051
+    },
+    {
+      "active_dates": 10,
+      "first_event": "2025-05-01T01:19:16.949000+00:00",
+      "last_event": "2025-05-10T03:44:52.250000+00:00",
+      "month": "2025-05",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 1999,
+      "requested_end_exclusive": "2025-06-01T00:00:00+00:00",
+      "silver_rows": 1538,
+      "tail_without_events_days": 21.843839699074074
+    },
+    {
+      "active_dates": 13,
+      "first_event": "2025-06-01T01:35:52.842000+00:00",
+      "last_event": "2025-06-13T00:12:26.096000+00:00",
+      "month": "2025-06",
+      "page_boundary_like_raw_count": true,
+      "raw_rows": 4999,
+      "requested_end_exclusive": "2025-06-28T00:00:00+00:00",
+      "silver_rows": 4427,
+      "tail_without_events_days": 14.991364629629631
+    }
+  ],
+  "observed": {
+    "active_date_ratio": 0.24816176470588236,
+    "active_event_dates": 135,
+    "eligible_active_dates": 135,
+    "eligible_effective_dates": 16.337221269432874,
+    "eligible_effective_months": 7.140609903675549,
+    "eligible_effective_symbols": 4.3948697192264445,
+    "eligible_large_event_counts": {
+      "10000": 44604,
+      "100000": 33284,
+      "1000000": 22366
+    },
+    "eligible_median_symbols_per_active_date": 12.0,
+    "eligible_top_symbol_event_share": 0.40626868375758673,
+    "eligible_ustf0_rows": 55195,
+    "eligible_ustf0_symbols": 68,
+    "first_event": "2024-01-01T03:43:36.461000+00:00",
+    "last_event": "2025-06-13T00:12:26.096000+00:00",
+    "raw_rows": 89273,
+    "silver_rows": 81231,
+    "symbols": 169
+  },
+  "publication_time_available": false,
+  "release_id": "BITFINEX_LIQUIDATIONS_20240101_20250627",
+  "release_identity_sha256": "93E4D3FBA8054B6007E916CC1AE313A6F2A2E004E66AA4E28B3C44AA1414B72C",
+  "release_root": "G:/AlphaFactory_CryptoData/external/bitfinex_liquidations_20240101_20250627",
+  "requested_interval": {
+    "calendar_days": 544,
+    "end": "2025-06-27",
+    "months": 18,
+    "start": "2024-01-01"
+  },
+  "research_admitted": false,
+  "schema_version": 1,
+  "schemas": {
+    "gold": {
+      "15min": [
+        "venue",
+        "symbol",
+        "timestamp",
+        "liquidation_count",
+        "liquidation_notional",
+        "max_liquidation_notional",
+        "long_liquidation_notional",
+        "short_liquidation_notional",
+        "liquidation_imbalance",
+        "feature_available_time",
+        "execution_time_min"
+      ],
+      "1h": [
+        "venue",
+        "symbol",
+        "timestamp",
+        "liquidation_count",
+        "liquidation_notional",
+        "max_liquidation_notional",
+        "long_liquidation_notional",
+        "short_liquidation_notional",
+        "liquidation_imbalance",
+        "feature_available_time",
+        "execution_time_min"
+      ],
+      "1min": [
+        "venue",
+        "symbol",
+        "timestamp",
+        "liquidation_count",
+        "liquidation_notional",
+        "max_liquidation_notional",
+        "long_liquidation_notional",
+        "short_liquidation_notional",
+        "liquidation_imbalance",
+        "feature_available_time",
+        "execution_time_min"
+      ],
+      "5min": [
+        "venue",
+        "symbol",
+        "timestamp",
+        "liquidation_count",
+        "liquidation_notional",
+        "max_liquidation_notional",
+        "long_liquidation_notional",
+        "short_liquidation_notional",
+        "liquidation_imbalance",
+        "feature_available_time",
+        "execution_time_min"
+      ]
+    },
+    "silver": [
+      "timestamp",
+      "venue",
+      "symbol",
+      "side",
+      "quantity",
+      "price",
+      "notional",
+      "position_id",
+      "is_match",
+      "is_market_sold",
+      "source_observable_time"
+    ]
+  },
+  "source_interval_completeness_verified": false,
+  "status": "FILE_INTEGRITY_QUALIFIED_SOURCE_COVERAGE_UNVERIFIED",
+  "warnings": [
+    "NON_UST_AND_LEGACY_NOTIONAL_QUARANTINED",
+    "PUBLICATION_TIME_UNAVAILABLE_EVENT_TIME_ONLY",
+    "SOURCE_INTERVAL_COMPLETENESS_UNVERIFIED"
+  ]
+}

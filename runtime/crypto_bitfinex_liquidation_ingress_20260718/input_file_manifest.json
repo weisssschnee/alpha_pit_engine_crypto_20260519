@@ -1,0 +1,766 @@
+{
+  "records": [
+    {
+      "path": "gold/15min/month=2024-01/part.parquet",
+      "rows": 132,
+      "sha256": "A1AEE01EBE28DE4CEA2FA574714991B8B04862F10F705A30B8E9B1D219C492D3",
+      "size_bytes": 13703
+    },
+    {
+      "path": "gold/15min/month=2024-02/part.parquet",
+      "rows": 146,
+      "sha256": "F7367F9A12FCE860264FFEB2C0EFC43D308F298DA4986D7F81D531C667FECE04",
+      "size_bytes": 15023
+    },
+    {
+      "path": "gold/15min/month=2024-03/part.parquet",
+      "rows": 114,
+      "sha256": "C34797FE6B56D2E47A996690C90F2AB00575EE8BC0014D7FABFEEB7B406320AB",
+      "size_bytes": 13509
+    },
+    {
+      "path": "gold/15min/month=2024-04/part.parquet",
+      "rows": 800,
+      "sha256": "BFF26B3FECDFA5A6277DB17446913FEC1B2D19FFD832B56BDBF9FFB195751D2F",
+      "size_bytes": 40466
+    },
+    {
+      "path": "gold/15min/month=2024-05/part.parquet",
+      "rows": 87,
+      "sha256": "C6102A7AA00A6EFF2E25C63B6E4B274CC28C84C26E287D4D86694C93F62DF89E",
+      "size_bytes": 11570
+    },
+    {
+      "path": "gold/15min/month=2024-06/part.parquet",
+      "rows": 451,
+      "sha256": "3B11B2DA44E03FBC7518A1FC70DF03D5E3C0E14DABE6FB09F820BB5ADBBB9ECB",
+      "size_bytes": 27861
+    },
+    {
+      "path": "gold/15min/month=2024-07/part.parquet",
+      "rows": 104,
+      "sha256": "037557A5EB854748BC8133B7915B6C8F4E08F7E96CA4A83DCD1488A66881B678",
+      "size_bytes": 12864
+    },
+    {
+      "path": "gold/15min/month=2024-08/part.parquet",
+      "rows": 109,
+      "sha256": "D047EE4617743F68E2A6288EE01495D0EDA1F938102BF0D1F0DA6A0EF213BEAC",
+      "size_bytes": 12653
+    },
+    {
+      "path": "gold/15min/month=2024-09/part.parquet",
+      "rows": 304,
+      "sha256": "AE3FD49BC2D712117F026CD9C46C27AC285ED02678915285C55A7ACFEA1BB3BD",
+      "size_bytes": 20979
+    },
+    {
+      "path": "gold/15min/month=2024-10/part.parquet",
+      "rows": 929,
+      "sha256": "0E7E06BEC690DF2765A6B77E44E062B2A1BF79103C12B50FC6540E279F65F618",
+      "size_bytes": 49243
+    },
+    {
+      "path": "gold/15min/month=2024-11/part.parquet",
+      "rows": 37,
+      "sha256": "B56ECC69943421D426D346B453EE3F5C87AC4AC8C792EB45594DEB374A7F4C80",
+      "size_bytes": 9765
+    },
+    {
+      "path": "gold/15min/month=2024-12/part.parquet",
+      "rows": 86,
+      "sha256": "95D258C964E31A0D970148A4F6D904DB94E63E5503C1790C3AD3F946467D5077",
+      "size_bytes": 11926
+    },
+    {
+      "path": "gold/15min/month=2025-01/part.parquet",
+      "rows": 337,
+      "sha256": "9A4529EAB36A3337B5558FFCEAB6BE5F8C814A870D0A4AD8AC46DBCC5E7AC3B6",
+      "size_bytes": 22359
+    },
+    {
+      "path": "gold/15min/month=2025-02/part.parquet",
+      "rows": 95,
+      "sha256": "01FDC8EAD8AE6FD547A8A35CBC5B5C22139C8ECB08BA26EF5E9614244B5AA62C",
+      "size_bytes": 11965
+    },
+    {
+      "path": "gold/15min/month=2025-03/part.parquet",
+      "rows": 246,
+      "sha256": "78C1C726ECFC6E08B7FE9E7C252978B0178965509AAFF5589B63E5C19E614F9A",
+      "size_bytes": 17636
+    },
+    {
+      "path": "gold/15min/month=2025-04/part.parquet",
+      "rows": 243,
+      "sha256": "52343818D370A9028ADF5BA4E4D3E6650813CEA1E505824F0DDFECA8C5A12969",
+      "size_bytes": 18841
+    },
+    {
+      "path": "gold/15min/month=2025-05/part.parquet",
+      "rows": 326,
+      "sha256": "7522E2BCEBB5F544F96038B055C8DBC204FE24DCE537C9C8FD0EFFA1B935A4DC",
+      "size_bytes": 22685
+    },
+    {
+      "path": "gold/15min/month=2025-06/part.parquet",
+      "rows": 402,
+      "sha256": "E5307797BA1239BA24D77481E607F791A1EC24079069E9DA4800A92436C9ECF5",
+      "size_bytes": 25770
+    },
+    {
+      "path": "gold/1h/month=2024-01/part.parquet",
+      "rows": 112,
+      "sha256": "9A437DF11684C5E24ED264FB7F29D1A430EB4C95FF96FBFFD65752A25BDC52EB",
+      "size_bytes": 12576
+    },
+    {
+      "path": "gold/1h/month=2024-02/part.parquet",
+      "rows": 135,
+      "sha256": "4EFE3BA564BB4BBB3D2F37AB75FA659FED4F0D84FE3D2513217871B38DA236D2",
+      "size_bytes": 14008
+    },
+    {
+      "path": "gold/1h/month=2024-03/part.parquet",
+      "rows": 105,
+      "sha256": "852781F20948277F9AE12DABD6F1D5BE847616F4F53F4A3E24B7781500206E49",
+      "size_bytes": 12616
+    },
+    {
+      "path": "gold/1h/month=2024-04/part.parquet",
+      "rows": 730,
+      "sha256": "FE0877493CA18BA158CC89706AFD368BEB50C3D2E5B23AB2BDF8163B2ECD90F2",
+      "size_bytes": 34940
+    },
+    {
+      "path": "gold/1h/month=2024-05/part.parquet",
+      "rows": 68,
+      "sha256": "BB6A59E2DD0180A14B32133E4659AD5C61E38F8FC8F91DDFB1D087613EE15D28",
+      "size_bytes": 10742
+    },
+    {
+      "path": "gold/1h/month=2024-06/part.parquet",
+      "rows": 397,
+      "sha256": "633D543F1FA9FB59B34CC8A9B27488539825E45BCBD78E05D449E78E7771BBD7",
+      "size_bytes": 24226
+    },
+    {
+      "path": "gold/1h/month=2024-07/part.parquet",
+      "rows": 97,
+      "sha256": "8D5308B2E31FE86B11373532807437133C18649111153E9A4675733693488170",
+      "size_bytes": 12218
+    },
+    {
+      "path": "gold/1h/month=2024-08/part.parquet",
+      "rows": 93,
+      "sha256": "A0C745615BC2810B82AA0AA13453897B0B4AC7F674210A87665B45514B0D9667",
+      "size_bytes": 11508
+    },
+    {
+      "path": "gold/1h/month=2024-09/part.parquet",
+      "rows": 272,
+      "sha256": "DB95C7C9BCAA401F9BD1F71E446591504325E6741DF7C9F6CC686FB62DB8ED43",
+      "size_bytes": 18897
+    },
+    {
+      "path": "gold/1h/month=2024-10/part.parquet",
+      "rows": 806,
+      "sha256": "8581CA18819DBF69CE47B4DB48ACF8CBD295A4E24DB9C713061A95B8A728427C",
+      "size_bytes": 41375
+    },
+    {
+      "path": "gold/1h/month=2024-11/part.parquet",
+      "rows": 35,
+      "sha256": "E0B6DEC349478957D4A0A4864C7B17C3CCB507A9718E94601F56284408995E49",
+      "size_bytes": 9532
+    },
+    {
+      "path": "gold/1h/month=2024-12/part.parquet",
+      "rows": 75,
+      "sha256": "31830CD371F08A8711DE8EDD8D052A24017AC7AD9E639916F9F2F4637649EC27",
+      "size_bytes": 11131
+    },
+    {
+      "path": "gold/1h/month=2025-01/part.parquet",
+      "rows": 302,
+      "sha256": "F0C83A656FAD911D0D1415A6E91D057A179F31FD74C033C38A205AB3657F6ED5",
+      "size_bytes": 20126
+    },
+    {
+      "path": "gold/1h/month=2025-02/part.parquet",
+      "rows": 83,
+      "sha256": "9A5AFD4D4B7D1BB066A7192B083F2DB41052814B77C655534ED4A5FFF3B3CF3F",
+      "size_bytes": 11331
+    },
+    {
+      "path": "gold/1h/month=2025-03/part.parquet",
+      "rows": 191,
+      "sha256": "889827806B644AEDFA9423FA495AAC44FF82A783EC2E1BC999D77F466A93E833",
+      "size_bytes": 15508
+    },
+    {
+      "path": "gold/1h/month=2025-04/part.parquet",
+      "rows": 208,
+      "sha256": "A37F3724FA8CC0246AC1E85DF98395C9E416E45E4FF9C8BA993855868A5679C9",
+      "size_bytes": 16504
+    },
+    {
+      "path": "gold/1h/month=2025-05/part.parquet",
+      "rows": 297,
+      "sha256": "1D62DAFFF76382A7E450B5337993C261B9ECBCBC62F89CC2F6A7A2FFFCD19535",
+      "size_bytes": 20230
+    },
+    {
+      "path": "gold/1h/month=2025-06/part.parquet",
+      "rows": 356,
+      "sha256": "DDFB016C6B524E5CDD61405ABD748AB53CB89AA9B7CEECCC3B76591263F5D418",
+      "size_bytes": 22948
+    },
+    {
+      "path": "gold/1min/month=2024-01/part.parquet",
+      "rows": 160,
+      "sha256": "B4BDA451624089953C6FD6B674752001BB9D82E492B9BF9B29CD405332BB8506",
+      "size_bytes": 15438
+    },
+    {
+      "path": "gold/1min/month=2024-02/part.parquet",
+      "rows": 155,
+      "sha256": "87C562503BD228863DB532F3673054C260D1ECE556B5AF531FF1F505ED2C5F0C",
+      "size_bytes": 16003
+    },
+    {
+      "path": "gold/1min/month=2024-03/part.parquet",
+      "rows": 131,
+      "sha256": "71F41B3E9F75ECE7AFCBDDD665618E537299DAB8BFC58D2D69688AF98A919786",
+      "size_bytes": 14697
+    },
+    {
+      "path": "gold/1min/month=2024-04/part.parquet",
+      "rows": 1254,
+      "sha256": "F2BABFA2DF47F3FF0428BBE4ADE5F3194A608F32D97CB55E85364BD7B869B482",
+      "size_bytes": 63697
+    },
+    {
+      "path": "gold/1min/month=2024-05/part.parquet",
+      "rows": 148,
+      "sha256": "47E0943FC2109479AECE6C20FFC226372AFECBC5777D54142B251F16095203BB",
+      "size_bytes": 14613
+    },
+    {
+      "path": "gold/1min/month=2024-06/part.parquet",
+      "rows": 816,
+      "sha256": "F2797E4FCE1D5E5BFFD0A79E0B48FDCF8E545584A03DBF670F430B2BC1ECD1E3",
+      "size_bytes": 45876
+    },
+    {
+      "path": "gold/1min/month=2024-07/part.parquet",
+      "rows": 110,
+      "sha256": "2070DC2FF37528815E3D6CEBA3FA5BE11F5449A4B0D9E017E40A37B058FA4C65",
+      "size_bytes": 13551
+    },
+    {
+      "path": "gold/1min/month=2024-08/part.parquet",
+      "rows": 149,
+      "sha256": "C86CCD7718FBDD8A067F26257023B2EE1B73FB8EADF0A9A75982300E874E52A8",
+      "size_bytes": 15137
+    },
+    {
+      "path": "gold/1min/month=2024-09/part.parquet",
+      "rows": 409,
+      "sha256": "0E0369CBD651F18FA3303217F1635A2FA555457C5A44CDC1711FC181F93B7E56",
+      "size_bytes": 25522
+    },
+    {
+      "path": "gold/1min/month=2024-10/part.parquet",
+      "rows": 1776,
+      "sha256": "617F0AE01DE249FFF51074E5A0328467D502784117D8BD69164D726CAD592C44",
+      "size_bytes": 94785
+    },
+    {
+      "path": "gold/1min/month=2024-11/part.parquet",
+      "rows": 41,
+      "sha256": "2E3F7AAF0D60C4D005BEEBE9C14BD7CBC78469CCDDEF9DD6A54CCCB7E16054C4",
+      "size_bytes": 10251
+    },
+    {
+      "path": "gold/1min/month=2024-12/part.parquet",
+      "rows": 115,
+      "sha256": "68A8657D737A532E7D0C4D0E8EC2FA914035191C73876AC24217DB7C639CCC99",
+      "size_bytes": 13825
+    },
+    {
+      "path": "gold/1min/month=2025-01/part.parquet",
+      "rows": 365,
+      "sha256": "4E1952DC6EEF64EB69AE0031ECFE6078E278CCB0625648CBCE92D28A7FCEB8AF",
+      "size_bytes": 25170
+    },
+    {
+      "path": "gold/1min/month=2025-02/part.parquet",
+      "rows": 112,
+      "sha256": "3A2B82583F821F5EEC67ECFAAD641269128CD5153D72A66A75BB9B152AD1CBA6",
+      "size_bytes": 13209
+    },
+    {
+      "path": "gold/1min/month=2025-03/part.parquet",
+      "rows": 328,
+      "sha256": "8101E796374EB68F54675BC373636E129EA934D91DD9B2CF1FB9BADED705F306",
+      "size_bytes": 22214
+    },
+    {
+      "path": "gold/1min/month=2025-04/part.parquet",
+      "rows": 527,
+      "sha256": "1D21CCE8DB9F341950869F047A06C4A3FA755754EB9BB9BF55EE2C5E80ECBAF0",
+      "size_bytes": 33606
+    },
+    {
+      "path": "gold/1min/month=2025-05/part.parquet",
+      "rows": 396,
+      "sha256": "3B5401BD905215C8218A9000D6A34B7B8A1813B22B3FC1C41124A39D79A03173",
+      "size_bytes": 27356
+    },
+    {
+      "path": "gold/1min/month=2025-06/part.parquet",
+      "rows": 560,
+      "sha256": "1EF4F97E6DD71E64418B076AD069072084A4B746573FAADE4A4E84927A1E8B42",
+      "size_bytes": 34845
+    },
+    {
+      "path": "gold/5min/month=2024-01/part.parquet",
+      "rows": 140,
+      "sha256": "FFF6F7F345F6D8CE17672DCB6E758852299DA8EFFD9AAC038F25563B4D00D161",
+      "size_bytes": 14270
+    },
+    {
+      "path": "gold/5min/month=2024-02/part.parquet",
+      "rows": 149,
+      "sha256": "CCED0B33AB704F0B06A756F8D4A8AC464FCF21E1B242D7472CBBE959998B769B",
+      "size_bytes": 15443
+    },
+    {
+      "path": "gold/5min/month=2024-03/part.parquet",
+      "rows": 118,
+      "sha256": "EB4CD9EF9C530ABCEFB4C25E788E66464BA2FC93DA3CDD658CDFA249F0CCCC86",
+      "size_bytes": 13896
+    },
+    {
+      "path": "gold/5min/month=2024-04/part.parquet",
+      "rows": 889,
+      "sha256": "DC5CB3B469C2A6C872942A8BD507E30C9A2B127DFD00869393CCE406EABA30F5",
+      "size_bytes": 45548
+    },
+    {
+      "path": "gold/5min/month=2024-05/part.parquet",
+      "rows": 101,
+      "sha256": "D21DF47C3E53AD1D4B6E5E320A2B2A9864538FDC90647840941446BF6A3C35F0",
+      "size_bytes": 12294
+    },
+    {
+      "path": "gold/5min/month=2024-06/part.parquet",
+      "rows": 525,
+      "sha256": "71BFBC3116F07ED1A2B0ACB35855EDD90D514255049E57A7687398A4EBB398DD",
+      "size_bytes": 31806
+    },
+    {
+      "path": "gold/5min/month=2024-07/part.parquet",
+      "rows": 104,
+      "sha256": "306A0B1E7125C747511D350C44AA737FB3AB37FD4D98BDD21CD63EC1FE0AAFEF",
+      "size_bytes": 13042
+    },
+    {
+      "path": "gold/5min/month=2024-08/part.parquet",
+      "rows": 116,
+      "sha256": "6F850E2BFA74BB98E4FA03464D27C5FDF044C24C4CCB78D784E28979B18A262F",
+      "size_bytes": 13231
+    },
+    {
+      "path": "gold/5min/month=2024-09/part.parquet",
+      "rows": 332,
+      "sha256": "B38C89D5F159F14D0215D3213F55ADC13E41C0F4C0025298FAE45AE201EC5A17",
+      "size_bytes": 22457
+    },
+    {
+      "path": "gold/5min/month=2024-10/part.parquet",
+      "rows": 1108,
+      "sha256": "4904CB6E1F51F0410FFFEA3A1FA41A7B7C0BFD0FA59C9602CFBC21C43C6E6012",
+      "size_bytes": 59244
+    },
+    {
+      "path": "gold/5min/month=2024-11/part.parquet",
+      "rows": 38,
+      "sha256": "0BDC5F28D149D4A8D61AE34D594B5997AE923EEF4AD7518D16E60A08B0479B58",
+      "size_bytes": 9886
+    },
+    {
+      "path": "gold/5min/month=2024-12/part.parquet",
+      "rows": 96,
+      "sha256": "74EA8C076532887A1A73076AF6042984F15BF33F00CA11D4A46C9F34ED8C03F9",
+      "size_bytes": 12527
+    },
+    {
+      "path": "gold/5min/month=2025-01/part.parquet",
+      "rows": 351,
+      "sha256": "8F2110956BE85B932D000113CBD5786EB36321ADE91C6301421E7A2989F22276",
+      "size_bytes": 23425
+    },
+    {
+      "path": "gold/5min/month=2025-02/part.parquet",
+      "rows": 99,
+      "sha256": "3A6607322B620D0FB25952301E8D15417F072239004302E2810CF5D8D60E19BC",
+      "size_bytes": 12303
+    },
+    {
+      "path": "gold/5min/month=2025-03/part.parquet",
+      "rows": 284,
+      "sha256": "EEC646DA0DC7952403297DFC6F0FC46243B36226FF60182089E8353E2D3E21CD",
+      "size_bytes": 19459
+    },
+    {
+      "path": "gold/5min/month=2025-04/part.parquet",
+      "rows": 287,
+      "sha256": "690E75C02A891A2804C7972007FE56897ADC8549B7A4AF6594ACF0AE3A795797",
+      "size_bytes": 21480
+    },
+    {
+      "path": "gold/5min/month=2025-05/part.parquet",
+      "rows": 348,
+      "sha256": "5D078E729940112A51215884E8501EE1C5096D12DBAB73156BFBD398FF4C8C68",
+      "size_bytes": 24224
+    },
+    {
+      "path": "gold/5min/month=2025-06/part.parquet",
+      "rows": 437,
+      "sha256": "21DCD2BD11C2793D6C5A8E1868E395C801CADFD060DFBD56C9666DC429D41168",
+      "size_bytes": 27987
+    },
+    {
+      "path": "manifests/2024-01.json",
+      "rows": null,
+      "sha256": "CE6E562FFD8FE057F3C6B1CB24FA487F6DEC68CB34F745C2E6022E49E36E8989",
+      "size_bytes": 823
+    },
+    {
+      "path": "manifests/2024-02.json",
+      "rows": null,
+      "sha256": "F8BB14599B43A98B00C26A0CF879C6882B0806DEA50B500BE9CF4C93CFDCF807",
+      "size_bytes": 823
+    },
+    {
+      "path": "manifests/2024-03.json",
+      "rows": null,
+      "sha256": "C6F696DA4D7F203521F66C1E10005B00CD1314E04BE0242BBF9FFEF2D230007F",
+      "size_bytes": 823
+    },
+    {
+      "path": "manifests/2024-04.json",
+      "rows": null,
+      "sha256": "D7E9C501BB47A0FA8D2051A7759689E5E67AA312CB59AB3C2952256C7C09825F",
+      "size_bytes": 828
+    },
+    {
+      "path": "manifests/2024-05.json",
+      "rows": null,
+      "sha256": "E98E7C106A80D8C0CE9663AD099EE1B230A630C1BAC05301250595F5A42A45D8",
+      "size_bytes": 823
+    },
+    {
+      "path": "manifests/2024-06.json",
+      "rows": null,
+      "sha256": "D4E7BC6AF5EE2159533079683FB9D1B3999C95704C3C032D99A75A54D811DC3F",
+      "size_bytes": 827
+    },
+    {
+      "path": "manifests/2024-07.json",
+      "rows": null,
+      "sha256": "921B373AD00F1778A9BC3FC32334B1BE4FDD863CCE4BC5F74B39913594E3C48C",
+      "size_bytes": 822
+    },
+    {
+      "path": "manifests/2024-08.json",
+      "rows": null,
+      "sha256": "AF7272A808D2DB8F0EECB6D0F5454E3A079B5C7DE17D8A439D1FC596577EF9C8",
+      "size_bytes": 824
+    },
+    {
+      "path": "manifests/2024-09.json",
+      "rows": null,
+      "sha256": "2CA0558963BFACFB5F8EAB1C7C8BA896690F88487F7A1158AE20EA8782B37DFB",
+      "size_bytes": 825
+    },
+    {
+      "path": "manifests/2024-10.json",
+      "rows": null,
+      "sha256": "550F869C2931E7D7E3F514582DFE44DA14697472756D92ADC3A259F720078F23",
+      "size_bytes": 829
+    },
+    {
+      "path": "manifests/2024-11.json",
+      "rows": null,
+      "sha256": "C407DFFDC06DFB90EBF1483D713AAB65DE64AA28A4EBD5C916B458B3EC97603F",
+      "size_bytes": 819
+    },
+    {
+      "path": "manifests/2024-12.json",
+      "rows": null,
+      "sha256": "CCB9745B4E612804E7A86A22146B317F7A2A22CFC04A0049052457058863ADBA",
+      "size_bytes": 822
+    },
+    {
+      "path": "manifests/2025-01.json",
+      "rows": null,
+      "sha256": "B00421418CEB098B6F6376667DE5A5096A78D875008DB5C4A439B59D86BED7AD",
+      "size_bytes": 825
+    },
+    {
+      "path": "manifests/2025-02.json",
+      "rows": null,
+      "sha256": "E95F1D558129B7C9F1E916F6280E2BE61779E26FC7389A45460A83D067BFCE49",
+      "size_bytes": 822
+    },
+    {
+      "path": "manifests/2025-03.json",
+      "rows": null,
+      "sha256": "6766A1EEEC662CFCEC09DE271C8055A8F8D71937E76D470756163BF9327874F0",
+      "size_bytes": 825
+    },
+    {
+      "path": "manifests/2025-04.json",
+      "rows": null,
+      "sha256": "D3EDD715B0F12259C5670DEF02D60D7E2C4D1FB82800BB580A71B0B22BD64142",
+      "size_bytes": 825
+    },
+    {
+      "path": "manifests/2025-05.json",
+      "rows": null,
+      "sha256": "2A2AA8D82496B23F434941F1DBB91F1DEDC86201848D8B4ED5E156321A6CD8C1",
+      "size_bytes": 825
+    },
+    {
+      "path": "manifests/2025-06.json",
+      "rows": null,
+      "sha256": "3F50764A1AA2F8D08E69F6113DA197C25A46C1E517B420BDB37BD0898FE0F800",
+      "size_bytes": 825
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-01.json.gz",
+      "rows": 999,
+      "sha256": "5AF158A6E679D8927C1127D5FDD30E9E04BDC5016DFE6DE0A66F1469E1167689",
+      "size_bytes": 17070
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-02.json.gz",
+      "rows": 997,
+      "sha256": "2814C27B4F2B377BC162EB1089E3AA0752D96A2F2CAFC2767F39DA729D2451EF",
+      "size_bytes": 15407
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-03.json.gz",
+      "rows": 999,
+      "sha256": "B8D33653AFF61A57260C01F2C019906E150F74CE5C99FE68F948D71E72C34D23",
+      "size_bytes": 14876
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-04.json.gz",
+      "rows": 15999,
+      "sha256": "BC92F5A22C0294C4FC2AE208E7938BB7D9AE8B57C4B83DB21BA11F6B69A9CB18",
+      "size_bytes": 232721
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-05.json.gz",
+      "rows": 1499,
+      "sha256": "8F2A8124389F955B09D4B48C3C1CBA75BF141903A15AFE979B16B26225F408F6",
+      "size_bytes": 23688
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-06.json.gz",
+      "rows": 14499,
+      "sha256": "E8E81A6AE47A074E146DC145A8DE10E790A6B03037F52162F4DC2866E6C959D8",
+      "size_bytes": 190358
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-07.json.gz",
+      "rows": 999,
+      "sha256": "C96DCF27681B195EE170F19931544BBB9E2217BB9CEBCF7163B1C6311F706B19",
+      "size_bytes": 15294
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-08.json.gz",
+      "rows": 1999,
+      "sha256": "3C0666E2BEA1263FC85453911BDC47462ACFF57EBCE8A6C7BF9BBD7D26559DF4",
+      "size_bytes": 28459
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-09.json.gz",
+      "rows": 1999,
+      "sha256": "00E23874BDAD6C5B7FDC234A1049549C8B38599A748EA4332DD949BA844A21DB",
+      "size_bytes": 31584
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-10.json.gz",
+      "rows": 25794,
+      "sha256": "74B7DD8837C474A08BA28EA1EC52F6DB084D29B33AEFB3EAD76E7628C49E9C7A",
+      "size_bytes": 341219
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-11.json.gz",
+      "rows": 499,
+      "sha256": "EB2B1313EAD4BDD6DE82A872E03FC9CDBC8B9A1CB18EFFC772950C9AEBC18870",
+      "size_bytes": 8066
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2024-12.json.gz",
+      "rows": 1499,
+      "sha256": "ED446271A157AA53DBEDDBEADC9DA3EBBDEABC4F4FF07E3F12B19CAEE96D2860",
+      "size_bytes": 22760
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2025-01.json.gz",
+      "rows": 1499,
+      "sha256": "416566BA8DC6D4829C4BD338FAD19B73A741275787AA9D562885D293F885EF22",
+      "size_bytes": 26071
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2025-02.json.gz",
+      "rows": 1499,
+      "sha256": "0261F5ACE42A21E1DDE8B9E822ABD43A8C37BCA16E27877ED087037D31BAD11C",
+      "size_bytes": 23831
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2025-03.json.gz",
+      "rows": 1997,
+      "sha256": "6250A06760C976F5151A96D53BC1BAF5D55B131F7E8D1746BF1EF2FD72B988EE",
+      "size_bytes": 36165
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2025-04.json.gz",
+      "rows": 9499,
+      "sha256": "34A192E5FDE46EA88A1BFC3B8CB8F38BA68E707F18185975CB919935E87567D4",
+      "size_bytes": 114029
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2025-05.json.gz",
+      "rows": 1999,
+      "sha256": "EEBD17FB7A3F01CE99D4D81E8E892233030935945E28EAB54B4A0636867782F5",
+      "size_bytes": 30656
+    },
+    {
+      "path": "raw/bitfinex_liquidations_2025-06.json.gz",
+      "rows": 4999,
+      "sha256": "3374E84C5AF3B677EE74CD67D28580A2E639815EA107FD921F10CA59A9CFEAF5",
+      "size_bytes": 67178
+    },
+    {
+      "path": "silver/month=2024-01/part.parquet",
+      "rows": 747,
+      "sha256": "53234657CB47F53E5F42BA19BF39326FDFADAA7F7EA7BF8216A30B48EF097C8A",
+      "size_bytes": 32847
+    },
+    {
+      "path": "silver/month=2024-02/part.parquet",
+      "rows": 818,
+      "sha256": "2989AE360FEB32FE32C1AF107AAE91CAF4512D3E7F6C39F50F4478C8724F71B1",
+      "size_bytes": 35405
+    },
+    {
+      "path": "silver/month=2024-03/part.parquet",
+      "rows": 806,
+      "sha256": "071ABBCBB46069CBE5949A170FC4B74F76D925F9E8406C56D4C4832B42E47043",
+      "size_bytes": 34892
+    },
+    {
+      "path": "silver/month=2024-04/part.parquet",
+      "rows": 14559,
+      "sha256": "0A8D24A8D8B93EE95D52ED93DE5BC5465E7ADC6442A98FB61E1EF070294C82AC",
+      "size_bytes": 533403
+    },
+    {
+      "path": "silver/month=2024-05/part.parquet",
+      "rows": 1298,
+      "sha256": "EB6B5C7E545330ED25D79894D1DA197E3D0D6B7D93CD5B39C7C7D69CA55A0E70",
+      "size_bytes": 52488
+    },
+    {
+      "path": "silver/month=2024-06/part.parquet",
+      "rows": 13618,
+      "sha256": "4692C00D57C141914ECB3B0F8765FB6E20C4207702696D5958ED9A968F3DD796",
+      "size_bytes": 475410
+    },
+    {
+      "path": "silver/month=2024-07/part.parquet",
+      "rows": 851,
+      "sha256": "9ADAC2D8044C64061AFA04623F455579CFC835D963A9E0345070D5B9F5D840C0",
+      "size_bytes": 36573
+    },
+    {
+      "path": "silver/month=2024-08/part.parquet",
+      "rows": 1824,
+      "sha256": "DBBAAF22FADB19D3E8A24A725173162AA103D4FF46BFE15DA3F0713078B095B6",
+      "size_bytes": 69358
+    },
+    {
+      "path": "silver/month=2024-09/part.parquet",
+      "rows": 1410,
+      "sha256": "161ACDA00E0A57028B5DCC1E7BD47E1D36268DEE3C81E36AD98F3AF5C092FE61",
+      "size_bytes": 56919
+    },
+    {
+      "path": "silver/month=2024-10/part.parquet",
+      "rows": 24357,
+      "sha256": "B6172121EEBC6B85909AA0A1F230B891D2E03B174B909E2FEAED74A9D630F466",
+      "size_bytes": 890255
+    },
+    {
+      "path": "silver/month=2024-11/part.parquet",
+      "rows": 449,
+      "sha256": "183DC4F9130B4721A7D31096DD5B379B18085DD999CD21E9484C86E1C6A8A00F",
+      "size_bytes": 23015
+    },
+    {
+      "path": "silver/month=2024-12/part.parquet",
+      "rows": 1356,
+      "sha256": "25CFC67DD7BBEB7001232B4C7334CCEB0E6D7FCC8CD9095699F7A8017D605C4B",
+      "size_bytes": 51907
+    },
+    {
+      "path": "silver/month=2025-01/part.parquet",
+      "rows": 1069,
+      "sha256": "EE4773DA839294E6591F89A341A9AE41D6A6116C3B45D2A216EC9BA42DE97551",
+      "size_bytes": 46713
+    },
+    {
+      "path": "silver/month=2025-02/part.parquet",
+      "rows": 1385,
+      "sha256": "0C2D163FF4A03FB00D594B61A3BA21B0A04237716912FFFEFA7971BEBDB6CA46",
+      "size_bytes": 55271
+    },
+    {
+      "path": "silver/month=2025-03/part.parquet",
+      "rows": 1563,
+      "sha256": "83F89766D3FF17B8FB0154CEBDC8B69E8240E4DB876115F45FD45B39E2F1AFC2",
+      "size_bytes": 62884
+    },
+    {
+      "path": "silver/month=2025-04/part.parquet",
+      "rows": 9156,
+      "sha256": "64291F22DF15F955D6DFE476BE147156D1DE1BCEBE59CF4413DC98FD47031A4B",
+      "size_bytes": 319277
+    },
+    {
+      "path": "silver/month=2025-05/part.parquet",
+      "rows": 1538,
+      "sha256": "DA16981D128A16F567F274436B920E43D8E5845B284EB2AA8E9FB3BB0B786931",
+      "size_bytes": 62272
+    },
+    {
+      "path": "silver/month=2025-06/part.parquet",
+      "rows": 4427,
+      "sha256": "79F49D067AEB2FE16A99B317966F5C4CF1B26CD4A9FE7F54E15A0DA033C8FE81",
+      "size_bytes": 162229
+    },
+    {
+      "path": "status.json",
+      "rows": null,
+      "sha256": "C7D21D23C0B5888BF5343119840951A3B197CF0079C84652813E49800909AF9A",
+      "size_bytes": 133
+    }
+  ]
+}
