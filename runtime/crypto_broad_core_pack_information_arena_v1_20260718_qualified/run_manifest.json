@@ -1,0 +1,190 @@
+{
+  "boundaries": {
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "formal_performance_search": false,
+    "hyperparameter_search": false,
+    "latest_timestamp_exclusive": "2024-07-01T00:00:00Z",
+    "sealed_reads_allowed": false
+  },
+  "command": "python scripts/crypto_broad_core_pack_information_arena_v1.py",
+  "cost_time": {
+    "actual_wall_seconds": 139.138140700059,
+    "estimated_peak_memory_gb": 4.0,
+    "estimated_wall_minutes": 45
+  },
+  "created_at": "2026-07-18T05:05:07Z",
+  "data_adequacy": {
+    "checks": {
+      "cross_sectional_assets": true,
+      "development_dates": true,
+      "field_non_null": true,
+      "field_variance": true,
+      "fields": true,
+      "history_length": true,
+      "independent_evaluation_blocks": true,
+      "label_support": true,
+      "training_samples": true,
+      "turnover_observations": true
+    },
+    "claim_scope": "BROAD_39_FIELD_FIXED_DEVELOPMENT_ARENA_ONLY",
+    "field_non_null_minimum": 0.9935245040548277,
+    "field_variance_positive": 39,
+    "split_support": {
+      "selection": {
+        "eligible_assets": 202,
+        "months": 2,
+        "target_samples": 287406,
+        "timestamps": 1464
+      },
+      "stability": {
+        "eligible_assets": 211,
+        "months": 2,
+        "target_samples": 300321,
+        "timestamps": 1464
+      },
+      "train": {
+        "eligible_assets": 189,
+        "months": 8,
+        "target_samples": 899545,
+        "timestamps": 5856
+      }
+    },
+    "status": "DATA_ADEQUACY_PASS"
+  },
+  "decision": {
+    "cannot_infer": [
+      "formal_performance_search_authority",
+      "OOS_qualification",
+      "candidate_promotion",
+      "future_or_recent_performance"
+    ],
+    "cost_killed_under_frozen_mapping": true,
+    "degenerate_pairs": 0,
+    "economic_increment_gate_pass": false,
+    "information_gate_pass": true,
+    "model_fit_degenerate_runs": [],
+    "split_increment_summary": [
+      {
+        "gross_median": 3.508598785974694e-05,
+        "net_median": -6.775419989865796e-05,
+        "positive_net_ratio": 0.0,
+        "split": "selection"
+      },
+      {
+        "gross_median": 5.171744810292315e-06,
+        "net_median": -8.648000908944823e-05,
+        "positive_net_ratio": 0.0,
+        "split": "stability"
+      }
+    ],
+    "stable_added_residual_information_ratio": 0.4482758620689655,
+    "status": "BROAD_CORE_PACK_INFORMATION_INCREMENT_COST_KILLED"
+  },
+  "economic_mapping_sha256": "E835E2EE46F3349928CDC6983C9F720BC651E7722234F4EA12D11886AF4C683F",
+  "experiment_id": "20260718_broad_core_pack_information_arena_002",
+  "files": {
+    "reports/CRYPTO_BROAD_CORE_PACK_INFORMATION_ARENA_V1_20260718_QUALIFIED.md": "F5F8BF52C8F13691857DD9C47A1B3DBBFDD563DD4BD7919044A4CBF2ED215046",
+    "runtime/crypto_broad_core_pack_information_arena_v1_20260718_qualified/data_adequacy.json": "8CB7D2D93F504BA4CD1569D22C2CEB6ED3E0591504043FC247B21081B70DC62A",
+    "runtime/crypto_broad_core_pack_information_arena_v1_20260718_qualified/decision.json": "F771B50D27C868FDEFA3C8501E288F22B09D4A437B023106AA4DA71F829FB437",
+    "runtime/crypto_broad_core_pack_information_arena_v1_20260718_qualified/information_evidence.csv": "F9ECF2AD394A989F1B55A5B7285DBC7C71E15297B2F794440D57F64B6238A111",
+    "runtime/crypto_broad_core_pack_information_arena_v1_20260718_qualified/model_evidence.jsonl": "0BF6EAF9F17975F93F5D56F9D99CC5B2B638139DFAE4A60B3144F24BC452F23B",
+    "runtime/crypto_broad_core_pack_information_arena_v1_20260718_qualified/paired_increment_evidence.jsonl": "02AC5EDF4A20E6F5D615093E01D62769DA3E9C8BB1E9F97CD7683FEF86EA30C5"
+  },
+  "identity_sha256": "B594020EC9B643974A9C152B2F0D2AE2703368D006EB4000D748F5F8DF62D67E",
+  "input_identities": {
+    "broad_cache_identity_sha256": "CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0",
+    "broad_cache_metadata_sha256": "CCEB67F08F7525C71F5EA25A4B658324B5EF376E414318CB1220A1507465E539",
+    "field_information_config_sha256": "BE2021B0C493CFA51E19A3F5DECD527AF27CA797031A0E59239E6F94B3CF9CA6",
+    "prior_information_census_sha256": "62488287AABCA93FCE0DE3313A0D64CF14C8939D4F5AC0502E3B8994D54F3BA9",
+    "resolved_core_pack_sha256": "2C6E334DD25BD2745371995B93CC5E0440D943F68A591419F34C48EDB34BA08A"
+  },
+  "objective": "Determine whether the 29 added Broad Core Pack fields contain stable conditional information and development-only economic increment over the current 10-field surface",
+  "parameters": {
+    "data_adequacy": {
+      "minimum_assets": 100,
+      "minimum_block_label_samples": 100000,
+      "minimum_development_dates": 300,
+      "minimum_field_non_null_ratio": 0.05,
+      "minimum_independent_evaluation_months": 4,
+      "minimum_train_hours": 4000,
+      "minimum_training_samples": 100000,
+      "minimum_turnover_observations": 2000
+    },
+    "economic_contract": {
+      "cost_bps": 5.0,
+      "horizon_hours": 4,
+      "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+      "turnover": "FULL_L1_WITH_INITIAL_ESTABLISHMENT_AND_TERMINAL_LIQUIDATION"
+    },
+    "frozen_budget": {
+      "control_fields": 10,
+      "estimated_peak_memory_gb": 4.0,
+      "estimated_wall_minutes": 45,
+      "full_fields": 39,
+      "hyperparameter_search": false,
+      "mlp_arms": 6,
+      "ridge_arms": 2
+    },
+    "information": {
+      "maximum_samples": 200000,
+      "minimum_positive_month_ratio": 0.5,
+      "minimum_stable_added_field_ratio": 0.2,
+      "quantile_bins": 16,
+      "within_block_null_shifts_hours": [
+        24,
+        72,
+        168,
+        336,
+        504
+      ]
+    },
+    "models": {
+      "mlp_batch_size": 4096,
+      "mlp_epochs": 8,
+      "mlp_hidden": [
+        64,
+        32
+      ],
+      "mlp_learning_rate": 0.001,
+      "mlp_seeds": [
+        20260718,
+        20260719,
+        20260720
+      ],
+      "mlp_weight_decay": 0.0001,
+      "rank_metric_samples": 200000,
+      "ridge_alpha": 10.0,
+      "torch_threads": 6,
+      "train_samples": 150000
+    },
+    "splits": {
+      "selection": {
+        "end_exclusive": "2024-05-01T00:00:00Z",
+        "start": "2024-03-01T00:00:00Z"
+      },
+      "stability": {
+        "end_exclusive": "2024-07-01T00:00:00Z",
+        "start": "2024-05-01T00:00:00Z"
+      },
+      "train": {
+        "end_exclusive": "2024-03-01T00:00:00Z",
+        "start": "2023-07-01T00:00:00Z"
+      }
+    }
+  },
+  "reproducibility": {
+    "continuation": "Rerun the exact command at source_sha with the same content-hash-bound inputs; do not tune models or open sealed roles.",
+    "failure": null,
+    "reproducible": true
+  },
+  "runtime": {
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "python": "3.11.9",
+    "sklearn": "1.6.1"
+  },
+  "schema_version": 1,
+  "source_sha": "ed4d0ce90c2a1b76ad0fb6a74db6622fcd3d7467",
+  "status": "BROAD_CORE_PACK_INFORMATION_INCREMENT_COST_KILLED"
+}
