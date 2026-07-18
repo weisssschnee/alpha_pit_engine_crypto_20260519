@@ -343,8 +343,14 @@ def load_broad_smoke_batch(
     decision_transitions = int(
         np.count_nonzero(np.diff(decision_eligibility.astype(np.int8), axis=0))
     )
-    if bool(smoke.get("require_dynamic_membership_transition", False)) and not decision_transitions:
-        raise ValueError("real smoke lacks a dynamic-universe membership transition")
+    probe_decision_eligibility = base_eligible[
+        probe_indices[:, None], decision_times[None, :]
+    ].T
+    probe_transitions = int(
+        np.count_nonzero(np.diff(probe_decision_eligibility.astype(np.int8), axis=0))
+    )
+    if bool(smoke.get("require_dynamic_membership_transition", False)) and not probe_transitions:
+        raise ValueError("predeclared probe lacks a dynamic-universe membership transition")
 
     asset_batches: list[np.ndarray] = []
     market_batches: list[np.ndarray] = []
@@ -396,6 +402,7 @@ def load_broad_smoke_batch(
             np.count_nonzero(~np.stack(eligibility_batches))
         ),
         "decision_eligibility_transitions": decision_transitions,
+        "probe_eligibility_transitions": probe_transitions,
     }
     return batch, metadata
 
@@ -499,6 +506,14 @@ def run_vertical_slice_smoke(
     elapsed = float(time.perf_counter() - started)
     if elapsed > float(smoke["maximum_wall_seconds"]):
         raise RuntimeError(f"vertical-slice smoke exceeded wall budget: {elapsed:.3f}s")
+    turnover_identity_closed = bool(
+        np.isclose(float(training_turnover.sum()), evaluation.total_turnover_l1)
+    )
+    cost_identity_closed = bool(
+        np.isclose(float(training_cost.sum()), evaluation.total_cost)
+    )
+    if not turnover_identity_closed or not cost_identity_closed:
+        raise AssertionError("training and strict-evaluator cost paths diverged")
     return {
         "status": "PASS",
         "scope": "DEVELOPMENT_ONLY_ARCHITECTURE_SMOKE_NOT_ECONOMIC_EVIDENCE",
@@ -515,6 +530,9 @@ def run_vertical_slice_smoke(
         "decision_eligibility_transitions": metadata[
             "decision_eligibility_transitions"
         ],
+        "probe_eligibility_transitions": metadata[
+            "probe_eligibility_transitions"
+        ],
         "nonzero_previous_weight_coordinates": int(
             torch.count_nonzero(previous_weights.abs().sum(dim=1) > 1e-8)
         ),
@@ -530,12 +548,8 @@ def run_vertical_slice_smoke(
         "strict_evaluator_mapping_id": evaluation.mapping_id,
         "strict_evaluator_total_turnover_l1": evaluation.total_turnover_l1,
         "strict_evaluator_total_cost": evaluation.total_cost,
-        "training_evaluator_turnover_identity_closed": bool(
-            np.isclose(float(training_turnover.sum()), evaluation.total_turnover_l1)
-        ),
-        "training_evaluator_cost_identity_closed": bool(
-            np.isclose(float(training_cost.sum()), evaluation.total_cost)
-        ),
+        "training_evaluator_turnover_identity_closed": turnover_identity_closed,
+        "training_evaluator_cost_identity_closed": cost_identity_closed,
         "wall_seconds": elapsed,
         "boundaries": dict(config["boundaries"]),
     }
