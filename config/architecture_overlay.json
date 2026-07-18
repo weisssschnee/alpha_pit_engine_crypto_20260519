@@ -1021,7 +1021,7 @@
         }
       ],
       "validation": {
-        "level": "RUNTIME_VERIFIED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/run_manifest.json",
@@ -1166,7 +1166,7 @@
         }
       ],
       "validation": {
-        "level": "RUNTIME_VERIFIED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/binance_force_order_capture_activation_20260718/snapshot.json",
@@ -1835,7 +1835,7 @@
         "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/data_adequacy.json"
       },
       "validation": {
-        "level": "RUNTIME_VERIFIED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_broad_core_pack_information_arena_v1_20260718_mapping_repair/data_adequacy.json",
