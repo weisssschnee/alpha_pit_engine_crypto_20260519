@@ -996,6 +996,8 @@ def sticky_mapping_decision(
     summary = (
         frame.groupby("split", sort=False)
         .agg(
+            arm_count=("matched_net_difference", "size"),
+            degenerate_pair_count=("gate_degenerate", "sum"),
             matched_net_difference_median=("matched_net_difference", "median"),
             matched_positive_ratio=(
                 "matched_gate_positive",

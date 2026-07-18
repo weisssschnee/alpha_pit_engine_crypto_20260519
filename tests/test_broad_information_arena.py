@@ -160,3 +160,5 @@ def test_sticky_gate_counts_degenerate_arm_as_failure() -> None:
     assert decision["gate_degenerate_pairs"] == 2
     assert decision["development_increment_observed"] is False
     assert all(row["matched_positive_ratio"] == 0.75 for row in decision["summary"])
+    assert all(row["arm_count"] == 4 for row in decision["summary"])
+    assert all(row["degenerate_pair_count"] == 1 for row in decision["summary"])

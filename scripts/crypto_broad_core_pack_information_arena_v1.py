@@ -99,7 +99,7 @@ def _report(manifest: dict[str, Any], decision: dict[str, Any], adequacy: dict[s
             f"- Mapping repair: `{decision['mapping_repair']['status']}`",
             f"- Turnover-aware sticky mapping: `{decision['turnover_aware_mapping']['status']}`",
             f"- Train-only calibrated sticky mapping: `{decision['train_only_calibrated_sticky']['status']}`",
-            f"- Calibration-fit degenerate arms: {decision['train_only_calibrated_sticky']['calibration_fit_degenerate_arms']}",
+            f"- Calibration-fit degenerate arms: {decision['train_only_calibrated_sticky']['calibration_fit_degenerate_arms']} (retained as gate failures)",
             f"- Bias audit: `{decision['bias_audit']['decision']}`",
             "",
             "## Why entropy is not used alone",
@@ -670,12 +670,18 @@ def run(config_path: Path) -> dict[str, Any]:
         )
         and data.slices["model_fit"].stop <= data.slices["calibration"].start,
         "nonnegative_slopes_preserve_direction": all(float(row["slope"]) >= 0.0 for row in calibration_rows),
-        "no_calibration_fit_degenerate_arms": not any(
-            bool(row["fit_degenerate"]) for row in calibration_rows
+        "calibration_fit_degenerate_arms_counted_as_gate_failures": all(
+            not (
+                bool(row["full"]["calibration"]["fit_degenerate"])
+                or bool(row["control"]["calibration"]["fit_degenerate"])
+            )
+            or bool(row["gate_degenerate"])
+            for row in calibrated_pair_rows
         ),
-        "raw_and_calibrated_candidate_weights_invariant": all(
+        "positive_slope_raw_and_calibrated_candidate_weights_invariant": all(
             bool(row["candidate_weight_invariant_under_positive_affine_calibration"])
             for row in calibrated_surface_rows
+            if not bool(row["calibration"]["fit_degenerate"])
         ),
         "intercept_does_not_change_sticky_weights": all(
             bool(row["intercept_sticky_weight_invariant"])
