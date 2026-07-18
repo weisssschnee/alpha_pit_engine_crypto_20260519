@@ -112,7 +112,7 @@
       }
     },
     {
-      "color": "#f9a825",
+      "color": "#757575",
       "contract": {
         "bypass_forbidden": true,
         "enforced_by": "broad_search.audit.check_evidence",
@@ -128,14 +128,14 @@
       "evidence": "DECLARED",
       "forbidden": false,
       "id": "broad_compositional_search_is_non_formal_and_data_gated",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "line_style": "dotted",
-      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
+      "relation": "DEPRECATED_NON_FORMAL_EVIDENCE",
       "required": false,
       "source": "broad_universe_compositional_search",
       "target": "data_adequacy_gate",
       "validation": {
-        "checked_at": "2026-07-16T12:16:54.093170+00:00",
+        "checked_at": "2026-07-18T09:41:47.562591+00:00",
         "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_SEARCH_DECISION.json",
         "evidence_sha256": "52125DC80C0590E8ACE0D77C17FE616A4092B9A469B259FEBC37A4CA01435C98",
         "level": "STATIC_VERIFIED",
@@ -146,7 +146,7 @@
       }
     },
     {
-      "color": "#f9a825",
+      "color": "#757575",
       "contract": {
         "bypass_forbidden": true,
         "enforced_by": "broad_search.runner18m.build_evidence",
@@ -162,14 +162,14 @@
       "evidence": "DECLARED",
       "forbidden": false,
       "id": "train_surface_supplies_18m_compositional_search",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "line_style": "dotted",
       "relation": "supplies_train_only_surface",
       "required": false,
       "source": "observed_archive_train_surface",
       "target": "observed_archive_18m_compositional_search",
       "validation": {
-        "checked_at": "2026-07-16T12:16:54.093170+00:00",
+        "checked_at": "2026-07-18T09:23:35.292228+00:00",
         "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_SEARCH_CONTRACT.json",
         "evidence_sha256": "E2557A1C16FC10C4E7AA2DD8845DE21C9D12DBC1321FDA7B89A95B7634F94B14",
         "level": "STATIC_VERIFIED",
@@ -180,7 +180,7 @@
       }
     },
     {
-      "color": "#f9a825",
+      "color": "#757575",
       "contract": {
         "bypass_forbidden": true,
         "enforced_by": "broad_search.qualification18m.check_evidence",
@@ -196,14 +196,14 @@
       "evidence": "DECLARED",
       "forbidden": false,
       "id": "search_18m_enforces_sealed_boundaries",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "line_style": "dotted",
       "relation": "respects_sealed_boundaries",
       "required": false,
       "source": "observed_archive_18m_compositional_search",
       "target": "sealed_research_boundaries",
       "validation": {
-        "checked_at": "2026-07-16T14:39:59.178854+00:00",
+        "checked_at": "2026-07-18T09:23:35.292228+00:00",
         "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_REPORT_ONLY_INDEPENDENCE_AUDIT.json",
         "evidence_sha256": "60DB6EB335A98D31346F2BF63AFDBE043A0EAFD23C2FB460B4C1ACEC417AB08C",
         "level": "PARTIAL",
@@ -214,7 +214,7 @@
       }
     },
     {
-      "color": "#f9a825",
+      "color": "#757575",
       "contract": {
         "bypass_forbidden": true,
         "enforced_by": "broad_search.qualification18m.check_evidence",
@@ -230,14 +230,14 @@
       "evidence": "DECLARED",
       "forbidden": false,
       "id": "search_18m_is_qualified_by_localized_mechanism_audit",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "line_style": "dotted",
       "relation": "evidence_qualified_by",
       "required": false,
       "source": "observed_archive_18m_compositional_search",
       "target": "localized_mechanism_qualification",
       "validation": {
-        "checked_at": "2026-07-16T14:39:59.178854+00:00",
+        "checked_at": "2026-07-18T09:23:35.292228+00:00",
         "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
         "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
         "level": "STATIC_VERIFIED",
@@ -282,7 +282,7 @@
       }
     },
     {
-      "color": "#f9a825",
+      "color": "#757575",
       "contract": {
         "bypass_forbidden": true,
         "enforced_by": "instrument_canary.cem_diversity_runner.check_evidence",
@@ -298,14 +298,14 @@
       "evidence": "STATIC",
       "forbidden": false,
       "id": "cem_diversity_uses_non_formal_canary",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "line_style": "dashed",
-      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
+      "relation": "DEPRECATED_NON_FORMAL_EVIDENCE",
       "required": false,
       "source": "cem_diversity_ab_experiment",
       "target": "real_data_lazy_search_canary",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T09:41:47.562591+00:00",
         "evidence_ref": "config/crypto_cem_diversity_ab_v1.json",
         "evidence_sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A",
         "level": "PARTIAL",
@@ -844,7 +844,7 @@
       }
     },
     {
-      "color": "#f9a825",
+      "color": "#757575",
       "contract": {
         "bypass_forbidden": true,
         "enforced_by": "latent_adaptive.economic_metrics",
@@ -860,14 +860,14 @@
       "evidence": "DECLARED",
       "forbidden": false,
       "id": "latent_adaptive_evaluated_in_development_arena",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "line_style": "dotted",
-      "relation": "EXPERIMENTAL_CURRENT_NON_FORMAL",
+      "relation": "DEPRECATED_NON_FORMAL_EVIDENCE",
       "required": false,
       "source": "explicit_latent_adaptive_experiment",
       "target": "multi_paradigm_arena",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T09:41:47.562591+00:00",
         "evidence_ref": "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md",
         "evidence_sha256": "DC2E109B222F0E9999F7498F91306845A4939D46B5B961B0E677F3A51ECB1DBC",
         "level": "PARTIAL",
@@ -948,7 +948,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-18T07:52:05.020736+00:00",
+  "generated_at": "2026-07-18T09:41:47.562591+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -1500,7 +1500,7 @@
         "verified_sha": "6950ea75e7848a94ecbc87cb3aee022cecee5901"
       },
       "claim_badges": [],
-      "color": "#f9a825",
+      "color": "#757575",
       "contracts": [
         {
           "bypass_forbidden": true,
@@ -1527,7 +1527,7 @@
       "id": "broad_universe_compositional_search",
       "kind": "development_experiment",
       "label": "Broad-Universe Compositional Search (6M gate audit)",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "owner": "",
       "paths": [
         "alphafactory_crypto/broad_search/audit.py",
@@ -2569,7 +2569,7 @@
       "required": false,
       "semantic_role": "experimental_broad_compositional_qualification",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T09:23:35.292228+00:00",
         "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_CURRENT_GRAMMAR_EXPRESSIVITY_AUDIT.json",
         "evidence_sha256": "B8EA6C50B0D65482812791EC3731E08B0609A4E9C14858C1B8087E2125E40FD1",
         "level": "STATIC_VERIFIED",
@@ -2578,7 +2578,7 @@
         "result": "PASS",
         "verified_at_sha": "24878d99ffca4aca46473b9d0ff3860fcb47d416"
       },
-      "visible_by_default": true
+      "visible_by_default": false
     },
     {
       "active_authority": false,
@@ -2589,7 +2589,7 @@
         "verified_sha": "b251733d51053cbbc99a3b79409debcee24ae760"
       },
       "claim_badges": [],
-      "color": "#f9a825",
+      "color": "#757575",
       "contracts": [
         {
           "bypass_forbidden": true,
@@ -2625,7 +2625,7 @@
       "id": "observed_archive_18m_compositional_search",
       "kind": "development_experiment",
       "label": "Observed-archive 18M compositional search",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "owner": "",
       "paths": [
         "alphafactory_crypto/broad_search/runner18m.py",
@@ -2711,7 +2711,7 @@
       "required": false,
       "semantic_role": "experimental_18m_compositional_search_evidence",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T09:23:35.292228+00:00",
         "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
         "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
         "level": "PARTIAL",
@@ -2720,7 +2720,7 @@
         "result": "WARN",
         "verified_at_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
       },
-      "visible_by_default": true
+      "visible_by_default": false
     },
     {
       "active_authority": false,
@@ -2731,7 +2731,7 @@
         "verified_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
       },
       "claim_badges": [],
-      "color": "#f9a825",
+      "color": "#757575",
       "contracts": [
         {
           "bypass_forbidden": true,
@@ -2767,7 +2767,7 @@
       "id": "localized_mechanism_qualification",
       "kind": "assurance",
       "label": "Localized mechanism evidence qualification",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "owner": "",
       "paths": [
         "alphafactory_crypto/broad_search/qualification18m.py",
@@ -2840,7 +2840,7 @@
       "required": false,
       "semantic_role": "localized_mechanism_evidence_qualification",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T09:23:35.292228+00:00",
         "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
         "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
         "level": "STATIC_VERIFIED",
@@ -2849,7 +2849,7 @@
         "result": "PASS",
         "verified_at_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
       },
-      "visible_by_default": true
+      "visible_by_default": false
     },
     {
       "active_authority": false,
@@ -3436,7 +3436,7 @@
         "verified_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
       "claim_badges": [],
-      "color": "#f9a825",
+      "color": "#757575",
       "contracts": [
         {
           "bypass_forbidden": true,
@@ -3454,7 +3454,7 @@
       "id": "cem_diversity_ab_experiment",
       "kind": "development_experiment",
       "label": "CEM Diversity Repair A/B",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "owner": "",
       "paths": [
         "alphafactory_crypto/instrument_canary/cem_diversity.py",
@@ -3544,7 +3544,7 @@
       "required": false,
       "semantic_role": "experimental_non_formal_cem_ab",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T09:23:35.292228+00:00",
         "evidence_ref": "config/crypto_cem_diversity_ab_v1.json",
         "evidence_sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A",
         "level": "PARTIAL",
@@ -3555,7 +3555,7 @@
         "result": "INSUFFICIENT_EVIDENCE",
         "verified_at_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
-      "visible_by_default": true
+      "visible_by_default": false
     },
     {
       "active_authority": true,
@@ -4109,7 +4109,7 @@
         "NO RUNTIME-FORMAL TRACE",
         "NO OOS"
       ],
-      "color": "#f9a825",
+      "color": "#757575",
       "contracts": [
         {
           "bypass_forbidden": true,
@@ -4154,7 +4154,7 @@
       "id": "explicit_latent_adaptive_experiment",
       "kind": "development_experiment",
       "label": "Explicit + Latent Adaptive TCN",
-      "lifecycle": "EXPERIMENTAL",
+      "lifecycle": "DEPRECATED",
       "owner": "",
       "paths": [
         "alphafactory_crypto/latent_adaptive/experiment.py",
@@ -4396,7 +4396,7 @@
       "required": false,
       "semantic_role": "adaptive_latent_challenger_evidence",
       "validation": {
-        "checked_at": "2026-07-17T03:22:57.135850+00:00",
+        "checked_at": "2026-07-18T09:23:35.292228+00:00",
         "evidence_ref": "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md",
         "evidence_sha256": "DC2E109B222F0E9999F7498F91306845A4939D46B5B961B0E677F3A51ECB1DBC",
         "level": "STATIC_VERIFIED",
@@ -4405,7 +4405,7 @@
         "result": "PASS",
         "verified_at_sha": "7389a36ebb4ee62f57aeb818cf4db7157bd1ea9f"
       },
-      "visible_by_default": true
+      "visible_by_default": false
     },
     {
       "active_authority": false,
@@ -5057,18 +5057,20 @@
         "planning_state_accepted_identities",
         "planning_state_active_execution_plan",
         "planning_state_blockers",
+        "planning_state_closed_lines_and_reusable_capability",
         "planning_state_crypto_alphafactory_current_state",
         "planning_state_current_decisions",
         "planning_state_current_phase",
         "planning_state_evidence_qualified_position",
         "planning_state_graph_and_maintenance",
         "planning_state_next_action",
+        "planning_state_proposed_future_large_scale_search_envelope",
         "planning_state_source_of_truth_order"
       ],
       "required": false,
       "semantic_role": "evaluation_access_boundary",
       "validation": {
-        "checked_at": "2026-07-17T18:36:56.219627+00:00",
+        "checked_at": "2026-07-18T09:41:47.562591+00:00",
         "evidence_ref": ".planning/STATE.md",
         "evidence_sha256": "ED3007BFE6C05AAE8FABA7F1F6E198D024DAD5109A62E69C1B861EF002B61474",
         "level": "PARTIAL",
@@ -5084,7 +5086,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "21EE9AA5E87362035FF76897CF688BFD920B2C609E62B70BB6D6FDFF5394146B"
+    "sha256": "D94D34E1F522D92712A86FFD581A9AFDB9A2597EAF7BB704AD65289525B321BA"
   },
   "profile_id": null,
   "profiles": [
@@ -5115,13 +5117,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "c34702d3482576eebab29a92ad6347ec6c20618d",
-    "edge_count": 33372,
-    "node_count": 17968,
+    "built_at_commit": "cc6ba9e17c63681cc19478d77f310e1edf5223ce",
+    "edge_count": 33375,
+    "node_count": 17971,
     "path": ".planning/graphs/graph.json",
-    "sha256": "37F1BBDF4C35B39D35701BFA21EAA77D96A88AC8ED1B7731D69475F5AF71A712"
+    "sha256": "7C1638F21D1C226DD5629F44602B83F91D72CA34343CEFEC7310E203519D5206"
   },
-  "repo_head": "c34702d3482576eebab29a92ad6347ec6c20618d",
+  "repo_head": "cc6ba9e17c63681cc19478d77f310e1edf5223ce",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
