@@ -69,7 +69,7 @@ def snapshot(config_path: Path, output_path: Path, report_path: Path) -> dict[st
                 payload = row.get("payload") or {}
                 order = payload.get("o") or {}
                 event_types[str(payload.get("e"))] += 1
-                symbol_types[str(payload.get("st", "MISSING"))] += 1
+                symbol_types[str(order.get("st", payload.get("st", "MISSING")))] += 1
                 if order.get("s"):
                     symbols.add(str(order["s"]))
                 if row.get("received_time_utc"):
