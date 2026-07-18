@@ -4,10 +4,14 @@ import numpy as np
 
 from alphafactory_crypto.broad_information_arena import (
     FixedMLP,
+    apply_linear_return_calibration,
     causal_trailing_mean,
     deterministic_coordinates,
+    fit_nonnegative_linear_return_calibration,
     model_matrix,
     paired_surface_diagnostics,
+    purge_label_boundary,
+    sticky_mapping_decision,
     turnover_aware_sticky_weights,
 )
 
@@ -88,3 +92,71 @@ def test_turnover_aware_sticky_mapping_uses_horizon_cohort_and_fixed_cost_gate()
     assert diagnostics["accepted_rebalances"] == 4
     assert diagnostics["rejected_rebalances"] == 1
     assert diagnostics["decision_counts"]["HOLD_NO_TRADE_BAND"] == 1
+
+
+def test_label_boundary_purge_removes_execution_delay_plus_horizon_tail() -> None:
+    assert purge_label_boundary(slice(10, 30), 6) == slice(10, 24)
+
+
+def test_nonnegative_calibration_recovers_positive_scale_and_flags_direction_flip() -> None:
+    prediction = np.asarray([[1.0, 2.0, 3.0], [4.0, 5.0, np.nan]])
+    target = 0.25 + 2.0 * prediction
+    positive = fit_nonnegative_linear_return_calibration(prediction, target)
+    assert positive["fit_degenerate"] is False
+    assert np.isclose(positive["slope"], 2.0)
+    assert np.isclose(positive["intercept"], 0.25)
+
+    negative = fit_nonnegative_linear_return_calibration(prediction, -prediction)
+    assert negative["fit_degenerate"] is True
+    assert negative["slope"] == 0.0
+    assert negative["unconstrained_slope"] < 0.0
+
+
+def test_zero_net_sticky_decision_is_invariant_to_calibration_intercept() -> None:
+    prediction = np.asarray(
+        [
+            [0.003, 0.002, 0.001, 0.004, 0.003],
+            [0.001, -0.001, 0.002, -0.002, 0.001],
+            [-0.001, 0.001, -0.002, 0.002, -0.001],
+            [-0.003, -0.002, -0.001, -0.004, -0.003],
+        ]
+    )
+    with_intercept = apply_linear_return_calibration(
+        prediction, slope=1.7, intercept=0.123
+    )
+    without_intercept = apply_linear_return_calibration(
+        prediction, slope=1.7, intercept=0.0
+    )
+    first, _ = turnover_aware_sticky_weights(
+        with_intercept, horizon=4, cost_bps=5.0, round_trip_multiplier=2.0
+    )
+    second, _ = turnover_aware_sticky_weights(
+        without_intercept, horizon=4, cost_bps=5.0, round_trip_multiplier=2.0
+    )
+    assert np.allclose(first, second, rtol=0.0, atol=1e-12)
+
+
+def test_sticky_gate_counts_degenerate_arm_as_failure() -> None:
+    rows = []
+    for split in ("selection", "stability"):
+        for index in range(4):
+            rows.append(
+                {
+                    "split": split,
+                    "matched_surface_difference": {"net_mean": 1e-5},
+                    "delta_sleeve_metrics": {"net_mean": 1e-5},
+                    "full": {
+                        "net_improvement_vs_reference": 1e-5,
+                        "turnover_reduction_ratio": 0.1,
+                    },
+                    "control": {
+                        "net_improvement_vs_reference": 1e-5,
+                        "turnover_reduction_ratio": 0.1,
+                    },
+                    "gate_degenerate": index == 0,
+                }
+            )
+    decision = sticky_mapping_decision(rows, minimum_positive_run_ratio=0.8)
+    assert decision["gate_degenerate_pairs"] == 2
+    assert decision["development_increment_observed"] is False
+    assert all(row["matched_positive_ratio"] == 0.75 for row in decision["summary"])

@@ -71,6 +71,14 @@ def _slice(store: RawPanelStore, spec: Mapping[str, str]) -> slice:
     return store.block_slice(spec["start"], spec["end_exclusive"])
 
 
+def purge_label_boundary(block: slice, purge_hours: int) -> slice:
+    if block.start is None or block.stop is None:
+        raise ValueError("bounded block required for label-boundary purge")
+    if int(purge_hours) < 0 or block.stop - block.start <= int(purge_hours):
+        raise ValueError("invalid label-boundary purge")
+    return slice(int(block.start), int(block.stop) - int(purge_hours))
+
+
 def load_broad_arena_data(repo_root: Path, config: Mapping[str, Any]) -> BroadArenaData:
     pack = json.loads((repo_root / config["inputs"]["resolved_core_pack"]).read_text())
     fields = tuple(
@@ -90,7 +98,22 @@ def load_broad_arena_data(repo_root: Path, config: Mapping[str, Any]) -> BroadAr
     if not set(control_fields).issubset(fields):
         raise ValueError("current runtime control is not a subset of the Broad Core Pack")
     store = RawPanelStore.open(repo_root / config["inputs"]["broad_cache"])
-    slices = {name: _slice(store, spec) for name, spec in config["splits"].items()}
+    boundary = config.get("label_boundary_contract", {})
+    execution_delay = int(boundary.get("execution_delay_hours", 0))
+    if int(boundary.get("target_horizon_hours", -1)) != int(
+        config["target_horizon_hours"]
+    ):
+        raise ValueError("label-boundary horizon contract does not match target horizon")
+    expected_purge = execution_delay + int(config["target_horizon_hours"])
+    purge_hours = int(boundary.get("purge_hours", 0))
+    if purge_hours != expected_purge:
+        raise ValueError(
+            f"label-boundary purge must equal execution delay plus horizon: {expected_purge}"
+        )
+    slices = {
+        name: purge_label_boundary(_slice(store, spec), purge_hours)
+        for name, spec in config["splits"].items()
+    }
     end = max(block.stop for block in slices.values())
     values = np.empty((store.shape[0], len(fields), end), dtype=np.float32)
     for index, field in enumerate(fields):
@@ -281,6 +304,56 @@ def prediction_metrics(
         "prediction_unique_rounded_1e8": int(np.unique(np.round(pred, 8)).size),
         "prediction_sha256": array_sha256(prediction),
     }
+
+
+def fit_nonnegative_linear_return_calibration(
+    prediction: np.ndarray, target: np.ndarray
+) -> dict[str, Any]:
+    valid = np.isfinite(prediction) & np.isfinite(target)
+    predicted = np.asarray(prediction[valid], dtype=float)
+    realized = np.asarray(target[valid], dtype=float)
+    if predicted.size < 2 or float(np.var(predicted)) <= 1e-20:
+        unconstrained_slope = 0.0
+        slope = 0.0
+        intercept = float(np.mean(realized)) if realized.size else 0.0
+        covariance = 0.0
+        fit_degenerate = True
+    else:
+        centered_prediction = predicted - float(np.mean(predicted))
+        centered_target = realized - float(np.mean(realized))
+        covariance = float(np.mean(centered_prediction * centered_target))
+        unconstrained_slope = covariance / float(np.mean(centered_prediction**2))
+        slope = max(0.0, unconstrained_slope)
+        intercept = float(np.mean(realized) - slope * np.mean(predicted))
+        fit_degenerate = bool(unconstrained_slope <= 0.0)
+    calibrated = slope * predicted + intercept
+    return {
+        "method": "TRAIN_ONLY_NONNEGATIVE_OLS_WITH_INTERCEPT",
+        "observations": int(predicted.size),
+        "slope": float(slope),
+        "unconstrained_slope": float(unconstrained_slope),
+        "intercept": float(intercept),
+        "fit_degenerate": fit_degenerate,
+        "fit_independence": "CALLER_MUST_DECLARE",
+        "prediction_mean": float(np.mean(predicted)) if predicted.size else 0.0,
+        "prediction_std": float(np.std(predicted)) if predicted.size else 0.0,
+        "target_mean": float(np.mean(realized)) if realized.size else 0.0,
+        "target_std": float(np.std(realized)) if realized.size else 0.0,
+        "covariance": covariance,
+        "raw_mse": float(np.mean((predicted - realized) ** 2)) if predicted.size else 0.0,
+        "calibrated_mse": float(np.mean((calibrated - realized) ** 2)) if predicted.size else 0.0,
+        "prediction_sha256": array_sha256(prediction),
+        "calibrated_prediction_sha256": array_sha256(
+            apply_linear_return_calibration(prediction, slope=slope, intercept=intercept)
+        ),
+    }
+
+
+def apply_linear_return_calibration(
+    prediction: np.ndarray, *, slope: float, intercept: float
+) -> np.ndarray:
+    source = np.asarray(prediction, dtype=float)
+    return np.where(np.isfinite(source), float(slope) * source + float(intercept), np.nan)
 
 
 def paired_surface_diagnostics(
@@ -644,7 +717,7 @@ def information_evidence(
     prior_census: pd.DataFrame,
 ) -> pd.DataFrame:
     info = config["information"]
-    train = data.slices["train"]
+    train = data.slices["model_fit"]
     train_mask = data.eligibility[:, train] & np.isfinite(data.target[:, train])
     train_assets, train_times = deterministic_coordinates(train_mask, int(info["maximum_samples"]))
     train_absolute = train_times + train.start
@@ -738,7 +811,7 @@ def data_adequacy(data: BroadArenaData, config: Mapping[str, Any]) -> dict[str, 
             "target_samples": int(local.sum()),
             "months": int(pd.Series(pd.to_datetime(data.timestamps[block], utc=True).strftime("%Y-%m")).nunique()),
         }
-    train = data.slices["train"]
+    train = data.slices["model_fit"]
     coverage = []
     variance = []
     for index in range(len(data.fields)):
@@ -749,14 +822,15 @@ def data_adequacy(data: BroadArenaData, config: Mapping[str, Any]) -> dict[str, 
     checks = {
         "development_dates": sum(row["timestamps"] for row in split_rows.values()) / 24
         >= int(gate["minimum_development_dates"]),
-        "training_samples": split_rows["train"]["target_samples"]
+        "training_samples": split_rows["model_fit"]["target_samples"]
         >= int(gate["minimum_training_samples"]),
-        "cross_sectional_assets": split_rows["train"]["eligible_assets"]
+        "cross_sectional_assets": split_rows["model_fit"]["eligible_assets"]
         >= int(gate["minimum_assets"]),
         "fields": len(data.fields) == int(config["frozen_budget"]["full_fields"]),
         "field_non_null": min(coverage) >= float(gate["minimum_field_non_null_ratio"]),
         "field_variance": all(value > 0 for value in variance),
-        "history_length": split_rows["train"]["timestamps"] >= int(gate["minimum_train_hours"]),
+        "history_length": split_rows["model_fit"]["timestamps"]
+        >= int(gate["minimum_train_hours"]),
         "label_support": all(row["target_samples"] >= int(gate["minimum_block_label_samples"]) for row in split_rows.values()),
         "turnover_observations": (
             split_rows["selection"]["timestamps"] + split_rows["stability"]["timestamps"]
@@ -908,22 +982,29 @@ def sticky_mapping_decision(
                 "control_net_improvement_vs_reference": row["control"]["net_improvement_vs_reference"],
                 "full_turnover_reduction_ratio": row["full"]["turnover_reduction_ratio"],
                 "control_turnover_reduction_ratio": row["control"]["turnover_reduction_ratio"],
+                "gate_degenerate": bool(row.get("gate_degenerate", False)),
             }
             for row in rows
         ]
+    )
+    frame["matched_gate_positive"] = (
+        (frame["matched_net_difference"] > 0.0) & ~frame["gate_degenerate"]
+    )
+    frame["delta_gate_positive"] = (
+        (frame["delta_sleeve_net_mean"] > 0.0) & ~frame["gate_degenerate"]
     )
     summary = (
         frame.groupby("split", sort=False)
         .agg(
             matched_net_difference_median=("matched_net_difference", "median"),
             matched_positive_ratio=(
-                "matched_net_difference",
-                lambda values: float(np.mean(np.asarray(values) > 0.0)),
+                "matched_gate_positive",
+                lambda values: float(np.mean(np.asarray(values, dtype=bool))),
             ),
             delta_sleeve_net_median=("delta_sleeve_net_mean", "median"),
             delta_sleeve_positive_ratio=(
-                "delta_sleeve_net_mean",
-                lambda values: float(np.mean(np.asarray(values) > 0.0)),
+                "delta_gate_positive",
+                lambda values: float(np.mean(np.asarray(values, dtype=bool))),
             ),
             full_net_improvement_median=("full_net_improvement_vs_reference", "median"),
             control_net_improvement_median=("control_net_improvement_vs_reference", "median"),
@@ -963,6 +1044,7 @@ def sticky_mapping_decision(
         "status": status,
         "development_increment_observed": increment_observed,
         "cost_reduction_only": cost_reduction_only,
+        "gate_degenerate_pairs": int(frame["gate_degenerate"].sum()),
         "summary": summary.to_dict("records"),
     }
 
@@ -977,6 +1059,7 @@ __all__ = [
     "TURNOVER_AWARE_STICKY_MAPPING",
     "BroadArenaData",
     "FixedMLP",
+    "apply_linear_return_calibration",
     "arena_decision",
     "array_sha256",
     "causal_trailing_mean",
@@ -984,6 +1067,7 @@ __all__ = [
     "deterministic_coordinates",
     "economic_metrics",
     "fit_normalization",
+    "fit_nonnegative_linear_return_calibration",
     "information_evidence",
     "incremental_signal_mapping",
     "load_broad_arena_data",
@@ -994,6 +1078,7 @@ __all__ = [
     "payload_sha256",
     "predict_split",
     "prediction_metrics",
+    "purge_label_boundary",
     "sticky_mapping_decision",
     "turnover_aware_sticky_mapping",
     "turnover_aware_sticky_weights",

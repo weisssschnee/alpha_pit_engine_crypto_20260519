@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "experiment_id": "20260718_broad_core_pack_sticky_mapping_004",
-  "objective": "Determine whether one horizon-cohort sticky cost gate can convert the qualified Broad conditional information into a development-only net increment over the current 10-field surface",
+  "experiment_id": "20260718_broad_purged_calibrated_sticky_006",
+  "objective": "Repair label-boundary leakage, fit one train-only return-scale calibration, and determine whether the calibrated Broad sticky mapping has development-only net increment over the current 10-field surface",
   "inputs": {
     "resolved_core_pack": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/resolved_token_contract.json",
     "field_information_config": "config/crypto_field_information_v0.json",
@@ -10,11 +10,18 @@
     "broad_cache": ".cache/crypto_18m_compositional_broad_search_v1"
   },
   "splits": {
-    "train": {"start": "2023-07-01T00:00:00Z", "end_exclusive": "2024-03-01T00:00:00Z"},
+    "model_fit": {"start": "2023-07-01T00:00:00Z", "end_exclusive": "2024-01-01T00:00:00Z"},
+    "calibration": {"start": "2024-01-01T00:00:00Z", "end_exclusive": "2024-03-01T00:00:00Z"},
     "selection": {"start": "2024-03-01T00:00:00Z", "end_exclusive": "2024-05-01T00:00:00Z"},
     "stability": {"start": "2024-05-01T00:00:00Z", "end_exclusive": "2024-07-01T00:00:00Z"}
   },
   "target_horizon_hours": 4,
+  "label_boundary_contract": {
+    "execution_delay_hours": 2,
+    "target_horizon_hours": 4,
+    "purge_hours": 6,
+    "rule": "Every train, selection, and stability block excludes its final execution-delay-plus-horizon coordinates"
+  },
   "information": {
     "quantile_bins": 16,
     "maximum_samples": 200000,
@@ -61,6 +68,18 @@
     "threshold_source": "FIXED_ECONOMIC_CONTRACT_NOT_SEARCHED",
     "hyperparameter_search": false
   },
+  "reference_prediction_policy": "SUPERSEDE_UNPURGED_REFERENCE",
+  "train_only_calibration": {
+    "method": "NONNEGATIVE_OLS_WITH_INTERCEPT",
+    "parent_role": "development_train",
+    "model_fit_role": "model_fit",
+    "fit_role": "calibration",
+    "fit_independence": "HELD_OUT_FROM_MODEL_FIT_WITHIN_DEVELOPMENT_TRAIN",
+    "direction_flip_allowed": false,
+    "selection_or_stability_fit_allowed": false,
+    "coefficient_clipping": false,
+    "hyperparameter_search": false
+  },
   "frozen_budget": {
     "control_fields": 10,
     "full_fields": 39,
@@ -70,8 +89,12 @@
     "sticky_surface_evaluations": 16,
     "sticky_matched_pairs": 8,
     "reference_prediction_identity_checks": 16,
+    "purged_model_refits": 8,
+    "train_calibration_predictions": 8,
+    "calibrated_sticky_surface_evaluations": 16,
+    "calibrated_sticky_matched_pairs": 8,
     "hyperparameter_search": false,
-    "estimated_wall_minutes": 5,
+    "estimated_wall_minutes": 8,
     "estimated_peak_memory_gb": 4.0
   },
   "economic_contract": {
@@ -89,7 +112,7 @@
     "cross_sprint_adaptive_memory": false
   },
   "outputs": {
-    "runtime_root": "runtime/crypto_broad_core_pack_sticky_mapping_v1_20260718",
-    "report": "reports/CRYPTO_BROAD_CORE_PACK_STICKY_MAPPING_V1_20260718.md"
+    "runtime_root": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718",
+    "report": "reports/CRYPTO_BROAD_PURGED_CALIBRATED_STICKY_V1_20260718.md"
   }
 }

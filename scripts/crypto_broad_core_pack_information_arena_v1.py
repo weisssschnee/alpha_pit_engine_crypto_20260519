@@ -28,12 +28,14 @@ from alphafactory_crypto.broad_information_arena import (  # noqa: E402
     RIDGE_MODEL,
     TURNOVER_AWARE_STICKY_MAPPING,
     FixedMLP,
+    apply_linear_return_calibration,
     arena_decision,
     array_sha256,
     data_adequacy,
     deterministic_coordinates,
     economic_metrics,
     fit_normalization,
+    fit_nonnegative_linear_return_calibration,
     information_evidence,
     incremental_signal_mapping,
     load_broad_arena_data,
@@ -51,6 +53,7 @@ from alphafactory_crypto.core_pack_consumption import sha256_file  # noqa: E402
 from alphafactory_crypto.instrument_capability.mapping import (  # noqa: E402
     CROSS_SECTIONAL_ZERO_NET,
     DEFAULT_MAPPING_CONTRACTS,
+    map_portfolio,
     mapping_contract_sha256,
 )
 
@@ -80,7 +83,7 @@ def _report(manifest: dict[str, Any], decision: dict[str, Any], adequacy: dict[s
     control = information.loc[information["surface_role"] == "CONTROL"]
     return "\n".join(
         [
-            "# Broad Core Pack information and fixed 2x2 development Arena",
+            "# Broad Core Pack purged model-fit / calibration development Arena",
             "",
             "This is a frozen development-only comparison. It is not performance search, OOS evidence, or promotion authority.",
             "",
@@ -95,6 +98,9 @@ def _report(manifest: dict[str, Any], decision: dict[str, Any], adequacy: dict[s
             f"- Degenerate prediction/mapping pairs: {decision['degenerate_pairs']}",
             f"- Mapping repair: `{decision['mapping_repair']['status']}`",
             f"- Turnover-aware sticky mapping: `{decision['turnover_aware_mapping']['status']}`",
+            f"- Train-only calibrated sticky mapping: `{decision['train_only_calibrated_sticky']['status']}`",
+            f"- Calibration-fit degenerate arms: {decision['train_only_calibrated_sticky']['calibration_fit_degenerate_arms']}",
+            f"- Bias audit: `{decision['bias_audit']['decision']}`",
             "",
             "## Why entropy is not used alone",
             "",
@@ -111,6 +117,16 @@ def _report(manifest: dict[str, Any], decision: dict[str, Any], adequacy: dict[s
             "## Turnover-aware sticky mapping summary",
             "",
             pd.DataFrame(decision["turnover_aware_mapping"]["summary"]).to_markdown(index=False),
+            "",
+            "## Train-only calibrated sticky summary",
+            "",
+            pd.DataFrame(decision["train_only_calibrated_sticky"]["summary"]).to_markdown(index=False),
+            "",
+            "## Boundary repair",
+            "",
+            "The former train role is split once into model-fit (2023-07 through 2023-12) and held-out calibration (2024-01 through 2024-02). Every model-fit, calibration, selection, and stability block purges its final 6 hours, equal to the 2h execution delay plus 4h target horizon. Prior unpurged prediction identities are retained only as superseded evidence.",
+            "",
+            "Ridge plus three MLP seeds are robustness arms, not independent samples. Selection and stability are already-spent development evidence; hourly LCBs are descriptive because 4h labels overlap and returns are serially dependent.",
             "",
             "## Boundaries",
             "",
@@ -138,10 +154,37 @@ def run(config_path: Path) -> dict[str, Any]:
     if adequacy["status"] != "DATA_ADEQUACY_PASS":
         raise RuntimeError("Broad information Arena failed its pre-registered Data Adequacy Gate")
 
-    train = data.slices["train"]
-    train_mask = data.eligibility[:, train] & np.isfinite(data.target[:, train])
+    purge_hours = int(config["label_boundary_contract"]["purge_hours"])
+    split_boundary_evidence: dict[str, Any] = {
+        "label_definition": "log(close[t+2+4]/close[t+2])",
+        "execution_delay_hours": int(
+            config["label_boundary_contract"]["execution_delay_hours"]
+        ),
+        "target_horizon_hours": int(config["target_horizon_hours"]),
+        "purge_hours": purge_hours,
+        "roles": {},
+    }
+    for role, block in data.slices.items():
+        declared_end = pd.Timestamp(config["splits"][role]["end_exclusive"])
+        last_signal = pd.Timestamp(int(data.timestamps[block.stop - 1]), tz="UTC")
+        label_end = last_signal + pd.Timedelta(hours=purge_hours)
+        local_mask = data.eligibility[:, block] & np.isfinite(data.target[:, block])
+        split_boundary_evidence["roles"][role] = {
+            "declared_start": config["splits"][role]["start"],
+            "declared_end_exclusive": config["splits"][role]["end_exclusive"],
+            "effective_last_signal_timestamp": str(last_signal),
+            "last_label_end_timestamp": str(label_end),
+            "last_label_end_before_declared_end": bool(label_end < declared_end),
+            "eligible_label_samples": int(local_mask.sum()),
+            "eligible_mask_sha256": array_sha256(local_mask.astype(np.float64)),
+            "target_block_sha256": array_sha256(data.target[:, block]),
+        }
+    _write_json(output_root / "split_boundary_evidence.json", split_boundary_evidence)
+
+    model_fit = data.slices["model_fit"]
+    train_mask = data.eligibility[:, model_fit] & np.isfinite(data.target[:, model_fit])
     train_assets, train_times = deterministic_coordinates(train_mask, int(config["models"]["train_samples"]))
-    train_absolute = train_times + train.start
+    train_absolute = train_times + model_fit.start
     median, scale = fit_normalization(data, train_assets, train_absolute)
     full_indices = np.arange(len(data.fields))
     control_indices = np.asarray([data.fields.index(field) for field in data.control_fields])
@@ -150,6 +193,13 @@ def run(config_path: Path) -> dict[str, Any]:
     target_scale = float(max(np.std(train_target), 1e-8))
     train_scaled = (train_target - target_mean) / target_scale
     raw_full = data.values[train_assets[:, None], full_indices[None, :], train_absolute[:, None]]
+    model_fit_identity = {
+        "role": "model_fit",
+        "sample_count": int(len(train_assets)),
+        "asset_coordinates_sha256": array_sha256(train_assets.astype(np.float64)),
+        "time_coordinates_sha256": array_sha256(train_absolute.astype(np.float64)),
+        "sampled_target_sha256": array_sha256(train_target),
+    }
 
     models: list[tuple[str, str, int, Any, dict[str, Any], np.ndarray]] = []
     for surface, indices in ((CONTROL_SURFACE, control_indices), (FULL_SURFACE, full_indices)):
@@ -187,10 +237,51 @@ def run(config_path: Path) -> dict[str, Any]:
     information_path = output_root / "information_evidence.csv"
     information.to_csv(information_path, index=False, lineterminator="\n")
 
+    calibration_block = data.slices["calibration"]
+    calibration_rows: list[dict[str, Any]] = []
+    calibration_by_model: dict[tuple[str, int, str], dict[str, Any]] = {}
+    for family, surface, seed, model, _, indices in models:
+        calibration_prediction = predict_split(
+            model,
+            model_family=family,
+            data=data,
+            block=calibration_block,
+            field_indices=indices,
+            median=median,
+            scale=scale,
+            target_mean=target_mean,
+            target_scale=target_scale,
+        )
+        calibration = fit_nonnegative_linear_return_calibration(
+            calibration_prediction, data.target[:, calibration_block]
+        )
+        calibration.update(
+            {
+                "model_family": family,
+                "surface": surface,
+                "seed": int(seed),
+                "parent_role": config["train_only_calibration"]["parent_role"],
+                "model_fit_role": config["train_only_calibration"]["model_fit_role"],
+                "fit_role": config["train_only_calibration"]["fit_role"],
+                "fit_independence": config["train_only_calibration"]["fit_independence"],
+                "model_fit_identity": model_fit_identity,
+                "fit_start": config["splits"]["calibration"]["start"],
+                "declared_fit_end_exclusive": config["splits"]["calibration"]["end_exclusive"],
+                "purge_hours": purge_hours,
+                "last_fitted_signal_timestamp": str(
+                    pd.Timestamp(int(data.timestamps[calibration_block.stop - 1]), tz="UTC")
+                ),
+            }
+        )
+        calibration_rows.append(calibration)
+        calibration_by_model[(family, int(seed), surface)] = calibration
+
     model_rows: list[dict[str, Any]] = []
     prediction_identity_rows: list[dict[str, Any]] = []
     weights: dict[tuple[str, int, str, str], np.ndarray] = {}
     predictions: dict[tuple[str, int, str, str], np.ndarray] = {}
+    base_economic_by_key: dict[tuple[str, int, str, str], dict[str, Any]] = {}
+    reference_policy = str(config["reference_prediction_policy"])
     for family, surface, seed, model, diagnostic, indices in models:
         for split in ("selection", "stability"):
             block = data.slices[split]
@@ -220,13 +311,22 @@ def run(config_path: Path) -> dict[str, Any]:
                     "expected_prediction_sha256": expected_prediction_sha256,
                     "observed_prediction_sha256": predictive["prediction_sha256"],
                     "match": prediction_identity_match,
+                    "policy": reference_policy,
+                    "supersession_reason": (
+                        "PRIOR_REFERENCE_DID_NOT_PURGE_EXECUTION_DELAY_PLUS_HORIZON"
+                        if reference_policy == "SUPERSEDE_UNPURGED_REFERENCE"
+                        else None
+                    ),
                 }
             )
-            if not prediction_identity_match:
+            if reference_policy == "REQUIRE_EXACT" and not prediction_identity_match:
                 raise ValueError(f"REFERENCE_PREDICTION_IDENTITY_MISMATCH:{identity_key}")
+            if reference_policy not in {"REQUIRE_EXACT", "SUPERSEDE_UNPURGED_REFERENCE"}:
+                raise ValueError(f"UNKNOWN_REFERENCE_PREDICTION_POLICY:{reference_policy}")
             economic, local_weights = economic_metrics(prediction, data, block)
             weights[(family, seed, split, surface)] = local_weights
             predictions[(family, seed, split, surface)] = prediction
+            base_economic_by_key[(family, seed, split, surface)] = economic
             model_rows.append({
                 "model_family": family,
                 "surface": surface,
@@ -324,7 +424,7 @@ def run(config_path: Path) -> dict[str, Any]:
             cost_bps=float(sticky["cost_bps"]),
             round_trip_multiplier=float(sticky["round_trip_multiplier"]),
         )
-        reference_economic = reference_by_key[key]["economic"]
+        reference_economic = base_economic_by_key[key]
         reference_turnover = float(reference_economic["turnover_mean"])
         row = {
             "mapping_id": TURNOVER_AWARE_STICKY_MAPPING,
@@ -334,7 +434,7 @@ def run(config_path: Path) -> dict[str, Any]:
             "split": split,
             "metrics": metrics,
             "diagnostics": diagnostics,
-            "reference_prediction_sha256": reference_by_key[key]["predictive"]["prediction_sha256"],
+            "reference_prediction_sha256": array_sha256(prediction),
             "reference_weight_sha256": reference_economic["weight_sha256"],
             "net_improvement_vs_reference": float(metrics["net_mean"] - reference_economic["net_mean"]),
             "turnover_reduction_ratio": float(
@@ -388,12 +488,258 @@ def run(config_path: Path) -> dict[str, Any]:
     )
     if decision["turnover_aware_mapping"]["development_increment_observed"]:
         decision["status"] = "BROAD_CORE_PACK_TURNOVER_AWARE_MAPPING_DEVELOPMENT_INCREMENT_OBSERVED"
+
+    calibrated_predictions: dict[tuple[str, int, str, str], np.ndarray] = {}
+    calibrated_weights: dict[tuple[str, int, str, str], np.ndarray] = {}
+    calibrated_surface_rows: list[dict[str, Any]] = []
+    calibrated_surface_by_key: dict[tuple[str, int, str, str], dict[str, Any]] = {}
+    for key, prediction in predictions.items():
+        family, seed, split, surface = key
+        calibration = calibration_by_model[(family, int(seed), surface)]
+        calibrated_prediction = apply_linear_return_calibration(
+            prediction,
+            slope=float(calibration["slope"]),
+            intercept=float(calibration["intercept"]),
+        )
+        no_intercept_prediction = apply_linear_return_calibration(
+            prediction,
+            slope=float(calibration["slope"]),
+            intercept=0.0,
+        )
+        metrics, local_weights, diagnostics = turnover_aware_sticky_mapping(
+            calibrated_prediction,
+            data,
+            data.slices[split],
+            horizon=int(sticky["horizon_hours"]),
+            cost_bps=float(sticky["cost_bps"]),
+            round_trip_multiplier=float(sticky["round_trip_multiplier"]),
+        )
+        _, no_intercept_weights, no_intercept_diagnostics = turnover_aware_sticky_mapping(
+            no_intercept_prediction,
+            data,
+            data.slices[split],
+            horizon=int(sticky["horizon_hours"]),
+            cost_bps=float(sticky["cost_bps"]),
+            round_trip_multiplier=float(sticky["round_trip_multiplier"]),
+        )
+        raw_candidate_weights = np.asarray(
+            map_portfolio(
+                prediction, DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET]
+            ).weights,
+            dtype=float,
+        )
+        calibrated_candidate_weights = np.asarray(
+            map_portfolio(
+                calibrated_prediction,
+                DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET],
+            ).weights,
+            dtype=float,
+        )
+        candidate_max_abs_difference = float(
+            np.max(np.abs(raw_candidate_weights - calibrated_candidate_weights))
+        )
+        intercept_max_abs_difference = float(
+            np.max(np.abs(local_weights - no_intercept_weights))
+        )
+        candidate_weight_invariant = bool(
+            np.allclose(
+                raw_candidate_weights,
+                calibrated_candidate_weights,
+                rtol=0.0,
+                atol=1e-12,
+            )
+        )
+        intercept_sticky_weight_invariant = bool(
+            np.allclose(local_weights, no_intercept_weights, rtol=0.0, atol=1e-12)
+        )
+        uncalibrated = sticky_surface_by_key[key]
+        reference_turnover = float(uncalibrated["metrics"]["turnover_mean"])
+        row = {
+            "mapping_id": f"TRAIN_ONLY_CALIBRATED_{TURNOVER_AWARE_STICKY_MAPPING}",
+            "model_family": family,
+            "surface": surface,
+            "seed": int(seed),
+            "split": split,
+            "metrics": metrics,
+            "diagnostics": diagnostics,
+            "calibration": calibration,
+            "raw_prediction_sha256": array_sha256(prediction),
+            "calibrated_prediction_sha256": array_sha256(calibrated_prediction),
+            "raw_candidate_weight_sha256": array_sha256(raw_candidate_weights),
+            "calibrated_candidate_weight_sha256": array_sha256(
+                calibrated_candidate_weights
+            ),
+            "candidate_weight_invariant_under_positive_affine_calibration": candidate_weight_invariant,
+            "candidate_weight_max_abs_difference": candidate_max_abs_difference,
+            "intercept_free_sticky_weight_sha256": array_sha256(no_intercept_weights),
+            "intercept_free_sticky_diagnostics": no_intercept_diagnostics,
+            "intercept_sticky_weight_invariant": intercept_sticky_weight_invariant,
+            "intercept_sticky_weight_max_abs_difference": intercept_max_abs_difference,
+            "reference_weight_sha256": uncalibrated["metrics"]["weight_sha256"],
+            "net_improvement_vs_reference": float(
+                metrics["net_mean"] - uncalibrated["metrics"]["net_mean"]
+            ),
+            "turnover_reduction_ratio": float(
+                1.0 - metrics["turnover_mean"] / reference_turnover
+                if reference_turnover > 0.0
+                else 0.0
+            ),
+        }
+        calibrated_surface_rows.append(row)
+        calibrated_surface_by_key[key] = row
+        calibrated_predictions[key] = calibrated_prediction
+        calibrated_weights[key] = local_weights
+
+    calibrated_pair_rows: list[dict[str, Any]] = []
+    for family, seed in ((RIDGE_MODEL, 0), *[(MLP_MODEL, int(seed)) for seed in config["models"]["mlp_seeds"]]):
+        for split in ("selection", "stability"):
+            full_key = (family, seed, split, FULL_SURFACE)
+            control_key = (family, seed, split, CONTROL_SURFACE)
+            full = calibrated_surface_by_key[full_key]
+            control = calibrated_surface_by_key[control_key]
+            full_metrics = full["metrics"]
+            control_metrics = control["metrics"]
+            calibrated_pair_rows.append(
+                {
+                    "mapping_id": f"TRAIN_ONLY_CALIBRATED_{TURNOVER_AWARE_STICKY_MAPPING}",
+                    "model_family": family,
+                    "seed": int(seed),
+                    "split": split,
+                    "full": full,
+                    "control": control,
+                    "matched_surface_difference": {
+                        "gross_mean": float(full_metrics["gross_mean"] - control_metrics["gross_mean"]),
+                        "cost_mean": float(full_metrics["cost_mean"] - control_metrics["cost_mean"]),
+                        "net_mean": float(full_metrics["net_mean"] - control_metrics["net_mean"]),
+                    },
+                    "delta_sleeve_metrics": paired_increment(
+                        calibrated_weights[full_key],
+                        calibrated_weights[control_key],
+                        data,
+                        data.slices[split],
+                    ),
+                    "comparison": paired_surface_diagnostics(
+                        calibrated_predictions[full_key],
+                        calibrated_predictions[control_key],
+                        calibrated_weights[full_key],
+                        calibrated_weights[control_key],
+                        maximum_rank_samples=int(config["models"]["rank_metric_samples"]),
+                    ),
+                    "gate_degenerate": bool(
+                        full["calibration"]["fit_degenerate"]
+                        or control["calibration"]["fit_degenerate"]
+                        or not full[
+                            "candidate_weight_invariant_under_positive_affine_calibration"
+                        ]
+                        or not control[
+                            "candidate_weight_invariant_under_positive_affine_calibration"
+                        ]
+                        or not full["intercept_sticky_weight_invariant"]
+                        or not control["intercept_sticky_weight_invariant"]
+                    ),
+                }
+            )
+    decision["train_only_calibrated_sticky"] = sticky_mapping_decision(
+        calibrated_pair_rows, float(config["decision"]["minimum_positive_run_ratio"])
+    )
+    decision["train_only_calibrated_sticky"].update(
+        {
+            "calibration_fit_degenerate_arms": int(
+                sum(bool(row["fit_degenerate"]) for row in calibration_rows)
+            ),
+            "arm_interpretation": "Ridge plus three MLP seeds are model-robustness arms, not independent statistical samples.",
+            "evidence_scope": "SPENT_DEVELOPMENT_SELECTION_AND_STABILITY_ONLY",
+        }
+    )
+
+    bias_checks = {
+        "purge_equals_execution_delay_plus_horizon": purge_hours
+        == int(config["label_boundary_contract"]["execution_delay_hours"])
+        + int(config["target_horizon_hours"]),
+        "boundary_horizon_matches_target": int(
+            config["label_boundary_contract"]["target_horizon_hours"]
+        )
+        == int(config["target_horizon_hours"]),
+        "all_calibrations_use_dedicated_calibration_role": all(
+            row["fit_role"] == "calibration" for row in calibration_rows
+        ),
+        "calibration_is_held_out_from_model_fit": all(
+            row["fit_independence"]
+            == "HELD_OUT_FROM_MODEL_FIT_WITHIN_DEVELOPMENT_TRAIN"
+            for row in calibration_rows
+        )
+        and data.slices["model_fit"].stop <= data.slices["calibration"].start,
+        "nonnegative_slopes_preserve_direction": all(float(row["slope"]) >= 0.0 for row in calibration_rows),
+        "no_calibration_fit_degenerate_arms": not any(
+            bool(row["fit_degenerate"]) for row in calibration_rows
+        ),
+        "raw_and_calibrated_candidate_weights_invariant": all(
+            bool(row["candidate_weight_invariant_under_positive_affine_calibration"])
+            for row in calibrated_surface_rows
+        ),
+        "intercept_does_not_change_sticky_weights": all(
+            bool(row["intercept_sticky_weight_invariant"])
+            for row in calibrated_surface_rows
+        ),
+        "selection_stability_not_used_for_fit": not bool(
+            config["train_only_calibration"]["selection_or_stability_fit_allowed"]
+        ),
+        "all_development_blocks_purged": all(
+            data.slices[name].stop
+            == data.store.block_slice(
+                config["splits"][name]["start"], config["splits"][name]["end_exclusive"]
+            ).stop
+            - purge_hours
+            for name in ("model_fit", "calibration", "selection", "stability")
+        ),
+        "all_last_labels_end_before_role_boundary": all(
+            bool(row["last_label_end_before_declared_end"])
+            for row in split_boundary_evidence["roles"].values()
+        ),
+    }
+    decision["reference_supersession"] = {
+        "status": "PRIOR_UNPURGED_REFERENCE_SUPERSEDED",
+        "policy": reference_policy,
+        "mismatched_prediction_identities": int(
+            sum(not row["match"] for row in prediction_identity_rows)
+        ),
+        "total_prediction_identities": int(len(prediction_identity_rows)),
+        "reason": "The prior run neither purged the final execution-delay-plus-horizon coordinates nor separated model fitting from calibration.",
+    }
+    decision["bias_audit"] = {
+        "decision": "PASS" if all(bias_checks.values()) else "HOLD_RESEARCH",
+        "requested_stage": "development-only matched replay",
+        "discovery_status": "predeclared repair reproduction",
+        "OOS_sample_grade": "NONE_SPENT_DEVELOPMENT_EVIDENCE",
+        "checks": bias_checks,
+        "feature_date": "signal timestamp",
+        "execution_date": "signal timestamp plus 2h",
+        "label_horizon": "4h after execution",
+        "cost_model": "full-L1 5 bps with initial establishment and terminal liquidation",
+        "cannot_infer": [
+            "OOS qualification",
+            "candidate promotion",
+            "future performance",
+            "independent statistical power from four model arms",
+            "survivorship-complete observed archive",
+        ],
+    }
+    if decision["bias_audit"]["decision"] != "PASS":
+        decision["status"] = "BROAD_CALIBRATED_STICKY_BIAS_AUDIT_HOLD"
+    elif decision["train_only_calibrated_sticky"]["development_increment_observed"]:
+        decision["status"] = "POST_HOC_DEVELOPMENT_CALIBRATION_INCREMENT_OBSERVED"
+    else:
+        decision["status"] = "BROAD_PURGED_CALIBRATED_STICKY_INCREMENT_NOT_ESTABLISHED"
+
     _write_jsonl(output_root / "model_evidence.jsonl", model_rows)
+    _write_jsonl(output_root / "train_calibration_evidence.jsonl", calibration_rows)
     _write_jsonl(output_root / "prediction_identity_evidence.jsonl", prediction_identity_rows)
     _write_jsonl(output_root / "paired_increment_evidence.jsonl", increment_rows)
     _write_jsonl(output_root / "mapping_repair_evidence.jsonl", mapping_rows)
     _write_jsonl(output_root / "sticky_surface_evidence.jsonl", sticky_surface_rows)
     _write_jsonl(output_root / "sticky_pair_evidence.jsonl", sticky_pair_rows)
+    _write_jsonl(output_root / "calibrated_sticky_surface_evidence.jsonl", calibrated_surface_rows)
+    _write_jsonl(output_root / "calibrated_sticky_pair_evidence.jsonl", calibrated_pair_rows)
     _write_json(output_root / "decision.json", decision)
 
     input_paths = {
@@ -408,7 +754,22 @@ def run(config_path: Path) -> dict[str, Any]:
         "source_sha": _git_sha(),
         "created_at": _now(),
         "command": "python scripts/crypto_broad_core_pack_information_arena_v1.py",
-        "parameters": {key: config[key] for key in ("splits", "information", "models", "data_adequacy", "mapping_repair", "turnover_aware_mapping", "frozen_budget", "economic_contract")},
+        "parameters": {
+            key: config[key]
+            for key in (
+                "splits",
+                "label_boundary_contract",
+                "information",
+                "models",
+                "data_adequacy",
+                "mapping_repair",
+                "turnover_aware_mapping",
+                "reference_prediction_policy",
+                "train_only_calibration",
+                "frozen_budget",
+                "economic_contract",
+            )
+        },
         "input_identities": {
             **{f"{name}_sha256": sha256_file(path) for name, path in input_paths.items()},
             "broad_cache_metadata_sha256": sha256_file(cache_metadata),
@@ -421,6 +782,8 @@ def run(config_path: Path) -> dict[str, Any]:
             "sklearn": sklearn.__version__,
         },
         "data_adequacy": adequacy,
+        "model_fit_identity": model_fit_identity,
+        "split_boundary_evidence": split_boundary_evidence,
         "decision": decision,
         "economic_mapping_sha256": mapping_contract_sha256(DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET]),
         "cost_time": {
@@ -440,13 +803,17 @@ def run(config_path: Path) -> dict[str, Any]:
     report_path.write_text(_report(manifest, decision, adequacy, information), encoding="utf-8", newline="\n")
     for path in (
         output_root / "data_adequacy.json",
+        output_root / "split_boundary_evidence.json",
         information_path,
         output_root / "model_evidence.jsonl",
+        output_root / "train_calibration_evidence.jsonl",
         output_root / "prediction_identity_evidence.jsonl",
         output_root / "paired_increment_evidence.jsonl",
         output_root / "mapping_repair_evidence.jsonl",
         output_root / "sticky_surface_evidence.jsonl",
         output_root / "sticky_pair_evidence.jsonl",
+        output_root / "calibrated_sticky_surface_evidence.jsonl",
+        output_root / "calibrated_sticky_pair_evidence.jsonl",
         output_root / "decision.json",
         report_path,
     ):
