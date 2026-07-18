@@ -1,0 +1,92 @@
+{
+  "cannot_infer": [
+    "formal_performance_search_authority",
+    "OOS_qualification",
+    "candidate_promotion",
+    "future_or_recent_performance"
+  ],
+  "cost_killed_under_frozen_mapping": true,
+  "degenerate_pairs": 0,
+  "economic_increment_gate_pass": false,
+  "information_gate_pass": true,
+  "mapping_repair": {
+    "passed_variants": [],
+    "status": "PORTFOLIO_MAPPING_REPAIR_NOT_ESTABLISHED",
+    "summary": [
+      {
+        "gross_median": 4.768310668497651e-05,
+        "net_median": -3.177527368634157e-05,
+        "positive_net_ratio": 0.0,
+        "split": "selection",
+        "variant": "DIRECT_DELTA_SIGNAL_ZERO_NET"
+      },
+      {
+        "gross_median": 4.1286432471447574e-05,
+        "net_median": -1.2788908535745116e-05,
+        "positive_net_ratio": 0.0,
+        "split": "selection",
+        "variant": "HORIZON_4H_CAUSAL_MEAN_DELTA_ZERO_NET"
+      },
+      {
+        "gross_median": 7.720144172954829e-06,
+        "net_median": -5.9993363743648666e-05,
+        "positive_net_ratio": 0.0,
+        "split": "stability",
+        "variant": "DIRECT_DELTA_SIGNAL_ZERO_NET"
+      },
+      {
+        "gross_median": 5.244482870942584e-06,
+        "net_median": -4.2839336562931524e-05,
+        "positive_net_ratio": 0.0,
+        "split": "stability",
+        "variant": "HORIZON_4H_CAUSAL_MEAN_DELTA_ZERO_NET"
+      }
+    ]
+  },
+  "model_fit_degenerate_runs": [],
+  "split_increment_summary": [
+    {
+      "gross_median": 3.508598785974694e-05,
+      "net_median": -6.775419989865796e-05,
+      "positive_net_ratio": 0.0,
+      "split": "selection"
+    },
+    {
+      "gross_median": 5.171744810292315e-06,
+      "net_median": -8.648000908944823e-05,
+      "positive_net_ratio": 0.0,
+      "split": "stability"
+    }
+  ],
+  "stable_added_residual_information_ratio": 0.4482758620689655,
+  "status": "BROAD_CORE_PACK_INFORMATION_INCREMENT_COST_KILLED",
+  "turnover_aware_mapping": {
+    "cost_reduction_only": true,
+    "development_increment_observed": false,
+    "status": "TURNOVER_AWARE_MAPPING_COST_REDUCTION_ONLY",
+    "summary": [
+      {
+        "control_net_improvement_median": 4.195876809005919e-05,
+        "control_turnover_reduction_ratio_median": 0.9751081840011473,
+        "delta_sleeve_net_median": 1.3629621122317404e-05,
+        "delta_sleeve_positive_ratio": 0.75,
+        "full_net_improvement_median": 2.3391668904312623e-05,
+        "full_turnover_reduction_ratio_median": 0.33766605327454974,
+        "matched_net_difference_median": 1.4381981462541159e-05,
+        "matched_positive_ratio": 0.75,
+        "split": "selection"
+      },
+      {
+        "control_net_improvement_median": 4.3811296145392515e-05,
+        "control_turnover_reduction_ratio_median": 0.9893634347949077,
+        "delta_sleeve_net_median": 4.290684352136672e-06,
+        "delta_sleeve_positive_ratio": 0.5,
+        "full_net_improvement_median": 3.420807622489603e-05,
+        "full_turnover_reduction_ratio_median": 0.5572085866515846,
+        "matched_net_difference_median": 5.2779123393127575e-06,
+        "matched_positive_ratio": 0.5,
+        "split": "stability"
+      }
+    ]
+  }
+}
