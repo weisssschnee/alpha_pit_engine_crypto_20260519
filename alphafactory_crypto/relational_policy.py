@@ -315,10 +315,17 @@ def load_broad_smoke_batch(
     # Universe membership and coverage ranking are frozen at the first
     # decision coordinate.  Later coordinates may invalidate the smoke, but
     # may not reach backward and influence which assets were selected.
-    candidate = base_eligible[:, start] & np.isfinite(target_store[:, start])
+    candidate = base_eligible[:, start]
     candidate_indices = np.flatnonzero(candidate)
     requested_assets = int(smoke["assets"])
-    if candidate_indices.size < requested_assets:
+    probe_symbols = tuple(str(value) for value in smoke.get("dynamic_membership_probe_symbols", []))
+    symbol_to_index = {symbol: index for index, symbol in enumerate(store.symbols)}
+    try:
+        probe_indices = np.asarray([symbol_to_index[symbol] for symbol in probe_symbols], dtype=int)
+    except KeyError as error:
+        raise ValueError(f"unknown dynamic-membership probe symbol: {error.args[0]}") from error
+    stable_assets = requested_assets - len(probe_indices)
+    if stable_assets < 3 or candidate_indices.size < stable_assets:
         raise ValueError("not enough stable eligible assets for the real smoke batch")
     asset_fields = views["BROAD_ASSET_LOCAL"]
     market_fields = views["BROAD_MARKET_STATE"]
@@ -327,11 +334,17 @@ def load_broad_smoke_batch(
     asset_arrays = {field: store.field(field) for field in asset_fields}
     for values in asset_arrays.values():
         coverage += np.isfinite(values[candidate_indices, history_start : start + 1]).mean(axis=1)
-    selected = candidate_indices[np.argsort(-coverage, kind="stable")[:requested_assets]]
-    if not base_eligible[selected[:, None], decision_times[None, :]].all():
-        raise ValueError("first-coordinate asset set did not remain eligible during smoke")
+    ranked = candidate_indices[np.argsort(-coverage, kind="stable")]
+    ranked = ranked[~np.isin(ranked, probe_indices)]
+    selected = np.concatenate((ranked[:stable_assets], probe_indices))
     if not np.isfinite(target_store[selected[:, None], decision_times[None, :]]).all():
         raise ValueError("first-coordinate asset set lacks complete smoke targets")
+    decision_eligibility = base_eligible[selected[:, None], decision_times[None, :]].T
+    decision_transitions = int(
+        np.count_nonzero(np.diff(decision_eligibility.astype(np.int8), axis=0))
+    )
+    if bool(smoke.get("require_dynamic_membership_transition", False)) and not decision_transitions:
+        raise ValueError("real smoke lacks a dynamic-universe membership transition")
 
     asset_batches: list[np.ndarray] = []
     market_batches: list[np.ndarray] = []
@@ -382,6 +395,7 @@ def load_broad_smoke_batch(
         "historical_ineligible_cells": int(
             np.count_nonzero(~np.stack(eligibility_batches))
         ),
+        "decision_eligibility_transitions": decision_transitions,
     }
     return batch, metadata
 
@@ -498,6 +512,9 @@ def run_vertical_slice_smoke(
             "historical_eligibility_transitions"
         ],
         "historical_ineligible_cells": metadata["historical_ineligible_cells"],
+        "decision_eligibility_transitions": metadata[
+            "decision_eligibility_transitions"
+        ],
         "nonzero_previous_weight_coordinates": int(
             torch.count_nonzero(previous_weights.abs().sum(dim=1) > 1e-8)
         ),
@@ -507,6 +524,9 @@ def run_vertical_slice_smoke(
         "asset_permutation_max_error": permutation_error,
         "maximum_abs_weight": float(np.abs(mapped.weights).max()),
         "maximum_abs_net_exposure": float(np.abs(mapped.weights.sum(axis=0)).max()),
+        "maximum_ineligible_current_weight": float(
+            np.abs(mapped.weights[~batch.eligibility[:, -1].numpy().T]).max(initial=0.0)
+        ),
         "strict_evaluator_mapping_id": evaluation.mapping_id,
         "strict_evaluator_total_turnover_l1": evaluation.total_turnover_l1,
         "strict_evaluator_total_cost": evaluation.total_cost,
