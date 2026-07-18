@@ -240,7 +240,11 @@ def evaluate_real_mapping(
     feasible = np.asarray(mapped.feasible, dtype=bool)[:last_valid]
 
     active_count = (np.abs(weights) > ACTIVE_EPSILON).sum(axis=0)
-    minimum_assets = 3 if mapped.portfolio_mapping_id == CROSS_SECTIONAL_ZERO_NET else 1
+    minimum_assets = int(
+        DEFAULT_MAPPING_CONTRACTS[mapped.portfolio_mapping_id].parameters.get(
+            "minimum_asset_count", 1
+        )
+    )
     support_mask = feasible & (active_count >= minimum_assets)
     sleeves = int(target_horizon_hours)
     if sleeves not in (1, 4):

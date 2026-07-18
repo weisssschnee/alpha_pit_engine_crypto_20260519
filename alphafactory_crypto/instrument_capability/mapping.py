@@ -14,6 +14,7 @@ import pandas as pd
 CROSS_SECTIONAL_ZERO_NET = "CROSS_SECTIONAL_ZERO_NET"
 TIME_SERIES_DIRECTIONAL_STATEFUL = "TIME_SERIES_DIRECTIONAL_STATEFUL"
 SPARSE_EVENT_OR_CARRY = "SPARSE_EVENT_OR_CARRY"
+DIRECT_ZERO_NET_COST_AWARE = "DIRECT_ZERO_NET_COST_AWARE"
 
 
 @dataclass(frozen=True)
@@ -84,6 +85,21 @@ DEFAULT_MAPPING_CONTRACTS: Mapping[str, MappingContract] = {
         },
         rebalance_cadence="event/settlement aligned",
         hold_semantics="fixed hold from eligible event, then explicit exit",
+        cost_model={"id": "FULL_L1_FIXED_BPS", "cost_bps": 5.0, "initial_establishment_charged": True},
+    ),
+    DIRECT_ZERO_NET_COST_AWARE: MappingContract(
+        portfolio_mapping_id=DIRECT_ZERO_NET_COST_AWARE,
+        parameters={
+            "source": "MODEL_DIRECT_WEIGHTS",
+            "gross_cap": 1.0,
+            "position_cap": 0.20,
+            "zero_net_tolerance": 1e-6,
+            "minimum_asset_count": 3,
+            "ineligible_weight_tolerance": 1e-8,
+            "missing_handling": "ineligible_assets_must_have_zero_weight",
+        },
+        rebalance_cadence="model decision coordinate",
+        hold_semantics="previous portfolio is an explicit model input; output is the next feasible portfolio",
         cost_model={"id": "FULL_L1_FIXED_BPS", "cost_bps": 5.0, "initial_establishment_charged": True},
     ),
 }
@@ -379,7 +395,74 @@ def map_portfolio(signal: np.ndarray, contract: MappingContract) -> MappingResul
         return _directional(source, contract)
     if contract.portfolio_mapping_id == SPARSE_EVENT_OR_CARRY:
         return _sparse(source, contract)
+    if contract.portfolio_mapping_id == DIRECT_ZERO_NET_COST_AWARE:
+        raise ValueError(
+            "direct-weight contract requires validate_direct_weights; it is not a signal mapping"
+        )
     raise ValueError(f"unknown portfolio_mapping_id: {contract.portfolio_mapping_id}")
+
+
+def validate_direct_weights(
+    weights: np.ndarray,
+    eligible: np.ndarray,
+    contract: MappingContract | None = None,
+) -> MappingResult:
+    """Validate model-produced weights without relabeling them as a rank mapping."""
+
+    selected = contract or DEFAULT_MAPPING_CONTRACTS[DIRECT_ZERO_NET_COST_AWARE]
+    if selected.portfolio_mapping_id != DIRECT_ZERO_NET_COST_AWARE:
+        raise ValueError("direct weights require the canonical direct-weight contract")
+    values = _matrix(weights, "weights")
+    mask = np.asarray(eligible, dtype=bool)
+    if mask.shape != values.shape:
+        raise ValueError("eligible must have the same [asset,time] shape as weights")
+    if not np.isfinite(values).all():
+        raise ValueError("direct weights must be finite")
+    parameters = selected.parameters
+    gross_cap = float(parameters["gross_cap"])
+    position_cap = float(parameters["position_cap"])
+    zero_net_tolerance = float(parameters["zero_net_tolerance"])
+    ineligible_tolerance = float(parameters["ineligible_weight_tolerance"])
+    minimum_assets = int(parameters["minimum_asset_count"])
+    if np.any(np.abs(values[~mask]) > ineligible_tolerance):
+        raise ValueError("direct weights allocate to an ineligible asset")
+    gross = np.abs(values).sum(axis=0)
+    net = values.sum(axis=0)
+    maximum = np.abs(values).max(axis=0)
+    active = (np.abs(values) > ineligible_tolerance).sum(axis=0)
+    eligible_count = mask.sum(axis=0)
+    violations = {
+        "gross cap": gross > gross_cap + zero_net_tolerance,
+        "position cap": maximum > position_cap + zero_net_tolerance,
+        "zero net": np.abs(net) > zero_net_tolerance,
+        "minimum eligible assets": (gross > ineligible_tolerance)
+        & (eligible_count < minimum_assets),
+    }
+    failed = [name for name, coordinates in violations.items() if np.any(coordinates)]
+    if failed:
+        raise ValueError("direct weight contract violation: " + ", ".join(failed))
+    feasible = (gross > ineligible_tolerance) & (active >= 2)
+    reasons = tuple(
+        ("DIRECT_WEIGHTS_VALIDATED",) if valid else ("EXPLICIT_NO_TRADE",)
+        for valid in feasible
+    )
+    diagnostics = {
+        "source": "MODEL_DIRECT_WEIGHTS",
+        "gross_cap": gross_cap,
+        "position_cap": position_cap,
+        "maximum_gross": float(gross.max()) if gross.size else 0.0,
+        "maximum_abs_weight": float(maximum.max()) if maximum.size else 0.0,
+        "maximum_abs_net_exposure": float(np.abs(net).max()) if net.size else 0.0,
+        "minimum_eligible_assets": int(eligible_count.min()) if eligible_count.size else 0,
+    }
+    return MappingResult(
+        selected.portfolio_mapping_id,
+        mapping_contract_sha256(selected),
+        values,
+        feasible,
+        reasons,
+        diagnostics,
+    )
 
 
 def portfolio_series(weights: np.ndarray, target_return: np.ndarray, cost_bps: float = 5.0) -> dict[str, np.ndarray]:
