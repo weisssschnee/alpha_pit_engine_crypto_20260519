@@ -314,63 +314,81 @@
     },
     {
       "id": "observed_archive_18m_compositional_search",
-      "label": "Observed-archive 18M compositional search",
+      "label": "Current-field 18M four-policy continuation",
       "kind": "development_experiment",
       "lifecycle": "DEPRECATED",
       "paths": [
         "alphafactory_crypto/broad_search/runner18m.py",
         "alphafactory_crypto/broad_search/compositional18m.py",
         "scripts/crypto_18m_compositional_broad_search.py",
-        "config/crypto_18m_compositional_broad_search_v1.json",
-        "reports/CRYPTO_18M_COMPOSITIONAL_BROAD_SEARCH_REPORT.md"
+        "config/crypto_18m_current_field_four_policy_continuation_v1.json",
+        "reports/CRYPTO_18M_CURRENT_FIELD_FOUR_POLICY_CONTINUATION_REPORT.md",
+        "reports/CRYPTO_18M_CURRENT_FIELD_FOUR_POLICY_CLOSURE_QUALIFICATION.md"
       ],
       "critical": true,
       "semantic_role": "experimental_18m_compositional_search_evidence",
       "active_authority": false,
       "authority": {
         "path": "alphafactory_crypto/broad_search/runner18m.py",
-        "repo_ref": "experiment/crypto-18m-compositional-broad-search-20260716",
-        "verified_sha": "b251733d51053cbbc99a3b79409debcee24ae760",
-        "sha256": "BF3C6B1929CD1F3E1FA8A776F47AEB08E7FB4F6B1BADA58F7CB90F5FD3D270E9"
+        "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
+        "verified_sha": "2350405595446b1c8615537666857ce5342159e3",
+        "sha256": "02AD3DB481957B1FD71E4075E2EE1DEFCE281418022CAA21EC03C80C2C5EFAAF"
       },
       "contracts": [
         {
-          "id": "bounded_18m_search_authority",
+          "id": "current_field_four_policy_authority",
           "type": "AUTHORITY",
-          "rule": "The frozen config, typed-DAG runner, field registry, mapping, cost, seeds, and pair budget own this one development-only execution",
+          "rule": "The frozen current-field config, source and compiler bundles, raw-cache identity, four policy/seed lanes, and fixed pair budget own this development-only continuation",
           "severity": "HARD",
-          "enforced_by": "broad_search.runner18m.build_evidence",
+          "enforced_by": "broad_search.runner18m.check_evidence",
           "bypass_forbidden": true,
-          "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_SEARCH_CONTRACT.json"
+          "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_18M_SEARCH_CONTRACT.json"
         },
         {
           "id": "report_only_feedback_boundary",
           "type": "BOUNDARY",
-          "rule": "Report-only rewards never update lane state, but the frozen runner exposed Stage-A report-only cluster/yield statistics to the Stage-B gate; the qualification audit owns this non-causal contract failure and future scheduling visibility remains forbidden",
+          "rule": "Stage B is frozen before report-only evaluation; report-only rewards make zero feedback writes and no policy may read another lane's private state",
           "severity": "HARD",
-          "enforced_by": "broad_search.qualification18m.check_evidence",
+          "enforced_by": "broad_search.runner18m.check_evidence",
           "bypass_forbidden": true,
-          "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_REPORT_ONLY_INDEPENDENCE_AUDIT.json"
+          "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_POLICY_BEHAVIOR_AUDIT.json"
         },
         {
-          "id": "localized_mechanism_claim_scope",
-          "type": "EVIDENCE",
-          "rule": "The unique candidate is neither an identity artifact nor accidentally concentrated, but its independent report-only LCB is negative and the reproduced clusters are same-family report-only variants; the qualified conclusion is INSUFFICIENT_INDEPENDENT_EVIDENCE",
+          "id": "current_broad_field_binding",
+          "type": "ADMISSION",
+          "rule": "The continuation binds to the 39 Broad tokens admitted by field_information_qualification_v0; the 18-month row/cache surface does not itself authorize fields and Core3 remains excluded",
           "severity": "HARD",
-          "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json"
+          "enforced_by": "broad_search.runner18m.check_evidence",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/resolved_token_contract.json"
+        },
+        {
+          "id": "policy_productivity_claim_scope",
+          "type": "EVIDENCE",
+          "rule": "Matched same-seed development evidence qualifies CEM distribution search and typed evolutionary mutation for small future implementation canaries only; negative mean rewards and challenge instability do not establish an economic challenger",
+          "severity": "HARD",
+          "evidence_ref": "reports/CRYPTO_18M_CURRENT_FIELD_FOUR_POLICY_CLOSURE_QUALIFICATION.md"
         }
       ],
       "validation": {
-        "level": "PARTIAL",
-        "result": "WARN",
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
-        "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
-        "verified_at_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
+        "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_ARTIFACT_MANIFEST.json",
+        "evidence_sha256": "5366AC5847DC78C6AEDFBC439D88C77DA425351EB66A3BD1E3C5DD009C4A2A69",
+        "verified_at_sha": "2f16328b599acaa3f6ca19e3c3cf284079fe0311"
       },
+      "claim_badges": [
+        "RUN ARTIFACTS VERIFIED",
+        "DEVELOPMENT ONLY",
+        "POLICY PRODUCTIVITY INCREMENT",
+        "NO ECONOMIC CHALLENGER",
+        "NO OOS",
+        "NO PROMOTION"
+      ],
       "promotion_requirements": [
-        "independent non-feedback reproduction",
-        "survivorship-safe historical eligibility",
+        "real CEM distribution and typed mutation implementation canary",
+        "positive matched development economic evidence",
         "formal OOS authorization and evidence",
         "accepted report",
         "explicit promotion authorization"
@@ -1449,19 +1467,19 @@
       "contract": {
         "id": "content_bound_train_surface_admission",
         "type": "ADMISSION",
-        "rule": "The search may consume only the content-hash-bound observed-archive 18-month train surface and its admitted field registry; no 2025+ or sealed role is eligible",
+        "rule": "The continuation may consume only the content-hash-bound observed-archive 18-month row/cache surface; field admission is owned separately and sealed roles remain ineligible",
         "severity": "HARD",
         "enforced_by": "broad_search.runner18m.build_evidence",
         "bypass_forbidden": true,
-        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_SEARCH_CONTRACT.json"
+        "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_18M_SEARCH_CONTRACT.json"
       },
       "validation": {
         "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_18m_compositional_broad_search_20260716/CRYPTO_18M_SEARCH_CONTRACT.json",
-        "evidence_sha256": "E2557A1C16FC10C4E7AA2DD8845DE21C9D12DBC1321FDA7B89A95B7634F94B14",
-        "verified_at_sha": "390c00ea480ad73ea8342fb7006b488c7f0cdc03"
+        "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_18M_SEARCH_CONTRACT.json",
+        "evidence_sha256": "E00D540A33D53D51E6B0C86829E6E8479EF2DBA08693887FE36A8C0391EF1BBD",
+        "verified_at_sha": "2f16328b599acaa3f6ca19e3c3cf284079fe0311"
       }
     },
     {
@@ -1475,45 +1493,44 @@
       "contract": {
         "id": "search_18m_development_only_boundary",
         "type": "BOUNDARY",
-        "rule": "The execution made zero sealed reads and no report-only reward entered lane state, but Stage-A report-only statistics were visible to the Stage-B scheduling gate; the frozen pack was counterfactually unchanged and the visibility defect remains recorded",
+        "rule": "The continuation makes zero sealed reads, freezes Stage B before report-only evaluation, writes zero report-only feedback, and creates no candidate or promotion authority",
         "severity": "HARD",
-        "enforced_by": "broad_search.qualification18m.check_evidence",
+        "enforced_by": "broad_search.runner18m.check_evidence",
         "bypass_forbidden": true,
-        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_REPORT_ONLY_INDEPENDENCE_AUDIT.json"
+        "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_POLICY_BEHAVIOR_AUDIT.json"
       },
       "validation": {
-        "level": "PARTIAL",
-        "result": "WARN",
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
         "profile": "evidence-boundary-change",
-        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_REPORT_ONLY_INDEPENDENCE_AUDIT.json",
-        "evidence_sha256": "60DB6EB335A98D31346F2BF63AFDBE043A0EAFD23C2FB460B4C1ACEC417AB08C",
-        "verified_at_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
+        "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_POLICY_BEHAVIOR_AUDIT.json",
+        "evidence_sha256": "5B16EFD1F15E8EDC09045DA0A5FAE73A4F52BC95F405C0982A193E9B761220EC",
+        "verified_at_sha": "2f16328b599acaa3f6ca19e3c3cf284079fe0311"
       }
     },
     {
       "id": "search_18m_is_qualified_by_localized_mechanism_audit",
       "source": "observed_archive_18m_compositional_search",
       "target": "localized_mechanism_qualification",
-      "relation": "evidence_qualified_by",
+      "relation": "supersedes_prior_execution_evidence",
       "lifecycle": "DEPRECATED",
       "critical": true,
       "evidence_type": "STATIC",
       "contract": {
-        "id": "localized_qualification_supersession",
+        "id": "current_continuation_supersession_scope",
         "type": "EVIDENCE",
-        "rule": "The qualification decision supersedes broad interpretations of the unique robust-positive candidate and the two reproduced clusters without changing the historical runtime artifacts",
+        "rule": "The current-field continuation is a separately bound execution and supersedes the prior 18M run for policy-productivity decisions without rewriting its localized-mechanism evidence",
         "severity": "HARD",
-        "enforced_by": "broad_search.qualification18m.check_evidence",
         "bypass_forbidden": true,
-        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json"
+        "evidence_ref": "reports/CRYPTO_18M_CURRENT_FIELD_FOUR_POLICY_CLOSURE_QUALIFICATION.md"
       },
       "validation": {
         "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
-        "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
-        "verified_at_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
+        "evidence_ref": "reports/CRYPTO_18M_CURRENT_FIELD_FOUR_POLICY_CLOSURE_QUALIFICATION.md",
+        "evidence_sha256": "065B8B245D6045B569545970B07C56C29F71AF87A8678F94F9E7548EFF7ED413",
+        "verified_at_sha": "2f16328b599acaa3f6ca19e3c3cf284079fe0311"
       }
     },
     {
@@ -1528,19 +1545,19 @@
       "contract": {
         "id": "development_result_not_formal_search_authority",
         "type": "BOUNDARY",
-        "rule": "INSUFFICIENT_INDEPENDENT_EVIDENCE and a non-issued challenger cannot activate formal performance search, strict OOS, forward access, candidate promotion, or accepted-tag movement",
+        "rule": "Development-only policy-productivity eligibility and localized positive clusters cannot activate formal performance search, strict OOS, forward access, candidate promotion, or accepted-tag movement",
         "severity": "HARD",
-        "enforced_by": "broad_search.qualification18m.check_evidence",
+        "enforced_by": "broad_search.runner18m.check_evidence",
         "bypass_forbidden": true,
-        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json"
+        "evidence_ref": "reports/CRYPTO_18M_CURRENT_FIELD_FOUR_POLICY_CLOSURE_QUALIFICATION.md"
       },
       "validation": {
         "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "evidence-boundary-change",
-        "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
-        "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
-        "verified_at_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
+        "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_ARTIFACT_MANIFEST.json",
+        "evidence_sha256": "5366AC5847DC78C6AEDFBC439D88C77DA425351EB66A3BD1E3C5DD009C4A2A69",
+        "verified_at_sha": "2f16328b599acaa3f6ca19e3c3cf284079fe0311"
       }
     },
     {
