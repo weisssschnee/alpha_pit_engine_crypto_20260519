@@ -1,0 +1,58 @@
+{
+  "clusters": [
+    {
+      "adaptive_matched_positive": 2,
+      "candidates": 37,
+      "challenge_matched_positive": 2,
+      "challenge_positive_seeds": [
+        20260716,
+        20260718
+      ],
+      "cluster_id": "5E7C5C43211A8CD166C51F250EC08CACF1794F899B1167DAB5FD2D4FA544BFEE",
+      "cross_seed_reproduced": true,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "skeleton_id": "state_regime_modulation_v3"
+    },
+    {
+      "adaptive_matched_positive": 0,
+      "candidates": 18,
+      "challenge_matched_positive": 2,
+      "challenge_positive_seeds": [
+        20260716,
+        20260718
+      ],
+      "cluster_id": "39DD04C198168081A77270C6DB38DDB33F4E3736107A6B2B1F1B4707A6D64214",
+      "cross_seed_reproduced": true,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "skeleton_id": "state_regime_modulation_v3"
+    },
+    {
+      "adaptive_matched_positive": 0,
+      "candidates": 31,
+      "challenge_matched_positive": 2,
+      "challenge_positive_seeds": [
+        20260716,
+        20260718
+      ],
+      "cluster_id": "FB543A8DC563C02062DDF1AA8E953998AE611860720F5A97D851BE59EBBF3453",
+      "cross_seed_reproduced": true,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "skeleton_id": "state_regime_modulation_v3"
+    },
+    {
+      "adaptive_matched_positive": 0,
+      "candidates": 15,
+      "challenge_matched_positive": 3,
+      "challenge_positive_seeds": [
+        20260717,
+        20260718
+      ],
+      "cluster_id": "7332C1CADE575067BB7195F8B1E46F3ECF0C3E6B6556F87135D11EBF5AC9FBF3",
+      "cross_seed_reproduced": true,
+      "mechanism_family": "STATE_REGIME_MODULATION",
+      "skeleton_id": "state_regime_modulation_v5"
+    }
+  ],
+  "cross_seed_reproduced_clusters": 4,
+  "schema_version": 1
+}

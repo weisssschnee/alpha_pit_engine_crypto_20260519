@@ -1,0 +1,17 @@
+stage,count
+proposal_attempts,500000
+grammar_legal,500000
+PIT_unit_pass,500000
+exact_unique,251892
+numeric_unique,41399
+behavior_unique,41625
+control_valid,47604
+materialization_pass,8192
+dynamic_support_pass,8192
+standalone_evaluation_pass,16384
+incremental_sleeve_pass,8192
+adaptive_matched_positive,4
+challenge_evaluation_pass,8192
+challenge_matched_positive,20
+robust_positive,4
+cross_seed_reproduced,4

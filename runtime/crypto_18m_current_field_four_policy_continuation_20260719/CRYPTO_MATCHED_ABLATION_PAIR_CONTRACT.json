@@ -1,0 +1,20 @@
+{
+  "control_behavior_identity_forbidden": true,
+  "control_exact_identity_forbidden": true,
+  "control_rule": "remove exactly one registered core mechanism while SupportMatchedPayload retains the removed input in support",
+  "incremental_turnover": "recomputed independently from delta weights",
+  "incremental_weight_formula": "primary_weight - control_weight",
+  "match_on": [
+    "raw inputs",
+    "timestamps",
+    "dynamic eligibility",
+    "target horizon",
+    "mapping family and position cap",
+    "5 bps full-L1 cost model",
+    "raw support"
+  ],
+  "pair_authority": "PRIMARY_CONTROL_WITH_INCREMENTAL_DELTA_WEIGHT_SLEEVE",
+  "schema_version": 1,
+  "standalone_scalar_delta_role": "DIAGNOSTIC_ONLY",
+  "support_overlap_required": 1.0
+}

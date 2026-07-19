@@ -1,12 +1,12 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-07-18 Asia/Hong_Kong
+Last updated: 2026-07-19 Asia/Hong_Kong
 
 ## Current phase
 
-`RELATIONAL_POLICY_STAGE1_COMPLETED_CURRENT_IMPLEMENTATION_LINE_CLOSED`
+`CURRENT_FIELD_FOUR_POLICY_CONTINUATION_COMPLETED_POLICY_UPGRADE_ELIGIBILITY_ESTABLISHED`
 
-The fixed Stage-1 attribution completed on PC2 after exact source/data/package parity. All three 12,993-parameter arms were non-degenerate, but synchronized relational representation beat temporal-only on only 1/6 seed-aggregated blocks and had an inconsistent seed direction. It beat the 336h shifted-peer control on 4/6 blocks, which shows the comparison was informative, but does not establish a stable increment over the asset-local temporal model. Stage 2 is not authorized. The temporary Stage-1 scaffold has been removed; the compact Stage-0 direct-weight slice remains an experimental reusable capability only. Liquidation capture and source qualification continue asynchronously.
+The exact current-field/current-compiler continuation completed on PC2 with the original four policies, Broad 38+1 only, fresh policy state, 500,000 structural proposals, 8,192 adaptive pairs, and 8,192 later report-only pairs. The runtime bundle, source, compiler, cache, packages, budgets, zero sealed reads, zero report-only feedback, and all 39 adaptive field exposures closed. Independent recomputation against same-seed typed random qualified CEM-lite in 4/4 seeds and Evolutionary-lite in 3/4 for future policy implementation. This is a search-policy productivity increment, not an economic challenger: mean pair rewards remained negative and the primary economic bottleneck remained challenge instability. No candidate, OOS, or promotion authority was created.
 
 ## Current decisions
 
@@ -17,6 +17,10 @@ CURRENT_DATA_UNDERPOWERED
 FINANCIAL_GATE_HOLD_RESEARCH
 CRYPTO_INTERNAL_SEARCH_INSTRUMENT_CAPABILITY_QUALIFIED
 CRYPTO_COMPOSITIONAL_GRAMMAR_BOTTLENECK_CONFIRMED
+CURRENT_FIELD_FOUR_POLICY_CONTINUATION_COMPLETED
+POLICY_PRODUCTIVITY_INCREMENT_OBSERVED
+CEM_DISTRIBUTION_SEARCH_UPGRADE_ELIGIBLE
+EVOLUTIONARY_TYPED_MUTATION_UPGRADE_ELIGIBLE
 IMPLEMENTATION_SPECIFIC_INFORMATIVE_NEGATIVE
 GRAPH_RAW_CURRENT_SEPARATION_ACTIVE
 CURRENT_CONTRACT_CAPSULE_ACTIVE
@@ -45,6 +49,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 - Latest qualified Graph closure before this maintenance phase: `920e0ad35c07e2e2cee3ed2be8ad0753937f86f4`.
 - Accepted closure bundle SHA256: `99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2`.
 - 18-month compositional bundle SHA256: `EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492`.
+- Current-field four-policy continuation: producer source `2350405595446b1c8615537666857ce5342159e3`; base closure `a115913ae333696482059b497472864871cebc9f`; runtime bundle SHA256 `13A521BE23B193EA3BFD9B4B319E69280BD9932A1B8A394EB4E3A73AD2D577EB`; compiler bundle SHA256 `E9A438114E8619E39B5535251F0B0A91E3905B61259E3A0ABB7745E94A5A6842`; raw-cache bundle SHA256 `D120C0444B2A5828CBE0C7B538DEF81A1D2E50689C941F4B1A96D2AE60D93FED`; raw-cache identity SHA256 `CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0`.
 - Localized qualification bundle SHA256: `0C6193E81FEAB8271B8BAE05AD04604D74494EAB2710794C59A7F42919DD68EB`.
 - Liquidation ingress implementation: `d64a783dac4c148d1924f76acb7b8a80cbcc7f1a`; byte-stable evidence commit: `58ff34e48cb88acc0005e741c8aaa52d3528177e`; release identity SHA256: `C9717263EC6F97839466A4BC13D8DBA803E3D0D5854AE6E3A005F4C6F0F34D7A`.
 - Core Pack consumption implementation source: `f01d0d22a40ae9949a027fe138c52998fb23c1ef`; evidence commit: `e3631d31ae5022b6765b0a333fb9c32015312c01`.
@@ -65,6 +70,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 - Internal search instrument: qualified only for the frozen finite grammar, deterministic synthetic reachability, mapping, cost, feedback, and survivor retention. It is not market alpha, open-generator recall, or OOS evidence.
 - Observed-archive train surface: 2,549,139 rows, 13,200 unique hours, and 276 observed assets across the joined 2023H2/2024 train archive. It is not survivorship-complete; native aggTrades history remains much narrower.
 - 18-month compositional run: 41 fields across 12 families, 500,000 proposal audit, 8,192 adaptive matched pairs, and zero sealed reads. Localized mechanisms did not supply independent evidence sufficient to issue a challenger.
+- Current-field/current-compiler continuation: Broad 38+1 supplied 39 fields across 11 families; 500,000 legal proposals produced 251,892 exact-unique and 41,625 behavior-unique candidates. All 16 policy/seed lanes completed 512 adaptive pairs and deterministic replay. CEM-lite beat same-seed typed random on both mean and fixed top-decile reward in 4/4 seeds; Evolutionary-lite did so in 3/4. These gates independently recomputed exactly from the strict parquet. The policies are eligible for narrow real implementations, but average rewards remained negative, Evolutionary-lite was coverage-concentrated, and challenge instability prevented an economic challenger.
 - Explicit/latent comparison: 41/41 means cache loadability plus minimum adaptive-surface nonmissing/variance. Arm D is implementation-verified. Arm E is an overlapping field-family grouped structured proxy with shared objectives and zero-out ablation; its configured semantic matched controls were not executed. The result is an implementation-specific development negative after 5 bps cost, not OOS evidence or rejection of latent-state research.
 - Field Information V0: the compiled view contains 177 base/registered tokens and 5,211 derived specifications. Census loading succeeded for 41/41 broad fields and 94/94 Core3 aggTrades fields. `census_loaded` is not `current_runtime_member`: only ten broad fields are current-runtime members, while the 94 Core3 fields remain a separate three-asset mechanism context.
 - Volume and flow are materially represented: the broad context contains seven quote-volume/activity fields; the Core3 registry contains 19 activity/liquidity, 16 flow, 6 large-trade, and 26 rolling fields. Trade count, quote volume, size-bucket notional, buy/sell quantity, and price-range fields lead the information census.
@@ -85,21 +91,22 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 
 ## Active execution plan
 
-1. Keep the Stage-1 decision closed: no width, attention, seed, horizon, field, or learning-rate rescue and no B/C/D/D0 Stage 2.
-2. Keep Stage 0 `EXPERIMENTAL` as a reusable direct-weight/cost-path capability; it is not an economic authority.
-3. Reuse the already packaged Broad `38+1` and Core3 `31+5+45` views as separate typed search surfaces. Do not create a pooled 120-channel panel or another registry.
-4. The next task may prepare one compact typed-search budget manifest and one short compile/reachability audit over the existing generator. It must expire when the next large-search contract is accepted or rejected; it may not become a new control plane.
-5. Keep CryptoHFT and Bitfinex quarantined, Binance capture raw-only, and challenge, recent, May stress, forward, promotion, and cross-sprint memory closed.
+1. Treat the completed continuation as spent development evidence; do not rerun it or tune its candidates.
+2. Implement only two expiring policy upgrades inside the existing generator: a real frozen CEM distribution update and receipt-bearing typed mutation. Do not add a registry, database, scheduler, or control plane.
+3. Retain canonical typed random as the same-seed matched control and retain UCT unchanged. Require coverage diagnostics because the lite evolutionary policy concentrated on eight skeletons and two to three mechanism families.
+4. Run one compile/replay check and one small fixed development canary before proposing another large search contract. A positive canary may justify a frozen future budget; it cannot authorize OOS or promotion.
+5. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
 
 No performance search or large experiment is authorized merely by this plan.
 
-## Candidate next-stage search preparation
+## Candidate next-stage policy implementation
 
-The next useful increment is generator/search enablement, not another relational model rescue. Reuse the existing Field Information V0 contracts and loaders, then measure whether the current generator can compile diverse candidates across context, field family, operator family, and expression depth. The smallest useful preparation is one typed budget table plus a compile-only stratified sample; no market score, HPO, new database, checkpoint service, or new Graph node is needed. If coverage is already adequate, delete the temporary audit code and freeze the next development-search contract. If coverage is not adequate, patch only the missing generator route and repeat the same short audit once. A later performance run still requires an explicit frozen budget and remains development-only under the current sealed boundaries.
+The useful increment is now implementation, not another coverage report or broad experiment. Reuse the existing policy interface and receipts, replace CEM-lite with a genuine distribution update and Evolutionary-lite with typed parent-to-child mutation, and keep the change disposable until a short matched canary passes. The canary should answer only whether the real policies preserve validity, coverage, deterministic replay, and the observed productivity direction. It should not rescore old report-only candidates, create cross-sprint memory, or open a large budget by default.
 
 ## Blockers
 
 - The observed-archive surface is not survivorship-complete, and its selection/stability blocks are spent; they can support engineering attribution but not fresh confirmation.
+- The completed continuation improved search-policy productivity but did not establish a positive absolute reward distribution or an economic challenger; its adaptive and report-only blocks are now spent.
 - Historical aggTrades coverage remains narrower than the observed-archive surface; the qualified Core3 slice has 3 assets, 4,368 hours, and 13,068 eligible observations.
 - Qlib and DeepDow remain data-underpowered; neither supplies a clean economic negative for its full external paradigm.
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
@@ -130,4 +137,4 @@ No status code overrides observed runtime or source facts.
 
 ## Next action
 
-Prepare one small, expiring typed-search coverage contract against the existing Broad and Core3 field packs, then run only its compile/reachability audit. Do not run performance search, reopen the relational Stage-1 line, execute Stage 2, or open sealed roles. Continue the liquidation data line independently.
+Implement the two expiring policy upgrades in the existing Broad generator, then run one compile/replay check and one small same-seed development canary. Do not rerun the completed continuation, start another large performance search, reopen relational Stage 1, execute Stage 2, or open sealed roles. Continue the liquidation data line independently.
