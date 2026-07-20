@@ -42,7 +42,8 @@ def _read(path: Path) -> Any:
 
 def _write(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(value, indent=2, sort_keys=True) + "\n")
 
 
 def _payload_sha(value: Any) -> str:
@@ -195,7 +196,8 @@ def build(source_sha: str | None = None) -> dict[str, Any]:
     value = _qualification(source_sha, datetime.now(timezone.utc).isoformat())
     _write(OUTPUT_JSON, value)
     OUTPUT_REPORT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_REPORT.write_text(_report(value), encoding="utf-8")
+    with OUTPUT_REPORT.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(_report(value))
     artifacts = [
         {"path": p.relative_to(REPO_ROOT).as_posix(), "bytes": p.stat().st_size, "sha256": sha256_file(p)}
         for p in (OUTPUT_JSON, OUTPUT_REPORT)
