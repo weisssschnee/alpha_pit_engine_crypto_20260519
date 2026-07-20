@@ -541,11 +541,16 @@ def typed_mutate_candidate(
         candidate = candidate_from_genes(
             registry, skeleton=skeleton, genes=genome, roles=role_map
         )
-        if candidate.candidate_id != parent.candidate_id:
+        actual_changes = {
+            key
+            for key in parent.generation_genes
+            if parent.generation_genes[key] != candidate.generation_genes[key]
+        }
+        if candidate.candidate_id != parent.candidate_id and actual_changes == {name}:
             child = candidate
             changed_gene = name
             before = parent.generation_genes[name]
-            after = value
+            after = candidate.generation_genes[name]
             break
     if child is None:
         raise RuntimeError("typed mutation did not change candidate identity")

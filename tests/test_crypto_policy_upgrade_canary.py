@@ -12,6 +12,7 @@ from alphafactory_crypto.broad_search.expression import (
 )
 from alphafactory_crypto.broad_search.policy_upgrade_canary import (
     CANARY_POLICIES,
+    _finalize_audit,
     _policy_upgrade_audit,
     compile_replay_audit,
     validate_canary_config,
@@ -57,6 +58,10 @@ def test_canary_contract_is_exactly_five_by_four_by_128_and_sealed() -> None:
     changed = deepcopy(config)
     changed["budget"]["pairs_per_lane"] = 64
     with pytest.raises(ValueError, match="frozen canary budget"):
+        validate_canary_config(changed)
+    changed = deepcopy(config)
+    changed["qualification"]["minimum_positive_seed_count"] = 0
+    with pytest.raises(ValueError, match="frozen canary contract"):
         validate_canary_config(changed)
 
 
@@ -134,4 +139,19 @@ def test_policy_audit_requires_real_policy_to_beat_random_and_lite() -> None:
     assert (
         failed["upgrade_decisions"]["cem_distribution_v1"]["decision"]
         == "EVICT_EXPERIMENTAL_UPGRADE"
+    )
+    invalidated = _finalize_audit(
+        audit,
+        replay={"result": "FAIL", "errors": ["state drift"]},
+        resource={
+            "wall_seconds": 1.0,
+            "maximum_worker_peak_rss_bytes": 1,
+            "raw_cache_unchanged": True,
+        },
+        config=config,
+    )
+    assert invalidated["implementation_result"] == "FAIL"
+    assert all(
+        value["decision"] == "EVICT_EXPERIMENTAL_UPGRADE"
+        for value in invalidated["upgrade_decisions"].values()
     )

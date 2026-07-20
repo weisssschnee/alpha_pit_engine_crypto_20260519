@@ -351,6 +351,26 @@ def test_real_typed_evolution_replays_and_verifies_every_mutation() -> None:
     assert first.state_hash() == second.state_hash()
 
 
+def test_real_typed_evolution_survives_all_formal_seeds_for_128_steps() -> None:
+    registry = _role_complete_registry()
+    params = {
+        "warmup": 16,
+        "exploration_probability": 0.25,
+        "tournament_size": 4,
+        "duplicate_resample_limit": 16,
+    }
+    for seed in (20260716, 20260717, 20260718, 20260719):
+        policy = LanePolicy("evolutionary_typed_v1", seed, registry, params)
+        for step in range(128):
+            candidate, metadata = policy.propose()
+            if metadata["mutation_receipt"] is not None:
+                parent = policy.candidates[metadata["parent_id"]]
+                assert verify_typed_mutation_receipt(
+                    registry, parent, candidate, metadata["mutation_receipt"]
+                )
+            policy.update(candidate, float(step % 7))
+
+
 def test_frozen_config_keeps_sealed_reads_and_promotion_disabled() -> None:
     config = json.loads(
         (Path(__file__).parents[1] / "config" / "crypto_18m_compositional_broad_search_v1.json").read_text()

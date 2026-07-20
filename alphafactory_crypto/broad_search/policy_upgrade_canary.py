@@ -50,6 +50,9 @@ EPOCH_ID = "CRYPTO_CURRENT_FIELD_POLICY_UPGRADE_CANARY_V1"
 CANARY_POLICIES = POLICY_UPGRADE_CANARY_POLICIES
 CANARY_SEEDS = (20260716, 20260717, 20260718, 20260719)
 PAIRS_PER_LANE = 128
+CONFIG_CONTRACT_SHA256 = (
+    "2E319C5A3C3CC5246F7730812D05C983ACD7326847894F05A2E684423CAFE1EC"
+)
 RUNTIME_FILES = (
     "POLICY_UPGRADE_CANARY_CONTRACT.json",
     "POLICY_COMPILE_REPLAY.json",
@@ -102,6 +105,47 @@ def validate_canary_config(config: Mapping[str, Any]) -> None:
     parameters = config.get("policy_parameters", {})
     if set(parameters) != {"cem_distribution_v1", "evolutionary_typed_v1"}:
         raise ValueError("policy parameter surface changed")
+    if _payload_sha(config) != CONFIG_CONTRACT_SHA256:
+        raise ValueError("frozen canary contract changed")
+
+
+def _invalidate_upgrade_decisions(
+    audit: dict[str, Any], *, reason: str
+) -> None:
+    for decision in audit.get("upgrade_decisions", {}).values():
+        decision["implementation_valid"] = False
+        decision["decision"] = "EVICT_EXPERIMENTAL_UPGRADE"
+        decision["invalidation_reason"] = reason
+
+
+def _finalize_audit(
+    audit: dict[str, Any],
+    *,
+    replay: Mapping[str, Any],
+    resource: Mapping[str, Any],
+    config: Mapping[str, Any],
+) -> dict[str, Any]:
+    audit["persisted_reward_replay"] = dict(replay)
+    if replay.get("result") != "PASS":
+        audit["implementation_errors"].extend(
+            "REPLAY:" + str(value) for value in replay.get("errors", [])
+        )
+    if float(resource.get("wall_seconds", math.inf)) > int(
+        config["resources"]["maximum_wall_seconds"]
+    ):
+        audit["implementation_errors"].append("RESOURCE:WALL_SECONDS")
+    if int(resource.get("maximum_worker_peak_rss_bytes", 2**63)) > int(
+        config["resources"]["maximum_worker_peak_rss_bytes"]
+    ):
+        audit["implementation_errors"].append("RESOURCE:WORKER_RSS")
+    if resource.get("raw_cache_unchanged") is not True:
+        audit["implementation_errors"].append("RESOURCE:RAW_CACHE_DRIFT")
+    if audit["implementation_errors"]:
+        audit["implementation_result"] = "FAIL"
+        _invalidate_upgrade_decisions(
+            audit, reason="GLOBAL_IMPLEMENTATION_OR_RESOURCE_GATE_FAILED"
+        )
+    return audit
 
 
 def _synthetic_reward(seed: int, step: int, candidate_id: str) -> float:
@@ -600,13 +644,6 @@ def build_canary(
     frame.to_parquet(runtime_root / RUNTIME_FILES[2], index=False)
     audit = _policy_upgrade_audit(rows, config)
     replay = _replay_persisted_rows(rows, registry, config)
-    if replay["result"] != "PASS":
-        audit["implementation_errors"].extend(
-            "REPLAY:" + value for value in replay["errors"]
-        )
-        audit["implementation_result"] = "FAIL"
-    audit["persisted_reward_replay"] = replay
-    _write_json(runtime_root / RUNTIME_FILES[3], audit)
     cache_after = _directory_bundle(repo_root / str(config["cache_root"]))
     resource = {
         "schema_version": 1,
@@ -625,17 +662,9 @@ def build_canary(
         "raw_cache_bundle_after": cache_after,
         "raw_cache_unchanged": cache_before == cache_after,
     }
-    if wall_seconds > int(config["resources"]["maximum_wall_seconds"]):
-        audit["implementation_errors"].append("RESOURCE:WALL_SECONDS")
-        audit["implementation_result"] = "FAIL"
-    if resource["maximum_worker_peak_rss_bytes"] > int(
-        config["resources"]["maximum_worker_peak_rss_bytes"]
-    ):
-        audit["implementation_errors"].append("RESOURCE:WORKER_RSS")
-        audit["implementation_result"] = "FAIL"
-    if not resource["raw_cache_unchanged"]:
-        audit["implementation_errors"].append("RESOURCE:RAW_CACHE_DRIFT")
-        audit["implementation_result"] = "FAIL"
+    audit = _finalize_audit(
+        audit, replay=replay, resource=resource, config=config
+    )
     _write_json(runtime_root / RUNTIME_FILES[3], audit)
     _write_json(runtime_root / RUNTIME_FILES[5], resource)
     decision = {
@@ -743,8 +772,13 @@ def check_canary(repo_root: Path, *, config_path: Path) -> dict[str, Any]:
     if replay["result"] != "PASS":
         errors.extend("persisted_replay:" + value for value in replay["errors"])
     observed_audit = _read_json(runtime_root / RUNTIME_FILES[3])
-    recomputed_audit = _policy_upgrade_audit(rows, config)
-    recomputed_audit["persisted_reward_replay"] = replay
+    resource = _read_json(runtime_root / RUNTIME_FILES[5])
+    recomputed_audit = _finalize_audit(
+        _policy_upgrade_audit(rows, config),
+        replay=replay,
+        resource=resource,
+        config=config,
+    )
     if observed_audit != recomputed_audit:
         errors.append("behavior_audit")
     decision = _read_json(runtime_root / RUNTIME_FILES[4])
@@ -756,7 +790,6 @@ def check_canary(repo_root: Path, *, config_path: Path) -> dict[str, Any]:
         or decision.get("candidate_promotion") != "FORBIDDEN"
     ):
         errors.append("decision")
-    resource = _read_json(runtime_root / RUNTIME_FILES[5])
     if (
         resource.get("raw_cache_unchanged") is not True
         or resource.get("strict_pairs") != 2560
