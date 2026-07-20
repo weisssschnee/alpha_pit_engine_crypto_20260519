@@ -395,6 +395,77 @@
       ]
     },
     {
+      "id": "real_policy_upgrade_canary",
+      "label": "Real CEM + typed evolutionary policy canary",
+      "kind": "development_experiment",
+      "lifecycle": "EXPERIMENTAL",
+      "paths": [
+        "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "scripts/crypto_policy_upgrade_canary.py",
+        "scripts/crypto_policy_upgrade_qualification_supersession.py",
+        "config/crypto_policy_upgrade_canary_v1.json",
+        "reports/CRYPTO_POLICY_UPGRADE_CANARY_V1_QUALIFICATION_SUPERSESSION.md"
+      ],
+      "critical": true,
+      "semantic_role": "future_new_data_policy_component_qualification",
+      "active_authority": false,
+      "authority": {
+        "path": "scripts/crypto_policy_upgrade_qualification_supersession.py",
+        "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
+        "verified_sha": "3d9a9ea2951216d66c72a2b70c539d109975375b"
+      },
+      "contracts": [
+        {
+          "id": "policy_canary_qualification_authority",
+          "type": "AUTHORITY",
+          "rule": "The immutable producer manifest plus the narrow supersession checker own the qualified 4/4 CEM and 3/4 typed-evolution decisions; the original fail-closed artifacts remain unchanged",
+          "severity": "HARD",
+          "enforced_by": "crypto_policy_upgrade_qualification_supersession.check",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720_qualification_supersession_v1/manifest.json"
+        },
+        {
+          "id": "policy_canary_sealed_boundary",
+          "type": "BOUNDARY",
+          "rule": "The spent-development canary performs zero sealed, report-only, or forward reads and creates no candidate, cross-sprint memory, OOS, or promotion authority",
+          "severity": "HARD",
+          "enforced_by": "policy_upgrade_canary.check_canary and crypto_policy_upgrade_qualification_supersession.check",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720_qualification_supersession_v1/QUALIFICATION_SUPERSESSION.json"
+        },
+        {
+          "id": "policy_canary_claim_scope",
+          "type": "EVIDENCE",
+          "rule": "Matched same-seed mean and top-decile margins qualify two policy implementations for a future new-data Arena only; they do not establish positive absolute reward, alpha, or economic increment",
+          "severity": "HARD",
+          "evidence_ref": "reports/CRYPTO_POLICY_UPGRADE_CANARY_V1_QUALIFICATION_SUPERSESSION.md"
+        }
+      ],
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720_qualification_supersession_v1/manifest.json",
+        "evidence_sha256": "4F24E31042FBBEE030CCAC89496043DB7E0391CB9D0225ABB64143F57D5D1EB5",
+        "verified_at_sha": "0d17e5ec2538a9a79b598310a813a1380955e2fe"
+      },
+      "claim_badges": [
+        "RUNTIME ARTIFACTS VERIFIED",
+        "CONTROL DIAGNOSTIC FIXED",
+        "DEVELOPMENT ONLY",
+        "POLICY COMPONENTS KEPT",
+        "NO OOS",
+        "NO PROMOTION"
+      ],
+      "promotion_requirements": [
+        "information-adequate new data",
+        "fresh policy state and frozen Arena budget",
+        "matched typed-random and internal baseline controls",
+        "formal OOS authorization and evidence",
+        "explicit promotion authorization"
+      ]
+    },
+    {
       "id": "localized_mechanism_qualification",
       "label": "Localized mechanism evidence qualification",
       "kind": "assurance",
@@ -1558,6 +1629,82 @@
         "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_ARTIFACT_MANIFEST.json",
         "evidence_sha256": "5366AC5847DC78C6AEDFBC439D88C77DA425351EB66A3BD1E3C5DD009C4A2A69",
         "verified_at_sha": "2f16328b599acaa3f6ca19e3c3cf284079fe0311"
+      }
+    },
+    {
+      "id": "current_field_search_precedes_real_policy_canary",
+      "source": "observed_archive_18m_compositional_search",
+      "target": "real_policy_upgrade_canary",
+      "relation": "provides_spent_development_parent_evidence",
+      "lifecycle": "DEPRECATED",
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "policy_canary_parent_evidence_scope",
+        "type": "EVIDENCE",
+        "rule": "The completed four-policy continuation supplied the frozen field, compiler, cache, and lite-control identities but supplied no reusable candidates or adaptive policy state",
+        "severity": "HARD",
+        "enforced_by": "policy_upgrade_canary.check_canary",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_UPGRADE_CANARY_CONTRACT.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720/manifest.json",
+        "verified_at_sha": "0d17e5ec2538a9a79b598310a813a1380955e2fe"
+      }
+    },
+    {
+      "id": "real_policy_canary_future_arena_admission",
+      "source": "real_policy_upgrade_canary",
+      "target": "multi_paradigm_arena",
+      "relation": "qualified_future_component",
+      "lifecycle": "EXPERIMENTAL",
+      "required": false,
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "future_new_data_policy_admission",
+        "type": "ADMISSION",
+        "rule": "Real CEM and typed evolution may enter only an information-adequate new-data Arena with fresh state, a frozen budget, typed random, and the current internal baseline",
+        "severity": "HARD",
+        "enforced_by": "data_adequacy_gate and future Arena contract",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720_qualification_supersession_v1/QUALIFICATION_SUPERSESSION.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "crypto-development-research",
+        "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720_qualification_supersession_v1/manifest.json",
+        "verified_at_sha": "0d17e5ec2538a9a79b598310a813a1380955e2fe"
+      }
+    },
+    {
+      "id": "real_policy_canary_enforces_sealed_boundaries",
+      "source": "real_policy_upgrade_canary",
+      "target": "sealed_research_boundaries",
+      "relation": "respects_sealed_boundaries",
+      "lifecycle": "EXPERIMENTAL",
+      "critical": true,
+      "evidence_type": "STATIC",
+      "contract": {
+        "id": "policy_canary_no_activation_authority",
+        "type": "BOUNDARY",
+        "rule": "Policy-productivity qualification cannot open sealed data, formal performance search, forward access, candidate promotion, or cross-sprint memory",
+        "severity": "HARD",
+        "enforced_by": "policy_upgrade_canary.check_canary and crypto_policy_upgrade_qualification_supersession.check",
+        "bypass_forbidden": true,
+        "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720_qualification_supersession_v1/QUALIFICATION_SUPERSESSION.json"
+      },
+      "validation": {
+        "level": "STATIC_VERIFIED",
+        "result": "PASS",
+        "profile": "evidence-boundary-change",
+        "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720_qualification_supersession_v1/manifest.json",
+        "verified_at_sha": "0d17e5ec2538a9a79b598310a813a1380955e2fe"
       }
     },
     {
