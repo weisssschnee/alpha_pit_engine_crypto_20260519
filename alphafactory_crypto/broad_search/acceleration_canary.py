@@ -513,7 +513,9 @@ def _render_report(contract: Mapping[str, Any], results: Mapping[str, Any], reso
         for row in results["scheduler"]
     ]
     packages = resource["environment"]["packages"]
-    package_line = ", ".join(f"{name}={value}" for name, value in packages.items())
+    package_line = ", ".join(
+        f"{name}={packages[name]}" for name in sorted(packages)
+    )
     background_scripts = sorted(
         {
             row["script"]
