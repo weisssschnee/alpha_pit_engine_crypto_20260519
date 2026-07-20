@@ -1,12 +1,12 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-07-19 Asia/Hong_Kong
+Last updated: 2026-07-20 Asia/Hong_Kong
 
 ## Current phase
 
-`CURRENT_FIELD_FOUR_POLICY_CONTINUATION_COMPLETED_POLICY_UPGRADE_ELIGIBILITY_ESTABLISHED`
+`REAL_POLICY_UPGRADE_CANARY_QUALIFIED_FOR_FUTURE_NEW_DATA_ARENA`
 
-The exact current-field/current-compiler continuation completed on PC2 with the original four policies, Broad 38+1 only, fresh policy state, 500,000 structural proposals, 8,192 adaptive pairs, and 8,192 later report-only pairs. The runtime bundle, source, compiler, cache, packages, budgets, zero sealed reads, zero report-only feedback, and all 39 adaptive field exposures closed. Independent recomputation against same-seed typed random qualified CEM-lite in 4/4 seeds and Evolutionary-lite in 3/4 for future policy implementation. This is a search-policy productivity increment, not an economic challenger: mean pair rewards remained negative and the primary economic bottleneck remained challenge instability. No candidate, OOS, or promotion authority was created.
+The exact current-field/current-compiler continuation remains spent development evidence. Its two real policy upgrades then completed a fixed 2,560-pair PC2 canary: CEM distribution jointly beat same-seed typed random and CEM-lite in 4/4 seeds, while receipt-bearing typed evolution beat typed random and Evolutionary-lite in 3/4. The producer's original fail-closed bundle is preserved; a narrow supersession corrected only the erroneous globalization of two known lite-control family-coverage diagnostics. No pair was rerun. This qualifies both policy implementations for a future new-data Arena, not as alpha, OOS evidence, candidates, or promotion authority.
 
 ## Current decisions
 
@@ -21,6 +21,9 @@ CURRENT_FIELD_FOUR_POLICY_CONTINUATION_COMPLETED
 POLICY_PRODUCTIVITY_INCREMENT_OBSERVED
 CEM_DISTRIBUTION_SEARCH_UPGRADE_ELIGIBLE
 EVOLUTIONARY_TYPED_MUTATION_UPGRADE_ELIGIBLE
+POLICY_UPGRADE_CANARY_QUALIFIED
+REAL_CEM_DISTRIBUTION_KEEP_FOR_FUTURE_NEW_DATA_ARENA
+TYPED_EVOLUTIONARY_KEEP_FOR_FUTURE_NEW_DATA_ARENA
 IMPLEMENTATION_SPECIFIC_INFORMATIVE_NEGATIVE
 GRAPH_RAW_CURRENT_SEPARATION_ACTIVE
 CURRENT_CONTRACT_CAPSULE_ACTIVE
@@ -50,6 +53,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 - Accepted closure bundle SHA256: `99C0DACAF12F17DA6B7705DDBFCE9BAD996143082301F47BCA7E690071140EF2`.
 - 18-month compositional bundle SHA256: `EABBD9B4844A0589A1C409A274688D2D2C41B9793A0B584BE54909C0AC27D492`.
 - Current-field four-policy continuation: producer source `2350405595446b1c8615537666857ce5342159e3`; base closure `a115913ae333696482059b497472864871cebc9f`; runtime bundle SHA256 `13A521BE23B193EA3BFD9B4B319E69280BD9932A1B8A394EB4E3A73AD2D577EB`; compiler bundle SHA256 `E9A438114E8619E39B5535251F0B0A91E3905B61259E3A0ABB7745E94A5A6842`; raw-cache bundle SHA256 `D120C0444B2A5828CBE0C7B538DEF81A1D2E50689C941F4B1A96D2AE60D93FED`; raw-cache identity SHA256 `CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0`.
+- Real policy-upgrade canary: producer source `33d44a57af99a1fb506216b336351674a10d0488`; original fail-closed bundle SHA256 `267CAB35DC4E1709DD77475BA59FCE4FC130A2AC7E6644D6B6A41803A52001F6`; immutable pair artifact SHA256 `F4D34B76DAEEF6E19E5CEB39E4E09F542F75490AF2B957F148AB5B34028E4222`; qualifier source `7f690bbce1e9879ee7f22f97468b9d672f499f34`; supersession bundle SHA256 `1809307A5A4D02D7F3B338C86151AD0B33DFF2DD898D9E7BC8B8D43F1B8B3C27`.
 - Localized qualification bundle SHA256: `0C6193E81FEAB8271B8BAE05AD04604D74494EAB2710794C59A7F42919DD68EB`.
 - Liquidation ingress implementation: `d64a783dac4c148d1924f76acb7b8a80cbcc7f1a`; byte-stable evidence commit: `58ff34e48cb88acc0005e741c8aaa52d3528177e`; release identity SHA256: `C9717263EC6F97839466A4BC13D8DBA803E3D0D5854AE6E3A005F4C6F0F34D7A`.
 - Core Pack consumption implementation source: `f01d0d22a40ae9949a027fe138c52998fb23c1ef`; evidence commit: `e3631d31ae5022b6765b0a333fb9c32015312c01`.
@@ -71,6 +75,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 - Observed-archive train surface: 2,549,139 rows, 13,200 unique hours, and 276 observed assets across the joined 2023H2/2024 train archive. It is not survivorship-complete; native aggTrades history remains much narrower.
 - 18-month compositional run: 41 fields across 12 families, 500,000 proposal audit, 8,192 adaptive matched pairs, and zero sealed reads. Localized mechanisms did not supply independent evidence sufficient to issue a challenger.
 - Current-field/current-compiler continuation: Broad 38+1 supplied 39 fields across 11 families; 500,000 legal proposals produced 251,892 exact-unique and 41,625 behavior-unique candidates. All 16 policy/seed lanes completed 512 adaptive pairs and deterministic replay. CEM-lite beat same-seed typed random on both mean and fixed top-decile reward in 4/4 seeds; Evolutionary-lite did so in 3/4. These gates independently recomputed exactly from the strict parquet. The policies are eligible for narrow real implementations, but average rewards remained negative, Evolutionary-lite was coverage-concentrated, and challenge instability prevented an economic challenger.
+- Real policy-upgrade canary: all 20 lanes and 2,560 pairs completed with deterministic replay, unchanged raw cache, 6,844-second wall time, and 646,377,472-byte maximum worker RSS. Independent qualification recomputed all four strict mean/top-decile margins: real CEM passed 4/4 seeds and typed evolution passed 3/4. The two `FAMILY_COVERAGE` diagnostics occurred only in the unchanged lite evolutionary comparator. Status: policy implementations kept only for a future new-data Arena; absolute rewards, fresh data, OOS, and economic increment were not tested.
 - Explicit/latent comparison: 41/41 means cache loadability plus minimum adaptive-surface nonmissing/variance. Arm D is implementation-verified. Arm E is an overlapping field-family grouped structured proxy with shared objectives and zero-out ablation; its configured semantic matched controls were not executed. The result is an implementation-specific development negative after 5 bps cost, not OOS evidence or rejection of latent-state research.
 - Field Information V0: the compiled view contains 177 base/registered tokens and 5,211 derived specifications. Census loading succeeded for 41/41 broad fields and 94/94 Core3 aggTrades fields. `census_loaded` is not `current_runtime_member`: only ten broad fields are current-runtime members, while the 94 Core3 fields remain a separate three-asset mechanism context.
 - Volume and flow are materially represented: the broad context contains seven quote-volume/activity fields; the Core3 registry contains 19 activity/liquidity, 16 flow, 6 large-trade, and 26 rolling fields. Trade count, quote volume, size-bucket notional, buy/sell quantity, and price-range fields lead the information census.
@@ -91,17 +96,17 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 
 ## Active execution plan
 
-1. Treat the completed continuation as spent development evidence; do not rerun it or tune its candidates.
-2. Implement only two expiring policy upgrades inside the existing generator: a real frozen CEM distribution update and receipt-bearing typed mutation. Do not add a registry, database, scheduler, or control plane.
-3. Retain canonical typed random as the same-seed matched control and retain UCT unchanged. Require coverage diagnostics because the lite evolutionary policy concentrated on eight skeletons and two to three mechanism families.
-4. Run one compile/replay check and one small fixed development canary before proposing another large search contract. A positive canary may justify a frozen future budget; it cannot authorize OOS or promotion.
+1. Treat the continuation and policy canary as spent development evidence; do not rerun or tune their candidates.
+2. Keep real CEM distribution and receipt-bearing typed evolution as the two qualified external-policy components for the next information-matched new-data Arena. Do not add another control plane.
+3. Before that Arena, run only a tiny exact-parity acceleration canary for thresholded GC/working-set trimming and then 10/12-worker scheduling; retain 8 workers unless identity, reward, weight hash, replay, and RSS all pass.
+4. Do not launch another large search until a new release passes the existing Data Adequacy and ingress gates.
 5. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
 
 No performance search or large experiment is authorized merely by this plan.
 
-## Candidate next-stage policy implementation
+## Qualified policy components
 
-The useful increment is now implementation, not another coverage report or broad experiment. Reuse the existing policy interface and receipts, replace CEM-lite with a genuine distribution update and Evolutionary-lite with typed parent-to-child mutation, and keep the change disposable until a short matched canary passes. The canary should answer only whether the real policies preserve validity, coverage, deterministic replay, and the observed productivity direction. It should not rescore old report-only candidates, create cross-sprint memory, or open a large budget by default.
+The implementation question is closed: genuine CEM distribution updates and typed parent-to-child mutation both preserve validity, deterministic replay, and the earlier policy-productivity direction under the fixed spent-development canary. They remain disposable components and may enter only a future new-data Arena with canonical typed random and the internal baseline. They must not import candidates or adaptive state from either spent run.
 
 ## Blockers
 
@@ -137,4 +142,4 @@ No status code overrides observed runtime or source facts.
 
 ## Next action
 
-Implement the two expiring policy upgrades in the existing Broad generator, then run one compile/replay check and one small same-seed development canary. Do not rerun the completed continuation, start another large performance search, reopen relational Stage 1, execute Stage 2, or open sealed roles. Continue the liquidation data line independently.
+Apply the bounded PC2 acceleration parity canary, then wait for an information-adequate new release and activate only the existing Arena entry with real CEM, typed evolution, and the internal baseline. Do not rerun spent evidence, start a large search on current data, open sealed roles, or promote candidates. Continue the liquidation data line independently.

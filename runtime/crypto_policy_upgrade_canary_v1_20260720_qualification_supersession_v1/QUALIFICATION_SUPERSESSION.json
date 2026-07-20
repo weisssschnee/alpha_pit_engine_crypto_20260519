@@ -1,0 +1,41 @@
+{
+  "candidate_promotion": "FORBIDDEN",
+  "claim_scope": "SPENT_DEVELOPMENT_POLICY_PRODUCTIVITY_DIRECTION_ONLY",
+  "created_at": "2026-07-20T07:20:39.186801+00:00",
+  "cross_sprint_adaptive_memory": "FORBIDDEN",
+  "forward_reads": 0,
+  "nonblocking_control_diagnostics": [
+    "evolutionary:20260716:FAMILY_COVERAGE",
+    "evolutionary:20260717:FAMILY_COVERAGE"
+  ],
+  "original_evidence": {
+    "bundle_sha256": "267CAB35DC4E1709DD77475BA59FCE4FC130A2AC7E6644D6B6A41803A52001F6",
+    "manifest_path": "runtime/crypto_policy_upgrade_canary_v1_20260720/manifest.json",
+    "manifest_sha256": "DCC77D5424F637812317B331613BB54FF3C37CBB611B069655270C0C2E6B3751",
+    "pair_artifact_sha256": "F4D34B76DAEEF6E19E5CEB39E4E09F542F75490AF2B957F148AB5B34028E4222",
+    "producer_source_sha": "33d44a57af99a1fb506216b336351674a10d0488"
+  },
+  "pair_evaluations_rerun": 0,
+  "qualifier_source_sha": "7f690bbce1e9879ee7f22f97468b9d672f499f34",
+  "report_only_reads": 0,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "POLICY_UPGRADE_CANARY_QUALIFIED",
+  "supersession_reason": "LITE_CONTROL_FAMILY_COVERAGE_DIAGNOSTICS_WERE_INCORRECTLY_GLOBALIZED",
+  "upgrade_decisions": {
+    "cem_distribution_v1": {
+      "decision": "KEEP_FOR_FUTURE_NEW_DATA_ARENA",
+      "implementation_valid": true,
+      "matched_seed_count": 4,
+      "positive_seed_count_vs_random_and_lite": 4,
+      "required_positive_seed_count": 3
+    },
+    "evolutionary_typed_v1": {
+      "decision": "KEEP_FOR_FUTURE_NEW_DATA_ARENA",
+      "implementation_valid": true,
+      "matched_seed_count": 4,
+      "positive_seed_count_vs_random_and_lite": 3,
+      "required_positive_seed_count": 3
+    }
+  }
+}
