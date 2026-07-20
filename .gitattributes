@@ -37,3 +37,9 @@ reports/CRYPTO_CORE_PACK_CONSUMPTION_V1_20260718.md text eol=lf
 runtime/crypto_core_pack_consumption_v1_20260718_repaired/*.json text eol=lf
 runtime/crypto_core_pack_consumption_v1_20260718_repaired/*.csv text eol=lf
 reports/CRYPTO_CORE_PACK_CONSUMPTION_V1_20260718_REPAIRED.md text eol=lf
+
+# Byte-stable evidence produced by the policy-upgrade canary and supersession.
+runtime/crypto_policy_upgrade_canary_v1_20260720/*.json text eol=lf
+reports/CRYPTO_POLICY_UPGRADE_CANARY_V1_REPORT.md text eol=lf
+runtime/crypto_policy_upgrade_canary_v1_20260720_qualification_supersession_v1/*.json text eol=lf
+reports/CRYPTO_POLICY_UPGRADE_CANARY_V1_QUALIFICATION_SUPERSESSION.md text eol=lf

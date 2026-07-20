@@ -1,0 +1,1168 @@
+{
+  "adaptive_block": {
+    "end_exclusive": "2024-07-01T00:00:00Z",
+    "role": "SPENT_DEVELOPMENT_ENGINEERING_CANARY",
+    "start": "2023-07-01T00:00:00Z"
+  },
+  "boundaries": {
+    "candidate_promotion": false,
+    "challenge_open": false,
+    "cross_sprint_adaptive_memory": false,
+    "development_block_role": "SPENT_DEVELOPMENT_ENGINEERING_CANARY",
+    "economic_claim_scope": "POLICY_IMPLEMENTATION_AND_SPENT_DEVELOPMENT_PRODUCTIVITY_ONLY",
+    "formal_performance_search": false,
+    "forward_open": false,
+    "report_only_reads_allowed": false,
+    "sealed_reads_allowed": false
+  },
+  "budget": {
+    "hard_cap_incremental_sleeve_evaluations": 2560,
+    "hard_cap_standalone_evaluations": 5120,
+    "lane_count": 20,
+    "mode": "FIXED_SINGLE_STAGE_POLICY_UPGRADE_CANARY",
+    "pairs_per_lane": 128,
+    "policies": [
+      "canonical_typed_random",
+      "cem_diversity_v2",
+      "cem_distribution_v1",
+      "evolutionary",
+      "evolutionary_typed_v1"
+    ],
+    "report_only_pairs": 0,
+    "seeds": [
+      20260716,
+      20260717,
+      20260718,
+      20260719
+    ],
+    "strict_pairs": 2560
+  },
+  "compiler": {
+    "bundle_sha256": "86AB93116834214910B4912B20BCC8C1E2DBC70E648C4EFFA11DFEAD245A60AE",
+    "paths": [
+      {
+        "bytes": 22088,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+      },
+      {
+        "bytes": 26919,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "A01B6568DED8ABE30FBF36D0481C12F2EF190A060B5BCFA2383870A542D51D90"
+      },
+      {
+        "bytes": 39173,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "B9D01669C94FFA2C35B84C53A39879FC8000FF4A5116D90994778962FE6377DE"
+      },
+      {
+        "bytes": 17147,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "117342BF9EAA0F423CBE666246DE8520927C956ADDEE84563BA0B9AEDA82A4B8"
+      },
+      {
+        "bytes": 106675,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "697BAFF479A769D7B0976678788F90A7B7853AA99480955E24D627EF361C9CAB"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "config_path": "config/crypto_policy_upgrade_canary_v1.json",
+  "config_sha256": "0C173FB91BA1FB34528C62EDDDFDA3844D47E9B7FC5B4CC5920DB108BE4EAD08",
+  "epoch_id": "CRYPTO_CURRENT_FIELD_POLICY_UPGRADE_CANARY_V1",
+  "field_contracts": [
+    {
+      "field_id": "top_global_account_divergence",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "mark_trade_basis_bps",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "bps",
+      "value_type": "BPS"
+    },
+    {
+      "field_id": "trade_quote_volume",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "account_position_divergence",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "global_long_short_account_ratio_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "open_interest_value_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "open_interest_value_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "top_long_short_account_ratio_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "trade_close",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "top_long_short_position_ratio_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "global_long_short_account_ratio_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "premium_high",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "active_universe_size",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "assets",
+      "value_type": "STATE"
+    },
+    {
+      "field_id": "listing_age_days",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "days",
+      "value_type": "AGE"
+    },
+    {
+      "field_id": "open_interest_last_change_1h",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RETURN"
+    },
+    {
+      "field_id": "open_interest_value_last_change_1h",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RETURN"
+    },
+    {
+      "field_id": "top_long_short_position_ratio_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "index_open",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "trade_return_1h",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RETURN"
+    },
+    {
+      "field_id": "trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "trades",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "top_long_short_account_ratio_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "premium_open",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "history_length_hours",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "hours",
+      "value_type": "AGE"
+    },
+    {
+      "field_id": "open_interest_last_change_4h",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RETURN"
+    },
+    {
+      "field_id": "open_interest_value_last_change_4h",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RETURN"
+    },
+    {
+      "field_id": "index_low",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "taker_buy_sell_volume_ratio_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "premium_low",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "age_percentile_active_universe",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "UNIT_INTERVAL"
+    },
+    {
+      "field_id": "open_interest_last_change_24h",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RETURN"
+    },
+    {
+      "field_id": "open_interest_value_last_change_24h",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RETURN"
+    },
+    {
+      "field_id": "index_high",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "taker_buy_sell_volume_ratio_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "mark_index_basis_bps",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "bps",
+      "value_type": "BPS"
+    },
+    {
+      "field_id": "open_interest_mean",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "taker_buy_quote_volume",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "premium_close",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "dimensionless",
+      "value_type": "RATIO"
+    },
+    {
+      "field_id": "open_interest_last",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "contracts",
+      "value_type": "VOLUME"
+    },
+    {
+      "field_id": "trade_volume",
+      "observable_lag_hours": 1,
+      "pit_authority": "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+      "unit": "base_asset",
+      "value_type": "VOLUME"
+    }
+  ],
+  "field_registry": {
+    "field_count": 39,
+    "field_families": [
+      "account_crowding",
+      "account_position_divergence",
+      "basis_premium",
+      "cross_asset_market_state",
+      "listing_age_context",
+      "open_interest_level_change",
+      "open_interest_value",
+      "position_crowding",
+      "price_level",
+      "price_return",
+      "quote_volume_activity"
+    ],
+    "fields": [
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": true,
+        "economic_role": "crowding divergence",
+        "field_family": "account_position_divergence",
+        "field_id": "top_global_account_divergence",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": true,
+        "economic_role": "mark/index/trade dislocation state",
+        "field_family": "basis_premium",
+        "field_id": "mark_trade_basis_bps",
+        "non_null_ratio": 0.9995270963915485,
+        "observable_lag_hours": 1,
+        "unit": "bps",
+        "value_type": "BPS"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": true,
+        "economic_role": "trading activity and participation",
+        "field_family": "quote_volume_activity",
+        "field_id": "trade_quote_volume",
+        "non_null_ratio": 1.0,
+        "observable_lag_hours": 1,
+        "unit": "quote_asset",
+        "value_type": "NOTIONAL"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": true,
+        "economic_role": "crowding divergence",
+        "field_family": "account_position_divergence",
+        "field_id": "account_position_divergence",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": true,
+        "economic_role": "account-side crowding state",
+        "field_family": "account_crowding",
+        "field_id": "global_long_short_account_ratio_last",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": true,
+        "economic_role": "notional open-interest level or change",
+        "field_family": "open_interest_value",
+        "field_id": "open_interest_value_last",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "quote_asset",
+        "value_type": "NOTIONAL"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": true,
+        "economic_role": "notional open-interest level or change",
+        "field_family": "open_interest_value",
+        "field_id": "open_interest_value_mean",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "quote_asset",
+        "value_type": "NOTIONAL"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": true,
+        "economic_role": "account-side crowding state",
+        "field_family": "account_crowding",
+        "field_id": "top_long_short_account_ratio_last",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": true,
+        "economic_role": "price reference used only through normalized relations",
+        "field_family": "price_level",
+        "field_id": "trade_close",
+        "non_null_ratio": 1.0,
+        "observable_lag_hours": 1,
+        "unit": "quote_per_base",
+        "value_type": "PRICE"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": true,
+        "economic_role": "position-side crowding state",
+        "field_family": "position_crowding",
+        "field_id": "top_long_short_position_ratio_last",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "account-side crowding state",
+        "field_family": "account_crowding",
+        "field_id": "global_long_short_account_ratio_mean",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "mark/index/trade dislocation state",
+        "field_family": "basis_premium",
+        "field_id": "premium_high",
+        "non_null_ratio": 0.9999940887048944,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 176,
+        "current_runtime_baseline": false,
+        "economic_role": "observable active-universe context",
+        "field_family": "cross_asset_market_state",
+        "field_id": "active_universe_size",
+        "non_null_ratio": 1.0,
+        "observable_lag_hours": 1,
+        "unit": "assets",
+        "value_type": "STATE"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "point-in-time maturity context",
+        "field_family": "listing_age_context",
+        "field_id": "listing_age_days",
+        "non_null_ratio": 1.0,
+        "observable_lag_hours": 1,
+        "unit": "days",
+        "value_type": "AGE"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "contract open-interest level or change",
+        "field_family": "open_interest_level_change",
+        "field_id": "open_interest_last_change_1h",
+        "non_null_ratio": 0.9975645464164744,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "notional open-interest level or change",
+        "field_family": "open_interest_value",
+        "field_id": "open_interest_value_last_change_1h",
+        "non_null_ratio": 0.9975645464164744,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "position-side crowding state",
+        "field_family": "position_crowding",
+        "field_id": "top_long_short_position_ratio_mean",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "price reference used only through normalized relations",
+        "field_family": "price_level",
+        "field_id": "index_open",
+        "non_null_ratio": 0.9995113329379334,
+        "observable_lag_hours": 1,
+        "unit": "quote_per_base",
+        "value_type": "PRICE"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "observable price response",
+        "field_family": "price_return",
+        "field_id": "trade_return_1h",
+        "non_null_ratio": 0.9992492655215831,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "trading activity and participation",
+        "field_family": "quote_volume_activity",
+        "field_id": "trade_count",
+        "non_null_ratio": 1.0,
+        "observable_lag_hours": 1,
+        "unit": "trades",
+        "value_type": "COUNT"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "account-side crowding state",
+        "field_family": "account_crowding",
+        "field_id": "top_long_short_account_ratio_mean",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "mark/index/trade dislocation state",
+        "field_family": "basis_premium",
+        "field_id": "premium_open",
+        "non_null_ratio": 0.9999940887048944,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "point-in-time maturity context",
+        "field_family": "listing_age_context",
+        "field_id": "history_length_hours",
+        "non_null_ratio": 1.0,
+        "observable_lag_hours": 1,
+        "unit": "hours",
+        "value_type": "AGE"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "contract open-interest level or change",
+        "field_family": "open_interest_level_change",
+        "field_id": "open_interest_last_change_4h",
+        "non_null_ratio": 0.9967074086261559,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "notional open-interest level or change",
+        "field_family": "open_interest_value",
+        "field_id": "open_interest_value_last_change_4h",
+        "non_null_ratio": 0.9967074086261559,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "price reference used only through normalized relations",
+        "field_family": "price_level",
+        "field_id": "index_low",
+        "non_null_ratio": 0.9995113329379334,
+        "observable_lag_hours": 1,
+        "unit": "quote_per_base",
+        "value_type": "PRICE"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "trading activity and participation",
+        "field_family": "quote_volume_activity",
+        "field_id": "taker_buy_sell_volume_ratio_last",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "mark/index/trade dislocation state",
+        "field_family": "basis_premium",
+        "field_id": "premium_low",
+        "non_null_ratio": 0.9999940887048944,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 176,
+        "current_runtime_baseline": false,
+        "economic_role": "point-in-time maturity context",
+        "field_family": "listing_age_context",
+        "field_id": "age_percentile_active_universe",
+        "non_null_ratio": 1.0,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "UNIT_INTERVAL"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "contract open-interest level or change",
+        "field_family": "open_interest_level_change",
+        "field_id": "open_interest_last_change_24h",
+        "non_null_ratio": 0.9927061186502018,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "notional open-interest level or change",
+        "field_family": "open_interest_value",
+        "field_id": "open_interest_value_last_change_24h",
+        "non_null_ratio": 0.9927061186502018,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "price reference used only through normalized relations",
+        "field_family": "price_level",
+        "field_id": "index_high",
+        "non_null_ratio": 0.9995113329379334,
+        "observable_lag_hours": 1,
+        "unit": "quote_per_base",
+        "value_type": "PRICE"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "trading activity and participation",
+        "field_family": "quote_volume_activity",
+        "field_id": "taker_buy_sell_volume_ratio_mean",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "mark/index/trade dislocation state",
+        "field_family": "basis_premium",
+        "field_id": "mark_index_basis_bps",
+        "non_null_ratio": 0.9990384293294818,
+        "observable_lag_hours": 1,
+        "unit": "bps",
+        "value_type": "BPS"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "contract open-interest level or change",
+        "field_family": "open_interest_level_change",
+        "field_id": "open_interest_mean",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "contracts",
+        "value_type": "VOLUME"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "trading activity and participation",
+        "field_family": "quote_volume_activity",
+        "field_id": "taker_buy_quote_volume",
+        "non_null_ratio": 1.0,
+        "observable_lag_hours": 1,
+        "unit": "quote_asset",
+        "value_type": "NOTIONAL"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "mark/index/trade dislocation state",
+        "field_family": "basis_premium",
+        "field_id": "premium_close",
+        "non_null_ratio": 0.9999940887048944,
+        "observable_lag_hours": 1,
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "contract open-interest level or change",
+        "field_family": "open_interest_level_change",
+        "field_id": "open_interest_last",
+        "non_null_ratio": 0.9981346579888855,
+        "observable_lag_hours": 1,
+        "unit": "contracts",
+        "value_type": "VOLUME"
+      },
+      {
+        "assets_with_time_variation": 211,
+        "current_runtime_baseline": false,
+        "economic_role": "trading activity and participation",
+        "field_family": "quote_volume_activity",
+        "field_id": "trade_volume",
+        "non_null_ratio": 1.0,
+        "observable_lag_hours": 1,
+        "unit": "base_asset",
+        "value_type": "VOLUME"
+      }
+    ],
+    "qualification_block": {
+      "end_exclusive": "2024-07-01T00:00:00Z",
+      "report_only_rows_read_for_admission": 0,
+      "start": "2023-07-01T00:00:00Z"
+    },
+    "registry_sha256": "A609B51B9FEB893685AC02C46AFB0ACBC528A4199FB504DB67F840FA346128B1",
+    "schema_version": 1,
+    "status": "ADMITTED_ADAPTIVE_ONLY"
+  },
+  "field_surface": {
+    "all_context_counts": {
+      "BROAD_PANEL_BASELINE": 39,
+      "CORE3_MICROSTRUCTURE_PILOT": 81
+    },
+    "context_pooling": false,
+    "contract_file_sha256": "2C6E334DD25BD2745371995B93CC5E0440D943F68A591419F34C48EDB34BA08A",
+    "contract_identity_sha256": "35E54F79576A6D7A1D94AE697E8066CB9FB49CF9A97979259F39490E3281914E",
+    "contract_path": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/resolved_token_contract.json",
+    "excluded_contexts": [
+      "CORE3_MICROSTRUCTURE_PILOT"
+    ],
+    "generator_role_coverage": {
+      "all_fields_reachable": true,
+      "declared_fields": [
+        "top_global_account_divergence",
+        "mark_trade_basis_bps",
+        "trade_quote_volume",
+        "account_position_divergence",
+        "global_long_short_account_ratio_last",
+        "open_interest_value_last",
+        "open_interest_value_mean",
+        "top_long_short_account_ratio_last",
+        "trade_close",
+        "top_long_short_position_ratio_last",
+        "global_long_short_account_ratio_mean",
+        "premium_high",
+        "active_universe_size",
+        "listing_age_days",
+        "open_interest_last_change_1h",
+        "open_interest_value_last_change_1h",
+        "top_long_short_position_ratio_mean",
+        "index_open",
+        "trade_return_1h",
+        "trade_count",
+        "top_long_short_account_ratio_mean",
+        "premium_open",
+        "history_length_hours",
+        "open_interest_last_change_4h",
+        "open_interest_value_last_change_4h",
+        "index_low",
+        "taker_buy_sell_volume_ratio_last",
+        "premium_low",
+        "age_percentile_active_universe",
+        "open_interest_last_change_24h",
+        "open_interest_value_last_change_24h",
+        "index_high",
+        "taker_buy_sell_volume_ratio_mean",
+        "mark_index_basis_bps",
+        "open_interest_mean",
+        "taker_buy_quote_volume",
+        "premium_close",
+        "open_interest_last",
+        "trade_volume"
+      ],
+      "reachable_fields": [
+        "account_position_divergence",
+        "active_universe_size",
+        "age_percentile_active_universe",
+        "global_long_short_account_ratio_last",
+        "global_long_short_account_ratio_mean",
+        "history_length_hours",
+        "index_high",
+        "index_low",
+        "index_open",
+        "listing_age_days",
+        "mark_index_basis_bps",
+        "mark_trade_basis_bps",
+        "open_interest_last",
+        "open_interest_last_change_1h",
+        "open_interest_last_change_24h",
+        "open_interest_last_change_4h",
+        "open_interest_mean",
+        "open_interest_value_last",
+        "open_interest_value_last_change_1h",
+        "open_interest_value_last_change_24h",
+        "open_interest_value_last_change_4h",
+        "open_interest_value_mean",
+        "premium_close",
+        "premium_high",
+        "premium_low",
+        "premium_open",
+        "taker_buy_quote_volume",
+        "taker_buy_sell_volume_ratio_last",
+        "taker_buy_sell_volume_ratio_mean",
+        "top_global_account_divergence",
+        "top_long_short_account_ratio_last",
+        "top_long_short_account_ratio_mean",
+        "top_long_short_position_ratio_last",
+        "top_long_short_position_ratio_mean",
+        "trade_close",
+        "trade_count",
+        "trade_quote_volume",
+        "trade_return_1h",
+        "trade_volume"
+      ],
+      "roles": {
+        "account": [
+          "top_global_account_divergence",
+          "account_position_divergence",
+          "global_long_short_account_ratio_last",
+          "top_long_short_account_ratio_last",
+          "global_long_short_account_ratio_mean",
+          "top_long_short_account_ratio_mean"
+        ],
+        "activity": [
+          "trade_quote_volume",
+          "trade_count",
+          "taker_buy_sell_volume_ratio_last",
+          "taker_buy_sell_volume_ratio_mean",
+          "taker_buy_quote_volume",
+          "trade_volume"
+        ],
+        "basis": [
+          "mark_trade_basis_bps",
+          "premium_high",
+          "premium_open",
+          "premium_low",
+          "mark_index_basis_bps",
+          "premium_close"
+        ],
+        "global_account": [
+          "global_long_short_account_ratio_last",
+          "global_long_short_account_ratio_mean"
+        ],
+        "local": [
+          "top_global_account_divergence",
+          "mark_trade_basis_bps",
+          "trade_quote_volume",
+          "account_position_divergence",
+          "global_long_short_account_ratio_last",
+          "open_interest_value_last",
+          "open_interest_value_mean",
+          "top_long_short_account_ratio_last",
+          "trade_close",
+          "top_long_short_position_ratio_last",
+          "global_long_short_account_ratio_mean",
+          "premium_high",
+          "open_interest_last_change_1h",
+          "open_interest_value_last_change_1h",
+          "top_long_short_position_ratio_mean",
+          "index_open",
+          "trade_return_1h",
+          "trade_count",
+          "top_long_short_account_ratio_mean",
+          "premium_open",
+          "open_interest_last_change_4h",
+          "open_interest_value_last_change_4h",
+          "index_low",
+          "taker_buy_sell_volume_ratio_last",
+          "premium_low",
+          "open_interest_last_change_24h",
+          "open_interest_value_last_change_24h",
+          "index_high",
+          "taker_buy_sell_volume_ratio_mean",
+          "mark_index_basis_bps",
+          "open_interest_mean",
+          "taker_buy_quote_volume",
+          "premium_close",
+          "open_interest_last",
+          "trade_volume"
+        ],
+        "market_context": [
+          "top_global_account_divergence",
+          "mark_trade_basis_bps",
+          "trade_quote_volume",
+          "account_position_divergence",
+          "global_long_short_account_ratio_last",
+          "open_interest_value_last",
+          "open_interest_value_mean",
+          "top_long_short_account_ratio_last",
+          "trade_close",
+          "top_long_short_position_ratio_last",
+          "global_long_short_account_ratio_mean",
+          "premium_high",
+          "open_interest_last_change_1h",
+          "open_interest_value_last_change_1h",
+          "top_long_short_position_ratio_mean",
+          "index_open",
+          "trade_return_1h",
+          "trade_count",
+          "top_long_short_account_ratio_mean",
+          "premium_open",
+          "open_interest_last_change_4h",
+          "open_interest_value_last_change_4h",
+          "index_low",
+          "taker_buy_sell_volume_ratio_last",
+          "premium_low",
+          "open_interest_last_change_24h",
+          "open_interest_value_last_change_24h",
+          "index_high",
+          "taker_buy_sell_volume_ratio_mean",
+          "mark_index_basis_bps",
+          "open_interest_mean",
+          "taker_buy_quote_volume",
+          "premium_close",
+          "open_interest_last",
+          "trade_volume"
+        ],
+        "oi": [
+          "open_interest_value_last",
+          "open_interest_value_mean",
+          "open_interest_last_change_1h",
+          "open_interest_value_last_change_1h",
+          "open_interest_last_change_4h",
+          "open_interest_value_last_change_4h",
+          "open_interest_last_change_24h",
+          "open_interest_value_last_change_24h",
+          "open_interest_mean",
+          "open_interest_last"
+        ],
+        "oi_change": [
+          "open_interest_last_change_1h",
+          "open_interest_value_last_change_1h",
+          "open_interest_last_change_4h",
+          "open_interest_value_last_change_4h",
+          "open_interest_last_change_24h",
+          "open_interest_value_last_change_24h"
+        ],
+        "payload": [
+          "top_global_account_divergence",
+          "mark_trade_basis_bps",
+          "trade_quote_volume",
+          "account_position_divergence",
+          "global_long_short_account_ratio_last",
+          "open_interest_value_last",
+          "open_interest_value_mean",
+          "top_long_short_account_ratio_last",
+          "trade_close",
+          "top_long_short_position_ratio_last",
+          "global_long_short_account_ratio_mean",
+          "premium_high",
+          "open_interest_last_change_1h",
+          "open_interest_value_last_change_1h",
+          "top_long_short_position_ratio_mean",
+          "index_open",
+          "trade_return_1h",
+          "trade_count",
+          "top_long_short_account_ratio_mean",
+          "premium_open",
+          "open_interest_last_change_4h",
+          "open_interest_value_last_change_4h",
+          "index_low",
+          "taker_buy_sell_volume_ratio_last",
+          "premium_low",
+          "open_interest_last_change_24h",
+          "open_interest_value_last_change_24h",
+          "index_high",
+          "taker_buy_sell_volume_ratio_mean",
+          "mark_index_basis_bps",
+          "open_interest_mean",
+          "taker_buy_quote_volume",
+          "premium_close",
+          "open_interest_last",
+          "trade_volume"
+        ],
+        "position": [
+          "top_global_account_divergence",
+          "account_position_divergence",
+          "top_long_short_position_ratio_last",
+          "top_long_short_position_ratio_mean"
+        ],
+        "price_return": [
+          "trade_return_1h"
+        ],
+        "state": [
+          "active_universe_size",
+          "listing_age_days",
+          "history_length_hours",
+          "age_percentile_active_universe"
+        ],
+        "top_account": [
+          "top_long_short_account_ratio_last",
+          "top_long_short_account_ratio_mean"
+        ]
+      },
+      "unreachable_fields": []
+    },
+    "selected_context_id": "BROAD_PANEL_BASELINE",
+    "selected_field_count": 39,
+    "selected_field_ids": [
+      "top_global_account_divergence",
+      "mark_trade_basis_bps",
+      "trade_quote_volume",
+      "account_position_divergence",
+      "global_long_short_account_ratio_last",
+      "open_interest_value_last",
+      "open_interest_value_mean",
+      "top_long_short_account_ratio_last",
+      "trade_close",
+      "top_long_short_position_ratio_last",
+      "global_long_short_account_ratio_mean",
+      "premium_high",
+      "active_universe_size",
+      "listing_age_days",
+      "open_interest_last_change_1h",
+      "open_interest_value_last_change_1h",
+      "top_long_short_position_ratio_mean",
+      "index_open",
+      "trade_return_1h",
+      "trade_count",
+      "top_long_short_account_ratio_mean",
+      "premium_open",
+      "history_length_hours",
+      "open_interest_last_change_4h",
+      "open_interest_value_last_change_4h",
+      "index_low",
+      "taker_buy_sell_volume_ratio_last",
+      "premium_low",
+      "age_percentile_active_universe",
+      "open_interest_last_change_24h",
+      "open_interest_value_last_change_24h",
+      "index_high",
+      "taker_buy_sell_volume_ratio_mean",
+      "mark_index_basis_bps",
+      "open_interest_mean",
+      "taker_buy_quote_volume",
+      "premium_close",
+      "open_interest_last",
+      "trade_volume"
+    ],
+    "selection_role": "FROZEN_CURRENT_SURFACE_BEFORE_CONTINUATION",
+    "view_counts": {
+      "asset_local": 38,
+      "market_state": 1
+    }
+  },
+  "parent_evidence": {
+    "bundle_sha256": "13A521BE23B193EA3BFD9B4B319E69280BD9932A1B8A394EB4E3A73AD2D577EB",
+    "manifest_path": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_ARTIFACT_MANIFEST.json",
+    "manifest_sha256": "5366AC5847DC78C6AEDFBC439D88C77DA425351EB66A3BD1E3C5DD009C4A2A69",
+    "policy_state_import": false
+  },
+  "policy_parameters": {
+    "cem_distribution_v1": {
+      "duplicate_resample_limit": 16,
+      "elite_fraction": 0.25,
+      "generation_size": 16,
+      "minimum_probability": 0.005,
+      "smoothing": 0.5
+    },
+    "evolutionary_typed_v1": {
+      "duplicate_resample_limit": 16,
+      "exploration_probability": 0.25,
+      "tournament_size": 4,
+      "warmup": 16
+    }
+  },
+  "producer_source_sha": "33d44a57af99a1fb506216b336351674a10d0488",
+  "raw_cache": {
+    "directory_bundle": {
+      "bundle_sha256": "D120C0444B2A5828CBE0C7B538DEF81A1D2E50689C941F4B1A96D2AE60D93FED",
+      "bytes": 1518625711,
+      "file_count": 62
+    },
+    "identity_sha256": "CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0",
+    "producer_source_sha": "b251733d51053cbbc99a3b79409debcee24ae760"
+  },
+  "schema_version": 1,
+  "sealed_reads": 0
+}

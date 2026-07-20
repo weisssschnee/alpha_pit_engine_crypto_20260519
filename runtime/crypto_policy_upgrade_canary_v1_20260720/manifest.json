@@ -1,0 +1,54 @@
+{
+  "artifacts": [
+    {
+      "bytes": 39975,
+      "path": "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_UPGRADE_CANARY_CONTRACT.json",
+      "sha256": "9B79DD827FB1CF4B9E836A26E3CACEA45DCEF3ED4CDA73364F4F77A7F4B80E75"
+    },
+    {
+      "bytes": 7445,
+      "path": "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_COMPILE_REPLAY.json",
+      "sha256": "3313344B5DEA5A4874D518F6B555FE542EB58DCB7EAE9F73C89AD85D4A6E058C"
+    },
+    {
+      "bytes": 13105875,
+      "path": "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_UPGRADE_PAIR_RESULTS.parquet",
+      "sha256": "F4D34B76DAEEF6E19E5CEB39E4E09F542F75490AF2B957F148AB5B34028E4222"
+    },
+    {
+      "bytes": 13286,
+      "path": "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_UPGRADE_BEHAVIOR_AUDIT.json",
+      "sha256": "36F8E8406F2563C6A8E60C0A68EC9E88A3E6F503543737406E93A1F5FFCD0C9C"
+    },
+    {
+      "bytes": 1518,
+      "path": "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_UPGRADE_DECISION.json",
+      "sha256": "E8A73E5F8574A83FBCDC0CA9C8E20E02790B249920124522F05A6365C74A0DCD"
+    },
+    {
+      "bytes": 5943,
+      "path": "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_UPGRADE_RESOURCE_AUDIT.json",
+      "sha256": "E28459A02C02F62E1E4633BBCE056C711680ABA72302335960C8FED511ED65BD"
+    },
+    {
+      "bytes": 579,
+      "path": "reports/CRYPTO_POLICY_UPGRADE_CANARY_V1_REPORT.md",
+      "sha256": "0E26164D795F47D060152809B04B255F58408AC054940618D27854C9E6D34770"
+    }
+  ],
+  "bundle_sha256": "267CAB35DC4E1709DD77475BA59FCE4FC130A2AC7E6644D6B6A41803A52001F6",
+  "created_at": "2026-07-20T06:00:42.163714+00:00",
+  "epoch_id": "CRYPTO_CURRENT_FIELD_POLICY_UPGRADE_CANARY_V1",
+  "expected_artifact_paths": [
+    "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_UPGRADE_CANARY_CONTRACT.json",
+    "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_COMPILE_REPLAY.json",
+    "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_UPGRADE_PAIR_RESULTS.parquet",
+    "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_UPGRADE_BEHAVIOR_AUDIT.json",
+    "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_UPGRADE_DECISION.json",
+    "runtime/crypto_policy_upgrade_canary_v1_20260720/POLICY_UPGRADE_RESOURCE_AUDIT.json",
+    "reports/CRYPTO_POLICY_UPGRADE_CANARY_V1_REPORT.md"
+  ],
+  "producer_source_sha": "33d44a57af99a1fb506216b336351674a10d0488",
+  "schema_version": 1,
+  "sealed_reads": 0
+}

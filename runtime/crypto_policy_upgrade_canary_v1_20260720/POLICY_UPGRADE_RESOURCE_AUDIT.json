@@ -1,0 +1,203 @@
+{
+  "environment": {
+    "machine": "AMD64",
+    "packages": {
+      "numpy": "2.1.3",
+      "pandas": "2.2.3",
+      "psutil": "7.0.0",
+      "pyarrow": "19.0.1",
+      "scipy": "1.17.1"
+    },
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+    "python_executable": "D:\\HermesWorker\\workspace\\crypto_line\\.venv_b251733\\Scripts\\python.exe",
+    "python_implementation": "CPython",
+    "python_version": "3.11.9",
+    "thread_caps": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1"
+    }
+  },
+  "execution_host": "COMPANY_PC2",
+  "free_memory_before_bytes": 18104610816,
+  "max_workers": 8,
+  "maximum_wall_seconds": 14400,
+  "maximum_worker_peak_rss_bytes": 646377472,
+  "raw_cache_bundle_after": {
+    "bundle_sha256": "D120C0444B2A5828CBE0C7B538DEF81A1D2E50689C941F4B1A96D2AE60D93FED",
+    "bytes": 1518625711,
+    "file_count": 62
+  },
+  "raw_cache_bundle_before": {
+    "bundle_sha256": "D120C0444B2A5828CBE0C7B538DEF81A1D2E50689C941F4B1A96D2AE60D93FED",
+    "bytes": 1518625711,
+    "file_count": 62
+  },
+  "raw_cache_unchanged": true,
+  "schema_version": 1,
+  "strict_pairs": 2560,
+  "wall_seconds": 6844.203919399995,
+  "worker_resources": [
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2503.8198135999846,
+      "peak_private_bytes": 611057664,
+      "peak_rss_bytes": 645824512,
+      "policy": "cem_diversity_v2",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2510.2642529000295,
+      "peak_private_bytes": 612134912,
+      "peak_rss_bytes": 645627904,
+      "policy": "cem_distribution_v1",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2518.9005525000393,
+      "peak_private_bytes": 612044800,
+      "peak_rss_bytes": 645656576,
+      "policy": "cem_distribution_v1",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2530.807612600038,
+      "peak_private_bytes": 613105664,
+      "peak_rss_bytes": 645193728,
+      "policy": "evolutionary",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2535.152312499995,
+      "peak_private_bytes": 611684352,
+      "peak_rss_bytes": 644366336,
+      "policy": "canonical_typed_random",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2543.820458699949,
+      "peak_private_bytes": 617725952,
+      "peak_rss_bytes": 646377472,
+      "policy": "evolutionary_typed_v1",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2546.793528399954,
+      "peak_private_bytes": 611450880,
+      "peak_rss_bytes": 645103616,
+      "policy": "cem_diversity_v2",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2552.662589400017,
+      "peak_private_bytes": 612777984,
+      "peak_rss_bytes": 645664768,
+      "policy": "canonical_typed_random",
+      "seed": 20260716
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2729.7819691999466,
+      "peak_private_bytes": 611422208,
+      "peak_rss_bytes": 592592896,
+      "policy": "evolutionary",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2786.613015400013,
+      "peak_private_bytes": 613183488,
+      "peak_rss_bytes": 591540224,
+      "policy": "evolutionary_typed_v1",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2836.12135500001,
+      "peak_private_bytes": 614543360,
+      "peak_rss_bytes": 594513920,
+      "policy": "evolutionary",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2813.8546212000074,
+      "peak_private_bytes": 612585472,
+      "peak_rss_bytes": 592191488,
+      "policy": "cem_diversity_v2",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2852.369043499988,
+      "peak_private_bytes": 613634048,
+      "peak_rss_bytes": 592707584,
+      "policy": "canonical_typed_random",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2865.4500382000115,
+      "peak_private_bytes": 612990976,
+      "peak_rss_bytes": 593666048,
+      "policy": "evolutionary_typed_v1",
+      "seed": 20260717
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2868.6966017999803,
+      "peak_private_bytes": 611225600,
+      "peak_rss_bytes": 591618048,
+      "policy": "cem_distribution_v1",
+      "seed": 20260718
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 2857.597659399966,
+      "peak_private_bytes": 612106240,
+      "peak_rss_bytes": 592404480,
+      "policy": "canonical_typed_random",
+      "seed": 20260719
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1422.825794400007,
+      "peak_private_bytes": 613900288,
+      "peak_rss_bytes": 591458304,
+      "policy": "evolutionary",
+      "seed": 20260719
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1538.856978899974,
+      "peak_private_bytes": 614645760,
+      "peak_rss_bytes": 592117760,
+      "policy": "cem_diversity_v2",
+      "seed": 20260719
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1497.502552799997,
+      "peak_private_bytes": 615194624,
+      "peak_rss_bytes": 591466496,
+      "policy": "cem_distribution_v1",
+      "seed": 20260719
+    },
+    {
+      "deterministic_replay_pass": true,
+      "elapsed_seconds": 1491.1499781000311,
+      "peak_private_bytes": 613138432,
+      "peak_rss_bytes": 591851520,
+      "policy": "evolutionary_typed_v1",
+      "seed": 20260719
+    }
+  ]
+}

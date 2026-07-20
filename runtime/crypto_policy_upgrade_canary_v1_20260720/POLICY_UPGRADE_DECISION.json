@@ -1,0 +1,43 @@
+{
+  "candidate_promotion": "FORBIDDEN",
+  "cross_sprint_adaptive_memory": "FORBIDDEN",
+  "economic_claim": "NOT_EVALUATED_ON_FRESH_OR_OOS_DATA",
+  "epoch_id": "CRYPTO_CURRENT_FIELD_POLICY_UPGRADE_CANARY_V1",
+  "forward": "SEALED",
+  "implementation_result": "FAIL",
+  "main_status": "POLICY_UPGRADE_CANARY_IMPLEMENTATION_FAILED",
+  "report_only_pairs": 0,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "strict_pairs": 2560,
+  "upgrade_decisions": {
+    "cem_distribution_v1": {
+      "corresponding_lite_policy": "cem_diversity_v2",
+      "decision": "EVICT_EXPERIMENTAL_UPGRADE",
+      "does_not_authorize": [
+        "FRESH_PERFORMANCE_SEARCH",
+        "OOS_OR_FORWARD_READ",
+        "CANDIDATE_PROMOTION"
+      ],
+      "implementation_valid": false,
+      "invalidation_reason": "GLOBAL_IMPLEMENTATION_OR_RESOURCE_GATE_FAILED",
+      "positive_seed_count_vs_random_and_lite": 4,
+      "reference_policy": "canonical_typed_random",
+      "required_positive_seed_count": 3
+    },
+    "evolutionary_typed_v1": {
+      "corresponding_lite_policy": "evolutionary",
+      "decision": "EVICT_EXPERIMENTAL_UPGRADE",
+      "does_not_authorize": [
+        "FRESH_PERFORMANCE_SEARCH",
+        "OOS_OR_FORWARD_READ",
+        "CANDIDATE_PROMOTION"
+      ],
+      "implementation_valid": false,
+      "invalidation_reason": "GLOBAL_IMPLEMENTATION_OR_RESOURCE_GATE_FAILED",
+      "positive_seed_count_vs_random_and_lite": 3,
+      "reference_policy": "canonical_typed_random",
+      "required_positive_seed_count": 3
+    }
+  }
+}
