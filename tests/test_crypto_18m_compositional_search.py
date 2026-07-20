@@ -8,6 +8,10 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from alphafactory_crypto.broad_search.audit import (
+    freeze_search_behavior_contract,
+    search_behavior_descriptor,
+)
 from alphafactory_crypto.broad_search.compositional18m import (
     CandidateSpec,
     candidate_from_genes,
@@ -35,6 +39,15 @@ from alphafactory_crypto.broad_search.runner18m import (
     _policy_audit,
     _validate_config,
     _working_set_trim_due,
+)
+from alphafactory_crypto.broad_search.search_engine_v1 import (
+    BehaviorArchive,
+    HierarchicalTypedCEMV2,
+    TypedEvolutionV2,
+    _checkpoint_allocation,
+    _load_checkpoint,
+    _new_campaign_state,
+    _write_checkpoint,
 )
 from alphafactory_crypto.instrument_capability.mapping import CROSS_SECTIONAL_ZERO_NET
 
@@ -533,3 +546,201 @@ def test_current_continuation_exact_budget_fails_closed() -> None:
     changed["budget"]["maximum_stage_b_pairs"] = 2048
     with pytest.raises(ValueError, match="frozen budget"):
         _validate_config(changed)
+
+
+def _fake_search_evaluation(candidate: CandidateSpec, family_id: str, reward: float) -> dict:
+    behavior = {
+        "behavior_family_id": family_id,
+        "coordinate_data_binding_id": "C" * 64,
+        "rank_descriptor_id": "R" * 64,
+        "selected_asset_overlap_id": "S" * 64,
+        "mapped_weight_descriptor_id": "W" * 64,
+        "turnover_path_descriptor_id": "T" * 64,
+        "pit_regime_descriptor_id": "P" * 64,
+        "descriptor_contract_sha256": "D" * 64,
+        "descriptor_schema_version": "CRYPTO_SEARCH_BEHAVIOR_DESCRIPTOR_V1",
+        "identity_excludes": ["gross", "net", "cost", "pair_reward"],
+    }
+    return {
+        "candidate_id": candidate.candidate_id,
+        "pair_reward": reward,
+        "matched_positive": reward > 0.0,
+        "incremental": {"gross_mean": 0.0, "net_mean": 0.0, "cost_mean": 0.0},
+        "behavior": behavior,
+    }
+
+
+def test_search_behavior_descriptor_is_frozen_coarse_and_outcome_free() -> None:
+    active = np.tile(np.arange(8, dtype=float), (3, 1))
+    contract = freeze_search_behavior_contract(active)
+    signal = np.asarray(
+        [[1, 2, 3, 4, 5, 6, 7, 8], [2, 1, 4, 3, 6, 5, 8, 7], [3, 3, 2, 2, 1, 1, 0, 0]],
+        dtype=float,
+    )
+    weights = np.sign(signal - np.nanmean(signal, axis=0)) * 0.25
+    kwargs = {
+        "signal": signal,
+        "weights": weights,
+        "eligible_mask": np.ones_like(signal, dtype=bool),
+        "month_labels": np.asarray(["2023-07"] * 4 + ["2023-08"] * 4),
+        "timestamp_ns": np.arange(8, dtype=np.int64),
+        "active_universe_size": active,
+        "horizon_hours": 1,
+        "mapping_id": CROSS_SECTIONAL_ZERO_NET,
+        "contract": contract,
+    }
+    first = search_behavior_descriptor(**kwargs)
+    second = search_behavior_descriptor(**kwargs)
+    assert first == second
+    assert first["behavior_family_id"]
+    assert first["identity_excludes"] == ["gross", "net", "cost", "pair_reward"]
+    changed_contract = deepcopy(contract)
+    changed_contract["mapped_weight_quantization_step"] = 0.01
+    with pytest.raises(ValueError, match="contract identity"):
+        search_behavior_descriptor(**{**kwargs, "contract": changed_contract})
+
+
+def test_hierarchical_cem_v2_samples_legal_order_and_roundtrips_state() -> None:
+    registry = _role_complete_registry()
+    policy = HierarchicalTypedCEMV2(20260721, registry)
+    rows = []
+    for index in range(48):
+        candidate, metadata = policy.propose()
+        assert metadata["operation"] == "HIERARCHICAL_TYPED_CEM_SAMPLE"
+        assert _role_complete_registry().validate(candidate.expression)
+        rows.append(
+            {
+                "pair_reward": float(index % 7),
+                "new_behavior_family_at_completion": index % 2 == 0,
+                "candidate_id": candidate.candidate_id,
+                "candidate_spec_json": json.dumps(candidate.to_dict(), sort_keys=True),
+            }
+        )
+    policy.update(rows)
+    assert policy.update_count == 1
+    assert policy.tables["mechanism_family"]["G"]["observations"] > 0
+    assert all(value >= 0.0 for value in policy.entropy_summary().values())
+    restored = HierarchicalTypedCEMV2.from_state(registry, policy.export_state())
+    assert restored.state_hash() == policy.state_hash()
+    left, _ = policy.propose()
+    right, _ = restored.propose()
+    assert left.candidate_id == right.candidate_id
+
+
+def test_typed_evolution_v2_receipts_cover_genes_skeleton_and_crossover() -> None:
+    registry = _role_complete_registry()
+    policy = TypedEvolutionV2(20260721, registry)
+    first = generate_candidate(
+        registry, skeleton=skeleton_registry()[0], rng=random.Random(101)
+    )
+    second = generate_candidate(
+        registry, skeleton=skeleton_registry()[1], rng=random.Random(202)
+    )
+    mutated, mutation_receipt = policy._mutate_genes(first)
+    assert policy.verify_receipt((first,), mutated, mutation_receipt)
+    assert 1 <= len(mutation_receipt["changed_genes"]) <= 3
+    remapped, skeleton_receipt = policy._mutate_skeleton(first)
+    assert policy.verify_receipt((first,), remapped, skeleton_receipt)
+    crossed, crossover_receipt = policy._crossover(first, second)
+    assert policy.verify_receipt((first, second), crossed, crossover_receipt)
+    assert crossover_receipt["gene_order"] == [
+        "left_field",
+        "right_field",
+        "left_window",
+        "right_window",
+        "beta",
+        "left_normalizer",
+        "right_normalizer",
+        "horizon_hours",
+    ]
+
+
+def test_behavior_archive_keeps_one_reward_champion_per_family() -> None:
+    registry = _role_complete_registry()
+    first = generate_candidate(
+        registry, skeleton=skeleton_registry()[0], rng=random.Random(11)
+    )
+    second = generate_candidate(
+        registry, skeleton=skeleton_registry()[0], rng=random.Random(12)
+    )
+    archive = BehaviorArchive()
+    archive.observe(
+        candidate=first,
+        evaluation=_fake_search_evaluation(first, "FAMILY", -1.0),
+        arm="canonical_typed_random",
+        seed=1,
+        completion_ordinal=1,
+        checkpoint_index=0,
+    )
+    champion, new_family = archive.observe(
+        candidate=second,
+        evaluation=_fake_search_evaluation(second, "FAMILY", 0.5),
+        arm="typed_evolution_v2",
+        seed=1,
+        completion_ordinal=2,
+        checkpoint_index=0,
+    )
+    assert new_family is False
+    assert champion["is_family_champion"] is True
+    assert sum(bool(row["is_family_champion"]) for row in archive.rows) == 1
+    assert archive.summary_rows()[0]["champion_exact_expression_id"] == second.candidate_id
+    assert archive.duplicate_replacements == 1
+
+
+def test_search_checkpoint_is_atomic_and_restores_policy_archive_and_rng(tmp_path: Path) -> None:
+    registry = _role_complete_registry()
+    candidate = generate_candidate(
+        registry, skeleton=skeleton_registry()[0], rng=random.Random(41)
+    )
+    archive = BehaviorArchive()
+    archive.observe(
+        candidate=candidate,
+        evaluation=_fake_search_evaluation(candidate, "FAMILY", 0.25),
+        arm="canonical_typed_random",
+        seed=20260716,
+        completion_ordinal=1,
+        checkpoint_index=0,
+    )
+    policy = HierarchicalTypedCEMV2(20260716, registry)
+    policy.propose()
+    state = _new_campaign_state("a" * 40, "B" * 64)
+    state["attempted_exact_ids"] = [candidate.candidate_id]
+    identities = {
+        "raw_cache": {"identity_sha256": "C" * 64},
+        "compiler_identity": {"bundle_sha256": "D" * 64},
+    }
+    checkpoint = _write_checkpoint(
+        runtime_root=tmp_path,
+        label="checkpoint_000",
+        checkpoint_index=0,
+        state=state,
+        policies={"hierarchical_typed_cem_v2|20260716": policy},
+        ledger=[{"candidate_id": candidate.candidate_id, "receipt_json": None}],
+        archive=archive,
+        metrics=[{"checkpoint_index": 0, "arm": "__campaign__"}],
+        identities=identities,
+    )
+    assert checkpoint.is_dir()
+    assert not list((tmp_path / "checkpoints").glob(".checkpoint_000.tmp-*"))
+    restored_state, restored_policies, ledger, restored_archive, _ = _load_checkpoint(
+        checkpoint_path=checkpoint,
+        registry=registry,
+        expected_source_sha="a" * 40,
+        expected_frozen_hash="B" * 64,
+        expected_identities=identities,
+    )
+    assert restored_state["attempted_exact_ids"] == [candidate.candidate_id]
+    assert ledger[0]["candidate_id"] == candidate.candidate_id
+    assert restored_archive.state_hash() == archive.state_hash()
+    restored_policy = restored_policies["hierarchical_typed_cem_v2|20260716"]
+    assert restored_policy.state_hash() == policy.state_hash()
+    assert _checkpoint_allocation(0, state["arm_states"]) == {
+        arm: 400
+        for arm in (
+            "canonical_typed_random",
+            "cem_distribution_v1",
+            "evolutionary_typed_v1",
+            "hierarchical_typed_cem_v2",
+            "typed_evolution_v2",
+        )
+    }

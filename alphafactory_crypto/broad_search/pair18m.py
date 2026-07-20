@@ -16,6 +16,7 @@ from alphafactory_crypto.instrument_capability.mapping import (
     mapping_contract_sha256,
 )
 
+from .audit import search_behavior_descriptor
 from .compositional18m import CandidateSpec
 from .expression import TypedExpressionRegistry, materialize_expression
 from .panel18m import RawPanelStore
@@ -194,6 +195,7 @@ def evaluate_pair(
     block_start: str,
     block_end: str,
     block_role: str,
+    behavior_contract: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     timings: dict[str, float] = {}
     process = psutil.Process()
@@ -294,6 +296,28 @@ def evaluate_pair(
     feedback = strict_pair_feedback(incremental)
     timings["incremental_sleeve_seconds"] = time.perf_counter() - incremental_started
     sample_memory()
+    behavior = None
+    if behavior_contract is not None:
+        behavior_started = time.perf_counter()
+        regime_values = np.asarray(
+            store.field(str(behavior_contract["pit_regime_source"]))[:, block],
+            dtype=float,
+        )
+        behavior = search_behavior_descriptor(
+            signal=primary_signal,
+            weights=primary_weight,
+            eligible_mask=support,
+            month_labels=months,
+            timestamp_ns=timestamp_ns,
+            active_universe_size=regime_values,
+            horizon_hours=candidate.horizon_hours,
+            mapping_id=candidate.mapping_id,
+            contract=behavior_contract,
+        )
+        timings["behavior_descriptor_seconds"] = (
+            time.perf_counter() - behavior_started
+        )
+        sample_memory()
     timings["peak_rss_bytes"] = float(max(rss_samples))
     timings["peak_private_bytes"] = float(max(private_samples))
     support_overlap = 1.0
@@ -322,6 +346,7 @@ def evaluate_pair(
         "pair_reward": float(feedback["distance"]),
         "matched_positive": bool(feedback["matched_positive"]),
         "feedback": feedback,
+        "behavior": behavior,
         "primary_control_weight_equal": False,
         "delta_weight_sha256": incremental["weight_sha256"],
         "timings": timings,
@@ -345,6 +370,7 @@ def pair_contract_payload() -> dict[str, Any]:
         "support_overlap_required": 1.0,
         "control_exact_identity_forbidden": True,
         "control_behavior_identity_forbidden": True,
+        "optional_behavior_identity": "FROZEN_OUTCOME_FREE_DESCRIPTOR_V1",
         "incremental_weight_formula": "primary_weight - control_weight",
         "incremental_turnover": "recomputed independently from delta weights",
         "standalone_scalar_delta_role": "DIAGNOSTIC_ONLY",

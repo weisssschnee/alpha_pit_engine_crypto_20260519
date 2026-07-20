@@ -86,6 +86,23 @@ FIELD_CONTRACTS = (
 )
 
 
+SEARCH_BEHAVIOR_DESCRIPTOR_SCHEMA: Mapping[str, Any] = {
+    "schema_version": "CRYPTO_SEARCH_BEHAVIOR_DESCRIPTOR_V1",
+    "rank_bucket_count": 10,
+    "rank_mean_quantization_step": 2.0,
+    "selection_rate_quantization_step": 0.20,
+    "selected_overlap_quantization_step": 0.10,
+    "mapped_weight_quantization_step": 0.05,
+    "turnover_histogram_quantization_step": 0.10,
+    "turnover_bin_edges": [0.0, 0.25, 0.50, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0],
+    "selected_weight_epsilon": 1.0e-12,
+    "pit_regime_source": "active_universe_size",
+    "pit_regime_lag_hours": 1,
+    "pit_regime_quantiles": [0.25, 0.50, 0.75],
+    "outcome_fields_in_identity": [],
+}
+
+
 def _json_bytes(value: Any) -> bytes:
     return json.dumps(
         value, sort_keys=True, separators=(",", ":"), ensure_ascii=True, default=str
@@ -442,6 +459,220 @@ def _behavior_sha(weights: np.ndarray, month_labels: np.ndarray) -> str:
             }
         )
     return _payload_sha(signature)
+
+
+def freeze_search_behavior_contract(active_universe_size: np.ndarray) -> dict[str, Any]:
+    """Freeze behavior quantization and a lag-only market-state regime contract."""
+
+    values = np.asarray(active_universe_size, dtype=float)
+    if values.ndim == 2:
+        with np.errstate(all="ignore"):
+            values = np.nanmedian(values, axis=0)
+    if values.ndim != 1 or values.size < 2:
+        raise ValueError("active_universe_size must expose at least two hourly coordinates")
+    lagged = np.empty(values.shape, dtype=float)
+    lagged[0] = np.nan
+    lagged[1:] = values[:-1]
+    finite = lagged[np.isfinite(lagged)]
+    if finite.size == 0:
+        raise ValueError("lagged active_universe_size has no finite observations")
+    quantiles = np.asarray(SEARCH_BEHAVIOR_DESCRIPTOR_SCHEMA["pit_regime_quantiles"])
+    thresholds = np.quantile(finite, quantiles, method="linear").astype(float)
+    return {
+        **dict(SEARCH_BEHAVIOR_DESCRIPTOR_SCHEMA),
+        "pit_regime_thresholds": thresholds.tolist(),
+        "pit_regime_thresholds_sha256": _payload_sha(thresholds.tolist()),
+        "frozen_observation_count": int(finite.size),
+        "contract_sha256": _payload_sha(
+            {
+                **dict(SEARCH_BEHAVIOR_DESCRIPTOR_SCHEMA),
+                "pit_regime_thresholds": thresholds.tolist(),
+                "frozen_observation_count": int(finite.size),
+            }
+        ),
+    }
+
+
+def _quantized(values: np.ndarray, step: float, *, missing: int = -32768) -> np.ndarray:
+    array = np.asarray(values, dtype=float)
+    output = np.full(array.shape, missing, dtype=np.int16)
+    finite = np.isfinite(array)
+    output[finite] = np.rint(array[finite] / float(step)).astype(np.int16)
+    return output
+
+
+def search_behavior_descriptor(
+    *,
+    signal: np.ndarray,
+    weights: np.ndarray,
+    eligible_mask: np.ndarray,
+    month_labels: np.ndarray,
+    timestamp_ns: np.ndarray,
+    active_universe_size: np.ndarray,
+    horizon_hours: int,
+    mapping_id: str,
+    contract: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Return a coarse, frozen, outcome-free behavior-family identity."""
+
+    signal = np.asarray(signal, dtype=float)
+    weights = np.asarray(weights, dtype=float)
+    eligible = np.asarray(eligible_mask, dtype=bool)
+    months = np.asarray(month_labels, dtype=str)
+    timestamps = np.asarray(timestamp_ns, dtype=np.int64)
+    if signal.shape != weights.shape or signal.shape != eligible.shape:
+        raise ValueError("behavior arrays must share the asset/time coordinate shape")
+    if signal.ndim != 2 or signal.shape[1] != months.size or months.size != timestamps.size:
+        raise ValueError("behavior time coordinates do not match the mapped arrays")
+    if str(contract.get("schema_version")) != "CRYPTO_SEARCH_BEHAVIOR_DESCRIPTOR_V1":
+        raise ValueError("unsupported behavior descriptor contract")
+    expected_contract_hash = _payload_sha(
+        {
+            key: value
+            for key, value in contract.items()
+            if key not in {"contract_sha256", "pit_regime_thresholds_sha256"}
+        }
+    )
+    if expected_contract_hash != str(contract.get("contract_sha256")):
+        raise ValueError("behavior descriptor contract identity changed")
+
+    regime_values = np.asarray(active_universe_size, dtype=float)
+    if regime_values.ndim == 2:
+        with np.errstate(all="ignore"):
+            regime_values = np.nanmedian(regime_values, axis=0)
+    if regime_values.shape != (signal.shape[1],):
+        raise ValueError("behavior regime source does not match the time coordinate")
+    lagged_regime = np.empty(regime_values.shape, dtype=float)
+    lagged_regime[0] = np.nan
+    lagged_regime[1:] = regime_values[:-1]
+    thresholds = np.asarray(contract["pit_regime_thresholds"], dtype=float)
+    regimes = np.full(lagged_regime.shape, -1, dtype=np.int8)
+    finite_regime = np.isfinite(lagged_regime)
+    regimes[finite_regime] = np.digitize(
+        lagged_regime[finite_regime], thresholds, right=True
+    ).astype(np.int8)
+
+    finite_signal = eligible & np.isfinite(signal)
+    sortable = np.where(finite_signal, signal, np.inf)
+    order = np.argsort(sortable, axis=0, kind="mergesort")
+    ranks = np.argsort(order, axis=0, kind="mergesort").astype(float)
+    denominators = np.maximum(1, finite_signal.sum(axis=0) - 1)
+    rank_buckets = np.floor(
+        ranks / denominators[np.newaxis, :] * int(contract["rank_bucket_count"])
+    )
+    rank_buckets = np.clip(rank_buckets, 0, int(contract["rank_bucket_count"]) - 1)
+    rank_buckets[~finite_signal] = np.nan
+
+    epsilon = float(contract["selected_weight_epsilon"])
+    selected = np.abs(weights) > epsilon
+    selected_sign = np.where(selected, np.sign(weights), 0.0)
+    changes = np.diff(weights, axis=1, prepend=np.zeros((weights.shape[0], 1)))
+    turnover_path = np.sum(np.abs(changes), axis=0) / float(horizon_hours)
+    previous_selected = np.zeros_like(selected)
+    previous_selected[:, 1:] = selected[:, :-1]
+    union = np.sum(selected | previous_selected, axis=0)
+    intersection = np.sum(selected & previous_selected, axis=0)
+    overlap = np.divide(
+        intersection,
+        union,
+        out=np.ones(intersection.shape, dtype=float),
+        where=union > 0,
+    )
+
+    rank_rows: list[Any] = []
+    selection_rows: list[Any] = []
+    weight_rows: list[Any] = []
+    turnover_rows: list[Any] = []
+    group_keys = sorted({(str(month), int(regime)) for month, regime in zip(months, regimes)})
+    turnover_edges = np.asarray(contract["turnover_bin_edges"], dtype=float)
+    for month, regime in group_keys:
+        local = (months == month) & (regimes == regime)
+        if not np.any(local):
+            continue
+        local_ranks = rank_buckets[:, local]
+        with np.errstate(all="ignore"):
+            rank_mean = np.nanmean(local_ranks, axis=1)
+        rank_rows.append(
+            [month, regime, _quantized(rank_mean, float(contract["rank_mean_quantization_step"])).tolist()]
+        )
+        selection_rows.append(
+            [
+                month,
+                regime,
+                _quantized(
+                    np.mean(selected_sign[:, local] > 0, axis=1),
+                    float(contract["selection_rate_quantization_step"]),
+                ).tolist(),
+                _quantized(
+                    np.mean(selected_sign[:, local] < 0, axis=1),
+                    float(contract["selection_rate_quantization_step"]),
+                ).tolist(),
+                int(
+                    _quantized(
+                        np.asarray([np.mean(overlap[local])]),
+                        float(contract["selected_overlap_quantization_step"]),
+                    )[0]
+                ),
+            ]
+        )
+        local_weights = weights[:, local]
+        weight_rows.append(
+            [
+                month,
+                regime,
+                _quantized(
+                    np.mean(local_weights, axis=1),
+                    float(contract["mapped_weight_quantization_step"]),
+                ).tolist(),
+                _quantized(
+                    np.std(local_weights, axis=1),
+                    float(contract["mapped_weight_quantization_step"]),
+                ).tolist(),
+            ]
+        )
+        local_turnover = turnover_path[local]
+        histogram = np.histogram(local_turnover, bins=np.r_[turnover_edges, np.inf])[0]
+        histogram_rate = histogram / max(1, int(histogram.sum()))
+        turnover_rows.append(
+            [
+                month,
+                regime,
+                _quantized(
+                    histogram_rate,
+                    float(contract["turnover_histogram_quantization_step"]),
+                ).tolist(),
+            ]
+        )
+
+    coordinate_descriptor = {
+        "shape": list(signal.shape),
+        "timestamp_sha256": array_sha256(timestamps),
+        "eligible_sha256": array_sha256(eligible.astype(np.int8)),
+        "mapping_id": str(mapping_id),
+        "horizon_hours": int(horizon_hours),
+    }
+    components = {
+        "coordinate_data_binding_id": _payload_sha(coordinate_descriptor),
+        "rank_descriptor_id": _payload_sha(rank_rows),
+        "selected_asset_overlap_id": _payload_sha(selection_rows),
+        "mapped_weight_descriptor_id": _payload_sha(weight_rows),
+        "turnover_path_descriptor_id": _payload_sha(turnover_rows),
+        "pit_regime_descriptor_id": _payload_sha(
+            {
+                "source": contract["pit_regime_source"],
+                "lag_hours": int(contract["pit_regime_lag_hours"]),
+                "thresholds": thresholds.tolist(),
+                "regime_path": regimes.tolist(),
+            }
+        ),
+        "descriptor_contract_sha256": str(contract["contract_sha256"]),
+    }
+    return {
+        **components,
+        "behavior_family_id": _payload_sha(components),
+        "descriptor_schema_version": str(contract["schema_version"]),
+        "identity_excludes": ["gross", "net", "cost", "pair_reward"],
+    }
 
 
 def audit_grammar(

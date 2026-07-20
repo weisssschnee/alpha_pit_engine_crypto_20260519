@@ -94,11 +94,13 @@ REPORT_ONLY_START = "2024-07-01T00:00:00Z"
 REPORT_ONLY_END = "2025-01-01T00:00:00Z"
 
 COMPILER_BINDING_PATHS = (
+    "alphafactory_crypto/broad_search/audit.py",
     "alphafactory_crypto/broad_search/expression.py",
     "alphafactory_crypto/broad_search/panel18m.py",
     "alphafactory_crypto/broad_search/compositional18m.py",
     "alphafactory_crypto/broad_search/pair18m.py",
     "alphafactory_crypto/broad_search/runner18m.py",
+    "alphafactory_crypto/broad_search/search_engine_v1.py",
     "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
 )
 
