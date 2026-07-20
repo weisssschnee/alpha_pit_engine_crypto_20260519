@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-20T07:31:54.235193+00:00",
+  "generated_at": "2026-07-20T10:22:47.367541+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -2882,6 +2882,7 @@
         "alphafactory_crypto_broad_search_runner18m_trim_working_set",
         "alphafactory_crypto_broad_search_runner18m_validate_config",
         "alphafactory_crypto_broad_search_runner18m_waterfall",
+        "alphafactory_crypto_broad_search_runner18m_working_set_trim_due",
         "alphafactory_crypto_broad_search_runner18m_write_json",
         "reports_crypto_18m_current_field_four_policy_closure_qualification",
         "reports_crypto_18m_current_field_four_policy_closure_qualification_crypto_18m_current_field_four_policy_closure_qualification",
@@ -2903,7 +2904,7 @@
       "required": false,
       "semantic_role": "experimental_18m_compositional_search_evidence",
       "validation": {
-        "checked_at": "2026-07-20T07:31:54.235193+00:00",
+        "checked_at": "2026-07-20T10:22:47.367541+00:00",
         "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_ARTIFACT_MANIFEST.json",
         "evidence_sha256": "5366AC5847DC78C6AEDFBC439D88C77DA425351EB66A3BD1E3C5DD009C4A2A69",
         "level": "STATIC_VERIFIED",
@@ -4594,6 +4595,12 @@
         "reports_crypto_localized_mechanism_qualification_report_fixed_a_g_ablation",
         "reports_crypto_localized_mechanism_qualification_report_identity_and_mapping_qualification",
         "reports_crypto_localized_mechanism_qualification_report_report_only_independence",
+        "reports_crypto_policy_acceleration_canary_v1_report",
+        "reports_crypto_policy_acceleration_canary_v1_report_crypto_policy_acceleration_canary_v1",
+        "reports_crypto_policy_acceleration_canary_v1_report_exact_parity",
+        "reports_crypto_policy_acceleration_canary_v1_report_next_launch_contract",
+        "reports_crypto_policy_acceleration_canary_v1_report_runtime_reality",
+        "reports_crypto_policy_acceleration_canary_v1_report_worker_scheduling",
         "reports_crypto_policy_upgrade_canary_v1_report",
         "reports_crypto_policy_upgrade_canary_v1_report_crypto_policy_upgrade_canary_v1",
         "reports_crypto_policy_upgrade_canary_v1_report_upgrade_decisions",
@@ -4724,7 +4731,7 @@
       "required": false,
       "semantic_role": "adaptive_latent_challenger_evidence",
       "validation": {
-        "checked_at": "2026-07-20T07:31:54.235193+00:00",
+        "checked_at": "2026-07-20T10:22:47.367541+00:00",
         "evidence_ref": "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md",
         "evidence_sha256": "DC2E109B222F0E9999F7498F91306845A4939D46B5B961B0E677F3A51ECB1DBC",
         "level": "STATIC_VERIFIED",
@@ -5552,13 +5559,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "0d17e5ec2538a9a79b598310a813a1380955e2fe",
-    "edge_count": 33912,
-    "node_count": 18139,
+    "built_at_commit": "f675810a62e0f7d9515e1ea9dbf756af18401d85",
+    "edge_count": 33947,
+    "node_count": 18173,
     "path": ".planning/graphs/graph.json",
-    "sha256": "BEB5F1C295B763101522B4A399C3FCD56AE81207AD5FD7E0E51DDD8D34BF276A"
+    "sha256": "DC3F12B69A21503EDB0B9BE816D6848D2A15019A9CEF416A49343BA588330283"
   },
-  "repo_head": "0d17e5ec2538a9a79b598310a813a1380955e2fe",
+  "repo_head": "f675810a62e0f7d9515e1ea9dbf756af18401d85",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
