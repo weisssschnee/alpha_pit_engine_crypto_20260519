@@ -7,7 +7,7 @@ import json
 import random
 import statistics
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 
@@ -32,6 +32,8 @@ from .panel18m import RawPanelStore, infer_family
 
 WINDOWS = (6, 12, 24, 48, 72, 168, 336, 720)
 HORIZONS = (1, 4)
+BETAS = (-1.0, -0.5, 0.5, 1.0)
+NORMALIZERS = ("RollingZScore", "VolatilityScale", "HistoricalPercentile")
 MECHANISM_FAMILIES = (
     "OI_PRICE_DIVERGENCE",
     "OI_ACTIVITY_INTERACTION",
@@ -110,6 +112,7 @@ class CandidateSpec:
     rolling_windows: tuple[int, ...]
     expression_depth: int
     operator_path: str
+    generation_genes: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -125,6 +128,7 @@ class CandidateSpec:
             "rolling_windows": list(self.rolling_windows),
             "expression_depth": self.expression_depth,
             "operator_path": self.operator_path,
+            "generation_genes": dict(self.generation_genes),
         }
 
     @classmethod
@@ -142,6 +146,7 @@ class CandidateSpec:
             tuple(int(value) for value in payload["rolling_windows"]),
             int(payload["expression_depth"]),
             str(payload["operator_path"]),
+            dict(payload.get("generation_genes") or {}),
         )
 
 
@@ -320,6 +325,290 @@ def _build_expression(
     return Expression(operator, (left, right))
 
 
+def _validated_generation_genes(
+    skeleton: Skeleton,
+    genes: Mapping[str, Any],
+    roles: Mapping[str, Sequence[str]],
+) -> dict[str, Any]:
+    required = {
+        "left_field",
+        "right_field",
+        "left_window",
+        "right_window",
+        "beta",
+        "left_normalizer",
+        "right_normalizer",
+        "horizon_hours",
+    }
+    if set(genes) != required:
+        raise ValueError(
+            "generation genes must be exact: "
+            + ",".join(sorted(required))
+        )
+    output = {
+        "left_field": str(genes["left_field"]),
+        "right_field": str(genes["right_field"]),
+        "left_window": int(genes["left_window"]),
+        "right_window": int(genes["right_window"]),
+        "beta": float(genes["beta"]),
+        "left_normalizer": str(genes["left_normalizer"]),
+        "right_normalizer": str(genes["right_normalizer"]),
+        "horizon_hours": int(genes["horizon_hours"]),
+    }
+    if output["left_field"] not in roles[skeleton.field_roles[0]]:
+        raise ValueError("left field violates the skeleton role contract")
+    if output["right_field"] not in roles[skeleton.field_roles[1]]:
+        raise ValueError("right field violates the skeleton role contract")
+    if output["left_window"] not in WINDOWS or output["right_window"] not in WINDOWS:
+        raise ValueError("rolling window is outside the frozen grammar")
+    if output["beta"] not in BETAS:
+        raise ValueError("residual beta is outside the frozen grammar")
+    if (
+        output["left_normalizer"] not in NORMALIZERS
+        or output["right_normalizer"] not in NORMALIZERS
+    ):
+        raise ValueError("normalizer is outside the frozen grammar")
+    if output["horizon_hours"] not in HORIZONS:
+        raise ValueError("horizon is outside the frozen grammar")
+    operator = _variant_operator(skeleton.mechanism_family, skeleton.variant)
+    if operator != "Residual":
+        output["beta"] = 0.5
+    if skeleton.mechanism_family == "STATE_REGIME_MODULATION" or operator == "StateModulation":
+        output["right_normalizer"] = "RollingZScore"
+    if infer_family(output["right_field"]) == "listing_age_context":
+        output["right_window"] = WINDOWS[0]
+    return output
+
+
+def _effective_generation_gene_names(
+    skeleton: Skeleton, genes: Mapping[str, Any]
+) -> frozenset[str]:
+    names = {
+        "left_field",
+        "right_field",
+        "left_window",
+        "right_window",
+        "left_normalizer",
+        "right_normalizer",
+        "horizon_hours",
+    }
+    operator = _variant_operator(skeleton.mechanism_family, skeleton.variant)
+    if operator == "Residual":
+        names.add("beta")
+    if skeleton.mechanism_family == "STATE_REGIME_MODULATION" or operator == "StateModulation":
+        names.discard("right_normalizer")
+    if infer_family(str(genes["right_field"])) == "listing_age_context":
+        names.discard("right_window")
+    return frozenset(names)
+
+
+def candidate_from_genes(
+    registry: TypedExpressionRegistry,
+    *,
+    skeleton: Skeleton,
+    genes: Mapping[str, Any],
+    roles: Mapping[str, Sequence[str]] | None = None,
+) -> CandidateSpec:
+    """Compile an explicit Broad genome through the existing typed registry."""
+
+    role_map = roles or _field_roles(tuple(registry.fields.values()))
+    genome = _validated_generation_genes(skeleton, genes, role_map)
+    expression = _build_expression(
+        skeleton,
+        left_field=genome["left_field"],
+        right_field=genome["right_field"],
+        left_window=genome["left_window"],
+        right_window=genome["right_window"],
+        beta=genome["beta"],
+        left_normalizer=genome["left_normalizer"],
+        right_normalizer=genome["right_normalizer"],
+    )
+    assurance = registry.validate(expression)
+    control = ablate_expression(expression)
+    control_assurance = registry.validate(control)
+    if assurance.raw_fields != control_assurance.raw_fields:
+        raise AssertionError("matched control changed the raw-input contract")
+    payload = {
+        "skeleton_id": skeleton.skeleton_id,
+        "expression": expression.canonical_dict(),
+        "control": control.canonical_dict(),
+        "horizon_hours": genome["horizon_hours"],
+        "mapping_id": CROSS_SECTIONAL_ZERO_NET,
+    }
+    raw_fields = assurance.raw_fields
+    return CandidateSpec(
+        _payload_sha(payload),
+        skeleton.skeleton_id,
+        skeleton.mechanism_family,
+        expression,
+        control,
+        genome["horizon_hours"],
+        CROSS_SECTIONAL_ZERO_NET,
+        raw_fields,
+        tuple(infer_family(field_id) for field_id in raw_fields),
+        assurance.rolling_windows,
+        assurance.depth,
+        operator_path(expression),
+        genome,
+    )
+
+
+def _sample_generation_genes(
+    skeleton: Skeleton,
+    *,
+    rng: random.Random,
+    roles: Mapping[str, Sequence[str]],
+) -> dict[str, Any]:
+    left_field = rng.choice(roles[skeleton.field_roles[0]])
+    right_options = roles[skeleton.field_roles[1]]
+    distinct = [field_id for field_id in right_options if field_id != left_field]
+    return {
+        "left_field": left_field,
+        "right_field": rng.choice(distinct or right_options),
+        "left_window": rng.choice(WINDOWS),
+        "right_window": rng.choice(WINDOWS),
+        "beta": rng.choice(BETAS),
+        "left_normalizer": rng.choice(NORMALIZERS),
+        "right_normalizer": rng.choice(NORMALIZERS),
+        "horizon_hours": rng.choice(HORIZONS),
+    }
+
+
+def _mutable_gene_domains(
+    skeleton: Skeleton,
+    *,
+    genes: Mapping[str, Any],
+    roles: Mapping[str, Sequence[str]],
+) -> dict[str, tuple[Any, ...]]:
+    domains: dict[str, tuple[Any, ...]] = {
+        "left_field": tuple(roles[skeleton.field_roles[0]]),
+        "right_field": tuple(roles[skeleton.field_roles[1]]),
+        "left_window": WINDOWS,
+        "right_window": WINDOWS,
+        "left_normalizer": NORMALIZERS,
+        "horizon_hours": HORIZONS,
+    }
+    effective = _effective_generation_gene_names(skeleton, genes)
+    if "beta" in effective:
+        domains["beta"] = BETAS
+    if "right_normalizer" in effective:
+        domains["right_normalizer"] = NORMALIZERS
+    if "right_window" not in effective:
+        domains.pop("right_window")
+    output: dict[str, tuple[Any, ...]] = {}
+    for name, values in domains.items():
+        options = tuple(value for value in values if value != genes[name])
+        if name == "right_field":
+            distinct = tuple(value for value in options if value != genes["left_field"])
+            options = distinct or options
+        if name == "left_field" and genes["right_field"] in options and len(options) > 1:
+            options = tuple(value for value in options if value != genes["right_field"])
+        if options:
+            output[name] = options
+    return output
+
+
+def typed_mutate_candidate(
+    registry: TypedExpressionRegistry,
+    *,
+    parent: CandidateSpec,
+    rng: random.Random,
+    roles: Mapping[str, Sequence[str]] | None = None,
+) -> tuple[CandidateSpec, dict[str, Any]]:
+    """Mutate exactly one effective typed gene and issue a tamper-evident receipt."""
+
+    if not parent.generation_genes:
+        raise ValueError("parent lacks an explicit generation genome")
+    skeleton = next(
+        item for item in skeleton_registry() if item.skeleton_id == parent.skeleton_id
+    )
+    role_map = roles or _field_roles(tuple(registry.fields.values()))
+    domains = _mutable_gene_domains(
+        skeleton, genes=parent.generation_genes, roles=role_map
+    )
+    names = sorted(domains)
+    if not names:
+        raise RuntimeError("parent has no mutable typed genes")
+    rng.shuffle(names)
+    child: CandidateSpec | None = None
+    changed_gene = ""
+    before: Any = None
+    after: Any = None
+    for name in names:
+        genome = dict(parent.generation_genes)
+        value = rng.choice(domains[name])
+        genome[name] = value
+        candidate = candidate_from_genes(
+            registry, skeleton=skeleton, genes=genome, roles=role_map
+        )
+        if candidate.candidate_id != parent.candidate_id:
+            child = candidate
+            changed_gene = name
+            before = parent.generation_genes[name]
+            after = value
+            break
+    if child is None:
+        raise RuntimeError("typed mutation did not change candidate identity")
+    receipt_core = {
+        "schema_version": "BROAD_TYPED_MUTATION_RECEIPT_V1",
+        "operator": "TYPED_SINGLE_GENE_MUTATION",
+        "parent_id": parent.candidate_id,
+        "child_id": child.candidate_id,
+        "parent_skeleton_id": parent.skeleton_id,
+        "child_skeleton_id": child.skeleton_id,
+        "changed_gene": changed_gene,
+        "before": before,
+        "after": after,
+        "parent_genome_sha256": _payload_sha(parent.generation_genes),
+        "child_genome_sha256": _payload_sha(child.generation_genes),
+        "parent_expression_sha256": _payload_sha(parent.expression.canonical_dict()),
+        "child_expression_sha256": _payload_sha(child.expression.canonical_dict()),
+        "child_raw_fields": list(child.raw_fields),
+    }
+    return child, {**receipt_core, "receipt_sha256": _payload_sha(receipt_core)}
+
+
+def verify_typed_mutation_receipt(
+    registry: TypedExpressionRegistry,
+    parent: CandidateSpec,
+    child: CandidateSpec,
+    receipt: Mapping[str, Any],
+) -> bool:
+    try:
+        changed = {
+            name
+            for name in parent.generation_genes
+            if parent.generation_genes[name] != child.generation_genes[name]
+        }
+        name = str(receipt["changed_gene"])
+        core = {key: value for key, value in receipt.items() if key != "receipt_sha256"}
+        child_assurance = registry.validate(child.expression)
+        control_assurance = registry.validate(child.control)
+        return bool(
+            receipt.get("schema_version") == "BROAD_TYPED_MUTATION_RECEIPT_V1"
+            and receipt.get("operator") == "TYPED_SINGLE_GENE_MUTATION"
+            and receipt.get("parent_id") == parent.candidate_id
+            and receipt.get("child_id") == child.candidate_id
+            and receipt.get("parent_skeleton_id") == parent.skeleton_id
+            and receipt.get("child_skeleton_id") == child.skeleton_id
+            and changed == {name}
+            and receipt.get("before") == parent.generation_genes[name]
+            and receipt.get("after") == child.generation_genes[name]
+            and receipt.get("parent_genome_sha256")
+            == _payload_sha(parent.generation_genes)
+            and receipt.get("child_genome_sha256") == _payload_sha(child.generation_genes)
+            and receipt.get("parent_expression_sha256")
+            == _payload_sha(parent.expression.canonical_dict())
+            and receipt.get("child_expression_sha256")
+            == _payload_sha(child.expression.canonical_dict())
+            and receipt.get("child_raw_fields") == list(child.raw_fields)
+            and child_assurance.raw_fields == control_assurance.raw_fields
+            and receipt.get("receipt_sha256") == _payload_sha(core)
+        )
+    except (KeyError, TypeError, ValueError):
+        return False
+
+
 def generate_candidate(
     registry: TypedExpressionRegistry,
     *,
@@ -328,53 +617,11 @@ def generate_candidate(
     roles: Mapping[str, Sequence[str]] | None = None,
 ) -> CandidateSpec:
     roles = roles or _field_roles(tuple(registry.fields.values()))
-    left_field = rng.choice(roles[skeleton.field_roles[0]])
-    right_options = roles[skeleton.field_roles[1]]
-    distinct = [field for field in right_options if field != left_field]
-    right_field = rng.choice(distinct or right_options)
-    left_window = rng.choice(WINDOWS)
-    right_window = rng.choice(WINDOWS)
-    beta = rng.choice((-1.0, -0.5, 0.5, 1.0))
-    left_normalizer = rng.choice(("RollingZScore", "VolatilityScale", "HistoricalPercentile"))
-    right_normalizer = rng.choice(("RollingZScore", "VolatilityScale", "HistoricalPercentile"))
-    expression = _build_expression(
-        skeleton,
-        left_field=left_field,
-        right_field=right_field,
-        left_window=left_window,
-        right_window=right_window,
-        beta=beta,
-        left_normalizer=left_normalizer,
-        right_normalizer=right_normalizer,
-    )
-    assurance = registry.validate(expression)
-    control = ablate_expression(expression)
-    control_assurance = registry.validate(control)
-    if assurance.raw_fields != control_assurance.raw_fields:
-        raise AssertionError("matched control changed the raw-input contract")
-    horizon = rng.choice(HORIZONS)
-    payload = {
-        "skeleton_id": skeleton.skeleton_id,
-        "expression": expression.canonical_dict(),
-        "control": control.canonical_dict(),
-        "horizon_hours": horizon,
-        "mapping_id": CROSS_SECTIONAL_ZERO_NET,
-    }
-    candidate_id = _payload_sha(payload)
-    raw_fields = assurance.raw_fields
-    return CandidateSpec(
-        candidate_id,
-        skeleton.skeleton_id,
-        skeleton.mechanism_family,
-        expression,
-        control,
-        horizon,
-        CROSS_SECTIONAL_ZERO_NET,
-        raw_fields,
-        tuple(infer_family(field) for field in raw_fields),
-        assurance.rolling_windows,
-        assurance.depth,
-        operator_path(expression),
+    return candidate_from_genes(
+        registry,
+        skeleton=skeleton,
+        genes=_sample_generation_genes(skeleton, rng=rng, roles=roles),
+        roles=roles,
     )
 
 

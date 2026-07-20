@@ -10,9 +10,12 @@ import pytest
 
 from alphafactory_crypto.broad_search.compositional18m import (
     CandidateSpec,
+    candidate_from_genes,
     field_role_coverage,
     generate_candidate,
     skeleton_registry,
+    typed_mutate_candidate,
+    verify_typed_mutation_receipt,
 )
 from alphafactory_crypto.broad_search.expression import (
     Expression,
@@ -249,6 +252,103 @@ def test_policy_private_state_and_deterministic_replay() -> None:
     candidate, _ = first.propose()
     first.update(candidate, 1.0)
     assert isolated.state_hash() == isolated_hash
+
+
+def test_candidate_gene_roundtrip_preserves_identity() -> None:
+    registry = _role_complete_registry()
+    original = generate_candidate(
+        registry, skeleton=skeleton_registry()[3], rng=random.Random(20260720)
+    )
+    rebuilt = candidate_from_genes(
+        registry,
+        skeleton=skeleton_registry()[3],
+        genes=original.generation_genes,
+    )
+    assert rebuilt.candidate_id == original.candidate_id
+    assert rebuilt.to_dict() == original.to_dict()
+
+
+def test_typed_mutation_changes_one_gene_and_receipt_detects_tampering() -> None:
+    registry = _role_complete_registry()
+    parent = generate_candidate(
+        registry, skeleton=skeleton_registry()[3], rng=random.Random(20260720)
+    )
+    child, receipt = typed_mutate_candidate(
+        registry, parent=parent, rng=random.Random(20260721)
+    )
+    assert parent.candidate_id != child.candidate_id
+    changed = {
+        key
+        for key in parent.generation_genes
+        if parent.generation_genes[key] != child.generation_genes[key]
+    }
+    assert changed == {receipt["changed_gene"]}
+    assert registry.validate(child.expression).raw_fields == registry.validate(
+        child.control
+    ).raw_fields
+    assert verify_typed_mutation_receipt(registry, parent, child, receipt) is True
+    tampered = dict(receipt)
+    tampered["after"] = "not-the-child-value"
+    assert verify_typed_mutation_receipt(registry, parent, child, tampered) is False
+
+
+def test_real_cem_updates_only_on_complete_generation_and_replays() -> None:
+    registry = _role_complete_registry()
+    params = {
+        "generation_size": 4,
+        "elite_fraction": 0.25,
+        "smoothing": 0.5,
+        "minimum_probability": 0.005,
+        "duplicate_resample_limit": 16,
+    }
+    first = LanePolicy("cem_distribution_v1", 20260720, registry, params)
+    second = LanePolicy("cem_distribution_v1", 20260720, registry, params)
+    initial_hash = first.distribution_hash()
+    for step in range(5):
+        left, left_meta = first.propose()
+        right, right_meta = second.propose()
+        assert left.candidate_id == right.candidate_id
+        assert left_meta["policy_diagnostics"] == right_meta["policy_diagnostics"]
+        first.update(left, float(step))
+        second.update(right, float(step))
+        if step < 3:
+            assert first.distribution_hash() == initial_hash
+    assert first.cem_update_count == 1
+    assert first.distribution_hash() != initial_hash
+    for probabilities in first.cem_probabilities.values():
+        assert sum(probabilities.values()) == pytest.approx(1.0)
+        assert min(probabilities.values()) >= 0.005
+    assert first.state_hash() == second.state_hash()
+
+
+def test_real_typed_evolution_replays_and_verifies_every_mutation() -> None:
+    registry = _role_complete_registry()
+    params = {
+        "warmup": 4,
+        "exploration_probability": 0.0,
+        "tournament_size": 3,
+        "duplicate_resample_limit": 16,
+    }
+    first = LanePolicy("evolutionary_typed_v1", 20260720, registry, params)
+    second = LanePolicy("evolutionary_typed_v1", 20260720, registry, params)
+    mutation_count = 0
+    for step in range(10):
+        left, left_meta = first.propose()
+        right, right_meta = second.propose()
+        assert left.candidate_id == right.candidate_id
+        assert left_meta == right_meta
+        if left_meta["mutation_receipt"] is not None:
+            mutation_count += 1
+            parent = first.candidates[left_meta["parent_id"]]
+            assert left_meta["mutation_receipt_verified"] is True
+            assert verify_typed_mutation_receipt(
+                registry, parent, left, left_meta["mutation_receipt"]
+            )
+        reward = float(step % 3)
+        first.update(left, reward)
+        second.update(right, reward)
+    assert mutation_count == 6
+    assert first.state_hash() == second.state_hash()
 
 
 def test_frozen_config_keeps_sealed_reads_and_promotion_disabled() -> None:

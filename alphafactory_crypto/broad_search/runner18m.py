@@ -33,14 +33,22 @@ from alphafactory_crypto.instrument_capability.mapping import (
 from alphafactory_crypto.instrument_canary.release import sha256_file
 
 from .compositional18m import (
+    BETAS,
     CandidateSpec,
+    HORIZONS,
     MECHANISM_FAMILIES,
+    NORMALIZERS,
+    WINDOWS,
+    _effective_generation_gene_names,
     audit_numeric_expressivity,
+    candidate_from_genes,
     field_role_coverage,
     generate_candidate,
     generate_structural_pool,
     skeleton_payload,
     skeleton_registry,
+    typed_mutate_candidate,
+    verify_typed_mutation_receipt,
 )
 from .expression import FieldContract, TypedExpressionRegistry
 from .pair18m import (
@@ -71,6 +79,14 @@ POLICIES = (
     "uct_ucb_like",
     "evolutionary",
 )
+POLICY_UPGRADE_CANARY_POLICIES = (
+    "canonical_typed_random",
+    "cem_diversity_v2",
+    "cem_distribution_v1",
+    "evolutionary",
+    "evolutionary_typed_v1",
+)
+SUPPORTED_POLICIES = tuple(dict.fromkeys(POLICIES + POLICY_UPGRADE_CANARY_POLICIES))
 SEEDS = (20260716, 20260717, 20260718, 20260719)
 ADAPTIVE_START = "2023-07-01T00:00:00Z"
 ADAPTIVE_END = "2024-07-01T00:00:00Z"
@@ -83,6 +99,7 @@ COMPILER_BINDING_PATHS = (
     "alphafactory_crypto/broad_search/compositional18m.py",
     "alphafactory_crypto/broad_search/pair18m.py",
     "alphafactory_crypto/broad_search/runner18m.py",
+    "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
 )
 
 RUNTIME_OUTPUTS = (
@@ -557,18 +574,180 @@ class LanePolicy:
     policy: str
     seed: int
     registry: TypedExpressionRegistry
+    parameters: Mapping[str, Any] = field(default_factory=dict)
     rng: random.Random = field(init=False)
     seen: set[str] = field(default_factory=set)
     rewards: dict[str, float] = field(default_factory=dict)
     candidates: dict[str, CandidateSpec] = field(default_factory=dict)
     skeleton_visits: Counter[str] = field(default_factory=Counter)
     skeleton_rewards: dict[str, list[float]] = field(default_factory=lambda: defaultdict(list))
+    proposal_order: list[str] = field(default_factory=list)
+    cem_probabilities: dict[str, dict[str, float]] = field(default_factory=dict)
+    cem_update_count: int = 0
     step: int = 0
 
     def __post_init__(self) -> None:
-        if self.policy not in POLICIES:
+        if self.policy not in SUPPORTED_POLICIES:
             raise ValueError(self.policy)
+        self.parameters = dict(self.parameters)
         self.rng = random.Random(self.seed)
+        if self.policy == "cem_distribution_v1":
+            self._validate_cem_parameters()
+            self.cem_probabilities = {
+                axis: {str(value): 1.0 / len(values) for value in values}
+                for axis, values in self._cem_domains().items()
+            }
+        if self.policy == "evolutionary_typed_v1":
+            self._validate_evolution_parameters()
+
+    def _cem_parameter(self, name: str, default: Any) -> Any:
+        return self.parameters.get(name, default)
+
+    def _validate_cem_parameters(self) -> None:
+        generation_size = int(self._cem_parameter("generation_size", 16))
+        elite_fraction = float(self._cem_parameter("elite_fraction", 0.25))
+        smoothing = float(self._cem_parameter("smoothing", 0.5))
+        minimum_probability = float(
+            self._cem_parameter("minimum_probability", 0.005)
+        )
+        if generation_size < 4:
+            raise ValueError("CEM generation_size must be at least four")
+        if not 0.0 < elite_fraction <= 0.5:
+            raise ValueError("CEM elite_fraction must be in (0, 0.5]")
+        if not 0.0 < smoothing <= 1.0:
+            raise ValueError("CEM smoothing must be in (0, 1]")
+        if not 0.0 <= minimum_probability < 1.0 / len(skeleton_registry()):
+            raise ValueError("CEM minimum_probability is incompatible with support")
+
+    def _validate_evolution_parameters(self) -> None:
+        if int(self.parameters.get("warmup", 16)) < 4:
+            raise ValueError("typed evolution warmup must be at least four")
+        probability = float(self.parameters.get("exploration_probability", 0.25))
+        if not 0.0 <= probability <= 1.0:
+            raise ValueError("typed evolution exploration probability is invalid")
+        if int(self.parameters.get("tournament_size", 4)) < 2:
+            raise ValueError("typed evolution tournament must include two candidates")
+
+    @staticmethod
+    def _cem_domains() -> dict[str, tuple[Any, ...]]:
+        return {
+            "skeleton_id": tuple(item.skeleton_id for item in skeleton_registry()),
+            "left_window": WINDOWS,
+            "right_window": WINDOWS,
+            "beta": BETAS,
+            "left_normalizer": NORMALIZERS,
+            "right_normalizer": NORMALIZERS,
+            "horizon_hours": HORIZONS,
+        }
+
+    def distribution_hash(self) -> str:
+        return _payload_sha(self.cem_probabilities)
+
+    def _distribution_entropy(self) -> dict[str, float]:
+        return {
+            axis: float(-sum(value * math.log(value) for value in probabilities.values()))
+            for axis, probabilities in self.cem_probabilities.items()
+        }
+
+    def _refresh_cem_distribution(self) -> None:
+        generation_size = int(self._cem_parameter("generation_size", 16))
+        if self.step == 0 or self.step % generation_size:
+            return
+        generation_ids = self.proposal_order[-generation_size:]
+        if len(generation_ids) != generation_size or any(
+            candidate_id not in self.rewards for candidate_id in generation_ids
+        ):
+            raise RuntimeError("CEM generation cannot update before complete feedback")
+        elite_count = max(
+            1,
+            int(math.ceil(generation_size * float(self._cem_parameter("elite_fraction", 0.25)))),
+        )
+        elite_ids = sorted(
+            generation_ids,
+            key=lambda candidate_id: (self.rewards[candidate_id], candidate_id),
+            reverse=True,
+        )[:elite_count]
+        smoothing = float(self._cem_parameter("smoothing", 0.5))
+        floor = float(self._cem_parameter("minimum_probability", 0.005))
+        domains = self._cem_domains()
+        for axis, values in domains.items():
+            counts = Counter()
+            applicable = 0
+            for candidate_id in elite_ids:
+                candidate = self.candidates[candidate_id]
+                skeleton = next(
+                    item
+                    for item in skeleton_registry()
+                    if item.skeleton_id == candidate.skeleton_id
+                )
+                if (
+                    axis != "skeleton_id"
+                    and axis
+                    not in _effective_generation_gene_names(
+                        skeleton, candidate.generation_genes
+                    )
+                ):
+                    continue
+                value = (
+                    candidate.skeleton_id
+                    if axis == "skeleton_id"
+                    else candidate.generation_genes[axis]
+                )
+                counts[str(value)] += 1
+                applicable += 1
+            if not applicable:
+                continue
+            blended = {
+                str(value): (
+                    (1.0 - smoothing) * self.cem_probabilities[axis][str(value)]
+                    + smoothing * counts[str(value)] / applicable
+                )
+                for value in values
+            }
+            total = sum(blended.values())
+            remaining = 1.0 - floor * len(values)
+            self.cem_probabilities[axis] = {
+                key: floor + remaining * value / total
+                for key, value in blended.items()
+            }
+        self.cem_update_count += 1
+
+    def _cem_choice(self, axis: str) -> Any:
+        values = self._cem_domains()[axis]
+        weights = [self.cem_probabilities[axis][str(value)] for value in values]
+        return self.rng.choices(values, weights=weights, k=1)[0]
+
+    def _propose_cem_candidate(self) -> CandidateSpec:
+        skeleton_id = str(self._cem_choice("skeleton_id"))
+        skeleton = next(
+            item for item in skeleton_registry() if item.skeleton_id == skeleton_id
+        )
+        roles = field_role_coverage(tuple(self.registry.fields.values()))["roles"]
+        left_field = self.rng.choice(roles[skeleton.field_roles[0]])
+        right_options = roles[skeleton.field_roles[1]]
+        distinct = [field_id for field_id in right_options if field_id != left_field]
+        genes = {
+            "left_field": left_field,
+            "right_field": self.rng.choice(distinct or right_options),
+            "left_window": self._cem_choice("left_window"),
+            "right_window": self._cem_choice("right_window"),
+            "beta": self._cem_choice("beta"),
+            "left_normalizer": self._cem_choice("left_normalizer"),
+            "right_normalizer": self._cem_choice("right_normalizer"),
+            "horizon_hours": self._cem_choice("horizon_hours"),
+        }
+        return candidate_from_genes(
+            self.registry, skeleton=skeleton, genes=genes, roles=roles
+        )
+
+    def _typed_evolution_parent(self) -> CandidateSpec:
+        size = min(int(self.parameters.get("tournament_size", 4)), len(self.rewards))
+        participant_ids = self.rng.sample(sorted(self.rewards), size)
+        parent_id = max(
+            participant_ids,
+            key=lambda candidate_id: (self.rewards[candidate_id], candidate_id),
+        )
+        return self.candidates[parent_id]
 
     def state_hash(self) -> str:
         return _payload_sha(
@@ -578,6 +757,15 @@ class LanePolicy:
                 "step": self.step,
                 "seen": sorted(self.seen),
                 "rewards": sorted(self.rewards.items()),
+                "registry": _contracts_payload(tuple(self.registry.fields.values())),
+                "parameters": dict(self.parameters),
+                "proposal_order": list(self.proposal_order),
+                "skeleton_visits": sorted(self.skeleton_visits.items()),
+                "skeleton_rewards": {
+                    key: list(values) for key, values in sorted(self.skeleton_rewards.items())
+                },
+                "cem_probabilities": self.cem_probabilities,
+                "cem_update_count": self.cem_update_count,
                 "rng": repr(self.rng.getstate()),
             }
         )
@@ -619,12 +807,25 @@ class LanePolicy:
         return selected, parent_id
 
     def propose(self) -> tuple[CandidateSpec, dict[str, Any]]:
+        if self.policy == "evolutionary_typed_v1":
+            return self._propose_typed_evolution()
+        if self.policy == "cem_distribution_v1":
+            self._refresh_cem_distribution()
         before = self.state_hash()
-        skeleton, parent_id = self._choose_skeleton()
+        if self.policy == "cem_distribution_v1":
+            skeleton = None
+            parent_id = None
+        else:
+            skeleton, parent_id = self._choose_skeleton()
         candidate: CandidateSpec | None = None
         duplicate_resamples = 0
-        for duplicate_resamples in range(17):
-            candidate = generate_candidate(self.registry, skeleton=skeleton, rng=self.rng)
+        limit = int(self.parameters.get("duplicate_resample_limit", 16))
+        for duplicate_resamples in range(limit + 1):
+            candidate = (
+                self._propose_cem_candidate()
+                if self.policy == "cem_distribution_v1"
+                else generate_candidate(self.registry, skeleton=skeleton, rng=self.rng)
+            )
             if candidate.candidate_id not in self.seen:
                 break
         assert candidate is not None
@@ -638,6 +839,7 @@ class LanePolicy:
                     changed.append(name)
         self.seen.add(candidate.candidate_id)
         self.candidates[candidate.candidate_id] = candidate
+        self.proposal_order.append(candidate.candidate_id)
         self.skeleton_visits[candidate.skeleton_id] += 1
         metadata = {
             "proposal_step": self.step,
@@ -650,10 +852,85 @@ class LanePolicy:
             }
             if parent_id is not None
             else None,
+            "mutation_receipt_verified": None,
             "duplicate_resamples": duplicate_resamples,
             "first_visit": True,
             "cache_hit": False,
             "cumulative_skeleton_exposure": self.skeleton_visits[candidate.skeleton_id],
+            "policy_diagnostics": {
+                "cem_update_count": self.cem_update_count,
+                "distribution_hash": self.distribution_hash()
+                if self.policy == "cem_distribution_v1"
+                else None,
+                "distribution_entropy": self._distribution_entropy()
+                if self.policy == "cem_distribution_v1"
+                else None,
+            },
+        }
+        self.step += 1
+        return candidate, metadata
+
+    def _propose_typed_evolution(self) -> tuple[CandidateSpec, dict[str, Any]]:
+        before = self.state_hash()
+        warmup = int(self.parameters.get("warmup", 16))
+        exploration_probability = float(
+            self.parameters.get("exploration_probability", 0.25)
+        )
+        explore = (
+            self.step < warmup
+            or not self.rewards
+            or self.rng.random() < exploration_probability
+        )
+        limit = int(self.parameters.get("duplicate_resample_limit", 16))
+        candidate: CandidateSpec | None = None
+        parent_id: str | None = None
+        receipt: dict[str, Any] | None = None
+        verified: bool | None = None
+        duplicate_resamples = 0
+        skeletons = skeleton_registry()
+        for duplicate_resamples in range(limit + 1):
+            if explore:
+                skeleton = skeletons[(self.step + self.seed + duplicate_resamples) % len(skeletons)]
+                candidate = generate_candidate(
+                    self.registry, skeleton=skeleton, rng=self.rng
+                )
+                parent_id = None
+                receipt = None
+                verified = None
+            else:
+                parent = self._typed_evolution_parent()
+                parent_id = parent.candidate_id
+                candidate, receipt = typed_mutate_candidate(
+                    self.registry, parent=parent, rng=self.rng
+                )
+                verified = verify_typed_mutation_receipt(
+                    self.registry, parent, candidate, receipt
+                )
+                if not verified:
+                    raise RuntimeError("typed mutation receipt verification failed")
+            if candidate.candidate_id not in self.seen:
+                break
+        assert candidate is not None
+        if candidate.candidate_id in self.seen:
+            raise RuntimeError("duplicate resample limit exhausted")
+        self.seen.add(candidate.candidate_id)
+        self.candidates[candidate.candidate_id] = candidate
+        self.proposal_order.append(candidate.candidate_id)
+        self.skeleton_visits[candidate.skeleton_id] += 1
+        metadata = {
+            "proposal_step": self.step,
+            "policy_state_hash_before": before,
+            "parent_id": parent_id,
+            "mutation_receipt": receipt,
+            "mutation_receipt_verified": verified,
+            "duplicate_resamples": duplicate_resamples,
+            "first_visit": True,
+            "cache_hit": False,
+            "cumulative_skeleton_exposure": self.skeleton_visits[candidate.skeleton_id],
+            "policy_diagnostics": {
+                "typed_mutation": receipt is not None,
+                "receipt_sha256": receipt.get("receipt_sha256") if receipt else None,
+            },
         }
         self.step += 1
         return candidate, metadata
@@ -698,6 +975,10 @@ def _flat_pair_row(
         "proposal_step": int(metadata["proposal_step"]),
         "parent_id": metadata.get("parent_id"),
         "mutation_receipt_json": json.dumps(metadata.get("mutation_receipt"), sort_keys=True),
+        "mutation_receipt_verified": metadata.get("mutation_receipt_verified"),
+        "policy_diagnostics_json": json.dumps(
+            metadata.get("policy_diagnostics", {}), sort_keys=True
+        ),
         "policy_state_hash_before": metadata["policy_state_hash_before"],
         "first_visit": bool(metadata["first_visit"]),
         "cache_hit": bool(metadata["cache_hit"]),
@@ -736,10 +1017,13 @@ def _run_lane_worker(
     seed: int,
     count: int,
     prior_rows: Sequence[Mapping[str, Any]] | None = None,
+    policy_parameters: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     store = RawPanelStore.open(Path(cache_root))
     registry = TypedExpressionRegistry(_contracts_from_payload(contract_rows))
-    policy = LanePolicy(policy_name, int(seed), registry)
+    policy = LanePolicy(
+        policy_name, int(seed), registry, dict(policy_parameters or {})
+    )
     replay_pass = True
     for prior in prior_rows or ():
         candidate, _ = policy.propose()
@@ -856,6 +1140,8 @@ def _parallel_lanes(
     count_per_lane: int,
     max_workers: int,
     prior: Mapping[tuple[str, int], Sequence[Mapping[str, Any]]] | None = None,
+    policy_parameters: Mapping[str, Mapping[str, Any]] | None = None,
+    policy_order: Sequence[str] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     contract_rows = _contracts_payload(contracts)
     rows: list[dict[str, Any]] = []
@@ -870,6 +1156,7 @@ def _parallel_lanes(
                 seed,
                 count_per_lane,
                 list((prior or {}).get((policy, seed), ())),
+                dict((policy_parameters or {}).get(policy, {})),
             ): (policy, seed)
             for policy, seed in lanes
         }
@@ -890,7 +1177,14 @@ def _parallel_lanes(
                 ),
                 flush=True,
             )
-    rows.sort(key=lambda row: (int(row["seed"]), POLICIES.index(str(row["policy"])), int(row["proposal_step"])))
+    order = tuple(policy_order or POLICIES)
+    rows.sort(
+        key=lambda row: (
+            int(row["seed"]),
+            order.index(str(row["policy"])),
+            int(row["proposal_step"]),
+        )
+    )
     return rows, resources
 
 

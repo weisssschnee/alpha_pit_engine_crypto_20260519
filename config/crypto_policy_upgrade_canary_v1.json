@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "epoch_id": "CRYPTO_CURRENT_FIELD_POLICY_UPGRADE_CANARY_V1",
+  "branch": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
+  "authorization": "BOUNDED_SPENT_DEVELOPMENT_POLICY_ENGINEERING_CANARY",
+  "fresh_policy_state": true,
+  "train_surface_config": "config/crypto_train_surface_18m_v1.json",
+  "cache_root": ".cache/crypto_18m_compositional_broad_search_v1",
+  "cache_reuse": {
+    "mode": "PINNED_EXISTING_RAW_CACHE",
+    "expected_identity_sha256": "CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0",
+    "expected_producer_source_sha": "b251733d51053cbbc99a3b79409debcee24ae760",
+    "directory_bundle": {
+      "file_count": 62,
+      "bytes": 1518625711,
+      "bundle_sha256": "D120C0444B2A5828CBE0C7B538DEF81A1D2E50689C941F4B1A96D2AE60D93FED"
+    }
+  },
+  "parent_evidence": {
+    "manifest_path": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_ARTIFACT_MANIFEST.json",
+    "manifest_sha256": "5366AC5847DC78C6AEDFBC439D88C77DA425351EB66A3BD1E3C5DD009C4A2A69",
+    "bundle_sha256": "13A521BE23B193EA3BFD9B4B319E69280BD9932A1B8A394EB4E3A73AD2D577EB",
+    "producer_source_sha": "2350405595446b1c8615537666857ce5342159e3",
+    "candidate_reuse": false,
+    "policy_state_import": false,
+    "report_only_reuse": false
+  },
+  "field_surface": {
+    "contract": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/resolved_token_contract.json",
+    "contract_file_sha256": "2C6E334DD25BD2745371995B93CC5E0440D943F68A591419F34C48EDB34BA08A",
+    "contract_identity_sha256": "35E54F79576A6D7A1D94AE697E8066CB9FB49CF9A97979259F39490E3281914E",
+    "context_id": "BROAD_PANEL_BASELINE",
+    "expected_fields": 39,
+    "expected_views": {
+      "asset_local": 38,
+      "market_state": 1
+    },
+    "excluded_contexts": [
+      "CORE3_MICROSTRUCTURE_PILOT"
+    ]
+  },
+  "boundaries": {
+    "development_block_role": "SPENT_DEVELOPMENT_ENGINEERING_CANARY",
+    "sealed_reads_allowed": false,
+    "report_only_reads_allowed": false,
+    "formal_performance_search": false,
+    "candidate_promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "challenge_open": false,
+    "forward_open": false,
+    "economic_claim_scope": "POLICY_IMPLEMENTATION_AND_SPENT_DEVELOPMENT_PRODUCTIVITY_ONLY"
+  },
+  "budget": {
+    "mode": "FIXED_SINGLE_STAGE_POLICY_UPGRADE_CANARY",
+    "policies": [
+      "canonical_typed_random",
+      "cem_diversity_v2",
+      "cem_distribution_v1",
+      "evolutionary",
+      "evolutionary_typed_v1"
+    ],
+    "seeds": [
+      20260716,
+      20260717,
+      20260718,
+      20260719
+    ],
+    "pairs_per_lane": 128,
+    "lane_count": 20,
+    "strict_pairs": 2560,
+    "report_only_pairs": 0,
+    "hard_cap_standalone_evaluations": 5120,
+    "hard_cap_incremental_sleeve_evaluations": 2560
+  },
+  "policy_parameters": {
+    "cem_distribution_v1": {
+      "generation_size": 16,
+      "elite_fraction": 0.25,
+      "smoothing": 0.5,
+      "minimum_probability": 0.005,
+      "duplicate_resample_limit": 16
+    },
+    "evolutionary_typed_v1": {
+      "warmup": 16,
+      "exploration_probability": 0.25,
+      "tournament_size": 4,
+      "duplicate_resample_limit": 16
+    }
+  },
+  "compile_replay": {
+    "steps_per_lane": 32,
+    "feedback": "DETERMINISTIC_SYNTHETIC_POLICY_ONLY"
+  },
+  "qualification": {
+    "reference_policy": "canonical_typed_random",
+    "minimum_positive_seed_count": 3,
+    "top_fraction": 0.10,
+    "comparisons": {
+      "cem_distribution_v1": "cem_diversity_v2",
+      "evolutionary_typed_v1": "evolutionary"
+    },
+    "minimum_unique_rate": 0.95,
+    "minimum_skeleton_coverage": 8,
+    "minimum_family_coverage": 3,
+    "minimum_field_coverage": 16,
+    "minimum_cem_updates_per_lane": 7,
+    "minimum_verified_mutations_per_lane": 64
+  },
+  "expected_environment": {
+    "python_version": "3.11.9",
+    "packages": {
+      "numpy": "2.1.3",
+      "pandas": "2.2.3",
+      "pyarrow": "19.0.1",
+      "scipy": "1.17.1",
+      "psutil": "7.0.0"
+    }
+  },
+  "resources": {
+    "execution_host": "COMPANY_PC2",
+    "max_workers": 8,
+    "minimum_free_memory_bytes": 8589934592,
+    "maximum_worker_peak_rss_bytes": 2147483648,
+    "maximum_wall_seconds": 14400,
+    "thread_caps": {
+      "OMP_NUM_THREADS": 1,
+      "MKL_NUM_THREADS": 1,
+      "NUMEXPR_NUM_THREADS": 1
+    }
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_policy_upgrade_canary_v1_20260720",
+    "report": "reports/CRYPTO_POLICY_UPGRADE_CANARY_V1_REPORT.md"
+  }
+}
