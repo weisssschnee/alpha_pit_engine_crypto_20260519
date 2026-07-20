@@ -34,8 +34,19 @@ from alphafactory_crypto.broad_search.runner18m import (
     _directory_bundle,
     _policy_audit,
     _validate_config,
+    _working_set_trim_due,
 )
 from alphafactory_crypto.instrument_capability.mapping import CROSS_SECTIONAL_ZERO_NET
+
+
+def test_working_set_trim_is_thresholded_but_mandatory_at_lane_boundary() -> None:
+    assert not _working_set_trim_due(
+        current_rss=805_306_367, lane_index=3, lane_count=8
+    )
+    assert _working_set_trim_due(
+        current_rss=805_306_368, lane_index=3, lane_count=8
+    )
+    assert _working_set_trim_due(current_rss=1, lane_index=7, lane_count=8)
 
 
 def _role_complete_registry() -> TypedExpressionRegistry:

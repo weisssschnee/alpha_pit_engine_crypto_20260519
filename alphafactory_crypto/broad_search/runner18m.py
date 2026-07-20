@@ -569,6 +569,16 @@ def _trim_working_set() -> None:
             pass
 
 
+WORKING_SET_TRIM_RSS_THRESHOLD_BYTES = 805_306_368
+
+
+def _working_set_trim_due(*, current_rss: int, lane_index: int, lane_count: int) -> bool:
+    return bool(
+        current_rss >= WORKING_SET_TRIM_RSS_THRESHOLD_BYTES
+        or lane_index == lane_count - 1
+    )
+
+
 @dataclass(slots=True)
 class LanePolicy:
     policy: str
@@ -1036,7 +1046,8 @@ def _run_lane_worker(
     peak_rss = process.memory_info().rss
     peak_private = getattr(process.memory_info(), "private", peak_rss)
     started = time.perf_counter()
-    for _ in range(int(count)):
+    lane_count = int(count)
+    for lane_index in range(lane_count):
         candidate, metadata = policy.propose()
         evaluation = None
         error = None
@@ -1071,7 +1082,12 @@ def _run_lane_worker(
             int(row.get("pair_peak_private_bytes") or 0),
         )
         del evaluation
-        _trim_working_set()
+        if _working_set_trim_due(
+            current_rss=process.memory_info().rss,
+            lane_index=lane_index,
+            lane_count=lane_count,
+        ):
+            _trim_working_set()
     return {
         "policy": policy_name,
         "seed": seed,
