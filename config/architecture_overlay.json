@@ -396,71 +396,84 @@
     },
     {
       "id": "real_policy_upgrade_canary",
-      "label": "Real CEM + typed evolutionary policy canary",
+      "label": "Search Engine V1 rolling Arena capability",
       "kind": "development_experiment",
       "lifecycle": "EXPERIMENTAL",
       "paths": [
-        "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
-        "scripts/crypto_policy_upgrade_canary.py",
-        "scripts/crypto_policy_upgrade_qualification_supersession.py",
-        "config/crypto_policy_upgrade_canary_v1.json",
-        "reports/CRYPTO_POLICY_UPGRADE_CANARY_V1_QUALIFICATION_SUPERSESSION.md"
+        "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "alphafactory_crypto/broad_search/runner18m.py",
+        "alphafactory_crypto/broad_search/compositional18m.py",
+        "alphafactory_crypto/broad_search/audit.py",
+        "runtime/crypto_search_engine_v1_20260721/run_manifest.json",
+        "runtime/crypto_search_engine_v1_20260721/final_decision.json",
+        "reports/CRYPTO_SEARCH_ENGINE_V1_20260721.md"
       ],
       "critical": true,
       "semantic_role": "future_new_data_policy_component_qualification",
       "active_authority": false,
       "authority": {
-        "path": "scripts/crypto_policy_upgrade_qualification_supersession.py",
-        "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
-        "verified_sha": "3d9a9ea2951216d66c72a2b70c539d109975375b"
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "repo_ref": "experiment/crypto-search-engine-v1-20260721",
+        "verified_sha": "baab218fdd9441fbf5851ba7ed8c587b0c4cae15",
+        "sha256": "D51301794B3CB5DB874A090F9E085212426F33F9A43F9FEC9E26458E3624EDB1"
       },
       "contracts": [
         {
           "id": "policy_canary_qualification_authority",
           "type": "AUTHORITY",
-          "rule": "The immutable producer manifest plus the narrow supersession checker own the qualified 4/4 CEM and 3/4 typed-evolution decisions; the original fail-closed artifacts remain unchanged",
+          "rule": "The immutable Search Engine V1 frozen contract, ten checkpoint manifests, run manifest, and final decision own the bounded component-qualification claims from the continuous 20,000-candidate Arena",
           "severity": "HARD",
-          "enforced_by": "crypto_policy_upgrade_qualification_supersession.check",
+          "enforced_by": "broad_search.search_engine_v1.check_run",
           "bypass_forbidden": true,
-          "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720_qualification_supersession_v1/manifest.json"
+          "evidence_ref": "runtime/crypto_search_engine_v1_20260721/run_manifest.json"
         },
         {
           "id": "policy_canary_sealed_boundary",
           "type": "BOUNDARY",
-          "rule": "The spent-development canary performs zero sealed, report-only, or forward reads and creates no candidate, cross-sprint memory, OOS, or promotion authority",
+          "rule": "The Arena uses only the current Broad 39 spent-development surface with campaign-local per-run memory; Core3, sealed, report-only, challenge, recent, May-stress, forward, promotion, and cross-sprint adaptive memory remain forbidden",
           "severity": "HARD",
-          "enforced_by": "policy_upgrade_canary.check_canary and crypto_policy_upgrade_qualification_supersession.check",
+          "enforced_by": "broad_search.search_engine_v1.validate_frozen_contract and check_run",
           "bypass_forbidden": true,
-          "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720_qualification_supersession_v1/QUALIFICATION_SUPERSESSION.json"
+          "evidence_ref": "runtime/crypto_search_engine_v1_20260721/frozen_contract.json"
         },
         {
           "id": "policy_canary_claim_scope",
           "type": "EVIDENCE",
-          "rule": "Matched same-seed mean and top-decile margins qualify two policy implementations for a future new-data Arena only; they do not establish positive absolute reward, alpha, or economic increment",
+          "rule": "Matched-count development evidence qualifies canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive for a separately authorized fresh-state new-data Arena only; it does not establish Alpha, economic increment, OOS, or promotion readiness",
           "severity": "HARD",
-          "evidence_ref": "reports/CRYPTO_POLICY_UPGRADE_CANARY_V1_QUALIFICATION_SUPERSESSION.md"
+          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_20260721.md"
+        },
+        {
+          "id": "search_engine_v1_counting_and_restore_gate",
+          "type": "ADMISSION",
+          "rule": "Qualification requires 20,000 compile-valid, exact-unique, matched-control-valid, fully cost-evaluated candidates plus ten atomic checkpoints with verified restoration of RNG, policy, population, archive, identities, receipts, and arm state",
+          "severity": "HARD",
+          "enforced_by": "broad_search.search_engine_v1.check_run",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_search_engine_v1_20260721/checkpoints/checkpoint_009/manifest.json"
         }
       ],
       "validation": {
         "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_policy_upgrade_canary_v1_20260720_qualification_supersession_v1/manifest.json",
-        "evidence_sha256": "4F24E31042FBBEE030CCAC89496043DB7E0391CB9D0225ABB64143F57D5D1EB5",
-        "verified_at_sha": "0d17e5ec2538a9a79b598310a813a1380955e2fe"
+        "evidence_ref": "runtime/crypto_search_engine_v1_20260721/run_manifest.json",
+        "evidence_sha256": "9ABD46C661D50F0F2B8311C390B6FDDD0A08CFF80B74BC0917B5D98CDDFC9FDF",
+        "verified_at_sha": "baab218fdd9441fbf5851ba7ed8c587b0c4cae15"
       },
       "claim_badges": [
-        "RUNTIME ARTIFACTS VERIFIED",
-        "CONTROL DIAGNOSTIC FIXED",
+        "20K RESTORE VERIFIED",
         "DEVELOPMENT ONLY",
-        "POLICY COMPONENTS KEPT",
-        "NO OOS",
-        "NO PROMOTION"
+        "CEM V2 DENSITY YES",
+        "EVOLUTION V2 PARTIAL",
+        "BEHAVIOR ARCHIVE KEPT",
+        "NO OOS OR PROMOTION"
       ],
       "promotion_requirements": [
         "information-adequate new data",
-        "fresh policy state and frozen Arena budget",
-        "matched typed-random and internal baseline controls",
+        "separate new-data Arena authorization",
+        "fresh policy and archive state with frozen Arena budget",
+        "matched canonical typed-random control",
         "formal OOS authorization and evidence",
         "explicit promotion authorization"
       ]

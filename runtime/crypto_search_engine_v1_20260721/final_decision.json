@@ -1,0 +1,44 @@
+{
+  "active_wall_seconds": 59811.4546863,
+  "archive_duplicate_replacements": 1000,
+  "arm_states": {
+    "hierarchical_typed_cem_v2": "ACTIVE",
+    "typed_evolution_v2": "ACTIVE"
+  },
+  "behavior_duplicate_rate": 0.1644,
+  "behavior_family_count": 16712,
+  "cannot_conclude": [
+    "new or fresh economic increment",
+    "Alpha discovery",
+    "OOS validity",
+    "challenge, recent, May-stress, or forward evidence",
+    "promotion readiness",
+    "latent or relational search priority"
+  ],
+  "checkpoint_count": 10,
+  "epoch_id": "CRYPTO_SEARCH_ENGINE_V1_20260721",
+  "future_new_data_arena_qualified_arms": [
+    "canonical_typed_random",
+    "hierarchical_typed_cem_v2",
+    "typed_evolution_v2",
+    "per_run_behavior_archive"
+  ],
+  "generation_attempts": 26072,
+  "latent_status": "LATENT_SEARCH_PRIORITY_MODEL_DEFERRED_TO_V1_1",
+  "next_arena_started": false,
+  "producer_source_sha": "baab218fdd9441fbf5851ba7ed8c587b0c4cae15",
+  "promotion": "FORBIDDEN",
+  "raw_attempt_limit": 100000,
+  "relational_status": "STAGE1_CLOSED",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS",
+  "strict_evaluated_count": 20000,
+  "success_questions": {
+    "behavior_archive_duplicate_reduction": "YES",
+    "cem_v2_compute_density": "YES",
+    "continuous_checkpoint_resume": "YES_EXACT_RESTORE_VERIFIED",
+    "evolution_v2_repair_and_behavior_discovery": "PARTIAL_REPAIRS_VERIFIED_DISCOVERY_INCREMENT_NOT_DEMONSTRATED"
+  },
+  "wall_time_limit_seconds": 64800
+}
