@@ -459,7 +459,7 @@
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_search_engine_v1_20260721/run_manifest.json",
         "evidence_sha256": "9ABD46C661D50F0F2B8311C390B6FDDD0A08CFF80B74BC0917B5D98CDDFC9FDF",
-        "verified_at_sha": "baab218fdd9441fbf5851ba7ed8c587b0c4cae15"
+        "verified_at_sha": "19e4fc5ac931b58b7bfdf27925cd633afe1b90b2"
       },
       "claim_badges": [
         "20K RESTORE VERIFIED",
