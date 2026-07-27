@@ -342,6 +342,64 @@ def _directory_bundle(root: Path) -> dict[str, Any]:
     }
 
 
+def load_search_surface_carrier(
+    repo_root: Path,
+    *,
+    carrier_manifest_path: Path,
+    surface_id: str,
+) -> tuple[RawPanelStore, tuple[FieldContract, ...], dict[str, Any]]:
+    """Load one independently bound search carrier through the normal runner."""
+
+    manifest = _read_json(carrier_manifest_path)
+    if manifest.get("schema_version") != 1:
+        raise ValueError("unsupported search carrier manifest")
+    try:
+        carrier = manifest["carriers"][surface_id]
+    except KeyError as exc:
+        raise KeyError(f"unknown search carrier: {surface_id}") from exc
+    raw_root = Path(str(carrier["cache_root"]))
+    cache_root = raw_root if raw_root.is_absolute() else repo_root / raw_root
+    if not cache_root.is_dir():
+        raise FileNotFoundError(f"search carrier is unavailable: {cache_root}")
+    metadata = _read_json(cache_root / "metadata.json")
+    if metadata.get("identity_sha256") != carrier["cache_identity_sha256"]:
+        raise ValueError("search carrier metadata identity changed")
+    if _directory_bundle(cache_root) != carrier["directory_bundle"]:
+        raise ValueError("search carrier content bundle changed")
+    contract_rows = list(carrier["contracts"])
+    if _payload_sha(contract_rows) != carrier["contracts_sha256"]:
+        raise ValueError("search carrier contract identity changed")
+    contracts = tuple(
+        FieldContract(
+            field_id=str(row["field_id"]),
+            value_type=str(row["value_type"]),
+            unit=str(row["unit"]),
+            observable_lag_hours=int(row["observable_lag_hours"]),
+            pit_authority=str(row["pit_authority"]),
+        )
+        for row in contract_rows
+    )
+    field_ids = [item.field_id for item in contracts]
+    if len(field_ids) != len(set(field_ids)):
+        raise ValueError("search carrier contract fields are not unique")
+    if not set(field_ids).issubset(set(metadata.get("field_ids", []))):
+        raise ValueError("search carrier cache lacks a contracted field")
+    minimum_assets = int(manifest["minimum_assets_per_timestamp"])
+    store = RawPanelStore.open(
+        cache_root,
+        minimum_assets_per_timestamp=minimum_assets,
+    )
+    evidence = {
+        "surface_id": surface_id,
+        "cache_root": str(cache_root),
+        "cache_identity_sha256": metadata["identity_sha256"],
+        "contracts_sha256": carrier["contracts_sha256"],
+        "field_count": len(contracts),
+        "minimum_assets_per_timestamp": minimum_assets,
+    }
+    return store, contracts, evidence
+
+
 def _load_pinned_cache_inputs(
     repo_root: Path,
     *,

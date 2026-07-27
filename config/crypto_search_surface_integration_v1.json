@@ -57,6 +57,21 @@
     "missing_as_zero": false,
     "missing_as_signal": false
   },
+  "carriers": {
+    "minimum_assets_per_timestamp": 3,
+    "BROAD_PANEL_BASELINE": {
+      "cache_root": ".cache/crypto_18m_compositional_broad_search_v1"
+    },
+    "CORE3_MICROSTRUCTURE_PILOT": {
+      "cache_root": ".cache/crypto_search_surface_integration_v1/core3_81"
+    },
+    "AGGTRADES_TOP200_DELIVERED": {
+      "cache_root": ".cache/crypto_aggtrades_system_canary_v1"
+    },
+    "OI_MARK_RANKS51_200_DELIVERED": {
+      "cache_root": ".cache/crypto_search_surface_integration_v1/oi_mark_ranks51_200"
+    }
+  },
   "proof": {
     "one_candidate_per_reachable_field": true,
     "compiler_validation": true,

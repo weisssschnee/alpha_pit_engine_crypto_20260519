@@ -333,11 +333,22 @@ class _Stats:
 class RawPanelStore:
     cache_root: Path
     metadata: Mapping[str, Any]
+    minimum_assets_per_timestamp: int | None = None
 
     @classmethod
-    def open(cls, cache_root: Path) -> "RawPanelStore":
+    def open(
+        cls,
+        cache_root: Path,
+        *,
+        minimum_assets_per_timestamp: int | None = None,
+    ) -> "RawPanelStore":
         metadata = json.loads((cache_root / "metadata.json").read_text(encoding="utf-8"))
-        return cls(cache_root, metadata)
+        if (
+            minimum_assets_per_timestamp is not None
+            and int(minimum_assets_per_timestamp) < 1
+        ):
+            raise ValueError("minimum_assets_per_timestamp must be positive")
+        return cls(cache_root, metadata, minimum_assets_per_timestamp)
 
     @property
     def shape(self) -> tuple[int, int]:
@@ -395,6 +406,14 @@ class RawPanelStore:
             if available.shape != support.shape:
                 raise ValueError("field availability and base eligibility shape mismatch")
             support &= available
+        minimum_assets = (
+            int(self.minimum_assets_per_timestamp)
+            if self.minimum_assets_per_timestamp is not None
+            else int(self.metadata.get("minimum_assets_per_timestamp", 1))
+        )
+        if minimum_assets > 1:
+            supported_timestamps = support.sum(axis=0) >= minimum_assets
+            support &= supported_timestamps[None, :]
         return support
 
     def target_return(self, horizon_hours: int) -> np.ndarray:

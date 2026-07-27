@@ -15,8 +15,10 @@ import io
 import json
 import math
 import os
+import shutil
 import subprocess
 import tarfile
+import tempfile
 import threading
 import time
 import xml.etree.ElementTree as ET
@@ -2381,11 +2383,570 @@ def _inventory_numeric_fields(
     }
 
 
+def _directory_content_identity(
+    root: Path,
+    *,
+    suffixes: tuple[str, ...],
+) -> dict[str, Any]:
+    paths = sorted(
+        path
+        for path in root.rglob("*")
+        if path.is_file() and path.suffix.lower() in suffixes
+    )
+    if not paths:
+        raise FileNotFoundError(f"identity root contains no matching files: {root}")
+    rows = [
+        {
+            "path": path.relative_to(root).as_posix(),
+            "bytes": path.stat().st_size,
+            "sha256": _sha256_file(path),
+        }
+        for path in paths
+    ]
+    return {
+        "root": str(root),
+        "file_count": len(rows),
+        "bytes": sum(int(row["bytes"]) for row in rows),
+        "bundle_sha256": _payload_sha(rows),
+    }
+
+
+def _write_raw_panel_store(
+    *,
+    output_root: Path,
+    metadata: dict[str, Any],
+    timestamp_ns: np.ndarray,
+    observed: np.ndarray,
+    base_eligible: np.ndarray,
+    source_segment: np.ndarray,
+    fields: Mapping[str, np.ndarray],
+    targets: Mapping[int, np.ndarray],
+    source_manifest: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Write one normal RawPanelStore atomically without introducing a new API."""
+
+    if output_root.exists():
+        existing = json.loads(
+            (output_root / "metadata.json").read_text(encoding="utf-8")
+        )
+        if existing.get("identity_sha256") != metadata["identity_sha256"]:
+            raise ValueError(f"existing search carrier identity changed: {output_root}")
+        return existing
+    output_root.parent.mkdir(parents=True, exist_ok=True)
+    temporary = Path(
+        tempfile.mkdtemp(
+            prefix=f".{output_root.name}.tmp-",
+            dir=str(output_root.parent),
+        )
+    )
+    try:
+        (temporary / "fields").mkdir()
+        np.save(temporary / "timestamp_ns.npy", np.asarray(timestamp_ns, dtype=np.int64))
+        np.save(temporary / "observed.npy", np.asarray(observed, dtype=bool))
+        np.save(
+            temporary / "base_eligible.npy",
+            np.asarray(base_eligible, dtype=bool),
+        )
+        np.save(
+            temporary / "source_segment.npy",
+            np.asarray(source_segment, dtype=np.int8),
+        )
+        for field_id, values in sorted(fields.items()):
+            np.save(
+                temporary / "fields" / f"{field_id}.npy",
+                np.asarray(values, dtype=np.float32),
+            )
+        for horizon, values in sorted(targets.items()):
+            np.save(
+                temporary / f"target_return_{int(horizon)}h.npy",
+                np.asarray(values, dtype=np.float32),
+            )
+        _write_json(temporary / "source_file_manifest.json", source_manifest)
+        _write_json(temporary / "metadata.json", metadata)
+        os.replace(temporary, output_root)
+    except BaseException:
+        if temporary.exists():
+            shutil.rmtree(temporary)
+        raise
+    return metadata
+
+
+def build_core3_search_carrier(
+    *,
+    panel_path: Path,
+    token_contract_path: Path,
+    consumption_manifest_path: Path,
+    output_root: Path,
+    source_binding_sha256: str,
+) -> tuple[dict[str, Any], dict[str, float]]:
+    """Expose the frozen independent Core3 81-token context as RawPanelStore."""
+
+    from alphafactory_crypto.core_pack_consumption import (
+        ResolvedToken,
+        materialize_core3_context,
+    )
+
+    contract_payload = json.loads(token_contract_path.read_text(encoding="utf-8"))
+    selected = [
+        ResolvedToken(
+            ordinal=int(row["ordinal"]),
+            token_id=str(row["token_id"]),
+            field_id=str(row["field_id"]),
+            token_kind=str(row["token_kind"]),
+            context_id=str(row["context_id"]),
+            family=str(row["family"]),
+            expression=str(row["expression"]),
+            base_dependencies=tuple(str(value) for value in row["base_dependencies"]),
+            feature_available_lag_bars=int(row["feature_available_lag_bars"]),
+            alignment_shift_bars=int(row["alignment_shift_bars"]),
+            execution_semantics=str(row["execution_semantics"]),
+            authority_ref=str(row["authority_ref"]),
+        )
+        for row in contract_payload["tokens"]
+        if row["context_id"] == "CORE3_MICROSTRUCTURE_PILOT"
+    ]
+    if len(selected) != 81:
+        raise ValueError("Core3 search carrier requires exactly 81 tokens")
+    consumption_manifest = json.loads(
+        consumption_manifest_path.read_text(encoding="utf-8")
+    )
+    context = consumption_manifest["parameters"]["contexts"][
+        "CORE3_MICROSTRUCTURE_PILOT"
+    ]
+    values, target4_flat, stats, summary = materialize_core3_context(
+        panel_path,
+        selected,
+        context,
+    )
+    symbols = tuple(str(value) for value in context["symbols"])
+    timestamps_per_symbol = int(summary["timestamps"])
+    shaped = values.reshape(len(symbols), timestamps_per_symbol, len(selected))
+    frame = pd.read_parquet(
+        panel_path,
+        columns=["symbol", "timestamp", "close", "agg_features_available"],
+    )
+    frame["timestamp"] = pd.to_datetime(frame["timestamp"], utc=True)
+    frame = frame.loc[
+        frame["symbol"].isin(symbols)
+        & frame["timestamp"].ge(pd.Timestamp(context["start"]))
+        & frame["timestamp"].lt(pd.Timestamp(context["end_exclusive"]))
+    ].sort_values(["symbol", "timestamp"], kind="stable")
+    close = pd.to_numeric(frame["close"], errors="coerce")
+    groups = close.groupby(frame["symbol"], sort=False)
+    target1_flat = np.log(groups.shift(-3) / groups.shift(-2)).to_numpy(
+        dtype=np.float32
+    )
+    timestamp_ns = (
+        frame.loc[frame["symbol"].eq(symbols[0]), "timestamp"]
+        .astype("int64")
+        .to_numpy(dtype=np.int64)
+    )
+    observed = (
+        frame["agg_features_available"].astype(bool)
+        & np.isfinite(close.to_numpy(dtype=float))
+    ).to_numpy().reshape(len(symbols), timestamps_per_symbol)
+    fields = {
+        token.field_id: shaped[:, :, index]
+        for index, token in enumerate(selected)
+    }
+    finite_ratios = {
+        str(row["field_id"]): float(row["finite_ratio"]) for row in stats
+    }
+    input_identity = {
+        "panel_path": str(panel_path),
+        "panel_bytes": panel_path.stat().st_size,
+        "panel_sha256": _sha256_file(panel_path),
+        "token_contract_sha256": _sha256_file(token_contract_path),
+        "consumption_manifest_sha256": _sha256_file(
+            consumption_manifest_path
+        ),
+        "source_binding_sha256": source_binding_sha256,
+    }
+    identity_payload = {
+        "schema_version": 1,
+        "surface_id": "CORE3_MICROSTRUCTURE_PILOT",
+        "inputs": input_identity,
+        "symbols": list(symbols),
+        "timestamp_count": len(timestamp_ns),
+        "field_ids": [token.field_id for token in selected],
+        "minimum_assets_per_timestamp": 3,
+    }
+    metadata = {
+        "schema_version": 2,
+        "surface_id": "CORE3_MICROSTRUCTURE_PILOT",
+        "cache_role": "SEARCH_SURFACE_INTEGRATION_V1_RAW_PANEL_STORE",
+        "identity_sha256": _payload_sha(identity_payload),
+        "producer_binding_sha256": source_binding_sha256,
+        "assets": len(symbols),
+        "timestamps": len(timestamp_ns),
+        "symbol_ids": list(symbols),
+        "field_ids": [token.field_id for token in selected],
+        "target_horizons_hours": [1, 4],
+        "target_formula": "log(close[t+2+h] / close[t+2])",
+        "start_utc": pd.Timestamp(context["start"]).isoformat(),
+        "end_exclusive_utc": pd.Timestamp(context["end_exclusive"]).isoformat(),
+        "observed_coordinates": int(observed.sum()),
+        "eligible_coordinates": int(observed.sum()),
+        "minimum_assets_per_timestamp": 3,
+        "contexts_merged": False,
+        "research_admission": "ENGINEERING_ONLY",
+        "sealed_rows": 0,
+    }
+    _write_raw_panel_store(
+        output_root=output_root,
+        metadata=metadata,
+        timestamp_ns=timestamp_ns,
+        observed=observed,
+        base_eligible=observed,
+        source_segment=np.where(observed, 1, 0),
+        fields=fields,
+        targets={
+            1: target1_flat.reshape(len(symbols), timestamps_per_symbol),
+            4: np.asarray(target4_flat).reshape(
+                len(symbols), timestamps_per_symbol
+            ),
+        },
+        source_manifest=input_identity,
+    )
+    return metadata, finite_ratios
+
+
+def _oi_declared_contracts(root: Path) -> tuple[Any, ...]:
+    contracts: list[Any] = []
+    excluded = {"liquidity_rank", "next_funding_time_last"}
+    for venue_root in sorted((root / "compact_1h").iterdir()):
+        if not venue_root.is_dir():
+            continue
+        sample = next(
+            (
+                path
+                for path in sorted(venue_root.rglob("part.parquet"))
+                if pq.ParquetFile(path).metadata.num_rows > 0
+            ),
+            None,
+        )
+        if sample is None:
+            continue
+        contracts.extend(
+            contract
+            for contract in contracts_from_oi_mark_schema(
+                venue_root.name,
+                pq.ParquetFile(sample).schema_arrow,
+            )
+            if contract.field_id.split("__", 1)[1] not in excluded
+        )
+    if not contracts:
+        raise ValueError("OI/mark surface contains no declared contracts")
+    return tuple(contracts)
+
+
+def build_oi_mark_search_carrier(
+    *,
+    source_root: Path,
+    output_root: Path,
+    source_binding_sha256: str,
+) -> tuple[dict[str, Any], tuple[Any, ...], dict[str, float], dict[str, Any]]:
+    """Build an engineering-only OI/mark carrier from full delivered support."""
+
+    declared = _oi_declared_contracts(source_root)
+    by_venue: dict[str, tuple[Any, ...]] = defaultdict(tuple)
+    for contract in declared:
+        venue = contract.field_id.split("__", 1)[0]
+        by_venue[venue] = (*by_venue[venue], contract)
+    finite_counts = {contract.field_id: 0 for contract in declared}
+    symbols: set[str] = set()
+    timestamp_min: pd.Timestamp | None = None
+    timestamp_max: pd.Timestamp | None = None
+    compact_root = source_root / "compact_1h"
+    for venue, contracts in sorted(by_venue.items()):
+        columns = [
+            "base_asset",
+            "timestamp",
+            "feature_available_time",
+            "execution_time_min",
+            *[
+                contract.field_id.split("__", 1)[1]
+                for contract in contracts
+            ],
+        ]
+        for path in sorted((compact_root / venue).rglob("part.parquet")):
+            if pq.ParquetFile(path).metadata.num_rows == 0:
+                continue
+            frame = pq.read_table(path, columns=columns).to_pandas()
+            available = pd.to_datetime(frame["feature_available_time"], utc=True)
+            executable = pd.to_datetime(frame["execution_time_min"], utc=True)
+            if not bool(available.le(executable).all()):
+                raise ValueError(f"OI/mark PIT timing order failed: {path}")
+            timestamps = pd.to_datetime(frame["timestamp"], utc=True)
+            if frame.duplicated(["base_asset", "timestamp"]).any():
+                raise ValueError(f"duplicate OI/mark coordinates: {path}")
+            symbols.update(f"{value}USDT" for value in frame["base_asset"].astype(str))
+            local_min = timestamps.min()
+            local_max = timestamps.max()
+            timestamp_min = local_min if timestamp_min is None else min(
+                timestamp_min, local_min
+            )
+            timestamp_max = local_max if timestamp_max is None else max(
+                timestamp_max, local_max
+            )
+            for contract in contracts:
+                field = contract.field_id.split("__", 1)[1]
+                finite_counts[contract.field_id] += int(
+                    np.isfinite(
+                        pd.to_numeric(frame[field], errors="coerce").to_numpy(
+                            dtype=float
+                        )
+                    ).sum()
+                )
+    active_contracts = tuple(
+        contract for contract in declared if finite_counts[contract.field_id] > 0
+    )
+    if timestamp_min is None or timestamp_max is None or not active_contracts:
+        raise ValueError("OI/mark surface has no finite searchable support")
+    symbol_ids = tuple(sorted(symbols))
+    timestamps = pd.date_range(
+        timestamp_min.floor("h"),
+        timestamp_max.floor("h"),
+        freq="h",
+    )
+    shape = (len(symbol_ids), len(timestamps))
+    symbol_index = {value: index for index, value in enumerate(symbol_ids)}
+    time_index = pd.Index(timestamps)
+    matrices = {
+        contract.field_id: np.full(shape, np.nan, dtype=np.float32)
+        for contract in active_contracts
+    }
+    coordinate_seen = np.zeros(shape, dtype=bool)
+    reference_price = np.full(shape, np.nan, dtype=np.float32)
+    active_by_venue: dict[str, list[Any]] = defaultdict(list)
+    for contract in active_contracts:
+        active_by_venue[contract.field_id.split("__", 1)[0]].append(contract)
+    for venue in sorted(active_by_venue):
+        contracts = active_by_venue[venue]
+        columns = [
+            "base_asset",
+            "timestamp",
+            *[
+                contract.field_id.split("__", 1)[1]
+                for contract in contracts
+            ],
+        ]
+        for path in sorted((compact_root / venue).rglob("part.parquet")):
+            if pq.ParquetFile(path).metadata.num_rows == 0:
+                continue
+            frame = pq.read_table(path, columns=columns).to_pandas()
+            row_indices = np.fromiter(
+                (
+                    symbol_index[f"{value}USDT"]
+                    for value in frame["base_asset"].astype(str)
+                ),
+                dtype=int,
+                count=len(frame),
+            )
+            column_indices = time_index.get_indexer(
+                pd.to_datetime(frame["timestamp"], utc=True)
+            )
+            if (column_indices < 0).any():
+                raise ValueError("OI/mark timestamp escaped frozen carrier")
+            coordinate_seen[row_indices, column_indices] = True
+            for contract in contracts:
+                field = contract.field_id.split("__", 1)[1]
+                values = pd.to_numeric(frame[field], errors="coerce").to_numpy(
+                    dtype=np.float32
+                )
+                matrices[contract.field_id][row_indices, column_indices] = values
+                if field == "mark_price_last":
+                    empty = ~np.isfinite(reference_price[row_indices, column_indices])
+                    reference_price[
+                        row_indices[empty], column_indices[empty]
+                    ] = values[empty]
+    base_eligible = coordinate_seen & np.isfinite(reference_price)
+    targets: dict[int, np.ndarray] = {}
+    for horizon in (1, 4):
+        target = np.full(shape, np.nan, dtype=np.float32)
+        offset = 2 + horizon
+        with np.errstate(divide="ignore", invalid="ignore"):
+            target[:, : shape[1] - offset] = np.log(
+                reference_price[:, offset:]
+                / reference_price[:, 2 : shape[1] - horizon]
+            )
+        targets[horizon] = target
+    source_identity = _directory_content_identity(
+        source_root,
+        suffixes=(".parquet", ".json"),
+    )
+    identity_payload = {
+        "schema_version": 1,
+        "surface_id": "OI_MARK_RANKS51_200_DELIVERED",
+        "source": source_identity,
+        "source_binding_sha256": source_binding_sha256,
+        "symbol_ids": list(symbol_ids),
+        "start_utc": timestamps[0].isoformat(),
+        "end_exclusive_utc": (timestamps[-1] + pd.Timedelta(hours=1)).isoformat(),
+        "field_ids": [contract.field_id for contract in active_contracts],
+        "minimum_assets_per_timestamp": 3,
+    }
+    metadata = {
+        "schema_version": 2,
+        "surface_id": "OI_MARK_RANKS51_200_DELIVERED",
+        "cache_role": "SEARCH_SURFACE_INTEGRATION_V1_RAW_PANEL_STORE",
+        "identity_sha256": _payload_sha(identity_payload),
+        "producer_binding_sha256": source_binding_sha256,
+        "assets": shape[0],
+        "timestamps": shape[1],
+        "symbol_ids": list(symbol_ids),
+        "field_ids": [contract.field_id for contract in active_contracts],
+        "target_horizons_hours": [1, 4],
+        "target_formula": (
+            "engineering-only log(priority_venue_mark[t+2+h] / "
+            "priority_venue_mark[t+2])"
+        ),
+        "start_utc": timestamps[0].isoformat(),
+        "end_exclusive_utc": (timestamps[-1] + pd.Timedelta(hours=1)).isoformat(),
+        "observed_coordinates": int(coordinate_seen.sum()),
+        "eligible_coordinates": int(base_eligible.sum()),
+        "minimum_assets_per_timestamp": 3,
+        "contexts_merged": False,
+        "research_admission": "HOLD_FIXED_COHORT_AND_PIT_UNIVERSE",
+        "sealed_rows": 0,
+    }
+    _write_raw_panel_store(
+        output_root=output_root,
+        metadata=metadata,
+        timestamp_ns=timestamps.asi8,
+        observed=coordinate_seen,
+        base_eligible=base_eligible,
+        source_segment=np.where(coordinate_seen, 2, 0),
+        fields=matrices,
+        targets=targets,
+        source_manifest=source_identity,
+    )
+    denominators = max(1, int(coordinate_seen.sum()))
+    ratios = {
+        contract.field_id: finite_counts[contract.field_id] / denominators
+        for contract in declared
+    }
+    evidence = {
+        **source_identity,
+        "declared_fields": len(declared),
+        "active_fields": len(active_contracts),
+        "zero_support_fields": sorted(
+            field_id for field_id, count in finite_counts.items() if count == 0
+        ),
+    }
+    return metadata, active_contracts, ratios, evidence
+
+
+def _runtime_candidate_validator(store: Any, registry: Any) -> Any:
+    from alphafactory_crypto.broad_search.expression import materialize_expression
+
+    def array_sha(values: np.ndarray) -> str:
+        array = np.asarray(values, dtype=np.float64)
+        canonical = np.nan_to_num(
+            array,
+            nan=9.87654321e307,
+            posinf=8.76543210e307,
+            neginf=-8.76543210e307,
+        )
+        digest = hashlib.sha256()
+        digest.update(str(canonical.shape).encode("ascii"))
+        digest.update(canonical.tobytes(order="C"))
+        return digest.hexdigest().upper()
+
+    def validate(candidate: Any) -> dict[str, Any] | None:
+        support = store.candidate_support(candidate.raw_fields)
+        columns = np.flatnonzero(support.any(axis=0))
+        if len(columns) == 0:
+            return None
+        probes = np.unique(
+            columns[
+                np.linspace(
+                    0,
+                    len(columns) - 1,
+                    min(8, len(columns)),
+                    dtype=int,
+                )
+            ]
+        )
+        for pivot in probes[::-1]:
+            stop = min(store.shape[1], int(pivot) + 1)
+            start = max(0, stop - 768)
+            block = slice(start, stop)
+            local_support = support[:, block]
+            reader = lambda field_id: np.asarray(  # noqa: E731
+                store.field(field_id)[:, block],
+                dtype=float,
+            )
+            primary = materialize_expression(
+                candidate.expression,
+                registry=registry,
+                field_reader=reader,
+                eligible_mask=local_support,
+            )
+            control = materialize_expression(
+                candidate.control,
+                registry=registry,
+                field_reader=reader,
+                eligible_mask=local_support,
+            )
+            primary_finite = int(np.isfinite(primary).sum())
+            control_finite = int(np.isfinite(control).sum())
+            if primary_finite == 0 or control_finite == 0:
+                continue
+            replay = materialize_expression(
+                candidate.expression,
+                registry=registry,
+                field_reader=reader,
+                eligible_mask=local_support,
+            )
+            primary_sha = array_sha(primary)
+            replay_sha = array_sha(replay)
+            return {
+                "runtime_materialized": True,
+                "runtime_window_start": int(start),
+                "runtime_window_stop": int(stop),
+                "candidate_support_coordinates": int(local_support.sum()),
+                "candidate_support_timestamps": int(
+                    local_support.any(axis=0).sum()
+                ),
+                "primary_finite_values": primary_finite,
+                "control_finite_values": control_finite,
+                "runtime_primary_sha256": primary_sha,
+                "runtime_control_sha256": array_sha(control),
+                "runtime_replay_sha256": replay_sha,
+                "runtime_replay_verified": primary_sha == replay_sha,
+            }
+        return None
+
+    return validate
+
+
+def _store_finite_ratios(
+    store: Any,
+    contracts: Sequence[Any],
+) -> dict[str, float]:
+    observed = np.asarray(store.observed(), dtype=bool)
+    denominator = max(1, int(observed.sum()))
+    return {
+        contract.field_id: float(
+            (
+                np.isfinite(
+                    np.asarray(store.field(contract.field_id), dtype=float)
+                )
+                & observed
+            ).sum()
+            / denominator
+        )
+        for contract in contracts
+    }
+
+
 def _active_surface_rows(
     *,
     surface_id: str,
     contracts: Sequence[Any],
     finite_ratios: Mapping[str, float],
+    store: Any | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
     from alphafactory_crypto.broad_search.compositional18m import (
         compiler_reachability_proofs,
@@ -2395,7 +2956,16 @@ def _active_surface_rows(
 
     registry = TypedExpressionRegistry(tuple(contracts))
     surface = field_role_surface(tuple(contracts))
-    proofs = compiler_reachability_proofs(registry, surface_id=surface_id)
+    runtime_validator = None
+    if store is not None:
+        runtime_validator = _runtime_candidate_validator(store, registry)
+
+    proofs = compiler_reachability_proofs(
+        registry,
+        surface_id=surface_id,
+        runtime_validator=runtime_validator,
+        require_all=store is None,
+    )
     proof_by_field = {str(row["field_id"]): row for row in proofs}
     roles_by_field: dict[str, list[str]] = defaultdict(list)
     for role, fields in surface["roles"].items():
@@ -2404,6 +2974,16 @@ def _active_surface_rows(
     rows = []
     for contract in contracts:
         proof = proof_by_field.get(contract.field_id)
+        finite_ratio = finite_ratios.get(contract.field_id)
+        runtime_materialized = bool(
+            proof
+            and (
+                store is None
+                or proof.get("runtime_materialized")
+            )
+            and finite_ratio is not None
+            and float(finite_ratio) > 0.0
+        )
         rows.append(
             {
                 "surface_id": surface_id,
@@ -2413,9 +2993,9 @@ def _active_surface_rows(
                 "unit": contract.unit,
                 "observable_lag_hours": int(contract.observable_lag_hours),
                 "pit_authority": contract.pit_authority,
-                "materialized": contract.field_id in finite_ratios,
-                "sample_finite_ratio": finite_ratios.get(contract.field_id),
-                "field_contract_registered": True,
+                "materialized": runtime_materialized,
+                "sample_finite_ratio": finite_ratio,
+                "field_contract_registered": proof is not None,
                 "typed_role_reachable": proof is not None,
                 "typed_roles_json": json.dumps(
                     sorted(roles_by_field.get(contract.field_id, [])),
@@ -2429,11 +3009,29 @@ def _active_surface_rows(
                     proof and proof["matched_control_constructible"]
                 ),
                 "deterministic_replay": bool(
-                    proof and proof["deterministic_replay"]
+                    proof
+                    and proof["deterministic_replay"]
+                    and (
+                        store is None
+                        or proof.get("runtime_replay_verified")
+                    )
+                ),
+                "runtime_materialized": bool(
+                    proof and proof.get("runtime_materialized")
+                ),
+                "candidate_support_coordinates": (
+                    int(proof["candidate_support_coordinates"])
+                    if proof
+                    and proof.get("candidate_support_coordinates") is not None
+                    else 0
                 ),
                 "candidate_id": proof["candidate_id"] if proof else None,
                 "research_admitted": False,
-                "block_reason": None,
+                "block_reason": (
+                    None
+                    if runtime_materialized
+                    else "NO_RUNTIME_MATERIALIZATION_OR_MATCHED_SUPPORT"
+                ),
             }
         )
     return rows, proofs, surface
@@ -2537,6 +3135,24 @@ def build_search_surface_integration(
         key: _resolve_repo_path(repo_root, value)
         for key, value in config["inputs"].items()
     }
+    binding_paths = (
+        "alphafactory_crypto/broad_search/compositional18m.py",
+        "alphafactory_crypto/broad_search/expression.py",
+        "alphafactory_crypto/broad_search/pair18m.py",
+        "alphafactory_crypto/broad_search/panel18m.py",
+        "alphafactory_crypto/broad_search/runner18m.py",
+        "alphafactory_crypto/data_admission_v1.py",
+        config_path.relative_to(repo_root).as_posix(),
+    )
+    source_binding = [
+        {
+            "path": path,
+            "sha256": _sha256_file(repo_root / path),
+        }
+        for path in binding_paths
+    ]
+    source_binding_sha256 = _payload_sha(source_binding)
+
     broad_payload = json.loads(inputs["broad_registry"].read_text(encoding="utf-8"))
     broad_contracts = tuple(
         FieldContract(
@@ -2556,64 +3172,237 @@ def build_search_surface_integration(
     core_contracts = contracts_from_core3_tokens(core_payload)
     if len(core_contracts) != 81:
         raise ValueError("Core3 integration surface is not 81 fields")
-    consumption_path = (
-        inputs["core3_token_contract"].parent / "token_consumption_evidence.csv"
+    consumption_manifest_path = (
+        inputs["core3_token_contract"].parent / "run_manifest.json"
     )
-    consumption = pd.read_csv(consumption_path)
-    broad_stats = {
-        str(row.field_id): float(row.finite_ratio)
-        for row in consumption.loc[
-            consumption["context_id"].eq("BROAD_PANEL_BASELINE")
-        ].itertuples()
-        if bool(row.check_materialized)
-    }
-    core_stats = {
-        str(row.field_id): float(row.finite_ratio)
-        for row in consumption.loc[
-            consumption["context_id"].eq("CORE3_MICROSTRUCTURE_PILOT")
-        ].itertuples()
-        if bool(row.check_materialized)
-    }
-
-    agg_contracts = contracts_from_aggtrades_search_fields()
-    top100_stats, top100_evidence = _aggtrades_sample_statistics(
-        inputs["aggtrades_top100_tar"]
+    carrier_config = config["carriers"]
+    minimum_assets = int(carrier_config["minimum_assets_per_timestamp"])
+    if minimum_assets != int(
+        config["candidate_support"]["minimum_assets_per_timestamp"]
+    ):
+        raise ValueError("candidate-support minimum assets changed across contracts")
+    broad_cache_root = _resolve_repo_path(
+        repo_root,
+        carrier_config["BROAD_PANEL_BASELINE"]["cache_root"],
     )
-    rank_stats, rank_evidence = _aggtrades_sample_statistics(
-        inputs["aggtrades_ranks101_200_tar"]
+    core_cache_root = _resolve_repo_path(
+        repo_root,
+        carrier_config["CORE3_MICROSTRUCTURE_PILOT"]["cache_root"],
     )
-    agg_stats = {
-        field_id: max(top100_stats[field_id], rank_stats[field_id])
-        for field_id in AGGTRADES_SEARCH_FIELDS
-    }
-    oi_contracts, oi_stats, oi_evidence = _oi_mark_surface(
+    agg_cache_root = _resolve_repo_path(
+        repo_root,
+        carrier_config["AGGTRADES_TOP200_DELIVERED"]["cache_root"],
+    )
+    oi_cache_root = _resolve_repo_path(
+        repo_root,
+        carrier_config["OI_MARK_RANKS51_200_DELIVERED"]["cache_root"],
+    )
+    core_metadata, _ = build_core3_search_carrier(
+        panel_path=inputs["core3_panel"],
+        token_contract_path=inputs["core3_token_contract"],
+        consumption_manifest_path=consumption_manifest_path,
+        output_root=core_cache_root,
+        source_binding_sha256=source_binding_sha256,
+    )
+    (
+        oi_metadata,
+        oi_active_contracts,
+        oi_all_ratios,
+        oi_evidence,
+    ) = build_oi_mark_search_carrier(
+        source_root=inputs["oi_mark_ranks51_200_root"],
+        output_root=oi_cache_root,
+        source_binding_sha256=source_binding_sha256,
+    )
+    oi_declared_contracts = _oi_declared_contracts(
         inputs["oi_mark_ranks51_200_root"]
+    )
+    all_agg_contracts = contracts_from_aggtrades_search_fields()
+    agg_contracts = tuple(
+        contract
+        for contract in all_agg_contracts
+        if contract.field_id in set(AGGTRADES_SYSTEM_CANARY_FIELDS)
+    )
+    if len(agg_contracts) != len(AGGTRADES_SYSTEM_CANARY_FIELDS):
+        raise ValueError("aggTrades runtime carrier contract changed")
+
+    from alphafactory_crypto.broad_search.runner18m import (
+        _directory_bundle,
+        load_search_surface_carrier,
+    )
+    from alphafactory_crypto.broad_search.panel18m import RawPanelStore
+
+    carrier_specs = {
+        "BROAD_PANEL_BASELINE": (broad_cache_root, broad_contracts),
+        "CORE3_MICROSTRUCTURE_PILOT": (core_cache_root, core_contracts),
+        "AGGTRADES_TOP200_DELIVERED": (agg_cache_root, agg_contracts),
+        "OI_MARK_RANKS51_200_DELIVERED": (
+            oi_cache_root,
+            oi_active_contracts,
+        ),
+    }
+    carrier_manifest = {
+        "schema_version": 1,
+        "minimum_assets_per_timestamp": minimum_assets,
+        "contexts_merged": False,
+        "source_binding_sha256": source_binding_sha256,
+        "carriers": {},
+    }
+    for surface_id, (cache_root, contracts) in carrier_specs.items():
+        metadata = json.loads(
+            (cache_root / "metadata.json").read_text(encoding="utf-8")
+        )
+        contract_rows = [
+            _field_contract_payload(contract) for contract in contracts
+        ]
+        try:
+            cache_value = cache_root.relative_to(repo_root).as_posix()
+        except ValueError:
+            cache_value = str(cache_root)
+        carrier_manifest["carriers"][surface_id] = {
+            "cache_root": cache_value,
+            "cache_identity_sha256": metadata["identity_sha256"],
+            "directory_bundle": _directory_bundle(cache_root),
+            "contracts": contract_rows,
+            "contracts_sha256": _payload_sha(contract_rows),
+        }
+    carrier_manifest_path = runtime_root / "search_carriers.json"
+    _write_json(carrier_manifest_path, carrier_manifest)
+    stores: dict[str, Any] = {}
+    loader_evidence: dict[str, Any] = {}
+    for surface_id in sorted(carrier_specs):
+        store, loaded_contracts, evidence = load_search_surface_carrier(
+            repo_root,
+            carrier_manifest_path=carrier_manifest_path,
+            surface_id=surface_id,
+        )
+        if tuple(item.field_id for item in loaded_contracts) != tuple(
+            item.field_id for item in carrier_specs[surface_id][1]
+        ):
+            raise ValueError("runner search-carrier contract order changed")
+        stores[surface_id] = store
+        loader_evidence[surface_id] = evidence
+    broad_stats = _store_finite_ratios(
+        stores["BROAD_PANEL_BASELINE"],
+        broad_contracts,
+    )
+    core_stats = _store_finite_ratios(
+        stores["CORE3_MICROSTRUCTURE_PILOT"],
+        core_contracts,
+    )
+    agg_stats = _store_finite_ratios(
+        stores["AGGTRADES_TOP200_DELIVERED"],
+        agg_contracts,
+    )
+    oi_active_stats = _store_finite_ratios(
+        stores["OI_MARK_RANKS51_200_DELIVERED"],
+        oi_active_contracts,
     )
 
     rows: list[dict[str, Any]] = []
     proofs: list[dict[str, Any]] = []
     surfaces: dict[str, Any] = {}
-    for surface_id, contracts, stats in (
-        ("BROAD_PANEL_BASELINE", broad_contracts, broad_stats),
-        ("CORE3_MICROSTRUCTURE_PILOT", core_contracts, core_stats),
-        ("AGGTRADES_TOP200_DELIVERED", agg_contracts, agg_stats),
-        ("OI_MARK_RANKS51_200_DELIVERED", oi_contracts, oi_stats),
+    for surface_id, contracts, stats, store in (
+        (
+            "BROAD_PANEL_BASELINE",
+            broad_contracts,
+            broad_stats,
+            stores["BROAD_PANEL_BASELINE"],
+        ),
+        (
+            "CORE3_MICROSTRUCTURE_PILOT",
+            core_contracts,
+            core_stats,
+            stores["CORE3_MICROSTRUCTURE_PILOT"],
+        ),
+        (
+            "AGGTRADES_TOP200_DELIVERED",
+            agg_contracts,
+            agg_stats,
+            stores["AGGTRADES_TOP200_DELIVERED"],
+        ),
+        (
+            "OI_MARK_RANKS51_200_DELIVERED",
+            oi_active_contracts,
+            oi_active_stats,
+            stores["OI_MARK_RANKS51_200_DELIVERED"],
+        ),
     ):
         local_rows, local_proofs, local_surface = _active_surface_rows(
             surface_id=surface_id,
             contracts=contracts,
             finite_ratios=stats,
+            store=store,
         )
         rows.extend(local_rows)
         proofs.extend(local_proofs)
         surfaces[surface_id] = local_surface
+
+    active_agg_ids = {contract.field_id for contract in agg_contracts}
+    for contract in all_agg_contracts:
+        if contract.field_id in active_agg_ids:
+            continue
+        rows.append(
+            {
+                "surface_id": "AGGTRADES_TOP200_DELIVERED",
+                "field_id": contract.field_id,
+                "source_field_id": contract.field_id,
+                "value_type": contract.value_type,
+                "unit": contract.unit,
+                "observable_lag_hours": int(contract.observable_lag_hours),
+                "pit_authority": contract.pit_authority,
+                "materialized": False,
+                "sample_finite_ratio": None,
+                "field_contract_registered": False,
+                "typed_role_reachable": False,
+                "typed_roles_json": "[]",
+                "compatible_skeleton_count": 0,
+                "compiler_valid": False,
+                "matched_control_constructible": False,
+                "deterministic_replay": False,
+                "runtime_materialized": False,
+                "candidate_support_coordinates": 0,
+                "candidate_id": None,
+                "research_admitted": False,
+                "block_reason": "NOT_IN_TOP200_RAW_PANEL_STORE",
+            }
+        )
+    active_oi_ids = {contract.field_id for contract in oi_active_contracts}
+    for contract in oi_declared_contracts:
+        if contract.field_id in active_oi_ids:
+            continue
+        rows.append(
+            {
+                "surface_id": "OI_MARK_RANKS51_200_DELIVERED",
+                "field_id": contract.field_id,
+                "source_field_id": contract.field_id.split("__", 1)[1],
+                "value_type": contract.value_type,
+                "unit": contract.unit,
+                "observable_lag_hours": int(contract.observable_lag_hours),
+                "pit_authority": contract.pit_authority,
+                "materialized": False,
+                "sample_finite_ratio": oi_all_ratios.get(contract.field_id, 0.0),
+                "field_contract_registered": False,
+                "typed_role_reachable": False,
+                "typed_roles_json": "[]",
+                "compatible_skeleton_count": 0,
+                "compiler_valid": False,
+                "matched_control_constructible": False,
+                "deterministic_replay": False,
+                "runtime_materialized": False,
+                "candidate_support_coordinates": 0,
+                "candidate_id": None,
+                "research_admitted": False,
+                "block_reason": "ZERO_FINITE_SUPPORT_IN_DELIVERED_ROOT",
+            }
+        )
 
     liquidation_rows, liquidation_evidence = _inventory_numeric_fields(
         inputs["liquidation_schemafixed_v2_root"],
         surface_id="LIQUIDATION_DELIVERED_QUARANTINED",
     )
     rows.extend(liquidation_rows)
-    for contract in oi_contracts:
+    for contract in oi_declared_contracts:
         rows.append(
             {
                 "surface_id": "OI_MARK_TOP50_RAW",
@@ -2648,7 +3437,7 @@ def build_search_surface_integration(
             ("BROAD_PANEL_BASELINE", broad_contracts),
             ("CORE3_MICROSTRUCTURE_PILOT", core_contracts),
             ("AGGTRADES_TOP200_DELIVERED", agg_contracts),
-            ("OI_MARK_RANKS51_200_DELIVERED", oi_contracts),
+            ("OI_MARK_RANKS51_200_DELIVERED", oi_active_contracts),
         )
     }
     _write_json(runtime_root / "carrier_contracts.json", contract_payload)
@@ -2677,11 +3466,30 @@ def build_search_surface_integration(
     support_contract["identity_sha256"] = _payload_sha(support_contract)
     _write_json(runtime_root / "candidate_support_contract.json", support_contract)
     source_evidence = {
+        "source_binding": source_binding,
+        "source_binding_sha256": source_binding_sha256,
+        "config_sha256": _sha256_file(config_path),
         "broad_registry_sha256": _sha256_file(inputs["broad_registry"]),
+        "broad_cache": carrier_manifest["carriers"][
+            "BROAD_PANEL_BASELINE"
+        ],
         "core3_contract_sha256": _sha256_file(inputs["core3_token_contract"]),
-        "core3_consumption_sha256": _sha256_file(consumption_path),
-        "aggtrades": [top100_evidence, rank_evidence],
+        "core3_consumption_manifest_sha256": _sha256_file(
+            consumption_manifest_path
+        ),
+        "core3_panel_sha256": _sha256_file(inputs["core3_panel"]),
+        "core3_carrier_identity_sha256": core_metadata["identity_sha256"],
+        "aggtrades_source_manifest": json.loads(
+            (agg_cache_root / "source_file_manifest.json").read_text(
+                encoding="utf-8"
+            )
+        ),
+        "aggtrades_carrier": carrier_manifest["carriers"][
+            "AGGTRADES_TOP200_DELIVERED"
+        ],
         "oi_mark": oi_evidence,
+        "oi_mark_carrier_identity_sha256": oi_metadata["identity_sha256"],
+        "runner_loader_evidence": loader_evidence,
         "liquidation": liquidation_evidence,
         "oi_mark_top50_raw": {
             "path": str(inputs["oi_mark_top50_raw_tar"]),
@@ -2717,34 +3525,48 @@ def build_search_surface_integration(
                 "blocked_fields": int(group["block_reason"].notna().sum()),
             }
         )
-    active = reachability.loc[
-        reachability["surface_id"].isin(
-            {
-                "BROAD_PANEL_BASELINE",
-                "CORE3_MICROSTRUCTURE_PILOT",
-                "AGGTRADES_TOP200_DELIVERED",
-                "OI_MARK_RANKS51_200_DELIVERED",
-            }
-        )
+    engineering_surfaces = {
+        "BROAD_PANEL_BASELINE",
+        "CORE3_MICROSTRUCTURE_PILOT",
+        "AGGTRADES_TOP200_DELIVERED",
+        "OI_MARK_RANKS51_200_DELIVERED",
+    }
+    declared_engineering = reachability.loc[
+        reachability["surface_id"].isin(engineering_surfaces)
     ]
+    active = declared_engineering.loc[
+        declared_engineering["field_contract_registered"].astype(bool)
+    ]
+    carrier_counts = active.groupby("surface_id").size().to_dict()
     active_pass = bool(
-        active["materialized"].all()
+        len(active) > 0
+        and set(carrier_counts) == engineering_surfaces
+        and active["materialized"].all()
         and active["field_contract_registered"].all()
         and active["typed_role_reachable"].all()
         and active["compiler_valid"].all()
         and active["matched_control_constructible"].all()
         and active["deterministic_replay"].all()
+        and active["runtime_materialized"].all()
+        and active["candidate_support_coordinates"].gt(0).all()
     )
     admission = json.loads(
         inputs["new_data_admission_decision"].read_text(encoding="utf-8")
     )
     final_decision = {
         "status": (
-            "PASS_SEARCH_SURFACE_INTEGRATION_ENGINEERING"
+            "PASS_ACTIVE_SEARCH_CARRIERS_WITH_DECLARED_FIELD_HOLDS"
             if active_pass
             else "HOLD_SEARCH_SURFACE_INTEGRATION_INCOMPLETE"
         ),
+        "declared_engineering_field_count": int(len(declared_engineering)),
         "active_field_count": int(len(active)),
+        "blocked_engineering_field_count": int(
+            declared_engineering["block_reason"].notna().sum()
+        ),
+        "runtime_materialized_active_fields": int(
+            active["runtime_materialized"].sum()
+        ),
         "compiler_reachable_active_fields": int(active["compiler_valid"].sum()),
         "matched_control_active_fields": int(
             active["matched_control_constructible"].sum()
@@ -2772,7 +3594,8 @@ def build_search_surface_integration(
             "# Crypto Search Surface Integration V1",
             "",
             f"- Status: `{final_decision['status']}`",
-            f"- Active fields: `{final_decision['active_field_count']}`; compiler/matched reachable: `{final_decision['compiler_reachable_active_fields']}`.",
+            f"- Declared engineering fields: `{final_decision['declared_engineering_field_count']}`; runtime-active: `{final_decision['active_field_count']}`; explicitly held: `{final_decision['blocked_engineering_field_count']}`.",
+            f"- Runtime materialized/compiler/matched fields: `{final_decision['runtime_materialized_active_fields']}` / `{final_decision['compiler_reachable_active_fields']}` / `{final_decision['matched_control_active_fields']}`.",
             "- Broad39 and Core3 81 remain independent; no joint 120-channel panel was created.",
             "- Candidate support is PIT base eligibility intersected with finite values for exactly the candidate raw fields.",
             "- No market search, pair evaluation, reward read, sealed read, Alpha claim, or promotion occurred.",
@@ -2802,6 +3625,7 @@ def build_search_surface_integration(
     outputs = [
         runtime_root / "frozen_contract.json",
         runtime_root / "field_reachability.parquet",
+        runtime_root / "search_carriers.json",
         runtime_root / "carrier_contracts.json",
         runtime_root / "compiler_proofs.jsonl",
         runtime_root / "candidate_support_contract.json",
@@ -2815,6 +3639,8 @@ def build_search_surface_integration(
     manifest = {
         "experiment_id": config["experiment_id"],
         "source_sha": source_sha,
+        "source_binding_sha256": source_binding_sha256,
+        "input_identity_sha256": _payload_sha(source_evidence),
         "frozen_contract_sha256": frozen_contract[
             "frozen_contract_sha256"
         ],
@@ -2853,6 +3679,7 @@ def check_search_surface_integration(
     required = (
         "frozen_contract.json",
         "field_reachability.parquet",
+        "search_carriers.json",
         "carrier_contracts.json",
         "compiler_proofs.jsonl",
         "candidate_support_contract.json",
@@ -2868,8 +3695,22 @@ def check_search_surface_integration(
     decision = json.loads(
         (runtime_root / "final_decision.json").read_text(encoding="utf-8")
     )
+    frozen_contract = json.loads(
+        (runtime_root / "frozen_contract.json").read_text(encoding="utf-8")
+    )
+    if frozen_contract.get("config_sha256") != _sha256_file(config_path):
+        errors.append("CONFIG_IDENTITY_MISMATCH")
+    stable_contract = {
+        key: value
+        for key, value in frozen_contract.items()
+        if key not in {"frozen_at", "frozen_contract_sha256"}
+    }
+    if frozen_contract.get("frozen_contract_sha256") != _payload_sha(
+        stable_contract
+    ):
+        errors.append("FROZEN_CONTRACT_IDENTITY_MISMATCH")
     reachability = pd.read_parquet(runtime_root / "field_reachability.parquet")
-    active = reachability.loc[
+    declared = reachability.loc[
         reachability["surface_id"].isin(
             {
                 "BROAD_PANEL_BASELINE",
@@ -2879,8 +3720,15 @@ def check_search_surface_integration(
             }
         )
     ]
+    active = declared.loc[
+        declared["field_contract_registered"].astype(bool)
+    ]
     if len(active) != int(decision.get("active_field_count", -1)):
         errors.append("ACTIVE_FIELD_COUNT_MISMATCH")
+    if len(declared) != int(
+        decision.get("declared_engineering_field_count", -1)
+    ):
+        errors.append("DECLARED_FIELD_COUNT_MISMATCH")
     for column in (
         "materialized",
         "field_contract_registered",
@@ -2888,9 +3736,12 @@ def check_search_surface_integration(
         "compiler_valid",
         "matched_control_constructible",
         "deterministic_replay",
+        "runtime_materialized",
     ):
         if not bool(active[column].all()):
             errors.append(f"ACTIVE_GATE_FAILED:{column}")
+    if not bool(active["candidate_support_coordinates"].gt(0).all()):
+        errors.append("ACTIVE_GATE_FAILED:candidate_support_coordinates")
     if (
         decision.get("market_search_started")
         or int(decision.get("market_pair_evaluations", -1)) != 0
@@ -2903,6 +3754,92 @@ def check_search_surface_integration(
     manifest = json.loads(
         (runtime_root / "run_manifest.json").read_text(encoding="utf-8")
     )
+    source_evidence = json.loads(
+        (runtime_root / "source_evidence.json").read_text(encoding="utf-8")
+    )
+    observed_binding = [
+        {
+            "path": row["path"],
+            "sha256": _sha256_file(repo_root / row["path"]),
+        }
+        for row in source_evidence["source_binding"]
+    ]
+    observed_binding_sha = _payload_sha(observed_binding)
+    if (
+        observed_binding_sha != source_evidence["source_binding_sha256"]
+        or observed_binding_sha != manifest.get("source_binding_sha256")
+    ):
+        errors.append("SOURCE_BINDING_IDENTITY_MISMATCH")
+    if _payload_sha(source_evidence) != manifest.get("input_identity_sha256"):
+        errors.append("INPUT_EVIDENCE_IDENTITY_MISMATCH")
+    source_sha = str(manifest.get("source_sha", ""))
+    if (
+        subprocess.run(
+            ["git", "merge-base", "--is-ancestor", source_sha, "HEAD"],
+            cwd=repo_root,
+            capture_output=True,
+        ).returncode
+        != 0
+    ):
+        errors.append("PRODUCER_SOURCE_NOT_ANCESTOR")
+    binding_paths = [row["path"] for row in source_evidence["source_binding"]]
+    if (
+        subprocess.run(
+            ["git", "diff", "--quiet", source_sha, "--", *binding_paths],
+            cwd=repo_root,
+            capture_output=True,
+        ).returncode
+        != 0
+    ):
+        errors.append("PRODUCER_SOURCE_BINDINGS_CHANGED")
+    from alphafactory_crypto.broad_search.runner18m import (
+        load_search_surface_carrier,
+    )
+
+    carrier_manifest_path = runtime_root / "search_carriers.json"
+    carrier_manifest = json.loads(
+        carrier_manifest_path.read_text(encoding="utf-8")
+    )
+    for surface_id in sorted(carrier_manifest["carriers"]):
+        try:
+            store, contracts, _ = load_search_surface_carrier(
+                repo_root,
+                carrier_manifest_path=carrier_manifest_path,
+                surface_id=surface_id,
+            )
+            if not contracts or store.shape[0] < int(
+                carrier_manifest["minimum_assets_per_timestamp"]
+            ):
+                errors.append(f"CARRIER_NOT_USABLE:{surface_id}")
+        except (FileNotFoundError, KeyError, TypeError, ValueError) as exc:
+            errors.append(f"CARRIER_IDENTITY_MISMATCH:{surface_id}:{exc}")
+    core_panel = _resolve_repo_path(
+        repo_root, config["inputs"]["core3_panel"]
+    )
+    if _sha256_file(core_panel) != source_evidence["core3_panel_sha256"]:
+        errors.append("CORE3_PANEL_IDENTITY_MISMATCH")
+    observed_oi = _directory_content_identity(
+        _resolve_repo_path(
+            repo_root, config["inputs"]["oi_mark_ranks51_200_root"]
+        ),
+        suffixes=(".parquet", ".json"),
+    )
+    if observed_oi != {
+        key: source_evidence["oi_mark"][key]
+        for key in ("root", "file_count", "bytes", "bundle_sha256")
+    }:
+        errors.append("OI_MARK_ROOT_IDENTITY_MISMATCH")
+    agg_source = source_evidence["aggtrades_source_manifest"]
+    for row in agg_source["tars"]:
+        path = Path(str(row["path"]))
+        if (
+            not path.is_file()
+            or not row.get("full_sha256_verified")
+            or _declared_tar_sha256(path) != str(row["declared_sha256"])
+            or str(row.get("observed_sha256"))
+            != str(row["declared_sha256"])
+        ):
+            errors.append(f"AGGTRADES_TAR_IDENTITY_MISMATCH:{path}")
     for row in manifest["outputs"]:
         path = repo_root / row["path"]
         if not path.is_file() or _sha256_file(path) != row["sha256"]:

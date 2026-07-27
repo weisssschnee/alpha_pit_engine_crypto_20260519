@@ -18,8 +18,14 @@ from alphafactory_crypto.broad_search.expression import (
     TypedExpressionRegistry,
 )
 from alphafactory_crypto.broad_search.panel18m import RawPanelStore
+from alphafactory_crypto.broad_search.runner18m import (
+    _directory_bundle,
+    _payload_sha,
+    load_search_surface_carrier,
+)
 from alphafactory_crypto.data_admission_v1 import (
     AGGTRADES_SEARCH_FIELDS,
+    _active_surface_rows,
     _compact_compatible_surfaces,
     _oi_mark_surface,
     aggregate_aggtrades_search_hourly,
@@ -63,6 +69,103 @@ def test_partial_data_plane_selects_only_compatible_skeletons() -> None:
     assert all(row["deterministic_replay"] for row in proofs)
 
 
+def test_runtime_reachability_proof_reads_real_raw_panel_fields(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "runtime-cache"
+    (root / "fields").mkdir(parents=True)
+    shape = (3, 800)
+    metadata = {
+        "assets": shape[0],
+        "timestamps": shape[1],
+        "symbol_ids": ["A", "B", "C"],
+        "field_ids": ["close_to_open_bps", "notional"],
+        "target_horizons_hours": [1, 4],
+        "minimum_assets_per_timestamp": 3,
+    }
+    (root / "metadata.json").write_text(json.dumps(metadata), encoding="utf-8")
+    np.save(root / "timestamp_ns.npy", np.arange(shape[1], dtype=np.int64))
+    np.save(root / "observed.npy", np.ones(shape, dtype=bool))
+    np.save(root / "base_eligible.npy", np.ones(shape, dtype=bool))
+    grid = np.arange(np.prod(shape), dtype=np.float32).reshape(shape) + 1
+    np.save(root / "fields" / "close_to_open_bps.npy", grid)
+    np.save(root / "fields" / "notional.npy", grid * 10)
+    store = RawPanelStore.open(root)
+    contracts = (
+        FieldContract("close_to_open_bps", "BPS", "bps", 1, "TEST"),
+        FieldContract("notional", "NOTIONAL", "quote_asset", 1, "TEST"),
+    )
+    rows, proofs, _ = _active_surface_rows(
+        surface_id="TEST_RUNTIME",
+        contracts=contracts,
+        finite_ratios={
+            "close_to_open_bps": 1.0,
+            "notional": 1.0,
+        },
+        store=store,
+    )
+    assert len(proofs) == 2
+    assert all(row["runtime_materialized"] for row in rows)
+    assert all(row["candidate_support_coordinates"] > 0 for row in rows)
+
+
+def test_runner_loads_content_bound_independent_search_carrier(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "carrier"
+    (root / "fields").mkdir(parents=True)
+    shape = (3, 8)
+    metadata = {
+        "schema_version": 2,
+        "identity_sha256": "A" * 64,
+        "assets": shape[0],
+        "timestamps": shape[1],
+        "symbol_ids": ["A", "B", "C"],
+        "field_ids": ["notional"],
+        "target_horizons_hours": [1, 4],
+    }
+    (root / "metadata.json").write_text(json.dumps(metadata), encoding="utf-8")
+    np.save(root / "timestamp_ns.npy", np.arange(shape[1], dtype=np.int64))
+    np.save(root / "observed.npy", np.ones(shape, dtype=bool))
+    np.save(root / "base_eligible.npy", np.ones(shape, dtype=bool))
+    np.save(root / "source_segment.npy", np.ones(shape, dtype=np.int8))
+    np.save(root / "target_return_1h.npy", np.zeros(shape, dtype=np.float32))
+    np.save(root / "target_return_4h.npy", np.zeros(shape, dtype=np.float32))
+    np.save(root / "fields" / "notional.npy", np.ones(shape, dtype=np.float32))
+    contracts = [
+        {
+            "field_id": "notional",
+            "value_type": "NOTIONAL",
+            "unit": "quote_asset",
+            "observable_lag_hours": 1,
+            "pit_authority": "TEST",
+        }
+    ]
+    manifest = {
+        "schema_version": 1,
+        "minimum_assets_per_timestamp": 3,
+        "carriers": {
+            "TEST": {
+                "cache_root": str(root),
+                "cache_identity_sha256": metadata["identity_sha256"],
+                "directory_bundle": _directory_bundle(root),
+                "contracts": contracts,
+                "contracts_sha256": _payload_sha(contracts),
+            }
+        },
+    }
+    manifest_path = tmp_path / "search_carriers.json"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    store, loaded, evidence = load_search_surface_carrier(
+        tmp_path,
+        carrier_manifest_path=manifest_path,
+        surface_id="TEST",
+    )
+    assert store.candidate_support(("notional",)).all()
+    assert [item.field_id for item in loaded] == ["notional"]
+    assert evidence["minimum_assets_per_timestamp"] == 3
+
+
 def test_candidate_support_is_field_local_not_full_surface_intersection(
     tmp_path: Path,
 ) -> None:
@@ -72,8 +175,9 @@ def test_candidate_support_is_field_local_not_full_surface_intersection(
         "assets": 3,
         "timestamps": 2,
         "symbol_ids": ["A", "B", "C"],
-        "field_ids": ["left", "right", "unrelated_sparse"],
+        "field_ids": ["left", "right", "unrelated_sparse", "two_only"],
         "target_horizons_hours": [1],
+        "minimum_assets_per_timestamp": 3,
     }
     (root / "metadata.json").write_text(json.dumps(metadata), encoding="utf-8")
     np.save(root / "timestamp_ns.npy", np.arange(2, dtype=np.int64))
@@ -84,6 +188,9 @@ def test_candidate_support_is_field_local_not_full_surface_intersection(
     sparse = np.ones((3, 2), dtype=np.float32)
     sparse[:, 0] = np.nan
     np.save(root / "fields" / "unrelated_sparse.npy", sparse)
+    two_only = np.ones((3, 2), dtype=np.float32)
+    two_only[-1, :] = np.nan
+    np.save(root / "fields" / "two_only.npy", two_only)
     np.save(root / "target_return_1h.npy", np.ones((3, 2), dtype=np.float32))
 
     store = RawPanelStore.open(root)
@@ -94,6 +201,7 @@ def test_candidate_support_is_field_local_not_full_surface_intersection(
     assert support.all()
     assert not full_surface[:, 0].any()
     assert full_surface[:, 1].all()
+    assert not store.candidate_support(("two_only",)).any()
 
 
 def test_full_aggtrades_physical_surface_aggregates_without_zero_fill() -> None:

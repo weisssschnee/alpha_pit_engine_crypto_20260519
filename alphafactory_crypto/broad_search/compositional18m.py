@@ -9,7 +9,7 @@ import statistics
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Iterable, Mapping, Sequence
+from typing import Any, Callable, Iterable, Mapping, Sequence
 
 import numpy as np
 
@@ -346,6 +346,9 @@ def compiler_reachability_proofs(
     registry: TypedExpressionRegistry,
     *,
     surface_id: str,
+    runtime_validator: Callable[[CandidateSpec], Mapping[str, Any] | None]
+    | None = None,
+    require_all: bool = True,
 ) -> list[dict[str, Any]]:
     """Compile one deterministic matched-control proof per reachable field."""
 
@@ -423,6 +426,12 @@ def compiler_reachability_proofs(
                         )
                     except ValueError:
                         continue
+                    runtime_payload: Mapping[str, Any] = {}
+                    if runtime_validator is not None:
+                        observed = runtime_validator(candidate)
+                        if observed is None:
+                            continue
+                        runtime_payload = observed
                     proof = {
                         "surface_id": str(surface_id),
                         "field_id": field_id,
@@ -444,6 +453,7 @@ def compiler_reachability_proofs(
                             == candidate.control.expression_id
                         ),
                         "candidate_spec": candidate.to_dict(),
+                        **dict(runtime_payload),
                     }
                     break
                 if proof is not None:
@@ -451,9 +461,12 @@ def compiler_reachability_proofs(
             if proof is not None:
                 break
         if proof is None:
-            raise ValueError(
-                f"no compiler proof could be constructed for {surface_id}:{field_id}"
-            )
+            if require_all:
+                raise ValueError(
+                    f"no compiler proof could be constructed for "
+                    f"{surface_id}:{field_id}"
+                )
+            continue
         proofs.append(proof)
     return proofs
 
