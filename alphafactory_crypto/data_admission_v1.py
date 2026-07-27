@@ -2357,7 +2357,8 @@ def _inventory_numeric_fields(
                 "unit": unit,
                 "observable_lag_hours": 1,
                 "pit_authority": "QUARANTINED_NOT_REGISTERED",
-                "materialized": True,
+                "materialized": False,
+                "schema_observed": True,
                 "sample_finite_ratio": None,
                 "field_contract_registered": False,
                 "typed_role_reachable": False,
@@ -3816,6 +3817,23 @@ def check_search_surface_integration(
     core_panel = _resolve_repo_path(
         repo_root, config["inputs"]["core3_panel"]
     )
+    identity_inputs = {
+        "broad_registry_sha256": "broad_registry",
+        "core3_contract_sha256": "core3_token_contract",
+        "core3_consumption_manifest_sha256": None,
+    }
+    for evidence_key, config_key in identity_inputs.items():
+        if config_key is None:
+            path = (
+                _resolve_repo_path(
+                    repo_root, config["inputs"]["core3_token_contract"]
+                ).parent
+                / "run_manifest.json"
+            )
+        else:
+            path = _resolve_repo_path(repo_root, config["inputs"][config_key])
+        if _sha256_file(path) != source_evidence[evidence_key]:
+            errors.append(f"INPUT_IDENTITY_MISMATCH:{evidence_key}")
     if _sha256_file(core_panel) != source_evidence["core3_panel_sha256"]:
         errors.append("CORE3_PANEL_IDENTITY_MISMATCH")
     observed_oi = _directory_content_identity(
@@ -3838,6 +3856,7 @@ def check_search_surface_integration(
             or _declared_tar_sha256(path) != str(row["declared_sha256"])
             or str(row.get("observed_sha256"))
             != str(row["declared_sha256"])
+            or _sha256_file(path) != str(row["declared_sha256"])
         ):
             errors.append(f"AGGTRADES_TAR_IDENTITY_MISMATCH:{path}")
     for row in manifest["outputs"]:
