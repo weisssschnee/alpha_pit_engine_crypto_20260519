@@ -34,6 +34,13 @@ WINDOWS = (6, 12, 24, 48, 72, 168, 336, 720)
 HORIZONS = (1, 4)
 BETAS = (-1.0, -0.5, 0.5, 1.0)
 NORMALIZERS = ("RollingZScore", "VolatilityScale", "HistoricalPercentile")
+SEMANTIC_NORMALIZERS_BY_FAMILY: Mapping[str, tuple[str, ...]] = {
+    "listing_age_context": ("HistoricalPercentile",),
+    "price_level": ("RollingZScore", "HistoricalPercentile"),
+}
+SEMANTIC_WINDOWS_BY_ROLE: Mapping[str, tuple[int, ...]] = {
+    "state": (24, 48, 72, 168, 336, 720),
+}
 MECHANISM_FAMILIES = (
     "OI_PRICE_DIVERGENCE",
     "OI_ACTIVITY_INTERACTION",
@@ -250,6 +257,18 @@ def _field_roles(contracts: Sequence[FieldContract]) -> dict[str, list[str]]:
     return role_map
 
 
+def _legal_normalizers(field_id: str, role: str) -> tuple[str, ...]:
+    del role
+    return SEMANTIC_NORMALIZERS_BY_FAMILY.get(infer_family(field_id), NORMALIZERS)
+
+
+def _legal_windows(field_id: str, role: str) -> tuple[int, ...]:
+    role_windows = SEMANTIC_WINDOWS_BY_ROLE.get(role, WINDOWS)
+    if infer_family(field_id) == "listing_age_context":
+        return (WINDOWS[0],)
+    return tuple(window for window in WINDOWS if window in role_windows)
+
+
 def field_role_coverage(
     contracts: Sequence[FieldContract],
 ) -> dict[str, Any]:
@@ -359,18 +378,30 @@ def _validated_generation_genes(
         raise ValueError("left field violates the skeleton role contract")
     if output["right_field"] not in roles[skeleton.field_roles[1]]:
         raise ValueError("right field violates the skeleton role contract")
-    if output["left_window"] not in WINDOWS or output["right_window"] not in WINDOWS:
-        raise ValueError("rolling window is outside the frozen grammar")
+    left_role, right_role = skeleton.field_roles
+    if output["left_window"] not in _legal_windows(
+        output["left_field"], left_role
+    ) or output["right_window"] not in _legal_windows(
+        output["right_field"], right_role
+    ):
+        raise ValueError("rolling window violates the typed-role representation contract")
     if output["beta"] not in BETAS:
         raise ValueError("residual beta is outside the frozen grammar")
-    if (
-        output["left_normalizer"] not in NORMALIZERS
-        or output["right_normalizer"] not in NORMALIZERS
+    operator = _variant_operator(skeleton.mechanism_family, skeleton.variant)
+    right_normalizer_active = not (
+        skeleton.mechanism_family == "STATE_REGIME_MODULATION"
+        or operator == "StateModulation"
+    )
+    if output["left_normalizer"] not in _legal_normalizers(
+        output["left_field"], left_role
+    ) or (
+        right_normalizer_active
+        and output["right_normalizer"]
+        not in _legal_normalizers(output["right_field"], right_role)
     ):
-        raise ValueError("normalizer is outside the frozen grammar")
+        raise ValueError("normalizer violates the field-family representation contract")
     if output["horizon_hours"] not in HORIZONS:
         raise ValueError("horizon is outside the frozen grammar")
-    operator = _variant_operator(skeleton.mechanism_family, skeleton.variant)
     if operator != "Residual":
         output["beta"] = 0.5
     if skeleton.mechanism_family == "STATE_REGIME_MODULATION" or operator == "StateModulation":
@@ -459,17 +490,69 @@ def _sample_generation_genes(
     rng: random.Random,
     roles: Mapping[str, Sequence[str]],
 ) -> dict[str, Any]:
+    """Preserve V1 gene draws while respecting the shared compiler whitelist."""
+
     left_field = rng.choice(roles[skeleton.field_roles[0]])
     right_options = roles[skeleton.field_roles[1]]
     distinct = [field_id for field_id in right_options if field_id != left_field]
+    right_field = rng.choice(distinct or right_options)
     return {
         "left_field": left_field,
-        "right_field": rng.choice(distinct or right_options),
-        "left_window": rng.choice(WINDOWS),
-        "right_window": rng.choice(WINDOWS),
+        "right_field": right_field,
+        "left_window": rng.choice(
+            _legal_windows(left_field, skeleton.field_roles[0])
+        ),
+        "right_window": rng.choice(
+            _legal_windows(right_field, skeleton.field_roles[1])
+        ),
         "beta": rng.choice(BETAS),
-        "left_normalizer": rng.choice(NORMALIZERS),
-        "right_normalizer": rng.choice(NORMALIZERS),
+        "left_normalizer": rng.choice(
+            _legal_normalizers(left_field, skeleton.field_roles[0])
+        ),
+        "right_normalizer": rng.choice(
+            _legal_normalizers(right_field, skeleton.field_roles[1])
+        ),
+        "horizon_hours": rng.choice(HORIZONS),
+    }
+
+
+def _sample_effective_generation_genes(
+    skeleton: Skeleton,
+    *,
+    rng: random.Random,
+    roles: Mapping[str, Sequence[str]],
+) -> dict[str, Any]:
+    left_field = rng.choice(roles[skeleton.field_roles[0]])
+    right_options = roles[skeleton.field_roles[1]]
+    distinct = [field_id for field_id in right_options if field_id != left_field]
+    operator = _variant_operator(skeleton.mechanism_family, skeleton.variant)
+    right_field = rng.choice(distinct or right_options)
+    right_is_state = (
+        skeleton.mechanism_family == "STATE_REGIME_MODULATION"
+        or operator == "StateModulation"
+    )
+    return {
+        "left_field": left_field,
+        "right_field": right_field,
+        "left_window": rng.choice(
+            _legal_windows(left_field, skeleton.field_roles[0])
+        ),
+        "right_window": (
+            WINDOWS[0]
+            if infer_family(right_field) == "listing_age_context"
+            else rng.choice(_legal_windows(right_field, skeleton.field_roles[1]))
+        ),
+        "beta": rng.choice(BETAS) if operator == "Residual" else 0.5,
+        "left_normalizer": rng.choice(
+            _legal_normalizers(left_field, skeleton.field_roles[0])
+        ),
+        "right_normalizer": (
+            "RollingZScore"
+            if right_is_state
+            else rng.choice(
+                _legal_normalizers(right_field, skeleton.field_roles[1])
+            )
+        ),
         "horizon_hours": rng.choice(HORIZONS),
     }
 
@@ -480,19 +563,51 @@ def _mutable_gene_domains(
     genes: Mapping[str, Any],
     roles: Mapping[str, Sequence[str]],
 ) -> dict[str, tuple[Any, ...]]:
+    operator = _variant_operator(skeleton.mechanism_family, skeleton.variant)
+    right_normalizer_active = not (
+        skeleton.mechanism_family == "STATE_REGIME_MODULATION"
+        or operator == "StateModulation"
+    )
+    left_fields = tuple(
+        field_id
+        for field_id in roles[skeleton.field_roles[0]]
+        if genes["left_window"]
+        in _legal_windows(str(field_id), skeleton.field_roles[0])
+        and genes["left_normalizer"]
+        in _legal_normalizers(str(field_id), skeleton.field_roles[0])
+    )
+    right_fields = tuple(
+        field_id
+        for field_id in roles[skeleton.field_roles[1]]
+        if genes["right_window"]
+        in _legal_windows(str(field_id), skeleton.field_roles[1])
+        and (
+            not right_normalizer_active
+            or genes["right_normalizer"]
+            in _legal_normalizers(str(field_id), skeleton.field_roles[1])
+        )
+    )
     domains: dict[str, tuple[Any, ...]] = {
-        "left_field": tuple(roles[skeleton.field_roles[0]]),
-        "right_field": tuple(roles[skeleton.field_roles[1]]),
-        "left_window": WINDOWS,
-        "right_window": WINDOWS,
-        "left_normalizer": NORMALIZERS,
+        "left_field": left_fields,
+        "right_field": right_fields,
+        "left_window": _legal_windows(
+            str(genes["left_field"]), skeleton.field_roles[0]
+        ),
+        "right_window": _legal_windows(
+            str(genes["right_field"]), skeleton.field_roles[1]
+        ),
+        "left_normalizer": _legal_normalizers(
+            str(genes["left_field"]), skeleton.field_roles[0]
+        ),
         "horizon_hours": HORIZONS,
     }
     effective = _effective_generation_gene_names(skeleton, genes)
     if "beta" in effective:
         domains["beta"] = BETAS
     if "right_normalizer" in effective:
-        domains["right_normalizer"] = NORMALIZERS
+        domains["right_normalizer"] = _legal_normalizers(
+            str(genes["right_field"]), skeleton.field_roles[1]
+        )
     if "right_window" not in effective:
         domains.pop("right_window")
     output: dict[str, tuple[Any, ...]] = {}
@@ -626,6 +741,26 @@ def generate_candidate(
         registry,
         skeleton=skeleton,
         genes=_sample_generation_genes(skeleton, rng=rng, roles=roles),
+        roles=roles,
+    )
+
+
+def generate_effective_candidate(
+    registry: TypedExpressionRegistry,
+    *,
+    skeleton: Skeleton,
+    rng: random.Random,
+    roles: Mapping[str, Sequence[str]] | None = None,
+) -> CandidateSpec:
+    """Sample only effective genes for V2 policies while preserving V1 controls."""
+
+    roles = roles or _field_roles(tuple(registry.fields.values()))
+    return candidate_from_genes(
+        registry,
+        skeleton=skeleton,
+        genes=_sample_effective_generation_genes(
+            skeleton, rng=rng, roles=roles
+        ),
         roles=roles,
     )
 

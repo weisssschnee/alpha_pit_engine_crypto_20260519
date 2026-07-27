@@ -586,7 +586,7 @@ def _valid_active_universe_series() -> np.ndarray:
 
 def test_search_behavior_descriptor_is_frozen_coarse_and_outcome_free() -> None:
     active = _valid_active_universe_series()
-    contract = freeze_search_behavior_contract(active)
+    contract = freeze_search_behavior_contract(active, np.isfinite(active))
     signal = np.asarray(
         [[1, 2, 3, 4, 5, 6, 7, 8], [2, 1, 4, 3, 6, 5, 8, 7], [3, 3, 2, 2, 1, 1, 0, 0]],
         dtype=float,
@@ -617,7 +617,7 @@ def test_search_behavior_descriptor_is_frozen_coarse_and_outcome_free() -> None:
 def test_behavior_contract_rejects_partition_local_universe_counts() -> None:
     broken = np.ones((3, 8), dtype=float)
     with pytest.raises(ValueError, match="active_universe_size"):
-        freeze_search_behavior_contract(broken)
+        freeze_search_behavior_contract(broken, np.ones_like(broken, dtype=bool))
 
 
 def test_panel_context_fields_are_rebuilt_after_source_join() -> None:
@@ -768,7 +768,6 @@ def test_typed_evolution_v2_receipts_cover_genes_skeleton_and_crossover() -> Non
         "right_field",
         "left_window",
         "right_window",
-        "beta",
         "left_normalizer",
         "right_normalizer",
         "horizon_hours",

@@ -39,10 +39,13 @@ from .compositional18m import (
     CandidateSpec,
     Skeleton,
     _effective_generation_gene_names,
+    _legal_normalizers,
+    _legal_windows,
     _mutable_gene_domains,
     candidate_from_genes,
     field_role_coverage,
     generate_candidate,
+    generate_effective_candidate,
     skeleton_registry,
 )
 from .expression import FieldContract, TypedExpressionRegistry
@@ -94,6 +97,8 @@ WALL_TIME_LIMIT_SECONDS = 18 * 60 * 60
 DEFAULT_WORKERS = 10
 FALLBACK_WORKERS = 8
 MEMORY_GATE_BYTES = 12 * 1024**3
+QUALIFICATION_TOLERANCE = 1.0e-12
+QUALIFICATION_DUPLICATE_RATE_MAXIMUM = 0.20
 GENE_ORDER = (
     "left_field",
     "right_field",
@@ -118,6 +123,7 @@ V2_PARAMETERS: Mapping[str, Mapping[str, Any]] = {
         "warmup": 32,
         "tournament_size": 4,
         "population_limit": 256,
+        "mechanism_cell_limit": 64,
         "gene_mutation_probability": 0.55,
         "skeleton_variant_mutation_probability": 0.25,
         "homologous_crossover_probability": 0.20,
@@ -316,7 +322,8 @@ def _load_bound_inputs(
     store = RawPanelStore.open(cache_root)
     adaptive = store.block_slice(ADAPTIVE_START, ADAPTIVE_END)
     behavior_contract = freeze_search_behavior_contract(
-        np.asarray(store.field("active_universe_size")[:, adaptive], dtype=float)
+        np.asarray(store.field("active_universe_size")[:, adaptive], dtype=float),
+        np.asarray(store.observed()[:, adaptive], dtype=bool),
     )
     identities = {
         "continuation_config": {
@@ -349,7 +356,7 @@ def _frozen_contract(
     environment: Mapping[str, Any],
 ) -> dict[str, Any]:
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "epoch_id": EPOCH_ID,
         "source_sha": source_sha,
         "base_sha": BASE_SHA,
@@ -418,7 +425,10 @@ def _frozen_contract(
                 "strict_cost_evaluated",
             ],
             "only_ordering_authority": "pair_reward",
-            "equal_reward_tie_break": ["new_behavior_family", "candidate_id"],
+            "equal_reward_tie_break": [
+                "arm_seed_policy_local_behavior_family_count",
+                "candidate_id",
+            ],
             "diagnostic_only": [
                 "turnover",
                 "gross_positive_cost_sign_killed",
@@ -432,9 +442,26 @@ def _frozen_contract(
             "genome": "existing CandidateSpec generation_genes",
             "mutation": "1_to_3_effective_genes",
             "operator_replacement": "compatible_skeleton_variant_mutation",
-            "crossover": "one_point_homologous_gene_bundle_typed_role_compatible",
+            "crossover": "one_point_effective_homologous_gene_bundle_typed_role_compatible",
+            "mechanism_cell_limit": int(
+                V2_PARAMETERS["typed_evolution_v2"]["mechanism_cell_limit"]
+            ),
             "free_string_mutation": False,
             "new_ast": False,
+        },
+        "representation_contract": {
+            "field_family_normalizer_whitelist": True,
+            "typed_role_window_whitelist": True,
+            "sample_effective_genes_only": True,
+        },
+        "qualification_gate": {
+            "engineering_execution_separate_from_search_strategy": True,
+            "reward_mean_and_top_decile_must_not_be_worse": True,
+            "productivity_must_clearly_improve": True,
+            "cross_seed_required": True,
+            "consecutive_checkpoints_required": 2,
+            "frozen_tolerance": QUALIFICATION_TOLERANCE,
+            "behavior_duplicate_rate_maximum": QUALIFICATION_DUPLICATE_RATE_MAXIMUM,
         },
         "budget": {
             "strict_evaluated_target": STRICT_TARGET,
@@ -744,30 +771,36 @@ class HierarchicalTypedCEMV2:
                     ),
                 )
             )
+            field_id = str(selected[f"{side}_field"])
+            window_contexts = (
+                f"E|{role}|{family}|{skeleton.skeleton_id}",
+                f"RF|{role}|{family}",
+                f"S|{skeleton.skeleton_id}",
+                f"M|{mechanism}",
+                "G",
+            )
             selected[f"{side}_window"] = int(
-                self._choice(
+                WINDOWS[0]
+                if side == "right"
+                and infer_family(field_id) == "listing_age_context"
+                else self._choice(
                     "window",
-                    WINDOWS,
-                    (
-                        f"E|{role}|{family}|{skeleton.skeleton_id}",
-                        f"RF|{role}|{family}",
-                        f"S|{skeleton.skeleton_id}",
-                        f"M|{mechanism}",
-                        "G",
-                    ),
+                    _legal_windows(field_id, role),
+                    window_contexts,
                 )
             )
+            operator = skeleton.to_dict()["operator_DAG"]
+            right_normalizer_inactive = side == "right" and (
+                skeleton.mechanism_family == "STATE_REGIME_MODULATION"
+                or operator == "StateModulation"
+            )
             selected[f"{side}_normalizer"] = str(
-                self._choice(
+                "RollingZScore"
+                if right_normalizer_inactive
+                else self._choice(
                     "normalizer",
-                    NORMALIZERS,
-                    (
-                        f"E|{role}|{family}|{skeleton.skeleton_id}",
-                        f"RF|{role}|{family}",
-                        f"S|{skeleton.skeleton_id}",
-                        f"M|{mechanism}",
-                        "G",
-                    ),
+                    _legal_normalizers(field_id, role),
+                    window_contexts,
                 )
             )
         selected["beta"] = float(
@@ -776,6 +809,8 @@ class HierarchicalTypedCEMV2:
                 BETAS,
                 (f"S|{skeleton.skeleton_id}", f"M|{mechanism}", "G"),
             )
+            if skeleton.to_dict()["operator_DAG"] == "Residual"
+            else 0.5
         )
         selected["horizon_hours"] = int(
             self._choice(
@@ -838,7 +873,7 @@ class HierarchicalTypedCEMV2:
             rows,
             key=lambda row: (
                 -float(row["pair_reward"]),
-                -int(bool(row["new_behavior_family_at_completion"])),
+                int(row.get("policy_local_family_count_at_completion", 1)),
                 str(row["candidate_id"]),
             ),
         )[:elite_count]
@@ -880,19 +915,28 @@ class HierarchicalTypedCEMV2:
                     f"G|{role}|{family}",
                 )
                 self._accumulate(accumulator, "field_token", common, field_id)
-                self._accumulate(accumulator, "window", (*common[:-1], "G"), genes[f"{side}_window"])
+                effective = _effective_generation_gene_names(skeleton, genes)
+                if f"{side}_window" in effective:
+                    self._accumulate(
+                        accumulator,
+                        "window",
+                        (*common[:-1], "G"),
+                        genes[f"{side}_window"],
+                    )
+                if f"{side}_normalizer" in effective:
+                    self._accumulate(
+                        accumulator,
+                        "normalizer",
+                        (*common[:-1], "G"),
+                        genes[f"{side}_normalizer"],
+                    )
+            if "beta" in _effective_generation_gene_names(skeleton, genes):
                 self._accumulate(
                     accumulator,
-                    "normalizer",
-                    (*common[:-1], "G"),
-                    genes[f"{side}_normalizer"],
+                    "beta",
+                    (f"S|{skeleton.skeleton_id}", f"M|{mechanism}", "G"),
+                    genes["beta"],
                 )
-            self._accumulate(
-                accumulator,
-                "beta",
-                (f"S|{skeleton.skeleton_id}", f"M|{mechanism}", "G"),
-                genes["beta"],
-            )
             self._accumulate(
                 accumulator,
                 "horizon",
@@ -913,19 +957,20 @@ class HierarchicalTypedCEMV2:
                     context,
                     {"observations": 0, "counts": {}, "probabilities": {}},
                 )
-                cumulative = Counter(
+                cumulative_observations = Counter(
                     {str(key): int(value) for key, value in table["counts"].items()}
                 )
-                cumulative.update(additions)
-                table["counts"] = dict(sorted(cumulative.items()))
-                table["observations"] = int(sum(cumulative.values()))
-                values = tuple(sorted(cumulative))
+                cumulative_observations.update(additions)
+                table["counts"] = dict(sorted(cumulative_observations.items()))
+                table["observations"] = int(sum(cumulative_observations.values()))
+                prior = table.get("probabilities", {})
+                values = tuple(sorted(set(prior) | set(additions)))
+                current_total = int(sum(additions.values()))
                 empirical = {
-                    value: (cumulative[value] + pseudocount)
-                    / (sum(cumulative.values()) + pseudocount * len(values))
+                    value: (additions[value] + pseudocount)
+                    / (current_total + pseudocount * len(values))
                     for value in values
                 }
-                prior = table.get("probabilities", {})
                 blended = {
                     value: (1.0 - smoothing)
                     * float(prior.get(value, 1.0 / len(values)))
@@ -997,6 +1042,7 @@ class TypedEvolutionV2:
     roles: dict[str, list[str]] = field(init=False)
     seen: set[str] = field(default_factory=set)
     population: dict[str, dict[str, Any]] = field(default_factory=dict)
+    family_counts: Counter[str] = field(default_factory=Counter)
     step: int = 0
     verified_mutations: int = 0
     verified_skeleton_mutations: int = 0
@@ -1026,13 +1072,16 @@ class TypedEvolutionV2:
             self.parameters["tournament_size"]
         ):
             raise ValueError("Evolution V2 population is smaller than its tournament")
+        if not 1 <= int(self.parameters["mechanism_cell_limit"]) <= int(
+            self.parameters["population_limit"]
+        ):
+            raise ValueError("Evolution V2 mechanism cell limit is invalid")
 
     def _candidate(self, record: Mapping[str, Any]) -> CandidateSpec:
         return CandidateSpec.from_dict(record["candidate"])
 
     def _parent(
         self,
-        archive: BehaviorArchive,
         *,
         eligible: Sequence[str] | None = None,
     ) -> CandidateSpec:
@@ -1046,7 +1095,7 @@ class TypedEvolutionV2:
             key=lambda candidate_id: (
                 float(self.population[candidate_id]["pair_reward"]),
                 -int(
-                    archive.family_counts[
+                    self.family_counts[
                         str(self.population[candidate_id]["behavior_family_id"])
                     ]
                 ),
@@ -1174,17 +1223,26 @@ class TypedEvolutionV2:
         second_skeleton = _skeleton_by_id(second.skeleton_id)
         if first_skeleton.field_roles != second_skeleton.field_roles:
             raise ValueError("crossover parents have incompatible typed roles")
-        points = list(range(1, len(GENE_ORDER)))
+        gene_order = [
+            name
+            for name in GENE_ORDER
+            if name
+            in (
+                _effective_generation_gene_names(
+                    first_skeleton, first.generation_genes
+                )
+                & _effective_generation_gene_names(
+                    second_skeleton, second.generation_genes
+                )
+            )
+        ]
+        points = list(range(1, len(gene_order)))
         self.rng.shuffle(points)
         for internal_attempt, point in enumerate(points, start=1):
-            genome = {
-                name: (
-                    first.generation_genes[name]
-                    if index < point
-                    else second.generation_genes[name]
-                )
-                for index, name in enumerate(GENE_ORDER)
-            }
+            genome = dict(first.generation_genes)
+            for index, name in enumerate(gene_order):
+                if index >= point:
+                    genome[name] = second.generation_genes[name]
             try:
                 child = candidate_from_genes(
                     self.registry,
@@ -1202,7 +1260,7 @@ class TypedEvolutionV2:
                 child=child,
                 details={
                     "crossover_point": int(point),
-                    "gene_order": list(GENE_ORDER),
+                    "gene_order": gene_order,
                     "output_type": "NUMERIC_ASSET_TIME",
                     "internal_generation_attempts": internal_attempt,
                 },
@@ -1279,25 +1337,38 @@ class TypedEvolutionV2:
             if operation == "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER":
                 if len(parents) != 2:
                     return False
-                point = int(receipt["crossover_point"])
-                if not 1 <= point < len(GENE_ORDER):
-                    return False
                 if (
                     _skeleton_by_id(parents[0].skeleton_id).field_roles
                     != _skeleton_by_id(parents[1].skeleton_id).field_roles
                 ):
                     return False
-                genome = {
-                    name: (
-                        parents[0].generation_genes[name]
-                        if index < point
-                        else parents[1].generation_genes[name]
+                first_skeleton = _skeleton_by_id(parents[0].skeleton_id)
+                second_skeleton = _skeleton_by_id(parents[1].skeleton_id)
+                gene_order = [
+                    name
+                    for name in GENE_ORDER
+                    if name
+                    in (
+                        _effective_generation_gene_names(
+                            first_skeleton, parents[0].generation_genes
+                        )
+                        & _effective_generation_gene_names(
+                            second_skeleton, parents[1].generation_genes
+                        )
                     )
-                    for index, name in enumerate(GENE_ORDER)
-                }
+                ]
+                if receipt.get("gene_order") != gene_order:
+                    return False
+                point = int(receipt["crossover_point"])
+                if not 1 <= point < len(gene_order):
+                    return False
+                genome = dict(parents[0].generation_genes)
+                for index, name in enumerate(gene_order):
+                    if index >= point:
+                        genome[name] = parents[1].generation_genes[name]
                 rebuilt = candidate_from_genes(
                     self.registry,
-                    skeleton=_skeleton_by_id(parents[0].skeleton_id),
+                    skeleton=first_skeleton,
                     genes=genome,
                     roles=self.roles,
                 )
@@ -1307,8 +1378,9 @@ class TypedEvolutionV2:
             return False
 
     def propose(
-        self, archive: BehaviorArchive
+        self, archive: BehaviorArchive | None = None
     ) -> tuple[CandidateSpec, dict[str, Any]]:
+        del archive
         before = self.state_hash()
         limit = int(self.parameters["duplicate_resample_limit"])
         candidate: CandidateSpec | None = None
@@ -1321,7 +1393,7 @@ class TypedEvolutionV2:
             if len(self.population) < int(self.parameters["warmup"]):
                 skeletons = skeleton_registry()
                 skeleton = skeletons[(self.step + self.seed + duplicate_resamples) % len(skeletons)]
-                candidate = generate_candidate(
+                candidate = generate_effective_candidate(
                     self.registry, skeleton=skeleton, rng=self.rng, roles=self.roles
                 )
                 receipt = None
@@ -1333,7 +1405,7 @@ class TypedEvolutionV2:
                 skeleton_probability = float(
                     self.parameters["skeleton_variant_mutation_probability"]
                 )
-                first = self._parent(archive)
+                first = self._parent()
                 if draw < gene_probability:
                     candidate, receipt = self._mutate_genes(first)
                     parents = (first,)
@@ -1357,7 +1429,7 @@ class TypedEvolutionV2:
                         candidate, receipt = self._mutate_genes(first)
                         parents = (first,)
                     else:
-                        second = self._parent(archive, eligible=compatible)
+                        second = self._parent(eligible=compatible)
                         candidate, receipt = self._crossover(first, second)
                         parents = (first, second)
                     operation = str(receipt["operation"])
@@ -1393,10 +1465,24 @@ class TypedEvolutionV2:
         archive_row: Mapping[str, Any],
     ) -> None:
         family_id = str(archive_row["behavior_family_id"])
+        self.family_counts[family_id] += 1
+        parent_ids = [str(value) for value in archive_row.get("parent_ids", [])]
+        root_lineage_ids = sorted(
+            {
+                root_id
+                for parent_id in parent_ids
+                for root_id in self.population.get(parent_id, {}).get(
+                    "root_lineage_ids", [parent_id]
+                )
+            }
+            or {candidate.candidate_id}
+        )
         candidate_record = {
             "candidate": candidate.to_dict(),
             "pair_reward": float(archive_row["pair_reward"]),
             "behavior_family_id": family_id,
+            "mechanism_family": candidate.mechanism_family,
+            "root_lineage_ids": root_lineage_ids,
         }
         family_members = [
             candidate_id
@@ -1428,9 +1514,22 @@ class TypedEvolutionV2:
                     candidate_id,
                 ),
             )
+            cell_limit = int(self.parameters["mechanism_cell_limit"])
+            mechanism_counts: Counter[str] = Counter()
+            retained: list[str] = []
+            for candidate_id in ordered:
+                mechanism = str(
+                    self.population[candidate_id]["mechanism_family"]
+                )
+                if mechanism_counts[mechanism] >= cell_limit:
+                    continue
+                retained.append(candidate_id)
+                mechanism_counts[mechanism] += 1
+                if len(retained) == limit:
+                    break
             self.population = {
                 candidate_id: self.population[candidate_id]
-                for candidate_id in ordered[:limit]
+                for candidate_id in retained
             }
         operation = str(archive_row.get("operation", ""))
         if operation == "EFFECTIVE_GENE_MUTATION_1_TO_3":
@@ -1439,6 +1538,35 @@ class TypedEvolutionV2:
             self.verified_skeleton_mutations += 1
         elif operation == "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER":
             self.verified_crossovers += 1
+
+    def population_diagnostics(self) -> dict[str, Any]:
+        mechanism_occupancy = Counter(
+            str(record.get("mechanism_family", ""))
+            for record in self.population.values()
+        )
+        root_counts: Counter[str] = Counter()
+        for record in self.population.values():
+            roots = tuple(record.get("root_lineage_ids", ()))
+            weight = 1.0 / max(1, len(roots))
+            for root_id in roots:
+                root_counts[str(root_id)] += weight
+        total_root_weight = float(sum(root_counts.values()))
+        probabilities = [
+            float(count) / total_root_weight
+            for count in root_counts.values()
+            if total_root_weight > 0.0 and count > 0.0
+        ]
+        return {
+            "effective_parent_count": len(self.population),
+            "lineage_entropy": float(
+                -sum(value * math.log(value) for value in probabilities)
+            ),
+            "top_root_lineage_share": (
+                max(root_counts.values(), default=0.0)
+                / max(total_root_weight, 1.0)
+            ),
+            "mechanism_occupancy": dict(sorted(mechanism_occupancy.items())),
+        }
 
     def export_state(self) -> dict[str, Any]:
         return {
@@ -1451,6 +1579,7 @@ class TypedEvolutionV2:
                 candidate_id: dict(record)
                 for candidate_id, record in sorted(self.population.items())
             },
+            "family_counts": dict(sorted(self.family_counts.items())),
             "step": int(self.step),
             "verified_mutations": int(self.verified_mutations),
             "verified_skeleton_mutations": int(self.verified_skeleton_mutations),
@@ -1472,6 +1601,12 @@ class TypedEvolutionV2:
             str(candidate_id): dict(record)
             for candidate_id, record in state["population"].items()
         }
+        policy.family_counts = Counter(
+            {
+                str(family_id): int(count)
+                for family_id, count in state.get("family_counts", {}).items()
+            }
+        )
         policy.step = int(state["step"])
         policy.verified_mutations = int(state["verified_mutations"])
         policy.verified_skeleton_mutations = int(
@@ -1714,6 +1849,11 @@ def _new_campaign_state(source_sha: str, frozen_hash: str) -> dict[str, Any]:
         "matched_control_valid": 0,
         "strict_evaluated": 0,
         "attempted_exact_ids": [],
+        "policy_local_family_counts": {
+            _policy_key(arm, seed): {}
+            for arm in sorted(arms)
+            for seed in SEEDS
+        },
         "failure_counts": {},
         "wall_elapsed_seconds": 0.0,
         "workers": DEFAULT_WORKERS,
@@ -1843,6 +1983,14 @@ def _metrics_rows(
             axis: float(np.mean([row.get(axis, 0.0) for row in cem_entropies]))
             for axis in sorted({key for row in cem_entropies for key in row})
         }
+        evolution_diagnostics = [
+            policy.population_diagnostics()
+            for key, policy in policies.items()
+            if key.startswith(arm + "|") and isinstance(policy, TypedEvolutionV2)
+        ]
+        mechanism_occupancy: Counter[str] = Counter()
+        for diagnostic in evolution_diagnostics:
+            mechanism_occupancy.update(diagnostic["mechanism_occupancy"])
         output.append(
             {
                 "checkpoint_index": int(checkpoint_index),
@@ -1868,11 +2016,25 @@ def _metrics_rows(
                 )
                 / max(cpu_hours, 1.0e-12),
                 "new_behavior_families_per_cpu_hour": sum(
-                    bool(row["new_behavior_family_at_completion"]) for row in rows
+                    bool(
+                        row.get(
+                            "new_policy_local_behavior_family_at_completion",
+                            row["new_behavior_family_at_completion"],
+                        )
+                    )
+                    for row in rows
                 )
                 / max(cpu_hours, 1.0e-12),
                 "new_behavior_families_per_1k_evaluations": 1000.0
-                * sum(bool(row["new_behavior_family_at_completion"]) for row in rows)
+                * sum(
+                    bool(
+                        row.get(
+                            "new_policy_local_behavior_family_at_completion",
+                            row["new_behavior_family_at_completion"],
+                        )
+                    )
+                    for row in rows
+                )
                 / max(1, len(rows)),
                 "matched_reward_comparison_count": int(matched_count),
                 "mean_pair_reward_at_matched_count": mean_reward,
@@ -1912,6 +2074,39 @@ def _metrics_rows(
                     == "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER"
                     and bool(row["receipt_verified"])
                     for row in rows
+                ),
+                "effective_parent_count": int(
+                    sum(
+                        int(row["effective_parent_count"])
+                        for row in evolution_diagnostics
+                    )
+                ),
+                "lineage_entropy": (
+                    float(
+                        np.mean(
+                            [
+                                float(row["lineage_entropy"])
+                                for row in evolution_diagnostics
+                            ]
+                        )
+                    )
+                    if evolution_diagnostics
+                    else 0.0
+                ),
+                "top_root_lineage_share": (
+                    float(
+                        np.mean(
+                            [
+                                float(row["top_root_lineage_share"])
+                                for row in evolution_diagnostics
+                            ]
+                        )
+                    )
+                    if evolution_diagnostics
+                    else 0.0
+                ),
+                "mechanism_occupancy_json": json.dumps(
+                    dict(sorted(mechanism_occupancy.items())), sort_keys=True
                 ),
                 "arm_state_after_gate": state.get("arm_states", {}).get(
                     arm, "CONTROL_EXITED" if checkpoint_index > 0 else "CONTROL"
@@ -2000,6 +2195,14 @@ def _metrics_rows(
                 and bool(row["receipt_verified"])
                 for row in ledger
             ),
+            "effective_parent_count": sum(
+                len(policy.population)
+                for policy in policies.values()
+                if isinstance(policy, TypedEvolutionV2)
+            ),
+            "lineage_entropy": 0.0,
+            "top_root_lineage_share": 0.0,
+            "mechanism_occupancy_json": "{}",
             "arm_state_after_gate": "RUNNING",
             "exit_gate_json": None,
         }
@@ -2347,6 +2550,11 @@ def _ledger_row(
         "exact_expression_id": candidate.candidate_id,
         "canonical_expression_id": candidate.expression.expression_id,
         "behavior_family_id": behavior["behavior_family_id"],
+        "primary_behavior_id": behavior.get("primary_behavior_id"),
+        "control_behavior_id": behavior.get("control_behavior_id"),
+        "incremental_behavior_id": behavior.get(
+            "incremental_behavior_id", behavior["behavior_family_id"]
+        ),
         "arm": str(proposal["arm"]),
         "seed": int(proposal["seed"]),
         "skeleton_id": candidate.skeleton_id,
@@ -2372,6 +2580,17 @@ def _ledger_row(
         "matched_control_valid": True,
         "strict_cost_evaluated": True,
         "new_behavior_family_at_completion": bool(new_family),
+        "new_policy_local_behavior_family_at_completion": bool(
+            proposal.get(
+                "new_policy_local_behavior_family_at_completion", new_family
+            )
+        ),
+        "policy_local_family_count_at_completion": int(
+            proposal.get(
+                "policy_local_family_count_at_completion",
+                proposal["family_member_count_at_completion"],
+            )
+        ),
         "family_member_count_at_completion": int(
             proposal["family_member_count_at_completion"]
         ),
@@ -2393,6 +2612,7 @@ def _ledger_row(
         "selected_asset_overlap_id": behavior["selected_asset_overlap_id"],
         "mapped_weight_descriptor_id": behavior["mapped_weight_descriptor_id"],
         "turnover_path_descriptor_id": behavior["turnover_path_descriptor_id"],
+        "turnover_path_sha256": behavior.get("turnover_path_sha256"),
         "pit_regime_descriptor_id": behavior["pit_regime_descriptor_id"],
         "descriptor_contract_sha256": behavior["descriptor_contract_sha256"],
         "proposal_compile_cpu_seconds": float(proposal["proposal_cpu_seconds"]),
@@ -2498,6 +2718,18 @@ def _final_decision(
         bool(_read_json(path / "manifest.json").get("restore_verified"))
         for path in checkpoints
     )
+    def not_worse(value: Any, baseline: Any) -> bool:
+        return float(value) >= float(baseline) - QUALIFICATION_TOLERANCE
+
+    def clearly_better(value: Any, baseline: Any) -> bool:
+        return float(value) > float(baseline) + QUALIFICATION_TOLERANCE
+
+    metric_by_checkpoint_arm = {
+        (int(row["checkpoint_index"]), str(row["arm"])): row
+        for row in metrics
+        if str(row["arm"]) != "__campaign__"
+    }
+    qualification_evidence: dict[str, Any] = {}
     qualified = ["canonical_typed_random"]
     for arm, arm_metrics in (
         ("hierarchical_typed_cem_v2", cem),
@@ -2505,21 +2737,111 @@ def _final_decision(
     ):
         if arm_metrics is None or state["arm_states"].get(arm) != "ACTIVE":
             continue
-        if any(
-            (
-                float(arm_metrics[name]) > float(random_metrics[name])
+        checkpoint_gates: list[dict[str, Any]] = []
+        for checkpoint_index in range(
+            max(1, CHECKPOINT_COUNT - 2), CHECKPOINT_COUNT
+        ):
+            local = metric_by_checkpoint_arm.get((checkpoint_index, arm))
+            random_local = metric_by_checkpoint_arm.get(
+                (checkpoint_index, "canonical_typed_random")
+            )
+            if local is None or random_local is None:
+                continue
+            reward_not_worse = all(
+                not_worse(local[name], random_local[name])
                 for name in (
-                    "valid_exact_unique_per_cpu_hour",
-                    "new_behavior_families_per_1k_evaluations",
                     "mean_pair_reward_at_matched_count",
                     "top_decile_pair_reward_at_matched_count",
                 )
             )
-        ):
+            productivity_better = any(
+                clearly_better(local[name], random_local[name])
+                for name in (
+                    "valid_exact_unique_per_cpu_hour",
+                    "new_behavior_families_per_1k_evaluations",
+                )
+            )
+            checkpoint_gates.append(
+                {
+                    "checkpoint_index": checkpoint_index,
+                    "reward_not_worse": reward_not_worse,
+                    "productivity_better": productivity_better,
+                    "pass": reward_not_worse and productivity_better,
+                }
+            )
+
+        seed_gates: dict[str, Any] = {}
+        for seed in SEEDS:
+            arm_rows = [
+                row
+                for row in ledger
+                if str(row["arm"]) == arm and int(row["seed"]) == seed
+            ]
+            random_rows = [
+                row
+                for row in ledger
+                if str(row["arm"]) == "canonical_typed_random"
+                and int(row["seed"]) == seed
+            ]
+            matched_count = min(len(arm_rows), len(random_rows))
+            arm_mean, arm_top = _reward_at_equal_count(arm_rows, matched_count)
+            random_mean, random_top = _reward_at_equal_count(
+                random_rows, matched_count
+            )
+            seed_pass = bool(
+                matched_count > 0
+                and arm_mean is not None
+                and arm_top is not None
+                and random_mean is not None
+                and random_top is not None
+                and not_worse(arm_mean, random_mean)
+                and not_worse(arm_top, random_top)
+            )
+            seed_gates[str(seed)] = {
+                "matched_count": matched_count,
+                "mean_pair_reward_not_worse": (
+                    seed_pass
+                    if arm_mean is None or random_mean is None
+                    else not_worse(arm_mean, random_mean)
+                ),
+                "top_decile_pair_reward_not_worse": (
+                    seed_pass
+                    if arm_top is None or random_top is None
+                    else not_worse(arm_top, random_top)
+                ),
+                "pass": seed_pass,
+            }
+
+        duplicate_gate = (
+            float(arm_metrics["behavior_duplicate_rate"])
+            <= QUALIFICATION_DUPLICATE_RATE_MAXIMUM + QUALIFICATION_TOLERANCE
+        )
+        consecutive_gate = (
+            len(checkpoint_gates) == 2
+            and all(bool(row["pass"]) for row in checkpoint_gates)
+        )
+        cross_seed_gate = len(seed_gates) == len(SEEDS) and all(
+            bool(row["pass"]) for row in seed_gates.values()
+        )
+        arm_pass = duplicate_gate and consecutive_gate and cross_seed_gate
+        qualification_evidence[arm] = {
+            "engineering_execution_qualified": True,
+            "search_strategy_qualified": arm_pass,
+            "frozen_tolerance": QUALIFICATION_TOLERANCE,
+            "behavior_duplicate_rate_maximum": QUALIFICATION_DUPLICATE_RATE_MAXIMUM,
+            "behavior_duplicate_rate_pass": duplicate_gate,
+            "checkpoint_gates": checkpoint_gates,
+            "seed_gates": seed_gates,
+        }
+        if arm_pass:
             qualified.append(arm)
-    if archive_reduced and restore_verified:
-        qualified.append("per_run_behavior_archive")
     duplicate_rate = 1.0 - len(archive.champion_by_family) / max(1, len(ledger))
+    archive_qualified = bool(
+        archive_reduced
+        and restore_verified
+        and duplicate_rate
+        <= QUALIFICATION_DUPLICATE_RATE_MAXIMUM + QUALIFICATION_TOLERANCE
+    )
     return {
         "schema_version": 1,
         "epoch_id": EPOCH_ID,
@@ -2535,7 +2857,14 @@ def _final_decision(
         "behavior_duplicate_rate": duplicate_rate,
         "archive_duplicate_replacements": archive.duplicate_replacements,
         "arm_states": dict(state["arm_states"]),
+        "engineering_execution_qualified_arms": list(ROLLING_ARMS),
+        "search_strategy_qualification_evidence": qualification_evidence,
+        "per_run_behavior_archive_engineering_qualified": archive_qualified,
         "future_new_data_arena_qualified_arms": qualified,
+        "future_new_data_arena_qualified_components": [
+            *qualified,
+            *(["per_run_behavior_archive"] if archive_qualified else []),
+        ],
         "success_questions": {
             "cem_v2_compute_density": (
                 "YES" if cem_density else "NO_NOT_DEMONSTRATED"
@@ -2925,9 +3254,24 @@ def run_engine(
                             str(archive_row["behavior_family_id"])
                         ]
                     )
+                    policy_family_counts = state.setdefault(
+                        "policy_local_family_counts", {}
+                    ).setdefault(str(proposal["policy_key"]), {})
+                    local_family_id = str(archive_row["behavior_family_id"])
+                    local_family_count = int(
+                        policy_family_counts.get(local_family_id, 0)
+                    ) + 1
+                    policy_family_counts[local_family_id] = local_family_count
+                    proposal[
+                        "new_policy_local_behavior_family_at_completion"
+                    ] = local_family_count == 1
+                    proposal[
+                        "policy_local_family_count_at_completion"
+                    ] = local_family_count
                     policy_archive_row = {
                         **archive_row,
                         "operation": proposal["operation"],
+                        "parent_ids": list(proposal["parent_ids"]),
                     }
                     _policy_observe(
                         policy,
@@ -3395,11 +3739,12 @@ def check_engine(
         "component_qualification": (
             "HOLD_POST_AUDIT_REMEDIATION_REQUIRED"
             if post_audit_holds
-            else "UNQUALIFIED_DEVELOPMENT_COMPONENT"
+            else "HOLD_SEPARATE_FRESH_STATE_REQUALIFICATION_REQUIRED"
         ),
         "post_audit_holds": post_audit_holds,
-        "future_new_data_arena_qualified_arms": (
-            [] if post_audit_holds else decision.get("future_new_data_arena_qualified_arms", [])
+        "future_new_data_arena_qualified_arms": [],
+        "historical_diagnostic_qualification_only": decision.get(
+            "future_new_data_arena_qualified_arms", []
         ),
         "producer_source_sha": manifest.get("producer_source_sha"),
         "strict_evaluated_count": len(ledger),
