@@ -396,7 +396,7 @@
     },
     {
       "id": "real_policy_upgrade_canary",
-      "label": "Search Engine V1 capability (system canary PASS; research HOLD)",
+      "label": "Search Engine capability (V1.1 PASS; increments rejected; research HOLD)",
       "kind": "development_experiment",
       "lifecycle": "EXPERIMENTAL",
       "paths": [
@@ -413,14 +413,19 @@
         "runtime/crypto_new_data_admission_v1_20260727/final_decision.json",
         "runtime/crypto_aggtrades_system_canary_v1_20260727/run_manifest.json",
         "runtime/crypto_aggtrades_system_canary_v1_20260727/final_decision.json",
+        "runtime/crypto_search_engine_v1_1_20260727/run_manifest.json",
+        "runtime/crypto_search_engine_v1_1_20260727/final_decision.json",
         "reports/CRYPTO_SEARCH_ENGINE_V1_20260721.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_CODE_AUTHORITY_AUDIT_20260727.md",
         "reports/CRYPTO_NEW_DATA_ADMISSION_AND_PIT_UNIVERSE_V1_20260727.md",
         "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727.md",
         "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_BIAS_AUDIT_20260727.md",
+        "reports/CRYPTO_SEARCH_ENGINE_V1_1_20260727.md",
+        "reports/CRYPTO_SEARCH_ENGINE_V1_1_BIAS_AUDIT_20260727.md",
         "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md",
-        "docs/adr/0009-aggtrades-system-canary-development-diagnostic.md"
+        "docs/adr/0009-aggtrades-system-canary-development-diagnostic.md",
+        "docs/adr/0010-behavior-niched-search-engine-v1-1.md"
       ],
       "critical": true,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
@@ -428,8 +433,8 @@
       "authority": {
         "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
         "repo_ref": "experiment/crypto-search-engine-v1-20260721",
-        "verified_sha": "5a17a91732a7aca7ec53cf9e10963faf2998a649",
-        "sha256": "CF6C59BBAFC871C336635E77736F2C1E499026CC338533CC9BB0C18A606A7331"
+        "verified_sha": "17ac5de989dec464b0c4903256f3f7662eeb9778",
+        "sha256": "5113ECDF10C7F4B0BA9DA9FED746EF7F3476058A98D7567BF492B83BA339949F"
       },
       "contracts": [
         {
@@ -444,18 +449,18 @@
         {
           "id": "policy_canary_sealed_boundary",
           "type": "BOUNDARY",
-          "rule": "The Arena uses only the current Broad 39 spent-development surface with campaign-local per-run memory; Core3, sealed, report-only, challenge, recent, May-stress, forward, promotion, and cross-sprint adaptive memory remain forbidden",
+          "rule": "Search Engine campaigns use only their explicitly frozen spent-development surface with campaign-local per-run memory; the Broad and Core3 data planes remain separate, while sealed, report-only, challenge, recent, May-stress, forward, promotion, and cross-sprint adaptive memory remain forbidden",
           "severity": "HARD",
-          "enforced_by": "broad_search.search_engine_v1._load_bound_inputs and check_engine",
+          "enforced_by": "broad_search.search_engine_v1 frozen loaders, check_engine, check_canary, and check_v11",
           "bypass_forbidden": true,
           "evidence_ref": "runtime/crypto_search_engine_v1_20260721/frozen_contract.json"
         },
         {
           "id": "policy_canary_claim_scope",
           "type": "EVIDENCE",
-          "rule": "Neither the real policy-upgrade canary nor Search Engine V1 currently qualifies an arm or archive for a future Arena because the shared legacy panel context and overlapping-horizon LCB failed post-audit research authority",
+          "rule": "Neither the real policy-upgrade canary nor any Search Engine campaign qualifies an arm or archive for a future Arena; V1.1 independently rejected both behavior-niched increments on its spent system carrier",
           "severity": "HARD",
-          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md"
+          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_1_BIAS_AUDIT_20260727.md"
         },
         {
           "id": "search_engine_v1_counting_and_restore_gate",
@@ -492,15 +497,24 @@
           "enforced_by": "broad_search.search_engine_v1.check_canary",
           "bypass_forbidden": true,
           "evidence_ref": "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_BIAS_AUDIT_20260727.md"
+        },
+        {
+          "id": "search_engine_v1_1_behavior_niche_boundary",
+          "type": "EVIDENCE",
+          "rule": "The one-run 3,000-candidate V1.1 Arena passed counting, receipt replay, equal four-seed allocation, checkpoint restore, and boundary checks, but CEM V2.1 lost unit-compute density and Evolution V2.1 lost density and behavior-family yield while duplicates rose to 7.8%; both increments are rejected and no Alpha-space, future-Arena, OOS, or promotion conclusion is authorized",
+          "severity": "HARD",
+          "enforced_by": "broad_search.search_engine_v1.check_v11 and ADR 0010",
+          "bypass_forbidden": true,
+          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_1_BIAS_AUDIT_20260727.md"
         }
       ],
       "validation": {
         "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "evidence-boundary-change",
-        "evidence_ref": "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727.md",
-        "evidence_sha256": "3165870BA7065CD40391FA8BBC52AB0B26EA80ECFC5C58B552DEB2B3C23010A5",
-        "verified_at_sha": "bbb3a0a42ef2a5e38af2cb1f2025c64d35d963f4"
+        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_1_20260727.md",
+        "evidence_sha256": "87BA8BDCCB2830D848C90BF28E9F34DD1DDF5D825EA3CCD625C0A1FB664193FC",
+        "verified_at_sha": "372aad3a244f1d1a4d16a0412a72f20a9cc664ad"
       },
       "claim_badges": [
         "LEGACY 20K ENGINEERING PASS",
@@ -519,6 +533,9 @@
         "EVOLUTION REPAIR VERIFIED DISCOVERY HOLD",
         "ARCHIVE CHAMPION REPLACEMENT VERIFIED",
         "FIXED COHORT RESEARCH HOLD",
+        "3K V1.1 SYSTEM ARENA PASS",
+        "V2.1 SEARCH INCREMENTS REJECTED",
+        "NO ALPHA-SPACE CONCLUSION",
         "FUTURE ARENA ARMS NONE",
         "NO OOS OR PROMOTION"
       ],
@@ -1738,18 +1755,18 @@
       "contract": {
         "id": "future_new_data_policy_admission",
         "type": "ADMISSION",
-        "rule": "No arm or archive from the real policy-upgrade canary or Search Engine V1 is currently admitted to a future Arena; requalification requires separate authorization, a new schema-2 cache, fresh state, a frozen budget, and matched typed-random control",
+        "rule": "No arm or archive from the real policy-upgrade canary or any Search Engine campaign is admitted to a future Arena; V1.1 rejected both behavior-niched increments, and any future requalification requires separate authorization, an admitted new carrier, fresh state, a frozen budget, and matched typed-random control",
         "severity": "HARD",
         "enforced_by": "ADR 0008, data_adequacy_gate, and future Arena contract",
         "bypass_forbidden": true,
-        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md"
+        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_1_BIAS_AUDIT_20260727.md"
       },
       "validation": {
         "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "evidence-boundary-change",
-        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
-        "verified_at_sha": "029a84916d74d9ee4d4f2c6c3f273735e05dcbe9"
+        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_1_BIAS_AUDIT_20260727.md",
+        "verified_at_sha": "372aad3a244f1d1a4d16a0412a72f20a9cc664ad"
       }
     },
     {
