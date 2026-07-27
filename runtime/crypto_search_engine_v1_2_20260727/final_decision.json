@@ -1,0 +1,1379 @@
+{
+  "active_wall_seconds": 1144.7665583999915,
+  "archive_duplicate_replacements": 44,
+  "arm_counts": {
+    "canonical_typed_random": 1000,
+    "collision_controlled_evolution_v2_2": 1000
+  },
+  "balanced_batch_count": 250,
+  "balanced_batch_integrity": true,
+  "behavior_duplicate_rate": 0.04200000000000004,
+  "behavior_family_count": 1916,
+  "blocked_transition_count": 67,
+  "blocked_transition_skips": 3,
+  "cannot_conclude": [
+    "unbiased cross-sectional Alpha",
+    "fresh economic increment",
+    "OOS validity",
+    "challenge, recent, May-stress, or forward evidence",
+    "candidate, arm, or component promotion"
+  ],
+  "checkpoint_count": 2,
+  "checkpoint_restore_verified": true,
+  "engineering_execution_qualified_arms": [
+    "canonical_typed_random",
+    "collision_controlled_evolution_v2_2"
+  ],
+  "epoch_id": "CRYPTO_SEARCH_ENGINE_V1_2_COLLISION_CONTROLLED_20260727",
+  "every_candidate_uses_aggtrades": true,
+  "expected_arm_counts": {
+    "canonical_typed_random": 1000,
+    "collision_controlled_evolution_v2_2": 1000
+  },
+  "final_evolution_operator_probabilities": {
+    "COMPATIBLE_SKELETON_VARIANT_MUTATION": 0.3012500873367573,
+    "EFFECTIVE_GENE_MUTATION_1_TO_3": 0.35241581639640335,
+    "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER": 0.34633409626683936
+  },
+  "final_evolution_operator_productivity": {
+    "COMPATIBLE_SKELETON_VARIANT_MUTATION": {
+      "new_families": 114,
+      "trials": 155
+    },
+    "EFFECTIVE_GENE_MUTATION_1_TO_3": {
+      "new_families": 194,
+      "trials": 197
+    },
+    "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER": {
+      "new_families": 143,
+      "trials": 148
+    }
+  },
+  "frozen_engineering_gate": {
+    "balanced_valid_exact_unique_per_cpu_hour_not_below_random": true,
+    "behavior_duplicate_rate_at_or_below_3pct": false,
+    "mean_pair_reward_not_below_random": true,
+    "new_behavior_families_per_cpu_hour_not_below_random": false,
+    "strict_per_raw_attempt_above_random": true,
+    "top_decile_pair_reward_not_below_random": true
+  },
+  "future_new_data_arena_qualified_arms": [],
+  "generation_attempts": 3598,
+  "next_arena_started": false,
+  "positive_matched_discoveries_by_arm": {
+    "canonical_typed_random": 0,
+    "collision_controlled_evolution_v2_2": 0
+  },
+  "producer_source_sha": "395a972a99c869f1c6acc24c6a167939b9f0857e",
+  "promotion": "FORBIDDEN",
+  "raw_attempt_limit": 15000,
+  "research_decision": "HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT",
+  "rotating_submission_integrity": true,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "search_iteration_decision": {
+    "collision_controlled_evolution_v2_2": "REJECT_INCREMENT_NOT_DEMONSTRATED"
+  },
+  "status": "PASS_SEARCH_ENGINE_V1_2_COMPLETED",
+  "strict_evaluated_count": 2000,
+  "system_comparison_vs_typed_random": {
+    "balanced_valid_exact_unique_per_cpu_hour": 1511.097119471116,
+    "balanced_valid_exact_unique_per_cpu_hour_delta": 16.26480150782504,
+    "behavior_duplicate_rate": 0.07899999999999996,
+    "behavior_duplicate_rate_delta": 0.07899999999999996,
+    "matched_evaluated_count": 1000,
+    "mean_pair_reward_at_matched_count": -3.807299839818692,
+    "mean_pair_reward_delta": 0.795376927248737,
+    "new_behavior_families_per_1k_delta": -75.0,
+    "new_behavior_families_per_1k_evaluations": 925.0,
+    "new_behavior_families_per_cpu_hour": 1397.7648355107824,
+    "new_behavior_families_per_cpu_hour_delta": -97.06748245250856,
+    "strict_per_raw_attempt": 0.6455777921239509,
+    "strict_per_raw_attempt_delta": 0.15753484434454634,
+    "top_decile_pair_reward_at_matched_count": -1.679275624654756,
+    "top_decile_pair_reward_delta": 1.2947234144557251
+  },
+  "transition_productivity": {
+    "023407EE193F42A541D5BAB581794C6FF028B37CDC04BAEC164F7EC159B5CB2F": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "033422F941951161510FCAD90C4AC61B88CA1707CCDF245D6ECEED14F975B49C": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "0416713BA25E94437C36C46E027AF73434762DB0E1D8804197C26648DF646F8E": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "0551571D6484EBFD8CD309FA233A7FCE7AC18340BF8130735613307136D74849": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "05F2AE38DC5A731B9DB3A80594A1776254ECD7CA0E47499B09697229EF306DB8": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "0632A78CA5B8AA90D8E8FD4623BFD15B5D4F866B582D066D9448AAD8F3A445B6": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "06D54E019A7C6BAB9752CF8F9F92D3EFF53F33D34AFE0F531FD41F6D2D18EAF6": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "07BD074681E6999D1186456E6CAEAE54DDAE10699FD4C4E9147557C7AA88AF52": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "08082BA88A635C9C89A0690DF88977F78F24B584C57A870C72610650E8C28133": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "0B039D81B9C30AEE6302E0BCEF393827B2546CB2D24803D73E3D72ABD3ED476E": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "0D5432ED523CCD9633BFE302F3273F7C6E0382AED4A23226994DDA022C7C3154": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "0E13272E322015477370A8BDEF1BF2E53873C46BB6FCA791DA94C736251E7DD7": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "0E7A9C65523A30F5D172E20CD19EA40962D0007A6068037D767F4D9499B0A7ED": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "0EACE975581AAF14BB4B8BF52BCDC841F93134E0DE65EB4F63A2B7EA902AA6BD": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "0F78B91B2CBB55D544E741A38ED77C4592EFCC13AB82161F6FB20E6AFB3932AB": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "0FA7305EA74C1D4B1C89583930A7D28C5A7981A822B742E9D52250456328E40A": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "0FE492815EC58F9E03498BAB5D89AE4A5E5A8220CAC6FEE4FB9A3E0F9A73CBDF": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "11968C2B1AC7EEC4FE438C4A6C948175F48AF2B9ABA5591E68EF25801AE0EA9C": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "14D2E38B2A2D6F325B20BF90FF83FC356DB677CF787FA5FD8408202F73950396": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "15B3BE6CE91DFD9BC3B7B4DBBDAC5BCE7B66861842F487B913C356D5A5E4603A": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "15EAA4CDD5805C50474ADDB5D3F03F4A6C0744256FB3E8E1A7B963DB99864D34": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "1735A322A59EAFD34E20AF9B2BB4E4AE0011AEAB8FAA1548C858097E70EB5882": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "177660E5C34A1B0AC6E8CB58A96CC7B750F72714A654AFDB8A66177F611A71AE": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "1959DB5A7D9AA89EFF14F161086675B263FBA188FD1CA6DCC1AB657C34CC3BC7": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "1A2EB31911CE38E12B78AD5165185AA537E76C114D47E7D42ABCEB5A1A08CB45": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "1AC464ABDFC072A384E802A510D329AC4228934F243F06259CA6CDC53FF7BF4D": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "1AFB89E46B71B2878C45060C8B28469D55785B411BD70263ACF3D3E60117983C": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "1BB4DDC6C790124DE0FC2BA011574C7A7FF33E1C400EC838C8F0B6898CC7A2F7": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "1C1EE621A8254A6471AA77F1CB2BB0A42E86F9D668CDC451AF7FD7A4206DB7AE": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "1D5917CC33825C536CB7ADB88C22DB6C1817BF768B60C1456342B59903644DED": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "1DDBE1506DC343DFBDEBEEDDE3297B9ED7695C528C662C854529856B78CD0E54": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "1EE6A61FDE8CC6CF5DA68A53B2700DFA60F1D4216C8C275132265E41220665A2": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "1F4A46859050DFB1F01C50A5BB27C9377AF3C15B39B4797A41CA2AF33F7A3E2F": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "2820BC93515F71551F7F19A28269A3AD15D8ED03FB549D6E4804FE60B1CAC13E": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "2AD90F733066A3CBE14CA2040F362E49513F8C6EED00F14AA6B656C2DFD322A9": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "2BBE141061F724778942122FF79338B7261A4D9B249F4501D6202E0F7BBCA270": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "2E0A7B3D44B5211BA3B2E48B37C9A64FE5C8A77A9C0ED2413B77A7A271BDAE02": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "2E624101B8B8FB93AE6BD17BCA54DA8F61CB070A3AF7207160C3C876174816ED": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "2E96DBC5FB9758330235EEA39500235A326F09E54335515B8DFA512D14B8B802": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "2F47AEFA5A2919424C94AAFE1568E0F7348C0C25C3B45EC1941CD51797D313B7": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "30DFF543FED0F9D71FED5B6C98819BAF6DBF5F8494C7157E5AD9B9D821FBA7BD": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "32C013B21BABAA57D775DF7F78E657996F05978CA470A23E3E4FCBE2CA7389A7": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "33B9AA14E651519990605224483A3AEF71A9E1618824CFDC6DCC07B4ADC92525": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "3494CD605B926F935D88A1DCA99EA31066FA7FDC78B299D35800DBE0A5609DF8": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "34A927DC2D9724FE5400F36253386036D227592F192B3C0D4F80311E91248489": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "371981B638C91CF288022AC0F1F482E7563BE8DBB84EDB81F13626B3B565D55D": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "3909A2D5263A5B050D8526B33BF9FB3B62FAE57EE855ECDC3E1C5D7CDA7459C0": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "39AE06401558C59549581DC147F12B7C3EFEB0AACC7EDED7A373331F97085DC4": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "3A8FE6909C07F6CD94265CC3BB85B255E0CB02C31CBEC6F9436B60FB675830DB": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "3AB0C43FA49AC0CF614E16849F948C5AB2AAB8B8B5653281BF2C11027E2C1C69": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "3B333A2BFBC457C308510187333437C08294459A21260281510C6938A27CD86B": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "3BE1365335B90C9957D662D70203DB42AD55CB1E50815F29EE5CF96ACF49DE0F": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "3C4309ECF91B83ABA6334E4A968E3D4AAC09AC193BDAEDA6A38BE71E05BF13DF": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "3D887552E8A3A21038D2467EA039BA3505D4CD46EAEC5FC80676313D6E28799C": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "3D9AD921F0C71B7A44CCCD2647E3A209D18E5140B42E6EDD88C7BDCBA153E67F": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "3FD188438E9CC9DA178D75647F010E3DE2BC65101DE0B7FE813C642F1F0B9D1E": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "414CD0E87613A9CA8DE4351BA20B58BDD26541565883DC55995B533C47868D82": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "422E90602C7EC988D3E1CC81374BC6E7D9F2E553571B88C45CE38ECBA06B47C1": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "42A3EDC2677A87AF45B4FFE696C91CD1683D2B8C4A000B65FF767CAD7A766CAF": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "434E9A9F33E110378CCA895FF6CA9A85F79503494FCA391BBBEB585A5143972D": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "43A7922DB6B34D51A113D2EEC10F119C6C816395B993DEB19BCA65603D676E73": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "46A453BE19DB8F3A2485B632CDF52E28398655C6FAD5E8C29D4F4DC568B75248": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "46E4C8B33B7BDCFC556F3BBB86DE4D08EB80CD6EA60277DED269D20562107D18": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "47832251B45C340153593038337435E16B8399EB8C8AF37AE976FE5631CAEAE9": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "491AB2FB22AE3DB6A77197B437BBA2CD04D44899F61AB4F43CD9302132A70CF7": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "4AC5400319BE9523D3186C88A879E03234419E1ECC05D732547CCAC5F0FEEB70": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "4B832803E2C4CAFA28ABA72216095683071C59C1CCD53E4F3391F3D1D0BA8914": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "4BFFE350CA0471E69C124616BC57914E61591836FD4C870DB320FE2837296038": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "4E1C0B214DE2E12B9E0899E704B541F2D1509D7DBE900CFC646961BB25D0BE58": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "4EC104E9C6CDA7989EF77A0F6E71E694ED51E13D7ABB232EDFD2ABC04C5A81B4": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "4EEB407237C8D4236C8DA678D3BD2A3864D42E71238966E7C3B36E235AC42E50": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "5107D76FAB67C81A51F7AB1671B6CC2D6F40CF8E660CC5646B55601343825491": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "51B543CF8242C4BE242345DE713B94B303625EE2AF6A6FB9179EF576963E2D18": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "525208CBCD88C9CB87A5535700E4F957A097A5AEBBC15A6110DC7A2A1F798E59": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "537E61509D232160DEFB9F525ADA863C8BEA4B1B0ABA0E8AF45C17AB7B09299D": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "548C1C9ADC7F283773AEFEB6CF08F58E799E9F701141EE98E4A19CF5A07403EB": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "57281EBFD730709B592E73448C906210AF9C34C76B70763B9CA41CDF744C67CF": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "57CF750838E4E999885365F6062D12ECD7CBA29171C1BAC347397B4B7A3FE826": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "598542D46B379A094B871693226F73308D910BA675C1D5F8A4C38D127BDC52E2": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "5BC26DA073A7D60043FDDA701EF7F57C9DDC1EEC0FB0469D977BE815A126F298": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "5BE0A2A6850C0D318E193DEB3AB71203F23C8BBC1C096B4031C375304F4A5E99": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "5C42A475CF86841C92989D8AC1EC22C5E7F45688F45D660A99AA8FD6971166DC": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "5F4B96AE6C99B3C89921D887BA2B865C60D0B534A992681F55E3C83AD55BCCF9": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "5FCD39FAA6DEBCD3DAF27A6B546AA78E686B82A16BC42B449394ADDF89BEDC9C": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "603A2F82DCE3A27370DEEB35C6F7B37704F42511D6346B36586AC35E772C8E66": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "60C175B067FBF77E6851C10704B11FA08E0CF728B1E4761B563EC2F60D2BF70D": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "61A42FD10D38EA560CFC309A7D045355D41DBA381D984481959A488C7BA05FF4": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "61C5AE8C065593506A2E2F85371E897E862D6B7B091D40AFCEBF220E348AD4F3": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "61D285BC2D4A9C8A65FA9949A9018CF56E8479158A9E36B741B77EDEB78F8312": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "6310A4BE52E8CDB533217718FA32D3707247D9CE21E990417709A1600F68DDBB": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "6355193623E454A34B5F2610F2E75CF99F799401FDC383E793DAC13FA6F31DE6": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "63F6762190BA7A3FACFA005EE8FD208CF7E23D8FE81A444869FD7DC8A93B4ABE": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "683A0D8D3CDD6F975EBD9FF5114A163EA763C82FABB90FF7BF26D72A88EE8AF9": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "6B3BFA929B05AF351EB72747EB2D93827022820A5F5550F2926F59B1AB8560F4": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "6B9DB53F562A3B038776618105E53E3FFD2151E9AAF26A278C91E60B798DA812": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "6E1868DAE928316B104D3A3FCD0F216B0C550CB03253E820D913B9FF106FC4F1": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "72B84635EE3ACF1B17A9618AB820EDA196BA5D120AA0ACCC4554720400C3A99B": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "72FF0FA4943B395779A478CE9420DC9D829EFE294BDCAF2454AADE2562FA4CBB": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "730CE20B6DC425659BE639DEE156B11D4D6D124E3028BD3A4EAC565A0C3F3E6D": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "73E54D5517F66A03AE2839A29985F6A6EC384EE29F8D1792007A86989FBD79E3": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "73F29E93AFAE4321C6964292C278D8B36D6A711561489AF1115DA1D4413A885C": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "748FC526797ACFE462229CDA8997C7FD371041A4AEA5D350C4E25E345E2D1BB1": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "7655714DCD7E4BE4BF9DEA342ECBF4F520C8ADE9B4A59CF5FE77D4A542503F5E": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "76AE9BF2AE1426C8F1238FB6C39D182B10D58E9AB521F229E6A43D01511F83B2": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "779E6A329FB80B309A77BF0724B3951BCC90331FF2764BBB1C4196984A14662D": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "783928F96DDC70C0BB40F0596DADAE2CA464E7CE376341162A682C04256C39B5": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "79E8BAF46FC68F769C79D003E7739DDE62D8ECD477695E6F81A680AFDE63E726": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "7A6526ABFC8BA74E4FB886F98B8C00A7EC8607D72E0F0CC661BE144A5979220D": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "7AD4D263F3B30038EDA89A3DD65F3189F3BA174B62A004EF43326DFB236D507F": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "7B1E3079711DC56B6589F471E8B4DE8312CBEC40224F1F31EC1D008C1DE8D34F": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "7C0899EDC949AB67825571D09463CA1A0ED816140EB662A41582A267F3C4DF34": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "7D5878DABCD7DFD1885A5D9CB24380819B78DEDEACA06A4A090B4B430BBC485D": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "7DBB43F24324D0B4883B471253F61DEF9FE8D983EBADE123F4058E40282E2C3F": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "7DCA5EB742B9035BB14F16B2F06C87F4E04E5D45AE9E779465193A6593290C12": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "7E33723355287053144042A51C7450541BFC0D03E1991374A41F3AA2680CE923": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "7E37346C0C43648B28566652CF9B4D9928CBF1EBF7DCA9F9F50D1C85E3C74945": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "7FE1D3DB6EEC77DBB08827D8339AE250215D03A4EF576294D373BA9A55887E7D": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "7FF86D2C587506D926434BC54A3A4A0FF3EF4F01E59C78CA6DD1AD9E6E5B0677": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "8050126C8D7E21526E6B2E02DD7B7A57F8E0BD08499A9FAED7FBDA91FF671B16": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "81604B51934BCF5ADCD8AA669EFE380C58F17D6AE5DC68C709B1380CBEAD0AFD": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "818EC24DB963E8C8FEEBD490D2EB439D72BA64D8F42B97EDCEE1AD799BB52346": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "82FD5F1315328D14EDB1FDAF0334BF188E78FBCD08E70306807DEE294237A84B": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "837314278B3EE1ED10112210ED06620F35D7D9B302BE607D944A19B49D7F2946": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "8454255567FF57D6EC58C480EA163C816AF346DB0D69E7881CAB9E1BC1EB7355": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "8550C4A2104D58789B1A74E62C47F5246EAE25D465CD1D058FA4FF35AA4B91B4": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "87F212AF9FADDFC2E6925D537B65C440AACDFEEFC5CB8A8B267E103A0E750AFA": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "8A7EA5D5ED9EAB189F5246AE6E7ECF3D1788F9CD114EC6CA0C39904946E1B7B3": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "8C0FE76B35B96199B5F583621DEB3270CED6984E573440E5BECB6E1C93EC43A5": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "8E564540E4869F95DB97454A130FF7958FA3383A6CC53D6755524BC40EDB9746": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "8E869E6B04C0BB313622F2E597F57C7A45AF1F4524A65E17B3625AAB26F195FC": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "9088C438687C32BE627E45D4B7F136F7DEDA4F4669EA22ED2393845B398919FC": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "91B3778636AD60F3404A3A2525F46E6A967FB8A1D76EE5FAD6462F22FB28585D": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "938BE72720EAADDC5547A01D02751B16A924513AF3241E452C7E37F08099AB2B": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "93D15C204B4BCCF6CD8040BEF5A0B0CC7D88A01A5F3CFCB644569DE9EA55A304": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "94862E61C64305D7B07E6687A87215832FF93628E3A7C9E181C8350085946048": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "9890F28F23FDE5401348CF2A5EF5FAD3F4584606F30169EC689B88BA08173045": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "9999EC0F7D08408CB99D3FA10522AAE5D3D7FD08769CDFA4A15DF2D430E89A10": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "9AE07E4D794A5C5FA70FB29AE0278999C2C416C41D77227FE1B534A08550BBA4": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "9B4EAE93826200D15B755EE44F77A5DFFA98896EA2B0401E08CFB4A439ACF480": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "9BDBC0A97AC589EA6BA9AF5729594EE9ACCF33145D5C8FA43DBEC163810F72E4": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "9C1CDE868A352D5816E369DC972AF1EDBB1E792F779A701D798A5D03F8A44CEE": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "9D3D02E89C32C85F54E36B3AD2BE514FDDBAE051078B5EBADE9562714B575CB2": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "9DCD311C078A5EBBCFDD4ECCD12B48FA0ACBF4B97ABE95C60D38114CCAC03F3C": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "9EB443BB7BE952D639BC9BB402E592BEFB417A74E32421EBA1F188C12C474ABE": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "9F7AC61407D4D6DC71731AD4AA1E618E7CAC3E49DF22366C79B234683E66C4AD": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "9FD10D7A7D60E2061B6DCFD1C0390947D4D3D36FDE1960923C7F3654712DBDAD": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "9FF6C5A821201E7CFB9119E04231946032D6BC5A7E42A8196B47F5193ED25CEB": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "A09FE709829B10C0470C6A1411E9ED6EAD918E020DFFC75813DFCCFE62455601": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "A0D8572A3A55B4B859C69CBCD8F03C7A40B816D346617C3A5859901C7B1A10D1": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "A4C9FCF7AF75EC27F91A5608F25343C29667B0D203DB4106CF04F0AFADD1D632": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "A4EDE8F018CFCE967B224825FE9EE71B138A6CBE40A08351264EEBCA7E3E80AF": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "A64E010C277EDEA2C05175F9059F970236AB2DD0576EBF4B9962A91ABEE2B57C": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "A6D2602B6AD65EDE8F958249665EC9FA94DD178654406F05DF01836AB4CB68AC": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "A78C4A2C811058579E2C0DDA0D106E4A737B8A94BB6FD93F5580959844B75A12": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "A875A7CC14AE28EBC99F70416906A3DE88CE76408519FD80621D2543B8C8ED40": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "A8B16C769B080BC0C2BEB6FA2AEF63D7E1738C9532238F5ED5C9E7C1F8C45E74": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "AA145FF0AEE5CB1C3E5B913624F7C5847E56BA4C42287CB76A21509E79270D99": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "AAF4D5DE6672593DEB2FDE812C704008586D1D316CB135626859D76626E0D479": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "AB271166F09C34735C0CEA4E73B1219FDC3579F058DF42D199E20E19AC39AA61": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "ACBD70867F062AB7DEF3F1AA08E71854B7B6FE758E071904AE0B86DEAEBEA5DE": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "AD1B0F0966C433DD471135FDE4895E2593BD8202304A869769921D0EE42F1D9B": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "AD6A38678FB5D99B51B09E706421A1C49196696E96B5BEDED7029586F13A893B": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "AD76C9E735AD39A30A73148A7E43FEE79B726596AE9EB351EA9519BF06A1811C": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "AFC1BDE454CEE1D38A4F9A204A63763D05A6F9D9BA54A06E91708A5C0A09936A": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B0180FAD006E12249E7EDE5E40C5000F097D18BA57F2EDDB93899F2E540E2B8B": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B06E1A8CE9C662CAD90893FD5A6F3344A0D07EA6B00D9FB54980C71FEB55F86A": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B2884556BBE8352B378224E54417C11E51E3A3FB1AF377CF82CD9B01B1B62BDB": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B5470DFDFFE3A0DF0BB3B13B8EB588636250C46F749B2D08E6A2876342D3E1A0": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B5D2FFB88C03588BE510C86313DCD5AF9348054AC09246172C1BB92CF8C952D1": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B608162301313426DE0DF14A041CEB84C1F9E2EB011DA35740F8EA407BD2ACE0": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B6320C9D996E0AA1B0B6E743ADDA8EEC6F42143B68A9FF5EF28800200BA533EA": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B69C9B7325C2586123EFA8CE491DE85263D0A3F1BC72565A39D13293E767281E": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B90BC09559FDD9E316023A9B591AD2069F2F677709DC26590FA64CAF0B22A913": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B9721DA9D4DD30CE0FA471EC87E8F2EF5B68B81E98CDB47BB317615A7B0D87EA": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "B999FC8C08C4EB645DE33130A3F25CD5B92321BAA011BFE1D7EA9CECE824C511": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B9A4BDD462B3E8A0607F1BB559CC8DDE315149E2E90353BFFB29ECA3F5278BB1": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B9B794F83273187F2626F3A7A2443587892B29761FD9BFFE8DC021C89FA796B2": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "B9BCDEB9CC186FC0D85BB4893FDA7137A2602373A7A35240004FAD07AFB19182": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "BA3A584C367247502111FE3C724C0829EE3168F8D45742C09E480BEE04444D5A": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "BA789683EDA2935F1912E7301ACDD29442B787A15975F5E8EBB4C8F22179841C": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "BC8084643CF5F205621E5BB8CE143E98A4FA2591417DD346CA821C3B50BC878A": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "BD0AB7EB863D4DAF0774707DE350E679CC5C536052A693295E7AD72E5B6416FC": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "BE2DF9ABB3DA2152957D6896D9E94B9C83B7A7E6C3403BB046F0BAA63D9ACA55": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "BE7DD978F5633C37753CCE9ECE8FDDB85A177FBF8AB00310C6E286B3374FA344": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "BEBB80DD827D20D6205FB56004F7E7C23F8CAC7ED59C27CC92F8221511BB0243": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "BF2280A59E18AFAE4F5C7E1CBBC16D1AF29FA85DC44FF91F5660C2DDA9E982B0": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "BFA3672CBF277F1D48DDE671825C709D68E6067BBBC28AA0FCFDCE96B8815CB0": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "C089439CC832FFAE7F1F67A3E9A4018DCE175BCFE5FDF8129BFA8BF14D3ED01C": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "C0DD768C83937AC38C6549707476DF46398F3659C52E13017C021E71692C9E99": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "C323423A0C8E1D3B18D786712EF4057D04C3A6822ABDD4EAB7F349C8793B7D41": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "C3A2101D15A67854052E2AE2547B8F79DE2FE3BF5129C1ABD7C5CD385315F536": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "C4FFEBFEFB43FA477457DEB5F5FD60AF2E90CA8F8AAC0738C6E0DAD561CA2FBE": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "C52DA136C51D96D02064DAA6FA77BA21D9D94A25AA5AF912028B213AEFEFE222": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "C59FA299A8C303DD29298782145BE378855619030CA7BAEB9326C55C01EC3403": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "C71D8AD8021DAAEA16FB8B22C6CBC40A5F5B8FFA885FFB5336D3B030F7CA5AEB": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "C872D7D30C7B63F9214BCEDC133C43E78B51528F1013946913655013D24FB02E": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "C8A0B6FA80ADE0364BBE9AC0BE63E54F0CFD36DCC1116A10CC50D7C10DD2540F": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "CAFCF4D50C8E4A982C2E9DAC2E1AEC277C41EA56D6645881B9FD95566ECCB887": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "CB138C5ED5641D64DDAF7C575AAAF0FADB80B2437695FBC5F331647397DEDC4E": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "CB28BA6324B4B32A32AB800FC91D01F755B30DD21F1AA2ADC62A2086CEF633E3": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "CB324CD751EE3593E2019C312AC3BCBB608ABED217D47F1B0FB8B591B3171C54": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "CB6C93EA6080FE1D6F793A1995C329BE3209C04CF1F61E1B7978728463D490F3": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "CBDC8FFE4A46C407AE5724BC27C4B6E81A95F5F6106B917214F97BD441359C64": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "CC97617E62BF1FB67BCE1307B1F02A87C5D4B587CEEE05FA3A0DC3A0ABB22AF7": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "CCB0675EF4C147C8683AE234AD700363EB3B0EF05D9E5B3021C63F687398A82A": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "CE7C06BD9B2080CC34C269FFD27826A254B985A7DC8A35E8CE02F79EEA222BD8": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "CF43840CD76781CDCD38EB85B61FF12A90D57D8958D21D964E8A6B5F3F4A7754": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "D01397697DBC578B3FA420D60C3EFD2F9FFE2DF5A29410A92B7CE02949E46CAF": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "D06408CBD61DC99191F95E6EEB9896F51B4EB2157514E4DC114653D9BC365132": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "D113C395D6F5857C37FC880BA6D43FAB554E375A17426C71BD8065026BEBD5D9": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "D38AFD2B5E7C552F1ACB28D5A9874B4ABA6BF6C5356281BC051DE05896EFD78C": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "D41FBB0A1FA2360ECDD54FA8A388B418F9F8DDAFC2D2CE951C8159A953F9203C": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "D52D984BA53379F3AFE30D250BF1450CA17B195A6558D09E778689201AE50D28": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "D68AB72FE8239E0DB2E1689E67E4372616D9314EF2E3D0C3933E8BB69E6E60C9": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "D826E768F57B8F8817B7C69741DB22BAFEDE361672E75F2CC37F56443297F3B7": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "DB8D2E2B50263A32AF61DD279BEAD0FBBC0898C0BA7D4579489D43D5B622C52D": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "DC1E9A7360E0B7E4C96A54EC5BAEE71C6CA73A3C43BCD99B217159918B885767": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "DCD5774BAA161FDC6332A89B0CF19B9865FF8E15F29633C436AA9A6BF48A090D": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "DD9B92B07CB7106043860360F03054C64C6483088B27297D33FE9BB235701005": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "DE94396D10925F1AAAB962E16B5315A83800F33E4AC0E410E323BF3F523C936C": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "DF0F96E45473B756905257367C6064E375D063302730CBB4192CB2E6559ED863": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "DF28581475F955965BE78358D9999AE223858BAC07DACB14EDDBE24008C4C75B": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "DF928C1C7D68D4BAF455F282B83B1B6A5226114F94339D71C042A24AE79F6781": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "E1ED2BDA737508FDA0D8BFB9F8FAC8A5DD5CFCC44E08AA878ED205BEC23D16C8": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "E2CA0C063FE8AB705B15176ECF3C1E71524080678B00272D2ED6D55873EE15A3": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "E3D12C77E1FD599BAC80DBF0BD585E08FA94DE8C488366E3A825D45740146DE9": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "E6D5F6221B45253B6BF5D381672ECAD803CF28D6FD26AF2B36BB0C487EEC1022": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "E754F071EE19BC4CE272F1CA0E5925DFDCE5E0434454ED2AC1D6FD814108487B": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "EC08FABFEB9EC9B4116E51C8AFF486054CAE00832B3D18F9C5382A9701A0FA70": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "EE2161CE1FE7B2939430F8A118405847D988858BFA33AE48A72D209EDB5263D6": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "EE988B86D529C081451B26B63B07CC6855986B9BB816EE255A3FCB22F9A67D87": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "EF3AE7AA710524F83515583D6D07E53DB75DE137586B8E04FF8D064E40CD460B": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "EF5CD3057573428AA5E193AF0CF6D49C06CFF9D48F7EDAEF8CC063278342DA91": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "F0361673ABFC2E2452E80389E8B7710B0B5CDE5ABD9D839D078F4191569FA43C": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "F193C3A792297C1F96DF2ABF19F2D55DC07217574DB2E31FD1DDD53781F048A8": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "F3757105358A46379B792C1CACAA74ACA886C7659461F5A0FBD63A1564A4A193": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "F38968395DFB9BB963043DE84E2358084816366C2F7242136D7E7DF253E42A82": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "F6120018C0D4FD03D32A2981B88A3CE06404B6E0FD022D807A6D5E07389008EF": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "F757D642049BB20109F41E098377AAC3C48708E6A67A93677D229D1F082D489B": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "F7A3B0BD9AAEC98EE0DBA196C52683CE4A049D00B26C8CCB00C85E0CE23E80DD": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "F87851E62FB144D69595F45F1D810699727D6E9649921A6F3E72F297D85CDBED": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "F88324039AB3F4216FAA3CA7D307A462AF3D8B26119E6CF249C71618AA1F921D": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "F898F5AF8490BA46AB5A14497A13BB0A4D9FC4F80ED94401A3828F2E8CCA248B": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "F99F7ED01B7E486EA42A9E31B21CB7CAD9178DA1ADE57C920088B3476C6636EF": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "FA69C5C9E5B292D43B3CC94B3EB8684E373533BA6149B929B2C6638DF54DDC13": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "FAF249CABD841A8652126256F4C7F4C318289E5CFC99DAC3B623E8F7934E0586": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "FAF452540D08F464FA0C0B20DA4D71F0B28E2766D4DDB92F0D1D909BBF9B4F18": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "FAFF5FD8866E560A9B657EE26CB1CF1FE0D80AC8821942CFE9C985C648711038": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "FB98A133FCD35F497EE140AEB8A2D7CFFD4A4562D3E3F96A73FEA3EA0905F868": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "FCC12566197896FD974B061E42F238E6182EC7356AB88E2CC37BB61777C4E3B3": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "FDE2615DB8CFD12CAD72E81A0811679B9396FEEA61C4FD6BF55782B2CCBF69B0": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "FDEDBAE896C921B63D23005B10CB25702C6B277798B028E142207D0C709700C1": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "FE0CE217C4F3D80F24A1E27A631648FCB229A7B24E70AD37A8ABC5F5852F47FE": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    },
+    "FE576D2000D990F74D79C0762B0F265C677DB8A82E7D90102ADE919060CEB89C": {
+      "collisions": 1,
+      "new_families": 0,
+      "trials": 1
+    },
+    "FEC850E2DDA0E4630B6F897AFA12DAC600839984DB6060D6DCC68F110CF00A9E": {
+      "collisions": 0,
+      "new_families": 1,
+      "trials": 1
+    }
+  },
+  "verified_evolution_operations": {
+    "COMPATIBLE_SKELETON_VARIANT_MUTATION": 255,
+    "EFFECTIVE_GENE_MUTATION_1_TO_3": 405,
+    "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER": 212
+  },
+  "wall_time_limit_seconds": 14400
+}
