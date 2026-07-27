@@ -640,6 +640,7 @@ def _validate_v12_config(config: Mapping[str, Any]) -> None:
         or int(search["balanced_micro_batch_size"])
         != V12_BALANCED_BATCH_SIZE
         or search.get("one_inflight_candidate_per_seed_lane") is not True
+        or search.get("rotating_seed_lane_submission_order") is not True
         or search.get("fresh_policy_and_archive_state") is not True
         or search.get("every_candidate_requires_aggtrades_input") is not True
     ):
@@ -1367,6 +1368,7 @@ def _v12_frozen_contract(
             "existing_lane_scheduler_balanced": True,
             "balanced_micro_batch_size": V12_BALANCED_BATCH_SIZE,
             "one_inflight_candidate_per_seed_lane": True,
+            "rotating_seed_lane_submission_order": True,
             "matched_batch_cpu_authority": True,
             "campaign_local_transition_collision_control": True,
             "transition_key": [
@@ -5666,6 +5668,10 @@ def run_engine(
                 if is_v12 and len(proposals) != V12_BALANCED_BATCH_SIZE:
                     raise _EngineBudgetExhausted(
                         "V12_BALANCED_BATCH_UNDERFILLED"
+                    )
+                if is_v12:
+                    state["scheduler_cursor"] = (
+                        int(state["scheduler_cursor"]) + 1
                     )
                 assert executor is not None
                 future_rows = [

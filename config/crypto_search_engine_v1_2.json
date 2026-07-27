@@ -44,6 +44,7 @@
     "workers_12_forbidden": true,
     "balanced_micro_batch_size": 8,
     "one_inflight_candidate_per_seed_lane": true,
+    "rotating_seed_lane_submission_order": true,
     "fresh_policy_and_archive_state": true,
     "every_candidate_requires_aggtrades_input": true
   },

@@ -72,6 +72,7 @@ def test_v12_profile_freezes_balanced_fresh_state_collision_control() -> None:
     assert config["search"]["strict_evaluated_target"] == 2_000
     assert config["search"]["balanced_micro_batch_size"] == 8
     assert config["search"]["one_inflight_candidate_per_seed_lane"] is True
+    assert config["search"]["rotating_seed_lane_submission_order"] is True
     assert config["boundaries"]["future_arm_qualification"] is False
     policies = _initial_policies(_registry(), arms=V12_ARMS)
     evolution = [

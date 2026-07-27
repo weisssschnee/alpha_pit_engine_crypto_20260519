@@ -803,10 +803,12 @@ def test_v12_balanced_lane_choice_finishes_all_seed_lanes_together() -> None:
                 continue
             proposals.append({"policy_key": lane})
         batches.append([row["policy_key"] for row in proposals])
+        cursor += 1
         for lane in batches[-1]:
             completed[lane] += 1
     assert len(batches) == 2
     assert all(set(batch) == set(lanes) for batch in batches)
+    assert batches[0] != batches[1]
     assert completed == targets
 
 
