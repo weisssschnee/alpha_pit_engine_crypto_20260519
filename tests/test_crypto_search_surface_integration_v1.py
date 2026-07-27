@@ -20,11 +20,25 @@ from alphafactory_crypto.broad_search.expression import (
 from alphafactory_crypto.broad_search.panel18m import RawPanelStore
 from alphafactory_crypto.data_admission_v1 import (
     AGGTRADES_SEARCH_FIELDS,
+    _compact_compatible_surfaces,
     _oi_mark_surface,
     aggregate_aggtrades_search_hourly,
     contracts_from_core3_tokens,
     contracts_from_oi_mark_schema,
 )
+
+
+def test_surface_decision_summary_does_not_duplicate_role_maps() -> None:
+    contracts = (
+        FieldContract("close_to_open_bps", "BPS", "bps", 1, "TEST"),
+        FieldContract("notional", "NOTIONAL", "quote_asset", 1, "TEST"),
+    )
+    surface = field_role_surface(contracts)
+    summary = _compact_compatible_surfaces({"TEST": surface})["TEST"]
+    assert summary["declared_field_count"] == 2
+    assert summary["reachable_field_count"] == 2
+    assert "roles" not in summary
+    assert "declared_fields" not in summary
 
 
 def test_partial_data_plane_selects_only_compatible_skeletons() -> None:

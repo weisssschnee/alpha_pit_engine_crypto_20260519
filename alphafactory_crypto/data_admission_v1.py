@@ -2439,6 +2439,27 @@ def _active_surface_rows(
     return rows, proofs, surface
 
 
+def _compact_compatible_surfaces(
+    surfaces: dict[str, dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    """Keep decisions compact; detailed role maps live in carrier contracts."""
+    return {
+        surface_id: {
+            "declared_field_count": len(surface["declared_fields"]),
+            "reachable_field_count": len(surface["reachable_fields"]),
+            "compatible_skeleton_count": len(
+                surface["compatible_skeleton_ids"]
+            ),
+            "compatible_mechanism_families": surface[
+                "compatible_mechanism_families"
+            ],
+            "full_grammar_supported": surface["full_grammar_supported"],
+            "all_fields_reachable": surface["all_fields_reachable"],
+        }
+        for surface_id, surface in sorted(surfaces.items())
+    }
+
+
 def build_search_surface_integration(
     *,
     repo_root: Path,
@@ -2729,7 +2750,9 @@ def build_search_surface_integration(
             active["matched_control_constructible"].sum()
         ),
         "data_planes": summary_rows,
-        "compatible_surfaces": surfaces,
+        # Detailed role/field mappings have one fact source in
+        # carrier_contracts.json.  The decision stays intentionally compact.
+        "compatible_surfaces": _compact_compatible_surfaces(surfaces),
         "candidate_support_identity_sha256": support_contract["identity_sha256"],
         "contexts_merged": False,
         "joint_120_channel_panel_created": False,
