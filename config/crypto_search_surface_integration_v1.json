@@ -66,7 +66,10 @@
       "cache_root": ".cache/crypto_search_surface_integration_v1/core3_81"
     },
     "AGGTRADES_TOP200_DELIVERED": {
-      "cache_root": ".cache/crypto_aggtrades_system_canary_v1"
+      "cache_root": ".cache/crypto_search_surface_integration_v1/aggtrades_top200_full44",
+      "start": "2024-01-01T00:00:00Z",
+      "end_exclusive": "2024-07-01T00:00:00Z",
+      "verify_full_tar_sha256": true
     },
     "OI_MARK_RANKS51_200_DELIVERED": {
       "cache_root": ".cache/crypto_search_surface_integration_v1/oi_mark_ranks51_200"

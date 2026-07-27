@@ -1199,8 +1199,9 @@ def build_aggtrades_system_canary_cache(
     end_exclusive: str,
     producer_source_sha: str,
     verify_tar_sha256: bool = True,
+    mode: str = "system_canary",
 ) -> dict[str, Any]:
-    """Build the smallest RawPanelStore bridge for a fixed-cohort system canary.
+    """Build a fixed-cohort aggTrades RawPanelStore with frozen semantics.
 
     The bridge keeps the existing target, mapping, compiler, evaluator, and
     matched-control path. It aggregates only the frozen development window,
@@ -1210,6 +1211,20 @@ def build_aggtrades_system_canary_cache(
 
     from alphafactory_crypto.broad_search.panel18m import RawPanelStore
 
+    if mode == "system_canary":
+        agg_field_ids = AGGTRADES_SYSTEM_CANARY_FIELDS
+        source_columns = _AGGTRADES_CANARY_SOURCE_COLUMNS
+        aggregate_hourly = _aggregate_aggtrades_hourly
+        cache_role = "AGGTRADES_FIXED_COHORT_SYSTEM_CANARY_RAW_PANEL_STORE"
+        surface_id = "CRYPTO_AGGTRADES_FIXED_COHORT_SYSTEM_CANARY_V1"
+    elif mode == "search_surface":
+        agg_field_ids = AGGTRADES_SEARCH_FIELDS
+        source_columns = _AGGTRADES_SEARCH_SOURCE_COLUMNS
+        aggregate_hourly = aggregate_aggtrades_search_hourly
+        cache_role = "AGGTRADES_TOP200_SEARCH_SURFACE_RAW_PANEL_STORE"
+        surface_id = "CRYPTO_AGGTRADES_TOP200_SEARCH_SURFACE_V1"
+    else:
+        raise ValueError(f"unsupported aggTrades cache mode: {mode}")
     source_cache_root = source_cache_root.resolve()
     output_cache_root = output_cache_root.resolve()
     top100_tar = top100_tar.resolve()
@@ -1224,6 +1239,12 @@ def build_aggtrades_system_canary_cache(
         if existing.get("producer_source_sha") != producer_source_sha:
             raise ValueError(
                 "existing canary cache was built by a different producer source"
+            )
+        if existing.get("cache_role") != cache_role or not set(
+            agg_field_ids
+        ).issubset(set(existing.get("field_ids", []))):
+            raise ValueError(
+                "existing aggTrades cache does not match the requested mode"
             )
         return existing
     for path in (top100_tar, ranks101_200_tar):
@@ -1292,7 +1313,7 @@ def build_aggtrades_system_canary_cache(
         if missing_broad:
             raise ValueError(f"source cache lacks Broad fields: {missing_broad}")
         all_fields = tuple(
-            dict.fromkeys((*broad_fields, *AGGTRADES_SYSTEM_CANARY_FIELDS))
+            dict.fromkeys((*broad_fields, *agg_field_ids))
         )
         output_cache_root.parent.mkdir(parents=True, exist_ok=True)
         temporary = output_cache_root.with_name(
@@ -1333,9 +1354,9 @@ def build_aggtrades_system_canary_cache(
             if handle is None:
                 raise ValueError(f"cannot read aggTrades member: {member.name}")
             frame = pq.ParquetFile(handle).read(
-                columns=list(_AGGTRADES_CANARY_SOURCE_COLUMNS)
+                columns=list(source_columns)
             ).to_pandas()
-            hourly = _aggregate_aggtrades_hourly(frame)
+            hourly = aggregate_hourly(frame)
             common = hourly.index.intersection(output_time_index)
             if common.empty:
                 continue
@@ -1344,7 +1365,7 @@ def build_aggtrades_system_canary_cache(
             selected = hourly.loc[common]
             valid = selected["complete_and_pit_safe"].to_numpy(dtype=bool)
             observed_minutes[row, positions] = valid
-            for field_id in AGGTRADES_SYSTEM_CANARY_FIELDS:
+            for field_id in agg_field_ids:
                 values = selected[field_id].to_numpy(dtype=np.float32)
                 field_matrices[field_id][row, positions] = np.where(
                     valid, values, np.nan
@@ -1427,7 +1448,7 @@ def build_aggtrades_system_canary_cache(
         _write_json(temporary / "source_file_manifest.json", source_manifest)
         identity_payload = {
             "schema_version": 1,
-            "cache_role": "AGGTRADES_FIXED_COHORT_SYSTEM_CANARY_RAW_PANEL_STORE",
+            "cache_role": cache_role,
             "producer_source_sha": producer_source_sha,
             "source_manifest": source_manifest,
             "start_utc": start_ts.isoformat(),
@@ -1445,7 +1466,7 @@ def build_aggtrades_system_canary_cache(
         }
         metadata = {
             "schema_version": 2,
-            "surface_id": "CRYPTO_AGGTRADES_FIXED_COHORT_SYSTEM_CANARY_V1",
+            "surface_id": surface_id,
             "cache_role": identity_payload["cache_role"],
             "identity_sha256": _payload_sha(identity_payload),
             "producer_source_sha": producer_source_sha,
@@ -1484,6 +1505,17 @@ def build_aggtrades_system_canary_cache(
     finally:
         for archive in archives:
             archive.close()
+
+
+def build_aggtrades_search_surface_cache(
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Materialize all delivered aggTrades fields through the existing bridge."""
+
+    return build_aggtrades_system_canary_cache(
+        **kwargs,
+        mode="search_surface",
+    )
 
 
 def _oi_symbol_dates(root: Path) -> set[tuple[str, pd.Timestamp]]:
@@ -3198,6 +3230,20 @@ def build_search_surface_integration(
         repo_root,
         carrier_config["OI_MARK_RANKS51_200_DELIVERED"]["cache_root"],
     )
+    agg_carrier_config = carrier_config["AGGTRADES_TOP200_DELIVERED"]
+    agg_metadata = build_aggtrades_search_surface_cache(
+        source_cache_root=broad_cache_root,
+        top100_tar=inputs["aggtrades_top100_tar"],
+        ranks101_200_tar=inputs["aggtrades_ranks101_200_tar"],
+        output_cache_root=agg_cache_root,
+        broad_field_ids=[contract.field_id for contract in broad_contracts],
+        start=str(agg_carrier_config["start"]),
+        end_exclusive=str(agg_carrier_config["end_exclusive"]),
+        producer_source_sha=source_binding_sha256,
+        verify_tar_sha256=bool(
+            agg_carrier_config["verify_full_tar_sha256"]
+        ),
+    )
     core_metadata, _ = build_core3_search_carrier(
         panel_path=inputs["core3_panel"],
         token_contract_path=inputs["core3_token_contract"],
@@ -3218,13 +3264,8 @@ def build_search_surface_integration(
     oi_declared_contracts = _oi_declared_contracts(
         inputs["oi_mark_ranks51_200_root"]
     )
-    all_agg_contracts = contracts_from_aggtrades_search_fields()
-    agg_contracts = tuple(
-        contract
-        for contract in all_agg_contracts
-        if contract.field_id in set(AGGTRADES_SYSTEM_CANARY_FIELDS)
-    )
-    if len(agg_contracts) != len(AGGTRADES_SYSTEM_CANARY_FIELDS):
+    agg_contracts = contracts_from_aggtrades_search_fields()
+    if len(agg_contracts) != len(AGGTRADES_SEARCH_FIELDS):
         raise ValueError("aggTrades runtime carrier contract changed")
 
     from alphafactory_crypto.broad_search.runner18m import (
@@ -3339,35 +3380,6 @@ def build_search_surface_integration(
         proofs.extend(local_proofs)
         surfaces[surface_id] = local_surface
 
-    active_agg_ids = {contract.field_id for contract in agg_contracts}
-    for contract in all_agg_contracts:
-        if contract.field_id in active_agg_ids:
-            continue
-        rows.append(
-            {
-                "surface_id": "AGGTRADES_TOP200_DELIVERED",
-                "field_id": contract.field_id,
-                "source_field_id": contract.field_id,
-                "value_type": contract.value_type,
-                "unit": contract.unit,
-                "observable_lag_hours": int(contract.observable_lag_hours),
-                "pit_authority": contract.pit_authority,
-                "materialized": False,
-                "sample_finite_ratio": None,
-                "field_contract_registered": False,
-                "typed_role_reachable": False,
-                "typed_roles_json": "[]",
-                "compatible_skeleton_count": 0,
-                "compiler_valid": False,
-                "matched_control_constructible": False,
-                "deterministic_replay": False,
-                "runtime_materialized": False,
-                "candidate_support_coordinates": 0,
-                "candidate_id": None,
-                "research_admitted": False,
-                "block_reason": "NOT_IN_TOP200_RAW_PANEL_STORE",
-            }
-        )
     active_oi_ids = {contract.field_id for contract in oi_active_contracts}
     for contract in oi_declared_contracts:
         if contract.field_id in active_oi_ids:
@@ -3394,7 +3406,9 @@ def build_search_surface_integration(
                 "candidate_support_coordinates": 0,
                 "candidate_id": None,
                 "research_admitted": False,
-                "block_reason": "ZERO_FINITE_SUPPORT_IN_DELIVERED_ROOT",
+                "block_reason": (
+                    "SOURCE_UNAVAILABLE_ZERO_FINITE_SUPPORT_IN_DELIVERED_ROOT"
+                ),
             }
         )
 
@@ -3488,6 +3502,7 @@ def build_search_surface_integration(
         "aggtrades_carrier": carrier_manifest["carriers"][
             "AGGTRADES_TOP200_DELIVERED"
         ],
+        "aggtrades_carrier_identity_sha256": agg_metadata["identity_sha256"],
         "oi_mark": oi_evidence,
         "oi_mark_carrier_identity_sha256": oi_metadata["identity_sha256"],
         "runner_loader_evidence": loader_evidence,
@@ -3585,6 +3600,12 @@ def build_search_surface_integration(
         "sealed_reads": 0,
         "research_admission": "HOLD",
         "research_holds_preserved": admission.get("holds", []),
+        "source_unavailable_engineering_field_count": len(
+            oi_evidence["zero_support_fields"]
+        ),
+        "source_unavailable_field_authority": (
+            "source_evidence.json#/oi_mark/zero_support_fields"
+        ),
         "future_arena_qualified": False,
         "liquidation_status": "QUARANTINED",
         "oi_mark_top50_status": "RAW_ONLY_INVENTORY",
@@ -3599,6 +3620,8 @@ def build_search_surface_integration(
             f"- Runtime materialized/compiler/matched fields: `{final_decision['runtime_materialized_active_fields']}` / `{final_decision['compiler_reachable_active_fields']}` / `{final_decision['matched_control_active_fields']}`.",
             "- Broad39 and Core3 81 remain independent; no joint 120-channel panel was created.",
             "- Candidate support is PIT base eligibility intersected with finite values for exactly the candidate raw fields.",
+            f"- aggTrades Top200 is runtime-active at `{len(agg_contracts)}/{len(AGGTRADES_SEARCH_FIELDS)}` delivered fields.",
+            f"- OI/mark retains `{final_decision['source_unavailable_engineering_field_count']}` source-unavailable zero-support fields; they were not filled or synthesized.",
             "- No market search, pair evaluation, reward read, sealed read, Alpha claim, or promotion occurred.",
             "",
             "## Data planes",
