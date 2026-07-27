@@ -1,0 +1,116 @@
+{
+  "bdxn_materiality": {
+    "affected_date_max": "2026-02-13 00:00:00+00:00",
+    "affected_date_min": "2025-06-15 00:00:00+00:00",
+    "affected_top200_days": 76,
+    "classification": "UNRESOLVED_FAIL_CLOSED",
+    "eligible_comparison_days": 281,
+    "evidence_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_new_data_admission_v1_20260727\\bdxn_materiality_diagnostic.json",
+    "evidence_sha256": "7d0020f2c0377b54375ec2900b2811beab5fdcb6cf4d4060539b4fd8be8964a3",
+    "max_score_to_cutoff_ratio": 4.264620020531985,
+    "positive_volume_date_max": "2026-03-17 00:00:00+00:00",
+    "positive_volume_date_min": "2025-06-03 00:00:00+00:00",
+    "positive_volume_days": 288,
+    "status": "MATERIAL_TO_TOP200_BOUNDARY"
+  },
+  "complete_top_n_days": 893,
+  "contract_sha256": "EB70D29CC4D19264C0DC00CBCD0DE2241E00B923E4402BD948E8A2BE60467D68",
+  "coverage": [
+    {
+      "maximum_coverage_rate": 0.7,
+      "mean_coverage_rate": 0.6146080627099665,
+      "minimum_coverage_rate": 0.48,
+      "missing_member_days": 893,
+      "surface_id": "AGGTRADES_DELIVERED_ACTUAL"
+    },
+    {
+      "maximum_coverage_rate": 0.995,
+      "mean_coverage_rate": 0.8887905935050393,
+      "minimum_coverage_rate": 0.77,
+      "missing_member_days": 893,
+      "surface_id": "CURRENT_498_HOURLY_ACTUAL"
+    },
+    {
+      "maximum_coverage_rate": 0.44,
+      "mean_coverage_rate": 0.1472788353863382,
+      "minimum_coverage_rate": 0.0,
+      "missing_member_days": 893,
+      "surface_id": "OI_MARK_SCHEMAFIXED_51_200_ACTUAL"
+    }
+  ],
+  "coverage_semantics": "actual delivered symbol-date support; Top50 raw excluded because no materialized authorized consumer",
+  "decision": "HOLD_PIT_UNIVERSE_AND_SEARCH_CACHE",
+  "distinct_instruments_selected": 639,
+  "distinct_raw_symbols_selected": 634,
+  "holds": [
+    "UNRESOLVED_INSTRUMENT_CLASSIFICATION",
+    "DELIVERED_FEATURE_SURFACES_DO_NOT_COVER_HISTORICAL_PIT_UNIVERSE",
+    "INFERRED_MULTI_LIFECYCLE_IDENTITY_REVIEW",
+    "BDXN_MATERIAL_TO_TOP200_BOUNDARY"
+  ],
+  "inferred_multi_lifecycle_symbols": [
+    "AIAUSDT",
+    "CTKUSDT",
+    "CVXUSDT",
+    "MAVIAUSDT",
+    "SLPUSDT"
+  ],
+  "membership_days": 893,
+  "oi_top50_raw_search_consumer_status": "NOT_MATERIALIZED_OR_AUTHORIZED",
+  "oi_top50_raw_symbol_map_count": 50,
+  "pit_ledger_status": "PROVISIONAL_FAIL_CLOSED",
+  "post_join_schema2_rebuild_required": true,
+  "schema2_context_authority_built": true,
+  "schema2_hourly_intersection_cache": {
+    "active_universe_max": 199,
+    "active_universe_min": 154,
+    "array_sha256": {
+      "active_universe_size.npy": "70ce1bd470f18db1ae8e75692e65696bfa5a00b6c9b3410ba2ce7e94e8a84d89",
+      "age_percentile_active_universe.npy": "55c5e17fe0e869294dbe938c032cec35fdcdcaae0b00e400b40e6e606f191e29",
+      "history_length_hours.npy": "7a9c9dd4530ea1ad4d37e6cf344423c6128fa6a596ac430a02c711fccd112bae",
+      "listing_age_hours.npy": "8c1e27cd4316a82503c31352b463401597d8e77f1ae2e25f100cdf7096ffd995",
+      "observed.npy": "0efcee21a94f440b9acfeced0353601891279a977f8bed77cae0ae5cc8f2c36b",
+      "timestamp_ns.npy": "342ec45427caac7dba4bf4dd95136d1def75d29d5f955cf1ff23f13dec7699e5"
+    },
+    "cache_identity_sha256": "2A03AF048B4907276182A6349060AD3703AC390F3BB50E08AC68F732AD90F91A",
+    "cache_role": "SCHEMA2_CONTEXT_CURRENT498_PIT_INTERSECTION",
+    "cache_schema_version": 2,
+    "complete_historical_pit_support_rate": 0.0,
+    "context_builder": "alphafactory_crypto.broad_search.panel18m.rebuild_panel_context_fields",
+    "hours": 21432,
+    "hours_with_complete_historical_pit_support": 0,
+    "missing_historical_members_are_not_imputed": true,
+    "observed_coordinates": 3809712,
+    "post_join_context_authority": true,
+    "search_cache": false,
+    "search_reuse_authorized": false,
+    "source_file_identity_sha256": "97E313839C887CE5A0B2E526BAE62990BBEF900374EF46496C11448258721C23",
+    "source_symbols": 498,
+    "timestamp_max": "2026-06-11 23:00:00+00:00",
+    "timestamp_min": "2024-01-01 00:00:00+00:00",
+    "universe_identity_sha256": "EC86D86D41530240C61DE5123AEFD7EDF8418DF8997DD32C48454A873568D66E"
+  },
+  "search_cache_authorized": false,
+  "search_started": false,
+  "source": {
+    "active_positive_volume_daily_rows": 365004,
+    "exchange_info_sha256": "BE436FC9D8AFA0297C636F8B7A73A5E61681EE4439B5811F617D2D215DDFF320",
+    "official_symbol_prefixes_sha256": "E629197F813ADEED07A9E076A3D1BC3348143702208FAD1D1E8E4C7129533D0D",
+    "requested_symbol_months": 20863,
+    "source_daily_rows": 405230,
+    "source_download_bytes": 23237115,
+    "source_failures": 0,
+    "source_not_found_count": 7319,
+    "source_object_count": 13544,
+    "source_object_manifest_sha256": "E186DD5FCF42916E09A433D2C0408A932B814462437BC62EADBD79956CBC5725",
+    "source_snapshot_mode": "REUSED_ABORT_SAFE_SOURCE_SNAPSHOT",
+    "zero_volume_inactive_rows_excluded": 40226
+  },
+  "surface_backfill_requirement_rows": 1198,
+  "surface_missing_member_rows": 240989,
+  "universe_rows": 178600,
+  "unresolved_symbols": [
+    "BDXNUSDT"
+  ],
+  "zero_volume_semantics": "quote_volume <= 0 is inactive and excluded before lifecycle/ranking"
+}

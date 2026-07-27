@@ -406,10 +406,14 @@
         "alphafactory_crypto/broad_search/audit.py",
         "alphafactory_crypto/broad_search/pair18m.py",
         "alphafactory_crypto/broad_search/panel18m.py",
+        "alphafactory_crypto/data_admission_v1.py",
         "runtime/crypto_search_engine_v1_20260721/run_manifest.json",
         "runtime/crypto_search_engine_v1_20260721/final_decision.json",
+        "runtime/crypto_new_data_admission_v1_20260727/run_manifest.json",
+        "runtime/crypto_new_data_admission_v1_20260727/final_decision.json",
         "reports/CRYPTO_SEARCH_ENGINE_V1_20260721.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
+        "reports/CRYPTO_NEW_DATA_ADMISSION_AND_PIT_UNIVERSE_V1_20260727.md",
         "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md"
       ],
       "critical": true,
@@ -455,6 +459,15 @@
           "enforced_by": "broad_search.search_engine_v1.check_engine",
           "bypass_forbidden": true,
           "evidence_ref": "runtime/crypto_search_engine_v1_20260721/checkpoints/checkpoint_009/manifest.json"
+        },
+        {
+          "id": "new_data_pit_and_schema2_admission_gate",
+          "type": "ADMISSION",
+          "rule": "A future Arena remains blocked until historical instrument identity is authoritative, actual symbol-date feature coverage closes the persisted gap manifest, Top50 OI/mark has an authorized materialized consumer, and a full post-join Broad39 schema-2 cache has complete required support; the current provisional PIT ledger and current498 intersection cache cannot authorize search",
+          "severity": "HARD",
+          "enforced_by": "alphafactory_crypto.data_admission_v1 and broad_search.panel18m.rebuild_panel_context_fields",
+          "bypass_forbidden": true,
+          "evidence_ref": "reports/CRYPTO_NEW_DATA_ADMISSION_AND_PIT_UNIVERSE_V1_20260727.md"
         }
       ],
       "validation": {
@@ -472,13 +485,19 @@
         "HAC LCB REQUIRED",
         "PROCESS CPU CONTRACT FROZEN",
         "RESTORE BEFORE ATOMIC RENAME",
+        "PIT LEDGER PROVISIONAL HOLD",
+        "SCHEMA2 INTERSECTION NOT SEARCH CACHE",
+        "ACTUAL SYMBOL-DATE GAPS PERSISTED",
         "FUTURE ARENA ARMS NONE",
         "NO OOS OR PROMOTION"
       ],
       "promotion_requirements": [
         "information-adequate new data",
         "separate new-data Arena authorization",
-        "new schema-2 post-join panel-context cache",
+        "authoritative historical instrument identity",
+        "complete actual symbol-date Broad39 support",
+        "authorized materialized Top50 OI/mark consumer",
+        "full schema-2 post-join panel-context cache",
         "fresh policy and archive state with frozen Arena budget",
         "matched canonical typed-random control",
         "formal OOS authorization and evidence",

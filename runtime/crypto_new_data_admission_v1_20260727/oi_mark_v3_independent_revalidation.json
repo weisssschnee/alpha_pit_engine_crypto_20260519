@@ -1,0 +1,21 @@
+{
+  "decision": "PASS_SCHEMAFIXED_CONTENT_RESEARCH_HOLD_UNIVERSE_PROVENANCE",
+  "root": "G:\\AlphaFactory_CryptoData\\derived\\cryptohft_crossvenue_oi_mark_compact_ranks51_200_schemafixed_v3_20260727",
+  "archive": "G:\\AlphaFactory_CryptoData\\deliveries\\pc2_followup_20260722\\archives\\cryptohft_crossvenue_oi_mark_compact_ranks51_200_schemafixed_v3_20260727.tar",
+  "archive_sha256": "a7eeacf2ccb4b4bc9ca26e2a15f2c7ac9977758a5397c010a63b82c4ef904bbb",
+  "archive_sha256_ok": true,
+  "counters": {
+    "feature_files": 1155,
+    "manifest_files": 1155,
+    "feature_rows": 2587012,
+    "manifest_rows": 5173729,
+    "done_markers": 1155,
+    "zero_column_parquets": 0,
+    "schema_mismatches": 0,
+    "marker_hash_mismatches": 0,
+    "marker_row_mismatches": 0
+  },
+  "error_count": 0,
+  "errors": [],
+  "research_admission": "HOLD_UNIVERSE_PROVENANCE"
+}

@@ -1,0 +1,105 @@
+{
+  "affected_date_max": "2026-02-13 00:00:00+00:00",
+  "affected_date_min": "2025-06-15 00:00:00+00:00",
+  "affected_top200_days": 76,
+  "classification": "UNRESOLVED_FAIL_CLOSED",
+  "eligible_comparison_days": 281,
+  "max_score_to_cutoff_ratio": 4.264620020531985,
+  "positive_volume_date_max": "2026-03-17 00:00:00+00:00",
+  "positive_volume_date_min": "2025-06-03 00:00:00+00:00",
+  "positive_volume_days": 288,
+  "rule": "unresolved symbol remains excluded; diagnostic does not alter frozen PIT ledger",
+  "source_objects": [
+    {
+      "actual": "2c32c4066c003071acb273d1bed8842fe9dd218779b7edb5c6142ec37cdb5d13",
+      "bytes": 1800,
+      "checksum_match": true,
+      "expected": "2c32c4066c003071acb273d1bed8842fe9dd218779b7edb5c6142ec37cdb5d13",
+      "month": "2025-06",
+      "rows": 28,
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BDXNUSDT/1d/BDXNUSDT-1d-2025-06.zip"
+    },
+    {
+      "actual": "f3c0fa9b4e0fc1dce867d745ceba5ed5d76a83fdb12aecc85c0007ea6406af4e",
+      "bytes": 1889,
+      "checksum_match": true,
+      "expected": "f3c0fa9b4e0fc1dce867d745ceba5ed5d76a83fdb12aecc85c0007ea6406af4e",
+      "month": "2025-07",
+      "rows": 31,
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BDXNUSDT/1d/BDXNUSDT-1d-2025-07.zip"
+    },
+    {
+      "actual": "d896f88860889133c8a90a68f63594a7bfab724dc8a696c0ed09754351786bb5",
+      "bytes": 1887,
+      "checksum_match": true,
+      "expected": "d896f88860889133c8a90a68f63594a7bfab724dc8a696c0ed09754351786bb5",
+      "month": "2025-08",
+      "rows": 31,
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BDXNUSDT/1d/BDXNUSDT-1d-2025-08.zip"
+    },
+    {
+      "actual": "e59c576ab8f7c0f7d5153de4dba7b26a06a58cfc8b3275ddcd8595aa9f25ce55",
+      "bytes": 1828,
+      "checksum_match": true,
+      "expected": "e59c576ab8f7c0f7d5153de4dba7b26a06a58cfc8b3275ddcd8595aa9f25ce55",
+      "month": "2025-09",
+      "rows": 30,
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BDXNUSDT/1d/BDXNUSDT-1d-2025-09.zip"
+    },
+    {
+      "actual": "2cabcf13543a72eda6b6bcdd7498a7b00a7c755aaf473bf9ecd588d3c616fd73",
+      "bytes": 1900,
+      "checksum_match": true,
+      "expected": "2cabcf13543a72eda6b6bcdd7498a7b00a7c755aaf473bf9ecd588d3c616fd73",
+      "month": "2025-10",
+      "rows": 31,
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BDXNUSDT/1d/BDXNUSDT-1d-2025-10.zip"
+    },
+    {
+      "actual": "86e90cf2f8bf6d58a7023d91d6b89907fce1746d7d03452a3214a3cb21e44f64",
+      "bytes": 1924,
+      "checksum_match": true,
+      "expected": "86e90cf2f8bf6d58a7023d91d6b89907fce1746d7d03452a3214a3cb21e44f64",
+      "month": "2025-11",
+      "rows": 30,
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BDXNUSDT/1d/BDXNUSDT-1d-2025-11.zip"
+    },
+    {
+      "actual": "1b00c8ea10a0846d964378bd56a79d02e14d04b4bdabc2f736c9d3ed158d3774",
+      "bytes": 1874,
+      "checksum_match": true,
+      "expected": "1b00c8ea10a0846d964378bd56a79d02e14d04b4bdabc2f736c9d3ed158d3774",
+      "month": "2025-12",
+      "rows": 31,
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BDXNUSDT/1d/BDXNUSDT-1d-2025-12.zip"
+    },
+    {
+      "actual": "21707e2b944af7119b70a1314f6505fa100b7c7dd1fd59e04bb4b95aa209d290",
+      "bytes": 1880,
+      "checksum_match": true,
+      "expected": "21707e2b944af7119b70a1314f6505fa100b7c7dd1fd59e04bb4b95aa209d290",
+      "month": "2026-01",
+      "rows": 31,
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BDXNUSDT/1d/BDXNUSDT-1d-2026-01.zip"
+    },
+    {
+      "actual": "d47ea271beb631fbb22b5945bc36050b38130a6a63f80a2cbe49f83ef5e4e97c",
+      "bytes": 1675,
+      "checksum_match": true,
+      "expected": "d47ea271beb631fbb22b5945bc36050b38130a6a63f80a2cbe49f83ef5e4e97c",
+      "month": "2026-02",
+      "rows": 28,
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BDXNUSDT/1d/BDXNUSDT-1d-2026-02.zip"
+    },
+    {
+      "actual": "aecc864090a82c0d748edab00d3714624beb207a9cd39a465695e045df93e253",
+      "bytes": 1275,
+      "checksum_match": true,
+      "expected": "aecc864090a82c0d748edab00d3714624beb207a9cd39a465695e045df93e253",
+      "month": "2026-03",
+      "rows": 31,
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BDXNUSDT/1d/BDXNUSDT-1d-2026-03.zip"
+    }
+  ],
+  "status": "MATERIAL_TO_TOP200_BOUNDARY"
+}

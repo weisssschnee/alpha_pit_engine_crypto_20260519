@@ -1,0 +1,54 @@
+{
+  "boundaries": {
+    "challenge_recent_may_stress_forward": false,
+    "latent": false,
+    "oos": false,
+    "promotion": false,
+    "relational_training": false,
+    "search": false
+  },
+  "contract_sha256": "EB70D29CC4D19264C0DC00CBCD0DE2241E00B923E4402BD948E8A2BE60467D68",
+  "contract_version": "CRYPTO_NEW_DATA_ADMISSION_AND_PIT_UNIVERSE_V1",
+  "created_at": "2026-07-27T05:14:18.666337+00:00",
+  "objective": "independently admit delivered data and build a lagged historical crypto Top-N membership/context authority without running search",
+  "parameters_frozen_without_hpo": true,
+  "schema2_context": {
+    "fields": [
+      "active_universe_size",
+      "listing_age_hours",
+      "history_length_hours",
+      "age_percentile_active_universe"
+    ],
+    "grain": "daily authority ledger",
+    "post_join_rebuild_still_required": true,
+    "reward_adaptation": false,
+    "search_cache": false
+  },
+  "source": {
+    "exchange_info_url": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+    "monthly_kline_interval": "1d",
+    "raw_zip_retention": "none_after_verified_compact_parse",
+    "source_checksum_required": true,
+    "symbol_prefix": "data/futures/um/monthly/klines/"
+  },
+  "universe": {
+    "active_evidence": "observed on previous completed UTC day",
+    "contract_surface": "crypto coin perpetual candidates",
+    "information_lag": "one completed UTC day",
+    "lifecycle_gap_days": 30,
+    "lit_identity_contract": {
+      "intervening_dates": "quarantined",
+      "new_start": "2025-12-23T17:30:00+00:00",
+      "old_end": "2025-01-31T08:59:59+00:00"
+    },
+    "membership_end": "2026-06-11",
+    "membership_start": "2024-01-01",
+    "minimum_observed_days": 7,
+    "quote_asset": "USDT",
+    "ranking_measure": "sum_quote_volume",
+    "tie_break": "instrument_id ascending",
+    "top_n": 200,
+    "trailing_days": 30
+  },
+  "workers": 10
+}

@@ -1,0 +1,50 @@
+{
+  "archives": [
+    {
+      "bytes": 27240388608,
+      "cohort": "Top100",
+      "complete_symbol_months": 2542,
+      "duplicate_or_unsorted_files": 0,
+      "manifest_without_complete_done": 0,
+      "month_bounds_fail_files": 0,
+      "not_found_symbol_months": 458,
+      "parquet_files": 2542,
+      "path": "G:\\AlphaFactory_CryptoData\\deliveries\\pc2_followup_20260722\\archives\\binance_aggtrades_top100_compact_1m_202401_202606.tar",
+      "requested_symbol_months": 3000,
+      "row_manifest_mismatch_files": 0,
+      "rows": 110104239,
+      "schema_variants": 1,
+      "sha256": "59c9dc8256fcf326ed6a31f7fbf6225e1a707dd76e35d457e53d3447c23501e1",
+      "sidecar_match": true,
+      "symbols": 100,
+      "time_semantic_fail_files": 0
+    },
+    {
+      "bytes": 21372253184,
+      "cohort": "ranks101_200",
+      "complete_symbol_months": 2167,
+      "duplicate_or_unsorted_files": 0,
+      "manifest_without_complete_done": 0,
+      "month_bounds_fail_files": 0,
+      "not_found_symbol_months": 833,
+      "parquet_files": 2167,
+      "path": "G:\\AlphaFactory_CryptoData\\deliveries\\pc2_followup_20260722\\archives\\binance_aggtrades_ranks101_200_compact_1m_202401_202606.tar",
+      "requested_symbol_months": 3000,
+      "row_manifest_mismatch_files": 0,
+      "rows": 93230404,
+      "schema_variants": 1,
+      "sha256": "87eae5c03be252f10b01ba0d2ff001f75876254d4968cc53fe5a07b28de08f5a",
+      "sidecar_match": true,
+      "symbols": 100,
+      "time_semantic_fail_files": 0
+    }
+  ],
+  "audited_at": "2026-07-27",
+  "decision": "PASS_CONTENT_FIXED_COHORT_RESEARCH_HOLD_PIT_UNIVERSE",
+  "errors": [],
+  "lit_identity": "old/new ticker lifecycles remain separated by the delivered identity contract",
+  "research_admission": "HOLD_PIT_UNIVERSE_AND_SEARCH_CACHE",
+  "time_contract": "feature_available_time=timestamp+1m; execution_time_min=timestamp+2m",
+  "time_rows_checked": 203334643,
+  "total_rows_checked": 203334643
+}
