@@ -418,8 +418,8 @@
       "authority": {
         "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
         "repo_ref": "experiment/crypto-search-engine-v1-20260721",
-        "verified_sha": "dadb10059629b8d68da546c5b92a163aa67d8065",
-        "sha256": "1A0A750B153488F2DB1A677AF51D4FB536C7839BE8A1FE501C4388D6A5A08283"
+        "verified_sha": "369dbb8fadf7a1308fd1820da37e5cd95ffc8450",
+        "sha256": "E8DCCF683432B7F1D2460D1FF3C9FF418D21FE753B86C101C6BEDDF80D9EBDA6"
       },
       "contracts": [
         {
@@ -450,7 +450,7 @@
         {
           "id": "search_engine_v1_counting_and_restore_gate",
           "type": "ADMISSION",
-          "rule": "Historical engineering integrity requires 20,000 compile-valid, exact-unique, matched-control-valid, fully cost-evaluated candidates plus ten atomic checkpoints with verified restoration of RNG, policy, population, archive, identities, receipts, and arm state; this gate does not confer research qualification",
+          "rule": "Historical engineering integrity requires 20,000 compile-valid, exact-unique, matched-control-valid, fully cost-evaluated candidates plus ten atomic checkpoints with verified restoration of RNG, policy, population, archive, identities, receipts, and arm state; future requalification additionally requires prepublication restore verification and the frozen parent-plus-worker process-CPU denominator; this gate does not confer research qualification",
           "severity": "HARD",
           "enforced_by": "broad_search.search_engine_v1.check_engine",
           "bypass_forbidden": true,
@@ -462,14 +462,16 @@
         "result": "PASS",
         "profile": "evidence-boundary-change",
         "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
-        "evidence_sha256": "952D8414DF9953905173B5D20DCC066230D0D4B07CA4C49A4450F2024BBDB0EB",
-        "verified_at_sha": "dadb10059629b8d68da546c5b92a163aa67d8065"
+        "evidence_sha256": "5D8A72EE8145F481D31EE580DA4087A2BEDC2DB315EDFCD2D37DDE04B2FD8E85",
+        "verified_at_sha": "029a84916d74d9ee4d4f2c6c3f273735e05dcbe9"
       },
       "claim_badges": [
         "LEGACY 20K ENGINEERING PASS",
         "RESEARCH QUALIFICATION HOLD",
         "PANEL CONTEXT REMEDIATED",
         "HAC LCB REQUIRED",
+        "PROCESS CPU CONTRACT FROZEN",
+        "RESTORE BEFORE ATOMIC RENAME",
         "FUTURE ARENA ARMS NONE",
         "NO OOS OR PROMOTION"
       ],
@@ -1697,7 +1699,7 @@
         "result": "PASS",
         "profile": "evidence-boundary-change",
         "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
-        "verified_at_sha": "dadb10059629b8d68da546c5b92a163aa67d8065"
+        "verified_at_sha": "029a84916d74d9ee4d4f2c6c3f273735e05dcbe9"
       }
     },
     {

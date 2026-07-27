@@ -6,48 +6,6 @@
       "evidence": {},
       "message": "Current view is advisory; formal runtime evidence was not supplied",
       "severity": "INFO"
-    },
-    {
-      "category": "DRIFT",
-      "code": "CRITICAL_NODE_ASSURANCE_FAILED",
-      "evidence": {
-        "component_id": "real_policy_upgrade_canary",
-        "validation": {
-          "checked_at": "2026-07-27T03:43:57.143605+00:00",
-          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
-          "evidence_sha256": null,
-          "level": "STALE",
-          "notes": [
-            "evidence: reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md is absent at dadb10059629b8d68da546c5b92a163aa67d8065"
-          ],
-          "profile": "evidence-boundary-change",
-          "result": "STALE",
-          "verified_at_sha": "dadb10059629b8d68da546c5b92a163aa67d8065"
-        }
-      },
-      "message": "Critical component assurance is failed or stale",
-      "severity": "WARN"
-    },
-    {
-      "category": "DRIFT",
-      "code": "CRITICAL_EDGE_ASSURANCE_FAILED",
-      "evidence": {
-        "edge_id": "real_policy_canary_future_arena_admission",
-        "validation": {
-          "checked_at": "2026-07-27T03:43:57.143605+00:00",
-          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
-          "evidence_sha256": null,
-          "level": "STALE",
-          "notes": [
-            "evidence: reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md is absent at dadb10059629b8d68da546c5b92a163aa67d8065"
-          ],
-          "profile": "evidence-boundary-change",
-          "result": "STALE",
-          "verified_at_sha": "dadb10059629b8d68da546c5b92a163aa67d8065"
-        }
-      },
-      "message": "Critical relationship assurance is failed or stale",
-      "severity": "WARN"
     }
   ],
   "edges": [
@@ -381,16 +339,14 @@
       "source": "real_policy_upgrade_canary",
       "target": "multi_paradigm_arena",
       "validation": {
-        "checked_at": "2026-07-27T03:43:57.143605+00:00",
+        "checked_at": "2026-07-27T04:35:07.820302+00:00",
         "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
-        "evidence_sha256": null,
-        "level": "STALE",
-        "notes": [
-          "evidence: reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md is absent at dadb10059629b8d68da546c5b92a163aa67d8065"
-        ],
+        "evidence_sha256": "5D8A72EE8145F481D31EE580DA4087A2BEDC2DB315EDFCD2D37DDE04B2FD8E85",
+        "level": "STATIC_VERIFIED",
+        "notes": [],
         "profile": "evidence-boundary-change",
-        "result": "STALE",
-        "verified_at_sha": "dadb10059629b8d68da546c5b92a163aa67d8065"
+        "result": "PASS",
+        "verified_at_sha": "029a84916d74d9ee4d4f2c6c3f273735e05dcbe9"
       }
     },
     {
@@ -1128,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-27T04:04:08.747568+00:00",
+  "generated_at": "2026-07-27T04:35:07.820302+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -2969,16 +2925,16 @@
       "authority": {
         "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
         "repo_ref": "experiment/crypto-search-engine-v1-20260721",
-        "sha256": "1A0A750B153488F2DB1A677AF51D4FB536C7839BE8A1FE501C4388D6A5A08283",
-        "verified_sha": "dadb10059629b8d68da546c5b92a163aa67d8065"
+        "sha256": "E8DCCF683432B7F1D2460D1FF3C9FF418D21FE753B86C101C6BEDDF80D9EBDA6",
+        "verified_sha": "369dbb8fadf7a1308fd1820da37e5cd95ffc8450"
       },
       "claim_badges": [
         "LEGACY 20K ENGINEERING PASS",
         "RESEARCH QUALIFICATION HOLD",
         "PANEL CONTEXT REMEDIATED",
         "HAC LCB REQUIRED",
-        "FUTURE ARENA ARMS NONE",
-        "NO OOS OR PROMOTION"
+        "PROCESS CPU CONTRACT FROZEN",
+        "RESTORE BEFORE ATOMIC RENAME"
       ],
       "color": "#f9a825",
       "contracts": [
@@ -3014,7 +2970,7 @@
           "enforced_by": "broad_search.search_engine_v1.check_engine",
           "evidence_ref": "runtime/crypto_search_engine_v1_20260721/checkpoints/checkpoint_009/manifest.json",
           "id": "search_engine_v1_counting_and_restore_gate",
-          "rule": "Historical engineering integrity requires 20,000 compile-valid, exact-unique, matched-control-valid, fully cost-evaluated candidates plus ten atomic checkpoints with verified restoration of RNG, policy, population, archive, identities, receipts, and arm state; this gate does not confer research qualification",
+          "rule": "Historical engineering integrity requires 20,000 compile-valid, exact-unique, matched-control-valid, fully cost-evaluated candidates plus ten atomic checkpoints with verified restoration of RNG, policy, population, archive, identities, receipts, and arm state; future requalification additionally requires prepublication restore verification and the frozen parent-plus-worker process-CPU denominator; this gate does not confer research qualification",
           "severity": "HARD",
           "type": "ADMISSION"
         }
@@ -3258,7 +3214,7 @@
         "alphafactory_crypto_broad_search_search_engine_v1_policy_propose",
         "alphafactory_crypto_broad_search_search_engine_v1_policy_reject",
         "alphafactory_crypto_broad_search_search_engine_v1_rationale_1",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_2249",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_2266",
         "alphafactory_crypto_broad_search_search_engine_v1_read_json",
         "alphafactory_crypto_broad_search_search_engine_v1_report_text",
         "alphafactory_crypto_broad_search_search_engine_v1_restore_lane_policy",
@@ -4264,16 +4220,14 @@
       "required": false,
       "semantic_role": "unqualified_search_engine_component_post_audit_hold",
       "validation": {
-        "checked_at": "2026-07-27T03:43:57.143605+00:00",
+        "checked_at": "2026-07-27T04:35:07.820302+00:00",
         "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
-        "evidence_sha256": null,
-        "level": "STALE",
-        "notes": [
-          "evidence: reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md is absent at dadb10059629b8d68da546c5b92a163aa67d8065"
-        ],
+        "evidence_sha256": "5D8A72EE8145F481D31EE580DA4087A2BEDC2DB315EDFCD2D37DDE04B2FD8E85",
+        "level": "STATIC_VERIFIED",
+        "notes": [],
         "profile": "evidence-boundary-change",
-        "result": "STALE",
-        "verified_at_sha": "dadb10059629b8d68da546c5b92a163aa67d8065"
+        "result": "PASS",
+        "verified_at_sha": "029a84916d74d9ee4d4f2c6c3f273735e05dcbe9"
       },
       "visible_by_default": true
     },
@@ -6765,7 +6719,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "83DB4A33001ADB11B653D0E234CFE3063920CFEA02E0ABA3662B19A8EEB33AA1"
+    "sha256": "8ACC96C491CB733D6315B7E4F9E01CAA2AE5C0C7EFAC86A5ED1B500242AF540E"
   },
   "profile_id": null,
   "profiles": [
@@ -6796,13 +6750,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "a46f3941e2a7777e499f61a742c724d6dc3d9d61",
-    "edge_count": 34844,
-    "node_count": 18543,
+    "built_at_commit": "029a84916d74d9ee4d4f2c6c3f273735e05dcbe9",
+    "edge_count": 34853,
+    "node_count": 18546,
     "path": ".planning/graphs/graph.json",
-    "sha256": "C307A42CD8BAF1152207FF127F20889C9C980447E7DD2FAB2476DBBA8A727B4F"
+    "sha256": "91CF91875AA1B7541D7470B97A36A85E6D4D060EBC60622ADD7C78B49069F779"
   },
-  "repo_head": "a46f3941e2a7777e499f61a742c724d6dc3d9d61",
+  "repo_head": "029a84916d74d9ee4d4f2c6c3f273735e05dcbe9",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
@@ -6813,7 +6767,7 @@
     "errors": 0,
     "runtime_edges": 0,
     "runtime_nodes": 0,
-    "warnings": 2
+    "warnings": 0
   },
   "trace": {
     "path": null,
