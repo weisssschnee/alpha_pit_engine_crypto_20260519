@@ -1861,7 +1861,7 @@ def _metrics_rows(
                 / max(1, int(counters["exact_unique"])),
                 "strict_evaluated_count": int(counters["strict_evaluated"]),
                 "cpu_hours": cpu_hours,
-                "valid_exact_unique_per_cpu_hour": len(rows)
+                "valid_exact_unique_per_cpu_hour": int(counters["exact_unique"])
                 / max(cpu_hours, 1.0e-12),
                 "positive_matched_discoveries_per_cpu_hour": sum(
                     bool(row["matched_positive"]) for row in rows
@@ -1941,7 +1941,7 @@ def _metrics_rows(
                 for value in state["arm_counters"].values()
             )
             / 3600.0,
-            "valid_exact_unique_per_cpu_hour": len(ledger)
+            "valid_exact_unique_per_cpu_hour": int(state["exact_unique"])
             / max(
                 1.0e-12,
                 sum(
@@ -2103,6 +2103,7 @@ def _write_checkpoint(
     runtime_root: Path,
     label: str,
     checkpoint_index: int,
+    registry: TypedExpressionRegistry,
     state: Mapping[str, Any],
     policies: Mapping[str, PolicyType],
     ledger: Sequence[Mapping[str, Any]],
@@ -2155,7 +2156,22 @@ def _write_checkpoint(
         "restore_verified": False,
     }
     _write_json(temporary / "manifest.json", manifest)
-    os.replace(temporary, target)
+    try:
+        _load_checkpoint(
+            checkpoint_path=temporary,
+            registry=registry,
+            expected_source_sha=str(state["source_sha"]),
+            expected_frozen_hash=str(state["frozen_contract_sha256"]),
+            expected_identities=identities,
+            require_restore_verified=False,
+        )
+        manifest["restore_verified"] = True
+        _write_json(temporary / "manifest.json", manifest)
+        os.replace(temporary, target)
+    except Exception:
+        if temporary.exists():
+            shutil.rmtree(temporary)
+        raise
     return target
 
 
@@ -2166,9 +2182,12 @@ def _load_checkpoint(
     expected_source_sha: str,
     expected_frozen_hash: str,
     expected_identities: Mapping[str, Any],
+    require_restore_verified: bool = True,
 ) -> tuple[dict[str, Any], dict[str, PolicyType], list[dict[str, Any]], BehaviorArchive, list[dict[str, Any]]]:
     manifest_path = checkpoint_path / "manifest.json"
     manifest = _read_json(manifest_path)
+    if require_restore_verified and manifest.get("restore_verified") is not True:
+        raise ValueError("checkpoint was not restore-verified before publication")
     if manifest.get("source_sha") != expected_source_sha:
         raise ValueError("checkpoint source SHA changed")
     if manifest.get("frozen_contract_sha256") != expected_frozen_hash:
@@ -2219,8 +2238,6 @@ def _load_checkpoint(
         raise ValueError("checkpoint policy state restore changed")
     if archive.state_hash() != manifest["archive_state_sha256"]:
         raise ValueError("checkpoint archive state restore changed")
-    manifest["restore_verified"] = True
-    _write_json(manifest_path, manifest)
     return state_payload, policies, ledger, archive, metrics
 
 
@@ -2806,13 +2823,11 @@ def run_engine(
                             "PROPOSAL_" + type(failure).__name__,
                         )
                         continue
-                    proposal_cpu = time.process_time() - proposal_cpu_started
                     raw_attempts = int(metadata["raw_attempts"])
                     _increment_counter(
                         state, arm, "generation_attempts", raw_attempts
                     )
                     _increment_counter(state, arm, "compile_valid", raw_attempts)
-                    state["arm_counters"][arm]["cpu_seconds"] += proposal_cpu
                     expression_verified = _candidate_rebuild_verified(
                         registry,
                         candidate,
@@ -2822,13 +2837,21 @@ def run_engine(
                         attempted_ids.add(candidate.candidate_id)
                         _policy_reject(policy, candidate)
                         _failure(state, arm, "EXPRESSION_HASH_REPLAY")
+                        state["arm_counters"][arm]["cpu_seconds"] += (
+                            time.process_time() - proposal_cpu_started
+                        )
                         continue
                     if candidate.candidate_id in attempted_ids:
                         _policy_reject(policy, candidate)
                         _failure(state, arm, "GLOBAL_EXACT_DUPLICATE")
+                        state["arm_counters"][arm]["cpu_seconds"] += (
+                            time.process_time() - proposal_cpu_started
+                        )
                         continue
                     attempted_ids.add(candidate.candidate_id)
                     _increment_counter(state, arm, "exact_unique", 1)
+                    proposal_cpu = time.process_time() - proposal_cpu_started
+                    state["arm_counters"][arm]["cpu_seconds"] += proposal_cpu
                     proposals.append(
                         {
                             **metadata,
@@ -2871,6 +2894,7 @@ def run_engine(
                     state["arm_counters"][arm]["cpu_seconds"] += float(
                         worker["process_cpu_seconds"]
                     )
+                    completion_cpu_started = time.process_time()
                     batch_peak_rss = max(
                         batch_peak_rss, int(worker["worker_rss_bytes"])
                     )
@@ -2881,6 +2905,9 @@ def run_engine(
                         _failure(state, arm, reason.split(":", 1)[0])
                         memory_failure = memory_failure or bool(
                             worker["memory_error"]
+                        )
+                        state["arm_counters"][arm]["cpu_seconds"] += (
+                            time.process_time() - completion_cpu_started
                         )
                         continue
                     completion_ordinal = len(ledger) + 1
@@ -2911,24 +2938,22 @@ def run_engine(
                     _increment_counter(state, arm, "matched_control_valid", 1)
                     _increment_counter(state, arm, "strict_evaluated", 1)
                     lane_completed[str(proposal["policy_key"])] += 1
-                    ledger.append(
-                        _ledger_row(
-                            candidate=candidate,
-                            evaluation=evaluation,
-                            proposal=proposal,
-                            archive_row=archive_row,
-                            new_family=new_family,
-                            state_hash_after=(
-                                policy.state_hash()
-                                if not isinstance(policy, LanePolicy)
-                                else policy.state_hash()
-                            ),
-                            checkpoint_index=checkpoint_index,
-                            completion_ordinal=completion_ordinal,
-                            arm_completion_ordinal=arm_completion[arm],
-                            worker=worker,
-                        )
+                    ledger_row = _ledger_row(
+                        candidate=candidate,
+                        evaluation=evaluation,
+                        proposal=proposal,
+                        archive_row=archive_row,
+                        new_family=new_family,
+                        state_hash_after=policy.state_hash(),
+                        checkpoint_index=checkpoint_index,
+                        completion_ordinal=completion_ordinal,
+                        arm_completion_ordinal=arm_completion[arm],
+                        worker=worker,
                     )
+                    completion_cpu = time.process_time() - completion_cpu_started
+                    state["arm_counters"][arm]["cpu_seconds"] += completion_cpu
+                    ledger_row["archive_completion_cpu_seconds"] = completion_cpu
+                    ledger.append(ledger_row)
                 if not preflight_done:
                     available_memory = int(psutil.virtual_memory().available)
                     projected = (
@@ -3043,6 +3068,7 @@ def run_engine(
                 runtime_root=runtime_root,
                 label=f"checkpoint_{checkpoint_index:03d}",
                 checkpoint_index=checkpoint_index,
+                registry=registry,
                 state=state,
                 policies=policies,
                 ledger=ledger,
@@ -3088,6 +3114,7 @@ def run_engine(
             runtime_root=runtime_root,
             label="checkpoint_budget_exhausted",
             checkpoint_index=int(state["next_checkpoint_index"]),
+            registry=registry,
             state=state,
             policies=policies,
             ledger=ledger,

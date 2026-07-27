@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import random
 from copy import deepcopy
 from pathlib import Path
@@ -30,6 +31,7 @@ from alphafactory_crypto.broad_search.expression import (
 )
 from alphafactory_crypto.broad_search.pair18m import (
     _mean_lcb,
+    _series_metrics,
     evaluate_pair,
     feedback_contract_payload,
 )
@@ -49,6 +51,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _checkpoint_allocation,
     _evaluation_audit_fields,
     _load_checkpoint,
+    _metrics_rows,
     _new_campaign_state,
     _write_checkpoint,
 )
@@ -670,6 +673,20 @@ def test_hac_preserves_missing_hour_coordinates() -> None:
     assert se_with_gap > se_if_compressed
 
 
+def test_monthly_metrics_preserve_gross_cost_net_waterfall() -> None:
+    metrics = _series_metrics(
+        weights=np.asarray([[1.0, 1.0, 1.0, 1.0]]),
+        target=np.asarray([[0.01, 0.01, 0.01, 0.01]]),
+        months=np.asarray(["2024-01"] * 4),
+        evaluation_mask=np.asarray([True, True, True, True]),
+        horizon=1,
+    )
+    month = metrics["month_metrics"][0]
+    assert month["gross_mean"] - month["cost_mean"] == pytest.approx(
+        month["net_mean"]
+    )
+
+
 def test_evaluation_audit_fields_preserve_matched_waterfall_and_cost_meaning() -> None:
     section = {
         "gross_mean": 0.001,
@@ -790,7 +807,10 @@ def test_behavior_archive_keeps_one_reward_champion_per_family() -> None:
     assert archive.duplicate_replacements == 1
 
 
-def test_search_checkpoint_is_atomic_and_restores_policy_archive_and_rng(tmp_path: Path) -> None:
+def test_search_checkpoint_is_atomic_and_restores_policy_archive_and_rng(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     registry = _role_complete_registry()
     candidate = generate_candidate(
         registry, skeleton=skeleton_registry()[0], rng=random.Random(41)
@@ -812,10 +832,24 @@ def test_search_checkpoint_is_atomic_and_restores_policy_archive_and_rng(tmp_pat
         "raw_cache": {"identity_sha256": "C" * 64},
         "compiler_identity": {"bundle_sha256": "D" * 64},
     }
+    real_replace = os.replace
+    replace_observations: list[bool] = []
+
+    def checked_replace(source: str | Path, target: str | Path) -> None:
+        if Path(source).is_dir():
+            manifest = json.loads((Path(source) / "manifest.json").read_text())
+            replace_observations.append(bool(manifest["restore_verified"]))
+        real_replace(source, target)
+
+    monkeypatch.setattr(
+        "alphafactory_crypto.broad_search.search_engine_v1.os.replace",
+        checked_replace,
+    )
     checkpoint = _write_checkpoint(
         runtime_root=tmp_path,
         label="checkpoint_000",
         checkpoint_index=0,
+        registry=registry,
         state=state,
         policies={"hierarchical_typed_cem_v2|20260716": policy},
         ledger=[{"candidate_id": candidate.candidate_id, "receipt_json": None}],
@@ -824,6 +858,10 @@ def test_search_checkpoint_is_atomic_and_restores_policy_archive_and_rng(tmp_pat
         identities=identities,
     )
     assert checkpoint.is_dir()
+    assert replace_observations == [True]
+    assert json.loads((checkpoint / "manifest.json").read_text())[
+        "restore_verified"
+    ] is True
     assert not list((tmp_path / "checkpoints").glob(".checkpoint_000.tmp-*"))
     restored_state, restored_policies, ledger, restored_archive, _ = _load_checkpoint(
         checkpoint_path=checkpoint,
@@ -847,3 +885,39 @@ def test_search_checkpoint_is_atomic_and_restores_policy_archive_and_rng(tmp_pat
             "typed_evolution_v2",
         )
     }
+
+
+def test_metrics_use_valid_exact_unique_counter_for_cpu_density() -> None:
+    state = _new_campaign_state("a" * 40, "B" * 64)
+    state["exact_unique"] = 9
+    state["arm_counters"]["canonical_typed_random"]["exact_unique"] = 9
+    state["arm_counters"]["canonical_typed_random"]["cpu_seconds"] = 3600.0
+    ledger = [
+        {
+            "arm": "canonical_typed_random",
+            "checkpoint_index": 0,
+            "behavior_family_id": "FAMILY",
+            "pair_reward": -1.0,
+            "candidate_id": "CANDIDATE",
+            "matched_positive": False,
+            "new_behavior_family_at_completion": True,
+            "operation": "CANONICAL_TYPED_RANDOM_SAMPLE",
+            "receipt_verified": None,
+            "cost_killed": False,
+            "turnover_killed": False,
+            "arm_completion_ordinal": 1,
+        }
+    ]
+    rows = _metrics_rows(
+        checkpoint_index=0,
+        ledger=ledger,
+        archive=BehaviorArchive(),
+        state=state,
+        policies={},
+    )
+    random_arm = next(
+        row for row in rows if row["arm"] == "canonical_typed_random"
+    )
+    campaign = next(row for row in rows if row["arm"] == "__campaign__")
+    assert random_arm["valid_exact_unique_per_cpu_hour"] == pytest.approx(9.0)
+    assert campaign["valid_exact_unique_per_cpu_hour"] == pytest.approx(9.0)

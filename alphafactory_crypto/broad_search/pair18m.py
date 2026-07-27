@@ -153,6 +153,7 @@ def _series_metrics(
                 "month": month,
                 "observations": int(values.size),
                 "gross_mean": float(gross[local].mean()) if values.size else None,
+                "cost_mean": float(cost[local].mean()) if values.size else None,
                 "net_mean": value if np.isfinite(value) else None,
                 "turnover_mean": float(turnover[local].mean()) if values.size else None,
             }
