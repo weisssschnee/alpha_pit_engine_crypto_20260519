@@ -1,6 +1,6 @@
 {
-  "active_field_count": 212,
-  "blocked_engineering_field_count": 48,
+  "active_field_count": 235,
+  "blocked_engineering_field_count": 25,
   "candidate_support_identity_sha256": "0FEC8E08AEAB78662C48A4DBB8644AD6B0FC76D046BCAB4D593D2644D3F32F9C",
   "compatible_surfaces": {
     "AGGTRADES_TOP200_DELIVERED": {
@@ -10,9 +10,9 @@
         "PRICE_ACTIVITY_RESPONSE"
       ],
       "compatible_skeleton_count": 10,
-      "declared_field_count": 21,
+      "declared_field_count": 44,
       "full_grammar_supported": false,
-      "reachable_field_count": 21
+      "reachable_field_count": 44
     },
     "BROAD_PANEL_BASELINE": {
       "all_fields_reachable": true,
@@ -55,16 +55,16 @@
       "reachable_field_count": 71
     }
   },
-  "compiler_reachable_active_fields": 212,
+  "compiler_reachable_active_fields": 235,
   "contexts_merged": false,
   "data_planes": [
     {
-      "blocked_fields": 23,
-      "compiler_reachable_fields": 21,
+      "blocked_fields": 0,
+      "compiler_reachable_fields": 44,
       "fields": 44,
-      "matched_control_fields": 21,
-      "materialized_fields": 21,
-      "registered_fields": 21,
+      "matched_control_fields": 44,
+      "materialized_fields": 44,
+      "registered_fields": 44,
       "research_admitted_fields": 0,
       "surface_id": "AGGTRADES_TOP200_DELIVERED"
     },
@@ -125,7 +125,7 @@
   "liquidation_status": "QUARANTINED",
   "market_pair_evaluations": 0,
   "market_search_started": false,
-  "matched_control_active_fields": 212,
+  "matched_control_active_fields": 235,
   "oi_mark_top50_status": "RAW_ONLY_INVENTORY",
   "research_admission": "HOLD",
   "research_holds_preserved": [
@@ -135,7 +135,9 @@
     "BDXN_MATERIAL_TO_TOP200_BOUNDARY"
   ],
   "reward_reads": 0,
-  "runtime_materialized_active_fields": 212,
+  "runtime_materialized_active_fields": 235,
   "sealed_reads": 0,
+  "source_unavailable_engineering_field_count": 25,
+  "source_unavailable_field_authority": "source_evidence.json#/oi_mark/zero_support_fields",
   "status": "PASS_ACTIVE_SEARCH_CARRIERS_WITH_DECLARED_FIELD_HOLDS"
 }

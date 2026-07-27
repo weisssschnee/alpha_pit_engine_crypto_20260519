@@ -43,6 +43,20 @@
       "value_type": "COUNT"
     },
     {
+      "field_id": "buy_underlying_trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "sell_underlying_trade_count",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
       "field_id": "buy_quantity",
       "observable_lag_hours": 1,
       "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
@@ -85,6 +99,125 @@
       "value_type": "SIGNED_FLOW"
     },
     {
+      "field_id": "trade_count_le_100",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "trade_count_100_1k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "trade_count_1k_10k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "trade_count_10k_100k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "trade_count_100k_1m",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "trade_count_gt_1m",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "notional_le_100",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "notional_100_1k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "notional_1k_10k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "notional_10k_100k",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "notional_100k_1m",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "notional_gt_1m",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "open_price",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "high_price",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "low_price",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "close_price",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_per_base",
+      "value_type": "PRICE"
+    },
+    {
+      "field_id": "max_trade_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
       "field_id": "vwap",
       "observable_lag_hours": 1,
       "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
@@ -104,6 +237,20 @@
       "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
       "unit": "quote_per_base",
       "value_type": "PRICE"
+    },
+    {
+      "field_id": "avg_agg_trade_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
+    },
+    {
+      "field_id": "avg_underlying_trade_notional",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
     },
     {
       "field_id": "volume_imbalance",
@@ -132,6 +279,20 @@
       "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
       "unit": "bps",
       "value_type": "BPS"
+    },
+    {
+      "field_id": "large_trade_count_100k_plus",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "observations",
+      "value_type": "COUNT"
+    },
+    {
+      "field_id": "large_notional_100k_plus",
+      "observable_lag_hours": 1,
+      "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+      "unit": "quote_asset",
+      "value_type": "NOTIONAL"
     },
     {
       "field_id": "large_trade_count_ratio_100k_plus",

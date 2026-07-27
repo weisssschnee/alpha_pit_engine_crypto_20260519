@@ -24,7 +24,10 @@
   },
   "carriers": {
     "AGGTRADES_TOP200_DELIVERED": {
-      "cache_root": ".cache/crypto_aggtrades_system_canary_v1"
+      "cache_root": ".cache/crypto_search_surface_integration_v1/aggtrades_top200_full44",
+      "end_exclusive": "2024-07-01T00:00:00Z",
+      "start": "2024-01-01T00:00:00Z",
+      "verify_full_tar_sha256": true
     },
     "BROAD_PANEL_BASELINE": {
       "cache_root": ".cache/crypto_18m_compositional_broad_search_v1"
@@ -38,7 +41,7 @@
     "minimum_assets_per_timestamp": 3
   },
   "config_path": "config/crypto_search_surface_integration_v1.json",
-  "config_sha256": "52d5f1e6277e195def326bd54575004d561d3985000fe82c2161f0ce34863031",
+  "config_sha256": "49b596f8f885fc25870793e6ac5d923be8d13c571be0f2f5b889dc14258a1178",
   "data_planes": {
     "AGGTRADES_TOP200_DELIVERED": {
       "missing_value_fill": null,
@@ -73,8 +76,8 @@
     }
   },
   "experiment_id": "20260728_crypto_search_surface_integration_v1",
-  "frozen_at": "2026-07-27T18:28:26.336864+00:00",
-  "frozen_contract_sha256": "208DD0D0665051E69C86E9AB52A8851E5879D9693FA6373B2C4F1211FB247DC9",
+  "frozen_at": "2026-07-27T19:25:00.562013+00:00",
+  "frozen_contract_sha256": "28368DC76F3C3D150A8B1EAD8C9D13011CB6B754AAFFF67BF1D7DFBD42A6B176",
   "inputs": {
     "aggtrades_ranks101_200_tar": "G:/AlphaFactory_CryptoData/deliveries/pc2_followup_20260722/archives/binance_aggtrades_ranks101_200_compact_1m_202401_202606.tar",
     "aggtrades_top100_tar": "G:/AlphaFactory_CryptoData/deliveries/pc2_followup_20260722/archives/binance_aggtrades_top100_compact_1m_202401_202606.tar",

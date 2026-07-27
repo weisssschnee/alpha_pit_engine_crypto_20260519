@@ -4,17 +4,17 @@ Last updated: 2026-07-28 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_COMPLETED_ENGINEERING_ONLY`
+`CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_FULL_AGG_CARRIER_COMPLETED_ENGINEERING_ONLY`
 
 Search Surface Integration V1 completed at producer source
-`e4bcc5d64c00635dfbc4384c102fde0b5bf74ca5`. Four independent
-`RawPanelStore` carriers expose 212 runtime-active fields with actual runner
+`7a42bd6eddf9b55685673778f4bcf2b3d2383d79`. Four independent
+`RawPanelStore` carriers expose 235 runtime-active fields with actual runner
 load, candidate-local minimum-three-asset support, compiler/matched-control
 materialization, and deterministic replay: Broad39 `39/39`, independent Core3
-`81/81`, Top200 aggTrades `21/44`, and ranks51-200 OI/mark `71/96`. The
-remaining 48 engineering fields are explicit HOLDs: 23 are not materialized in
-the existing Top200 cache and 25 have zero finite support in the full delivered
-OI/mark root. Liquidation remains schema-observed inventory only and Top50
+`81/81`, Top200 aggTrades `44/44`, and ranks51-200 OI/mark `71/96`. The
+remaining 25 engineering fields are explicit source-unavailable HOLDs because
+they have zero finite support in the full delivered OI/mark root; no source
+value was filled or synthesized. Liquidation remains schema-observed inventory only and Top50
 OI/mark remains raw-only. The independent checker passed after recomputing
 source/config/carrier identities, the full OI root bundle, and both aggTrades
 TAR SHA256 values. Market pair evaluations, reward reads, sealed reads, Alpha
@@ -101,8 +101,8 @@ EVOLUTION_V2_2_INCREMENT_NOT_DEMONSTRATED
 BALANCED_ROTATING_MICROBATCH_EXECUTION_VERIFIED
 CAMPAIGN_LOCAL_TRANSITION_COLLISION_MEMORY_VERIFIED
 SEARCH_SURFACE_INTEGRATION_V1_ENGINEERING_PASS
-SEARCH_SURFACE_RUNTIME_ACTIVE_FIELDS_212
-SEARCH_SURFACE_DECLARED_FIELD_HOLDS_48
+SEARCH_SURFACE_RUNTIME_ACTIVE_FIELDS_235
+SEARCH_SURFACE_DECLARED_SOURCE_UNAVAILABLE_HOLDS_25
 BROAD39_CORE3_81_CONTEXT_SEPARATION_PRESERVED
 LIQUIDATION_AND_TOP50_OI_MARK_REMAIN_QUARANTINED
 SEARCH_SURFACE_FUTURE_ARENA_NOT_AUTHORIZED
@@ -126,7 +126,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 - Fresh-state aggTrades Search-System Canary V1: producer source `5a17a91732a7aca7ec53cf9e10963faf2998a649`; artifact bundle SHA256 `880BC5D5AD5F47242FD534AD4AD0A9C40C4BFBE91A76523E773CA487F9A4EC74`; frozen contract SHA256 `FD61656C7D53A682B8E8CA4E9C704B8D655F9EE3CFC2B3124B796243E1E06FAD`; data-cache identity SHA256 `127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04`; 2,000 strict candidates; 3,452 attempts; 2/2 exact-restored checkpoints; 1,946 behavior families; engineering integrity `PASS`; research `HOLD_RESEARCH_FIXED_RETROSPECTIVE_COHORT`; future qualified arms `[]`; sealed reads `0`.
 - Search Engine V1.1 Behavior-Niched Arena: producer source `17ac5de989dec464b0c4903256f3f7662eeb9778`; artifact bundle SHA256 `E27E0F116CBE1D1FB3F23D76178688AA44E4D1DE6738D02284F3D6F6FCA729A8`; frozen contract SHA256 `A94F0AE452FF626823E4408A786DBC7B7979EDBAEB5843950A10853548A393CC`; data-cache identity SHA256 `127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04`; 3,000 strict candidates; 5,444 attempts; 2/2 exact-restored checkpoints; 2,916 behavior families; 42 champion replacements; engineering integrity `PASS`; research `HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT`; CEM V2.1 and Evolution V2.1 increments rejected; future qualified arms `[]`; sealed reads `0`.
 - Search Engine V1.2 Balanced Collision Arena: producer source `395a972a99c869f1c6acc24c6a167939b9f0857e`; artifact bundle SHA256 `F142EB44FE91C349A54F0D7C78C704A491658B7FBC0B30402E0B08E5B8459296`; frozen contract SHA256 `620B40B5AEE6634BB719E3AA0FA95B778939CB66264869DC7E851A8949EB1C83`; data-cache identity SHA256 `127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04`; 2,000 strict candidates; 3,598 attempts; 2/2 exact-restored checkpoints; 1,916 behavior families; 250 balanced rotating micro-batches; engineering integrity `PASS`; research `HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT`; Evolution V2.2 increment rejected; future qualified arms `[]`; sealed reads `0`.
-- Search Surface Integration V1: producer source `e4bcc5d64c00635dfbc4384c102fde0b5bf74ca5`; source-binding SHA256 `FFA83DF61DD30ED8FBC8A9276FA622A4B1DA956BEE8CE45115893559F07FA38D`; run-manifest SHA256 `A6E5D3F25A9E0145B5CB13B448960C24072DC295FB8C140DC1AF93EE5D8ECB66`; carrier-manifest SHA256 `46232A870256F3F49755D501A55926B0ABC2C85CFB6B72CEF5F0221CB65A7FDD`; frozen-contract identity SHA256 `208DD0D0665051E69C86E9AB52A8851E5879D9693FA6373B2C4F1211FB247DC9`; 260 declared engineering fields, 212 runtime-active, 48 explicit HOLD; checker `PASS`; research and future Arena `HOLD`; market pair evaluations/reward/sealed reads `0`.
+- Search Surface Integration V1: producer source `7a42bd6eddf9b55685673778f4bcf2b3d2383d79`; source-binding SHA256 `583D2F4F71BAA0ADE59032756E80CA07091722A670049AA8D56E5E5D4B1146C3`; run-manifest SHA256 `E164995AE018A1623EECA21384E76DB9132963556C2D5C621B2DD3F472AD377B`; carrier-manifest SHA256 `265CED0B92F4687123197253B3578B8760A619AE797BAF62EE2BA46B0DE78C55`; frozen-contract identity SHA256 `28368DC76F3C3D150A8B1EAD8C9D13011CB6B754AAFFF67BF1D7DFBD42A6B176`; aggTrades full-44 carrier identity SHA256 `E819A3D1E5ECE0DD33D32E5B3AD6C3768A22999788C972E593E8712EEFF0D0C4`; 260 declared engineering fields, 235 runtime-active, 25 explicit source-unavailable HOLD; checker `PASS`; research and future Arena `HOLD`; market pair evaluations/reward/sealed reads `0`.
 - Bounded acceleration canary: execution producer `d77cdc4b0ff2ccf4662a690864be78b37e743605`; deterministic report-order repair `e806c15380e029ac00e662afec72a82620162d8f`; evidence bundle SHA256 `10E8002034399AD8B319F7EB4EE74FAB7B81E41C1943A38A37D44757301C38AB`; 512 fixed spent-development executions; no pair rerun during report repair.
 - Localized qualification bundle SHA256: `0C6193E81FEAB8271B8BAE05AD04604D74494EAB2710794C59A7F42919DD68EB`.
 - Liquidation ingress implementation: `d64a783dac4c148d1924f76acb7b8a80cbcc7f1a`; byte-stable evidence commit: `58ff34e48cb88acc0005e741c8aaa52d3528177e`; release identity SHA256: `C9717263EC6F97839466A4BC13D8DBA803E3D0D5854AE6E3A005F4C6F0F34D7A`.
@@ -177,7 +177,7 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 ## Active execution plan
 
 1. Treat the continuation, policy canary, Search Engine V1 20k campaign, aggTrades canary, Search Engine V1.1 Arena, and Search Engine V1.2 Arena as spent development engineering evidence; do not rerun, tune, rewrite, or import their candidate, reward, distribution, population, policy, archive, or transition-memory state.
-2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 212 fields runner-reachable but do not grant research admission. Keep the 48 declared-field holds explicit and do not merge Broad39 with Core3 81.
+2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
 3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. Requalification requires a separately authorized fresh-state run over an admitted carrier; do not add another control plane.
 4. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
 5. Do not launch another large search until separately authorized over an admitted new release. Latent search priority remains deferred after V1.2 and cannot influence budget.
@@ -229,7 +229,7 @@ No status code overrides observed runtime or source facts.
 ## Next action
 
 Stop at this closure and preserve all Search Engine and Search Surface bundles
-as immutable evidence. The 212 active fields are engineering-reachable, not
+as immutable evidence. The 235 active fields are engineering-reachable, not
 research-admitted; no V1.1 or V1.2 arm qualifies for a future new-data Arena.
 Any next search-capability iteration requires separate authorization and a new
 frozen spec. Do not automatically spend a market-evaluation budget, start a

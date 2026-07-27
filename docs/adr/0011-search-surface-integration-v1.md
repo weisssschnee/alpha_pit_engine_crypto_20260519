@@ -50,7 +50,14 @@ Each active data plane receives:
 A declared field remains HOLD when its carrier does not materialize it, its
 full delivered root has zero finite support, or no support-valid runtime proof
 can be constructed. V1 therefore records 260 declared engineering fields,
-212 runtime-active fields, and 48 explicit field holds.
+235 runtime-active fields, and 25 explicit field holds. The existing
+aggTrades bridge now uses its frozen `search_surface` mode to materialize all
+44 delivered physical fields through the same `RawPanelStore`, hourly
+aggregator, compiler, and evaluator path used by the 21-field canary. No
+second builder, AST, compiler, or evaluator was introduced. The remaining 25
+holds are OI/mark fields with zero finite support in the delivered source root;
+they are classified as source-unavailable and are neither filled nor
+synthesized.
 
 An independent carrier is not required to satisfy roles used only by other
 carriers. The generator selects only Skeletons whose typed roles are available
