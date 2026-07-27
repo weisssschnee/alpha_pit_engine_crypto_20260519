@@ -48,6 +48,8 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     BehaviorArchive,
     HierarchicalTypedCEMV2,
     TypedEvolutionV2,
+    V22_PARAMETERS,
+    _balanced_lane_choice,
     _checkpoint_allocation,
     _evaluation_audit_fields,
     _load_checkpoint,
@@ -772,6 +774,91 @@ def test_typed_evolution_v2_receipts_cover_genes_skeleton_and_crossover() -> Non
         "right_normalizer",
         "horizon_hours",
     ]
+
+
+def test_v12_balanced_lane_choice_finishes_all_seed_lanes_together() -> None:
+    lanes = [
+        f"{arm}|{seed}"
+        for arm in ("canonical_typed_random", "collision_controlled_evolution_v2_2")
+        for seed in (20260716, 20260717, 20260718, 20260719)
+    ]
+    targets = {lane: 2 for lane in lanes}
+    completed = {lane: 0 for lane in lanes}
+    cursor = 0
+    batches: list[list[str]] = []
+    failed_once = False
+    while any(completed[lane] < targets[lane] for lane in lanes):
+        proposals: list[dict[str, str]] = []
+        while len(proposals) < len(lanes):
+            lane, cursor = _balanced_lane_choice(
+                lane_order=lanes,
+                lane_completed=completed,
+                proposals=proposals,
+                target_by_lane=targets,
+                scheduler_cursor=cursor,
+            )
+            assert lane is not None
+            if lane == lanes[0] and not failed_once:
+                failed_once = True
+                continue
+            proposals.append({"policy_key": lane})
+        batches.append([row["policy_key"] for row in proposals])
+        for lane in batches[-1]:
+            completed[lane] += 1
+    assert len(batches) == 2
+    assert all(set(batch) == set(lanes) for batch in batches)
+    assert completed == targets
+
+
+def test_v22_collision_transition_memory_blocks_and_restores() -> None:
+    registry = _role_complete_registry()
+    parameters = {
+        **V22_PARAMETERS["collision_controlled_evolution_v2_2"],
+        "warmup": 1,
+    }
+    policy = TypedEvolutionV2(20260721, registry, parameters)
+    parent = generate_candidate(
+        registry, skeleton=skeleton_registry()[0], rng=random.Random(303)
+    )
+    policy.observe(
+        parent,
+        {
+            "behavior_family_id": "PARENT_FAMILY",
+            "pair_reward": 0.0,
+            "parent_ids": [],
+            "operation": "TYPED_RANDOM_WARMUP",
+            "new_policy_local_behavior_family_at_completion": True,
+        },
+    )
+    child, receipt, transition_key = policy._mutate_skeleton_with_transition(
+        parent, parent_behavior_family_id="PARENT_FAMILY"
+    )
+    policy.observe(
+        child,
+        {
+            "behavior_family_id": "PARENT_FAMILY",
+            "pair_reward": -1.0,
+            "parent_ids": [parent.candidate_id],
+            "operation": "COMPATIBLE_SKELETON_VARIANT_MUTATION",
+            "transition_key": transition_key,
+            "new_policy_local_behavior_family_at_completion": False,
+        },
+    )
+    assert policy.verify_receipt((parent,), child, receipt)
+    assert transition_key in policy.blocked_transition_keys
+    assert policy.transition_productivity[transition_key] == {
+        "trials": 1,
+        "new_families": 0,
+        "collisions": 1,
+    }
+    restored = TypedEvolutionV2.from_state(registry, policy.export_state())
+    assert restored.state_hash() == policy.state_hash()
+    next_child, _, next_transition_key = restored._mutate_skeleton_with_transition(
+        parent, parent_behavior_family_id="PARENT_FAMILY"
+    )
+    assert next_child.candidate_id != child.candidate_id
+    assert next_transition_key != transition_key
+    assert restored.blocked_transition_skips >= 1
 
 
 def test_behavior_archive_keeps_one_reward_champion_per_family() -> None:

@@ -84,6 +84,9 @@ AGGTRADES_CANARY_CONFIG = "config/crypto_aggtrades_system_canary_v1.json"
 V11_EPOCH_ID = "CRYPTO_SEARCH_ENGINE_V1_1_BEHAVIOR_NICHED_20260727"
 V11_DEFAULT_RUNTIME_DATE = "20260727"
 V11_CONFIG = "config/crypto_search_engine_v1_1.json"
+V12_EPOCH_ID = "CRYPTO_SEARCH_ENGINE_V1_2_COLLISION_CONTROLLED_20260727"
+V12_DEFAULT_RUNTIME_DATE = "20260727"
+V12_CONFIG = "config/crypto_search_engine_v1_2.json"
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
 CONTINUATION_RUNTIME = "runtime/crypto_18m_current_field_four_policy_continuation_20260719"
 SEEDS = (20260716, 20260717, 20260718, 20260719)
@@ -140,6 +143,20 @@ V11_CHECKPOINT_ALLOCATION = {
     "behavior_niched_cem_v2_1": 500,
     "behavior_niched_evolution_v2_1": 500,
 }
+V12_ARMS = (
+    "canonical_typed_random",
+    "collision_controlled_evolution_v2_2",
+)
+V12_CHECKPOINT_SIZE = 1_000
+V12_CHECKPOINT_COUNT = 2
+V12_STRICT_TARGET = V12_CHECKPOINT_SIZE * V12_CHECKPOINT_COUNT
+V12_RAW_ATTEMPT_LIMIT = 15_000
+V12_WALL_TIME_LIMIT_SECONDS = 4 * 60 * 60
+V12_CHECKPOINT_ALLOCATION = {
+    "canonical_typed_random": 500,
+    "collision_controlled_evolution_v2_2": 500,
+}
+V12_BALANCED_BATCH_SIZE = len(V12_ARMS) * len(SEEDS)
 QUALIFICATION_TOLERANCE = 1.0e-12
 QUALIFICATION_DUPLICATE_RATE_MAXIMUM = 0.20
 GENE_ORDER = (
@@ -195,6 +212,13 @@ V21_PARAMETERS: Mapping[str, Mapping[str, Any]] = {
         "operator_productivity_floor": 0.15,
         "operator_productivity_prior_successes": 1,
         "operator_productivity_prior_trials": 2,
+    },
+}
+V22_PARAMETERS: Mapping[str, Mapping[str, Any]] = {
+    "collision_controlled_evolution_v2_2": {
+        **V21_PARAMETERS["behavior_niched_evolution_v2_1"],
+        "campaign_local_transition_collision_control": True,
+        "transition_block_after_collisions": 1,
     },
 }
 V1_PARAMETERS: Mapping[str, Mapping[str, Any]] = {
@@ -587,6 +611,83 @@ def _validate_v11_config(config: Mapping[str, Any]) -> None:
         raise ValueError("Search Engine V1.1 research boundary changed")
 
 
+def _validate_v12_config(config: Mapping[str, Any]) -> None:
+    search = config["search"]
+    if config.get("authorization") != (
+        "ONE_FRESH_STATE_2000_SPENT_DEVELOPMENT_SEARCH_ENGINE_V1_2"
+    ):
+        raise ValueError("Search Engine V1.2 authorization changed")
+    if (
+        int(search["strict_evaluated_target"]) != V12_STRICT_TARGET
+        or int(search["checkpoint_size"]) != V12_CHECKPOINT_SIZE
+        or int(search["checkpoint_count"]) != V12_CHECKPOINT_COUNT
+    ):
+        raise ValueError("Search Engine V1.2 checkpoint contract changed")
+    if {
+        str(key): int(value)
+        for key, value in search["arms_per_checkpoint"].items()
+    } != V12_CHECKPOINT_ALLOCATION:
+        raise ValueError("Search Engine V1.2 arm allocation changed")
+    if tuple(int(value) for value in search["seeds"]) != SEEDS:
+        raise ValueError("Search Engine V1.2 seed set changed")
+    if (
+        int(search["raw_generation_attempt_limit"]) != V12_RAW_ATTEMPT_LIMIT
+        or int(search["wall_time_limit_seconds"])
+        != V12_WALL_TIME_LIMIT_SECONDS
+        or int(search["workers_default"]) != DEFAULT_WORKERS
+        or int(search["workers_memory_fallback"]) != FALLBACK_WORKERS
+        or search.get("workers_12_forbidden") is not True
+        or int(search["balanced_micro_batch_size"])
+        != V12_BALANCED_BATCH_SIZE
+        or search.get("one_inflight_candidate_per_seed_lane") is not True
+        or search.get("fresh_policy_and_archive_state") is not True
+        or search.get("every_candidate_requires_aggtrades_input") is not True
+    ):
+        raise ValueError("Search Engine V1.2 execution contract changed")
+    gate = config["frozen_engineering_gate"]
+    if (
+        any(
+            gate.get(key) is not True
+            for key in (
+                "strict_per_raw_attempt_above_random",
+                "balanced_valid_exact_unique_per_cpu_hour_not_below_random",
+                "new_behavior_families_per_cpu_hour_not_below_random",
+                "mean_pair_reward_not_below_random",
+                "top_decile_pair_reward_not_below_random",
+            )
+        )
+        or not math.isclose(
+            float(gate["behavior_duplicate_rate_maximum"]),
+            0.03,
+            rel_tol=0.0,
+            abs_tol=1.0e-12,
+        )
+    ):
+        raise ValueError("Search Engine V1.2 engineering gate changed")
+    boundaries = config["boundaries"]
+    if (
+        boundaries.get("fixed_retrospective_cohort") is not True
+        or boundaries.get("system_behavior_only") is not True
+        or any(
+            bool(boundaries.get(key))
+            for key in (
+                "alpha_claim",
+                "oos",
+                "challenge",
+                "recent",
+                "may_stress",
+                "forward",
+                "promotion",
+                "latent_priority",
+                "relational_training",
+                "cross_sprint_adaptive_memory",
+                "future_arm_qualification",
+            )
+        )
+    ):
+        raise ValueError("Search Engine V1.2 research boundary changed")
+
+
 def build_aggtrades_canary_cache_from_config(
     repo_root: Path, *, source_sha: str
 ) -> dict[str, Any]:
@@ -752,6 +853,47 @@ def _load_v11_inputs(
         "source_canary_config": identities["canary_config"],
         "v11_config": {
             "path": V11_CONFIG,
+            "sha256": sha256_file(config_path),
+        },
+    }
+    identities.pop("canary_config", None)
+    return store, contracts, behavior_contract, identities, config
+
+
+def _load_v12_inputs(
+    repo_root: Path,
+) -> tuple[
+    RawPanelStore,
+    tuple[FieldContract, ...],
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+]:
+    store, contracts, behavior_contract, identities, canary_config = (
+        _load_aggtrades_canary_inputs(repo_root)
+    )
+    config_path = repo_root / V12_CONFIG
+    config = _read_json(config_path)
+    _validate_v12_config(config)
+    for key in ("inputs", "cache"):
+        if config.get(key) != canary_config.get(key):
+            raise ValueError(
+                f"Search Engine V1.2 {key} must reuse the exact canary input carrier"
+            )
+    if {
+        key: config["window"].get(key) for key in ("start", "end_exclusive")
+    } != {
+        key: canary_config["window"].get(key)
+        for key in ("start", "end_exclusive")
+    }:
+        raise ValueError(
+            "Search Engine V1.2 window must reuse the exact canary input carrier"
+        )
+    identities = {
+        **identities,
+        "source_canary_config": identities["canary_config"],
+        "v12_config": {
+            "path": V12_CONFIG,
             "sha256": sha256_file(config_path),
         },
     }
@@ -1147,6 +1289,125 @@ def _v11_frozen_contract(
         "cpu_hour_definition": (
             "sum process CPU seconds for proposal, compile, archive, and pair "
             "evaluation; excludes queue and human wait"
+        ),
+        "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
+        "boundaries": {
+            "sealed_reads": 0,
+            "challenge": False,
+            "recent": False,
+            "may_stress": False,
+            "forward": False,
+            "promotion": False,
+            "cross_sprint_adaptive_memory": False,
+            "latent_priority": False,
+            "relational_training": False,
+        },
+    }
+    return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
+def _v12_frozen_contract(
+    *,
+    source_sha: str,
+    compiler_binding: Mapping[str, Any],
+    behavior_contract: Mapping[str, Any],
+    input_identities: Mapping[str, Any],
+    environment: Mapping[str, Any],
+    config: Mapping[str, Any],
+) -> dict[str, Any]:
+    payload = {
+        "schema_version": 1,
+        "epoch_id": V12_EPOCH_ID,
+        "experiment_id": str(config["experiment_id"]),
+        "source_sha": source_sha,
+        "objective": str(config["objective"]),
+        "authorization": str(config["authorization"]),
+        "evidence_role": "SYSTEM_SEARCH_CAPABILITY_ONLY_SPENT_DEVELOPMENT",
+        "input_identities": dict(input_identities),
+        "compiler_identity": dict(compiler_binding),
+        "evaluator_contract": pair_contract_payload(),
+        "behavior_descriptor": dict(behavior_contract),
+        "environment": dict(environment),
+        "window": dict(config["window"]),
+        "surface": {
+            "broad_context_fields": 39,
+            "aggtrades_fields": len(AGGTRADES_SYSTEM_CANARY_FIELDS),
+            "aggtrades_field_ids": list(AGGTRADES_SYSTEM_CANARY_FIELDS),
+            "every_candidate_requires_aggtrades_input": True,
+            "fixed_retrospective_cohort": True,
+            "input_carrier_reused_without_rebuild": True,
+        },
+        "seeds": list(SEEDS),
+        "arms": {
+            "active": list(V12_ARMS),
+            "checkpoint_allocation": dict(V12_CHECKPOINT_ALLOCATION),
+            "same_seed_set_for_every_arm": True,
+            "reward_comparison": (
+                "same first N by deterministic arm completion ordinal"
+            ),
+        },
+        "fresh_state": {
+            "old_candidate_import": False,
+            "old_reward_import": False,
+            "old_distribution_import": False,
+            "old_population_import": False,
+            "old_policy_state_import": False,
+            "old_archive_import": False,
+            "old_transition_collision_memory_import": False,
+        },
+        "policies": {
+            "canonical_typed_random": dict(
+                V1_PARAMETERS["canonical_typed_random"]
+            ),
+            "collision_controlled_evolution_v2_2": dict(
+                V22_PARAMETERS["collision_controlled_evolution_v2_2"]
+            ),
+        },
+        "search_capability_delta": {
+            "existing_lane_scheduler_balanced": True,
+            "balanced_micro_batch_size": V12_BALANCED_BATCH_SIZE,
+            "one_inflight_candidate_per_seed_lane": True,
+            "matched_batch_cpu_authority": True,
+            "campaign_local_transition_collision_control": True,
+            "transition_key": [
+                "parent_behavior_family_id",
+                "source_skeleton_id",
+                "target_skeleton_id",
+            ],
+            "block_after_collisions": int(
+                V22_PARAMETERS["collision_controlled_evolution_v2_2"][
+                    "transition_block_after_collisions"
+                ]
+            ),
+            "new_ast": False,
+            "new_compiler": False,
+            "new_evaluator": False,
+            "new_scheduler_system": False,
+        },
+        "budget": {
+            "strict_evaluated_target": V12_STRICT_TARGET,
+            "raw_generation_attempts_maximum": V12_RAW_ATTEMPT_LIMIT,
+            "fail_closed_attempt_reservation_per_proposal": (
+                MAX_SINGLE_PROPOSAL_RAW_ATTEMPTS
+            ),
+            "wall_time_seconds_maximum": V12_WALL_TIME_LIMIT_SECONDS,
+            "checkpoint_size": V12_CHECKPOINT_SIZE,
+            "checkpoint_count": V12_CHECKPOINT_COUNT,
+            "workers_default": DEFAULT_WORKERS,
+            "workers_memory_fallback": FALLBACK_WORKERS,
+            "workers_12_forbidden": True,
+        },
+        "frozen_engineering_gate": dict(config["frozen_engineering_gate"]),
+        "decision_authority": {
+            "system_behavior_only": True,
+            "alpha_discovery_claim": False,
+            "future_arm_qualification": False,
+            "data_admission_promotion": False,
+        },
+        "cpu_hour_definition": (
+            "sum process CPU seconds for proposal, compile, archive, and pair "
+            "evaluation inside full balanced matched micro-batches; excludes "
+            "queue and human wait"
         ),
         "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
         "boundaries": {
@@ -1846,6 +2107,9 @@ class TypedEvolutionV2:
         }
     )
     operator_update_count: int = 0
+    transition_productivity: dict[str, dict[str, int]] = field(default_factory=dict)
+    blocked_transition_keys: set[str] = field(default_factory=set)
+    blocked_transition_skips: int = 0
 
     def __post_init__(self) -> None:
         self.parameters = dict(self.parameters)
@@ -1889,6 +2153,12 @@ class TypedEvolutionV2:
                 raise ValueError(
                     "Evolution V2 operator productivity floor is invalid"
                 )
+        if bool(
+            self.parameters.get(
+                "campaign_local_transition_collision_control", False
+            )
+        ) and int(self.parameters.get("transition_block_after_collisions", 0)) < 1:
+            raise ValueError("Evolution V2 transition collision gate is invalid")
         self.operation_probabilities = {
             "EFFECTIVE_GENE_MUTATION_1_TO_3": float(
                 self.parameters["gene_mutation_probability"]
@@ -2056,9 +2326,28 @@ class TypedEvolutionV2:
             raw_attempts=int(self.parameters["duplicate_resample_limit"]) + 1,
         )
 
-    def _mutate_skeleton(
-        self, parent: CandidateSpec
-    ) -> tuple[CandidateSpec, dict[str, Any]]:
+    @staticmethod
+    def _skeleton_transition_key(
+        *,
+        parent_behavior_family_id: str,
+        source_skeleton_id: str,
+        target_skeleton_id: str,
+    ) -> str:
+        return _payload_sha(
+            {
+                "operation": "COMPATIBLE_SKELETON_VARIANT_MUTATION",
+                "parent_behavior_family_id": str(parent_behavior_family_id),
+                "source_skeleton_id": str(source_skeleton_id),
+                "target_skeleton_id": str(target_skeleton_id),
+            }
+        )
+
+    def _mutate_skeleton_with_transition(
+        self,
+        parent: CandidateSpec,
+        *,
+        parent_behavior_family_id: str,
+    ) -> tuple[CandidateSpec, dict[str, Any], str]:
         source = _skeleton_by_id(parent.skeleton_id)
         targets = [
             item
@@ -2069,6 +2358,14 @@ class TypedEvolutionV2:
         ]
         self.rng.shuffle(targets)
         for internal_attempt, target in enumerate(targets, start=1):
+            transition_key = self._skeleton_transition_key(
+                parent_behavior_family_id=parent_behavior_family_id,
+                source_skeleton_id=source.skeleton_id,
+                target_skeleton_id=target.skeleton_id,
+            )
+            if transition_key in self.blocked_transition_keys:
+                self.blocked_transition_skips += 1
+                continue
             child = candidate_from_genes(
                 self.registry,
                 skeleton=target,
@@ -2076,23 +2373,36 @@ class TypedEvolutionV2:
                 roles=self.roles,
             )
             if child.candidate_id != parent.candidate_id:
-                return child, self._receipt(
-                    operation="COMPATIBLE_SKELETON_VARIANT_MUTATION",
-                    parents=(parent,),
-                    child=child,
-                    details={
-                        "source_variant": int(source.variant),
-                        "target_variant": int(target.variant),
-                        "deterministic_gene_remapping": dict(
-                            child.generation_genes
-                        ),
-                        "internal_generation_attempts": internal_attempt,
-                    },
+                return (
+                    child,
+                    self._receipt(
+                        operation="COMPATIBLE_SKELETON_VARIANT_MUTATION",
+                        parents=(parent,),
+                        child=child,
+                        details={
+                            "source_variant": int(source.variant),
+                            "target_variant": int(target.variant),
+                            "deterministic_gene_remapping": dict(
+                                child.generation_genes
+                            ),
+                            "internal_generation_attempts": internal_attempt,
+                        },
+                    ),
+                    transition_key,
                 )
         raise _ProposalGenerationFailure(
             "Evolution V2 has no compatible skeleton variant mutation",
             raw_attempts=max(1, len(targets)),
         )
+
+    def _mutate_skeleton(
+        self, parent: CandidateSpec
+    ) -> tuple[CandidateSpec, dict[str, Any]]:
+        child, receipt, _ = self._mutate_skeleton_with_transition(
+            parent,
+            parent_behavior_family_id="RECEIPT_ONLY_NO_COLLISION_MEMORY",
+        )
+        return child, receipt
 
     def _crossover(
         self, first: CandidateSpec, second: CandidateSpec
@@ -2268,8 +2578,10 @@ class TypedEvolutionV2:
         receipt: dict[str, Any] | None = None
         parents: tuple[CandidateSpec, ...] = ()
         operation = "TYPED_RANDOM_WARMUP"
+        transition_key: str | None = None
         compile_attempts = 0
         for duplicate_resamples in range(limit + 1):
+            transition_key = None
             compile_attempts += 1
             if len(self.population) < int(self.parameters["warmup"]):
                 skeletons = skeleton_registry()
@@ -2298,7 +2610,27 @@ class TypedEvolutionV2:
                     parents = (first,)
                     operation = str(receipt["operation"])
                 elif draw < gene_probability + skeleton_probability:
-                    candidate, receipt = self._mutate_skeleton(first)
+                    if bool(
+                        self.parameters.get(
+                            "campaign_local_transition_collision_control",
+                            False,
+                        )
+                    ):
+                        parent_family_id = str(
+                            self.population[first.candidate_id][
+                                "behavior_family_id"
+                            ]
+                        )
+                        (
+                            candidate,
+                            receipt,
+                            transition_key,
+                        ) = self._mutate_skeleton_with_transition(
+                            first,
+                            parent_behavior_family_id=parent_family_id,
+                        )
+                    else:
+                        candidate, receipt = self._mutate_skeleton(first)
                     parents = (first,)
                     operation = str(receipt["operation"])
                 else:
@@ -2364,6 +2696,7 @@ class TypedEvolutionV2:
             "receipt": receipt,
             "receipt_verified": bool(verified) if receipt is not None else None,
             "raw_attempts": compile_attempts,
+            "transition_key": transition_key,
         }
 
     def observe(
@@ -2460,6 +2793,32 @@ class TypedEvolutionV2:
             self.verified_mutations += 1
         elif operation == "COMPATIBLE_SKELETON_VARIANT_MUTATION":
             self.verified_skeleton_mutations += 1
+            transition_key = str(archive_row.get("transition_key") or "")
+            if bool(
+                self.parameters.get(
+                    "campaign_local_transition_collision_control", False
+                )
+            ):
+                if not transition_key:
+                    raise ValueError(
+                        "collision-controlled skeleton mutation lacks transition key"
+                    )
+                transition_stats = self.transition_productivity.setdefault(
+                    transition_key,
+                    {"trials": 0, "new_families": 0, "collisions": 0},
+                )
+                transition_stats["trials"] += 1
+                new_family = bool(
+                    archive_row.get(
+                        "new_policy_local_behavior_family_at_completion", False
+                    )
+                )
+                transition_stats["new_families"] += int(new_family)
+                transition_stats["collisions"] += int(not new_family)
+                if int(transition_stats["collisions"]) >= int(
+                    self.parameters["transition_block_after_collisions"]
+                ):
+                    self.blocked_transition_keys.add(transition_key)
         elif operation == "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER":
             self.verified_crossovers += 1
 
@@ -2517,6 +2876,12 @@ class TypedEvolutionV2:
                 )
             },
             "operator_update_count": int(self.operator_update_count),
+            "transition_productivity": {
+                key: dict(stats)
+                for key, stats in sorted(self.transition_productivity.items())
+            },
+            "blocked_transition_count": len(self.blocked_transition_keys),
+            "blocked_transition_skips": int(self.blocked_transition_skips),
         }
 
     def export_state(self) -> dict[str, Any]:
@@ -2546,6 +2911,12 @@ class TypedEvolutionV2:
                 )
             },
             "operator_update_count": int(self.operator_update_count),
+            "transition_productivity": {
+                key: dict(stats)
+                for key, stats in sorted(self.transition_productivity.items())
+            },
+            "blocked_transition_keys": sorted(self.blocked_transition_keys),
+            "blocked_transition_skips": int(self.blocked_transition_skips),
         }
 
     def state_hash(self) -> str:
@@ -2599,6 +2970,20 @@ class TypedEvolutionV2:
         }
         policy.operator_update_count = int(
             state.get("operator_update_count", 0)
+        )
+        policy.transition_productivity = {
+            str(key): {
+                "trials": int(stats.get("trials", 0)),
+                "new_families": int(stats.get("new_families", 0)),
+                "collisions": int(stats.get("collisions", 0)),
+            }
+            for key, stats in state.get("transition_productivity", {}).items()
+        }
+        policy.blocked_transition_keys = set(
+            str(value) for value in state.get("blocked_transition_keys", ())
+        )
+        policy.blocked_transition_skips = int(
+            state.get("blocked_transition_skips", 0)
         )
         return policy
 
@@ -2694,6 +3079,46 @@ def _policy_key(arm: str, seed: int) -> str:
     return f"{arm}|{int(seed)}"
 
 
+def _balanced_lane_choice(
+    *,
+    lane_order: Sequence[str],
+    lane_completed: Mapping[str, int],
+    proposals: Sequence[Mapping[str, Any]],
+    target_by_lane: Mapping[str, int],
+    scheduler_cursor: int,
+) -> tuple[str | None, int]:
+    """Choose the least-progressed unused lane with deterministic rotation."""
+    pending = Counter(str(row["policy_key"]) for row in proposals)
+    used = set(pending)
+    eligible = [
+        str(key)
+        for key in lane_order
+        if str(key) not in used
+        and int(lane_completed.get(str(key), 0)) + int(pending[str(key)])
+        < int(target_by_lane[str(key)])
+    ]
+    if not eligible:
+        return None, int(scheduler_cursor)
+    progress = {
+        key: (
+            int(lane_completed.get(key, 0)) + int(pending[key])
+        )
+        / max(1, int(target_by_lane[key]))
+        for key in eligible
+    }
+    minimum = min(progress.values())
+    tied = {
+        key
+        for key in eligible
+        if math.isclose(progress[key], minimum, rel_tol=0.0, abs_tol=1.0e-15)
+    }
+    count = len(lane_order)
+    start = int(scheduler_cursor) % max(1, count)
+    rotated = [str(lane_order[(start + offset) % count]) for offset in range(count)]
+    selected = next(key for key in rotated if key in tied)
+    return selected, int(scheduler_cursor) + 1
+
+
 def _initial_policies(
     registry: TypedExpressionRegistry,
     *,
@@ -2729,6 +3154,16 @@ def _initial_policies(
                     seed,
                     registry,
                     dict(V21_PARAMETERS["behavior_niched_evolution_v2_1"]),
+                )
+            elif arm == "collision_controlled_evolution_v2_2":
+                output[key] = TypedEvolutionV2(
+                    seed,
+                    registry,
+                    dict(
+                        V22_PARAMETERS[
+                            "collision_controlled_evolution_v2_2"
+                        ]
+                    ),
                 )
             else:
                 raise ValueError(f"unsupported search policy arm: {arm}")
@@ -2864,6 +3299,7 @@ def _new_campaign_state(
         "frozen_contract_sha256": frozen_hash,
         "next_checkpoint_index": 0,
         "scheduler_cursor": 0,
+        "balanced_batch_index": 0,
         "generation_attempts": 0,
         "compile_valid": 0,
         "exact_unique": 0,
@@ -3019,6 +3455,9 @@ def _metrics_rows(
         mechanism_occupancy: Counter[str] = Counter()
         skeleton_occupancy: Counter[str] = Counter()
         operator_productivity: dict[str, Counter[str]] = defaultdict(Counter)
+        transition_productivity: dict[str, Counter[str]] = defaultdict(Counter)
+        blocked_transition_count = 0
+        blocked_transition_skips = 0
         for diagnostic in evolution_diagnostics:
             mechanism_occupancy.update(diagnostic["mechanism_occupancy"])
             skeleton_occupancy.update(diagnostic["skeleton_occupancy"])
@@ -3026,6 +3465,16 @@ def _metrics_rows(
                 "operator_productivity"
             ].items():
                 operator_productivity[operation].update(stats)
+            for transition_key, stats in diagnostic[
+                "transition_productivity"
+            ].items():
+                transition_productivity[transition_key].update(stats)
+            blocked_transition_count += int(
+                diagnostic["blocked_transition_count"]
+            )
+            blocked_transition_skips += int(
+                diagnostic["blocked_transition_skips"]
+            )
         operation_probabilities = {
             operation: float(
                 np.mean(
@@ -3061,8 +3510,14 @@ def _metrics_rows(
                 )
                 / max(1, int(counters["exact_unique"])),
                 "strict_evaluated_count": int(counters["strict_evaluated"]),
+                "strict_per_raw_attempt": int(counters["strict_evaluated"])
+                / max(1, int(counters["generation_attempts"])),
                 "cpu_hours": cpu_hours,
                 "valid_exact_unique_per_cpu_hour": int(counters["exact_unique"])
+                / max(cpu_hours, 1.0e-12),
+                "balanced_valid_exact_unique_per_cpu_hour": int(
+                    counters["exact_unique"]
+                )
                 / max(cpu_hours, 1.0e-12),
                 "positive_matched_discoveries_per_cpu_hour": sum(
                     bool(row["matched_positive"]) for row in rows
@@ -3192,6 +3647,28 @@ def _metrics_rows(
                     int(row["operator_update_count"])
                     for row in evolution_diagnostics
                 ),
+                "transition_productivity_json": json.dumps(
+                    {
+                        key: dict(sorted(stats.items()))
+                        for key, stats in sorted(
+                            transition_productivity.items()
+                        )
+                    },
+                    sort_keys=True,
+                ),
+                "blocked_transition_count": int(
+                    blocked_transition_count
+                ),
+                "blocked_transition_skips": int(
+                    blocked_transition_skips
+                ),
+                "balanced_batch_count": len(
+                    {
+                        int(row["balanced_batch_index"])
+                        for row in rows
+                        if row.get("balanced_batch_index") is not None
+                    }
+                ),
                 "arm_state_after_gate": state.get("arm_states", {}).get(
                     arm, "CONTROL_EXITED" if checkpoint_index > 0 else "CONTROL"
                 ),
@@ -3215,12 +3692,25 @@ def _metrics_rows(
             "matched_control_valid_rate": float(state["matched_control_valid"])
             / max(1, int(state["exact_unique"])),
             "strict_evaluated_count": int(state["strict_evaluated"]),
+            "strict_per_raw_attempt": int(state["strict_evaluated"])
+            / max(1, int(state["generation_attempts"])),
             "cpu_hours": sum(
                 float(value["cpu_seconds"])
                 for value in state["arm_counters"].values()
             )
             / 3600.0,
             "valid_exact_unique_per_cpu_hour": int(state["exact_unique"])
+            / max(
+                1.0e-12,
+                sum(
+                    float(value["cpu_seconds"])
+                    for value in state["arm_counters"].values()
+                )
+                / 3600.0,
+            ),
+            "balanced_valid_exact_unique_per_cpu_hour": int(
+                state["exact_unique"]
+            )
             / max(
                 1.0e-12,
                 sum(
@@ -3294,6 +3784,16 @@ def _metrics_rows(
             "operator_probabilities_json": "{}",
             "operator_productivity_json": "{}",
             "operator_update_count": 0,
+            "transition_productivity_json": "{}",
+            "blocked_transition_count": 0,
+            "blocked_transition_skips": 0,
+            "balanced_batch_count": len(
+                {
+                    int(row["balanced_batch_index"])
+                    for row in ledger
+                    if row.get("balanced_batch_index") is not None
+                }
+            ),
             "arm_state_after_gate": "RUNNING",
             "exit_gate_json": None,
         }
@@ -3661,6 +4161,10 @@ def _ledger_row(
         "raw_fields_json": json.dumps(list(candidate.raw_fields)),
         "field_families_json": json.dumps(list(candidate.field_families)),
         "operation": str(proposal["operation"]),
+        "transition_key": proposal.get("transition_key"),
+        "balanced_batch_index": proposal.get("balanced_batch_index"),
+        "balanced_batch_slot": proposal.get("balanced_batch_slot"),
+        "balanced_batch_size": proposal.get("balanced_batch_size"),
         "parent_ids_json": json.dumps(list(proposal["parent_ids"])),
         "receipt_json": (
             json.dumps(proposal["receipt"], sort_keys=True)
@@ -4331,6 +4835,254 @@ def _v11_final_decision(
     }
 
 
+def _v12_final_decision(
+    *,
+    source_sha: str,
+    state: Mapping[str, Any],
+    ledger: Sequence[Mapping[str, Any]],
+    archive: BehaviorArchive,
+    metrics: Sequence[Mapping[str, Any]],
+    runtime_root: Path,
+) -> dict[str, Any]:
+    final_rows = {
+        str(row["arm"]): row
+        for row in metrics
+        if int(row["checkpoint_index"]) == V12_CHECKPOINT_COUNT - 1
+    }
+    random_metrics = final_rows["canonical_typed_random"]
+    evolution_metrics = final_rows["collision_controlled_evolution_v2_2"]
+    comparison = {
+        "matched_evaluated_count": int(
+            evolution_metrics["matched_reward_comparison_count"]
+        ),
+        "strict_per_raw_attempt": float(
+            evolution_metrics["strict_per_raw_attempt"]
+        ),
+        "strict_per_raw_attempt_delta": float(
+            evolution_metrics["strict_per_raw_attempt"]
+        )
+        - float(random_metrics["strict_per_raw_attempt"]),
+        "balanced_valid_exact_unique_per_cpu_hour": float(
+            evolution_metrics[
+                "balanced_valid_exact_unique_per_cpu_hour"
+            ]
+        ),
+        "balanced_valid_exact_unique_per_cpu_hour_delta": float(
+            evolution_metrics[
+                "balanced_valid_exact_unique_per_cpu_hour"
+            ]
+        )
+        - float(
+            random_metrics[
+                "balanced_valid_exact_unique_per_cpu_hour"
+            ]
+        ),
+        "new_behavior_families_per_cpu_hour": float(
+            evolution_metrics["new_behavior_families_per_cpu_hour"]
+        ),
+        "new_behavior_families_per_cpu_hour_delta": float(
+            evolution_metrics["new_behavior_families_per_cpu_hour"]
+        )
+        - float(random_metrics["new_behavior_families_per_cpu_hour"]),
+        "new_behavior_families_per_1k_evaluations": float(
+            evolution_metrics["new_behavior_families_per_1k_evaluations"]
+        ),
+        "new_behavior_families_per_1k_delta": float(
+            evolution_metrics["new_behavior_families_per_1k_evaluations"]
+        )
+        - float(random_metrics["new_behavior_families_per_1k_evaluations"]),
+        "mean_pair_reward_at_matched_count": float(
+            evolution_metrics["mean_pair_reward_at_matched_count"]
+        ),
+        "mean_pair_reward_delta": float(
+            evolution_metrics["mean_pair_reward_at_matched_count"]
+        )
+        - float(random_metrics["mean_pair_reward_at_matched_count"]),
+        "top_decile_pair_reward_at_matched_count": float(
+            evolution_metrics["top_decile_pair_reward_at_matched_count"]
+        ),
+        "top_decile_pair_reward_delta": float(
+            evolution_metrics["top_decile_pair_reward_at_matched_count"]
+        )
+        - float(random_metrics["top_decile_pair_reward_at_matched_count"]),
+        "behavior_duplicate_rate": float(
+            evolution_metrics["behavior_duplicate_rate"]
+        ),
+        "behavior_duplicate_rate_delta": float(
+            evolution_metrics["behavior_duplicate_rate"]
+        )
+        - float(random_metrics["behavior_duplicate_rate"]),
+    }
+    engineering_gate = {
+        "strict_per_raw_attempt_above_random": (
+            comparison["strict_per_raw_attempt_delta"] > 0.0
+        ),
+        "balanced_valid_exact_unique_per_cpu_hour_not_below_random": (
+            comparison[
+                "balanced_valid_exact_unique_per_cpu_hour_delta"
+            ]
+            >= 0.0
+        ),
+        "new_behavior_families_per_cpu_hour_not_below_random": (
+            comparison["new_behavior_families_per_cpu_hour_delta"] >= 0.0
+        ),
+        "behavior_duplicate_rate_at_or_below_3pct": (
+            comparison["behavior_duplicate_rate"] <= 0.03
+        ),
+        "mean_pair_reward_not_below_random": (
+            comparison["mean_pair_reward_delta"] >= 0.0
+        ),
+        "top_decile_pair_reward_not_below_random": (
+            comparison["top_decile_pair_reward_delta"] >= 0.0
+        ),
+    }
+    increment_pass = all(engineering_gate.values())
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    restore_verified = (
+        len(checkpoints) == V12_CHECKPOINT_COUNT
+        and all(
+            bool(_read_json(path / "manifest.json").get("restore_verified"))
+            for path in checkpoints
+        )
+    )
+    arm_counts = Counter(str(row["arm"]) for row in ledger)
+    expected_arm_counts = {
+        arm: count * V12_CHECKPOINT_COUNT
+        for arm, count in V12_CHECKPOINT_ALLOCATION.items()
+    }
+    batches: dict[int, list[Mapping[str, Any]]] = defaultdict(list)
+    for row in ledger:
+        if row.get("balanced_batch_index") is not None:
+            batches[int(row["balanced_batch_index"])].append(row)
+    balanced_batch_integrity = bool(
+        len(batches) == V12_STRICT_TARGET // V12_BALANCED_BATCH_SIZE
+        and all(
+            len(rows) == V12_BALANCED_BATCH_SIZE
+            and Counter(str(row["arm"]) for row in rows)
+            == {
+                "canonical_typed_random": len(SEEDS),
+                "collision_controlled_evolution_v2_2": len(SEEDS),
+            }
+            and len(
+                {
+                    (str(row["arm"]), int(row["seed"]))
+                    for row in rows
+                }
+            )
+            == V12_BALANCED_BATCH_SIZE
+            and sorted(int(row["balanced_batch_slot"]) for row in rows)
+            == list(range(V12_BALANCED_BATCH_SIZE))
+            for rows in batches.values()
+        )
+    )
+    every_candidate_uses_aggtrades = all(
+        bool(
+            set(json.loads(str(row["raw_fields_json"])))
+            & set(AGGTRADES_SYSTEM_CANARY_FIELDS)
+        )
+        for row in ledger
+    )
+    verified_operations = Counter(
+        str(row["operation"])
+        for row in ledger
+        if str(row["arm"]) == "collision_controlled_evolution_v2_2"
+        and bool(row.get("receipt_verified"))
+    )
+    positive_by_arm = {
+        arm: sum(
+            bool(row["matched_positive"])
+            for row in ledger
+            if str(row["arm"]) == arm
+        )
+        for arm in V12_ARMS
+    }
+    within_budget = bool(
+        int(state["generation_attempts"]) <= V12_RAW_ATTEMPT_LIMIT
+        and float(state["wall_elapsed_seconds"])
+        <= V12_WALL_TIME_LIMIT_SECONDS
+    )
+    engineering_pass = bool(
+        len(ledger) == V12_STRICT_TARGET
+        and dict(arm_counts) == expected_arm_counts
+        and every_candidate_uses_aggtrades
+        and balanced_batch_integrity
+        and restore_verified
+        and int(evolution_metrics["operator_update_count"]) > 0
+        and within_budget
+    )
+    return {
+        "schema_version": 1,
+        "epoch_id": V12_EPOCH_ID,
+        "status": (
+            "PASS_SEARCH_ENGINE_V1_2_COMPLETED"
+            if engineering_pass
+            else "ENGINE_BUDGET_EXHAUSTED"
+            if not within_budget
+            else "HOLD_SEARCH_ENGINE_V1_2_INCOMPLETE"
+        ),
+        "research_decision": "HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT",
+        "producer_source_sha": source_sha,
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": int(state["generation_attempts"]),
+        "raw_attempt_limit": V12_RAW_ATTEMPT_LIMIT,
+        "active_wall_seconds": float(state["wall_elapsed_seconds"]),
+        "wall_time_limit_seconds": V12_WALL_TIME_LIMIT_SECONDS,
+        "checkpoint_count": len(checkpoints),
+        "checkpoint_restore_verified": restore_verified,
+        "arm_counts": dict(sorted(arm_counts.items())),
+        "expected_arm_counts": expected_arm_counts,
+        "balanced_batch_count": len(batches),
+        "balanced_batch_integrity": balanced_batch_integrity,
+        "every_candidate_uses_aggtrades": every_candidate_uses_aggtrades,
+        "behavior_family_count": len(archive.champion_by_family),
+        "behavior_duplicate_rate": 1.0
+        - len(archive.champion_by_family) / max(1, len(ledger)),
+        "archive_duplicate_replacements": archive.duplicate_replacements,
+        "system_comparison_vs_typed_random": comparison,
+        "frozen_engineering_gate": engineering_gate,
+        "verified_evolution_operations": dict(
+            sorted(verified_operations.items())
+        ),
+        "final_evolution_operator_probabilities": json.loads(
+            str(evolution_metrics["operator_probabilities_json"])
+        ),
+        "final_evolution_operator_productivity": json.loads(
+            str(evolution_metrics["operator_productivity_json"])
+        ),
+        "transition_productivity": json.loads(
+            str(evolution_metrics["transition_productivity_json"])
+        ),
+        "blocked_transition_count": int(
+            evolution_metrics["blocked_transition_count"]
+        ),
+        "blocked_transition_skips": int(
+            evolution_metrics["blocked_transition_skips"]
+        ),
+        "positive_matched_discoveries_by_arm": positive_by_arm,
+        "search_iteration_decision": {
+            "collision_controlled_evolution_v2_2": (
+                "RETAIN_ENGINEERING_SEARCH_INCREMENT"
+                if increment_pass
+                else "REJECT_INCREMENT_NOT_DEMONSTRATED"
+            )
+        },
+        "engineering_execution_qualified_arms": list(V12_ARMS),
+        "future_new_data_arena_qualified_arms": [],
+        "promotion": "FORBIDDEN",
+        "sealed_reads": 0,
+        "next_arena_started": False,
+        "cannot_conclude": [
+            "unbiased cross-sectional Alpha",
+            "fresh economic increment",
+            "OOS validity",
+            "challenge, recent, May-stress, or forward evidence",
+            "candidate, arm, or component promotion",
+        ],
+    }
+
+
 def _v11_report_text(decision: Mapping[str, Any]) -> str:
     comparisons = decision["system_comparisons_vs_typed_random"]
     cem = comparisons["behavior_niched_cem_v2_1"]
@@ -4361,7 +5113,46 @@ def _v11_report_text(decision: Mapping[str, Any]) -> str:
 This fixed, spent-development Arena evaluates search capability only. It
 creates no Alpha, OOS, challenge, recent, May-stress, forward, promotion,
 data-admission, latent-priority, relational-training, or future-Arena
-qualification authority.
+    qualification authority.
+"""
+
+
+def _v12_report_text(decision: Mapping[str, Any]) -> str:
+    comparison = decision["system_comparison_vs_typed_random"]
+    gate = decision["frozen_engineering_gate"]
+    return f"""# Crypto Search Engine V1.2
+
+- Status: `{decision['status']}`
+- Research decision: `{decision['research_decision']}`
+- Producer source: `{decision['producer_source_sha']}`
+- Strict completed: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
+- Checkpoints: `{decision['checkpoint_count']}/{V12_CHECKPOINT_COUNT}`, exact restore verified: `{decision['checkpoint_restore_verified']}`.
+- Balanced batches: `{decision['balanced_batch_count']}`, integrity: `{decision['balanced_batch_integrity']}`.
+- Behavior families: `{decision['behavior_family_count']:,}`; global duplicate rate `{decision['behavior_duplicate_rate']:.2%}`.
+
+## Evolution V2.2 versus typed random
+
+| Metric | Delta / result |
+|---|---:|
+| strict per raw attempt | {comparison['strict_per_raw_attempt_delta']:+.8f} |
+| balanced valid unique / CPU-hour | {comparison['balanced_valid_exact_unique_per_cpu_hour_delta']:+.6f} |
+| new families / CPU-hour | {comparison['new_behavior_families_per_cpu_hour_delta']:+.6f} |
+| new families / 1k | {comparison['new_behavior_families_per_1k_evaluations']:.3f} |
+| mean pair reward | {comparison['mean_pair_reward_delta']:+.8f} |
+| top-decile pair reward | {comparison['top_decile_pair_reward_delta']:+.8f} |
+| behavior duplicate rate | {comparison['behavior_duplicate_rate']:.2%} |
+
+## Collision control
+
+- Blocked transitions: `{decision['blocked_transition_count']}`
+- Pre-evaluation blocked-transition skips: `{decision['blocked_transition_skips']}`
+- Frozen gates passed: `{sum(bool(value) for value in gate.values())}/{len(gate)}`
+- Search decision: `{decision['search_iteration_decision']['collision_controlled_evolution_v2_2']}`
+- Future new-data Arena arms: `[]`
+
+This fixed, spent-development engineering Arena creates no Alpha, OOS,
+challenge, recent, May-stress, forward, promotion, data-admission,
+latent-priority, relational-training, or future-Arena qualification authority.
 """
 
 
@@ -4434,12 +5225,33 @@ def run_engine(
         "legacy",
         "aggtrades_system_canary",
         "search_engine_v1_1",
+        "search_engine_v1_2",
     }:
         raise ValueError(f"unsupported Search Engine V1 campaign: {campaign}")
     is_canary = campaign == "aggtrades_system_canary"
     is_v11 = campaign == "search_engine_v1_1"
-    is_system_campaign = is_canary or is_v11
-    if is_v11:
+    is_v12 = campaign == "search_engine_v1_2"
+    is_system_campaign = is_canary or is_v11 or is_v12
+    if is_v12:
+        if runtime_date != V12_DEFAULT_RUNTIME_DATE:
+            raise ValueError(
+                "Search Engine V1.2 is authorized only for runtime date "
+                f"{V12_DEFAULT_RUNTIME_DATE}"
+            )
+        runtime_root = (
+            repo_root / f"runtime/crypto_search_engine_v1_2_{runtime_date}"
+        )
+        report_path = (
+            repo_root / f"reports/CRYPTO_SEARCH_ENGINE_V1_2_{runtime_date}.md"
+        )
+        strict_target = V12_STRICT_TARGET
+        checkpoint_count = V12_CHECKPOINT_COUNT
+        checkpoint_size = V12_CHECKPOINT_SIZE
+        raw_attempt_limit = V12_RAW_ATTEMPT_LIMIT
+        wall_time_limit = V12_WALL_TIME_LIMIT_SECONDS
+        campaign_arms = V12_ARMS
+        block_role = "SPENT_DEVELOPMENT_SEARCH_ENGINE_V1_2_SYSTEM_ONLY"
+    elif is_v11:
         if runtime_date != V11_DEFAULT_RUNTIME_DATE:
             raise ValueError(
                 "Search Engine V1.1 is authorized only for runtime date "
@@ -4494,7 +5306,13 @@ def run_engine(
         raise RuntimeError(
             "Search Engine V1 requires a clean producer tree; only its runtime/report may exist"
         )
-    if is_v11:
+    if is_v12:
+        store, contracts, behavior_contract, input_identities, continuation = (
+            _load_v12_inputs(repo_root)
+        )
+        block_start = str(continuation["window"]["start"])
+        block_end = str(continuation["window"]["end_exclusive"])
+    elif is_v11:
         store, contracts, behavior_contract, input_identities, continuation = (
             _load_v11_inputs(repo_root)
         )
@@ -4515,7 +5333,16 @@ def run_engine(
     registry = TypedExpressionRegistry(contracts)
     compiler_binding = _compiler_binding(repo_root)
     environment = _environment_fingerprint()
-    if is_v11:
+    if is_v12:
+        frozen = _v12_frozen_contract(
+            source_sha=source_sha,
+            compiler_binding=compiler_binding,
+            behavior_contract=behavior_contract,
+            input_identities=input_identities,
+            environment=environment,
+            config=continuation,
+        )
+    elif is_v11:
         frozen = _v11_frozen_contract(
             source_sha=source_sha,
             compiler_binding=compiler_binding,
@@ -4647,7 +5474,9 @@ def run_engine(
             int(state["next_checkpoint_index"]), checkpoint_count
         ):
             allocation = (
-                dict(V11_CHECKPOINT_ALLOCATION)
+                dict(V12_CHECKPOINT_ALLOCATION)
+                if is_v12
+                else dict(V11_CHECKPOINT_ALLOCATION)
                 if is_v11
                 else dict(AGGTRADES_CANARY_CHECKPOINT_ALLOCATION)
                 if is_canary
@@ -4681,7 +5510,13 @@ def run_engine(
                 enforce_budget()
                 proposals: list[dict[str, Any]] = []
                 scans_without_slot = 0
-                while len(proposals) < int(state["workers"]):
+                batch_target_size = (
+                    min(int(state["workers"]), len(lane_order))
+                    if is_v12
+                    else int(state["workers"])
+                )
+                balanced_batch_index = int(state["balanced_batch_index"])
+                while len(proposals) < batch_target_size:
                     enforce_budget()
                     if all(
                         lane_completed[key]
@@ -4690,10 +5525,24 @@ def run_engine(
                         for key, target in target_by_lane.items()
                     ):
                         break
-                    policy_key = lane_order[
-                        int(state["scheduler_cursor"]) % len(lane_order)
-                    ]
-                    state["scheduler_cursor"] = int(state["scheduler_cursor"]) + 1
+                    if is_v12:
+                        policy_key, next_cursor = _balanced_lane_choice(
+                            lane_order=lane_order,
+                            lane_completed=lane_completed,
+                            proposals=proposals,
+                            target_by_lane=target_by_lane,
+                            scheduler_cursor=int(state["scheduler_cursor"]),
+                        )
+                        state["scheduler_cursor"] = next_cursor
+                        if policy_key is None:
+                            break
+                    else:
+                        policy_key = lane_order[
+                            int(state["scheduler_cursor"]) % len(lane_order)
+                        ]
+                        state["scheduler_cursor"] = (
+                            int(state["scheduler_cursor"]) + 1
+                        )
                     if any(
                         proposal["policy_key"] == policy_key
                         for proposal in proposals
@@ -4801,10 +5650,23 @@ def run_engine(
                             - checkpoint_start_count
                             + len(proposals)
                             + 1,
+                            "balanced_batch_index": (
+                                balanced_batch_index if is_v12 else None
+                            ),
+                            "balanced_batch_slot": (
+                                len(proposals) if is_v12 else None
+                            ),
+                            "balanced_batch_size": (
+                                batch_target_size if is_v12 else None
+                            ),
                         }
                     )
                 if not proposals:
                     continue
+                if is_v12 and len(proposals) != V12_BALANCED_BATCH_SIZE:
+                    raise _EngineBudgetExhausted(
+                        "V12_BALANCED_BATCH_UNDERFILLED"
+                    )
                 assert executor is not None
                 future_rows = [
                     (
@@ -4876,6 +5738,12 @@ def run_engine(
                         **archive_row,
                         "operation": proposal["operation"],
                         "parent_ids": list(proposal["parent_ids"]),
+                        "transition_key": proposal.get("transition_key"),
+                        "new_policy_local_behavior_family_at_completion": bool(
+                            proposal[
+                                "new_policy_local_behavior_family_at_completion"
+                            ]
+                        ),
                     }
                     _policy_observe(
                         policy,
@@ -4951,6 +5819,8 @@ def run_engine(
                         raise _EngineBudgetExhausted(
                             "MEMORY_ERROR_RECURRED_AT_8_WORKERS"
                         )
+                if is_v12:
+                    state["balanced_batch_index"] = balanced_batch_index + 1
                 state["attempted_exact_ids"] = sorted(attempted_ids)
                 state["wall_elapsed_seconds"] = active_elapsed()
                 if (
@@ -4997,7 +5867,11 @@ def run_engine(
             evolution_adaptation_arms = tuple(
                 arm
                 for arm in campaign_arms
-                if arm == "behavior_niched_evolution_v2_1"
+                if arm
+                in {
+                    "behavior_niched_evolution_v2_1",
+                    "collision_controlled_evolution_v2_2",
+                }
             )
             for seed in SEEDS:
                 for arm in cem_arms:
@@ -5031,7 +5905,9 @@ def run_engine(
                 state=state,
                 policies=policies,
                 comparison_arms=(
-                    V11_ARMS
+                    V12_ARMS
+                    if is_v12
+                    else V11_ARMS
                     if is_v11
                     else AGGTRADES_CANARY_ARMS
                     if is_canary
@@ -5136,7 +6012,16 @@ def run_engine(
         )
     state["wall_elapsed_seconds"] = active_elapsed()
     decision = (
-        _v11_final_decision(
+        _v12_final_decision(
+            source_sha=source_sha,
+            state=state,
+            ledger=ledger,
+            archive=archive,
+            metrics=metrics,
+            runtime_root=runtime_root,
+        )
+        if is_v12
+        else _v11_final_decision(
             source_sha=source_sha,
             state=state,
             ledger=ledger,
@@ -5167,7 +6052,9 @@ def run_engine(
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
         (
-            _v11_report_text(decision)
+            _v12_report_text(decision)
+            if is_v12
+            else _v11_report_text(decision)
             if is_v11
             else _aggtrades_canary_report_text(decision)
             if is_canary
@@ -5185,7 +6072,9 @@ def run_engine(
         identities=identities,
         state=state,
         epoch_id=(
-            V11_EPOCH_ID
+            V12_EPOCH_ID
+            if is_v12
+            else V11_EPOCH_ID
             if is_v11
             else AGGTRADES_CANARY_EPOCH_ID
             if is_canary
@@ -5194,6 +6083,9 @@ def run_engine(
         base_sha=(source_sha if is_system_campaign else BASE_SHA),
         continuation=(
             "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+            f"check-v12 --runtime-date {runtime_date}"
+            if is_v12
+            else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
             f"check-v11 --runtime-date {runtime_date}"
             if is_v11
             else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
@@ -5206,8 +6098,12 @@ def run_engine(
     _write_json(runtime_root / "run_manifest.json", manifest)
     run_result = (
         "PASS"
-        if not is_v11
-        or decision["status"] == "PASS_SEARCH_ENGINE_V1_1_COMPLETED"
+        if (not is_v11 and not is_v12)
+        or decision["status"]
+        in {
+            "PASS_SEARCH_ENGINE_V1_1_COMPLETED",
+            "PASS_SEARCH_ENGINE_V1_2_COMPLETED",
+        }
         else "ENGINE_BUDGET_EXHAUSTED"
         if decision["status"] == "ENGINE_BUDGET_EXHAUSTED"
         else "FAIL"
@@ -6026,6 +6922,364 @@ def check_v11(
     }
 
 
+def check_v12(
+    repo_root: Path,
+    *,
+    runtime_date: str = V12_DEFAULT_RUNTIME_DATE,
+) -> dict[str, Any]:
+    runtime_root = repo_root / f"runtime/crypto_search_engine_v1_2_{runtime_date}"
+    report_path = repo_root / f"reports/CRYPTO_SEARCH_ENGINE_V1_2_{runtime_date}.md"
+    errors: list[str] = []
+    required = (
+        "frozen_contract.json",
+        "embedded_preflight.json",
+        "candidate_ledger.parquet",
+        "behavior_archive.parquet",
+        "behavior_family_summary.json",
+        "arm_checkpoint_metrics.parquet",
+        "final_decision.json",
+        "run_manifest.json",
+    )
+    for name in required:
+        if not (runtime_root / name).is_file():
+            errors.append(f"missing:{name}")
+    if not report_path.is_file():
+        errors.append("missing:report")
+    if errors:
+        return {"result": "FAIL", "errors": errors}
+    frozen = _read_json(runtime_root / "frozen_contract.json")
+    decision = _read_json(runtime_root / "final_decision.json")
+    manifest = _read_json(runtime_root / "run_manifest.json")
+    preflight = _read_json(runtime_root / "embedded_preflight.json")
+    ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
+    archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
+    metrics = pd.read_parquet(runtime_root / "arm_checkpoint_metrics.parquet")
+    family_summary = _read_json(runtime_root / "behavior_family_summary.json")
+    frozen_without_hash = {
+        key: value
+        for key, value in frozen.items()
+        if key != "frozen_contract_sha256"
+    }
+    if _payload_sha(frozen_without_hash) != frozen.get("frozen_contract_sha256"):
+        errors.append("frozen_contract_sha256")
+    if frozen.get("authorization") != (
+        "ONE_FRESH_STATE_2000_SPENT_DEVELOPMENT_SEARCH_ENGINE_V1_2"
+    ):
+        errors.append("authorization")
+    if frozen.get("surface", {}).get(
+        "every_candidate_requires_aggtrades_input"
+    ) is not True:
+        errors.append("aggtrades_candidate_gate")
+    fresh_state = frozen.get("fresh_state", {})
+    if any(bool(value) for value in fresh_state.values()):
+        errors.append("fresh_state_import")
+    capability_delta = frozen.get("search_capability_delta", {})
+    if (
+        capability_delta.get("existing_lane_scheduler_balanced") is not True
+        or int(capability_delta.get("balanced_micro_batch_size", -1))
+        != V12_BALANCED_BATCH_SIZE
+        or capability_delta.get(
+            "campaign_local_transition_collision_control"
+        )
+        is not True
+        or capability_delta.get("new_scheduler_system") is not False
+    ):
+        errors.append("v12_capability_contract")
+    boundaries = frozen.get("boundaries", {})
+    if boundaries.get("sealed_reads") != 0 or any(
+        bool(boundaries.get(key))
+        for key in (
+            "challenge",
+            "recent",
+            "may_stress",
+            "forward",
+            "promotion",
+            "cross_sprint_adaptive_memory",
+            "latent_priority",
+            "relational_training",
+        )
+    ):
+        errors.append("sealed_boundary")
+    if preflight.get("workers_selected") not in {
+        DEFAULT_WORKERS,
+        FALLBACK_WORKERS,
+    }:
+        errors.append("worker_selection")
+    if preflight.get("strict_candidates_consumed_outside_campaign") != 0:
+        errors.append("preflight_external_budget")
+    if len(ledger) != V12_STRICT_TARGET:
+        errors.append("strict_count")
+    if ledger["candidate_id"].nunique() != V12_STRICT_TARGET:
+        errors.append("exact_unique")
+    for column in (
+        "compile_valid",
+        "exact_unique",
+        "matched_control_valid",
+        "strict_cost_evaluated",
+        "expression_hash_verified",
+    ):
+        if column not in ledger or not bool(ledger[column].fillna(False).all()):
+            errors.append(f"ledger_gate:{column}")
+    if not all(
+        bool(set(json.loads(str(value))) & set(AGGTRADES_SYSTEM_CANARY_FIELDS))
+        for value in ledger["raw_fields_json"]
+    ):
+        errors.append("candidate_without_aggtrades")
+    expected_arm_counts = {
+        arm: count * V12_CHECKPOINT_COUNT
+        for arm, count in V12_CHECKPOINT_ALLOCATION.items()
+    }
+    if ledger.groupby("arm").size().to_dict() != expected_arm_counts:
+        errors.append("arm_counts")
+    expected_lane_count = next(
+        iter(V12_CHECKPOINT_ALLOCATION.values())
+    ) // len(SEEDS)
+    for checkpoint_index in range(V12_CHECKPOINT_COUNT):
+        local = ledger[
+            ledger["checkpoint_index"].astype(int).eq(checkpoint_index)
+        ]
+        if local.groupby("arm").size().to_dict() != V12_CHECKPOINT_ALLOCATION:
+            errors.append(f"checkpoint_arm_counts:{checkpoint_index}")
+        expected_lanes = {
+            (arm, seed): expected_lane_count
+            for arm in V12_ARMS
+            for seed in SEEDS
+        }
+        if local.groupby(["arm", "seed"]).size().to_dict() != expected_lanes:
+            errors.append(f"checkpoint_arm_seed_counts:{checkpoint_index}")
+    if any(
+        column not in ledger
+        for column in (
+            "balanced_batch_index",
+            "balanced_batch_slot",
+            "balanced_batch_size",
+        )
+    ):
+        errors.append("balanced_batch_columns")
+    else:
+        batches = list(ledger.groupby("balanced_batch_index", dropna=False))
+        if len(batches) != V12_STRICT_TARGET // V12_BALANCED_BATCH_SIZE:
+            errors.append("balanced_batch_count")
+        for batch_id, rows in batches:
+            if pd.isna(batch_id):
+                errors.append("balanced_batch_null")
+                continue
+            if (
+                len(rows) != V12_BALANCED_BATCH_SIZE
+                or not rows["balanced_batch_size"]
+                .astype(int)
+                .eq(V12_BALANCED_BATCH_SIZE)
+                .all()
+                or sorted(rows["balanced_batch_slot"].astype(int).tolist())
+                != list(range(V12_BALANCED_BATCH_SIZE))
+                or rows.groupby("arm").size().to_dict()
+                != {
+                    "canonical_typed_random": len(SEEDS),
+                    "collision_controlled_evolution_v2_2": len(SEEDS),
+                }
+                or len(rows[["arm", "seed"]].drop_duplicates())
+                != V12_BALANCED_BATCH_SIZE
+            ):
+                errors.append(f"balanced_batch:{int(batch_id)}")
+    broad_contracts, _, _ = _broad39_registry_contracts(repo_root)
+    replay_registry = TypedExpressionRegistry(
+        tuple((*broad_contracts, *_aggtrades_canary_contracts()))
+    )
+    replay_policy = TypedEvolutionV2(
+        0,
+        replay_registry,
+        V22_PARAMETERS["collision_controlled_evolution_v2_2"],
+    )
+    candidates_by_id = {
+        str(row["candidate_id"]): CandidateSpec.from_dict(
+            json.loads(str(row["candidate_spec_json"]))
+        )
+        for row in ledger.to_dict("records")
+    }
+    receipt_rows = ledger[ledger["receipt_json"].notna()]
+    if receipt_rows.empty or not bool(
+        receipt_rows["receipt_verified"].eq(True).all()
+    ):
+        errors.append("receipt_verification")
+    for row in receipt_rows.to_dict("records"):
+        try:
+            child = candidates_by_id[str(row["candidate_id"])]
+            parents = tuple(
+                candidates_by_id[str(parent_id)]
+                for parent_id in json.loads(str(row["parent_ids_json"]))
+            )
+            receipt = json.loads(str(row["receipt_json"]))
+            if not replay_policy.verify_receipt(parents, child, receipt):
+                errors.append(f"receipt_replay:{row['candidate_id']}")
+        except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+            errors.append(f"receipt_replay:{row['candidate_id']}")
+    for operation in EVOLUTION_OPERATIONS:
+        if not bool(ledger["operation"].eq(operation).any()):
+            errors.append(f"operation_not_executed:{operation}")
+    skeleton_rows = ledger[
+        ledger["operation"].eq("COMPATIBLE_SKELETON_VARIANT_MUTATION")
+    ]
+    if skeleton_rows.empty or not bool(
+        skeleton_rows["transition_key"].notna().all()
+    ):
+        errors.append("transition_key")
+    if len(archive) != V12_STRICT_TARGET:
+        errors.append("archive_row_count")
+    champions = archive[archive["is_family_champion"].fillna(False)]
+    if champions["behavior_family_id"].nunique() != archive[
+        "behavior_family_id"
+    ].nunique():
+        errors.append("archive_family_champion")
+    if family_summary.get("family_count") != int(
+        archive["behavior_family_id"].nunique()
+    ):
+        errors.append("family_summary_count")
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    if len(checkpoints) != V12_CHECKPOINT_COUNT:
+        errors.append("checkpoint_count")
+    for index, checkpoint in enumerate(checkpoints):
+        checkpoint_manifest = _read_json(checkpoint / "manifest.json")
+        if int(checkpoint_manifest.get("completed_ledger_row_count", -1)) != (
+            index + 1
+        ) * V12_CHECKPOINT_SIZE:
+            errors.append(f"checkpoint_rows:{index}")
+        if checkpoint_manifest.get("restore_verified") is not True:
+            errors.append(f"checkpoint_restore:{index}")
+        for record in checkpoint_manifest.get("files", []):
+            path = checkpoint / str(record["name"])
+            if (
+                not path.is_file()
+                or path.stat().st_size != int(record["bytes"])
+                or sha256_file(path) != str(record["sha256"])
+            ):
+                errors.append(f"checkpoint_file:{index}:{record['name']}")
+        try:
+            _, restored_policies, _, _, _ = _load_checkpoint(
+                checkpoint_path=checkpoint,
+                registry=replay_registry,
+                expected_source_sha=str(frozen["source_sha"]),
+                expected_frozen_hash=str(
+                    frozen["frozen_contract_sha256"]
+                ),
+                expected_identities={
+                    **dict(frozen["input_identities"]),
+                    "compiler_identity": dict(frozen["compiler_identity"]),
+                },
+            )
+            evolution_policies = [
+                policy
+                for key, policy in restored_policies.items()
+                if key.startswith("collision_controlled_evolution_v2_2|")
+                and isinstance(policy, TypedEvolutionV2)
+            ]
+            if len(evolution_policies) != len(SEEDS) or not all(
+                policy.parameters.get(
+                    "campaign_local_transition_collision_control"
+                )
+                is True
+                for policy in evolution_policies
+            ):
+                errors.append(f"checkpoint_transition_state:{index}")
+        except (KeyError, TypeError, ValueError):
+            errors.append(f"checkpoint_state_replay:{index}")
+    if set(metrics["checkpoint_index"].astype(int).unique()) != set(
+        range(V12_CHECKPOINT_COUNT)
+    ):
+        errors.append("checkpoint_metrics")
+    final_evolution = metrics[
+        metrics["checkpoint_index"].astype(int).eq(V12_CHECKPOINT_COUNT - 1)
+        & metrics["arm"].eq("collision_controlled_evolution_v2_2")
+    ]
+    if (
+        len(final_evolution) != 1
+        or int(final_evolution.iloc[0]["operator_update_count"]) <= 0
+        or json.loads(
+            str(final_evolution.iloc[0]["operator_probabilities_json"])
+        )
+        == {}
+        or json.loads(
+            str(final_evolution.iloc[0]["transition_productivity_json"])
+        )
+        == {}
+    ):
+        errors.append("v12_policy_update")
+    if int(
+        decision.get("generation_attempts", V12_RAW_ATTEMPT_LIMIT + 1)
+    ) > V12_RAW_ATTEMPT_LIMIT:
+        errors.append("raw_attempt_budget")
+    if float(
+        decision.get(
+            "active_wall_seconds", V12_WALL_TIME_LIMIT_SECONDS + 1
+        )
+    ) > V12_WALL_TIME_LIMIT_SECONDS:
+        errors.append("wall_time_budget")
+    if decision.get("status") != "PASS_SEARCH_ENGINE_V1_2_COMPLETED":
+        errors.append("final_decision")
+    if decision.get("balanced_batch_integrity") is not True:
+        errors.append("final_balanced_batch_integrity")
+    if decision.get("research_decision") != (
+        "HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT"
+    ):
+        errors.append("research_boundary")
+    if decision.get("future_new_data_arena_qualified_arms") != []:
+        errors.append("future_arm_qualification")
+    if decision.get("sealed_reads") != 0:
+        errors.append("sealed_reads")
+    if manifest.get("strict_evaluated_count") != V12_STRICT_TARGET:
+        errors.append("manifest_strict_count")
+    if manifest.get("frozen_contract_sha256") != frozen.get(
+        "frozen_contract_sha256"
+    ):
+        errors.append("manifest_contract")
+    if _payload_sha(manifest.get("artifacts", [])) != manifest.get(
+        "artifact_bundle_sha256"
+    ):
+        errors.append("manifest_bundle")
+    for record in manifest.get("artifacts", []):
+        path = repo_root / str(record["path"])
+        if (
+            not path.is_file()
+            or path.stat().st_size != int(record["bytes"])
+            or sha256_file(path) != str(record["sha256"])
+        ):
+            errors.append(f"manifest_artifact:{record['path']}")
+    try:
+        subprocess.check_call(
+            [
+                "git",
+                "cat-file",
+                "-e",
+                f"{manifest['producer_source_sha']}^{{commit}}",
+            ],
+            cwd=repo_root,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except subprocess.CalledProcessError:
+        errors.append("producer_source_commit")
+    result = "PASS" if not errors else "FAIL"
+    return {
+        "result": result,
+        "errors": errors,
+        "engineering_integrity": result,
+        "research_decision": decision.get("research_decision"),
+        "producer_source_sha": manifest.get("producer_source_sha"),
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": decision.get("generation_attempts"),
+        "checkpoint_count": len(checkpoints),
+        "balanced_batch_count": decision.get("balanced_batch_count"),
+        "behavior_family_count": int(archive["behavior_family_id"].nunique()),
+        "artifact_bundle_sha256": manifest.get("artifact_bundle_sha256"),
+        "search_iteration_decision": decision.get(
+            "search_iteration_decision", {}
+        ),
+        "future_new_data_arena_qualified_arms": [],
+        "sealed_reads": decision.get("sealed_reads"),
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -6038,6 +7292,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "check-canary",
             "run-v11",
             "check-v11",
+            "run-v12",
+            "check-v12",
         ),
     )
     parser.add_argument("--runtime-date")
@@ -6090,10 +7346,22 @@ def main(argv: Sequence[str] | None = None) -> int:
             source_sha=args.source_sha,
             campaign="search_engine_v1_1",
         )
-    else:
+    elif args.command == "check-v11":
         result = check_v11(
             repo_root,
             runtime_date=str(args.runtime_date or V11_DEFAULT_RUNTIME_DATE),
+        )
+    elif args.command == "run-v12":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or V12_DEFAULT_RUNTIME_DATE),
+            source_sha=args.source_sha,
+            campaign="search_engine_v1_2",
+        )
+    else:
+        result = check_v12(
+            repo_root,
+            runtime_date=str(args.runtime_date or V12_DEFAULT_RUNTIME_DATE),
         )
     print(json.dumps(result, indent=2, sort_keys=True), flush=True)
     return 0 if result.get("result") == "PASS" else 1
@@ -6109,9 +7377,12 @@ __all__ = [
     "TypedEvolutionV2",
     "V11_ARMS",
     "V21_PARAMETERS",
+    "V12_ARMS",
+    "V22_PARAMETERS",
     "build_aggtrades_canary_cache_from_config",
     "check_aggtrades_canary",
     "check_v11",
+    "check_v12",
     "check_engine",
     "run_engine",
 ]
