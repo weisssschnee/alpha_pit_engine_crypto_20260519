@@ -226,7 +226,7 @@ def test_aggtrades_search_surface_cache_materializes_all_delivered_fields(
         ],
         start="2024-01-01T00:00:00Z",
         end_exclusive="2024-01-01T02:00:00Z",
-        producer_source_sha="C" * 64,
+        producer_source_sha="C" * 40,
         verify_tar_sha256=True,
     )
 

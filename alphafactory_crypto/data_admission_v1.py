@@ -3185,6 +3185,9 @@ def build_search_surface_integration(
         for path in binding_paths
     ]
     source_binding_sha256 = _payload_sha(source_binding)
+    producer_source_sha = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=repo_root, text=True
+    ).strip()
 
     broad_payload = json.loads(inputs["broad_registry"].read_text(encoding="utf-8"))
     broad_contracts = tuple(
@@ -3239,7 +3242,7 @@ def build_search_surface_integration(
         broad_field_ids=[contract.field_id for contract in broad_contracts],
         start=str(agg_carrier_config["start"]),
         end_exclusive=str(agg_carrier_config["end_exclusive"]),
-        producer_source_sha=source_binding_sha256,
+        producer_source_sha=producer_source_sha,
         verify_tar_sha256=bool(
             agg_carrier_config["verify_full_tar_sha256"]
         ),
@@ -3657,12 +3660,9 @@ def build_search_surface_integration(
         runtime_root / "final_decision.json",
         report_path,
     ]
-    source_sha = subprocess.check_output(
-        ["git", "rev-parse", "HEAD"], cwd=repo_root, text=True
-    ).strip()
     manifest = {
         "experiment_id": config["experiment_id"],
-        "source_sha": source_sha,
+        "source_sha": producer_source_sha,
         "source_binding_sha256": source_binding_sha256,
         "input_identity_sha256": _payload_sha(source_evidence),
         "frozen_contract_sha256": frozen_contract[
