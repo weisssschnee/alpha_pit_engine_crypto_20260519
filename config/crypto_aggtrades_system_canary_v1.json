@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "20260727_aggtrades_system_canary_001",
+  "objective": "Evaluate Search Engine V1 proposal productivity and behavior discovery on a newly materialized aggTrades field family",
+  "authorization": "ONE_FRESH_STATE_2000_AGGTRADES_SYSTEM_CANARY",
+  "evidence_role": "DEVELOPMENT_DIAGNOSTIC_FIXED_RETROSPECTIVE_COHORT",
+  "window": {
+    "start": "2024-01-01T00:00:00Z",
+    "end_exclusive": "2024-07-01T00:00:00Z",
+    "selection_reason": "Earliest delivered six-month block overlapping the existing development-only target cache; excludes later identity breaks and all recent/forward roles"
+  },
+  "inputs": {
+    "top100_tar": "G:/AlphaFactory_CryptoData/deliveries/pc2_followup_20260722/archives/binance_aggtrades_top100_compact_1m_202401_202606.tar",
+    "top100_tar_sha256": "59c9dc8256fcf326ed6a31f7fbf6225e1a707dd76e35d457e53d3447c23501e1",
+    "ranks101_200_tar": "G:/AlphaFactory_CryptoData/deliveries/pc2_followup_20260722/archives/binance_aggtrades_ranks101_200_compact_1m_202401_202606.tar",
+    "ranks101_200_tar_sha256": "87eae5c03be252f10b01ba0d2ff001f75876254d4968cc53fe5a07b28de08f5a",
+    "verify_full_tar_sha256": true
+  },
+  "cache": {
+    "root": ".cache/crypto_aggtrades_system_canary_v1",
+    "kind": "RUNTIME_LOCAL_RAW_PANEL_STORE",
+    "missing_fill": null,
+    "minute_rows_per_hour": 60,
+    "post_join_context_recompute": true
+  },
+  "search": {
+    "strict_evaluated_target": 2000,
+    "checkpoint_size": 1000,
+    "checkpoint_count": 2,
+    "raw_generation_attempt_limit": 20000,
+    "wall_time_limit_seconds": 14400,
+    "arms_per_checkpoint": {
+      "canonical_typed_random": 200,
+      "hierarchical_typed_cem_v2": 400,
+      "typed_evolution_v2": 400
+    },
+    "seeds": [
+      20260716,
+      20260717,
+      20260718,
+      20260719
+    ],
+    "workers_default": 10,
+    "workers_memory_fallback": 8,
+    "workers_12_forbidden": true,
+    "fresh_policy_and_archive_state": true,
+    "every_candidate_requires_aggtrades_input": true
+  },
+  "boundaries": {
+    "fixed_retrospective_cohort": true,
+    "system_behavior_only": true,
+    "alpha_claim": false,
+    "oos": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "latent_priority": false,
+    "relational_training": false,
+    "cross_sprint_adaptive_memory": false,
+    "future_arm_qualification": false
+  }
+}

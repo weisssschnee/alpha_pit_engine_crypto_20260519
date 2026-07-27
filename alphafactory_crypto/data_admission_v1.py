@@ -9,12 +9,14 @@ point-in-time Top-N ledger.  It never evaluates candidates or starts a search.
 from __future__ import annotations
 
 import argparse
+import gc
 import hashlib
 import io
 import json
 import math
 import os
 import subprocess
+import tarfile
 import threading
 import time
 import xml.etree.ElementTree as ET
@@ -92,6 +94,54 @@ KLINE_COLUMNS = (
     "ignore",
 )
 
+AGGTRADES_SYSTEM_CANARY_FIELDS = (
+    "agg_trade_count",
+    "underlying_trade_count",
+    "quantity",
+    "notional",
+    "buy_agg_trade_count",
+    "sell_agg_trade_count",
+    "buy_quantity",
+    "sell_quantity",
+    "buy_notional",
+    "sell_notional",
+    "signed_aggressor_quantity",
+    "signed_aggressor_notional",
+    "vwap",
+    "buy_vwap",
+    "sell_vwap",
+    "volume_imbalance",
+    "buy_sell_notional_ratio",
+    "price_range_bps",
+    "close_to_open_bps",
+    "large_trade_count_ratio_100k_plus",
+    "large_notional_ratio_100k_plus",
+)
+
+_AGGTRADES_CANARY_SOURCE_COLUMNS = (
+    "timestamp",
+    "agg_trade_count",
+    "underlying_trade_count",
+    "quantity",
+    "notional",
+    "buy_agg_trade_count",
+    "sell_agg_trade_count",
+    "buy_quantity",
+    "sell_quantity",
+    "buy_notional",
+    "sell_notional",
+    "signed_aggressor_quantity",
+    "signed_aggressor_notional",
+    "high_price",
+    "low_price",
+    "open_price",
+    "close_price",
+    "large_trade_count_100k_plus",
+    "large_notional_100k_plus",
+    "feature_available_time",
+    "execution_time_min",
+)
+
 LIT_OLD_END = pd.Timestamp("2025-01-31T08:59:59Z")
 LIT_NEW_START = pd.Timestamp("2025-12-23T17:30:00Z")
 _REQUEST_LOCAL = threading.local()
@@ -110,6 +160,14 @@ def _payload_sha(value: Any) -> str:
 
 def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest().lower()
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(8 * 1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest().lower()
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -693,8 +751,6 @@ def coverage_against_temporal_surfaces(
 
 
 def _aggtrade_symbol_dates_from_tar(path: Path) -> set[tuple[str, pd.Timestamp]]:
-    import tarfile
-
     output: set[tuple[str, pd.Timestamp]] = set()
     with tarfile.open(path, "r:") as archive:
         for member in archive.getmembers():
@@ -714,6 +770,424 @@ def _aggtrade_symbol_dates_from_tar(path: Path) -> set[tuple[str, pd.Timestamp]]
                 for date in pd.date_range(start, end, freq="D", tz="UTC")
             )
     return output
+
+
+def _declared_tar_sha256(path: Path) -> str:
+    sidecar = Path(str(path) + ".sha256")
+    if not sidecar.is_file():
+        raise FileNotFoundError(f"missing TAR SHA256 sidecar: {sidecar}")
+    tokens = sidecar.read_text(encoding="utf-8").strip().split()
+    if not tokens or len(tokens[0]) != 64:
+        raise ValueError(f"invalid TAR SHA256 sidecar: {sidecar}")
+    return tokens[0].lower()
+
+
+def _aggtrade_coordinate(member_name: str) -> tuple[str, str] | None:
+    normalized = member_name.replace("\\", "/")
+    marker = "/compact_1m/symbol="
+    if marker not in normalized or not normalized.endswith("/part.parquet"):
+        return None
+    remainder = normalized.split(marker, 1)[1]
+    try:
+        symbol, month_part = remainder.split("/month=", 1)
+        month = month_part.split("/", 1)[0]
+    except ValueError:
+        return None
+    if not symbol or len(month) != 7:
+        return None
+    return symbol, month
+
+
+def _safe_divide(numerator: pd.Series, denominator: pd.Series) -> pd.Series:
+    left = pd.to_numeric(numerator, errors="coerce").astype(float)
+    right = pd.to_numeric(denominator, errors="coerce").astype(float)
+    return left.divide(right.where(right.abs().gt(0.0)))
+
+
+def _aggregate_aggtrades_hourly(frame: pd.DataFrame) -> pd.DataFrame:
+    missing = sorted(set(_AGGTRADES_CANARY_SOURCE_COLUMNS) - set(frame.columns))
+    if missing:
+        raise ValueError(f"aggTrades compact partition lacks columns: {missing}")
+    local = frame.loc[:, list(_AGGTRADES_CANARY_SOURCE_COLUMNS)].copy()
+    local["timestamp"] = pd.to_datetime(local["timestamp"], utc=True)
+    local["feature_available_time"] = pd.to_datetime(
+        local["feature_available_time"], utc=True
+    )
+    local["execution_time_min"] = pd.to_datetime(
+        local["execution_time_min"], utc=True
+    )
+    if local["timestamp"].duplicated().any():
+        raise ValueError("aggTrades compact partition has duplicate minute timestamps")
+    local = local.sort_values("timestamp")
+    local["hour"] = local["timestamp"].dt.floor("h")
+    grouped = local.groupby("hour", sort=True, observed=True)
+    sum_columns = [
+        "agg_trade_count",
+        "underlying_trade_count",
+        "quantity",
+        "notional",
+        "buy_agg_trade_count",
+        "sell_agg_trade_count",
+        "buy_quantity",
+        "sell_quantity",
+        "buy_notional",
+        "sell_notional",
+        "signed_aggressor_quantity",
+        "signed_aggressor_notional",
+        "large_trade_count_100k_plus",
+        "large_notional_100k_plus",
+    ]
+    output = grouped[sum_columns].sum(min_count=1)
+    output["vwap"] = _safe_divide(output["notional"], output["quantity"])
+    output["buy_vwap"] = _safe_divide(
+        output["buy_notional"], output["buy_quantity"]
+    )
+    output["sell_vwap"] = _safe_divide(
+        output["sell_notional"], output["sell_quantity"]
+    )
+    output["volume_imbalance"] = _safe_divide(
+        output["buy_notional"] - output["sell_notional"],
+        output["buy_notional"] + output["sell_notional"],
+    )
+    output["buy_sell_notional_ratio"] = _safe_divide(
+        output["buy_notional"], output["sell_notional"]
+    )
+    first_open = grouped["open_price"].first()
+    last_close = grouped["close_price"].last()
+    low = grouped["low_price"].min()
+    high = grouped["high_price"].max()
+    output["price_range_bps"] = 10_000.0 * _safe_divide(high - low, low)
+    output["close_to_open_bps"] = 10_000.0 * _safe_divide(
+        last_close - first_open, first_open
+    )
+    output["large_trade_count_ratio_100k_plus"] = _safe_divide(
+        output["large_trade_count_100k_plus"], output["agg_trade_count"]
+    )
+    output["large_notional_ratio_100k_plus"] = _safe_divide(
+        output["large_notional_100k_plus"], output["notional"]
+    )
+    output["minute_rows"] = grouped.size()
+    output["maximum_feature_available_time"] = grouped[
+        "feature_available_time"
+    ].max()
+    output["maximum_execution_time_min"] = grouped["execution_time_min"].max()
+    hour_end = output.index + pd.Timedelta(hours=1)
+    decision_time = output.index + pd.Timedelta(hours=2)
+    output["complete_and_pit_safe"] = (
+        output["minute_rows"].eq(60)
+        & output["maximum_feature_available_time"].le(hour_end)
+        & output["maximum_execution_time_min"].le(decision_time)
+        & np.isfinite(output[list(AGGTRADES_SYSTEM_CANARY_FIELDS)]).all(axis=1)
+    )
+    return output
+
+
+def _open_canary_matrix(
+    path: Path, shape: tuple[int, int], dtype: Any, fill: Any
+) -> np.memmap:
+    values = np.lib.format.open_memmap(path, mode="w+", dtype=dtype, shape=shape)
+    values[...] = fill
+    return values
+
+
+def _rank_percentile_on_mask(
+    values: np.ndarray, observed: np.ndarray
+) -> np.ndarray:
+    output = np.full(values.shape, np.nan, dtype=np.float32)
+    for time_index in range(values.shape[1]):
+        mask = observed[:, time_index] & np.isfinite(values[:, time_index])
+        count = int(mask.sum())
+        if count == 0:
+            continue
+        local = values[mask, time_index]
+        order = np.argsort(local, kind="stable")
+        ranks = np.empty(count, dtype=float)
+        ranks[order] = (np.arange(count, dtype=float) + 0.5) / count
+        output[mask, time_index] = ranks.astype(np.float32)
+    return output
+
+
+def build_aggtrades_system_canary_cache(
+    *,
+    source_cache_root: Path,
+    top100_tar: Path,
+    ranks101_200_tar: Path,
+    output_cache_root: Path,
+    broad_field_ids: Sequence[str],
+    start: str,
+    end_exclusive: str,
+    producer_source_sha: str,
+    verify_tar_sha256: bool = True,
+) -> dict[str, Any]:
+    """Build the smallest RawPanelStore bridge for a fixed-cohort system canary.
+
+    The bridge keeps the existing target, mapping, compiler, evaluator, and
+    matched-control path. It aggregates only the frozen development window,
+    requires 60 minute rows per hour, recomputes panel context after the
+    aggTrades join, and never fills a missing source coordinate with zero.
+    """
+
+    from alphafactory_crypto.broad_search.panel18m import RawPanelStore
+
+    source_cache_root = source_cache_root.resolve()
+    output_cache_root = output_cache_root.resolve()
+    top100_tar = top100_tar.resolve()
+    ranks101_200_tar = ranks101_200_tar.resolve()
+    if output_cache_root.exists():
+        metadata_path = output_cache_root / "metadata.json"
+        if not metadata_path.is_file():
+            raise FileExistsError(
+                f"existing canary cache has no metadata: {output_cache_root}"
+            )
+        return json.loads(metadata_path.read_text(encoding="utf-8"))
+    for path in (top100_tar, ranks101_200_tar):
+        if not path.is_file():
+            raise FileNotFoundError(path)
+    source = RawPanelStore.open(source_cache_root)
+    start_ts = pd.Timestamp(start)
+    end_ts = pd.Timestamp(end_exclusive)
+    start_ts = start_ts.tz_localize("UTC") if start_ts.tzinfo is None else start_ts.tz_convert("UTC")
+    end_ts = end_ts.tz_localize("UTC") if end_ts.tzinfo is None else end_ts.tz_convert("UTC")
+    if end_ts <= start_ts:
+        raise ValueError("canary cache window is empty")
+    block = source.block_slice(start_ts.isoformat(), end_ts.isoformat())
+    source_time_indices = np.arange(source.shape[1])[block]
+    timestamp_ns = np.asarray(source.timestamp_ns[block], dtype=np.int64)
+    if len(timestamp_ns) == 0:
+        raise ValueError("canary cache window is outside the source target cache")
+    timestamps = pd.to_datetime(timestamp_ns, utc=True)
+    expected = pd.date_range(start_ts, end_ts, freq="h", inclusive="left")
+    if not timestamps.equals(expected):
+        raise ValueError("source target cache is not a complete hourly canary window")
+    months = set(pd.period_range(start_ts, end_ts - pd.Timedelta(hours=1), freq="M").astype(str))
+
+    declared_hashes = {
+        str(top100_tar): _declared_tar_sha256(top100_tar),
+        str(ranks101_200_tar): _declared_tar_sha256(ranks101_200_tar),
+    }
+    observed_hashes: dict[str, str] = {}
+    if verify_tar_sha256:
+        for path in (top100_tar, ranks101_200_tar):
+            observed_hashes[str(path)] = _sha256_file(path)
+            if observed_hashes[str(path)] != declared_hashes[str(path)]:
+                raise ValueError(f"TAR SHA256 mismatch: {path}")
+
+    archives = [
+        tarfile.open(top100_tar, "r:"),
+        tarfile.open(ranks101_200_tar, "r:"),
+    ]
+    try:
+        coordinates: dict[tuple[str, str], tuple[int, tarfile.TarInfo]] = {}
+        for archive_index, archive in enumerate(archives):
+            for member in archive.getmembers():
+                coordinate = _aggtrade_coordinate(member.name)
+                if coordinate is None or coordinate[1] not in months:
+                    continue
+                if coordinate in coordinates:
+                    raise ValueError(f"duplicate aggTrades coordinate: {coordinate}")
+                coordinates[coordinate] = (archive_index, member)
+        source_symbol_index = {
+            symbol: index for index, symbol in enumerate(source.symbols)
+        }
+        symbols = sorted(
+            {
+                symbol
+                for symbol, _ in coordinates
+                if symbol in source_symbol_index
+            }
+        )
+        if len(symbols) < 50:
+            raise ValueError("aggTrades canary has fewer than 50 source-bridge symbols")
+        source_asset_indices = np.asarray(
+            [source_symbol_index[symbol] for symbol in symbols], dtype=int
+        )
+        broad_fields = tuple(dict.fromkeys(str(value) for value in broad_field_ids))
+        missing_broad = sorted(set(broad_fields) - set(source.metadata["field_ids"]))
+        if missing_broad:
+            raise ValueError(f"source cache lacks Broad fields: {missing_broad}")
+        all_fields = tuple(
+            dict.fromkeys((*broad_fields, *AGGTRADES_SYSTEM_CANARY_FIELDS))
+        )
+        output_cache_root.parent.mkdir(parents=True, exist_ok=True)
+        temporary = output_cache_root.with_name(
+            f".{output_cache_root.name}.tmp-{os.getpid()}"
+        )
+        if temporary.exists():
+            raise FileExistsError(f"stale canary cache temporary path: {temporary}")
+        temporary.mkdir(parents=True)
+        (temporary / "fields").mkdir()
+        shape = (len(symbols), len(timestamp_ns))
+        np.save(temporary / "timestamp_ns.npy", timestamp_ns)
+        observed_minutes = _open_canary_matrix(
+            temporary / "aggtrades_complete_hour.npy", shape, np.bool_, False
+        )
+        field_matrices = {
+            field_id: _open_canary_matrix(
+                temporary / "fields" / f"{field_id}.npy",
+                shape,
+                np.float32,
+                np.nan,
+            )
+            for field_id in all_fields
+        }
+        for field_id in broad_fields:
+            source_values = np.asarray(
+                source.field(field_id)[:, block], dtype=np.float32
+            )
+            field_matrices[field_id][...] = source_values[source_asset_indices]
+
+        output_time_index = pd.Index(timestamps)
+        symbol_output_index = {symbol: index for index, symbol in enumerate(symbols)}
+        partition_count = 0
+        partition_rows = 0
+        for (symbol, month), (archive_index, member) in sorted(coordinates.items()):
+            if symbol not in symbol_output_index:
+                continue
+            handle = archives[archive_index].extractfile(member)
+            if handle is None:
+                raise ValueError(f"cannot read aggTrades member: {member.name}")
+            frame = pq.ParquetFile(handle).read(
+                columns=list(_AGGTRADES_CANARY_SOURCE_COLUMNS)
+            ).to_pandas()
+            hourly = _aggregate_aggtrades_hourly(frame)
+            common = hourly.index.intersection(output_time_index)
+            if common.empty:
+                continue
+            positions = output_time_index.get_indexer(common)
+            row = symbol_output_index[symbol]
+            selected = hourly.loc[common]
+            valid = selected["complete_and_pit_safe"].to_numpy(dtype=bool)
+            observed_minutes[row, positions] = valid
+            for field_id in AGGTRADES_SYSTEM_CANARY_FIELDS:
+                values = selected[field_id].to_numpy(dtype=np.float32)
+                field_matrices[field_id][row, positions] = np.where(
+                    valid, values, np.nan
+                )
+            partition_count += 1
+            partition_rows += len(frame)
+
+        source_observed = np.asarray(source.observed()[:, block], dtype=bool)[
+            source_asset_indices
+        ]
+        observed = source_observed & np.asarray(observed_minutes, dtype=bool)
+        source_base = np.asarray(source.base_eligible()[:, block], dtype=bool)[
+            source_asset_indices
+        ]
+        base_eligible = source_base & observed
+        np.save(temporary / "observed.npy", observed)
+        np.save(temporary / "base_eligible.npy", base_eligible)
+        active_count = observed.sum(axis=0).astype(np.float32)
+        active_matrix = np.where(observed, active_count[None, :], np.nan).astype(
+            np.float32
+        )
+        listing_age = np.asarray(
+            source.field("listing_age_hours")[:, block], dtype=float
+        )[source_asset_indices]
+        age_percentile = _rank_percentile_on_mask(listing_age, observed)
+        history_length = np.where(
+            observed, np.cumsum(observed, axis=1, dtype=np.int32), np.nan
+        ).astype(np.float32)
+        for field_id, values in {
+            "active_universe_size": active_matrix,
+            "age_percentile_active_universe": age_percentile,
+            "history_length_hours": history_length,
+        }.items():
+            if field_id not in field_matrices:
+                raise ValueError(f"Broad canary registry lacks context field: {field_id}")
+            field_matrices[field_id][...] = values
+        for field_id, matrix in field_matrices.items():
+            if field_id not in {
+                "active_universe_size",
+                "age_percentile_active_universe",
+                "history_length_hours",
+            }:
+                matrix[~observed] = np.nan
+            matrix.flush()
+        observed_minutes.flush()
+        for horizon in source.metadata["target_horizons_hours"]:
+            target = np.asarray(
+                source.target_return(int(horizon))[:, block], dtype=np.float32
+            )[source_asset_indices]
+            target = np.where(base_eligible, target, np.nan).astype(np.float32)
+            np.save(temporary / f"target_return_{int(horizon)}h.npy", target)
+
+        source_manifest = {
+            "schema_version": 1,
+            "source_cache_root": str(source_cache_root),
+            "source_cache_identity_sha256": source.metadata["identity_sha256"],
+            "tars": [
+                {
+                    "path": str(path),
+                    "bytes": path.stat().st_size,
+                    "declared_sha256": declared_hashes[str(path)],
+                    "observed_sha256": observed_hashes.get(str(path)),
+                    "full_sha256_verified": bool(verify_tar_sha256),
+                }
+                for path in (top100_tar, ranks101_200_tar)
+            ],
+            "partition_count": partition_count,
+            "partition_rows": partition_rows,
+        }
+        _write_json(temporary / "source_file_manifest.json", source_manifest)
+        identity_payload = {
+            "schema_version": 1,
+            "cache_role": "AGGTRADES_FIXED_COHORT_SYSTEM_CANARY_RAW_PANEL_STORE",
+            "producer_source_sha": producer_source_sha,
+            "source_manifest": source_manifest,
+            "start_utc": start_ts.isoformat(),
+            "end_exclusive_utc": end_ts.isoformat(),
+            "symbols": symbols,
+            "field_ids": list(all_fields),
+            "observed_coordinates": int(observed.sum()),
+            "eligible_coordinates": int(base_eligible.sum()),
+            "aggregation": {
+                "minute_rows_per_hour": 60,
+                "missing_fill": None,
+                "feature_available_time_maximum": "hour_end",
+                "execution_time_maximum": "hour_plus_2h",
+            },
+        }
+        metadata = {
+            "schema_version": 2,
+            "surface_id": "CRYPTO_AGGTRADES_FIXED_COHORT_SYSTEM_CANARY_V1",
+            "cache_role": identity_payload["cache_role"],
+            "identity_sha256": _payload_sha(identity_payload),
+            "producer_source_sha": producer_source_sha,
+            "source_cache_identity_sha256": source.metadata["identity_sha256"],
+            "assets": len(symbols),
+            "timestamps": len(timestamp_ns),
+            "symbol_ids": symbols,
+            "field_ids": list(all_fields),
+            "target_horizons_hours": list(
+                source.metadata["target_horizons_hours"]
+            ),
+            "target_formula": source.metadata["target_formula"],
+            "start_utc": start_ts.isoformat(),
+            "end_exclusive_utc": end_ts.isoformat(),
+            "observed_coordinates": int(observed.sum()),
+            "eligible_coordinates": int(base_eligible.sum()),
+            "panel_context_contract": {
+                "authority": "POST_JOIN_ASSET_BY_TIME_RECOMPUTE",
+                "fields": [
+                    "active_universe_size",
+                    "age_percentile_active_universe",
+                    "history_length_hours",
+                ],
+            },
+            "fixed_retrospective_cohort": True,
+            "research_admission": "DEVELOPMENT_DIAGNOSTIC_ONLY",
+            "sealed_rows": 0,
+        }
+        _write_json(temporary / "metadata.json", metadata)
+        del matrix
+        del field_matrices
+        del observed_minutes
+        gc.collect()
+        os.replace(temporary, output_cache_root)
+        return metadata
+    finally:
+        for archive in archives:
+            archive.close()
 
 
 def _oi_symbol_dates(root: Path) -> set[tuple[str, pd.Timestamp]]:

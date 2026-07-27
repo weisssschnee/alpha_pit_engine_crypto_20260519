@@ -28,8 +28,13 @@ import numpy as np
 import pandas as pd
 import psutil
 
+from alphafactory_crypto.data_admission_v1 import (
+    AGGTRADES_SYSTEM_CANARY_FIELDS,
+    build_aggtrades_system_canary_cache,
+)
 from alphafactory_crypto.instrument_canary.release import sha256_file
 
+from .audit import FIELD_CONTRACTS as LEGACY_AGGTRADES_FIELD_CONTRACTS
 from .audit import freeze_search_behavior_contract
 from .compositional18m import (
     BETAS,
@@ -73,6 +78,9 @@ from .runner18m import (
 EPOCH_ID = "CRYPTO_SEARCH_ENGINE_V1_20260721"
 DEFAULT_RUNTIME_DATE = "20260721"
 BASE_SHA = "bbb0e696bc5f560f733dd4e9bfe263f11e4bb840"
+AGGTRADES_CANARY_EPOCH_ID = "CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727"
+AGGTRADES_CANARY_DEFAULT_RUNTIME_DATE = "20260727"
+AGGTRADES_CANARY_CONFIG = "config/crypto_aggtrades_system_canary_v1.json"
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
 CONTINUATION_RUNTIME = "runtime/crypto_18m_current_field_four_policy_continuation_20260719"
 SEEDS = (20260716, 20260717, 20260718, 20260719)
@@ -97,6 +105,23 @@ WALL_TIME_LIMIT_SECONDS = 18 * 60 * 60
 DEFAULT_WORKERS = 10
 FALLBACK_WORKERS = 8
 MEMORY_GATE_BYTES = 12 * 1024**3
+AGGTRADES_CANARY_ARMS = (
+    "canonical_typed_random",
+    "hierarchical_typed_cem_v2",
+    "typed_evolution_v2",
+)
+AGGTRADES_CANARY_CHECKPOINT_SIZE = 1_000
+AGGTRADES_CANARY_CHECKPOINT_COUNT = 2
+AGGTRADES_CANARY_STRICT_TARGET = (
+    AGGTRADES_CANARY_CHECKPOINT_SIZE * AGGTRADES_CANARY_CHECKPOINT_COUNT
+)
+AGGTRADES_CANARY_RAW_ATTEMPT_LIMIT = 20_000
+AGGTRADES_CANARY_WALL_TIME_LIMIT_SECONDS = 4 * 60 * 60
+AGGTRADES_CANARY_CHECKPOINT_ALLOCATION = {
+    "canonical_typed_random": 200,
+    "hierarchical_typed_cem_v2": 400,
+    "typed_evolution_v2": 400,
+}
 QUALIFICATION_TOLERANCE = 1.0e-12
 QUALIFICATION_DUPLICATE_RATE_MAXIMUM = 0.20
 GENE_ORDER = (
@@ -239,6 +264,72 @@ def _candidate_rebuild_verified(
         return False
 
 
+def _broad39_registry_contracts(
+    repo_root: Path,
+) -> tuple[tuple[FieldContract, ...], dict[str, Any], dict[str, Any]]:
+    continuation_path = repo_root / CONTINUATION_CONFIG
+    continuation = _read_json(continuation_path)
+    field_binding, field_ids = _current_field_surface_binding(repo_root, continuation)
+    if field_ids is None or len(field_ids) != 39:
+        raise PermissionError("Broad registry authority no longer resolves 39 fields")
+    prior_runtime = repo_root / CONTINUATION_RUNTIME
+    prior_manifest = _read_json(prior_runtime / "CRYPTO_ARTIFACT_MANIFEST.json")
+    registry_path = prior_runtime / "CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY.json"
+    registry_record = next(
+        row
+        for row in prior_manifest["artifacts"]
+        if row["path"].endswith("CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY.json")
+    )
+    if sha256_file(registry_path) != registry_record["sha256"]:
+        raise ValueError("committed Broad field registry identity changed")
+    registry_payload = _read_json(registry_path)
+    rows = registry_payload["fields"]
+    if registry_payload.get("field_count") != 39 or {
+        str(row["field_id"]) for row in rows
+    } != set(field_ids):
+        raise ValueError("committed Broad field registry no longer matches its surface")
+    by_id = {str(row["field_id"]): row for row in rows}
+    contracts = tuple(
+        FieldContract(
+            field_id,
+            str(by_id[field_id]["value_type"]),
+            str(by_id[field_id]["unit"]),
+            1,
+            "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+        )
+        for field_id in sorted(field_ids)
+    )
+    identity = {
+        "field_surface": field_binding,
+        "field_registry": {
+            "path": registry_path.relative_to(repo_root).as_posix(),
+            "sha256": registry_record["sha256"],
+            "logical_sha256": registry_payload["registry_sha256"],
+        },
+        "continuation_config": {
+            "path": CONTINUATION_CONFIG,
+            "sha256": sha256_file(continuation_path),
+        },
+    }
+    return contracts, identity, continuation
+
+
+def _aggtrades_canary_contracts() -> tuple[FieldContract, ...]:
+    contracts = tuple(
+        FieldContract(
+            "agg_trade_count" if item.field_id == "trade_count" else item.field_id,
+            item.value_type,
+            item.unit,
+            1,
+            "AGGTRADES_FIXED_COHORT_SYSTEM_CANARY_HOUR_CLOSE",
+        )
+        for item in LEGACY_AGGTRADES_FIELD_CONTRACTS
+    )
+    if {item.field_id for item in contracts} != set(AGGTRADES_SYSTEM_CANARY_FIELDS):
+        raise AssertionError("aggTrades canary FieldContract surface drifted")
+    return contracts
+
+
 def _load_bound_inputs(
     repo_root: Path,
 ) -> tuple[
@@ -345,6 +436,200 @@ def _load_bound_inputs(
         "prior_continuation_manifest_bundle_sha256": prior_manifest["bundle_sha256"],
     }
     return store, contracts, behavior_contract, identities, continuation
+
+
+def _resolve_config_path(repo_root: Path, value: str) -> Path:
+    path = Path(value)
+    return path if path.is_absolute() else repo_root / path
+
+
+def _validate_aggtrades_canary_config(config: Mapping[str, Any]) -> None:
+    search = config["search"]
+    if config.get("authorization") != (
+        "ONE_FRESH_STATE_2000_AGGTRADES_SYSTEM_CANARY"
+    ):
+        raise ValueError("aggTrades canary authorization changed")
+    if int(search["strict_evaluated_target"]) != AGGTRADES_CANARY_STRICT_TARGET:
+        raise ValueError("aggTrades canary strict target changed")
+    if int(search["checkpoint_size"]) != AGGTRADES_CANARY_CHECKPOINT_SIZE or int(
+        search["checkpoint_count"]
+    ) != AGGTRADES_CANARY_CHECKPOINT_COUNT:
+        raise ValueError("aggTrades canary checkpoint contract changed")
+    if {
+        str(key): int(value)
+        for key, value in search["arms_per_checkpoint"].items()
+    } != AGGTRADES_CANARY_CHECKPOINT_ALLOCATION:
+        raise ValueError("aggTrades canary arm allocation changed")
+    if tuple(int(value) for value in search["seeds"]) != SEEDS:
+        raise ValueError("aggTrades canary seed set changed")
+    if (
+        int(search["workers_default"]) != DEFAULT_WORKERS
+        or int(search["workers_memory_fallback"]) != FALLBACK_WORKERS
+        or search.get("workers_12_forbidden") is not True
+    ):
+        raise ValueError("aggTrades canary worker contract changed")
+    boundaries = config["boundaries"]
+    if (
+        boundaries.get("fixed_retrospective_cohort") is not True
+        or boundaries.get("system_behavior_only") is not True
+        or any(
+            bool(boundaries.get(key))
+            for key in (
+                "alpha_claim",
+                "oos",
+                "challenge",
+                "recent",
+                "may_stress",
+                "forward",
+                "promotion",
+                "latent_priority",
+                "relational_training",
+                "cross_sprint_adaptive_memory",
+                "future_arm_qualification",
+            )
+        )
+    ):
+        raise ValueError("aggTrades canary research boundary changed")
+
+
+def build_aggtrades_canary_cache_from_config(
+    repo_root: Path, *, source_sha: str
+) -> dict[str, Any]:
+    config_path = repo_root / AGGTRADES_CANARY_CONFIG
+    config = _read_json(config_path)
+    _validate_aggtrades_canary_config(config)
+    broad_contracts, _, continuation = _broad39_registry_contracts(repo_root)
+    inputs = config["inputs"]
+    cache = config["cache"]
+    metadata = build_aggtrades_system_canary_cache(
+        source_cache_root=repo_root / str(continuation["cache_root"]),
+        top100_tar=_resolve_config_path(repo_root, str(inputs["top100_tar"])),
+        ranks101_200_tar=_resolve_config_path(
+            repo_root, str(inputs["ranks101_200_tar"])
+        ),
+        output_cache_root=repo_root / str(cache["root"]),
+        broad_field_ids=[item.field_id for item in broad_contracts],
+        start=str(config["window"]["start"]),
+        end_exclusive=str(config["window"]["end_exclusive"]),
+        producer_source_sha=source_sha,
+        verify_tar_sha256=bool(inputs["verify_full_tar_sha256"]),
+    )
+    expected_hashes = {
+        str(_resolve_config_path(repo_root, str(inputs["top100_tar"]))): str(
+            inputs["top100_tar_sha256"]
+        ).lower(),
+        str(
+            _resolve_config_path(repo_root, str(inputs["ranks101_200_tar"]))
+        ): str(inputs["ranks101_200_tar_sha256"]).lower(),
+    }
+    source_manifest = _read_json(
+        repo_root / str(cache["root"]) / "source_file_manifest.json"
+    )
+    observed_hashes = {
+        str(row["path"]): str(row["declared_sha256"]).lower()
+        for row in source_manifest["tars"]
+    }
+    if observed_hashes != expected_hashes:
+        raise ValueError("built canary cache TAR identities differ from frozen config")
+    return metadata
+
+
+def _load_aggtrades_canary_inputs(
+    repo_root: Path,
+) -> tuple[
+    RawPanelStore,
+    tuple[FieldContract, ...],
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+]:
+    config_path = repo_root / AGGTRADES_CANARY_CONFIG
+    config = _read_json(config_path)
+    _validate_aggtrades_canary_config(config)
+    broad_contracts, broad_identity, _ = _broad39_registry_contracts(repo_root)
+    contracts = tuple((*broad_contracts, *_aggtrades_canary_contracts()))
+    if len({item.field_id for item in contracts}) != len(contracts):
+        raise ValueError("aggTrades canary field surface has duplicate identities")
+    coverage = field_role_coverage(contracts)
+    if not coverage["all_fields_reachable"]:
+        raise ValueError("aggTrades canary contains a generator-unreachable field")
+    cache_root = repo_root / str(config["cache"]["root"])
+    metadata = _read_json(cache_root / "metadata.json")
+    if metadata.get("cache_role") != (
+        "AGGTRADES_FIXED_COHORT_SYSTEM_CANARY_RAW_PANEL_STORE"
+    ):
+        raise ValueError("aggTrades system canary cache role changed")
+    if metadata.get("fixed_retrospective_cohort") is not True:
+        raise ValueError("aggTrades canary must disclose its retrospective cohort")
+    panel_context = metadata.get("panel_context_contract", {})
+    if panel_context.get("authority") != "POST_JOIN_ASSET_BY_TIME_RECOMPUTE":
+        raise ValueError("aggTrades canary cache lacks post-join context authority")
+    expected_fields = {item.field_id for item in contracts}
+    if not expected_fields.issubset(set(metadata.get("field_ids", []))):
+        raise ValueError("aggTrades canary cache lacks a frozen searchable field")
+    source_manifest = _read_json(cache_root / "source_file_manifest.json")
+    expected_tar_hashes = {
+        str(
+            _resolve_config_path(
+                repo_root, str(config["inputs"]["top100_tar"])
+            ).resolve()
+        ): str(config["inputs"]["top100_tar_sha256"]).lower(),
+        str(
+            _resolve_config_path(
+                repo_root, str(config["inputs"]["ranks101_200_tar"])
+            ).resolve()
+        ): str(config["inputs"]["ranks101_200_tar_sha256"]).lower(),
+    }
+    observed_tar_hashes = {
+        str(Path(str(row["path"])).resolve()): str(row["declared_sha256"]).lower()
+        for row in source_manifest["tars"]
+    }
+    if observed_tar_hashes != expected_tar_hashes:
+        raise ValueError("aggTrades canary cache input identity changed")
+    store = RawPanelStore.open(cache_root)
+    block = store.block_slice(
+        str(config["window"]["start"]), str(config["window"]["end_exclusive"])
+    )
+    if block.start != 0 or block.stop != store.shape[1]:
+        raise ValueError("aggTrades canary cache contains data outside its frozen window")
+    behavior_contract = freeze_search_behavior_contract(
+        np.asarray(store.field("active_universe_size")[:, block], dtype=float),
+        np.asarray(store.observed()[:, block], dtype=bool),
+    )
+    directory_bundle = _directory_bundle(cache_root)
+    identities = {
+        **broad_identity,
+        "canary_config": {
+            "path": AGGTRADES_CANARY_CONFIG,
+            "sha256": sha256_file(config_path),
+        },
+        "aggtrades_field_surface": {
+            "field_count": len(AGGTRADES_SYSTEM_CANARY_FIELDS),
+            "field_ids": list(AGGTRADES_SYSTEM_CANARY_FIELDS),
+            "logical_sha256": _payload_sha(
+                [
+                    {
+                        "field_id": item.field_id,
+                        "value_type": item.value_type,
+                        "unit": item.unit,
+                        "observable_lag_hours": item.observable_lag_hours,
+                        "pit_authority": item.pit_authority,
+                    }
+                    for item in _aggtrades_canary_contracts()
+                ]
+            ),
+        },
+        "raw_cache": {
+            "root": cache_root.relative_to(repo_root).as_posix(),
+            "identity_sha256": metadata["identity_sha256"],
+            "directory_bundle": directory_bundle,
+            "panel_context_contract": panel_context,
+            "source_manifest_sha256": sha256_file(
+                cache_root / "source_file_manifest.json"
+            ),
+        },
+    }
+    return store, contracts, behavior_contract, identities, config
 
 
 def _frozen_contract(
@@ -487,6 +772,123 @@ def _frozen_contract(
             "forward": False,
             "promotion": False,
             "cross_sprint_adaptive_memory": False,
+        },
+    }
+    return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
+def _aggtrades_canary_frozen_contract(
+    *,
+    source_sha: str,
+    compiler_binding: Mapping[str, Any],
+    behavior_contract: Mapping[str, Any],
+    input_identities: Mapping[str, Any],
+    environment: Mapping[str, Any],
+    config: Mapping[str, Any],
+) -> dict[str, Any]:
+    payload = {
+        "schema_version": 1,
+        "epoch_id": AGGTRADES_CANARY_EPOCH_ID,
+        "experiment_id": str(config["experiment_id"]),
+        "source_sha": source_sha,
+        "objective": (
+            "Exercise Search Engine V1 proposal productivity, behavior discovery, "
+            "and exact checkpoint restoration on a newly materialized aggTrades "
+            "field family"
+        ),
+        "authorization": "ONE_FRESH_STATE_2000_AGGTRADES_SYSTEM_CANARY",
+        "evidence_role": "DEVELOPMENT_DIAGNOSTIC_FIXED_RETROSPECTIVE_COHORT",
+        "input_identities": dict(input_identities),
+        "compiler_identity": dict(compiler_binding),
+        "evaluator_contract": pair_contract_payload(),
+        "behavior_descriptor": dict(behavior_contract),
+        "environment": dict(environment),
+        "window": dict(config["window"]),
+        "surface": {
+            "broad_context_fields": 39,
+            "aggtrades_fields": len(AGGTRADES_SYSTEM_CANARY_FIELDS),
+            "aggtrades_field_ids": list(AGGTRADES_SYSTEM_CANARY_FIELDS),
+            "every_candidate_requires_aggtrades_input": True,
+            "fixed_retrospective_cohort": True,
+            "missing_value_fill": None,
+        },
+        "seeds": list(SEEDS),
+        "arms": {
+            "active": list(AGGTRADES_CANARY_ARMS),
+            "checkpoint_allocation": dict(AGGTRADES_CANARY_CHECKPOINT_ALLOCATION),
+            "same_seed_set_for_every_arm": True,
+            "reward_comparison": (
+                "same first N by deterministic arm completion ordinal"
+            ),
+        },
+        "fresh_state": {
+            "old_candidate_import": False,
+            "old_reward_import": False,
+            "old_distribution_import": False,
+            "old_population_import": False,
+            "old_policy_state_import": False,
+            "old_archive_import": False,
+        },
+        "policies": {
+            "canonical_typed_random": dict(
+                V1_PARAMETERS["canonical_typed_random"]
+            ),
+            "hierarchical_typed_cem_v2": dict(
+                V2_PARAMETERS["hierarchical_typed_cem_v2"]
+            ),
+            "typed_evolution_v2": dict(
+                V2_PARAMETERS["typed_evolution_v2"]
+            ),
+        },
+        "elite_authority": {
+            "only_ordering_authority": "pair_reward",
+            "equal_reward_tie_break": [
+                "arm_seed_policy_local_behavior_family_count",
+                "candidate_id",
+            ],
+            "diagnostic_only": [
+                "turnover",
+                "cost_killed",
+                "failure_layer",
+                "behavior_novelty_except_equal_reward",
+            ],
+        },
+        "budget": {
+            "strict_evaluated_target": AGGTRADES_CANARY_STRICT_TARGET,
+            "raw_generation_attempts_maximum": AGGTRADES_CANARY_RAW_ATTEMPT_LIMIT,
+            "fail_closed_attempt_reservation_per_proposal": (
+                MAX_SINGLE_PROPOSAL_RAW_ATTEMPTS
+            ),
+            "wall_time_seconds_maximum": (
+                AGGTRADES_CANARY_WALL_TIME_LIMIT_SECONDS
+            ),
+            "checkpoint_size": AGGTRADES_CANARY_CHECKPOINT_SIZE,
+            "checkpoint_count": AGGTRADES_CANARY_CHECKPOINT_COUNT,
+            "workers_default": DEFAULT_WORKERS,
+            "workers_memory_fallback": FALLBACK_WORKERS,
+            "workers_12_forbidden": True,
+        },
+        "decision_authority": {
+            "system_behavior_only": True,
+            "alpha_discovery_claim": False,
+            "future_arm_qualification": False,
+            "data_admission_promotion": False,
+        },
+        "cpu_hour_definition": (
+            "sum process CPU seconds for proposal, compile, archive, and pair "
+            "evaluation; excludes queue and human wait"
+        ),
+        "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
+        "boundaries": {
+            "sealed_reads": 0,
+            "challenge": False,
+            "recent": False,
+            "may_stress": False,
+            "forward": False,
+            "promotion": False,
+            "cross_sprint_adaptive_memory": False,
+            "latent_priority": False,
+            "relational_training": False,
         },
     }
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
@@ -1708,10 +2110,15 @@ def _policy_key(arm: str, seed: int) -> str:
     return f"{arm}|{int(seed)}"
 
 
-def _initial_policies(registry: TypedExpressionRegistry) -> dict[str, PolicyType]:
+def _initial_policies(
+    registry: TypedExpressionRegistry,
+    *,
+    arms: Sequence[str] = FIRST_CHECKPOINT_ARMS,
+    seeds: Sequence[int] = SEEDS,
+) -> dict[str, PolicyType]:
     output: dict[str, PolicyType] = {}
-    for seed in SEEDS:
-        for arm in FIRST_CHECKPOINT_ARMS:
+    for seed in seeds:
+        for arm in arms:
             key = _policy_key(arm, seed)
             if arm in V1_PARAMETERS:
                 output[key] = LanePolicy(
@@ -1780,17 +2187,27 @@ def _policy_observe(
 _WORKER_STORE: RawPanelStore | None = None
 _WORKER_REGISTRY: TypedExpressionRegistry | None = None
 _WORKER_BEHAVIOR_CONTRACT: Mapping[str, Any] | None = None
+_WORKER_BLOCK_START = ADAPTIVE_START
+_WORKER_BLOCK_END = ADAPTIVE_END
+_WORKER_BLOCK_ROLE = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1"
 
 
 def _worker_initialize(
     cache_root: str,
     contract_rows: Sequence[Mapping[str, Any]],
     behavior_contract: Mapping[str, Any],
+    block_start: str = ADAPTIVE_START,
+    block_end: str = ADAPTIVE_END,
+    block_role: str = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1",
 ) -> None:
     global _WORKER_STORE, _WORKER_REGISTRY, _WORKER_BEHAVIOR_CONTRACT
+    global _WORKER_BLOCK_START, _WORKER_BLOCK_END, _WORKER_BLOCK_ROLE
     _WORKER_STORE = RawPanelStore.open(Path(cache_root))
     _WORKER_REGISTRY = TypedExpressionRegistry(_contracts_from_payload(contract_rows))
     _WORKER_BEHAVIOR_CONTRACT = dict(behavior_contract)
+    _WORKER_BLOCK_START = str(block_start)
+    _WORKER_BLOCK_END = str(block_end)
+    _WORKER_BLOCK_ROLE = str(block_role)
 
 
 def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
@@ -1812,9 +2229,9 @@ def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
             store=_WORKER_STORE,
             registry=_WORKER_REGISTRY,
             candidate=candidate,
-            block_start=ADAPTIVE_START,
-            block_end=ADAPTIVE_END,
-            block_role="SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1",
+            block_start=_WORKER_BLOCK_START,
+            block_end=_WORKER_BLOCK_END,
+            block_role=_WORKER_BLOCK_ROLE,
             behavior_contract=_WORKER_BEHAVIOR_CONTRACT,
         )
     except MemoryError as failure:
@@ -1835,8 +2252,14 @@ def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
-def _new_campaign_state(source_sha: str, frozen_hash: str) -> dict[str, Any]:
-    arms = set(FIRST_CHECKPOINT_ARMS)
+def _new_campaign_state(
+    source_sha: str,
+    frozen_hash: str,
+    *,
+    arms: Sequence[str] = FIRST_CHECKPOINT_ARMS,
+    seeds: Sequence[int] = SEEDS,
+) -> dict[str, Any]:
+    arm_set = set(arms)
     return {
         "schema_version": 1,
         "source_sha": source_sha,
@@ -1851,8 +2274,8 @@ def _new_campaign_state(source_sha: str, frozen_hash: str) -> dict[str, Any]:
         "attempted_exact_ids": [],
         "policy_local_family_counts": {
             _policy_key(arm, seed): {}
-            for arm in sorted(arms)
-            for seed in SEEDS
+            for arm in sorted(arm_set)
+            for seed in seeds
         },
         "failure_counts": {},
         "wall_elapsed_seconds": 0.0,
@@ -1871,7 +2294,7 @@ def _new_campaign_state(source_sha: str, frozen_hash: str) -> dict[str, Any]:
                 "strict_evaluated": 0,
                 "cpu_seconds": 0.0,
             }
-            for arm in sorted(arms)
+            for arm in sorted(arm_set)
         },
     }
 
@@ -1926,22 +2349,28 @@ def _metrics_rows(
     archive: BehaviorArchive,
     state: Mapping[str, Any],
     policies: Mapping[str, PolicyType],
+    comparison_arms: Sequence[str] | None = None,
 ) -> list[dict[str, Any]]:
     cumulative_by_arm: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
     for row in ledger:
         cumulative_by_arm[str(row["arm"])].append(row)
-    comparison_arms = (
-        FIRST_CHECKPOINT_ARMS
-        if checkpoint_index == 0
-        else tuple(
-            arm
-            for arm in ROLLING_ARMS
-            if cumulative_by_arm.get(arm)
-            and state.get("arm_states", {}).get(arm, "ACTIVE") != "EXITED"
+    if comparison_arms is None:
+        active_comparison_arms = (
+            FIRST_CHECKPOINT_ARMS
+            if checkpoint_index == 0
+            else tuple(
+                arm
+                for arm in ROLLING_ARMS
+                if cumulative_by_arm.get(arm)
+                and state.get("arm_states", {}).get(arm, "ACTIVE") != "EXITED"
+            )
         )
-    )
+    else:
+        active_comparison_arms = tuple(
+            arm for arm in comparison_arms if cumulative_by_arm.get(arm)
+        )
     matched_count = min(
-        (len(cumulative_by_arm[arm]) for arm in comparison_arms), default=0
+        (len(cumulative_by_arm[arm]) for arm in active_comparison_arms), default=0
     )
     prior_families = {
         str(row["behavior_family_id"])
@@ -2901,6 +3330,151 @@ def _final_decision(
     }
 
 
+def _aggtrades_canary_final_decision(
+    *,
+    source_sha: str,
+    state: Mapping[str, Any],
+    ledger: Sequence[Mapping[str, Any]],
+    archive: BehaviorArchive,
+    metrics: Sequence[Mapping[str, Any]],
+    runtime_root: Path,
+) -> dict[str, Any]:
+    final_rows = {
+        str(row["arm"]): row
+        for row in metrics
+        if int(row["checkpoint_index"]) == AGGTRADES_CANARY_CHECKPOINT_COUNT - 1
+    }
+    random_metrics = final_rows["canonical_typed_random"]
+    comparisons: dict[str, Any] = {}
+    for arm in ("hierarchical_typed_cem_v2", "typed_evolution_v2"):
+        local = final_rows[arm]
+        comparisons[arm] = {
+            "matched_evaluated_count": int(
+                local["matched_reward_comparison_count"]
+            ),
+            "valid_exact_unique_per_cpu_hour_delta": float(
+                local["valid_exact_unique_per_cpu_hour"]
+            )
+            - float(random_metrics["valid_exact_unique_per_cpu_hour"]),
+            "new_behavior_families_per_1k_delta": float(
+                local["new_behavior_families_per_1k_evaluations"]
+            )
+            - float(random_metrics["new_behavior_families_per_1k_evaluations"]),
+            "mean_pair_reward_delta": float(
+                local["mean_pair_reward_at_matched_count"]
+            )
+            - float(random_metrics["mean_pair_reward_at_matched_count"]),
+            "top_decile_pair_reward_delta": float(
+                local["top_decile_pair_reward_at_matched_count"]
+            )
+            - float(random_metrics["top_decile_pair_reward_at_matched_count"]),
+            "behavior_duplicate_rate_delta": float(
+                local["behavior_duplicate_rate"]
+            )
+            - float(random_metrics["behavior_duplicate_rate"]),
+        }
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    restore_verified = (
+        len(checkpoints) == AGGTRADES_CANARY_CHECKPOINT_COUNT
+        and all(
+            bool(_read_json(path / "manifest.json").get("restore_verified"))
+            for path in checkpoints
+        )
+    )
+    arm_counts = Counter(str(row["arm"]) for row in ledger)
+    expected_arm_counts = {
+        arm: count * AGGTRADES_CANARY_CHECKPOINT_COUNT
+        for arm, count in AGGTRADES_CANARY_CHECKPOINT_ALLOCATION.items()
+    }
+    every_candidate_uses_aggtrades = all(
+        bool(
+            set(json.loads(str(row["raw_fields_json"])))
+            & set(AGGTRADES_SYSTEM_CANARY_FIELDS)
+        )
+        for row in ledger
+    )
+    verified_operations = Counter(
+        str(row["operation"])
+        for row in ledger
+        if str(row["arm"]) == "typed_evolution_v2"
+        and bool(row.get("receipt_verified"))
+    )
+    engineering_pass = bool(
+        len(ledger) == AGGTRADES_CANARY_STRICT_TARGET
+        and dict(arm_counts) == expected_arm_counts
+        and every_candidate_uses_aggtrades
+        and restore_verified
+    )
+    return {
+        "schema_version": 1,
+        "epoch_id": AGGTRADES_CANARY_EPOCH_ID,
+        "status": (
+            "PASS_SYSTEM_CANARY_COMPLETED"
+            if engineering_pass
+            else "HOLD_SYSTEM_CANARY_INCOMPLETE"
+        ),
+        "research_decision": "HOLD_RESEARCH_FIXED_RETROSPECTIVE_COHORT",
+        "producer_source_sha": source_sha,
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": int(state["generation_attempts"]),
+        "raw_attempt_limit": AGGTRADES_CANARY_RAW_ATTEMPT_LIMIT,
+        "active_wall_seconds": float(state["wall_elapsed_seconds"]),
+        "wall_time_limit_seconds": AGGTRADES_CANARY_WALL_TIME_LIMIT_SECONDS,
+        "checkpoint_count": len(checkpoints),
+        "checkpoint_restore_verified": restore_verified,
+        "arm_counts": dict(sorted(arm_counts.items())),
+        "expected_arm_counts": expected_arm_counts,
+        "every_candidate_uses_aggtrades": every_candidate_uses_aggtrades,
+        "behavior_family_count": len(archive.champion_by_family),
+        "behavior_duplicate_rate": 1.0
+        - len(archive.champion_by_family) / max(1, len(ledger)),
+        "archive_duplicate_replacements": archive.duplicate_replacements,
+        "system_comparisons_vs_typed_random": comparisons,
+        "verified_evolution_operations": dict(sorted(verified_operations.items())),
+        "engineering_execution_qualified_arms": list(AGGTRADES_CANARY_ARMS),
+        "future_new_data_arena_qualified_arms": [],
+        "promotion": "FORBIDDEN",
+        "sealed_reads": 0,
+        "next_arena_started": False,
+        "cannot_conclude": [
+            "unbiased cross-sectional Alpha",
+            "fresh economic increment",
+            "OOS validity",
+            "challenge, recent, May-stress, or forward evidence",
+            "candidate or component promotion",
+        ],
+    }
+
+
+def _aggtrades_canary_report_text(decision: Mapping[str, Any]) -> str:
+    comparisons = decision["system_comparisons_vs_typed_random"]
+    cem = comparisons["hierarchical_typed_cem_v2"]
+    evolution = comparisons["typed_evolution_v2"]
+    return f"""# Crypto aggTrades Search-System Canary V1
+
+- Status: `{decision['status']}`
+- Research decision: `{decision['research_decision']}`
+- Producer source: `{decision['producer_source_sha']}`
+- Strict completed: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
+- Checkpoints: `{decision['checkpoint_count']}/{AGGTRADES_CANARY_CHECKPOINT_COUNT}`, exact restore verified: `{decision['checkpoint_restore_verified']}`.
+- Every candidate used at least one aggTrades field: `{decision['every_candidate_uses_aggtrades']}`.
+- Behavior families: `{decision['behavior_family_count']:,}`; duplicate rate `{decision['behavior_duplicate_rate']:.2%}`.
+
+## System comparison versus typed random
+
+| Arm | valid exact-unique / CPU-hour delta | new families / 1k delta | mean pair reward delta | top-decile reward delta |
+|---|---:|---:|---:|---:|
+| Hierarchical Typed CEM V2 | {cem['valid_exact_unique_per_cpu_hour_delta']:.6f} | {cem['new_behavior_families_per_1k_delta']:.6f} | {cem['mean_pair_reward_delta']:.8f} | {cem['top_decile_pair_reward_delta']:.8f} |
+| Typed Evolution V2 | {evolution['valid_exact_unique_per_cpu_hour_delta']:.6f} | {evolution['new_behavior_families_per_1k_delta']:.6f} | {evolution['mean_pair_reward_delta']:.8f} | {evolution['top_decile_pair_reward_delta']:.8f} |
+
+This fixed-retrospective-cohort canary evaluates search-system behavior only.
+It creates no Alpha, OOS, challenge, recent, May-stress, forward, promotion,
+data-admission, latent-priority, or relational-training authority.
+"""
+
+
 def _final_manifest(
     *,
     repo_root: Path,
@@ -2910,6 +3484,12 @@ def _final_manifest(
     frozen_hash: str,
     identities: Mapping[str, Any],
     state: Mapping[str, Any],
+    epoch_id: str = EPOCH_ID,
+    base_sha: str = BASE_SHA,
+    continuation: str = (
+        "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+        "check --runtime-date 20260721"
+    ),
 ) -> dict[str, Any]:
     paths = [
         runtime_root / "frozen_contract.json",
@@ -2933,10 +3513,10 @@ def _final_manifest(
     ]
     return {
         "schema_version": 1,
-        "epoch_id": EPOCH_ID,
+        "epoch_id": epoch_id,
         "status": "COMPLETED",
         "producer_source_sha": source_sha,
-        "base_sha": BASE_SHA,
+        "base_sha": base_sha,
         "frozen_contract_sha256": frozen_hash,
         "data_cache_identity": identities["raw_cache"],
         "compiler_identity": identities["compiler_identity"],
@@ -2949,7 +3529,7 @@ def _final_manifest(
         "artifacts": artifacts,
         "artifact_bundle_sha256": _payload_sha(artifacts),
         "reproducible": True,
-        "continuation": "python -m alphafactory_crypto.broad_search.search_engine_v1 check --runtime-date 20260721",
+        "continuation": continuation,
     }
 
 
@@ -2958,9 +3538,37 @@ def run_engine(
     *,
     runtime_date: str = DEFAULT_RUNTIME_DATE,
     source_sha: str | None = None,
+    campaign: str = "legacy",
 ) -> dict[str, Any]:
-    runtime_root = repo_root / f"runtime/crypto_search_engine_v1_{runtime_date}"
-    report_path = repo_root / f"reports/CRYPTO_SEARCH_ENGINE_V1_{runtime_date}.md"
+    if campaign not in {"legacy", "aggtrades_system_canary"}:
+        raise ValueError(f"unsupported Search Engine V1 campaign: {campaign}")
+    is_canary = campaign == "aggtrades_system_canary"
+    if is_canary:
+        runtime_root = (
+            repo_root
+            / f"runtime/crypto_aggtrades_system_canary_v1_{runtime_date}"
+        )
+        report_path = (
+            repo_root
+            / f"reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_{runtime_date}.md"
+        )
+        strict_target = AGGTRADES_CANARY_STRICT_TARGET
+        checkpoint_count = AGGTRADES_CANARY_CHECKPOINT_COUNT
+        checkpoint_size = AGGTRADES_CANARY_CHECKPOINT_SIZE
+        raw_attempt_limit = AGGTRADES_CANARY_RAW_ATTEMPT_LIMIT
+        wall_time_limit = AGGTRADES_CANARY_WALL_TIME_LIMIT_SECONDS
+        campaign_arms = AGGTRADES_CANARY_ARMS
+        block_role = "DEVELOPMENT_DIAGNOSTIC_FIXED_COHORT_AGGTRADES_SYSTEM_CANARY"
+    else:
+        runtime_root = repo_root / f"runtime/crypto_search_engine_v1_{runtime_date}"
+        report_path = repo_root / f"reports/CRYPTO_SEARCH_ENGINE_V1_{runtime_date}.md"
+        strict_target = STRICT_TARGET
+        checkpoint_count = CHECKPOINT_COUNT
+        checkpoint_size = CHECKPOINT_SIZE
+        raw_attempt_limit = RAW_ATTEMPT_LIMIT
+        wall_time_limit = WALL_TIME_LIMIT_SECONDS
+        campaign_arms = FIRST_CHECKPOINT_ARMS
+        block_role = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1"
     observed_source = _git_sha(repo_root)
     source_sha = (source_sha or observed_source).lower()
     if source_sha != observed_source:
@@ -2971,25 +3579,48 @@ def run_engine(
         raise RuntimeError(
             "Search Engine V1 requires a clean producer tree; only its runtime/report may exist"
         )
-    store, contracts, behavior_contract, input_identities, continuation = (
-        _load_bound_inputs(repo_root)
-    )
+    if is_canary:
+        store, contracts, behavior_contract, input_identities, continuation = (
+            _load_aggtrades_canary_inputs(repo_root)
+        )
+        block_start = str(continuation["window"]["start"])
+        block_end = str(continuation["window"]["end_exclusive"])
+    else:
+        store, contracts, behavior_contract, input_identities, continuation = (
+            _load_bound_inputs(repo_root)
+        )
+        block_start = ADAPTIVE_START
+        block_end = ADAPTIVE_END
     registry = TypedExpressionRegistry(contracts)
     compiler_binding = _compiler_binding(repo_root)
     environment = _environment_fingerprint()
-    frozen = _frozen_contract(
-        source_sha=source_sha,
-        compiler_binding=compiler_binding,
-        behavior_contract=behavior_contract,
-        input_identities=input_identities,
-        environment=environment,
-    )
+    if is_canary:
+        frozen = _aggtrades_canary_frozen_contract(
+            source_sha=source_sha,
+            compiler_binding=compiler_binding,
+            behavior_contract=behavior_contract,
+            input_identities=input_identities,
+            environment=environment,
+            config=continuation,
+        )
+    else:
+        frozen = _frozen_contract(
+            source_sha=source_sha,
+            compiler_binding=compiler_binding,
+            behavior_contract=behavior_contract,
+            input_identities=input_identities,
+            environment=environment,
+        )
     frozen_hash = str(frozen["frozen_contract_sha256"])
     identities = {
         **input_identities,
         "compiler_identity": compiler_binding,
     }
-    cache_root = repo_root / str(continuation["cache_root"])
+    cache_root = (
+        repo_root / str(continuation["cache"]["root"])
+        if is_canary
+        else repo_root / str(continuation["cache_root"])
+    )
 
     existing_checkpoints: list[Path] = []
     if runtime_root.exists():
@@ -3008,7 +3639,7 @@ def run_engine(
             runtime_root / "embedded_preflight.json",
             {
                 "schema_version": 1,
-                "status": "READY_FIRST_STRICT_BATCH_COUNTS_TOWARD_20000",
+                "status": f"READY_FIRST_STRICT_BATCH_COUNTS_TOWARD_{strict_target}",
                 "workers_requested": DEFAULT_WORKERS,
                 "workers_12_forbidden": True,
                 "memory_gate_bytes": MEMORY_GATE_BYTES,
@@ -3026,8 +3657,12 @@ def run_engine(
             expected_identities=identities,
         )
     else:
-        state = _new_campaign_state(source_sha, frozen_hash)
-        policies = _initial_policies(registry)
+        state = _new_campaign_state(
+            source_sha, frozen_hash, arms=campaign_arms, seeds=SEEDS
+        )
+        policies = _initial_policies(
+            registry, arms=campaign_arms, seeds=SEEDS
+        )
         ledger: list[dict[str, Any]] = []
         archive = BehaviorArchive()
         metrics: list[dict[str, Any]] = []
@@ -3037,7 +3672,9 @@ def run_engine(
     prior_active_seconds = float(state["wall_elapsed_seconds"])
     preflight_done = _read_json(runtime_root / "embedded_preflight.json").get(
         "status"
-    ) not in {"READY_FIRST_STRICT_BATCH_COUNTS_TOWARD_20000"}
+    ) not in {
+        f"READY_FIRST_STRICT_BATCH_COUNTS_TOWARD_{strict_target}"
+    }
 
     def active_elapsed() -> float:
         return prior_active_seconds + (time.perf_counter() - active_started)
@@ -3046,10 +3683,10 @@ def run_engine(
         state["wall_elapsed_seconds"] = active_elapsed()
         if (
             int(state["generation_attempts"]) + int(reserve_attempts)
-            > RAW_ATTEMPT_LIMIT
+            > raw_attempt_limit
         ):
             raise _EngineBudgetExhausted("RAW_GENERATION_ATTEMPT_LIMIT")
-        if float(state["wall_elapsed_seconds"]) >= WALL_TIME_LIMIT_SECONDS:
+        if float(state["wall_elapsed_seconds"]) >= wall_time_limit:
             raise _EngineBudgetExhausted("ACTIVE_WALL_TIME_LIMIT")
 
     executor: concurrent.futures.ProcessPoolExecutor | None = None
@@ -3058,7 +3695,14 @@ def run_engine(
         return concurrent.futures.ProcessPoolExecutor(
             max_workers=workers,
             initializer=_worker_initialize,
-            initargs=(str(cache_root), _contracts_payload(contracts), behavior_contract),
+            initargs=(
+                str(cache_root),
+                _contracts_payload(contracts),
+                behavior_contract,
+                block_start,
+                block_end,
+                block_role,
+            ),
         )
 
     def stop_executor() -> None:
@@ -3070,10 +3714,14 @@ def run_engine(
     try:
         executor = start_executor(int(state["workers"]))
         for checkpoint_index in range(
-            int(state["next_checkpoint_index"]), CHECKPOINT_COUNT
+            int(state["next_checkpoint_index"]), checkpoint_count
         ):
-            allocation = _checkpoint_allocation(
-                checkpoint_index, state["arm_states"]
+            allocation = (
+                dict(AGGTRADES_CANARY_CHECKPOINT_ALLOCATION)
+                if is_canary
+                else _checkpoint_allocation(
+                    checkpoint_index, state["arm_states"]
+                )
             )
             checkpoint_existing = Counter(
                 str(row["arm"])
@@ -3095,7 +3743,7 @@ def run_engine(
             lane_order = sorted(target_by_lane)
             checkpoint_start_count = len(ledger)
             checkpoint_target_count = checkpoint_start_count + (
-                CHECKPOINT_SIZE - sum(checkpoint_existing.values())
+                checkpoint_size - sum(checkpoint_existing.values())
             )
             while len(ledger) < checkpoint_target_count:
                 enforce_budget()
@@ -3178,6 +3826,16 @@ def run_engine(
                         )
                         continue
                     attempted_ids.add(candidate.candidate_id)
+                    if is_canary and not (
+                        set(candidate.raw_fields)
+                        & set(AGGTRADES_SYSTEM_CANARY_FIELDS)
+                    ):
+                        _policy_reject(policy, candidate)
+                        _failure(state, arm, "AGGTRADES_INPUT_REQUIRED")
+                        state["arm_counters"][arm]["cpu_seconds"] += (
+                            time.process_time() - proposal_cpu_started
+                        )
+                        continue
                     _increment_counter(state, arm, "exact_unique", 1)
                     proposal_cpu = time.process_time() - proposal_cpu_started
                     state["arm_counters"][arm]["cpu_seconds"] += proposal_cpu
@@ -3395,11 +4053,18 @@ def run_engine(
                 archive=archive,
                 state=state,
                 policies=policies,
+                comparison_arms=(
+                    AGGTRADES_CANARY_ARMS if is_canary else None
+                ),
             )
-            gates = _apply_exit_gate(
-                checkpoint_index=checkpoint_index,
-                checkpoint_metrics=checkpoint_metrics,
-                state=state,
+            gates = (
+                {}
+                if is_canary
+                else _apply_exit_gate(
+                    checkpoint_index=checkpoint_index,
+                    checkpoint_metrics=checkpoint_metrics,
+                    state=state,
+                )
             )
             metrics.extend(checkpoint_metrics)
             _write_top_level_artifacts(
@@ -3484,21 +4149,40 @@ def run_engine(
     finally:
         stop_executor()
 
-    if len(ledger) != STRICT_TARGET:
-        raise AssertionError("Search Engine V1 ended without exactly 20,000 strict candidates")
+    if len(ledger) != strict_target:
+        raise AssertionError(
+            f"Search Engine V1 ended without exactly {strict_target:,} strict candidates"
+        )
     state["wall_elapsed_seconds"] = active_elapsed()
-    decision = _final_decision(
-        source_sha=source_sha,
-        state=state,
-        ledger=ledger,
-        archive=archive,
-        metrics=metrics,
-        runtime_root=runtime_root,
+    decision = (
+        _aggtrades_canary_final_decision(
+            source_sha=source_sha,
+            state=state,
+            ledger=ledger,
+            archive=archive,
+            metrics=metrics,
+            runtime_root=runtime_root,
+        )
+        if is_canary
+        else _final_decision(
+            source_sha=source_sha,
+            state=state,
+            ledger=ledger,
+            archive=archive,
+            metrics=metrics,
+            runtime_root=runtime_root,
+        )
     )
     _write_json(runtime_root / "final_decision.json", decision)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
-        _report_text(decision), encoding="utf-8", newline="\n"
+        (
+            _aggtrades_canary_report_text(decision)
+            if is_canary
+            else _report_text(decision)
+        ),
+        encoding="utf-8",
+        newline="\n",
     )
     manifest = _final_manifest(
         repo_root=repo_root,
@@ -3508,6 +4192,17 @@ def run_engine(
         frozen_hash=frozen_hash,
         identities=identities,
         state=state,
+        epoch_id=(
+            AGGTRADES_CANARY_EPOCH_ID if is_canary else EPOCH_ID
+        ),
+        base_sha=(source_sha if is_canary else BASE_SHA),
+        continuation=(
+            "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+            f"check-canary --runtime-date {runtime_date}"
+            if is_canary
+            else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+            f"check --runtime-date {runtime_date}"
+        ),
     )
     _write_json(runtime_root / "run_manifest.json", manifest)
     return {
@@ -3516,7 +4211,7 @@ def run_engine(
         "producer_source_sha": source_sha,
         "strict_evaluated_count": len(ledger),
         "generation_attempts": int(state["generation_attempts"]),
-        "checkpoint_count": CHECKPOINT_COUNT,
+        "checkpoint_count": checkpoint_count,
         "behavior_family_count": len(archive.champion_by_family),
         "artifact_bundle_sha256": manifest["artifact_bundle_sha256"],
         "sealed_reads": 0,
@@ -3756,21 +4451,292 @@ def check_engine(
     }
 
 
+def check_aggtrades_canary(
+    repo_root: Path,
+    *,
+    runtime_date: str = AGGTRADES_CANARY_DEFAULT_RUNTIME_DATE,
+) -> dict[str, Any]:
+    runtime_root = (
+        repo_root / f"runtime/crypto_aggtrades_system_canary_v1_{runtime_date}"
+    )
+    report_path = (
+        repo_root / f"reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_{runtime_date}.md"
+    )
+    errors: list[str] = []
+    required = (
+        "frozen_contract.json",
+        "embedded_preflight.json",
+        "candidate_ledger.parquet",
+        "behavior_archive.parquet",
+        "behavior_family_summary.json",
+        "arm_checkpoint_metrics.parquet",
+        "final_decision.json",
+        "run_manifest.json",
+    )
+    for name in required:
+        if not (runtime_root / name).is_file():
+            errors.append(f"missing:{name}")
+    if not report_path.is_file():
+        errors.append("missing:report")
+    if errors:
+        return {"result": "FAIL", "errors": errors}
+    frozen = _read_json(runtime_root / "frozen_contract.json")
+    decision = _read_json(runtime_root / "final_decision.json")
+    manifest = _read_json(runtime_root / "run_manifest.json")
+    preflight = _read_json(runtime_root / "embedded_preflight.json")
+    ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
+    archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
+    metrics = pd.read_parquet(runtime_root / "arm_checkpoint_metrics.parquet")
+    family_summary = _read_json(runtime_root / "behavior_family_summary.json")
+    frozen_without_hash = {
+        key: value
+        for key, value in frozen.items()
+        if key != "frozen_contract_sha256"
+    }
+    if _payload_sha(frozen_without_hash) != frozen.get("frozen_contract_sha256"):
+        errors.append("frozen_contract_sha256")
+    if frozen.get("authorization") != (
+        "ONE_FRESH_STATE_2000_AGGTRADES_SYSTEM_CANARY"
+    ):
+        errors.append("authorization")
+    if frozen.get("surface", {}).get(
+        "every_candidate_requires_aggtrades_input"
+    ) is not True:
+        errors.append("aggtrades_candidate_gate")
+    boundaries = frozen.get("boundaries", {})
+    if boundaries.get("sealed_reads") != 0 or any(
+        bool(boundaries.get(key))
+        for key in (
+            "challenge",
+            "recent",
+            "may_stress",
+            "forward",
+            "promotion",
+            "cross_sprint_adaptive_memory",
+            "latent_priority",
+            "relational_training",
+        )
+    ):
+        errors.append("sealed_boundary")
+    if preflight.get("workers_selected") not in {
+        DEFAULT_WORKERS,
+        FALLBACK_WORKERS,
+    }:
+        errors.append("worker_selection")
+    if preflight.get("strict_candidates_consumed_outside_campaign") != 0:
+        errors.append("preflight_external_budget")
+    if len(ledger) != AGGTRADES_CANARY_STRICT_TARGET:
+        errors.append("strict_count")
+    if ledger["candidate_id"].nunique() != AGGTRADES_CANARY_STRICT_TARGET:
+        errors.append("exact_unique")
+    for column in (
+        "compile_valid",
+        "exact_unique",
+        "matched_control_valid",
+        "strict_cost_evaluated",
+        "expression_hash_verified",
+    ):
+        if column not in ledger or not bool(ledger[column].fillna(False).all()):
+            errors.append(f"ledger_gate:{column}")
+    if not all(
+        bool(
+            set(json.loads(str(value)))
+            & set(AGGTRADES_SYSTEM_CANARY_FIELDS)
+        )
+        for value in ledger["raw_fields_json"]
+    ):
+        errors.append("candidate_without_aggtrades")
+    arm_counts = ledger.groupby("arm").size().to_dict()
+    expected_arm_counts = {
+        arm: count * AGGTRADES_CANARY_CHECKPOINT_COUNT
+        for arm, count in AGGTRADES_CANARY_CHECKPOINT_ALLOCATION.items()
+    }
+    if arm_counts != expected_arm_counts:
+        errors.append("arm_counts")
+    for checkpoint_index in range(AGGTRADES_CANARY_CHECKPOINT_COUNT):
+        local = (
+            ledger[ledger["checkpoint_index"].astype(int).eq(checkpoint_index)]
+            .groupby("arm")
+            .size()
+            .to_dict()
+        )
+        if local != AGGTRADES_CANARY_CHECKPOINT_ALLOCATION:
+            errors.append(f"checkpoint_arm_counts:{checkpoint_index}")
+    receipt_rows = ledger[ledger["receipt_json"].notna()]
+    if receipt_rows.empty or not bool(
+        receipt_rows["receipt_verified"].eq(True).all()
+    ):
+        errors.append("receipt_verification")
+    for operation in (
+        "EFFECTIVE_GENE_MUTATION_1_TO_3",
+        "COMPATIBLE_SKELETON_VARIANT_MUTATION",
+        "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER",
+    ):
+        if not bool(ledger["operation"].eq(operation).any()):
+            errors.append(f"operation_not_executed:{operation}")
+    if len(archive) != AGGTRADES_CANARY_STRICT_TARGET:
+        errors.append("archive_row_count")
+    champions = archive[archive["is_family_champion"].fillna(False)]
+    if champions["behavior_family_id"].nunique() != archive[
+        "behavior_family_id"
+    ].nunique():
+        errors.append("archive_family_champion")
+    if family_summary.get("family_count") != int(
+        archive["behavior_family_id"].nunique()
+    ):
+        errors.append("family_summary_count")
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    if len(checkpoints) != AGGTRADES_CANARY_CHECKPOINT_COUNT:
+        errors.append("checkpoint_count")
+    for index, checkpoint in enumerate(checkpoints):
+        checkpoint_manifest = _read_json(checkpoint / "manifest.json")
+        if int(checkpoint_manifest.get("completed_ledger_row_count", -1)) != (
+            index + 1
+        ) * AGGTRADES_CANARY_CHECKPOINT_SIZE:
+            errors.append(f"checkpoint_rows:{index}")
+        if checkpoint_manifest.get("restore_verified") is not True:
+            errors.append(f"checkpoint_restore:{index}")
+        for record in checkpoint_manifest.get("files", []):
+            path = checkpoint / str(record["name"])
+            if (
+                not path.is_file()
+                or path.stat().st_size != int(record["bytes"])
+                or sha256_file(path) != str(record["sha256"])
+            ):
+                errors.append(f"checkpoint_file:{index}:{record['name']}")
+    if set(metrics["checkpoint_index"].astype(int).unique()) != set(
+        range(AGGTRADES_CANARY_CHECKPOINT_COUNT)
+    ):
+        errors.append("checkpoint_metrics")
+    if int(
+        decision.get(
+            "generation_attempts", AGGTRADES_CANARY_RAW_ATTEMPT_LIMIT + 1
+        )
+    ) > AGGTRADES_CANARY_RAW_ATTEMPT_LIMIT:
+        errors.append("raw_attempt_budget")
+    if float(
+        decision.get(
+            "active_wall_seconds",
+            AGGTRADES_CANARY_WALL_TIME_LIMIT_SECONDS + 1,
+        )
+    ) > AGGTRADES_CANARY_WALL_TIME_LIMIT_SECONDS:
+        errors.append("wall_time_budget")
+    if decision.get("status") != "PASS_SYSTEM_CANARY_COMPLETED":
+        errors.append("final_decision")
+    if decision.get("research_decision") != (
+        "HOLD_RESEARCH_FIXED_RETROSPECTIVE_COHORT"
+    ):
+        errors.append("research_boundary")
+    if decision.get("future_new_data_arena_qualified_arms") != []:
+        errors.append("future_arm_qualification")
+    if decision.get("sealed_reads") != 0:
+        errors.append("sealed_reads")
+    if manifest.get("strict_evaluated_count") != AGGTRADES_CANARY_STRICT_TARGET:
+        errors.append("manifest_strict_count")
+    if manifest.get("frozen_contract_sha256") != frozen.get(
+        "frozen_contract_sha256"
+    ):
+        errors.append("manifest_contract")
+    if _payload_sha(manifest.get("artifacts", [])) != manifest.get(
+        "artifact_bundle_sha256"
+    ):
+        errors.append("manifest_bundle")
+    for record in manifest.get("artifacts", []):
+        path = repo_root / str(record["path"])
+        if (
+            not path.is_file()
+            or path.stat().st_size != int(record["bytes"])
+            or sha256_file(path) != str(record["sha256"])
+        ):
+            errors.append(f"manifest_artifact:{record['path']}")
+    try:
+        subprocess.check_call(
+            [
+                "git",
+                "cat-file",
+                "-e",
+                f"{manifest['producer_source_sha']}^{{commit}}",
+            ],
+            cwd=repo_root,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except subprocess.CalledProcessError:
+        errors.append("producer_source_commit")
+    result = "PASS" if not errors else "FAIL"
+    return {
+        "result": result,
+        "errors": errors,
+        "engineering_integrity": result,
+        "research_decision": decision.get("research_decision"),
+        "producer_source_sha": manifest.get("producer_source_sha"),
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": decision.get("generation_attempts"),
+        "checkpoint_count": len(checkpoints),
+        "behavior_family_count": int(archive["behavior_family_id"].nunique()),
+        "artifact_bundle_sha256": manifest.get("artifact_bundle_sha256"),
+        "future_new_data_arena_qualified_arms": [],
+        "sealed_reads": decision.get("sealed_reads"),
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=("run", "check"))
-    parser.add_argument("--runtime-date", default=DEFAULT_RUNTIME_DATE)
+    parser.add_argument(
+        "command",
+        choices=(
+            "run",
+            "check",
+            "build-canary-cache",
+            "run-canary",
+            "check-canary",
+        ),
+    )
+    parser.add_argument("--runtime-date")
     parser.add_argument("--source-sha")
     args = parser.parse_args(argv)
     repo_root = Path(__file__).resolve().parents[2]
     if args.command == "run":
         result = run_engine(
             repo_root,
-            runtime_date=str(args.runtime_date),
+            runtime_date=str(args.runtime_date or DEFAULT_RUNTIME_DATE),
             source_sha=args.source_sha,
         )
+    elif args.command == "check":
+        result = check_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or DEFAULT_RUNTIME_DATE),
+        )
+    elif args.command == "build-canary-cache":
+        source_sha = str(args.source_sha or _git_sha(repo_root)).lower()
+        metadata = build_aggtrades_canary_cache_from_config(
+            repo_root, source_sha=source_sha
+        )
+        result = {
+            "result": "PASS",
+            "cache_identity_sha256": metadata["identity_sha256"],
+            "assets": metadata["assets"],
+            "timestamps": metadata["timestamps"],
+            "observed_coordinates": metadata["observed_coordinates"],
+        }
+    elif args.command == "run-canary":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or AGGTRADES_CANARY_DEFAULT_RUNTIME_DATE
+            ),
+            source_sha=args.source_sha,
+            campaign="aggtrades_system_canary",
+        )
     else:
-        result = check_engine(repo_root, runtime_date=str(args.runtime_date))
+        result = check_aggtrades_canary(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or AGGTRADES_CANARY_DEFAULT_RUNTIME_DATE
+            ),
+        )
     print(json.dumps(result, indent=2, sort_keys=True), flush=True)
     return 0 if result.get("result") == "PASS" else 1
 
@@ -3783,6 +4749,8 @@ __all__ = [
     "BehaviorArchive",
     "HierarchicalTypedCEMV2",
     "TypedEvolutionV2",
+    "build_aggtrades_canary_cache_from_config",
+    "check_aggtrades_canary",
     "check_engine",
     "run_engine",
 ]
