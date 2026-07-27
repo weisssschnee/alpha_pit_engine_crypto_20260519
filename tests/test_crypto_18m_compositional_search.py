@@ -29,9 +29,11 @@ from alphafactory_crypto.broad_search.expression import (
     materialize_expression,
 )
 from alphafactory_crypto.broad_search.pair18m import (
+    _mean_lcb,
     evaluate_pair,
     feedback_contract_payload,
 )
+from alphafactory_crypto.broad_search.panel18m import rebuild_panel_context_fields
 from alphafactory_crypto.broad_search.runner18m import (
     LanePolicy,
     _current_field_surface_binding,
@@ -45,6 +47,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     HierarchicalTypedCEMV2,
     TypedEvolutionV2,
     _checkpoint_allocation,
+    _evaluation_audit_fields,
     _load_checkpoint,
     _new_campaign_state,
     _write_checkpoint,
@@ -570,8 +573,16 @@ def _fake_search_evaluation(candidate: CandidateSpec, family_id: str, reward: fl
     }
 
 
+def _valid_active_universe_series() -> np.ndarray:
+    active = np.full((3, 8), np.nan, dtype=float)
+    counts = (3, 3, 2, 2, 3, 1, 2, 3)
+    for column, count in enumerate(counts):
+        active[:count, column] = float(count)
+    return active
+
+
 def test_search_behavior_descriptor_is_frozen_coarse_and_outcome_free() -> None:
-    active = np.tile(np.arange(8, dtype=float), (3, 1))
+    active = _valid_active_universe_series()
     contract = freeze_search_behavior_contract(active)
     signal = np.asarray(
         [[1, 2, 3, 4, 5, 6, 7, 8], [2, 1, 4, 3, 6, 5, 8, 7], [3, 3, 2, 2, 1, 1, 0, 0]],
@@ -598,6 +609,98 @@ def test_search_behavior_descriptor_is_frozen_coarse_and_outcome_free() -> None:
     changed_contract["mapped_weight_quantization_step"] = 0.01
     with pytest.raises(ValueError, match="contract identity"):
         search_behavior_descriptor(**{**kwargs, "contract": changed_contract})
+
+
+def test_behavior_contract_rejects_partition_local_universe_counts() -> None:
+    broken = np.ones((3, 8), dtype=float)
+    with pytest.raises(ValueError, match="active_universe_size"):
+        freeze_search_behavior_contract(broken)
+
+
+def test_panel_context_fields_are_rebuilt_after_source_join() -> None:
+    observed = np.asarray(
+        [
+            [True, True, True, True, True, True],
+            [True, True, True, True, True, True],
+            [False, False, True, True, True, True],
+        ],
+        dtype=bool,
+    )
+    listing_age_hours = np.asarray(
+        [
+            [100, 101, 102, 103, 104, 105],
+            [100, 101, 102, 103, 104, 105],
+            [np.nan, np.nan, 1, 2, 3, 4],
+        ],
+        dtype=float,
+    )
+    rebuilt = rebuild_panel_context_fields(
+        observed=observed,
+        listing_age_hours=listing_age_hours,
+    )
+    active = rebuilt["active_universe_size"]
+    history = rebuilt["history_length_hours"]
+    percentile = rebuilt["age_percentile_active_universe"]
+    assert active[:, 0][np.isfinite(active[:, 0])].tolist() == [2.0, 2.0]
+    assert active[:, 2].tolist() == [3.0, 3.0, 3.0]
+    assert history[0].tolist() == pytest.approx([1, 2, 3, 4, 5, 6])
+    assert history[2, 2:].tolist() == pytest.approx([1, 2, 3, 4])
+    assert np.isnan(history[2, :2]).all()
+    assert percentile[:2, 0].tolist() == pytest.approx([0.75, 0.75])
+    assert percentile[:, 2].tolist() == pytest.approx(
+        [2.5 / 3.0, 2.5 / 3.0, 1.0 / 3.0]
+    )
+
+
+def test_horizon_aware_lcb_accounts_for_overlapping_return_dependence() -> None:
+    values = np.repeat(np.linspace(-1.0, 1.0, 64), 4)
+    _, iid_se, iid_lcb, _ = _mean_lcb(values, dependency_lags=0)
+    _, hac_se, hac_lcb, _ = _mean_lcb(values, dependency_lags=3)
+    assert hac_se > iid_se
+    assert hac_lcb < iid_lcb
+
+
+def test_hac_preserves_missing_hour_coordinates() -> None:
+    values = np.asarray([-1.0, -1.0, np.nan, 1.0, 1.0])
+    _, se_with_gap, _, _ = _mean_lcb(values, dependency_lags=1)
+    _, se_if_compressed, _, _ = _mean_lcb(
+        values[np.isfinite(values)],
+        dependency_lags=1,
+    )
+    assert se_with_gap > se_if_compressed
+
+
+def test_evaluation_audit_fields_preserve_matched_waterfall_and_cost_meaning() -> None:
+    section = {
+        "gross_mean": 0.001,
+        "net_mean": -0.001,
+        "net_lcb": -0.002,
+        "net_standard_error": 0.0001,
+        "net_standard_error_method": "NEWEY_WEST_BARTLETT",
+        "net_standard_error_lags": 3,
+        "monthly_block_lcb": -0.003,
+        "turnover_mean": 0.2,
+        "cost_mean": 0.0001,
+        "support": 1.0,
+        "month_metrics": [{"month": "2023-07", "net_mean": -0.001}],
+    }
+    evaluation = {
+        "primary": {**section, "net_mean": 0.001},
+        "control": {**section, "gross_mean": 0.0},
+        "incremental": section,
+        "scalar_net_delta_diagnostic": 0.002,
+        "feedback": {"violations": ["NET_LCB"]},
+    }
+    fields = _evaluation_audit_fields(evaluation)
+    assert fields["cost_killed"] is True
+    assert fields["gross_positive_cost_sign_killed"] is True
+    assert fields["cost_threshold_violated"] is False
+    assert fields["turnover_killed"] is False
+    assert fields["scalar_net_delta_diagnostic"] == pytest.approx(0.002)
+    assert json.loads(fields["primary_month_metrics_json"])[0]["month"] == "2023-07"
+    assert json.loads(fields["control_month_metrics_json"])[0]["net_mean"] == pytest.approx(
+        -0.001
+    )
 
 
 def test_hierarchical_cem_v2_samples_legal_order_and_roundtrips_state() -> None:

@@ -43,6 +43,13 @@ IDENTITY_OR_METADATA = frozenset(
 )
 
 SPARSE_FIELDS = frozenset({"funding_rate"})
+PANEL_CONTEXT_FIELDS = frozenset(
+    {
+        "active_universe_size",
+        "age_percentile_active_universe",
+        "history_length_hours",
+    }
+)
 
 FAMILY_OVERRIDES: Mapping[str, str] = {
     "account_position_divergence": "account_position_divergence",
@@ -316,6 +323,71 @@ def _open_matrix(path: Path, shape: tuple[int, int], dtype: Any, fill: Any) -> n
     return values
 
 
+def rebuild_panel_context_fields(
+    *,
+    observed: np.ndarray,
+    listing_age_hours: np.ndarray,
+) -> dict[str, np.ndarray]:
+    """Rebuild cross-asset and history context after all source segments are joined."""
+
+    observed_values = np.asarray(observed, dtype=bool)
+    ages = np.asarray(listing_age_hours, dtype=float)
+    if observed_values.ndim != 2 or ages.shape != observed_values.shape:
+        raise ValueError("panel context inputs must share one asset-by-time shape")
+    missing_age = observed_values & ~np.isfinite(ages)
+    if np.any(missing_age):
+        raise ValueError("listing_age_hours is missing on an observed panel coordinate")
+
+    counts = observed_values.sum(axis=0).astype(np.float32)
+    active_universe = np.where(observed_values, counts[np.newaxis, :], np.nan).astype(
+        np.float32
+    )
+
+    history = np.full(observed_values.shape, np.nan, dtype=np.float32)
+    for asset_index, local_observed in enumerate(observed_values):
+        cumulative = np.cumsum(local_observed, dtype=np.int32)
+        last_gap = np.maximum.accumulate(np.where(local_observed, 0, cumulative))
+        local_history = cumulative - last_gap
+        history[asset_index, local_observed] = local_history[local_observed].astype(
+            np.float32
+        )
+
+    age_percentile = np.full(observed_values.shape, np.nan, dtype=np.float32)
+    for time_index, count in enumerate(counts.astype(int)):
+        if count == 0:
+            continue
+        local = observed_values[:, time_index]
+        ranks = rankdata(ages[local, time_index], method="average") / float(count)
+        age_percentile[local, time_index] = ranks.astype(np.float32)
+
+    finite_counts = np.isfinite(active_universe).sum(axis=0)
+    if not np.array_equal(finite_counts, counts.astype(int)):
+        raise AssertionError("active universe finite support changed during panel rebuild")
+    for time_index, count in enumerate(counts.astype(int)):
+        if count == 0:
+            continue
+        local_active = active_universe[observed_values[:, time_index], time_index]
+        if not np.all(local_active == float(count)):
+            raise AssertionError("active universe count is not cross-sectionally authoritative")
+    if np.any(
+        observed_values
+        & (
+            ~np.isfinite(age_percentile)
+            | (age_percentile <= 0.0)
+            | (age_percentile > 1.0)
+        )
+    ):
+        raise AssertionError("age percentile escaped the frozen (0, 1] domain")
+    if np.any(observed_values & (~np.isfinite(history) | (history < 1.0))):
+        raise AssertionError("history length was not rebuilt on an observed coordinate")
+
+    return {
+        "active_universe_size": active_universe,
+        "age_percentile_active_universe": age_percentile,
+        "history_length_hours": history,
+    }
+
+
 def _write_eligibility_rows(
     writer: pq.ParquetWriter,
     *,
@@ -443,6 +515,39 @@ def build_raw_panel_cache(
         raise FileNotFoundError("18-month loader returned no observed symbols")
     writer.close()
 
+    context_fields = PANEL_CONTEXT_FIELDS & matrices.keys()
+    if context_fields != PANEL_CONTEXT_FIELDS:
+        missing_context = sorted(PANEL_CONTEXT_FIELDS - context_fields)
+        raise ValueError(
+            f"raw panel is missing required post-join context fields: {missing_context}"
+        )
+    if context_fields:
+        if "listing_age_hours" in matrices:
+            listing_age_hours = np.asarray(matrices["listing_age_hours"], dtype=float)
+        elif "listing_age_days" in matrices:
+            listing_age_hours = (
+                np.asarray(matrices["listing_age_days"], dtype=float) * 24.0
+            )
+        else:
+            raise ValueError(
+                "panel context rebuild requires listing_age_hours or listing_age_days"
+            )
+        rebuilt_context = rebuild_panel_context_fields(
+            observed=np.asarray(observed, dtype=bool),
+            listing_age_hours=listing_age_hours,
+        )
+        source_values = np.asarray(source_matrix)
+        observed_values = np.asarray(observed, dtype=bool)
+        for field in sorted(context_fields):
+            matrices[field][:] = rebuilt_context[field]
+            stats[field] = _Stats()
+            for asset_index in range(shape[0]):
+                local = observed_values[asset_index]
+                stats[field].update(
+                    rebuilt_context[field][asset_index, local],
+                    source=source_values[asset_index, local],
+                )
+
     close_matrix = matrices["trade_close"]
     for horizon in (1, 4):
         target = _open_matrix(
@@ -462,7 +567,7 @@ def build_raw_panel_cache(
         [dict(field_id=field, **stats[field].payload()) for field in fields]
     )
     metadata = {
-        "schema_version": 1,
+        "schema_version": 2,
         "source_sha": source_sha,
         "surface_id": train_config["surface_id"],
         "start_utc": train_config["train_start_utc"],
@@ -474,6 +579,14 @@ def build_raw_panel_cache(
         "warmup_hours": int(warmup_hours),
         "target_formula": "log(close[t+2+h] / close[t+2])",
         "target_horizons_hours": [1, 4],
+        "panel_context_contract": {
+            "schema_version": 1,
+            "authority": "POST_JOIN_ASSET_BY_TIME_RECOMPUTE",
+            "fields": sorted(context_fields),
+            "active_universe_definition": "observed_asset_count_at_time",
+            "age_percentile_definition": "average_tie_rank_over_observed_assets",
+            "history_definition": "consecutive_observed_hours_across_source_segments",
+        },
         "sealed_rows": 0,
         "build_seconds": time.perf_counter() - started,
         "bytes_read_in_memory": read_bytes,
@@ -688,4 +801,5 @@ __all__ = [
     "infer_family",
     "infer_type_unit",
     "qualify_fields",
+    "rebuild_panel_context_fields",
 ]

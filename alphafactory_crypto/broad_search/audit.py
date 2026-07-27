@@ -465,11 +465,27 @@ def freeze_search_behavior_contract(active_universe_size: np.ndarray) -> dict[st
     """Freeze behavior quantization and a lag-only market-state regime contract."""
 
     values = np.asarray(active_universe_size, dtype=float)
-    if values.ndim == 2:
-        with np.errstate(all="ignore"):
-            values = np.nanmedian(values, axis=0)
-    if values.ndim != 1 or values.size < 2:
-        raise ValueError("active_universe_size must expose at least two hourly coordinates")
+    if values.ndim != 2 or values.shape[1] < 2:
+        raise ValueError(
+            "active_universe_size must expose an asset-by-time panel with at least two hours"
+        )
+    finite = np.isfinite(values)
+    finite_counts = finite.sum(axis=0)
+    if np.any(finite_counts == 0):
+        raise ValueError("active_universe_size has an empty hourly cross-section")
+    with np.errstate(all="ignore"):
+        minimum = np.nanmin(values, axis=0)
+        maximum = np.nanmax(values, axis=0)
+        reported = np.nanmedian(values, axis=0)
+    if not np.allclose(minimum, maximum, rtol=0.0, atol=1.0e-6):
+        raise ValueError("active_universe_size is not cross-sectionally constant")
+    if not np.allclose(
+        reported, finite_counts.astype(float), rtol=0.0, atol=1.0e-6
+    ):
+        raise ValueError(
+            "active_universe_size does not equal its observed cross-sectional support"
+        )
+    values = reported
     lagged = np.empty(values.shape, dtype=float)
     lagged[0] = np.nan
     lagged[1:] = values[:-1]
@@ -483,11 +499,17 @@ def freeze_search_behavior_contract(active_universe_size: np.ndarray) -> dict[st
         "pit_regime_thresholds": thresholds.tolist(),
         "pit_regime_thresholds_sha256": _payload_sha(thresholds.tolist()),
         "frozen_observation_count": int(finite.size),
+        "pit_regime_source_validation": (
+            "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_FINITE_ASSET_SUPPORT"
+        ),
         "contract_sha256": _payload_sha(
             {
                 **dict(SEARCH_BEHAVIOR_DESCRIPTOR_SCHEMA),
                 "pit_regime_thresholds": thresholds.tolist(),
                 "frozen_observation_count": int(finite.size),
+                "pit_regime_source_validation": (
+                    "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_FINITE_ASSET_SUPPORT"
+                ),
             }
         ),
     }

@@ -52,16 +52,39 @@ def _array_sha(values: np.ndarray) -> str:
     return digest.hexdigest().upper()
 
 
-def _mean_lcb(values: np.ndarray) -> tuple[float, float, float, int]:
-    clean = np.asarray(values, dtype=float)
-    clean = clean[np.isfinite(clean)]
-    if clean.size == 0:
+def _mean_lcb(
+    values: np.ndarray, *, dependency_lags: int = 0
+) -> tuple[float, float, float, int]:
+    series = np.asarray(values, dtype=float).reshape(-1)
+    finite = np.isfinite(series)
+    observations = int(finite.sum())
+    if observations == 0:
         return float("nan"), float("nan"), float("nan"), 0
+    clean = series[finite]
     mean = float(clean.mean())
-    if clean.size < 2:
-        return mean, float("nan"), float("nan"), int(clean.size)
-    se = float(clean.std(ddof=1) / math.sqrt(clean.size))
-    return mean, se, mean - 1.96 * se, int(clean.size)
+    if observations < 2:
+        return mean, float("nan"), float("nan"), observations
+    centered = np.where(finite, series - mean, 0.0)
+    maximum_lag = min(max(0, int(dependency_lags)), int(series.size) - 1)
+    long_run_variance = float(np.dot(centered, centered) / observations)
+    for lag in range(1, maximum_lag + 1):
+        weight = 1.0 - lag / float(maximum_lag + 1)
+        valid_pairs = finite[lag:] & finite[:-lag]
+        covariance = (
+            float(
+                np.dot(
+                    centered[lag:][valid_pairs],
+                    centered[:-lag][valid_pairs],
+                )
+                / observations
+            )
+            if np.any(valid_pairs)
+            else 0.0
+        )
+        long_run_variance += 2.0 * weight * covariance
+    long_run_variance *= observations / float(observations - 1)
+    se = math.sqrt(max(0.0, long_run_variance) / observations)
+    return mean, se, mean - 1.96 * se, observations
 
 
 def _turnover(weights: np.ndarray, horizon: int) -> tuple[np.ndarray, dict[str, float]]:
@@ -110,8 +133,15 @@ def _series_metrics(
     cost = turnover * FIXED_COST_BPS / 10000.0
     net = gross - cost
     mask = np.asarray(evaluation_mask, dtype=bool) | (turnover > ACTIVE_EPSILON)
-    net_mean, net_se, net_lcb, observations = _mean_lcb(net[mask])
-    gross_mean, _, _, _ = _mean_lcb(gross[mask])
+    dependency_lags = max(0, int(horizon) - 1)
+    net_mean, net_se, net_lcb, observations = _mean_lcb(
+        np.where(mask, net, np.nan),
+        dependency_lags=dependency_lags,
+    )
+    gross_mean, _, _, _ = _mean_lcb(
+        np.where(mask, gross, np.nan),
+        dependency_lags=dependency_lags,
+    )
     month_rows: list[dict[str, Any]] = []
     month_means: list[float] = []
     for month in tuple(dict.fromkeys(months.tolist())):
@@ -130,6 +160,12 @@ def _series_metrics(
         month_means.append(value)
     finite_months = np.asarray(month_means, dtype=float)
     finite_months = finite_months[np.isfinite(finite_months)]
+    (
+        monthly_block_mean,
+        monthly_block_se,
+        monthly_block_lcb,
+        monthly_block_count,
+    ) = _mean_lcb(finite_months, dependency_lags=0)
     active = np.abs(weights) > ACTIVE_EPSILON
     concentration = (
         float(np.mean(np.max(np.abs(weights[:, mask]), axis=0))) if np.any(mask) else float("nan")
@@ -140,6 +176,12 @@ def _series_metrics(
         "net_mean": net_mean,
         "net_standard_error": net_se,
         "net_lcb": net_lcb,
+        "net_standard_error_method": "NEWEY_WEST_BARTLETT",
+        "net_standard_error_lags": dependency_lags,
+        "monthly_block_mean": monthly_block_mean,
+        "monthly_block_standard_error": monthly_block_se,
+        "monthly_block_lcb": monthly_block_lcb,
+        "monthly_block_count": monthly_block_count,
         "gross_mean": gross_mean,
         "turnover_mean": float(np.mean(turnover[mask])) if np.any(mask) else float("nan"),
         "cost_mean": float(np.mean(cost[mask])) if np.any(mask) else float("nan"),
@@ -357,6 +399,12 @@ def pair_contract_payload() -> dict[str, Any]:
     return {
         "schema_version": 1,
         "pair_authority": "PRIMARY_CONTROL_WITH_INCREMENTAL_DELTA_WEIGHT_SLEEVE",
+        "lcb_contract": {
+            "authority": "NEWEY_WEST_BARTLETT",
+            "dependency_lags": "horizon_hours_minus_one",
+            "confidence_multiplier": 1.96,
+            "monthly_block_lcb": "DIAGNOSTIC_ONLY",
+        },
         "match_on": [
             "raw inputs",
             "timestamps",

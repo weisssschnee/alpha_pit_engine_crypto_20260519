@@ -46,7 +46,12 @@ from .compositional18m import (
     skeleton_registry,
 )
 from .expression import FieldContract, TypedExpressionRegistry
-from .pair18m import FIXED_COST_BPS, evaluate_pair, feedback_contract_payload
+from .pair18m import (
+    FIXED_COST_BPS,
+    evaluate_pair,
+    feedback_contract_payload,
+    pair_contract_payload,
+)
 from .panel18m import RawPanelStore, infer_family
 from .runner18m import (
     ADAPTIVE_END,
@@ -249,6 +254,17 @@ def _load_bound_inputs(
 
     cache_root = repo_root / str(continuation["cache_root"])
     cache_metadata = _read_json(cache_root / "metadata.json")
+    panel_context = cache_metadata.get("panel_context_contract", {})
+    if int(cache_metadata.get("schema_version", 0)) < 2 or panel_context.get(
+        "authority"
+    ) != "POST_JOIN_ASSET_BY_TIME_RECOMPUTE":
+        raise ValueError("raw cache lacks the post-join panel context authority")
+    if set(panel_context.get("fields", [])) != {
+        "active_universe_size",
+        "age_percentile_active_universe",
+        "history_length_hours",
+    }:
+        raise ValueError("raw cache panel context field contract changed")
     reuse = continuation["cache_reuse"]
     if cache_metadata.get("identity_sha256") != reuse["expected_identity_sha256"]:
         raise ValueError("pinned raw-cache identity changed")
@@ -317,6 +333,7 @@ def _load_bound_inputs(
             "root": cache_root.relative_to(repo_root).as_posix(),
             "identity_sha256": cache_metadata["identity_sha256"],
             "directory_bundle": directory_bundle,
+            "panel_context_contract": panel_context,
         },
         "prior_continuation_manifest_bundle_sha256": prior_manifest["bundle_sha256"],
     }
@@ -346,6 +363,7 @@ def _frozen_contract(
         },
         "input_identities": dict(input_identities),
         "compiler_identity": dict(compiler_binding),
+        "evaluator_contract": pair_contract_payload(),
         "behavior_descriptor": dict(behavior_contract),
         "environment": dict(environment),
         "seeds": list(SEEDS),
@@ -403,7 +421,9 @@ def _frozen_contract(
             "equal_reward_tie_break": ["new_behavior_family", "candidate_id"],
             "diagnostic_only": [
                 "turnover",
-                "cost_killed",
+                "gross_positive_cost_sign_killed",
+                "cost_threshold_violated",
+                "turnover_threshold_violated",
                 "failure_layer",
                 "behavior_novelty_except_equal_reward",
             ],
@@ -2225,6 +2245,63 @@ def _failure(state: dict[str, Any], arm: str, reason: str) -> None:
     state["failure_counts"] = dict(sorted(failures.items()))
 
 
+def _evaluation_audit_fields(evaluation: Mapping[str, Any]) -> dict[str, Any]:
+    """Flatten the matched economic waterfall without changing reward authority."""
+
+    scalar_fields = (
+        "gross_mean",
+        "net_mean",
+        "net_lcb",
+        "net_standard_error",
+        "net_standard_error_method",
+        "net_standard_error_lags",
+        "monthly_block_mean",
+        "monthly_block_standard_error",
+        "monthly_block_lcb",
+        "monthly_block_count",
+        "turnover_mean",
+        "cost_mean",
+        "support",
+    )
+    output: dict[str, Any] = {}
+    for section_name in ("primary", "control", "incremental"):
+        section = evaluation[section_name]
+        for field in scalar_fields:
+            output[f"{section_name}_{field}"] = section.get(field)
+        output[f"{section_name}_month_metrics_json"] = json.dumps(
+            section.get("month_metrics", []),
+            sort_keys=True,
+            separators=(",", ":"),
+            default=str,
+        )
+
+    incremental = evaluation["incremental"]
+    gross_mean = float(incremental.get("gross_mean", float("nan")))
+    net_mean = float(incremental.get("net_mean", float("nan")))
+    violations = {
+        str(value) for value in evaluation["feedback"].get("violations", [])
+    }
+    cost_sign_flip = bool(
+        math.isfinite(gross_mean)
+        and math.isfinite(net_mean)
+        and gross_mean > 0.0
+        and net_mean <= 0.0
+    )
+    output.update(
+        {
+            "scalar_net_delta_diagnostic": evaluation.get(
+                "scalar_net_delta_diagnostic"
+            ),
+            "gross_positive_cost_sign_killed": cost_sign_flip,
+            "cost_killed": cost_sign_flip,
+            "cost_threshold_violated": "COST_MEAN" in violations,
+            "turnover_killed": "TURNOVER_MEAN" in violations,
+            "turnover_threshold_violated": "TURNOVER_MEAN" in violations,
+        }
+    )
+    return output
+
+
 def _ledger_row(
     *,
     candidate: CandidateSpec,
@@ -2242,6 +2319,7 @@ def _ledger_row(
     violations = [str(value) for value in feedback.get("violations", [])]
     incremental = evaluation["incremental"]
     behavior = evaluation["behavior"]
+    economic_audit = _evaluation_audit_fields(evaluation)
     return {
         "completion_ordinal": int(completion_ordinal),
         "arm_completion_ordinal": int(arm_completion_ordinal),
@@ -2292,8 +2370,7 @@ def _ledger_row(
         "cost_mean": incremental.get("cost_mean"),
         "support": incremental.get("support"),
         "feedback_violations_json": json.dumps(violations),
-        "cost_killed": "COST_MEAN" in violations,
-        "turnover_killed": "TURNOVER_MEAN" in violations,
+        **economic_audit,
         "coordinate_data_binding_id": behavior["coordinate_data_binding_id"],
         "rank_descriptor_id": behavior["rank_descriptor_id"],
         "selected_asset_overlap_id": behavior["selected_asset_overlap_id"],
@@ -3139,6 +3216,17 @@ def check_engine(
         errors.append("sealed_boundary")
     if frozen.get("behavior_descriptor", {}).get("outcome_fields_in_identity") != []:
         errors.append("behavior_outcome_identity")
+    post_audit_holds: list[str] = []
+    if frozen.get("behavior_descriptor", {}).get(
+        "pit_regime_source_validation"
+    ) != "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_FINITE_ASSET_SUPPORT":
+        post_audit_holds.append("LEGACY_UNVALIDATED_ACTIVE_UNIVERSE_REGIME")
+    if frozen.get("evaluator_contract", {}).get("lcb_contract", {}).get(
+        "authority"
+    ) != "NEWEY_WEST_BARTLETT":
+        post_audit_holds.append("LEGACY_IID_LCB_ON_OVERLAPPING_HORIZON")
+    if "primary_month_metrics_json" not in ledger.columns:
+        post_audit_holds.append("LEGACY_MATCHED_WATERFALL_NOT_PERSISTED")
     if preflight.get("strict_candidates_consumed_outside_campaign") != 0:
         errors.append("preflight_external_budget")
     if preflight.get("workers_selected") not in {DEFAULT_WORKERS, FALLBACK_WORKERS}:
@@ -3158,7 +3246,7 @@ def check_engine(
         if column not in ledger or not bool(ledger[column].fillna(False).all()):
             errors.append(f"ledger_gate:{column}")
     receipt_rows = ledger[ledger["receipt_json"].notna()]
-    if receipt_rows.empty or not bool(receipt_rows["receipt_verified"].fillna(False).all()):
+    if receipt_rows.empty or not bool(receipt_rows["receipt_verified"].eq(True).all()):
         errors.append("receipt_verification")
     for operation in (
         "EFFECTIVE_GENE_MUTATION_1_TO_3",
@@ -3272,9 +3360,20 @@ def check_engine(
         )
     except subprocess.CalledProcessError:
         errors.append("producer_source_commit")
+    engineering_result = "PASS" if not errors else "FAIL"
     return {
-        "result": "PASS" if not errors else "FAIL",
+        "result": engineering_result,
         "errors": errors,
+        "engineering_integrity": engineering_result,
+        "component_qualification": (
+            "HOLD_POST_AUDIT_REMEDIATION_REQUIRED"
+            if post_audit_holds
+            else "UNQUALIFIED_DEVELOPMENT_COMPONENT"
+        ),
+        "post_audit_holds": post_audit_holds,
+        "future_new_data_arena_qualified_arms": (
+            [] if post_audit_holds else decision.get("future_new_data_arena_qualified_arms", [])
+        ),
         "producer_source_sha": manifest.get("producer_source_sha"),
         "strict_evaluated_count": len(ledger),
         "generation_attempts": decision.get("generation_attempts"),
