@@ -2257,7 +2257,18 @@ def _oi_mark_surface(
         files = sorted(venue_root.rglob("part.parquet"))
         if not files:
             raise ValueError(f"OI/mark venue exposes no parquet: {venue_root.name}")
-        sample = files[0]
+        sample = next(
+            (
+                path
+                for path in files
+                if pq.ParquetFile(path).metadata.num_rows > 0
+            ),
+            None,
+        )
+        if sample is None:
+            raise ValueError(
+                f"OI/mark venue exposes no non-empty parquet: {venue_root.name}"
+            )
         parquet = pq.ParquetFile(sample)
         local_contracts = contracts_from_oi_mark_schema(
             venue_root.name, parquet.schema_arrow
@@ -2467,17 +2478,39 @@ def build_search_surface_integration(
     )
     report_path = _resolve_repo_path(repo_root, config["outputs"]["report"])
     runtime_root.mkdir(parents=True, exist_ok=True)
-    contract = {
+    frozen_contract = {
         **config,
         "config_path": config_path.relative_to(repo_root).as_posix(),
         "config_sha256": _sha256_file(config_path),
         "frozen_at": started.isoformat(),
     }
     stable_contract = {
-        key: value for key, value in contract.items() if key != "frozen_at"
+        key: value
+        for key, value in frozen_contract.items()
+        if key != "frozen_at"
     }
-    contract["frozen_contract_sha256"] = _payload_sha(stable_contract)
-    _write_json(runtime_root / "frozen_contract.json", contract)
+    frozen_contract["frozen_contract_sha256"] = _payload_sha(stable_contract)
+    frozen_contract_path = runtime_root / "frozen_contract.json"
+    if frozen_contract_path.is_file():
+        existing_contract = json.loads(
+            frozen_contract_path.read_text(encoding="utf-8")
+        )
+        existing_stable = {
+            key: value
+            for key, value in existing_contract.items()
+            if key not in {"frozen_at", "frozen_contract_sha256"}
+        }
+        expected_stable = {
+            key: value
+            for key, value in frozen_contract.items()
+            if key not in {"frozen_at", "frozen_contract_sha256"}
+        }
+        if existing_stable != expected_stable:
+            raise ValueError(
+                "existing search-surface runtime has a different frozen contract"
+            )
+        frozen_contract["frozen_at"] = existing_contract["frozen_at"]
+    _write_json(frozen_contract_path, frozen_contract)
 
     inputs = {
         key: _resolve_repo_path(repo_root, value)
@@ -2759,7 +2792,9 @@ def build_search_surface_integration(
     manifest = {
         "experiment_id": config["experiment_id"],
         "source_sha": source_sha,
-        "frozen_contract_sha256": contract["frozen_contract_sha256"],
+        "frozen_contract_sha256": frozen_contract[
+            "frozen_contract_sha256"
+        ],
         "started_at": started.isoformat(),
         "completed_at": datetime.now(UTC).isoformat(),
         "wall_seconds": time.perf_counter() - wall_started,

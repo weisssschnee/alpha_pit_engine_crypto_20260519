@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import pyarrow as pa
+import pyarrow.parquet as pq
 import pytest
 
 from alphafactory_crypto.broad_search.compositional18m import (
@@ -19,6 +20,7 @@ from alphafactory_crypto.broad_search.expression import (
 from alphafactory_crypto.broad_search.panel18m import RawPanelStore
 from alphafactory_crypto.data_admission_v1 import (
     AGGTRADES_SEARCH_FIELDS,
+    _oi_mark_surface,
     aggregate_aggtrades_search_hourly,
     contracts_from_core3_tokens,
     contracts_from_oi_mark_schema,
@@ -191,3 +193,51 @@ def test_context_contracts_remain_separate_and_oi_fields_are_venue_qualified() -
         "bybit__funding_rate_last",
     ]
     assert all(row.observable_lag_hours == 1 for row in oi)
+
+
+def test_oi_materialization_probe_skips_schemafixed_empty_partition(
+    tmp_path: Path,
+) -> None:
+    venue = tmp_path / "compact_1h" / "bybit"
+    empty_path = venue / "date=2025-06-28" / "part.parquet"
+    full_path = venue / "date=2025-06-29" / "part.parquet"
+    empty_path.parent.mkdir(parents=True)
+    full_path.parent.mkdir(parents=True)
+    schema = pa.schema(
+        [
+            pa.field("venue", pa.string()),
+            pa.field("base_asset", pa.string()),
+            pa.field("timestamp", pa.timestamp("us", tz="UTC")),
+            pa.field("open_interest_last", pa.float64()),
+            pa.field("feature_available_time", pa.timestamp("us", tz="UTC")),
+            pa.field("execution_time_min", pa.timestamp("us", tz="UTC")),
+        ]
+    )
+    pq.write_table(pa.Table.from_pylist([], schema=schema), empty_path)
+    pq.write_table(
+        pa.Table.from_pylist(
+            [
+                {
+                    "venue": "bybit",
+                    "base_asset": "BTC",
+                    "timestamp": pd.Timestamp("2025-06-29T00:00:00Z"),
+                    "open_interest_last": 1.0,
+                    "feature_available_time": pd.Timestamp(
+                        "2025-06-29T01:00:00Z"
+                    ),
+                    "execution_time_min": pd.Timestamp(
+                        "2025-06-29T01:01:00Z"
+                    ),
+                }
+            ],
+            schema=schema,
+        ),
+        full_path,
+    )
+    contracts, stats, evidence = _oi_mark_surface(tmp_path)
+    assert [row.field_id for row in contracts] == [
+        "bybit__open_interest_last"
+    ]
+    assert stats == {"bybit__open_interest_last": 1.0}
+    assert evidence[0]["sample_rows"] == 1
+    assert evidence[0]["sample_path"] == str(full_path)
