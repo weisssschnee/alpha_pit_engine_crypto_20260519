@@ -1554,14 +1554,18 @@ class BehaviorArchive:
         )
 
     def state_hash(self) -> str:
-        return _payload_sha(
-            {
-                "families": self.summary_rows(),
-                "rows": len(self.rows),
-                "duplicate_replacements": self.duplicate_replacements,
-                "transition_state": self.transition_state(),
-            }
-        )
+        payload = {
+            "families": self.summary_rows(),
+            "rows": len(self.rows),
+            "duplicate_replacements": self.duplicate_replacements,
+        }
+        if (
+            self.transition_productivity
+            or self.blocked_transition_keys
+            or self.blocked_transition_skips
+        ):
+            payload["transition_state"] = self.transition_state()
+        return _payload_sha(payload)
 
     @classmethod
     def from_rows(cls, rows: Sequence[Mapping[str, Any]]) -> "BehaviorArchive":
@@ -2967,7 +2971,7 @@ class TypedEvolutionV2:
         }
 
     def export_state(self) -> dict[str, Any]:
-        return {
+        state = {
             "kind": "typed_evolution_v2",
             "seed": int(self.seed),
             "parameters": dict(self.parameters),
@@ -2993,8 +2997,16 @@ class TypedEvolutionV2:
                 )
             },
             "operator_update_count": int(self.operator_update_count),
-            "blocked_transition_skips": int(self.blocked_transition_skips),
         }
+        if bool(
+            self.parameters.get(
+                "campaign_local_transition_collision_control", False
+            )
+        ):
+            state["blocked_transition_skips"] = int(
+                self.blocked_transition_skips
+            )
+        return state
 
     def state_hash(self) -> str:
         return _payload_sha(self.export_state())
@@ -6865,31 +6877,6 @@ def check_v11(
         )
         for row in ledger.to_dict("records")
     }
-    ledger_by_id = {
-        str(row["candidate_id"]): row for row in ledger.to_dict("records")
-    }
-    for row in skeleton_rows.to_dict("records"):
-        try:
-            parent_ids = json.loads(str(row["parent_ids_json"]))
-            if len(parent_ids) != 1:
-                raise ValueError("skeleton mutation requires one parent")
-            parent_row = ledger_by_id[str(parent_ids[0])]
-            parent = candidates_by_id[str(parent_ids[0])]
-            child = candidates_by_id[str(row["candidate_id"])]
-            expected_transition_key = TypedEvolutionV2._skeleton_transition_key(
-                parent_behavior_family_id=str(
-                    parent_row["behavior_family_id"]
-                ),
-                source_skeleton_id=parent.skeleton_id,
-                target_skeleton_id=child.skeleton_id,
-                remapped_genome_sha256=_payload_sha(
-                    child.generation_genes
-                ),
-            )
-            if str(row["transition_key"]) != expected_transition_key:
-                errors.append(f"transition_key_replay:{row['candidate_id']}")
-        except (KeyError, TypeError, ValueError, json.JSONDecodeError):
-            errors.append(f"transition_key_replay:{row['candidate_id']}")
     receipt_rows = ledger[ledger["receipt_json"].notna()]
     if receipt_rows.empty or not bool(
         receipt_rows["receipt_verified"].eq(True).all()
@@ -7303,6 +7290,31 @@ def check_v12(
         skeleton_rows["transition_key"].notna().all()
     ):
         errors.append("transition_key")
+    ledger_by_id = {
+        str(row["candidate_id"]): row for row in ledger.to_dict("records")
+    }
+    for row in skeleton_rows.to_dict("records"):
+        try:
+            parent_ids = json.loads(str(row["parent_ids_json"]))
+            if len(parent_ids) != 1:
+                raise ValueError("skeleton mutation requires one parent")
+            parent_row = ledger_by_id[str(parent_ids[0])]
+            parent = candidates_by_id[str(parent_ids[0])]
+            child = candidates_by_id[str(row["candidate_id"])]
+            expected_transition_key = TypedEvolutionV2._skeleton_transition_key(
+                parent_behavior_family_id=str(
+                    parent_row["behavior_family_id"]
+                ),
+                source_skeleton_id=parent.skeleton_id,
+                target_skeleton_id=child.skeleton_id,
+                remapped_genome_sha256=_payload_sha(
+                    child.generation_genes
+                ),
+            )
+            if str(row["transition_key"]) != expected_transition_key:
+                errors.append(f"transition_key_replay:{row['candidate_id']}")
+        except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+            errors.append(f"transition_key_replay:{row['candidate_id']}")
     if len(archive) != V12_STRICT_TARGET:
         errors.append("archive_row_count")
     champions = archive[archive["is_family_champion"].fillna(False)]

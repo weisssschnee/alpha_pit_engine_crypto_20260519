@@ -12,6 +12,7 @@ from alphafactory_crypto.broad_search.expression import (
 from alphafactory_crypto.broad_search.search_engine_v1 import (
     AGGTRADES_SYSTEM_CANARY_FIELDS,
     SEEDS,
+    V21_PARAMETERS,
     V12_ARMS,
     V22_PARAMETERS,
     BehaviorArchive,
@@ -90,6 +91,13 @@ def test_v12_profile_freezes_balanced_fresh_state_collision_control() -> None:
     assert V22_PARAMETERS["collision_controlled_evolution_v2_2"][
         "operator_productivity_adaptation"
     ] is True
+    assert "blocked_transition_skips" in evolution[0].export_state()
+    legacy = TypedEvolutionV2(
+        SEEDS[0],
+        _registry(),
+        V21_PARAMETERS["behavior_niched_evolution_v2_1"],
+    )
+    assert "blocked_transition_skips" not in legacy.export_state()
 
 
 def test_v12_final_decision_uses_frozen_engineering_gates_only(
