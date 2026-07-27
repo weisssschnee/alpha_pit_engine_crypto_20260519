@@ -110,9 +110,10 @@ def test_v12_final_decision_uses_frozen_engineering_gates_only(
         "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER",
     )
     for batch_index in range(250):
-        for slot, (arm, seed) in enumerate(
-            (arm, seed) for arm in V12_ARMS for seed in SEEDS
-        ):
+        lanes = [(arm, seed) for arm in V12_ARMS for seed in SEEDS]
+        offset = batch_index % len(lanes)
+        rotated_lanes = lanes[offset:] + lanes[:offset]
+        for slot, (arm, seed) in enumerate(rotated_lanes):
             ledger.append(
                 {
                     "arm": arm,
@@ -192,6 +193,7 @@ def test_v12_final_decision_uses_frozen_engineering_gates_only(
     report = _v12_report_text(decision)
     assert decision["status"] == "PASS_SEARCH_ENGINE_V1_2_COMPLETED"
     assert decision["balanced_batch_integrity"] is True
+    assert decision["rotating_submission_integrity"] is True
     assert all(decision["frozen_engineering_gate"].values())
     assert decision["future_new_data_arena_qualified_arms"] == []
     assert decision["promotion"] == "FORBIDDEN"

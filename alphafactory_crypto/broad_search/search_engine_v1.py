@@ -22,7 +22,7 @@ import time
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Iterable, Mapping, Sequence
+from typing import Any, Callable, Iterable, Mapping, Sequence
 
 import numpy as np
 import pandas as pd
@@ -1375,6 +1375,7 @@ def _v12_frozen_contract(
                 "parent_behavior_family_id",
                 "source_skeleton_id",
                 "target_skeleton_id",
+                "remapped_genome_sha256",
             ],
             "block_after_collisions": int(
                 V22_PARAMETERS["collision_controlled_evolution_v2_2"][
@@ -1433,6 +1434,9 @@ class BehaviorArchive:
     champion_by_family: dict[str, int] = field(default_factory=dict)
     family_counts: Counter[str] = field(default_factory=Counter)
     duplicate_replacements: int = 0
+    transition_productivity: dict[str, dict[str, int]] = field(default_factory=dict)
+    blocked_transition_keys: set[str] = field(default_factory=set)
+    blocked_transition_skips: int = 0
 
     def observe(
         self,
@@ -1504,12 +1508,58 @@ class BehaviorArchive:
             )
         return output
 
+    def observe_transition(
+        self,
+        *,
+        transition_key: str,
+        new_family: bool,
+        block_after_collisions: int,
+    ) -> None:
+        if not transition_key:
+            raise ValueError("campaign transition observation lacks a key")
+        stats = self.transition_productivity.setdefault(
+            str(transition_key),
+            {"trials": 0, "new_families": 0, "collisions": 0},
+        )
+        stats["trials"] += 1
+        stats["new_families"] += int(bool(new_family))
+        stats["collisions"] += int(not new_family)
+        if int(stats["collisions"]) >= int(block_after_collisions):
+            self.blocked_transition_keys.add(str(transition_key))
+
+    def transition_state(self) -> dict[str, Any]:
+        return {
+            "transition_productivity": {
+                key: dict(stats)
+                for key, stats in sorted(self.transition_productivity.items())
+            },
+            "blocked_transition_keys": sorted(self.blocked_transition_keys),
+            "blocked_transition_skips": int(self.blocked_transition_skips),
+        }
+
+    def restore_transition_state(self, state: Mapping[str, Any]) -> None:
+        self.transition_productivity = {
+            str(key): {
+                "trials": int(stats.get("trials", 0)),
+                "new_families": int(stats.get("new_families", 0)),
+                "collisions": int(stats.get("collisions", 0)),
+            }
+            for key, stats in state.get("transition_productivity", {}).items()
+        }
+        self.blocked_transition_keys = set(
+            str(value) for value in state.get("blocked_transition_keys", ())
+        )
+        self.blocked_transition_skips = int(
+            state.get("blocked_transition_skips", 0)
+        )
+
     def state_hash(self) -> str:
         return _payload_sha(
             {
                 "families": self.summary_rows(),
                 "rows": len(self.rows),
                 "duplicate_replacements": self.duplicate_replacements,
+                "transition_state": self.transition_state(),
             }
         )
 
@@ -2109,8 +2159,6 @@ class TypedEvolutionV2:
         }
     )
     operator_update_count: int = 0
-    transition_productivity: dict[str, dict[str, int]] = field(default_factory=dict)
-    blocked_transition_keys: set[str] = field(default_factory=set)
     blocked_transition_skips: int = 0
 
     def __post_init__(self) -> None:
@@ -2287,6 +2335,7 @@ class TypedEvolutionV2:
         skeleton = _skeleton_by_id(parent.skeleton_id)
         maximum = int(self.parameters["maximum_mutated_genes"])
         minimum = int(self.parameters["minimum_mutated_genes"])
+        compiled_attempts = 0
         for internal_attempt in range(
             1, int(self.parameters["duplicate_resample_limit"]) + 2
         ):
@@ -2308,6 +2357,7 @@ class TypedEvolutionV2:
                     genes=genome,
                     roles=self.roles,
                 )
+                compiled_attempts += 1
                 changed = sorted(
                     name
                     for name in GENE_ORDER
@@ -2321,11 +2371,13 @@ class TypedEvolutionV2:
                         details={
                             "changed_genes": changed,
                             "internal_generation_attempts": internal_attempt,
+                            "compile_valid_attempts": compiled_attempts,
                         },
                     )
         raise _ProposalGenerationFailure(
             "Evolution V2 could not produce an effective 1-3 gene mutation",
             raw_attempts=int(self.parameters["duplicate_resample_limit"]) + 1,
+            compile_valid_attempts=compiled_attempts,
         )
 
     @staticmethod
@@ -2334,6 +2386,7 @@ class TypedEvolutionV2:
         parent_behavior_family_id: str,
         source_skeleton_id: str,
         target_skeleton_id: str,
+        remapped_genome_sha256: str,
     ) -> str:
         return _payload_sha(
             {
@@ -2341,6 +2394,7 @@ class TypedEvolutionV2:
                 "parent_behavior_family_id": str(parent_behavior_family_id),
                 "source_skeleton_id": str(source_skeleton_id),
                 "target_skeleton_id": str(target_skeleton_id),
+                "remapped_genome_sha256": str(remapped_genome_sha256),
             }
         )
 
@@ -2349,6 +2403,7 @@ class TypedEvolutionV2:
         parent: CandidateSpec,
         *,
         parent_behavior_family_id: str,
+        blocked_transition_keys: set[str] | None = None,
     ) -> tuple[CandidateSpec, dict[str, Any], str]:
         source = _skeleton_by_id(parent.skeleton_id)
         targets = [
@@ -2359,21 +2414,25 @@ class TypedEvolutionV2:
             and item.field_roles == source.field_roles
         ]
         self.rng.shuffle(targets)
+        blocked = blocked_transition_keys or set()
         for internal_attempt, target in enumerate(targets, start=1):
-            transition_key = self._skeleton_transition_key(
-                parent_behavior_family_id=parent_behavior_family_id,
-                source_skeleton_id=source.skeleton_id,
-                target_skeleton_id=target.skeleton_id,
-            )
-            if transition_key in self.blocked_transition_keys:
-                self.blocked_transition_skips += 1
-                continue
             child = candidate_from_genes(
                 self.registry,
                 skeleton=target,
                 genes=dict(parent.generation_genes),
                 roles=self.roles,
             )
+            transition_key = self._skeleton_transition_key(
+                parent_behavior_family_id=parent_behavior_family_id,
+                source_skeleton_id=source.skeleton_id,
+                target_skeleton_id=target.skeleton_id,
+                remapped_genome_sha256=_payload_sha(
+                    child.generation_genes
+                ),
+            )
+            if transition_key in blocked:
+                self.blocked_transition_skips += 1
+                continue
             if child.candidate_id != parent.candidate_id:
                 return (
                     child,
@@ -2388,6 +2447,7 @@ class TypedEvolutionV2:
                                 child.generation_genes
                             ),
                             "internal_generation_attempts": internal_attempt,
+                            "compile_valid_attempts": internal_attempt,
                         },
                     ),
                     transition_key,
@@ -2395,6 +2455,7 @@ class TypedEvolutionV2:
         raise _ProposalGenerationFailure(
             "Evolution V2 has no compatible skeleton variant mutation",
             raw_attempts=max(1, len(targets)),
+            compile_valid_attempts=len(targets),
         )
 
     def _mutate_skeleton(
@@ -2403,6 +2464,7 @@ class TypedEvolutionV2:
         child, receipt, _ = self._mutate_skeleton_with_transition(
             parent,
             parent_behavior_family_id="RECEIPT_ONLY_NO_COLLISION_MEMORY",
+            blocked_transition_keys=set(),
         )
         return child, receipt
 
@@ -2428,6 +2490,7 @@ class TypedEvolutionV2:
         ]
         points = list(range(1, len(gene_order)))
         self.rng.shuffle(points)
+        compiled_attempts = 0
         for internal_attempt, point in enumerate(points, start=1):
             genome = dict(first.generation_genes)
             for index, name in enumerate(gene_order):
@@ -2442,6 +2505,7 @@ class TypedEvolutionV2:
                 )
             except ValueError:
                 continue
+            compiled_attempts += 1
             if child.candidate_id in {first.candidate_id, second.candidate_id}:
                 continue
             return child, self._receipt(
@@ -2453,11 +2517,13 @@ class TypedEvolutionV2:
                     "gene_order": gene_order,
                     "output_type": "NUMERIC_ASSET_TIME",
                     "internal_generation_attempts": internal_attempt,
+                    "compile_valid_attempts": compiled_attempts,
                 },
             )
         raise _ProposalGenerationFailure(
             "Evolution V2 could not produce a compatible crossover",
             raw_attempts=max(1, len(points)),
+            compile_valid_attempts=compiled_attempts,
         )
 
     def verify_receipt(
@@ -2573,7 +2639,6 @@ class TypedEvolutionV2:
     def propose(
         self, archive: BehaviorArchive | None = None
     ) -> tuple[CandidateSpec, dict[str, Any]]:
-        del archive
         before = self.state_hash()
         limit = int(self.parameters["duplicate_resample_limit"])
         candidate: CandidateSpec | None = None
@@ -2582,6 +2647,23 @@ class TypedEvolutionV2:
         operation = "TYPED_RANDOM_WARMUP"
         transition_key: str | None = None
         compile_attempts = 0
+        compile_valid_attempts = 0
+
+        def run_child_operation(operation_factory: Callable[[], Any]) -> Any:
+            try:
+                return operation_factory()
+            except _ProposalGenerationFailure as failure:
+                raise _ProposalGenerationFailure(
+                    str(failure),
+                    raw_attempts=(
+                        compile_attempts + failure.raw_attempts - 1
+                    ),
+                    compile_valid_attempts=(
+                        compile_valid_attempts
+                        + failure.compile_valid_attempts
+                    ),
+                ) from failure
+
         for duplicate_resamples in range(limit + 1):
             transition_key = None
             compile_attempts += 1
@@ -2594,6 +2676,7 @@ class TypedEvolutionV2:
                 receipt = None
                 parents = ()
                 operation = "TYPED_RANDOM_WARMUP"
+                compile_valid_attempts += 1
             else:
                 draw = self.rng.random()
                 gene_probability = float(
@@ -2608,7 +2691,9 @@ class TypedEvolutionV2:
                 )
                 first = self._parent()
                 if draw < gene_probability:
-                    candidate, receipt = self._mutate_genes(first)
+                    candidate, receipt = run_child_operation(
+                        lambda: self._mutate_genes(first)
+                    )
                     parents = (first,)
                     operation = str(receipt["operation"])
                 elif draw < gene_probability + skeleton_probability:
@@ -2623,16 +2708,33 @@ class TypedEvolutionV2:
                                 "behavior_family_id"
                             ]
                         )
-                        (
-                            candidate,
-                            receipt,
-                            transition_key,
-                        ) = self._mutate_skeleton_with_transition(
-                            first,
-                            parent_behavior_family_id=parent_family_id,
-                        )
+                        skips_before = self.blocked_transition_skips
+                        try:
+                            (
+                                candidate,
+                                receipt,
+                                transition_key,
+                            ) = run_child_operation(
+                                lambda: self._mutate_skeleton_with_transition(
+                                    first,
+                                    parent_behavior_family_id=parent_family_id,
+                                    blocked_transition_keys=(
+                                        archive.blocked_transition_keys
+                                        if archive is not None
+                                        else set()
+                                    ),
+                                )
+                            )
+                        finally:
+                            if archive is not None:
+                                archive.blocked_transition_skips += (
+                                    self.blocked_transition_skips
+                                    - skips_before
+                                )
                     else:
-                        candidate, receipt = self._mutate_skeleton(first)
+                        candidate, receipt = run_child_operation(
+                            lambda: self._mutate_skeleton(first)
+                        )
                     parents = (first,)
                     operation = str(receipt["operation"])
                 else:
@@ -2664,16 +2766,23 @@ class TypedEvolutionV2:
                         if cross_skeleton:
                             compatible = cross_skeleton
                     if not compatible:
-                        candidate, receipt = self._mutate_genes(first)
+                        candidate, receipt = run_child_operation(
+                            lambda: self._mutate_genes(first)
+                        )
                         parents = (first,)
                     else:
                         second = self._parent(eligible=compatible)
-                        candidate, receipt = self._crossover(first, second)
+                        candidate, receipt = run_child_operation(
+                            lambda: self._crossover(first, second)
+                        )
                         parents = (first, second)
                     operation = str(receipt["operation"])
                 compile_attempts += int(
                     receipt.get("internal_generation_attempts", 1)
                 ) - 1
+                compile_valid_attempts += int(
+                    receipt.get("compile_valid_attempts", 1)
+                )
             if candidate.candidate_id not in self.seen:
                 break
         assert candidate is not None
@@ -2681,6 +2790,7 @@ class TypedEvolutionV2:
             raise _ProposalGenerationFailure(
                 "Evolution V2 duplicate resample limit exhausted",
                 raw_attempts=compile_attempts,
+                compile_valid_attempts=compile_valid_attempts,
             )
         verified = (
             self.verify_receipt(parents, candidate, receipt)
@@ -2698,6 +2808,7 @@ class TypedEvolutionV2:
             "receipt": receipt,
             "receipt_verified": bool(verified) if receipt is not None else None,
             "raw_attempts": compile_attempts,
+            "compile_valid_attempts": compile_valid_attempts,
             "transition_key": transition_key,
         }
 
@@ -2795,32 +2906,6 @@ class TypedEvolutionV2:
             self.verified_mutations += 1
         elif operation == "COMPATIBLE_SKELETON_VARIANT_MUTATION":
             self.verified_skeleton_mutations += 1
-            transition_key = str(archive_row.get("transition_key") or "")
-            if bool(
-                self.parameters.get(
-                    "campaign_local_transition_collision_control", False
-                )
-            ):
-                if not transition_key:
-                    raise ValueError(
-                        "collision-controlled skeleton mutation lacks transition key"
-                    )
-                transition_stats = self.transition_productivity.setdefault(
-                    transition_key,
-                    {"trials": 0, "new_families": 0, "collisions": 0},
-                )
-                transition_stats["trials"] += 1
-                new_family = bool(
-                    archive_row.get(
-                        "new_policy_local_behavior_family_at_completion", False
-                    )
-                )
-                transition_stats["new_families"] += int(new_family)
-                transition_stats["collisions"] += int(not new_family)
-                if int(transition_stats["collisions"]) >= int(
-                    self.parameters["transition_block_after_collisions"]
-                ):
-                    self.blocked_transition_keys.add(transition_key)
         elif operation == "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER":
             self.verified_crossovers += 1
 
@@ -2878,11 +2963,6 @@ class TypedEvolutionV2:
                 )
             },
             "operator_update_count": int(self.operator_update_count),
-            "transition_productivity": {
-                key: dict(stats)
-                for key, stats in sorted(self.transition_productivity.items())
-            },
-            "blocked_transition_count": len(self.blocked_transition_keys),
             "blocked_transition_skips": int(self.blocked_transition_skips),
         }
 
@@ -2913,11 +2993,6 @@ class TypedEvolutionV2:
                 )
             },
             "operator_update_count": int(self.operator_update_count),
-            "transition_productivity": {
-                key: dict(stats)
-                for key, stats in sorted(self.transition_productivity.items())
-            },
-            "blocked_transition_keys": sorted(self.blocked_transition_keys),
             "blocked_transition_skips": int(self.blocked_transition_skips),
         }
 
@@ -2972,17 +3047,6 @@ class TypedEvolutionV2:
         }
         policy.operator_update_count = int(
             state.get("operator_update_count", 0)
-        )
-        policy.transition_productivity = {
-            str(key): {
-                "trials": int(stats.get("trials", 0)),
-                "new_families": int(stats.get("new_families", 0)),
-                "collisions": int(stats.get("collisions", 0)),
-            }
-            for key, stats in state.get("transition_productivity", {}).items()
-        }
-        policy.blocked_transition_keys = set(
-            str(value) for value in state.get("blocked_transition_keys", ())
         )
         policy.blocked_transition_skips = int(
             state.get("blocked_transition_skips", 0)
@@ -3454,12 +3518,18 @@ def _metrics_rows(
             for key, policy in policies.items()
             if key.startswith(arm + "|") and isinstance(policy, TypedEvolutionV2)
         ]
+        collision_controlled = any(
+            isinstance(policy, TypedEvolutionV2)
+            and policy.parameters.get(
+                "campaign_local_transition_collision_control"
+            )
+            is True
+            for key, policy in policies.items()
+            if key.startswith(arm + "|")
+        )
         mechanism_occupancy: Counter[str] = Counter()
         skeleton_occupancy: Counter[str] = Counter()
         operator_productivity: dict[str, Counter[str]] = defaultdict(Counter)
-        transition_productivity: dict[str, Counter[str]] = defaultdict(Counter)
-        blocked_transition_count = 0
-        blocked_transition_skips = 0
         for diagnostic in evolution_diagnostics:
             mechanism_occupancy.update(diagnostic["mechanism_occupancy"])
             skeleton_occupancy.update(diagnostic["skeleton_occupancy"])
@@ -3467,16 +3537,17 @@ def _metrics_rows(
                 "operator_productivity"
             ].items():
                 operator_productivity[operation].update(stats)
-            for transition_key, stats in diagnostic[
-                "transition_productivity"
-            ].items():
-                transition_productivity[transition_key].update(stats)
-            blocked_transition_count += int(
-                diagnostic["blocked_transition_count"]
-            )
-            blocked_transition_skips += int(
-                diagnostic["blocked_transition_skips"]
-            )
+        transition_productivity = (
+            archive.transition_productivity if collision_controlled else {}
+        )
+        blocked_transition_count = (
+            len(archive.blocked_transition_keys) if collision_controlled else 0
+        )
+        blocked_transition_skips = (
+            int(archive.blocked_transition_skips)
+            if collision_controlled
+            else 0
+        )
         operation_probabilities = {
             operation: float(
                 np.mean(
@@ -3518,7 +3589,7 @@ def _metrics_rows(
                 "valid_exact_unique_per_cpu_hour": int(counters["exact_unique"])
                 / max(cpu_hours, 1.0e-12),
                 "balanced_valid_exact_unique_per_cpu_hour": int(
-                    counters["exact_unique"]
+                    counters["strict_evaluated"]
                 )
                 / max(cpu_hours, 1.0e-12),
                 "positive_matched_discoveries_per_cpu_hour": sum(
@@ -3711,7 +3782,7 @@ def _metrics_rows(
                 / 3600.0,
             ),
             "balanced_valid_exact_unique_per_cpu_hour": int(
-                state["exact_unique"]
+                state["strict_evaluated"]
             )
             / max(
                 1.0e-12,
@@ -3888,6 +3959,7 @@ def _checkpoint_state_payload(
         **dict(state),
         "attempted_exact_ids": sorted(set(state["attempted_exact_ids"])),
         "archive_duplicate_replacements": int(archive.duplicate_replacements),
+        "archive_transition_state": archive.transition_state(),
         "policies": {
             key: _export_policy(policy) for key, policy in sorted(policies.items())
         },
@@ -4010,6 +4082,9 @@ def _load_checkpoint(
     archive_duplicate_replacements = int(
         state_payload.pop("archive_duplicate_replacements", 0)
     )
+    archive_transition_state = dict(
+        state_payload.pop("archive_transition_state", {})
+    )
     ledger = pd.read_parquet(checkpoint_path / "candidate_ledger.parquet").to_dict(
         "records"
     )
@@ -4019,6 +4094,7 @@ def _load_checkpoint(
         )
     )
     archive.duplicate_replacements = archive_duplicate_replacements
+    archive.restore_transition_state(archive_transition_state)
     metrics = pd.read_parquet(
         checkpoint_path / "arm_checkpoint_metrics.parquet"
     ).to_dict("records")
@@ -4042,9 +4118,20 @@ class _EngineBudgetExhausted(RuntimeError):
 
 
 class _ProposalGenerationFailure(RuntimeError):
-    def __init__(self, message: str, *, raw_attempts: int) -> None:
+    def __init__(
+        self,
+        message: str,
+        *,
+        raw_attempts: int,
+        compile_valid_attempts: int | None = None,
+    ) -> None:
         super().__init__(message)
         self.raw_attempts = int(raw_attempts)
+        self.compile_valid_attempts = int(
+            raw_attempts
+            if compile_valid_attempts is None
+            else compile_valid_attempts
+        )
 
 
 def _increment_counter(
@@ -4979,6 +5066,20 @@ def _v12_final_decision(
             for rows in batches.values()
         )
     )
+    expected_lanes = {
+        (arm, seed) for arm in V12_ARMS for seed in SEEDS
+    }
+    lanes_by_slot: dict[int, set[tuple[str, int]]] = defaultdict(set)
+    for rows in batches.values():
+        for row in rows:
+            lanes_by_slot[int(row["balanced_batch_slot"])].add(
+                (str(row["arm"]), int(row["seed"]))
+            )
+    rotating_submission_integrity = bool(
+        balanced_batch_integrity
+        and set(lanes_by_slot) == set(range(V12_BALANCED_BATCH_SIZE))
+        and all(lanes == expected_lanes for lanes in lanes_by_slot.values())
+    )
     every_candidate_uses_aggtrades = all(
         bool(
             set(json.loads(str(row["raw_fields_json"])))
@@ -5010,6 +5111,7 @@ def _v12_final_decision(
         and dict(arm_counts) == expected_arm_counts
         and every_candidate_uses_aggtrades
         and balanced_batch_integrity
+        and rotating_submission_integrity
         and restore_verified
         and int(evolution_metrics["operator_update_count"]) > 0
         and within_budget
@@ -5037,6 +5139,7 @@ def _v12_final_decision(
         "expected_arm_counts": expected_arm_counts,
         "balanced_batch_count": len(batches),
         "balanced_batch_integrity": balanced_batch_integrity,
+        "rotating_submission_integrity": rotating_submission_integrity,
         "every_candidate_uses_aggtrades": every_candidate_uses_aggtrades,
         "behavior_family_count": len(archive.champion_by_family),
         "behavior_duplicate_rate": 1.0
@@ -5129,7 +5232,7 @@ def _v12_report_text(decision: Mapping[str, Any]) -> str:
 - Producer source: `{decision['producer_source_sha']}`
 - Strict completed: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
 - Checkpoints: `{decision['checkpoint_count']}/{V12_CHECKPOINT_COUNT}`, exact restore verified: `{decision['checkpoint_restore_verified']}`.
-- Balanced batches: `{decision['balanced_batch_count']}`, integrity: `{decision['balanced_batch_integrity']}`.
+- Balanced batches: `{decision['balanced_batch_count']}`, integrity: `{decision['balanced_batch_integrity']}`, rotating submission: `{decision['rotating_submission_integrity']}`.
 - Behavior families: `{decision['behavior_family_count']:,}`; global duplicate rate `{decision['behavior_duplicate_rate']:.2%}`.
 
 ## Evolution V2.2 versus typed random
@@ -5578,6 +5681,9 @@ def run_engine(
                         failed_raw_attempts = int(
                             getattr(failure, "raw_attempts", 1)
                         )
+                        failed_compile_valid_attempts = int(
+                            getattr(failure, "compile_valid_attempts", 0)
+                        )
                         _increment_counter(
                             state,
                             arm,
@@ -5588,7 +5694,7 @@ def run_engine(
                             state,
                             arm,
                             "compile_valid",
-                            failed_raw_attempts,
+                            failed_compile_valid_attempts,
                         )
                         state["arm_counters"][arm]["cpu_seconds"] += proposal_cpu
                         _failure(
@@ -5598,10 +5704,15 @@ def run_engine(
                         )
                         continue
                     raw_attempts = int(metadata["raw_attempts"])
+                    compile_valid_attempts = int(
+                        metadata.get("compile_valid_attempts", raw_attempts)
+                    )
                     _increment_counter(
                         state, arm, "generation_attempts", raw_attempts
                     )
-                    _increment_counter(state, arm, "compile_valid", raw_attempts)
+                    _increment_counter(
+                        state, arm, "compile_valid", compile_valid_attempts
+                    )
                     expression_verified = _candidate_rebuild_verified(
                         registry,
                         candidate,
@@ -5751,6 +5862,26 @@ def run_engine(
                             ]
                         ),
                     }
+                    if (
+                        isinstance(policy, TypedEvolutionV2)
+                        and policy.parameters.get(
+                            "campaign_local_transition_collision_control"
+                        )
+                        is True
+                        and str(proposal["operation"])
+                        == "COMPATIBLE_SKELETON_VARIANT_MUTATION"
+                    ):
+                        archive.observe_transition(
+                            transition_key=str(
+                                proposal.get("transition_key") or ""
+                            ),
+                            new_family=bool(new_family),
+                            block_after_collisions=int(
+                                policy.parameters[
+                                    "transition_block_after_collisions"
+                                ]
+                            ),
+                        )
                     _policy_observe(
                         policy,
                         candidate=candidate,
@@ -6734,6 +6865,31 @@ def check_v11(
         )
         for row in ledger.to_dict("records")
     }
+    ledger_by_id = {
+        str(row["candidate_id"]): row for row in ledger.to_dict("records")
+    }
+    for row in skeleton_rows.to_dict("records"):
+        try:
+            parent_ids = json.loads(str(row["parent_ids_json"]))
+            if len(parent_ids) != 1:
+                raise ValueError("skeleton mutation requires one parent")
+            parent_row = ledger_by_id[str(parent_ids[0])]
+            parent = candidates_by_id[str(parent_ids[0])]
+            child = candidates_by_id[str(row["candidate_id"])]
+            expected_transition_key = TypedEvolutionV2._skeleton_transition_key(
+                parent_behavior_family_id=str(
+                    parent_row["behavior_family_id"]
+                ),
+                source_skeleton_id=parent.skeleton_id,
+                target_skeleton_id=child.skeleton_id,
+                remapped_genome_sha256=_payload_sha(
+                    child.generation_genes
+                ),
+            )
+            if str(row["transition_key"]) != expected_transition_key:
+                errors.append(f"transition_key_replay:{row['candidate_id']}")
+        except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+            errors.append(f"transition_key_replay:{row['candidate_id']}")
     receipt_rows = ledger[ledger["receipt_json"].notna()]
     if receipt_rows.empty or not bool(
         receipt_rows["receipt_verified"].eq(True).all()
@@ -6984,6 +7140,8 @@ def check_v12(
         capability_delta.get("existing_lane_scheduler_balanced") is not True
         or int(capability_delta.get("balanced_micro_batch_size", -1))
         != V12_BALANCED_BATCH_SIZE
+        or capability_delta.get("rotating_seed_lane_submission_order")
+        is not True
         or capability_delta.get(
             "campaign_local_transition_collision_control"
         )
@@ -7064,6 +7222,7 @@ def check_v12(
         errors.append("balanced_batch_columns")
     else:
         batches = list(ledger.groupby("balanced_batch_index", dropna=False))
+        lanes_by_slot: dict[int, set[tuple[str, int]]] = defaultdict(set)
         if len(batches) != V12_STRICT_TARGET // V12_BALANCED_BATCH_SIZE:
             errors.append("balanced_batch_count")
         for batch_id, rows in batches:
@@ -7087,6 +7246,21 @@ def check_v12(
                 != V12_BALANCED_BATCH_SIZE
             ):
                 errors.append(f"balanced_batch:{int(batch_id)}")
+            for row in rows.to_dict("records"):
+                lanes_by_slot[int(row["balanced_batch_slot"])].add(
+                    (str(row["arm"]), int(row["seed"]))
+                )
+        expected_rotating_lanes = {
+            (arm, seed) for arm in V12_ARMS for seed in SEEDS
+        }
+        if (
+            set(lanes_by_slot) != set(range(V12_BALANCED_BATCH_SIZE))
+            or any(
+                lanes != expected_rotating_lanes
+                for lanes in lanes_by_slot.values()
+            )
+        ):
+            errors.append("rotating_submission_order")
     broad_contracts, _, _ = _broad39_registry_contracts(repo_root)
     replay_registry = TypedExpressionRegistry(
         tuple((*broad_contracts, *_aggtrades_canary_contracts()))
@@ -7225,6 +7399,8 @@ def check_v12(
         errors.append("final_decision")
     if decision.get("balanced_batch_integrity") is not True:
         errors.append("final_balanced_batch_integrity")
+    if decision.get("rotating_submission_integrity") is not True:
+        errors.append("final_rotating_submission_integrity")
     if decision.get("research_decision") != (
         "HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT"
     ):

@@ -49,12 +49,14 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     HierarchicalTypedCEMV2,
     TypedEvolutionV2,
     V22_PARAMETERS,
+    _ProposalGenerationFailure,
     _balanced_lane_choice,
     _checkpoint_allocation,
     _evaluation_audit_fields,
     _load_checkpoint,
     _metrics_rows,
     _new_campaign_state,
+    _payload_sha,
     _write_checkpoint,
 )
 from alphafactory_crypto.instrument_capability.mapping import CROSS_SECTIONAL_ZERO_NET
@@ -832,35 +834,97 @@ def test_v22_collision_transition_memory_blocks_and_restores() -> None:
             "new_policy_local_behavior_family_at_completion": True,
         },
     )
+    archive = BehaviorArchive()
     child, receipt, transition_key = policy._mutate_skeleton_with_transition(
-        parent, parent_behavior_family_id="PARENT_FAMILY"
+        parent,
+        parent_behavior_family_id="PARENT_FAMILY",
+        blocked_transition_keys=archive.blocked_transition_keys,
     )
-    policy.observe(
-        child,
-        {
-            "behavior_family_id": "PARENT_FAMILY",
-            "pair_reward": -1.0,
-            "parent_ids": [parent.candidate_id],
-            "operation": "COMPATIBLE_SKELETON_VARIANT_MUTATION",
-            "transition_key": transition_key,
-            "new_policy_local_behavior_family_at_completion": False,
-        },
+    archive.observe_transition(
+        transition_key=transition_key,
+        new_family=False,
+        block_after_collisions=1,
     )
     assert policy.verify_receipt((parent,), child, receipt)
-    assert transition_key in policy.blocked_transition_keys
-    assert policy.transition_productivity[transition_key] == {
+    assert transition_key in archive.blocked_transition_keys
+    assert archive.transition_productivity[transition_key] == {
         "trials": 1,
         "new_families": 0,
         "collisions": 1,
     }
     restored = TypedEvolutionV2.from_state(registry, policy.export_state())
     assert restored.state_hash() == policy.state_hash()
+    restored_archive = BehaviorArchive()
+    restored_archive.restore_transition_state(archive.transition_state())
+    assert restored_archive.state_hash() == archive.state_hash()
+    assert policy._skeleton_transition_key(
+        parent_behavior_family_id="PARENT_FAMILY",
+        source_skeleton_id=parent.skeleton_id,
+        target_skeleton_id=child.skeleton_id,
+        remapped_genome_sha256="A",
+    ) != policy._skeleton_transition_key(
+        parent_behavior_family_id="PARENT_FAMILY",
+        source_skeleton_id=parent.skeleton_id,
+        target_skeleton_id=child.skeleton_id,
+        remapped_genome_sha256="B",
+    )
     next_child, _, next_transition_key = restored._mutate_skeleton_with_transition(
-        parent, parent_behavior_family_id="PARENT_FAMILY"
+        parent,
+        parent_behavior_family_id="PARENT_FAMILY",
+        blocked_transition_keys=restored_archive.blocked_transition_keys,
     )
     assert next_child.candidate_id != child.candidate_id
     assert next_transition_key != transition_key
     assert restored.blocked_transition_skips >= 1
+
+
+def test_v22_blocked_transition_scans_remain_compile_valid() -> None:
+    registry = _role_complete_registry()
+    policy = TypedEvolutionV2(
+        20260721,
+        registry,
+        V22_PARAMETERS["collision_controlled_evolution_v2_2"],
+    )
+    parent = generate_candidate(
+        registry, skeleton=skeleton_registry()[0], rng=random.Random(404)
+    )
+    source = next(
+        item
+        for item in skeleton_registry()
+        if item.skeleton_id == parent.skeleton_id
+    )
+    targets = [
+        item
+        for item in skeleton_registry()
+        if item.mechanism_family == source.mechanism_family
+        and item.skeleton_id != source.skeleton_id
+        and item.field_roles == source.field_roles
+    ]
+    blocked = set()
+    for target in targets:
+        child = candidate_from_genes(
+            registry,
+            skeleton=target,
+            genes=dict(parent.generation_genes),
+        )
+        blocked.add(
+            policy._skeleton_transition_key(
+                parent_behavior_family_id="PARENT_FAMILY",
+                source_skeleton_id=source.skeleton_id,
+                target_skeleton_id=target.skeleton_id,
+                remapped_genome_sha256=_payload_sha(
+                    child.generation_genes
+                ),
+            )
+        )
+    with pytest.raises(_ProposalGenerationFailure) as captured:
+        policy._mutate_skeleton_with_transition(
+            parent,
+            parent_behavior_family_id="PARENT_FAMILY",
+            blocked_transition_keys=blocked,
+        )
+    assert captured.value.raw_attempts == len(targets)
+    assert captured.value.compile_valid_attempts == len(targets)
 
 
 def test_behavior_archive_keeps_one_reward_champion_per_family() -> None:
