@@ -81,6 +81,9 @@ BASE_SHA = "bbb0e696bc5f560f733dd4e9bfe263f11e4bb840"
 AGGTRADES_CANARY_EPOCH_ID = "CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727"
 AGGTRADES_CANARY_DEFAULT_RUNTIME_DATE = "20260727"
 AGGTRADES_CANARY_CONFIG = "config/crypto_aggtrades_system_canary_v1.json"
+V11_EPOCH_ID = "CRYPTO_SEARCH_ENGINE_V1_1_BEHAVIOR_NICHED_20260727"
+V11_DEFAULT_RUNTIME_DATE = "20260727"
+V11_CONFIG = "config/crypto_search_engine_v1_1.json"
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
 CONTINUATION_RUNTIME = "runtime/crypto_18m_current_field_four_policy_continuation_20260719"
 SEEDS = (20260716, 20260717, 20260718, 20260719)
@@ -122,6 +125,21 @@ AGGTRADES_CANARY_CHECKPOINT_ALLOCATION = {
     "hierarchical_typed_cem_v2": 400,
     "typed_evolution_v2": 400,
 }
+V11_ARMS = (
+    "canonical_typed_random",
+    "behavior_niched_cem_v2_1",
+    "behavior_niched_evolution_v2_1",
+)
+V11_CHECKPOINT_SIZE = 1_500
+V11_CHECKPOINT_COUNT = 2
+V11_STRICT_TARGET = V11_CHECKPOINT_SIZE * V11_CHECKPOINT_COUNT
+V11_RAW_ATTEMPT_LIMIT = 20_000
+V11_WALL_TIME_LIMIT_SECONDS = 4 * 60 * 60
+V11_CHECKPOINT_ALLOCATION = {
+    "canonical_typed_random": 500,
+    "behavior_niched_cem_v2_1": 500,
+    "behavior_niched_evolution_v2_1": 500,
+}
 QUALIFICATION_TOLERANCE = 1.0e-12
 QUALIFICATION_DUPLICATE_RATE_MAXIMUM = 0.20
 GENE_ORDER = (
@@ -133,6 +151,11 @@ GENE_ORDER = (
     "left_normalizer",
     "right_normalizer",
     "horizon_hours",
+)
+EVOLUTION_OPERATIONS = (
+    "EFFECTIVE_GENE_MUTATION_1_TO_3",
+    "COMPATIBLE_SKELETON_VARIANT_MUTATION",
+    "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER",
 )
 V2_PARAMETERS: Mapping[str, Mapping[str, Any]] = {
     "hierarchical_typed_cem_v2": {
@@ -155,6 +178,23 @@ V2_PARAMETERS: Mapping[str, Mapping[str, Any]] = {
         "minimum_mutated_genes": 1,
         "maximum_mutated_genes": 3,
         "duplicate_resample_limit": 64,
+    },
+}
+V21_PARAMETERS: Mapping[str, Mapping[str, Any]] = {
+    "behavior_niched_cem_v2_1": {
+        **V2_PARAMETERS["hierarchical_typed_cem_v2"],
+        "behavior_family_champion_elites": True,
+        "mechanism_stratified_elites": True,
+        "skeleton_stratified_elites": True,
+    },
+    "behavior_niched_evolution_v2_1": {
+        **V2_PARAMETERS["typed_evolution_v2"],
+        "skeleton_cell_limit": 32,
+        "prefer_cross_skeleton_crossover": True,
+        "operator_productivity_adaptation": True,
+        "operator_productivity_floor": 0.15,
+        "operator_productivity_prior_successes": 1,
+        "operator_productivity_prior_trials": 2,
     },
 }
 V1_PARAMETERS: Mapping[str, Mapping[str, Any]] = {
@@ -492,6 +532,61 @@ def _validate_aggtrades_canary_config(config: Mapping[str, Any]) -> None:
         raise ValueError("aggTrades canary research boundary changed")
 
 
+def _validate_v11_config(config: Mapping[str, Any]) -> None:
+    search = config["search"]
+    if config.get("authorization") != (
+        "ONE_FRESH_STATE_3000_SPENT_DEVELOPMENT_SEARCH_ENGINE_V1_1"
+    ):
+        raise ValueError("Search Engine V1.1 authorization changed")
+    if int(search["strict_evaluated_target"]) != V11_STRICT_TARGET:
+        raise ValueError("Search Engine V1.1 strict target changed")
+    if (
+        int(search["checkpoint_size"]) != V11_CHECKPOINT_SIZE
+        or int(search["checkpoint_count"]) != V11_CHECKPOINT_COUNT
+    ):
+        raise ValueError("Search Engine V1.1 checkpoint contract changed")
+    if {
+        str(key): int(value)
+        for key, value in search["arms_per_checkpoint"].items()
+    } != V11_CHECKPOINT_ALLOCATION:
+        raise ValueError("Search Engine V1.1 arm allocation changed")
+    if tuple(int(value) for value in search["seeds"]) != SEEDS:
+        raise ValueError("Search Engine V1.1 seed set changed")
+    if (
+        int(search["raw_generation_attempt_limit"]) != V11_RAW_ATTEMPT_LIMIT
+        or int(search["wall_time_limit_seconds"])
+        != V11_WALL_TIME_LIMIT_SECONDS
+        or int(search["workers_default"]) != DEFAULT_WORKERS
+        or int(search["workers_memory_fallback"]) != FALLBACK_WORKERS
+        or search.get("workers_12_forbidden") is not True
+        or search.get("fresh_policy_and_archive_state") is not True
+        or search.get("every_candidate_requires_aggtrades_input") is not True
+    ):
+        raise ValueError("Search Engine V1.1 execution contract changed")
+    boundaries = config["boundaries"]
+    if (
+        boundaries.get("fixed_retrospective_cohort") is not True
+        or boundaries.get("system_behavior_only") is not True
+        or any(
+            bool(boundaries.get(key))
+            for key in (
+                "alpha_claim",
+                "oos",
+                "challenge",
+                "recent",
+                "may_stress",
+                "forward",
+                "promotion",
+                "latent_priority",
+                "relational_training",
+                "cross_sprint_adaptive_memory",
+                "future_arm_qualification",
+            )
+        )
+    ):
+        raise ValueError("Search Engine V1.1 research boundary changed")
+
+
 def build_aggtrades_canary_cache_from_config(
     repo_root: Path, *, source_sha: str
 ) -> dict[str, Any]:
@@ -629,6 +724,38 @@ def _load_aggtrades_canary_inputs(
             ),
         },
     }
+    return store, contracts, behavior_contract, identities, config
+
+
+def _load_v11_inputs(
+    repo_root: Path,
+) -> tuple[
+    RawPanelStore,
+    tuple[FieldContract, ...],
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+]:
+    store, contracts, behavior_contract, identities, canary_config = (
+        _load_aggtrades_canary_inputs(repo_root)
+    )
+    config_path = repo_root / V11_CONFIG
+    config = _read_json(config_path)
+    _validate_v11_config(config)
+    for key in ("window", "inputs", "cache"):
+        if config.get(key) != canary_config.get(key):
+            raise ValueError(
+                f"Search Engine V1.1 {key} must reuse the exact canary input carrier"
+            )
+    identities = {
+        **identities,
+        "source_canary_config": identities["canary_config"],
+        "v11_config": {
+            "path": V11_CONFIG,
+            "sha256": sha256_file(config_path),
+        },
+    }
+    identities.pop("canary_config", None)
     return store, contracts, behavior_contract, identities, config
 
 
@@ -894,6 +1021,149 @@ def _aggtrades_canary_frozen_contract(
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
 
 
+def _v11_frozen_contract(
+    *,
+    source_sha: str,
+    compiler_binding: Mapping[str, Any],
+    behavior_contract: Mapping[str, Any],
+    input_identities: Mapping[str, Any],
+    environment: Mapping[str, Any],
+    config: Mapping[str, Any],
+) -> dict[str, Any]:
+    payload = {
+        "schema_version": 1,
+        "epoch_id": V11_EPOCH_ID,
+        "experiment_id": str(config["experiment_id"]),
+        "source_sha": source_sha,
+        "objective": (
+            "Compare behavior-niched CEM and Evolution against equal-count "
+            "typed random on the fixed spent-development aggTrades carrier"
+        ),
+        "authorization": (
+            "ONE_FRESH_STATE_3000_SPENT_DEVELOPMENT_SEARCH_ENGINE_V1_1"
+        ),
+        "evidence_role": "SYSTEM_SEARCH_CAPABILITY_ONLY_SPENT_DEVELOPMENT",
+        "input_identities": dict(input_identities),
+        "compiler_identity": dict(compiler_binding),
+        "evaluator_contract": pair_contract_payload(),
+        "behavior_descriptor": dict(behavior_contract),
+        "environment": dict(environment),
+        "window": dict(config["window"]),
+        "surface": {
+            "broad_context_fields": 39,
+            "aggtrades_fields": len(AGGTRADES_SYSTEM_CANARY_FIELDS),
+            "aggtrades_field_ids": list(AGGTRADES_SYSTEM_CANARY_FIELDS),
+            "every_candidate_requires_aggtrades_input": True,
+            "fixed_retrospective_cohort": True,
+            "missing_value_fill": None,
+            "input_carrier_reused_without_rebuild": True,
+        },
+        "seeds": list(SEEDS),
+        "arms": {
+            "active": list(V11_ARMS),
+            "checkpoint_allocation": dict(V11_CHECKPOINT_ALLOCATION),
+            "same_seed_set_for_every_arm": True,
+            "reward_comparison": (
+                "same first N by deterministic arm completion ordinal"
+            ),
+        },
+        "fresh_state": {
+            "old_candidate_import": False,
+            "old_reward_import": False,
+            "old_distribution_import": False,
+            "old_population_import": False,
+            "old_policy_state_import": False,
+            "old_archive_import": False,
+        },
+        "policies": {
+            "canonical_typed_random": dict(
+                V1_PARAMETERS["canonical_typed_random"]
+            ),
+            **{
+                key: dict(value)
+                for key, value in V21_PARAMETERS.items()
+            },
+        },
+        "search_capability_delta": {
+            "cem": {
+                "family_champion_elite_admission": True,
+                "mechanism_stratified_elite_frontier": True,
+                "skeleton_stratified_elite_frontier": True,
+                "only_ordering_authority": "pair_reward",
+            },
+            "evolution": {
+                "one_population_champion_per_behavior_family": True,
+                "bounded_skeleton_cells": True,
+                "cross_skeleton_crossover_preferred_when_compatible": True,
+                "checkpoint_operator_family_productivity_update": True,
+                "operator_probability_floor": float(
+                    V21_PARAMETERS["behavior_niched_evolution_v2_1"][
+                        "operator_productivity_floor"
+                    ]
+                ),
+                "parent_tournament_authority": "pair_reward",
+            },
+            "new_ast": False,
+            "new_compiler": False,
+            "new_evaluator": False,
+            "new_scheduler": False,
+        },
+        "elite_authority": {
+            "only_ordering_authority": "pair_reward",
+            "niche_admission": [
+                "behavior_family_champion",
+                "mechanism_family_frontier",
+                "skeleton_variant_frontier",
+            ],
+            "equal_reward_tie_break": [
+                "arm_seed_policy_local_behavior_family_count",
+                "candidate_id",
+            ],
+            "diagnostic_only": [
+                "turnover",
+                "cost_killed",
+                "failure_layer",
+            ],
+        },
+        "budget": {
+            "strict_evaluated_target": V11_STRICT_TARGET,
+            "raw_generation_attempts_maximum": V11_RAW_ATTEMPT_LIMIT,
+            "fail_closed_attempt_reservation_per_proposal": (
+                MAX_SINGLE_PROPOSAL_RAW_ATTEMPTS
+            ),
+            "wall_time_seconds_maximum": V11_WALL_TIME_LIMIT_SECONDS,
+            "checkpoint_size": V11_CHECKPOINT_SIZE,
+            "checkpoint_count": V11_CHECKPOINT_COUNT,
+            "workers_default": DEFAULT_WORKERS,
+            "workers_memory_fallback": FALLBACK_WORKERS,
+            "workers_12_forbidden": True,
+        },
+        "decision_authority": {
+            "system_behavior_only": True,
+            "alpha_discovery_claim": False,
+            "future_arm_qualification": False,
+            "data_admission_promotion": False,
+        },
+        "cpu_hour_definition": (
+            "sum process CPU seconds for proposal, compile, archive, and pair "
+            "evaluation; excludes queue and human wait"
+        ),
+        "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
+        "boundaries": {
+            "sealed_reads": 0,
+            "challenge": False,
+            "recent": False,
+            "may_stress": False,
+            "forward": False,
+            "promotion": False,
+            "cross_sprint_adaptive_memory": False,
+            "latent_priority": False,
+            "relational_training": False,
+        },
+    }
+    return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
 @dataclass(slots=True)
 class BehaviorArchive:
     rows: list[dict[str, Any]] = field(default_factory=list)
@@ -1010,6 +1280,9 @@ class HierarchicalTypedCEMV2:
     )
     update_count: int = 0
     step: int = 0
+    last_elite_family_count: int = 0
+    last_elite_mechanism_count: int = 0
+    last_elite_skeleton_count: int = 0
 
     def __post_init__(self) -> None:
         self.parameters = dict(self.parameters)
@@ -1240,7 +1513,10 @@ class HierarchicalTypedCEMV2:
                 break
         assert candidate is not None
         if candidate.candidate_id in self.seen:
-            raise RuntimeError("CEM V2 duplicate resample limit exhausted")
+            raise _ProposalGenerationFailure(
+                "CEM V2 duplicate resample limit exhausted",
+                raw_attempts=limit + 1,
+            )
         self.seen.add(candidate.candidate_id)
         self.step += 1
         return candidate, {
@@ -1264,21 +1540,119 @@ class HierarchicalTypedCEMV2:
         for context in contexts:
             accumulator[axis][str(context)][str(value)] += 1
 
-    def update(self, rows: Sequence[Mapping[str, Any]]) -> None:
-        if not rows:
-            return
+    @staticmethod
+    def _elite_sort_key(row: Mapping[str, Any]) -> tuple[Any, ...]:
+        return (
+            -float(row["pair_reward"]),
+            int(row.get("policy_local_family_count_at_completion", 1)),
+            str(row["candidate_id"]),
+        )
+
+    def _select_elites(
+        self, rows: Sequence[Mapping[str, Any]]
+    ) -> list[Mapping[str, Any]]:
         elite_count = max(
             1,
             int(math.ceil(len(rows) * float(self.parameters["elite_fraction"]))),
         )
-        elites = sorted(
-            rows,
-            key=lambda row: (
-                -float(row["pair_reward"]),
-                int(row.get("policy_local_family_count_at_completion", 1)),
-                str(row["candidate_id"]),
-            ),
-        )[:elite_count]
+        ordered = sorted(rows, key=self._elite_sort_key)
+        if bool(self.parameters.get("behavior_family_champion_elites", False)):
+            champions: list[Mapping[str, Any]] = []
+            seen_families: set[str] = set()
+            for row in ordered:
+                family_id = str(
+                    row.get("behavior_family_id") or row["candidate_id"]
+                )
+                if family_id in seen_families:
+                    continue
+                seen_families.add(family_id)
+                champions.append(row)
+        else:
+            champions = ordered
+        if bool(
+            self.parameters.get("mechanism_stratified_elites", False)
+            or self.parameters.get("skeleton_stratified_elites", False)
+        ):
+            candidate_by_id = {
+                str(row["candidate_id"]): CandidateSpec.from_dict(
+                    json.loads(str(row["candidate_spec_json"]))
+                )
+                for row in champions
+            }
+            selected: list[Mapping[str, Any]] = []
+            selected_ids: set[str] = set()
+            if bool(
+                self.parameters.get("mechanism_stratified_elites", False)
+            ):
+                best_by_mechanism: dict[str, Mapping[str, Any]] = {}
+                for row in champions:
+                    candidate = candidate_by_id[str(row["candidate_id"])]
+                    best_by_mechanism.setdefault(
+                        candidate.mechanism_family, row
+                    )
+                selected.extend(
+                    sorted(
+                        best_by_mechanism.values(),
+                        key=self._elite_sort_key,
+                    )[:elite_count]
+                )
+                selected_ids.update(
+                    str(row["candidate_id"]) for row in selected
+                )
+            best_by_skeleton: dict[str, Mapping[str, Any]] = {}
+            if bool(
+                self.parameters.get("skeleton_stratified_elites", False)
+            ):
+                for row in champions:
+                    candidate = candidate_by_id[str(row["candidate_id"])]
+                    best_by_skeleton.setdefault(candidate.skeleton_id, row)
+                for row in sorted(
+                    best_by_skeleton.values(), key=self._elite_sort_key
+                ):
+                    if len(selected) >= elite_count:
+                        break
+                    if str(row["candidate_id"]) in selected_ids:
+                        continue
+                    selected.append(row)
+                    selected_ids.add(str(row["candidate_id"]))
+            for row in champions:
+                if len(selected) >= elite_count:
+                    break
+                if str(row["candidate_id"]) in selected_ids:
+                    continue
+                selected.append(row)
+                selected_ids.add(str(row["candidate_id"]))
+            elites = sorted(selected, key=self._elite_sort_key)
+        else:
+            elites = champions[:elite_count]
+        self.last_elite_family_count = len(
+            {
+                str(row.get("behavior_family_id") or row["candidate_id"])
+                for row in elites
+            }
+        )
+        self.last_elite_mechanism_count = len(
+            {
+                CandidateSpec.from_dict(
+                    json.loads(str(row["candidate_spec_json"]))
+                ).mechanism_family
+                for row in elites
+            }
+        )
+        self.last_elite_skeleton_count = len(
+            {
+                CandidateSpec.from_dict(
+                    json.loads(str(row["candidate_spec_json"]))
+                ).skeleton_id
+                for row in elites
+            }
+        )
+        return elites
+
+    def update(self, rows: Sequence[Mapping[str, Any]]) -> None:
+        if not rows:
+            return
+        elites = self._select_elites(rows)
         accumulator: dict[str, dict[str, Counter[str]]] = defaultdict(
             lambda: defaultdict(Counter)
         )
@@ -1406,6 +1780,11 @@ class HierarchicalTypedCEMV2:
             },
             "update_count": int(self.update_count),
             "step": int(self.step),
+            "last_elite_family_count": int(self.last_elite_family_count),
+            "last_elite_mechanism_count": int(
+                self.last_elite_mechanism_count
+            ),
+            "last_elite_skeleton_count": int(self.last_elite_skeleton_count),
         }
 
     def state_hash(self) -> str:
@@ -1430,6 +1809,15 @@ class HierarchicalTypedCEMV2:
         )
         policy.update_count = int(state["update_count"])
         policy.step = int(state["step"])
+        policy.last_elite_family_count = int(
+            state.get("last_elite_family_count", 0)
+        )
+        policy.last_elite_mechanism_count = int(
+            state.get("last_elite_mechanism_count", 0)
+        )
+        policy.last_elite_skeleton_count = int(
+            state.get("last_elite_skeleton_count", 0)
+        )
         return policy
 
 
@@ -1450,6 +1838,14 @@ class TypedEvolutionV2:
     verified_skeleton_mutations: int = 0
     verified_crossovers: int = 0
     duplicate_replacements: int = 0
+    operation_probabilities: dict[str, float] = field(init=False)
+    operator_productivity: dict[str, dict[str, int]] = field(
+        default_factory=lambda: {
+            operation: {"trials": 0, "new_families": 0}
+            for operation in EVOLUTION_OPERATIONS
+        }
+    )
+    operator_update_count: int = 0
 
     def __post_init__(self) -> None:
         self.parameters = dict(self.parameters)
@@ -1478,6 +1874,32 @@ class TypedEvolutionV2:
             self.parameters["population_limit"]
         ):
             raise ValueError("Evolution V2 mechanism cell limit is invalid")
+        skeleton_cell_limit = int(
+            self.parameters.get(
+                "skeleton_cell_limit", self.parameters["population_limit"]
+            )
+        )
+        if not 1 <= skeleton_cell_limit <= int(
+            self.parameters["population_limit"]
+        ):
+            raise ValueError("Evolution V2 skeleton cell limit is invalid")
+        floor = float(self.parameters.get("operator_productivity_floor", 0.0))
+        if bool(self.parameters.get("operator_productivity_adaptation", False)):
+            if not 0.0 <= floor < 1.0 / len(EVOLUTION_OPERATIONS):
+                raise ValueError(
+                    "Evolution V2 operator productivity floor is invalid"
+                )
+        self.operation_probabilities = {
+            "EFFECTIVE_GENE_MUTATION_1_TO_3": float(
+                self.parameters["gene_mutation_probability"]
+            ),
+            "COMPATIBLE_SKELETON_VARIANT_MUTATION": float(
+                self.parameters["skeleton_variant_mutation_probability"]
+            ),
+            "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER": float(
+                self.parameters["homologous_crossover_probability"]
+            ),
+        }
 
     def _candidate(self, record: Mapping[str, Any]) -> CandidateSpec:
         return CandidateSpec.from_dict(record["candidate"])
@@ -1539,6 +1961,54 @@ class TypedEvolutionV2:
         }
         return {**core, "receipt_sha256": _payload_sha(core)}
 
+    def update_operator_productivity(
+        self, rows: Sequence[Mapping[str, Any]]
+    ) -> None:
+        if not bool(
+            self.parameters.get("operator_productivity_adaptation", False)
+        ):
+            return
+        checkpoint_productivity = {
+            operation: Counter(trials=0, new_families=0)
+            for operation in EVOLUTION_OPERATIONS
+        }
+        for row in rows:
+            operation = str(row.get("operation", ""))
+            if operation not in checkpoint_productivity:
+                continue
+            stats = checkpoint_productivity[operation]
+            stats["trials"] += 1
+            stats["new_families"] += int(
+                bool(
+                    row.get(
+                        "new_policy_local_behavior_family_at_completion",
+                        False,
+                    )
+                )
+            )
+        self.operator_productivity = checkpoint_productivity
+        prior_successes = int(
+            self.parameters["operator_productivity_prior_successes"]
+        )
+        prior_trials = int(
+            self.parameters["operator_productivity_prior_trials"]
+        )
+        scores = {
+            operation: (
+                int(stats["new_families"]) + prior_successes
+            )
+            / (int(stats["trials"]) + prior_trials)
+            for operation, stats in sorted(self.operator_productivity.items())
+        }
+        total = float(sum(scores.values()))
+        floor = float(self.parameters["operator_productivity_floor"])
+        remaining = 1.0 - floor * len(EVOLUTION_OPERATIONS)
+        self.operation_probabilities = {
+            operation: floor + remaining * float(scores[operation]) / total
+            for operation in EVOLUTION_OPERATIONS
+        }
+        self.operator_update_count += 1
+
     def _mutate_genes(
         self, parent: CandidateSpec
     ) -> tuple[CandidateSpec, dict[str, Any]]:
@@ -1581,7 +2051,10 @@ class TypedEvolutionV2:
                             "internal_generation_attempts": internal_attempt,
                         },
                     )
-        raise RuntimeError("Evolution V2 could not produce an effective 1-3 gene mutation")
+        raise _ProposalGenerationFailure(
+            "Evolution V2 could not produce an effective 1-3 gene mutation",
+            raw_attempts=int(self.parameters["duplicate_resample_limit"]) + 1,
+        )
 
     def _mutate_skeleton(
         self, parent: CandidateSpec
@@ -1616,7 +2089,10 @@ class TypedEvolutionV2:
                         "internal_generation_attempts": internal_attempt,
                     },
                 )
-        raise RuntimeError("Evolution V2 has no compatible skeleton variant mutation")
+        raise _ProposalGenerationFailure(
+            "Evolution V2 has no compatible skeleton variant mutation",
+            raw_attempts=max(1, len(targets)),
+        )
 
     def _crossover(
         self, first: CandidateSpec, second: CandidateSpec
@@ -1667,7 +2143,10 @@ class TypedEvolutionV2:
                     "internal_generation_attempts": internal_attempt,
                 },
             )
-        raise RuntimeError("Evolution V2 could not produce a compatible crossover")
+        raise _ProposalGenerationFailure(
+            "Evolution V2 could not produce a compatible crossover",
+            raw_attempts=max(1, len(points)),
+        )
 
     def verify_receipt(
         self,
@@ -1803,9 +2282,15 @@ class TypedEvolutionV2:
                 operation = "TYPED_RANDOM_WARMUP"
             else:
                 draw = self.rng.random()
-                gene_probability = float(self.parameters["gene_mutation_probability"])
+                gene_probability = float(
+                    self.operation_probabilities[
+                        "EFFECTIVE_GENE_MUTATION_1_TO_3"
+                    ]
+                )
                 skeleton_probability = float(
-                    self.parameters["skeleton_variant_mutation_probability"]
+                    self.operation_probabilities[
+                        "COMPATIBLE_SKELETON_VARIANT_MUTATION"
+                    ]
                 )
                 first = self._parent()
                 if draw < gene_probability:
@@ -1827,6 +2312,23 @@ class TypedEvolutionV2:
                         ).field_roles
                         == first_roles
                     ]
+                    if bool(
+                        self.parameters.get(
+                            "prefer_cross_skeleton_crossover", False
+                        )
+                    ):
+                        cross_skeleton = [
+                            candidate_id
+                            for candidate_id in compatible
+                            if str(
+                                self.population[candidate_id]["candidate"][
+                                    "skeleton_id"
+                                ]
+                            )
+                            != first.skeleton_id
+                        ]
+                        if cross_skeleton:
+                            compatible = cross_skeleton
                     if not compatible:
                         candidate, receipt = self._mutate_genes(first)
                         parents = (first,)
@@ -1842,7 +2344,10 @@ class TypedEvolutionV2:
                 break
         assert candidate is not None
         if candidate.candidate_id in self.seen:
-            raise RuntimeError("Evolution V2 duplicate resample limit exhausted")
+            raise _ProposalGenerationFailure(
+                "Evolution V2 duplicate resample limit exhausted",
+                raw_attempts=compile_attempts,
+            )
         verified = (
             self.verify_receipt(parents, candidate, receipt)
             if receipt is not None
@@ -1884,6 +2389,7 @@ class TypedEvolutionV2:
             "pair_reward": float(archive_row["pair_reward"]),
             "behavior_family_id": family_id,
             "mechanism_family": candidate.mechanism_family,
+            "skeleton_id": candidate.skeleton_id,
             "root_lineage_ids": root_lineage_ids,
         }
         family_members = [
@@ -1908,7 +2414,9 @@ class TypedEvolutionV2:
         if keep_new:
             self.population[candidate.candidate_id] = candidate_record
         limit = int(self.parameters["population_limit"])
-        if len(self.population) > limit:
+        if len(self.population) > limit or (
+            "skeleton_cell_limit" in self.parameters and self.population
+        ):
             ordered = sorted(
                 self.population,
                 key=lambda candidate_id: (
@@ -1917,16 +2425,30 @@ class TypedEvolutionV2:
                 ),
             )
             cell_limit = int(self.parameters["mechanism_cell_limit"])
+            skeleton_cell_limit = int(
+                self.parameters.get("skeleton_cell_limit", limit)
+            )
             mechanism_counts: Counter[str] = Counter()
+            skeleton_counts: Counter[str] = Counter()
             retained: list[str] = []
             for candidate_id in ordered:
                 mechanism = str(
                     self.population[candidate_id]["mechanism_family"]
                 )
-                if mechanism_counts[mechanism] >= cell_limit:
+                skeleton_id = str(
+                    self.population[candidate_id].get(
+                        "skeleton_id",
+                        self.population[candidate_id]["candidate"]["skeleton_id"],
+                    )
+                )
+                if (
+                    mechanism_counts[mechanism] >= cell_limit
+                    or skeleton_counts[skeleton_id] >= skeleton_cell_limit
+                ):
                     continue
                 retained.append(candidate_id)
                 mechanism_counts[mechanism] += 1
+                skeleton_counts[skeleton_id] += 1
                 if len(retained) == limit:
                     break
             self.population = {
@@ -1944,6 +2466,18 @@ class TypedEvolutionV2:
     def population_diagnostics(self) -> dict[str, Any]:
         mechanism_occupancy = Counter(
             str(record.get("mechanism_family", ""))
+            for record in self.population.values()
+        )
+        skeleton_occupancy = Counter(
+            str(
+                record.get(
+                    "skeleton_id", record["candidate"]["skeleton_id"]
+                )
+            )
+            for record in self.population.values()
+        )
+        family_occupancy = Counter(
+            str(record.get("behavior_family_id", ""))
             for record in self.population.values()
         )
         root_counts: Counter[str] = Counter()
@@ -1968,6 +2502,21 @@ class TypedEvolutionV2:
                 / max(total_root_weight, 1.0)
             ),
             "mechanism_occupancy": dict(sorted(mechanism_occupancy.items())),
+            "skeleton_occupancy": dict(sorted(skeleton_occupancy.items())),
+            "behavior_family_count": len(family_occupancy),
+            "duplicate_family_slots": int(
+                sum(max(0, count - 1) for count in family_occupancy.values())
+            ),
+            "operation_probabilities": dict(
+                sorted(self.operation_probabilities.items())
+            ),
+            "operator_productivity": {
+                operation: dict(stats)
+                for operation, stats in sorted(
+                    self.operator_productivity.items()
+                )
+            },
+            "operator_update_count": int(self.operator_update_count),
         }
 
     def export_state(self) -> dict[str, Any]:
@@ -1987,6 +2536,16 @@ class TypedEvolutionV2:
             "verified_skeleton_mutations": int(self.verified_skeleton_mutations),
             "verified_crossovers": int(self.verified_crossovers),
             "duplicate_replacements": int(self.duplicate_replacements),
+            "operation_probabilities": dict(
+                sorted(self.operation_probabilities.items())
+            ),
+            "operator_productivity": {
+                operation: dict(stats)
+                for operation, stats in sorted(
+                    self.operator_productivity.items()
+                )
+            },
+            "operator_update_count": int(self.operator_update_count),
         }
 
     def state_hash(self) -> str:
@@ -2016,6 +2575,31 @@ class TypedEvolutionV2:
         )
         policy.verified_crossovers = int(state["verified_crossovers"])
         policy.duplicate_replacements = int(state["duplicate_replacements"])
+        policy.operation_probabilities = {
+            str(operation): float(probability)
+            for operation, probability in state.get(
+                "operation_probabilities",
+                policy.operation_probabilities,
+            ).items()
+        }
+        policy.operator_productivity = {
+            operation: {
+                "trials": int(
+                    state.get("operator_productivity", {})
+                    .get(operation, {})
+                    .get("trials", 0)
+                ),
+                "new_families": int(
+                    state.get("operator_productivity", {})
+                    .get(operation, {})
+                    .get("new_families", 0)
+                ),
+            }
+            for operation in EVOLUTION_OPERATIONS
+        }
+        policy.operator_update_count = int(
+            state.get("operator_update_count", 0)
+        )
         return policy
 
 
@@ -2134,6 +2718,20 @@ def _initial_policies(
                 output[key] = TypedEvolutionV2(
                     seed, registry, dict(V2_PARAMETERS["typed_evolution_v2"])
                 )
+            elif arm == "behavior_niched_cem_v2_1":
+                output[key] = HierarchicalTypedCEMV2(
+                    seed,
+                    registry,
+                    dict(V21_PARAMETERS["behavior_niched_cem_v2_1"]),
+                )
+            elif arm == "behavior_niched_evolution_v2_1":
+                output[key] = TypedEvolutionV2(
+                    seed,
+                    registry,
+                    dict(V21_PARAMETERS["behavior_niched_evolution_v2_1"]),
+                )
+            else:
+                raise ValueError(f"unsupported search policy arm: {arm}")
     return output
 
 
@@ -2282,8 +2880,9 @@ def _new_campaign_state(
         "workers": DEFAULT_WORKERS,
         "memory_fallback_used": False,
         "arm_states": {
-            "hierarchical_typed_cem_v2": "ACTIVE",
-            "typed_evolution_v2": "ACTIVE",
+            arm: "ACTIVE"
+            for arm in sorted(arm_set)
+            if arm not in V1_PARAMETERS
         },
         "arm_counters": {
             arm: {
@@ -2418,8 +3017,33 @@ def _metrics_rows(
             if key.startswith(arm + "|") and isinstance(policy, TypedEvolutionV2)
         ]
         mechanism_occupancy: Counter[str] = Counter()
+        skeleton_occupancy: Counter[str] = Counter()
+        operator_productivity: dict[str, Counter[str]] = defaultdict(Counter)
         for diagnostic in evolution_diagnostics:
             mechanism_occupancy.update(diagnostic["mechanism_occupancy"])
+            skeleton_occupancy.update(diagnostic["skeleton_occupancy"])
+            for operation, stats in diagnostic[
+                "operator_productivity"
+            ].items():
+                operator_productivity[operation].update(stats)
+        operation_probabilities = {
+            operation: float(
+                np.mean(
+                    [
+                        diagnostic["operation_probabilities"][operation]
+                        for diagnostic in evolution_diagnostics
+                    ]
+                )
+            )
+            for operation in EVOLUTION_OPERATIONS
+            if evolution_diagnostics
+        }
+        cem_policies = [
+            policy
+            for key, policy in policies.items()
+            if key.startswith(arm + "|")
+            and isinstance(policy, HierarchicalTypedCEMV2)
+        ]
         output.append(
             {
                 "checkpoint_index": int(checkpoint_index),
@@ -2487,6 +3111,18 @@ def _metrics_rows(
                 "top_behavior_family_share": max(families.values(), default=0)
                 / max(1, len(rows)),
                 "cem_entropy_json": json.dumps(entropy_summary, sort_keys=True),
+                "cem_elite_family_count": sum(
+                    policy.last_elite_family_count
+                    for policy in cem_policies
+                ),
+                "cem_elite_mechanism_count": sum(
+                    policy.last_elite_mechanism_count
+                    for policy in cem_policies
+                ),
+                "cem_elite_skeleton_count": sum(
+                    policy.last_elite_skeleton_count
+                    for policy in cem_policies
+                ),
                 "verified_gene_mutations": sum(
                     str(row["operation"]) == "EFFECTIVE_GENE_MUTATION_1_TO_3"
                     and bool(row["receipt_verified"])
@@ -2536,6 +3172,25 @@ def _metrics_rows(
                 ),
                 "mechanism_occupancy_json": json.dumps(
                     dict(sorted(mechanism_occupancy.items())), sort_keys=True
+                ),
+                "skeleton_occupancy_json": json.dumps(
+                    dict(sorted(skeleton_occupancy.items())), sort_keys=True
+                ),
+                "operator_probabilities_json": json.dumps(
+                    operation_probabilities, sort_keys=True
+                ),
+                "operator_productivity_json": json.dumps(
+                    {
+                        operation: dict(sorted(stats.items()))
+                        for operation, stats in sorted(
+                            operator_productivity.items()
+                        )
+                    },
+                    sort_keys=True,
+                ),
+                "operator_update_count": sum(
+                    int(row["operator_update_count"])
+                    for row in evolution_diagnostics
                 ),
                 "arm_state_after_gate": state.get("arm_states", {}).get(
                     arm, "CONTROL_EXITED" if checkpoint_index > 0 else "CONTROL"
@@ -2608,6 +3263,9 @@ def _metrics_rows(
             )
             / max(1, len(ledger)),
             "cem_entropy_json": "{}",
+            "cem_elite_family_count": 0,
+            "cem_elite_mechanism_count": 0,
+            "cem_elite_skeleton_count": 0,
             "verified_gene_mutations": sum(
                 str(row["operation"]) == "EFFECTIVE_GENE_MUTATION_1_TO_3"
                 and bool(row["receipt_verified"])
@@ -2632,6 +3290,10 @@ def _metrics_rows(
             "lineage_entropy": 0.0,
             "top_root_lineage_share": 0.0,
             "mechanism_occupancy_json": "{}",
+            "skeleton_occupancy_json": "{}",
+            "operator_probabilities_json": "{}",
+            "operator_productivity_json": "{}",
+            "operator_update_count": 0,
             "arm_state_after_gate": "RUNNING",
             "exit_gate_json": None,
         }
@@ -2875,6 +3537,12 @@ def _load_checkpoint(
 
 class _EngineBudgetExhausted(RuntimeError):
     pass
+
+
+class _ProposalGenerationFailure(RuntimeError):
+    def __init__(self, message: str, *, raw_attempts: int) -> None:
+        super().__init__(message)
+        self.raw_attempts = int(raw_attempts)
 
 
 def _increment_counter(
@@ -3475,6 +4143,228 @@ data-admission, latent-priority, or relational-training authority.
 """
 
 
+def _v11_final_decision(
+    *,
+    source_sha: str,
+    state: Mapping[str, Any],
+    ledger: Sequence[Mapping[str, Any]],
+    archive: BehaviorArchive,
+    metrics: Sequence[Mapping[str, Any]],
+    runtime_root: Path,
+) -> dict[str, Any]:
+    final_rows = {
+        str(row["arm"]): row
+        for row in metrics
+        if int(row["checkpoint_index"]) == V11_CHECKPOINT_COUNT - 1
+    }
+    random_metrics = final_rows["canonical_typed_random"]
+    comparisons: dict[str, Any] = {}
+    for arm in V11_ARMS[1:]:
+        local = final_rows[arm]
+        comparisons[arm] = {
+            "matched_evaluated_count": int(
+                local["matched_reward_comparison_count"]
+            ),
+            "valid_exact_unique_per_cpu_hour": float(
+                local["valid_exact_unique_per_cpu_hour"]
+            ),
+            "valid_exact_unique_per_cpu_hour_delta": float(
+                local["valid_exact_unique_per_cpu_hour"]
+            )
+            - float(random_metrics["valid_exact_unique_per_cpu_hour"]),
+            "new_behavior_families_per_1k_evaluations": float(
+                local["new_behavior_families_per_1k_evaluations"]
+            ),
+            "new_behavior_families_per_1k_delta": float(
+                local["new_behavior_families_per_1k_evaluations"]
+            )
+            - float(random_metrics["new_behavior_families_per_1k_evaluations"]),
+            "mean_pair_reward_at_matched_count": float(
+                local["mean_pair_reward_at_matched_count"]
+            ),
+            "mean_pair_reward_delta": float(
+                local["mean_pair_reward_at_matched_count"]
+            )
+            - float(random_metrics["mean_pair_reward_at_matched_count"]),
+            "top_decile_pair_reward_at_matched_count": float(
+                local["top_decile_pair_reward_at_matched_count"]
+            ),
+            "top_decile_pair_reward_delta": float(
+                local["top_decile_pair_reward_at_matched_count"]
+            )
+            - float(random_metrics["top_decile_pair_reward_at_matched_count"]),
+            "behavior_duplicate_rate": float(
+                local["behavior_duplicate_rate"]
+            ),
+            "behavior_duplicate_rate_delta": float(
+                local["behavior_duplicate_rate"]
+            )
+            - float(random_metrics["behavior_duplicate_rate"]),
+        }
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    restore_verified = (
+        len(checkpoints) == V11_CHECKPOINT_COUNT
+        and all(
+            bool(_read_json(path / "manifest.json").get("restore_verified"))
+            for path in checkpoints
+        )
+    )
+    arm_counts = Counter(str(row["arm"]) for row in ledger)
+    expected_arm_counts = {
+        arm: count * V11_CHECKPOINT_COUNT
+        for arm, count in V11_CHECKPOINT_ALLOCATION.items()
+    }
+    every_candidate_uses_aggtrades = all(
+        bool(
+            set(json.loads(str(row["raw_fields_json"])))
+            & set(AGGTRADES_SYSTEM_CANARY_FIELDS)
+        )
+        for row in ledger
+    )
+    verified_operations = Counter(
+        str(row["operation"])
+        for row in ledger
+        if str(row["arm"]) == "behavior_niched_evolution_v2_1"
+        and bool(row.get("receipt_verified"))
+    )
+    positive_by_arm = {
+        arm: sum(
+            bool(row["matched_positive"])
+            for row in ledger
+            if str(row["arm"]) == arm
+        )
+        for arm in V11_ARMS
+    }
+    cem = comparisons["behavior_niched_cem_v2_1"]
+    evolution = comparisons["behavior_niched_evolution_v2_1"]
+    cem_pass = bool(
+        cem["valid_exact_unique_per_cpu_hour_delta"] >= 0.0
+        and (
+            cem["new_behavior_families_per_1k_delta"] > 0.0
+            or cem["mean_pair_reward_delta"] > 0.0
+            or cem["top_decile_pair_reward_delta"] > 0.0
+        )
+    )
+    evolution_pass = bool(
+        evolution["new_behavior_families_per_1k_delta"] >= 0.0
+        and evolution["mean_pair_reward_delta"] >= 0.0
+        and evolution["top_decile_pair_reward_delta"] >= 0.0
+        and evolution["behavior_duplicate_rate"] < 0.065
+    )
+    evolution_metrics = final_rows["behavior_niched_evolution_v2_1"]
+    within_budget = bool(
+        int(state["generation_attempts"]) <= V11_RAW_ATTEMPT_LIMIT
+        and float(state["wall_elapsed_seconds"])
+        <= V11_WALL_TIME_LIMIT_SECONDS
+    )
+    engineering_pass = bool(
+        len(ledger) == V11_STRICT_TARGET
+        and dict(arm_counts) == expected_arm_counts
+        and every_candidate_uses_aggtrades
+        and restore_verified
+        and int(evolution_metrics["operator_update_count"]) > 0
+        and within_budget
+    )
+    return {
+        "schema_version": 1,
+        "epoch_id": V11_EPOCH_ID,
+        "status": (
+            "PASS_SEARCH_ENGINE_V1_1_COMPLETED"
+            if engineering_pass
+            else "ENGINE_BUDGET_EXHAUSTED"
+            if not within_budget
+            else "HOLD_SEARCH_ENGINE_V1_1_INCOMPLETE"
+        ),
+        "research_decision": "HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT",
+        "producer_source_sha": source_sha,
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": int(state["generation_attempts"]),
+        "raw_attempt_limit": V11_RAW_ATTEMPT_LIMIT,
+        "active_wall_seconds": float(state["wall_elapsed_seconds"]),
+        "wall_time_limit_seconds": V11_WALL_TIME_LIMIT_SECONDS,
+        "checkpoint_count": len(checkpoints),
+        "checkpoint_restore_verified": restore_verified,
+        "arm_counts": dict(sorted(arm_counts.items())),
+        "expected_arm_counts": expected_arm_counts,
+        "every_candidate_uses_aggtrades": every_candidate_uses_aggtrades,
+        "behavior_family_count": len(archive.champion_by_family),
+        "behavior_duplicate_rate": 1.0
+        - len(archive.champion_by_family) / max(1, len(ledger)),
+        "archive_duplicate_replacements": archive.duplicate_replacements,
+        "system_comparisons_vs_typed_random": comparisons,
+        "positive_matched_discoveries_by_arm": positive_by_arm,
+        "verified_evolution_operations": dict(
+            sorted(verified_operations.items())
+        ),
+        "final_evolution_operator_probabilities": json.loads(
+            str(evolution_metrics["operator_probabilities_json"])
+        ),
+        "final_evolution_operator_productivity": json.loads(
+            str(evolution_metrics["operator_productivity_json"])
+        ),
+        "search_iteration_decision": {
+            "behavior_niched_cem_v2_1": (
+                "RETAIN_ENGINEERING_SEARCH_INCREMENT"
+                if cem_pass
+                else "REJECT_INCREMENT_NOT_DEMONSTRATED"
+            ),
+            "behavior_niched_evolution_v2_1": (
+                "RETAIN_ENGINEERING_SEARCH_INCREMENT"
+                if evolution_pass
+                else "REJECT_INCREMENT_NOT_DEMONSTRATED"
+            ),
+        },
+        "engineering_execution_qualified_arms": list(V11_ARMS),
+        "future_new_data_arena_qualified_arms": [],
+        "promotion": "FORBIDDEN",
+        "sealed_reads": 0,
+        "next_arena_started": False,
+        "cannot_conclude": [
+            "unbiased cross-sectional Alpha",
+            "fresh economic increment",
+            "OOS validity",
+            "challenge, recent, May-stress, or forward evidence",
+            "candidate, arm, or component promotion",
+        ],
+    }
+
+
+def _v11_report_text(decision: Mapping[str, Any]) -> str:
+    comparisons = decision["system_comparisons_vs_typed_random"]
+    cem = comparisons["behavior_niched_cem_v2_1"]
+    evolution = comparisons["behavior_niched_evolution_v2_1"]
+    return f"""# Crypto Search Engine V1.1 Behavior-Niched Arena
+
+- Status: `{decision['status']}`
+- Research decision: `{decision['research_decision']}`
+- Producer source: `{decision['producer_source_sha']}`
+- Strict completed: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
+- Checkpoints: `{decision['checkpoint_count']}/{V11_CHECKPOINT_COUNT}`, exact restore verified: `{decision['checkpoint_restore_verified']}`.
+- Behavior families: `{decision['behavior_family_count']:,}`; duplicate rate `{decision['behavior_duplicate_rate']:.2%}`.
+- Positive matched discoveries by arm: `{json.dumps(decision['positive_matched_discoveries_by_arm'], sort_keys=True)}`.
+
+## Equal-count system comparison versus typed random
+
+| Arm | valid unique / CPU-hour delta | new families / 1k | delta | mean reward delta | top-decile delta | duplicate rate |
+|---|---:|---:|---:|---:|---:|---:|
+| Behavior-Niched CEM V2.1 | {cem['valid_exact_unique_per_cpu_hour_delta']:.6f} | {cem['new_behavior_families_per_1k_evaluations']:.3f} | {cem['new_behavior_families_per_1k_delta']:.3f} | {cem['mean_pair_reward_delta']:.8f} | {cem['top_decile_pair_reward_delta']:.8f} | {cem['behavior_duplicate_rate']:.2%} |
+| Behavior-Niched Evolution V2.1 | {evolution['valid_exact_unique_per_cpu_hour_delta']:.6f} | {evolution['new_behavior_families_per_1k_evaluations']:.3f} | {evolution['new_behavior_families_per_1k_delta']:.3f} | {evolution['mean_pair_reward_delta']:.8f} | {evolution['top_decile_pair_reward_delta']:.8f} | {evolution['behavior_duplicate_rate']:.2%} |
+
+## System decision
+
+- CEM V2.1: `{decision['search_iteration_decision']['behavior_niched_cem_v2_1']}`
+- Evolution V2.1: `{decision['search_iteration_decision']['behavior_niched_evolution_v2_1']}`
+- Future new-data Arena arms: `[]`
+
+This fixed, spent-development Arena evaluates search capability only. It
+creates no Alpha, OOS, challenge, recent, May-stress, forward, promotion,
+data-admission, latent-priority, relational-training, or future-Arena
+qualification authority.
+"""
+
+
 def _final_manifest(
     *,
     repo_root: Path,
@@ -3540,10 +4430,35 @@ def run_engine(
     source_sha: str | None = None,
     campaign: str = "legacy",
 ) -> dict[str, Any]:
-    if campaign not in {"legacy", "aggtrades_system_canary"}:
+    if campaign not in {
+        "legacy",
+        "aggtrades_system_canary",
+        "search_engine_v1_1",
+    }:
         raise ValueError(f"unsupported Search Engine V1 campaign: {campaign}")
     is_canary = campaign == "aggtrades_system_canary"
-    if is_canary:
+    is_v11 = campaign == "search_engine_v1_1"
+    is_system_campaign = is_canary or is_v11
+    if is_v11:
+        if runtime_date != V11_DEFAULT_RUNTIME_DATE:
+            raise ValueError(
+                "Search Engine V1.1 is authorized only for runtime date "
+                f"{V11_DEFAULT_RUNTIME_DATE}"
+            )
+        runtime_root = (
+            repo_root / f"runtime/crypto_search_engine_v1_1_{runtime_date}"
+        )
+        report_path = (
+            repo_root / f"reports/CRYPTO_SEARCH_ENGINE_V1_1_{runtime_date}.md"
+        )
+        strict_target = V11_STRICT_TARGET
+        checkpoint_count = V11_CHECKPOINT_COUNT
+        checkpoint_size = V11_CHECKPOINT_SIZE
+        raw_attempt_limit = V11_RAW_ATTEMPT_LIMIT
+        wall_time_limit = V11_WALL_TIME_LIMIT_SECONDS
+        campaign_arms = V11_ARMS
+        block_role = "SPENT_DEVELOPMENT_SEARCH_ENGINE_V1_1_SYSTEM_ONLY"
+    elif is_canary:
         runtime_root = (
             repo_root
             / f"runtime/crypto_aggtrades_system_canary_v1_{runtime_date}"
@@ -3579,7 +4494,13 @@ def run_engine(
         raise RuntimeError(
             "Search Engine V1 requires a clean producer tree; only its runtime/report may exist"
         )
-    if is_canary:
+    if is_v11:
+        store, contracts, behavior_contract, input_identities, continuation = (
+            _load_v11_inputs(repo_root)
+        )
+        block_start = str(continuation["window"]["start"])
+        block_end = str(continuation["window"]["end_exclusive"])
+    elif is_canary:
         store, contracts, behavior_contract, input_identities, continuation = (
             _load_aggtrades_canary_inputs(repo_root)
         )
@@ -3594,7 +4515,16 @@ def run_engine(
     registry = TypedExpressionRegistry(contracts)
     compiler_binding = _compiler_binding(repo_root)
     environment = _environment_fingerprint()
-    if is_canary:
+    if is_v11:
+        frozen = _v11_frozen_contract(
+            source_sha=source_sha,
+            compiler_binding=compiler_binding,
+            behavior_contract=behavior_contract,
+            input_identities=input_identities,
+            environment=environment,
+            config=continuation,
+        )
+    elif is_canary:
         frozen = _aggtrades_canary_frozen_contract(
             source_sha=source_sha,
             compiler_binding=compiler_binding,
@@ -3618,7 +4548,7 @@ def run_engine(
     }
     cache_root = (
         repo_root / str(continuation["cache"]["root"])
-        if is_canary
+        if is_system_campaign
         else repo_root / str(continuation["cache_root"])
     )
 
@@ -3717,7 +4647,9 @@ def run_engine(
             int(state["next_checkpoint_index"]), checkpoint_count
         ):
             allocation = (
-                dict(AGGTRADES_CANARY_CHECKPOINT_ALLOCATION)
+                dict(V11_CHECKPOINT_ALLOCATION)
+                if is_v11
+                else dict(AGGTRADES_CANARY_CHECKPOINT_ALLOCATION)
                 if is_canary
                 else _checkpoint_allocation(
                     checkpoint_index, state["arm_states"]
@@ -3792,7 +4724,21 @@ def run_engine(
                         candidate, metadata = _policy_propose(policy, archive)
                     except (RuntimeError, ValueError) as failure:
                         proposal_cpu = time.process_time() - proposal_cpu_started
-                        _increment_counter(state, arm, "generation_attempts", 1)
+                        failed_raw_attempts = int(
+                            getattr(failure, "raw_attempts", 1)
+                        )
+                        _increment_counter(
+                            state,
+                            arm,
+                            "generation_attempts",
+                            failed_raw_attempts,
+                        )
+                        _increment_counter(
+                            state,
+                            arm,
+                            "compile_valid",
+                            failed_raw_attempts,
+                        )
                         state["arm_counters"][arm]["cpu_seconds"] += proposal_cpu
                         _failure(
                             state,
@@ -3826,7 +4772,7 @@ def run_engine(
                         )
                         continue
                     attempted_ids.add(candidate.candidate_id)
-                    if is_canary and not (
+                    if is_system_campaign and not (
                         set(candidate.raw_fields)
                         & set(AGGTRADES_SYSTEM_CANARY_FIELDS)
                     ):
@@ -4007,6 +4953,13 @@ def run_engine(
                         )
                 state["attempted_exact_ids"] = sorted(attempted_ids)
                 state["wall_elapsed_seconds"] = active_elapsed()
+                if (
+                    int(state["generation_attempts"]) > raw_attempt_limit
+                    or float(state["wall_elapsed_seconds"]) > wall_time_limit
+                ):
+                    raise _EngineBudgetExhausted(
+                        "RAW_OR_WALL_BUDGET_EXCEEDED_AFTER_WORKER_BATCH"
+                    )
                 if len(ledger) % 100 == 0:
                     print(
                         json.dumps(
@@ -4032,19 +4985,43 @@ def run_engine(
                 for row in ledger
                 if int(row["checkpoint_index"]) == checkpoint_index
             ]
+            cem_arms = tuple(
+                arm
+                for arm in campaign_arms
+                if arm
+                in {
+                    "hierarchical_typed_cem_v2",
+                    "behavior_niched_cem_v2_1",
+                }
+            )
+            evolution_adaptation_arms = tuple(
+                arm
+                for arm in campaign_arms
+                if arm == "behavior_niched_evolution_v2_1"
+            )
             for seed in SEEDS:
-                policy = policies[
-                    _policy_key("hierarchical_typed_cem_v2", seed)
-                ]
-                assert isinstance(policy, HierarchicalTypedCEMV2)
-                policy.update(
-                    [
-                        row
-                        for row in checkpoint_rows
-                        if row["arm"] == "hierarchical_typed_cem_v2"
-                        and int(row["seed"]) == seed
-                    ]
-                )
+                for arm in cem_arms:
+                    policy = policies[_policy_key(arm, seed)]
+                    assert isinstance(policy, HierarchicalTypedCEMV2)
+                    policy.update(
+                        [
+                            row
+                            for row in checkpoint_rows
+                            if row["arm"] == arm
+                            and int(row["seed"]) == seed
+                        ]
+                    )
+                for arm in evolution_adaptation_arms:
+                    policy = policies[_policy_key(arm, seed)]
+                    assert isinstance(policy, TypedEvolutionV2)
+                    policy.update_operator_productivity(
+                        [
+                            row
+                            for row in checkpoint_rows
+                            if row["arm"] == arm
+                            and int(row["seed"]) == seed
+                        ]
+                    )
             state["next_checkpoint_index"] = checkpoint_index + 1
             state["wall_elapsed_seconds"] = active_elapsed()
             checkpoint_metrics = _metrics_rows(
@@ -4054,12 +5031,16 @@ def run_engine(
                 state=state,
                 policies=policies,
                 comparison_arms=(
-                    AGGTRADES_CANARY_ARMS if is_canary else None
+                    V11_ARMS
+                    if is_v11
+                    else AGGTRADES_CANARY_ARMS
+                    if is_canary
+                    else None
                 ),
             )
             gates = (
                 {}
-                if is_canary
+                if is_system_campaign
                 else _apply_exit_gate(
                     checkpoint_index=checkpoint_index,
                     checkpoint_metrics=checkpoint_metrics,
@@ -4155,7 +5136,16 @@ def run_engine(
         )
     state["wall_elapsed_seconds"] = active_elapsed()
     decision = (
-        _aggtrades_canary_final_decision(
+        _v11_final_decision(
+            source_sha=source_sha,
+            state=state,
+            ledger=ledger,
+            archive=archive,
+            metrics=metrics,
+            runtime_root=runtime_root,
+        )
+        if is_v11
+        else _aggtrades_canary_final_decision(
             source_sha=source_sha,
             state=state,
             ledger=ledger,
@@ -4177,7 +5167,9 @@ def run_engine(
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
         (
-            _aggtrades_canary_report_text(decision)
+            _v11_report_text(decision)
+            if is_v11
+            else _aggtrades_canary_report_text(decision)
             if is_canary
             else _report_text(decision)
         ),
@@ -4193,11 +5185,18 @@ def run_engine(
         identities=identities,
         state=state,
         epoch_id=(
-            AGGTRADES_CANARY_EPOCH_ID if is_canary else EPOCH_ID
+            V11_EPOCH_ID
+            if is_v11
+            else AGGTRADES_CANARY_EPOCH_ID
+            if is_canary
+            else EPOCH_ID
         ),
-        base_sha=(source_sha if is_canary else BASE_SHA),
+        base_sha=(source_sha if is_system_campaign else BASE_SHA),
         continuation=(
             "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+            f"check-v11 --runtime-date {runtime_date}"
+            if is_v11
+            else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
             f"check-canary --runtime-date {runtime_date}"
             if is_canary
             else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
@@ -4205,8 +5204,16 @@ def run_engine(
         ),
     )
     _write_json(runtime_root / "run_manifest.json", manifest)
+    run_result = (
+        "PASS"
+        if not is_v11
+        or decision["status"] == "PASS_SEARCH_ENGINE_V1_1_COMPLETED"
+        else "ENGINE_BUDGET_EXHAUSTED"
+        if decision["status"] == "ENGINE_BUDGET_EXHAUSTED"
+        else "FAIL"
+    )
     return {
-        "result": "PASS",
+        "result": run_result,
         "status": decision["status"],
         "producer_source_sha": source_sha,
         "strict_evaluated_count": len(ledger),
@@ -4682,6 +5689,343 @@ def check_aggtrades_canary(
     }
 
 
+def check_v11(
+    repo_root: Path,
+    *,
+    runtime_date: str = V11_DEFAULT_RUNTIME_DATE,
+) -> dict[str, Any]:
+    runtime_root = repo_root / f"runtime/crypto_search_engine_v1_1_{runtime_date}"
+    report_path = repo_root / f"reports/CRYPTO_SEARCH_ENGINE_V1_1_{runtime_date}.md"
+    errors: list[str] = []
+    required = (
+        "frozen_contract.json",
+        "embedded_preflight.json",
+        "candidate_ledger.parquet",
+        "behavior_archive.parquet",
+        "behavior_family_summary.json",
+        "arm_checkpoint_metrics.parquet",
+        "final_decision.json",
+        "run_manifest.json",
+    )
+    for name in required:
+        if not (runtime_root / name).is_file():
+            errors.append(f"missing:{name}")
+    if not report_path.is_file():
+        errors.append("missing:report")
+    if errors:
+        return {"result": "FAIL", "errors": errors}
+    frozen = _read_json(runtime_root / "frozen_contract.json")
+    decision = _read_json(runtime_root / "final_decision.json")
+    manifest = _read_json(runtime_root / "run_manifest.json")
+    preflight = _read_json(runtime_root / "embedded_preflight.json")
+    ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
+    archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
+    metrics = pd.read_parquet(runtime_root / "arm_checkpoint_metrics.parquet")
+    family_summary = _read_json(runtime_root / "behavior_family_summary.json")
+    frozen_without_hash = {
+        key: value
+        for key, value in frozen.items()
+        if key != "frozen_contract_sha256"
+    }
+    if _payload_sha(frozen_without_hash) != frozen.get("frozen_contract_sha256"):
+        errors.append("frozen_contract_sha256")
+    if frozen.get("authorization") != (
+        "ONE_FRESH_STATE_3000_SPENT_DEVELOPMENT_SEARCH_ENGINE_V1_1"
+    ):
+        errors.append("authorization")
+    if frozen.get("surface", {}).get(
+        "every_candidate_requires_aggtrades_input"
+    ) is not True:
+        errors.append("aggtrades_candidate_gate")
+    fresh_state = frozen.get("fresh_state", {})
+    if any(bool(value) for value in fresh_state.values()):
+        errors.append("fresh_state_import")
+    boundaries = frozen.get("boundaries", {})
+    if boundaries.get("sealed_reads") != 0 or any(
+        bool(boundaries.get(key))
+        for key in (
+            "challenge",
+            "recent",
+            "may_stress",
+            "forward",
+            "promotion",
+            "cross_sprint_adaptive_memory",
+            "latent_priority",
+            "relational_training",
+        )
+    ):
+        errors.append("sealed_boundary")
+    if preflight.get("workers_selected") not in {
+        DEFAULT_WORKERS,
+        FALLBACK_WORKERS,
+    }:
+        errors.append("worker_selection")
+    if preflight.get("strict_candidates_consumed_outside_campaign") != 0:
+        errors.append("preflight_external_budget")
+    if len(ledger) != V11_STRICT_TARGET:
+        errors.append("strict_count")
+    if ledger["candidate_id"].nunique() != V11_STRICT_TARGET:
+        errors.append("exact_unique")
+    for column in (
+        "compile_valid",
+        "exact_unique",
+        "matched_control_valid",
+        "strict_cost_evaluated",
+        "expression_hash_verified",
+    ):
+        if column not in ledger or not bool(ledger[column].fillna(False).all()):
+            errors.append(f"ledger_gate:{column}")
+    if not all(
+        bool(
+            set(json.loads(str(value)))
+            & set(AGGTRADES_SYSTEM_CANARY_FIELDS)
+        )
+        for value in ledger["raw_fields_json"]
+    ):
+        errors.append("candidate_without_aggtrades")
+    arm_counts = ledger.groupby("arm").size().to_dict()
+    expected_arm_counts = {
+        arm: count * V11_CHECKPOINT_COUNT
+        for arm, count in V11_CHECKPOINT_ALLOCATION.items()
+    }
+    if arm_counts != expected_arm_counts:
+        errors.append("arm_counts")
+    expected_lane_count = next(iter(V11_CHECKPOINT_ALLOCATION.values())) // len(
+        SEEDS
+    )
+    for checkpoint_index in range(V11_CHECKPOINT_COUNT):
+        local = (
+            ledger[ledger["checkpoint_index"].astype(int).eq(checkpoint_index)]
+            .groupby("arm")
+            .size()
+            .to_dict()
+        )
+        if local != V11_CHECKPOINT_ALLOCATION:
+            errors.append(f"checkpoint_arm_counts:{checkpoint_index}")
+        lane_counts = (
+            ledger[
+                ledger["checkpoint_index"].astype(int).eq(checkpoint_index)
+            ]
+            .groupby(["arm", "seed"])
+            .size()
+            .to_dict()
+        )
+        expected_lanes = {
+            (arm, seed): expected_lane_count
+            for arm in V11_ARMS
+            for seed in SEEDS
+        }
+        if lane_counts != expected_lanes:
+            errors.append(f"checkpoint_arm_seed_counts:{checkpoint_index}")
+    broad_contracts, _, _ = _broad39_registry_contracts(repo_root)
+    replay_registry = TypedExpressionRegistry(
+        tuple((*broad_contracts, *_aggtrades_canary_contracts()))
+    )
+    replay_policy = TypedEvolutionV2(
+        0,
+        replay_registry,
+        V21_PARAMETERS["behavior_niched_evolution_v2_1"],
+    )
+    candidates_by_id = {
+        str(row["candidate_id"]): CandidateSpec.from_dict(
+            json.loads(str(row["candidate_spec_json"]))
+        )
+        for row in ledger.to_dict("records")
+    }
+    receipt_rows = ledger[ledger["receipt_json"].notna()]
+    if receipt_rows.empty or not bool(
+        receipt_rows["receipt_verified"].eq(True).all()
+    ):
+        errors.append("receipt_verification")
+    for row in receipt_rows.to_dict("records"):
+        try:
+            child = candidates_by_id[str(row["candidate_id"])]
+            parent_ids = json.loads(str(row["parent_ids_json"]))
+            parents = tuple(
+                candidates_by_id[str(parent_id)] for parent_id in parent_ids
+            )
+            receipt = json.loads(str(row["receipt_json"]))
+            if not replay_policy.verify_receipt(parents, child, receipt):
+                errors.append(f"receipt_replay:{row['candidate_id']}")
+        except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+            errors.append(f"receipt_replay:{row['candidate_id']}")
+    for operation in EVOLUTION_OPERATIONS:
+        if not bool(ledger["operation"].eq(operation).any()):
+            errors.append(f"operation_not_executed:{operation}")
+    if len(archive) != V11_STRICT_TARGET:
+        errors.append("archive_row_count")
+    champions = archive[archive["is_family_champion"].fillna(False)]
+    if champions["behavior_family_id"].nunique() != archive[
+        "behavior_family_id"
+    ].nunique():
+        errors.append("archive_family_champion")
+    if family_summary.get("family_count") != int(
+        archive["behavior_family_id"].nunique()
+    ):
+        errors.append("family_summary_count")
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    if len(checkpoints) != V11_CHECKPOINT_COUNT:
+        errors.append("checkpoint_count")
+    checkpoint_policy_frontier_verified = True
+    for index, checkpoint in enumerate(checkpoints):
+        checkpoint_manifest = _read_json(checkpoint / "manifest.json")
+        if int(checkpoint_manifest.get("completed_ledger_row_count", -1)) != (
+            index + 1
+        ) * V11_CHECKPOINT_SIZE:
+            errors.append(f"checkpoint_rows:{index}")
+        if checkpoint_manifest.get("restore_verified") is not True:
+            errors.append(f"checkpoint_restore:{index}")
+        for record in checkpoint_manifest.get("files", []):
+            path = checkpoint / str(record["name"])
+            if (
+                not path.is_file()
+                or path.stat().st_size != int(record["bytes"])
+                or sha256_file(path) != str(record["sha256"])
+            ):
+                errors.append(f"checkpoint_file:{index}:{record['name']}")
+        try:
+            _, restored_policies, _, _, _ = _load_checkpoint(
+                checkpoint_path=checkpoint,
+                registry=replay_registry,
+                expected_source_sha=str(frozen["source_sha"]),
+                expected_frozen_hash=str(
+                    frozen["frozen_contract_sha256"]
+                ),
+                expected_identities={
+                    **dict(frozen["input_identities"]),
+                    "compiler_identity": dict(frozen["compiler_identity"]),
+                },
+            )
+            cem_policies = [
+                policy
+                for key, policy in restored_policies.items()
+                if key.startswith("behavior_niched_cem_v2_1|")
+                and isinstance(policy, HierarchicalTypedCEMV2)
+            ]
+            checkpoint_policy_frontier_verified = bool(
+                checkpoint_policy_frontier_verified
+                and len(cem_policies) == len(SEEDS)
+                and all(
+                    policy.parameters.get(
+                        "mechanism_stratified_elites"
+                    )
+                    is True
+                    and policy.parameters.get(
+                        "skeleton_stratified_elites"
+                    )
+                    is True
+                    and policy.last_elite_mechanism_count > 0
+                    and policy.last_elite_skeleton_count > 0
+                    for policy in cem_policies
+                )
+            )
+        except (KeyError, TypeError, ValueError):
+            errors.append(f"checkpoint_state_replay:{index}")
+            checkpoint_policy_frontier_verified = False
+    if not checkpoint_policy_frontier_verified:
+        errors.append("cem_checkpoint_frontier_state")
+    if set(metrics["checkpoint_index"].astype(int).unique()) != set(
+        range(V11_CHECKPOINT_COUNT)
+    ):
+        errors.append("checkpoint_metrics")
+    final_evolution = metrics[
+        metrics["checkpoint_index"].astype(int).eq(V11_CHECKPOINT_COUNT - 1)
+        & metrics["arm"].eq("behavior_niched_evolution_v2_1")
+    ]
+    final_cem = metrics[
+        metrics["checkpoint_index"].astype(int).eq(V11_CHECKPOINT_COUNT - 1)
+        & metrics["arm"].eq("behavior_niched_cem_v2_1")
+    ]
+    if (
+        len(final_evolution) != 1
+        or int(final_evolution.iloc[0]["operator_update_count"]) <= 0
+        or json.loads(
+            str(final_evolution.iloc[0]["operator_probabilities_json"])
+        )
+        == {}
+    ):
+        errors.append("operator_productivity_update")
+    if (
+        len(final_cem) != 1
+        or int(final_cem.iloc[0]["cem_elite_family_count"]) <= 0
+        or int(final_cem.iloc[0]["cem_elite_mechanism_count"]) <= 0
+        or int(final_cem.iloc[0]["cem_elite_skeleton_count"]) <= 0
+    ):
+        errors.append("cem_behavior_niche_update")
+    if int(
+        decision.get("generation_attempts", V11_RAW_ATTEMPT_LIMIT + 1)
+    ) > V11_RAW_ATTEMPT_LIMIT:
+        errors.append("raw_attempt_budget")
+    if float(
+        decision.get(
+            "active_wall_seconds", V11_WALL_TIME_LIMIT_SECONDS + 1
+        )
+    ) > V11_WALL_TIME_LIMIT_SECONDS:
+        errors.append("wall_time_budget")
+    if decision.get("status") != "PASS_SEARCH_ENGINE_V1_1_COMPLETED":
+        errors.append("final_decision")
+    if decision.get("research_decision") != (
+        "HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT"
+    ):
+        errors.append("research_boundary")
+    if decision.get("future_new_data_arena_qualified_arms") != []:
+        errors.append("future_arm_qualification")
+    if decision.get("sealed_reads") != 0:
+        errors.append("sealed_reads")
+    if manifest.get("strict_evaluated_count") != V11_STRICT_TARGET:
+        errors.append("manifest_strict_count")
+    if manifest.get("frozen_contract_sha256") != frozen.get(
+        "frozen_contract_sha256"
+    ):
+        errors.append("manifest_contract")
+    if _payload_sha(manifest.get("artifacts", [])) != manifest.get(
+        "artifact_bundle_sha256"
+    ):
+        errors.append("manifest_bundle")
+    for record in manifest.get("artifacts", []):
+        path = repo_root / str(record["path"])
+        if (
+            not path.is_file()
+            or path.stat().st_size != int(record["bytes"])
+            or sha256_file(path) != str(record["sha256"])
+        ):
+            errors.append(f"manifest_artifact:{record['path']}")
+    try:
+        subprocess.check_call(
+            [
+                "git",
+                "cat-file",
+                "-e",
+                f"{manifest['producer_source_sha']}^{{commit}}",
+            ],
+            cwd=repo_root,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except subprocess.CalledProcessError:
+        errors.append("producer_source_commit")
+    result = "PASS" if not errors else "FAIL"
+    return {
+        "result": result,
+        "errors": errors,
+        "engineering_integrity": result,
+        "research_decision": decision.get("research_decision"),
+        "producer_source_sha": manifest.get("producer_source_sha"),
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": decision.get("generation_attempts"),
+        "checkpoint_count": len(checkpoints),
+        "behavior_family_count": int(archive["behavior_family_id"].nunique()),
+        "artifact_bundle_sha256": manifest.get("artifact_bundle_sha256"),
+        "search_iteration_decision": decision.get(
+            "search_iteration_decision", {}
+        ),
+        "future_new_data_arena_qualified_arms": [],
+        "sealed_reads": decision.get("sealed_reads"),
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -4692,6 +6036,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "build-canary-cache",
             "run-canary",
             "check-canary",
+            "run-v11",
+            "check-v11",
         ),
     )
     parser.add_argument("--runtime-date")
@@ -4730,12 +6076,24 @@ def main(argv: Sequence[str] | None = None) -> int:
             source_sha=args.source_sha,
             campaign="aggtrades_system_canary",
         )
-    else:
+    elif args.command == "check-canary":
         result = check_aggtrades_canary(
             repo_root,
             runtime_date=str(
                 args.runtime_date or AGGTRADES_CANARY_DEFAULT_RUNTIME_DATE
             ),
+        )
+    elif args.command == "run-v11":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or V11_DEFAULT_RUNTIME_DATE),
+            source_sha=args.source_sha,
+            campaign="search_engine_v1_1",
+        )
+    else:
+        result = check_v11(
+            repo_root,
+            runtime_date=str(args.runtime_date or V11_DEFAULT_RUNTIME_DATE),
         )
     print(json.dumps(result, indent=2, sort_keys=True), flush=True)
     return 0 if result.get("result") == "PASS" else 1
@@ -4749,8 +6107,11 @@ __all__ = [
     "BehaviorArchive",
     "HierarchicalTypedCEMV2",
     "TypedEvolutionV2",
+    "V11_ARMS",
+    "V21_PARAMETERS",
     "build_aggtrades_canary_cache_from_config",
     "check_aggtrades_canary",
+    "check_v11",
     "check_engine",
     "run_engine",
 ]
