@@ -939,7 +939,12 @@ def build_aggtrades_system_canary_cache(
             raise FileExistsError(
                 f"existing canary cache has no metadata: {output_cache_root}"
             )
-        return json.loads(metadata_path.read_text(encoding="utf-8"))
+        existing = json.loads(metadata_path.read_text(encoding="utf-8"))
+        if existing.get("producer_source_sha") != producer_source_sha:
+            raise ValueError(
+                "existing canary cache was built by a different producer source"
+            )
+        return existing
     for path in (top100_tar, ranks101_200_tar):
         if not path.is_file():
             raise FileNotFoundError(path)
@@ -1076,6 +1081,16 @@ def build_aggtrades_system_canary_cache(
         base_eligible = source_base & observed
         np.save(temporary / "observed.npy", observed)
         np.save(temporary / "base_eligible.npy", base_eligible)
+        source_segment = np.asarray(
+            np.load(
+                source_cache_root / "source_segment.npy", mmap_mode="r"
+            )[:, block],
+            dtype=np.int8,
+        )[source_asset_indices]
+        np.save(
+            temporary / "source_segment.npy",
+            np.where(observed, source_segment, 0).astype(np.int8),
+        )
         active_count = observed.sum(axis=0).astype(np.float32)
         active_matrix = np.where(observed, active_count[None, :], np.nan).astype(
             np.float32

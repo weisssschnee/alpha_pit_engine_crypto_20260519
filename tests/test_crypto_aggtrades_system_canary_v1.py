@@ -48,6 +48,7 @@ def _write_source_cache(root: Path, symbols: list[str]) -> None:
     np.save(root / "timestamp_ns.npy", timestamps)
     np.save(root / "observed.npy", np.ones(shape, dtype=bool))
     np.save(root / "base_eligible.npy", np.ones(shape, dtype=bool))
+    np.save(root / "source_segment.npy", np.ones(shape, dtype=np.int8))
     for field in fields:
         values = np.ones(shape, dtype=np.float32)
         if field == "listing_age_hours":
@@ -178,7 +179,7 @@ def test_aggtrades_cache_bridge_is_hourly_pit_safe_and_missingness_preserving(
         broad_field_ids=["trade_count"],
         start="2024-01-01T00:00:00Z",
         end_exclusive="2024-01-01T02:00:00Z",
-        producer_source_sha="C" * 40,
+        producer_source_sha="B" * 40,
     ) == metadata
 
 
