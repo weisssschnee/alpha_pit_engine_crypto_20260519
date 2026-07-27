@@ -113,6 +113,58 @@ def _payload_sha(value: Any) -> str:
     return hashlib.sha256(_json_bytes(value)).hexdigest().upper()
 
 
+def turnover_path(
+    weights: np.ndarray, horizon: int
+) -> tuple[np.ndarray, dict[str, float]]:
+    """Return the frozen horizon-phased full-L1 turnover path and attribution."""
+
+    weights = np.asarray(weights, dtype=float)
+    if weights.ndim != 2:
+        raise ValueError("weights must have asset/time coordinate shape")
+    if horizon not in (1, 4):
+        raise ValueError("horizon is outside the frozen 1h/4h sleeve contract")
+    scale = 1.0 / float(horizon)
+    previous = np.zeros_like(weights)
+    if weights.shape[1] > horizon:
+        previous[:, horizon:] = weights[:, :-horizon]
+    current_zero = np.abs(weights) <= 1.0e-12
+    previous_zero = np.abs(previous) <= 1.0e-12
+    flip = (~current_zero) & (~previous_zero) & (
+        np.sign(weights) != np.sign(previous)
+    )
+    entry = np.where(
+        (previous_zero & ~current_zero) | flip, np.abs(weights), 0.0
+    ).sum(axis=0)
+    exit_ = np.where(
+        (~previous_zero & current_zero) | flip, np.abs(previous), 0.0
+    ).sum(axis=0)
+    rebalance = np.where(
+        ~previous_zero & ~current_zero & ~flip,
+        np.abs(weights - previous),
+        0.0,
+    ).sum(axis=0)
+    path = (entry + exit_ + rebalance) * scale
+    terminal = 0.0
+    for offset in range(min(horizon, weights.shape[1])):
+        terminal_index = weights.shape[1] - 1 - (
+            (weights.shape[1] - 1 - offset) % horizon
+        )
+        liquidation = float(np.abs(weights[:, terminal_index]).sum()) * scale
+        path[terminal_index] += liquidation
+        terminal += liquidation
+    initial = (
+        float(np.abs(weights[:, : min(horizon, weights.shape[1])]).sum()) * scale
+    )
+    return path, {
+        "initial_establishment_l1": initial,
+        "entry_l1": float(entry.sum()) * scale,
+        "rebalance_l1": float(rebalance.sum()) * scale,
+        "transition_exit_l1": float(exit_.sum()) * scale,
+        "terminal_liquidation_l1": terminal,
+        "total_turnover_l1": float(path.sum()),
+    }
+
+
 def _write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="\n") as handle:
@@ -461,7 +513,10 @@ def _behavior_sha(weights: np.ndarray, month_labels: np.ndarray) -> str:
     return _payload_sha(signature)
 
 
-def freeze_search_behavior_contract(active_universe_size: np.ndarray) -> dict[str, Any]:
+def freeze_search_behavior_contract(
+    active_universe_size: np.ndarray,
+    observed_support: np.ndarray,
+) -> dict[str, Any]:
     """Freeze behavior quantization and a lag-only market-state regime contract."""
 
     values = np.asarray(active_universe_size, dtype=float)
@@ -469,10 +524,19 @@ def freeze_search_behavior_contract(active_universe_size: np.ndarray) -> dict[st
         raise ValueError(
             "active_universe_size must expose an asset-by-time panel with at least two hours"
         )
+    observed = np.asarray(observed_support)
+    if observed.dtype != np.bool_ or observed.shape != values.shape:
+        raise ValueError(
+            "observed_support must be an independent bool mask matching active_universe_size"
+        )
     finite = np.isfinite(values)
-    finite_counts = finite.sum(axis=0)
-    if np.any(finite_counts == 0):
-        raise ValueError("active_universe_size has an empty hourly cross-section")
+    observed_counts = observed.sum(axis=0)
+    if np.any(observed_counts == 0):
+        raise ValueError("observed_support has an empty hourly cross-section")
+    if not np.array_equal(finite, observed):
+        raise ValueError(
+            "active_universe_size finite mask must exactly match observed_support"
+        )
     with np.errstate(all="ignore"):
         minimum = np.nanmin(values, axis=0)
         maximum = np.nanmax(values, axis=0)
@@ -480,10 +544,10 @@ def freeze_search_behavior_contract(active_universe_size: np.ndarray) -> dict[st
     if not np.allclose(minimum, maximum, rtol=0.0, atol=1.0e-6):
         raise ValueError("active_universe_size is not cross-sectionally constant")
     if not np.allclose(
-        reported, finite_counts.astype(float), rtol=0.0, atol=1.0e-6
+        reported, observed_counts.astype(float), rtol=0.0, atol=1.0e-6
     ):
         raise ValueError(
-            "active_universe_size does not equal its observed cross-sectional support"
+            "active_universe_size does not equal independent observed_support"
         )
     values = reported
     lagged = np.empty(values.shape, dtype=float)
@@ -500,16 +564,18 @@ def freeze_search_behavior_contract(active_universe_size: np.ndarray) -> dict[st
         "pit_regime_thresholds_sha256": _payload_sha(thresholds.tolist()),
         "frozen_observation_count": int(finite.size),
         "pit_regime_source_validation": (
-            "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_FINITE_ASSET_SUPPORT"
+            "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_INDEPENDENT_OBSERVED_SUPPORT"
         ),
+        "observed_support_sha256": array_sha256(observed.astype(np.int8)),
         "contract_sha256": _payload_sha(
             {
                 **dict(SEARCH_BEHAVIOR_DESCRIPTOR_SCHEMA),
                 "pit_regime_thresholds": thresholds.tolist(),
                 "frozen_observation_count": int(finite.size),
                 "pit_regime_source_validation": (
-                    "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_FINITE_ASSET_SUPPORT"
+                    "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_INDEPENDENT_OBSERVED_SUPPORT"
                 ),
+                "observed_support_sha256": array_sha256(observed.astype(np.int8)),
             }
         ),
     }
@@ -588,8 +654,7 @@ def search_behavior_descriptor(
     epsilon = float(contract["selected_weight_epsilon"])
     selected = np.abs(weights) > epsilon
     selected_sign = np.where(selected, np.sign(weights), 0.0)
-    changes = np.diff(weights, axis=1, prepend=np.zeros((weights.shape[0], 1)))
-    turnover_path = np.sum(np.abs(changes), axis=0) / float(horizon_hours)
+    turnover, _ = turnover_path(weights, horizon_hours)
     previous_selected = np.zeros_like(selected)
     previous_selected[:, 1:] = selected[:, :-1]
     union = np.sum(selected | previous_selected, axis=0)
@@ -652,7 +717,7 @@ def search_behavior_descriptor(
                 ).tolist(),
             ]
         )
-        local_turnover = turnover_path[local]
+        local_turnover = turnover[local]
         histogram = np.histogram(local_turnover, bins=np.r_[turnover_edges, np.inf])[0]
         histogram_rate = histogram / max(1, int(histogram.sum()))
         turnover_rows.append(
@@ -693,6 +758,7 @@ def search_behavior_descriptor(
         **components,
         "behavior_family_id": _payload_sha(components),
         "descriptor_schema_version": str(contract["schema_version"]),
+        "turnover_path_sha256": array_sha256(turnover),
         "identity_excludes": ["gross", "net", "cost", "pair_reward"],
     }
 

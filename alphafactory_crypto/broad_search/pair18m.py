@@ -16,7 +16,7 @@ from alphafactory_crypto.instrument_capability.mapping import (
     mapping_contract_sha256,
 )
 
-from .audit import search_behavior_descriptor
+from .audit import search_behavior_descriptor, turnover_path
 from .compositional18m import CandidateSpec
 from .expression import TypedExpressionRegistry, materialize_expression
 from .panel18m import RawPanelStore
@@ -24,6 +24,9 @@ from .panel18m import RawPanelStore
 
 ACTIVE_EPSILON = 1e-12
 FIXED_COST_BPS = 5.0
+# Private compatibility name for the qualification evaluator.  It is an alias,
+# not a second implementation; audit.turnover_path remains the sole authority.
+_turnover = turnover_path
 PAIR_THRESHOLDS: Mapping[str, float] = {
     "net_lcb": 0.0,
     "worst_month": -0.001,
@@ -87,39 +90,6 @@ def _mean_lcb(
     return mean, se, mean - 1.96 * se, observations
 
 
-def _turnover(weights: np.ndarray, horizon: int) -> tuple[np.ndarray, dict[str, float]]:
-    if horizon not in (1, 4):
-        raise ValueError("horizon is outside the frozen 1h/4h sleeve contract")
-    scale = 1.0 / float(horizon)
-    previous = np.zeros_like(weights)
-    if weights.shape[1] > horizon:
-        previous[:, horizon:] = weights[:, :-horizon]
-    current_zero = np.abs(weights) <= ACTIVE_EPSILON
-    previous_zero = np.abs(previous) <= ACTIVE_EPSILON
-    flip = (~current_zero) & (~previous_zero) & (np.sign(weights) != np.sign(previous))
-    entry = np.where((previous_zero & ~current_zero) | flip, np.abs(weights), 0.0).sum(axis=0)
-    exit_ = np.where((~previous_zero & current_zero) | flip, np.abs(previous), 0.0).sum(axis=0)
-    rebalance = np.where(
-        ~previous_zero & ~current_zero & ~flip, np.abs(weights - previous), 0.0
-    ).sum(axis=0)
-    turnover = (entry + exit_ + rebalance) * scale
-    terminal = 0.0
-    for offset in range(min(horizon, weights.shape[1])):
-        terminal_index = weights.shape[1] - 1 - ((weights.shape[1] - 1 - offset) % horizon)
-        liquidation = float(np.abs(weights[:, terminal_index]).sum()) * scale
-        turnover[terminal_index] += liquidation
-        terminal += liquidation
-    initial = float(np.abs(weights[:, : min(horizon, weights.shape[1])]).sum()) * scale
-    return turnover, {
-        "initial_establishment_l1": initial,
-        "entry_l1": float(entry.sum()) * scale,
-        "rebalance_l1": float(rebalance.sum()) * scale,
-        "transition_exit_l1": float(exit_.sum()) * scale,
-        "terminal_liquidation_l1": terminal,
-        "total_turnover_l1": float(turnover.sum()),
-    }
-
-
 def _series_metrics(
     *,
     weights: np.ndarray,
@@ -128,7 +98,7 @@ def _series_metrics(
     evaluation_mask: np.ndarray,
     horizon: int,
 ) -> dict[str, Any]:
-    turnover, attribution = _turnover(weights, horizon)
+    turnover, attribution = turnover_path(weights, horizon)
     gross = np.nansum(weights * target, axis=0) / float(horizon)
     cost = turnover * FIXED_COST_BPS / 10000.0
     net = gross - cost
@@ -194,6 +164,7 @@ def _series_metrics(
         "worst_month": float(np.min(finite_months)) if finite_months.size else float("nan"),
         "month_metrics": month_rows,
         "weight_sha256": _array_sha(weights),
+        "turnover_path_sha256": _array_sha(turnover),
         "gross_series_sha256": _array_sha(gross),
         "net_series_sha256": _array_sha(net),
         **attribution,
@@ -346,17 +317,36 @@ def evaluate_pair(
             store.field(str(behavior_contract["pit_regime_source"]))[:, block],
             dtype=float,
         )
-        behavior = search_behavior_descriptor(
+        descriptor_kwargs = {
+            "eligible_mask": support,
+            "month_labels": months,
+            "timestamp_ns": timestamp_ns,
+            "active_universe_size": regime_values,
+            "horizon_hours": candidate.horizon_hours,
+            "mapping_id": candidate.mapping_id,
+            "contract": behavior_contract,
+        }
+        primary_behavior = search_behavior_descriptor(
             signal=primary_signal,
             weights=primary_weight,
-            eligible_mask=support,
-            month_labels=months,
-            timestamp_ns=timestamp_ns,
-            active_universe_size=regime_values,
-            horizon_hours=candidate.horizon_hours,
-            mapping_id=candidate.mapping_id,
-            contract=behavior_contract,
+            **descriptor_kwargs,
         )
+        control_behavior = search_behavior_descriptor(
+            signal=control_signal,
+            weights=control_weight,
+            **descriptor_kwargs,
+        )
+        incremental_behavior = search_behavior_descriptor(
+            signal=primary_signal - control_signal,
+            weights=delta_weight,
+            **descriptor_kwargs,
+        )
+        behavior = {
+            **incremental_behavior,
+            "primary_behavior_id": primary_behavior["behavior_family_id"],
+            "control_behavior_id": control_behavior["behavior_family_id"],
+            "incremental_behavior_id": incremental_behavior["behavior_family_id"],
+        }
         timings["behavior_descriptor_seconds"] = (
             time.perf_counter() - behavior_started
         )
