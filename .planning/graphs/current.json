@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-27T07:54:24.289769+00:00",
+  "generated_at": "2026-07-27T10:13:55.710958+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -1109,6 +1109,7 @@
         "sha256": "648E2021DD156D794AC0CAB105A0AACB36FF79C8EF2E4B227B7361864B38447F",
         "verified_sha": "4726795f61052470d56e2d1475e4f6da9d262943"
       },
+      "claim_badges": [],
       "color": "#2e7d32",
       "contracts": [
         {
@@ -1149,7 +1150,7 @@
       "required": false,
       "semantic_role": "research_decision_authority",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/independent_closure_decisions.json",
         "evidence_sha256": "FE4A1D1306DB3B3FE13B3EAC795B03AFBB5F01FC1D3A7CE1D4B8AB216384B983",
         "level": "STATIC_VERIFIED",
@@ -1168,6 +1169,7 @@
         "sha256": "50FD9DA3F51E9C7818E90DAA98EE6ED419797D8E4892B3CEE98E539156E47F53",
         "verified_sha": "4eda31c9637b2faeaaa39910a084ad456f393542"
       },
+      "claim_badges": [],
       "color": "#2e7d32",
       "contracts": [
         {
@@ -1280,7 +1282,7 @@
       "required": false,
       "semantic_role": "historical_instrument_diagnosis",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "reports/CRYPTO_LATEST_EVIDENCE_INDEPENDENT_AUDIT.md",
         "evidence_sha256": "50FD9DA3F51E9C7818E90DAA98EE6ED419797D8E4892B3CEE98E539156E47F53",
         "level": "STATIC_VERIFIED",
@@ -1299,6 +1301,7 @@
         "sha256": "0D5E4E92285A2339C1917DF46D29B66842C68D5E38E02532186BCB3548FB6317",
         "verified_sha": "4726795f61052470d56e2d1475e4f6da9d262943"
       },
+      "claim_badges": [],
       "color": "#2e7d32",
       "contracts": [
         {
@@ -1410,7 +1413,7 @@
       "required": false,
       "semantic_role": "development_arena",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_frontier_research_v2_20260713/architecture_decision.json",
         "evidence_sha256": "9940FCA2C8607A3991DF4EF75ABADCF51C25812F034E42EBF5396D8B5EA0E2D1",
         "level": "STATIC_VERIFIED",
@@ -1429,6 +1432,7 @@
         "sha256": "38A21EF12CCEA7C82217CEB5BC5FA957EE9612DCC496FEAE07C0059681C77D02",
         "verified_sha": "4726795f61052470d56e2d1475e4f6da9d262943"
       },
+      "claim_badges": [],
       "color": "#2e7d32",
       "contracts": [
         {
@@ -1475,7 +1479,7 @@
       "required": false,
       "semantic_role": "large_experiment_admission",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_frontier_provenance_closure_20260714/data_adequacy_gate.json",
         "evidence_sha256": "51EAEFBA3A76ED869D07FEC391116F4E159BA949E852BBC693C6040742A49B61",
         "level": "STATIC_VERIFIED",
@@ -1494,6 +1498,7 @@
         "sha256": "3C83B2CB0BDE461B8C8B5106DF870C021C5B51DFCEF46BAD138354F1A8276076",
         "verified_sha": "a88552589c92161a3cfb7593cc82c8e20f0c5f5c"
       },
+      "claim_badges": [],
       "color": "#2e7d32",
       "contracts": [
         {
@@ -1611,7 +1616,7 @@
       "required": false,
       "semantic_role": "train_surface_authority",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_train_surface_18m_qualification_20260716/CRYPTO_TRAIN_DATA_ADEQUACY.json",
         "evidence_sha256": "08942FE05F517245E4AC2B9FEABA2E4356A8CF352934390BFF21955062711718",
         "level": "STATIC_VERIFIED",
@@ -1630,6 +1635,7 @@
         "sha256": "01216B4499340AF537EA975117851ACE50892156E0733D23FFEA26ABB2EE16BB",
         "verified_sha": "6950ea75e7848a94ecbc87cb3aee022cecee5901"
       },
+      "claim_badges": [],
       "color": "#757575",
       "contracts": [
         {
@@ -2706,7 +2712,7 @@
       "required": false,
       "semantic_role": "experimental_broad_compositional_qualification",
       "validation": {
-        "checked_at": "2026-07-27T07:54:24.289769+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_broad_universe_compositional_search_20260715/CRYPTO_CURRENT_GRAMMAR_EXPRESSIVITY_AUDIT.json",
         "evidence_sha256": "B8EA6C50B0D65482812791EC3731E08B0609A4E9C14858C1B8087E2125E40FD1",
         "level": "STATIC_VERIFIED",
@@ -2725,6 +2731,14 @@
         "sha256": "02AD3DB481957B1FD71E4075E2EE1DEFCE281418022CAA21EC03C80C2C5EFAAF",
         "verified_sha": "2350405595446b1c8615537666857ce5342159e3"
       },
+      "claim_badges": [
+        "RUN ARTIFACTS VERIFIED",
+        "DEVELOPMENT ONLY",
+        "POLICY PRODUCTIVITY INCREMENT",
+        "NO ECONOMIC CHALLENGER",
+        "NO OOS",
+        "NO PROMOTION"
+      ],
       "color": "#757575",
       "contracts": [
         {
@@ -2903,7 +2917,7 @@
       "required": false,
       "semantic_role": "experimental_18m_compositional_search_evidence",
       "validation": {
-        "checked_at": "2026-07-27T07:54:24.289769+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_ARTIFACT_MANIFEST.json",
         "evidence_sha256": "5366AC5847DC78C6AEDFBC439D88C77DA425351EB66A3BD1E3C5DD009C4A2A69",
         "level": "STATIC_VERIFIED",
@@ -2919,9 +2933,17 @@
       "authority": {
         "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
         "repo_ref": "experiment/crypto-search-engine-v1-20260721",
-        "sha256": "4A31C12075FED875331D825EE6CF7FF65018CD9568110EC23CCF105A1EE58AE5",
-        "verified_sha": "2414af4d2cfccb3f87a53c31d6441e6cdf199d8d"
+        "sha256": "CF6C59BBAFC871C336635E77736F2C1E499026CC338533CC9BB0C18A606A7331",
+        "verified_sha": "5a17a91732a7aca7ec53cf9e10963faf2998a649"
       },
+      "claim_badges": [
+        "LEGACY 20K ENGINEERING PASS",
+        "RESEARCH QUALIFICATION HOLD",
+        "CODE AUTHORITY ALIGNMENT VERIFIED",
+        "FUTURE REQUALIFICATION FAIL CLOSED",
+        "PANEL CONTEXT REMEDIATED",
+        "HAC LCB REQUIRED"
+      ],
       "color": "#f9a825",
       "contracts": [
         {
@@ -2977,6 +2999,15 @@
           "rule": "A future Arena remains blocked until historical instrument identity is authoritative, actual symbol-date feature coverage closes the persisted gap manifest, Top50 OI/mark has an authorized materialized consumer, and a full post-join Broad39 schema-2 cache has complete required support; the current provisional PIT ledger and current498 intersection cache cannot authorize search",
           "severity": "HARD",
           "type": "ADMISSION"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "broad_search.search_engine_v1.check_canary",
+          "evidence_ref": "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_BIAS_AUDIT_20260727.md",
+          "id": "aggtrades_system_canary_boundary",
+          "rule": "The separately authorized 2,000-candidate fresh-state aggTrades canary qualifies continuous counting, exact restore, CEM unit-compute density, typed Evolution repair operations, and archive champion replacement only; the fixed retrospective cohort, zero positive matched discoveries, and absent OOS keep research, promotion, and future-Arena arm qualification on HOLD",
+          "severity": "HARD",
+          "type": "EVIDENCE"
         }
       ],
       "critical": true,
@@ -2984,7 +3015,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine V1 capability (post-audit HOLD)",
+      "label": "Search Engine V1 capability (system canary PASS; research HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -2999,11 +3030,16 @@
         "runtime/crypto_search_engine_v1_20260721/final_decision.json",
         "runtime/crypto_new_data_admission_v1_20260727/run_manifest.json",
         "runtime/crypto_new_data_admission_v1_20260727/final_decision.json",
+        "runtime/crypto_aggtrades_system_canary_v1_20260727/run_manifest.json",
+        "runtime/crypto_aggtrades_system_canary_v1_20260727/final_decision.json",
         "reports/CRYPTO_SEARCH_ENGINE_V1_20260721.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_CODE_AUTHORITY_AUDIT_20260727.md",
         "reports/CRYPTO_NEW_DATA_ADMISSION_AND_PIT_UNIVERSE_V1_20260727.md",
-        "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md"
+        "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727.md",
+        "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_BIAS_AUDIT_20260727.md",
+        "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md",
+        "docs/adr/0009-aggtrades-system-canary-development-diagnostic.md"
       ],
       "promotion_requirements": [
         "information-adequate new data",
@@ -3109,8 +3145,8 @@
         "alphafactory_crypto_broad_search_panel18m_payload_sha",
         "alphafactory_crypto_broad_search_panel18m_qualify_fields",
         "alphafactory_crypto_broad_search_panel18m_rationale_1",
-        "alphafactory_crypto_broad_search_panel18m_rationale_331",
-        "alphafactory_crypto_broad_search_panel18m_rationale_434",
+        "alphafactory_crypto_broad_search_panel18m_rationale_352",
+        "alphafactory_crypto_broad_search_panel18m_rationale_455",
         "alphafactory_crypto_broad_search_panel18m_rawpanelstore",
         "alphafactory_crypto_broad_search_panel18m_rawpanelstore_base_eligible",
         "alphafactory_crypto_broad_search_panel18m_rawpanelstore_block_slice",
@@ -3183,13 +3219,20 @@
         "alphafactory_crypto_broad_search_runner18m_working_set_trim_due",
         "alphafactory_crypto_broad_search_runner18m_write_json",
         "alphafactory_crypto_broad_search_search_engine_v1",
+        "alphafactory_crypto_broad_search_search_engine_v1_aggtrades_canary_contracts",
+        "alphafactory_crypto_broad_search_search_engine_v1_aggtrades_canary_final_decision",
+        "alphafactory_crypto_broad_search_search_engine_v1_aggtrades_canary_frozen_contract",
+        "alphafactory_crypto_broad_search_search_engine_v1_aggtrades_canary_report_text",
         "alphafactory_crypto_broad_search_search_engine_v1_apply_exit_gate",
         "alphafactory_crypto_broad_search_search_engine_v1_behaviorarchive",
         "alphafactory_crypto_broad_search_search_engine_v1_behaviorarchive_from_rows",
         "alphafactory_crypto_broad_search_search_engine_v1_behaviorarchive_observe",
         "alphafactory_crypto_broad_search_search_engine_v1_behaviorarchive_state_hash",
         "alphafactory_crypto_broad_search_search_engine_v1_behaviorarchive_summary_rows",
+        "alphafactory_crypto_broad_search_search_engine_v1_broad39_registry_contracts",
+        "alphafactory_crypto_broad_search_search_engine_v1_build_aggtrades_canary_cache_from_config",
         "alphafactory_crypto_broad_search_search_engine_v1_candidate_rebuild_verified",
+        "alphafactory_crypto_broad_search_search_engine_v1_check_aggtrades_canary",
         "alphafactory_crypto_broad_search_search_engine_v1_check_engine",
         "alphafactory_crypto_broad_search_search_engine_v1_checkpoint_allocation",
         "alphafactory_crypto_broad_search_search_engine_v1_checkpoint_state_payload",
@@ -3222,6 +3265,7 @@
         "alphafactory_crypto_broad_search_search_engine_v1_initial_policies",
         "alphafactory_crypto_broad_search_search_engine_v1_json_rng_state",
         "alphafactory_crypto_broad_search_search_engine_v1_ledger_row",
+        "alphafactory_crypto_broad_search_search_engine_v1_load_aggtrades_canary_inputs",
         "alphafactory_crypto_broad_search_search_engine_v1_load_bound_inputs",
         "alphafactory_crypto_broad_search_search_engine_v1_load_checkpoint",
         "alphafactory_crypto_broad_search_search_engine_v1_main",
@@ -3233,9 +3277,10 @@
         "alphafactory_crypto_broad_search_search_engine_v1_policy_propose",
         "alphafactory_crypto_broad_search_search_engine_v1_policy_reject",
         "alphafactory_crypto_broad_search_search_engine_v1_rationale_1",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_2469",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_2898",
         "alphafactory_crypto_broad_search_search_engine_v1_read_json",
         "alphafactory_crypto_broad_search_search_engine_v1_report_text",
+        "alphafactory_crypto_broad_search_search_engine_v1_resolve_config_path",
         "alphafactory_crypto_broad_search_search_engine_v1_restore_lane_policy",
         "alphafactory_crypto_broad_search_search_engine_v1_restore_policy",
         "alphafactory_crypto_broad_search_search_engine_v1_reward_at_equal_count",
@@ -3257,6 +3302,7 @@
         "alphafactory_crypto_broad_search_search_engine_v1_typedevolutionv2_receipt",
         "alphafactory_crypto_broad_search_search_engine_v1_typedevolutionv2_state_hash",
         "alphafactory_crypto_broad_search_search_engine_v1_typedevolutionv2_verify_receipt",
+        "alphafactory_crypto_broad_search_search_engine_v1_validate_aggtrades_canary_config",
         "alphafactory_crypto_broad_search_search_engine_v1_worker_evaluate",
         "alphafactory_crypto_broad_search_search_engine_v1_worker_initialize",
         "alphafactory_crypto_broad_search_search_engine_v1_write_checkpoint",
@@ -3264,14 +3310,18 @@
         "alphafactory_crypto_broad_search_search_engine_v1_write_parquet",
         "alphafactory_crypto_broad_search_search_engine_v1_write_top_level_artifacts",
         "alphafactory_crypto_data_admission_v1",
+        "alphafactory_crypto_data_admission_v1_aggregate_aggtrades_hourly",
+        "alphafactory_crypto_data_admission_v1_aggtrade_coordinate",
         "alphafactory_crypto_data_admission_v1_aggtrade_symbol_dates_from_tar",
         "alphafactory_crypto_data_admission_v1_assign_instrument_lifecycles",
+        "alphafactory_crypto_data_admission_v1_build_aggtrades_system_canary_cache",
         "alphafactory_crypto_data_admission_v1_build_daily_context",
         "alphafactory_crypto_data_admission_v1_build_hourly_schema2_intersection_cache",
         "alphafactory_crypto_data_admission_v1_build_lagged_pit_universe",
         "alphafactory_crypto_data_admission_v1_classify_symbols",
         "alphafactory_crypto_data_admission_v1_coverage_against_surfaces",
         "alphafactory_crypto_data_admission_v1_coverage_against_temporal_surfaces",
+        "alphafactory_crypto_data_admission_v1_declared_tar_sha256",
         "alphafactory_crypto_data_admission_v1_download_object",
         "alphafactory_crypto_data_admission_v1_fetch_source_snapshots",
         "alphafactory_crypto_data_admission_v1_hourly_cache_symbol_dates",
@@ -3279,17 +3329,22 @@
         "alphafactory_crypto_data_admission_v1_main",
         "alphafactory_crypto_data_admission_v1_month_strings",
         "alphafactory_crypto_data_admission_v1_oi_symbol_dates",
+        "alphafactory_crypto_data_admission_v1_open_canary_matrix",
         "alphafactory_crypto_data_admission_v1_parse_kline_zip",
         "alphafactory_crypto_data_admission_v1_parse_s3_xml",
         "alphafactory_crypto_data_admission_v1_parser",
         "alphafactory_crypto_data_admission_v1_payload_sha",
+        "alphafactory_crypto_data_admission_v1_rank_percentile_on_mask",
         "alphafactory_crypto_data_admission_v1_rationale_1",
-        "alphafactory_crypto_data_admission_v1_rationale_757",
+        "alphafactory_crypto_data_admission_v1_rationale_1246",
+        "alphafactory_crypto_data_admission_v1_rationale_922",
         "alphafactory_crypto_data_admission_v1_request",
         "alphafactory_crypto_data_admission_v1_run",
         "alphafactory_crypto_data_admission_v1_runconfig",
         "alphafactory_crypto_data_admission_v1_s3_texts",
+        "alphafactory_crypto_data_admission_v1_safe_divide",
         "alphafactory_crypto_data_admission_v1_sha256",
+        "alphafactory_crypto_data_admission_v1_sha256_file",
         "alphafactory_crypto_data_admission_v1_surface_missing_member_rows",
         "alphafactory_crypto_data_admission_v1_symbol_dirs",
         "alphafactory_crypto_data_admission_v1_symbols_from_aggtrade_tar",
@@ -3606,6 +3661,21 @@
         "docs_adr_0008_search_engine_v1_post_audit_remediation_and_qualification_suspension_consequences",
         "docs_adr_0008_search_engine_v1_post_audit_remediation_and_qualification_suspension_context",
         "docs_adr_0008_search_engine_v1_post_audit_remediation_and_qualification_suspension_decision",
+        "docs_adr_0009_aggtrades_system_canary_development_diagnostic",
+        "docs_adr_0009_aggtrades_system_canary_development_diagnostic_adr_0009_aggtrades_fixed_cohort_search_system_canary",
+        "docs_adr_0009_aggtrades_system_canary_development_diagnostic_boundaries",
+        "docs_adr_0009_aggtrades_system_canary_development_diagnostic_consequences",
+        "docs_adr_0009_aggtrades_system_canary_development_diagnostic_decision",
+        "docs_adr_0009_aggtrades_system_canary_development_diagnostic_evidence_authority",
+        "reports_crypto_aggtrades_system_canary_v1_20260727",
+        "reports_crypto_aggtrades_system_canary_v1_20260727_crypto_aggtrades_search_system_canary_v1",
+        "reports_crypto_aggtrades_system_canary_v1_20260727_system_comparison_versus_typed_random",
+        "reports_crypto_aggtrades_system_canary_v1_bias_audit_20260727",
+        "reports_crypto_aggtrades_system_canary_v1_bias_audit_20260727_blocking_issues",
+        "reports_crypto_aggtrades_system_canary_v1_bias_audit_20260727_crypto_aggtrades_search_system_canary_v1_bias_audit",
+        "reports_crypto_aggtrades_system_canary_v1_bias_audit_20260727_decision",
+        "reports_crypto_aggtrades_system_canary_v1_bias_audit_20260727_findings",
+        "reports_crypto_aggtrades_system_canary_v1_bias_audit_20260727_required_next_action",
         "reports_crypto_new_data_admission_and_pit_universe_v1_20260727",
         "reports_crypto_new_data_admission_and_pit_universe_v1_20260727_actual_delivered_coverage",
         "reports_crypto_new_data_admission_and_pit_universe_v1_20260727_conclusion",
@@ -4295,16 +4365,16 @@
         "verified_core_crypto_20260618_regime_crypto_a7regime2_mechanism_regime_audit_write_json"
       ],
       "required": false,
-      "semantic_role": "unqualified_search_engine_component_post_audit_hold",
+      "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-07-27T07:54:24.289769+00:00",
-        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_CODE_AUTHORITY_AUDIT_20260727.md",
-        "evidence_sha256": "9C67C8905AB5F98BEC2810C8000E864A37CC5A1353B51EF659431665E0CD1298",
+        "checked_at": "2026-07-27T10:13:55.710958+00:00",
+        "evidence_ref": "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727.md",
+        "evidence_sha256": "3165870BA7065CD40391FA8BBC52AB0B26EA80ECFC5C58B552DEB2B3C23010A5",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "evidence-boundary-change",
         "result": "PASS",
-        "verified_at_sha": "2414af4d2cfccb3f87a53c31d6441e6cdf199d8d"
+        "verified_at_sha": "bbb3a0a42ef2a5e38af2cb1f2025c64d35d963f4"
       },
       "visible_by_default": true
     },
@@ -4316,6 +4386,7 @@
         "sha256": "D0B37CA7C291735981F61C343A90CB5445CA97B403B66A39AFBA34230B7B8609",
         "verified_sha": "eae955593355b1f8e6466167f66200bfb0ddc29b"
       },
+      "claim_badges": [],
       "color": "#757575",
       "contracts": [
         {
@@ -4425,7 +4496,7 @@
       "required": false,
       "semantic_role": "localized_mechanism_evidence_qualification",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_localized_mechanism_qualification_20260716/CRYPTO_LOCALIZED_MECHANISM_DECISION.json",
         "evidence_sha256": "D4B56FD798DD702622FF4E88A487A9D5D3C95FE887D4AD60D1B04164FEAF9622",
         "level": "STATIC_VERIFIED",
@@ -4444,6 +4515,7 @@
         "sha256": "C9160FBF5C8C4B91BCF8E4E7B0ECDE2807A7E91D0519DFE87CEE32AAFF2FE75C",
         "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0"
       },
+      "claim_badges": [],
       "color": "#f9a825",
       "contracts": [
         {
@@ -4599,7 +4671,7 @@
       "required": false,
       "semantic_role": "capability_instrument_execution",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_INSTRUMENT_CAPABILITY_QUALIFICATION.json",
         "evidence_sha256": "F47457BD0E4FABE8A9D579CAE4E53C4B095A0432E72A25A1A93E18EC4E0CB35C",
         "level": "STATIC_VERIFIED",
@@ -4618,6 +4690,7 @@
         "sha256": "3CDD2A76190D59365ACF95FAF86F941A7DAE44782E2435F38FC5D317F0778722",
         "verified_sha": "46280c5ad2acf6783d0ede0eb27fd93e3713d6f0"
       },
+      "claim_badges": [],
       "color": "#757575",
       "contracts": [
         {
@@ -4665,7 +4738,7 @@
       "required": false,
       "semantic_role": "legacy_proposal_parity_source",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/CRYPTO_LEGACY_SEMANTIC_COMPATIBILITY.csv",
         "evidence_sha256": "C80825E15DD740F1CE0CE1E41C76466358795F95F462E75D23A42E220D8F94B0",
         "level": "STATIC_VERIFIED",
@@ -4684,6 +4757,7 @@
         "sha256": "2FF3073252BAF427D8398502E264ADC754822D09EE6C26D69A47DEAD77F3B12C",
         "verified_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
       },
+      "claim_badges": [],
       "color": "#f9a825",
       "contracts": [
         {
@@ -4996,7 +5070,7 @@
       "required": false,
       "semantic_role": "bounded_real_data_lazy_search",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "config/crypto_real_data_instrument_canary_v1.json",
         "evidence_sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724",
         "level": "PARTIAL",
@@ -5017,6 +5091,7 @@
         "sha256": "353FDFC1B61D6693512E168D6B32FB5C243CA6DE1E2CA94AE7DD611F700BBEAC",
         "verified_sha": "5066c20234b6a4f778fa3644e09200a38a076114"
       },
+      "claim_badges": [],
       "color": "#757575",
       "contracts": [
         {
@@ -5125,7 +5200,7 @@
       "required": false,
       "semantic_role": "experimental_non_formal_cem_ab",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "config/crypto_cem_diversity_ab_v1.json",
         "evidence_sha256": "03153D72743A02C6F40987FD543C5877E15592940A388CE57D775123E41AD00A",
         "level": "PARTIAL",
@@ -5146,6 +5221,7 @@
         "sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724",
         "verified_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
       },
+      "claim_badges": [],
       "color": "#2e7d32",
       "contracts": [
         {
@@ -5195,7 +5271,7 @@
       "required": false,
       "semantic_role": "development_release_authority",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "config/crypto_real_data_instrument_canary_v1.json",
         "evidence_sha256": "12C931FC0488E3A12DB5350F43FD31F236F1442F579326DD475793EA199B4724",
         "level": "PARTIAL",
@@ -5216,6 +5292,7 @@
         "sha256": "1D87617D00557DD2863240FF00406AC5F005F3014A5D543F3C4009B375E5FEFF",
         "verified_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
       },
+      "claim_badges": [],
       "color": "#f9a825",
       "contracts": [
         {
@@ -5289,7 +5366,7 @@
       "required": false,
       "semantic_role": "candidate_admission",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_canary/admission.py",
         "evidence_sha256": "1D87617D00557DD2863240FF00406AC5F005F3014A5D543F3C4009B375E5FEFF",
         "level": "PARTIAL",
@@ -5310,6 +5387,7 @@
         "sha256": "83329690EC557AE5D27F748669F7DAECA504B9F3B80468868D01EB7015E0DE53",
         "verified_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
       },
+      "claim_badges": [],
       "color": "#f9a825",
       "contracts": [
         {
@@ -5372,7 +5450,7 @@
       "required": false,
       "semantic_role": "mapped_cost_evaluator",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_canary/evaluator.py",
         "evidence_sha256": "83329690EC557AE5D27F748669F7DAECA504B9F3B80468868D01EB7015E0DE53",
         "level": "PARTIAL",
@@ -5393,6 +5471,7 @@
         "sha256": "93EA813FA259F875CE8B221CE9BCD387FAC28AB274B4AA5C9579FBD01E6FB8F8",
         "verified_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
       },
+      "claim_badges": [],
       "color": "#2e7d32",
       "contracts": [
         {
@@ -5462,7 +5541,7 @@
       "required": false,
       "semantic_role": "primitive_semantic_authority",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_capability/primitives.py",
         "evidence_sha256": "93EA813FA259F875CE8B221CE9BCD387FAC28AB274B4AA5C9579FBD01E6FB8F8",
         "level": "PARTIAL",
@@ -5483,6 +5562,7 @@
         "sha256": "EFB7160B46A35DE3798EF1C36ABFC86E017B16283B7E98B522259E5E3F0A2C88",
         "verified_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
       },
+      "claim_badges": [],
       "color": "#2e7d32",
       "contracts": [
         {
@@ -5569,7 +5649,7 @@
       "required": false,
       "semantic_role": "portfolio_mapping_authority",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_capability/mapping.py",
         "evidence_sha256": "EFB7160B46A35DE3798EF1C36ABFC86E017B16283B7E98B522259E5E3F0A2C88",
         "level": "PARTIAL",
@@ -5590,6 +5670,7 @@
         "sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0",
         "verified_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
       },
+      "claim_badges": [],
       "color": "#2e7d32",
       "contracts": [
         {
@@ -5657,7 +5738,7 @@
       "required": false,
       "semantic_role": "adaptive_feedback_authority",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_capability/feedback.py",
         "evidence_sha256": "9302C75A8D27E5C45ABC2743110F666FEBFBBC61992A7BC84B022FB58D57ECA0",
         "level": "PARTIAL",
@@ -5678,6 +5759,14 @@
         "sha256": "15A6236404487643B1EFB60F241D0C3955A8BFEAE9FAB65F5FC71FF417942D98",
         "verified_sha": "7389a36ebb4ee62f57aeb818cf4db7157bd1ea9f"
       },
+      "claim_badges": [
+        "ARM D IMPLEMENTATION VERIFIED",
+        "DEVELOPMENT NEGATIVE",
+        "STRUCTURED-PROXY CLAIM PARTIAL",
+        "NO MATCHED-CONTROL RUNTIME",
+        "NO RUNTIME-FORMAL TRACE",
+        "NO OOS"
+      ],
       "color": "#757575",
       "contracts": [
         {
@@ -5980,7 +6069,7 @@
       "required": false,
       "semantic_role": "adaptive_latent_challenger_evidence",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "reports/crypto_explicit_latent_adaptive_v1_20260717/IMPLEMENTATION_QUALIFICATION.md",
         "evidence_sha256": "DC2E109B222F0E9999F7498F91306845A4939D46B5B961B0E677F3A51ECB1DBC",
         "level": "STATIC_VERIFIED",
@@ -5999,6 +6088,14 @@
         "sha256": "65E33CD77B841C63400778D1A240B671149D7005EFFB5A1BD1DD29915E455455",
         "verified_sha": "c8af3c3396b380f190ca323e630ae59f6b54b706"
       },
+      "claim_badges": [
+        "DEVELOPMENT SMOKE PASS",
+        "DYNAMIC MEMBERSHIP CONSUMED",
+        "COST PATH IDENTICAL",
+        "STAGE1 MATCHED NEGATIVE",
+        "NO ECONOMIC CLAIM",
+        "NO OOS"
+      ],
       "color": "#f9a825",
       "contracts": [
         {
@@ -6079,7 +6176,7 @@
       "required": false,
       "semantic_role": "relational_direct_weight_policy_challenger",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "tests/test_crypto_relational_policy_vertical_slice.py",
         "evidence_sha256": "71FE5D71779DD75372534CD853D68A49695F4149F4159066502F7AF6498749C6",
         "level": "STATIC_VERIFIED",
@@ -6098,6 +6195,14 @@
         "sha256": "BE2021B0C493CFA51E19A3F5DECD527AF27CA797031A0E59239E6F94B3CF9CA6",
         "verified_sha": "057e31df71f55f9e3a6e8ea3b48d53293d7d2e13"
       },
+      "claim_badges": [
+        "CONSUMPTION VERIFIED",
+        "PURGED CONDITIONAL INFORMATION VERIFIED",
+        "HELD-OUT CALIBRATION VERIFIED",
+        "UNPURGED EVIDENCE SUPERSEDED",
+        "ECONOMIC INCREMENT NOT ESTABLISHED",
+        "NO OOS"
+      ],
       "color": "#f9a825",
       "contracts": [
         {
@@ -6357,7 +6462,7 @@
       "required": false,
       "semantic_role": "context_bound_feature_information_qualification",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
         "evidence_sha256": "92BF05B0046FE258BA708871EE52ED764C61EAA61E46F0ACCDA1A7FAEE73E6FA",
         "level": "PARTIAL",
@@ -6378,6 +6483,7 @@
         "sha256": "6B3773B462103991C86A1DD950E87EDCD7C27EB20CF04854B8C08D0F6BCBAAB7",
         "verified_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
+      "claim_badges": [],
       "color": "#c62828",
       "contracts": [
         {
@@ -6404,7 +6510,7 @@
       "required": false,
       "semantic_role": "performance_search_boundary",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
         "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "level": "STATIC_VERIFIED",
@@ -6423,6 +6529,7 @@
         "sha256": "6B3773B462103991C86A1DD950E87EDCD7C27EB20CF04854B8C08D0F6BCBAAB7",
         "verified_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
       },
+      "claim_badges": [],
       "color": "#c62828",
       "contracts": [
         {
@@ -6449,7 +6556,7 @@
       "required": false,
       "semantic_role": "new_data_integration_boundary",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
         "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
         "level": "STATIC_VERIFIED",
@@ -6468,6 +6575,14 @@
         "sha256": "AA4DB810885F9EBAEF1BACAA1C7C3D789755D7CC7D469BC4A4819127C4D73C8C",
         "verified_sha": "d64a783dac4c148d1924f76acb7b8a80cbcc7f1a"
       },
+      "claim_badges": [
+        "SUPPLIER QUARANTINED",
+        "BITFINEX COVERAGE UNVERIFIED",
+        "BITFINEX ADEQUACY UNDERPOWERED",
+        "FORWARD RAW CAPTURE ACTIVE",
+        "NO CURRENT OVERLAP",
+        "NO RESEARCH ADMISSION"
+      ],
       "color": "#2e7d32",
       "contracts": [
         {
@@ -6653,7 +6768,7 @@
       "required": false,
       "semantic_role": "liquidation_source_ingress",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": "runtime/binance_force_order_capture_activation_20260718/snapshot.json",
         "evidence_sha256": "E4B6916E3C04C384E797DC5707178B0127E743B6E255300121D61B377F364751",
         "level": "PARTIAL",
@@ -6674,6 +6789,7 @@
         "sha256": "ED3007BFE6C05AAE8FABA7F1F6E198D024DAD5109A62E69C1B861EF002B61474",
         "verified_sha": "e943f14aba1d0c0287f61746567a4ed26d702035"
       },
+      "claim_badges": [],
       "color": "#c62828",
       "contracts": [
         {
@@ -6734,7 +6850,7 @@
       "required": false,
       "semantic_role": "evaluation_access_boundary",
       "validation": {
-        "checked_at": "2026-07-27T07:42:47.378243+00:00",
+        "checked_at": "2026-07-27T10:05:17.991606+00:00",
         "evidence_ref": ".planning/STATE.md",
         "evidence_sha256": "ED3007BFE6C05AAE8FABA7F1F6E198D024DAD5109A62E69C1B861EF002B61474",
         "level": "PARTIAL",
@@ -6750,7 +6866,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "639EFC414D30B6DE5D6DB1754F401A7E55FCB305077B14C1AC158C437E4646E2"
+    "sha256": "BB74A667ED6B9979CCACBBED38D4CE962E5FDBF0DB59E8CB93A160131B645D60"
   },
   "profile_id": null,
   "profiles": [
@@ -6781,13 +6897,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "2414af4d2cfccb3f87a53c31d6441e6cdf199d8d",
-    "edge_count": 35173,
-    "node_count": 18645,
+    "built_at_commit": "bbb3a0a42ef2a5e38af2cb1f2025c64d35d963f4",
+    "edge_count": 35378,
+    "node_count": 18749,
     "path": ".planning/graphs/graph.json",
-    "sha256": "409224A1A5DAF63D4425EDE6F9C1006972A02014167754A5FB47E487858CD40F"
+    "sha256": "DF4014C976320D3512EC75EA1FEBF8CC3DC12D44532B55914845A3109D01EFDE"
   },
-  "repo_head": "2414af4d2cfccb3f87a53c31d6441e6cdf199d8d",
+  "repo_head": "bbb3a0a42ef2a5e38af2cb1f2025c64d35d963f4",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,

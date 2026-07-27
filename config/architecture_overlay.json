@@ -495,12 +495,12 @@
         }
       ],
       "validation": {
-        "level": "RUNTIME_VERIFIED",
+        "level": "STATIC_VERIFIED",
         "result": "PASS",
-        "profile": "bounded-system-canary",
+        "profile": "evidence-boundary-change",
         "evidence_ref": "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727.md",
         "evidence_sha256": "3165870BA7065CD40391FA8BBC52AB0B26EA80ECFC5C58B552DEB2B3C23010A5",
-        "verified_at_sha": "5a17a91732a7aca7ec53cf9e10963faf2998a649"
+        "verified_at_sha": "bbb3a0a42ef2a5e38af2cb1f2025c64d35d963f4"
       },
       "claim_badges": [
         "LEGACY 20K ENGINEERING PASS",
