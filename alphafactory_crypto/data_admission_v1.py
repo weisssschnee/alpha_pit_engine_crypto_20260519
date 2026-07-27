@@ -21,6 +21,7 @@ import threading
 import time
 import xml.etree.ElementTree as ET
 import zipfile
+from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -118,6 +119,53 @@ AGGTRADES_SYSTEM_CANARY_FIELDS = (
     "large_notional_ratio_100k_plus",
 )
 
+AGGTRADES_SEARCH_FIELDS = (
+    "agg_trade_count",
+    "underlying_trade_count",
+    "quantity",
+    "notional",
+    "buy_agg_trade_count",
+    "sell_agg_trade_count",
+    "buy_underlying_trade_count",
+    "sell_underlying_trade_count",
+    "buy_quantity",
+    "sell_quantity",
+    "buy_notional",
+    "sell_notional",
+    "signed_aggressor_quantity",
+    "signed_aggressor_notional",
+    "trade_count_le_100",
+    "trade_count_100_1k",
+    "trade_count_1k_10k",
+    "trade_count_10k_100k",
+    "trade_count_100k_1m",
+    "trade_count_gt_1m",
+    "notional_le_100",
+    "notional_100_1k",
+    "notional_1k_10k",
+    "notional_10k_100k",
+    "notional_100k_1m",
+    "notional_gt_1m",
+    "open_price",
+    "high_price",
+    "low_price",
+    "close_price",
+    "max_trade_notional",
+    "vwap",
+    "buy_vwap",
+    "sell_vwap",
+    "avg_agg_trade_notional",
+    "avg_underlying_trade_notional",
+    "volume_imbalance",
+    "buy_sell_notional_ratio",
+    "price_range_bps",
+    "close_to_open_bps",
+    "large_trade_count_100k_plus",
+    "large_notional_100k_plus",
+    "large_trade_count_ratio_100k_plus",
+    "large_notional_ratio_100k_plus",
+)
+
 _AGGTRADES_CANARY_SOURCE_COLUMNS = (
     "timestamp",
     "agg_trade_count",
@@ -141,6 +189,154 @@ _AGGTRADES_CANARY_SOURCE_COLUMNS = (
     "feature_available_time",
     "execution_time_min",
 )
+
+_AGGTRADES_SEARCH_SOURCE_COLUMNS = (
+    "timestamp",
+    *AGGTRADES_SEARCH_FIELDS[:26],
+    "high_price",
+    "low_price",
+    "max_trade_notional",
+    "open_price",
+    "close_price",
+    "large_trade_count_100k_plus",
+    "large_notional_100k_plus",
+    "feature_available_time",
+    "execution_time_min",
+)
+
+
+def _search_value_type_unit(field_id: str) -> tuple[str, str]:
+    semantic_id = str(field_id).rsplit("__", 1)[-1].lower()
+    full_id = str(field_id).lower()
+    if full_id.startswith("zscore_"):
+        return "RATIO", "dimensionless"
+    if "close_to_open" in semantic_id or "price_range" in semantic_id:
+        return "BPS", "bps"
+    if "return" in semantic_id:
+        return "RETURN", "dimensionless"
+    if "ratio" in semantic_id or "share" in semantic_id or "imbalance" in semantic_id:
+        return "RATIO", "dimensionless"
+    if semantic_id.startswith("funding_rate"):
+        return "RATIO", "dimensionless"
+    if semantic_id in {"oi_n", "mark_n"} or "count" in semantic_id:
+        return "COUNT", "observations"
+    if "signed" in semantic_id:
+        return (
+            ("SIGNED_FLOW", "quote_asset")
+            if "notional" in semantic_id
+            else ("SIGNED_FLOW", "base_asset")
+        )
+    if "notional" in semantic_id or semantic_id.startswith("open_interest_value"):
+        return "NOTIONAL", "quote_asset"
+    if semantic_id.startswith("open_interest"):
+        return "VOLUME", "contracts"
+    if any(
+        token in semantic_id
+        for token in (
+            "price",
+            "vwap",
+            "open",
+            "high",
+            "low",
+            "close",
+            "settle",
+        )
+    ):
+        return "PRICE", "quote_per_base"
+    if "quantity" in semantic_id or "volume" in semantic_id:
+        return "VOLUME", "base_asset"
+    return "RATIO", "dimensionless"
+
+
+def contracts_from_core3_tokens(
+    payload: Mapping[str, Any],
+) -> tuple[Any, ...]:
+    """Convert only the independent Core3 token plane into FieldContracts."""
+
+    from alphafactory_crypto.broad_search.expression import FieldContract
+
+    rows = [
+        row
+        for row in payload.get("tokens", [])
+        if row.get("context_id") == "CORE3_MICROSTRUCTURE_PILOT"
+    ]
+    contracts = []
+    seen: set[str] = set()
+    for row in rows:
+        field_id = str(row["field_id"])
+        if field_id in seen:
+            raise ValueError(f"duplicate Core3 field identity: {field_id}")
+        seen.add(field_id)
+        value_type, unit = _search_value_type_unit(field_id)
+        contracts.append(
+            FieldContract(
+                field_id,
+                value_type,
+                unit,
+                max(1, int(row.get("feature_available_lag_bars", 1))),
+                "CORE3_SEARCH_SURFACE_INTEGRATION_V1",
+            )
+        )
+    if not contracts:
+        raise ValueError("Core3 token contract contains no independent fields")
+    return tuple(contracts)
+
+
+def contracts_from_aggtrades_search_fields() -> tuple[Any, ...]:
+    """Register the complete safe physical hourly aggTrades carrier surface."""
+
+    from alphafactory_crypto.broad_search.expression import FieldContract
+
+    return tuple(
+        FieldContract(
+            field_id,
+            *_search_value_type_unit(f"agg_{field_id}"),
+            1,
+            "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        )
+        for field_id in AGGTRADES_SEARCH_FIELDS
+    )
+
+
+def contracts_from_oi_mark_schema(
+    venue: str,
+    schema: pa.Schema,
+) -> tuple[Any, ...]:
+    """Register safe hourly OI/mark values with a stable venue qualifier."""
+
+    from alphafactory_crypto.broad_search.expression import FieldContract
+
+    excluded = {
+        "venue",
+        "base_asset",
+        "venue_symbol",
+        "liquidity_rank",
+        "timestamp",
+        "next_funding_time_last",
+        "feature_available_time",
+        "execution_time_min",
+    }
+    contracts = []
+    for item in schema:
+        if item.name in excluded or not (
+            pa.types.is_integer(item.type) or pa.types.is_floating(item.type)
+        ):
+            continue
+        field_id = f"{venue}__{item.name}"
+        value_type, unit = _search_value_type_unit(field_id)
+        contracts.append(
+            FieldContract(
+                field_id,
+                value_type,
+                unit,
+                1,
+                "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+            )
+        )
+    if not contracts:
+        raise ValueError(f"OI/mark schema contains no safe numeric fields: {venue}")
+    return tuple(contracts)
+
 
 LIT_OLD_END = pd.Timestamp("2025-01-31T08:59:59Z")
 LIT_NEW_START = pd.Timestamp("2025-12-23T17:30:00Z")
@@ -878,6 +1074,89 @@ def _aggregate_aggtrades_hourly(frame: pd.DataFrame) -> pd.DataFrame:
         & output["maximum_feature_available_time"].le(hour_end)
         & output["maximum_execution_time_min"].le(decision_time)
         & np.isfinite(output[list(AGGTRADES_SYSTEM_CANARY_FIELDS)]).all(axis=1)
+    )
+    return output
+
+
+def aggregate_aggtrades_search_hourly(frame: pd.DataFrame) -> pd.DataFrame:
+    """Materialize the delivered physical aggTrades surface at hourly grain.
+
+    Completeness and PIT timing are coordinate gates.  Individual feature
+    missingness remains field-local so a zero sell side, for example, does not
+    erase unrelated count/notional fields from another candidate.
+    """
+
+    missing = sorted(set(_AGGTRADES_SEARCH_SOURCE_COLUMNS) - set(frame.columns))
+    if missing:
+        raise ValueError(f"aggTrades compact partition lacks columns: {missing}")
+    local = frame.loc[:, list(_AGGTRADES_SEARCH_SOURCE_COLUMNS)].copy()
+    local["timestamp"] = pd.to_datetime(local["timestamp"], utc=True)
+    local["feature_available_time"] = pd.to_datetime(
+        local["feature_available_time"], utc=True
+    )
+    local["execution_time_min"] = pd.to_datetime(
+        local["execution_time_min"], utc=True
+    )
+    if local["timestamp"].duplicated().any():
+        raise ValueError("aggTrades compact partition has duplicate minute timestamps")
+    local = local.sort_values("timestamp")
+    local["hour"] = local["timestamp"].dt.floor("h")
+    grouped = local.groupby("hour", sort=True, observed=True)
+    additive = list(AGGTRADES_SEARCH_FIELDS[:26]) + [
+        "large_trade_count_100k_plus",
+        "large_notional_100k_plus",
+    ]
+    output = grouped[additive].sum(min_count=1)
+    output["open_price"] = grouped["open_price"].first()
+    output["high_price"] = grouped["high_price"].max()
+    output["low_price"] = grouped["low_price"].min()
+    output["close_price"] = grouped["close_price"].last()
+    output["max_trade_notional"] = grouped["max_trade_notional"].max()
+    output["vwap"] = _safe_divide(output["notional"], output["quantity"])
+    output["buy_vwap"] = _safe_divide(
+        output["buy_notional"], output["buy_quantity"]
+    )
+    output["sell_vwap"] = _safe_divide(
+        output["sell_notional"], output["sell_quantity"]
+    )
+    output["avg_agg_trade_notional"] = _safe_divide(
+        output["notional"], output["agg_trade_count"]
+    )
+    output["avg_underlying_trade_notional"] = _safe_divide(
+        output["notional"], output["underlying_trade_count"]
+    )
+    output["volume_imbalance"] = _safe_divide(
+        output["buy_notional"] - output["sell_notional"],
+        output["buy_notional"] + output["sell_notional"],
+    )
+    output["buy_sell_notional_ratio"] = _safe_divide(
+        output["buy_notional"], output["sell_notional"]
+    )
+    output["price_range_bps"] = 10_000.0 * _safe_divide(
+        output["high_price"] - output["low_price"], output["low_price"]
+    )
+    output["close_to_open_bps"] = 10_000.0 * _safe_divide(
+        output["close_price"] - output["open_price"], output["open_price"]
+    )
+    output["large_trade_count_ratio_100k_plus"] = _safe_divide(
+        output["large_trade_count_100k_plus"], output["agg_trade_count"]
+    )
+    output["large_notional_ratio_100k_plus"] = _safe_divide(
+        output["large_notional_100k_plus"], output["notional"]
+    )
+    output["minute_rows"] = grouped.size()
+    output["maximum_feature_available_time"] = grouped[
+        "feature_available_time"
+    ].max()
+    output["maximum_execution_time_min"] = grouped["execution_time_min"].max()
+    output["complete_and_pit_safe"] = (
+        output["minute_rows"].eq(60)
+        & output["maximum_feature_available_time"].le(
+            output.index + pd.Timedelta(hours=1)
+        )
+        & output["maximum_execution_time_min"].le(
+            output.index + pd.Timedelta(hours=2)
+        )
     )
     return output
 
@@ -1902,10 +2181,688 @@ def run(config: RunConfig) -> dict[str, Any]:
     return run_manifest
 
 
+def _resolve_repo_path(repo_root: Path, value: str) -> Path:
+    path = Path(str(value))
+    return path if path.is_absolute() else repo_root / path
+
+
+def _field_contract_payload(contract: Any) -> dict[str, Any]:
+    return {
+        "field_id": contract.field_id,
+        "value_type": contract.value_type,
+        "unit": contract.unit,
+        "observable_lag_hours": int(contract.observable_lag_hours),
+        "pit_authority": contract.pit_authority,
+    }
+
+
+def _aggtrades_sample_statistics(path: Path) -> tuple[dict[str, float], dict[str, Any]]:
+    members_checked = 0
+    with tarfile.open(path, "r:") as archive:
+        members = sorted(
+            (
+                member
+                for member in archive.getmembers()
+                if member.isfile()
+                and "/compact_1m/" in member.name
+                and member.name.endswith("/part.parquet")
+            ),
+            key=lambda member: member.name,
+        )
+        for member in members[:32]:
+            members_checked += 1
+            handle = archive.extractfile(member)
+            if handle is None:
+                continue
+            table = pq.ParquetFile(handle).read(
+                columns=list(_AGGTRADES_SEARCH_SOURCE_COLUMNS)
+            )
+            hourly = aggregate_aggtrades_search_hourly(table.to_pandas())
+            valid = hourly.loc[hourly["complete_and_pit_safe"].astype(bool)]
+            if valid.empty:
+                continue
+            stats = {
+                field_id: float(
+                    np.isfinite(
+                        pd.to_numeric(valid[field_id], errors="coerce").to_numpy(
+                            dtype=float
+                        )
+                    ).mean()
+                )
+                for field_id in AGGTRADES_SEARCH_FIELDS
+            }
+            return stats, {
+                "archive": str(path),
+                "declared_sha256": _declared_tar_sha256(path),
+                "sample_member": member.name,
+                "sample_minute_rows": int(table.num_rows),
+                "sample_complete_hours": int(len(valid)),
+                "members_checked": members_checked,
+                "missing_fill": None,
+            }
+    raise ValueError(f"no complete PIT-safe aggTrades hour found in {path}")
+
+
+def _oi_mark_surface(
+    root: Path,
+) -> tuple[tuple[Any, ...], dict[str, float], list[dict[str, Any]]]:
+    contracts: list[Any] = []
+    stats: dict[str, float] = {}
+    evidence: list[dict[str, Any]] = []
+    compact_root = root / "compact_1h"
+    venues = sorted(path for path in compact_root.iterdir() if path.is_dir())
+    if not venues:
+        raise ValueError("OI/mark compact root exposes no venue")
+    for venue_root in venues:
+        files = sorted(venue_root.rglob("part.parquet"))
+        if not files:
+            raise ValueError(f"OI/mark venue exposes no parquet: {venue_root.name}")
+        sample = files[0]
+        parquet = pq.ParquetFile(sample)
+        local_contracts = contracts_from_oi_mark_schema(
+            venue_root.name, parquet.schema_arrow
+        )
+        source_fields = [
+            contract.field_id.split("__", 1)[1]
+            for contract in local_contracts
+        ]
+        table = parquet.read(
+            columns=[
+                *source_fields,
+                "feature_available_time",
+                "execution_time_min",
+            ]
+        )
+        frame = table.to_pandas()
+        available = pd.to_datetime(frame["feature_available_time"], utc=True)
+        executable = pd.to_datetime(frame["execution_time_min"], utc=True)
+        if not bool(available.le(executable).all()):
+            raise ValueError(
+                f"OI/mark sample violates feature/execution order: {sample}"
+            )
+        for contract, source_field in zip(
+            local_contracts, source_fields, strict=True
+        ):
+            stats[contract.field_id] = float(
+                np.isfinite(
+                    pd.to_numeric(frame[source_field], errors="coerce").to_numpy(
+                        dtype=float
+                    )
+                ).mean()
+            )
+        contracts.extend(local_contracts)
+        evidence.append(
+            {
+                "venue": venue_root.name,
+                "sample_path": str(sample),
+                "sample_sha256": _sha256_file(sample),
+                "sample_rows": int(table.num_rows),
+                "schema_sha256": _payload_sha(
+                    [
+                        {"name": item.name, "type": str(item.type)}
+                        for item in parquet.schema_arrow
+                    ]
+                ),
+                "feature_before_or_at_execution": True,
+                "missing_fill": None,
+            }
+        )
+    return tuple(contracts), stats, evidence
+
+
+def _inventory_numeric_fields(
+    root: Path,
+    *,
+    surface_id: str,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    files = sorted(root.rglob("*.parquet"))
+    if not files:
+        raise ValueError(f"{surface_id} exposes no parquet inventory")
+    parquet = pq.ParquetFile(files[0])
+    excluded = {
+        "venue",
+        "symbol",
+        "base_asset",
+        "venue_symbol",
+        "timestamp",
+        "feature_available_time",
+        "execution_time_min",
+    }
+    rows = []
+    for item in parquet.schema_arrow:
+        if item.name in excluded or not (
+            pa.types.is_integer(item.type) or pa.types.is_floating(item.type)
+        ):
+            continue
+        value_type, unit = _search_value_type_unit(item.name)
+        rows.append(
+            {
+                "surface_id": surface_id,
+                "field_id": item.name,
+                "source_field_id": item.name,
+                "value_type": value_type,
+                "unit": unit,
+                "observable_lag_hours": 1,
+                "pit_authority": "QUARANTINED_NOT_REGISTERED",
+                "materialized": True,
+                "sample_finite_ratio": None,
+                "field_contract_registered": False,
+                "typed_role_reachable": False,
+                "compatible_skeleton_count": 0,
+                "compiler_valid": False,
+                "matched_control_constructible": False,
+                "deterministic_replay": False,
+                "candidate_id": None,
+                "research_admitted": False,
+                "block_reason": "SOURCE_OR_DATA_ADEQUACY_QUARANTINE",
+            }
+        )
+    return rows, {
+        "sample_path": str(files[0]),
+        "sample_sha256": _sha256_file(files[0]),
+        "schema_sha256": _payload_sha(
+            [
+                {"name": item.name, "type": str(item.type)}
+                for item in parquet.schema_arrow
+            ]
+        ),
+        "parquet_files": len(files),
+    }
+
+
+def _active_surface_rows(
+    *,
+    surface_id: str,
+    contracts: Sequence[Any],
+    finite_ratios: Mapping[str, float],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    from alphafactory_crypto.broad_search.compositional18m import (
+        compiler_reachability_proofs,
+        field_role_surface,
+    )
+    from alphafactory_crypto.broad_search.expression import TypedExpressionRegistry
+
+    registry = TypedExpressionRegistry(tuple(contracts))
+    surface = field_role_surface(tuple(contracts))
+    proofs = compiler_reachability_proofs(registry, surface_id=surface_id)
+    proof_by_field = {str(row["field_id"]): row for row in proofs}
+    roles_by_field: dict[str, list[str]] = defaultdict(list)
+    for role, fields in surface["roles"].items():
+        for field_id in fields:
+            roles_by_field[str(field_id)].append(str(role))
+    rows = []
+    for contract in contracts:
+        proof = proof_by_field.get(contract.field_id)
+        rows.append(
+            {
+                "surface_id": surface_id,
+                "field_id": contract.field_id,
+                "source_field_id": contract.field_id.split("__", 1)[-1],
+                "value_type": contract.value_type,
+                "unit": contract.unit,
+                "observable_lag_hours": int(contract.observable_lag_hours),
+                "pit_authority": contract.pit_authority,
+                "materialized": contract.field_id in finite_ratios,
+                "sample_finite_ratio": finite_ratios.get(contract.field_id),
+                "field_contract_registered": True,
+                "typed_role_reachable": proof is not None,
+                "typed_roles_json": json.dumps(
+                    sorted(roles_by_field.get(contract.field_id, [])),
+                    separators=(",", ":"),
+                ),
+                "compatible_skeleton_count": len(
+                    surface["compatible_skeleton_ids"]
+                ),
+                "compiler_valid": bool(proof and proof["compiler_valid"]),
+                "matched_control_constructible": bool(
+                    proof and proof["matched_control_constructible"]
+                ),
+                "deterministic_replay": bool(
+                    proof and proof["deterministic_replay"]
+                ),
+                "candidate_id": proof["candidate_id"] if proof else None,
+                "research_admitted": False,
+                "block_reason": None,
+            }
+        )
+    return rows, proofs, surface
+
+
+def build_search_surface_integration(
+    *,
+    repo_root: Path,
+    config_path: Path,
+) -> dict[str, Any]:
+    """Build non-economic source-to-compiler reachability evidence."""
+
+    from alphafactory_crypto.broad_search.expression import FieldContract
+
+    started = datetime.now(UTC)
+    wall_started = time.perf_counter()
+    cpu_started = time.process_time()
+    repo_root = repo_root.resolve()
+    config_path = config_path.resolve()
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    if config.get("authorization") != "NON_ECONOMIC_SEARCH_SURFACE_INTEGRATION_V1":
+        raise PermissionError("search-surface integration authorization changed")
+    if any(
+        bool(config["boundaries"].get(key))
+        for key in (
+            "market_search",
+            "alpha_claim",
+            "oos",
+            "challenge",
+            "recent",
+            "may_stress",
+            "forward",
+            "promotion",
+            "latent_priority",
+            "relational_training",
+            "cross_sprint_adaptive_memory",
+        )
+    ):
+        raise PermissionError("search-surface integration boundary opened")
+    runtime_root = _resolve_repo_path(
+        repo_root, config["outputs"]["runtime_root"]
+    )
+    report_path = _resolve_repo_path(repo_root, config["outputs"]["report"])
+    runtime_root.mkdir(parents=True, exist_ok=True)
+    contract = {
+        **config,
+        "config_path": config_path.relative_to(repo_root).as_posix(),
+        "config_sha256": _sha256_file(config_path),
+        "frozen_at": started.isoformat(),
+    }
+    stable_contract = {
+        key: value for key, value in contract.items() if key != "frozen_at"
+    }
+    contract["frozen_contract_sha256"] = _payload_sha(stable_contract)
+    _write_json(runtime_root / "frozen_contract.json", contract)
+
+    inputs = {
+        key: _resolve_repo_path(repo_root, value)
+        for key, value in config["inputs"].items()
+    }
+    broad_payload = json.loads(inputs["broad_registry"].read_text(encoding="utf-8"))
+    broad_contracts = tuple(
+        FieldContract(
+            str(row["field_id"]),
+            str(row["value_type"]),
+            str(row["unit"]),
+            max(1, int(row.get("observable_lag_hours", 1))),
+            "SEARCH_SURFACE_INTEGRATION_V1",
+        )
+        for row in broad_payload["fields"]
+    )
+    if len(broad_contracts) != 39:
+        raise ValueError("Broad integration surface is not 39 fields")
+    core_payload = json.loads(
+        inputs["core3_token_contract"].read_text(encoding="utf-8")
+    )
+    core_contracts = contracts_from_core3_tokens(core_payload)
+    if len(core_contracts) != 81:
+        raise ValueError("Core3 integration surface is not 81 fields")
+    consumption_path = (
+        inputs["core3_token_contract"].parent / "token_consumption_evidence.csv"
+    )
+    consumption = pd.read_csv(consumption_path)
+    broad_stats = {
+        str(row.field_id): float(row.finite_ratio)
+        for row in consumption.loc[
+            consumption["context_id"].eq("BROAD_PANEL_BASELINE")
+        ].itertuples()
+        if bool(row.check_materialized)
+    }
+    core_stats = {
+        str(row.field_id): float(row.finite_ratio)
+        for row in consumption.loc[
+            consumption["context_id"].eq("CORE3_MICROSTRUCTURE_PILOT")
+        ].itertuples()
+        if bool(row.check_materialized)
+    }
+
+    agg_contracts = contracts_from_aggtrades_search_fields()
+    top100_stats, top100_evidence = _aggtrades_sample_statistics(
+        inputs["aggtrades_top100_tar"]
+    )
+    rank_stats, rank_evidence = _aggtrades_sample_statistics(
+        inputs["aggtrades_ranks101_200_tar"]
+    )
+    agg_stats = {
+        field_id: max(top100_stats[field_id], rank_stats[field_id])
+        for field_id in AGGTRADES_SEARCH_FIELDS
+    }
+    oi_contracts, oi_stats, oi_evidence = _oi_mark_surface(
+        inputs["oi_mark_ranks51_200_root"]
+    )
+
+    rows: list[dict[str, Any]] = []
+    proofs: list[dict[str, Any]] = []
+    surfaces: dict[str, Any] = {}
+    for surface_id, contracts, stats in (
+        ("BROAD_PANEL_BASELINE", broad_contracts, broad_stats),
+        ("CORE3_MICROSTRUCTURE_PILOT", core_contracts, core_stats),
+        ("AGGTRADES_TOP200_DELIVERED", agg_contracts, agg_stats),
+        ("OI_MARK_RANKS51_200_DELIVERED", oi_contracts, oi_stats),
+    ):
+        local_rows, local_proofs, local_surface = _active_surface_rows(
+            surface_id=surface_id,
+            contracts=contracts,
+            finite_ratios=stats,
+        )
+        rows.extend(local_rows)
+        proofs.extend(local_proofs)
+        surfaces[surface_id] = local_surface
+
+    liquidation_rows, liquidation_evidence = _inventory_numeric_fields(
+        inputs["liquidation_schemafixed_v2_root"],
+        surface_id="LIQUIDATION_DELIVERED_QUARANTINED",
+    )
+    rows.extend(liquidation_rows)
+    for contract in oi_contracts:
+        rows.append(
+            {
+                "surface_id": "OI_MARK_TOP50_RAW",
+                "field_id": contract.field_id,
+                "source_field_id": contract.field_id.split("__", 1)[-1],
+                "value_type": contract.value_type,
+                "unit": contract.unit,
+                "observable_lag_hours": int(contract.observable_lag_hours),
+                "pit_authority": "RAW_ONLY_NOT_REGISTERED",
+                "materialized": False,
+                "sample_finite_ratio": None,
+                "field_contract_registered": False,
+                "typed_role_reachable": False,
+                "typed_roles_json": "[]",
+                "compatible_skeleton_count": 0,
+                "compiler_valid": False,
+                "matched_control_constructible": False,
+                "deterministic_replay": False,
+                "candidate_id": None,
+                "research_admitted": False,
+                "block_reason": "RAW_TOP50_COMPACT_MATERIALIZER_NOT_VERIFIED",
+            }
+        )
+
+    reachability = pd.DataFrame(rows).sort_values(
+        ["surface_id", "field_id"], kind="stable"
+    )
+    _write_parquet(runtime_root / "field_reachability.parquet", reachability)
+    contract_payload = {
+        surface_id: [_field_contract_payload(contract) for contract in contracts]
+        for surface_id, contracts in (
+            ("BROAD_PANEL_BASELINE", broad_contracts),
+            ("CORE3_MICROSTRUCTURE_PILOT", core_contracts),
+            ("AGGTRADES_TOP200_DELIVERED", agg_contracts),
+            ("OI_MARK_RANKS51_200_DELIVERED", oi_contracts),
+        )
+    }
+    _write_json(runtime_root / "carrier_contracts.json", contract_payload)
+    proof_path = runtime_root / "compiler_proofs.jsonl"
+    with proof_path.open("w", encoding="utf-8", newline="\n") as handle:
+        for proof in proofs:
+            handle.write(
+                json.dumps(
+                    proof,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                    ensure_ascii=True,
+                )
+                + "\n"
+            )
+    support_contract = {
+        **config["candidate_support"],
+        "implementation": (
+            "RawPanelStore.candidate_support(field_ids, time_slice)"
+        ),
+        "evaluator_consumer": "broad_search.pair18m.evaluate_pair",
+        "unrelated_sparse_fields_reduce_candidate_support": False,
+        "field_availability": "numpy.isfinite(field values)",
+        "full_surface_intersection_required": False,
+    }
+    support_contract["identity_sha256"] = _payload_sha(support_contract)
+    _write_json(runtime_root / "candidate_support_contract.json", support_contract)
+    source_evidence = {
+        "broad_registry_sha256": _sha256_file(inputs["broad_registry"]),
+        "core3_contract_sha256": _sha256_file(inputs["core3_token_contract"]),
+        "core3_consumption_sha256": _sha256_file(consumption_path),
+        "aggtrades": [top100_evidence, rank_evidence],
+        "oi_mark": oi_evidence,
+        "liquidation": liquidation_evidence,
+        "oi_mark_top50_raw": {
+            "path": str(inputs["oi_mark_top50_raw_tar"]),
+            "bytes": inputs["oi_mark_top50_raw_tar"].stat().st_size,
+            "declared_sha256": _declared_tar_sha256(
+                inputs["oi_mark_top50_raw_tar"]
+            ),
+            "consumer_status": "RAW_ONLY_INVENTORY",
+        },
+        "new_data_admission_decision_sha256": _sha256_file(
+            inputs["new_data_admission_decision"]
+        ),
+        "search_v1_2_ledger_sha256": _sha256_file(
+            inputs["search_v1_2_ledger"]
+        ),
+    }
+    _write_json(runtime_root / "source_evidence.json", source_evidence)
+    summary_rows = []
+    for surface_id, group in reachability.groupby("surface_id", sort=True):
+        summary_rows.append(
+            {
+                "surface_id": surface_id,
+                "fields": int(len(group)),
+                "materialized_fields": int(group["materialized"].sum()),
+                "registered_fields": int(group["field_contract_registered"].sum()),
+                "compiler_reachable_fields": int(group["compiler_valid"].sum()),
+                "matched_control_fields": int(
+                    group["matched_control_constructible"].sum()
+                ),
+                "research_admitted_fields": int(
+                    group["research_admitted"].sum()
+                ),
+                "blocked_fields": int(group["block_reason"].notna().sum()),
+            }
+        )
+    active = reachability.loc[
+        reachability["surface_id"].isin(
+            {
+                "BROAD_PANEL_BASELINE",
+                "CORE3_MICROSTRUCTURE_PILOT",
+                "AGGTRADES_TOP200_DELIVERED",
+                "OI_MARK_RANKS51_200_DELIVERED",
+            }
+        )
+    ]
+    active_pass = bool(
+        active["materialized"].all()
+        and active["field_contract_registered"].all()
+        and active["typed_role_reachable"].all()
+        and active["compiler_valid"].all()
+        and active["matched_control_constructible"].all()
+        and active["deterministic_replay"].all()
+    )
+    admission = json.loads(
+        inputs["new_data_admission_decision"].read_text(encoding="utf-8")
+    )
+    final_decision = {
+        "status": (
+            "PASS_SEARCH_SURFACE_INTEGRATION_ENGINEERING"
+            if active_pass
+            else "HOLD_SEARCH_SURFACE_INTEGRATION_INCOMPLETE"
+        ),
+        "active_field_count": int(len(active)),
+        "compiler_reachable_active_fields": int(active["compiler_valid"].sum()),
+        "matched_control_active_fields": int(
+            active["matched_control_constructible"].sum()
+        ),
+        "data_planes": summary_rows,
+        "compatible_surfaces": surfaces,
+        "candidate_support_identity_sha256": support_contract["identity_sha256"],
+        "contexts_merged": False,
+        "joint_120_channel_panel_created": False,
+        "market_search_started": False,
+        "market_pair_evaluations": 0,
+        "reward_reads": 0,
+        "sealed_reads": 0,
+        "research_admission": "HOLD",
+        "research_holds_preserved": admission.get("holds", []),
+        "future_arena_qualified": False,
+        "liquidation_status": "QUARANTINED",
+        "oi_mark_top50_status": "RAW_ONLY_INVENTORY",
+    }
+    _write_json(runtime_root / "final_decision.json", final_decision)
+    report = "\n".join(
+        [
+            "# Crypto Search Surface Integration V1",
+            "",
+            f"- Status: `{final_decision['status']}`",
+            f"- Active fields: `{final_decision['active_field_count']}`; compiler/matched reachable: `{final_decision['compiler_reachable_active_fields']}`.",
+            "- Broad39 and Core3 81 remain independent; no joint 120-channel panel was created.",
+            "- Candidate support is PIT base eligibility intersected with finite values for exactly the candidate raw fields.",
+            "- No market search, pair evaluation, reward read, sealed read, Alpha claim, or promotion occurred.",
+            "",
+            "## Data planes",
+            "",
+            "| Plane | Fields | Materialized | Compiler reachable | Blocked |",
+            "|---|---:|---:|---:|---:|",
+            *[
+                (
+                    f"| {row['surface_id']} | {row['fields']} | "
+                    f"{row['materialized_fields']} | "
+                    f"{row['compiler_reachable_fields']} | "
+                    f"{row['blocked_fields']} |"
+                )
+                for row in summary_rows
+            ],
+            "",
+            "## Boundary",
+            "",
+            "This is engineering reachability, not research admission. Existing instrument-identity, PIT-universe, source-coverage, liquidation, and Top50 raw-consumer holds remain in force.",
+            "",
+        ]
+    )
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(report, encoding="utf-8", newline="\n")
+    outputs = [
+        runtime_root / "frozen_contract.json",
+        runtime_root / "field_reachability.parquet",
+        runtime_root / "carrier_contracts.json",
+        runtime_root / "compiler_proofs.jsonl",
+        runtime_root / "candidate_support_contract.json",
+        runtime_root / "source_evidence.json",
+        runtime_root / "final_decision.json",
+        report_path,
+    ]
+    source_sha = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=repo_root, text=True
+    ).strip()
+    manifest = {
+        "experiment_id": config["experiment_id"],
+        "source_sha": source_sha,
+        "frozen_contract_sha256": contract["frozen_contract_sha256"],
+        "started_at": started.isoformat(),
+        "completed_at": datetime.now(UTC).isoformat(),
+        "wall_seconds": time.perf_counter() - wall_started,
+        "process_cpu_seconds": time.process_time() - cpu_started,
+        "market_search_started": False,
+        "market_pair_evaluations": 0,
+        "reward_reads": 0,
+        "sealed_reads": 0,
+        "outputs": [
+            {
+                "path": path.relative_to(repo_root).as_posix(),
+                "bytes": path.stat().st_size,
+                "sha256": _sha256_file(path),
+            }
+            for path in outputs
+        ],
+        "final_decision": final_decision,
+    }
+    _write_json(runtime_root / "run_manifest.json", manifest)
+    return manifest
+
+
+def check_search_surface_integration(
+    *,
+    repo_root: Path,
+    config_path: Path,
+) -> dict[str, Any]:
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    runtime_root = _resolve_repo_path(
+        repo_root, config["outputs"]["runtime_root"]
+    )
+    errors: list[str] = []
+    required = (
+        "frozen_contract.json",
+        "field_reachability.parquet",
+        "carrier_contracts.json",
+        "compiler_proofs.jsonl",
+        "candidate_support_contract.json",
+        "source_evidence.json",
+        "final_decision.json",
+        "run_manifest.json",
+    )
+    for name in required:
+        if not (runtime_root / name).is_file():
+            errors.append(f"MISSING:{name}")
+    if errors:
+        return {"status": "FAIL", "errors": errors}
+    decision = json.loads(
+        (runtime_root / "final_decision.json").read_text(encoding="utf-8")
+    )
+    reachability = pd.read_parquet(runtime_root / "field_reachability.parquet")
+    active = reachability.loc[
+        reachability["surface_id"].isin(
+            {
+                "BROAD_PANEL_BASELINE",
+                "CORE3_MICROSTRUCTURE_PILOT",
+                "AGGTRADES_TOP200_DELIVERED",
+                "OI_MARK_RANKS51_200_DELIVERED",
+            }
+        )
+    ]
+    if len(active) != int(decision.get("active_field_count", -1)):
+        errors.append("ACTIVE_FIELD_COUNT_MISMATCH")
+    for column in (
+        "materialized",
+        "field_contract_registered",
+        "typed_role_reachable",
+        "compiler_valid",
+        "matched_control_constructible",
+        "deterministic_replay",
+    ):
+        if not bool(active[column].all()):
+            errors.append(f"ACTIVE_GATE_FAILED:{column}")
+    if (
+        decision.get("market_search_started")
+        or int(decision.get("market_pair_evaluations", -1)) != 0
+        or int(decision.get("reward_reads", -1)) != 0
+        or int(decision.get("sealed_reads", -1)) != 0
+        or decision.get("future_arena_qualified")
+        or decision.get("joint_120_channel_panel_created")
+    ):
+        errors.append("BOUNDARY_OPENED")
+    manifest = json.loads(
+        (runtime_root / "run_manifest.json").read_text(encoding="utf-8")
+    )
+    for row in manifest["outputs"]:
+        path = repo_root / row["path"]
+        if not path.is_file() or _sha256_file(path) != row["sha256"]:
+            errors.append(f"OUTPUT_IDENTITY_MISMATCH:{row['path']}")
+    return {
+        "status": "PASS" if not errors else "FAIL",
+        "errors": errors,
+        "active_field_count": len(active),
+        "data_plane_count": int(reachability["surface_id"].nunique()),
+    }
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output-root", type=Path, required=True)
-    parser.add_argument("--runtime-root", type=Path, required=True)
+    parser.add_argument("--search-surface-integration-config", type=Path)
+    parser.add_argument("--check-search-surface-integration", action="store_true")
+    parser.add_argument("--output-root", type=Path)
+    parser.add_argument("--runtime-root", type=Path)
     parser.add_argument("--start-month", default="2023-12")
     parser.add_argument("--end-month", default="2026-06")
     parser.add_argument("--membership-start", default="2024-01-01")
@@ -1917,16 +2874,42 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--workers", type=int, default=10)
     parser.add_argument("--timeout-seconds", type=int, default=60)
     parser.add_argument("--retries", type=int, default=3)
-    parser.add_argument("--v3-root", type=Path, required=True)
-    parser.add_argument("--agg-top100-tar", type=Path, required=True)
-    parser.add_argument("--agg-101-200-tar", type=Path, required=True)
-    parser.add_argument("--oi-51-200-symbol-map", type=Path, required=True)
+    parser.add_argument("--v3-root", type=Path)
+    parser.add_argument("--agg-top100-tar", type=Path)
+    parser.add_argument("--agg-101-200-tar", type=Path)
+    parser.add_argument("--oi-51-200-symbol-map", type=Path)
     parser.add_argument("--oi-top50-tar", type=Path)
     return parser
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
+    if args.search_surface_integration_config is not None:
+        repo_root = Path(__file__).resolve().parents[1]
+        if args.check_search_surface_integration:
+            result = check_search_surface_integration(
+                repo_root=repo_root,
+                config_path=args.search_surface_integration_config.resolve(),
+            )
+            print(json.dumps(result, indent=2, default=str))
+            return 0 if result["status"] == "PASS" else 1
+        manifest = build_search_surface_integration(
+            repo_root=repo_root,
+            config_path=args.search_surface_integration_config.resolve(),
+        )
+        print(json.dumps(manifest["final_decision"], indent=2, default=str))
+        return 0
+    required = {
+        "--output-root": args.output_root,
+        "--runtime-root": args.runtime_root,
+        "--v3-root": args.v3_root,
+        "--agg-top100-tar": args.agg_top100_tar,
+        "--agg-101-200-tar": args.agg_101_200_tar,
+        "--oi-51-200-symbol-map": args.oi_51_200_symbol_map,
+    }
+    missing = [name for name, value in required.items() if value is None]
+    if missing:
+        raise SystemExit(f"missing required admission arguments: {', '.join(missing)}")
     config = RunConfig(
         output_root=args.output_root,
         runtime_root=args.runtime_root,

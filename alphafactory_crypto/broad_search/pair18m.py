@@ -230,9 +230,15 @@ def evaluate_pair(
     }
     timings["field_read_seconds"] = time.perf_counter() - read_started
     sample_memory()
-    support = base.copy()
-    for values in raw.values():
-        support &= np.isfinite(values)
+    if hasattr(store, "candidate_support"):
+        support = store.candidate_support(candidate.raw_fields, block)
+    else:
+        # Lightweight test/probe stores predate the explicit carrier method.
+        # Preserve the exact candidate-local semantics without requiring them
+        # to impersonate the full RawPanelStore API.
+        support = base.copy()
+        for values in raw.values():
+            support &= np.isfinite(values)
     materialize_started = time.perf_counter()
     # Primary and ablation control deliberately share their unchanged DAG
     # subtrees.  Reusing those immutable arrays preserves exact semantics and

@@ -216,7 +216,9 @@ def _variant_operator(family: str, variant: int) -> str:
     return table[family][variant - 1]
 
 
-def _field_roles(contracts: Sequence[FieldContract]) -> dict[str, list[str]]:
+def _field_roles(
+    contracts: Sequence[FieldContract], *, require_complete: bool = True
+) -> dict[str, list[str]]:
     fields = [item.field_id for item in contracts]
     families = {field: infer_family(field) for field in fields}
     current_price_level_routes = any(
@@ -224,6 +226,9 @@ def _field_roles(contracts: Sequence[FieldContract]) -> dict[str, list[str]]:
         in {
             "CURRENT_FIELD_SURFACE_BINDING",
             "CURRENT_CORE_PACK_ADAPTIVE_ONLY_QUALIFICATION",
+            "SEARCH_SURFACE_INTEGRATION_V1",
+            "CORE3_SEARCH_SURFACE_INTEGRATION_V1",
+            "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
         }
         for item in contracts
     )
@@ -252,7 +257,7 @@ def _field_roles(contracts: Sequence[FieldContract]) -> dict[str, list[str]]:
     role_map["market_context"] = role_map["local"]
     role_map["payload"] = [field for field in role_map["local"] if families[field] != "funding"]
     for role, values in role_map.items():
-        if not values:
+        if require_complete and not values:
             raise ValueError(f"admitted field registry cannot satisfy skeleton role: {role}")
     return role_map
 
@@ -290,6 +295,167 @@ def field_role_coverage(
         "roles": {name: list(values) for name, values in sorted(roles.items())},
         "all_fields_reachable": not unreachable,
     }
+
+
+def field_role_surface(
+    contracts: Sequence[FieldContract],
+) -> dict[str, Any]:
+    """Resolve one independent carrier without requiring the full Broad grammar."""
+
+    roles = _field_roles(contracts, require_complete=False)
+    compatible = tuple(
+        skeleton
+        for skeleton in skeleton_registry()
+        if all(roles[role] for role in skeleton.field_roles)
+    )
+    compatible_roles = {
+        role
+        for skeleton in compatible
+        for role in skeleton.field_roles
+    }
+    declared = tuple(item.field_id for item in contracts)
+    reachable = tuple(
+        sorted(
+            {
+                field_id
+                for role in compatible_roles
+                for field_id in roles[role]
+            }
+        )
+    )
+    unreachable = tuple(sorted(set(declared) - set(reachable)))
+    missing_roles = tuple(sorted(role for role, fields in roles.items() if not fields))
+    return {
+        "declared_fields": list(declared),
+        "reachable_fields": list(reachable),
+        "unreachable_fields": list(unreachable),
+        "roles": {name: list(values) for name, values in sorted(roles.items())},
+        "missing_roles": list(missing_roles),
+        "compatible_skeleton_ids": [
+            skeleton.skeleton_id for skeleton in compatible
+        ],
+        "compatible_mechanism_families": sorted(
+            {skeleton.mechanism_family for skeleton in compatible}
+        ),
+        "full_grammar_supported": len(compatible) == len(skeleton_registry()),
+        "all_fields_reachable": not unreachable,
+    }
+
+
+def compiler_reachability_proofs(
+    registry: TypedExpressionRegistry,
+    *,
+    surface_id: str,
+) -> list[dict[str, Any]]:
+    """Compile one deterministic matched-control proof per reachable field."""
+
+    contracts = tuple(registry.fields.values())
+    surface = field_role_surface(contracts)
+    roles = {
+        name: tuple(values)
+        for name, values in surface["roles"].items()
+    }
+    compatible = tuple(
+        skeleton
+        for skeleton in skeleton_registry()
+        if skeleton.skeleton_id in set(surface["compatible_skeleton_ids"])
+    )
+    proofs: list[dict[str, Any]] = []
+    for field_id in surface["reachable_fields"]:
+        proof: dict[str, Any] | None = None
+        for skeleton in compatible:
+            for side, role in enumerate(skeleton.field_roles):
+                if field_id not in roles[role]:
+                    continue
+                other_role = skeleton.field_roles[1 - side]
+                companions = tuple(
+                    value for value in roles[other_role] if value != field_id
+                ) or roles[other_role]
+                for companion in companions:
+                    left_field = field_id if side == 0 else companion
+                    right_field = companion if side == 0 else field_id
+                    operator = _variant_operator(
+                        skeleton.mechanism_family, skeleton.variant
+                    )
+                    genes = {
+                        "left_field": left_field,
+                        "right_field": right_field,
+                        "left_window": _legal_windows(
+                            left_field, skeleton.field_roles[0]
+                        )[0],
+                        "right_window": (
+                            WINDOWS[0]
+                            if infer_family(right_field)
+                            == "listing_age_context"
+                            else _legal_windows(
+                                right_field, skeleton.field_roles[1]
+                            )[0]
+                        ),
+                        "left_normalizer": _legal_normalizers(
+                            left_field, skeleton.field_roles[0]
+                        )[0],
+                        "right_normalizer": (
+                            "RollingZScore"
+                            if skeleton.mechanism_family
+                            == "STATE_REGIME_MODULATION"
+                            or operator == "StateModulation"
+                            else _legal_normalizers(
+                                right_field, skeleton.field_roles[1]
+                            )[0]
+                        ),
+                        "beta": 0.5,
+                        "horizon_hours": HORIZONS[0],
+                    }
+                    try:
+                        candidate = candidate_from_genes(
+                            registry,
+                            skeleton=skeleton,
+                            genes=genes,
+                            roles=roles,
+                        )
+                        primary = registry.validate(candidate.expression)
+                        control = registry.validate(candidate.control)
+                        replay = candidate_from_genes(
+                            registry,
+                            skeleton=skeleton,
+                            genes=candidate.generation_genes,
+                            roles=roles,
+                        )
+                    except ValueError:
+                        continue
+                    proof = {
+                        "surface_id": str(surface_id),
+                        "field_id": field_id,
+                        "candidate_id": candidate.candidate_id,
+                        "skeleton_id": candidate.skeleton_id,
+                        "mechanism_family": candidate.mechanism_family,
+                        "raw_fields": list(candidate.raw_fields),
+                        "compiler_valid": True,
+                        "matched_control_constructible": bool(
+                            primary.raw_fields == control.raw_fields
+                            and candidate.expression.expression_id
+                            != candidate.control.expression_id
+                        ),
+                        "deterministic_replay": bool(
+                            replay.candidate_id == candidate.candidate_id
+                            and replay.expression.expression_id
+                            == candidate.expression.expression_id
+                            and replay.control.expression_id
+                            == candidate.control.expression_id
+                        ),
+                        "candidate_spec": candidate.to_dict(),
+                    }
+                    break
+                if proof is not None:
+                    break
+            if proof is not None:
+                break
+        if proof is None:
+            raise ValueError(
+                f"no compiler proof could be constructed for {surface_id}:{field_id}"
+            )
+        proofs.append(proof)
+    return proofs
 
 
 def _normalized(

@@ -110,23 +110,60 @@ def _payload_sha(value: Any) -> str:
 
 
 def infer_family(field_id: str) -> str:
-    if field_id in FAMILY_OVERRIDES:
-        return FAMILY_OVERRIDES[field_id]
-    if field_id.startswith("open_interest_value"):
+    # Delivered surfaces retain a source/venue qualifier without creating a
+    # second field ontology.  Core3 derived tokens place the dependency after
+    # ``__`` (for example ``Delta_4h__agg_notional``), while cross-venue
+    # OI/mark fields place the venue before it (``bybit__open_interest_last``).
+    # In both cases the semantic base name is the right-most segment.
+    semantic_id = field_id.rsplit("__", 1)[-1]
+    if semantic_id in FAMILY_OVERRIDES:
+        return FAMILY_OVERRIDES[semantic_id]
+    if semantic_id.startswith("open_interest_value"):
         return "open_interest_value"
-    if field_id.startswith("open_interest"):
+    if semantic_id.startswith("open_interest"):
         return "open_interest_level_change"
-    if field_id.startswith("top_long_short_account") or field_id.startswith(
+    if semantic_id.startswith("top_long_short_account") or semantic_id.startswith(
         "global_long_short_account"
     ):
         return "account_crowding"
-    if field_id.startswith("top_long_short_position"):
+    if semantic_id.startswith("top_long_short_position"):
         return "position_crowding"
-    if field_id.startswith(("trade_", "mark_", "index_")) and field_id.endswith(
+    if semantic_id.startswith(("trade_", "mark_", "index_")) and semantic_id.endswith(
         ("open", "high", "low", "close")
     ):
         return "price_level"
-    if field_id.startswith("premium_"):
+    if semantic_id.startswith(
+        ("mark_price_", "index_price_", "estimated_settle_price_")
+    ):
+        return "price_level"
+    if semantic_id.startswith("funding_rate"):
+        return "funding"
+    if semantic_id in {"oi_n", "mark_n"}:
+        return "quote_volume_activity"
+    if semantic_id.startswith("agg_"):
+        if any(
+            token in semantic_id
+            for token in ("price_range", "close_to_open", "return")
+        ):
+            return "price_return"
+        if any(
+            token in semantic_id
+            for token in (
+                "notional",
+                "quantity",
+                "trade",
+                "volume",
+                "flow",
+                "imbalance",
+                "vwap",
+                "open",
+                "high",
+                "low",
+                "close",
+            )
+        ):
+            return "quote_volume_activity"
+    if semantic_id.startswith("premium_"):
         return "basis_premium"
     return "other"
 
@@ -324,6 +361,41 @@ class RawPanelStore:
 
     def observed(self) -> np.ndarray:
         return np.load(self.cache_root / "observed.npy", mmap_mode="r")
+
+    def field_available(
+        self, field_id: str, time_slice: slice | None = None
+    ) -> np.ndarray:
+        """Return the explicit finite-value mask for one registered field."""
+
+        values = self.field(field_id)
+        if time_slice is not None:
+            values = values[:, time_slice]
+        return np.isfinite(np.asarray(values))
+
+    def candidate_support(
+        self,
+        field_ids: Sequence[str],
+        time_slice: slice | None = None,
+    ) -> np.ndarray:
+        """Resolve support only from PIT base eligibility and required fields.
+
+        Unrelated sparse fields never shrink another candidate's universe.
+        Missing values remain missing and are not converted into a signal.
+        """
+
+        fields = tuple(dict.fromkeys(str(value) for value in field_ids))
+        if not fields:
+            raise ValueError("candidate support requires at least one raw field")
+        base = self.base_eligible()
+        if time_slice is not None:
+            base = base[:, time_slice]
+        support = np.asarray(base, dtype=bool).copy()
+        for field_id in fields:
+            available = self.field_available(field_id, time_slice)
+            if available.shape != support.shape:
+                raise ValueError("field availability and base eligibility shape mismatch")
+            support &= available
+        return support
 
     def target_return(self, horizon_hours: int) -> np.ndarray:
         return np.load(
