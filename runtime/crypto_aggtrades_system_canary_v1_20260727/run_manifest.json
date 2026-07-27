@@ -1,0 +1,172 @@
+{
+  "active_wall_seconds": 1072.8217598000047,
+  "artifact_bundle_sha256": "880BC5D5AD5F47242FD534AD4AD0A9C40C4BFBE91A76523E773CA487F9A4EC74",
+  "artifacts": [
+    {
+      "bytes": 1004,
+      "path": "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727.md",
+      "sha256": "3165870BA7065CD40391FA8BBC52AB0B26EA80ECFC5C58B552DEB2B3C23010A5"
+    },
+    {
+      "bytes": 25688,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/arm_checkpoint_metrics.parquet",
+      "sha256": "B38061907D9003191BF60CFDDAEFFCDC16B1D259A4D682DEA3CAB1E97AE66F2F"
+    },
+    {
+      "bytes": 1433968,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/behavior_archive.parquet",
+      "sha256": "4D475289AAAE5111BDE53077E964C05CBA5B431B7467E8D67FBD6CD7E8E8EE6F"
+    },
+    {
+      "bytes": 708663,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/behavior_family_summary.json",
+      "sha256": "FC48473EF4B405A49A91810C210E8CBC521B968ED2F2AC8B597736D597E1E089"
+    },
+    {
+      "bytes": 6018725,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/candidate_ledger.parquet",
+      "sha256": "A5347269AB5F32D67AA3A03D49621D98679F6BA7CC943A0349BFC3BF9DB49182"
+    },
+    {
+      "bytes": 25052,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/checkpoints/checkpoint_000/arm_checkpoint_metrics.parquet",
+      "sha256": "2DE5D9B9ED7D384D6939DDE7F9A1DE0662871292B72076C1FE9E7AF576099EB3"
+    },
+    {
+      "bytes": 750693,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/checkpoints/checkpoint_000/behavior_archive.parquet",
+      "sha256": "2617E49732F5EAF97E5753470024D86EE2283471D3AEC4B83CE06624460D37E5"
+    },
+    {
+      "bytes": 3100136,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/checkpoints/checkpoint_000/candidate_ledger.parquet",
+      "sha256": "C0371DECF7FAAE533B4C8CE311FEA3049F6244463F2A2B883D8E1944AB1FFC11"
+    },
+    {
+      "bytes": 3773,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/checkpoints/checkpoint_000/manifest.json",
+      "sha256": "54FECC025F1D0F1494E7134EFFA51287565EF241E415FCB5BA839D96BD521B0A"
+    },
+    {
+      "bytes": 4009764,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/checkpoints/checkpoint_000/state.json",
+      "sha256": "17CED71344EB9C31BB20D7D37D0518FDB95432F8913A0025C71FCC3316E40EBD"
+    },
+    {
+      "bytes": 25688,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/checkpoints/checkpoint_001/arm_checkpoint_metrics.parquet",
+      "sha256": "B38061907D9003191BF60CFDDAEFFCDC16B1D259A4D682DEA3CAB1E97AE66F2F"
+    },
+    {
+      "bytes": 1433968,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/checkpoints/checkpoint_001/behavior_archive.parquet",
+      "sha256": "4D475289AAAE5111BDE53077E964C05CBA5B431B7467E8D67FBD6CD7E8E8EE6F"
+    },
+    {
+      "bytes": 6018725,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/checkpoints/checkpoint_001/candidate_ledger.parquet",
+      "sha256": "A5347269AB5F32D67AA3A03D49621D98679F6BA7CC943A0349BFC3BF9DB49182"
+    },
+    {
+      "bytes": 3774,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/checkpoints/checkpoint_001/manifest.json",
+      "sha256": "83C59538D7E6D70176961F7E975F478B7274CF4CA8D66F2712133EE2B44DCDFB"
+    },
+    {
+      "bytes": 7221800,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/checkpoints/checkpoint_001/state.json",
+      "sha256": "8EBDE060D6083D8F0B07196C4EEFF0CD5C6718C3625F39BDCF29BA3776A0919E"
+    },
+    {
+      "bytes": 450,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/embedded_preflight.json",
+      "sha256": "95702DA148F6056AC55C8F053686893296EC7BC604A238BA6E2121F85AC8413C"
+    },
+    {
+      "bytes": 2373,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/final_decision.json",
+      "sha256": "B72A74E38AA2F01366D83A56808423206413D4259035512D9CD318842A633AB3"
+    },
+    {
+      "bytes": 23105,
+      "path": "runtime/crypto_aggtrades_system_canary_v1_20260727/frozen_contract.json",
+      "sha256": "86F1DE2281359049843E47FD9CE863E468EC474ACDA130A41152C95382EC1829"
+    }
+  ],
+  "base_sha": "5a17a91732a7aca7ec53cf9e10963faf2998a649",
+  "compiler_identity": {
+    "bundle_sha256": "B9B3065D31E9AF8CB3C1E7B995A1CE9D3DE7B8EB1D025C72172A3E6A102F5E4B",
+    "paths": [
+      {
+        "bytes": 53635,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "4072B53F81A3C53B3D6989FB1E47199581F8914F3A833A30FF7EFC0EE7A70D8D"
+      },
+      {
+        "bytes": 22088,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+      },
+      {
+        "bytes": 32816,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "AC81177C4C36B093C48E03BF290D0D639C126D638C1DB4ADA7FC4782E0B63C99"
+      },
+      {
+        "bytes": 43994,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "218731D47940247DC899D193E971511F294C7C153297C6EB2405BFB4AD506470"
+      },
+      {
+        "bytes": 19380,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "66E1364053F824116B327CD9AADD1C673D095C349B2E5A891967F28498C3CDED"
+      },
+      {
+        "bytes": 107259,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "78128C4697195E5F750A311E5AD778F758DA16CC49B7980B13D7DD03171081CE"
+      },
+      {
+        "bytes": 193307,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "CF6C59BBAFC871C336635E77736F2C1E499026CC338533CC9BB0C18A606A7331"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "continuation": "python -m alphafactory_crypto.broad_search.search_engine_v1 check-canary --runtime-date 20260727",
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "EBC9A406BE326F2901A844A86DAB4DEEFC634C3BF0133879EBA945A0418FA850",
+      "bytes": 132708859,
+      "file_count": 67
+    },
+    "identity_sha256": "127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04",
+    "panel_context_contract": {
+      "authority": "POST_JOIN_ASSET_BY_TIME_RECOMPUTE",
+      "fields": [
+        "active_universe_size",
+        "age_percentile_active_universe",
+        "history_length_hours"
+      ]
+    },
+    "root": ".cache/crypto_aggtrades_system_canary_v1",
+    "source_manifest_sha256": "81F57C0F6E637574B69882CE81895D34AE4A52B4D44DFA3071DFDA253270A21B"
+  },
+  "epoch_id": "CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727",
+  "frozen_contract_sha256": "FD61656C7D53A682B8E8CA4E9C704B8D655F9EE3CFC2B3124B796243E1E06FAD",
+  "generation_attempts": 3452,
+  "memory_fallback_used": true,
+  "producer_source_sha": "5a17a91732a7aca7ec53cf9e10963faf2998a649",
+  "reproducible": true,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "COMPLETED",
+  "strict_evaluated_count": 2000,
+  "workers_final": 8
+}

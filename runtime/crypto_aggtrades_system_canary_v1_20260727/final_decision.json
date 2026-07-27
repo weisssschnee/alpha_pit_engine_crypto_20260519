@@ -1,0 +1,67 @@
+{
+  "active_wall_seconds": 1072.8217598000047,
+  "archive_duplicate_replacements": 39,
+  "arm_counts": {
+    "canonical_typed_random": 400,
+    "hierarchical_typed_cem_v2": 800,
+    "typed_evolution_v2": 800
+  },
+  "behavior_duplicate_rate": 0.027000000000000024,
+  "behavior_family_count": 1946,
+  "cannot_conclude": [
+    "unbiased cross-sectional Alpha",
+    "fresh economic increment",
+    "OOS validity",
+    "challenge, recent, May-stress, or forward evidence",
+    "candidate or component promotion"
+  ],
+  "checkpoint_count": 2,
+  "checkpoint_restore_verified": true,
+  "engineering_execution_qualified_arms": [
+    "canonical_typed_random",
+    "hierarchical_typed_cem_v2",
+    "typed_evolution_v2"
+  ],
+  "epoch_id": "CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727",
+  "every_candidate_uses_aggtrades": true,
+  "expected_arm_counts": {
+    "canonical_typed_random": 400,
+    "hierarchical_typed_cem_v2": 800,
+    "typed_evolution_v2": 800
+  },
+  "future_new_data_arena_qualified_arms": [],
+  "generation_attempts": 3452,
+  "next_arena_started": false,
+  "producer_source_sha": "5a17a91732a7aca7ec53cf9e10963faf2998a649",
+  "promotion": "FORBIDDEN",
+  "raw_attempt_limit": 20000,
+  "research_decision": "HOLD_RESEARCH_FIXED_RETROSPECTIVE_COHORT",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS_SYSTEM_CANARY_COMPLETED",
+  "strict_evaluated_count": 2000,
+  "system_comparisons_vs_typed_random": {
+    "hierarchical_typed_cem_v2": {
+      "behavior_duplicate_rate_delta": 0.0012499999999999734,
+      "matched_evaluated_count": 400,
+      "mean_pair_reward_delta": 0.04025857850175285,
+      "new_behavior_families_per_1k_delta": 0.0,
+      "top_decile_pair_reward_delta": 0.1505547422473703,
+      "valid_exact_unique_per_cpu_hour_delta": 169.55368929626957
+    },
+    "typed_evolution_v2": {
+      "behavior_duplicate_rate_delta": 0.06499999999999995,
+      "matched_evaluated_count": 400,
+      "mean_pair_reward_delta": 0.36718780630950043,
+      "new_behavior_families_per_1k_delta": -65.0,
+      "top_decile_pair_reward_delta": 0.9493256697682781,
+      "valid_exact_unique_per_cpu_hour_delta": 50.75594354149348
+    }
+  },
+  "verified_evolution_operations": {
+    "COMPATIBLE_SKELETON_VARIANT_MUTATION": 170,
+    "EFFECTIVE_GENE_MUTATION_1_TO_3": 399,
+    "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER": 103
+  },
+  "wall_time_limit_seconds": 14400
+}

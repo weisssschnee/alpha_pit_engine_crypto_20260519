@@ -1,0 +1,660 @@
+{
+  "arms": {
+    "active": [
+      "canonical_typed_random",
+      "hierarchical_typed_cem_v2",
+      "typed_evolution_v2"
+    ],
+    "checkpoint_allocation": {
+      "canonical_typed_random": 200,
+      "hierarchical_typed_cem_v2": 400,
+      "typed_evolution_v2": 400
+    },
+    "reward_comparison": "same first N by deterministic arm completion ordinal",
+    "same_seed_set_for_every_arm": true
+  },
+  "authorization": "ONE_FRESH_STATE_2000_AGGTRADES_SYSTEM_CANARY",
+  "behavior_descriptor": {
+    "contract_sha256": "5EE495A875A5670AB60AA976917AB2389F74040B3077FBE1C22C0DFCF6ED85B9",
+    "frozen_observation_count": 4367,
+    "mapped_weight_quantization_step": 0.05,
+    "observed_support_sha256": "0F95891BEC27F3CFA0F169DAC9D55A652D74A4CECAAAEC84416C96C36C5F34F6",
+    "outcome_fields_in_identity": [],
+    "pit_regime_lag_hours": 1,
+    "pit_regime_quantiles": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "pit_regime_source": "active_universe_size",
+    "pit_regime_source_validation": "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_INDEPENDENT_OBSERVED_SUPPORT",
+    "pit_regime_thresholds": [
+      101.5,
+      108.0,
+      112.0
+    ],
+    "pit_regime_thresholds_sha256": "39C424A64BE15C47AB09C3EC53BCC6744A4999F1EB7C6BE286AF30E0EEFCE8D3",
+    "rank_bucket_count": 10,
+    "rank_mean_quantization_step": 2.0,
+    "schema_version": "CRYPTO_SEARCH_BEHAVIOR_DESCRIPTOR_V1",
+    "selected_overlap_quantization_step": 0.1,
+    "selected_weight_epsilon": 1e-12,
+    "selection_rate_quantization_step": 0.2,
+    "turnover_bin_edges": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.5,
+      2.0,
+      3.0,
+      4.0
+    ],
+    "turnover_histogram_quantization_step": 0.1
+  },
+  "boundaries": {
+    "challenge": false,
+    "cross_sprint_adaptive_memory": false,
+    "forward": false,
+    "latent_priority": false,
+    "may_stress": false,
+    "promotion": false,
+    "recent": false,
+    "relational_training": false,
+    "sealed_reads": 0
+  },
+  "budget": {
+    "checkpoint_count": 2,
+    "checkpoint_size": 1000,
+    "fail_closed_attempt_reservation_per_proposal": 4225,
+    "raw_generation_attempts_maximum": 20000,
+    "strict_evaluated_target": 2000,
+    "wall_time_seconds_maximum": 14400,
+    "workers_12_forbidden": true,
+    "workers_default": 10,
+    "workers_memory_fallback": 8
+  },
+  "compiler_identity": {
+    "bundle_sha256": "B9B3065D31E9AF8CB3C1E7B995A1CE9D3DE7B8EB1D025C72172A3E6A102F5E4B",
+    "paths": [
+      {
+        "bytes": 53635,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "4072B53F81A3C53B3D6989FB1E47199581F8914F3A833A30FF7EFC0EE7A70D8D"
+      },
+      {
+        "bytes": 22088,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+      },
+      {
+        "bytes": 32816,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "AC81177C4C36B093C48E03BF290D0D639C126D638C1DB4ADA7FC4782E0B63C99"
+      },
+      {
+        "bytes": 43994,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "218731D47940247DC899D193E971511F294C7C153297C6EB2405BFB4AD506470"
+      },
+      {
+        "bytes": 19380,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "66E1364053F824116B327CD9AADD1C673D095C349B2E5A891967F28498C3CDED"
+      },
+      {
+        "bytes": 107259,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "78128C4697195E5F750A311E5AD778F758DA16CC49B7980B13D7DD03171081CE"
+      },
+      {
+        "bytes": 193307,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "CF6C59BBAFC871C336635E77736F2C1E499026CC338533CC9BB0C18A606A7331"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "cpu_hour_definition": "sum process CPU seconds for proposal, compile, archive, and pair evaluation; excludes queue and human wait",
+  "decision_authority": {
+    "alpha_discovery_claim": false,
+    "data_admission_promotion": false,
+    "future_arm_qualification": false,
+    "system_behavior_only": true
+  },
+  "elite_authority": {
+    "diagnostic_only": [
+      "turnover",
+      "cost_killed",
+      "failure_layer",
+      "behavior_novelty_except_equal_reward"
+    ],
+    "equal_reward_tie_break": [
+      "arm_seed_policy_local_behavior_family_count",
+      "candidate_id"
+    ],
+    "only_ordering_authority": "pair_reward"
+  },
+  "environment": {
+    "machine": "AMD64",
+    "packages": {
+      "numpy": "2.1.3",
+      "pandas": "2.2.3",
+      "psutil": "7.0.0",
+      "pyarrow": "19.0.1",
+      "scipy": "1.17.1"
+    },
+    "platform": "Windows-10-10.0.22631-SP0",
+    "processor": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD",
+    "python_executable": "G:\\PythonProject\\.venv\\Scripts\\python.exe",
+    "python_implementation": "CPython",
+    "python_version": "3.11.9",
+    "thread_caps": {
+      "MKL_NUM_THREADS": null,
+      "NUMEXPR_NUM_THREADS": null,
+      "OMP_NUM_THREADS": null
+    }
+  },
+  "epoch_id": "CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727",
+  "evaluator_contract": {
+    "control_behavior_identity_forbidden": true,
+    "control_exact_identity_forbidden": true,
+    "control_rule": "remove exactly one registered core mechanism while SupportMatchedPayload retains the removed input in support",
+    "incremental_turnover": "recomputed independently from delta weights",
+    "incremental_weight_formula": "primary_weight - control_weight",
+    "lcb_contract": {
+      "authority": "NEWEY_WEST_BARTLETT",
+      "confidence_multiplier": 1.96,
+      "dependency_lags": "horizon_hours_minus_one",
+      "monthly_block_lcb": "DIAGNOSTIC_ONLY"
+    },
+    "match_on": [
+      "raw inputs",
+      "timestamps",
+      "dynamic eligibility",
+      "target horizon",
+      "mapping family and position cap",
+      "5 bps full-L1 cost model",
+      "raw support"
+    ],
+    "optional_behavior_identity": "FROZEN_OUTCOME_FREE_DESCRIPTOR_V1",
+    "pair_authority": "PRIMARY_CONTROL_WITH_INCREMENTAL_DELTA_WEIGHT_SLEEVE",
+    "schema_version": 1,
+    "standalone_scalar_delta_role": "DIAGNOSTIC_ONLY",
+    "support_overlap_required": 1.0
+  },
+  "evidence_role": "DEVELOPMENT_DIAGNOSTIC_FIXED_RETROSPECTIVE_COHORT",
+  "experiment_id": "20260727_aggtrades_system_canary_001",
+  "fresh_state": {
+    "old_archive_import": false,
+    "old_candidate_import": false,
+    "old_distribution_import": false,
+    "old_policy_state_import": false,
+    "old_population_import": false,
+    "old_reward_import": false
+  },
+  "frozen_contract_sha256": "FD61656C7D53A682B8E8CA4E9C704B8D655F9EE3CFC2B3124B796243E1E06FAD",
+  "input_identities": {
+    "aggtrades_field_surface": {
+      "field_count": 21,
+      "field_ids": [
+        "agg_trade_count",
+        "underlying_trade_count",
+        "quantity",
+        "notional",
+        "buy_agg_trade_count",
+        "sell_agg_trade_count",
+        "buy_quantity",
+        "sell_quantity",
+        "buy_notional",
+        "sell_notional",
+        "signed_aggressor_quantity",
+        "signed_aggressor_notional",
+        "vwap",
+        "buy_vwap",
+        "sell_vwap",
+        "volume_imbalance",
+        "buy_sell_notional_ratio",
+        "price_range_bps",
+        "close_to_open_bps",
+        "large_trade_count_ratio_100k_plus",
+        "large_notional_ratio_100k_plus"
+      ],
+      "logical_sha256": "6EE80E1957C8AABF96FECB76B8E1608880292B803E46559A92876603FFB46F1F"
+    },
+    "canary_config": {
+      "path": "config/crypto_aggtrades_system_canary_v1.json",
+      "sha256": "FFF449D1DEB1A4735515B4D2DF53CA61311F9CAD5A461BE281AA379F696E0566"
+    },
+    "continuation_config": {
+      "path": "config/crypto_18m_current_field_four_policy_continuation_v1.json",
+      "sha256": "A0DD2AD657EEDDF69DAD7B9E054E63A736EB35EC9758F885BA2F274CCA3DD70E"
+    },
+    "field_registry": {
+      "logical_sha256": "A609B51B9FEB893685AC02C46AFB0ACBC528A4199FB504DB67F840FA346128B1",
+      "path": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY.json",
+      "sha256": "8EFC87151E4F58E665360E3212A9D85E689117D29AD86B27AE909CF8E804AD04"
+    },
+    "field_surface": {
+      "all_context_counts": {
+        "BROAD_PANEL_BASELINE": 39,
+        "CORE3_MICROSTRUCTURE_PILOT": 81
+      },
+      "context_pooling": false,
+      "contract_file_sha256": "2C6E334DD25BD2745371995B93CC5E0440D943F68A591419F34C48EDB34BA08A",
+      "contract_identity_sha256": "35E54F79576A6D7A1D94AE697E8066CB9FB49CF9A97979259F39490E3281914E",
+      "contract_path": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/resolved_token_contract.json",
+      "excluded_contexts": [
+        "CORE3_MICROSTRUCTURE_PILOT"
+      ],
+      "generator_role_coverage": {
+        "all_fields_reachable": true,
+        "declared_fields": [
+          "top_global_account_divergence",
+          "mark_trade_basis_bps",
+          "trade_quote_volume",
+          "account_position_divergence",
+          "global_long_short_account_ratio_last",
+          "open_interest_value_last",
+          "open_interest_value_mean",
+          "top_long_short_account_ratio_last",
+          "trade_close",
+          "top_long_short_position_ratio_last",
+          "global_long_short_account_ratio_mean",
+          "premium_high",
+          "active_universe_size",
+          "listing_age_days",
+          "open_interest_last_change_1h",
+          "open_interest_value_last_change_1h",
+          "top_long_short_position_ratio_mean",
+          "index_open",
+          "trade_return_1h",
+          "trade_count",
+          "top_long_short_account_ratio_mean",
+          "premium_open",
+          "history_length_hours",
+          "open_interest_last_change_4h",
+          "open_interest_value_last_change_4h",
+          "index_low",
+          "taker_buy_sell_volume_ratio_last",
+          "premium_low",
+          "age_percentile_active_universe",
+          "open_interest_last_change_24h",
+          "open_interest_value_last_change_24h",
+          "index_high",
+          "taker_buy_sell_volume_ratio_mean",
+          "mark_index_basis_bps",
+          "open_interest_mean",
+          "taker_buy_quote_volume",
+          "premium_close",
+          "open_interest_last",
+          "trade_volume"
+        ],
+        "reachable_fields": [
+          "account_position_divergence",
+          "active_universe_size",
+          "age_percentile_active_universe",
+          "global_long_short_account_ratio_last",
+          "global_long_short_account_ratio_mean",
+          "history_length_hours",
+          "index_high",
+          "index_low",
+          "index_open",
+          "listing_age_days",
+          "mark_index_basis_bps",
+          "mark_trade_basis_bps",
+          "open_interest_last",
+          "open_interest_last_change_1h",
+          "open_interest_last_change_24h",
+          "open_interest_last_change_4h",
+          "open_interest_mean",
+          "open_interest_value_last",
+          "open_interest_value_last_change_1h",
+          "open_interest_value_last_change_24h",
+          "open_interest_value_last_change_4h",
+          "open_interest_value_mean",
+          "premium_close",
+          "premium_high",
+          "premium_low",
+          "premium_open",
+          "taker_buy_quote_volume",
+          "taker_buy_sell_volume_ratio_last",
+          "taker_buy_sell_volume_ratio_mean",
+          "top_global_account_divergence",
+          "top_long_short_account_ratio_last",
+          "top_long_short_account_ratio_mean",
+          "top_long_short_position_ratio_last",
+          "top_long_short_position_ratio_mean",
+          "trade_close",
+          "trade_count",
+          "trade_quote_volume",
+          "trade_return_1h",
+          "trade_volume"
+        ],
+        "roles": {
+          "account": [
+            "top_global_account_divergence",
+            "account_position_divergence",
+            "global_long_short_account_ratio_last",
+            "top_long_short_account_ratio_last",
+            "global_long_short_account_ratio_mean",
+            "top_long_short_account_ratio_mean"
+          ],
+          "activity": [
+            "trade_quote_volume",
+            "trade_count",
+            "taker_buy_sell_volume_ratio_last",
+            "taker_buy_sell_volume_ratio_mean",
+            "taker_buy_quote_volume",
+            "trade_volume"
+          ],
+          "basis": [
+            "mark_trade_basis_bps",
+            "premium_high",
+            "premium_open",
+            "premium_low",
+            "mark_index_basis_bps",
+            "premium_close"
+          ],
+          "global_account": [
+            "global_long_short_account_ratio_last",
+            "global_long_short_account_ratio_mean"
+          ],
+          "local": [
+            "top_global_account_divergence",
+            "mark_trade_basis_bps",
+            "trade_quote_volume",
+            "account_position_divergence",
+            "global_long_short_account_ratio_last",
+            "open_interest_value_last",
+            "open_interest_value_mean",
+            "top_long_short_account_ratio_last",
+            "trade_close",
+            "top_long_short_position_ratio_last",
+            "global_long_short_account_ratio_mean",
+            "premium_high",
+            "open_interest_last_change_1h",
+            "open_interest_value_last_change_1h",
+            "top_long_short_position_ratio_mean",
+            "index_open",
+            "trade_return_1h",
+            "trade_count",
+            "top_long_short_account_ratio_mean",
+            "premium_open",
+            "open_interest_last_change_4h",
+            "open_interest_value_last_change_4h",
+            "index_low",
+            "taker_buy_sell_volume_ratio_last",
+            "premium_low",
+            "open_interest_last_change_24h",
+            "open_interest_value_last_change_24h",
+            "index_high",
+            "taker_buy_sell_volume_ratio_mean",
+            "mark_index_basis_bps",
+            "open_interest_mean",
+            "taker_buy_quote_volume",
+            "premium_close",
+            "open_interest_last",
+            "trade_volume"
+          ],
+          "market_context": [
+            "top_global_account_divergence",
+            "mark_trade_basis_bps",
+            "trade_quote_volume",
+            "account_position_divergence",
+            "global_long_short_account_ratio_last",
+            "open_interest_value_last",
+            "open_interest_value_mean",
+            "top_long_short_account_ratio_last",
+            "trade_close",
+            "top_long_short_position_ratio_last",
+            "global_long_short_account_ratio_mean",
+            "premium_high",
+            "open_interest_last_change_1h",
+            "open_interest_value_last_change_1h",
+            "top_long_short_position_ratio_mean",
+            "index_open",
+            "trade_return_1h",
+            "trade_count",
+            "top_long_short_account_ratio_mean",
+            "premium_open",
+            "open_interest_last_change_4h",
+            "open_interest_value_last_change_4h",
+            "index_low",
+            "taker_buy_sell_volume_ratio_last",
+            "premium_low",
+            "open_interest_last_change_24h",
+            "open_interest_value_last_change_24h",
+            "index_high",
+            "taker_buy_sell_volume_ratio_mean",
+            "mark_index_basis_bps",
+            "open_interest_mean",
+            "taker_buy_quote_volume",
+            "premium_close",
+            "open_interest_last",
+            "trade_volume"
+          ],
+          "oi": [
+            "open_interest_value_last",
+            "open_interest_value_mean",
+            "open_interest_last_change_1h",
+            "open_interest_value_last_change_1h",
+            "open_interest_last_change_4h",
+            "open_interest_value_last_change_4h",
+            "open_interest_last_change_24h",
+            "open_interest_value_last_change_24h",
+            "open_interest_mean",
+            "open_interest_last"
+          ],
+          "oi_change": [
+            "open_interest_last_change_1h",
+            "open_interest_value_last_change_1h",
+            "open_interest_last_change_4h",
+            "open_interest_value_last_change_4h",
+            "open_interest_last_change_24h",
+            "open_interest_value_last_change_24h"
+          ],
+          "payload": [
+            "top_global_account_divergence",
+            "mark_trade_basis_bps",
+            "trade_quote_volume",
+            "account_position_divergence",
+            "global_long_short_account_ratio_last",
+            "open_interest_value_last",
+            "open_interest_value_mean",
+            "top_long_short_account_ratio_last",
+            "trade_close",
+            "top_long_short_position_ratio_last",
+            "global_long_short_account_ratio_mean",
+            "premium_high",
+            "open_interest_last_change_1h",
+            "open_interest_value_last_change_1h",
+            "top_long_short_position_ratio_mean",
+            "index_open",
+            "trade_return_1h",
+            "trade_count",
+            "top_long_short_account_ratio_mean",
+            "premium_open",
+            "open_interest_last_change_4h",
+            "open_interest_value_last_change_4h",
+            "index_low",
+            "taker_buy_sell_volume_ratio_last",
+            "premium_low",
+            "open_interest_last_change_24h",
+            "open_interest_value_last_change_24h",
+            "index_high",
+            "taker_buy_sell_volume_ratio_mean",
+            "mark_index_basis_bps",
+            "open_interest_mean",
+            "taker_buy_quote_volume",
+            "premium_close",
+            "open_interest_last",
+            "trade_volume"
+          ],
+          "position": [
+            "top_global_account_divergence",
+            "account_position_divergence",
+            "top_long_short_position_ratio_last",
+            "top_long_short_position_ratio_mean"
+          ],
+          "price_return": [
+            "trade_return_1h"
+          ],
+          "state": [
+            "active_universe_size",
+            "listing_age_days",
+            "history_length_hours",
+            "age_percentile_active_universe"
+          ],
+          "top_account": [
+            "top_long_short_account_ratio_last",
+            "top_long_short_account_ratio_mean"
+          ]
+        },
+        "unreachable_fields": []
+      },
+      "selected_context_id": "BROAD_PANEL_BASELINE",
+      "selected_field_count": 39,
+      "selected_field_ids": [
+        "top_global_account_divergence",
+        "mark_trade_basis_bps",
+        "trade_quote_volume",
+        "account_position_divergence",
+        "global_long_short_account_ratio_last",
+        "open_interest_value_last",
+        "open_interest_value_mean",
+        "top_long_short_account_ratio_last",
+        "trade_close",
+        "top_long_short_position_ratio_last",
+        "global_long_short_account_ratio_mean",
+        "premium_high",
+        "active_universe_size",
+        "listing_age_days",
+        "open_interest_last_change_1h",
+        "open_interest_value_last_change_1h",
+        "top_long_short_position_ratio_mean",
+        "index_open",
+        "trade_return_1h",
+        "trade_count",
+        "top_long_short_account_ratio_mean",
+        "premium_open",
+        "history_length_hours",
+        "open_interest_last_change_4h",
+        "open_interest_value_last_change_4h",
+        "index_low",
+        "taker_buy_sell_volume_ratio_last",
+        "premium_low",
+        "age_percentile_active_universe",
+        "open_interest_last_change_24h",
+        "open_interest_value_last_change_24h",
+        "index_high",
+        "taker_buy_sell_volume_ratio_mean",
+        "mark_index_basis_bps",
+        "open_interest_mean",
+        "taker_buy_quote_volume",
+        "premium_close",
+        "open_interest_last",
+        "trade_volume"
+      ],
+      "selection_role": "FROZEN_CURRENT_SURFACE_BEFORE_CONTINUATION",
+      "view_counts": {
+        "asset_local": 38,
+        "market_state": 1
+      }
+    },
+    "raw_cache": {
+      "directory_bundle": {
+        "bundle_sha256": "EBC9A406BE326F2901A844A86DAB4DEEFC634C3BF0133879EBA945A0418FA850",
+        "bytes": 132708859,
+        "file_count": 67
+      },
+      "identity_sha256": "127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04",
+      "panel_context_contract": {
+        "authority": "POST_JOIN_ASSET_BY_TIME_RECOMPUTE",
+        "fields": [
+          "active_universe_size",
+          "age_percentile_active_universe",
+          "history_length_hours"
+        ]
+      },
+      "root": ".cache/crypto_aggtrades_system_canary_v1",
+      "source_manifest_sha256": "81F57C0F6E637574B69882CE81895D34AE4A52B4D44DFA3071DFDA253270A21B"
+    }
+  },
+  "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
+  "objective": "Exercise Search Engine V1 proposal productivity, behavior discovery, and exact checkpoint restoration on a newly materialized aggTrades field family",
+  "policies": {
+    "canonical_typed_random": {
+      "duplicate_resample_limit": 64
+    },
+    "hierarchical_typed_cem_v2": {
+      "count_pseudocount": 0.5,
+      "duplicate_resample_limit": 64,
+      "elite_fraction": 0.2,
+      "entropy_floor_ratio": 0.6,
+      "minimum_observation_count": 8,
+      "minimum_probability": 0.002,
+      "smoothing": 0.35
+    },
+    "typed_evolution_v2": {
+      "duplicate_resample_limit": 64,
+      "gene_mutation_probability": 0.55,
+      "homologous_crossover_probability": 0.2,
+      "maximum_mutated_genes": 3,
+      "mechanism_cell_limit": 64,
+      "minimum_mutated_genes": 1,
+      "population_limit": 256,
+      "skeleton_variant_mutation_probability": 0.25,
+      "tournament_size": 4,
+      "warmup": 32
+    }
+  },
+  "schema_version": 1,
+  "seeds": [
+    20260716,
+    20260717,
+    20260718,
+    20260719
+  ],
+  "source_sha": "5a17a91732a7aca7ec53cf9e10963faf2998a649",
+  "surface": {
+    "aggtrades_field_ids": [
+      "agg_trade_count",
+      "underlying_trade_count",
+      "quantity",
+      "notional",
+      "buy_agg_trade_count",
+      "sell_agg_trade_count",
+      "buy_quantity",
+      "sell_quantity",
+      "buy_notional",
+      "sell_notional",
+      "signed_aggressor_quantity",
+      "signed_aggressor_notional",
+      "vwap",
+      "buy_vwap",
+      "sell_vwap",
+      "volume_imbalance",
+      "buy_sell_notional_ratio",
+      "price_range_bps",
+      "close_to_open_bps",
+      "large_trade_count_ratio_100k_plus",
+      "large_notional_ratio_100k_plus"
+    ],
+    "aggtrades_fields": 21,
+    "broad_context_fields": 39,
+    "every_candidate_requires_aggtrades_input": true,
+    "fixed_retrospective_cohort": true,
+    "missing_value_fill": null
+  },
+  "window": {
+    "end_exclusive": "2024-07-01T00:00:00Z",
+    "selection_reason": "Earliest delivered six-month block overlapping the existing development-only target cache; excludes later identity breaks and all recent/forward roles",
+    "start": "2024-01-01T00:00:00Z"
+  }
+}

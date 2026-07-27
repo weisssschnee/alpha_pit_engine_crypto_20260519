@@ -396,7 +396,7 @@
     },
     {
       "id": "real_policy_upgrade_canary",
-      "label": "Search Engine V1 capability (post-audit HOLD)",
+      "label": "Search Engine V1 capability (system canary PASS; research HOLD)",
       "kind": "development_experiment",
       "lifecycle": "EXPERIMENTAL",
       "paths": [
@@ -411,20 +411,25 @@
         "runtime/crypto_search_engine_v1_20260721/final_decision.json",
         "runtime/crypto_new_data_admission_v1_20260727/run_manifest.json",
         "runtime/crypto_new_data_admission_v1_20260727/final_decision.json",
+        "runtime/crypto_aggtrades_system_canary_v1_20260727/run_manifest.json",
+        "runtime/crypto_aggtrades_system_canary_v1_20260727/final_decision.json",
         "reports/CRYPTO_SEARCH_ENGINE_V1_20260721.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_CODE_AUTHORITY_AUDIT_20260727.md",
         "reports/CRYPTO_NEW_DATA_ADMISSION_AND_PIT_UNIVERSE_V1_20260727.md",
-        "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md"
+        "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727.md",
+        "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_BIAS_AUDIT_20260727.md",
+        "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md",
+        "docs/adr/0009-aggtrades-system-canary-development-diagnostic.md"
       ],
       "critical": true,
-      "semantic_role": "unqualified_search_engine_component_post_audit_hold",
+      "semantic_role": "search_engine_system_canary_pass_research_hold",
       "active_authority": false,
       "authority": {
         "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
         "repo_ref": "experiment/crypto-search-engine-v1-20260721",
-        "verified_sha": "2414af4d2cfccb3f87a53c31d6441e6cdf199d8d",
-        "sha256": "4A31C12075FED875331D825EE6CF7FF65018CD9568110EC23CCF105A1EE58AE5"
+        "verified_sha": "5a17a91732a7aca7ec53cf9e10963faf2998a649",
+        "sha256": "CF6C59BBAFC871C336635E77736F2C1E499026CC338533CC9BB0C18A606A7331"
       },
       "contracts": [
         {
@@ -478,15 +483,24 @@
           "enforced_by": "alphafactory_crypto.data_admission_v1 and broad_search.panel18m.rebuild_panel_context_fields",
           "bypass_forbidden": true,
           "evidence_ref": "reports/CRYPTO_NEW_DATA_ADMISSION_AND_PIT_UNIVERSE_V1_20260727.md"
+        },
+        {
+          "id": "aggtrades_system_canary_boundary",
+          "type": "EVIDENCE",
+          "rule": "The separately authorized 2,000-candidate fresh-state aggTrades canary qualifies continuous counting, exact restore, CEM unit-compute density, typed Evolution repair operations, and archive champion replacement only; the fixed retrospective cohort, zero positive matched discoveries, and absent OOS keep research, promotion, and future-Arena arm qualification on HOLD",
+          "severity": "HARD",
+          "enforced_by": "broad_search.search_engine_v1.check_canary",
+          "bypass_forbidden": true,
+          "evidence_ref": "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_BIAS_AUDIT_20260727.md"
         }
       ],
       "validation": {
-        "level": "STATIC_VERIFIED",
+        "level": "RUNTIME_VERIFIED",
         "result": "PASS",
-        "profile": "evidence-boundary-change",
-        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_CODE_AUTHORITY_AUDIT_20260727.md",
-        "evidence_sha256": "9C67C8905AB5F98BEC2810C8000E864A37CC5A1353B51EF659431665E0CD1298",
-        "verified_at_sha": "2414af4d2cfccb3f87a53c31d6441e6cdf199d8d"
+        "profile": "bounded-system-canary",
+        "evidence_ref": "reports/CRYPTO_AGGTRADES_SYSTEM_CANARY_V1_20260727.md",
+        "evidence_sha256": "3165870BA7065CD40391FA8BBC52AB0B26EA80ECFC5C58B552DEB2B3C23010A5",
+        "verified_at_sha": "5a17a91732a7aca7ec53cf9e10963faf2998a649"
       },
       "claim_badges": [
         "LEGACY 20K ENGINEERING PASS",
@@ -500,6 +514,11 @@
         "PIT LEDGER PROVISIONAL HOLD",
         "SCHEMA2 INTERSECTION NOT SEARCH CACHE",
         "ACTUAL SYMBOL-DATE GAPS PERSISTED",
+        "2K FRESH-STATE SYSTEM CANARY PASS",
+        "CEM UNIT-COMPUTE DENSITY INCREMENT",
+        "EVOLUTION REPAIR VERIFIED DISCOVERY HOLD",
+        "ARCHIVE CHAMPION REPLACEMENT VERIFIED",
+        "FIXED COHORT RESEARCH HOLD",
         "FUTURE ARENA ARMS NONE",
         "NO OOS OR PROMOTION"
       ],
