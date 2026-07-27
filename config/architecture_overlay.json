@@ -396,7 +396,7 @@
     },
     {
       "id": "real_policy_upgrade_canary",
-      "label": "Search Engine capability (V1.2 PASS; V2.2 rejected; research HOLD)",
+      "label": "Search Engine capability (212-field runtime carriers; research HOLD)",
       "kind": "development_experiment",
       "lifecycle": "EXPERIMENTAL",
       "paths": [
@@ -407,6 +407,10 @@
         "alphafactory_crypto/broad_search/pair18m.py",
         "alphafactory_crypto/broad_search/panel18m.py",
         "alphafactory_crypto/data_admission_v1.py",
+        "config/crypto_search_surface_integration_v1.json",
+        "docs/adr/0011-search-surface-integration-v1.md",
+        "runtime/crypto_search_surface_integration_v1_20260728/run_manifest.json",
+        "runtime/crypto_search_surface_integration_v1_20260728/final_decision.json",
         "config/crypto_search_engine_v1_2.json",
         "runtime/crypto_search_engine_v1_20260721/run_manifest.json",
         "runtime/crypto_search_engine_v1_20260721/final_decision.json",
@@ -427,6 +431,7 @@
         "reports/CRYPTO_SEARCH_ENGINE_V1_1_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_1_BIAS_AUDIT_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_2_20260727.md",
+        "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
         "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md",
         "docs/adr/0009-aggtrades-system-canary-development-diagnostic.md",
         "docs/adr/0010-behavior-niched-search-engine-v1-1.md"
@@ -441,6 +446,15 @@
         "sha256": "707114559E327D1A188C9B8D2CCBEAA5B0BA856D2E39590C159494A783337D89"
       },
       "contracts": [
+        {
+          "id": "search_surface_runtime_carrier_gate",
+          "type": "EVIDENCE",
+          "rule": "Search Surface Integration V1 declares 260 engineering fields and admits only 212 with content-bound RawPanelStore carrier loading, minimum-three-asset candidate-local support, compiler and matched-control materialization, and deterministic replay; 48 fields remain explicit HOLD, Broad39 and Core3 81 remain independent, and no research admission follows",
+          "severity": "HARD",
+          "enforced_by": "broad_search.runner18m.load_search_surface_carrier and data_admission_v1.check_search_surface_integration",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_search_surface_integration_v1_20260728/final_decision.json"
+        },
         {
           "id": "policy_canary_qualification_authority",
           "type": "AUTHORITY",
@@ -525,9 +539,9 @@
         "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "evidence-boundary-change",
-        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_2_20260727.md",
-        "evidence_sha256": "D9E26D0D70F39E0705111F39A5B2A9D82FAE5EBB910E2FE647EDE95D2EA41AFE",
-        "verified_at_sha": "956f6231d31fbe2d8ace1e3fbac1b90ae9c3693c"
+        "evidence_ref": "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
+        "evidence_sha256": "EEB9DB6E61166BCC88E4EF89C1EDC395A0B818B4028189D098C3C3FF759DFE01",
+        "verified_at_sha": "e4bcc5d64c00635dfbc4384c102fde0b5bf74ca5"
       },
       "claim_badges": [
         "LEGACY 20K ENGINEERING PASS",
@@ -551,6 +565,9 @@
         "2K V1.2 BALANCED ARENA PASS",
         "CAMPAIGN-LOCAL COLLISION MEMORY VERIFIED",
         "V2.2 SEARCH INCREMENT REJECTED",
+        "212 RUNTIME-ACTIVE SEARCH FIELDS",
+        "48 DECLARED FIELD HOLDS",
+        "CONTEXT-BOUND CARRIERS",
         "NO ALPHA-SPACE CONCLUSION",
         "FUTURE ARENA ARMS NONE",
         "NO OOS OR PROMOTION"
@@ -1345,32 +1362,52 @@
     },
     {
       "id": "new_data_integration",
-      "label": "New-data Integration",
-      "kind": "boundary",
-      "lifecycle": "FORBIDDEN",
+      "label": "Search-surface carrier integration (engineering PASS; research HOLD)",
+      "kind": "integration_boundary",
+      "lifecycle": "EXPERIMENTAL",
       "critical": true,
       "semantic_role": "new_data_integration_boundary",
+      "paths": [
+        "alphafactory_crypto/data_admission_v1.py",
+        "alphafactory_crypto/broad_search/runner18m.py",
+        "config/crypto_search_surface_integration_v1.json",
+        "docs/adr/0011-search-surface-integration-v1.md",
+        "runtime/crypto_search_surface_integration_v1_20260728/run_manifest.json",
+        "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md"
+      ],
       "authority": {
-        "path": ".planning/STATE.md",
-        "repo_ref": "repair/crypto-instrument-capability-20260715"
+        "path": "docs/adr/0011-search-surface-integration-v1.md",
+        "repo_ref": "experiment/crypto-search-surface-integration-v1-20260728",
+        "verified_sha": "e4bcc5d64c00635dfbc4384c102fde0b5bf74ca5",
+        "sha256": "475ED67B10A065FDB315E3A9BB0F18ECA23795941126718B43DC0E6B0247DC1C"
       },
       "contracts": [
         {
-          "id": "no_new_data_integration",
-          "type": "BOUNDARY",
-          "rule": "NO_NEW_DATA_INTEGRATION remains in force; this repair consumes no new release and cannot activate one",
+          "id": "engineering_carrier_integration_only",
+          "type": "ADMISSION",
+          "rule": "Content-bound engineering carriers may expose only fields with real runtime support and replay proof; 212 fields pass while 48 declared fields, liquidation, and Top50 OI/mark remain held",
           "severity": "HARD",
+          "enforced_by": "data_admission_v1.check_search_surface_integration",
           "bypass_forbidden": true,
-          "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json"
+          "evidence_ref": "runtime/crypto_search_surface_integration_v1_20260728/final_decision.json"
+        },
+        {
+          "id": "engineering_integration_not_research_admission",
+          "type": "BOUNDARY",
+          "rule": "Engineering carrier reachability cannot authorize a market Arena, reward read, sealed access, OOS, challenge, promotion, or future-arm qualification",
+          "severity": "HARD",
+          "enforced_by": "data_admission_v1.check_search_surface_integration and ADR 0011",
+          "bypass_forbidden": true,
+          "evidence_ref": "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md"
         }
       ],
       "validation": {
         "level": "STATIC_VERIFIED",
         "result": "PASS",
-        "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_instrument_capability_20260715/manifest.json",
-        "evidence_sha256": "4C7EF61D507795E76E0DD8D9412871CF44DA8CF9A1DE61C83A32A6E64701BAFD",
-        "verified_at_sha": "6055bc9ce9794113178a40c8f6f403e1ccd3781e"
+        "profile": "evidence-boundary-change",
+        "evidence_ref": "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
+        "evidence_sha256": "EEB9DB6E61166BCC88E4EF89C1EDC395A0B818B4028189D098C3C3FF759DFE01",
+        "verified_at_sha": "e4bcc5d64c00635dfbc4384c102fde0b5bf74ca5"
       }
     },
     {

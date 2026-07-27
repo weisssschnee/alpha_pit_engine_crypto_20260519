@@ -1,0 +1,590 @@
+{
+  "aggtrades_carrier": {
+    "cache_identity_sha256": "127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04",
+    "cache_root": ".cache/crypto_aggtrades_system_canary_v1",
+    "contracts": [
+      {
+        "field_id": "agg_trade_count",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "observations",
+        "value_type": "COUNT"
+      },
+      {
+        "field_id": "underlying_trade_count",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "observations",
+        "value_type": "COUNT"
+      },
+      {
+        "field_id": "quantity",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "base_asset",
+        "value_type": "VOLUME"
+      },
+      {
+        "field_id": "notional",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_asset",
+        "value_type": "NOTIONAL"
+      },
+      {
+        "field_id": "buy_agg_trade_count",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "observations",
+        "value_type": "COUNT"
+      },
+      {
+        "field_id": "sell_agg_trade_count",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "observations",
+        "value_type": "COUNT"
+      },
+      {
+        "field_id": "buy_quantity",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "base_asset",
+        "value_type": "VOLUME"
+      },
+      {
+        "field_id": "sell_quantity",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "base_asset",
+        "value_type": "VOLUME"
+      },
+      {
+        "field_id": "buy_notional",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_asset",
+        "value_type": "NOTIONAL"
+      },
+      {
+        "field_id": "sell_notional",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_asset",
+        "value_type": "NOTIONAL"
+      },
+      {
+        "field_id": "signed_aggressor_quantity",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "base_asset",
+        "value_type": "SIGNED_FLOW"
+      },
+      {
+        "field_id": "signed_aggressor_notional",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_asset",
+        "value_type": "SIGNED_FLOW"
+      },
+      {
+        "field_id": "vwap",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_per_base",
+        "value_type": "PRICE"
+      },
+      {
+        "field_id": "buy_vwap",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_per_base",
+        "value_type": "PRICE"
+      },
+      {
+        "field_id": "sell_vwap",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_per_base",
+        "value_type": "PRICE"
+      },
+      {
+        "field_id": "volume_imbalance",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "buy_sell_notional_ratio",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "price_range_bps",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "bps",
+        "value_type": "BPS"
+      },
+      {
+        "field_id": "close_to_open_bps",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "bps",
+        "value_type": "BPS"
+      },
+      {
+        "field_id": "large_trade_count_ratio_100k_plus",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "large_notional_ratio_100k_plus",
+        "observable_lag_hours": 1,
+        "pit_authority": "DELIVERED_SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      }
+    ],
+    "contracts_sha256": "3EE3381BBC12338F3AA691C4C7E52917FC1119E85CC5FA9D62D4B5EBC9DDBB74",
+    "directory_bundle": {
+      "bundle_sha256": "EBC9A406BE326F2901A844A86DAB4DEEFC634C3BF0133879EBA945A0418FA850",
+      "bytes": 132708859,
+      "file_count": 67
+    }
+  },
+  "aggtrades_source_manifest": {
+    "partition_count": 669,
+    "partition_rows": 28666518,
+    "schema_version": 1,
+    "source_cache_identity_sha256": "CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0",
+    "source_cache_root": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\.cache\\crypto_18m_compositional_broad_search_v1",
+    "tars": [
+      {
+        "bytes": 27240388608,
+        "declared_sha256": "59c9dc8256fcf326ed6a31f7fbf6225e1a707dd76e35d457e53d3447c23501e1",
+        "full_sha256_verified": true,
+        "observed_sha256": "59c9dc8256fcf326ed6a31f7fbf6225e1a707dd76e35d457e53d3447c23501e1",
+        "path": "G:\\AlphaFactory_CryptoData\\deliveries\\pc2_followup_20260722\\archives\\binance_aggtrades_top100_compact_1m_202401_202606.tar"
+      },
+      {
+        "bytes": 21372253184,
+        "declared_sha256": "87eae5c03be252f10b01ba0d2ff001f75876254d4968cc53fe5a07b28de08f5a",
+        "full_sha256_verified": true,
+        "observed_sha256": "87eae5c03be252f10b01ba0d2ff001f75876254d4968cc53fe5a07b28de08f5a",
+        "path": "G:\\AlphaFactory_CryptoData\\deliveries\\pc2_followup_20260722\\archives\\binance_aggtrades_ranks101_200_compact_1m_202401_202606.tar"
+      }
+    ]
+  },
+  "broad_cache": {
+    "cache_identity_sha256": "CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0",
+    "cache_root": ".cache/crypto_18m_compositional_broad_search_v1",
+    "contracts": [
+      {
+        "field_id": "top_global_account_divergence",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "mark_trade_basis_bps",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "bps",
+        "value_type": "BPS"
+      },
+      {
+        "field_id": "trade_quote_volume",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_asset",
+        "value_type": "NOTIONAL"
+      },
+      {
+        "field_id": "account_position_divergence",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "global_long_short_account_ratio_last",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "open_interest_value_last",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_asset",
+        "value_type": "NOTIONAL"
+      },
+      {
+        "field_id": "open_interest_value_mean",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_asset",
+        "value_type": "NOTIONAL"
+      },
+      {
+        "field_id": "top_long_short_account_ratio_last",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "trade_close",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_per_base",
+        "value_type": "PRICE"
+      },
+      {
+        "field_id": "top_long_short_position_ratio_last",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "global_long_short_account_ratio_mean",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "premium_high",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "active_universe_size",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "assets",
+        "value_type": "STATE"
+      },
+      {
+        "field_id": "listing_age_days",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "days",
+        "value_type": "AGE"
+      },
+      {
+        "field_id": "open_interest_last_change_1h",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "field_id": "open_interest_value_last_change_1h",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "field_id": "top_long_short_position_ratio_mean",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "index_open",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_per_base",
+        "value_type": "PRICE"
+      },
+      {
+        "field_id": "trade_return_1h",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "field_id": "trade_count",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "trades",
+        "value_type": "COUNT"
+      },
+      {
+        "field_id": "top_long_short_account_ratio_mean",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "premium_open",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "history_length_hours",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "hours",
+        "value_type": "AGE"
+      },
+      {
+        "field_id": "open_interest_last_change_4h",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "field_id": "open_interest_value_last_change_4h",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "field_id": "index_low",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_per_base",
+        "value_type": "PRICE"
+      },
+      {
+        "field_id": "taker_buy_sell_volume_ratio_last",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "premium_low",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "age_percentile_active_universe",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "UNIT_INTERVAL"
+      },
+      {
+        "field_id": "open_interest_last_change_24h",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "field_id": "open_interest_value_last_change_24h",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RETURN"
+      },
+      {
+        "field_id": "index_high",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_per_base",
+        "value_type": "PRICE"
+      },
+      {
+        "field_id": "taker_buy_sell_volume_ratio_mean",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "mark_index_basis_bps",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "bps",
+        "value_type": "BPS"
+      },
+      {
+        "field_id": "open_interest_mean",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "contracts",
+        "value_type": "VOLUME"
+      },
+      {
+        "field_id": "taker_buy_quote_volume",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "quote_asset",
+        "value_type": "NOTIONAL"
+      },
+      {
+        "field_id": "premium_close",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "dimensionless",
+        "value_type": "RATIO"
+      },
+      {
+        "field_id": "open_interest_last",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "contracts",
+        "value_type": "VOLUME"
+      },
+      {
+        "field_id": "trade_volume",
+        "observable_lag_hours": 1,
+        "pit_authority": "SEARCH_SURFACE_INTEGRATION_V1",
+        "unit": "base_asset",
+        "value_type": "VOLUME"
+      }
+    ],
+    "contracts_sha256": "483B51BE97E1093FE012B1F3543E94039478C24A0A962DC491BC5E7A2A7CF590",
+    "directory_bundle": {
+      "bundle_sha256": "D120C0444B2A5828CBE0C7B538DEF81A1D2E50689C941F4B1A96D2AE60D93FED",
+      "bytes": 1518625711,
+      "file_count": 62
+    }
+  },
+  "broad_registry_sha256": "8efc87151e4f58e665360e3212a9d85e689117d29ad86b27ae909cf8e804ad04",
+  "config_sha256": "52d5f1e6277e195def326bd54575004d561d3985000fe82c2161f0ce34863031",
+  "core3_carrier_identity_sha256": "721DA72596978C12080870A0F41ABC670A0DB93452C967B54499274E91173693",
+  "core3_consumption_manifest_sha256": "48c0a0b425e510fe6adaf3450b0eb88e96dc8b69b3021f3ae37b85e23d72b800",
+  "core3_contract_sha256": "2c6e334dd25bd2745371995b93cc5e0440d943f68a591419f34c48edb34ba08a",
+  "core3_panel_sha256": "174ca773e0cc0b6dc76986ce66554a8f627eb908b9f8ca691e64ed6343d0ab97",
+  "liquidation": {
+    "parquet_files": 11570,
+    "sample_path": "G:\\AlphaFactory_CryptoData\\derived\\cryptohft_crossvenue_liquidations_schemafixed_v2_20260723\\gold\\15min\\aster_futures\\date=2025-06-28\\part.parquet",
+    "sample_sha256": "78b0a3e0d1635fc38523f588c537292c04cb1daa02906f595eb2f856b052f581",
+    "schema_sha256": "12F9719B86126FD38725F3CAEC3680BB1C225DC483C87B842094855DF1766548"
+  },
+  "new_data_admission_decision_sha256": "7606cd8e4cbb34fcd9cd09315f54bbb6b98758a1726525b9f167cb63b41b3dc6",
+  "oi_mark": {
+    "active_fields": 71,
+    "bundle_sha256": "8FB2F13AFE5C5D9CE72CCA423365787BA91C2F3A3F737EF80DFF8667960DF656",
+    "bytes": 676070933,
+    "declared_fields": 96,
+    "file_count": 3468,
+    "root": "G:\\AlphaFactory_CryptoData\\derived\\cryptohft_crossvenue_oi_mark_compact_ranks51_200_schemafixed_v3_20260727",
+    "zero_support_fields": [
+      "bybit__estimated_settle_price_last",
+      "bybit__estimated_settle_price_max",
+      "bybit__estimated_settle_price_mean",
+      "bybit__estimated_settle_price_min",
+      "bybit__estimated_settle_price_std",
+      "hyperliquid_futures__estimated_settle_price_last",
+      "hyperliquid_futures__estimated_settle_price_max",
+      "hyperliquid_futures__estimated_settle_price_mean",
+      "hyperliquid_futures__estimated_settle_price_min",
+      "hyperliquid_futures__estimated_settle_price_std",
+      "hyperliquid_futures__open_interest_value_last",
+      "hyperliquid_futures__open_interest_value_max",
+      "hyperliquid_futures__open_interest_value_mean",
+      "hyperliquid_futures__open_interest_value_min",
+      "hyperliquid_futures__open_interest_value_std",
+      "okx_futures__estimated_settle_price_last",
+      "okx_futures__estimated_settle_price_max",
+      "okx_futures__estimated_settle_price_mean",
+      "okx_futures__estimated_settle_price_min",
+      "okx_futures__estimated_settle_price_std",
+      "okx_futures__index_price_last",
+      "okx_futures__index_price_max",
+      "okx_futures__index_price_mean",
+      "okx_futures__index_price_min",
+      "okx_futures__index_price_std"
+    ]
+  },
+  "oi_mark_carrier_identity_sha256": "9499AA17F6F192F660A0EA20BA28C70CD23E5AAA9281CC0BE0D96986FE50EBA3",
+  "oi_mark_top50_raw": {
+    "bytes": 108416852480,
+    "consumer_status": "RAW_ONLY_INVENTORY",
+    "declared_sha256": "265847e70d27e8b129cb077304fa85aae45eae00d15510aa5ab3d729617464ef",
+    "path": "G:\\AlphaFactory_CryptoData\\deliveries\\pc2_crossvenue_20260721\\archives\\cryptohft_crossvenue_oi_mark_raw_top50_20250628_20260717.tar"
+  },
+  "runner_loader_evidence": {
+    "AGGTRADES_TOP200_DELIVERED": {
+      "cache_identity_sha256": "127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04",
+      "cache_root": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\.cache\\crypto_aggtrades_system_canary_v1",
+      "contracts_sha256": "3EE3381BBC12338F3AA691C4C7E52917FC1119E85CC5FA9D62D4B5EBC9DDBB74",
+      "field_count": 21,
+      "minimum_assets_per_timestamp": 3,
+      "surface_id": "AGGTRADES_TOP200_DELIVERED"
+    },
+    "BROAD_PANEL_BASELINE": {
+      "cache_identity_sha256": "CBD66860C54314A8376A5EA126E4FE5A9760FB766D250AD1F966DC1007EE99F0",
+      "cache_root": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\.cache\\crypto_18m_compositional_broad_search_v1",
+      "contracts_sha256": "483B51BE97E1093FE012B1F3543E94039478C24A0A962DC491BC5E7A2A7CF590",
+      "field_count": 39,
+      "minimum_assets_per_timestamp": 3,
+      "surface_id": "BROAD_PANEL_BASELINE"
+    },
+    "CORE3_MICROSTRUCTURE_PILOT": {
+      "cache_identity_sha256": "721DA72596978C12080870A0F41ABC670A0DB93452C967B54499274E91173693",
+      "cache_root": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\.cache\\crypto_search_surface_integration_v1\\core3_81",
+      "contracts_sha256": "49C832452C32A578B0A6F90286952A490548A801468FCAAD7697DCFE359997C6",
+      "field_count": 81,
+      "minimum_assets_per_timestamp": 3,
+      "surface_id": "CORE3_MICROSTRUCTURE_PILOT"
+    },
+    "OI_MARK_RANKS51_200_DELIVERED": {
+      "cache_identity_sha256": "9499AA17F6F192F660A0EA20BA28C70CD23E5AAA9281CC0BE0D96986FE50EBA3",
+      "cache_root": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\.cache\\crypto_search_surface_integration_v1\\oi_mark_ranks51_200",
+      "contracts_sha256": "D83A04C4DA12FEBFF7DD1D91A58625E80F8B4927FA3F2499BE190100583B5023",
+      "field_count": 71,
+      "minimum_assets_per_timestamp": 3,
+      "surface_id": "OI_MARK_RANKS51_200_DELIVERED"
+    }
+  },
+  "search_v1_2_ledger_sha256": "e14f2a9d384b59b14b27504a4b46cd7f1f9a16f367c14e0f6d93894aa56c8bb0",
+  "source_binding": [
+    {
+      "path": "alphafactory_crypto/broad_search/compositional18m.py",
+      "sha256": "070c10c5f56ecde92210ebd8bd14e153de4ff1912e5f75cc17113abe52a0583a"
+    },
+    {
+      "path": "alphafactory_crypto/broad_search/expression.py",
+      "sha256": "315aa6b2cb89a03eb095225117065fd75c7e628f60cca74a11709c063e89f348"
+    },
+    {
+      "path": "alphafactory_crypto/broad_search/pair18m.py",
+      "sha256": "232ce0e4c6925834f83fa0f59e5af87a424ec4b1df097522214765abc78a8432"
+    },
+    {
+      "path": "alphafactory_crypto/broad_search/panel18m.py",
+      "sha256": "c8d50bc3c858c47f3df0850a5aa763c6d104ecf5dc0eb1bd0cdbfd9841310e5b"
+    },
+    {
+      "path": "alphafactory_crypto/broad_search/runner18m.py",
+      "sha256": "1535c7f41f2a6749940c1cbff0753f1d9318d025a3a7585a649288a0f4084063"
+    },
+    {
+      "path": "alphafactory_crypto/data_admission_v1.py",
+      "sha256": "1e98af0c5ebe70544962fd422e027908fad5097ba2f9d7d64eaaeccf8bd4b601"
+    },
+    {
+      "path": "config/crypto_search_surface_integration_v1.json",
+      "sha256": "52d5f1e6277e195def326bd54575004d561d3985000fe82c2161f0ce34863031"
+    }
+  ],
+  "source_binding_sha256": "FFA83DF61DD30ED8FBC8A9276FA622A4B1DA956BEE8CE45115893559F07FA38D"
+}

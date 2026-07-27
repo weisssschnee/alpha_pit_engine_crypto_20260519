@@ -1,0 +1,141 @@
+{
+  "active_field_count": 212,
+  "blocked_engineering_field_count": 48,
+  "candidate_support_identity_sha256": "0FEC8E08AEAB78662C48A4DBB8644AD6B0FC76D046BCAB4D593D2644D3F32F9C",
+  "compatible_surfaces": {
+    "AGGTRADES_TOP200_DELIVERED": {
+      "all_fields_reachable": true,
+      "compatible_mechanism_families": [
+        "CROSS_ASSET_RELATIVE_STATE",
+        "PRICE_ACTIVITY_RESPONSE"
+      ],
+      "compatible_skeleton_count": 10,
+      "declared_field_count": 21,
+      "full_grammar_supported": false,
+      "reachable_field_count": 21
+    },
+    "BROAD_PANEL_BASELINE": {
+      "all_fields_reachable": true,
+      "compatible_mechanism_families": [
+        "ACCOUNT_POSITION_DIVERGENCE",
+        "BASIS_PREMIUM_STATE",
+        "CROSS_ASSET_RELATIVE_STATE",
+        "OI_ACTIVITY_INTERACTION",
+        "OI_PRICE_DIVERGENCE",
+        "PRICE_ACTIVITY_RESPONSE",
+        "STATE_REGIME_MODULATION",
+        "TOP_GLOBAL_CROWDING"
+      ],
+      "compatible_skeleton_count": 40,
+      "declared_field_count": 39,
+      "full_grammar_supported": true,
+      "reachable_field_count": 39
+    },
+    "CORE3_MICROSTRUCTURE_PILOT": {
+      "all_fields_reachable": true,
+      "compatible_mechanism_families": [
+        "CROSS_ASSET_RELATIVE_STATE",
+        "PRICE_ACTIVITY_RESPONSE"
+      ],
+      "compatible_skeleton_count": 10,
+      "declared_field_count": 81,
+      "full_grammar_supported": false,
+      "reachable_field_count": 81
+    },
+    "OI_MARK_RANKS51_200_DELIVERED": {
+      "all_fields_reachable": true,
+      "compatible_mechanism_families": [
+        "CROSS_ASSET_RELATIVE_STATE",
+        "OI_ACTIVITY_INTERACTION",
+        "STATE_REGIME_MODULATION"
+      ],
+      "compatible_skeleton_count": 15,
+      "declared_field_count": 71,
+      "full_grammar_supported": false,
+      "reachable_field_count": 71
+    }
+  },
+  "compiler_reachable_active_fields": 212,
+  "contexts_merged": false,
+  "data_planes": [
+    {
+      "blocked_fields": 23,
+      "compiler_reachable_fields": 21,
+      "fields": 44,
+      "matched_control_fields": 21,
+      "materialized_fields": 21,
+      "registered_fields": 21,
+      "research_admitted_fields": 0,
+      "surface_id": "AGGTRADES_TOP200_DELIVERED"
+    },
+    {
+      "blocked_fields": 0,
+      "compiler_reachable_fields": 39,
+      "fields": 39,
+      "matched_control_fields": 39,
+      "materialized_fields": 39,
+      "registered_fields": 39,
+      "research_admitted_fields": 0,
+      "surface_id": "BROAD_PANEL_BASELINE"
+    },
+    {
+      "blocked_fields": 0,
+      "compiler_reachable_fields": 81,
+      "fields": 81,
+      "matched_control_fields": 81,
+      "materialized_fields": 81,
+      "registered_fields": 81,
+      "research_admitted_fields": 0,
+      "surface_id": "CORE3_MICROSTRUCTURE_PILOT"
+    },
+    {
+      "blocked_fields": 7,
+      "compiler_reachable_fields": 0,
+      "fields": 7,
+      "matched_control_fields": 0,
+      "materialized_fields": 0,
+      "registered_fields": 0,
+      "research_admitted_fields": 0,
+      "surface_id": "LIQUIDATION_DELIVERED_QUARANTINED"
+    },
+    {
+      "blocked_fields": 25,
+      "compiler_reachable_fields": 71,
+      "fields": 96,
+      "matched_control_fields": 71,
+      "materialized_fields": 71,
+      "registered_fields": 71,
+      "research_admitted_fields": 0,
+      "surface_id": "OI_MARK_RANKS51_200_DELIVERED"
+    },
+    {
+      "blocked_fields": 96,
+      "compiler_reachable_fields": 0,
+      "fields": 96,
+      "matched_control_fields": 0,
+      "materialized_fields": 0,
+      "registered_fields": 0,
+      "research_admitted_fields": 0,
+      "surface_id": "OI_MARK_TOP50_RAW"
+    }
+  ],
+  "declared_engineering_field_count": 260,
+  "future_arena_qualified": false,
+  "joint_120_channel_panel_created": false,
+  "liquidation_status": "QUARANTINED",
+  "market_pair_evaluations": 0,
+  "market_search_started": false,
+  "matched_control_active_fields": 212,
+  "oi_mark_top50_status": "RAW_ONLY_INVENTORY",
+  "research_admission": "HOLD",
+  "research_holds_preserved": [
+    "UNRESOLVED_INSTRUMENT_CLASSIFICATION",
+    "DELIVERED_FEATURE_SURFACES_DO_NOT_COVER_HISTORICAL_PIT_UNIVERSE",
+    "INFERRED_MULTI_LIFECYCLE_IDENTITY_REVIEW",
+    "BDXN_MATERIAL_TO_TOP200_BOUNDARY"
+  ],
+  "reward_reads": 0,
+  "runtime_materialized_active_fields": 212,
+  "sealed_reads": 0,
+  "status": "PASS_ACTIVE_SEARCH_CARRIERS_WITH_DECLARED_FIELD_HOLDS"
+}

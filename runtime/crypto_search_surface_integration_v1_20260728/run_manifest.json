@@ -1,0 +1,203 @@
+{
+  "completed_at": "2026-07-27T18:31:16.235119+00:00",
+  "experiment_id": "20260728_crypto_search_surface_integration_v1",
+  "final_decision": {
+    "active_field_count": 212,
+    "blocked_engineering_field_count": 48,
+    "candidate_support_identity_sha256": "0FEC8E08AEAB78662C48A4DBB8644AD6B0FC76D046BCAB4D593D2644D3F32F9C",
+    "compatible_surfaces": {
+      "AGGTRADES_TOP200_DELIVERED": {
+        "all_fields_reachable": true,
+        "compatible_mechanism_families": [
+          "CROSS_ASSET_RELATIVE_STATE",
+          "PRICE_ACTIVITY_RESPONSE"
+        ],
+        "compatible_skeleton_count": 10,
+        "declared_field_count": 21,
+        "full_grammar_supported": false,
+        "reachable_field_count": 21
+      },
+      "BROAD_PANEL_BASELINE": {
+        "all_fields_reachable": true,
+        "compatible_mechanism_families": [
+          "ACCOUNT_POSITION_DIVERGENCE",
+          "BASIS_PREMIUM_STATE",
+          "CROSS_ASSET_RELATIVE_STATE",
+          "OI_ACTIVITY_INTERACTION",
+          "OI_PRICE_DIVERGENCE",
+          "PRICE_ACTIVITY_RESPONSE",
+          "STATE_REGIME_MODULATION",
+          "TOP_GLOBAL_CROWDING"
+        ],
+        "compatible_skeleton_count": 40,
+        "declared_field_count": 39,
+        "full_grammar_supported": true,
+        "reachable_field_count": 39
+      },
+      "CORE3_MICROSTRUCTURE_PILOT": {
+        "all_fields_reachable": true,
+        "compatible_mechanism_families": [
+          "CROSS_ASSET_RELATIVE_STATE",
+          "PRICE_ACTIVITY_RESPONSE"
+        ],
+        "compatible_skeleton_count": 10,
+        "declared_field_count": 81,
+        "full_grammar_supported": false,
+        "reachable_field_count": 81
+      },
+      "OI_MARK_RANKS51_200_DELIVERED": {
+        "all_fields_reachable": true,
+        "compatible_mechanism_families": [
+          "CROSS_ASSET_RELATIVE_STATE",
+          "OI_ACTIVITY_INTERACTION",
+          "STATE_REGIME_MODULATION"
+        ],
+        "compatible_skeleton_count": 15,
+        "declared_field_count": 71,
+        "full_grammar_supported": false,
+        "reachable_field_count": 71
+      }
+    },
+    "compiler_reachable_active_fields": 212,
+    "contexts_merged": false,
+    "data_planes": [
+      {
+        "blocked_fields": 23,
+        "compiler_reachable_fields": 21,
+        "fields": 44,
+        "matched_control_fields": 21,
+        "materialized_fields": 21,
+        "registered_fields": 21,
+        "research_admitted_fields": 0,
+        "surface_id": "AGGTRADES_TOP200_DELIVERED"
+      },
+      {
+        "blocked_fields": 0,
+        "compiler_reachable_fields": 39,
+        "fields": 39,
+        "matched_control_fields": 39,
+        "materialized_fields": 39,
+        "registered_fields": 39,
+        "research_admitted_fields": 0,
+        "surface_id": "BROAD_PANEL_BASELINE"
+      },
+      {
+        "blocked_fields": 0,
+        "compiler_reachable_fields": 81,
+        "fields": 81,
+        "matched_control_fields": 81,
+        "materialized_fields": 81,
+        "registered_fields": 81,
+        "research_admitted_fields": 0,
+        "surface_id": "CORE3_MICROSTRUCTURE_PILOT"
+      },
+      {
+        "blocked_fields": 7,
+        "compiler_reachable_fields": 0,
+        "fields": 7,
+        "matched_control_fields": 0,
+        "materialized_fields": 0,
+        "registered_fields": 0,
+        "research_admitted_fields": 0,
+        "surface_id": "LIQUIDATION_DELIVERED_QUARANTINED"
+      },
+      {
+        "blocked_fields": 25,
+        "compiler_reachable_fields": 71,
+        "fields": 96,
+        "matched_control_fields": 71,
+        "materialized_fields": 71,
+        "registered_fields": 71,
+        "research_admitted_fields": 0,
+        "surface_id": "OI_MARK_RANKS51_200_DELIVERED"
+      },
+      {
+        "blocked_fields": 96,
+        "compiler_reachable_fields": 0,
+        "fields": 96,
+        "matched_control_fields": 0,
+        "materialized_fields": 0,
+        "registered_fields": 0,
+        "research_admitted_fields": 0,
+        "surface_id": "OI_MARK_TOP50_RAW"
+      }
+    ],
+    "declared_engineering_field_count": 260,
+    "future_arena_qualified": false,
+    "joint_120_channel_panel_created": false,
+    "liquidation_status": "QUARANTINED",
+    "market_pair_evaluations": 0,
+    "market_search_started": false,
+    "matched_control_active_fields": 212,
+    "oi_mark_top50_status": "RAW_ONLY_INVENTORY",
+    "research_admission": "HOLD",
+    "research_holds_preserved": [
+      "UNRESOLVED_INSTRUMENT_CLASSIFICATION",
+      "DELIVERED_FEATURE_SURFACES_DO_NOT_COVER_HISTORICAL_PIT_UNIVERSE",
+      "INFERRED_MULTI_LIFECYCLE_IDENTITY_REVIEW",
+      "BDXN_MATERIAL_TO_TOP200_BOUNDARY"
+    ],
+    "reward_reads": 0,
+    "runtime_materialized_active_fields": 212,
+    "sealed_reads": 0,
+    "status": "PASS_ACTIVE_SEARCH_CARRIERS_WITH_DECLARED_FIELD_HOLDS"
+  },
+  "frozen_contract_sha256": "208DD0D0665051E69C86E9AB52A8851E5879D9693FA6373B2C4F1211FB247DC9",
+  "input_identity_sha256": "53A6E844A43AF71F00D2ABA6714AA9A92B80C321E45BFD301CF482CDB3E95380",
+  "market_pair_evaluations": 0,
+  "market_search_started": false,
+  "outputs": [
+    {
+      "bytes": 4751,
+      "path": "runtime/crypto_search_surface_integration_v1_20260728/frozen_contract.json",
+      "sha256": "5afec6c04cc29810314173344e4d63aad00e4df5339d5a4295c0bf215d88be46"
+    },
+    {
+      "bytes": 26531,
+      "path": "runtime/crypto_search_surface_integration_v1_20260728/field_reachability.parquet",
+      "sha256": "f66c94e19b0856544dcfdcbd5e122d9041565d9a3caf4744bd08550f67085a7d"
+    },
+    {
+      "bytes": 55267,
+      "path": "runtime/crypto_search_surface_integration_v1_20260728/search_carriers.json",
+      "sha256": "46232a870256f3f49755d501a55926b0abc2c85cfb6b72cef5f0221cb65a7fdd"
+    },
+    {
+      "bytes": 47149,
+      "path": "runtime/crypto_search_surface_integration_v1_20260728/carrier_contracts.json",
+      "sha256": "38322341613066280f5f1bfe11bcd91516e68051e288ad6659303251ac4f7d01"
+    },
+    {
+      "bytes": 528535,
+      "path": "runtime/crypto_search_surface_integration_v1_20260728/compiler_proofs.jsonl",
+      "sha256": "6b2dbd74bb2f8c15c80155d6843a8bf7b638aed66927bef889481b1541409465"
+    },
+    {
+      "bytes": 691,
+      "path": "runtime/crypto_search_surface_integration_v1_20260728/candidate_support_contract.json",
+      "sha256": "fd8e912bbd24b70a25ffe2644622b9a8b1c3934d76646d0f1d4867a7d027e6e3"
+    },
+    {
+      "bytes": 22417,
+      "path": "runtime/crypto_search_surface_integration_v1_20260728/source_evidence.json",
+      "sha256": "37e64a02815a052735b1e8a175d9f2e756ffbf3feaddc9f714efb1a4d55f515d"
+    },
+    {
+      "bytes": 4508,
+      "path": "runtime/crypto_search_surface_integration_v1_20260728/final_decision.json",
+      "sha256": "cbd9420f9cfa9a0ffc2ca3047aae0f3cab9d4ccbf1722b98f13df661aed78a0c"
+    },
+    {
+      "bytes": 1149,
+      "path": "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
+      "sha256": "eeb9db6e61166bcc88e4ef89c1edc395a0b818b4028189d098c3c3ff759dfe01"
+    }
+  ],
+  "process_cpu_seconds": 18.8125,
+  "reward_reads": 0,
+  "sealed_reads": 0,
+  "source_binding_sha256": "FFA83DF61DD30ED8FBC8A9276FA622A4B1DA956BEE8CE45115893559F07FA38D",
+  "source_sha": "e4bcc5d64c00635dfbc4384c102fde0b5bf74ca5",
+  "started_at": "2026-07-27T18:28:26.336864+00:00",
+  "wall_seconds": 169.8981102000107
+}

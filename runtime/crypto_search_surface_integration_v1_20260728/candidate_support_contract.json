@@ -1,0 +1,14 @@
+{
+  "evaluator_consumer": "broad_search.pair18m.evaluate_pair",
+  "field_availability": "numpy.isfinite(field values)",
+  "full_surface_intersection_required": false,
+  "full_top200_support_is_diagnostic_only_for_engineering_reachability": true,
+  "identity_sha256": "0FEC8E08AEAB78662C48A4DBB8644AD6B0FC76D046BCAB4D593D2644D3F32F9C",
+  "implementation": "RawPanelStore.candidate_support(field_ids, time_slice)",
+  "minimum_assets_per_timestamp": 3,
+  "missing_as_signal": false,
+  "missing_as_zero": false,
+  "primary_control_same_raw_fields": true,
+  "rule": "base_eligible AND finite(all candidate raw fields)",
+  "unrelated_sparse_fields_reduce_candidate_support": false
+}

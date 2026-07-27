@@ -46,6 +46,12 @@ Each active data plane receives:
 5. explicit candidate-local support semantics:
    `base_eligible AND finite(all candidate raw fields)`.
 
+`Active` is a per-field runtime state, not a synonym for schema declaration.
+A declared field remains HOLD when its carrier does not materialize it, its
+full delivered root has zero finite support, or no support-valid runtime proof
+can be constructed. V1 therefore records 260 declared engineering fields,
+212 runtime-active fields, and 48 explicit field holds.
+
 An independent carrier is not required to satisfy roles used only by other
 carriers. The generator selects only Skeletons whose typed roles are available
 on that carrier. Full-Top200 support remains reported, but is not required for

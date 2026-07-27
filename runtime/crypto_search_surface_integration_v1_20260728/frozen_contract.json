@@ -1,0 +1,105 @@
+{
+  "authorization": "NON_ECONOMIC_SEARCH_SURFACE_INTEGRATION_V1",
+  "boundaries": {
+    "alpha_claim": false,
+    "challenge": false,
+    "cross_sprint_adaptive_memory": false,
+    "forward": false,
+    "latent_priority": false,
+    "market_search": false,
+    "may_stress": false,
+    "oos": false,
+    "promotion": false,
+    "recent": false,
+    "relational_training": false,
+    "sealed_reads": 0
+  },
+  "candidate_support": {
+    "full_top200_support_is_diagnostic_only_for_engineering_reachability": true,
+    "minimum_assets_per_timestamp": 3,
+    "missing_as_signal": false,
+    "missing_as_zero": false,
+    "primary_control_same_raw_fields": true,
+    "rule": "base_eligible AND finite(all candidate raw fields)"
+  },
+  "carriers": {
+    "AGGTRADES_TOP200_DELIVERED": {
+      "cache_root": ".cache/crypto_aggtrades_system_canary_v1"
+    },
+    "BROAD_PANEL_BASELINE": {
+      "cache_root": ".cache/crypto_18m_compositional_broad_search_v1"
+    },
+    "CORE3_MICROSTRUCTURE_PILOT": {
+      "cache_root": ".cache/crypto_search_surface_integration_v1/core3_81"
+    },
+    "OI_MARK_RANKS51_200_DELIVERED": {
+      "cache_root": ".cache/crypto_search_surface_integration_v1/oi_mark_ranks51_200"
+    },
+    "minimum_assets_per_timestamp": 3
+  },
+  "config_path": "config/crypto_search_surface_integration_v1.json",
+  "config_sha256": "52d5f1e6277e195def326bd54575004d561d3985000fe82c2161f0ce34863031",
+  "data_planes": {
+    "AGGTRADES_TOP200_DELIVERED": {
+      "missing_value_fill": null,
+      "mode": "ACTIVE_ENGINEERING_REACHABILITY",
+      "research_admission": false
+    },
+    "BROAD_PANEL_BASELINE": {
+      "context_merge_allowed": false,
+      "expected_fields": 39,
+      "mode": "ACTIVE_EXISTING_SEARCH_CARRIER"
+    },
+    "CORE3_MICROSTRUCTURE_PILOT": {
+      "context_merge_allowed": false,
+      "expected_fields": 81,
+      "mode": "ACTIVE_INDEPENDENT_COMPILER_CARRIER"
+    },
+    "LIQUIDATION_DELIVERED_QUARANTINED": {
+      "compiler_admission": false,
+      "mode": "INVENTORY_ONLY",
+      "research_admission": false
+    },
+    "OI_MARK_RANKS51_200_DELIVERED": {
+      "missing_value_fill": null,
+      "mode": "ACTIVE_ENGINEERING_REACHABILITY",
+      "research_admission": false,
+      "venue_qualified_fields": true
+    },
+    "OI_MARK_TOP50_RAW": {
+      "compiler_admission": false,
+      "mode": "INVENTORY_ONLY",
+      "research_admission": false
+    }
+  },
+  "experiment_id": "20260728_crypto_search_surface_integration_v1",
+  "frozen_at": "2026-07-27T18:28:26.336864+00:00",
+  "frozen_contract_sha256": "208DD0D0665051E69C86E9AB52A8851E5879D9693FA6373B2C4F1211FB247DC9",
+  "inputs": {
+    "aggtrades_ranks101_200_tar": "G:/AlphaFactory_CryptoData/deliveries/pc2_followup_20260722/archives/binance_aggtrades_ranks101_200_compact_1m_202401_202606.tar",
+    "aggtrades_top100_tar": "G:/AlphaFactory_CryptoData/deliveries/pc2_followup_20260722/archives/binance_aggtrades_top100_compact_1m_202401_202606.tar",
+    "broad_cache": ".cache/crypto_18m_compositional_broad_search_v1",
+    "broad_registry": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY.json",
+    "core3_panel": "G:/AlphaFactory_CryptoData/gold/panels/crypto_core12_1h_with_aggtrades_features_v1.parquet",
+    "core3_token_contract": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/resolved_token_contract.json",
+    "liquidation_schemafixed_v2_root": "G:/AlphaFactory_CryptoData/derived/cryptohft_crossvenue_liquidations_schemafixed_v2_20260723",
+    "new_data_admission_decision": "runtime/crypto_new_data_admission_v1_20260727/final_decision.json",
+    "oi_mark_ranks51_200_root": "G:/AlphaFactory_CryptoData/derived/cryptohft_crossvenue_oi_mark_compact_ranks51_200_schemafixed_v3_20260727",
+    "oi_mark_top50_raw_tar": "G:/AlphaFactory_CryptoData/deliveries/pc2_crossvenue_20260721/archives/cryptohft_crossvenue_oi_mark_raw_top50_20250628_20260717.tar",
+    "search_v1_2_ledger": "runtime/crypto_search_engine_v1_2_20260727/candidate_ledger.parquet"
+  },
+  "objective": "Make delivered crypto fields explicitly materializable, typed, compiler-reachable, matched-control-constructible, and candidate-support-aware without running a market Arena",
+  "outputs": {
+    "report": "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
+    "runtime_root": "runtime/crypto_search_surface_integration_v1_20260728"
+  },
+  "proof": {
+    "compiler_validation": true,
+    "deterministic_replay": true,
+    "market_pair_evaluation": false,
+    "matched_control_constructible": true,
+    "one_candidate_per_reachable_field": true,
+    "reward_read": false
+  },
+  "schema_version": 1
+}
