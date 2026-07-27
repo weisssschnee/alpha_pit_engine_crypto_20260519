@@ -2,7 +2,7 @@
 
 - Status: Accepted
 - Date: 2026-07-27
-- Remediation source: `dadb10059629b8d68da546c5b92a163aa67d8065`
+- Remediation source: `369dbb8fadf7a1308fd1820da37e5cd95ffc8450`
 - Supersedes: Real policy-upgrade canary and Search Engine V1 future-new-data
   component qualification only
 
@@ -51,10 +51,17 @@ future-Arena qualification is suspended by the same defects.
    standard error with `horizon - 1` dependency lags. Monthly-block LCB remains
    diagnostic and cannot replace the strict reward authority.
 6. Future ledgers must retain primary, control, and incremental scalar metrics
-   and monthly waterfalls. Gross-positive-to-net-nonpositive cost sign-flip,
-   cost-threshold violation, and turnover-threshold violation are distinct
-   diagnostics.
-7. Requalification requires a separately authorized, fresh-state run over a
+   and monthly gross/cost/net/turnover waterfalls.
+   Gross-positive-to-net-nonpositive cost sign-flip, cost-threshold violation,
+   and turnover-threshold violation are distinct diagnostics.
+7. CPU-hour must sum parent-process proposal, compiler/replay, archive, policy
+   observation, and ledger CPU plus every worker's pair-evaluation process CPU.
+   Valid exact-unique density uses the exact-unique counter, not strict
+   evaluation success rows.
+8. A checkpoint may become visible at its final path only after its temporary
+   directory passes state, policy, archive, ledger, receipt, identity, and hash
+   restoration. The verified manifest is written before the atomic rename.
+9. Requalification requires a separately authorized, fresh-state run over a
    newly built schema-2 cache. This ADR does not authorize a cache build,
    current-data rerun, new-data Arena, OOS, challenge, promotion, latent model,
    or larger budget.
@@ -67,6 +74,8 @@ future-Arena qualification is suspended by the same defects.
   historical diagnostics only and cannot allocate future budget.
 - The repaired code is fail-closed but unqualified until a new campaign
   exercises it under an authorized data contract.
+- Future efficiency and exit-gate comparisons use the frozen process-CPU and
+  exact-unique definitions; no legacy metric is silently reinterpreted.
 - CURRENT keeps the existing Search Engine V1 capability node and records the
   qualification suspension; no new Graph layer or replacement authority is
   created.

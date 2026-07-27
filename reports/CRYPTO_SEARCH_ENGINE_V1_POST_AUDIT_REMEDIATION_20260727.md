@@ -1,7 +1,7 @@
 # Crypto Search Engine V1 post-audit remediation
 
 - Decision: `RESEARCH_AND_FUTURE_ARENA_QUALIFICATION_HOLD`
-- Remediation source: `dadb10059629b8d68da546c5b92a163aa67d8065`
+- Remediation source: `369dbb8fadf7a1308fd1820da37e5cd95ffc8450`
 - Historical runtime: `runtime/crypto_search_engine_v1_20260721`
 - Historical artifact bundle: `2E0EAED26747E1B97F5F4C06482BE61337965DC0CAAA2A5B1C48C06625657288`
 - New search or cache build: `NO`
@@ -44,10 +44,17 @@ well; its execution and replay evidence remain historical engineering evidence.
   and scalar metrics.
 - Cost sign-flip, cost-threshold violation, and turnover-threshold violation
   are distinct diagnostics.
+- Monthly waterfalls now persist gross, cost, net, and turnover together.
+- CPU-hour sums parent proposal/compile/archive/ledger CPU and all worker pair
+  evaluation process CPU. Valid exact-unique density uses the exact-unique
+  counter, including candidates that fail later matched evaluation.
+- Checkpoint state is fully restored and hash-verified in its temporary
+  directory; only a manifest already marked restore-verified can be atomically
+  renamed to the public checkpoint path.
 
 ## Verification
 
-- Targeted search/train tests: `34 passed`.
+- Targeted search/train tests: `36 passed`.
 - Historical checker: engineering integrity `PASS`, strict count `20,000`,
   checkpoints `10`, behavior families `16,712`, errors `[]`.
 - Historical component qualification:
