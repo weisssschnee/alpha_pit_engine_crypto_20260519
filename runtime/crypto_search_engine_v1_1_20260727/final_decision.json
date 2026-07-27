@@ -1,0 +1,105 @@
+{
+  "active_wall_seconds": 1625.2468915000063,
+  "archive_duplicate_replacements": 42,
+  "arm_counts": {
+    "behavior_niched_cem_v2_1": 1000,
+    "behavior_niched_evolution_v2_1": 1000,
+    "canonical_typed_random": 1000
+  },
+  "behavior_duplicate_rate": 0.028000000000000025,
+  "behavior_family_count": 2916,
+  "cannot_conclude": [
+    "unbiased cross-sectional Alpha",
+    "fresh economic increment",
+    "OOS validity",
+    "challenge, recent, May-stress, or forward evidence",
+    "candidate, arm, or component promotion"
+  ],
+  "checkpoint_count": 2,
+  "checkpoint_restore_verified": true,
+  "engineering_execution_qualified_arms": [
+    "canonical_typed_random",
+    "behavior_niched_cem_v2_1",
+    "behavior_niched_evolution_v2_1"
+  ],
+  "epoch_id": "CRYPTO_SEARCH_ENGINE_V1_1_BEHAVIOR_NICHED_20260727",
+  "every_candidate_uses_aggtrades": true,
+  "expected_arm_counts": {
+    "behavior_niched_cem_v2_1": 1000,
+    "behavior_niched_evolution_v2_1": 1000,
+    "canonical_typed_random": 1000
+  },
+  "final_evolution_operator_probabilities": {
+    "COMPATIBLE_SKELETON_VARIANT_MUTATION": 0.29783400953867945,
+    "EFFECTIVE_GENE_MUTATION_1_TO_3": 0.35373442633998664,
+    "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER": 0.3484315641213339
+  },
+  "final_evolution_operator_productivity": {
+    "COMPATIBLE_SKELETON_VARIANT_MUTATION": {
+      "new_families": 103,
+      "trials": 144
+    },
+    "EFFECTIVE_GENE_MUTATION_1_TO_3": {
+      "new_families": 189,
+      "trials": 191
+    },
+    "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER": {
+      "new_families": 160,
+      "trials": 165
+    }
+  },
+  "future_new_data_arena_qualified_arms": [],
+  "generation_attempts": 5444,
+  "next_arena_started": false,
+  "positive_matched_discoveries_by_arm": {
+    "behavior_niched_cem_v2_1": 0,
+    "behavior_niched_evolution_v2_1": 0,
+    "canonical_typed_random": 0
+  },
+  "producer_source_sha": "17ac5de989dec464b0c4903256f3f7662eeb9778",
+  "promotion": "FORBIDDEN",
+  "raw_attempt_limit": 20000,
+  "research_decision": "HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "search_iteration_decision": {
+    "behavior_niched_cem_v2_1": "REJECT_INCREMENT_NOT_DEMONSTRATED",
+    "behavior_niched_evolution_v2_1": "REJECT_INCREMENT_NOT_DEMONSTRATED"
+  },
+  "status": "PASS_SEARCH_ENGINE_V1_1_COMPLETED",
+  "strict_evaluated_count": 3000,
+  "system_comparisons_vs_typed_random": {
+    "behavior_niched_cem_v2_1": {
+      "behavior_duplicate_rate": 0.0,
+      "behavior_duplicate_rate_delta": 0.0,
+      "matched_evaluated_count": 1000,
+      "mean_pair_reward_at_matched_count": -4.482073792973992,
+      "mean_pair_reward_delta": 0.1206029740934369,
+      "new_behavior_families_per_1k_delta": 0.0,
+      "new_behavior_families_per_1k_evaluations": 1000.0,
+      "top_decile_pair_reward_at_matched_count": -3.0605161064973663,
+      "top_decile_pair_reward_delta": -0.08651706738688514,
+      "valid_exact_unique_per_cpu_hour": 1693.744027052856,
+      "valid_exact_unique_per_cpu_hour_delta": -145.4979242679019
+    },
+    "behavior_niched_evolution_v2_1": {
+      "behavior_duplicate_rate": 0.07799999999999996,
+      "behavior_duplicate_rate_delta": 0.07799999999999996,
+      "matched_evaluated_count": 1000,
+      "mean_pair_reward_at_matched_count": -3.8366086450576202,
+      "mean_pair_reward_delta": 0.7660681220098087,
+      "new_behavior_families_per_1k_delta": -74.0,
+      "new_behavior_families_per_1k_evaluations": 926.0,
+      "top_decile_pair_reward_at_matched_count": -1.8338841521871874,
+      "top_decile_pair_reward_delta": 1.1401148869232938,
+      "valid_exact_unique_per_cpu_hour": 1605.3064295866895,
+      "valid_exact_unique_per_cpu_hour_delta": -233.9355217340683
+    }
+  },
+  "verified_evolution_operations": {
+    "COMPATIBLE_SKELETON_VARIANT_MUTATION": 244,
+    "EFFECTIVE_GENE_MUTATION_1_TO_3": 399,
+    "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER": 229
+  },
+  "wall_time_limit_seconds": 14400
+}

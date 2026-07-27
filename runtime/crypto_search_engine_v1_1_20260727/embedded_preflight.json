@@ -1,0 +1,14 @@
+{
+  "available_memory_bytes": 7958388736,
+  "first_batch_candidates": 10,
+  "first_batch_strict_completed": 10,
+  "memory_gate_bytes": 12884901888,
+  "peak_worker_rss_bytes": 268472320,
+  "projected_10_worker_plus_parent_rss_bytes": 2850455552,
+  "schema_version": 1,
+  "status": "MEMORY_FAIL_CLOSED_FALLBACK_8",
+  "strict_candidates_consumed_outside_campaign": 0,
+  "workers_12_forbidden": true,
+  "workers_requested": 10,
+  "workers_selected": 8
+}
