@@ -76,7 +76,7 @@
     }
   },
   "experiment_id": "20260728_crypto_search_surface_integration_v1",
-  "frozen_at": "2026-07-27T19:25:00.562013+00:00",
+  "frozen_at": "2026-07-27T19:45:32.635090+00:00",
   "frozen_contract_sha256": "28368DC76F3C3D150A8B1EAD8C9D13011CB6B754AAFFF67BF1D7DFBD42A6B176",
   "inputs": {
     "aggtrades_ranks101_200_tar": "G:/AlphaFactory_CryptoData/deliveries/pc2_followup_20260722/archives/binance_aggtrades_ranks101_200_compact_1m_202401_202606.tar",

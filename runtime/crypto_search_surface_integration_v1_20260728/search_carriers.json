@@ -1,7 +1,7 @@
 {
   "carriers": {
     "AGGTRADES_TOP200_DELIVERED": {
-      "cache_identity_sha256": "E819A3D1E5ECE0DD33D32E5B3AD6C3768A22999788C972E593E8712EEFF0D0C4",
+      "cache_identity_sha256": "0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6",
       "cache_root": ".cache/crypto_search_surface_integration_v1/aggtrades_top200_full44",
       "contracts": [
         {
@@ -315,8 +315,8 @@
       ],
       "contracts_sha256": "C41418C41B298C600B8C88A2E7DEBE648A62517967BFF24C6F10CC4FE14C6B54",
       "directory_bundle": {
-        "bundle_sha256": "BD5F5A993C0EC4A6B32BCB32B6EEE0D4ACAA1FFADEA361E97FA4F049AF871096",
-        "bytes": 181337015,
+        "bundle_sha256": "8C3FF6D282510B483D70D6B59B3046E1C4A2267721F25AE0189E2E9AEEE12623",
+        "bytes": 181336991,
         "file_count": 90
       }
     },
@@ -606,7 +606,7 @@
       }
     },
     "CORE3_MICROSTRUCTURE_PILOT": {
-      "cache_identity_sha256": "8CF6D1EF39F00BC0FBC791FB874597EFE2E3FAD7BE5CF68AF56BEEE62704D940",
+      "cache_identity_sha256": "361F7A63D44B9F8C6FCA9756CA18ADA390BE05D96FA0C4895D2F49802FDEB80D",
       "cache_root": ".cache/crypto_search_surface_integration_v1/core3_81",
       "contracts": [
         {
@@ -1179,13 +1179,13 @@
       ],
       "contracts_sha256": "49C832452C32A578B0A6F90286952A490548A801468FCAAD7697DCFE359997C6",
       "directory_bundle": {
-        "bundle_sha256": "ECEE22E13658EBFC3074097A63ED2101A9A015D56955A4C75A2872C136E3C01F",
+        "bundle_sha256": "642FFF88F2609C70F19D9118539F5F7A1E7CA7CEDAA2CC753843036B847E3510",
         "bytes": 4439915,
         "file_count": 88
       }
     },
     "OI_MARK_RANKS51_200_DELIVERED": {
-      "cache_identity_sha256": "7FAAF4DAF05EF4F5100B8DC6065A88D90029FF41314B622EA4115F861EDE03C1",
+      "cache_identity_sha256": "D97B516BDF3DFFA2DFCC293B28AF4007698B0BDC1C3678F443B6CDBB570DDD74",
       "cache_root": ".cache/crypto_search_surface_integration_v1/oi_mark_ranks51_200",
       "contracts": [
         {
@@ -1688,7 +1688,7 @@
       ],
       "contracts_sha256": "D83A04C4DA12FEBFF7DD1D91A58625E80F8B4927FA3F2499BE190100583B5023",
       "directory_bundle": {
-        "bundle_sha256": "DA09F62F2A84601E6567525F7ECE8035D6D30E04C511CE3FDD6B427F5B1F503C",
+        "bundle_sha256": "4975780EFE4147DC696340E9C7CA6390ED1B3307F8A9FBB9ED47258C4055C5FA",
         "bytes": 392392609,
         "file_count": 78
       }
@@ -1697,5 +1697,5 @@
   "contexts_merged": false,
   "minimum_assets_per_timestamp": 3,
   "schema_version": 1,
-  "source_binding_sha256": "583D2F4F71BAA0ADE59032756E80CA07091722A670049AA8D56E5E5D4B1146C3"
+  "source_binding_sha256": "D1AF43DAB909256A8B9EF171E70548B58DC3CC524852194071263A636AA87C7D"
 }

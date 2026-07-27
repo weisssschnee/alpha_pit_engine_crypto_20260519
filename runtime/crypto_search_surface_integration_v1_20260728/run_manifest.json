@@ -1,5 +1,5 @@
 {
-  "completed_at": "2026-07-27T19:30:14.441009+00:00",
+  "completed_at": "2026-07-27T19:51:56.856638+00:00",
   "experiment_id": "20260728_crypto_search_surface_integration_v1",
   "final_decision": {
     "active_field_count": 235,
@@ -145,14 +145,14 @@
     "status": "PASS_ACTIVE_SEARCH_CARRIERS_WITH_DECLARED_FIELD_HOLDS"
   },
   "frozen_contract_sha256": "28368DC76F3C3D150A8B1EAD8C9D13011CB6B754AAFFF67BF1D7DFBD42A6B176",
-  "input_identity_sha256": "1FB975DC8A417D94B76E65593FAE5186158B256AB1DAE84B868B77D35D06D4D0",
+  "input_identity_sha256": "7A460901B49B921CADCFA4410DFBD07D533BE5AE608E8F0CDCC8ED76805D8311",
   "market_pair_evaluations": 0,
   "market_search_started": false,
   "outputs": [
     {
       "bytes": 4905,
       "path": "runtime/crypto_search_surface_integration_v1_20260728/frozen_contract.json",
-      "sha256": "908a2d999489005d0360b7d5c30be0e16db2c36b4ef2c3660b968b98a5878b91"
+      "sha256": "630a2945380298a8645db61d95b934fab2690ae877d2b16305b9bb88f69370f8"
     },
     {
       "bytes": 27305,
@@ -162,7 +162,7 @@
     {
       "bytes": 60958,
       "path": "runtime/crypto_search_surface_integration_v1_20260728/search_carriers.json",
-      "sha256": "265ced0b92f4687123197253b3578b8760a619ae797baf62ee2ba46b0de78c55"
+      "sha256": "f4e1a3f81b7c7f80097fe42b52debe5e086c884d7123fb854a360f3868e691d8"
     },
     {
       "bytes": 52169,
@@ -182,7 +182,7 @@
     {
       "bytes": 27922,
       "path": "runtime/crypto_search_surface_integration_v1_20260728/source_evidence.json",
-      "sha256": "570af744320a2c3ce0886034f841a28b9480b20655b4de60b37b604ba00d315e"
+      "sha256": "c7b9e31d0602b446527135ed6ac84be685cee9359ffe707ef9607d82919403e2"
     },
     {
       "bytes": 4654,
@@ -195,11 +195,11 @@
       "sha256": "955583e49d21f1409aa14b9ffbb1ff6685ac326bd89dbdf942dbdd3ef5f0067c"
     }
   ],
-  "process_cpu_seconds": 83.125,
+  "process_cpu_seconds": 57.1875,
   "reward_reads": 0,
   "sealed_reads": 0,
-  "source_binding_sha256": "583D2F4F71BAA0ADE59032756E80CA07091722A670049AA8D56E5E5D4B1146C3",
-  "source_sha": "7a42bd6eddf9b55685673778f4bcf2b3d2383d79",
-  "started_at": "2026-07-27T19:25:00.562013+00:00",
-  "wall_seconds": 313.87883950000105
+  "source_binding_sha256": "D1AF43DAB909256A8B9EF171E70548B58DC3CC524852194071263A636AA87C7D",
+  "source_sha": "caa4500485995119a908790508030e305add6841",
+  "started_at": "2026-07-27T19:45:32.635090+00:00",
+  "wall_seconds": 384.22129129999666
 }

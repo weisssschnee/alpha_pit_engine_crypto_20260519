@@ -1,6 +1,6 @@
 {
   "aggtrades_carrier": {
-    "cache_identity_sha256": "E819A3D1E5ECE0DD33D32E5B3AD6C3768A22999788C972E593E8712EEFF0D0C4",
+    "cache_identity_sha256": "0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6",
     "cache_root": ".cache/crypto_search_surface_integration_v1/aggtrades_top200_full44",
     "contracts": [
       {
@@ -314,12 +314,12 @@
     ],
     "contracts_sha256": "C41418C41B298C600B8C88A2E7DEBE648A62517967BFF24C6F10CC4FE14C6B54",
     "directory_bundle": {
-      "bundle_sha256": "BD5F5A993C0EC4A6B32BCB32B6EEE0D4ACAA1FFADEA361E97FA4F049AF871096",
-      "bytes": 181337015,
+      "bundle_sha256": "8C3FF6D282510B483D70D6B59B3046E1C4A2267721F25AE0189E2E9AEEE12623",
+      "bytes": 181336991,
       "file_count": 90
     }
   },
-  "aggtrades_carrier_identity_sha256": "E819A3D1E5ECE0DD33D32E5B3AD6C3768A22999788C972E593E8712EEFF0D0C4",
+  "aggtrades_carrier_identity_sha256": "0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6",
   "aggtrades_source_manifest": {
     "partition_count": 669,
     "partition_rows": 28666518,
@@ -630,7 +630,7 @@
   },
   "broad_registry_sha256": "8efc87151e4f58e665360e3212a9d85e689117d29ad86b27ae909cf8e804ad04",
   "config_sha256": "49b596f8f885fc25870793e6ac5d923be8d13c571be0f2f5b889dc14258a1178",
-  "core3_carrier_identity_sha256": "8CF6D1EF39F00BC0FBC791FB874597EFE2E3FAD7BE5CF68AF56BEEE62704D940",
+  "core3_carrier_identity_sha256": "361F7A63D44B9F8C6FCA9756CA18ADA390BE05D96FA0C4895D2F49802FDEB80D",
   "core3_consumption_manifest_sha256": "48c0a0b425e510fe6adaf3450b0eb88e96dc8b69b3021f3ae37b85e23d72b800",
   "core3_contract_sha256": "2c6e334dd25bd2745371995b93cc5e0440d943f68a591419f34c48edb34ba08a",
   "core3_panel_sha256": "174ca773e0cc0b6dc76986ce66554a8f627eb908b9f8ca691e64ed6343d0ab97",
@@ -676,7 +676,7 @@
       "okx_futures__index_price_std"
     ]
   },
-  "oi_mark_carrier_identity_sha256": "7FAAF4DAF05EF4F5100B8DC6065A88D90029FF41314B622EA4115F861EDE03C1",
+  "oi_mark_carrier_identity_sha256": "D97B516BDF3DFFA2DFCC293B28AF4007698B0BDC1C3678F443B6CDBB570DDD74",
   "oi_mark_top50_raw": {
     "bytes": 108416852480,
     "consumer_status": "RAW_ONLY_INVENTORY",
@@ -685,7 +685,7 @@
   },
   "runner_loader_evidence": {
     "AGGTRADES_TOP200_DELIVERED": {
-      "cache_identity_sha256": "E819A3D1E5ECE0DD33D32E5B3AD6C3768A22999788C972E593E8712EEFF0D0C4",
+      "cache_identity_sha256": "0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6",
       "cache_root": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\.cache\\crypto_search_surface_integration_v1\\aggtrades_top200_full44",
       "contracts_sha256": "C41418C41B298C600B8C88A2E7DEBE648A62517967BFF24C6F10CC4FE14C6B54",
       "field_count": 44,
@@ -701,7 +701,7 @@
       "surface_id": "BROAD_PANEL_BASELINE"
     },
     "CORE3_MICROSTRUCTURE_PILOT": {
-      "cache_identity_sha256": "8CF6D1EF39F00BC0FBC791FB874597EFE2E3FAD7BE5CF68AF56BEEE62704D940",
+      "cache_identity_sha256": "361F7A63D44B9F8C6FCA9756CA18ADA390BE05D96FA0C4895D2F49802FDEB80D",
       "cache_root": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\.cache\\crypto_search_surface_integration_v1\\core3_81",
       "contracts_sha256": "49C832452C32A578B0A6F90286952A490548A801468FCAAD7697DCFE359997C6",
       "field_count": 81,
@@ -709,7 +709,7 @@
       "surface_id": "CORE3_MICROSTRUCTURE_PILOT"
     },
     "OI_MARK_RANKS51_200_DELIVERED": {
-      "cache_identity_sha256": "7FAAF4DAF05EF4F5100B8DC6065A88D90029FF41314B622EA4115F861EDE03C1",
+      "cache_identity_sha256": "D97B516BDF3DFFA2DFCC293B28AF4007698B0BDC1C3678F443B6CDBB570DDD74",
       "cache_root": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\.cache\\crypto_search_surface_integration_v1\\oi_mark_ranks51_200",
       "contracts_sha256": "D83A04C4DA12FEBFF7DD1D91A58625E80F8B4927FA3F2499BE190100583B5023",
       "field_count": 71,
@@ -741,12 +741,12 @@
     },
     {
       "path": "alphafactory_crypto/data_admission_v1.py",
-      "sha256": "3f88bbf0db0ed28d7edaa5236fd73857432955487a558f57945bade472a65f7b"
+      "sha256": "8918031381a802e68a08256b999d06210bb0d1b4aa72113142a0983fdb1534d0"
     },
     {
       "path": "config/crypto_search_surface_integration_v1.json",
       "sha256": "49b596f8f885fc25870793e6ac5d923be8d13c571be0f2f5b889dc14258a1178"
     }
   ],
-  "source_binding_sha256": "583D2F4F71BAA0ADE59032756E80CA07091722A670049AA8D56E5E5D4B1146C3"
+  "source_binding_sha256": "D1AF43DAB909256A8B9EF171E70548B58DC3CC524852194071263A636AA87C7D"
 }
