@@ -2050,12 +2050,23 @@ class HierarchicalTypedCEMV2:
                     context,
                     {"observations": 0, "counts": {}, "probabilities": {}},
                 )
-                cumulative_observations = Counter(
-                    {str(key): int(value) for key, value in table["counts"].items()}
+                # The probability table is the sole cross-checkpoint memory.
+                # Keeping cumulative elite counts as well would replay old
+                # observations a second time through the smoothing update.
+                current_observations = Counter(
+                    {str(key): int(value) for key, value in additions.items()}
                 )
-                cumulative_observations.update(additions)
-                table["counts"] = dict(sorted(cumulative_observations.items()))
-                table["observations"] = int(sum(cumulative_observations.values()))
+                diagnostic_counts = Counter(
+                    {
+                        str(key): int(value)
+                        for key, value in table["counts"].items()
+                    }
+                )
+                diagnostic_counts.update(current_observations)
+                table["counts"] = dict(sorted(diagnostic_counts.items()))
+                # Admission uses current-checkpoint observations. Historical
+                # counts remain diagnostic and never feed the EMA again.
+                table["observations"] = int(sum(current_observations.values()))
                 prior = table.get("probabilities", {})
                 values = tuple(sorted(set(prior) | set(additions)))
                 current_total = int(sum(additions.values()))
@@ -2164,6 +2175,8 @@ class TypedEvolutionV2:
     )
     operator_update_count: int = 0
     blocked_transition_skips: int = 0
+    transition_productivity: dict[str, dict[str, int]] = field(default_factory=dict)
+    blocked_transition_keys: set[str] = field(default_factory=set)
 
     def __post_init__(self) -> None:
         self.parameters = dict(self.parameters)
@@ -2643,6 +2656,7 @@ class TypedEvolutionV2:
     def propose(
         self, archive: BehaviorArchive | None = None
     ) -> tuple[CandidateSpec, dict[str, Any]]:
+        del archive  # reporting archive is never an adaptive-policy input
         before = self.state_hash()
         limit = int(self.parameters["duplicate_resample_limit"])
         candidate: CandidateSpec | None = None
@@ -2712,29 +2726,17 @@ class TypedEvolutionV2:
                                 "behavior_family_id"
                             ]
                         )
-                        skips_before = self.blocked_transition_skips
-                        try:
-                            (
-                                candidate,
-                                receipt,
-                                transition_key,
-                            ) = run_child_operation(
-                                lambda: self._mutate_skeleton_with_transition(
-                                    first,
-                                    parent_behavior_family_id=parent_family_id,
-                                    blocked_transition_keys=(
-                                        archive.blocked_transition_keys
-                                        if archive is not None
-                                        else set()
-                                    ),
-                                )
+                        (
+                            candidate,
+                            receipt,
+                            transition_key,
+                        ) = run_child_operation(
+                            lambda: self._mutate_skeleton_with_transition(
+                                first,
+                                parent_behavior_family_id=parent_family_id,
+                                blocked_transition_keys=self.blocked_transition_keys,
                             )
-                        finally:
-                            if archive is not None:
-                                archive.blocked_transition_skips += (
-                                    self.blocked_transition_skips
-                                    - skips_before
-                                )
+                        )
                     else:
                         candidate, receipt = run_child_operation(
                             lambda: self._mutate_skeleton(first)
@@ -2913,6 +2915,25 @@ class TypedEvolutionV2:
         elif operation == "ONE_POINT_HOMOLOGOUS_GENE_BUNDLE_CROSSOVER":
             self.verified_crossovers += 1
 
+    def observe_transition(
+        self,
+        *,
+        transition_key: str,
+        new_family: bool,
+        block_after_collisions: int,
+    ) -> None:
+        if not transition_key:
+            raise ValueError("policy-local transition observation lacks a key")
+        stats = self.transition_productivity.setdefault(
+            str(transition_key),
+            {"trials": 0, "new_families": 0, "collisions": 0},
+        )
+        stats["trials"] += 1
+        stats["new_families"] += int(bool(new_family))
+        stats["collisions"] += int(not new_family)
+        if int(stats["collisions"]) >= int(block_after_collisions):
+            self.blocked_transition_keys.add(str(transition_key))
+
     def population_diagnostics(self) -> dict[str, Any]:
         mechanism_occupancy = Counter(
             str(record.get("mechanism_family", ""))
@@ -2968,6 +2989,11 @@ class TypedEvolutionV2:
             },
             "operator_update_count": int(self.operator_update_count),
             "blocked_transition_skips": int(self.blocked_transition_skips),
+            "transition_productivity": {
+                key: dict(value)
+                for key, value in sorted(self.transition_productivity.items())
+            },
+            "blocked_transition_keys": sorted(self.blocked_transition_keys),
         }
 
     def export_state(self) -> dict[str, Any]:
@@ -3005,6 +3031,13 @@ class TypedEvolutionV2:
         ):
             state["blocked_transition_skips"] = int(
                 self.blocked_transition_skips
+            )
+            state["transition_productivity"] = {
+                key: dict(value)
+                for key, value in sorted(self.transition_productivity.items())
+            }
+            state["blocked_transition_keys"] = sorted(
+                self.blocked_transition_keys
             )
         return state
 
@@ -3062,6 +3095,17 @@ class TypedEvolutionV2:
         )
         policy.blocked_transition_skips = int(
             state.get("blocked_transition_skips", 0)
+        )
+        policy.transition_productivity = {
+            str(key): {
+                "trials": int(value.get("trials", 0)),
+                "new_families": int(value.get("new_families", 0)),
+                "collisions": int(value.get("collisions", 0)),
+            }
+            for key, value in state.get("transition_productivity", {}).items()
+        }
+        policy.blocked_transition_keys = set(
+            str(value) for value in state.get("blocked_transition_keys", ())
         )
         return policy
 
@@ -5883,11 +5927,15 @@ def run_engine(
                         and str(proposal["operation"])
                         == "COMPATIBLE_SKELETON_VARIANT_MUTATION"
                     ):
-                        archive.observe_transition(
+                        policy.observe_transition(
                             transition_key=str(
                                 proposal.get("transition_key") or ""
                             ),
-                            new_family=bool(new_family),
+                            new_family=bool(
+                                proposal[
+                                    "new_policy_local_behavior_family_at_completion"
+                                ]
+                            ),
                             block_after_collisions=int(
                                 policy.parameters[
                                     "transition_block_after_collisions"

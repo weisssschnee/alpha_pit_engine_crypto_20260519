@@ -18,7 +18,7 @@ from alphafactory_crypto.instrument_capability.mapping import (
 
 from .audit import search_behavior_descriptor, turnover_path
 from .compositional18m import CandidateSpec
-from .expression import TypedExpressionRegistry, materialize_expression
+from .expression import Expression, TypedExpressionRegistry, materialize_expression
 from .panel18m import RawPanelStore
 
 
@@ -258,25 +258,48 @@ def evaluate_pair(
         eligible_mask=base,
         candidate_cache=candidate_cache,
     )
+    if len(candidate.expression.inputs) != 2:
+        raise ValueError("DUAL_AXIS_CONTROL_REQUIRES_BINARY_PRIMARY")
+    right_control_expression = Expression(
+        "SupportMatchedPayload",
+        (candidate.expression.inputs[1], candidate.expression.inputs[0]),
+    )
+    right_control_assurance = registry.validate(right_control_expression)
+    if set(right_control_assurance.raw_fields) != set(candidate.raw_fields):
+        raise ValueError("RIGHT_AXIS_CONTROL_CHANGED_RAW_INPUT_CONTRACT")
+    right_control_signal = materialize_expression(
+        right_control_expression,
+        registry=registry,
+        field_reader=raw.__getitem__,
+        eligible_mask=base,
+        candidate_cache=candidate_cache,
+    )
     primary_signal = np.where(support, primary_signal, np.nan)
     control_signal = np.where(support, control_signal, np.nan)
+    right_control_signal = np.where(support, right_control_signal, np.nan)
     timings["dag_materialization_seconds"] = time.perf_counter() - materialize_started
     sample_memory()
     mapping_started = time.perf_counter()
     mapping_contract = DEFAULT_MAPPING_CONTRACTS[candidate.mapping_id]
     primary_mapped = map_portfolio(primary_signal, mapping_contract)
     control_mapped = map_portfolio(control_signal, mapping_contract)
+    right_control_mapped = map_portfolio(right_control_signal, mapping_contract)
     timings["mapping_seconds"] = time.perf_counter() - mapping_started
     sample_memory()
     primary_weight = np.asarray(primary_mapped.weights, dtype=float)
     control_weight = np.asarray(control_mapped.weights, dtype=float)
+    right_control_weight = np.asarray(right_control_mapped.weights, dtype=float)
     if candidate.expression.expression_id == candidate.control.expression_id:
         raise ValueError("CONTROL_EXACT_IDENTITY_EQUALS_PRIMARY")
     if np.array_equal(primary_weight, control_weight):
         raise ValueError("CONTROL_BEHAVIOR_EQUALS_PRIMARY")
+    if np.array_equal(primary_weight, right_control_weight):
+        raise ValueError("RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY")
     target = np.asarray(store.target_return(candidate.horizon_hours)[:, block], dtype=float)
-    active_union = (np.abs(primary_weight) > ACTIVE_EPSILON) | (
-        np.abs(control_weight) > ACTIVE_EPSILON
+    active_union = (
+        (np.abs(primary_weight) > ACTIVE_EPSILON)
+        | (np.abs(control_weight) > ACTIVE_EPSILON)
+        | (np.abs(right_control_weight) > ACTIVE_EPSILON)
     )
     missing_active_target = np.any(active_union & ~np.isfinite(target), axis=0)
     raw_coordinate_support = support.sum(axis=0) >= 3
@@ -302,18 +325,50 @@ def evaluate_pair(
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
     )
-    timings["standalone_evaluator_seconds"] = time.perf_counter() - standalone_started
-    sample_memory()
-    incremental_started = time.perf_counter()
-    delta_weight = primary_weight - control_weight
-    incremental = _series_metrics(
-        weights=delta_weight,
+    right_control = _series_metrics(
+        weights=right_control_weight,
         target=target,
         months=months,
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
     )
-    feedback = strict_pair_feedback(incremental)
+    timings["standalone_evaluator_seconds"] = time.perf_counter() - standalone_started
+    sample_memory()
+    incremental_started = time.perf_counter()
+    left_delta_weight = primary_weight - control_weight
+    right_delta_weight = primary_weight - right_control_weight
+    left_incremental = _series_metrics(
+        weights=left_delta_weight,
+        target=target,
+        months=months,
+        evaluation_mask=evaluation_mask,
+        horizon=candidate.horizon_hours,
+    )
+    right_incremental = _series_metrics(
+        weights=right_delta_weight,
+        target=target,
+        months=months,
+        evaluation_mask=evaluation_mask,
+        horizon=candidate.horizon_hours,
+    )
+    left_feedback = strict_pair_feedback(left_incremental)
+    right_feedback = strict_pair_feedback(right_incremental)
+    feedback = {
+        **(
+            left_feedback
+            if float(left_feedback["distance"]) <= float(right_feedback["distance"])
+            else right_feedback
+        ),
+        "dual_axis": True,
+        "left_axis": left_feedback,
+        "right_axis": right_feedback,
+        "matched_positive": bool(
+            left_feedback["matched_positive"] and right_feedback["matched_positive"]
+        ),
+        "distance": float(
+            min(left_feedback["distance"], right_feedback["distance"])
+        ),
+    }
     timings["incremental_sleeve_seconds"] = time.perf_counter() - incremental_started
     sample_memory()
     behavior = None
@@ -342,16 +397,38 @@ def evaluate_pair(
             weights=control_weight,
             **descriptor_kwargs,
         )
-        incremental_behavior = search_behavior_descriptor(
+        right_control_behavior = search_behavior_descriptor(
+            signal=right_control_signal,
+            weights=right_control_weight,
+            **descriptor_kwargs,
+        )
+        left_incremental_behavior = search_behavior_descriptor(
             signal=primary_signal - control_signal,
-            weights=delta_weight,
+            weights=left_delta_weight,
+            **descriptor_kwargs,
+        )
+        right_incremental_behavior = search_behavior_descriptor(
+            signal=primary_signal - right_control_signal,
+            weights=right_delta_weight,
             **descriptor_kwargs,
         )
         behavior = {
-            **incremental_behavior,
+            **left_incremental_behavior,
             "primary_behavior_id": primary_behavior["behavior_family_id"],
             "control_behavior_id": control_behavior["behavior_family_id"],
-            "incremental_behavior_id": incremental_behavior["behavior_family_id"],
+            "right_control_behavior_id": right_control_behavior[
+                "behavior_family_id"
+            ],
+            "left_incremental_behavior_id": left_incremental_behavior[
+                "behavior_family_id"
+            ],
+            "right_incremental_behavior_id": right_incremental_behavior[
+                "behavior_family_id"
+            ],
+            "incremental_behavior_id": left_incremental_behavior[
+                "behavior_family_id"
+            ],
+            "identity_authority": "LEFT_AXIS_INCREMENTAL_DELTA_WEIGHT_V1",
         }
         timings["behavior_descriptor_seconds"] = (
             time.perf_counter() - behavior_started
@@ -380,14 +457,20 @@ def evaluate_pair(
         "missing_active_target_coordinates": int(missing_active_target.sum()),
         "primary": primary,
         "control": control,
-        "incremental": incremental,
+        "left_control": control,
+        "right_control": right_control,
+        "incremental": left_incremental,
+        "left_incremental": left_incremental,
+        "right_incremental": right_incremental,
         "scalar_net_delta_diagnostic": float(primary["net_mean"] - control["net_mean"]),
         "pair_reward": float(feedback["distance"]),
         "matched_positive": bool(feedback["matched_positive"]),
         "feedback": feedback,
         "behavior": behavior,
         "primary_control_weight_equal": False,
-        "delta_weight_sha256": incremental["weight_sha256"],
+        "delta_weight_sha256": left_incremental["weight_sha256"],
+        "left_delta_weight_sha256": left_incremental["weight_sha256"],
+        "right_delta_weight_sha256": right_incremental["weight_sha256"],
         "timings": timings,
     }
 
@@ -395,7 +478,7 @@ def evaluate_pair(
 def pair_contract_payload() -> dict[str, Any]:
     return {
         "schema_version": 1,
-        "pair_authority": "PRIMARY_CONTROL_WITH_INCREMENTAL_DELTA_WEIGHT_SLEEVE",
+        "pair_authority": "PRIMARY_WITH_LEFT_AND_RIGHT_AXIS_INCREMENTAL_DELTA_WEIGHT_SLEEVES",
         "lcb_contract": {
             "authority": "NEWEY_WEST_BARTLETT",
             "dependency_lags": "horizon_hours_minus_one",
@@ -411,12 +494,13 @@ def pair_contract_payload() -> dict[str, Any]:
             "5 bps full-L1 cost model",
             "raw support",
         ],
-        "control_rule": "remove exactly one registered core mechanism while SupportMatchedPayload retains the removed input in support",
+        "control_rule": "compare the primary independently with left-only and right-only SupportMatchedPayload controls; both retain identical raw support",
         "support_overlap_required": 1.0,
         "control_exact_identity_forbidden": True,
         "control_behavior_identity_forbidden": True,
         "optional_behavior_identity": "FROZEN_OUTCOME_FREE_DESCRIPTOR_V1",
-        "incremental_weight_formula": "primary_weight - control_weight",
+        "incremental_weight_formula": "primary_weight - each_axis_control_weight",
+        "authoritative_pair_reward": "minimum strict feasibility distance across left and right incremental sleeves",
         "incremental_turnover": "recomputed independently from delta weights",
         "standalone_scalar_delta_role": "DIAGNOSTIC_ONLY",
     }
