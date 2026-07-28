@@ -1204,6 +1204,7 @@
         "alphafactory_crypto/unified_field_management.py",
         "scripts/crypto_unified_field_management_v1.py",
         "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
+        "runtime/crypto_unified_field_management_v1_20260728/field_reachability_matrix.parquet",
         "reports/CRYPTO_UNIFIED_FIELD_MANAGEMENT_V1_20260728.md",
         "config/crypto_field_information_v0.json",
         "alphafactory_crypto/field_information.py",
@@ -1238,7 +1239,7 @@
       "authority": {
         "path": "config/crypto_unified_field_management_v1.json",
         "repo_ref": "experiment/crypto-search-surface-integration-v1-20260728",
-        "verified_sha": "43739edd18c264bfa9b4ce11a3953c95b6ca58db",
+        "verified_sha": "45c9936302418d2dd9e4b7ec7dd4e8e0790e009b",
         "sha256": "C6D0A1A9C1E24EB7FC0C2A80A400D4C8AA4A677A4E4979645920F7D7AEF4FBE8"
       },
       "contracts": [
@@ -1262,7 +1263,7 @@
         {
           "id": "management_conflicts_fail_closed",
           "type": "ADMISSION",
-          "rule": "An orphan ontology, approval, or lineage identity, or divergent type, unit, or lag for one cross-carrier field identity, prevents publication of the compiled management view",
+          "rule": "Orphan authority identities and divergent type, unit, or lag fail closed; PIT authority, lineage, approval, and ontology semantic differences are explicitly checked and scoped nonfatal differences remain visible in the conflict table",
           "severity": "HARD",
           "enforced_by": "unified_field_management.compile_management_tables",
           "bypass_forbidden": true,
@@ -1363,8 +1364,8 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
-        "evidence_sha256": "A2DDFC630F9FF48F5804AAB816A92AFB62E95A75550669D6DD8BC14705791478",
-        "verified_at_sha": "43739edd18c264bfa9b4ce11a3953c95b6ca58db"
+        "evidence_sha256": "F44A54C9F09AACB0FEB5E8E293041BBDE8E101F95CD1C7B3651E095E0A121FEC",
+        "verified_at_sha": "45c9936302418d2dd9e4b7ec7dd4e8e0790e009b"
       },
       "promotion_requirements": [
         "context-matched data adequacy",

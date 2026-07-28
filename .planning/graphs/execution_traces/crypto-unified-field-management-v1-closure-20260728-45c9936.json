@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "run_id": "crypto-unified-field-management-v1-closure-20260728-45c9936",
+  "repo_sha": "45c9936302418d2dd9e4b7ec7dd4e8e0790e009b",
+  "entrypoint": "scripts/crypto_unified_field_management_v1.py",
+  "status": "COMPLETED",
+  "profile_id": "crypto-development-research",
+  "observed_components": [
+    {
+      "component_id": "field_information_qualification_v0",
+      "implementation_path": "alphafactory_crypto/unified_field_management.py",
+      "implementation_sha256": "FAF9240200CA8C32A858A4879E3D0E119E86FC3C97383A757F161E53EA10B83C",
+      "function": "build_management_view",
+      "semantic_role": "compiled_field_management_and_context_bound_information_qualification",
+      "evidence_produced": true
+    }
+  ],
+  "observed_edges": [],
+  "artifacts": [
+    {
+      "path": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
+      "sha256": "F44A54C9F09AACB0FEB5E8E293041BBDE8E101F95CD1C7B3651E095E0A121FEC",
+      "producer_component": "field_information_qualification_v0"
+    },
+    {
+      "path": "runtime/crypto_unified_field_management_v1_20260728/field_management_summary.json",
+      "sha256": "3048E9A78C32392DA9156A4665BBBEE60B14B38F7757451DB8920F805419767E",
+      "producer_component": "field_information_qualification_v0"
+    },
+    {
+      "path": "runtime/crypto_unified_field_management_v1_20260728/field_reachability_matrix.parquet",
+      "sha256": "3890F7E37C879A95BA611F9FF27852CA12E4CEBBC16ADC016F151707C8EE9256",
+      "producer_component": "field_information_qualification_v0"
+    }
+  ],
+  "contract_bindings": {
+    "unified_management_view_not_field_authority": {
+      "contract_id": "unified_management_view_not_field_authority",
+      "path": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
+      "sha256": "F44A54C9F09AACB0FEB5E8E293041BBDE8E101F95CD1C7B3651E095E0A121FEC"
+    },
+    "carrier_management_boundaries_preserved": {
+      "contract_id": "carrier_management_boundaries_preserved",
+      "path": "runtime/crypto_unified_field_management_v1_20260728/field_management_summary.json",
+      "sha256": "3048E9A78C32392DA9156A4665BBBEE60B14B38F7757451DB8920F805419767E"
+    },
+    "management_conflicts_fail_closed": {
+      "contract_id": "management_conflicts_fail_closed",
+      "path": "runtime/crypto_unified_field_management_v1_20260728/field_management_summary.json",
+      "sha256": "3048E9A78C32392DA9156A4665BBBEE60B14B38F7757451DB8920F805419767E"
+    },
+    "provenance_only_fields_not_search_inputs": {
+      "contract_id": "provenance_only_fields_not_search_inputs",
+      "path": "runtime/crypto_unified_field_management_v1_20260728/field_management_summary.json",
+      "sha256": "3048E9A78C32392DA9156A4665BBBEE60B14B38F7757451DB8920F805419767E"
+    },
+    "compiled_token_view_not_authority": {
+      "contract_id": "compiled_token_view_not_authority",
+      "path": "runtime/crypto_field_information_v0_20260717/token_catalog.parquet",
+      "sha256": "A4885AADF152FEB202742D52AC6770F742103CB4427A883B63F30D2BD25DFBA2"
+    },
+    "context_bound_information_scope": {
+      "contract_id": "context_bound_information_scope",
+      "path": "runtime/crypto_field_information_v0_20260717/run_manifest.json",
+      "sha256": "6209A8461589924887ED5B04795B619D883F797BB1AC038B209A80C346E30999"
+    },
+    "context_bound_consumption_verified": {
+      "contract_id": "context_bound_consumption_verified",
+      "path": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json",
+      "sha256": "48C0A0B425E510FE6ADAF3450B0EB88E96DC8B69B3021F3AE37B85E23D72B800"
+    },
+    "consumption_not_model_fit": {
+      "contract_id": "consumption_not_model_fit",
+      "path": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/context_consumption_summary.json",
+      "sha256": "37F4FAB564D89FCD19364A578CD35DB22EC4D31C89D3D4EE73893124250004DF"
+    },
+    "broad_conditional_information_verified": {
+      "contract_id": "broad_conditional_information_verified",
+      "path": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
+      "sha256": "92BF05B0046FE258BA708871EE52ED764C61EAA61E46F0ACCDA1A7FAEE73E6FA"
+    },
+    "broad_economic_mapping_scope": {
+      "contract_id": "broad_economic_mapping_scope",
+      "path": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
+      "sha256": "92BF05B0046FE258BA708871EE52ED764C61EAA61E46F0ACCDA1A7FAEE73E6FA"
+    },
+    "broad_sticky_mapping_scope": {
+      "contract_id": "broad_sticky_mapping_scope",
+      "path": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
+      "sha256": "92BF05B0046FE258BA708871EE52ED764C61EAA61E46F0ACCDA1A7FAEE73E6FA"
+    },
+    "broad_prediction_scale_calibration_replay": {
+      "contract_id": "broad_prediction_scale_calibration_replay",
+      "path": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
+      "sha256": "92BF05B0046FE258BA708871EE52ED764C61EAA61E46F0ACCDA1A7FAEE73E6FA"
+    },
+    "consumed_pack_requires_model_admission": {
+      "contract_id": "consumed_pack_requires_model_admission",
+      "path": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/run_manifest.json",
+      "sha256": "48C0A0B425E510FE6ADAF3450B0EB88E96DC8B69B3021F3AE37B85E23D72B800"
+    },
+    "field_census_sealed_boundary": {
+      "contract_id": "field_census_sealed_boundary",
+      "path": "runtime/crypto_field_information_v0_20260717/run_manifest.json",
+      "sha256": "6209A8461589924887ED5B04795B619D883F797BB1AC038B209A80C346E30999"
+    }
+  }
+}

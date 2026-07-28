@@ -25,9 +25,17 @@ view over the existing inventory, lineage, ontology, approval, derived-recipe,
 token, and carrier authorities. It records 5,509 canonical management
 identities, 5,211 existing lazy derived views, 235 independent carrier
 bindings, 852 typed-role bindings, four provenance-only exclusions, and zero
-authority conflicts. It creates no field authority, ontology, approval
+fatal authority conflicts. It creates no field authority, ontology, approval
 registry, materializer, compiler, AST, database, or Graph layer; candidate and
 carrier identities are unchanged, and no market search or reward read ran.
+
+Closure repair binds all regenerated runtime artifacts to production commit
+`f21ed7d1375904f62cb0cc03abb350ea56f911cd`, adds a 5,638-row first-breakpoint
+reachability matrix, and expands the catalog authority joins. One nonfatal
+carrier-scoped PIT-authority difference for `agg_trade_count` is explicit;
+fatal type/unit/lag, lineage, approval, and ontology-semantic conflicts remain
+zero. The prior statement of zero total conflict rows is superseded by this
+fatal-versus-scoped distinction.
 
 The preceding one-run fresh-state Search Engine V1.2 exception completed at producer
 source `395a972a99c869f1c6acc24c6a167939b9f0857e`. It counted exactly 2,000
@@ -140,6 +148,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 - Search Engine V1.2 Balanced Collision Arena: producer source `395a972a99c869f1c6acc24c6a167939b9f0857e`; artifact bundle SHA256 `F142EB44FE91C349A54F0D7C78C704A491658B7FBC0B30402E0B08E5B8459296`; frozen contract SHA256 `620B40B5AEE6634BB719E3AA0FA95B778939CB66264869DC7E851A8949EB1C83`; data-cache identity SHA256 `127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04`; 2,000 strict candidates; 3,598 attempts; 2/2 exact-restored checkpoints; 1,916 behavior families; 250 balanced rotating micro-batches; engineering integrity `PASS`; research `HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT`; Evolution V2.2 increment rejected; future qualified arms `[]`; sealed reads `0`.
 - Search Surface Integration V1: producer source `caa4500485995119a908790508030e305add6841`; source-binding SHA256 `D1AF43DAB909256A8B9EF171E70548B58DC3CC524852194071263A636AA87C7D`; run-manifest SHA256 `5959D31E6218E0A12EDE2730D68F97D012B7AC9164AC06EA8BD31850A9BE7BF2`; carrier-manifest SHA256 `F4E1A3F81B7C7F80097FE42B52DEBE5E086C884D7123FB854A360F3868E691D8`; frozen-contract identity SHA256 `28368DC76F3C3D150A8B1EAD8C9D13011CB6B754AAFFF67BF1D7DFBD42A6B176`; aggTrades full-44 carrier identity SHA256 `0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6`; 260 declared engineering fields, 235 runtime-active, 25 explicit source-unavailable HOLD; checker `PASS`; research and future Arena `HOLD`; market pair evaluations/reward/sealed reads `0`.
 - Unified Field Management V1: producer source `43739edd18c264bfa9b4ce11a3953c95b6ca58db`; config SHA256 `C6D0A1A9C1E24EB7FC0C2A80A400D4C8AA4A677A4E4979645920F7D7AEF4FBE8`; committed run-manifest SHA256 `A2DDFC630F9FF48F5804AAB816A92AFB62E95A75550669D6DD8BC14705791478`; 5,509 canonical management records, 5,211 existing lazy derived views, 235 independent carrier bindings, four provenance-only exclusions, zero authority conflicts; compiled view only, not field authority; market search/reward/sealed reads `0`.
+- Unified Field Management V1 closure repair: production source `f21ed7d1375904f62cb0cc03abb350ea56f911cd`; artifact commit `45c9936302418d2dd9e4b7ec7dd4e8e0790e009b`; production bundle SHA256 `BD72E2C8934B00BDCE32ADB720F322DC88F95705DFF7A9E0E64179957AD32E3B`; committed run-manifest SHA256 `F44A54C9F09AACB0FEB5E8E293041BBDE8E101F95CD1C7B3651E095E0A121FEC`; 5,638 reachability rows; one nonfatal scoped PIT-authority difference; fatal authority conflicts `0`; no market search or reward read.
 - Bounded acceleration canary: execution producer `d77cdc4b0ff2ccf4662a690864be78b37e743605`; deterministic report-order repair `e806c15380e029ac00e662afec72a82620162d8f`; evidence bundle SHA256 `10E8002034399AD8B319F7EB4EE74FAB7B81E41C1943A38A37D44757301C38AB`; 512 fixed spent-development executions; no pair rerun during report repair.
 - Localized qualification bundle SHA256: `0C6193E81FEAB8271B8BAE05AD04604D74494EAB2710794C59A7F42919DD68EB`.
 - Liquidation ingress implementation: `d64a783dac4c148d1924f76acb7b8a80cbcc7f1a`; byte-stable evidence commit: `58ff34e48cb88acc0005e741c8aaa52d3528177e`; release identity SHA256: `C9717263EC6F97839466A4BC13D8DBA803E3D0D5854AE6E3A005F4C6F0F34D7A`.

@@ -35,8 +35,28 @@ new AST, new materializer, database, or Graph layer was created.
   - OI/mark: `71`
 - typed role bindings: `852`
 - provenance-only fields: `4`
-- authority conflicts: `0`
+- authority conflict rows: `1` nonfatal scoped PIT-authority difference
+- fatal authority conflicts: `0`
 - carrier contexts merged: `false`
+
+Closure repair regenerated every runtime artifact from production commit
+`f21ed7d1375904f62cb0cc03abb350ea56f911cd`. The manifest records that exact
+`source_sha` and the committed production-code bundle SHA256
+`BD72E2C8934B00BDCE32ADB720F322DC88F95705DFF7A9E0E64179957AD32E3B`.
+
+The main catalog now joins type, unit, PIT authority, approval, lineage, grain,
+venue, statistic, deprecation, materialization, and ontology semantic type.
+Unresolved facts remain explicit rather than inferred.
+
+`field_reachability_matrix.parquet` contains 5,638 carrier-scoped or unbound
+rows and one deterministic first breakpoint per row:
+
+- current Broad, Core3, and full aggTrades: research admission not granted;
+- OI/mark ranks51-200: 71 engineering-reachable and 25 zero-finite-support
+  source holds;
+- Top50 OI/mark: compact materializer not verified;
+- liquidation: source/data-adequacy quarantine;
+- catalog identities outside current carriers: no current carrier binding.
 
 The four provenance-only fields are the first/last aggregate-trade receipt IDs
 and transaction timestamps. They remain available for provenance but receive
@@ -47,9 +67,11 @@ no search role.
 Ontology and approval identities are complete subsets of the 5,388-row
 inventory. Carrier integration introduces 121 canonical physical identities
 not present in that inventory. The only cross-carrier same-name contract is
-`agg_trade_count`; its type, unit, and lag agree exactly, so it shares a
-canonical management identity while retaining two independent carrier
-bindings. No conflicting type/unit/lag authority was found.
+`agg_trade_count`; its type, unit, and lag agree, so it shares a canonical
+management identity while retaining two independent carrier bindings. Its two
+carrier-scoped PIT authority labels differ and are reported as one nonfatal
+scoped difference, not falsely asserted as `EXACT_EQUIVALENT`. No fatal
+type/unit/lag, lineage, approval, or ontology-semantic conflict was found.
 
 ## Boundary
 
