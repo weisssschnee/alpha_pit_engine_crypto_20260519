@@ -1117,7 +1117,15 @@ def _load_v13_inputs(
     surface = field_role_surface(contracts)
     if not surface["compatible_skeleton_ids"] or not surface["all_fields_reachable"]:
         raise ValueError("V1.3 combined typed surface is not compiler reachable")
-    base = np.asarray(store.base_eligible(), dtype=bool)
+    qualification = _read_json(
+        runtime_root / "stage_a_carrier_qualification.json"
+    )
+    qualified_window = qualification["qualified_continuous_window"]
+    block = store.block_slice(
+        str(qualified_window["start"]),
+        str(qualified_window["end_exclusive"]),
+    )
+    base = np.asarray(store.base_eligible()[:, block], dtype=bool)
     counts = base.sum(axis=0, dtype=np.int64).astype(float)
     regime = np.broadcast_to(counts, base.shape).copy()
     regime[~base] = np.nan
@@ -8652,6 +8660,47 @@ def qualify_v14_aligned_carrier(
         == 3_600_000_000_000
     )
     active_assets = base.sum(axis=0)
+    minimum_assets = int(
+        config["aligned_carrier"]["minimum_assets_per_timestamp"]
+    )
+    nonempty = active_assets >= minimum_assets
+    runs: list[tuple[int, int]] = []
+    run_start: int | None = None
+    for index, value in enumerate(nonempty.tolist()):
+        if value and run_start is None:
+            run_start = index
+        if run_start is not None and (
+            not value or index == len(nonempty) - 1
+        ):
+            run_end = (
+                index
+                if value and index == len(nonempty) - 1
+                else index - 1
+            )
+            runs.append((run_start, run_end))
+            run_start = None
+    if not runs:
+        raise ValueError("V1.4 aligned carrier has no continuous eligible block")
+    qualified_start, qualified_end = max(
+        runs,
+        key=lambda value: (value[1] - value[0] + 1, -value[0]),
+    )
+    qualified_end_exclusive_ns = (
+        int(timestamp_ns[qualified_end]) + 3_600_000_000_000
+    )
+    qualified_window = {
+        "selection_rule": (
+            "LONGEST_CONTIGUOUS_PRE_REWARD_BLOCK_WITH_AT_LEAST_3_ELIGIBLE_ASSETS"
+        ),
+        "start": pd.Timestamp(
+            int(timestamp_ns[qualified_start]), unit="ns", tz="UTC"
+        ).isoformat(),
+        "end_exclusive": pd.Timestamp(
+            qualified_end_exclusive_ns, unit="ns", tz="UTC"
+        ).isoformat(),
+        "hours": int(qualified_end - qualified_start + 1),
+        "excluded_empty_hours": int((~nonempty).sum()),
+    }
     domains = _v14_domains(contracts)
     gates = {
         "source_sha_bound": manifest.get("source_sha") == source_sha,
@@ -8661,7 +8710,11 @@ def qualify_v14_aligned_carrier(
         "all_fields_have_finite_support": all(
             value > 0 for value in field_finite.values()
         ),
-        "hourly_target_window_contiguous": hourly_contiguous,
+        "hourly_timestamp_grid_contiguous": hourly_contiguous,
+        "qualified_target_window_contiguous": bool(
+            qualified_window["hours"] >= 24 * 180
+            and nonempty[qualified_start : qualified_end + 1].all()
+        ),
         "real_overlapping_assets": int((base.any(axis=1)).sum()) >= 3,
         "dynamic_eligible_intersection": bool(
             np.all(~base | observed)
@@ -8701,6 +8754,7 @@ def qualify_v14_aligned_carrier(
         },
         "field_finite_counts": field_finite,
         "target_finite_on_base": target_support,
+        "qualified_continuous_window": qualified_window,
         "gates": gates,
         "sealed_reads": 0,
     }
@@ -8758,8 +8812,15 @@ def _load_v14_inputs(
             "directory_bundle": manifest["directory_bundle"],
         },
         "compiler_identity": _compiler_binding(repo_root),
+        "qualified_continuous_window": dict(qualified_window),
     }
-    return store, contracts, behavior_contract, identities, config
+    return (
+        store,
+        contracts,
+        behavior_contract,
+        identities,
+        {**config, "qualified_continuous_window": dict(qualified_window)},
+    )
 
 
 def _v14_frozen_contract(
@@ -9159,6 +9220,8 @@ def _v14_run_fixed_stage(
     frozen_hash: str,
     cache_root: Path,
     cache_identity: str,
+    block_start: str,
+    block_end: str,
     contracts: Sequence[FieldContract],
     behavior_contract: Mapping[str, Any],
     stage: str,
@@ -9192,8 +9255,8 @@ def _v14_run_fixed_stage(
             str(cache_root),
             _contracts_payload(contracts),
             behavior_contract,
-            _read_json(cache_root / "metadata.json")["start_utc"],
-            _read_json(cache_root / "metadata.json")["end_exclusive_utc"],
+            block_start,
+            block_end,
             f"FRESH_STATE_V14_{stage}",
         ),
     )
@@ -9270,8 +9333,8 @@ def _v14_run_fixed_stage(
                         str(cache_root),
                         _contracts_payload(contracts),
                         behavior_contract,
-                        _read_json(cache_root / "metadata.json")["start_utc"],
-                        _read_json(cache_root / "metadata.json")["end_exclusive_utc"],
+                        block_start,
+                        block_end,
                         f"FRESH_STATE_V14_{stage}",
                     ),
                 )
@@ -9490,6 +9553,12 @@ def run_v14(
                 frozen_hash=frozen_hash,
                 cache_root=repo_root / str(identities["raw_cache"]["root"]),
                 cache_identity=store.metadata["identity_sha256"],
+                block_start=str(
+                    config["qualified_continuous_window"]["start"]
+                ),
+                block_end=str(
+                    config["qualified_continuous_window"]["end_exclusive"]
+                ),
                 contracts=contracts,
                 behavior_contract=behavior_contract,
                 stage="STAGE_A",
@@ -9551,6 +9620,12 @@ def run_v14(
                 frozen_hash=frozen_hash,
                 cache_root=repo_root / str(identities["raw_cache"]["root"]),
                 cache_identity=store.metadata["identity_sha256"],
+                block_start=str(
+                    config["qualified_continuous_window"]["start"]
+                ),
+                block_end=str(
+                    config["qualified_continuous_window"]["end_exclusive"]
+                ),
                 contracts=contracts,
                 behavior_contract=behavior_contract,
                 stage="STAGE_B",
