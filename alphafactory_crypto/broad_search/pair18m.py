@@ -108,7 +108,7 @@ def _series_metrics(
         np.where(mask, net, np.nan),
         dependency_lags=dependency_lags,
     )
-    gross_mean, _, _, _ = _mean_lcb(
+    gross_mean, gross_se, gross_lcb, gross_observations = _mean_lcb(
         np.where(mask, gross, np.nan),
         dependency_lags=dependency_lags,
     )
@@ -154,6 +154,9 @@ def _series_metrics(
         "monthly_block_lcb": monthly_block_lcb,
         "monthly_block_count": monthly_block_count,
         "gross_mean": gross_mean,
+        "gross_standard_error": gross_se,
+        "gross_lcb": gross_lcb,
+        "gross_observations": gross_observations,
         "turnover_mean": float(np.mean(turnover[mask])) if np.any(mask) else float("nan"),
         "cost_mean": float(np.mean(cost[mask])) if np.any(mask) else float("nan"),
         "concentration_mean": concentration,
@@ -667,6 +670,7 @@ def pair_contract_payload() -> dict[str, Any]:
             "authority": "NEWEY_WEST_BARTLETT",
             "dependency_lags": "horizon_hours_minus_one",
             "confidence_multiplier": 1.96,
+            "gross_lcb_role": "DIAGNOSTIC_ONLY",
             "monthly_block_lcb": "DIAGNOSTIC_ONLY",
         },
         "match_on": [

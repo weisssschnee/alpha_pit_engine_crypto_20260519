@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "experiment_id": "20260729_crypto_search_engine_v1_4_binance_target_exact_replay",
+  "authorization": "EXACT_REPLAY_EXISTING_V1_4_STAGE_B_1200_ONLY",
+  "source_runtime": "runtime/crypto_search_engine_v1_4_oi_flow_20260728",
+  "source_ledger": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/candidate_ledger.parquet",
+  "source_stage": "STAGE_B",
+  "strict_count": 1200,
+  "checkpoint_size": 300,
+  "target": {
+    "venue": "BINANCE_USD_M",
+    "source": "DELIVERED_AGGTRADES_COMPACT_1M_AGGREGATED_1H",
+    "price_field": "open_price",
+    "formula": "log(open_price[t+2+h] / open_price[t+2])",
+    "execution_delay_hours": 2,
+    "horizons_hours": [
+      1,
+      4
+    ],
+    "positive_price_required": true,
+    "missing_value_fill": null
+  },
+  "evaluation": {
+    "reuse_existing_pair_evaluator": true,
+    "cost_bps": 5.0,
+    "cost_contract_changed": false,
+    "candidate_spec_changed": false,
+    "candidate_order_changed": false,
+    "mapping_changed": false,
+    "eligibility_changed": false,
+    "behavior_archive_used_for_policy": false
+  },
+  "gross_persistence_gate": {
+    "final_increment_gross_lcb_positive_minimum": 12,
+    "final_increment_monthly_gross_positive_fraction_minimum": 0.6,
+    "monthly_consistent_candidate_minimum": 12,
+    "minimum_horizons_represented": 2,
+    "minimum_semantic_groups_represented": 2,
+    "role": "DIAGNOSTIC_BRANCH_GATE_NOT_ALPHA_QUALIFICATION"
+  },
+  "budget": {
+    "candidate_evaluations_exact": 1200,
+    "new_candidate_generation": 0,
+    "workers_default": 10,
+    "workers_memory_fallback": 8,
+    "workers_12_forbidden": true,
+    "wall_time_seconds_maximum": 64800
+  },
+  "boundaries": {
+    "development_only": true,
+    "fixed_retrospective_carrier": true,
+    "sealed_reads": 0,
+    "alpha_claim": false,
+    "oos": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "adaptive_search": false,
+    "candidate_generation": false,
+    "turnover_optimization": false,
+    "cost_optimization": false,
+    "operator_expansion": false,
+    "latent_priority": false,
+    "relational_training": false,
+    "cross_sprint_adaptive_memory": false
+  }
+}
