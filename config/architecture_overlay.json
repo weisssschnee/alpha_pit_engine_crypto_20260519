@@ -396,7 +396,7 @@
     },
     {
       "id": "real_policy_upgrade_canary",
-      "label": "Search Engine capability (V1.4 OI/flow aligned carrier and hierarchical gate engineering PASS, research HOLD)",
+      "label": "Search Engine capability (V1.4 failure decomposition: target/execution and turnover repair first, research HOLD)",
       "kind": "development_experiment",
       "lifecycle": "EXPERIMENTAL",
       "paths": [
@@ -428,6 +428,9 @@
         "config/crypto_search_engine_v1_4_oi_flow.json",
         "runtime/crypto_search_engine_v1_4_oi_flow_20260728/run_manifest.json",
         "runtime/crypto_search_engine_v1_4_oi_flow_20260728/final_decision.json",
+        "alphafactory_crypto/broad_search/failure_decomposition_v14.py",
+        "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/run_manifest.json",
+        "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/final_decision.json",
         "reports/CRYPTO_SEARCH_ENGINE_V1_20260721.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_CODE_AUTHORITY_AUDIT_20260727.md",
@@ -439,6 +442,7 @@
         "reports/CRYPTO_SEARCH_ENGINE_V1_2_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_AUDIT_20260728.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md",
+        "reports/CRYPTO_SEARCH_ENGINE_V1_4_FAILURE_DECOMPOSITION_20260728.md",
         "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
         "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md",
         "docs/adr/0009-aggtrades-system-canary-development-diagnostic.md",
@@ -559,6 +563,15 @@
           "enforced_by": "broad_search.search_engine_v1.check_v14",
           "bypass_forbidden": true,
           "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md"
+        },
+        {
+          "id": "search_engine_v1_4_failure_decomposition_boundary",
+          "type": "EVIDENCE",
+          "rule": "The existing-ledger-only V1.4 audit consumed zero candidate evaluations and found 666/1,200 gross-positive final increments but only 26 net-positive, with 640 cost sign-kills; it also found that Binance flow used an availability-dependent non-Binance mark target and that full standalone/monthly waterfalls were not persisted, so target/execution and turnover repair must precede adaptive or operator expansion",
+          "severity": "HARD",
+          "enforced_by": "broad_search.failure_decomposition_v14.check_audit",
+          "bypass_forbidden": true,
+          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_FAILURE_DECOMPOSITION_20260728.md"
         }
       ],
       "validation": {
@@ -604,7 +617,12 @@
         "HIERARCHICAL A-B-AB-ABC EXECUTION VERIFIED",
         "1.2K V1.4 SEMANTIC GATE HOLD",
         "V1.4 ADAPTIVE STAGE NOT RUN",
-        "V1.4 FUTURE ARENA ARMS NONE"
+        "V1.4 FUTURE ARENA ARMS NONE",
+        "V1.4 LEDGER FAILURE DECOMPOSITION PASS",
+        "V1.4 FULL WATERFALL NOT PERSISTED",
+        "TARGET EXECUTION CONTRACT UNQUALIFIED",
+        "COST SIGN KILL DOMINANT",
+        "ADAPTIVE AND OPERATOR EXPANSION HOLD"
       ],
       "promotion_requirements": [
         "information-adequate new data",

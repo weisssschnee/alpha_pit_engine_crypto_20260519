@@ -1,0 +1,24 @@
+{
+  "adaptive_v1_4b_authorized": false,
+  "alpha_claim": false,
+  "audit_id": "CRYPTO_SEARCH_ENGINE_V1_4_EXISTING_LEDGER_FAILURE_DECOMPOSITION",
+  "decision": "HOLD_ADAPTIVE_TARGET_EXECUTION_AND_TURNOVER_REPAIR_FIRST",
+  "evidence_limits": [
+    "standalone A/B/AB/ABC economics not persisted",
+    "component constraint margins and violation names not persisted",
+    "monthly waterfall not persisted",
+    "market time-block reward stability not reconstructible"
+  ],
+  "new_market_candidate_evaluations": 0,
+  "oos": false,
+  "operator_basis_expansion_authorized": false,
+  "promotion": false,
+  "research_decision": "HOLD_RESEARCH",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS_LEDGER_FAILURE_DECOMPOSITION_WITH_PERSISTENCE_GAPS",
+  "triggered_primary_branches": [
+    "TARGET_EXECUTION_CONTRACT_REPAIR",
+    "MAPPING_HOLDING_TURNOVER_REPAIR"
+  ]
+}

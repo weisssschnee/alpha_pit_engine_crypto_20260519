@@ -1,0 +1,96 @@
+{
+  "audit_id": "CRYPTO_SEARCH_ENGINE_V1_4_EXISTING_LEDGER_FAILURE_DECOMPOSITION",
+  "boundaries": {
+    "candidate_evaluations": 0,
+    "candidate_materializations": 0,
+    "mark_availability_read_for_target_provenance": true,
+    "market_budget_consumed": 0,
+    "oos": false,
+    "promotion": false,
+    "sealed_reads": 0,
+    "target_return_arrays_read": false
+  },
+  "contract_sha256": "953DD28AAB312CA6E3990B59A7E9942E5B21E7D81176BDB1CE65FFCC79E3428B",
+  "input_bundle_sha256": "0DE62CB1D38F10A0477F6E8D98B9A0EB2A863A7B8CD5531F03A909592203EFEB",
+  "input_records": [
+    {
+      "bytes": 1136164,
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/candidate_ledger.parquet",
+      "sha256": "ACE1C67F19B59DF492F9495995FE57BC8CD16887B680B83B114813BFE2CF4FB4"
+    },
+    {
+      "bytes": 1302762,
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/behavior_archive.parquet",
+      "sha256": "18C29E309221948DC0992D8ACB89971E31327CA3B3B49630FD958D1FC45D8185"
+    },
+    {
+      "bytes": 14334,
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/frozen_contract.json",
+      "sha256": "1F62437FED6A6C7AFD96E805CAEA2EC4D90824D54FD96B6E315F832DF2B18217"
+    },
+    {
+      "bytes": 29790,
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+      "sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6"
+    },
+    {
+      "bytes": 6113,
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/stage_a_carrier_qualification.json",
+      "sha256": "87F9FFB1C15107EE648ACEF5CB7906E2CFA21A33114EA922F24EFFA6CF376EC1"
+    },
+    {
+      "bytes": 1179,
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/stage_b_semantic_gate.json",
+      "sha256": "B5AF2FD1B1FE0F80E57F0481A61A809E22D7B1198A93DC3B2DEC01E4C9E2546F"
+    },
+    {
+      "bytes": 568,
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/final_decision.json",
+      "sha256": "E73C650D32E4550A51BEE108FE567BE1F4E17868EADEBCC65747C73138B2FCE5"
+    },
+    {
+      "bytes": 7878,
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/run_manifest.json",
+      "sha256": "EFF7EA8C1D55A632A36BF2EEB71E4CF1DC423AEE529A9541379C4B329CBFEA66"
+    },
+    {
+      "bytes": 1913,
+      "path": "reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md",
+      "sha256": "E36D1971E7B507ADE7CF350C329F1DFB78B88B856A0DDE71A12B48080FF178E2"
+    },
+    {
+      "bytes": 31233,
+      "path": "alphafactory_crypto/broad_search/pair18m.py",
+      "sha256": "B98E083768E35AA9F1A23B12373FB91150E2F6CFB883D5493E0E7C4F2680C231"
+    },
+    {
+      "bytes": 154767,
+      "path": "alphafactory_crypto/data_admission_v1.py",
+      "sha256": "F1DA30F1A4C3F7F2F3A83ABFF58D104C012EC676EA01C5A5BCCA5BA502D1377F"
+    },
+    {
+      "bytes": 3241,
+      "path": "config/crypto_search_engine_v1_4_oi_flow.json",
+      "sha256": "47D4687F334437BB12B4026283F9E18F2618AFD82FAD14337928890FC22C6C61"
+    },
+    {
+      "bytes": 598775942,
+      "identity_role": "EXISTING_ALIGNED_CACHE_DIRECTORY_BUNDLE",
+      "path": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115",
+      "sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97"
+    }
+  ],
+  "rules": {
+    "checkpoint_minimum_comparisons": 2,
+    "checkpoint_minimum_level_count": 5,
+    "cost_kill_dominance_minimum": 0.5,
+    "near_miss_distance": -1.0,
+    "near_miss_minimum_rate": 0.01,
+    "secondary_near_miss_distance": -2.0,
+    "stable_rank_correlation_minimum": 0.6
+  },
+  "schema_version": 1,
+  "source_artifact_bundle_sha256": "3AE3E801A58C1C3F9AEABFB80F7E748AF933C026BA2A99EB1E6EDB429F24BF7E",
+  "source_sha": "16fc1feabc79f711d4b7b728eac2c2b9d00f91e5",
+  "source_v14_producer_sha": "018be6caca5c7ad294729c17294295283589ec7d"
+}

@@ -1,0 +1,52 @@
+{
+  "assets_ever_eligible": 144,
+  "assets_with_multiple_priority_venues": 126,
+  "candidate_evaluator_called": false,
+  "eligible_coordinates": 890799,
+  "horizon_ledger_metrics": {
+    "1": {
+      "candidate_count": 636,
+      "cost_sign_killed_rate": 0.5738993710691824,
+      "gross_positive_rate": 0.5754716981132075,
+      "mean_pair_reward": -6.7404062388978225,
+      "net_positive_rate": 0.0015723270440251573,
+      "turnover_mean": 0.7772041390669429
+    },
+    "4": {
+      "candidate_count": 564,
+      "cost_sign_killed_rate": 0.4875886524822695,
+      "gross_positive_rate": 0.5319148936170213,
+      "mean_pair_reward": -3.537499284843228,
+      "net_positive_rate": 0.044326241134751775,
+      "turnover_mean": 0.22666299816208213
+    }
+  },
+  "mark_fields_in_priority_order": [
+    "bybit__mark_price_last",
+    "hyperliquid_futures__mark_price_last",
+    "okx_futures__mark_price_last"
+  ],
+  "switch_metrics": {
+    "1": {
+      "cross_venue_endpoint_switch_rate": 0.0020532050059565237,
+      "cross_venue_endpoint_switches": 1658,
+      "valid_target_coordinates": 807518
+    },
+    "4": {
+      "cross_venue_endpoint_switch_rate": 0.005124504060078149,
+      "cross_venue_endpoint_switches": 4097,
+      "valid_target_coordinates": 799492
+    }
+  },
+  "target_return_arrays_read": false,
+  "venue_counts": {
+    "bybit": 788380,
+    "hyperliquid_futures": 66008,
+    "okx_futures": 36411
+  },
+  "venue_shares": {
+    "bybit": 0.8850256904194997,
+    "hyperliquid_futures": 0.0740997688591927,
+    "okx_futures": 0.0408745407213075
+  }
+}

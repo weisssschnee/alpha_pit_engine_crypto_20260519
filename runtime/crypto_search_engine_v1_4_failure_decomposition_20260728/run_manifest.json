@@ -1,0 +1,60 @@
+{
+  "artifact_bundle_sha256": "D50D37ECB025E09B5BDEDADDC3ED8F6D60CE5F6CAB7A770203F5FAFD13A38E96",
+  "artifacts": [
+    {
+      "bytes": 3637,
+      "path": "reports/CRYPTO_SEARCH_ENGINE_V1_4_FAILURE_DECOMPOSITION_20260728.md",
+      "sha256": "10BDC80509A68D0CE7D7304061E6EEC3A5D2D5B0F55A5C722E7DEE98BB2F762A"
+    },
+    {
+      "bytes": 6239,
+      "path": "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/automatic_branch_decision.parquet",
+      "sha256": "16AA039082B6CCDEFD00565E19FFDDA76FB1D2B9EB0DCDE46B5E29DFEFE59A3A"
+    },
+    {
+      "bytes": 15821,
+      "path": "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/constraint_bottleneck_matrix.parquet",
+      "sha256": "D854CA676F4372225D256286B6E5B326D9F1494F7E5AC028A7FACCC8FAFB488D"
+    },
+    {
+      "bytes": 14941,
+      "path": "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/economic_waterfall.parquet",
+      "sha256": "631B1A1C70F32C752BADDB5783583A1BCA320B8D334EAD3D1473E540C6E19CC6"
+    },
+    {
+      "bytes": 870,
+      "path": "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/final_decision.json",
+      "sha256": "B433281AAC5C0C15D85E71214175E5FC99FA1B35895F658FF8E76FD5887072D1"
+    },
+    {
+      "bytes": 3804,
+      "path": "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/frozen_audit_contract.json",
+      "sha256": "1D340D7EFACF8F0DCB7B610AEA90C2106716D4EC168CA8109288C1351149A899"
+    },
+    {
+      "bytes": 27342,
+      "path": "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/search_learnability.parquet",
+      "sha256": "D325AFEA50C08E51FDF26A8025D4FCA5A95334725CB31D613CF8D2A052CD0F75"
+    },
+    {
+      "bytes": 1561,
+      "path": "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/target_execution_facts.json",
+      "sha256": "E3167229AFC19DB4D604C9D5F9FD7E14540A2416A0CF7FC97CB4CCF075F9B9CA"
+    },
+    {
+      "bytes": 7037,
+      "path": "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/target_execution_semantics.parquet",
+      "sha256": "A95EA5FE589633734F699C9BFB4F9F7087F2A34F9DFD39DFECA6A08208D95DD7"
+    }
+  ],
+  "audit_id": "CRYPTO_SEARCH_ENGINE_V1_4_EXISTING_LEDGER_FAILURE_DECOMPOSITION",
+  "candidate_evaluations": 0,
+  "continuation": "python -m alphafactory_crypto.broad_search.failure_decomposition_v14 check",
+  "input_bundle_sha256": "0DE62CB1D38F10A0477F6E8D98B9A0EB2A863A7B8CD5531F03A909592203EFEB",
+  "market_budget_consumed": 0,
+  "producer_source_sha": "16fc1feabc79f711d4b7b728eac2c2b9d00f91e5",
+  "reproducible": true,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_inputs_unchanged": true
+}
