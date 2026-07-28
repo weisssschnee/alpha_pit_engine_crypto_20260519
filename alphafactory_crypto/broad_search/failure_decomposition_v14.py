@@ -1063,6 +1063,7 @@ def _report_text(
         axis: int((deterministic == index).sum())
         for index, axis in enumerate(AXIS_ORDER)
     }
+    horizon_metrics = target_facts["horizon_ledger_metrics"]
     return "\n".join(
         [
             "# Crypto Search Engine V1.4 Failure Decomposition",
@@ -1076,7 +1077,53 @@ def _report_text(
             "- Target/execution finding: Binance aggTrades is evaluated against a lexicographic first-finite Bybit/Hyperliquid/OKX mark target, with no qualified unified tradable venue or venue-specific 5 bps bridge.",
             "- Persistence finding: V1.4 did not write standalone A/B/AB/ABC economics, component constraint margins, monthly waterfalls, or time-block rewards. These are `NOT_RECONSTRUCTIBLE` without market reevaluation.",
             f"- Decision: `{decision['decision']}`. Adaptive V1.4b and operator-basis expansion remain unauthorized.",
-            "- Bias audit: `HOLD_RESEARCH`; OOS grade `NONE`; no Alpha, promotion, challenge, forward, or sealed-read claim.",
+            "",
+            "## Bias Audit",
+            "",
+            "- Factor: V1.4 binary and hierarchical candidate population; no candidate is promoted.",
+            f"- Run/experiment_id: `{AUDIT_ID}`.",
+            "- Data source and universe: fixed-retrospective aligned OI/mark ranks51-200 plus Binance aggTrades Top200 carrier; dynamic eligible intersection; 144 assets ever eligible.",
+            "- Frequency and horizon: hourly signal grid; 1h and 4h labels with t+2 execution delay.",
+            "- IS window: 2025-08-29 07:00 UTC through 2026-07-01 00:00 UTC.",
+            "- OOS window: none.",
+            "- OOS sample grade: `NONE`.",
+            "- Cost model: fixed 5 bps full-L1 turnover; venue/execution consistency unqualified.",
+            (
+                "- Turnover: 1h mean "
+                f"`{horizon_metrics['1']['turnover_mean']:.6f}`; "
+                "4h mean "
+                f"`{horizon_metrics['4']['turnover_mean']:.6f}`."
+            ),
+            "- Benchmark: matched A, B, AB and ABC controls under the original evaluator; only partial waterfall persisted.",
+            "- Discovery status: post-hoc existing-ledger audit.",
+            "",
+            "### Findings",
+            "",
+            "- Look-ahead: engineering lag contract is explicit; no sealed or forward role was read by this audit.",
+            "- Survivorship: fixed delivered cohort and historical PIT-universe limitations remain; unsuitable for promotion.",
+            "- Date alignment: signal-to-label lag is explicit, but t+2 mark is not a qualified first tradable execution price.",
+            "- Label horizon: 1h/4h overlap was handled by the original Newey-West contract; per-time-block stability was not persisted.",
+            "- Costs: 5 bps is generic and is not tied to Bybit, Hyperliquid, OKX, or a Binance execution bridge.",
+            "- Turnover: cost sign-killed 640 of 666 gross-positive final increments; 1h is materially worse than 4h.",
+            "- Multi-window stability: `NOT_RECONSTRUCTIBLE`; one full-window reward was persisted per candidate.",
+            "- Replay vs discovery: post-hoc decomposition only; it cannot count as a new discovery.",
+            "",
+            "### Blocking Issues",
+            "",
+            "- Binance order flow is labelled with a non-Binance, availability-dependent mark target.",
+            "- 126/144 assets use more than one priority target venue; some label endpoints cross venues.",
+            "- Standalone A/B/AB/ABC economics, component constraint names, and monthly waterfalls are absent.",
+            "- The near-miss rate is below the frozen adaptive threshold.",
+            "",
+            "### Decision",
+            "",
+            "`HOLD_RESEARCH`",
+            "",
+            "### Required Next Action",
+            "",
+            "- Freeze a tradable venue-specific target/execution/cost contract.",
+            "- Audit mapping, holding period and turnover using that contract before field or operator expansion.",
+            "- Do not authorize CEM/Evolution, operator-basis expansion, OOS, or promotion from this audit.",
             "",
         ]
     )
