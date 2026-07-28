@@ -363,3 +363,33 @@ def test_oi_materialization_probe_skips_schemafixed_empty_partition(
     assert stats == {"bybit__open_interest_last": 1.0}
     assert evidence[0]["sample_rows"] == 1
     assert evidence[0]["sample_path"] == str(full_path)
+
+
+def test_raw_panel_store_normalizes_legacy_microsecond_timestamps(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "carrier"
+    root.mkdir()
+    (root / "metadata.json").write_text(
+        json.dumps(
+            {
+                "assets": 1,
+                "timestamps": 2,
+                "symbol_ids": ["A"],
+                "field_ids": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+    np.save(
+        root / "timestamp_ns.npy",
+        np.asarray(
+            [1_704_067_200_000_000, 1_704_070_800_000_000],
+            dtype=np.int64,
+        ),
+    )
+    store = RawPanelStore.open(root)
+    assert store.timestamp_ns.tolist() == [
+        1_704_067_200_000_000_000,
+        1_704_070_800_000_000_000,
+    ]

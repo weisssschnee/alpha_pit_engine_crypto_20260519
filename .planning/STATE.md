@@ -4,7 +4,19 @@ Last updated: 2026-07-28 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_FULL_AGG_CARRIER_COMPLETED_ENGINEERING_ONLY`
+`CRYPTO_SEARCH_CARRIER_ACTIVATION_MATCHED_GATE_V1_COMPLETED_HOLD_RESEARCH`
+
+Carrier Activation & Fresh-State Matched Gate V1 reused the existing 235-field
+carrier surface and Search Engine implementation. It completed 768 fresh-state,
+dual-axis, matched, cost-evaluated candidates: 256 full-44 aggTrades, 256
+Core3-81, and 256 available OI/mark-71. All six checkpoints restored exactly;
+sealed reads and promotion remained zero. No carrier produced a positive
+matched discovery and no CEM/Evolution arm dominated typed random across the
+frozen density, family-discovery, mean-reward, and top-decile dimensions.
+Status is engineering `PASS`, research `HOLD_RESEARCH`, future larger-Arena
+qualification `NONE`. OI/mark PIT-universe limitations and liquidation HOLD
+remain unchanged. The right-axis waterfall is not separately persisted in the
+ledger and must be added before any larger Arena without rerunning this gate.
 
 Search Surface Integration V1 completed at producer source
 `caa4500485995119a908790508030e305add6841`. Four independent
