@@ -485,6 +485,7 @@ def compile_management_tables(
     catalog = pd.DataFrame(catalog_rows.values()).sort_values(
         ["record_kind", "canonical_field_id"], kind="stable"
     )
+    catalog["observable_lag_hours"] = catalog["observable_lag_hours"].map(_text)
     aliases = pd.DataFrame(alias_rows).drop_duplicates().sort_values(
         ["canonical_field_id", "authority_scope"], kind="stable"
     )
