@@ -1195,10 +1195,16 @@
     },
     {
       "id": "field_information_qualification_v0",
-      "label": "Context-bound Core Pack information and consumption qualification",
-      "kind": "representation_qualification",
-      "lifecycle": "EXPERIMENTAL",
+      "label": "Unified field management compiled view and context-bound qualification",
+      "kind": "field_management_compiled_view",
+      "lifecycle": "ACTIVE",
       "paths": [
+        "docs/adr/0012-unified-field-management-compiled-view.md",
+        "config/crypto_unified_field_management_v1.json",
+        "alphafactory_crypto/unified_field_management.py",
+        "scripts/crypto_unified_field_management_v1.py",
+        "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
+        "reports/CRYPTO_UNIFIED_FIELD_MANAGEMENT_V1_20260728.md",
         "config/crypto_field_information_v0.json",
         "alphafactory_crypto/field_information.py",
         "scripts/crypto_field_information_v0.py",
@@ -1216,9 +1222,12 @@
         "reports/CRYPTO_BROAD_PURGED_CALIBRATED_STICKY_V1_20260718.md"
       ],
       "critical": true,
-      "semantic_role": "context_bound_feature_information_qualification",
+      "semantic_role": "compiled_field_management_and_context_bound_information_qualification",
       "active_authority": false,
       "claim_badges": [
+        "5,509 CANONICAL MANAGEMENT RECORDS",
+        "235 INDEPENDENT CARRIER BINDINGS",
+        "NO SECOND FIELD AUTHORITY",
         "CONSUMPTION VERIFIED",
         "PURGED CONDITIONAL INFORMATION VERIFIED",
         "HELD-OUT CALIBRATION VERIFIED",
@@ -1227,12 +1236,47 @@
         "NO OOS"
       ],
       "authority": {
-        "path": "config/crypto_field_information_v0.json",
-        "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
-        "verified_sha": "057e31df71f55f9e3a6e8ea3b48d53293d7d2e13",
-        "sha256": "BE2021B0C493CFA51E19A3F5DECD527AF27CA797031A0E59239E6F94B3CF9CA6"
+        "path": "config/crypto_unified_field_management_v1.json",
+        "repo_ref": "experiment/crypto-search-surface-integration-v1-20260728",
+        "verified_sha": "43739ed197dd009756a4d5c2e2209e3060c2c61e",
+        "sha256": "C6D0A1A9C1E24EB7FC0C2A80A400D4C8AA4A677A4E4979645920F7D7AEF4FBE8"
       },
       "contracts": [
+        {
+          "id": "unified_management_view_not_field_authority",
+          "type": "AUTHORITY",
+          "rule": "The 5,509-record management catalog is a deterministic compiled view over the existing inventory, lineage, ontology, approval, derived-recipe, token, and carrier authorities; it cannot activate, approve, or redefine a field",
+          "severity": "HARD",
+          "enforced_by": "unified_field_management.compile_management_tables",
+          "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json"
+        },
+        {
+          "id": "carrier_management_boundaries_preserved",
+          "type": "BOUNDARY",
+          "rule": "Broad39, Core3 81, aggTrades 44, and OI/mark 71 remain independent carrier bindings; a shared canonical management identity never merges their panels, eligibility, evidence, or research admission",
+          "severity": "HARD",
+          "enforced_by": "unified_field_management.compile_management_tables",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/field_management_summary.json"
+        },
+        {
+          "id": "management_conflicts_fail_closed",
+          "type": "ADMISSION",
+          "rule": "An orphan ontology, approval, or lineage identity, or divergent type, unit, or lag for one cross-carrier field identity, prevents publication of the compiled management view",
+          "severity": "HARD",
+          "enforced_by": "unified_field_management.compile_management_tables",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/field_management_summary.json"
+        },
+        {
+          "id": "provenance_only_fields_not_search_inputs",
+          "type": "BOUNDARY",
+          "rule": "The four first/last aggregate-trade receipt and transaction-time fields remain provenance-only and cannot receive a typed search role",
+          "severity": "HARD",
+          "enforced_by": "unified_field_management.compile_management_tables",
+          "bypass_forbidden": true,
+          "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/field_management_summary.json"
+        },
         {
           "id": "compiled_token_view_not_authority",
           "type": "AUTHORITY",
@@ -1318,9 +1362,9 @@
         "level": "RUNTIME_VERIFIED",
         "result": "PASS",
         "profile": "crypto-development-research",
-        "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
-        "evidence_sha256": "92BF05B0046FE258BA708871EE52ED764C61EAA61E46F0ACCDA1A7FAEE73E6FA",
-        "verified_at_sha": "3bd334c7e11dcb3583a0b3ebba3c577242172fef"
+        "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
+        "evidence_sha256": "3787A4230455A8895D2275CF537B19C8AFC967B7D9E80E917582058C04708B28",
+        "verified_at_sha": "43739ed197dd009756a4d5c2e2209e3060c2c61e"
       },
       "promotion_requirements": [
         "context-matched data adequacy",
