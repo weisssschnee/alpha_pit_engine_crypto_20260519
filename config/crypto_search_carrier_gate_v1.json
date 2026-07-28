@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "experiment_id": "20260728_crypto_search_carrier_gate_v1",
+  "authorization": "ONE_FRESH_STATE_768_CARRIER_LOCAL_DEVELOPMENT_MATCHED_GATE",
+  "source_carrier_manifest": "runtime/crypto_search_surface_integration_v1_20260728/search_carriers.json",
+  "carriers": [
+    "AGGTRADES_TOP200_DELIVERED",
+    "CORE3_MICROSTRUCTURE_PILOT",
+    "OI_MARK_RANKS51_200_DELIVERED"
+  ],
+  "per_carrier": {
+    "strict_evaluated_target": 256,
+    "checkpoint_size": 128,
+    "checkpoint_count": 2,
+    "raw_generation_attempt_limit": 5000,
+    "wall_time_limit_seconds": 7200,
+    "arms_per_checkpoint": {
+      "canonical_typed_random": 32,
+      "hierarchical_typed_cem_v2": 48,
+      "typed_evolution_v2": 48
+    },
+    "seeds": [20260716, 20260717, 20260718, 20260719],
+    "fresh_policy_archive_and_transition_state": true
+  },
+  "authority_repairs": {
+    "dual_axis_controls": true,
+    "behavior_identity": "INCREMENTAL_DELTA_WEIGHT",
+    "adaptive_memory_scope": "ARM_AND_SEED_LOCAL",
+    "cem_memory": "CURRENT_CHECKPOINT_SUFFICIENT_STATISTICS_PLUS_SINGLE_PROBABILITY_EMA"
+  },
+  "boundaries": {
+    "development_only": true,
+    "fixed_retrospective_carriers": true,
+    "alpha_claim": false,
+    "oos": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "cross_sprint_adaptive_memory": false,
+    "liquidation": "HOLD"
+  }
+}

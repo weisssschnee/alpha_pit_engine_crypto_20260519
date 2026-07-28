@@ -49,6 +49,7 @@ from .compositional18m import (
     _mutable_gene_domains,
     candidate_from_genes,
     field_role_coverage,
+    field_role_surface,
     generate_candidate,
     generate_effective_candidate,
     skeleton_registry,
@@ -71,6 +72,7 @@ from .runner18m import (
     _current_field_surface_binding,
     _directory_bundle,
     _environment_fingerprint,
+    load_search_surface_carrier,
     _source_tree_clean_for_run,
 )
 
@@ -87,6 +89,29 @@ V11_CONFIG = "config/crypto_search_engine_v1_1.json"
 V12_EPOCH_ID = "CRYPTO_SEARCH_ENGINE_V1_2_COLLISION_CONTROLLED_20260727"
 V12_DEFAULT_RUNTIME_DATE = "20260727"
 V12_CONFIG = "config/crypto_search_engine_v1_2.json"
+CARRIER_GATE_CONFIG = "config/crypto_search_carrier_gate_v1.json"
+CARRIER_GATE_EPOCH_ID = "CRYPTO_SEARCH_CARRIER_GATE_V1_20260728"
+CARRIER_GATE_DEFAULT_RUNTIME_DATE = "20260728"
+CARRIER_GATE_ARMS = (
+    "canonical_typed_random",
+    "hierarchical_typed_cem_v2",
+    "typed_evolution_v2",
+)
+CARRIER_GATE_CHECKPOINT_SIZE = 128
+CARRIER_GATE_CHECKPOINT_COUNT = 2
+CARRIER_GATE_STRICT_TARGET = 256
+CARRIER_GATE_RAW_ATTEMPT_LIMIT = 5_000
+CARRIER_GATE_WALL_TIME_LIMIT_SECONDS = 2 * 60 * 60
+CARRIER_GATE_CHECKPOINT_ALLOCATION = {
+    "canonical_typed_random": 32,
+    "hierarchical_typed_cem_v2": 48,
+    "typed_evolution_v2": 48,
+}
+CARRIER_GATE_IDS = (
+    "AGGTRADES_TOP200_DELIVERED",
+    "CORE3_MICROSTRUCTURE_PILOT",
+    "OI_MARK_RANKS51_200_DELIVERED",
+)
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
 CONTINUATION_RUNTIME = "runtime/crypto_18m_current_field_four_policy_continuation_20260719"
 SEEDS = (20260716, 20260717, 20260718, 20260719)
@@ -902,6 +927,84 @@ def _load_v12_inputs(
     return store, contracts, behavior_contract, identities, config
 
 
+def _load_carrier_gate_inputs(
+    repo_root: Path, carrier_id: str
+) -> tuple[
+    RawPanelStore,
+    tuple[FieldContract, ...],
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+]:
+    if carrier_id not in CARRIER_GATE_IDS:
+        raise ValueError(f"unsupported carrier gate identity: {carrier_id}")
+    config_path = repo_root / CARRIER_GATE_CONFIG
+    config = _read_json(config_path)
+    if tuple(config["carriers"]) != CARRIER_GATE_IDS:
+        raise ValueError("carrier gate identities changed")
+    manifest_path = repo_root / str(config["source_carrier_manifest"])
+    store, contracts, loader_evidence = load_search_surface_carrier(
+        repo_root,
+        carrier_manifest_path=manifest_path,
+        surface_id=carrier_id,
+    )
+    surface = field_role_surface(contracts)
+    if not surface["compatible_skeleton_ids"] or not surface["all_fields_reachable"]:
+        raise ValueError("carrier gate has an unreachable field or no compatible skeleton")
+    base = np.asarray(store.base_eligible(), dtype=bool)
+    counts = base.sum(axis=0, dtype=np.int64).astype(float)
+    regime = np.broadcast_to(counts, base.shape).copy()
+    regime[~base] = np.nan
+    behavior_contract = freeze_search_behavior_contract(regime, base)
+    behavior_contract["pit_regime_source"] = "__BASE_ELIGIBLE_COUNT__"
+    behavior_contract["contract_sha256"] = _payload_sha(
+        {
+            key: value
+            for key, value in behavior_contract.items()
+            if key != "contract_sha256"
+        }
+    )
+    metadata = _read_json(
+        repo_root
+        / str(
+            _read_json(manifest_path)["carriers"][carrier_id]["cache_root"]
+        )
+        / "metadata.json"
+    )
+    identities = {
+        "carrier_gate_config": {
+            "path": CARRIER_GATE_CONFIG,
+            "sha256": sha256_file(config_path),
+        },
+        "source_carrier_manifest": {
+            "path": str(config["source_carrier_manifest"]),
+            "sha256": sha256_file(manifest_path),
+        },
+        "carrier": {
+            "carrier_id": carrier_id,
+            "cache_identity_sha256": metadata["identity_sha256"],
+            "contracts_sha256": _payload_sha(_contracts_payload(contracts)),
+            "loader_evidence": loader_evidence,
+        },
+        "raw_cache": {
+            "root": str(
+                _read_json(manifest_path)["carriers"][carrier_id]["cache_root"]
+            ),
+            "identity_sha256": metadata["identity_sha256"],
+        },
+    }
+    local_config = {
+        **config,
+        "carrier_id": carrier_id,
+        "window": {
+            "start": metadata["start_utc"],
+            "end_exclusive": metadata["end_exclusive_utc"],
+        },
+        "cache": identities["raw_cache"],
+    }
+    return store, contracts, behavior_contract, identities, local_config
+
+
 def _frozen_contract(
     *,
     source_sha: str,
@@ -1428,6 +1531,68 @@ def _v12_frozen_contract(
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
 
 
+def _carrier_gate_frozen_contract(
+    *,
+    source_sha: str,
+    compiler_binding: Mapping[str, Any],
+    behavior_contract: Mapping[str, Any],
+    input_identities: Mapping[str, Any],
+    environment: Mapping[str, Any],
+    config: Mapping[str, Any],
+    contracts: Sequence[FieldContract],
+) -> dict[str, Any]:
+    surface = field_role_surface(contracts)
+    payload = {
+        "schema_version": 1,
+        "epoch_id": CARRIER_GATE_EPOCH_ID,
+        "experiment_id": str(config["experiment_id"]),
+        "source_sha": source_sha,
+        "authorization": str(config["authorization"]),
+        "carrier_id": str(config["carrier_id"]),
+        "input_identities": dict(input_identities),
+        "compiler_identity": dict(compiler_binding),
+        "evaluator_contract": pair_contract_payload(),
+        "behavior_descriptor": dict(behavior_contract),
+        "environment": dict(environment),
+        "window": dict(config["window"]),
+        "surface": {
+            "field_count": len(contracts),
+            "field_ids": [item.field_id for item in contracts],
+            "compatible_skeleton_ids": surface["compatible_skeleton_ids"],
+            "contexts_merged": False,
+        },
+        "seeds": list(SEEDS),
+        "arms": {
+            "active": list(CARRIER_GATE_ARMS),
+            "checkpoint_allocation": dict(CARRIER_GATE_CHECKPOINT_ALLOCATION),
+            "same_seed_set_for_every_arm": True,
+        },
+        "fresh_state": {
+            "old_candidate_import": False,
+            "old_reward_import": False,
+            "old_distribution_import": False,
+            "old_population_import": False,
+            "old_policy_state_import": False,
+            "old_archive_import": False,
+            "old_transition_memory_import": False,
+        },
+        "authority_repairs": dict(config["authority_repairs"]),
+        "budget": {
+            "strict_evaluated_target": CARRIER_GATE_STRICT_TARGET,
+            "checkpoint_size": CARRIER_GATE_CHECKPOINT_SIZE,
+            "checkpoint_count": CARRIER_GATE_CHECKPOINT_COUNT,
+            "raw_generation_attempts_maximum": CARRIER_GATE_RAW_ATTEMPT_LIMIT,
+            "wall_time_seconds_maximum": CARRIER_GATE_WALL_TIME_LIMIT_SECONDS,
+            "workers_default": DEFAULT_WORKERS,
+            "workers_memory_fallback": FALLBACK_WORKERS,
+            "workers_12_forbidden": True,
+        },
+        "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY_ARM_AND_SEED_LOCAL",
+        "boundaries": {**dict(config["boundaries"]), "sealed_reads": 0},
+    }
+    return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
 @dataclass(slots=True)
 class BehaviorArchive:
     rows: list[dict[str, Any]] = field(default_factory=list)
@@ -1591,6 +1756,7 @@ class HierarchicalTypedCEMV2:
     )
     rng: random.Random = field(init=False)
     roles: dict[str, list[str]] = field(init=False)
+    compatible_skeleton_ids: tuple[str, ...] = field(init=False)
     seen: set[str] = field(default_factory=set)
     tables: dict[str, dict[str, dict[str, Any]]] = field(
         default_factory=lambda: defaultdict(dict)
@@ -1604,12 +1770,14 @@ class HierarchicalTypedCEMV2:
     def __post_init__(self) -> None:
         self.parameters = dict(self.parameters)
         self.rng = random.Random(int(self.seed))
+        surface = field_role_surface(tuple(self.registry.fields.values()))
         self.roles = {
             str(key): [str(value) for value in values]
-            for key, values in field_role_coverage(
-                tuple(self.registry.fields.values())
-            )["roles"].items()
+            for key, values in surface["roles"].items()
         }
+        self.compatible_skeleton_ids = tuple(surface["compatible_skeleton_ids"])
+        if not self.compatible_skeleton_ids:
+            raise ValueError("CEM V2 carrier has no compatible skeleton")
         if not 0.0 < float(self.parameters["smoothing"]) <= 1.0:
             raise ValueError("CEM V2 smoothing is invalid")
         if int(self.parameters["minimum_observation_count"]) < 1:
@@ -1711,11 +1879,16 @@ class HierarchicalTypedCEMV2:
         )[0]
 
     def _sample_candidate(self) -> CandidateSpec:
-        mechanisms = tuple(sorted({item.mechanism_family for item in skeleton_registry()}))
+        compatible = tuple(
+            item
+            for item in skeleton_registry()
+            if item.skeleton_id in self.compatible_skeleton_ids
+        )
+        mechanisms = tuple(sorted({item.mechanism_family for item in compatible}))
         mechanism = str(self._choice("mechanism_family", mechanisms, ("G",)))
         skeleton_ids = tuple(
             item.skeleton_id
-            for item in skeleton_registry()
+            for item in compatible
             if item.mechanism_family == mechanism
         )
         skeleton = _skeleton_by_id(
@@ -2158,6 +2331,7 @@ class TypedEvolutionV2:
     )
     rng: random.Random = field(init=False)
     roles: dict[str, list[str]] = field(init=False)
+    compatible_skeleton_ids: tuple[str, ...] = field(init=False)
     seen: set[str] = field(default_factory=set)
     population: dict[str, dict[str, Any]] = field(default_factory=dict)
     family_counts: Counter[str] = field(default_factory=Counter)
@@ -2181,12 +2355,14 @@ class TypedEvolutionV2:
     def __post_init__(self) -> None:
         self.parameters = dict(self.parameters)
         self.rng = random.Random(int(self.seed))
+        surface = field_role_surface(tuple(self.registry.fields.values()))
         self.roles = {
             str(key): [str(value) for value in values]
-            for key, values in field_role_coverage(
-                tuple(self.registry.fields.values())
-            )["roles"].items()
+            for key, values in surface["roles"].items()
         }
+        self.compatible_skeleton_ids = tuple(surface["compatible_skeleton_ids"])
+        if not self.compatible_skeleton_ids:
+            raise ValueError("Evolution V2 carrier has no compatible skeleton")
         probabilities = sum(
             float(self.parameters[name])
             for name in (
@@ -2426,7 +2602,8 @@ class TypedEvolutionV2:
         targets = [
             item
             for item in skeleton_registry()
-            if item.mechanism_family == source.mechanism_family
+            if item.skeleton_id in self.compatible_skeleton_ids
+            and item.mechanism_family == source.mechanism_family
             and item.skeleton_id != source.skeleton_id
             and item.field_roles == source.field_roles
         ]
@@ -2686,7 +2863,11 @@ class TypedEvolutionV2:
             transition_key = None
             compile_attempts += 1
             if len(self.population) < int(self.parameters["warmup"]):
-                skeletons = skeleton_registry()
+                skeletons = tuple(
+                    item
+                    for item in skeleton_registry()
+                    if item.skeleton_id in self.compatible_skeleton_ids
+                )
                 skeleton = skeletons[(self.step + self.seed + duplicate_resamples) % len(skeletons)]
                 candidate = generate_effective_candidate(
                     self.registry, skeleton=skeleton, rng=self.rng, roles=self.roles
@@ -5375,25 +5556,122 @@ def _final_manifest(
     }
 
 
+def _carrier_gate_final_decision(
+    *,
+    source_sha: str,
+    carrier_id: str,
+    state: Mapping[str, Any],
+    ledger: Sequence[Mapping[str, Any]],
+    archive: BehaviorArchive,
+    metrics: Sequence[Mapping[str, Any]],
+    runtime_root: Path,
+) -> dict[str, Any]:
+    final_metrics = {
+        str(row["arm"]): dict(row)
+        for row in metrics
+        if int(row["checkpoint_index"]) == CARRIER_GATE_CHECKPOINT_COUNT - 1
+    }
+    random_metrics = final_metrics["canonical_typed_random"]
+    comparisons = {}
+    for arm in CARRIER_GATE_ARMS[1:]:
+        local = final_metrics[arm]
+        comparisons[arm] = {
+            "mean_pair_reward_delta": float(
+                local["mean_pair_reward_at_matched_count"]
+            )
+            - float(random_metrics["mean_pair_reward_at_matched_count"]),
+            "top_decile_pair_reward_delta": float(
+                local["top_decile_pair_reward_at_matched_count"]
+            )
+            - float(random_metrics["top_decile_pair_reward_at_matched_count"]),
+            "new_behavior_families_per_1k_delta": float(
+                local["new_behavior_families_per_1k_evaluations"]
+            )
+            - float(random_metrics["new_behavior_families_per_1k_evaluations"]),
+        }
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    return {
+        "schema_version": 1,
+        "status": "PASS_CARRIER_GATE_COMPLETED",
+        "producer_source_sha": source_sha,
+        "carrier_id": carrier_id,
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": int(state["generation_attempts"]),
+        "active_wall_seconds": float(state["wall_elapsed_seconds"]),
+        "checkpoint_count": len(checkpoints),
+        "checkpoint_restore_verified": (
+            len(checkpoints) == CARRIER_GATE_CHECKPOINT_COUNT
+            and all(
+                _read_json(path / "manifest.json").get("restore_verified") is True
+                for path in checkpoints
+            )
+        ),
+        "behavior_family_count": len(archive.champion_by_family),
+        "arm_comparisons": comparisons,
+        "research_decision": "HOLD_DEVELOPMENT_FIXED_RETROSPECTIVE_CARRIER",
+        "future_arena_qualification": False,
+        "alpha_claim": False,
+        "oos": False,
+        "promotion": False,
+        "sealed_reads": 0,
+    }
+
+
+def _carrier_gate_report_text(decision: Mapping[str, Any]) -> str:
+    return f"""# Crypto Search Carrier Gate V1
+
+- Carrier: `{decision['carrier_id']}`
+- Strict evaluated: `{decision['strict_evaluated_count']}`
+- Checkpoints: `{decision['checkpoint_count']}`, exact restore: `{decision['checkpoint_restore_verified']}`
+- Research decision: `{decision['research_decision']}`
+- Authority: dual-axis matched controls, incremental behavior identity, arm/seed-local adaptive memory, single-EMA CEM update.
+- Boundaries: development-only; no OOS, promotion, sealed reads, or Alpha claim.
+"""
+
+
 def run_engine(
     repo_root: Path,
     *,
     runtime_date: str = DEFAULT_RUNTIME_DATE,
     source_sha: str | None = None,
     campaign: str = "legacy",
+    carrier_id: str | None = None,
 ) -> dict[str, Any]:
     if campaign not in {
         "legacy",
         "aggtrades_system_canary",
         "search_engine_v1_1",
         "search_engine_v1_2",
+        "carrier_gate_v1",
     }:
         raise ValueError(f"unsupported Search Engine V1 campaign: {campaign}")
     is_canary = campaign == "aggtrades_system_canary"
     is_v11 = campaign == "search_engine_v1_1"
     is_v12 = campaign == "search_engine_v1_2"
-    is_system_campaign = is_canary or is_v11 or is_v12
-    if is_v12:
+    is_carrier_gate = campaign == "carrier_gate_v1"
+    is_system_campaign = is_canary or is_v11 or is_v12 or is_carrier_gate
+    if is_carrier_gate:
+        if runtime_date != CARRIER_GATE_DEFAULT_RUNTIME_DATE:
+            raise ValueError("carrier gate runtime date changed")
+        if carrier_id not in CARRIER_GATE_IDS:
+            raise ValueError("carrier gate requires one frozen carrier id")
+        carrier_slug = str(carrier_id).lower()
+        runtime_root = repo_root / (
+            f"runtime/crypto_search_carrier_gate_v1_{carrier_slug}_{runtime_date}"
+        )
+        report_path = repo_root / (
+            f"reports/CRYPTO_SEARCH_CARRIER_GATE_V1_{carrier_slug.upper()}_{runtime_date}.md"
+        )
+        strict_target = CARRIER_GATE_STRICT_TARGET
+        checkpoint_count = CARRIER_GATE_CHECKPOINT_COUNT
+        checkpoint_size = CARRIER_GATE_CHECKPOINT_SIZE
+        raw_attempt_limit = CARRIER_GATE_RAW_ATTEMPT_LIMIT
+        wall_time_limit = CARRIER_GATE_WALL_TIME_LIMIT_SECONDS
+        campaign_arms = CARRIER_GATE_ARMS
+        block_role = f"FRESH_STATE_CARRIER_LOCAL_DEVELOPMENT_GATE:{carrier_id}"
+    elif is_v12:
         if runtime_date != V12_DEFAULT_RUNTIME_DATE:
             raise ValueError(
                 "Search Engine V1.2 is authorized only for runtime date "
@@ -5467,7 +5745,13 @@ def run_engine(
         raise RuntimeError(
             "Search Engine V1 requires a clean producer tree; only its runtime/report may exist"
         )
-    if is_v12:
+    if is_carrier_gate:
+        store, contracts, behavior_contract, input_identities, continuation = (
+            _load_carrier_gate_inputs(repo_root, str(carrier_id))
+        )
+        block_start = str(continuation["window"]["start"])
+        block_end = str(continuation["window"]["end_exclusive"])
+    elif is_v12:
         store, contracts, behavior_contract, input_identities, continuation = (
             _load_v12_inputs(repo_root)
         )
@@ -5494,7 +5778,17 @@ def run_engine(
     registry = TypedExpressionRegistry(contracts)
     compiler_binding = _compiler_binding(repo_root)
     environment = _environment_fingerprint()
-    if is_v12:
+    if is_carrier_gate:
+        frozen = _carrier_gate_frozen_contract(
+            source_sha=source_sha,
+            compiler_binding=compiler_binding,
+            behavior_contract=behavior_contract,
+            input_identities=input_identities,
+            environment=environment,
+            config=continuation,
+            contracts=contracts,
+        )
+    elif is_v12:
         frozen = _v12_frozen_contract(
             source_sha=source_sha,
             compiler_binding=compiler_binding,
@@ -5536,7 +5830,7 @@ def run_engine(
     }
     cache_root = (
         repo_root / str(continuation["cache"]["root"])
-        if is_system_campaign
+        if is_system_campaign or is_carrier_gate
         else repo_root / str(continuation["cache_root"])
     )
 
@@ -5635,7 +5929,9 @@ def run_engine(
             int(state["next_checkpoint_index"]), checkpoint_count
         ):
             allocation = (
-                dict(V12_CHECKPOINT_ALLOCATION)
+                dict(CARRIER_GATE_CHECKPOINT_ALLOCATION)
+                if is_carrier_gate
+                else dict(V12_CHECKPOINT_ALLOCATION)
                 if is_v12
                 else dict(V11_CHECKPOINT_ALLOCATION)
                 if is_v11
@@ -5772,7 +6068,7 @@ def run_engine(
                     expression_verified = _candidate_rebuild_verified(
                         registry,
                         candidate,
-                        field_role_coverage(contracts)["roles"],
+                        field_role_surface(contracts)["roles"],
                     )
                     if not expression_verified:
                         attempted_ids.add(candidate.candidate_id)
@@ -5790,7 +6086,7 @@ def run_engine(
                         )
                         continue
                     attempted_ids.add(candidate.candidate_id)
-                    if is_system_campaign and not (
+                    if is_system_campaign and not is_carrier_gate and not (
                         set(candidate.raw_fields)
                         & set(AGGTRADES_SYSTEM_CANARY_FIELDS)
                     ):
@@ -6102,7 +6398,9 @@ def run_engine(
                 state=state,
                 policies=policies,
                 comparison_arms=(
-                    V12_ARMS
+                    CARRIER_GATE_ARMS
+                    if is_carrier_gate
+                    else V12_ARMS
                     if is_v12
                     else V11_ARMS
                     if is_v11
@@ -6209,7 +6507,17 @@ def run_engine(
         )
     state["wall_elapsed_seconds"] = active_elapsed()
     decision = (
-        _v12_final_decision(
+        _carrier_gate_final_decision(
+            source_sha=source_sha,
+            carrier_id=str(carrier_id),
+            state=state,
+            ledger=ledger,
+            archive=archive,
+            metrics=metrics,
+            runtime_root=runtime_root,
+        )
+        if is_carrier_gate
+        else _v12_final_decision(
             source_sha=source_sha,
             state=state,
             ledger=ledger,
@@ -6249,7 +6557,9 @@ def run_engine(
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
         (
-            _v12_report_text(decision)
+            _carrier_gate_report_text(decision)
+            if is_carrier_gate
+            else _v12_report_text(decision)
             if is_v12
             else _v11_report_text(decision)
             if is_v11
@@ -6269,7 +6579,9 @@ def run_engine(
         identities=identities,
         state=state,
         epoch_id=(
-            V12_EPOCH_ID
+            CARRIER_GATE_EPOCH_ID
+            if is_carrier_gate
+            else V12_EPOCH_ID
             if is_v12
             else V11_EPOCH_ID
             if is_v11
@@ -6280,6 +6592,9 @@ def run_engine(
         base_sha=(source_sha if is_system_campaign else BASE_SHA),
         continuation=(
             "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+            f"check-carrier-gate --carrier-id {carrier_id} --runtime-date {runtime_date}"
+            if is_carrier_gate
+            else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
             f"check-v12 --runtime-date {runtime_date}"
             if is_v12
             else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
@@ -6295,7 +6610,8 @@ def run_engine(
     _write_json(runtime_root / "run_manifest.json", manifest)
     run_result = (
         "PASS"
-        if (not is_v11 and not is_v12)
+        if is_carrier_gate
+        or (not is_v11 and not is_v12)
         or decision["status"]
         in {
             "PASS_SEARCH_ENGINE_V1_1_COMPLETED",
@@ -7536,10 +7852,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             "check-v11",
             "run-v12",
             "check-v12",
+            "run-carrier-gate",
         ),
     )
     parser.add_argument("--runtime-date")
     parser.add_argument("--source-sha")
+    parser.add_argument("--carrier-id", choices=CARRIER_GATE_IDS)
     args = parser.parse_args(argv)
     repo_root = Path(__file__).resolve().parents[2]
     if args.command == "run":
@@ -7552,6 +7870,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         result = check_engine(
             repo_root,
             runtime_date=str(args.runtime_date or DEFAULT_RUNTIME_DATE),
+        )
+    elif args.command == "run-carrier-gate":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or CARRIER_GATE_DEFAULT_RUNTIME_DATE
+            ),
+            source_sha=args.source_sha,
+            campaign="carrier_gate_v1",
+            carrier_id=args.carrier_id,
         )
     elif args.command == "build-canary-cache":
         source_sha = str(args.source_sha or _git_sha(repo_root)).lower()

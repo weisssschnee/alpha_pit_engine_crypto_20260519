@@ -374,10 +374,15 @@ def evaluate_pair(
     behavior = None
     if behavior_contract is not None:
         behavior_started = time.perf_counter()
-        regime_values = np.asarray(
-            store.field(str(behavior_contract["pit_regime_source"]))[:, block],
-            dtype=float,
-        )
+        regime_source = str(behavior_contract["pit_regime_source"])
+        if regime_source == "__BASE_ELIGIBLE_COUNT__":
+            counts = base.sum(axis=0, dtype=np.int64).astype(float)
+            regime_values = np.broadcast_to(counts, base.shape).copy()
+        else:
+            regime_values = np.asarray(
+                store.field(regime_source)[:, block],
+                dtype=float,
+            )
         descriptor_kwargs = {
             "eligible_mask": support,
             "month_labels": months,
