@@ -1,0 +1,13 @@
+{
+  "active_wall_seconds": 0.5502403999853414,
+  "checkpoint": "checkpoint_budget_exhausted",
+  "generation_attempts": 776,
+  "parameters_changed": false,
+  "reason": "RAW_GENERATION_ATTEMPT_LIMIT",
+  "rescue_rerun_started": false,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "seed_changed": false,
+  "status": "ENGINE_BUDGET_EXHAUSTED",
+  "strict_evaluated_count": 0
+}
