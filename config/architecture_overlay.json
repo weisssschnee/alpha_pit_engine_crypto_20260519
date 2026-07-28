@@ -396,7 +396,7 @@
     },
     {
       "id": "real_policy_upgrade_canary",
-      "label": "Search Engine capability (235-field runtime carriers; research HOLD)",
+      "label": "Search Engine capability (235-field carriers; V1.3 cross-source engineering PASS, research HOLD)",
       "kind": "development_experiment",
       "lifecycle": "EXPERIMENTAL",
       "paths": [
@@ -422,6 +422,9 @@
         "runtime/crypto_search_engine_v1_1_20260727/final_decision.json",
         "runtime/crypto_search_engine_v1_2_20260727/run_manifest.json",
         "runtime/crypto_search_engine_v1_2_20260727/final_decision.json",
+        "config/crypto_search_engine_v1_3_cross_carrier.json",
+        "runtime/crypto_search_engine_v1_3_cross_carrier_20260728/run_manifest.json",
+        "runtime/crypto_search_engine_v1_3_cross_carrier_20260728/final_decision.json",
         "reports/CRYPTO_SEARCH_ENGINE_V1_20260721.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_CODE_AUTHORITY_AUDIT_20260727.md",
@@ -431,6 +434,7 @@
         "reports/CRYPTO_SEARCH_ENGINE_V1_1_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_1_BIAS_AUDIT_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_2_20260727.md",
+        "reports/CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_AUDIT_20260728.md",
         "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
         "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md",
         "docs/adr/0009-aggtrades-system-canary-development-diagnostic.md",
@@ -441,9 +445,9 @@
       "active_authority": false,
       "authority": {
         "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-        "repo_ref": "experiment/crypto-search-engine-v1-2-20260727",
-        "verified_sha": "395a972a99c869f1c6acc24c6a167939b9f0857e",
-        "sha256": "707114559E327D1A188C9B8D2CCBEAA5B0BA856D2E39590C159494A783337D89"
+        "repo_ref": "experiment/crypto-search-surface-integration-v1-20260728",
+        "verified_sha": "c594727ef66239963ab7419cfaec1454e93acbaa",
+        "sha256": "AD472E7A3449B5DC750BC7FDB65A561B82B8803D7EE71BA0DF91C5D5970F0EF9"
       },
       "contracts": [
         {
@@ -533,15 +537,24 @@
           "enforced_by": "broad_search.search_engine_v1.check_v12",
           "bypass_forbidden": true,
           "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_2_20260727.md"
+        },
+        {
+          "id": "search_engine_v1_3_cross_carrier_boundary",
+          "type": "EVIDENCE",
+          "rule": "The one-run 4,000-candidate V1.3 Arena reused the aligned Broad39 plus aggTrades44 carrier, required both semantic sources in every candidate, persisted both axis waterfalls, restored four checkpoints, and found zero positive matched discoveries; CEM and Evolution each failed at least one frozen productivity dimension, so future-Arena qualification remains empty and no Alpha-space, OOS, or promotion conclusion is authorized",
+          "severity": "HARD",
+          "enforced_by": "broad_search.search_engine_v1.check_v13",
+          "bypass_forbidden": true,
+          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_AUDIT_20260728.md"
         }
       ],
       "validation": {
         "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "evidence-boundary-change",
-        "evidence_ref": "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
-        "evidence_sha256": "EEB9DB6E61166BCC88E4EF89C1EDC395A0B818B4028189D098C3C3FF759DFE01",
-        "verified_at_sha": "e4bcc5d64c00635dfbc4384c102fde0b5bf74ca5"
+        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_AUDIT_20260728.md",
+        "evidence_sha256": "07BB79D4705E4811B20D80E7113B47F48E1E4686259B7D4F56B60B45953CA21D",
+        "verified_at_sha": "5f7089faf24166dc3ed8687ef41c44b1bd4b194a"
       },
       "claim_badges": [
         "LEGACY 20K ENGINEERING PASS",
@@ -565,12 +578,15 @@
         "2K V1.2 BALANCED ARENA PASS",
         "CAMPAIGN-LOCAL COLLISION MEMORY VERIFIED",
         "V2.2 SEARCH INCREMENT REJECTED",
-        "212 RUNTIME-ACTIVE SEARCH FIELDS",
-        "48 DECLARED FIELD HOLDS",
+        "235 RUNTIME-ACTIVE SEARCH FIELDS",
+        "25 DECLARED FIELD HOLDS",
         "CONTEXT-BOUND CARRIERS",
         "NO ALPHA-SPACE CONCLUSION",
         "FUTURE ARENA ARMS NONE",
-        "NO OOS OR PROMOTION"
+        "NO OOS OR PROMOTION",
+        "4K V1.3 CROSS-SOURCE ARENA PASS",
+        "DUAL-AXIS LEDGER TRACE VERIFIED",
+        "V1.3 FUTURE ARENA ARMS NONE"
       ],
       "promotion_requirements": [
         "information-adequate new data",
