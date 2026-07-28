@@ -1,5 +1,5 @@
 {
-  "authority_conflict_count": 0,
+  "authority_conflict_count": 1,
   "base_field_count": 298,
   "canonical_field_count": 5509,
   "carrier_binding_count": 235,
@@ -14,8 +14,16 @@
   "creates_approval_authority": false,
   "creates_ontology": false,
   "derived_view_count": 5211,
+  "first_breakpoint_counts": {
+    "NO_CURRENT_CARRIER_BINDING": 5275,
+    "RAW_TOP50_COMPACT_MATERIALIZER_NOT_VERIFIED": 96,
+    "RESEARCH_ADMISSION_NOT_GRANTED": 235,
+    "SOURCE_OR_DATA_ADEQUACY_QUARANTINE": 7,
+    "SOURCE_UNAVAILABLE_ZERO_FINITE_SUPPORT_IN_DELIVERED_ROOT": 25
+  },
   "market_search_executed": false,
   "provenance_only_count": 4,
+  "reachability_row_count": 5638,
   "schema_version": 1,
   "search_role_binding_count": 852,
   "status": "PASS_COMPILED_VIEW_NOT_AUTHORITY"
