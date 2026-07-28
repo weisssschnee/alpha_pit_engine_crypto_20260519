@@ -955,14 +955,10 @@ def _load_carrier_gate_inputs(
     counts = base.sum(axis=0, dtype=np.int64).astype(float)
     regime = np.broadcast_to(counts, base.shape).copy()
     regime[~base] = np.nan
-    behavior_contract = freeze_search_behavior_contract(regime, base)
-    behavior_contract["pit_regime_source"] = "__BASE_ELIGIBLE_COUNT__"
-    behavior_contract["contract_sha256"] = _payload_sha(
-        {
-            key: value
-            for key, value in behavior_contract.items()
-            if key != "contract_sha256"
-        }
+    behavior_contract = freeze_search_behavior_contract(
+        regime,
+        base,
+        pit_regime_source="__BASE_ELIGIBLE_COUNT__",
     )
     metadata = _read_json(
         repo_root
@@ -5667,10 +5663,10 @@ def run_engine(
             raise ValueError("carrier gate requires one frozen carrier id")
         carrier_slug = str(carrier_id).lower()
         runtime_root = repo_root / (
-            f"runtime/crypto_search_carrier_gate_v1_r2_{carrier_slug}_{runtime_date}"
+            f"runtime/crypto_search_carrier_gate_v1_r3_{carrier_slug}_{runtime_date}"
         )
         report_path = repo_root / (
-            f"reports/crypto_search_carrier_gate_v1_r2_{carrier_slug.upper()}_{runtime_date}.md"
+            f"reports/CRYPTO_SEARCH_CARRIER_GATE_V1_R3_{carrier_slug.upper()}_{runtime_date}.md"
         )
         strict_target = CARRIER_GATE_STRICT_TARGET
         checkpoint_count = CARRIER_GATE_CHECKPOINT_COUNT

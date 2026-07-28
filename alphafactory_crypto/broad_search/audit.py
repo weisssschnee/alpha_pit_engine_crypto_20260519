@@ -516,6 +516,8 @@ def _behavior_sha(weights: np.ndarray, month_labels: np.ndarray) -> str:
 def freeze_search_behavior_contract(
     active_universe_size: np.ndarray,
     observed_support: np.ndarray,
+    *,
+    pit_regime_source: str | None = None,
 ) -> dict[str, Any]:
     """Freeze behavior quantization and a lag-only market-state regime contract."""
 
@@ -558,8 +560,11 @@ def freeze_search_behavior_contract(
         raise ValueError("lagged active_universe_size has no finite observations")
     quantiles = np.asarray(SEARCH_BEHAVIOR_DESCRIPTOR_SCHEMA["pit_regime_quantiles"])
     thresholds = np.quantile(finite, quantiles, method="linear").astype(float)
+    schema = dict(SEARCH_BEHAVIOR_DESCRIPTOR_SCHEMA)
+    if pit_regime_source is not None:
+        schema["pit_regime_source"] = str(pit_regime_source)
     return {
-        **dict(SEARCH_BEHAVIOR_DESCRIPTOR_SCHEMA),
+        **schema,
         "pit_regime_thresholds": thresholds.tolist(),
         "pit_regime_thresholds_sha256": _payload_sha(thresholds.tolist()),
         "frozen_observation_count": int(finite.size),
@@ -569,7 +574,7 @@ def freeze_search_behavior_contract(
         "observed_support_sha256": array_sha256(observed.astype(np.int8)),
         "contract_sha256": _payload_sha(
             {
-                **dict(SEARCH_BEHAVIOR_DESCRIPTOR_SCHEMA),
+                **schema,
                 "pit_regime_thresholds": thresholds.tolist(),
                 "frozen_observation_count": int(finite.size),
                 "pit_regime_source_validation": (
