@@ -100,7 +100,7 @@ CARRIER_GATE_ARMS = (
 CARRIER_GATE_CHECKPOINT_SIZE = 128
 CARRIER_GATE_CHECKPOINT_COUNT = 2
 CARRIER_GATE_STRICT_TARGET = 256
-CARRIER_GATE_RAW_ATTEMPT_LIMIT = 5_000
+CARRIER_GATE_RAW_ATTEMPT_LIMIT = 20_000
 CARRIER_GATE_WALL_TIME_LIMIT_SECONDS = 2 * 60 * 60
 CARRIER_GATE_CHECKPOINT_ALLOCATION = {
     "canonical_typed_random": 32,
@@ -5659,10 +5659,10 @@ def run_engine(
             raise ValueError("carrier gate requires one frozen carrier id")
         carrier_slug = str(carrier_id).lower()
         runtime_root = repo_root / (
-            f"runtime/crypto_search_carrier_gate_v1_{carrier_slug}_{runtime_date}"
+            f"runtime/crypto_search_carrier_gate_v1_r1_{carrier_slug}_{runtime_date}"
         )
         report_path = repo_root / (
-            f"reports/CRYPTO_SEARCH_CARRIER_GATE_V1_{carrier_slug.upper()}_{runtime_date}.md"
+            f"reports/CRYPTO_SEARCH_CARRIER_GATE_V1_R1_{carrier_slug.upper()}_{runtime_date}.md"
         )
         strict_target = CARRIER_GATE_STRICT_TARGET
         checkpoint_count = CARRIER_GATE_CHECKPOINT_COUNT

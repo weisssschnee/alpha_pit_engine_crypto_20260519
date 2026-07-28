@@ -12,7 +12,7 @@
     "strict_evaluated_target": 256,
     "checkpoint_size": 128,
     "checkpoint_count": 2,
-    "raw_generation_attempt_limit": 5000,
+    "raw_generation_attempt_limit": 20000,
     "wall_time_limit_seconds": 7200,
     "arms_per_checkpoint": {
       "canonical_typed_random": 32,
