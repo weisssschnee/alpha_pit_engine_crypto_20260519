@@ -5662,11 +5662,14 @@ def run_engine(
         if carrier_id not in CARRIER_GATE_IDS:
             raise ValueError("carrier gate requires one frozen carrier id")
         carrier_slug = str(carrier_id).lower()
+        carrier_revision = (
+            "r4" if carrier_id == "CORE3_MICROSTRUCTURE_PILOT" else "r3"
+        )
         runtime_root = repo_root / (
-            f"runtime/crypto_search_carrier_gate_v1_r3_{carrier_slug}_{runtime_date}"
+            f"runtime/crypto_search_carrier_gate_v1_{carrier_revision}_{carrier_slug}_{runtime_date}"
         )
         report_path = repo_root / (
-            f"reports/CRYPTO_SEARCH_CARRIER_GATE_V1_R3_{carrier_slug.upper()}_{runtime_date}.md"
+            f"reports/CRYPTO_SEARCH_CARRIER_GATE_V1_{carrier_revision.upper()}_{carrier_slug.upper()}_{runtime_date}.md"
         )
         strict_target = CARRIER_GATE_STRICT_TARGET
         checkpoint_count = CARRIER_GATE_CHECKPOINT_COUNT

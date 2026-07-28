@@ -360,7 +360,19 @@ class RawPanelStore:
 
     @property
     def timestamp_ns(self) -> np.ndarray:
-        return np.load(self.cache_root / "timestamp_ns.npy", mmap_mode="r")
+        values = np.load(self.cache_root / "timestamp_ns.npy", mmap_mode="r")
+        if values.size == 0:
+            return values
+        magnitude = abs(int(values[0]))
+        if magnitude >= 100_000_000_000_000_000:
+            return values
+        if magnitude >= 100_000_000_000_000:
+            return np.asarray(values, dtype=np.int64) * 1_000
+        if magnitude >= 100_000_000_000:
+            return np.asarray(values, dtype=np.int64) * 1_000_000
+        if magnitude >= 1_000_000_000:
+            return np.asarray(values, dtype=np.int64) * 1_000_000_000
+        raise ValueError("timestamp array is not a supported Unix time unit")
 
     def field(self, field_id: str) -> np.ndarray:
         if field_id not in self.metadata["field_ids"]:
