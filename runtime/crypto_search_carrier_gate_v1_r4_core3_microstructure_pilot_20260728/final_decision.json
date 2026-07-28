@@ -1,0 +1,30 @@
+{
+  "active_wall_seconds": 61.14019099998404,
+  "alpha_claim": false,
+  "arm_comparisons": {
+    "hierarchical_typed_cem_v2": {
+      "mean_pair_reward_delta": -0.002238949858166972,
+      "new_behavior_families_per_1k_delta": 0.0,
+      "top_decile_pair_reward_delta": -0.4623636765552528
+    },
+    "typed_evolution_v2": {
+      "mean_pair_reward_delta": 0.14147337764940193,
+      "new_behavior_families_per_1k_delta": 0.0,
+      "top_decile_pair_reward_delta": -0.5951529412568495
+    }
+  },
+  "behavior_family_count": 255,
+  "carrier_id": "CORE3_MICROSTRUCTURE_PILOT",
+  "checkpoint_count": 2,
+  "checkpoint_restore_verified": true,
+  "future_arena_qualification": false,
+  "generation_attempts": 274,
+  "oos": false,
+  "producer_source_sha": "333234156584e0de03dfe5dd7d044fed1fbb22c7",
+  "promotion": false,
+  "research_decision": "HOLD_DEVELOPMENT_FIXED_RETROSPECTIVE_CARRIER",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS_CARRIER_GATE_COMPLETED",
+  "strict_evaluated_count": 256
+}
