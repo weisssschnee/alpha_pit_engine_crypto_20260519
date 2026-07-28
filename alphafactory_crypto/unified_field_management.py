@@ -33,6 +33,13 @@ def _git_sha(repo_root: Path) -> str:
     ).strip()
 
 
+def _git_file_sha(repo_root: Path, source_sha: str, path: str) -> str:
+    content = subprocess.check_output(
+        ["git", "show", f"{source_sha}:{path}"], cwd=repo_root
+    )
+    return hashlib.sha256(content).hexdigest().upper()
+
+
 def _read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -596,7 +603,7 @@ def build_management_view(
         repo_root / config["inputs"]["field_information_config"]
     )
     production_files = {
-        path: sha256_file(repo_root / path)
+        path: _git_file_sha(repo_root, actual_sha, path)
         for path in config["production_paths"]
     }
     manifest = {
