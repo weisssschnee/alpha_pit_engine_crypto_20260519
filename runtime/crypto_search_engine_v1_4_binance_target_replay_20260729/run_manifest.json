@@ -1,0 +1,171 @@
+{
+  "artifact_bundle_sha256": "47216015D1D5FFFCFF7488A41DCF517D87EA787F6091B500209EC077E0A04702",
+  "artifacts": [
+    {
+      "bytes": 1633,
+      "path": "reports/CRYPTO_SEARCH_ENGINE_V1_4_BINANCE_TARGET_REPLAY_20260729.md",
+      "sha256": "E5680CDE1EAFFEE22543A2464CEA161DFCC6A20A902AE8C416607A5044611162"
+    },
+    {
+      "bytes": 573054,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/candidate_replay_ledger.parquet",
+      "sha256": "A0B5DACA7EDB18A601DBB4194BF141AB3FE666EF86DA1B736C24EE5C8441DB32"
+    },
+    {
+      "bytes": 169244,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_000/candidate_replay_ledger.parquet",
+      "sha256": "70A2AACD59B0A201987FA0F161ACA66562DD69CF6FAECDE5E9F5A2D67ACCAD99"
+    },
+    {
+      "bytes": 960026,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_000/full_waterfall.parquet",
+      "sha256": "48E94EE847039E4C913551493CAF2B4A858558CB958A2BEBA84493771FEAF04B"
+    },
+    {
+      "bytes": 1362,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_000/manifest.json",
+      "sha256": "EB215CF501DEAE0FD181C3E43CCB81EBA1EF59B4A91F2DDAA3644AE819A39C1F"
+    },
+    {
+      "bytes": 819856,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_000/monthly_waterfall.parquet",
+      "sha256": "E65F3C76730755B5CD25523B38E2F24F3AC9B3E07AA317EBF7EE17FF9D4C328D"
+    },
+    {
+      "bytes": 22175,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_000/state.json",
+      "sha256": "2BBD059D728C1E4FDFE30BD19668947F5ED80D5DB16D898C7533BF431F34C91D"
+    },
+    {
+      "bytes": 311725,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_001/candidate_replay_ledger.parquet",
+      "sha256": "59316F5C25DC66A7E594F9A98DAAAB83DD33217A2A92E5530618F823445C137D"
+    },
+    {
+      "bytes": 1888558,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_001/full_waterfall.parquet",
+      "sha256": "7F7CF31E6B488B768AECCF982E9C462CB4FB805AD19C16750FC1BB677384A079"
+    },
+    {
+      "bytes": 1364,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_001/manifest.json",
+      "sha256": "F0D6A664FB8D36E401F9EC79B545CA9C0F5B4D0702FCA365AB3C142E1C9BB5DE"
+    },
+    {
+      "bytes": 1628007,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_001/monthly_waterfall.parquet",
+      "sha256": "F67845BBC4950AD3E15BB60DD9BDD626C83060DC77633FDEE07AAE968D945921"
+    },
+    {
+      "bytes": 43775,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_001/state.json",
+      "sha256": "1747D8131D2375D09EC0AE6B0CA5655FB078937572DCF8665501960262B79908"
+    },
+    {
+      "bytes": 445384,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_002/candidate_replay_ledger.parquet",
+      "sha256": "D6AB4592016EE1A601D2157D03D9FD12D31C01A9C788A80FCB4138847DF33596"
+    },
+    {
+      "bytes": 2711583,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_002/full_waterfall.parquet",
+      "sha256": "374C24CC9A4813FF54ECA31FAADC085B60357E35CA13ADD69E14D7373F3BAAA6"
+    },
+    {
+      "bytes": 1364,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_002/manifest.json",
+      "sha256": "56F0BC16466B8C7745975952926EACE92D6244EAC67085CBBF17A0C0E9E5EE6B"
+    },
+    {
+      "bytes": 2338163,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_002/monthly_waterfall.parquet",
+      "sha256": "B0BEF16D65452F48E9B3393C4E7DD26F2752ECE36B27734081D69598F64F7BBF"
+    },
+    {
+      "bytes": 65375,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_002/state.json",
+      "sha256": "BE61F6D300EA532B4AA4A644052DF949CC7F07A12FFCA0DB9762ECFF5E7EF188"
+    },
+    {
+      "bytes": 573054,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_003/candidate_replay_ledger.parquet",
+      "sha256": "A0B5DACA7EDB18A601DBB4194BF141AB3FE666EF86DA1B736C24EE5C8441DB32"
+    },
+    {
+      "bytes": 3405189,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_003/full_waterfall.parquet",
+      "sha256": "BA10E4D972B0CA4198C499F3448477027FCD7C7A679FD3C79C31833C4E85B2F7"
+    },
+    {
+      "bytes": 1365,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_003/manifest.json",
+      "sha256": "21043695E39B1CF50DE0995F71CD84D439EECFA1C98B984ECD0843A106E7684C"
+    },
+    {
+      "bytes": 2987563,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_003/monthly_waterfall.parquet",
+      "sha256": "E2F54103A1D17F9E9A304021A80ECACF135D70683133515D4A11DE84D5B26CD5"
+    },
+    {
+      "bytes": 86977,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/checkpoints/checkpoint_003/state.json",
+      "sha256": "383BCF4B1F143AE190A8254DABA7667C4EB3262DD93EB7B254C2C50F82864B2C"
+    },
+    {
+      "bytes": 9701,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/constraint_bottleneck_matrix.parquet",
+      "sha256": "F014A5ED7912F3815AA70EA93BAB82D8A60ECEF58C4ADF479E7BB016C9483B88"
+    },
+    {
+      "bytes": 1332,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/embedded_preflight.json",
+      "sha256": "86A33E6026F2FF20CBF063EF578BAC7255D0E9DD840089B0EAF94FADDD295012"
+    },
+    {
+      "bytes": 520,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/final_decision.json",
+      "sha256": "C369FF6B1D7C9FB7F4CC39556B58A66F3A4EA82766354798C927162F639FAA56"
+    },
+    {
+      "bytes": 9570,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/frozen_contract.json",
+      "sha256": "A787094722FEBE3C7F471C448799F3B223D8880998EBFF823D42BA053AF98AE5"
+    },
+    {
+      "bytes": 3405189,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/full_waterfall.parquet",
+      "sha256": "BA10E4D972B0CA4198C499F3448477027FCD7C7A679FD3C79C31833C4E85B2F7"
+    },
+    {
+      "bytes": 2987563,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/monthly_waterfall.parquet",
+      "sha256": "E2F54103A1D17F9E9A304021A80ECACF135D70683133515D4A11DE84D5B26CD5"
+    },
+    {
+      "bytes": 7658,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/old_new_comparison.parquet",
+      "sha256": "3DA08C4D8FC6A9DA2AE0F42D5195B178D4386DA5FBF04CADD0693AE2FA93BD29"
+    },
+    {
+      "bytes": 1304,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/replay_metrics.json",
+      "sha256": "18A182CD0F8615D1623EF412FFC14C39ECCC90544229A98BB24945818813EEF4"
+    },
+    {
+      "bytes": 1222,
+      "path": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/target_contract.json",
+      "sha256": "754F15B1DCBEB040C1DE7F0989E3E5D6C51311A8AF325822D5203B95205AEB20"
+    }
+  ],
+  "checkpoint_count": 4,
+  "frozen_contract_sha256": "ADA30AE30B55B449F7FBE2C6B8E28E41757F4A8CEA87B5513D5277DA7FE2BF85",
+  "memory_fallback_used": true,
+  "new_candidate_generation_count": 0,
+  "producer_source_sha": "fe82d94e5530d13e933c0f3db5d2b4869ad34521",
+  "run_identity_sha256": "947ECB1A7C589804B7E1F7B389000B68E47D47133B9A90B16D4AB2FBF44E04B8",
+  "schema_version": 1,
+  "source_candidate_identity_sha256": "5D6B0FC87218907556A0228F862569A61075BB153A0A5A9265F5B74937372959",
+  "strict_replayed_count": 1200,
+  "target_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+  "workers_final": 8
+}

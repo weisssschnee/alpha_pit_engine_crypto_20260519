@@ -1,0 +1,39 @@
+{
+  "candidate_generation_count": 0,
+  "exact_candidate_count": 1200,
+  "gross_persistence": {
+    "final_increment_gross_lcb_positive_count": 86,
+    "final_increment_monthly_consistent_count": 320,
+    "joint_gross_persistent_count": 69,
+    "qualified_horizons": [
+      1,
+      4
+    ],
+    "qualified_semantic_groups": [
+      "BINARY_BASELINE",
+      "CROSS_VENUE_OI_X_FLOW_IMBALANCE_GIVEN_FUNDING",
+      "OI_LEVEL_X_AGGRESSOR_FLOW_GIVEN_BASIS",
+      "OI_NOTIONAL_X_PRICE_RESPONSE_GIVEN_TRADE_INTENSITY",
+      "PRICE_RESPONSE_X_LARGE_TRADE_GIVEN_OI_STATE"
+    ]
+  },
+  "gross_persistence_gates": {
+    "gross_lcb_positive_minimum": true,
+    "horizon_breadth": true,
+    "monthly_consistent_minimum": true,
+    "semantic_breadth": true
+  },
+  "gross_persistence_status": "PASS_GROSS_PERSISTS_DIAGNOSTIC",
+  "new_gross_lcb_positive_count": 86,
+  "new_gross_positive_count": 661,
+  "new_matched_positive_count": 0,
+  "new_mean_pair_reward": -5.342311873692693,
+  "new_net_positive_count": 32,
+  "old_gross_positive_count": 666,
+  "old_mean_pair_reward": -5.2350399704921635,
+  "old_new_gross_correlation": 0.8312120010143682,
+  "old_new_reward_correlation": 0.9593841120633062,
+  "process_cpu_seconds": 11203.546875,
+  "strict_replayed_count": 1200,
+  "worker_wall_seconds": 16575.715309599706
+}

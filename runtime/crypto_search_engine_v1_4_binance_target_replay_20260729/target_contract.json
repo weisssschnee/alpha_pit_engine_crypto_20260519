@@ -1,0 +1,37 @@
+{
+  "cache_role": "TARGET_OVERRIDE_ONLY_NOT_A_SECOND_PANEL_STORE",
+  "execution_delay_hours": 2,
+  "formula": "log(open_price[t+2+h] / open_price[t+2])",
+  "horizons_hours": [
+    1,
+    4
+  ],
+  "identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+  "missing_value_fill": null,
+  "positive_price_required": true,
+  "price_field": "open_price",
+  "price_file_sha256": "BF03D7E94AD5D154A9FC6FA0E0E5DFF5897231D2A9ABE15A127B3D6BB0B205BC",
+  "schema_version": 1,
+  "shape": [
+    144,
+    8827
+  ],
+  "source": "DELIVERED_AGGTRADES_COMPACT_1M_AGGREGATED_1H",
+  "source_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+  "target_files": {
+    "1": {
+      "bytes": 5084480,
+      "finite_count": 1011103,
+      "path": "target_return_1h.npy",
+      "sha256": "077CF9616F901E4F8FA15C5ABFF2C871C4FD11AFFA0A4D089E7E4773D6D73849"
+    },
+    "4": {
+      "bytes": 5084480,
+      "finite_count": 1001658,
+      "path": "target_return_4h.npy",
+      "sha256": "F842EACA4F35FFB61BD8E0E53BB1E6EF5C5232F7A4557253C58A35E82A87706D"
+    }
+  },
+  "timestamp_sha256": "D7178C55EBD5C6CC87C5273158EDB42635CEDB565A44B14599E611B111B5CE27",
+  "venue": "BINANCE_USD_M"
+}

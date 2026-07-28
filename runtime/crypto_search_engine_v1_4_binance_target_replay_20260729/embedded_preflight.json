@@ -1,0 +1,31 @@
+{
+  "candidate_generation_count": 0,
+  "compiler_valid_count": 1200,
+  "cost_bps": 5.0,
+  "exact_order_preserved": true,
+  "producer_source_sha": "fe82d94e5530d13e933c0f3db5d2b4869ad34521",
+  "qualified_window": {
+    "end_exclusive": "2026-07-01T00:00:00+00:00",
+    "excluded_empty_hours": 1,
+    "hours": 7337,
+    "selection_rule": "LONGEST_CONTIGUOUS_PRE_REWARD_BLOCK_WITH_AT_LEAST_3_ELIGIBLE_ASSETS",
+    "start": "2025-08-29T07:00:00+00:00"
+  },
+  "sealed_reads": 0,
+  "selected_candidate_count": 1200,
+  "selected_candidate_identity_sha256": "5D6B0FC87218907556A0228F862569A61075BB153A0A5A9265F5B74937372959",
+  "selected_candidate_spec_sha256": "C29FEBEB44DB5134FF75FDCB8CD960B2069CA2BD13AF640A49438AD96C039FE1",
+  "selected_stage": "STAGE_B",
+  "source_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+  "source_ledger": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/candidate_ledger.parquet",
+  "source_ledger_rows": 1264,
+  "source_ledger_sha256": "ACE1C67F19B59DF492F9495995FE57BC8CD16887B680B83B114813BFE2CF4FB4",
+  "status": "PASS",
+  "target_finite_on_qualified_window": {
+    "1": 843648,
+    "4": 834629
+  },
+  "target_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+  "workers_12_forbidden": true,
+  "workers_requested": 10
+}

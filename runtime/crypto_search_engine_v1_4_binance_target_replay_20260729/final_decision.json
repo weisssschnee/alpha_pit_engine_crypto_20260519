@@ -1,0 +1,14 @@
+{
+  "adaptive_search_started": false,
+  "bias_audit_decision": "HOLD",
+  "future_new_data_arena_qualified_arms": [],
+  "gross_persistence_status": "PASS_GROSS_PERSISTS_DIAGNOSTIC",
+  "new_candidate_generation_count": 0,
+  "next_action": "TURNOVER_REPAIR_THEN_BOUNDED_ADAPTIVE_SEARCH_IS_INFORMATION_BEARING",
+  "oos": false,
+  "promotion": false,
+  "research_qualification": "HOLD_SPENT_DEVELOPMENT_EXACT_REPLAY",
+  "sealed_reads": 0,
+  "status": "PASS_EXACT_REPLAY_COMPLETED",
+  "turnover_optimization_started": false
+}

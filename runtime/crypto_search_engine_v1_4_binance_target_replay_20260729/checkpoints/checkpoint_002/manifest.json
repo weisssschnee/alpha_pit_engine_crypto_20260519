@@ -1,0 +1,35 @@
+{
+  "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+  "checkpoint_index": 2,
+  "completed_candidate_count": 900,
+  "completed_identity_sha256": "075EA7A66E7D2FC728B07A93FC9DEDBE46512E04AECF4409CD854CCB4AB561AC",
+  "files": [
+    {
+      "bytes": 445384,
+      "name": "candidate_replay_ledger.parquet",
+      "sha256": "D6AB4592016EE1A601D2157D03D9FD12D31C01A9C788A80FCB4138847DF33596"
+    },
+    {
+      "bytes": 2711583,
+      "name": "full_waterfall.parquet",
+      "sha256": "374C24CC9A4813FF54ECA31FAADC085B60357E35CA13ADD69E14D7373F3BAAA6"
+    },
+    {
+      "bytes": 2338163,
+      "name": "monthly_waterfall.parquet",
+      "sha256": "B0BEF16D65452F48E9B3393C4E7DD26F2752ECE36B27734081D69598F64F7BBF"
+    },
+    {
+      "bytes": 65375,
+      "name": "state.json",
+      "sha256": "BE61F6D300EA532B4AA4A644052DF949CC7F07A12FFCA0DB9762ECFF5E7EF188"
+    }
+  ],
+  "frozen_contract_sha256": "ADA30AE30B55B449F7FBE2C6B8E28E41757F4A8CEA87B5513D5277DA7FE2BF85",
+  "restore_verified": true,
+  "schema_version": 1,
+  "source_candidate_identity_sha256": "5D6B0FC87218907556A0228F862569A61075BB153A0A5A9265F5B74937372959",
+  "source_sha": "fe82d94e5530d13e933c0f3db5d2b4869ad34521",
+  "state_sha256": "71A46C46BC2B6AB68D40340D3DB535A556F279AC99E8B61D106C6D601B15AB23",
+  "target_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0"
+}

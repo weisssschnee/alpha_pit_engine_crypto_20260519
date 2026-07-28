@@ -1,0 +1,235 @@
+{
+  "authorization": "EXACT_REPLAY_EXISTING_V1_4_STAGE_B_1200_ONLY",
+  "boundaries": {
+    "adaptive_search": false,
+    "alpha_claim": false,
+    "candidate_generation": false,
+    "challenge": false,
+    "cost_optimization": false,
+    "cross_sprint_adaptive_memory": false,
+    "development_only": true,
+    "fixed_retrospective_carrier": true,
+    "forward": false,
+    "latent_priority": false,
+    "may_stress": false,
+    "oos": false,
+    "operator_expansion": false,
+    "promotion": false,
+    "recent": false,
+    "relational_training": false,
+    "sealed_reads": 0,
+    "turnover_optimization": false
+  },
+  "budget": {
+    "candidate_evaluations_exact": 1200,
+    "new_candidate_generation": 0,
+    "wall_time_seconds_maximum": 64800,
+    "workers_12_forbidden": true,
+    "workers_default": 10,
+    "workers_memory_fallback": 8
+  },
+  "candidate_generation_count": 0,
+  "compiler_identity": {
+    "bundle_sha256": "5CB358C1694DF7713E35508F008EAA66B8F1BFDC9B5CD8A581CE107639A3CDF9",
+    "paths": [
+      {
+        "bytes": 53770,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "8A928F3FEAAE9E2F6E47A74FD8744B33CFA3B9CEEBD9D20A176EEDC5A123F0DA"
+      },
+      {
+        "bytes": 22088,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 61925,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "FA914235CD628673A0FD0C59F41CE507E1D24C62C7A75ABF3DE17031763B692F"
+      },
+      {
+        "bytes": 31438,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "EDE14083C986E36345F16A02065D13096147D8C64CC776AE412623512388ADAA"
+      },
+      {
+        "bytes": 110881,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "1BD17FD85586033436531B3BC4873FEEC0DB968428253B256960F202BD296085"
+      },
+      {
+        "bytes": 420647,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "B3C29B6A82F0202C73A8ECE75B1CE30BDA4653F227039DBC28425F9E5D4E2436"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "config_path": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+  "config_sha256": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
+  "evaluation": {
+    "behavior_archive_used_for_policy": false,
+    "candidate_order_changed": false,
+    "candidate_spec_changed": false,
+    "cost_bps": 5.0,
+    "cost_contract_changed": false,
+    "eligibility_changed": false,
+    "mapping_changed": false,
+    "reuse_existing_pair_evaluator": true
+  },
+  "evaluator_contract": {
+    "authoritative_pair_reward": "minimum strict feasibility distance across left and right incremental sleeves",
+    "control_behavior_identity_forbidden": true,
+    "control_exact_identity_forbidden": true,
+    "control_rule": "compare the primary independently with left-only and right-only SupportMatchedPayload controls; both retain identical raw support",
+    "hierarchical_three_axis_extension": {
+      "authoritative_pair_reward": "minimum strict feasibility distance across AB-A, AB-B, and ABC-AB",
+      "behavior_identity": "ABC_minus_AB incremental delta weight",
+      "conditional_gate": "ABC_minus_AB must pass",
+      "dag": "ABC=StateModulation(AB,C); AB=RatioInteraction(A,B)",
+      "interaction_gate": "AB_minus_A and AB_minus_B must both pass",
+      "shared_contract": "raw support, target, timestamps, eligibility, horizon, mapping, and cost are identical for A, B, AB, and ABC"
+    },
+    "incremental_turnover": "recomputed independently from delta weights",
+    "incremental_weight_formula": "primary_weight - each_axis_control_weight",
+    "lcb_contract": {
+      "authority": "NEWEY_WEST_BARTLETT",
+      "confidence_multiplier": 1.96,
+      "dependency_lags": "horizon_hours_minus_one",
+      "gross_lcb_role": "DIAGNOSTIC_ONLY",
+      "monthly_block_lcb": "DIAGNOSTIC_ONLY"
+    },
+    "match_on": [
+      "raw inputs",
+      "timestamps",
+      "dynamic eligibility",
+      "target horizon",
+      "mapping family and position cap",
+      "5 bps full-L1 cost model",
+      "raw support"
+    ],
+    "optional_behavior_identity": "FROZEN_OUTCOME_FREE_DESCRIPTOR_V1",
+    "pair_authority": "PRIMARY_WITH_LEFT_AND_RIGHT_AXIS_INCREMENTAL_DELTA_WEIGHT_SLEEVES",
+    "schema_version": 1,
+    "standalone_scalar_delta_role": "DIAGNOSTIC_ONLY",
+    "support_overlap_required": 1.0
+  },
+  "experiment_id": "20260729_crypto_search_engine_v1_4_binance_target_exact_replay",
+  "frozen_contract_sha256": "ADA30AE30B55B449F7FBE2C6B8E28E41757F4A8CEA87B5513D5277DA7FE2BF85",
+  "gross_persistence_gate": {
+    "final_increment_gross_lcb_positive_minimum": 12,
+    "final_increment_monthly_gross_positive_fraction_minimum": 0.6,
+    "minimum_horizons_represented": 2,
+    "minimum_semantic_groups_represented": 2,
+    "monthly_consistent_candidate_minimum": 12,
+    "role": "DIAGNOSTIC_BRANCH_GATE_NOT_ALPHA_QUALIFICATION"
+  },
+  "producer_source_sha": "fe82d94e5530d13e933c0f3db5d2b4869ad34521",
+  "qualified_window": {
+    "end_exclusive": "2026-07-01T00:00:00+00:00",
+    "excluded_empty_hours": 1,
+    "hours": 7337,
+    "selection_rule": "LONGEST_CONTIGUOUS_PRE_REWARD_BLOCK_WITH_AT_LEAST_3_ELIGIBLE_ASSETS",
+    "start": "2025-08-29T07:00:00+00:00"
+  },
+  "schema_version": 1,
+  "source_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+  "source_candidate_identity_sha256": "5D6B0FC87218907556A0228F862569A61075BB153A0A5A9265F5B74937372959",
+  "source_candidate_spec_sha256": "C29FEBEB44DB5134FF75FDCB8CD960B2069CA2BD13AF640A49438AD96C039FE1",
+  "source_ledger_sha256": "ACE1C67F19B59DF492F9495995FE57BC8CD16887B680B83B114813BFE2CF4FB4",
+  "target_cache_role": "TARGET_OVERRIDE_ONLY_NOT_A_SECOND_PANEL_STORE",
+  "target_contract": {
+    "execution_delay_hours": 2,
+    "formula": "log(open_price[t+2+h] / open_price[t+2])",
+    "horizons_hours": [
+      1,
+      4
+    ],
+    "missing_value_fill": null,
+    "positive_price_required": true,
+    "price_field": "open_price",
+    "source": "DELIVERED_AGGTRADES_COMPACT_1M_AGGREGATED_1H",
+    "venue": "BINANCE_USD_M"
+  },
+  "target_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+  "v14_input_identities": {
+    "aligned_carrier_manifest": {
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+      "sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6"
+    },
+    "compiler_identity": {
+      "bundle_sha256": "5CB358C1694DF7713E35508F008EAA66B8F1BFDC9B5CD8A581CE107639A3CDF9",
+      "paths": [
+        {
+          "bytes": 53770,
+          "path": "alphafactory_crypto/broad_search/audit.py",
+          "sha256": "8A928F3FEAAE9E2F6E47A74FD8744B33CFA3B9CEEBD9D20A176EEDC5A123F0DA"
+        },
+        {
+          "bytes": 22088,
+          "path": "alphafactory_crypto/broad_search/expression.py",
+          "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+        },
+        {
+          "bytes": 36886,
+          "path": "alphafactory_crypto/broad_search/panel18m.py",
+          "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+        },
+        {
+          "bytes": 61925,
+          "path": "alphafactory_crypto/broad_search/compositional18m.py",
+          "sha256": "FA914235CD628673A0FD0C59F41CE507E1D24C62C7A75ABF3DE17031763B692F"
+        },
+        {
+          "bytes": 31438,
+          "path": "alphafactory_crypto/broad_search/pair18m.py",
+          "sha256": "EDE14083C986E36345F16A02065D13096147D8C64CC776AE412623512388ADAA"
+        },
+        {
+          "bytes": 110881,
+          "path": "alphafactory_crypto/broad_search/runner18m.py",
+          "sha256": "1BD17FD85586033436531B3BC4873FEEC0DB968428253B256960F202BD296085"
+        },
+        {
+          "bytes": 420647,
+          "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+          "sha256": "B3C29B6A82F0202C73A8ECE75B1CE30BDA4653F227039DBC28425F9E5D4E2436"
+        },
+        {
+          "bytes": 34792,
+          "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+          "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+        }
+      ]
+    },
+    "qualified_continuous_window": {
+      "end_exclusive": "2026-07-01T00:00:00+00:00",
+      "excluded_empty_hours": 1,
+      "hours": 7337,
+      "selection_rule": "LONGEST_CONTIGUOUS_PRE_REWARD_BLOCK_WITH_AT_LEAST_3_ELIGIBLE_ASSETS",
+      "start": "2025-08-29T07:00:00+00:00"
+    },
+    "raw_cache": {
+      "directory_bundle": {
+        "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+        "bytes": 598775942,
+        "file_count": 122
+      },
+      "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+      "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+    },
+    "v14_config": {
+      "path": "config/crypto_search_engine_v1_4_oi_flow.json",
+      "sha256": "47D4687F334437BB12B4026283F9E18F2618AFD82FAD14337928890FC22C6C61"
+    }
+  }
+}
