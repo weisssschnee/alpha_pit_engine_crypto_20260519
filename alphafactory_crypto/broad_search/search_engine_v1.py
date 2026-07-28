@@ -1117,15 +1117,7 @@ def _load_v13_inputs(
     surface = field_role_surface(contracts)
     if not surface["compatible_skeleton_ids"] or not surface["all_fields_reachable"]:
         raise ValueError("V1.3 combined typed surface is not compiler reachable")
-    qualification = _read_json(
-        runtime_root / "stage_a_carrier_qualification.json"
-    )
-    qualified_window = qualification["qualified_continuous_window"]
-    block = store.block_slice(
-        str(qualified_window["start"]),
-        str(qualified_window["end_exclusive"]),
-    )
-    base = np.asarray(store.base_eligible()[:, block], dtype=bool)
+    base = np.asarray(store.base_eligible(), dtype=bool)
     counts = base.sum(axis=0, dtype=np.int64).astype(float)
     regime = np.broadcast_to(counts, base.shape).copy()
     regime[~base] = np.nan
@@ -8788,7 +8780,15 @@ def _load_v14_inputs(
         item.field_id for item in contracts
     ):
         raise ValueError("V1.4 aligned field order changed")
-    base = np.asarray(store.base_eligible(), dtype=bool)
+    qualification = _read_json(
+        runtime_root / "stage_a_carrier_qualification.json"
+    )
+    qualified_window = qualification["qualified_continuous_window"]
+    block = store.block_slice(
+        str(qualified_window["start"]),
+        str(qualified_window["end_exclusive"]),
+    )
+    base = np.asarray(store.base_eligible()[:, block], dtype=bool)
     counts = base.sum(axis=0, dtype=np.int64).astype(float)
     regime = np.broadcast_to(counts, base.shape).copy()
     regime[~base] = np.nan
