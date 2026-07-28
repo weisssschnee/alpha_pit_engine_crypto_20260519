@@ -1,0 +1,38 @@
+{
+  "active_wall_seconds": 4138.571267899999,
+  "alpha_claim": false,
+  "arm_comparisons": {
+    "hierarchical_typed_cem_v2": {
+      "mean_pair_reward_delta": 0.18636942342510832,
+      "new_behavior_families_per_1k_delta": 0.0,
+      "top_decile_pair_reward_delta": -0.17118438791425694,
+      "valid_exact_unique_per_cpu_hour_delta": 171.6713022071574
+    },
+    "typed_evolution_v2": {
+      "mean_pair_reward_delta": 0.8927915905625277,
+      "new_behavior_families_per_1k_delta": -90.625,
+      "top_decile_pair_reward_delta": 0.8060582614498744,
+      "valid_exact_unique_per_cpu_hour_delta": 16.172475375136855
+    }
+  },
+  "behavior_family_count": 3848,
+  "carrier_id": "BROAD_PANEL_BASELINE_X_AGGTRADES_TOP200_DELIVERED",
+  "checkpoint_count": 4,
+  "checkpoint_restore_verified": true,
+  "core3_exclusion": "THREE_ASSET_ONLY_NOT_USED_FOR_121_ASSET_ARENA",
+  "cross_carrier_strict_count": 4000,
+  "future_arena_qualification": false,
+  "future_new_data_arena_qualified_arms": [],
+  "generation_attempts": 7165,
+  "oi_mark_exclusion": "NO_COMMON_VERIFIED_TARGET_WINDOW",
+  "oos": false,
+  "positive_matched_discoveries": 0,
+  "producer_source_sha": "c594727ef66239963ab7419cfaec1454e93acbaa",
+  "promotion": false,
+  "research_decision": "HOLD_RESEARCH_FIXED_RETROSPECTIVE_CROSS_CARRIER",
+  "right_axis_ledger_trace": true,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS_SEARCH_ENGINE_V1_3_CROSS_CARRIER_COMPLETED",
+  "strict_evaluated_count": 4000
+}

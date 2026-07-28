@@ -1,0 +1,16 @@
+{
+  "all_cross_carrier": true,
+  "all_dual_axis_traced": true,
+  "checkpoint_manifest_sha256": "40129CBD42DB4814B01D4DA002D5C25A25B83D70EEF841BBB0F8D438FA4C6367",
+  "checkpoint_restore": "VERIFIED_AT_CHECKPOINT_000",
+  "compiler_validation": true,
+  "matched_controls": [
+    "left_only",
+    "right_only"
+  ],
+  "receipt_and_hash_replay": true,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS",
+  "strict_evaluated_count": 32
+}

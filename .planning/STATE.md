@@ -4,7 +4,22 @@ Last updated: 2026-07-28 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_CARRIER_ACTIVATION_MATCHED_GATE_V1_COMPLETED_HOLD_RESEARCH`
+`CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_COMPLETED_HOLD_RESEARCH`
+
+Search Engine V1.3 reused the existing 2024H1 physical carrier to evaluate
+4,000 fresh-state Broad39 x aggTrades44 candidates. Every candidate contained
+both semantic sources and completed dual-axis matched controls, turnover, and
+cost evaluation. The run used 7,165 attempts, retained 3,848 behavior
+families, restored four checkpoints exactly, and recorded zero sealed reads
+and zero positive matched discoveries. CEM improved density and mean reward
+but lost top-decile reward; Evolution improved reward ordering but lost
+behavior-family discovery and reached a 9.125% duplicate rate. No arm qualifies
+for a future new-data Arena. Engineering integrity is `PASS`; research remains
+`HOLD_RESEARCH_FIXED_RETROSPECTIVE_CROSS_CARRIER`. OI/mark was not joined
+because it has no common verified target window with another active carrier;
+Core3 remained outside the 121-asset Arena because its qualified context has
+only three assets. The right-axis ledger trace gap is closed for V1.3 without
+rerunning the prior 768 candidates.
 
 Carrier Activation & Fresh-State Matched Gate V1 reused the existing 235-field
 carrier surface and Search Engine implementation. It completed 768 fresh-state,
@@ -135,6 +150,11 @@ SEARCH_SURFACE_DECLARED_SOURCE_UNAVAILABLE_HOLDS_25
 BROAD39_CORE3_81_CONTEXT_SEPARATION_PRESERVED
 LIQUIDATION_AND_TOP50_OI_MARK_REMAIN_QUARANTINED
 SEARCH_SURFACE_FUTURE_ARENA_NOT_AUTHORIZED
+SEARCH_ENGINE_V1_3_CROSS_CARRIER_ENGINEERING_PASS
+SEARCH_ENGINE_V1_3_CROSS_CARRIER_RESEARCH_HOLD
+SEARCH_ENGINE_V1_3_FUTURE_ARMS_NONE
+SEARCH_ENGINE_V1_3_RIGHT_AXIS_LEDGER_TRACE_VERIFIED
+OI_MARK_CROSS_CARRIER_NO_COMMON_VERIFIED_TARGET_WINDOW
 UNIFIED_FIELD_MANAGEMENT_V1_COMPILED_VIEW_ACTIVE
 UNIFIED_FIELD_MANAGEMENT_V1_NOT_FIELD_AUTHORITY
 UNIFIED_FIELD_MANAGEMENT_V1_AUTHORITY_CONFLICTS_ZERO
