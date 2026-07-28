@@ -578,9 +578,9 @@
         "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "evidence-boundary-change",
-        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md",
-        "evidence_sha256": "E36D1971E7B507ADE7CF350C329F1DFB78B88B856A0DDE71A12B48080FF178E2",
-        "verified_at_sha": "d1db0033726c19a663486e8112f8e2a184028dfa"
+        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_FAILURE_DECOMPOSITION_20260728.md",
+        "evidence_sha256": "10BDC80509A68D0CE7D7304061E6EEC3A5D2D5B0F55A5C722E7DEE98BB2F762A",
+        "verified_at_sha": "6b960632792bbf7dc22910316653173fa0740995"
       },
       "claim_badges": [
         "LEGACY 20K ENGINEERING PASS",

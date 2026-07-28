@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-28T11:53:43.422724+00:00",
+  "generated_at": "2026-07-28T12:44:02.055017+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3067,6 +3067,15 @@
           "rule": "The one-run V1.4 gate aligned 71 OI/mark and 44 aggTrades fields over a frozen 7,337-hour dynamic-eligibility window, completed 64 constructibility and 1,200 typed-random semantic candidates with five exact-restored checkpoints, and found zero matched-positive binary, AB-interaction, or ABC-conditional mechanisms; the frozen gate therefore prevented adaptive Stage C and no Alpha-space, future-Arena, OOS, or promotion conclusion is authorized",
           "severity": "HARD",
           "type": "EVIDENCE"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "broad_search.failure_decomposition_v14.check_audit",
+          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_FAILURE_DECOMPOSITION_20260728.md",
+          "id": "search_engine_v1_4_failure_decomposition_boundary",
+          "rule": "The existing-ledger-only V1.4 audit consumed zero candidate evaluations and found 666/1,200 gross-positive final increments but only 26 net-positive, with 640 cost sign-kills; it also found that Binance flow used an availability-dependent non-Binance mark target and that full standalone/monthly waterfalls were not persisted, so target/execution and turnover repair must precede adaptive or operator expansion",
+          "severity": "HARD",
+          "type": "EVIDENCE"
         }
       ],
       "critical": true,
@@ -3074,7 +3083,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine capability (V1.4 OI/flow aligned carrier and hierarchical gate engineering PASS, research HOLD)",
+      "label": "Search Engine capability (V1.4 failure decomposition: target/execution and turnover repair first, research HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3106,6 +3115,9 @@
         "config/crypto_search_engine_v1_4_oi_flow.json",
         "runtime/crypto_search_engine_v1_4_oi_flow_20260728/run_manifest.json",
         "runtime/crypto_search_engine_v1_4_oi_flow_20260728/final_decision.json",
+        "alphafactory_crypto/broad_search/failure_decomposition_v14.py",
+        "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/run_manifest.json",
+        "runtime/crypto_search_engine_v1_4_failure_decomposition_20260728/final_decision.json",
         "reports/CRYPTO_SEARCH_ENGINE_V1_20260721.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_CODE_AUTHORITY_AUDIT_20260727.md",
@@ -3117,6 +3129,7 @@
         "reports/CRYPTO_SEARCH_ENGINE_V1_2_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_AUDIT_20260728.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md",
+        "reports/CRYPTO_SEARCH_ENGINE_V1_4_FAILURE_DECOMPOSITION_20260728.md",
         "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
         "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md",
         "docs/adr/0009-aggtrades-system-canary-development-diagnostic.md",
@@ -3214,6 +3227,33 @@
         "alphafactory_crypto_broad_search_compositional18m_validated_generation_genes",
         "alphafactory_crypto_broad_search_compositional18m_variant_operator",
         "alphafactory_crypto_broad_search_compositional18m_verify_typed_mutation_receipt",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_augment_ledger",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_check_audit",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_checkpoint_rank_correlations",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_constraint_bottleneck_rows",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_decision_rows",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_economic_waterfall_rows",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_finite_float",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_git_sha",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_input_records",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_joined",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_json_bytes",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_json_default",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_learnability_rows",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_main",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_manifest_records",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_oi_metric_statistic",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_payload_sha",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_rationale_1",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_read_json",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_report_text",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_run_audit",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_sha256_file",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_target_execution_rows",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_waterfall_summary",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_write_json",
+        "alphafactory_crypto_broad_search_failure_decomposition_v14_write_parquet",
         "alphafactory_crypto_broad_search_pair18m",
         "alphafactory_crypto_broad_search_pair18m_array_sha",
         "alphafactory_crypto_broad_search_pair18m_evaluate_pair",
@@ -3903,6 +3943,13 @@
         "reports_crypto_search_engine_v1_3_cross_carrier_audit_20260728_decision_64",
         "reports_crypto_search_engine_v1_3_cross_carrier_audit_20260728_independently_recomputed_results",
         "reports_crypto_search_engine_v1_3_cross_carrier_audit_20260728_scope_and_reuse",
+        "reports_crypto_search_engine_v1_4_failure_decomposition_20260728",
+        "reports_crypto_search_engine_v1_4_failure_decomposition_20260728_bias_audit",
+        "reports_crypto_search_engine_v1_4_failure_decomposition_20260728_blocking_issues",
+        "reports_crypto_search_engine_v1_4_failure_decomposition_20260728_crypto_search_engine_v1_4_failure_decomposition",
+        "reports_crypto_search_engine_v1_4_failure_decomposition_20260728_decision",
+        "reports_crypto_search_engine_v1_4_failure_decomposition_20260728_findings",
+        "reports_crypto_search_engine_v1_4_failure_decomposition_20260728_required_next_action",
         "reports_crypto_search_engine_v1_4_oi_flow_20260728",
         "reports_crypto_search_engine_v1_4_oi_flow_20260728_crypto_search_engine_v1_4_oi_flow",
         "reports_crypto_search_engine_v1_code_authority_audit_20260727",
@@ -4589,14 +4636,14 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-07-28T11:53:43.422724+00:00",
-        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md",
-        "evidence_sha256": "E36D1971E7B507ADE7CF350C329F1DFB78B88B856A0DDE71A12B48080FF178E2",
+        "checked_at": "2026-07-28T12:44:02.055017+00:00",
+        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_FAILURE_DECOMPOSITION_20260728.md",
+        "evidence_sha256": "10BDC80509A68D0CE7D7304061E6EEC3A5D2D5B0F55A5C722E7DEE98BB2F762A",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "evidence-boundary-change",
         "result": "PASS",
-        "verified_at_sha": "d1db0033726c19a663486e8112f8e2a184028dfa"
+        "verified_at_sha": "6b960632792bbf7dc22910316653173fa0740995"
       },
       "visible_by_default": true
     },
@@ -7352,7 +7399,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "903D99C41FFA713E0217A20BD4AC25E2640B4603F4B8F30876435CB8A21AED36"
+    "sha256": "46BBF78B642A4C90E20169811D4034CC2CEC429893F62F3D686D0FF8F18CF6DD"
   },
   "profile_id": null,
   "profiles": [
@@ -7383,13 +7430,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "d1db0033726c19a663486e8112f8e2a184028dfa",
-    "edge_count": 36796,
-    "node_count": 19455,
+    "built_at_commit": "6b960632792bbf7dc22910316653173fa0740995",
+    "edge_count": 36929,
+    "node_count": 19499,
     "path": ".planning/graphs/graph.json",
-    "sha256": "2984201E8873AE9F41EAFBA9FA33AC0EC6D44AA9C09B6092D28DF0C8B85ED9EA"
+    "sha256": "E0D0B5C77B895EC39EC783F78BFED4397D7669A92C1107E6DED1E9F6DCCECCE1"
   },
-  "repo_head": "d1db0033726c19a663486e8112f8e2a184028dfa",
+  "repo_head": "6b960632792bbf7dc22910316653173fa0740995",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
