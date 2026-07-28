@@ -1240,7 +1240,7 @@
         "path": "config/crypto_unified_field_management_v1.json",
         "repo_ref": "experiment/crypto-search-surface-integration-v1-20260728",
         "verified_sha": "45c9936302418d2dd9e4b7ec7dd4e8e0790e009b",
-        "sha256": "C6D0A1A9C1E24EB7FC0C2A80A400D4C8AA4A677A4E4979645920F7D7AEF4FBE8"
+        "sha256": "C576EC152F6EC62FB14D91D81CA659BA716C6C6617C00349A05FCBE0AB7446D7"
       },
       "contracts": [
         {
