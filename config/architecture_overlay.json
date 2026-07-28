@@ -396,7 +396,7 @@
     },
     {
       "id": "real_policy_upgrade_canary",
-      "label": "Search Engine capability (235-field carriers; V1.3 cross-source engineering PASS, research HOLD)",
+      "label": "Search Engine capability (V1.4 OI/flow aligned carrier and hierarchical gate engineering PASS, research HOLD)",
       "kind": "development_experiment",
       "lifecycle": "EXPERIMENTAL",
       "paths": [
@@ -425,6 +425,9 @@
         "config/crypto_search_engine_v1_3_cross_carrier.json",
         "runtime/crypto_search_engine_v1_3_cross_carrier_20260728/run_manifest.json",
         "runtime/crypto_search_engine_v1_3_cross_carrier_20260728/final_decision.json",
+        "config/crypto_search_engine_v1_4_oi_flow.json",
+        "runtime/crypto_search_engine_v1_4_oi_flow_20260728/run_manifest.json",
+        "runtime/crypto_search_engine_v1_4_oi_flow_20260728/final_decision.json",
         "reports/CRYPTO_SEARCH_ENGINE_V1_20260721.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_POST_AUDIT_REMEDIATION_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_CODE_AUTHORITY_AUDIT_20260727.md",
@@ -435,6 +438,7 @@
         "reports/CRYPTO_SEARCH_ENGINE_V1_1_BIAS_AUDIT_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_2_20260727.md",
         "reports/CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_AUDIT_20260728.md",
+        "reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md",
         "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
         "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md",
         "docs/adr/0009-aggtrades-system-canary-development-diagnostic.md",
@@ -445,9 +449,9 @@
       "active_authority": false,
       "authority": {
         "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-        "repo_ref": "experiment/crypto-search-surface-integration-v1-20260728",
-        "verified_sha": "c594727ef66239963ab7419cfaec1454e93acbaa",
-        "sha256": "AD472E7A3449B5DC750BC7FDB65A561B82B8803D7EE71BA0DF91C5D5970F0EF9"
+        "repo_ref": "experiment/crypto-search-engine-v1-4-oi-flow-20260728",
+        "verified_sha": "018be6caca5c7ad294729c17294295283589ec7d",
+        "sha256": "B3C29B6A82F0202C73A8ECE75B1CE30BDA4653F227039DBC28425F9E5D4E2436"
       },
       "contracts": [
         {
@@ -471,18 +475,18 @@
         {
           "id": "policy_canary_sealed_boundary",
           "type": "BOUNDARY",
-          "rule": "Search Engine campaigns use only their explicitly frozen spent-development surface with campaign-local per-run memory; the Broad and Core3 data planes remain separate, while sealed, report-only, challenge, recent, May-stress, forward, promotion, and cross-sprint adaptive memory remain forbidden",
+          "rule": "Search Engine campaigns use only their explicitly frozen surface with campaign-local per-run memory; V1.4 uses only its aligned OI/mark plus aggTrades carrier while Broad, Core3, and liquidation remain excluded, and sealed, report-only, challenge, recent, May-stress, forward, promotion, and cross-sprint adaptive memory remain forbidden",
           "severity": "HARD",
-          "enforced_by": "broad_search.search_engine_v1 frozen loaders, check_engine, check_canary, check_v11, and check_v12",
+          "enforced_by": "broad_search.search_engine_v1 frozen loaders, check_engine, check_canary, check_v11, check_v12, check_v13, and check_v14",
           "bypass_forbidden": true,
-          "evidence_ref": "runtime/crypto_search_engine_v1_2_20260727/frozen_contract.json"
+          "evidence_ref": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/frozen_contract.json"
         },
         {
           "id": "policy_canary_claim_scope",
           "type": "EVIDENCE",
-          "rule": "Neither the real policy-upgrade canary nor any Search Engine campaign qualifies an arm or archive for a future Arena; V1.1 rejected both behavior-niched increments and V1.2 rejected the collision-controlled Evolution V2.2 increment on the spent system carrier",
+          "rule": "No Search Engine campaign currently qualifies an arm or archive for a future Arena; V1.4 qualified the OI/flow carrier and hierarchical execution path but found zero matched positives in its frozen typed-random semantic gate, so CEM and Evolution Stage C did not run",
           "severity": "HARD",
-          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_2_20260727.md"
+          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md"
         },
         {
           "id": "search_engine_v1_counting_and_restore_gate",
@@ -505,7 +509,7 @@
         {
           "id": "new_data_pit_and_schema2_admission_gate",
           "type": "ADMISSION",
-          "rule": "A future Arena remains blocked until historical instrument identity is authoritative, actual symbol-date feature coverage closes the persisted gap manifest, Top50 OI/mark has an authorized materialized consumer, and a full post-join Broad39 schema-2 cache has complete required support; the current provisional PIT ledger and current498 intersection cache cannot authorize search",
+          "rule": "V1.4's bounded engineering gate may use the qualified 71-field OI/mark subset without implying full Top200 admission; a larger future Arena remains blocked until historical instrument identity and actual symbol-date coverage gaps are resolved and its specific carrier receives separate authorization",
           "severity": "HARD",
           "enforced_by": "alphafactory_crypto.data_admission_v1 and broad_search.panel18m.rebuild_panel_context_fields",
           "bypass_forbidden": true,
@@ -546,15 +550,24 @@
           "enforced_by": "broad_search.search_engine_v1.check_v13",
           "bypass_forbidden": true,
           "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_AUDIT_20260728.md"
+        },
+        {
+          "id": "search_engine_v1_4_oi_flow_conditional_boundary",
+          "type": "EVIDENCE",
+          "rule": "The one-run V1.4 gate aligned 71 OI/mark and 44 aggTrades fields over a frozen 7,337-hour dynamic-eligibility window, completed 64 constructibility and 1,200 typed-random semantic candidates with five exact-restored checkpoints, and found zero matched-positive binary, AB-interaction, or ABC-conditional mechanisms; the frozen gate therefore prevented adaptive Stage C and no Alpha-space, future-Arena, OOS, or promotion conclusion is authorized",
+          "severity": "HARD",
+          "enforced_by": "broad_search.search_engine_v1.check_v14",
+          "bypass_forbidden": true,
+          "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md"
         }
       ],
       "validation": {
         "level": "STATIC_VERIFIED",
         "result": "PASS",
         "profile": "evidence-boundary-change",
-        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_AUDIT_20260728.md",
-        "evidence_sha256": "07BB79D4705E4811B20D80E7113B47F48E1E4686259B7D4F56B60B45953CA21D",
-        "verified_at_sha": "5f7089faf24166dc3ed8687ef41c44b1bd4b194a"
+        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md",
+        "evidence_sha256": "E36D1971E7B507ADE7CF350C329F1DFB78B88B856A0DDE71A12B48080FF178E2",
+        "verified_at_sha": "018be6caca5c7ad294729c17294295283589ec7d"
       },
       "claim_badges": [
         "LEGACY 20K ENGINEERING PASS",
@@ -586,7 +599,12 @@
         "NO OOS OR PROMOTION",
         "4K V1.3 CROSS-SOURCE ARENA PASS",
         "DUAL-AXIS LEDGER TRACE VERIFIED",
-        "V1.3 FUTURE ARENA ARMS NONE"
+        "V1.3 FUTURE ARENA ARMS NONE",
+        "V1.4 OI-FLOW ALIGNED CARRIER PASS",
+        "HIERARCHICAL A-B-AB-ABC EXECUTION VERIFIED",
+        "1.2K V1.4 SEMANTIC GATE HOLD",
+        "V1.4 ADAPTIVE STAGE NOT RUN",
+        "V1.4 FUTURE ARENA ARMS NONE"
       ],
       "promotion_requirements": [
         "information-adequate new data",

@@ -1,0 +1,19 @@
+{
+  "alpha_claim": false,
+  "engineering_integrity": "PASS",
+  "future_new_data_arena_qualified_arms": [],
+  "generation_attempts": 1958,
+  "memory_fallback_used": true,
+  "oos": false,
+  "promotion": false,
+  "research_decision": "HOLD_RESEARCH",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_sha": "018be6caca5c7ad294729c17294295283589ec7d",
+  "stage_a": "PASS",
+  "stage_b": "HOLD_ADAPTIVE_GATE",
+  "stage_c": "NOT_RUN_STAGE_B_GATE",
+  "status": "PASS_SEARCH_ENGINE_V1_4_SEMANTIC_GATE_COMPLETED",
+  "strict_evaluated_count": 1264,
+  "workers_selected": 8
+}

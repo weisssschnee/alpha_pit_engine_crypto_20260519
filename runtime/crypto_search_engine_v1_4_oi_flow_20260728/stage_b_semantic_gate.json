@@ -1,0 +1,35 @@
+{
+  "gates": {
+    "all_semantic_tuple_quotas_complete": true,
+    "hierarchical_behavior_duplicate_rate_maximum": true,
+    "hierarchical_matched_positive_minimum": false,
+    "hierarchical_strict_completion_rate_minimum": true
+  },
+  "metrics": {
+    "behavior_duplicate_rate": 0.0,
+    "behavior_family_count": 1200,
+    "conditional_positive_count": 0,
+    "exact_unique_count": 1200,
+    "hierarchical_behavior_duplicate_rate": 0.0,
+    "hierarchical_count": 600,
+    "hierarchical_matched_positive_count": 0,
+    "interaction_positive_count": 0,
+    "matched_positive_count": 0,
+    "mean_pair_reward": -5.2350399704921635,
+    "semantic_tuple_counts": {
+      "CROSS_VENUE_OI_X_FLOW_IMBALANCE_GIVEN_FUNDING": 150,
+      "OI_LEVEL_X_AGGRESSOR_FLOW_GIVEN_BASIS": 150,
+      "OI_NOTIONAL_X_PRICE_RESPONSE_GIVEN_TRADE_INTENSITY": 150,
+      "PRICE_RESPONSE_X_LARGE_TRADE_GIVEN_OI_STATE": 150
+    },
+    "stage": "STAGE_B",
+    "strict_evaluated_count": 1200,
+    "top_decile_pair_reward": -2.189120857073992,
+    "verified_receipts": 0
+  },
+  "parameters_changed": false,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "seed_changed": false,
+  "status": "HOLD_ADAPTIVE_GATE"
+}

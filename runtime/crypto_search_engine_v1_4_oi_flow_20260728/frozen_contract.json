@@ -1,0 +1,396 @@
+{
+  "authorization": "ONE_FRESH_STATE_OI_FLOW_CONDITIONAL_MECHANISM_GATE",
+  "behavior_descriptor": {
+    "contract_sha256": "9E124327E45C67C6DF8F709BB90A282896BC1DF326547C743B2BD9457B280E7A",
+    "frozen_observation_count": 7336,
+    "mapped_weight_quantization_step": 0.05,
+    "observed_support_sha256": "303918A81C36D149208F60112F54AD7017DF164F2517C81140A3830180064B64",
+    "outcome_fields_in_identity": [],
+    "pit_regime_lag_hours": 1,
+    "pit_regime_quantiles": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "pit_regime_source": "__BASE_ELIGIBLE_COUNT__",
+    "pit_regime_source_validation": "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_INDEPENDENT_OBSERVED_SUPPORT",
+    "pit_regime_thresholds": [
+      113.0,
+      122.0,
+      131.0
+    ],
+    "pit_regime_thresholds_sha256": "785757855BFE6DC06D10E8E487C515B2738B629BDA7291B3029BC9274B70BCC4",
+    "rank_bucket_count": 10,
+    "rank_mean_quantization_step": 2.0,
+    "schema_version": "CRYPTO_SEARCH_BEHAVIOR_DESCRIPTOR_V1",
+    "selected_overlap_quantization_step": 0.1,
+    "selected_weight_epsilon": 1e-12,
+    "selection_rate_quantization_step": 0.2,
+    "turnover_bin_edges": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.5,
+      2.0,
+      3.0,
+      4.0
+    ],
+    "turnover_histogram_quantization_step": 0.1
+  },
+  "boundaries": {
+    "alpha_claim": false,
+    "broad": "EXCLUDED",
+    "challenge": false,
+    "core3": "EXCLUDED",
+    "cross_sprint_adaptive_memory": false,
+    "development_only": true,
+    "fixed_retrospective_carrier": true,
+    "forward": false,
+    "latent_priority": false,
+    "liquidation": "HOLD",
+    "may_stress": false,
+    "oos": false,
+    "promotion": false,
+    "recent": false,
+    "relational_training": false,
+    "sealed_reads": 0
+  },
+  "budget": {
+    "raw_generation_attempts_maximum": 50000,
+    "wall_time_seconds_maximum": 64800,
+    "workers_12_forbidden": true,
+    "workers_default": 10,
+    "workers_memory_fallback": 8
+  },
+  "compiler_identity": {
+    "bundle_sha256": "ED29593C6A2E9156BD2BAF1588FC138F27A43FBEE670D368A9D7780B0D9D0F1C",
+    "paths": [
+      {
+        "bytes": 53770,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "8A928F3FEAAE9E2F6E47A74FD8744B33CFA3B9CEEBD9D20A176EEDC5A123F0DA"
+      },
+      {
+        "bytes": 22088,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 61925,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "FA914235CD628673A0FD0C59F41CE507E1D24C62C7A75ABF3DE17031763B692F"
+      },
+      {
+        "bytes": 31233,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "B98E083768E35AA9F1A23B12373FB91150E2F6CFB883D5493E0E7C4F2680C231"
+      },
+      {
+        "bytes": 110881,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "1BD17FD85586033436531B3BC4873FEEC0DB968428253B256960F202BD296085"
+      },
+      {
+        "bytes": 420647,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "B3C29B6A82F0202C73A8ECE75B1CE30BDA4653F227039DBC28425F9E5D4E2436"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "epoch_id": "CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_CONDITIONAL_20260728",
+  "evaluator_contract": {
+    "authoritative_pair_reward": "minimum strict feasibility distance across left and right incremental sleeves",
+    "control_behavior_identity_forbidden": true,
+    "control_exact_identity_forbidden": true,
+    "control_rule": "compare the primary independently with left-only and right-only SupportMatchedPayload controls; both retain identical raw support",
+    "hierarchical_three_axis_extension": {
+      "authoritative_pair_reward": "minimum strict feasibility distance across AB-A, AB-B, and ABC-AB",
+      "behavior_identity": "ABC_minus_AB incremental delta weight",
+      "conditional_gate": "ABC_minus_AB must pass",
+      "dag": "ABC=StateModulation(AB,C); AB=RatioInteraction(A,B)",
+      "interaction_gate": "AB_minus_A and AB_minus_B must both pass",
+      "shared_contract": "raw support, target, timestamps, eligibility, horizon, mapping, and cost are identical for A, B, AB, and ABC"
+    },
+    "incremental_turnover": "recomputed independently from delta weights",
+    "incremental_weight_formula": "primary_weight - each_axis_control_weight",
+    "lcb_contract": {
+      "authority": "NEWEY_WEST_BARTLETT",
+      "confidence_multiplier": 1.96,
+      "dependency_lags": "horizon_hours_minus_one",
+      "monthly_block_lcb": "DIAGNOSTIC_ONLY"
+    },
+    "match_on": [
+      "raw inputs",
+      "timestamps",
+      "dynamic eligibility",
+      "target horizon",
+      "mapping family and position cap",
+      "5 bps full-L1 cost model",
+      "raw support"
+    ],
+    "optional_behavior_identity": "FROZEN_OUTCOME_FREE_DESCRIPTOR_V1",
+    "pair_authority": "PRIMARY_WITH_LEFT_AND_RIGHT_AXIS_INCREMENTAL_DELTA_WEIGHT_SLEEVES",
+    "schema_version": 1,
+    "standalone_scalar_delta_role": "DIAGNOSTIC_ONLY",
+    "support_overlap_required": 1.0
+  },
+  "experiment_id": "20260728_crypto_search_engine_v1_4_oi_flow",
+  "fresh_state": {
+    "old_archive_import": false,
+    "old_candidate_import": false,
+    "old_distribution_import": false,
+    "old_policy_state_import": false,
+    "old_population_import": false,
+    "old_reward_import": false,
+    "old_transition_memory_import": false
+  },
+  "frozen_contract_sha256": "50A8C014E3E162EE7F809E9496C85E758E760AA2B27092C470CCAC25ABC885BA",
+  "input_identities": {
+    "aligned_carrier_manifest": {
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+      "sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6"
+    },
+    "compiler_identity": {
+      "bundle_sha256": "ED29593C6A2E9156BD2BAF1588FC138F27A43FBEE670D368A9D7780B0D9D0F1C",
+      "paths": [
+        {
+          "bytes": 53770,
+          "path": "alphafactory_crypto/broad_search/audit.py",
+          "sha256": "8A928F3FEAAE9E2F6E47A74FD8744B33CFA3B9CEEBD9D20A176EEDC5A123F0DA"
+        },
+        {
+          "bytes": 22088,
+          "path": "alphafactory_crypto/broad_search/expression.py",
+          "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+        },
+        {
+          "bytes": 36886,
+          "path": "alphafactory_crypto/broad_search/panel18m.py",
+          "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+        },
+        {
+          "bytes": 61925,
+          "path": "alphafactory_crypto/broad_search/compositional18m.py",
+          "sha256": "FA914235CD628673A0FD0C59F41CE507E1D24C62C7A75ABF3DE17031763B692F"
+        },
+        {
+          "bytes": 31233,
+          "path": "alphafactory_crypto/broad_search/pair18m.py",
+          "sha256": "B98E083768E35AA9F1A23B12373FB91150E2F6CFB883D5493E0E7C4F2680C231"
+        },
+        {
+          "bytes": 110881,
+          "path": "alphafactory_crypto/broad_search/runner18m.py",
+          "sha256": "1BD17FD85586033436531B3BC4873FEEC0DB968428253B256960F202BD296085"
+        },
+        {
+          "bytes": 420647,
+          "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+          "sha256": "B3C29B6A82F0202C73A8ECE75B1CE30BDA4653F227039DBC28425F9E5D4E2436"
+        },
+        {
+          "bytes": 34792,
+          "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+          "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+        }
+      ]
+    },
+    "qualified_continuous_window": {
+      "end_exclusive": "2026-07-01T00:00:00+00:00",
+      "excluded_empty_hours": 1,
+      "hours": 7337,
+      "selection_rule": "LONGEST_CONTIGUOUS_PRE_REWARD_BLOCK_WITH_AT_LEAST_3_ELIGIBLE_ASSETS",
+      "start": "2025-08-29T07:00:00+00:00"
+    },
+    "raw_cache": {
+      "directory_bundle": {
+        "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+        "bytes": 598775942,
+        "file_count": 122
+      },
+      "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+      "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+    },
+    "v14_config": {
+      "path": "config/crypto_search_engine_v1_4_oi_flow.json",
+      "sha256": "47D4687F334437BB12B4026283F9E18F2618AFD82FAD14337928890FC22C6C61"
+    }
+  },
+  "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY_ONLY",
+  "schema_version": 1,
+  "source_sha": "018be6caca5c7ad294729c17294295283589ec7d",
+  "stages": {
+    "A": {
+      "binary_baseline_count": 32,
+      "constructibility_canary_strict_count": 64,
+      "hierarchical_three_axis_count": 32
+    },
+    "B": {
+      "adaptive_gate": {
+        "all_semantic_tuple_quotas_complete": true,
+        "hierarchical_behavior_duplicate_rate_maximum": 0.1,
+        "hierarchical_matched_positive_minimum": 1,
+        "hierarchical_strict_completion_rate_minimum": 0.9
+      },
+      "binary_baseline_fraction": 0.5,
+      "checkpoint_size": 300,
+      "hierarchical_three_axis_fraction": 0.5,
+      "minimum_tuple_count": 100,
+      "typed_random_strict_count": 1200
+    },
+    "C": {
+      "arms": {
+        "hierarchical_typed_cem_v2": 800,
+        "typed_evolution_v2": 800
+      },
+      "checkpoint_size": 400,
+      "enabled_only_if_stage_b_gate_passes": true,
+      "fresh_state": true,
+      "same_semantic_tuple_quota": true,
+      "strict_count": 1600
+    }
+  },
+  "surface": {
+    "binary_skeleton_registry_count": 40,
+    "field_count": 115,
+    "field_ids": [
+      "bybit__open_interest_last",
+      "bybit__open_interest_mean",
+      "bybit__open_interest_min",
+      "bybit__open_interest_max",
+      "bybit__open_interest_std",
+      "bybit__open_interest_value_last",
+      "bybit__open_interest_value_mean",
+      "bybit__open_interest_value_min",
+      "bybit__open_interest_value_max",
+      "bybit__open_interest_value_std",
+      "bybit__oi_n",
+      "bybit__mark_price_last",
+      "bybit__mark_price_mean",
+      "bybit__mark_price_min",
+      "bybit__mark_price_max",
+      "bybit__mark_price_std",
+      "bybit__index_price_last",
+      "bybit__index_price_mean",
+      "bybit__index_price_min",
+      "bybit__index_price_max",
+      "bybit__index_price_std",
+      "bybit__funding_rate_last",
+      "bybit__funding_rate_mean",
+      "bybit__funding_rate_min",
+      "bybit__funding_rate_max",
+      "bybit__funding_rate_std",
+      "bybit__mark_n",
+      "hyperliquid_futures__open_interest_last",
+      "hyperliquid_futures__open_interest_mean",
+      "hyperliquid_futures__open_interest_min",
+      "hyperliquid_futures__open_interest_max",
+      "hyperliquid_futures__open_interest_std",
+      "hyperliquid_futures__oi_n",
+      "hyperliquid_futures__mark_price_last",
+      "hyperliquid_futures__mark_price_mean",
+      "hyperliquid_futures__mark_price_min",
+      "hyperliquid_futures__mark_price_max",
+      "hyperliquid_futures__mark_price_std",
+      "hyperliquid_futures__index_price_last",
+      "hyperliquid_futures__index_price_mean",
+      "hyperliquid_futures__index_price_min",
+      "hyperliquid_futures__index_price_max",
+      "hyperliquid_futures__index_price_std",
+      "hyperliquid_futures__funding_rate_last",
+      "hyperliquid_futures__funding_rate_mean",
+      "hyperliquid_futures__funding_rate_min",
+      "hyperliquid_futures__funding_rate_max",
+      "hyperliquid_futures__funding_rate_std",
+      "hyperliquid_futures__mark_n",
+      "okx_futures__open_interest_last",
+      "okx_futures__open_interest_mean",
+      "okx_futures__open_interest_min",
+      "okx_futures__open_interest_max",
+      "okx_futures__open_interest_std",
+      "okx_futures__open_interest_value_last",
+      "okx_futures__open_interest_value_mean",
+      "okx_futures__open_interest_value_min",
+      "okx_futures__open_interest_value_max",
+      "okx_futures__open_interest_value_std",
+      "okx_futures__oi_n",
+      "okx_futures__mark_price_last",
+      "okx_futures__mark_price_mean",
+      "okx_futures__mark_price_min",
+      "okx_futures__mark_price_max",
+      "okx_futures__mark_price_std",
+      "okx_futures__funding_rate_last",
+      "okx_futures__funding_rate_mean",
+      "okx_futures__funding_rate_min",
+      "okx_futures__funding_rate_max",
+      "okx_futures__funding_rate_std",
+      "okx_futures__mark_n",
+      "agg_trade_count",
+      "underlying_trade_count",
+      "quantity",
+      "notional",
+      "buy_agg_trade_count",
+      "sell_agg_trade_count",
+      "buy_underlying_trade_count",
+      "sell_underlying_trade_count",
+      "buy_quantity",
+      "sell_quantity",
+      "buy_notional",
+      "sell_notional",
+      "signed_aggressor_quantity",
+      "signed_aggressor_notional",
+      "trade_count_le_100",
+      "trade_count_100_1k",
+      "trade_count_1k_10k",
+      "trade_count_10k_100k",
+      "trade_count_100k_1m",
+      "trade_count_gt_1m",
+      "notional_le_100",
+      "notional_100_1k",
+      "notional_1k_10k",
+      "notional_10k_100k",
+      "notional_100k_1m",
+      "notional_gt_1m",
+      "open_price",
+      "high_price",
+      "low_price",
+      "close_price",
+      "max_trade_notional",
+      "vwap",
+      "buy_vwap",
+      "sell_vwap",
+      "avg_agg_trade_notional",
+      "avg_underlying_trade_notional",
+      "volume_imbalance",
+      "buy_sell_notional_ratio",
+      "price_range_bps",
+      "close_to_open_bps",
+      "large_trade_count_100k_plus",
+      "large_notional_100k_plus",
+      "large_trade_count_ratio_100k_plus",
+      "large_notional_ratio_100k_plus"
+    ],
+    "new_ast": false,
+    "new_compiler": false,
+    "new_evaluator": false,
+    "semantic_tuples": [
+      "OI_LEVEL_X_AGGRESSOR_FLOW_GIVEN_BASIS",
+      "PRICE_RESPONSE_X_LARGE_TRADE_GIVEN_OI_STATE",
+      "CROSS_VENUE_OI_X_FLOW_IMBALANCE_GIVEN_FUNDING",
+      "OI_NOTIONAL_X_PRICE_RESPONSE_GIVEN_TRADE_INTENSITY"
+    ],
+    "target_formula_changed": false
+  }
+}

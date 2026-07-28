@@ -1,0 +1,31 @@
+{
+  "archive_state_sha256": "B94F1C42A36CC837476C330D2E28385C08B2B3614F456170270EE0A8B6521625",
+  "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+  "cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+  "checkpoint": "checkpoint_stage_b_003",
+  "completed_identity_sha256": "CB9A53F51FE4FE9D8C35DFF479FA1210F8E03A3752B2F2FEBA0B201C03589F73",
+  "completed_ledger_row_count": 1264,
+  "files": [
+    {
+      "bytes": 1302762,
+      "name": "behavior_archive.parquet",
+      "sha256": "18C29E309221948DC0992D8ACB89971E31327CA3B3B49630FD958D1FC45D8185"
+    },
+    {
+      "bytes": 1136164,
+      "name": "candidate_ledger.parquet",
+      "sha256": "ACE1C67F19B59DF492F9495995FE57BC8CD16887B680B83B114813BFE2CF4FB4"
+    },
+    {
+      "bytes": 102650,
+      "name": "state.json",
+      "sha256": "10442DA8D2B9611B7E242326FEC21C69BBB8C43ADF052B83B7897CFD8A493D4B"
+    }
+  ],
+  "frozen_contract_sha256": "50A8C014E3E162EE7F809E9496C85E758E760AA2B27092C470CCAC25ABC885BA",
+  "restore_verified": true,
+  "schema_version": 1,
+  "source_sha": "018be6caca5c7ad294729c17294295283589ec7d",
+  "stage": "STAGE_B",
+  "state_sha256": "EE88C012274B0CDB0AA7B6A200629D56C6DE981D4E2D8A47FCE9640BA3DC9B7F"
+}

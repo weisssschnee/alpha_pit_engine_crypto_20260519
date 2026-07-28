@@ -4,7 +4,22 @@ Last updated: 2026-07-28 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_COMPLETED_HOLD_RESEARCH`
+`CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_CONDITIONAL_GATE_COMPLETED_HOLD_RESEARCH`
+
+Search Engine V1.4 built one aligned `71 OI/mark + 44 aggTrades` carrier and
+froze the longest pre-reward continuous eligible block: 7,337 hours from
+2025-08-29 07:00 UTC through 2026-07-01 00:00 UTC, with 144 assets ever
+eligible and 58-143 active per hour. Stage A completed 64 constructibility
+candidates and verified five atomic checkpoint restores across the campaign.
+Stage B completed exactly 1,200 fresh typed-random candidates: 600 binary
+baselines plus 150 candidates for each of four hierarchical OI/flow/state
+tuples. All were compile-valid, exact-unique, matched-control-valid,
+full-cost-evaluated, and behavior-family unique. Pair reward mean was
+`-5.235040`, exact-count top decile was `-2.189121`, and no binary,
+interaction, conditional, or final matched-positive discovery occurred. The
+frozen semantic gate therefore held Stage C before CEM or Evolution consumed
+budget. Engineering integrity is `PASS`; research remains `HOLD_RESEARCH`;
+future new-data Arena qualification remains empty.
 
 Search Engine V1.3 reused the existing 2024H1 physical carrier to evaluate
 4,000 fresh-state Broad39 x aggTrades44 candidates. Every candidate contained
@@ -154,7 +169,12 @@ SEARCH_ENGINE_V1_3_CROSS_CARRIER_ENGINEERING_PASS
 SEARCH_ENGINE_V1_3_CROSS_CARRIER_RESEARCH_HOLD
 SEARCH_ENGINE_V1_3_FUTURE_ARMS_NONE
 SEARCH_ENGINE_V1_3_RIGHT_AXIS_LEDGER_TRACE_VERIFIED
-OI_MARK_CROSS_CARRIER_NO_COMMON_VERIFIED_TARGET_WINDOW
+OI_MARK_CROSS_CARRIER_NO_COMMON_VERIFIED_TARGET_WINDOW_SUPERSEDED_BY_V1_4_ALIGNED_CARRIER
+SEARCH_ENGINE_V1_4_OI_FLOW_ALIGNED_CARRIER_ENGINEERING_PASS
+SEARCH_ENGINE_V1_4_HIERARCHICAL_THREE_AXIS_EXECUTION_VERIFIED
+SEARCH_ENGINE_V1_4_SEMANTIC_GATE_HOLD
+SEARCH_ENGINE_V1_4_STAGE_C_NOT_RUN
+SEARCH_ENGINE_V1_4_FUTURE_ARMS_NONE
 UNIFIED_FIELD_MANAGEMENT_V1_COMPILED_VIEW_ACTIVE
 UNIFIED_FIELD_MANAGEMENT_V1_NOT_FIELD_AUTHORITY
 UNIFIED_FIELD_MANAGEMENT_V1_AUTHORITY_CONFLICTS_ZERO
@@ -166,7 +186,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 ## Accepted identities
 
 - Provenance closure: branch `origin/audit/evalreset-collapse-forensics-20260711`, commit `4726795f61052470d56e2d1475e4f6da9d262943`, tag `crypto-frontier-provenance-closure-20260714`.
-- Current research branch: `experiment/crypto-search-surface-integration-v1-20260728`.
+- Current research branch: `experiment/crypto-search-engine-v1-4-oi-flow-20260728`.
 - Explicit/latent implementation qualification: `7389a36ebb4ee62f57aeb818cf4db7157bd1ea9f`.
 - Field Information V0 source: `057e31df71f55f9e3a6e8ea3b48d53293d7d2e13`; run identity SHA256: `623036F48CBC8089CC61E81876F3A1E14199FC781456BF9F39183F8A129E53D6`.
 - Latest qualified Graph closure before this maintenance phase: `920e0ad35c07e2e2cee3ed2be8ad0753937f86f4`.
@@ -178,6 +198,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 - Fresh-state aggTrades Search-System Canary V1: producer source `5a17a91732a7aca7ec53cf9e10963faf2998a649`; artifact bundle SHA256 `880BC5D5AD5F47242FD534AD4AD0A9C40C4BFBE91A76523E773CA487F9A4EC74`; frozen contract SHA256 `FD61656C7D53A682B8E8CA4E9C704B8D655F9EE3CFC2B3124B796243E1E06FAD`; data-cache identity SHA256 `127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04`; 2,000 strict candidates; 3,452 attempts; 2/2 exact-restored checkpoints; 1,946 behavior families; engineering integrity `PASS`; research `HOLD_RESEARCH_FIXED_RETROSPECTIVE_COHORT`; future qualified arms `[]`; sealed reads `0`.
 - Search Engine V1.1 Behavior-Niched Arena: producer source `17ac5de989dec464b0c4903256f3f7662eeb9778`; artifact bundle SHA256 `E27E0F116CBE1D1FB3F23D76178688AA44E4D1DE6738D02284F3D6F6FCA729A8`; frozen contract SHA256 `A94F0AE452FF626823E4408A786DBC7B7979EDBAEB5843950A10853548A393CC`; data-cache identity SHA256 `127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04`; 3,000 strict candidates; 5,444 attempts; 2/2 exact-restored checkpoints; 2,916 behavior families; 42 champion replacements; engineering integrity `PASS`; research `HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT`; CEM V2.1 and Evolution V2.1 increments rejected; future qualified arms `[]`; sealed reads `0`.
 - Search Engine V1.2 Balanced Collision Arena: producer source `395a972a99c869f1c6acc24c6a167939b9f0857e`; artifact bundle SHA256 `F142EB44FE91C349A54F0D7C78C704A491658B7FBC0B30402E0B08E5B8459296`; frozen contract SHA256 `620B40B5AEE6634BB719E3AA0FA95B778939CB66264869DC7E851A8949EB1C83`; data-cache identity SHA256 `127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04`; 2,000 strict candidates; 3,598 attempts; 2/2 exact-restored checkpoints; 1,916 behavior families; 250 balanced rotating micro-batches; engineering integrity `PASS`; research `HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT`; Evolution V2.2 increment rejected; future qualified arms `[]`; sealed reads `0`.
+- Search Engine V1.4 OI/flow conditional gate: producer source `018be6caca5c7ad294729c17294295283589ec7d`; artifact bundle SHA256 `3AE3E801A58C1C3F9AEABFB80F7E748AF933C026BA2A99EB1E6EDB429F24BF7E`; aligned-cache identity SHA256 `E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA`; `71 OI/mark + 44 aggTrades`; 1,264 strict candidates from 1,958 attempts; 5/5 exact-restored checkpoints; 1,264 behavior families; Stage B `HOLD_ADAPTIVE_GATE`; Stage C not run; future qualified arms `[]`; sealed reads `0`.
 - Search Surface Integration V1: producer source `caa4500485995119a908790508030e305add6841`; source-binding SHA256 `D1AF43DAB909256A8B9EF171E70548B58DC3CC524852194071263A636AA87C7D`; run-manifest SHA256 `5959D31E6218E0A12EDE2730D68F97D012B7AC9164AC06EA8BD31850A9BE7BF2`; carrier-manifest SHA256 `F4E1A3F81B7C7F80097FE42B52DEBE5E086C884D7123FB854A360F3868E691D8`; frozen-contract identity SHA256 `28368DC76F3C3D150A8B1EAD8C9D13011CB6B754AAFFF67BF1D7DFBD42A6B176`; aggTrades full-44 carrier identity SHA256 `0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6`; 260 declared engineering fields, 235 runtime-active, 25 explicit source-unavailable HOLD; checker `PASS`; research and future Arena `HOLD`; market pair evaluations/reward/sealed reads `0`.
 - Unified Field Management V1: producer source `43739edd18c264bfa9b4ce11a3953c95b6ca58db`; config SHA256 `C6D0A1A9C1E24EB7FC0C2A80A400D4C8AA4A677A4E4979645920F7D7AEF4FBE8`; committed run-manifest SHA256 `A2DDFC630F9FF48F5804AAB816A92AFB62E95A75550669D6DD8BC14705791478`; 5,509 canonical management records, 5,211 existing lazy derived views, 235 independent carrier bindings, four provenance-only exclusions, zero authority conflicts; compiled view only, not field authority; market search/reward/sealed reads `0`.
 - Unified Field Management V1 closure repair: production source `f21ed7d1375904f62cb0cc03abb350ea56f911cd`; artifact commit `45c9936302418d2dd9e4b7ec7dd4e8e0790e009b`; production bundle SHA256 `BD72E2C8934B00BDCE32ADB720F322DC88F95705DFF7A9E0E64179957AD32E3B`; committed run-manifest SHA256 `F44A54C9F09AACB0FEB5E8E293041BBDE8E101F95CD1C7B3651E095E0A121FEC`; 5,638 reachability rows; one nonfatal scoped PIT-authority difference; fatal authority conflicts `0`; no market search or reward read.
@@ -230,9 +251,9 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 
 ## Active execution plan
 
-1. Treat the continuation, policy canary, Search Engine V1 20k campaign, aggTrades canary, Search Engine V1.1 Arena, and Search Engine V1.2 Arena as spent development engineering evidence; do not rerun, tune, rewrite, or import their candidate, reward, distribution, population, policy, archive, or transition-memory state.
+1. Treat the continuation, policy canary, Search Engine V1 20k campaign, aggTrades canary, and Search Engine V1.1-V1.4 campaigns as spent development engineering evidence; do not rerun, tune, rewrite, or import their candidate, reward, distribution, population, policy, archive, or transition-memory state.
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
-3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. Requalification requires a separately authorized fresh-state run over an admitted carrier; do not add another control plane.
+3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.4 qualified the OI/flow carrier and hierarchical execution path, but its typed-random semantic gate produced zero matched positives and correctly prevented adaptive Stage C; do not add another control plane.
 4. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
 5. Do not launch another large search until separately authorized over an admitted new release. Latent search priority remains deferred after V1.2 and cannot influence budget.
 6. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
@@ -243,7 +264,7 @@ No performance search or large experiment is authorized merely by this plan.
 
 ## Qualified policy components
 
-The implementation preserves compiler authority, matched controls, deterministic replay, balanced rotating micro-batches, campaign-local transition memory, and exact checkpoint restoration, but no search arm or archive is currently qualified for a future Arena. V1.2 verified that Evolution V2.2 improved repair density and reward ordering while failing its behavior-discovery and duplicate gates. Research qualification remains suspended until separately authorized fresh-state work exercises an admitted new carrier; V1.1/V1.2 state and trajectories cannot seed it.
+The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched controls, deterministic replay, campaign-local memory, and exact checkpoint restoration, but no search arm or archive is currently qualified for a future Arena. V1.4 exercised a newly aligned OI/flow carrier and stopped at its frozen typed-random semantic gate, so CEM V2 and Evolution V2 received no qualification evidence from V1.4. V1.1-V1.4 state and trajectories cannot seed another campaign.
 
 ## Blockers
 
@@ -252,6 +273,7 @@ The implementation preserves compiler authority, matched controls, deterministic
 - Search Engine V1 arm-productivity and behavior-family comparisons are research-invalid because panel-context identity and 4h reward uncertainty were defective; the historical run remains engineering-valid, and all trajectories, policies, and archive state are spent and cannot seed another campaign.
 - Search Engine V1.1 used a repaired system carrier and exact equal-count controls, but both proposed policy increments failed: CEM lost unit-compute density and Evolution lost both density and behavior-family yield while duplicate rate increased. This rejects the V2.1 engineering increments, not the existence of crypto Alpha.
 - Search Engine V1.2 used balanced rotating micro-batches and campaign-global transition collision memory, but Evolution V2.2 still lost behavior-family yield and exceeded the 3% duplicate gate. This rejects the V2.2 engineering increment, not the existence of crypto Alpha.
+- Search Engine V1.4 proved that OI/mark and aggTrades can share a real, PIT/lag-safe, dynamically eligible carrier and that hierarchical A/B/AB/ABC controls execute without a new AST or evaluator. Its 1,200-candidate semantic gate found zero matched positives across all four frozen tuples, so adaptive-policy attribution was not authorized. This is a bounded mechanism-space negative, not evidence that the supplied fields or crypto market contain no Alpha.
 - Historical aggTrades coverage remains narrower than the observed-archive surface; the qualified Core3 slice has 3 assets, 4,368 hours, and 13,068 eligible observations.
 - The delivered current cohorts are not historical PIT-complete. Every one of 893 provisional Top200 dates has feature-surface gaps; Top50 OI/mark remains raw-only without an authorized materialized consumer. `BDXNUSDT` lacks historical type authority and would alter 76 Top200 dates if admitted as crypto.
 - Qlib and DeepDow remain data-underpowered; neither supplies a clean economic negative for its full external paradigm.
@@ -284,9 +306,10 @@ No status code overrides observed runtime or source facts.
 ## Next action
 
 Stop at this closure and preserve all Search Engine and Search Surface bundles
-as immutable evidence. The 235 active fields are engineering-reachable, not
-research-admitted; no V1.1 or V1.2 arm qualifies for a future new-data Arena.
-Any next search-capability iteration requires separate authorization and a new
-frozen spec. Do not automatically spend a market-evaluation budget, start a
-larger/new-data Arena, train latent priority, open sealed roles, or promote
+as immutable evidence. The V1.4 aligned carrier and hierarchical mechanism
+path are engineering-qualified, but the frozen Stage-B semantic gate held and
+no adaptive arm qualifies for a future new-data Arena. Any next
+search-capability iteration requires separate authorization and a new frozen
+spec. Do not automatically spend a larger market-evaluation budget, train
+latent priority, open sealed roles, run OOS/challenge/forward, or promote
 candidates.

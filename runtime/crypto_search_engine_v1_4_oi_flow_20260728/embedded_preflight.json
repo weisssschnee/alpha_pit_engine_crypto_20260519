@@ -1,0 +1,13 @@
+{
+  "assets": 144,
+  "cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+  "field_count": 115,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "source_sha": "018be6caca5c7ad294729c17294295283589ec7d",
+  "status": "PASS_READY_STAGE_A_CANARY",
+  "timestamps": 8827,
+  "workers_12_forbidden": true,
+  "workers_memory_fallback": 8,
+  "workers_requested": 10
+}

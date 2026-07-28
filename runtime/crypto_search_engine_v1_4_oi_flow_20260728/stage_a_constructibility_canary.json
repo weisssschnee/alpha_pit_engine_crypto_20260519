@@ -1,0 +1,37 @@
+{
+  "binary_baseline_count": 32,
+  "checkpoint_restore": "VERIFIED",
+  "controls": [
+    "A",
+    "B",
+    "AB",
+    "ABC"
+  ],
+  "hierarchical_three_axis_count": 32,
+  "metrics": {
+    "behavior_duplicate_rate": 0.0,
+    "behavior_family_count": 64,
+    "conditional_positive_count": 0,
+    "exact_unique_count": 64,
+    "hierarchical_behavior_duplicate_rate": 0.0,
+    "hierarchical_count": 32,
+    "hierarchical_matched_positive_count": 0,
+    "interaction_positive_count": 0,
+    "matched_positive_count": 0,
+    "mean_pair_reward": -5.124249531520794,
+    "semantic_tuple_counts": {
+      "CROSS_VENUE_OI_X_FLOW_IMBALANCE_GIVEN_FUNDING": 8,
+      "OI_LEVEL_X_AGGRESSOR_FLOW_GIVEN_BASIS": 8,
+      "OI_NOTIONAL_X_PRICE_RESPONSE_GIVEN_TRADE_INTENSITY": 8,
+      "PRICE_RESPONSE_X_LARGE_TRADE_GIVEN_OI_STATE": 8
+    },
+    "stage": "STAGE_A",
+    "strict_evaluated_count": 64,
+    "top_decile_pair_reward": -1.9664185106288163,
+    "verified_receipts": 0
+  },
+  "pit_lag": true,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS"
+}
