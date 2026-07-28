@@ -9246,6 +9246,17 @@ def _v14_run_fixed_stage(
     stage_existing = sum(str(row["stage"]) == stage for row in ledger)
     if stage_existing > len(target_sequence):
         raise ValueError("V1.4 stage ledger exceeds its frozen target")
+    target_counts = Counter(str(value) for value in target_sequence)
+    mode_order = tuple(dict.fromkeys(str(value) for value in target_sequence))
+    completed_counts: Counter[str] = Counter()
+    for row in ledger:
+        if str(row["stage"]) != stage:
+            continue
+        completed_counts[
+            str(row["semantic_tuple"])
+            if bool(row["hierarchical_three_axis"])
+            else "BINARY_BASELINE"
+        ] += 1
     workers = DEFAULT_WORKERS
     memory_fallback = False
     executor = concurrent.futures.ProcessPoolExecutor(
@@ -9271,7 +9282,30 @@ def _v14_run_fixed_stage(
                 len(proposals) < workers
                 and stage_existing + len(proposals) < len(target_sequence)
             ):
-                mode = str(target_sequence[stage_existing + len(proposals)])
+                pending_counts = Counter(
+                    (
+                        str(value[0].generation_genes.get("semantic_tuple"))
+                        if value[0].mechanism_family.startswith("CONDITIONAL_")
+                        else "BINARY_BASELINE"
+                    )
+                    for value in proposals
+                )
+                start = (stage_existing + len(proposals)) % len(mode_order)
+                rotated = (
+                    *mode_order[start:],
+                    *mode_order[:start],
+                )
+                mode = next(
+                    (
+                        value
+                        for value in rotated
+                        if completed_counts[value] + pending_counts[value]
+                        < target_counts[value]
+                    ),
+                    None,
+                )
+                if mode is None:
+                    break
                 generation_attempts += 1
                 if mode == "BINARY_BASELINE":
                     candidate, attempts = _v14_sample_binary(
@@ -9346,6 +9380,11 @@ def _v14_run_fixed_stage(
                     continue
                 completed_ids.add(candidate.candidate_id)
                 stage_existing += 1
+                completed_counts[
+                    str(candidate.generation_genes.get("semantic_tuple"))
+                    if candidate.mechanism_family.startswith("CONDITIONAL_")
+                    else "BINARY_BASELINE"
+                ] += 1
                 checkpoint_index = (stage_existing - 1) // checkpoint_size
                 row = _v14_candidate_row(
                     registry=registry,
@@ -9582,6 +9621,20 @@ def run_v14(
             if (
                 stage_a_metrics["strict_evaluated_count"] == V14_STAGE_A_COUNT
                 and stage_a_metrics["exact_unique_count"] == V14_STAGE_A_COUNT
+                and sum(
+                    not bool(row["hierarchical_three_axis"])
+                    for row in stage_a_rows
+                )
+                == 32
+                and all(
+                    int(
+                        stage_a_metrics["semantic_tuple_counts"].get(
+                            value, 0
+                        )
+                    )
+                    == 8
+                    for value in CONDITIONAL_SEMANTIC_TUPLES
+                )
                 and all(
                     bool(row["expression_hash_verified"])
                     and bool(row["strict_cost_evaluated"])
