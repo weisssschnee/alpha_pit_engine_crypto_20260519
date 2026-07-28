@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-28T19:26:40.503821+00:00",
+  "generated_at": "2026-07-28T19:36:58.923631+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -7606,13 +7606,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "9dbb4ce52f5db218683e10c5463e2e6554c7b060",
+    "built_at_commit": "216bc4fffb2732850b4373425e0f31ca5b28d280",
     "edge_count": 37189,
     "node_count": 19614,
     "path": ".planning/graphs/graph.json",
-    "sha256": "763F0786D45E8FAC625FD098C423DF880070F503AC11B7B52CD3CECA6E66A9B1"
+    "sha256": "6B66B822F02454FA1B9A0FF67ACE39952935593EE9453B822245A178C5CE5010"
   },
-  "repo_head": "9dbb4ce52f5db218683e10c5463e2e6554c7b060",
+  "repo_head": "216bc4fffb2732850b4373425e0f31ca5b28d280",
   "schema_version": 1,
   "semantic_authorities": [
     {
