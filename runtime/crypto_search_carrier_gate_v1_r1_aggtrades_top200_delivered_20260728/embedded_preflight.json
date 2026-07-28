@@ -1,0 +1,9 @@
+{
+  "available_memory_bytes": 3884216320,
+  "memory_gate_bytes": 12884901888,
+  "schema_version": 1,
+  "status": "READY_FIRST_STRICT_BATCH_COUNTS_TOWARD_256",
+  "strict_candidates_consumed_outside_campaign": 0,
+  "workers_12_forbidden": true,
+  "workers_requested": 10
+}
