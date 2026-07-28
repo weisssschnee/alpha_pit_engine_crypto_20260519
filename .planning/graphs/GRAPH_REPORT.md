@@ -1,83 +1,89 @@
 # Graph Report - alpha_pit_engine_crypto_20260519  (2026-07-28)
 
 ## Corpus Check
-- 3149 files · ~14,775,376 words
+- 3172 files · ~14,809,417 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 19340 nodes · 36475 edges · 1644 communities (1601 shown, 43 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 1219 edges (avg confidence: 0.7)
+- 19455 nodes · 36796 edges · 1644 communities (1599 shown, 45 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 1235 edges (avg confidence: 0.7)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5f7089fa`
+- Built from commit: `d1db0033`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_FrozenGrammar|FrozenGrammar]]
 - [[_COMMUNITY_search_engine_v1.py|search_engine_v1.py]]
-- [[_COMMUNITY_harness.py|harness.py]]
-- [[_COMMUNITY_split_for_timestamps|split_for_timestamps]]
+- [[_COMMUNITY_crypto_a7al2x5_evaluator_preflight_smoke.py|crypto_a7al2x5_evaluator_preflight_smoke.py]]
 - [[_COMMUNITY_TypedExpressionRegistry|TypedExpressionRegistry]]
-- [[_COMMUNITY_ValueError|ValueError]]
 - [[_COMMUNITY_crypto_a7reward1_portfolio_reward_model.py|crypto_a7reward1_portfolio_reward_model.py]]
-- [[_COMMUNITY_load_base|load_base]]
-- [[_COMMUNITY_runner.py|runner.py]]
+- [[_COMMUNITY_ValueError|ValueError]]
+- [[_COMMUNITY_crypto_a7aa1_primitive_response_map.py|crypto_a7aa1_primitive_response_map.py]]
 - [[_COMMUNITY_crypto_a7v5_small_replay_smoke.py|crypto_a7v5_small_replay_smoke.py]]
-- [[_COMMUNITY_runner18m.py|runner18m.py]]
 - [[_COMMUNITY_test_crypto_18m_compositional_search.py|test_crypto_18m_compositional_search.py]]
+- [[_COMMUNITY_crypto_a7ff8_expanded_numeric_probe.py|crypto_a7ff8_expanded_numeric_probe.py]]
+- [[_COMMUNITY_crypto_a7n_regime_invariant_counterfactual.py|crypto_a7n_regime_invariant_counterfactual.py]]
+- [[_COMMUNITY_runner.py|runner.py]]
+- [[_COMMUNITY_SearchState|SearchState]]
+- [[_COMMUNITY_FrozenGrammar|FrozenGrammar]]
 - [[_COMMUNITY_crypto_a7ab6_small_numeric_replay_preflight.py|crypto_a7ab6_small_numeric_replay_preflight.py]]
-- [[_COMMUNITY_map_portfolio|map_portfolio]]
+- [[_COMMUNITY_runner18m.py|runner18m.py]]
 - [[_COMMUNITY_sampler.py|sampler.py]]
 - [[_COMMUNITY_crypto_a7ffcore30e_bounded_numeric_probe.py|crypto_a7ffcore30e_bounded_numeric_probe.py]]
 - [[_COMMUNITY_experiment.py|experiment.py]]
+- [[_COMMUNITY_compositional18m.py|compositional18m.py]]
+- [[_COMMUNITY_crypto_a7c_fundingcore_narrow_audit.py|crypto_a7c_fundingcore_narrow_audit.py]]
+- [[_COMMUNITY_map_portfolio|map_portfolio]]
+- [[_COMMUNITY_harness.py|harness.py]]
 - [[_COMMUNITY_broad_information_arena.py|broad_information_arena.py]]
+- [[_COMMUNITY_scale_book|scale_book]]
+- [[_COMMUNITY_crypto_a2_strict_replay.py|crypto_a2_strict_replay.py]]
+- [[_COMMUNITY_crypto_a7o_search_space_and_fold_replay.py|crypto_a7o_search_space_and_fold_replay.py]]
 - [[_COMMUNITY_phase3o3_regime_gate_robustness_audit.py|phase3o3_regime_gate_robustness_audit.py]]
-- [[_COMMUNITY_crypto_a7reward1_portfolio_reward_model.py|crypto_a7reward1_portfolio_reward_model.py]]
+- [[_COMMUNITY_split_for_timestamps|split_for_timestamps]]
 - [[_COMMUNITY_materialize_authorized|materialize_authorized]]
-- [[_COMMUNITY_evaluator.py|evaluator.py]]
-- [[_COMMUNITY_crypto_a7ag3_numeric_replay_pilot.py|crypto_a7ag3_numeric_replay_pilot.py]]
-- [[_COMMUNITY_crypto_a7search6_june_blind_adapter.py|crypto_a7search6_june_blind_adapter.py]]
 - [[_COMMUNITY_cem_diversity_runner.py|cem_diversity_runner.py]]
 - [[_COMMUNITY_crypto_a7v3s9_prereward_oos_control_proxy.py|crypto_a7v3s9_prereward_oos_control_proxy.py]]
 - [[_COMMUNITY_crypto_a7m2_equal_budget_engine_bakeoff.py|crypto_a7m2_equal_budget_engine_bakeoff.py]]
+- [[_COMMUNITY_crypto_a7source4_batch_source_lag_retest.py|crypto_a7source4_batch_source_lag_retest.py]]
+- [[_COMMUNITY_crypto_a7ffcore1_ast_schema_adapter.py|crypto_a7ffcore1_ast_schema_adapter.py]]
 - [[_COMMUNITY_field_information.py|field_information.py]]
 - [[_COMMUNITY_qualification18m.py|qualification18m.py]]
 - [[_COMMUNITY_manifest.json|manifest.json]]
-- [[_COMMUNITY_crypto_a7al2x5_evaluator_preflight_smoke.py|crypto_a7al2x5_evaluator_preflight_smoke.py]]
-- [[_COMMUNITY_crypto_a7i1a_runner_preflight.py|crypto_a7i1a_runner_preflight.py]]
 - [[_COMMUNITY_train_surface.py|train_surface.py]]
 - [[_COMMUNITY_crypto_a7_validation_utils.py|crypto_a7_validation_utils.py]]
+- [[_COMMUNITY_crypto_a7mem0_search_memory_registry.py|crypto_a7mem0_search_memory_registry.py]]
 - [[_COMMUNITY_crypto_a7s2m_metrics_registry_diagnostic.py|crypto_a7s2m_metrics_registry_diagnostic.py]]
 - [[_COMMUNITY_RawPanelStore|RawPanelStore]]
-- [[_COMMUNITY_crypto_a2_6_tradable_replay.py|crypto_a2_6_tradable_replay.py]]
-- [[_COMMUNITY_liquidation_ingress.py|liquidation_ingress.py]]
+- [[_COMMUNITY_LazySearchEngine|LazySearchEngine]]
 - [[_COMMUNITY_crypto_a7ak_lv3_neutral_field_family_smoke.py|crypto_a7ak_lv3_neutral_field_family_smoke.py]]
 - [[_COMMUNITY_Crypto Latest Evidence and Search-Instrument Independent Audit|Crypto Latest Evidence and Search-Instrument Independent Audit]]
-- [[_COMMUNITY_crypto_a7ffcore56_bounded_replay_preflight.py|crypto_a7ffcore56_bounded_replay_preflight.py]]
+- [[_COMMUNITY_evaluator.py|evaluator.py]]
 - [[_COMMUNITY_crypto_a7o_l1_pilot_shard.py|crypto_a7o_l1_pilot_shard.py]]
-- [[_COMMUNITY_crypto_a7o_search_space_and_fold_replay.py|crypto_a7o_search_space_and_fold_replay.py]]
-- [[_COMMUNITY_scale_book|scale_book]]
+- [[_COMMUNITY_crypto_a7ffcore56_bounded_replay_preflight.py|crypto_a7ffcore56_bounded_replay_preflight.py]]
 - [[_COMMUNITY_crypto_latest_feature_space_audit.py|crypto_latest_feature_space_audit.py]]
 - [[_COMMUNITY_phase3l_champion_selection.py|phase3l_champion_selection.py]]
+- [[_COMMUNITY_A7AB4Evaluator|A7AB4Evaluator]]
 - [[_COMMUNITY_datetime|datetime]]
-- [[_COMMUNITY_crypto_a7m2e_cluster_cap_policy_revision.py|crypto_a7m2e_cluster_cap_policy_revision.py]]
+- [[_COMMUNITY_crypto_a7h1_nonfunding_masked_loo_audit.py|crypto_a7h1_nonfunding_masked_loo_audit.py]]
 - [[_COMMUNITY_preflight_bitfinex_release|preflight_bitfinex_release]]
 - [[_COMMUNITY_core_pack_consumption.py|core_pack_consumption.py]]
 - [[_COMMUNITY_crypto_a7ag1_core3_aggtrades_interaction_smoke.py|crypto_a7ag1_core3_aggtrades_interaction_smoke.py]]
 - [[_COMMUNITY_crypto_a7ffcore49e_full_universe_null_vector_preflight_execution.py|crypto_a7ffcore49e_full_universe_null_vector_preflight_execution.py]]
 - [[_COMMUNITY_crypto_a7ffcore5_gate_native_generation_dryrun.py|crypto_a7ffcore5_gate_native_generation_dryrun.py]]
-- [[_COMMUNITY_crypto_a2_strict_replay.py|crypto_a2_strict_replay.py]]
+- [[_COMMUNITY_crypto_a7reward1_portfolio_reward_model.py|crypto_a7reward1_portfolio_reward_model.py]]
+- [[_COMMUNITY_FeedbackDecision|FeedbackDecision]]
+- [[_COMMUNITY_crypto_a7f_funding_regime_failure_audit.py|crypto_a7f_funding_regime_failure_audit.py]]
 - [[_COMMUNITY_crypto_a7al1_field_family_neutralized_baseline.py|crypto_a7al1_field_family_neutralized_baseline.py]]
-- [[_COMMUNITY_LazySearchEngine|LazySearchEngine]]
-- [[_COMMUNITY_A7AB4Evaluator|A7AB4Evaluator]]
+- [[_COMMUNITY_RuntimeError|RuntimeError]]
+- [[_COMMUNITY_crypto_a5_champion_deep_audit.py|crypto_a5_champion_deep_audit.py]]
 - [[_COMMUNITY_crypto_a7ad1_core48_controlled_replay_smoke.py|crypto_a7ad1_core48_controlled_replay_smoke.py]]
 - [[_COMMUNITY_crypto_a7af1_core39_selected_field_smoke.py|crypto_a7af1_core39_selected_field_smoke.py]]
-- [[_COMMUNITY_crypto_a7h1_nonfunding_masked_loo_audit.py|crypto_a7h1_nonfunding_masked_loo_audit.py]]
-- [[_COMMUNITY_RuntimeError|RuntimeError]]
+- [[_COMMUNITY_liquidation_ingress.py|liquidation_ingress.py]]
+- [[_COMMUNITY_crypto_a7m2e_cluster_cap_policy_revision.py|crypto_a7m2e_cluster_cap_policy_revision.py]]
 - [[_COMMUNITY_crypto_a7al2k_derived_generator_smoke.py|crypto_a7al2k_derived_generator_smoke.py]]
-- [[_COMMUNITY_crypto_a7ffcore1_ast_schema_adapter.py|crypto_a7ffcore1_ast_schema_adapter.py]]
 - [[_COMMUNITY_crypto_latest_instrument_semantics_audit.py|crypto_latest_instrument_semantics_audit.py]]
 - [[_COMMUNITY_manifest.json|manifest.json]]
 - [[_COMMUNITY_manifest.json|manifest.json]]
@@ -87,11 +93,16 @@
 - [[_COMMUNITY_manifest.json|manifest.json]]
 - [[_COMMUNITY_crypto_a7ffcore48se_repaired_null_first_dry_generation.py|crypto_a7ffcore48se_repaired_null_first_dry_generation.py]]
 - [[_COMMUNITY_crypto_a7al2x5_evaluator_preflight_smoke.py|crypto_a7al2x5_evaluator_preflight_smoke.py]]
+- [[_COMMUNITY_release.py|release.py]]
 - [[_COMMUNITY_crypto_a7al2q_local_oi_price_formula_search.py|crypto_a7al2q_local_oi_price_formula_search.py]]
+- [[_COMMUNITY_CEMDiversityV2Policy|CEMDiversityV2Policy]]
+- [[_COMMUNITY_crypto_a7ffcore26de_non_s0_lane_repair_probe.py|crypto_a7ffcore26de_non_s0_lane_repair_probe.py]]
 - [[_COMMUNITY_crypto_a7al2p0_pre_search_hardening_audit.py|crypto_a7al2p0_pre_search_hardening_audit.py]]
+- [[_COMMUNITY_crypto_a7al2x7_small_numeric_replay_preflight.py|crypto_a7al2x7_small_numeric_replay_preflight.py]]
 - [[_COMMUNITY_crypto_a7ffcore2_feature_subgraph_registry.py|crypto_a7ffcore2_feature_subgraph_registry.py]]
 - [[_COMMUNITY_crypto_a7ls9_info_axis_queue_contract.py|crypto_a7ls9_info_axis_queue_contract.py]]
 - [[_COMMUNITY_crypto_a7ffcore2_feature_subgraph_registry.py|crypto_a7ffcore2_feature_subgraph_registry.py]]
+- [[_COMMUNITY_formula_gen_v2_adapter.py|formula_gen_v2_adapter.py]]
 - [[_COMMUNITY_evidence_primitives.py|evidence_primitives.py]]
 - [[_COMMUNITY_crypto_a7y1_interaction_diagnostic.py|crypto_a7y1_interaction_diagnostic.py]]
 - [[_COMMUNITY_pc2_transport|pc2_transport]]
@@ -99,11 +110,9 @@
 - [[_COMMUNITY_crypto_a7ff_v2_field_to_factor_compiler.py|crypto_a7ff_v2_field_to_factor_compiler.py]]
 - [[_COMMUNITY_crypto_a7ffcore14e_bounded_replay_execution.py|crypto_a7ffcore14e_bounded_replay_execution.py]]
 - [[_COMMUNITY_crypto_a7ffcore26ce_split_consistency_repair_probe.py|crypto_a7ffcore26ce_split_consistency_repair_probe.py]]
-- [[_COMMUNITY_crypto_a7ffcore26de_non_s0_lane_repair_probe.py|crypto_a7ffcore26de_non_s0_lane_repair_probe.py]]
 - [[_COMMUNITY_crypto_a7search1_cem_uct_ast_policy_bakeoff.py|crypto_a7search1_cem_uct_ast_policy_bakeoff.py]]
 - [[_COMMUNITY_formula_gen_v2_adapter.py|formula_gen_v2_adapter.py]]
-- [[_COMMUNITY_load_field_enforcement_csv|load_field_enforcement_csv]]
-- [[_COMMUNITY_build_policy|build_policy]]
+- [[_COMMUNITY_evaluate_primitive|evaluate_primitive]]
 - [[_COMMUNITY_crypto_a7v3_agg_aware_candidate_dry_run.py|crypto_a7v3_agg_aware_candidate_dry_run.py]]
 - [[_COMMUNITY_Phase 1 Crypto Search Hardening And Continuation|Phase 1: Crypto Search Hardening And Continuation]]
 - [[_COMMUNITY_counts|counts]]
@@ -123,32 +132,29 @@
 - [[_COMMUNITY_crypto_a7ffr_derived_generation_redesign.py|crypto_a7ffr_derived_generation_redesign.py]]
 - [[_COMMUNITY_crypto_a7ls7_clue_mechanism_queue_contract.py|crypto_a7ls7_clue_mechanism_queue_contract.py]]
 - [[_COMMUNITY_build_capture_record|build_capture_record]]
-- [[_COMMUNITY_crypto_a7ffcore7e_numeric_response_execution.py|crypto_a7ffcore7e_numeric_response_execution.py]]
+- [[_COMMUNITY_search_memory_enforcement.py|search_memory_enforcement.py]]
 - [[_COMMUNITY_Phase 5 Verified Core Extraction Or New Repo Decision|Phase 5: Verified Core Extraction Or New Repo Decision]]
 - [[_COMMUNITY_crypto_a7ak_lv2_response_merge_audit.py|crypto_a7ak_lv2_response_merge_audit.py]]
 - [[_COMMUNITY_crypto_a7search7_family_diversified_queue.py|crypto_a7search7_family_diversified_queue.py]]
 - [[_COMMUNITY_feature_algebra.py|feature_algebra.py]]
-- [[_COMMUNITY_formula_gen_v2_adapter.py|formula_gen_v2_adapter.py]]
+- [[_COMMUNITY_CryptoFeatureAlgebra|CryptoFeatureAlgebra]]
 - [[_COMMUNITY_unified_field_management.py|unified_field_management.py]]
 - [[_COMMUNITY_crypto_a7ah0_core12_aggtrades_final_handoff_audit.py|crypto_a7ah0_core12_aggtrades_final_handoff_audit.py]]
 - [[_COMMUNITY_crypto_a7al0_top498_alpha_search_contract.py|crypto_a7al0_top498_alpha_search_contract.py]]
 - [[_COMMUNITY_crypto_a7ffcore26e_targeted_numeric_probe_execution.py|crypto_a7ffcore26e_targeted_numeric_probe_execution.py]]
-- [[_COMMUNITY_crypto_a7ls16_local_preflight.py|crypto_a7ls16_local_preflight.py]]
+- [[_COMMUNITY_crypto_a7ffcore7e_numeric_response_execution.py|crypto_a7ffcore7e_numeric_response_execution.py]]
 - [[_COMMUNITY_crypto_a7pm0_source_of_truth_registry.py|crypto_a7pm0_source_of_truth_registry.py]]
 - [[_COMMUNITY_crypto_a7s3_metrics_clue_forensic.py|crypto_a7s3_metrics_clue_forensic.py]]
 - [[_COMMUNITY_crypto_a7pm0_source_of_truth_registry.py|crypto_a7pm0_source_of_truth_registry.py]]
-- [[_COMMUNITY_CryptoFeatureAlgebra|CryptoFeatureAlgebra]]
-- [[_COMMUNITY_crypto_a7ls15_million_scale_blueprint_generation.py|crypto_a7ls15_million_scale_blueprint_generation.py]]
-- [[_COMMUNITY_crypto_a4_cluster_stress_and_champion_shortlist.py|crypto_a4_cluster_stress_and_champion_shortlist.py]]
-- [[_COMMUNITY_crypto_a7o2c_semantic_uniqueness_audit.py|crypto_a7o2c_semantic_uniqueness_audit.py]]
 - [[_COMMUNITY_crypto_a7aj_universe500_silver_acceptance_and_panel_prep.py|crypto_a7aj_universe500_silver_acceptance_and_panel_prep.py]]
 - [[_COMMUNITY_crypto_a7ffcore13e_numeric_response_execution.py|crypto_a7ffcore13e_numeric_response_execution.py]]
 - [[_COMMUNITY_crypto_a7regime2_mechanism_regime_audit.py|crypto_a7regime2_mechanism_regime_audit.py]]
 - [[_COMMUNITY_crypto_a7regime2_mechanism_regime_audit.py|crypto_a7regime2_mechanism_regime_audit.py]]
-- [[_COMMUNITY_MatrixContext|MatrixContext]]
-- [[_COMMUNITY_crypto_a7c_fundingcore_narrow_audit.py|crypto_a7c_fundingcore_narrow_audit.py]]
+- [[_COMMUNITY_legacy.py|legacy.py]]
+- [[_COMMUNITY_crypto_a7d_funding_time_semantics_audit.py|crypto_a7d_funding_time_semantics_audit.py]]
 - [[_COMMUNITY_crypto_a7p_cell_failure_map_redesign.py|crypto_a7p_cell_failure_map_redesign.py]]
 - [[_COMMUNITY_crypto_a7y2_interaction_clue_forensic.py|crypto_a7y2_interaction_clue_forensic.py]]
+- [[_COMMUNITY_crypto_a7ls15_million_scale_blueprint_generation.py|crypto_a7ls15_million_scale_blueprint_generation.py]]
 - [[_COMMUNITY_manifest.json|manifest.json]]
 - [[_COMMUNITY_manifest.json|manifest.json]]
 - [[_COMMUNITY_manifest.json|manifest.json]]
@@ -170,7 +176,6 @@
 - [[_COMMUNITY_run_binance_vision_monthly_pool.py|run_binance_vision_monthly_pool.py]]
 - [[_COMMUNITY_evidence_feedback.py|evidence_feedback.py]]
 - [[_COMMUNITY_crypto_a7ad0_controlled_replay_prep.py|crypto_a7ad0_controlled_replay_prep.py]]
-- [[_COMMUNITY_crypto_a7f_funding_regime_failure_audit.py|crypto_a7f_funding_regime_failure_audit.py]]
 - [[_COMMUNITY_crypto_a7k2_new_space_same_budget_smoke.py|crypto_a7k2_new_space_same_budget_smoke.py]]
 - [[_COMMUNITY_crypto_a7l0_search_space_coverage_audit.py|crypto_a7l0_search_space_coverage_audit.py]]
 - [[_COMMUNITY_crypto_a7m2b_cem_adaptive_grammar_preflight.py|crypto_a7m2b_cem_adaptive_grammar_preflight.py]]
@@ -184,21 +189,18 @@
 - [[_COMMUNITY_crypto_a7al2z7_response_guided_dry_generation.py|crypto_a7al2z7_response_guided_dry_generation.py]]
 - [[_COMMUNITY_crypto_a7ap2_multiplier_price_scale_repair.py|crypto_a7ap2_multiplier_price_scale_repair.py]]
 - [[_COMMUNITY_crypto_a7live1_source_lag_checksum_audit.py|crypto_a7live1_source_lag_checksum_audit.py]]
-- [[_COMMUNITY_crypto_a7mem0_search_memory_registry.py|crypto_a7mem0_search_memory_registry.py]]
 - [[_COMMUNITY_crypto_a7search6_mechanism_memory_seed_search.py|crypto_a7search6_mechanism_memory_seed_search.py]]
 - [[_COMMUNITY_build|build]]
 - [[_COMMUNITY_crypto_a7source5_accepted_forensic_pack.py|crypto_a7source5_accepted_forensic_pack.py]]
-- [[_COMMUNITY_crypto_a7ffcore1_ast_schema_adapter.py|crypto_a7ffcore1_ast_schema_adapter.py]]
+- [[_COMMUNITY_semantic_domains.py|semantic_domains.py]]
 - [[_COMMUNITY_Crypto A7P-4 Productivity Forensic|Crypto A7P-4 Productivity Forensic]]
 - [[_COMMUNITY_crypto_a1_generator_dry_run.py|crypto_a1_generator_dry_run.py]]
 - [[_COMMUNITY_crypto_a2_5_linkage_and_placebo_audit.py|crypto_a2_5_linkage_and_placebo_audit.py]]
 - [[_COMMUNITY_crypto_a6_1_core4_curve_exposure_sanity.py|crypto_a6_1_core4_curve_exposure_sanity.py]]
 - [[_COMMUNITY_crypto_a6_2_core4_risk_scaling.py|crypto_a6_2_core4_risk_scaling.py]]
-- [[_COMMUNITY_crypto_a7n_regime_invariant_counterfactual.py|crypto_a7n_regime_invariant_counterfactual.py]]
 - [[_COMMUNITY_build_crypto_primary_additions_1h_panel_from_vision.py|build_crypto_primary_additions_1h_panel_from_vision.py]]
 - [[_COMMUNITY_crypto_a7al2i_replay_preflight.py|crypto_a7al2i_replay_preflight.py]]
 - [[_COMMUNITY_crypto_a7al2p1r_selector_reweighted_retry.py|crypto_a7al2p1r_selector_reweighted_retry.py]]
-- [[_COMMUNITY_crypto_a7ff30a_portfolio_replay_smoke.py|crypto_a7ff30a_portfolio_replay_smoke.py]]
 - [[_COMMUNITY_crypto_a7ao_okx_cross_exchange_light_acceptance.py|crypto_a7ao_okx_cross_exchange_light_acceptance.py]]
 - [[_COMMUNITY_crypto_a7ar2_feature_algebra_parity_smoke.py|crypto_a7ar2_feature_algebra_parity_smoke.py]]
 - [[_COMMUNITY_crypto_a7ar8_signal_vector_cluster_registry.py|crypto_a7ar8_signal_vector_cluster_registry.py]]
@@ -211,12 +213,8 @@
 - [[_COMMUNITY_crypto_a7t0_forward_telemetry_contract.py|crypto_a7t0_forward_telemetry_contract.py]]
 - [[_COMMUNITY_crypto_a7v3s0_next_large_search_contract.py|crypto_a7v3s0_next_large_search_contract.py]]
 - [[_COMMUNITY_crypto_a7v3s0_next_large_search_contract.py|crypto_a7v3s0_next_large_search_contract.py]]
-- [[_COMMUNITY_semantic_domains.py|semantic_domains.py]]
-- [[_COMMUNITY_legacy.py|legacy.py]]
 - [[_COMMUNITY_crypto_a7aa0_new_source_feasibility_contract.py|crypto_a7aa0_new_source_feasibility_contract.py]]
 - [[_COMMUNITY_crypto_a7ac0_universe_expansion_handoff_audit.py|crypto_a7ac0_universe_expansion_handoff_audit.py]]
-- [[_COMMUNITY_crypto_a7g1_may_failure_forensic_audit.py|crypto_a7g1_may_failure_forensic_audit.py]]
-- [[_COMMUNITY_crypto_a7h0_nonfunding_residual_smoke.py|crypto_a7h0_nonfunding_residual_smoke.py]]
 - [[_COMMUNITY_crypto_a7o_l1w1r_policy_repair_audit.py|crypto_a7o_l1w1r_policy_repair_audit.py]]
 - [[_COMMUNITY_crypto_a7v1_feature_registry_and_smoke.py|crypto_a7v1_feature_registry_and_smoke.py]]
 - [[_COMMUNITY_crypto_a7al2p1_selector_feature_generation.py|crypto_a7al2p1_selector_feature_generation.py]]
@@ -258,7 +256,7 @@
 - [[_COMMUNITY_crypto_a7v3s7_candidate_construction_redesign.py|crypto_a7v3s7_candidate_construction_redesign.py]]
 - [[_COMMUNITY_crypto_policy_upgrade_qualification_supersession.py|crypto_policy_upgrade_qualification_supersession.py]]
 - [[_COMMUNITY_crypto_a7v3s9_prereward_oos_control_proxy.py|crypto_a7v3s9_prereward_oos_control_proxy.py]]
-- [[_COMMUNITY_search_memory.py|search_memory.py]]
+- [[_COMMUNITY_evaluate_mapping_result|evaluate_mapping_result]]
 - [[_COMMUNITY_CRYPTO A7AF-2 Selected-Field Failure Forensic|CRYPTO A7AF-2 Selected-Field Failure Forensic]]
 - [[_COMMUNITY_compute_snapshot|compute_snapshot]]
 - [[_COMMUNITY_crypto_a7ab0_forward_data_handoff_audit.py|crypto_a7ab0_forward_data_handoff_audit.py]]
@@ -294,7 +292,7 @@
 - [[_COMMUNITY_crypto_a7v3s0_reward_sharded_aggregate.py|crypto_a7v3s0_reward_sharded_aggregate.py]]
 - [[_COMMUNITY_build|build]]
 - [[_COMMUNITY_crypto_a7guard0_leakage_chain_audit.py|crypto_a7guard0_leakage_chain_audit.py]]
-- [[_COMMUNITY_search_memory_enforcement.py|search_memory_enforcement.py]]
+- [[_COMMUNITY_crypto_a3_signal_cluster_registry.py|crypto_a3_signal_cluster_registry.py]]
 - [[_COMMUNITY_crypto_a6_3_core4_conservative_dry_shadow_replay.py|crypto_a6_3_core4_conservative_dry_shadow_replay.py]]
 - [[_COMMUNITY_crypto_a7ac3_core48_panel_integrity_audit.py|crypto_a7ac3_core48_panel_integrity_audit.py]]
 - [[_COMMUNITY_crypto_a7m1_surrogate_policy_preflight.py|crypto_a7m1_surrogate_policy_preflight.py]]
@@ -323,7 +321,6 @@
 - [[_COMMUNITY_crypto_a7i1c_failure_attribution.py|crypto_a7i1c_failure_attribution.py]]
 - [[_COMMUNITY_crypto_a7j1_redesigned_runner_preflight.py|crypto_a7j1_redesigned_runner_preflight.py]]
 - [[_COMMUNITY_crypto_a7j2_same_budget_redesigned_smoke.py|crypto_a7j2_same_budget_redesigned_smoke.py]]
-- [[_COMMUNITY_crypto_a7m2_inherited_engine_bakeoff_protocol.py|crypto_a7m2_inherited_engine_bakeoff_protocol.py]]
 - [[_COMMUNITY_crypto_a7p2_w2_cell_registry_audit.py|crypto_a7p2_w2_cell_registry_audit.py]]
 - [[_COMMUNITY_crypto_a7v_panel_acceptance_generative_contract.py|crypto_a7v_panel_acceptance_generative_contract.py]]
 - [[_COMMUNITY_crypto_a7x_reset_contract.py|crypto_a7x_reset_contract.py]]
@@ -331,6 +328,11 @@
 - [[_COMMUNITY_CRYPTO A7AK-LV0 Listing-Age Latent Variable Contract|CRYPTO A7AK-LV0 Listing-Age Latent Variable Contract]]
 - [[_COMMUNITY_CRYPTO A7FF-25R0 COMPANY QUEUE COVERAGE AUDIT|CRYPTO A7FF-25R0 COMPANY QUEUE COVERAGE AUDIT]]
 - [[_COMMUNITY_CRYPTO A7V3S9S10 Reward Validation Version - 20260614|CRYPTO A7V3S9/S10 Reward Validation Version - 20260614]]
+- [[_COMMUNITY_manifest.json|manifest.json]]
+- [[_COMMUNITY_manifest.json|manifest.json]]
+- [[_COMMUNITY_manifest.json|manifest.json]]
+- [[_COMMUNITY_manifest.json|manifest.json]]
+- [[_COMMUNITY_manifest.json|manifest.json]]
 - [[_COMMUNITY_manifest.json|manifest.json]]
 - [[_COMMUNITY_manifest.json|manifest.json]]
 - [[_COMMUNITY_manifest.json|manifest.json]]
@@ -360,8 +362,6 @@
 - [[_COMMUNITY_CRYPTO A7AD-0 Controlled Replay Prep|CRYPTO A7AD-0 Controlled Replay Prep]]
 - [[_COMMUNITY_Crypto A7I Residual-Aware Small Generator Design|Crypto A7I Residual-Aware Small Generator Design]]
 - [[_COMMUNITY_crypto_a7ae0_new_data_intake_audit.py|crypto_a7ae0_new_data_intake_audit.py]]
-- [[_COMMUNITY_crypto_a7l1_search_space_redesign_spec.py|crypto_a7l1_search_space_redesign_spec.py]]
-- [[_COMMUNITY_crypto_a7m2d_cluster_concentration_forensics.py|crypto_a7m2d_cluster_concentration_forensics.py]]
 - [[_COMMUNITY_crypto_alpha_preflight.py|crypto_alpha_preflight.py]]
 - [[_COMMUNITY_Crypto AlphaFactory current state|Crypto AlphaFactory current state]]
 - [[_COMMUNITY_CRYPTO A7AL-2X Objective Family Reset Contract|CRYPTO A7AL-2X Objective Family Reset Contract]]
@@ -397,13 +397,13 @@
 - [[_COMMUNITY_crypto_system_rectification_wave1.py|crypto_system_rectification_wave1.py]]
 - [[_COMMUNITY_Layer Findings|Layer Findings]]
 - [[_COMMUNITY_run|run]]
+- [[_COMMUNITY_preflight_supplier_release|preflight_supplier_release]]
 - [[_COMMUNITY_CRYPTO A7AC-2C P0 Backfill Execution Status|CRYPTO A7AC-2C P0 Backfill Execution Status]]
 - [[_COMMUNITY_CRYPTO A7AD-3 Control Dominance Contract|CRYPTO A7AD-3 Control Dominance Contract]]
 - [[_COMMUNITY_CRYPTO A7AG-2 aggTrades Interaction Failure Forensic|CRYPTO A7AG-2 aggTrades Interaction Failure Forensic]]
 - [[_COMMUNITY_Crypto A7X-4 Failure Forensic|Crypto A7X-4 Failure Forensic]]
 - [[_COMMUNITY_CRYPTO A7Z Failure Registry And Next Data Decision|CRYPTO A7Z Failure Registry And Next Data Decision]]
 - [[_COMMUNITY_crypto_a6_2b_core4_risk_budget_ladder.py|crypto_a6_2b_core4_risk_budget_ladder.py]]
-- [[_COMMUNITY_crypto_a7m2c_execution_authorization_revision.py|crypto_a7m2c_execution_authorization_revision.py]]
 - [[_COMMUNITY_crypto_a7o_l1_wave_runner.py|crypto_a7o_l1_wave_runner.py]]
 - [[_COMMUNITY_crypto_a7y0_unified_state_panel.py|crypto_a7y0_unified_state_panel.py]]
 - [[_COMMUNITY_crypto_a7ar1_formula_engine_adapter_smoke.py|crypto_a7ar1_formula_engine_adapter_smoke.py]]
@@ -467,10 +467,8 @@
 - [[_COMMUNITY_Crypto A7H Final Decision Record|Crypto A7H Final Decision Record]]
 - [[_COMMUNITY_Crypto A7O-L1W1R Policy Repair And Reclassification|Crypto A7O-L1W1R Policy Repair And Reclassification]]
 - [[_COMMUNITY_Crypto A7V-6 CandidateControl Dominance Forensic|Crypto A7V-6 Candidate/Control Dominance Forensic]]
-- [[_COMMUNITY_crypto_a5_1_book_curve_sanity.py|crypto_a5_1_book_curve_sanity.py]]
 - [[_COMMUNITY_crypto_a7ae1_field_selection_contract.py|crypto_a7ae1_field_selection_contract.py]]
 - [[_COMMUNITY_main|main]]
-- [[_COMMUNITY_crypto_a7g0_regime_feature_contract_audit.py|crypto_a7g0_regime_feature_contract_audit.py]]
 - [[_COMMUNITY_main|main]]
 - [[_COMMUNITY_CRYPTO A7AC-2 LABEL DIVERSIFICATION CONTRACT|CRYPTO A7AC-2 LABEL DIVERSIFICATION CONTRACT]]
 - [[_COMMUNITY_CRYPTO A7AL-0 Top498 Latent-Neutral Alpha Search Contract|CRYPTO A7AL-0 Top498 Latent-Neutral Alpha Search Contract]]
@@ -522,6 +520,7 @@
 - [[_COMMUNITY_crypto_a7ag4_clue_forensic_contract.py|crypto_a7ag4_clue_forensic_contract.py]]
 - [[_COMMUNITY_crypto_a7ah1d_ordinary_alpha_dry_rerank.py|crypto_a7ah1d_ordinary_alpha_dry_rerank.py]]
 - [[_COMMUNITY_crypto_a7aif1_engine_enforcement_gap_audit.py|crypto_a7aif1_engine_enforcement_gap_audit.py]]
+- [[_COMMUNITY_crypto_a7aif3_materialization_evaluator_parity.py|crypto_a7aif3_materialization_evaluator_parity.py]]
 - [[_COMMUNITY_crypto_a7aif4_response_backed_field_promotion.py|crypto_a7aif4_response_backed_field_promotion.py]]
 - [[_COMMUNITY_crypto_a7al0f_derived_feature_engineering_contract.py|crypto_a7al0f_derived_feature_engineering_contract.py]]
 - [[_COMMUNITY_crypto_a7al2p0r_repair_rerun_decision.py|crypto_a7al2p0r_repair_rerun_decision.py]]
@@ -560,6 +559,7 @@
 - [[_COMMUNITY_crypto_a7night_taskflow_20260531.py|crypto_a7night_taskflow_20260531.py]]
 - [[_COMMUNITY_crypto_feature_runtime_inventory_20260714.py|crypto_feature_runtime_inventory_20260714.py]]
 - [[_COMMUNITY_crypto_archive_deprecated_a7_20260527.py|crypto_archive_deprecated_a7_20260527.py]]
+- [[_COMMUNITY_crypto_a7aif3_materialization_evaluator_parity.py|crypto_a7aif3_materialization_evaluator_parity.py]]
 - [[_COMMUNITY_signal_identity.py|signal_identity.py]]
 - [[_COMMUNITY_CRYPTO A7AC-1 Expanded Universe Backfill Source-Trace Contract|CRYPTO A7AC-1 Expanded Universe Backfill Source-Trace Contract]]
 - [[_COMMUNITY_CRYPTO A7AC-2C Effective P0 Backfill Coverage Audit|CRYPTO A7AC-2C Effective P0 Backfill Coverage Audit]]
@@ -1040,11 +1040,11 @@
 - [[_COMMUNITY_build|build]]
 - [[_COMMUNITY_build|build]]
 - [[_COMMUNITY_crypto_a7ls25_large_search_launch_packet.py|crypto_a7ls25_large_search_launch_packet.py]]
-- [[_COMMUNITY_crypto_a7mem1_memory_enforcement_smoke.py|crypto_a7mem1_memory_enforcement_smoke.py]]
 - [[_COMMUNITY_crypto_a7pm2_candidate_lifecycle_state_machine.py|crypto_a7pm2_candidate_lifecycle_state_machine.py]]
 - [[_COMMUNITY_crypto_a7shadow3_execution_realism_summary.py|crypto_a7shadow3_execution_realism_summary.py]]
 - [[_COMMUNITY_crypto_a7v3s2_control_variant_audit.py|crypto_a7v3s2_control_variant_audit.py]]
 - [[_COMMUNITY_test_crypto_aggtrades_system_canary_v1.py|test_crypto_aggtrades_system_canary_v1.py]]
+- [[_COMMUNITY__Store|_Store]]
 - [[_COMMUNITY_crypto_a7pm2_candidate_lifecycle_state_machine.py|crypto_a7pm2_candidate_lifecycle_state_machine.py]]
 - [[_COMMUNITY_Crypto A1 Generator Dry Run|Crypto A1 Generator Dry Run]]
 - [[_COMMUNITY_Crypto A2.6 Tradable Replay|Crypto A2.6 Tradable Replay]]
@@ -1182,14 +1182,12 @@
 - [[_COMMUNITY_CRYPTO VERIFIED CORE COMPONENT AUDIT 20260618|CRYPTO VERIFIED CORE COMPONENT AUDIT 20260618]]
 - [[_COMMUNITY_crypto_a7al0p_pretrain_readiness_gate.py|crypto_a7al0p_pretrain_readiness_gate.py]]
 - [[_COMMUNITY_crypto_a7al2j_derived_tolerant_search_reset.py|crypto_a7al2j_derived_tolerant_search_reset.py]]
-- [[_COMMUNITY_crypto_a7ar3_fresh_memory_dedup_smoke.py|crypto_a7ar3_fresh_memory_dedup_smoke.py]]
 - [[_COMMUNITY_crypto_a7clean2_delete_safe_sync_tmp.py|crypto_a7clean2_delete_safe_sync_tmp.py]]
 - [[_COMMUNITY_crypto_a7ffcore16j_nearmiss_resolution_audit.py|crypto_a7ffcore16j_nearmiss_resolution_audit.py]]
 - [[_COMMUNITY_crypto_a7ffcore16k_h2_strict_floor_repair_contract.py|crypto_a7ffcore16k_h2_strict_floor_repair_contract.py]]
 - [[_COMMUNITY_main|main]]
 - [[_COMMUNITY_crypto_a7ffcore52f_diagnostic_clue_forensic.py|crypto_a7ffcore52f_diagnostic_clue_forensic.py]]
 - [[_COMMUNITY_crypto_a7ffcore53_replay_target_repair_contract.py|crypto_a7ffcore53_replay_target_repair_contract.py]]
-- [[_COMMUNITY_crypto_a7ls0_checkpoint_large_search_contract.py|crypto_a7ls0_checkpoint_large_search_contract.py]]
 - [[_COMMUNITY_crypto_a7ls24_label_transfer_deep_bias_replay.py|crypto_a7ls24_label_transfer_deep_bias_replay.py]]
 - [[_COMMUNITY_crypto_a7v3s0_reward_prequeue.py|crypto_a7v3s0_reward_prequeue.py]]
 - [[_COMMUNITY_Crypto A7C FundingCore Decision Record|Crypto A7C FundingCore Decision Record]]
@@ -1338,9 +1336,9 @@
 - [[_COMMUNITY_CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION|CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION]]
 - [[_COMMUNITY_CRYPTO A7SEARCH4 Final Aggregate 20260628|CRYPTO A7SEARCH4 Final Aggregate 20260628]]
 - [[_COMMUNITY_crypto_a7al2_small_formula_search_contract.py|crypto_a7al2_small_formula_search_contract.py]]
+- [[_COMMUNITY_crypto_a7al2h_selector_repair.py|crypto_a7al2h_selector_repair.py]]
 - [[_COMMUNITY_crypto_a7al2x2r_family_balanced_repair_contract.py|crypto_a7al2x2r_family_balanced_repair_contract.py]]
 - [[_COMMUNITY_crypto_a7ff24r4_repaired_numeric_wave_contract.py|crypto_a7ff24r4_repaired_numeric_wave_contract.py]]
-- [[_COMMUNITY_crypto_a7ff25r2_missing_field_audit.py|crypto_a7ff25r2_missing_field_audit.py]]
 - [[_COMMUNITY_crypto_a7ff51_compact_non_l5_contract.py|crypto_a7ff51_compact_non_l5_contract.py]]
 - [[_COMMUNITY_crypto_a7ff52_materialization_preflight_contract.py|crypto_a7ff52_materialization_preflight_contract.py]]
 - [[_COMMUNITY_build|build]]
@@ -1373,7 +1371,6 @@
 - [[_COMMUNITY_Crypto Alpha Smoke v0|Crypto Alpha Smoke v0]]
 - [[_COMMUNITY_Crypto Method Gate Check|Crypto Method Gate Check]]
 - [[_COMMUNITY_crypto_a7j0_failure_mode_to_reward_contract.py|crypto_a7j0_failure_mode_to_reward_contract.py]]
-- [[_COMMUNITY_crypto_a7k0_generator_space_redesign_contract.py|crypto_a7k0_generator_space_redesign_contract.py]]
 - [[_COMMUNITY_crypto_a7o2d_l1_execution_authorization.py|crypto_a7o2d_l1_execution_authorization.py]]
 - [[_COMMUNITY_ADR 0009 aggTrades fixed-cohort search-system canary|ADR 0009: aggTrades fixed-cohort search-system canary]]
 - [[_COMMUNITY_ADR 0010 Behavior-Niched Search Engine V1.1|ADR 0010: Behavior-Niched Search Engine V1.1]]
@@ -1439,6 +1436,7 @@
 - [[_COMMUNITY_crypto_a7ap3_cross_exchange_overlay_handoff.py|crypto_a7ap3_cross_exchange_overlay_handoff.py]]
 - [[_COMMUNITY_crypto_a7ffcore51pxe_company_sharded_replay_orchestrator.py|crypto_a7ffcore51pxe_company_sharded_replay_orchestrator.py]]
 - [[_COMMUNITY_build|build]]
+- [[_COMMUNITY_crypto_a7v3s0_reward_shard_queue.py|crypto_a7v3s0_reward_shard_queue.py]]
 - [[_COMMUNITY_CEM  AST  MCTS Search Core Hold|CEM / AST / MCTS Search Core Hold]]
 - [[_COMMUNITY_Crypto A2 Strict Replay|Crypto A2 Strict Replay]]
 - [[_COMMUNITY_Crypto A3 Signal Cluster Registry|Crypto A3 Signal Cluster Registry]]
@@ -1570,597 +1568,599 @@
 - [[_COMMUNITY_CRYPTO_SEARCH_CARRIER_GATE_V1_R3_OI_MARK_RANKS51_200_DELIVERED_20260728|CRYPTO_SEARCH_CARRIER_GATE_V1_R3_OI_MARK_RANKS51_200_DELIVERED_20260728.md]]
 - [[_COMMUNITY_CRYPTO_SEARCH_CARRIER_GATE_V1_R4_CORE3_MICROSTRUCTURE_PILOT_20260728|CRYPTO_SEARCH_CARRIER_GATE_V1_R4_CORE3_MICROSTRUCTURE_PILOT_20260728.md]]
 - [[_COMMUNITY_CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_20260728|CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_20260728.md]]
+- [[_COMMUNITY_CRYPTO_SEARCH_ENGINE_V1_4_GAP_REPORT_20260728|CRYPTO_SEARCH_ENGINE_V1_4_GAP_REPORT_20260728.md]]
+- [[_COMMUNITY_CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728|CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_20260728.md]]
 - [[_COMMUNITY_OI_MARK_V3_INDEPENDENT_REVALIDATION|OI_MARK_V3_INDEPENDENT_REVALIDATION.md]]
 - [[_COMMUNITY_README|README.md]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `FrozenGrammar` - 95 edges
-2. `TypedExpressionRegistry` - 85 edges
-3. `FieldContract` - 75 edges
+1. `TypedExpressionRegistry` - 97 edges
+2. `FrozenGrammar` - 95 edges
+3. `FieldContract` - 84 edges
 4. `run_engine()` - 74 edges
-5. `RawPanelStore` - 68 edges
+5. `RawPanelStore` - 69 edges
 6. `split_for_timestamps()` - 63 edges
 7. `CandidateGenome` - 58 edges
-8. `CryptoFeatureAlgebra` - 53 edges
-9. `load_base()` - 53 edges
-10. `sha256_file()` - 52 edges
+8. `sha256_file()` - 58 edges
+9. `CryptoFeatureAlgebra` - 53 edges
+10. `load_base()` - 53 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `test_source_runner_exposes_report_only_metrics_to_stage_b_gate()` --indirect_call--> `build_evidence()`  [INFERRED]
   tests/test_crypto_localized_mechanism_qualification.py → alphafactory_crypto/broad_search/runner18m.py
-- `test_behavior_contract_rejects_partition_local_universe_counts()` --calls--> `freeze_search_behavior_contract()`  [EXTRACTED]
-  tests/test_crypto_18m_compositional_search.py → alphafactory_crypto/broad_search/audit.py
-- `test_behavior_contract_rejects_self_proving_partial_active_support()` --calls--> `freeze_search_behavior_contract()`  [EXTRACTED]
-  tests/test_crypto_search_authority_alignment.py → alphafactory_crypto/broad_search/audit.py
-- `test_behavior_contract_rejects_stale_active_values_outside_observed_support()` --calls--> `freeze_search_behavior_contract()`  [EXTRACTED]
-  tests/test_crypto_search_authority_alignment.py → alphafactory_crypto/broad_search/audit.py
-- `_FakeStore` --uses--> `CandidateSpec`  [INFERRED]
-  tests/test_crypto_18m_compositional_search.py → alphafactory_crypto/broad_search/compositional18m.py
+- `_Store` --uses--> `FieldContract`  [INFERRED]
+  tests/test_crypto_search_engine_v1_4.py → alphafactory_crypto/broad_search/expression.py
+- `_Store` --uses--> `TypedExpressionRegistry`  [INFERRED]
+  tests/test_crypto_search_engine_v1_4.py → alphafactory_crypto/broad_search/expression.py
+- `test_monthly_metrics_preserve_gross_cost_net_waterfall()` --calls--> `_series_metrics()`  [EXTRACTED]
+  tests/test_crypto_18m_compositional_search.py → alphafactory_crypto/broad_search/pair18m.py
+- `_FakeStore` --uses--> `LanePolicy`  [INFERRED]
+  tests/test_crypto_18m_compositional_search.py → alphafactory_crypto/broad_search/runner18m.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (1644 total, 43 thin omitted)
+## Communities (1644 total, 45 thin omitted)
 
-### Community 0 - "FrozenGrammar"
-Cohesion: 0.03
-Nodes (88): ABC, cem_diversity_v2(), CEMDiversityV2Policy, Any, Experimental diversity-preserving CEM policy for the bounded canary A/B.  The ba, Return immutable copies of per-proposal branch and dedupe receipts., Expose this policy's own proposal identities, never engine cache state., Construct the independently registered experimental challenger policy. (+80 more)
+### Community 0 - "search_engine_v1.py"
+Cohesion: 0.07
+Nodes (107): pair_contract_payload(), _aggtrades_canary_contracts(), _aggtrades_canary_final_decision(), _aggtrades_canary_frozen_contract(), _aggtrades_canary_report_text(), _apply_exit_gate(), _balanced_lane_choice(), BehaviorArchive (+99 more)
 
-### Community 1 - "search_engine_v1.py"
+### Community 1 - "crypto_a7al2x5_evaluator_preflight_smoke.py"
 Cohesion: 0.05
-Nodes (109): freeze_search_behavior_contract(), Freeze behavior quantization and a lag-only market-state regime contract., pair_contract_payload(), _aggtrades_canary_contracts(), _aggtrades_canary_final_decision(), _aggtrades_canary_frozen_contract(), _aggtrades_canary_report_text(), _apply_exit_gate() (+101 more)
+Nodes (117): load_base(), load_group_fields(), load_latent_numeric(), main(), md_table(), now_utc(), parquet_schema(), Any (+109 more)
 
-### Community 2 - "harness.py"
+### Community 2 - "TypedExpressionRegistry"
 Cohesion: 0.05
-Nodes (102): _average_ranks(), CapabilityEvaluationError, _cross_sectional_rank_ic(), evaluate_mapping_result(), _fixed_block_metrics(), _matrix(), _ordinary_mean_lcb(), Any (+94 more)
+Nodes (97): _assert_safe_path(), audit_grammar(), _behavior_sha(), build_evidence(), _calendar_rows(), check_evidence(), _coverage_rows(), _derived_registry_payload() (+89 more)
 
-### Community 3 - "split_for_timestamps"
+### Community 3 - "crypto_a7reward1_portfolio_reward_model.py"
 Cohesion: 0.06
-Nodes (118): horizon_label(), label_family_matrix(), main(), max_control_ratio(), md_table(), nonoverlap_tstat(), now_utc(), Any (+110 more)
+Nodes (103): horizon_label(), expression_fields(), annualization(), choose_orientation(), evaluate_regime_attribution(), load_state_panel(), main(), md_table() (+95 more)
 
-### Community 4 - "TypedExpressionRegistry"
-Cohesion: 0.05
-Nodes (90): _assert_safe_path(), audit_grammar(), _behavior_sha(), build_evidence(), _calendar_rows(), check_evidence(), _coverage_rows(), _derived_registry_payload() (+82 more)
-
-### Community 5 - "ValueError"
+### Community 4 - "ValueError"
 Cohesion: 0.06
-Nodes (106): field_role_surface(), Resolve one independent carrier without requiring the full Broad grammar., _active_surface_rows(), _aggregate_aggtrades_hourly(), aggregate_aggtrades_search_hourly(), _aggtrade_coordinate(), _aggtrade_symbol_dates_from_tar(), _aggtrades_sample_statistics() (+98 more)
+Nodes (103): _active_surface_rows(), _aggregate_aggtrades_hourly(), aggregate_aggtrades_search_hourly(), _aggtrade_coordinate(), _aggtrade_symbol_dates_from_tar(), _aggtrades_sample_statistics(), assign_instrument_lifecycles(), build_aggtrades_search_surface_cache() (+95 more)
 
-### Community 6 - "crypto_a7reward1_portfolio_reward_model.py"
+### Community 5 - "crypto_a7aa1_primitive_response_map.py"
 Cohesion: 0.06
-Nodes (101): collect_operator_calls(), expression_fields(), annualization(), choose_orientation(), evaluate_regime_attribution(), load_state_panel(), main(), md_table() (+93 more)
+Nodes (95): label_family_matrix(), main(), max_control_ratio(), md_table(), nonoverlap_tstat(), now_utc(), Any, DataFrame (+87 more)
 
-### Community 7 - "load_base"
-Cohesion: 0.06
-Nodes (96): load_numeric_fields(), DatetimeIndex, load_base(), load_group_fields(), load_latent_numeric(), parquet_schema(), DatetimeIndex, StateAwareEvaluator (+88 more)
-
-### Community 8 - "runner.py"
-Cohesion: 0.06
-Nodes (76): _calendar_hours(), load_development_release(), Any, ndarray, Path, Development-only reader for the already-qualified native aggTrades release.  The, Return the frozen PIT-safe target for a signal bucket at coordinate t., _readonly_array() (+68 more)
-
-### Community 9 - "crypto_a7v5_small_replay_smoke.py"
+### Community 6 - "crypto_a7v5_small_replay_smoke.py"
 Cohesion: 0.06
 Nodes (86): apply_control(), choose_candidates(), clean_float(), decay(), delta(), evaluate_row(), ExprContext, forward_open_return() (+78 more)
 
-### Community 10 - "runner18m.py"
-Cohesion: 0.08
-Nodes (68): build_canary(), _candidate_raw_fields(), check_canary(), compile_replay_audit(), _finalize_audit(), _invalidate_upgrade_decisions(), _policy_upgrade_audit(), Any (+60 more)
+### Community 7 - "test_crypto_18m_compositional_search.py"
+Cohesion: 0.06
+Nodes (64): field_role_coverage(), _field_roles(), generate_candidate(), generate_structural_pool(), Mutate exactly one effective typed gene and issue a tamper-evident receipt., Return the deterministic generator reachability of a field contract.      This i, skeleton_registry(), typed_mutate_candidate() (+56 more)
 
-### Community 11 - "test_crypto_18m_compositional_search.py"
+### Community 8 - "crypto_a7ff8_expanded_numeric_probe.py"
+Cohesion: 0.06
+Nodes (77): main(), now_utc(), Any, Path, schema_safe(), write_json(), dense_ffill_and_age(), field_metrics() (+69 more)
+
+### Community 9 - "crypto_a7n_regime_invariant_counterfactual.py"
+Cohesion: 0.06
+Nodes (76): bucket(), main(), Any, DatetimeIndex, Path, Series, quantile_row(), train_edges() (+68 more)
+
+### Community 10 - "runner.py"
 Cohesion: 0.07
-Nodes (83): _array_identity(), audit_numeric_expressivity(), _build_expression(), candidate_from_genes(), CandidateSpec, compiler_reachability_proofs(), _effective_generation_gene_names(), expression_from_dict() (+75 more)
+Nodes (63): evaluate_authorized_materialization(), Any, Bind authorization, canonical mapping and release-generated target.      The pub, StrictEvaluation, ReleasePanel, _admission_decoy_audit(), _affine_preflight_indices(), _algorithm_behavior_audit() (+55 more)
 
-### Community 12 - "crypto_a7ab6_small_numeric_replay_preflight.py"
+### Community 11 - "SearchState"
+Cohesion: 0.07
+Nodes (36): ABC, Experimental diversity-preserving CEM policy for the bounded canary A/B.  The ba, Proposal, Small immutable contracts shared by the real-data canary search layer.  The cont, One policy proposal.  It intentionally contains no feedback., Minimal engine-to-policy state with no global cache or feedback surface., SearchState, Bounded real-data canary structural grammar and lazy policy protocol.  Data acce (+28 more)
+
+### Community 12 - "FrozenGrammar"
+Cohesion: 0.05
+Nodes (28): CandidateGenome, _canonical_float(), MutationReceipt, Any, Alias retained for consumers that call the structural ID identity., Proof that an evolutionary child was generated from a concrete parent., One legal structural candidate before data materialization.      ``window`` and, Return the complete, label-free structural identity payload. (+20 more)
+
+### Community 13 - "crypto_a7ab6_small_numeric_replay_preflight.py"
 Cohesion: 0.07
 Nodes (73): shift_matrix(), classify(), cs_rank_pct(), forward_return_label(), label_matrix(), main(), md_table(), nonoverlap_tstats() (+65 more)
 
-### Community 13 - "map_portfolio"
-Cohesion: 0.06
-Nodes (51): _assert_close(), _counterfactual_signal(), _hash_array(), _json_array(), mapping_cost_counterfactual_payload(), mapping_synthetic_behavior_payload(), mapping_turnover_rows(), math_isclose() (+43 more)
+### Community 14 - "runner18m.py"
+Cohesion: 0.09
+Nodes (67): build_canary(), _candidate_raw_fields(), check_canary(), compile_replay_audit(), _finalize_audit(), _invalidate_upgrade_decisions(), _policy_upgrade_audit(), Any (+59 more)
 
-### Community 14 - "sampler.py"
+### Community 15 - "sampler.py"
 Cohesion: 0.07
 Nodes (59): _bounded_series(), build_agnostic_freeform_ledger(), _pick(), Any, Path, Random, _raw_series(), _safe_binary() (+51 more)
 
-### Community 15 - "crypto_a7ffcore30e_bounded_numeric_probe.py"
+### Community 16 - "crypto_a7ffcore30e_bounded_numeric_probe.py"
 Cohesion: 0.06
 Nodes (68): attach_labels(), build_signal(), cs_rank(), cs_zscore(), delta(), load_dataset(), main(), md_table() (+60 more)
 
-### Community 16 - "experiment.py"
+### Community 17 - "experiment.py"
 Cohesion: 0.08
 Nodes (53): adaptive_decision(), array_sha(), baseline_models(), build_contracts(), causal_rolling_mean(), CausalBlock, current_sha(), economic_metrics() (+45 more)
 
-### Community 17 - "broad_information_arena.py"
+### Community 18 - "compositional18m.py"
+Cohesion: 0.09
+Nodes (50): _array_identity(), audit_numeric_expressivity(), _build_expression(), candidate_from_genes(), compiler_reachability_proofs(), _conditional_axis(), conditional_candidate_from_genes(), _conditional_difference() (+42 more)
+
+### Community 19 - "crypto_a7c_fundingcore_narrow_audit.py"
+Cohesion: 0.08
+Nodes (63): average_component_frames(), component_leave_one_out(), component_standalone(), fundingcore_specs(), main(), metric(), placebo_raw_book(), CandidateSpec (+55 more)
+
+### Community 20 - "map_portfolio"
+Cohesion: 0.08
+Nodes (45): _assert_close(), _counterfactual_signal(), _hash_array(), _json_array(), mapping_cost_counterfactual_payload(), mapping_synthetic_behavior_payload(), mapping_turnover_rows(), math_isclose() (+37 more)
+
+### Community 21 - "harness.py"
+Cohesion: 0.09
+Nodes (49): CapabilityEvaluationError, A fail-closed capability-evaluator contract violation., _admission_receipt(), _behavior_identity(), _build_proposals(), build_structural_mutation_space(), build_synthetic_case(), CandidateEvidence (+41 more)
+
+### Community 22 - "broad_information_arena.py"
 Cohesion: 0.11
 Nodes (56): apply_linear_return_calibration(), arena_decision(), array_sha256(), BroadArenaData, causal_trailing_mean(), data_adequacy(), deterministic_coordinates(), economic_metrics() (+48 more)
 
-### Community 18 - "phase3o3_regime_gate_robustness_audit.py"
+### Community 23 - "scale_book"
+Cohesion: 0.09
+Nodes (59): forward_funding_cost(), funding_event_rate(), next_open_return(), position_matrix(), compute_multiplier(), main(), may_failure_attribution(), object_raw_book() (+51 more)
+
+### Community 24 - "crypto_a2_strict_replay.py"
+Cohesion: 0.08
+Nodes (56): clean_float(), component_expressions(), eval_placebos(), evaluate_interval(), json_safe(), main(), net_long_short(), placebo_pass() (+48 more)
+
+### Community 25 - "crypto_a7o_search_space_and_fold_replay.py"
+Cohesion: 0.08
+Nodes (58): main(), Path, write_decision_record(), bucket_expression(), bucket_window(), economic_uniqueness(), extract_windows(), fold_feasibility() (+50 more)
+
+### Community 26 - "phase3o3_regime_gate_robustness_audit.py"
 Cohesion: 0.08
 Nodes (56): attach_pit_trend_state_features(), build_pit_market_regime_state_frame(), _label_regime(), _limit_ratio(), MarketRegimeThresholds, _mean_positive_ratio(), Any, DataFrame (+48 more)
 
-### Community 19 - "crypto_a7reward1_portfolio_reward_model.py"
+### Community 27 - "split_for_timestamps"
 Cohesion: 0.10
-Nodes (55): dense_ffill_and_age(), field_metrics(), main(), md_table(), now_utc(), Any, DataFrame, ndarray (+47 more)
+Nodes (54): horizon_label(), label_family_matrix(), main(), max_control_ratio(), md_table(), nonoverlap_tstat(), now_utc(), Any (+46 more)
 
-### Community 20 - "materialize_authorized"
+### Community 28 - "materialize_authorized"
 Cohesion: 0.10
-Nodes (48): authorize_candidate(), CandidateAuthorizationReceipt, _json_copy(), Any, Fail-closed candidate authorization for the real-data canary.  This module is de, Copy a JSON contract while rejecting non-finite/non-serializable state., Immutable authorization identity required by materialization., Authorize one candidate without reading any market-data field.      ``reader_cal (+40 more)
+Nodes (49): authorize_candidate(), CandidateAuthorizationReceipt, _json_copy(), Any, Fail-closed candidate authorization for the real-data canary.  This module is de, Copy a JSON contract while rejecting non-finite/non-serializable state., Immutable authorization identity required by materialization., Authorize one candidate without reading any market-data field.      ``reader_cal (+41 more)
 
-### Community 21 - "evaluator.py"
-Cohesion: 0.08
-Nodes (40): _aggregate_sleeve_positions(), array_sha256(), _average_ranks(), evaluate_authorized_materialization(), evaluate_real_mapping(), _mean_lcb(), Any, ndarray (+32 more)
-
-### Community 22 - "crypto_a7ag3_numeric_replay_pilot.py"
-Cohesion: 0.10
-Nodes (51): horizon_label(), label_family_matrix(), main(), max_control_ratio(), md_table(), nonoverlap_tstat(), now_utc(), Any (+43 more)
-
-### Community 23 - "crypto_a7search6_june_blind_adapter.py"
-Cohesion: 0.10
-Nodes (51): control_signal(), finite_corr(), build_queue(), evaluate(), forward_label(), main(), md_table(), now_utc() (+43 more)
-
-### Community 24 - "cem_diversity_runner.py"
+### Community 29 - "cem_diversity_runner.py"
 Cohesion: 0.12
-Nodes (51): build_evidence(), _cache_reuse_is_completed(), check_evidence(), _cross_seed_metrics(), _decision(), _distribution(), _distribution_metrics(), _experiment_source_blobs() (+43 more)
+Nodes (52): build_evidence(), _cache_reuse_is_completed(), check_evidence(), _cross_seed_metrics(), _decision(), _distribution(), _distribution_metrics(), _experiment_source_blobs() (+44 more)
 
-### Community 25 - "crypto_a7v3s9_prereward_oos_control_proxy.py"
+### Community 30 - "crypto_a7v3s9_prereward_oos_control_proxy.py"
 Cohesion: 0.10
 Nodes (49): field_sets(), generate_blueprints(), main(), md_table(), motif_expr(), now_utc(), Any, DataFrame (+41 more)
 
-### Community 26 - "crypto_a7m2_equal_budget_engine_bakeoff.py"
+### Community 31 - "crypto_a7m2_equal_budget_engine_bakeoff.py"
 Cohesion: 0.11
-Nodes (50): add_a7m_rank_score(), add_static_scores(), candidate_row(), cem_weights(), clip(), compute_multiplier_arrays(), compute_return_corr_clusters(), engine_advantage_summary() (+42 more)
+Nodes (51): add_a7m_rank_score(), add_static_scores(), candidate_row(), cem_weights(), clip(), compute_multiplier_arrays(), compute_return_corr_clusters(), engine_advantage_summary() (+43 more)
 
-### Community 27 - "field_information.py"
+### Community 32 - "crypto_a7source4_batch_source_lag_retest.py"
+Cohesion: 0.09
+Nodes (49): control_signal(), build_queue(), evaluate(), forward_label(), main(), md_table(), now_utc(), orient_on_train() (+41 more)
+
+### Community 33 - "crypto_a7ffcore1_ast_schema_adapter.py"
+Cohesion: 0.09
+Nodes (39): main(), md_table(), now_utc(), Any, DataFrame, Path, read_json(), stable_id() (+31 more)
+
+### Community 34 - "field_information.py"
 Cohesion: 0.10
 Nodes (42): apply_bins(), build_core_pack(), compile_token_catalog(), cross_fitted_ridge_residual(), discrete_entropy(), discrete_mi(), FieldBatch, FieldBatchProvider (+34 more)
 
-### Community 28 - "qualification18m.py"
+### Community 35 - "qualification18m.py"
 Cohesion: 0.12
 Nodes (44): robust_monthly_audit(), _array_sha(), _asset_turnover(), _ast_distance(), _ast_tokens(), _block_analysis(), build_audits(), build_decision() (+36 more)
 
-### Community 29 - "manifest.json"
+### Community 36 - "manifest.json"
 Cohesion: 0.04
 Nodes (47): accepted_closure_sha, accepted_closure_tag, artifact_count, artifacts, boundaries, candidate_promoted, challenge_opened, cross_sprint_adaptive_memory_written (+39 more)
 
-### Community 30 - "crypto_a7al2x5_evaluator_preflight_smoke.py"
-Cohesion: 0.11
-Nodes (41): cs_rank_pct(), cs_zscore(), group_demean(), group_rank(), main(), md_table(), now_utc(), Any (+33 more)
-
-### Community 31 - "crypto_a7i1a_runner_preflight.py"
-Cohesion: 0.10
-Nodes (43): book_from_spec(), build_rank_components(), candidate_seed(), classify_candidate(), main(), metric_by_split(), preflight_candidates(), Any (+35 more)
-
-### Community 32 - "train_surface.py"
+### Community 37 - "train_surface.py"
 Cohesion: 0.13
 Nodes (40): _apply_derivations(), _apply_temporal_derivations(), _bool(), build_qualification(), check_qualification(), _git_sha(), iter_train_symbols(), load_symbol_train() (+32 more)
 
-### Community 33 - "crypto_a7_validation_utils.py"
+### Community 38 - "crypto_a7_validation_utils.py"
 Cohesion: 0.12
 Nodes (41): evaluate_variant(), main(), DataFrame, DatetimeIndex, ndarray, shifted_or_shuffled_matrices(), symbol_shuffle_signal(), utc_now() (+33 more)
 
-### Community 34 - "crypto_a7s2m_metrics_registry_diagnostic.py"
+### Community 39 - "crypto_a7mem0_search_memory_registry.py"
+Cohesion: 0.11
+Nodes (36): canonicalize_expression_light(), CryptoMemoryRecord, CryptoSearchMemory, _digest(), expression_memory_key(), production_rule_key(), Any, Path (+28 more)
+
+### Community 40 - "crypto_a7s2m_metrics_registry_diagnostic.py"
 Cohesion: 0.14
 Nodes (39): apply_control(), build_controls(), candidate_row(), choose_strict_replay(), clean_float(), decay(), delta(), evaluate_signal() (+31 more)
 
-### Community 35 - "RawPanelStore"
+### Community 41 - "RawPanelStore"
 Cohesion: 0.10
 Nodes (29): _bool(), build_raw_panel_cache(), candidate_fields(), economic_role(), _eligibility_schema(), field_equivalence_audit(), infer_type_unit(), _open_matrix() (+21 more)
 
-### Community 36 - "crypto_a2_6_tradable_replay.py"
-Cohesion: 0.12
-Nodes (41): clean_float(), component_expressions(), eval_placebos(), evaluate_interval(), forward_funding_cost(), funding_event_rate(), json_safe(), main() (+33 more)
+### Community 42 - "LazySearchEngine"
+Cohesion: 0.10
+Nodes (24): canonical_json_bytes(), Return the one canonical JSON encoding used by structural identities., _CacheEntry, CandidateFeedback, CandidateObservation, _feedback_payload(), LazySearchEngine, LazySearchResult (+16 more)
 
-### Community 37 - "liquidation_ingress.py"
-Cohesion: 0.14
-Nodes (39): canonical_sha256(), _check_required_columns(), classify_contract(), _dates(), _file_record(), _file_records(), _first_column(), _load_vendor_overlap_events() (+31 more)
-
-### Community 38 - "crypto_a7ak_lv3_neutral_field_family_smoke.py"
+### Community 43 - "crypto_a7ak_lv3_neutral_field_family_smoke.py"
 Cohesion: 0.12
 Nodes (40): boolish(), derive_row(), field_tokens(), formula_depth(), get(), load_source(), main(), operator_tokens() (+32 more)
 
-### Community 39 - "Crypto Latest Evidence and Search-Instrument Independent Audit"
+### Community 44 - "Crypto Latest Evidence and Search-Instrument Independent Audit"
 Cohesion: 0.05
 Nodes (38): 2026-07-18 residual / orthogonal / score-path closure, Authority model, Crypto Branch Evidence Map, Current accepted result, Machine-readable companions, Stage map, Supersession rules used in the CSVs, Algorithm and objective lineage (+30 more)
 
-### Community 40 - "crypto_a7ffcore56_bounded_replay_preflight.py"
+### Community 45 - "evaluator.py"
+Cohesion: 0.11
+Nodes (31): _aggregate_sleeve_positions(), _average_ranks(), evaluate_real_mapping(), _mean_lcb(), ndarray, _rank_ic(), Frozen train-only strict evaluator for the real-data instrument canary., Full-L1 turnover for equal-capital, horizon-offset execution sleeves.      A hor (+23 more)
+
+### Community 46 - "crypto_a7o_l1_pilot_shard.py"
+Cohesion: 0.15
+Nodes (33): A7OExpressionContext, active_hour_count(), append_reason(), apply_negative_control_dominance(), candidate_decisions(), decay(), delta(), evaluate_strict() (+25 more)
+
+### Community 47 - "crypto_a7ffcore56_bounded_replay_preflight.py"
 Cohesion: 0.11
 Nodes (37): dense_index(), dense_matrix(), dense_spread(), main(), md_table(), now_utc(), Any, DataFrame (+29 more)
 
-### Community 41 - "crypto_a7o_l1_pilot_shard.py"
-Cohesion: 0.15
-Nodes (32): A7OExpressionContext, active_hour_count(), append_reason(), apply_negative_control_dominance(), candidate_decisions(), decay(), delta(), is_liquidity_volatility_family() (+24 more)
-
-### Community 42 - "crypto_a7o_search_space_and_fold_replay.py"
-Cohesion: 0.12
-Nodes (38): formula_hash(), generate_pilot_candidates(), Series, static_score(), apply_cell_context(), bounded_window(), build_fold_masks(), build_search_cells() (+30 more)
-
-### Community 43 - "scale_book"
-Cohesion: 0.16
-Nodes (36): compute_multiplier(), main(), may_failure_attribution(), object_raw_book(), object_specs(), CandidateSpec, DataFrame, DatetimeIndex (+28 more)
-
-### Community 44 - "crypto_latest_feature_space_audit.py"
+### Community 48 - "crypto_latest_feature_space_audit.py"
 Cohesion: 0.13
 Nodes (37): base_dependencies(), base_depth(), base_equivalence(), base_formula_status(), base_window_family(), build(), canonical_axis(), check() (+29 more)
 
-### Community 45 - "phase3l_champion_selection.py"
+### Community 49 - "phase3l_champion_selection.py"
 Cohesion: 0.17
 Nodes (36): _as_bool(), _book_component(), _candidate_from_kb(), _candidate_from_locked(), _candidate_from_registry(), _canonical_expression(), _capacity_component(), _clip() (+28 more)
 
-### Community 46 - "datetime"
-Cohesion: 0.09
-Nodes (28): main(), Any, stable_hash(), utc_now(), main(), utc_now_dt(), datetime, main() (+20 more)
+### Community 50 - "A7AB4Evaluator"
+Cohesion: 0.12
+Nodes (34): A7AB4Evaluator, evaluate_candidate(), load_numeric_fields(), main(), md_table(), now_utc(), Any, DataFrame (+26 more)
 
-### Community 47 - "crypto_a7m2e_cluster_cap_policy_revision.py"
-Cohesion: 0.14
-Nodes (33): main(), utc_now(), load_core4_context(), load_core4_specs(), fundingcore_specs(), to_runner_candidates(), build_parity_sample(), compare_parity_from_wide() (+25 more)
+### Community 51 - "datetime"
+Cohesion: 0.08
+Nodes (29): main(), Any, stable_hash(), utc_now(), main(), utc_now_dt(), main(), Any (+21 more)
 
-### Community 48 - "preflight_bitfinex_release"
+### Community 52 - "crypto_a7h1_nonfunding_masked_loo_audit.py"
+Cohesion: 0.13
+Nodes (33): a7h_candidates(), candidate_features(), linear_beta(), main(), Any, CandidateSpec, DataFrame, DatetimeIndex (+25 more)
+
+### Community 53 - "preflight_bitfinex_release"
 Cohesion: 0.14
 Nodes (31): _as_utc(), BitfinexPreflight, canonical_sha256(), classify_symbol(), _compare_gold(), _effective_count(), _file_record(), _months() (+23 more)
 
-### Community 49 - "core_pack_consumption.py"
+### Community 54 - "core_pack_consumption.py"
 Cohesion: 0.16
 Nodes (30): _bool(), _channel_statistics(), dense_consumption_probe(), _expression(), materialize_broad_context(), materialize_core3_context(), payload_sha256(), Any (+22 more)
 
-### Community 50 - "crypto_a7ag1_core3_aggtrades_interaction_smoke.py"
+### Community 55 - "crypto_a7ag1_core3_aggtrades_interaction_smoke.py"
 Cohesion: 0.16
 Nodes (30): candidate_row(), control_variants(), decision_for_row(), evaluate_candidate(), ExprContext, forward_return_from_ret1(), generate_candidates(), load_panel() (+22 more)
 
-### Community 51 - "crypto_a7ffcore49e_full_universe_null_vector_preflight_execution.py"
+### Community 56 - "crypto_a7ffcore49e_full_universe_null_vector_preflight_execution.py"
 Cohesion: 0.14
 Nodes (31): corr(), extract_fields(), main(), md_table(), normalize_timestamp(), now_utc(), overlay_latent_fields(), Any (+23 more)
 
-### Community 52 - "crypto_a7ffcore5_gate_native_generation_dryrun.py"
+### Community 57 - "crypto_a7ffcore5_gate_native_generation_dryrun.py"
 Cohesion: 0.12
 Nodes (27): classify_entrypoints(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_json() (+19 more)
 
-### Community 53 - "crypto_a2_strict_replay.py"
-Cohesion: 0.13
-Nodes (29): evaluate_interval(), load_candidates(), load_method(), main(), Any, DatetimeIndex, ndarray, read_interval_panel() (+21 more)
+### Community 58 - "crypto_a7reward1_portfolio_reward_model.py"
+Cohesion: 0.17
+Nodes (32): accepted_for_next_search(), add_pareto_columns(), aggregate_rewards(), contiguous_orientation_extension_mask(), contract_payload(), control_signal(), drawdown(), evaluate_queue() (+24 more)
 
-### Community 54 - "crypto_a7al1_field_family_neutralized_baseline.py"
+### Community 59 - "FeedbackDecision"
+Cohesion: 0.13
+Nodes (28): _blocked_decision(), _decision_sort_key(), feedback_sort_key(), FeedbackDecision, _normalized_margin(), old_zero_cost_gross_proxy(), Frozen capability-only feedback aligned to strict feasibility.  This module deli, Return a stable higher-is-better key with an explicit final tie-break. (+20 more)
+
+### Community 60 - "crypto_a7f_funding_regime_failure_audit.py"
+Cohesion: 0.15
+Nodes (31): bucket_from_edges(), gate_definitions(), main(), merge_book_with_regime(), Any, DataFrame, DatetimeIndex, ndarray (+23 more)
+
+### Community 61 - "crypto_a7al1_field_family_neutralized_baseline.py"
 Cohesion: 0.19
 Nodes (32): add_derived_features(), bias_audit(), build_report(), classify(), control_audit(), diff_by_symbol(), evaluate(), evaluate_metric_grid() (+24 more)
 
-### Community 55 - "LazySearchEngine"
-Cohesion: 0.12
-Nodes (15): CandidateObservation, _feedback_payload(), LazySearchEngine, Any, Run fixed lanes against a private global first-visit cache., Evaluation result cached under one fully qualified authorization key., _receipt_dict(), _value() (+7 more)
+### Community 62 - "RuntimeError"
+Cohesion: 0.18
+Nodes (28): feedback_contract_payload(), Return the frozen, predeclared feedback contract for evidence output., RuntimeError, build(), check(), _clean(), _compatibility_summary(), _csv_bytes() (+20 more)
 
-### Community 56 - "A7AB4Evaluator"
+### Community 63 - "crypto_a5_champion_deep_audit.py"
 Cohesion: 0.15
-Nodes (29): A7AB4Evaluator, evaluate_candidate(), main(), md_table(), now_utc(), Any, DataFrame, ndarray (+21 more)
+Nodes (29): additive_drawdown(), build_series(), clean_float(), compounded_drawdown(), main(), Any, DataFrame, ndarray (+21 more)
 
-### Community 57 - "crypto_a7ad1_core48_controlled_replay_smoke.py"
+### Community 64 - "crypto_a7ad1_core48_controlled_replay_smoke.py"
 Cohesion: 0.17
 Nodes (27): candidate_row(), classify(), clean_float(), control_signal(), ExprContext, future_open_return(), generate_candidates(), load_panel() (+19 more)
 
-### Community 58 - "crypto_a7af1_core39_selected_field_smoke.py"
+### Community 65 - "crypto_a7af1_core39_selected_field_smoke.py"
 Cohesion: 0.17
 Nodes (27): candidate_row(), classify(), clean_float(), control_signal(), ExprContext, forward_return_from_ret1(), generate_candidates(), load_panel() (+19 more)
 
-### Community 59 - "crypto_a7h1_nonfunding_masked_loo_audit.py"
-Cohesion: 0.15
-Nodes (29): evaluate_candidate(), main(), monthly_summary(), Any, CandidateSpec, DataFrame, DatetimeIndex, ndarray (+21 more)
+### Community 66 - "liquidation_ingress.py"
+Cohesion: 0.17
+Nodes (28): canonical_sha256(), _check_required_columns(), _dates(), _file_record(), _file_records(), _first_column(), _load_vendor_overlap_events(), load_ws_events() (+20 more)
 
-### Community 60 - "RuntimeError"
-Cohesion: 0.20
-Nodes (26): RuntimeError, build(), check(), _clean(), _compatibility_summary(), _csv_bytes(), _csv_cell(), _execution_boundary_receipt() (+18 more)
+### Community 67 - "crypto_a7m2e_cluster_cap_policy_revision.py"
+Cohesion: 0.16
+Nodes (28): main(), utc_now(), load_core4_specs(), build_parity_sample(), compare_parity_from_wide(), evaluate_candidates_legacy(), evaluate_known_objects_fast(), family_signature() (+20 more)
 
-### Community 61 - "crypto_a7al2k_derived_generator_smoke.py"
+### Community 68 - "crypto_a7al2k_derived_generator_smoke.py"
 Cohesion: 0.15
 Nodes (25): CandidateSpec, canonical(), DerivedCandidateGenerator, digest(), extract_fields(), extract_operators(), extract_windows(), field_family() (+17 more)
 
-### Community 62 - "crypto_a7ffcore1_ast_schema_adapter.py"
-Cohesion: 0.14
-Nodes (24): main(), md_table(), now_utc(), Any, DataFrame, Path, read_json(), stable_id() (+16 more)
-
-### Community 63 - "crypto_latest_instrument_semantics_audit.py"
+### Community 69 - "crypto_latest_instrument_semantics_audit.py"
 Cohesion: 0.17
 Nodes (28): ModuleType, _algorithm_default(), algorithm_rows(), blob(), blob_identity(), build(), check(), closure_sha() (+20 more)
 
-### Community 64 - "manifest.json"
+### Community 70 - "manifest.json"
 Cohesion: 0.07
 Nodes (28): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+20 more)
 
-### Community 65 - "manifest.json"
+### Community 71 - "manifest.json"
 Cohesion: 0.07
 Nodes (28): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+20 more)
 
-### Community 66 - "manifest.json"
+### Community 72 - "manifest.json"
 Cohesion: 0.07
 Nodes (28): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+20 more)
 
-### Community 67 - "manifest.json"
+### Community 73 - "manifest.json"
 Cohesion: 0.07
 Nodes (28): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+20 more)
 
-### Community 68 - "manifest.json"
+### Community 74 - "manifest.json"
 Cohesion: 0.07
 Nodes (28): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+20 more)
 
-### Community 69 - "manifest.json"
+### Community 75 - "manifest.json"
 Cohesion: 0.07
 Nodes (28): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+20 more)
 
-### Community 70 - "crypto_a7ffcore48se_repaired_null_first_dry_generation.py"
+### Community 76 - "crypto_a7ffcore48se_repaired_null_first_dry_generation.py"
 Cohesion: 0.14
 Nodes (27): candidate_status(), evidence_tag(), expression(), main(), md_table(), now_utc(), Any, DataFrame (+19 more)
 
-### Community 71 - "crypto_a7al2x5_evaluator_preflight_smoke.py"
+### Community 77 - "crypto_a7al2x5_evaluator_preflight_smoke.py"
 Cohesion: 0.18
 Nodes (25): cs_rank_pct(), cs_zscore(), group_demean(), group_rank(), load_base(), load_group_fields(), load_latent_numeric(), main() (+17 more)
 
-### Community 72 - "crypto_a7al2q_local_oi_price_formula_search.py"
+### Community 78 - "release.py"
+Cohesion: 0.14
+Nodes (20): _calendar_hours(), load_development_release(), ndarray, Path, Development-only reader for the already-qualified native aggTrades release.  The, Return the frozen PIT-safe target for a signal bucket at coordinate t., _readonly_array(), _safe_coordinate() (+12 more)
+
+### Community 79 - "crypto_a7al2q_local_oi_price_formula_search.py"
 Cohesion: 0.17
 Nodes (27): classify_candidates(), control_ratio_by_split(), eval_local_signal(), expression_fields(), finite_tstat(), fit_train_orientation(), formula_patterns(), generate_candidates() (+19 more)
 
-### Community 73 - "crypto_a7al2p0_pre_search_hardening_audit.py"
+### Community 80 - "CEMDiversityV2Policy"
+Cohesion: 0.11
+Nodes (19): cem_diversity_v2(), CEMDiversityV2Policy, Any, Return immutable copies of per-proposal branch and dedupe receipts., Expose this policy's own proposal identities, never engine cache state., Construct the independently registered experimental challenger policy., Visited-elite CEM with fixed exploration and bounded local deduping., Draw uniformly from the frozen structural support without traversal. (+11 more)
+
+### Community 81 - "crypto_a7ffcore26de_non_s0_lane_repair_probe.py"
+Cohesion: 0.16
+Nodes (24): CryptoFeatureAlgebra, add_labels(), CachedCryptoFeatureAlgebra, controls(), generate_repair_pool(), label_col(), load_panel(), load_schema() (+16 more)
+
+### Community 82 - "crypto_a7al2p0_pre_search_hardening_audit.py"
 Cohesion: 0.20
 Nodes (26): block_bootstrap_tstat(), canonical_alias_audit(), control_ratio_by_split(), expression_fields(), finite_tstat(), label_matrix_entry_shift(), load_fast_module(), load_timevarying_latent_states() (+18 more)
 
-### Community 74 - "crypto_a7ffcore2_feature_subgraph_registry.py"
+### Community 83 - "crypto_a7al2x7_small_numeric_replay_preflight.py"
+Cohesion: 0.19
+Nodes (25): classify(), main(), md_table(), nonoverlap_tstat(), now_utc(), Any, DataFrame, DatetimeIndex (+17 more)
+
+### Community 84 - "crypto_a7ffcore2_feature_subgraph_registry.py"
 Cohesion: 0.18
 Nodes (22): clean(), collect_nodes(), formula_gen_gate(), join_unique(), main(), max_depth(), md_table(), now_utc() (+14 more)
 
-### Community 75 - "crypto_a7ls9_info_axis_queue_contract.py"
+### Community 85 - "crypto_a7ls9_info_axis_queue_contract.py"
 Cohesion: 0.21
 Nodes (26): add(), build_queue(), digest(), expand_basis_crowding(), expand_listing(), expand_positioning(), expand_raw_axis(), expand_vol_liquidity() (+18 more)
 
-### Community 76 - "crypto_a7ffcore2_feature_subgraph_registry.py"
+### Community 86 - "crypto_a7ffcore2_feature_subgraph_registry.py"
 Cohesion: 0.18
 Nodes (22): clean(), collect_nodes(), formula_gen_gate(), join_unique(), main(), max_depth(), md_table(), now_utc() (+14 more)
 
-### Community 77 - "evidence_primitives.py"
+### Community 87 - "formula_gen_v2_adapter.py"
+Cohesion: 0.17
+Nodes (15): _choice(), CryptoFormulaCandidate, CryptoFormulaGenV2Adapter, extract_operators(), load_field_enforcement_csv(), Any, Path, Random (+7 more)
+
+### Community 88 - "evidence_primitives.py"
 Cohesion: 0.22
 Nodes (25): _activation_summary(), _array_equal(), _behaviour_identity(), _check(), _compact_numeric(), _comparison_classification(), _comparison_fields(), _cross_asset_rank() (+17 more)
 
-### Community 78 - "crypto_a7y1_interaction_diagnostic.py"
+### Community 89 - "crypto_a7y1_interaction_diagnostic.py"
 Cohesion: 0.20
 Nodes (24): build_controls(), candidate_row(), choose_strict_replay(), clean_float(), evaluate_lane(), generate_candidates(), label_candidates(), load_matrices() (+16 more)
 
-### Community 79 - "pc2_transport"
+### Community 90 - "pc2_transport"
 Cohesion: 0.08
 Nodes (25): artifacts, bundle_sha256, created_at, epoch_id, pc2_transport, execution_task_id, formal_wrapper_ended_at, formal_wrapper_exit_code (+17 more)
 
-### Community 80 - "crypto_a7ar4_selector_adapter_smoke.py"
+### Community 91 - "crypto_a7ar4_selector_adapter_smoke.py"
 Cohesion: 0.22
 Nodes (25): base_reject_reason(), build_summary_tables(), count_share(), decide(), field_family_tokens(), latency_policy_audit(), load_inputs(), main() (+17 more)
 
-### Community 81 - "crypto_a7ff_v2_field_to_factor_compiler.py"
+### Community 92 - "crypto_a7ff_v2_field_to_factor_compiler.py"
 Cohesion: 0.23
 Nodes (25): build_ontology(), coarse_to_fine_contract(), corr(), data_behavior(), factor_candidate_compile(), feature_pair_clustering(), main(), md_table() (+17 more)
 
-### Community 82 - "crypto_a7ffcore14e_bounded_replay_execution.py"
+### Community 93 - "crypto_a7ffcore14e_bounded_replay_execution.py"
 Cohesion: 0.17
 Nodes (24): build_placebo_map(), choose_best_clue(), main(), md_table(), now_utc(), Any, DataFrame, ndarray (+16 more)
 
-### Community 83 - "crypto_a7ffcore26ce_split_consistency_repair_probe.py"
+### Community 94 - "crypto_a7ffcore26ce_split_consistency_repair_probe.py"
 Cohesion: 0.17
 Nodes (23): add_labels(), CachedCryptoFeatureAlgebra, controls(), generate_repair_pool(), label_col(), load_panel(), load_schema(), main() (+15 more)
 
-### Community 84 - "crypto_a7ffcore26de_non_s0_lane_repair_probe.py"
-Cohesion: 0.17
-Nodes (23): add_labels(), CachedCryptoFeatureAlgebra, controls(), generate_repair_pool(), label_col(), load_panel(), load_schema(), main() (+15 more)
-
-### Community 85 - "crypto_a7search1_cem_uct_ast_policy_bakeoff.py"
+### Community 95 - "crypto_a7search1_cem_uct_ast_policy_bakeoff.py"
 Cohesion: 0.23
 Nodes (25): available_field_rows(), build_queue(), canonical_ast(), choose_pair(), expression_tokens(), interaction_ast(), load_priors(), main() (+17 more)
 
-### Community 86 - "formula_gen_v2_adapter.py"
+### Community 96 - "formula_gen_v2_adapter.py"
 Cohesion: 0.17
 Nodes (15): _choice(), CryptoFormulaCandidate, CryptoFormulaGenV2Adapter, extract_operators(), extract_windows(), load_field_enforcement_csv(), Any, Path (+7 more)
 
-### Community 87 - "load_field_enforcement_csv"
-Cohesion: 0.16
-Nodes (22): load_field_enforcement_csv(), Path, main(), md_table(), now_utc(), Any, DataFrame, Path (+14 more)
-
-### Community 88 - "build_policy"
+### Community 97 - "evaluate_primitive"
 Cohesion: 0.14
-Nodes (5): build_policy(), deterministic_feedback(), DummyFeedback, FrozenGrammarTests, GenerativePolicyTests
+Nodes (16): _complete_windows(), evaluate_primitive(), _matrix(), primitive_contract_payload(), PrimitiveContract, Any, ndarray, Canonical temporal primitive authority used by the capability harness.  The defi (+8 more)
 
-### Community 89 - "crypto_a7v3_agg_aware_candidate_dry_run.py"
+### Community 98 - "crypto_a7v3_agg_aware_candidate_dry_run.py"
 Cohesion: 0.19
 Nodes (24): build_blocked_controls(), build_candidate(), candidate_id(), cross_symbol_expression(), expression_from_spec(), field_families_from_spec(), horizon_from_spec(), interaction_expression() (+16 more)
 
-### Community 90 - "Phase 1: Crypto Search Hardening And Continuation"
+### Community 99 - "Phase 1: Crypto Search Hardening And Continuation"
 Cohesion: 0.08
 Nodes (24): 1. Maintain Current Source Of Truth, 2. A7LIVE-1 Source-Lag / Checksum Audit, 3. A7SEARCH7 Family-Diversified Queue, 4. A7SEARCH7 Proxy Run And Aggregate, 5. Strict Reward And Candidate Triage, 6. Dedupe And Information-Source Audit, 7. Reward/Leakage/Regime Gate Review, A7MEM-0 Search Memory Registry (+16 more)
 
-### Community 91 - "counts"
+### Community 100 - "counts"
 Cohesion: 0.08
 Nodes (24): boundaries, a7v1_assets_recovered_from_git_history, a7v1_authorizes_full_search, a7v1_current_epoch_loaded, inventory_is_static_metadata_not_numeric_proof, counts, active_fields, aggtrades_base_features (+16 more)
-
-### Community 92 - "manifest.json"
-Cohesion: 0.08
-Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
-
-### Community 93 - "manifest.json"
-Cohesion: 0.08
-Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
-
-### Community 94 - "manifest.json"
-Cohesion: 0.08
-Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
-
-### Community 95 - "manifest.json"
-Cohesion: 0.08
-Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
-
-### Community 96 - "manifest.json"
-Cohesion: 0.08
-Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
-
-### Community 97 - "manifest.json"
-Cohesion: 0.08
-Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
-
-### Community 98 - "manifest.json"
-Cohesion: 0.08
-Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
-
-### Community 99 - "manifest.json"
-Cohesion: 0.08
-Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
-
-### Community 100 - "manifest.json"
-Cohesion: 0.08
-Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
 
 ### Community 101 - "manifest.json"
 Cohesion: 0.08
 Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
 
-### Community 102 - "crypto_a7ak_lv1_latent_state_feature_build.py"
+### Community 102 - "manifest.json"
+Cohesion: 0.08
+Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
+
+### Community 103 - "manifest.json"
+Cohesion: 0.08
+Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
+
+### Community 104 - "manifest.json"
+Cohesion: 0.08
+Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
+
+### Community 105 - "manifest.json"
+Cohesion: 0.08
+Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
+
+### Community 106 - "manifest.json"
+Cohesion: 0.08
+Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
+
+### Community 107 - "manifest.json"
+Cohesion: 0.08
+Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
+
+### Community 108 - "manifest.json"
+Cohesion: 0.08
+Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
+
+### Community 109 - "manifest.json"
+Cohesion: 0.08
+Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
+
+### Community 110 - "manifest.json"
+Cohesion: 0.08
+Nodes (24): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+16 more)
+
+### Community 111 - "crypto_a7ak_lv1_latent_state_feature_build.py"
 Cohesion: 0.20
 Nodes (24): active_cross_section_features(), age_quota_audit(), bucketize(), build_report(), build_symbol_features(), feature_quality(), get_threshold(), main() (+16 more)
 
-### Community 103 - "crypto_a7al2l_fast_derived_replay_preflight.py"
+### Community 112 - "crypto_a7al2l_fast_derived_replay_preflight.py"
 Cohesion: 0.20
 Nodes (22): classify_candidate(), cs_rank_pct(), cs_zscore(), fields_from_selected(), label_matrix(), load_panel_matrices(), main(), MatrixFormulaEvaluator (+14 more)
 
-### Community 104 - "crypto_a7al2n_deep_audit.py"
+### Community 113 - "crypto_a7al2n_deep_audit.py"
 Cohesion: 0.22
 Nodes (24): beta_rows(), classify_deep_candidate(), concentration_value(), finite_tstat(), group_exposure_rows(), group_mask(), load_fast_module(), main() (+16 more)
 
-### Community 105 - "crypto_a7ffr_derived_generation_redesign.py"
+### Community 114 - "crypto_a7ffr_derived_generation_redesign.py"
 Cohesion: 0.29
 Nodes (24): boolish(), data_behavior(), load_inputs(), main(), md_table(), now_utc(), operator_family_policy(), pair_priority() (+16 more)
 
-### Community 106 - "crypto_a7ls7_clue_mechanism_queue_contract.py"
+### Community 115 - "crypto_a7ls7_clue_mechanism_queue_contract.py"
 Cohesion: 0.21
 Nodes (24): add(), basis_vol_expansion(), build_next_queue(), digest(), fields_in_expr(), listing_expansion(), load_clues(), main() (+16 more)
 
-### Community 107 - "build_capture_record"
+### Community 116 - "build_capture_record"
 Cohesion: 0.18
 Nodes (20): append_capture_record(), build_capture_record(), capture_partition_path(), CaptureIdentity, Any, Path, Provenance-safe capture helpers for Binance native forceOrder messages.  Capture, Bind an exact WS message to receive provenance without changing payload. (+12 more)
 
-### Community 108 - "crypto_a7ffcore7e_numeric_response_execution.py"
-Cohesion: 0.20
-Nodes (21): CryptoFeatureAlgebra, add_labels(), CachedCryptoFeatureAlgebra, control_variants(), evaluate_candidate(), label_col(), load_panel(), main() (+13 more)
+### Community 117 - "search_memory_enforcement.py"
+Cohesion: 0.18
+Nodes (18): _as_float(), MemoryDecision, _pair_motif(), Any, Counter, Path, Fail-closed A7MEM prior loader and queue-level search memory gate., _read_csv() (+10 more)
 
-### Community 109 - "Phase 5: Verified Core Extraction Or New Repo Decision"
+### Community 118 - "Phase 5: Verified Core Extraction Or New Repo Decision"
 Cohesion: 0.08
 Nodes (23): 1. Freeze Current System State, 2. Build Verified-Core Inventory, 3. Define Core Interface Contracts, 4. Audit Data, Field, And Leakage Controls, 5. Audit Reward And Validation Automation, 6. Audit Search Core And Policy Separation, 7. Stage Verified Core Layout, 8. New Repo Decision Record (+15 more)
 
-### Community 110 - "crypto_a7ak_lv2_response_merge_audit.py"
+### Community 119 - "crypto_a7ak_lv2_response_merge_audit.py"
 Cohesion: 0.20
 Nodes (23): build_bias_audit(), build_merge_audit(), build_report(), build_response_vectors(), cosine_similarity_matrix(), cs_zscore(), load_forward_labels(), main() (+15 more)
 
-### Community 111 - "crypto_a7search7_family_diversified_queue.py"
+### Community 120 - "crypto_a7search7_family_diversified_queue.py"
 Cohesion: 0.21
 Nodes (23): available(), build_expression(), build_queue(), canonical_ast(), choose_fields(), choose_lane(), fields_by_semantic(), main() (+15 more)
 
-### Community 112 - "feature_algebra.py"
+### Community 121 - "feature_algebra.py"
 Cohesion: 0.22
 Nodes (18): _cross_sectional_rank(), _cross_sectional_zscore(), CryptoFeatureAlgebra, _decay_linear(), _delta(), EvalResult, _group_symbol(), parse_call() (+10 more)
 
-### Community 113 - "formula_gen_v2_adapter.py"
-Cohesion: 0.19
-Nodes (13): _choice(), CryptoFormulaCandidate, CryptoFormulaGenV2Adapter, extract_operators(), Any, Random, CN FormulaGenV2-style generator adapted to crypto field contracts.      This is, semantic_degeneracy_reasons() (+5 more)
+### Community 122 - "CryptoFeatureAlgebra"
+Cohesion: 0.23
+Nodes (17): _cross_sectional_rank(), _cross_sectional_zscore(), CryptoFeatureAlgebra, _decay_linear(), _delta(), EvalResult, _group_symbol(), Any (+9 more)
 
-### Community 114 - "unified_field_management.py"
+### Community 123 - "unified_field_management.py"
 Cohesion: 0.22
 Nodes (21): _as_bool(), build_management_view(), compile_management_tables(), _first(), _git_file_sha(), _git_sha(), _grain(), _payload_sha() (+13 more)
 
-### Community 115 - "crypto_a7ah0_core12_aggtrades_final_handoff_audit.py"
+### Community 124 - "crypto_a7ah0_core12_aggtrades_final_handoff_audit.py"
 Cohesion: 0.22
 Nodes (22): FileMetaData, agg_coverage(), agg_partition_audit(), checksum_count_audit(), hourly_partition_audit(), key_audit(), load_validation_columns(), main() (+14 more)
 
-### Community 116 - "crypto_a7al0_top498_alpha_search_contract.py"
+### Community 125 - "crypto_a7al0_top498_alpha_search_contract.py"
 Cohesion: 0.18
 Nodes (22): active_expected_hours(), build_beta_exposure_baseline(), build_field_family_candidate_list(), build_field_timing_contract(), build_latent_freeze_audit(), build_negative_control_plan(), build_neutralization_policy(), build_split_tables() (+14 more)
 
-### Community 117 - "crypto_a7ffcore26e_targeted_numeric_probe_execution.py"
+### Community 126 - "crypto_a7ffcore26e_targeted_numeric_probe_execution.py"
 Cohesion: 0.19
 Nodes (20): add_labels(), CachedCryptoFeatureAlgebra, choose_probe_packet(), controls(), label_col(), load_panel(), load_schema(), main() (+12 more)
 
-### Community 118 - "crypto_a7ls16_local_preflight.py"
-Cohesion: 0.20
-Nodes (21): A7LS16Evaluator, balanced_sample(), build(), categorical_or_numeric(), expression_operators(), load_numeric(), load_upper_numeric(), md_table() (+13 more)
+### Community 127 - "crypto_a7ffcore7e_numeric_response_execution.py"
+Cohesion: 0.21
+Nodes (20): add_labels(), CachedCryptoFeatureAlgebra, control_variants(), evaluate_candidate(), label_col(), load_panel(), main(), md_table() (+12 more)
 
-### Community 119 - "crypto_a7pm0_source_of_truth_registry.py"
+### Community 128 - "crypto_a7pm0_source_of_truth_registry.py"
 Cohesion: 0.21
 Nodes (22): apply_special_status(), bool_authorized(), build_commit_map(), collect_authorization(), find_reports(), infer_evidence_level(), main(), md_table() (+14 more)
 
-### Community 120 - "crypto_a7s3_metrics_clue_forensic.py"
+### Community 129 - "crypto_a7s3_metrics_clue_forensic.py"
 Cohesion: 0.28
 Nodes (22): baseline_rows(), clean_float(), concentration_summary(), control_detail(), evaluate_expr(), main(), month_contribution(), position_book() (+14 more)
 
-### Community 121 - "crypto_a7pm0_source_of_truth_registry.py"
+### Community 130 - "crypto_a7pm0_source_of_truth_registry.py"
 Cohesion: 0.21
 Nodes (22): apply_special_status(), bool_authorized(), build_commit_map(), collect_authorization(), find_reports(), infer_evidence_level(), main(), md_table() (+14 more)
 
-### Community 122 - "CryptoFeatureAlgebra"
-Cohesion: 0.24
-Nodes (16): _cross_sectional_rank(), _cross_sectional_zscore(), CryptoFeatureAlgebra, _decay_linear(), _delta(), EvalResult, _group_symbol(), Any (+8 more)
-
-### Community 123 - "crypto_a7ls15_million_scale_blueprint_generation.py"
-Cohesion: 0.23
-Nodes (21): is_numeric_constant_expression(), DictWriter, axis_pairs(), build(), field_catalog(), interaction_rows(), md_table(), motifs() (+13 more)
-
-### Community 124 - "crypto_a4_cluster_stress_and_champion_shortlist.py"
-Cohesion: 0.22
-Nodes (21): choose_sample_indices(), clean_float(), corr_vectors(), grade_cluster(), greedy_cluster(), load_a1_by_id(), main(), masked_symbols_target() (+13 more)
-
-### Community 125 - "crypto_a7o2c_semantic_uniqueness_audit.py"
-Cohesion: 0.21
-Nodes (20): main(), Path, write_decision_record(), bucket_expression(), bucket_window(), economic_uniqueness(), extract_windows(), fold_feasibility() (+12 more)
-
-### Community 126 - "crypto_a7aj_universe500_silver_acceptance_and_panel_prep.py"
+### Community 131 - "crypto_a7aj_universe500_silver_acceptance_and_panel_prep.py"
 Cohesion: 0.26
 Nodes (21): audit_dataset(), audit_symbol_file(), build_search_panel(), derive_market_features(), derive_metrics_features(), feature_contract(), load_agg_overlay(), load_manifest() (+13 more)
 
-### Community 127 - "crypto_a7ffcore13e_numeric_response_execution.py"
+### Community 132 - "crypto_a7ffcore13e_numeric_response_execution.py"
 Cohesion: 0.20
 Nodes (19): add_labels(), CachedCryptoFeatureAlgebra, controls(), label_col(), load_panel(), main(), md_table(), metric_pair() (+11 more)
 
-### Community 128 - "crypto_a7regime2_mechanism_regime_audit.py"
+### Community 133 - "crypto_a7regime2_mechanism_regime_audit.py"
 Cohesion: 0.21
 Nodes (21): build_states(), episode_count(), load_hourly_market_state(), main(), md_table(), mechanism_overlap(), nan_p90(), now_utc() (+13 more)
 
-### Community 129 - "crypto_a7regime2_mechanism_regime_audit.py"
+### Community 134 - "crypto_a7regime2_mechanism_regime_audit.py"
 Cohesion: 0.21
 Nodes (21): build_states(), episode_count(), load_hourly_market_state(), main(), md_table(), mechanism_overlap(), nan_p90(), now_utc() (+13 more)
 
-### Community 130 - "MatrixContext"
+### Community 135 - "legacy.py"
+Cohesion: 0.15
+Nodes (18): _activation_identity(), _alias(), _blob(), _canonical_weight_hash(), _git(), LegacyAlias, LegacyModules, load_legacy_modules() (+10 more)
+
+### Community 136 - "crypto_a7d_funding_time_semantics_audit.py"
 Cohesion: 0.28
-Nodes (20): MatrixContext, cash_book(), component_position_decomposition(), funding_field_contract(), funding_lag_ladder(), main(), metric(), payment_decomposition() (+12 more)
+Nodes (20): cash_book(), component_position_decomposition(), funding_field_contract(), funding_lag_ladder(), main(), metric(), payment_decomposition(), Any (+12 more)
 
-### Community 131 - "crypto_a7c_fundingcore_narrow_audit.py"
-Cohesion: 0.29
-Nodes (20): average_component_frames(), component_leave_one_out(), component_standalone(), main(), metric(), placebo_raw_book(), CandidateSpec, DataFrame (+12 more)
-
-### Community 132 - "crypto_a7p_cell_failure_map_redesign.py"
+### Community 137 - "crypto_a7p_cell_failure_map_redesign.py"
 Cohesion: 0.25
 Nodes (20): build_recommendations(), cell_failure_map(), contains_liqvol(), group_summary(), load_reclassification(), load_strict_metadata(), main(), merged_candidate_table() (+12 more)
 
-### Community 133 - "crypto_a7y2_interaction_clue_forensic.py"
+### Community 138 - "crypto_a7y2_interaction_clue_forensic.py"
 Cohesion: 0.25
 Nodes (20): clean_float(), control_rows(), evaluate_clue(), main(), month_rows(), position_book(), Any, DataFrame (+12 more)
 
-### Community 134 - "manifest.json"
-Cohesion: 0.10
-Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
-
-### Community 135 - "manifest.json"
-Cohesion: 0.10
-Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
-
-### Community 136 - "manifest.json"
-Cohesion: 0.10
-Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
-
-### Community 137 - "manifest.json"
-Cohesion: 0.10
-Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
-
-### Community 138 - "manifest.json"
-Cohesion: 0.10
-Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
-
-### Community 139 - "manifest.json"
-Cohesion: 0.10
-Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
+### Community 139 - "crypto_a7ls15_million_scale_blueprint_generation.py"
+Cohesion: 0.25
+Nodes (20): DictWriter, axis_pairs(), build(), field_catalog(), interaction_rows(), md_table(), motifs(), now_iso() (+12 more)
 
 ### Community 140 - "manifest.json"
 Cohesion: 0.10
@@ -2186,213 +2186,213 @@ Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, co
 Cohesion: 0.10
 Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
 
-### Community 146 - "crypto_a7al2p1s_selected_pool_provenance_audit.py"
+### Community 146 - "manifest.json"
+Cohesion: 0.10
+Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
+
+### Community 147 - "manifest.json"
+Cohesion: 0.10
+Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
+
+### Community 148 - "manifest.json"
+Cohesion: 0.10
+Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
+
+### Community 149 - "manifest.json"
+Cohesion: 0.10
+Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
+
+### Community 150 - "manifest.json"
+Cohesion: 0.10
+Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
+
+### Community 151 - "manifest.json"
+Cohesion: 0.10
+Nodes (20): archive_state_sha256, atomic_write, checkpoint, checkpoint_index, compiler_identity, bundle_sha256, paths, completed_identity_sha256 (+12 more)
+
+### Community 152 - "crypto_a7al2p1s_selected_pool_provenance_audit.py"
 Cohesion: 0.24
 Nodes (20): artifact_row(), blocked_aliases_from(), first_row(), git_commit_time(), main(), md_table(), parse_dt(), Any (+12 more)
 
-### Community 147 - "crypto_a7al2x7f_replay_preflight_forensic.py"
+### Community 153 - "crypto_a7al2x7f_replay_preflight_forensic.py"
 Cohesion: 0.23
 Nodes (19): bool_series(), candidate_forensic(), control_forensic(), control_summary(), family_summary(), load_inputs(), main(), md_table() (+11 more)
 
-### Community 148 - "crypto_a7ffcore9e_bounded_replay_execution.py"
+### Community 154 - "crypto_a7ffcore9e_bounded_replay_execution.py"
 Cohesion: 0.20
 Nodes (18): add_labels(), CachedCryptoFeatureAlgebra, choose_best_clue(), label_col(), load_panel(), main(), md_table(), now_utc() (+10 more)
 
-### Community 149 - "crypto_a7ls1_multi_arm_blueprint_generation.py"
+### Community 155 - "crypto_a7ls1_multi_arm_blueprint_generation.py"
 Cohesion: 0.20
 Nodes (20): add_row(), assign_shards(), axis_pairs_for_arm(), balanced_select(), field_catalog(), generate_arm(), main(), md_table() (+12 more)
 
-### Community 150 - "crypto_a7shadow6_may_funding_repair.py"
+### Community 156 - "crypto_a7shadow6_may_funding_repair.py"
 Cohesion: 0.29
 Nodes (20): build(), dense_stress_audit(), download_vision_zip(), fetch_funding(), fetch_rest_funding(), load_vision_funding(), main(), md_table() (+12 more)
 
-### Community 151 - "crypto_a7u0r_source_trace_audit.py"
+### Community 157 - "crypto_a7u0r_source_trace_audit.py"
 Cohesion: 0.24
 Nodes (20): audit_partitions(), build_trace(), clean_float(), expected_hours(), latest_file(), latest_report(), load_daily_manifest(), load_json() (+12 more)
 
-### Community 152 - "run_binance_vision_monthly_pool.py"
+### Community 158 - "run_binance_vision_monthly_pool.py"
 Cohesion: 0.28
 Nodes (20): append_csv(), build_url(), checksum_path(), download_bytes(), download_file_once(), download_verified_file(), evaluate_job(), Job (+12 more)
 
-### Community 153 - "evidence_feedback.py"
+### Community 159 - "evidence_feedback.py"
 Cohesion: 0.31
 Nodes (19): _aligned_key(), _aligned_outcome(), _average_ranks(), capability_matrix_rows(), _clean(), _family_id(), _finite(), _legacy_proxy() (+11 more)
 
-### Community 154 - "crypto_a7ad0_controlled_replay_prep.py"
+### Community 160 - "crypto_a7ad0_controlled_replay_prep.py"
 Cohesion: 0.25
 Nodes (19): authorization_matrix(), baseline_residual_contract(), candidate_family_contract(), clean_float(), cost_lag_contract(), feature_family_availability(), file_sha256(), load_a7ac3() (+11 more)
 
-### Community 155 - "crypto_a7f_funding_regime_failure_audit.py"
-Cohesion: 0.26
-Nodes (19): bucket_from_edges(), gate_definitions(), main(), merge_book_with_regime(), Any, DataFrame, DatetimeIndex, ndarray (+11 more)
-
-### Community 156 - "crypto_a7k2_new_space_same_budget_smoke.py"
+### Community 161 - "crypto_a7k2_new_space_same_budget_smoke.py"
 Cohesion: 0.24
 Nodes (19): add_rank_score(), candidates_from_manifest(), clip(), duplicate_family_audit(), evaluate_candidates(), final_candidate_decision(), linear_beta(), main() (+11 more)
 
-### Community 157 - "crypto_a7l0_search_space_coverage_audit.py"
+### Community 162 - "crypto_a7l0_search_space_coverage_audit.py"
 Cohesion: 0.24
 Nodes (19): candidate_enrich(), compute_a7k_style_preselection(), coverage_summary(), distribution_table(), field_tokens(), formula_depth(), gate_attrition(), load_manifest() (+11 more)
 
-### Community 158 - "crypto_a7m2b_cem_adaptive_grammar_preflight.py"
+### Community 163 - "crypto_a7m2b_cem_adaptive_grammar_preflight.py"
 Cohesion: 0.26
 Nodes (19): bool_series(), diversity_quota_rows(), elite_policy(), initial_weights(), main(), may_exclusion_rows(), non_may_training_mask(), placebo_policy_rows() (+11 more)
 
-### Community 159 - "crypto_a7z_failure_registry_and_route.py"
+### Community 164 - "crypto_a7z_failure_registry_and_route.py"
 Cohesion: 0.25
 Nodes (19): build_authorization_matrix(), build_blocked_motif_registry(), build_next_route_scorecard(), build_source_gap_matrix(), build_weak_prior_registry(), evidence_refs(), main(), next_decision_for_source() (+11 more)
 
-### Community 160 - "crypto_a7ai0r_core12_aggtrades_unified_feature_build.py"
+### Community 165 - "crypto_a7ai0r_core12_aggtrades_unified_feature_build.py"
 Cohesion: 0.23
 Nodes (19): build_features(), main(), md_table(), Any, DataFrame, Path, Series, SeriesGroupBy (+11 more)
 
-### Community 161 - "crypto_a7al2l_derived_replay_preflight.py"
+### Community 166 - "crypto_a7al2l_derived_replay_preflight.py"
 Cohesion: 0.26
 Nodes (19): classify_candidate(), eval_expression(), fields_from_selected(), load_frame(), main(), md_table(), Any, DataFrame (+11 more)
 
-### Community 162 - "crypto_a7al2o_candidate_mini_replay.py"
+### Community 167 - "crypto_a7al2o_candidate_mini_replay.py"
 Cohesion: 0.25
 Nodes (19): alpha_rows(), classify_candidates(), finite_tstat(), group_zscore(), load_fast_module(), main(), mask_symbols(), md_table() (+11 more)
 
-### Community 163 - "crypto_a7al2x1_dry_rerank.py"
+### Community 168 - "crypto_a7al2x1_dry_rerank.py"
 Cohesion: 0.24
 Nodes (19): build_trace(), corr_lookup(), main(), max_corr(), md_table(), objective_family(), pairwise(), Any (+11 more)
 
-### Community 164 - "crypto_a7al2x3_family_balanced_dry_generation.py"
+### Community 169 - "crypto_a7al2x3_family_balanced_dry_generation.py"
 Cohesion: 0.22
 Nodes (19): build_specs(), canonical(), digest(), extract_fields(), extract_operators(), extract_windows(), field_family(), main() (+11 more)
 
-### Community 165 - "crypto_a7al2z1_broader_non_oi_dry_generation.py"
+### Community 170 - "crypto_a7al2z1_broader_non_oi_dry_generation.py"
 Cohesion: 0.22
 Nodes (19): build_specs(), canonical(), digest(), expr_row(), extract_fields(), extract_operators(), extract_windows(), field_family() (+11 more)
 
-### Community 166 - "crypto_a7al2z7_response_guided_dry_generation.py"
+### Community 171 - "crypto_a7al2z7_response_guided_dry_generation.py"
 Cohesion: 0.22
 Nodes (19): build_specs(), canonical(), digest(), expr_row(), extract_fields(), extract_operators(), extract_windows(), field_family() (+11 more)
 
-### Community 167 - "crypto_a7ap2_multiplier_price_scale_repair.py"
+### Community 172 - "crypto_a7ap2_multiplier_price_scale_repair.py"
 Cohesion: 0.26
 Nodes (19): add_forward_returns(), build_repaired_panel(), build_report(), classify(), cs_zscore(), field_smoke(), load_taxonomy(), main() (+11 more)
 
-### Community 168 - "crypto_a7live1_source_lag_checksum_audit.py"
+### Community 173 - "crypto_a7live1_source_lag_checksum_audit.py"
 Cohesion: 0.25
 Nodes (19): audit_selected_fields(), build(), download_family_summary(), expression_fields(), main(), md_table(), now_utc(), parse_args() (+11 more)
 
-### Community 169 - "crypto_a7mem0_search_memory_registry.py"
-Cohesion: 0.29
-Nodes (19): as_bool(), as_float(), avg_or_blank(), build_cluster_memory(), build_pair_motif_prior(), canonicalize_candidates(), finite_values(), main() (+11 more)
-
-### Community 170 - "crypto_a7search6_mechanism_memory_seed_search.py"
+### Community 174 - "crypto_a7search6_mechanism_memory_seed_search.py"
 Cohesion: 0.25
 Nodes (19): available(), build_queue(), canonical_ast(), field_semantic(), interaction_expr(), lane_fields(), main(), md_table() (+11 more)
 
-### Community 171 - "build"
+### Community 175 - "build"
 Cohesion: 0.24
 Nodes (16): build(), canonical_expression(), field_set(), jaccard(), main(), operator_set(), overlap_decision(), parameterless_signature() (+8 more)
 
-### Community 172 - "crypto_a7source5_accepted_forensic_pack.py"
+### Community 176 - "crypto_a7source5_accepted_forensic_pack.py"
 Cohesion: 0.25
 Nodes (19): accepted_field_usage(), accepted_skeletons(), canonical_ast(), compact_expr(), field_semantic(), main(), md_table(), now_utc() (+11 more)
 
-### Community 173 - "crypto_a7ffcore1_ast_schema_adapter.py"
-Cohesion: 0.23
-Nodes (15): ast_stats(), attach_metadata(), canonical(), main(), md_table(), now_utc(), parse_expression(), Parser (+7 more)
+### Community 177 - "semantic_domains.py"
+Cohesion: 0.26
+Nodes (16): parse_call(), canonicalize_semantic_expression(), collect_operator_calls(), default_domain_registry(), FieldDomainRegistry, infer_value_domain(), is_numeric_constant_expression(), _mul_domain() (+8 more)
 
-### Community 174 - "Crypto A7P-4 Productivity Forensic"
+### Community 178 - "Crypto A7P-4 Productivity Forensic"
 Cohesion: 0.11
 Nodes (18): cell, Crypto A7P-4 Productivity Forensic, Decision Counts, Eligible vs Ineligible Median Metrics, feature_family, feature_operator_horizon, Fold Failure Summary, horizon (+10 more)
 
-### Community 175 - "crypto_a1_generator_dry_run.py"
+### Community 179 - "crypto_a1_generator_dry_run.py"
 Cohesion: 0.23
 Nodes (18): add_candidate(), build_candidates(), candidate_id(), expr_mul(), expr_rank(), expr_z(), family_for_feature(), is_forbidden_feature() (+10 more)
 
-### Community 176 - "crypto_a2_5_linkage_and_placebo_audit.py"
+### Community 180 - "crypto_a2_5_linkage_and_placebo_audit.py"
 Cohesion: 0.29
 Nodes (18): ann_return(), audit_baseline_ablation(), audit_cost(), audit_funding_alignment(), audit_label_sources(), audit_placebo(), audit_universe(), forward_return() (+10 more)
 
-### Community 177 - "crypto_a6_1_core4_curve_exposure_sanity.py"
+### Community 181 - "crypto_a6_1_core4_curve_exposure_sanity.py"
 Cohesion: 0.26
 Nodes (18): additive_drawdown(), clean_float(), cluster_position(), cluster_return_components(), compounded_drawdown(), compute_core4(), contribution_summary(), extract_features() (+10 more)
 
-### Community 178 - "crypto_a6_2_core4_risk_scaling.py"
+### Community 182 - "crypto_a6_2_core4_risk_scaling.py"
 Cohesion: 0.25
 Nodes (18): additive_drawdown(), build_scaled_panel(), clean_float(), compounded_drawdown(), compute_multipliers(), load_book(), main(), monthly_pass_rate() (+10 more)
 
-### Community 179 - "crypto_a7n_regime_invariant_counterfactual.py"
-Cohesion: 0.30
-Nodes (18): add_a7n_scores(), diversity_capped_selection(), has_liquidity_volatility(), main(), normalized_motif(), num(), objective_contract(), Any (+10 more)
-
-### Community 180 - "build_crypto_primary_additions_1h_panel_from_vision.py"
+### Community 183 - "build_crypto_primary_additions_1h_panel_from_vision.py"
 Cohesion: 0.29
 Nodes (18): add_features(), aggregate_zip_to_1h(), build_family_hourly(), build_symbol_panel(), load_funding(), load_monthly_manifest(), main(), merge_funding() (+10 more)
 
-### Community 181 - "crypto_a7al2i_replay_preflight.py"
+### Community 184 - "crypto_a7al2i_replay_preflight.py"
 Cohesion: 0.27
 Nodes (18): classify_candidate(), eval_expression(), fields_from_selected(), load_frame(), main(), md_table(), Any, DataFrame (+10 more)
 
-### Community 182 - "crypto_a7al2p1r_selector_reweighted_retry.py"
+### Community 185 - "crypto_a7al2p1r_selector_reweighted_retry.py"
 Cohesion: 0.24
 Nodes (18): classify(), finite_tstat(), load_module(), main(), md_table(), numeric(), portfolio_weights_and_spread(), Any (+10 more)
 
-### Community 183 - "crypto_a7ff30a_portfolio_replay_smoke.py"
-Cohesion: 0.23
-Nodes (18): DatetimeIndex, smoke_column_indices(), cost_fields(), evaluate_portfolio(), expression_fields(), main(), md_table(), now_utc() (+10 more)
-
-### Community 184 - "crypto_a7ao_okx_cross_exchange_light_acceptance.py"
+### Community 186 - "crypto_a7ao_okx_cross_exchange_light_acceptance.py"
 Cohesion: 0.26
 Nodes (18): build_alignment(), dataset_quality(), feature_contract(), load_binance(), load_okx(), main(), manifest_summary(), md_table() (+10 more)
 
-### Community 185 - "crypto_a7ar2_feature_algebra_parity_smoke.py"
+### Community 187 - "crypto_a7ar2_feature_algebra_parity_smoke.py"
 Cohesion: 0.27
 Nodes (18): aggregate_by_family(), evaluate_candidates(), field_timing_subset(), fields_from_candidates(), load_panel(), main(), make_report(), Any (+10 more)
 
-### Community 186 - "crypto_a7ar8_signal_vector_cluster_registry.py"
+### Community 188 - "crypto_a7ar8_signal_vector_cluster_registry.py"
 Cohesion: 0.24
 Nodes (18): build_signal_vectors(), corr_matrix(), greedy_clusters(), main(), max_corr_to_other(), md_table(), mode_value(), Any (+10 more)
 
-### Community 187 - "crypto_a7ls20_checkpoint_deep_audit.py"
+### Community 189 - "crypto_a7ls20_checkpoint_deep_audit.py"
 Cohesion: 0.26
 Nodes (18): add_deep_metrics(), build_marginal_queue(), concentration_summary(), counts(), main(), md_table(), normalize_frame(), now_utc() (+10 more)
 
-### Community 188 - "crypto_a7ls30_productive_followup_queue.py"
+### Community 190 - "crypto_a7ls30_productive_followup_queue.py"
 Cohesion: 0.21
 Nodes (18): balanced_take(), field_swap_variants(), interaction_variants(), load_parents(), main(), md_table(), normalize_skeleton(), now_iso() (+10 more)
 
-### Community 189 - "crypto_a7ls5_followup_queue_contract.py"
+### Community 191 - "crypto_a7ls5_followup_queue_contract.py"
 Cohesion: 0.28
 Nodes (18): add_candidate(), basis_variants(), digest(), lifecycle_variants(), main(), md_table(), now_utc(), oi_positioning_probe_variants() (+10 more)
 
-### Community 190 - "crypto_a7ls6_deep_followup_queue_contract.py"
+### Community 192 - "crypto_a7ls6_deep_followup_queue_contract.py"
 Cohesion: 0.28
 Nodes (18): add(), basis_lane(), digest(), listing_lane(), main(), md_table(), now_utc(), oi_lane() (+10 more)
 
-### Community 191 - "build"
+### Community 193 - "build"
 Cohesion: 0.23
 Nodes (15): build(), candidate_key(), expression_fields(), field_family_counts(), main(), md_table(), metric_summary(), now_utc() (+7 more)
 
-### Community 192 - "crypto_a7source10_seed_expansion_queue.py"
+### Community 194 - "crypto_a7source10_seed_expansion_queue.py"
 Cohesion: 0.20
 Nodes (18): canonical_skeleton(), expand_seed(), fields_in_expr(), main(), md_table(), now_utc(), operator_neighbors(), pair_controls() (+10 more)
 
-### Community 193 - "crypto_a7t0_forward_telemetry_contract.py"
+### Community 195 - "crypto_a7t0_forward_telemetry_contract.py"
 Cohesion: 0.27
 Nodes (18): audit_cross_snapshot(), audit_orderbook_runs(), audit_positioning_forward(), build_append_only_policy(), build_authorization(), build_evidence_boundary(), build_inventory(), build_schedule() (+10 more)
 
-### Community 194 - "crypto_a7v3s0_next_large_search_contract.py"
+### Community 196 - "crypto_a7v3s0_next_large_search_contract.py"
 Cohesion: 0.25
 Nodes (18): available_fields(), build_queue(), lane_for(), main(), md_table(), now_utc(), pair_templates(), Any (+10 more)
 
-### Community 195 - "crypto_a7v3s0_next_large_search_contract.py"
+### Community 197 - "crypto_a7v3s0_next_large_search_contract.py"
 Cohesion: 0.25
 Nodes (18): available_fields(), build_queue(), lane_for(), main(), md_table(), now_utc(), pair_templates(), Any (+10 more)
-
-### Community 196 - "semantic_domains.py"
-Cohesion: 0.27
-Nodes (15): parse_call(), split_args(), canonicalize_semantic_expression(), default_domain_registry(), FieldDomainRegistry, infer_value_domain(), _mul_domain(), _negate() (+7 more)
-
-### Community 197 - "legacy.py"
-Cohesion: 0.19
-Nodes (17): _activation_identity(), _alias(), _blob(), _canonical_weight_hash(), _git(), LegacyAlias, LegacyModules, load_legacy_modules() (+9 more)
 
 ### Community 198 - "crypto_a7aa0_new_source_feasibility_contract.py"
 Cohesion: 0.25
@@ -2402,469 +2402,469 @@ Nodes (17): build_authorization(), build_field_contract(), build_pit_policy(), b
 Cohesion: 0.32
 Nodes (17): build_authorization(), compare_recommendations(), is_ok(), main(), Any, DataFrame, Path, read_json() (+9 more)
 
-### Community 200 - "crypto_a7g1_may_failure_forensic_audit.py"
-Cohesion: 0.27
-Nodes (17): book_regime_summary(), component_symbol_may(), component_top_loss_contrib(), concentration_stats(), main(), object_book(), object_specs(), Any (+9 more)
-
-### Community 201 - "crypto_a7h0_nonfunding_residual_smoke.py"
-Cohesion: 0.25
-Nodes (17): a7h_candidates(), candidate_features(), linear_beta(), main(), Any, CandidateSpec, DataFrame, DatetimeIndex (+9 more)
-
-### Community 202 - "crypto_a7o_l1w1r_policy_repair_audit.py"
+### Community 200 - "crypto_a7o_l1w1r_policy_repair_audit.py"
 Cohesion: 0.27
 Nodes (17): artifact_staleness_audit(), checkpoint_summary_v2(), control_forensic(), enrich_with_split_gross_exposure(), load_deep(), load_strict_scored(), main(), nonnegative() (+9 more)
 
-### Community 203 - "crypto_a7v1_feature_registry_and_smoke.py"
+### Community 201 - "crypto_a7v1_feature_registry_and_smoke.py"
 Cohesion: 0.27
 Nodes (17): add_smoke_feature(), build_base_registry(), build_config(), build_derived_specs(), main(), Any, DataFrame, Path (+9 more)
 
-### Community 204 - "crypto_a7al2p1_selector_feature_generation.py"
+### Community 202 - "crypto_a7al2p1_selector_feature_generation.py"
 Cohesion: 0.27
 Nodes (17): lineage_features(), load_module(), main(), md_table(), numeric(), operator_depth(), oriented_label_t1_metrics(), premay_control_by_split() (+9 more)
 
-### Community 205 - "crypto_a7al2r_local_forensic.py"
+### Community 203 - "crypto_a7al2r_local_forensic.py"
 Cohesion: 0.25
 Nodes (17): classify(), contribution_tables(), control_ratio_by_split(), finite_tstat(), load_module(), main(), md_table(), positive_count() (+9 more)
 
-### Community 206 - "crypto_a7al_universe498_replay_acceptance.py"
+### Community 204 - "crypto_a7al_universe498_replay_acceptance.py"
 Cohesion: 0.27
 Nodes (17): assign_liquidity_tiers(), audit_symbol(), build_reports(), build_split_coverage(), classify_symbol_format(), feature_family(), main(), md_table() (+9 more)
 
-### Community 207 - "crypto_a7ff40_control_strict_followup.py"
+### Community 205 - "crypto_a7ff40_control_strict_followup.py"
 Cohesion: 0.29
 Nodes (17): balanced_take_by_skeleton(), build_followup_queue(), build_policy(), main(), md_table(), now_utc(), numeric(), post_numeric_forensic() (+9 more)
 
-### Community 208 - "crypto_a7ffcore32e_replay_preflight_execution.py"
+### Community 206 - "crypto_a7ffcore32e_replay_preflight_execution.py"
 Cohesion: 0.25
 Nodes (17): attach_labels(), build_signal(), cs_rank(), cs_zscore(), delta(), load_dataset(), main(), md_table() (+9 more)
 
-### Community 209 - "crypto_a7ffcore33e_bounded_replay_execution.py"
+### Community 207 - "crypto_a7ffcore33e_bounded_replay_execution.py"
 Cohesion: 0.26
 Nodes (17): attach_labels(), build_signal(), cs_rank(), cs_zscore(), delta(), load_dataset(), main(), md_table() (+9 more)
 
-### Community 210 - "crypto_a7ffcore57_replay_failure_decomposition.py"
+### Community 208 - "crypto_a7ffcore57_replay_failure_decomposition.py"
 Cohesion: 0.29
 Nodes (17): build_candidate_profile(), finite_float(), label_observation_audit(), main(), md_table(), now_utc(), Any, DataFrame (+9 more)
 
-### Community 211 - "crypto_a7ffr8_selector_objective_rewrite.py"
+### Community 209 - "crypto_a7ffr8_selector_objective_rewrite.py"
 Cohesion: 0.29
 Nodes (17): add_scores(), main(), md_table(), now_utc(), num(), Any, DataFrame, Path (+9 more)
 
-### Community 212 - "crypto_a7ls29_productive_family_queue.py"
+### Community 210 - "crypto_a7ls29_productive_family_queue.py"
 Cohesion: 0.22
 Nodes (17): balanced_take(), field_swap_variants(), main(), md_table(), normalize_skeleton(), now_iso(), Any, DataFrame (+9 more)
 
-### Community 213 - "crypto_a7s1_data_source_availability_audit.py"
+### Community 211 - "crypto_a7s1_data_source_availability_audit.py"
 Cohesion: 0.31
 Nodes (17): candidate_source_contract(), main(), microstructure_audit(), ms_to_iso(), panel_coverage(), pit_matrix(), positioning_audit(), Any (+9 more)
 
-### Community 214 - "crypto_a7search6_validation_pack.py"
+### Community 212 - "crypto_a7search6_validation_pack.py"
 Cohesion: 0.31
 Nodes (17): accepted_rows(), add_row(), build_queue(), compressed_mechanisms(), field_risk(), field_risk_table(), main(), md_table() (+9 more)
 
-### Community 215 - "test_crypto_unified_field_management_v1.py"
+### Community 213 - "test_crypto_unified_field_management_v1.py"
 Cohesion: 0.19
 Nodes (16): DataFrame, Path, tables(), test_aliases_resolve_to_one_canonical_field(), test_canonical_identity_is_deterministic(), test_carrier_boundaries_are_not_merged(), test_catalog_joins_existing_authority_semantics(), test_conflicting_authorities_fail_closed() (+8 more)
 
-### Community 216 - "search_memory.py"
+### Community 214 - "search_memory.py"
 Cohesion: 0.21
 Nodes (11): extract_windows(), canonicalize_expression_light(), CryptoMemoryRecord, CryptoSearchMemory, _digest(), expression_memory_key(), production_rule_key(), Any (+3 more)
 
-### Community 217 - "crypto_a7af2_selected_field_failure_forensic.py"
+### Community 215 - "crypto_a7af2_selected_field_failure_forensic.py"
 Cohesion: 0.26
 Nodes (16): add_gate_columns(), bool_col(), control_forensic(), family_gate_summary(), gate_summary(), main(), md_table(), Any (+8 more)
 
-### Community 218 - "crypto_a7k1b_new_space_generator_impl_preflight.py"
+### Community 216 - "crypto_a7k1b_new_space_generator_impl_preflight.py"
 Cohesion: 0.26
 Nodes (16): duplicate_audit(), family_quota_audit(), family_tokens(), feature_coverage(), field_tokens(), formula_hash(), generate_arm(), main() (+8 more)
 
-### Community 219 - "crypto_a7l1b_implementation_preflight.py"
+### Community 217 - "crypto_a7l1b_implementation_preflight.py"
 Cohesion: 0.26
 Nodes (16): expr_hash(), feature_activity_rows(), field_tokens(), formula(), formula_depth(), main(), make_candidates(), metric_availability_rows() (+8 more)
 
-### Community 220 - "crypto_a7m1b_surrogate_engine_readiness.py"
+### Community 218 - "crypto_a7m1b_surrogate_engine_readiness.py"
 Cohesion: 0.29
 Nodes (16): bool_series(), build_targets(), engine_inventory(), laplace_rate(), lift_for(), main(), Any, DataFrame (+8 more)
 
-### Community 221 - "crypto_a7m2a_ast_repair_adapter_preflight.py"
+### Community 219 - "crypto_a7m2a_ast_repair_adapter_preflight.py"
 Cohesion: 0.28
 Nodes (16): any_count(), authorization_rows(), bool_series(), failure_taxonomy(), main(), may_exclusion_rows(), Any, DataFrame (+8 more)
 
-### Community 222 - "crypto_a7v4_control_preflight.py"
+### Community 220 - "crypto_a7v4_control_preflight.py"
 Cohesion: 0.28
 Nodes (16): blocked_control_variant(), build_candidate_coverage(), build_controls(), build_policy_audit(), main(), Any, DataFrame, Path (+8 more)
 
-### Community 223 - "crypto_a7v6_candidate_control_dominance_forensic.py"
+### Community 221 - "crypto_a7v6_candidate_control_dominance_forensic.py"
 Cohesion: 0.29
 Nodes (16): best_control(), bool_int(), build_control_summary(), build_dominance_table(), build_family_summary(), clean_float(), load_wide_metrics(), main() (+8 more)
 
-### Community 224 - "十个必答问题"
+### Community 222 - "十个必答问题"
 Cohesion: 0.12
 Nodes (16): 10. 是否可启动小型 development-only canary, 1. Canonical primitive authority, 2. Deprecated 旧实现, 3. 已确认的历史语义漂移, 4. 三种 mapping 保留/删除的信息, 5. Turnover attribution, 6. Aligned feedback 是否优于旧 gross proxy, 7. 仍能欺骗 feedback 的 decoy (+8 more)
 
-### Community 225 - "crypto_a7al0g_upper_regime_state_builder.py"
+### Community 223 - "crypto_a7al0g_upper_regime_state_builder.py"
 Cohesion: 0.26
 Nodes (16): build_regime_panel(), contract_rows(), coverage_rows(), load_positioning_fields(), main(), md_table(), Any, DataFrame (+8 more)
 
-### Community 226 - "crypto_a7al2x2_objective_family_coverage_gap_audit.py"
+### Community 224 - "crypto_a7al2x2_objective_family_coverage_gap_audit.py"
 Cohesion: 0.29
 Nodes (16): as_bool(), classify_family(), count_unique(), family_count(), gap_stage(), group_count(), main(), md_table() (+8 more)
 
-### Community 227 - "crypto_a7ap0_cross_exchange_overlay_acceptance.py"
+### Community 225 - "crypto_a7ap0_cross_exchange_overlay_acceptance.py"
 Cohesion: 0.29
 Nodes (16): build_report(), contract_audit(), field_quality(), load_panel(), main(), md_table(), parquet_files(), price_scale_audit() (+8 more)
 
-### Community 228 - "crypto_a7ap1_cross_exchange_field_smoke.py"
+### Community 226 - "crypto_a7ap1_cross_exchange_field_smoke.py"
 Cohesion: 0.28
 Nodes (16): build_report(), classify(), cs_zscore(), evaluate(), load_panel(), main(), md_table(), Any (+8 more)
 
-### Community 229 - "crypto_a7ff24r_dry_generation_plan.py"
+### Community 227 - "crypto_a7ff24r_dry_generation_plan.py"
 Cohesion: 0.24
 Nodes (16): build_pool(), interaction(), main(), md_table(), motifs_for_pair(), now_utc(), Any, DataFrame (+8 more)
 
-### Community 230 - "crypto_a7ff31_portfolio_forensic.py"
+### Community 228 - "crypto_a7ff31_portfolio_forensic.py"
 Cohesion: 0.26
 Nodes (16): expression_fields(), expression_operators(), main(), md_table(), now_utc(), Any, DataFrame, DatetimeIndex (+8 more)
 
-### Community 231 - "crypto_a7ff42_family_balanced_numeric.py"
+### Community 229 - "crypto_a7ff42_family_balanced_numeric.py"
 Cohesion: 0.30
 Nodes (16): balanced_take(), build_queue(), main(), md_table(), now_utc(), numeric(), post_forensic(), Any (+8 more)
 
-### Community 232 - "crypto_a7ffcore55_numeric_clue_forensic.py"
+### Community 230 - "crypto_a7ffcore55_numeric_clue_forensic.py"
 Cohesion: 0.29
 Nodes (16): aggregate_candidates(), build_replay_packet(), clue_score(), finite_float(), load_shard_csv(), main(), md_table(), now_utc() (+8 more)
 
-### Community 233 - "crypto_a7ffcore59_numeric_repair_execution.py"
+### Community 231 - "crypto_a7ffcore59_numeric_repair_execution.py"
 Cohesion: 0.35
 Nodes (16): checkpoint_rows(), collect_shard_csv(), compact_summary(), main(), md_table(), now_utc(), parse_shard_filter(), Any (+8 more)
 
-### Community 234 - "crypto_a7ffcore60bcd_parallel_audits.py"
+### Community 232 - "crypto_a7ffcore60bcd_parallel_audits.py"
 Cohesion: 0.35
 Nodes (16): build_materialization_audit(), build_selector_audit(), build_target_audit(), classify_decision(), collect(), main(), md_table(), now_utc() (+8 more)
 
-### Community 235 - "crypto_a7source5_a7search7_source_lag_reward_flow.py"
+### Community 233 - "crypto_a7source5_a7search7_source_lag_reward_flow.py"
 Cohesion: 0.38
 Nodes (16): acquire_lock(), apply_semantic_gate(), build_reward_survivor_queue(), concat_csv(), concat_csv_files(), deduplicate_reward_survivors(), log(), main() (+8 more)
 
-### Community 236 - "crypto_a7t1_forward_health_report.py"
+### Community 234 - "crypto_a7t1_forward_health_report.py"
 Cohesion: 0.29
 Nodes (16): age_hours(), build_authorization(), build_health(), cross_health(), main(), now_utc(), orderbook_health(), positioning_health() (+8 more)
 
-### Community 237 - "crypto_a7u_enhanced_v1_acceptance_contract.py"
+### Community 235 - "crypto_a7u_enhanced_v1_acceptance_contract.py"
 Cohesion: 0.26
 Nodes (16): audit_files(), audit_manifests(), build_field_contract(), build_join_contract(), expected_hours(), main(), max_abs(), parse_partition() (+8 more)
 
-### Community 238 - "crypto_a7v3s0_reward_sharded_aggregate.py"
+### Community 236 - "crypto_a7v3s0_reward_sharded_aggregate.py"
 Cohesion: 0.35
 Nodes (16): collect_file(), collect_manifests(), collect_queue(), enrich_with_queue(), expand_exact_signal_aliases(), explode_reasons(), main(), md_table() (+8 more)
 
-### Community 239 - "crypto_a7v3s4_near_miss_prefilter_audit.py"
+### Community 237 - "crypto_a7v3s4_near_miss_prefilter_audit.py"
 Cohesion: 0.27
 Nodes (16): build_prefilter_rules(), classify(), extract_fields(), field_summary(), group_summary(), main(), md_table(), now_utc() (+8 more)
 
-### Community 240 - "crypto_a7v3s7_candidate_construction_redesign.py"
+### Community 238 - "crypto_a7v3s7_candidate_construction_redesign.py"
 Cohesion: 0.31
 Nodes (16): bounded_select(), contains_reason(), failure_rules(), main(), md_table(), now_utc(), numeric(), pair_motif_key() (+8 more)
 
-### Community 241 - "crypto_policy_upgrade_qualification_supersession.py"
+### Community 239 - "crypto_policy_upgrade_qualification_supersession.py"
 Cohesion: 0.32
 Nodes (15): build(), check(), _commit_exists(), main(), _payload_sha(), Any, Path, _qualification() (+7 more)
 
-### Community 242 - "crypto_a7v3s9_prereward_oos_control_proxy.py"
+### Community 240 - "crypto_a7v3s9_prereward_oos_control_proxy.py"
 Cohesion: 0.27
 Nodes (16): add_proxy_columns(), apply_proxy_runtime(), bounded_select(), contains(), group_summary(), halving_keep_queue(), main(), md_table() (+8 more)
 
-### Community 243 - "search_memory.py"
-Cohesion: 0.23
-Nodes (10): canonicalize_expression_light(), CryptoMemoryRecord, CryptoSearchMemory, _digest(), expression_memory_key(), production_rule_key(), Any, Path (+2 more)
+### Community 241 - "evaluate_mapping_result"
+Cohesion: 0.25
+Nodes (12): _average_ranks(), _cross_sectional_rank_ic(), evaluate_mapping_result(), _fixed_block_metrics(), _matrix(), _ordinary_mean_lcb(), Any, ndarray (+4 more)
 
-### Community 244 - "CRYPTO A7AF-2 Selected-Field Failure Forensic"
+### Community 242 - "CRYPTO A7AF-2 Selected-Field Failure Forensic"
 Cohesion: 0.12
 Nodes (15): Authorization, Bias Audit, Control Mode Summary, CRYPTO A7AF-2 Selected-Field Failure Forensic, Decision, Decision, Family Gate Summary, Findings (+7 more)
 
-### Community 245 - "compute_snapshot"
+### Community 243 - "compute_snapshot"
 Cohesion: 0.31
 Nodes (15): clean_float(), compute_snapshot(), latest_bar_metadata(), main(), Any, DataFrame, ndarray, Path (+7 more)
 
-### Community 246 - "crypto_a7ab0_forward_data_handoff_audit.py"
+### Community 244 - "crypto_a7ab0_forward_data_handoff_audit.py"
 Cohesion: 0.30
 Nodes (15): audit_cross_snapshot(), audit_metrics_gold(), audit_probe_manifest(), build_authorization(), build_policy(), classify_cross_field(), main(), Any (+7 more)
 
-### Community 247 - "crypto_a7ac1_expanded_universe_backfill_contract.py"
+### Community 245 - "crypto_a7ac1_expanded_universe_backfill_contract.py"
 Cohesion: 0.32
 Nodes (15): build_acceptance_gates(), build_authorization(), build_download_job_plan(), build_source_requirements(), build_track_registry(), load_inputs(), main(), Any (+7 more)
 
-### Community 248 - "crypto_a7ac2c_effective_backfill_coverage_audit.py"
+### Community 246 - "crypto_a7ac2c_effective_backfill_coverage_audit.py"
 Cohesion: 0.30
 Nodes (15): audit_funding_sources(), audit_metrics_sources(), audit_monthly_sources(), build_manifest(), main(), metric_symbol_inventory(), primary_symbols(), Any (+7 more)
 
-### Community 249 - "crypto_a7ag2_aggtrades_interaction_failure_forensic.py"
+### Community 247 - "crypto_a7ag2_aggtrades_interaction_failure_forensic.py"
 Cohesion: 0.27
 Nodes (15): add_gates(), control_penetration(), family_summary(), gate_summary(), gt0(), main(), md_table(), Any (+7 more)
 
-### Community 250 - "crypto_a7k1_generator_space_preflight.py"
+### Community 248 - "crypto_a7k1_generator_space_preflight.py"
 Cohesion: 0.28
 Nodes (15): audit_family_diversity(), audit_feature_coverage(), audit_may_exclusion(), audit_old_pool_preselection(), load_json(), main(), pass_col(), Any (+7 more)
 
-### Community 251 - "crypto_a7p4_productivity_forensic.py"
+### Community 249 - "crypto_a7p4_productivity_forensic.py"
 Cohesion: 0.28
 Nodes (15): bool_sum(), family_summary(), fold_failure_summary(), load_csv(), main(), may_gate_attribution(), Any, DataFrame (+7 more)
 
-### Community 252 - "crypto_a7x4_failure_forensic.py"
+### Community 250 - "crypto_a7x4_failure_forensic.py"
 Cohesion: 0.31
 Nodes (15): clean_float(), control_contamination_detail(), failure_mode_matrix(), label_summary(), load_inputs(), main(), near_miss_records(), Any (+7 more)
 
-### Community 253 - "crypto_a7ab3_seed_constrained_dry_generation.py"
+### Community 251 - "crypto_a7ab3_seed_constrained_dry_generation.py"
 Cohesion: 0.24
 Nodes (15): atom(), main(), md_table(), next_distinct(), now_utc(), obvious_self_spread_count(), pair_expression(), Any (+7 more)
 
-### Community 254 - "crypto_a7aif0_field_contract_enforcement_ledger.py"
+### Community 252 - "crypto_a7aif0_field_contract_enforcement_ledger.py"
 Cohesion: 0.34
 Nodes (15): as_set(), boolish(), classify_semantic_role(), dict_by_field(), main(), md_table(), motif_field_rows(), now_utc() (+7 more)
 
-### Community 255 - "crypto_a7ak_lv0_listing_age_latent_variable_contract.py"
+### Community 253 - "crypto_a7ak_lv0_listing_age_latent_variable_contract.py"
 Cohesion: 0.29
 Nodes (15): approval_checklist(), authorization_matrix(), construction_rules(), forbidden_inputs(), main(), md_table(), observable_state_features(), Any (+7 more)
 
-### Community 256 - "crypto_a7al2w_signal_vector_selector_repair.py"
+### Community 254 - "crypto_a7al2w_signal_vector_selector_repair.py"
 Cohesion: 0.30
 Nodes (15): corr_lookup(), greedy_repair_select(), main(), max_corr_to_selected(), md_table(), pairwise_selected(), Any, DataFrame (+7 more)
 
-### Community 257 - "crypto_a7al2x4m_materialization_and_evaluator_audit.py"
+### Community 255 - "crypto_a7al2x4m_materialization_and_evaluator_audit.py"
 Cohesion: 0.31
 Nodes (15): actual_values(), build_field_sources(), build_operator_semantics(), build_state_domains(), build_statemask_audit(), main(), md_table(), now_utc() (+7 more)
 
-### Community 258 - "build"
+### Community 256 - "build"
 Cohesion: 0.30
 Nodes (15): add_age_columns(), age_bucket(), build(), load_first_seen(), main(), md_table(), normalize_patch(), now_utc() (+7 more)
 
-### Community 259 - "crypto_a7ff15_cost_tiered_balanced_followup.py"
+### Community 257 - "crypto_a7ff15_cost_tiered_balanced_followup.py"
 Cohesion: 0.28
 Nodes (15): assign_cost_tier(), bool_series(), build_candidate_pool(), cost_tier_rank(), load_shard_frames(), main(), md_table(), now_utc() (+7 more)
 
-### Community 260 - "crypto_a7ff55r3_repaired_atlas_dry_generation.py"
+### Community 258 - "crypto_a7ff55r3_repaired_atlas_dry_generation.py"
 Cohesion: 0.28
 Nodes (15): add_row(), build_pool(), interaction(), main(), md_table(), now_utc(), Any, DataFrame (+7 more)
 
-### Community 261 - "crypto_a7ffcore12e_materialization_preflight.py"
+### Community 259 - "crypto_a7ffcore12e_materialization_preflight.py"
 Cohesion: 0.25
 Nodes (13): build_queue(), CachedCryptoFeatureAlgebra, load_panel(), main(), md_table(), now_utc(), Any, DataFrame (+5 more)
 
-### Community 262 - "crypto_a7ffcore6e_materialization_preflight_execution.py"
+### Community 260 - "crypto_a7ffcore6e_materialization_preflight_execution.py"
 Cohesion: 0.25
 Nodes (13): CachedCryptoFeatureAlgebra, evaluate_shard(), load_panel(), main(), md_table(), now_utc(), Any, DataFrame (+5 more)
 
-### Community 263 - "crypto_a7ffr7_operator_pair_repair.py"
+### Community 261 - "crypto_a7ffr7_operator_pair_repair.py"
 Cohesion: 0.32
 Nodes (15): add_response_score(), build_repaired_dry_queue(), family_suppression(), main(), md_table(), now_utc(), num(), operator_pair_policy() (+7 more)
 
-### Community 264 - "crypto_a7ffr9_reference_regime_repair.py"
+### Community 262 - "crypto_a7ffr9_reference_regime_repair.py"
 Cohesion: 0.31
 Nodes (15): main(), md_table(), normalize_queue(), now_utc(), num(), Any, DataFrame, Path (+7 more)
 
-### Community 265 - "crypto_a7guard0_leakage_chain_audit.py"
+### Community 263 - "crypto_a7guard0_leakage_chain_audit.py"
 Cohesion: 0.30
 Nodes (15): chain_gate_inventory(), classify_occurrence(), file_contains(), main(), md_table(), now_utc(), Any, DataFrame (+7 more)
 
-### Community 266 - "crypto_a7input2_tag_aware_queue_builder.py"
+### Community 264 - "crypto_a7input2_tag_aware_queue_builder.py"
 Cohesion: 0.28
 Nodes (15): boolish(), cap_queue(), classify_mode(), enrich_candidates(), main(), md_table(), now_utc(), parse_fields() (+7 more)
 
-### Community 267 - "crypto_a7live0_forward_adapter_probe.py"
+### Community 265 - "crypto_a7live0_forward_adapter_probe.py"
 Cohesion: 0.30
 Nodes (15): build(), build_frame(), dense_funding_delta(), evaluate_packet(), expression_fields(), field_health(), main(), md_table() (+7 more)
 
-### Community 268 - "main"
+### Community 266 - "main"
 Cohesion: 0.32
 Nodes (15): blocker_family(), collect_csv(), enrich_with_queue(), main(), md_table(), now_utc(), numeric_col(), Any (+7 more)
 
-### Community 269 - "crypto_a7s0_data_horizon_contract.py"
+### Community 267 - "crypto_a7s0_data_horizon_contract.py"
 Cohesion: 0.32
 Nodes (15): cost_lag_contract(), data_source_inventory(), feature_family_contract(), horizon_execution_contract(), latest_panel_report(), main(), panel_inventory(), pit_timestamp_contract() (+7 more)
 
-### Community 270 - "crypto_a7s1_metrics_acceptance_audit.py"
+### Community 268 - "crypto_a7s1_metrics_acceptance_audit.py"
 Cohesion: 0.33
 Nodes (15): availability_summary(), clean_float(), coverage_by_symbol(), field_contract_summary(), gold_panel_summary(), load_inputs(), main(), Any (+7 more)
 
-### Community 271 - "crypto_a7s3_sample_package_acceptance_audit.py"
+### Community 269 - "crypto_a7s3_sample_package_acceptance_audit.py"
 Cohesion: 0.28
 Nodes (15): acceptance_matrix(), audit_aggtrades(), audit_orderbook(), audit_panel(), audit_positioning(), main(), max_abs(), Any (+7 more)
 
-### Community 272 - "crypto_a7search6_v3_source_contract_audit.py"
+### Community 270 - "crypto_a7search6_v3_source_contract_audit.py"
 Cohesion: 0.33
 Nodes (15): build_field_maps(), dataset_inventory(), dataset_specs(), field_contract(), load_accepted(), main(), md_table(), now_utc() (+7 more)
 
-### Community 273 - "crypto_a7shadow0_historical_candidate_consolidation.py"
+### Community 271 - "crypto_a7shadow0_historical_candidate_consolidation.py"
 Cohesion: 0.33
 Nodes (15): canonical_expression(), canonical_skeleton(), evidence_tier(), hard_gate(), infer_source_required(), main(), normalize_row(), Any (+7 more)
 
-### Community 274 - "crypto_a7source10_proxy_reward_flow_company_py_20260708.py"
+### Community 272 - "crypto_a7source10_proxy_reward_flow_company_py_20260708.py"
 Cohesion: 0.35
 Nodes (15): child_env(), ensure_proxy_shards(), ensure_reward_shards(), launch_batch(), log(), main(), proxy_manifest(), Path (+7 more)
 
-### Community 275 - "summarize"
+### Community 273 - "summarize"
 Cohesion: 0.33
 Nodes (15): attach_queue_metadata(), build(), main(), md_table(), now_utc(), Any, DataFrame, Namespace (+7 more)
 
-### Community 276 - "crypto_a7v3s0_reward_sharded_aggregate.py"
+### Community 274 - "crypto_a7v3s0_reward_sharded_aggregate.py"
 Cohesion: 0.37
 Nodes (15): collect_file(), collect_manifests(), collect_queue(), enrich_with_queue(), explode_reasons(), main(), md_table(), now_utc() (+7 more)
 
-### Community 277 - "build"
+### Community 275 - "build"
 Cohesion: 0.30
 Nodes (15): add_age_columns(), age_bucket(), build(), load_first_seen(), main(), md_table(), normalize_patch(), now_utc() (+7 more)
 
-### Community 278 - "crypto_a7guard0_leakage_chain_audit.py"
+### Community 276 - "crypto_a7guard0_leakage_chain_audit.py"
 Cohesion: 0.30
 Nodes (15): chain_gate_inventory(), classify_occurrence(), file_contains(), main(), md_table(), now_utc(), Any, DataFrame (+7 more)
 
-### Community 279 - "search_memory_enforcement.py"
-Cohesion: 0.28
-Nodes (10): _as_float(), MemoryDecision, _pair_motif(), Any, Counter, Path, Fail-closed A7MEM prior loader and queue-level search memory gate., _read_csv() (+2 more)
+### Community 277 - "crypto_a3_signal_cluster_registry.py"
+Cohesion: 0.29
+Nodes (14): choose_sample_indices(), corr_vectors(), greedy_cluster(), load_a1_by_id(), main(), normalize_vector(), Any, DataFrame (+6 more)
 
-### Community 280 - "crypto_a6_3_core4_conservative_dry_shadow_replay.py"
+### Community 278 - "crypto_a6_3_core4_conservative_dry_shadow_replay.py"
 Cohesion: 0.28
 Nodes (14): additive_drawdown(), build_panel(), clean_float(), compounded_drawdown(), main(), monthly_stats(), Any, DataFrame (+6 more)
 
-### Community 281 - "crypto_a7ac3_core48_panel_integrity_audit.py"
+### Community 279 - "crypto_a7ac3_core48_panel_integrity_audit.py"
 Cohesion: 0.30
 Nodes (14): build_field_coverage(), build_schema_alignment(), build_symbol_coverage(), load_registry(), main(), normalize_panel(), Any, DataFrame (+6 more)
 
-### Community 282 - "crypto_a7m1_surrogate_policy_preflight.py"
+### Community 280 - "crypto_a7m1_surrogate_policy_preflight.py"
 Cohesion: 0.30
 Nodes (14): bool_series(), build_targets(), feature_table(), laplace_rate(), lift_rows(), main(), Any, DataFrame (+6 more)
 
-### Community 283 - "crypto_a7q_reset_decision.py"
+### Community 281 - "crypto_a7q_reset_decision.py"
 Cohesion: 0.49
 Nodes (14): a7p_failure_freeze(), a7q1_hypothesis_matrix(), a7q2_route_selection(), a7q3_next_stage(), load_json(), main(), Any, DataFrame (+6 more)
 
-### Community 284 - "evaluate_horizons"
+### Community 282 - "evaluate_horizons"
 Cohesion: 0.32
 Nodes (14): evaluate_horizons(), fold_min(), main(), make_contracts(), Any, DataFrame, DatetimeIndex, ndarray (+6 more)
 
-### Community 285 - "CRYPTO A7AH-0 Core12 aggTrades Final Handoff Audit"
+### Community 283 - "CRYPTO A7AH-0 Core12 aggTrades Final Handoff Audit"
 Cohesion: 0.13
 Nodes (14): agg Feature Partition Audit, aggTrades Coverage By Symbol, Authorization, Boundary, Bounded Field Audit, Checksum Count Audit, CRYPTO A7AH-0 Core12 aggTrades Final Handoff Audit, Decision (+6 more)
 
-### Community 286 - "CRYPTO A7FF VERSION 20260530: A7FF-R TO A7FF-24R"
+### Community 284 - "CRYPTO A7FF VERSION 20260530: A7FF-R TO A7FF-24R"
 Cohesion: 0.13
 Nodes (14): Authorization Boundary, Company Shard Plan, Complete Formula Index, CRYPTO A7FF VERSION 20260530: A7FF-R TO A7FF-24R, Derived Field Catalog, Formula Family Summary, Formula Samples, Key Stage Decisions (+6 more)
 
-### Community 287 - "Keep-Review Queue"
+### Community 285 - "Keep-Review Queue"
 Cohesion: 0.13
 Nodes (14): a7ls15_04d0fe57519a6e45, a7ls15_42dc6539d51aca8b, a7ls15_6b338a109f660b8c, a7ls15_7355ef8aa37d5217, a7ls15_78478a819e0cd255, a7ls15_83b2ec53c58ee01a, a7ls15_982c459fa90224ed, Boundaries (+6 more)
 
-### Community 288 - "A7LS24 Queue"
+### Community 286 - "A7LS24 Queue"
 Cohesion: 0.13
 Nodes (14): a7ls15_04d0fe57519a6e45, a7ls15_42dc6539d51aca8b, a7ls15_6b338a109f660b8c, a7ls15_7355ef8aa37d5217, a7ls15_78478a819e0cd255, a7ls15_83b2ec53c58ee01a, a7ls15_982c459fa90224ed, A7LS24 Queue (+6 more)
 
-### Community 289 - "build_crypto_bronze.py"
+### Community 287 - "build_crypto_bronze.py"
 Cohesion: 0.31
 Nodes (14): build_funding_rate(), build_futures_klines(), candidate_paths(), main(), normalize_epoch_series(), Any, DataFrame, Path (+6 more)
 
-### Community 290 - "crypto_a7ab1_selector_rewrite_dryrun.py"
+### Community 288 - "crypto_a7ab1_selector_rewrite_dryrun.py"
 Cohesion: 0.30
 Nodes (14): as_bool(), clamp(), file_meta(), finite_float(), main(), make_blueprint(), md_table(), now_utc() (+6 more)
 
-### Community 291 - "crypto_a7af1_role_aware_selector_dryrun.py"
+### Community 289 - "crypto_a7af1_role_aware_selector_dryrun.py"
 Cohesion: 0.29
 Nodes (14): assign_tier(), blueprint(), clamp(), finite_float(), main(), md_table(), now_utc(), Any (+6 more)
 
-### Community 292 - "crypto_a7aif2_field_enforcement_regression.py"
+### Community 290 - "crypto_a7aif2_field_enforcement_regression.py"
 Cohesion: 0.35
 Nodes (14): evaluator_fail_closed(), field_set(), generator_smoke(), historical_reclassification(), main(), md_table(), now_utc(), Any (+6 more)
 
-### Community 293 - "crypto_a7al2v_replay_aware_selector_dryrun.py"
+### Community 291 - "crypto_a7al2v_replay_aware_selector_dryrun.py"
 Cohesion: 0.30
 Nodes (14): build_selector_matrix(), forbidden_feature_audit(), main(), md_table(), minmax(), Any, DataFrame, Path (+6 more)
 
-### Community 294 - "crypto_a7ar7_shared_candidate_pool_builder.py"
+### Community 292 - "crypto_a7ar7_shared_candidate_pool_builder.py"
 Cohesion: 0.30
 Nodes (14): bool_series(), first_by_candidate(), load_pool(), main(), md_table(), prefix_columns(), Any, DataFrame (+6 more)
 
-### Community 295 - "crypto_a7ff33_family_diversified_dry_generation.py"
+### Community 293 - "crypto_a7ff33_family_diversified_dry_generation.py"
 Cohesion: 0.29
 Nodes (14): balanced_queue(), build_family(), interaction(), main(), md_table(), now_utc(), Any, DataFrame (+6 more)
 
-### Community 296 - "crypto_a7ffcore54e_tag_aware_numeric_execution.py"
+### Community 294 - "crypto_a7ffcore54e_tag_aware_numeric_execution.py"
 Cohesion: 0.36
 Nodes (14): build_main_queue(), collect_shard_csv(), compact_summary(), main(), md_table(), now_utc(), Any, DataFrame (+6 more)
 
-### Community 297 - "crypto_a7ffcore58_failure_aware_queue_rebuild.py"
+### Community 295 - "crypto_a7ffcore58_failure_aware_queue_rebuild.py"
 Cohesion: 0.30
 Nodes (14): as_bool(), balanced_select(), main(), md_table(), now_utc(), Any, DataFrame, Path (+6 more)
 
-### Community 298 - "crypto_a7ffcore59fg_forensic_attrition.py"
+### Community 296 - "crypto_a7ffcore59fg_forensic_attrition.py"
 Cohesion: 0.38
 Nodes (14): aggregate_metrics(), build_attrition(), build_forensic(), collect(), main(), md_table(), now_utc(), Any (+6 more)
 
-### Community 299 - "crypto_a7ls19_checkpoint_arbitration.py"
+### Community 297 - "crypto_a7ls19_checkpoint_arbitration.py"
 Cohesion: 0.30
 Nodes (14): add_numeric_columns(), bool_series(), build_checkpoint_queue(), group_counts(), main(), md_table(), now_utc(), Any (+6 more)
 
-### Community 300 - "crypto_a7search7_strict_accepted_pack.py"
+### Community 298 - "crypto_a7search7_strict_accepted_pack.py"
 Cohesion: 0.28
 Nodes (13): add_validation_row(), expression_fields(), main(), md_table(), now_utc(), Any, DataFrame, Path (+5 more)
 
-### Community 301 - "crypto_a7shadow5_stress_funding_coverage_audit.py"
+### Community 299 - "crypto_a7shadow5_stress_funding_coverage_audit.py"
 Cohesion: 0.33
 Nodes (14): build(), main(), matrix_coverage(), md_table(), missing_hour_table(), now_utc(), patch_coverage(), Any (+6 more)
 
-### Community 302 - "crypto_a7aif2_field_enforcement_regression.py"
+### Community 300 - "crypto_a7aif2_field_enforcement_regression.py"
 Cohesion: 0.35
 Nodes (14): evaluator_fail_closed(), field_set(), generator_smoke(), historical_reclassification(), main(), md_table(), now_utc(), Any (+6 more)
 
-### Community 303 - "crypto_a6_4_core4_conservative_robustness.py"
+### Community 301 - "crypto_a6_4_core4_conservative_robustness.py"
 Cohesion: 0.30
 Nodes (13): additive_drawdown(), clean_float(), compounded_drawdown(), main(), monthly_pass_rate(), Any, DataFrame, ndarray (+5 more)
 
-### Community 304 - "crypto_a7ac2_preflight_current_coverage_gap_scan.py"
+### Community 302 - "crypto_a7ac2_preflight_current_coverage_gap_scan.py"
 Cohesion: 0.34
 Nodes (13): build_batch_plan(), build_gold_inventory(), build_readiness(), build_symbol_gap_matrix(), main(), parquet_symbol_inventory(), Any, DataFrame (+5 more)
 
-### Community 305 - "crypto_a7i1c_failure_attribution.py"
+### Community 303 - "crypto_a7i1c_failure_attribution.py"
 Cohesion: 0.30
 Nodes (13): add_gate_margins(), as_bool(), col(), main(), pivot_metrics(), Any, DataFrame, Path (+5 more)
 
-### Community 306 - "crypto_a7j1_redesigned_runner_preflight.py"
+### Community 304 - "crypto_a7j1_redesigned_runner_preflight.py"
 Cohesion: 0.34
 Nodes (13): build_known_objects(), classify(), clip_score(), main(), metric(), Any, DataFrame, Path (+5 more)
 
-### Community 307 - "crypto_a7j2_same_budget_redesigned_smoke.py"
+### Community 305 - "crypto_a7j2_same_budget_redesigned_smoke.py"
 Cohesion: 0.31
 Nodes (13): add_score_components(), clip(), duplicate_audit(), evaluate_candidate(), main(), pivot_metrics(), Any, DataFrame (+5 more)
 
-### Community 308 - "crypto_a7m2_inherited_engine_bakeoff_protocol.py"
-Cohesion: 0.36
-Nodes (13): budget_plan(), engine_matrix(), execution_blockers(), gate_policy_rows(), main(), Any, Path, read_csv() (+5 more)
-
-### Community 309 - "crypto_a7p2_w2_cell_registry_audit.py"
+### Community 306 - "crypto_a7p2_w2_cell_registry_audit.py"
 Cohesion: 0.30
 Nodes (13): build_registry(), contains_liqvol(), coverage_audit(), load_recommendations(), main(), non_may_score(), Any, DataFrame (+5 more)
 
-### Community 310 - "crypto_a7v_panel_acceptance_generative_contract.py"
+### Community 307 - "crypto_a7v_panel_acceptance_generative_contract.py"
 Cohesion: 0.33
 Nodes (13): build_generator_contract(), build_join_contract(), classify_agg_column(), main(), panel_audit(), Any, DataFrame, Path (+5 more)
 
-### Community 311 - "crypto_a7x_reset_contract.py"
+### Community 308 - "crypto_a7x_reset_contract.py"
 Cohesion: 0.33
 Nodes (13): direction_contract(), experiment_spec(), load_json(), main(), Any, DataFrame, Path, stage_freeze_matrix() (+5 more)
 
-### Community 312 - "crypto_alpha_smoke_v0.py"
+### Community 309 - "crypto_alpha_smoke_v0.py"
 Cohesion: 0.31
 Nodes (13): annualization(), cross_sectional_ic_by_time(), evaluate_panel(), feature_family(), long_short_by_time(), main(), Any, DataFrame (+5 more)
 
-### Community 313 - "CRYPTO A7AK-LV0 Listing-Age Latent Variable Contract"
+### Community 310 - "CRYPTO A7AK-LV0 Listing-Age Latent Variable Contract"
 Cohesion: 0.14
 Nodes (13): Authorization, Core Change, CRYPTO A7AK-LV0 Listing-Age Latent Variable Contract, Decision, Execution Boundary, Forbidden Inputs, Input Feature Families, Input Universe Counts (+5 more)
 
-### Community 314 - "CRYPTO A7FF-25R0 COMPANY QUEUE COVERAGE AUDIT"
+### Community 311 - "CRYPTO A7FF-25R0 COMPANY QUEUE COVERAGE AUDIT"
 Cohesion: 0.14
 Nodes (13): Boundary, Company Shard Plan, Coverage By Base Field, Coverage By Level, Coverage By Motif, Coverage By Semantic Pair, Coverage Criteria, CRYPTO A7FF-25R0 COMPANY QUEUE COVERAGE AUDIT (+5 more)
 
-### Community 315 - "CRYPTO A7V3S9/S10 Reward Validation Version - 20260614"
+### Community 312 - "CRYPTO A7V3S9/S10 Reward Validation Version - 20260614"
 Cohesion: 0.14
 Nodes (13): A7V3S10 Accepted Candidate Validation, A7V3S9 Proxy Aggregate, A7V3S9 Selected Full Reward, Accepted Research Candidate, Authorization, CRYPTO A7V3S9/S10 Reward Validation Version - 20260614, Decision, Known Limits (+5 more)
+
+### Community 313 - "manifest.json"
+Cohesion: 0.14
+Nodes (13): a7ls_arm, activity_ok_count, activity_ok_rate, eval_failure_count, eval_success_count, field_count, generated_at, missing_field_count (+5 more)
+
+### Community 314 - "manifest.json"
+Cohesion: 0.14
+Nodes (13): a7ls_arm, activity_ok_count, activity_ok_rate, eval_failure_count, eval_success_count, field_count, generated_at, missing_field_count (+5 more)
+
+### Community 315 - "manifest.json"
+Cohesion: 0.14
+Nodes (13): a7ls_arm, activity_ok_count, activity_ok_rate, eval_failure_count, eval_success_count, field_count, generated_at, missing_field_count (+5 more)
 
 ### Community 316 - "manifest.json"
 Cohesion: 0.14
@@ -2872,123 +2872,123 @@ Nodes (13): a7ls_arm, activity_ok_count, activity_ok_rate, eval_failure_count, e
 
 ### Community 317 - "manifest.json"
 Cohesion: 0.14
-Nodes (13): a7ls_arm, activity_ok_count, activity_ok_rate, eval_failure_count, eval_success_count, field_count, generated_at, missing_field_count (+5 more)
+Nodes (13): archive_state_sha256, atomic_write, cache_identity_sha256, checkpoint, completed_identity_sha256, completed_ledger_row_count, files, frozen_contract_sha256 (+5 more)
 
 ### Community 318 - "manifest.json"
 Cohesion: 0.14
-Nodes (13): a7ls_arm, activity_ok_count, activity_ok_rate, eval_failure_count, eval_success_count, field_count, generated_at, missing_field_count (+5 more)
+Nodes (13): archive_state_sha256, atomic_write, cache_identity_sha256, checkpoint, completed_identity_sha256, completed_ledger_row_count, files, frozen_contract_sha256 (+5 more)
 
 ### Community 319 - "manifest.json"
 Cohesion: 0.14
-Nodes (13): a7ls_arm, activity_ok_count, activity_ok_rate, eval_failure_count, eval_success_count, field_count, generated_at, missing_field_count (+5 more)
+Nodes (13): archive_state_sha256, atomic_write, cache_identity_sha256, checkpoint, completed_identity_sha256, completed_ledger_row_count, files, frozen_contract_sha256 (+5 more)
 
-### Community 320 - "crypto_a7ag1_static_blueprint_dryrun.py"
+### Community 320 - "manifest.json"
+Cohesion: 0.14
+Nodes (13): archive_state_sha256, atomic_write, cache_identity_sha256, checkpoint, completed_identity_sha256, completed_ledger_row_count, files, frozen_contract_sha256 (+5 more)
+
+### Community 321 - "manifest.json"
+Cohesion: 0.14
+Nodes (13): archive_state_sha256, atomic_write, cache_identity_sha256, checkpoint, completed_identity_sha256, completed_ledger_row_count, files, frozen_contract_sha256 (+5 more)
+
+### Community 322 - "crypto_a7ag1_static_blueprint_dryrun.py"
 Cohesion: 0.27
 Nodes (13): base_expr(), interaction_variants(), key(), main(), md_table(), now_utc(), Any, DataFrame (+5 more)
 
-### Community 321 - "crypto_a7al0r_code_feature_regime_readiness_audit.py"
+### Community 323 - "crypto_a7al0r_code_feature_regime_readiness_audit.py"
 Cohesion: 0.35
 Nodes (13): base_lineage_rows(), dataflow_graph_rows(), derived_lineage_rows(), label_lineage_rows(), main(), md_table(), pit_lag_rows(), Any (+5 more)
 
-### Community 322 - "crypto_a7ar0_cn_engine_inheritance_audit.py"
+### Community 324 - "crypto_a7ar0_cn_engine_inheritance_audit.py"
 Cohesion: 0.37
 Nodes (13): adapter_plan_rows(), component_inventory(), exists_text(), forbidden_rows(), gap_matrix(), main(), make_report(), memory_policy_rows() (+5 more)
 
-### Community 323 - "crypto_a7as0_v2_data_acceptance.py"
+### Community 325 - "crypto_a7as0_v2_data_acceptance.py"
 Cohesion: 0.43
 Nodes (13): audit_base(), audit_overlay(), coverage_summary(), main(), md_table(), parquet_schema_columns(), Any, DataFrame (+5 more)
 
-### Community 324 - "crypto_a7data_pre2024_backfill_acceptance_and_age.py"
+### Community 326 - "crypto_a7data_pre2024_backfill_acceptance_and_age.py"
 Cohesion: 0.32
 Nodes (13): acceptance_tables(), age_bucket(), build_augmented_panel(), collect_first_seen(), main(), md_table(), now_utc(), Any (+5 more)
 
-### Community 325 - "crypto_a7ff11_selected_queue_triage.py"
+### Community 327 - "crypto_a7ff11_selected_queue_triage.py"
 Cohesion: 0.30
 Nodes (13): bool_series(), concentration(), main(), md_table(), next_action(), now_utc(), Any, DataFrame (+5 more)
 
-### Community 326 - "crypto_a7ff18_external_label_balanced_selector.py"
+### Community 328 - "crypto_a7ff18_external_label_balanced_selector.py"
 Cohesion: 0.29
 Nodes (13): cost_tier(), load_materialization(), main(), md_table(), now_utc(), Any, DataFrame, Path (+5 more)
 
-### Community 327 - "crypto_a7ff21_external_confirmation_selector.py"
+### Community 329 - "crypto_a7ff21_external_confirmation_selector.py"
 Cohesion: 0.29
 Nodes (13): cost_tier(), load_materialization(), main(), md_table(), now_utc(), Any, DataFrame, Path (+5 more)
 
-### Community 328 - "crypto_a7ff25r0_company_queue_coverage_audit.py"
+### Community 330 - "crypto_a7ff25r0_company_queue_coverage_audit.py"
 Cohesion: 0.32
 Nodes (13): add_membership(), coverage_table(), dropoff_table(), explode_base_fields(), git_text(), main(), md_table(), now_utc() (+5 more)
 
-### Community 329 - "main"
+### Community 331 - "main"
 Cohesion: 0.34
 Nodes (13): main(), md_table(), normalize_key(), now_utc(), num(), Any, DataFrame, Path (+5 more)
 
-### Community 330 - "crypto_a7ff45_bounded_deep_replay.py"
+### Community 332 - "crypto_a7ff45_bounded_deep_replay.py"
 Cohesion: 0.33
 Nodes (13): main(), md_table(), normalize_key(), now_utc(), num(), Any, DataFrame, Path (+5 more)
 
-### Community 331 - "crypto_a7ff55f_full_primary_input_rebuild.py"
+### Community 333 - "crypto_a7ff55f_full_primary_input_rebuild.py"
 Cohesion: 0.33
 Nodes (13): cap_limit(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_csv() (+5 more)
 
-### Community 332 - "crypto_a7ffcore25e_targeted_lane_horizon_generation.py"
+### Community 334 - "crypto_a7ffcore25e_targeted_lane_horizon_generation.py"
 Cohesion: 0.30
 Nodes (13): expr_for(), generate_for_lane(), lane_specs(), main(), md_table(), now_utc(), Any, DataFrame (+5 more)
 
-### Community 333 - "crypto_a7ffcore63_dice_execution_audit.py"
+### Community 335 - "crypto_a7ffcore63_dice_execution_audit.py"
 Cohesion: 0.31
 Nodes (13): build_core62b_score(), build_core62c_audit(), collect_external(), finite_num(), main(), md_table(), now_utc(), Any (+5 more)
 
-### Community 334 - "crypto_a7ls10_company_result_aggregate.py"
+### Community 336 - "crypto_a7ls10_company_result_aggregate.py"
 Cohesion: 0.36
 Nodes (13): blocker_family(), collect_csv(), enrich_with_queue(), main(), md_table(), now_utc(), Any, DataFrame (+5 more)
 
-### Community 335 - "crypto_a7ls3_numeric_checkpoint_from_materialized.py"
+### Community 337 - "crypto_a7ls3_numeric_checkpoint_from_materialized.py"
 Cohesion: 0.36
 Nodes (13): build_queue(), diversified_take(), main(), md_table(), now_utc(), Any, DataFrame, Path (+5 more)
 
-### Community 336 - "crypto_a7ls8_company_result_aggregate.py"
+### Community 338 - "crypto_a7ls8_company_result_aggregate.py"
 Cohesion: 0.36
 Nodes (13): blocker_family(), collect_csv(), enrich_with_queue(), main(), md_table(), now_utc(), Any, DataFrame (+5 more)
 
-### Community 337 - "main"
+### Community 339 - "main"
 Cohesion: 0.30
 Nodes (13): load_field_pool(), main(), md_table(), now_iso(), pair_templates(), Any, DataFrame, Path (+5 more)
 
-### Community 338 - "crypto_a7source1_field_timing_proof.py"
+### Community 340 - "crypto_a7source1_field_timing_proof.py"
 Cohesion: 0.36
 Nodes (13): field_family(), main(), md_table(), now_utc(), proof_for_field(), Any, DataFrame, Path (+5 more)
 
-### Community 339 - "crypto_a7data_pre2024_backfill_acceptance_and_age.py"
+### Community 341 - "crypto_a7data_pre2024_backfill_acceptance_and_age.py"
 Cohesion: 0.32
 Nodes (13): acceptance_tables(), age_bucket(), build_augmented_panel(), collect_first_seen(), main(), md_table(), now_utc(), Any (+5 more)
 
-### Community 340 - "Crypto A2.5 Linkage And Placebo Audit"
+### Community 342 - "Crypto A2.5 Linkage And Placebo Audit"
 Cohesion: 0.15
 Nodes (12): 1. Time Alignment, 2. Premium / Basis Label-Source Audit, 3. Funding Semantics, 4. Purged / Embargoed Split, 5. Cost Stress, 6. Simple Baseline Ablation, 7. Placebo, 8. Universe / Survivorship (+4 more)
 
-### Community 341 - "CRYPTO A7AB-0 Forward Data Handoff Audit"
+### Community 343 - "CRYPTO A7AB-0 Forward Data Handoff Audit"
 Cohesion: 0.15
 Nodes (12): Authorization, Binance Metrics History, Cross-Exchange Feature Groups, Cross-Exchange Forward Snapshot, Cross-Exchange Schema, CRYPTO A7AB-0 Forward Data Handoff Audit, Decision, External Handoff Summary (+4 more)
 
-### Community 342 - "CRYPTO A7AD-0 Controlled Replay Prep"
+### Community 344 - "CRYPTO A7AD-0 Controlled Replay Prep"
 Cohesion: 0.15
 Nodes (12): Authorization, Baseline / Residual Contract, Candidate Family Contract, Cost / Lag Contract, CRYPTO A7AD-0 Controlled Replay Prep, Decision, Feature Family Availability, Input Panel (+4 more)
 
-### Community 343 - "Crypto A7I Residual-Aware Small Generator Design"
+### Community 345 - "Crypto A7I Residual-Aware Small Generator Design"
 Cohesion: 0.15
 Nodes (12): Candidate Families, Crypto A7I Residual-Aware Small Generator Design, Decision Labels, Evidence Boundary, Mandatory Baselines, Matched Budget, Objective, Promotion Gate (+4 more)
 
-### Community 344 - "crypto_a7ae0_new_data_intake_audit.py"
+### Community 346 - "crypto_a7ae0_new_data_intake_audit.py"
 Cohesion: 0.36
 Nodes (12): main(), md_table(), parquet_summary(), Any, DataFrame, Path, raw_agg_manifest_summary(), read_json() (+4 more)
-
-### Community 345 - "crypto_a7l1_search_space_redesign_spec.py"
-Cohesion: 0.38
-Nodes (12): arm_contract_rows(), budget_rows(), main(), preflight_rows(), Any, Path, read_csv_dicts(), read_json() (+4 more)
-
-### Community 346 - "crypto_a7m2d_cluster_concentration_forensics.py"
-Cohesion: 0.31
-Nodes (12): cluster_cap_counterfactual(), cluster_summary(), main(), matrix_counts(), Any, DataFrame, Path, Series (+4 more)
 
 ### Community 347 - "crypto_alpha_preflight.py"
 Cohesion: 0.37
@@ -3130,33 +3130,33 @@ Nodes (12): 1. Data, 2. Formula / Feature Layer, 3. Search Space, 4. Fast Evalua
 Cohesion: 0.35
 Nodes (11): sha256_file(), _git_sha(), main(), _now(), Any, DataFrame, Path, _rank_correlation() (+3 more)
 
-### Community 382 - "CRYPTO A7AC-2C P0 Backfill Execution Status"
+### Community 382 - "preflight_supplier_release"
+Cohesion: 0.42
+Nodes (11): classify_contract(), preflight_supplier_release(), SupplierPreflight, _fixture(), Path, test_binance_nested_force_order_payload_is_supported(), test_contract_classification_does_not_treat_inverse_quantity_as_base_asset(), test_equivalent_ws_overlap_passes_but_never_auto_stitches() (+3 more)
+
+### Community 383 - "CRYPTO A7AC-2C P0 Backfill Execution Status"
 Cohesion: 0.17
 Nodes (11): Audit Artifacts, Authorization, Completed, CRYPTO A7AC-2C P0 Backfill Execution Status, Decision, Effective Result, New Gold Metrics Feature File, P0B01-P0B04 Binance Vision monthly 1m sources (+3 more)
 
-### Community 383 - "CRYPTO A7AD-3 Control Dominance Contract"
+### Community 384 - "CRYPTO A7AD-3 Control Dominance Contract"
 Cohesion: 0.17
 Nodes (11): A7AD-2 Control Contamination, Authorization, Boundary, Control Dominance Rules, CRYPTO A7AD-3 Control Dominance Contract, Decision, Evidence Inputs, Family Policy Revision (+3 more)
 
-### Community 384 - "CRYPTO A7AG-2 aggTrades Interaction Failure Forensic"
+### Community 385 - "CRYPTO A7AG-2 aggTrades Interaction Failure Forensic"
 Cohesion: 0.17
 Nodes (11): Authorization, CRYPTO A7AG-2 aggTrades Interaction Failure Forensic, Decision, Family Gate Summary, Gate Summary, Negative Control Penetration, Recent-Rank Decile vs May Alignment, Reject Reasons (+3 more)
 
-### Community 385 - "Crypto A7X-4 Failure Forensic"
+### Community 386 - "Crypto A7X-4 Failure Forensic"
 Cohesion: 0.17
 Nodes (11): Authorization, Bias Audit, Control Contamination Detail, Crypto A7X-4 Failure Forensic, Failure Mode Matrix, Fast Book Parity, Label Summary, Near-Miss Records (+3 more)
 
-### Community 386 - "CRYPTO A7Z Failure Registry And Next Data Decision"
+### Community 387 - "CRYPTO A7Z Failure Registry And Next Data Decision"
 Cohesion: 0.17
 Nodes (11): Authorization, Bias Audit Boundary, Blocked Motif Registry, CRYPTO A7Z Failure Registry And Next Data Decision, Current State, Decision, Evidence Decisions, Next Route Scorecard (+3 more)
 
-### Community 387 - "crypto_a6_2b_core4_risk_budget_ladder.py"
+### Community 388 - "crypto_a6_2b_core4_risk_budget_ladder.py"
 Cohesion: 0.33
 Nodes (11): additive_drawdown(), clean_float(), compounded_drawdown(), main(), monthly_pass_rate(), Any, ndarray, Series (+3 more)
-
-### Community 388 - "crypto_a7m2c_execution_authorization_revision.py"
-Cohesion: 0.41
-Nodes (11): authorization_rows(), blocker_reclassification(), main(), Any, Path, read_csv(), read_json(), revised_engine_matrix() (+3 more)
 
 ### Community 389 - "crypto_a7o_l1_wave_runner.py"
 Cohesion: 0.36
@@ -3410,377 +3410,377 @@ Nodes (10): Artifact Staleness Audit, Boundary, Checkpoint Summary V2, Control-C
 Cohesion: 0.18
 Nodes (10): A7V-5 Positive Candidate Dominance, Authorization, Candidate Factor Review Notes, Control Summary, Crypto A7V-6 Candidate/Control Dominance Forensic, Decision Summary, Family Summary, Pre-May Dominance Clues (+2 more)
 
-### Community 452 - "crypto_a5_1_book_curve_sanity.py"
-Cohesion: 0.36
-Nodes (10): additive_drawdown(), build_series(), clean_float(), compounded_drawdown(), main(), Any, DataFrame, ndarray (+2 more)
-
-### Community 453 - "crypto_a7ae1_field_selection_contract.py"
+### Community 452 - "crypto_a7ae1_field_selection_contract.py"
 Cohesion: 0.35
 Nodes (10): blocked_patterns(), main(), md_table(), next_experiment_contract(), Any, DataFrame, Path, selected_field_contract() (+2 more)
 
-### Community 454 - "main"
+### Community 453 - "main"
 Cohesion: 0.36
 Nodes (10): availability(), main(), md_table(), Any, DataFrame, Path, split_availability(), split_manifest() (+2 more)
 
-### Community 455 - "crypto_a7g0_regime_feature_contract_audit.py"
-Cohesion: 0.35
-Nodes (10): bucket(), main(), Any, DatetimeIndex, Path, Series, quantile_row(), train_edges() (+2 more)
-
-### Community 456 - "main"
+### Community 454 - "main"
 Cohesion: 0.38
 Nodes (10): build_stress_score(), load_csv(), main(), Any, DataFrame, Path, rank_decile_summary(), table() (+2 more)
 
-### Community 457 - "CRYPTO A7AC-2 LABEL DIVERSIFICATION CONTRACT"
+### Community 455 - "CRYPTO A7AC-2 LABEL DIVERSIFICATION CONTRACT"
 Cohesion: 0.18
 Nodes (10): CRYPTO A7AC-2 LABEL DIVERSIFICATION CONTRACT, Decision, Execution Plan, Experiment Record, Forbidden Actions, Label Family Contract, Manifest, Neutralization Contract (+2 more)
 
-### Community 458 - "CRYPTO A7AL-0 Top498 Latent-Neutral Alpha Search Contract"
+### Community 456 - "CRYPTO A7AL-0 Top498 Latent-Neutral Alpha Search Contract"
 Cohesion: 0.18
 Nodes (10): A7AL-1 Authorization, CRYPTO A7AL-0 Top498 Latent-Neutral Alpha Search Contract, Decision, Latent State Boundary, Neutralization Boundary, Pass Conditions For A7AL-1, PIT Timing Rule, Required Outputs (+2 more)
 
-### Community 459 - "CRYPTO A7AL-2T Company May-Stress Failure Attribution"
+### Community 457 - "CRYPTO A7AL-2T Company May-Stress Failure Attribution"
 Cohesion: 0.18
 Nodes (10): Action Matrix, Boundary, Candidate Failure Summary, CRYPTO A7AL-2T Company May-Stress Failure Attribution, Decision, Manifest, May Control Mode Failure, May Latent Concentration (+2 more)
 
-### Community 460 - "CRYPTO A7AL-2T May-Stress Failure Attribution"
+### Community 458 - "CRYPTO A7AL-2T May-Stress Failure Attribution"
 Cohesion: 0.18
 Nodes (10): Action Matrix, Boundary, Candidate Failure Summary, CRYPTO A7AL-2T May-Stress Failure Attribution, Decision, Manifest, May Control Mode Failure, May Latent Concentration (+2 more)
 
-### Community 461 - "CRYPTO A7AL-2W Signal-Vector Selector Repair"
+### Community 459 - "CRYPTO A7AL-2W Signal-Vector Selector Repair"
 Cohesion: 0.18
 Nodes (10): Authorization, Boundary, CRYPTO A7AL-2W Signal-Vector Selector Repair, Decision, Manifest, Pairwise Correlation, Post-Selection Stress Quarantine, Queue Diversity Audit (+2 more)
 
-### Community 462 - "CRYPTO A7AL-2X1 Dry Rerank"
+### Community 460 - "CRYPTO A7AL-2X1 Dry Rerank"
 Cohesion: 0.18
 Nodes (10): Authorization, Boundary, Control Dominance Audit, CRYPTO A7AL-2X1 Dry Rerank, Decision, Manifest, Objective Family Funnel, Selected Queue (+2 more)
 
-### Community 463 - "CRYPTO A7AL-2X7F REPLAY PREFLIGHT FORENSIC"
+### Community 461 - "CRYPTO A7AL-2X7F REPLAY PREFLIGHT FORENSIC"
 Cohesion: 0.18
 Nodes (10): Candidate Forensic Detail, Control Dominance Rollup, CRYPTO A7AL-2X7F REPLAY PREFLIGHT FORENSIC, Decision, Failure Roots, Highest Control Ratios, Interpretation, Manifest (+2 more)
 
-### Community 464 - "CRYPTO A7AL-2X7HF HEAVY REPLAY PREFLIGHT FORENSIC"
+### Community 462 - "CRYPTO A7AL-2X7HF HEAVY REPLAY PREFLIGHT FORENSIC"
 Cohesion: 0.18
 Nodes (10): Candidate Forensic Detail, Control Dominance Rollup, CRYPTO A7AL-2X7HF HEAVY REPLAY PREFLIGHT FORENSIC, Decision, Failure Roots, Highest Control Ratios, Interpretation, Manifest (+2 more)
 
-### Community 465 - "CRYPTO A7DATA Recent Patch And CE Overlay Acceptance 20260613"
+### Community 463 - "CRYPTO A7DATA Recent Patch And CE Overlay Acceptance 20260613"
 Cohesion: 0.18
 Nodes (10): Authorization, Binance Coverage Notes, Binance Recent Patch Checks, CE Coverage Notes, CE Overlay Checks, CRYPTO A7DATA Recent Patch And CE Overlay Acceptance 20260613, Decision, Field Contract And Age (+2 more)
 
-### Community 466 - "CRYPTO A7EFF1 Search And Reward Efficiency Audit"
+### Community 464 - "CRYPTO A7EFF1 Search And Reward Efficiency Audit"
 Cohesion: 0.18
 Nodes (10): Confirmed Defects, CRYPTO A7EFF1 Search And Reward Efficiency Audit, Decision, DSL Waste Audit, Equivalence Proof, Evidence, Flow Corrections, Measured Efficiency (+2 more)
 
-### Community 467 - "CRYPTO A7EFF2 Semantic Identity and SafeDiv Integration"
+### Community 465 - "CRYPTO A7EFF2 Semantic Identity and SafeDiv Integration"
 Cohesion: 0.18
 Nodes (10): Active Contract, CRYPTO A7EFF2 Semantic Identity and SafeDiv Integration, Decision, Frozen Regression Input, Git Release Evidence, Information Decisions, Reward Regression, SafeDiv Review (+2 more)
 
-### Community 468 - "CRYPTO A7FF-17 FOLLOWUP SELECTOR TRIAGE"
+### Community 466 - "CRYPTO A7FF-17 FOLLOWUP SELECTOR TRIAGE"
 Cohesion: 0.18
 Nodes (10): Boundary, CRYPTO A7FF-17 FOLLOWUP SELECTOR TRIAGE, Decision, Internal Selected Label Distribution, Internal Selected Non-L7 Label Distribution, Internal Selected Semantic Distribution, Interpretation, Manifest (+2 more)
 
-### Community 469 - "CRYPTO A7FF-20 CONFIRMATION SELECTOR TRIAGE"
+### Community 467 - "CRYPTO A7FF-20 CONFIRMATION SELECTOR TRIAGE"
 Cohesion: 0.18
 Nodes (10): Boundary, CRYPTO A7FF-20 CONFIRMATION SELECTOR TRIAGE, Decision, Internal Selected Label Distribution, Internal Selected Non-L7 Label Distribution, Internal Selected Semantic Distribution, Interpretation, Manifest (+2 more)
 
-### Community 470 - "CRYPTO A7FF-25R5 FUNDING TAIL REPAIR CONTRACT"
+### Community 468 - "CRYPTO A7FF-25R5 FUNDING TAIL REPAIR CONTRACT"
 Cohesion: 0.18
 Nodes (10): Blocked Funding Patterns, Boundary, CRYPTO A7FF-25R5 FUNDING TAIL REPAIR CONTRACT, Decision, Dense Funding-State Field Contract, Experiment Record, Manifest, Prior Failure Summary (+2 more)
 
-### Community 471 - "CRYPTO A7FF-27 REPLAY PREFLIGHT SUMMARY"
+### Community 469 - "CRYPTO A7FF-27 REPLAY PREFLIGHT SUMMARY"
 Cohesion: 0.18
 Nodes (10): A7FF-28 Preflight Queue, Boundary, Candidate Summary, Control Summary, CRYPTO A7FF-27 REPLAY PREFLIGHT SUMMARY, Decision, Experiment Record, Label Decision Summary (+2 more)
 
-### Community 472 - "CRYPTO A7FF-30 PORTFOLIO REPLAY CONTRACT"
+### Community 470 - "CRYPTO A7FF-30 PORTFOLIO REPLAY CONTRACT"
 Cohesion: 0.18
 Nodes (10): Boundary, CRYPTO A7FF-30 PORTFOLIO REPLAY CONTRACT, Decision, Experiment Record, Frozen Queue, Gates, Manifest, Prior Forensic (+2 more)
 
-### Community 473 - "CRYPTO A7FF-31 PORTFOLIO FORENSIC"
+### Community 471 - "CRYPTO A7FF-31 PORTFOLIO FORENSIC"
 Cohesion: 0.18
 Nodes (10): Boundary, Candidate Factor Review, CRYPTO A7FF-31 PORTFOLIO FORENSIC, Decision, Experiment Record, Leave-One-Out Focus, Manifest, Recent Month Contribution (+2 more)
 
-### Community 474 - "CRYPTO A7FF-38 FOCUSED REPLAY TASKFLOW"
+### Community 472 - "CRYPTO A7FF-38 FOCUSED REPLAY TASKFLOW"
 Cohesion: 0.18
 Nodes (10): Boundary, Control Metrics Sample, CRYPTO A7FF-38 FOCUSED REPLAY TASKFLOW, Decision, Decision Counts, Family Decisions, Focused Queue Summary, Manifest (+2 more)
 
-### Community 475 - "CRYPTO A7FF-39 FOCUSED TASKFLOW FORENSIC"
+### Community 473 - "CRYPTO A7FF-39 FOCUSED TASKFLOW FORENSIC"
 Cohesion: 0.18
 Nodes (10): Boundary, CRYPTO A7FF-39 FOCUSED TASKFLOW FORENSIC, Decision, Decision Counts, Family Health, Focus Summary, Manifest, Next Actions (+2 more)
 
-### Community 476 - "CRYPTO A7FF-42 FAMILY-BALANCED CONTROL-STRICT NUMERIC"
+### Community 474 - "CRYPTO A7FF-42 FAMILY-BALANCED CONTROL-STRICT NUMERIC"
 Cohesion: 0.18
 Nodes (10): Boundary, Control-Strict Summary, CRYPTO A7FF-42 FAMILY-BALANCED CONTROL-STRICT NUMERIC, Decision, Decision Counts, Family Summary, Manifest, Next Actions (+2 more)
 
-### Community 477 - "CRYPTO A7FF-44 DEEP FORENSIC"
+### Community 475 - "CRYPTO A7FF-44 DEEP FORENSIC"
 Cohesion: 0.18
 Nodes (10): Boundary, Bounded Deep Replay Queue, Concentration Audit, CRYPTO A7FF-44 DEEP FORENSIC, Decision, Family Confirmation From A7FF-43, Family Forensic, Manifest (+2 more)
 
-### Community 478 - "CRYPTO A7FF-54 NUMERIC CLUE CONSOLIDATION"
+### Community 476 - "CRYPTO A7FF-54 NUMERIC CLUE CONSOLIDATION"
 Cohesion: 0.18
 Nodes (10): Boundary, CRYPTO A7FF-54 NUMERIC CLUE CONSOLIDATION, Decision, Manifest, Numeric Clue Rows By Family, Replay-Preflight Policy, Selected Family / Label Distribution, Selected Label Distribution (+2 more)
 
-### Community 479 - "CRYPTO A7FF-CORE48 NULL-FIRST SEED GENERATION CONTRACT"
+### Community 477 - "CRYPTO A7FF-CORE48 NULL-FIRST SEED GENERATION CONTRACT"
 Cohesion: 0.18
 Nodes (10): Authorization, CRYPTO A7FF-CORE48 NULL-FIRST SEED GENERATION CONTRACT, Decision, Execution Plan, Generation Lanes, Hard Gates, Input Sources, Manifest (+2 more)
 
-### Community 480 - "CRYPTO A7FF-CORE49 FULL-UNIVERSE NULL-VECTOR PREFLIGHT CONTRACT"
+### Community 478 - "CRYPTO A7FF-CORE49 FULL-UNIVERSE NULL-VECTOR PREFLIGHT CONTRACT"
 Cohesion: 0.18
 Nodes (10): Authorization, CRYPTO A7FF-CORE49 FULL-UNIVERSE NULL-VECTOR PREFLIGHT CONTRACT, Decision, Execution Policy, Input Sources, Manifest, Quality Gate, Shard Plan (+2 more)
 
-### Community 481 - "CRYPTO A7FF-CORE51 FILTERED REPLAY CONTRACT"
+### Community 479 - "CRYPTO A7FF-CORE51 FILTERED REPLAY CONTRACT"
 Cohesion: 0.18
 Nodes (10): Authorization, Candidate Summary, CRYPTO A7FF-CORE51 FILTERED REPLAY CONTRACT, Decision, Input Sources, Label And Cost Policy, Manifest, Pass Gate (+2 more)
 
-### Community 482 - "CRYPTO A7FF-CORE53I FACTOR INPUT INFORMATION AUDIT"
+### Community 480 - "CRYPTO A7FF-CORE53I FACTOR INPUT INFORMATION AUDIT"
 Cohesion: 0.18
 Nodes (10): Authorization, Base Field Usage, Clue Pair Overlap, CRYPTO A7FF-CORE53I FACTOR INPUT INFORMATION AUDIT, Decision, Field Set Redundancy, Field Type Usage, Input Type Redundancy (+2 more)
 
-### Community 483 - "CRYPTO A7FF-CORE54E TAG-AWARE NUMERIC EXECUTION"
+### Community 481 - "CRYPTO A7FF-CORE54E TAG-AWARE NUMERIC EXECUTION"
 Cohesion: 0.18
 Nodes (10): Boundary, CRYPTO A7FF-CORE54E TAG-AWARE NUMERIC EXECUTION, Decision, Decision By Queue, External Detail Artifacts, Manifest, Materialization By Queue, Selected Summary (+2 more)
 
-### Community 484 - "CRYPTO A7FF-CORE59 NUMERIC REPAIR EXECUTION"
+### Community 482 - "CRYPTO A7FF-CORE59 NUMERIC REPAIR EXECUTION"
 Cohesion: 0.18
 Nodes (10): Boundary, CRYPTO A7FF-CORE59 NUMERIC REPAIR EXECUTION, Decision, Decision By Semantic, External Detail Artifacts, Manifest, Materialization By Semantic, Non-L7 Clue Summary (+2 more)
 
-### Community 485 - "CRYPTO A7FF-R10 LABEL / FEATURE TARGET REDESIGN"
+### Community 483 - "CRYPTO A7FF-R10 LABEL / FEATURE TARGET REDESIGN"
 Cohesion: 0.18
 Nodes (10): A7FF-47 Family Label Summary, A7FF-47 Label Summary, Allowed Source Maps, Boundary, CRYPTO A7FF-R10 LABEL / FEATURE TARGET REDESIGN, Decision, Failure Attribution, Label Target Policy (+2 more)
 
-### Community 486 - "CRYPTO A7V3S9 Pre-Reward OOS/Control Proxy 20260614"
+### Community 484 - "CRYPTO A7V3S9 Pre-Reward OOS/Control Proxy 20260614"
 Cohesion: 0.18
 Nodes (10): Boundary, Bucket Summary, Counts, CRYPTO A7FIX Active Universe Reward Smoke 20260615, CRYPTO A7V3S9 Pre-Reward OOS/Control Proxy 20260614, Manifest, Rejection Reasons, Selected Motif Summary (+2 more)
 
-### Community 487 - "CRYPTO A7LIVE1 Source-Lag / Checksum Audit"
+### Community 485 - "CRYPTO A7LIVE1 Source-Lag / Checksum Audit"
 Cohesion: 0.18
 Nodes (10): Alias Policy, CRYPTO A7LIVE1 Source-Lag / Checksum Audit, Decision, Download Manifest Family Summary, Interpretation, Manifest, Patch Manifest Audit, Selected Field Source Audit (+2 more)
 
-### Community 488 - "CRYPTO A7LS19 CHECKPOINT ARBITRATION"
+### Community 486 - "CRYPTO A7LS19 CHECKPOINT ARBITRATION"
 Cohesion: 0.18
 Nodes (10): Authorization, CRYPTO A7LS19 CHECKPOINT ARBITRATION, Decision, Interpretation, Label Distribution, Manifest, Rejection Summary, Semantic Pair Distribution (+2 more)
 
-### Community 489 - "CRYPTO A7LS-24 Label-Transfer Deep Bias Replay (20260607)"
+### Community 487 - "CRYPTO A7LS-24 Label-Transfer Deep Bias Replay (20260607)"
 Cohesion: 0.18
 Nodes (10): a7ls15_04d0fe57519a6e45, a7ls15_78478a819e0cd255, a7ls15_982c459fa90224ed, Boundaries, CRYPTO A7LS-24 Label-Transfer Deep Bias Replay (20260607), Decision, Decision Counts, Label-Transfer Seeds (+2 more)
 
-### Community 490 - "CRYPTO A7LS29 Productive Numeric Acceptance 20260610"
+### Community 488 - "CRYPTO A7LS29 Productive Numeric Acceptance 20260610"
 Cohesion: 0.18
 Nodes (10): Boundary, Counts, CRYPTO A7LS29 Productive Numeric Acceptance 20260610, Decision, Interpretation, Outputs, Selected Family Summary, Selected Label Summary (+2 more)
 
-### Community 491 - "CRYPTO A7LS-8 COMPANY RESULT AGGREGATE"
+### Community 489 - "CRYPTO A7LS-8 COMPANY RESULT AGGREGATE"
 Cohesion: 0.18
 Nodes (10): Authorization, CRYPTO A7LS-8 COMPANY RESULT AGGREGATE, Decision, Non-L7 By Label, Non-L7 By Next Wave Family, Non-L7 By Semantic Pair, Response Blockers, Shard Summary (+2 more)
 
-### Community 492 - "CRYPTO A7REWARD1 Portfolio Reward Model"
+### Community 490 - "CRYPTO A7REWARD1 Portfolio Reward Model"
 Cohesion: 0.18
 Nodes (10): Best By Sortino, Boundary, Counts, CRYPTO A7REWARD1 Portfolio Reward Model, Decision, Diagnostic Composite Leaderboard, Manifest, Pareto Leaderboard (+2 more)
 
-### Community 493 - "CRYPTO A7REWARD2 Acceptance Bias Audit 20260610"
+### Community 491 - "CRYPTO A7REWARD2 Acceptance Bias Audit 20260610"
 Cohesion: 0.18
 Nodes (10): Automatic Promotion Output, CRYPTO A7REWARD2 Acceptance Bias Audit 20260610, Decision, Gate Patch, Memory Errors, New Strict Top, Next Required Action, Remaining Risk (+2 more)
 
-### Community 494 - "Crypto A7S-0 Data / Horizon Contract"
+### Community 492 - "Crypto A7S-0 Data / Horizon Contract"
 Cohesion: 0.18
 Nodes (10): Authorization, Cost / Lag Contract, Crypto A7S-0 Data / Horizon Contract, Feature Family Contract, Horizon / Execution Contract, Panel Coverage, PIT Timestamp Contract, Required Next (+2 more)
 
-### Community 495 - "Crypto A7S-1 Data Source Availability / PIT Audit"
+### Community 493 - "Crypto A7S-1 Data Source Availability / PIT Audit"
 Cohesion: 0.18
 Nodes (10): Authorization Matrix, Candidate Source Contract, Crypto A7S-1 Data Source Availability / PIT Audit, Decision, Existing Manifest Inventory, Gold Panel Coverage, Microstructure Pilot Audit, PIT Readiness Matrix (+2 more)
 
-### Community 496 - "Crypto A7S-2M Metrics Registry Diagnostic"
+### Community 494 - "Crypto A7S-2M Metrics Registry Diagnostic"
 Cohesion: 0.18
 Nodes (10): Authorization, Coverage, Crypto A7S-2M Metrics Registry Diagnostic, Deep Audit Pool, Eval Failures, Feature Registry Summary, Funnel, Label Summary (+2 more)
 
-### Community 497 - "Crypto A7S-3 Metrics Clue Forensic"
+### Community 495 - "Crypto A7S-3 Metrics Clue Forensic"
 Cohesion: 0.18
 Nodes (10): Authorization, Baseline Comparison, Concentration Summary, Control Detail, Crypto A7S-3 Metrics Clue Forensic, May Symbol Contribution, Recent Symbol Contribution, Required Next (+2 more)
 
-### Community 498 - "CRYPTO A7SEARCH5 Selected Full Reward R3 Aggregate Status 20260630"
+### Community 496 - "CRYPTO A7SEARCH5 Selected Full Reward R3 Aggregate Status 20260630"
 Cohesion: 0.18
 Nodes (10): Accepted By Semantic Pair / Motif, Counts, CRYPTO A7SEARCH5 Selected Full Reward R3 Aggregate Status 20260630, Decision, Execution Notes, Interpretation, Next Authorized Work, Rejection Reasons (+2 more)
 
-### Community 499 - "CRYPTO A7SOURCE5 Accepted Forensic Pack"
+### Community 497 - "CRYPTO A7SOURCE5 Accepted Forensic Pack"
 Cohesion: 0.18
 Nodes (10): Accepted Candidates, Boundary, Counts, CRYPTO A7SOURCE5 Accepted Forensic Pack, Decision, Field Usage, Motif Summary, Rejection Context (+2 more)
 
-### Community 500 - "CRYPTO A7V3S0 Remote Launch Status 20260613"
+### Community 498 - "CRYPTO A7V3S0 Remote Launch Status 20260613"
 Cohesion: 0.18
 Nodes (10): Company Sync, CRYPTO A7V3S0 Remote Launch Status 20260613, Decision, Git / Contract, Initial Detached Launch, Next Check, Remote Smoke, Replacement C2 Launch (+2 more)
 
-### Community 501 - "CRYPTO A7V3S4 Near-Miss Prefilter Audit - 20260613"
+### Community 499 - "CRYPTO A7V3S4 Near-Miss Prefilter Audit - 20260613"
 Cohesion: 0.18
 Nodes (10): Authorization, CRYPTO A7V3S4 Near-Miss Prefilter Audit - 20260613, Decision, Field Failure Summary, Input, Interpretation, Outputs, Pair/Motif Decisions (+2 more)
 
-### Community 502 - "Crypto AlphaFactory Method v1"
+### Community 500 - "Crypto AlphaFactory Method v1"
 Cohesion: 0.18
 Nodes (10): Crypto AlphaFactory Method v1, Current A0 Finding, Current Inputs, Decision, Evaluation Stages, Generator Changes Required, Next Step, Reward Changes Required (+2 more)
 
-### Community 503 - "crypto_a7ag2_numeric_replay_contract.py"
+### Community 501 - "crypto_a7ag2_numeric_replay_contract.py"
 Cohesion: 0.36
 Nodes (10): choose_diverse(), expression_fields(), main(), md_table(), now_utc(), Any, DataFrame, Path (+2 more)
 
-### Community 504 - "crypto_a7ag4_clue_forensic_contract.py"
+### Community 502 - "crypto_a7ag4_clue_forensic_contract.py"
 Cohesion: 0.38
 Nodes (10): clue_role(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_json() (+2 more)
 
-### Community 505 - "crypto_a7ah1d_ordinary_alpha_dry_rerank.py"
+### Community 503 - "crypto_a7ah1d_ordinary_alpha_dry_rerank.py"
 Cohesion: 0.33
 Nodes (10): bool_series(), main(), md_table(), now_utc(), Any, DataFrame, Path, Series (+2 more)
 
-### Community 506 - "crypto_a7aif1_engine_enforcement_gap_audit.py"
+### Community 504 - "crypto_a7aif1_engine_enforcement_gap_audit.py"
 Cohesion: 0.38
 Nodes (10): main(), md_table(), now_utc(), Any, DataFrame, Path, read_json(), read_text() (+2 more)
 
-### Community 507 - "crypto_a7aif4_response_backed_field_promotion.py"
+### Community 505 - "crypto_a7aif3_materialization_evaluator_parity.py"
+Cohesion: 0.36
+Nodes (10): main(), md_table(), now_utc(), Any, DataFrame, Path, read_json(), synthetic_frame() (+2 more)
+
+### Community 506 - "crypto_a7aif4_response_backed_field_promotion.py"
 Cohesion: 0.40
 Nodes (10): main(), md_table(), now_utc(), Any, DataFrame, Path, read_json(), require_pass() (+2 more)
 
-### Community 508 - "crypto_a7al0f_derived_feature_engineering_contract.py"
+### Community 507 - "crypto_a7al0f_derived_feature_engineering_contract.py"
 Cohesion: 0.40
 Nodes (10): allowed_set(), blocked_set(), caps(), contract_rows(), main(), md_table(), Any, Path (+2 more)
 
-### Community 509 - "crypto_a7al2p0r_repair_rerun_decision.py"
+### Community 508 - "crypto_a7al2p0r_repair_rerun_decision.py"
 Cohesion: 0.44
 Nodes (10): csv_or_empty(), main(), md_table(), Any, DataFrame, Path, read_json(), stage_row() (+2 more)
 
-### Community 510 - "crypto_a7al2p1t_repaired_pool_rerun_status.py"
+### Community 509 - "crypto_a7al2p1t_repaired_pool_rerun_status.py"
 Cohesion: 0.44
 Nodes (10): main(), md_table(), Any, DataFrame, Path, read_csv(), read_json(), stage_row() (+2 more)
 
-### Community 511 - "crypto_a7al2x4_replay_readiness_audit.py"
+### Community 510 - "crypto_a7al2x4_replay_readiness_audit.py"
 Cohesion: 0.33
 Nodes (10): classify_field(), main(), md_table(), now_utc(), Any, DataFrame, Path, schema_names() (+2 more)
 
-### Community 512 - "crypto_a7al2z4f_broader_non_oi_preflight_forensic.py"
+### Community 511 - "crypto_a7al2z4f_broader_non_oi_preflight_forensic.py"
 Cohesion: 0.38
 Nodes (10): control_forensic(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_json() (+2 more)
 
-### Community 513 - "crypto_a7ff10_company_parallel_aggregate.py"
+### Community 512 - "crypto_a7ff10_company_parallel_aggregate.py"
 Cohesion: 0.40
 Nodes (10): load_csv(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_json() (+2 more)
 
-### Community 514 - "crypto_a7ff12_company_wave_aggregate.py"
+### Community 513 - "crypto_a7ff12_company_wave_aggregate.py"
 Cohesion: 0.40
 Nodes (10): load_csv(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_json() (+2 more)
 
-### Community 515 - "crypto_a7ff13_wave_triage.py"
+### Community 514 - "crypto_a7ff13_wave_triage.py"
 Cohesion: 0.31
 Nodes (10): bool_series(), main(), md_table(), now_utc(), Any, DataFrame, Path, Series (+2 more)
 
-### Community 516 - "crypto_a7ff16_company_followup_aggregate.py"
+### Community 515 - "crypto_a7ff16_company_followup_aggregate.py"
 Cohesion: 0.40
 Nodes (10): load_csv(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_json() (+2 more)
 
-### Community 517 - "crypto_a7ff16_cost_tiered_numeric_followup_contract.py"
+### Community 516 - "crypto_a7ff16_cost_tiered_numeric_followup_contract.py"
 Cohesion: 0.31
 Nodes (10): join_unique(), main(), md_table(), now_utc(), Any, DataFrame, Path, Series (+2 more)
 
-### Community 518 - "crypto_a7ff19_company_confirmation_aggregate.py"
+### Community 517 - "crypto_a7ff19_company_confirmation_aggregate.py"
 Cohesion: 0.40
 Nodes (10): load_csv(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_json() (+2 more)
 
-### Community 519 - "crypto_a7ff24r3_dense_materializer_preflight.py"
+### Community 518 - "crypto_a7ff24r3_dense_materializer_preflight.py"
 Cohesion: 0.40
 Nodes (10): audit_repaired_queue(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_json() (+2 more)
 
-### Community 520 - "crypto_a7ff25r3_full_numeric_wave_summary.py"
+### Community 519 - "crypto_a7ff25r3_full_numeric_wave_summary.py"
 Cohesion: 0.38
 Nodes (10): main(), md_table(), norm_decision(), now_utc(), Any, DataFrame, Path, read_csv() (+2 more)
 
-### Community 521 - "crypto_a7ff35_diversified_numeric_preflight.py"
+### Community 520 - "crypto_a7ff35_diversified_numeric_preflight.py"
 Cohesion: 0.40
 Nodes (10): main(), md_table(), now_utc(), Any, DataFrame, Path, read_csv(), read_json() (+2 more)
 
-### Community 522 - "crypto_a7ff53e_numeric_response_summary.py"
+### Community 521 - "crypto_a7ff53e_numeric_response_summary.py"
 Cohesion: 0.40
 Nodes (10): main(), md_table(), now_utc(), Any, DataFrame, Path, read_csv(), read_json() (+2 more)
 
-### Community 523 - "crypto_a7ff55r1_supplemental_queue_feasibility.py"
+### Community 522 - "crypto_a7ff55r1_supplemental_queue_feasibility.py"
 Cohesion: 0.35
 Nodes (10): family_mask(), main(), md_table(), now_utc(), Any, DataFrame, Path, Series (+2 more)
 
-### Community 524 - "crypto_a7ff55r2_atlas_field_family_generation_repair.py"
+### Community 523 - "crypto_a7ff55r2_atlas_field_family_generation_repair.py"
 Cohesion: 0.35
 Nodes (10): main(), md_table(), now_utc(), Any, DataFrame, Path, read_json(), repaired_route() (+2 more)
 
-### Community 525 - "crypto_a7ff9_continuation_comparison.py"
+### Community 524 - "crypto_a7ff9_continuation_comparison.py"
 Cohesion: 0.42
 Nodes (10): family_clues(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_json() (+2 more)
 
-### Community 526 - "crypto_a7ffcore14r_replay_failure_forensic.py"
+### Community 525 - "crypto_a7ffcore14r_replay_failure_forensic.py"
 Cohesion: 0.33
 Nodes (10): dominant_control(), main(), md_table(), now_utc(), Any, DataFrame, Path, Series (+2 more)
 
-### Community 527 - "crypto_a7ffcore16her_second_pass_forensic_and_queue.py"
+### Community 526 - "crypto_a7ffcore16her_second_pass_forensic_and_queue.py"
 Cohesion: 0.40
 Nodes (10): build_balanced_queue(), load_csv(), main(), md_table(), now_utc(), Any, DataFrame, Path (+2 more)
 
-### Community 528 - "crypto_a7ffcore28e_independent_data_family_atlas_audit.py"
+### Community 527 - "crypto_a7ffcore28e_independent_data_family_atlas_audit.py"
 Cohesion: 0.40
 Nodes (10): field_status(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_csv() (+2 more)
 
-### Community 529 - "crypto_a7ffcore29e_independent_family_preflight.py"
+### Community 528 - "crypto_a7ffcore29e_independent_family_preflight.py"
 Cohesion: 0.38
 Nodes (10): build_blueprints(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_json() (+2 more)
 
-### Community 530 - "crypto_a7ffcore36e_replay_objective_reset_execution.py"
+### Community 529 - "crypto_a7ffcore36e_replay_objective_reset_execution.py"
 Cohesion: 0.33
 Nodes (10): bool_sum(), main(), md_table(), now_utc(), Any, DataFrame, Path, Series (+2 more)
 
-### Community 531 - "crypto_a7ffcore36er_replay_objective_forensic.py"
+### Community 530 - "crypto_a7ffcore36er_replay_objective_forensic.py"
 Cohesion: 0.33
 Nodes (10): bool_sum(), main(), md_table(), now_utc(), Any, DataFrame, Path, Series (+2 more)
 
-### Community 532 - "crypto_a7ffcore3_formula_gen_subgraph_gate.py"
+### Community 531 - "crypto_a7ffcore3_formula_gen_subgraph_gate.py"
 Cohesion: 0.40
 Nodes (10): audit_script(), generation_scripts(), main(), md_table(), now_utc(), Any, DataFrame, Path (+2 more)
 
-### Community 533 - "main"
+### Community 532 - "main"
 Cohesion: 0.35
 Nodes (10): bool_sum(), main(), md_table(), now_utc(), Any, DataFrame, Path, Series (+2 more)
 
-### Community 534 - "crypto_a7ffcore41e_book_control_repair_execution.py"
+### Community 533 - "crypto_a7ffcore41e_book_control_repair_execution.py"
 Cohesion: 0.31
 Nodes (10): bool_sum(), main(), md_table(), now_utc(), Any, DataFrame, Path, Series (+2 more)
 
-### Community 535 - "main"
+### Community 534 - "main"
 Cohesion: 0.35
 Nodes (10): main(), md_table(), now_utc(), Any, DataFrame, Path, Series, read_json() (+2 more)
 
-### Community 536 - "crypto_a7ffcore62_dice_batch_dryrun.py"
+### Community 535 - "crypto_a7ffcore62_dice_batch_dryrun.py"
 Cohesion: 0.38
 Nodes (10): diversified_take(), main(), md_table(), now_utc(), Any, DataFrame, Path, read_csv() (+2 more)
 
-### Community 537 - "crypto_a7ffcore6_materialization_preflight_contract.py"
+### Community 536 - "crypto_a7ffcore6_materialization_preflight_contract.py"
 Cohesion: 0.33
 Nodes (10): main(), md_table(), now_utc(), Any, DataFrame, Path, Series, read_json() (+2 more)
 
-### Community 538 - "crypto_a7ffcore7r_control_policy_forensic.py"
+### Community 537 - "crypto_a7ffcore7r_control_policy_forensic.py"
 Cohesion: 0.35
 Nodes (10): control_score(), main(), md_table(), now_utc(), Any, DataFrame, Path, Series (+2 more)
 
-### Community 539 - "crypto_a7ffcore8e_replay_preflight_packet_audit.py"
+### Community 538 - "crypto_a7ffcore8e_replay_preflight_packet_audit.py"
 Cohesion: 0.33
 Nodes (10): forbidden_token_count(), main(), md_table(), now_utc(), Any, DataFrame, Path, Series (+2 more)
 
-### Community 540 - "main"
+### Community 539 - "main"
 Cohesion: 0.42
 Nodes (10): env_int(), evaluate(), main(), now_iso(), Any, DataFrame, Path, read_queue_slice() (+2 more)
 
-### Community 541 - "main"
+### Community 540 - "main"
 Cohesion: 0.38
 Nodes (10): main(), md_table(), now_iso(), Any, DataFrame, Path, read_csvs(), read_manifest() (+2 more)
 
-### Community 542 - "crypto_a7night_taskflow_20260531.py"
+### Community 541 - "crypto_a7night_taskflow_20260531.py"
 Cohesion: 0.35
 Nodes (10): git_value(), main(), md_table(), now_utc(), only_expected_dirty(), Any, DataFrame, Path (+2 more)
 
-### Community 543 - "crypto_feature_runtime_inventory_20260714.py"
+### Community 542 - "crypto_feature_runtime_inventory_20260714.py"
 Cohesion: 0.36
 Nodes (10): bool_text(), first_nonempty(), git(), git_bytes(), main(), Path, read_csv(), read_csv_bytes() (+2 more)
 
-### Community 544 - "crypto_archive_deprecated_a7_20260527.py"
+### Community 543 - "crypto_archive_deprecated_a7_20260527.py"
 Cohesion: 0.47
 Nodes (10): classify_report(), classify_runtime(), classify_script(), main(), move_path(), Any, Path, safe_relative() (+2 more)
+
+### Community 544 - "crypto_a7aif3_materialization_evaluator_parity.py"
+Cohesion: 0.36
+Nodes (10): main(), md_table(), now_utc(), Any, DataFrame, Path, read_json(), synthetic_frame() (+2 more)
 
 ### Community 545 - "signal_identity.py"
 Cohesion: 0.47
@@ -5702,25 +5702,25 @@ Nodes (8): build(), md_table(), now_iso(), Any, DataFrame, Path, read_json(), wr
 Cohesion: 0.39
 Nodes (8): axis_match(), balanced_take(), main(), now_iso(), DataFrame, Path, Series, write_json()
 
-### Community 1025 - "crypto_a7mem1_memory_enforcement_smoke.py"
-Cohesion: 0.50
-Nodes (8): main(), make_report(), make_rows(), Any, Path, read_csv(), write_csv(), write_json()
-
-### Community 1026 - "crypto_a7pm2_candidate_lifecycle_state_machine.py"
+### Community 1025 - "crypto_a7pm2_candidate_lifecycle_state_machine.py"
 Cohesion: 0.42
 Nodes (8): main(), md_table(), now_utc(), Any, DataFrame, Path, read_json(), write_json()
 
-### Community 1027 - "crypto_a7shadow3_execution_realism_summary.py"
+### Community 1026 - "crypto_a7shadow3_execution_realism_summary.py"
 Cohesion: 0.53
 Nodes (8): build(), fnum(), main(), Any, Path, read_csv(), read_json(), write_csv()
 
-### Community 1028 - "crypto_a7v3s2_control_variant_audit.py"
+### Community 1027 - "crypto_a7v3s2_control_variant_audit.py"
 Cohesion: 0.44
 Nodes (8): audit_candidate(), finite_float(), get_metric(), main(), md_table(), now_utc(), DataFrame, Series
 
-### Community 1029 - "test_crypto_aggtrades_system_canary_v1.py"
+### Community 1028 - "test_crypto_aggtrades_system_canary_v1.py"
 Cohesion: 0.50
 Nodes (8): _minute_frame(), DataFrame, Path, _sha256(), test_aggtrades_cache_bridge_is_hourly_pit_safe_and_missingness_preserving(), test_aggtrades_search_surface_cache_materializes_all_delivered_fields(), _write_source_cache(), _write_tar()
+
+### Community 1029 - "_Store"
+Cohesion: 0.36
+Nodes (3): ndarray, slice, _Store
 
 ### Community 1030 - "crypto_a7pm2_candidate_lifecycle_state_machine.py"
 Cohesion: 0.42
@@ -6270,109 +6270,109 @@ Nodes (7): checks(), main(), md_table(), Any, Path, read_json(), utc_now()
 Cohesion: 0.46
 Nodes (7): main(), md_table(), DataFrame, Path, read_json(), utc_now(), write_json()
 
-### Community 1167 - "crypto_a7ar3_fresh_memory_dedup_smoke.py"
-Cohesion: 0.54
-Nodes (7): main(), make_report(), Any, Path, read_csv_dict(), write_csv(), write_json()
-
-### Community 1168 - "crypto_a7clean2_delete_safe_sync_tmp.py"
+### Community 1167 - "crypto_a7clean2_delete_safe_sync_tmp.py"
 Cohesion: 0.54
 Nodes (7): delete_path(), is_within(), main(), Any, Path, size_bytes(), write_csv()
 
-### Community 1169 - "crypto_a7ffcore16j_nearmiss_resolution_audit.py"
+### Community 1168 - "crypto_a7ffcore16j_nearmiss_resolution_audit.py"
 Cohesion: 0.46
 Nodes (7): main(), md_table(), now_utc(), DataFrame, Path, read_json(), write_json()
 
-### Community 1170 - "crypto_a7ffcore16k_h2_strict_floor_repair_contract.py"
+### Community 1169 - "crypto_a7ffcore16k_h2_strict_floor_repair_contract.py"
 Cohesion: 0.46
 Nodes (7): main(), md_table(), now_utc(), DataFrame, Path, read_json(), write_json()
 
-### Community 1171 - "main"
+### Community 1170 - "main"
 Cohesion: 0.50
 Nodes (7): main(), md_table(), now_utc(), DataFrame, Path, read_json(), write_json()
 
-### Community 1172 - "crypto_a7ffcore52f_diagnostic_clue_forensic.py"
+### Community 1171 - "crypto_a7ffcore52f_diagnostic_clue_forensic.py"
 Cohesion: 0.46
 Nodes (7): main(), md_table(), now_utc(), DataFrame, Path, read_json(), write_json()
 
-### Community 1173 - "crypto_a7ffcore53_replay_target_repair_contract.py"
+### Community 1172 - "crypto_a7ffcore53_replay_target_repair_contract.py"
 Cohesion: 0.46
 Nodes (7): main(), md_table(), now_utc(), DataFrame, Path, read_json(), write_json()
 
-### Community 1174 - "crypto_a7ls0_checkpoint_large_search_contract.py"
-Cohesion: 0.39
-Nodes (7): main(), md_table(), now_utc(), Any, DataFrame, Path, write_json()
-
-### Community 1175 - "crypto_a7ls24_label_transfer_deep_bias_replay.py"
+### Community 1173 - "crypto_a7ls24_label_transfer_deep_bias_replay.py"
 Cohesion: 0.39
 Nodes (7): clue_mask(), main(), DataFrame, Path, Series, transfer_decision(), write_json()
 
-### Community 1176 - "crypto_a7v3s0_reward_prequeue.py"
+### Community 1174 - "crypto_a7v3s0_reward_prequeue.py"
 Cohesion: 0.39
 Nodes (7): bounded_select(), main(), now_utc(), Any, DataFrame, Path, write_json()
 
-### Community 1177 - "Crypto A7C FundingCore Decision Record"
+### Community 1175 - "Crypto A7C FundingCore Decision Record"
 Cohesion: 0.29
 Nodes (6): Confirmed, Crypto A7C FundingCore Decision Record, Decision, Not Confirmed, Required Next Action, Summary
 
-### Community 1178 - "Crypto A7F Funding Regime / Risk Failure Audit"
+### Community 1176 - "Crypto A7F Funding Regime / Risk Failure Audit"
 Cohesion: 0.29
 Nodes (6): Crypto A7F Funding Regime / Risk Failure Audit, Decision, FundingCore Bucket Replay, Gate Replay, Random Active-Hour Placebo, Scope
 
-### Community 1179 - "Crypto A7I-1a Runner Implementation Preflight"
+### Community 1177 - "Crypto A7I-1a Runner Implementation Preflight"
 Cohesion: 0.29
 Nodes (6): Baseline Classification, Crypto A7I-1a Runner Implementation Preflight, Decision Boundary, May Usage Audit, Scope, Selection Trace
 
-### Community 1180 - "Crypto A7I-1c Failure Attribution"
+### Community 1178 - "Crypto A7I-1c Failure Attribution"
 Cohesion: 0.29
 Nodes (6): Crypto A7I-1c Failure Attribution, Decision Boundary, Funnel By Arm, Interpretation, Single Candidate Fragility, Top Selected Reject Reasons
 
-### Community 1181 - "Crypto A7I-2 Single Candidate Deep Audit"
+### Community 1179 - "Crypto A7I-2 Single Candidate Deep Audit"
 Cohesion: 0.29
 Nodes (6): Blockers, Boundary, Crypto A7I-2 Single Candidate Deep Audit, Interpretation, Key Metrics, Output Files
 
-### Community 1182 - "Crypto A7I Final Decision Record"
+### Community 1180 - "Crypto A7I Final Decision Record"
 Cohesion: 0.29
 Nodes (6): Crypto A7I Final Decision Record, Final Boundary, Next Valid Work, Stage Results, What A7I Confirmed, What A7I Rejected
 
-### Community 1183 - "Crypto A7J Final Decision Record"
+### Community 1181 - "Crypto A7J Final Decision Record"
 Cohesion: 0.29
 Nodes (6): A7J-2 Summary, Crypto A7J Final Decision Record, Final Boundary, Interpretation, Next Valid Work, Stage Results
 
-### Community 1184 - "Crypto A7K-1 Generator-Space Preflight"
+### Community 1182 - "Crypto A7K-1 Generator-Space Preflight"
 Cohesion: 0.29
 Nodes (6): Boundary, Crypto A7K-1 Generator-Space Preflight, Feature Coverage, Interpretation, May Exclusion, Tightest Old-Pool Gates
 
-### Community 1185 - "Crypto A7K Final Decision Record Revision"
+### Community 1183 - "Crypto A7K Final Decision Record Revision"
 Cohesion: 0.29
 Nodes (6): Correct Scope Of A7K, Crypto A7K Final Decision Record Revision, Next Valid Work, Revision, What A7K Does Not Negate, What A7K Negates
 
-### Community 1186 - "Crypto A7M-0 Failure-Labeled Search Dataset"
+### Community 1184 - "Crypto A7M-0 Failure-Labeled Search Dataset"
 Cohesion: 0.29
 Nodes (6): Crypto A7M-0 Failure-Labeled Search Dataset, Decision, Label Summary, May Policy, Purpose, Source Summary
 
-### Community 1187 - "Crypto A7M-2E Cluster-Cap Policy Revision"
+### Community 1185 - "Crypto A7M-2E Cluster-Cap Policy Revision"
 Cohesion: 0.29
 Nodes (6): Counterfactual Pools, Crypto A7M-2E Cluster-Cap Policy Revision, Engine Advantage After Full Caps, Fast Replay Parity, Label Refactor, Policy Decision
 
-### Community 1188 - "Crypto A7N Regime-Invariant Counterfactual"
+### Community 1186 - "Crypto A7N Regime-Invariant Counterfactual"
 Cohesion: 0.29
 Nodes (6): A7N-0 Objective Contract, A7N-1 Non-May Fold Library, A7N-2 Counterfactual Summary, Crypto A7N Regime-Invariant Counterfactual, Decision, Gate Summary
 
-### Community 1189 - "Crypto A7O-2C2 Bounded-Horizon Semantic Repair Audit"
+### Community 1187 - "Crypto A7O-2C2 Bounded-Horizon Semantic Repair Audit"
 Cohesion: 0.29
 Nodes (6): Crypto A7O-2C2 Bounded-Horizon Semantic Repair Audit, Decision, Economic Motif Uniqueness, Effective Uniqueness, Fold Coverage Feasibility, Horizon Parameter Distribution
 
-### Community 1190 - "Crypto A7O-2C3 Field-Pair Semantic Repair Audit"
+### Community 1188 - "Crypto A7O-2C3 Field-Pair Semantic Repair Audit"
 Cohesion: 0.29
 Nodes (6): Crypto A7O-2C3 Field-Pair Semantic Repair Audit, Decision, Economic Motif Uniqueness, Effective Uniqueness, Fold Coverage Feasibility, Horizon Parameter Distribution
 
-### Community 1191 - "Crypto A7O-2C4 Cell-Context Semantic Repair Audit"
+### Community 1189 - "Crypto A7O-2C4 Cell-Context Semantic Repair Audit"
 Cohesion: 0.29
 Nodes (6): Crypto A7O-2C4 Cell-Context Semantic Repair Audit, Decision, Economic Motif Uniqueness, Effective Uniqueness, Fold Coverage Feasibility, Horizon Parameter Distribution
 
-### Community 1192 - "Crypto A7O-2C Semantic Uniqueness Audit"
+### Community 1190 - "Crypto A7O-2C Semantic Uniqueness Audit"
 Cohesion: 0.29
 Nodes (6): Crypto A7O-2C Semantic Uniqueness Audit, Decision, Economic Motif Uniqueness, Effective Uniqueness, Fold Coverage Feasibility, Horizon Parameter Distribution
+
+### Community 1191 - "Crypto A7O-L1 Pilot Shard Checkpoint"
+Cohesion: 0.29
+Nodes (6): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, Cumulative Checkpoint Summary, Deep Audit Decision Counts, Generation Funnel
+
+### Community 1192 - "Crypto A7O-L1 Pilot Shard Checkpoint"
+Cohesion: 0.29
+Nodes (6): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, Cumulative Checkpoint Summary, Deep Audit Decision Counts, Generation Funnel
 
 ### Community 1193 - "Crypto A7O-L1 Pilot Shard Checkpoint"
 Cohesion: 0.29
@@ -6390,437 +6390,437 @@ Nodes (6): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, C
 Cohesion: 0.29
 Nodes (6): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, Cumulative Checkpoint Summary, Deep Audit Decision Counts, Generation Funnel
 
-### Community 1197 - "Crypto A7O-L1 Pilot Shard Checkpoint"
-Cohesion: 0.29
-Nodes (6): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, Cumulative Checkpoint Summary, Deep Audit Decision Counts, Generation Funnel
-
-### Community 1198 - "Crypto A7O-L1 Pilot Shard Checkpoint"
-Cohesion: 0.29
-Nodes (6): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, Cumulative Checkpoint Summary, Deep Audit Decision Counts, Generation Funnel
-
-### Community 1199 - "Crypto A7P-5 Non-May Rank Repair Audit"
+### Community 1197 - "Crypto A7P-5 Non-May Rank Repair Audit"
 Cohesion: 0.29
 Nodes (6): Crypto A7P-5 Non-May Rank Repair Audit, Interpretation, Metrics, Original Rank Deciles, Purpose, Stress-Analog Rank Deciles
 
-### Community 1200 - "Crypto A7Y-2 Interaction Clue Forensic"
+### Community 1198 - "Crypto A7Y-2 Interaction Clue Forensic"
 Cohesion: 0.29
 Nodes (6): Authorization, Crypto A7Y-2 Interaction Clue Forensic, Recent Symbol Contribution, Robustness Summary, Scope, Split Metrics
 
-### Community 1201 - "ADR 0001: Controlled Semantic, Signal Identity, and SafeDiv Gates"
+### Community 1199 - "ADR 0001: Controlled Semantic, Signal Identity, and SafeDiv Gates"
 Cohesion: 0.29
 Nodes (6): ADR 0001: Controlled Semantic, Signal Identity, and SafeDiv Gates, Boundaries, Consequences, Context, Decision, Verification
 
-### Community 1202 - "ADR 0003: Bounded real-data lazy-search instrument canary"
+### Community 1200 - "ADR 0003: Bounded real-data lazy-search instrument canary"
 Cohesion: 0.29
 Nodes (6): ADR 0003: Bounded real-data lazy-search instrument canary, Assurance, Consequences, Context, Decision, Evidence entrypoints
 
-### Community 1203 - "AlphaFactory Crypto Workspace"
+### Community 1201 - "AlphaFactory Crypto Workspace"
 Cohesion: 0.29
 Nodes (6): AlphaFactory Crypto Workspace, Copied CN References, Current Data Root, Evidence Boundary, First Commands, Primary Goal
 
-### Community 1204 - "CRYPTO A7AB-0 SELECTOR REWRITE DRYRUN CONTRACT"
+### Community 1202 - "CRYPTO A7AB-0 SELECTOR REWRITE DRYRUN CONTRACT"
 Cohesion: 0.29
 Nodes (6): Allowed Seed Fields, CRYPTO A7AB-0 SELECTOR REWRITE DRYRUN CONTRACT, Decision, Hard Gates, Manifest, Selector Score Features
 
-### Community 1205 - "CRYPTO A7AB-6 SMALL NUMERIC REPLAY PREFLIGHT"
+### Community 1203 - "CRYPTO A7AB-6 SMALL NUMERIC REPLAY PREFLIGHT"
 Cohesion: 0.29
 Nodes (6): Clue Queue, CRYPTO A7AB-6 SMALL NUMERIC REPLAY PREFLIGHT, Decision, Decision Counts, Manifest, Ranked Decision Queue Sample
 
-### Community 1206 - "CRYPTO A7AB-9 SURVIVOR FREEZE CONTRACT"
+### Community 1204 - "CRYPTO A7AB-9 SURVIVOR FREEZE CONTRACT"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7AB-9 SURVIVOR FREEZE CONTRACT, Decision, Manifest, Representative Survivor Pool, Survivor Cluster Audit, Survivor Label Audit
 
-### Community 1207 - "CRYPTO A7AI-F1 ENGINE ENFORCEMENT GAP AUDIT"
+### Community 1205 - "CRYPTO A7AI-F1 ENGINE ENFORCEMENT GAP AUDIT"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7AI-F1 ENGINE ENFORCEMENT GAP AUDIT, Decision, Enforcement Patch Status, Engine Enforcement Gap Matrix, Manifest
 
-### Community 1208 - "CRYPTO A7AI-F2 END TO END FIELD ENFORCEMENT REGRESSION"
+### Community 1206 - "CRYPTO A7AI-F2 END TO END FIELD ENFORCEMENT REGRESSION"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7AI-F2 END TO END FIELD ENFORCEMENT REGRESSION, Decision, Evaluator Fail-Closed Audit, Generator Mode Smoke, Historical Candidate Role Summary
 
-### Community 1209 - "CRYPTO A7AI-F4 RESPONSE-BACKED FIELD PROMOTION"
+### Community 1207 - "CRYPTO A7AI-F4 RESPONSE-BACKED FIELD PROMOTION"
 Cohesion: 0.29
 Nodes (6): Blocked Response Candidates, Boundary, CRYPTO A7AI-F4 RESPONSE-BACKED FIELD PROMOTION, Decision, Manifest, Promoted Ordinary-Alpha Fields
 
-### Community 1210 - "CRYPTO A7AL-2I Replay Preflight"
+### Community 1208 - "CRYPTO A7AL-2I Replay Preflight"
 Cohesion: 0.29
 Nodes (6): Boundary, Candidate Decisions, CRYPTO A7AL-2I Replay Preflight, Decision, Decision Counts, Manifest
 
-### Community 1211 - "CRYPTO A7AL-2L Fast Derived Replay Preflight"
+### Community 1209 - "CRYPTO A7AL-2L Fast Derived Replay Preflight"
 Cohesion: 0.29
 Nodes (6): Boundary, Candidate Decisions, CRYPTO A7AL-2L Fast Derived Replay Preflight, Decision, Decision Counts, Manifest
 
-### Community 1212 - "CRYPTO A7AL-2X2R1 Shared-Pool Rebuild Contract"
+### Community 1210 - "CRYPTO A7AL-2X2R1 Shared-Pool Rebuild Contract"
 Cohesion: 0.29
 Nodes (6): Authorization Boundary, CRYPTO A7AL-2X2R1 Shared-Pool Rebuild Contract, Decision, Shared-Pool Ledger Schema, Shared-Pool Rebuild Policy, Source-Of-Truth Rules
 
-### Community 1213 - "CRYPTO A7AL-2Z0 BROADER NON-OI OBJECTIVE CONTRACT"
+### Community 1211 - "CRYPTO A7AL-2Z0 BROADER NON-OI OBJECTIVE CONTRACT"
 Cohesion: 0.29
 Nodes (6): Allowed Families, Authorization, CRYPTO A7AL-2Z0 BROADER NON-OI OBJECTIVE CONTRACT, Decision, Forbidden Fields And Families, Manifest
 
-### Community 1214 - "CRYPTO A7AL-2Z1 BROADER NON-OI DRY GENERATION"
+### Community 1212 - "CRYPTO A7AL-2Z1 BROADER NON-OI DRY GENERATION"
 Cohesion: 0.29
 Nodes (6): Blockers, CRYPTO A7AL-2Z1 BROADER NON-OI DRY GENERATION, Decision, Family Quota Audit, Manifest, Selected Preview
 
-### Community 1215 - "CRYPTO A7AL-2Z5 BROADER NON-OI MULTI-HORIZON DIAGNOSTIC"
+### Community 1213 - "CRYPTO A7AL-2Z5 BROADER NON-OI MULTI-HORIZON DIAGNOSTIC"
 Cohesion: 0.29
 Nodes (6): Candidate Horizon Decisions, CRYPTO A7AL-2Z5 BROADER NON-OI MULTI-HORIZON DIAGNOSTIC, Decision, Decision Counts By Horizon, Family Horizon Summary, Manifest
 
-### Community 1216 - "CRYPTO A7AL-2Z6 RESPONSE-GUIDED MUTATION CONTRACT"
+### Community 1214 - "CRYPTO A7AL-2Z6 RESPONSE-GUIDED MUTATION CONTRACT"
 Cohesion: 0.29
 Nodes (6): Allowed Families, CRYPTO A7AL-2Z6 RESPONSE-GUIDED MUTATION CONTRACT, Decision, Forbidden Patterns, Manifest, Mutation Directives
 
-### Community 1217 - "CRYPTO A7AL-2Z7 RESPONSE-GUIDED DRY GENERATION"
+### Community 1215 - "CRYPTO A7AL-2Z7 RESPONSE-GUIDED DRY GENERATION"
 Cohesion: 0.29
 Nodes (6): Blockers, CRYPTO A7AL-2Z7 RESPONSE-GUIDED DRY GENERATION, Decision, Family Quota Audit, Manifest, Selected Preview
 
-### Community 1218 - "CRYPTO A7AL-2Z8 RESPONSE-GUIDED MATERIALIZATION REPAIR"
+### Community 1216 - "CRYPTO A7AL-2Z8 RESPONSE-GUIDED MATERIALIZATION REPAIR"
 Cohesion: 0.29
 Nodes (6): Blockers, CRYPTO A7AL-2Z8 RESPONSE-GUIDED MATERIALIZATION REPAIR, Decision, Family Summary, Manifest, Selected Queue
 
-### Community 1219 - "CRYPTO A7AL-2Z9 RESPONSE-GUIDED PARTIAL NUMERIC DIAGNOSTIC"
+### Community 1217 - "CRYPTO A7AL-2Z9 RESPONSE-GUIDED PARTIAL NUMERIC DIAGNOSTIC"
 Cohesion: 0.29
 Nodes (6): Candidate Horizon Decisions, CRYPTO A7AL-2Z9 RESPONSE-GUIDED PARTIAL NUMERIC DIAGNOSTIC, Decision, Decision Counts By Horizon, Family Horizon Summary, Manifest
 
-### Community 1220 - "CRYPTO A7AM-0 Universe498 Feature And Symbol Contract"
+### Community 1218 - "CRYPTO A7AM-0 Universe498 Feature And Symbol Contract"
 Cohesion: 0.29
 Nodes (6): Authorized Next Step, CRYPTO A7AM-0 Universe498 Feature And Symbol Contract, Decision, Feature Contract Sample, Feature Families, Symbol Classes
 
-### Community 1221 - "CRYPTO A7AP-1 Cross-Exchange Field Smoke"
+### Community 1219 - "CRYPTO A7AP-1 Cross-Exchange Field Smoke"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7AP-1 Cross-Exchange Field Smoke, Decision, Metrics, Signal Decisions, Summary
 
-### Community 1222 - "CRYPTO A7DATA Recent Patch Merged Panel 20260613"
+### Community 1220 - "CRYPTO A7DATA Recent Patch Merged Panel 20260613"
 Cohesion: 0.29
 Nodes (6): Coverage Sample, CRYPTO A7DATA Recent Patch Merged Panel 20260613, Decision, Merge Rules, Required Downstream Gates, Summary
 
-### Community 1223 - "CRYPTO A7DEDUP1 Canonical Reward Queue Dedup"
+### Community 1221 - "CRYPTO A7DEDUP1 Canonical Reward Queue Dedup"
 Cohesion: 0.29
 Nodes (6): Counts, CRYPTO A7DEDUP1 Canonical Reward Queue Dedup, Decision, Interpretation, Outputs, Selected Queue
 
-### Community 1224 - "CRYPTO A7FF-10 COMPANY PARALLEL NUMERIC AGGREGATE"
+### Community 1222 - "CRYPTO A7FF-10 COMPANY PARALLEL NUMERIC AGGREGATE"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7FF-10 COMPANY PARALLEL NUMERIC AGGREGATE, Decision, Manifest, Non-L7 Clue Summary, Shards
 
-### Community 1225 - "CRYPTO A7FF-12 COMPANY NUMERIC WAVE AGGREGATE"
+### Community 1223 - "CRYPTO A7FF-12 COMPANY NUMERIC WAVE AGGREGATE"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7FF-12 COMPANY NUMERIC WAVE AGGREGATE, Decision, Manifest, Non-L7 Clue Summary, Shards
 
-### Community 1226 - "CRYPTO A7FF-51E NON-L5 HEAVY GENERATION"
+### Community 1224 - "CRYPTO A7FF-51E NON-L5 HEAVY GENERATION"
 Cohesion: 0.29
 Nodes (6): Boundary, Coverage Summary, CRYPTO A7FF-51E NON-L5 HEAVY GENERATION, Decision, Manifest, Static Audit
 
-### Community 1227 - "CRYPTO A7FF-55R1 SUPPLEMENTAL QUEUE FEASIBILITY"
+### Community 1225 - "CRYPTO A7FF-55R1 SUPPLEMENTAL QUEUE FEASIBILITY"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7FF-55R1 SUPPLEMENTAL QUEUE FEASIBILITY, Decision, Family Feasibility, Manifest, Top Atlas Family / Motif Availability
 
-### Community 1228 - "CRYPTO A7FF-55R3 REPAIRED ATLAS DRY GENERATION"
+### Community 1226 - "CRYPTO A7FF-55R3 REPAIRED ATLAS DRY GENERATION"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7FF-55R3 REPAIRED ATLAS DRY GENERATION, Decision, Formula Family Summary, Manifest, Queue Summary
 
-### Community 1229 - "CRYPTO A7FF-6 FIELD-TO-FACTOR COMPILER"
+### Community 1227 - "CRYPTO A7FF-6 FIELD-TO-FACTOR COMPILER"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7FF-6 FIELD-TO-FACTOR COMPILER, Decision, Manifest, Portfolio Marginal Queue, Selected Dryrun Queue
 
-### Community 1230 - "CRYPTO A7FF-9 CONTINUATION COMPARISON"
+### Community 1228 - "CRYPTO A7FF-9 CONTINUATION COMPARISON"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7FF-9 CONTINUATION COMPARISON, Decision, Family Clue Comparison, Summary, Timeout Note
 
-### Community 1231 - "CRYPTO A7FF-CORE10E SEARCH READINESS AUDIT"
+### Community 1229 - "CRYPTO A7FF-CORE10E SEARCH READINESS AUDIT"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE10E SEARCH READINESS AUDIT, Decision, Family Summary, Manifest, Readiness Gates, Small Search Contract Preview
 
-### Community 1232 - "CRYPTO A7FF-CORE11 SMALL GATE-NATIVE EXPANSION CONTRACT"
+### Community 1230 - "CRYPTO A7FF-CORE11 SMALL GATE-NATIVE EXPANSION CONTRACT"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE11 SMALL GATE-NATIVE EXPANSION CONTRACT, Decision, Execution Plan, Family Budget, Grammar Contract, Manifest
 
-### Community 1233 - "CRYPTO A7FF-CORE11E SMALL DRY GENERATION"
+### Community 1231 - "CRYPTO A7FF-CORE11E SMALL DRY GENERATION"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7FF-CORE11E SMALL DRY GENERATION, Decision, Family Generation Summary, Manifest, Parent Seed Summary
 
-### Community 1234 - "CRYPTO A7FF-CORE12 BLUEPRINT REGISTRATION AUDIT"
+### Community 1232 - "CRYPTO A7FF-CORE12 BLUEPRINT REGISTRATION AUDIT"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7FF-CORE12 BLUEPRINT REGISTRATION AUDIT, Decision, Family Summary, Manifest, Operator Summary
 
-### Community 1235 - "CRYPTO A7FF-CORE13 NUMERIC RESPONSE CONTRACT"
+### Community 1233 - "CRYPTO A7FF-CORE13 NUMERIC RESPONSE CONTRACT"
 Cohesion: 0.29
 Nodes (6): Control Contract, CRYPTO A7FF-CORE13 NUMERIC RESPONSE CONTRACT, Decision, Label Contract, Manifest, Shard Plan
 
-### Community 1236 - "CRYPTO A7FF-CORE14 REPLAY-PREFLIGHT CONTRACT"
+### Community 1234 - "CRYPTO A7FF-CORE14 REPLAY-PREFLIGHT CONTRACT"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE14 REPLAY-PREFLIGHT CONTRACT, Decision, Family Summary, Gates, Label Summary, Manifest
 
-### Community 1237 - "CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION"
+### Community 1235 - "CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION"
 Cohesion: 0.29
 Nodes (6): Boundary, Candidate Summary, CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION, Decision, Family Summary, Manifest
 
-### Community 1238 - "CRYPTO A7FF-CORE15YR SURFACE FAILURE REPAIR"
+### Community 1236 - "CRYPTO A7FF-CORE15YR SURFACE FAILURE REPAIR"
 Cohesion: 0.29
 Nodes (6): Blocked Actions, CRYPTO A7FF-CORE15YR SURFACE FAILURE REPAIR, Decision, Manifest, Next Contract, Weak Points
 
-### Community 1239 - "CRYPTO A7FF-CORE16 PRIMITIVE REPLAY-STABILITY ATLAS"
+### Community 1237 - "CRYPTO A7FF-CORE16 PRIMITIVE REPLAY-STABILITY ATLAS"
 Cohesion: 0.29
 Nodes (6): Candidate Objective Atlas, CRYPTO A7FF-CORE16 PRIMITIVE REPLAY-STABILITY ATLAS, Decision, Field Type By Label/Horizon Stability, Manifest, Replay Surface Family Map
 
-### Community 1240 - "CRYPTO A7FF-CORE16E EXPANDED PRIMITIVE / OPERATOR ATLAS"
+### Community 1238 - "CRYPTO A7FF-CORE16E EXPANDED PRIMITIVE / OPERATOR ATLAS"
 Cohesion: 0.29
 Nodes (6): Candidate Objective Atlas, CRYPTO A7FF-CORE16E EXPANDED PRIMITIVE / OPERATOR ATLAS, Decision, Decision Counts, Manifest, Operator / Family Scoreboard
 
-### Community 1241 - "CRYPTO A7FF-CORE16FE NON-BASIS ATLAS EXECUTION"
+### Community 1239 - "CRYPTO A7FF-CORE16FE NON-BASIS ATLAS EXECUTION"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE16FE NON-BASIS ATLAS EXECUTION, Decision, Family Supply Summary, Manifest, Near Miss Sample, Strict Candidate Sample
 
-### Community 1242 - "CRYPTO A7FF-CORE16GE FAMILY-NATIVE INTERACTION PROBE"
+### Community 1240 - "CRYPTO A7FF-CORE16GE FAMILY-NATIVE INTERACTION PROBE"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE16GE FAMILY-NATIVE INTERACTION PROBE, Decision, Decision Counts, Interaction Family Summary, Manifest, Probe Candidate Sample
 
-### Community 1243 - "CRYPTO A7FF-CORE16HE SECOND-PASS INTERACTION BREADTH"
+### Community 1241 - "CRYPTO A7FF-CORE16HE SECOND-PASS INTERACTION BREADTH"
 Cohesion: 0.29
 Nodes (6): Candidate Sample, CRYPTO A7FF-CORE16HE SECOND-PASS INTERACTION BREADTH, Decision, Decision Counts, Manifest, Second-Pass Family Summary
 
-### Community 1244 - "CRYPTO A7FF-CORE16J NEAR-MISS RESOLUTION AUDIT"
+### Community 1242 - "CRYPTO A7FF-CORE16J NEAR-MISS RESOLUTION AUDIT"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE16J NEAR-MISS RESOLUTION AUDIT, Decision, Manifest, Near-Miss Resolution, Next Contract, Strict Queue Summary
 
-### Community 1245 - "CRYPTO A7FF-CORE16M H2 FLOOR ARBITRATION CONTRACT"
+### Community 1243 - "CRYPTO A7FF-CORE16M H2 FLOOR ARBITRATION CONTRACT"
 Cohesion: 0.29
 Nodes (6): Blocked, CORE16ME Operator Policy, CRYPTO A7FF-CORE16M H2 FLOOR ARBITRATION CONTRACT, Decision, Floor Policy, Manifest
 
-### Community 1246 - "CRYPTO A7FF-CORE16ME BROADER H2 REPAIR EXECUTION"
+### Community 1244 - "CRYPTO A7FF-CORE16ME BROADER H2 REPAIR EXECUTION"
 Cohesion: 0.29
 Nodes (6): Added Strict H2 Rows, CRYPTO A7FF-CORE16ME BROADER H2 REPAIR EXECUTION, Decision, Decision Counts, Family Summary, Manifest
 
-### Community 1247 - "CRYPTO A7FF-CORE16R PRIMITIVE ATLAS SUPPLY REPAIR"
+### Community 1245 - "CRYPTO A7FF-CORE16R PRIMITIVE ATLAS SUPPLY REPAIR"
 Cohesion: 0.29
 Nodes (6): Blocked Actions, CRYPTO A7FF-CORE16R PRIMITIVE ATLAS SUPPLY REPAIR, Decision, Manifest, Next Contract, Repair Actions
 
-### Community 1248 - "CRYPTO A7FF-CORE17 OBJECTIVE SEED POLICY CONTRACT"
+### Community 1246 - "CRYPTO A7FF-CORE17 OBJECTIVE SEED POLICY CONTRACT"
 Cohesion: 0.29
 Nodes (6): Blocked, CRYPTO A7FF-CORE17 OBJECTIVE SEED POLICY CONTRACT, Decision, Manifest, Objective Policy, Seed Lane Summary
 
-### Community 1249 - "CRYPTO A7FF-CORE17E OBJECTIVE SEED PACKET CONSTRUCTION"
+### Community 1247 - "CRYPTO A7FF-CORE17E OBJECTIVE SEED PACKET CONSTRUCTION"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE17E OBJECTIVE SEED PACKET CONSTRUCTION, Decision, Gate Audit, Label/Horizon Summary, Manifest, Seed Lane Summary
 
-### Community 1250 - "CRYPTO A7FF-CORE18 BOUNDED REPLAY PREFLIGHT CONTRACT"
+### Community 1248 - "CRYPTO A7FF-CORE18 BOUNDED REPLAY PREFLIGHT CONTRACT"
 Cohesion: 0.29
 Nodes (6): Blocked, CRYPTO A7FF-CORE18 BOUNDED REPLAY PREFLIGHT CONTRACT, Decision, Execution Plan, Manifest, Replay Preflight Contract
 
-### Community 1251 - "CRYPTO A7FF-CORE19 BOUNDED REPLAY CONTRACT"
+### Community 1249 - "CRYPTO A7FF-CORE19 BOUNDED REPLAY CONTRACT"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE19 BOUNDED REPLAY CONTRACT, Decision, Input Lane Counts, Manifest, Pass Gates, Replay Scope
 
-### Community 1252 - "CRYPTO A7FF-CORE19R BOUNDED REPLAY FORENSIC"
+### Community 1250 - "CRYPTO A7FF-CORE19R BOUNDED REPLAY FORENSIC"
 Cohesion: 0.29
 Nodes (6): Clean Clue Summary, CRYPTO A7FF-CORE19R BOUNDED REPLAY FORENSIC, Decision, Failure Summary, Manifest, Recommended Actions
 
-### Community 1253 - "CRYPTO A7FF-CORE19S BOUNDED REPLAY REPAIR CONTRACT"
+### Community 1251 - "CRYPTO A7FF-CORE19S BOUNDED REPLAY REPAIR CONTRACT"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE19S BOUNDED REPLAY REPAIR CONTRACT, Decision, Execution Plan, Manifest, Repair Policy, Source Failure Summary
 
-### Community 1254 - "CRYPTO A7FF-CORE19SE BOUNDED REPLAY REPAIR EXECUTION"
+### Community 1252 - "CRYPTO A7FF-CORE19SE BOUNDED REPLAY REPAIR EXECUTION"
 Cohesion: 0.29
 Nodes (6): 2bps Diagnostic Clean Clues, Cost Tier Clean Summary, CRYPTO A7FF-CORE19SE BOUNDED REPLAY REPAIR EXECUTION, Decision, Diagnosis, Manifest
 
-### Community 1255 - "CRYPTO A7FF-CORE19SER REPLAY REPAIR FORENSIC"
+### Community 1253 - "CRYPTO A7FF-CORE19SER REPLAY REPAIR FORENSIC"
 Cohesion: 0.29
 Nodes (6): Cost Summary, CRYPTO A7FF-CORE19SER REPLAY REPAIR FORENSIC, Decision, Diagnosis, Manifest, Recommended Actions
 
-### Community 1256 - "CRYPTO A7FF-CORE21 REPLAY TRANSLATION RESET CONTRACT"
+### Community 1254 - "CRYPTO A7FF-CORE21 REPLAY TRANSLATION RESET CONTRACT"
 Cohesion: 0.29
 Nodes (6): Blocked, CRYPTO A7FF-CORE21 REPLAY TRANSLATION RESET CONTRACT, Decision, Execution Plan, Manifest, Reset Policy
 
-### Community 1257 - "CRYPTO A7FF-CORE21R TRANSLATION MATRIX FORENSIC"
+### Community 1255 - "CRYPTO A7FF-CORE21R TRANSLATION MATRIX FORENSIC"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE21R TRANSLATION MATRIX FORENSIC, Decision, Diagnosis, Manifest, Recommended Actions, Top Lag Gate Loss
 
-### Community 1258 - "CRYPTO A7FF-CORE22 LAG-AWARE REPLAY TRANSLATION CONTRACT"
+### Community 1256 - "CRYPTO A7FF-CORE22 LAG-AWARE REPLAY TRANSLATION CONTRACT"
 Cohesion: 0.29
 Nodes (6): Blocked, CRYPTO A7FF-CORE22 LAG-AWARE REPLAY TRANSLATION CONTRACT, Decision, Execution Plan, Lag Policy, Manifest
 
-### Community 1259 - "CRYPTO A7FF-CORE22R LAG TRANSLATION FORENSIC"
+### Community 1257 - "CRYPTO A7FF-CORE22R LAG TRANSLATION FORENSIC"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE22R LAG TRANSLATION FORENSIC, Decision, Diagnosis, Lag Matrix, Manifest, Recommended Actions
 
-### Community 1260 - "CRYPTO A7FF-CORE23 EXECUTABLE-HORIZON REDESIGN CONTRACT"
+### Community 1258 - "CRYPTO A7FF-CORE23 EXECUTABLE-HORIZON REDESIGN CONTRACT"
 Cohesion: 0.29
 Nodes (6): Blocked, CRYPTO A7FF-CORE23 EXECUTABLE-HORIZON REDESIGN CONTRACT, Decision, Execution Plan, Horizon Policy, Manifest
 
-### Community 1261 - "CRYPTO A7FF-CORE25E TARGETED LANE/HORIZON GENERATION"
+### Community 1259 - "CRYPTO A7FF-CORE25E TARGETED LANE/HORIZON GENERATION"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE25E TARGETED LANE/HORIZON GENERATION, Decision, Lane Distribution, Manifest, Preflight Distribution, Top Field Usage
 
-### Community 1262 - "CRYPTO A7FF-CORE26 TARGETED NUMERIC PROBE CONTRACT"
+### Community 1260 - "CRYPTO A7FF-CORE26 TARGETED NUMERIC PROBE CONTRACT"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE26 TARGETED NUMERIC PROBE CONTRACT, Decision, Expected Outputs, Gates, Manifest, Probe Policy
 
-### Community 1263 - "CRYPTO A7FF-CORE26CE SPLIT-CONSISTENCY REPAIR PROBE"
+### Community 1261 - "CRYPTO A7FF-CORE26CE SPLIT-CONSISTENCY REPAIR PROBE"
 Cohesion: 0.29
 Nodes (6): Clean Candidates, CRYPTO A7FF-CORE26CE SPLIT-CONSISTENCY REPAIR PROBE, Decision, Lane Summary, Manifest, Near Miss Candidates
 
-### Community 1264 - "CRYPTO A7FF-CORE26CER SPLIT REPAIR FORENSIC"
+### Community 1262 - "CRYPTO A7FF-CORE26CER SPLIT REPAIR FORENSIC"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE26CER SPLIT REPAIR FORENSIC, Decision, Diagnosis, Lane Summary From CORE26CE, Manifest, Recommended Actions
 
-### Community 1265 - "CRYPTO A7FF-CORE26D NON-S0 LANE REPAIR CONTRACT"
+### Community 1263 - "CRYPTO A7FF-CORE26D NON-S0 LANE REPAIR CONTRACT"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE26D NON-S0 LANE REPAIR CONTRACT, Decision, Execution Plan, Gates, Lane Policy, Manifest
 
-### Community 1266 - "CRYPTO A7FF-CORE26DE NON-S0 LANE REPAIR PROBE"
+### Community 1264 - "CRYPTO A7FF-CORE26DE NON-S0 LANE REPAIR PROBE"
 Cohesion: 0.29
 Nodes (6): Clean Candidates, CRYPTO A7FF-CORE26DE NON-S0 LANE REPAIR PROBE, Decision, Lane Summary, Manifest, Near Miss Candidates
 
-### Community 1267 - "CRYPTO A7FF-CORE26DER NON-S0 REPAIR FORENSIC"
+### Community 1265 - "CRYPTO A7FF-CORE26DER NON-S0 REPAIR FORENSIC"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE26DER NON-S0 REPAIR FORENSIC, Decision, Diagnosis, Lane Summary From CORE26DE, Manifest, Recommended Actions
 
-### Community 1268 - "CRYPTO A7FF-CORE26E TARGETED NUMERIC PROBE EXECUTION"
+### Community 1266 - "CRYPTO A7FF-CORE26E TARGETED NUMERIC PROBE EXECUTION"
 Cohesion: 0.29
 Nodes (6): Clean Candidates, CRYPTO A7FF-CORE26E TARGETED NUMERIC PROBE EXECUTION, Decision, Label Summary, Lane Summary, Manifest
 
-### Community 1269 - "CRYPTO A7FF-CORE28 OBJECTIVE/DATA-FAMILY RESET CONTRACT"
+### Community 1267 - "CRYPTO A7FF-CORE28 OBJECTIVE/DATA-FAMILY RESET CONTRACT"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE28 OBJECTIVE/DATA-FAMILY RESET CONTRACT, Decision, Execution Plan, Gates, Manifest, Reset Policy
 
-### Community 1270 - "CRYPTO A7FF-CORE51PXH COMPANY EXECUTION HANDOFF"
+### Community 1268 - "CRYPTO A7FF-CORE51PXH COMPANY EXECUTION HANDOFF"
 Cohesion: 0.29
 Nodes (6): Acceptance Gates, CRYPTO A7FF-CORE51PXH COMPANY EXECUTION HANDOFF, Decision, Execution Steps, Failure Policy, Manifest
 
-### Community 1271 - "CRYPTO A7FF-CORE60D SELECTOR / PORTFOLIO PROXY ATTRIBUTION"
+### Community 1269 - "CRYPTO A7FF-CORE60D SELECTOR / PORTFOLIO PROXY ATTRIBUTION"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE60D SELECTOR / PORTFOLIO PROXY ATTRIBUTION, Decision, Decision Record, L7 Pressure By Semantic Pair, Pool vs Selected By Semantic / Motif, Selected Distribution
 
-### Community 1272 - "CRYPTO A7FF-CORE62 DICE BATCH DRYRUN"
+### Community 1270 - "CRYPTO A7FF-CORE62 DICE BATCH DRYRUN"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE62 DICE BATCH DRYRUN, Decision, Dice Queue Preview, Dice Summary, Manifest, Selector Caps
 
-### Community 1273 - "CRYPTO A7FF-CORE65B FUNDING STATE RETEST EXECUTION"
+### Community 1271 - "CRYPTO A7FF-CORE65B FUNDING STATE RETEST EXECUTION"
 Cohesion: 0.29
 Nodes (6): CRYPTO A7FF-CORE65B FUNDING STATE RETEST EXECUTION, Decision, Manifest, Materialization Summary, Response Summary, Selected Summary
 
-### Community 1274 - "CRYPTO A7FF-CORE9E BOUNDED REPLAY EXECUTION"
+### Community 1272 - "CRYPTO A7FF-CORE9E BOUNDED REPLAY EXECUTION"
 Cohesion: 0.29
 Nodes (6): Boundary, Candidate Summary, CRYPTO A7FF-CORE9E BOUNDED REPLAY EXECUTION, Decision, Family Summary, Manifest
 
-### Community 1275 - "CRYPTO A7FF-R11 FEATURE / LABEL OBJECTIVE RESET"
+### Community 1273 - "CRYPTO A7FF-R11 FEATURE / LABEL OBJECTIVE RESET"
 Cohesion: 0.29
 Nodes (6): A7FF-49 Non-L5 Summary, Boundary, Compact Reset Policy, CRYPTO A7FF-R11 FEATURE / LABEL OBJECTIVE RESET, Decision, Manifest
 
-### Community 1276 - "CRYPTO A7FF-R4 COARSE TO FINE GENERATION REDESIGN"
+### Community 1274 - "CRYPTO A7FF-R4 COARSE TO FINE GENERATION REDESIGN"
 Cohesion: 0.29
 Nodes (6): Allowed Pair Preview, CRYPTO A7FF-R4 COARSE TO FINE GENERATION REDESIGN, Decision, Generation Levels, Manifest, Operator Budget Summary
 
-### Community 1277 - "CRYPTO A7INPUT-1 INTEGRATION SMOKE"
+### Community 1275 - "CRYPTO A7INPUT-1 INTEGRATION SMOKE"
 Cohesion: 0.29
 Nodes (6): Authorization, CRYPTO A7INPUT-1 INTEGRATION SMOKE, Decision, Manifest, Mode Acceptance, Mode Filter Summary
 
-### Community 1278 - "CRYPTO A7LS-17 COMPANY MATERIALIZATION AGGREGATE"
+### Community 1276 - "CRYPTO A7LS-17 COMPANY MATERIALIZATION AGGREGATE"
 Cohesion: 0.29
 Nodes (6): Authorization, CRYPTO A7LS-17 COMPANY MATERIALIZATION AGGREGATE, Decision, Lane Summary, Summary, Top Semantic Pairs
 
-### Community 1279 - "CRYPTO A7LS-21 Company Deep Replay Aggregate (20260607)"
+### Community 1277 - "CRYPTO A7LS-21 Company Deep Replay Aggregate (20260607)"
 Cohesion: 0.29
 Nodes (6): Boundaries, CRYPTO A7LS-21 Company Deep Replay Aggregate (20260607), Decision, Next, Shards, Summary
 
-### Community 1280 - "CRYPTO A7LS-2 SHARDED MATERIALIZATION WAVE"
+### Community 1278 - "CRYPTO A7LS-2 SHARDED MATERIALIZATION WAVE"
 Cohesion: 0.29
 Nodes (6): Boundary, Checkpoint Status, CRYPTO A7LS-2 SHARDED MATERIALIZATION WAVE, Decision, Manifest, Semantic Summary
 
-### Community 1281 - "CRYPTO A7SOURCE-4 Batch Source-Lag Retest"
+### Community 1279 - "CRYPTO A7SOURCE-4 Batch Source-Lag Retest"
 Cohesion: 0.29
 Nodes (6): Boundary, Counts, CRYPTO A7SOURCE-4 Batch Source-Lag Retest, Decision, Errors, Source-Lag Summary
 
-### Community 1282 - "CRYPTO A7SOURCE-5 Source-Lag Survivor Reward Queue"
+### Community 1280 - "CRYPTO A7SOURCE-5 Source-Lag Survivor Reward Queue"
 Cohesion: 0.29
 Nodes (6): Counts, CRYPTO A7SOURCE-5 Source-Lag Survivor Reward Queue, Decision, Family Summary, Next Required, Survivor Queue
 
-### Community 1283 - "CRYPTO A7PM-1 ASSET TAXONOMY AND MODULARIZATION PLAN"
+### Community 1281 - "CRYPTO A7PM-1 ASSET TAXONOMY AND MODULARIZATION PLAN"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7PM-1 ASSET TAXONOMY AND MODULARIZATION PLAN, Decision, Manifest, Refactor Priority, Target Layout
 
-### Community 1284 - "CRYPTO A7PM-2 CANDIDATE LIFECYCLE STATE MACHINE"
+### Community 1282 - "CRYPTO A7PM-2 CANDIDATE LIFECYCLE STATE MACHINE"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7PM-2 CANDIDATE LIFECYCLE STATE MACHINE, Decision, Forbidden Transitions, Promotion Gates, State Dictionary
 
-### Community 1285 - "CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD"
+### Community 1283 - "CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD"
 Cohesion: 0.29
 Nodes (6): Active Workstreams, Allowed Next Tasks, Blocked Tasks, Boundary, CRYPTO A7PM-3 CURRENT EXPERIMENT BOARD, Decision
 
-### Community 1286 - "CRYPTO A7POOL-0 ALPHA-ELIGIBLE POOL REBUILD"
+### Community 1284 - "CRYPTO A7POOL-0 ALPHA-ELIGIBLE POOL REBUILD"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7POOL-0 ALPHA-ELIGIBLE POOL REBUILD, Decision, Family Distribution, Generated Pool, Manifest
 
-### Community 1287 - "CRYPTO A7SEARCH6 June Blind Adapter"
+### Community 1285 - "CRYPTO A7SEARCH6 June Blind Adapter"
 Cohesion: 0.29
 Nodes (6): Counts, CRYPTO A7SEARCH6 June Blind Adapter, Decision, Errors, Original Formula June Summary, Required Next Action
 
-### Community 1288 - "CRYPTO A7SEARCH6 Source Lag Retest"
+### Community 1286 - "CRYPTO A7SEARCH6 Source Lag Retest"
 Cohesion: 0.29
 Nodes (6): Counts, CRYPTO A7SEARCH6 Source Lag Retest, Decision, Decision Boundary, Errors, Sensitivity Summary
 
-### Community 1289 - "CRYPTO A7SEL-0 SELECTOR TARGET COUNTERFACTUAL"
+### Community 1287 - "CRYPTO A7SEL-0 SELECTOR TARGET COUNTERFACTUAL"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO A7SEL-0 SELECTOR TARGET COUNTERFACTUAL, Decision, Manifest, Selected Queue, Stress Summary
 
-### Community 1290 - "CRYPTO A7SHADOW0 Historical Strong Candidate Consolidation"
+### Community 1288 - "CRYPTO A7SHADOW0 Historical Strong Candidate Consolidation"
 Cohesion: 0.29
 Nodes (6): Counts, CRYPTO A7SHADOW0 Historical Strong Candidate Consolidation, Decision, Interpretation, Outputs, Shadow-Readiness Review Queue
 
-### Community 1291 - "CRYPTO A7SOURCE-4 Batch Source-Lag Retest"
+### Community 1289 - "CRYPTO A7SOURCE-4 Batch Source-Lag Retest"
 Cohesion: 0.29
 Nodes (6): Boundary, Counts, CRYPTO A7SOURCE-4 Batch Source-Lag Retest, Decision, Errors, Source-Lag Summary
 
-### Community 1292 - "CRYPTO A7SHADOW2 Signal Overlap Dedup"
+### Community 1290 - "CRYPTO A7SHADOW2 Signal Overlap Dedup"
 Cohesion: 0.29
 Nodes (6): Cluster Leaders, Counts, CRYPTO A7SHADOW2 Signal Overlap Dedup, Decision, Interpretation, Outputs
 
-### Community 1293 - "CRYPTO A7SHADOW6 May Funding Repair"
+### Community 1291 - "CRYPTO A7SHADOW6 May Funding Repair"
 Cohesion: 0.29
 Nodes (6): Counts, CRYPTO A7SHADOW6 May Funding Repair, Decision, Dense Stress Audit, Manifest, Symbol Repair Manifest
 
-### Community 1294 - "CRYPTO A7SOURCE-4 Batch Source-Lag Retest"
+### Community 1292 - "CRYPTO A7SOURCE-4 Batch Source-Lag Retest"
 Cohesion: 0.29
 Nodes (6): Boundary, Counts, CRYPTO A7SOURCE-4 Batch Source-Lag Retest, Decision, Errors, Source-Lag Summary
 
-### Community 1295 - "CRYPTO A7SOURCE-5 Source-Lag Survivor Reward Queue"
+### Community 1293 - "CRYPTO A7SOURCE-5 Source-Lag Survivor Reward Queue"
 Cohesion: 0.29
 Nodes (6): Counts, CRYPTO A7SOURCE-5 Source-Lag Survivor Reward Queue, Decision, Family Summary, Next Required, Survivor Queue
 
-### Community 1296 - "CRYPTO A7T-1 Forward Health Report"
+### Community 1294 - "CRYPTO A7T-1 Forward Health Report"
 Cohesion: 0.29
 Nodes (6): Authorization, CRYPTO A7T-1 Forward Health Report, Decision, Positioning Error Detail, Required Next Action, Source Health
 
-### Community 1297 - "Crypto A7W-0 Post Source-Trace Status"
+### Community 1295 - "Crypto A7W-0 Post Source-Trace Status"
 Cohesion: 0.29
 Nodes (6): Authorization, Crypto A7W-0 Post Source-Trace Status, Current Boundary, Purpose, Required Next, Stage Status
 
-### Community 1298 - "Bitfinex liquidation ingress preflight"
+### Community 1296 - "Bitfinex liquidation ingress preflight"
 Cohesion: 0.29
 Nodes (6): Bitfinex liquidation ingress preflight, Data Adequacy gaps, Decision, Observed data, Reproduction, Semantic boundary
 
-### Community 1299 - "Broad Core Pack information and fixed 2x2 development Arena"
+### Community 1297 - "Broad Core Pack information and fixed 2x2 development Arena"
 Cohesion: 0.29
 Nodes (6): Boundaries, Broad Core Pack information and fixed 2x2 development Arena, Mapping repair summary, Split increment summary, Turnover-aware sticky mapping summary, Why entropy is not used alone
 
-### Community 1300 - "Crypto Broad-Universe Compositional Search Epoch 1"
+### Community 1298 - "Crypto Broad-Universe Compositional Search Epoch 1"
 Cohesion: 0.29
 Nodes (6): Crypto Broad-Universe Compositional Search Epoch 1, Current grammar, Data gate, Decision, Experimental replacement, Search budget
 
-### Community 1301 - "CRYPTO GIT SYNC STATUS 20260529"
+### Community 1299 - "CRYPTO GIT SYNC STATUS 20260529"
 Cohesion: 0.29
 Nodes (6): Boundary, CRYPTO GIT SYNC STATUS 20260529, Decision, Next Allowed Stage, Push Command, Verification
 
-### Community 1302 - "Crypto Search Carrier Activation & Fresh-State Matched Gate V1"
+### Community 1300 - "Crypto Search Carrier Activation & Fresh-State Matched Gate V1"
 Cohesion: 0.29
 Nodes (6): Bias audit, Crypto Search Carrier Activation & Fresh-State Matched Gate V1, Equal-count matched diagnostics, Pre-evaluation failures retained, Result, Search authority repair
 
-### Community 1303 - "Crypto Search Engine V1.3 Cross-Carrier Audit"
+### Community 1301 - "Crypto Search Engine V1.3 Cross-Carrier Audit"
 Cohesion: 0.29
 Nodes (6): Bias Audit, Crypto Search Engine V1.3 Cross-Carrier Audit, Decision, Decision, Independently recomputed results, Scope and reuse
 
-### Community 1304 - "Crypto Unified Field Management V1"
+### Community 1302 - "Crypto Unified Field Management V1"
 Cohesion: 0.29
 Nodes (6): Authority map, Boundary, Compiled result, Crypto Unified Field Management V1, Decision, Duplicate and conflict audit
+
+### Community 1303 - "CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION"
+Cohesion: 0.29
+Nodes (6): Boundary, Candidate Summary, CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION, Decision, Family Summary, Manifest
+
+### Community 1304 - "CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION"
+Cohesion: 0.29
+Nodes (6): Boundary, Candidate Summary, CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION, Decision, Family Summary, Manifest
 
 ### Community 1305 - "CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION"
 Cohesion: 0.29
@@ -6878,97 +6878,97 @@ Nodes (6): Boundary, Candidate Summary, CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECU
 Cohesion: 0.29
 Nodes (6): Boundary, Candidate Summary, CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION, Decision, Family Summary, Manifest
 
-### Community 1319 - "CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION"
-Cohesion: 0.29
-Nodes (6): Boundary, Candidate Summary, CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION, Decision, Family Summary, Manifest
-
-### Community 1320 - "CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION"
-Cohesion: 0.29
-Nodes (6): Boundary, Candidate Summary, CRYPTO A7FF-CORE14E BOUNDED REPLAY EXECUTION, Decision, Family Summary, Manifest
-
-### Community 1321 - "CRYPTO A7SEARCH4 Final Aggregate 20260628"
+### Community 1319 - "CRYPTO A7SEARCH4 Final Aggregate 20260628"
 Cohesion: 0.29
 Nodes (6): Best Strict, Counts, CRYPTO A7SEARCH4 Final Aggregate 20260628, Review Notes, Strict Motif Counts, Strict Pair Counts
 
-### Community 1322 - "crypto_a7al2_small_formula_search_contract.py"
+### Community 1320 - "crypto_a7al2_small_formula_search_contract.py"
 Cohesion: 0.48
 Nodes (6): main(), md_table(), DataFrame, Path, utc_now(), write_json()
 
-### Community 1323 - "crypto_a7al2x2r_family_balanced_repair_contract.py"
+### Community 1321 - "crypto_a7al2h_selector_repair.py"
+Cohesion: 0.43
+Nodes (6): main(), md_table(), DataFrame, Path, utc_now(), write_json()
+
+### Community 1322 - "crypto_a7al2x2r_family_balanced_repair_contract.py"
 Cohesion: 0.48
 Nodes (6): main(), md_table(), now_utc(), DataFrame, Path, write_json()
 
-### Community 1324 - "crypto_a7ff24r4_repaired_numeric_wave_contract.py"
+### Community 1323 - "crypto_a7ff24r4_repaired_numeric_wave_contract.py"
 Cohesion: 0.52
 Nodes (6): main(), now_utc(), Any, Path, read_json(), write_json()
 
-### Community 1325 - "crypto_a7ff25r2_missing_field_audit.py"
-Cohesion: 0.48
-Nodes (6): main(), now_utc(), Any, Path, schema_safe(), write_json()
-
-### Community 1326 - "crypto_a7ff51_compact_non_l5_contract.py"
+### Community 1324 - "crypto_a7ff51_compact_non_l5_contract.py"
 Cohesion: 0.52
 Nodes (6): main(), now_utc(), Any, Path, read_json(), write_json()
 
-### Community 1327 - "crypto_a7ff52_materialization_preflight_contract.py"
+### Community 1325 - "crypto_a7ff52_materialization_preflight_contract.py"
 Cohesion: 0.52
 Nodes (6): main(), now_utc(), Any, Path, read_json(), write_json()
 
-### Community 1328 - "build"
+### Community 1326 - "build"
 Cohesion: 0.48
 Nodes (6): build(), joined_unique(), md_table(), now_iso(), DataFrame, Series
 
-### Community 1329 - "crypto_a7ls21_company_deep_replay_aggregate.py"
+### Community 1327 - "crypto_a7ls21_company_deep_replay_aggregate.py"
 Cohesion: 0.57
 Nodes (6): main(), DataFrame, Path, read_csv_optional(), read_json(), write_json()
 
-### Community 1331 - "build"
+### Community 1329 - "build"
 Cohesion: 0.62
 Nodes (6): build(), main(), Any, Path, read_csv(), write_csv()
 
-### Community 1333 - "Crypto A6.1 Core4 Curve Exposure Sanity"
+### Community 1331 - "Crypto A6.1 Core4 Curve Exposure Sanity"
 Cohesion: 0.33
 Nodes (5): Crypto A6.1 Core4 Curve Exposure Sanity, Interpretation, Recent Cluster Contribution, Split Summary, Top Loss Hours
 
-### Community 1334 - "Crypto A7 Method Validation Design"
+### Community 1332 - "Crypto A7 Method Validation Design"
 Cohesion: 0.33
 Nodes (5): Crypto A7 Method Validation Design, Fixed Protocol, Required Gates, Splits, Time Alignment
 
-### Community 1335 - "Crypto A7D Decision Record"
+### Community 1333 - "Crypto A7D Decision Record"
 Cohesion: 0.33
 Nodes (5): Conclusion, Confirmed, Crypto A7D Decision Record, Not Confirmed, Required Next Action
 
-### Community 1336 - "Crypto A7D Funding Semantics Reconfirmation"
+### Community 1334 - "Crypto A7D Funding Semantics Reconfirmation"
 Cohesion: 0.33
 Nodes (5): Crypto A7D Funding Semantics Reconfirmation, Current Interpretation, Next Valid Use, Reconfirmation, Retained Warnings
 
-### Community 1337 - "Crypto A7I-0 Runner Contract Audit"
+### Community 1335 - "Crypto A7I-0 Runner Contract Audit"
 Cohesion: 0.33
 Nodes (5): Crypto A7I-0 Runner Contract Audit, Decision Boundary, Required Contract Checks, Scope, Unit Contract Tests
 
-### Community 1338 - "Crypto A7J-0 Failure-Mode-to-Reward Contract"
+### Community 1336 - "Crypto A7J-0 Failure-Mode-to-Reward Contract"
 Cohesion: 0.33
 Nodes (5): Crypto A7J-0 Failure-Mode-to-Reward Contract, Expected Known-Object Classification, Hard Boundary, Next, Reward Redesign
 
-### Community 1339 - "Crypto A7K-0 Generator-Space Redesign Contract"
+### Community 1337 - "Crypto A7K-0 Generator-Space Redesign Contract"
 Cohesion: 0.33
 Nodes (5): Boundary, Crypto A7K-0 Generator-Space Redesign Contract, Generator Space, Next, Preselection Gates
 
-### Community 1340 - "Crypto A7K-1B New-Space Generator Implementation Preflight"
+### Community 1338 - "Crypto A7K-1B New-Space Generator Implementation Preflight"
 Cohesion: 0.33
 Nodes (5): Arm Counts, Boundary, Crypto A7K-1B New-Space Generator Implementation Preflight, Family Quota, Feature Coverage
 
-### Community 1341 - "Crypto A7M-1 Surrogate Policy Preflight"
+### Community 1339 - "Crypto A7M-1 Surrogate Policy Preflight"
 Cohesion: 0.33
 Nodes (5): Crypto A7M-1 Surrogate Policy Preflight, Decision, May Boundary, Method, Target Lift
 
-### Community 1342 - "Crypto A7M-2 Inherited-Engine Bakeoff Protocol"
+### Community 1340 - "Crypto A7M-2 Inherited-Engine Bakeoff Protocol"
 Cohesion: 0.33
 Nodes (5): Boundary, Crypto A7M-2 Inherited-Engine Bakeoff Protocol, Engine Matrix, Execution Blockers, Planned Budget If Separately Authorized
 
-### Community 1343 - "Crypto A7O-2D L1 Execution Authorization"
+### Community 1341 - "Crypto A7O-2D L1 Execution Authorization"
 Cohesion: 0.33
 Nodes (5): Authorization Matrix, Checkpoint Stop Rules, Crypto A7O-2D L1 Execution Authorization, Decision, Execution Plan
+
+### Community 1342 - "Crypto A7O-L1 Pilot Shard Checkpoint"
+Cohesion: 0.33
+Nodes (5): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, Deep Audit Decision Counts, Generation Funnel
+
+### Community 1343 - "Crypto A7O-L1 Pilot Shard Checkpoint"
+Cohesion: 0.33
+Nodes (5): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, Deep Audit Decision Counts, Generation Funnel
 
 ### Community 1344 - "Crypto A7O-L1 Pilot Shard Checkpoint"
 Cohesion: 0.33
@@ -6982,701 +6982,693 @@ Nodes (5): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, D
 Cohesion: 0.33
 Nodes (5): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, Deep Audit Decision Counts, Generation Funnel
 
-### Community 1347 - "Crypto A7O-L1 Pilot Shard Checkpoint"
-Cohesion: 0.33
-Nodes (5): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, Deep Audit Decision Counts, Generation Funnel
-
-### Community 1348 - "Crypto A7O-L1 Pilot Shard Checkpoint"
-Cohesion: 0.33
-Nodes (5): Boundary, Checkpoint Metrics, Crypto A7O-L1 Pilot Shard Checkpoint, Deep Audit Decision Counts, Generation Funnel
-
-### Community 1349 - "Crypto A7O-L1W1 Negative-Control And May-Activity Forensic"
+### Community 1347 - "Crypto A7O-L1W1 Negative-Control And May-Activity Forensic"
 Cohesion: 0.33
 Nodes (5): Crypto A7O-L1W1 Negative-Control And May-Activity Forensic, Final W1 Result After Repair, Finding, Interpretation, Remaining Negative Controls
 
-### Community 1350 - "Crypto A7O-L1W1 Parallel Checkpoint Wave"
+### Community 1348 - "Crypto A7O-L1W1 Parallel Checkpoint Wave"
 Cohesion: 0.33
 Nodes (5): Boundary, Checkpoint Summary, Crypto A7O-L1W1 Parallel Checkpoint Wave, Cumulative Summary, Wave Concentration Audit
 
-### Community 1351 - "Crypto A7O-L1W1 Parallel Checkpoint Wave"
+### Community 1349 - "Crypto A7O-L1W1 Parallel Checkpoint Wave"
 Cohesion: 0.33
 Nodes (5): Boundary, Checkpoint Summary, Crypto A7O-L1W1 Parallel Checkpoint Wave, Cumulative Summary, Wave Concentration Audit
 
-### Community 1352 - "Crypto A7P-2 Runner Gate Preflight"
+### Community 1350 - "Crypto A7P-2 Runner Gate Preflight"
 Cohesion: 0.33
 Nodes (5): Active-Hour Metric Audit, Boundary, Checks, Crypto A7P-2 Runner Gate Preflight, Negative-Control Dominance Audit
 
-### Community 1353 - "Crypto A7P-2 W2 Cell Registry Audit"
+### Community 1351 - "Crypto A7P-2 W2 Cell Registry Audit"
 Cohesion: 0.33
 Nodes (5): Boundary, Coverage Audit, Crypto A7P-2 W2 Cell Registry Audit, Quarantined Cells, W2 Registry Preview
 
-### Community 1354 - "Crypto A7R-0 Horizon Reframing Contract"
+### Community 1352 - "Crypto A7R-0 Horizon Reframing Contract"
 Cohesion: 0.33
 Nodes (5): Boundary, Cost Contract, Crypto A7R-0 Horizon Reframing Contract, Execution Lag Contract, Horizons
 
-### Community 1355 - "Crypto Alpha Smoke v0"
+### Community 1353 - "Crypto Alpha Smoke v0"
 Cohesion: 0.33
 Nodes (5): Boundary, Crypto Alpha Smoke v0, Family Summary By Recent-OOS LS Annualized, Stable Positive-IC Rows Across All Splits, Top Recent-OOS Feature/Horizon Rows
 
-### Community 1356 - "Crypto Method Gate Check"
+### Community 1354 - "Crypto Method Gate Check"
 Cohesion: 0.33
 Nodes (5): Blockers, Crypto Method Gate Check, Interpretation, Panel Checks, Warnings
 
-### Community 1357 - "crypto_a7j0_failure_mode_to_reward_contract.py"
+### Community 1355 - "crypto_a7j0_failure_mode_to_reward_contract.py"
 Cohesion: 0.47
 Nodes (5): main(), Any, Path, utc_now(), write_json()
 
-### Community 1358 - "crypto_a7k0_generator_space_redesign_contract.py"
-Cohesion: 0.47
-Nodes (5): main(), Any, Path, utc_now(), write_json()
-
-### Community 1359 - "crypto_a7o2d_l1_execution_authorization.py"
+### Community 1356 - "crypto_a7o2d_l1_execution_authorization.py"
 Cohesion: 0.47
 Nodes (5): load_json(), main(), Any, Path, utc_now()
 
-### Community 1360 - "ADR 0009: aggTrades fixed-cohort search-system canary"
+### Community 1357 - "ADR 0009: aggTrades fixed-cohort search-system canary"
 Cohesion: 0.33
 Nodes (5): ADR 0009: aggTrades fixed-cohort search-system canary, Boundaries, Consequences, Decision, Evidence authority
 
-### Community 1361 - "ADR 0010: Behavior-Niched Search Engine V1.1"
+### Community 1358 - "ADR 0010: Behavior-Niched Search Engine V1.1"
 Cohesion: 0.33
 Nodes (5): ADR 0010: Behavior-Niched Search Engine V1.1, Boundaries, Context, Decision, Status
 
-### Community 1362 - "ADR 0011: Search Surface Integration V1"
+### Community 1359 - "ADR 0011: Search Surface Integration V1"
 Cohesion: 0.33
 Nodes (5): ADR 0011: Search Surface Integration V1, Boundaries, Consequences, Context, Decision
 
-### Community 1363 - "ADR 0012: Unified Field Management Compiled View"
+### Community 1360 - "ADR 0012: Unified Field Management Compiled View"
 Cohesion: 0.33
 Nodes (5): ADR 0012: Unified Field Management Compiled View, Boundaries, Consequences, Context, Decision
 
-### Community 1364 - "Alpha Pit Engine Crypto Line"
+### Community 1361 - "Alpha Pit Engine Crypto Line"
 Cohesion: 0.33
 Nodes (5): Alpha Pit Engine Crypto Line, Current Evidence Status, Excluded, Included, Next Correct Work
 
-### Community 1365 - "Crypto 18M Compositional Broad Search"
+### Community 1362 - "Crypto 18M Compositional Broad Search"
 Cohesion: 0.33
 Nodes (5): Claim boundary, Crypto 18M Compositional Broad Search, Decision, Evidence, Frozen execution
 
-### Community 1366 - "Crypto 18M Compositional Broad Search"
+### Community 1363 - "Crypto 18M Compositional Broad Search"
 Cohesion: 0.33
 Nodes (5): Claim boundary, Crypto 18M Compositional Broad Search, Decision, Evidence, Frozen execution
 
-### Community 1367 - "CRYPTO A7AA-4 RESPONSE READINESS HANDOFF"
+### Community 1364 - "CRYPTO A7AA-4 RESPONSE READINESS HANDOFF"
 Cohesion: 0.33
 Nodes (5): Boundary, CRYPTO A7AA-4 RESPONSE READINESS HANDOFF, Decision, Label Contract, Reused Stages
 
-### Community 1368 - "CRYPTO A7AI-F3 MATERIALIZATION EVALUATOR PARITY"
+### Community 1365 - "CRYPTO A7AI-F3 MATERIALIZATION EVALUATOR PARITY"
 Cohesion: 0.33
 Nodes (5): Boundary, CRYPTO A7AI-F3 MATERIALIZATION EVALUATOR PARITY, Decision, Field Materialization, Operator Parity
 
-### Community 1369 - "CRYPTO A7AL-0L Fixed Delay Stress Abolition"
+### Community 1366 - "CRYPTO A7AL-0L Fixed Delay Stress Abolition"
 Cohesion: 0.33
 Nodes (5): Active Code Scan, Authorization, CRYPTO A7AL-0L Fixed Delay Stress Abolition, Decision, Policy
 
-### Community 1370 - "CRYPTO A7AL-2Z3 BROADER NON-OI NUMERIC PREFLIGHT CONTRACT"
+### Community 1367 - "CRYPTO A7AL-2Z3 BROADER NON-OI NUMERIC PREFLIGHT CONTRACT"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7AL-2Z3 BROADER NON-OI NUMERIC PREFLIGHT CONTRACT, Decision, Family Inputs, Manifest, Negative Controls
 
-### Community 1371 - "CRYPTO A7AL-2Z8P PARTIAL VIABLE QUEUE AUTHORIZATION"
+### Community 1368 - "CRYPTO A7AL-2Z8P PARTIAL VIABLE QUEUE AUTHORIZATION"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7AL-2Z8P PARTIAL VIABLE QUEUE AUTHORIZATION, Decision, Manifest, Source Blockers, Source Family Summary
 
-### Community 1372 - "CRYPTO A7AO-1 OKX-Binance Spread Alignment Sample"
+### Community 1369 - "CRYPTO A7AO-1 OKX-Binance Spread Alignment Sample"
 Cohesion: 0.33
 Nodes (5): Alignment Summary, Authorization, CRYPTO A7AO-1 OKX-Binance Spread Alignment Sample, Decision, Output
 
-### Community 1373 - "Crypto A7AR-1 Formula Engine Adapter Smoke"
+### Community 1370 - "Crypto A7AR-1 Formula Engine Adapter Smoke"
 Cohesion: 0.33
 Nodes (5): Crypto A7AR-1 Formula Engine Adapter Smoke, Decision, Next Gate, Results, Scope
 
-### Community 1374 - "Crypto A7AR-2 Feature Algebra Parity Smoke"
+### Community 1371 - "Crypto A7AR-2 Feature Algebra Parity Smoke"
 Cohesion: 0.33
 Nodes (5): Authorization, Crypto A7AR-2 Feature Algebra Parity Smoke, Decision, Results, Scope
 
-### Community 1375 - "Crypto A7AR-3 Fresh Memory And Dedup Smoke"
+### Community 1372 - "Crypto A7AR-3 Fresh Memory And Dedup Smoke"
 Cohesion: 0.33
 Nodes (5): Authorization, Crypto A7AR-3 Fresh Memory And Dedup Smoke, Decision, Results, Scope
 
-### Community 1376 - "CRYPTO A7CLEAN1 Remote Disk Safety Audit"
+### Community 1373 - "CRYPTO A7CLEAN1 Remote Disk Safety Audit"
 Cohesion: 0.33
 Nodes (5): Counts, CRYPTO A7CLEAN1 Remote Disk Safety Audit, Decision, Largest Candidates, Outputs
 
-### Community 1377 - "CRYPTO A7CLEAN2 Safe Sync/Tmp Cleanup"
+### Community 1374 - "CRYPTO A7CLEAN2 Safe Sync/Tmp Cleanup"
 Cohesion: 0.33
 Nodes (5): Counts, CRYPTO A7CLEAN2 Safe Sync/Tmp Cleanup, Decision, Delete Log, Outputs
 
-### Community 1378 - "CRYPTO A7FF-0 FIELD-TO-FACTOR COMPILER"
+### Community 1375 - "CRYPTO A7FF-0 FIELD-TO-FACTOR COMPILER"
 Cohesion: 0.33
 Nodes (5): Boundary, CRYPTO A7FF-0 FIELD-TO-FACTOR COMPILER, Decision, Manifest, Semantic Type Summary
 
-### Community 1379 - "CRYPTO A7FF-1 FIELD-TO-FACTOR COMPILER"
+### Community 1376 - "CRYPTO A7FF-1 FIELD-TO-FACTOR COMPILER"
 Cohesion: 0.33
 Nodes (5): Allowed Operator Rows, CRYPTO A7FF-1 FIELD-TO-FACTOR COMPILER, Decision, Manifest, Operator Reliability
 
-### Community 1380 - "CRYPTO A7FF-2 FIELD-TO-FACTOR COMPILER"
+### Community 1377 - "CRYPTO A7FF-2 FIELD-TO-FACTOR COMPILER"
 Cohesion: 0.33
 Nodes (5): Allowed Pair Policy, CRYPTO A7FF-2 FIELD-TO-FACTOR COMPILER, Decision, Manifest, Semantic Response Clusters
 
-### Community 1381 - "CRYPTO A7FF-3 FIELD-TO-FACTOR COMPILER"
+### Community 1378 - "CRYPTO A7FF-3 FIELD-TO-FACTOR COMPILER"
 Cohesion: 0.33
 Nodes (5): Blueprints, CRYPTO A7FF-3 FIELD-TO-FACTOR COMPILER, Decision, Layer Policy, Manifest
 
-### Community 1382 - "CRYPTO A7FF-4 FIELD-TO-FACTOR COMPILER"
+### Community 1379 - "CRYPTO A7FF-4 FIELD-TO-FACTOR COMPILER"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-4 FIELD-TO-FACTOR COMPILER, Decision, Manifest, Promotions, Transition Policy
 
-### Community 1383 - "CRYPTO A7FF-52E MATERIALIZATION PREFLIGHT"
+### Community 1380 - "CRYPTO A7FF-52E MATERIALIZATION PREFLIGHT"
 Cohesion: 0.33
 Nodes (5): Boundary, CRYPTO A7FF-52E MATERIALIZATION PREFLIGHT, Decision, Family Summary, Manifest
 
-### Community 1384 - "CRYPTO A7FF-5 FIELD-TO-FACTOR COMPILER"
+### Community 1381 - "CRYPTO A7FF-5 FIELD-TO-FACTOR COMPILER"
 Cohesion: 0.33
 Nodes (5): Blocked Factor Blueprints, Compiled Factor Blueprints, CRYPTO A7FF-5 FIELD-TO-FACTOR COMPILER, Decision, Manifest
 
-### Community 1385 - "CRYPTO A7FF-CORE10R REPLAY-CLEAN POOL REPAIR"
+### Community 1382 - "CRYPTO A7FF-CORE10R REPLAY-CLEAN POOL REPAIR"
 Cohesion: 0.33
 Nodes (5): Balanced Pool, CRYPTO A7FF-CORE10R REPLAY-CLEAN POOL REPAIR, Decision, Manifest, Repair Gates
 
-### Community 1386 - "CRYPTO A7FF-CORE12E MATERIALIZATION PREFLIGHT"
+### Community 1383 - "CRYPTO A7FF-CORE12E MATERIALIZATION PREFLIGHT"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-CORE12E MATERIALIZATION PREFLIGHT, Decision, Error Summary, Manifest, Materialization Summary
 
-### Community 1387 - "CRYPTO A7FF-CORE13E NUMERIC RESPONSE EXECUTION"
+### Community 1384 - "CRYPTO A7FF-CORE13E NUMERIC RESPONSE EXECUTION"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-CORE13E NUMERIC RESPONSE EXECUTION, Decision, Family Summary, Label Summary, Manifest
 
-### Community 1388 - "CRYPTO A7FF-CORE14SE REPAIRED PACKET CONSTRUCTION"
+### Community 1385 - "CRYPTO A7FF-CORE14SE REPAIRED PACKET CONSTRUCTION"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-CORE14SE REPAIRED PACKET CONSTRUCTION, Decision, Family Summary, Manifest, Repaired Packet Preview
 
-### Community 1389 - "CRYPTO A7FF-CORE15Y REPLAY-STABILITY OBJECTIVE SURFACE"
+### Community 1386 - "CRYPTO A7FF-CORE15Y REPLAY-STABILITY OBJECTIVE SURFACE"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-CORE15Y REPLAY-STABILITY OBJECTIVE SURFACE, Decision, Family Scorecard, Manifest, Surface Candidates
 
-### Community 1390 - "CRYPTO A7FF-CORE16I BALANCED PRE-SEED QUEUE AUDIT"
+### Community 1387 - "CRYPTO A7FF-CORE16I BALANCED PRE-SEED QUEUE AUDIT"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-CORE16I BALANCED PRE-SEED QUEUE AUDIT, Decision, Manifest, Queue Sample, Queue Summary
 
-### Community 1391 - "CRYPTO A7FF-CORE16K H2 STRICT-FLOOR REPAIR CONTRACT"
+### Community 1388 - "CRYPTO A7FF-CORE16K H2 STRICT-FLOOR REPAIR CONTRACT"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-CORE16K H2 STRICT-FLOOR REPAIR CONTRACT, Decision, Execution Contract, Manifest, Repair Policy
 
-### Community 1392 - "CRYPTO A7FF-CORE16KE H2 STRICT-FLOOR EXECUTION"
+### Community 1389 - "CRYPTO A7FF-CORE16KE H2 STRICT-FLOOR EXECUTION"
 Cohesion: 0.33
 Nodes (5): Added Strict H2 Rows, CRYPTO A7FF-CORE16KE H2 STRICT-FLOOR EXECUTION, Decision, Decision Counts, Manifest
 
-### Community 1393 - "CRYPTO A7FF-CORE16L STRICT PRESEED QUEUE LOCK"
+### Community 1390 - "CRYPTO A7FF-CORE16L STRICT PRESEED QUEUE LOCK"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-CORE16L STRICT PRESEED QUEUE LOCK, Decision, Family Summary, Gate Audit, Manifest
 
-### Community 1394 - "CRYPTO A7FF-CORE18E BOUNDED REPLAY PREFLIGHT"
+### Community 1391 - "CRYPTO A7FF-CORE18E BOUNDED REPLAY PREFLIGHT"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-CORE18E BOUNDED REPLAY PREFLIGHT, Decision, Gate Audit, Lane Summary, Manifest
 
-### Community 1395 - "CRYPTO A7FF-CORE19E BOUNDED REPLAY EXECUTION"
+### Community 1392 - "CRYPTO A7FF-CORE19E BOUNDED REPLAY EXECUTION"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-CORE19E BOUNDED REPLAY EXECUTION, Decision, Family Summary, Manifest, Replay Clean Candidates
 
-### Community 1396 - "CRYPTO A7FF-CORE22E LAG-AWARE REPLAY TRANSLATION AUDIT"
+### Community 1393 - "CRYPTO A7FF-CORE22E LAG-AWARE REPLAY TRANSLATION AUDIT"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-CORE22E LAG-AWARE REPLAY TRANSLATION AUDIT, Decision, Diagnosis, Lag Translation Matrix, Manifest
 
-### Community 1397 - "CRYPTO A7FF-CORE27X SEARCH READINESS ARBITRATION"
+### Community 1394 - "CRYPTO A7FF-CORE27X SEARCH READINESS ARBITRATION"
 Cohesion: 0.33
 Nodes (5): Authorization Matrix, CRYPTO A7FF-CORE27X SEARCH READINESS ARBITRATION, Decision, Manifest, Readiness Verdict
 
-### Community 1398 - "CRYPTO A7FF-CORE51PXE COMPANY SHARDED REPLAY IMPORT"
+### Community 1395 - "CRYPTO A7FF-CORE51PXE COMPANY SHARDED REPLAY IMPORT"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-CORE51PXE COMPANY SHARDED REPLAY IMPORT, Decision, Family Summary, Label Summary, Manifest
 
-### Community 1399 - "CRYPTO A7FF-CORE51PXV COMPANY EXECUTION PREFLIGHT VALIDATOR"
+### Community 1396 - "CRYPTO A7FF-CORE51PXV COMPANY EXECUTION PREFLIGHT VALIDATOR"
 Cohesion: 0.33
 Nodes (5): Authorization, Checks, CRYPTO A7FF-CORE51PXV COMPANY EXECUTION PREFLIGHT VALIDATOR, Decision, Script Compile Audit
 
-### Community 1400 - "CRYPTO A7FF-R0 DERIVED GENERATION FAILURE FREEZE"
+### Community 1397 - "CRYPTO A7FF-R0 DERIVED GENERATION FAILURE FREEZE"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-R0 DERIVED GENERATION FAILURE FREEZE, Decision, Evidence Matrix, Interpretation, Manifest
 
-### Community 1401 - "CRYPTO A7FF-R1 FIELD ONTOLOGY V3"
+### Community 1398 - "CRYPTO A7FF-R1 FIELD ONTOLOGY V3"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-R1 FIELD ONTOLOGY V3, Decision, Manifest, Ontology Preview, Semantic / Role Summary
 
-### Community 1402 - "CRYPTO A7FF-R2 OPERATOR PROBING V2"
+### Community 1399 - "CRYPTO A7FF-R2 OPERATOR PROBING V2"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-R2 OPERATOR PROBING V2, Decision, Manifest, Observed Operator Response, Operator Policy
 
-### Community 1403 - "CRYPTO A7FF-R3 FEATURE PAIR POLICY V2"
+### Community 1400 - "CRYPTO A7FF-R3 FEATURE PAIR POLICY V2"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-R3 FEATURE PAIR POLICY V2, Decision, Manifest, Pair Policy Preview, Pair Policy Summary
 
-### Community 1404 - "CRYPTO A7FF-R5 RESPONSE BACKED PROMOTION REDESIGN"
+### Community 1401 - "CRYPTO A7FF-R5 RESPONSE BACKED PROMOTION REDESIGN"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7FF-R5 RESPONSE BACKED PROMOTION REDESIGN, Decision, Manifest, Promotion Gates, Seed Preview
 
-### Community 1405 - "CRYPTO A7LS-15 MILLION-SCALE BLUEPRINT GENERATION"
+### Community 1402 - "CRYPTO A7LS-15 MILLION-SCALE BLUEPRINT GENERATION"
 Cohesion: 0.33
 Nodes (5): Authorization, Counts, CRYPTO A7LS-15 MILLION-SCALE BLUEPRINT GENERATION, Decision, Lane Summary
 
-### Community 1406 - "CRYPTO A7LS21 COMPANY DEEP REPLAY PACKET"
+### Community 1403 - "CRYPTO A7LS21 COMPANY DEEP REPLAY PACKET"
 Cohesion: 0.33
 Nodes (5): Boundary, CRYPTO A7LS21 COMPANY DEEP REPLAY PACKET, Decision, Manifest, Shard Plan
 
-### Community 1407 - "CRYPTO A7LS30 Company Numeric Launch 20260610"
+### Community 1404 - "CRYPTO A7LS30 Company Numeric Launch 20260610"
 Cohesion: 0.33
 Nodes (5): Boundary, CRYPTO A7LS30 Company Numeric Launch 20260610, Decision, Initial Verification, Launch
 
-### Community 1408 - "CRYPTO A7RAW0 Company Numeric Launch 20260610"
+### Community 1405 - "CRYPTO A7RAW0 Company Numeric Launch 20260610"
 Cohesion: 0.33
 Nodes (5): Boundary, CRYPTO A7RAW0 Company Numeric Launch 20260610, Decision, Initial Verification, Launch
 
-### Community 1409 - "CRYPTO A7SOURCE10 Seed Expansion Queue"
+### Community 1406 - "CRYPTO A7SOURCE10 Seed Expansion Queue"
 Cohesion: 0.33
 Nodes (5): Boundary, Counts, CRYPTO A7SOURCE10 Seed Expansion Queue, Decision, Queue Summary
 
-### Community 1410 - "CRYPTO A7SOURCE-1 Field Timing Proof"
+### Community 1407 - "CRYPTO A7SOURCE-1 Field Timing Proof"
 Cohesion: 0.33
 Nodes (5): Blocking Interpretation, CRYPTO A7SOURCE-1 Field Timing Proof, Decision, Formula Gate, Summary
 
-### Community 1411 - "CRYPTO A7SOURCE-2 Source-Lag Retest"
+### Community 1408 - "CRYPTO A7SOURCE-2 Source-Lag Retest"
 Cohesion: 0.33
 Nodes (5): Counts, CRYPTO A7SOURCE-2 Source-Lag Retest, Decision, Errors, Source-Lag Summary
 
-### Community 1412 - "CRYPTO A7V3S8 Redesigned Reward Smoke Launch - 20260614"
+### Community 1409 - "CRYPTO A7V3S8 Redesigned Reward Smoke Launch - 20260614"
 Cohesion: 0.33
 Nodes (5): CRYPTO A7V3S8 Redesigned Reward Smoke Launch - 20260614, Decision, Launch, Launch Verification, Stop Rule
 
-### Community 1413 - "Crypto aggTrades Search-System Canary V1 — Bias Audit"
+### Community 1410 - "Crypto aggTrades Search-System Canary V1 — Bias Audit"
 Cohesion: 0.33
 Nodes (5): Blocking Issues, Crypto aggTrades Search-System Canary V1 — Bias Audit, Decision, Findings, Required Next Action
 
-### Community 1414 - "Broad Core Pack information and fixed 2x2 development Arena"
+### Community 1411 - "Broad Core Pack information and fixed 2x2 development Arena"
 Cohesion: 0.33
 Nodes (5): Boundaries, Broad Core Pack information and fixed 2x2 development Arena, Mapping repair summary, Split increment summary, Why entropy is not used alone
 
-### Community 1415 - "Crypto Policy Acceleration Canary V1"
+### Community 1412 - "Crypto Policy Acceleration Canary V1"
 Cohesion: 0.33
 Nodes (5): Crypto Policy Acceleration Canary V1, Exact parity, Next launch contract, Runtime reality, Worker scheduling
 
-### Community 1416 - "Crypto Relational Policy Stage 1 — Layer Attribution"
+### Community 1413 - "Crypto Relational Policy Stage 1 — Layer Attribution"
 Cohesion: 0.33
 Nodes (5): Boundaries and expiry, Crypto Relational Policy Stage 1 — Layer Attribution, Data and non-degeneracy, Primary block deltas, What was attributed
 
-### Community 1417 - "Crypto Search Engine V1 post-audit remediation"
+### Community 1414 - "Crypto Search Engine V1 post-audit remediation"
 Cohesion: 0.33
 Nodes (5): Audit findings, Boundary, Crypto Search Engine V1 post-audit remediation, Remediation, Verification
 
-### Community 1418 - "CRYPTO SYSTEM ARCHITECTURE BLUEPRINT 20260630"
+### Community 1415 - "CRYPTO SYSTEM ARCHITECTURE BLUEPRINT 20260630"
 Cohesion: 0.33
 Nodes (5): CRYPTO SYSTEM ARCHITECTURE BLUEPRINT 20260630, Decision, Edges, Nodes, Target Verified-Core Flow
 
-### Community 1419 - "A7AL-2Q/2R Company Full Run Summary"
+### Community 1416 - "A7AL-2Q/2R Company Full Run Summary"
 Cohesion: 0.33
 Nodes (5): A7AL-2Q, A7AL-2Q/2R Company Full Run Summary, A7AL-2R, Authorization Boundary, Execution
 
-### Community 1420 - "manifest.json"
+### Community 1417 - "manifest.json"
 Cohesion: 0.33
 Nodes (5): artifacts, bundle_sha256, original_bundle_sha256, qualifier_source_sha, schema_version
 
-### Community 1421 - "crypto_a7ap3_cross_exchange_overlay_handoff.py"
+### Community 1418 - "crypto_a7ap3_cross_exchange_overlay_handoff.py"
 Cohesion: 0.60
 Nodes (5): main(), markdown_table(), Path, read_json(), write_csv()
 
-### Community 1422 - "crypto_a7ffcore51pxe_company_sharded_replay_orchestrator.py"
+### Community 1419 - "crypto_a7ffcore51pxe_company_sharded_replay_orchestrator.py"
 Cohesion: 0.67
 Nodes (5): main(), now_utc(), Path, run_command(), run_shard()
 
-### Community 1423 - "build"
+### Community 1420 - "build"
 Cohesion: 0.60
 Nodes (5): build(), md_table(), now_iso(), DataFrame, replace_field_token()
 
-### Community 1426 - "CEM / AST / MCTS Search Core Hold"
+### Community 1423 - "crypto_a7v3s0_reward_shard_queue.py"
+Cohesion: 0.53
+Nodes (5): main(), now_utc(), Any, Path, write_json()
+
+### Community 1424 - "CEM / AST / MCTS Search Core Hold"
 Cohesion: 0.33
 Nodes (5): CEM / AST / MCTS Search Core Hold, Decision, Immediate Recommendation, Reason, Requirement To Promote
 
-### Community 1427 - "Crypto A2 Strict Replay"
+### Community 1425 - "Crypto A2 Strict Replay"
 Cohesion: 0.40
 Nodes (4): Bias / Scope Notes, Crypto A2 Strict Replay, Decision Counts By Motif, Top KEEP Candidates
 
-### Community 1428 - "Crypto A3 Signal Cluster Registry"
+### Community 1426 - "Crypto A3 Signal Cluster Registry"
 Cohesion: 0.40
 Nodes (4): Boundary, Crypto A3 Signal Cluster Registry, Representative Motif Counts, Top Cluster Representatives
 
-### Community 1429 - "Crypto A4 Cluster Stress And Champion Shortlist"
+### Community 1427 - "Crypto A4 Cluster Stress And Champion Shortlist"
 Cohesion: 0.40
 Nodes (4): Boundary, Champion Shortlist, Crypto A4 Cluster Stress And Champion Shortlist, Interpretation
 
-### Community 1430 - "Crypto A5 Champion Deep Audit"
+### Community 1428 - "Crypto A5 Champion Deep Audit"
 Cohesion: 0.40
 Nodes (4): Alpha Cards, Book Proxy, Crypto A5 Champion Deep Audit, Decision Boundary
 
-### Community 1431 - "Crypto A6.2 Core4 Risk Scaling"
+### Community 1429 - "Crypto A6.2 Core4 Risk Scaling"
 Cohesion: 0.40
 Nodes (4): Crypto A6.2 Core4 Risk Scaling, Fixed Variants, Gate, Recent OOS Summary
 
-### Community 1432 - "Crypto A7.2 Core4 Fixed-Split Revalidation"
+### Community 1430 - "Crypto A7.2 Core4 Fixed-Split Revalidation"
 Cohesion: 0.40
 Nodes (4): 10bps Risk Variant Summary, Crypto A7.2 Core4 Fixed-Split Revalidation, Decision Rule, LOO Gates
 
-### Community 1433 - "Crypto A7B Funding Baseline Audit"
+### Community 1431 - "Crypto A7B Funding Baseline Audit"
 Cohesion: 0.40
 Nodes (4): 10bps Baseline Comparison, Crypto A7B Funding Baseline Audit, Interpretation, May Failure Attribution
 
-### Community 1434 - "Crypto A7G-0 Regime Feature Contract Audit"
+### Community 1432 - "Crypto A7G-0 Regime Feature Contract Audit"
 Cohesion: 0.40
 Nodes (4): Contract, Crypto A7G-0 Regime Feature Contract Audit, Decision, Key Metrics
 
-### Community 1435 - "Crypto A7H-0 Non-Funding Residual Smoke"
+### Community 1433 - "Crypto A7H-0 Non-Funding Residual Smoke"
 Cohesion: 0.40
 Nodes (4): Contract Boundary, Crypto A7H-0 Non-Funding Residual Smoke, Decision, Top Candidate Summary
 
-### Community 1436 - "Crypto A7H-1 Non-Funding Masked LOO Audit"
+### Community 1434 - "Crypto A7H-1 Non-Funding Masked LOO Audit"
 Cohesion: 0.40
 Nodes (4): Candidate Summary, Crypto A7H-1 Non-Funding Masked LOO Audit, Decision Boundary, Scope
 
-### Community 1437 - "Crypto A7I-1b Matched-Budget Smoke"
+### Community 1435 - "Crypto A7I-1b Matched-Budget Smoke"
 Cohesion: 0.40
 Nodes (4): Arm Summary, Crypto A7I-1b Matched-Budget Smoke, Decision Boundary, Research Candidate Shortlist
 
-### Community 1438 - "Crypto A7J-1 Redesigned Runner Preflight"
+### Community 1436 - "Crypto A7J-1 Redesigned Runner Preflight"
 Cohesion: 0.40
 Nodes (4): Boundary, Classification, Crypto A7J-1 Redesigned Runner Preflight, May Exclusion
 
-### Community 1439 - "Crypto A7J-2 Same-Budget Redesigned Generator Smoke"
+### Community 1437 - "Crypto A7J-2 Same-Budget Redesigned Generator Smoke"
 Cohesion: 0.40
 Nodes (4): Arm Summary, Boundary, Crypto A7J-2 Same-Budget Redesigned Generator Smoke, Research Candidate Shortlist
 
-### Community 1440 - "Crypto A7K-2 New-Space Same-Budget Smoke"
+### Community 1438 - "Crypto A7K-2 New-Space Same-Budget Smoke"
 Cohesion: 0.40
 Nodes (4): Arm Summary, Boundary, Crypto A7K-2 New-Space Same-Budget Smoke, Research Candidate Shortlist
 
-### Community 1441 - "Crypto A7L-0 Search-Space Coverage Audit"
+### Community 1439 - "Crypto A7L-0 Search-Space Coverage Audit"
 Cohesion: 0.40
 Nodes (4): Coverage Summary, Crypto A7L-0 Search-Space Coverage Audit, Gate Attrition, Interpretation
 
-### Community 1442 - "Crypto A7L-1B Implementation Preflight"
+### Community 1440 - "Crypto A7L-1B Implementation Preflight"
 Cohesion: 0.40
 Nodes (4): Contract Correction, Crypto A7L-1B Implementation Preflight, Limits, Readiness Checks
 
-### Community 1443 - "Crypto A7M-2A AST Repair Adapter Preflight"
+### Community 1441 - "Crypto A7M-2A AST Repair Adapter Preflight"
 Cohesion: 0.40
 Nodes (4): Boundary, Confirmed, Crypto A7M-2A AST Repair Adapter Preflight, Failure Taxonomy
 
-### Community 1444 - "Crypto A7M-2B CEM Adaptive Grammar Preflight"
+### Community 1442 - "Crypto A7M-2B CEM Adaptive Grammar Preflight"
 Cohesion: 0.40
 Nodes (4): Boundary, Confirmed, Coverage, Crypto A7M-2B CEM Adaptive Grammar Preflight
 
-### Community 1445 - "Crypto A7M-2C Execution Authorization Revision"
+### Community 1443 - "Crypto A7M-2C Execution Authorization Revision"
 Cohesion: 0.40
 Nodes (4): Blocker Reclassification, Confirmed, Crypto A7M-2C Execution Authorization Revision, Still Not Authorized
 
-### Community 1446 - "Crypto A7P Final Failure Decision Record"
+### Community 1444 - "Crypto A7P Final Failure Decision Record"
 Cohesion: 0.40
 Nodes (4): Blocker Matrix, Crypto A7P Final Failure Decision Record, Evidence Summary, Interpretation
 
-### Community 1447 - "Crypto A7Q-1 Failure Hypothesis Matrix"
+### Community 1445 - "Crypto A7Q-1 Failure Hypothesis Matrix"
 Cohesion: 0.40
 Nodes (4): Crypto A7Q-1 Failure Hypothesis Matrix, Evidence, Hypothesis Matrix, Interpretation
 
-### Community 1448 - "Crypto A7R-1 Horizon Reframing Small Audit"
+### Community 1446 - "Crypto A7R-1 Horizon Reframing Small Audit"
 Cohesion: 0.40
 Nodes (4): Crypto A7R-1 Horizon Reframing Small Audit, Horizon Summary, Interpretation, Rank Decile Alignment By Horizon
 
-### Community 1449 - "CN Reference Manifest"
+### Community 1447 - "CN Reference Manifest"
 Cohesion: 0.40
 Nodes (4): CN Reference Manifest, Crypto Adaptation Priorities, Formula Generation References, Runtime References
 
-### Community 1450 - "ADR 0002: Capability-only search-instrument authority"
+### Community 1448 - "ADR 0002: Capability-only search-instrument authority"
 Cohesion: 0.40
 Nodes (4): ADR 0002: Capability-only search-instrument authority, Consequences, Context, Decision
 
-### Community 1451 - "ADR 0004: Matched CEM diversity A/B experiment"
+### Community 1449 - "ADR 0004: Matched CEM diversity A/B experiment"
 Cohesion: 0.40
 Nodes (4): ADR 0004: Matched CEM diversity A/B experiment, Consequences, Context, Decision
 
-### Community 1452 - "ADR 0005: Gated broad-universe compositional-search epoch"
+### Community 1450 - "ADR 0005: Gated broad-universe compositional-search epoch"
 Cohesion: 0.40
 Nodes (4): ADR 0005: Gated broad-universe compositional-search epoch, Consequences, Context, Decision
 
-### Community 1453 - "ADR 0006: Observed-archive 18-month train surface"
+### Community 1451 - "ADR 0006: Observed-archive 18-month train surface"
 Cohesion: 0.40
 Nodes (4): ADR 0006: Observed-archive 18-month train surface, Consequences, Context, Decision
 
-### Community 1454 - "ADR 0007: 18M pair-native compositional development search"
+### Community 1452 - "ADR 0007: 18M pair-native compositional development search"
 Cohesion: 0.40
 Nodes (4): ADR 0007: 18M pair-native compositional development search, Consequences, Context, Decision
 
-### Community 1455 - "ADR 0008: Search Engine V1 post-audit remediation and qualification suspension"
+### Community 1453 - "ADR 0008: Search Engine V1 post-audit remediation and qualification suspension"
 Cohesion: 0.40
 Nodes (4): ADR 0008: Search Engine V1 post-audit remediation and qualification suspension, Consequences, Context, Decision
 
-### Community 1456 - "CRYPTO A7AL-0F Derived Feature Engineering Contract"
+### Community 1454 - "CRYPTO A7AL-0F Derived Feature Engineering Contract"
 Cohesion: 0.40
 Nodes (4): Boundary, CRYPTO A7AL-0F Derived Feature Engineering Contract, Decision, Feature Generation Contract
 
-### Community 1457 - "CRYPTO A7AL-0P Pretrain Readiness Gate"
+### Community 1455 - "CRYPTO A7AL-0P Pretrain Readiness Gate"
 Cohesion: 0.40
 Nodes (4): Authorization, Checks, CRYPTO A7AL-0P Pretrain Readiness Gate, Decision
 
-### Community 1458 - "CRYPTO A7FF-24R4 REPAIRED NUMERIC WAVE CONTRACT"
+### Community 1456 - "CRYPTO A7FF-24R4 REPAIRED NUMERIC WAVE CONTRACT"
 Cohesion: 0.40
 Nodes (4): Boundary, Contract, CRYPTO A7FF-24R4 REPAIRED NUMERIC WAVE CONTRACT, Decision
 
-### Community 1459 - "CRYPTO A7FF-51 COMPACT NON-L5 CONTRACT"
+### Community 1457 - "CRYPTO A7FF-51 COMPACT NON-L5 CONTRACT"
 Cohesion: 0.40
 Nodes (4): Boundary, Contract, CRYPTO A7FF-51 COMPACT NON-L5 CONTRACT, Decision
 
-### Community 1460 - "CRYPTO A7FF-52 MATERIALIZATION PREFLIGHT CONTRACT"
+### Community 1458 - "CRYPTO A7FF-52 MATERIALIZATION PREFLIGHT CONTRACT"
 Cohesion: 0.40
 Nodes (4): Boundary, Contract, CRYPTO A7FF-52 MATERIALIZATION PREFLIGHT CONTRACT, Decision
 
-### Community 1461 - "CRYPTO A7FF-CORE14SEE SHARDED BOUNDED REPLAY"
+### Community 1459 - "CRYPTO A7FF-CORE14SEE SHARDED BOUNDED REPLAY"
 Cohesion: 0.40
 Nodes (4): Clean Candidates, CRYPTO A7FF-CORE14SEE SHARDED BOUNDED REPLAY, Decision, Manifest
 
-### Community 1462 - "CRYPTO A7LS-25 Large Search Launch Packet (20260607)"
+### Community 1460 - "CRYPTO A7LS-25 Large Search Launch Packet (20260607)"
 Cohesion: 0.40
 Nodes (4): Axis Coverage, CRYPTO A7LS-25 Large Search Launch Packet (20260607), Decision, Scope
 
-### Community 1463 - "CRYPTO A7MEM-1 Memory Enforcement Smoke 20260628"
+### Community 1461 - "CRYPTO A7MEM-1 Memory Enforcement Smoke 20260628"
 Cohesion: 0.40
 Nodes (4): Checks, CRYPTO A7MEM-1 Memory Enforcement Smoke 20260628, Decision, Next Gate
 
-### Community 1464 - "Crypto A7S-0 Data / Horizon Contract Skeleton"
+### Community 1462 - "Crypto A7S-0 Data / Horizon Contract Skeleton"
 Cohesion: 0.40
 Nodes (4): Boundary, Candidate Data Sources, Crypto A7S-0 Data / Horizon Contract Skeleton, PIT Timestamp Contract Fields
 
-### Community 1465 - "CRYPTO A7SHADOW3 Reward Queue Adapter"
+### Community 1463 - "CRYPTO A7SHADOW3 Reward Queue Adapter"
 Cohesion: 0.40
 Nodes (4): Counts, CRYPTO A7SHADOW3 Reward Queue Adapter, Decision, Outputs
 
-### Community 1466 - "Broad Core Pack information and fixed 2x2 development Arena"
+### Community 1464 - "Broad Core Pack information and fixed 2x2 development Arena"
 Cohesion: 0.40
 Nodes (4): Boundaries, Broad Core Pack information and fixed 2x2 development Arena, Split increment summary, Why entropy is not used alone
 
-### Community 1467 - "Broad Core Pack information and fixed 2x2 development Arena"
+### Community 1465 - "Broad Core Pack information and fixed 2x2 development Arena"
 Cohesion: 0.40
 Nodes (4): Boundaries, Broad Core Pack information and fixed 2x2 development Arena, Split increment summary, Why entropy is not used alone
 
-### Community 1468 - "Crypto Bronze Build"
+### Community 1466 - "Crypto Bronze Build"
 Cohesion: 0.40
 Nodes (4): Crypto Bronze Build, File Errors, FundingRate Groups, Futures Klines Groups
 
-### Community 1469 - "Crypto Field Information V0"
+### Community 1467 - "Crypto Field Information V0"
 Cohesion: 0.40
 Nodes (4): BROAD_PANEL_BASELINE, Claim boundary, CORE3_MICROSTRUCTURE_PILOT, Crypto Field Information V0
 
-### Community 1470 - "Crypto liquidation supplier ingress"
+### Community 1468 - "Crypto liquidation supplier ingress"
 Cohesion: 0.40
 Nodes (4): Boundaries, Contract classes, Crypto liquidation supplier ingress, Overlap gate
 
-### Community 1471 - "Search Engine V1.1 Source Gap Report"
+### Community 1469 - "Search Engine V1.1 Source Gap Report"
 Cohesion: 0.40
 Nodes (4): Already implemented and retained, Minimal V1.1 delta, Search-capability gaps, Search Engine V1.1 Source Gap Report
 
-### Community 1472 - "Crypto Search Engine V1 code-authority audit"
+### Community 1470 - "Crypto Search Engine V1 code-authority audit"
 Cohesion: 0.40
 Nodes (4): Crypto Search Engine V1 code-authority audit, Decision, Deferred blockers, Verification
 
-### Community 1473 - "CRYPTO SYSTEM CORE INVENTORY 20260630"
+### Community 1471 - "CRYPTO SYSTEM CORE INVENTORY 20260630"
 Cohesion: 0.40
 Nodes (4): CRYPTO SYSTEM CORE INVENTORY 20260630, Decision, Key Core Candidates, Summary
 
-### Community 1474 - "CRYPTO SYSTEM RECTIFICATION STATE FREEZE 20260630"
+### Community 1472 - "CRYPTO SYSTEM RECTIFICATION STATE FREEZE 20260630"
 Cohesion: 0.40
 Nodes (4): Active Remote Search, CRYPTO SYSTEM RECTIFICATION STATE FREEZE 20260630, Decision, Git
 
-### Community 1475 - "Crypto Verified Core 20260618"
+### Community 1473 - "Crypto Verified Core 20260618"
 Cohesion: 0.40
 Nodes (4): Boundary, Classification, Crypto Verified Core 20260618, Scope
 
-### Community 1476 - "Crypto A5.1 Book Curve Sanity"
+### Community 1474 - "Crypto A5.1 Book Curve Sanity"
 Cohesion: 0.50
 Nodes (3): Crypto A5.1 Book Curve Sanity, Interpretation, Summary
 
-### Community 1477 - "Crypto A6.0 Core4 Locked Object"
+### Community 1475 - "Crypto A6.0 Core4 Locked Object"
 Cohesion: 0.50
 Nodes (3): Boundary, Clusters, Crypto A6.0 Core4 Locked Object
 
-### Community 1478 - "Crypto A6.2B Core4 Risk Budget Ladder"
+### Community 1476 - "Crypto A6.2B Core4 Risk Budget Ladder"
 Cohesion: 0.50
 Nodes (3): Crypto A6.2B Core4 Risk Budget Ladder, Interpretation, Recent OOS 10bp Ladder
 
-### Community 1479 - "Crypto A6.3 Core4 Conservative Dry Shadow Replay"
+### Community 1477 - "Crypto A6.3 Core4 Conservative Dry Shadow Replay"
 Cohesion: 0.50
 Nodes (3): Boundary, Crypto A6.3 Core4 Conservative Dry Shadow Replay, Summary
 
-### Community 1480 - "Crypto A6.4 Core4 Conservative Robustness"
+### Community 1478 - "Crypto A6.4 Core4 Conservative Robustness"
 Cohesion: 0.50
 Nodes (3): Boundary, Crypto A6.4 Core4 Conservative Robustness, Recent OOS 10bp Cluster Leave-One-Out
 
-### Community 1481 - "Crypto A6.6 Append-Only Dry Shadow Snapshot"
+### Community 1479 - "Crypto A6.6 Append-Only Dry Shadow Snapshot"
 Cohesion: 0.50
 Nodes (3): Boundary, Crypto A6.6 Append-Only Dry Shadow Snapshot, Outputs
 
-### Community 1482 - "Crypto A7.1 Baseline / Placebo Suite"
+### Community 1480 - "Crypto A7.1 Baseline / Placebo Suite"
 Cohesion: 0.50
 Nodes (3): Boundary, Cluster Decisions, Crypto A7.1 Baseline / Placebo Suite
 
-### Community 1483 - "Crypto A7F Decision Record"
+### Community 1481 - "Crypto A7F Decision Record"
 Cohesion: 0.50
 Nodes (3): Conclusion, Crypto A7F Decision Record, Current State
 
-### Community 1484 - "Crypto A7G-1 Decision Record"
+### Community 1482 - "Crypto A7G-1 Decision Record"
 Cohesion: 0.50
 Nodes (3): Conclusion, Crypto A7G-1 Decision Record, Explicit Non-Authorization
 
-### Community 1485 - "Crypto A7L-1 Decision Record"
+### Community 1483 - "Crypto A7L-1 Decision Record"
 Cohesion: 0.50
 Nodes (3): Confirmed, Crypto A7L-1 Decision Record, Not Confirmed
 
-### Community 1486 - "Crypto A7L-1B Decision Record"
+### Community 1484 - "Crypto A7L-1B Decision Record"
 Cohesion: 0.50
 Nodes (3): Confirmed, Crypto A7L-1B Decision Record, Not Confirmed
 
-### Community 1487 - "Crypto A7M-0 Decision Record"
+### Community 1485 - "Crypto A7M-0 Decision Record"
 Cohesion: 0.50
 Nodes (3): Confirmed, Crypto A7M-0 Decision Record, Not Confirmed
 
-### Community 1488 - "Crypto A7M-1 Decision Record"
+### Community 1486 - "Crypto A7M-1 Decision Record"
 Cohesion: 0.50
 Nodes (3): Confirmed, Crypto A7M-1 Decision Record, Not Confirmed
 
-### Community 1489 - "Crypto A7M-1B Decision Record"
+### Community 1487 - "Crypto A7M-1B Decision Record"
 Cohesion: 0.50
 Nodes (3): Confirmed, Crypto A7M-1B Decision Record, Not Confirmed
 
-### Community 1490 - "Crypto A7M-1B Surrogate Calibration + Inherited Engine Readiness"
+### Community 1488 - "Crypto A7M-1B Surrogate Calibration + Inherited Engine Readiness"
 Cohesion: 0.50
 Nodes (3): Boundary, Crypto A7M-1B Surrogate Calibration + Inherited Engine Readiness, Engine Inventory
 
-### Community 1491 - "Crypto A7M-2 Decision Record"
+### Community 1489 - "Crypto A7M-2 Decision Record"
 Cohesion: 0.50
 Nodes (3): Confirmed, Crypto A7M-2 Decision Record, Not Authorized
 
-### Community 1492 - "Crypto A7M-2 Equal-Budget Inherited-Engine Bakeoff"
+### Community 1490 - "Crypto A7M-2 Equal-Budget Inherited-Engine Bakeoff"
 Cohesion: 0.50
 Nodes (3): Boundary, Crypto A7M-2 Equal-Budget Inherited-Engine Bakeoff, Engine Summary
 
-### Community 1493 - "Crypto A7M-2A Decision Record"
+### Community 1491 - "Crypto A7M-2A Decision Record"
 Cohesion: 0.50
 Nodes (3): Confirmed, Crypto A7M-2A Decision Record, Not Confirmed
 
-### Community 1494 - "Crypto A7M-2B Decision Record"
+### Community 1492 - "Crypto A7M-2B Decision Record"
 Cohesion: 0.50
 Nodes (3): Confirmed, Crypto A7M-2B Decision Record, Not Confirmed
 
-### Community 1495 - "Crypto A7M-2C Decision Record"
+### Community 1493 - "Crypto A7M-2C Decision Record"
 Cohesion: 0.50
 Nodes (3): Boundary, Crypto A7M-2C Decision Record, Resolved / Reclassified
 
-### Community 1496 - "Crypto A7M-2D Decision Record"
+### Community 1494 - "Crypto A7M-2D Decision Record"
 Cohesion: 0.50
 Nodes (3): Confirmed, Crypto A7M-2D Decision Record, Required Before Any Next Search
 
-### Community 1497 - "Crypto A7M-2E Decision Record"
+### Community 1495 - "Crypto A7M-2E Decision Record"
 Cohesion: 0.50
 Nodes (3): Confirmed, Crypto A7M-2E Decision Record, Not Authorized
 
-### Community 1498 - "Crypto A7O-0 Search Space Contract"
+### Community 1496 - "Crypto A7O-0 Search Space Contract"
 Cohesion: 0.50
 Nodes (3): Cell Dimensions, Crypto A7O-0 Search Space Contract, Ladder
 
-### Community 1499 - "Crypto A7O-1 Fold Replay Kernel Audit"
+### Community 1497 - "Crypto A7O-1 Fold Replay Kernel Audit"
 Cohesion: 0.50
 Nodes (3): Crypto A7O-1 Fold Replay Kernel Audit, Fold Definition Audit, Metrics Produced
 
-### Community 1500 - "Crypto A7O-2 Dry Cartography Audit"
+### Community 1498 - "Crypto A7O-2 Dry Cartography Audit"
 Cohesion: 0.50
 Nodes (3): Crypto A7O-2 Dry Cartography Audit, Dry Summary, Static Funnel
 
-### Community 1501 - "Crypto A7P-0 Search-Cell Failure-Map Redesign Contract"
+### Community 1499 - "Crypto A7P-0 Search-Cell Failure-Map Redesign Contract"
 Cohesion: 0.50
 Nodes (3): Crypto A7P-0 Search-Cell Failure-Map Redesign Contract, Policy, Task Registry
 
-### Community 1502 - "Crypto A7Q-2 Route Selection Record"
+### Community 1500 - "Crypto A7Q-2 Route Selection Record"
 Cohesion: 0.50
 Nodes (3): Crypto A7Q-2 Route Selection Record, Decision, Route Scorecard
 
-### Community 1503 - "Crypto A7Q-3 Next Stage Definition"
+### Community 1501 - "Crypto A7Q-3 Next Stage Definition"
 Cohesion: 0.50
 Nodes (3): Boundary, Crypto A7Q-3 Next Stage Definition, Task Registry
 
-### Community 1504 - "CRYPTO A7REWARD1 Synthetic Reward Smoke"
+### Community 1502 - "CRYPTO A7REWARD1 Synthetic Reward Smoke"
 Cohesion: 0.50
 Nodes (3): CRYPTO A7REWARD1 Synthetic Reward Smoke, Decision, Synthetic Smoke Leaderboard
 
-### Community 1505 - "CRYPTO A7REWARD1 Synthetic Reward Smoke"
+### Community 1503 - "CRYPTO A7REWARD1 Synthetic Reward Smoke"
 Cohesion: 0.50
 Nodes (3): CRYPTO A7REWARD1 Synthetic Reward Smoke, Decision, Synthetic Smoke Leaderboard
 
-### Community 1506 - "CRYPTO A7SEL-1 ROLE-STRICT SELECTOR COUNTERFACTUAL"
+### Community 1504 - "CRYPTO A7SEL-1 ROLE-STRICT SELECTOR COUNTERFACTUAL"
 Cohesion: 0.50
 Nodes (3): CRYPTO A7SEL-1 ROLE-STRICT SELECTOR COUNTERFACTUAL, Decision, Manifest
 
-### Community 1507 - "CRYPTO A7SOURCE5 Python A7SEARCH7 Source-Lag Retest Aggregate"
+### Community 1505 - "CRYPTO A7SOURCE5 Python A7SEARCH7 Source-Lag Retest Aggregate"
 Cohesion: 0.50
 Nodes (3): Counts, CRYPTO A7SOURCE5 Python A7SEARCH7 Source-Lag Retest Aggregate, Decision
 
-### Community 1508 - "CRYPTO A7SOURCE5 Python A7SEARCH7 Source-Lag Retest Aggregate"
+### Community 1506 - "CRYPTO A7SOURCE5 Python A7SEARCH7 Source-Lag Retest Aggregate"
 Cohesion: 0.50
 Nodes (3): Counts, CRYPTO A7SOURCE5 Python A7SEARCH7 Source-Lag Retest Aggregate, Decision
 
-### Community 1509 - "Broad prediction-scale audit"
+### Community 1507 - "Broad prediction-scale audit"
 Cohesion: 0.50
 Nodes (3): Boundaries, Broad prediction-scale audit, Scope correlations
 
-### Community 1510 - "Crypto Explicit Latent Adaptive V1"
+### Community 1508 - "Crypto Explicit Latent Adaptive V1"
 Cohesion: 0.50
 Nodes (3): Adaptive gate, Capability, Crypto Explicit Latent Adaptive V1
 
-### Community 1511 - "Crypto Search Engine V1.1 Behavior-Niched Arena"
+### Community 1509 - "Crypto Search Engine V1.1 Behavior-Niched Arena"
 Cohesion: 0.50
 Nodes (3): Crypto Search Engine V1.1 Behavior-Niched Arena, Equal-count system comparison versus typed random, System decision
 
-### Community 1512 - "Search Engine V1.1 Bias Audit"
+### Community 1510 - "Search Engine V1.1 Bias Audit"
 Cohesion: 0.50
 Nodes (3): Decision, Findings, Search Engine V1.1 Bias Audit
 
-### Community 1513 - "Crypto Search Engine V1.2"
+### Community 1511 - "Crypto Search Engine V1.2"
 Cohesion: 0.50
 Nodes (3): Collision control, Crypto Search Engine V1.2, Evolution V2.2 versus typed random
 
-### Community 1514 - "Crypto Search Surface Integration V1"
+### Community 1512 - "Crypto Search Surface Integration V1"
 Cohesion: 0.50
 Nodes (3): Boundary, Crypto Search Surface Integration V1, Data planes
 
-### Community 1515 - "read_json"
+### Community 1513 - "read_json"
 Cohesion: 0.67
 Nodes (3): main(), Path, read_json()
 
-### Community 1516 - "read_json"
+### Community 1514 - "read_json"
 Cohesion: 0.67
 Nodes (3): main(), Path, read_json()
 
-### Community 1517 - "main"
+### Community 1515 - "main"
 Cohesion: 0.83
 Nodes (3): main(), Path, read_json()
 
 ## Knowledge Gaps
-- **6059 isolated node(s):** `_FixedLegalCoordinate`, `a7ls_arm`, `activity_ok_count`, `activity_ok_rate`, `eval_failure_count` (+6054 more)
+- **6126 isolated node(s):** `_FixedLegalCoordinate`, `a7ls_arm`, `activity_ok_count`, `activity_ok_rate`, `eval_failure_count` (+6121 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **43 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **45 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `sha256_file()` connect `search_engine_v1.py` to `TypedExpressionRegistry`, `runner.py`, `runner18m.py`, `crypto_policy_upgrade_qualification_supersession.py`, `cem_diversity_runner.py`, `qualification18m.py`?**
+- **Why does `RawPanelStore` connect `RawPanelStore` to `search_engine_v1.py`, `TypedExpressionRegistry`, `qualification18m.py`, `ValueError`, `field_information.py`, `test_crypto_aggtrades_system_canary_v1.py`, `test_crypto_18m_compositional_search.py`, `evaluator.py`, `runner18m.py`, `experiment.py`, `compositional18m.py`, `broad_information_arena.py`, `core_pack_consumption.py`?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+- **Why does `sha256_file()` connect `search_engine_v1.py` to `TypedExpressionRegistry`, `qualification18m.py`, `runner.py`, `release.py`, `runner18m.py`, `crypto_policy_upgrade_qualification_supersession.py`, `cem_diversity_runner.py`?**
   _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **Why does `map_portfolio()` connect `map_portfolio` to `harness.py`, `TypedExpressionRegistry`, `ValueError`, `evidence_primitives.py`, `experiment.py`, `broad_information_arena.py`, `materialize_authorized`, `qualification18m.py`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **Why does `RawPanelStore` connect `RawPanelStore` to `search_engine_v1.py`, `TypedExpressionRegistry`, `ValueError`, `test_crypto_aggtrades_system_canary_v1.py`, `runner18m.py`, `test_crypto_18m_compositional_search.py`, `experiment.py`, `broad_information_arena.py`, `core_pack_consumption.py`, `evaluator.py`, `field_information.py`, `qualification18m.py`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **Are the 292 inferred relationships involving `ValueError` (e.g. with `build_capture_record()` and `preflight_bitfinex_release()`) actually correct?**
-  _`ValueError` has 292 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 304 inferred relationships involving `ValueError` (e.g. with `build_capture_record()` and `preflight_bitfinex_release()`) actually correct?**
+  _`ValueError` has 304 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 115 inferred relationships involving `RuntimeError` (e.g. with `typed_mutate_candidate()` and `build_canary()`) actually correct?**
   _`RuntimeError` has 115 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 23 inferred relationships involving `FrozenGrammar` (e.g. with `CandidateAuthorizationReceipt` and `CEMDiversityV2Policy`) actually correct?**
-  _`FrozenGrammar` has 23 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 12 inferred relationships involving `TypedExpressionRegistry` (e.g. with `CandidateSpec` and `Skeleton`) actually correct?**
+  _`TypedExpressionRegistry` has 12 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `Crypto AlphaFactory package.`, `Provenance-safe capture helpers for Binance native forceOrder messages.  Capture`, `Bind an exact WS message to receive provenance without changing payload.` to the rest of the system?**
-  _6266 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _6334 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `search_engine_v1.py` be split into smaller, more focused modules?**
+  _Cohesion score 0.0660742766005924 - nodes in this community are weakly interconnected._
