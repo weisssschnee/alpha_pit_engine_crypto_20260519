@@ -1,0 +1,158 @@
+{
+  "active_wall_seconds": 224.777944499976,
+  "artifact_bundle_sha256": "47E0AC5AFA48DAD07BDC813F43A8F721D1E6D185BC95EFD2A399E33609D7DC21",
+  "artifacts": [
+    {
+      "bytes": 417,
+      "path": "reports/CRYPTO_SEARCH_CARRIER_GATE_V1_R3_AGGTRADES_TOP200_DELIVERED_20260728.md",
+      "sha256": "11983736AF93CD0491626D7D18B6FD67ED87CCFCC097CCE9C6C0CD48A43BB921"
+    },
+    {
+      "bytes": 35620,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/arm_checkpoint_metrics.parquet",
+      "sha256": "1DCDE5F713B8E04AA2E1604081860533D61AEE68B7AAF36882C49E73289E5BCB"
+    },
+    {
+      "bytes": 271098,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/behavior_archive.parquet",
+      "sha256": "6AC531ECAE245187E5EBCFF9AFBDD0AF689FDF8DAD185B845B9867CCD4B07F11"
+    },
+    {
+      "bytes": 93858,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/behavior_family_summary.json",
+      "sha256": "18008ADDDD5D2A6096C1E2059D5C75DAE2E8111B8BA119C2D9F8F0321F4643A5"
+    },
+    {
+      "bytes": 849631,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/candidate_ledger.parquet",
+      "sha256": "741C624C2285B620D13E8E8906D5A7957267166790BB56E012B9F64E20053BA0"
+    },
+    {
+      "bytes": 35092,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/checkpoints/checkpoint_000/arm_checkpoint_metrics.parquet",
+      "sha256": "21DEF88ABB54A29E59962011AF4D562EA993B222B85A76BF39A79ED6223E97A0"
+    },
+    {
+      "bytes": 148784,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/checkpoints/checkpoint_000/behavior_archive.parquet",
+      "sha256": "FDFFDC5B5EA81C874934C576572B940EFCB714B815744A26C48340EAC256E485"
+    },
+    {
+      "bytes": 482248,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/checkpoints/checkpoint_000/candidate_ledger.parquet",
+      "sha256": "ACD9669056D9ECE6A88415A1D524D3638789A574A5FB1DB49B8BDD24C092B558"
+    },
+    {
+      "bytes": 3298,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/checkpoints/checkpoint_000/manifest.json",
+      "sha256": "2DB402F3785530ABB4F94FBD5A448EF38918C48E8EAEC8021641A9820734B745"
+    },
+    {
+      "bytes": 603462,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/checkpoints/checkpoint_000/state.json",
+      "sha256": "35DD71DC7E04A273577B3645AEACE45C5B6D9673079453557833EC2F98A4F55B"
+    },
+    {
+      "bytes": 35620,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/checkpoints/checkpoint_001/arm_checkpoint_metrics.parquet",
+      "sha256": "1DCDE5F713B8E04AA2E1604081860533D61AEE68B7AAF36882C49E73289E5BCB"
+    },
+    {
+      "bytes": 271098,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/checkpoints/checkpoint_001/behavior_archive.parquet",
+      "sha256": "6AC531ECAE245187E5EBCFF9AFBDD0AF689FDF8DAD185B845B9867CCD4B07F11"
+    },
+    {
+      "bytes": 849631,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/checkpoints/checkpoint_001/candidate_ledger.parquet",
+      "sha256": "741C624C2285B620D13E8E8906D5A7957267166790BB56E012B9F64E20053BA0"
+    },
+    {
+      "bytes": 3298,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/checkpoints/checkpoint_001/manifest.json",
+      "sha256": "C3455454015CFB1B658C0B14E5C4B5624A70F3E9EEA452EAAEA7D5A06A2D8E86"
+    },
+    {
+      "bytes": 998085,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/checkpoints/checkpoint_001/state.json",
+      "sha256": "E3AB4ABB928921302F9DC8DA21C3271792E0A1EB8573536D7AF9D875AC195E9C"
+    },
+    {
+      "bytes": 450,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/embedded_preflight.json",
+      "sha256": "05500E72CA62836BED9B1700AB0C09FE03065E51F8C5371E0D0A0019C19866D6"
+    },
+    {
+      "bytes": 1005,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/final_decision.json",
+      "sha256": "989FDC45EC939A2AF034F6E2D34B395D3917860FF3963CFB1BE6D3EC3DFF3144"
+    },
+    {
+      "bytes": 10010,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_aggtrades_top200_delivered_20260728/frozen_contract.json",
+      "sha256": "453E88F798899472ABA78A96F564BF95AEA9EB5A89F8F383EAA8AAFE757AEEC4"
+    }
+  ],
+  "base_sha": "a19d7a948de1f35089badd8acaf0abb171a96c96",
+  "compiler_identity": {
+    "bundle_sha256": "38D89E60CF505713221EAC2A1E2DC01A9E6F4559E4457775CC6E08436315384A",
+    "paths": [
+      {
+        "bytes": 53770,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "8A928F3FEAAE9E2F6E47A74FD8744B33CFA3B9CEEBD9D20A176EEDC5A123F0DA"
+      },
+      {
+        "bytes": 22088,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+      },
+      {
+        "bytes": 36313,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "C8D50BC3C858C47F3DF0850A5AA763C6D104ECF5DC0EB1BD0CDBFD9841310E5B"
+      },
+      {
+        "bytes": 51461,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "070C10C5F56ECDE92210EBD8BD14E153DE4FF1912E5F75CC17113ABE52A0583A"
+      },
+      {
+        "bytes": 23621,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "313125F7066DDDC81986FA70F3FDE31D13ABEA4419EC56ABA8A8CE217DABFBE4"
+      },
+      {
+        "bytes": 110881,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "1BD17FD85586033436531B3BC4873FEEC0DB968428253B256960F202BD296085"
+      },
+      {
+        "bytes": 330250,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "7B9C98C35C29ABE41595208EE06FBA929310E4EC6391F34ADF08A40E101DED7F"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "continuation": "python -m alphafactory_crypto.broad_search.search_engine_v1 check-carrier-gate --carrier-id AGGTRADES_TOP200_DELIVERED --runtime-date 20260728",
+  "data_cache_identity": {
+    "identity_sha256": "0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6",
+    "root": ".cache/crypto_search_surface_integration_v1/aggtrades_top200_full44"
+  },
+  "epoch_id": "CRYPTO_SEARCH_CARRIER_GATE_V1_20260728",
+  "frozen_contract_sha256": "589DE431248A287A93B23198E75F60DC41CF2F6D66C379715E8DA7CA7CAB2C16",
+  "generation_attempts": 256,
+  "memory_fallback_used": true,
+  "producer_source_sha": "a19d7a948de1f35089badd8acaf0abb171a96c96",
+  "reproducible": true,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "COMPLETED",
+  "strict_evaluated_count": 256,
+  "workers_final": 8
+}

@@ -1,0 +1,293 @@
+{
+  "arms": {
+    "active": [
+      "canonical_typed_random",
+      "hierarchical_typed_cem_v2",
+      "typed_evolution_v2"
+    ],
+    "checkpoint_allocation": {
+      "canonical_typed_random": 32,
+      "hierarchical_typed_cem_v2": 48,
+      "typed_evolution_v2": 48
+    },
+    "same_seed_set_for_every_arm": true
+  },
+  "authority_repairs": {
+    "adaptive_memory_scope": "ARM_AND_SEED_LOCAL",
+    "behavior_identity": "INCREMENTAL_DELTA_WEIGHT",
+    "cem_memory": "CURRENT_CHECKPOINT_SUFFICIENT_STATISTICS_PLUS_SINGLE_PROBABILITY_EMA",
+    "dual_axis_controls": true
+  },
+  "authorization": "ONE_FRESH_STATE_768_CARRIER_LOCAL_DEVELOPMENT_MATCHED_GATE",
+  "behavior_descriptor": {
+    "contract_sha256": "A00C98856D2C9758C646772B9CE0B4D6C66CB32A6D2BAFA6AD1573040BDB1DA7",
+    "frozen_observation_count": 4367,
+    "mapped_weight_quantization_step": 0.05,
+    "observed_support_sha256": "E6D1D8253A9EF4914CC08F16AD48D8266FF1741F37B613C1E13943715CE4F21F",
+    "outcome_fields_in_identity": [],
+    "pit_regime_lag_hours": 1,
+    "pit_regime_quantiles": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "pit_regime_source": "__BASE_ELIGIBLE_COUNT__",
+    "pit_regime_source_validation": "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_INDEPENDENT_OBSERVED_SUPPORT",
+    "pit_regime_thresholds": [
+      101.0,
+      107.0,
+      111.0
+    ],
+    "pit_regime_thresholds_sha256": "B8B202640F5457F370591A9DCA42B83C57B62C0A3EDCE36970F7B3CAFA16071E",
+    "rank_bucket_count": 10,
+    "rank_mean_quantization_step": 2.0,
+    "schema_version": "CRYPTO_SEARCH_BEHAVIOR_DESCRIPTOR_V1",
+    "selected_overlap_quantization_step": 0.1,
+    "selected_weight_epsilon": 1e-12,
+    "selection_rate_quantization_step": 0.2,
+    "turnover_bin_edges": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.5,
+      2.0,
+      3.0,
+      4.0
+    ],
+    "turnover_histogram_quantization_step": 0.1
+  },
+  "boundaries": {
+    "alpha_claim": false,
+    "challenge": false,
+    "cross_sprint_adaptive_memory": false,
+    "development_only": true,
+    "fixed_retrospective_carriers": true,
+    "forward": false,
+    "liquidation": "HOLD",
+    "may_stress": false,
+    "oos": false,
+    "promotion": false,
+    "recent": false,
+    "sealed_reads": 0
+  },
+  "budget": {
+    "checkpoint_count": 2,
+    "checkpoint_size": 128,
+    "raw_generation_attempts_maximum": 20000,
+    "strict_evaluated_target": 256,
+    "wall_time_seconds_maximum": 7200,
+    "workers_12_forbidden": true,
+    "workers_default": 10,
+    "workers_memory_fallback": 8
+  },
+  "carrier_id": "AGGTRADES_TOP200_DELIVERED",
+  "compiler_identity": {
+    "bundle_sha256": "38D89E60CF505713221EAC2A1E2DC01A9E6F4559E4457775CC6E08436315384A",
+    "paths": [
+      {
+        "bytes": 53770,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "8A928F3FEAAE9E2F6E47A74FD8744B33CFA3B9CEEBD9D20A176EEDC5A123F0DA"
+      },
+      {
+        "bytes": 22088,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+      },
+      {
+        "bytes": 36313,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "C8D50BC3C858C47F3DF0850A5AA763C6D104ECF5DC0EB1BD0CDBFD9841310E5B"
+      },
+      {
+        "bytes": 51461,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "070C10C5F56ECDE92210EBD8BD14E153DE4FF1912E5F75CC17113ABE52A0583A"
+      },
+      {
+        "bytes": 23621,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "313125F7066DDDC81986FA70F3FDE31D13ABEA4419EC56ABA8A8CE217DABFBE4"
+      },
+      {
+        "bytes": 110881,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "1BD17FD85586033436531B3BC4873FEEC0DB968428253B256960F202BD296085"
+      },
+      {
+        "bytes": 330250,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "7B9C98C35C29ABE41595208EE06FBA929310E4EC6391F34ADF08A40E101DED7F"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "environment": {
+    "machine": "AMD64",
+    "packages": {
+      "numpy": "2.1.3",
+      "pandas": "2.2.3",
+      "psutil": "7.0.0",
+      "pyarrow": "19.0.1",
+      "scipy": "1.17.1"
+    },
+    "platform": "Windows-10-10.0.22631-SP0",
+    "processor": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD",
+    "python_executable": "G:\\PythonProject\\.venv\\Scripts\\python.exe",
+    "python_implementation": "CPython",
+    "python_version": "3.11.9",
+    "thread_caps": {
+      "MKL_NUM_THREADS": null,
+      "NUMEXPR_NUM_THREADS": null,
+      "OMP_NUM_THREADS": null
+    }
+  },
+  "epoch_id": "CRYPTO_SEARCH_CARRIER_GATE_V1_20260728",
+  "evaluator_contract": {
+    "authoritative_pair_reward": "minimum strict feasibility distance across left and right incremental sleeves",
+    "control_behavior_identity_forbidden": true,
+    "control_exact_identity_forbidden": true,
+    "control_rule": "compare the primary independently with left-only and right-only SupportMatchedPayload controls; both retain identical raw support",
+    "incremental_turnover": "recomputed independently from delta weights",
+    "incremental_weight_formula": "primary_weight - each_axis_control_weight",
+    "lcb_contract": {
+      "authority": "NEWEY_WEST_BARTLETT",
+      "confidence_multiplier": 1.96,
+      "dependency_lags": "horizon_hours_minus_one",
+      "monthly_block_lcb": "DIAGNOSTIC_ONLY"
+    },
+    "match_on": [
+      "raw inputs",
+      "timestamps",
+      "dynamic eligibility",
+      "target horizon",
+      "mapping family and position cap",
+      "5 bps full-L1 cost model",
+      "raw support"
+    ],
+    "optional_behavior_identity": "FROZEN_OUTCOME_FREE_DESCRIPTOR_V1",
+    "pair_authority": "PRIMARY_WITH_LEFT_AND_RIGHT_AXIS_INCREMENTAL_DELTA_WEIGHT_SLEEVES",
+    "schema_version": 1,
+    "standalone_scalar_delta_role": "DIAGNOSTIC_ONLY",
+    "support_overlap_required": 1.0
+  },
+  "experiment_id": "20260728_crypto_search_carrier_gate_v1",
+  "fresh_state": {
+    "old_archive_import": false,
+    "old_candidate_import": false,
+    "old_distribution_import": false,
+    "old_policy_state_import": false,
+    "old_population_import": false,
+    "old_reward_import": false,
+    "old_transition_memory_import": false
+  },
+  "frozen_contract_sha256": "589DE431248A287A93B23198E75F60DC41CF2F6D66C379715E8DA7CA7CAB2C16",
+  "input_identities": {
+    "carrier": {
+      "cache_identity_sha256": "0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6",
+      "carrier_id": "AGGTRADES_TOP200_DELIVERED",
+      "contracts_sha256": "C41418C41B298C600B8C88A2E7DEBE648A62517967BFF24C6F10CC4FE14C6B54",
+      "loader_evidence": {
+        "cache_identity_sha256": "0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6",
+        "cache_root": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\.cache\\crypto_search_surface_integration_v1\\aggtrades_top200_full44",
+        "contracts_sha256": "C41418C41B298C600B8C88A2E7DEBE648A62517967BFF24C6F10CC4FE14C6B54",
+        "field_count": 44,
+        "minimum_assets_per_timestamp": 3,
+        "surface_id": "AGGTRADES_TOP200_DELIVERED"
+      }
+    },
+    "carrier_gate_config": {
+      "path": "config/crypto_search_carrier_gate_v1.json",
+      "sha256": "8CFAF8D12D7474B2808B4F63D482610DD7D6E74F209253F5BA5E7276C0F8A252"
+    },
+    "raw_cache": {
+      "identity_sha256": "0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6",
+      "root": ".cache/crypto_search_surface_integration_v1/aggtrades_top200_full44"
+    },
+    "source_carrier_manifest": {
+      "path": "runtime/crypto_search_surface_integration_v1_20260728/search_carriers.json",
+      "sha256": "F4E1A3F81B7C7F80097FE42B52DEBE5E086C884D7123FB854A360F3868E691D8"
+    }
+  },
+  "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY_ARM_AND_SEED_LOCAL",
+  "schema_version": 1,
+  "seeds": [
+    20260716,
+    20260717,
+    20260718,
+    20260719
+  ],
+  "source_sha": "a19d7a948de1f35089badd8acaf0abb171a96c96",
+  "surface": {
+    "compatible_skeleton_ids": [
+      "price_activity_response_v1",
+      "price_activity_response_v2",
+      "price_activity_response_v3",
+      "price_activity_response_v4",
+      "price_activity_response_v5",
+      "cross_asset_relative_state_v1",
+      "cross_asset_relative_state_v2",
+      "cross_asset_relative_state_v3",
+      "cross_asset_relative_state_v4",
+      "cross_asset_relative_state_v5"
+    ],
+    "contexts_merged": false,
+    "field_count": 44,
+    "field_ids": [
+      "agg_trade_count",
+      "underlying_trade_count",
+      "quantity",
+      "notional",
+      "buy_agg_trade_count",
+      "sell_agg_trade_count",
+      "buy_underlying_trade_count",
+      "sell_underlying_trade_count",
+      "buy_quantity",
+      "sell_quantity",
+      "buy_notional",
+      "sell_notional",
+      "signed_aggressor_quantity",
+      "signed_aggressor_notional",
+      "trade_count_le_100",
+      "trade_count_100_1k",
+      "trade_count_1k_10k",
+      "trade_count_10k_100k",
+      "trade_count_100k_1m",
+      "trade_count_gt_1m",
+      "notional_le_100",
+      "notional_100_1k",
+      "notional_1k_10k",
+      "notional_10k_100k",
+      "notional_100k_1m",
+      "notional_gt_1m",
+      "open_price",
+      "high_price",
+      "low_price",
+      "close_price",
+      "max_trade_notional",
+      "vwap",
+      "buy_vwap",
+      "sell_vwap",
+      "avg_agg_trade_notional",
+      "avg_underlying_trade_notional",
+      "volume_imbalance",
+      "buy_sell_notional_ratio",
+      "price_range_bps",
+      "close_to_open_bps",
+      "large_trade_count_100k_plus",
+      "large_notional_100k_plus",
+      "large_trade_count_ratio_100k_plus",
+      "large_notional_ratio_100k_plus"
+    ]
+  },
+  "window": {
+    "end_exclusive": "2024-07-01T00:00:00+00:00",
+    "start": "2024-01-01T00:00:00+00:00"
+  }
+}

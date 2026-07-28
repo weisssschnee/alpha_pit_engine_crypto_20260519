@@ -1,0 +1,2057 @@
+{
+  "archive_state_sha256": "05E28F4F8EAE45CFE3FA0C081A2AA15DA7F337564E824980E16CC8950C977AED",
+  "candidate_count": 256,
+  "duplicate_replacements": 0,
+  "families": [
+    {
+      "behavior_family_id": "032B83B05DC286B58F10593FFF9329A98528652791A73DF6BC77B28D00D37F86",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "2EB4D6089F7BD745B5E42344015DFCF95A8D1CD3A69E1EBE765AAAB9594AEBF0",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "03F0DA698E36E6BE5D7DB85CA104E8538607E4F8918CEC549861380378E571CB",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "B4044D4C506860D8BB284D54AE27E7C4BA5C1C81D82AE697D4DCC83B072230CE",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.244058395208631,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "0499204D89EB5C299C916DBA8B7D5591600ED4D57590AAA9578B7FB5751E9B84",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "408B1133D38881E1F2170C458BAB1A7BD1C102BF3F9A50C35D7D5C1AA0B529D6",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "04DD1EF2CD7627FE995273B33EB4F6F80E531102A5BD82BFEE18CF4DB5285A2C",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "C2483D533A514FE1881C929D84C3B7B45910F5D15B60442102F15BEA798FA79F",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "0525608526A5520C6A7944156370723D8D9E01C754D0937B63F957E5E4869547",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "0A3B954AD62623EE33058870DA2E0AF303A033CA37207F77CE9379ED010D9A30",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "0535E0AE2E928D9F902360F2E017A5668321F5D4FBE4CA6C07306E017EE738CB",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "502C43923C1861D8C1C385770E6ED6D6015575058BEF7F8DB28B7FF839AB89B4",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.453245672068469,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "06068EE8AC0798C6182580FC129562E52105EAE8CFAF5BEA8A1795B17A8EB450",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "F6159CA7918905436BB70F0CF5AFC587965386389036124506B087A7D7112D86",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "079482EFBBFE497DCA3014A6A27FC97AD2DE5B1697A9C43B9725ECD46E0F3120",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "318D0D0C3F38025DAFA6912AE67A5FB7A264FD8F4AFE768D6FEB7A3C1EAC218F",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.606004097355426,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "07F3C4413CDA855551CBC7FB574625F98098C5E49F1703568892A28784750AA6",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "BA7C3AACE4CBEE9AB61E89DF3341E8268F9FC5DEA4DE6196B8EC3E47B513419F",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.1374840497516665,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "093F3A982456AC745A7D38D8EB631425C57BA46B5C6A7CBCC5945370D1C2C3EB",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "0A9174D59281911B3E9B9F23377A43C80C6A51404D7BED904F99F6186AA2719E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.361713634048263,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "0A8342EEF33FF1147D1FD136647F8F1DD3F9FDF1FB3052FF859BF0E5367DA56C",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "51662A6DFB06AF4D30E45F48CD215E3C2DF0509596A73FF0025929AF83109010",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "0C87510266677755FB08D180C4A0AB21E052D3744476CE3E19277E2409EA72F6",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "BE0942585E00970A3B890FD9E2F1228B5DC30FFD501F601B814EC8B0F306117B",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.124770866394323,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "0D4AD562D165C858ED141B1F7842CA040ECFCFF197E1D1FF3CCD0FD1326FC6F5",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "152CF9FAB19F1171EFD14426CCE8A21ABD97D25AC5AEABC83C8EEC2995231232",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "0DF1B813EDFDFDB949887102A0729E6CF90E574DFB2BD037D2BF81FC4EC65493",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "5EBB7050FAA65D5BC61EA519E7B59BAB1E5E05C7B6C1CD803DDDD5AEA05A957A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "1046BE07B6975518ED6699C025CF178CA8809F6904C4A54AD6B26033FB40C449",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "E79FCA521C3B16FDF0AEE0FD5C4900781FBE2E8F0890F17F36F1FB9163459771",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "114D93E16A48EB8C65D8E347A4E0B624451C9327C24A8FBD5418D0DD79289348",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "35D9F358355DB100A11320406F8F153E136B8E3E017DC726EF54ED987D5DCEEE",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.25926087674149,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "1394C2CDC5A5853027E860731868611936FF539F485CCBF30D3D88D8B731EFC5",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "41A38FF4FC9306B1CA90EDE7CA78E6C6C578E8F13733F70C42B0446F1CC58D2E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "14842D171EC889AA704D761734F275385C551D1EE075C1BB3B3F1CE57055E1DE",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "11B68D6D127115CA94F4FE4ACDF7D25C8F9859F5F0DF760AC4C30714F06333CB",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.594472954102924,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "1599C9BB9AD933E03F52F52CF1CECF9B29DC84CF62B27E433B6567A2BF79FC04",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "393EE3C3959EA9B5FBFCE85FB8125C5270BD1A393A8C61629F2D57B616D85563",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -2.662091137368617,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "166A9D61FFC9DCB14DD61DC2440CF571C13DE3B5B91C92A3B27EAEF1389F6D5B",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "5397EFB01EE2E785FC992F6F9E5033BC3728490271BD42BCF8C4A1341115F44C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.019295007699997,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "19B73438DC85E8B9C640CAE7C5078D98308CA96F4575A7BB3C30EDF1BBA2A2E6",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "A7B283A58267716194945F3DA3166BE6D173EA2233B166B43E9C803893116384",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.256798360821794,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "1AE1E8FDBAD1A74672CDD1648DC0312A1C1F085DFD015925F70FF32F4BC9D39A",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "80100488AD435FD7005BECB0A4FED5FD0827FD9960468EEC7B687F87706777AA",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "1C5D30BF89B26FC15835552EB44843D2EC52B3DE8A563863A5F98C1EB36B83E4",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "C5EDC4C8AD5DC0062299674876E0DB370C81B940AC5C3FCFF49F422EA681AC0F",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "1C83C37FC1D8D43FDCF7A343D3ADBC3FEA1F2DA614259FA02CF881044016D90C",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "3D677CBE0082A24A90C826FCFB9E12789BBD851DB66C74F5D89D12F9E724AAA6",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.417094162458046,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "1E144BD6F4A4770EBABBE3A2D9BB2D7B4EC43D2691F85D799052BE052FD505CE",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "4DEC968993D10DAFDA113F72D463E3C449C925F9FFABC263AB69B1DDE6061043",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.151836855482369,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "1FDACB9CE4370D26C5E6EC07976C8DCD8E6E4A0FEA62CB670A47B8F453F18F72",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "0BFB420C571DAAAFD3ECD92F797A80A006DECD5AF9FBB00798625313AD35E75B",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.310509231516237,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "20C12B2623029F38D303BBC603E67670DF8ADB7B7E61BE64A676EF1ADC80213B",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "07289E478D4F6AD707CFFEF8921A642C8E417057D6F9764F66F40E951650E7B8",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "20D2D488788EC52FC69C958EBDC218E12A4F0058CFE19DB5AB3F712CBD25F1D8",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "80A57BDA71698AA172C0B3BB844069E81F78590A8342EBA56C704FB4BEDD4118",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.177509127809723,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "22340D9ED02408D651419B4A3E7E391885357A38404F3F5C4FBBFCC8AC067B4F",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "7B45868B2C36A9A18FA5DD2DFC6D5C96AEC3DF2D5CBC90272269F797597AFDB3",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.932077135214108,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "2359C1B7ACDE3EF37AE67EE12D2E20ED533F720296AC928D061D3220F8E12F4A",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "92E839B5EF948208E7E9D4AE7A61B33EB1C081C2E4F2153D3A81F3D13C867327",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.865746575378134,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "239D496BE86E693CCC8BEA35CEADD8B2B510C1F37FD97C8D328E67ED244C6F41",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "9762F3E106E2D183DC223AADEA241C7B5B69B860C6E5B72144EC7A7FBE8322D3",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "23A01408E74619B531D0DC76D8607482016CF65D812817846C05E92D380A5D05",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "E13AC4B9B218E81497FA4CAB2C8F33C99C3C6FB517618D08E2562B2C9FAB989D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "245DCB49690849CE38CFAE02A68F1889BDFFBAF9837708F179114FFDC6A42F89",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "7498BB25AE5D574B1F247BD538CF418B0ACD1AB42881E518CC9BC03040CD2E8D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.197399049685412,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "24E64F50664961FC15D0A1B79E73F1ED1D62E1C2EA4CA5FBF1F0FBAD03B33E47",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "ECDB4164824ED33D61CB2680CA0E7C3D066E7D8A08B1EF67D4AF72A80D3C9BF2",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "24F018A389FB8FCF212BA808CCE3A4363A490C97B19A87F672203FB151A7DD6D",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "74ECBDB0BBA0968F66DC31140581763AC23CBF446E3BB0EA244B0A333C204652",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "25F6E1248087389AE145426B9871E026F2B456BC679A243F64B79BB4E47B1CA4",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "C51FEA9E083B9FF1B6D80A0C03B038509F5BB150F016A185BE39EC4FAB05E220",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.561043567004347,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "26034442F11D57982E819A23B0B19EE6D3B2BB6565F0237B852ED62560B0D183",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "CF63ABDFF25659B04B9514BB17B5114EFF31D0B2AC0A36377642DEA49581CBC1",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "2710E3669F6716C75EB7D4E79B1C3EDEC04020ECCADA63393DF11FA233AFB7DD",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "0DE977B2D6792D1255EEB1E06897A9B2501BA3707DA6BA15E53814A68AC206B7",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "2762AD82358940313B699737E4447B7CA75B807D56561AF83DF18B11C2B76041",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "6918B10361BB3ECEF84A338BA3E4BDDAA409C9725DA0400A651CF6AFC65B9006",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "28A315EA69772AC49CCC4370D92857838714629CED5FB5CE6EA9049474BEDFB5",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "017FCF02F0B236BF201EAC437FE3A298452C627F5C5B5D44E3A1ADF9080DA66A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "2AA6AD9063DFDFCE13C8BE374B513742E92F7E4825A4C75E2A25EC00A1308141",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "3BCADD0015221B9C50E2DE7EAFDB03A24C7A78B75C5A2E39E78A83FC46691214",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.5104794466035765,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "2B1F1DFA35866E22DEF01E6626013CB78D0A21997E1B3073953138984C794F19",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "3453ADE039C65DE6332CC0CC42CB060A710C129B036535A6B3A37629D8FF93D7",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "2BF941A60AF6D90B1AB2D9D9743FD0132D03D00FEF2008EAC5DFC4E0C16A58A5",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "916E20B26B8EA30EC64B3D3C49A211D55CA8382FAF4EA2E402B948543203EA01",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "2D6A55A3F1BE8118D0FA2971721D161D67028BFD4D2D82109339C97BC35ADBD5",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "5CEDCFC9FD19743F4A30AEE3A0D1E191373F4E37E4BC2B4F335F435DBBC7C0E4",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "2DB269AA3EC557930F1445E95DD47BEEDF80921F1A84AF5C904ED4212C6A5DD7",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "BC246B0B32E8D9E4CEB80211CD84E3F97AA2390B4B363AADACD2038A8FCCDBEC",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "2F6D7D4484223D6E61870D91C86B7001DFA1DF1B9B62979D19945C3E11B436CF",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "5E8526DB1AF776461FC84D03D3D1FB8AA96C7FDF9CB41B6E5733F5C0774F6B2B",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.475139423103465,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "30C87F943090FE45A5255618DE6E0F6B140528A519653B706F44E9E592606917",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "DDB0F207DAC1C51233C7D2574636276A6C0903E921B024E65DE6A483A220470C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "30E08BE3960FCB58C4FB591F46301F957E7BD945FFC1CB490BF6056B1D7AA8CD",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "8E5CF9FDB4A7756E4A2B719C85196D1D17CAF6055B491786B464529031F4B875",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "311FCD5DC6A7F56B381C5F9BA4885398C14F253B0C1C83A4180F22A51930ED6F",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "277BE483E02187BD8BC2D59124ED7D71E94BF2251B358A8896FD0BADD41604EA",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "32191B159C8A2C47A58831FC9B71CA1C20B69E38280870345F76E20DFDD19684",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "3EA5B9F8F6DEF3336E0FEC886A88A97C551635CDDA1B64D5F840C4B9F5768D7D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "3382D8BF8C61FC12400973D56D6B12B6CCE808E82119670BF078ABA9959CD222",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "FF19FE70FBF6A0F045481FECC23EFDB06636612F0B2DFC68F4E26D5FF8AF0654",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "349A642EBFF690B3E5880FF13F447A09D35356627800E62A7C35174D490EB5AD",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "57D2D5474B66E8095D0AF90EC5CFD2F4BAA2F058E2E21190B41E0323EF7083DB",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "351EF63E57814ED71716A8BAFC988EC81E0ECFEE7E2EB8A3D1F9383E2759C977",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "2CA3E1AC70173CA44578F25166F398C5DFDB435C1E6EF9E181B037CCB82BC835",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.1479391402647785,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "3583306186F3D691432D44FF443151C66BB4AF25D0D1C94C5A6C2C95B779D3E6",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "13585D5A3326FAECB03005E427EC8BD897D76538B6BBACE2AC7F621746AE9F3D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "38BFBD0BA863D54F1AEEA5EC301DB8B8F65A52EC2A465DF20F433AB975A8BEE3",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "DF924FE163B13633753CD687DE065F5EC47C354AB106D0E2E0B42A68483AE75C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.426803404264522,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "39AB0394BB46A0385C8FEAE410117874F8E2924D6E556635559412DB355E7726",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "B5AC77D4E0E917D0BA2C2E9199E0913192C8A06E0D27160CF1CD39714E3037DA",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "3B039352FDA6BED01046FEE29F8AA60D75A365407122849F149E4823A0950876",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "562D4B2FDB1FB05080F6A454124A358315756ED8C3E9AA9FC4AD8E1C41361FAD",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.519139611275013,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "3BE4E92FB739F7E7DFE730DF48AB8C219D4A5943793031BCFF40018FDED13641",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "18399C20FC5248254D8DBA1C7BF991B187AE878B867E585BDA7F408808A87048",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "3CE727B243C8EB9B0597CE42F4C20909BEF98DE2AA74CDBCB22DA3FEAED7EEE6",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "136F26F346834A264A8387668CD693AC6D9964FEA43FDBDAB4BC3252967863E0",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "3D4F40CEE55E438B6D4BB3876A5624A3CDF94099413F2CE09EDC77C8E050FCAA",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "2AF7124E760ACB3F3DA2C3481231C3883D9DDBC607923CEC3C71A69AD5CC7BC8",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "3DD4BF9C0170D749FCC4F394728D66C272FFBF882912A2B3AF77BC418ACF7854",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "DD8B02106E512D44999DDE5CB1BC67F777272E498E829F8ECE5BCFCF3B73C265",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "3EE60235C59382F6C5706A4A3CF54826B53D980A16324D2CE3D62F210906574A",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "DA9306CCC854AA2F6D90B99665A6946943151B69A024E2AFE056A1294406FBE0",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.6055255023995,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "3FC11ECE4F884B3E4EF117418CC887CCC2BA6D772C156AF8C59F6CA9B12512CC",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "E8346DE7BB6CC1745D178134189AF101EE255193FDE0DD82305813614741AE52",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "40269174BEEE75C205640C579084EA5B3E86502BA61F6F84DCE701F023AD2AEB",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "E2CD33F901AC9E6814C15E4731F415BFA7B4E68BAC4E137C20ABBB77B11BC552",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "406044DB83DFB8E4A14BA8914216ADC91481EDF418FB1E5FE95882FEBA6943C6",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "52170D8F20CE1EDA2E2F144762918D7F157BA1E9FB257C504D8C32A2423C009C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.739951403965071,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "42BA22C5C221AED8D918FE981258E72FAFB84C63EFFD4E20F4849E4083FC814D",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "02D1CC6553491C6EA6309BAA93B2171E5177978B114BA6B68FCB90E164449BA9",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "44235A8AB35F3E3866A585083187EF818BCCEEB64ADAB91AF4BEFF63FE128E4C",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "C2D6E63A63CD9F3626712A23B557024B9FD2CB5F3F7EE6F319E45A390BB8E310",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.568396301217929,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "460612BB08B44445AD1A460575C0B4070F3BA4AB677271B5A0FFF029C68E3D27",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "7C2123FDF74DF327E8D81D3F39764C8C9D624200C13F8528BD0422BE37E8B5AC",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -2.5053476515534907,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "465D28E83AAC60F473EDDBF05DA2F01AA016838C35474A86FD5C1C607001EE4C",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "3DB74EC06EB20950C10801EBD0F148D23839986FD3E50DD7AA576EF1ED5A676B",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "484651EC5FB6D385CDDF4611043A573A48BC81CDD59E50419D238B8E2288B43B",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "2AC8230A1C5FA374E00783DBB56567288C741AE7CBABE468E17DD80118C0090D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "4917B104796FB5B6C5B972122E9D337BD6D272A5EF746A6E36520C001A2FCAD2",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "1E2C6EDEEFE81BDDBACB9F2CA7E1787DC1FBDE3649D15E4192CBE5FB45F44F84",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "4A6B36C6660A6B30F0930FC27DA3D301439524EA3052DE79AC571B933FEBC7F8",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "A113341EEAD2E58F27920CD2F83D72DD3066A701AF0598F1ACCA48E1ABEDD5C7",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "4BDCF397758EF5794EDEB002421AC7B727FBFA780C91E632EEEB641EFD99B495",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "1C97FAA3EFC96526C8F165629031DBD49A678C03797F2B4BDF99963FB4412A22",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "4F095AE801F49436A67430D78B79F9BF6C270310E3001A85BC1800BB24DE6017",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "7DD4E015B408E5B14846F9E233BC843042F75058A5A1051D998C0BBD167D966E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.217348864373818,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "4FD91E60F65EE89AF31FD06C631519DDA041086AB8E4650954B9AD588803EDDD",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "22F7081D0B8BF61739D4F120D76608FC1DA7DAA61B1F43413AFDD55A7BFC4BB4",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "50D02003B30E673D5338FABD12F3828F5CCC1429C0166A7AE44D4E4343AC3E96",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "874BFA66AB6C9E3D43ABC3583B5F64E56976584470C6727D810B7150D15D455E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.728758920286392,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "520CF078727D108B3D5B9CEB00486094E3F13D7E9003E38412E94EAD742B4BFF",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "3523F42C38FA07EC197A805E2348E9661EB05134D178593C4C0C379731EC2E32",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "536F2D92C75EA2B05263090376E1E35825DA805FD87517472AC4807D1CE533F5",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "45C36967C60C69C12C2EB7763E7B1E6D89B177BAF75FB667719BFE940DB4AA53",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "54A548BF9701E1A60690AF9CC428F8E2A7611CB8DABD3B070CD275C7DFFF0A39",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "22D204225745B259DE8643B28C17C7F275D4F4F2F93690AD50DA0A133EBAF4FB",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "55B4029184E615634D59EC7F71582F9042512ED4B4B0434702E478E92D02A6A5",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "4661747B321F507C25797DCAA8CF2A181102A45B5D345D3FFD68ADBD2CDACA2E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "5753912826BB42ADD7A5BD2B0097E36D8F0855DF4D986B6DF4F083683756BC88",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "FB235BE5AEB771E5D612ECA657C5E23E6999BD6A4BA3B62DC4A4B53584F6D62A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.7285805436328285,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "57D993AA9A460B04818771DE2FBACF1477F6F60BA9DA0698B93AADC738B5A4CC",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "785B24AA310622097F9BD190B9FD0031451DAB249676C275E317E07FF07EFC6E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.349830083769072,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "57F24F74794CA5468396DCB90A41E2D14A44060CB16984CD439F02E1174C731E",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "8178AE70FE09CFFD46EEBB920A2742C68856A9B19BD6A3FC2ACBA0643F26A402",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "5A035907F020523A5062A72446E6DA71950DF80B9F1AD7A9864AE855DEBFFEDA",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "677530F986B9994085C587B4D8E5F2F8C165CB13793211DB4AB971BB5B1C1D48",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.492518112432423,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "5BB00C7ACC52F2DFB43D8978DA30F62947156762CD5B79FB048B2BA48D00D2A8",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "15700F9AF948BC10306A30A3994FB7BD1BD60A3CEBBB8D6496810005FAB05A78",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.623350936224876,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "5C2553A69C77A9BD9D7ECDD8D27BA70196C0656A40105F8B206F34977BC9A378",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "3F62538430F43D49AE60F4E45A076F3C8981A81B53921F9C413565BED2FA93F7",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "5C44B4A5A371CFD3CA7845068FA1F15D2F44B05CAA55CA3F23C6360BD47D5F1E",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "2A09751075D91D524294DE4E3FC6FE2FE71C162506CEC992D8F16F4F3ED9B37B",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "5C63225EB6788FEE38F9E12F0AB71A98C9E181F830145E98509EE5EE6B4BDE77",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "784C0F5DCBC708E14362F7159B722907411656F4F33E9788FFB32ACF20C43948",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "60E685EB86C98B4896E478EC4C92D44C9BA050081D1B0F735D90D5B0E75CA9BC",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "27C5B2FAA0680F636D0061E4782844BF6CBB121E055D04298D9AE0A6048EB6E2",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.716938621649101,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "6100E844189303E49A69D6B5F0FB575DB44C1EEF591D12B63879EF4D73BA19BE",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "291668AD69DBE799D07B201C1FD0880B8D7DA7BF2719B0A47C96AB30CA2D89B3",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "612017FB6CC94A65328FF54FFA88D65296E788B3FA820A30172D00AADF649D28",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "741FE0C56FF0EEC1AB97D806A6049D463BC0E95A22ABAE80153D9A4E2C858890",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.543646028758597,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "61D91A8C16ECA2DA0AF2BA59BE2A069D70062C6CEACA6E0BADC7310A2F184822",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "A9B6895B70E54803FA1ED4621B09A47FEF616742445484C10F455AB6F63BB7B5",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "65D79A86C98EB34C29B37630F058E28B0218CE9D20B628C1FAE005B2C3AFA396",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "2B04E88B7BABE00B588480CC4459524A8F3F414002B8B2ECFD86CA787364E8C8",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "667409833F03E27B2AFF16778D052618E7B0F0A412525FAE146FFFBFAF3294A5",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "00EE4D77692CB941F1CB7D0D6C17DD297AC07B7D7BB300D69115E0472A90E952",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "672A96F887D5EFA3F1B4A15CB893C328068D30044015D9DC57B5AB41969F810B",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "24724FFADDC64095D9FF348FCD35E516D423D17D52EA708833D9A46ECBD017DD",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "692E18A3EA0212CC3C7E629D76B70DB5234FA7DB96C66F865DA56F4A2185EE16",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "F52333FABCA431A6EB46B1F98A4AC2BEE41E725A5BE4FBCDE14E5174BB39375A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.038358494819121,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "69EDE1A982FC732D85CFDA7CAF7CA57885571FF2C8055574AC37244BDA7412B4",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "8E9BC6EBEA1A937DBFD2DA29E944B75D5314AA87E75219F5D1FE2F253D4F3641",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "6A9841810A280BC8879AF9BDEC347643C755E77A9B3FB47CCA030F0454068A14",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "1AC7972887A040B2F0A0531417345DA1138B2A14A83498A89683848FCBBF17C4",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "6CAA7F3D9859401F7C739DAB319EB2D9A218ABCBA16FB90EDBEF8BD8AB4BC258",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "6AC466DF121379EE5CF0779ADBE8A1BD58D38AD3415A26D5664CB51449F090DC",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "6CE2C0A32FF9C1E674BA610BA0B8C51BE5EE3924D0A162DB8728FEDA86F8D76A",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "F975C8E25C2190BF4958AC9FE8C766FCE341481DF8D339704C251D271BBA2BF0",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.484225097726801,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "6F06B396F7367CE3DFF63C431A4F5A86BFAEBD6A8C389C48B5A17CC2CD3D2110",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "073F17F5932662C430445DDA864D360D29E714F15A1BCD427511C6A640A9369D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "732A98EA449EA572C32E7031E0D9BD8B33B0F0F0ABC1FDBE430F645F56D8CEDA",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "934C635968065FBC73266C9EF9625D4A763F295F36A2770EBE3FD6D8A5ABBE5B",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "7461EC2A7847E33C90DDF70E776EB1E2F75AF53D793C11FF83C249F519A52005",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "50D60D301452AB9213F6ABC9827ED30A80D802516138FA08EE1E016140E61126",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.818231607562756,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "74960BDD211E809369C9E69B23A7BE13AB641045B6185F3A5F16ECAE186F9D17",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "F0B5E55765C1DD8A6C224558A3E60763BFF1E13ABD719480A39CEBC273FEAE93",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.601950641657638,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "75A9371929D46946C8561E06751A47C52BA5A7A4F2DD7A2A5E874F1FD1B793F1",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "23F60B7FAEE8ADD21D56144FDE37660DB1C3C0F4FDFC1A38BE9E7F7397902F99",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "75DC85A19090EBDA67A10A965384200AA084D153EBCE45286D161AE107D6AB3C",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "9FBEF78345EB1C6DF0717415A98876C92E4064D54307A2BC8B1AC398FB20F9F0",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "75DCC1AA6D72BC1B2E744EF8EAF3E2145FF17FB95CE011FE9A2E7595E089F2F3",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "3B8D357E9643246FA9F6273C93FE105B340CE5364F080926905790B0F5A98C23",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "768C63FDE2063A6DB202DABDEF21F6055CC9382A337468058BD2B3154F85A387",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "6A0916F4B9C7F3372CC2B25DAAC4D19C45901425C1460A807ADCD04EFD11EA89",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "76A673B1340E69CBF371D8A9DF3D8938AB5D56B0C57346CBF3B16BB4159C46E3",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "A7C46212521D34C7D6E9B15F6D6B423A6AFCD0E26EBE2C734292FCCC750DDF5C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.833806480985622,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "77E9C1A6B442FD2C85524D59ED3E2F3CC909486F4AE78A1EF826283F48D40B1C",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "F1FBC8482CCE26F2C75EB15A7C4B58BBC291E7929B1366AABB764A698C17BB1A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "7858527E67FF8C00257ACEC9D1D1D7AF9373C47367357C4CD996F45DA23CF96A",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "0B1D9AF9A6009B37BDFE2CAD91B0FF0046980DA470698DDF0EC6E3C557C93A22",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.789830056165645,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "786ABBCC1CB6011AEF9B762A238D7F4DB4B3E9D78137BF4C105ED75F6CB5E2F5",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "454B5AF415CFDD00B028837D61C7AAAD8B01ED36DA346CB955A6D27F4D86D5C4",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "78E715F5CA9FCA35076B119FD8DCA37A4856012EB02F31D6D2FA22089435D5EF",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "051131D5A59BC1CBADBCFE29E7B910D0498F18C0353CD7128805759808C3D644",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.40060699972644,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "79493E6EC070509E693221A83D3C82AFB66E474E2CA5F0E7FB5F2D92443DFD49",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "ED4A0444A68AF66C72BF40088AEDCF17B46F9922EA002A601B3C94EB62E36984",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.507911444925647,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "7A53D68D5BB7ABEF4C54C75C32FCABEE0F9978DCD530D23D6E191A715BD9AE9E",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "CAA643C49FFB8EEFB63A09A74D9281ED045979762E700F8DF761D13FBACAE4F6",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.2249518508355575,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "7A5A8E82377DC478960CE9D51B9F2134822215E9FE26E59181F1E04F0BB015D9",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "C22827D6DA307D3A87E6C819355BBC114BADA643216E51698906EB7B5F0D6CAB",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "7DBEF46872A72D0057E95E4913F37FE42EB594137BC579325CADCCA5F8C0FE6C",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "FC7D8484F431E878B2960A9CA7A295A424BECF7A4746FA5E993619E4023C1A0C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "7E738A49B33599B1CFA29C1300FBA930CF2DA1F207B67491D4C0936A36E9BBB0",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "F871BECF1F0CD45922F19AC4A486035169DDE37C9DB3335EDA1BBD40955FD8D3",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.05999095468873,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "7FB28A1BF84768564D5832FC609F8937D41C191633524BF8B934F5D78D995AE6",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "B94057FAD9CE7A573623D54CA983EC0377C89EE79B89399884AEF9D98C2D8EE4",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0866757800516185,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "7FCEA9F11CC69D6DB454B9B66DF7B32F8265F24B69262F082E81999DA20EF5AE",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "B86C3819E0079370F815B1CC0C0E64EB8F9C0A13CB959ECFD608102907510ED0",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "80588D6A065210C7D1A5F5620AC099F159D564FEAAF1F4F3F527C5AE998362D0",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "F8967D1BFE2E6F597C9CB05556E98144BE48B32AD80407FD82C120393236DBFD",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.785207008201739,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "8090A40142AB962DFA011CD7464B56D374F8AAAD0B8261C56B3F69A7B7C71501",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "349F097B2D03BE63354EEC7B7CD784AFB0B747607CF3462319F8F7812A08995C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.707577598881484,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "8339080133D95F122811221614964B9217FCC4DBAE1BCF448635419B4F3EC7A4",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "A3608F2D09494B2242ADB81C5163F3C2092B2222642074B508B6EE56916DB0AA",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "846A4B81B7AEA3FFE63CDEBF36497A54BC8DF6D4BBF56EA5E6B7401E61D9E2BE",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "655F42C8E1E2EE16E28D8FC33B2590FBE3BC79BCB9183D8D6C2ED4418AC147F5",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.548812199524475,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "852DD5C04B0E63191CB54C7831BA9A7E4599E475D1E5EC0A9AF19CBF6E10357D",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "C5415018C824206E44ACB8B1D2ACD737677B667777FC07BB47A2EDBAC8B6112A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "87874226D631A1FCC6C306732868828602CF6C0EFA6C959B2A16019A7952A03F",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "49E7048ED0D0311B82E943BF4D3E1B44ACC833117F92F315A9F3BB2A3D399E77",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.594634460735223,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "87C8385F8C44F220C403188313BC247E179F28CBA19AE8680B32334E5BC751E1",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "260566D553AF14848C5AAE13B4B19F2A2CB1D075F6E93BFB5823C861150C06AA",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "8832CB079C09F585212E4D128F3F66D8C9762C87876F8858D467BC3A680C3B22",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "82EB295F034F7B89692D052A0F5120E0E5E861FD6171E3E8225F2E46052973F3",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "89829F0AD451850EAD02A57AD60504DEC8484635D9F86B8A105B8150DD8EBEE8",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "39C2F00467BCD47F9B8663C564D5BCE17A12AC4BF3D94CD0F504B6FB8555AFEA",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.257693926217641,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "8B054E9EEE5C0C182D37BE592B1A11A7A0F9D615070D83F22B7D525376AC1F29",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "80172A2A06704395327A5E5B97DCB3DEA0BF5423D35A4F451EF55F2EC90D9B44",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.481067546136783,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "8B1EA425A82D07C1DE567A04C3A159285E0B37317243075D362AD674C36EC146",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "90083AA529F367F5F35109203EA881FD202F8614FD2F4369314D7A07C31E14BF",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "8B9C1FD8A09E9D9371DB388EB5A0E4D30C64AAA6F9590E1B401209EC6253A787",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "54B039CE544EB679CE3D3E23E454D393011EFA7A507CD0D8C86D95B257E2D7F0",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.947391826312375,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "8BA8EC617D02A716FC4104C123696DA92D6850D92C10A34CD50348106D99D1A5",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "FBE418B1DF978772E82102372E28A0068822AF1E8F6391B87B9D2C95EC3BCC1D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.355908550229067,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "8BD2DF304B5133AFDE56DE2E4EB3C441178B2DEBE9EFA343685067CD3FB910A8",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "89A14EA5F9267888640AD13B67A9FDE121A22B6DDF85E6850A3416214C782AE7",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "8CDB6B7355DC36597B3CFDB017AF5AD6BB0336DCA2F976ACD2D896C649CB8B37",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "63F69BB8AA57617B67D314CD315ED2DCAE075EBD3489670F6B0AC9F53842CF2F",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.509962316644002,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "8F5326C4F19A4372BA53CA9D8DBB1FDA3F4D8B68BC3CFDB68B79F15E9758714D",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "ABE859A7416ABC5368A22F3BEB5295A2ACC7D397C9ED0E60B40EF1D00F7523AA",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.59930442399389,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "909A11244AE61D85C8D5533909DE6961A8F3D1B596520FE6214446D43C97FC1A",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "C9ACD4BED3E61C7436D5F5B9E2787F847F315D7E0B61C9D2F6827619BB32647A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "909D59B18F36F1F0D4E08272D50259FB3A2B7EE36DED7A8759DBDD4769EC0461",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "BDFC064328FE29D2197244295CA7B09708FC1FCFAA72C4C567E2F50FF3EFA44C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.9078387219295605,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "917EE46DECC82CCF740D1F58740B5ACB38612556FD2A4AF0B8BD1753D4DBA38B",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "E646AAC9E85E487B584B01EB5068C397621919168492CF485EA6056EE86C9EB7",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "91D70C630280A5E5AD7943DF25AC44B46F3C7C11EB5BEC49FB29057ED95FE673",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "2ABCAA7F68B27806F06EC83118459434295757FAEE81BB820E7B54243C7D8659",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "93FE51541E4AB516F6462A1ADF04950E5EB7D1B9946E7479DAEF8644974CB733",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "3C2FEC3C26ABAF0DD60B5C54D80A22F9FF2422E3A2B75AA6059A4E06842CFD46",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "94FCB1B5CE7714C219B8E087BD1F579AFD1F98AFFBD6A6B7BD76FE1A79BB0DF3",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "24B14FFDBB7B6BE38F27E3F9767B15D2A1DD9A3FBF66C57871262DF7C7E19363",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.135622702191915,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "962B7CED86AB0F9EA33FFC2F6B617741EEE0585D909A5730B7A0B27A6B7343EE",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "C07F9EFC2D5A4D2CF05DE06D37F6F0B83BB845A2E704871511A13C8EC151511A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.889644117049675,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "975B1573A8DED5B97C31302E4376580F1C8D3556B817C6409BE3792D97633DE6",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "3026439EA1D3CB3DF4F1C9D8EA01A124E820C55B07FD11B34ED7F66522523997",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.398780567805965,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "9A692663BFBA08093244FA57238BD13F07421703803877CCFEBABE4623CBC63E",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "DDE50B442470C5DA2D678B61856FFC82D147CDD5349D0AE80FCC2AE33BEA9DF7",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.42280158566434,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "9DE6EECBAA59EEF3C8D2D799FD4EEBF43C6461464D512D86652B0F4CA6A69F0F",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "589A59FF0EE1A9377E75F1D549CF3D943CEBF2B09B7805DE13E56B40D464877D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "9F790822A0199B25C4F4BE92587CECF626E1E2E7C74B82ACC58D932B4543D4C4",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "1ED10F2686F9D04AB31D61F5BDA9E2B5F7D4D1A6820EF3AEEB907B8D8C7305AD",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "9FFD66D221F13BD81C15DC774ADA7A86CE5E27D42255DE56D0335D90E1145B98",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "878143A2DF85A4F9B587E8FC8DADDDE064DF6035B7F24EF3164E29FF7CF94DDB",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A056018BC3E73560D96ED5BEB750371157291E7B76E354984CB93DE1E6D4427D",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "691C1AA789D019F342827F968867FE42A4015F97FACB48729FAEC49CE4FF45BF",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A10277E84BAC03861905A248E9B1FB5DCC04531F0DF283F7FC35E61EA9BA00A3",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "686CC84216FA1FB8FCC310F762713C008D13B45548CA5AA34FCAFCBDA80348D2",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A1E507CCCAF08D07EF5A21F1C6D2772A78F5F3871B643938A9D872FFC9ADE859",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "8E4C9D21B6F6CDCFD38432073A2217752C435670ABAD14D315421F7CF491AE02",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.797779110821535,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A31F78F6D911253D595BAE5335EDBE5E2B6C037A232C63FB456A5F18683313D1",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "BDE5440B546EFCF08804D19F48BBF7B5272B858DAA955321D51581CA33FCC93C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A3B8BB91A13E69BBAB506AA705E4D9B163791424061B0C9389FC31DB318994B3",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "20897171FC6324485B9A4353CD3009B5C444DAE67FCFB3EE6DF74CE80193B5AC",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A55CB496D339CC7794DAF468C382804DE49DBA87115375EA08062511F2DEBAB4",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "4D78CB8C6421C06BFFAED1A89AA882FC397E7424EAE23034CEDC409D6372FF49",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.665923281176543,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A5D5EE9E8F5221282F9BB577E21FA3519F26E71D6954109B7A8A0B2C100063C2",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "DE79D8585EA80B8AB379B3C912DA84CF589800B8013962BF00F66B86BFABCE40",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A61351105870AE9AC3691F6CF5A8589731A3FBA3EC93E0F4F192143128AA1A6E",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "63078CE51419A2E46298F764BA681549F3A0AC8DF48823C0768D325C32E75B18",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A664220E1A76E308672E20E4A8F19AF7817FC0A6FD15F203BA197828C05FEF0B",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "B57B002D92487A71A77C2B9DA7D1917D6362A7790D7D267A823FF6DE0BBE0B1D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A68FEECBF452A13E10D3B55441FAD04FB8BBD4350A0C26769B7A7D82B72898E3",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "8C19641E2FD34D216951D5621F9260DFC0E2D50D225E2C89232AB4213FF62FC6",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.230941249364082,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A6D8CBB36381AE6A8118C8DCA4CB19163B26E3791BC64304E6208D941BCB91EB",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "393C51653B50A889CA9620D9BA21C8F824B3E3683B706206BFC85935FAEC79D1",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -2.4762434556070905,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A7B0126DA662ED78A2A63526F1CC0BF7793E1448AEF15CDA801E49815840C86D",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "385C1B299D40F3098A190C8E0433757B4B7F0E5D149B9A1F93CF40B716ABD089",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A7C35555F48A66136FE393974F3647B7EF26E7BA2EEBAC6E416DB4AD20481A6F",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "0829787DAD760AFC0A37D66BDF815C529F760764BC9F4F51811931086D7A00CB",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A80FB528859BF1F172940789203095CF26BC53B43AA574356381D634F20C3BBD",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "BDFB82C543AA5F94B41D3A08B77A15B7EE265BCC410FC201FDA733C7AC23D604",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A93140C1E8883F11F711CB52A084CDED97A51004F260BA161B8573171D7923AD",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "C690109F5D07655A7020AA0A6563D411608333A0E932A30FD451AE768DE57304",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.416254465659671,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "A9B209AF6F9BFB5DF0ADA372E869D6F8BAA0ED6D5CF0D336066C541E11E2DF0E",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "6669390E4C490F2CD0B5466AC9D4ED3E4392FEE9ABC6301E51EF979E4B4DDCF9",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.18467778644938,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "AD59AA1B97D0F09181B88CF89F8C69D5778638625D5CCE7E6ED09FC977AB1438",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "1BDE4E7B752FA9C9F3B5047B4EF1DFCA3E3B47F17CE751F6D794B43E4D503CCD",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.703819713488949,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "AE06C6A3C005CFF4A0FFDEBAE65A91834327C321AC7970F011BB31C21993DF99",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "2C713D4CDF255A37011B1FC819C3F4F50684BFFE312FAF5D2DCFF900B5BC3364",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "AF2D0558E4D99820EB2150BECEC91137EC4C97B5A9C4EBC9F0A7027E55DB600E",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "C8748677C8FFCB0DC8500910FE27D0FA26AAAB89DE24E0B3EE3FD3006C0CCB55",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.661894317386059,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B0C3826C1923FA5B353AA6C590324EF340B1E31AC42E310E3A00B7F31FA57C7A",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "27C07CB26A96664B6130333A559D49B541D166B9856FCACA380D9B24FC506808",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.345605059747914,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B14DB3234C0FDAC100BF4F1DCA40A07D4C6F95C5EE7C7E51B29CC51D2E4F40B0",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "372A1BACF4EAB858528068ECDB303485D3C3D5EF46465E09D3F42202388A631E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B168A47B269780F40ED4755A982D7BCBC9636FEE6C9E1A2062ABF089E8B7952D",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "6ED5D68103B4442BEEAE36D24B32ADBDD489A092543A9C5E6CB34CC763E20E75",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -2.4329028138566797,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B2C11167245D3074F94D32506CA536DF9984A28E50BE7B65E0EC442585FEA8A9",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "A56F5D87DC9DFBAAF533E03962C896A1A9C554687893E6F99FD71B5761DDDD9D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -2.419133987556238,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B33DB95C97F1A31DE09D7E297FF1D4E5A570A32144641931842F83FD9D88BCE7",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "007CDE605E520E7D3D3123A494643A860D8314B09F7D4C4904BA5B4DCA983E69",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.619050291506872,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B362F04AB569C9076A40CF1B08DF64B814C12CA539CB51BA8B8AC9AFCCE428FE",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "A221A3FB2BBB80CB8151A6D2C4D3B20430B9DC089CF7263DBD40FD0F4DF0BBFC",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B3A61F3E92B7F701E4D95F37E029228487333E5929B5CA104D93D9E9E0CCF5A5",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "D5915F283E7B2C6C83BC68425F222B160361B4A55EF0CDE961EE34AB442BB4CF",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B3E5559902481F09AFB5A27BBD7AA77DE316E7E8ACBD0B7D75277B994539CFD0",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "3DBFF73233945878060FC7B18B93E8DA41F0720BE9974559113FD86CF7F6A0EC",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B4478C3A5B100505FB7CD2432086D1AD80092DD40C73E8E472E3510C68396F5A",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "0CB8B860E9E4C9AB4AF8FA6E6FDC9A15422BD09C91443850F0A96C6E90896A4D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B4807F1513E2EC5881D27A396E12A938EE154E350649C3FC3D3386B2419126BE",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "FCD9E4B3645183D665E9E23388E38288EF3E0486057EF24D390FFB7E681BED7B",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.098107491743994,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B582F3094529872DCC524B4BFF5D3EA6CBA7643D18FEC260152720DDEA140679",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "35890C16516A093005B90FA0164B2D55A29CA94C8A2F012018624D501D9BAD46",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.484545963910222,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B638BEDDBA4C26D35B6E4CB882C5E5C47185725E4779ED420B4BFD544F92930A",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "DFF4796BD973AC4CAC5383F9A29D0E7F60C43D62A1F361970A9085A44B53B82C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.6948945639050175,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B7BA521E7E77198DD734FA19AEE0C2164CFEBC6BCDBF11B672C76BFE24DF2C60",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "5A2CAF3E637C0A5E127464A8819D884299C56F786748C63B49A74A2466CE5A91",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B91219778E1D8AB83C011863C9A583524F8101152D5702116F8A0F6C2ADFB4CB",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "F6E55A7E59CAF6AFDEB445F64678C56529F5E5C11625D512D3FAF4E90FFB746A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.853972820765136,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "B9FA3B67E7C5BD2A240D8CD66B80BB5C040D30C4279EE7AB0863D1F8E85E02B4",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "5A1D310C206439DD0296A6E248559EDC789C6DF4738C4B0CDB614A691AE545B0",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.715291653513638,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "BA1EF9D3CBE9406391E968641F33BEAE233D7B108012D9BCB1F8AA084929DD57",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "21A3415C581DF0538461B60F39F333751292D619993F0069F7DCA772189A940E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.965056291612039,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "BAA663DB9897CED961F595267A2D19F86A9CDB435AF0803C2F73BD7A24AF96EE",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "FD54BCC22FA476BA5CEE7A50E37E5C0E2BCA78432CC8B291F1DCF52AC3B1B8E2",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "BB36B5EE5DCF7D6E13B403DCDFCB8DA0A9E18DC0AA023DB44F06ADD1BDB2F0A8",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "CB32DE35C1FACF4E743D54CB8A5DF219151AAB235855D3377711D954E43B9220",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.459233782535847,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "BBAD702B0E6489C0838556FFC5574AB7CE04E9881D14411603F0EA0E08704F59",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "0F402E36BBD8EC5E54A116EEB15355AD0A6D80F0C941FBA9345756646E0CA2DB",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.161279841379086,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "BBF69FCA33C80CC82A10480B863EB71D2322CC836D8BFA6E437961C29A4D3738",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "BF5113F9B8B1EA1131AFC7D0DE536BBF42AE886DC98DFE59B781F0CE83B32009",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.45578204352983,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "BCB81375BFEEF021174CEB691F0506FEBC38FF64CC02C70F28C79EF2D7E86056",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "E8D1447317F8A95720F997A76967A49E06D00105BEFAECEE8CD665E042F5E538",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "BD387E495A61C3268A5F05ACFCE8ED7BC9453F116F8FA35089F0618169B11D69",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "8D08BAB1C6AC3206D058B782A1B185C3C39E5E76484DB1A48780ADF9A314FC7C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "BD53647E12FCF45E7F4AE79A326467A4E5A773DE22D5E0A01D136FD27C5AACBD",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "3D093084F8DAF4C1DC71E85829D2807DDD672FF4D1CE7203FBC0A070FC1B8298",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.514681290321603,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C334EDF0FECD2BC658D37FD46EACC2597A4E3368827830980558A334E09CD2CC",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "9EDDC1409D4774EE84478DC6372469487735983DAD8FE215D94AFBD34B3BC038",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C4789A7ED05F7465A7F31310B433F86838F54B2B20C718C8767F776AB7954660",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "B8A5D742681603DDAD0AB5C94E378D4E772FD6BCF8B7A2211ADF83366155B55A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C591EDF3C8472AADDBDA7AEBC47FD973BBAC04FF195B1A20CE97845E3639DD5F",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "24E86139481B432019595FF63369C898AA184748C1EF7BC807B3D1E50C04DDFB",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.94081292437649,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C59A069E529080552C7C95DCA1D46C2562AB2F237C83180715C45A898B719250",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "1A41A6F6275A482A134486B6262B69F543AAB2EED4F587D375EA7A0F9A9DDD63",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C6281A00AF563D1E0CE6E88A22964604032670C5EB2D50B03E48606B133C332B",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "A946005C42279C8A87C78FA67C095333C219534BFEB219DC32CD9291929951A0",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.958913885089327,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C82C9C9C6C54E686C7513B17DAA57C9CF1655445FF76A360EEF9B8A887B5438C",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "FEFE0F8D63F1B89A5F13CC58BC0001517B769BFA9DB8A6692B8F3B1B27398532",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C8759C1A09987E075E0AD3D28CAE639EE1483C9CE89CEECB92F084183DC56B9C",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "62CE1B716E30454C1A0F366A9614A756C0A3E949501AF2ECB372D56D0A66FD15",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C8CDDF6894551DADC1A842397058D920FE2E5C4E87AD7A283D5C240A64EFEB85",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "F423F0F13B0EC21657834AA8719D8956A94A21957551BD97805A6BF3812DA642",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.61642433031202,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C8FEC14DC4919662A5D3F44D355CA4ECDDCD0908672E695457D8CCCB13DFF1FD",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "D09F4E72D5EDA7FF7CD7B426756F16BEDCF588D5F64211538B0B79EEB1640E98",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C938C338542226452C8B7D616744F2F5B58F6DE6853D6C4DF8106A9FC1A8A391",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "A813C11DB54727FE42CC8169F78EC23B2EA34F785970857CD0FAE7CEDBDD8F9D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.918772970403978,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C984EC32D8C81E6F22B3BD3F357BB435D7094C9DF5E2870C10C7A4C19335D973",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "009A8A33D38C237850DF69320B16528BEFC50549F3D6986C2D1D15DAB9552837",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C9DB4F72C37560A93CDC4C710A9B9ED2C959DF35DF35530267831BC4B6BBD4EC",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "B5BAB12D8ED2E66EABC1D599E79736EC9237134C1204FBF117F7A3E9DA94E4A8",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "C9E25DD8304706F2AB727527FF731E31CF48FC7931328898077C5CE7CB393037",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "E751CC80D32E25478D6B3782774439B907E0909F70B44943E036415787F7ADFD",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "CB00337439C6199A214CFC43EE30B66E92E6ED06955452BE9390AD9C169E95B2",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "AED0F678764D11C8582E899799BCE3E46FF6E580130F4A8F6AC12E06C326CE55",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.784309382360186,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "CB83F3EACE6E6E2C48172A6DE3EA969E8F193C09FDB6745832420EC90D159C75",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "97D085E8E7260FB768F7D796E2633406DBCD1406E42E4E5F1F390FACF5C44F7A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "CC7D28929654DF951EB26A5F219D93279B0AA94FFF38D41FDC98A37055B6BB4B",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "4D8D0AA63594A81842B6A7BA0C60EC66CA94B0BBF59F59A135B7AEE53644522E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -2.3333333333333335,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "CD1C8217BA2430A29E50A4AE3EB0D9B96A3CCD35B316E333CAC6ED9359AAA59C",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "A755F4C4500A6CA444D9F1B25C0A2F57B643818AAAAE0F793A110A8D7F86178A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "CDCE732B44ADE05B0C3112AEE1203CEE0926D9F5C1D3A04AB539607870AF2E9F",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "15B102A1FA4C77429F2378E17F461D0639337914D67978D1F45489366093D1E5",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.693130249868309,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "CDD680D9D7D303FF884719A06A2DD5B9403EBAE5039DDD62D349226585E5F48D",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "F6FDFA91CE10975E1F7A26842631E480B85692BC1C7F67BF7B75C87635910DDA",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "CE32FD381550B305E918A50B2F2AD62C6991009016F611EA05898BD684E1A044",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "7EEF1552132137EC435F2E63463C2CD826E1BFAD9442CEAEE959B1FB40291CAC",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "CFACF97DA978BA7282B0DF57A7BCD3E9145851D4D2906A853A88DEAE1E69F89C",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "5FADFE0436A936EAB7E64DDF98C119E192BAEE0BC287B43B5F3AE2454F48E654",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.085261654922343,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "D0F6AEB7D491D71B1BDE0616B1CEC8FBE7FAAC88989B25AF94DDB9245FF70ED7",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "D37174B1C18F583394B416F6CDEF0503688262C4B14ADD1FCBD3DB61965EE49A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.101521612017098,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "D103BB847BDD47F5FCC4C76CE758151E6475526B366148616C1EC973F4925C6C",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "FD917A28BF6573B60983237915D341CBEFBF1C2FD9E7601DD905DC7DA349A434",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "D21E59576688FE4CDC01B9548197CEE081F1E1106DF16EA99370B5F006A2F7EA",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "832AFD3E6434E4520E064571030C4DE22E68C6155289DDF99C1548244865EE70",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "D22E6EE01715F3D61A5E02EEC37488F402405324AD1DA0D9AD1A32EAF0886838",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "243E53C356FD13E154D6F0A0ACE3A55382AE6B248F6DB894376F76A66B4620F5",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.472845384763055,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "D3FD80E59AAE331C78CA082B2154ED7304572AA0366AF09A495139B901B6ECFF",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "7C2A87E0A8690BA0BF94C2BA6310512229D14F6076A7FD0F6991D432BD1F7CE8",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.785311376248628,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "D41B6EB0D5B952F433A51C0E97788BB8406F9C5D30B0611DBE84E888AB70C7C9",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "3814F74599B6AA55681D9D83DC762C4584A9685D01BB5BDCD3AFE589E74CDEC8",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "D58193F02AFCC0C55FDC15A9880A03F86007E32D758E5C773A8AD2BA66A25F6F",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "2FC70793DDBC2334BF07E0B35BBB200CD3552040F426FEDC9EAD8E25AA89099C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "D59FA75D04FC619BF0D912BC66FCAB6ECD1199F90E1AFDCC4008E08644D9659B",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "CA7C08165D6810C8C04E7ABDC1E8A3F197D48B78838F20FD422B1861BB81036E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -7.427664491662441,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "D85E547AD5098C9585FA6F6C0F5337FB49F05596CE56385DA8BD4DECE4DD80CF",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "67BB016DF1B226B7C0F608EEB442123D764E0D58E47EBF4B064FF05AEF1CE1FA",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "D9773AE20CB5AB21C925B79683AD89F5788BF4D5372B407C2008A2C758BE64DF",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "E41F7BB9E3466C4443B678FC90004BE53D692B0775F5F7B46E84A0E2D25DEC54",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -2.5058245271844806,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "DA72AECBDE7DE85DC2BD8E50503F84BAB622FEABDBF19C36461DDFD51D05C9AD",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "F8F140E282E1237A6E2A5A2D3C3B1A88E93669556D099EED36F30A4BC12657EE",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.858356713266367,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "DB36B798D3231AF319974CF250DE2B9720FBFC34FD997DCD8D3ABB707A371413",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "CDF3D7D19EB06D437432084007C772020FE4C6916867466180353AF0D558CA3C",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "DB8C2C4B90D7F2F1887FD77A10B7F7CCB312CCD4EF065A90008083985EA786ED",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "B1E42C9BC80B08B62B2D6601A8A6B7FA4DF3C18484C2B9E464B8A2077D044450",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "DC67CE1F52E5ED3B436750AF63E9F49AFD56F3FF35CB8E735D552A006AD0B4D6",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "3BEB9FF4701BC4E470EA67909B043B3D4FCE9AC249428FC8F003C6D469CBC60A",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "DE34758A383FA643DA26D1ECDA6630998F5C9F8371BC2854EDF639A82AAFC89E",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "3E3179520EB452371643E973674466B78FEA8F198171703480CF60ECBE6C3CF3",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.332891638242612,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "E02E3C2F0731EAD175D854265028A7E08D0B573087FFCD451AF825172B232989",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "D0E3B1B6FD2771FC7F0211B934A419D121C1C75C2C09CA4EF0164277FDC5AB38",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -5.25958514835148,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "E21C7A5B628AA9612715BB117D22EB2C76F0D3C4703B78E887EA29ED55739A6E",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "350B30A34C07B874F9F7BB0AD020D57822DDC82A5589F0891C50DC49B3153581",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "E3FB8CBCA1233E38AD7A88A55818D43AC0C67D0837161F2A6617A64BD8760ED2",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "CB66E082D89968427BCF3459821C59112B98FAB288D6B44D62971DFF99B957FB",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -2.654737527290266,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "E52112D40832D05F276FED907DD590DCB74CC4663C32C1C8491F44CEE18AF64B",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "3C60A39ADD3FD57A39B4BCAB66265201AD86F178C84418DB393CFB5423C6BBAC",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.120330442717135,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "E539C7531CB08D4F16839395306DD6FF4A65EC6F1CB073BBD0BE7D1CF1BC26A9",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "2601D8502ADCC72BB7EB6BF3F095E6438CA54F47B1A60B82E1D8F151CD77A4E7",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "E5C00C111CA585C96192D23AB90EFC98752231AA4D6D095CF2EB051753F55BD1",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "0D83A2D7FF94359B00B23B5677CEA915E6964F70996162F67778BC1593545B8D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "E6A79972CEE69DDA7B14DB853D1CAB2C9AECA7967556A33BDF27558242F3E83F",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "43906A1DF1457BAC09C77DAE5C6CC7AC8A6975FDD93C572EB17DD2BA554F580E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "E9B56E4090E8AA016CD71AB63EF1257998694FBA59354E5FF5111BCAE4C5C614",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "DF7BD3C7338D2E23987EF5CD16C644624F94AB93D7DACC78D79122D23D3C3BE0",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.233676248908823,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "E9CABBEADCAC8CBD93E45183B2C8E313933B8FE32F1E3CF46B6D92530B7C99FE",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "445AED84319FFFAFE25316AE372323B4600E2B347FE59726E442F8E3BC56B15F",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "EB0CAA169D5A119874B53866A34B84F35218229A76288B98112EDEA82EE5CAEE",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "BDFFF6568D4BF58D51969012817BFDBC02DFB9FAB4529E71A660C4B9CB875A97",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "EB82A554913F65B6E32FC142BA9B78A893BF372D6F3BCB244A4E3EE07225228B",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "2AA0932C26B7DCDB07437FEFA21C6B87B8CB17FD6BFDD46357A72E5BF5352560",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "ED02AAE4ADB1DCAE0290D727D54E8FA42728C6484172CC63AA891E7512B63A2D",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "8FB70DF1449E762ADE396823254D6EC66F646F62238DE820FF2F015F99B3BFE1",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "EDCC95E5A82BF3A12BCCD17B75EEAA1BB455867DEABDFB5F50886A1ADF1DF6D3",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "D3074374581192095AA233FB99772B3339924754BB0A9AB4FE4A37B473A0D7A6",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -8.164490046210071,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "EDD9297DDD2F73C93B4EC1BBB47F1B9B7D05CC8045B389D27AD92F97F624EC0F",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "B35F26C06F1DA836D0F3E3C9D9902D5AD4FE58BB15EDF5C7CC0B4C61391B6FE6",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "EE57FDE781B6F6B403397E193008141D65898F1C7FC6193052BC4FAD11A28336",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "78C452D4B331636F41BAA4C6CFDB1E1F56D81CAE4ECDE4511D3ECDBFB29DBB40",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "EF71CD5A3CDBEF993BCED41050FDFD708C788023DC599D5BABBEE937579E5E48",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "7277ABC336B8E86AD0B1935747BEF444439ABE63848FBEE38606A6771AB09EC2",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -2.435085997681779,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "F1895B0224E2D8BD6FA84EBEE5DA27A102E73A02523136E42A8D3DE58608B463",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "8C293734BE33A8CD198238869B5B9DD9B6FCEF3BE23F928353C71B3C14ADF86E",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.392706460894389,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "F263FB9E7BEF05D0434925C9FE3DAD00888E1B74257E931B305AF7C497F97824",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "513B48ABED072A405CB0A9B7107D27C40806AF8FD654181465028CD9D1F8E02D",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -2.3333333333333335,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "F3155EBA60F2B71F8603A6253C84BC6137C8E21ECA52AA10E93919560A4B39C4",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "96BC0AE8714E51F7BC79CA5E89BE5A664ED59F919FBDCA33656CD1C6940785F2",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "F53E35E581D1AFEDEDAC5CA2DC4D0C21707A8F93CFE073F63D482EFF73D1385B",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "28655F38FF4CC288E2E512FBFA56269FB1DE5966A5B5FAD21B09D54F3851FE8B",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "F719CC2CF3135F6ECD0BF584FFEAADA07F115201D913D00E149979927D5A9734",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "2AEC8F60AF1639B3100B0DE132E66B23F4795FB0430DAB36FCA707F445848EA1",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "F72F2C26FF86C83B9A66FC508B39674332762D03793BA8736E11DAE1EFC25E01",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "6D954F009939C9CAC4588AC1B07BD3D9AB388AA137EE9ABF0448F369DE352A79",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -1.5449169582110356,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "F7C20BCEB3DDD4659EF7DFFD5D7E83427C5EDAD4250D270AA6B3B46EB8F5EF65",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "08D7E0BDC0DB6994FD6C702D7240E67D4CC02A52E7908D7853566325454C0A46",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -10.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "F99C98BCB0A29F2E36DA324CD43F61DE3A68CBA46445DD52CA2FF170C24C3E19",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "C7A2A574F08E6F80378AE8346636C457FEAA1C68F15CD7CB771B5C7C8C38349B",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -9.107492414029592,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "FA3ABDB8126BFAB2F7E7276AA70E381D9A676037F1A0C75358F50DCECE5F8D40",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "25BAF0B6A8FDAE0903134C31B5CF5F2C336D23F5CA0B2EC3C428C66F964EDA51",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -6.8843635370277845,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "FB9A57105B429D51C4EF8DCA0EB569D2943026B9DA5B7519D690C7AEA7B9ED91",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "E45FA34E079A58B85050CAE469AB0331ACCD24A12A1E56366A7DDC66471C4476",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "FCEE2CBDA9F1DC044DCB5FDDD8B77D0061F112EEF7C36A9DDD184BF67E4049A6",
+      "champion_arm": "typed_evolution_v2",
+      "champion_exact_expression_id": "9241FA22560EBE79383C4782DEE9B0AFC01B22DFED728FA748283F2876F9CC90",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "FDCE3A7DCD88D3E21CB4204551DA8F2543B9AA555F3CA4B4BA392C07A6F5C6B9",
+      "champion_arm": "canonical_typed_random",
+      "champion_exact_expression_id": "B7D6FC9EEED5F4BCC76A0BCD2B711A5471F967A16115A5218B57882B17452F14",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "FEEB5F33006DEE7DCFF4B454C7288A3F107777374D60479F9A073ADE5AB4058B",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "A050F1C258E165DC9D001A26DFD998C2CEEFD3BA5F0396E19AC07091F1C2B607",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    },
+    {
+      "behavior_family_id": "FFE85F88E8E6CEF001CD1CE91AF3BBC8D71067BE1D1CDD87856054784FBA499A",
+      "champion_arm": "hierarchical_typed_cem_v2",
+      "champion_exact_expression_id": "E9A8D810E0557BD8DB8ABC2C0808DCBBC98B514D180816094EC8352D81BD9AFC",
+      "champion_matched_positive": false,
+      "champion_pair_reward": -4.0,
+      "members": 1
+    }
+  ],
+  "family_count": 256,
+  "schema_version": 1
+}

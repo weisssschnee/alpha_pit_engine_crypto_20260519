@@ -1,0 +1,30 @@
+{
+  "active_wall_seconds": 224.777944499976,
+  "alpha_claim": false,
+  "arm_comparisons": {
+    "hierarchical_typed_cem_v2": {
+      "mean_pair_reward_delta": -0.38696932701620934,
+      "new_behavior_families_per_1k_delta": 0.0,
+      "top_decile_pair_reward_delta": 0.4751691464777861
+    },
+    "typed_evolution_v2": {
+      "mean_pair_reward_delta": -0.29622582909883466,
+      "new_behavior_families_per_1k_delta": 0.0,
+      "top_decile_pair_reward_delta": -0.19805999009072028
+    }
+  },
+  "behavior_family_count": 256,
+  "carrier_id": "AGGTRADES_TOP200_DELIVERED",
+  "checkpoint_count": 2,
+  "checkpoint_restore_verified": true,
+  "future_arena_qualification": false,
+  "generation_attempts": 256,
+  "oos": false,
+  "producer_source_sha": "a19d7a948de1f35089badd8acaf0abb171a96c96",
+  "promotion": false,
+  "research_decision": "HOLD_DEVELOPMENT_FIXED_RETROSPECTIVE_CARRIER",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS_CARRIER_GATE_COMPLETED",
+  "strict_evaluated_count": 256
+}
