@@ -152,6 +152,8 @@ NEXT_NEW_DATA_ARENA_WORKER_LIMIT_10
 IMPLEMENTATION_SPECIFIC_INFORMATIVE_NEGATIVE
 GRAPH_RAW_CURRENT_SEPARATION_ACTIVE
 CURRENT_CONTRACT_CAPSULE_ACTIVE
+CURRENT_SEMANTIC_AUTHORITY_CLASSES_EXPLICIT
+MULTI_PARADIGM_ARENA_ACTIVE_NON_FORMAL_REFERENCE_REPAIRED
 CRYPTO_FIELD_INFORMATION_V0_COMPLETED
 BROAD_PURGED_CALIBRATED_STICKY_INCREMENT_NOT_ESTABLISHED
 EXECUTED_RESIDUAL_ORTHOGONAL_VARIANTS_ARCHIVED
@@ -323,6 +325,7 @@ No status code overrides observed runtime or source facts.
 - RAW and CURRENT remain the only two graph layers.
 - Lifecycle color, evidence line style, and validation assurance are independent.
 - CURRENT never infers authority or lifecycle promotion from RAW presence or test success.
+- Semantic role bindings declare `FORMAL` or `NON_FORMAL`; canonical artifact paths and ACTIVE lifecycle do not grant formal authority.
 - Use `scripts/maintain_crypto_navigation_graph.ps1 build` after source changes that stale RAW.
 - Use `scripts/maintain_crypto_navigation_graph.ps1 maintain` after overlay/profile changes.
 - Use `scripts/maintain_crypto_navigation_graph.ps1 check` before closure; it verifies both RAW and CURRENT input hashes.

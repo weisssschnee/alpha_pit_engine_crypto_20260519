@@ -95,7 +95,7 @@
       "kind": "evaluation",
       "lifecycle": "ACTIVE",
       "paths": [
-        "docs/adr/0003-multi-paradigm-frontier-arena-and-artifact-contracts.md",
+        "docs/adr/0013-explicit-semantic-authority-classes.md",
         "alphafactory_crypto/frontier_v2/arena.py",
         "alphafactory_crypto/frontier_v2/qlib_v097.py",
         "alphafactory_crypto/frontier_v2/deepdow_v023.py",
@@ -103,12 +103,11 @@
       ],
       "critical": true,
       "semantic_role": "development_arena",
-      "active_authority": true,
+      "active_authority": false,
       "authority": {
-        "path": "docs/adr/0003-multi-paradigm-frontier-arena-and-artifact-contracts.md",
+        "path": "alphafactory_crypto/frontier_v2/arena.py",
         "repo_ref": "crypto-frontier-provenance-closure-20260714",
-        "verified_sha": "4726795f61052470d56e2d1475e4f6da9d262943",
-        "sha256": "0D5E4E92285A2339C1917DF46D29B66842C68D5E38E02532186BCB3548FB6317"
+        "verified_sha": "4726795f61052470d56e2d1475e4f6da9d262943"
       },
       "contracts": [
         {
@@ -2459,19 +2458,19 @@
     "profiles/crypto-broad-compositional-epoch1.json"
   ],
   "semantic_authorities": [
-    {"semantic_role": "research_decision_authority", "authoritative_component": "accepted_frontier_closure"},
-    {"semantic_role": "historical_instrument_diagnosis", "authoritative_component": "instrument_semantics_audit"},
-    {"semantic_role": "development_arena", "authoritative_component": "multi_paradigm_arena"},
-    {"semantic_role": "large_experiment_admission", "authoritative_component": "data_adequacy_gate"},
-    {"semantic_role": "train_surface_authority", "authoritative_component": "observed_archive_train_surface"},
-    {"semantic_role": "evaluation_access_boundary", "authoritative_component": "sealed_research_boundaries"},
-    {"semantic_role": "bounded_real_data_lazy_search", "authoritative_component": "real_data_lazy_search_canary"},
-    {"semantic_role": "development_release_authority", "authoritative_component": "approved_existing_development_release"},
-    {"semantic_role": "candidate_admission", "authoritative_component": "real_data_candidate_authorization"},
-    {"semantic_role": "mapped_cost_evaluator", "authoritative_component": "real_data_mapping_cost_evaluator"},
-    {"semantic_role": "primitive_semantic_authority", "authoritative_component": "canonical_primitive_authority"},
-    {"semantic_role": "portfolio_mapping_authority", "authoritative_component": "explicit_portfolio_mapping"},
-    {"semantic_role": "adaptive_feedback_authority", "authoritative_component": "adaptive_strict_feasibility_feedback"},
-    {"semantic_role": "liquidation_source_ingress", "authoritative_component": "liquidation_supplier_ingress"}
+    {"semantic_role": "research_decision_authority", "authoritative_component": "accepted_frontier_closure", "authority_class": "FORMAL"},
+    {"semantic_role": "historical_instrument_diagnosis", "authoritative_component": "instrument_semantics_audit", "authority_class": "FORMAL"},
+    {"semantic_role": "development_arena", "authoritative_component": "multi_paradigm_arena", "authority_class": "NON_FORMAL"},
+    {"semantic_role": "large_experiment_admission", "authoritative_component": "data_adequacy_gate", "authority_class": "FORMAL"},
+    {"semantic_role": "train_surface_authority", "authoritative_component": "observed_archive_train_surface", "authority_class": "FORMAL"},
+    {"semantic_role": "evaluation_access_boundary", "authoritative_component": "sealed_research_boundaries", "authority_class": "FORMAL"},
+    {"semantic_role": "bounded_real_data_lazy_search", "authoritative_component": "real_data_lazy_search_canary", "authority_class": "NON_FORMAL"},
+    {"semantic_role": "development_release_authority", "authoritative_component": "approved_existing_development_release", "authority_class": "FORMAL"},
+    {"semantic_role": "candidate_admission", "authoritative_component": "real_data_candidate_authorization", "authority_class": "NON_FORMAL"},
+    {"semantic_role": "mapped_cost_evaluator", "authoritative_component": "real_data_mapping_cost_evaluator", "authority_class": "NON_FORMAL"},
+    {"semantic_role": "primitive_semantic_authority", "authoritative_component": "canonical_primitive_authority", "authority_class": "FORMAL"},
+    {"semantic_role": "portfolio_mapping_authority", "authoritative_component": "explicit_portfolio_mapping", "authority_class": "FORMAL"},
+    {"semantic_role": "adaptive_feedback_authority", "authoritative_component": "adaptive_strict_feasibility_feedback", "authority_class": "FORMAL"},
+    {"semantic_role": "liquidation_source_ingress", "authoritative_component": "liquidation_supplier_ingress", "authority_class": "FORMAL"}
   ]
 }
