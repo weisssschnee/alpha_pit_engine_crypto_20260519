@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-28T14:15:16.414984+00:00",
+  "generated_at": "2026-07-28T19:26:40.503821+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -2988,10 +2988,10 @@
     {
       "active_authority": false,
       "authority": {
-        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-        "repo_ref": "experiment/crypto-search-engine-v1-4-oi-flow-20260728",
-        "sha256": "D36CEC62DF3C4CB2EC9C7023369A804977340CE49C91859EE009D76B81FCB536",
-        "verified_sha": "018be6caca5c7ad294729c17294295283589ec7d"
+        "path": "alphafactory_crypto/broad_search/replay_v14_binance_target.py",
+        "repo_ref": "replay/crypto-search-engine-v1-4-binance-target-20260729",
+        "sha256": "F43FF3DFB195E28776C6B13696F38025DC5AE456CE7E7DB14F4CD36DF5D18181",
+        "verified_sha": "fe82d94e5530d13e933c0f3db5d2b4869ad34521"
       },
       "authority_bindings": [],
       "claim_badges": [
@@ -3117,7 +3117,16 @@
           "enforced_by": "broad_search.failure_decomposition_v14.check_audit",
           "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_FAILURE_DECOMPOSITION_20260728.md",
           "id": "search_engine_v1_4_failure_decomposition_boundary",
-          "rule": "The existing-ledger-only V1.4 audit consumed zero candidate evaluations and found 666/1,200 gross-positive final increments but only 26 net-positive, with 640 cost sign-kills; it also found that Binance flow used an availability-dependent non-Binance mark target and that full standalone/monthly waterfalls were not persisted, so target/execution and turnover repair must precede adaptive or operator expansion",
+          "rule": "The existing-ledger-only V1.4 audit consumed zero candidate evaluations and found 666/1,200 gross-positive Stage-B increments, only 26 net-positive, 640 cost sign-kills, and venue-dependent non-Binance target mapping; it remains historical evidence and motivates full replay + turnover repair before any adaptive expansion.",
+          "severity": "HARD",
+          "type": "EVIDENCE"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "broad_search.replay_v14_binance_target and broad_search.pair18m.evaluate_pair",
+          "evidence_ref": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/final_decision.json",
+          "id": "search_engine_v1_4_binance_target_exact_replay_boundary",
+          "rule": "Exact-replay of the prior 1,200 V1.4 gate restores source candidates and checkpoints, then evaluates all A, B, AB, and ABC sleeves under a fixed Binance USD-M 1h/4h executable target; results are 661 gross-positive, 86 HAC-LCB-positive, 69 joint persistence, 32 net-positive, 0 matched-positive, and 95.16% gross-positive cost-killed. Research remains HOLD; adaptive and expansion remain unstarted; next action is turnover repair then bounded adaptive diagnostic.",
           "severity": "HARD",
           "type": "EVIDENCE"
         }
@@ -3127,7 +3136,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine capability (V1.4 failure decomposition: target/execution and turnover repair first, research HOLD)",
+      "label": "Search Engine capability (V1.4 Binance target exact replay: gross persists, turnover repair next, research HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3177,7 +3186,12 @@
         "reports/CRYPTO_SEARCH_SURFACE_INTEGRATION_V1_20260728.md",
         "docs/adr/0008-search-engine-v1-post-audit-remediation-and-qualification-suspension.md",
         "docs/adr/0009-aggtrades-system-canary-development-diagnostic.md",
-        "docs/adr/0010-behavior-niched-search-engine-v1-1.md"
+        "docs/adr/0010-behavior-niched-search-engine-v1-1.md",
+        "alphafactory_crypto/broad_search/replay_v14_binance_target.py",
+        "config/crypto_search_engine_v1_4_binance_target_replay.json",
+        "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/run_manifest.json",
+        "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/final_decision.json",
+        "reports/CRYPTO_SEARCH_ENGINE_V1_4_BINANCE_TARGET_REPLAY_20260729.md"
       ],
       "promotion_requirements": [
         "information-adequate new data",
@@ -3189,7 +3203,8 @@
         "fresh policy and archive state with frozen Arena budget",
         "matched canonical typed-random control",
         "formal OOS authorization and evidence",
-        "explicit promotion authorization"
+        "explicit promotion authorization",
+        "bounded adaptive diagnostics after turnover repair"
       ],
       "raw_node_ids": [
         "alphafactory_crypto_broad_search_audit",
@@ -3342,6 +3357,45 @@
         "alphafactory_crypto_broad_search_panel18m_stats_payload",
         "alphafactory_crypto_broad_search_panel18m_stats_update",
         "alphafactory_crypto_broad_search_panel18m_write_eligibility_rows",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore_base_eligible",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore_block_slice",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore_candidate_support",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore_field",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore_field_available",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore_metadata",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore_observed",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore_shape",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore_symbols",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore_target_return",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_binancetargetstore_timestamp_ns",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_build_binance_target_cache",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_build_target_arrays",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_check_replay",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_directory_bundle",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_final_increment",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_finalize_metrics",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_git_sha",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_load_source_candidates",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_main",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_monthly_gross_positive_fraction",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_payload_sha",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_rationale_1",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_rationale_252",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_read_json",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_replay_row",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_report",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_restore_latest_checkpoint",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_run_replay",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_safe_correlation",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_sleeves",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_waterfall_rows",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_worker_evaluate",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_worker_initialize",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_write_checkpoint",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_write_json",
+        "alphafactory_crypto_broad_search_replay_v14_binance_target_write_parquet",
         "alphafactory_crypto_broad_search_runner18m",
         "alphafactory_crypto_broad_search_runner18m_adaptive_surface_qualification",
         "alphafactory_crypto_broad_search_runner18m_build_evidence",
@@ -3987,6 +4041,10 @@
         "reports_crypto_search_engine_v1_3_cross_carrier_audit_20260728_decision_64",
         "reports_crypto_search_engine_v1_3_cross_carrier_audit_20260728_independently_recomputed_results",
         "reports_crypto_search_engine_v1_3_cross_carrier_audit_20260728_scope_and_reuse",
+        "reports_crypto_search_engine_v1_4_binance_target_replay_20260729",
+        "reports_crypto_search_engine_v1_4_binance_target_replay_20260729_bias_audit",
+        "reports_crypto_search_engine_v1_4_binance_target_replay_20260729_crypto_search_engine_v1_4_binance_target_exact_replay",
+        "reports_crypto_search_engine_v1_4_binance_target_replay_20260729_evidence_boundary",
         "reports_crypto_search_engine_v1_4_failure_decomposition_20260728",
         "reports_crypto_search_engine_v1_4_failure_decomposition_20260728_bias_audit",
         "reports_crypto_search_engine_v1_4_failure_decomposition_20260728_blocking_issues",
@@ -4680,14 +4738,16 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-07-28T14:01:30.205012+00:00",
-        "evidence_ref": "reports/CRYPTO_SEARCH_ENGINE_V1_4_FAILURE_DECOMPOSITION_20260728.md",
-        "evidence_sha256": "10BDC80509A68D0CE7D7304061E6EEC3A5D2D5B0F55A5C722E7DEE98BB2F762A",
-        "level": "STATIC_VERIFIED",
-        "notes": [],
-        "profile": "evidence-boundary-change",
-        "result": "PASS",
-        "verified_at_sha": "6b960632792bbf7dc22910316653173fa0740995"
+        "checked_at": "2026-07-28T19:26:40.503821+00:00",
+        "evidence_ref": "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/run_manifest.json",
+        "evidence_sha256": "6458EE3F8272A54F468411610F45CF5D3A3FC361DE6DCA5EDC98F7AC61599E46",
+        "level": "PARTIAL",
+        "notes": [
+          "runtime assurance needs a completed matching trace with all contract bindings"
+        ],
+        "profile": "crypto-development-research",
+        "result": "INSUFFICIENT_EVIDENCE",
+        "verified_at_sha": "9dbb4ce52f5db218683e10c5463e2e6554c7b060"
       },
       "visible_by_default": true
     },
@@ -7515,7 +7575,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "B5A3127616E438ECDDA6FA0F305614BA6E6A0FD64BF00D0F35E7CF78E0D241E2"
+    "sha256": "9E363B11BA8B0938CCCEB27986546FD9C393EBE2FFC3DAE5CDAD015453BE3A85"
   },
   "profile_id": null,
   "profiles": [
@@ -7546,13 +7606,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "7bc2dacb81da625ff6ee32e17aa8090f6d2c86f7",
-    "edge_count": 36934,
-    "node_count": 19505,
+    "built_at_commit": "9dbb4ce52f5db218683e10c5463e2e6554c7b060",
+    "edge_count": 37189,
+    "node_count": 19614,
     "path": ".planning/graphs/graph.json",
-    "sha256": "55F15FA8F08F97EADE33F7C4CC6E456DEB34606299B2FD46331161B80A41B30C"
+    "sha256": "763F0786D45E8FAC625FD098C423DF880070F503AC11B7B52CD3CECA6E66A9B1"
   },
-  "repo_head": "7bc2dacb81da625ff6ee32e17aa8090f6d2c86f7",
+  "repo_head": "9dbb4ce52f5db218683e10c5463e2e6554c7b060",
   "schema_version": 1,
   "semantic_authorities": [
     {

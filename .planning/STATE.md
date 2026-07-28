@@ -1,26 +1,33 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-07-28 Asia/Hong_Kong
+Last updated: 2026-07-29 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ENGINE_V1_4_FAILURE_DECOMPOSITION_COMPLETED_HOLD_TARGET_EXECUTION_TURNOVER_REPAIR`
+`CRYPTO_SEARCH_ENGINE_V1_4_BINANCE_TARGET_EXACT_REPLAY_COMPLETED_GROSS_PERSISTENCE_TURNOVER_REPAIR_NEXT`
+
+The Binance target exact-replay gate completed all `1,200` strict-valid entries from
+the existing V1.4 OI/flow aligned candidate graph under the new fixed execution
+contract. It preserved candidate order, exact identities, and deterministic replay
+across all `4` checkpoints of `300` candidates each (`1200` completed exactly).
+`fe82d94` produced `661` final gross-positive, `86` HAC-LCB-positive, `69`
+jointly persistent, `32` net-positive, and `0` matched-positive rows. Gross
+direction remained correlated with the prior gate (`new mean reward -5.3423`,
+old mean reward `-5.2350`, correlation `0.9594`), but full-step cost kill
+dominated the outcome (`629/661 = 95.15885%` cost sign-killed). The gross
+persistence diagnostic passed; strict paired exact-replay qualification remains
+`HOLD_SPENT_DEVELOPMENT_EXACT_REPLAY`; research remains `HOLD`; adaptive
+search has not started. Next action is turnover repair, then bounded adaptive
+diagnostic only.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new
-candidate evaluations and zero market budget. It found that 666/1,200 Stage-B
-final increments were gross-positive, only 26 were net-positive, and 640 of
-the 666 gross-positive increments were sign-killed after the generic 5 bps
-full-L1 cost. Only three candidates were within one strict-distance unit of
-zero. Persisted hierarchical worst-axis attribution was 261 `AB_MINUS_A`, 174
-`AB_MINUS_B`, and 165 `ABC_MINUS_AB`, but standalone A/B/AB/ABC economics,
-component constraint margins, monthly waterfalls, and market-time-block
-rewards were not persisted and are not reconstructible without reevaluation.
-The target audit also established that Binance aggTrades was labelled against
-the lexicographic first-finite Bybit/Hyperliquid/OKX mark, not a qualified
-Binance or unified tradable execution surface: venue shares were 88.50%,
-7.41%, and 4.09%, and 126/144 assets changed priority venue. Decision:
-`HOLD_ADAPTIVE_TARGET_EXECUTION_AND_TURNOVER_REPAIR_FIRST`; neither adaptive
-V1.4b nor operator-basis expansion is authorized.
+candidate evaluations and zero market budget. It found that `666/1,200` Stage-B
+final increments were gross-positive, only `26` were net-positive, and `640` of
+the `666` gross-positive increments were cost sign-killed after the generic
+5 bps full-L1 cost. The target audit also established that the prior target mapping
+was venue-dependent (Bybit/Hyperliquid/OKX priority mix: 88.50%, 7.41%, and
+4.09%; `126/144` assets changed priority venue), with decision
+`HOLD_ADAPTIVE_TARGET_EXECUTION_AND_TURNOVER_REPAIR_FIRST`.
 
 Search Engine V1.4 built one aligned `71 OI/mark + 44 aggTrades` carrier and
 froze the longest pre-reward continuous eligible block: 7,337 hours from
@@ -194,8 +201,12 @@ SEARCH_ENGINE_V1_4_SEMANTIC_GATE_HOLD
 SEARCH_ENGINE_V1_4_STAGE_C_NOT_RUN
 SEARCH_ENGINE_V1_4_FUTURE_ARMS_NONE
 SEARCH_ENGINE_V1_4_FAILURE_DECOMPOSITION_PASS
-SEARCH_ENGINE_V1_4_FULL_WATERFALL_NOT_PERSISTED
-SEARCH_ENGINE_V1_4_TARGET_EXECUTION_CONTRACT_UNQUALIFIED
+SEARCH_ENGINE_V1_4_BINANCE_TARGET_EXACT_REPLAY_PASS
+SEARCH_ENGINE_V1_4_FULL_WATERFALL_PERSISTED
+SEARCH_ENGINE_V1_4_TARGET_EXECUTION_CONTRACT_REPAIRED_FOR_DIAGNOSTIC
+SEARCH_ENGINE_V1_4_GROSS_PERSISTENCE_DIAGNOSTIC_PASS
+SEARCH_ENGINE_V1_4_TURNOVER_REPAIR_NEXT
+SEARCH_ENGINE_V1_4_ADAPTIVE_SEARCH_NOT_STARTED
 SEARCH_ENGINE_V1_4_COST_SIGN_KILL_DOMINANT
 SEARCH_ENGINE_V1_4B_NOT_AUTHORIZED
 SEARCH_ENGINE_V1_5_OPERATOR_EXPANSION_NOT_AUTHORIZED
@@ -224,6 +235,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 - Search Engine V1.2 Balanced Collision Arena: producer source `395a972a99c869f1c6acc24c6a167939b9f0857e`; artifact bundle SHA256 `F142EB44FE91C349A54F0D7C78C704A491658B7FBC0B30402E0B08E5B8459296`; frozen contract SHA256 `620B40B5AEE6634BB719E3AA0FA95B778939CB66264869DC7E851A8949EB1C83`; data-cache identity SHA256 `127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04`; 2,000 strict candidates; 3,598 attempts; 2/2 exact-restored checkpoints; 1,916 behavior families; 250 balanced rotating micro-batches; engineering integrity `PASS`; research `HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT`; Evolution V2.2 increment rejected; future qualified arms `[]`; sealed reads `0`.
 - Search Engine V1.4 OI/flow conditional gate: producer source `018be6caca5c7ad294729c17294295283589ec7d`; artifact bundle SHA256 `3AE3E801A58C1C3F9AEABFB80F7E748AF933C026BA2A99EB1E6EDB429F24BF7E`; aligned-cache identity SHA256 `E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA`; `71 OI/mark + 44 aggTrades`; 1,264 strict candidates from 1,958 attempts; 5/5 exact-restored checkpoints; 1,264 behavior families; Stage B `HOLD_ADAPTIVE_GATE`; Stage C not run; future qualified arms `[]`; sealed reads `0`.
 - Search Engine V1.4 existing-ledger failure decomposition: producer source `16fc1feabc79f711d4b7b728eac2c2b9d00f91e5`; input bundle SHA256 `0DE62CB1D38F10A0477F6E8D98B9A0EB2A863A7B8CD5531F03A909592203EFEB`; artifact bundle SHA256 `D50D37ECB025E09B5BDEDADDC3ED8F6D60CE5F6CAB7A770203F5FAFD13A38E96`; five diagnostic tables; zero candidate evaluations, market budget, sealed reads, OOS, or promotion; adaptive V1.4b and operator expansion not authorized.
+- Search Engine V1.4 Binance target exact replay: producer source `fe82d94e5530d13e933c0f3db5d2b4869ad34521`; artifact commit `9dbb4ce52f5db218683e10c5463e2e6554c7b060`; aligned cache identity `E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA`; target identity `27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0`; frozen contract `ADA30AE30B55B449F7FBE2C6B8E28E41757F4A8CEA87B5513D5277DA7FE2BF85`; run manifest SHA256 `6458EE3F8272A54F468411610F45CF5D3A3FC361DE6DCA5EDC98F7AC61599E46`; final decision SHA256 `C369FF6B1D7C9FB7F4CC39556B58A66F3A4EA82766354798C927162F639FAA56`; 4 checkpoints; exact replay ledger and full/ monthly waterfalls persisted; gross persistence diagnostic passed; research qualification `HOLD_SPENT_DEVELOPMENT_EXACT_REPLAY`; next action turnover repair then bounded adaptive.
 - Search Surface Integration V1: producer source `caa4500485995119a908790508030e305add6841`; source-binding SHA256 `D1AF43DAB909256A8B9EF171E70548B58DC3CC524852194071263A636AA87C7D`; run-manifest SHA256 `5959D31E6218E0A12EDE2730D68F97D012B7AC9164AC06EA8BD31850A9BE7BF2`; carrier-manifest SHA256 `F4E1A3F81B7C7F80097FE42B52DEBE5E086C884D7123FB854A360F3868E691D8`; frozen-contract identity SHA256 `28368DC76F3C3D150A8B1EAD8C9D13011CB6B754AAFFF67BF1D7DFBD42A6B176`; aggTrades full-44 carrier identity SHA256 `0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6`; 260 declared engineering fields, 235 runtime-active, 25 explicit source-unavailable HOLD; checker `PASS`; research and future Arena `HOLD`; market pair evaluations/reward/sealed reads `0`.
 - Unified Field Management V1: producer source `43739edd18c264bfa9b4ce11a3953c95b6ca58db`; config SHA256 `C6D0A1A9C1E24EB7FC0C2A80A400D4C8AA4A677A4E4979645920F7D7AEF4FBE8`; committed run-manifest SHA256 `A2DDFC630F9FF48F5804AAB816A92AFB62E95A75550669D6DD8BC14705791478`; 5,509 canonical management records, 5,211 existing lazy derived views, 235 independent carrier bindings, four provenance-only exclusions, zero authority conflicts; compiled view only, not field authority; market search/reward/sealed reads `0`.
 - Unified Field Management V1 closure repair: production source `f21ed7d1375904f62cb0cc03abb350ea56f911cd`; artifact commit `45c9936302418d2dd9e4b7ec7dd4e8e0790e009b`; production bundle SHA256 `BD72E2C8934B00BDCE32ADB720F322DC88F95705DFF7A9E0E64179957AD32E3B`; committed run-manifest SHA256 `F44A54C9F09AACB0FEB5E8E293041BBDE8E101F95CD1C7B3651E095E0A121FEC`; 5,638 reachability rows; one nonfatal scoped PIT-authority difference; fatal authority conflicts `0`; no market search or reward read.
