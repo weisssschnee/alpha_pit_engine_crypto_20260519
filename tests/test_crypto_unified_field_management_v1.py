@@ -54,6 +54,8 @@ def test_aliases_resolve_to_one_canonical_field(
         "AGGTRADES_TOP200_DELIVERED",
         "CORE3_MICROSTRUCTURE_PILOT",
     } <= set(duplicate["authority_scope"])
+    assert "EXACT_EQUIVALENT" not in set(aliases["alias_type"])
+    assert "SAME_CANONICAL_IDENTITY" in set(duplicate["alias_type"])
 
 
 def test_different_venue_or_unit_does_not_collapse(
@@ -155,6 +157,62 @@ def test_existing_search_fields_preserve_contract_identity(
     assert not carrier.duplicated(["carrier_id", "field_id"]).any()
 
 
+def test_catalog_joins_existing_authority_semantics(
+    tables: dict[str, pd.DataFrame],
+) -> None:
+    catalog = tables["unified_field_catalog"]
+    required = {
+        "value_type",
+        "unit",
+        "observable_lag_hours",
+        "pit_authority",
+        "approval_status",
+        "lineage_status",
+        "grain",
+        "venue",
+        "statistic",
+        "deprecation_status",
+        "materialization_status",
+        "ontology_semantic_type",
+    }
+    assert required <= set(catalog.columns)
+    assert all(catalog[column].astype(str).str.len().gt(0).all() for column in required)
+    active = catalog.loc[catalog["field_id"] == "open_interest_value_last"].iloc[0]
+    assert active["value_type"]
+    assert active["unit"]
+    assert active["pit_authority"]
+    assert active["materialization_status"] == "CURRENT_RUNTIME_MATERIALIZED"
+
+
+def test_reachability_records_first_breakpoint_for_every_field(
+    tables: dict[str, pd.DataFrame],
+) -> None:
+    matrix = tables["field_reachability_matrix"]
+    assert matrix["first_breakpoint"].str.len().gt(0).all()
+    assert set(tables["unified_field_catalog"]["canonical_field_id"]) <= set(
+        matrix["canonical_field_id"]
+    )
+    reasons = (
+        matrix.groupby("carrier_id")["first_breakpoint"].apply(set).to_dict()
+    )
+    assert reasons["OI_MARK_RANKS51_200_DELIVERED"] >= {
+        "SOURCE_UNAVAILABLE_ZERO_FINITE_SUPPORT_IN_DELIVERED_ROOT",
+        "RESEARCH_ADMISSION_NOT_GRANTED",
+    }
+    assert reasons["OI_MARK_TOP50_RAW"] == {
+        "RAW_TOP50_COMPACT_MATERIALIZER_NOT_VERIFIED"
+    }
+    assert reasons["LIQUIDATION_DELIVERED_QUARANTINED"] == {
+        "SOURCE_OR_DATA_ADEQUACY_QUARANTINE"
+    }
+    assert reasons["CORE3_MICROSTRUCTURE_PILOT"] == {
+        "RESEARCH_ADMISSION_NOT_GRANTED"
+    }
+    assert reasons["AGGTRADES_TOP200_DELIVERED"] == {
+        "RESEARCH_ADMISSION_NOT_GRANTED"
+    }
+
+
 def test_existing_candidate_spec_replay_is_unchanged() -> None:
     payload = {
         "candidate_id": "TEST-CANDIDATE",
@@ -193,3 +251,11 @@ def test_no_second_ontology_or_approval_authority_is_created() -> None:
     assert "to_csv" not in source
     assert "ontology.csv" not in source
     assert "approval_registry" not in source
+    for dead_name in (
+        "CarrierSpec",
+        "BaseFieldSpec",
+        "DerivedViewSpec",
+        "SearchRoleBinding",
+        "ProvenanceOnlySpec",
+    ):
+        assert dead_name not in source
