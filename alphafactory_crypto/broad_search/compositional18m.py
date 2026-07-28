@@ -663,6 +663,288 @@ def candidate_from_genes(
     )
 
 
+CONDITIONAL_SEMANTIC_TUPLES = (
+    "OI_LEVEL_X_AGGRESSOR_FLOW_GIVEN_BASIS",
+    "PRICE_RESPONSE_X_LARGE_TRADE_GIVEN_OI_STATE",
+    "CROSS_VENUE_OI_X_FLOW_IMBALANCE_GIVEN_FUNDING",
+    "OI_NOTIONAL_X_PRICE_RESPONSE_GIVEN_TRADE_INTENSITY",
+)
+
+
+def _conditional_axis(
+    field_id: str,
+    *,
+    window: int,
+    normalizer: str,
+) -> Expression:
+    return _normalized(field_id, window, mode=normalizer)
+
+
+def _conditional_difference(left_field: str, right_field: str) -> Expression:
+    return Expression(
+        "NormalizedDifference",
+        (Expression.raw(left_field), Expression.raw(right_field)),
+    )
+
+
+def _conditional_field_kind(field_id: str) -> str:
+    value = str(field_id)
+    suffix = value.split("__", 1)[-1]
+    if "__open_interest_value_" in value:
+        return "oi_notional"
+    if "__open_interest_" in value and not suffix.endswith("_n"):
+        return "oi_level"
+    if "__funding_rate_" in value:
+        return "funding"
+    if "__mark_price_" in value:
+        return "mark"
+    if "__index_price_" in value:
+        return "index"
+    if value in {"price_range_bps", "close_to_open_bps"}:
+        return "price_response"
+    if value.startswith("large_") or value == "max_trade_notional":
+        return "large_trade"
+    if value in {
+        "signed_aggressor_quantity",
+        "signed_aggressor_notional",
+        "volume_imbalance",
+        "buy_sell_notional_ratio",
+    }:
+        return "flow_imbalance"
+    if value in {
+        "agg_trade_count",
+        "underlying_trade_count",
+        "buy_agg_trade_count",
+        "sell_agg_trade_count",
+        "buy_underlying_trade_count",
+        "sell_underlying_trade_count",
+    } or value.startswith("trade_count_"):
+        return "trade_intensity"
+    return "other"
+
+
+def _same_venue_statistic(left_field: str, right_field: str) -> bool:
+    left_venue, left_suffix = str(left_field).split("__", 1)
+    right_venue, right_suffix = str(right_field).split("__", 1)
+    left_stat = left_suffix.rsplit("_", 1)[-1]
+    right_stat = right_suffix.rsplit("_", 1)[-1]
+    return left_venue == right_venue and left_stat == right_stat
+
+
+def _same_oi_statistic_different_venue(
+    left_field: str, right_field: str
+) -> bool:
+    left_venue, left_suffix = str(left_field).split("__", 1)
+    right_venue, right_suffix = str(right_field).split("__", 1)
+    return left_venue != right_venue and left_suffix == right_suffix
+
+
+def conditional_candidate_from_genes(
+    registry: TypedExpressionRegistry,
+    *,
+    genes: Mapping[str, Any],
+) -> CandidateSpec:
+    """Compile one three-axis conditional mechanism through the existing AST.
+
+    The primary is ``StateModulation(Interaction(A, B), C)``.  Its stored
+    control is the support-matched AB payload, so the existing pair evaluator
+    can measure the conditional increment while deriving support-matched A and
+    B controls for the lower interaction layer.
+    """
+
+    required = {
+        "semantic_tuple",
+        "left_field",
+        "right_field",
+        "condition_field",
+        "auxiliary_field",
+        "left_window",
+        "right_window",
+        "condition_window",
+        "left_normalizer",
+        "right_normalizer",
+        "condition_normalizer",
+        "horizon_hours",
+    }
+    if set(genes) != required:
+        raise ValueError(
+            "conditional generation genes must be exact: "
+            + ",".join(sorted(required))
+        )
+    genome = {
+        "semantic_tuple": str(genes["semantic_tuple"]),
+        "left_field": str(genes["left_field"]),
+        "right_field": str(genes["right_field"]),
+        "condition_field": str(genes["condition_field"]),
+        "auxiliary_field": str(genes["auxiliary_field"]),
+        "left_window": int(genes["left_window"]),
+        "right_window": int(genes["right_window"]),
+        "condition_window": int(genes["condition_window"]),
+        "left_normalizer": str(genes["left_normalizer"]),
+        "right_normalizer": str(genes["right_normalizer"]),
+        "condition_normalizer": str(genes["condition_normalizer"]),
+        "horizon_hours": int(genes["horizon_hours"]),
+    }
+    semantic_tuple = genome["semantic_tuple"]
+    if semantic_tuple not in CONDITIONAL_SEMANTIC_TUPLES:
+        raise ValueError("unknown conditional semantic tuple")
+    for name in ("left_window", "right_window", "condition_window"):
+        if genome[name] not in WINDOWS:
+            raise ValueError("conditional window is outside the frozen grammar")
+    for name in (
+        "left_normalizer",
+        "right_normalizer",
+        "condition_normalizer",
+    ):
+        if genome[name] not in NORMALIZERS:
+            raise ValueError("conditional normalizer is outside the frozen grammar")
+    if genome["horizon_hours"] not in HORIZONS:
+        raise ValueError("conditional horizon is outside the frozen grammar")
+    fields = registry.fields
+    raw_gene_fields = [
+        genome["left_field"],
+        genome["right_field"],
+        genome["condition_field"],
+    ]
+    if genome["auxiliary_field"]:
+        raw_gene_fields.append(genome["auxiliary_field"])
+    if any(field_id not in fields for field_id in raw_gene_fields):
+        raise ValueError("conditional field is outside the typed registry")
+
+    left_kind = _conditional_field_kind(genome["left_field"])
+    right_kind = _conditional_field_kind(genome["right_field"])
+    condition_kind = _conditional_field_kind(genome["condition_field"])
+    auxiliary_kind = (
+        _conditional_field_kind(genome["auxiliary_field"])
+        if genome["auxiliary_field"]
+        else ""
+    )
+    if semantic_tuple == "OI_LEVEL_X_AGGRESSOR_FLOW_GIVEN_BASIS":
+        if not (
+            left_kind == "oi_level"
+            and right_kind == "flow_imbalance"
+            and condition_kind == "mark"
+            and auxiliary_kind == "index"
+            and _same_venue_statistic(
+                genome["condition_field"], genome["auxiliary_field"]
+            )
+        ):
+            raise ValueError("OI/flow/basis tuple violates its typed roles")
+        left = _conditional_axis(
+            genome["left_field"],
+            window=genome["left_window"],
+            normalizer=genome["left_normalizer"],
+        )
+        right = _conditional_axis(
+            genome["right_field"],
+            window=genome["right_window"],
+            normalizer=genome["right_normalizer"],
+        )
+        condition = _conditional_difference(
+            genome["condition_field"], genome["auxiliary_field"]
+        )
+    elif semantic_tuple == "PRICE_RESPONSE_X_LARGE_TRADE_GIVEN_OI_STATE":
+        if not (
+            left_kind == "price_response"
+            and right_kind == "large_trade"
+            and condition_kind == "oi_level"
+            and not genome["auxiliary_field"]
+        ):
+            raise ValueError("price/large-trade/OI tuple violates its typed roles")
+        left = _conditional_axis(
+            genome["left_field"],
+            window=genome["left_window"],
+            normalizer=genome["left_normalizer"],
+        )
+        right = _conditional_axis(
+            genome["right_field"],
+            window=genome["right_window"],
+            normalizer=genome["right_normalizer"],
+        )
+        condition = _conditional_axis(
+            genome["condition_field"],
+            window=genome["condition_window"],
+            normalizer=genome["condition_normalizer"],
+        )
+    elif semantic_tuple == "CROSS_VENUE_OI_X_FLOW_IMBALANCE_GIVEN_FUNDING":
+        if not (
+            left_kind == "oi_level"
+            and auxiliary_kind == "oi_level"
+            and _same_oi_statistic_different_venue(
+                genome["left_field"], genome["auxiliary_field"]
+            )
+            and right_kind == "flow_imbalance"
+            and condition_kind == "funding"
+        ):
+            raise ValueError("cross-venue OI/flow/funding tuple violates its typed roles")
+        left = _conditional_difference(
+            genome["left_field"], genome["auxiliary_field"]
+        )
+        right = _conditional_axis(
+            genome["right_field"],
+            window=genome["right_window"],
+            normalizer=genome["right_normalizer"],
+        )
+        condition = _conditional_axis(
+            genome["condition_field"],
+            window=genome["condition_window"],
+            normalizer=genome["condition_normalizer"],
+        )
+    else:
+        if not (
+            left_kind == "oi_notional"
+            and right_kind == "price_response"
+            and condition_kind == "trade_intensity"
+            and not genome["auxiliary_field"]
+        ):
+            raise ValueError("OI-notional/price/intensity tuple violates its typed roles")
+        left = _conditional_axis(
+            genome["left_field"],
+            window=genome["left_window"],
+            normalizer=genome["left_normalizer"],
+        )
+        right = _conditional_axis(
+            genome["right_field"],
+            window=genome["right_window"],
+            normalizer=genome["right_normalizer"],
+        )
+        condition = _conditional_axis(
+            genome["condition_field"],
+            window=genome["condition_window"],
+            normalizer=genome["condition_normalizer"],
+        )
+
+    interaction = Expression("RatioInteraction", (left, right))
+    expression = Expression("StateModulation", (interaction, condition))
+    control = Expression("SupportMatchedPayload", (interaction, condition))
+    assurance = registry.validate(expression)
+    control_assurance = registry.validate(control)
+    if assurance.raw_fields != control_assurance.raw_fields:
+        raise AssertionError("conditional control changed the raw-input contract")
+    payload = {
+        "skeleton_id": f"conditional::{semantic_tuple.lower()}",
+        "expression": expression.canonical_dict(),
+        "control": control.canonical_dict(),
+        "horizon_hours": genome["horizon_hours"],
+        "mapping_id": CROSS_SECTIONAL_ZERO_NET,
+    }
+    return CandidateSpec(
+        _payload_sha(payload),
+        payload["skeleton_id"],
+        f"CONDITIONAL_{semantic_tuple}",
+        expression,
+        control,
+        genome["horizon_hours"],
+        CROSS_SECTIONAL_ZERO_NET,
+        assurance.raw_fields,
+        tuple(infer_family(field_id) for field_id in assurance.raw_fields),
+        assurance.rolling_windows,
+        assurance.depth,
+        operator_path(expression),
+        genome,
+    )
+
+
 def _sample_generation_genes(
     skeleton: Skeleton,
     *,
@@ -1246,10 +1528,12 @@ def skeleton_payload() -> dict[str, Any]:
 
 __all__ = [
     "CandidateSpec",
+    "CONDITIONAL_SEMANTIC_TUPLES",
     "HORIZONS",
     "MECHANISM_FAMILIES",
     "Skeleton",
     "audit_numeric_expressivity",
+    "conditional_candidate_from_genes",
     "expression_from_dict",
     "field_role_coverage",
     "generate_candidate",

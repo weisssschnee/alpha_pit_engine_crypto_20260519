@@ -30,7 +30,9 @@ import psutil
 
 from alphafactory_crypto.data_admission_v1 import (
     AGGTRADES_SYSTEM_CANARY_FIELDS,
+    AGGTRADES_SEARCH_FIELDS,
     build_aggtrades_system_canary_cache,
+    build_aggtrades_search_surface_cache,
     contracts_from_aggtrades_search_fields,
 )
 from alphafactory_crypto.instrument_canary.release import sha256_file
@@ -43,12 +45,14 @@ from .compositional18m import (
     NORMALIZERS,
     WINDOWS,
     CandidateSpec,
+    CONDITIONAL_SEMANTIC_TUPLES,
     Skeleton,
     _effective_generation_gene_names,
     _legal_normalizers,
     _legal_windows,
     _mutable_gene_domains,
     candidate_from_genes,
+    conditional_candidate_from_genes,
     field_role_coverage,
     field_role_surface,
     generate_candidate,
@@ -128,6 +132,14 @@ V13_CHECKPOINT_ALLOCATION = {
     "hierarchical_typed_cem_v2": 400,
     "typed_evolution_v2": 400,
 }
+V14_CONFIG = "config/crypto_search_engine_v1_4_oi_flow.json"
+V14_EPOCH_ID = "CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_CONDITIONAL_20260728"
+V14_DEFAULT_RUNTIME_DATE = "20260728"
+V14_STAGE_A_COUNT = 64
+V14_STAGE_B_COUNT = 1_200
+V14_STAGE_B_CHECKPOINT_SIZE = 300
+V14_STAGE_C_COUNT = 1_600
+V14_STAGE_C_CHECKPOINT_SIZE = 400
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
 CONTINUATION_RUNTIME = "runtime/crypto_18m_current_field_four_policy_continuation_20260719"
 SEEDS = (20260716, 20260717, 20260718, 20260719)
@@ -8327,6 +8339,1372 @@ def check_v12(
     }
 
 
+def _load_v14_config(repo_root: Path) -> tuple[dict[str, Any], Path]:
+    path = repo_root / V14_CONFIG
+    config = _read_json(path)
+    if config.get("authorization") != (
+        "ONE_FRESH_STATE_OI_FLOW_CONDITIONAL_MECHANISM_GATE"
+    ):
+        raise PermissionError("Search Engine V1.4 authorization changed")
+    if any(bool(value) for value in config.get("fresh_state", {}).values()):
+        raise PermissionError("Search Engine V1.4 imported prior state")
+    forbidden = (
+        "alpha_claim",
+        "oos",
+        "challenge",
+        "recent",
+        "may_stress",
+        "forward",
+        "promotion",
+        "latent_priority",
+        "relational_training",
+        "cross_sprint_adaptive_memory",
+    )
+    if any(bool(config["boundaries"].get(key)) for key in forbidden):
+        raise PermissionError("Search Engine V1.4 research boundary opened")
+    if tuple(config["semantic_tuples"]) != CONDITIONAL_SEMANTIC_TUPLES:
+        raise ValueError("Search Engine V1.4 semantic tuples changed")
+    if int(config["stage_a"]["constructibility_canary_strict_count"]) != (
+        V14_STAGE_A_COUNT
+    ):
+        raise ValueError("Search Engine V1.4 Stage A budget changed")
+    if int(config["stage_b"]["typed_random_strict_count"]) != V14_STAGE_B_COUNT:
+        raise ValueError("Search Engine V1.4 Stage B budget changed")
+    if int(config["stage_c"]["strict_count"]) != V14_STAGE_C_COUNT:
+        raise ValueError("Search Engine V1.4 Stage C budget changed")
+    return config, path
+
+
+def _v14_carrier_contracts(
+    repo_root: Path, config: Mapping[str, Any]
+) -> tuple[tuple[FieldContract, ...], tuple[FieldContract, ...], Path, Path]:
+    manifest_path = repo_root / str(config["source_carrier_manifest"])
+    manifest = _read_json(manifest_path)
+    oi_id = str(config["source_carriers"]["oi_mark"])
+    agg_id = str(config["source_carriers"]["aggtrades"])
+    oi_contracts = _contracts_from_payload(
+        manifest["carriers"][oi_id]["contracts"]
+    )
+    agg_contracts = _contracts_from_payload(
+        manifest["carriers"][agg_id]["contracts"]
+    )
+    if len(oi_contracts) != 71 or len(agg_contracts) != 44:
+        raise ValueError("V1.4 source carrier field counts changed")
+    if set(item.field_id for item in oi_contracts) & set(
+        item.field_id for item in agg_contracts
+    ):
+        raise ValueError("V1.4 source carrier field identities overlap")
+    oi_cache = repo_root / str(manifest["carriers"][oi_id]["cache_root"])
+    output_cache = repo_root / str(config["aligned_carrier"]["cache_root"])
+    return oi_contracts, agg_contracts, oi_cache, output_cache
+
+
+def build_v14_aligned_carrier(
+    repo_root: Path, *, source_sha: str
+) -> dict[str, Any]:
+    config, config_path = _load_v14_config(repo_root)
+    oi_contracts, agg_contracts, oi_cache, output_cache = (
+        _v14_carrier_contracts(repo_root, config)
+    )
+    aligned = config["aligned_carrier"]
+    metadata = build_aggtrades_search_surface_cache(
+        source_cache_root=oi_cache,
+        top100_tar=Path(str(config["inputs"]["aggtrades_top100_tar"])),
+        ranks101_200_tar=Path(
+            str(config["inputs"]["aggtrades_ranks101_200_tar"])
+        ),
+        output_cache_root=output_cache,
+        broad_field_ids=[item.field_id for item in oi_contracts],
+        start=str(aligned["start"]),
+        end_exclusive=str(aligned["end_exclusive"]),
+        producer_source_sha=source_sha,
+        verify_tar_sha256=bool(aligned["verify_full_tar_sha256"]),
+    )
+    contracts = tuple((*oi_contracts, *agg_contracts))
+    if len(contracts) != int(aligned["field_count"]):
+        raise ValueError("V1.4 aligned contract field count changed")
+    runtime_root = (
+        repo_root
+        / f"runtime/crypto_search_engine_v1_4_oi_flow_{V14_DEFAULT_RUNTIME_DATE}"
+    )
+    runtime_root.mkdir(parents=True, exist_ok=True)
+    contract_rows = _contracts_payload(contracts)
+    carrier_manifest = {
+        "schema_version": 1,
+        "source_sha": source_sha,
+        "config_sha256": sha256_file(config_path),
+        "carrier_id": "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+        "cache_root": output_cache.relative_to(repo_root).as_posix(),
+        "cache_identity_sha256": metadata["identity_sha256"],
+        "directory_bundle": _directory_bundle(output_cache),
+        "contracts": contract_rows,
+        "contracts_sha256": _payload_sha(contract_rows),
+        "field_origins": {
+            "OI_MARK_RANKS51_200_DELIVERED": [
+                item.field_id for item in oi_contracts
+            ],
+            "AGGTRADES_TOP200_DELIVERED": [
+                item.field_id for item in agg_contracts
+            ],
+        },
+    }
+    _write_json(runtime_root / "aligned_carrier_manifest.json", carrier_manifest)
+    return carrier_manifest
+
+
+def _v14_domains(
+    contracts: Sequence[FieldContract],
+) -> dict[str, dict[str, tuple[Any, ...]]]:
+    fields = tuple(item.field_id for item in contracts)
+
+    def values(predicate: Callable[[str], bool]) -> tuple[str, ...]:
+        return tuple(sorted(field_id for field_id in fields if predicate(field_id)))
+
+    oi_level = values(
+        lambda value: "__open_interest_" in value
+        and "__open_interest_value_" not in value
+        and not value.endswith("__oi_n")
+    )
+    oi_notional = values(lambda value: "__open_interest_value_" in value)
+    funding = values(lambda value: "__funding_rate_" in value)
+    mark = values(lambda value: "__mark_price_" in value)
+    index = values(lambda value: "__index_price_" in value)
+    flow = values(
+        lambda value: value
+        in {
+            "signed_aggressor_quantity",
+            "signed_aggressor_notional",
+            "volume_imbalance",
+            "buy_sell_notional_ratio",
+        }
+    )
+    price_response = values(
+        lambda value: value in {"price_range_bps", "close_to_open_bps"}
+    )
+    large_trade = values(
+        lambda value: value.startswith("large_")
+        or value == "max_trade_notional"
+    )
+    intensity = values(
+        lambda value: value
+        in {
+            "agg_trade_count",
+            "underlying_trade_count",
+            "buy_agg_trade_count",
+            "sell_agg_trade_count",
+            "buy_underlying_trade_count",
+            "sell_underlying_trade_count",
+        }
+        or value.startswith("trade_count_")
+    )
+    basis_pairs = tuple(
+        sorted(
+            (left, right)
+            for left in mark
+            for right in index
+            if left.split("__", 1)[0] == right.split("__", 1)[0]
+            and left.rsplit("_", 1)[-1] == right.rsplit("_", 1)[-1]
+        )
+    )
+    cross_oi_pairs = tuple(
+        sorted(
+            (left, right)
+            for left in oi_level
+            for right in oi_level
+            if left < right
+            and left.split("__", 1)[0] != right.split("__", 1)[0]
+            and left.split("__", 1)[1] == right.split("__", 1)[1]
+        )
+    )
+    domains = {
+        CONDITIONAL_SEMANTIC_TUPLES[0]: {
+            "left": oi_level,
+            "right": flow,
+            "condition_bundle": basis_pairs,
+        },
+        CONDITIONAL_SEMANTIC_TUPLES[1]: {
+            "left": price_response,
+            "right": large_trade,
+            "condition": oi_level,
+        },
+        CONDITIONAL_SEMANTIC_TUPLES[2]: {
+            "left_bundle": cross_oi_pairs,
+            "right": flow,
+            "condition": funding,
+        },
+        CONDITIONAL_SEMANTIC_TUPLES[3]: {
+            "left": oi_notional,
+            "right": price_response,
+            "condition": intensity,
+        },
+    }
+    if any(
+        not all(values for values in domain.values())
+        for domain in domains.values()
+    ):
+        raise ValueError("V1.4 conditional typed domain is empty")
+    return domains
+
+
+def _v14_sample_conditional(
+    *,
+    registry: TypedExpressionRegistry,
+    domains: Mapping[str, Mapping[str, Sequence[Any]]],
+    semantic_tuple: str,
+    rng: random.Random,
+) -> CandidateSpec:
+    domain = domains[semantic_tuple]
+    auxiliary = ""
+    if "left_bundle" in domain:
+        left, auxiliary = rng.choice(tuple(domain["left_bundle"]))
+    else:
+        left = rng.choice(tuple(domain["left"]))
+    right = rng.choice(tuple(domain["right"]))
+    if "condition_bundle" in domain:
+        condition, auxiliary = rng.choice(tuple(domain["condition_bundle"]))
+    else:
+        condition = rng.choice(tuple(domain["condition"]))
+    genes = {
+        "semantic_tuple": semantic_tuple,
+        "left_field": left,
+        "right_field": right,
+        "condition_field": condition,
+        "auxiliary_field": auxiliary,
+        "left_window": rng.choice(WINDOWS),
+        "right_window": rng.choice(WINDOWS),
+        "condition_window": rng.choice(WINDOWS),
+        "left_normalizer": rng.choice(NORMALIZERS),
+        "right_normalizer": rng.choice(NORMALIZERS),
+        "condition_normalizer": rng.choice(NORMALIZERS),
+        "horizon_hours": rng.choice(HORIZONS),
+    }
+    return conditional_candidate_from_genes(registry, genes=genes)
+
+
+def _v14_replay_verified(
+    registry: TypedExpressionRegistry, candidate: CandidateSpec
+) -> bool:
+    try:
+        if candidate.mechanism_family.startswith("CONDITIONAL_"):
+            replay = conditional_candidate_from_genes(
+                registry, genes=candidate.generation_genes
+            )
+        else:
+            replay = candidate_from_genes(
+                registry,
+                skeleton=_skeleton_by_id(candidate.skeleton_id),
+                genes=candidate.generation_genes,
+                roles=field_role_surface(
+                    tuple(registry.fields.values())
+                )["roles"],
+            )
+        return bool(
+            replay.candidate_id == candidate.candidate_id
+            and replay.expression.expression_id
+            == candidate.expression.expression_id
+            and replay.control.expression_id == candidate.control.expression_id
+        )
+    except (KeyError, TypeError, ValueError):
+        return False
+
+
+def qualify_v14_aligned_carrier(
+    repo_root: Path, *, source_sha: str
+) -> dict[str, Any]:
+    config, _ = _load_v14_config(repo_root)
+    runtime_root = (
+        repo_root
+        / f"runtime/crypto_search_engine_v1_4_oi_flow_{V14_DEFAULT_RUNTIME_DATE}"
+    )
+    manifest_path = runtime_root / "aligned_carrier_manifest.json"
+    if not manifest_path.is_file():
+        build_v14_aligned_carrier(repo_root, source_sha=source_sha)
+    manifest = _read_json(manifest_path)
+    if manifest.get("source_sha") != source_sha:
+        raise ValueError("V1.4 aligned carrier producer SHA changed")
+    cache_root = repo_root / str(manifest["cache_root"])
+    store = RawPanelStore.open(cache_root)
+    contracts = _contracts_from_payload(manifest["contracts"])
+    registry = TypedExpressionRegistry(contracts)
+    oi_fields = set(manifest["field_origins"][
+        "OI_MARK_RANKS51_200_DELIVERED"
+    ])
+    agg_fields = set(
+        manifest["field_origins"]["AGGTRADES_TOP200_DELIVERED"]
+    )
+    field_finite = {
+        item.field_id: int(np.isfinite(store.field(item.field_id)).sum())
+        for item in contracts
+    }
+    base = np.asarray(store.base_eligible(), dtype=bool)
+    observed = np.asarray(store.observed(), dtype=bool)
+    target_support = {
+        str(horizon): int(
+            np.isfinite(store.target_return(horizon))[base].sum()
+        )
+        for horizon in HORIZONS
+    }
+    timestamp_ns = np.asarray(store.timestamp_ns, dtype=np.int64)
+    hourly_contiguous = bool(
+        len(timestamp_ns) > 1
+        and np.diff(timestamp_ns).min()
+        == np.diff(timestamp_ns).max()
+        == 3_600_000_000_000
+    )
+    active_assets = base.sum(axis=0)
+    domains = _v14_domains(contracts)
+    gates = {
+        "source_sha_bound": manifest.get("source_sha") == source_sha,
+        "field_count_115": len(contracts) == 115,
+        "oi_mark_count_71": len(oi_fields) == 71,
+        "aggtrades_count_44": len(agg_fields) == 44,
+        "all_fields_have_finite_support": all(
+            value > 0 for value in field_finite.values()
+        ),
+        "hourly_target_window_contiguous": hourly_contiguous,
+        "real_overlapping_assets": int((base.any(axis=1)).sum()) >= 3,
+        "dynamic_eligible_intersection": bool(
+            np.all(~base | observed)
+            and np.any(active_assets >= int(
+                config["aligned_carrier"]["minimum_assets_per_timestamp"]
+            ))
+        ),
+        "no_fill": config["aligned_carrier"]["missing_value_fill"] is None,
+        "pit_lag": all(item.observable_lag_hours >= 1 for item in contracts),
+        "target_support": all(value > 0 for value in target_support.values()),
+        "target_formula_unchanged": (
+            store.metadata.get("target_formula")
+            == "engineering-only log(priority_venue_mark[t+2+h] / priority_venue_mark[t+2])"
+            and config["aligned_carrier"]["target_formula_change"] is False
+        ),
+        "semantic_domains_nonempty": all(
+            all(values for values in domain.values())
+            for domain in domains.values()
+        ),
+    }
+    decision = {
+        "schema_version": 1,
+        "stage": "A_CARRIER_QUALIFICATION",
+        "status": "PASS" if all(gates.values()) else "FAIL_CLOSED",
+        "source_sha": source_sha,
+        "cache_identity_sha256": store.metadata["identity_sha256"],
+        "window": {
+            "start": store.metadata["start_utc"],
+            "end_exclusive": store.metadata["end_exclusive_utc"],
+            "timestamps": int(store.shape[1]),
+        },
+        "assets": {
+            "physical": int(store.shape[0]),
+            "ever_eligible": int(base.any(axis=1).sum()),
+            "minimum_active": int(active_assets[active_assets > 0].min()),
+            "maximum_active": int(active_assets.max()),
+        },
+        "field_finite_counts": field_finite,
+        "target_finite_on_base": target_support,
+        "gates": gates,
+        "sealed_reads": 0,
+    }
+    _write_json(runtime_root / "stage_a_carrier_qualification.json", decision)
+    return decision
+
+
+def _load_v14_inputs(
+    repo_root: Path,
+) -> tuple[
+    RawPanelStore,
+    tuple[FieldContract, ...],
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+]:
+    config, config_path = _load_v14_config(repo_root)
+    runtime_root = (
+        repo_root
+        / f"runtime/crypto_search_engine_v1_4_oi_flow_{V14_DEFAULT_RUNTIME_DATE}"
+    )
+    manifest_path = runtime_root / "aligned_carrier_manifest.json"
+    manifest = _read_json(manifest_path)
+    cache_root = repo_root / str(manifest["cache_root"])
+    metadata = _read_json(cache_root / "metadata.json")
+    if metadata["identity_sha256"] != manifest["cache_identity_sha256"]:
+        raise ValueError("V1.4 aligned carrier identity changed")
+    contracts = _contracts_from_payload(manifest["contracts"])
+    store = RawPanelStore.open(cache_root)
+    if tuple(store.metadata["field_ids"]) != tuple(
+        item.field_id for item in contracts
+    ):
+        raise ValueError("V1.4 aligned field order changed")
+    base = np.asarray(store.base_eligible(), dtype=bool)
+    counts = base.sum(axis=0, dtype=np.int64).astype(float)
+    regime = np.broadcast_to(counts, base.shape).copy()
+    regime[~base] = np.nan
+    behavior_contract = freeze_search_behavior_contract(
+        regime,
+        base,
+        pit_regime_source="__BASE_ELIGIBLE_COUNT__",
+    )
+    identities = {
+        "v14_config": {
+            "path": V14_CONFIG,
+            "sha256": sha256_file(config_path),
+        },
+        "aligned_carrier_manifest": {
+            "path": manifest_path.relative_to(repo_root).as_posix(),
+            "sha256": sha256_file(manifest_path),
+        },
+        "raw_cache": {
+            "root": str(manifest["cache_root"]),
+            "identity_sha256": metadata["identity_sha256"],
+            "directory_bundle": manifest["directory_bundle"],
+        },
+        "compiler_identity": _compiler_binding(repo_root),
+    }
+    return store, contracts, behavior_contract, identities, config
+
+
+def _v14_frozen_contract(
+    *,
+    source_sha: str,
+    contracts: Sequence[FieldContract],
+    behavior_contract: Mapping[str, Any],
+    identities: Mapping[str, Any],
+    config: Mapping[str, Any],
+) -> dict[str, Any]:
+    payload = {
+        "schema_version": 1,
+        "epoch_id": V14_EPOCH_ID,
+        "experiment_id": config["experiment_id"],
+        "source_sha": source_sha,
+        "authorization": config["authorization"],
+        "input_identities": dict(identities),
+        "compiler_identity": dict(identities["compiler_identity"]),
+        "evaluator_contract": pair_contract_payload(),
+        "behavior_descriptor": dict(behavior_contract),
+        "surface": {
+            "field_count": len(contracts),
+            "field_ids": [item.field_id for item in contracts],
+            "semantic_tuples": list(CONDITIONAL_SEMANTIC_TUPLES),
+            "binary_skeleton_registry_count": len(skeleton_registry()),
+            "new_ast": False,
+            "new_compiler": False,
+            "new_evaluator": False,
+            "target_formula_changed": False,
+        },
+        "stages": {
+            "A": dict(config["stage_a"]),
+            "B": dict(config["stage_b"]),
+            "C": dict(config["stage_c"]),
+        },
+        "budget": dict(config["budget"]),
+        "fresh_state": dict(config["fresh_state"]),
+        "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY_ONLY",
+        "boundaries": {**dict(config["boundaries"]), "sealed_reads": 0},
+    }
+    return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
+def _v14_sample_binary(
+    *,
+    registry: TypedExpressionRegistry,
+    contracts: Sequence[FieldContract],
+    origin_sets: Mapping[str, set[str]],
+    rng: random.Random,
+) -> tuple[CandidateSpec, int]:
+    surface = field_role_surface(contracts)
+    compatible = [
+        item
+        for item in skeleton_registry()
+        if item.skeleton_id in surface["compatible_skeleton_ids"]
+    ]
+    if not compatible:
+        raise ValueError("V1.4 binary baseline has no compatible skeleton")
+    for attempt in range(1, 4_226):
+        candidate = generate_effective_candidate(
+            registry,
+            skeleton=rng.choice(compatible),
+            rng=rng,
+            roles=surface["roles"],
+        )
+        if all(set(candidate.raw_fields) & fields for fields in origin_sets.values()):
+            return candidate, attempt
+    raise _ProposalGenerationFailure(
+        "V1.4 binary cross-origin proposal exhausted",
+        raw_attempts=4_225,
+    )
+
+
+def _v14_candidate_row(
+    *,
+    registry: TypedExpressionRegistry,
+    candidate: CandidateSpec,
+    evaluation: Mapping[str, Any],
+    stage: str,
+    arm: str,
+    completion_ordinal: int,
+    stage_completion_ordinal: int,
+    generation_attempt_ordinal: int,
+    checkpoint_index: int,
+    worker: Mapping[str, Any],
+    archive: BehaviorArchive,
+    seed: int,
+    operation: str,
+    receipt: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    archive_row, new_family = archive.observe(
+        candidate=candidate,
+        evaluation=evaluation,
+        arm=arm,
+        seed=seed,
+        completion_ordinal=completion_ordinal,
+        checkpoint_index=checkpoint_index,
+    )
+    feedback = evaluation["feedback"]
+    semantic_tuple = candidate.generation_genes.get("semantic_tuple")
+    return {
+        "completion_ordinal": completion_ordinal,
+        "stage_completion_ordinal": stage_completion_ordinal,
+        "checkpoint_index": checkpoint_index,
+        "stage": stage,
+        "arm": arm,
+        "seed": seed,
+        "generation_attempt_ordinal": generation_attempt_ordinal,
+        "candidate_id": candidate.candidate_id,
+        "exact_expression_id": candidate.candidate_id,
+        "canonical_expression_id": candidate.expression.expression_id,
+        "behavior_family_id": evaluation["behavior"]["behavior_family_id"],
+        "new_behavior_family_at_completion": bool(new_family),
+        "is_family_champion_at_completion": bool(
+            archive_row["is_family_champion"]
+        ),
+        "skeleton_id": candidate.skeleton_id,
+        "mechanism_family": candidate.mechanism_family,
+        "semantic_tuple": semantic_tuple,
+        "hierarchical_three_axis": bool(
+            evaluation.get("hierarchical_three_axis")
+        ),
+        "raw_fields_json": json.dumps(list(candidate.raw_fields)),
+        "candidate_spec_json": json.dumps(candidate.to_dict(), sort_keys=True),
+        "operation": operation,
+        "receipt_json": (
+            json.dumps(receipt, sort_keys=True) if receipt is not None else None
+        ),
+        "receipt_verified": (
+            _payload_sha(
+                {key: value for key, value in receipt.items() if key != "receipt_sha256"}
+            )
+            == receipt.get("receipt_sha256")
+            if receipt is not None
+            else None
+        ),
+        "compile_valid": True,
+        "exact_unique": True,
+        "matched_control_valid": True,
+        "strict_cost_evaluated": True,
+        "expression_hash_verified": _v14_replay_verified(registry, candidate),
+        "pair_reward": float(evaluation["pair_reward"]),
+        "matched_positive": bool(evaluation["matched_positive"]),
+        "interaction_matched_positive": feedback.get(
+            "interaction_matched_positive"
+        ),
+        "conditional_matched_positive": feedback.get(
+            "conditional_matched_positive"
+        ),
+        "interaction_left_distance": (
+            feedback.get("interaction_left_axis") or {}
+        ).get("distance"),
+        "interaction_right_distance": (
+            feedback.get("interaction_right_axis") or {}
+        ).get("distance"),
+        "conditional_distance": (
+            feedback.get("conditional_axis") or {}
+        ).get("distance"),
+        "net_mean": evaluation["incremental"].get("net_mean"),
+        "turnover_mean": evaluation["incremental"].get("turnover_mean"),
+        "cost_mean": evaluation["incremental"].get("cost_mean"),
+        "support": evaluation["incremental"].get("support"),
+        "left_delta_weight_sha256": evaluation.get(
+            "left_delta_weight_sha256"
+        ),
+        "right_delta_weight_sha256": evaluation.get(
+            "right_delta_weight_sha256"
+        ),
+        "interaction_left_delta_weight_sha256": evaluation.get(
+            "interaction_left_delta_weight_sha256"
+        ),
+        "process_cpu_seconds": float(worker["process_cpu_seconds"]),
+        "wall_seconds": float(worker["wall_seconds"]),
+        "worker_rss_bytes": int(worker["worker_rss_bytes"]),
+    }
+
+
+def _v14_write_checkpoint(
+    *,
+    runtime_root: Path,
+    label: str,
+    source_sha: str,
+    frozen_hash: str,
+    cache_identity: str,
+    stage: str,
+    rng: random.Random,
+    generation_attempts: int,
+    ledger: Sequence[Mapping[str, Any]],
+    archive: BehaviorArchive,
+    policy_state: Mapping[str, Any] | None = None,
+) -> Path:
+    root = runtime_root / "checkpoints"
+    root.mkdir(parents=True, exist_ok=True)
+    target = root / label
+    if target.exists():
+        raise FileExistsError(target)
+    temporary = root / f".{label}.tmp-{os.getpid()}"
+    if temporary.exists():
+        shutil.rmtree(temporary)
+    temporary.mkdir(parents=True)
+    state = {
+        "schema_version": 1,
+        "source_sha": source_sha,
+        "frozen_contract_sha256": frozen_hash,
+        "cache_identity_sha256": cache_identity,
+        "stage": stage,
+        "rng_state": _json_rng_state(rng.getstate()),
+        "generation_attempts": int(generation_attempts),
+        "completed_candidate_ids": [
+            str(row["candidate_id"]) for row in ledger
+        ],
+        "policy_state": dict(policy_state or {}),
+        "archive_state_sha256": archive.state_hash(),
+        "archive_duplicate_replacements": archive.duplicate_replacements,
+    }
+    _write_json(temporary / "state.json", state)
+    _write_parquet(temporary / "candidate_ledger.parquet", ledger)
+    _write_parquet(temporary / "behavior_archive.parquet", archive.rows)
+    files = [
+        {
+            "name": path.name,
+            "bytes": path.stat().st_size,
+            "sha256": sha256_file(path),
+        }
+        for path in sorted(temporary.iterdir())
+    ]
+    manifest = {
+        "schema_version": 1,
+        "checkpoint": label,
+        "source_sha": source_sha,
+        "frozen_contract_sha256": frozen_hash,
+        "cache_identity_sha256": cache_identity,
+        "stage": stage,
+        "completed_ledger_row_count": len(ledger),
+        "completed_identity_sha256": _payload_sha(
+            [str(row["candidate_id"]) for row in ledger]
+        ),
+        "state_sha256": _payload_sha(state),
+        "archive_state_sha256": archive.state_hash(),
+        "files": files,
+        "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
+        "restore_verified": False,
+    }
+    _write_json(temporary / "manifest.json", manifest)
+    restored_state = _read_json(temporary / "state.json")
+    restored_ledger = pd.read_parquet(
+        temporary / "candidate_ledger.parquet"
+    ).to_dict("records")
+    restored_archive = BehaviorArchive.from_rows(
+        pd.read_parquet(temporary / "behavior_archive.parquet").to_dict(
+            "records"
+        )
+    )
+    restored_archive.duplicate_replacements = int(
+        restored_state["archive_duplicate_replacements"]
+    )
+    restored_rng = random.Random()
+    restored_rng.setstate(_tuple_rng_state(restored_state["rng_state"]))
+    if (
+        _payload_sha(restored_state) != manifest["state_sha256"]
+        or _payload_sha(
+            [str(row["candidate_id"]) for row in restored_ledger]
+        )
+        != manifest["completed_identity_sha256"]
+        or restored_archive.state_hash() != manifest["archive_state_sha256"]
+        or _json_rng_state(restored_rng.getstate()) != restored_state["rng_state"]
+    ):
+        shutil.rmtree(temporary)
+        raise ValueError("V1.4 checkpoint restore verification failed")
+    manifest["restore_verified"] = True
+    _write_json(temporary / "manifest.json", manifest)
+    os.replace(temporary, target)
+    return target
+
+
+def _v14_restore_latest_checkpoint(
+    *,
+    runtime_root: Path,
+    source_sha: str,
+    frozen_hash: str,
+    cache_identity: str,
+) -> tuple[
+    random.Random,
+    int,
+    list[dict[str, Any]],
+    BehaviorArchive,
+] | None:
+    checkpoints = sorted(
+        path
+        for path in (runtime_root / "checkpoints").glob("checkpoint_*")
+        if path.is_dir()
+    )
+    if not checkpoints:
+        return None
+    path = checkpoints[-1]
+    manifest = _read_json(path / "manifest.json")
+    if (
+        manifest.get("restore_verified") is not True
+        or manifest.get("source_sha") != source_sha
+        or manifest.get("frozen_contract_sha256") != frozen_hash
+        or manifest.get("cache_identity_sha256") != cache_identity
+    ):
+        raise ValueError("V1.4 checkpoint authority changed")
+    for record in manifest["files"]:
+        local = path / str(record["name"])
+        if (
+            not local.is_file()
+            or local.stat().st_size != int(record["bytes"])
+            or sha256_file(local) != str(record["sha256"])
+        ):
+            raise ValueError("V1.4 checkpoint file identity changed")
+    state = _read_json(path / "state.json")
+    if _payload_sha(state) != manifest["state_sha256"]:
+        raise ValueError("V1.4 checkpoint state identity changed")
+    ledger = pd.read_parquet(path / "candidate_ledger.parquet").to_dict(
+        "records"
+    )
+    archive = BehaviorArchive.from_rows(
+        pd.read_parquet(path / "behavior_archive.parquet").to_dict("records")
+    )
+    archive.duplicate_replacements = int(
+        state["archive_duplicate_replacements"]
+    )
+    if (
+        len(ledger) != int(manifest["completed_ledger_row_count"])
+        or archive.state_hash() != manifest["archive_state_sha256"]
+    ):
+        raise ValueError("V1.4 checkpoint restore content changed")
+    rng = random.Random()
+    rng.setstate(_tuple_rng_state(state["rng_state"]))
+    return rng, int(state["generation_attempts"]), ledger, archive
+
+
+def _v14_stage_metrics(
+    ledger: Sequence[Mapping[str, Any]], *, stage: str
+) -> dict[str, Any]:
+    rows = [row for row in ledger if str(row["stage"]) == stage]
+    frame = pd.DataFrame(rows)
+    if frame.empty:
+        return {
+            "stage": stage,
+            "strict_evaluated_count": 0,
+        }
+    hierarchical = frame.loc[
+        frame["hierarchical_three_axis"].fillna(False).astype(bool)
+    ]
+    return {
+        "stage": stage,
+        "strict_evaluated_count": len(frame),
+        "exact_unique_count": int(frame["candidate_id"].nunique()),
+        "behavior_family_count": int(frame["behavior_family_id"].nunique()),
+        "behavior_duplicate_rate": float(
+            1.0 - frame["behavior_family_id"].nunique() / len(frame)
+        ),
+        "matched_positive_count": int(
+            frame["matched_positive"].fillna(False).sum()
+        ),
+        "hierarchical_count": len(hierarchical),
+        "hierarchical_matched_positive_count": int(
+            hierarchical["matched_positive"].fillna(False).sum()
+        ),
+        "interaction_positive_count": int(
+            hierarchical["interaction_matched_positive"].fillna(False).sum()
+        ),
+        "conditional_positive_count": int(
+            hierarchical["conditional_matched_positive"].fillna(False).sum()
+        ),
+        "hierarchical_behavior_duplicate_rate": (
+            float(
+                1.0
+                - hierarchical["behavior_family_id"].nunique()
+                / len(hierarchical)
+            )
+            if len(hierarchical)
+            else None
+        ),
+        "mean_pair_reward": float(frame["pair_reward"].mean()),
+        "top_decile_pair_reward": float(
+            frame["pair_reward"]
+            .nlargest(max(1, int(math.ceil(len(frame) * 0.1))))
+            .mean()
+        ),
+        "semantic_tuple_counts": {
+            str(key): int(value)
+            for key, value in hierarchical.groupby(
+                "semantic_tuple", dropna=False
+            ).size().to_dict().items()
+        },
+        "verified_receipts": int(frame["receipt_verified"].fillna(False).sum()),
+    }
+
+
+def _v14_run_fixed_stage(
+    *,
+    runtime_root: Path,
+    source_sha: str,
+    frozen_hash: str,
+    cache_root: Path,
+    cache_identity: str,
+    contracts: Sequence[FieldContract],
+    behavior_contract: Mapping[str, Any],
+    stage: str,
+    target_sequence: Sequence[str],
+    rng: random.Random,
+    ledger: list[dict[str, Any]],
+    archive: BehaviorArchive,
+    completed_ids: set[str],
+    generation_attempts: int,
+    checkpoint_size: int,
+    raw_attempt_limit: int,
+    wall_deadline: float,
+) -> tuple[int, int, bool]:
+    registry = TypedExpressionRegistry(contracts)
+    domains = _v14_domains(contracts)
+    contract_fields = set(item.field_id for item in contracts)
+    oi_fields = {
+        value for value in contract_fields if "__" in value
+    }
+    agg_fields = contract_fields - oi_fields
+    origin_sets = {"oi_mark": oi_fields, "aggtrades": agg_fields}
+    stage_existing = sum(str(row["stage"]) == stage for row in ledger)
+    if stage_existing > len(target_sequence):
+        raise ValueError("V1.4 stage ledger exceeds its frozen target")
+    workers = DEFAULT_WORKERS
+    memory_fallback = False
+    executor = concurrent.futures.ProcessPoolExecutor(
+        max_workers=workers,
+        initializer=_worker_initialize,
+        initargs=(
+            str(cache_root),
+            _contracts_payload(contracts),
+            behavior_contract,
+            _read_json(cache_root / "metadata.json")["start_utc"],
+            _read_json(cache_root / "metadata.json")["end_exclusive_utc"],
+            f"FRESH_STATE_V14_{stage}",
+        ),
+    )
+    try:
+        while stage_existing < len(target_sequence):
+            if generation_attempts >= raw_attempt_limit:
+                raise _EngineBudgetExhausted("RAW_GENERATION_ATTEMPT_LIMIT")
+            if time.perf_counter() >= wall_deadline:
+                raise _EngineBudgetExhausted("ACTIVE_WALL_TIME_LIMIT")
+            proposals: list[tuple[CandidateSpec, int, str]] = []
+            while (
+                len(proposals) < workers
+                and stage_existing + len(proposals) < len(target_sequence)
+            ):
+                mode = str(target_sequence[stage_existing + len(proposals)])
+                generation_attempts += 1
+                if mode == "BINARY_BASELINE":
+                    candidate, attempts = _v14_sample_binary(
+                        registry=registry,
+                        contracts=contracts,
+                        origin_sets=origin_sets,
+                        rng=rng,
+                    )
+                    generation_attempts += attempts - 1
+                    operation = "CANONICAL_TYPED_RANDOM_BINARY_BASELINE"
+                else:
+                    candidate = _v14_sample_conditional(
+                        registry=registry,
+                        domains=domains,
+                        semantic_tuple=mode,
+                        rng=rng,
+                    )
+                    operation = "CANONICAL_TYPED_RANDOM_THREE_AXIS"
+                if (
+                    candidate.candidate_id in completed_ids
+                    or any(
+                        candidate.candidate_id == value[0].candidate_id
+                        for value in proposals
+                    )
+                ):
+                    continue
+                if not _v14_replay_verified(registry, candidate):
+                    raise ValueError("V1.4 proposal replay/hash verification failed")
+                if not all(
+                    set(candidate.raw_fields) & values
+                    for values in origin_sets.values()
+                ):
+                    raise ValueError("V1.4 candidate escaped OI/flow origin gate")
+                proposals.append((candidate, generation_attempts, operation))
+            futures = [
+                executor.submit(_worker_evaluate, candidate.to_dict())
+                for candidate, _, _ in proposals
+            ]
+            worker_rows = [future.result() for future in futures]
+            peak_rss = max(
+                (int(row["worker_rss_bytes"]) for row in worker_rows),
+                default=0,
+            )
+            if (
+                not memory_fallback
+                and workers == DEFAULT_WORKERS
+                and (
+                    any(bool(row["memory_error"]) for row in worker_rows)
+                    or peak_rss * DEFAULT_WORKERS > MEMORY_GATE_BYTES
+                )
+            ):
+                executor.shutdown(wait=True)
+                workers = FALLBACK_WORKERS
+                memory_fallback = True
+                executor = concurrent.futures.ProcessPoolExecutor(
+                    max_workers=workers,
+                    initializer=_worker_initialize,
+                    initargs=(
+                        str(cache_root),
+                        _contracts_payload(contracts),
+                        behavior_contract,
+                        _read_json(cache_root / "metadata.json")["start_utc"],
+                        _read_json(cache_root / "metadata.json")["end_exclusive_utc"],
+                        f"FRESH_STATE_V14_{stage}",
+                    ),
+                )
+            for (candidate, attempt_ordinal, operation), worker in zip(
+                proposals, worker_rows
+            ):
+                evaluation = worker["evaluation"]
+                if evaluation is None:
+                    continue
+                completed_ids.add(candidate.candidate_id)
+                stage_existing += 1
+                checkpoint_index = (stage_existing - 1) // checkpoint_size
+                row = _v14_candidate_row(
+                    registry=registry,
+                    candidate=candidate,
+                    evaluation=evaluation,
+                    stage=stage,
+                    arm="canonical_typed_random",
+                    completion_ordinal=len(ledger) + 1,
+                    stage_completion_ordinal=stage_existing,
+                    generation_attempt_ordinal=attempt_ordinal,
+                    checkpoint_index=checkpoint_index,
+                    worker=worker,
+                    archive=archive,
+                    seed=20260728,
+                    operation=operation,
+                )
+                ledger.append(row)
+                if stage_existing % checkpoint_size == 0:
+                    label = (
+                        f"checkpoint_{stage.lower()}_"
+                        f"{checkpoint_index:03d}"
+                    )
+                    _v14_write_checkpoint(
+                        runtime_root=runtime_root,
+                        label=label,
+                        source_sha=source_sha,
+                        frozen_hash=frozen_hash,
+                        cache_identity=cache_identity,
+                        stage=stage,
+                        rng=rng,
+                        generation_attempts=generation_attempts,
+                        ledger=ledger,
+                        archive=archive,
+                    )
+                if stage_existing >= len(target_sequence):
+                    break
+    finally:
+        executor.shutdown(wait=True)
+    return generation_attempts, workers, memory_fallback
+
+
+def _v14_artifact_manifest(
+    *,
+    repo_root: Path,
+    runtime_root: Path,
+    report_path: Path,
+    source_sha: str,
+    frozen_hash: str,
+) -> dict[str, Any]:
+    artifacts = []
+    for path in sorted(
+        (
+            *[
+                value
+                for value in runtime_root.rglob("*")
+                if value.is_file()
+                and value.name != "run_manifest.json"
+            ],
+            report_path,
+        ),
+        key=lambda value: str(value),
+    ):
+        artifacts.append(
+            {
+                "path": path.relative_to(repo_root).as_posix(),
+                "bytes": path.stat().st_size,
+                "sha256": sha256_file(path),
+            }
+        )
+    return {
+        "schema_version": 1,
+        "epoch_id": V14_EPOCH_ID,
+        "producer_source_sha": source_sha,
+        "frozen_contract_sha256": frozen_hash,
+        "artifacts": artifacts,
+        "artifact_bundle_sha256": _payload_sha(artifacts),
+        "continuation": (
+            "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+            "check-v14 --runtime-date 20260728"
+        ),
+        "reproducible": True,
+        "sealed_reads": 0,
+    }
+
+
+def run_v14(
+    repo_root: Path,
+    *,
+    runtime_date: str = V14_DEFAULT_RUNTIME_DATE,
+    source_sha: str | None = None,
+) -> dict[str, Any]:
+    if runtime_date != V14_DEFAULT_RUNTIME_DATE:
+        raise ValueError("Search Engine V1.4 runtime date changed")
+    source_sha = str(source_sha or _git_sha(repo_root)).lower()
+    if source_sha != _git_sha(repo_root).lower():
+        raise ValueError("Search Engine V1.4 source SHA must equal checkout HEAD")
+    config, _ = _load_v14_config(repo_root)
+    runtime_root = (
+        repo_root / f"runtime/crypto_search_engine_v1_4_oi_flow_{runtime_date}"
+    )
+    report_path = (
+        repo_root
+        / f"reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_{runtime_date}.md"
+    )
+    cache_root = repo_root / str(config["aligned_carrier"]["cache_root"])
+    if not _source_tree_clean_for_run(
+        repo_root,
+        allowed_paths=(runtime_root, report_path, cache_root),
+    ):
+        raise PermissionError("Search Engine V1.4 requires a clean source tree")
+    runtime_root.mkdir(parents=True, exist_ok=True)
+    if not (runtime_root / "aligned_carrier_manifest.json").is_file():
+        build_v14_aligned_carrier(repo_root, source_sha=source_sha)
+    qualification = qualify_v14_aligned_carrier(
+        repo_root, source_sha=source_sha
+    )
+    if qualification["status"] != "PASS":
+        decision = {
+            "schema_version": 1,
+            "status": "FAIL_CLOSED_STAGE_A_CARRIER_QUALIFICATION",
+            "research_decision": "HOLD_RESEARCH",
+            "stage_c": "NOT_RUN",
+            "source_sha": source_sha,
+            "sealed_reads": 0,
+        }
+        _write_json(runtime_root / "final_decision.json", decision)
+        return {"result": "FAIL", **decision}
+    (
+        store,
+        contracts,
+        behavior_contract,
+        identities,
+        config,
+    ) = _load_v14_inputs(repo_root)
+    frozen = _v14_frozen_contract(
+        source_sha=source_sha,
+        contracts=contracts,
+        behavior_contract=behavior_contract,
+        identities=identities,
+        config=config,
+    )
+    frozen_hash = str(frozen["frozen_contract_sha256"])
+    frozen_path = runtime_root / "frozen_contract.json"
+    if frozen_path.is_file() and _read_json(frozen_path) != frozen:
+        raise ValueError("Search Engine V1.4 frozen contract changed")
+    _write_json(frozen_path, frozen)
+    embedded_preflight = {
+        "schema_version": 1,
+        "status": "PASS_READY_STAGE_A_CANARY",
+        "source_sha": source_sha,
+        "cache_identity_sha256": store.metadata["identity_sha256"],
+        "field_count": len(contracts),
+        "assets": store.shape[0],
+        "timestamps": store.shape[1],
+        "workers_requested": DEFAULT_WORKERS,
+        "workers_memory_fallback": FALLBACK_WORKERS,
+        "workers_12_forbidden": True,
+        "sealed_reads": 0,
+    }
+    _write_json(runtime_root / "embedded_preflight.json", embedded_preflight)
+    restored = _v14_restore_latest_checkpoint(
+        runtime_root=runtime_root,
+        source_sha=source_sha,
+        frozen_hash=frozen_hash,
+        cache_identity=store.metadata["identity_sha256"],
+    )
+    if restored is None:
+        rng = random.Random(20260728)
+        generation_attempts = 0
+        ledger: list[dict[str, Any]] = []
+        archive = BehaviorArchive()
+    else:
+        rng, generation_attempts, ledger, archive = restored
+    completed_ids = {str(row["candidate_id"]) for row in ledger}
+    started = time.perf_counter()
+    wall_deadline = started + float(
+        config["budget"]["wall_time_seconds_maximum"]
+    )
+    raw_attempt_limit = int(
+        config["budget"]["raw_generation_attempts_maximum"]
+    )
+    stage_a_sequence = ["BINARY_BASELINE"] * 32 + [
+        semantic_tuple
+        for semantic_tuple in CONDITIONAL_SEMANTIC_TUPLES
+        for _ in range(8)
+    ]
+    random.Random(2026072801).shuffle(stage_a_sequence)
+    stage_b_sequence = ["BINARY_BASELINE"] * 600 + [
+        semantic_tuple
+        for semantic_tuple in CONDITIONAL_SEMANTIC_TUPLES
+        for _ in range(150)
+    ]
+    random.Random(2026072802).shuffle(stage_b_sequence)
+    workers_selected = DEFAULT_WORKERS
+    memory_fallback = False
+    try:
+        if sum(row["stage"] == "STAGE_A" for row in ledger) < V14_STAGE_A_COUNT:
+            (
+                generation_attempts,
+                workers_selected,
+                memory_fallback,
+            ) = _v14_run_fixed_stage(
+                runtime_root=runtime_root,
+                source_sha=source_sha,
+                frozen_hash=frozen_hash,
+                cache_root=repo_root / str(identities["raw_cache"]["root"]),
+                cache_identity=store.metadata["identity_sha256"],
+                contracts=contracts,
+                behavior_contract=behavior_contract,
+                stage="STAGE_A",
+                target_sequence=stage_a_sequence,
+                rng=rng,
+                ledger=ledger,
+                archive=archive,
+                completed_ids=completed_ids,
+                generation_attempts=generation_attempts,
+                checkpoint_size=V14_STAGE_A_COUNT,
+                raw_attempt_limit=raw_attempt_limit,
+                wall_deadline=wall_deadline,
+            )
+        stage_a_metrics = _v14_stage_metrics(ledger, stage="STAGE_A")
+        stage_a_rows = [
+            row for row in ledger if row["stage"] == "STAGE_A"
+        ]
+        stage_a_canary = {
+            "schema_version": 1,
+            "status": "PASS"
+            if (
+                stage_a_metrics["strict_evaluated_count"] == V14_STAGE_A_COUNT
+                and stage_a_metrics["exact_unique_count"] == V14_STAGE_A_COUNT
+                and all(
+                    bool(row["expression_hash_verified"])
+                    and bool(row["strict_cost_evaluated"])
+                    for row in stage_a_rows
+                )
+            )
+            else "FAIL_CLOSED",
+            "metrics": stage_a_metrics,
+            "binary_baseline_count": sum(
+                not bool(row["hierarchical_three_axis"])
+                for row in stage_a_rows
+            ),
+            "hierarchical_three_axis_count": sum(
+                bool(row["hierarchical_three_axis"])
+                for row in stage_a_rows
+            ),
+            "controls": ["A", "B", "AB", "ABC"],
+            "checkpoint_restore": "VERIFIED",
+            "pit_lag": qualification["gates"]["pit_lag"],
+            "sealed_reads": 0,
+        }
+        _write_json(
+            runtime_root / "stage_a_constructibility_canary.json",
+            stage_a_canary,
+        )
+        if stage_a_canary["status"] != "PASS":
+            raise _EngineBudgetExhausted("STAGE_A_CONSTRUCTIBILITY_GATE")
+        if sum(row["stage"] == "STAGE_B" for row in ledger) < V14_STAGE_B_COUNT:
+            (
+                generation_attempts,
+                workers_selected,
+                local_fallback,
+            ) = _v14_run_fixed_stage(
+                runtime_root=runtime_root,
+                source_sha=source_sha,
+                frozen_hash=frozen_hash,
+                cache_root=repo_root / str(identities["raw_cache"]["root"]),
+                cache_identity=store.metadata["identity_sha256"],
+                contracts=contracts,
+                behavior_contract=behavior_contract,
+                stage="STAGE_B",
+                target_sequence=stage_b_sequence,
+                rng=rng,
+                ledger=ledger,
+                archive=archive,
+                completed_ids=completed_ids,
+                generation_attempts=generation_attempts,
+                checkpoint_size=V14_STAGE_B_CHECKPOINT_SIZE,
+                raw_attempt_limit=raw_attempt_limit,
+                wall_deadline=wall_deadline,
+            )
+            memory_fallback = memory_fallback or local_fallback
+    except _EngineBudgetExhausted as failure:
+        _write_parquet(runtime_root / "candidate_ledger.parquet", ledger)
+        _write_parquet(runtime_root / "behavior_archive.parquet", archive.rows)
+        decision = {
+            "schema_version": 1,
+            "status": "ENGINE_BUDGET_EXHAUSTED",
+            "reason": str(failure),
+            "source_sha": source_sha,
+            "generation_attempts": generation_attempts,
+            "strict_evaluated_count": len(ledger),
+            "stage_c": "NOT_RUN",
+            "parameters_changed": False,
+            "seed_changed": False,
+            "rescue_rerun_started": False,
+            "sealed_reads": 0,
+        }
+        _write_json(runtime_root / "final_decision.json", decision)
+        return {"result": "ENGINE_BUDGET_EXHAUSTED", **decision}
+
+    stage_b_metrics = _v14_stage_metrics(ledger, stage="STAGE_B")
+    tuple_counts = stage_b_metrics["semantic_tuple_counts"]
+    gate_contract = config["stage_b"]["adaptive_gate"]
+    stage_b_gate = {
+        "hierarchical_matched_positive_minimum": (
+            stage_b_metrics["hierarchical_matched_positive_count"]
+            >= int(gate_contract["hierarchical_matched_positive_minimum"])
+        ),
+        "hierarchical_strict_completion_rate_minimum": (
+            stage_b_metrics["hierarchical_count"] / 600.0
+            >= float(
+                gate_contract[
+                    "hierarchical_strict_completion_rate_minimum"
+                ]
+            )
+        ),
+        "hierarchical_behavior_duplicate_rate_maximum": (
+            float(stage_b_metrics["hierarchical_behavior_duplicate_rate"])
+            <= float(
+                gate_contract[
+                    "hierarchical_behavior_duplicate_rate_maximum"
+                ]
+            )
+        ),
+        "all_semantic_tuple_quotas_complete": all(
+            int(tuple_counts.get(value, 0))
+            >= int(config["stage_b"]["minimum_tuple_count"])
+            for value in CONDITIONAL_SEMANTIC_TUPLES
+        ),
+    }
+    stage_b_decision = {
+        "schema_version": 1,
+        "status": "PASS_ADAPTIVE_GATE"
+        if all(stage_b_gate.values())
+        else "HOLD_ADAPTIVE_GATE",
+        "metrics": stage_b_metrics,
+        "gates": stage_b_gate,
+        "parameters_changed": False,
+        "seed_changed": False,
+        "sealed_reads": 0,
+    }
+    _write_json(runtime_root / "stage_b_semantic_gate.json", stage_b_decision)
+    # Stage C is deliberately called only through the frozen gate.  The
+    # adaptive implementation is kept separate below so a semantic-space
+    # failure cannot consume policy budget.
+    stage_c_status = "NOT_RUN_STAGE_B_GATE"
+    if stage_b_decision["status"] == "PASS_ADAPTIVE_GATE":
+        stage_c_status = "AUTHORIZED_PENDING_ADAPTIVE_EXECUTION"
+
+    _write_parquet(runtime_root / "candidate_ledger.parquet", ledger)
+    _write_parquet(runtime_root / "behavior_archive.parquet", archive.rows)
+    _write_json(
+        runtime_root / "behavior_family_summary.json",
+        {
+            "schema_version": 1,
+            "family_count": len(archive.champion_by_family),
+            "candidate_count": len(archive.rows),
+            "duplicate_replacements": archive.duplicate_replacements,
+            "families": archive.summary_rows(),
+            "archive_state_sha256": archive.state_hash(),
+        },
+    )
+    metrics_rows = [
+        _v14_stage_metrics(ledger, stage=value)
+        for value in ("STAGE_A", "STAGE_B", "STAGE_C")
+    ]
+    _write_parquet(runtime_root / "arm_checkpoint_metrics.parquet", metrics_rows)
+    decision = {
+        "schema_version": 1,
+        "status": "PASS_SEARCH_ENGINE_V1_4_SEMANTIC_GATE_COMPLETED",
+        "source_sha": source_sha,
+        "engineering_integrity": "PASS",
+        "research_decision": "HOLD_RESEARCH",
+        "stage_a": "PASS",
+        "stage_b": stage_b_decision["status"],
+        "stage_c": stage_c_status,
+        "generation_attempts": generation_attempts,
+        "strict_evaluated_count": len(ledger),
+        "workers_selected": workers_selected,
+        "memory_fallback_used": memory_fallback,
+        "future_new_data_arena_qualified_arms": [],
+        "alpha_claim": False,
+        "oos": False,
+        "promotion": False,
+        "sealed_reads": 0,
+    }
+    _write_json(runtime_root / "final_decision.json", decision)
+    report_path.write_text(
+        "\n".join(
+            [
+                "# Crypto Search Engine V1.4 OI/Flow",
+                "",
+                f"- Source: `{source_sha}`",
+                f"- Aligned carrier: `71 OI/mark + 44 aggTrades`; window `{qualification['window']['start']}` to `{qualification['window']['end_exclusive']}`.",
+                f"- Eligible assets: `{qualification['assets']['ever_eligible']}`; strict candidates: `{len(ledger)}`.",
+                f"- Stage A: `{decision['stage_a']}`; Stage B: `{decision['stage_b']}`; Stage C: `{decision['stage_c']}`.",
+                f"- Hierarchical matched positives: `{stage_b_metrics['hierarchical_matched_positive_count']}`.",
+                f"- Stage-B behavior duplicate rate: `{stage_b_metrics['behavior_duplicate_rate']:.6f}`.",
+                "- A/B/AB/ABC share target, support, eligibility, horizon, mapping, and 5 bps cost.",
+                "- Development-only result; no OOS, promotion, challenge, recent, forward, or sealed reads.",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+        newline="\n",
+    )
+    manifest = _v14_artifact_manifest(
+        repo_root=repo_root,
+        runtime_root=runtime_root,
+        report_path=report_path,
+        source_sha=source_sha,
+        frozen_hash=frozen_hash,
+    )
+    _write_json(runtime_root / "run_manifest.json", manifest)
+    return {
+        "result": "PASS",
+        **decision,
+        "artifact_bundle_sha256": manifest["artifact_bundle_sha256"],
+    }
+
+
 def check_v13(
     repo_root: Path,
     *,
@@ -8493,6 +9871,150 @@ def check_v13(
     }
 
 
+def check_v14(
+    repo_root: Path,
+    *,
+    runtime_date: str = V14_DEFAULT_RUNTIME_DATE,
+) -> dict[str, Any]:
+    runtime_root = (
+        repo_root / f"runtime/crypto_search_engine_v1_4_oi_flow_{runtime_date}"
+    )
+    report_path = (
+        repo_root
+        / f"reports/CRYPTO_SEARCH_ENGINE_V1_4_OI_FLOW_{runtime_date}.md"
+    )
+    errors: list[str] = []
+    required = (
+        "aligned_carrier_manifest.json",
+        "stage_a_carrier_qualification.json",
+        "frozen_contract.json",
+        "embedded_preflight.json",
+        "stage_a_constructibility_canary.json",
+        "stage_b_semantic_gate.json",
+        "candidate_ledger.parquet",
+        "behavior_archive.parquet",
+        "behavior_family_summary.json",
+        "arm_checkpoint_metrics.parquet",
+        "final_decision.json",
+        "run_manifest.json",
+    )
+    for name in required:
+        if not (runtime_root / name).is_file():
+            errors.append(f"missing:{name}")
+    if not report_path.is_file():
+        errors.append("missing:report")
+    if errors:
+        return {"result": "FAIL", "errors": errors}
+    frozen = _read_json(runtime_root / "frozen_contract.json")
+    qualification = _read_json(
+        runtime_root / "stage_a_carrier_qualification.json"
+    )
+    canary = _read_json(
+        runtime_root / "stage_a_constructibility_canary.json"
+    )
+    stage_b = _read_json(runtime_root / "stage_b_semantic_gate.json")
+    decision = _read_json(runtime_root / "final_decision.json")
+    manifest = _read_json(runtime_root / "run_manifest.json")
+    ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
+    archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
+    if _payload_sha(
+        {
+            key: value
+            for key, value in frozen.items()
+            if key != "frozen_contract_sha256"
+        }
+    ) != frozen.get("frozen_contract_sha256"):
+        errors.append("frozen_contract_sha256")
+    if qualification.get("status") != "PASS":
+        errors.append("carrier_qualification")
+    if canary.get("status") != "PASS":
+        errors.append("constructibility_canary")
+    stage_a_count = int(ledger["stage"].eq("STAGE_A").sum())
+    stage_b_count = int(ledger["stage"].eq("STAGE_B").sum())
+    if stage_a_count != V14_STAGE_A_COUNT or stage_b_count != V14_STAGE_B_COUNT:
+        errors.append("stage_strict_counts")
+    if ledger["candidate_id"].nunique() != len(ledger):
+        errors.append("exact_unique")
+    for column in (
+        "compile_valid",
+        "exact_unique",
+        "matched_control_valid",
+        "strict_cost_evaluated",
+        "expression_hash_verified",
+    ):
+        if column not in ledger or not bool(ledger[column].fillna(False).all()):
+            errors.append(f"ledger_gate:{column}")
+    hierarchical = ledger.loc[
+        ledger["hierarchical_three_axis"].fillna(False).astype(bool)
+    ]
+    if hierarchical.empty or not hierarchical["semantic_tuple"].isin(
+        CONDITIONAL_SEMANTIC_TUPLES
+    ).all():
+        errors.append("hierarchical_semantic_tuple")
+    if (
+        hierarchical["interaction_left_delta_weight_sha256"]
+        .astype(str)
+        .str.len()
+        .ne(64)
+        .any()
+    ):
+        errors.append("hierarchical_delta_hash")
+    checkpoints = sorted(
+        path
+        for path in (runtime_root / "checkpoints").glob("checkpoint_*")
+        if path.is_dir()
+    )
+    if len(checkpoints) != 5 or not all(
+        _read_json(path / "manifest.json").get("restore_verified") is True
+        for path in checkpoints
+    ):
+        errors.append("checkpoint_restore")
+    if (
+        stage_b.get("status") == "PASS_ADAPTIVE_GATE"
+        and decision.get("stage_c")
+        == "AUTHORIZED_PENDING_ADAPTIVE_EXECUTION"
+    ):
+        errors.append("stage_c_not_automatically_executed")
+    if decision.get("future_new_data_arena_qualified_arms") != []:
+        errors.append("future_arena_qualification")
+    if decision.get("sealed_reads") != 0:
+        errors.append("sealed_reads")
+    if len(archive) != len(ledger):
+        errors.append("archive_ledger_count")
+    if _payload_sha(manifest.get("artifacts", [])) != manifest.get(
+        "artifact_bundle_sha256"
+    ):
+        errors.append("artifact_bundle")
+    for record in manifest.get("artifacts", []):
+        path = repo_root / str(record["path"])
+        if (
+            not path.is_file()
+            or path.stat().st_size != int(record["bytes"])
+            or sha256_file(path) != str(record["sha256"])
+        ):
+            errors.append(f"manifest_artifact:{record['path']}")
+    result = "PASS" if not errors else "FAIL"
+    return {
+        "result": result,
+        "errors": errors,
+        "engineering_integrity": result,
+        "producer_source_sha": manifest.get("producer_source_sha"),
+        "strict_evaluated_count": len(ledger),
+        "stage_a_count": stage_a_count,
+        "stage_b_count": stage_b_count,
+        "stage_c": decision.get("stage_c"),
+        "behavior_family_count": int(
+            archive["behavior_family_id"].nunique()
+        ),
+        "hierarchical_matched_positive_count": int(
+            hierarchical["matched_positive"].fillna(False).sum()
+        ),
+        "artifact_bundle_sha256": manifest.get("artifact_bundle_sha256"),
+        "future_new_data_arena_qualified_arms": [],
+        "sealed_reads": decision.get("sealed_reads"),
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -8510,6 +10032,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             "run-carrier-gate",
             "run-v13",
             "check-v13",
+            "build-v14-carrier",
+            "qualify-v14-carrier",
+            "run-v14",
+            "check-v14",
         ),
     )
     parser.add_argument("--runtime-date")
@@ -8596,6 +10122,32 @@ def main(argv: Sequence[str] | None = None) -> int:
         result = check_v13(
             repo_root,
             runtime_date=str(args.runtime_date or V13_DEFAULT_RUNTIME_DATE),
+        )
+    elif args.command == "build-v14-carrier":
+        source_sha = str(args.source_sha or _git_sha(repo_root)).lower()
+        result = {
+            "result": "PASS",
+            **build_v14_aligned_carrier(repo_root, source_sha=source_sha),
+        }
+    elif args.command == "qualify-v14-carrier":
+        source_sha = str(args.source_sha or _git_sha(repo_root)).lower()
+        result = qualify_v14_aligned_carrier(
+            repo_root, source_sha=source_sha
+        )
+        result = {
+            "result": "PASS" if result["status"] == "PASS" else "FAIL",
+            **result,
+        }
+    elif args.command == "run-v14":
+        result = run_v14(
+            repo_root,
+            runtime_date=str(args.runtime_date or V14_DEFAULT_RUNTIME_DATE),
+            source_sha=args.source_sha,
+        )
+    elif args.command == "check-v14":
+        result = check_v14(
+            repo_root,
+            runtime_date=str(args.runtime_date or V14_DEFAULT_RUNTIME_DATE),
         )
     else:
         result = check_v12(

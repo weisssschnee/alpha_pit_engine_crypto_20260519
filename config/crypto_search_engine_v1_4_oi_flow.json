@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "experiment_id": "20260728_crypto_search_engine_v1_4_oi_flow",
+  "authorization": "ONE_FRESH_STATE_OI_FLOW_CONDITIONAL_MECHANISM_GATE",
+  "source_carrier_manifest": "runtime/crypto_search_surface_integration_v1_20260728/search_carriers.json",
+  "source_carriers": {
+    "oi_mark": "OI_MARK_RANKS51_200_DELIVERED",
+    "aggtrades": "AGGTRADES_TOP200_DELIVERED"
+  },
+  "inputs": {
+    "aggtrades_top100_tar": "G:/AlphaFactory_CryptoData/deliveries/pc2_followup_20260722/archives/binance_aggtrades_top100_compact_1m_202401_202606.tar",
+    "aggtrades_ranks101_200_tar": "G:/AlphaFactory_CryptoData/deliveries/pc2_followup_20260722/archives/binance_aggtrades_ranks101_200_compact_1m_202401_202606.tar"
+  },
+  "aligned_carrier": {
+    "cache_root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115",
+    "start": "2025-06-28T05:00:00Z",
+    "end_exclusive": "2026-07-01T00:00:00Z",
+    "field_count": 115,
+    "oi_mark_field_count": 71,
+    "aggtrades_field_count": 44,
+    "minimum_assets_per_timestamp": 3,
+    "missing_value_fill": null,
+    "verify_full_tar_sha256": false,
+    "target_authority": "OI_MARK_PRIORITY_VENUE_MARK_EXISTING_1H_4H_TARGET",
+    "target_formula_change": false
+  },
+  "stage_a": {
+    "constructibility_canary_strict_count": 64,
+    "binary_baseline_count": 32,
+    "hierarchical_three_axis_count": 32
+  },
+  "stage_b": {
+    "typed_random_strict_count": 1200,
+    "checkpoint_size": 300,
+    "binary_baseline_fraction": 0.5,
+    "hierarchical_three_axis_fraction": 0.5,
+    "minimum_tuple_count": 100,
+    "adaptive_gate": {
+      "hierarchical_matched_positive_minimum": 1,
+      "hierarchical_strict_completion_rate_minimum": 0.9,
+      "hierarchical_behavior_duplicate_rate_maximum": 0.1,
+      "all_semantic_tuple_quotas_complete": true
+    }
+  },
+  "stage_c": {
+    "enabled_only_if_stage_b_gate_passes": true,
+    "strict_count": 1600,
+    "checkpoint_size": 400,
+    "arms": {
+      "hierarchical_typed_cem_v2": 800,
+      "typed_evolution_v2": 800
+    },
+    "same_semantic_tuple_quota": true,
+    "fresh_state": true
+  },
+  "semantic_tuples": [
+    "OI_LEVEL_X_AGGRESSOR_FLOW_GIVEN_BASIS",
+    "PRICE_RESPONSE_X_LARGE_TRADE_GIVEN_OI_STATE",
+    "CROSS_VENUE_OI_X_FLOW_IMBALANCE_GIVEN_FUNDING",
+    "OI_NOTIONAL_X_PRICE_RESPONSE_GIVEN_TRADE_INTENSITY"
+  ],
+  "budget": {
+    "raw_generation_attempts_maximum": 50000,
+    "wall_time_seconds_maximum": 64800,
+    "workers_default": 10,
+    "workers_memory_fallback": 8,
+    "workers_12_forbidden": true
+  },
+  "fresh_state": {
+    "old_candidate_import": false,
+    "old_reward_import": false,
+    "old_distribution_import": false,
+    "old_population_import": false,
+    "old_policy_state_import": false,
+    "old_archive_import": false,
+    "old_transition_memory_import": false
+  },
+  "boundaries": {
+    "development_only": true,
+    "fixed_retrospective_carrier": true,
+    "alpha_claim": false,
+    "oos": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "latent_priority": false,
+    "relational_training": false,
+    "cross_sprint_adaptive_memory": false,
+    "liquidation": "HOLD",
+    "broad": "EXCLUDED",
+    "core3": "EXCLUDED"
+  }
+}
