@@ -1363,7 +1363,7 @@
         "result": "PASS",
         "profile": "crypto-development-research",
         "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
-        "evidence_sha256": "3787A4230455A8895D2275CF537B19C8AFC967B7D9E80E917582058C04708B28",
+        "evidence_sha256": "A2DDFC630F9FF48F5804AAB816A92AFB62E95A75550669D6DD8BC14705791478",
         "verified_at_sha": "43739edd18c264bfa9b4ce11a3953c95b6ca58db"
       },
       "promotion_requirements": [
