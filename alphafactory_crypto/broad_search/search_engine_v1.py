@@ -31,6 +31,7 @@ import psutil
 from alphafactory_crypto.data_admission_v1 import (
     AGGTRADES_SYSTEM_CANARY_FIELDS,
     build_aggtrades_system_canary_cache,
+    contracts_from_aggtrades_search_fields,
 )
 from alphafactory_crypto.instrument_canary.release import sha256_file
 
@@ -112,6 +113,21 @@ CARRIER_GATE_IDS = (
     "CORE3_MICROSTRUCTURE_PILOT",
     "OI_MARK_RANKS51_200_DELIVERED",
 )
+V13_CONFIG = "config/crypto_search_engine_v1_3_cross_carrier.json"
+V13_EPOCH_ID = "CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_20260728"
+V13_DEFAULT_RUNTIME_DATE = "20260728"
+V13_ARMS = CARRIER_GATE_ARMS
+V13_CHECKPOINT_SIZE = 1_000
+V13_CHECKPOINT_COUNT = 4
+V13_STRICT_TARGET = 4_000
+V13_RAW_ATTEMPT_LIMIT = 50_000
+V13_WALL_TIME_LIMIT_SECONDS = 18 * 60 * 60
+V13_CANARY_STRICT_COUNT = 32
+V13_CHECKPOINT_ALLOCATION = {
+    "canonical_typed_random": 200,
+    "hierarchical_typed_cem_v2": 400,
+    "typed_evolution_v2": 400,
+}
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
 CONTINUATION_RUNTIME = "runtime/crypto_18m_current_field_four_policy_continuation_20260719"
 SEEDS = (20260716, 20260717, 20260718, 20260719)
@@ -351,6 +367,20 @@ def _candidate_rebuild_verified(
         )
     except (KeyError, TypeError, ValueError):
         return False
+
+
+def _candidate_semantic_carriers(
+    candidate: CandidateSpec,
+    origin_sets: Mapping[str, set[str]],
+) -> tuple[str, ...]:
+    fields = set(candidate.raw_fields)
+    return tuple(
+        sorted(
+            carrier
+            for carrier, origin_fields in origin_sets.items()
+            if fields & origin_fields
+        )
+    )
 
 
 def _broad39_registry_contracts(
@@ -1001,6 +1031,136 @@ def _load_carrier_gate_inputs(
     return store, contracts, behavior_contract, identities, local_config
 
 
+def _load_v13_inputs(
+    repo_root: Path,
+) -> tuple[
+    RawPanelStore,
+    tuple[FieldContract, ...],
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+]:
+    """Expose the existing Broad39+aggTrades44 physical carrier as two origins."""
+
+    config_path = repo_root / V13_CONFIG
+    config = _read_json(config_path)
+    if config.get("authorization") != (
+        "ONE_FRESH_STATE_4000_FIXED_RETROSPECTIVE_CROSS_CARRIER_ARENA"
+    ):
+        raise PermissionError("Search Engine V1.3 authorization changed")
+    expected_scalars = {
+        "strict_evaluated_target": V13_STRICT_TARGET,
+        "checkpoint_size": V13_CHECKPOINT_SIZE,
+        "checkpoint_count": V13_CHECKPOINT_COUNT,
+        "raw_generation_attempt_limit": V13_RAW_ATTEMPT_LIMIT,
+        "wall_time_limit_seconds": V13_WALL_TIME_LIMIT_SECONDS,
+        "constructibility_canary_strict_count": V13_CANARY_STRICT_COUNT,
+    }
+    if any(int(config.get(key, -1)) != value for key, value in expected_scalars.items()):
+        raise ValueError("Search Engine V1.3 frozen budget changed")
+    if config.get("arms_per_checkpoint") != V13_CHECKPOINT_ALLOCATION:
+        raise ValueError("Search Engine V1.3 arm allocation changed")
+    if tuple(int(value) for value in config.get("seeds", [])) != SEEDS:
+        raise ValueError("Search Engine V1.3 seed set changed")
+    if any(bool(value) for value in config.get("fresh_state", {}).values()):
+        raise PermissionError("Search Engine V1.3 imported prior state")
+    forbidden = (
+        "alpha_claim",
+        "oos",
+        "challenge",
+        "recent",
+        "may_stress",
+        "forward",
+        "promotion",
+        "latent_priority",
+        "relational_training",
+        "cross_sprint_adaptive_memory",
+    )
+    if any(bool(config["boundaries"].get(key)) for key in forbidden):
+        raise PermissionError("Search Engine V1.3 research boundary opened")
+    manifest_path = repo_root / str(config["source_carrier_manifest"])
+    physical_carrier = str(config["physical_carrier"])
+    if physical_carrier != "AGGTRADES_TOP200_DELIVERED":
+        raise ValueError("V1.3 must reuse the existing full aggTrades physical carrier")
+    store, physical_contracts, loader_evidence = load_search_surface_carrier(
+        repo_root,
+        carrier_manifest_path=manifest_path,
+        surface_id=physical_carrier,
+    )
+    broad_contracts, broad_identity, _ = _broad39_registry_contracts(repo_root)
+    agg_contracts = tuple(contracts_from_aggtrades_search_fields())
+    if {
+        item.field_id for item in physical_contracts
+    } != {item.field_id for item in agg_contracts}:
+        raise ValueError("V1.3 aggTrades contract authority changed")
+    contracts = tuple((*broad_contracts, *agg_contracts))
+    if len(contracts) != 83 or len({item.field_id for item in contracts}) != 83:
+        raise ValueError("V1.3 requires distinct Broad39 plus aggTrades44 fields")
+    missing = sorted(
+        {item.field_id for item in contracts}
+        - set(store.metadata.get("field_ids", []))
+    )
+    if missing:
+        raise ValueError(f"V1.3 physical carrier is missing fields: {missing}")
+    surface = field_role_surface(contracts)
+    if not surface["compatible_skeleton_ids"] or not surface["all_fields_reachable"]:
+        raise ValueError("V1.3 combined typed surface is not compiler reachable")
+    base = np.asarray(store.base_eligible(), dtype=bool)
+    counts = base.sum(axis=0, dtype=np.int64).astype(float)
+    regime = np.broadcast_to(counts, base.shape).copy()
+    regime[~base] = np.nan
+    behavior_contract = freeze_search_behavior_contract(
+        regime,
+        base,
+        pit_regime_source="__BASE_ELIGIBLE_COUNT__",
+    )
+    metadata = store.metadata
+    origins = {
+        "BROAD_PANEL_BASELINE": sorted(item.field_id for item in broad_contracts),
+        "AGGTRADES_TOP200_DELIVERED": sorted(
+            item.field_id for item in agg_contracts
+        ),
+    }
+    identities = {
+        "v13_config": {
+            "path": V13_CONFIG,
+            "sha256": sha256_file(config_path),
+        },
+        "source_carrier_manifest": {
+            "path": str(config["source_carrier_manifest"]),
+            "sha256": sha256_file(manifest_path),
+        },
+        "physical_carrier": {
+            "carrier_id": physical_carrier,
+            "cache_identity_sha256": metadata["identity_sha256"],
+            "loader_evidence": loader_evidence,
+        },
+        "semantic_carriers": {
+            "field_origins": origins,
+            "broad_authority": broad_identity,
+            "contracts_sha256": _payload_sha(_contracts_payload(contracts)),
+        },
+        "raw_cache": {
+            "root": str(
+                _read_json(manifest_path)["carriers"][physical_carrier][
+                    "cache_root"
+                ]
+            ),
+            "identity_sha256": metadata["identity_sha256"],
+        },
+    }
+    local_config = {
+        **config,
+        "window": {
+            "start": metadata["start_utc"],
+            "end_exclusive": metadata["end_exclusive_utc"],
+        },
+        "cache": identities["raw_cache"],
+        "field_origins": origins,
+    }
+    return store, contracts, behavior_contract, identities, local_config
+
+
 def _frozen_contract(
     *,
     source_sha: str,
@@ -1584,6 +1744,63 @@ def _carrier_gate_frozen_contract(
             "workers_12_forbidden": True,
         },
         "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY_ARM_AND_SEED_LOCAL",
+        "boundaries": {**dict(config["boundaries"]), "sealed_reads": 0},
+    }
+    return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
+def _v13_frozen_contract(
+    *,
+    source_sha: str,
+    compiler_binding: Mapping[str, Any],
+    behavior_contract: Mapping[str, Any],
+    input_identities: Mapping[str, Any],
+    environment: Mapping[str, Any],
+    config: Mapping[str, Any],
+    contracts: Sequence[FieldContract],
+) -> dict[str, Any]:
+    surface = field_role_surface(contracts)
+    payload = {
+        "schema_version": 1,
+        "epoch_id": V13_EPOCH_ID,
+        "experiment_id": str(config["experiment_id"]),
+        "source_sha": source_sha,
+        "authorization": str(config["authorization"]),
+        "input_identities": dict(input_identities),
+        "compiler_identity": dict(compiler_binding),
+        "evaluator_contract": pair_contract_payload(),
+        "behavior_descriptor": dict(behavior_contract),
+        "environment": dict(environment),
+        "window": dict(config["window"]),
+        "surface": {
+            "physical_carrier": str(config["physical_carrier"]),
+            "semantic_carriers": dict(config["semantic_carriers"]),
+            "field_count": len(contracts),
+            "field_origins": dict(config["field_origins"]),
+            "compatible_skeleton_ids": surface["compatible_skeleton_ids"],
+            "candidate_gate": dict(config["candidate_gate"]),
+            "contexts_merged": False,
+        },
+        "seeds": list(SEEDS),
+        "arms": {
+            "active": list(V13_ARMS),
+            "checkpoint_allocation": dict(V13_CHECKPOINT_ALLOCATION),
+            "same_seed_set_for_every_arm": True,
+        },
+        "fresh_state": dict(config["fresh_state"]),
+        "budget": {
+            "strict_evaluated_target": V13_STRICT_TARGET,
+            "checkpoint_size": V13_CHECKPOINT_SIZE,
+            "checkpoint_count": V13_CHECKPOINT_COUNT,
+            "constructibility_canary_strict_count": V13_CANARY_STRICT_COUNT,
+            "raw_generation_attempts_maximum": V13_RAW_ATTEMPT_LIMIT,
+            "wall_time_seconds_maximum": V13_WALL_TIME_LIMIT_SECONDS,
+            "workers_default": DEFAULT_WORKERS,
+            "workers_memory_fallback": FALLBACK_WORKERS,
+            "workers_12_forbidden": True,
+        },
+        "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY_ARM_AND_SEED_LOCAL",
+        "right_axis_ledger": "SEPARATE_CONTROL_INCREMENTAL_WATERFALL_AND_HASHES",
         "boundaries": {**dict(config["boundaries"]), "sealed_reads": 0},
     }
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
@@ -4411,8 +4628,22 @@ def _evaluation_audit_fields(evaluation: Mapping[str, Any]) -> dict[str, Any]:
         "support",
     )
     output: dict[str, Any] = {}
-    for section_name in ("primary", "control", "incremental"):
-        section = evaluation[section_name]
+    for section_name in (
+        "primary",
+        "control",
+        "left_control",
+        "right_control",
+        "incremental",
+        "left_incremental",
+        "right_incremental",
+    ):
+        section = evaluation.get(section_name)
+        if section is None and section_name == "left_control":
+            section = evaluation.get("control")
+        if section is None and section_name == "left_incremental":
+            section = evaluation.get("incremental")
+        if section is None:
+            continue
         for field in scalar_fields:
             output[f"{section_name}_{field}"] = section.get(field)
         output[f"{section_name}_month_metrics_json"] = json.dumps(
@@ -4479,8 +4710,15 @@ def _ledger_row(
         "behavior_family_id": behavior["behavior_family_id"],
         "primary_behavior_id": behavior.get("primary_behavior_id"),
         "control_behavior_id": behavior.get("control_behavior_id"),
+        "right_control_behavior_id": behavior.get("right_control_behavior_id"),
         "incremental_behavior_id": behavior.get(
             "incremental_behavior_id", behavior["behavior_family_id"]
+        ),
+        "left_incremental_behavior_id": behavior.get(
+            "left_incremental_behavior_id", behavior["behavior_family_id"]
+        ),
+        "right_incremental_behavior_id": behavior.get(
+            "right_incremental_behavior_id"
         ),
         "arm": str(proposal["arm"]),
         "seed": int(proposal["seed"]),
@@ -4490,6 +4728,10 @@ def _ledger_row(
         "horizon_hours": int(candidate.horizon_hours),
         "raw_fields_json": json.dumps(list(candidate.raw_fields)),
         "field_families_json": json.dumps(list(candidate.field_families)),
+        "semantic_carriers_json": json.dumps(
+            list(proposal.get("semantic_carriers", []))
+        ),
+        "cross_carrier_verified": proposal.get("cross_carrier_verified"),
         "operation": str(proposal["operation"]),
         "transition_key": proposal.get("transition_key"),
         "balanced_batch_index": proposal.get("balanced_batch_index"),
@@ -4536,6 +4778,14 @@ def _ledger_row(
         "turnover_mean": incremental.get("turnover_mean"),
         "cost_mean": incremental.get("cost_mean"),
         "support": incremental.get("support"),
+        "left_delta_weight_sha256": evaluation.get("left_delta_weight_sha256"),
+        "right_delta_weight_sha256": evaluation.get("right_delta_weight_sha256"),
+        "left_axis_feedback_json": json.dumps(
+            feedback.get("left_axis", {}), sort_keys=True
+        ),
+        "right_axis_feedback_json": json.dumps(
+            feedback.get("right_axis", {}), sort_keys=True
+        ),
         "feedback_violations_json": json.dumps(violations),
         **economic_audit,
         "coordinate_data_binding_id": behavior["coordinate_data_binding_id"],
@@ -5528,6 +5778,8 @@ def _final_manifest(
         runtime_root / "final_decision.json",
         report_path,
     ]
+    if (runtime_root / "constructibility_canary.json").is_file():
+        paths.append(runtime_root / "constructibility_canary.json")
     for checkpoint in sorted((runtime_root / "checkpoints").glob("checkpoint_*")):
         paths.extend(sorted(checkpoint.iterdir()))
     artifacts = [
@@ -5635,6 +5887,99 @@ def _carrier_gate_report_text(decision: Mapping[str, Any]) -> str:
 """
 
 
+def _v13_final_decision(
+    *,
+    source_sha: str,
+    state: Mapping[str, Any],
+    ledger: Sequence[Mapping[str, Any]],
+    archive: BehaviorArchive,
+    metrics: Sequence[Mapping[str, Any]],
+    runtime_root: Path,
+) -> dict[str, Any]:
+    base = _carrier_gate_final_decision(
+        source_sha=source_sha,
+        carrier_id="BROAD_PANEL_BASELINE_X_AGGTRADES_TOP200_DELIVERED",
+        state=state,
+        ledger=ledger,
+        archive=archive,
+        metrics=metrics,
+        runtime_root=runtime_root,
+    )
+    final_metrics = {
+        str(row["arm"]): dict(row)
+        for row in metrics
+        if int(row["checkpoint_index"]) == V13_CHECKPOINT_COUNT - 1
+    }
+    random_metrics = final_metrics["canonical_typed_random"]
+    comparisons = {
+        arm: {
+            "valid_exact_unique_per_cpu_hour_delta": float(
+                final_metrics[arm]["valid_exact_unique_per_cpu_hour"]
+            )
+            - float(random_metrics["valid_exact_unique_per_cpu_hour"]),
+            "new_behavior_families_per_1k_delta": float(
+                final_metrics[arm]["new_behavior_families_per_1k_evaluations"]
+            )
+            - float(
+                random_metrics["new_behavior_families_per_1k_evaluations"]
+            ),
+            "mean_pair_reward_delta": float(
+                final_metrics[arm]["mean_pair_reward_at_matched_count"]
+            )
+            - float(random_metrics["mean_pair_reward_at_matched_count"]),
+            "top_decile_pair_reward_delta": float(
+                final_metrics[arm]["top_decile_pair_reward_at_matched_count"]
+            )
+            - float(
+                random_metrics["top_decile_pair_reward_at_matched_count"]
+            ),
+        }
+        for arm in V13_ARMS[1:]
+    }
+    positive = sum(bool(row["matched_positive"]) for row in ledger)
+    return {
+        **base,
+        "status": "PASS_SEARCH_ENGINE_V1_3_CROSS_CARRIER_COMPLETED",
+        "checkpoint_restore_verified": (
+            len(
+                sorted(
+                    (runtime_root / "checkpoints").glob(
+                        "checkpoint_[0-9][0-9][0-9]"
+                    )
+                )
+            )
+            == V13_CHECKPOINT_COUNT
+        ),
+        "cross_carrier_strict_count": sum(
+            bool(row.get("cross_carrier_verified")) for row in ledger
+        ),
+        "positive_matched_discoveries": positive,
+        "arm_comparisons": comparisons,
+        "research_decision": "HOLD_RESEARCH_FIXED_RETROSPECTIVE_CROSS_CARRIER",
+        "future_arena_qualification": False,
+        "future_new_data_arena_qualified_arms": [],
+        "oi_mark_exclusion": "NO_COMMON_VERIFIED_TARGET_WINDOW",
+        "core3_exclusion": "THREE_ASSET_ONLY_NOT_USED_FOR_121_ASSET_ARENA",
+        "right_axis_ledger_trace": True,
+    }
+
+
+def _v13_report_text(decision: Mapping[str, Any]) -> str:
+    return f"""# Crypto Search Engine V1.3 Cross-Carrier Arena
+
+- Status: `{decision['status']}`
+- Producer source: `{decision['producer_source_sha']}`
+- Surface: existing aligned Broad39 x aggTrades44 physical carrier.
+- Strict evaluated: `{decision['strict_evaluated_count']}`; cross-carrier verified: `{decision['cross_carrier_strict_count']}`.
+- Positive matched discoveries: `{decision['positive_matched_discoveries']}`.
+- Checkpoints: `{decision['checkpoint_count']}`, exact restore: `{decision['checkpoint_restore_verified']}`.
+- Right-axis control and incremental waterfall persisted separately: `{decision['right_axis_ledger_trace']}`.
+- Research decision: `{decision['research_decision']}`.
+- OI/mark excluded because no verified target window overlaps another active carrier; Core3 excluded from the 121-asset Arena because its verified context has only three assets.
+- Boundaries: fixed retrospective development only; no OOS, promotion, sealed reads, liquidation, or Alpha claim.
+"""
+
+
 def run_engine(
     repo_root: Path,
     *,
@@ -5649,14 +5994,36 @@ def run_engine(
         "search_engine_v1_1",
         "search_engine_v1_2",
         "carrier_gate_v1",
+        "search_engine_v1_3_cross_carrier",
     }:
         raise ValueError(f"unsupported Search Engine V1 campaign: {campaign}")
     is_canary = campaign == "aggtrades_system_canary"
     is_v11 = campaign == "search_engine_v1_1"
     is_v12 = campaign == "search_engine_v1_2"
     is_carrier_gate = campaign == "carrier_gate_v1"
-    is_system_campaign = is_canary or is_v11 or is_v12 or is_carrier_gate
-    if is_carrier_gate:
+    is_v13 = campaign == "search_engine_v1_3_cross_carrier"
+    is_system_campaign = (
+        is_canary or is_v11 or is_v12 or is_carrier_gate or is_v13
+    )
+    if is_v13:
+        if runtime_date != V13_DEFAULT_RUNTIME_DATE:
+            raise ValueError("Search Engine V1.3 runtime date changed")
+        runtime_root = (
+            repo_root
+            / f"runtime/crypto_search_engine_v1_3_cross_carrier_{runtime_date}"
+        )
+        report_path = (
+            repo_root
+            / f"reports/CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_{runtime_date}.md"
+        )
+        strict_target = V13_STRICT_TARGET
+        checkpoint_count = V13_CHECKPOINT_COUNT
+        checkpoint_size = V13_CHECKPOINT_SIZE
+        raw_attempt_limit = V13_RAW_ATTEMPT_LIMIT
+        wall_time_limit = V13_WALL_TIME_LIMIT_SECONDS
+        campaign_arms = V13_ARMS
+        block_role = "FRESH_STATE_FIXED_RETROSPECTIVE_BROAD_X_AGGTRADES"
+    elif is_carrier_gate:
         if runtime_date != CARRIER_GATE_DEFAULT_RUNTIME_DATE:
             raise ValueError("carrier gate runtime date changed")
         if carrier_id not in CARRIER_GATE_IDS:
@@ -5752,7 +6119,13 @@ def run_engine(
         raise RuntimeError(
             "Search Engine V1 requires a clean producer tree; only its runtime/report may exist"
         )
-    if is_carrier_gate:
+    if is_v13:
+        store, contracts, behavior_contract, input_identities, continuation = (
+            _load_v13_inputs(repo_root)
+        )
+        block_start = str(continuation["window"]["start"])
+        block_end = str(continuation["window"]["end_exclusive"])
+    elif is_carrier_gate:
         store, contracts, behavior_contract, input_identities, continuation = (
             _load_carrier_gate_inputs(repo_root, str(carrier_id))
         )
@@ -5785,7 +6158,17 @@ def run_engine(
     registry = TypedExpressionRegistry(contracts)
     compiler_binding = _compiler_binding(repo_root)
     environment = _environment_fingerprint()
-    if is_carrier_gate:
+    if is_v13:
+        frozen = _v13_frozen_contract(
+            source_sha=source_sha,
+            compiler_binding=compiler_binding,
+            behavior_contract=behavior_contract,
+            input_identities=input_identities,
+            environment=environment,
+            config=continuation,
+            contracts=contracts,
+        )
+    elif is_carrier_gate:
         frozen = _carrier_gate_frozen_contract(
             source_sha=source_sha,
             compiler_binding=compiler_binding,
@@ -5839,6 +6222,14 @@ def run_engine(
         repo_root / str(continuation["cache"]["root"])
         if is_system_campaign or is_carrier_gate
         else repo_root / str(continuation["cache_root"])
+    )
+    v13_origin_sets = (
+        {
+            key: set(str(value) for value in values)
+            for key, values in continuation["field_origins"].items()
+        }
+        if is_v13
+        else {}
     )
 
     existing_checkpoints: list[Path] = []
@@ -5936,7 +6327,9 @@ def run_engine(
             int(state["next_checkpoint_index"]), checkpoint_count
         ):
             allocation = (
-                dict(CARRIER_GATE_CHECKPOINT_ALLOCATION)
+                dict(V13_CHECKPOINT_ALLOCATION)
+                if is_v13
+                else dict(CARRIER_GATE_CHECKPOINT_ALLOCATION)
                 if is_carrier_gate
                 else dict(V12_CHECKPOINT_ALLOCATION)
                 if is_v12
@@ -6093,9 +6486,29 @@ def run_engine(
                         )
                         continue
                     attempted_ids.add(candidate.candidate_id)
-                    if is_system_campaign and not is_carrier_gate and not (
+                    if is_v13:
+                        semantic_carriers = list(
+                            _candidate_semantic_carriers(
+                                candidate, v13_origin_sets
+                            )
+                        )
+                        if set(semantic_carriers) != set(v13_origin_sets):
+                            _policy_reject(policy, candidate)
+                            _failure(state, arm, "CROSS_CARRIER_INPUT_REQUIRED")
+                            state["arm_counters"][arm]["cpu_seconds"] += (
+                                time.process_time() - proposal_cpu_started
+                            )
+                            continue
+                    else:
+                        semantic_carriers = []
+                    if (
+                        is_system_campaign
+                        and not is_carrier_gate
+                        and not is_v13
+                        and not (
                         set(candidate.raw_fields)
                         & set(AGGTRADES_SYSTEM_CANARY_FIELDS)
+                        )
                     ):
                         _policy_reject(policy, candidate)
                         _failure(state, arm, "AGGTRADES_INPUT_REQUIRED")
@@ -6113,6 +6526,10 @@ def run_engine(
                             "arm": arm,
                             "seed": seed,
                             "candidate": candidate,
+                            "semantic_carriers": semantic_carriers,
+                            "cross_carrier_verified": (
+                                True if is_v13 else None
+                            ),
                             "expression_hash_verified": expression_verified,
                             "proposal_cpu_seconds": proposal_cpu,
                             "generation_attempt_ordinal": int(
@@ -6270,6 +6687,39 @@ def run_engine(
                     state["arm_counters"][arm]["cpu_seconds"] += completion_cpu
                     ledger_row["archive_completion_cpu_seconds"] = completion_cpu
                     ledger.append(ledger_row)
+                    if is_v13 and len(ledger) == V13_CANARY_STRICT_COUNT:
+                        _write_json(
+                            runtime_root / "constructibility_canary.json",
+                            {
+                                "schema_version": 1,
+                                "status": "PASS_PENDING_CHECKPOINT_RESTORE",
+                                "strict_evaluated_count": len(ledger),
+                                "all_cross_carrier": all(
+                                    bool(row.get("cross_carrier_verified"))
+                                    for row in ledger
+                                ),
+                                "all_dual_axis_traced": all(
+                                    row.get("right_delta_weight_sha256")
+                                    and row.get("right_axis_feedback_json")
+                                    for row in ledger
+                                ),
+                                "compiler_validation": True,
+                                "matched_controls": [
+                                    "left_only",
+                                    "right_only",
+                                ],
+                                "receipt_and_hash_replay": all(
+                                    bool(row["expression_hash_verified"])
+                                    and (
+                                        row.get("receipt_json") is None
+                                        or bool(row.get("receipt_verified"))
+                                    )
+                                    for row in ledger
+                                ),
+                                "checkpoint_restore": "PENDING_CHECKPOINT_000",
+                                "sealed_reads": 0,
+                            },
+                        )
                 if not preflight_done:
                     available_memory = int(psutil.virtual_memory().available)
                     projected = (
@@ -6405,7 +6855,9 @@ def run_engine(
                 state=state,
                 policies=policies,
                 comparison_arms=(
-                    CARRIER_GATE_ARMS
+                    V13_ARMS
+                    if is_v13
+                    else CARRIER_GATE_ARMS
                     if is_carrier_gate
                     else V12_ARMS
                     if is_v12
@@ -6451,6 +6903,19 @@ def run_engine(
                 expected_frozen_hash=frozen_hash,
                 expected_identities=identities,
             )
+            if is_v13 and checkpoint_index == 0:
+                canary_path = runtime_root / "constructibility_canary.json"
+                canary = _read_json(canary_path)
+                canary.update(
+                    {
+                        "status": "PASS",
+                        "checkpoint_restore": "VERIFIED_AT_CHECKPOINT_000",
+                        "checkpoint_manifest_sha256": sha256_file(
+                            checkpoint_path / "manifest.json"
+                        ),
+                    }
+                )
+                _write_json(canary_path, canary)
             attempted_ids = set(str(value) for value in state["attempted_exact_ids"])
             print(
                 json.dumps(
@@ -6514,7 +6979,16 @@ def run_engine(
         )
     state["wall_elapsed_seconds"] = active_elapsed()
     decision = (
-        _carrier_gate_final_decision(
+        _v13_final_decision(
+            source_sha=source_sha,
+            state=state,
+            ledger=ledger,
+            archive=archive,
+            metrics=metrics,
+            runtime_root=runtime_root,
+        )
+        if is_v13
+        else _carrier_gate_final_decision(
             source_sha=source_sha,
             carrier_id=str(carrier_id),
             state=state,
@@ -6564,7 +7038,9 @@ def run_engine(
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
         (
-            _carrier_gate_report_text(decision)
+            _v13_report_text(decision)
+            if is_v13
+            else _carrier_gate_report_text(decision)
             if is_carrier_gate
             else _v12_report_text(decision)
             if is_v12
@@ -6586,7 +7062,9 @@ def run_engine(
         identities=identities,
         state=state,
         epoch_id=(
-            CARRIER_GATE_EPOCH_ID
+            V13_EPOCH_ID
+            if is_v13
+            else CARRIER_GATE_EPOCH_ID
             if is_carrier_gate
             else V12_EPOCH_ID
             if is_v12
@@ -6599,6 +7077,9 @@ def run_engine(
         base_sha=(source_sha if is_system_campaign else BASE_SHA),
         continuation=(
             "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+            f"check-v13 --runtime-date {runtime_date}"
+            if is_v13
+            else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
             f"check-carrier-gate --carrier-id {carrier_id} --runtime-date {runtime_date}"
             if is_carrier_gate
             else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
@@ -6617,7 +7098,8 @@ def run_engine(
     _write_json(runtime_root / "run_manifest.json", manifest)
     run_result = (
         "PASS"
-        if is_carrier_gate
+        if is_v13
+        or is_carrier_gate
         or (not is_v11 and not is_v12)
         or decision["status"]
         in {
@@ -7845,6 +8327,172 @@ def check_v12(
     }
 
 
+def check_v13(
+    repo_root: Path,
+    *,
+    runtime_date: str = V13_DEFAULT_RUNTIME_DATE,
+) -> dict[str, Any]:
+    runtime_root = (
+        repo_root
+        / f"runtime/crypto_search_engine_v1_3_cross_carrier_{runtime_date}"
+    )
+    report_path = (
+        repo_root
+        / f"reports/CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_{runtime_date}.md"
+    )
+    errors: list[str] = []
+    required = (
+        "frozen_contract.json",
+        "embedded_preflight.json",
+        "constructibility_canary.json",
+        "candidate_ledger.parquet",
+        "behavior_archive.parquet",
+        "behavior_family_summary.json",
+        "arm_checkpoint_metrics.parquet",
+        "final_decision.json",
+        "run_manifest.json",
+    )
+    for name in required:
+        if not (runtime_root / name).is_file():
+            errors.append(f"missing:{name}")
+    if not report_path.is_file():
+        errors.append("missing:report")
+    if errors:
+        return {"result": "FAIL", "errors": errors}
+    frozen = _read_json(runtime_root / "frozen_contract.json")
+    decision = _read_json(runtime_root / "final_decision.json")
+    manifest = _read_json(runtime_root / "run_manifest.json")
+    canary = _read_json(runtime_root / "constructibility_canary.json")
+    ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
+    archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
+    if _payload_sha(
+        {
+            key: value
+            for key, value in frozen.items()
+            if key != "frozen_contract_sha256"
+        }
+    ) != frozen.get("frozen_contract_sha256"):
+        errors.append("frozen_contract_sha256")
+    if frozen.get("authorization") != (
+        "ONE_FRESH_STATE_4000_FIXED_RETROSPECTIVE_CROSS_CARRIER_ARENA"
+    ):
+        errors.append("authorization")
+    if any(bool(value) for value in frozen.get("fresh_state", {}).values()):
+        errors.append("fresh_state_import")
+    if len(ledger) != V13_STRICT_TARGET or ledger["candidate_id"].nunique() != len(
+        ledger
+    ):
+        errors.append("strict_exact_unique_count")
+    for column in (
+        "compile_valid",
+        "exact_unique",
+        "matched_control_valid",
+        "strict_cost_evaluated",
+        "expression_hash_verified",
+        "cross_carrier_verified",
+    ):
+        if column not in ledger or not bool(ledger[column].fillna(False).all()):
+            errors.append(f"ledger_gate:{column}")
+    right_axis_columns = (
+        "right_control_net_mean",
+        "right_incremental_net_mean",
+        "right_delta_weight_sha256",
+        "right_axis_feedback_json",
+        "right_control_behavior_id",
+        "right_incremental_behavior_id",
+    )
+    if any(column not in ledger for column in right_axis_columns):
+        errors.append("right_axis_trace_columns")
+    elif (
+        ledger[list(right_axis_columns)].isna().any().any()
+        or ledger["right_delta_weight_sha256"].astype(str).str.len().ne(64).any()
+    ):
+        errors.append("right_axis_trace_values")
+    origin_sets = {
+        key: set(values)
+        for key, values in frozen["surface"]["field_origins"].items()
+    }
+    if not all(
+        all(set(json.loads(value)) & fields for fields in origin_sets.values())
+        for value in ledger["raw_fields_json"].astype(str)
+    ):
+        errors.append("cross_carrier_origin_gate")
+    expected_arm_counts = {
+        arm: count * V13_CHECKPOINT_COUNT
+        for arm, count in V13_CHECKPOINT_ALLOCATION.items()
+    }
+    if ledger.groupby("arm").size().to_dict() != expected_arm_counts:
+        errors.append("arm_counts")
+    checkpoints = sorted(
+        (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
+    )
+    if (
+        len(checkpoints) != V13_CHECKPOINT_COUNT
+        or not all(
+            _read_json(path / "manifest.json").get("restore_verified") is True
+            for path in checkpoints
+        )
+    ):
+        errors.append("checkpoint_restore")
+    if (
+        canary.get("status") != "PASS"
+        or canary.get("strict_evaluated_count") != V13_CANARY_STRICT_COUNT
+        or canary.get("checkpoint_restore") != "VERIFIED_AT_CHECKPOINT_000"
+    ):
+        errors.append("constructibility_canary")
+    boundaries = frozen.get("boundaries", {})
+    if boundaries.get("sealed_reads") != 0 or any(
+        bool(boundaries.get(key))
+        for key in (
+            "alpha_claim",
+            "oos",
+            "challenge",
+            "recent",
+            "may_stress",
+            "forward",
+            "promotion",
+            "latent_priority",
+            "relational_training",
+            "cross_sprint_adaptive_memory",
+        )
+    ):
+        errors.append("research_boundary")
+    if decision.get("status") != "PASS_SEARCH_ENGINE_V1_3_CROSS_CARRIER_COMPLETED":
+        errors.append("final_decision")
+    if decision.get("future_new_data_arena_qualified_arms") != []:
+        errors.append("future_arena_qualification")
+    if _payload_sha(manifest.get("artifacts", [])) != manifest.get(
+        "artifact_bundle_sha256"
+    ):
+        errors.append("manifest_bundle")
+    for record in manifest.get("artifacts", []):
+        path = repo_root / str(record["path"])
+        if (
+            not path.is_file()
+            or path.stat().st_size != int(record["bytes"])
+            or sha256_file(path) != str(record["sha256"])
+        ):
+            errors.append(f"manifest_artifact:{record['path']}")
+    result = "PASS" if not errors else "FAIL"
+    return {
+        "result": result,
+        "errors": errors,
+        "engineering_integrity": result,
+        "research_decision": decision.get("research_decision"),
+        "producer_source_sha": manifest.get("producer_source_sha"),
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": decision.get("generation_attempts"),
+        "checkpoint_count": len(checkpoints),
+        "behavior_family_count": int(archive["behavior_family_id"].nunique()),
+        "positive_matched_discoveries": int(
+            ledger["matched_positive"].fillna(False).sum()
+        ),
+        "artifact_bundle_sha256": manifest.get("artifact_bundle_sha256"),
+        "future_new_data_arena_qualified_arms": [],
+        "sealed_reads": decision.get("sealed_reads"),
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -7860,6 +8508,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "run-v12",
             "check-v12",
             "run-carrier-gate",
+            "run-v13",
+            "check-v13",
         ),
     )
     parser.add_argument("--runtime-date")
@@ -7935,6 +8585,18 @@ def main(argv: Sequence[str] | None = None) -> int:
             source_sha=args.source_sha,
             campaign="search_engine_v1_2",
         )
+    elif args.command == "run-v13":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or V13_DEFAULT_RUNTIME_DATE),
+            source_sha=args.source_sha,
+            campaign="search_engine_v1_3_cross_carrier",
+        )
+    elif args.command == "check-v13":
+        result = check_v13(
+            repo_root,
+            runtime_date=str(args.runtime_date or V13_DEFAULT_RUNTIME_DATE),
+        )
     else:
         result = check_v12(
             repo_root,
@@ -7960,6 +8622,7 @@ __all__ = [
     "check_aggtrades_canary",
     "check_v11",
     "check_v12",
+    "check_v13",
     "check_engine",
     "run_engine",
 ]

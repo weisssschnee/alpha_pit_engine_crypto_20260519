@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_id": "20260728_crypto_search_engine_v1_3_cross_carrier",
+  "authorization": "ONE_FRESH_STATE_4000_FIXED_RETROSPECTIVE_CROSS_CARRIER_ARENA",
+  "source_carrier_manifest": "runtime/crypto_search_surface_integration_v1_20260728/search_carriers.json",
+  "physical_carrier": "AGGTRADES_TOP200_DELIVERED",
+  "semantic_carriers": {
+    "left": "BROAD_PANEL_BASELINE",
+    "right": "AGGTRADES_TOP200_DELIVERED"
+  },
+  "strict_evaluated_target": 4000,
+  "checkpoint_size": 1000,
+  "checkpoint_count": 4,
+  "raw_generation_attempt_limit": 50000,
+  "wall_time_limit_seconds": 64800,
+  "constructibility_canary_strict_count": 32,
+  "arms_per_checkpoint": {
+    "canonical_typed_random": 200,
+    "hierarchical_typed_cem_v2": 400,
+    "typed_evolution_v2": 400
+  },
+  "seeds": [20260716, 20260717, 20260718, 20260719],
+  "candidate_gate": {
+    "requires_at_least_one_field_from_each_semantic_carrier": true,
+    "minimum_assets_per_timestamp": 3,
+    "missing_fill": null
+  },
+  "fresh_state": {
+    "old_candidate_import": false,
+    "old_reward_import": false,
+    "old_distribution_import": false,
+    "old_population_import": false,
+    "old_policy_state_import": false,
+    "old_archive_import": false,
+    "old_transition_memory_import": false
+  },
+  "boundaries": {
+    "development_only": true,
+    "fixed_retrospective_carrier": true,
+    "alpha_claim": false,
+    "oos": false,
+    "challenge": false,
+    "recent": false,
+    "may_stress": false,
+    "forward": false,
+    "promotion": false,
+    "latent_priority": false,
+    "relational_training": false,
+    "cross_sprint_adaptive_memory": false,
+    "liquidation": "HOLD",
+    "oi_mark_cross_carrier": "HOLD_NO_COMMON_VERIFIED_TARGET_WINDOW",
+    "core3_cross_section": "HOLD_THREE_ASSET_ONLY"
+  }
+}

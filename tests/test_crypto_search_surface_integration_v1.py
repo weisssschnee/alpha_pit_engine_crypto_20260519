@@ -18,6 +18,9 @@ from alphafactory_crypto.broad_search.expression import (
     TypedExpressionRegistry,
 )
 from alphafactory_crypto.broad_search.panel18m import RawPanelStore
+from alphafactory_crypto.broad_search.search_engine_v1 import (
+    _evaluation_audit_fields,
+)
 from alphafactory_crypto.broad_search.runner18m import (
     _directory_bundle,
     _payload_sha,
@@ -393,3 +396,32 @@ def test_raw_panel_store_normalizes_legacy_microsecond_timestamps(
         1_704_067_200_000_000_000,
         1_704_070_800_000_000_000,
     ]
+
+
+def test_dual_axis_waterfalls_are_flattened_independently() -> None:
+    def section(value: float) -> dict[str, object]:
+        return {
+            "gross_mean": value,
+            "net_mean": value,
+            "turnover_mean": abs(value),
+            "cost_mean": 0.0,
+            "support": 10,
+            "month_metrics": [],
+        }
+
+    evaluation = {
+        "primary": section(3.0),
+        "control": section(1.0),
+        "left_control": section(1.0),
+        "right_control": section(2.0),
+        "incremental": section(-1.0),
+        "left_incremental": section(-1.0),
+        "right_incremental": section(-2.0),
+        "feedback": {"violations": []},
+        "scalar_net_delta_diagnostic": 2.0,
+    }
+    flattened = _evaluation_audit_fields(evaluation)
+    assert flattened["left_control_net_mean"] == 1.0
+    assert flattened["right_control_net_mean"] == 2.0
+    assert flattened["left_incremental_net_mean"] == -1.0
+    assert flattened["right_incremental_net_mean"] == -2.0
