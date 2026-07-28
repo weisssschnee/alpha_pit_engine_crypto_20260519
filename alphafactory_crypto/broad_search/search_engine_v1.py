@@ -3429,12 +3429,20 @@ def _initial_policies(
     seeds: Sequence[int] = SEEDS,
 ) -> dict[str, PolicyType]:
     output: dict[str, PolicyType] = {}
+    compatible_skeleton_ids = field_role_surface(
+        tuple(registry.fields.values())
+    )["compatible_skeleton_ids"]
     for seed in seeds:
         for arm in arms:
             key = _policy_key(arm, seed)
             if arm in V1_PARAMETERS:
+                parameters = dict(V1_PARAMETERS[arm])
+                if len(compatible_skeleton_ids) != len(skeleton_registry()):
+                    parameters["compatible_skeleton_ids"] = list(
+                        compatible_skeleton_ids
+                    )
                 output[key] = LanePolicy(
-                    arm, seed, registry, dict(V1_PARAMETERS[arm])
+                    arm, seed, registry, parameters
                 )
             elif arm == "hierarchical_typed_cem_v2":
                 output[key] = HierarchicalTypedCEMV2(
@@ -5659,10 +5667,10 @@ def run_engine(
             raise ValueError("carrier gate requires one frozen carrier id")
         carrier_slug = str(carrier_id).lower()
         runtime_root = repo_root / (
-            f"runtime/crypto_search_carrier_gate_v1_r1_{carrier_slug}_{runtime_date}"
+            f"runtime/crypto_search_carrier_gate_v1_r2_{carrier_slug}_{runtime_date}"
         )
         report_path = repo_root / (
-            f"reports/CRYPTO_SEARCH_CARRIER_GATE_V1_R1_{carrier_slug.upper()}_{runtime_date}.md"
+            f"reports/crypto_search_carrier_gate_v1_r2_{carrier_slug.upper()}_{runtime_date}.md"
         )
         strict_target = CARRIER_GATE_STRICT_TARGET
         checkpoint_count = CARRIER_GATE_CHECKPOINT_COUNT

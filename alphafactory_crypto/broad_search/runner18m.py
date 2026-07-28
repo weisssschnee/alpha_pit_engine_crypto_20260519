@@ -43,6 +43,7 @@ from .compositional18m import (
     audit_numeric_expressivity,
     candidate_from_genes,
     field_role_coverage,
+    field_role_surface,
     generate_candidate,
     generate_structural_pool,
     skeleton_payload,
@@ -646,6 +647,7 @@ class LanePolicy:
     registry: TypedExpressionRegistry
     parameters: Mapping[str, Any] = field(default_factory=dict)
     rng: random.Random = field(init=False)
+    roles: dict[str, list[str]] = field(init=False)
     seen: set[str] = field(default_factory=set)
     rewards: dict[str, float] = field(default_factory=dict)
     candidates: dict[str, CandidateSpec] = field(default_factory=dict)
@@ -661,6 +663,20 @@ class LanePolicy:
             raise ValueError(self.policy)
         self.parameters = dict(self.parameters)
         self.rng = random.Random(self.seed)
+        self.roles = {
+            str(key): [str(value) for value in values]
+            for key, values in field_role_surface(
+                tuple(self.registry.fields.values())
+            )["roles"].items()
+        }
+        compatible = tuple(
+            str(value)
+            for value in self.parameters.get("compatible_skeleton_ids", ())
+        )
+        if compatible:
+            known = {item.skeleton_id for item in skeleton_registry()}
+            if not set(compatible).issubset(known):
+                raise ValueError("lane policy compatible skeleton identity changed")
         if self.policy == "cem_distribution_v1":
             self._validate_cem_parameters()
             self.cem_probabilities = {
@@ -686,7 +702,7 @@ class LanePolicy:
             raise ValueError("CEM elite_fraction must be in (0, 0.5]")
         if not 0.0 < smoothing <= 1.0:
             raise ValueError("CEM smoothing must be in (0, 1]")
-        if not 0.0 <= minimum_probability < 1.0 / len(skeleton_registry()):
+        if not 0.0 <= minimum_probability < 1.0 / len(self._skeletons()):
             raise ValueError("CEM minimum_probability is incompatible with support")
 
     def _validate_evolution_parameters(self) -> None:
@@ -698,10 +714,20 @@ class LanePolicy:
         if int(self.parameters.get("tournament_size", 4)) < 2:
             raise ValueError("typed evolution tournament must include two candidates")
 
-    @staticmethod
-    def _cem_domains() -> dict[str, tuple[Any, ...]]:
+    def _skeletons(self) -> tuple[Skeleton, ...]:
+        allowed = set(
+            str(value)
+            for value in self.parameters.get("compatible_skeleton_ids", ())
+        )
+        return tuple(
+            item
+            for item in skeleton_registry()
+            if not allowed or item.skeleton_id in allowed
+        )
+
+    def _cem_domains(self) -> dict[str, tuple[Any, ...]]:
         return {
-            "skeleton_id": tuple(item.skeleton_id for item in skeleton_registry()),
+            "skeleton_id": tuple(item.skeleton_id for item in self._skeletons()),
             "left_window": WINDOWS,
             "right_window": WINDOWS,
             "beta": BETAS,
@@ -747,7 +773,7 @@ class LanePolicy:
                 candidate = self.candidates[candidate_id]
                 skeleton = next(
                     item
-                    for item in skeleton_registry()
+                    for item in self._skeletons()
                     if item.skeleton_id == candidate.skeleton_id
                 )
                 if (
@@ -790,7 +816,7 @@ class LanePolicy:
     def _propose_cem_candidate(self) -> CandidateSpec:
         skeleton_id = str(self._cem_choice("skeleton_id"))
         skeleton = next(
-            item for item in skeleton_registry() if item.skeleton_id == skeleton_id
+            item for item in self._skeletons() if item.skeleton_id == skeleton_id
         )
         roles = field_role_coverage(tuple(self.registry.fields.values()))["roles"]
         left_field = self.rng.choice(roles[skeleton.field_roles[0]])
@@ -845,7 +871,7 @@ class LanePolicy:
         return float(np.mean(values)) if values else -11.0
 
     def _choose_skeleton(self) -> tuple[Any, str | None]:
-        skeletons = skeleton_registry()
+        skeletons = self._skeletons()
         parent_id: str | None = None
         if self.policy == "canonical_typed_random":
             return skeletons[(self.step + self.seed) % len(skeletons)], None
@@ -894,7 +920,12 @@ class LanePolicy:
             candidate = (
                 self._propose_cem_candidate()
                 if self.policy == "cem_distribution_v1"
-                else generate_candidate(self.registry, skeleton=skeleton, rng=self.rng)
+                else generate_candidate(
+                    self.registry,
+                    skeleton=skeleton,
+                    rng=self.rng,
+                    roles=self.roles,
+                )
             )
             if candidate.candidate_id not in self.seen:
                 break
@@ -957,7 +988,7 @@ class LanePolicy:
         receipt: dict[str, Any] | None = None
         verified: bool | None = None
         duplicate_resamples = 0
-        skeletons = skeleton_registry()
+        skeletons = self._skeletons()
         for duplicate_resamples in range(limit + 1):
             if explore:
                 skeleton = skeletons[(self.step + self.seed + duplicate_resamples) % len(skeletons)]
