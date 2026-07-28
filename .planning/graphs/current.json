@@ -1105,7 +1105,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-27T20:02:02.266592+00:00",
+  "generated_at": "2026-07-28T02:59:08.269766+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -6354,21 +6354,57 @@
     {
       "active_authority": false,
       "authority": {
-        "path": "config/crypto_field_information_v0.json",
-        "repo_ref": "experiment/crypto-explicit-latent-adaptive-v1-20260717",
-        "sha256": "BE2021B0C493CFA51E19A3F5DECD527AF27CA797031A0E59239E6F94B3CF9CA6",
-        "verified_sha": "057e31df71f55f9e3a6e8ea3b48d53293d7d2e13"
+        "path": "config/crypto_unified_field_management_v1.json",
+        "repo_ref": "experiment/crypto-search-surface-integration-v1-20260728",
+        "sha256": "C6D0A1A9C1E24EB7FC0C2A80A400D4C8AA4A677A4E4979645920F7D7AEF4FBE8",
+        "verified_sha": "43739edd18c264bfa9b4ce11a3953c95b6ca58db"
       },
       "claim_badges": [
+        "5,509 CANONICAL MANAGEMENT RECORDS",
+        "235 INDEPENDENT CARRIER BINDINGS",
+        "NO SECOND FIELD AUTHORITY",
         "CONSUMPTION VERIFIED",
         "PURGED CONDITIONAL INFORMATION VERIFIED",
-        "HELD-OUT CALIBRATION VERIFIED",
-        "UNPURGED EVIDENCE SUPERSEDED",
-        "ECONOMIC INCREMENT NOT ESTABLISHED",
-        "NO OOS"
+        "HELD-OUT CALIBRATION VERIFIED"
       ],
-      "color": "#f9a825",
+      "color": "#2e7d32",
       "contracts": [
+        {
+          "bypass_forbidden": false,
+          "enforced_by": "unified_field_management.compile_management_tables",
+          "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
+          "id": "unified_management_view_not_field_authority",
+          "rule": "The 5,509-record management catalog is a deterministic compiled view over the existing inventory, lineage, ontology, approval, derived-recipe, token, and carrier authorities; it cannot activate, approve, or redefine a field",
+          "severity": "HARD",
+          "type": "AUTHORITY"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "unified_field_management.compile_management_tables",
+          "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/field_management_summary.json",
+          "id": "carrier_management_boundaries_preserved",
+          "rule": "Broad39, Core3 81, aggTrades 44, and OI/mark 71 remain independent carrier bindings; a shared canonical management identity never merges their panels, eligibility, evidence, or research admission",
+          "severity": "HARD",
+          "type": "BOUNDARY"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "unified_field_management.compile_management_tables",
+          "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/field_management_summary.json",
+          "id": "management_conflicts_fail_closed",
+          "rule": "An orphan ontology, approval, or lineage identity, or divergent type, unit, or lag for one cross-carrier field identity, prevents publication of the compiled management view",
+          "severity": "HARD",
+          "type": "ADMISSION"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "unified_field_management.compile_management_tables",
+          "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/field_management_summary.json",
+          "id": "provenance_only_fields_not_search_inputs",
+          "rule": "The four first/last aggregate-trade receipt and transaction-time fields remain provenance-only and cannot receive a typed search role",
+          "severity": "HARD",
+          "type": "BOUNDARY"
+        },
         {
           "bypass_forbidden": false,
           "enforced_by": "field_information.compile_token_catalog",
@@ -6464,11 +6500,17 @@
       "evidence": "STATIC",
       "expires_at": "",
       "id": "field_information_qualification_v0",
-      "kind": "representation_qualification",
-      "label": "Context-bound Core Pack information and consumption qualification",
-      "lifecycle": "EXPERIMENTAL",
+      "kind": "field_management_compiled_view",
+      "label": "Unified field management compiled view and context-bound qualification",
+      "lifecycle": "ACTIVE",
       "owner": "",
       "paths": [
+        "docs/adr/0012-unified-field-management-compiled-view.md",
+        "config/crypto_unified_field_management_v1.json",
+        "alphafactory_crypto/unified_field_management.py",
+        "scripts/crypto_unified_field_management_v1.py",
+        "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
+        "reports/CRYPTO_UNIFIED_FIELD_MANAGEMENT_V1_20260728.md",
         "config/crypto_field_information_v0.json",
         "alphafactory_crypto/field_information.py",
         "scripts/crypto_field_information_v0.py",
@@ -6563,6 +6605,28 @@
         "alphafactory_crypto_field_information_role_for_family",
         "alphafactory_crypto_field_information_sample_coordinates",
         "alphafactory_crypto_field_information_sha256_file",
+        "alphafactory_crypto_unified_field_management",
+        "alphafactory_crypto_unified_field_management_as_bool",
+        "alphafactory_crypto_unified_field_management_basefieldspec",
+        "alphafactory_crypto_unified_field_management_build_management_view",
+        "alphafactory_crypto_unified_field_management_carrierspec",
+        "alphafactory_crypto_unified_field_management_compile_management_tables",
+        "alphafactory_crypto_unified_field_management_derivedviewspec",
+        "alphafactory_crypto_unified_field_management_git_sha",
+        "alphafactory_crypto_unified_field_management_payload_sha",
+        "alphafactory_crypto_unified_field_management_provenanceonlyspec",
+        "alphafactory_crypto_unified_field_management_rationale_1",
+        "alphafactory_crypto_unified_field_management_rationale_327",
+        "alphafactory_crypto_unified_field_management_rationale_96",
+        "alphafactory_crypto_unified_field_management_read_json",
+        "alphafactory_crypto_unified_field_management_searchrolebinding",
+        "alphafactory_crypto_unified_field_management_write_json",
+        "docs_adr_0012_unified_field_management_compiled_view",
+        "docs_adr_0012_unified_field_management_compiled_view_adr_0012_unified_field_management_compiled_view",
+        "docs_adr_0012_unified_field_management_compiled_view_boundaries",
+        "docs_adr_0012_unified_field_management_compiled_view_consequences",
+        "docs_adr_0012_unified_field_management_compiled_view_context",
+        "docs_adr_0012_unified_field_management_compiled_view_decision",
         "reports_crypto_broad_purged_calibrated_sticky_v1_20260718",
         "reports_crypto_broad_purged_calibrated_sticky_v1_20260718_boundaries",
         "reports_crypto_broad_purged_calibrated_sticky_v1_20260718_boundary_repair",
@@ -6585,6 +6649,13 @@
         "reports_crypto_field_information_v0_20260717_claim_boundary",
         "reports_crypto_field_information_v0_20260717_core3_microstructure_pilot",
         "reports_crypto_field_information_v0_20260717_crypto_field_information_v0",
+        "reports_crypto_unified_field_management_v1_20260728",
+        "reports_crypto_unified_field_management_v1_20260728_authority_map",
+        "reports_crypto_unified_field_management_v1_20260728_boundary",
+        "reports_crypto_unified_field_management_v1_20260728_compiled_result",
+        "reports_crypto_unified_field_management_v1_20260728_crypto_unified_field_management_v1",
+        "reports_crypto_unified_field_management_v1_20260728_decision",
+        "reports_crypto_unified_field_management_v1_20260728_duplicate_and_conflict_audit",
         "scripts_crypto_broad_core_pack_information_arena_v1",
         "scripts_crypto_broad_core_pack_information_arena_v1_git_sha",
         "scripts_crypto_broad_core_pack_information_arena_v1_main",
@@ -6611,6 +6682,8 @@
         "scripts_crypto_field_information_v0_report",
         "scripts_crypto_field_information_v0_run",
         "scripts_crypto_field_information_v0_timestamp_iso",
+        "scripts_crypto_unified_field_management_v1",
+        "scripts_crypto_unified_field_management_v1_main",
         "tests_test_broad_information_arena",
         "tests_test_broad_information_arena_test_causal_trailing_mean_uses_no_future_values",
         "tests_test_broad_information_arena_test_deterministic_coordinates_are_time_major_and_capped",
@@ -6621,21 +6694,36 @@
         "tests_test_broad_information_arena_test_pair_diagnostics_separate_prediction_difference_from_mapping_collapse",
         "tests_test_broad_information_arena_test_sticky_gate_counts_degenerate_arm_as_failure",
         "tests_test_broad_information_arena_test_turnover_aware_sticky_mapping_uses_horizon_cohort_and_fixed_cost_gate",
-        "tests_test_broad_information_arena_test_zero_net_sticky_decision_is_invariant_to_calibration_intercept"
+        "tests_test_broad_information_arena_test_zero_net_sticky_decision_is_invariant_to_calibration_intercept",
+        "tests_test_crypto_unified_field_management_v1",
+        "tests_test_crypto_unified_field_management_v1_tables",
+        "tests_test_crypto_unified_field_management_v1_test_aliases_resolve_to_one_canonical_field",
+        "tests_test_crypto_unified_field_management_v1_test_canonical_identity_is_deterministic",
+        "tests_test_crypto_unified_field_management_v1_test_carrier_boundaries_are_not_merged",
+        "tests_test_crypto_unified_field_management_v1_test_conflicting_authorities_fail_closed",
+        "tests_test_crypto_unified_field_management_v1_test_derived_view_identity_is_deterministic",
+        "tests_test_crypto_unified_field_management_v1_test_different_venue_or_unit_does_not_collapse",
+        "tests_test_crypto_unified_field_management_v1_test_every_discovered_field_has_one_canonical_management_record",
+        "tests_test_crypto_unified_field_management_v1_test_existing_candidate_spec_replay_is_unchanged",
+        "tests_test_crypto_unified_field_management_v1_test_existing_search_fields_preserve_contract_identity",
+        "tests_test_crypto_unified_field_management_v1_test_new_registry_can_be_added_without_duplicate_manual_entry",
+        "tests_test_crypto_unified_field_management_v1_test_no_second_ontology_or_approval_authority_is_created",
+        "tests_test_crypto_unified_field_management_v1_test_prematerialized_derived_field_binds_to_existing_recipe",
+        "tests_test_crypto_unified_field_management_v1_test_provenance_only_field_cannot_receive_search_role"
       ],
       "required": false,
-      "semantic_role": "context_bound_feature_information_qualification",
+      "semantic_role": "compiled_field_management_and_context_bound_information_qualification",
       "validation": {
-        "checked_at": "2026-07-27T10:05:17.991606+00:00",
-        "evidence_ref": "runtime/crypto_broad_purged_calibrated_sticky_v1_20260718/run_manifest.json",
-        "evidence_sha256": "92BF05B0046FE258BA708871EE52ED764C61EAA61E46F0ACCDA1A7FAEE73E6FA",
+        "checked_at": "2026-07-28T02:59:08.269766+00:00",
+        "evidence_ref": "runtime/crypto_unified_field_management_v1_20260728/run_manifest.json",
+        "evidence_sha256": "A2DDFC630F9FF48F5804AAB816A92AFB62E95A75550669D6DD8BC14705791478",
         "level": "PARTIAL",
         "notes": [
           "runtime assurance needs a completed matching trace with all contract bindings"
         ],
         "profile": "crypto-development-research",
         "result": "INSUFFICIENT_EVIDENCE",
-        "verified_at_sha": "3bd334c7e11dcb3583a0b3ebba3c577242172fef"
+        "verified_at_sha": "43739edd18c264bfa9b4ce11a3953c95b6ca58db"
       },
       "visible_by_default": true
     },
@@ -7200,7 +7288,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "FC37955FB9DAFBEA830C7593D75E6400F66B591C5846F60A3F12A95154536580"
+    "sha256": "F0DFA3F51D1C9EDAE7FE7896278A7A2E974C0F2915F01486B1468FF630134545"
   },
   "profile_id": null,
   "profiles": [
@@ -7231,13 +7319,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "f2c66a751fc4614e7618ca6ffeaf095d7ca63880",
-    "edge_count": 36001,
-    "node_count": 18996,
+    "built_at_commit": "e80a5593347e7fd75c539dac65fe6784cb69007c",
+    "edge_count": 36105,
+    "node_count": 19047,
     "path": ".planning/graphs/graph.json",
-    "sha256": "66A65E830A57C33A3F7230086913B491C3BAFE6863DE44F0CD0F86CB8C55A648"
+    "sha256": "492AF3006331A45EFF5C392CC753B1665DB8FB0CA4CCD787DF321EF1D52CE059"
   },
-  "repo_head": "f2c66a751fc4614e7618ca6ffeaf095d7ca63880",
+  "repo_head": "e80a5593347e7fd75c539dac65fe6784cb69007c",
   "schema_version": 1,
   "status": "INSUFFICIENT_EVIDENCE",
   "strict_mode": false,
