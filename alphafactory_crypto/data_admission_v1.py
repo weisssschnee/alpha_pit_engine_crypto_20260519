@@ -1393,25 +1393,32 @@ def build_aggtrades_system_canary_cache(
             temporary / "source_segment.npy",
             np.where(observed, source_segment, 0).astype(np.int8),
         )
-        active_count = observed.sum(axis=0).astype(np.float32)
-        active_matrix = np.where(observed, active_count[None, :], np.nan).astype(
-            np.float32
-        )
-        listing_age = np.asarray(
-            source.field("listing_age_hours")[:, block], dtype=float
-        )[source_asset_indices]
-        age_percentile = _rank_percentile_on_mask(listing_age, observed)
-        history_length = np.where(
-            observed, np.cumsum(observed, axis=1, dtype=np.int32), np.nan
-        ).astype(np.float32)
-        for field_id, values in {
-            "active_universe_size": active_matrix,
-            "age_percentile_active_universe": age_percentile,
-            "history_length_hours": history_length,
-        }.items():
-            if field_id not in field_matrices:
-                raise ValueError(f"Broad canary registry lacks context field: {field_id}")
-            field_matrices[field_id][...] = values
+        context_fields = {
+            "active_universe_size",
+            "age_percentile_active_universe",
+            "history_length_hours",
+        }
+        present_context_fields = context_fields & set(field_matrices)
+        if present_context_fields:
+            if present_context_fields != context_fields:
+                raise ValueError("source bridge exposes a partial context-field contract")
+            active_count = observed.sum(axis=0).astype(np.float32)
+            active_matrix = np.where(
+                observed, active_count[None, :], np.nan
+            ).astype(np.float32)
+            listing_age = np.asarray(
+                source.field("listing_age_hours")[:, block], dtype=float
+            )[source_asset_indices]
+            age_percentile = _rank_percentile_on_mask(listing_age, observed)
+            history_length = np.where(
+                observed, np.cumsum(observed, axis=1, dtype=np.int32), np.nan
+            ).astype(np.float32)
+            for field_id, values in {
+                "active_universe_size": active_matrix,
+                "age_percentile_active_universe": age_percentile,
+                "history_length_hours": history_length,
+            }.items():
+                field_matrices[field_id][...] = values
         for field_id, matrix in field_matrices.items():
             if field_id not in {
                 "active_universe_size",
@@ -1483,14 +1490,17 @@ def build_aggtrades_system_canary_cache(
             "end_exclusive_utc": end_ts.isoformat(),
             "observed_coordinates": int(observed.sum()),
             "eligible_coordinates": int(base_eligible.sum()),
-            "panel_context_contract": {
-                "authority": "POST_JOIN_ASSET_BY_TIME_RECOMPUTE",
-                "fields": [
-                    "active_universe_size",
-                    "age_percentile_active_universe",
-                    "history_length_hours",
-                ],
-            },
+            "panel_context_contract": (
+                {
+                    "authority": "POST_JOIN_ASSET_BY_TIME_RECOMPUTE",
+                    "fields": sorted(context_fields),
+                }
+                if present_context_fields
+                else {
+                    "authority": "SOURCE_HAS_NO_CONTEXT_FIELDS",
+                    "fields": [],
+                }
+            ),
             "fixed_retrospective_cohort": True,
             "research_admission": "DEVELOPMENT_DIAGNOSTIC_ONLY",
             "sealed_rows": 0,
