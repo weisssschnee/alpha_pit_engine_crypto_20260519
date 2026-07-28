@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "run_id": "CRYPTO_UNIFIED_FIELD_MANAGEMENT_V1_20260728",
+  "authorization": "COMPILED_MANAGEMENT_VIEW_ONLY",
+  "inputs": {
+    "field_information_config": "config/crypto_field_information_v0.json",
+    "inventory": "runtime/crypto_feature_runtime_inventory_20260714/CRYPTO_FEATURE_RUNTIME_INVENTORY.csv",
+    "lineage": "runtime/crypto_feature_runtime_inventory_20260714/feature_lineage_ledger.csv",
+    "ontology": "runtime/a7ffr1_field_ontology_v3/a7ffr1_field_ontology_v3.csv",
+    "approval": "runtime/crypto_feature_runtime_inventory_20260714/latest_input_approval_registry.csv",
+    "carrier_contracts": "runtime/crypto_search_surface_integration_v1_20260728/carrier_contracts.json",
+    "resolved_token_contract": "runtime/crypto_core_pack_consumption_v1_20260718_repaired/resolved_token_contract.json",
+    "broad_field_registry": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_18M_COMPOSITIONAL_FIELD_REGISTRY.json"
+  },
+  "provenance_only_fields": [
+    "agg_first_agg_trade_id",
+    "agg_last_agg_trade_id",
+    "agg_first_transact_time_ms",
+    "agg_last_transact_time_ms"
+  ],
+  "boundaries": {
+    "compiled_view_is_authority": false,
+    "carrier_contexts_merged": false,
+    "new_ontology_created": false,
+    "new_approval_authority_created": false,
+    "candidate_identity_changed": false,
+    "market_search_allowed": false,
+    "reward_read_allowed": false,
+    "sealed_reads_allowed": false,
+    "promotion_allowed": false
+  },
+  "outputs": {
+    "runtime_root": "runtime/crypto_unified_field_management_v1_20260728",
+    "report": "reports/CRYPTO_UNIFIED_FIELD_MANAGEMENT_V1_20260728.md"
+  }
+}

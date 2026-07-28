@@ -1,0 +1,22 @@
+{
+  "authority_conflict_count": 0,
+  "base_field_count": 298,
+  "canonical_field_count": 5509,
+  "carrier_binding_count": 235,
+  "carrier_counts": {
+    "AGGTRADES_TOP200_DELIVERED": 44,
+    "BROAD_PANEL_BASELINE": 39,
+    "CORE3_MICROSTRUCTURE_PILOT": 81,
+    "OI_MARK_RANKS51_200_DELIVERED": 71
+  },
+  "changes_candidate_identity": false,
+  "contexts_merged": false,
+  "creates_approval_authority": false,
+  "creates_ontology": false,
+  "derived_view_count": 5211,
+  "market_search_executed": false,
+  "provenance_only_count": 4,
+  "schema_version": 1,
+  "search_role_binding_count": 852,
+  "status": "PASS_COMPILED_VIEW_NOT_AUTHORITY"
+}
