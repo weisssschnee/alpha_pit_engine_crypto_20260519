@@ -1,0 +1,158 @@
+{
+  "active_wall_seconds": 547.8512264000019,
+  "artifact_bundle_sha256": "BCB6F54F9DA9256DA9416146738B838B745DD0FB06AAF263D308264CA464C5B7",
+  "artifacts": [
+    {
+      "bytes": 420,
+      "path": "reports/CRYPTO_SEARCH_CARRIER_GATE_V1_R3_OI_MARK_RANKS51_200_DELIVERED_20260728.md",
+      "sha256": "3759CC3C114909F86DB2D3E85D0349DE3A9D76086DB325D46CCE938174174866"
+    },
+    {
+      "bytes": 36323,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/arm_checkpoint_metrics.parquet",
+      "sha256": "F2B67F14675FFCC1164E9018191E7D9E797DAECB91D96F068A48F6C31A32971B"
+    },
+    {
+      "bytes": 274377,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/behavior_archive.parquet",
+      "sha256": "5BF8E7FEA6A56F0C95103777B5EFBBCF4D04784BB2F92AD9D372A6FF1B7D8671"
+    },
+    {
+      "bytes": 94053,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/behavior_family_summary.json",
+      "sha256": "FFCD4336D2E5A76DE07B8B3BEA1A95AC3067932A0A973EAC6BD4696D56568265"
+    },
+    {
+      "bytes": 1249642,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/candidate_ledger.parquet",
+      "sha256": "23EE248AC0E0F2AEB3C982A84D885BFC8DB801E3D8B017A9F836ADC60EC6F477"
+    },
+    {
+      "bytes": 35682,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/checkpoints/checkpoint_000/arm_checkpoint_metrics.parquet",
+      "sha256": "D76D5F4B0B0CF33498E5E62B8614F9EFF7F4B11894334A373C5CDA1E4F069A57"
+    },
+    {
+      "bytes": 150645,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/checkpoints/checkpoint_000/behavior_archive.parquet",
+      "sha256": "A235CE5BFE9611786B3063947490C14230FD281487132458D3E11A0C2414E3E9"
+    },
+    {
+      "bytes": 683552,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/checkpoints/checkpoint_000/candidate_ledger.parquet",
+      "sha256": "3C524F3DA584BC8E810F2896320DE1D0EAAF5C582FC3172D6906BFCEC97A852E"
+    },
+    {
+      "bytes": 3294,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/checkpoints/checkpoint_000/manifest.json",
+      "sha256": "E61F2CB5630AF13B7702D172EAEE14FD636B15CDC4780A4E23D674825A5F1795"
+    },
+    {
+      "bytes": 627762,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/checkpoints/checkpoint_000/state.json",
+      "sha256": "46CACAADC137951389417448B05C64998B0DB0B5D0DE37A88ED398B7622DCEF7"
+    },
+    {
+      "bytes": 36323,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/checkpoints/checkpoint_001/arm_checkpoint_metrics.parquet",
+      "sha256": "F2B67F14675FFCC1164E9018191E7D9E797DAECB91D96F068A48F6C31A32971B"
+    },
+    {
+      "bytes": 274377,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/checkpoints/checkpoint_001/behavior_archive.parquet",
+      "sha256": "5BF8E7FEA6A56F0C95103777B5EFBBCF4D04784BB2F92AD9D372A6FF1B7D8671"
+    },
+    {
+      "bytes": 1249642,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/checkpoints/checkpoint_001/candidate_ledger.parquet",
+      "sha256": "23EE248AC0E0F2AEB3C982A84D885BFC8DB801E3D8B017A9F836ADC60EC6F477"
+    },
+    {
+      "bytes": 3296,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/checkpoints/checkpoint_001/manifest.json",
+      "sha256": "1AB4EFC06CDD72E65FF92514B5DE0A9AED13017F98F2A5CC55C0C24513EF7B8E"
+    },
+    {
+      "bytes": 1037267,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/checkpoints/checkpoint_001/state.json",
+      "sha256": "4F5279AD349E3D182FCE05FD61739B9DE210BE54FE70DC8C648EEB7A25435FBD"
+    },
+    {
+      "bytes": 450,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/embedded_preflight.json",
+      "sha256": "E32FA537E781C1428B12602AA700A70A6D65D62B61142291B33251AB16A5A015"
+    },
+    {
+      "bytes": 1010,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/final_decision.json",
+      "sha256": "7136A44DF6EDB38E4308752999A49A7C8677A715A83D5EEB73A63D5C0BB24C7C"
+    },
+    {
+      "bytes": 11777,
+      "path": "runtime/crypto_search_carrier_gate_v1_r3_oi_mark_ranks51_200_delivered_20260728/frozen_contract.json",
+      "sha256": "F6CD1CE52D1386A6E7FC72B2C3D55E49DFCEDAF208B86A2F76345BAF5BEF78CF"
+    }
+  ],
+  "base_sha": "65c3a4fe615cb7cdcbca006f0c8f5cb8313a85cc",
+  "compiler_identity": {
+    "bundle_sha256": "BEADD3A487B3D36C05B265987141146F2BDCFDC76B14868FE542792E5B3D3D26",
+    "paths": [
+      {
+        "bytes": 53770,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "8A928F3FEAAE9E2F6E47A74FD8744B33CFA3B9CEEBD9D20A176EEDC5A123F0DA"
+      },
+      {
+        "bytes": 22088,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 51461,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "070C10C5F56ECDE92210EBD8BD14E153DE4FF1912E5F75CC17113ABE52A0583A"
+      },
+      {
+        "bytes": 23621,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "313125F7066DDDC81986FA70F3FDE31D13ABEA4419EC56ABA8A8CE217DABFBE4"
+      },
+      {
+        "bytes": 110881,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "1BD17FD85586033436531B3BC4873FEEC0DB968428253B256960F202BD296085"
+      },
+      {
+        "bytes": 330395,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "91224208B784AA260A768D7AEB4BAFDA73A66005AD9A68FFF4A46FFCB273E6B3"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "continuation": "python -m alphafactory_crypto.broad_search.search_engine_v1 check-carrier-gate --carrier-id OI_MARK_RANKS51_200_DELIVERED --runtime-date 20260728",
+  "data_cache_identity": {
+    "identity_sha256": "D97B516BDF3DFFA2DFCC293B28AF4007698B0BDC1C3678F443B6CDBB570DDD74",
+    "root": ".cache/crypto_search_surface_integration_v1/oi_mark_ranks51_200"
+  },
+  "epoch_id": "CRYPTO_SEARCH_CARRIER_GATE_V1_20260728",
+  "frozen_contract_sha256": "6909EF4CAAF698BFEE30737BAEE0AD82F83F7F9FB3A23CD4BDB3675665D65538",
+  "generation_attempts": 260,
+  "memory_fallback_used": true,
+  "producer_source_sha": "65c3a4fe615cb7cdcbca006f0c8f5cb8313a85cc",
+  "reproducible": true,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "COMPLETED",
+  "strict_evaluated_count": 256,
+  "workers_final": 8
+}

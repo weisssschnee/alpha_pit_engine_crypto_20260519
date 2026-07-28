@@ -1,0 +1,30 @@
+{
+  "active_wall_seconds": 547.8512264000019,
+  "alpha_claim": false,
+  "arm_comparisons": {
+    "hierarchical_typed_cem_v2": {
+      "mean_pair_reward_delta": -0.09619985092364303,
+      "new_behavior_families_per_1k_delta": 0.0,
+      "top_decile_pair_reward_delta": -0.2605631243732016
+    },
+    "typed_evolution_v2": {
+      "mean_pair_reward_delta": 0.0224958183214774,
+      "new_behavior_families_per_1k_delta": 0.0,
+      "top_decile_pair_reward_delta": -0.0025457629021570227
+    }
+  },
+  "behavior_family_count": 255,
+  "carrier_id": "OI_MARK_RANKS51_200_DELIVERED",
+  "checkpoint_count": 2,
+  "checkpoint_restore_verified": true,
+  "future_arena_qualification": false,
+  "generation_attempts": 260,
+  "oos": false,
+  "producer_source_sha": "65c3a4fe615cb7cdcbca006f0c8f5cb8313a85cc",
+  "promotion": false,
+  "research_decision": "HOLD_DEVELOPMENT_FIXED_RETROSPECTIVE_CARRIER",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "PASS_CARRIER_GATE_COMPLETED",
+  "strict_evaluated_count": 256
+}
