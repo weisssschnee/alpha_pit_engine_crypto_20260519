@@ -10308,8 +10308,29 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--runtime-date")
     parser.add_argument("--source-sha")
     parser.add_argument("--carrier-id", choices=CARRIER_GATE_IDS)
+    parser.add_argument("--evidence-to-add")
+    parser.add_argument("--decision-to-change")
     args = parser.parse_args(argv)
     repo_root = Path(__file__).resolve().parents[2]
+    authority_preflight = None
+    if args.command.startswith("run"):
+        from alphafactory_crypto.broad_search.experiment_authority import (
+            require_real_experiment_authority,
+        )
+
+        authority_preflight = require_real_experiment_authority(
+            repo_root,
+            evidence_to_add=args.evidence_to_add,
+            decision_to_change=args.decision_to_change,
+        )
+        print(
+            json.dumps(
+                {"experiment_authority_preflight": authority_preflight},
+                indent=2,
+                sort_keys=True,
+            ),
+            flush=True,
+        )
     if args.command == "run":
         result = run_engine(
             repo_root,
@@ -10421,6 +10442,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             repo_root,
             runtime_date=str(args.runtime_date or V12_DEFAULT_RUNTIME_DATE),
         )
+    if authority_preflight is not None:
+        result = {**result, "experiment_authority_preflight": authority_preflight}
     print(json.dumps(result, indent=2, sort_keys=True), flush=True)
     return 0 if result.get("result") == "PASS" else 1
 

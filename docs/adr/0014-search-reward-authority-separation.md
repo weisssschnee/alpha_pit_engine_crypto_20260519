@@ -1,9 +1,14 @@
 # ADR 0014: Search Reward Authority Separation
 
-- Status: Accepted
+- Status: Superseded by ADR 0016 as an economic optimizer authority decision
 - Date: 2026-07-29
 
 ## Context
+
+> Historical note: the implementation and evidence boundary below remain
+> reproducible, but ADR 0016 found that the copied formula does not bind enough
+> candidate economic semantics to serve as the sole qualified optimizer
+> authority. It is retained as a diagnostic prototype.
 
 Search Engine V1 used `pair_reward`, the minimum normalized distance to the
 strict matched-sleeve feasibility thresholds, as the sole ordering authority
@@ -60,4 +65,3 @@ rules, and a read-only holdout boundary.
 No candidate was generated or reevaluated. No market search, OOS, challenge,
 recent, May-stress, forward, promotion, latent training, or cross-sprint
 adaptive memory is authorized by this decision.
-

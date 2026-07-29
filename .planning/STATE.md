@@ -4,21 +4,22 @@ Last updated: 2026-07-29 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_REWARD_AUTHORITY_REPAIRED_CODE_ONLY_VALIDATION_CONTRACT_REQUIRED`
+`CRYPTO_SEARCH_ENGINEERING_CHAIN_RETAINED_ECONOMIC_AUTHORITY_SUSPENDED`
 
-Source `1066153eaa72fd6036a81a31583f4666105adffc` repairs a material
-Search Engine V1 authority defect without running a market search. The prior
-implementation used `pair_reward` -- the minimum strict matched-feasibility
-margin -- as the sole ordering authority for CEM, Evolution, Behavior Archive
-champions, and arm gates. The existing `pair18m` evaluator now also computes a
-train-only Phase3CM-style primary-portfolio reward from day Sortino,
-deterministic 600-draw bootstrap Sortino p25, and a one-way turnover penalty.
-All adaptive ordering reads `search_reward`; `pair_reward` remains matched
-attribution and execution diagnostic only. Legacy state without
-`search_reward` fails closed. Full-L1 cost was verified equivalent to
-Phase3CM's two-sleeve one-way charge under the shared zero-net definition, so
-cost was not halved. Full tests passed (`295 passed`, one pre-existing NumPy
-warning). No candidate was generated or reevaluated.
+The repository-wide authority audit confirms that Search Engine V1 has a
+substantial reusable engineering chain: admitted carriers, PIT/lag contracts,
+the existing typed AST/compiler, A/B/AB/ABC matched controls, deterministic
+replay, incremental behavior identity, campaign-local adaptive mechanics, and
+exact checkpoint restoration. It does not need to be replaced.
+
+The audit also supersedes ADR 0014's stronger authority claim.
+`PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` remains deterministic diagnostic
+code, but it is not a qualified economic optimizer authority: CandidateSpec
+does not bind direction/orientation, portfolio role, execution
+venue/instrument/price, or venue-specific cost; its single selected horizon is
+duplicated in the nominal worst-horizon term; IID day resampling ignores
+dependence; and primary-portfolio ordering is not jointly constrained by the
+matched mechanism increment. No candidate was generated or reevaluated.
 
 The prior Binance target exact replay remains immutable historical evidence:
 `1,200` strict-valid entries, `661` final gross-positive, `86` HAC-LCB-positive,
@@ -221,12 +222,16 @@ SEARCH_ENGINE_V1_4_COST_SIGN_KILL_DOMINANT
 SEARCH_ENGINE_V1_4B_NOT_AUTHORIZED
 SEARCH_ENGINE_V1_5_OPERATOR_EXPANSION_NOT_AUTHORIZED
 SEARCH_ENGINE_PAIR_REWARD_SOLE_ORDERING_AUTHORITY_REVOKED
-SEARCH_ENGINE_PHASE3CM_STYLE_TRAIN_PORTFOLIO_REWARD_ACTIVE_IN_CODE
+SEARCH_ENGINE_PHASE3CM_STYLE_REWARD_DIAGNOSTIC_CODE_RETAINED
+SEARCH_ENGINE_ECONOMIC_OPTIMIZER_AUTHORITY_SUSPENDED
 SEARCH_ENGINE_PAIR_REWARD_MATCHED_DIAGNOSTIC_ONLY
 SEARCH_ENGINE_LEGACY_STATE_WITHOUT_SEARCH_REWARD_FAIL_CLOSED
 SEARCH_ENGINE_HISTORICAL_POLICY_REWARD_CLAIMS_SUSPENDED
 SEARCH_ENGINE_VALIDATION_KILL_LINE_NOT_IMPLEMENTED
 SEARCH_ENGINE_FRESH_ADAPTIVE_CAMPAIGN_NOT_AUTHORIZED
+SEARCH_ENGINE_INACTIVE_AUTHORITY_PREFLIGHT_BLOCKED
+CAPABILITY_STRICT_FEEDBACK_GLOBAL_SCOPE_REVOKED
+CAPABILITY_STRICT_FEEDBACK_AUTHORITY_RETAINED
 UNIFIED_FIELD_MANAGEMENT_V1_COMPILED_VIEW_ACTIVE
 UNIFIED_FIELD_MANAGEMENT_V1_NOT_FIELD_AUTHORITY
 UNIFIED_FIELD_MANAGEMENT_V1_AUTHORITY_CONFLICTS_ZERO
@@ -308,8 +313,8 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 1. Treat the continuation, policy canary, Search Engine V1 20k campaign, aggTrades canary, and Search Engine V1.1-V1.4 campaigns as spent development engineering evidence; do not rerun, tune, rewrite, or import their candidate, reward, distribution, population, policy, archive, or transition-memory state.
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
 3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
-4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` as the only adaptive ordering authority. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
-5. Before any fresh adaptive market campaign, freeze a distinct validation split and kill-line, read-only holdout, tradable venue-specific execution/cost contract, and fresh policy/archive/checkpoint state. The historical report-only block cannot be promoted to validation.
+4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
+5. Before any fresh adaptive market campaign, bind mechanism, direction/orientation, portfolio role and formal mapping, tradable venue-specific target/execution/cost, train-only standalone quality, matched increment, dependence-aware uncertainty, a distinct validation split and kill-line, read-only holdout, and fresh policy/archive/checkpoint state. The historical report-only block cannot be promoted to validation.
 6. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
 7. Do not launch another large search until separately authorized over an admitted new release. Latent search priority remains deferred after V1.2 and cannot influence budget.
 8. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
@@ -320,7 +325,7 @@ No performance search or large experiment is authorized merely by this plan.
 
 ## Qualified policy components
 
-The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched controls, deterministic replay, campaign-local memory, exact checkpoint restoration, and now a separate train-only portfolio search objective. No search arm or archive is currently qualified for a future Arena. V1.4 exercised a newly aligned OI/flow carrier and stopped before adaptive Stage C. V1.1-V1.4 state and trajectories lack the current reward field and cannot seed another campaign.
+The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched controls, deterministic replay, campaign-local memory, exact checkpoint restoration, and a reproducible train-only portfolio diagnostic. The formal portfolio-mapping module and capability receipt/lazy-engine patterns are reusable. Capability strict-feasibility feedback remains formal only inside that capability scope. No economic optimizer, search arm, or archive is currently qualified for a future Arena. V1.4 exercised a newly aligned OI/flow carrier and stopped before adaptive Stage C. V1.1-V1.4 state and trajectories cannot seed another campaign.
 
 ## Blockers
 
@@ -337,6 +342,7 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 - Search Engine V1 has no formal validation kill-line. The historical report-only block is spent and cannot become optimizer feedback. A future fresh campaign must define a new validation boundary before any adaptive budget is authorized.
+- Search Engine V1 has no enforced economic-semantics receipt. Skeleton hypotheses are prose, all compositional candidates are hardwired to cross-sectional zero-net mapping, the general candidate lacks execution identity, and the current primary-only diagnostic is not jointly gated by matched increment. ADR 0016 suspends economic optimizer authority while retaining the engineering chain.
 
 ## Source-of-truth order
 
@@ -362,12 +368,33 @@ No status code overrides observed runtime or source facts.
 - Use `scripts/maintain_crypto_navigation_graph.ps1 query -Question "..."` for RAW navigation.
 - Lifecycle history not recalled with confidence remains in Git; it is not reconstructed into CURRENT.
 
+## Real experiment authority preflight
+
+The canonical Search Engine `run*` CLI now resolves target, optimizer reward,
+execution price, portfolio mapping, cost, validation role, and promotion gate
+from CURRENT before execution. It also requires a concrete evidence increment
+and the decision that evidence can change. Vacancy, conflict, stale or inactive
+authority, or missing intent fails closed. NON_FORMAL roles remain visible
+development boundaries and are runnable only when the bound node explicitly
+declares `active_authority: true`; they grant no formal claim or promotion
+authority.
+
+ADR 0015 records the preflight and ADR 0016 records the active-authority rule,
+economic authority suspension, and reuse map. The current target, optimizer
+reward, execution-price, and cost bindings point to inactive experimental
+nodes, so a canonical fresh `run*` fails closed. No market experiment,
+candidate evaluation, OOS access, promotion, or large budget was run or
+authorized by the implementation.
+
 ## Next action
 
-Stop at this authority-repair closure. The next code-design task is a compact
-fresh-campaign contract that binds train-only `search_reward`, a distinct
-validation budget/kill-line, read-only holdout, and a tradable venue-specific
-execution/cost model. Do not reconstruct historical `search_reward` by
-rerunning candidates, start adaptive V1.4b, expand the operator basis, spend a
-new market-evaluation budget, train latent priority, open sealed roles, run
-OOS/challenge/forward, or promote candidates without separate authorization.
+Stop at this authority-suspension closure. The next authorized code-design task
+is one thin successor receipt on the existing Search Engine chain: bind
+mechanism, direction/orientation, portfolio role and canonical mapping,
+tradable target/execution/cost identity, train-only standalone quality, matched
+increment, dependence-aware uncertainty, a distinct validation kill-line, and
+read-only holdout. Do not create a second AST/compiler/evaluator, reconstruct
+historical rewards, rerun candidates, start adaptive V1.4b, expand the operator
+basis, spend market-evaluation budget, train latent priority, open sealed
+roles, run OOS/challenge/forward, or promote candidates without separate
+authorization.
