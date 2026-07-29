@@ -615,7 +615,9 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "reports/CRYPTO_SEARCH_AUTHORITY_SYSTEM_AUDIT_20260729.md"
+                                         "evidence_ref":  "reports/CRYPTO_SEARCH_AUTHORITY_SYSTEM_AUDIT_20260729.md",
+                                         "evidence_sha256":  "0DDC4D7A8C0F51A1B46DE9C2CEA37A97EBC0263C8292A99C67F3FCF04C1D8237",
+                                         "verified_at_sha":  "b09e8d2ad549a4d3ebb7dd6f07296b3f673c5e9c"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
