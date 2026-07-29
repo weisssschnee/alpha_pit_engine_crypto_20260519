@@ -88,6 +88,7 @@ def _cem_row(
     family_id: str,
 ) -> dict:
     return {
+        "search_reward": reward,
         "pair_reward": reward,
         "policy_local_family_count_at_completion": 1,
         "candidate_id": candidate.candidate_id,
@@ -282,6 +283,7 @@ def test_behavior_niched_evolution_population_has_family_and_skeleton_caps() -> 
                 candidate,
                 {
                     "behavior_family_id": f"family-{index}-{repeat}",
+                    "search_reward": float(repeat),
                     "pair_reward": float(repeat),
                     "operation": "TYPED_RANDOM_WARMUP",
                     "parent_ids": [],
@@ -326,6 +328,8 @@ def test_v11_final_decision_remains_system_only(
                 "matched_reward_comparison_count": 1_000,
                 "valid_exact_unique_per_cpu_hour": 100.0,
                 "new_behavior_families_per_1k_evaluations": 900.0,
+                "mean_search_reward_at_matched_count": -0.01,
+                "top_decile_search_reward_at_matched_count": 0.01,
                 "mean_pair_reward_at_matched_count": -0.01,
                 "top_decile_pair_reward_at_matched_count": 0.01,
                 "behavior_duplicate_rate": 0.04,

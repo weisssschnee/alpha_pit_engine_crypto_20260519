@@ -53,8 +53,8 @@
     "balanced_valid_exact_unique_per_cpu_hour_not_below_random": true,
     "new_behavior_families_per_cpu_hour_not_below_random": true,
     "behavior_duplicate_rate_maximum": 0.03,
-    "mean_pair_reward_not_below_random": true,
-    "top_decile_pair_reward_not_below_random": true
+    "mean_search_reward_not_below_random": true,
+    "top_decile_search_reward_not_below_random": true
   },
   "boundaries": {
     "fixed_retrospective_cohort": true,

@@ -764,7 +764,13 @@ def search_behavior_descriptor(
         "behavior_family_id": _payload_sha(components),
         "descriptor_schema_version": str(contract["schema_version"]),
         "turnover_path_sha256": array_sha256(turnover),
-        "identity_excludes": ["gross", "net", "cost", "pair_reward"],
+        "identity_excludes": [
+            "gross",
+            "net",
+            "cost",
+            "search_reward",
+            "pair_reward",
+        ],
     }
 
 

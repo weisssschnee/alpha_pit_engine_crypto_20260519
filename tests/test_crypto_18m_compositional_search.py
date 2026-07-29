@@ -247,7 +247,9 @@ def test_incremental_sleeve_is_recomputed_from_delta_weights() -> None:
 def test_report_only_metrics_are_not_policy_feedback() -> None:
     contract = feedback_contract_payload()
     assert contract["report_only_metrics_visible_to_policy"] is False
-    assert contract["authoritative_feedback"].startswith("incremental sleeve")
+    assert contract["authoritative_search_feedback"].startswith("PHASE3CM_STYLE")
+    assert contract["matched_attribution_feedback"].startswith("incremental sleeve")
+    assert contract["matched_attribution_is_search_ordering_authority"] is False
 
 
 def test_unvisited_candidate_cannot_receive_feedback() -> None:
@@ -453,6 +455,7 @@ def test_policy_productivity_gate_uses_seed_matched_random_controls() -> None:
                     "seed": seed,
                     "candidate_id": f"random-parent-{seed}",
                     "parent_id": None,
+                    "search_reward": 0.0,
                     "pair_reward": 0.0,
                     "matched_positive": False,
                     "skeleton_id": "random-a",
@@ -465,6 +468,7 @@ def test_policy_productivity_gate_uses_seed_matched_random_controls() -> None:
                     "seed": seed,
                     "candidate_id": f"random-child-{seed}",
                     "parent_id": None,
+                    "search_reward": 0.1,
                     "pair_reward": 0.1,
                     "matched_positive": True,
                     "skeleton_id": "random-b",
@@ -477,6 +481,7 @@ def test_policy_productivity_gate_uses_seed_matched_random_controls() -> None:
                     "seed": seed,
                     "candidate_id": f"cem-{seed}",
                     "parent_id": None,
+                    "search_reward": 0.5,
                     "pair_reward": 0.5,
                     "matched_positive": True,
                     "skeleton_id": "cem-a",
@@ -489,6 +494,7 @@ def test_policy_productivity_gate_uses_seed_matched_random_controls() -> None:
                     "seed": seed,
                     "candidate_id": f"evo-parent-{seed}",
                     "parent_id": None,
+                    "search_reward": 0.2,
                     "pair_reward": 0.2,
                     "matched_positive": True,
                     "skeleton_id": "evo-a",
@@ -501,6 +507,7 @@ def test_policy_productivity_gate_uses_seed_matched_random_controls() -> None:
                     "seed": seed,
                     "candidate_id": f"evo-child-{seed}",
                     "parent_id": f"evo-parent-{seed}",
+                    "search_reward": 0.6,
                     "pair_reward": 0.6,
                     "matched_positive": True,
                     "skeleton_id": "evo-b",
@@ -569,10 +576,17 @@ def _fake_search_evaluation(candidate: CandidateSpec, family_id: str, reward: fl
         "pit_regime_descriptor_id": "P" * 64,
         "descriptor_contract_sha256": "D" * 64,
         "descriptor_schema_version": "CRYPTO_SEARCH_BEHAVIOR_DESCRIPTOR_V1",
-        "identity_excludes": ["gross", "net", "cost", "pair_reward"],
+        "identity_excludes": [
+            "gross",
+            "net",
+            "cost",
+            "search_reward",
+            "pair_reward",
+        ],
     }
     return {
         "candidate_id": candidate.candidate_id,
+        "search_reward": reward,
         "pair_reward": reward,
         "matched_positive": reward > 0.0,
         "incremental": {"gross_mean": 0.0, "net_mean": 0.0, "cost_mean": 0.0},
@@ -611,7 +625,13 @@ def test_search_behavior_descriptor_is_frozen_coarse_and_outcome_free() -> None:
     second = search_behavior_descriptor(**kwargs)
     assert first == second
     assert first["behavior_family_id"]
-    assert first["identity_excludes"] == ["gross", "net", "cost", "pair_reward"]
+    assert first["identity_excludes"] == [
+        "gross",
+        "net",
+        "cost",
+        "search_reward",
+        "pair_reward",
+    ]
     changed_contract = deepcopy(contract)
     changed_contract["mapped_weight_quantization_step"] = 0.01
     with pytest.raises(ValueError, match="contract identity"):
@@ -734,6 +754,7 @@ def test_hierarchical_cem_v2_samples_legal_order_and_roundtrips_state() -> None:
         assert _role_complete_registry().validate(candidate.expression)
         rows.append(
             {
+                "search_reward": float(index % 7),
                 "pair_reward": float(index % 7),
                 "new_behavior_family_at_completion": index % 2 == 0,
                 "candidate_id": candidate.candidate_id,
@@ -828,6 +849,7 @@ def test_v22_collision_transition_memory_blocks_and_restores() -> None:
         parent,
         {
             "behavior_family_id": "PARENT_FAMILY",
+            "search_reward": 0.0,
             "pair_reward": 0.0,
             "parent_ids": [],
             "operation": "TYPED_RANDOM_WARMUP",
@@ -1049,6 +1071,7 @@ def test_metrics_use_valid_exact_unique_counter_for_cpu_density() -> None:
             "arm": "canonical_typed_random",
             "checkpoint_index": 0,
             "behavior_family_id": "FAMILY",
+            "search_reward": -1.0,
             "pair_reward": -1.0,
             "candidate_id": "CANDIDATE",
             "matched_positive": False,

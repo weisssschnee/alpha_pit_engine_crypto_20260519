@@ -24,6 +24,15 @@ from .panel18m import RawPanelStore
 
 ACTIVE_EPSILON = 1e-12
 FIXED_COST_BPS = 5.0
+SEARCH_REWARD_AUTHORITY = "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1"
+SEARCH_REWARD_BOOTSTRAP_DRAWS = 600
+SEARCH_REWARD_WEIGHTS: Mapping[str, float] = {
+    "train_day_sortino": 0.55,
+    "train_worst_horizon_day_sortino": 0.25,
+    "train_day_bootstrap_sortino_p25": 0.20,
+}
+SEARCH_REWARD_TURNOVER_PENALTY_START = 0.55
+SEARCH_REWARD_TURNOVER_PENALTY_WEIGHT = 0.75
 # Private compatibility name for the qualification evaluator.  It is an alias,
 # not a second implementation; audit.turnover_path remains the sole authority.
 _turnover = turnover_path
@@ -90,6 +99,162 @@ def _mean_lcb(
     return mean, se, mean - 1.96 * se, observations
 
 
+def _sortino(values: np.ndarray) -> float:
+    clean = np.asarray(values, dtype=float).reshape(-1)
+    clean = clean[np.isfinite(clean)]
+    if clean.size == 0:
+        return float("nan")
+    downside = np.minimum(clean, 0.0)
+    downside_scale = float(np.sqrt(np.mean(downside * downside)))
+    if downside_scale <= 1.0e-18:
+        return float("nan")
+    return float(np.mean(clean) / downside_scale)
+
+
+def _daily_net_returns(
+    net: np.ndarray,
+    mask: np.ndarray,
+    timestamp_ns: np.ndarray | None,
+) -> np.ndarray:
+    values = np.asarray(net, dtype=float).reshape(-1)
+    active = np.asarray(mask, dtype=bool).reshape(-1) & np.isfinite(values)
+    if timestamp_ns is None:
+        return values[active]
+    timestamps = np.asarray(timestamp_ns, dtype=np.int64).reshape(-1)
+    if timestamps.shape != values.shape:
+        raise ValueError("timestamp_ns does not match the evaluated return path")
+    day_labels = timestamps.astype("datetime64[ns]").astype("datetime64[D]")
+    daily: list[float] = []
+    for day in np.unique(day_labels[active]):
+        local = active & (day_labels == day)
+        if np.any(local):
+            daily.append(float(np.sum(values[local])))
+    return np.asarray(daily, dtype=float)
+
+
+def _bootstrap_sortino(
+    day_values: np.ndarray, *, seed: int, draws: int
+) -> dict[str, Any]:
+    clean = np.asarray(day_values, dtype=float).reshape(-1)
+    clean = clean[np.isfinite(clean)]
+    if clean.size == 0 or int(draws) <= 0:
+        return {
+            "draws": 0,
+            "p25": float("nan"),
+            "median": float("nan"),
+            "probability_gt_zero": float("nan"),
+        }
+    rng = np.random.default_rng(int(seed))
+    indices = rng.integers(
+        0,
+        clean.size,
+        size=(int(draws), clean.size),
+        dtype=np.int64,
+    )
+    samples = clean[indices]
+    means = np.mean(samples, axis=1)
+    downside = np.minimum(samples, 0.0)
+    scales = np.sqrt(np.mean(downside * downside, axis=1))
+    finite = np.isfinite(means) & np.isfinite(scales) & (scales > 1.0e-18)
+    sortinos = means[finite] / scales[finite]
+    if sortinos.size == 0:
+        return {
+            "draws": 0,
+            "p25": float("nan"),
+            "median": float("nan"),
+            "probability_gt_zero": float("nan"),
+        }
+    return {
+        "draws": int(sortinos.size),
+        "p25": float(np.quantile(sortinos, 0.25)),
+        "median": float(np.quantile(sortinos, 0.50)),
+        "probability_gt_zero": float(np.mean(sortinos > 0.0)),
+    }
+
+
+def _portfolio_search_reward(
+    *,
+    net: np.ndarray,
+    turnover_l1: np.ndarray,
+    mask: np.ndarray,
+    timestamp_ns: np.ndarray,
+    seed: int,
+) -> dict[str, Any]:
+    """Return the train-only portfolio objective used by proposal policies.
+
+    CandidateSpec freezes one target horizon per candidate, so the Phase3CM
+    worst-horizon term equals the selected-horizon day Sortino here.  The
+    absence of a cross-horizon term is explicit rather than replaced by a new
+    proxy.  Matched attribution remains a separate diagnostic.
+    """
+
+    daily = _daily_net_returns(net, mask, timestamp_ns)
+    day_sortino = _sortino(daily)
+    bootstrap = _bootstrap_sortino(
+        daily,
+        seed=int(seed),
+        draws=SEARCH_REWARD_BOOTSTRAP_DRAWS,
+    )
+    bootstrap_p25 = float(bootstrap["p25"])
+    active_turnover = np.asarray(turnover_l1, dtype=float)[np.asarray(mask, dtype=bool)]
+    mean_full_l1_turnover = (
+        float(np.mean(active_turnover)) if active_turnover.size else float("nan")
+    )
+    # For a dollar-neutral book, one-way turnover is exactly half the full-L1
+    # weight change.  Phase3CM charges both long and short sleeves, which makes
+    # 2 * one-way turnover * one-side cost identical to full-L1 * one-side cost.
+    mean_one_way_turnover = 0.5 * mean_full_l1_turnover
+    day_component = day_sortino if math.isfinite(day_sortino) else -2.0
+    bootstrap_component = bootstrap_p25 if math.isfinite(bootstrap_p25) else -2.0
+    turnover_penalty = (
+        max(
+            0.0,
+            mean_one_way_turnover - SEARCH_REWARD_TURNOVER_PENALTY_START,
+        )
+        * SEARCH_REWARD_TURNOVER_PENALTY_WEIGHT
+        if math.isfinite(mean_one_way_turnover)
+        else 2.0
+    )
+    reward = (
+        SEARCH_REWARD_WEIGHTS["train_day_sortino"] * day_component
+        + SEARCH_REWARD_WEIGHTS["train_worst_horizon_day_sortino"]
+        * day_component
+        + SEARCH_REWARD_WEIGHTS["train_day_bootstrap_sortino_p25"]
+        * bootstrap_component
+        - turnover_penalty
+    )
+    blockers: list[str] = []
+    if not math.isfinite(day_sortino) or day_sortino <= 0.0:
+        blockers.append("NON_POSITIVE_TRAIN_DAY_SORTINO")
+    if (
+        not math.isfinite(float(bootstrap["probability_gt_zero"]))
+        or float(bootstrap["probability_gt_zero"]) < 0.60
+    ):
+        blockers.append("WEAK_TRAIN_DAY_BOOTSTRAP")
+    if not math.isfinite(reward) or reward <= 0.0:
+        blockers.append("NON_POSITIVE_TRAIN_SEARCH_REWARD")
+    return {
+        "authority": SEARCH_REWARD_AUTHORITY,
+        "search_reward": float(reward),
+        "train_day_sortino": day_sortino,
+        "train_worst_horizon_day_sortino": day_sortino,
+        "train_day_bootstrap_sortino_p25": bootstrap_p25,
+        "train_day_bootstrap_sortino_median": float(bootstrap["median"]),
+        "train_day_bootstrap_probability_gt_zero": float(
+            bootstrap["probability_gt_zero"]
+        ),
+        "train_day_bootstrap_draws": int(bootstrap["draws"]),
+        "train_day_count": int(daily.size),
+        "mean_full_l1_turnover": mean_full_l1_turnover,
+        "mean_one_way_turnover": mean_one_way_turnover,
+        "turnover_penalty": float(turnover_penalty),
+        "horizon_scope": "CANDIDATE_SELECTED_SINGLE_HORIZON",
+        "cross_horizon_instability_penalty": 0.0,
+        "inherited_blocker_penalty": 0.0,
+        "blockers": blockers,
+    }
+
+
 def _series_metrics(
     *,
     weights: np.ndarray,
@@ -97,6 +262,8 @@ def _series_metrics(
     months: np.ndarray,
     evaluation_mask: np.ndarray,
     horizon: int,
+    timestamp_ns: np.ndarray | None = None,
+    search_reward_seed: int | None = None,
 ) -> dict[str, Any]:
     turnover, attribution = turnover_path(weights, horizon)
     gross = np.nansum(weights * target, axis=0) / float(horizon)
@@ -142,7 +309,7 @@ def _series_metrics(
         float(np.mean(np.max(np.abs(weights[:, mask]), axis=0))) if np.any(mask) else float("nan")
     )
     support = float(np.mean(evaluation_mask))
-    return {
+    metrics = {
         "observations": observations,
         "net_mean": net_mean,
         "net_standard_error": net_se,
@@ -172,6 +339,17 @@ def _series_metrics(
         "net_series_sha256": _array_sha(net),
         **attribution,
     }
+    if search_reward_seed is not None:
+        if timestamp_ns is None:
+            raise ValueError("search reward requires explicit timestamps")
+        metrics["portfolio_search_objective"] = _portfolio_search_reward(
+            net=net,
+            turnover_l1=turnover,
+            mask=mask,
+            timestamp_ns=np.asarray(timestamp_ns, dtype=np.int64),
+            seed=int(search_reward_seed),
+        )
+    return metrics
 
 
 def strict_pair_feedback(metrics: Mapping[str, Any]) -> dict[str, Any]:
@@ -383,6 +561,16 @@ def evaluate_pair(
     months = np.asarray(
         [str(np.datetime64(int(value), "ns"))[:7] for value in timestamp_ns], dtype=str
     )
+    search_reward_seed = int.from_bytes(
+        hashlib.sha256(
+            (
+                f"{SEARCH_REWARD_AUTHORITY}|{candidate.candidate_id}|"
+                f"{block_start}|{block_end}|{block_role}"
+            ).encode("utf-8")
+        ).digest()[:8],
+        "little",
+        signed=False,
+    )
     standalone_started = time.perf_counter()
     primary = _series_metrics(
         weights=primary_weight,
@@ -390,6 +578,8 @@ def evaluate_pair(
         months=months,
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
+        timestamp_ns=timestamp_ns,
+        search_reward_seed=search_reward_seed,
     )
     control = _series_metrics(
         weights=control_weight,
@@ -607,6 +797,7 @@ def evaluate_pair(
     timings["peak_rss_bytes"] = float(max(rss_samples))
     timings["peak_private_bytes"] = float(max(private_samples))
     support_overlap = 1.0
+    search_objective = dict(primary["portfolio_search_objective"])
     return {
         "candidate_id": candidate.candidate_id,
         "skeleton_id": candidate.skeleton_id,
@@ -645,6 +836,9 @@ def evaluate_pair(
             left_incremental if hierarchical_conditional else None
         ),
         "scalar_net_delta_diagnostic": float(primary["net_mean"] - control["net_mean"]),
+        "search_reward": float(search_objective["search_reward"]),
+        "search_reward_authority": SEARCH_REWARD_AUTHORITY,
+        "search_reward_feedback": search_objective,
         "pair_reward": float(feedback["distance"]),
         "matched_positive": bool(feedback["matched_positive"]),
         "feedback": feedback,
@@ -664,8 +858,29 @@ def evaluate_pair(
 
 def pair_contract_payload() -> dict[str, Any]:
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "pair_authority": "PRIMARY_WITH_LEFT_AND_RIGHT_AXIS_INCREMENTAL_DELTA_WEIGHT_SLEEVES",
+        "search_objective": {
+            "authority": SEARCH_REWARD_AUTHORITY,
+            "portfolio": "primary mapped candidate portfolio",
+            "split": "train/development adaptive block only",
+            "formula_weights": dict(SEARCH_REWARD_WEIGHTS),
+            "bootstrap_draws": SEARCH_REWARD_BOOTSTRAP_DRAWS,
+            "turnover_penalty_start_one_way": SEARCH_REWARD_TURNOVER_PENALTY_START,
+            "turnover_penalty_weight": SEARCH_REWARD_TURNOVER_PENALTY_WEIGHT,
+            "selected_horizon_scope": (
+                "CandidateSpec freezes one horizon, so the Phase3CM "
+                "worst-horizon term equals selected-horizon day Sortino"
+            ),
+            "validation_role": (
+                "not implemented by Search Engine V1; an explicit fresh "
+                "validation split and kill-line are required before another "
+                "adaptive market campaign"
+            ),
+            "holdout_role": (
+                "not read by Search Engine V1 and must remain read-only"
+            ),
+        },
         "lcb_contract": {
             "authority": "NEWEY_WEST_BARTLETT",
             "dependency_lags": "horizon_hours_minus_one",
@@ -688,13 +903,17 @@ def pair_contract_payload() -> dict[str, Any]:
         "control_behavior_identity_forbidden": True,
         "optional_behavior_identity": "FROZEN_OUTCOME_FREE_DESCRIPTOR_V1",
         "incremental_weight_formula": "primary_weight - each_axis_control_weight",
-        "authoritative_pair_reward": "minimum strict feasibility distance across left and right incremental sleeves",
+        "pair_reward_role": (
+            "matched attribution and execution diagnostic; never proposal-policy, "
+            "elite, parent, archive-champion, or arm-exit ordering authority"
+        ),
+        "pair_reward": "minimum strict feasibility distance across left and right incremental sleeves",
         "hierarchical_three_axis_extension": {
             "dag": "ABC=StateModulation(AB,C); AB=RatioInteraction(A,B)",
             "shared_contract": "raw support, target, timestamps, eligibility, horizon, mapping, and cost are identical for A, B, AB, and ABC",
             "interaction_gate": "AB_minus_A and AB_minus_B must both pass",
             "conditional_gate": "ABC_minus_AB must pass",
-            "authoritative_pair_reward": "minimum strict feasibility distance across AB-A, AB-B, and ABC-AB",
+            "pair_reward": "minimum strict feasibility distance across AB-A, AB-B, and ABC-AB",
             "behavior_identity": "ABC_minus_AB incremental delta weight",
         },
         "incremental_turnover": "recomputed independently from delta weights",
@@ -704,12 +923,15 @@ def pair_contract_payload() -> dict[str, Any]:
 
 def feedback_contract_payload() -> dict[str, Any]:
     return {
-        "schema_version": 1,
-        "authoritative_feedback": "incremental sleeve strict feasibility distance",
+        "schema_version": 2,
+        "authoritative_search_feedback": SEARCH_REWARD_AUTHORITY,
+        "matched_attribution_feedback": "incremental sleeve strict feasibility distance",
+        "matched_attribution_is_search_ordering_authority": False,
         "thresholds": dict(PAIR_THRESHOLDS),
         "normalization_scales": dict(PAIR_SCALES),
         "feedback_block": "2023-07-01/2024-07-01 development adaptive block only",
         "report_only_block": "2024-07-01/2025-01-01 development report-only block",
+        "report_only_block_is_formal_validation": False,
         "report_only_metrics_visible_to_policy": False,
         "control_has_independent_vote": False,
         "control_has_adaptive_memory": False,

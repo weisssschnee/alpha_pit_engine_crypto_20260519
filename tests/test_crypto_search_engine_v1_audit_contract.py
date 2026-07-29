@@ -57,6 +57,7 @@ def _registry() -> TypedExpressionRegistry:
 
 def _cem_row(candidate, reward: float, local_count: int = 1) -> dict:
     return {
+        "search_reward": reward,
         "pair_reward": reward,
         "policy_local_family_count_at_completion": local_count,
         "candidate_id": candidate.candidate_id,
@@ -114,6 +115,86 @@ def test_cem_checkpoint_update_does_not_double_count_prior_elites() -> None:
     }
 
 
+def test_search_reward_not_pair_reward_orders_all_adaptive_state() -> None:
+    registry = _registry()
+    first = generate_candidate(
+        registry, skeleton=skeleton_registry()[0], rng=random.Random(901)
+    )
+    second = generate_candidate(
+        registry, skeleton=skeleton_registry()[1], rng=random.Random(902)
+    )
+    rows = (
+        {
+            **_cem_row(first, 10.0),
+            "search_reward": -1.0,
+            "behavior_family_id": "family-first",
+        },
+        {
+            **_cem_row(second, -10.0),
+            "search_reward": 1.0,
+            "behavior_family_id": "family-second",
+        },
+    )
+    cem = HierarchicalTypedCEMV2(
+        7,
+        registry,
+        {
+            **HierarchicalTypedCEMV2(7, registry).parameters,
+            "elite_fraction": 0.5,
+        },
+    )
+    assert cem._select_elites(rows)[0]["candidate_id"] == second.candidate_id
+
+    evolution = TypedEvolutionV2(
+        11,
+        registry,
+        {
+            **TypedEvolutionV2(11, registry).parameters,
+            "warmup": 1,
+            "tournament_size": 2,
+        },
+    )
+    for candidate, row in zip((first, second), rows, strict=True):
+        evolution.observe(
+            candidate,
+            {
+                **row,
+                "operation": "TYPED_RANDOM_WARMUP",
+                "parent_ids": [],
+            },
+        )
+    assert evolution._parent().candidate_id == second.candidate_id
+
+    archive = BehaviorArchive()
+    for ordinal, (candidate, row) in enumerate(
+        zip((first, second), rows, strict=True),
+        start=1,
+    ):
+        archive.observe(
+            candidate=candidate,
+            evaluation={
+                "search_reward": row["search_reward"],
+                "search_reward_authority": "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1",
+                "pair_reward": row["pair_reward"],
+                "matched_positive": False,
+                "incremental": {
+                    "gross_mean": 0.0,
+                    "net_mean": 0.0,
+                    "cost_mean": 0.0,
+                },
+                "behavior": {"behavior_family_id": "shared-family"},
+            },
+            arm="test",
+            seed=1,
+            completion_ordinal=ordinal,
+            checkpoint_index=0,
+        )
+    champion = archive.rows[archive.champion_by_family["shared-family"]]
+    assert champion["exact_expression_id"] == second.candidate_id
+    assert champion["search_reward"] == 1.0
+    assert champion["pair_reward"] == -10.0
+
+
 def test_evolution_next_proposal_is_invariant_to_other_arm_history() -> None:
     registry = _registry()
     parameters = {
@@ -127,9 +208,10 @@ def test_evolution_next_proposal_is_invariant_to_other_arm_history() -> None:
         )
         policy.observe(
             candidate,
-            {
-                "behavior_family_id": f"family-{index}",
-                "pair_reward": float(index),
+                {
+                    "behavior_family_id": f"family-{index}",
+                    "search_reward": float(index),
+                    "pair_reward": float(index),
                 "operation": "TYPED_RANDOM_WARMUP",
                 "parent_ids": [],
             },
@@ -202,6 +284,7 @@ def test_lineage_collapse_metrics_are_persisted() -> None:
         root,
         {
             "behavior_family_id": "root-family",
+            "search_reward": 1.0,
             "pair_reward": 1.0,
             "operation": "TYPED_RANDOM_WARMUP",
             "parent_ids": [],
@@ -212,6 +295,7 @@ def test_lineage_collapse_metrics_are_persisted() -> None:
         child,
         {
             "behavior_family_id": "child-family",
+            "search_reward": 2.0,
             "pair_reward": 2.0,
             "operation": receipt["operation"],
             "parent_ids": [root.candidate_id],
@@ -241,6 +325,8 @@ def test_arm_cannot_qualify_on_compute_density_alone(tmp_path) -> None:
                     "arm": "canonical_typed_random",
                     "valid_exact_unique_per_cpu_hour": 100.0,
                     "new_behavior_families_per_1k_evaluations": 800.0,
+                    "mean_search_reward_at_matched_count": 0.0,
+                    "top_decile_search_reward_at_matched_count": 1.0,
                     "mean_pair_reward_at_matched_count": 0.0,
                     "top_decile_pair_reward_at_matched_count": 1.0,
                     "behavior_duplicate_rate": 0.10,
@@ -250,6 +336,8 @@ def test_arm_cannot_qualify_on_compute_density_alone(tmp_path) -> None:
                     "arm": "hierarchical_typed_cem_v2",
                     "valid_exact_unique_per_cpu_hour": 101.0,
                     "new_behavior_families_per_1k_evaluations": 700.0,
+                    "mean_search_reward_at_matched_count": -0.1,
+                    "top_decile_search_reward_at_matched_count": 0.9,
                     "mean_pair_reward_at_matched_count": -0.1,
                     "top_decile_pair_reward_at_matched_count": 0.9,
                     "behavior_duplicate_rate": 0.10,
@@ -263,15 +351,17 @@ def test_arm_cannot_qualify_on_compute_density_alone(tmp_path) -> None:
                 {
                     "arm": "canonical_typed_random",
                     "seed": seed,
-                    "arm_completion_ordinal": 1,
-                    "pair_reward": 0.0,
+                        "arm_completion_ordinal": 1,
+                        "search_reward": 0.0,
+                        "pair_reward": 0.0,
                     "family_member_count_at_completion": 1,
                 },
                 {
                     "arm": "hierarchical_typed_cem_v2",
                     "seed": seed,
-                    "arm_completion_ordinal": 1,
-                    "pair_reward": -0.1,
+                        "arm_completion_ordinal": 1,
+                        "search_reward": -0.1,
+                        "pair_reward": -0.1,
                     "family_member_count_at_completion": 1,
                 },
             )

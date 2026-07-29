@@ -16,7 +16,12 @@ from alphafactory_crypto.broad_search.expression import (
     ablate_expression,
     materialize_expression,
 )
-from alphafactory_crypto.broad_search.pair18m import _series_metrics, evaluate_pair
+from alphafactory_crypto.broad_search.pair18m import (
+    FIXED_COST_BPS,
+    SEARCH_REWARD_AUTHORITY,
+    _series_metrics,
+    evaluate_pair,
+)
 from alphafactory_crypto.instrument_capability.mapping import (
     CROSS_SECTIONAL_ZERO_NET,
     DEFAULT_MAPPING_CONTRACTS,
@@ -80,6 +85,61 @@ def test_behavior_turnover_exactly_matches_evaluator_turnover() -> None:
     assert metrics["total_turnover_l1"] == pytest.approx(float(path.sum()))
     assert metrics["total_turnover_l1"] == pytest.approx(
         attribution["total_turnover_l1"]
+    )
+
+
+def test_train_portfolio_search_reward_is_deterministic_and_cost_consistent() -> None:
+    hour_count = 72
+    weights = np.vstack(
+        (
+            np.full(hour_count, 0.5, dtype=float),
+            np.full(hour_count, -0.5, dtype=float),
+        )
+    )
+    alpha = np.concatenate(
+        (
+            np.full(24, 0.0010),
+            np.full(24, -0.0005),
+            np.full(24, 0.0010),
+        )
+    )
+    target = np.vstack((alpha, -alpha))
+    months = np.asarray(["2023-07"] * hour_count)
+    timestamps = (
+        np.datetime64("2023-07-01T00:00:00", "ns").astype(np.int64)
+        + np.arange(hour_count, dtype=np.int64) * 3_600_000_000_000
+    )
+    kwargs = {
+        "weights": weights,
+        "target": target,
+        "months": months,
+        "evaluation_mask": np.ones(hour_count, dtype=bool),
+        "horizon": 1,
+        "timestamp_ns": timestamps,
+        "search_reward_seed": 20260729,
+    }
+
+    first = _series_metrics(**kwargs)
+    second = _series_metrics(**kwargs)
+    objective = first["portfolio_search_objective"]
+
+    assert first["portfolio_search_objective"] == second[
+        "portfolio_search_objective"
+    ]
+    assert objective["authority"] == SEARCH_REWARD_AUTHORITY
+    assert objective["train_day_count"] == 3
+    assert objective["train_day_bootstrap_draws"] > 0
+    assert objective["mean_one_way_turnover"] == pytest.approx(
+        0.5 * objective["mean_full_l1_turnover"]
+    )
+    assert first["cost_mean"] == pytest.approx(
+        objective["mean_full_l1_turnover"] * FIXED_COST_BPS / 10_000.0
+    )
+    assert first["cost_mean"] == pytest.approx(
+        2.0
+        * objective["mean_one_way_turnover"]
+        * FIXED_COST_BPS
+        / 10_000.0
     )
 
 
@@ -218,7 +278,13 @@ def test_behavior_family_uses_incremental_delta_weights() -> None:
         behavior["turnover_path_descriptor_id"]
         == incremental_behavior["turnover_path_descriptor_id"]
     )
-    assert behavior["identity_excludes"] == ["gross", "net", "cost", "pair_reward"]
+    assert behavior["identity_excludes"] == [
+        "gross",
+        "net",
+        "cost",
+        "search_reward",
+        "pair_reward",
+    ]
 
 
 def test_behavior_contract_rejects_self_proving_partial_active_support() -> None:

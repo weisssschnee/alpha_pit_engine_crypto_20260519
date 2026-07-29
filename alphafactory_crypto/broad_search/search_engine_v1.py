@@ -720,8 +720,8 @@ def _validate_v12_config(config: Mapping[str, Any]) -> None:
                 "strict_per_raw_attempt_above_random",
                 "balanced_valid_exact_unique_per_cpu_hour_not_below_random",
                 "new_behavior_families_per_cpu_hour_not_below_random",
-                "mean_pair_reward_not_below_random",
-                "top_decile_pair_reward_not_below_random",
+                "mean_search_reward_not_below_random",
+                "top_decile_search_reward_not_below_random",
             )
         )
         or not math.isclose(
@@ -1250,7 +1250,8 @@ def _frozen_contract(
                 "matched_control_valid",
                 "strict_cost_evaluated",
             ],
-            "only_ordering_authority": "pair_reward",
+            "only_ordering_authority": "search_reward",
+            "matched_attribution_diagnostic": "pair_reward",
             "equal_reward_tie_break": [
                 "arm_seed_policy_local_behavior_family_count",
                 "candidate_id",
@@ -1382,7 +1383,8 @@ def _aggtrades_canary_frozen_contract(
             ),
         },
         "elite_authority": {
-            "only_ordering_authority": "pair_reward",
+            "only_ordering_authority": "search_reward",
+            "matched_attribution_diagnostic": "pair_reward",
             "equal_reward_tie_break": [
                 "arm_seed_policy_local_behavior_family_count",
                 "candidate_id",
@@ -1503,7 +1505,8 @@ def _v11_frozen_contract(
                 "family_champion_elite_admission": True,
                 "mechanism_stratified_elite_frontier": True,
                 "skeleton_stratified_elite_frontier": True,
-                "only_ordering_authority": "pair_reward",
+                "only_ordering_authority": "search_reward",
+                "matched_attribution_diagnostic": "pair_reward",
             },
             "evolution": {
                 "one_population_champion_per_behavior_family": True,
@@ -1515,7 +1518,7 @@ def _v11_frozen_contract(
                         "operator_productivity_floor"
                     ]
                 ),
-                "parent_tournament_authority": "pair_reward",
+                "parent_tournament_authority": "search_reward",
             },
             "new_ast": False,
             "new_compiler": False,
@@ -1523,7 +1526,8 @@ def _v11_frozen_contract(
             "new_scheduler": False,
         },
         "elite_authority": {
-            "only_ordering_authority": "pair_reward",
+            "only_ordering_authority": "search_reward",
+            "matched_attribution_diagnostic": "pair_reward",
             "niche_admission": [
                 "behavior_family_champion",
                 "mechanism_family_frontier",
@@ -1818,6 +1822,18 @@ def _v13_frozen_contract(
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
 
 
+def _search_ordering_reward(row: Mapping[str, Any]) -> float:
+    if "search_reward" not in row:
+        raise ValueError(
+            "search ordering requires train-only portfolio search_reward; "
+            "legacy pair_reward state cannot seed a fresh campaign"
+        )
+    reward = float(row["search_reward"])
+    if not math.isfinite(reward):
+        raise ValueError("search_reward must be finite")
+    return reward
+
+
 @dataclass(slots=True)
 class BehaviorArchive:
     rows: list[dict[str, Any]] = field(default_factory=list)
@@ -1851,6 +1867,10 @@ class BehaviorArchive:
             "seed": int(seed),
             "completion_ordinal": int(completion_ordinal),
             "checkpoint_index": int(checkpoint_index),
+            "search_reward": _search_ordering_reward(evaluation),
+            "search_reward_authority": str(
+                evaluation.get("search_reward_authority", "")
+            ),
             "pair_reward": float(evaluation["pair_reward"]),
             "matched_positive": bool(evaluation["matched_positive"]),
             "gross_mean_annotation": evaluation["incremental"].get("gross_mean"),
@@ -1867,9 +1887,9 @@ class BehaviorArchive:
         if old_index is not None:
             old = self.rows[old_index]
             replace = (
-                float(row["pair_reward"]) > float(old["pair_reward"])
+                _search_ordering_reward(row) > _search_ordering_reward(old)
                 or (
-                    float(row["pair_reward"]) == float(old["pair_reward"])
+                    _search_ordering_reward(row) == _search_ordering_reward(old)
                     and str(row["exact_expression_id"])
                     < str(old["exact_expression_id"])
                 )
@@ -1892,6 +1912,7 @@ class BehaviorArchive:
                     "members": int(self.family_counts[family_id]),
                     "champion_exact_expression_id": champion["exact_expression_id"],
                     "champion_arm": champion["arm"],
+                    "champion_search_reward": champion["search_reward"],
                     "champion_pair_reward": champion["pair_reward"],
                     "champion_matched_positive": champion["matched_positive"],
                 }
@@ -1961,6 +1982,7 @@ class BehaviorArchive:
     def from_rows(cls, rows: Sequence[Mapping[str, Any]]) -> "BehaviorArchive":
         archive = cls(rows=[dict(row) for row in rows])
         for index, row in enumerate(archive.rows):
+            _search_ordering_reward(row)
             family_id = str(row["behavior_family_id"])
             archive.family_counts[family_id] += 1
             if bool(row["is_family_champion"]):
@@ -2258,7 +2280,7 @@ class HierarchicalTypedCEMV2:
     @staticmethod
     def _elite_sort_key(row: Mapping[str, Any]) -> tuple[Any, ...]:
         return (
-            -float(row["pair_reward"]),
+            -_search_ordering_reward(row),
             int(row.get("policy_local_family_count_at_completion", 1)),
             str(row["candidate_id"]),
         )
@@ -2655,7 +2677,7 @@ class TypedEvolutionV2:
         parent_id = max(
             participants,
             key=lambda candidate_id: (
-                float(self.population[candidate_id]["pair_reward"]),
+                float(self.population[candidate_id]["search_reward"]),
                 -int(
                     self.family_counts[
                         str(self.population[candidate_id]["behavior_family_id"])
@@ -3244,6 +3266,7 @@ class TypedEvolutionV2:
         )
         candidate_record = {
             "candidate": candidate.to_dict(),
+            "search_reward": _search_ordering_reward(archive_row),
             "pair_reward": float(archive_row["pair_reward"]),
             "behavior_family_id": family_id,
             "mechanism_family": candidate.mechanism_family,
@@ -3259,9 +3282,11 @@ class TypedEvolutionV2:
         for candidate_id in family_members:
             old = self.population[candidate_id]
             if (
-                float(old["pair_reward"]) > float(candidate_record["pair_reward"])
+                float(old["search_reward"])
+                > float(candidate_record["search_reward"])
                 or (
-                    float(old["pair_reward"]) == float(candidate_record["pair_reward"])
+                    float(old["search_reward"])
+                    == float(candidate_record["search_reward"])
                     and candidate_id < candidate.candidate_id
                 )
             ):
@@ -3278,7 +3303,7 @@ class TypedEvolutionV2:
             ordered = sorted(
                 self.population,
                 key=lambda candidate_id: (
-                    -float(self.population[candidate_id]["pair_reward"]),
+                    -float(self.population[candidate_id]["search_reward"]),
                     candidate_id,
                 ),
             )
@@ -3903,10 +3928,13 @@ def _checkpoint_allocation(
 
 
 def _reward_at_equal_count(
-    rows: Sequence[Mapping[str, Any]], count: int
+    rows: Sequence[Mapping[str, Any]],
+    count: int,
+    *,
+    reward_field: str,
 ) -> tuple[float | None, float | None]:
     local = sorted(rows, key=lambda row: int(row["arm_completion_ordinal"]))[:count]
-    rewards = [float(row["pair_reward"]) for row in local]
+    rewards = [float(row[reward_field]) for row in local]
     if not rewards:
         return None, None
     top_count = max(1, int(math.ceil(0.10 * len(rewards))))
@@ -3963,16 +3991,26 @@ def _metrics_rows(
             family_id = str(row["behavior_family_id"])
             current = family_champions.get(family_id)
             if current is None or (
-                float(row["pair_reward"]) > float(current["pair_reward"])
+                _search_ordering_reward(row) > _search_ordering_reward(current)
                 or (
-                    float(row["pair_reward"]) == float(current["pair_reward"])
+                    _search_ordering_reward(row)
+                    == _search_ordering_reward(current)
                     and str(row["candidate_id"]) < str(current["candidate_id"])
                 )
             ):
                 family_champions[family_id] = row
         counters = state["arm_counters"][arm]
         cpu_hours = float(counters["cpu_seconds"]) / 3600.0
-        mean_reward, top_reward = _reward_at_equal_count(rows, matched_count)
+        mean_search_reward, top_search_reward = _reward_at_equal_count(
+            rows,
+            matched_count,
+            reward_field="search_reward",
+        )
+        mean_pair_reward, top_pair_reward = _reward_at_equal_count(
+            rows,
+            matched_count,
+            reward_field="pair_reward",
+        )
         cem_entropies = [
             policy.entropy_summary()
             for key, policy in policies.items()
@@ -4088,8 +4126,10 @@ def _metrics_rows(
                 )
                 / max(1, len(rows)),
                 "matched_reward_comparison_count": int(matched_count),
-                "mean_pair_reward_at_matched_count": mean_reward,
-                "top_decile_pair_reward_at_matched_count": top_reward,
+                "mean_search_reward_at_matched_count": mean_search_reward,
+                "top_decile_search_reward_at_matched_count": top_search_reward,
+                "mean_pair_reward_at_matched_count": mean_pair_reward,
+                "top_decile_pair_reward_at_matched_count": top_pair_reward,
                 "positive_matched_family_rate": sum(
                     bool(row["matched_positive"])
                     for row in family_champions.values()
@@ -4268,6 +4308,8 @@ def _metrics_rows(
             * len(archive.champion_by_family)
             / max(1, len(ledger)),
             "matched_reward_comparison_count": int(matched_count),
+            "mean_search_reward_at_matched_count": None,
+            "top_decile_search_reward_at_matched_count": None,
             "mean_pair_reward_at_matched_count": None,
             "top_decile_pair_reward_at_matched_count": None,
             "positive_matched_family_rate": sum(
@@ -4368,12 +4410,16 @@ def _apply_exit_gate(
                 metrics["new_behavior_families_per_1k_evaluations"]
             )
             > float(random_metrics["new_behavior_families_per_1k_evaluations"]),
-            "mean_pair_reward": float(metrics["mean_pair_reward_at_matched_count"])
-            > float(random_metrics["mean_pair_reward_at_matched_count"]),
-            "top_decile_pair_reward": float(
-                metrics["top_decile_pair_reward_at_matched_count"]
+            "mean_search_reward": float(
+                metrics["mean_search_reward_at_matched_count"]
             )
-            > float(random_metrics["top_decile_pair_reward_at_matched_count"]),
+            > float(random_metrics["mean_search_reward_at_matched_count"]),
+            "top_decile_search_reward": float(
+                metrics["top_decile_search_reward_at_matched_count"]
+            )
+            > float(
+                random_metrics["top_decile_search_reward_at_matched_count"]
+            ),
         }
         all_no_increment = not any(comparisons.values())
         before = str(state["arm_states"][arm])
@@ -4782,6 +4828,31 @@ def _ledger_row(
         "is_family_champion_at_completion": bool(
             archive_row["is_family_champion"]
         ),
+        "search_reward": _search_ordering_reward(evaluation),
+        "search_reward_authority": str(
+            evaluation.get("search_reward_authority", "")
+        ),
+        "search_reward_feedback_json": json.dumps(
+            evaluation.get("search_reward_feedback", {}),
+            sort_keys=True,
+            separators=(",", ":"),
+            default=str,
+        ),
+        "train_day_sortino": evaluation.get("search_reward_feedback", {}).get(
+            "train_day_sortino"
+        ),
+        "train_worst_horizon_day_sortino": evaluation.get(
+            "search_reward_feedback", {}
+        ).get("train_worst_horizon_day_sortino"),
+        "train_day_bootstrap_sortino_p25": evaluation.get(
+            "search_reward_feedback", {}
+        ).get("train_day_bootstrap_sortino_p25"),
+        "train_day_bootstrap_probability_gt_zero": evaluation.get(
+            "search_reward_feedback", {}
+        ).get("train_day_bootstrap_probability_gt_zero"),
+        "train_mean_one_way_turnover": evaluation.get(
+            "search_reward_feedback", {}
+        ).get("mean_one_way_turnover"),
         "pair_reward": float(evaluation["pair_reward"]),
         "matched_positive": bool(evaluation["matched_positive"]),
         "gross_mean": incremental.get("gross_mean"),
@@ -4943,8 +5014,8 @@ def _final_decision(
             reward_not_worse = all(
                 not_worse(local[name], random_local[name])
                 for name in (
-                    "mean_pair_reward_at_matched_count",
-                    "top_decile_pair_reward_at_matched_count",
+                    "mean_search_reward_at_matched_count",
+                    "top_decile_search_reward_at_matched_count",
                 )
             )
             productivity_better = any(
@@ -4977,9 +5048,15 @@ def _final_decision(
                 and int(row["seed"]) == seed
             ]
             matched_count = min(len(arm_rows), len(random_rows))
-            arm_mean, arm_top = _reward_at_equal_count(arm_rows, matched_count)
+            arm_mean, arm_top = _reward_at_equal_count(
+                arm_rows,
+                matched_count,
+                reward_field="search_reward",
+            )
             random_mean, random_top = _reward_at_equal_count(
-                random_rows, matched_count
+                random_rows,
+                matched_count,
+                reward_field="search_reward",
             )
             seed_pass = bool(
                 matched_count > 0
@@ -4992,12 +5069,12 @@ def _final_decision(
             )
             seed_gates[str(seed)] = {
                 "matched_count": matched_count,
-                "mean_pair_reward_not_worse": (
+                "mean_search_reward_not_worse": (
                     seed_pass
                     if arm_mean is None or random_mean is None
                     else not_worse(arm_mean, random_mean)
                 ),
-                "top_decile_pair_reward_not_worse": (
+                "top_decile_search_reward_not_worse": (
                     seed_pass
                     if arm_top is None or random_top is None
                     else not_worse(arm_top, random_top)
@@ -5124,6 +5201,16 @@ def _aggtrades_canary_final_decision(
                 local["new_behavior_families_per_1k_evaluations"]
             )
             - float(random_metrics["new_behavior_families_per_1k_evaluations"]),
+            "mean_search_reward_delta": float(
+                local["mean_search_reward_at_matched_count"]
+            )
+            - float(random_metrics["mean_search_reward_at_matched_count"]),
+            "top_decile_search_reward_delta": float(
+                local["top_decile_search_reward_at_matched_count"]
+            )
+            - float(
+                random_metrics["top_decile_search_reward_at_matched_count"]
+            ),
             "mean_pair_reward_delta": float(
                 local["mean_pair_reward_at_matched_count"]
             )
@@ -5228,10 +5315,10 @@ def _aggtrades_canary_report_text(decision: Mapping[str, Any]) -> str:
 
 ## System comparison versus typed random
 
-| Arm | valid exact-unique / CPU-hour delta | new families / 1k delta | mean pair reward delta | top-decile reward delta |
+| Arm | valid exact-unique / CPU-hour delta | new families / 1k delta | mean search reward delta | top-decile search reward delta |
 |---|---:|---:|---:|---:|
-| Hierarchical Typed CEM V2 | {cem['valid_exact_unique_per_cpu_hour_delta']:.6f} | {cem['new_behavior_families_per_1k_delta']:.6f} | {cem['mean_pair_reward_delta']:.8f} | {cem['top_decile_pair_reward_delta']:.8f} |
-| Typed Evolution V2 | {evolution['valid_exact_unique_per_cpu_hour_delta']:.6f} | {evolution['new_behavior_families_per_1k_delta']:.6f} | {evolution['mean_pair_reward_delta']:.8f} | {evolution['top_decile_pair_reward_delta']:.8f} |
+| Hierarchical Typed CEM V2 | {cem['valid_exact_unique_per_cpu_hour_delta']:.6f} | {cem['new_behavior_families_per_1k_delta']:.6f} | {cem['mean_search_reward_delta']:.8f} | {cem['top_decile_search_reward_delta']:.8f} |
+| Typed Evolution V2 | {evolution['valid_exact_unique_per_cpu_hour_delta']:.6f} | {evolution['new_behavior_families_per_1k_delta']:.6f} | {evolution['mean_search_reward_delta']:.8f} | {evolution['top_decile_search_reward_delta']:.8f} |
 
 This fixed-retrospective-cohort canary evaluates search-system behavior only.
 It creates no Alpha, OOS, challenge, recent, May-stress, forward, promotion,
@@ -5275,6 +5362,22 @@ def _v11_final_decision(
                 local["new_behavior_families_per_1k_evaluations"]
             )
             - float(random_metrics["new_behavior_families_per_1k_evaluations"]),
+            "mean_search_reward_at_matched_count": float(
+                local["mean_search_reward_at_matched_count"]
+            ),
+            "mean_search_reward_delta": float(
+                local["mean_search_reward_at_matched_count"]
+            )
+            - float(random_metrics["mean_search_reward_at_matched_count"]),
+            "top_decile_search_reward_at_matched_count": float(
+                local["top_decile_search_reward_at_matched_count"]
+            ),
+            "top_decile_search_reward_delta": float(
+                local["top_decile_search_reward_at_matched_count"]
+            )
+            - float(
+                random_metrics["top_decile_search_reward_at_matched_count"]
+            ),
             "mean_pair_reward_at_matched_count": float(
                 local["mean_pair_reward_at_matched_count"]
             ),
@@ -5339,14 +5442,14 @@ def _v11_final_decision(
         cem["valid_exact_unique_per_cpu_hour_delta"] >= 0.0
         and (
             cem["new_behavior_families_per_1k_delta"] > 0.0
-            or cem["mean_pair_reward_delta"] > 0.0
-            or cem["top_decile_pair_reward_delta"] > 0.0
+            or cem["mean_search_reward_delta"] > 0.0
+            or cem["top_decile_search_reward_delta"] > 0.0
         )
     )
     evolution_pass = bool(
         evolution["new_behavior_families_per_1k_delta"] >= 0.0
-        and evolution["mean_pair_reward_delta"] >= 0.0
-        and evolution["top_decile_pair_reward_delta"] >= 0.0
+        and evolution["mean_search_reward_delta"] >= 0.0
+        and evolution["top_decile_search_reward_delta"] >= 0.0
         and evolution["behavior_duplicate_rate"] < 0.065
     )
     evolution_metrics = final_rows["behavior_niched_evolution_v2_1"]
@@ -5483,6 +5586,20 @@ def _v12_final_decision(
             evolution_metrics["new_behavior_families_per_1k_evaluations"]
         )
         - float(random_metrics["new_behavior_families_per_1k_evaluations"]),
+        "mean_search_reward_at_matched_count": float(
+            evolution_metrics["mean_search_reward_at_matched_count"]
+        ),
+        "mean_search_reward_delta": float(
+            evolution_metrics["mean_search_reward_at_matched_count"]
+        )
+        - float(random_metrics["mean_search_reward_at_matched_count"]),
+        "top_decile_search_reward_at_matched_count": float(
+            evolution_metrics["top_decile_search_reward_at_matched_count"]
+        ),
+        "top_decile_search_reward_delta": float(
+            evolution_metrics["top_decile_search_reward_at_matched_count"]
+        )
+        - float(random_metrics["top_decile_search_reward_at_matched_count"]),
         "mean_pair_reward_at_matched_count": float(
             evolution_metrics["mean_pair_reward_at_matched_count"]
         ),
@@ -5521,11 +5638,11 @@ def _v12_final_decision(
         "behavior_duplicate_rate_at_or_below_3pct": (
             comparison["behavior_duplicate_rate"] <= 0.03
         ),
-        "mean_pair_reward_not_below_random": (
-            comparison["mean_pair_reward_delta"] >= 0.0
+        "mean_search_reward_not_below_random": (
+            comparison["mean_search_reward_delta"] >= 0.0
         ),
-        "top_decile_pair_reward_not_below_random": (
-            comparison["top_decile_pair_reward_delta"] >= 0.0
+        "top_decile_search_reward_not_below_random": (
+            comparison["top_decile_search_reward_delta"] >= 0.0
         ),
     }
     increment_pass = all(engineering_gate.values())
@@ -5709,8 +5826,8 @@ def _v11_report_text(decision: Mapping[str, Any]) -> str:
 
 | Arm | valid unique / CPU-hour delta | new families / 1k | delta | mean reward delta | top-decile delta | duplicate rate |
 |---|---:|---:|---:|---:|---:|---:|
-| Behavior-Niched CEM V2.1 | {cem['valid_exact_unique_per_cpu_hour_delta']:.6f} | {cem['new_behavior_families_per_1k_evaluations']:.3f} | {cem['new_behavior_families_per_1k_delta']:.3f} | {cem['mean_pair_reward_delta']:.8f} | {cem['top_decile_pair_reward_delta']:.8f} | {cem['behavior_duplicate_rate']:.2%} |
-| Behavior-Niched Evolution V2.1 | {evolution['valid_exact_unique_per_cpu_hour_delta']:.6f} | {evolution['new_behavior_families_per_1k_evaluations']:.3f} | {evolution['new_behavior_families_per_1k_delta']:.3f} | {evolution['mean_pair_reward_delta']:.8f} | {evolution['top_decile_pair_reward_delta']:.8f} | {evolution['behavior_duplicate_rate']:.2%} |
+| Behavior-Niched CEM V2.1 | {cem['valid_exact_unique_per_cpu_hour_delta']:.6f} | {cem['new_behavior_families_per_1k_evaluations']:.3f} | {cem['new_behavior_families_per_1k_delta']:.3f} | {cem['mean_search_reward_delta']:.8f} | {cem['top_decile_search_reward_delta']:.8f} | {cem['behavior_duplicate_rate']:.2%} |
+| Behavior-Niched Evolution V2.1 | {evolution['valid_exact_unique_per_cpu_hour_delta']:.6f} | {evolution['new_behavior_families_per_1k_evaluations']:.3f} | {evolution['new_behavior_families_per_1k_delta']:.3f} | {evolution['mean_search_reward_delta']:.8f} | {evolution['top_decile_search_reward_delta']:.8f} | {evolution['behavior_duplicate_rate']:.2%} |
 
 ## System decision
 
@@ -5746,8 +5863,8 @@ def _v12_report_text(decision: Mapping[str, Any]) -> str:
 | balanced valid unique / CPU-hour | {comparison['balanced_valid_exact_unique_per_cpu_hour_delta']:+.6f} |
 | new families / CPU-hour | {comparison['new_behavior_families_per_cpu_hour_delta']:+.6f} |
 | new families / 1k | {comparison['new_behavior_families_per_1k_evaluations']:.3f} |
-| mean pair reward | {comparison['mean_pair_reward_delta']:+.8f} |
-| top-decile pair reward | {comparison['top_decile_pair_reward_delta']:+.8f} |
+| mean search reward | {comparison['mean_search_reward_delta']:+.8f} |
+| top-decile search reward | {comparison['top_decile_search_reward_delta']:+.8f} |
 | behavior duplicate rate | {comparison['behavior_duplicate_rate']:.2%} |
 
 ## Collision control
@@ -5844,6 +5961,16 @@ def _carrier_gate_final_decision(
     for arm in CARRIER_GATE_ARMS[1:]:
         local = final_metrics[arm]
         comparisons[arm] = {
+            "mean_search_reward_delta": float(
+                local["mean_search_reward_at_matched_count"]
+            )
+            - float(random_metrics["mean_search_reward_at_matched_count"]),
+            "top_decile_search_reward_delta": float(
+                local["top_decile_search_reward_at_matched_count"]
+            )
+            - float(
+                random_metrics["top_decile_search_reward_at_matched_count"]
+            ),
             "mean_pair_reward_delta": float(
                 local["mean_pair_reward_at_matched_count"]
             )
@@ -5934,6 +6061,18 @@ def _v13_final_decision(
             )
             - float(
                 random_metrics["new_behavior_families_per_1k_evaluations"]
+            ),
+            "mean_search_reward_delta": float(
+                final_metrics[arm]["mean_search_reward_at_matched_count"]
+            )
+            - float(random_metrics["mean_search_reward_at_matched_count"]),
+            "top_decile_search_reward_delta": float(
+                final_metrics[arm][
+                    "top_decile_search_reward_at_matched_count"
+                ]
+            )
+            - float(
+                random_metrics["top_decile_search_reward_at_matched_count"]
             ),
             "mean_pair_reward_delta": float(
                 final_metrics[arm]["mean_pair_reward_at_matched_count"]
@@ -6677,7 +6816,7 @@ def run_engine(
                     _policy_observe(
                         policy,
                         candidate=candidate,
-                        reward=float(evaluation["pair_reward"]),
+                        reward=_search_ordering_reward(evaluation),
                         archive_row=policy_archive_row,
                     )
                     _increment_counter(state, arm, "matched_control_valid", 1)
