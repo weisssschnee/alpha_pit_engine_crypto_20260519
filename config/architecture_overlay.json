@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine capability (V1.4 Binance target exact replay: gross persists, turnover repair next, research HOLD)",
+                      "label":  "Search Engine capability (portfolio Sortino reward authority repaired in code; validation gate required; research HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -408,6 +408,8 @@
                                     "alphafactory_crypto/data_admission_v1.py",
                                     "config/crypto_search_surface_integration_v1.json",
                                     "docs/adr/0011-search-surface-integration-v1.md",
+                                    "docs/adr/0014-search-reward-authority-separation.md",
+                                    "reports/CRYPTO_SEARCH_REWARD_AUTHORITY_AUDIT_20260729.md",
                                     "runtime/crypto_search_surface_integration_v1_20260728/run_manifest.json",
                                     "runtime/crypto_search_surface_integration_v1_20260728/final_decision.json",
                                     "config/crypto_search_engine_v1_2.json",
@@ -585,15 +587,24 @@
                                             "enforced_by":  "broad_search.replay_v14_binance_target and broad_search.pair18m.evaluate_pair",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/final_decision.json"
+                                        },
+                                        {
+                                            "id":  "search_engine_reward_authority_separation",
+                                            "type":  "AUTHORITY",
+                                            "rule":  "Adaptive ordering uses train-only PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1 for CEM elites, Evolution parents and replacement, Behavior Archive champions, equal-count quality metrics, and arm gates. pair_reward and matched-positive status remain attribution/execution diagnostics only. Legacy state without search_reward fails closed. Historical V1.1-V1.4 reward-improvement claims cannot be reinterpreted, and no fresh adaptive market run is allowed before an explicit validation kill-line and read-only holdout contract.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.pair18m.evaluate_pair, broad_search.search_engine_v1._search_ordering_reward, BehaviorArchive.observe, HierarchicalTypedCEMV2._elite_sort_key, TypedEvolutionV2._parent",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "reports/CRYPTO_SEARCH_REWARD_AUTHORITY_AUDIT_20260729.md"
                                         }
                                     ],
                       "validation":  {
-                                         "level":  "RUNTIME_ENFORCED",
-                                         "result":  "PASS",
+                                         "level":  "SOURCE_TESTED",
+                                         "result":  "PASS_CODE_ONLY_RESEARCH_HOLD",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/run_manifest.json",
-                                         "evidence_sha256":  "6458EE3F8272A54F468411610F45CF5D3A3FC361DE6DCA5EDC98F7AC61599E46",
-                                         "verified_at_sha":  "9dbb4ce52f5db218683e10c5463e2e6554c7b060"
+                                         "evidence_ref":  "reports/CRYPTO_SEARCH_REWARD_AUTHORITY_AUDIT_20260729.md",
+                                         "evidence_sha256":  "AB595238A97A17CCE40DBDBE043727F7392356933619B9578A190961D6DB54AD",
+                                         "verified_at_sha":  "1066153eaa72fd6036a81a31583f4666105adffc"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
@@ -637,7 +648,9 @@
                                            "V1.4 BINANCE TARGET EXACT REPLAY PASS",
                                            "GROSS PERSISTENCE DIAGNOSTIC PASS",
                                            "95.16% GROSS POSITIVES COST-KILLED",
-                                           "TURNOVER REPAIR NEXT",
+                                           "SEARCH REWARD AUTHORITY REPAIRED IN CODE",
+                                           "PAIR REWARD DIAGNOSTIC ONLY",
+                                           "VALIDATION KILL-LINE REQUIRED",
                                            "ADAPTIVE SEARCH NOT STARTED"
                                        ],
                       "promotion_requirements":  [
@@ -649,9 +662,12 @@
                                                      "full schema-2 post-join panel-context cache",
                                                      "fresh policy and archive state with frozen Arena budget",
                                                      "matched canonical typed-random control",
+                                                     "fresh train-only search_reward contract",
+                                                     "distinct validation budget and kill-line",
+                                                     "read-only holdout boundary",
                                                      "formal OOS authorization and evidence",
                                                      "explicit promotion authorization",
-                                                     "bounded adaptive diagnostics after turnover repair"
+                                                     "bounded fresh adaptive diagnostic after validation qualification"
                                                  ]
                   },
                   {

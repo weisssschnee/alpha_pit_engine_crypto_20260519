@@ -4,21 +4,31 @@ Last updated: 2026-07-29 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ENGINE_V1_4_BINANCE_TARGET_EXACT_REPLAY_COMPLETED_GROSS_PERSISTENCE_TURNOVER_REPAIR_NEXT`
+`CRYPTO_SEARCH_REWARD_AUTHORITY_REPAIRED_CODE_ONLY_VALIDATION_CONTRACT_REQUIRED`
 
-The Binance target exact-replay gate completed all `1,200` strict-valid entries from
-the existing V1.4 OI/flow aligned candidate graph under the new fixed execution
-contract. It preserved candidate order, exact identities, and deterministic replay
-across all `4` checkpoints of `300` candidates each (`1200` completed exactly).
-`fe82d94` produced `661` final gross-positive, `86` HAC-LCB-positive, `69`
-jointly persistent, `32` net-positive, and `0` matched-positive rows. Gross
-direction remained correlated with the prior gate (`new mean reward -5.3423`,
-old mean reward `-5.2350`, correlation `0.9594`), but full-step cost kill
-dominated the outcome (`629/661 = 95.15885%` cost sign-killed). The gross
-persistence diagnostic passed; strict paired exact-replay qualification remains
-`HOLD_SPENT_DEVELOPMENT_EXACT_REPLAY`; research remains `HOLD`; adaptive
-search has not started. Next action is turnover repair, then bounded adaptive
-diagnostic only.
+Source `1066153eaa72fd6036a81a31583f4666105adffc` repairs a material
+Search Engine V1 authority defect without running a market search. The prior
+implementation used `pair_reward` -- the minimum strict matched-feasibility
+margin -- as the sole ordering authority for CEM, Evolution, Behavior Archive
+champions, and arm gates. The existing `pair18m` evaluator now also computes a
+train-only Phase3CM-style primary-portfolio reward from day Sortino,
+deterministic 600-draw bootstrap Sortino p25, and a one-way turnover penalty.
+All adaptive ordering reads `search_reward`; `pair_reward` remains matched
+attribution and execution diagnostic only. Legacy state without
+`search_reward` fails closed. Full-L1 cost was verified equivalent to
+Phase3CM's two-sleeve one-way charge under the shared zero-net definition, so
+cost was not halved. Full tests passed (`295 passed`, one pre-existing NumPy
+warning). No candidate was generated or reevaluated.
+
+The prior Binance target exact replay remains immutable historical evidence:
+`1,200` strict-valid entries, `661` final gross-positive, `86` HAC-LCB-positive,
+`69` jointly persistent, `32` net-positive, and `0` matched-positive rows.
+Those values remain execution/matched diagnostics. They cannot be reinterpreted
+as portfolio search-reward results because the old ledger does not persist the
+complete daily primary-portfolio path needed to reconstruct `search_reward`.
+Research remains `HOLD`; adaptive search has not started. A distinct fresh
+validation kill-line and read-only holdout contract are required before any
+future adaptive market campaign.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new
 candidate evaluations and zero market budget. It found that `666/1,200` Stage-B
@@ -210,6 +220,13 @@ SEARCH_ENGINE_V1_4_ADAPTIVE_SEARCH_NOT_STARTED
 SEARCH_ENGINE_V1_4_COST_SIGN_KILL_DOMINANT
 SEARCH_ENGINE_V1_4B_NOT_AUTHORIZED
 SEARCH_ENGINE_V1_5_OPERATOR_EXPANSION_NOT_AUTHORIZED
+SEARCH_ENGINE_PAIR_REWARD_SOLE_ORDERING_AUTHORITY_REVOKED
+SEARCH_ENGINE_PHASE3CM_STYLE_TRAIN_PORTFOLIO_REWARD_ACTIVE_IN_CODE
+SEARCH_ENGINE_PAIR_REWARD_MATCHED_DIAGNOSTIC_ONLY
+SEARCH_ENGINE_LEGACY_STATE_WITHOUT_SEARCH_REWARD_FAIL_CLOSED
+SEARCH_ENGINE_HISTORICAL_POLICY_REWARD_CLAIMS_SUSPENDED
+SEARCH_ENGINE_VALIDATION_KILL_LINE_NOT_IMPLEMENTED
+SEARCH_ENGINE_FRESH_ADAPTIVE_CAMPAIGN_NOT_AUTHORIZED
 UNIFIED_FIELD_MANAGEMENT_V1_COMPILED_VIEW_ACTIVE
 UNIFIED_FIELD_MANAGEMENT_V1_NOT_FIELD_AUTHORITY
 UNIFIED_FIELD_MANAGEMENT_V1_AUTHORITY_CONFLICTS_ZERO
@@ -290,28 +307,28 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 
 1. Treat the continuation, policy canary, Search Engine V1 20k campaign, aggTrades canary, and Search Engine V1.1-V1.4 campaigns as spent development engineering evidence; do not rerun, tune, rewrite, or import their candidate, reward, distribution, population, policy, archive, or transition-memory state.
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
-3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.4 qualified the OI/flow carrier and hierarchical execution path, but its typed-random semantic gate produced zero matched positives and correctly prevented adaptive Stage C; do not add another control plane.
-4. Treat the V1.4 failure decomposition as post-hoc diagnostic authority only. Repair the target/execution/cost contract and mapping/holding/turnover assumptions before any field, operator, or adaptive-policy expansion. The audit does not authorize candidate reevaluation.
-5. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
-6. Do not launch another large search until separately authorized over an admitted new release. Latent search priority remains deferred after V1.2 and cannot influence budget.
-7. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
-8. Treat `runtime/crypto_new_data_admission_v1_20260727` and the Search Surface Integration V1 bundle as distinct authorities: the former owns research admission gaps; the latter owns engineering carrier reachability. Resolve `BDXNUSDT`, lifecycle splits, Top200 surface gaps, and the Top50 OI/mark consumer before research admission.
-9. Use Unified Field Management V1 only as the deterministic navigation and conflict-checking view over those authorities. Add future registries by declaring their authority path and recompiling; do not hand-maintain duplicate field facts or infer research admission from catalog presence.
+3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
+4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` as the only adaptive ordering authority. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
+5. Before any fresh adaptive market campaign, freeze a distinct validation split and kill-line, read-only holdout, tradable venue-specific execution/cost contract, and fresh policy/archive/checkpoint state. The historical report-only block cannot be promoted to validation.
+6. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
+7. Do not launch another large search until separately authorized over an admitted new release. Latent search priority remains deferred after V1.2 and cannot influence budget.
+8. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
+9. Treat `runtime/crypto_new_data_admission_v1_20260727` and the Search Surface Integration V1 bundle as distinct authorities: the former owns research admission gaps; the latter owns engineering carrier reachability. Resolve `BDXNUSDT`, lifecycle splits, Top200 surface gaps, and the Top50 OI/mark consumer before research admission.
+10. Use Unified Field Management V1 only as the deterministic navigation and conflict-checking view over those authorities. Add future registries by declaring their authority path and recompiling; do not hand-maintain duplicate field facts or infer research admission from catalog presence.
 
 No performance search or large experiment is authorized merely by this plan.
 
 ## Qualified policy components
 
-The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched controls, deterministic replay, campaign-local memory, and exact checkpoint restoration, but no search arm or archive is currently qualified for a future Arena. V1.4 exercised a newly aligned OI/flow carrier and stopped at its frozen typed-random semantic gate, so CEM V2 and Evolution V2 received no qualification evidence from V1.4. V1.1-V1.4 state and trajectories cannot seed another campaign.
+The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched controls, deterministic replay, campaign-local memory, exact checkpoint restoration, and now a separate train-only portfolio search objective. No search arm or archive is currently qualified for a future Arena. V1.4 exercised a newly aligned OI/flow carrier and stopped before adaptive Stage C. V1.1-V1.4 state and trajectories lack the current reward field and cannot seed another campaign.
 
 ## Blockers
 
 - The observed-archive surface is not survivorship-complete, and its selection/stability blocks are spent; they can support engineering attribution but not fresh confirmation.
-- The completed continuation improved search-policy productivity but did not establish a positive absolute reward distribution or an economic challenger; its adaptive and report-only blocks are now spent.
+- The completed continuation and V1.1-V1.3 policy comparisons optimized strict matched-feasibility distance, not portfolio Sortino. Their throughput and engineering evidence remain valid, but reward-improvement claims do not establish better Alpha-search ability.
 - Search Engine V1 arm-productivity and behavior-family comparisons are research-invalid because panel-context identity and 4h reward uncertainty were defective; the historical run remains engineering-valid, and all trajectories, policies, and archive state are spent and cannot seed another campaign.
-- Search Engine V1.1 used a repaired system carrier and exact equal-count controls, but both proposed policy increments failed: CEM lost unit-compute density and Evolution lost both density and behavior-family yield while duplicate rate increased. This rejects the V2.1 engineering increments, not the existence of crypto Alpha.
-- Search Engine V1.2 used balanced rotating micro-batches and campaign-global transition collision memory, but Evolution V2.2 still lost behavior-family yield and exceeded the 3% duplicate gate. This rejects the V2.2 engineering increment, not the existence of crypto Alpha.
-- Search Engine V1.4 proved that OI/mark and aggTrades can share a real, PIT/lag-safe, dynamically eligible carrier and that hierarchical A/B/AB/ABC controls execute without a new AST or evaluator. Its 1,200-candidate semantic gate found zero matched positives across all four frozen tuples, so adaptive-policy attribution was not authorized. This is a bounded mechanism-space negative, not evidence that the supplied fields or crypto market contain no Alpha.
+- Search Engine V1.1 and V1.2 retain valid proposal, duplicate, family-yield, checkpoint, and receipt evidence. Their mean/top-decile `pair_reward` comparisons are matched-feasibility diagnostics and cannot qualify or reject CEM/Evolution as Alpha-search policies.
+- Search Engine V1.4 proved that OI/mark and aggTrades can share a real, PIT/lag-safe, dynamically eligible carrier and that hierarchical A/B/AB/ABC controls execute without a new AST or evaluator. Its zero matched-positive result is a strict attribution outcome, not a portfolio reward negative and not evidence that the supplied fields or crypto market contain no Alpha.
 - V1.4 failure decomposition: final-increment gross directionality exists frequently, but 96.10% of gross-positive rows are sign-killed after cost and only 0.25% of Stage-B rows are within one strict-distance unit of zero. This points first to target/execution and turnover economics, not a larger random or adaptive budget. Because standalone sleeves and monthly waterfalls were not persisted, the audit cannot distinguish A/B efficacy from AB/ABC incremental failure strongly enough to authorize a residual, gate, or regime-routing grammar.
 - Historical aggTrades coverage remains narrower than the observed-archive surface; the qualified Core3 slice has 3 assets, 4,368 hours, and 13,068 eligible observations.
 - V1.4 target semantics are not a qualified execution contract. Binance order flow is evaluated against an availability-dependent non-Binance mark; 126/144 assets use more than one priority venue, and 0.205% of 1h plus 0.512% of 4h valid label endpoints cross venues. The generic 5 bps model is not tied to fees, slippage, mark-to-trade basis, or an executable instrument on those venues.
@@ -319,6 +336,7 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Qlib and DeepDow remain data-underpowered; neither supplies a clean economic negative for its full external paradigm.
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
+- Search Engine V1 has no formal validation kill-line. The historical report-only block is spent and cannot become optimizer feedback. A future fresh campaign must define a new validation boundary before any adaptive budget is authorized.
 
 ## Source-of-truth order
 
@@ -346,9 +364,10 @@ No status code overrides observed runtime or source facts.
 
 ## Next action
 
-Stop at this audit closure. The only evidence-backed next design task is a
-tradable venue-specific target/execution/cost contract followed by a
-mapping/holding/turnover audit. Do not reconstruct the missing waterfall by
+Stop at this authority-repair closure. The next code-design task is a compact
+fresh-campaign contract that binds train-only `search_reward`, a distinct
+validation budget/kill-line, read-only holdout, and a tradable venue-specific
+execution/cost model. Do not reconstruct historical `search_reward` by
 rerunning candidates, start adaptive V1.4b, expand the operator basis, spend a
 new market-evaluation budget, train latent priority, open sealed roles, run
 OOS/challenge/forward, or promote candidates without separate authorization.
