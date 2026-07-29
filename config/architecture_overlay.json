@@ -599,12 +599,12 @@
                                         }
                                     ],
                       "validation":  {
-                                         "level":  "SOURCE_TESTED",
-                                         "result":  "PASS_CODE_ONLY_RESEARCH_HOLD",
+                                         "level":  "STATIC_VERIFIED",
+                                         "result":  "PASS",
                                          "profile":  "crypto-development-research",
                                          "evidence_ref":  "reports/CRYPTO_SEARCH_REWARD_AUTHORITY_AUDIT_20260729.md",
                                          "evidence_sha256":  "AB595238A97A17CCE40DBDBE043727F7392356933619B9578A190961D6DB54AD",
-                                         "verified_at_sha":  "1066153eaa72fd6036a81a31583f4666105adffc"
+                                         "verified_at_sha":  "e6aa3c8d8f92f27502dbfd1c5f7e43e2a925522f"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
