@@ -465,14 +465,14 @@
                       "authority":  {
                                         "path":  "config/crypto_search_economic_receipt_v1.json",
                                         "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "0bbe594a6a5db49f1d4661c349da08f0d36dec09",
-                                        "sha256":  "632F18D3E8495E8292817EFD0A139BB6A239F1A3F04F6950D08391E5CAE6B57A"
+                                        "verified_sha":  "fe306f53c7c34cfce6ff05514df4eb12310a9ae2",
+                                        "sha256":  "F626E1AB27FAA7F4846725FF3F2221C2958AF93C1991202A79E746A84E4290F3"
                                     },
                       "contracts":  [
                                         {
                                             "id":  "crypto_search_economic_receipt_v1_binding",
                                             "type":  "AUTHORITY",
-                                            "rule":  "The successor receipt reuses Skeleton financial hypotheses, A7Reward train-frozen orientation and validation aggregation, the formal explicit portfolio mapping and its full-L1 5 bps cost, the existing Binance USD-M delayed-open target store, and the retained joint standalone-plus-matched Sortino reward. Validation is a distinct no-feedback development kill-line and the later holdout remains unreadable. The receipt is source-qualified but run_authorized remains false.",
+                                            "rule":  "The successor receipt reuses Skeleton financial hypotheses, the existing mechanism-to-mapping authority, A7Reward train-frozen orientation, formal explicit portfolio mapping, the existing Binance USD-M delayed-open target store, and the retained joint standalone-plus-matched Sortino reward. The full-L1 5 bps cost is bound as a non-formal Binance venue assumption, not promoted as venue-qualified. Validation uses a distinct pure no-feedback development kill-line and the later holdout remains unreadable. Component hashes are frozen; run_authorized is hard false.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt and broad_search.search_engine_v1.main",
                                             "bypass_forbidden":  true,
@@ -626,8 +626,8 @@
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
                                          "evidence_ref":  "config/crypto_search_economic_receipt_v1.json",
-                                         "evidence_sha256":  "632F18D3E8495E8292817EFD0A139BB6A239F1A3F04F6950D08391E5CAE6B57A",
-                                         "verified_at_sha":  "0bbe594a6a5db49f1d4661c349da08f0d36dec09"
+                                         "evidence_sha256":  "F626E1AB27FAA7F4846725FF3F2221C2958AF93C1991202A79E746A84E4290F3",
+                                         "verified_at_sha":  "fe306f53c7c34cfce6ff05514df4eb12310a9ae2"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
@@ -2617,8 +2617,8 @@
                                  },
                                  {
                                      "semantic_role":  "cost",
-                                     "authoritative_component":  "explicit_portfolio_mapping",
-                                     "authority_class":  "FORMAL"
+                                     "authoritative_component":  "real_data_mapping_cost_evaluator",
+                                     "authority_class":  "NON_FORMAL"
                                  },
                                  {
                                      "semantic_role":  "validation_role",

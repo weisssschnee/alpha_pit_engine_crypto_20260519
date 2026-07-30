@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-30T10:07:33.081202+00:00",
+  "generated_at": "2026-07-30T10:39:36.639896+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -2868,20 +2868,22 @@
         "alphafactory_crypto_broad_search_compositional18m_generate_structural_pool",
         "alphafactory_crypto_broad_search_compositional18m_legal_normalizers",
         "alphafactory_crypto_broad_search_compositional18m_legal_windows",
+        "alphafactory_crypto_broad_search_compositional18m_mapping_id_for_mechanism_family",
         "alphafactory_crypto_broad_search_compositional18m_mutable_gene_domains",
         "alphafactory_crypto_broad_search_compositional18m_normalized",
         "alphafactory_crypto_broad_search_compositional18m_operator_path",
         "alphafactory_crypto_broad_search_compositional18m_payload_sha",
         "alphafactory_crypto_broad_search_compositional18m_rank_behavior",
         "alphafactory_crypto_broad_search_compositional18m_rationale_1",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_1094",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_1216",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_280",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_303",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_353",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_622",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_747",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_954",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_1109",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_1231",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_292",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_315",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_365",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_60",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_634",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_760",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_969",
         "alphafactory_crypto_broad_search_compositional18m_same_oi_statistic_different_venue",
         "alphafactory_crypto_broad_search_compositional18m_same_venue_statistic",
         "alphafactory_crypto_broad_search_compositional18m_sample_effective_generation_genes",
@@ -2974,7 +2976,7 @@
       "required": false,
       "semantic_role": "experimental_18m_compositional_search_evidence",
       "validation": {
-        "checked_at": "2026-07-28T14:01:30.205012+00:00",
+        "checked_at": "2026-07-30T10:39:36.639896+00:00",
         "evidence_ref": "runtime/crypto_18m_current_field_four_policy_continuation_20260719/CRYPTO_ARTIFACT_MANIFEST.json",
         "evidence_sha256": "5366AC5847DC78C6AEDFBC439D88C77DA425351EB66A3BD1E3C5DD009C4A2A69",
         "level": "STATIC_VERIFIED",
@@ -2990,8 +2992,8 @@
       "authority": {
         "path": "config/crypto_search_economic_receipt_v1.json",
         "repo_ref": "replay/crypto-search-engine-v1-4-binance-target-20260729",
-        "sha256": "632F18D3E8495E8292817EFD0A139BB6A239F1A3F04F6950D08391E5CAE6B57A",
-        "verified_sha": "0bbe594a6a5db49f1d4661c349da08f0d36dec09"
+        "sha256": "F626E1AB27FAA7F4846725FF3F2221C2958AF93C1991202A79E746A84E4290F3",
+        "verified_sha": "fe306f53c7c34cfce6ff05514df4eb12310a9ae2"
       },
       "authority_bindings": [
         {
@@ -3030,7 +3032,7 @@
           "enforced_by": "broad_search.experiment_authority.resolve_search_economic_receipt and broad_search.search_engine_v1.main",
           "evidence_ref": "config/crypto_search_economic_receipt_v1.json",
           "id": "crypto_search_economic_receipt_v1_binding",
-          "rule": "The successor receipt reuses Skeleton financial hypotheses, A7Reward train-frozen orientation and validation aggregation, the formal explicit portfolio mapping and its full-L1 5 bps cost, the existing Binance USD-M delayed-open target store, and the retained joint standalone-plus-matched Sortino reward. Validation is a distinct no-feedback development kill-line and the later holdout remains unreadable. The receipt is source-qualified but run_authorized remains false.",
+          "rule": "The successor receipt reuses Skeleton financial hypotheses, the existing mechanism-to-mapping authority, A7Reward train-frozen orientation, formal explicit portfolio mapping, the existing Binance USD-M delayed-open target store, and the retained joint standalone-plus-matched Sortino reward. The full-L1 5 bps cost is bound as a non-formal Binance venue assumption, not promoted as venue-qualified. Validation uses a distinct pure no-feedback development kill-line and the later holdout remains unreadable. Component hashes are frozen; run_authorized is hard false.",
           "severity": "HARD",
           "type": "AUTHORITY"
         },
@@ -3317,20 +3319,22 @@
         "alphafactory_crypto_broad_search_compositional18m_generate_structural_pool",
         "alphafactory_crypto_broad_search_compositional18m_legal_normalizers",
         "alphafactory_crypto_broad_search_compositional18m_legal_windows",
+        "alphafactory_crypto_broad_search_compositional18m_mapping_id_for_mechanism_family",
         "alphafactory_crypto_broad_search_compositional18m_mutable_gene_domains",
         "alphafactory_crypto_broad_search_compositional18m_normalized",
         "alphafactory_crypto_broad_search_compositional18m_operator_path",
         "alphafactory_crypto_broad_search_compositional18m_payload_sha",
         "alphafactory_crypto_broad_search_compositional18m_rank_behavior",
         "alphafactory_crypto_broad_search_compositional18m_rationale_1",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_1094",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_1216",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_280",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_303",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_353",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_622",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_747",
-        "alphafactory_crypto_broad_search_compositional18m_rationale_954",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_1109",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_1231",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_292",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_315",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_365",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_60",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_634",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_760",
+        "alphafactory_crypto_broad_search_compositional18m_rationale_969",
         "alphafactory_crypto_broad_search_compositional18m_same_oi_statistic_different_venue",
         "alphafactory_crypto_broad_search_compositional18m_same_venue_statistic",
         "alphafactory_crypto_broad_search_compositional18m_sample_effective_generation_genes",
@@ -3346,16 +3350,20 @@
         "alphafactory_crypto_broad_search_compositional18m_verify_typed_mutation_receipt",
         "alphafactory_crypto_broad_search_experiment_authority",
         "alphafactory_crypto_broad_search_experiment_authority_canonical_sha256",
+        "alphafactory_crypto_broad_search_experiment_authority_evaluate_search_validation_kill_line",
         "alphafactory_crypto_broad_search_experiment_authority_file_sha256",
         "alphafactory_crypto_broad_search_experiment_authority_meaningful",
         "alphafactory_crypto_broad_search_experiment_authority_node_id",
         "alphafactory_crypto_broad_search_experiment_authority_parse_utc",
         "alphafactory_crypto_broad_search_experiment_authority_rationale_1",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_101",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_100",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_155",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_456",
         "alphafactory_crypto_broad_search_experiment_authority_require_real_experiment_authority",
         "alphafactory_crypto_broad_search_experiment_authority_resolve_real_experiment_authorities",
         "alphafactory_crypto_broad_search_experiment_authority_resolve_search_economic_receipt",
         "alphafactory_crypto_broad_search_experiment_authority_symbol_is_declared",
+        "alphafactory_crypto_broad_search_experiment_authority_validate_search_economic_receipt",
         "alphafactory_crypto_broad_search_failure_decomposition_v14",
         "alphafactory_crypto_broad_search_failure_decomposition_v14_augment_ledger",
         "alphafactory_crypto_broad_search_failure_decomposition_v14_check_audit",
@@ -3549,6 +3557,7 @@
         "alphafactory_crypto_broad_search_search_engine_v1_behaviorarchive_state_hash",
         "alphafactory_crypto_broad_search_search_engine_v1_behaviorarchive_summary_rows",
         "alphafactory_crypto_broad_search_search_engine_v1_behaviorarchive_transition_state",
+        "alphafactory_crypto_broad_search_search_engine_v1_bind_economic_receipt",
         "alphafactory_crypto_broad_search_search_engine_v1_broad39_registry_contracts",
         "alphafactory_crypto_broad_search_search_engine_v1_build_aggtrades_canary_cache_from_config",
         "alphafactory_crypto_broad_search_search_engine_v1_build_v14_aligned_carrier",
@@ -3619,9 +3628,10 @@
         "alphafactory_crypto_broad_search_search_engine_v1_rationale_1",
         "alphafactory_crypto_broad_search_search_engine_v1_rationale_1056",
         "alphafactory_crypto_broad_search_search_engine_v1_rationale_3650",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_4678",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_4685",
         "alphafactory_crypto_broad_search_search_engine_v1_read_json",
         "alphafactory_crypto_broad_search_search_engine_v1_report_text",
+        "alphafactory_crypto_broad_search_search_engine_v1_require_bound_economic_run",
         "alphafactory_crypto_broad_search_search_engine_v1_resolve_config_path",
         "alphafactory_crypto_broad_search_search_engine_v1_restore_lane_policy",
         "alphafactory_crypto_broad_search_search_engine_v1_restore_policy",
@@ -4822,6 +4832,7 @@
         "tests_test_crypto_experiment_authority_test_missing_information_intent_fails_closed",
         "tests_test_crypto_experiment_authority_test_search_economic_receipt_cannot_open_run_authority_by_itself",
         "tests_test_crypto_experiment_authority_test_search_economic_receipt_fails_closed_on_target_drift",
+        "tests_test_crypto_experiment_authority_test_validation_kill_line_is_pure_and_fail_closed",
         "tests_test_crypto_experiment_authority_write_current",
         "verified_core_crypto_20260618_governance_crypto_a7guard0_leakage_chain_audit",
         "verified_core_crypto_20260618_governance_crypto_a7guard0_leakage_chain_audit_chain_gate_inventory",
@@ -4856,14 +4867,14 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-07-30T09:50:10.290109+00:00",
+        "checked_at": "2026-07-30T10:39:36.639896+00:00",
         "evidence_ref": "config/crypto_search_economic_receipt_v1.json",
-        "evidence_sha256": "632F18D3E8495E8292817EFD0A139BB6A239F1A3F04F6950D08391E5CAE6B57A",
+        "evidence_sha256": "F626E1AB27FAA7F4846725FF3F2221C2958AF93C1991202A79E746A84E4290F3",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "0bbe594a6a5db49f1d4661c349da08f0d36dec09"
+        "verified_at_sha": "fe306f53c7c34cfce6ff05514df4eb12310a9ae2"
       },
       "visible_by_default": true
     },
@@ -5905,6 +5916,11 @@
         {
           "authoritative_component": "real_data_mapping_cost_evaluator",
           "authority_class": "NON_FORMAL",
+          "semantic_role": "cost"
+        },
+        {
+          "authoritative_component": "real_data_mapping_cost_evaluator",
+          "authority_class": "NON_FORMAL",
           "semantic_role": "mapped_cost_evaluator"
         }
       ],
@@ -5971,7 +5987,7 @@
       "required": false,
       "semantic_role": "mapped_cost_evaluator",
       "validation": {
-        "checked_at": "2026-07-30T09:35:28.299621+00:00",
+        "checked_at": "2026-07-30T10:31:06.909960+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_canary/evaluator.py",
         "evidence_sha256": "83329690EC557AE5D27F748669F7DAECA504B9F3B80468868D01EB7015E0DE53",
         "level": "PARTIAL",
@@ -6094,11 +6110,6 @@
         {
           "authoritative_component": "explicit_portfolio_mapping",
           "authority_class": "FORMAL",
-          "semantic_role": "cost"
-        },
-        {
-          "authoritative_component": "explicit_portfolio_mapping",
-          "authority_class": "FORMAL",
           "semantic_role": "portfolio_mapping"
         },
         {
@@ -6194,7 +6205,7 @@
       "required": false,
       "semantic_role": "portfolio_mapping_authority",
       "validation": {
-        "checked_at": "2026-07-30T09:35:28.299621+00:00",
+        "checked_at": "2026-07-30T10:31:06.909960+00:00",
         "evidence_ref": "alphafactory_crypto/instrument_capability/mapping.py",
         "evidence_sha256": "EFB7160B46A35DE3798EF1C36ABFC86E017B16283B7E98B522259E5E3F0A2C88",
         "level": "PARTIAL",
@@ -7717,7 +7728,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "2BE9BC37774F8E261496AFC43838972CA980F3982C6B9F2AC3B2747F8A0CD583"
+    "sha256": "D0968E7A4938BBB4C2096A3BDC4E416C783249A02B0E6D6FFC68A86344B3936D"
   },
   "profile_id": null,
   "profiles": [
@@ -7748,13 +7759,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "39cb23325a16cc58da7d744c638248325ee75a59",
-    "edge_count": 36710,
-    "node_count": 19686,
+    "built_at_commit": "fe306f53c7c34cfce6ff05514df4eb12310a9ae2",
+    "edge_count": 36757,
+    "node_count": 19697,
     "path": ".planning/graphs/graph.json",
-    "sha256": "650817B0569FF715444AB6B44266138F7620B636550D208EB30B791D3B303435"
+    "sha256": "07979575FB9E128999E36A5970115FD6998C76021C89E68DABD2791072F02308"
   },
-  "repo_head": "39cb23325a16cc58da7d744c638248325ee75a59",
+  "repo_head": "fe306f53c7c34cfce6ff05514df4eb12310a9ae2",
   "schema_version": 1,
   "semantic_authorities": [
     {
@@ -7773,8 +7784,8 @@
       "semantic_role": "capability_strict_feedback_authority"
     },
     {
-      "authoritative_component": "explicit_portfolio_mapping",
-      "authority_class": "FORMAL",
+      "authoritative_component": "real_data_mapping_cost_evaluator",
+      "authority_class": "NON_FORMAL",
       "semantic_role": "cost"
     },
     {
