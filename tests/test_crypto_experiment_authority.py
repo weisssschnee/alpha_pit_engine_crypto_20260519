@@ -165,7 +165,7 @@ def test_committed_current_blocks_inactive_search_economic_roles() -> None:
         "target:INACTIVE_AUTHORITY",
         "optimizer_reward:INACTIVE_AUTHORITY",
         "execution_price:INACTIVE_AUTHORITY",
-        "cost:INACTIVE_AUTHORITY",
+        "validation_role:INACTIVE_AUTHORITY",
     }
     current = json.loads(
         (repo_root / ".planning" / "graphs" / "current.json").read_text(
