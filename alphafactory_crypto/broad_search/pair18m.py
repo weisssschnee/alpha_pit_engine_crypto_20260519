@@ -490,13 +490,14 @@ def _series_metrics(
     months: np.ndarray,
     evaluation_mask: np.ndarray,
     horizon: int,
+    cost_bps: float = FIXED_COST_BPS,
     timestamp_ns: np.ndarray | None = None,
     search_reward_seed: int | None = None,
     include_internal_objective_paths: bool = False,
 ) -> dict[str, Any]:
     turnover, attribution = turnover_path(weights, horizon)
     gross = np.nansum(weights * target, axis=0) / float(horizon)
-    cost = turnover * FIXED_COST_BPS / 10000.0
+    cost = turnover * float(cost_bps) / 10000.0
     net = gross - cost
     mask = np.asarray(evaluation_mask, dtype=bool) | (turnover > ACTIVE_EPSILON)
     dependency_lags = max(0, int(horizon) - 1)
@@ -555,6 +556,7 @@ def _series_metrics(
         "gross_observations": gross_observations,
         "turnover_mean": float(np.mean(turnover[mask])) if np.any(mask) else float("nan"),
         "cost_mean": float(np.mean(cost[mask])) if np.any(mask) else float("nan"),
+        "cost_bps": float(cost_bps),
         "concentration_mean": concentration,
         "support": support,
         "active_weight_fraction": float(np.mean(active)),
@@ -754,16 +756,41 @@ def evaluate_pair(
     mapping_started = time.perf_counter()
     mapping_contract = DEFAULT_MAPPING_CONTRACTS[candidate.mapping_id]
     train_orientation = 1.0
+    evaluation_cost_bps = FIXED_COST_BPS
     if economic_receipt is not None:
         receipt = dict(economic_receipt)
         train = dict(receipt.get("train") or {})
         portfolio = dict(receipt.get("portfolio") or {})
         direction = dict(receipt.get("direction") or {})
         cost_contract = dict(receipt.get("cost") or {})
+        execution = dict(receipt.get("execution") or {})
         if direction.get("rule") != "TRAIN_FROZEN_SIGN_ORIENTATION":
             raise ValueError("ECONOMIC_RECEIPT_DIRECTION_RULE_CHANGED")
         if candidate.mapping_id != portfolio.get("mapping_id"):
             raise ValueError("ECONOMIC_RECEIPT_MAPPING_CHANGED")
+        target_metadata = getattr(store, "target_metadata", None)
+        if not isinstance(target_metadata, Mapping):
+            raise ValueError("ECONOMIC_RECEIPT_TARGET_STORE_NOT_BOUND")
+        for field in (
+            "venue",
+            "source",
+            "price_field",
+            "formula",
+            "execution_delay_hours",
+            "horizons_hours",
+            "positive_price_required",
+            "missing_value_fill",
+            "target_cache_identity_sha256",
+        ):
+            observed = (
+                target_metadata.get("identity_sha256")
+                if field == "target_cache_identity_sha256"
+                else target_metadata.get(field)
+            )
+            if observed != execution.get(field):
+                raise ValueError(
+                    f"ECONOMIC_RECEIPT_TARGET_CONTRACT_CHANGED:{field}"
+                )
         if (
             str(block_start) != str(train.get("start"))
             or str(block_end) != str(train.get("end_exclusive"))
@@ -781,9 +808,9 @@ def evaluate_pair(
             negative_weight,
             candidate.horizon_hours,
         )
-        cost_bps = float(cost_contract["cost_bps"])
-        positive_cost = positive_turnover * cost_bps / 10_000.0
-        negative_cost = negative_turnover * cost_bps / 10_000.0
+        evaluation_cost_bps = float(cost_contract["cost_bps"])
+        positive_cost = positive_turnover * evaluation_cost_bps / 10_000.0
+        negative_cost = negative_turnover * evaluation_cost_bps / 10_000.0
         active_union = (
             (np.abs(positive_weight) > ACTIVE_EPSILON)
             | (np.abs(negative_weight) > ACTIVE_EPSILON)
@@ -873,6 +900,7 @@ def evaluate_pair(
         months=months,
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
+        cost_bps=evaluation_cost_bps,
         timestamp_ns=timestamp_ns,
         include_internal_objective_paths=True,
     )
@@ -882,6 +910,7 @@ def evaluate_pair(
         months=months,
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
+        cost_bps=evaluation_cost_bps,
     )
     right_control = _series_metrics(
         weights=right_control_weight,
@@ -889,6 +918,7 @@ def evaluate_pair(
         months=months,
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
+        cost_bps=evaluation_cost_bps,
     )
     interaction_left_control = (
         _series_metrics(
@@ -897,6 +927,7 @@ def evaluate_pair(
             months=months,
             evaluation_mask=evaluation_mask,
             horizon=candidate.horizon_hours,
+            cost_bps=evaluation_cost_bps,
         )
         if interaction_left_control_weight is not None
         else None
@@ -916,6 +947,7 @@ def evaluate_pair(
         months=months,
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
+        cost_bps=evaluation_cost_bps,
         include_internal_objective_paths=True,
     )
     right_incremental = _series_metrics(
@@ -924,6 +956,7 @@ def evaluate_pair(
         months=months,
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
+        cost_bps=evaluation_cost_bps,
         include_internal_objective_paths=True,
     )
     left_feedback = strict_pair_feedback(left_incremental)
@@ -938,6 +971,7 @@ def evaluate_pair(
             months=months,
             evaluation_mask=evaluation_mask,
             horizon=candidate.horizon_hours,
+            cost_bps=evaluation_cost_bps,
             include_internal_objective_paths=True,
         )
         interaction_left_feedback = strict_pair_feedback(
@@ -1132,6 +1166,7 @@ def evaluate_pair(
         "horizon_hours": candidate.horizon_hours,
         "mapping_id": candidate.mapping_id,
         "mapping_hash": mapping_contract_sha256(mapping_contract),
+        "cost_bps": float(evaluation_cost_bps),
         "train_orientation": float(train_orientation),
         "economic_receipt_sha256": (
             str(economic_receipt.get("receipt_sha256"))

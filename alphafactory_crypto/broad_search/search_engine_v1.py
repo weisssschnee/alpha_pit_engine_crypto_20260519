@@ -3806,7 +3806,22 @@ def _worker_initialize(
     global _WORKER_STORE, _WORKER_REGISTRY, _WORKER_BEHAVIOR_CONTRACT
     global _WORKER_ECONOMIC_RECEIPT
     global _WORKER_BLOCK_START, _WORKER_BLOCK_END, _WORKER_BLOCK_ROLE
-    _WORKER_STORE = RawPanelStore.open(Path(cache_root))
+    source_store = RawPanelStore.open(Path(cache_root))
+    if economic_receipt is not None:
+        from alphafactory_crypto.broad_search.replay_v14_binance_target import (
+            BinanceTargetStore,
+        )
+
+        execution = dict(economic_receipt.get("execution") or {})
+        target_root = (
+            Path(__file__).resolve().parents[2]
+            / str(execution.get("target_cache_path") or "")
+        )
+        if not (target_root / "metadata.json").is_file():
+            raise RuntimeError("ECONOMIC_RECEIPT_TARGET_CACHE_MISSING")
+        _WORKER_STORE = BinanceTargetStore(source_store, target_root)
+    else:
+        _WORKER_STORE = source_store
     _WORKER_REGISTRY = TypedExpressionRegistry(_contracts_from_payload(contract_rows))
     _WORKER_BEHAVIOR_CONTRACT = dict(behavior_contract)
     _WORKER_ECONOMIC_RECEIPT = (
@@ -6190,6 +6205,30 @@ def _require_bound_economic_run(
     receipt = verified.get("economic_receipt")
     if not isinstance(receipt, Mapping) or receipt.get("run_authorized") is not True:
         raise RuntimeError("ECONOMIC_RECEIPT_RUN_NOT_AUTHORIZED")
+    execution = dict(receipt.get("execution") or {})
+    target_root = repo_root / str(execution.get("target_cache_path") or "")
+    target_metadata_path = target_root / "metadata.json"
+    if not target_metadata_path.is_file():
+        raise RuntimeError("ECONOMIC_RECEIPT_TARGET_CACHE_MISSING")
+    target_metadata = _read_json(target_metadata_path)
+    for field in (
+        "venue",
+        "source",
+        "price_field",
+        "formula",
+        "execution_delay_hours",
+        "horizons_hours",
+        "positive_price_required",
+        "missing_value_fill",
+        "target_cache_identity_sha256",
+    ):
+        observed = (
+            target_metadata.get("identity_sha256")
+            if field == "target_cache_identity_sha256"
+            else target_metadata.get(field)
+        )
+        if observed != execution.get(field):
+            raise RuntimeError(f"ECONOMIC_RECEIPT_TARGET_DRIFT:{field}")
     return dict(receipt)
 
 
@@ -6204,6 +6243,63 @@ def _bind_economic_receipt(
     }
     payload["economic_receipt"] = dict(receipt)
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
+def apply_search_validation_kill_line(
+    *,
+    runtime_root: Path,
+    arm_id: str,
+    metrics: Mapping[str, Any],
+    matched_evaluated_counts: Mapping[str, int],
+    economic_receipt: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Execute the frozen no-feedback validation stop and checkpoint action."""
+
+    validation = dict(economic_receipt.get("validation") or {})
+    kill_line = dict(economic_receipt.get("validation_kill_line") or {})
+    if any(
+        validation.get(field) is not False
+        for field in (
+            "optimizer_feedback_allowed",
+            "policy_memory_write_allowed",
+            "candidate_generation_allowed",
+        )
+    ):
+        raise RuntimeError("ECONOMIC_RECEIPT_VALIDATION_WRITE_BOUNDARY_CHANGED")
+    counts = {str(key): int(value) for key, value in matched_evaluated_counts.items()}
+    if not counts or len(set(counts.values())) != 1:
+        raise RuntimeError("VALIDATION_MATCHED_EVALUATED_COUNTS_DIFFER")
+    if min(counts.values()) < int(kill_line["minimum_evaluated_per_active_arm"]):
+        raise RuntimeError("VALIDATION_MATCHED_EVALUATED_COUNT_TOO_SMALL")
+    from alphafactory_crypto.broad_search.experiment_authority import (
+        evaluate_search_validation_kill_line,
+    )
+
+    decision = evaluate_search_validation_kill_line(metrics)
+    result = {
+        **decision,
+        "arm_id": str(arm_id),
+        "matched_evaluated_counts": counts,
+        "economic_receipt_sha256": str(
+            economic_receipt.get("receipt_sha256") or ""
+        ),
+        "validation_role": validation.get("role"),
+        "holdout_read": False,
+        "threshold_tuning_performed": False,
+    }
+    if not bool(decision["passed"]):
+        checkpoint = (
+            runtime_root
+            / "checkpoints"
+            / f"validation_kill_{str(arm_id).lower()}.json"
+        )
+        result["arm_stopped"] = True
+        result["checkpoint_path"] = str(checkpoint)
+        _write_json(checkpoint, result)
+    else:
+        result["arm_stopped"] = False
+        result["checkpoint_path"] = None
+    return result
 
 
 def run_engine(
@@ -10561,6 +10657,7 @@ __all__ = [
     "V12_ARMS",
     "V22_PARAMETERS",
     "build_aggtrades_canary_cache_from_config",
+    "apply_search_validation_kill_line",
     "check_aggtrades_canary",
     "check_v11",
     "check_v12",

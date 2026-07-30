@@ -35,11 +35,14 @@ adaptive market campaign.
 without creating another evaluator. It resolves Skeleton hypotheses through
 the existing mechanism-to-mapping authority, consumes A7Reward's train-frozen
 orientation in the retained pair evaluator, retains the formal explicit
-mapping, binds the existing Binance USD-M delayed-open target, and uses the
-joint standalone-plus-matched Sortino reward. The full-L1 5 bps cost remains a
-NON_FORMAL Binance venue assumption, not a venue-qualified authority. A new
-pure validation kill-line consumes only frozen validation metrics; it cannot
-read test/recent/stress/holdout or write optimizer state. All referenced source
+mapping, wraps the existing carrier with the existing Binance USD-M
+`BinanceTargetStore`, and uses the joint standalone-plus-matched Sortino
+reward. The pair evaluator consumes the receipt-bound cost instead of its
+legacy module default; the full-L1 5 bps value remains a NON_FORMAL Binance
+venue assumption, not a venue-qualified authority. A new pure validation
+kill-line consumes only frozen validation metrics; its runtime adapter stops
+the failed arm and atomically writes a checkpoint without reading
+test/recent/stress/holdout or writing optimizer state. All referenced source
 hashes are frozen. Canonical and direct runner entry points revalidate the
 receipt, but `run_authorized=false` remains a hard blocker. No market
 evaluation, search, sealed read, policy update, or promotion occurred.
@@ -357,7 +360,7 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 - Search Engine V1 now has a source-qualified distinct validation kill-line contract. It is NON_FORMAL, makes no optimizer feedback writes, and is not runtime- or market-verified. The historical report-only block remains spent and is not reused.
-- Search Engine V1 now has one enforced source-level economic-semantics receipt over existing components. Both CLI and direct runner entry points re-resolve it; alternate receipt paths are not accepted, component hashes must match, and `run_authorized` must remain false under this schema. The pair evaluator has a receipt-bound train-orientation path, but no fresh candidate ledger has executed it and no runtime qualification is claimed.
+- Search Engine V1 now has one enforced source-level economic-semantics receipt over existing components. Both CLI and direct runner entry points re-resolve it; alternate receipt paths are not accepted, component hashes must match, and `run_authorized` must remain false under this schema. The worker has a receipt-bound Binance target override, the pair evaluator consumes receipt-bound train orientation and cost, and the validation adapter atomically checkpoints failed arms. No fresh candidate ledger has executed those paths and no runtime qualification is claimed.
 
 ## Source-of-truth order
 

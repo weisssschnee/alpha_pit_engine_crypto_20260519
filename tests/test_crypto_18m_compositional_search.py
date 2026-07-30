@@ -14,13 +14,21 @@ from alphafactory_crypto.broad_search.audit import (
     search_behavior_descriptor,
 )
 from alphafactory_crypto.broad_search.compositional18m import (
+    CONDITIONAL_SEMANTIC_TUPLES,
     CandidateSpec,
+    MECHANISM_FAMILIES,
+    MECHANISM_MAPPING_CLASS,
     candidate_from_genes,
     field_role_coverage,
     generate_candidate,
+    mapping_id_for_mechanism_family,
     skeleton_registry,
     typed_mutate_candidate,
     verify_typed_mutation_receipt,
+)
+from alphafactory_crypto.instrument_canary.grammar import (
+    CROSS_SECTIONAL_RELATIVE,
+    MECHANISM_MAPPING,
 )
 from alphafactory_crypto.broad_search.expression import (
     Expression,
@@ -61,6 +69,24 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _write_checkpoint,
 )
 from alphafactory_crypto.instrument_capability.mapping import CROSS_SECTIONAL_ZERO_NET
+
+
+def test_each_broad_mechanism_has_an_explicit_canonical_mapping_class() -> None:
+    expected_families = {
+        *MECHANISM_FAMILIES,
+        *(f"CONDITIONAL_{value}" for value in CONDITIONAL_SEMANTIC_TUPLES),
+    }
+    assert set(MECHANISM_MAPPING_CLASS) == expected_families
+    for mechanism_family in sorted(expected_families):
+        assert (
+            MECHANISM_MAPPING_CLASS[mechanism_family]
+            == CROSS_SECTIONAL_RELATIVE
+        )
+        assert mapping_id_for_mechanism_family(mechanism_family) == (
+            MECHANISM_MAPPING[CROSS_SECTIONAL_RELATIVE]
+        )
+    with pytest.raises(ValueError, match="unknown Broad mechanism family"):
+        mapping_id_for_mechanism_family("UNREGISTERED_EVENT_MECHANISM")
 
 
 def test_working_set_trim_is_thresholded_but_mandatory_at_lane_boundary() -> None:
@@ -204,6 +230,20 @@ class _FakeStore:
         assert horizon == 1
         return self._target
 
+    @property
+    def target_metadata(self) -> dict[str, object]:
+        return {
+            "venue": "BINANCE_USD_M",
+            "source": "TEST_BINANCE_OPEN",
+            "price_field": "open_price",
+            "formula": "log(open_price[t+2+h] / open_price[t+2])",
+            "execution_delay_hours": 2,
+            "horizons_hours": [1, 4],
+            "positive_price_required": True,
+            "missing_value_fill": None,
+            "identity_sha256": "B" * 64,
+        }
+
     def block_slice(self, start: str, end: str) -> slice:
         return slice(0, self.shape[1])
 
@@ -286,11 +326,18 @@ def test_train_orientation_is_consumed_and_persisted_when_receipt_is_bound() -> 
             "train": {"start": start, "end_exclusive": end},
             "direction": {"rule": "TRAIN_FROZEN_SIGN_ORIENTATION"},
             "portfolio": {"mapping_id": CROSS_SECTIONAL_ZERO_NET},
-            "cost": {"cost_bps": 5.0},
+            "cost": {"cost_bps": 7.0},
+            "execution": {
+                **_FakeStore().target_metadata,
+                "target_cache_identity_sha256": "B" * 64,
+            },
         },
     )
     assert result["train_orientation"] in {-1.0, 1.0}
     assert result["economic_receipt_sha256"] == "A" * 64
+    assert result["cost_bps"] == 7.0
+    assert result["primary"]["cost_bps"] == 7.0
+    assert result["incremental"]["cost_bps"] == 7.0
 
 
 def test_report_only_metrics_are_not_policy_feedback() -> None:

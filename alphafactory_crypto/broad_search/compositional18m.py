@@ -54,15 +54,33 @@ MECHANISM_FAMILIES = (
     "CROSS_ASSET_RELATIVE_STATE",
     "STATE_REGIME_MODULATION",
 )
+CONDITIONAL_SEMANTIC_TUPLES = (
+    "OI_LEVEL_X_AGGRESSOR_FLOW_GIVEN_BASIS",
+    "PRICE_RESPONSE_X_LARGE_TRADE_GIVEN_OI_STATE",
+    "CROSS_VENUE_OI_X_FLOW_IMBALANCE_GIVEN_FUNDING",
+    "OI_NOTIONAL_X_PRICE_RESPONSE_GIVEN_TRADE_INTENSITY",
+)
+
+MECHANISM_MAPPING_CLASS: Mapping[str, str] = {
+    **{
+        mechanism_family: CROSS_SECTIONAL_RELATIVE
+        for mechanism_family in MECHANISM_FAMILIES
+    },
+    **{
+        f"CONDITIONAL_{semantic_tuple}": CROSS_SECTIONAL_RELATIVE
+        for semantic_tuple in CONDITIONAL_SEMANTIC_TUPLES
+    },
+}
 
 
 def mapping_id_for_mechanism_family(mechanism_family: str) -> str:
     """Resolve Broad mechanisms through the existing canonical mapping table."""
 
     family = str(mechanism_family)
-    if family not in MECHANISM_FAMILIES and not family.startswith("CONDITIONAL_"):
+    mapping_class = MECHANISM_MAPPING_CLASS.get(family)
+    if mapping_class is None:
         raise ValueError(f"unknown Broad mechanism family: {family}")
-    return str(MECHANISM_MAPPING[CROSS_SECTIONAL_RELATIVE])
+    return str(MECHANISM_MAPPING[mapping_class])
 
 
 def _payload_sha(value: Any) -> str:
@@ -674,14 +692,6 @@ def candidate_from_genes(
         operator_path(expression),
         genome,
     )
-
-
-CONDITIONAL_SEMANTIC_TUPLES = (
-    "OI_LEVEL_X_AGGRESSOR_FLOW_GIVEN_BASIS",
-    "PRICE_RESPONSE_X_LARGE_TRADE_GIVEN_OI_STATE",
-    "CROSS_VENUE_OI_X_FLOW_IMBALANCE_GIVEN_FUNDING",
-    "OI_NOTIONAL_X_PRICE_RESPONSE_GIVEN_TRADE_INTENSITY",
-)
 
 
 def _conditional_axis(
@@ -1550,6 +1560,7 @@ __all__ = [
     "CONDITIONAL_SEMANTIC_TUPLES",
     "HORIZONS",
     "MECHANISM_FAMILIES",
+    "MECHANISM_MAPPING_CLASS",
     "Skeleton",
     "audit_numeric_expressivity",
     "conditional_candidate_from_genes",

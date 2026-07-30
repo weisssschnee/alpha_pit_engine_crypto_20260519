@@ -94,19 +94,24 @@ accepted components whose nodes explicitly said `active_authority: false`.
 10. `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` is the thin successor binding for a
     future fresh development campaign. It does not copy any evaluator:
     - mechanism and hypothesis resolve to the existing Skeleton registry;
-    - Broad mechanisms resolve through the existing mechanism-to-mapping
-      authority instead of a candidate-global mapping literal;
+    - every Broad and conditional mechanism family has an explicit mapping
+      class and resolves through the existing mechanism-to-mapping authority
+      instead of a candidate-global mapping literal;
     - direction resolves to A7Reward's train-frozen orientation and the
       retained pair evaluator has an explicit receipt-bound consumption path;
     - mapping resolves to formal `explicit_portfolio_mapping`; the full-L1
       5 bps cost remains a NON_FORMAL frozen Binance venue assumption;
     - target and execution resolve to the existing Binance USD-M delayed-open
-      target contract;
+      target contract; the worker wraps the retained carrier with the existing
+      `BinanceTargetStore` and the evaluator verifies its target metadata;
+    - the evaluator consumes the receipt-bound cost rather than its legacy
+      module default, while the 5 bps value remains NON_FORMAL;
     - optimizer reward resolves to
       `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2`;
     - validation resolves to a distinct pure no-feedback development
-      kill-line that cannot read test/recent/stress/holdout, while the later
-      holdout remains unreadable.
+      kill-line whose runtime adapter stops the failed arm and atomically
+      writes its checkpoint without reading test/recent/stress/holdout, while
+      the later holdout remains unreadable.
     Every referenced component is content-hash frozen. Alternate receipt paths
     are rejected and both CLI and direct runner entry points re-resolve the
     committed receipt. This schema requires `run_authorized=false`; source

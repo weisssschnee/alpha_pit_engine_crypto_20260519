@@ -270,6 +270,10 @@ class BinanceTargetStore:
     def metadata(self) -> Mapping[str, Any]:
         return self.source.metadata
 
+    @property
+    def target_metadata(self) -> Mapping[str, Any]:
+        return _read_json(self.target_root / "metadata.json")
+
     def field(self, field_id: str) -> np.ndarray:
         return self.source.field(field_id)
 

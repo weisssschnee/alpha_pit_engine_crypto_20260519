@@ -14,6 +14,9 @@ from alphafactory_crypto.broad_search.experiment_authority import (
     resolve_search_economic_receipt,
     resolve_real_experiment_authorities,
 )
+from alphafactory_crypto.broad_search.search_engine_v1 import (
+    apply_search_validation_kill_line,
+)
 
 
 def _write_current(
@@ -108,6 +111,9 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
         "calendar": "CONTINUOUS_UTC",
     }
     assert result["mechanism"]["registry_symbol"].endswith("skeleton_registry")
+    assert result["mechanism"]["mapping_adapter_symbol"].endswith(
+        "mapping_id_for_mechanism_family"
+    )
     assert result["direction"]["authority_symbol"].endswith(
         "select_train_orientation"
     )
@@ -115,12 +121,19 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
     assert result["execution"]["venue"] == "BINANCE_USD_M"
     assert result["execution"]["price_field"] == "open_price"
     assert result["execution"]["execution_delay_hours"] == 2
+    assert result["execution"]["target_cache_path"].endswith(
+        "binance_open_target_v1"
+    )
+    assert len(result["execution"]["target_cache_identity_sha256"]) == 64
     assert result["cost"] == {
         "model_id": "FULL_L1_FIXED_BPS",
         "cost_bps": 5.0,
         "initial_establishment_charged": True,
     }
     assert result["validation"]["optimizer_feedback_allowed"] is False
+    assert result["validation_kill_line"]["runtime_symbol"].endswith(
+        "apply_search_validation_kill_line"
+    )
     assert result["holdout"]["read_allowed"] is False
     assert result["run_authorized"] is False
     assert len(result["receipt_sha256"]) == 64
@@ -197,6 +210,42 @@ def test_validation_kill_line_is_pure_and_fail_closed() -> None:
         "candidate_generation_performed": False,
         "holdout_read": False,
     }
+
+
+def test_validation_kill_line_stops_arm_and_writes_atomic_checkpoint(
+    tmp_path: Path,
+) -> None:
+    result = apply_search_validation_kill_line(
+        runtime_root=tmp_path,
+        arm_id="CEM_V2",
+        metrics={
+            "validation_net_mean": -0.001,
+            "validation_nonoverlap_floor_sortino": 0.2,
+            "validation_matched_increment": 0.0001,
+            "validation_control_not_dominant": True,
+        },
+        matched_evaluated_counts={"random": 128, "cem_v2": 128},
+        economic_receipt={
+            "receipt_sha256": "A" * 64,
+            "validation": {
+                "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+                "optimizer_feedback_allowed": False,
+                "policy_memory_write_allowed": False,
+                "candidate_generation_allowed": False,
+            },
+            "validation_kill_line": {
+                "minimum_evaluated_per_active_arm": 128,
+            },
+        },
+    )
+    checkpoint = (
+        tmp_path / "checkpoints" / "validation_kill_cem_v2.json"
+    )
+    assert result["arm_stopped"] is True
+    assert checkpoint.is_file()
+    persisted = json.loads(checkpoint.read_text(encoding="utf-8"))
+    assert persisted["result"] == "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT"
+    assert persisted["holdout_read"] is False
 
 
 def test_committed_current_blocks_inactive_search_economic_roles() -> None:

@@ -188,12 +188,20 @@ def _validate_search_economic_receipt(
     expected_mapping = (
         "alphafactory_crypto.instrument_canary.grammar.MECHANISM_MAPPING"
     )
+    expected_mapping_adapter = (
+        "alphafactory_crypto.broad_search.compositional18m."
+        "mapping_id_for_mechanism_family"
+    )
     expected_direction = (
         "scripts.crypto_a7reward1_portfolio_reward_model.select_train_orientation"
     )
     expected_validation = (
         "alphafactory_crypto.broad_search.experiment_authority."
         "evaluate_search_validation_kill_line"
+    )
+    expected_validation_runtime = (
+        "alphafactory_crypto.broad_search.search_engine_v1."
+        "apply_search_validation_kill_line"
     )
     expected_target_store = (
         "alphafactory_crypto.broad_search.replay_v14_binance_target."
@@ -208,6 +216,8 @@ def _validate_search_economic_receipt(
         blockers.append("mechanism.economic_hypothesis_field")
     if mechanism.get("mapping_authority_symbol") != expected_mapping:
         blockers.append("mechanism.mapping_authority_symbol")
+    if mechanism.get("mapping_adapter_symbol") != expected_mapping_adapter:
+        blockers.append("mechanism.mapping_adapter_symbol")
     if mechanism.get("mapping_class") != "CROSS_SECTIONAL_RELATIVE":
         blockers.append("mechanism.mapping_class")
     elif (
@@ -258,6 +268,13 @@ def _validate_search_economic_receipt(
             blockers.append(f"execution.{field}")
     if execution.get("target_store_symbol") != expected_target_store:
         blockers.append("execution.target_store_symbol")
+    if (
+        execution.get("target_cache_path")
+        != ".cache/crypto_search_engine_v1_4/binance_open_target_v1"
+    ):
+        blockers.append("execution.target_cache_path")
+    if len(str(execution.get("target_cache_identity_sha256") or "")) != 64:
+        blockers.append("execution.target_cache_identity_sha256")
     if execution.get("venue") != "BINANCE_USD_M":
         blockers.append("execution.venue")
     if execution.get("instrument_type") != "LINEAR_PERPETUAL":
@@ -372,6 +389,8 @@ def _validate_search_economic_receipt(
             blockers.append(f"evidence_partition.holdout.{field}")
     if kill_line.get("authority_symbol") != expected_validation:
         blockers.append("validation_kill_line.authority_symbol")
+    if kill_line.get("runtime_symbol") != expected_validation_runtime:
+        blockers.append("validation_kill_line.runtime_symbol")
     if kill_line.get("equal_matched_evaluated_count") is not True:
         blockers.append("validation_kill_line.equal_matched_evaluated_count")
     if kill_line.get("threshold_tuning_allowed") is not False:
@@ -405,6 +424,10 @@ def _validate_search_economic_receipt(
         "optimizer_reward_and_matched_attribution": optimizer_reward.get(
             "authority_symbol"
         ),
+        "runtime_binding": (
+            "alphafactory_crypto.broad_search.search_engine_v1."
+            "_require_bound_economic_run"
+        ),
     }
     component_sha256: dict[str, str] = {}
     for component, source_binding in component_sources.items():
@@ -423,6 +446,22 @@ def _validate_search_economic_receipt(
         symbol = source_symbols.get(str(component))
         if symbol and not _symbol_is_declared(source_path, str(symbol)):
             blockers.append(f"component_symbol.{component}")
+    mechanism_source = component_sources.get("mechanism")
+    if isinstance(mechanism_source, Mapping):
+        mechanism_path = repo_root / str(mechanism_source.get("path") or "")
+        if mechanism_path.is_file() and not _symbol_is_declared(
+            mechanism_path,
+            expected_mapping_adapter,
+        ):
+            blockers.append("component_symbol.mechanism_mapping_adapter")
+    runtime_source = component_sources.get("runtime_binding")
+    if isinstance(runtime_source, Mapping):
+        runtime_path = repo_root / str(runtime_source.get("path") or "")
+        if runtime_path.is_file() and not _symbol_is_declared(
+            runtime_path,
+            expected_validation_runtime,
+        ):
+            blockers.append("component_symbol.validation_kill_line_runtime")
 
     if blockers:
         raise RuntimeError(
