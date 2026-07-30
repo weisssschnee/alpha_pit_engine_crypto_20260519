@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine engineering capability (economic optimizer authority suspended; research HOLD)",
+                      "label":  "Search Engine engineering capability (economic receipt source-qualified; run authorization HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -406,6 +406,7 @@
                                     "alphafactory_crypto/broad_search/audit.py",
                                     "alphafactory_crypto/broad_search/pair18m.py",
                                     "alphafactory_crypto/broad_search/panel18m.py",
+                                    "config/crypto_search_economic_receipt_v1.json",
                                     "alphafactory_crypto/data_admission_v1.py",
                                     "config/crypto_search_surface_integration_v1.json",
                                     "docs/adr/0011-search-surface-integration-v1.md",
@@ -462,12 +463,21 @@
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
                       "active_authority":  false,
                       "authority":  {
-                                        "path":  "alphafactory_crypto/broad_search/replay_v14_binance_target.py",
+                                        "path":  "config/crypto_search_economic_receipt_v1.json",
                                         "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "fe82d94e5530d13e933c0f3db5d2b4869ad34521",
-                                        "sha256":  "F43FF3DFB195E28776C6B13696F38025DC5AE456CE7E7DB14F4CD36DF5D18181"
+                                        "verified_sha":  "0bbe594a6a5db49f1d4661c349da08f0d36dec09",
+                                        "sha256":  "632F18D3E8495E8292817EFD0A139BB6A239F1A3F04F6950D08391E5CAE6B57A"
                                     },
                       "contracts":  [
+                                        {
+                                            "id":  "crypto_search_economic_receipt_v1_binding",
+                                            "type":  "AUTHORITY",
+                                            "rule":  "The successor receipt reuses Skeleton financial hypotheses, A7Reward train-frozen orientation and validation aggregation, the formal explicit portfolio mapping and its full-L1 5 bps cost, the existing Binance USD-M delayed-open target store, and the retained joint standalone-plus-matched Sortino reward. Validation is a distinct no-feedback development kill-line and the later holdout remains unreadable. The receipt is source-qualified but run_authorized remains false.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt and broad_search.search_engine_v1.main",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "config/crypto_search_economic_receipt_v1.json"
+                                        },
                                         {
                                             "id":  "search_surface_runtime_carrier_gate",
                                             "type":  "EVIDENCE",
@@ -615,9 +625,9 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "reports/CRYPTO_SEARCH_AUTHORITY_SYSTEM_AUDIT_20260729.md",
-                                         "evidence_sha256":  "0DDC4D7A8C0F51A1B46DE9C2CEA37A97EBC0263C8292A99C67F3FCF04C1D8237",
-                                         "verified_at_sha":  "b09e8d2ad549a4d3ebb7dd6f07296b3f673c5e9c"
+                                         "evidence_ref":  "config/crypto_search_economic_receipt_v1.json",
+                                         "evidence_sha256":  "632F18D3E8495E8292817EFD0A139BB6A239F1A3F04F6950D08391E5CAE6B57A",
+                                         "verified_at_sha":  "0bbe594a6a5db49f1d4661c349da08f0d36dec09"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
@@ -2607,13 +2617,13 @@
                                  },
                                  {
                                      "semantic_role":  "cost",
-                                     "authoritative_component":  "real_data_mapping_cost_evaluator",
-                                     "authority_class":  "NON_FORMAL"
+                                     "authoritative_component":  "explicit_portfolio_mapping",
+                                     "authority_class":  "FORMAL"
                                  },
                                  {
                                      "semantic_role":  "validation_role",
-                                     "authoritative_component":  "sealed_research_boundaries",
-                                     "authority_class":  "FORMAL"
+                                     "authoritative_component":  "real_policy_upgrade_canary",
+                                     "authority_class":  "NON_FORMAL"
                                  },
                                  {
                                      "semantic_role":  "promotion_gate",

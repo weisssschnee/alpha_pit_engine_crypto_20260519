@@ -91,6 +91,23 @@ accepted components whose nodes explicitly said `active_authority: false`.
 9. This implementation is crypto-only: continuous UTC crypto semantics are
    declared and no A-share T+1, ST, price-limit, stamp-duty, suspension, CN
    evaluator, CN reward or CN market-cost rule is applied.
+10. `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` is the thin successor binding for a
+    future fresh development campaign. It does not copy any evaluator:
+    - mechanism and hypothesis resolve to the existing Skeleton registry;
+    - direction resolves to A7Reward's train-frozen orientation;
+    - mapping and full-L1 5 bps cost resolve to the formal
+      `explicit_portfolio_mapping`;
+    - target and execution resolve to the existing Binance USD-M delayed-open
+      target contract;
+    - optimizer reward resolves to
+      `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2`;
+    - validation resolves to a distinct no-feedback development kill-line,
+      while the later holdout is unreadable.
+    The receipt is source-qualified at commit
+    `0bbe594a6a5db49f1d4661c349da08f0d36dec09`, but
+    `run_authorized=false` remains a hard preflight blocker. Source
+    qualification does not activate a market experiment or promote any
+    NON_FORMAL role.
 
 ## Consequences
 
@@ -103,7 +120,8 @@ accepted components whose nodes explicitly said `active_authority: false`.
   matched-attribution, and replay evidence under its original contracts.
 - The V2 source repair does not activate optimizer authority. Direction,
   portfolio role, tradable venue/instrument/price, venue-specific cost, a
-  distinct validation kill-line and read-only holdout remain unresolved by
-  this implementation.
+  distinct validation kill-line and read-only holdout now have one
+  content-hashed successor receipt, but the receipt remains run-inactive and
+  has no runtime or market evidence.
 - No second AST, compiler, evaluator, Graph layer, scheduler, or experiment
   database is created.
