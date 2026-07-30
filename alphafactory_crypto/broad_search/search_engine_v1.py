@@ -3794,6 +3794,39 @@ _WORKER_BLOCK_END = ADAPTIVE_END
 _WORKER_BLOCK_ROLE = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1"
 
 
+def _validate_receipt_target_store_binding(
+    source_store: RawPanelStore,
+    target_root: Path,
+    execution: Mapping[str, Any],
+) -> dict[str, Any]:
+    metadata_path = target_root / "metadata.json"
+    if not metadata_path.is_file():
+        raise RuntimeError("ECONOMIC_RECEIPT_TARGET_CACHE_MISSING")
+    target_metadata = _read_json(metadata_path)
+    if (
+        str(target_metadata.get("source_cache_identity_sha256") or "")
+        != str(source_store.metadata.get("identity_sha256") or "")
+    ):
+        raise RuntimeError("ECONOMIC_RECEIPT_TARGET_SOURCE_IDENTITY_CHANGED")
+    if tuple(int(value) for value in target_metadata.get("shape") or ()) != tuple(
+        int(value) for value in source_store.shape
+    ):
+        raise RuntimeError("ECONOMIC_RECEIPT_TARGET_SOURCE_SHAPE_CHANGED")
+    timestamp_path = source_store.cache_root / "timestamp_ns.npy"
+    if (
+        not timestamp_path.is_file()
+        or sha256_file(timestamp_path)
+        != target_metadata.get("timestamp_sha256")
+    ):
+        raise RuntimeError("ECONOMIC_RECEIPT_TARGET_TIMESTAMP_CHANGED")
+    if (
+        target_metadata.get("identity_sha256")
+        != execution.get("target_cache_identity_sha256")
+    ):
+        raise RuntimeError("ECONOMIC_RECEIPT_TARGET_CACHE_IDENTITY_CHANGED")
+    return target_metadata
+
+
 def _worker_initialize(
     cache_root: str,
     contract_rows: Sequence[Mapping[str, Any]],
@@ -3817,8 +3850,11 @@ def _worker_initialize(
             Path(__file__).resolve().parents[2]
             / str(execution.get("target_cache_path") or "")
         )
-        if not (target_root / "metadata.json").is_file():
-            raise RuntimeError("ECONOMIC_RECEIPT_TARGET_CACHE_MISSING")
+        _validate_receipt_target_store_binding(
+            source_store,
+            target_root,
+            execution,
+        )
         _WORKER_STORE = BinanceTargetStore(source_store, target_root)
     else:
         _WORKER_STORE = source_store

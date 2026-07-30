@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 from alphafactory_crypto.broad_search.experiment_authority import (
@@ -15,8 +16,10 @@ from alphafactory_crypto.broad_search.experiment_authority import (
     resolve_real_experiment_authorities,
 )
 from alphafactory_crypto.broad_search.search_engine_v1 import (
+    _validate_receipt_target_store_binding,
     apply_search_validation_kill_line,
 )
+from alphafactory_crypto.instrument_canary.release import sha256_file
 
 
 def _write_current(
@@ -246,6 +249,58 @@ def test_validation_kill_line_stops_arm_and_writes_atomic_checkpoint(
     persisted = json.loads(checkpoint.read_text(encoding="utf-8"))
     assert persisted["result"] == "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT"
     assert persisted["holdout_read"] is False
+
+
+def test_target_override_is_bound_to_exact_source_cache_identity(
+    tmp_path: Path,
+) -> None:
+    source_root = tmp_path / "source"
+    source_root.mkdir()
+    timestamp_path = source_root / "timestamp_ns.npy"
+    np.save(timestamp_path, np.arange(4, dtype=np.int64))
+
+    class _Source:
+        cache_root = source_root
+        shape = (2, 4)
+        metadata = {"identity_sha256": "SOURCE-ID"}
+
+    target_root = tmp_path / "target"
+    target_root.mkdir()
+    (target_root / "metadata.json").write_text(
+        json.dumps(
+            {
+                "source_cache_identity_sha256": "SOURCE-ID",
+                "shape": [2, 4],
+                "timestamp_sha256": sha256_file(timestamp_path),
+                "identity_sha256": "TARGET-ID",
+            }
+        ),
+        encoding="utf-8",
+    )
+    result = _validate_receipt_target_store_binding(
+        _Source(),
+        target_root,
+        {"target_cache_identity_sha256": "TARGET-ID"},
+    )
+    assert result["source_cache_identity_sha256"] == "SOURCE-ID"
+    (target_root / "metadata.json").write_text(
+        json.dumps(
+            {
+                **result,
+                "source_cache_identity_sha256": "OTHER-SOURCE",
+            }
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        RuntimeError,
+        match="ECONOMIC_RECEIPT_TARGET_SOURCE_IDENTITY_CHANGED",
+    ):
+        _validate_receipt_target_store_binding(
+            _Source(),
+            target_root,
+            {"target_cache_identity_sha256": "TARGET-ID"},
+        )
 
 
 def test_committed_current_blocks_inactive_search_economic_roles() -> None:
