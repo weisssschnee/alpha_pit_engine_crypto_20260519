@@ -10340,6 +10340,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--carrier-id", choices=CARRIER_GATE_IDS)
     parser.add_argument("--evidence-to-add")
     parser.add_argument("--decision-to-change")
+    parser.add_argument("--economic-receipt")
     args = parser.parse_args(argv)
     repo_root = Path(__file__).resolve().parents[2]
     authority_preflight = None
@@ -10352,6 +10353,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             repo_root,
             evidence_to_add=args.evidence_to_add,
             decision_to_change=args.decision_to_change,
+            economic_receipt_required=True,
+            economic_receipt_path=(
+                Path(args.economic_receipt).resolve()
+                if args.economic_receipt
+                else None
+            ),
         )
         print(
             json.dumps(

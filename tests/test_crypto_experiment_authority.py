@@ -6,8 +6,10 @@ from pathlib import Path
 import pytest
 
 from alphafactory_crypto.broad_search.experiment_authority import (
+    DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH,
     REQUIRED_REAL_EXPERIMENT_ROLES,
     require_real_experiment_authority,
+    resolve_search_economic_receipt,
     resolve_real_experiment_authorities,
 )
 
@@ -86,6 +88,71 @@ def test_missing_information_intent_fails_closed(tmp_path: Path) -> None:
             tmp_path,
             evidence_to_add="TBD",
             decision_to_change="keep or close that mechanism",
+        )
+
+
+def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+
+    result = resolve_search_economic_receipt(repo_root)
+
+    assert result["result"] == "SOURCE_QUALIFIED_NOT_RUN_AUTHORIZED"
+    assert result["receipt_path"] == DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH
+    assert result["market"] == {
+        "asset_class": "CRYPTO",
+        "calendar": "CONTINUOUS_UTC",
+    }
+    assert result["mechanism"]["registry_symbol"].endswith("skeleton_registry")
+    assert result["direction"]["authority_symbol"].endswith(
+        "select_train_orientation"
+    )
+    assert result["portfolio"]["mapping_id"] == "CROSS_SECTIONAL_ZERO_NET"
+    assert result["execution"]["venue"] == "BINANCE_USD_M"
+    assert result["execution"]["price_field"] == "open_price"
+    assert result["execution"]["execution_delay_hours"] == 2
+    assert result["cost"] == {
+        "model_id": "FULL_L1_FIXED_BPS",
+        "cost_bps": 5.0,
+        "initial_establishment_charged": True,
+    }
+    assert result["validation"]["optimizer_feedback_allowed"] is False
+    assert result["holdout"]["read_allowed"] is False
+    assert result["run_authorized"] is False
+    assert len(result["receipt_sha256"]) == 64
+    assert all(
+        len(value) == 64 for value in result["component_sha256"].values()
+    )
+
+
+def test_search_economic_receipt_fails_closed_on_target_drift(
+    tmp_path: Path,
+) -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    source = repo_root / DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH
+    receipt = json.loads(source.read_text(encoding="utf-8"))
+    receipt["execution"]["price_field"] = "close_price"
+    changed = tmp_path / "changed_receipt.json"
+    changed.write_text(json.dumps(receipt), encoding="utf-8")
+
+    with pytest.raises(
+        RuntimeError,
+        match="SEARCH_ECONOMIC_RECEIPT_BLOCKED: execution.price_field",
+    ):
+        resolve_search_economic_receipt(repo_root, receipt_path=changed)
+
+
+def test_search_economic_receipt_cannot_open_run_authority_by_itself() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+
+    with pytest.raises(
+        RuntimeError,
+        match="economic_receipt:RUN_NOT_AUTHORIZED",
+    ):
+        require_real_experiment_authority(
+            repo_root,
+            evidence_to_add="fresh development policy productivity evidence",
+            decision_to_change="qualify or reject a future search arm",
+            economic_receipt_required=True,
         )
 
 
