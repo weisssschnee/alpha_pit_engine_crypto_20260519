@@ -30,6 +30,7 @@ from alphafactory_crypto.broad_search.expression import (
     materialize_expression,
 )
 from alphafactory_crypto.broad_search.pair18m import (
+    SEARCH_REWARD_AUTHORITY,
     _mean_lcb,
     _series_metrics,
     evaluate_pair,
@@ -247,7 +248,7 @@ def test_incremental_sleeve_is_recomputed_from_delta_weights() -> None:
 def test_report_only_metrics_are_not_policy_feedback() -> None:
     contract = feedback_contract_payload()
     assert contract["report_only_metrics_visible_to_policy"] is False
-    assert contract["authoritative_search_feedback"].startswith("PHASE3CM_STYLE")
+    assert contract["authoritative_search_feedback"] == SEARCH_REWARD_AUTHORITY
     assert contract["matched_attribution_feedback"].startswith("incremental sleeve")
     assert contract["matched_attribution_is_search_ordering_authority"] is False
 
@@ -587,6 +588,7 @@ def _fake_search_evaluation(candidate: CandidateSpec, family_id: str, reward: fl
     return {
         "candidate_id": candidate.candidate_id,
         "search_reward": reward,
+        "search_reward_authority": SEARCH_REWARD_AUTHORITY,
         "pair_reward": reward,
         "matched_positive": reward > 0.0,
         "incremental": {"gross_mean": 0.0, "net_mean": 0.0, "cost_mean": 0.0},
@@ -755,6 +757,7 @@ def test_hierarchical_cem_v2_samples_legal_order_and_roundtrips_state() -> None:
         rows.append(
             {
                 "search_reward": float(index % 7),
+                "search_reward_authority": SEARCH_REWARD_AUTHORITY,
                 "pair_reward": float(index % 7),
                 "new_behavior_family_at_completion": index % 2 == 0,
                 "candidate_id": candidate.candidate_id,
@@ -850,6 +853,7 @@ def test_v22_collision_transition_memory_blocks_and_restores() -> None:
         {
             "behavior_family_id": "PARENT_FAMILY",
             "search_reward": 0.0,
+            "search_reward_authority": SEARCH_REWARD_AUTHORITY,
             "pair_reward": 0.0,
             "parent_ids": [],
             "operation": "TYPED_RANDOM_WARMUP",

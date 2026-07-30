@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import ast
+from pathlib import Path
+
 import numpy as np
 import pytest
 
@@ -19,6 +22,10 @@ from alphafactory_crypto.broad_search.expression import (
 from alphafactory_crypto.broad_search.pair18m import (
     FIXED_COST_BPS,
     SEARCH_REWARD_AUTHORITY,
+    SEARCH_REWARD_COMPONENT_AUTHORITY,
+    SEARCH_REWARD_UNCERTAINTY_CONTRACT,
+    _stationary_bootstrap_indices,
+    pair_contract_payload,
     _series_metrics,
     evaluate_pair,
 )
@@ -126,9 +133,14 @@ def test_train_portfolio_search_reward_is_deterministic_and_cost_consistent() ->
     assert first["portfolio_search_objective"] == second[
         "portfolio_search_objective"
     ]
-    assert objective["authority"] == SEARCH_REWARD_AUTHORITY
+    assert objective["authority"] == SEARCH_REWARD_COMPONENT_AUTHORITY
+    assert objective["uncertainty_contract"] == SEARCH_REWARD_UNCERTAINTY_CONTRACT
     assert objective["train_day_count"] == 3
     assert objective["train_day_bootstrap_draws"] > 0
+    assert objective["train_day_bootstrap_requested_draws"] == 600
+    assert objective["train_day_bootstrap_expected_block_length"] == 2
+    assert objective["train_worst_horizon_day_sortino"] is None
+    assert objective["worst_horizon_term_removed"] is True
     assert objective["mean_one_way_turnover"] == pytest.approx(
         0.5 * objective["mean_full_l1_turnover"]
     )
@@ -141,6 +153,66 @@ def test_train_portfolio_search_reward_is_deterministic_and_cost_consistent() ->
         * FIXED_COST_BPS
         / 10_000.0
     )
+
+
+def test_stationary_bootstrap_is_deterministic_and_order_aware() -> None:
+    first, first_meta = _stationary_bootstrap_indices(
+        16, seed=20260730, draws=64
+    )
+    second, second_meta = _stationary_bootstrap_indices(
+        16, seed=20260730, draws=64
+    )
+
+    assert np.array_equal(first, second)
+    assert first_meta == second_meta
+    assert first_meta["contract"] == SEARCH_REWARD_UNCERTAINTY_CONTRACT
+    assert first_meta["method"] == "STATIONARY_BOOTSTRAP"
+    assert first_meta["expected_block_length"] >= 2
+    continued = first[:, 1:] == (first[:, :-1] + 1) % 16
+    assert bool(np.any(continued))
+    assert bool(np.any(~continued))
+
+
+def test_pair_contract_is_crypto_only_and_has_joint_matched_reward() -> None:
+    contract = pair_contract_payload()
+
+    assert contract["schema_version"] == 3
+    assert contract["market_semantics"]["asset_class"] == "CRYPTO"
+    assert contract["market_semantics"]["calendar"] == "CONTINUOUS_UTC"
+    assert contract["market_semantics"]["a_share_constraints_applied"] is False
+    objective = contract["search_objective"]
+    assert objective["authority"] == SEARCH_REWARD_AUTHORITY
+    assert objective["uncertainty_contract"] == SEARCH_REWARD_UNCERTAINTY_CONTRACT
+    assert "matched incremental" in objective["portfolio"]
+    assert "counted twice" in objective["selected_horizon_scope"]
+
+
+def test_active_crypto_economic_chain_has_no_cn_runtime_imports() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    active_paths = (
+        "alphafactory_crypto/broad_search/pair18m.py",
+        "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "alphafactory_crypto/broad_search/experiment_authority.py",
+        "alphafactory_crypto/instrument_capability/mapping.py",
+    )
+    forbidden_prefixes = (
+        "our_system_phase2",
+        "alpha_pit_true1min",
+        "a_share",
+    )
+    imported: list[str] = []
+    for relative in active_paths:
+        tree = ast.parse((repo_root / relative).read_text(encoding="utf-8"))
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                imported.extend(alias.name for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                imported.append(node.module)
+    assert not [
+        name
+        for name in imported
+        if name.startswith(forbidden_prefixes)
+    ]
 
 
 class _BehaviorStore:
@@ -263,6 +335,20 @@ def test_behavior_family_uses_incremental_delta_weights() -> None:
     )
 
     behavior = result["behavior"]
+    objective = result["search_reward_feedback"]
+    assert objective["authority"] == SEARCH_REWARD_AUTHORITY
+    assert objective["uncertainty_contract"] == SEARCH_REWARD_UNCERTAINTY_CONTRACT
+    assert objective["joint_rule"] == "MIN_PRIMARY_AND_ALL_REQUIRED_MATCHED_COMPONENTS"
+    assert objective["component_order"] == [
+        "primary",
+        "primary_minus_left_control",
+        "primary_minus_right_control",
+    ]
+    assert objective["search_reward"] == min(
+        component["search_reward"]
+        for component in objective["component_objectives"].values()
+    )
+    assert result["search_reward"] == objective["search_reward"]
     assert behavior["primary_behavior_id"] == primary_behavior["behavior_family_id"]
     assert behavior["control_behavior_id"] == control_behavior["behavior_family_id"]
     assert (

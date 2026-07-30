@@ -27,6 +27,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _validate_v11_config,
     run_engine,
 )
+from alphafactory_crypto.broad_search.pair18m import SEARCH_REWARD_AUTHORITY
 
 
 def _registry() -> TypedExpressionRegistry:
@@ -89,6 +90,7 @@ def _cem_row(
 ) -> dict:
     return {
         "search_reward": reward,
+        "search_reward_authority": SEARCH_REWARD_AUTHORITY,
         "pair_reward": reward,
         "policy_local_family_count_at_completion": 1,
         "candidate_id": candidate.candidate_id,
@@ -284,6 +286,7 @@ def test_behavior_niched_evolution_population_has_family_and_skeleton_caps() -> 
                 {
                     "behavior_family_id": f"family-{index}-{repeat}",
                     "search_reward": float(repeat),
+                    "search_reward_authority": SEARCH_REWARD_AUTHORITY,
                     "pair_reward": float(repeat),
                     "operation": "TYPED_RANDOM_WARMUP",
                     "parent_ids": [],

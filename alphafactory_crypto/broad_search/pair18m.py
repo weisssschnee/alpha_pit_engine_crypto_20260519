@@ -24,11 +24,17 @@ from .panel18m import RawPanelStore
 
 ACTIVE_EPSILON = 1e-12
 FIXED_COST_BPS = 5.0
-SEARCH_REWARD_AUTHORITY = "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1"
+SEARCH_REWARD_AUTHORITY = "CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2"
+SEARCH_REWARD_COMPONENT_AUTHORITY = "CRYPTO_TRAIN_PORTFOLIO_SORTINO_COMPONENT_V2"
+SEARCH_REWARD_UNCERTAINTY_CONTRACT = (
+    "CRYPTO_ORDERED_DAY_STATIONARY_BOOTSTRAP_V1"
+)
 SEARCH_REWARD_BOOTSTRAP_DRAWS = 600
+SEARCH_REWARD_BOOTSTRAP_SUPPORT_MINIMUM = 0.60
 SEARCH_REWARD_WEIGHTS: Mapping[str, float] = {
-    "train_day_sortino": 0.55,
-    "train_worst_horizon_day_sortino": 0.25,
+    # Preserve the V1 effective 0.55 + duplicated 0.25 day-Sortino weight
+    # without retaining a false second-horizon claim.
+    "train_day_sortino": 0.80,
     "train_day_bootstrap_sortino_p25": 0.20,
 }
 SEARCH_REWARD_TURNOVER_PENALTY_START = 0.55
@@ -132,43 +138,136 @@ def _daily_net_returns(
     return np.asarray(daily, dtype=float)
 
 
+def _stationary_bootstrap_indices(
+    observation_count: int,
+    *,
+    seed: int,
+    draws: int,
+) -> tuple[np.ndarray, dict[str, Any]]:
+    """Return deterministic ordered-day stationary-bootstrap indices.
+
+    The restart probability is frozen from the observed day count.  This is a
+    dependence-aware bootstrap, not MCMC and not a Bayesian posterior.
+    """
+
+    count = int(observation_count)
+    requested_draws = int(draws)
+    if count <= 0 or requested_draws <= 0:
+        return np.empty((0, 0), dtype=np.int64), {
+            "contract": SEARCH_REWARD_UNCERTAINTY_CONTRACT,
+            "method": "STATIONARY_BOOTSTRAP",
+            "seed": int(seed),
+            "requested_draws": max(0, requested_draws),
+            "observation_count": max(0, count),
+            "expected_block_length": 0,
+            "restart_probability": float("nan"),
+        }
+    expected_block_length = (
+        1
+        if count == 1
+        else min(20, max(2, int(round(count ** (1.0 / 3.0)))))
+    )
+    restart_probability = 1.0 / float(expected_block_length)
+    rng = np.random.default_rng(int(seed))
+    indices = np.empty((requested_draws, count), dtype=np.int64)
+    indices[:, 0] = rng.integers(0, count, size=requested_draws, dtype=np.int64)
+    if count > 1:
+        restart = rng.random((requested_draws, count - 1)) < restart_probability
+        restart_at = rng.integers(
+            0,
+            count,
+            size=(requested_draws, count - 1),
+            dtype=np.int64,
+        )
+        for column in range(1, count):
+            continued = (indices[:, column - 1] + 1) % count
+            indices[:, column] = np.where(
+                restart[:, column - 1],
+                restart_at[:, column - 1],
+                continued,
+            )
+    return indices, {
+        "contract": SEARCH_REWARD_UNCERTAINTY_CONTRACT,
+        "method": "STATIONARY_BOOTSTRAP",
+        "seed": int(seed),
+        "requested_draws": requested_draws,
+        "observation_count": count,
+        "expected_block_length": expected_block_length,
+        "restart_probability": restart_probability,
+    }
+
+
 def _bootstrap_sortino(
-    day_values: np.ndarray, *, seed: int, draws: int
+    day_values: np.ndarray,
+    *,
+    seed: int,
+    draws: int,
+    shared_indices: np.ndarray | None = None,
+    shared_metadata: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     clean = np.asarray(day_values, dtype=float).reshape(-1)
     clean = clean[np.isfinite(clean)]
     if clean.size == 0 or int(draws) <= 0:
         return {
             "draws": 0,
+            "requested_draws": max(0, int(draws)),
+            "invalid_draws": max(0, int(draws)),
             "p25": float("nan"),
             "median": float("nan"),
             "probability_gt_zero": float("nan"),
+            "monte_carlo_standard_error": float("nan"),
+            "uncertainty_contract": SEARCH_REWARD_UNCERTAINTY_CONTRACT,
         }
-    rng = np.random.default_rng(int(seed))
-    indices = rng.integers(
-        0,
-        clean.size,
-        size=(int(draws), clean.size),
-        dtype=np.int64,
-    )
+    if shared_indices is None:
+        indices, metadata = _stationary_bootstrap_indices(
+            clean.size,
+            seed=int(seed),
+            draws=int(draws),
+        )
+    else:
+        indices = np.asarray(shared_indices, dtype=np.int64)
+        metadata = dict(shared_metadata or {})
+        if indices.shape != (int(draws), clean.size):
+            raise ValueError("shared stationary-bootstrap path shape changed")
+        if np.any(indices < 0) or np.any(indices >= clean.size):
+            raise ValueError("shared stationary-bootstrap path is out of bounds")
     samples = clean[indices]
     means = np.mean(samples, axis=1)
     downside = np.minimum(samples, 0.0)
     scales = np.sqrt(np.mean(downside * downside, axis=1))
     finite = np.isfinite(means) & np.isfinite(scales) & (scales > 1.0e-18)
     sortinos = means[finite] / scales[finite]
+    mean_support = float(np.mean(means > 0.0)) if means.size else float("nan")
+    monte_carlo_standard_error = (
+        math.sqrt(mean_support * (1.0 - mean_support) / float(means.size))
+        if means.size and math.isfinite(mean_support)
+        else float("nan")
+    )
     if sortinos.size == 0:
         return {
             "draws": 0,
+            "requested_draws": int(indices.shape[0]),
+            "invalid_draws": int(indices.shape[0]),
             "p25": float("nan"),
             "median": float("nan"),
-            "probability_gt_zero": float("nan"),
+            "probability_gt_zero": mean_support,
+            "monte_carlo_standard_error": monte_carlo_standard_error,
+            "uncertainty_contract": SEARCH_REWARD_UNCERTAINTY_CONTRACT,
+            **metadata,
         }
     return {
         "draws": int(sortinos.size),
+        "requested_draws": int(indices.shape[0]),
+        "invalid_draws": int(indices.shape[0] - sortinos.size),
+        "p05": float(np.quantile(sortinos, 0.05)),
         "p25": float(np.quantile(sortinos, 0.25)),
         "median": float(np.quantile(sortinos, 0.50)),
-        "probability_gt_zero": float(np.mean(sortinos > 0.0)),
+        "p75": float(np.quantile(sortinos, 0.75)),
+        "p95": float(np.quantile(sortinos, 0.95)),
+        "probability_gt_zero": mean_support,
+        "monte_carlo_standard_error": monte_carlo_standard_error,
+        "uncertainty_contract": SEARCH_REWARD_UNCERTAINTY_CONTRACT,
+        **metadata,
     }
 
 
@@ -179,14 +278,10 @@ def _portfolio_search_reward(
     mask: np.ndarray,
     timestamp_ns: np.ndarray,
     seed: int,
+    shared_indices: np.ndarray | None = None,
+    shared_metadata: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Return the train-only portfolio objective used by proposal policies.
-
-    CandidateSpec freezes one target horizon per candidate, so the Phase3CM
-    worst-horizon term equals the selected-horizon day Sortino here.  The
-    absence of a cross-horizon term is explicit rather than replaced by a new
-    proxy.  Matched attribution remains a separate diagnostic.
-    """
+    """Return one crypto train-portfolio component of the joint objective."""
 
     daily = _daily_net_returns(net, mask, timestamp_ns)
     day_sortino = _sortino(daily)
@@ -194,6 +289,8 @@ def _portfolio_search_reward(
         daily,
         seed=int(seed),
         draws=SEARCH_REWARD_BOOTSTRAP_DRAWS,
+        shared_indices=shared_indices,
+        shared_metadata=shared_metadata,
     )
     bootstrap_p25 = float(bootstrap["p25"])
     active_turnover = np.asarray(turnover_l1, dtype=float)[np.asarray(mask, dtype=bool)]
@@ -217,8 +314,6 @@ def _portfolio_search_reward(
     )
     reward = (
         SEARCH_REWARD_WEIGHTS["train_day_sortino"] * day_component
-        + SEARCH_REWARD_WEIGHTS["train_worst_horizon_day_sortino"]
-        * day_component
         + SEARCH_REWARD_WEIGHTS["train_day_bootstrap_sortino_p25"]
         * bootstrap_component
         - turnover_penalty
@@ -228,29 +323,162 @@ def _portfolio_search_reward(
         blockers.append("NON_POSITIVE_TRAIN_DAY_SORTINO")
     if (
         not math.isfinite(float(bootstrap["probability_gt_zero"]))
-        or float(bootstrap["probability_gt_zero"]) < 0.60
+        or float(bootstrap["probability_gt_zero"])
+        < SEARCH_REWARD_BOOTSTRAP_SUPPORT_MINIMUM
     ):
-        blockers.append("WEAK_TRAIN_DAY_BOOTSTRAP")
+        blockers.append("WEAK_TRAIN_DAY_STATIONARY_BOOTSTRAP")
     if not math.isfinite(reward) or reward <= 0.0:
         blockers.append("NON_POSITIVE_TRAIN_SEARCH_REWARD")
     return {
-        "authority": SEARCH_REWARD_AUTHORITY,
+        "authority": SEARCH_REWARD_COMPONENT_AUTHORITY,
+        "uncertainty_contract": SEARCH_REWARD_UNCERTAINTY_CONTRACT,
         "search_reward": float(reward),
         "train_day_sortino": day_sortino,
-        "train_worst_horizon_day_sortino": day_sortino,
+        "train_worst_horizon_day_sortino": None,
         "train_day_bootstrap_sortino_p25": bootstrap_p25,
         "train_day_bootstrap_sortino_median": float(bootstrap["median"]),
         "train_day_bootstrap_probability_gt_zero": float(
             bootstrap["probability_gt_zero"]
         ),
         "train_day_bootstrap_draws": int(bootstrap["draws"]),
+        "train_day_bootstrap_requested_draws": int(
+            bootstrap["requested_draws"]
+        ),
+        "train_day_bootstrap_invalid_draws": int(bootstrap["invalid_draws"]),
+        "train_day_bootstrap_expected_block_length": int(
+            bootstrap.get("expected_block_length", 0)
+        ),
+        "train_day_bootstrap_restart_probability": float(
+            bootstrap.get("restart_probability", float("nan"))
+        ),
+        "train_day_bootstrap_monte_carlo_standard_error": float(
+            bootstrap["monte_carlo_standard_error"]
+        ),
         "train_day_count": int(daily.size),
         "mean_full_l1_turnover": mean_full_l1_turnover,
         "mean_one_way_turnover": mean_one_way_turnover,
         "turnover_penalty": float(turnover_penalty),
         "horizon_scope": "CANDIDATE_SELECTED_SINGLE_HORIZON",
+        "worst_horizon_term_removed": True,
         "cross_horizon_instability_penalty": 0.0,
         "inherited_blocker_penalty": 0.0,
+        "blockers": blockers,
+    }
+
+
+def _joint_portfolio_search_reward(
+    *,
+    components: Mapping[str, Mapping[str, np.ndarray]],
+    timestamp_ns: np.ndarray,
+    seed: int,
+) -> dict[str, Any]:
+    """Conservatively join primary quality with all required matched sleeves."""
+
+    if "primary" not in components or len(components) < 2:
+        raise ValueError("joint search reward requires primary and matched components")
+    ordered_names = tuple(components)
+    common_mask = np.zeros(np.asarray(timestamp_ns).shape, dtype=bool)
+    for name in ordered_names:
+        local = components[name]
+        common_mask |= np.asarray(local["mask"], dtype=bool)
+    day_count: int | None = None
+    for name in ordered_names:
+        local = components[name]
+        daily = _daily_net_returns(
+            np.asarray(local["net"], dtype=float),
+            common_mask,
+            np.asarray(timestamp_ns, dtype=np.int64),
+        )
+        if day_count is None:
+            day_count = int(daily.size)
+        elif int(daily.size) != day_count:
+            raise ValueError("joint reward components lost shared ordered-day support")
+    shared_indices, shared_metadata = _stationary_bootstrap_indices(
+        int(day_count or 0),
+        seed=int(seed),
+        draws=SEARCH_REWARD_BOOTSTRAP_DRAWS,
+    )
+    objectives: dict[str, dict[str, Any]] = {}
+    for name in ordered_names:
+        local = components[name]
+        objectives[name] = _portfolio_search_reward(
+            net=np.asarray(local["net"], dtype=float),
+            turnover_l1=np.asarray(local["turnover"], dtype=float),
+            mask=common_mask,
+            timestamp_ns=np.asarray(timestamp_ns, dtype=np.int64),
+            seed=int(seed),
+            shared_indices=shared_indices,
+            shared_metadata=shared_metadata,
+        )
+    limiting_component = min(
+        ordered_names,
+        key=lambda name: (float(objectives[name]["search_reward"]), name),
+    )
+    matched_names = tuple(name for name in ordered_names if name != "primary")
+    matched_limiting_component = min(
+        matched_names,
+        key=lambda name: (float(objectives[name]["search_reward"]), name),
+    )
+    blockers = [
+        f"{name}:{blocker}"
+        for name in ordered_names
+        for blocker in objectives[name]["blockers"]
+    ]
+    primary = objectives["primary"]
+    return {
+        "authority": SEARCH_REWARD_AUTHORITY,
+        "component_authority": SEARCH_REWARD_COMPONENT_AUTHORITY,
+        "uncertainty_contract": SEARCH_REWARD_UNCERTAINTY_CONTRACT,
+        "joint_rule": "MIN_PRIMARY_AND_ALL_REQUIRED_MATCHED_COMPONENTS",
+        "search_reward": float(
+            objectives[limiting_component]["search_reward"]
+        ),
+        "primary_search_reward": float(primary["search_reward"]),
+        "matched_min_search_reward": float(
+            objectives[matched_limiting_component]["search_reward"]
+        ),
+        "limiting_component": limiting_component,
+        "matched_limiting_component": matched_limiting_component,
+        "component_order": list(ordered_names),
+        "component_objectives": objectives,
+        "shared_stationary_bootstrap_path_sha256": _array_sha(shared_indices),
+        "shared_ordered_day_count": int(day_count or 0),
+        "train_day_sortino": primary["train_day_sortino"],
+        "train_worst_horizon_day_sortino": None,
+        "train_day_bootstrap_sortino_p25": primary[
+            "train_day_bootstrap_sortino_p25"
+        ],
+        "train_day_bootstrap_sortino_median": primary[
+            "train_day_bootstrap_sortino_median"
+        ],
+        "train_day_bootstrap_probability_gt_zero": primary[
+            "train_day_bootstrap_probability_gt_zero"
+        ],
+        "train_day_bootstrap_draws": primary["train_day_bootstrap_draws"],
+        "train_day_bootstrap_requested_draws": primary[
+            "train_day_bootstrap_requested_draws"
+        ],
+        "train_day_bootstrap_invalid_draws": primary[
+            "train_day_bootstrap_invalid_draws"
+        ],
+        "train_day_bootstrap_expected_block_length": primary[
+            "train_day_bootstrap_expected_block_length"
+        ],
+        "train_day_bootstrap_restart_probability": primary[
+            "train_day_bootstrap_restart_probability"
+        ],
+        "train_day_bootstrap_monte_carlo_standard_error": primary[
+            "train_day_bootstrap_monte_carlo_standard_error"
+        ],
+        "train_day_count": primary["train_day_count"],
+        "mean_full_l1_turnover": primary["mean_full_l1_turnover"],
+        "mean_one_way_turnover": primary["mean_one_way_turnover"],
+        "turnover_penalty": primary["turnover_penalty"],
+        "horizon_scope": "CANDIDATE_SELECTED_SINGLE_HORIZON",
+        "worst_horizon_term_removed": True,
+        "cross_horizon_instability_penalty": 0.0,
+        "inherited_blocker_penalty": 0.0,
+        "feedback_eligible": not blockers,
         "blockers": blockers,
     }
 
@@ -264,6 +492,7 @@ def _series_metrics(
     horizon: int,
     timestamp_ns: np.ndarray | None = None,
     search_reward_seed: int | None = None,
+    include_internal_objective_paths: bool = False,
 ) -> dict[str, Any]:
     turnover, attribution = turnover_path(weights, horizon)
     gross = np.nansum(weights * target, axis=0) / float(horizon)
@@ -349,6 +578,10 @@ def _series_metrics(
             timestamp_ns=np.asarray(timestamp_ns, dtype=np.int64),
             seed=int(search_reward_seed),
         )
+    if include_internal_objective_paths:
+        metrics["_objective_net_path"] = net
+        metrics["_objective_turnover_path"] = turnover
+        metrics["_objective_mask"] = mask
     return metrics
 
 
@@ -579,7 +812,7 @@ def evaluate_pair(
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
         timestamp_ns=timestamp_ns,
-        search_reward_seed=search_reward_seed,
+        include_internal_objective_paths=True,
     )
     control = _series_metrics(
         weights=control_weight,
@@ -621,6 +854,7 @@ def evaluate_pair(
         months=months,
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
+        include_internal_objective_paths=True,
     )
     right_incremental = _series_metrics(
         weights=right_delta_weight,
@@ -628,6 +862,7 @@ def evaluate_pair(
         months=months,
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
+        include_internal_objective_paths=True,
     )
     left_feedback = strict_pair_feedback(left_incremental)
     right_feedback = strict_pair_feedback(right_incremental)
@@ -641,6 +876,7 @@ def evaluate_pair(
             months=months,
             evaluation_mask=evaluation_mask,
             horizon=candidate.horizon_hours,
+            include_internal_objective_paths=True,
         )
         interaction_left_feedback = strict_pair_feedback(
             interaction_left_incremental
@@ -701,6 +937,36 @@ def evaluate_pair(
                 min(left_feedback["distance"], right_feedback["distance"])
             ),
         }
+    objective_components: dict[str, dict[str, np.ndarray]] = {}
+    component_metrics: list[tuple[str, dict[str, Any]]]
+    if hierarchical_conditional:
+        assert interaction_left_incremental is not None
+        component_metrics = [
+            ("primary", primary),
+            ("interaction_ab_minus_a", interaction_left_incremental),
+            ("interaction_ab_minus_b", right_incremental),
+            ("conditional_abc_minus_ab", left_incremental),
+        ]
+    else:
+        component_metrics = [
+            ("primary", primary),
+            ("primary_minus_left_control", left_incremental),
+            ("primary_minus_right_control", right_incremental),
+        ]
+    for name, metrics in component_metrics:
+        objective_components[name] = {
+            "net": np.asarray(metrics.pop("_objective_net_path"), dtype=float),
+            "turnover": np.asarray(
+                metrics.pop("_objective_turnover_path"), dtype=float
+            ),
+            "mask": np.asarray(metrics.pop("_objective_mask"), dtype=bool),
+        }
+    search_objective = _joint_portfolio_search_reward(
+        components=objective_components,
+        timestamp_ns=timestamp_ns,
+        seed=search_reward_seed,
+    )
+    primary["portfolio_search_objective"] = search_objective
     timings["incremental_sleeve_seconds"] = time.perf_counter() - incremental_started
     sample_memory()
     behavior = None
@@ -797,7 +1063,6 @@ def evaluate_pair(
     timings["peak_rss_bytes"] = float(max(rss_samples))
     timings["peak_private_bytes"] = float(max(private_samples))
     support_overlap = 1.0
-    search_objective = dict(primary["portfolio_search_objective"])
     return {
         "candidate_id": candidate.candidate_id,
         "skeleton_id": candidate.skeleton_id,
@@ -858,19 +1123,43 @@ def evaluate_pair(
 
 def pair_contract_payload() -> dict[str, Any]:
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "pair_authority": "PRIMARY_WITH_LEFT_AND_RIGHT_AXIS_INCREMENTAL_DELTA_WEIGHT_SLEEVES",
+        "market_semantics": {
+            "asset_class": "CRYPTO",
+            "calendar": "CONTINUOUS_UTC",
+            "a_share_constraints_applied": False,
+            "forbidden_cross_market_constraints": [
+                "A_SHARE_T_PLUS_ONE",
+                "A_SHARE_ST",
+                "A_SHARE_PRICE_LIMIT",
+                "A_SHARE_STAMP_DUTY",
+                "A_SHARE_SUSPENSION_CALENDAR",
+            ],
+        },
         "search_objective": {
             "authority": SEARCH_REWARD_AUTHORITY,
-            "portfolio": "primary mapped candidate portfolio",
+            "component_authority": SEARCH_REWARD_COMPONENT_AUTHORITY,
+            "portfolio": (
+                "minimum of primary mapped portfolio and every required "
+                "matched incremental delta-weight sleeve"
+            ),
             "split": "train/development adaptive block only",
             "formula_weights": dict(SEARCH_REWARD_WEIGHTS),
-            "bootstrap_draws": SEARCH_REWARD_BOOTSTRAP_DRAWS,
+            "uncertainty_contract": SEARCH_REWARD_UNCERTAINTY_CONTRACT,
+            "stationary_bootstrap_draws": SEARCH_REWARD_BOOTSTRAP_DRAWS,
+            "stationary_bootstrap_support_minimum": (
+                SEARCH_REWARD_BOOTSTRAP_SUPPORT_MINIMUM
+            ),
+            "shared_resample_path": (
+                "primary and matched components use one deterministic "
+                "ordered-day stationary-bootstrap index path"
+            ),
             "turnover_penalty_start_one_way": SEARCH_REWARD_TURNOVER_PENALTY_START,
             "turnover_penalty_weight": SEARCH_REWARD_TURNOVER_PENALTY_WEIGHT,
             "selected_horizon_scope": (
-                "CandidateSpec freezes one horizon, so the Phase3CM "
-                "worst-horizon term equals selected-horizon day Sortino"
+                "CandidateSpec freezes one horizon; the duplicate nominal "
+                "worst-horizon term is removed rather than counted twice"
             ),
             "validation_role": (
                 "not implemented by Search Engine V1; an explicit fresh "
@@ -923,10 +1212,13 @@ def pair_contract_payload() -> dict[str, Any]:
 
 def feedback_contract_payload() -> dict[str, Any]:
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "authoritative_search_feedback": SEARCH_REWARD_AUTHORITY,
         "matched_attribution_feedback": "incremental sleeve strict feasibility distance",
         "matched_attribution_is_search_ordering_authority": False,
+        "matched_incremental_portfolio_quality_is_search_ordering_authority": True,
+        "joint_ordering_rule": "minimum primary and all required matched component rewards",
+        "uncertainty_contract": SEARCH_REWARD_UNCERTAINTY_CONTRACT,
         "thresholds": dict(PAIR_THRESHOLDS),
         "normalization_scales": dict(PAIR_SCALES),
         "feedback_block": "2023-07-01/2024-07-01 development adaptive block only",

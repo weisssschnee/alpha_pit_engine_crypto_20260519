@@ -74,6 +74,23 @@ accepted components whose nodes explicitly said `active_authority: false`.
    joint rule such as `min(standalone_train_score, matched_increment_score)`,
    subject to an explicit future contract and tests; this ADR does not promote
    that formula.
+8. The retained evaluator now implements that design basis as
+   `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2` for future fresh-state use:
+   - the duplicated nominal worst-horizon term is removed because
+     `CandidateSpec` binds only one horizon;
+   - ordered daily returns use deterministic stationary bootstrap under
+     `CRYPTO_ORDERED_DAY_STATIONARY_BOOTSTRAP_V1`, not IID resampling and not
+     an MCMC or posterior claim;
+   - primary and every required matched delta-weight sleeve share the exact
+     same bootstrap index path;
+   - binary ordering uses the minimum of primary, primary-minus-left-control
+     and primary-minus-right-control portfolio components;
+   - hierarchical ordering uses the minimum of primary, `AB-A`, `AB-B`, and
+     `ABC-AB` portfolio components;
+   - legacy V1 reward identities cannot seed adaptive state.
+9. This implementation is crypto-only: continuous UTC crypto semantics are
+   declared and no A-share T+1, ST, price-limit, stamp-duty, suspension, CN
+   evaluator, CN reward or CN market-cost rule is applied.
 
 ## Consequences
 
@@ -84,6 +101,9 @@ accepted components whose nodes explicitly said `active_authority: false`.
   The preflight therefore blocks fresh market execution.
 - Existing V1.1-V1.4 evidence is unchanged. It remains engineering,
   matched-attribution, and replay evidence under its original contracts.
+- The V2 source repair does not activate optimizer authority. Direction,
+  portfolio role, tradable venue/instrument/price, venue-specific cost, a
+  distinct validation kill-line and read-only holdout remain unresolved by
+  this implementation.
 - No second AST, compiler, evaluator, Graph layer, scheduler, or experiment
   database is created.
-

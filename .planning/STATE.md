@@ -313,8 +313,8 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 1. Treat the continuation, policy canary, Search Engine V1 20k campaign, aggTrades canary, and Search Engine V1.1-V1.4 campaigns as spent development engineering evidence; do not rerun, tune, rewrite, or import their candidate, reward, distribution, population, policy, archive, or transition-memory state.
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
 3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
-4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
-5. Before any fresh adaptive market campaign, bind mechanism, direction/orientation, portfolio role and formal mapping, tradable venue-specific target/execution/cost, train-only standalone quality, matched increment, dependence-aware uncertainty, a distinct validation split and kill-line, read-only holdout, and fresh policy/archive/checkpoint state. The historical report-only block cannot be promoted to validation.
+4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2` is source-qualified for future fresh-state use but remains inactive until the rest of the economic receipt closes. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
+5. Before any fresh adaptive market campaign, bind mechanism, direction/orientation, portfolio role and formal mapping, tradable venue-specific target/execution/cost, a distinct validation split and kill-line, read-only holdout, and fresh policy/archive/checkpoint state. Train-only standalone-plus-matched portfolio ordering and dependence-aware uncertainty are now implemented but do not activate those missing authorities. The historical report-only block cannot be promoted to validation.
 6. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
 7. Do not launch another large search until separately authorized over an admitted new release. Latent search priority remains deferred after V1.2 and cannot influence budget.
 8. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
@@ -342,7 +342,7 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 - Search Engine V1 has no formal validation kill-line. The historical report-only block is spent and cannot become optimizer feedback. A future fresh campaign must define a new validation boundary before any adaptive budget is authorized.
-- Search Engine V1 has no enforced economic-semantics receipt. Skeleton hypotheses are prose, all compositional candidates are hardwired to cross-sectional zero-net mapping, the general candidate lacks execution identity, and the current primary-only diagnostic is not jointly gated by matched increment. ADR 0016 suspends economic optimizer authority while retaining the engineering chain.
+- Search Engine V1 still has no complete enforced economic-semantics receipt. Skeleton hypotheses are prose, all compositional candidates are hardwired to cross-sectional zero-net mapping, and the general candidate lacks execution identity. The V2 source now joins primary and required matched incremental portfolio quality under shared dependence-aware uncertainty, but ADR 0016 continues to suspend economic optimizer authority until the remaining mechanism/direction/mapping/target/execution/cost/validation/holdout bindings close.
 
 ## Source-of-truth order
 
@@ -386,14 +386,31 @@ nodes, so a canonical fresh `run*` fails closed. No market experiment,
 candidate evaluation, OOS access, promotion, or large budget was run or
 authorized by the implementation.
 
+## Crypto reward uncertainty V2 source repair
+
+The retained crypto evaluator now implements
+`CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2`. It removes the duplicated
+single-horizon term, replaces IID day sampling with deterministic ordered-day
+stationary bootstrap, and gives primary plus every required matched
+delta-weight sleeve one shared bootstrap path. Binary reward is the minimum of
+primary, primary-minus-left-control and primary-minus-right-control portfolio
+quality; hierarchical reward is the minimum of primary, `AB-A`, `AB-B` and
+`ABC-AB`. Legacy V1 reward identities fail closed when presented to fresh
+adaptive ordering.
+
+This repair is crypto-only and applies continuous UTC semantics. It imports no
+CN evaluator or reward and applies no A-share T+1, ST, price-limit, stamp-duty
+or suspension-calendar rule. Verification is synthetic and source-only. No
+candidate was generated, replayed or evaluated against market data, and no
+authority binding or research qualification was promoted.
+
 ## Next action
 
 Stop at this authority-suspension closure. The next authorized code-design task
 is one thin successor receipt on the existing Search Engine chain: bind
 mechanism, direction/orientation, portfolio role and canonical mapping,
-tradable target/execution/cost identity, train-only standalone quality, matched
-increment, dependence-aware uncertainty, a distinct validation kill-line, and
-read-only holdout. Do not create a second AST/compiler/evaluator, reconstruct
+tradable target/execution/cost identity, a distinct validation kill-line, and
+read-only holdout around the now-implemented train-only joint reward. Do not create a second AST/compiler/evaluator, reconstruct
 historical rewards, rerun candidates, start adaptive V1.4b, expand the operator
 basis, spend market-evaluation budget, train latent priority, open sealed
 roles, run OOS/challenge/forward, or promote candidates without separate

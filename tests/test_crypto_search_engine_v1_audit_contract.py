@@ -22,7 +22,9 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     SEEDS,
     TypedEvolutionV2,
     _final_decision,
+    _search_ordering_reward,
 )
+from alphafactory_crypto.broad_search.pair18m import SEARCH_REWARD_AUTHORITY
 
 
 def _registry() -> TypedExpressionRegistry:
@@ -58,6 +60,7 @@ def _registry() -> TypedExpressionRegistry:
 def _cem_row(candidate, reward: float, local_count: int = 1) -> dict:
     return {
         "search_reward": reward,
+        "search_reward_authority": SEARCH_REWARD_AUTHORITY,
         "pair_reward": reward,
         "policy_local_family_count_at_completion": local_count,
         "candidate_id": candidate.candidate_id,
@@ -174,7 +177,7 @@ def test_search_reward_not_pair_reward_orders_all_adaptive_state() -> None:
             candidate=candidate,
             evaluation={
                 "search_reward": row["search_reward"],
-                "search_reward_authority": "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1",
+                "search_reward_authority": SEARCH_REWARD_AUTHORITY,
                 "pair_reward": row["pair_reward"],
                 "matched_positive": False,
                 "incremental": {
@@ -195,6 +198,18 @@ def test_search_reward_not_pair_reward_orders_all_adaptive_state() -> None:
     assert champion["pair_reward"] == -10.0
 
 
+def test_legacy_primary_only_reward_authority_cannot_seed_fresh_search() -> None:
+    with pytest.raises(ValueError, match="legacy reward state cannot seed"):
+        _search_ordering_reward(
+            {
+                "search_reward": 1.0,
+                "search_reward_authority": (
+                    "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1"
+                ),
+            }
+        )
+
+
 def test_evolution_next_proposal_is_invariant_to_other_arm_history() -> None:
     registry = _registry()
     parameters = {
@@ -211,6 +226,7 @@ def test_evolution_next_proposal_is_invariant_to_other_arm_history() -> None:
                 {
                     "behavior_family_id": f"family-{index}",
                     "search_reward": float(index),
+                    "search_reward_authority": SEARCH_REWARD_AUTHORITY,
                     "pair_reward": float(index),
                 "operation": "TYPED_RANDOM_WARMUP",
                 "parent_ids": [],
@@ -285,6 +301,7 @@ def test_lineage_collapse_metrics_are_persisted() -> None:
         {
             "behavior_family_id": "root-family",
             "search_reward": 1.0,
+            "search_reward_authority": SEARCH_REWARD_AUTHORITY,
             "pair_reward": 1.0,
             "operation": "TYPED_RANDOM_WARMUP",
             "parent_ids": [],
@@ -296,6 +313,7 @@ def test_lineage_collapse_metrics_are_persisted() -> None:
         {
             "behavior_family_id": "child-family",
             "search_reward": 2.0,
+            "search_reward_authority": SEARCH_REWARD_AUTHORITY,
             "pair_reward": 2.0,
             "operation": receipt["operation"],
             "parent_ids": [root.candidate_id],

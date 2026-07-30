@@ -62,6 +62,7 @@ from .compositional18m import (
 from .expression import FieldContract, TypedExpressionRegistry
 from .pair18m import (
     FIXED_COST_BPS,
+    SEARCH_REWARD_AUTHORITY,
     evaluate_pair,
     feedback_contract_payload,
     pair_contract_payload,
@@ -1831,6 +1832,12 @@ def _search_ordering_reward(row: Mapping[str, Any]) -> float:
     reward = float(row["search_reward"])
     if not math.isfinite(reward):
         raise ValueError("search_reward must be finite")
+    authority = str(row.get("search_reward_authority", ""))
+    if authority != SEARCH_REWARD_AUTHORITY:
+        raise ValueError(
+            "search_reward authority changed; legacy reward state cannot seed "
+            "a fresh campaign"
+        )
     return reward
 
 
@@ -4832,6 +4839,23 @@ def _ledger_row(
         "search_reward_authority": str(
             evaluation.get("search_reward_authority", "")
         ),
+        "search_reward_uncertainty_contract": str(
+            evaluation.get("search_reward_feedback", {}).get(
+                "uncertainty_contract", ""
+            )
+        ),
+        "primary_search_reward": evaluation.get(
+            "search_reward_feedback", {}
+        ).get("primary_search_reward"),
+        "matched_min_search_reward": evaluation.get(
+            "search_reward_feedback", {}
+        ).get("matched_min_search_reward"),
+        "search_reward_limiting_component": evaluation.get(
+            "search_reward_feedback", {}
+        ).get("limiting_component"),
+        "shared_stationary_bootstrap_path_sha256": evaluation.get(
+            "search_reward_feedback", {}
+        ).get("shared_stationary_bootstrap_path_sha256"),
         "search_reward_feedback_json": json.dumps(
             evaluation.get("search_reward_feedback", {}),
             sort_keys=True,
@@ -4850,6 +4874,12 @@ def _ledger_row(
         "train_day_bootstrap_probability_gt_zero": evaluation.get(
             "search_reward_feedback", {}
         ).get("train_day_bootstrap_probability_gt_zero"),
+        "train_day_bootstrap_expected_block_length": evaluation.get(
+            "search_reward_feedback", {}
+        ).get("train_day_bootstrap_expected_block_length"),
+        "train_day_bootstrap_monte_carlo_standard_error": evaluation.get(
+            "search_reward_feedback", {}
+        ).get("train_day_bootstrap_monte_carlo_standard_error"),
         "train_mean_one_way_turnover": evaluation.get(
             "search_reward_feedback", {}
         ).get("mean_one_way_turnover"),
