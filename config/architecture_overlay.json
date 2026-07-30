@@ -465,16 +465,16 @@
                       "authority":  {
                                         "path":  "config/crypto_search_economic_receipt_v1.json",
                                         "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "fe306f53c7c34cfce6ff05514df4eb12310a9ae2",
-                                        "sha256":  "F626E1AB27FAA7F4846725FF3F2221C2958AF93C1991202A79E746A84E4290F3"
+                                        "verified_sha":  "360eb4305db04c8c604bb1fe19335c2b176b5fe9",
+                                        "sha256":  "8158A17CC2AAC626D29D29B542C16A12909688C6B71646AA3693F2CF22477F14"
                                     },
                       "contracts":  [
                                         {
                                             "id":  "crypto_search_economic_receipt_v1_binding",
                                             "type":  "AUTHORITY",
-                                            "rule":  "The successor receipt reuses Skeleton financial hypotheses, the existing mechanism-to-mapping authority, A7Reward train-frozen orientation, formal explicit portfolio mapping, the existing Binance USD-M delayed-open target store, and the retained joint standalone-plus-matched Sortino reward. The full-L1 5 bps cost is bound as a non-formal Binance venue assumption, not promoted as venue-qualified. Validation uses a distinct pure no-feedback development kill-line and the later holdout remains unreadable. Component hashes are frozen; run_authorized is hard false.",
+                                            "rule":  "The successor receipt gives every Broad mechanism an explicit class through the existing mechanism-to-mapping authority, consumes A7Reward train-frozen orientation, wraps the carrier with the existing content-bound Binance USD-M delayed-open target store, injects the receipt cost into the retained evaluator, and uses the retained joint standalone-plus-matched Sortino reward. The full-L1 5 bps cost remains a non-formal Binance venue assumption. Validation is a pure no-feedback kill-line whose runtime adapter stops the failed arm and atomically checkpoints it without reading test/recent/stress/holdout. Component and target-cache hashes are frozen; run_authorized is hard false.",
                                             "severity":  "HARD",
-                                            "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt and broad_search.search_engine_v1.main",
+                                            "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt, broad_search.search_engine_v1._worker_initialize/apply_search_validation_kill_line, and broad_search.pair18m.evaluate_pair",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "config/crypto_search_economic_receipt_v1.json"
                                         },
@@ -626,8 +626,8 @@
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
                                          "evidence_ref":  "config/crypto_search_economic_receipt_v1.json",
-                                         "evidence_sha256":  "F626E1AB27FAA7F4846725FF3F2221C2958AF93C1991202A79E746A84E4290F3",
-                                         "verified_at_sha":  "fe306f53c7c34cfce6ff05514df4eb12310a9ae2"
+                                         "evidence_sha256":  "8158A17CC2AAC626D29D29B542C16A12909688C6B71646AA3693F2CF22477F14",
+                                         "verified_at_sha":  "360eb4305db04c8c604bb1fe19335c2b176b5fe9"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
