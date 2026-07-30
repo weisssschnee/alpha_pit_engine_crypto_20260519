@@ -94,19 +94,23 @@ accepted components whose nodes explicitly said `active_authority: false`.
 10. `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` is the thin successor binding for a
     future fresh development campaign. It does not copy any evaluator:
     - mechanism and hypothesis resolve to the existing Skeleton registry;
-    - direction resolves to A7Reward's train-frozen orientation;
-    - mapping and full-L1 5 bps cost resolve to the formal
-      `explicit_portfolio_mapping`;
+    - Broad mechanisms resolve through the existing mechanism-to-mapping
+      authority instead of a candidate-global mapping literal;
+    - direction resolves to A7Reward's train-frozen orientation and the
+      retained pair evaluator has an explicit receipt-bound consumption path;
+    - mapping resolves to formal `explicit_portfolio_mapping`; the full-L1
+      5 bps cost remains a NON_FORMAL frozen Binance venue assumption;
     - target and execution resolve to the existing Binance USD-M delayed-open
       target contract;
     - optimizer reward resolves to
       `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2`;
-    - validation resolves to a distinct no-feedback development kill-line,
-      while the later holdout is unreadable.
-    The receipt is source-qualified at commit
-    `0bbe594a6a5db49f1d4661c349da08f0d36dec09`, but
-    `run_authorized=false` remains a hard preflight blocker. Source
-    qualification does not activate a market experiment or promote any
+    - validation resolves to a distinct pure no-feedback development
+      kill-line that cannot read test/recent/stress/holdout, while the later
+      holdout remains unreadable.
+    Every referenced component is content-hash frozen. Alternate receipt paths
+    are rejected and both CLI and direct runner entry points re-resolve the
+    committed receipt. This schema requires `run_authorized=false`; source
+    qualification cannot activate a market experiment or promote any
     NON_FORMAL role.
 
 ## Consequences
@@ -119,9 +123,9 @@ accepted components whose nodes explicitly said `active_authority: false`.
 - Existing V1.1-V1.4 evidence is unchanged. It remains engineering,
   matched-attribution, and replay evidence under its original contracts.
 - The V2 source repair does not activate optimizer authority. Direction,
-  portfolio role, tradable venue/instrument/price, venue-specific cost, a
-  distinct validation kill-line and read-only holdout now have one
-  content-hashed successor receipt, but the receipt remains run-inactive and
-  has no runtime or market evidence.
+  portfolio role, tradable venue/instrument/price, an explicitly NON_FORMAL
+  frozen venue-cost assumption, a distinct validation kill-line and read-only
+  holdout now have one content-hashed successor receipt, but the receipt
+  remains run-inactive and has no runtime or market evidence.
 - No second AST, compiler, evaluator, Graph layer, scheduler, or experiment
   database is created.

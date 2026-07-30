@@ -624,6 +624,7 @@ def evaluate_pair(
     block_end: str,
     block_role: str,
     behavior_contract: Mapping[str, Any] | None = None,
+    economic_receipt: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     timings: dict[str, float] = {}
     process = psutil.Process()
@@ -746,8 +747,70 @@ def evaluate_pair(
         )
     timings["dag_materialization_seconds"] = time.perf_counter() - materialize_started
     sample_memory()
+    target = np.asarray(
+        store.target_return(candidate.horizon_hours)[:, block],
+        dtype=float,
+    )
     mapping_started = time.perf_counter()
     mapping_contract = DEFAULT_MAPPING_CONTRACTS[candidate.mapping_id]
+    train_orientation = 1.0
+    if economic_receipt is not None:
+        receipt = dict(economic_receipt)
+        train = dict(receipt.get("train") or {})
+        portfolio = dict(receipt.get("portfolio") or {})
+        direction = dict(receipt.get("direction") or {})
+        cost_contract = dict(receipt.get("cost") or {})
+        if direction.get("rule") != "TRAIN_FROZEN_SIGN_ORIENTATION":
+            raise ValueError("ECONOMIC_RECEIPT_DIRECTION_RULE_CHANGED")
+        if candidate.mapping_id != portfolio.get("mapping_id"):
+            raise ValueError("ECONOMIC_RECEIPT_MAPPING_CHANGED")
+        if (
+            str(block_start) != str(train.get("start"))
+            or str(block_end) != str(train.get("end_exclusive"))
+        ):
+            raise ValueError("ECONOMIC_RECEIPT_TRAIN_BLOCK_CHANGED")
+        positive_mapped = map_portfolio(primary_signal, mapping_contract)
+        negative_mapped = map_portfolio(-primary_signal, mapping_contract)
+        positive_weight = np.asarray(positive_mapped.weights, dtype=float)
+        negative_weight = np.asarray(negative_mapped.weights, dtype=float)
+        positive_turnover, _ = turnover_path(
+            positive_weight,
+            candidate.horizon_hours,
+        )
+        negative_turnover, _ = turnover_path(
+            negative_weight,
+            candidate.horizon_hours,
+        )
+        cost_bps = float(cost_contract["cost_bps"])
+        positive_cost = positive_turnover * cost_bps / 10_000.0
+        negative_cost = negative_turnover * cost_bps / 10_000.0
+        active_union = (
+            (np.abs(positive_weight) > ACTIVE_EPSILON)
+            | (np.abs(negative_weight) > ACTIVE_EPSILON)
+        )
+        orientation_mask = (
+            (support.sum(axis=0) >= 3)
+            & ~np.any(active_union & ~np.isfinite(target), axis=0)
+        )
+        if not np.any(orientation_mask):
+            raise ValueError("ECONOMIC_RECEIPT_ORIENTATION_SUPPORT_COLLAPSE")
+        from scripts.crypto_a7reward1_portfolio_reward_model import (
+            select_train_orientation,
+        )
+
+        train_orientation = select_train_orientation(
+            (positive_weight, positive_cost, primary_signal, positive_turnover),
+            (negative_weight, negative_cost, -primary_signal, negative_turnover),
+            target,
+            orientation_mask,
+        )
+        primary_signal = primary_signal * train_orientation
+        control_signal = control_signal * train_orientation
+        right_control_signal = right_control_signal * train_orientation
+        if interaction_left_control_signal is not None:
+            interaction_left_control_signal = (
+                interaction_left_control_signal * train_orientation
+            )
     primary_mapped = map_portfolio(primary_signal, mapping_contract)
     control_mapped = map_portfolio(control_signal, mapping_contract)
     right_control_mapped = map_portfolio(right_control_signal, mapping_contract)
@@ -777,7 +840,6 @@ def evaluate_pair(
         and np.array_equal(control_weight, interaction_left_control_weight)
     ):
         raise ValueError("INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB")
-    target = np.asarray(store.target_return(candidate.horizon_hours)[:, block], dtype=float)
     active_union = (
         (np.abs(primary_weight) > ACTIVE_EPSILON)
         | (np.abs(control_weight) > ACTIVE_EPSILON)
@@ -1070,6 +1132,12 @@ def evaluate_pair(
         "horizon_hours": candidate.horizon_hours,
         "mapping_id": candidate.mapping_id,
         "mapping_hash": mapping_contract_sha256(mapping_contract),
+        "train_orientation": float(train_orientation),
+        "economic_receipt_sha256": (
+            str(economic_receipt.get("receipt_sha256"))
+            if economic_receipt is not None
+            else None
+        ),
         "block_role": block_role,
         "block_start": block_start,
         "block_end_exclusive": block_end,

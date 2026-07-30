@@ -245,6 +245,54 @@ def test_incremental_sleeve_is_recomputed_from_delta_weights() -> None:
     assert result["scalar_net_delta_diagnostic"] != result["pair_reward"]
 
 
+def test_train_orientation_is_consumed_and_persisted_when_receipt_is_bound() -> None:
+    registry = TypedExpressionRegistry(
+        (
+            FieldContract("a", "RATIO", "dimensionless"),
+            FieldContract("b", "RATIO", "dimensionless"),
+        )
+    )
+    primary = Expression(
+        "RatioInteraction",
+        (Expression.raw("a"), Expression.raw("b")),
+    )
+    control = ablate_expression(primary)
+    assurance = registry.validate(primary)
+    spec = CandidateSpec(
+        "candidate",
+        "skeleton",
+        "OI_ACTIVITY_INTERACTION",
+        primary,
+        control,
+        1,
+        CROSS_SECTIONAL_ZERO_NET,
+        assurance.raw_fields,
+        ("family_a", "family_b"),
+        assurance.rolling_windows,
+        assurance.depth,
+        "RatioInteraction(Raw,Raw)",
+    )
+    start = "2023-07-01T00:00:00Z"
+    end = "2024-07-01T00:00:00Z"
+    result = evaluate_pair(
+        store=_FakeStore(),
+        registry=registry,
+        candidate=spec,
+        block_start=start,
+        block_end=end,
+        block_role="FRESH_DEVELOPMENT_TRAIN_ONLY",
+        economic_receipt={
+            "receipt_sha256": "A" * 64,
+            "train": {"start": start, "end_exclusive": end},
+            "direction": {"rule": "TRAIN_FROZEN_SIGN_ORIENTATION"},
+            "portfolio": {"mapping_id": CROSS_SECTIONAL_ZERO_NET},
+            "cost": {"cost_bps": 5.0},
+        },
+    )
+    assert result["train_orientation"] in {-1.0, 1.0}
+    assert result["economic_receipt_sha256"] == "A" * 64
+
+
 def test_report_only_metrics_are_not_policy_feedback() -> None:
     contract = feedback_contract_payload()
     assert contract["report_only_metrics_visible_to_policy"] is False

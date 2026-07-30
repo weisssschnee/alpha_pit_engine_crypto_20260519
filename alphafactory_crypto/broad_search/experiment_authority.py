@@ -7,11 +7,12 @@ import hashlib
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 from alphafactory_crypto.instrument_capability.mapping import (
     DEFAULT_MAPPING_CONTRACTS,
 )
+from alphafactory_crypto.instrument_canary.grammar import MECHANISM_MAPPING
 
 
 REQUIRED_REAL_EXPERIMENT_ROLES = (
@@ -93,20 +94,67 @@ def _parse_utc(value: Any, field: str, blockers: list[str]) -> datetime | None:
     return parsed
 
 
-def resolve_search_economic_receipt(
-    repo_root: Path,
-    *,
-    receipt_path: Path | None = None,
+def evaluate_search_validation_kill_line(
+    metrics: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Verify the thin crypto campaign binding without reimplementing its authorities."""
+    """Apply the frozen development-validation stop rule without reading data.
 
-    relative_receipt = DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH
-    path = receipt_path or (repo_root / relative_receipt)
-    if not path.is_file():
-        raise RuntimeError(
-            f"SEARCH_ECONOMIC_RECEIPT_BLOCKED: receipt:MISSING:{path}"
-        )
-    receipt = json.loads(path.read_text(encoding="utf-8-sig"))
+    The caller owns metric production and checkpoint persistence.  This gate
+    consumes one already-evaluated validation row, returns a deterministic
+    decision, and has no optimizer, archive, proposal, or holdout side effect.
+    """
+
+    required = {
+        "validation_net_mean_positive": bool(
+            float(metrics.get("validation_net_mean", float("nan"))) > 0.0
+        ),
+        "validation_nonoverlap_floor_sortino_positive": bool(
+            float(
+                metrics.get(
+                    "validation_nonoverlap_floor_sortino",
+                    float("nan"),
+                )
+            )
+            > 0.0
+        ),
+        "validation_matched_increment_positive": bool(
+            float(
+                metrics.get(
+                    "validation_matched_increment",
+                    float("nan"),
+                )
+            )
+            > 0.0
+        ),
+        "validation_control_not_dominant": (
+            metrics.get("validation_control_not_dominant") is True
+        ),
+    }
+    passed = all(required.values())
+    return {
+        "result": (
+            "PASS_CONTINUE_FROZEN_ARM"
+            if passed
+            else "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT"
+        ),
+        "passed": passed,
+        "conditions": required,
+        "optimizer_feedback_written": False,
+        "policy_memory_written": False,
+        "candidate_generation_performed": False,
+        "holdout_read": False,
+    }
+
+
+def _validate_search_economic_receipt(
+    repo_root: Path,
+    receipt: Mapping[str, Any],
+    *,
+    receipt_path_label: str,
+) -> dict[str, Any]:
+    """Validate one receipt payload; it never grants run authority."""
+
+    receipt = dict(receipt)
     blockers: list[str] = []
 
     if receipt.get("schema_version") != 1:
@@ -115,6 +163,8 @@ def resolve_search_economic_receipt(
         blockers.append("receipt_id")
     if receipt.get("status") != "SOURCE_QUALIFIED_NOT_RUN_AUTHORIZED":
         blockers.append("status")
+    if receipt.get("run_authorized") is not False:
+        blockers.append("run_authorized")
     market = dict(receipt.get("market") or {})
     if market != {"asset_class": "CRYPTO", "calendar": "CONTINUOUS_UTC"}:
         blockers.append("market")
@@ -135,11 +185,15 @@ def resolve_search_economic_receipt(
     expected_mechanism = (
         "alphafactory_crypto.broad_search.compositional18m.skeleton_registry"
     )
+    expected_mapping = (
+        "alphafactory_crypto.instrument_canary.grammar.MECHANISM_MAPPING"
+    )
     expected_direction = (
         "scripts.crypto_a7reward1_portfolio_reward_model.select_train_orientation"
     )
     expected_validation = (
-        "scripts.crypto_a7reward1_portfolio_reward_model.aggregate_rewards"
+        "alphafactory_crypto.broad_search.experiment_authority."
+        "evaluate_search_validation_kill_line"
     )
     expected_target_store = (
         "alphafactory_crypto.broad_search.replay_v14_binance_target."
@@ -152,6 +206,15 @@ def resolve_search_economic_receipt(
         blockers.append("mechanism.registry_symbol")
     if mechanism.get("economic_hypothesis_field") != "financial_hypothesis":
         blockers.append("mechanism.economic_hypothesis_field")
+    if mechanism.get("mapping_authority_symbol") != expected_mapping:
+        blockers.append("mechanism.mapping_authority_symbol")
+    if mechanism.get("mapping_class") != "CROSS_SECTIONAL_RELATIVE":
+        blockers.append("mechanism.mapping_class")
+    elif (
+        MECHANISM_MAPPING.get(str(mechanism.get("mapping_class")))
+        != portfolio.get("mapping_id")
+    ):
+        blockers.append("mechanism.mapping_resolution")
     if direction.get("rule") != "TRAIN_FROZEN_SIGN_ORIENTATION":
         blockers.append("direction.rule")
     if direction.get("authority_symbol") != expected_direction:
@@ -219,12 +282,17 @@ def resolve_search_economic_receipt(
         if observed_cost != expected_cost:
             blockers.append("cost.mapping_contract")
     else:
-        expected_cost = {}
         observed_cost = {}
-    if cost.get("authority_component") != "explicit_portfolio_mapping":
+    if cost.get("authority_component") != "real_data_mapping_cost_evaluator":
         blockers.append("cost.authority_component")
     if cost.get("mapping_id") != mapping_id:
         blockers.append("cost.mapping_id")
+    if cost.get("venue") != execution.get("venue"):
+        blockers.append("cost.venue")
+    if cost.get("instrument_type") != execution.get("instrument_type"):
+        blockers.append("cost.instrument_type")
+    if cost.get("qualification") != "FROZEN_VENUE_ASSUMPTION_NON_FORMAL":
+        blockers.append("cost.qualification")
 
     from alphafactory_crypto.broad_search.pair18m import SEARCH_REWARD_AUTHORITY
 
@@ -241,14 +309,18 @@ def resolve_search_economic_receipt(
         blockers.append("optimizer_reward.pair_reward_role")
 
     train = dict(partitions.get("train") or {})
-    train_start = _parse_utc(train.get("start"), "evidence_partition.train.start", blockers)
+    train_start = _parse_utc(
+        train.get("start"), "evidence_partition.train.start", blockers
+    )
     train_end = _parse_utc(
         train.get("end_exclusive"),
         "evidence_partition.train.end_exclusive",
         blockers,
     )
     validation_start = _parse_utc(
-        validation.get("start"), "evidence_partition.validation.start", blockers
+        validation.get("start"),
+        "evidence_partition.validation.start",
+        blockers,
     )
     validation_end = _parse_utc(
         validation.get("end_exclusive"),
@@ -326,41 +398,40 @@ def resolve_search_economic_receipt(
 
     source_symbols = {
         "mechanism": mechanism.get("registry_symbol"),
-        "direction_and_validation": direction.get("authority_symbol"),
+        "mechanism_mapping": mechanism.get("mapping_authority_symbol"),
+        "direction": direction.get("authority_symbol"),
+        "validation_kill_line": kill_line.get("authority_symbol"),
         "target_execution": execution.get("target_store_symbol"),
         "optimizer_reward_and_matched_attribution": optimizer_reward.get(
             "authority_symbol"
         ),
     }
     component_sha256: dict[str, str] = {}
-    for component, raw_path in component_sources.items():
-        source_path = repo_root / str(raw_path)
+    for component, source_binding in component_sources.items():
+        if not isinstance(source_binding, Mapping):
+            blockers.append(f"component_sources.{component}")
+            continue
+        source_path = repo_root / str(source_binding.get("path") or "")
+        expected_sha256 = str(source_binding.get("sha256") or "").upper()
         if not source_path.is_file():
             blockers.append(f"component_sources.{component}")
             continue
-        component_sha256[str(component)] = _file_sha256(source_path)
+        observed_sha256 = _file_sha256(source_path)
+        component_sha256[str(component)] = observed_sha256
+        if observed_sha256 != expected_sha256:
+            blockers.append(f"component_hash.{component}")
         symbol = source_symbols.get(str(component))
         if symbol and not _symbol_is_declared(source_path, str(symbol)):
             blockers.append(f"component_symbol.{component}")
-    validation_source = repo_root / str(
-        component_sources.get("direction_and_validation") or ""
-    )
-    if validation_source.is_file() and not _symbol_is_declared(
-        validation_source, expected_validation
-    ):
-        blockers.append("component_symbol.validation_kill_line")
 
     if blockers:
         raise RuntimeError(
-            "SEARCH_ECONOMIC_RECEIPT_BLOCKED: " + "; ".join(sorted(set(blockers)))
+            "SEARCH_ECONOMIC_RECEIPT_BLOCKED: "
+            + "; ".join(sorted(set(blockers)))
         )
     return {
         "result": str(receipt["status"]),
-        "receipt_path": (
-            relative_receipt
-            if receipt_path is None
-            else str(path.resolve())
-        ),
+        "receipt_path": receipt_path_label,
         "receipt_sha256": _canonical_sha256(receipt),
         "component_sha256": component_sha256,
         "market": market,
@@ -370,12 +441,32 @@ def resolve_search_economic_receipt(
         "execution": execution,
         "cost": observed_cost,
         "optimizer_reward": optimizer_reward,
+        "train": train,
         "validation": validation,
         "holdout": holdout,
         "validation_kill_line": kill_line,
-        "run_authorized": receipt.get("run_authorized") is True,
+        "run_authorized": False,
         "formal_claims_authorized": False,
     }
+
+
+def resolve_search_economic_receipt(
+    repo_root: Path,
+) -> dict[str, Any]:
+    """Verify the thin crypto campaign binding without reimplementing its authorities."""
+
+    relative_receipt = DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH
+    path = repo_root / relative_receipt
+    if not path.is_file():
+        raise RuntimeError(
+            f"SEARCH_ECONOMIC_RECEIPT_BLOCKED: receipt:MISSING:{path}"
+        )
+    receipt = json.loads(path.read_text(encoding="utf-8-sig"))
+    return _validate_search_economic_receipt(
+        repo_root,
+        receipt,
+        receipt_path_label=relative_receipt,
+    )
 
 
 def resolve_real_experiment_authorities(repo_root: Path) -> dict[str, Any]:
@@ -469,17 +560,13 @@ def require_real_experiment_authority(
     *,
     evidence_to_add: str | None,
     decision_to_change: str | None,
-    economic_receipt_required: bool = False,
-    economic_receipt_path: Path | None = None,
+    economic_receipt_required: bool = True,
 ) -> dict[str, Any]:
     resolution = resolve_real_experiment_authorities(repo_root)
     blockers = list(resolution["blockers"])
     economic_receipt = None
     if economic_receipt_required:
-        economic_receipt = resolve_search_economic_receipt(
-            repo_root,
-            receipt_path=economic_receipt_path,
-        )
+        economic_receipt = resolve_search_economic_receipt(repo_root)
         if economic_receipt["run_authorized"] is not True:
             blockers.append("economic_receipt:RUN_NOT_AUTHORIZED")
     if not _meaningful(evidence_to_add):
@@ -507,6 +594,7 @@ def require_real_experiment_authority(
 __all__ = [
     "DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH",
     "REQUIRED_REAL_EXPERIMENT_ROLES",
+    "evaluate_search_validation_kill_line",
     "require_real_experiment_authority",
     "resolve_real_experiment_authorities",
     "resolve_search_economic_receipt",

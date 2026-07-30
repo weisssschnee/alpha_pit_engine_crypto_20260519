@@ -17,6 +17,7 @@ from alphafactory_crypto.broad_search.expression import (
 from alphafactory_crypto.broad_search.search_engine_v1 import (
     AGGTRADES_SYSTEM_CANARY_FIELDS,
     V11_ARMS,
+    V11_DEFAULT_RUNTIME_DATE,
     V21_PARAMETERS,
     BehaviorArchive,
     HierarchicalTypedCEMV2,
@@ -382,5 +383,17 @@ def test_v11_rejects_an_alternate_runtime_identity(tmp_path: Path) -> None:
         run_engine(
             tmp_path,
             runtime_date="20260728",
+            campaign="search_engine_v1_1",
+        )
+
+
+def test_v11_direct_runner_requires_economic_preflight(tmp_path: Path) -> None:
+    with pytest.raises(
+        RuntimeError,
+        match="ECONOMIC_RECEIPT_PREFLIGHT_REQUIRED",
+    ):
+        run_engine(
+            tmp_path,
+            runtime_date=V11_DEFAULT_RUNTIME_DATE,
             campaign="search_engine_v1_1",
         )

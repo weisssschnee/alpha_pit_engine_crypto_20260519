@@ -8,6 +8,8 @@ import pytest
 from alphafactory_crypto.broad_search.experiment_authority import (
     DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH,
     REQUIRED_REAL_EXPERIMENT_ROLES,
+    _validate_search_economic_receipt,
+    evaluate_search_validation_kill_line,
     require_real_experiment_authority,
     resolve_search_economic_receipt,
     resolve_real_experiment_authorities,
@@ -56,6 +58,7 @@ def test_active_non_formal_authority_is_visible_but_not_formal(tmp_path: Path) -
         tmp_path,
         evidence_to_add="compare a frozen development mechanism",
         decision_to_change="keep or close that mechanism",
+        economic_receipt_required=False,
     )
 
     assert result["result"] == "READY_WITH_NON_FORMAL_BOUNDARIES"
@@ -77,6 +80,7 @@ def test_inactive_bound_component_fails_closed(tmp_path: Path) -> None:
             tmp_path,
             evidence_to_add="compare a frozen development mechanism",
             decision_to_change="keep or close that mechanism",
+            economic_receipt_required=False,
         )
 
 
@@ -88,6 +92,7 @@ def test_missing_information_intent_fails_closed(tmp_path: Path) -> None:
             tmp_path,
             evidence_to_add="TBD",
             decision_to_change="keep or close that mechanism",
+            economic_receipt_required=False,
         )
 
 
@@ -138,7 +143,11 @@ def test_search_economic_receipt_fails_closed_on_target_drift(
         RuntimeError,
         match="SEARCH_ECONOMIC_RECEIPT_BLOCKED: execution.price_field",
     ):
-        resolve_search_economic_receipt(repo_root, receipt_path=changed)
+        _validate_search_economic_receipt(
+            repo_root,
+            receipt,
+            receipt_path_label=str(changed),
+        )
 
 
 def test_search_economic_receipt_cannot_open_run_authority_by_itself() -> None:
@@ -152,8 +161,42 @@ def test_search_economic_receipt_cannot_open_run_authority_by_itself() -> None:
             repo_root,
             evidence_to_add="fresh development policy productivity evidence",
             decision_to_change="qualify or reject a future search arm",
-            economic_receipt_required=True,
         )
+
+
+def test_validation_kill_line_is_pure_and_fail_closed() -> None:
+    passed = evaluate_search_validation_kill_line(
+        {
+            "validation_net_mean": 0.001,
+            "validation_nonoverlap_floor_sortino": 0.2,
+            "validation_matched_increment": 0.0001,
+            "validation_control_not_dominant": True,
+        }
+    )
+    assert passed["result"] == "PASS_CONTINUE_FROZEN_ARM"
+    assert passed["passed"] is True
+    failed = evaluate_search_validation_kill_line(
+        {
+            "validation_net_mean": 0.001,
+            "validation_nonoverlap_floor_sortino": -0.2,
+            "validation_matched_increment": 0.0001,
+            "validation_control_not_dominant": True,
+        }
+    )
+    assert failed == {
+        "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+        "passed": False,
+        "conditions": {
+            "validation_net_mean_positive": True,
+            "validation_nonoverlap_floor_sortino_positive": False,
+            "validation_matched_increment_positive": True,
+            "validation_control_not_dominant": True,
+        },
+        "optimizer_feedback_written": False,
+        "policy_memory_written": False,
+        "candidate_generation_performed": False,
+        "holdout_read": False,
+    }
 
 
 def test_committed_current_blocks_inactive_search_economic_roles() -> None:
@@ -165,6 +208,7 @@ def test_committed_current_blocks_inactive_search_economic_roles() -> None:
         "target:INACTIVE_AUTHORITY",
         "optimizer_reward:INACTIVE_AUTHORITY",
         "execution_price:INACTIVE_AUTHORITY",
+        "cost:INACTIVE_AUTHORITY",
         "validation_role:INACTIVE_AUTHORITY",
     }
     current = json.loads(

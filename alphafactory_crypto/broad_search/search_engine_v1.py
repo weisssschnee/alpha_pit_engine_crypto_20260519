@@ -3788,6 +3788,7 @@ def _policy_observe(
 _WORKER_STORE: RawPanelStore | None = None
 _WORKER_REGISTRY: TypedExpressionRegistry | None = None
 _WORKER_BEHAVIOR_CONTRACT: Mapping[str, Any] | None = None
+_WORKER_ECONOMIC_RECEIPT: Mapping[str, Any] | None = None
 _WORKER_BLOCK_START = ADAPTIVE_START
 _WORKER_BLOCK_END = ADAPTIVE_END
 _WORKER_BLOCK_ROLE = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1"
@@ -3800,12 +3801,17 @@ def _worker_initialize(
     block_start: str = ADAPTIVE_START,
     block_end: str = ADAPTIVE_END,
     block_role: str = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1",
+    economic_receipt: Mapping[str, Any] | None = None,
 ) -> None:
     global _WORKER_STORE, _WORKER_REGISTRY, _WORKER_BEHAVIOR_CONTRACT
+    global _WORKER_ECONOMIC_RECEIPT
     global _WORKER_BLOCK_START, _WORKER_BLOCK_END, _WORKER_BLOCK_ROLE
     _WORKER_STORE = RawPanelStore.open(Path(cache_root))
     _WORKER_REGISTRY = TypedExpressionRegistry(_contracts_from_payload(contract_rows))
     _WORKER_BEHAVIOR_CONTRACT = dict(behavior_contract)
+    _WORKER_ECONOMIC_RECEIPT = (
+        dict(economic_receipt) if economic_receipt is not None else None
+    )
     _WORKER_BLOCK_START = str(block_start)
     _WORKER_BLOCK_END = str(block_end)
     _WORKER_BLOCK_ROLE = str(block_role)
@@ -3834,6 +3840,7 @@ def _worker_evaluate(candidate_payload: Mapping[str, Any]) -> dict[str, Any]:
             block_end=_WORKER_BLOCK_END,
             block_role=_WORKER_BLOCK_ROLE,
             behavior_contract=_WORKER_BEHAVIOR_CONTRACT,
+            economic_receipt=_WORKER_ECONOMIC_RECEIPT,
         )
     except MemoryError as failure:
         error = type(failure).__name__ + ":" + str(failure)
@@ -6161,6 +6168,44 @@ def _v13_report_text(decision: Mapping[str, Any]) -> str:
 """
 
 
+def _require_bound_economic_run(
+    repo_root: Path,
+    authority_preflight: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    if not isinstance(authority_preflight, Mapping):
+        raise RuntimeError("ECONOMIC_RECEIPT_PREFLIGHT_REQUIRED")
+    from alphafactory_crypto.broad_search.experiment_authority import (
+        require_real_experiment_authority,
+    )
+
+    verified = require_real_experiment_authority(
+        repo_root,
+        evidence_to_add=str(authority_preflight.get("evidence_to_add") or ""),
+        decision_to_change=str(
+            authority_preflight.get("decision_to_change") or ""
+        ),
+    )
+    if verified != dict(authority_preflight):
+        raise RuntimeError("ECONOMIC_RECEIPT_PREFLIGHT_CHANGED")
+    receipt = verified.get("economic_receipt")
+    if not isinstance(receipt, Mapping) or receipt.get("run_authorized") is not True:
+        raise RuntimeError("ECONOMIC_RECEIPT_RUN_NOT_AUTHORIZED")
+    return dict(receipt)
+
+
+def _bind_economic_receipt(
+    frozen: Mapping[str, Any],
+    receipt: Mapping[str, Any],
+) -> dict[str, Any]:
+    payload = {
+        key: value
+        for key, value in frozen.items()
+        if key != "frozen_contract_sha256"
+    }
+    payload["economic_receipt"] = dict(receipt)
+    return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
 def run_engine(
     repo_root: Path,
     *,
@@ -6168,6 +6213,7 @@ def run_engine(
     source_sha: str | None = None,
     campaign: str = "legacy",
     carrier_id: str | None = None,
+    authority_preflight: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     if campaign not in {
         "legacy",
@@ -6290,6 +6336,10 @@ def run_engine(
         wall_time_limit = WALL_TIME_LIMIT_SECONDS
         campaign_arms = FIRST_CHECKPOINT_ARMS
         block_role = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1"
+    economic_receipt = _require_bound_economic_run(
+        repo_root,
+        authority_preflight,
+    )
     observed_source = _git_sha(repo_root)
     source_sha = (source_sha or observed_source).lower()
     if source_sha != observed_source:
@@ -6493,6 +6543,7 @@ def run_engine(
                 block_start,
                 block_end,
                 block_role,
+                economic_receipt,
             ),
         )
 
@@ -9403,6 +9454,7 @@ def _v14_run_fixed_stage(
     checkpoint_size: int,
     raw_attempt_limit: int,
     wall_deadline: float,
+    economic_receipt: Mapping[str, Any],
 ) -> tuple[int, int, bool]:
     registry = TypedExpressionRegistry(contracts)
     domains = _v14_domains(contracts)
@@ -9438,6 +9490,7 @@ def _v14_run_fixed_stage(
             block_start,
             block_end,
             f"FRESH_STATE_V14_{stage}",
+            economic_receipt,
         ),
     )
     try:
@@ -9539,6 +9592,7 @@ def _v14_run_fixed_stage(
                         block_start,
                         block_end,
                         f"FRESH_STATE_V14_{stage}",
+                        economic_receipt,
                     ),
                 )
             for (candidate, attempt_ordinal, operation), worker in zip(
@@ -9644,9 +9698,14 @@ def run_v14(
     *,
     runtime_date: str = V14_DEFAULT_RUNTIME_DATE,
     source_sha: str | None = None,
+    authority_preflight: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     if runtime_date != V14_DEFAULT_RUNTIME_DATE:
         raise ValueError("Search Engine V1.4 runtime date changed")
+    economic_receipt = _require_bound_economic_run(
+        repo_root,
+        authority_preflight,
+    )
     source_sha = str(source_sha or _git_sha(repo_root)).lower()
     if source_sha != _git_sha(repo_root).lower():
         raise ValueError("Search Engine V1.4 source SHA must equal checkout HEAD")
@@ -9695,6 +9754,8 @@ def run_v14(
         identities=identities,
         config=config,
     )
+    frozen = _bind_economic_receipt(frozen, economic_receipt)
+    frozen = _bind_economic_receipt(frozen, economic_receipt)
     frozen_hash = str(frozen["frozen_contract_sha256"])
     frozen_path = runtime_root / "frozen_contract.json"
     if frozen_path.is_file() and _read_json(frozen_path) != frozen:
@@ -9779,6 +9840,7 @@ def run_v14(
                 checkpoint_size=V14_STAGE_A_COUNT,
                 raw_attempt_limit=raw_attempt_limit,
                 wall_deadline=wall_deadline,
+                economic_receipt=economic_receipt,
             )
         stage_a_metrics = _v14_stage_metrics(ledger, stage="STAGE_A")
         stage_a_rows = [
@@ -9860,6 +9922,7 @@ def run_v14(
                 checkpoint_size=V14_STAGE_B_CHECKPOINT_SIZE,
                 raw_attempt_limit=raw_attempt_limit,
                 wall_deadline=wall_deadline,
+                economic_receipt=economic_receipt,
             )
             memory_fallback = memory_fallback or local_fallback
     except _EngineBudgetExhausted as failure:
@@ -10340,7 +10403,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--carrier-id", choices=CARRIER_GATE_IDS)
     parser.add_argument("--evidence-to-add")
     parser.add_argument("--decision-to-change")
-    parser.add_argument("--economic-receipt")
     args = parser.parse_args(argv)
     repo_root = Path(__file__).resolve().parents[2]
     authority_preflight = None
@@ -10353,12 +10415,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             repo_root,
             evidence_to_add=args.evidence_to_add,
             decision_to_change=args.decision_to_change,
-            economic_receipt_required=True,
-            economic_receipt_path=(
-                Path(args.economic_receipt).resolve()
-                if args.economic_receipt
-                else None
-            ),
         )
         print(
             json.dumps(
@@ -10373,6 +10429,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             repo_root,
             runtime_date=str(args.runtime_date or DEFAULT_RUNTIME_DATE),
             source_sha=args.source_sha,
+            authority_preflight=authority_preflight,
         )
     elif args.command == "check":
         result = check_engine(
@@ -10388,6 +10445,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             source_sha=args.source_sha,
             campaign="carrier_gate_v1",
             carrier_id=args.carrier_id,
+            authority_preflight=authority_preflight,
         )
     elif args.command == "build-canary-cache":
         source_sha = str(args.source_sha or _git_sha(repo_root)).lower()
@@ -10409,6 +10467,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             ),
             source_sha=args.source_sha,
             campaign="aggtrades_system_canary",
+            authority_preflight=authority_preflight,
         )
     elif args.command == "check-canary":
         result = check_aggtrades_canary(
@@ -10423,6 +10482,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             runtime_date=str(args.runtime_date or V11_DEFAULT_RUNTIME_DATE),
             source_sha=args.source_sha,
             campaign="search_engine_v1_1",
+            authority_preflight=authority_preflight,
         )
     elif args.command == "check-v11":
         result = check_v11(
@@ -10435,6 +10495,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             runtime_date=str(args.runtime_date or V12_DEFAULT_RUNTIME_DATE),
             source_sha=args.source_sha,
             campaign="search_engine_v1_2",
+            authority_preflight=authority_preflight,
         )
     elif args.command == "run-v13":
         result = run_engine(
@@ -10442,6 +10503,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             runtime_date=str(args.runtime_date or V13_DEFAULT_RUNTIME_DATE),
             source_sha=args.source_sha,
             campaign="search_engine_v1_3_cross_carrier",
+            authority_preflight=authority_preflight,
         )
     elif args.command == "check-v13":
         result = check_v13(
@@ -10468,6 +10530,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             repo_root,
             runtime_date=str(args.runtime_date or V14_DEFAULT_RUNTIME_DATE),
             source_sha=args.source_sha,
+            authority_preflight=authority_preflight,
         )
     elif args.command == "check-v14":
         result = check_v14(

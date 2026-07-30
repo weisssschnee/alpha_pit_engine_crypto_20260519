@@ -14,9 +14,12 @@ from typing import Any, Callable, Iterable, Mapping, Sequence
 import numpy as np
 
 from alphafactory_crypto.instrument_capability.mapping import (
-    CROSS_SECTIONAL_ZERO_NET,
     DEFAULT_MAPPING_CONTRACTS,
     mapping_contract_sha256,
+)
+from alphafactory_crypto.instrument_canary.grammar import (
+    CROSS_SECTIONAL_RELATIVE,
+    MECHANISM_MAPPING,
 )
 from scipy.stats import rankdata
 
@@ -51,6 +54,15 @@ MECHANISM_FAMILIES = (
     "CROSS_ASSET_RELATIVE_STATE",
     "STATE_REGIME_MODULATION",
 )
+
+
+def mapping_id_for_mechanism_family(mechanism_family: str) -> str:
+    """Resolve Broad mechanisms through the existing canonical mapping table."""
+
+    family = str(mechanism_family)
+    if family not in MECHANISM_FAMILIES and not family.startswith("CONDITIONAL_"):
+        raise ValueError(f"unknown Broad mechanism family: {family}")
+    return str(MECHANISM_MAPPING[CROSS_SECTIONAL_RELATIVE])
 
 
 def _payload_sha(value: Any) -> str:
@@ -638,12 +650,13 @@ def candidate_from_genes(
     control_assurance = registry.validate(control)
     if assurance.raw_fields != control_assurance.raw_fields:
         raise AssertionError("matched control changed the raw-input contract")
+    mapping_id = mapping_id_for_mechanism_family(skeleton.mechanism_family)
     payload = {
         "skeleton_id": skeleton.skeleton_id,
         "expression": expression.canonical_dict(),
         "control": control.canonical_dict(),
         "horizon_hours": genome["horizon_hours"],
-        "mapping_id": CROSS_SECTIONAL_ZERO_NET,
+        "mapping_id": mapping_id,
     }
     raw_fields = assurance.raw_fields
     return CandidateSpec(
@@ -653,7 +666,7 @@ def candidate_from_genes(
         expression,
         control,
         genome["horizon_hours"],
-        CROSS_SECTIONAL_ZERO_NET,
+        mapping_id,
         raw_fields,
         tuple(infer_family(field_id) for field_id in raw_fields),
         assurance.rolling_windows,
@@ -921,21 +934,23 @@ def conditional_candidate_from_genes(
     control_assurance = registry.validate(control)
     if assurance.raw_fields != control_assurance.raw_fields:
         raise AssertionError("conditional control changed the raw-input contract")
+    mechanism_family = f"CONDITIONAL_{semantic_tuple}"
+    mapping_id = mapping_id_for_mechanism_family(mechanism_family)
     payload = {
         "skeleton_id": f"conditional::{semantic_tuple.lower()}",
         "expression": expression.canonical_dict(),
         "control": control.canonical_dict(),
         "horizon_hours": genome["horizon_hours"],
-        "mapping_id": CROSS_SECTIONAL_ZERO_NET,
+        "mapping_id": mapping_id,
     }
     return CandidateSpec(
         _payload_sha(payload),
         payload["skeleton_id"],
-        f"CONDITIONAL_{semantic_tuple}",
+        mechanism_family,
         expression,
         control,
         genome["horizon_hours"],
-        CROSS_SECTIONAL_ZERO_NET,
+        mapping_id,
         assurance.raw_fields,
         tuple(infer_family(field_id) for field_id in assurance.raw_fields),
         assurance.rolling_windows,
@@ -1326,7 +1341,11 @@ def audit_numeric_expressivity(
     attempted_by_skeleton: dict[str, int] = {}
     valid_by_skeleton: dict[str, int] = {}
     failures_by_skeleton: dict[str, dict[str, int]] = {}
-    mapping = DEFAULT_MAPPING_CONTRACTS[CROSS_SECTIONAL_ZERO_NET]
+    mapping_ids = {candidate.mapping_id for candidate in sample}
+    if len(mapping_ids) != 1:
+        raise ValueError("numeric expressivity audit requires one mapping contract")
+    mapping_id = next(iter(mapping_ids))
+    mapping = DEFAULT_MAPPING_CONTRACTS[mapping_id]
     leaf_cache: dict[str, np.ndarray] = {}
     checkpoint_path = checkpoint_path or store.cache_root / "expressivity_checkpoint.json"
     checkpoint_identity = _payload_sha(
@@ -1485,7 +1504,7 @@ def audit_numeric_expressivity(
         "behavior_unique_over_audited_exact": behavior_ratio,
         "matched_control_valid": controls_valid,
         "matched_control_valid_rate": control_rate,
-        "mapping_id": CROSS_SECTIONAL_ZERO_NET,
+        "mapping_id": mapping_id,
         "mapping_hash": mapping_contract_sha256(mapping),
         "probe": {
             "assets": eligible.shape[0],
@@ -1538,6 +1557,7 @@ __all__ = [
     "field_role_coverage",
     "generate_candidate",
     "generate_structural_pool",
+    "mapping_id_for_mechanism_family",
     "operator_path",
     "skeleton_payload",
     "skeleton_registry",

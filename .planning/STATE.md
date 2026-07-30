@@ -31,16 +31,18 @@ Research remains `HOLD`; adaptive search has not started. A distinct fresh
 validation kill-line and read-only holdout must be bound before any future
 adaptive market campaign.
 
-`CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` now closes that source-binding gap without
-creating another evaluator. It resolves Skeleton mechanism hypotheses,
-A7Reward train-frozen orientation and validation aggregation, the formal
-explicit mapping and its full-L1 5 bps cost, the existing Binance USD-M
-delayed-open target, and the retained joint standalone-plus-matched Sortino
-reward into one content-hashed campaign receipt. Train, no-feedback
-development validation, and unreadable holdout roles are non-overlapping.
-Canonical `run*` preflight validates the receipt, but
-`run_authorized=false` remains a hard blocker. No market evaluation, search,
-sealed read, policy update, or promotion occurred.
+`CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` now closes the source-level binding gap
+without creating another evaluator. It resolves Skeleton hypotheses through
+the existing mechanism-to-mapping authority, consumes A7Reward's train-frozen
+orientation in the retained pair evaluator, retains the formal explicit
+mapping, binds the existing Binance USD-M delayed-open target, and uses the
+joint standalone-plus-matched Sortino reward. The full-L1 5 bps cost remains a
+NON_FORMAL Binance venue assumption, not a venue-qualified authority. A new
+pure validation kill-line consumes only frozen validation metrics; it cannot
+read test/recent/stress/holdout or write optimizer state. All referenced source
+hashes are frozen. Canonical and direct runner entry points revalidate the
+receipt, but `run_authorized=false` remains a hard blocker. No market
+evaluation, search, sealed read, policy update, or promotion occurred.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new
 candidate evaluations and zero market budget. It found that `666/1,200` Stage-B
@@ -327,7 +329,7 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
 3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
 4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2` is source-qualified for future fresh-state use but remains inactive until the rest of the economic receipt closes. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
-5. Treat `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` as the sole successor source binding for mechanism, train-frozen orientation, portfolio role and formal mapping, Binance USD-M target/execution, mapping-owned full-L1 5 bps cost, train-only joint reward, distinct no-feedback validation kill-line, unreadable holdout, and fresh-state requirements. Do not duplicate these components. The receipt remains run-inactive and cannot authorize a market campaign by itself.
+5. Treat `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` as the sole successor source binding for mechanism, train-frozen orientation, portfolio role and formal mapping, Binance USD-M target/execution, the NON_FORMAL frozen 5 bps venue assumption, train-only joint reward, distinct no-feedback validation kill-line, unreadable holdout, and fresh-state requirements. Do not duplicate these components. The receipt remains run-inactive and cannot authorize a market campaign by itself.
 6. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
 7. Do not launch another large search until separately authorized over an admitted new release. Latent search priority remains deferred after V1.2 and cannot influence budget.
 8. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
@@ -355,7 +357,7 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 - Search Engine V1 now has a source-qualified distinct validation kill-line contract. It is NON_FORMAL, makes no optimizer feedback writes, and is not runtime- or market-verified. The historical report-only block remains spent and is not reused.
-- Search Engine V1 now has one enforced source-level economic-semantics receipt over existing components. It remains `run_authorized=false`; the active CLI cannot spend market budget from source qualification alone, and no runtime claim is made that a fresh candidate ledger has yet persisted the receipt-bound orientation and execution identities.
+- Search Engine V1 now has one enforced source-level economic-semantics receipt over existing components. Both CLI and direct runner entry points re-resolve it; alternate receipt paths are not accepted, component hashes must match, and `run_authorized` must remain false under this schema. The pair evaluator has a receipt-bound train-orientation path, but no fresh candidate ledger has executed it and no runtime qualification is claimed.
 
 ## Source-of-truth order
 
@@ -394,12 +396,13 @@ authority.
 
 ADR 0015 records the preflight and ADR 0016 records the active-authority rule,
 economic authority suspension, reuse map, and successor receipt. The current
-target, optimizer-reward, execution-price, and validation bindings remain
-NON_FORMAL and run-inactive. Cost resolves to the formal explicit mapping
-authority. Canonical `run*` additionally verifies the content-hashed successor
-receipt and rejects its current `run_authorized=false`, so a fresh run fails
-closed. No market experiment, candidate evaluation, OOS access, promotion, or
-large budget was run or authorized by the implementation.
+target, optimizer-reward, execution-price, cost, and validation bindings remain
+NON_FORMAL and run-inactive. Portfolio mapping remains formal; that does not
+promote the venue cost assumption. Canonical and direct `run*` entry points
+additionally verify the content-hashed successor receipt and reject its
+hard-false `run_authorized`, so a fresh run fails closed. No market experiment,
+candidate evaluation, OOS access, promotion, or large budget was run or
+authorized by the implementation.
 
 ## Crypto reward uncertainty V2 source repair
 
