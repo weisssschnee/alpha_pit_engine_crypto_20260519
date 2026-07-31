@@ -26,6 +26,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _budget_exhausted_report_text,
     _final_decision,
     _initial_policies,
+    _proposal_liveness_preflight,
     _search_ordering_reward,
 )
 from alphafactory_crypto.broad_search.pair18m import SEARCH_REWARD_AUTHORITY
@@ -96,6 +97,59 @@ def test_frozen_v1_controls_reuse_partial_carrier_role_surface() -> None:
         candidate, _ = policy.propose()
         assert candidate.raw_fields
         assert set(candidate.raw_fields).issubset(registry.fields)
+
+
+def test_all_policy_lanes_pass_zero_market_proposal_liveness_preflight() -> None:
+    registry = TypedExpressionRegistry(
+        (
+            FieldContract(
+                "bybit__mark_price_last", "PRICE", "quote_per_base"
+            ),
+            FieldContract(
+                "bybit__funding_rate_last", "RETURN", "dimensionless"
+            ),
+            FieldContract(
+                "signed_aggressor_notional", "NOTIONAL", "quote_asset"
+            ),
+        )
+    )
+    result = _proposal_liveness_preflight(
+        registry,
+        arms=(
+            "canonical_typed_random",
+            "cem_distribution_v1",
+            "evolutionary_typed_v1",
+            "hierarchical_typed_cem_v2",
+            "typed_evolution_v2",
+        ),
+        seeds=SEEDS,
+    )
+
+    assert result["status"] == "PASS"
+    assert result["lane_count_expected"] == 5 * len(SEEDS)
+    assert result["lane_count_passed"] == result["lane_count_expected"]
+    assert result["market_evaluations"] == 0
+    assert result["reward_reads"] == 0
+    assert all(row["matched_control_constructible"] for row in result["records"])
+    assert all(row["deterministic_replay_verified"] for row in result["records"])
+
+
+def test_proposal_liveness_preflight_fails_closed_on_unexpected_error(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def fail_proposal(*_args, **_kwargs):
+        raise ValueError("deterministic role resolver defect")
+
+    monkeypatch.setattr(
+        "alphafactory_crypto.broad_search.search_engine_v1._policy_propose",
+        fail_proposal,
+    )
+    with pytest.raises(RuntimeError, match="PROPOSAL_LIVENESS_PREFLIGHT_FAILED"):
+        _proposal_liveness_preflight(
+            _registry(),
+            arms=("canonical_typed_random",),
+            seeds=(SEEDS[0],),
+        )
 
 
 def test_budget_exhausted_closure_preserves_partial_evidence_boundaries() -> None:

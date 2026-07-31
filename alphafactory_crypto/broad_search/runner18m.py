@@ -919,21 +919,36 @@ class LanePolicy:
             skeleton, parent_id = self._choose_skeleton()
         candidate: CandidateSpec | None = None
         duplicate_resamples = 0
+        generation_rejects = 0
+        last_generation_reject: str | None = None
         limit = int(self.parameters.get("duplicate_resample_limit", 16))
         for duplicate_resamples in range(limit + 1):
-            candidate = (
-                self._propose_cem_candidate()
-                if self.policy == "cem_distribution_v1"
-                else generate_candidate(
-                    self.registry,
-                    skeleton=skeleton,
-                    rng=self.rng,
-                    roles=self.roles,
+            try:
+                candidate = (
+                    self._propose_cem_candidate()
+                    if self.policy == "cem_distribution_v1"
+                    else generate_candidate(
+                        self.registry,
+                        skeleton=skeleton,
+                        rng=self.rng,
+                        roles=self.roles,
+                    )
                 )
-            )
+            except ValueError as failure:
+                # Compile-domain rejects are part of the raw proposal stream.
+                # A completely incompatible role surface is still caught by
+                # the bounded liveness preflight before market evaluation.
+                generation_rejects += 1
+                last_generation_reject = str(failure)
+                candidate = None
+                continue
             if candidate.candidate_id not in self.seen:
                 break
-        assert candidate is not None
+        if candidate is None:
+            raise RuntimeError(
+                "generation resample limit exhausted:"
+                + str(last_generation_reject or "UNKNOWN_COMPILE_DOMAIN_REJECT")
+            )
         if candidate.candidate_id in self.seen:
             raise RuntimeError("duplicate resample limit exhausted")
         changed: list[str] = []
@@ -959,6 +974,7 @@ class LanePolicy:
             else None,
             "mutation_receipt_verified": None,
             "duplicate_resamples": duplicate_resamples,
+            "generation_rejects": generation_rejects,
             "first_visit": True,
             "cache_hit": False,
             "cumulative_skeleton_exposure": self.skeleton_visits[candidate.skeleton_id],
@@ -992,36 +1008,53 @@ class LanePolicy:
         receipt: dict[str, Any] | None = None
         verified: bool | None = None
         duplicate_resamples = 0
+        generation_rejects = 0
+        last_generation_reject: str | None = None
         skeletons = self._skeletons()
         for duplicate_resamples in range(limit + 1):
-            if explore:
-                skeleton = skeletons[(self.step + self.seed + duplicate_resamples) % len(skeletons)]
-                candidate = generate_candidate(
-                    self.registry,
-                    skeleton=skeleton,
-                    rng=self.rng,
-                    roles=self.roles,
-                )
-                parent_id = None
-                receipt = None
-                verified = None
-            else:
-                parent = self._typed_evolution_parent()
-                parent_id = parent.candidate_id
-                candidate, receipt = typed_mutate_candidate(
-                    self.registry,
-                    parent=parent,
-                    rng=self.rng,
-                    roles=self.roles,
-                )
-                verified = verify_typed_mutation_receipt(
-                    self.registry, parent, candidate, receipt
-                )
-                if not verified:
-                    raise RuntimeError("typed mutation receipt verification failed")
+            try:
+                if explore:
+                    skeleton = skeletons[
+                        (self.step + self.seed + duplicate_resamples)
+                        % len(skeletons)
+                    ]
+                    candidate = generate_candidate(
+                        self.registry,
+                        skeleton=skeleton,
+                        rng=self.rng,
+                        roles=self.roles,
+                    )
+                    parent_id = None
+                    receipt = None
+                    verified = None
+                else:
+                    parent = self._typed_evolution_parent()
+                    parent_id = parent.candidate_id
+                    candidate, receipt = typed_mutate_candidate(
+                        self.registry,
+                        parent=parent,
+                        rng=self.rng,
+                        roles=self.roles,
+                    )
+                    verified = verify_typed_mutation_receipt(
+                        self.registry, parent, candidate, receipt
+                    )
+                    if not verified:
+                        raise RuntimeError(
+                            "typed mutation receipt verification failed"
+                        )
+            except ValueError as failure:
+                generation_rejects += 1
+                last_generation_reject = str(failure)
+                candidate = None
+                continue
             if candidate.candidate_id not in self.seen:
                 break
-        assert candidate is not None
+        if candidate is None:
+            raise RuntimeError(
+                "generation resample limit exhausted:"
+                + str(last_generation_reject or "UNKNOWN_COMPILE_DOMAIN_REJECT")
+            )
         if candidate.candidate_id in self.seen:
             raise RuntimeError("duplicate resample limit exhausted")
         self.seen.add(candidate.candidate_id)
@@ -1035,6 +1068,7 @@ class LanePolicy:
             "mutation_receipt": receipt,
             "mutation_receipt_verified": verified,
             "duplicate_resamples": duplicate_resamples,
+            "generation_rejects": generation_rejects,
             "first_visit": True,
             "cache_hit": False,
             "cumulative_skeleton_exposure": self.skeleton_visits[candidate.skeleton_id],

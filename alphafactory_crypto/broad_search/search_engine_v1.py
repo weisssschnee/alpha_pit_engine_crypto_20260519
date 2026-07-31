@@ -3794,7 +3794,22 @@ def _policy_propose(
         return policy.propose(archive)
     if isinstance(policy, HierarchicalTypedCEMV2):
         return policy.propose()
-    candidate, metadata = policy.propose()
+    try:
+        candidate, metadata = policy.propose()
+    except RuntimeError as failure:
+        # LanePolicy predates the bounded proposal-failure type.  Preserve its
+        # one known, retryable search-space underfill while allowing every
+        # configuration, role, receipt, and replay defect to fail closed.
+        if (
+            str(failure) != "duplicate resample limit exhausted"
+            and not str(failure).startswith("generation resample limit exhausted:")
+        ):
+            raise
+        raise _ProposalGenerationFailure(
+            str(failure),
+            raw_attempts=int(policy.parameters.get("duplicate_resample_limit", 16))
+            + 1,
+        ) from failure
     receipt = metadata.get("mutation_receipt")
     operation = {
         "canonical_typed_random": "CANONICAL_TYPED_RANDOM_SAMPLE",
@@ -3814,6 +3829,75 @@ def _policy_propose(
         "raw_attempts": int(metadata.get("duplicate_resamples", 0)) + 1,
         "policy_diagnostics": metadata.get("policy_diagnostics", {}),
     }
+
+
+def _proposal_liveness_preflight(
+    registry: TypedExpressionRegistry,
+    *,
+    arms: Sequence[str],
+    seeds: Sequence[int],
+) -> dict[str, Any]:
+    """Prove every frozen policy lane can emit one legal proposal, without reward."""
+
+    policies = _initial_policies(registry, arms=arms, seeds=seeds)
+    roles = field_role_surface(tuple(registry.fields.values()))["roles"]
+    archive = BehaviorArchive()
+    records: list[dict[str, Any]] = []
+    failures: list[dict[str, str]] = []
+    for policy_key in sorted(policies):
+        policy = policies[policy_key]
+        try:
+            candidate, metadata = _policy_propose(policy, archive)
+            field_scope_verified = set(candidate.raw_fields).issubset(registry.fields)
+            replay_verified = _candidate_rebuild_verified(
+                registry, candidate, roles
+            )
+            if not field_scope_verified or not replay_verified:
+                raise RuntimeError(
+                    "proposal failed field-scope or deterministic replay proof"
+                )
+            records.append(
+                {
+                    "policy_key": policy_key,
+                    "arm": policy_key.rsplit("|", 1)[0],
+                    "seed": int(policy_key.rsplit("|", 1)[1]),
+                    "candidate_id": candidate.candidate_id,
+                    "skeleton_id": candidate.skeleton_id,
+                    "control_expression_id": candidate.control.expression_id,
+                    "operation": str(metadata["operation"]),
+                    "raw_attempts": int(metadata["raw_attempts"]),
+                    "field_scope_verified": True,
+                    "matched_control_constructible": True,
+                    "deterministic_replay_verified": True,
+                }
+            )
+        except (RuntimeError, ValueError, KeyError) as failure:
+            failures.append(
+                {
+                    "policy_key": policy_key,
+                    "failure_type": type(failure).__name__,
+                    "failure_message": str(failure),
+                }
+            )
+    result = {
+        "schema_version": 1,
+        "status": "PASS" if not failures else "FAIL",
+        "authority": "SOURCE_ONLY_PROPOSAL_LIVENESS_PREFLIGHT",
+        "lane_count_expected": len(policies),
+        "lane_count_passed": len(records),
+        "market_evaluations": 0,
+        "reward_reads": 0,
+        "strict_candidates_consumed_outside_campaign": 0,
+        "records": records,
+        "failures": failures,
+    }
+    result["proposal_liveness_sha256"] = _payload_sha(result)
+    if failures:
+        raise RuntimeError(
+            "PROPOSAL_LIVENESS_PREFLIGHT_FAILED:"
+            + json.dumps(failures, sort_keys=True, separators=(",", ":"))
+        )
+    return result
 
 
 def _policy_reject(policy: PolicyType, candidate: CandidateSpec) -> None:
@@ -7933,6 +8017,11 @@ def run_engine(
         block_start = ADAPTIVE_START
         block_end = ADAPTIVE_END
     registry = TypedExpressionRegistry(contracts)
+    proposal_liveness = _proposal_liveness_preflight(
+        registry,
+        arms=campaign_arms,
+        seeds=SEEDS,
+    )
     compiler_binding = _compiler_binding(repo_root)
     environment = _environment_fingerprint()
     if is_economic:
@@ -8052,6 +8141,7 @@ def run_engine(
                 "memory_gate_bytes": MEMORY_GATE_BYTES,
                 "available_memory_bytes": int(psutil.virtual_memory().available),
                 "strict_candidates_consumed_outside_campaign": 0,
+                "proposal_liveness": proposal_liveness,
             },
         )
 
@@ -8319,7 +8409,7 @@ def run_engine(
                     proposal_cpu_started = time.process_time()
                     try:
                         candidate, metadata = _policy_propose(policy, archive)
-                    except (RuntimeError, ValueError) as failure:
+                    except _ProposalGenerationFailure as failure:
                         proposal_cpu = time.process_time() - proposal_cpu_started
                         failed_raw_attempts = int(
                             getattr(failure, "raw_attempts", 1)
@@ -8623,6 +8713,7 @@ def run_engine(
                         or available_memory < MEMORY_GATE_BYTES
                     )
                     preflight = {
+                        **_read_json(runtime_root / "embedded_preflight.json"),
                         "schema_version": 1,
                         "status": "PASS_10_WORKERS"
                         if not fallback

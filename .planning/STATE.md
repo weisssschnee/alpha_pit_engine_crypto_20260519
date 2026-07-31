@@ -4,7 +4,7 @@ Last updated: 2026-07-31 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ECONOMIC_V1_ENGINE_BUDGET_EXHAUSTED_CLOSED`
+`CRYPTO_SEARCH_ECONOMIC_V1_PROPOSAL_AUTOMATION_REPAIRED_NO_RUN_AUTHORIZED`
 
 The repository-wide authority audit confirms that Search Engine V1 has a
 substantial reusable engineering chain: admitted carriers, PIT/lag contracts,
@@ -64,6 +64,17 @@ discoveries. This is an incomplete, allocation-imbalanced campaign and
 qualifies no arm. The proposal compatibility defect and the budget-exhausted
 report/manifest closure path are fixed at `da7842dabacf7c98e62475014666877eeda86664`;
 the run authorization is now false and cannot launch a second campaign.
+
+The postmortem proposal repair now reuses the proven CN generator discipline
+without importing CN fields, evaluator, calendar, or A-share constraints.
+Every campaign first exercises one source-only proposal from every frozen
+arm/seed lane on the exact admitted carrier, verifies field scope, matched
+control construction, and deterministic replay, and records zero reward reads
+and zero market evaluations. The real 115-field carrier passes all 20 lanes.
+Legacy V1 proposal paths now perform bounded internal compile-domain resampling;
+the rolling engine retries only the explicitly typed bounded-underfill failure.
+Unexpected role, configuration, receipt, or replay errors fail closed instead
+of being counted indefinitely as ordinary proposal rejection.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new
 candidate evaluations and zero market budget. It found that `666/1,200` Stage-B
@@ -453,9 +464,11 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Run the one authorized `crypto_search_economic_v1` campaign using the committed
-receipt, 115-field aligned carrier, 10 workers, frozen seeds, 2,000-candidate
-checkpoints, and existing budget/validation exits. Do not redesign components,
-reconstruct historical rewards, expand the operator basis, train latent
-priority, open sealed roles, run OOS/challenge/forward, promote candidates,
-tune parameters, change seeds, or start a rescue rerun.
+No market campaign is currently authorized. The consumed 2026-07-31 receipt
+cannot be reused, and the incomplete run cannot be continued or described as a
+rescue rerun. A future attempt requires a distinct user authorization and
+fresh-state receipt; it must retain the exact-carrier proposal-liveness
+preflight and cannot import prior policy, archive, reward, candidate, or RNG
+state. Until then, do not evaluate candidates, reconstruct historical rewards,
+expand the operator basis, train latent priority, open sealed roles, run
+OOS/challenge/forward, promote candidates, tune parameters, or change seeds.
