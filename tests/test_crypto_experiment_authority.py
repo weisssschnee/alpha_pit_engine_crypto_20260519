@@ -177,6 +177,11 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
         "initial_establishment_charged": True,
     }
     assert result["validation"]["optimizer_feedback_allowed"] is False
+    assert result["evidence_partition"] == {
+        "train": result["train"],
+        "validation": result["validation"],
+        "holdout": result["holdout"],
+    }
     assert result["validation_kill_line"]["runtime_symbol"].endswith(
         "apply_search_validation_kill_line"
     )

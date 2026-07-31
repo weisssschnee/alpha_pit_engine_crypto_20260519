@@ -605,6 +605,11 @@ def _validate_search_economic_receipt(
         "execution": execution,
         "cost": observed_cost,
         "optimizer_reward": optimizer_reward,
+        "evidence_partition": {
+            "train": train,
+            "validation": validation,
+            "holdout": holdout,
+        },
         "train": train,
         "validation": validation,
         "holdout": holdout,
