@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "receipt_id": "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V4",
+  "status": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+  "run_authorized": true,
+  "run_authorization": {
+    "decision_id": "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V4_20260731",
+    "authority": "CURRENT_USER_INSTRUCTION",
+    "scope": "ONE_FRESH_STATE_20000_STRICT_MAXIMUM_CAMPAIGN",
+    "cost_interpretation": "RESULTS_CONDITIONAL_ON_FROZEN_5_BPS",
+    "parameter_tuning_allowed": false,
+    "seed_change_allowed": false,
+    "rescue_rerun_allowed": false
+  },
+  "base_receipt_path": "config/crypto_search_economic_receipt_v1.json",
+  "base_receipt_sha256": "21EDD8EAEE4A22B76AC929E2378F14AD44C0BFD496D6AD5F32E74605A66070E2",
+  "search_campaign": {
+    "runner_campaign": "crypto_search_economic_v4"
+  },
+  "validation_kill_line": {
+    "orchestration_campaign": "crypto_search_economic_v4"
+  }
+}

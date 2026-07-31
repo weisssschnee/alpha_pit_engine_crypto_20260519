@@ -11,6 +11,7 @@ from alphafactory_crypto.broad_search.experiment_authority import (
     REQUIRED_REAL_EXPERIMENT_ROLES,
     SEARCH_ECONOMIC_V2_RECEIPT_PATH,
     SEARCH_ECONOMIC_V3_RECEIPT_PATH,
+    SEARCH_ECONOMIC_V4_RECEIPT_PATH,
     _file_sha256,
     _validate_search_economic_receipt,
     evaluate_search_validation_kill_line,
@@ -371,6 +372,29 @@ def test_v3_consumed_receipt_cannot_unlock_another_run() -> None:
             decision_to_change="future new-data Arena arm qualification",
             economic_receipt_path=SEARCH_ECONOMIC_V3_RECEIPT_PATH,
         )
+
+
+def test_v4_search_economic_receipt_unlocks_only_fresh_v4_run() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+
+    receipt = resolve_search_economic_receipt(
+        repo_root,
+        receipt_path=SEARCH_ECONOMIC_V4_RECEIPT_PATH,
+    )
+
+    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+    assert receipt["receipt_path"] == SEARCH_ECONOMIC_V4_RECEIPT_PATH
+    assert receipt["run_authorized"] is True
+    assert receipt["run_outcome"] == {}
+    assert receipt["search_campaign"]["runner_campaign"] == (
+        "crypto_search_economic_v4"
+    )
+    assert receipt["validation_kill_line"]["orchestration_campaign"] == (
+        "crypto_search_economic_v4"
+    )
+    assert receipt["search_campaign"]["field_count"] == 115
+    assert receipt["search_campaign"]["fresh_state"] is True
+    assert receipt["formal_claims_authorized"] is False
 
 
 def test_unregistered_search_economic_receipt_path_fails_closed() -> None:

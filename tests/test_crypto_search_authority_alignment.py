@@ -176,7 +176,7 @@ def test_stationary_bootstrap_is_deterministic_and_order_aware() -> None:
 def test_pair_contract_is_crypto_only_and_has_joint_matched_reward() -> None:
     contract = pair_contract_payload()
 
-    assert contract["schema_version"] == 3
+    assert contract["schema_version"] == 4
     assert contract["market_semantics"]["asset_class"] == "CRYPTO"
     assert contract["market_semantics"]["calendar"] == "CONTINUOUS_UTC"
     assert contract["market_semantics"]["a_share_constraints_applied"] is False

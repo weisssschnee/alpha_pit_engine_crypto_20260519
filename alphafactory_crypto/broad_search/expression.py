@@ -468,7 +468,16 @@ def materialize_expression(
             elif node.operator in {"SafeMul", "RatioInteraction", "StateModulation"}:
                 result = left * right
             elif node.operator in {"SafeDiv", "FlowPerTrade", "FlowPerNotional", "PriceImpactRatio"}:
-                result = left / np.where(np.abs(right) > epsilon, right, np.where(right < 0, -epsilon, epsilon))
+                denominator = np.where(
+                    np.isfinite(right),
+                    np.where(
+                        np.abs(right) > epsilon,
+                        right,
+                        np.where(right < 0, -epsilon, epsilon),
+                    ),
+                    np.nan,
+                )
+                result = left / denominator
             elif node.operator == "NormalizedDifference":
                 result = (left - right) / (np.abs(left) + np.abs(right) + epsilon)
             elif node.operator == "Residual":
@@ -476,7 +485,12 @@ def materialize_expression(
                 result = left - beta * right
             elif node.operator == "ConditionGate":
                 threshold = float(node.parameters.get("threshold", 0.0))
-                result = np.where(right > threshold, left, 0.0)
+                finite_support = np.isfinite(left) & np.isfinite(right)
+                result = np.where(
+                    finite_support,
+                    np.where(right > threshold, left, 0.0),
+                    np.nan,
+                )
             elif node.operator == "CrossAssetRelative":
                 result = left - _cross_sectional_robust_zscore(right, epsilon)
             elif node.operator == "SupportMatchedPayload":

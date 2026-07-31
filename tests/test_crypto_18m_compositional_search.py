@@ -257,6 +257,88 @@ class _FakeStore:
         return slice(0, self.shape[1])
 
 
+class _WarmupStore:
+    def __init__(self) -> None:
+        rng = np.random.default_rng(1701)
+        self.shape = (6, 12)
+        self._fields = {
+            "a": rng.normal(size=self.shape),
+            "b": rng.normal(size=self.shape),
+        }
+        self._eligible = np.ones(self.shape, dtype=bool)
+        self._target = rng.normal(scale=0.001, size=self.shape)
+        start = np.datetime64("2023-07-01T00:00:00", "ns").astype(np.int64)
+        self.timestamp_ns = (
+            start
+            + np.arange(self.shape[1], dtype=np.int64) * 3_600_000_000_000
+        )
+
+    def field(self, name: str) -> np.ndarray:
+        return self._fields[name]
+
+    def base_eligible(self) -> np.ndarray:
+        return self._eligible
+
+    def target_return(self, horizon: int) -> np.ndarray:
+        assert horizon == 1
+        return self._target
+
+    def block_slice(self, start: str, end: str) -> slice:
+        assert start == "2023-07-01T06:00:00Z"
+        assert end == "2023-07-01T09:00:00Z"
+        return slice(6, 9)
+
+
+def test_pair_materialization_uses_prior_feature_warmup_then_trims() -> None:
+    registry = TypedExpressionRegistry(
+        (
+            FieldContract("a", "RATIO", "dimensionless"),
+            FieldContract("b", "RATIO", "dimensionless"),
+        )
+    )
+    left = Expression(
+        "RollingZScore",
+        (Expression.raw("a"),),
+        parameters={"window": 4},
+    )
+    right = Expression(
+        "RollingZScore",
+        (Expression.raw("b"),),
+        parameters={"window": 4},
+    )
+    primary = Expression("RatioInteraction", (left, right))
+    assurance = registry.validate(primary)
+    spec = CandidateSpec(
+        "candidate-warmup",
+        "skeleton",
+        "OI_ACTIVITY_INTERACTION",
+        primary,
+        ablate_expression(primary),
+        1,
+        CROSS_SECTIONAL_ZERO_NET,
+        assurance.raw_fields,
+        ("family_a", "family_b"),
+        assurance.rolling_windows,
+        assurance.depth,
+        "RatioInteraction(RollingZScore(Raw),RollingZScore(Raw))",
+    )
+
+    result = evaluate_pair(
+        store=_WarmupStore(),
+        registry=registry,
+        candidate=spec,
+        block_start="2023-07-01T06:00:00Z",
+        block_end="2023-07-01T09:00:00Z",
+        block_role="DEVELOPMENT_ADAPTIVE_FEEDBACK",
+    )
+
+    assert result["feature_warmup_hours"] == 3
+    assert result["materialization_start_index"] == 3
+    assert result["evaluation_start_index"] == 6
+    assert result["evaluation_stop_index"] == 9
+    assert result["primary_control_weight_equal"] is False
+
+
 def test_incremental_sleeve_is_recomputed_from_delta_weights() -> None:
     registry = TypedExpressionRegistry(
         (

@@ -148,10 +148,13 @@ ECONOMIC_SEARCH_V2_CAMPAIGN = "crypto_search_economic_v2"
 ECONOMIC_SEARCH_V2_EPOCH_ID = "CRYPTO_SEARCH_ECONOMIC_V2_20260731"
 ECONOMIC_SEARCH_V3_CAMPAIGN = "crypto_search_economic_v3"
 ECONOMIC_SEARCH_V3_EPOCH_ID = "CRYPTO_SEARCH_ECONOMIC_V3_20260731"
+ECONOMIC_SEARCH_V4_CAMPAIGN = "crypto_search_economic_v4"
+ECONOMIC_SEARCH_V4_EPOCH_ID = "CRYPTO_SEARCH_ECONOMIC_V4_20260731"
 ECONOMIC_SEARCH_CAMPAIGNS = (
     ECONOMIC_SEARCH_CAMPAIGN,
     ECONOMIC_SEARCH_V2_CAMPAIGN,
     ECONOMIC_SEARCH_V3_CAMPAIGN,
+    ECONOMIC_SEARCH_V4_CAMPAIGN,
 )
 ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, str]] = {
     ECONOMIC_SEARCH_CAMPAIGN: {
@@ -180,6 +183,15 @@ ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, str]] = {
         "report_title": "Crypto Search Economic V3",
         "receipt_path": "config/crypto_search_economic_receipt_v3.json",
         "cli_suffix": "economic-v3",
+    },
+    ECONOMIC_SEARCH_V4_CAMPAIGN: {
+        "epoch_id": ECONOMIC_SEARCH_V4_EPOCH_ID,
+        "runtime_date": ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE,
+        "runtime_prefix": "crypto_search_economic_v4",
+        "report_prefix": "CRYPTO_SEARCH_ECONOMIC_V4",
+        "report_title": "Crypto Search Economic V4",
+        "receipt_path": "config/crypto_search_economic_receipt_v4.json",
+        "cli_suffix": "economic-v4",
     },
 }
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
@@ -5242,6 +5254,18 @@ def _ledger_row(
         "partition_tail_purge_hours": int(
             evaluation.get("partition_tail_purge_hours", 0)
         ),
+        "feature_warmup_hours": int(
+            evaluation.get("feature_warmup_hours", 0)
+        ),
+        "materialization_start_index": int(
+            evaluation.get("materialization_start_index", 0)
+        ),
+        "evaluation_start_index": int(
+            evaluation.get("evaluation_start_index", 0)
+        ),
+        "evaluation_stop_index": int(
+            evaluation.get("evaluation_stop_index", 0)
+        ),
         "pair_reward": float(evaluation["pair_reward"]),
         "matched_positive": bool(evaluation["matched_positive"]),
         "gross_mean": incremental.get("gross_mean"),
@@ -7648,6 +7672,9 @@ VALIDATION_CANDIDATE_FAIL_CLOSED_ERRORS = frozenset(
         "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
         "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY",
         "INTERACTION_LEFT_CONTROL_BEHAVIOR_EQUALS_AB",
+        "MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+        "RIGHT_AXIS_CONTROL_SUPPORT_DIFFERS_PRIMARY",
+        "INTERACTION_LEFT_CONTROL_SUPPORT_DIFFERS_AB",
         "DYNAMIC_UNIVERSE_SUPPORT_COLLAPSE",
     }
 )
@@ -12977,6 +13004,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             "run-economic-v3",
             "close-economic-v3",
             "check-economic-v3",
+            "run-economic-v4",
+            "close-economic-v4",
+            "check-economic-v4",
             "build-canary-cache",
             "run-canary",
             "check-canary",
@@ -13005,6 +13035,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "run-economic-v1": ECONOMIC_SEARCH_CAMPAIGN,
         "run-economic-v2": ECONOMIC_SEARCH_V2_CAMPAIGN,
         "run-economic-v3": ECONOMIC_SEARCH_V3_CAMPAIGN,
+        "run-economic-v4": ECONOMIC_SEARCH_V4_CAMPAIGN,
     }.get(args.command)
     if args.command.startswith("run"):
         from alphafactory_crypto.broad_search.experiment_authority import (
@@ -13071,6 +13102,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             campaign=ECONOMIC_SEARCH_V3_CAMPAIGN,
             authority_preflight=authority_preflight,
         )
+    elif args.command == "run-economic-v4":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            source_sha=args.source_sha,
+            campaign=ECONOMIC_SEARCH_V4_CAMPAIGN,
+            authority_preflight=authority_preflight,
+        )
     elif args.command == "close-economic-v1":
         result = close_budget_exhausted_engine(
             repo_root,
@@ -13132,6 +13173,23 @@ def main(argv: Sequence[str] | None = None) -> int:
                 args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
             ),
             campaign=ECONOMIC_SEARCH_V3_CAMPAIGN,
+        )
+    elif args.command == "close-economic-v4":
+        result = close_budget_exhausted_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            closure_source_sha=args.source_sha,
+            campaign=ECONOMIC_SEARCH_V4_CAMPAIGN,
+        )
+    elif args.command == "check-economic-v4":
+        result = check_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            campaign=ECONOMIC_SEARCH_V4_CAMPAIGN,
         )
     elif args.command == "check":
         result = check_engine(

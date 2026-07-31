@@ -673,17 +673,49 @@ def evaluate_pair(
             parsed_end
             - timedelta(hours=partition_tail_purge_hours)
         ).isoformat().replace("+00:00", "Z")
-    block = store.block_slice(block_start, effective_block_end)
-    base = np.asarray(store.base_eligible()[:, block], dtype=bool)
+    evaluation_block = store.block_slice(block_start, effective_block_end)
+    if evaluation_block.step not in {None, 1}:
+        raise ValueError("PAIR_EVALUATION_BLOCK_STEP_CHANGED")
+    evaluation_start = (
+        0 if evaluation_block.start is None else int(evaluation_block.start)
+    )
+    total_timestamps = int(np.asarray(store.timestamp_ns).shape[0])
+    evaluation_stop = (
+        total_timestamps
+        if evaluation_block.stop is None
+        else int(evaluation_block.stop)
+    )
+    if not 0 <= evaluation_start < evaluation_stop <= total_timestamps:
+        raise ValueError("PAIR_EVALUATION_BLOCK_INVALID")
+    feature_warmup_hours = max(
+        (int(value) - 1 for value in candidate.rolling_windows),
+        default=0,
+    )
+    materialization_start = max(0, evaluation_start - feature_warmup_hours)
+    materialization_block = slice(materialization_start, evaluation_stop)
+    evaluation_local = slice(
+        evaluation_start - materialization_start,
+        evaluation_stop - materialization_start,
+    )
+    base = np.asarray(
+        store.base_eligible()[:, materialization_block],
+        dtype=bool,
+    )
     read_started = time.perf_counter()
     raw = {
-        field: np.asarray(store.field(field)[:, block], dtype=float)
+        field: np.asarray(
+            store.field(field)[:, materialization_block],
+            dtype=float,
+        )
         for field in candidate.raw_fields
     }
     timings["field_read_seconds"] = time.perf_counter() - read_started
     sample_memory()
     if hasattr(store, "candidate_support"):
-        support = store.candidate_support(candidate.raw_fields, block)
+        support = store.candidate_support(
+            candidate.raw_fields,
+            materialization_block,
+        )
     else:
         # Lightweight test/probe stores predate the explicit carrier method.
         # Preserve the exact candidate-local semantics without requiring them
@@ -782,10 +814,39 @@ def evaluate_pair(
         interaction_left_control_signal = np.where(
             support, interaction_left_control_signal, np.nan
         )
+    base = base[:, evaluation_local]
+    support = support[:, evaluation_local]
+    primary_signal = primary_signal[:, evaluation_local]
+    control_signal = control_signal[:, evaluation_local]
+    right_control_signal = right_control_signal[:, evaluation_local]
+    if interaction_left_control_signal is not None:
+        interaction_left_control_signal = interaction_left_control_signal[
+            :,
+            evaluation_local,
+        ]
+    primary_finite_support = np.isfinite(primary_signal)
+    if not np.array_equal(
+        primary_finite_support,
+        np.isfinite(control_signal),
+    ):
+        raise ValueError("MATCHED_CONTROL_SUPPORT_DIFFERS_PRIMARY")
+    if not np.array_equal(
+        primary_finite_support,
+        np.isfinite(right_control_signal),
+    ):
+        raise ValueError("RIGHT_AXIS_CONTROL_SUPPORT_DIFFERS_PRIMARY")
+    if (
+        interaction_left_control_signal is not None
+        and not np.array_equal(
+            primary_finite_support,
+            np.isfinite(interaction_left_control_signal),
+        )
+    ):
+        raise ValueError("INTERACTION_LEFT_CONTROL_SUPPORT_DIFFERS_AB")
     timings["dag_materialization_seconds"] = time.perf_counter() - materialize_started
     sample_memory()
     target = np.asarray(
-        store.target_return(candidate.horizon_hours)[:, block],
+        store.target_return(candidate.horizon_hours)[:, evaluation_block],
         dtype=float,
     )
     mapping_started = time.perf_counter()
@@ -967,7 +1028,7 @@ def evaluate_pair(
     evaluation_mask = raw_coordinate_support & ~missing_active_target
     if not np.any(evaluation_mask):
         raise ValueError("DYNAMIC_UNIVERSE_SUPPORT_COLLAPSE")
-    timestamp_ns = store.timestamp_ns[block]
+    timestamp_ns = store.timestamp_ns[evaluation_block]
     months = np.asarray(
         [str(np.datetime64(int(value), "ns"))[:7] for value in timestamp_ns], dtype=str
     )
@@ -1198,7 +1259,7 @@ def evaluate_pair(
             regime_values = np.broadcast_to(counts, base.shape).copy()
         else:
             regime_values = np.asarray(
-                store.field(regime_source)[:, block],
+                store.field(regime_source)[:, evaluation_block],
                 dtype=float,
             )
         descriptor_kwargs = {
@@ -1304,6 +1365,10 @@ def evaluate_pair(
         "block_end_exclusive": block_end,
         "effective_block_end_exclusive": effective_block_end,
         "partition_tail_purge_hours": partition_tail_purge_hours,
+        "feature_warmup_hours": feature_warmup_hours,
+        "materialization_start_index": materialization_start,
+        "evaluation_start_index": evaluation_start,
+        "evaluation_stop_index": evaluation_stop,
         "raw_fields": list(candidate.raw_fields),
         "field_families": list(candidate.field_families),
         "operator_path": candidate.operator_path,
@@ -1359,7 +1424,7 @@ def evaluate_pair(
 
 def pair_contract_payload() -> dict[str, Any]:
     return {
-        "schema_version": 3,
+        "schema_version": 4,
         "pair_authority": "PRIMARY_WITH_LEFT_AND_RIGHT_AXIS_INCREMENTAL_DELTA_WEIGHT_SLEEVES",
         "market_semantics": {
             "asset_class": "CRYPTO",
@@ -1402,6 +1467,12 @@ def pair_contract_payload() -> dict[str, Any]:
                 "the maximum target horizon from its tail; the current "
                 "receipt freezes this at six hours"
             ),
+            "feature_warmup": (
+                "every evaluation block materializes each candidate from up "
+                "to max(rolling_windows)-1 prior continuous UTC coordinates, "
+                "then trims back to the frozen evidence block before target "
+                "or reward computation"
+            ),
             "validation_role": (
                 "distinct receipt-bound validation block; train-frozen "
                 "direction and matched limiting sleeve are replayed without "
@@ -1428,9 +1499,11 @@ def pair_contract_payload() -> dict[str, Any]:
             "mapping family and position cap",
             "5 bps full-L1 cost model",
             "raw support",
+            "finite transformed support",
         ],
-        "control_rule": "compare the primary independently with left-only and right-only SupportMatchedPayload controls; both retain identical raw support",
+        "control_rule": "compare the primary independently with left-only and right-only SupportMatchedPayload controls; primary and controls retain identical raw and finite transformed support",
         "support_overlap_required": 1.0,
+        "finite_transformed_support_equality_required": True,
         "control_exact_identity_forbidden": True,
         "control_behavior_identity_forbidden": True,
         "optional_behavior_identity": "FROZEN_OUTCOME_FREE_DESCRIPTOR_V1",

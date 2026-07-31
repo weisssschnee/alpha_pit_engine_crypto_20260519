@@ -6,6 +6,7 @@ import pytest
 from alphafactory_crypto.broad_search.audit import FIELD_CONTRACTS, qualify_data_mode
 from alphafactory_crypto.broad_search.expression import (
     Expression,
+    FieldContract,
     TypedExpressionRegistry,
     ablate_expression,
     materialize_expression,
@@ -44,6 +45,62 @@ def test_flow_per_notional_is_lazy_and_matched_ablation_removes_interaction() ->
     control = ablate_expression(expression)
     assert control.operator == "SupportMatchedPayload"
     assert registry.validate(control).raw_fields == registry.validate(expression).raw_fields
+
+
+def test_division_preserves_missing_denominator_support() -> None:
+    registry = TypedExpressionRegistry(
+        (
+            FieldContract("numerator", "RATIO", "dimensionless"),
+            FieldContract("denominator", "RATIO", "dimensionless"),
+        )
+    )
+    expression = Expression(
+        "SafeDiv",
+        (Expression.raw("numerator"), Expression.raw("denominator")),
+    )
+    fields = {
+        "numerator": np.array([[2.0, 3.0, 4.0]]),
+        "denominator": np.array([[2.0, np.nan, 0.0]]),
+    }
+
+    values = materialize_expression(
+        expression,
+        registry=registry,
+        field_reader=fields.__getitem__,
+    )
+
+    assert values[0, 0] == 1.0
+    assert np.isnan(values[0, 1])
+    assert np.isfinite(values[0, 2])
+
+
+def test_condition_gate_preserves_both_child_support() -> None:
+    registry = TypedExpressionRegistry(
+        (
+            FieldContract("payload", "RATIO", "dimensionless"),
+            FieldContract("state", "STATE", "dimensionless"),
+        )
+    )
+    expression = Expression(
+        "ConditionGate",
+        (Expression.raw("payload"), Expression.raw("state")),
+        parameters={"threshold": 0.0},
+    )
+    fields = {
+        "payload": np.array([[1.0, 2.0, np.nan, 4.0]]),
+        "state": np.array([[1.0, -1.0, -1.0, np.nan]]),
+    }
+
+    values = materialize_expression(
+        expression,
+        registry=registry,
+        field_reader=fields.__getitem__,
+    )
+
+    assert values[0, 0] == 1.0
+    assert values[0, 1] == 0.0
+    assert np.isnan(values[0, 2])
+    assert np.isnan(values[0, 3])
 
 
 def test_data_gate_does_not_promote_six_month_archive() -> None:
