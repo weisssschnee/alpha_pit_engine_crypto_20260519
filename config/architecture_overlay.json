@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaign (V3 fresh-state authorized; V2 validation-blocked HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (V3 validation-blocked closed; research HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -465,16 +465,19 @@
                                     "reports/CRYPTO_SEARCH_ECONOMIC_V1_20260731.md",
                                     "runtime/crypto_search_economic_v2_20260731/run_manifest.json",
                                     "runtime/crypto_search_economic_v2_20260731/final_decision.json",
-                                    "reports/CRYPTO_SEARCH_ECONOMIC_V2_20260731.md"
+                                    "reports/CRYPTO_SEARCH_ECONOMIC_V2_20260731.md",
+                                    "runtime/crypto_search_economic_v3_20260731/run_manifest.json",
+                                    "runtime/crypto_search_economic_v3_20260731/final_decision.json",
+                                    "reports/CRYPTO_SEARCH_ECONOMIC_V3_20260731.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
-                      "active_authority":  true,
+                      "active_authority":  false,
                       "authority":  {
                                         "path":  "config/crypto_search_economic_receipt_v3.json",
                                         "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "a1f87a5cba12a5ba6c4560c9474800130de9bee4",
-                                        "sha256":  "3F0FD92DB3223AA360B5E3EA1D2EE82EBEAC402C240D5709CCC5BBF40C9127D0"
+                                        "verified_sha":  "658937c74d9708b3138fcb5999f35980d7779fec",
+                                        "sha256":  "10A2B7FE63278A5033B7FB8A846D220628AF1A0AE8AD5BAB454C6993D247E8D4"
                                     },
                       "contracts":  [
                                         {
@@ -505,13 +508,13 @@
                                             "evidence_ref":  "runtime/crypto_search_economic_v2_20260731/final_decision.json"
                                         },
                                         {
-                                            "id":  "crypto_search_economic_v3_fresh_state_authorization",
+                                            "id":  "crypto_search_economic_v3_consumed_outcome",
                                             "type":  "AUTHORITY",
-                                            "rule":  "The current-user V3 receipt authorizes exactly one independent fresh-state campaign capped at 20,000 strict candidates on the unchanged 115-field OI/mark x aggTrades carrier. It hash-locks and inherits the consumed V1 target, mapping, joint train reward, conditional 5 bps cost, evidence partitions, validation kill-line, and sealed boundaries while assigning a distinct campaign, epoch, runtime, RNG, policies, archive, ledger, receipts, and checkpoints. It imports no V1 or V2 search state. Known validation matched-control degeneracy must terminate fail closed with an exact checkpoint; unexpected defects still propagate. Ten workers are requested with fail-closed fallback to eight; 12 workers, parameter tuning, seed changes, rescue reruns, sealed/OOS/challenge/recent/May-stress/forward reads, promotion, latent priority, and cross-sprint memory remain forbidden.",
+                                            "rule":  "The one-run V3 receipt is consumed and run_authorized is false. Its independent fresh-state producer at ead338b4d34a95b707ae1a140b1aa318a71e4f6a reproduced checkpoint_000 with 2,000 strict candidates from 2,280 attempts and 1,964 behavior families, then the frozen validation gate identified canonical typed-random candidate 1DC068A07C8B4C29BFE9C35A27A5948D9FA0503B0DECF2A601D36B35F512B038 at 1h and selection rank 9 with CONTROL_BEHAVIOR_EQUALS_PRIMARY. The repaired orchestration wrote restore-verified checkpoint_validation_blocked with exact campaign state and failure identity and terminated normally. No validation optimizer/archive write, continuation, rescue, reseed, tuning, sealed read, arm qualification, Alpha claim, or next Arena occurred. This is a validation-constructibility result, not a portfolio-reward, Alpha-space, or carrier-information negative. Another market run requires a separate user authorization and cannot import V1, V2, or V3 state.",
                                             "severity":  "HARD",
-                                            "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt and broad_search.search_engine_v1 run-economic-v3/check-economic-v3",
+                                            "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt and broad_search.search_engine_v1 run-economic-v3/check-economic-v3 validation-blocked terminal path",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "config/crypto_search_economic_receipt_v3.json"
+                                            "evidence_ref":  "runtime/crypto_search_economic_v3_20260731/final_decision.json"
                                         },
                                         {
                                             "id":  "search_surface_runtime_carrier_gate",
@@ -660,9 +663,9 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                          "evidence_ref":  "config/crypto_search_economic_receipt_v3.json",
-                                          "evidence_sha256":  "3F0FD92DB3223AA360B5E3EA1D2EE82EBEAC402C240D5709CCC5BBF40C9127D0",
-                                          "verified_at_sha":  "a1f87a5cba12a5ba6c4560c9474800130de9bee4"
+                                          "evidence_ref":  "runtime/crypto_search_economic_v3_20260731/final_decision.json",
+                                          "evidence_sha256":  "33CC74D87D35089E49636AE6C38BD46507AFAE3B256D66013161C455F38603F7",
+                                          "verified_at_sha":  "658937c74d9708b3138fcb5999f35980d7779fec"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
@@ -716,6 +719,9 @@
                                             "V2 2,000 STRICT CHECKPOINT RESTORE VERIFIED",
                                             "V2 VALIDATION CONSTRUCTIBILITY BLOCKED",
                                             "V2 AUTHORIZATION CONSUMED",
+                                            "V3 2,000 STRICT CHECKPOINT RESTORE VERIFIED",
+                                            "V3 VALIDATION BLOCKED CHECKPOINT VERIFIED",
+                                            "V3 AUTHORIZATION CONSUMED",
                                             "NO RESCUE RERUN",
                                             "NO ARM QUALIFIED"
                                        ],
