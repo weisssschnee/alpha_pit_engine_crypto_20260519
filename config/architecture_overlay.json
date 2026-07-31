@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaign (single run authorized; non-formal)",
+                      "label":  "Search Engine conditional-development campaign (authorization consumed; incomplete HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -457,7 +457,10 @@
                                     "config/crypto_search_engine_v1_4_binance_target_replay.json",
                                     "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/run_manifest.json",
                                     "runtime/crypto_search_engine_v1_4_binance_target_replay_20260729/final_decision.json",
-                                    "reports/CRYPTO_SEARCH_ENGINE_V1_4_BINANCE_TARGET_REPLAY_20260729.md"
+                                    "reports/CRYPTO_SEARCH_ENGINE_V1_4_BINANCE_TARGET_REPLAY_20260729.md",
+                                    "runtime/crypto_search_economic_v1_20260731/run_manifest.json",
+                                    "runtime/crypto_search_economic_v1_20260731/final_decision.json",
+                                    "reports/CRYPTO_SEARCH_ECONOMIC_V1_20260731.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -465,18 +468,27 @@
                       "authority":  {
                                         "path":  "config/crypto_search_economic_receipt_v1.json",
                                         "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "8ac3fe892a5a8c82534b54c7aa2ecd77ec6659d8",
-                                        "sha256":  "EC1E12B505F7820867546690F8B239966F40DD2BB5AC32484E4644EF8B0CCF82"
+                                        "verified_sha":  "da7842dabacf7c98e62475014666877eeda86664",
+                                        "sha256":  "161AE5D5AFEACE889CB47F17599599E11D6B13A80A7142196D52D8B2F62255E2"
                                     },
                       "contracts":  [
                                         {
                                             "id":  "crypto_search_economic_receipt_v1_binding",
                                             "type":  "AUTHORITY",
-                                            "rule":  "The schema-2 successor receipt authorizes exactly one crypto_search_economic_v1 fresh-state conditional-development campaign, capped at 20,000 strict candidates, on the existing 115-field OI/mark x aggTrades aligned carrier; every historical runner revalidates its existing Graph authority preflight without consuming this receipt. The dedicated entry gives every mechanism an explicit class through the existing mechanism-to-mapping authority, consumes A7Reward train-frozen orientation, wraps the carrier with the existing content-bound Binance USD-M delayed-open target store, injects the receipt cost into the retained evaluator, and uses the retained joint standalone-plus-matched Sortino reward. The full-L1 5 bps cost is frozen as a conditional non-formal assumption; every result must be interpreted under it. Behavior identity bins and support are frozen from the receipt train partition only; validation and holdout cannot enter that contract. Every evidence role purges its final six hours, exactly the two-hour execution delay plus maximum four-hour horizon, so target endpoints cannot cross roles. After checkpoint_000 train-policy update and exact restore but before checkpoint_001 allocation, the runner selects the top 64 train-frozen candidates for each required 1h/4h horizon per active arm, evaluates only the validation block with frozen orientation and matched sleeve, applies a worst-horizon equal-weight ensemble kill-line, writes failed arms to existing arm state, and atomically restores checkpoint_validation. The next existing allocation consumes those states, and later numeric checkpoints supersede validation during resume; every resumed economic state revalidates checkpoint_validation and republishes the top-level validation ledger, metrics, and decision before more allocation. Parameter tuning, seed changes, rescue reruns, policy/archive/generation writes during validation, holdout/OOS/challenge reads, formal claims, and promotion remain forbidden. Component hashes canonicalize text line endings to LF; component, carrier, and target-cache hashes are frozen.",
+                                            "rule":  "The schema-2 successor receipt recorded exactly one crypto_search_economic_v1 fresh-state conditional-development authorization, capped at 20,000 strict candidates, on the existing 115-field OI/mark x aggTrades aligned carrier; that authorization is consumed and run_authorized is false after the terminal budget-exhausted run. Every historical runner revalidates its existing Graph authority preflight without consuming this receipt. The dedicated entry gives every mechanism an explicit class through the existing mechanism-to-mapping authority, consumes A7Reward train-frozen orientation, wraps the carrier with the existing content-bound Binance USD-M delayed-open target store, injects the receipt cost into the retained evaluator, and uses the retained joint standalone-plus-matched Sortino reward. The full-L1 5 bps cost is frozen as a conditional non-formal assumption; every result must be interpreted under it. Behavior identity bins and support are frozen from the receipt train partition only; validation and holdout cannot enter that contract. Every evidence role purges its final six hours, exactly the two-hour execution delay plus maximum four-hour horizon, so target endpoints cannot cross roles. After checkpoint_000 train-policy update and exact restore but before checkpoint_001 allocation, the runner would select the top 64 train-frozen candidates for each required 1h/4h horizon per active arm, evaluate only the validation block with frozen orientation and matched sleeve, apply a worst-horizon equal-weight ensemble kill-line, write failed arms to existing arm state, and atomically restore checkpoint_validation. This run never reached checkpoint_000, so validation and subsequent allocation remained unstarted. Parameter tuning, seed changes, rescue reruns, policy/archive/generation writes during validation, holdout/OOS/challenge reads, formal claims, and promotion remain forbidden. Component hashes canonicalize text line endings to LF; component, carrier, and target-cache hashes are frozen.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt, broad_search.search_engine_v1.run_engine/run_frozen_validation_stage/apply_search_validation_kill_line, and broad_search.pair18m.evaluate_pair",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "config/crypto_search_economic_receipt_v1.json"
+                                        },
+                                        {
+                                            "id":  "crypto_search_economic_v1_budget_exhausted_boundary",
+                                            "type":  "EVIDENCE",
+                                            "rule":  "The single authorized campaign stopped at the frozen raw-attempt limit with 95,776 attempts and 1,190 strict candidates. The emergency checkpoint restore passed, but no 2,000-candidate checkpoint or validation stage ran. Two fresh-state V1 controls consumed 94,469 attempts while failing before compilation on partial-carrier role resolution. The partial ledger is allocation-imbalanced, qualifies no arm, and creates no Alpha, OOS, promotion, or next-Arena authority. The compatibility path is repaired for future separately authorized work, but this campaign is not rerun.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.search_engine_v1.close_budget_exhausted_engine/check_engine and the consumed schema-2 receipt",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "runtime/crypto_search_economic_v1_20260731/final_decision.json"
                                         },
                                         {
                                             "id":  "search_surface_runtime_carrier_gate",
@@ -605,7 +617,7 @@
                                         {
                                             "id":  "search_engine_economic_reward_suspension",
                                             "type":  "BOUNDARY",
-                                            "rule":  "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1 remains suspended as the predecessor economic optimizer authority. The schema-2 successor receipt authorizes one conditional-development campaign using explicitly named NON_FORMAL experimental bindings for train-frozen direction, portfolio mapping, Binance USD-M execution target, frozen 5 bps cost, and joint standalone-plus-matched Sortino reward; it does not promote those bindings to active formal authority. Legacy state, formal claims, OOS, promotion, parameter tuning, seed changes, and rescue reruns remain forbidden.",
+                                            "rule":  "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1 remains suspended as the predecessor economic optimizer authority. The schema-2 successor receipt recorded one now-consumed conditional-development authorization using explicitly named NON_FORMAL experimental bindings for train-frozen direction, portfolio mapping, Binance USD-M execution target, frozen 5 bps cost, and joint standalone-plus-matched Sortino reward; it did not promote those bindings to active formal authority. Legacy state, formal claims, OOS, promotion, parameter tuning, seed changes, rescue reruns, and a second campaign remain forbidden.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.experiment_authority.require_real_experiment_authority, broad_search.search_engine_v1.main, and ADR 0016",
                                             "bypass_forbidden":  true,
@@ -626,8 +638,8 @@
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
                                          "evidence_ref":  "config/crypto_search_economic_receipt_v1.json",
-                                         "evidence_sha256":  "EC1E12B505F7820867546690F8B239966F40DD2BB5AC32484E4644EF8B0CCF82",
-                                         "verified_at_sha":  "8ac3fe892a5a8c82534b54c7aa2ecd77ec6659d8"
+                                         "evidence_sha256":  "161AE5D5AFEACE889CB47F17599599E11D6B13A80A7142196D52D8B2F62255E2",
+                                         "verified_at_sha":  "da7842dabacf7c98e62475014666877eeda86664"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
@@ -671,11 +683,14 @@
                                            "V1.4 BINANCE TARGET EXACT REPLAY PASS",
                                            "GROSS PERSISTENCE DIAGNOSTIC PASS",
                                            "95.16% GROSS POSITIVES COST-KILLED",
-                                           "SUCCESSOR ECONOMIC RECEIPT ACTIVE FOR ONE CONDITIONAL RUN",
+                                           "ECONOMIC RECEIPT ONE-RUN AUTHORIZATION CONSUMED",
                                            "ENGINEERING SEARCH CHAIN RETAINED",
                                            "PAIR REWARD DIAGNOSTIC ONLY",
                                            "CONDITIONAL 5 BPS INTERPRETATION",
-                                           "20K MAXIMUM RUN AUTHORIZED"
+                                           "1,190 STRICT PARTIAL RUN BUDGET EXHAUSTED",
+                                           "EMERGENCY CHECKPOINT RESTORE VERIFIED",
+                                           "V1 CONTROL PARTIAL-CARRIER ROLE PATH REPAIRED",
+                                           "NO ARM QUALIFIED"
                                        ],
                       "promotion_requirements":  [
                                                      "information-adequate new data",

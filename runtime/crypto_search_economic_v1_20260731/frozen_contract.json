@@ -1,0 +1,721 @@
+{
+  "arm_contract": {
+    "checkpoint_000": {
+      "canonical_typed_random": 400,
+      "cem_distribution_v1": 400,
+      "evolutionary_typed_v1": 400,
+      "hierarchical_typed_cem_v2": 400,
+      "typed_evolution_v2": 400
+    },
+    "diagnostic_floor": 0.1,
+    "reward_comparison": "same first N by deterministic candidate completion ordinal",
+    "rolling_default": {
+      "canonical_typed_random": 0.2,
+      "hierarchical_typed_cem_v2": 0.4,
+      "typed_evolution_v2": 0.4
+    },
+    "same_seed_set_for_every_arm": true,
+    "typed_random_minimum": 0.2
+  },
+  "authorization": "SOURCE_QUALIFIED_RUN_REQUIRES_RECEIPT_AUTHORIZATION",
+  "base_sha": "bbb0e696bc5f560f733dd4e9bfe263f11e4bb840",
+  "behavior_descriptor": {
+    "contract_sha256": "5C4F21D45F4DA55FEF2E689181A2D9F25041B5AC37D3C74278005688274E5E34",
+    "frozen_observation_count": 1528,
+    "mapped_weight_quantization_step": 0.05,
+    "observed_support_sha256": "465C2002A61B893458167DEE0DB3B96139A3A3A8888180C4CE27E143E4E55D99",
+    "outcome_fields_in_identity": [],
+    "pit_regime_lag_hours": 1,
+    "pit_regime_quantiles": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "pit_regime_source": "__BASE_ELIGIBLE_COUNT__",
+    "pit_regime_source_validation": "CROSS_SECTION_CONSTANT_AND_EQUAL_TO_INDEPENDENT_OBSERVED_SUPPORT",
+    "pit_regime_thresholds": [
+      118.0,
+      122.0,
+      126.0
+    ],
+    "pit_regime_thresholds_sha256": "CCECF4207B7F1AACDC8C96A257BDEA04A3C253BE2C6778245D9A61CD8BA1815E",
+    "rank_bucket_count": 10,
+    "rank_mean_quantization_step": 2.0,
+    "schema_version": "CRYPTO_SEARCH_BEHAVIOR_DESCRIPTOR_V1",
+    "selected_overlap_quantization_step": 0.1,
+    "selected_weight_epsilon": 1e-12,
+    "selection_rate_quantization_step": 0.2,
+    "turnover_bin_edges": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.5,
+      2.0,
+      3.0,
+      4.0
+    ],
+    "turnover_histogram_quantization_step": 0.1
+  },
+  "boundaries": {
+    "challenge": false,
+    "cross_sprint_adaptive_memory": false,
+    "forward": false,
+    "may_stress": false,
+    "promotion": false,
+    "recent": false,
+    "report_only_feedback": false,
+    "sealed_reads": 0
+  },
+  "budget": {
+    "checkpoint_count": 10,
+    "checkpoint_size": 2000,
+    "fail_closed_attempt_reservation_per_proposal": 4225,
+    "raw_generation_attempts_maximum": 100000,
+    "strict_evaluated_target": 20000,
+    "wall_time_seconds_maximum": 64800,
+    "workers_12_forbidden": true,
+    "workers_default": 10,
+    "workers_memory_fallback": 8
+  },
+  "cem": {
+    "fallback": [
+      "exact_condition",
+      "typed_role_plus_field_family",
+      "skeleton_variant",
+      "mechanism_family",
+      "global_legal_domain_filtered_by_typed_role"
+    ],
+    "interaction_sampling": false,
+    "operator_sampling": false,
+    "sample_order": [
+      "mechanism_family",
+      "skeleton_variant",
+      "typed_roles",
+      "field_families",
+      "field_tokens",
+      "windows_and_normalizers",
+      "horizon"
+    ]
+  },
+  "compiler_identity": {
+    "bundle_sha256": "4E9659791645FD92D27C7CD51E2B312A045422406AB8C806F9CFEABC289ACAA4",
+    "paths": [
+      {
+        "bytes": 53858,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "BF7CA03041D84B6E5BB61A0B55914B9DADBBD0F82C91A98C1EEA60397417BC89"
+      },
+      {
+        "bytes": 22088,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 63095,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "6B57D3A62B409257398E805DCB3E592CDB6499F86D114600F5401D08097BA99E"
+      },
+      {
+        "bytes": 62883,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "C86E9048D41C1CA6A7561EA1FCDE7C83ECD881032831A9F108CA18C78C9291EA"
+      },
+      {
+        "bytes": 110881,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "1BD17FD85586033436531B3BC4873FEEC0DB968428253B256960F202BD296085"
+      },
+      {
+        "bytes": 483526,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "B89042309B4108BA4A1E9EFDE7FFC21275AD5E47321950B405B9F52D0C01F7EC"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "cpu_hour_definition": "sum process CPU seconds for proposal, compile, archive, and pair evaluation; excludes queue and human wait",
+  "economic_receipt": {
+    "component_sha256": {
+      "direction": "BBC246A15012EDD1F8133E16C4E920529002EE36895351373BCE4FA1161D10F9",
+      "mechanism": "6B57D3A62B409257398E805DCB3E592CDB6499F86D114600F5401D08097BA99E",
+      "mechanism_mapping": "0EC46865116DE3C1F40C01A7ABCEBD4AFDF51940057974772B1B841516884741",
+      "optimizer_reward_and_matched_attribution": "C86E9048D41C1CA6A7561EA1FCDE7C83ECD881032831A9F108CA18C78C9291EA",
+      "portfolio_mapping_and_cost": "7DD20E2B19A4C93DEDA0AE8B593E6465B77B53E8CAD8407DB26CE1DDE6C8E036",
+      "runtime_binding": "CC8CB8BEFA09C0A07D5E223CBCA4213E50EBE416DDACFFDEF428FF86BD040733",
+      "target_contract": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
+      "target_execution": "03BE602CFF7C4EE4DCE1DAEE5DAE02FD1B6B54F865E5AB8307573C6064300629",
+      "validation_kill_line": "16F136F54DF1E69D7168802883F0CCC3242F79188F64A635E2FA2B1E6FD99CC1"
+    },
+    "cost": {
+      "cost_bps": 5.0,
+      "initial_establishment_charged": true,
+      "model_id": "FULL_L1_FIXED_BPS"
+    },
+    "direction": {
+      "allowed_values": [
+        -1,
+        1
+      ],
+      "authority_symbol": "scripts.crypto_a7reward1_portfolio_reward_model.select_train_orientation",
+      "fit_role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+      "persist_in_candidate_ledger": true,
+      "rule": "TRAIN_FROZEN_SIGN_ORIENTATION"
+    },
+    "evidence_partition": {
+      "holdout": {
+        "end_exclusive": "2026-07-01T00:00:00Z",
+        "optimizer_feedback_allowed": false,
+        "policy_memory_write_allowed": false,
+        "read_allowed": false,
+        "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+        "start": "2026-01-01T00:00:00Z"
+      },
+      "train": {
+        "end_exclusive": "2025-11-01T00:00:00Z",
+        "optimizer_feedback_allowed": true,
+        "role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+        "start": "2025-08-29T07:00:00Z"
+      },
+      "validation": {
+        "candidate_generation_allowed": false,
+        "end_exclusive": "2026-01-01T00:00:00Z",
+        "optimizer_feedback_allowed": false,
+        "policy_memory_write_allowed": false,
+        "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+        "start": "2025-11-01T00:00:00Z"
+      }
+    },
+    "execution": {
+      "authority_config": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+      "execution_delay_hours": 2,
+      "formula": "log(open_price[t+2+h] / open_price[t+2])",
+      "horizons_hours": [
+        1,
+        4
+      ],
+      "instrument_type": "LINEAR_PERPETUAL",
+      "missing_value_fill": null,
+      "partition_tail_purge_hours": 6,
+      "positive_price_required": true,
+      "price_field": "open_price",
+      "source": "DELIVERED_AGGTRADES_COMPACT_1M_AGGREGATED_1H",
+      "target_cache_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+      "target_cache_path": ".cache/crypto_search_engine_v1_4/binance_open_target_v1",
+      "target_store_symbol": "alphafactory_crypto.broad_search.replay_v14_binance_target.BinanceTargetStore",
+      "venue": "BINANCE_USD_M"
+    },
+    "formal_claims_authorized": false,
+    "holdout": {
+      "end_exclusive": "2026-07-01T00:00:00Z",
+      "optimizer_feedback_allowed": false,
+      "policy_memory_write_allowed": false,
+      "read_allowed": false,
+      "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+      "start": "2026-01-01T00:00:00Z"
+    },
+    "market": {
+      "asset_class": "CRYPTO",
+      "calendar": "CONTINUOUS_UTC"
+    },
+    "mechanism": {
+      "candidate_bindings": [
+        "skeleton_id",
+        "mechanism_family"
+      ],
+      "economic_hypothesis_field": "financial_hypothesis",
+      "mapping_adapter_symbol": "alphafactory_crypto.broad_search.compositional18m.mapping_id_for_mechanism_family",
+      "mapping_authority_symbol": "alphafactory_crypto.instrument_canary.grammar.MECHANISM_MAPPING",
+      "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+      "registry_symbol": "alphafactory_crypto.broad_search.compositional18m.skeleton_registry"
+    },
+    "optimizer_reward": {
+      "authority_id": "CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2",
+      "authority_symbol": "alphafactory_crypto.broad_search.pair18m.SEARCH_REWARD_AUTHORITY",
+      "feedback_role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+      "pair_reward_role": "MATCHED_ATTRIBUTION_DIAGNOSTIC_ONLY"
+    },
+    "portfolio": {
+      "mapping_authority_component": "explicit_portfolio_mapping",
+      "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+      "mapping_symbol": "alphafactory_crypto.instrument_capability.mapping.DEFAULT_MAPPING_CONTRACTS",
+      "matched_roles": [
+        "PRIMARY_MINUS_LEFT_CONTROL",
+        "PRIMARY_MINUS_RIGHT_CONTROL",
+        "AB_MINUS_A",
+        "AB_MINUS_B",
+        "ABC_MINUS_AB"
+      ],
+      "primary_role": "STANDALONE_MAPPED_PORTFOLIO",
+      "shared_support_execution_horizon_cost": true
+    },
+    "receipt_path": "config/crypto_search_economic_receipt_v1.json",
+    "receipt_sha256": "AAC089207DB815063C8A8C91E251250D30F58954C7E31368F7807F4EC610FF4A",
+    "result": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+    "run_authorized": true,
+    "search_campaign": {
+      "carrier_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+      "carrier_id": "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+      "carrier_manifest": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+      "checkpoint_count": 10,
+      "checkpoint_size": 2000,
+      "field_count": 115,
+      "fresh_state": true,
+      "runner_campaign": "crypto_search_economic_v1",
+      "runtime_date": "20260731",
+      "strict_evaluated_target": 20000
+    },
+    "train": {
+      "end_exclusive": "2025-11-01T00:00:00Z",
+      "optimizer_feedback_allowed": true,
+      "role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+      "start": "2025-08-29T07:00:00Z"
+    },
+    "validation": {
+      "candidate_generation_allowed": false,
+      "end_exclusive": "2026-01-01T00:00:00Z",
+      "optimizer_feedback_allowed": false,
+      "policy_memory_write_allowed": false,
+      "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+      "start": "2025-11-01T00:00:00Z"
+    },
+    "validation_kill_line": {
+      "arm_aggregation": "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE",
+      "authority_symbol": "alphafactory_crypto.broad_search.experiment_authority.evaluate_search_validation_kill_line",
+      "candidate_selection": "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_THEN_COMPLETION_ORDINAL",
+      "checkpoint_action": "EXISTING_CAMPAIGN_CHECKPOINT_WITH_VALIDATION_ARTIFACTS",
+      "continuation_action": "NEXT_CHECKPOINT_USES_EXISTING_ARM_STATE",
+      "equal_matched_evaluated_count": true,
+      "evaluated_per_active_arm": 128,
+      "evaluated_per_arm_per_horizon": 64,
+      "evaluation_order": "AFTER_FROZEN_TRAIN_POLICY_BEFORE_ANY_ADDITIONAL_BUDGET",
+      "failed_arm_allocation": "EXISTING_ARM_STATE_EXITED",
+      "failure_action": "STOP_ARM_AND_WRITE_CHECKPOINT",
+      "minimum_evaluated_per_active_arm": 128,
+      "orchestration_campaign": "crypto_search_economic_v1",
+      "required_conditions": [
+        "validation_net_mean_positive",
+        "validation_nonoverlap_floor_sortino_positive",
+        "validation_matched_increment_positive",
+        "validation_control_not_dominant"
+      ],
+      "required_horizons_hours": [
+        1,
+        4
+      ],
+      "runtime_symbol": "alphafactory_crypto.broad_search.search_engine_v1.apply_search_validation_kill_line",
+      "threshold_tuning_allowed": false,
+      "trigger_after_train_checkpoint_index": 0
+    }
+  },
+  "elite_authority": {
+    "admission_hard_gates": [
+      "compile_valid",
+      "exact_unique",
+      "matched_control_valid",
+      "strict_cost_evaluated"
+    ],
+    "diagnostic_only": [
+      "turnover",
+      "gross_positive_cost_sign_killed",
+      "cost_threshold_violated",
+      "turnover_threshold_violated",
+      "failure_layer",
+      "behavior_novelty_except_equal_reward"
+    ],
+    "equal_reward_tie_break": [
+      "arm_seed_policy_local_behavior_family_count",
+      "candidate_id"
+    ],
+    "matched_attribution_diagnostic": "pair_reward",
+    "only_ordering_authority": "search_reward"
+  },
+  "environment": {
+    "machine": "AMD64",
+    "packages": {
+      "numpy": "2.1.3",
+      "pandas": "2.2.3",
+      "psutil": "7.0.0",
+      "pyarrow": "19.0.1",
+      "scipy": "1.17.1"
+    },
+    "platform": "Windows-10-10.0.22631-SP0",
+    "processor": "AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD",
+    "python_executable": "G:\\PythonProject\\.venv\\Scripts\\python.exe",
+    "python_implementation": "CPython",
+    "python_version": "3.11.9",
+    "thread_caps": {
+      "MKL_NUM_THREADS": null,
+      "NUMEXPR_NUM_THREADS": null,
+      "OMP_NUM_THREADS": null
+    }
+  },
+  "epoch_id": "CRYPTO_SEARCH_ECONOMIC_V1_20260731",
+  "evaluator_contract": {
+    "control_behavior_identity_forbidden": true,
+    "control_exact_identity_forbidden": true,
+    "control_rule": "compare the primary independently with left-only and right-only SupportMatchedPayload controls; both retain identical raw support",
+    "hierarchical_three_axis_extension": {
+      "behavior_identity": "ABC_minus_AB incremental delta weight",
+      "conditional_gate": "ABC_minus_AB must pass",
+      "dag": "ABC=StateModulation(AB,C); AB=RatioInteraction(A,B)",
+      "interaction_gate": "AB_minus_A and AB_minus_B must both pass",
+      "pair_reward": "minimum strict feasibility distance across AB-A, AB-B, and ABC-AB",
+      "shared_contract": "raw support, target, timestamps, eligibility, horizon, mapping, and cost are identical for A, B, AB, and ABC"
+    },
+    "incremental_turnover": "recomputed independently from delta weights",
+    "incremental_weight_formula": "primary_weight - each_axis_control_weight",
+    "lcb_contract": {
+      "authority": "NEWEY_WEST_BARTLETT",
+      "confidence_multiplier": 1.96,
+      "dependency_lags": "horizon_hours_minus_one",
+      "gross_lcb_role": "DIAGNOSTIC_ONLY",
+      "monthly_block_lcb": "DIAGNOSTIC_ONLY"
+    },
+    "market_semantics": {
+      "a_share_constraints_applied": false,
+      "asset_class": "CRYPTO",
+      "calendar": "CONTINUOUS_UTC",
+      "forbidden_cross_market_constraints": [
+        "A_SHARE_T_PLUS_ONE",
+        "A_SHARE_ST",
+        "A_SHARE_PRICE_LIMIT",
+        "A_SHARE_STAMP_DUTY",
+        "A_SHARE_SUSPENSION_CALENDAR"
+      ]
+    },
+    "match_on": [
+      "raw inputs",
+      "timestamps",
+      "dynamic eligibility",
+      "target horizon",
+      "mapping family and position cap",
+      "5 bps full-L1 cost model",
+      "raw support"
+    ],
+    "optional_behavior_identity": "FROZEN_OUTCOME_FREE_DESCRIPTOR_V1",
+    "pair_authority": "PRIMARY_WITH_LEFT_AND_RIGHT_AXIS_INCREMENTAL_DELTA_WEIGHT_SLEEVES",
+    "pair_reward": "minimum strict feasibility distance across left and right incremental sleeves",
+    "pair_reward_role": "matched attribution and execution diagnostic; never proposal-policy, elite, parent, archive-champion, or arm-exit ordering authority",
+    "schema_version": 3,
+    "search_objective": {
+      "authority": "CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2",
+      "component_authority": "CRYPTO_TRAIN_PORTFOLIO_SORTINO_COMPONENT_V2",
+      "formula_weights": {
+        "train_day_bootstrap_sortino_p25": 0.2,
+        "train_day_sortino": 0.8
+      },
+      "holdout_role": "read-only and excluded from train behavior contracts, validation target endpoints, optimizer feedback, and Search Engine V1 execution",
+      "partition_tail_purge": "each economic evidence role excludes execution delay plus the maximum target horizon from its tail; the current receipt freezes this at six hours",
+      "portfolio": "minimum of primary mapped portfolio and every required matched incremental delta-weight sleeve",
+      "selected_horizon_scope": "CandidateSpec freezes one horizon; the duplicate nominal worst-horizon term is removed rather than counted twice",
+      "shared_resample_path": "primary and matched components use one deterministic ordered-day stationary-bootstrap index path",
+      "split": "train/development adaptive block only",
+      "stationary_bootstrap_draws": 600,
+      "stationary_bootstrap_support_minimum": 0.6,
+      "turnover_penalty_start_one_way": 0.55,
+      "turnover_penalty_weight": 0.75,
+      "uncertainty_contract": "CRYPTO_ORDERED_DAY_STATIONARY_BOOTSTRAP_V1",
+      "validation_role": "distinct receipt-bound validation block; train-frozen direction and matched limiting sleeve are replayed without optimizer, proposal-policy, archive, or generation feedback"
+    },
+    "standalone_scalar_delta_role": "DIAGNOSTIC_ONLY",
+    "support_overlap_required": 1.0
+  },
+  "evolution": {
+    "crossover": "one_point_effective_homologous_gene_bundle_typed_role_compatible",
+    "free_string_mutation": false,
+    "genome": "existing CandidateSpec generation_genes",
+    "mechanism_cell_limit": 64,
+    "mutation": "1_to_3_effective_genes",
+    "new_ast": false,
+    "operator_replacement": "compatible_skeleton_variant_mutation"
+  },
+  "frozen_contract_sha256": "348B3F2C31B3AC0CC1022C3B421E25A820B8F779782009D8B9D87C83C6AB27BF",
+  "input_identities": {
+    "aligned_carrier_manifest": {
+      "path": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+      "sha256": "5B5A05C044AC5C8FF4FB54806E5F846380E195A684A7ECE8775B0D48C96FF1A6"
+    },
+    "behavior_contract_window": {
+      "authority": "ECONOMIC_RECEIPT_TRAIN_ONLY",
+      "end_exclusive": "2025-11-01T00:00:00Z",
+      "holdout_read": false,
+      "start": "2025-08-29T07:00:00Z",
+      "validation_read": false
+    },
+    "compiler_identity": {
+      "bundle_sha256": "4E9659791645FD92D27C7CD51E2B312A045422406AB8C806F9CFEABC289ACAA4",
+      "paths": [
+        {
+          "bytes": 53858,
+          "path": "alphafactory_crypto/broad_search/audit.py",
+          "sha256": "BF7CA03041D84B6E5BB61A0B55914B9DADBBD0F82C91A98C1EEA60397417BC89"
+        },
+        {
+          "bytes": 22088,
+          "path": "alphafactory_crypto/broad_search/expression.py",
+          "sha256": "315AA6B2CB89A03EB095225117065FD75C7E628F60CCA74A11709C063E89F348"
+        },
+        {
+          "bytes": 36886,
+          "path": "alphafactory_crypto/broad_search/panel18m.py",
+          "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+        },
+        {
+          "bytes": 63095,
+          "path": "alphafactory_crypto/broad_search/compositional18m.py",
+          "sha256": "6B57D3A62B409257398E805DCB3E592CDB6499F86D114600F5401D08097BA99E"
+        },
+        {
+          "bytes": 62883,
+          "path": "alphafactory_crypto/broad_search/pair18m.py",
+          "sha256": "C86E9048D41C1CA6A7561EA1FCDE7C83ECD881032831A9F108CA18C78C9291EA"
+        },
+        {
+          "bytes": 110881,
+          "path": "alphafactory_crypto/broad_search/runner18m.py",
+          "sha256": "1BD17FD85586033436531B3BC4873FEEC0DB968428253B256960F202BD296085"
+        },
+        {
+          "bytes": 483526,
+          "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+          "sha256": "B89042309B4108BA4A1E9EFDE7FFC21275AD5E47321950B405B9F52D0C01F7EC"
+        },
+        {
+          "bytes": 34792,
+          "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+          "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+        }
+      ]
+    },
+    "qualified_continuous_window": {
+      "end_exclusive": "2026-07-01T00:00:00+00:00",
+      "excluded_empty_hours": 1,
+      "hours": 7337,
+      "selection_rule": "LONGEST_CONTIGUOUS_PRE_REWARD_BLOCK_WITH_AT_LEAST_3_ELIGIBLE_ASSETS",
+      "start": "2025-08-29T07:00:00+00:00"
+    },
+    "raw_cache": {
+      "directory_bundle": {
+        "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+        "bytes": 598775942,
+        "file_count": 122
+      },
+      "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+      "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+    },
+    "v14_config": {
+      "path": "config/crypto_search_engine_v1_4_oi_flow.json",
+      "sha256": "47D4687F334437BB12B4026283F9E18F2618AFD82FAD14337928890FC22C6C61"
+    }
+  },
+  "latent_status": "LATENT_SEARCH_PRIORITY_MODEL_DEFERRED_TO_V1_1",
+  "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
+  "objective": "Compare fresh-state rolling proposal productivity on the receipt-bound OI/mark x aggTrades carrier",
+  "qualification_gate": {
+    "behavior_duplicate_rate_maximum": 0.2,
+    "consecutive_checkpoints_required": 2,
+    "cross_seed_required": true,
+    "engineering_execution_separate_from_search_strategy": true,
+    "frozen_tolerance": 1e-12,
+    "productivity_must_clearly_improve": true,
+    "reward_mean_and_top_decile_must_not_be_worse": true
+  },
+  "relational_status": "STAGE1_CLOSED_READ_ONLY_BRIDGES_ONLY",
+  "representation_contract": {
+    "field_family_normalizer_whitelist": true,
+    "sample_effective_genes_only": true,
+    "typed_role_window_whitelist": true
+  },
+  "schema_version": 2,
+  "seeds": [
+    20260716,
+    20260717,
+    20260718,
+    20260719
+  ],
+  "source_sha": "17d5b5f19acd1366cf5b8f332249d78e918556f1",
+  "surface": {
+    "carrier_reused": true,
+    "context_id": "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+    "field_ids": [
+      "bybit__open_interest_last",
+      "bybit__open_interest_mean",
+      "bybit__open_interest_min",
+      "bybit__open_interest_max",
+      "bybit__open_interest_std",
+      "bybit__open_interest_value_last",
+      "bybit__open_interest_value_mean",
+      "bybit__open_interest_value_min",
+      "bybit__open_interest_value_max",
+      "bybit__open_interest_value_std",
+      "bybit__oi_n",
+      "bybit__mark_price_last",
+      "bybit__mark_price_mean",
+      "bybit__mark_price_min",
+      "bybit__mark_price_max",
+      "bybit__mark_price_std",
+      "bybit__index_price_last",
+      "bybit__index_price_mean",
+      "bybit__index_price_min",
+      "bybit__index_price_max",
+      "bybit__index_price_std",
+      "bybit__funding_rate_last",
+      "bybit__funding_rate_mean",
+      "bybit__funding_rate_min",
+      "bybit__funding_rate_max",
+      "bybit__funding_rate_std",
+      "bybit__mark_n",
+      "hyperliquid_futures__open_interest_last",
+      "hyperliquid_futures__open_interest_mean",
+      "hyperliquid_futures__open_interest_min",
+      "hyperliquid_futures__open_interest_max",
+      "hyperliquid_futures__open_interest_std",
+      "hyperliquid_futures__oi_n",
+      "hyperliquid_futures__mark_price_last",
+      "hyperliquid_futures__mark_price_mean",
+      "hyperliquid_futures__mark_price_min",
+      "hyperliquid_futures__mark_price_max",
+      "hyperliquid_futures__mark_price_std",
+      "hyperliquid_futures__index_price_last",
+      "hyperliquid_futures__index_price_mean",
+      "hyperliquid_futures__index_price_min",
+      "hyperliquid_futures__index_price_max",
+      "hyperliquid_futures__index_price_std",
+      "hyperliquid_futures__funding_rate_last",
+      "hyperliquid_futures__funding_rate_mean",
+      "hyperliquid_futures__funding_rate_min",
+      "hyperliquid_futures__funding_rate_max",
+      "hyperliquid_futures__funding_rate_std",
+      "hyperliquid_futures__mark_n",
+      "okx_futures__open_interest_last",
+      "okx_futures__open_interest_mean",
+      "okx_futures__open_interest_min",
+      "okx_futures__open_interest_max",
+      "okx_futures__open_interest_std",
+      "okx_futures__open_interest_value_last",
+      "okx_futures__open_interest_value_mean",
+      "okx_futures__open_interest_value_min",
+      "okx_futures__open_interest_value_max",
+      "okx_futures__open_interest_value_std",
+      "okx_futures__oi_n",
+      "okx_futures__mark_price_last",
+      "okx_futures__mark_price_mean",
+      "okx_futures__mark_price_min",
+      "okx_futures__mark_price_max",
+      "okx_futures__mark_price_std",
+      "okx_futures__funding_rate_last",
+      "okx_futures__funding_rate_mean",
+      "okx_futures__funding_rate_min",
+      "okx_futures__funding_rate_max",
+      "okx_futures__funding_rate_std",
+      "okx_futures__mark_n",
+      "agg_trade_count",
+      "underlying_trade_count",
+      "quantity",
+      "notional",
+      "buy_agg_trade_count",
+      "sell_agg_trade_count",
+      "buy_underlying_trade_count",
+      "sell_underlying_trade_count",
+      "buy_quantity",
+      "sell_quantity",
+      "buy_notional",
+      "sell_notional",
+      "signed_aggressor_quantity",
+      "signed_aggressor_notional",
+      "trade_count_le_100",
+      "trade_count_100_1k",
+      "trade_count_1k_10k",
+      "trade_count_10k_100k",
+      "trade_count_100k_1m",
+      "trade_count_gt_1m",
+      "notional_le_100",
+      "notional_100_1k",
+      "notional_1k_10k",
+      "notional_10k_100k",
+      "notional_100k_1m",
+      "notional_gt_1m",
+      "open_price",
+      "high_price",
+      "low_price",
+      "close_price",
+      "max_trade_notional",
+      "vwap",
+      "buy_vwap",
+      "sell_vwap",
+      "avg_agg_trade_notional",
+      "avg_underlying_trade_notional",
+      "volume_imbalance",
+      "buy_sell_notional_ratio",
+      "price_range_bps",
+      "close_to_open_bps",
+      "large_trade_count_100k_plus",
+      "large_notional_100k_plus",
+      "large_trade_count_ratio_100k_plus",
+      "large_notional_ratio_100k_plus"
+    ],
+    "fields": 115,
+    "new_materializer": false
+  },
+  "v1_controls": {
+    "exit_after_checkpoint_000": true,
+    "fresh_state": true,
+    "old_candidate_import": false,
+    "old_distribution_import": false,
+    "old_policy_state_import": false,
+    "old_population_import": false,
+    "old_reward_import": false,
+    "parameters": {
+      "canonical_typed_random": {
+        "duplicate_resample_limit": 64
+      },
+      "cem_distribution_v1": {
+        "duplicate_resample_limit": 64,
+        "elite_fraction": 0.25,
+        "generation_size": 16,
+        "minimum_probability": 0.005,
+        "smoothing": 0.5
+      },
+      "evolutionary_typed_v1": {
+        "duplicate_resample_limit": 64,
+        "exploration_probability": 0.25,
+        "tournament_size": 4,
+        "warmup": 16
+      }
+    }
+  },
+  "v2_parameters": {
+    "hierarchical_typed_cem_v2": {
+      "count_pseudocount": 0.5,
+      "duplicate_resample_limit": 64,
+      "elite_fraction": 0.2,
+      "entropy_floor_ratio": 0.6,
+      "minimum_observation_count": 8,
+      "minimum_probability": 0.002,
+      "smoothing": 0.35
+    },
+    "typed_evolution_v2": {
+      "duplicate_resample_limit": 64,
+      "gene_mutation_probability": 0.55,
+      "homologous_crossover_probability": 0.2,
+      "maximum_mutated_genes": 3,
+      "mechanism_cell_limit": 64,
+      "minimum_mutated_genes": 1,
+      "population_limit": 256,
+      "skeleton_variant_mutation_probability": 0.25,
+      "tournament_size": 4,
+      "warmup": 32
+    }
+  }
+}

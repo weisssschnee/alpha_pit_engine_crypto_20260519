@@ -1,10 +1,10 @@
 # Crypto AlphaFactory current state
 
-Last updated: 2026-07-29 Asia/Hong_Kong
+Last updated: 2026-07-31 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ECONOMIC_RECEIPT_SOURCE_QUALIFIED_RUN_AUTHORIZATION_SUSPENDED`
+`CRYPTO_SEARCH_ECONOMIC_V1_ENGINE_BUDGET_EXHAUSTED_CLOSED`
 
 The repository-wide authority audit confirms that Search Engine V1 has a
 substantial reusable engineering chain: admitted carriers, PIT/lag contracts,
@@ -44,9 +44,26 @@ kill-line consumes only frozen validation metrics; its runtime adapter stops
 the failed arm and atomically writes a checkpoint without reading
 test/recent/stress/holdout or writing optimizer state. All referenced source
 hashes are frozen. Canonical and direct runner entry points revalidate the
-receipt. The current user instruction authorizes exactly one conditional
-development campaign under the frozen 5 bps assumption; no formal claim,
-sealed read, OOS, challenge, or promotion is authorized.
+receipt. The one authorized conditional-development campaign under the frozen
+5 bps assumption has now been consumed; no formal claim, sealed read, OOS,
+challenge, or promotion was authorized.
+
+Crypto Search Economic V1 stopped at the frozen raw-attempt hard limit with
+`95,776` attempts and `1,190` strict, exact-unique, matched-control-valid,
+fully cost-evaluated candidates. It wrote and restore-verified
+`checkpoint_budget_exhausted`; no 2,000-candidate checkpoint, validation stage,
+adaptive update, holdout read, OOS, promotion, or rescue rerun occurred. The
+three functioning arms contributed 397 typed-random, 399 Hierarchical CEM V2,
+and 394 Typed Evolution V2 candidates. The two fresh-state V1 controls each
+failed before compilation because their legacy proposal path re-required a
+complete Broad role surface after a compatible carrier-specific Skeleton
+subset had already been frozen; together they consumed 94,469 raw attempts.
+The partial ledger contains 1,160 behavior families, 35 positive train joint
+search rewards, zero positive strict `pair_reward`, and zero matched-positive
+discoveries. This is an incomplete, allocation-imbalanced campaign and
+qualifies no arm. The proposal compatibility defect and the budget-exhausted
+report/manifest closure path are fixed at `da7842dabacf7c98e62475014666877eeda86664`;
+the run authorization is now false and cannot launch a second campaign.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new
 candidate evaluations and zero market budget. It found that `666/1,200` Stage-B
@@ -249,7 +266,11 @@ SEARCH_ENGINE_FROZEN_VALIDATION_ORCHESTRATION_SOURCE_COMPLETE
 SEARCH_ENGINE_FRESH_ADAPTIVE_CAMPAIGN_NOT_AUTHORIZED
 SEARCH_ENGINE_INACTIVE_AUTHORITY_PREFLIGHT_BLOCKED
 SEARCH_ENGINE_ECONOMIC_RECEIPT_V1_SOURCE_QUALIFIED
-SEARCH_ENGINE_ECONOMIC_RECEIPT_RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT
+SEARCH_ENGINE_ECONOMIC_RECEIPT_RUN_AUTHORIZATION_CONSUMED
+SEARCH_ENGINE_ECONOMIC_V1_ENGINE_BUDGET_EXHAUSTED
+SEARCH_ENGINE_ECONOMIC_V1_EMERGENCY_CHECKPOINT_RESTORE_VERIFIED
+SEARCH_ENGINE_ECONOMIC_V1_INCOMPLETE_IMBALANCED_NO_ARM_QUALIFICATION
+SEARCH_ENGINE_V1_CONTROLS_PARTIAL_CARRIER_ROLE_RESOLUTION_REPAIRED
 CAPABILITY_STRICT_FEEDBACK_GLOBAL_SCOPE_REVOKED
 CAPABILITY_STRICT_FEEDBACK_AUTHORITY_RETAINED
 UNIFIED_FIELD_MANAGEMENT_V1_COMPILED_VIEW_ACTIVE
@@ -276,6 +297,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 - Search Engine V1.1 Behavior-Niched Arena: producer source `17ac5de989dec464b0c4903256f3f7662eeb9778`; artifact bundle SHA256 `E27E0F116CBE1D1FB3F23D76178688AA44E4D1DE6738D02284F3D6F6FCA729A8`; frozen contract SHA256 `A94F0AE452FF626823E4408A786DBC7B7979EDBAEB5843950A10853548A393CC`; data-cache identity SHA256 `127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04`; 3,000 strict candidates; 5,444 attempts; 2/2 exact-restored checkpoints; 2,916 behavior families; 42 champion replacements; engineering integrity `PASS`; research `HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT`; CEM V2.1 and Evolution V2.1 increments rejected; future qualified arms `[]`; sealed reads `0`.
 - Search Engine V1.2 Balanced Collision Arena: producer source `395a972a99c869f1c6acc24c6a167939b9f0857e`; artifact bundle SHA256 `F142EB44FE91C349A54F0D7C78C704A491658B7FBC0B30402E0B08E5B8459296`; frozen contract SHA256 `620B40B5AEE6634BB719E3AA0FA95B778939CB66264869DC7E851A8949EB1C83`; data-cache identity SHA256 `127C1C4EBA099A5AB1F2CE8AE0E78564AEABBAE83D12C7FEC0FE784191C3CD04`; 2,000 strict candidates; 3,598 attempts; 2/2 exact-restored checkpoints; 1,916 behavior families; 250 balanced rotating micro-batches; engineering integrity `PASS`; research `HOLD_RESEARCH_SPENT_FIXED_RETROSPECTIVE_COHORT`; Evolution V2.2 increment rejected; future qualified arms `[]`; sealed reads `0`.
 - Search Engine V1.4 OI/flow conditional gate: producer source `018be6caca5c7ad294729c17294295283589ec7d`; artifact bundle SHA256 `3AE3E801A58C1C3F9AEABFB80F7E748AF933C026BA2A99EB1E6EDB429F24BF7E`; aligned-cache identity SHA256 `E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA`; `71 OI/mark + 44 aggTrades`; 1,264 strict candidates from 1,958 attempts; 5/5 exact-restored checkpoints; 1,264 behavior families; Stage B `HOLD_ADAPTIVE_GATE`; Stage C not run; future qualified arms `[]`; sealed reads `0`.
+- Crypto Search Economic V1 partial terminal run: producer source `17d5b5f19acd1366cf5b8f332249d78e918556f1`; closure source `da7842dabacf7c98e62475014666877eeda86664`; artifact bundle SHA256 `D639AB3BDD671BB71725BD7013BE61B2CD698C7BEDD08C9481F44DE309B8A870`; aligned-cache identity SHA256 `E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA`; 1,190 strict candidates from 95,776 attempts; emergency restore `PASS`; status `ENGINE_BUDGET_EXHAUSTED`; research `HOLD_INCOMPLETE_IMBALANCED_CAMPAIGN`; future qualified arms `[]`; sealed reads `0`.
 - Search Engine V1.4 existing-ledger failure decomposition: producer source `16fc1feabc79f711d4b7b728eac2c2b9d00f91e5`; input bundle SHA256 `0DE62CB1D38F10A0477F6E8D98B9A0EB2A863A7B8CD5531F03A909592203EFEB`; artifact bundle SHA256 `D50D37ECB025E09B5BDEDADDC3ED8F6D60CE5F6CAB7A770203F5FAFD13A38E96`; five diagnostic tables; zero candidate evaluations, market budget, sealed reads, OOS, or promotion; adaptive V1.4b and operator expansion not authorized.
 - Search Engine V1.4 Binance target exact replay: producer source `fe82d94e5530d13e933c0f3db5d2b4869ad34521`; artifact commit `9dbb4ce52f5db218683e10c5463e2e6554c7b060`; aligned cache identity `E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA`; target identity `27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0`; frozen contract `ADA30AE30B55B449F7FBE2C6B8E28E41757F4A8CEA87B5513D5277DA7FE2BF85`; run manifest SHA256 `6458EE3F8272A54F468411610F45CF5D3A3FC361DE6DCA5EDC98F7AC61599E46`; final decision SHA256 `C369FF6B1D7C9FB7F4CC39556B58A66F3A4EA82766354798C927162F639FAA56`; 4 checkpoints; exact replay ledger and full/ monthly waterfalls persisted; gross persistence diagnostic passed; research qualification `HOLD_SPENT_DEVELOPMENT_EXACT_REPLAY`; next action turnover repair then bounded adaptive.
 - Search Surface Integration V1: producer source `caa4500485995119a908790508030e305add6841`; source-binding SHA256 `D1AF43DAB909256A8B9EF171E70548B58DC3CC524852194071263A636AA87C7D`; run-manifest SHA256 `5959D31E6218E0A12EDE2730D68F97D012B7AC9164AC06EA8BD31850A9BE7BF2`; carrier-manifest SHA256 `F4E1A3F81B7C7F80097FE42B52DEBE5E086C884D7123FB854A360F3868E691D8`; frozen-contract identity SHA256 `28368DC76F3C3D150A8B1EAD8C9D13011CB6B754AAFFF67BF1D7DFBD42A6B176`; aggTrades full-44 carrier identity SHA256 `0F8BDE06E35D62E7B64BD3A43866C19796D84E65CF8F096465E9CA63B75630B6`; 260 declared engineering fields, 235 runtime-active, 25 explicit source-unavailable HOLD; checker `PASS`; research and future Arena `HOLD`; market pair evaluations/reward/sealed reads `0`.
@@ -334,7 +356,7 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
 3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
 4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2` is source-qualified for future fresh-state use but remains inactive until the rest of the economic receipt closes. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
-5. Treat `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` as the sole successor source binding for mechanism, train-frozen orientation, portfolio role and formal mapping, Binance USD-M target/execution, the NON_FORMAL frozen 5 bps venue assumption, train-only joint reward, distinct no-feedback validation kill-line, unreadable holdout, and fresh-state requirements. Do not duplicate these components. The receipt remains run-inactive and cannot authorize a market campaign by itself.
+5. Treat `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` as the sole successor source binding for mechanism, train-frozen orientation, portfolio role and formal mapping, Binance USD-M target/execution, the NON_FORMAL frozen 5 bps venue assumption, train-only joint reward, distinct no-feedback validation kill-line, unreadable holdout, and fresh-state requirements. Do not duplicate these components. Its one-run authorization is consumed and `run_authorized=false`; it cannot authorize another market campaign.
 6. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
 7. Do not launch another large search until separately authorized over an admitted new release. Latent search priority remains deferred after V1.2 and cannot influence budget.
 8. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
