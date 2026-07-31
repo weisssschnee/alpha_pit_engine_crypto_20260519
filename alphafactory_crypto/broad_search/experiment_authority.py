@@ -49,6 +49,9 @@ SEARCH_ECONOMIC_V5_RECEIPT_PATH = (
 SEARCH_ECONOMIC_V6_RECEIPT_PATH = (
     "config/crypto_search_economic_receipt_v6.json"
 )
+SEARCH_MECHANISM_V2_RECEIPT_PATH = (
+    "config/crypto_search_mechanism_v2_receipt.json"
+)
 ECONOMIC_SEARCH_V6_EPOCH_ID = (
     "CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801"
 )
@@ -227,6 +230,73 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
         "seed_set": ECONOMIC_SEARCH_V6_SEEDS,
         "seed_derivation": ECONOMIC_SEARCH_V6_SEED_DERIVATION,
     },
+    "CRYPTO_SEARCH_MECHANISM_V2_RECEIPT": {
+        "path": SEARCH_MECHANISM_V2_RECEIPT_PATH,
+        "decision_id": (
+            "USER_AUTHORIZED_EXTENSIBLE_TYPED_MECHANISM_GRAMMAR_12K_20260801"
+        ),
+        "runner_campaign": "crypto_search_mechanism_v2",
+        "runtime_date": "20260801",
+        "allowed_statuses": {
+            "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
+        },
+        "expected_run_outcome": {},
+        "run_authorization_scope": (
+            "ONE_FRESH_STATE_12000_STRICT_MECHANISM_CAMPAIGN"
+        ),
+        "run_authorization_extras": {
+            "mechanism_catalog_persistence_authorized": True,
+            "candidate_or_policy_state_persistence_authorized": False,
+            "additional_seed_campaign_allowed": False,
+        },
+        "mechanism_registry_symbol": (
+            "alphafactory_crypto.broad_search.compositional18m."
+            "compile_mechanism_catalog"
+        ),
+        "mapping_adapter_symbol": (
+            "alphafactory_crypto.broad_search.compositional18m."
+            "mapping_id_for_mechanism_spec"
+        ),
+        "economic_hypothesis_field": "hypothesis",
+        "mapping_classes": {
+            "CROSS_SECTIONAL_RELATIVE",
+            "DIRECTIONAL_STATEFUL",
+            "SPARSE_EVENT_CARRY",
+        },
+        "strict_evaluated_target": 12_000,
+        "checkpoint_size": 2_000,
+        "checkpoint_count": 6,
+        "validation_trigger": 5,
+        "validation_continuation_action": (
+            "NO_ADDITIONAL_BUDGET_FINAL_PER_ARM_QUALIFICATION"
+        ),
+        "random_control_survival_required": False,
+        "seed_set": (
+            3119619210,
+            1353677240,
+            2161345710,
+            2150829259,
+        ),
+        "seed_derivation": (
+            "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_3)"
+        ),
+        "required_component_sources": {
+            "mechanism",
+            "mechanism_mapping",
+            "direction",
+            "validation_kill_line",
+            "portfolio_mapping_and_cost",
+            "target_execution",
+            "optimizer_reward_and_matched_attribution",
+            "target_contract",
+            "runtime_binding",
+            "mechanism_catalog",
+            "campaign_contract",
+        },
+    },
 }
 
 _INVALID_INTENT = {
@@ -392,7 +462,10 @@ def _validate_search_economic_receipt(
     expected_run_authorization = {
         "decision_id": receipt_spec["decision_id"],
         "authority": "CURRENT_USER_INSTRUCTION",
-        "scope": "ONE_FRESH_STATE_20000_STRICT_MAXIMUM_CAMPAIGN",
+        "scope": receipt_spec.get(
+            "run_authorization_scope",
+            "ONE_FRESH_STATE_20000_STRICT_MAXIMUM_CAMPAIGN",
+        ),
         "cost_interpretation": "RESULTS_CONDITIONAL_ON_FROZEN_5_BPS",
         "parameter_tuning_allowed": False,
         "seed_change_allowed": False,
@@ -426,15 +499,21 @@ def _validate_search_economic_receipt(
     boundaries = dict(receipt.get("boundaries") or {})
     component_sources = dict(receipt.get("component_sources") or {})
 
-    expected_mechanism = (
-        "alphafactory_crypto.broad_search.compositional18m.skeleton_registry"
+    expected_mechanism = str(
+        receipt_spec.get(
+            "mechanism_registry_symbol",
+            "alphafactory_crypto.broad_search.compositional18m.skeleton_registry",
+        )
     )
     expected_mapping = (
         "alphafactory_crypto.instrument_canary.grammar.MECHANISM_MAPPING"
     )
-    expected_mapping_adapter = (
-        "alphafactory_crypto.broad_search.compositional18m."
-        "mapping_id_for_mechanism_family"
+    expected_mapping_adapter = str(
+        receipt_spec.get(
+            "mapping_adapter_symbol",
+            "alphafactory_crypto.broad_search.compositional18m."
+            "mapping_id_for_mechanism_family",
+        )
     )
     expected_direction = (
         "scripts.crypto_a7reward1_portfolio_reward_model.select_train_orientation"
@@ -456,18 +535,31 @@ def _validate_search_economic_receipt(
     )
     if mechanism.get("registry_symbol") != expected_mechanism:
         blockers.append("mechanism.registry_symbol")
-    if mechanism.get("economic_hypothesis_field") != "financial_hypothesis":
+    if mechanism.get("economic_hypothesis_field") != receipt_spec.get(
+        "economic_hypothesis_field", "financial_hypothesis"
+    ):
         blockers.append("mechanism.economic_hypothesis_field")
     if mechanism.get("mapping_authority_symbol") != expected_mapping:
         blockers.append("mechanism.mapping_authority_symbol")
     if mechanism.get("mapping_adapter_symbol") != expected_mapping_adapter:
         blockers.append("mechanism.mapping_adapter_symbol")
-    if mechanism.get("mapping_class") != "CROSS_SECTIONAL_RELATIVE":
+    expected_mapping_classes = set(
+        receipt_spec.get("mapping_classes", {"CROSS_SECTIONAL_RELATIVE"})
+    )
+    observed_mapping_classes = set(
+        str(value) for value in mechanism.get("mapping_classes", ())
+    ) or {str(mechanism.get("mapping_class") or "")}
+    if observed_mapping_classes != expected_mapping_classes:
         blockers.append("mechanism.mapping_class")
-    elif (
-        MECHANISM_MAPPING.get(str(mechanism.get("mapping_class")))
-        != portfolio.get("mapping_id")
-    ):
+    resolved_mapping_ids = {
+        str(MECHANISM_MAPPING[value])
+        for value in observed_mapping_classes
+        if value in MECHANISM_MAPPING
+    }
+    observed_portfolio_mapping_ids = set(
+        str(value) for value in portfolio.get("mapping_ids", ())
+    ) or {str(portfolio.get("mapping_id") or "")}
+    if resolved_mapping_ids != observed_portfolio_mapping_ids:
         blockers.append("mechanism.mapping_resolution")
     if direction.get("rule") != "TRAIN_FROZEN_SIGN_ORIENTATION":
         blockers.append("direction.rule")
@@ -481,9 +573,13 @@ def _validate_search_economic_receipt(
         blockers.append("direction.persist_in_candidate_ledger")
     if portfolio.get("mapping_authority_component") != "explicit_portfolio_mapping":
         blockers.append("portfolio.mapping_authority_component")
-    mapping_id = str(portfolio.get("mapping_id") or "")
-    mapping_contract = DEFAULT_MAPPING_CONTRACTS.get(mapping_id)
-    if mapping_contract is None:
+    mapping_ids = tuple(sorted(observed_portfolio_mapping_ids))
+    mapping_contracts = [
+        DEFAULT_MAPPING_CONTRACTS[value]
+        for value in mapping_ids
+        if value in DEFAULT_MAPPING_CONTRACTS
+    ]
+    if len(mapping_contracts) != len(mapping_ids):
         blockers.append("portfolio.mapping_id")
     if portfolio.get("shared_support_execution_horizon_cost") is not True:
         blockers.append("portfolio.shared_support_execution_horizon_cost")
@@ -536,8 +632,14 @@ def _validate_search_economic_receipt(
     if execution.get("instrument_type") != "LINEAR_PERPETUAL":
         blockers.append("execution.instrument_type")
 
-    if mapping_contract is not None:
-        mapping_cost = dict(mapping_contract.cost_model)
+    if mapping_contracts:
+        mapping_cost_models = {
+            _canonical_sha256(dict(contract.cost_model)): dict(contract.cost_model)
+            for contract in mapping_contracts
+        }
+        if len(mapping_cost_models) != 1:
+            blockers.append("cost.mapping_contract_divergence")
+        mapping_cost = next(iter(mapping_cost_models.values()))
         expected_cost = {
             "model_id": mapping_cost.get("id"),
             "cost_bps": float(mapping_cost.get("cost_bps")),
@@ -558,7 +660,10 @@ def _validate_search_economic_receipt(
         observed_cost = {}
     if cost.get("authority_component") != "real_data_mapping_cost_evaluator":
         blockers.append("cost.authority_component")
-    if cost.get("mapping_id") != mapping_id:
+    cost_mapping_ids = set(str(value) for value in cost.get("mapping_ids", ())) or {
+        str(cost.get("mapping_id") or "")
+    }
+    if cost_mapping_ids != set(mapping_ids):
         blockers.append("cost.mapping_id")
     if cost.get("venue") != execution.get("venue"):
         blockers.append("cost.venue")
@@ -684,11 +789,17 @@ def _validate_search_economic_receipt(
         blockers.append("search_campaign.carrier_cache_identity_sha256")
     if search_campaign.get("field_count") != 115:
         blockers.append("search_campaign.field_count")
-    if search_campaign.get("strict_evaluated_target") != 20_000:
+    if search_campaign.get("strict_evaluated_target") != int(
+        receipt_spec.get("strict_evaluated_target", 20_000)
+    ):
         blockers.append("search_campaign.strict_evaluated_target")
-    if search_campaign.get("checkpoint_size") != 2_000:
+    if search_campaign.get("checkpoint_size") != int(
+        receipt_spec.get("checkpoint_size", 2_000)
+    ):
         blockers.append("search_campaign.checkpoint_size")
-    if search_campaign.get("checkpoint_count") != 10:
+    if search_campaign.get("checkpoint_count") != int(
+        receipt_spec.get("checkpoint_count", 10)
+    ):
         blockers.append("search_campaign.checkpoint_count")
     if search_campaign.get("fresh_state") is not True:
         blockers.append("search_campaign.fresh_state")
@@ -710,7 +821,9 @@ def _validate_search_economic_receipt(
         != receipt_spec["runner_campaign"]
     ):
         blockers.append("validation_kill_line.orchestration_campaign")
-    if kill_line.get("trigger_after_train_checkpoint_index") != 0:
+    if kill_line.get("trigger_after_train_checkpoint_index") != int(
+        receipt_spec.get("validation_trigger", 0)
+    ):
         blockers.append(
             "validation_kill_line.trigger_after_train_checkpoint_index"
         )
@@ -745,9 +858,19 @@ def _validate_search_economic_receipt(
         blockers.append("validation_kill_line.failed_arm_allocation")
     if (
         kill_line.get("continuation_action")
-        != "NEXT_CHECKPOINT_USES_EXISTING_ARM_STATE"
+        != receipt_spec.get(
+            "validation_continuation_action",
+            "NEXT_CHECKPOINT_USES_EXISTING_ARM_STATE",
+        )
     ):
         blockers.append("validation_kill_line.continuation_action")
+    if "random_control_survival_required" in receipt_spec and (
+        kill_line.get("random_control_survival_required")
+        is not receipt_spec["random_control_survival_required"]
+    ):
+        blockers.append(
+            "validation_kill_line.random_control_survival_required"
+        )
     if (
         kill_line.get("checkpoint_action")
         != "EXISTING_CAMPAIGN_CHECKPOINT_WITH_VALIDATION_ARTIFACTS"
@@ -786,6 +909,11 @@ def _validate_search_economic_receipt(
         ),
     }
     component_sha256: dict[str, str] = {}
+    required_component_sources = receipt_spec.get("required_component_sources")
+    if required_component_sources is not None and set(component_sources) != set(
+        required_component_sources
+    ):
+        blockers.append("component_sources.required_set")
     for component, source_binding in component_sources.items():
         if not isinstance(source_binding, Mapping):
             blockers.append(f"component_sources.{component}")

@@ -19,11 +19,14 @@ from alphafactory_crypto.instrument_capability.mapping import (
 )
 from alphafactory_crypto.instrument_canary.grammar import (
     CROSS_SECTIONAL_RELATIVE,
+    DIRECTIONAL_STATEFUL,
     MECHANISM_MAPPING,
+    SPARSE_EVENT_CARRY,
 )
 from scipy.stats import rankdata
 
 from .expression import (
+    BINARY_OPERATORS,
     Expression,
     FieldContract,
     TypedExpressionRegistry,
@@ -136,6 +139,120 @@ class Skeleton:
 
 
 @dataclass(frozen=True, slots=True)
+class MechanismSpec:
+    """Versioned economic mechanism compiled through the existing typed AST.
+
+    The identity deliberately excludes field bindings, windows, normalizers,
+    horizons, lineage, and observed rewards.  Those belong to a candidate or a
+    campaign; this object is the durable, declarative mechanism definition.
+    """
+
+    mechanism_id: str
+    template_id: str
+    generation: int
+    hypothesis: str
+    left_role: str
+    right_role: str
+    payload_operator: str
+    condition_role: str | None
+    condition_operator: str | None
+    mapping_class: str
+    matched_control_schema: str
+    parent_mechanism_ids: tuple[str, ...] = ()
+    lifecycle: str = "ACTIVE"
+
+    def semantic_payload(self) -> dict[str, Any]:
+        return {
+            "schema_version": 1,
+            "template_id": self.template_id,
+            "left_role": self.left_role,
+            "right_role": self.right_role,
+            "payload_operator": self.payload_operator,
+            "condition_role": self.condition_role,
+            "condition_operator": self.condition_operator,
+            "mapping_class": self.mapping_class,
+            "matched_control_schema": self.matched_control_schema,
+        }
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "mechanism_id": self.mechanism_id,
+            "generation": int(self.generation),
+            "hypothesis": self.hypothesis,
+            "parent_mechanism_ids": list(self.parent_mechanism_ids),
+            "lifecycle": self.lifecycle,
+            **self.semantic_payload(),
+        }
+
+    @classmethod
+    def build(
+        cls,
+        *,
+        template_id: str,
+        generation: int,
+        hypothesis: str,
+        left_role: str,
+        right_role: str,
+        payload_operator: str,
+        condition_role: str | None,
+        condition_operator: str | None,
+        mapping_class: str,
+        matched_control_schema: str,
+        parent_mechanism_ids: Sequence[str] = (),
+        lifecycle: str = "ACTIVE",
+    ) -> "MechanismSpec":
+        semantic = {
+            "schema_version": 1,
+            "template_id": str(template_id),
+            "left_role": str(left_role),
+            "right_role": str(right_role),
+            "payload_operator": str(payload_operator),
+            "condition_role": str(condition_role) if condition_role else None,
+            "condition_operator": (
+                str(condition_operator) if condition_operator else None
+            ),
+            "mapping_class": str(mapping_class),
+            "matched_control_schema": str(matched_control_schema),
+        }
+        mechanism_id = f"MECHANISM_V2_{_payload_sha(semantic)[:32]}"
+        return cls(
+            mechanism_id,
+            str(template_id),
+            int(generation),
+            str(hypothesis),
+            str(left_role),
+            str(right_role),
+            str(payload_operator),
+            semantic["condition_role"],
+            semantic["condition_operator"],
+            str(mapping_class),
+            str(matched_control_schema),
+            tuple(str(value) for value in parent_mechanism_ids),
+            str(lifecycle),
+        )
+
+    @classmethod
+    def from_dict(cls, payload: Mapping[str, Any]) -> "MechanismSpec":
+        built = cls.build(
+            template_id=str(payload["template_id"]),
+            generation=int(payload["generation"]),
+            hypothesis=str(payload["hypothesis"]),
+            left_role=str(payload["left_role"]),
+            right_role=str(payload["right_role"]),
+            payload_operator=str(payload["payload_operator"]),
+            condition_role=payload.get("condition_role"),
+            condition_operator=payload.get("condition_operator"),
+            mapping_class=str(payload["mapping_class"]),
+            matched_control_schema=str(payload["matched_control_schema"]),
+            parent_mechanism_ids=payload.get("parent_mechanism_ids", ()),
+            lifecycle=str(payload.get("lifecycle", "ACTIVE")),
+        )
+        if str(payload["mechanism_id"]) != built.mechanism_id:
+            raise ValueError("mechanism semantic identity changed")
+        return built
+
+
+@dataclass(frozen=True, slots=True)
 class CandidateSpec:
     candidate_id: str
     skeleton_id: str
@@ -230,6 +347,121 @@ def skeleton_registry() -> tuple[Skeleton, ...]:
         for family in MECHANISM_FAMILIES
         for variant in range(1, 6)
     )
+
+
+def compile_mechanism_catalog(payload: Mapping[str, Any]) -> tuple[MechanismSpec, ...]:
+    """Expand declarative semantic templates into a bounded typed catalog."""
+
+    if int(payload.get("schema_version", -1)) != 1:
+        raise ValueError("unsupported typed mechanism catalog schema")
+    if payload.get("compiler_route") != (
+        "EXISTING_EXPRESSION_TYPED_REGISTRY_CANDIDATE_SPEC"
+    ):
+        raise ValueError("typed mechanism catalog attempted a second compiler route")
+    if int(payload.get("maximum_generation", -1)) != 2:
+        raise ValueError("typed mechanism maximum generation changed")
+    operator_sets = {
+        str(name): tuple(str(value) for value in values)
+        for name, values in dict(payload["payload_operator_sets"]).items()
+    }
+    condition_operators = tuple(
+        str(value) for value in payload["condition_operator_set"]
+    )
+    allowed_payload = {
+        "SafeMul",
+        "SafeDiv",
+        "NormalizedDifference",
+        "Residual",
+        "RatioInteraction",
+    }
+    if (
+        any(not values for values in operator_sets.values())
+        or any(
+            operator not in BINARY_OPERATORS or operator not in allowed_payload
+            for values in operator_sets.values()
+            for operator in values
+        )
+        or set(condition_operators) != {"ConditionGate", "StateModulation"}
+    ):
+        raise ValueError("typed mechanism catalog operator basis is unsafe")
+    mapping = dict(payload["mapping_derivation"])
+    expected_mapping_classes = {
+        CROSS_SECTIONAL_RELATIVE,
+        DIRECTIONAL_STATEFUL,
+        SPARSE_EVENT_CARRY,
+    }
+    if set(mapping.values()) != expected_mapping_classes:
+        raise ValueError("typed mechanism mapping derivation changed")
+
+    output: list[MechanismSpec] = []
+    for template in payload["templates"]:
+        operator_set = str(template["payload_operator_set"])
+        if operator_set not in operator_sets:
+            raise ValueError("mechanism template references an unknown operator set")
+        template_id = str(template["template_id"])
+        hypothesis = str(template["hypothesis"])
+        left_role = str(template["left_role"])
+        right_role = str(template["right_role"])
+        directional = bool(template.get("directional", False))
+        binary_mapping = str(
+            mapping["DIRECTIONAL_TEMPLATE"] if directional else mapping["default"]
+        )
+        for payload_operator in operator_sets[operator_set]:
+            parent = MechanismSpec.build(
+                template_id=template_id,
+                generation=1,
+                hypothesis=hypothesis,
+                left_role=left_role,
+                right_role=right_role,
+                payload_operator=payload_operator,
+                condition_role=None,
+                condition_operator=None,
+                mapping_class=binary_mapping,
+                matched_control_schema="DUAL_AXIS_A_B_AB",
+            )
+            output.append(parent)
+            for condition_role in template.get("condition_roles", ()):
+                for condition_operator in condition_operators:
+                    mapping_class = str(
+                        mapping[condition_operator]
+                        if condition_operator == "ConditionGate"
+                        else binary_mapping
+                    )
+                    output.append(
+                        MechanismSpec.build(
+                            template_id=template_id,
+                            generation=2,
+                            hypothesis=(
+                                f"{hypothesis} The {condition_role} state controls "
+                                "whether or how strongly the payload is expressed."
+                            ),
+                            left_role=left_role,
+                            right_role=right_role,
+                            payload_operator=payload_operator,
+                            condition_role=str(condition_role),
+                            condition_operator=condition_operator,
+                            mapping_class=mapping_class,
+                            matched_control_schema="HIERARCHICAL_A_B_AB_ABC",
+                            parent_mechanism_ids=(parent.mechanism_id,),
+                        )
+                    )
+    ids = [item.mechanism_id for item in output]
+    if len(ids) != len(set(ids)):
+        raise ValueError("typed mechanism catalog contains semantic duplicates")
+    if any(item.mapping_class not in MECHANISM_MAPPING for item in output):
+        raise ValueError("typed mechanism catalog has no existing mapping authority")
+    return tuple(sorted(output, key=lambda item: item.mechanism_id))
+
+
+def mapping_id_for_mechanism_spec(spec: MechanismSpec) -> str:
+    """Resolve a compiled mechanism through the existing mapping authority."""
+
+    try:
+        return str(MECHANISM_MAPPING[spec.mapping_class])
+    except KeyError as error:
+        raise ValueError(
+            f"unknown mechanism mapping class: {spec.mapping_class}"
+        ) from error
 
 
 def _variant_operator(family: str, variant: int) -> str:
@@ -760,6 +992,334 @@ def _same_oi_statistic_different_venue(
     left_venue, left_suffix = str(left_field).split("__", 1)
     right_venue, right_suffix = str(right_field).split("__", 1)
     return left_venue != right_venue and left_suffix == right_suffix
+
+
+MECHANISM_V2_ROLES = (
+    "OI_LEVEL",
+    "OI_NOTIONAL",
+    "FUNDING",
+    "FLOW_IMBALANCE",
+    "PRICE_RESPONSE",
+    "LARGE_TRADE",
+    "TRADE_INTENSITY",
+    "BASIS_BUNDLE",
+    "CROSS_VENUE_OI_BUNDLE",
+)
+
+
+def mechanism_role_domains(
+    contracts: Sequence[FieldContract],
+) -> dict[str, tuple[Any, ...]]:
+    """Build typed role domains directly from the existing field contracts."""
+
+    fields = tuple(sorted(item.field_id for item in contracts))
+
+    def singles(kind: str) -> tuple[str, ...]:
+        return tuple(
+            field_id
+            for field_id in fields
+            if _conditional_field_kind(field_id) == kind
+        )
+
+    mark = singles("mark")
+    index = singles("index")
+    oi_level = singles("oi_level")
+    basis = tuple(
+        sorted(
+            (left, right)
+            for left in mark
+            for right in index
+            if _same_venue_statistic(left, right)
+        )
+    )
+    cross_venue_oi = tuple(
+        sorted(
+            (left, right)
+            for left in oi_level
+            for right in oi_level
+            if left < right and _same_oi_statistic_different_venue(left, right)
+        )
+    )
+    domains: dict[str, tuple[Any, ...]] = {
+        "OI_LEVEL": oi_level,
+        "OI_NOTIONAL": singles("oi_notional"),
+        "FUNDING": singles("funding"),
+        "FLOW_IMBALANCE": singles("flow_imbalance"),
+        "PRICE_RESPONSE": singles("price_response"),
+        "LARGE_TRADE": singles("large_trade"),
+        "TRADE_INTENSITY": singles("trade_intensity"),
+        "BASIS_BUNDLE": basis,
+        "CROSS_VENUE_OI_BUNDLE": cross_venue_oi,
+    }
+    empty = sorted(role for role, values in domains.items() if not values)
+    if empty:
+        raise ValueError("typed mechanism roles have empty domains: " + ",".join(empty))
+    return domains
+
+
+def _mechanism_binding_expression(
+    *,
+    role: str,
+    field_id: str,
+    auxiliary_field_id: str,
+    window: int,
+    normalizer: str,
+) -> Expression:
+    if role in {"BASIS_BUNDLE", "CROSS_VENUE_OI_BUNDLE"}:
+        if not auxiliary_field_id:
+            raise ValueError("bundle role requires two raw fields")
+        return _conditional_difference(field_id, auxiliary_field_id)
+    if auxiliary_field_id:
+        raise ValueError("single-field role cannot carry an auxiliary field")
+    return _normalized(field_id, window, mode=normalizer)
+
+
+def _validate_mechanism_binding(
+    *,
+    role: str,
+    field_id: str,
+    auxiliary_field_id: str,
+    domains: Mapping[str, Sequence[Any]],
+) -> None:
+    if role not in domains:
+        raise ValueError(f"unknown mechanism role: {role}")
+    binding: Any = (
+        (str(field_id), str(auxiliary_field_id))
+        if role in {"BASIS_BUNDLE", "CROSS_VENUE_OI_BUNDLE"}
+        else str(field_id)
+    )
+    if binding not in domains[role]:
+        raise ValueError(f"field binding violates typed mechanism role: {role}")
+
+
+def mechanism_candidate_from_genes(
+    registry: TypedExpressionRegistry,
+    *,
+    genes: Mapping[str, Any],
+    domains: Mapping[str, Sequence[Any]] | None = None,
+) -> CandidateSpec:
+    """Compile a V2 mechanism genome with the existing Expression registry."""
+
+    required = {
+        "mechanism_id",
+        "mechanism_spec",
+        "left_field",
+        "left_auxiliary_field",
+        "right_field",
+        "right_auxiliary_field",
+        "condition_field",
+        "condition_auxiliary_field",
+        "left_window",
+        "right_window",
+        "condition_window",
+        "left_normalizer",
+        "right_normalizer",
+        "condition_normalizer",
+        "beta",
+        "horizon_hours",
+        "matched_control_schema",
+    }
+    if set(genes) != required:
+        raise ValueError(
+            "mechanism generation genes must be exact: "
+            + ",".join(sorted(required))
+        )
+    spec = MechanismSpec.from_dict(dict(genes["mechanism_spec"]))
+    if str(genes["mechanism_id"]) != spec.mechanism_id:
+        raise ValueError("mechanism genome identity changed")
+    if str(genes["matched_control_schema"]) != spec.matched_control_schema:
+        raise ValueError("mechanism matched-control schema changed")
+    role_domains = domains or mechanism_role_domains(tuple(registry.fields.values()))
+    bindings = {
+        "left": (
+            spec.left_role,
+            str(genes["left_field"]),
+            str(genes["left_auxiliary_field"]),
+        ),
+        "right": (
+            spec.right_role,
+            str(genes["right_field"]),
+            str(genes["right_auxiliary_field"]),
+        ),
+    }
+    if spec.condition_role:
+        bindings["condition"] = (
+            spec.condition_role,
+            str(genes["condition_field"]),
+            str(genes["condition_auxiliary_field"]),
+        )
+    elif str(genes["condition_field"]) or str(genes["condition_auxiliary_field"]):
+        raise ValueError("binary mechanism cannot carry a condition binding")
+    for role, field_id, auxiliary in bindings.values():
+        _validate_mechanism_binding(
+            role=role,
+            field_id=field_id,
+            auxiliary_field_id=auxiliary,
+            domains=role_domains,
+        )
+    for name in ("left_window", "right_window", "condition_window"):
+        if int(genes[name]) not in WINDOWS:
+            raise ValueError("mechanism rolling window is outside the frozen grammar")
+    for name in (
+        "left_normalizer",
+        "right_normalizer",
+        "condition_normalizer",
+    ):
+        if str(genes[name]) not in NORMALIZERS:
+            raise ValueError("mechanism normalizer is outside the frozen grammar")
+    if float(genes["beta"]) not in BETAS:
+        raise ValueError("mechanism residual beta is outside the frozen grammar")
+    if int(genes["horizon_hours"]) not in HORIZONS:
+        raise ValueError("mechanism horizon is outside the frozen grammar")
+
+    left = _mechanism_binding_expression(
+        role=spec.left_role,
+        field_id=str(genes["left_field"]),
+        auxiliary_field_id=str(genes["left_auxiliary_field"]),
+        window=int(genes["left_window"]),
+        normalizer=str(genes["left_normalizer"]),
+    )
+    right = _mechanism_binding_expression(
+        role=spec.right_role,
+        field_id=str(genes["right_field"]),
+        auxiliary_field_id=str(genes["right_auxiliary_field"]),
+        window=int(genes["right_window"]),
+        normalizer=str(genes["right_normalizer"]),
+    )
+    payload_parameters = (
+        {"beta": float(genes["beta"])}
+        if spec.payload_operator == "Residual"
+        else {}
+    )
+    payload_expression = Expression(
+        spec.payload_operator,
+        (left, right),
+        parameters=payload_parameters,
+    )
+    if spec.condition_role:
+        condition = _mechanism_binding_expression(
+            role=spec.condition_role,
+            field_id=str(genes["condition_field"]),
+            auxiliary_field_id=str(genes["condition_auxiliary_field"]),
+            window=int(genes["condition_window"]),
+            normalizer=str(genes["condition_normalizer"]),
+        )
+        expression = Expression(
+            str(spec.condition_operator),
+            (payload_expression, condition),
+            parameters=(
+                {"threshold": 0.0}
+                if spec.condition_operator == "ConditionGate"
+                else {}
+            ),
+        )
+        mechanism_family = f"CONDITIONAL_V2_{spec.template_id}"
+    else:
+        expression = payload_expression
+        mechanism_family = f"MECHANISM_V2_{spec.template_id}"
+    assurance = registry.validate(expression)
+    control = ablate_expression(expression)
+    control_assurance = registry.validate(control)
+    if set(assurance.raw_fields) != set(control_assurance.raw_fields):
+        raise AssertionError("mechanism matched control changed raw inputs")
+    mapping_id = mapping_id_for_mechanism_spec(spec)
+    genome = {
+        "mechanism_id": spec.mechanism_id,
+        "mechanism_spec": spec.to_dict(),
+        "left_field": str(genes["left_field"]),
+        "left_auxiliary_field": str(genes["left_auxiliary_field"]),
+        "right_field": str(genes["right_field"]),
+        "right_auxiliary_field": str(genes["right_auxiliary_field"]),
+        "condition_field": str(genes["condition_field"]),
+        "condition_auxiliary_field": str(genes["condition_auxiliary_field"]),
+        "left_window": int(genes["left_window"]),
+        "right_window": int(genes["right_window"]),
+        "condition_window": int(genes["condition_window"]),
+        "left_normalizer": str(genes["left_normalizer"]),
+        "right_normalizer": str(genes["right_normalizer"]),
+        "condition_normalizer": str(genes["condition_normalizer"]),
+        "beta": (
+            float(genes["beta"]) if spec.payload_operator == "Residual" else 0.5
+        ),
+        "horizon_hours": int(genes["horizon_hours"]),
+        "matched_control_schema": spec.matched_control_schema,
+    }
+    candidate_payload = {
+        "mechanism_id": spec.mechanism_id,
+        "expression": expression.canonical_dict(),
+        "control": control.canonical_dict(),
+        "horizon_hours": genome["horizon_hours"],
+        "mapping_id": mapping_id,
+    }
+    return CandidateSpec(
+        _payload_sha(candidate_payload),
+        spec.mechanism_id,
+        mechanism_family,
+        expression,
+        control,
+        genome["horizon_hours"],
+        mapping_id,
+        assurance.raw_fields,
+        tuple(infer_family(field_id) for field_id in assurance.raw_fields),
+        assurance.rolling_windows,
+        assurance.depth,
+        operator_path(expression),
+        genome,
+    )
+
+
+def _sample_role_binding(
+    role: str,
+    domains: Mapping[str, Sequence[Any]],
+    rng: random.Random,
+) -> tuple[str, str]:
+    selected = rng.choice(tuple(domains[role]))
+    if role in {"BASIS_BUNDLE", "CROSS_VENUE_OI_BUNDLE"}:
+        left, right = selected
+        return str(left), str(right)
+    return str(selected), ""
+
+
+def sample_mechanism_candidate(
+    *,
+    registry: TypedExpressionRegistry,
+    spec: MechanismSpec,
+    domains: Mapping[str, Sequence[Any]] | None,
+    rng: random.Random,
+) -> CandidateSpec:
+    role_domains = domains or mechanism_role_domains(tuple(registry.fields.values()))
+    left, left_auxiliary = _sample_role_binding(spec.left_role, role_domains, rng)
+    right, right_auxiliary = _sample_role_binding(spec.right_role, role_domains, rng)
+    if spec.condition_role:
+        condition, condition_auxiliary = _sample_role_binding(
+            spec.condition_role, role_domains, rng
+        )
+    else:
+        condition, condition_auxiliary = "", ""
+    genes = {
+        "mechanism_id": spec.mechanism_id,
+        "mechanism_spec": spec.to_dict(),
+        "left_field": left,
+        "left_auxiliary_field": left_auxiliary,
+        "right_field": right,
+        "right_auxiliary_field": right_auxiliary,
+        "condition_field": condition,
+        "condition_auxiliary_field": condition_auxiliary,
+        "left_window": rng.choice(WINDOWS),
+        "right_window": rng.choice(WINDOWS),
+        "condition_window": rng.choice(WINDOWS),
+        "left_normalizer": rng.choice(NORMALIZERS),
+        "right_normalizer": rng.choice(NORMALIZERS),
+        "condition_normalizer": rng.choice(NORMALIZERS),
+        "beta": rng.choice(BETAS),
+        "horizon_hours": rng.choice(HORIZONS),
+        "matched_control_schema": spec.matched_control_schema,
+    }
+    return mechanism_candidate_from_genes(
+        registry,
+        genes=genes,
+        domains=role_domains,
+    )
 
 
 def conditional_candidate_from_genes(
@@ -1559,17 +2119,23 @@ __all__ = [
     "CandidateSpec",
     "CONDITIONAL_SEMANTIC_TUPLES",
     "HORIZONS",
+    "MechanismSpec",
     "MECHANISM_FAMILIES",
     "MECHANISM_MAPPING_CLASS",
     "Skeleton",
     "audit_numeric_expressivity",
+    "compile_mechanism_catalog",
     "conditional_candidate_from_genes",
     "expression_from_dict",
     "field_role_coverage",
     "generate_candidate",
     "generate_structural_pool",
+    "mechanism_candidate_from_genes",
+    "mechanism_role_domains",
     "mapping_id_for_mechanism_family",
+    "mapping_id_for_mechanism_spec",
     "operator_path",
+    "sample_mechanism_candidate",
     "skeleton_payload",
     "skeleton_registry",
 ]

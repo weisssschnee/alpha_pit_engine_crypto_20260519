@@ -744,15 +744,27 @@ def evaluate_pair(
     )
     if len(candidate.expression.inputs) != 2:
         raise ValueError("DUAL_AXIS_CONTROL_REQUIRES_BINARY_PRIMARY")
-    hierarchical_conditional = candidate.mechanism_family.startswith(
-        "CONDITIONAL_"
+    declared_control_schema = str(
+        candidate.generation_genes.get("matched_control_schema", "")
+    )
+    hierarchical_conditional = (
+        candidate.mechanism_family.startswith("CONDITIONAL_")
+        or declared_control_schema == "HIERARCHICAL_A_B_AB_ABC"
     )
     interaction_left_control_expression = None
     if hierarchical_conditional:
         interaction, condition = candidate.expression.inputs
         if (
-            candidate.expression.operator != "StateModulation"
-            or interaction.operator != "RatioInteraction"
+            candidate.expression.operator
+            not in {"ConditionGate", "StateModulation"}
+            or interaction.operator
+            not in {
+                "SafeMul",
+                "SafeDiv",
+                "NormalizedDifference",
+                "Residual",
+                "RatioInteraction",
+            }
             or len(interaction.inputs) != 2
         ):
             raise ValueError("HIERARCHICAL_CONDITIONAL_DAG_CHANGED")
@@ -865,7 +877,10 @@ def evaluate_pair(
         execution = dict(receipt.get("execution") or {})
         if direction.get("rule") != "TRAIN_FROZEN_SIGN_ORIENTATION":
             raise ValueError("ECONOMIC_RECEIPT_DIRECTION_RULE_CHANGED")
-        if candidate.mapping_id != portfolio.get("mapping_id"):
+        allowed_mapping_ids = tuple(
+            str(value) for value in portfolio.get("mapping_ids", ())
+        ) or (str(portfolio.get("mapping_id") or ""),)
+        if candidate.mapping_id not in allowed_mapping_ids:
             raise ValueError("ECONOMIC_RECEIPT_MAPPING_CHANGED")
         target_metadata = getattr(store, "target_metadata", None)
         if not isinstance(target_metadata, Mapping):
