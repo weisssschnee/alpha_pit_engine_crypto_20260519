@@ -132,8 +132,11 @@ accepted components whose nodes explicitly said `active_authority: false`.
   frozen venue-cost assumption, a distinct validation kill-line and read-only
   holdout now have one content-hashed successor receipt, but the receipt
   remains run-inactive and has no runtime or market evidence.
-- The fresh validation campaign orchestration is now reusable source inside
-  the existing legacy rolling Search Engine. Immediately after
+- The fresh validation campaign orchestration is now reusable source through
+  the dedicated `crypto_search_economic_v1` entry point. It reuses the existing
+  rolling Search Engine plus the qualified 115-field OI/mark x aggTrades carrier
+  and deliberately does not attach the 2025 receipt partitions to the historical
+  2023-2024 legacy run. Immediately after
   `checkpoint_000` updates and restores the frozen train policy, and before
   `checkpoint_001` allocation, it selects the top 64 train candidates for each
   required 1h/4h horizon per active arm (128 total), consumes each candidate's persisted train
@@ -144,7 +147,9 @@ accepted components whose nodes explicitly said `active_authority: false`.
   `checkpoint_validation`. The next existing allocation consumes those states,
   so a failed adaptive arm receives zero subsequent budget; a failed typed-random
   control stops continuation. Policy state, archive state, generation attempts,
-  and holdout access remain unchanged. This is source and synthetic-test evidence
-  only; no validation campaign ran.
+  and holdout access remain unchanged. Resume ordering selects validation over
+  its same-progress train checkpoint, then selects any later numeric checkpoint
+  after continuation. This is source and synthetic-test evidence only; no
+  validation campaign ran.
 - No second AST, compiler, evaluator, Graph layer, scheduler, or experiment
   database is created.

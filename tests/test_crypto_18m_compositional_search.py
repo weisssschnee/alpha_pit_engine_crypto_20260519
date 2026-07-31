@@ -63,6 +63,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _ProposalGenerationFailure,
     _balanced_lane_choice,
     _checkpoint_allocation,
+    _checkpoint_resume_order,
     _evaluation_audit_fields,
     _export_policy,
     _frozen_validation_due,
@@ -71,6 +72,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _new_campaign_state,
     _payload_sha,
     _initial_policies,
+    _validate_economic_search_surface,
     run_frozen_validation_stage,
     _write_checkpoint,
 )
@@ -548,7 +550,7 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
             "candidate_generation_allowed": False,
         },
         "validation_kill_line": {
-            "orchestration_campaign": "legacy",
+            "orchestration_campaign": "crypto_search_economic_v1",
             "trigger_after_train_checkpoint_index": 0,
             "minimum_evaluated_per_active_arm": 128,
             "evaluated_per_active_arm": 128,
@@ -646,7 +648,7 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
 def test_frozen_validation_trigger_precedes_reachable_next_allocation() -> None:
     receipt = {
         "validation_kill_line": {
-            "orchestration_campaign": "legacy",
+            "orchestration_campaign": "crypto_search_economic_v1",
             "trigger_after_train_checkpoint_index": 0,
         }
     }
@@ -659,20 +661,20 @@ def test_frozen_validation_trigger_precedes_reachable_next_allocation() -> None:
         },
     }
     assert not _frozen_validation_due(
-        campaign="legacy",
+        campaign="crypto_search_economic_v1",
         state=state,
         economic_receipt=receipt,
     )
     state["next_checkpoint_index"] = 1
     assert _frozen_validation_due(
-        campaign="legacy",
+        campaign="crypto_search_economic_v1",
         state=state,
         economic_receipt=receipt,
     )
     state["validation_stage"] = {"status": "VALIDATION_STAGE_COMPLETE"}
     state["arm_states"]["hierarchical_typed_cem_v2"] = "EXITED"
     assert not _frozen_validation_due(
-        campaign="legacy",
+        campaign="crypto_search_economic_v1",
         state=state,
         economic_receipt=receipt,
     )
@@ -684,9 +686,76 @@ def test_frozen_validation_trigger_precedes_reachable_next_allocation() -> None:
         match="ECONOMIC_RECEIPT_VALIDATION_CAMPAIGN_CHANGED",
     ):
         _frozen_validation_due(
-            campaign="search_engine_v1_3_cross_carrier",
+            campaign="legacy",
             state=state,
             economic_receipt=receipt,
+        )
+
+
+def test_checkpoint_resume_order_prefers_validation_only_at_same_progress(
+    tmp_path: Path,
+) -> None:
+    checkpoints = tmp_path / "checkpoints"
+    paths = {}
+    for name, next_index in (
+        ("checkpoint_000", 1),
+        ("checkpoint_validation", 1),
+        ("checkpoint_001", 2),
+    ):
+        path = checkpoints / name
+        path.mkdir(parents=True)
+        (path / "state.json").write_text(
+            json.dumps({"next_checkpoint_index": next_index}),
+            encoding="utf-8",
+        )
+        paths[name] = path
+    assert max(
+        (paths["checkpoint_000"], paths["checkpoint_validation"]),
+        key=_checkpoint_resume_order,
+    ).name == "checkpoint_validation"
+    assert max(paths.values(), key=_checkpoint_resume_order).name == (
+        "checkpoint_001"
+    )
+
+
+def test_economic_search_surface_is_exactly_receipt_bound() -> None:
+    contracts = tuple(_role_complete_registry().fields.values())
+    receipt = {
+        "search_campaign": {
+            "runner_campaign": "crypto_search_economic_v1",
+            "carrier_id": (
+                "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED"
+            ),
+            "carrier_cache_identity_sha256": "C" * 64,
+            "carrier_manifest": "runtime/carrier.json",
+            "field_count": len(contracts),
+            "strict_evaluated_target": 20_000,
+            "checkpoint_size": 2_000,
+            "checkpoint_count": 10,
+        }
+    }
+    identities = {
+        "raw_cache": {
+            "root": ".cache/carrier",
+            "identity_sha256": "C" * 64,
+        },
+        "aligned_carrier_manifest": {"path": "runtime/carrier.json"},
+    }
+    assert _validate_economic_search_surface(
+        receipt=receipt,
+        identities=identities,
+        contracts=contracts,
+    ) == "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED"
+    changed = deepcopy(receipt)
+    changed["search_campaign"]["field_count"] += 1
+    with pytest.raises(
+        RuntimeError,
+        match="ECONOMIC_SEARCH_SURFACE_BINDING_CHANGED:field_count",
+    ):
+        _validate_economic_search_surface(
+            receipt=changed,
+            identities=identities,
+            contracts=contracts,
         )
 
 

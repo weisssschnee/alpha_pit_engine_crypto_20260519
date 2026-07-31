@@ -3,6 +3,18 @@
   "receipt_id": "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1",
   "status": "SOURCE_QUALIFIED_NOT_RUN_AUTHORIZED",
   "run_authorized": false,
+  "search_campaign": {
+    "runner_campaign": "crypto_search_economic_v1",
+    "runtime_date": "20260731",
+    "carrier_id": "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+    "carrier_manifest": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+    "carrier_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "field_count": 115,
+    "strict_evaluated_target": 20000,
+    "checkpoint_size": 2000,
+    "checkpoint_count": 10,
+    "fresh_state": true
+  },
   "market": {
     "asset_class": "CRYPTO",
     "calendar": "CONTINUOUS_UTC"
@@ -104,7 +116,7 @@
   "validation_kill_line": {
     "authority_symbol": "alphafactory_crypto.broad_search.experiment_authority.evaluate_search_validation_kill_line",
     "runtime_symbol": "alphafactory_crypto.broad_search.search_engine_v1.apply_search_validation_kill_line",
-    "orchestration_campaign": "legacy",
+    "orchestration_campaign": "crypto_search_economic_v1",
     "trigger_after_train_checkpoint_index": 0,
     "evaluation_order": "AFTER_FROZEN_TRAIN_POLICY_BEFORE_ANY_ADDITIONAL_BUDGET",
     "equal_matched_evaluated_count": true,
@@ -165,7 +177,7 @@
     },
     "validation_kill_line": {
       "path": "alphafactory_crypto/broad_search/experiment_authority.py",
-      "sha256": "2C84046B8EA503363865144C168CEB1D3483F3A3D07A35E944F4A03DFC6E08C2"
+      "sha256": "BE0DD69F45A1B3E1785165FE1432558A46315DBBA7A87665260EE9354C9A85E9"
     },
     "portfolio_mapping_and_cost": {
       "path": "alphafactory_crypto/instrument_capability/mapping.py",
@@ -185,7 +197,7 @@
     },
     "runtime_binding": {
       "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-      "sha256": "D03B4EAAE01BA3A96615600467ED153D505B2335B3C90B09C9AE4D2A1982B499"
+      "sha256": "1CB2F30C50C826772FAD8D22A59917ABC92134F74D086B2AFE9AE6D658CF4756"
     }
   }
 }

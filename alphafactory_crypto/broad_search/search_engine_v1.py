@@ -141,6 +141,9 @@ V14_STAGE_B_COUNT = 1_200
 V14_STAGE_B_CHECKPOINT_SIZE = 300
 V14_STAGE_C_COUNT = 1_600
 V14_STAGE_C_CHECKPOINT_SIZE = 400
+ECONOMIC_SEARCH_CAMPAIGN = "crypto_search_economic_v1"
+ECONOMIC_SEARCH_EPOCH_ID = "CRYPTO_SEARCH_ECONOMIC_V1_20260731"
+ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE = "20260731"
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
 CONTINUATION_RUNTIME = "runtime/crypto_18m_current_field_four_policy_continuation_20260719"
 SEEDS = (20260716, 20260717, 20260718, 20260719)
@@ -1317,6 +1320,52 @@ def _frozen_contract(
             "cross_sprint_adaptive_memory": False,
         },
     }
+    return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
+
+
+def _economic_search_frozen_contract(
+    *,
+    source_sha: str,
+    compiler_binding: Mapping[str, Any],
+    behavior_contract: Mapping[str, Any],
+    input_identities: Mapping[str, Any],
+    environment: Mapping[str, Any],
+    contracts: Sequence[FieldContract],
+    carrier_id: str,
+) -> dict[str, Any]:
+    """Reuse the V1 rolling engine contract on the admitted OI/flow carrier."""
+
+    legacy = _frozen_contract(
+        source_sha=source_sha,
+        compiler_binding=compiler_binding,
+        behavior_contract=behavior_contract,
+        input_identities=input_identities,
+        environment=environment,
+    )
+    payload = {
+        key: value
+        for key, value in legacy.items()
+        if key != "frozen_contract_sha256"
+    }
+    payload.update(
+        {
+            "epoch_id": ECONOMIC_SEARCH_EPOCH_ID,
+            "objective": (
+                "Compare fresh-state rolling proposal productivity on the "
+                "receipt-bound OI/mark x aggTrades carrier"
+            ),
+            "authorization": (
+                "SOURCE_QUALIFIED_RUN_REQUIRES_RECEIPT_AUTHORIZATION"
+            ),
+            "surface": {
+                "context_id": str(carrier_id),
+                "fields": len(contracts),
+                "field_ids": [item.field_id for item in contracts],
+                "carrier_reused": True,
+                "new_materializer": False,
+            },
+        }
+    )
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
 
 
@@ -4551,6 +4600,18 @@ def _checkpoint_state_payload(
     }
 
 
+def _checkpoint_resume_order(checkpoint_path: Path) -> tuple[int, int, str]:
+    state_path = Path(checkpoint_path) / "state.json"
+    if not state_path.is_file():
+        raise ValueError(f"checkpoint state missing: {state_path}")
+    state = _read_json(state_path)
+    return (
+        int(state["next_checkpoint_index"]),
+        int(Path(checkpoint_path).name == "checkpoint_validation"),
+        Path(checkpoint_path).name,
+    )
+
+
 def _write_checkpoint(
     *,
     runtime_root: Path,
@@ -5067,11 +5128,16 @@ def _ledger_row(
 def _report_text(decision: Mapping[str, Any]) -> str:
     answers = decision["success_questions"]
     qualified = ", ".join(decision["future_new_data_arena_qualified_arms"]) or "none"
-    return f"""# Crypto Search Engine V1
+    title = str(decision.get("report_title") or "Crypto Search Engine V1")
+    surface = str(
+        decision.get("surface_description")
+        or "Broad 39 spent-development only; Core3 excluded"
+    )
+    return f"""# {title}
 
 - Status: `{decision['status']}`
 - Producer source: `{decision['producer_source_sha']}`
-- Surface: Broad 39 spent-development only; Core3 excluded; sealed reads `0`.
+- Surface: {surface}; sealed reads `0`.
 - Strict completed: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
 - Checkpoints: `{decision['checkpoint_count']}/10`, all atomic and restore-verified.
 - Behavior families: `{decision['behavior_family_count']:,}`; duplicate rate `{decision['behavior_duplicate_rate']:.2%}`.
@@ -6364,6 +6430,49 @@ def _bind_economic_receipt(
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
 
 
+def _validate_economic_search_surface(
+    *,
+    receipt: Mapping[str, Any],
+    identities: Mapping[str, Any],
+    contracts: Sequence[FieldContract],
+) -> str:
+    campaign = dict(receipt.get("search_campaign") or {})
+    raw_cache = dict(identities.get("raw_cache") or {})
+    carrier_manifest = dict(
+        identities.get("aligned_carrier_manifest") or {}
+    )
+    checks = {
+        "runner_campaign": campaign.get("runner_campaign")
+        == ECONOMIC_SEARCH_CAMPAIGN,
+        "carrier_id": campaign.get("carrier_id")
+        == "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+        "carrier_cache_identity_sha256": (
+            campaign.get("carrier_cache_identity_sha256")
+            == raw_cache.get("identity_sha256")
+        ),
+        "carrier_manifest": (
+            campaign.get("carrier_manifest")
+            == carrier_manifest.get("path")
+        ),
+        "field_count": int(campaign.get("field_count", -1))
+        == len(contracts),
+        "strict_evaluated_target": int(
+            campaign.get("strict_evaluated_target", -1)
+        )
+        == STRICT_TARGET,
+        "checkpoint_size": int(campaign.get("checkpoint_size", -1))
+        == CHECKPOINT_SIZE,
+        "checkpoint_count": int(campaign.get("checkpoint_count", -1))
+        == CHECKPOINT_COUNT,
+    }
+    failed = sorted(key for key, value in checks.items() if not value)
+    if failed:
+        raise RuntimeError(
+            "ECONOMIC_SEARCH_SURFACE_BINDING_CHANGED:" + ",".join(failed)
+        )
+    return str(campaign["carrier_id"])
+
+
 def apply_search_validation_kill_line(
     *,
     runtime_root: Path,
@@ -7115,8 +7224,10 @@ def run_engine(
         "search_engine_v1_2",
         "carrier_gate_v1",
         "search_engine_v1_3_cross_carrier",
+        ECONOMIC_SEARCH_CAMPAIGN,
     }:
         raise ValueError(f"unsupported Search Engine V1 campaign: {campaign}")
+    is_economic = campaign == ECONOMIC_SEARCH_CAMPAIGN
     is_canary = campaign == "aggtrades_system_canary"
     is_v11 = campaign == "search_engine_v1_1"
     is_v12 = campaign == "search_engine_v1_2"
@@ -7125,7 +7236,25 @@ def run_engine(
     is_system_campaign = (
         is_canary or is_v11 or is_v12 or is_carrier_gate or is_v13
     )
-    if is_v13:
+    if is_economic:
+        if runtime_date != ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE:
+            raise ValueError("economic search runtime date changed")
+        runtime_root = (
+            repo_root
+            / f"runtime/crypto_search_economic_v1_{runtime_date}"
+        )
+        report_path = (
+            repo_root
+            / f"reports/CRYPTO_SEARCH_ECONOMIC_V1_{runtime_date}.md"
+        )
+        strict_target = STRICT_TARGET
+        checkpoint_count = CHECKPOINT_COUNT
+        checkpoint_size = CHECKPOINT_SIZE
+        raw_attempt_limit = RAW_ATTEMPT_LIMIT
+        wall_time_limit = WALL_TIME_LIMIT_SECONDS
+        campaign_arms = FIRST_CHECKPOINT_ARMS
+        block_role = "FRESH_DEVELOPMENT_TRAIN_ONLY"
+    elif is_v13:
         if runtime_date != V13_DEFAULT_RUNTIME_DATE:
             raise ValueError("Search Engine V1.3 runtime date changed")
         runtime_root = (
@@ -7233,6 +7362,10 @@ def run_engine(
         repo_root,
         authority_preflight,
     )
+    if is_economic:
+        block_role = str(
+            economic_receipt["evidence_partition"]["train"]["role"]
+        )
     observed_source = _git_sha(repo_root)
     source_sha = (source_sha or observed_source).lower()
     if source_sha != observed_source:
@@ -7243,7 +7376,21 @@ def run_engine(
         raise RuntimeError(
             "Search Engine V1 requires a clean producer tree; only its runtime/report may exist"
         )
-    if is_v13:
+    if is_economic:
+        store, contracts, behavior_contract, input_identities, continuation = (
+            _load_v14_inputs(repo_root)
+        )
+        train_partition = dict(
+            economic_receipt["evidence_partition"]["train"]
+        )
+        block_start = str(train_partition["start"])
+        block_end = str(train_partition["end_exclusive"])
+        carrier_id = _validate_economic_search_surface(
+            receipt=economic_receipt,
+            identities=input_identities,
+            contracts=contracts,
+        )
+    elif is_v13:
         store, contracts, behavior_contract, input_identities, continuation = (
             _load_v13_inputs(repo_root)
         )
@@ -7282,7 +7429,17 @@ def run_engine(
     registry = TypedExpressionRegistry(contracts)
     compiler_binding = _compiler_binding(repo_root)
     environment = _environment_fingerprint()
-    if is_v13:
+    if is_economic:
+        frozen = _economic_search_frozen_contract(
+            source_sha=source_sha,
+            compiler_binding=compiler_binding,
+            behavior_contract=behavior_contract,
+            input_identities=input_identities,
+            environment=environment,
+            contracts=contracts,
+            carrier_id=str(carrier_id),
+        )
+    elif is_v13:
         frozen = _v13_frozen_contract(
             source_sha=source_sha,
             compiler_binding=compiler_binding,
@@ -7343,7 +7500,9 @@ def run_engine(
         "compiler_identity": compiler_binding,
     }
     cache_root = (
-        repo_root / str(continuation["cache"]["root"])
+        repo_root / str(input_identities["raw_cache"]["root"])
+        if is_economic
+        else repo_root / str(continuation["cache"]["root"])
         if is_system_campaign or is_carrier_gate
         else repo_root / str(continuation["cache_root"])
     )
@@ -7388,8 +7547,12 @@ def run_engine(
         )
 
     if existing_checkpoints:
+        resume_checkpoint = max(
+            existing_checkpoints,
+            key=_checkpoint_resume_order,
+        )
         state, policies, ledger, archive, metrics = _load_checkpoint(
-            checkpoint_path=existing_checkpoints[-1],
+            checkpoint_path=resume_checkpoint,
             registry=registry,
             expected_source_sha=source_sha,
             expected_frozen_hash=frozen_hash,
@@ -8242,11 +8405,25 @@ def run_engine(
     decision["validation_arm_decisions"] = validation_result[
         "arm_decisions"
     ]
+    if is_economic:
+        decision.update(
+            {
+                "epoch_id": ECONOMIC_SEARCH_EPOCH_ID,
+                "report_title": "Crypto Search Economic V1",
+                "surface_description": (
+                    "existing 115-field OI/mark x aggTrades aligned carrier; "
+                    "receipt-bound Binance USD-M target"
+                ),
+                "search_campaign": ECONOMIC_SEARCH_CAMPAIGN,
+            }
+        )
     _write_json(runtime_root / "final_decision.json", decision)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
         (
-            _v13_report_text(decision)
+            _report_text(decision)
+            if is_economic
+            else _v13_report_text(decision)
             if is_v13
             else _carrier_gate_report_text(decision)
             if is_carrier_gate
@@ -8270,7 +8447,9 @@ def run_engine(
         identities=identities,
         state=state,
         epoch_id=(
-            V13_EPOCH_ID
+            ECONOMIC_SEARCH_EPOCH_ID
+            if is_economic
+            else V13_EPOCH_ID
             if is_v13
             else CARRIER_GATE_EPOCH_ID
             if is_carrier_gate
@@ -8282,9 +8461,16 @@ def run_engine(
             if is_canary
             else EPOCH_ID
         ),
-        base_sha=(source_sha if is_system_campaign else BASE_SHA),
+        base_sha=(
+            source_sha
+            if is_system_campaign or is_economic
+            else BASE_SHA
+        ),
         continuation=(
             "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+            f"check-economic-v1 --runtime-date {runtime_date}"
+            if is_economic
+            else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
             f"check-v13 --runtime-date {runtime_date}"
             if is_v13
             else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
@@ -8334,10 +8520,30 @@ def run_engine(
 
 
 def check_engine(
-    repo_root: Path, *, runtime_date: str = DEFAULT_RUNTIME_DATE
+    repo_root: Path,
+    *,
+    runtime_date: str = DEFAULT_RUNTIME_DATE,
+    campaign: str = "legacy",
 ) -> dict[str, Any]:
-    runtime_root = repo_root / f"runtime/crypto_search_engine_v1_{runtime_date}"
-    report_path = repo_root / f"reports/CRYPTO_SEARCH_ENGINE_V1_{runtime_date}.md"
+    is_economic = campaign == ECONOMIC_SEARCH_CAMPAIGN
+    if campaign not in {"legacy", ECONOMIC_SEARCH_CAMPAIGN}:
+        raise ValueError(f"unsupported check campaign: {campaign}")
+    if is_economic:
+        if runtime_date != ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE:
+            raise ValueError("economic search runtime date changed")
+        runtime_root = (
+            repo_root / f"runtime/crypto_search_economic_v1_{runtime_date}"
+        )
+        report_path = (
+            repo_root / f"reports/CRYPTO_SEARCH_ECONOMIC_V1_{runtime_date}.md"
+        )
+    else:
+        runtime_root = (
+            repo_root / f"runtime/crypto_search_engine_v1_{runtime_date}"
+        )
+        report_path = (
+            repo_root / f"reports/CRYPTO_SEARCH_ENGINE_V1_{runtime_date}.md"
+        )
     errors: list[str] = []
     required = (
         "frozen_contract.json",
@@ -8365,13 +8571,59 @@ def check_engine(
     archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
     metrics = pd.read_parquet(runtime_root / "arm_checkpoint_metrics.parquet")
     family_summary = _read_json(runtime_root / "behavior_family_summary.json")
+    if is_economic:
+        validation_rows = pd.read_parquet(
+            runtime_root / "validation_candidate_ledger.parquet"
+        )
+        validation_metrics = pd.read_parquet(
+            runtime_root / "validation_arm_metrics.parquet"
+        )
+        validation_decisions = _read_json(
+            runtime_root / "validation_decisions.json"
+        )
+        validation_checkpoint = (
+            runtime_root / "checkpoints" / "checkpoint_validation"
+        )
+        if not validation_checkpoint.is_dir():
+            errors.append("validation_checkpoint")
+        if len(validation_rows) != 3 * 128:
+            errors.append("validation_candidate_count")
+        if set(validation_rows["horizon_hours"].astype(int).unique()) != {
+            1,
+            4,
+        }:
+            errors.append("validation_horizons")
+        horizon_counts = (
+            validation_rows.groupby(["arm", "horizon_hours"])
+            .size()
+            .to_dict()
+        )
+        if not horizon_counts or any(
+            int(value) != 64 for value in horizon_counts.values()
+        ):
+            errors.append("validation_horizon_allocation")
+        if len(validation_metrics) != 3:
+            errors.append("validation_arm_count")
+        if validation_decisions.get("status") != "VALIDATION_STAGE_COMPLETE":
+            errors.append("validation_decision")
 
     frozen_without_hash = {
         key: value for key, value in frozen.items() if key != "frozen_contract_sha256"
     }
     if _payload_sha(frozen_without_hash) != frozen.get("frozen_contract_sha256"):
         errors.append("frozen_contract_sha256")
-    if frozen.get("surface") != {
+    if is_economic:
+        surface = dict(frozen.get("surface") or {})
+        if (
+            surface.get("context_id")
+            != "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED"
+            or surface.get("fields") != 115
+            or len(surface.get("field_ids") or []) != 115
+            or surface.get("carrier_reused") is not True
+            or surface.get("new_materializer") is not False
+        ):
+            errors.append("economic_search_surface")
+    elif frozen.get("surface") != {
         "context_id": "BROAD_PANEL_BASELINE",
         "fields": 39,
         "core3_fields": 0,
@@ -11057,7 +11309,7 @@ def check_v13(
         / f"reports/CRYPTO_SEARCH_ENGINE_V1_3_CROSS_CARRIER_{runtime_date}.md"
     )
     errors: list[str] = []
-    required = (
+    required = [
         "frozen_contract.json",
         "embedded_preflight.json",
         "constructibility_canary.json",
@@ -11067,7 +11319,15 @@ def check_v13(
         "arm_checkpoint_metrics.parquet",
         "final_decision.json",
         "run_manifest.json",
-    )
+    ]
+    if is_economic:
+        required.extend(
+            [
+                "validation_candidate_ledger.parquet",
+                "validation_arm_metrics.parquet",
+                "validation_decisions.json",
+            ]
+        )
     for name in required:
         if not (runtime_root / name).is_file():
             errors.append(f"missing:{name}")
@@ -11360,6 +11620,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         choices=(
             "run",
             "check",
+            "run-economic-v1",
+            "check-economic-v1",
             "build-canary-cache",
             "run-canary",
             "check-canary",
@@ -11408,6 +11670,24 @@ def main(argv: Sequence[str] | None = None) -> int:
             runtime_date=str(args.runtime_date or DEFAULT_RUNTIME_DATE),
             source_sha=args.source_sha,
             authority_preflight=authority_preflight,
+        )
+    elif args.command == "run-economic-v1":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            source_sha=args.source_sha,
+            campaign=ECONOMIC_SEARCH_CAMPAIGN,
+            authority_preflight=authority_preflight,
+        )
+    elif args.command == "check-economic-v1":
+        result = check_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            campaign=ECONOMIC_SEARCH_CAMPAIGN,
         )
     elif args.command == "check":
         result = check_engine(

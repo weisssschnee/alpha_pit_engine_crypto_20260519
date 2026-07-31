@@ -113,6 +113,11 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
         "asset_class": "CRYPTO",
         "calendar": "CONTINUOUS_UTC",
     }
+    assert result["search_campaign"]["runner_campaign"] == (
+        "crypto_search_economic_v1"
+    )
+    assert result["search_campaign"]["field_count"] == 115
+    assert result["search_campaign"]["strict_evaluated_target"] == 20_000
     assert result["mechanism"]["registry_symbol"].endswith("skeleton_registry")
     assert result["mechanism"]["mapping_adapter_symbol"].endswith(
         "mapping_id_for_mechanism_family"
@@ -138,7 +143,9 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
         "apply_search_validation_kill_line"
     )
     assert result["validation_kill_line"]["evaluated_per_active_arm"] == 128
-    assert result["validation_kill_line"]["orchestration_campaign"] == "legacy"
+    assert result["validation_kill_line"]["orchestration_campaign"] == (
+        "crypto_search_economic_v1"
+    )
     assert (
         result["validation_kill_line"][
             "trigger_after_train_checkpoint_index"

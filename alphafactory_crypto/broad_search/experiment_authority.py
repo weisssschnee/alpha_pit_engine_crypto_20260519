@@ -170,6 +170,7 @@ def _validate_search_economic_receipt(
         blockers.append("market")
 
     mechanism = dict(receipt.get("mechanism") or {})
+    search_campaign = dict(receipt.get("search_campaign") or {})
     direction = dict(receipt.get("direction") or {})
     portfolio = dict(receipt.get("portfolio") or {})
     execution = dict(receipt.get("execution") or {})
@@ -398,7 +399,45 @@ def _validate_search_economic_receipt(
         blockers.append("validation_kill_line.evaluation_order")
     if kill_line.get("equal_matched_evaluated_count") is not True:
         blockers.append("validation_kill_line.equal_matched_evaluated_count")
-    if kill_line.get("orchestration_campaign") != "legacy":
+    if (
+        search_campaign.get("runner_campaign")
+        != "crypto_search_economic_v1"
+    ):
+        blockers.append("search_campaign.runner_campaign")
+    if search_campaign.get("runtime_date") != "20260731":
+        blockers.append("search_campaign.runtime_date")
+    if (
+        search_campaign.get("carrier_id")
+        != "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED"
+    ):
+        blockers.append("search_campaign.carrier_id")
+    if (
+        search_campaign.get("carrier_manifest")
+        != (
+            "runtime/crypto_search_engine_v1_4_oi_flow_20260728/"
+            "aligned_carrier_manifest.json"
+        )
+    ):
+        blockers.append("search_campaign.carrier_manifest")
+    if (
+        search_campaign.get("carrier_cache_identity_sha256")
+        != "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA"
+    ):
+        blockers.append("search_campaign.carrier_cache_identity_sha256")
+    if search_campaign.get("field_count") != 115:
+        blockers.append("search_campaign.field_count")
+    if search_campaign.get("strict_evaluated_target") != 20_000:
+        blockers.append("search_campaign.strict_evaluated_target")
+    if search_campaign.get("checkpoint_size") != 2_000:
+        blockers.append("search_campaign.checkpoint_size")
+    if search_campaign.get("checkpoint_count") != 10:
+        blockers.append("search_campaign.checkpoint_count")
+    if search_campaign.get("fresh_state") is not True:
+        blockers.append("search_campaign.fresh_state")
+    if (
+        kill_line.get("orchestration_campaign")
+        != "crypto_search_economic_v1"
+    ):
         blockers.append("validation_kill_line.orchestration_campaign")
     if kill_line.get("trigger_after_train_checkpoint_index") != 0:
         blockers.append(
@@ -520,6 +559,7 @@ def _validate_search_economic_receipt(
         "receipt_sha256": _canonical_sha256(receipt),
         "component_sha256": component_sha256,
         "market": market,
+        "search_campaign": search_campaign,
         "mechanism": mechanism,
         "direction": direction,
         "portfolio": portfolio,
