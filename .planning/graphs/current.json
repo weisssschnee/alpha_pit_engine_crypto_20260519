@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-30T11:09:31.248853+00:00",
+  "generated_at": "2026-07-31T03:30:51.789238+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -2992,8 +2992,8 @@
       "authority": {
         "path": "config/crypto_search_economic_receipt_v1.json",
         "repo_ref": "replay/crypto-search-engine-v1-4-binance-target-20260729",
-        "sha256": "8158A17CC2AAC626D29D29B542C16A12909688C6B71646AA3693F2CF22477F14",
-        "verified_sha": "360eb4305db04c8c604bb1fe19335c2b176b5fe9"
+        "sha256": "D641E940D05CE848B2BEDFA55472F1F532679846B678FCE71603EF4E7864DAD4",
+        "verified_sha": "b8afdadeaf32e106beb8f2891fbf6d1b0f23f19b"
       },
       "authority_bindings": [
         {
@@ -3029,10 +3029,10 @@
       "contracts": [
         {
           "bypass_forbidden": true,
-          "enforced_by": "broad_search.experiment_authority.resolve_search_economic_receipt, broad_search.search_engine_v1._worker_initialize/apply_search_validation_kill_line, and broad_search.pair18m.evaluate_pair",
+          "enforced_by": "broad_search.experiment_authority.resolve_search_economic_receipt, broad_search.search_engine_v1.run_engine/run_frozen_validation_stage/apply_search_validation_kill_line, and broad_search.pair18m.evaluate_pair",
           "evidence_ref": "config/crypto_search_economic_receipt_v1.json",
           "id": "crypto_search_economic_receipt_v1_binding",
-          "rule": "The successor receipt gives every Broad mechanism an explicit class through the existing mechanism-to-mapping authority, consumes A7Reward train-frozen orientation, wraps the carrier with the existing content-bound Binance USD-M delayed-open target store, injects the receipt cost into the retained evaluator, and uses the retained joint standalone-plus-matched Sortino reward. The full-L1 5 bps cost remains a non-formal Binance venue assumption. Validation is a pure no-feedback kill-line whose runtime adapter stops the failed arm and atomically checkpoints it without reading test/recent/stress/holdout. Component and target-cache hashes are frozen; run_authorized is hard false.",
+          "rule": "The successor receipt binds only the dedicated crypto_search_economic_v1 entry point to the existing 115-field OI/mark x aggTrades aligned carrier; every historical runner revalidates its existing Graph authority preflight without consuming this receipt. The dedicated entry gives every mechanism an explicit class through the existing mechanism-to-mapping authority, consumes A7Reward train-frozen orientation, wraps the carrier with the existing content-bound Binance USD-M delayed-open target store, injects the receipt cost into the retained evaluator, and uses the retained joint standalone-plus-matched Sortino reward. The full-L1 5 bps cost remains a non-formal Binance venue assumption. Behavior identity bins and support are frozen from the receipt train partition only; validation and holdout cannot enter that contract. Every evidence role purges its final six hours, exactly the two-hour execution delay plus maximum four-hour horizon, so target endpoints cannot cross roles. After checkpoint_000 train-policy update and exact restore but before checkpoint_001 allocation, the runner selects the top 64 train-frozen candidates for each required 1h/4h horizon per active arm, evaluates only the validation block with frozen orientation and matched sleeve, applies a worst-horizon equal-weight ensemble kill-line, writes failed arms to existing arm state, and atomically restores checkpoint_validation. The next existing allocation consumes those states, and later numeric checkpoints supersede validation during resume; every resumed economic state revalidates checkpoint_validation and republishes the top-level validation ledger, metrics, and decision before more allocation. Policy/archive/generation writes and holdout reads remain forbidden. Component hashes canonicalize text line endings to LF; component, carrier, and target-cache hashes are frozen; run_authorized is hard false.",
           "severity": "HARD",
           "type": "AUTHORITY"
         },
@@ -3356,9 +3356,9 @@
         "alphafactory_crypto_broad_search_experiment_authority_node_id",
         "alphafactory_crypto_broad_search_experiment_authority_parse_utc",
         "alphafactory_crypto_broad_search_experiment_authority_rationale_1",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_100",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_155",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_495",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_105",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_160",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_598",
         "alphafactory_crypto_broad_search_experiment_authority_require_real_experiment_authority",
         "alphafactory_crypto_broad_search_experiment_authority_resolve_real_experiment_authorities",
         "alphafactory_crypto_broad_search_experiment_authority_resolve_search_economic_receipt",
@@ -3402,9 +3402,9 @@
         "alphafactory_crypto_broad_search_pair18m_pair_contract_payload",
         "alphafactory_crypto_broad_search_pair18m_portfolio_search_reward",
         "alphafactory_crypto_broad_search_pair18m_rationale_1",
-        "alphafactory_crypto_broad_search_pair18m_rationale_147",
-        "alphafactory_crypto_broad_search_pair18m_rationale_284",
-        "alphafactory_crypto_broad_search_pair18m_rationale_375",
+        "alphafactory_crypto_broad_search_pair18m_rationale_148",
+        "alphafactory_crypto_broad_search_pair18m_rationale_285",
+        "alphafactory_crypto_broad_search_pair18m_rationale_376",
         "alphafactory_crypto_broad_search_pair18m_robust_monthly_audit",
         "alphafactory_crypto_broad_search_pair18m_series_metrics",
         "alphafactory_crypto_broad_search_pair18m_sortino",
@@ -3575,8 +3575,11 @@
         "alphafactory_crypto_broad_search_search_engine_v1_check_v13",
         "alphafactory_crypto_broad_search_search_engine_v1_check_v14",
         "alphafactory_crypto_broad_search_search_engine_v1_checkpoint_allocation",
+        "alphafactory_crypto_broad_search_search_engine_v1_checkpoint_resume_order",
         "alphafactory_crypto_broad_search_search_engine_v1_checkpoint_state_payload",
+        "alphafactory_crypto_broad_search_search_engine_v1_economic_search_frozen_contract",
         "alphafactory_crypto_broad_search_search_engine_v1_enginebudgetexhausted",
+        "alphafactory_crypto_broad_search_search_engine_v1_equal_weight_path",
         "alphafactory_crypto_broad_search_search_engine_v1_evaluation_audit_fields",
         "alphafactory_crypto_broad_search_search_engine_v1_export_lane_policy",
         "alphafactory_crypto_broad_search_search_engine_v1_export_policy",
@@ -3585,6 +3588,7 @@
         "alphafactory_crypto_broad_search_search_engine_v1_final_decision",
         "alphafactory_crypto_broad_search_search_engine_v1_final_manifest",
         "alphafactory_crypto_broad_search_search_engine_v1_frozen_contract",
+        "alphafactory_crypto_broad_search_search_engine_v1_frozen_validation_due",
         "alphafactory_crypto_broad_search_search_engine_v1_git_blob_sha",
         "alphafactory_crypto_broad_search_search_engine_v1_git_sha",
         "alphafactory_crypto_broad_search_search_engine_v1_hierarchicaltypedcemv2",
@@ -3624,22 +3628,28 @@
         "alphafactory_crypto_broad_search_search_engine_v1_policy_observe",
         "alphafactory_crypto_broad_search_search_engine_v1_policy_propose",
         "alphafactory_crypto_broad_search_search_engine_v1_policy_reject",
+        "alphafactory_crypto_broad_search_search_engine_v1_policy_state_sha256",
         "alphafactory_crypto_broad_search_search_engine_v1_proposalgenerationfailure",
         "alphafactory_crypto_broad_search_search_engine_v1_proposalgenerationfailure_init",
         "alphafactory_crypto_broad_search_search_engine_v1_qualify_v14_aligned_carrier",
         "alphafactory_crypto_broad_search_search_engine_v1_rationale_1",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1056",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_3650",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_4736",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6292",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1059",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1336",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_3699",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_4859",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6521",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6840",
         "alphafactory_crypto_broad_search_search_engine_v1_read_json",
         "alphafactory_crypto_broad_search_search_engine_v1_report_text",
+        "alphafactory_crypto_broad_search_search_engine_v1_require_bound_authority_preflight",
         "alphafactory_crypto_broad_search_search_engine_v1_require_bound_economic_run",
         "alphafactory_crypto_broad_search_search_engine_v1_resolve_config_path",
         "alphafactory_crypto_broad_search_search_engine_v1_restore_lane_policy",
         "alphafactory_crypto_broad_search_search_engine_v1_restore_policy",
+        "alphafactory_crypto_broad_search_search_engine_v1_restore_validation_checkpoint",
         "alphafactory_crypto_broad_search_search_engine_v1_reward_at_equal_count",
         "alphafactory_crypto_broad_search_search_engine_v1_run_engine",
+        "alphafactory_crypto_broad_search_search_engine_v1_run_frozen_validation_stage",
         "alphafactory_crypto_broad_search_search_engine_v1_run_v14",
         "alphafactory_crypto_broad_search_search_engine_v1_search_ordering_reward",
         "alphafactory_crypto_broad_search_search_engine_v1_skeleton_by_id",
@@ -3685,15 +3695,19 @@
         "alphafactory_crypto_broad_search_search_engine_v1_v14_stage_metrics",
         "alphafactory_crypto_broad_search_search_engine_v1_v14_write_checkpoint",
         "alphafactory_crypto_broad_search_search_engine_v1_validate_aggtrades_canary_config",
+        "alphafactory_crypto_broad_search_search_engine_v1_validate_economic_search_surface",
         "alphafactory_crypto_broad_search_search_engine_v1_validate_receipt_target_store_binding",
         "alphafactory_crypto_broad_search_search_engine_v1_validate_v11_config",
         "alphafactory_crypto_broad_search_search_engine_v1_validate_v12_config",
+        "alphafactory_crypto_broad_search_search_engine_v1_validation_arm_metrics",
+        "alphafactory_crypto_broad_search_search_engine_v1_validation_path_summary",
         "alphafactory_crypto_broad_search_search_engine_v1_worker_evaluate",
         "alphafactory_crypto_broad_search_search_engine_v1_worker_initialize",
         "alphafactory_crypto_broad_search_search_engine_v1_write_checkpoint",
         "alphafactory_crypto_broad_search_search_engine_v1_write_json",
         "alphafactory_crypto_broad_search_search_engine_v1_write_parquet",
         "alphafactory_crypto_broad_search_search_engine_v1_write_top_level_artifacts",
+        "alphafactory_crypto_broad_search_search_engine_v1_write_validation_top_level_artifacts",
         "alphafactory_crypto_data_admission_v1",
         "alphafactory_crypto_data_admission_v1_active_surface_rows",
         "alphafactory_crypto_data_admission_v1_aggregate_aggtrades_hourly",
@@ -4832,6 +4846,8 @@
         "tests_test_crypto_experiment_authority_test_active_non_formal_authority_is_visible_but_not_formal",
         "tests_test_crypto_experiment_authority_test_committed_current_blocks_inactive_search_economic_roles",
         "tests_test_crypto_experiment_authority_test_committed_search_economic_receipt_reuses_existing_crypto_authorities",
+        "tests_test_crypto_experiment_authority_test_component_source_hash_is_checkout_line_ending_stable",
+        "tests_test_crypto_experiment_authority_test_historical_runner_preflight_is_verified_without_economic_receipt",
         "tests_test_crypto_experiment_authority_test_inactive_bound_component_fails_closed",
         "tests_test_crypto_experiment_authority_test_missing_information_intent_fails_closed",
         "tests_test_crypto_experiment_authority_test_search_economic_receipt_cannot_open_run_authority_by_itself",
@@ -4873,14 +4889,14 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-07-30T11:09:31.248853+00:00",
+        "checked_at": "2026-07-31T03:30:51.789238+00:00",
         "evidence_ref": "config/crypto_search_economic_receipt_v1.json",
-        "evidence_sha256": "8158A17CC2AAC626D29D29B542C16A12909688C6B71646AA3693F2CF22477F14",
+        "evidence_sha256": "D641E940D05CE848B2BEDFA55472F1F532679846B678FCE71603EF4E7864DAD4",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "360eb4305db04c8c604bb1fe19335c2b176b5fe9"
+        "verified_at_sha": "b8afdadeaf32e106beb8f2891fbf6d1b0f23f19b"
       },
       "visible_by_default": true
     },
@@ -7734,7 +7750,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "C1E01CD723C2BC1FA499350B5BAA9795BA6F8903D558C62C2CF2DBD48E10CBEF"
+    "sha256": "C93177B95195F74EB6A39A9C62E0E293EC79D884FE2D5FBE90BA6935F919AA7F"
   },
   "profile_id": null,
   "profiles": [
@@ -7765,13 +7781,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "360eb4305db04c8c604bb1fe19335c2b176b5fe9",
-    "edge_count": 36802,
-    "node_count": 19705,
+    "built_at_commit": "b8afdadeaf32e106beb8f2891fbf6d1b0f23f19b",
+    "edge_count": 36942,
+    "node_count": 19727,
     "path": ".planning/graphs/graph.json",
-    "sha256": "2AA36C00F55C998F3997CE914A23E617BEFB35F0921D7B0E52A732B1C95DD89C"
+    "sha256": "56B7177BC9B9D59EFBA0DBFED9B6548F6B0BC8A9CD8B64C0563C71DEF95F9C2A"
   },
-  "repo_head": "360eb4305db04c8c604bb1fe19335c2b176b5fe9",
+  "repo_head": "b8afdadeaf32e106beb8f2891fbf6d1b0f23f19b",
   "schema_version": 1,
   "semantic_authorities": [
     {
