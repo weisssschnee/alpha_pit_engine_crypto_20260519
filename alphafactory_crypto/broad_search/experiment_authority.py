@@ -120,7 +120,18 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
             "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
         },
-        "expected_run_outcome": {},
+        "expected_run_outcome": {
+            "status": "ENGINE_VALIDATION_BLOCKED",
+            "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+            "runtime": "runtime/crypto_search_economic_v4_20260731",
+            "producer_source_sha": (
+                "94c79d0a8e559b7223fa1eaddb2d07ca76c1e628"
+            ),
+            "generation_attempts": 2_298,
+            "strict_evaluated_count": 2_000,
+            "checkpoint": "checkpoint_validation_blocked",
+            "rescue_rerun_started": False,
+        },
     },
 }
 

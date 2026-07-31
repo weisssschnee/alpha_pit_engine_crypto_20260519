@@ -374,7 +374,7 @@ def test_v3_consumed_receipt_cannot_unlock_another_run() -> None:
         )
 
 
-def test_v4_search_economic_receipt_unlocks_only_fresh_v4_run() -> None:
+def test_v4_search_economic_receipt_is_consumed_after_validation_block() -> None:
     repo_root = Path(__file__).resolve().parents[1]
 
     receipt = resolve_search_economic_receipt(
@@ -382,10 +382,23 @@ def test_v4_search_economic_receipt_unlocks_only_fresh_v4_run() -> None:
         receipt_path=SEARCH_ECONOMIC_V4_RECEIPT_PATH,
     )
 
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+    assert receipt["result"] == (
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED"
+    )
     assert receipt["receipt_path"] == SEARCH_ECONOMIC_V4_RECEIPT_PATH
-    assert receipt["run_authorized"] is True
-    assert receipt["run_outcome"] == {}
+    assert receipt["run_authorized"] is False
+    assert receipt["run_outcome"] == {
+        "status": "ENGINE_VALIDATION_BLOCKED",
+        "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "runtime": "runtime/crypto_search_economic_v4_20260731",
+        "producer_source_sha": (
+            "94c79d0a8e559b7223fa1eaddb2d07ca76c1e628"
+        ),
+        "generation_attempts": 2_298,
+        "strict_evaluated_count": 2_000,
+        "checkpoint": "checkpoint_validation_blocked",
+        "rescue_rerun_started": False,
+    }
     assert receipt["search_campaign"]["runner_campaign"] == (
         "crypto_search_economic_v4"
     )
@@ -395,6 +408,21 @@ def test_v4_search_economic_receipt_unlocks_only_fresh_v4_run() -> None:
     assert receipt["search_campaign"]["field_count"] == 115
     assert receipt["search_campaign"]["fresh_state"] is True
     assert receipt["formal_claims_authorized"] is False
+
+
+def test_v4_consumed_receipt_cannot_unlock_another_run() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+
+    with pytest.raises(
+        RuntimeError,
+        match="economic_receipt:RUN_NOT_AUTHORIZED",
+    ):
+        require_real_experiment_authority(
+            repo_root,
+            evidence_to_add="fresh-state V4 matched economic evidence",
+            decision_to_change="future new-data Arena arm qualification",
+            economic_receipt_path=SEARCH_ECONOMIC_V4_RECEIPT_PATH,
+        )
 
 
 def test_unregistered_search_economic_receipt_path_fails_closed() -> None:

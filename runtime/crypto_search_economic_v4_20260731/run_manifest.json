@@ -1,0 +1,164 @@
+{
+  "active_wall_seconds": 1204.3845489000087,
+  "artifact_bundle_sha256": "136A03D53B36CBC76F9BD2B491E1CADDD9C03DE5B95B43B35FE5517AFD56BF84",
+  "artifacts": [
+    {
+      "bytes": 927,
+      "path": "reports/CRYPTO_SEARCH_ECONOMIC_V4_20260731.md",
+      "sha256": "6A5F8F1D3A26E5504B6067E61D301CBB8470BB809CD412ADDA709EC561DDDE87"
+    },
+    {
+      "bytes": 38259,
+      "path": "runtime/crypto_search_economic_v4_20260731/arm_checkpoint_metrics.parquet",
+      "sha256": "357651BF3ED918FB898418B687BC69DB03A4C00A17E90A51A99DB310EBB23B5C"
+    },
+    {
+      "bytes": 1862096,
+      "path": "runtime/crypto_search_economic_v4_20260731/behavior_archive.parquet",
+      "sha256": "2A4AB9908C5A2007421C97F1FC1A74239B47238E4D5E459FCB954F8C86336AEF"
+    },
+    {
+      "bytes": 820896,
+      "path": "runtime/crypto_search_economic_v4_20260731/behavior_family_summary.json",
+      "sha256": "193C6E969830EE69EE8E3759202087882F06C6A989DA24144B567990541C54B2"
+    },
+    {
+      "bytes": 9450210,
+      "path": "runtime/crypto_search_economic_v4_20260731/candidate_ledger.parquet",
+      "sha256": "1F3ADAA8266F60CD01C1751C1B8241E6633973795468010B12910B12DC318EA8"
+    },
+    {
+      "bytes": 38259,
+      "path": "runtime/crypto_search_economic_v4_20260731/checkpoints/checkpoint_000/arm_checkpoint_metrics.parquet",
+      "sha256": "357651BF3ED918FB898418B687BC69DB03A4C00A17E90A51A99DB310EBB23B5C"
+    },
+    {
+      "bytes": 1862096,
+      "path": "runtime/crypto_search_economic_v4_20260731/checkpoints/checkpoint_000/behavior_archive.parquet",
+      "sha256": "2A4AB9908C5A2007421C97F1FC1A74239B47238E4D5E459FCB954F8C86336AEF"
+    },
+    {
+      "bytes": 9450210,
+      "path": "runtime/crypto_search_economic_v4_20260731/checkpoints/checkpoint_000/candidate_ledger.parquet",
+      "sha256": "1F3ADAA8266F60CD01C1751C1B8241E6633973795468010B12910B12DC318EA8"
+    },
+    {
+      "bytes": 3591,
+      "path": "runtime/crypto_search_economic_v4_20260731/checkpoints/checkpoint_000/manifest.json",
+      "sha256": "556C1A69B196B4E17629F8DCA5931ACC3766FC9BF9C427E2F541AEFF1C2B5B5E"
+    },
+    {
+      "bytes": 7391172,
+      "path": "runtime/crypto_search_economic_v4_20260731/checkpoints/checkpoint_000/state.json",
+      "sha256": "8AE32CA5F466BCA4614F1A0B36BEFA81BE62D3A1236BF06D9B4B38EEF9D10B79"
+    },
+    {
+      "bytes": 38259,
+      "path": "runtime/crypto_search_economic_v4_20260731/checkpoints/checkpoint_validation_blocked/arm_checkpoint_metrics.parquet",
+      "sha256": "357651BF3ED918FB898418B687BC69DB03A4C00A17E90A51A99DB310EBB23B5C"
+    },
+    {
+      "bytes": 1862096,
+      "path": "runtime/crypto_search_economic_v4_20260731/checkpoints/checkpoint_validation_blocked/behavior_archive.parquet",
+      "sha256": "2A4AB9908C5A2007421C97F1FC1A74239B47238E4D5E459FCB954F8C86336AEF"
+    },
+    {
+      "bytes": 9450210,
+      "path": "runtime/crypto_search_economic_v4_20260731/checkpoints/checkpoint_validation_blocked/candidate_ledger.parquet",
+      "sha256": "1F3ADAA8266F60CD01C1751C1B8241E6633973795468010B12910B12DC318EA8"
+    },
+    {
+      "bytes": 3606,
+      "path": "runtime/crypto_search_economic_v4_20260731/checkpoints/checkpoint_validation_blocked/manifest.json",
+      "sha256": "35731DDA915603FE0A31538C84D21EE2A6EE197726332809D234B67E2D99E21B"
+    },
+    {
+      "bytes": 7391626,
+      "path": "runtime/crypto_search_economic_v4_20260731/checkpoints/checkpoint_validation_blocked/state.json",
+      "sha256": "455CCB10A056BEAAC02246C748A004D59357D9EFDDDB52F99567F33DCEADF831"
+    },
+    {
+      "bytes": 12874,
+      "path": "runtime/crypto_search_economic_v4_20260731/embedded_preflight.json",
+      "sha256": "D522301075A5BFAF7801676BB529C1269407BB0F9C612E52C3CE4737D0ABE958"
+    },
+    {
+      "bytes": 1586,
+      "path": "runtime/crypto_search_economic_v4_20260731/final_decision.json",
+      "sha256": "6275A95F631748E084B9E991B386050F71BF1B45427F72BBBC7998C986DC0EE4"
+    },
+    {
+      "bytes": 28067,
+      "path": "runtime/crypto_search_economic_v4_20260731/frozen_contract.json",
+      "sha256": "FD99D8987CA9C182B286A22DFD54B13F29A57311DF750A3AC7836153DE6F16FC"
+    }
+  ],
+  "base_sha": "94c79d0a8e559b7223fa1eaddb2d07ca76c1e628",
+  "closure_source_sha": "94c79d0a8e559b7223fa1eaddb2d07ca76c1e628",
+  "compiler_identity": {
+    "bundle_sha256": "76147F6940FB0B41B67EF999DD97115E46F250EDF7237562DC00BC10BEEF045C",
+    "paths": [
+      {
+        "bytes": 53858,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "BF7CA03041D84B6E5BB61A0B55914B9DADBBD0F82C91A98C1EEA60397417BC89"
+      },
+      {
+        "bytes": 22527,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "07549C7DE24C7BB4EE593A2F80CBED7831BE2D9B7992A4B922B2D2E89A6AA7A7"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 63095,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "6B57D3A62B409257398E805DCB3E592CDB6499F86D114600F5401D08097BA99E"
+      },
+      {
+        "bytes": 65839,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "2290BC65C29CDBBD6C5B0997FCC1859B07BF5159B918C80CF868A936DEF2F7BA"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 537223,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "9C95391610A561B0B76FA0834608550EE271A58B2F4C896A1185E455B1546CF6"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "continuation": "python -m alphafactory_crypto.broad_search.search_engine_v1 check-economic-v4 --runtime-date 20260731",
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+  },
+  "epoch_id": "CRYPTO_SEARCH_ECONOMIC_V4_20260731",
+  "frozen_contract_sha256": "8577792ED7A66C45C589F38BD9CFC85F45CE83A2B9E63F4C75057872FEDB8A01",
+  "generation_attempts": 2298,
+  "memory_fallback_used": true,
+  "producer_source_sha": "94c79d0a8e559b7223fa1eaddb2d07ca76c1e628",
+  "reproducible": true,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "ENGINE_VALIDATION_BLOCKED",
+  "strict_evaluated_count": 2000,
+  "workers_final": 8
+}
