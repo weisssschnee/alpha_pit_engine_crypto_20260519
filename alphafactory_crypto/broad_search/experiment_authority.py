@@ -34,6 +34,43 @@ CONDITIONAL_RUN_NON_FORMAL_COMPONENTS = {
 DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH = (
     "config/crypto_search_economic_receipt_v1.json"
 )
+SEARCH_ECONOMIC_V2_RECEIPT_PATH = (
+    "config/crypto_search_economic_receipt_v2.json"
+)
+SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
+    "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1": {
+        "path": DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH,
+        "decision_id": "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V1_20260731",
+        "runner_campaign": "crypto_search_economic_v1",
+        "runtime_date": "20260731",
+        "allowed_statuses": {
+            "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+        },
+        "expected_run_outcome": {
+            "status": "ENGINE_BUDGET_EXHAUSTED",
+            "reason": "RAW_GENERATION_ATTEMPT_LIMIT",
+            "runtime": "runtime/crypto_search_economic_v1_20260731",
+            "producer_source_sha": (
+                "17d5b5f19acd1366cf5b8f332249d78e918556f1"
+            ),
+            "generation_attempts": 95_776,
+            "strict_evaluated_count": 1_190,
+            "checkpoint": "checkpoint_budget_exhausted",
+            "rescue_rerun_started": False,
+        },
+    },
+    "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V2": {
+        "path": SEARCH_ECONOMIC_V2_RECEIPT_PATH,
+        "decision_id": "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V2_20260731",
+        "runner_campaign": "crypto_search_economic_v2",
+        "runtime_date": "20260731",
+        "allowed_statuses": {
+            "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+        },
+        "expected_run_outcome": None,
+    },
+}
 
 _INVALID_INTENT = {
     "",
@@ -171,14 +208,18 @@ def _validate_search_economic_receipt(
 
     if receipt.get("schema_version") != 2:
         blockers.append("schema_version")
-    if receipt.get("receipt_id") != "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1":
+    receipt_id = str(receipt.get("receipt_id") or "")
+    receipt_spec = SEARCH_ECONOMIC_RECEIPT_SPECS.get(receipt_id)
+    if receipt_spec is None:
         blockers.append("receipt_id")
+        receipt_spec = SEARCH_ECONOMIC_RECEIPT_SPECS[
+            "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1"
+        ]
+    if receipt_path_label.replace("\\", "/") != receipt_spec["path"]:
+        blockers.append("receipt_path")
     status = str(receipt.get("status") or "")
     run_authorized = receipt.get("run_authorized")
-    if status not in {
-        "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
-        "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
-    }:
+    if status not in receipt_spec["allowed_statuses"]:
         blockers.append("status")
     if (
         status == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
@@ -190,7 +231,7 @@ def _validate_search_economic_receipt(
         blockers.append("run_authorized")
     run_authorization = dict(receipt.get("run_authorization") or {})
     expected_run_authorization = {
-        "decision_id": "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V1_20260731",
+        "decision_id": receipt_spec["decision_id"],
         "authority": "CURRENT_USER_INSTRUCTION",
         "scope": "ONE_FRESH_STATE_20000_STRICT_MAXIMUM_CAMPAIGN",
         "cost_interpretation": "RESULTS_CONDITIONAL_ON_FROZEN_5_BPS",
@@ -201,18 +242,7 @@ def _validate_search_economic_receipt(
     if run_authorization != expected_run_authorization:
         blockers.append("run_authorization")
     run_outcome = dict(receipt.get("run_outcome") or {})
-    expected_run_outcome = {
-        "status": "ENGINE_BUDGET_EXHAUSTED",
-        "reason": "RAW_GENERATION_ATTEMPT_LIMIT",
-        "runtime": "runtime/crypto_search_economic_v1_20260731",
-        "producer_source_sha": (
-            "17d5b5f19acd1366cf5b8f332249d78e918556f1"
-        ),
-        "generation_attempts": 95_776,
-        "strict_evaluated_count": 1_190,
-        "checkpoint": "checkpoint_budget_exhausted",
-        "rescue_rerun_started": False,
-    }
+    expected_run_outcome = receipt_spec["expected_run_outcome"]
     if status == "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED":
         if run_outcome != expected_run_outcome:
             blockers.append("run_outcome")
@@ -469,10 +499,10 @@ def _validate_search_economic_receipt(
         blockers.append("validation_kill_line.equal_matched_evaluated_count")
     if (
         search_campaign.get("runner_campaign")
-        != "crypto_search_economic_v1"
+        != receipt_spec["runner_campaign"]
     ):
         blockers.append("search_campaign.runner_campaign")
-    if search_campaign.get("runtime_date") != "20260731":
+    if search_campaign.get("runtime_date") != receipt_spec["runtime_date"]:
         blockers.append("search_campaign.runtime_date")
     if (
         search_campaign.get("carrier_id")
@@ -504,7 +534,7 @@ def _validate_search_economic_receipt(
         blockers.append("search_campaign.fresh_state")
     if (
         kill_line.get("orchestration_campaign")
-        != "crypto_search_economic_v1"
+        != receipt_spec["runner_campaign"]
     ):
         blockers.append("validation_kill_line.orchestration_campaign")
     if kill_line.get("trigger_after_train_checkpoint_index") != 0:
@@ -649,18 +679,114 @@ def _validate_search_economic_receipt(
     }
 
 
+def _materialize_search_economic_receipt(
+    repo_root: Path,
+    receipt: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Materialize a narrowly authorized receipt over one hash-bound base contract."""
+
+    raw = dict(receipt)
+    base_path_label = str(raw.get("base_receipt_path") or "").replace("\\", "/")
+    if not base_path_label:
+        return raw
+    expected_keys = {
+        "schema_version",
+        "receipt_id",
+        "status",
+        "run_authorized",
+        "run_authorization",
+        "base_receipt_path",
+        "base_receipt_sha256",
+        "search_campaign",
+        "validation_kill_line",
+    }
+    if set(raw) != expected_keys:
+        raise RuntimeError(
+            "SEARCH_ECONOMIC_RECEIPT_BLOCKED: inherited_receipt:SCHEMA"
+        )
+    if base_path_label != DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH:
+        raise RuntimeError(
+            "SEARCH_ECONOMIC_RECEIPT_BLOCKED: inherited_receipt:BASE_PATH"
+        )
+    base_path = repo_root / base_path_label
+    if not base_path.is_file():
+        raise RuntimeError(
+            "SEARCH_ECONOMIC_RECEIPT_BLOCKED: inherited_receipt:BASE_MISSING"
+        )
+    base = json.loads(base_path.read_text(encoding="utf-8-sig"))
+    base_sha256 = _canonical_sha256(base)
+    if str(raw.get("base_receipt_sha256") or "").upper() != base_sha256:
+        raise RuntimeError(
+            "SEARCH_ECONOMIC_RECEIPT_BLOCKED: inherited_receipt:BASE_HASH"
+        )
+    _validate_search_economic_receipt(
+        repo_root,
+        base,
+        receipt_path_label=base_path_label,
+    )
+    search_override = dict(raw.get("search_campaign") or {})
+    validation_override = dict(raw.get("validation_kill_line") or {})
+    if set(search_override) != {"runner_campaign"}:
+        raise RuntimeError(
+            "SEARCH_ECONOMIC_RECEIPT_BLOCKED: inherited_receipt:SEARCH_OVERRIDE"
+        )
+    if set(validation_override) != {"orchestration_campaign"}:
+        raise RuntimeError(
+            "SEARCH_ECONOMIC_RECEIPT_BLOCKED: "
+            "inherited_receipt:VALIDATION_OVERRIDE"
+        )
+    effective = dict(base)
+    for key in (
+        "schema_version",
+        "receipt_id",
+        "status",
+        "run_authorized",
+        "run_authorization",
+    ):
+        effective[key] = raw[key]
+    effective.pop("run_outcome", None)
+    effective["search_campaign"] = {
+        **dict(base["search_campaign"]),
+        **search_override,
+    }
+    effective["validation_kill_line"] = {
+        **dict(base["validation_kill_line"]),
+        **validation_override,
+    }
+    effective["contract_inheritance"] = {
+        "base_receipt_path": base_path_label,
+        "base_receipt_sha256": base_sha256,
+        "authorization_receipt_sha256": _canonical_sha256(raw),
+    }
+    return effective
+
+
 def resolve_search_economic_receipt(
     repo_root: Path,
+    receipt_path: str | None = None,
 ) -> dict[str, Any]:
     """Verify the thin crypto campaign binding without reimplementing its authorities."""
 
-    relative_receipt = DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH
+    relative_receipt = str(
+        receipt_path or DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH
+    ).replace("\\", "/")
+    registered_paths = {
+        str(spec["path"]) for spec in SEARCH_ECONOMIC_RECEIPT_SPECS.values()
+    }
+    if relative_receipt not in registered_paths:
+        raise RuntimeError(
+            "SEARCH_ECONOMIC_RECEIPT_BLOCKED: "
+            f"receipt:UNREGISTERED:{relative_receipt}"
+        )
     path = repo_root / relative_receipt
     if not path.is_file():
         raise RuntimeError(
             f"SEARCH_ECONOMIC_RECEIPT_BLOCKED: receipt:MISSING:{path}"
         )
-    receipt = json.loads(path.read_text(encoding="utf-8-sig"))
+    receipt = _materialize_search_economic_receipt(
+        repo_root,
+        json.loads(path.read_text(encoding="utf-8-sig")),
+    )
     return _validate_search_economic_receipt(
         repo_root,
         receipt,
@@ -760,12 +886,16 @@ def require_real_experiment_authority(
     evidence_to_add: str | None,
     decision_to_change: str | None,
     economic_receipt_required: bool = True,
+    economic_receipt_path: str | None = None,
 ) -> dict[str, Any]:
     resolution = resolve_real_experiment_authorities(repo_root)
     blockers = list(resolution["blockers"])
     economic_receipt = None
     if economic_receipt_required:
-        economic_receipt = resolve_search_economic_receipt(repo_root)
+        economic_receipt = resolve_search_economic_receipt(
+            repo_root,
+            receipt_path=economic_receipt_path,
+        )
         if economic_receipt["run_authorized"] is not True:
             blockers.append("economic_receipt:RUN_NOT_AUTHORIZED")
         else:
@@ -821,6 +951,7 @@ def require_real_experiment_authority(
 
 __all__ = [
     "DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH",
+    "SEARCH_ECONOMIC_V2_RECEIPT_PATH",
     "REQUIRED_REAL_EXPERIMENT_ROLES",
     "evaluate_search_validation_kill_line",
     "require_real_experiment_authority",

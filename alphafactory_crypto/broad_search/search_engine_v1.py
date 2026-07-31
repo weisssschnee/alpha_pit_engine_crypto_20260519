@@ -144,6 +144,32 @@ V14_STAGE_C_CHECKPOINT_SIZE = 400
 ECONOMIC_SEARCH_CAMPAIGN = "crypto_search_economic_v1"
 ECONOMIC_SEARCH_EPOCH_ID = "CRYPTO_SEARCH_ECONOMIC_V1_20260731"
 ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE = "20260731"
+ECONOMIC_SEARCH_V2_CAMPAIGN = "crypto_search_economic_v2"
+ECONOMIC_SEARCH_V2_EPOCH_ID = "CRYPTO_SEARCH_ECONOMIC_V2_20260731"
+ECONOMIC_SEARCH_CAMPAIGNS = (
+    ECONOMIC_SEARCH_CAMPAIGN,
+    ECONOMIC_SEARCH_V2_CAMPAIGN,
+)
+ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, str]] = {
+    ECONOMIC_SEARCH_CAMPAIGN: {
+        "epoch_id": ECONOMIC_SEARCH_EPOCH_ID,
+        "runtime_date": ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE,
+        "runtime_prefix": "crypto_search_economic_v1",
+        "report_prefix": "CRYPTO_SEARCH_ECONOMIC_V1",
+        "report_title": "Crypto Search Economic V1",
+        "receipt_path": "config/crypto_search_economic_receipt_v1.json",
+        "cli_suffix": "economic-v1",
+    },
+    ECONOMIC_SEARCH_V2_CAMPAIGN: {
+        "epoch_id": ECONOMIC_SEARCH_V2_EPOCH_ID,
+        "runtime_date": ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE,
+        "runtime_prefix": "crypto_search_economic_v2",
+        "report_prefix": "CRYPTO_SEARCH_ECONOMIC_V2",
+        "report_title": "Crypto Search Economic V2",
+        "receipt_path": "config/crypto_search_economic_receipt_v2.json",
+        "cli_suffix": "economic-v2",
+    },
+}
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
 CONTINUATION_RUNTIME = "runtime/crypto_18m_current_field_four_policy_continuation_20260719"
 SEEDS = (20260716, 20260717, 20260718, 20260719)
@@ -294,6 +320,15 @@ V1_PARAMETERS: Mapping[str, Mapping[str, Any]] = {
         "duplicate_resample_limit": 64,
     },
 }
+
+
+def _economic_campaign_config(campaign: str) -> dict[str, str]:
+    try:
+        return dict(ECONOMIC_SEARCH_CONFIGS[str(campaign)])
+    except KeyError as exc:
+        raise ValueError(
+            f"unsupported economic search campaign: {campaign}"
+        ) from exc
 
 
 def _payload_sha(value: Any) -> str:
@@ -1332,6 +1367,7 @@ def _economic_search_frozen_contract(
     environment: Mapping[str, Any],
     contracts: Sequence[FieldContract],
     carrier_id: str,
+    epoch_id: str = ECONOMIC_SEARCH_EPOCH_ID,
 ) -> dict[str, Any]:
     """Reuse the V1 rolling engine contract on the admitted OI/flow carrier."""
 
@@ -1349,7 +1385,7 @@ def _economic_search_frozen_contract(
     }
     payload.update(
         {
-            "epoch_id": ECONOMIC_SEARCH_EPOCH_ID,
+            "epoch_id": str(epoch_id),
             "objective": (
                 "Compare fresh-state rolling proposal productivity on the "
                 "receipt-bound OI/mark x aggTrades carrier"
@@ -5262,7 +5298,9 @@ def _budget_exhausted_decision(
     archive: BehaviorArchive | pd.DataFrame,
     checkpoint_restore_verified: bool,
     closure_source_sha: str,
+    campaign: str = ECONOMIC_SEARCH_CAMPAIGN,
 ) -> dict[str, Any]:
+    economic_config = _economic_campaign_config(campaign)
     frame = (
         ledger.copy()
         if isinstance(ledger, pd.DataFrame)
@@ -5376,19 +5414,52 @@ def _budget_exhausted_decision(
         else 0
     )
     strict_count = len(frame)
+    legacy_v1_failure = {
+        "status": "PROPOSAL_LAYER_INCOMPATIBLE_ROLE_RESOLUTION",
+        "observed_exception": (
+            "admitted field registry cannot satisfy skeleton role: oi_change"
+        ),
+        "candidate_evaluations_consumed_by_diagnostic": 0,
+        "remedy": (
+            "reuse the already-frozen partial role map for compatible "
+            "skeleton proposal and mutation"
+        ),
+    }
+    validation_stage = dict(state.get("validation_stage") or {})
+    if not validation_stage:
+        validation_stage = {
+            "status": "NOT_RUN_BUDGET_EXHAUSTED_BEFORE_CHECKPOINT_000",
+            "candidate_generation_performed": False,
+            "holdout_read": False,
+        }
+    terminal_diagnosis = (
+        "The two fresh-state V1 controls consumed almost the entire raw-attempt "
+        "budget before compilation. Their legacy proposal path re-required a "
+        "complete Broad role surface after a compatible carrier-specific "
+        "skeleton subset had already been frozen, and failed on the absent "
+        "`oi_change` role. This is a proposal-layer defect, not evidence that "
+        "the carrier lacks economic information."
+        if campaign == ECONOMIC_SEARCH_CAMPAIGN
+        else (
+            "The independent V2 campaign reached a frozen hard budget. "
+            "Completed candidates and the exact checkpoint are retained; "
+            "partial arm evidence is diagnostic only and does not qualify an "
+            "arm or support an Alpha claim."
+        )
+    )
     return {
         **dict(decision),
         "producer_source_sha": source_sha,
         "closure_source_sha": closure_source_sha,
-        "epoch_id": ECONOMIC_SEARCH_EPOCH_ID,
-        "report_title": "Crypto Search Economic V1",
+        "epoch_id": economic_config["epoch_id"],
+        "report_title": economic_config["report_title"],
         "surface_description": (
             "existing 115-field OI/mark x aggTrades aligned carrier; "
             "receipt-bound Binance USD-M target"
         ),
-        "search_campaign": ECONOMIC_SEARCH_CAMPAIGN,
+        "search_campaign": campaign,
         "strict_evaluated_count": strict_count,
-        "checkpoint_count": 0,
+        "checkpoint_count": int(state.get("next_checkpoint_index", 0)),
         "emergency_checkpoint_restore_verified": bool(
             checkpoint_restore_verified
         ),
@@ -5413,22 +5484,16 @@ def _budget_exhausted_decision(
         ),
         "arm_summaries": arm_summaries,
         "failure_counts": dict(state.get("failure_counts") or {}),
-        "v1_control_failure": {
-            "status": "PROPOSAL_LAYER_INCOMPATIBLE_ROLE_RESOLUTION",
-            "observed_exception": (
-                "admitted field registry cannot satisfy skeleton role: oi_change"
-            ),
-            "candidate_evaluations_consumed_by_diagnostic": 0,
-            "remedy": (
-                "reuse the already-frozen partial role map for compatible "
-                "skeleton proposal and mutation"
-            ),
-        },
-        "validation_stage": {
-            "status": "NOT_RUN_BUDGET_EXHAUSTED_BEFORE_CHECKPOINT_000",
-            "candidate_generation_performed": False,
-            "holdout_read": False,
-        },
+        "v1_control_failure": (
+            legacy_v1_failure
+            if campaign == ECONOMIC_SEARCH_CAMPAIGN
+            else {
+                "status": "NOT_OBSERVED_AFTER_PROPOSAL_LIVENESS_REPAIR",
+                "candidate_evaluations_consumed_by_diagnostic": 0,
+            }
+        ),
+        "validation_stage": validation_stage,
+        "terminal_diagnosis": terminal_diagnosis,
         "research_decision": "HOLD_INCOMPLETE_IMBALANCED_CAMPAIGN",
         "future_new_data_arena_qualified_arms": [],
         "success_questions": {
@@ -5483,7 +5548,7 @@ def _budget_exhausted_report_text(decision: Mapping[str, Any]) -> str:
                 pair_top=f"{top_pair:.6f}" if top_pair is not None else "n/a",
             )
         )
-    return f"""# Crypto Search Economic V1
+    return f"""# {decision['report_title']}
 
 - Status: `{decision['status']}` (`{decision['reason']}`)
 - Producer source: `{decision['producer_source_sha']}`
@@ -5507,14 +5572,10 @@ the strict matched authority.
 
 ## Terminal diagnosis
 
-The two fresh-state V1 controls consumed almost the entire raw-attempt budget
-before compilation.  Their legacy proposal path re-required a complete Broad
-role surface after a compatible carrier-specific skeleton subset had already
-been frozen, and failed on the absent `oi_change` role.  This is a proposal
-layer defect, not evidence that the carrier lacks economic information.
+{decision['terminal_diagnosis']}
 
-The campaign did not reach `checkpoint_000`; validation, adaptive checkpoint
-updates, OOS, promotion, challenge, and any next Arena remain unstarted.
+Completed rolling checkpoints: `{decision['checkpoint_count']}`. OOS, promotion,
+challenge, and any next Arena remain unstarted.
 No seed, parameter, or rescue rerun was used.
 """
 
@@ -6551,16 +6612,20 @@ def close_budget_exhausted_engine(
     runtime_date: str = ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE,
     expected_producer_source_sha: str | None = None,
     closure_source_sha: str | None = None,
+    campaign: str = ECONOMIC_SEARCH_CAMPAIGN,
 ) -> dict[str, Any]:
     """Finish reports and provenance without generating or evaluating candidates."""
 
-    if runtime_date != ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE:
+    economic_config = _economic_campaign_config(campaign)
+    if runtime_date != economic_config["runtime_date"]:
         raise ValueError("economic search runtime date changed")
     runtime_root = (
-        repo_root / f"runtime/crypto_search_economic_v1_{runtime_date}"
+        repo_root
+        / f"runtime/{economic_config['runtime_prefix']}_{runtime_date}"
     )
     report_path = (
-        repo_root / f"reports/CRYPTO_SEARCH_ECONOMIC_V1_{runtime_date}.md"
+        repo_root
+        / f"reports/{economic_config['report_prefix']}_{runtime_date}.md"
     )
     checkpoint = runtime_root / "checkpoints" / "checkpoint_budget_exhausted"
     for path in (
@@ -6637,6 +6702,7 @@ def close_budget_exhausted_engine(
         archive=archive,
         checkpoint_restore_verified=True,
         closure_source_sha=closure_sha,
+        campaign=campaign,
     )
     _write_json(runtime_root / "final_decision.json", decision)
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -6657,13 +6723,13 @@ def close_budget_exhausted_engine(
         frozen_hash=str(frozen["frozen_contract_sha256"]),
         identities=identities,
         state=state,
-        epoch_id=ECONOMIC_SEARCH_EPOCH_ID,
+        epoch_id=economic_config["epoch_id"],
         base_sha=producer_source_sha,
         status="ENGINE_BUDGET_EXHAUSTED",
         closure_source_sha=closure_sha,
         continuation=(
             "python -m alphafactory_crypto.broad_search.search_engine_v1 "
-            f"check-economic-v1 --runtime-date {runtime_date}"
+            f"check-{economic_config['cli_suffix']} --runtime-date {runtime_date}"
         ),
     )
     _write_json(runtime_root / "run_manifest.json", manifest)
@@ -6885,6 +6951,12 @@ def _require_bound_authority_preflight(
         require_real_experiment_authority,
     )
 
+    receipt_path = None
+    if economic_receipt_required:
+        incoming_receipt = authority_preflight.get("economic_receipt")
+        if not isinstance(incoming_receipt, Mapping):
+            raise RuntimeError("ECONOMIC_RECEIPT_PREFLIGHT_REQUIRED")
+        receipt_path = str(incoming_receipt.get("receipt_path") or "")
     verified = require_real_experiment_authority(
         repo_root,
         evidence_to_add=str(authority_preflight.get("evidence_to_add") or ""),
@@ -6892,6 +6964,7 @@ def _require_bound_authority_preflight(
             authority_preflight.get("decision_to_change") or ""
         ),
         economic_receipt_required=economic_receipt_required,
+        economic_receipt_path=receipt_path,
     )
     if verified != dict(authority_preflight):
         raise RuntimeError("ECONOMIC_RECEIPT_PREFLIGHT_CHANGED")
@@ -6955,6 +7028,7 @@ def _validate_economic_search_surface(
     receipt: Mapping[str, Any],
     identities: Mapping[str, Any],
     contracts: Sequence[FieldContract],
+    expected_campaign: str = ECONOMIC_SEARCH_CAMPAIGN,
 ) -> str:
     campaign = dict(receipt.get("search_campaign") or {})
     raw_cache = dict(identities.get("raw_cache") or {})
@@ -6969,7 +7043,7 @@ def _validate_economic_search_surface(
     )
     checks = {
         "runner_campaign": campaign.get("runner_campaign")
-        == ECONOMIC_SEARCH_CAMPAIGN,
+        == expected_campaign,
         "carrier_id": campaign.get("carrier_id")
         == "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
         "carrier_cache_identity_sha256": (
@@ -7802,10 +7876,13 @@ def run_engine(
         "search_engine_v1_2",
         "carrier_gate_v1",
         "search_engine_v1_3_cross_carrier",
-        ECONOMIC_SEARCH_CAMPAIGN,
+        *ECONOMIC_SEARCH_CAMPAIGNS,
     }:
         raise ValueError(f"unsupported Search Engine V1 campaign: {campaign}")
-    is_economic = campaign == ECONOMIC_SEARCH_CAMPAIGN
+    is_economic = campaign in ECONOMIC_SEARCH_CAMPAIGNS
+    economic_config = (
+        _economic_campaign_config(campaign) if is_economic else None
+    )
     is_canary = campaign == "aggtrades_system_canary"
     is_v11 = campaign == "search_engine_v1_1"
     is_v12 = campaign == "search_engine_v1_2"
@@ -7815,15 +7892,16 @@ def run_engine(
         is_canary or is_v11 or is_v12 or is_carrier_gate or is_v13
     )
     if is_economic:
-        if runtime_date != ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE:
+        assert economic_config is not None
+        if runtime_date != economic_config["runtime_date"]:
             raise ValueError("economic search runtime date changed")
         runtime_root = (
             repo_root
-            / f"runtime/crypto_search_economic_v1_{runtime_date}"
+            / f"runtime/{economic_config['runtime_prefix']}_{runtime_date}"
         )
         report_path = (
             repo_root
-            / f"reports/CRYPTO_SEARCH_ECONOMIC_V1_{runtime_date}.md"
+            / f"reports/{economic_config['report_prefix']}_{runtime_date}.md"
         )
         strict_target = STRICT_TARGET
         checkpoint_count = CHECKPOINT_COUNT
@@ -7979,6 +8057,7 @@ def run_engine(
             receipt=economic_receipt,
             identities=input_identities,
             contracts=contracts,
+            expected_campaign=campaign,
         )
     elif is_v13:
         store, contracts, behavior_contract, input_identities, continuation = (
@@ -8033,6 +8112,7 @@ def run_engine(
             environment=environment,
             contracts=contracts,
             carrier_id=str(carrier_id),
+            epoch_id=economic_config["epoch_id"],
         )
     elif is_v13:
         frozen = _v13_frozen_contract(
@@ -9027,6 +9107,7 @@ def run_engine(
         )
     )
     if is_economic:
+        assert economic_config is not None
         assert validation_result is not None
         decision["validation_stage"] = {
             key: value
@@ -9038,13 +9119,13 @@ def run_engine(
         ]
         decision.update(
             {
-                "epoch_id": ECONOMIC_SEARCH_EPOCH_ID,
-                "report_title": "Crypto Search Economic V1",
+                "epoch_id": economic_config["epoch_id"],
+                "report_title": economic_config["report_title"],
                 "surface_description": (
                     "existing 115-field OI/mark x aggTrades aligned carrier; "
                     "receipt-bound Binance USD-M target"
                 ),
-                "search_campaign": ECONOMIC_SEARCH_CAMPAIGN,
+                "search_campaign": campaign,
             }
         )
     _write_json(runtime_root / "final_decision.json", decision)
@@ -9077,7 +9158,7 @@ def run_engine(
         identities=identities,
         state=state,
         epoch_id=(
-            ECONOMIC_SEARCH_EPOCH_ID
+            economic_config["epoch_id"]
             if is_economic
             else V13_EPOCH_ID
             if is_v13
@@ -9098,7 +9179,7 @@ def run_engine(
         ),
         continuation=(
             "python -m alphafactory_crypto.broad_search.search_engine_v1 "
-            f"check-economic-v1 --runtime-date {runtime_date}"
+            f"check-{economic_config['cli_suffix']} --runtime-date {runtime_date}"
             if is_economic
             else "python -m alphafactory_crypto.broad_search.search_engine_v1 "
             f"check-v13 --runtime-date {runtime_date}"
@@ -9163,17 +9244,20 @@ def check_engine(
     runtime_date: str = DEFAULT_RUNTIME_DATE,
     campaign: str = "legacy",
 ) -> dict[str, Any]:
-    is_economic = campaign == ECONOMIC_SEARCH_CAMPAIGN
-    if campaign not in {"legacy", ECONOMIC_SEARCH_CAMPAIGN}:
+    is_economic = campaign in ECONOMIC_SEARCH_CAMPAIGNS
+    if campaign not in {"legacy", *ECONOMIC_SEARCH_CAMPAIGNS}:
         raise ValueError(f"unsupported check campaign: {campaign}")
     if is_economic:
-        if runtime_date != ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE:
+        economic_config = _economic_campaign_config(campaign)
+        if runtime_date != economic_config["runtime_date"]:
             raise ValueError("economic search runtime date changed")
         runtime_root = (
-            repo_root / f"runtime/crypto_search_economic_v1_{runtime_date}"
+            repo_root
+            / f"runtime/{economic_config['runtime_prefix']}_{runtime_date}"
         )
         report_path = (
-            repo_root / f"reports/CRYPTO_SEARCH_ECONOMIC_V1_{runtime_date}.md"
+            repo_root
+            / f"reports/{economic_config['report_prefix']}_{runtime_date}.md"
         )
     else:
         runtime_root = (
@@ -9248,17 +9332,27 @@ def check_engine(
         if validation_decisions.get("status") != "VALIDATION_STAGE_COMPLETE":
             errors.append("validation_decision")
     elif is_economic:
-        if decision.get("validation_stage", {}).get("status") != (
-            "NOT_RUN_BUDGET_EXHAUSTED_BEFORE_CHECKPOINT_000"
-        ):
+        validation_status = decision.get("validation_stage", {}).get("status")
+        if validation_status not in {
+            "NOT_RUN_BUDGET_EXHAUSTED_BEFORE_CHECKPOINT_000",
+            "VALIDATION_STAGE_COMPLETE",
+        }:
             errors.append("budget_exhausted_validation_status")
-        for name in (
+        validation_artifacts = (
             "validation_candidate_ledger.parquet",
             "validation_arm_metrics.parquet",
             "validation_decisions.json",
-        ):
-            if (runtime_root / name).exists():
+        )
+        for name in validation_artifacts:
+            exists = (runtime_root / name).exists()
+            if (
+                validation_status
+                == "NOT_RUN_BUDGET_EXHAUSTED_BEFORE_CHECKPOINT_000"
+                and exists
+            ):
                 errors.append(f"budget_exhausted_unexpected_validation:{name}")
+            if validation_status == "VALIDATION_STAGE_COMPLETE" and not exists:
+                errors.append(f"budget_exhausted_missing_validation:{name}")
 
     frozen_without_hash = {
         key: value for key, value in frozen.items() if key != "frozen_contract_sha256"
@@ -9365,7 +9459,8 @@ def check_engine(
         (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
     )
     if budget_exhausted:
-        if checkpoints:
+        completed_checkpoint_count = int(decision.get("checkpoint_count", 0))
+        if len(checkpoints) != completed_checkpoint_count:
             errors.append("budget_exhausted_numeric_checkpoint")
         emergency_checkpoint = (
             runtime_root / "checkpoints" / "checkpoint_budget_exhausted"
@@ -9425,9 +9520,20 @@ def check_engine(
                 errors.append(f"checkpoint_file:{index}:{record['name']}")
 
     if budget_exhausted:
-        if not bool(ledger["checkpoint_index"].eq(0).all()):
+        completed_checkpoint_count = int(decision.get("checkpoint_count", 0))
+        if not bool(
+            ledger["checkpoint_index"]
+            .astype(int)
+            .le(completed_checkpoint_count)
+            .all()
+        ):
             errors.append("budget_exhausted_checkpoint_index")
-        if not metrics.empty:
+        metric_indices = (
+            set(metrics["checkpoint_index"].astype(int).unique())
+            if not metrics.empty
+            else set()
+        )
+        if metric_indices != set(range(completed_checkpoint_count)):
             errors.append("budget_exhausted_checkpoint_metrics")
         if decision.get("research_decision") != (
             "HOLD_INCOMPLETE_IMBALANCED_CAMPAIGN"
@@ -12391,6 +12497,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             "run-economic-v1",
             "close-economic-v1",
             "check-economic-v1",
+            "run-economic-v2",
+            "close-economic-v2",
+            "check-economic-v2",
             "build-canary-cache",
             "run-canary",
             "check-canary",
@@ -12415,6 +12524,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser.parse_args(argv)
     repo_root = Path(__file__).resolve().parents[2]
     authority_preflight = None
+    economic_command_campaign = {
+        "run-economic-v1": ECONOMIC_SEARCH_CAMPAIGN,
+        "run-economic-v2": ECONOMIC_SEARCH_V2_CAMPAIGN,
+    }.get(args.command)
     if args.command.startswith("run"):
         from alphafactory_crypto.broad_search.experiment_authority import (
             require_real_experiment_authority,
@@ -12425,7 +12538,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             evidence_to_add=args.evidence_to_add,
             decision_to_change=args.decision_to_change,
             economic_receipt_required=(
-                args.command == "run-economic-v1"
+                economic_command_campaign is not None
+            ),
+            economic_receipt_path=(
+                _economic_campaign_config(economic_command_campaign)[
+                    "receipt_path"
+                ]
+                if economic_command_campaign is not None
+                else None
             ),
         )
         print(
@@ -12453,6 +12573,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             campaign=ECONOMIC_SEARCH_CAMPAIGN,
             authority_preflight=authority_preflight,
         )
+    elif args.command == "run-economic-v2":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            source_sha=args.source_sha,
+            campaign=ECONOMIC_SEARCH_V2_CAMPAIGN,
+            authority_preflight=authority_preflight,
+        )
     elif args.command == "close-economic-v1":
         result = close_budget_exhausted_engine(
             repo_root,
@@ -12468,6 +12598,23 @@ def main(argv: Sequence[str] | None = None) -> int:
                 args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
             ),
             campaign=ECONOMIC_SEARCH_CAMPAIGN,
+        )
+    elif args.command == "close-economic-v2":
+        result = close_budget_exhausted_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            closure_source_sha=args.source_sha,
+            campaign=ECONOMIC_SEARCH_V2_CAMPAIGN,
+        )
+    elif args.command == "check-economic-v2":
+        result = check_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            campaign=ECONOMIC_SEARCH_V2_CAMPAIGN,
         )
     elif args.command == "check":
         result = check_engine(

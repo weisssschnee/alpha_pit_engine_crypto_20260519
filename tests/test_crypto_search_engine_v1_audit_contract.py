@@ -19,11 +19,13 @@ from alphafactory_crypto.broad_search.expression import (
 )
 from alphafactory_crypto.broad_search.search_engine_v1 import (
     BehaviorArchive,
+    ECONOMIC_SEARCH_V2_CAMPAIGN,
     HierarchicalTypedCEMV2,
     SEEDS,
     TypedEvolutionV2,
     _budget_exhausted_decision,
     _budget_exhausted_report_text,
+    _economic_campaign_config,
     _final_decision,
     _initial_policies,
     _proposal_liveness_preflight,
@@ -132,6 +134,20 @@ def test_all_policy_lanes_pass_zero_market_proposal_liveness_preflight() -> None
     assert result["reward_reads"] == 0
     assert all(row["matched_control_constructible"] for row in result["records"])
     assert all(row["deterministic_replay_verified"] for row in result["records"])
+
+
+def test_v2_campaign_uses_independent_runtime_and_receipt() -> None:
+    config = _economic_campaign_config(ECONOMIC_SEARCH_V2_CAMPAIGN)
+
+    assert config == {
+        "epoch_id": "CRYPTO_SEARCH_ECONOMIC_V2_20260731",
+        "runtime_date": "20260731",
+        "runtime_prefix": "crypto_search_economic_v2",
+        "report_prefix": "CRYPTO_SEARCH_ECONOMIC_V2",
+        "report_title": "Crypto Search Economic V2",
+        "receipt_path": "config/crypto_search_economic_receipt_v2.json",
+        "cli_suffix": "economic-v2",
+    }
 
 
 def test_proposal_liveness_preflight_fails_closed_on_unexpected_error(

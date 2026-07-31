@@ -4,7 +4,7 @@ Last updated: 2026-07-31 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ECONOMIC_V1_PROPOSAL_AUTOMATION_REPAIRED_NO_RUN_AUTHORIZED`
+`CRYPTO_SEARCH_ECONOMIC_V2_FRESH_STATE_AUTHORIZED_PENDING_LAUNCH`
 
 The repository-wide authority audit confirms that Search Engine V1 has a
 substantial reusable engineering chain: admitted carriers, PIT/lag contracts,
@@ -75,6 +75,19 @@ Legacy V1 proposal paths now perform bounded internal compile-domain resampling;
 the rolling engine retries only the explicitly typed bounded-underfill failure.
 Unexpected role, configuration, receipt, or replay errors fail closed instead
 of being counted indefinitely as ordinary proposal rejection.
+
+`CRYPTO_SEARCH_ECONOMIC_RECEIPT_V2` is a separate current-user authorization
+for one fresh-state 20,000-strict campaign on the unchanged 115-field OI/mark x
+aggTrades carrier. It imports no V1 candidate, reward, distribution,
+population, policy, archive, RNG, or transition state. The thin V2 receipt
+hash-locks and reuses the V1 target, mapping, reward, cost, evidence-partition,
+validation, and sealed-boundary contract rather than duplicating those
+authorities; only the authorization identity, runner campaign, epoch, and
+runtime path differ. The exact carrier proposal liveness preflight remains
+20/20 lanes with zero market evaluations and zero reward reads. Launch is
+permitted only from the clean committed producer SHA and retains the frozen
+100,000-attempt/18-hour, 10-worker with fail-closed 8-worker fallback, no-rescue
+limits.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new
 candidate evaluations and zero market budget. It found that `666/1,200` Stage-B
@@ -367,9 +380,9 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
 3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
 4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2` is source-qualified for future fresh-state use but remains inactive until the rest of the economic receipt closes. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
-5. Treat `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` as the sole successor source binding for mechanism, train-frozen orientation, portfolio role and formal mapping, Binance USD-M target/execution, the NON_FORMAL frozen 5 bps venue assumption, train-only joint reward, distinct no-feedback validation kill-line, unreadable holdout, and fresh-state requirements. Do not duplicate these components. Its one-run authorization is consumed and `run_authorized=false`; it cannot authorize another market campaign.
+5. Keep `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` as the consumed base economic contract and immutable V1 outcome. `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V2` hash-locks and inherits that contract while supplying only a separate one-run authorization, campaign identity, epoch, and runtime path. Do not duplicate the target, mapping, reward, cost, validation, or evidence partitions.
 6. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
-7. Do not launch another large search until separately authorized over an admitted new release. Latent search priority remains deferred after V1.2 and cannot influence budget.
+7. Launch only the separately authorized V2 fresh-state campaign on the unchanged admitted 115-field carrier. Do not import V1 state or start any other large search, new-data Arena, OOS, challenge, promotion, or latent priority run.
 8. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
 9. Treat `runtime/crypto_new_data_admission_v1_20260727` and the Search Surface Integration V1 bundle as distinct authorities: the former owns research admission gaps; the latter owns engineering carrier reachability. Resolve `BDXNUSDT`, lifecycle splits, Top200 surface gaps, and the Top50 OI/mark consumer before research admission.
 10. Use Unified Field Management V1 only as the deterministic navigation and conflict-checking view over those authorities. Add future registries by declaring their authority path and recompiling; do not hand-maintain duplicate field facts or infer research admission from catalog presence.
@@ -394,9 +407,9 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Qlib and DeepDow remain data-underpowered; neither supplies a clean economic negative for its full external paradigm.
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
-- Search Engine V1 now has a source-qualified distinct validation kill-line contract. It is NON_FORMAL, makes no optimizer feedback writes, and is not runtime- or market-verified. The historical report-only block remains spent and is not reused.
-- Search Engine V1 now has one enforced source-level economic-semantics receipt over existing components. Both CLI and direct runner entry points re-resolve it; alternate receipt paths are not accepted and component hashes must match. Receipt schema 2 records the current user's authorization for exactly one fresh-state campaign with at most 20,000 strict candidates under the frozen 5 bps conditional assumption; parameter tuning, seed changes, rescue reruns, formal claims, and promotion remain forbidden. The worker has a receipt-bound Binance target override, the pair evaluator consumes receipt-bound train orientation and cost, and the validation adapter atomically checkpoints failed arms.
-- The receipt-bound fresh validation orchestration is connected to the dedicated `crypto_search_economic_v1` entry point that reuses the existing rolling engine and the already-qualified 115-field OI/mark x aggTrades carrier; historical campaigns revalidate the existing Graph authority preflight against their own spent contracts and do not consume this receipt. The behavior descriptor contract and its regime quantiles/support hash are frozen from the receipt train block only; validation and holdout do not contribute to behavior identity. Both train and validation drop the final six hours, equal to the frozen two-hour execution delay plus maximum four-hour horizon, so label endpoints cannot cross into the next evidence role. At the reachable budget boundary after `checkpoint_000` updates and restores the frozen train policy, but before any `checkpoint_001` allocation, it deterministically selects 64 train-frozen candidates for each required 1h/4h horizon per active arm (128 total), reuses their persisted orientation and matched limiting sleeve, evaluates only the validation partition, keeps policy/archive/generation state unchanged, writes failed arms to the existing `arm_states`, and atomically publishes/restores `checkpoint_validation`. The next existing allocation consumes those states, so a failed adaptive arm receives zero subsequent budget while the typed-random control remains mandatory. Resume ordering prefers validation only at equal checkpoint progress and prefers later numeric checkpoints after continuation; every resumed economic state revalidates `checkpoint_validation` and republishes the top-level validation artifacts before continuation, closing the crash window between atomic checkpoint publication and artifact projection. Component hashes use canonical LF content so Windows checkout line endings cannot invalidate the committed binding. The campaign remains development-only and every result is conditional on the frozen 5 bps assumption.
+- Search Engine V1 has a source-qualified distinct validation kill-line contract. It is NON_FORMAL, makes no optimizer feedback writes, and has not yet been market-verified under V2. The historical report-only block remains spent and is not reused.
+- The V1 base and V2 authorization receipts are the only registered economic receipt paths. Both CLI and direct runner entry points re-resolve the selected exact path; component and inherited-base hashes must match. V2 authorizes exactly one fresh-state campaign with at most 20,000 strict candidates under the unchanged frozen 5 bps conditional assumption; parameter tuning, seed changes, rescue reruns, formal claims, and promotion remain forbidden.
+- The receipt-bound validation orchestration is shared by the dedicated V1 and V2 campaign identities and reuses the existing rolling engine and already-qualified 115-field OI/mark x aggTrades carrier. V2 has its own runtime, epoch, RNG state, policies, archive, ledger, receipts, and checkpoints. Behavior identity remains frozen from the train block only; validation and holdout cannot enter it. Both train and validation purge the final six hours. After `checkpoint_000` update and exact restore but before any `checkpoint_001` allocation, the runner evaluates the fixed equal-count validation kill-line and writes failed arms into the existing arm state. Component hashes canonicalize text to LF. All results remain development-only and conditional on 5 bps.
 
 ## Source-of-truth order
 
