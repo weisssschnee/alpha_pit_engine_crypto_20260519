@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-31T16:17:46.449588+00:00",
+  "generated_at": "2026-07-31T17:36:50.419304+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -2992,10 +2992,10 @@
     {
       "active_authority": false,
       "authority": {
-        "path": "config/crypto_search_economic_receipt_v5.json",
+        "path": "config/crypto_search_economic_receipt_v6.json",
         "repo_ref": "replay/crypto-search-engine-v1-4-binance-target-20260729",
-        "sha256": "1CE1A6C108CE85C19C6D666D78E77F7F47A5BEA661932B0D0A593E66103E1BD9",
-        "verified_sha": "dcd1aaff6738a5a0d75cc1b222119cb5cbafd889"
+        "sha256": "8EF18E4341D488A25252D89E9B837A2C575FC98A95F1DC45FFDEF88C386922F5",
+        "verified_sha": "fe48d19f6adf417d7fd51170e98cfc4ba5484b3b"
       },
       "authority_bindings": [
         {
@@ -3080,6 +3080,15 @@
           "evidence_ref": "config/crypto_search_economic_receipt_v5.json",
           "id": "crypto_search_economic_v5_consumed_outcome",
           "rule": "The one-run V5 receipt is consumed and run_authorized is false. Producer a6946df8b9b24db8572e48a5f8b79ef621feb0f9 used the unchanged 115-field OI/mark x aggTrades carrier, receipt-bound Binance USD-M target, joint primary-plus-matched Sortino reward, frozen 5 bps cost, existing seeds, and the fail-closed 8-worker memory fallback. It completed restore-verified checkpoint_000 with 2,000 strict candidates from 2,298 attempts and 1,962 behavior families. Validation persisted one canonical-random CONTROL_BEHAVIOR_EQUALS_PRIMARY candidate-local failure, deterministically backfilled by frozen train rank within the same 1h lane, and completed 128 matched evaluations per current arm with 64 at each 1h and 4h horizon. The canonical typed-random ensemble failed net mean, non-overlap floor Sortino, matched increment, and control-not-dominant conditions. The runner wrote restore-verified checkpoint_validation, exited all current arms, and allocated none of the remaining 18k budget. No arm qualifies. Tuning, reseeding, rescue, OOS, challenge, forward, promotion, latent training, operator expansion, formal claims, a second campaign, and all prior-state import remain forbidden.",
+          "severity": "HARD",
+          "type": "AUTHORITY"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "broad_search.experiment_authority.resolve_search_economic_receipt/require_real_experiment_authority and broad_search.search_engine_v1 run-economic-v6/check-economic-v6",
+          "evidence_ref": "config/crypto_search_economic_receipt_v6.json",
+          "id": "crypto_search_economic_v6_seed_robustness_authorization",
+          "rule": "The current user instruction authorizes exactly one independent V6 fresh-state development campaign to test seed robustness without unlocking or rewriting V5. Four uint32 seeds are pre-registered by SHA256 derivation from CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801 and are disjoint from V1-V5. The 115-field carrier, train/validation/holdout partitions, Binance target, joint reward, 5 bps cost, 20,000 strict maximum, raw-attempt and wall-time caps, checkpoint cadence, and validation kill-line are unchanged. V6 imports no prior candidate, reward, RNG, distribution, population, policy, archive, checkpoint, transition, or validation state. Within-campaign seed changes, tuning, rescue, and any third seed campaign are forbidden. Failure of the 2,000-candidate typed-random validation control stops V6 before the remaining 18k; only a passing control may enter existing continuation rules. Evidence remains development-only and cannot authorize holdout/OOS, challenge, forward, promotion, or an Alpha claim.",
           "severity": "HARD",
           "type": "AUTHORITY"
         },
@@ -3223,7 +3232,7 @@
           "enforced_by": "broad_search.experiment_authority.require_real_experiment_authority, broad_search.search_engine_v1.main, and ADR 0016",
           "evidence_ref": "reports/CRYPTO_SEARCH_AUTHORITY_SYSTEM_AUDIT_20260729.md",
           "id": "search_engine_economic_reward_suspension",
-          "rule": "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1 remains suspended as the predecessor economic optimizer authority. V1-V5 schema-2 receipts are consumed. V5 used explicitly named NON_FORMAL experimental bindings for train-frozen direction, portfolio mapping, Binance USD-M execution target, frozen 5 bps cost, and joint standalone-plus-matched Sortino reward; its validation-blocked outcome does not promote those bindings to active formal authority. Prior state, formal claims, OOS, promotion, parameter tuning, seed changes, rescue reruns, and another campaign remain forbidden.",
+          "rule": "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1 remains suspended as the predecessor economic optimizer authority. V1-V5 schema-2 receipts are consumed. V6 alone authorizes one independent pre-registered seed-robustness campaign while preserving the same explicitly NON_FORMAL train-frozen direction, portfolio mapping, Binance USD-M execution target, frozen 5 bps cost, and joint standalone-plus-matched Sortino reward bindings. Neither V5's negative validation result nor any V6 development result can promote those bindings to active formal authority. Prior-state import, formal claims, holdout/OOS, promotion, parameter tuning, within-campaign seed changes, rescue reruns, a third seed campaign, and any unregistered additional campaign remain forbidden.",
           "severity": "HARD",
           "type": "BOUNDARY"
         },
@@ -3242,7 +3251,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine conditional-development campaigns (V5 validation complete; random control failed; research HOLD)",
+      "label": "Search Engine conditional-development campaigns (V6 seed robustness authorized; not started; research HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -3258,6 +3267,7 @@
         "config/crypto_search_economic_receipt_v3.json",
         "config/crypto_search_economic_receipt_v4.json",
         "config/crypto_search_economic_receipt_v5.json",
+        "config/crypto_search_economic_receipt_v6.json",
         "alphafactory_crypto/data_admission_v1.py",
         "config/crypto_search_surface_integration_v1.json",
         "docs/adr/0011-search-surface-integration-v1.md",
@@ -3425,6 +3435,7 @@
         "alphafactory_crypto_broad_search_compositional18m_verify_typed_mutation_receipt",
         "alphafactory_crypto_broad_search_experiment_authority",
         "alphafactory_crypto_broad_search_experiment_authority_canonical_sha256",
+        "alphafactory_crypto_broad_search_experiment_authority_derive_v6_seed_set",
         "alphafactory_crypto_broad_search_experiment_authority_evaluate_search_validation_kill_line",
         "alphafactory_crypto_broad_search_experiment_authority_file_sha256",
         "alphafactory_crypto_broad_search_experiment_authority_materialize_search_economic_receipt",
@@ -3432,10 +3443,11 @@
         "alphafactory_crypto_broad_search_experiment_authority_node_id",
         "alphafactory_crypto_broad_search_experiment_authority_parse_utc",
         "alphafactory_crypto_broad_search_experiment_authority_rationale_1",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_239",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_294",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_778",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_865",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_295",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_350",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_61",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_849",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_944",
         "alphafactory_crypto_broad_search_experiment_authority_require_real_experiment_authority",
         "alphafactory_crypto_broad_search_experiment_authority_resolve_real_experiment_authorities",
         "alphafactory_crypto_broad_search_experiment_authority_resolve_search_economic_receipt",
@@ -3658,8 +3670,10 @@
         "alphafactory_crypto_broad_search_search_engine_v1_checkpoint_state_payload",
         "alphafactory_crypto_broad_search_search_engine_v1_close_budget_exhausted_engine",
         "alphafactory_crypto_broad_search_search_engine_v1_close_validation_blocked_engine",
+        "alphafactory_crypto_broad_search_search_engine_v1_completed_checkpoint_seed_balance_errors",
         "alphafactory_crypto_broad_search_search_engine_v1_completed_validation_control_stop",
         "alphafactory_crypto_broad_search_search_engine_v1_economic_campaign_config",
+        "alphafactory_crypto_broad_search_search_engine_v1_economic_campaign_seeds",
         "alphafactory_crypto_broad_search_search_engine_v1_economic_search_frozen_contract",
         "alphafactory_crypto_broad_search_search_engine_v1_enginebudgetexhausted",
         "alphafactory_crypto_broad_search_search_engine_v1_equal_weight_path",
@@ -3717,15 +3731,16 @@
         "alphafactory_crypto_broad_search_search_engine_v1_proposalgenerationfailure_init",
         "alphafactory_crypto_broad_search_search_engine_v1_qualify_v14_aligned_carrier",
         "alphafactory_crypto_broad_search_search_engine_v1_rationale_1",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1130",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1408",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_3771",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_3912",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_5069",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6829",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6972",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_7480",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_7813",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1165",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_1445",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_3818",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_3959",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_4260",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_5168",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6929",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_7072",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_7589",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_7922",
         "alphafactory_crypto_broad_search_search_engine_v1_read_json",
         "alphafactory_crypto_broad_search_search_engine_v1_report_text",
         "alphafactory_crypto_broad_search_search_engine_v1_require_bound_authority_preflight",
@@ -4969,6 +4984,7 @@
         "tests_test_crypto_experiment_authority_test_v4_consumed_receipt_cannot_unlock_another_run",
         "tests_test_crypto_experiment_authority_test_v4_search_economic_receipt_is_consumed_after_validation_block",
         "tests_test_crypto_experiment_authority_test_v5_search_economic_receipt_is_consumed_after_control_stop",
+        "tests_test_crypto_experiment_authority_test_v6_search_economic_receipt_authorizes_only_the_preregistered_seed_campaign",
         "tests_test_crypto_experiment_authority_test_validation_kill_line_is_pure_and_fail_closed",
         "tests_test_crypto_experiment_authority_test_validation_kill_line_stops_arm_and_writes_atomic_checkpoint",
         "tests_test_crypto_experiment_authority_write_current",
@@ -5005,14 +5021,14 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-07-31T16:17:46.449588+00:00",
-        "evidence_ref": "runtime/crypto_search_economic_v5_20260731/final_decision.json",
-        "evidence_sha256": "B1769588F88AEF41EF569467BA8DB78FB5BEF72B259171B10C747FC2CD66A1DA",
+        "checked_at": "2026-07-31T17:36:50.419304+00:00",
+        "evidence_ref": ".planning/STATE.md",
+        "evidence_sha256": "700C116F34E44015EC39BEA4C6E834BA11AB890FD9758DC75F7FBEDF6E83F5D7",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "dcd1aaff6738a5a0d75cc1b222119cb5cbafd889"
+        "verified_at_sha": "fe48d19f6adf417d7fd51170e98cfc4ba5484b3b"
       },
       "visible_by_default": true
     },
@@ -7866,7 +7882,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "B1A1186CC1B455A68FEDCED1457D2C4A89635BC4EA763EBCE59D4D30F0C3C2CA"
+    "sha256": "2D610B8C2D4F1B9B2416164AFFC49A31AC736958687A5588A55439D360F96342"
   },
   "profile_id": null,
   "profiles": [
@@ -7897,13 +7913,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "be1ac2dcaec290203b4695de6a4de7b449f7abe1",
-    "edge_count": 37441,
-    "node_count": 20019,
+    "built_at_commit": "fe48d19f6adf417d7fd51170e98cfc4ba5484b3b",
+    "edge_count": 37472,
+    "node_count": 20029,
     "path": ".planning/graphs/graph.json",
-    "sha256": "F1F1D5F2798A4655D6E547DFBEE09140B35D6F30363C0C0B5CFDD704CF40A5A0"
+    "sha256": "4F1D69126C656AFFE7B45FD626678131AD3FA8A04223ACE9674A15F4B97568E3"
   },
-  "repo_head": "be1ac2dcaec290203b4695de6a4de7b449f7abe1",
+  "repo_head": "fe48d19f6adf417d7fd51170e98cfc4ba5484b3b",
   "schema_version": 1,
   "semantic_authorities": [
     {

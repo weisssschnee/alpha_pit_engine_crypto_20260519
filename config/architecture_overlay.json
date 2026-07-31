@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V5 validation complete; random control failed; research HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (V6 seed robustness authorized; not started; research HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -411,6 +411,7 @@
                                     "config/crypto_search_economic_receipt_v3.json",
                                     "config/crypto_search_economic_receipt_v4.json",
                                     "config/crypto_search_economic_receipt_v5.json",
+                                    "config/crypto_search_economic_receipt_v6.json",
                                     "alphafactory_crypto/data_admission_v1.py",
                                     "config/crypto_search_surface_integration_v1.json",
                                     "docs/adr/0011-search-surface-integration-v1.md",
@@ -482,10 +483,10 @@
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
                       "active_authority":  false,
                       "authority":  {
-                                        "path":  "config/crypto_search_economic_receipt_v5.json",
+                                        "path":  "config/crypto_search_economic_receipt_v6.json",
                                         "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "dcd1aaff6738a5a0d75cc1b222119cb5cbafd889",
-                                        "sha256":  "1CE1A6C108CE85C19C6D666D78E77F7F47A5BEA661932B0D0A593E66103E1BD9"
+                                        "verified_sha":  "fe48d19f6adf417d7fd51170e98cfc4ba5484b3b",
+                                        "sha256":  "8EF18E4341D488A25252D89E9B837A2C575FC98A95F1DC45FFDEF88C386922F5"
                                     },
                       "contracts":  [
                                         {
@@ -541,6 +542,15 @@
                                             "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt/require_real_experiment_authority and broad_search.search_engine_v1 run-economic-v5/run_frozen_validation_stage/check-economic-v5",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "config/crypto_search_economic_receipt_v5.json"
+                                        },
+                                        {
+                                            "id":  "crypto_search_economic_v6_seed_robustness_authorization",
+                                            "type":  "AUTHORITY",
+                                            "rule":  "The current user instruction authorizes exactly one independent V6 fresh-state development campaign to test seed robustness without unlocking or rewriting V5. Four uint32 seeds are pre-registered by SHA256 derivation from CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801 and are disjoint from V1-V5. The 115-field carrier, train/validation/holdout partitions, Binance target, joint reward, 5 bps cost, 20,000 strict maximum, raw-attempt and wall-time caps, checkpoint cadence, and validation kill-line are unchanged. V6 imports no prior candidate, reward, RNG, distribution, population, policy, archive, checkpoint, transition, or validation state. Within-campaign seed changes, tuning, rescue, and any third seed campaign are forbidden. Failure of the 2,000-candidate typed-random validation control stops V6 before the remaining 18k; only a passing control may enter existing continuation rules. Evidence remains development-only and cannot authorize holdout/OOS, challenge, forward, promotion, or an Alpha claim.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt/require_real_experiment_authority and broad_search.search_engine_v1 run-economic-v6/check-economic-v6",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "config/crypto_search_economic_receipt_v6.json"
                                         },
                                         {
                                             "id":  "crypto_search_validation_arm_local_failure_repair",
@@ -678,7 +688,7 @@
                                         {
                                             "id":  "search_engine_economic_reward_suspension",
                                             "type":  "BOUNDARY",
-                                            "rule":  "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1 remains suspended as the predecessor economic optimizer authority. V1-V5 schema-2 receipts are consumed. V5 used explicitly named NON_FORMAL experimental bindings for train-frozen direction, portfolio mapping, Binance USD-M execution target, frozen 5 bps cost, and joint standalone-plus-matched Sortino reward; its validation-blocked outcome does not promote those bindings to active formal authority. Prior state, formal claims, OOS, promotion, parameter tuning, seed changes, rescue reruns, and another campaign remain forbidden.",
+                                            "rule":  "PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1 remains suspended as the predecessor economic optimizer authority. V1-V5 schema-2 receipts are consumed. V6 alone authorizes one independent pre-registered seed-robustness campaign while preserving the same explicitly NON_FORMAL train-frozen direction, portfolio mapping, Binance USD-M execution target, frozen 5 bps cost, and joint standalone-plus-matched Sortino reward bindings. Neither V5's negative validation result nor any V6 development result can promote those bindings to active formal authority. Prior-state import, formal claims, holdout/OOS, promotion, parameter tuning, within-campaign seed changes, rescue reruns, a third seed campaign, and any unregistered additional campaign remain forbidden.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.experiment_authority.require_real_experiment_authority, broad_search.search_engine_v1.main, and ADR 0016",
                                             "bypass_forbidden":  true,
@@ -698,9 +708,9 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                          "evidence_ref":  "runtime/crypto_search_economic_v5_20260731/final_decision.json",
-                                          "evidence_sha256":  "B1769588F88AEF41EF569467BA8DB78FB5BEF72B259171B10C747FC2CD66A1DA",
-                                          "verified_at_sha":  "dcd1aaff6738a5a0d75cc1b222119cb5cbafd889"
+                                          "evidence_ref":  ".planning/STATE.md",
+                                          "evidence_sha256":  "700C116F34E44015EC39BEA4C6E834BA11AB890FD9758DC75F7FBEDF6E83F5D7",
+                                          "verified_at_sha":  "fe48d19f6adf417d7fd51170e98cfc4ba5484b3b"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
