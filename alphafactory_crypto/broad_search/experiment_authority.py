@@ -61,11 +61,16 @@ def _canonical_sha256(payload: Any) -> str:
 
 
 def _file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest().upper()
+    payload = path.read_bytes()
+    try:
+        text = payload.decode("utf-8")
+    except UnicodeDecodeError:
+        canonical = payload
+    else:
+        canonical = text.replace("\r\n", "\n").replace("\r", "\n").encode(
+            "utf-8"
+        )
+    return hashlib.sha256(canonical).hexdigest().upper()
 
 
 def _symbol_is_declared(source_path: Path, dotted_symbol: str) -> bool:
@@ -267,6 +272,18 @@ def _validate_search_economic_receipt(
     for field in target_fields:
         if execution.get(field) != target.get(field):
             blockers.append(f"execution.{field}")
+    expected_tail_purge = int(execution.get("execution_delay_hours", -1)) + max(
+        (
+            int(value)
+            for value in execution.get("horizons_hours", ())
+        ),
+        default=-1,
+    )
+    if (
+        execution.get("partition_tail_purge_hours") != 6
+        or expected_tail_purge != 6
+    ):
+        blockers.append("execution.partition_tail_purge_hours")
     if execution.get("target_store_symbol") != expected_target_store:
         blockers.append("execution.target_store_symbol")
     if (

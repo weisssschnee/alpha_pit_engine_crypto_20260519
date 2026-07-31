@@ -136,7 +136,13 @@ accepted components whose nodes explicitly said `active_authority: false`.
   the dedicated `crypto_search_economic_v1` entry point. It reuses the existing
   rolling Search Engine plus the qualified 115-field OI/mark x aggTrades carrier
   and deliberately does not attach the 2025 receipt partitions to the historical
-  2023-2024 legacy run. Immediately after
+  2023-2024 legacy run. Behavior descriptor bins and support identity are frozen
+  from the receipt train block only; validation and holdout do not contribute.
+  Train and validation each purge their final six hours, equal to the two-hour
+  execution delay plus maximum four-hour horizon, so target endpoints never
+  cross an evidence-role boundary. Receipt component hashes canonicalize text
+  line endings to LF before hashing.
+  Immediately after
   `checkpoint_000` updates and restores the frozen train policy, and before
   `checkpoint_001` allocation, it selects the top 64 train candidates for each
   required 1h/4h horizon per active arm (128 total), consumes each candidate's persisted train

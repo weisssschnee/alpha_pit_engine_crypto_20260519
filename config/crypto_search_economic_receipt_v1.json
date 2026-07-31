@@ -65,6 +65,7 @@
     "price_field": "open_price",
     "formula": "log(open_price[t+2+h] / open_price[t+2])",
     "execution_delay_hours": 2,
+    "partition_tail_purge_hours": 6,
     "horizons_hours": [
       1,
       4
@@ -177,7 +178,7 @@
     },
     "validation_kill_line": {
       "path": "alphafactory_crypto/broad_search/experiment_authority.py",
-      "sha256": "BE0DD69F45A1B3E1785165FE1432558A46315DBBA7A87665260EE9354C9A85E9"
+      "sha256": "8E7F0FEF95DB0B0CF98DD5B449FC67EA453F87E18D37D3E0883E3EC0229F528D"
     },
     "portfolio_mapping_and_cost": {
       "path": "alphafactory_crypto/instrument_capability/mapping.py",
@@ -189,7 +190,7 @@
     },
     "optimizer_reward_and_matched_attribution": {
       "path": "alphafactory_crypto/broad_search/pair18m.py",
-      "sha256": "8918255C7EF939801B336F9FABE030FCC271F0F6BA69CBAB525E2AF95389FCCC"
+      "sha256": "C86E9048D41C1CA6A7561EA1FCDE7C83ECD881032831A9F108CA18C78C9291EA"
     },
     "target_contract": {
       "path": "config/crypto_search_engine_v1_4_binance_target_replay.json",
@@ -197,7 +198,7 @@
     },
     "runtime_binding": {
       "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-      "sha256": "1CB2F30C50C826772FAD8D22A59917ABC92134F74D086B2AFE9AE6D658CF4756"
+      "sha256": "6CA304F816EF8B4DC300FF0C78315750446E0256DC7932E104C6FF25253580B4"
     }
   }
 }

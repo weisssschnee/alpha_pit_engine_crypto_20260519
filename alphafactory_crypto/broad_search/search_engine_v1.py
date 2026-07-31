@@ -5077,6 +5077,12 @@ def _ledger_row(
         "economic_receipt_sha256": evaluation.get(
             "economic_receipt_sha256"
         ),
+        "effective_block_end_exclusive": evaluation.get(
+            "effective_block_end_exclusive"
+        ),
+        "partition_tail_purge_hours": int(
+            evaluation.get("partition_tail_purge_hours", 0)
+        ),
         "pair_reward": float(evaluation["pair_reward"]),
         "matched_positive": bool(evaluation["matched_positive"]),
         "gross_mean": incremental.get("gross_mean"),
@@ -6441,6 +6447,12 @@ def _validate_economic_search_surface(
     carrier_manifest = dict(
         identities.get("aligned_carrier_manifest") or {}
     )
+    behavior_window = dict(
+        identities.get("behavior_contract_window") or {}
+    )
+    train_partition = dict(
+        dict(receipt.get("evidence_partition") or {}).get("train") or {}
+    )
     checks = {
         "runner_campaign": campaign.get("runner_campaign")
         == ECONOMIC_SEARCH_CAMPAIGN,
@@ -6464,6 +6476,16 @@ def _validate_economic_search_surface(
         == CHECKPOINT_SIZE,
         "checkpoint_count": int(campaign.get("checkpoint_count", -1))
         == CHECKPOINT_COUNT,
+        "behavior_contract_train_start": behavior_window.get("start")
+        == train_partition.get("start"),
+        "behavior_contract_train_end": behavior_window.get("end_exclusive")
+        == train_partition.get("end_exclusive"),
+        "behavior_contract_validation_read": behavior_window.get(
+            "validation_read"
+        )
+        is False,
+        "behavior_contract_holdout_read": behavior_window.get("holdout_read")
+        is False,
     }
     failed = sorted(key for key, value in checks.items() if not value)
     if failed:
@@ -7001,6 +7023,16 @@ def run_frozen_validation_stage(
             raise RuntimeError("VALIDATION_REFIT_TRAIN_ORIENTATION")
         if float(evaluation.get("train_orientation", float("nan"))) != orientation:
             raise RuntimeError("VALIDATION_FROZEN_ORIENTATION_CHANGED")
+        expected_tail_purge = int(
+            dict(economic_receipt.get("execution") or {}).get(
+                "partition_tail_purge_hours",
+                -1,
+            )
+        )
+        if int(evaluation.get("partition_tail_purge_hours", -1)) != (
+            expected_tail_purge
+        ):
+            raise RuntimeError("VALIDATION_PARTITION_TAIL_PURGE_CHANGED")
         paths = evaluation.get("_validation_paths")
         if not isinstance(paths, Mapping):
             raise RuntimeError("VALIDATION_PATHS_MISSING")
@@ -7056,6 +7088,10 @@ def run_frozen_validation_stage(
                 "train_search_reward": float(train_row["search_reward"]),
                 "frozen_train_orientation": orientation,
                 "frozen_matched_component": matched_component,
+                "effective_block_end_exclusive": evaluation.get(
+                    "effective_block_end_exclusive"
+                ),
+                "partition_tail_purge_hours": expected_tail_purge,
                 "validation_primary_net_mean": primary_mean,
                 "validation_primary_nonoverlap_floor_sortino": floor_sortino,
                 "validation_matched_increment": (
@@ -7358,11 +7394,18 @@ def run_engine(
         wall_time_limit = WALL_TIME_LIMIT_SECONDS
         campaign_arms = FIRST_CHECKPOINT_ARMS
         block_role = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1"
-    economic_receipt = _require_bound_economic_run(
-        repo_root,
-        authority_preflight,
+    if not isinstance(authority_preflight, Mapping):
+        raise RuntimeError("ECONOMIC_RECEIPT_PREFLIGHT_REQUIRED")
+    economic_receipt = (
+        _require_bound_economic_run(
+            repo_root,
+            authority_preflight,
+        )
+        if is_economic
+        else None
     )
     if is_economic:
+        assert economic_receipt is not None
         block_role = str(
             economic_receipt["evidence_partition"]["train"]["role"]
         )
@@ -7377,11 +7420,15 @@ def run_engine(
             "Search Engine V1 requires a clean producer tree; only its runtime/report may exist"
         )
     if is_economic:
-        store, contracts, behavior_contract, input_identities, continuation = (
-            _load_v14_inputs(repo_root)
-        )
+        assert economic_receipt is not None
         train_partition = dict(
             economic_receipt["evidence_partition"]["train"]
+        )
+        store, contracts, behavior_contract, input_identities, continuation = (
+            _load_v14_inputs(
+                repo_root,
+                behavior_window=train_partition,
+            )
         )
         block_start = str(train_partition["start"])
         block_end = str(train_partition["end_exclusive"])
@@ -7494,6 +7541,9 @@ def run_engine(
             input_identities=input_identities,
             environment=environment,
         )
+    if is_economic:
+        assert economic_receipt is not None
+        frozen = _bind_economic_receipt(frozen, economic_receipt)
     frozen_hash = str(frozen["frozen_contract_sha256"])
     identities = {
         **input_identities,
@@ -7629,6 +7679,9 @@ def run_engine(
         nonlocal metrics
         nonlocal attempted_ids
         nonlocal validation_result
+        if not is_economic:
+            return False
+        assert economic_receipt is not None
         if not _frozen_validation_due(
             campaign=campaign,
             state=state,
@@ -8336,7 +8389,7 @@ def run_engine(
         raise AssertionError(
             f"Search Engine V1 ended without exactly {strict_target:,} strict candidates"
         )
-    if validation_result is None:
+    if is_economic and validation_result is None:
         raise RuntimeError(
             "VALIDATION_STAGE_NOT_COMPLETED_BEFORE_ADDITIONAL_BUDGET"
         )
@@ -8397,15 +8450,16 @@ def run_engine(
             runtime_root=runtime_root,
         )
     )
-    decision["validation_stage"] = {
-        key: value
-        for key, value in validation_result.items()
-        if key != "arm_decisions"
-    }
-    decision["validation_arm_decisions"] = validation_result[
-        "arm_decisions"
-    ]
     if is_economic:
+        assert validation_result is not None
+        decision["validation_stage"] = {
+            key: value
+            for key, value in validation_result.items()
+            if key != "arm_decisions"
+        }
+        decision["validation_arm_decisions"] = validation_result[
+            "arm_decisions"
+        ]
         decision.update(
             {
                 "epoch_id": ECONOMIC_SEARCH_EPOCH_ID,
@@ -8512,8 +8566,16 @@ def run_engine(
         "generation_attempts": int(state["generation_attempts"]),
         "checkpoint_count": checkpoint_count,
         "behavior_family_count": len(archive.champion_by_family),
-        "validation_status": validation_result["status"],
-        "validation_resumed": bool(validation_result["resumed"]),
+        "validation_status": (
+            validation_result["status"]
+            if validation_result is not None
+            else "NOT_APPLICABLE"
+        ),
+        "validation_resumed": (
+            bool(validation_result["resumed"])
+            if validation_result is not None
+            else False
+        ),
         "artifact_bundle_sha256": manifest["artifact_bundle_sha256"],
         "sealed_reads": 0,
     }
@@ -10206,6 +10268,8 @@ def qualify_v14_aligned_carrier(
 
 def _load_v14_inputs(
     repo_root: Path,
+    *,
+    behavior_window: Mapping[str, Any] | None = None,
 ) -> tuple[
     RawPanelStore,
     tuple[FieldContract, ...],
@@ -10234,9 +10298,30 @@ def _load_v14_inputs(
         runtime_root / "stage_a_carrier_qualification.json"
     )
     qualified_window = qualification["qualified_continuous_window"]
+    contract_window = (
+        {
+            "start": str(behavior_window["start"]),
+            "end_exclusive": str(behavior_window["end_exclusive"]),
+        }
+        if behavior_window is not None
+        else {
+            "start": str(qualified_window["start"]),
+            "end_exclusive": str(qualified_window["end_exclusive"]),
+        }
+    )
+    qualified_start = pd.Timestamp(str(qualified_window["start"]))
+    qualified_end = pd.Timestamp(str(qualified_window["end_exclusive"]))
+    contract_start = pd.Timestamp(contract_window["start"])
+    contract_end = pd.Timestamp(contract_window["end_exclusive"])
+    if (
+        contract_start < qualified_start
+        or contract_end > qualified_end
+        or contract_start >= contract_end
+    ):
+        raise ValueError("V1.4 behavior contract window is outside qualification")
     block = store.block_slice(
-        str(qualified_window["start"]),
-        str(qualified_window["end_exclusive"]),
+        contract_window["start"],
+        contract_window["end_exclusive"],
     )
     base = np.asarray(store.base_eligible()[:, block], dtype=bool)
     counts = base.sum(axis=0, dtype=np.int64).astype(float)
@@ -10264,6 +10349,13 @@ def _load_v14_inputs(
         "compiler_identity": _compiler_binding(repo_root),
         "qualified_continuous_window": dict(qualified_window),
     }
+    if behavior_window is not None:
+        identities["behavior_contract_window"] = {
+            **contract_window,
+            "authority": "ECONOMIC_RECEIPT_TRAIN_ONLY",
+            "validation_read": False,
+            "holdout_read": False,
+        }
     return (
         store,
         contracts,
@@ -10984,7 +11076,6 @@ def run_v14(
         identities=identities,
         config=config,
     )
-    frozen = _bind_economic_receipt(frozen, economic_receipt)
     frozen = _bind_economic_receipt(frozen, economic_receipt)
     frozen_hash = str(frozen["frozen_contract_sha256"])
     frozen_path = runtime_root / "frozen_contract.json"

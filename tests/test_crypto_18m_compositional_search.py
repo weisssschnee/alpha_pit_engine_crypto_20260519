@@ -338,12 +338,18 @@ def test_train_orientation_is_consumed_and_persisted_when_receipt_is_bound() -> 
             "execution": {
                 **_FakeStore().target_metadata,
                 "target_cache_identity_sha256": "B" * 64,
+                "partition_tail_purge_hours": 6,
             },
         },
     )
     assert result["train_orientation"] in {-1.0, 1.0}
     assert result["economic_receipt_sha256"] == "A" * 64
     assert result["cost_bps"] == 7.0
+    assert result["partition_tail_purge_hours"] == 6
+    assert (
+        result["effective_block_end_exclusive"]
+        == "2024-06-30T18:00:00Z"
+    )
     assert result["primary"]["cost_bps"] == 7.0
     assert result["incremental"]["cost_bps"] == 7.0
 
@@ -405,6 +411,7 @@ def test_validation_consumes_frozen_train_orientation_without_refit() -> None:
             "execution": {
                 **_FakeStore().target_metadata,
                 "target_cache_identity_sha256": "B" * 64,
+                "partition_tail_purge_hours": 6,
             },
         },
         frozen_train_orientation=-1.0,
@@ -413,6 +420,11 @@ def test_validation_consumes_frozen_train_orientation_without_refit() -> None:
     assert result["train_orientation"] == -1.0
     assert result["train_orientation_fitted"] is False
     assert result["evaluation_partition"] == "validation"
+    assert result["partition_tail_purge_hours"] == 6
+    assert (
+        result["effective_block_end_exclusive"]
+        == "2023-08-31T18:00:00Z"
+    )
     assert result["_validation_paths"]["primary_net"].shape == (400,)
     with pytest.raises(
         ValueError,
@@ -445,6 +457,7 @@ def test_validation_consumes_frozen_train_orientation_without_refit() -> None:
                 "execution": {
                     **_FakeStore().target_metadata,
                     "target_cache_identity_sha256": "B" * 64,
+                    "partition_tail_purge_hours": 6,
                 },
             },
         )
@@ -525,6 +538,8 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
             "train_orientation": frozen_orientation,
             "train_orientation_fitted": False,
             "evaluation_partition": "validation",
+            "effective_block_end_exclusive": "2025-12-31T18:00:00Z",
+            "partition_tail_purge_hours": 6,
             "_validation_paths": {
                 "primary_net": np.full(48, primary),
                 "control_net": {
@@ -540,7 +555,11 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
 
     receipt = {
         "receipt_sha256": "R" * 64,
-        "execution": {"horizons_hours": [1, 4]},
+        "execution": {
+            "execution_delay_hours": 2,
+            "horizons_hours": [1, 4],
+            "partition_tail_purge_hours": 6,
+        },
         "validation": {
             "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
             "start": "2025-11-01T00:00:00Z",
@@ -721,6 +740,12 @@ def test_checkpoint_resume_order_prefers_validation_only_at_same_progress(
 def test_economic_search_surface_is_exactly_receipt_bound() -> None:
     contracts = tuple(_role_complete_registry().fields.values())
     receipt = {
+        "evidence_partition": {
+            "train": {
+                "start": "2025-08-29T07:00:00Z",
+                "end_exclusive": "2025-11-01T00:00:00Z",
+            }
+        },
         "search_campaign": {
             "runner_campaign": "crypto_search_economic_v1",
             "carrier_id": (
@@ -740,6 +765,13 @@ def test_economic_search_surface_is_exactly_receipt_bound() -> None:
             "identity_sha256": "C" * 64,
         },
         "aligned_carrier_manifest": {"path": "runtime/carrier.json"},
+        "behavior_contract_window": {
+            "start": "2025-08-29T07:00:00Z",
+            "end_exclusive": "2025-11-01T00:00:00Z",
+            "authority": "ECONOMIC_RECEIPT_TRAIN_ONLY",
+            "validation_read": False,
+            "holdout_read": False,
+        },
     }
     assert _validate_economic_search_surface(
         receipt=receipt,

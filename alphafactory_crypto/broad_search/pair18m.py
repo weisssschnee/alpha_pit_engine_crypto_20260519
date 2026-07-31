@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import math
 import time
+from datetime import datetime, timedelta
 from typing import Any, Mapping, Sequence
 
 import numpy as np
@@ -640,7 +641,39 @@ def evaluate_pair(
         rss_samples.append(int(memory.rss))
         private_samples.append(int(getattr(memory, "private", memory.rss)))
 
-    block = store.block_slice(block_start, block_end)
+    effective_block_end = str(block_end)
+    partition_tail_purge_hours = 0
+    if economic_receipt is not None:
+        execution_boundary = dict(
+            economic_receipt.get("execution") or {}
+        )
+        horizons = tuple(
+            int(value)
+            for value in execution_boundary.get("horizons_hours", ())
+        )
+        execution_delay = int(
+            execution_boundary.get("execution_delay_hours", -1)
+        )
+        partition_tail_purge_hours = int(
+            execution_boundary.get("partition_tail_purge_hours", -1)
+        )
+        required_purge = execution_delay + max(horizons, default=-1)
+        if (
+            execution_delay < 0
+            or not horizons
+            or partition_tail_purge_hours != required_purge
+        ):
+            raise ValueError(
+                "ECONOMIC_RECEIPT_PARTITION_TAIL_PURGE_CHANGED"
+            )
+        parsed_end = datetime.fromisoformat(
+            str(block_end).replace("Z", "+00:00")
+        )
+        effective_block_end = (
+            parsed_end
+            - timedelta(hours=partition_tail_purge_hours)
+        ).isoformat().replace("+00:00", "Z")
+    block = store.block_slice(block_start, effective_block_end)
     base = np.asarray(store.base_eligible()[:, block], dtype=bool)
     read_started = time.perf_counter()
     raw = {
@@ -1269,6 +1302,8 @@ def evaluate_pair(
         "block_role": block_role,
         "block_start": block_start,
         "block_end_exclusive": block_end,
+        "effective_block_end_exclusive": effective_block_end,
+        "partition_tail_purge_hours": partition_tail_purge_hours,
         "raw_fields": list(candidate.raw_fields),
         "field_families": list(candidate.field_families),
         "operator_path": candidate.operator_path,
@@ -1362,13 +1397,20 @@ def pair_contract_payload() -> dict[str, Any]:
                 "CandidateSpec freezes one horizon; the duplicate nominal "
                 "worst-horizon term is removed rather than counted twice"
             ),
+            "partition_tail_purge": (
+                "each economic evidence role excludes execution delay plus "
+                "the maximum target horizon from its tail; the current "
+                "receipt freezes this at six hours"
+            ),
             "validation_role": (
-                "not implemented by Search Engine V1; an explicit fresh "
-                "validation split and kill-line are required before another "
-                "adaptive market campaign"
+                "distinct receipt-bound validation block; train-frozen "
+                "direction and matched limiting sleeve are replayed without "
+                "optimizer, proposal-policy, archive, or generation feedback"
             ),
             "holdout_role": (
-                "not read by Search Engine V1 and must remain read-only"
+                "read-only and excluded from train behavior contracts, "
+                "validation target endpoints, optimizer feedback, and "
+                "Search Engine V1 execution"
             ),
         },
         "lcb_contract": {

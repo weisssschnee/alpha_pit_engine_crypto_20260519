@@ -9,6 +9,7 @@ import pytest
 from alphafactory_crypto.broad_search.experiment_authority import (
     DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH,
     REQUIRED_REAL_EXPERIMENT_ROLES,
+    _file_sha256,
     _validate_search_economic_receipt,
     evaluate_search_validation_kill_line,
     require_real_experiment_authority,
@@ -20,6 +21,17 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     apply_search_validation_kill_line,
 )
 from alphafactory_crypto.instrument_canary.release import sha256_file
+
+
+def test_component_source_hash_is_checkout_line_ending_stable(
+    tmp_path: Path,
+) -> None:
+    lf = tmp_path / "source_lf.py"
+    crlf = tmp_path / "source_crlf.py"
+    lf.write_bytes(b"def value():\n    return 1\n")
+    crlf.write_bytes(b"def value():\r\n    return 1\r\n")
+
+    assert _file_sha256(lf) == _file_sha256(crlf)
 
 
 def _write_current(
@@ -129,6 +141,7 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
     assert result["execution"]["venue"] == "BINANCE_USD_M"
     assert result["execution"]["price_field"] == "open_price"
     assert result["execution"]["execution_delay_hours"] == 2
+    assert result["execution"]["partition_tail_purge_hours"] == 6
     assert result["execution"]["target_cache_path"].endswith(
         "binance_open_target_v1"
     )
