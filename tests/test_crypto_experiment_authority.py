@@ -12,6 +12,7 @@ from alphafactory_crypto.broad_search.experiment_authority import (
     SEARCH_ECONOMIC_V2_RECEIPT_PATH,
     SEARCH_ECONOMIC_V3_RECEIPT_PATH,
     SEARCH_ECONOMIC_V4_RECEIPT_PATH,
+    SEARCH_ECONOMIC_V5_RECEIPT_PATH,
     _file_sha256,
     _validate_search_economic_receipt,
     evaluate_search_validation_kill_line,
@@ -423,6 +424,40 @@ def test_v4_consumed_receipt_cannot_unlock_another_run() -> None:
             decision_to_change="future new-data Arena arm qualification",
             economic_receipt_path=SEARCH_ECONOMIC_V4_RECEIPT_PATH,
         )
+
+
+def test_v5_search_economic_receipt_authorizes_one_fresh_state_run() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+
+    receipt = resolve_search_economic_receipt(
+        repo_root,
+        receipt_path=SEARCH_ECONOMIC_V5_RECEIPT_PATH,
+    )
+
+    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+    assert receipt["receipt_path"] == SEARCH_ECONOMIC_V5_RECEIPT_PATH
+    assert receipt["run_authorized"] is True
+    assert receipt["run_outcome"] == {}
+    assert receipt["search_campaign"]["runner_campaign"] == (
+        "crypto_search_economic_v5"
+    )
+    assert receipt["validation_kill_line"]["orchestration_campaign"] == (
+        "crypto_search_economic_v5"
+    )
+    assert receipt["search_campaign"]["strict_evaluated_target"] == 20_000
+    assert receipt["search_campaign"]["fresh_state"] is True
+    assert receipt["formal_claims_authorized"] is False
+
+    preflight = require_real_experiment_authority(
+        repo_root,
+        evidence_to_add=(
+            "fresh-state V5 equal-count matched validation and rolling search evidence"
+        ),
+        decision_to_change="future new-data Arena arm qualification",
+        economic_receipt_path=SEARCH_ECONOMIC_V5_RECEIPT_PATH,
+    )
+    assert preflight["result"] == "READY_WITH_NON_FORMAL_BOUNDARIES"
+    assert preflight["economic_receipt"]["run_authorized"] is True
 
 
 def test_unregistered_search_economic_receipt_path_fails_closed() -> None:

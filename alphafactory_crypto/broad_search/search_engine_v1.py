@@ -150,11 +150,14 @@ ECONOMIC_SEARCH_V3_CAMPAIGN = "crypto_search_economic_v3"
 ECONOMIC_SEARCH_V3_EPOCH_ID = "CRYPTO_SEARCH_ECONOMIC_V3_20260731"
 ECONOMIC_SEARCH_V4_CAMPAIGN = "crypto_search_economic_v4"
 ECONOMIC_SEARCH_V4_EPOCH_ID = "CRYPTO_SEARCH_ECONOMIC_V4_20260731"
+ECONOMIC_SEARCH_V5_CAMPAIGN = "crypto_search_economic_v5"
+ECONOMIC_SEARCH_V5_EPOCH_ID = "CRYPTO_SEARCH_ECONOMIC_V5_20260731"
 ECONOMIC_SEARCH_CAMPAIGNS = (
     ECONOMIC_SEARCH_CAMPAIGN,
     ECONOMIC_SEARCH_V2_CAMPAIGN,
     ECONOMIC_SEARCH_V3_CAMPAIGN,
     ECONOMIC_SEARCH_V4_CAMPAIGN,
+    ECONOMIC_SEARCH_V5_CAMPAIGN,
 )
 ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, str]] = {
     ECONOMIC_SEARCH_CAMPAIGN: {
@@ -192,6 +195,15 @@ ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, str]] = {
         "report_title": "Crypto Search Economic V4",
         "receipt_path": "config/crypto_search_economic_receipt_v4.json",
         "cli_suffix": "economic-v4",
+    },
+    ECONOMIC_SEARCH_V5_CAMPAIGN: {
+        "epoch_id": ECONOMIC_SEARCH_V5_EPOCH_ID,
+        "runtime_date": ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE,
+        "runtime_prefix": "crypto_search_economic_v5",
+        "report_prefix": "CRYPTO_SEARCH_ECONOMIC_V5",
+        "report_title": "Crypto Search Economic V5",
+        "receipt_path": "config/crypto_search_economic_receipt_v5.json",
+        "cli_suffix": "economic-v5",
     },
 }
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
@@ -4189,6 +4201,16 @@ def _checkpoint_allocation(
     return allocation
 
 
+def _validation_control_arm_stopped(state: Mapping[str, Any]) -> bool:
+    validation_stage = state.get("validation_stage")
+    return bool(
+        isinstance(validation_stage, Mapping)
+        and validation_stage.get("status") == "VALIDATION_STAGE_COMPLETE"
+        and dict(state.get("arm_states") or {}).get("canonical_typed_random")
+        == "EXITED"
+    )
+
+
 def _reward_at_equal_count(
     rows: Sequence[Mapping[str, Any]],
     count: int,
@@ -4992,6 +5014,10 @@ class _ValidationStageBlocked(RuntimeError):
         }
 
 
+class _ValidationControlArmStopped(RuntimeError):
+    pass
+
+
 class _ProposalGenerationFailure(RuntimeError):
     def __init__(
         self,
@@ -5430,6 +5456,33 @@ block. This is an engine validation-constructibility defect, not an Alpha or
 carrier-information conclusion. No adaptive continuation, seed/parameter
 change, rescue rerun, holdout/OOS/challenge read, promotion, or next Arena
 occurred.
+"""
+
+
+def _validation_control_arm_stopped_report_text(
+    decision: Mapping[str, Any],
+) -> str:
+    control = dict(
+        dict(decision["validation_arm_decisions"])["canonical_typed_random"]
+    )
+    failed_conditions = sorted(
+        key
+        for key, value in dict(control.get("conditions") or {}).items()
+        if value is not True
+    )
+    return f"""# {decision['report_title']}
+
+- Status: `ENGINE_VALIDATION_BLOCKED` (`{decision['reason']}`)
+- Producer source: `{decision['producer_source_sha']}`
+- Strict train candidates retained: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
+- Exact checkpoint: `{decision['checkpoint']}`; restore verified: `{decision['checkpoint_restore_verified']}`.
+- Failed typed-random conditions: `{', '.join(failed_conditions)}`.
+
+The frozen equal-count validation stage completed, but its typed-random control
+arm failed the pre-authorized economic kill-line.  Without a surviving control
+arm, later adaptive-arm comparisons are undefined, so the remaining campaign
+budget was not allocated.  No parameter/seed change, rescue rerun,
+holdout/OOS/challenge read, promotion, or next Arena occurred.
 """
 
 
@@ -8916,6 +8969,10 @@ def run_engine(
 
     try:
         execute_frozen_validation_if_due()
+        if _validation_control_arm_stopped(state):
+            raise _ValidationControlArmStopped(
+                "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE"
+            )
         executor = start_executor(int(state["workers"]))
         for checkpoint_index in range(
             int(state["next_checkpoint_index"]), checkpoint_count
@@ -9499,6 +9556,10 @@ def run_engine(
                 expected_identities=identities,
             )
             validation_ran = execute_frozen_validation_if_due()
+            if _validation_control_arm_stopped(state):
+                raise _ValidationControlArmStopped(
+                    "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE"
+                )
             if (
                 validation_ran
                 and int(state["next_checkpoint_index"]) < checkpoint_count
@@ -9534,6 +9595,93 @@ def run_engine(
                 flush=True,
             )
         stop_executor()
+    except _ValidationControlArmStopped as failure:
+        stop_executor()
+        if not is_economic or economic_config is None:
+            raise
+        validation_stage = dict(state.get("validation_stage") or {})
+        arm_decisions = dict(validation_stage.get("arm_decisions") or {})
+        control_decision = dict(
+            arm_decisions.get("canonical_typed_random") or {}
+        )
+        if control_decision.get("passed") is not False:
+            raise RuntimeError(
+                "VALIDATION_CONTROL_ARM_STOP_STATE_INCONSISTENT"
+            ) from failure
+        validation_checkpoint = (
+            runtime_root / "checkpoints" / "checkpoint_validation"
+        )
+        if not validation_checkpoint.is_dir():
+            raise RuntimeError(
+                "VALIDATION_CONTROL_ARM_STOP_CHECKPOINT_MISSING"
+            ) from failure
+        state["attempted_exact_ids"] = sorted(attempted_ids)
+        state["wall_elapsed_seconds"] = active_elapsed()
+        _write_top_level_artifacts(
+            runtime_root=runtime_root,
+            ledger=ledger,
+            archive=archive,
+            metrics=metrics,
+        )
+        decision = _validation_blocked_decision(
+            source_sha=source_sha,
+            state=state,
+            ledger=ledger,
+            archive=archive,
+            checkpoint=validation_checkpoint,
+            failure={
+                "reason": str(failure),
+                "arm": "canonical_typed_random",
+                "candidate_id": "EQUAL_COUNT_ARM_ENSEMBLE",
+                "horizon_hours": -1,
+                "selection_rank": -1,
+            },
+            campaign=campaign,
+        )
+        decision["validation_stage"] = {
+            key: value
+            for key, value in validation_stage.items()
+            if key != "arm_decisions"
+        }
+        decision["validation_arm_decisions"] = arm_decisions
+        _write_json(runtime_root / "final_decision.json", decision)
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(
+            _validation_control_arm_stopped_report_text(decision),
+            encoding="utf-8",
+            newline="\n",
+        )
+        manifest = _final_manifest(
+            repo_root=repo_root,
+            runtime_root=runtime_root,
+            report_path=report_path,
+            source_sha=source_sha,
+            frozen_hash=frozen_hash,
+            identities=identities,
+            state=state,
+            epoch_id=economic_config["epoch_id"],
+            base_sha=source_sha,
+            status="ENGINE_VALIDATION_BLOCKED",
+            continuation=(
+                "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+                f"check-{economic_config['cli_suffix']} "
+                f"--runtime-date {runtime_date}"
+            ),
+        )
+        _write_json(runtime_root / "run_manifest.json", manifest)
+        print(
+            json.dumps(
+                {
+                    "event": "search_engine_v1_validation_control_arm_stopped",
+                    "checkpoint": validation_checkpoint.name,
+                    "strict_evaluated": len(ledger),
+                    "reason": str(failure),
+                },
+                sort_keys=True,
+            ),
+            flush=True,
+        )
+        return {"result": "ENGINE_VALIDATION_BLOCKED", **decision}
     except _ValidationStageBlocked as failure:
         stop_executor()
         if not is_economic or economic_config is None:
@@ -13293,6 +13441,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             "run-economic-v4",
             "close-economic-v4",
             "check-economic-v4",
+            "run-economic-v5",
+            "close-economic-v5",
+            "check-economic-v5",
             "build-canary-cache",
             "run-canary",
             "check-canary",
@@ -13322,6 +13473,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "run-economic-v2": ECONOMIC_SEARCH_V2_CAMPAIGN,
         "run-economic-v3": ECONOMIC_SEARCH_V3_CAMPAIGN,
         "run-economic-v4": ECONOMIC_SEARCH_V4_CAMPAIGN,
+        "run-economic-v5": ECONOMIC_SEARCH_V5_CAMPAIGN,
     }.get(args.command)
     if args.command.startswith("run"):
         from alphafactory_crypto.broad_search.experiment_authority import (
@@ -13396,6 +13548,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             ),
             source_sha=args.source_sha,
             campaign=ECONOMIC_SEARCH_V4_CAMPAIGN,
+            authority_preflight=authority_preflight,
+        )
+    elif args.command == "run-economic-v5":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            source_sha=args.source_sha,
+            campaign=ECONOMIC_SEARCH_V5_CAMPAIGN,
             authority_preflight=authority_preflight,
         )
     elif args.command == "close-economic-v1":
@@ -13476,6 +13638,23 @@ def main(argv: Sequence[str] | None = None) -> int:
                 args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
             ),
             campaign=ECONOMIC_SEARCH_V4_CAMPAIGN,
+        )
+    elif args.command == "close-economic-v5":
+        result = close_budget_exhausted_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            closure_source_sha=args.source_sha,
+            campaign=ECONOMIC_SEARCH_V5_CAMPAIGN,
+        )
+    elif args.command == "check-economic-v5":
+        result = check_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            campaign=ECONOMIC_SEARCH_V5_CAMPAIGN,
         )
     elif args.command == "check":
         result = check_engine(

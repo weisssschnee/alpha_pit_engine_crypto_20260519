@@ -73,6 +73,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     _payload_sha,
     _initial_policies,
     _validate_economic_search_surface,
+    _validation_control_arm_stopped,
     run_frozen_validation_stage,
     _write_checkpoint,
 )
@@ -1203,6 +1204,7 @@ def test_frozen_validation_trigger_precedes_reachable_next_allocation() -> None:
     )
     state["validation_stage"] = {"status": "VALIDATION_STAGE_COMPLETE"}
     state["arm_states"]["hierarchical_typed_cem_v2"] = "EXITED"
+    assert not _validation_control_arm_stopped(state)
     assert not _frozen_validation_due(
         campaign="crypto_search_economic_v1",
         state=state,
@@ -1211,6 +1213,13 @@ def test_frozen_validation_trigger_precedes_reachable_next_allocation() -> None:
     next_allocation = _checkpoint_allocation(1, state["arm_states"])
     assert next_allocation["hierarchical_typed_cem_v2"] == 0
     assert sum(next_allocation.values()) == 2_000
+    state["arm_states"]["canonical_typed_random"] = "EXITED"
+    assert _validation_control_arm_stopped(state)
+    with pytest.raises(
+        RuntimeError,
+        match="VALIDATION_STOPPED_CONTROL_ARM_NO_FURTHER_ALLOCATION",
+    ):
+        _checkpoint_allocation(1, state["arm_states"])
     with pytest.raises(
         RuntimeError,
         match="ECONOMIC_RECEIPT_VALIDATION_CAMPAIGN_CHANGED",

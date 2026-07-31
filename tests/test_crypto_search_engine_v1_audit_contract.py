@@ -23,6 +23,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     ECONOMIC_SEARCH_V2_CAMPAIGN,
     ECONOMIC_SEARCH_V3_CAMPAIGN,
     ECONOMIC_SEARCH_V4_CAMPAIGN,
+    ECONOMIC_SEARCH_V5_CAMPAIGN,
     HierarchicalTypedCEMV2,
     SEEDS,
     TypedEvolutionV2,
@@ -180,6 +181,20 @@ def test_v4_campaign_uses_independent_runtime_and_receipt() -> None:
         "report_title": "Crypto Search Economic V4",
         "receipt_path": "config/crypto_search_economic_receipt_v4.json",
         "cli_suffix": "economic-v4",
+    }
+
+
+def test_v5_campaign_uses_independent_runtime_and_receipt() -> None:
+    config = _economic_campaign_config(ECONOMIC_SEARCH_V5_CAMPAIGN)
+
+    assert config == {
+        "epoch_id": "CRYPTO_SEARCH_ECONOMIC_V5_20260731",
+        "runtime_date": "20260731",
+        "runtime_prefix": "crypto_search_economic_v5",
+        "report_prefix": "CRYPTO_SEARCH_ECONOMIC_V5",
+        "report_title": "Crypto Search Economic V5",
+        "receipt_path": "config/crypto_search_economic_receipt_v5.json",
+        "cli_suffix": "economic-v5",
     }
 
 

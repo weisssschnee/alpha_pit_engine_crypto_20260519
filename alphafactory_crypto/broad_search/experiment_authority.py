@@ -43,6 +43,9 @@ SEARCH_ECONOMIC_V3_RECEIPT_PATH = (
 SEARCH_ECONOMIC_V4_RECEIPT_PATH = (
     "config/crypto_search_economic_receipt_v4.json"
 )
+SEARCH_ECONOMIC_V5_RECEIPT_PATH = (
+    "config/crypto_search_economic_receipt_v5.json"
+)
 SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
     "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1": {
         "path": DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH,
@@ -132,6 +135,19 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "checkpoint": "checkpoint_validation_blocked",
             "rescue_rerun_started": False,
         },
+    },
+    "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V5": {
+        "path": SEARCH_ECONOMIC_V5_RECEIPT_PATH,
+        "decision_id": "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V5_20260731",
+        "runner_campaign": "crypto_search_economic_v5",
+        "runtime_date": "20260731",
+        "allowed_statuses": {
+            "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
+        },
+        "expected_run_outcome": {},
     },
 }
 
@@ -282,12 +298,13 @@ def _validate_search_economic_receipt(
         blockers.append("receipt_path")
     status = str(receipt.get("status") or "")
     run_authorized = receipt.get("run_authorized")
-    if status not in receipt_spec["allowed_statuses"]:
-        blockers.append("status")
     consumed_statuses = {
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
         "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
         "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
     }
+    if status not in receipt_spec["allowed_statuses"]:
+        blockers.append("status")
     if (
         status == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
         and run_authorized is not True
@@ -1023,6 +1040,7 @@ __all__ = [
     "SEARCH_ECONOMIC_V2_RECEIPT_PATH",
     "SEARCH_ECONOMIC_V3_RECEIPT_PATH",
     "SEARCH_ECONOMIC_V4_RECEIPT_PATH",
+    "SEARCH_ECONOMIC_V5_RECEIPT_PATH",
     "REQUIRED_REAL_EXPERIMENT_ROLES",
     "evaluate_search_validation_kill_line",
     "require_real_experiment_authority",
