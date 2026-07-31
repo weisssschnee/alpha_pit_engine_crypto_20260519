@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V6 seed robustness validation complete; random control failed; research HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (V2 mechanism grammar authorized; 12k run pending; development only)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -412,6 +412,11 @@
                                     "config/crypto_search_economic_receipt_v4.json",
                                     "config/crypto_search_economic_receipt_v5.json",
                                     "config/crypto_search_economic_receipt_v6.json",
+                                    "config/crypto_search_mechanism_v2_receipt.json",
+                                    "config/crypto_search_engine_v2_mechanism_grammar.json",
+                                    "config/crypto_typed_mechanism_catalog_v2.json",
+                                    "docs/adr/0017-extensible-typed-mechanism-search-v2.md",
+                                    "reports/CRYPTO_SEARCH_ENGINE_V2_SOURCE_GAP_REPORT_20260801.md",
                                     "alphafactory_crypto/data_admission_v1.py",
                                     "config/crypto_search_surface_integration_v1.json",
                                     "docs/adr/0011-search-surface-integration-v1.md",
@@ -486,12 +491,21 @@
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
                       "active_authority":  false,
                       "authority":  {
-                                        "path":  "config/crypto_search_economic_receipt_v6.json",
-                                        "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "d77a32d6ecc749ae495765a174134d7570d1b6c7",
-                                        "sha256":  "9225E3BCACB43A3A6A19D168FDD97EDBDE02CE22428DD199AE0A74368E02CAB8"
+                                        "path":  "config/crypto_search_mechanism_v2_receipt.json",
+                                        "repo_ref":  "experiment/crypto-search-engine-v2-mechanism-grammar-20260801",
+                                        "verified_sha":  "fbc396aef80c1d1749479e2b3eb0ade923585968",
+                                        "sha256":  "A3F50301B6E261D87EBAD58968CC570F8F6031A542E048AC339C9813C1CECE69"
                                     },
                       "contracts":  [
+                                        {
+                                            "id":  "crypto_search_mechanism_v2_authorization",
+                                            "type":  "AUTHORITY",
+                                            "rule":  "ADR 0017 and the content-hashed V2 receipt authorize exactly one fresh-state 12,000-strict-candidate development campaign on the existing 71 OI/mark plus 44 aggTrades aligned carrier. The engine compiles 12 declarative templates into 184 typed mechanism specs through the existing AST, registry, CandidateSpec, compiler, matched controls, evaluator, Binance target, and frozen 5 bps cost. Checkpoint 0 is a 2,000-candidate fixed-Skeleton typed-random baseline; checkpoints 1-2 contain 4,000 expanded-mechanism random candidates; checkpoints 3-5 contain 3,000 mechanism CEM and 3,000 mechanism Evolution candidates. There is no pre-adaptive positivity gate; final development validation is per arm after checkpoint 5. Adaptive memory is arm-local and campaign-local. No prior state, holdout/OOS, challenge, recent, May stress, forward, promotion, tuning, reseed, rescue, or second campaign is authorized.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.experiment_authority, broad_search.search_engine_v1 run-mechanism-v2/check-mechanism-v2, and ADR 0017",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "config/crypto_search_mechanism_v2_receipt.json"
+                                        },
                                         {
                                             "id":  "crypto_search_economic_receipt_v1_binding",
                                             "type":  "AUTHORITY",
@@ -711,9 +725,9 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "runtime/crypto_search_economic_v6_20260801/final_decision.json",
-                                         "evidence_sha256":  "4092813225A8201A69C97B584C90E30D025625B27BF301AC799D9066B7EAC57E",
-                                         "verified_at_sha":  "d77a32d6ecc749ae495765a174134d7570d1b6c7"
+                                         "evidence_ref":  "reports/CRYPTO_SEARCH_ENGINE_V2_SOURCE_GAP_REPORT_20260801.md",
+                                         "evidence_sha256":  "AE0834611A6727214C92E356B66BE0433D1075B19E05E4342223949E16C297E5",
+                                         "verified_at_sha":  "fbc396aef80c1d1749479e2b3eb0ade923585968"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
@@ -795,7 +809,10 @@
                                             "RANDOM CONTROL KILL-LINE CLEAN TERMINAL VERIFIED",
                                             "NO MARKET REPLAY FOR SOURCE REPAIR",
                                             "NO RESCUE RERUN",
-                                            "NO ARM QUALIFIED"
+                                           "NO ARM QUALIFIED"
+                                           ,"V2 MECHANISM GRAMMAR AUTHORIZED"
+                                           ,"V2 12K RUN PENDING"
+                                           ,"V2 NO PRE-ADAPTIVE POSITIVITY GATE"
                                        ],
                       "promotion_requirements":  [
                                                      "information-adequate new data",
