@@ -4211,6 +4211,19 @@ def _validation_control_arm_stopped(state: Mapping[str, Any]) -> bool:
     )
 
 
+def _completed_validation_control_stop(
+    decision: Mapping[str, Any],
+) -> bool:
+    return bool(
+        decision.get("status") == "ENGINE_VALIDATION_BLOCKED"
+        and dict(decision.get("validation_stage") or {}).get("status")
+        == "VALIDATION_STAGE_COMPLETE"
+        and decision.get("reason")
+        == "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE"
+        and decision.get("checkpoint") == "checkpoint_validation"
+    )
+
+
 def _reward_at_equal_count(
     rows: Sequence[Mapping[str, Any]],
     count: int,
@@ -10055,12 +10068,24 @@ def check_engine(
     validation_blocked = (
         decision.get("status") == "ENGINE_VALIDATION_BLOCKED"
     )
+    validation_status = str(
+        dict(decision.get("validation_stage") or {}).get("status") or ""
+    )
+    validation_complete = validation_status == "VALIDATION_STAGE_COMPLETE"
+    completed_validation_control_stop = _completed_validation_control_stop(
+        decision
+    )
     preflight = _read_json(runtime_root / "embedded_preflight.json")
     ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
     archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
     metrics = pd.read_parquet(runtime_root / "arm_checkpoint_metrics.parquet")
     family_summary = _read_json(runtime_root / "behavior_family_summary.json")
-    if is_economic and not budget_exhausted and not validation_blocked:
+    if (
+        is_economic
+        and validation_complete
+        and not budget_exhausted
+        and (not validation_blocked or completed_validation_control_stop)
+    ):
         validation_rows = pd.read_parquet(
             runtime_root / "validation_candidate_ledger.parquet"
         )
@@ -10217,7 +10242,6 @@ def check_engine(
             if validation_status == "VALIDATION_STAGE_COMPLETE" and not exists:
                 errors.append(f"budget_exhausted_missing_validation:{name}")
     elif is_economic:
-        validation_status = decision.get("validation_stage", {}).get("status")
         if validation_status != "BLOCKED_BEFORE_COMPLETE_EQUAL_COUNT":
             errors.append("validation_blocked_status")
         for name in (
@@ -10374,36 +10398,79 @@ def check_engine(
         if len(checkpoints) != 1:
             errors.append("validation_blocked_numeric_checkpoint")
         validation_stage = dict(decision.get("validation_stage") or {})
-        blocked_checkpoint = (
-            runtime_root / "checkpoints" / "checkpoint_validation_blocked"
-        )
-        if blocked_checkpoint.is_dir():
-            blocked_manifest = _read_json(blocked_checkpoint / "manifest.json")
-            if blocked_manifest.get("restore_verified") is not True:
-                errors.append("validation_blocked_checkpoint_restore")
-            if int(
-                blocked_manifest.get("completed_ledger_row_count", -1)
-            ) != len(ledger):
-                errors.append("validation_blocked_checkpoint_rows")
-        elif (
-            validation_stage.get("closure_mode")
-            == "POST_MORTEM_FROM_VERIFIED_CHECKPOINT"
-            and decision.get("checkpoint") == "checkpoint_000"
-        ):
-            checkpoint_manifest = _read_json(
-                runtime_root
-                / "checkpoints"
-                / "checkpoint_000"
-                / "manifest.json"
+        if completed_validation_control_stop:
+            completed_checkpoint = (
+                runtime_root / "checkpoints" / "checkpoint_validation"
             )
-            if checkpoint_manifest.get("restore_verified") is not True:
-                errors.append("validation_blocked_checkpoint_restore")
-            if int(
-                checkpoint_manifest.get("completed_ledger_row_count", -1)
-            ) != len(ledger):
-                errors.append("validation_blocked_checkpoint_rows")
+            if not completed_checkpoint.is_dir():
+                errors.append("validation_blocked_checkpoint")
+            else:
+                completed_manifest = _read_json(
+                    completed_checkpoint / "manifest.json"
+                )
+                if completed_manifest.get("restore_verified") is not True:
+                    errors.append("validation_blocked_checkpoint_restore")
+                if int(
+                    completed_manifest.get("completed_ledger_row_count", -1)
+                ) != len(ledger):
+                    errors.append("validation_blocked_checkpoint_rows")
+                if completed_manifest.get("source_sha") != manifest.get(
+                    "producer_source_sha"
+                ):
+                    errors.append("validation_blocked_checkpoint_source")
+            arm_decisions = dict(
+                decision.get("validation_arm_decisions") or {}
+            )
+            control_decision = dict(
+                arm_decisions.get("canonical_typed_random") or {}
+            )
+            if (
+                decision.get("reason")
+                != "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE"
+                or decision.get("checkpoint") != "checkpoint_validation"
+                or control_decision.get("passed") is not False
+                or control_decision.get("state_after") != "EXITED"
+                or validation_stage.get("arm_state_after")
+                != {
+                    "canonical_typed_random": "EXITED",
+                    "hierarchical_typed_cem_v2": "EXITED",
+                    "typed_evolution_v2": "EXITED",
+                }
+            ):
+                errors.append("validation_blocked_control_arm_terminal")
         else:
-            errors.append("validation_blocked_checkpoint")
+            blocked_checkpoint = (
+                runtime_root / "checkpoints" / "checkpoint_validation_blocked"
+            )
+            if blocked_checkpoint.is_dir():
+                blocked_manifest = _read_json(
+                    blocked_checkpoint / "manifest.json"
+                )
+                if blocked_manifest.get("restore_verified") is not True:
+                    errors.append("validation_blocked_checkpoint_restore")
+                if int(
+                    blocked_manifest.get("completed_ledger_row_count", -1)
+                ) != len(ledger):
+                    errors.append("validation_blocked_checkpoint_rows")
+            elif (
+                validation_stage.get("closure_mode")
+                == "POST_MORTEM_FROM_VERIFIED_CHECKPOINT"
+                and decision.get("checkpoint") == "checkpoint_000"
+            ):
+                checkpoint_manifest = _read_json(
+                    runtime_root
+                    / "checkpoints"
+                    / "checkpoint_000"
+                    / "manifest.json"
+                )
+                if checkpoint_manifest.get("restore_verified") is not True:
+                    errors.append("validation_blocked_checkpoint_restore")
+                if int(
+                    checkpoint_manifest.get("completed_ledger_row_count", -1)
+                ) != len(ledger):
+                    errors.append("validation_blocked_checkpoint_rows")
+            else:
+                errors.append("validation_blocked_checkpoint")
     elif len(checkpoints) != CHECKPOINT_COUNT:
         errors.append("checkpoint_count")
     for index, checkpoint in enumerate(checkpoints):

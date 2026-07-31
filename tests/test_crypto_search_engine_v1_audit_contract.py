@@ -27,6 +27,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     HierarchicalTypedCEMV2,
     SEEDS,
     TypedEvolutionV2,
+    _completed_validation_control_stop,
     _budget_exhausted_decision,
     _budget_exhausted_report_text,
     _economic_campaign_config,
@@ -196,6 +197,19 @@ def test_v5_campaign_uses_independent_runtime_and_receipt() -> None:
         "receipt_path": "config/crypto_search_economic_receipt_v5.json",
         "cli_suffix": "economic-v5",
     }
+
+
+def test_completed_validation_control_stop_has_distinct_terminal_identity() -> None:
+    decision = {
+        "status": "ENGINE_VALIDATION_BLOCKED",
+        "reason": "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE",
+        "checkpoint": "checkpoint_validation",
+        "validation_stage": {"status": "VALIDATION_STAGE_COMPLETE"},
+    }
+
+    assert _completed_validation_control_stop(decision)
+    decision["checkpoint"] = "checkpoint_validation_blocked"
+    assert not _completed_validation_control_stop(decision)
 
 
 def test_proposal_liveness_preflight_fails_closed_on_unexpected_error(

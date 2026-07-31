@@ -1,0 +1,31 @@
+{
+  "arm_id": "typed_evolution_v2",
+  "arm_stopped": true,
+  "candidate_generation_performed": false,
+  "candidate_local_failure_count": 0,
+  "checkpoint_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_search_economic_v5_20260731\\checkpoints\\validation_kill_typed_evolution_v2.json",
+  "conditions": {
+    "validation_control_arm_constructible": true,
+    "validation_control_arm_passed": false,
+    "validation_equal_count_constructible": true
+  },
+  "economic_receipt_sha256": "AD85FD305A2522013E23859B9F7AE2E31E70230EBA91415830E0A469224EF1DE",
+  "equal_count_comparison_counts": {
+    "canonical_typed_random": 128,
+    "hierarchical_typed_cem_v2": 128,
+    "typed_evolution_v2": 128
+  },
+  "failure_reason": "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE",
+  "holdout_read": false,
+  "matched_evaluated_counts": {
+    "canonical_typed_random": 128,
+    "hierarchical_typed_cem_v2": 128,
+    "typed_evolution_v2": 128
+  },
+  "optimizer_feedback_written": false,
+  "passed": false,
+  "policy_memory_written": false,
+  "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+  "threshold_tuning_performed": false,
+  "validation_role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE"
+}
