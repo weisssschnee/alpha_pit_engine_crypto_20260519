@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V4 support repair authorized; research HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (V4 validation-blocked closed; research HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -469,7 +469,10 @@
                                     "reports/CRYPTO_SEARCH_ECONOMIC_V2_20260731.md",
                                     "runtime/crypto_search_economic_v3_20260731/run_manifest.json",
                                     "runtime/crypto_search_economic_v3_20260731/final_decision.json",
-                                    "reports/CRYPTO_SEARCH_ECONOMIC_V3_20260731.md"
+                                    "reports/CRYPTO_SEARCH_ECONOMIC_V3_20260731.md",
+                                    "runtime/crypto_search_economic_v4_20260731/run_manifest.json",
+                                    "runtime/crypto_search_economic_v4_20260731/final_decision.json",
+                                    "reports/CRYPTO_SEARCH_ECONOMIC_V4_20260731.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -477,8 +480,8 @@
                       "authority":  {
                                         "path":  "config/crypto_search_economic_receipt_v4.json",
                                         "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "cc9614e6485dafc8d37f951cee4c1437f076e2f8",
-                                        "sha256":  "9251AF3A53E0BDD199F1051D26038288A000A711A5D18409DF314C4EAAC693CB"
+                                        "verified_sha":  "df6071cec75d2a787fe587074980dea929a795c7",
+                                        "sha256":  "DB2D59BF28056C1A7F121F5CF775AB8056FD4B0EE9AD55CA9843DF6112B4BF32"
                                     },
                       "contracts":  [
                                         {
@@ -518,13 +521,13 @@
                                             "evidence_ref":  "runtime/crypto_search_economic_v3_20260731/final_decision.json"
                                         },
                                         {
-                                            "id":  "crypto_search_economic_v4_support_repair_authorization",
+                                            "id":  "crypto_search_economic_v4_consumed_outcome",
                                             "type":  "AUTHORITY",
-                                            "rule":  "The one-run V4 receipt authorizes a fresh-state campaign only after repairing transformed finite-support semantics and candidate-specific rolling-feature warm-up. ConditionGate and safe-division operators preserve missing support; primary, right-axis, and hierarchical controls must have identical transformed finite support before mapping. Validation materializes from prior feature-only history and trims back to its frozen role before target or reward access. V4 reuses the existing 115-field carrier, Binance target, mapping, cost, reward, compiler, archive, and checkpoint systems and imports no V1-V3 candidate, reward, RNG, distribution, population, policy, archive, checkpoint, or transition memory. The authorization remains development-only, conditional on frozen 5 bps cost, and forbids tuning, reseeding, rescue, holdout/OOS/challenge reads, formal claims, and promotion.",
+                                            "rule":  "The one-run V4 receipt is consumed and run_authorized is false. Its independent fresh-state producer at 94c79d0a8e559b7223fa1eaddb2d07ca76c1e628 completed restore-verified checkpoint_000 with 2,000 strict candidates from 2,298 attempts and 1,962 behavior families. The transformed finite-support hard gates and candidate-specific rolling-feature warm-up repair passed. During equal-count validation, canonical typed-random candidate 88D6330B8CC329460CBFA97E810FCE4109A5159A796FA4D4E9F2C8D00F0AD88D at 1h and selection rank 13 remained behavior-distinct on train but mapped to exactly equal primary and control validation weights, producing CONTROL_BEHAVIOR_EQUALS_PRIMARY. The runner wrote restore-verified checkpoint_validation_blocked and terminated normally. The remaining defect is orchestration scope: this legitimate candidate-local validation degeneration is escalated to a campaign-wide validation block instead of persisted arm-local failure evidence. No continuation, rescue, reseed, tuning, sealed read, arm qualification, Alpha claim, or next Arena occurred. This is an engine-validation result, not an Alpha-space, field, or carrier-information negative. Another market run requires a separate authorization and cannot import V1-V4 state.",
                                             "severity":  "HARD",
                                             "enforced_by":  "broad_search.expression.materialize_expression, broad_search.pair18m.evaluate_pair, broad_search.experiment_authority.resolve_search_economic_receipt, and broad_search.search_engine_v1 run-economic-v4/check-economic-v4",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "config/crypto_search_economic_receipt_v4.json"
+                                            "evidence_ref":  "runtime/crypto_search_economic_v4_20260731/final_decision.json"
                                         },
                                         {
                                             "id":  "search_surface_runtime_carrier_gate",
@@ -670,12 +673,12 @@
                                         }
                                     ],
                       "validation":  {
-                                         "level":  "SOURCE_VERIFIED",
+                                         "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                          "evidence_ref":  "config/crypto_search_economic_receipt_v4.json",
-                                          "evidence_sha256":  "9251AF3A53E0BDD199F1051D26038288A000A711A5D18409DF314C4EAAC693CB",
-                                          "verified_at_sha":  "cc9614e6485dafc8d37f951cee4c1437f076e2f8"
+                                          "evidence_ref":  "runtime/crypto_search_economic_v4_20260731/final_decision.json",
+                                          "evidence_sha256":  "6275A95F631748E084B9E991B386050F71BF1B45427F72BBBC7998C986DC0EE4",
+                                          "verified_at_sha":  "df6071cec75d2a787fe587074980dea929a795c7"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
@@ -733,7 +736,10 @@
                                             "V3 VALIDATION BLOCKED CHECKPOINT VERIFIED",
                                             "V3 AUTHORIZATION CONSUMED",
                                             "V4 SUPPORT SEMANTICS REPAIRED",
-                                            "V4 FRESH-STATE RUN AUTHORIZED",
+                                            "V4 2,000 STRICT CHECKPOINT RESTORE VERIFIED",
+                                            "V4 VALIDATION BLOCKED CHECKPOINT VERIFIED",
+                                            "V4 AUTHORIZATION CONSUMED",
+                                            "V4 ARM-LOCAL VALIDATION FAILURE NOT IMPLEMENTED",
                                             "NO RESCUE RERUN",
                                             "NO ARM QUALIFIED"
                                        ],
