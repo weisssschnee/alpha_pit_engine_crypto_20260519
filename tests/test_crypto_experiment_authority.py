@@ -227,6 +227,20 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
     assert all(
         len(value) == 64 for value in result["component_sha256"].values()
     )
+    frozen = json.loads(
+        (
+            repo_root
+            / result["run_outcome"]["runtime"]
+            / "frozen_contract.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert frozen["source_sha"] == result["run_outcome"]["producer_source_sha"]
+    assert result["component_sha256"] == frozen["economic_receipt"][
+        "component_sha256"
+    ]
+    assert result["component_sha256"]["runtime_binding"] != _file_sha256(
+        repo_root / "alphafactory_crypto/broad_search/search_engine_v1.py"
+    )
 
 
 def test_search_economic_receipt_fails_closed_on_target_drift(

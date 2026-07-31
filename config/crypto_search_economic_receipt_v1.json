@@ -185,7 +185,7 @@
   "component_sources": {
     "mechanism": {
       "path": "alphafactory_crypto/broad_search/compositional18m.py",
-      "sha256": "989C337BB17F9893FE585785B781E392FC600ADF3166433AB113C553EEFD0DC0"
+      "sha256": "6B57D3A62B409257398E805DCB3E592CDB6499F86D114600F5401D08097BA99E"
     },
     "mechanism_mapping": {
       "path": "alphafactory_crypto/instrument_canary/grammar.py",
@@ -197,7 +197,7 @@
     },
     "validation_kill_line": {
       "path": "alphafactory_crypto/broad_search/experiment_authority.py",
-      "sha256": "E7DAEF66A2C4BCDCFD4C143D5271E3B99FE33BDBA3B6385683A99BDB56E9F45A"
+      "sha256": "67770056BE65F20F287B90763B0856732B0FCA8E22FCB540A858605DE9B39A9D"
     },
     "portfolio_mapping_and_cost": {
       "path": "alphafactory_crypto/instrument_capability/mapping.py",
@@ -209,7 +209,7 @@
     },
     "optimizer_reward_and_matched_attribution": {
       "path": "alphafactory_crypto/broad_search/pair18m.py",
-      "sha256": "7963A36C426174A8A8C745CF73BCF19ADD53EA24487E0F037CDEC222F623BFC9"
+      "sha256": "2290BC65C29CDBBD6C5B0997FCC1859B07BF5159B918C80CF868A936DEF2F7BA"
     },
     "target_contract": {
       "path": "config/crypto_search_engine_v1_4_binance_target_replay.json",
@@ -217,7 +217,7 @@
     },
     "runtime_binding": {
       "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-      "sha256": "347D316D3B510E65B1116AC53037E03472BEB94F45999CEC85659A50F3E16F37"
+      "sha256": "C7B05E82969C629413E814695CC8CB286E8989894A26FA79D492F6174EDFCED4"
     }
   }
 }

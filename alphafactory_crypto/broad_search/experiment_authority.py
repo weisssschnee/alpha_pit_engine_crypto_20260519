@@ -5,7 +5,9 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import subprocess
 from datetime import datetime
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -331,8 +333,7 @@ def _canonical_sha256(payload: Any) -> str:
     ).hexdigest().upper()
 
 
-def _file_sha256(path: Path) -> str:
-    payload = path.read_bytes()
+def _canonical_file_sha256(payload: bytes) -> str:
     try:
         text = payload.decode("utf-8")
     except UnicodeDecodeError:
@@ -344,9 +345,24 @@ def _file_sha256(path: Path) -> str:
     return hashlib.sha256(canonical).hexdigest().upper()
 
 
-def _symbol_is_declared(source_path: Path, dotted_symbol: str) -> bool:
+def _file_sha256(path: Path) -> str:
+    return _canonical_file_sha256(path.read_bytes())
+
+
+@lru_cache(maxsize=256)
+def _git_file_payload(repo_root: Path, source_sha: str, path: str) -> bytes:
+    """Read one committed source file without changing the checkout."""
+
+    return subprocess.check_output(
+        ["git", "show", f"{source_sha}:{Path(path).as_posix()}"],
+        cwd=repo_root,
+        stderr=subprocess.DEVNULL,
+    )
+
+
+def _symbol_is_declared_payload(payload: bytes, dotted_symbol: str) -> bool:
     symbol = str(dotted_symbol).rsplit(".", 1)[-1]
-    tree = ast.parse(source_path.read_text(encoding="utf-8"))
+    tree = ast.parse(payload.decode("utf-8-sig"))
     for node in tree.body:
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
             if node.name == symbol:
@@ -356,6 +372,10 @@ def _symbol_is_declared(source_path: Path, dotted_symbol: str) -> bool:
             if any(isinstance(target, ast.Name) and target.id == symbol for target in targets):
                 return True
     return False
+
+
+def _symbol_is_declared(source_path: Path, dotted_symbol: str) -> bool:
+    return _symbol_is_declared_payload(source_path.read_bytes(), dotted_symbol)
 
 
 def _parse_utc(value: Any, field: str, blockers: list[str]) -> datetime | None:
@@ -909,6 +929,31 @@ def _validate_search_economic_receipt(
         ),
     }
     component_sha256: dict[str, str] = {}
+    component_payloads: dict[str, bytes] = {}
+    historical_component_sha256: dict[str, str] | None = None
+    historical_source_sha = ""
+    if status in consumed_statuses:
+        historical_source_sha = str(run_outcome.get("producer_source_sha") or "")
+        frozen_contract_path = (
+            repo_root
+            / str(run_outcome.get("runtime") or "")
+            / "frozen_contract.json"
+        )
+        if not frozen_contract_path.is_file():
+            blockers.append("run_outcome.frozen_contract")
+        else:
+            frozen_contract = json.loads(
+                frozen_contract_path.read_text(encoding="utf-8-sig")
+            )
+            if str(frozen_contract.get("source_sha") or "") != historical_source_sha:
+                blockers.append("run_outcome.producer_source_sha")
+            frozen_receipt = dict(frozen_contract.get("economic_receipt") or {})
+            historical_component_sha256 = {
+                str(key): str(value).upper()
+                for key, value in dict(
+                    frozen_receipt.get("component_sha256") or {}
+                ).items()
+            }
     required_component_sources = receipt_spec.get("required_component_sources")
     if required_component_sources is not None and set(component_sources) != set(
         required_component_sources
@@ -918,31 +963,48 @@ def _validate_search_economic_receipt(
         if not isinstance(source_binding, Mapping):
             blockers.append(f"component_sources.{component}")
             continue
-        source_path = repo_root / str(source_binding.get("path") or "")
+        relative_source_path = str(source_binding.get("path") or "")
+        source_path = repo_root / relative_source_path
         expected_sha256 = str(source_binding.get("sha256") or "").upper()
-        if not source_path.is_file():
-            blockers.append(f"component_sources.{component}")
-            continue
-        observed_sha256 = _file_sha256(source_path)
+        if status in consumed_statuses:
+            try:
+                source_payload = _git_file_payload(
+                    repo_root,
+                    historical_source_sha,
+                    relative_source_path,
+                )
+            except (OSError, subprocess.CalledProcessError):
+                blockers.append(f"component_sources.{component}.producer_blob")
+                continue
+            expected_sha256 = str(
+                (historical_component_sha256 or {}).get(str(component)) or ""
+            ).upper()
+            if not expected_sha256:
+                blockers.append(f"component_sources.{component}.frozen_hash")
+        else:
+            if not source_path.is_file():
+                blockers.append(f"component_sources.{component}")
+                continue
+            source_payload = source_path.read_bytes()
+        observed_sha256 = _canonical_file_sha256(source_payload)
         component_sha256[str(component)] = observed_sha256
+        component_payloads[str(component)] = source_payload
         if observed_sha256 != expected_sha256:
             blockers.append(f"component_hash.{component}")
         symbol = source_symbols.get(str(component))
-        if symbol and not _symbol_is_declared(source_path, str(symbol)):
+        if symbol and not _symbol_is_declared_payload(source_payload, str(symbol)):
             blockers.append(f"component_symbol.{component}")
-    mechanism_source = component_sources.get("mechanism")
-    if isinstance(mechanism_source, Mapping):
-        mechanism_path = repo_root / str(mechanism_source.get("path") or "")
-        if mechanism_path.is_file() and not _symbol_is_declared(
-            mechanism_path,
+    mechanism_payload = component_payloads.get("mechanism")
+    if mechanism_payload is not None:
+        if not _symbol_is_declared_payload(
+            mechanism_payload,
             expected_mapping_adapter,
         ):
             blockers.append("component_symbol.mechanism_mapping_adapter")
-    runtime_source = component_sources.get("runtime_binding")
-    if isinstance(runtime_source, Mapping):
-        runtime_path = repo_root / str(runtime_source.get("path") or "")
-        if runtime_path.is_file() and not _symbol_is_declared(
-            runtime_path,
+    runtime_payload = component_payloads.get("runtime_binding")
+    if runtime_payload is not None:
+        if not _symbol_is_declared_payload(
+            runtime_payload,
             expected_validation_runtime,
         ):
             blockers.append("component_symbol.validation_kill_line_runtime")

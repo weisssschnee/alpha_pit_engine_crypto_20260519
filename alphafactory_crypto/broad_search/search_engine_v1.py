@@ -1558,34 +1558,40 @@ def _mechanism_v2_frozen_contract(
     """Freeze the V2 mechanism grammar without inheriting V1 arm semantics."""
 
     config, catalog = _load_mechanism_v2_contract(repo_root)
-    legacy = _economic_search_frozen_contract(
-        source_sha=source_sha,
-        compiler_binding=compiler_binding,
-        behavior_contract=behavior_contract,
-        input_identities=input_identities,
-        environment=environment,
-        contracts=contracts,
-        carrier_id=carrier_id,
-        epoch_id=MECHANISM_SEARCH_V2_EPOCH_ID,
-        seeds=MECHANISM_SEARCH_V2_SEEDS,
-        seed_derivation=MECHANISM_SEARCH_V2_SEED_DERIVATION,
-    )
     payload = {
-        key: value
-        for key, value in legacy.items()
-        if key != "frozen_contract_sha256"
-    }
-    payload.update(
-        {
-            "schema_version": 2,
-            "search_engine_version": "EXTENSIBLE_TYPED_MECHANISM_GRAMMAR_V2",
-            "objective": (
-                "Measure whether an extensible typed economic-mechanism grammar "
-                "and mechanism-level adaptive policies improve compute density, "
-                "behavior discovery, and train reward ordering"
-            ),
-            "authorization": "ONE_FRESH_STATE_12000_STRICT_MECHANISM_CAMPAIGN",
-            "mechanism_grammar": {
+        "schema_version": 2,
+        "epoch_id": MECHANISM_SEARCH_V2_EPOCH_ID,
+        "source_sha": source_sha,
+        "base_sha": BASE_SHA,
+        "search_engine_version": "EXTENSIBLE_TYPED_MECHANISM_GRAMMAR_V2",
+        "objective": (
+            "Measure whether an extensible typed economic-mechanism grammar "
+            "and mechanism-level adaptive policies improve compute density, "
+            "behavior discovery, and train reward ordering"
+        ),
+        "authorization": "ONE_FRESH_STATE_12000_STRICT_MECHANISM_CAMPAIGN",
+        "surface": {
+            "context_id": str(carrier_id),
+            "fields": len(contracts),
+            "field_ids": [item.field_id for item in contracts],
+            "carrier_reused": True,
+            "new_materializer": False,
+        },
+        "input_identities": dict(input_identities),
+        "compiler_identity": dict(compiler_binding),
+        "evaluator_contract": pair_contract_payload(),
+        "behavior_descriptor": dict(behavior_contract),
+        "environment": dict(environment),
+        "seeds": [int(value) for value in MECHANISM_SEARCH_V2_SEEDS],
+        "seed_contract": {
+            "derivation": MECHANISM_SEARCH_V2_SEED_DERIVATION,
+            "pre_registered_before_candidate_one": True,
+            "prior_v1_v6_seed_set_reused": False,
+            "within_campaign_seed_change_allowed": False,
+            "additional_seed_campaign_allowed": False,
+            "evidence_role": "FRESH_DEVELOPMENT_MECHANISM_SEARCH_ONLY",
+        },
+        "mechanism_grammar": {
                 "catalog_path": MECHANISM_SEARCH_V2_CATALOG,
                 "catalog_file_sha256": sha256_file(
                     repo_root / MECHANISM_SEARCH_V2_CATALOG
@@ -1614,6 +1620,20 @@ def _mechanism_v2_frozen_contract(
             },
             "policies": dict(config["policy_parameters"]),
             "comparison_contract": dict(config["comparison_contract"]),
+            "elite_authority": {
+                "admission_hard_gates": [
+                    "compile_valid",
+                    "exact_unique",
+                    "matched_control_valid",
+                    "strict_cost_evaluated",
+                ],
+                "only_ordering_authority": "search_reward",
+                "matched_attribution_diagnostic": "pair_reward",
+                "equal_reward_tie_break": [
+                    "arm_seed_policy_local_behavior_family_count",
+                    "candidate_id",
+                ],
+            },
             "validation_contract": dict(config["validation"]),
             "fresh_state": dict(config["fresh_state"]),
             "persistent_mechanism_knowledge": dict(
@@ -1631,8 +1651,14 @@ def _mechanism_v2_frozen_contract(
                 "report_only_feedback": False,
                 "cross_sprint_adaptive_memory": False,
             },
-        }
-    )
+        "cpu_hour_definition": (
+            "sum process CPU seconds for proposal, compile, archive, and "
+            "pair evaluation; excludes queue and human wait"
+        ),
+        "memory": "CAMPAIGN_LOCAL_PER_RUN_MEMORY",
+        "latent_status": "LATENT_SEARCH_PRIORITY_MODEL_DEFERRED",
+        "relational_status": "STAGE1_CLOSED_READ_ONLY_BRIDGES_ONLY",
+    }
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
 
 
@@ -4327,6 +4353,8 @@ class MechanismEvolutionV2(MechanismRandomV2):
                     "matched_control_schema": target.matched_control_schema,
                 }
             )
+            if target.payload_operator != "Residual":
+                genome["beta"] = 0.5
             try:
                 child = mechanism_candidate_from_genes(
                     self.registry, genes=genome, domains=self.domains
@@ -4335,6 +4363,12 @@ class MechanismEvolutionV2(MechanismRandomV2):
                 continue
             if child.candidate_id == parent.candidate_id:
                 continue
+            remapped_gene_names = sorted(
+                name
+                for name in ("beta",)
+                if child.generation_genes.get(name)
+                != parent.generation_genes.get(name)
+            )
             return child, self._receipt(
                 operation=MECHANISM_EVOLUTION_OPERATIONS[1],
                 parents=(parent,),
@@ -4343,6 +4377,7 @@ class MechanismEvolutionV2(MechanismRandomV2):
                     "source_mechanism_id": source.mechanism_id,
                     "target_mechanism_id": target.mechanism_id,
                     "deterministic_gene_remapping": True,
+                    "remapped_gene_names": remapped_gene_names,
                     "internal_generation_attempts": attempt,
                     "compile_valid_attempts": attempt,
                 },
@@ -4439,10 +4474,17 @@ class MechanismEvolutionV2(MechanismRandomV2):
             elif operation == MECHANISM_EVOLUTION_OPERATIONS[1] and len(parents) == 1:
                 source = self._spec(parents[0])
                 target = self._spec(child)
+                expected_remapped = sorted(
+                    name
+                    for name in ("beta",)
+                    if child.generation_genes.get(name)
+                    != parents[0].generation_genes.get(name)
+                )
                 allowed = {
                     "mechanism_id",
                     "mechanism_spec",
                     "matched_control_schema",
+                    *expected_remapped,
                 }
                 all_keys = set(parents[0].generation_genes) | set(
                     child.generation_genes
@@ -4455,6 +4497,7 @@ class MechanismEvolutionV2(MechanismRandomV2):
                     and source.mechanism_id != target.mechanism_id
                     and self._compatible(source, target)
                     and receipt.get("deterministic_gene_remapping") is True
+                    and receipt.get("remapped_gene_names") == expected_remapped
                     and all(
                         child.generation_genes.get(key)
                         == parents[0].generation_genes.get(key)
@@ -4583,7 +4626,9 @@ class MechanismEvolutionV2(MechanismRandomV2):
             "candidate": candidate.to_dict(),
             "search_reward": _search_ordering_reward(archive_row),
             "behavior_family_id": family_id,
-            "family_count": int(archive_row.get("family_member_count", 1)),
+            "family_count": int(
+                archive_row.get("policy_local_family_count_at_completion", 1)
+            ),
         }
         for candidate_id in [
             key
@@ -11056,6 +11101,11 @@ def run_engine(
                         "new_policy_local_behavior_family_at_completion": bool(
                             proposal[
                                 "new_policy_local_behavior_family_at_completion"
+                            ]
+                        ),
+                        "policy_local_family_count_at_completion": int(
+                            proposal[
+                                "policy_local_family_count_at_completion"
                             ]
                         ),
                     }

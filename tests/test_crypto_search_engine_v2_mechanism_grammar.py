@@ -30,6 +30,7 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     MechanismRandomV2,
     _load_mechanism_v2_contract,
     _mechanism_v2_checkpoint_allocation,
+    _mechanism_v2_frozen_contract,
 )
 
 
@@ -112,6 +113,27 @@ def test_frozen_campaign_contract_has_continuous_stage_allocation() -> None:
         "mechanism_level_cem_v2": 1_000,
         "mechanism_evolution_v2": 1_000,
     }
+
+    frozen = _mechanism_v2_frozen_contract(
+        repo_root=REPO_ROOT,
+        source_sha="A" * 40,
+        compiler_binding={"bundle_sha256": "B" * 64},
+        behavior_contract={"schema_version": 1},
+        input_identities={"carrier": "frozen"},
+        environment={"workers": 10},
+        contracts=_contracts(),
+        carrier_id="OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+    )
+    assert {
+        "arm_contract",
+        "v1_controls",
+        "v2_parameters",
+        "cem",
+        "evolution",
+        "qualification_gate",
+    }.isdisjoint(frozen)
+    assert frozen["budget"]["strict_evaluated_target"] == 12_000
+    assert frozen["stages"] == config["stages"]
 
 
 def test_mechanism_receipt_authorizes_independent_final_arm_validation() -> None:
@@ -387,3 +409,93 @@ def test_mechanism_evolution_receipts_and_checkpoint_replay_are_exact() -> None:
     replayed, _ = restored.propose()
     assert replayed.candidate_id == expected.candidate_id
     assert restored.state_hash() == policy.state_hash()
+
+
+def test_mechanism_evolution_memory_is_policy_local() -> None:
+    registry = TypedExpressionRegistry(_contracts())
+    parameters = {
+        "duplicate_resample_limit": 64,
+        "warmup": 4,
+        "tournament_size": 3,
+        "population_limit": 32,
+        "parameter_mutation_probability": 0.50,
+        "mechanism_mutation_probability": 0.30,
+        "crossover_probability": 0.20,
+    }
+    first = MechanismEvolutionV2(777, registry, _catalog(), parameters)
+    second = MechanismEvolutionV2(777, registry, _catalog(), parameters)
+    for index in range(4):
+        first_candidate, first_metadata = first.propose()
+        second_candidate, second_metadata = second.propose()
+        assert first_candidate.candidate_id == second_candidate.candidate_id
+        shared = {
+            "behavior_family_id": f"LOCAL_{index}",
+            "search_reward": float(index),
+            "search_reward_authority": SEARCH_REWARD_AUTHORITY,
+            "policy_local_family_count_at_completion": 1,
+        }
+        first.observe(
+            first_candidate,
+            {
+                **shared,
+                "family_member_count": 1,
+                "operation": first_metadata["operation"],
+            },
+        )
+        second.observe(
+            second_candidate,
+            {
+                **shared,
+                "family_member_count": 100 + index,
+                "operation": second_metadata["operation"],
+            },
+        )
+    assert first.state_hash() == second.state_hash()
+    assert all(
+        record["family_count"] == 1 for record in first.population.values()
+    )
+
+
+def test_mechanism_mutation_receipt_verifies_deterministic_beta_remap() -> None:
+    registry = TypedExpressionRegistry(_contracts())
+    compatible = {}
+    for spec in _catalog():
+        key = (spec.left_role, spec.right_role, spec.condition_role)
+        compatible.setdefault(key, []).append(spec)
+    source = target = None
+    for specs in compatible.values():
+        residual = next(
+            (item for item in specs if item.payload_operator == "Residual"),
+            None,
+        )
+        non_residual = next(
+            (item for item in specs if item.payload_operator != "Residual"),
+            None,
+        )
+        if residual is not None and non_residual is not None:
+            source, target = residual, non_residual
+            break
+    assert source is not None and target is not None
+    parent = sample_mechanism_candidate(
+        registry=registry,
+        spec=source,
+        domains=mechanism_role_domains(tuple(registry.fields.values())),
+        rng=random.Random(991),
+    )
+    genes = dict(parent.generation_genes)
+    genes["beta"] = 1.0
+    parent = mechanism_candidate_from_genes(
+        registry,
+        genes=genes,
+        domains=mechanism_role_domains(tuple(registry.fields.values())),
+    )
+    policy = MechanismEvolutionV2(
+        992,
+        registry,
+        (source, target),
+        {"duplicate_resample_limit": 64},
+    )
+    child, receipt = policy._mutate_mechanism(parent)
+    assert child.generation_genes["beta"] == 0.5
+    assert receipt["remapped_gene_names"] == ["beta"]
+    assert policy.verify_receipt((parent,), child, receipt) is True
