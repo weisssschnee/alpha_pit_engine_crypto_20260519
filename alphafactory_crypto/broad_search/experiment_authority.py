@@ -24,6 +24,13 @@ REQUIRED_REAL_EXPERIMENT_ROLES = (
     "validation_role",
     "promotion_gate",
 )
+CONDITIONAL_RUN_NON_FORMAL_COMPONENTS = {
+    "target": "real_policy_upgrade_canary",
+    "optimizer_reward": "real_policy_upgrade_canary",
+    "execution_price": "real_policy_upgrade_canary",
+    "cost": "real_data_mapping_cost_evaluator",
+    "validation_role": "real_policy_upgrade_canary",
+}
 DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH = (
     "config/crypto_search_economic_receipt_v1.json"
 )
@@ -726,6 +733,35 @@ def require_real_experiment_authority(
         economic_receipt = resolve_search_economic_receipt(repo_root)
         if economic_receipt["run_authorized"] is not True:
             blockers.append("economic_receipt:RUN_NOT_AUTHORIZED")
+        else:
+            authority_refs = {
+                role: dict(value)
+                for role, value in resolution["authority_refs"].items()
+            }
+            non_formal_roles = set(resolution["non_formal_roles"])
+            for role, expected_component in (
+                CONDITIONAL_RUN_NON_FORMAL_COMPONENTS.items()
+            ):
+                ref = authority_refs.get(role, {})
+                if (
+                    ref.get("status") == "INACTIVE_AUTHORITY"
+                    and ref.get("component") == expected_component
+                    and ref.get("authority_class") == "NON_FORMAL"
+                    and ref.get("lifecycle") == "EXPERIMENTAL"
+                    and ref.get("active_authority") is False
+                ):
+                    blocker = f"{role}:INACTIVE_AUTHORITY"
+                    blockers = [
+                        value for value in blockers if value != blocker
+                    ]
+                    ref["status"] = "BOUND_NON_FORMAL_EXPERIMENT"
+                    authority_refs[role] = ref
+                    non_formal_roles.add(role)
+            resolution = {
+                **resolution,
+                "authority_refs": authority_refs,
+                "non_formal_roles": sorted(non_formal_roles),
+            }
     if not _meaningful(evidence_to_add):
         blockers.append("evidence_to_add:MISSING")
     if not _meaningful(decision_to_change):

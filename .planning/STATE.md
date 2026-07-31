@@ -403,11 +403,13 @@ authority.
 ADR 0015 records the preflight and ADR 0016 records the active-authority rule,
 economic authority suspension, reuse map, and successor receipt. The current
 target, optimizer-reward, execution-price, cost, and validation bindings remain
-NON_FORMAL but are activated only for the one receipt-bound conditional
+NON_FORMAL and are not promoted to active formal authority. The exact schema-2
+receipt binds those named experimental components only for the one conditional
 development campaign. Portfolio mapping remains formal; that does not promote
 the venue cost assumption. Canonical and direct `run*` entry points verify the
-content-hashed successor receipt and exact user authorization. OOS access,
-promotion, cost tuning, seed changes, and rescue reruns remain forbidden.
+content-hashed successor receipt and exact user authorization. Historical
+entrypoints cannot use this exception. OOS access, promotion, cost tuning, seed
+changes, and rescue reruns remain forbidden.
 
 ## Crypto reward uncertainty V2 source repair
 
