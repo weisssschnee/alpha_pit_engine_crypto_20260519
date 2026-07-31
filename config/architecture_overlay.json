@@ -465,8 +465,8 @@
                       "authority":  {
                                         "path":  "config/crypto_search_economic_receipt_v1.json",
                                         "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "25df2cb95f07078c08018001c4086b16181a2a5a",
-                                        "sha256":  "CCF719DC7809C5C2C3AFD7A230B85090CA310DE989B4713BAA870A6F018AABB1"
+                                        "verified_sha":  "8ac3fe892a5a8c82534b54c7aa2ecd77ec6659d8",
+                                        "sha256":  "EC1E12B505F7820867546690F8B239966F40DD2BB5AC32484E4644EF8B0CCF82"
                                     },
                       "contracts":  [
                                         {
@@ -626,8 +626,8 @@
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
                                          "evidence_ref":  "config/crypto_search_economic_receipt_v1.json",
-                                         "evidence_sha256":  "CCF719DC7809C5C2C3AFD7A230B85090CA310DE989B4713BAA870A6F018AABB1",
-                                         "verified_at_sha":  "25df2cb95f07078c08018001c4086b16181a2a5a"
+                                         "evidence_sha256":  "EC1E12B505F7820867546690F8B239966F40DD2BB5AC32484E4644EF8B0CCF82",
+                                         "verified_at_sha":  "8ac3fe892a5a8c82534b54c7aa2ecd77ec6659d8"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",

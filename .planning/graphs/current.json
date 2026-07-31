@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-31T04:16:28.181067+00:00",
+  "generated_at": "2026-07-31T04:25:12.094336+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -2992,8 +2992,8 @@
       "authority": {
         "path": "config/crypto_search_economic_receipt_v1.json",
         "repo_ref": "replay/crypto-search-engine-v1-4-binance-target-20260729",
-        "sha256": "CCF719DC7809C5C2C3AFD7A230B85090CA310DE989B4713BAA870A6F018AABB1",
-        "verified_sha": "25df2cb95f07078c08018001c4086b16181a2a5a"
+        "sha256": "EC1E12B505F7820867546690F8B239966F40DD2BB5AC32484E4644EF8B0CCF82",
+        "verified_sha": "8ac3fe892a5a8c82534b54c7aa2ecd77ec6659d8"
       },
       "authority_bindings": [
         {
@@ -3358,7 +3358,7 @@
         "alphafactory_crypto_broad_search_experiment_authority_rationale_1",
         "alphafactory_crypto_broad_search_experiment_authority_rationale_112",
         "alphafactory_crypto_broad_search_experiment_authority_rationale_167",
-        "alphafactory_crypto_broad_search_experiment_authority_rationale_620",
+        "alphafactory_crypto_broad_search_experiment_authority_rationale_625",
         "alphafactory_crypto_broad_search_experiment_authority_require_real_experiment_authority",
         "alphafactory_crypto_broad_search_experiment_authority_resolve_real_experiment_authorities",
         "alphafactory_crypto_broad_search_experiment_authority_resolve_search_economic_receipt",
@@ -4889,14 +4889,14 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-07-31T04:16:28.181067+00:00",
+        "checked_at": "2026-07-31T04:25:12.094336+00:00",
         "evidence_ref": "config/crypto_search_economic_receipt_v1.json",
-        "evidence_sha256": "CCF719DC7809C5C2C3AFD7A230B85090CA310DE989B4713BAA870A6F018AABB1",
+        "evidence_sha256": "EC1E12B505F7820867546690F8B239966F40DD2BB5AC32484E4644EF8B0CCF82",
         "level": "STATIC_VERIFIED",
         "notes": [],
         "profile": "crypto-development-research",
         "result": "PASS",
-        "verified_at_sha": "25df2cb95f07078c08018001c4086b16181a2a5a"
+        "verified_at_sha": "8ac3fe892a5a8c82534b54c7aa2ecd77ec6659d8"
       },
       "visible_by_default": true
     },
@@ -7750,7 +7750,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "E66192B5F2A31623545120A6FB1EFEFA54B1BBF1EDCC916B696FA9220B162A33"
+    "sha256": "7F933A53C75E4E414855484606313EBCE634C75728AD8FF7B2377DE7F21A5774"
   },
   "profile_id": null,
   "profiles": [
@@ -7781,13 +7781,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "25df2cb95f07078c08018001c4086b16181a2a5a",
+    "built_at_commit": "8ac3fe892a5a8c82534b54c7aa2ecd77ec6659d8",
     "edge_count": 36943,
     "node_count": 19727,
     "path": ".planning/graphs/graph.json",
-    "sha256": "CEB403E3A5B0011AB5A96975084F5829ED3A6E71AB86D9B467336367991F1E48"
+    "sha256": "8A563D315827B2F6A66C8E0BF27B222BA4CC26513077F6F77CF801B23ADCD2EF"
   },
-  "repo_head": "25df2cb95f07078c08018001c4086b16181a2a5a",
+  "repo_head": "8ac3fe892a5a8c82534b54c7aa2ecd77ec6659d8",
   "schema_version": 1,
   "semantic_authorities": [
     {
