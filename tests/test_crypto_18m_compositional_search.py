@@ -56,16 +56,20 @@ from alphafactory_crypto.broad_search.runner18m import (
 from alphafactory_crypto.broad_search.search_engine_v1 import (
     BehaviorArchive,
     HierarchicalTypedCEMV2,
+    SEEDS,
     TypedEvolutionV2,
     V22_PARAMETERS,
     _ProposalGenerationFailure,
     _balanced_lane_choice,
     _checkpoint_allocation,
     _evaluation_audit_fields,
+    _export_policy,
     _load_checkpoint,
     _metrics_rows,
     _new_campaign_state,
     _payload_sha,
+    _initial_policies,
+    run_frozen_validation_stage,
     _write_checkpoint,
 )
 from alphafactory_crypto.instrument_capability.mapping import CROSS_SECTIONAL_ZERO_NET
@@ -338,6 +342,293 @@ def test_train_orientation_is_consumed_and_persisted_when_receipt_is_bound() -> 
     assert result["cost_bps"] == 7.0
     assert result["primary"]["cost_bps"] == 7.0
     assert result["incremental"]["cost_bps"] == 7.0
+
+
+def test_validation_consumes_frozen_train_orientation_without_refit() -> None:
+    registry = TypedExpressionRegistry(
+        (
+            FieldContract("a", "RATIO", "dimensionless"),
+            FieldContract("b", "RATIO", "dimensionless"),
+        )
+    )
+    primary = Expression(
+        "RatioInteraction",
+        (Expression.raw("a"), Expression.raw("b")),
+    )
+    assurance = registry.validate(primary)
+    spec = CandidateSpec(
+        "candidate-validation",
+        "skeleton",
+        "OI_ACTIVITY_INTERACTION",
+        primary,
+        ablate_expression(primary),
+        1,
+        CROSS_SECTIONAL_ZERO_NET,
+        assurance.raw_fields,
+        ("family_a", "family_b"),
+        assurance.rolling_windows,
+        assurance.depth,
+        "RatioInteraction(Raw,Raw)",
+    )
+    train_start = "2023-07-01T00:00:00Z"
+    train_end = "2023-08-01T00:00:00Z"
+    validation_start = train_end
+    validation_end = "2023-09-01T00:00:00Z"
+    result = evaluate_pair(
+        store=_FakeStore(),
+        registry=registry,
+        candidate=spec,
+        block_start=validation_start,
+        block_end=validation_end,
+        block_role="FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+        economic_receipt={
+            "receipt_sha256": "A" * 64,
+            "train": {"start": train_start, "end_exclusive": train_end},
+            "validation": {
+                "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+                "start": validation_start,
+                "end_exclusive": validation_end,
+                "optimizer_feedback_allowed": False,
+                "policy_memory_write_allowed": False,
+                "candidate_generation_allowed": False,
+            },
+            "direction": {
+                "rule": "TRAIN_FROZEN_SIGN_ORIENTATION",
+                "allowed_values": [-1, 1],
+            },
+            "portfolio": {"mapping_id": CROSS_SECTIONAL_ZERO_NET},
+            "cost": {"cost_bps": 7.0},
+            "execution": {
+                **_FakeStore().target_metadata,
+                "target_cache_identity_sha256": "B" * 64,
+            },
+        },
+        frozen_train_orientation=-1.0,
+        include_validation_paths=True,
+    )
+    assert result["train_orientation"] == -1.0
+    assert result["train_orientation_fitted"] is False
+    assert result["evaluation_partition"] == "validation"
+    assert result["_validation_paths"]["primary_net"].shape == (400,)
+    with pytest.raises(
+        ValueError,
+        match="ECONOMIC_RECEIPT_VALIDATION_REQUIRES_FROZEN_ORIENTATION",
+    ):
+        evaluate_pair(
+            store=_FakeStore(),
+            registry=registry,
+            candidate=spec,
+            block_start=validation_start,
+            block_end=validation_end,
+            block_role="FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+            economic_receipt={
+                "receipt_sha256": "A" * 64,
+                "train": {"start": train_start, "end_exclusive": train_end},
+                "validation": {
+                    "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+                    "start": validation_start,
+                    "end_exclusive": validation_end,
+                    "optimizer_feedback_allowed": False,
+                    "policy_memory_write_allowed": False,
+                    "candidate_generation_allowed": False,
+                },
+                "direction": {
+                    "rule": "TRAIN_FROZEN_SIGN_ORIENTATION",
+                    "allowed_values": [-1, 1],
+                },
+                "portfolio": {"mapping_id": CROSS_SECTIONAL_ZERO_NET},
+                "cost": {"cost_bps": 7.0},
+                "execution": {
+                    **_FakeStore().target_metadata,
+                    "target_cache_identity_sha256": "B" * 64,
+                },
+            },
+        )
+
+
+def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
+    tmp_path: Path,
+) -> None:
+    registry = _role_complete_registry()
+    arms = (
+        "canonical_typed_random",
+        "hierarchical_typed_cem_v2",
+        "typed_evolution_v2",
+    )
+    source_sha = "a" * 40
+    frozen_hash = "b" * 64
+    state = _new_campaign_state(source_sha, frozen_hash, arms=arms, seeds=SEEDS)
+    state["next_checkpoint_index"] = 2
+    policies = _initial_policies(registry, arms=arms, seeds=SEEDS)
+    policy_hash_before = _payload_sha(
+        {
+            key: _export_policy(policy)
+            for key, policy in sorted(policies.items())
+        }
+    )
+    archive = BehaviorArchive()
+    candidate = generate_candidate(
+        registry,
+        skeleton=skeleton_registry()[0],
+        rng=random.Random(19),
+    )
+    train_ledger = []
+    for arm in arms:
+        for ordinal in range(1, 129):
+            local = CandidateSpec(
+                f"{arm}-{ordinal:03d}",
+                candidate.skeleton_id,
+                candidate.mechanism_family,
+                candidate.expression,
+                candidate.control,
+                candidate.horizon_hours,
+                candidate.mapping_id,
+                candidate.raw_fields,
+                candidate.field_families,
+                candidate.rolling_windows,
+                candidate.expression_depth,
+                candidate.operator_path,
+            )
+            train_ledger.append(
+                {
+                    "arm": arm,
+                    "arm_completion_ordinal": ordinal,
+                    "candidate_id": local.candidate_id,
+                    "candidate_spec_json": json.dumps(
+                        local.to_dict(), sort_keys=True
+                    ),
+                    "search_reward": float(ordinal),
+                    "search_reward_authority": SEARCH_REWARD_AUTHORITY,
+                        "search_reward_matched_limiting_component": (
+                            "primary_minus_left_control"
+                        ),
+                        "train_orientation": 1.0,
+                        "train_orientation_fitted": True,
+                        "evaluation_partition": "train",
+                        "economic_receipt_sha256": "R" * 64,
+                }
+            )
+
+    def evaluate_validation(candidate_spec, frozen_orientation):
+        failed = candidate_spec.candidate_id.startswith(
+            "hierarchical_typed_cem_v2"
+        )
+        primary = -0.001 if failed else 0.001
+        matched = -0.0005 if failed else 0.0005
+        return {
+            "candidate_id": candidate_spec.candidate_id,
+            "horizon_hours": candidate_spec.horizon_hours,
+            "train_orientation": frozen_orientation,
+            "train_orientation_fitted": False,
+            "evaluation_partition": "validation",
+            "_validation_paths": {
+                "primary_net": np.full(48, primary),
+                "control_net": {
+                    "left": np.zeros(48),
+                    "right": np.zeros(48),
+                },
+                "matched_component_net": {
+                    "primary_minus_left_control": np.full(48, matched),
+                    "primary_minus_right_control": np.full(48, matched),
+                },
+            },
+        }
+
+    receipt = {
+        "receipt_sha256": "R" * 64,
+        "validation": {
+            "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+            "start": "2025-11-01T00:00:00Z",
+            "end_exclusive": "2026-01-01T00:00:00Z",
+            "optimizer_feedback_allowed": False,
+            "policy_memory_write_allowed": False,
+            "candidate_generation_allowed": False,
+        },
+        "validation_kill_line": {
+            "minimum_evaluated_per_active_arm": 128,
+            "evaluated_per_active_arm": 128,
+            "candidate_selection": (
+                "TOP_TRAIN_SEARCH_REWARD_THEN_COMPLETION_ORDINAL"
+            ),
+            "arm_aggregation": (
+                "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE"
+            ),
+        },
+    }
+    identities = {
+        "raw_cache": {"identity_sha256": "C" * 64},
+        "compiler_identity": {"sha256": "D" * 64},
+    }
+    (
+        restored_state,
+        restored_policies,
+        restored_ledger,
+        restored_archive,
+        restored_metrics,
+        result,
+    ) = run_frozen_validation_stage(
+        runtime_root=tmp_path,
+        store=_FakeStore(),
+        registry=registry,
+        state=state,
+        policies=policies,
+        train_ledger=train_ledger,
+        archive=archive,
+        train_metrics=[],
+        identities=identities,
+        economic_receipt=receipt,
+        evaluation_runner=evaluate_validation,
+    )
+    assert result["resumed"] is False
+    assert result["matched_evaluated_counts"] == {
+        arm: 128 for arm in arms
+    }
+    assert restored_state["arm_states"]["hierarchical_typed_cem_v2"] == "EXITED"
+    assert restored_state["arm_states"]["canonical_typed_random"] == "ACTIVE"
+    assert restored_state["arm_states"]["typed_evolution_v2"] == "ACTIVE"
+    next_allocation = _checkpoint_allocation(
+        2, restored_state["arm_states"]
+    )
+    assert next_allocation["hierarchical_typed_cem_v2"] == 0
+    assert next_allocation["canonical_typed_random"] >= 400
+    assert restored_state["generation_attempts"] == 0
+    assert (
+        restored_state["validation_stage"]["candidate_generation_performed"]
+        is False
+    )
+    assert restored_archive.state_hash() == archive.state_hash()
+    assert _payload_sha(
+        {
+            key: _export_policy(policy)
+            for key, policy in sorted(restored_policies.items())
+        }
+    ) == policy_hash_before
+    assert restored_ledger == train_ledger
+    assert restored_metrics == []
+    assert (
+        tmp_path / "checkpoints" / "checkpoint_validation" / "manifest.json"
+    ).is_file()
+    assert (tmp_path / "validation_candidate_ledger.parquet").is_file()
+    assert (tmp_path / "validation_arm_metrics.parquet").is_file()
+
+    def must_not_reevaluate(*_args):
+        raise AssertionError("restored validation checkpoint must not reevaluate")
+
+    resumed = run_frozen_validation_stage(
+        runtime_root=tmp_path,
+        store=_FakeStore(),
+        registry=registry,
+        state=state,
+        policies=policies,
+        train_ledger=train_ledger,
+        archive=archive,
+        train_metrics=[],
+        identities=identities,
+        economic_receipt=receipt,
+        evaluation_runner=must_not_reevaluate,
+    )
+    assert resumed[-1]["resumed"] is True
+    assert resumed[0]["validation_stage"] == restored_state["validation_stage"]
 
 
 def test_report_only_metrics_are_not_policy_feedback() -> None:

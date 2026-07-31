@@ -393,10 +393,31 @@ def _validate_search_economic_receipt(
         blockers.append("validation_kill_line.runtime_symbol")
     if kill_line.get("equal_matched_evaluated_count") is not True:
         blockers.append("validation_kill_line.equal_matched_evaluated_count")
+    if kill_line.get("minimum_evaluated_per_active_arm") != 128:
+        blockers.append("validation_kill_line.minimum_evaluated_per_active_arm")
+    if kill_line.get("evaluated_per_active_arm") != 128:
+        blockers.append("validation_kill_line.evaluated_per_active_arm")
+    if (
+        kill_line.get("candidate_selection")
+        != "TOP_TRAIN_SEARCH_REWARD_THEN_COMPLETION_ORDINAL"
+    ):
+        blockers.append("validation_kill_line.candidate_selection")
+    if (
+        kill_line.get("arm_aggregation")
+        != "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE"
+    ):
+        blockers.append("validation_kill_line.arm_aggregation")
     if kill_line.get("threshold_tuning_allowed") is not False:
         blockers.append("validation_kill_line.threshold_tuning_allowed")
     if kill_line.get("failure_action") != "STOP_ARM_AND_WRITE_CHECKPOINT":
         blockers.append("validation_kill_line.failure_action")
+    if kill_line.get("failed_arm_allocation") != "EXISTING_ARM_STATE_EXITED":
+        blockers.append("validation_kill_line.failed_arm_allocation")
+    if (
+        kill_line.get("checkpoint_action")
+        != "EXISTING_CAMPAIGN_CHECKPOINT_WITH_VALIDATION_ARTIFACTS"
+    ):
+        blockers.append("validation_kill_line.checkpoint_action")
 
     for field in (
         "oos",

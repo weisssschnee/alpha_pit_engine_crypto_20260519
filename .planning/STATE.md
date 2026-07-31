@@ -244,6 +244,7 @@ SEARCH_ENGINE_PAIR_REWARD_MATCHED_DIAGNOSTIC_ONLY
 SEARCH_ENGINE_LEGACY_STATE_WITHOUT_SEARCH_REWARD_FAIL_CLOSED
 SEARCH_ENGINE_HISTORICAL_POLICY_REWARD_CLAIMS_SUSPENDED
 SEARCH_ENGINE_VALIDATION_KILL_LINE_CONTRACT_BOUND
+SEARCH_ENGINE_FROZEN_VALIDATION_ORCHESTRATION_SOURCE_COMPLETE
 SEARCH_ENGINE_FRESH_ADAPTIVE_CAMPAIGN_NOT_AUTHORIZED
 SEARCH_ENGINE_INACTIVE_AUTHORITY_PREFLIGHT_BLOCKED
 SEARCH_ENGINE_ECONOMIC_RECEIPT_V1_SOURCE_QUALIFIED
@@ -361,7 +362,7 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 - Search Engine V1 now has a source-qualified distinct validation kill-line contract. It is NON_FORMAL, makes no optimizer feedback writes, and is not runtime- or market-verified. The historical report-only block remains spent and is not reused.
 - Search Engine V1 now has one enforced source-level economic-semantics receipt over existing components. Both CLI and direct runner entry points re-resolve it; alternate receipt paths are not accepted, component hashes must match, and `run_authorized` must remain false under this schema. The worker has a receipt-bound Binance target override, the pair evaluator consumes receipt-bound train orientation and cost, and the validation adapter atomically checkpoints failed arms. No fresh candidate ledger has executed those paths and no runtime qualification is claimed.
-- The receipt-bound validation decision/checkpoint adapter is implemented and tested, but no current campaign runner freezes a train policy, performs equal-count validation-only reevaluation, invokes that adapter, and removes a failed arm from subsequent allocation. That fresh campaign orchestration remains the only economic-chain implementation gap; it must be specified with the next campaign budget and must not be faked by feeding train metrics into the validation gate.
+- The receipt-bound fresh validation orchestration is now connected to the existing Search Engine after train completion. It deterministically selects 128 train-frozen candidates per active arm, reuses their persisted orientation and matched limiting sleeve, evaluates only the validation partition, keeps policy/archive/generation state unchanged, writes failed arms to the existing `arm_states`, and atomically publishes/restores `checkpoint_validation`. No market candidate was evaluated and the receipt remains run-inactive; this closes the source orchestration gap without authorizing or claiming a validation result.
 
 ## Source-of-truth order
 

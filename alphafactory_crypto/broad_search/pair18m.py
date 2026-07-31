@@ -627,6 +627,8 @@ def evaluate_pair(
     block_role: str,
     behavior_contract: Mapping[str, Any] | None = None,
     economic_receipt: Mapping[str, Any] | None = None,
+    frozen_train_orientation: float | None = None,
+    include_validation_paths: bool = False,
 ) -> dict[str, Any]:
     timings: dict[str, float] = {}
     process = psutil.Process()
@@ -756,10 +758,13 @@ def evaluate_pair(
     mapping_started = time.perf_counter()
     mapping_contract = DEFAULT_MAPPING_CONTRACTS[candidate.mapping_id]
     train_orientation = 1.0
+    train_orientation_fitted = False
+    evaluation_partition = "legacy"
     evaluation_cost_bps = FIXED_COST_BPS
     if economic_receipt is not None:
         receipt = dict(economic_receipt)
         train = dict(receipt.get("train") or {})
+        validation = dict(receipt.get("validation") or {})
         portfolio = dict(receipt.get("portfolio") or {})
         direction = dict(receipt.get("direction") or {})
         cost_contract = dict(receipt.get("cost") or {})
@@ -791,46 +796,96 @@ def evaluate_pair(
                 raise ValueError(
                     f"ECONOMIC_RECEIPT_TARGET_CONTRACT_CHANGED:{field}"
                 )
-        if (
-            str(block_start) != str(train.get("start"))
-            or str(block_end) != str(train.get("end_exclusive"))
-        ):
-            raise ValueError("ECONOMIC_RECEIPT_TRAIN_BLOCK_CHANGED")
-        positive_mapped = map_portfolio(primary_signal, mapping_contract)
-        negative_mapped = map_portfolio(-primary_signal, mapping_contract)
-        positive_weight = np.asarray(positive_mapped.weights, dtype=float)
-        negative_weight = np.asarray(negative_mapped.weights, dtype=float)
-        positive_turnover, _ = turnover_path(
-            positive_weight,
-            candidate.horizon_hours,
+        is_train = (
+            str(block_start) == str(train.get("start"))
+            and str(block_end) == str(train.get("end_exclusive"))
         )
-        negative_turnover, _ = turnover_path(
-            negative_weight,
-            candidate.horizon_hours,
+        is_validation = (
+            str(block_start) == str(validation.get("start"))
+            and str(block_end) == str(validation.get("end_exclusive"))
+            and str(block_role) == str(validation.get("role"))
         )
         evaluation_cost_bps = float(cost_contract["cost_bps"])
-        positive_cost = positive_turnover * evaluation_cost_bps / 10_000.0
-        negative_cost = negative_turnover * evaluation_cost_bps / 10_000.0
-        active_union = (
-            (np.abs(positive_weight) > ACTIVE_EPSILON)
-            | (np.abs(negative_weight) > ACTIVE_EPSILON)
-        )
-        orientation_mask = (
-            (support.sum(axis=0) >= 3)
-            & ~np.any(active_union & ~np.isfinite(target), axis=0)
-        )
-        if not np.any(orientation_mask):
-            raise ValueError("ECONOMIC_RECEIPT_ORIENTATION_SUPPORT_COLLAPSE")
-        from scripts.crypto_a7reward1_portfolio_reward_model import (
-            select_train_orientation,
-        )
+        if is_train:
+            if frozen_train_orientation is not None:
+                raise ValueError(
+                    "ECONOMIC_RECEIPT_TRAIN_MUST_FIT_ORIENTATION"
+                )
+            positive_mapped = map_portfolio(primary_signal, mapping_contract)
+            negative_mapped = map_portfolio(-primary_signal, mapping_contract)
+            positive_weight = np.asarray(positive_mapped.weights, dtype=float)
+            negative_weight = np.asarray(negative_mapped.weights, dtype=float)
+            positive_turnover, _ = turnover_path(
+                positive_weight,
+                candidate.horizon_hours,
+            )
+            negative_turnover, _ = turnover_path(
+                negative_weight,
+                candidate.horizon_hours,
+            )
+            positive_cost = positive_turnover * evaluation_cost_bps / 10_000.0
+            negative_cost = negative_turnover * evaluation_cost_bps / 10_000.0
+            active_union = (
+                (np.abs(positive_weight) > ACTIVE_EPSILON)
+                | (np.abs(negative_weight) > ACTIVE_EPSILON)
+            )
+            orientation_mask = (
+                (support.sum(axis=0) >= 3)
+                & ~np.any(active_union & ~np.isfinite(target), axis=0)
+            )
+            if not np.any(orientation_mask):
+                raise ValueError(
+                    "ECONOMIC_RECEIPT_ORIENTATION_SUPPORT_COLLAPSE"
+                )
+            from scripts.crypto_a7reward1_portfolio_reward_model import (
+                select_train_orientation,
+            )
 
-        train_orientation = select_train_orientation(
-            (positive_weight, positive_cost, primary_signal, positive_turnover),
-            (negative_weight, negative_cost, -primary_signal, negative_turnover),
-            target,
-            orientation_mask,
-        )
+            train_orientation = select_train_orientation(
+                (
+                    positive_weight,
+                    positive_cost,
+                    primary_signal,
+                    positive_turnover,
+                ),
+                (
+                    negative_weight,
+                    negative_cost,
+                    -primary_signal,
+                    negative_turnover,
+                ),
+                target,
+                orientation_mask,
+            )
+            train_orientation_fitted = True
+            evaluation_partition = "train"
+        elif is_validation:
+            if any(
+                validation.get(field) is not False
+                for field in (
+                    "optimizer_feedback_allowed",
+                    "policy_memory_write_allowed",
+                    "candidate_generation_allowed",
+                )
+            ):
+                raise ValueError(
+                    "ECONOMIC_RECEIPT_VALIDATION_WRITE_BOUNDARY_CHANGED"
+                )
+            allowed = {
+                float(value)
+                for value in direction.get("allowed_values", (-1.0, 1.0))
+            }
+            if (
+                frozen_train_orientation is None
+                or float(frozen_train_orientation) not in allowed
+            ):
+                raise ValueError(
+                    "ECONOMIC_RECEIPT_VALIDATION_REQUIRES_FROZEN_ORIENTATION"
+                )
+            train_orientation = float(frozen_train_orientation)
+            evaluation_partition = "validation"
+        else:
+            raise ValueError("ECONOMIC_RECEIPT_EVALUATION_BLOCK_CHANGED")
         primary_signal = primary_signal * train_orientation
         control_signal = control_signal * train_orientation
         right_control_signal = right_control_signal * train_orientation
@@ -911,6 +966,7 @@ def evaluate_pair(
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
         cost_bps=evaluation_cost_bps,
+        include_internal_objective_paths=include_validation_paths,
     )
     right_control = _series_metrics(
         weights=right_control_weight,
@@ -919,6 +975,7 @@ def evaluate_pair(
         evaluation_mask=evaluation_mask,
         horizon=candidate.horizon_hours,
         cost_bps=evaluation_cost_bps,
+        include_internal_objective_paths=include_validation_paths,
     )
     interaction_left_control = (
         _series_metrics(
@@ -928,6 +985,7 @@ def evaluate_pair(
             evaluation_mask=evaluation_mask,
             horizon=candidate.horizon_hours,
             cost_bps=evaluation_cost_bps,
+            include_internal_objective_paths=include_validation_paths,
         )
         if interaction_left_control_weight is not None
         else None
@@ -1033,6 +1091,33 @@ def evaluate_pair(
                 min(left_feedback["distance"], right_feedback["distance"])
             ),
         }
+    if include_validation_paths and evaluation_partition != "validation":
+        raise ValueError("VALIDATION_PATHS_REQUIRE_VALIDATION_PARTITION")
+    validation_paths: dict[str, Any] | None = None
+    if include_validation_paths:
+        validation_paths = {
+            "primary_net": np.where(
+                np.asarray(primary["_objective_mask"], dtype=bool),
+                np.asarray(primary["_objective_net_path"], dtype=float),
+                np.nan,
+            ),
+            "control_net": {},
+            "matched_component_net": {},
+        }
+        control_sections = {
+            "left": control,
+            "right": right_control,
+        }
+        if interaction_left_control is not None:
+            control_sections["interaction_left"] = interaction_left_control
+        for name, section in control_sections.items():
+            validation_paths["control_net"][name] = np.where(
+                np.asarray(section.pop("_objective_mask"), dtype=bool),
+                np.asarray(section.pop("_objective_net_path"), dtype=float),
+                np.nan,
+            )
+            section.pop("_objective_turnover_path")
+
     objective_components: dict[str, dict[str, np.ndarray]] = {}
     component_metrics: list[tuple[str, dict[str, Any]]]
     if hierarchical_conditional:
@@ -1050,6 +1135,12 @@ def evaluate_pair(
             ("primary_minus_right_control", right_incremental),
         ]
     for name, metrics in component_metrics:
+        if validation_paths is not None and name != "primary":
+            validation_paths["matched_component_net"][name] = np.where(
+                np.asarray(metrics["_objective_mask"], dtype=bool),
+                np.asarray(metrics["_objective_net_path"], dtype=float),
+                np.nan,
+            )
         objective_components[name] = {
             "net": np.asarray(metrics.pop("_objective_net_path"), dtype=float),
             "turnover": np.asarray(
@@ -1168,6 +1259,8 @@ def evaluate_pair(
         "mapping_hash": mapping_contract_sha256(mapping_contract),
         "cost_bps": float(evaluation_cost_bps),
         "train_orientation": float(train_orientation),
+        "train_orientation_fitted": bool(train_orientation_fitted),
+        "evaluation_partition": evaluation_partition,
         "economic_receipt_sha256": (
             str(economic_receipt.get("receipt_sha256"))
             if economic_receipt is not None
@@ -1221,6 +1314,11 @@ def evaluate_pair(
             else None
         ),
         "timings": timings,
+        **(
+            {"_validation_paths": validation_paths}
+            if validation_paths is not None
+            else {}
+        ),
     }
 
 

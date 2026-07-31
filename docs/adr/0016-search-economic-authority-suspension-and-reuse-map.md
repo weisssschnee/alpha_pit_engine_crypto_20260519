@@ -132,10 +132,15 @@ accepted components whose nodes explicitly said `active_authority: false`.
   frozen venue-cost assumption, a distinct validation kill-line and read-only
   holdout now have one content-hashed successor receipt, but the receipt
   remains run-inactive and has no runtime or market evidence.
-- The validation decision and atomic stop-checkpoint adapter is reusable
-  source, not a completed validation campaign stage. A future campaign must
-  separately freeze its train policy, produce equal-count validation-only
-  metrics, invoke the adapter, and remove failed arms from subsequent
-  allocation. Train metrics must never be relabeled as validation evidence.
+- The fresh validation campaign orchestration is now reusable source inside
+  the existing Search Engine. It selects exactly 128 candidates per active arm
+  by frozen train reward, consumes each candidate's persisted train
+  orientation and train-frozen limiting matched sleeve, evaluates only the
+  receipt validation block, aggregates an equal-weight ensemble with a
+  worst-horizon floor, invokes the existing kill-line, writes failed arms to
+  the existing `arm_states`, and atomically publishes/restores
+  `checkpoint_validation`. Policy state, archive state, generation attempts,
+  and holdout access remain unchanged. This is source and synthetic-test
+  evidence only; no validation campaign ran.
 - No second AST, compiler, evaluator, Graph layer, scheduler, or experiment
   database is created.

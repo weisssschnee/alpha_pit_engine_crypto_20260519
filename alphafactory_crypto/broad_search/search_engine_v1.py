@@ -3963,6 +3963,10 @@ def _new_campaign_state(
 def _checkpoint_allocation(
     checkpoint_index: int, arm_states: Mapping[str, str]
 ) -> dict[str, int]:
+    if arm_states.get("canonical_typed_random") == "EXITED":
+        raise RuntimeError(
+            "VALIDATION_STOPPED_CONTROL_ARM_NO_FURTHER_ALLOCATION"
+        )
     if checkpoint_index == 0:
         return {arm: 400 for arm in FIRST_CHECKPOINT_ARMS}
     allocation = {"canonical_typed_random": 400}
@@ -4559,6 +4563,9 @@ def _write_checkpoint(
     archive: BehaviorArchive,
     metrics: Sequence[Mapping[str, Any]],
     identities: Mapping[str, Any],
+    validation_rows: Sequence[Mapping[str, Any]] | None = None,
+    validation_metrics: Sequence[Mapping[str, Any]] | None = None,
+    validation_decisions: Mapping[str, Any] | None = None,
 ) -> Path:
     checkpoints = runtime_root / "checkpoints"
     checkpoints.mkdir(parents=True, exist_ok=True)
@@ -4574,6 +4581,28 @@ def _write_checkpoint(
     _write_parquet(temporary / "candidate_ledger.parquet", ledger)
     _write_parquet(temporary / "behavior_archive.parquet", archive.rows)
     _write_parquet(temporary / "arm_checkpoint_metrics.parquet", metrics)
+    validation_payloads = (
+        validation_rows,
+        validation_metrics,
+        validation_decisions,
+    )
+    if any(value is not None for value in validation_payloads):
+        if any(value is None for value in validation_payloads):
+            raise ValueError(
+                "validation checkpoint artifacts must be written together"
+            )
+        _write_parquet(
+            temporary / "validation_candidate_ledger.parquet",
+            validation_rows or (),
+        )
+        _write_parquet(
+            temporary / "validation_arm_metrics.parquet",
+            validation_metrics or (),
+        )
+        _write_json(
+            temporary / "validation_decisions.json",
+            validation_decisions,
+        )
     files = []
     for path in sorted(temporary.iterdir()):
         files.append(
@@ -4600,6 +4629,17 @@ def _write_checkpoint(
         "archive_state_sha256": archive.state_hash(),
         "state_sha256": _payload_sha(state_payload),
         "receipt_count": sum(bool(row.get("receipt_json")) for row in ledger),
+        "validation_candidate_row_count": (
+            len(validation_rows) if validation_rows is not None else None
+        ),
+        "validation_arm_metric_row_count": (
+            len(validation_metrics) if validation_metrics is not None else None
+        ),
+        "validation_decisions_sha256": (
+            _payload_sha(validation_decisions)
+            if validation_decisions is not None
+            else None
+        ),
         "files": files,
         "atomic_write": "TEMP_DIRECTORY_THEN_OS_REPLACE",
         "restore_verified": False,
@@ -4691,6 +4731,28 @@ def _load_checkpoint(
         raise ValueError("checkpoint policy state restore changed")
     if archive.state_hash() != manifest["archive_state_sha256"]:
         raise ValueError("checkpoint archive state restore changed")
+    if manifest.get("validation_candidate_row_count") is not None:
+        validation_rows = pd.read_parquet(
+            checkpoint_path / "validation_candidate_ledger.parquet"
+        ).to_dict("records")
+        validation_metrics = pd.read_parquet(
+            checkpoint_path / "validation_arm_metrics.parquet"
+        ).to_dict("records")
+        validation_decisions = _read_json(
+            checkpoint_path / "validation_decisions.json"
+        )
+        if len(validation_rows) != int(
+            manifest["validation_candidate_row_count"]
+        ):
+            raise ValueError("checkpoint validation candidate row count changed")
+        if len(validation_metrics) != int(
+            manifest["validation_arm_metric_row_count"]
+        ):
+            raise ValueError("checkpoint validation metric row count changed")
+        if _payload_sha(validation_decisions) != str(
+            manifest["validation_decisions_sha256"]
+        ):
+            raise ValueError("checkpoint validation decision identity changed")
     return state_payload, policies, ledger, archive, metrics
 
 
@@ -4911,6 +4973,9 @@ def _ledger_row(
         "search_reward_limiting_component": evaluation.get(
             "search_reward_feedback", {}
         ).get("limiting_component"),
+        "search_reward_matched_limiting_component": evaluation.get(
+            "search_reward_feedback", {}
+        ).get("matched_limiting_component"),
         "shared_stationary_bootstrap_path_sha256": evaluation.get(
             "search_reward_feedback", {}
         ).get("shared_stationary_bootstrap_path_sha256"),
@@ -4941,6 +5006,16 @@ def _ledger_row(
         "train_mean_one_way_turnover": evaluation.get(
             "search_reward_feedback", {}
         ).get("mean_one_way_turnover"),
+        "train_orientation": float(evaluation.get("train_orientation", 1.0)),
+        "train_orientation_fitted": bool(
+            evaluation.get("train_orientation_fitted", False)
+        ),
+        "evaluation_partition": str(
+            evaluation.get("evaluation_partition", "legacy")
+        ),
+        "economic_receipt_sha256": evaluation.get(
+            "economic_receipt_sha256"
+        ),
         "pair_reward": float(evaluation["pair_reward"]),
         "matched_positive": bool(evaluation["matched_positive"]),
         "gross_mean": incremental.get("gross_mean"),
@@ -5997,6 +6072,14 @@ def _final_manifest(
     ]
     if (runtime_root / "constructibility_canary.json").is_file():
         paths.append(runtime_root / "constructibility_canary.json")
+    for name in (
+        "validation_candidate_ledger.parquet",
+        "validation_arm_metrics.parquet",
+        "validation_decisions.json",
+    ):
+        path = runtime_root / name
+        if path.is_file():
+            paths.append(path)
     for checkpoint in sorted((runtime_root / "checkpoints").glob("checkpoint_*")):
         paths.extend(sorted(checkpoint.iterdir()))
     artifacts = [
@@ -6338,6 +6421,585 @@ def apply_search_validation_kill_line(
     return result
 
 
+def _policy_state_sha256(policies: Mapping[str, PolicyType]) -> str:
+    return _payload_sha(
+        {
+            key: _export_policy(policy)
+            for key, policy in sorted(policies.items())
+        }
+    )
+
+
+def _equal_weight_path(paths: Sequence[np.ndarray]) -> np.ndarray:
+    if not paths:
+        raise ValueError("validation ensemble has no paths")
+    arrays = [np.asarray(path, dtype=float) for path in paths]
+    shapes = {array.shape for array in arrays}
+    if len(shapes) != 1:
+        raise ValueError("validation ensemble path shapes differ")
+    stack = np.stack(arrays, axis=0)
+    finite = np.isfinite(stack)
+    counts = finite.sum(axis=0)
+    sums = np.where(finite, stack, 0.0).sum(axis=0)
+    return np.divide(
+        sums,
+        counts,
+        out=np.full(sums.shape, np.nan, dtype=float),
+        where=counts > 0,
+    )
+
+
+def _validation_path_summary(
+    values: np.ndarray,
+    *,
+    horizon: int,
+) -> tuple[float, float]:
+    from scripts.crypto_a7reward1_portfolio_reward_model import (
+        nonoverlap_metric,
+        sortino,
+    )
+
+    path = np.asarray(values, dtype=float)
+    finite = path[np.isfinite(path)]
+    net_mean = float(np.mean(finite)) if finite.size else float("nan")
+    periods_per_year = 24.0 * 365.0 / max(1, int(horizon))
+    _, floor = nonoverlap_metric(
+        path,
+        int(horizon),
+        lambda local: sortino(local, periods_per_year),
+    )
+    return net_mean, float(floor)
+
+
+def _validation_arm_metrics(
+    arm: str,
+    records: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    by_horizon: dict[int, list[Mapping[str, Any]]] = defaultdict(list)
+    for record in records:
+        by_horizon[int(record["horizon_hours"])].append(record)
+    if not by_horizon:
+        raise ValueError(f"validation arm has no evaluated candidates: {arm}")
+    horizon_rows: list[dict[str, Any]] = []
+    for horizon, local in sorted(by_horizon.items()):
+        primary_path = _equal_weight_path(
+            [
+                np.asarray(row["paths"]["primary_net"], dtype=float)
+                for row in local
+            ]
+        )
+        matched_path = _equal_weight_path(
+            [
+                np.asarray(
+                    row["paths"]["matched_component_net"][
+                        str(row["matched_component"])
+                    ],
+                    dtype=float,
+                )
+                for row in local
+            ]
+        )
+        control_names = sorted(
+            {
+                str(name)
+                for row in local
+                for name in row["paths"]["control_net"]
+            }
+        )
+        if not control_names:
+            raise ValueError(f"validation controls missing for arm: {arm}")
+        control_means: dict[str, float] = {}
+        for name in control_names:
+            if any(name not in row["paths"]["control_net"] for row in local):
+                raise ValueError(
+                    f"validation control path inconsistent for arm: {arm}:{name}"
+                )
+            control_path = _equal_weight_path(
+                [
+                    np.asarray(row["paths"]["control_net"][name], dtype=float)
+                    for row in local
+                ]
+            )
+            finite_control = control_path[np.isfinite(control_path)]
+            control_means[name] = (
+                float(np.mean(finite_control))
+                if finite_control.size
+                else float("nan")
+            )
+        primary_mean, floor_sortino = _validation_path_summary(
+            primary_path,
+            horizon=horizon,
+        )
+        finite_matched = matched_path[np.isfinite(matched_path)]
+        matched_mean = (
+            float(np.mean(finite_matched))
+            if finite_matched.size
+            else float("nan")
+        )
+        finite_control_means = [
+            value for value in control_means.values() if math.isfinite(value)
+        ]
+        max_control_mean = (
+            max(finite_control_means)
+            if finite_control_means
+            else float("nan")
+        )
+        horizon_rows.append(
+            {
+                "horizon_hours": int(horizon),
+                "candidate_count": len(local),
+                "validation_net_mean": primary_mean,
+                "validation_nonoverlap_floor_sortino": floor_sortino,
+                "validation_matched_increment": matched_mean,
+                "validation_max_control_net_mean": max_control_mean,
+                "validation_control_not_dominant": bool(
+                    math.isfinite(primary_mean)
+                    and math.isfinite(max_control_mean)
+                    and primary_mean > max_control_mean
+                ),
+                "control_net_means_json": json.dumps(
+                    control_means,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ),
+            }
+        )
+    return {
+        "arm": str(arm),
+        "matched_evaluated_count": len(records),
+        "validation_net_mean": min(
+            float(row["validation_net_mean"]) for row in horizon_rows
+        ),
+        "validation_nonoverlap_floor_sortino": min(
+            float(row["validation_nonoverlap_floor_sortino"])
+            for row in horizon_rows
+        ),
+        "validation_matched_increment": min(
+            float(row["validation_matched_increment"])
+            for row in horizon_rows
+        ),
+        "validation_control_not_dominant": all(
+            bool(row["validation_control_not_dominant"])
+            for row in horizon_rows
+        ),
+        "horizon_metrics_json": json.dumps(
+            horizon_rows,
+            sort_keys=True,
+            separators=(",", ":"),
+        ),
+        "aggregation": (
+            "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE"
+        ),
+    }
+
+
+def _write_validation_top_level_artifacts(
+    *,
+    runtime_root: Path,
+    validation_rows: Sequence[Mapping[str, Any]],
+    validation_metrics: Sequence[Mapping[str, Any]],
+    validation_decisions: Mapping[str, Any],
+) -> None:
+    _write_parquet(
+        runtime_root / "validation_candidate_ledger.parquet",
+        validation_rows,
+    )
+    _write_parquet(
+        runtime_root / "validation_arm_metrics.parquet",
+        validation_metrics,
+    )
+    _write_json(
+        runtime_root / "validation_decisions.json",
+        validation_decisions,
+    )
+
+
+def run_frozen_validation_stage(
+    *,
+    runtime_root: Path,
+    store: RawPanelStore,
+    registry: TypedExpressionRegistry,
+    state: Mapping[str, Any],
+    policies: Mapping[str, PolicyType],
+    train_ledger: Sequence[Mapping[str, Any]],
+    archive: BehaviorArchive,
+    train_metrics: Sequence[Mapping[str, Any]],
+    identities: Mapping[str, Any],
+    economic_receipt: Mapping[str, Any],
+    evaluation_runner: (
+        Callable[[CandidateSpec, float], Mapping[str, Any]] | None
+    ) = None,
+) -> tuple[
+    dict[str, Any],
+    dict[str, PolicyType],
+    list[dict[str, Any]],
+    BehaviorArchive,
+    list[dict[str, Any]],
+    dict[str, Any],
+]:
+    """Run or exactly restore the no-feedback validation stage.
+
+    Candidate selection is frozen from train-only rows.  Validation may
+    evaluate those candidates but cannot propose, update a policy/archive, or
+    read the holdout.  Failed arms are written back to the existing arm state,
+    so the existing checkpoint allocation removes them on continuation.
+    """
+
+    runtime_root = Path(runtime_root)
+    checkpoint_path = runtime_root / "checkpoints" / "checkpoint_validation"
+    expected_source_sha = str(state["source_sha"])
+    expected_frozen_hash = str(state["frozen_contract_sha256"])
+    incoming_policy_hash = _policy_state_sha256(policies)
+    incoming_archive_hash = archive.state_hash()
+    incoming_ledger_hash = _payload_sha(
+        [str(row["candidate_id"]) for row in train_ledger]
+    )
+    if checkpoint_path.exists():
+        manifest = _read_json(checkpoint_path / "manifest.json")
+        if incoming_policy_hash != str(manifest["policy_state_sha256"]):
+            raise ValueError("validation resume policy state changed")
+        if incoming_archive_hash != str(manifest["archive_state_sha256"]):
+            raise ValueError("validation resume archive state changed")
+        if incoming_ledger_hash != str(manifest["completed_identity_sha256"]):
+            raise ValueError("validation resume train ledger changed")
+        restored = _load_checkpoint(
+            checkpoint_path=checkpoint_path,
+            registry=registry,
+            expected_source_sha=expected_source_sha,
+            expected_frozen_hash=expected_frozen_hash,
+            expected_identities=identities,
+        )
+        (
+            restored_state,
+            restored_policies,
+            restored_ledger,
+            restored_archive,
+            restored_metrics,
+        ) = restored
+        if _payload_sha(list(train_metrics)) != _payload_sha(restored_metrics):
+            raise ValueError("validation resume train metrics changed")
+        validation_rows = pd.read_parquet(
+            checkpoint_path / "validation_candidate_ledger.parquet"
+        ).to_dict("records")
+        validation_metrics = pd.read_parquet(
+            checkpoint_path / "validation_arm_metrics.parquet"
+        ).to_dict("records")
+        validation_decisions = _read_json(
+            checkpoint_path / "validation_decisions.json"
+        )
+        _write_validation_top_level_artifacts(
+            runtime_root=runtime_root,
+            validation_rows=validation_rows,
+            validation_metrics=validation_metrics,
+            validation_decisions=validation_decisions,
+        )
+        return (
+            restored_state,
+            restored_policies,
+            restored_ledger,
+            restored_archive,
+            restored_metrics,
+            {**validation_decisions, "resumed": True},
+        )
+
+    validation = dict(economic_receipt.get("validation") or {})
+    kill_line = dict(economic_receipt.get("validation_kill_line") or {})
+    if any(
+        validation.get(field) is not False
+        for field in (
+            "optimizer_feedback_allowed",
+            "policy_memory_write_allowed",
+            "candidate_generation_allowed",
+        )
+    ):
+        raise RuntimeError("ECONOMIC_RECEIPT_VALIDATION_WRITE_BOUNDARY_CHANGED")
+    evaluated_per_arm = int(kill_line.get("evaluated_per_active_arm", 0))
+    minimum = int(kill_line.get("minimum_evaluated_per_active_arm", 0))
+    if evaluated_per_arm < minimum or minimum <= 0:
+        raise RuntimeError("VALIDATION_EVALUATED_COUNT_CONTRACT_INVALID")
+    if (
+        kill_line.get("candidate_selection")
+        != "TOP_TRAIN_SEARCH_REWARD_THEN_COMPLETION_ORDINAL"
+    ):
+        raise RuntimeError("VALIDATION_CANDIDATE_SELECTION_CHANGED")
+    if (
+        kill_line.get("arm_aggregation")
+        != "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE"
+    ):
+        raise RuntimeError("VALIDATION_ARM_AGGREGATION_CHANGED")
+
+    mutable_state = dict(state)
+    mutable_state["arm_states"] = dict(state.get("arm_states", {}))
+    by_arm: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    for row in train_ledger:
+        by_arm[str(row["arm"])].append(row)
+    if "canonical_typed_random" in by_arm:
+        mutable_state["arm_states"].setdefault(
+            "canonical_typed_random",
+            "ACTIVE",
+        )
+    active_arms = sorted(
+        arm
+        for arm, arm_state in mutable_state["arm_states"].items()
+        if str(arm_state) != "EXITED"
+    )
+    if not active_arms:
+        raise RuntimeError("VALIDATION_HAS_NO_ACTIVE_ARMS")
+    selected: list[tuple[str, int, Mapping[str, Any], CandidateSpec]] = []
+    expected_receipt_hash = str(
+        economic_receipt.get("receipt_sha256") or ""
+    )
+    for arm in active_arms:
+        candidates = sorted(
+            by_arm.get(arm, ()),
+            key=lambda row: (
+                -float(row["search_reward"]),
+                int(row["arm_completion_ordinal"]),
+                str(row["candidate_id"]),
+            ),
+        )
+        if len(candidates) < evaluated_per_arm:
+            raise RuntimeError(
+                f"VALIDATION_TRAIN_CANDIDATE_COUNT_TOO_SMALL:{arm}"
+            )
+        for rank, row in enumerate(candidates[:evaluated_per_arm], start=1):
+            if row.get("search_reward_authority") != SEARCH_REWARD_AUTHORITY:
+                raise RuntimeError(
+                    f"VALIDATION_TRAIN_REWARD_AUTHORITY_CHANGED:{arm}"
+                )
+            if str(row.get("economic_receipt_sha256") or "") != (
+                expected_receipt_hash
+            ):
+                raise RuntimeError(
+                    f"VALIDATION_TRAIN_RECEIPT_IDENTITY_CHANGED:{arm}"
+                )
+            if (
+                row.get("train_orientation_fitted") is not True
+                or str(row.get("evaluation_partition") or "") != "train"
+            ):
+                raise RuntimeError(
+                    f"VALIDATION_TRAIN_ORIENTATION_NOT_FROZEN:{arm}"
+                )
+            candidate = CandidateSpec.from_dict(
+                json.loads(str(row["candidate_spec_json"]))
+            )
+            if candidate.candidate_id != str(row["candidate_id"]):
+                raise RuntimeError(
+                    f"VALIDATION_CANDIDATE_IDENTITY_CHANGED:{arm}"
+                )
+            selected.append((arm, rank, row, candidate))
+
+    if evaluation_runner is None:
+        def evaluate_selected(
+            candidate: CandidateSpec,
+            orientation: float,
+        ) -> Mapping[str, Any]:
+            return evaluate_pair(
+                store=store,
+                registry=registry,
+                candidate=candidate,
+                block_start=str(validation["start"]),
+                block_end=str(validation["end_exclusive"]),
+                block_role=str(validation["role"]),
+                behavior_contract=None,
+                economic_receipt=economic_receipt,
+                frozen_train_orientation=float(orientation),
+                include_validation_paths=True,
+            )
+    else:
+        evaluate_selected = evaluation_runner
+
+    policy_hash_before = _policy_state_sha256(policies)
+    archive_hash_before = archive.state_hash()
+    internal_records: list[dict[str, Any]] = []
+    validation_rows: list[dict[str, Any]] = []
+    for arm, rank, train_row, candidate in selected:
+        orientation = float(train_row["train_orientation"])
+        evaluation = dict(evaluate_selected(candidate, orientation))
+        if evaluation.get("candidate_id") != candidate.candidate_id:
+            raise RuntimeError("VALIDATION_EVALUATION_CANDIDATE_CHANGED")
+        if evaluation.get("evaluation_partition") != "validation":
+            raise RuntimeError("VALIDATION_EVALUATION_PARTITION_CHANGED")
+        if evaluation.get("train_orientation_fitted") is not False:
+            raise RuntimeError("VALIDATION_REFIT_TRAIN_ORIENTATION")
+        if float(evaluation.get("train_orientation", float("nan"))) != orientation:
+            raise RuntimeError("VALIDATION_FROZEN_ORIENTATION_CHANGED")
+        paths = evaluation.get("_validation_paths")
+        if not isinstance(paths, Mapping):
+            raise RuntimeError("VALIDATION_PATHS_MISSING")
+        matched_component = str(
+            train_row.get("search_reward_matched_limiting_component") or ""
+        )
+        matched_paths = paths.get("matched_component_net")
+        if (
+            not isinstance(matched_paths, Mapping)
+            or matched_component not in matched_paths
+        ):
+            raise RuntimeError(
+                "VALIDATION_FROZEN_MATCHED_COMPONENT_MISSING"
+            )
+        internal = {
+            "arm": arm,
+            "selection_rank": int(rank),
+            "candidate_id": candidate.candidate_id,
+            "horizon_hours": int(candidate.horizon_hours),
+            "matched_component": matched_component,
+            "paths": paths,
+        }
+        internal_records.append(internal)
+        primary_mean, floor_sortino = _validation_path_summary(
+            np.asarray(paths["primary_net"], dtype=float),
+            horizon=int(candidate.horizon_hours),
+        )
+        matched_path = np.asarray(
+            matched_paths[matched_component],
+            dtype=float,
+        )
+        finite_matched = matched_path[np.isfinite(matched_path)]
+        control_means = {
+            str(name): (
+                float(np.mean(finite))
+                if (
+                    finite := np.asarray(values, dtype=float)[
+                        np.isfinite(np.asarray(values, dtype=float))
+                    ]
+                ).size
+                else float("nan")
+            )
+            for name, values in dict(paths.get("control_net") or {}).items()
+        }
+        validation_rows.append(
+            {
+                "arm": arm,
+                "selection_rank": int(rank),
+                "candidate_id": candidate.candidate_id,
+                "horizon_hours": int(candidate.horizon_hours),
+                "train_search_reward": float(train_row["search_reward"]),
+                "frozen_train_orientation": orientation,
+                "frozen_matched_component": matched_component,
+                "validation_primary_net_mean": primary_mean,
+                "validation_primary_nonoverlap_floor_sortino": floor_sortino,
+                "validation_matched_increment": (
+                    float(np.mean(finite_matched))
+                    if finite_matched.size
+                    else float("nan")
+                ),
+                "validation_control_net_means_json": json.dumps(
+                    control_means,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ),
+                "candidate_generation_performed": False,
+                "optimizer_feedback_written": False,
+                "policy_memory_written": False,
+                "holdout_read": False,
+            }
+        )
+
+    validation_metrics = [
+        _validation_arm_metrics(
+            arm,
+            [row for row in internal_records if row["arm"] == arm],
+        )
+        for arm in active_arms
+    ]
+    counts = {
+        str(row["arm"]): int(row["matched_evaluated_count"])
+        for row in validation_metrics
+    }
+    decisions: dict[str, Any] = {}
+    for metric in validation_metrics:
+        arm = str(metric["arm"])
+        before = str(mutable_state["arm_states"][arm])
+        decision = apply_search_validation_kill_line(
+            runtime_root=runtime_root,
+            arm_id=arm,
+            metrics=metric,
+            matched_evaluated_counts=counts,
+            economic_receipt=economic_receipt,
+        )
+        after = before if bool(decision["passed"]) else "EXITED"
+        mutable_state["arm_states"][arm] = after
+        decisions[arm] = {
+            **decision,
+            "state_before": before,
+            "state_after": after,
+        }
+
+    policy_hash_after = _policy_state_sha256(policies)
+    archive_hash_after = archive.state_hash()
+    if policy_hash_after != policy_hash_before:
+        raise RuntimeError("VALIDATION_MUTATED_POLICY_STATE")
+    if archive_hash_after != archive_hash_before:
+        raise RuntimeError("VALIDATION_MUTATED_ARCHIVE_STATE")
+    validation_decisions = {
+        "schema_version": 1,
+        "status": "VALIDATION_STAGE_COMPLETE",
+        "matched_evaluated_counts": counts,
+        "candidate_selection": kill_line["candidate_selection"],
+        "arm_aggregation": kill_line["arm_aggregation"],
+        "arm_decisions": decisions,
+        "arm_state_after": dict(sorted(mutable_state["arm_states"].items())),
+        "policy_state_sha256_before": policy_hash_before,
+        "policy_state_sha256_after": policy_hash_after,
+        "archive_state_sha256_before": archive_hash_before,
+        "archive_state_sha256_after": archive_hash_after,
+        "candidate_generation_performed": False,
+        "optimizer_feedback_written": False,
+        "policy_memory_written": False,
+        "holdout_read": False,
+        "threshold_tuning_performed": False,
+        "economic_receipt_sha256": expected_receipt_hash,
+    }
+    mutable_state["validation_stage"] = {
+        **validation_decisions,
+        "validation_candidate_ledger_sha256": _payload_sha(validation_rows),
+        "validation_arm_metrics_sha256": _payload_sha(validation_metrics),
+    }
+    checkpoint_path = _write_checkpoint(
+        runtime_root=runtime_root,
+        label="checkpoint_validation",
+        checkpoint_index=int(mutable_state["next_checkpoint_index"]),
+        registry=registry,
+        state=mutable_state,
+        policies=policies,
+        ledger=train_ledger,
+        archive=archive,
+        metrics=train_metrics,
+        identities=identities,
+        validation_rows=validation_rows,
+        validation_metrics=validation_metrics,
+        validation_decisions=validation_decisions,
+    )
+    (
+        restored_state,
+        restored_policies,
+        restored_ledger,
+        restored_archive,
+        restored_metrics,
+    ) = _load_checkpoint(
+        checkpoint_path=checkpoint_path,
+        registry=registry,
+        expected_source_sha=expected_source_sha,
+        expected_frozen_hash=expected_frozen_hash,
+        expected_identities=identities,
+    )
+    _write_validation_top_level_artifacts(
+        runtime_root=runtime_root,
+        validation_rows=validation_rows,
+        validation_metrics=validation_metrics,
+        validation_decisions=validation_decisions,
+    )
+    return (
+        restored_state,
+        restored_policies,
+        restored_ledger,
+        restored_archive,
+        restored_metrics,
+        {**validation_decisions, "resumed": False},
+    )
+
+
 def run_engine(
     repo_root: Path,
     *,
@@ -6605,6 +7267,11 @@ def run_engine(
         existing_checkpoints = sorted(
             (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
         )
+        validation_checkpoint = (
+            runtime_root / "checkpoints" / "checkpoint_validation"
+        )
+        if validation_checkpoint.is_dir():
+            existing_checkpoints.append(validation_checkpoint)
     else:
         runtime_root.mkdir(parents=True)
         _write_json(runtime_root / "frozen_contract.json", frozen)
@@ -7341,6 +8008,38 @@ def run_engine(
         raise AssertionError(
             f"Search Engine V1 ended without exactly {strict_target:,} strict candidates"
         )
+    from alphafactory_crypto.broad_search.replay_v14_binance_target import (
+        BinanceTargetStore,
+    )
+
+    validation_execution = dict(economic_receipt["execution"])
+    validation_target_root = (
+        repo_root / str(validation_execution["target_cache_path"])
+    )
+    _validate_receipt_target_store_binding(
+        store,
+        validation_target_root,
+        validation_execution,
+    )
+    (
+        state,
+        policies,
+        ledger,
+        archive,
+        metrics,
+        validation_result,
+    ) = run_frozen_validation_stage(
+        runtime_root=runtime_root,
+        store=BinanceTargetStore(store, validation_target_root),
+        registry=registry,
+        state=state,
+        policies=policies,
+        train_ledger=ledger,
+        archive=archive,
+        train_metrics=metrics,
+        identities=identities,
+        economic_receipt=economic_receipt,
+    )
     state["wall_elapsed_seconds"] = active_elapsed()
     decision = (
         _v13_final_decision(
@@ -7398,6 +8097,14 @@ def run_engine(
             runtime_root=runtime_root,
         )
     )
+    decision["validation_stage"] = {
+        key: value
+        for key, value in validation_result.items()
+        if key != "arm_decisions"
+    }
+    decision["validation_arm_decisions"] = validation_result[
+        "arm_decisions"
+    ]
     _write_json(runtime_root / "final_decision.json", decision)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
@@ -7482,6 +8189,8 @@ def run_engine(
         "generation_attempts": int(state["generation_attempts"]),
         "checkpoint_count": checkpoint_count,
         "behavior_family_count": len(archive.champion_by_family),
+        "validation_status": validation_result["status"],
+        "validation_resumed": bool(validation_result["resumed"]),
         "artifact_bundle_sha256": manifest["artifact_bundle_sha256"],
         "sealed_reads": 0,
     }
@@ -10699,5 +11408,6 @@ __all__ = [
     "check_v12",
     "check_v13",
     "check_engine",
+    "run_frozen_validation_stage",
     "run_engine",
 ]

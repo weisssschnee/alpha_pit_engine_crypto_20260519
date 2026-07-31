@@ -137,6 +137,13 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
     assert result["validation_kill_line"]["runtime_symbol"].endswith(
         "apply_search_validation_kill_line"
     )
+    assert result["validation_kill_line"]["evaluated_per_active_arm"] == 128
+    assert result["validation_kill_line"]["candidate_selection"] == (
+        "TOP_TRAIN_SEARCH_REWARD_THEN_COMPLETION_ORDINAL"
+    )
+    assert result["validation_kill_line"]["failed_arm_allocation"] == (
+        "EXISTING_ARM_STATE_EXITED"
+    )
     assert result["holdout"]["read_allowed"] is False
     assert result["run_authorized"] is False
     assert len(result["receipt_sha256"]) == 64

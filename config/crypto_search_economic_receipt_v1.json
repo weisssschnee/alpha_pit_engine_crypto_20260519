@@ -107,6 +107,9 @@
     "evaluation_order": "AFTER_FROZEN_TRAIN_POLICY_BEFORE_ANY_ADDITIONAL_BUDGET",
     "equal_matched_evaluated_count": true,
     "minimum_evaluated_per_active_arm": 128,
+    "evaluated_per_active_arm": 128,
+    "candidate_selection": "TOP_TRAIN_SEARCH_REWARD_THEN_COMPLETION_ORDINAL",
+    "arm_aggregation": "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE",
     "required_conditions": [
       "validation_net_mean_positive",
       "validation_nonoverlap_floor_sortino_positive",
@@ -114,6 +117,8 @@
       "validation_control_not_dominant"
     ],
     "failure_action": "STOP_ARM_AND_WRITE_CHECKPOINT",
+    "failed_arm_allocation": "EXISTING_ARM_STATE_EXITED",
+    "checkpoint_action": "EXISTING_CAMPAIGN_CHECKPOINT_WITH_VALIDATION_ARTIFACTS",
     "threshold_tuning_allowed": false
   },
   "fresh_state": {
@@ -152,7 +157,7 @@
     },
     "validation_kill_line": {
       "path": "alphafactory_crypto/broad_search/experiment_authority.py",
-      "sha256": "3CA3C6DF005F1FDB12207E0E36FD016FC0A40B25673D56AF5998E3391A107900"
+      "sha256": "D4C77C2EDAD3D96866E13DEF97D9EC8A4A143A53A03CE01BC3F6C2FC6D748EF3"
     },
     "portfolio_mapping_and_cost": {
       "path": "alphafactory_crypto/instrument_capability/mapping.py",
@@ -164,7 +169,7 @@
     },
     "optimizer_reward_and_matched_attribution": {
       "path": "alphafactory_crypto/broad_search/pair18m.py",
-      "sha256": "34ECA12BDDE5048128EC488A03E085C51E42E25E7952FD73FC67AE30B0F490A1"
+      "sha256": "8918255C7EF939801B336F9FABE030FCC271F0F6BA69CBAB525E2AF95389FCCC"
     },
     "target_contract": {
       "path": "config/crypto_search_engine_v1_4_binance_target_replay.json",
@@ -172,7 +177,7 @@
     },
     "runtime_binding": {
       "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-      "sha256": "478AA349755FE8DF42B210D89217F1C24B0B0ED4B5C578129F2C782C0B3DA463"
+      "sha256": "F5B4B56045C9FEF061EDB138F305508F4D19E6F06F990D8A824E7F7AF07975F0"
     }
   }
 }
