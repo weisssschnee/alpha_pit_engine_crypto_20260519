@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-31T13:20:32.986188+00:00",
+  "generated_at": "2026-07-31T14:04:16.721800+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -2994,8 +2994,8 @@
       "authority": {
         "path": "config/crypto_search_economic_receipt_v4.json",
         "repo_ref": "replay/crypto-search-engine-v1-4-binance-target-20260729",
-        "sha256": "DB2D59BF28056C1A7F121F5CF775AB8056FD4B0EE9AD55CA9843DF6112B4BF32",
-        "verified_sha": "df6071cec75d2a787fe587074980dea929a795c7"
+        "sha256": "6360CC94A229A6825E05A0904D18CCDB54E0F547DCA03633C090739C35048854",
+        "verified_sha": "1e29eb6c4ad1e2a032d27f62ff702e694e358af8"
       },
       "authority_bindings": [
         {
@@ -3070,9 +3070,18 @@
           "enforced_by": "broad_search.expression.materialize_expression, broad_search.pair18m.evaluate_pair, broad_search.experiment_authority.resolve_search_economic_receipt, and broad_search.search_engine_v1 run-economic-v4/check-economic-v4",
           "evidence_ref": "runtime/crypto_search_economic_v4_20260731/final_decision.json",
           "id": "crypto_search_economic_v4_consumed_outcome",
-          "rule": "The one-run V4 receipt is consumed and run_authorized is false. Its independent fresh-state producer at 94c79d0a8e559b7223fa1eaddb2d07ca76c1e628 completed restore-verified checkpoint_000 with 2,000 strict candidates from 2,298 attempts and 1,962 behavior families. The transformed finite-support hard gates and candidate-specific rolling-feature warm-up repair passed. During equal-count validation, canonical typed-random candidate 88D6330B8CC329460CBFA97E810FCE4109A5159A796FA4D4E9F2C8D00F0AD88D at 1h and selection rank 13 remained behavior-distinct on train but mapped to exactly equal primary and control validation weights, producing CONTROL_BEHAVIOR_EQUALS_PRIMARY. The runner wrote restore-verified checkpoint_validation_blocked and terminated normally. The remaining defect is orchestration scope: this legitimate candidate-local validation degeneration is escalated to a campaign-wide validation block instead of persisted arm-local failure evidence. No continuation, rescue, reseed, tuning, sealed read, arm qualification, Alpha claim, or next Arena occurred. This is an engine-validation result, not an Alpha-space, field, or carrier-information negative. Another market run requires a separate authorization and cannot import V1-V4 state.",
+          "rule": "The one-run V4 receipt is consumed and run_authorized is false. Its independent fresh-state producer at 94c79d0a8e559b7223fa1eaddb2d07ca76c1e628 completed restore-verified checkpoint_000 with 2,000 strict candidates from 2,298 attempts and 1,962 behavior families. The transformed finite-support hard gates and candidate-specific rolling-feature warm-up repair passed. During equal-count validation, canonical typed-random candidate 88D6330B8CC329460CBFA97E810FCE4109A5159A796FA4D4E9F2C8D00F0AD88D at 1h and selection rank 13 remained behavior-distinct on train but mapped to exactly equal primary and control validation weights, producing CONTROL_BEHAVIOR_EQUALS_PRIMARY. The runner wrote restore-verified checkpoint_validation_blocked and terminated normally. That historical campaign-wide orchestration defect is now repaired at source only; V4 was not resumed or replayed. No continuation, rescue, reseed, tuning, sealed read, arm qualification, Alpha claim, or next Arena occurred. This is an engine-validation result, not an Alpha-space, field, or carrier-information negative. Another market run requires a separate authorization and cannot import V1-V4 state.",
           "severity": "HARD",
           "type": "AUTHORITY"
+        },
+        {
+          "bypass_forbidden": true,
+          "enforced_by": "broad_search.search_engine_v1.run_frozen_validation_stage/check_engine and broad_search.experiment_authority.resolve_search_economic_receipt",
+          "evidence_ref": ".planning/STATE.md",
+          "id": "crypto_search_validation_arm_local_failure_repair",
+          "rule": "The retained validation orchestrator records known candidate-local constructibility degenerations, deterministically backfills by frozen train rank within the same arm and horizon, exits only an arm whose frozen pool cannot fill the receipt-bound equal matched count, and prevents any other arm from qualifying when the canonical typed-random control fails constructibility or its economic kill-line. Attempted, evaluated, and failure counts plus exact failure identities are checkpointed and restored without reevaluation. Policy, archive, candidate generation, validation-reward selection, holdout access, and unexpected-error suppression remain forbidden. Verification is source/synthetic only with 342 passing tests and one pre-existing NumPy warning; no market candidate was generated, replayed, or evaluated, every V1-V4 receipt remains consumed, and no run authority or research qualification is created.",
+          "severity": "HARD",
+          "type": "EVIDENCE"
         },
         {
           "bypass_forbidden": true,
@@ -3224,7 +3233,7 @@
       "expires_at": "",
       "id": "real_policy_upgrade_canary",
       "kind": "development_experiment",
-      "label": "Search Engine conditional-development campaigns (V4 validation-blocked closed; research HOLD)",
+      "label": "Search Engine conditional-development campaigns (V4 closed; arm-local validation repair source-verified; research HOLD)",
       "lifecycle": "EXPERIMENTAL",
       "owner": "",
       "paths": [
@@ -4976,7 +4985,7 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-07-31T13:20:32.986188+00:00",
+        "checked_at": "2026-07-31T14:04:16.721800+00:00",
         "evidence_ref": "runtime/crypto_search_economic_v4_20260731/final_decision.json",
         "evidence_sha256": "6275A95F631748E084B9E991B386050F71BF1B45427F72BBBC7998C986DC0EE4",
         "level": "STATIC_VERIFIED",
@@ -7837,7 +7846,7 @@
   ],
   "overlay": {
     "path": "config/architecture_overlay.json",
-    "sha256": "54DB05DE8C3336059C170F8CB3E0F9FC47A918333CA1E1DD0CC0091236E32E56"
+    "sha256": "448898D1B3742547D69E060BA7861AFF99E6CE8B2C1E20B270ABFEB024A0434F"
   },
   "profile_id": null,
   "profiles": [
@@ -7868,13 +7877,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "6a42cdf61bf4020d146c2b02eb3a64f8d8296db1",
-    "edge_count": 37337,
-    "node_count": 19951,
+    "built_at_commit": "b3e667cc73b3dc8c5fd21fa2082d2e5e6cb11bf5",
+    "edge_count": 37356,
+    "node_count": 19954,
     "path": ".planning/graphs/graph.json",
-    "sha256": "CA499030299326363C79B5744E1F9C7FFB8C64197D741617A5D55CC834CED589"
+    "sha256": "949C0F50265BEDBCD90251C593D18CF6BF72AF052CB6A18B57611975D9C2BC46"
   },
-  "repo_head": "6a42cdf61bf4020d146c2b02eb3a64f8d8296db1",
+  "repo_head": "b3e667cc73b3dc8c5fd21fa2082d2e5e6cb11bf5",
   "schema_version": 1,
   "semantic_authorities": [
     {
