@@ -61,7 +61,6 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     TypedEvolutionV2,
     V22_PARAMETERS,
     _ProposalGenerationFailure,
-    _ValidationStageBlocked,
     _balanced_lane_choice,
     _checkpoint_allocation,
     _checkpoint_resume_order,
@@ -829,6 +828,8 @@ def _minimal_validation_failure_inputs(
                 "candidate_generation_allowed": False,
             },
             "validation_kill_line": {
+                "orchestration_campaign": "crypto_search_economic_v1",
+                "trigger_after_train_checkpoint_index": 0,
                 "minimum_evaluated_per_active_arm": 2,
                 "evaluated_per_active_arm": 2,
                 "required_horizons_hours": [1, 4],
@@ -845,7 +846,7 @@ def _minimal_validation_failure_inputs(
     }
 
 
-def test_frozen_validation_constructibility_failure_is_typed_and_side_effect_free(
+def test_frozen_validation_constructibility_failure_is_arm_local_and_persisted(
     tmp_path: Path,
 ) -> None:
     inputs = _minimal_validation_failure_inputs(tmp_path)
@@ -861,19 +862,24 @@ def test_frozen_validation_constructibility_failure_is_typed_and_side_effect_fre
     def reject_degenerate_control(*_args):
         raise ValueError("CONTROL_BEHAVIOR_EQUALS_PRIMARY")
 
-    with pytest.raises(_ValidationStageBlocked) as captured:
-        run_frozen_validation_stage(
-            **inputs,
-            evaluation_runner=reject_degenerate_control,
-        )
+    result = run_frozen_validation_stage(
+        **inputs,
+        evaluation_runner=reject_degenerate_control,
+    )
 
-    assert captured.value.to_dict() == {
-        "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
-        "arm": "canonical_typed_random",
-        "candidate_id": "validation-failure-1h",
-        "horizon_hours": 1,
-        "selection_rank": 1,
+    restored_state = result[0]
+    validation_result = result[-1]
+    assert validation_result["status"] == "VALIDATION_STAGE_COMPLETE"
+    assert validation_result["matched_evaluated_counts"] == {
+        "canonical_typed_random": 0,
     }
+    assert validation_result["candidate_local_failure_counts"] == {
+        "canonical_typed_random": 2,
+    }
+    assert restored_state["arm_states"]["canonical_typed_random"] == "EXITED"
+    assert validation_result["arm_decisions"]["canonical_typed_random"][
+        "failure_reason"
+    ] == "VALIDATION_ARM_EQUAL_COUNT_UNAVAILABLE"
     assert inputs["state"] == state_before
     assert inputs["archive"].state_hash() == archive_hash_before
     assert _payload_sha(
@@ -882,8 +888,131 @@ def test_frozen_validation_constructibility_failure_is_typed_and_side_effect_fre
             for key, policy in sorted(inputs["policies"].items())
         }
     ) == policy_hash_before
-    assert not (tmp_path / "checkpoints").exists()
-    assert not (tmp_path / "validation_candidate_ledger.parquet").exists()
+    failure_rows = pd.read_parquet(
+        tmp_path / "validation_candidate_ledger.parquet"
+    )
+    assert len(failure_rows) == 2
+    assert set(failure_rows["validation_status"]) == {
+        "CANDIDATE_LOCAL_FAILURE"
+    }
+    assert set(failure_rows["validation_failure_reason"]) == {
+        "CONTROL_BEHAVIOR_EQUALS_PRIMARY"
+    }
+    assert (
+        tmp_path / "checkpoints" / "checkpoint_validation" / "manifest.json"
+    ).is_file()
+
+
+def test_frozen_validation_constructibility_failure_backfills_by_train_rank(
+    tmp_path: Path,
+) -> None:
+    inputs = _minimal_validation_failure_inputs(tmp_path)
+    original_rows = list(inputs["train_ledger"])
+    for ordinal, source_row in enumerate(original_rows, start=3):
+        source = CandidateSpec.from_dict(
+            json.loads(str(source_row["candidate_spec_json"]))
+        )
+        backup = CandidateSpec(
+            f"validation-backfill-{source.horizon_hours}h",
+            source.skeleton_id,
+            source.mechanism_family,
+            source.expression,
+            source.control,
+            source.horizon_hours,
+            source.mapping_id,
+            source.raw_fields,
+            source.field_families,
+            source.rolling_windows,
+            source.expression_depth,
+            source.operator_path,
+        )
+        inputs["train_ledger"].append(
+            {
+                **source_row,
+                "arm_completion_ordinal": ordinal,
+                "candidate_id": backup.candidate_id,
+                "candidate_spec_json": json.dumps(
+                    backup.to_dict(), sort_keys=True
+                ),
+                "search_reward": float(source_row["search_reward"]) - 10.0,
+            }
+        )
+
+    def evaluate_with_backfill(candidate_spec, frozen_orientation):
+        if candidate_spec.candidate_id.startswith("validation-failure"):
+            raise ValueError("CONTROL_BEHAVIOR_EQUALS_PRIMARY")
+        return {
+            "candidate_id": candidate_spec.candidate_id,
+            "horizon_hours": candidate_spec.horizon_hours,
+            "train_orientation": frozen_orientation,
+            "train_orientation_fitted": False,
+            "evaluation_partition": "validation",
+            "effective_block_end_exclusive": "2025-12-31T18:00:00Z",
+            "partition_tail_purge_hours": 6,
+            "_validation_paths": {
+                "primary_net": np.full(48, 0.001),
+                "control_net": {
+                    "left": np.zeros(48),
+                    "right": np.zeros(48),
+                },
+                "matched_component_net": {
+                    "primary_minus_left_control": np.full(48, 0.0005),
+                    "primary_minus_right_control": np.full(48, 0.0005),
+                },
+            },
+        }
+
+    result = run_frozen_validation_stage(
+        **inputs,
+        evaluation_runner=evaluate_with_backfill,
+    )
+
+    restored_state = result[0]
+    validation_result = result[-1]
+    assert validation_result["matched_evaluated_counts"] == {
+        "canonical_typed_random": 2,
+    }
+    assert validation_result["validation_attempted_counts"] == {
+        "canonical_typed_random": 4,
+    }
+    assert validation_result["candidate_local_failure_counts"] == {
+        "canonical_typed_random": 2,
+    }
+    assert restored_state["arm_states"]["canonical_typed_random"] == "ACTIVE"
+    assert validation_result["arm_decisions"]["canonical_typed_random"][
+        "passed"
+    ] is True
+    ledger = pd.read_parquet(tmp_path / "validation_candidate_ledger.parquet")
+    assert ledger["validation_status"].value_counts().to_dict() == {
+        "CANDIDATE_LOCAL_FAILURE": 2,
+        "EVALUATED": 2,
+    }
+
+    for name in (
+        "validation_candidate_ledger.parquet",
+        "validation_arm_metrics.parquet",
+        "validation_decisions.json",
+    ):
+        (tmp_path / name).unlink()
+
+    def must_not_reevaluate(*_args):
+        raise AssertionError("restored validation checkpoint must not reevaluate")
+
+    resumed = run_frozen_validation_stage(
+        **inputs,
+        evaluation_runner=must_not_reevaluate,
+    )
+    assert resumed[-1]["resumed"] is True
+    assert resumed[-1]["candidate_local_failure_counts"] == {
+        "canonical_typed_random": 2,
+    }
+    restored_ledger = pd.read_parquet(
+        tmp_path / "validation_candidate_ledger.parquet"
+    )
+    assert restored_ledger["validation_status"].value_counts().to_dict() == {
+        "CANDIDATE_LOCAL_FAILURE": 2,
+        "EVALUATED": 2,
+    }
 
 
 def test_frozen_validation_unexpected_value_error_still_propagates(

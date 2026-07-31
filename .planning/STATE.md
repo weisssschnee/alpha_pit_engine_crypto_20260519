@@ -4,7 +4,7 @@ Last updated: 2026-07-31 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ECONOMIC_V4_VALIDATION_BLOCKED_CLOSED`
+`CRYPTO_SEARCH_VALIDATION_ARM_LOCAL_FAILURE_REPAIR_SOURCE_VERIFIED`
 
 The repository-wide authority audit confirms that Search Engine V1 has a
 substantial reusable engineering chain: admitted carriers, PIT/lag contracts,
@@ -130,13 +130,28 @@ promotion evidence. Before checkpoint_001, validation candidate
 from canonical typed random, 1h, selection rank 13, produced
 `CONTROL_BEHAVIOR_EQUALS_PRIMARY`. Its 719-hour feature warm-up and transformed
 support checks passed; train primary/control behaviors were distinct. The
-remaining defect is orchestration scope: one candidate whose validation-period
-cross-sectional mapping degenerates to its control terminates the whole
-equal-count validation stage instead of recording an arm-local validation
-failure. V4 stopped normally at `checkpoint_validation_blocked`, consumed no
-remaining 18k budget, read no sealed partition, wrote no validation optimizer
-or archive state, and started no rescue, reseed, OOS, promotion, or next Arena.
-Its receipt is consumed and no arm is qualified.
+historical defect was orchestration scope: one candidate whose
+validation-period cross-sectional mapping degenerates to its control terminated
+the whole equal-count validation stage instead of recording an arm-local
+validation failure. V4 stopped normally at `checkpoint_validation_blocked`,
+consumed no remaining 18k budget, read no sealed partition, wrote no validation
+optimizer or archive state, and started no rescue, reseed, OOS, promotion, or
+next Arena. Its receipt is consumed and no arm is qualified.
+
+The retained validation orchestrator now records every known candidate-local
+constructibility degeneration in the validation ledger, then deterministically
+backfills from the next frozen train-ranked candidate within the same arm and
+horizon. It does not use validation reward for selection and cannot write
+policy, archive, candidate-generation, or holdout state. An arm exits only when
+its frozen pool cannot supply the receipt-bound equal matched count; if the
+typed-random control cannot supply that count, other arms cannot qualify. The
+checkpoint persists attempted, evaluated, and failure counts plus exact failure
+identities and restores without reevaluation. The normalized runtime-binding
+component hash is
+`40197518F85C6A0937D49F3286C156FBE6C089E0A99160EB57E283E327E488DD`;
+all consumed receipt heirs remain `run_authorized=false`. Verification is
+source/synthetic only: `340 passed, 1 warning`; no candidate or market pair was
+evaluated and no historical V4 artifact was replayed or rewritten.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new
 candidate evaluations and zero market budget. It found that `666/1,200` Stage-B
@@ -356,7 +371,10 @@ SEARCH_ENGINE_ECONOMIC_V3_NO_RESCUE_RERUN
 SEARCH_ENGINE_ECONOMIC_V4_AUTHORIZATION_CONSUMED
 SEARCH_ENGINE_ECONOMIC_V4_CHECKPOINT_000_RESTORE_VERIFIED
 SEARCH_ENGINE_ECONOMIC_V4_VALIDATION_BLOCKED_CHECKPOINT_VERIFIED
-SEARCH_ENGINE_ECONOMIC_V4_ARM_LOCAL_VALIDATION_FAILURE_NOT_IMPLEMENTED
+SEARCH_ENGINE_VALIDATION_CANDIDATE_LOCAL_FAILURE_PERSISTED
+SEARCH_ENGINE_VALIDATION_FROZEN_RANK_BACKFILL_VERIFIED
+SEARCH_ENGINE_VALIDATION_ARM_LOCAL_EQUAL_COUNT_FAIL_CLOSED
+SEARCH_ENGINE_VALIDATION_CHECKPOINT_RESTORE_WITH_FAILURES_VERIFIED
 SEARCH_ENGINE_ECONOMIC_V4_NO_ARM_QUALIFICATION
 SEARCH_ENGINE_ECONOMIC_V4_NO_RESCUE_RERUN
 SEARCH_ENGINE_V1_CONTROLS_PARTIAL_CARRIER_ROLE_RESOLUTION_REPAIRED
@@ -545,10 +563,11 @@ authority binding or research qualification was promoted.
 ## Next action
 
 No market campaign is currently authorized. The consumed 2026-07-31 receipt
-cannot be reused, and the incomplete run cannot be continued or described as a
-rescue rerun. A future attempt requires a distinct user authorization and
-fresh-state receipt; it must retain the exact-carrier proposal-liveness
-preflight and cannot import prior policy, archive, reward, candidate, or RNG
-state. Until then, do not evaluate candidates, reconstruct historical rewards,
-expand the operator basis, train latent priority, open sealed roles, run
+cannot be reused, and V4 cannot be continued or described as a rescue rerun.
+The arm-local validation repair is available for a future distinct fresh-state
+receipt, but it is implementation evidence only and grants no run authority.
+A future attempt must retain the exact-carrier proposal-liveness preflight and
+cannot import prior policy, archive, reward, candidate, or RNG state. Until
+then, do not evaluate candidates, reconstruct historical rewards, expand the
+operator basis, train latent priority, open sealed roles, run
 OOS/challenge/forward, promote candidates, tune parameters, or change seeds.

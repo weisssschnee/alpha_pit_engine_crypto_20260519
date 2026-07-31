@@ -7746,10 +7746,12 @@ def run_frozen_validation_stage(
 ]:
     """Run or exactly restore the no-feedback validation stage.
 
-    Candidate selection is frozen from train-only rows.  Validation may
-    evaluate those candidates but cannot propose, update a policy/archive, or
-    read the holdout.  Failed arms are written back to the existing arm state,
-    so the existing checkpoint allocation removes them on continuation.
+    Candidate ranking is frozen from train-only rows.  Known candidate-local
+    validation degenerations are persisted and deterministically backfilled
+    by that ranking within the same arm and horizon.  Validation cannot
+    propose, update a policy/archive, or read the holdout.  Arms that cannot
+    fill the frozen equal-count sample are written back as EXITED, so the
+    existing checkpoint allocation removes them on continuation.
     """
 
     runtime_root = Path(runtime_root)
@@ -7898,7 +7900,7 @@ def run_frozen_validation_stage(
             arm_selected.extend(
                 (horizon, horizon_rank, row)
                 for horizon_rank, row in enumerate(
-                    candidates[:evaluated_per_horizon],
+                    candidates,
                     start=1,
                 )
             )
@@ -7962,21 +7964,68 @@ def run_frozen_validation_stage(
     archive_hash_before = archive.state_hash()
     internal_records: list[dict[str, Any]] = []
     validation_rows: list[dict[str, Any]] = []
-    for arm, rank, horizon_rank, train_row, candidate in selected:
+    candidate_local_failures: list[dict[str, Any]] = []
+    successful_by_arm_horizon: Counter[tuple[str, int]] = Counter()
+    attempted_by_arm: Counter[str] = Counter()
+    expected_tail_purge = int(
+        dict(economic_receipt.get("execution") or {}).get(
+            "partition_tail_purge_hours",
+            -1,
+        )
+    )
+    for arm, _pool_rank, horizon_rank, train_row, candidate in selected:
+        arm_horizon = (arm, int(candidate.horizon_hours))
+        if successful_by_arm_horizon[arm_horizon] >= evaluated_per_horizon:
+            continue
+        attempted_by_arm[arm] += 1
+        rank = int(attempted_by_arm[arm])
         orientation = float(train_row["train_orientation"])
+        matched_component = str(
+            train_row.get("search_reward_matched_limiting_component") or ""
+        )
         try:
             evaluation = dict(evaluate_selected(candidate, orientation))
         except ValueError as exc:
             reason = str(exc)
             if reason not in VALIDATION_CANDIDATE_FAIL_CLOSED_ERRORS:
                 raise
-            raise _ValidationStageBlocked(
-                reason,
-                arm=arm,
-                candidate_id=candidate.candidate_id,
-                horizon_hours=int(candidate.horizon_hours),
-                selection_rank=int(rank),
-            ) from exc
+            failure = {
+                "arm": arm,
+                "selection_rank": int(rank),
+                "horizon_selection_rank": int(horizon_rank),
+                "candidate_id": candidate.candidate_id,
+                "horizon_hours": int(candidate.horizon_hours),
+                "reason": reason,
+            }
+            candidate_local_failures.append(failure)
+            validation_rows.append(
+                {
+                    "arm": arm,
+                    "selection_rank": int(rank),
+                    "horizon_selection_rank": int(horizon_rank),
+                    "candidate_id": candidate.candidate_id,
+                    "horizon_hours": int(candidate.horizon_hours),
+                    "train_search_reward": float(train_row["search_reward"]),
+                    "frozen_train_orientation": orientation,
+                    "frozen_matched_component": matched_component,
+                    "effective_block_end_exclusive": None,
+                    "partition_tail_purge_hours": expected_tail_purge,
+                    "validation_status": "CANDIDATE_LOCAL_FAILURE",
+                    "validation_failure_reason": reason,
+                    "matched_evaluated": False,
+                    "validation_primary_net_mean": float("nan"),
+                    "validation_primary_nonoverlap_floor_sortino": float(
+                        "nan"
+                    ),
+                    "validation_matched_increment": float("nan"),
+                    "validation_control_net_means_json": "{}",
+                    "candidate_generation_performed": False,
+                    "optimizer_feedback_written": False,
+                    "policy_memory_written": False,
+                    "holdout_read": False,
+                }
+            )
+            continue
         if evaluation.get("candidate_id") != candidate.candidate_id:
             raise RuntimeError("VALIDATION_EVALUATION_CANDIDATE_CHANGED")
         if evaluation.get("evaluation_partition") != "validation":
@@ -7985,12 +8034,6 @@ def run_frozen_validation_stage(
             raise RuntimeError("VALIDATION_REFIT_TRAIN_ORIENTATION")
         if float(evaluation.get("train_orientation", float("nan"))) != orientation:
             raise RuntimeError("VALIDATION_FROZEN_ORIENTATION_CHANGED")
-        expected_tail_purge = int(
-            dict(economic_receipt.get("execution") or {}).get(
-                "partition_tail_purge_hours",
-                -1,
-            )
-        )
         if int(evaluation.get("partition_tail_purge_hours", -1)) != (
             expected_tail_purge
         ):
@@ -7998,9 +8041,6 @@ def run_frozen_validation_stage(
         paths = evaluation.get("_validation_paths")
         if not isinstance(paths, Mapping):
             raise RuntimeError("VALIDATION_PATHS_MISSING")
-        matched_component = str(
-            train_row.get("search_reward_matched_limiting_component") or ""
-        )
         matched_paths = paths.get("matched_component_net")
         if (
             not isinstance(matched_paths, Mapping)
@@ -8019,6 +8059,7 @@ def run_frozen_validation_stage(
             "paths": paths,
         }
         internal_records.append(internal)
+        successful_by_arm_horizon[arm_horizon] += 1
         primary_mean, floor_sortino = _validation_path_summary(
             np.asarray(paths["primary_net"], dtype=float),
             horizon=int(candidate.horizon_hours),
@@ -8054,6 +8095,9 @@ def run_frozen_validation_stage(
                     "effective_block_end_exclusive"
                 ),
                 "partition_tail_purge_hours": expected_tail_purge,
+                "validation_status": "EVALUATED",
+                "validation_failure_reason": None,
+                "matched_evaluated": True,
                 "validation_primary_net_mean": primary_mean,
                 "validation_primary_nonoverlap_floor_sortino": floor_sortino,
                 "validation_matched_increment": (
@@ -8073,29 +8117,148 @@ def run_frozen_validation_stage(
             }
         )
 
-    validation_metrics = [
-        _validation_arm_metrics(
-            arm,
-            [row for row in internal_records if row["arm"] == arm],
-            required_horizons=required_horizons,
+    failures_by_arm: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for failure in candidate_local_failures:
+        failures_by_arm[str(failure["arm"])].append(failure)
+    validation_metrics: list[dict[str, Any]] = []
+    constructible_arms: set[str] = set()
+    for arm in active_arms:
+        arm_records = [
+            row for row in internal_records if str(row["arm"]) == arm
+        ]
+        arm_failures = failures_by_arm.get(arm, [])
+        horizon_success_counts = {
+            int(horizon): int(successful_by_arm_horizon[(arm, int(horizon))])
+            for horizon in required_horizons
+        }
+        constructible = all(
+            count == evaluated_per_horizon
+            for count in horizon_success_counts.values()
         )
-        for arm in active_arms
-    ]
+        reason_counts = Counter(
+            str(failure["reason"]) for failure in arm_failures
+        )
+        common = {
+            "validation_constructibility_passed": constructible,
+            "validation_attempted_count": int(attempted_by_arm[arm]),
+            "candidate_local_failure_count": len(arm_failures),
+            "candidate_local_failure_reasons_json": json.dumps(
+                dict(sorted(reason_counts.items())),
+                sort_keys=True,
+                separators=(",", ":"),
+            ),
+            "horizon_success_counts_json": json.dumps(
+                horizon_success_counts,
+                sort_keys=True,
+                separators=(",", ":"),
+            ),
+        }
+        if constructible:
+            constructible_arms.add(arm)
+            validation_metrics.append(
+                {
+                    **_validation_arm_metrics(
+                        arm,
+                        arm_records,
+                        required_horizons=required_horizons,
+                    ),
+                    **common,
+                }
+            )
+            continue
+        validation_metrics.append(
+            {
+                "arm": arm,
+                "matched_evaluated_count": len(arm_records),
+                "validation_net_mean": float("nan"),
+                "validation_nonoverlap_floor_sortino": float("nan"),
+                "validation_matched_increment": float("nan"),
+                "validation_control_not_dominant": False,
+                "horizon_metrics_json": json.dumps(
+                    [
+                        {
+                            "horizon_hours": int(horizon),
+                            "candidate_count": horizon_success_counts[
+                                int(horizon)
+                            ],
+                            "required_candidate_count": evaluated_per_horizon,
+                        }
+                        for horizon in required_horizons
+                    ],
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ),
+                "aggregation": (
+                    "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE"
+                ),
+                "required_horizons_hours_json": json.dumps(
+                    tuple(sorted(required_horizons)),
+                    separators=(",", ":"),
+                ),
+                **common,
+            }
+        )
     counts = {
         str(row["arm"]): int(row["matched_evaluated_count"])
         for row in validation_metrics
     }
+    comparison_counts = {
+        arm: counts[arm] for arm in sorted(constructible_arms)
+    }
+    control_constructible = "canonical_typed_random" in constructible_arms
     decisions: dict[str, Any] = {}
     for metric in validation_metrics:
         arm = str(metric["arm"])
         before = str(mutable_state["arm_states"][arm])
-        decision = apply_search_validation_kill_line(
-            runtime_root=runtime_root,
-            arm_id=arm,
-            metrics=metric,
-            matched_evaluated_counts=counts,
-            economic_receipt=economic_receipt,
-        )
+        constructible = metric["validation_constructibility_passed"] is True
+        if constructible and control_constructible:
+            decision = apply_search_validation_kill_line(
+                runtime_root=runtime_root,
+                arm_id=arm,
+                metrics=metric,
+                matched_evaluated_counts=comparison_counts,
+                economic_receipt=economic_receipt,
+            )
+        else:
+            failure_reason = (
+                "VALIDATION_ARM_EQUAL_COUNT_UNAVAILABLE"
+                if not constructible
+                else "VALIDATION_CONTROL_ARM_EQUAL_COUNT_UNAVAILABLE"
+            )
+            checkpoint = (
+                runtime_root
+                / "checkpoints"
+                / f"validation_kill_{arm.lower()}.json"
+            )
+            decision = {
+                "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+                "passed": False,
+                "conditions": {
+                    "validation_equal_count_constructible": constructible,
+                    "validation_control_arm_constructible": (
+                        control_constructible
+                    ),
+                },
+                "failure_reason": failure_reason,
+                "arm_id": arm,
+                "matched_evaluated_counts": counts,
+                "equal_count_comparison_counts": comparison_counts,
+                "candidate_local_failure_count": int(
+                    metric["candidate_local_failure_count"]
+                ),
+                "economic_receipt_sha256": str(
+                    economic_receipt.get("receipt_sha256") or ""
+                ),
+                "validation_role": validation.get("role"),
+                "holdout_read": False,
+                "threshold_tuning_performed": False,
+                "optimizer_feedback_written": False,
+                "policy_memory_written": False,
+                "candidate_generation_performed": False,
+                "arm_stopped": True,
+                "checkpoint_path": str(checkpoint),
+            }
+            _write_json(checkpoint, decision)
         after = before if bool(decision["passed"]) else "EXITED"
         mutable_state["arm_states"][arm] = after
         decisions[arm] = {
@@ -8114,6 +8277,18 @@ def run_frozen_validation_stage(
         "schema_version": 1,
         "status": "VALIDATION_STAGE_COMPLETE",
         "matched_evaluated_counts": counts,
+        "equal_count_comparison_counts": comparison_counts,
+        "validation_attempted_counts": {
+            arm: int(attempted_by_arm[arm]) for arm in active_arms
+        },
+        "candidate_local_failure_counts": {
+            arm: len(failures_by_arm.get(arm, ())) for arm in active_arms
+        },
+        "candidate_local_failure_handling": (
+            "RECORD_AND_DETERMINISTICALLY_BACKFILL_BY_FROZEN_TRAIN_RANK_"
+            "WITHIN_ARM_HORIZON"
+        ),
+        "candidate_local_failures": candidate_local_failures,
         "orchestration_campaign": kill_line["orchestration_campaign"],
         "trigger_after_train_checkpoint_index": int(
             kill_line["trigger_after_train_checkpoint_index"]
@@ -9740,24 +9915,123 @@ def check_engine(
         )
         if not validation_checkpoint.is_dir():
             errors.append("validation_checkpoint")
-        if len(validation_rows) != 3 * 128:
+        if "validation_status" not in validation_rows.columns:
+            errors.append("validation_candidate_status")
+            evaluated_validation_rows = validation_rows.iloc[0:0]
+        else:
+            observed_statuses = set(
+                validation_rows["validation_status"].astype(str).unique()
+            )
+            if not observed_statuses.issubset(
+                {"EVALUATED", "CANDIDATE_LOCAL_FAILURE"}
+            ):
+                errors.append("validation_candidate_status")
+            evaluated_validation_rows = validation_rows[
+                validation_rows["validation_status"] == "EVALUATED"
+            ]
+        failure_validation_rows = validation_rows[
+            validation_rows.get(
+                "validation_status",
+                pd.Series(index=validation_rows.index, dtype=str),
+            )
+            == "CANDIDATE_LOCAL_FAILURE"
+        ]
+        expected_validation_counts = {
+            str(arm): int(count)
+            for arm, count in dict(
+                validation_decisions.get("matched_evaluated_counts") or {}
+            ).items()
+        }
+        if len(expected_validation_counts) != 3:
+            errors.append("validation_arm_count")
+        observed_validation_counts_raw = {
+            str(arm): int(count)
+            for arm, count in evaluated_validation_rows.groupby("arm").size().items()
+        }
+        observed_validation_counts = {
+            arm: observed_validation_counts_raw.get(arm, 0)
+            for arm in expected_validation_counts
+        }
+        if (
+            set(observed_validation_counts_raw) - set(expected_validation_counts)
+            or observed_validation_counts != expected_validation_counts
+        ):
             errors.append("validation_candidate_count")
-        if set(validation_rows["horizon_hours"].astype(int).unique()) != {
-            1,
-            4,
-        }:
-            errors.append("validation_horizons")
         horizon_counts = (
-            validation_rows.groupby(["arm", "horizon_hours"])
+            evaluated_validation_rows.groupby(["arm", "horizon_hours"])
             .size()
             .to_dict()
         )
-        if not horizon_counts or any(
-            int(value) != 64 for value in horizon_counts.values()
-        ):
-            errors.append("validation_horizon_allocation")
         if len(validation_metrics) != 3:
             errors.append("validation_arm_count")
+        else:
+            metric_by_arm = {
+                str(row["arm"]): row
+                for row in validation_metrics.to_dict("records")
+            }
+            arm_decisions = dict(
+                validation_decisions.get("arm_decisions") or {}
+            )
+            for arm, expected_count in expected_validation_counts.items():
+                metric = metric_by_arm.get(arm)
+                if metric is None:
+                    errors.append(f"validation_metric_missing:{arm}")
+                    continue
+                constructible = bool(
+                    metric.get("validation_constructibility_passed", False)
+                )
+                local_horizon_counts = {
+                    int(horizon): int(count)
+                    for (local_arm, horizon), count in horizon_counts.items()
+                    if str(local_arm) == arm
+                }
+                if constructible:
+                    if expected_count != 128 or local_horizon_counts != {
+                        1: 64,
+                        4: 64,
+                    }:
+                        errors.append(
+                            f"validation_horizon_allocation:{arm}"
+                        )
+                else:
+                    decision_row = dict(arm_decisions.get(arm) or {})
+                    if (
+                        expected_count >= 128
+                        or decision_row.get("passed") is not False
+                        or decision_row.get("state_after") != "EXITED"
+                    ):
+                        errors.append(
+                            f"validation_constructibility_decision:{arm}"
+                        )
+        expected_failure_counts = {
+            str(arm): int(count)
+            for arm, count in dict(
+                validation_decisions.get("candidate_local_failure_counts")
+                or {}
+            ).items()
+        }
+        observed_failure_counts = {
+            str(arm): int(count)
+            for arm, count in failure_validation_rows.groupby("arm").size().items()
+        }
+        expected_nonzero_failure_counts = {
+            arm: count
+            for arm, count in expected_failure_counts.items()
+            if count > 0
+        }
+        if observed_failure_counts != expected_nonzero_failure_counts:
+            errors.append("validation_candidate_failure_count")
+        if (
+            not failure_validation_rows.empty
+            and (
+                failure_validation_rows["validation_failure_reason"]
+                .fillna("")
+                .eq("")
+                .any()
+                or failure_validation_rows["matched_evaluated"].astype(bool).any()
+            )
+        ):
+            errors.append("validation_candidate_failure_evidence")
         if validation_decisions.get("status") != "VALIDATION_STAGE_COMPLETE":
             errors.append("validation_decision")
     elif is_economic and budget_exhausted:
