@@ -1015,6 +1015,150 @@ def test_frozen_validation_constructibility_failure_backfills_by_train_rank(
     }
 
 
+def test_frozen_validation_short_train_pool_exits_only_that_arm(
+    tmp_path: Path,
+) -> None:
+    inputs = _minimal_validation_failure_inputs(tmp_path)
+    kill_line = inputs["economic_receipt"]["validation_kill_line"]
+    kill_line["minimum_evaluated_per_active_arm"] = 4
+    kill_line["evaluated_per_active_arm"] = 4
+    kill_line["evaluated_per_arm_per_horizon"] = 2
+
+    def evaluate_valid(candidate_spec, frozen_orientation):
+        return {
+            "candidate_id": candidate_spec.candidate_id,
+            "horizon_hours": candidate_spec.horizon_hours,
+            "train_orientation": frozen_orientation,
+            "train_orientation_fitted": False,
+            "evaluation_partition": "validation",
+            "effective_block_end_exclusive": "2025-12-31T18:00:00Z",
+            "partition_tail_purge_hours": 6,
+            "_validation_paths": {
+                "primary_net": np.full(48, 0.001),
+                "control_net": {
+                    "left": np.zeros(48),
+                    "right": np.zeros(48),
+                },
+                "matched_component_net": {
+                    "primary_minus_left_control": np.full(48, 0.0005),
+                    "primary_minus_right_control": np.full(48, 0.0005),
+                },
+            },
+        }
+
+    result = run_frozen_validation_stage(
+        **inputs,
+        evaluation_runner=evaluate_valid,
+    )
+
+    assert result[-1]["matched_evaluated_counts"] == {
+        "canonical_typed_random": 2,
+    }
+    assert result[-1]["candidate_local_failure_counts"] == {
+        "canonical_typed_random": 0,
+    }
+    assert result[-1]["arm_decisions"]["canonical_typed_random"][
+        "failure_reason"
+    ] == "VALIDATION_ARM_EQUAL_COUNT_UNAVAILABLE"
+    assert result[0]["arm_states"]["canonical_typed_random"] == "EXITED"
+
+
+def test_frozen_validation_failed_random_control_cannot_qualify_other_arm(
+    tmp_path: Path,
+) -> None:
+    inputs = _minimal_validation_failure_inputs(tmp_path)
+    registry = inputs["registry"]
+    arms = ("canonical_typed_random", "typed_evolution_v2")
+    state = _new_campaign_state(
+        "a" * 40,
+        "b" * 64,
+        arms=arms,
+        seeds=SEEDS,
+    )
+    state["next_checkpoint_index"] = 1
+    inputs["state"] = state
+    inputs["policies"] = _initial_policies(
+        registry,
+        arms=arms,
+        seeds=SEEDS,
+    )
+    for ordinal, source_row in enumerate(
+        list(inputs["train_ledger"]),
+        start=1,
+    ):
+        source = CandidateSpec.from_dict(
+            json.loads(str(source_row["candidate_spec_json"]))
+        )
+        candidate = CandidateSpec(
+            f"typed-evolution-control-test-{source.horizon_hours}h",
+            source.skeleton_id,
+            source.mechanism_family,
+            source.expression,
+            source.control,
+            source.horizon_hours,
+            source.mapping_id,
+            source.raw_fields,
+            source.field_families,
+            source.rolling_windows,
+            source.expression_depth,
+            source.operator_path,
+        )
+        inputs["train_ledger"].append(
+            {
+                **source_row,
+                "arm": "typed_evolution_v2",
+                "arm_completion_ordinal": ordinal,
+                "candidate_id": candidate.candidate_id,
+                "candidate_spec_json": json.dumps(
+                    candidate.to_dict(), sort_keys=True
+                ),
+            }
+        )
+
+    def evaluate_control_failure(candidate_spec, frozen_orientation):
+        control_arm = candidate_spec.candidate_id.startswith(
+            "validation-failure"
+        )
+        primary = -0.001 if control_arm else 0.001
+        matched = -0.0005 if control_arm else 0.0005
+        return {
+            "candidate_id": candidate_spec.candidate_id,
+            "horizon_hours": candidate_spec.horizon_hours,
+            "train_orientation": frozen_orientation,
+            "train_orientation_fitted": False,
+            "evaluation_partition": "validation",
+            "effective_block_end_exclusive": "2025-12-31T18:00:00Z",
+            "partition_tail_purge_hours": 6,
+            "_validation_paths": {
+                "primary_net": np.full(48, primary),
+                "control_net": {
+                    "left": np.zeros(48),
+                    "right": np.zeros(48),
+                },
+                "matched_component_net": {
+                    "primary_minus_left_control": np.full(48, matched),
+                    "primary_minus_right_control": np.full(48, matched),
+                },
+            },
+        }
+
+    result = run_frozen_validation_stage(
+        **inputs,
+        evaluation_runner=evaluate_control_failure,
+    )
+
+    decisions = result[-1]["arm_decisions"]
+    assert decisions["canonical_typed_random"]["passed"] is False
+    assert decisions["typed_evolution_v2"]["passed"] is False
+    assert decisions["typed_evolution_v2"]["failure_reason"] == (
+        "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE"
+    )
+    assert result[0]["arm_states"] == {
+        "canonical_typed_random": "EXITED",
+        "typed_evolution_v2": "EXITED",
+    }
+
+
 def test_frozen_validation_unexpected_value_error_still_propagates(
     tmp_path: Path,
 ) -> None:

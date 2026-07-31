@@ -217,7 +217,7 @@
     },
     "runtime_binding": {
       "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-      "sha256": "40197518F85C6A0937D49F3286C156FBE6C089E0A99160EB57E283E327E488DD"
+      "sha256": "D40EC866C106B3AEAF23E693175CB020953A5546DB43467FE3762E2193E3D57C"
     }
   }
 }

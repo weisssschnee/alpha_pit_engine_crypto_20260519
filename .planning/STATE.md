@@ -148,9 +148,9 @@ typed-random control cannot supply that count, other arms cannot qualify. The
 checkpoint persists attempted, evaluated, and failure counts plus exact failure
 identities and restores without reevaluation. The normalized runtime-binding
 component hash is
-`40197518F85C6A0937D49F3286C156FBE6C089E0A99160EB57E283E327E488DD`;
+`D40EC866C106B3AEAF23E693175CB020953A5546DB43467FE3762E2193E3D57C`;
 all consumed receipt heirs remain `run_authorized=false`. Verification is
-source/synthetic only: `340 passed, 1 warning`; no candidate or market pair was
+source/synthetic only: `342 passed, 1 warning`; no candidate or market pair was
 evaluated and no historical V4 artifact was replayed or rewritten.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new

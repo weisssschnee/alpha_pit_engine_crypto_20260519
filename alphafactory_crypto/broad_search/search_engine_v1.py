@@ -7892,11 +7892,6 @@ def run_frozen_validation_stage(
                     str(row["candidate_id"]),
                 ),
             )
-            if len(candidates) < evaluated_per_horizon:
-                raise RuntimeError(
-                    "VALIDATION_TRAIN_HORIZON_COUNT_TOO_SMALL:"
-                    f"{arm}:{horizon}"
-                )
             arm_selected.extend(
                 (horizon, horizon_rank, row)
                 for horizon_rank, row in enumerate(
@@ -8207,11 +8202,22 @@ def run_frozen_validation_stage(
     }
     control_constructible = "canonical_typed_random" in constructible_arms
     decisions: dict[str, Any] = {}
-    for metric in validation_metrics:
+    control_passed: bool | None = None
+    ordered_validation_metrics = sorted(
+        validation_metrics,
+        key=lambda metric: (
+            str(metric["arm"]) != "canonical_typed_random",
+            str(metric["arm"]),
+        ),
+    )
+    for metric in ordered_validation_metrics:
         arm = str(metric["arm"])
         before = str(mutable_state["arm_states"][arm])
         constructible = metric["validation_constructibility_passed"] is True
-        if constructible and control_constructible:
+        can_apply_economic_kill_line = constructible and (
+            arm == "canonical_typed_random" or control_passed is True
+        )
+        if can_apply_economic_kill_line:
             decision = apply_search_validation_kill_line(
                 runtime_root=runtime_root,
                 arm_id=arm,
@@ -8220,11 +8226,14 @@ def run_frozen_validation_stage(
                 economic_receipt=economic_receipt,
             )
         else:
-            failure_reason = (
-                "VALIDATION_ARM_EQUAL_COUNT_UNAVAILABLE"
-                if not constructible
-                else "VALIDATION_CONTROL_ARM_EQUAL_COUNT_UNAVAILABLE"
-            )
+            if not constructible:
+                failure_reason = "VALIDATION_ARM_EQUAL_COUNT_UNAVAILABLE"
+            elif not control_constructible:
+                failure_reason = (
+                    "VALIDATION_CONTROL_ARM_EQUAL_COUNT_UNAVAILABLE"
+                )
+            else:
+                failure_reason = "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE"
             checkpoint = (
                 runtime_root
                 / "checkpoints"
@@ -8238,6 +8247,7 @@ def run_frozen_validation_stage(
                     "validation_control_arm_constructible": (
                         control_constructible
                     ),
+                    "validation_control_arm_passed": control_passed is True,
                 },
                 "failure_reason": failure_reason,
                 "arm_id": arm,
@@ -8259,6 +8269,8 @@ def run_frozen_validation_stage(
                 "checkpoint_path": str(checkpoint),
             }
             _write_json(checkpoint, decision)
+        if arm == "canonical_typed_random":
+            control_passed = bool(decision["passed"])
         after = before if bool(decision["passed"]) else "EXITED"
         mutable_state["arm_states"][arm] = after
         decisions[arm] = {
