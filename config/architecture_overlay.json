@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaigns (V2 checkpoint_000 validation-blocked HOLD)",
+                      "label":  "Search Engine conditional-development campaign (V3 fresh-state authorized; V2 validation-blocked HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -408,6 +408,7 @@
                                     "alphafactory_crypto/broad_search/panel18m.py",
                                     "config/crypto_search_economic_receipt_v1.json",
                                     "config/crypto_search_economic_receipt_v2.json",
+                                    "config/crypto_search_economic_receipt_v3.json",
                                     "alphafactory_crypto/data_admission_v1.py",
                                     "config/crypto_search_surface_integration_v1.json",
                                     "docs/adr/0011-search-surface-integration-v1.md",
@@ -468,12 +469,12 @@
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
-                      "active_authority":  false,
+                      "active_authority":  true,
                       "authority":  {
-                                        "path":  "config/crypto_search_economic_receipt_v2.json",
+                                        "path":  "config/crypto_search_economic_receipt_v3.json",
                                         "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "e5d495f148042132fadb0e6aeec6fc83088a8d8d",
-                                        "sha256":  "F78FB2A77478CFD5BE71977058DA35D81A244C5FAC2D959C65413D7D7D7D7552"
+                                        "verified_sha":  "a1f87a5cba12a5ba6c4560c9474800130de9bee4",
+                                        "sha256":  "3F0FD92DB3223AA360B5E3EA1D2EE82EBEAC402C240D5709CCC5BBF40C9127D0"
                                     },
                       "contracts":  [
                                         {
@@ -502,6 +503,15 @@
                                             "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt and broad_search.search_engine_v1 close-validation-blocked-v2/check-economic-v2",
                                             "bypass_forbidden":  true,
                                             "evidence_ref":  "runtime/crypto_search_economic_v2_20260731/final_decision.json"
+                                        },
+                                        {
+                                            "id":  "crypto_search_economic_v3_fresh_state_authorization",
+                                            "type":  "AUTHORITY",
+                                            "rule":  "The current-user V3 receipt authorizes exactly one independent fresh-state campaign capped at 20,000 strict candidates on the unchanged 115-field OI/mark x aggTrades carrier. It hash-locks and inherits the consumed V1 target, mapping, joint train reward, conditional 5 bps cost, evidence partitions, validation kill-line, and sealed boundaries while assigning a distinct campaign, epoch, runtime, RNG, policies, archive, ledger, receipts, and checkpoints. It imports no V1 or V2 search state. Known validation matched-control degeneracy must terminate fail closed with an exact checkpoint; unexpected defects still propagate. Ten workers are requested with fail-closed fallback to eight; 12 workers, parameter tuning, seed changes, rescue reruns, sealed/OOS/challenge/recent/May-stress/forward reads, promotion, latent priority, and cross-sprint memory remain forbidden.",
+                                            "severity":  "HARD",
+                                            "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt and broad_search.search_engine_v1 run-economic-v3/check-economic-v3",
+                                            "bypass_forbidden":  true,
+                                            "evidence_ref":  "config/crypto_search_economic_receipt_v3.json"
                                         },
                                         {
                                             "id":  "search_surface_runtime_carrier_gate",
@@ -650,9 +660,9 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                          "evidence_ref":  "runtime/crypto_search_economic_v2_20260731/final_decision.json",
-                                          "evidence_sha256":  "1A677DD6D400BAB8D30D1AEA43FC2C1E191C0CB8C115A5677F2AEE3B22C6B624",
-                                          "verified_at_sha":  "e5d495f148042132fadb0e6aeec6fc83088a8d8d"
+                                          "evidence_ref":  "config/crypto_search_economic_receipt_v3.json",
+                                          "evidence_sha256":  "3F0FD92DB3223AA360B5E3EA1D2EE82EBEAC402C240D5709CCC5BBF40C9127D0",
+                                          "verified_at_sha":  "a1f87a5cba12a5ba6c4560c9474800130de9bee4"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
