@@ -1084,7 +1084,7 @@
       }
     }
   ],
-  "generated_at": "2026-07-31T04:58:59.967662+00:00",
+  "generated_at": "2026-07-31T06:07:33.103139+00:00",
   "kind": "current-architecture",
   "legend": {
     "evidence_line_styles": {
@@ -3644,6 +3644,7 @@
         "alphafactory_crypto_broad_search_search_engine_v1_policy_propose",
         "alphafactory_crypto_broad_search_search_engine_v1_policy_reject",
         "alphafactory_crypto_broad_search_search_engine_v1_policy_state_sha256",
+        "alphafactory_crypto_broad_search_search_engine_v1_proposal_liveness_preflight",
         "alphafactory_crypto_broad_search_search_engine_v1_proposalgenerationfailure",
         "alphafactory_crypto_broad_search_search_engine_v1_proposalgenerationfailure_init",
         "alphafactory_crypto_broad_search_search_engine_v1_qualify_v14_aligned_carrier",
@@ -3651,10 +3652,11 @@
         "alphafactory_crypto_broad_search_search_engine_v1_rationale_1059",
         "alphafactory_crypto_broad_search_search_engine_v1_rationale_1336",
         "alphafactory_crypto_broad_search_search_engine_v1_rationale_3699",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_4859",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6471",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6936",
-        "alphafactory_crypto_broad_search_search_engine_v1_rationale_7255",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_3840",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_4943",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_6555",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_7020",
+        "alphafactory_crypto_broad_search_search_engine_v1_rationale_7339",
         "alphafactory_crypto_broad_search_search_engine_v1_read_json",
         "alphafactory_crypto_broad_search_search_engine_v1_report_text",
         "alphafactory_crypto_broad_search_search_engine_v1_require_bound_authority_preflight",
@@ -4910,7 +4912,7 @@
       "required": false,
       "semantic_role": "search_engine_system_canary_pass_research_hold",
       "validation": {
-        "checked_at": "2026-07-31T04:58:59.967662+00:00",
+        "checked_at": "2026-07-31T06:00:25.000156+00:00",
         "evidence_ref": "config/crypto_search_economic_receipt_v1.json",
         "evidence_sha256": "161AE5D5AFEACE889CB47F17599599E11D6B13A80A7142196D52D8B2F62255E2",
         "level": "STATIC_VERIFIED",
@@ -7802,13 +7804,13 @@
     }
   ],
   "raw": {
-    "built_at_commit": "5df2fb2aad6733e806997bceb3516e5be27c81af",
-    "edge_count": 37007,
-    "node_count": 19767,
+    "built_at_commit": "e9efe7a2e14808a0c58054859e0d44718b407903",
+    "edge_count": 37029,
+    "node_count": 19772,
     "path": ".planning/graphs/graph.json",
-    "sha256": "7CF2A0A63214D24457FC7775E957A70C6467DB7E01D062C217F712D6B33D2AD9"
+    "sha256": "E5F464F08C4D760287FCDFAF772F4B86FF9E1F714D9C15A17A3FDDFC774482D6"
   },
-  "repo_head": "5df2fb2aad6733e806997bceb3516e5be27c81af",
+  "repo_head": "e9efe7a2e14808a0c58054859e0d44718b407903",
   "schema_version": 1,
   "semantic_authorities": [
     {
