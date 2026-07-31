@@ -647,6 +647,9 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
     def must_not_reevaluate(*_args):
         raise AssertionError("restored validation checkpoint must not reevaluate")
 
+    (tmp_path / "validation_candidate_ledger.parquet").unlink()
+    (tmp_path / "validation_arm_metrics.parquet").unlink()
+    (tmp_path / "validation_decisions.json").unlink()
     resumed = run_frozen_validation_stage(
         runtime_root=tmp_path,
         store=_FakeStore(),
@@ -662,6 +665,9 @@ def test_frozen_validation_stage_stops_failed_arm_and_restores_exactly(
     )
     assert resumed[-1]["resumed"] is True
     assert resumed[0]["validation_stage"] == restored_state["validation_stage"]
+    assert (tmp_path / "validation_candidate_ledger.parquet").is_file()
+    assert (tmp_path / "validation_arm_metrics.parquet").is_file()
+    assert (tmp_path / "validation_decisions.json").is_file()
 
 
 def test_frozen_validation_trigger_precedes_reachable_next_allocation() -> None:

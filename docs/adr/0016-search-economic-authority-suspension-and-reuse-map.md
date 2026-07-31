@@ -135,8 +135,10 @@ accepted components whose nodes explicitly said `active_authority: false`.
 - The fresh validation campaign orchestration is now reusable source through
   the dedicated `crypto_search_economic_v1` entry point. It reuses the existing
   rolling Search Engine plus the qualified 115-field OI/mark x aggTrades carrier
-  and deliberately does not attach the 2025 receipt partitions to the historical
-  2023-2024 legacy run. Behavior descriptor bins and support identity are frozen
+  and deliberately does not attach the successor receipt to any historical
+  legacy, canary, V1.1-V1.4, or carrier-gate runner. Those entries continue to
+  resolve the existing Graph authority preflight without consuming the new
+  economic receipt. Behavior descriptor bins and support identity are frozen
   from the receipt train block only; validation and holdout do not contribute.
   Train and validation each purge their final six hours, equal to the two-hour
   execution delay plus maximum four-hour horizon, so target endpoints never
@@ -155,7 +157,9 @@ accepted components whose nodes explicitly said `active_authority: false`.
   control stops continuation. Policy state, archive state, generation attempts,
   and holdout access remain unchanged. Resume ordering selects validation over
   its same-progress train checkpoint, then selects any later numeric checkpoint
-  after continuation. This is source and synthetic-test evidence only; no
-  validation campaign ran.
+  after continuation. Every resumed economic state also revalidates
+  `checkpoint_validation` and republishes its top-level validation ledger,
+  metrics, and decision before further allocation. This is source and
+  synthetic-test evidence only; no validation campaign ran.
 - No second AST, compiler, evaluator, Graph layer, scheduler, or experiment
   database is created.

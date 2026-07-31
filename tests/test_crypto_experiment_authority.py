@@ -17,6 +17,7 @@ from alphafactory_crypto.broad_search.experiment_authority import (
     resolve_real_experiment_authorities,
 )
 from alphafactory_crypto.broad_search.search_engine_v1 import (
+    _require_bound_authority_preflight,
     _validate_receipt_target_store_binding,
     apply_search_validation_kill_line,
 )
@@ -110,6 +111,30 @@ def test_missing_information_intent_fails_closed(tmp_path: Path) -> None:
             tmp_path,
             evidence_to_add="TBD",
             decision_to_change="keep or close that mechanism",
+            economic_receipt_required=False,
+        )
+
+
+def test_historical_runner_preflight_is_verified_without_economic_receipt(
+    tmp_path: Path,
+) -> None:
+    _write_current(tmp_path)
+    preflight = require_real_experiment_authority(
+        tmp_path,
+        evidence_to_add="replay an existing spent engineering contract",
+        decision_to_change="preserve its recorded historical result",
+        economic_receipt_required=False,
+    )
+
+    assert preflight["economic_receipt"] is None
+    tampered = {**preflight, "result": "FORGED"}
+    with pytest.raises(
+        RuntimeError,
+        match="ECONOMIC_RECEIPT_PREFLIGHT_CHANGED",
+    ):
+        _require_bound_authority_preflight(
+            tmp_path,
+            tampered,
             economic_receipt_required=False,
         )
 

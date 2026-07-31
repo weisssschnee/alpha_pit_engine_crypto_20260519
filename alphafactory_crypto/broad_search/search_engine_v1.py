@@ -6374,9 +6374,11 @@ def _v13_report_text(decision: Mapping[str, Any]) -> str:
 """
 
 
-def _require_bound_economic_run(
+def _require_bound_authority_preflight(
     repo_root: Path,
     authority_preflight: Mapping[str, Any] | None,
+    *,
+    economic_receipt_required: bool,
 ) -> dict[str, Any]:
     if not isinstance(authority_preflight, Mapping):
         raise RuntimeError("ECONOMIC_RECEIPT_PREFLIGHT_REQUIRED")
@@ -6390,9 +6392,22 @@ def _require_bound_economic_run(
         decision_to_change=str(
             authority_preflight.get("decision_to_change") or ""
         ),
+        economic_receipt_required=economic_receipt_required,
     )
     if verified != dict(authority_preflight):
         raise RuntimeError("ECONOMIC_RECEIPT_PREFLIGHT_CHANGED")
+    return dict(verified)
+
+
+def _require_bound_economic_run(
+    repo_root: Path,
+    authority_preflight: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    verified = _require_bound_authority_preflight(
+        repo_root,
+        authority_preflight,
+        economic_receipt_required=True,
+    )
     receipt = verified.get("economic_receipt")
     if not isinstance(receipt, Mapping) or receipt.get("run_authorized") is not True:
         raise RuntimeError("ECONOMIC_RECEIPT_RUN_NOT_AUTHORIZED")
@@ -6758,6 +6773,47 @@ def _write_validation_top_level_artifacts(
     )
 
 
+def _restore_validation_checkpoint(
+    *,
+    runtime_root: Path,
+    checkpoint_path: Path,
+    registry: TypedExpressionRegistry,
+    expected_source_sha: str,
+    expected_frozen_hash: str,
+    expected_identities: Mapping[str, Any],
+) -> tuple[
+    dict[str, Any],
+    dict[str, PolicyType],
+    list[dict[str, Any]],
+    BehaviorArchive,
+    list[dict[str, Any]],
+    dict[str, Any],
+]:
+    restored = _load_checkpoint(
+        checkpoint_path=checkpoint_path,
+        registry=registry,
+        expected_source_sha=expected_source_sha,
+        expected_frozen_hash=expected_frozen_hash,
+        expected_identities=expected_identities,
+    )
+    validation_rows = pd.read_parquet(
+        checkpoint_path / "validation_candidate_ledger.parquet"
+    ).to_dict("records")
+    validation_metrics = pd.read_parquet(
+        checkpoint_path / "validation_arm_metrics.parquet"
+    ).to_dict("records")
+    validation_decisions = _read_json(
+        checkpoint_path / "validation_decisions.json"
+    )
+    _write_validation_top_level_artifacts(
+        runtime_root=runtime_root,
+        validation_rows=validation_rows,
+        validation_metrics=validation_metrics,
+        validation_decisions=validation_decisions,
+    )
+    return (*restored, {**validation_decisions, "resumed": True})
+
+
 def run_frozen_validation_stage(
     *,
     runtime_root: Path,
@@ -6806,7 +6862,8 @@ def run_frozen_validation_stage(
             raise ValueError("validation resume archive state changed")
         if incoming_ledger_hash != str(manifest["completed_identity_sha256"]):
             raise ValueError("validation resume train ledger changed")
-        restored = _load_checkpoint(
+        restored = _restore_validation_checkpoint(
+            runtime_root=runtime_root,
             checkpoint_path=checkpoint_path,
             registry=registry,
             expected_source_sha=expected_source_sha,
@@ -6819,31 +6876,17 @@ def run_frozen_validation_stage(
             restored_ledger,
             restored_archive,
             restored_metrics,
+            validation_result,
         ) = restored
         if _payload_sha(list(train_metrics)) != _payload_sha(restored_metrics):
             raise ValueError("validation resume train metrics changed")
-        validation_rows = pd.read_parquet(
-            checkpoint_path / "validation_candidate_ledger.parquet"
-        ).to_dict("records")
-        validation_metrics = pd.read_parquet(
-            checkpoint_path / "validation_arm_metrics.parquet"
-        ).to_dict("records")
-        validation_decisions = _read_json(
-            checkpoint_path / "validation_decisions.json"
-        )
-        _write_validation_top_level_artifacts(
-            runtime_root=runtime_root,
-            validation_rows=validation_rows,
-            validation_metrics=validation_metrics,
-            validation_decisions=validation_decisions,
-        )
         return (
             restored_state,
             restored_policies,
             restored_ledger,
             restored_archive,
             restored_metrics,
-            {**validation_decisions, "resumed": True},
+            validation_result,
         )
 
     validation = dict(economic_receipt.get("validation") or {})
@@ -7394,21 +7437,22 @@ def run_engine(
         wall_time_limit = WALL_TIME_LIMIT_SECONDS
         campaign_arms = FIRST_CHECKPOINT_ARMS
         block_role = "SPENT_DEVELOPMENT_BROAD39_SEARCH_ENGINE_V1"
-    if not isinstance(authority_preflight, Mapping):
-        raise RuntimeError("ECONOMIC_RECEIPT_PREFLIGHT_REQUIRED")
-    economic_receipt = (
-        _require_bound_economic_run(
+    if is_economic:
+        economic_receipt = _require_bound_economic_run(
             repo_root,
             authority_preflight,
         )
-        if is_economic
-        else None
-    )
-    if is_economic:
         assert economic_receipt is not None
         block_role = str(
             economic_receipt["evidence_partition"]["train"]["role"]
         )
+    else:
+        _require_bound_authority_preflight(
+            repo_root,
+            authority_preflight,
+            economic_receipt_required=False,
+        )
+        economic_receipt = None
     observed_source = _git_sha(repo_root)
     source_sha = (source_sha or observed_source).lower()
     if source_sha != observed_source:
@@ -7666,10 +7710,36 @@ def run_engine(
 
     validation_result: dict[str, Any] | None = None
     if isinstance(state.get("validation_stage"), Mapping):
-        validation_result = {
-            **dict(state["validation_stage"]),
-            "resumed": True,
-        }
+        if is_economic:
+            validation_checkpoint = (
+                runtime_root / "checkpoints" / "checkpoint_validation"
+            )
+            if not validation_checkpoint.is_dir():
+                raise RuntimeError("VALIDATION_CHECKPOINT_MISSING_ON_RESUME")
+            (
+                validation_state,
+                _validation_policies,
+                _validation_ledger,
+                _validation_archive,
+                _validation_metrics,
+                validation_result,
+            ) = _restore_validation_checkpoint(
+                runtime_root=runtime_root,
+                checkpoint_path=validation_checkpoint,
+                registry=registry,
+                expected_source_sha=source_sha,
+                expected_frozen_hash=frozen_hash,
+                expected_identities=identities,
+            )
+            if dict(validation_state.get("validation_stage") or {}) != dict(
+                state["validation_stage"]
+            ):
+                raise RuntimeError("VALIDATION_STAGE_STATE_CHANGED_ON_RESUME")
+        else:
+            validation_result = {
+                **dict(state["validation_stage"]),
+                "resumed": True,
+            }
 
     def execute_frozen_validation_if_due() -> bool:
         nonlocal state
@@ -11024,9 +11094,10 @@ def run_v14(
 ) -> dict[str, Any]:
     if runtime_date != V14_DEFAULT_RUNTIME_DATE:
         raise ValueError("Search Engine V1.4 runtime date changed")
-    economic_receipt = _require_bound_economic_run(
+    _require_bound_authority_preflight(
         repo_root,
         authority_preflight,
+        economic_receipt_required=False,
     )
     source_sha = str(source_sha or _git_sha(repo_root)).lower()
     if source_sha != _git_sha(repo_root).lower():
@@ -11076,7 +11147,6 @@ def run_v14(
         identities=identities,
         config=config,
     )
-    frozen = _bind_economic_receipt(frozen, economic_receipt)
     frozen_hash = str(frozen["frozen_contract_sha256"])
     frozen_path = runtime_root / "frozen_contract.json"
     if frozen_path.is_file() and _read_json(frozen_path) != frozen:
@@ -11161,7 +11231,7 @@ def run_v14(
                 checkpoint_size=V14_STAGE_A_COUNT,
                 raw_attempt_limit=raw_attempt_limit,
                 wall_deadline=wall_deadline,
-                economic_receipt=economic_receipt,
+                economic_receipt=None,
             )
         stage_a_metrics = _v14_stage_metrics(ledger, stage="STAGE_A")
         stage_a_rows = [
@@ -11243,7 +11313,7 @@ def run_v14(
                 checkpoint_size=V14_STAGE_B_CHECKPOINT_SIZE,
                 raw_attempt_limit=raw_attempt_limit,
                 wall_deadline=wall_deadline,
-                economic_receipt=economic_receipt,
+                economic_receipt=None,
             )
             memory_fallback = memory_fallback or local_fallback
     except _EngineBudgetExhausted as failure:
@@ -11746,6 +11816,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             repo_root,
             evidence_to_add=args.evidence_to_add,
             decision_to_change=args.decision_to_change,
+            economic_receipt_required=(
+                args.command == "run-economic-v1"
+            ),
         )
         print(
             json.dumps(
