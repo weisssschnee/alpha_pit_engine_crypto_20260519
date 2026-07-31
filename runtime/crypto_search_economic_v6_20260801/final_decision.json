@@ -1,0 +1,193 @@
+{
+  "active_wall_seconds": 1290.0914453000005,
+  "alpha_claim": false,
+  "behavior_duplicate_rate": 0.026499999999999968,
+  "behavior_family_count": 1947,
+  "checkpoint": "checkpoint_validation",
+  "checkpoint_count": 1,
+  "checkpoint_restore_verified": true,
+  "closure_source_sha": "07a699f11510b943991425c4a86eb7582aa59583",
+  "epoch_id": "CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801",
+  "future_new_data_arena_qualified_arms": [],
+  "generation_attempts": 2263,
+  "next_arena_started": false,
+  "oos": false,
+  "parameters_changed": false,
+  "producer_source_sha": "07a699f11510b943991425c4a86eb7582aa59583",
+  "promotion": false,
+  "reason": "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE",
+  "report_title": "Crypto Search Economic V6 Seed Robustness",
+  "rescue_rerun_started": false,
+  "research_decision": "HOLD_ENGINE_VALIDATION_BLOCKED",
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "search_campaign": "crypto_search_economic_v6",
+  "seed_changed": false,
+  "status": "ENGINE_VALIDATION_BLOCKED",
+  "strict_evaluated_count": 2000,
+  "surface_description": "existing 115-field OI/mark x aggTrades aligned carrier; receipt-bound Binance USD-M target",
+  "validation_arm_decisions": {
+    "canonical_typed_random": {
+      "arm_id": "canonical_typed_random",
+      "arm_stopped": true,
+      "candidate_generation_performed": false,
+      "checkpoint_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_search_economic_v6_20260801\\checkpoints\\validation_kill_canonical_typed_random.json",
+      "conditions": {
+        "validation_control_not_dominant": false,
+        "validation_matched_increment_positive": false,
+        "validation_net_mean_positive": false,
+        "validation_nonoverlap_floor_sortino_positive": false
+      },
+      "economic_receipt_sha256": "B6D72994C58AF07559A115F62970257B2C85D6A599B9C65D4DF179EB57486166",
+      "holdout_read": false,
+      "matched_evaluated_counts": {
+        "canonical_typed_random": 128,
+        "hierarchical_typed_cem_v2": 128,
+        "typed_evolution_v2": 128
+      },
+      "optimizer_feedback_written": false,
+      "passed": false,
+      "policy_memory_written": false,
+      "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+      "state_after": "EXITED",
+      "state_before": "ACTIVE",
+      "threshold_tuning_performed": false,
+      "validation_role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE"
+    },
+    "hierarchical_typed_cem_v2": {
+      "arm_id": "hierarchical_typed_cem_v2",
+      "arm_stopped": true,
+      "candidate_generation_performed": false,
+      "candidate_local_failure_count": 0,
+      "checkpoint_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_search_economic_v6_20260801\\checkpoints\\validation_kill_hierarchical_typed_cem_v2.json",
+      "conditions": {
+        "validation_control_arm_constructible": true,
+        "validation_control_arm_passed": false,
+        "validation_equal_count_constructible": true
+      },
+      "economic_receipt_sha256": "B6D72994C58AF07559A115F62970257B2C85D6A599B9C65D4DF179EB57486166",
+      "equal_count_comparison_counts": {
+        "canonical_typed_random": 128,
+        "hierarchical_typed_cem_v2": 128,
+        "typed_evolution_v2": 128
+      },
+      "failure_reason": "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE",
+      "holdout_read": false,
+      "matched_evaluated_counts": {
+        "canonical_typed_random": 128,
+        "hierarchical_typed_cem_v2": 128,
+        "typed_evolution_v2": 128
+      },
+      "optimizer_feedback_written": false,
+      "passed": false,
+      "policy_memory_written": false,
+      "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+      "state_after": "EXITED",
+      "state_before": "ACTIVE",
+      "threshold_tuning_performed": false,
+      "validation_role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE"
+    },
+    "typed_evolution_v2": {
+      "arm_id": "typed_evolution_v2",
+      "arm_stopped": true,
+      "candidate_generation_performed": false,
+      "candidate_local_failure_count": 1,
+      "checkpoint_path": "G:\\Project_V7_Rotation\\alpha_pit_engine_crypto_20260519\\runtime\\crypto_search_economic_v6_20260801\\checkpoints\\validation_kill_typed_evolution_v2.json",
+      "conditions": {
+        "validation_control_arm_constructible": true,
+        "validation_control_arm_passed": false,
+        "validation_equal_count_constructible": true
+      },
+      "economic_receipt_sha256": "B6D72994C58AF07559A115F62970257B2C85D6A599B9C65D4DF179EB57486166",
+      "equal_count_comparison_counts": {
+        "canonical_typed_random": 128,
+        "hierarchical_typed_cem_v2": 128,
+        "typed_evolution_v2": 128
+      },
+      "failure_reason": "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE",
+      "holdout_read": false,
+      "matched_evaluated_counts": {
+        "canonical_typed_random": 128,
+        "hierarchical_typed_cem_v2": 128,
+        "typed_evolution_v2": 128
+      },
+      "optimizer_feedback_written": false,
+      "passed": false,
+      "policy_memory_written": false,
+      "result": "FAIL_STOP_ARM_AND_WRITE_CHECKPOINT",
+      "state_after": "EXITED",
+      "state_before": "ACTIVE",
+      "threshold_tuning_performed": false,
+      "validation_role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE"
+    }
+  },
+  "validation_stage": {
+    "archive_state_sha256_after": "7ED4BC01EF920D07861FC944427A27FB3153DDCEC2A3AF8AE18F8C7CE08CF0D2",
+    "archive_state_sha256_before": "7ED4BC01EF920D07861FC944427A27FB3153DDCEC2A3AF8AE18F8C7CE08CF0D2",
+    "arm_aggregation": "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE",
+    "arm_state_after": {
+      "canonical_typed_random": "EXITED",
+      "hierarchical_typed_cem_v2": "EXITED",
+      "typed_evolution_v2": "EXITED"
+    },
+    "candidate_generation_performed": false,
+    "candidate_local_failure_counts": {
+      "canonical_typed_random": 1,
+      "hierarchical_typed_cem_v2": 0,
+      "typed_evolution_v2": 1
+    },
+    "candidate_local_failure_handling": "RECORD_AND_DETERMINISTICALLY_BACKFILL_BY_FROZEN_TRAIN_RANK_WITHIN_ARM_HORIZON",
+    "candidate_local_failures": [
+      {
+        "arm": "canonical_typed_random",
+        "candidate_id": "F2F814F637EDC2B8995AFC2FAD2FC68D82BFA97BEA549F02C6F9B47391AD25E9",
+        "horizon_hours": 1,
+        "horizon_selection_rank": 26,
+        "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "selection_rank": 26
+      },
+      {
+        "arm": "typed_evolution_v2",
+        "candidate_id": "D58F1E53CFB1684F7E77EF56EA8D6BD48FF6D883C074813C053B17B49D1D1DAF",
+        "horizon_hours": 1,
+        "horizon_selection_rank": 28,
+        "reason": "RIGHT_AXIS_CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+        "selection_rank": 28
+      }
+    ],
+    "candidate_selection": "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_THEN_COMPLETION_ORDINAL",
+    "economic_receipt_sha256": "B6D72994C58AF07559A115F62970257B2C85D6A599B9C65D4DF179EB57486166",
+    "equal_count_comparison_counts": {
+      "canonical_typed_random": 128,
+      "hierarchical_typed_cem_v2": 128,
+      "typed_evolution_v2": 128
+    },
+    "evaluated_per_arm_per_horizon": 64,
+    "holdout_read": false,
+    "matched_evaluated_counts": {
+      "canonical_typed_random": 128,
+      "hierarchical_typed_cem_v2": 128,
+      "typed_evolution_v2": 128
+    },
+    "optimizer_feedback_written": false,
+    "orchestration_campaign": "crypto_search_economic_v6",
+    "policy_memory_written": false,
+    "policy_state_sha256_after": "DBA7ED2762F72BA681EEAD454C478048DAAA9D851D72C01441DF88AC2CD55231",
+    "policy_state_sha256_before": "DBA7ED2762F72BA681EEAD454C478048DAAA9D851D72C01441DF88AC2CD55231",
+    "required_horizons_hours": [
+      1,
+      4
+    ],
+    "schema_version": 1,
+    "status": "VALIDATION_STAGE_COMPLETE",
+    "threshold_tuning_performed": false,
+    "trigger_after_train_checkpoint_index": 0,
+    "validation_arm_metrics_sha256": "F7C434C067F3B19A54B96542F39B7EEA885298535566EF30B2CF3B390ABFE40D",
+    "validation_attempted_counts": {
+      "canonical_typed_random": 129,
+      "hierarchical_typed_cem_v2": 128,
+      "typed_evolution_v2": 129
+    },
+    "validation_candidate_ledger_sha256": "9682044A0A0515028C80B34E9A85C8405DE3FE08033CB0AC8AE6A6B40DF2F66B"
+  }
+}

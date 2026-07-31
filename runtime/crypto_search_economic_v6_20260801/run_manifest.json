@@ -1,0 +1,194 @@
+{
+  "active_wall_seconds": 1290.0914453000005,
+  "artifact_bundle_sha256": "41F0ED04B1568C35323CE328A2251DC06EACBE1BED4D61CD3A8BE7F346427B89",
+  "artifacts": [
+    {
+      "bytes": 882,
+      "path": "reports/CRYPTO_SEARCH_ECONOMIC_V6_20260801.md",
+      "sha256": "AEFF28BE037A011884186CF59B6FA2B43D67E24B3189DA1028B41E320573432E"
+    },
+    {
+      "bytes": 38212,
+      "path": "runtime/crypto_search_economic_v6_20260801/arm_checkpoint_metrics.parquet",
+      "sha256": "7491CA9CF7A915954A281225B98CB8CB08F90A33C8D753AF7E3D16A69131FE40"
+    },
+    {
+      "bytes": 1863678,
+      "path": "runtime/crypto_search_economic_v6_20260801/behavior_archive.parquet",
+      "sha256": "8644A48C17BED33451ACEC191B7DD3257DCBDA00A8BB3B81174B6B4B87808CE9"
+    },
+    {
+      "bytes": 814966,
+      "path": "runtime/crypto_search_economic_v6_20260801/behavior_family_summary.json",
+      "sha256": "B606578905A54A2097D20CB64F045B2AFB8EA6E0D2ECDD313AD43C7F8EEE22B1"
+    },
+    {
+      "bytes": 9481665,
+      "path": "runtime/crypto_search_economic_v6_20260801/candidate_ledger.parquet",
+      "sha256": "D68ACBF362D1159505D49C1EF33F4AF8CEE936D35355A3D48674A7E52FE64A4A"
+    },
+    {
+      "bytes": 38212,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_000/arm_checkpoint_metrics.parquet",
+      "sha256": "7491CA9CF7A915954A281225B98CB8CB08F90A33C8D753AF7E3D16A69131FE40"
+    },
+    {
+      "bytes": 1863678,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_000/behavior_archive.parquet",
+      "sha256": "8644A48C17BED33451ACEC191B7DD3257DCBDA00A8BB3B81174B6B4B87808CE9"
+    },
+    {
+      "bytes": 9481665,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_000/candidate_ledger.parquet",
+      "sha256": "D68ACBF362D1159505D49C1EF33F4AF8CEE936D35355A3D48674A7E52FE64A4A"
+    },
+    {
+      "bytes": 3591,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_000/manifest.json",
+      "sha256": "B9F3389EB29B24B26A4952349C3972DA1D53235D61C20202FF94242131D07A88"
+    },
+    {
+      "bytes": 7341185,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_000/state.json",
+      "sha256": "6EC8F820FCAB42739E6839B26D9037DE9594AD35A1A962AABBFFB0F2C3C5DE5B"
+    },
+    {
+      "bytes": 38212,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_validation/arm_checkpoint_metrics.parquet",
+      "sha256": "7491CA9CF7A915954A281225B98CB8CB08F90A33C8D753AF7E3D16A69131FE40"
+    },
+    {
+      "bytes": 1863678,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_validation/behavior_archive.parquet",
+      "sha256": "8644A48C17BED33451ACEC191B7DD3257DCBDA00A8BB3B81174B6B4B87808CE9"
+    },
+    {
+      "bytes": 9481665,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_validation/candidate_ledger.parquet",
+      "sha256": "D68ACBF362D1159505D49C1EF33F4AF8CEE936D35355A3D48674A7E52FE64A4A"
+    },
+    {
+      "bytes": 4153,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_validation/manifest.json",
+      "sha256": "42CB4AC03901C89ED4F608A027203E90C81FF37E82FAF6F1B0A39797CEDCE85F"
+    },
+    {
+      "bytes": 7348413,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_validation/state.json",
+      "sha256": "6B2E6EEB5D4668BD356426F9ED3B1000E6F5B5C4BD20A5B96FA5DC2BB3CB476A"
+    },
+    {
+      "bytes": 14340,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_validation/validation_arm_metrics.parquet",
+      "sha256": "BB94285219E3A7895E67232E03514A24061D9904BAEE19AE632D02A9EC949689"
+    },
+    {
+      "bytes": 68767,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_validation/validation_candidate_ledger.parquet",
+      "sha256": "78B38009D91E8AB2D1BF7E570C45B0A5C287405360B6FFA56B165E4A885B9B17"
+    },
+    {
+      "bytes": 6628,
+      "path": "runtime/crypto_search_economic_v6_20260801/checkpoints/checkpoint_validation/validation_decisions.json",
+      "sha256": "306508C8B1511C7C69E28E02AF761332E76EB37D9CC10DB19E4F761B83F1185C"
+    },
+    {
+      "bytes": 12951,
+      "path": "runtime/crypto_search_economic_v6_20260801/embedded_preflight.json",
+      "sha256": "9B70020D0451473B24063414BD6E66ADA4DD5D9220F31F0BADD78FBF6ED4BCAA"
+    },
+    {
+      "bytes": 8173,
+      "path": "runtime/crypto_search_economic_v6_20260801/final_decision.json",
+      "sha256": "4092813225A8201A69C97B584C90E30D025625B27BF301AC799D9066B7EAC57E"
+    },
+    {
+      "bytes": 29173,
+      "path": "runtime/crypto_search_economic_v6_20260801/frozen_contract.json",
+      "sha256": "1B59C9E6091FB9B6E80E19C5B3EB08CF3CCF3E321D503D267BEA7188D213A6A9"
+    },
+    {
+      "bytes": 14340,
+      "path": "runtime/crypto_search_economic_v6_20260801/validation_arm_metrics.parquet",
+      "sha256": "BB94285219E3A7895E67232E03514A24061D9904BAEE19AE632D02A9EC949689"
+    },
+    {
+      "bytes": 68767,
+      "path": "runtime/crypto_search_economic_v6_20260801/validation_candidate_ledger.parquet",
+      "sha256": "78B38009D91E8AB2D1BF7E570C45B0A5C287405360B6FFA56B165E4A885B9B17"
+    },
+    {
+      "bytes": 6628,
+      "path": "runtime/crypto_search_economic_v6_20260801/validation_decisions.json",
+      "sha256": "306508C8B1511C7C69E28E02AF761332E76EB37D9CC10DB19E4F761B83F1185C"
+    }
+  ],
+  "base_sha": "07a699f11510b943991425c4a86eb7582aa59583",
+  "closure_source_sha": "07a699f11510b943991425c4a86eb7582aa59583",
+  "compiler_identity": {
+    "bundle_sha256": "448B4B0F6DE13A07C803C730D9475D3B9A6B596F8C500829DC2F8EFCE7AA227F",
+    "paths": [
+      {
+        "bytes": 53858,
+        "path": "alphafactory_crypto/broad_search/audit.py",
+        "sha256": "BF7CA03041D84B6E5BB61A0B55914B9DADBBD0F82C91A98C1EEA60397417BC89"
+      },
+      {
+        "bytes": 22527,
+        "path": "alphafactory_crypto/broad_search/expression.py",
+        "sha256": "07549C7DE24C7BB4EE593A2F80CBED7831BE2D9B7992A4B922B2D2E89A6AA7A7"
+      },
+      {
+        "bytes": 36886,
+        "path": "alphafactory_crypto/broad_search/panel18m.py",
+        "sha256": "5C1D49E5892F4EFE8207793A0DF37471F5179CCC757638FFF5B2F58E53645496"
+      },
+      {
+        "bytes": 63095,
+        "path": "alphafactory_crypto/broad_search/compositional18m.py",
+        "sha256": "6B57D3A62B409257398E805DCB3E592CDB6499F86D114600F5401D08097BA99E"
+      },
+      {
+        "bytes": 65839,
+        "path": "alphafactory_crypto/broad_search/pair18m.py",
+        "sha256": "2290BC65C29CDBBD6C5B0997FCC1859B07BF5159B918C80CF868A936DEF2F7BA"
+      },
+      {
+        "bytes": 112828,
+        "path": "alphafactory_crypto/broad_search/runner18m.py",
+        "sha256": "7B902D9E581EAB8349D86478EB0910C1628201599C4996DA07971AA204AFD113"
+      },
+      {
+        "bytes": 567255,
+        "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
+        "sha256": "B6FFE299697C1EA5F3C03A5322B2389C42838BDEB78B9D688247C661AE4DF27A"
+      },
+      {
+        "bytes": 34792,
+        "path": "alphafactory_crypto/broad_search/policy_upgrade_canary.py",
+        "sha256": "C2BB20D451EE1910A8512677568313661C37388C1FE5C0AC5B35650373704FA7"
+      }
+    ]
+  },
+  "continuation": "python -m alphafactory_crypto.broad_search.search_engine_v1 check-economic-v6 --runtime-date 20260801",
+  "data_cache_identity": {
+    "directory_bundle": {
+      "bundle_sha256": "340C01BEB680E776F9B2C6024FDD09AB3CDF09B608A4372C3E355AECF7F0CD97",
+      "bytes": 598775942,
+      "file_count": 122
+    },
+    "identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+    "root": ".cache/crypto_search_engine_v1_4/oi_mark_x_aggtrades_115"
+  },
+  "epoch_id": "CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801",
+  "frozen_contract_sha256": "98B1D94F14414266C5CEDDB8FD8E7366CAD0672286CB778E6570337F6CA892A2",
+  "generation_attempts": 2263,
+  "memory_fallback_used": true,
+  "producer_source_sha": "07a699f11510b943991425c4a86eb7582aa59583",
+  "reproducible": true,
+  "schema_version": 1,
+  "sealed_reads": 0,
+  "status": "ENGINE_VALIDATION_BLOCKED",
+  "strict_evaluated_count": 2000,
+  "workers_final": 8
+}

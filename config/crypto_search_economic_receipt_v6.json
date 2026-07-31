@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "receipt_id": "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V6",
-  "status": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
-  "run_authorized": true,
+  "status": "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
+  "run_authorized": false,
   "run_authorization": {
     "decision_id": "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801",
     "authority": "CURRENT_USER_INSTRUCTION",
@@ -15,8 +15,18 @@
     "seed_set_pre_registered": true,
     "additional_seed_campaign_allowed": false
   },
+  "run_outcome": {
+    "status": "ENGINE_VALIDATION_BLOCKED",
+    "reason": "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE",
+    "runtime": "runtime/crypto_search_economic_v6_20260801",
+    "producer_source_sha": "07a699f11510b943991425c4a86eb7582aa59583",
+    "generation_attempts": 2263,
+    "strict_evaluated_count": 2000,
+    "checkpoint": "checkpoint_validation",
+    "rescue_rerun_started": false
+  },
   "base_receipt_path": "config/crypto_search_economic_receipt_v1.json",
-  "base_receipt_sha256": "C0DEFAE7219D46526B50F6E1D6D02184A0915F9F62F132D0E91961C29D89CCE2",
+  "base_receipt_sha256": "9B59354C8BE5DC9DD98D8D5DF28F3B6B4E5631F6BFF0F226F22ECE76BBAAE8D4",
   "search_campaign": {
     "runner_campaign": "crypto_search_economic_v6",
     "runtime_date": "20260801",

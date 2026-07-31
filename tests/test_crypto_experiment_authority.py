@@ -477,7 +477,7 @@ def test_v5_search_economic_receipt_is_consumed_after_control_stop() -> None:
         )
 
 
-def test_v6_search_economic_receipt_authorizes_only_the_preregistered_seed_campaign() -> None:
+def test_v6_search_economic_receipt_is_consumed_after_seed_robustness_stop() -> None:
     repo_root = Path(__file__).resolve().parents[1]
 
     receipt = resolve_search_economic_receipt(
@@ -485,8 +485,22 @@ def test_v6_search_economic_receipt_authorizes_only_the_preregistered_seed_campa
         receipt_path=SEARCH_ECONOMIC_V6_RECEIPT_PATH,
     )
 
-    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
-    assert receipt["run_authorized"] is True
+    assert receipt["result"] == (
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED"
+    )
+    assert receipt["run_authorized"] is False
+    assert receipt["run_outcome"] == {
+        "status": "ENGINE_VALIDATION_BLOCKED",
+        "reason": "VALIDATION_CONTROL_ARM_FAILED_KILL_LINE",
+        "runtime": "runtime/crypto_search_economic_v6_20260801",
+        "producer_source_sha": (
+            "07a699f11510b943991425c4a86eb7582aa59583"
+        ),
+        "generation_attempts": 2_263,
+        "strict_evaluated_count": 2_000,
+        "checkpoint": "checkpoint_validation",
+        "rescue_rerun_started": False,
+    }
     assert receipt["search_campaign"]["runner_campaign"] == (
         "crypto_search_economic_v6"
     )
@@ -511,6 +525,17 @@ def test_v6_search_economic_receipt_authorizes_only_the_preregistered_seed_campa
         "additional_seed_campaign_allowed": False,
     }
     assert receipt["formal_claims_authorized"] is False
+
+    with pytest.raises(
+        RuntimeError,
+        match="economic_receipt:RUN_NOT_AUTHORIZED",
+    ):
+        require_real_experiment_authority(
+            repo_root,
+            evidence_to_add="another V6 seed campaign",
+            decision_to_change="override the frozen terminal",
+            economic_receipt_path=SEARCH_ECONOMIC_V6_RECEIPT_PATH,
+        )
 
 
 def test_unregistered_search_economic_receipt_path_fails_closed() -> None:

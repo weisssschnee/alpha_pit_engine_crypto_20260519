@@ -4,34 +4,36 @@ Last updated: 2026-08-01 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_AUTHORIZED_NOT_STARTED`
+`CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_VALIDATION_COMPLETE_CONTROL_FAILED_CLOSED`
 
-The current user instruction authorizes one independent V6 fresh-state
-development campaign to test whether V5's result is seed-robust. It does not
-unlock or rewrite V5. The four V6 seeds are pre-registered before candidate one
-as SHA256-derived uint32 values from
-`CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801`: `2816876876`,
-`329219361`, `3805005781`, and `4227787900`. They are disjoint from the V1-V5
-seed set. Carrier, train/validation/holdout partitions, Binance target, joint
-reward, 5 bps cost, 20,000 strict maximum, 100,000 raw-attempt cap, 18-hour
-cap, checkpoint cadence, and validation kill-line are unchanged.
+The single authorized V6 fresh-state seed-robustness campaign is complete and
+its receipt is consumed. Producer
+`07a699f11510b943991425c4a86eb7582aa59583` used four pre-registered,
+SHA256-derived uint32 seeds (`2816876876`, `329219361`, `3805005781`, and
+`4227787900`) disjoint from V1-V5. It retained exactly `2,000` strict candidates
+from `2,263` generation attempts, with all five initial arms at `400` candidates
+and all four V6 seeds at `500` candidates. `checkpoint_000` and
+`checkpoint_validation` restore exactly; the archive contains `1,947` behavior
+families (`2.65%` duplicate rate).
 
-V6 imports no candidate, reward, RNG, distribution, population, policy,
-archive, checkpoint, transition, or validation state from V1-V5. It permits no
-within-campaign seed change, tuning, rescue, or third seed campaign. If the
-2,000-candidate typed-random validation control fails, V6 stops without
-allocating the remaining 18k; only a passing frozen control may enter the
-existing continuation rules. Evidence remains development-only and cannot
-authorize holdout/OOS, challenge, forward, promotion, or an Alpha claim.
+The frozen equal-count validation stage completed `128` matched evaluations per
+current arm, split `64/64` across 1h and 4h. One canonical-random candidate and
+one typed-Evolution candidate produced known control-behavior degenerations and
+were recorded and deterministically backfilled by frozen train rank. Policy and
+archive hashes were unchanged, no candidate was generated during validation,
+and no holdout was read. The canonical typed-random control failed all four
+kill-line conditions: validation net mean, non-overlap floor Sortino, matched
+increment, and control-not-dominant. Its worst-horizon aggregate was
+`-0.0001665951` net mean, `-29.1668` Sortino, and `-0.0002597542` matched
+increment. The runner exited all current arms and allocated none of the
+remaining 18k budget.
 
-Pre-run source verification is complete: all 20 arm-by-seed proposal lanes pass
-on the exact 115-field carrier with zero market evaluations and zero reward
-reads. Campaign-local seeds now drive proposal policies, lane allocation,
-checkpoint state, adaptive updates, final cross-seed qualification, and the
-independent checker. Completed checkpoints require exact four-seed arm-lane
-balance, and validation candidate identities must trace back to the train
-ledger. The full suite passes `349 passed, 1 warning`. No V6 runtime has been
-created and no V6 candidate has been evaluated yet.
+V6 therefore qualifies no arm for a future new-data Arena. The result is
+development-only and does not rewrite V5, establish an Alpha claim, or authorize
+holdout/OOS, challenge, forward, promotion, rescue, tuning, a third seed
+campaign, or import of any V1-V6 state. The independent artifact checker passes
+with bundle SHA256
+`41F0ED04B1568C35323CE328A2251DC06EACBE1BED4D61CD3A8BE7F346427B89`.
 
 The preceding durable state remains:
 
