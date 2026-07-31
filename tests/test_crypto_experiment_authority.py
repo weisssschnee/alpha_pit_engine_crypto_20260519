@@ -13,6 +13,8 @@ from alphafactory_crypto.broad_search.experiment_authority import (
     SEARCH_ECONOMIC_V3_RECEIPT_PATH,
     SEARCH_ECONOMIC_V4_RECEIPT_PATH,
     SEARCH_ECONOMIC_V5_RECEIPT_PATH,
+    SEARCH_ECONOMIC_V6_RECEIPT_PATH,
+    ECONOMIC_SEARCH_V6_SEEDS,
     _file_sha256,
     _validate_search_economic_receipt,
     evaluate_search_validation_kill_line,
@@ -473,6 +475,42 @@ def test_v5_search_economic_receipt_is_consumed_after_control_stop() -> None:
             decision_to_change="future new-data Arena arm qualification",
             economic_receipt_path=SEARCH_ECONOMIC_V5_RECEIPT_PATH,
         )
+
+
+def test_v6_search_economic_receipt_authorizes_only_the_preregistered_seed_campaign() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+
+    receipt = resolve_search_economic_receipt(
+        repo_root,
+        receipt_path=SEARCH_ECONOMIC_V6_RECEIPT_PATH,
+    )
+
+    assert receipt["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+    assert receipt["run_authorized"] is True
+    assert receipt["search_campaign"]["runner_campaign"] == (
+        "crypto_search_economic_v6"
+    )
+    assert tuple(receipt["search_campaign"]["seed_set"]) == (
+        ECONOMIC_SEARCH_V6_SEEDS
+    )
+    assert receipt["search_campaign"]["seed_derivation"] == (
+        "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_3)"
+    )
+    assert receipt["run_authorization"] == {
+        "decision_id": (
+            "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801"
+        ),
+        "authority": "CURRENT_USER_INSTRUCTION",
+        "scope": "ONE_FRESH_STATE_20000_STRICT_MAXIMUM_CAMPAIGN",
+        "cost_interpretation": "RESULTS_CONDITIONAL_ON_FROZEN_5_BPS",
+        "parameter_tuning_allowed": False,
+        "seed_change_allowed": False,
+        "rescue_rerun_allowed": False,
+        "new_campaign_seed_set_authorized": True,
+        "seed_set_pre_registered": True,
+        "additional_seed_campaign_allowed": False,
+    }
+    assert receipt["formal_claims_authorized"] is False
 
 
 def test_unregistered_search_economic_receipt_path_fails_closed() -> None:

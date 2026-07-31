@@ -46,6 +46,34 @@ SEARCH_ECONOMIC_V4_RECEIPT_PATH = (
 SEARCH_ECONOMIC_V5_RECEIPT_PATH = (
     "config/crypto_search_economic_receipt_v5.json"
 )
+SEARCH_ECONOMIC_V6_RECEIPT_PATH = (
+    "config/crypto_search_economic_receipt_v6.json"
+)
+ECONOMIC_SEARCH_V6_EPOCH_ID = (
+    "CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801"
+)
+ECONOMIC_SEARCH_V6_SEED_DERIVATION = (
+    "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_3)"
+)
+
+
+def _derive_v6_seed_set(epoch_id: str) -> tuple[int, ...]:
+    """Derive a pre-registered uint32 seed set without outcome inspection."""
+
+    return tuple(
+        int.from_bytes(
+            hashlib.sha256(f"{epoch_id}|seed|{ordinal}".encode("utf-8")).digest()[
+                :4
+            ],
+            "big",
+        )
+        for ordinal in range(4)
+    )
+
+
+ECONOMIC_SEARCH_V6_SEEDS = _derive_v6_seed_set(
+    ECONOMIC_SEARCH_V6_EPOCH_ID
+)
 SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
     "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1": {
         "path": DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH,
@@ -159,6 +187,34 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "checkpoint": "checkpoint_validation",
             "rescue_rerun_started": False,
         },
+    },
+    "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V6": {
+        "path": SEARCH_ECONOMIC_V6_RECEIPT_PATH,
+        "decision_id": (
+            "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801"
+        ),
+        "runner_campaign": "crypto_search_economic_v6",
+        "runtime_date": "20260801",
+        "allowed_statuses": {
+            "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_COMPLETE",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
+        },
+        "expected_run_outcome": {},
+        "run_authorization_extras": {
+            "new_campaign_seed_set_authorized": True,
+            "seed_set_pre_registered": True,
+            "additional_seed_campaign_allowed": False,
+        },
+        "search_override_keys": {
+            "runner_campaign",
+            "runtime_date",
+            "seed_set",
+            "seed_derivation",
+        },
+        "seed_set": ECONOMIC_SEARCH_V6_SEEDS,
+        "seed_derivation": ECONOMIC_SEARCH_V6_SEED_DERIVATION,
     },
 }
 
@@ -330,6 +386,7 @@ def _validate_search_economic_receipt(
         "parameter_tuning_allowed": False,
         "seed_change_allowed": False,
         "rescue_rerun_allowed": False,
+        **dict(receipt_spec.get("run_authorization_extras") or {}),
     }
     if run_authorization != expected_run_authorization:
         blockers.append("run_authorization")
@@ -624,6 +681,19 @@ def _validate_search_economic_receipt(
         blockers.append("search_campaign.checkpoint_count")
     if search_campaign.get("fresh_state") is not True:
         blockers.append("search_campaign.fresh_state")
+    expected_seed_set = receipt_spec.get("seed_set")
+    if expected_seed_set is not None:
+        if tuple(int(value) for value in search_campaign.get("seed_set") or ()) != tuple(
+            int(value) for value in expected_seed_set
+        ):
+            blockers.append("search_campaign.seed_set")
+        if (
+            search_campaign.get("seed_derivation")
+            != receipt_spec.get("seed_derivation")
+        ):
+            blockers.append("search_campaign.seed_derivation")
+    elif "seed_set" in search_campaign or "seed_derivation" in search_campaign:
+        blockers.append("search_campaign.unexpected_seed_override")
     if (
         kill_line.get("orchestration_campaign")
         != receipt_spec["runner_campaign"]
@@ -765,6 +835,7 @@ def _validate_search_economic_receipt(
         "validation": validation,
         "holdout": holdout,
         "validation_kill_line": kill_line,
+        "run_authorization": run_authorization,
         "run_authorized": bool(receipt["run_authorized"]),
         "run_outcome": run_outcome,
         "formal_claims_authorized": False,
@@ -821,7 +892,15 @@ def _materialize_search_economic_receipt(
     )
     search_override = dict(raw.get("search_campaign") or {})
     validation_override = dict(raw.get("validation_kill_line") or {})
-    if set(search_override) != {"runner_campaign"}:
+    receipt_spec = SEARCH_ECONOMIC_RECEIPT_SPECS.get(
+        str(raw.get("receipt_id") or "")
+    )
+    allowed_search_override = set(
+        dict(receipt_spec or {}).get(
+            "search_override_keys", {"runner_campaign"}
+        )
+    )
+    if set(search_override) != allowed_search_override:
         raise RuntimeError(
             "SEARCH_ECONOMIC_RECEIPT_BLOCKED: inherited_receipt:SEARCH_OVERRIDE"
         )
@@ -1052,6 +1131,10 @@ __all__ = [
     "SEARCH_ECONOMIC_V3_RECEIPT_PATH",
     "SEARCH_ECONOMIC_V4_RECEIPT_PATH",
     "SEARCH_ECONOMIC_V5_RECEIPT_PATH",
+    "SEARCH_ECONOMIC_V6_RECEIPT_PATH",
+    "ECONOMIC_SEARCH_V6_EPOCH_ID",
+    "ECONOMIC_SEARCH_V6_SEED_DERIVATION",
+    "ECONOMIC_SEARCH_V6_SEEDS",
     "REQUIRED_REAL_EXPERIMENT_ROLES",
     "evaluate_search_validation_kill_line",
     "require_real_experiment_authority",

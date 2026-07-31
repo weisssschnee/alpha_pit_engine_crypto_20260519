@@ -60,6 +60,11 @@ from .compositional18m import (
     skeleton_registry,
 )
 from .expression import FieldContract, TypedExpressionRegistry
+from .experiment_authority import (
+    ECONOMIC_SEARCH_V6_EPOCH_ID,
+    ECONOMIC_SEARCH_V6_SEED_DERIVATION,
+    ECONOMIC_SEARCH_V6_SEEDS,
+)
 from .pair18m import (
     FIXED_COST_BPS,
     SEARCH_REWARD_AUTHORITY,
@@ -152,14 +157,16 @@ ECONOMIC_SEARCH_V4_CAMPAIGN = "crypto_search_economic_v4"
 ECONOMIC_SEARCH_V4_EPOCH_ID = "CRYPTO_SEARCH_ECONOMIC_V4_20260731"
 ECONOMIC_SEARCH_V5_CAMPAIGN = "crypto_search_economic_v5"
 ECONOMIC_SEARCH_V5_EPOCH_ID = "CRYPTO_SEARCH_ECONOMIC_V5_20260731"
+ECONOMIC_SEARCH_V6_CAMPAIGN = "crypto_search_economic_v6"
 ECONOMIC_SEARCH_CAMPAIGNS = (
     ECONOMIC_SEARCH_CAMPAIGN,
     ECONOMIC_SEARCH_V2_CAMPAIGN,
     ECONOMIC_SEARCH_V3_CAMPAIGN,
     ECONOMIC_SEARCH_V4_CAMPAIGN,
     ECONOMIC_SEARCH_V5_CAMPAIGN,
+    ECONOMIC_SEARCH_V6_CAMPAIGN,
 )
-ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, str]] = {
+ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, Any]] = {
     ECONOMIC_SEARCH_CAMPAIGN: {
         "epoch_id": ECONOMIC_SEARCH_EPOCH_ID,
         "runtime_date": ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE,
@@ -204,6 +211,17 @@ ECONOMIC_SEARCH_CONFIGS: dict[str, dict[str, str]] = {
         "report_title": "Crypto Search Economic V5",
         "receipt_path": "config/crypto_search_economic_receipt_v5.json",
         "cli_suffix": "economic-v5",
+    },
+    ECONOMIC_SEARCH_V6_CAMPAIGN: {
+        "epoch_id": ECONOMIC_SEARCH_V6_EPOCH_ID,
+        "runtime_date": "20260801",
+        "runtime_prefix": "crypto_search_economic_v6",
+        "report_prefix": "CRYPTO_SEARCH_ECONOMIC_V6",
+        "report_title": "Crypto Search Economic V6 Seed Robustness",
+        "receipt_path": "config/crypto_search_economic_receipt_v6.json",
+        "cli_suffix": "economic-v6",
+        "seeds": ECONOMIC_SEARCH_V6_SEEDS,
+        "seed_derivation": ECONOMIC_SEARCH_V6_SEED_DERIVATION,
     },
 }
 CONTINUATION_CONFIG = "config/crypto_18m_current_field_four_policy_continuation_v1.json"
@@ -358,13 +376,30 @@ V1_PARAMETERS: Mapping[str, Mapping[str, Any]] = {
 }
 
 
-def _economic_campaign_config(campaign: str) -> dict[str, str]:
+def _economic_campaign_config(campaign: str) -> dict[str, Any]:
     try:
         return dict(ECONOMIC_SEARCH_CONFIGS[str(campaign)])
     except KeyError as exc:
         raise ValueError(
             f"unsupported economic search campaign: {campaign}"
         ) from exc
+
+
+def _economic_campaign_seeds(campaign: str) -> tuple[int, ...]:
+    config = _economic_campaign_config(campaign)
+    seeds = tuple(int(value) for value in config.get("seeds", SEEDS))
+    if len(seeds) != len(SEEDS) or len(set(seeds)) != len(seeds):
+        raise ValueError("economic campaign seed set must contain four unique seeds")
+    if any(value < 0 or value > 0xFFFFFFFF for value in seeds):
+        raise ValueError("economic campaign seed set must contain uint32 values")
+    if campaign == ECONOMIC_SEARCH_V6_CAMPAIGN:
+        if seeds != ECONOMIC_SEARCH_V6_SEEDS:
+            raise ValueError("V6 seed set changed")
+        if config.get("seed_derivation") != ECONOMIC_SEARCH_V6_SEED_DERIVATION:
+            raise ValueError("V6 seed derivation changed")
+        if set(seeds) & set(SEEDS):
+            raise ValueError("V6 seed set overlaps the V1-V5 seed set")
+    return seeds
 
 
 def _payload_sha(value: Any) -> str:
@@ -1404,6 +1439,8 @@ def _economic_search_frozen_contract(
     contracts: Sequence[FieldContract],
     carrier_id: str,
     epoch_id: str = ECONOMIC_SEARCH_EPOCH_ID,
+    seeds: Sequence[int] = SEEDS,
+    seed_derivation: str | None = None,
 ) -> dict[str, Any]:
     """Reuse the V1 rolling engine contract on the admitted OI/flow carrier."""
 
@@ -1438,6 +1475,16 @@ def _economic_search_frozen_contract(
             },
         }
     )
+    payload["seeds"] = [int(value) for value in seeds]
+    if seed_derivation is not None:
+        payload["seed_contract"] = {
+            "derivation": str(seed_derivation),
+            "pre_registered_before_candidate_one": True,
+            "prior_v1_v5_seed_set_reused": False,
+            "within_campaign_seed_change_allowed": False,
+            "additional_seed_campaign_allowed": False,
+            "evidence_role": "DEVELOPMENT_SEED_ROBUSTNESS_ONLY",
+        }
     return {**payload, "frozen_contract_sha256": _payload_sha(payload)}
 
 
@@ -4166,7 +4213,10 @@ def _new_campaign_state(
 
 
 def _checkpoint_allocation(
-    checkpoint_index: int, arm_states: Mapping[str, str]
+    checkpoint_index: int,
+    arm_states: Mapping[str, str],
+    *,
+    seeds: Sequence[int] = SEEDS,
 ) -> dict[str, int]:
     if arm_states.get("canonical_typed_random") == "EXITED":
         raise RuntimeError(
@@ -4183,7 +4233,7 @@ def _checkpoint_allocation(
         allocation[arm] = 200
     remaining = CHECKPOINT_SIZE - sum(allocation.values())
     if active:
-        per_arm = (remaining // len(active)) // len(SEEDS) * len(SEEDS)
+        per_arm = (remaining // len(active)) // len(seeds) * len(seeds)
         for arm in active:
             allocation[arm] = per_arm
         allocation[active[0]] += CHECKPOINT_SIZE - sum(allocation.values())
@@ -4194,11 +4244,60 @@ def _checkpoint_allocation(
             allocation[arm] = 0
     if sum(allocation.values()) != CHECKPOINT_SIZE:
         raise AssertionError("checkpoint arm allocation does not sum to 2,000")
-    if any(value % len(SEEDS) for value in allocation.values()):
+    if any(value % len(seeds) for value in allocation.values()):
         raise AssertionError("checkpoint arm allocation is not seed balanced")
     if allocation["canonical_typed_random"] < 400:
         raise AssertionError("typed random fell below its 20% floor")
     return allocation
+
+
+def _completed_checkpoint_seed_balance_errors(
+    ledger: pd.DataFrame,
+    *,
+    expected_seeds: Sequence[int],
+    checkpoint_size: int = CHECKPOINT_SIZE,
+) -> list[str]:
+    """Audit exact seed-lane balance for every completed rolling checkpoint."""
+
+    required_columns = {"checkpoint_index", "arm", "seed"}
+    if not required_columns.issubset(ledger.columns):
+        return ["ledger_seed_balance_columns"]
+    seeds = tuple(int(value) for value in expected_seeds)
+    if not seeds or len(set(seeds)) != len(seeds):
+        return ["expected_seed_contract"]
+    errors: list[str] = []
+    observed_seeds = set(int(value) for value in ledger["seed"].dropna().unique())
+    if len(ledger) >= int(checkpoint_size) and observed_seeds != set(seeds):
+        errors.append("ledger_seed_set_incomplete")
+    for raw_checkpoint_index, rows in ledger.groupby("checkpoint_index"):
+        checkpoint_index = int(raw_checkpoint_index)
+        if len(rows) != int(checkpoint_size):
+            continue
+        arm_counts = {
+            str(arm): int(count) for arm, count in rows.groupby("arm").size().items()
+        }
+        if checkpoint_index == 0 and arm_counts != {
+            arm: 400 for arm in FIRST_CHECKPOINT_ARMS
+        }:
+            errors.append("checkpoint_000_arm_allocation")
+        lane_counts = {
+            (str(arm), int(seed)): int(count)
+            for (arm, seed), count in rows.groupby(["arm", "seed"]).size().items()
+        }
+        for arm, arm_count in arm_counts.items():
+            if arm_count % len(seeds):
+                errors.append(f"checkpoint_{checkpoint_index:03d}_arm_not_seed_divisible:{arm}")
+                continue
+            expected_count = arm_count // len(seeds)
+            expected_lanes = {
+                (arm, seed): expected_count for seed in seeds
+            }
+            observed_lanes = {
+                key: count for key, count in lane_counts.items() if key[0] == arm
+            }
+            if observed_lanes != expected_lanes:
+                errors.append(f"checkpoint_{checkpoint_index:03d}_seed_lanes:{arm}")
+    return errors
 
 
 def _validation_control_arm_stopped(state: Mapping[str, Any]) -> bool:
@@ -5798,6 +5897,7 @@ def _final_decision(
     archive: BehaviorArchive,
     metrics: Sequence[Mapping[str, Any]],
     runtime_root: Path,
+    seeds: Sequence[int] = SEEDS,
 ) -> dict[str, Any]:
     final_rows = {
         str(row["arm"]): row
@@ -5899,7 +5999,7 @@ def _final_decision(
             )
 
         seed_gates: dict[str, Any] = {}
-        for seed in SEEDS:
+        for seed in seeds:
             arm_rows = [
                 row
                 for row in ledger
@@ -5954,7 +6054,7 @@ def _final_decision(
             len(checkpoint_gates) == 2
             and all(bool(row["pass"]) for row in checkpoint_gates)
         )
-        cross_seed_gate = len(seed_gates) == len(SEEDS) and all(
+        cross_seed_gate = len(seed_gates) == len(seeds) and all(
             bool(row["pass"]) for row in seed_gates.values()
         )
         arm_pass = duplicate_gate and consecutive_gate and cross_seed_gate
@@ -7415,6 +7515,7 @@ def _validate_economic_search_surface(
     identities: Mapping[str, Any],
     contracts: Sequence[FieldContract],
     expected_campaign: str = ECONOMIC_SEARCH_CAMPAIGN,
+    expected_seeds: Sequence[int] = SEEDS,
 ) -> str:
     campaign = dict(receipt.get("search_campaign") or {})
     raw_cache = dict(identities.get("raw_cache") or {})
@@ -7461,6 +7562,14 @@ def _validate_economic_search_surface(
         "behavior_contract_holdout_read": behavior_window.get("holdout_read")
         is False,
     }
+    if tuple(int(value) for value in expected_seeds) != SEEDS:
+        checks["campaign_seed_set"] = tuple(
+            int(value) for value in campaign.get("seed_set") or ()
+        ) == tuple(int(value) for value in expected_seeds)
+        checks["campaign_seed_derivation"] = (
+            campaign.get("seed_derivation")
+            == ECONOMIC_SEARCH_V6_SEED_DERIVATION
+        )
     failed = sorted(key for key, value in checks.items() if not value)
     if failed:
         raise RuntimeError(
@@ -8482,6 +8591,9 @@ def run_engine(
     economic_config = (
         _economic_campaign_config(campaign) if is_economic else None
     )
+    campaign_seeds = (
+        _economic_campaign_seeds(campaign) if is_economic else SEEDS
+    )
     is_canary = campaign == "aggtrades_system_canary"
     is_v11 = campaign == "search_engine_v1_1"
     is_v12 = campaign == "search_engine_v1_2"
@@ -8657,6 +8769,7 @@ def run_engine(
             identities=input_identities,
             contracts=contracts,
             expected_campaign=campaign,
+            expected_seeds=campaign_seeds,
         )
     elif is_v13:
         store, contracts, behavior_contract, input_identities, continuation = (
@@ -8698,7 +8811,7 @@ def run_engine(
     proposal_liveness = _proposal_liveness_preflight(
         registry,
         arms=campaign_arms,
-        seeds=SEEDS,
+        seeds=campaign_seeds,
     )
     compiler_binding = _compiler_binding(repo_root)
     environment = _environment_fingerprint()
@@ -8712,6 +8825,8 @@ def run_engine(
             contracts=contracts,
             carrier_id=str(carrier_id),
             epoch_id=economic_config["epoch_id"],
+            seeds=campaign_seeds,
+            seed_derivation=economic_config.get("seed_derivation"),
         )
     elif is_v13:
         frozen = _v13_frozen_contract(
@@ -8838,10 +8953,10 @@ def run_engine(
         )
     else:
         state = _new_campaign_state(
-            source_sha, frozen_hash, arms=campaign_arms, seeds=SEEDS
+            source_sha, frozen_hash, arms=campaign_arms, seeds=campaign_seeds
         )
         policies = _initial_policies(
-            registry, arms=campaign_arms, seeds=SEEDS
+            registry, arms=campaign_arms, seeds=campaign_seeds
         )
         ledger: list[dict[str, Any]] = []
         archive = BehaviorArchive()
@@ -9002,7 +9117,9 @@ def run_engine(
                 else dict(AGGTRADES_CANARY_CHECKPOINT_ALLOCATION)
                 if is_canary
                 else _checkpoint_allocation(
-                    checkpoint_index, state["arm_states"]
+                    checkpoint_index,
+                    state["arm_states"],
+                    seeds=campaign_seeds,
                 )
             )
             checkpoint_existing = Counter(
@@ -9011,10 +9128,10 @@ def run_engine(
                 if int(row["checkpoint_index"]) == checkpoint_index
             )
             target_by_lane = {
-                _policy_key(arm, seed): allocation[arm] // len(SEEDS)
+                _policy_key(arm, seed): allocation[arm] // len(campaign_seeds)
                 for arm in allocation
                 if allocation[arm] > 0
-                for seed in SEEDS
+                for seed in campaign_seeds
             }
             lane_completed = Counter(
                 _policy_key(str(row["arm"]), int(row["seed"]))
@@ -9488,7 +9605,7 @@ def run_engine(
                     "collision_controlled_evolution_v2_2",
                 }
             )
-            for seed in SEEDS:
+            for seed in campaign_seeds:
                 for arm in cem_arms:
                     policy = policies[_policy_key(arm, seed)]
                     assert isinstance(policy, HierarchicalTypedCEMV2)
@@ -9878,6 +9995,7 @@ def run_engine(
             archive=archive,
             metrics=metrics,
             runtime_root=runtime_root,
+            seeds=campaign_seeds,
         )
     )
     if is_economic:
@@ -10080,6 +10198,35 @@ def check_engine(
     archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
     metrics = pd.read_parquet(runtime_root / "arm_checkpoint_metrics.parquet")
     family_summary = _read_json(runtime_root / "behavior_family_summary.json")
+    expected_campaign_seeds = (
+        _economic_campaign_seeds(campaign) if is_economic else SEEDS
+    )
+    if tuple(int(value) for value in frozen.get("seeds") or ()) != tuple(
+        expected_campaign_seeds
+    ):
+        errors.append("frozen_seed_set")
+    if "seed" in ledger.columns and not set(
+        int(value) for value in ledger["seed"].dropna().unique()
+    ).issubset(set(expected_campaign_seeds)):
+        errors.append("ledger_seed_set")
+    if campaign == ECONOMIC_SEARCH_V6_CAMPAIGN:
+        expected_seed_contract = {
+            "derivation": ECONOMIC_SEARCH_V6_SEED_DERIVATION,
+            "pre_registered_before_candidate_one": True,
+            "prior_v1_v5_seed_set_reused": False,
+            "within_campaign_seed_change_allowed": False,
+            "additional_seed_campaign_allowed": False,
+            "evidence_role": "DEVELOPMENT_SEED_ROBUSTNESS_ONLY",
+        }
+        if dict(frozen.get("seed_contract") or {}) != expected_seed_contract:
+            errors.append("frozen_seed_contract")
+        errors.extend(
+            f"v6_seed_balance:{item}"
+            for item in _completed_checkpoint_seed_balance_errors(
+                ledger,
+                expected_seeds=expected_campaign_seeds,
+            )
+        )
     if (
         is_economic
         and validation_complete
@@ -10095,6 +10242,13 @@ def check_engine(
         validation_decisions = _read_json(
             runtime_root / "validation_decisions.json"
         )
+        if campaign == ECONOMIC_SEARCH_V6_CAMPAIGN:
+            if "candidate_id" not in validation_rows.columns:
+                errors.append("validation_candidate_provenance")
+            elif not set(validation_rows["candidate_id"].astype(str)).issubset(
+                set(ledger["candidate_id"].astype(str))
+            ):
+                errors.append("validation_candidate_provenance")
         validation_checkpoint = (
             runtime_root / "checkpoints" / "checkpoint_validation"
         )
@@ -13511,6 +13665,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             "run-economic-v5",
             "close-economic-v5",
             "check-economic-v5",
+            "run-economic-v6",
+            "close-economic-v6",
+            "check-economic-v6",
             "build-canary-cache",
             "run-canary",
             "check-canary",
@@ -13541,6 +13698,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "run-economic-v3": ECONOMIC_SEARCH_V3_CAMPAIGN,
         "run-economic-v4": ECONOMIC_SEARCH_V4_CAMPAIGN,
         "run-economic-v5": ECONOMIC_SEARCH_V5_CAMPAIGN,
+        "run-economic-v6": ECONOMIC_SEARCH_V6_CAMPAIGN,
     }.get(args.command)
     if args.command.startswith("run"):
         from alphafactory_crypto.broad_search.experiment_authority import (
@@ -13625,6 +13783,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             ),
             source_sha=args.source_sha,
             campaign=ECONOMIC_SEARCH_V5_CAMPAIGN,
+            authority_preflight=authority_preflight,
+        )
+    elif args.command == "run-economic-v6":
+        result = run_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260801"),
+            source_sha=args.source_sha,
+            campaign=ECONOMIC_SEARCH_V6_CAMPAIGN,
             authority_preflight=authority_preflight,
         )
     elif args.command == "close-economic-v1":
@@ -13722,6 +13888,19 @@ def main(argv: Sequence[str] | None = None) -> int:
                 args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
             ),
             campaign=ECONOMIC_SEARCH_V5_CAMPAIGN,
+        )
+    elif args.command == "close-economic-v6":
+        result = close_budget_exhausted_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260801"),
+            closure_source_sha=args.source_sha,
+            campaign=ECONOMIC_SEARCH_V6_CAMPAIGN,
+        )
+    elif args.command == "check-economic-v6":
+        result = check_engine(
+            repo_root,
+            runtime_date=str(args.runtime_date or "20260801"),
+            campaign=ECONOMIC_SEARCH_V6_CAMPAIGN,
         )
     elif args.command == "check":
         result = check_engine(

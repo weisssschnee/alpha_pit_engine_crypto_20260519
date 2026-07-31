@@ -24,13 +24,19 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     ECONOMIC_SEARCH_V3_CAMPAIGN,
     ECONOMIC_SEARCH_V4_CAMPAIGN,
     ECONOMIC_SEARCH_V5_CAMPAIGN,
+    ECONOMIC_SEARCH_V6_CAMPAIGN,
+    ECONOMIC_SEARCH_V6_SEEDS,
+    FIRST_CHECKPOINT_ARMS,
     HierarchicalTypedCEMV2,
     SEEDS,
     TypedEvolutionV2,
     _completed_validation_control_stop,
+    _completed_checkpoint_seed_balance_errors,
     _budget_exhausted_decision,
     _budget_exhausted_report_text,
     _economic_campaign_config,
+    _economic_campaign_seeds,
+    _economic_search_frozen_contract,
     _final_decision,
     _initial_policies,
     _proposal_liveness_preflight,
@@ -197,6 +203,86 @@ def test_v5_campaign_uses_independent_runtime_and_receipt() -> None:
         "receipt_path": "config/crypto_search_economic_receipt_v5.json",
         "cli_suffix": "economic-v5",
     }
+
+
+def test_v6_campaign_freezes_an_independent_deterministic_seed_set() -> None:
+    config = _economic_campaign_config(ECONOMIC_SEARCH_V6_CAMPAIGN)
+
+    assert config == {
+        "epoch_id": "CRYPTO_SEARCH_ECONOMIC_V6_SEED_ROBUSTNESS_20260801",
+        "runtime_date": "20260801",
+        "runtime_prefix": "crypto_search_economic_v6",
+        "report_prefix": "CRYPTO_SEARCH_ECONOMIC_V6",
+        "report_title": "Crypto Search Economic V6 Seed Robustness",
+        "receipt_path": "config/crypto_search_economic_receipt_v6.json",
+        "cli_suffix": "economic-v6",
+        "seeds": ECONOMIC_SEARCH_V6_SEEDS,
+        "seed_derivation": (
+            "SHA256_U32_BIG_ENDIAN(epoch_id|seed|ordinal_0_TO_3)"
+        ),
+    }
+    assert ECONOMIC_SEARCH_V6_SEEDS == (
+        2816876876,
+        329219361,
+        3805005781,
+        4227787900,
+    )
+    assert _economic_campaign_seeds(ECONOMIC_SEARCH_V6_CAMPAIGN) == (
+        ECONOMIC_SEARCH_V6_SEEDS
+    )
+    assert _economic_campaign_seeds(ECONOMIC_SEARCH_V5_CAMPAIGN) == SEEDS
+    assert set(ECONOMIC_SEARCH_V6_SEEDS).isdisjoint(SEEDS)
+
+    frozen = _economic_search_frozen_contract(
+        source_sha="a" * 40,
+        compiler_binding={"sha256": "b" * 64},
+        behavior_contract={"schema_version": 1},
+        input_identities={"carrier": "fixed"},
+        environment={"python": "test"},
+        contracts=tuple(_registry().fields.values()),
+        carrier_id="OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+        epoch_id=config["epoch_id"],
+        seeds=_economic_campaign_seeds(ECONOMIC_SEARCH_V6_CAMPAIGN),
+        seed_derivation=config["seed_derivation"],
+    )
+    assert tuple(frozen["seeds"]) == ECONOMIC_SEARCH_V6_SEEDS
+    assert frozen["seed_contract"] == {
+        "derivation": config["seed_derivation"],
+        "pre_registered_before_candidate_one": True,
+        "prior_v1_v5_seed_set_reused": False,
+        "within_campaign_seed_change_allowed": False,
+        "additional_seed_campaign_allowed": False,
+        "evidence_role": "DEVELOPMENT_SEED_ROBUSTNESS_ONLY",
+    }
+
+
+def test_v6_completed_checkpoint_requires_all_seed_lanes_exactly_balanced() -> None:
+    rows = [
+        {"checkpoint_index": 0, "arm": arm, "seed": seed}
+        for arm in FIRST_CHECKPOINT_ARMS
+        for seed in ECONOMIC_SEARCH_V6_SEEDS
+        for _ in range(100)
+    ]
+    balanced = pd.DataFrame(rows)
+    assert _completed_checkpoint_seed_balance_errors(
+        balanced,
+        expected_seeds=ECONOMIC_SEARCH_V6_SEEDS,
+    ) == []
+
+    corrupted = balanced.copy()
+    corrupted.loc[0, "seed"] = ECONOMIC_SEARCH_V6_SEEDS[1]
+    errors = _completed_checkpoint_seed_balance_errors(
+        corrupted,
+        expected_seeds=ECONOMIC_SEARCH_V6_SEEDS,
+    )
+    assert "checkpoint_000_seed_lanes:canonical_typed_random" in errors
+
+    one_seed = balanced.copy()
+    one_seed["seed"] = ECONOMIC_SEARCH_V6_SEEDS[0]
+    assert "ledger_seed_set_incomplete" in _completed_checkpoint_seed_balance_errors(
+        one_seed,
+        expected_seeds=ECONOMIC_SEARCH_V6_SEEDS,
+    )
 
 
 def test_completed_validation_control_stop_has_distinct_terminal_identity() -> None:
@@ -672,3 +758,69 @@ def test_arm_cannot_qualify_on_compute_density_alone(tmp_path) -> None:
     assert not decision["search_strategy_qualification_evidence"][
         "hierarchical_typed_cem_v2"
     ]["checkpoint_gates"][-1]["reward_not_worse"]
+
+
+def test_v6_final_decision_uses_campaign_local_seed_set(tmp_path: Path) -> None:
+    metrics = []
+    for checkpoint_index in (8, 9):
+        metrics.extend(
+            (
+                {
+                    "checkpoint_index": checkpoint_index,
+                    "arm": "canonical_typed_random",
+                    "valid_exact_unique_per_cpu_hour": 100.0,
+                    "new_behavior_families_per_1k_evaluations": 600.0,
+                    "mean_search_reward_at_matched_count": 0.0,
+                    "top_decile_search_reward_at_matched_count": 1.0,
+                    "behavior_duplicate_rate": 0.10,
+                },
+                {
+                    "checkpoint_index": checkpoint_index,
+                    "arm": "hierarchical_typed_cem_v2",
+                    "valid_exact_unique_per_cpu_hour": 101.0,
+                    "new_behavior_families_per_1k_evaluations": 700.0,
+                    "mean_search_reward_at_matched_count": 0.0,
+                    "top_decile_search_reward_at_matched_count": 1.0,
+                    "behavior_duplicate_rate": 0.10,
+                },
+            )
+        )
+    ledger = [
+        {
+            "arm": arm,
+            "seed": seed,
+            "arm_completion_ordinal": 1,
+            "search_reward": 0.0,
+            "operation": "TEST",
+            "receipt_verified": False,
+            "family_member_count_at_completion": 1,
+        }
+        for seed in ECONOMIC_SEARCH_V6_SEEDS
+        for arm in ("canonical_typed_random", "hierarchical_typed_cem_v2")
+    ]
+
+    decision = _final_decision(
+        source_sha="a" * 40,
+        state={
+            "arm_states": {
+                "hierarchical_typed_cem_v2": "ACTIVE",
+                "typed_evolution_v2": "EXITED",
+            },
+            "generation_attempts": len(ledger),
+            "wall_elapsed_seconds": 1.0,
+        },
+        ledger=ledger,
+        archive=BehaviorArchive(),
+        metrics=metrics,
+        runtime_root=tmp_path,
+        seeds=ECONOMIC_SEARCH_V6_SEEDS,
+    )
+
+    assert "hierarchical_typed_cem_v2" in decision[
+        "future_new_data_arena_qualified_arms"
+    ]
+    assert set(
+        decision["search_strategy_qualification_evidence"][
+            "hierarchical_typed_cem_v2"
+        ]["seed_gates"]
+    ) == {str(seed) for seed in ECONOMIC_SEARCH_V6_SEEDS}
