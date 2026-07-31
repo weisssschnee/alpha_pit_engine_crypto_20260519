@@ -114,9 +114,11 @@ accepted components whose nodes explicitly said `active_authority: false`.
       the later holdout remains unreadable.
     Every referenced component is content-hash frozen. Alternate receipt paths
     are rejected and both CLI and direct runner entry points re-resolve the
-    committed receipt. This schema requires `run_authorized=false`; source
-    qualification cannot activate a market experiment or promote any
-    NON_FORMAL role.
+    committed receipt. Schema 2 records the current user's explicit
+    authorization for one fresh-state, development-only campaign of at most
+    20,000 strict candidates. The frozen 5 bps cost remains a conditional
+    assumption, so this activation cannot create a formal economic claim or
+    promote any NON_FORMAL role.
 
 ## Consequences
 
@@ -163,3 +165,7 @@ accepted components whose nodes explicitly said `active_authority: false`.
   synthetic-test evidence only; no validation campaign ran.
 - No second AST, compiler, evaluator, Graph layer, scheduler, or experiment
   database is created.
+- The run authorization is single-campaign and fail-closed: no parameter
+  tuning, seed change, rescue rerun, holdout/OOS/challenge read, or promotion
+  is permitted. All outcomes must be reported as conditional on the frozen
+  5 bps assumption.

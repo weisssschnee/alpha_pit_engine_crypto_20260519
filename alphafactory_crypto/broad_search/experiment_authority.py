@@ -157,19 +157,31 @@ def _validate_search_economic_receipt(
     *,
     receipt_path_label: str,
 ) -> dict[str, Any]:
-    """Validate one receipt payload; it never grants run authority."""
+    """Validate the one explicitly authorized conditional-development receipt."""
 
     receipt = dict(receipt)
     blockers: list[str] = []
 
-    if receipt.get("schema_version") != 1:
+    if receipt.get("schema_version") != 2:
         blockers.append("schema_version")
     if receipt.get("receipt_id") != "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1":
         blockers.append("receipt_id")
-    if receipt.get("status") != "SOURCE_QUALIFIED_NOT_RUN_AUTHORIZED":
+    if receipt.get("status") != "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT":
         blockers.append("status")
-    if receipt.get("run_authorized") is not False:
+    if receipt.get("run_authorized") is not True:
         blockers.append("run_authorized")
+    run_authorization = dict(receipt.get("run_authorization") or {})
+    expected_run_authorization = {
+        "decision_id": "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V1_20260731",
+        "authority": "CURRENT_USER_INSTRUCTION",
+        "scope": "ONE_FRESH_STATE_20000_STRICT_MAXIMUM_CAMPAIGN",
+        "cost_interpretation": "RESULTS_CONDITIONAL_ON_FROZEN_5_BPS",
+        "parameter_tuning_allowed": False,
+        "seed_change_allowed": False,
+        "rescue_rerun_allowed": False,
+    }
+    if run_authorization != expected_run_authorization:
+        blockers.append("run_authorization")
     market = dict(receipt.get("market") or {})
     if market != {"asset_class": "CRYPTO", "calendar": "CONTINUOUS_UTC"}:
         blockers.append("market")
@@ -326,7 +338,10 @@ def _validate_search_economic_receipt(
         blockers.append("cost.venue")
     if cost.get("instrument_type") != execution.get("instrument_type"):
         blockers.append("cost.instrument_type")
-    if cost.get("qualification") != "FROZEN_VENUE_ASSUMPTION_NON_FORMAL":
+    if (
+        cost.get("qualification")
+        != "FROZEN_CONDITIONAL_5BPS_ASSUMPTION"
+    ):
         blockers.append("cost.qualification")
 
     from alphafactory_crypto.broad_search.pair18m import SEARCH_REWARD_AUTHORITY
@@ -587,7 +602,7 @@ def _validate_search_economic_receipt(
         "validation": validation,
         "holdout": holdout,
         "validation_kill_line": kill_line,
-        "run_authorized": False,
+        "run_authorized": bool(receipt["run_authorized"]),
         "formal_claims_authorized": False,
     }
 

@@ -144,7 +144,7 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
 
     result = resolve_search_economic_receipt(repo_root)
 
-    assert result["result"] == "SOURCE_QUALIFIED_NOT_RUN_AUTHORIZED"
+    assert result["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
     assert result["receipt_path"] == DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH
     assert result["market"] == {
         "asset_class": "CRYPTO",
@@ -206,7 +206,8 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
         "NEXT_CHECKPOINT_USES_EXISTING_ARM_STATE"
     )
     assert result["holdout"]["read_allowed"] is False
-    assert result["run_authorized"] is False
+    assert result["run_authorized"] is True
+    assert result["formal_claims_authorized"] is False
     assert len(result["receipt_sha256"]) == 64
     assert all(
         len(value) == 64 for value in result["component_sha256"].values()
@@ -234,18 +235,14 @@ def test_search_economic_receipt_fails_closed_on_target_drift(
         )
 
 
-def test_search_economic_receipt_cannot_open_run_authority_by_itself() -> None:
+def test_search_economic_receipt_authority_remains_conditional() -> None:
     repo_root = Path(__file__).resolve().parents[1]
 
-    with pytest.raises(
-        RuntimeError,
-        match="economic_receipt:RUN_NOT_AUTHORIZED",
-    ):
-        require_real_experiment_authority(
-            repo_root,
-            evidence_to_add="fresh development policy productivity evidence",
-            decision_to_change="qualify or reject a future search arm",
-        )
+    receipt = resolve_search_economic_receipt(repo_root)
+
+    assert receipt["run_authorized"] is True
+    assert receipt["formal_claims_authorized"] is False
+    assert receipt["cost"]["cost_bps"] == 5.0
 
 
 def test_validation_kill_line_is_pure_and_fail_closed() -> None:

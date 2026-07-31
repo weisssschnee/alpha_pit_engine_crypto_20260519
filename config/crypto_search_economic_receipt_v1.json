@@ -1,8 +1,17 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "receipt_id": "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1",
-  "status": "SOURCE_QUALIFIED_NOT_RUN_AUTHORIZED",
-  "run_authorized": false,
+  "status": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+  "run_authorized": true,
+  "run_authorization": {
+    "decision_id": "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V1_20260731",
+    "authority": "CURRENT_USER_INSTRUCTION",
+    "scope": "ONE_FRESH_STATE_20000_STRICT_MAXIMUM_CAMPAIGN",
+    "cost_interpretation": "RESULTS_CONDITIONAL_ON_FROZEN_5_BPS",
+    "parameter_tuning_allowed": false,
+    "seed_change_allowed": false,
+    "rescue_rerun_allowed": false
+  },
   "search_campaign": {
     "runner_campaign": "crypto_search_economic_v1",
     "runtime_date": "20260731",
@@ -78,7 +87,7 @@
     "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
     "venue": "BINANCE_USD_M",
     "instrument_type": "LINEAR_PERPETUAL",
-    "qualification": "FROZEN_VENUE_ASSUMPTION_NON_FORMAL",
+    "qualification": "FROZEN_CONDITIONAL_5BPS_ASSUMPTION",
     "model_id": "FULL_L1_FIXED_BPS",
     "cost_bps": 5.0,
     "initial_establishment_charged": true,
@@ -178,7 +187,7 @@
     },
     "validation_kill_line": {
       "path": "alphafactory_crypto/broad_search/experiment_authority.py",
-      "sha256": "8E7F0FEF95DB0B0CF98DD5B449FC67EA453F87E18D37D3E0883E3EC0229F528D"
+      "sha256": "761D3F235217D87A94C486D1DEB9534BE1A5EE1078362C73B0F1DE379B269608"
     },
     "portfolio_mapping_and_cost": {
       "path": "alphafactory_crypto/instrument_capability/mapping.py",

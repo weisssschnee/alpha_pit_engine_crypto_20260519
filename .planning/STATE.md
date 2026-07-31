@@ -44,8 +44,9 @@ kill-line consumes only frozen validation metrics; its runtime adapter stops
 the failed arm and atomically writes a checkpoint without reading
 test/recent/stress/holdout or writing optimizer state. All referenced source
 hashes are frozen. Canonical and direct runner entry points revalidate the
-receipt, but `run_authorized=false` remains a hard blocker. No market
-evaluation, search, sealed read, policy update, or promotion occurred.
+receipt. The current user instruction authorizes exactly one conditional
+development campaign under the frozen 5 bps assumption; no formal claim,
+sealed read, OOS, challenge, or promotion is authorized.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new
 candidate evaluations and zero market budget. It found that `666/1,200` Stage-B
@@ -248,7 +249,7 @@ SEARCH_ENGINE_FROZEN_VALIDATION_ORCHESTRATION_SOURCE_COMPLETE
 SEARCH_ENGINE_FRESH_ADAPTIVE_CAMPAIGN_NOT_AUTHORIZED
 SEARCH_ENGINE_INACTIVE_AUTHORITY_PREFLIGHT_BLOCKED
 SEARCH_ENGINE_ECONOMIC_RECEIPT_V1_SOURCE_QUALIFIED
-SEARCH_ENGINE_ECONOMIC_RECEIPT_RUN_NOT_AUTHORIZED
+SEARCH_ENGINE_ECONOMIC_RECEIPT_RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT
 CAPABILITY_STRICT_FEEDBACK_GLOBAL_SCOPE_REVOKED
 CAPABILITY_STRICT_FEEDBACK_AUTHORITY_RETAINED
 UNIFIED_FIELD_MANAGEMENT_V1_COMPILED_VIEW_ACTIVE
@@ -361,8 +362,8 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 - Search Engine V1 now has a source-qualified distinct validation kill-line contract. It is NON_FORMAL, makes no optimizer feedback writes, and is not runtime- or market-verified. The historical report-only block remains spent and is not reused.
-- Search Engine V1 now has one enforced source-level economic-semantics receipt over existing components. Both CLI and direct runner entry points re-resolve it; alternate receipt paths are not accepted, component hashes must match, and `run_authorized` must remain false under this schema. The worker has a receipt-bound Binance target override, the pair evaluator consumes receipt-bound train orientation and cost, and the validation adapter atomically checkpoints failed arms. No fresh candidate ledger has executed those paths and no runtime qualification is claimed.
-- The receipt-bound fresh validation orchestration is now connected to a dedicated `crypto_search_economic_v1` entry point that reuses the existing rolling engine and the already-qualified 115-field OI/mark x aggTrades carrier; historical campaigns revalidate the existing Graph authority preflight against their own spent contracts and do not consume this receipt. The behavior descriptor contract and its regime quantiles/support hash are frozen from the receipt train block only; validation and holdout do not contribute to behavior identity. Both train and validation drop the final six hours, equal to the frozen two-hour execution delay plus maximum four-hour horizon, so label endpoints cannot cross into the next evidence role. At the reachable budget boundary after `checkpoint_000` updates and restores the frozen train policy, but before any `checkpoint_001` allocation, it deterministically selects 64 train-frozen candidates for each required 1h/4h horizon per active arm (128 total), reuses their persisted orientation and matched limiting sleeve, evaluates only the validation partition, keeps policy/archive/generation state unchanged, writes failed arms to the existing `arm_states`, and atomically publishes/restores `checkpoint_validation`. The next existing allocation consumes those states, so a failed adaptive arm receives zero subsequent budget while the typed-random control remains mandatory. Resume ordering prefers validation only at equal checkpoint progress and prefers later numeric checkpoints after continuation; every resumed economic state revalidates `checkpoint_validation` and republishes the top-level validation artifacts before continuation, closing the crash window between atomic checkpoint publication and artifact projection. Component hashes use canonical LF content so Windows checkout line endings cannot invalidate the committed binding. No market candidate was evaluated and the receipt remains run-inactive; this closes the source orchestration gap without authorizing or claiming a validation result.
+- Search Engine V1 now has one enforced source-level economic-semantics receipt over existing components. Both CLI and direct runner entry points re-resolve it; alternate receipt paths are not accepted and component hashes must match. Receipt schema 2 records the current user's authorization for exactly one fresh-state campaign with at most 20,000 strict candidates under the frozen 5 bps conditional assumption; parameter tuning, seed changes, rescue reruns, formal claims, and promotion remain forbidden. The worker has a receipt-bound Binance target override, the pair evaluator consumes receipt-bound train orientation and cost, and the validation adapter atomically checkpoints failed arms.
+- The receipt-bound fresh validation orchestration is connected to the dedicated `crypto_search_economic_v1` entry point that reuses the existing rolling engine and the already-qualified 115-field OI/mark x aggTrades carrier; historical campaigns revalidate the existing Graph authority preflight against their own spent contracts and do not consume this receipt. The behavior descriptor contract and its regime quantiles/support hash are frozen from the receipt train block only; validation and holdout do not contribute to behavior identity. Both train and validation drop the final six hours, equal to the frozen two-hour execution delay plus maximum four-hour horizon, so label endpoints cannot cross into the next evidence role. At the reachable budget boundary after `checkpoint_000` updates and restores the frozen train policy, but before any `checkpoint_001` allocation, it deterministically selects 64 train-frozen candidates for each required 1h/4h horizon per active arm (128 total), reuses their persisted orientation and matched limiting sleeve, evaluates only the validation partition, keeps policy/archive/generation state unchanged, writes failed arms to the existing `arm_states`, and atomically publishes/restores `checkpoint_validation`. The next existing allocation consumes those states, so a failed adaptive arm receives zero subsequent budget while the typed-random control remains mandatory. Resume ordering prefers validation only at equal checkpoint progress and prefers later numeric checkpoints after continuation; every resumed economic state revalidates `checkpoint_validation` and republishes the top-level validation artifacts before continuation, closing the crash window between atomic checkpoint publication and artifact projection. Component hashes use canonical LF content so Windows checkout line endings cannot invalidate the committed binding. The campaign remains development-only and every result is conditional on the frozen 5 bps assumption.
 
 ## Source-of-truth order
 
@@ -402,12 +403,11 @@ authority.
 ADR 0015 records the preflight and ADR 0016 records the active-authority rule,
 economic authority suspension, reuse map, and successor receipt. The current
 target, optimizer-reward, execution-price, cost, and validation bindings remain
-NON_FORMAL and run-inactive. Portfolio mapping remains formal; that does not
-promote the venue cost assumption. Canonical and direct `run*` entry points
-additionally verify the content-hashed successor receipt and reject its
-hard-false `run_authorized`, so a fresh run fails closed. No market experiment,
-candidate evaluation, OOS access, promotion, or large budget was run or
-authorized by the implementation.
+NON_FORMAL but are activated only for the one receipt-bound conditional
+development campaign. Portfolio mapping remains formal; that does not promote
+the venue cost assumption. Canonical and direct `run*` entry points verify the
+content-hashed successor receipt and exact user authorization. OOS access,
+promotion, cost tuning, seed changes, and rescue reruns remain forbidden.
 
 ## Crypto reward uncertainty V2 source repair
 
@@ -429,11 +429,9 @@ authority binding or research qualification was promoted.
 
 ## Next action
 
-Stop at this source-qualification closure. The successor receipt exists and
-must be reused; do not redesign its components. A future explicit run
-authorization must name the admitted carrier, budget, evidence increment and
-decision, then change `run_authorized` under a new accepted decision before
-the canonical CLI can start. Do not reconstruct historical rewards, rerun
-candidates, start adaptive V1.4b, expand the operator basis, spend
-market-evaluation budget, train latent priority, open sealed roles, run
-OOS/challenge/forward, or promote candidates without that authorization.
+Run the one authorized `crypto_search_economic_v1` campaign using the committed
+receipt, 115-field aligned carrier, 10 workers, frozen seeds, 2,000-candidate
+checkpoints, and existing budget/validation exits. Do not redesign components,
+reconstruct historical rewards, expand the operator basis, train latent
+priority, open sealed roles, run OOS/challenge/forward, promote candidates,
+tune parameters, change seeds, or start a rescue rerun.
