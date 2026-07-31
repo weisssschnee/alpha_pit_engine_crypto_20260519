@@ -395,7 +395,7 @@
                   },
                   {
                       "id":  "real_policy_upgrade_canary",
-                      "label":  "Search Engine conditional-development campaign (V2 fresh-state authorized; V1 incomplete HOLD)",
+                      "label":  "Search Engine conditional-development campaigns (V2 checkpoint_000 validation-blocked HOLD)",
                       "kind":  "development_experiment",
                       "lifecycle":  "EXPERIMENTAL",
                       "paths":  [
@@ -461,7 +461,10 @@
                                     "reports/CRYPTO_SEARCH_ENGINE_V1_4_BINANCE_TARGET_REPLAY_20260729.md",
                                     "runtime/crypto_search_economic_v1_20260731/run_manifest.json",
                                     "runtime/crypto_search_economic_v1_20260731/final_decision.json",
-                                    "reports/CRYPTO_SEARCH_ECONOMIC_V1_20260731.md"
+                                    "reports/CRYPTO_SEARCH_ECONOMIC_V1_20260731.md",
+                                    "runtime/crypto_search_economic_v2_20260731/run_manifest.json",
+                                    "runtime/crypto_search_economic_v2_20260731/final_decision.json",
+                                    "reports/CRYPTO_SEARCH_ECONOMIC_V2_20260731.md"
                                 ],
                       "critical":  true,
                       "semantic_role":  "search_engine_system_canary_pass_research_hold",
@@ -469,8 +472,8 @@
                       "authority":  {
                                         "path":  "config/crypto_search_economic_receipt_v2.json",
                                         "repo_ref":  "replay/crypto-search-engine-v1-4-binance-target-20260729",
-                                        "verified_sha":  "e371befdcf38be50bf37a68e75de9ec72b6de852",
-                                        "sha256":  "EFCD810D68E4FAD28A54219AA5A0B9A970C51CF7E1B5E4B48B33424C686415D2"
+                                        "verified_sha":  "e5d495f148042132fadb0e6aeec6fc83088a8d8d",
+                                        "sha256":  "F78FB2A77478CFD5BE71977058DA35D81A244C5FAC2D959C65413D7D7D7D7552"
                                     },
                       "contracts":  [
                                         {
@@ -492,13 +495,13 @@
                                             "evidence_ref":  "runtime/crypto_search_economic_v1_20260731/final_decision.json"
                                         },
                                         {
-                                            "id":  "crypto_search_economic_v2_fresh_state_authorization",
+                                            "id":  "crypto_search_economic_v2_consumed_outcome",
                                             "type":  "AUTHORITY",
-                                            "rule":  "The current-user V2 receipt authorizes one independent fresh-state campaign capped at 20,000 strict candidates on the unchanged 115-field OI/mark x aggTrades carrier. It hash-locks and inherits the consumed V1 target, mapping, joint train reward, conditional 5 bps cost, evidence partitions, validation kill-line, and sealed boundaries, while assigning a distinct campaign, epoch, runtime, RNG, policies, archive, ledger, receipts, and checkpoints. It imports no V1 search state. The exact five-arm by four-seed proposal liveness preflight passed on the admitted carrier with zero market evaluations and zero reward reads. Ten workers are requested with fail-closed fallback to eight; 12 workers, parameter tuning, seed changes, rescue reruns, sealed/OOS/challenge/recent/May-stress/forward reads, promotion, latent priority, and cross-sprint memory remain forbidden.",
+                                            "rule":  "The one-run V2 receipt is consumed and run_authorized is false. Its independent fresh-state producer passed all 20 proposal-liveness lanes with zero preflight market evaluations, selected the fail-closed eight-worker fallback, and reached restore-verified checkpoint_000 with 2,000 strict candidates from 2,280 attempts and 1,964 behavior families. Before checkpoint_001 allocation, one train-selected validation candidate produced CONTROL_BEHAVIOR_EQUALS_PRIMARY. The historical producer detected the invalid matched control but did not persist the selected identity or convert the condition into a terminal state; closure source a371330a8ec5f77a70d34ecdbf0193e89cb5ea94 now handles known validation-constructibility failures fail closed. The stopped run was closed from checkpoint_000 without candidate generation or evaluation and was not resumed, rescued, reseeded, or tuned. It read no sealed partition, qualifies no arm, and supports no Alpha or carrier-information conclusion. Another launch requires a separate fresh-state authorization and cannot import V1 or V2 state.",
                                             "severity":  "HARD",
-                                            "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt and broad_search.search_engine_v1 run-economic-v2/check-economic-v2",
+                                            "enforced_by":  "broad_search.experiment_authority.resolve_search_economic_receipt and broad_search.search_engine_v1 close-validation-blocked-v2/check-economic-v2",
                                             "bypass_forbidden":  true,
-                                            "evidence_ref":  "config/crypto_search_economic_receipt_v2.json"
+                                            "evidence_ref":  "runtime/crypto_search_economic_v2_20260731/final_decision.json"
                                         },
                                         {
                                             "id":  "search_surface_runtime_carrier_gate",
@@ -647,9 +650,9 @@
                                          "level":  "STATIC_VERIFIED",
                                          "result":  "PASS",
                                          "profile":  "crypto-development-research",
-                                         "evidence_ref":  "config/crypto_search_economic_receipt_v1.json",
-                                         "evidence_sha256":  "161AE5D5AFEACE889CB47F17599599E11D6B13A80A7142196D52D8B2F62255E2",
-                                         "verified_at_sha":  "da7842dabacf7c98e62475014666877eeda86664"
+                                          "evidence_ref":  "runtime/crypto_search_economic_v2_20260731/final_decision.json",
+                                          "evidence_sha256":  "1A677DD6D400BAB8D30D1AEA43FC2C1E191C0CB8C115A5677F2AEE3B22C6B624",
+                                          "verified_at_sha":  "e5d495f148042132fadb0e6aeec6fc83088a8d8d"
                                      },
                       "claim_badges":  [
                                            "LEGACY 20K ENGINEERING PASS",
@@ -697,10 +700,14 @@
                                            "ENGINEERING SEARCH CHAIN RETAINED",
                                            "PAIR REWARD DIAGNOSTIC ONLY",
                                            "CONDITIONAL 5 BPS INTERPRETATION",
-                                           "1,190 STRICT PARTIAL RUN BUDGET EXHAUSTED",
-                                           "EMERGENCY CHECKPOINT RESTORE VERIFIED",
-                                           "V1 CONTROL PARTIAL-CARRIER ROLE PATH REPAIRED",
-                                           "NO ARM QUALIFIED"
+                                            "1,190 STRICT PARTIAL RUN BUDGET EXHAUSTED",
+                                            "EMERGENCY CHECKPOINT RESTORE VERIFIED",
+                                            "V1 CONTROL PARTIAL-CARRIER ROLE PATH REPAIRED",
+                                            "V2 2,000 STRICT CHECKPOINT RESTORE VERIFIED",
+                                            "V2 VALIDATION CONSTRUCTIBILITY BLOCKED",
+                                            "V2 AUTHORIZATION CONSUMED",
+                                            "NO RESCUE RERUN",
+                                            "NO ARM QUALIFIED"
                                        ],
                       "promotion_requirements":  [
                                                      "information-adequate new data",
