@@ -92,8 +92,20 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
         "runtime_date": "20260731",
         "allowed_statuses": {
             "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+            "RUN_AUTHORIZATION_CONSUMED_ENGINE_VALIDATION_BLOCKED",
         },
-        "expected_run_outcome": None,
+        "expected_run_outcome": {
+            "status": "ENGINE_VALIDATION_BLOCKED",
+            "reason": "CONTROL_BEHAVIOR_EQUALS_PRIMARY",
+            "runtime": "runtime/crypto_search_economic_v3_20260731",
+            "producer_source_sha": (
+                "ead338b4d34a95b707ae1a140b1aa318a71e4f6a"
+            ),
+            "generation_attempts": 2_280,
+            "strict_evaluated_count": 2_000,
+            "checkpoint": "checkpoint_validation_blocked",
+            "rescue_rerun_started": False,
+        },
     },
 }
 

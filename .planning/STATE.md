@@ -4,7 +4,7 @@ Last updated: 2026-07-31 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ECONOMIC_V3_FRESH_STATE_AUTHORIZED_PENDING_LAUNCH`
+`CRYPTO_SEARCH_ECONOMIC_V3_VALIDATION_BLOCKED_CLOSED`
 
 The repository-wide authority audit confirms that Search Engine V1 has a
 substantial reusable engineering chain: admitted carriers, PIT/lag contracts,
@@ -92,17 +92,19 @@ verified checkpoint without candidate generation or evaluation. The current
 run was not resumed, rescued, reseeded, or tuned; it read no sealed partition,
 qualifies no arm, and supplies no Alpha or carrier-information conclusion.
 
-`CRYPTO_SEARCH_ECONOMIC_RECEIPT_V3` is the current user's new one-run
-authorization for an independent fresh-state campaign on the unchanged
-115-field OI/mark x aggTrades carrier. It hash-locks and reuses the consumed V1
-economic contract while assigning a distinct campaign, epoch, runtime, RNG,
-policies, archive, ledger, receipts, and checkpoints. It imports no V1/V2
-candidate, reward, distribution, population, policy, archive, transition, or
-checkpoint state. The repaired validation orchestration will convert known
-matched-control degeneracy into an exact fail-closed terminal checkpoint;
-unexpected validation defects still propagate. The same 20,000-strict,
-100,000-attempt, 18-hour, 10-worker with fail-closed eight-worker fallback,
-no-rescue, no-sealed-read boundaries remain frozen.
+`CRYPTO_SEARCH_ECONOMIC_RECEIPT_V3` has been consumed. Producer
+`ead338b4d34a95b707ae1a140b1aa318a71e4f6a` independently reproduced the
+fresh-state train trajectory and reached restore-verified `checkpoint_000`
+with `2,000` strict candidates from `2,280` attempts and `1,964` behavior
+families. The frozen validation gate then identified candidate
+`1DC068A07C8B4C29BFE9C35A27A5948D9FA0503B0DECF2A601D36B35F512B038`
+from `canonical_typed_random`, 1h, selection rank 9, whose matched control was
+behavior-identical to primary. The repaired orchestration wrote
+`checkpoint_validation_blocked` with exact RNG, policy, population, archive,
+ledger, receipts, arm state, and failure identity, then terminated normally.
+No validation optimizer/archive write, checkpoint continuation, rescue,
+reseed, tuning, sealed read, arm qualification, Alpha claim, or next Arena
+occurred.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new
 candidate evaluations and zero market budget. It found that `666/1,200` Stage-B
@@ -314,8 +316,11 @@ SEARCH_ENGINE_ECONOMIC_V2_CHECKPOINT_000_RESTORE_VERIFIED
 SEARCH_ENGINE_ECONOMIC_V2_ENGINE_VALIDATION_BLOCKED
 SEARCH_ENGINE_ECONOMIC_V2_NO_ARM_QUALIFICATION
 SEARCH_ENGINE_ECONOMIC_V2_NO_RESCUE_RERUN
-SEARCH_ENGINE_ECONOMIC_V3_FRESH_STATE_AUTHORIZED
-SEARCH_ENGINE_ECONOMIC_V3_PENDING_LAUNCH
+SEARCH_ENGINE_ECONOMIC_V3_AUTHORIZATION_CONSUMED
+SEARCH_ENGINE_ECONOMIC_V3_CHECKPOINT_000_RESTORE_VERIFIED
+SEARCH_ENGINE_ECONOMIC_V3_VALIDATION_BLOCKED_CHECKPOINT_VERIFIED
+SEARCH_ENGINE_ECONOMIC_V3_NO_ARM_QUALIFICATION
+SEARCH_ENGINE_ECONOMIC_V3_NO_RESCUE_RERUN
 SEARCH_ENGINE_V1_CONTROLS_PARTIAL_CARRIER_ROLE_RESOLUTION_REPAIRED
 CAPABILITY_STRICT_FEEDBACK_GLOBAL_SCOPE_REVOKED
 CAPABILITY_STRICT_FEEDBACK_AUTHORITY_RETAINED
@@ -402,9 +407,9 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
 3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
 4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2` is source-qualified for future fresh-state use but remains inactive until the rest of the economic receipt closes. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
-5. Keep `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` as the consumed base economic contract and immutable V1 outcome. Keep V2 as a consumed one-run outcome bound to `checkpoint_000`. V3 is the only current one-run authorization and inherits the same target, mapping, reward, cost, validation, and evidence partitions without duplicating them.
+5. Keep V1, V2, and V3 as consumed outcomes. V3 is bound to `checkpoint_000` plus `checkpoint_validation_blocked`; do not reuse any receipt or duplicate the target, mapping, reward, cost, validation, and evidence partitions.
 6. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
-7. Launch only V3 from its clean committed production SHA. Do not resume or rescue V2, import V1/V2 state, or start OOS, challenge, promotion, or latent priority work.
+7. Do not resume or rescue V2/V3, import their state, or start OOS, challenge, promotion, latent priority work, or another market search without a distinct user authorization.
 8. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
 9. Treat `runtime/crypto_new_data_admission_v1_20260727` and the Search Surface Integration V1 bundle as distinct authorities: the former owns research admission gaps; the latter owns engineering carrier reachability. Resolve `BDXNUSDT`, lifecycle splits, Top200 surface gaps, and the Top50 OI/mark consumer before research admission.
 10. Use Unified Field Management V1 only as the deterministic navigation and conflict-checking view over those authorities. Add future registries by declaring their authority path and recompiling; do not hand-maintain duplicate field facts or infer research admission from catalog presence.
@@ -430,8 +435,8 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 - Search Engine V1's distinct validation kill-line is now market-exercised only to the point of a deterministic constructibility block. It remains NON_FORMAL, made no optimizer or archive writes on validation, and did not complete the equal-count arm gate.
-- V1 and V2 are consumed and `run_authorized=false`. V3 is the only current registered economic receipt with `run_authorized=true`; component and inherited-base hashes must match and it authorizes exactly one campaign.
-- V2's restore-verified `checkpoint_000` is the terminal retained state. The validation candidate identity was not persisted by the producer, so the run is closed as `ENGINE_VALIDATION_BLOCKED` rather than reconstructed or resumed. Future source now persists an exact terminal checkpoint when a known matched-control degeneration occurs; unexpected validation errors still propagate. All retained results remain development-only and conditional on 5 bps.
+- V1, V2, and V3 are consumed and `run_authorized=false`; component and inherited-base hashes must match. No current receipt authorizes another market run.
+- V3 proves the repaired failure path: the exact validation candidate identity and all campaign state are persisted in `checkpoint_validation_blocked`, and the process terminates as `ENGINE_VALIDATION_BLOCKED` instead of crashing. This is a validation-constructibility result, not a portfolio-reward, Alpha-space, or carrier-information negative. All retained results remain development-only and conditional on 5 bps.
 
 ## Source-of-truth order
 
