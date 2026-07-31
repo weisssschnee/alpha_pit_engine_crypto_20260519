@@ -37,6 +37,9 @@ DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH = (
 SEARCH_ECONOMIC_V2_RECEIPT_PATH = (
     "config/crypto_search_economic_receipt_v2.json"
 )
+SEARCH_ECONOMIC_V3_RECEIPT_PATH = (
+    "config/crypto_search_economic_receipt_v3.json"
+)
 SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
     "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1": {
         "path": DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH,
@@ -81,6 +84,16 @@ SEARCH_ECONOMIC_RECEIPT_SPECS: dict[str, dict[str, Any]] = {
             "checkpoint": "checkpoint_000",
             "rescue_rerun_started": False,
         },
+    },
+    "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V3": {
+        "path": SEARCH_ECONOMIC_V3_RECEIPT_PATH,
+        "decision_id": "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V3_20260731",
+        "runner_campaign": "crypto_search_economic_v3",
+        "runtime_date": "20260731",
+        "allowed_statuses": {
+            "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+        },
+        "expected_run_outcome": None,
     },
 }
 
@@ -970,6 +983,7 @@ def require_real_experiment_authority(
 __all__ = [
     "DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH",
     "SEARCH_ECONOMIC_V2_RECEIPT_PATH",
+    "SEARCH_ECONOMIC_V3_RECEIPT_PATH",
     "REQUIRED_REAL_EXPERIMENT_ROLES",
     "evaluate_search_validation_kill_line",
     "require_real_experiment_authority",

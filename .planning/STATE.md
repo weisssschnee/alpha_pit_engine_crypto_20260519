@@ -4,7 +4,7 @@ Last updated: 2026-07-31 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ECONOMIC_V2_CHECKPOINT_000_VALIDATION_BLOCKED_CLOSED`
+`CRYPTO_SEARCH_ECONOMIC_V3_FRESH_STATE_AUTHORIZED_PENDING_LAUNCH`
 
 The repository-wide authority audit confirms that Search Engine V1 has a
 substantial reusable engineering chain: admitted carriers, PIT/lag contracts,
@@ -91,6 +91,18 @@ conversion for future runs and closes this historical process from the
 verified checkpoint without candidate generation or evaluation. The current
 run was not resumed, rescued, reseeded, or tuned; it read no sealed partition,
 qualifies no arm, and supplies no Alpha or carrier-information conclusion.
+
+`CRYPTO_SEARCH_ECONOMIC_RECEIPT_V3` is the current user's new one-run
+authorization for an independent fresh-state campaign on the unchanged
+115-field OI/mark x aggTrades carrier. It hash-locks and reuses the consumed V1
+economic contract while assigning a distinct campaign, epoch, runtime, RNG,
+policies, archive, ledger, receipts, and checkpoints. It imports no V1/V2
+candidate, reward, distribution, population, policy, archive, transition, or
+checkpoint state. The repaired validation orchestration will convert known
+matched-control degeneracy into an exact fail-closed terminal checkpoint;
+unexpected validation defects still propagate. The same 20,000-strict,
+100,000-attempt, 18-hour, 10-worker with fail-closed eight-worker fallback,
+no-rescue, no-sealed-read boundaries remain frozen.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new
 candidate evaluations and zero market budget. It found that `666/1,200` Stage-B
@@ -302,6 +314,8 @@ SEARCH_ENGINE_ECONOMIC_V2_CHECKPOINT_000_RESTORE_VERIFIED
 SEARCH_ENGINE_ECONOMIC_V2_ENGINE_VALIDATION_BLOCKED
 SEARCH_ENGINE_ECONOMIC_V2_NO_ARM_QUALIFICATION
 SEARCH_ENGINE_ECONOMIC_V2_NO_RESCUE_RERUN
+SEARCH_ENGINE_ECONOMIC_V3_FRESH_STATE_AUTHORIZED
+SEARCH_ENGINE_ECONOMIC_V3_PENDING_LAUNCH
 SEARCH_ENGINE_V1_CONTROLS_PARTIAL_CARRIER_ROLE_RESOLUTION_REPAIRED
 CAPABILITY_STRICT_FEEDBACK_GLOBAL_SCOPE_REVOKED
 CAPABILITY_STRICT_FEEDBACK_AUTHORITY_RETAINED
@@ -388,9 +402,9 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
 3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
 4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2` is source-qualified for future fresh-state use but remains inactive until the rest of the economic receipt closes. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
-5. Keep `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` as the consumed base economic contract and immutable V1 outcome. Keep `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V2` as a consumed one-run outcome bound to `checkpoint_000`; do not duplicate its target, mapping, reward, cost, validation, or evidence partitions and do not reuse it for another launch.
+5. Keep `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` as the consumed base economic contract and immutable V1 outcome. Keep V2 as a consumed one-run outcome bound to `checkpoint_000`. V3 is the only current one-run authorization and inherits the same target, mapping, reward, cost, validation, and evidence partitions without duplicating them.
 6. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
-7. Do not resume or rescue V2. A future market search requires a new fresh-state authorization after explicitly deciding how validation-degenerate controls are treated; it must not import V1/V2 state or start OOS, challenge, promotion, or latent priority work.
+7. Launch only V3 from its clean committed production SHA. Do not resume or rescue V2, import V1/V2 state, or start OOS, challenge, promotion, or latent priority work.
 8. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
 9. Treat `runtime/crypto_new_data_admission_v1_20260727` and the Search Surface Integration V1 bundle as distinct authorities: the former owns research admission gaps; the latter owns engineering carrier reachability. Resolve `BDXNUSDT`, lifecycle splits, Top200 surface gaps, and the Top50 OI/mark consumer before research admission.
 10. Use Unified Field Management V1 only as the deterministic navigation and conflict-checking view over those authorities. Add future registries by declaring their authority path and recompiling; do not hand-maintain duplicate field facts or infer research admission from catalog presence.
@@ -416,7 +430,7 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
 - Search Engine V1's distinct validation kill-line is now market-exercised only to the point of a deterministic constructibility block. It remains NON_FORMAL, made no optimizer or archive writes on validation, and did not complete the equal-count arm gate.
-- The V1 base and V2 outcome receipts are the only registered economic receipt paths. Both are consumed and `run_authorized=false`; component and inherited-base hashes must match. No current receipt authorizes another market run.
+- V1 and V2 are consumed and `run_authorized=false`. V3 is the only current registered economic receipt with `run_authorized=true`; component and inherited-base hashes must match and it authorizes exactly one campaign.
 - V2's restore-verified `checkpoint_000` is the terminal retained state. The validation candidate identity was not persisted by the producer, so the run is closed as `ENGINE_VALIDATION_BLOCKED` rather than reconstructed or resumed. Future source now persists an exact terminal checkpoint when a known matched-control degeneration occurs; unexpected validation errors still propagate. All retained results remain development-only and conditional on 5 bps.
 
 ## Source-of-truth order

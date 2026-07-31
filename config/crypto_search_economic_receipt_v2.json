@@ -23,7 +23,7 @@
     "rescue_rerun_started": false
   },
   "base_receipt_path": "config/crypto_search_economic_receipt_v1.json",
-  "base_receipt_sha256": "64CFF71075FBAD3BDA5A30D0BA2A2484B379A2A79A9797A4B34D78AB8CB0D793",
+  "base_receipt_sha256": "FB399D9DF6DB0C4B7D5AEC81ACBE66654AF9867969675790CFEA2C68F5206BD5",
   "search_campaign": {
     "runner_campaign": "crypto_search_economic_v2"
   },
