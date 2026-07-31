@@ -5161,6 +5161,280 @@ latent-priority, promotion, or cross-sprint-memory conclusion is created by this
 """
 
 
+def _top_decile_mean(values: Sequence[float]) -> float | None:
+    finite = [float(value) for value in values if math.isfinite(float(value))]
+    if not finite:
+        return None
+    count = max(1, int(math.ceil(0.10 * len(finite))))
+    return float(np.mean(sorted(finite, reverse=True)[:count]))
+
+
+def _budget_exhausted_decision(
+    *,
+    decision: Mapping[str, Any],
+    source_sha: str,
+    state: Mapping[str, Any],
+    ledger: Sequence[Mapping[str, Any]] | pd.DataFrame,
+    archive: BehaviorArchive | pd.DataFrame,
+    checkpoint_restore_verified: bool,
+    closure_source_sha: str,
+) -> dict[str, Any]:
+    frame = (
+        ledger.copy()
+        if isinstance(ledger, pd.DataFrame)
+        else pd.DataFrame(list(ledger))
+    )
+    archive_frame = (
+        archive.copy()
+        if isinstance(archive, pd.DataFrame)
+        else pd.DataFrame(list(archive.rows))
+    )
+    counters = {
+        str(arm): dict(values)
+        for arm, values in dict(state.get("arm_counters") or {}).items()
+    }
+    arm_summaries: dict[str, dict[str, Any]] = {}
+    for arm, counter in sorted(counters.items()):
+        local = (
+            frame[frame["arm"].eq(arm)].copy()
+            if not frame.empty and "arm" in frame
+            else pd.DataFrame()
+        )
+        search_rewards = (
+            pd.to_numeric(local["search_reward"], errors="coerce")
+            .dropna()
+            .astype(float)
+            .tolist()
+            if "search_reward" in local
+            else []
+        )
+        pair_rewards = (
+            pd.to_numeric(local["pair_reward"], errors="coerce")
+            .dropna()
+            .astype(float)
+            .tolist()
+            if "pair_reward" in local
+            else []
+        )
+        strict_count = int(counter.get("strict_evaluated", len(local)))
+        cpu_seconds = float(counter.get("cpu_seconds", 0.0))
+        family_count = (
+            int(local["behavior_family_id"].nunique())
+            if "behavior_family_id" in local
+            else 0
+        )
+        operations = (
+            {
+                str(key): int(value)
+                for key, value in local["operation"].value_counts().items()
+            }
+            if "operation" in local
+            else {}
+        )
+        arm_summaries[arm] = {
+            **{
+                key: int(counter.get(key, 0))
+                for key in (
+                    "generation_attempts",
+                    "compile_valid",
+                    "exact_unique",
+                    "matched_control_valid",
+                    "strict_evaluated",
+                )
+            },
+            "cpu_seconds": cpu_seconds,
+            "compile_valid_rate": (
+                float(counter.get("compile_valid", 0))
+                / max(1, int(counter.get("generation_attempts", 0)))
+            ),
+            "strict_per_cpu_hour": (
+                strict_count * 3600.0 / cpu_seconds if cpu_seconds > 0.0 else 0.0
+            ),
+            "behavior_family_count": family_count,
+            "new_behavior_families_per_1k_evaluations": (
+                family_count * 1000.0 / strict_count if strict_count else 0.0
+            ),
+            "behavior_duplicate_rate": (
+                1.0 - family_count / strict_count if strict_count else 0.0
+            ),
+            "mean_search_reward": (
+                float(np.mean(search_rewards)) if search_rewards else None
+            ),
+            "top_decile_search_reward": _top_decile_mean(search_rewards),
+            "positive_search_reward_count": sum(
+                value > 0.0 for value in search_rewards
+            ),
+            "mean_pair_reward": (
+                float(np.mean(pair_rewards)) if pair_rewards else None
+            ),
+            "top_decile_pair_reward": _top_decile_mean(pair_rewards),
+            "positive_pair_reward_count": sum(value > 0.0 for value in pair_rewards),
+            "positive_matched_discovery_count": (
+                int(local["matched_positive"].fillna(False).astype(bool).sum())
+                if "matched_positive" in local
+                else 0
+            ),
+            "cost_killed_count": (
+                int(local["cost_killed"].fillna(False).astype(bool).sum())
+                if "cost_killed" in local
+                else 0
+            ),
+            "turnover_killed_count": (
+                int(local["turnover_killed"].fillna(False).astype(bool).sum())
+                if "turnover_killed" in local
+                else 0
+            ),
+            "verified_operations": operations,
+        }
+    family_count = (
+        int(archive_frame["behavior_family_id"].nunique())
+        if "behavior_family_id" in archive_frame
+        else 0
+    )
+    strict_count = len(frame)
+    return {
+        **dict(decision),
+        "producer_source_sha": source_sha,
+        "closure_source_sha": closure_source_sha,
+        "epoch_id": ECONOMIC_SEARCH_EPOCH_ID,
+        "report_title": "Crypto Search Economic V1",
+        "surface_description": (
+            "existing 115-field OI/mark x aggTrades aligned carrier; "
+            "receipt-bound Binance USD-M target"
+        ),
+        "search_campaign": ECONOMIC_SEARCH_CAMPAIGN,
+        "strict_evaluated_count": strict_count,
+        "checkpoint_count": 0,
+        "emergency_checkpoint_restore_verified": bool(
+            checkpoint_restore_verified
+        ),
+        "behavior_family_count": family_count,
+        "behavior_duplicate_rate": (
+            1.0 - family_count / strict_count if strict_count else 0.0
+        ),
+        "archive_duplicate_replacements": int(
+            state.get("archive_duplicate_replacements", 0)
+        ),
+        "positive_search_reward_count": sum(
+            int(values["positive_search_reward_count"])
+            for values in arm_summaries.values()
+        ),
+        "positive_pair_reward_count": sum(
+            int(values["positive_pair_reward_count"])
+            for values in arm_summaries.values()
+        ),
+        "positive_matched_discovery_count": sum(
+            int(values["positive_matched_discovery_count"])
+            for values in arm_summaries.values()
+        ),
+        "arm_summaries": arm_summaries,
+        "failure_counts": dict(state.get("failure_counts") or {}),
+        "v1_control_failure": {
+            "status": "PROPOSAL_LAYER_INCOMPATIBLE_ROLE_RESOLUTION",
+            "observed_exception": (
+                "admitted field registry cannot satisfy skeleton role: oi_change"
+            ),
+            "candidate_evaluations_consumed_by_diagnostic": 0,
+            "remedy": (
+                "reuse the already-frozen partial role map for compatible "
+                "skeleton proposal and mutation"
+            ),
+        },
+        "validation_stage": {
+            "status": "NOT_RUN_BUDGET_EXHAUSTED_BEFORE_CHECKPOINT_000",
+            "candidate_generation_performed": False,
+            "holdout_read": False,
+        },
+        "research_decision": "HOLD_INCOMPLETE_IMBALANCED_CAMPAIGN",
+        "future_new_data_arena_qualified_arms": [],
+        "success_questions": {
+            "cem_v2_compute_density": (
+                "NO_ON_PARTIAL_EQUAL_COUNT_EVIDENCE"
+            ),
+            "evolution_v2_repair_and_behavior_discovery": (
+                "NO_BEHAVIOR_DISCOVERY_GAIN_ON_PARTIAL_EQUAL_COUNT_EVIDENCE"
+            ),
+            "behavior_archive_duplicate_reduction": (
+                "PARTIAL_DEDUPLICATION_OBSERVED_NO_ROLLING_LEARNING_EVIDENCE"
+            ),
+            "continuous_checkpoint_resume": (
+                "NO_2K_CHECKPOINT_REACHED_EMERGENCY_RESTORE_ONLY"
+            ),
+        },
+        "alpha_claim": False,
+        "oos": False,
+        "promotion": False,
+        "next_arena_started": False,
+        "parameters_changed": False,
+        "seed_changed": False,
+        "rescue_rerun_started": False,
+        "sealed_reads": 0,
+    }
+
+
+def _budget_exhausted_report_text(decision: Mapping[str, Any]) -> str:
+    summaries = decision["arm_summaries"]
+    rows = []
+    for arm, values in summaries.items():
+        mean_search = values["mean_search_reward"]
+        top_search = values["top_decile_search_reward"]
+        mean_pair = values["mean_pair_reward"]
+        top_pair = values["top_decile_pair_reward"]
+        rows.append(
+            "| {arm} | {attempts:,} | {compiled:,} | {strict:,} | "
+            "{families:,} | {search_mean} | {search_top} | "
+            "{pair_mean} | {pair_top} |".format(
+                arm=arm,
+                attempts=values["generation_attempts"],
+                compiled=values["compile_valid"],
+                strict=values["strict_evaluated"],
+                families=values["behavior_family_count"],
+                search_mean=(
+                    f"{mean_search:.6f}" if mean_search is not None else "n/a"
+                ),
+                search_top=(
+                    f"{top_search:.6f}" if top_search is not None else "n/a"
+                ),
+                pair_mean=f"{mean_pair:.6f}" if mean_pair is not None else "n/a",
+                pair_top=f"{top_pair:.6f}" if top_pair is not None else "n/a",
+            )
+        )
+    return f"""# Crypto Search Economic V1
+
+- Status: `{decision['status']}` (`{decision['reason']}`)
+- Producer source: `{decision['producer_source_sha']}`
+- Closure source: `{decision['closure_source_sha']}`
+- Surface: {decision['surface_description']}; frozen cost assumption `5 bps`.
+- Strict completed: `{decision['strict_evaluated_count']:,}` from `{decision['generation_attempts']:,}` raw attempts.
+- Behavior families: `{decision['behavior_family_count']:,}`; duplicate rate `{decision['behavior_duplicate_rate']:.2%}`.
+- Emergency checkpoint restore verified: `{decision['emergency_checkpoint_restore_verified']}`.
+
+## Arm evidence
+
+| Arm | Raw attempts | Compile-valid | Strict | Families | Mean search reward | Top-decile search reward | Mean pair reward | Top-decile pair reward |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+{chr(10).join(rows)}
+
+Strict `pair_reward` positives: `{decision['positive_pair_reward_count']}`;
+matched-positive discoveries: `{decision['positive_matched_discovery_count']}`;
+positive joint search rewards: `{decision['positive_search_reward_count']}`.
+Joint search-reward positives are partial train diagnostics and do not override
+the strict matched authority.
+
+## Terminal diagnosis
+
+The two fresh-state V1 controls consumed almost the entire raw-attempt budget
+before compilation.  Their legacy proposal path re-required a complete Broad
+role surface after a compatible carrier-specific skeleton subset had already
+been frozen, and failed on the absent `oi_change` role.  This is a proposal
+layer defect, not evidence that the carrier lacks economic information.
+
+The campaign did not reach `checkpoint_000`; validation, adaptive checkpoint
+updates, OOS, promotion, challenge, and any next Arena remain unstarted.
+No seed, parameter, or rescue rerun was used.
+"""
+
+
 def _final_decision(
     *,
     source_sha: str,
@@ -6127,6 +6401,8 @@ def _final_manifest(
     state: Mapping[str, Any],
     epoch_id: str = EPOCH_ID,
     base_sha: str = BASE_SHA,
+    status: str = "COMPLETED",
+    closure_source_sha: str | None = None,
     continuation: str = (
         "python -m alphafactory_crypto.broad_search.search_engine_v1 "
         "check --runtime-date 20260721"
@@ -6165,8 +6441,9 @@ def _final_manifest(
     return {
         "schema_version": 1,
         "epoch_id": epoch_id,
-        "status": "COMPLETED",
+        "status": status,
         "producer_source_sha": source_sha,
+        "closure_source_sha": closure_source_sha or source_sha,
         "base_sha": base_sha,
         "frozen_contract_sha256": frozen_hash,
         "data_cache_identity": identities["raw_cache"],
@@ -6181,6 +6458,144 @@ def _final_manifest(
         "artifact_bundle_sha256": _payload_sha(artifacts),
         "reproducible": True,
         "continuation": continuation,
+    }
+
+
+def close_budget_exhausted_engine(
+    repo_root: Path,
+    *,
+    runtime_date: str = ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE,
+    expected_producer_source_sha: str | None = None,
+    closure_source_sha: str | None = None,
+) -> dict[str, Any]:
+    """Finish reports and provenance without generating or evaluating candidates."""
+
+    if runtime_date != ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE:
+        raise ValueError("economic search runtime date changed")
+    runtime_root = (
+        repo_root / f"runtime/crypto_search_economic_v1_{runtime_date}"
+    )
+    report_path = (
+        repo_root / f"reports/CRYPTO_SEARCH_ECONOMIC_V1_{runtime_date}.md"
+    )
+    checkpoint = runtime_root / "checkpoints" / "checkpoint_budget_exhausted"
+    for path in (
+        runtime_root / "frozen_contract.json",
+        runtime_root / "embedded_preflight.json",
+        runtime_root / "candidate_ledger.parquet",
+        runtime_root / "behavior_archive.parquet",
+        runtime_root / "behavior_family_summary.json",
+        runtime_root / "arm_checkpoint_metrics.parquet",
+        runtime_root / "final_decision.json",
+        checkpoint / "manifest.json",
+        checkpoint / "state.json",
+    ):
+        if not path.is_file():
+            raise FileNotFoundError(f"budget-exhausted closure input missing: {path}")
+
+    frozen = _read_json(runtime_root / "frozen_contract.json")
+    original_decision = _read_json(runtime_root / "final_decision.json")
+    checkpoint_manifest = _read_json(checkpoint / "manifest.json")
+    state = _read_json(checkpoint / "state.json")
+    ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
+    archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
+    producer_source_sha = str(checkpoint_manifest["source_sha"]).lower()
+    if (
+        expected_producer_source_sha is not None
+        and producer_source_sha != str(expected_producer_source_sha).lower()
+    ):
+        raise RuntimeError("budget-exhausted producer source SHA changed")
+    if original_decision.get("status") != "ENGINE_BUDGET_EXHAUSTED":
+        raise RuntimeError("closure is only valid for ENGINE_BUDGET_EXHAUSTED")
+    if original_decision.get("reason") not in {
+        "RAW_GENERATION_ATTEMPT_LIMIT",
+        "WALL_TIME_LIMIT",
+    }:
+        raise RuntimeError("budget-exhausted reason is not a frozen hard limit")
+    if checkpoint_manifest.get("restore_verified") is not True:
+        raise RuntimeError("budget-exhausted checkpoint restore was not verified")
+    if int(checkpoint_manifest.get("completed_ledger_row_count", -1)) != len(
+        ledger
+    ):
+        raise RuntimeError("budget-exhausted checkpoint row count changed")
+    if int(state.get("strict_evaluated", -1)) != len(ledger):
+        raise RuntimeError("budget-exhausted state row count changed")
+    if len(archive) != len(ledger):
+        raise RuntimeError("budget-exhausted archive row count changed")
+    if checkpoint_manifest.get("frozen_contract_sha256") != frozen.get(
+        "frozen_contract_sha256"
+    ):
+        raise RuntimeError("budget-exhausted frozen contract changed")
+    for record in checkpoint_manifest.get("files", []):
+        checkpoint_file = checkpoint / str(record["name"])
+        top_level_file = runtime_root / str(record["name"])
+        if (
+            not checkpoint_file.is_file()
+            or checkpoint_file.stat().st_size != int(record["bytes"])
+            or sha256_file(checkpoint_file) != str(record["sha256"])
+        ):
+            raise RuntimeError(
+                f"budget-exhausted checkpoint file changed: {record['name']}"
+            )
+        if top_level_file.is_file() and sha256_file(top_level_file) != str(
+            record["sha256"]
+        ):
+            raise RuntimeError(
+                f"budget-exhausted top-level artifact changed: {record['name']}"
+            )
+
+    closure_sha = str(closure_source_sha or _git_sha(repo_root)).lower()
+    decision = _budget_exhausted_decision(
+        decision=original_decision,
+        source_sha=producer_source_sha,
+        state=state,
+        ledger=ledger,
+        archive=archive,
+        checkpoint_restore_verified=True,
+        closure_source_sha=closure_sha,
+    )
+    _write_json(runtime_root / "final_decision.json", decision)
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(
+        _budget_exhausted_report_text(decision),
+        encoding="utf-8",
+        newline="\n",
+    )
+    identities = {
+        "raw_cache": checkpoint_manifest["data_cache_identity"],
+        "compiler_identity": checkpoint_manifest["compiler_identity"],
+    }
+    manifest = _final_manifest(
+        repo_root=repo_root,
+        runtime_root=runtime_root,
+        report_path=report_path,
+        source_sha=producer_source_sha,
+        frozen_hash=str(frozen["frozen_contract_sha256"]),
+        identities=identities,
+        state=state,
+        epoch_id=ECONOMIC_SEARCH_EPOCH_ID,
+        base_sha=producer_source_sha,
+        status="ENGINE_BUDGET_EXHAUSTED",
+        closure_source_sha=closure_sha,
+        continuation=(
+            "python -m alphafactory_crypto.broad_search.search_engine_v1 "
+            f"check-economic-v1 --runtime-date {runtime_date}"
+        ),
+    )
+    _write_json(runtime_root / "run_manifest.json", manifest)
+    return {
+        "result": "PASS",
+        "status": "ENGINE_BUDGET_EXHAUSTED",
+        "producer_source_sha": producer_source_sha,
+        "closure_source_sha": closure_sha,
+        "strict_evaluated_count": len(ledger),
+        "generation_attempts": int(state["generation_attempts"]),
+        "checkpoint": checkpoint.name,
+        "artifact_bundle_sha256": manifest["artifact_bundle_sha256"],
+        "candidate_generation_performed": False,
+        "candidate_evaluation_performed": False,
+        "rescue_rerun_started": False,
+        "sealed_reads": 0,
     }
 
 
@@ -8698,12 +9113,15 @@ def check_engine(
     frozen = _read_json(runtime_root / "frozen_contract.json")
     decision = _read_json(runtime_root / "final_decision.json")
     manifest = _read_json(runtime_root / "run_manifest.json")
+    budget_exhausted = (
+        decision.get("status") == "ENGINE_BUDGET_EXHAUSTED"
+    )
     preflight = _read_json(runtime_root / "embedded_preflight.json")
     ledger = pd.read_parquet(runtime_root / "candidate_ledger.parquet")
     archive = pd.read_parquet(runtime_root / "behavior_archive.parquet")
     metrics = pd.read_parquet(runtime_root / "arm_checkpoint_metrics.parquet")
     family_summary = _read_json(runtime_root / "behavior_family_summary.json")
-    if is_economic:
+    if is_economic and not budget_exhausted:
         validation_rows = pd.read_parquet(
             runtime_root / "validation_candidate_ledger.parquet"
         )
@@ -8738,6 +9156,18 @@ def check_engine(
             errors.append("validation_arm_count")
         if validation_decisions.get("status") != "VALIDATION_STAGE_COMPLETE":
             errors.append("validation_decision")
+    elif is_economic:
+        if decision.get("validation_stage", {}).get("status") != (
+            "NOT_RUN_BUDGET_EXHAUSTED_BEFORE_CHECKPOINT_000"
+        ):
+            errors.append("budget_exhausted_validation_status")
+        for name in (
+            "validation_candidate_ledger.parquet",
+            "validation_arm_metrics.parquet",
+            "validation_decisions.json",
+        ):
+            if (runtime_root / name).exists():
+                errors.append(f"budget_exhausted_unexpected_validation:{name}")
 
     frozen_without_hash = {
         key: value for key, value in frozen.items() if key != "frozen_contract_sha256"
@@ -8797,9 +9227,15 @@ def check_engine(
     if preflight.get("workers_selected") not in {DEFAULT_WORKERS, FALLBACK_WORKERS}:
         errors.append("worker_selection")
 
-    if len(ledger) != STRICT_TARGET:
+    if budget_exhausted:
+        if not 0 < len(ledger) < STRICT_TARGET:
+            errors.append("budget_exhausted_strict_count")
+        if int(decision.get("strict_evaluated_count", -1)) != len(ledger):
+            errors.append("budget_exhausted_decision_count")
+    elif len(ledger) != STRICT_TARGET:
         errors.append("strict_count")
-    if ledger["candidate_id"].nunique() != STRICT_TARGET:
+    expected_strict_count = len(ledger) if budget_exhausted else STRICT_TARGET
+    if ledger["candidate_id"].nunique() != expected_strict_count:
         errors.append("exact_unique")
     for column in (
         "compile_valid",
@@ -8822,7 +9258,7 @@ def check_engine(
             errors.append(f"operation_not_executed:{operation}")
     if ledger["behavior_family_id"].isna().any():
         errors.append("behavior_identity")
-    if len(archive) != STRICT_TARGET:
+    if len(archive) != expected_strict_count:
         errors.append("archive_row_count")
     champions = archive[archive["is_family_champion"].fillna(False)]
     if champions["behavior_family_id"].nunique() != archive[
@@ -8837,7 +9273,40 @@ def check_engine(
     checkpoints = sorted(
         (runtime_root / "checkpoints").glob("checkpoint_[0-9][0-9][0-9]")
     )
-    if len(checkpoints) != CHECKPOINT_COUNT:
+    if budget_exhausted:
+        if checkpoints:
+            errors.append("budget_exhausted_numeric_checkpoint")
+        emergency_checkpoint = (
+            runtime_root / "checkpoints" / "checkpoint_budget_exhausted"
+        )
+        if not emergency_checkpoint.is_dir():
+            errors.append("budget_exhausted_checkpoint")
+        else:
+            emergency_manifest = _read_json(
+                emergency_checkpoint / "manifest.json"
+            )
+            if int(
+                emergency_manifest.get("completed_ledger_row_count", -1)
+            ) != len(ledger):
+                errors.append("budget_exhausted_checkpoint_rows")
+            if emergency_manifest.get("restore_verified") is not True:
+                errors.append("budget_exhausted_checkpoint_restore")
+            if emergency_manifest.get("source_sha") != manifest.get(
+                "producer_source_sha"
+            ):
+                errors.append("budget_exhausted_checkpoint_source")
+            for record in emergency_manifest.get("files", []):
+                path = emergency_checkpoint / str(record["name"])
+                if (
+                    not path.is_file()
+                    or path.stat().st_size != int(record["bytes"])
+                    or sha256_file(path) != str(record["sha256"])
+                ):
+                    errors.append(
+                        "budget_exhausted_checkpoint_file:"
+                        + str(record["name"])
+                    )
+    elif len(checkpoints) != CHECKPOINT_COUNT:
         errors.append("checkpoint_count")
     for index, checkpoint in enumerate(checkpoints):
         checkpoint_manifest = _read_json(checkpoint / "manifest.json")
@@ -8864,35 +9333,71 @@ def check_engine(
             ):
                 errors.append(f"checkpoint_file:{index}:{record['name']}")
 
-    initial = ledger[ledger["checkpoint_index"] == 0].groupby("arm").size().to_dict()
-    if initial != {arm: 400 for arm in FIRST_CHECKPOINT_ARMS}:
-        errors.append("checkpoint_000_arm_contract")
-    if bool(
-        ledger[
-            (ledger["checkpoint_index"] > 0)
-            & ledger["arm"].isin(
-                ["cem_distribution_v1", "evolutionary_typed_v1"]
-            )
-        ].shape[0]
-    ):
-        errors.append("v1_control_did_not_exit")
-    if set(metrics["checkpoint_index"].astype(int).unique()) != set(
-        range(CHECKPOINT_COUNT)
-    ):
-        errors.append("checkpoint_metrics")
+    if budget_exhausted:
+        if not bool(ledger["checkpoint_index"].eq(0).all()):
+            errors.append("budget_exhausted_checkpoint_index")
+        if not metrics.empty:
+            errors.append("budget_exhausted_checkpoint_metrics")
+        if decision.get("research_decision") != (
+            "HOLD_INCOMPLETE_IMBALANCED_CAMPAIGN"
+        ):
+            errors.append("budget_exhausted_research_decision")
+        if decision.get("future_new_data_arena_qualified_arms") != []:
+            errors.append("budget_exhausted_arm_qualification")
+    else:
+        initial = (
+            ledger[ledger["checkpoint_index"] == 0]
+            .groupby("arm")
+            .size()
+            .to_dict()
+        )
+        if initial != {arm: 400 for arm in FIRST_CHECKPOINT_ARMS}:
+            errors.append("checkpoint_000_arm_contract")
+        if bool(
+            ledger[
+                (ledger["checkpoint_index"] > 0)
+                & ledger["arm"].isin(
+                    ["cem_distribution_v1", "evolutionary_typed_v1"]
+                )
+            ].shape[0]
+        ):
+            errors.append("v1_control_did_not_exit")
+        if set(metrics["checkpoint_index"].astype(int).unique()) != set(
+            range(CHECKPOINT_COUNT)
+        ):
+            errors.append("checkpoint_metrics")
     if int(decision.get("generation_attempts", RAW_ATTEMPT_LIMIT + 1)) > RAW_ATTEMPT_LIMIT:
         errors.append("raw_attempt_budget")
     if float(decision.get("active_wall_seconds", WALL_TIME_LIMIT_SECONDS + 1)) > WALL_TIME_LIMIT_SECONDS:
         errors.append("wall_time_budget")
-    if decision.get("status") != "PASS" or decision.get("sealed_reads") != 0:
+    if budget_exhausted:
+        if (
+            decision.get("reason")
+            not in {"RAW_GENERATION_ATTEMPT_LIMIT", "WALL_TIME_LIMIT"}
+            or decision.get("sealed_reads") != 0
+            or decision.get("rescue_rerun_started") is not False
+        ):
+            errors.append("budget_exhausted_final_decision")
+    elif decision.get("status") != "PASS" or decision.get("sealed_reads") != 0:
         errors.append("final_decision")
     if decision.get("next_arena_started") is not False:
         errors.append("next_arena_boundary")
-    if decision.get("success_questions", {}).get("continuous_checkpoint_resume") != "YES_EXACT_RESTORE_VERIFIED":
+    if (
+        not budget_exhausted
+        and decision.get("success_questions", {}).get(
+            "continuous_checkpoint_resume"
+        )
+        != "YES_EXACT_RESTORE_VERIFIED"
+    ):
         errors.append("resume_answer")
 
-    if manifest.get("strict_evaluated_count") != STRICT_TARGET:
+    if manifest.get("strict_evaluated_count") != expected_strict_count:
         errors.append("manifest_strict_count")
+    expected_manifest_status = (
+        "ENGINE_BUDGET_EXHAUSTED" if budget_exhausted else "COMPLETED"
+    )
+    if manifest.get("status") != expected_manifest_status:
+        errors.append("manifest_status")
     if manifest.get("frozen_contract_sha256") != frozen.get(
         "frozen_contract_sha256"
     ):
@@ -8931,6 +9436,9 @@ def check_engine(
         "errors": errors,
         "engineering_integrity": engineering_result,
         "component_qualification": (
+            "HOLD_ENGINE_BUDGET_EXHAUSTED_BEFORE_CHECKPOINT_000"
+            if budget_exhausted
+            else
             "HOLD_POST_AUDIT_REMEDIATION_REQUIRED"
             if post_audit_holds
             else "HOLD_SEPARATE_FRESH_STATE_REQUALIFICATION_REQUIRED"
@@ -11333,6 +11841,14 @@ def run_v14(
             "sealed_reads": 0,
         }
         _write_json(runtime_root / "final_decision.json", decision)
+        if is_economic:
+            closure = close_budget_exhausted_engine(
+                repo_root,
+                runtime_date=runtime_date,
+                expected_producer_source_sha=source_sha,
+                closure_source_sha=source_sha,
+            )
+            return {**decision, **closure, "result": "ENGINE_BUDGET_EXHAUSTED"}
         return {"result": "ENGINE_BUDGET_EXHAUSTED", **decision}
 
     stage_b_metrics = _v14_stage_metrics(ledger, stage="STAGE_B")
@@ -11782,6 +12298,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "run",
             "check",
             "run-economic-v1",
+            "close-economic-v1",
             "check-economic-v1",
             "build-canary-cache",
             "run-canary",
@@ -11844,6 +12361,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             source_sha=args.source_sha,
             campaign=ECONOMIC_SEARCH_CAMPAIGN,
             authority_preflight=authority_preflight,
+        )
+    elif args.command == "close-economic-v1":
+        result = close_budget_exhausted_engine(
+            repo_root,
+            runtime_date=str(
+                args.runtime_date or ECONOMIC_SEARCH_DEFAULT_RUNTIME_DATE
+            ),
+            closure_source_sha=args.source_sha,
         )
     elif args.command == "check-economic-v1":
         result = check_engine(

@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "receipt_id": "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1",
-  "status": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
-  "run_authorized": true,
+  "status": "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+  "run_authorized": false,
   "run_authorization": {
     "decision_id": "USER_AUTHORIZED_CRYPTO_SEARCH_ECONOMIC_V1_20260731",
     "authority": "CURRENT_USER_INSTRUCTION",
@@ -11,6 +11,16 @@
     "parameter_tuning_allowed": false,
     "seed_change_allowed": false,
     "rescue_rerun_allowed": false
+  },
+  "run_outcome": {
+    "status": "ENGINE_BUDGET_EXHAUSTED",
+    "reason": "RAW_GENERATION_ATTEMPT_LIMIT",
+    "runtime": "runtime/crypto_search_economic_v1_20260731",
+    "producer_source_sha": "17d5b5f19acd1366cf5b8f332249d78e918556f1",
+    "generation_attempts": 95776,
+    "strict_evaluated_count": 1190,
+    "checkpoint": "checkpoint_budget_exhausted",
+    "rescue_rerun_started": false
   },
   "search_campaign": {
     "runner_campaign": "crypto_search_economic_v1",
@@ -187,7 +197,7 @@
     },
     "validation_kill_line": {
       "path": "alphafactory_crypto/broad_search/experiment_authority.py",
-      "sha256": "16F136F54DF1E69D7168802883F0CCC3242F79188F64A635E2FA2B1E6FD99CC1"
+      "sha256": "A5D484D433EFE7A5692E1BAC0DD1F725DFB1E5C1185535A57761B1C007618D14"
     },
     "portfolio_mapping_and_cost": {
       "path": "alphafactory_crypto/instrument_capability/mapping.py",
@@ -207,7 +217,7 @@
     },
     "runtime_binding": {
       "path": "alphafactory_crypto/broad_search/search_engine_v1.py",
-      "sha256": "CC8CB8BEFA09C0A07D5E223CBCA4213E50EBE416DDACFFDEF428FF86BD040733"
+      "sha256": "4979EB976D73C7F6044997D312298ECF680046ECFB16AC6543FE12C52E9B24B5"
     }
   }
 }

@@ -4,6 +4,7 @@ import json
 import random
 from collections import Counter
 
+import pandas as pd
 import pytest
 
 from alphafactory_crypto.broad_search.compositional18m import (
@@ -21,7 +22,10 @@ from alphafactory_crypto.broad_search.search_engine_v1 import (
     HierarchicalTypedCEMV2,
     SEEDS,
     TypedEvolutionV2,
+    _budget_exhausted_decision,
+    _budget_exhausted_report_text,
     _final_decision,
+    _initial_policies,
     _search_ordering_reward,
 )
 from alphafactory_crypto.broad_search.pair18m import SEARCH_REWARD_AUTHORITY
@@ -66,6 +70,107 @@ def _cem_row(candidate, reward: float, local_count: int = 1) -> dict:
         "candidate_id": candidate.candidate_id,
         "candidate_spec_json": json.dumps(candidate.to_dict(), sort_keys=True),
     }
+
+
+def test_frozen_v1_controls_reuse_partial_carrier_role_surface() -> None:
+    registry = TypedExpressionRegistry(
+        (
+            FieldContract(
+                "bybit__mark_price_last", "PRICE", "quote_per_base"
+            ),
+            FieldContract(
+                "bybit__funding_rate_last", "RETURN", "dimensionless"
+            ),
+            FieldContract(
+                "signed_aggressor_notional", "NOTIONAL", "quote_asset"
+            ),
+        )
+    )
+    policies = _initial_policies(
+        registry,
+        arms=("cem_distribution_v1", "evolutionary_typed_v1"),
+        seeds=(20260716,),
+    )
+
+    for policy in policies.values():
+        candidate, _ = policy.propose()
+        assert candidate.raw_fields
+        assert set(candidate.raw_fields).issubset(registry.fields)
+
+
+def test_budget_exhausted_closure_preserves_partial_evidence_boundaries() -> None:
+    rows = pd.DataFrame(
+        (
+            {
+                "arm": "canonical_typed_random",
+                "search_reward": 0.1,
+                "pair_reward": -1.0,
+                "behavior_family_id": "family-a",
+                "operation": "CANONICAL_TYPED_RANDOM_SAMPLE",
+                "matched_positive": False,
+                "cost_killed": True,
+                "turnover_killed": False,
+            },
+            {
+                "arm": "typed_evolution_v2",
+                "search_reward": 0.2,
+                "pair_reward": -0.5,
+                "behavior_family_id": "family-a",
+                "operation": "EFFECTIVE_GENE_MUTATION_1_TO_3",
+                "matched_positive": False,
+                "cost_killed": False,
+                "turnover_killed": False,
+            },
+        )
+    )
+    state = {
+        "archive_duplicate_replacements": 1,
+        "failure_counts": {
+            "cem_distribution_v1:PROPOSAL_ValueError": 10,
+        },
+        "arm_counters": {
+            "canonical_typed_random": {
+                "generation_attempts": 1,
+                "compile_valid": 1,
+                "exact_unique": 1,
+                "matched_control_valid": 1,
+                "strict_evaluated": 1,
+                "cpu_seconds": 1.0,
+            },
+            "typed_evolution_v2": {
+                "generation_attempts": 1,
+                "compile_valid": 1,
+                "exact_unique": 1,
+                "matched_control_valid": 1,
+                "strict_evaluated": 1,
+                "cpu_seconds": 1.0,
+            },
+        },
+    }
+    decision = _budget_exhausted_decision(
+        decision={
+            "status": "ENGINE_BUDGET_EXHAUSTED",
+            "reason": "RAW_GENERATION_ATTEMPT_LIMIT",
+            "generation_attempts": 12,
+            "active_wall_seconds": 3.0,
+            "checkpoint": "checkpoint_budget_exhausted",
+        },
+        source_sha="a" * 40,
+        state=state,
+        ledger=rows,
+        archive=rows,
+        checkpoint_restore_verified=True,
+        closure_source_sha="b" * 40,
+    )
+    report = _budget_exhausted_report_text(decision)
+
+    assert decision["strict_evaluated_count"] == 2
+    assert decision["future_new_data_arena_qualified_arms"] == []
+    assert decision["next_arena_started"] is False
+    assert decision["positive_pair_reward_count"] == 0
+    assert decision["research_decision"] == "HOLD_INCOMPLETE_IMBALANCED_CAMPAIGN"
+    assert "layer defect" in report
+    assert "No seed, parameter, or rescue rerun was used." in report
 
 
 def test_cem_checkpoint_update_does_not_double_count_prior_elites() -> None:

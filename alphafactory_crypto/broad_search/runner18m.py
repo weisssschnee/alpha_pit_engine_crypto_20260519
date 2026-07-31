@@ -818,7 +818,11 @@ class LanePolicy:
         skeleton = next(
             item for item in self._skeletons() if item.skeleton_id == skeleton_id
         )
-        roles = field_role_coverage(tuple(self.registry.fields.values()))["roles"]
+        # Independent carriers intentionally expose only the roles needed by
+        # their compatible skeleton subset.  Requiring the complete Broad role
+        # surface here makes every frozen V1 control proposal fail before
+        # compilation even though __post_init__ already froze the legal subset.
+        roles = self.roles
         left_field = self.rng.choice(roles[skeleton.field_roles[0]])
         right_options = roles[skeleton.field_roles[1]]
         distinct = [field_id for field_id in right_options if field_id != left_field]
@@ -993,7 +997,10 @@ class LanePolicy:
             if explore:
                 skeleton = skeletons[(self.step + self.seed + duplicate_resamples) % len(skeletons)]
                 candidate = generate_candidate(
-                    self.registry, skeleton=skeleton, rng=self.rng
+                    self.registry,
+                    skeleton=skeleton,
+                    rng=self.rng,
+                    roles=self.roles,
                 )
                 parent_id = None
                 receipt = None
@@ -1002,7 +1009,10 @@ class LanePolicy:
                 parent = self._typed_evolution_parent()
                 parent_id = parent.candidate_id
                 candidate, receipt = typed_mutate_candidate(
-                    self.registry, parent=parent, rng=self.rng
+                    self.registry,
+                    parent=parent,
+                    rng=self.rng,
+                    roles=self.roles,
                 )
                 verified = verify_typed_mutation_receipt(
                     self.registry, parent, candidate, receipt

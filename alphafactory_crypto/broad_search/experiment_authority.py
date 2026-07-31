@@ -173,9 +173,20 @@ def _validate_search_economic_receipt(
         blockers.append("schema_version")
     if receipt.get("receipt_id") != "CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1":
         blockers.append("receipt_id")
-    if receipt.get("status") != "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT":
+    status = str(receipt.get("status") or "")
+    run_authorized = receipt.get("run_authorized")
+    if status not in {
+        "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED",
+    }:
         blockers.append("status")
-    if receipt.get("run_authorized") is not True:
+    if (
+        status == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+        and run_authorized is not True
+    ) or (
+        status == "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED"
+        and run_authorized is not False
+    ):
         blockers.append("run_authorized")
     run_authorization = dict(receipt.get("run_authorization") or {})
     expected_run_authorization = {
@@ -189,6 +200,24 @@ def _validate_search_economic_receipt(
     }
     if run_authorization != expected_run_authorization:
         blockers.append("run_authorization")
+    run_outcome = dict(receipt.get("run_outcome") or {})
+    expected_run_outcome = {
+        "status": "ENGINE_BUDGET_EXHAUSTED",
+        "reason": "RAW_GENERATION_ATTEMPT_LIMIT",
+        "runtime": "runtime/crypto_search_economic_v1_20260731",
+        "producer_source_sha": (
+            "17d5b5f19acd1366cf5b8f332249d78e918556f1"
+        ),
+        "generation_attempts": 95_776,
+        "strict_evaluated_count": 1_190,
+        "checkpoint": "checkpoint_budget_exhausted",
+        "rescue_rerun_started": False,
+    }
+    if status == "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED":
+        if run_outcome != expected_run_outcome:
+            blockers.append("run_outcome")
+    elif run_outcome:
+        blockers.append("run_outcome")
     market = dict(receipt.get("market") or {})
     if market != {"asset_class": "CRYPTO", "calendar": "CONTINUOUS_UTC"}:
         blockers.append("market")
@@ -615,6 +644,7 @@ def _validate_search_economic_receipt(
         "holdout": holdout,
         "validation_kill_line": kill_line,
         "run_authorized": bool(receipt["run_authorized"]),
+        "run_outcome": run_outcome,
         "formal_claims_authorized": False,
     }
 

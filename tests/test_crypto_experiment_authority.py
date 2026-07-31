@@ -144,7 +144,9 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
 
     result = resolve_search_economic_receipt(repo_root)
 
-    assert result["result"] == "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT"
+    assert result["result"] == (
+        "RUN_AUTHORIZATION_CONSUMED_ENGINE_BUDGET_EXHAUSTED"
+    )
     assert result["receipt_path"] == DEFAULT_SEARCH_ECONOMIC_RECEIPT_PATH
     assert result["market"] == {
         "asset_class": "CRYPTO",
@@ -211,7 +213,9 @@ def test_committed_search_economic_receipt_reuses_existing_crypto_authorities() 
         "NEXT_CHECKPOINT_USES_EXISTING_ARM_STATE"
     )
     assert result["holdout"]["read_allowed"] is False
-    assert result["run_authorized"] is True
+    assert result["run_authorized"] is False
+    assert result["run_outcome"]["status"] == "ENGINE_BUDGET_EXHAUSTED"
+    assert result["run_outcome"]["strict_evaluated_count"] == 1_190
     assert result["formal_claims_authorized"] is False
     assert len(result["receipt_sha256"]) == 64
     assert all(
@@ -244,33 +248,25 @@ def test_search_economic_receipt_authority_remains_conditional() -> None:
     repo_root = Path(__file__).resolve().parents[1]
 
     receipt = resolve_search_economic_receipt(repo_root)
-    preflight = require_real_experiment_authority(
-        repo_root,
-        evidence_to_add=(
-            "fresh conditional development search productivity and matched "
-            "reward evidence on the frozen 115-field carrier"
-        ),
-        decision_to_change=(
-            "qualify or reject search arms for a future new-data arena "
-            "without promotion"
-        ),
-    )
 
-    assert receipt["run_authorized"] is True
+    assert receipt["run_authorized"] is False
     assert receipt["formal_claims_authorized"] is False
     assert receipt["cost"]["cost_bps"] == 5.0
-    assert preflight["result"] == "READY_WITH_NON_FORMAL_BOUNDARIES"
-    assert preflight["formal_claims_authorized"] is False
-    assert {
-        preflight["authority_refs"][role]["status"]
-        for role in (
-            "target",
-            "optimizer_reward",
-            "execution_price",
-            "cost",
-            "validation_role",
+    with pytest.raises(
+        RuntimeError,
+        match="economic_receipt:RUN_NOT_AUTHORIZED",
+    ):
+        require_real_experiment_authority(
+            repo_root,
+            evidence_to_add=(
+                "fresh conditional development search productivity and matched "
+                "reward evidence on the frozen 115-field carrier"
+            ),
+            decision_to_change=(
+                "qualify or reject search arms for a future new-data arena "
+                "without promotion"
+            ),
         )
-    } == {"BOUND_NON_FORMAL_EXPERIMENT"}
 
 
 def test_validation_kill_line_is_pure_and_fail_closed() -> None:
