@@ -1,0 +1,235 @@
+{
+  "experiment_authority_preflight": {
+    "authority_refs": {
+      "cost": {
+        "active_authority": false,
+        "authority_class": "NON_FORMAL",
+        "component": "real_data_mapping_cost_evaluator",
+        "lifecycle": "EXPERIMENTAL",
+        "status": "BOUND_NON_FORMAL_EXPERIMENT"
+      },
+      "execution_price": {
+        "active_authority": false,
+        "authority_class": "NON_FORMAL",
+        "component": "real_policy_upgrade_canary",
+        "lifecycle": "EXPERIMENTAL",
+        "status": "BOUND_NON_FORMAL_EXPERIMENT"
+      },
+      "optimizer_reward": {
+        "active_authority": false,
+        "authority_class": "NON_FORMAL",
+        "component": "real_policy_upgrade_canary",
+        "lifecycle": "EXPERIMENTAL",
+        "status": "BOUND_NON_FORMAL_EXPERIMENT"
+      },
+      "portfolio_mapping": {
+        "active_authority": true,
+        "authority_class": "FORMAL",
+        "component": "explicit_portfolio_mapping",
+        "lifecycle": "ACTIVE",
+        "status": "RESOLVED"
+      },
+      "promotion_gate": {
+        "active_authority": true,
+        "authority_class": "FORMAL",
+        "component": "sealed_research_boundaries",
+        "lifecycle": "FORBIDDEN",
+        "status": "RESOLVED"
+      },
+      "target": {
+        "active_authority": false,
+        "authority_class": "NON_FORMAL",
+        "component": "real_policy_upgrade_canary",
+        "lifecycle": "EXPERIMENTAL",
+        "status": "BOUND_NON_FORMAL_EXPERIMENT"
+      },
+      "validation_role": {
+        "active_authority": false,
+        "authority_class": "NON_FORMAL",
+        "component": "real_policy_upgrade_canary",
+        "lifecycle": "EXPERIMENTAL",
+        "status": "BOUND_NON_FORMAL_EXPERIMENT"
+      }
+    },
+    "decision_to_change": "which search arms qualify for a future new-data Arena",
+    "economic_receipt": {
+      "component_sha256": {
+        "direction": "BBC246A15012EDD1F8133E16C4E920529002EE36895351373BCE4FA1161D10F9",
+        "mechanism": "6B57D3A62B409257398E805DCB3E592CDB6499F86D114600F5401D08097BA99E",
+        "mechanism_mapping": "0EC46865116DE3C1F40C01A7ABCEBD4AFDF51940057974772B1B841516884741",
+        "optimizer_reward_and_matched_attribution": "C86E9048D41C1CA6A7561EA1FCDE7C83ECD881032831A9F108CA18C78C9291EA",
+        "portfolio_mapping_and_cost": "7DD20E2B19A4C93DEDA0AE8B593E6465B77B53E8CAD8407DB26CE1DDE6C8E036",
+        "runtime_binding": "992AE117F2530041A35B137FD5F06CEAC29AD30E4BE4F78B42B08B7AF0684FB3",
+        "target_contract": "2EBC07A444C98465C49EC042890EB9DCEEAA7956E45D38F48830F130AAB66A60",
+        "target_execution": "03BE602CFF7C4EE4DCE1DAEE5DAE02FD1B6B54F865E5AB8307573C6064300629",
+        "validation_kill_line": "7647AD0E2B6C97AC837ABF50B331F8E9FBC98510BA792BFF4D0DC903DE045695"
+      },
+      "cost": {
+        "cost_bps": 5.0,
+        "initial_establishment_charged": true,
+        "model_id": "FULL_L1_FIXED_BPS"
+      },
+      "direction": {
+        "allowed_values": [
+          -1,
+          1
+        ],
+        "authority_symbol": "scripts.crypto_a7reward1_portfolio_reward_model.select_train_orientation",
+        "fit_role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+        "persist_in_candidate_ledger": true,
+        "rule": "TRAIN_FROZEN_SIGN_ORIENTATION"
+      },
+      "evidence_partition": {
+        "holdout": {
+          "end_exclusive": "2026-07-01T00:00:00Z",
+          "optimizer_feedback_allowed": false,
+          "policy_memory_write_allowed": false,
+          "read_allowed": false,
+          "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+          "start": "2026-01-01T00:00:00Z"
+        },
+        "train": {
+          "end_exclusive": "2025-11-01T00:00:00Z",
+          "optimizer_feedback_allowed": true,
+          "role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+          "start": "2025-08-29T07:00:00Z"
+        },
+        "validation": {
+          "candidate_generation_allowed": false,
+          "end_exclusive": "2026-01-01T00:00:00Z",
+          "optimizer_feedback_allowed": false,
+          "policy_memory_write_allowed": false,
+          "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+          "start": "2025-11-01T00:00:00Z"
+        }
+      },
+      "execution": {
+        "authority_config": "config/crypto_search_engine_v1_4_binance_target_replay.json",
+        "execution_delay_hours": 2,
+        "formula": "log(open_price[t+2+h] / open_price[t+2])",
+        "horizons_hours": [
+          1,
+          4
+        ],
+        "instrument_type": "LINEAR_PERPETUAL",
+        "missing_value_fill": null,
+        "partition_tail_purge_hours": 6,
+        "positive_price_required": true,
+        "price_field": "open_price",
+        "source": "DELIVERED_AGGTRADES_COMPACT_1M_AGGREGATED_1H",
+        "target_cache_identity_sha256": "27F780D458CBA50D6C82393F7DFDA396AC3994724645D112C4F8EF0ACDA865F0",
+        "target_cache_path": ".cache/crypto_search_engine_v1_4/binance_open_target_v1",
+        "target_store_symbol": "alphafactory_crypto.broad_search.replay_v14_binance_target.BinanceTargetStore",
+        "venue": "BINANCE_USD_M"
+      },
+      "formal_claims_authorized": false,
+      "holdout": {
+        "end_exclusive": "2026-07-01T00:00:00Z",
+        "optimizer_feedback_allowed": false,
+        "policy_memory_write_allowed": false,
+        "read_allowed": false,
+        "role": "READ_ONLY_HOLDOUT_REQUIRES_SEPARATE_AUTHORIZATION",
+        "start": "2026-01-01T00:00:00Z"
+      },
+      "market": {
+        "asset_class": "CRYPTO",
+        "calendar": "CONTINUOUS_UTC"
+      },
+      "mechanism": {
+        "candidate_bindings": [
+          "skeleton_id",
+          "mechanism_family"
+        ],
+        "economic_hypothesis_field": "financial_hypothesis",
+        "mapping_adapter_symbol": "alphafactory_crypto.broad_search.compositional18m.mapping_id_for_mechanism_family",
+        "mapping_authority_symbol": "alphafactory_crypto.instrument_canary.grammar.MECHANISM_MAPPING",
+        "mapping_class": "CROSS_SECTIONAL_RELATIVE",
+        "registry_symbol": "alphafactory_crypto.broad_search.compositional18m.skeleton_registry"
+      },
+      "optimizer_reward": {
+        "authority_id": "CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2",
+        "authority_symbol": "alphafactory_crypto.broad_search.pair18m.SEARCH_REWARD_AUTHORITY",
+        "feedback_role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+        "pair_reward_role": "MATCHED_ATTRIBUTION_DIAGNOSTIC_ONLY"
+      },
+      "portfolio": {
+        "mapping_authority_component": "explicit_portfolio_mapping",
+        "mapping_id": "CROSS_SECTIONAL_ZERO_NET",
+        "mapping_symbol": "alphafactory_crypto.instrument_capability.mapping.DEFAULT_MAPPING_CONTRACTS",
+        "matched_roles": [
+          "PRIMARY_MINUS_LEFT_CONTROL",
+          "PRIMARY_MINUS_RIGHT_CONTROL",
+          "AB_MINUS_A",
+          "AB_MINUS_B",
+          "ABC_MINUS_AB"
+        ],
+        "primary_role": "STANDALONE_MAPPED_PORTFOLIO",
+        "shared_support_execution_horizon_cost": true
+      },
+      "receipt_path": "config/crypto_search_economic_receipt_v2.json",
+      "receipt_sha256": "DD74F23C9FB4B24E3FE32ED2BF2A87AEA2CB1F6C632150F92BB2373BA4CE73B0",
+      "result": "RUN_AUTHORIZED_CONDITIONAL_DEVELOPMENT",
+      "run_authorized": true,
+      "run_outcome": {},
+      "search_campaign": {
+        "carrier_cache_identity_sha256": "E8BFD15AF1EA58807A75868D52AD3535126DFB77CEDEB404EEE8E690AA58F2BA",
+        "carrier_id": "OI_MARK_RANKS51_200_X_AGGTRADES_TOP200_ALIGNED",
+        "carrier_manifest": "runtime/crypto_search_engine_v1_4_oi_flow_20260728/aligned_carrier_manifest.json",
+        "checkpoint_count": 10,
+        "checkpoint_size": 2000,
+        "field_count": 115,
+        "fresh_state": true,
+        "runner_campaign": "crypto_search_economic_v2",
+        "runtime_date": "20260731",
+        "strict_evaluated_target": 20000
+      },
+      "train": {
+        "end_exclusive": "2025-11-01T00:00:00Z",
+        "optimizer_feedback_allowed": true,
+        "role": "FRESH_DEVELOPMENT_TRAIN_ONLY",
+        "start": "2025-08-29T07:00:00Z"
+      },
+      "validation": {
+        "candidate_generation_allowed": false,
+        "end_exclusive": "2026-01-01T00:00:00Z",
+        "optimizer_feedback_allowed": false,
+        "policy_memory_write_allowed": false,
+        "role": "FRESH_DEVELOPMENT_VALIDATION_KILL_LINE",
+        "start": "2025-11-01T00:00:00Z"
+      },
+      "validation_kill_line": {
+        "arm_aggregation": "WORST_HORIZON_EQUAL_WEIGHT_FROZEN_CANDIDATE_ENSEMBLE",
+        "authority_symbol": "alphafactory_crypto.broad_search.experiment_authority.evaluate_search_validation_kill_line",
+        "candidate_selection": "TOP_TRAIN_SEARCH_REWARD_PER_REQUIRED_HORIZON_THEN_COMPLETION_ORDINAL",
+        "checkpoint_action": "EXISTING_CAMPAIGN_CHECKPOINT_WITH_VALIDATION_ARTIFACTS",
+        "continuation_action": "NEXT_CHECKPOINT_USES_EXISTING_ARM_STATE",
+        "equal_matched_evaluated_count": true,
+        "evaluated_per_active_arm": 128,
+        "evaluated_per_arm_per_horizon": 64,
+        "evaluation_order": "AFTER_FROZEN_TRAIN_POLICY_BEFORE_ANY_ADDITIONAL_BUDGET",
+        "failed_arm_allocation": "EXISTING_ARM_STATE_EXITED",
+        "failure_action": "STOP_ARM_AND_WRITE_CHECKPOINT",
+        "minimum_evaluated_per_active_arm": 128,
+        "orchestration_campaign": "crypto_search_economic_v2",
+        "required_conditions": [
+          "validation_net_mean_positive",
+          "validation_nonoverlap_floor_sortino_positive",
+          "validation_matched_increment_positive",
+          "validation_control_not_dominant"
+        ],
+        "required_horizons_hours": [
+          1,
+          4
+        ],
+        "runtime_symbol": "alphafactory_crypto.broad_search.search_engine_v1.apply_search_validation_kill_line",
+        "threshold_tuning_allowed": false,
+        "trigger_after_train_checkpoint_index": 0
+      }
+    },
+    "evidence_to_add": "fresh-state 20k proposal-productivity and matched-economic evidence after proposal-liveness repair",
+    "formal_claims_authorized": false,
+    "result": "READY_WITH_NON_FORMAL_BOUNDARIES"
+  }
+}
+{"behavior_families": 600, "checkpoint_index": 0, "event": "search_engine_v1_progress", "generation_attempts": 702, "strict_evaluated": 600, "workers": 8}
+{"behavior_families": 1964, "checkpoint_index": 0, "event": "search_engine_v1_progress", "generation_attempts": 2280, "strict_evaluated": 2000, "workers": 8}

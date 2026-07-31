@@ -4,7 +4,7 @@ Last updated: 2026-07-31 Asia/Hong_Kong
 
 ## Current phase
 
-`CRYPTO_SEARCH_ECONOMIC_V2_FRESH_STATE_AUTHORIZED_PENDING_LAUNCH`
+`CRYPTO_SEARCH_ECONOMIC_V2_CHECKPOINT_000_VALIDATION_BLOCKED_CLOSED`
 
 The repository-wide authority audit confirms that Search Engine V1 has a
 substantial reusable engineering chain: admitted carriers, PIT/lag contracts,
@@ -76,18 +76,21 @@ the rolling engine retries only the explicitly typed bounded-underfill failure.
 Unexpected role, configuration, receipt, or replay errors fail closed instead
 of being counted indefinitely as ordinary proposal rejection.
 
-`CRYPTO_SEARCH_ECONOMIC_RECEIPT_V2` is a separate current-user authorization
-for one fresh-state 20,000-strict campaign on the unchanged 115-field OI/mark x
-aggTrades carrier. It imports no V1 candidate, reward, distribution,
-population, policy, archive, RNG, or transition state. The thin V2 receipt
-hash-locks and reuses the V1 target, mapping, reward, cost, evidence-partition,
-validation, and sealed-boundary contract rather than duplicating those
-authorities; only the authorization identity, runner campaign, epoch, and
-runtime path differ. The exact carrier proposal liveness preflight remains
-20/20 lanes with zero market evaluations and zero reward reads. Launch is
-permitted only from the clean committed producer SHA and retains the frozen
-100,000-attempt/18-hour, 10-worker with fail-closed 8-worker fallback, no-rescue
-limits.
+`CRYPTO_SEARCH_ECONOMIC_RECEIPT_V2` has been consumed. Producer
+`bcb77cecf2d75e650e73998b37af9ceed1b71072` passed the 20/20 zero-market
+proposal preflight, selected the fail-closed eight-worker fallback, and reached
+the exact restore-verified `checkpoint_000` with `2,000` strict candidates from
+`2,280` attempts and `1,964` behavior families. Before any
+`checkpoint_001` allocation, the frozen validation stage rejected one selected
+candidate with `CONTROL_BEHAVIOR_EQUALS_PRIMARY`. The producer correctly
+detected the invalid matched control but its orchestration did not persist the
+candidate identity or convert the deterministic validation-constructibility
+failure into a terminal state. Source closure
+`a371330a8ec5f77a70d34ecdbf0193e89cb5ea94` now performs that fail-closed
+conversion for future runs and closes this historical process from the
+verified checkpoint without candidate generation or evaluation. The current
+run was not resumed, rescued, reseeded, or tuned; it read no sealed partition,
+qualifies no arm, and supplies no Alpha or carrier-information conclusion.
 
 The existing-ledger-only V1.4 failure decomposition completed with zero new
 candidate evaluations and zero market budget. It found that `666/1,200` Stage-B
@@ -294,6 +297,11 @@ SEARCH_ENGINE_ECONOMIC_RECEIPT_RUN_AUTHORIZATION_CONSUMED
 SEARCH_ENGINE_ECONOMIC_V1_ENGINE_BUDGET_EXHAUSTED
 SEARCH_ENGINE_ECONOMIC_V1_EMERGENCY_CHECKPOINT_RESTORE_VERIFIED
 SEARCH_ENGINE_ECONOMIC_V1_INCOMPLETE_IMBALANCED_NO_ARM_QUALIFICATION
+SEARCH_ENGINE_ECONOMIC_V2_AUTHORIZATION_CONSUMED
+SEARCH_ENGINE_ECONOMIC_V2_CHECKPOINT_000_RESTORE_VERIFIED
+SEARCH_ENGINE_ECONOMIC_V2_ENGINE_VALIDATION_BLOCKED
+SEARCH_ENGINE_ECONOMIC_V2_NO_ARM_QUALIFICATION
+SEARCH_ENGINE_ECONOMIC_V2_NO_RESCUE_RERUN
 SEARCH_ENGINE_V1_CONTROLS_PARTIAL_CARRIER_ROLE_RESOLUTION_REPAIRED
 CAPABILITY_STRICT_FEEDBACK_GLOBAL_SCOPE_REVOKED
 CAPABILITY_STRICT_FEEDBACK_AUTHORITY_RETAINED
@@ -308,7 +316,7 @@ NO_CROSS_SPRINT_ADAPTIVE_MEMORY
 ## Accepted identities
 
 - Provenance closure: branch `origin/audit/evalreset-collapse-forensics-20260711`, commit `4726795f61052470d56e2d1475e4f6da9d262943`, tag `crypto-frontier-provenance-closure-20260714`.
-- Current research branch: `experiment/crypto-search-engine-v1-4-oi-flow-20260728`.
+- Current research branch: `replay/crypto-search-engine-v1-4-binance-target-20260729`.
 - Explicit/latent implementation qualification: `7389a36ebb4ee62f57aeb818cf4db7157bd1ea9f`.
 - Field Information V0 source: `057e31df71f55f9e3a6e8ea3b48d53293d7d2e13`; run identity SHA256: `623036F48CBC8089CC61E81876F3A1E14199FC781456BF9F39183F8A129E53D6`.
 - Latest qualified Graph closure before this maintenance phase: `920e0ad35c07e2e2cee3ed2be8ad0753937f86f4`.
@@ -380,9 +388,9 @@ The implemented residual/orthogonal variants and current signal-to-portfolio pri
 2. Preserve the four Search Surface Integration V1 carriers as engineering inputs only. They make 235 fields runner-reachable but do not grant research admission. Keep the 25 OI/mark source-unavailable holds explicit and do not merge Broad39 with Core3 81.
 3. Keep future-Arena qualification for canonical typed random, Hierarchical Typed CEM V2, Typed Evolution V2, and the per-run Behavior Archive suspended. V1.1-V1.3 policy comparisons measured pair-feasibility optimization, not portfolio search-reward improvement; V1.4 never ran adaptive Stage C.
 4. Preserve `PHASE3CM_STYLE_TRAIN_PORTFOLIO_SORTINO_V1` only as reproducible diagnostic code; do not treat it or the capability strict-feasibility tuple as a qualified economic optimizer. `CRYPTO_TRAIN_JOINT_PRIMARY_MATCHED_SORTINO_V2` is source-qualified for future fresh-state use but remains inactive until the rest of the economic receipt closes. Keep `pair_reward`, matched-positive status, strict margins, turnover, cost, support, and concentration as attribution/execution diagnostics only.
-5. Keep `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` as the consumed base economic contract and immutable V1 outcome. `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V2` hash-locks and inherits that contract while supplying only a separate one-run authorization, campaign identity, epoch, and runtime path. Do not duplicate the target, mapping, reward, cost, validation, or evidence partitions.
+5. Keep `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V1` as the consumed base economic contract and immutable V1 outcome. Keep `CRYPTO_SEARCH_ECONOMIC_RECEIPT_V2` as a consumed one-run outcome bound to `checkpoint_000`; do not duplicate its target, mapping, reward, cost, validation, or evidence partitions and do not reuse it for another launch.
 6. Use the existing memory preflight at 10 workers and fail closed to 8 when its gate requires; the prior campaign correctly used 8. Do not use 12 workers.
-7. Launch only the separately authorized V2 fresh-state campaign on the unchanged admitted 115-field carrier. Do not import V1 state or start any other large search, new-data Arena, OOS, challenge, promotion, or latent priority run.
+7. Do not resume or rescue V2. A future market search requires a new fresh-state authorization after explicitly deciding how validation-degenerate controls are treated; it must not import V1/V2 state or start OOS, challenge, promotion, or latent priority work.
 8. Keep the relational Stage-1 line closed, Stage 0 experimental only, Broad `38+1` and Core3 `31+5+45` separate, and CryptoHFT/Bitfinex/Binance boundaries unchanged.
 9. Treat `runtime/crypto_new_data_admission_v1_20260727` and the Search Surface Integration V1 bundle as distinct authorities: the former owns research admission gaps; the latter owns engineering carrier reachability. Resolve `BDXNUSDT`, lifecycle splits, Top200 surface gaps, and the Top50 OI/mark consumer before research admission.
 10. Use Unified Field Management V1 only as the deterministic navigation and conflict-checking view over those authorities. Add future registries by declaring their authority path and recompiling; do not hand-maintain duplicate field facts or infer research admission from catalog presence.
@@ -407,9 +415,9 @@ The implementation preserves compiler authority, hierarchical A/B/AB/ABC matched
 - Qlib and DeepDow remain data-underpowered; neither supplies a clean economic negative for its full external paradigm.
 - Bitfinex source-interval coverage is unverified and its effective months/symbols plus missing price-label and turnover bridges fail event-study Data Adequacy.
 - The active Binance forceOrder capture starts after the current supplier release ends, so supplier/WS overlap compatibility is not yet qualified and stitching is blocked.
-- Search Engine V1 has a source-qualified distinct validation kill-line contract. It is NON_FORMAL, makes no optimizer feedback writes, and has not yet been market-verified under V2. The historical report-only block remains spent and is not reused.
-- The V1 base and V2 authorization receipts are the only registered economic receipt paths. Both CLI and direct runner entry points re-resolve the selected exact path; component and inherited-base hashes must match. V2 authorizes exactly one fresh-state campaign with at most 20,000 strict candidates under the unchanged frozen 5 bps conditional assumption; parameter tuning, seed changes, rescue reruns, formal claims, and promotion remain forbidden.
-- The receipt-bound validation orchestration is shared by the dedicated V1 and V2 campaign identities and reuses the existing rolling engine and already-qualified 115-field OI/mark x aggTrades carrier. V2 has its own runtime, epoch, RNG state, policies, archive, ledger, receipts, and checkpoints. Behavior identity remains frozen from the train block only; validation and holdout cannot enter it. Both train and validation purge the final six hours. After `checkpoint_000` update and exact restore but before any `checkpoint_001` allocation, the runner evaluates the fixed equal-count validation kill-line and writes failed arms into the existing arm state. Component hashes canonicalize text to LF. All results remain development-only and conditional on 5 bps.
+- Search Engine V1's distinct validation kill-line is now market-exercised only to the point of a deterministic constructibility block. It remains NON_FORMAL, made no optimizer or archive writes on validation, and did not complete the equal-count arm gate.
+- The V1 base and V2 outcome receipts are the only registered economic receipt paths. Both are consumed and `run_authorized=false`; component and inherited-base hashes must match. No current receipt authorizes another market run.
+- V2's restore-verified `checkpoint_000` is the terminal retained state. The validation candidate identity was not persisted by the producer, so the run is closed as `ENGINE_VALIDATION_BLOCKED` rather than reconstructed or resumed. Future source now persists an exact terminal checkpoint when a known matched-control degeneration occurs; unexpected validation errors still propagate. All retained results remain development-only and conditional on 5 bps.
 
 ## Source-of-truth order
 
